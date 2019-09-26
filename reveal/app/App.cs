@@ -45,13 +45,14 @@ namespace Z0
         void Disassemble(bool asm, bool cil)
         {
             Disassemble(new PrimalScenarios());
+            Disassemble(true, true, typeof(math));
 
-            Disassemble(true,true, typeof(math));
+
+            //Disassemble(true,true, typeof(math));
             // Disassemble(true,true, typeof(BitRef));
             // Disassemble(new PrimalScenarios());
             // Disassemble(new SysMathCases());
             // Disassemble(new CompositeScenarios());
-
 
         }
 
