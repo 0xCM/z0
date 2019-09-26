@@ -227,7 +227,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static bool operator >= (in num<T> lhs, in num<T> rhs) 
-            => gmath.gteq(in unwrap(in lhs), in unwrap(in rhs));            
+            => gmath.gteq(unwrap(in lhs), unwrap(in rhs));            
 
         [MethodImpl(Inline)]
         public num<T> abs() 

@@ -15,149 +15,149 @@ namespace Z0
     {        
         [MethodImpl(Inline)]
         public static BinaryOp<T> add<T>()
-            where T : struct
+            where T : unmanaged
                 => Add<T>.Op;
 
         [MethodImpl(Inline)]
         public static BinaryOp<T> sub<T>()
-            where T : struct
+            where T : unmanaged
                 => Sub<T>.Op;
 
         [MethodImpl(Inline)]
         public static BinaryOp<T> mul<T>()
-            where T : struct
+            where T : unmanaged
                 => Mul<T>.Op;
 
         [MethodImpl(Inline)]
         public static BinaryOp<T> div<T>()
-            where T : struct
+            where T : unmanaged
                 => Div<T>.Op;
 
         [MethodImpl(Inline)]
         public static BinaryOp<T> mod<T>()
-            where T : struct
+            where T : unmanaged
                 => Mod<T>.Op;
 
 
         [MethodImpl(Inline)]
         public static UnaryOp<T> negate<T>()
-            where T : struct
+            where T : unmanaged
                 => Negate<T>.Op;
 
         [MethodImpl(Inline)]
         public static UnaryOp<T> inc<T>()
-            where T : struct
+            where T : unmanaged
                 => Inc<T>.Op;
 
         [MethodImpl(Inline)]
         public static UnaryOp<T> dec<T>()
-            where T : struct
+            where T : unmanaged
                 => Dec<T>.Op;
 
         [MethodImpl(Inline)]
         public static BinaryPredicate<T> eq<T>()
-            where T : struct
+            where T : unmanaged
                 => Eq<T>.Op;
 
         [MethodImpl(Inline)]
         public static BinaryPredicate<T> gt<T>()
-            where T : struct
+            where T : unmanaged
                 => Gt<T>.Op;
 
         [MethodImpl(Inline)]
         public static BinaryPredicate<T> gteq<T>()
-            where T : struct
+            where T : unmanaged
                 => GtEq<T>.Op;
 
         [MethodImpl(Inline)]
         public static BinaryPredicate<T> lt<T>()
-            where T : struct
+            where T : unmanaged
                 => Lt<T>.Op;
 
         [MethodImpl(Inline)]
         public static BinaryPredicate<T> lteq<T>()
-            where T : struct
+            where T : unmanaged
                 => LtEq<T>.Op;
                         
         [MethodImpl(Inline)]
         public static T add<T>(T lhs, T rhs)
-            where T : struct
+            where T : unmanaged
                 => gmath.add(lhs,rhs);
         
         readonly struct Add<T>
-            where T : struct
+            where T : unmanaged
         {
             public static readonly BinaryOp<T> Op = add<T>;
         }
 
        readonly struct Sub<T>
-            where T : struct
+            where T : unmanaged
         {
             public static readonly BinaryOp<T> Op = gmath.sub<T>;
         }
 
        readonly struct Mul<T>
-            where T : struct
+            where T : unmanaged
         {
             public static readonly BinaryOp<T> Op = gmath.mul<T>;
         }
 
         readonly struct Div<T>
-            where T : struct
+            where T : unmanaged
         {
             public static readonly BinaryOp<T> Op = gmath.div<T>;
         }
 
        readonly struct Mod<T>
-            where T : struct
+            where T : unmanaged
         {
             public static readonly BinaryOp<T> Op = gmath.mod<T>;
         }
 
         readonly struct Negate<T>
-            where T : struct
+            where T : unmanaged
         {
             public static readonly UnaryOp<T> Op = gmath.negate<T>;
         }    
 
        readonly struct Inc<T>
-            where T : struct
+            where T : unmanaged
         {
             public static readonly UnaryOp<T> Op = gmath.inc<T>;
         }    
 
        readonly struct Dec<T>
-            where T : struct
+            where T : unmanaged
         {
             public static readonly UnaryOp<T> Op = gmath.dec<T>;
         }    
 
         readonly struct Eq<T>
-            where T : struct
+            where T : unmanaged
         {
             public static readonly BinaryPredicate<T> Op = gmath.eq<T>;
         }
 
        readonly struct Gt<T>
-            where T : struct
+            where T : unmanaged
         {
             public static readonly BinaryPredicate<T> Op = gmath.gt<T>;
         }
 
        readonly struct Lt<T>
-            where T : struct
+            where T : unmanaged
         {
             public static readonly BinaryPredicate<T> Op = gmath.lt<T>;
         }    
 
        readonly struct GtEq<T>
-            where T : struct
+            where T : unmanaged
         {
             public static readonly BinaryPredicate<T> Op = gmath.gteq<T>;
         }
 
        readonly struct LtEq<T>
-            where T : struct
+            where T : unmanaged
         {
             public static readonly BinaryPredicate<T> Op = gmath.lteq<T>;
         }    

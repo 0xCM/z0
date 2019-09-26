@@ -1,134 +1,4 @@
-// 2019-09-25 22:28:38:900
-ref short srl(ref short src, int offset)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.0
-    IL_0002: ldind.i2
-    IL_0003: ldarg.1
-    IL_0004: call System.Int16 Z0.math::srl(System.Int16,System.Int32)
-    IL_0009: stind.i2
-    IL_000A: ldarg.0
-    IL_000B: ret
-
-}
-ref ushort srl(ref ushort src, int offset)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.0
-    IL_0002: ldind.u2
-    IL_0003: ldarg.1
-    IL_0004: call System.UInt16 Z0.math::srl(System.UInt16,System.Int32)
-    IL_0009: stind.i2
-    IL_000A: ldarg.0
-    IL_000B: ret
-
-}
-ref int srl(ref int src, int offset)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.0
-    IL_0002: ldind.i4
-    IL_0003: ldarg.1
-    IL_0004: call System.Int32 Z0.math::srl(System.Int32,System.Int32)
-    IL_0009: stind.i4
-    IL_000A: ldarg.0
-    IL_000B: ret
-
-}
-ref uint srl(ref uint src, int offset)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.0
-    IL_0002: ldind.u4
-    IL_0003: ldarg.1
-    IL_0004: call System.UInt32 Z0.math::srl(System.UInt32,System.Int32)
-    IL_0009: stind.i4
-    IL_000A: ldarg.0
-    IL_000B: ret
-
-}
-ref long srl(ref long src, int offset)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.0
-    IL_0002: ldind.i8
-    IL_0003: ldarg.1
-    IL_0004: call System.Int64 Z0.math::srl(System.Int64,System.Int32)
-    IL_0009: stind.i8
-    IL_000A: ldarg.0
-    IL_000B: ret
-
-}
-ref ulong srl(ref ulong src, int offset)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.0
-    IL_0002: ldind.i8
-    IL_0003: ldarg.1
-    IL_0004: call System.UInt64 Z0.math::srl(System.UInt64,System.Int32)
-    IL_0009: stind.i8
-    IL_000A: ldarg.0
-    IL_000B: ret
-
-}
-int srl32i(int src, int offset)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: ldc.i4.s 31
-    IL_0004: and
-    IL_0005: shr.un
-    IL_0006: ret
-
-}
-uint srl32u(uint src, int offset)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: ldc.i4.s 31
-    IL_0004: and
-    IL_0005: shr.un
-    IL_0006: ret
-
-}
-long srl64i(long src, int offset)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: ldc.i4.s 63
-    IL_0004: and
-    IL_0005: shr.un
-    IL_0006: ret
-
-}
-ulong srl64u(ulong src, int offset)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: ldc.i4.s 63
-    IL_0004: and
-    IL_0005: shr.un
-    IL_0006: ret
-
-}
-sbyte sub(sbyte lhs, sbyte rhs)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: sub
-    IL_0003: conv.i1
-    IL_0004: ret
-
-}
-byte sub(byte lhs, byte rhs)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: sub
-    IL_0003: conv.u1
-    IL_0004: ret
-
-}
+// 2019-09-26 00:47:44:769
 short sub(short lhs, short rhs)
 {
     IL_0000: ldarg.0
@@ -1248,112 +1118,6 @@ ref double xor(in double lhs, in double rhs, ref double dst)
     IL_0015: stind.r8
     IL_0016: ldarg.2
     IL_0017: ret
-
-}
-bool nonzero(int src)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldc.i4.0
-    IL_0002: cgt.un
-    IL_0004: ret
-
-}
-bool nonzero(uint src)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldc.i4.0
-    IL_0002: cgt.un
-    IL_0004: ret
-
-}
-bool nonzero(long src)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldc.i4.0
-    IL_0002: conv.i8
-    IL_0003: cgt.un
-    IL_0005: ret
-
-}
-bool nonzero(ulong src)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldc.i4.0
-    IL_0002: conv.i8
-    IL_0003: cgt.un
-    IL_0005: ret
-
-}
-bool nonzero(float src)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldc.r4 0
-    IL_0006: ceq
-    IL_0008: ldc.i4.0
-    IL_0009: ceq
-    IL_000B: ret
-
-}
-bool nonzero(double src)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldc.r8 0
-    IL_000A: ceq
-    IL_000C: ldc.i4.0
-    IL_000D: ceq
-    IL_000F: ret
-
-}
-sbyte or(sbyte lhs, sbyte rhs)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: or
-    IL_0003: conv.i1
-    IL_0004: ret
-
-}
-byte or(byte lhs, byte rhs)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: or
-    IL_0003: conv.u1
-    IL_0004: ret
-
-}
-short or(short lhs, short rhs)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: or
-    IL_0003: conv.i2
-    IL_0004: ret
-
-}
-ushort or(ushort lhs, ushort rhs)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: or
-    IL_0003: conv.u2
-    IL_0004: ret
-
-}
-int or(int lhs, int rhs)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: or
-    IL_0003: ret
-
-}
-uint or(uint lhs, uint rhs)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: or
-    IL_0003: ret
 
 }
 long or(long lhs, long rhs)
@@ -2868,96 +2632,134 @@ ref byte srl(ref byte src, int offset)
     IL_000B: ret
 
 }
-bool lt(long lhs, long rhs)
+ref short srl(ref short src, int offset)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.0
+    IL_0002: ldind.i2
+    IL_0003: ldarg.1
+    IL_0004: call System.Int16 Z0.math::srl(System.Int16,System.Int32)
+    IL_0009: stind.i2
+    IL_000A: ldarg.0
+    IL_000B: ret
+
+}
+ref ushort srl(ref ushort src, int offset)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.0
+    IL_0002: ldind.u2
+    IL_0003: ldarg.1
+    IL_0004: call System.UInt16 Z0.math::srl(System.UInt16,System.Int32)
+    IL_0009: stind.i2
+    IL_000A: ldarg.0
+    IL_000B: ret
+
+}
+ref int srl(ref int src, int offset)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.0
+    IL_0002: ldind.i4
+    IL_0003: ldarg.1
+    IL_0004: call System.Int32 Z0.math::srl(System.Int32,System.Int32)
+    IL_0009: stind.i4
+    IL_000A: ldarg.0
+    IL_000B: ret
+
+}
+ref uint srl(ref uint src, int offset)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.0
+    IL_0002: ldind.u4
+    IL_0003: ldarg.1
+    IL_0004: call System.UInt32 Z0.math::srl(System.UInt32,System.Int32)
+    IL_0009: stind.i4
+    IL_000A: ldarg.0
+    IL_000B: ret
+
+}
+ref long srl(ref long src, int offset)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.0
+    IL_0002: ldind.i8
+    IL_0003: ldarg.1
+    IL_0004: call System.Int64 Z0.math::srl(System.Int64,System.Int32)
+    IL_0009: stind.i8
+    IL_000A: ldarg.0
+    IL_000B: ret
+
+}
+ref ulong srl(ref ulong src, int offset)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.0
+    IL_0002: ldind.i8
+    IL_0003: ldarg.1
+    IL_0004: call System.UInt64 Z0.math::srl(System.UInt64,System.Int32)
+    IL_0009: stind.i8
+    IL_000A: ldarg.0
+    IL_000B: ret
+
+}
+int srl32i(int src, int offset)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: clt
+    IL_0002: ldc.i4.s 31
+    IL_0004: and
+    IL_0005: shr.un
+    IL_0006: ret
+
+}
+uint srl32u(uint src, int offset)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: ldc.i4.s 31
+    IL_0004: and
+    IL_0005: shr.un
+    IL_0006: ret
+
+}
+long srl64i(long src, int offset)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: ldc.i4.s 63
+    IL_0004: and
+    IL_0005: shr.un
+    IL_0006: ret
+
+}
+ulong srl64u(ulong src, int offset)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: ldc.i4.s 63
+    IL_0004: and
+    IL_0005: shr.un
+    IL_0006: ret
+
+}
+sbyte sub(sbyte lhs, sbyte rhs)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: sub
+    IL_0003: conv.i1
     IL_0004: ret
 
 }
-bool lt(ulong lhs, ulong rhs)
+byte sub(byte lhs, byte rhs)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: clt.un
+    IL_0002: sub
+    IL_0003: conv.u1
     IL_0004: ret
-
-}
-bool lt(float lhs, float rhs)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: clt
-    IL_0004: ret
-
-}
-bool lt(double lhs, double rhs)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: clt
-    IL_0004: ret
-
-}
-bool lteq(sbyte lhs, sbyte rhs)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: cgt
-    IL_0004: ldc.i4.0
-    IL_0005: ceq
-    IL_0007: ret
-
-}
-bool lteq(byte lhs, byte rhs)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: cgt
-    IL_0004: ldc.i4.0
-    IL_0005: ceq
-    IL_0007: ret
-
-}
-bool lteq(short lhs, short rhs)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: cgt
-    IL_0004: ldc.i4.0
-    IL_0005: ceq
-    IL_0007: ret
-
-}
-bool lteq(ushort lhs, ushort rhs)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: cgt
-    IL_0004: ldc.i4.0
-    IL_0005: ceq
-    IL_0007: ret
-
-}
-bool lteq(int lhs, int rhs)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: cgt
-    IL_0004: ldc.i4.0
-    IL_0005: ceq
-    IL_0007: ret
-
-}
-bool lteq(uint lhs, uint rhs)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: cgt.un
-    IL_0004: ldc.i4.0
-    IL_0005: ceq
-    IL_0007: ret
 
 }
 bool lteq(long lhs, long rhs)
@@ -2971,26 +2773,6 @@ bool lteq(long lhs, long rhs)
 
 }
 bool lteq(ulong lhs, ulong rhs)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: cgt.un
-    IL_0004: ldc.i4.0
-    IL_0005: ceq
-    IL_0007: ret
-
-}
-bool lteq(float lhs, float rhs)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: cgt.un
-    IL_0004: ldc.i4.0
-    IL_0005: ceq
-    IL_0007: ret
-
-}
-bool lteq(double lhs, double rhs)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
@@ -4473,6 +4255,112 @@ bool nonzero(ushort src)
     IL_0004: ret
 
 }
+bool nonzero(int src)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldc.i4.0
+    IL_0002: cgt.un
+    IL_0004: ret
+
+}
+bool nonzero(uint src)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldc.i4.0
+    IL_0002: cgt.un
+    IL_0004: ret
+
+}
+bool nonzero(long src)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldc.i4.0
+    IL_0002: conv.i8
+    IL_0003: cgt.un
+    IL_0005: ret
+
+}
+bool nonzero(ulong src)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldc.i4.0
+    IL_0002: conv.i8
+    IL_0003: cgt.un
+    IL_0005: ret
+
+}
+bool nonzero(float src)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldc.r4 0
+    IL_0006: ceq
+    IL_0008: ldc.i4.0
+    IL_0009: ceq
+    IL_000B: ret
+
+}
+bool nonzero(double src)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldc.r8 0
+    IL_000A: ceq
+    IL_000C: ldc.i4.0
+    IL_000D: ceq
+    IL_000F: ret
+
+}
+sbyte or(sbyte lhs, sbyte rhs)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: or
+    IL_0003: conv.i1
+    IL_0004: ret
+
+}
+byte or(byte lhs, byte rhs)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: or
+    IL_0003: conv.u1
+    IL_0004: ret
+
+}
+short or(short lhs, short rhs)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: or
+    IL_0003: conv.i2
+    IL_0004: ret
+
+}
+ushort or(ushort lhs, ushort rhs)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: or
+    IL_0003: conv.u2
+    IL_0004: ret
+
+}
+int or(int lhs, int rhs)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: or
+    IL_0003: ret
+
+}
+uint or(uint lhs, uint rhs)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: or
+    IL_0003: ret
+
+}
 ref long div(ref long lhs, in long rhs)
 {
     IL_0000: ldarg.0
@@ -4586,7 +4474,7 @@ sbyte dot(ReadOnlySpan<sbyte> lhs, ReadOnlySpan<sbyte> rhs)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldstr "dot"
-    IL_0007: ldstr "J:\\dev\\projects\\z0_release\\primal\\math\\src\\operators\\dot.cs"
+    IL_0007: ldstr "J:\\dev\\projects\\z0_release\\primal\\math\\src\\integral\\dot.cs"
     IL_000C: ldc.i4.s 28
     IL_000E: newobj System.Void System.Nullable`1<System.Int32>::.ctor(System.Int32)
     IL_0013: call System.Int32 zfunc::length<System.SByte,System.SByte>(System.ReadOnlySpan`1<System.SByte>,System.ReadOnlySpan`1<System.SByte>,System.String,System.String,System.Nullable`1<System.Int32>)
@@ -4623,7 +4511,7 @@ byte dot(ReadOnlySpan<byte> lhs, ReadOnlySpan<byte> rhs)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldstr "dot"
-    IL_0007: ldstr "J:\\dev\\projects\\z0_release\\primal\\math\\src\\operators\\dot.cs"
+    IL_0007: ldstr "J:\\dev\\projects\\z0_release\\primal\\math\\src\\integral\\dot.cs"
     IL_000C: ldc.i4.s 42
     IL_000E: newobj System.Void System.Nullable`1<System.Int32>::.ctor(System.Int32)
     IL_0013: call System.Int32 zfunc::length<System.Byte,System.Byte>(System.ReadOnlySpan`1<System.Byte>,System.ReadOnlySpan`1<System.Byte>,System.String,System.String,System.Nullable`1<System.Int32>)
@@ -4660,7 +4548,7 @@ short dot(ReadOnlySpan<short> lhs, ReadOnlySpan<short> rhs)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldstr "dot"
-    IL_0007: ldstr "J:\\dev\\projects\\z0_release\\primal\\math\\src\\operators\\dot.cs"
+    IL_0007: ldstr "J:\\dev\\projects\\z0_release\\primal\\math\\src\\integral\\dot.cs"
     IL_000C: ldc.i4.s 56
     IL_000E: newobj System.Void System.Nullable`1<System.Int32>::.ctor(System.Int32)
     IL_0013: call System.Int32 zfunc::length<System.Int16,System.Int16>(System.ReadOnlySpan`1<System.Int16>,System.ReadOnlySpan`1<System.Int16>,System.String,System.String,System.Nullable`1<System.Int32>)
@@ -4697,7 +4585,7 @@ ushort dot(ReadOnlySpan<ushort> lhs, ReadOnlySpan<ushort> rhs)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldstr "dot"
-    IL_0007: ldstr "J:\\dev\\projects\\z0_release\\primal\\math\\src\\operators\\dot.cs"
+    IL_0007: ldstr "J:\\dev\\projects\\z0_release\\primal\\math\\src\\integral\\dot.cs"
     IL_000C: ldc.i4.s 70
     IL_000E: newobj System.Void System.Nullable`1<System.Int32>::.ctor(System.Int32)
     IL_0013: call System.Int32 zfunc::length<System.UInt16,System.UInt16>(System.ReadOnlySpan`1<System.UInt16>,System.ReadOnlySpan`1<System.UInt16>,System.String,System.String,System.Nullable`1<System.Int32>)
@@ -4734,7 +4622,7 @@ int dot(ReadOnlySpan<int> lhs, ReadOnlySpan<int> rhs)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldstr "dot"
-    IL_0007: ldstr "J:\\dev\\projects\\z0_release\\primal\\math\\src\\operators\\dot.cs"
+    IL_0007: ldstr "J:\\dev\\projects\\z0_release\\primal\\math\\src\\integral\\dot.cs"
     IL_000C: ldc.i4.s 84
     IL_000E: newobj System.Void System.Nullable`1<System.Int32>::.ctor(System.Int32)
     IL_0013: call System.Int32 zfunc::length<System.Int32,System.Int32>(System.ReadOnlySpan`1<System.Int32>,System.ReadOnlySpan`1<System.Int32>,System.String,System.String,System.Nullable`1<System.Int32>)
@@ -4771,7 +4659,7 @@ uint dot(ReadOnlySpan<uint> lhs, ReadOnlySpan<uint> rhs)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldstr "dot"
-    IL_0007: ldstr "J:\\dev\\projects\\z0_release\\primal\\math\\src\\operators\\dot.cs"
+    IL_0007: ldstr "J:\\dev\\projects\\z0_release\\primal\\math\\src\\integral\\dot.cs"
     IL_000C: ldc.i4.s 98
     IL_000E: newobj System.Void System.Nullable`1<System.Int32>::.ctor(System.Int32)
     IL_0013: call System.Int32 zfunc::length<System.UInt32,System.UInt32>(System.ReadOnlySpan`1<System.UInt32>,System.ReadOnlySpan`1<System.UInt32>,System.String,System.String,System.Nullable`1<System.Int32>)
@@ -4808,7 +4696,7 @@ long dot(ReadOnlySpan<long> lhs, ReadOnlySpan<long> rhs)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldstr "dot"
-    IL_0007: ldstr "J:\\dev\\projects\\z0_release\\primal\\math\\src\\operators\\dot.cs"
+    IL_0007: ldstr "J:\\dev\\projects\\z0_release\\primal\\math\\src\\integral\\dot.cs"
     IL_000C: ldc.i4.s 112
     IL_000E: newobj System.Void System.Nullable`1<System.Int32>::.ctor(System.Int32)
     IL_0013: call System.Int32 zfunc::length<System.Int64,System.Int64>(System.ReadOnlySpan`1<System.Int64>,System.ReadOnlySpan`1<System.Int64>,System.String,System.String,System.Nullable`1<System.Int32>)
@@ -4846,7 +4734,7 @@ ulong dot(ReadOnlySpan<ulong> lhs, ReadOnlySpan<ulong> rhs)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldstr "dot"
-    IL_0007: ldstr "J:\\dev\\projects\\z0_release\\primal\\math\\src\\operators\\dot.cs"
+    IL_0007: ldstr "J:\\dev\\projects\\z0_release\\primal\\math\\src\\integral\\dot.cs"
     IL_000C: ldc.i4.s 126
     IL_000E: newobj System.Void System.Nullable`1<System.Int32>::.ctor(System.Int32)
     IL_0013: call System.Int32 zfunc::length<System.UInt64,System.UInt64>(System.ReadOnlySpan`1<System.UInt64>,System.ReadOnlySpan`1<System.UInt64>,System.String,System.String,System.Nullable`1<System.Int32>)
@@ -4941,206 +4829,6 @@ bool eq(ulong lhs, ulong rhs)
     IL_0001: ldarg.1
     IL_0002: ceq
     IL_0004: ret
-
-}
-bool eq(ReadOnlySpan<sbyte> src, sbyte target)
-{
-    IL_0000: ldc.i4.0
-    IL_0001: stloc.0
-    IL_0002: br.s IL_0016
-    IL_0004: ldarga.s src
-    IL_0006: ldloc.0
-    IL_0007: call System.SByte& modreq(System.Runtime.InteropServices.InAttribute) System.ReadOnlySpan`1<System.SByte>::get_Item(System.Int32)
-    IL_000C: ldind.i1
-    IL_000D: ldarg.1
-    IL_000E: beq.s IL_0012
-    IL_0010: ldc.i4.0
-    IL_0011: ret
-    IL_0012: ldloc.0
-    IL_0013: ldc.i4.1
-    IL_0014: add
-    IL_0015: stloc.0
-    IL_0016: ldloc.0
-    IL_0017: ldarga.s src
-    IL_0019: call System.Int32 System.ReadOnlySpan`1<System.SByte>::get_Length()
-    IL_001E: blt.s IL_0004
-    IL_0020: ldc.i4.1
-    IL_0021: ret
-
-}
-bool eq(ReadOnlySpan<byte> src, byte target)
-{
-    IL_0000: ldc.i4.0
-    IL_0001: stloc.0
-    IL_0002: br.s IL_0016
-    IL_0004: ldarga.s src
-    IL_0006: ldloc.0
-    IL_0007: call System.Byte& modreq(System.Runtime.InteropServices.InAttribute) System.ReadOnlySpan`1<System.Byte>::get_Item(System.Int32)
-    IL_000C: ldind.u1
-    IL_000D: ldarg.1
-    IL_000E: beq.s IL_0012
-    IL_0010: ldc.i4.0
-    IL_0011: ret
-    IL_0012: ldloc.0
-    IL_0013: ldc.i4.1
-    IL_0014: add
-    IL_0015: stloc.0
-    IL_0016: ldloc.0
-    IL_0017: ldarga.s src
-    IL_0019: call System.Int32 System.ReadOnlySpan`1<System.Byte>::get_Length()
-    IL_001E: blt.s IL_0004
-    IL_0020: ldc.i4.1
-    IL_0021: ret
-
-}
-bool eq(ReadOnlySpan<short> src, short target)
-{
-    IL_0000: ldc.i4.0
-    IL_0001: stloc.0
-    IL_0002: br.s IL_0016
-    IL_0004: ldarga.s src
-    IL_0006: ldloc.0
-    IL_0007: call System.Int16& modreq(System.Runtime.InteropServices.InAttribute) System.ReadOnlySpan`1<System.Int16>::get_Item(System.Int32)
-    IL_000C: ldind.i2
-    IL_000D: ldarg.1
-    IL_000E: beq.s IL_0012
-    IL_0010: ldc.i4.0
-    IL_0011: ret
-    IL_0012: ldloc.0
-    IL_0013: ldc.i4.1
-    IL_0014: add
-    IL_0015: stloc.0
-    IL_0016: ldloc.0
-    IL_0017: ldarga.s src
-    IL_0019: call System.Int32 System.ReadOnlySpan`1<System.Int16>::get_Length()
-    IL_001E: blt.s IL_0004
-    IL_0020: ldc.i4.1
-    IL_0021: ret
-
-}
-bool eq(ReadOnlySpan<ushort> src, ushort target)
-{
-    IL_0000: ldc.i4.0
-    IL_0001: stloc.0
-    IL_0002: br.s IL_0016
-    IL_0004: ldarga.s src
-    IL_0006: ldloc.0
-    IL_0007: call System.UInt16& modreq(System.Runtime.InteropServices.InAttribute) System.ReadOnlySpan`1<System.UInt16>::get_Item(System.Int32)
-    IL_000C: ldind.u2
-    IL_000D: ldarg.1
-    IL_000E: beq.s IL_0012
-    IL_0010: ldc.i4.0
-    IL_0011: ret
-    IL_0012: ldloc.0
-    IL_0013: ldc.i4.1
-    IL_0014: add
-    IL_0015: stloc.0
-    IL_0016: ldloc.0
-    IL_0017: ldarga.s src
-    IL_0019: call System.Int32 System.ReadOnlySpan`1<System.UInt16>::get_Length()
-    IL_001E: blt.s IL_0004
-    IL_0020: ldc.i4.1
-    IL_0021: ret
-
-}
-bool eq(ReadOnlySpan<int> src, int target)
-{
-    IL_0000: ldc.i4.0
-    IL_0001: stloc.0
-    IL_0002: br.s IL_0016
-    IL_0004: ldarga.s src
-    IL_0006: ldloc.0
-    IL_0007: call System.Int32& modreq(System.Runtime.InteropServices.InAttribute) System.ReadOnlySpan`1<System.Int32>::get_Item(System.Int32)
-    IL_000C: ldind.i4
-    IL_000D: ldarg.1
-    IL_000E: beq.s IL_0012
-    IL_0010: ldc.i4.0
-    IL_0011: ret
-    IL_0012: ldloc.0
-    IL_0013: ldc.i4.1
-    IL_0014: add
-    IL_0015: stloc.0
-    IL_0016: ldloc.0
-    IL_0017: ldarga.s src
-    IL_0019: call System.Int32 System.ReadOnlySpan`1<System.Int32>::get_Length()
-    IL_001E: blt.s IL_0004
-    IL_0020: ldc.i4.1
-    IL_0021: ret
-
-}
-bool eq(ReadOnlySpan<uint> src, uint target)
-{
-    IL_0000: ldc.i4.0
-    IL_0001: stloc.0
-    IL_0002: br.s IL_0016
-    IL_0004: ldarga.s src
-    IL_0006: ldloc.0
-    IL_0007: call System.UInt32& modreq(System.Runtime.InteropServices.InAttribute) System.ReadOnlySpan`1<System.UInt32>::get_Item(System.Int32)
-    IL_000C: ldind.u4
-    IL_000D: ldarg.1
-    IL_000E: beq.s IL_0012
-    IL_0010: ldc.i4.0
-    IL_0011: ret
-    IL_0012: ldloc.0
-    IL_0013: ldc.i4.1
-    IL_0014: add
-    IL_0015: stloc.0
-    IL_0016: ldloc.0
-    IL_0017: ldarga.s src
-    IL_0019: call System.Int32 System.ReadOnlySpan`1<System.UInt32>::get_Length()
-    IL_001E: blt.s IL_0004
-    IL_0020: ldc.i4.1
-    IL_0021: ret
-
-}
-bool eq(ReadOnlySpan<long> src, long target)
-{
-    IL_0000: ldc.i4.0
-    IL_0001: stloc.0
-    IL_0002: br.s IL_0016
-    IL_0004: ldarga.s src
-    IL_0006: ldloc.0
-    IL_0007: call System.Int64& modreq(System.Runtime.InteropServices.InAttribute) System.ReadOnlySpan`1<System.Int64>::get_Item(System.Int32)
-    IL_000C: ldind.i8
-    IL_000D: ldarg.1
-    IL_000E: beq.s IL_0012
-    IL_0010: ldc.i4.0
-    IL_0011: ret
-    IL_0012: ldloc.0
-    IL_0013: ldc.i4.1
-    IL_0014: add
-    IL_0015: stloc.0
-    IL_0016: ldloc.0
-    IL_0017: ldarga.s src
-    IL_0019: call System.Int32 System.ReadOnlySpan`1<System.Int64>::get_Length()
-    IL_001E: blt.s IL_0004
-    IL_0020: ldc.i4.1
-    IL_0021: ret
-
-}
-bool eq(ReadOnlySpan<ulong> src, ulong target)
-{
-    IL_0000: ldc.i4.0
-    IL_0001: stloc.0
-    IL_0002: br.s IL_0016
-    IL_0004: ldarga.s src
-    IL_0006: ldloc.0
-    IL_0007: call System.UInt64& modreq(System.Runtime.InteropServices.InAttribute) System.ReadOnlySpan`1<System.UInt64>::get_Item(System.Int32)
-    IL_000C: ldind.i8
-    IL_000D: ldarg.1
-    IL_000E: beq.s IL_0012
-    IL_0010: ldc.i4.0
-    IL_0011: ret
-    IL_0012: ldloc.0
-    IL_0013: ldc.i4.1
-    IL_0014: add
-    IL_0015: stloc.0
-    IL_0016: ldloc.0
-    IL_0017: ldarga.s src
-    IL_0019: call System.Int32 System.ReadOnlySpan`1<System.UInt64>::get_Length()
-    IL_001E: blt.s IL_0004
-    IL_0020: ldc.i4.1
-    IL_0021: ret
 
 }
 sbyte flip(sbyte src)
@@ -6375,6 +6063,82 @@ bool lt(uint lhs, uint rhs)
     IL_0004: ret
 
 }
+bool lt(long lhs, long rhs)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: clt
+    IL_0004: ret
+
+}
+bool lt(ulong lhs, ulong rhs)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: clt.un
+    IL_0004: ret
+
+}
+bool lteq(sbyte lhs, sbyte rhs)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: cgt
+    IL_0004: ldc.i4.0
+    IL_0005: ceq
+    IL_0007: ret
+
+}
+bool lteq(byte lhs, byte rhs)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: cgt
+    IL_0004: ldc.i4.0
+    IL_0005: ceq
+    IL_0007: ret
+
+}
+bool lteq(short lhs, short rhs)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: cgt
+    IL_0004: ldc.i4.0
+    IL_0005: ceq
+    IL_0007: ret
+
+}
+bool lteq(ushort lhs, ushort rhs)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: cgt
+    IL_0004: ldc.i4.0
+    IL_0005: ceq
+    IL_0007: ret
+
+}
+bool lteq(int lhs, int rhs)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: cgt
+    IL_0004: ldc.i4.0
+    IL_0005: ceq
+    IL_0007: ret
+
+}
+bool lteq(uint lhs, uint rhs)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: cgt.un
+    IL_0004: ldc.i4.0
+    IL_0005: ceq
+    IL_0007: ret
+
+}
 sbyte abs(sbyte src)
 {
     IL_0000: ldarg.0
@@ -6496,7 +6260,7 @@ Span<sbyte> abs(ReadOnlySpan<sbyte> src, Span<sbyte> dst)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldstr "abs"
-    IL_0007: ldstr "J:\\dev\\projects\\z0_release\\primal\\math\\src\\operators\\abs.cs"
+    IL_0007: ldstr "J:\\dev\\projects\\z0_release\\primal\\math\\src\\integral\\abs.cs"
     IL_000C: ldc.i4.s 109
     IL_000E: newobj System.Void System.Nullable`1<System.Int32>::.ctor(System.Int32)
     IL_0013: call System.Int32 zfunc::length<System.SByte,System.SByte>(System.ReadOnlySpan`1<System.SByte>,System.Span`1<System.SByte>,System.String,System.String,System.Nullable`1<System.Int32>)
@@ -6529,7 +6293,7 @@ Span<short> abs(ReadOnlySpan<short> src, Span<short> dst)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldstr "abs"
-    IL_0007: ldstr "J:\\dev\\projects\\z0_release\\primal\\math\\src\\operators\\abs.cs"
+    IL_0007: ldstr "J:\\dev\\projects\\z0_release\\primal\\math\\src\\integral\\abs.cs"
     IL_000C: ldc.i4.s 117
     IL_000E: newobj System.Void System.Nullable`1<System.Int32>::.ctor(System.Int32)
     IL_0013: call System.Int32 zfunc::length<System.Int16,System.Int16>(System.ReadOnlySpan`1<System.Int16>,System.Span`1<System.Int16>,System.String,System.String,System.Nullable`1<System.Int32>)
@@ -6562,7 +6326,7 @@ Span<int> abs(ReadOnlySpan<int> src, Span<int> dst)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldstr "abs"
-    IL_0007: ldstr "J:\\dev\\projects\\z0_release\\primal\\math\\src\\operators\\abs.cs"
+    IL_0007: ldstr "J:\\dev\\projects\\z0_release\\primal\\math\\src\\integral\\abs.cs"
     IL_000C: ldc.i4.s 125
     IL_000E: newobj System.Void System.Nullable`1<System.Int32>::.ctor(System.Int32)
     IL_0013: call System.Int32 zfunc::length<System.Int32,System.Int32>(System.ReadOnlySpan`1<System.Int32>,System.Span`1<System.Int32>,System.String,System.String,System.Nullable`1<System.Int32>)
@@ -6595,7 +6359,7 @@ Span<long> abs(ReadOnlySpan<long> src, Span<long> dst)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldstr "abs"
-    IL_0007: ldstr "J:\\dev\\projects\\z0_release\\primal\\math\\src\\operators\\abs.cs"
+    IL_0007: ldstr "J:\\dev\\projects\\z0_release\\primal\\math\\src\\integral\\abs.cs"
     IL_000C: ldc.i4 133
     IL_0011: newobj System.Void System.Nullable`1<System.Int32>::.ctor(System.Int32)
     IL_0016: call System.Int32 zfunc::length<System.Int64,System.Int64>(System.ReadOnlySpan`1<System.Int64>,System.Span`1<System.Int64>,System.String,System.String,System.Nullable`1<System.Int32>)
@@ -7348,7 +7112,7 @@ Span<byte> avgz(ReadOnlySpan<byte> lhs, ReadOnlySpan<byte> rhs)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldstr "avgz"
-    IL_0007: ldstr "J:\\dev\\projects\\z0_release\\primal\\math\\src\\operators\\avg.cs"
+    IL_0007: ldstr "J:\\dev\\projects\\z0_release\\primal\\math\\src\\integral\\avg.cs"
     IL_000C: ldc.i4.s 112
     IL_000E: newobj System.Void System.Nullable`1<System.Int32>::.ctor(System.Int32)
     IL_0013: call System.Int32 zfunc::length<System.Byte,System.Byte>(System.ReadOnlySpan`1<System.Byte>,System.ReadOnlySpan`1<System.Byte>,System.String,System.String,System.Nullable`1<System.Int32>)
@@ -7388,7 +7152,7 @@ Span<byte> avgi(ReadOnlySpan<byte> lhs, ReadOnlySpan<byte> rhs)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldstr "avgi"
-    IL_0007: ldstr "J:\\dev\\projects\\z0_release\\primal\\math\\src\\operators\\avg.cs"
+    IL_0007: ldstr "J:\\dev\\projects\\z0_release\\primal\\math\\src\\integral\\avg.cs"
     IL_000C: ldc.i4.s 120
     IL_000E: newobj System.Void System.Nullable`1<System.Int32>::.ctor(System.Int32)
     IL_0013: call System.Int32 zfunc::length<System.Byte,System.Byte>(System.ReadOnlySpan`1<System.Byte>,System.ReadOnlySpan`1<System.Byte>,System.String,System.String,System.Nullable`1<System.Int32>)
@@ -7428,7 +7192,7 @@ Span<ushort> avgi(ReadOnlySpan<ushort> lhs, ReadOnlySpan<ushort> rhs)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldstr "avgi"
-    IL_0007: ldstr "J:\\dev\\projects\\z0_release\\primal\\math\\src\\operators\\avg.cs"
+    IL_0007: ldstr "J:\\dev\\projects\\z0_release\\primal\\math\\src\\integral\\avg.cs"
     IL_000C: ldc.i4 128
     IL_0011: newobj System.Void System.Nullable`1<System.Int32>::.ctor(System.Int32)
     IL_0016: call System.Int32 zfunc::length<System.UInt16,System.UInt16>(System.ReadOnlySpan`1<System.UInt16>,System.ReadOnlySpan`1<System.UInt16>,System.String,System.String,System.Nullable`1<System.Int32>)

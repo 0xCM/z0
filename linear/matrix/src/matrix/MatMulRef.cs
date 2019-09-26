@@ -22,7 +22,7 @@ namespace Z0
             where M : ITypeNat, new()
             where K : ITypeNat, new()
             where N : ITypeNat, new()
-            where T : struct    
+            where T : unmanaged    
         {
             var m = nati<M>();
             var n = nati<N>();

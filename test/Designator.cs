@@ -31,6 +31,10 @@ namespace Z0.Designators
             D.Intrinsics.Assembly,
             D.PrimalMath.Assembly,
             D.PrimalMathTest.Assembly,
+            D.Bits.Assembly,
+            D.BitTest.Assembly,
+            D.Circuits.Assembly,
+            D.CircuitTest.Assembly,
             D.Rng.Assembly
             );
     }

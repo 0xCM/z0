@@ -14,7 +14,7 @@ namespace Z0
         
 
     public readonly struct Divisors<T> 
-        where T : struct
+        where T : unmanaged
     {
         public static readonly Divisors<T> Inhabitant = default;
             

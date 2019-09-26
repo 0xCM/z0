@@ -124,7 +124,7 @@ namespace Z0
 
         //Adapted from corefx repo
         static bool Contains<T>(ref T src, T match, int length)
-            where T : struct
+            where T : unmanaged
         {
             IntPtr index = (IntPtr)0;
 
@@ -217,7 +217,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static T Quotient<T>(this Ratio<T> src)        
-            where T : struct       
+            where T : unmanaged       
                 => gmath.div(src.A, src.B);
     }
 

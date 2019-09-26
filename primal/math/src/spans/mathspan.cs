@@ -211,7 +211,7 @@ namespace Z0
 
 
         public static Span<T> idiv<T>(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs, Span<T> dst)
-            where T : struct
+            where T : unmanaged
         {
             var len = length(lhs,rhs);
             for(var i = 0; i< len; i++)
@@ -227,7 +227,7 @@ namespace Z0
         /// <param name="rhs">The right integer source</param>
         /// <typeparam name="T">The primal integer type</typeparam>
         public static Span<T> idiv<T>(Span<T> lhs, ReadOnlySpan<T> rhs)
-            where T : struct
+            where T : unmanaged
         {
             var len = length(lhs,rhs);
             for(var i = 0; i< len; i++)
@@ -244,7 +244,7 @@ namespace Z0
         /// <param name="rhs">The right integer source</param>
         /// <typeparam name="T">The primal floating-point type</typeparam>
         public static Span<T> fdiv<T>(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs, Span<T> dst)
-            where T : struct
+            where T : unmanaged
         {
             var len = length(lhs,rhs);
             for(var i = 0; i< len; i++)
@@ -375,7 +375,7 @@ namespace Z0
         }
 
         public static Span<bool> gteq<T>(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs, Span<bool> dst)
-            where T : struct
+            where T : unmanaged
         {
             for(var i = 0; i< lhs.Length; i++)
                 dst[i] = gmath.gteq(lhs[i], rhs[i]);
@@ -383,7 +383,7 @@ namespace Z0
         }
 
         public static Span<bool> gteq<T>(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs)
-            where T : struct
+            where T : unmanaged
                 => gteq(lhs,rhs,span<bool>(length(lhs,rhs)));
 
 
@@ -392,7 +392,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source values</param>
         public static Span<T> inc<T>(Span<T> src)
-            where T : struct
+            where T : unmanaged
         {
             for(var i = 0; i< src.Length; i++)
                 gmath.inc(ref src[i]);
@@ -457,8 +457,22 @@ namespace Z0
                 => lteq(lhs,rhs,span<bool>(length(lhs,rhs)));
 
 
+        /// <summary>
+        /// Returns true if all supplied values are equal to a target value; false otherwise
+        /// </summary>
+        /// <param name="src">The values to examine</param>
+        /// <param name="target">The value to match</param>
+        public static bool eq<T>(ReadOnlySpan<T> src, T target)
+            where T : unmanaged
+        {
+            for(var i=0; i<src.Length; i++)
+                if(gmath.neq(src[i], target))
+                    return false;
+            return true;
+        }
+
         public static Span<bool> eq<T>(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs, Span<bool> dst)
-            where T : struct
+            where T : unmanaged
         {
             var len = length(lhs,rhs);
             for(var i = 0; i< lhs.Length; i++)
@@ -468,7 +482,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static Span<bool> eq<T>(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs)
-            where T : struct
+            where T : unmanaged
                 => eq(lhs,rhs,span<bool>(length(lhs,rhs)));
 
 

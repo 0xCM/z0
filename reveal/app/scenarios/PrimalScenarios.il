@@ -1,4 +1,102 @@
-// 2019-09-25 22:28:38:534
+// 2019-09-26 00:47:44:334
+ulong div_64u(ulong x, ulong y)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: div.un
+    IL_0003: ret
+
+}
+ulong div_g64u(ulong x, ulong y)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call System.UInt64 Z0.gmath::div<System.UInt64>(System.UInt64,System.UInt64)
+    IL_0007: ret
+
+}
+ulong inc_64u(ulong x)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldc.i4.1
+    IL_0002: conv.i8
+    IL_0003: add
+    IL_0004: dup
+    IL_0005: starg.s x
+    IL_0007: ret
+
+}
+ulong inc_g64u(ulong x)
+{
+    IL_0000: ldarg.0
+    IL_0001: call System.UInt64 Z0.gmath::inc<System.UInt64>(System.UInt64)
+    IL_0006: ret
+
+}
+ref ulong inc_g64u_ref(ref ulong x)
+{
+    IL_0000: ldarg.0
+    IL_0001: call System.UInt64& Z0.gmath::inc<System.UInt64>(System.UInt64&)
+    IL_0006: ret
+
+}
+ref ulong inc_64u_ref(ref ulong x)
+{
+    IL_0000: ldarg.0
+    IL_0001: call System.UInt64& Z0.math::inc(System.UInt64&)
+    IL_0006: ret
+
+}
+bool gt_64u(ulong x, ulong y)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: cgt.un
+    IL_0004: ret
+
+}
+bool gt_g64u(ulong x, ulong y)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call System.Boolean Z0.gmath::gt<System.UInt64>(System.UInt64,System.UInt64)
+    IL_0007: ret
+
+}
+bool gteq_64u(ulong x, ulong y)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: clt.un
+    IL_0004: ldc.i4.0
+    IL_0005: ceq
+    IL_0007: ret
+
+}
+bool gteq_g64u(ulong x, ulong y)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call System.Boolean Z0.gmath::gteq<System.UInt64>(System.UInt64,System.UInt64)
+    IL_0007: ret
+
+}
+bool eq_64u(ulong x, ulong y)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: ceq
+    IL_0004: ret
+
+}
+bool eq_g64u(ulong x, ulong y)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call System.Boolean Z0.gmath::eq<System.UInt64>(System.UInt64,System.UInt64)
+    IL_0007: ret
+
+}
 byte add_8u(byte x, byte y)
 {
     IL_0000: ldarg.0
@@ -127,23 +225,6 @@ ulong xor_g64u(ulong x, ulong y)
     IL_0007: ret
 
 }
-double inc_64f(double x)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldc.r8 1
-    IL_000A: add
-    IL_000B: dup
-    IL_000C: starg.s x
-    IL_000E: ret
-
-}
-double inc_g64f(double x)
-{
-    IL_0000: ldarg.0
-    IL_0001: call System.Double Z0.gfp::inc<System.Double>(System.Double)
-    IL_0006: ret
-
-}
 double dec_64f(double x)
 {
     IL_0000: ldarg.0
@@ -182,63 +263,19 @@ ref double dec_g64f(ref double x)
     IL_0006: ret
 
 }
-sbyte emit8i()
+bool gteq_32i(int x, int y)
 {
-    IL_0000: ldc.i4.s -37
-    IL_0002: ret
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: ceq
+    IL_0004: ret
 
 }
-byte emit8u()
+bool gteq_g32i(int x, int y)
 {
-    IL_0000: ldc.i4.s 37
-    IL_0002: ret
-
-}
-short emit16i()
-{
-    IL_0000: ldc.i4 -21554
-    IL_0005: ret
-
-}
-ushort emit16u()
-{
-    IL_0000: ldc.i4 21554
-    IL_0005: ret
-
-}
-int emit32i()
-{
-    IL_0000: ldc.i4 -2171941
-    IL_0005: ret
-
-}
-uint emit32u()
-{
-    IL_0000: ldc.i4 1141059618
-    IL_0005: ret
-
-}
-long emit64i()
-{
-    IL_0000: ldc.i8 -9223372036854775808
-    IL_0009: ret
-
-}
-ulong emit64u()
-{
-    IL_0000: ldc.i8 28716289921069090
-    IL_0009: ret
-
-}
-float emit32f()
-{
-    IL_0000: ldc.r4 20304050
-    IL_0005: ret
-
-}
-double emit64f()
-{
-    IL_0000: ldc.r8 -358298783.335255
-    IL_0009: ret
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call System.Boolean Z0.gmath::gteq<System.Int32>(System.Int32,System.Int32)
+    IL_0007: ret
 
 }

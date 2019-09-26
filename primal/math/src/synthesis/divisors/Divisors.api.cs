@@ -21,32 +21,32 @@ namespace Z0
         /// <param name="divisors">The values that divide the dividend</param>
         /// <typeparam name="T">The numeric type</typeparam>
         public static DivisorList<T> DefineList<T>(T dividend, T[] divisors)
-            where T : struct
+            where T : unmanaged
                 => new DivisorList<T>(dividend, divisors);
 
         public static DivisorList<T> DefineList<T>(T dividend, IReadOnlyList<T> divisors)
-            where T : struct
+            where T : unmanaged
                 => new DivisorList<T>(dividend, divisors);
 
 
         [MethodImpl(Inline)]
         public static DivisorIndex<T> DefineIndex<T>(Interval<T> range, IReadOnlyList<DivisorList<T>> lists)
-            where T : struct
+            where T : unmanaged
                 => new DivisorIndex<T>(range, lists);
 
         [MethodImpl(Inline)]
         public static T[] Compute<T>(T src)
-            where T : struct
+            where T : unmanaged
                 => Divisors<T>.Inhabitant.divisors(src);
 
         [MethodImpl(Inline)]
         public static DivisorIndex<T> Compute<T>(Interval<T> interval)
-            where T : struct
+            where T : unmanaged
                 => Divisors<T>.Inhabitant.Compute(interval);
 
         [MethodImpl(Inline)]
         public static IEnumerable<DivisorIndex<T>> Compute<T>(Interval<T> interval, T step)        
-            where T : struct
+            where T : unmanaged
                 => Divisors<T>.Inhabitant.Compute(interval,step);
 
         public static ulong[] Compute(ulong src)

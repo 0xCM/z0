@@ -92,7 +92,7 @@ namespace Z0
         }
 
         void points_check<T>(T min, T max, T step)
-            where T : struct
+            where T : unmanaged
         {
             var points = open(min, max).StepwisePartitionPoints(step); 
             var width = gmath.sub(max,min);

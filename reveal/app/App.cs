@@ -34,18 +34,41 @@ namespace Z0
 
         }
 
+        public static MethodDisassembly[] DeconstructGeneric(Type host, string[] opnames, Type[] typeargs, string name)
+        {
+            var open = from m in host.Methods().Public().OpenGeneric()
+                where opnames.Contains(m.Name)
+                let parms = m.GetParameters()
+                where ! parms.Any(p => p.IsRetval || p.IsIn || p.IsOut)
+                select m;
+
+            var closed = (from om in open
+                         from t in typeargs
+                         let def = om.GetGenericMethodDefinition()
+                         let gm = def.MakeGenericMethod(t)
+                         select gm).ToArray();
+            var deconstructed = closed.Deconstruct();
+            if(deconstructed.Length != 0)
+                deconstructed.Emit(name);
+            return deconstructed;
+        }
+
+
         static void Disassemble<T>(IDeconstructable<T> src)
         {
             var deconstructed = typeof(T).Deconstruct();
-            deconstructed.EmitAsm(src.AsmTargetPath);
-            deconstructed.EmitCil(src.CilTargetPath);
-            
+            CodeEmitter.EmitAsm(deconstructed, src.AsmTargetPath);
+            CodeEmitter.EmitCil(deconstructed, src.CilTargetPath);            
         }
 
         void Disassemble(bool asm, bool cil)
         {
             Disassemble(new PrimalScenarios());
+            Disassemble(new ExperimentalScenarios());
             Disassemble(true, true, typeof(math));
+            //DeconstructGeneric(typeof(gmath), new string[]{"add"}, new Type[]{typeof(int), typeof(ulong)}, "gmath");
+
+
 
 
             //Disassemble(true,true, typeof(math));

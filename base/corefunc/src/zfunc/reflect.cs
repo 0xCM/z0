@@ -33,6 +33,15 @@ partial class zfunc
         => typeof(T).Assembly;
 
     /// <summary>
+    /// Returns true if the two parameteric types are the same, false otherwise
+    /// </summary>
+    /// <typeparam name="S">The first type</typeparam>
+    /// <typeparam name="T">The second type</typeparam>
+    [MethodImpl(Inline)]
+    public static bool typematch<S,T>()
+        => typeof(S) == typeof(T);
+
+    /// <summary>
     /// Specifies the generic type definition for a specified generic type
     /// </summary>
     /// <typeparam name="T">The generic type</typeparam>

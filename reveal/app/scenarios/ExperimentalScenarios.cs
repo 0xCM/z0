@@ -12,9 +12,14 @@ namespace Z0
     using static zfunc;
 
 
-    [DisplayName("scenarios-experimental")]
-    class ExperimentalScenarios
+    class ExperimentalScenarios : Deconstructable<ExperimentalScenarios>
     {
+        public ExperimentalScenarios()
+            : base(callerfile())
+        {
+
+        }
+
         static ReadOnlySpan<byte> U8Data => new byte[]
         {
             0x20, 0xda, 0x1f, 0x32, 0x4b, 0xca, 0x42, 0x5b,
@@ -94,6 +99,79 @@ namespace Z0
             else if(x == 4) return 16;
             else if(x == 5) return 32;
             else return 0;
+        }
+
+        public TypeCode GetTypeCodeInt32()
+            => GetTypeCode<int>();
+
+        public TypeCode GetTypeCodeUInt32()
+            => GetTypeCode<uint>();
+
+
+
+        public int CheckMatches()
+        {
+            var match = 0;
+            match |= CheckMatches<sbyte>();
+            match |= CheckMatches<byte>();
+            match |= CheckMatches<short>();
+            match |= CheckMatches<ushort>();
+            match |= CheckMatches<int>();
+            match |= CheckMatches<uint>();
+            match |= CheckMatches<long>();
+            match |= CheckMatches<ulong>();
+            match |= CheckMatches<float>();
+            match |= CheckMatches<double>();
+            return match;
+        }
+
+
+        [MethodImpl(Inline)]
+        public int CheckMatches<T>()
+        {
+            if(IsMatch<sbyte,T>())
+                return 1;
+            else if(IsMatch<byte,T>())                
+                return 2;
+            else if(IsMatch<short,T>())
+                return 4;
+            else if(IsMatch<ushort,T>())
+                return 8;
+            else if(IsMatch<int,T>())
+                return 16;
+            else if(IsMatch<uint,T>())
+                return 32;
+            else if(IsMatch<long,T>())
+                return 64;
+            else if(IsMatch<ulong,T>())
+                return 128;
+            else if(IsMatch<float,T>())
+                return 256;
+            else if(IsMatch<double,T>())
+                return 512;
+            else
+                return 0;
+        }
+
+        
+        [MethodImpl(Inline)]
+        bool IsMatch<S,T>()
+            => typeof(S) == typeof(T);
+
+
+        [MethodImpl(Inline)]
+        TypeCode GetTypeCode<T>()
+        {
+            if(Type.GetTypeCode(typeof(T)) == TypeCode.Int16) return TypeCode.Int16;
+            else if(Type.GetTypeCode(typeof(T)) == TypeCode.Int32) return TypeCode.Int32;
+            else if(Type.GetTypeCode(typeof(T)) == TypeCode.Int64) return TypeCode.Int64;
+            else if(Type.GetTypeCode(typeof(T)) == TypeCode.UInt64) return TypeCode.UInt64;
+            else if(Type.GetTypeCode(typeof(T)) == TypeCode.UInt32) return TypeCode.UInt32;
+            else if(Type.GetTypeCode(typeof(T)) == TypeCode.UInt16) return TypeCode.UInt16;
+            else if(Type.GetTypeCode(typeof(T)) == TypeCode.Single) return TypeCode.Single;
+            else if(Type.GetTypeCode(typeof(T)) == TypeCode.Byte) return TypeCode.Byte;
+            else if(Type.GetTypeCode(typeof(T)) == TypeCode.SByte) return TypeCode.SByte;
+            else throw unsupported<T>();
         }
 
         [MethodImpl(Inline)]

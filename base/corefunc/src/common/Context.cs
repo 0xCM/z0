@@ -232,7 +232,6 @@ namespace Z0
                 TracePerf(time.Format(labelPad));
         }
 
-
         /// <summary>
         /// Collects function evaluation timing
         /// </summary>
@@ -260,4 +259,21 @@ namespace Z0
         }
 
     }   
+
+    public abstract class AppContext<T> : Context<T>
+        where T : AppContext<T>, new()
+    {
+        protected AppContext(IPolyrand rng)
+            : base(rng)
+        {
+
+        }
+
+        public abstract void Run();
+
+        public static void RunApp()
+            => new T().Run();
+
+    }
+
 }

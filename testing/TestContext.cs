@@ -326,7 +326,7 @@ namespace Z0
 
         protected void VerifyOp<K>(BinaryOp<K> baseline, BinaryOp<K> op, bool nonzero = false, [CallerMemberName] string caller = null, 
             [CallerFilePath] string file = null, [CallerLineNumber] int? line = null)
-            where K : struct
+            where K : unmanaged
         {
             var kind = PrimalKinds.kind<K>(); 
             var lhs = RandArray<K>();
@@ -340,7 +340,7 @@ namespace Z0
 
         protected void VerifyOp<K>(OpKind opKind, BinaryOp<K> baseline, BinaryOp<K> op, bool nonzero = false, [CallerMemberName] string caller = null, 
             [CallerFilePath] string file = null, [CallerLineNumber] int? line = null)
-            where K : struct
+            where K : unmanaged
         {
             var kind = PrimalKinds.kind<K>(); 
             var lhs = RandArray<K>();

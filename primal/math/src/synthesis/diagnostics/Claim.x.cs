@@ -56,7 +56,7 @@ namespace Z0
         /// <param name="line">The file line number of invocation</param>
         /// <typeparam name="T">The element type</typeparam>
         public static void ClaimEqual<T>(this ReadOnlySpan128<T> lhs, ReadOnlySpan128<T> rhs,  [Member] string caller = null, [File] string file = null, [Line] int? line = null)
-            where T : struct 
+            where T : unmanaged 
         {
             for(var i = 0; i< Span128.Length(lhs,rhs); i++)
                 if(!gmath.eq(lhs[i],rhs[i]))
@@ -74,7 +74,7 @@ namespace Z0
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
         public static void ClaimEqual<T>(this Span128<T> lhs, Span128<T> rhs,  [Member] string caller = null, [File] string file = null, [Line] int? line = null)
-            where T : struct 
+            where T : unmanaged 
                 => lhs.ReadOnly().ClaimEqual(rhs, caller, file, line);
 
         /// <summary>
@@ -87,7 +87,7 @@ namespace Z0
         /// <param name="line">The file line number of invocation</param>
         /// <typeparam name="T">The element type</typeparam>
         public static void ClaimEqual<T>(this ReadOnlySpan256<T> lhs, ReadOnlySpan256<T> rhs, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
-            where T : struct 
+            where T : unmanaged 
         {
             for(var i = 0; i< length(lhs,rhs); i++)
                 if(!gmath.eq(lhs[i],rhs[i]))
@@ -105,7 +105,7 @@ namespace Z0
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
         public static void ClaimEqual<T>(this Span256<T> lhs, Span256<T> rhs, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
-            where T : struct 
+            where T : unmanaged 
                 => lhs.ReadOnly().ClaimEqual(rhs, caller, file, line);
 
         /// <summary>
@@ -118,7 +118,7 @@ namespace Z0
         /// <param name="line">The file line number of invocation</param>
         /// <typeparam name="T">The element type</typeparam>
         public static void ClaimEqual<T>(this Span<T> lhs, Span<T> rhs, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
-            where T : struct 
+            where T : unmanaged 
         {
             for(var i = 0; i< length(lhs,rhs); i++)
                 if(!gmath.eq(lhs[i],rhs[i]))

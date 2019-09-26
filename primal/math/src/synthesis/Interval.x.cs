@@ -22,7 +22,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static bool Contains<T>(this IInterval<T> src, T point)
-            where T : struct
+            where T : unmanaged
         {
             if(src.Kind == IntervalKind.Closed)
                 return gmath.gteq(point, src.Left) && gmath.lteq(point, src.Right);
@@ -56,7 +56,7 @@ namespace Z0
         }
 
         public static Span<T> StepwisePartitionPoints<T>(this Interval<T> src, T? stepWidth = null)
-            where T : struct
+            where T : unmanaged
         {
             var negOne = gmath.dec(gmath.zero<T>());
             var step = stepWidth ?? gmath.one<T>();
@@ -87,7 +87,7 @@ namespace Z0
         }
 
         public static Span<Interval<T>> StepwisePartition<T>(this Interval<T> src, T stepWidth)
-            where T : struct
+            where T : unmanaged
         {
             var points = src.StepwisePartitionPoints(stepWidth);
             var dst = span<Interval<T>>(points.Length - 1);
@@ -122,14 +122,14 @@ namespace Z0
         /// <param name="parts">The number of partition points</param>
         /// <typeparam name="T">The underlying interval type</typeparam>
         public static Span<T> PartitionPoints<T>(this Interval<T> src, int count)
-            where T : struct
+            where T : unmanaged
         {            
             var step = gmath.div(gmath.sub(src.Right, src.Left), convert<T>(count - 1));
             return src.StepwisePartitionPoints(step);            
         }
 
         public static Span<Interval<T>> Partition<T>(this Interval<T> src, int count)
-            where T : struct
+            where T : unmanaged
         {
             var step = gmath.div(gmath.sub(src.Right, src.Left), convert<T>(count));
             return src.StepwisePartition(step);

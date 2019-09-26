@@ -24,7 +24,7 @@ namespace Z0
         public static string Format<M,N,T>(this BlockMatrix<M,N,T> src, int? cellwidth = null, char? cellsep = null, Func<T,string> render = null)
             where M : ITypeNat, new()
             where N : ITypeNat, new()
-            where T : struct    
+            where T : unmanaged    
         {
             var sep = cellsep ?? '|';
             var width = cellwidth ?? 3;
@@ -74,7 +74,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static string Format<N,T>(this BlockMatrix<N,T> src, int? cellwidth = null, char? cellsep = null, Func<T,string> render = null)
             where N : ITypeNat, new()
-            where T : struct    
+            where T : unmanaged    
                 => src.ToRectangular().Format(cellwidth, cellsep,render);
 
         [MethodImpl(Inline)]

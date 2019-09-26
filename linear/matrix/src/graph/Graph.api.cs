@@ -162,7 +162,7 @@ namespace Z0
         /// <param name="target">The index of the target vertex</param>
         /// <typeparam name="V">The vertex index type</typeparam>
         public static ReadOnlySpan<Edge<V>> Incoming<V>(Graph<V> graph, V target)
-            where V : struct
+            where V : unmanaged
         {            
             Span<Edge<V>> dst = new Edge<V>[graph.EdgeCount];
             var j = 0;
@@ -183,7 +183,7 @@ namespace Z0
         /// <param name="target">The index of the target vertex</param>
         /// <typeparam name="V">The vertex index type</typeparam>
         public static ReadOnlySpan<Edge<V>> Outgoing<V>(Graph<V> graph, V source)
-            where V : struct
+            where V : unmanaged
         {            
             Span<Edge<V>> dst = new Edge<V>[graph.EdgeCount];
             var j = 0;

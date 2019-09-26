@@ -338,7 +338,7 @@ namespace Z0
         /// <param name="first">The value of the first component</param>
         /// <typeparam name="T">The primal component type</typeparam>
         public static Vec128<T> Increments<T>(T first = default, params Swap[] swaps)
-            where T : struct  
+            where T : unmanaged  
         {
             var dst = Alloc<T>();
             var n = dst.Length;

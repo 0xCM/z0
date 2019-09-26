@@ -9,11 +9,11 @@ namespace Z0
 
     class GenericScenarios
     {
-        public static MethodDisassembly[] RevealGeneric(Type host, params string[] opnames)
+        public static MethodDisassembly[] DeconstructGeneric(Type host, string[] opnames, Type[] typeargs)
         {
             var open = host.Methods().Public().OpenGeneric().Where(m => opnames.Contains(m.Name));
             var closed = from om in open
-                        from t in PrimalTypes.All
+                         from t in typeargs
                          let def = om.GetGenericMethodDefinition()
                          let gm = def.MakeGenericMethod(t)
                          select gm;
@@ -30,7 +30,7 @@ namespace Z0
                 let gm = def.MakeGenericMethod(t)
                 select gm;
 
-        public static MethodDisassembly[] RevealMath()
+        public static MethodDisassembly[] Gmath()
         {
             var opnames = set("add", "sub", "mul", "idiv", "mod");
             var unopnames = set("negate","inc","dec");

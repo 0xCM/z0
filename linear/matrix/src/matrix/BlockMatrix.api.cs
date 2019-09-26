@@ -28,7 +28,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BlockMatrix<N,T> Alloc<N,T>(N n = default, T exemplar = default)
             where N : ITypeNat, new()
-            where T : struct
+            where T : unmanaged
                 => Span256.Alloc<N,N,T>(); 
 
         /// <summary>
@@ -44,7 +44,7 @@ namespace Z0
         public static BlockMatrix<M,N,T> Alloc<M,N,T>(M m = default, N n = default, T exemplar = default)
             where M : ITypeNat, new()
             where N : ITypeNat, new()
-            where T : struct
+            where T : unmanaged
                 => Span256.Alloc<M,N,T>(); 
          
         /// <summary>
@@ -58,7 +58,7 @@ namespace Z0
         public static BlockMatrix<M,N,T> Load<M,N,T>(Span256<T> src, M m = default, N n = default)
             where M : ITypeNat, new()
             where N : ITypeNat, new()
-            where T : struct
+            where T : unmanaged
                 => new BlockMatrix<M, N, T>(src);
 
         /// <summary>
@@ -71,14 +71,14 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BlockMatrix<N,T> Load<N,T>(Span256<T> src,  N n = default)
             where N : ITypeNat, new()
-            where T : struct
+            where T : unmanaged
                 => new BlockMatrix<N, T>(src);
 
         [MethodImpl(Inline)]
         public static BlockMatrix<M,N,T> Load<M,N,T>(Span<T> src,M m = default, N n = default)
             where M : ITypeNat, new()
             where N : ITypeNat, new()
-            where T : struct
+            where T : unmanaged
                 => Span256.Load(src);
 
         /// <summary>
@@ -91,7 +91,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BlockMatrix<N,T> Define<N,T>(T[] src, N n = default)
             where N : ITypeNat, new()
-            where T : struct
+            where T : unmanaged
         {
             var dst = Alloc<N,T>();
             src.CopyTo(dst.Unblocked);
@@ -108,7 +108,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BlockMatrix<N,T> Define<N,T>(N n, params T[] src )
             where N : ITypeNat, new()
-            where T : struct
+            where T : unmanaged
                 => Define<N,T>(src,n);
 
         /// <summary>
@@ -121,7 +121,7 @@ namespace Z0
         public static FileName DataFileName<M,N,T>(string fileId = null)
             where M : ITypeNat, new()
             where N : ITypeNat, new()
-            where T : struct    
+            where T : unmanaged    
                 => FileName.Define($" {fileId ?? "mat"}_{PrimalKinds.kind<T>()}[{nati<M>()}x{nati<N>()}].csv");
         
         /// <summary>
@@ -135,7 +135,7 @@ namespace Z0
         public static BlockMatrix<M,N,T> ReadFrom<M,N,T>(FilePath src, TextFormat? format = null)
             where M : ITypeNat, new()
             where N : ITypeNat, new()
-            where T : struct    
+            where T : unmanaged    
         {
             var doc = src.ReadTextDoc().Require();
             var m = nati<M>();

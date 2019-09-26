@@ -23,7 +23,7 @@ namespace Z0
     public ref struct BlockMatrix<M,N,T>
         where M : ITypeNat, new()
         where N : ITypeNat, new()
-        where T : struct    
+        where T : unmanaged
     {        
         Span256<T> data;
 
@@ -239,7 +239,7 @@ namespace Z0
         /// <typeparam name="U">The conversion target type</typeparam>
         [MethodImpl(Inline)]
         public BlockMatrix<M,N,U> Convert<U>()
-            where U : struct
+            where U : unmanaged
                => new BlockMatrix<M,N,U>(convert<T,U>(data));
 
 
@@ -250,7 +250,7 @@ namespace Z0
         /// <typeparam name="U">The conversion target type</typeparam>
         [MethodImpl(Inline)]
         public ref BlockMatrix<M,N,U> Convert<U>(out BlockMatrix<M,N,U> dst)
-            where U : struct
+            where U : unmanaged
         {
             dst = new BlockMatrix<M,N,U>(convert<T,U>(data));
             return ref dst;
@@ -262,7 +262,7 @@ namespace Z0
         /// <typeparam name="U">The target type</typeparam>
         [MethodImpl(Inline)]
         public BlockMatrix<M,N,U> As<U>()
-            where U : struct
+            where U : unmanaged
                => new BlockMatrix<M,N,U>(data.As<U>());
 
         /// <summary>
@@ -271,7 +271,7 @@ namespace Z0
         /// <typeparam name="U">The target type</typeparam>
         [MethodImpl(Inline)]
         public ref BlockMatrix<M,N,U> As<U>(out BlockMatrix<M,N,U> dst)
-            where U : struct        
+            where U : unmanaged
         {
             dst = this.As<U>();
             return ref dst;

@@ -21,7 +21,7 @@ namespace Z0
     /// <typeparam name="T">The primal type</typeparam>
     public ref struct BlockMatrix<N,T>
         where N : ITypeNat, new()
-        where T : struct    
+        where T : unmanaged    
     {        
         Span256<T> data;
 
@@ -265,12 +265,12 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public BlockMatrix<N,U> Convert<U>()
-            where U : struct
+            where U : unmanaged
                => new BlockMatrix<N,U>(convert<T,U>(data));
 
         [MethodImpl(Inline)]
         public BlockMatrix<N,U> As<U>()
-            where U : struct
+            where U : unmanaged
                 => new BlockMatrix<N,U>(data.As<U>());
 
         /// <summary>

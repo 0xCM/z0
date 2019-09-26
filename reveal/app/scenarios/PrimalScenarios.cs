@@ -20,8 +20,42 @@ namespace Z0
 
         }
 
+        public static ulong div_64u(ulong x, ulong y)
+            => x/y;
+
+        public static ulong div_g64u(ulong x, ulong y)
+            => gmath.div(x,y);
         
-        
+        public static ulong inc_64u(ulong x)
+            => ++x;
+
+        public static ulong inc_g64u(ulong x)
+            => gmath.inc(x);
+
+        public static ref ulong inc_g64u_ref(ref ulong x)
+            => ref gmath.inc(ref x);
+
+        public static ref ulong inc_64u_ref(ref ulong x)
+            => ref math.inc(ref x);
+
+        public static bool gt_64u(ulong x, ulong y)
+            => x > y;
+
+        public static bool gt_g64u(ulong x, ulong y)
+            => gmath.gt(x,y);
+
+        public static bool gteq_64u(ulong x, ulong y)
+            => x >= y;
+
+        public static bool gteq_g64u(ulong x, ulong y)
+            => gmath.gteq(x,y);
+
+        public static bool eq_64u(ulong x, ulong y)
+            => x == y;
+
+        public static bool eq_g64u(ulong x, ulong y)
+            => gmath.eq(x,y);
+
         public static byte add_8u(byte x, byte y)
             => (byte)(x + y);
 
@@ -70,84 +104,12 @@ namespace Z0
         public static ulong xor_g64u(ulong x, ulong y)
             => gmath.xor(x,y);
 
+        public static bool gteq_32i(int x, int y)
+            => x == y;
 
-        public static double inc_64f(double x)
-            => ++x;
+        public static bool gteq_g32i(int x, int y)
+            => gmath.gteq(x,y);
 
-        public static double inc_g64f(double x)
-            => gfp.inc(x);
-
-        public static double dec_64f(double x)
-            => --x;
-
-        public static double dec_g64f(double x)
-            => gfp.dec(x);
-
-        public static double dec_64f(ref double x)
-            => --x;
-
-        public static ref double dec_g64f(ref double x)        
-            => ref gfp.dec(ref x);
-
-
-        #region emit
-
-        public sbyte emit8i()
-        {
-            return -0x25;
-        }
-
-        public byte emit8u()
-        {
-            return 0x25;
-        }
-
-        public short emit16i()
-        {
-            return - 0x5432;
-        }
-
-        public ushort emit16u()
-        {
-            return 0x5432;
-        }
-
-        public int emit32i()
-        {
-            return -0x212425;
-        }
-
-        public uint emit32u()
-        {
-            return 0x44033022;
-        }
-
-        public long emit64i()
-        {
-
-            return Int64.MinValue;
-        }
-
-        public ulong emit64u()
-        {
-
-            return 0x66055044033022;
-        }
-
-        public float emit32f()
-        {
-
-            return 20304050.335255f;
-        }
-
-        public double emit64f()
-        {
-
-            return -358298783.335255;
-        }
-
-        #endregion
- 
  
     }
 }

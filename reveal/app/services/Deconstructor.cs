@@ -69,8 +69,6 @@ namespace Z0
         ClrMethod GetRuntimeMethod(MethodBase src)
             =>  Runtime.GetMethodByHandle((ulong)src.MethodHandle.Value.ToInt64());
             
-            //Runtime.GetMethodByAddress((ulong)src.MethodHandle.GetFunctionPointer());
-
         Option<MethodDisassembly> Disassemble(MethodInfo method, Action<string> onError)
         {
             try
@@ -110,6 +108,9 @@ namespace Z0
         MethodAsmBody DecodeAsm(MethodBase method)
         {
             var data = ReadNativeContent(method);
+            if(data.NativeCode.Length == 0)
+                throw new Exception($"No code found for method {method}");
+                
             var instructions = new List<Instruction>();
             var blocks = new List<CodeBlock>();
             foreach(var block in data.NativeCode)

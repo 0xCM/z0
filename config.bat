@@ -12,6 +12,7 @@ dotnet sln add primal/math/test/z0.math.test.csproj
 
 dotnet sln add cpu/cpudata/z0.cpudata.csproj
 dotnet sln add cpu/cpufunc/z0.cpufunc.csproj
+dotnet sln add cpu/cpuemu/z0.cpuemu.csproj
 dotnet sln add cpu/test/z0.cpu.test.csproj
 
 dotnet sln add primal/intrinsic/src/z0.intrinsic.csproj
@@ -19,13 +20,30 @@ dotnet sln add primal/intrinsic/test/z0.intrinsic.test.csproj
 
 dotnet sln add linear/matrix/src/z0.matrix.csproj
 
-dotnet sln add bits/src/z0.bits.csproj
-dotnet sln add bits/test/z0.bits.test.csproj
+dotnet sln add mkl/src/z0.mkl.csproj
+dotnet sln add mkl/test/z0.mkl.test.csproj
 
 
 dotnet sln add rng/src/z0.rng.csproj
 
+dotnet sln add bits/src/z0.bits.csproj
+dotnet sln add bits/test/z0.bits.test.csproj
+
 dotnet sln add reveal/app/z0.reveal.app.csproj
+dotnet sln add reveal/lib/z0.reveal.lib.csproj
+
+
+dotnet sln add circuits/src/z0.circuits.csproj
+dotnet sln add circuits/test/z0.circuits.test.csproj
+
+dotnet sln add stats/dist/z0.statdist.csproj
+
+dotnet sln add rng/system/z0.rng.system.csproj
+dotnet sln add machines/src/z0.machines.csproj
+dotnet sln add machines/test/z0.machines.test.csproj
+
+dotnet sln add linear/ops/z0.linops.csproj
+dotnet sln add linear/test/z0.linops.test.csproj
 
 
 dotnet sln add testing/z0.testing.csproj

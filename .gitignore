@@ -2,7 +2,6 @@
 alpha.cabal
 *~
 libs/
-dist/
 bin/
 .vs/
 .work/

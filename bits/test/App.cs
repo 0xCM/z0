@@ -10,7 +10,7 @@ namespace Z0.Test
 
     using static zfunc;
 
-    public class App : TestApp<App>
+    class App : TestApp<App>
     {                    
 
         protected override void  RunTests(params string[] filters)

@@ -63,7 +63,7 @@ namespace Z0
         /// <param name="target">The index of the target vertex</param>
         /// <typeparam name="V">The vertex index type</typeparam>
         public static ReadOnlySpan<Edge<V>> Incoming<V>(this Graph<V> graph, V target)
-            where V : struct
+            where V : unmanaged
                 => Graph.Incoming(graph, target);
 
         /// <summary>
@@ -73,7 +73,7 @@ namespace Z0
         /// <param name="target">The index of the target vertex</param>
         /// <typeparam name="V">The vertex index type</typeparam>
         public static ReadOnlySpan<Edge<V>> Outgoing<V>(this Graph<V> graph, V source)
-            where V : struct
+            where V : unmanaged
                 => Graph.Outgoing(graph, source);
 
     }

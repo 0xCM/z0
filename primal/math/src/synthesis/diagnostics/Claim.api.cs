@@ -169,7 +169,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static bool numeq<T>(T lhs, T rhs, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
-            where T : struct 
+            where T : unmanaged 
                 => gmath.eq(lhs,rhs) ? true : throw Errors.Equal(lhs,rhs);
 
         public static void eq<T>(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
@@ -183,12 +183,12 @@ namespace Z0
  
         [MethodImpl(Inline)]
         public static void eq<T>(Span128<T> lhs, Span128<T> rhs, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
-            where T : struct 
+            where T : unmanaged 
                 => lhs.ClaimEqual(rhs, caller,file,line);
 
         [MethodImpl(Inline)]
         public static void eq<T>(Span256<T> lhs, Span256<T> rhs, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
-            where T : struct 
+            where T : unmanaged
                 => lhs.ClaimEqual(rhs, caller,file,line);
 
         [MethodImpl(Inline)]
@@ -197,12 +197,12 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static bool within<T>(T x, Interval<T> range, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
-            where T : struct
+            where T : unmanaged
                 => range.Contains(x) ? true : throw failed(ClaimOpKind.Between, NotBetween(x,range.Left, range.Right, caller, file, line));
 
         [MethodImpl(Inline)]
         public static bool within<T>(T x, T lower, T upper, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
-            where T : struct
+            where T : unmanaged
         {
             var range = closed(lower,upper);
             return range.Contains(x) 
@@ -222,7 +222,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static bool between<T>(BitSize x, Interval<T> range, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
-            where T : struct
+            where T : unmanaged
                 => range.Contains(x.Bits.Convert<T>()) ? true : throw failed(ClaimOpKind.Between, NotBetween(x.Bits.Convert<T>(), range.Left, range.Right, caller, file, line));
 
         [MethodImpl(Inline)]
@@ -232,7 +232,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static bool gteq<T>(T lhs, T rhs, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
-            where T : struct
+            where T : unmanaged
                 => gmath.gteq(lhs,rhs) ? true : throw failed(ClaimOpKind.GtEq, NotGreaterThanOrEqual(lhs, rhs, caller, file, line));
 
         [MethodImpl(Inline)]

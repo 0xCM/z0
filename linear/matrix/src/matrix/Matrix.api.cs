@@ -125,7 +125,7 @@ namespace Z0
         public static void WriteTo<M,N,T>(BlockMatrix<M,N,T> src, FilePath dst, bool overwrite = true, TextFormat? fmt = null)
             where M : ITypeNat, new()
             where N : ITypeNat, new()
-            where T : struct    
+            where T : unmanaged
         {
             var _fmt = fmt ?? TextFormat.Default;
             var sep = _fmt.Delimiter;
