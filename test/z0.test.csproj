@@ -1,0 +1,37 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="$(TopDir)base/nats/src/z0.nats.csproj" />
+    <ProjectReference Include="$(TopDir)base/nats/test/z0.nats.test.csproj" />
+
+    <ProjectReference Include="$(TopDir)base/coredata/src/z0.coredata.csproj" />
+    
+    <ProjectReference Include="$(TopDir)base/corefunc/src/z0.corefunc.csproj" />
+    <ProjectReference Include="$(TopDir)base/corefunc/test/z0.corefunc.test.csproj" />
+
+    <ProjectReference Include="$(TopDir)primal/math/src/z0.math.csproj" />
+    <ProjectReference Include="$(TopDir)primal/math/test/z0.math.test.csproj" />
+
+    <ProjectReference Include="$(TopDir)primal/intrinsic/src/z0.intrinsic.csproj" />
+    <ProjectReference Include="$(TopDir)primal/intrinsic/test/z0.intrinsic.test.csproj" />
+
+    <ProjectReference Include="$(TopDir)cpu/cpudata/z0.cpudata.csproj" />
+    <ProjectReference Include="$(TopDir)cpu/cpufunc/z0.cpufunc.csproj" />
+    <ProjectReference Include="$(TopDir)cpu/test/z0.cpu.test.csproj" />
+
+    <ProjectReference Include="$(TopDir)rng/src/z0.rng.csproj" />
+
+    <ProjectReference Include="$(TopDir)bits/src/z0.bits.csproj" />
+    <ProjectReference Include="$(TopDir)bits/test/z0.bits.test.csproj" />
+
+    <ProjectReference Include="$(TopDir)testing/z0.testing.csproj" />
+
+
+  </ItemGroup>
+
+</Project>

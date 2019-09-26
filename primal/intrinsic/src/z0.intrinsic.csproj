@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="$(TopDir)base/nats/src/z0.nats.csproj" />
+    <ProjectReference Include="$(TopDir)base/coredata/src/z0.coredata.csproj" />
+    <ProjectReference Include="$(TopDir)base/corefunc/src/z0.corefunc.csproj" />
+    <ProjectReference Include="$(TopDir)primal/math/src/z0.math.csproj" />
+  </ItemGroup>
+
+</Project>
