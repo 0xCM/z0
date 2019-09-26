@@ -18,21 +18,21 @@ namespace Z0
         public static T flip<T>(T src)
             where T : struct
         {
-            if(typeof(T) == typeof(sbyte))
+            if(typematch<T,sbyte>())
                 return generic<T>(math.flip(int8(src)));  
-            else if(typeof(T) == typeof(byte))
+            else if(typematch<T,byte>())
                 return generic<T>(math.flip(uint8(src)));  
-            else if(typeof(T) == typeof(short))
+            else if(typematch<T,short>())
                 return generic<T>(math.flip(int16(src)));  
-            else if(typeof(T) == typeof(ushort))
+            else if(typematch<T,ushort>())
                 return generic<T>(math.flip(uint16(src)));  
-            else if(typeof(T) == typeof(int))
+            else if(typematch<T,int>())
                 return generic<T>(math.flip(int32(src)));  
-            else if(typeof(T) == typeof(uint))
+            else if(typematch<T,uint>())
                 return generic<T>(math.flip(uint32(src)));  
-            else if(typeof(T) == typeof(long))
+            else if(typematch<T,long>())
                 return generic<T>(math.flip(int64(src)));  
-            else if(typeof(T) == typeof(ulong))
+            else if(typematch<T,ulong>())
                 return generic<T>(math.flip(uint64(src)));  
             else            
                 throw unsupported<T>();
@@ -42,21 +42,21 @@ namespace Z0
         public static ref T flip<T>(ref T src)
             where T : struct
         {
-            if(typeof(T) == typeof(sbyte))
+            if(typematch<T,sbyte>())
                 math.flip(ref int8(ref src));
-            else if(typeof(T) == typeof(byte))
+            else if(typematch<T,byte>())
                 math.flip(ref uint8(ref src));
-            else if(typeof(T) == typeof(short))
+            else if(typematch<T,short>())
                 math.flip(ref int16(ref src));
-            else if(typeof(T) == typeof(ushort))
+            else if(typematch<T,ushort>())
                 math.flip(ref uint16(ref src));
-            else if(typeof(T) == typeof(int))
+            else if(typematch<T,int>())
                 math.flip(ref int32(ref src));
-            else if(typeof(T) == typeof(uint))
+            else if(typematch<T,uint>())
                 math.flip(ref uint32(ref src));
-            else if(typeof(T) == typeof(long))
+            else if(typematch<T,long>())
                 math.flip(ref int64(ref src));
-            else if(typeof(T) == typeof(ulong))
+            else if(typematch<T,ulong>())
                 math.flip(ref uint64(ref src));
             else            
                 throw unsupported<T>();

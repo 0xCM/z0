@@ -98,7 +98,7 @@ namespace Z0
         {
             if(typeof(T) == typeof(byte))
                 return MergeLanesU8().As<T>();
-            else if(typeof(T) == typeof(ushort))
+            else if(typematch<T,ushort>())
                 return MergeLanesU16().As<T>();
             else 
                 return Zero;
@@ -106,9 +106,9 @@ namespace Z0
 
         static Vec256<T> CalcFpSignMask()
         {
-            if(typeof(T) == typeof(float))
+            if(typematch<T,float>())
                 return CalcFpSignMask32().As<T>();
-            else if(typeof(T) == typeof(double))
+            else if(typematch<T,double>())
                 return CalcFpSignMask64().As<T>();
             else 
                 return Zero;

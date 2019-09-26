@@ -20,9 +20,9 @@ namespace Z0
             where T : struct
         {
 
-            if(typeof(T) == typeof(float))
+            if(typematch<T,float>())
                 return generic<T>(fmath.round(float32(src), scale));
-            else if(typeof(T) == typeof(double))
+            else if(typematch<T,double>())
                 return generic<T>(fmath.round(float64(src), scale));
             else
                 return src;

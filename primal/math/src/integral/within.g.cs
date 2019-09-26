@@ -27,25 +27,25 @@ namespace Z0
         public static bool within<T>(T lhs, T rhs, T epsilon)
             where T : struct
         {
-            if(typeof(T) == typeof(sbyte))
+            if(typematch<T,sbyte>())
                 return math.within(int8(lhs), int8(rhs), int8(epsilon));
-            else if(typeof(T) == typeof(byte))
+            else if(typematch<T,byte>())
                 return math.within(uint8(lhs), uint8(rhs), uint8(epsilon));
-            else if(typeof(T) == typeof(short))
+            else if(typematch<T,short>())
                 return math.within(int16(lhs), int16(rhs), int16(epsilon));
-            else if(typeof(T) == typeof(ushort))
+            else if(typematch<T,ushort>())
                 return math.within(uint16(lhs), uint16(rhs), uint16(epsilon));
-            else if(typeof(T) == typeof(int))
+            else if(typematch<T,int>())
                 return math.within(int32(lhs), int32(rhs), int32(epsilon));
-            else if(typeof(T) == typeof(uint))
+            else if(typematch<T,uint>())
                 return math.within(uint32(lhs), uint32(rhs), uint32(epsilon));
-            else if(typeof(T) == typeof(long))
+            else if(typematch<T,long>())
                 return math.within(int64(lhs), int64(rhs), int64(epsilon));
-            else if(typeof(T) == typeof(ulong))
+            else if(typematch<T,ulong>())
                 return math.within(uint64(lhs), uint64(rhs), uint64(epsilon));
-            else if(typeof(T) == typeof(float))
+            else if(typematch<T,float>())
                 return math.within(float32(lhs), float32(rhs), float32(epsilon));
-            else if(typeof(T) == typeof(double))
+            else if(typematch<T,double>())
                 return math.within(float64(lhs), float64(rhs), float64(epsilon));
             else            
                 throw unsupported<T>();

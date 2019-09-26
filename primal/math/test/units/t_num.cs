@@ -100,11 +100,11 @@ namespace Z0.Test
 
             if(typeof(T) == typeof(int))
                 time = add32i_bench();
-            else if(typeof(T) == typeof(long))
+            else if(typematch<T,long>())
                 time = add64i_bench();
-            else if(typeof(T) == typeof(ulong))
+            else if(typematch<T,ulong>())
                 time = add64u_bench();
-            else if(typeof(T) == typeof(double))
+            else if(typematch<T,double>())
                 time = add64f_bench();
             
             var opname = $"direct<{typeof(T).DisplayName()}>_add";

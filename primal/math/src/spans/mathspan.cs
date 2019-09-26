@@ -125,7 +125,7 @@ namespace Z0
         /// <param name="rhs">The right integer source</param>
         /// <typeparam name="T">The primal floating-point type</typeparam>
         public static Span<T> fmod<T>(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs, Span<T> dst)
-            where T : struct
+            where T : unmanaged
         {
             var len = length(lhs,rhs);
             for(var i = 0; i< len; i++)
@@ -164,11 +164,11 @@ namespace Z0
         }
 
         public static Span<T> ceil<T>(ReadOnlySpan<T> src)
-            where T : struct
-            => ceil(src, span<T>(src.Length));
+            where T : unmanaged
+                => ceil(src, span<T>(src.Length));
 
         public static Span<T> ceil<T>(Span<T> io)
-            where T : struct
+            where T : unmanaged
         {
             for(var i =0; i<io.Length; i++)
                 io[i] = gfp.ceil(io[i]);
@@ -201,7 +201,7 @@ namespace Z0
         /// <param name="rhs">The right integer source</param>
         /// <typeparam name="T">The primal floating-point type</typeparam>
         public static Span<T> fdiv<T>(Span<T> lhs, ReadOnlySpan<T> rhs)
-            where T : struct
+            where T : unmanaged
         {
             var len = length(lhs,rhs);
             for(var i = 0; i< len; i++)
@@ -253,7 +253,7 @@ namespace Z0
         }
 
         public static Span<T> mod<T>(Span<T> lhs, T rhs)
-            where T : struct
+            where T : unmanaged
         {
             for(var i=0; i<lhs.Length; i++)
                 gmath.mod(ref lhs[i],rhs);
@@ -261,7 +261,7 @@ namespace Z0
         }
 
         public static Span<T> mod<T>(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs, Span<T> dst)
-            where T : struct
+            where T : unmanaged
         {
             var len = length(lhs,rhs);
             for(var i=0; i<len; i++)
@@ -270,7 +270,7 @@ namespace Z0
         }
 
         public static Span<T> mod<T>(ReadOnlySpan<T> lhs, T rhs, Span<T> dst)
-            where T : struct
+            where T : unmanaged
         {
             var len = length(lhs,dst);
             for(var i=0; i<len; i++)
@@ -279,7 +279,7 @@ namespace Z0
         }
 
         public static Span<T> mod<T>(Span<T> lhs, ReadOnlySpan<T> rhs)
-            where T : struct
+            where T : unmanaged
         {
             var len = length(lhs,rhs);
             for(var i=0; i<len; i++)
@@ -305,25 +305,25 @@ namespace Z0
         public static T dot<T>(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs)
             where T : struct
         {
-            if(typeof(T) == typeof(sbyte))
+            if(typematch<T,sbyte>())
                 return generic<T>(math.dot(int8(lhs), int8(rhs)));
-            else if(typeof(T) == typeof(byte))
+            else if(typematch<T,byte>())
                 return generic<T>(math.dot(uint8(lhs), uint8(rhs)));
-            else if(typeof(T) == typeof(short))
+            else if(typematch<T,short>())
                 return generic<T>(math.dot(int16(lhs), int16(rhs)));
-            else if(typeof(T) == typeof(ushort))
+            else if(typematch<T,ushort>())
                 return generic<T>(math.dot(uint16(lhs), uint16(rhs)));
-            else if(typeof(T) == typeof(int))
+            else if(typematch<T,int>())
                 return generic<T>(math.dot(int32(lhs), int32(rhs)));
-            else if(typeof(T) == typeof(uint))
+            else if(typematch<T,uint>())
                 return generic<T>(math.dot(uint32(lhs), uint32(rhs)));
-            else if(typeof(T) == typeof(long))
+            else if(typematch<T,long>())
                 return generic<T>(math.dot(int64(lhs), int64(rhs)));
-            else if(typeof(T) == typeof(ulong))
+            else if(typematch<T,ulong>())
                 return generic<T>(math.dot(uint64(lhs), uint64(rhs)));
-            else if(typeof(T) == typeof(float))
+            else if(typematch<T,float>())
                 return generic<T>(fmath.dot(float32(lhs), float32(rhs)));
-            else if(typeof(T) == typeof(double))
+            else if(typematch<T,double>())
                 return generic<T>(fmath.dot(float64(lhs), float64(rhs)));
             else
                 throw unsupported<T>();
@@ -456,7 +456,6 @@ namespace Z0
             where T : struct
                 => lteq(lhs,rhs,span<bool>(length(lhs,rhs)));
 
-
         /// <summary>
         /// Returns true if all supplied values are equal to a target value; false otherwise
         /// </summary>
@@ -510,25 +509,25 @@ namespace Z0
         public static T sum<T>(ReadOnlySpan<T> src)
             where T :  struct
         {
-            if(typeof(T) == typeof(sbyte))
+            if(typematch<T,sbyte>())
                 return generic<T>(math.sum(int8(src)));
-            else if(typeof(T) == typeof(byte))
+            else if(typematch<T,byte>())
                 return generic<T>(math.sum(uint8(src)));
-            else if(typeof(T) == typeof(short))
+            else if(typematch<T,short>())
                 return generic<T>(math.sum(int16(src)));
-            else if(typeof(T) == typeof(ushort))
+            else if(typematch<T,ushort>())
                 return generic<T>(math.sum(uint16(src)));
-            else if(typeof(T) == typeof(int))
+            else if(typematch<T,int>())
                 return generic<T>(math.sum(int32(src)));
-            else if(typeof(T) == typeof(uint))
+            else if(typematch<T,uint>())
                 return generic<T>(math.sum(uint32(src)));
-            else if(typeof(T) == typeof(long))
+            else if(typematch<T,long>())
                 return generic<T>(math.sum(int64(src)));
-            else if(typeof(T) == typeof(ulong))
+            else if(typematch<T,ulong>())
                 return generic<T>(math.sum(uint64(src)));
-            else if(typeof(T) == typeof(float))
+            else if(typematch<T,float>())
                 return generic<T>(math.sum(float32(src)));
-            else if(typeof(T) == typeof(double))
+            else if(typematch<T,double>())
                 return generic<T>(math.sum(float64(src)));
             else
                 throw unsupported<T>();
@@ -543,25 +542,25 @@ namespace Z0
         public static T min<T>(ReadOnlySpan<T> src)
             where T : struct
         {
-            if(typeof(T) == typeof(sbyte))
+            if(typematch<T,sbyte>())
                 return generic<T>(math.min(int8(src)));
-            else if(typeof(T) == typeof(byte))
+            else if(typematch<T,byte>())
                 return generic<T>(math.min(uint8(src)));
-            else if(typeof(T) == typeof(short))
+            else if(typematch<T,short>())
                 return generic<T>(math.min(int16(src)));
-            else if(typeof(T) == typeof(ushort))
+            else if(typematch<T,ushort>())
                 return generic<T>(math.min(uint16(src)));
-            else if(typeof(T) == typeof(int))
+            else if(typematch<T,int>())
                 return generic<T>(math.min(int32(src)));
-            else if(typeof(T) == typeof(uint))
+            else if(typematch<T,uint>())
                 return generic<T>(math.min(uint32(src)));
-            else if(typeof(T) == typeof(long))
+            else if(typematch<T,long>())
                 return generic<T>(math.min(int64(src)));
-            else if(typeof(T) == typeof(ulong))
+            else if(typematch<T,ulong>())
                 return generic<T>(math.min(uint64(src)));
-            else if(typeof(T) == typeof(float))
+            else if(typematch<T,float>())
                 return generic<T>(math.min(float32(src)));
-            else if(typeof(T) == typeof(double))
+            else if(typematch<T,double>())
                 return generic<T>(math.min(float64(src)));
             else
                 throw unsupported<T>();
@@ -673,9 +672,9 @@ namespace Z0
                 return dst;
             }            
             
-            if(typeof(T) == typeof(float))
+            if(typematch<T,float>())
                 round32(float32(src), scale, float32(dst));
-            else if(typeof(T) == typeof(double))
+            else if(typematch<T,double>())
                 round64(float64(src), scale, float64(dst));
             else
                 return src.Replicate();
@@ -702,9 +701,9 @@ namespace Z0
                     fmath.round(ref io[i], scale);
             }
          
-            if(typeof(T) == typeof(float))
+            if(typematch<T,float>())
                 round32(float32(io), scale);
-            else if(typeof(T) == typeof(double))
+            else if(typematch<T,double>())
                 round64(float64(io), scale);
             return io;        
         }

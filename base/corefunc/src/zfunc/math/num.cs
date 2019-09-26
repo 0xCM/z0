@@ -67,7 +67,7 @@ partial class zfunc
     public static IEnumerable<T> range<T>(T x0, T x1, T? step = null)
         where T : struct
     {
-        if(typeof(T) == typeof(sbyte))
+        if(typematch<T,sbyte>())
         {
             var min = int8(x0);
             var max = int8(x1);
@@ -75,7 +75,7 @@ partial class zfunc
             for(var i = min; i <= max; i += _step)            
                 yield return generic<T>(i);
         }
-        else if(typeof(T) == typeof(byte))
+        else if(typematch<T,byte>())
         {
             var min = uint8(x0);
             var max = uint8(x1);
@@ -83,7 +83,7 @@ partial class zfunc
             for(var i = min; i <= max; i += _step)            
                 yield return generic<T>(i);
         }
-        else if(typeof(T) == typeof(short))
+        else if(typematch<T,short>())
         {
             var min = int16(x0);
             var max = int16(x1);
@@ -91,7 +91,7 @@ partial class zfunc
             for(var i = min; i <= max; i += _step)            
                 yield return generic<T>(i);
         }
-        else if(typeof(T) == typeof(ushort))
+        else if(typematch<T,ushort>())
         {
             var min = uint16(x0);
             var max = uint16(x1);
@@ -99,7 +99,7 @@ partial class zfunc
             for(var i = min; i <= max; i += _step)            
                 yield return generic<T>(i);
         }
-        else if(typeof(T) == typeof(int))
+        else if(typematch<T,int>())
         {
             var min = int32(x0);
             var max = int32(x1);
@@ -107,7 +107,7 @@ partial class zfunc
             for(var i = min; i <= max; i += _step)            
                 yield return generic<T>(i);
         }
-        else if(typeof(T) == typeof(uint))
+        else if(typematch<T,uint>())
         {
             var min = uint32(x0);
             var max = uint32(x1);
@@ -115,7 +115,7 @@ partial class zfunc
             for(var i = min; i <= max; i += _step)            
                 yield return generic<T>(i);
         }
-        else if(typeof(T) == typeof(long))
+        else if(typematch<T,long>())
         {
             var min = int64(x0);
             var max = int64(x1);
@@ -123,7 +123,7 @@ partial class zfunc
             for(var i = min; i <= max; i += _step)            
                 yield return generic<T>(i);
         }
-        else if(typeof(T) == typeof(ulong))
+        else if(typematch<T,ulong>())
         {
             var min = uint64(x0);
             var max = uint64(x1);
@@ -131,7 +131,7 @@ partial class zfunc
             for(var i = min; i <= max; i += _step)            
                 yield return generic<T>(i);
         }
-        else if(typeof(T) == typeof(float))
+        else if(typematch<T,float>())
         {
             var min = float32(x0);
             var max = float32(x1);
@@ -139,7 +139,7 @@ partial class zfunc
             for(var i = min; i <= max; i += _step)            
                 yield return generic<T>(i);
         }
-        else if(typeof(T) == typeof(double))
+        else if(typematch<T,double>())
         {
             var min = float64(x0);
             var max = float64(x1);

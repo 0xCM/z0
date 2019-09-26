@@ -22,21 +22,21 @@ namespace Z0
         public static bool odd<T>(T src)
             where T : struct
         {
-            if(typeof(T) == typeof(sbyte))
+            if(typematch<T,sbyte>())
                 return zfunc.odd(int8(src));  
-            else if(typeof(T) == typeof(byte))
+            else if(typematch<T,byte>())
                 return zfunc.odd(uint8(src));  
-            else if(typeof(T) == typeof(short))
+            else if(typematch<T,short>())
                 return zfunc.odd(int16(src));  
-            else if(typeof(T) == typeof(ushort))
+            else if(typematch<T,ushort>())
                 return zfunc.odd(uint16(src));  
-            else if(typeof(T) == typeof(int))
+            else if(typematch<T,int>())
                 return zfunc.odd(int32(src));  
-            else if(typeof(T) == typeof(uint))
+            else if(typematch<T,uint>())
                 return zfunc.odd(uint32(src));  
-            else if(typeof(T) == typeof(long))
+            else if(typematch<T,long>())
                 return zfunc.odd(int64(src));  
-            else if(typeof(T) == typeof(ulong))
+            else if(typematch<T,ulong>())
                 return zfunc.odd(uint64(src));  
             else            
                 throw unsupported<T>();

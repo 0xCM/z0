@@ -27,11 +27,11 @@ namespace Z0
         {
             if(typeof(T) == typeof(byte))
                 return generic<T>(math.avgz(uint8(lhs), uint8(rhs)));
-            else if(typeof(T) == typeof(ushort))
+            else if(typematch<T,ushort>())
                 return generic<T>(math.avgz(uint16(lhs), uint16(rhs)));
-            else if(typeof(T) == typeof(uint))
+            else if(typematch<T,uint>())
                 return generic<T>(math.avgz(uint32(lhs), uint32(rhs)));
-            else if(typeof(T) == typeof(ulong))
+            else if(typematch<T,ulong>())
                 return generic<T>(math.avgz(uint64(lhs), uint64(rhs)));
             else            
                 throw unsupported<T>();
@@ -49,11 +49,11 @@ namespace Z0
         {
             if(typeof(T) == typeof(byte))
                 math.avgz(ref uint8(ref lhs), in uint8(in rhs));
-            else if(typeof(T) == typeof(ushort))
+            else if(typematch<T,ushort>())
                 math.avgz(ref uint16(ref lhs), in uint16(in rhs));
-            else if(typeof(T) == typeof(uint))
+            else if(typematch<T,uint>())
                 math.avgz(ref uint32(ref lhs), in uint32(in rhs));
-            else if(typeof(T) == typeof(ulong))
+            else if(typematch<T,ulong>())
                 math.avgz(ref uint64(ref lhs), in uint64(in rhs));
             else            
                 throw unsupported<T>();
@@ -63,25 +63,25 @@ namespace Z0
         public static T avg<T>(ReadOnlySpan<T> src)
             where T : struct
         {
-            if(typeof(T) == typeof(sbyte))
+            if(typematch<T,sbyte>())
                 return generic<T>(math.avg(int8(src)));
-            else if(typeof(T) == typeof(byte))
+            else if(typematch<T,byte>())
                 return generic<T>(math.avg(uint8(src)));
-            else if(typeof(T) == typeof(short))
+            else if(typematch<T,short>())
                 return generic<T>(math.avg(int16(src)));
-            else if(typeof(T) == typeof(ushort))
+            else if(typematch<T,ushort>())
                 return generic<T>(math.avg(uint16(src)));
-            else if(typeof(T) == typeof(int))
+            else if(typematch<T,int>())
                 return generic<T>(math.avg(int32(src)));
-            else if(typeof(T) == typeof(uint))
+            else if(typematch<T,uint>())
                 return generic<T>(math.avg(uint32(src)));
-            else if(typeof(T) == typeof(long))
+            else if(typematch<T,long>())
                 return generic<T>(math.avg(int64(src)));
-            else if(typeof(T) == typeof(ulong))
+            else if(typematch<T,ulong>())
                 return generic<T>(math.avg(uint64(src)));
-            else if(typeof(T) == typeof(float))
+            else if(typematch<T,float>())
                 return generic<T>(math.avg(float32(src)));
-            else if(typeof(T) == typeof(double))
+            else if(typematch<T,double>())
                 return generic<T>(math.avg(float64(src)));
             else            
                 throw unsupported<T>();

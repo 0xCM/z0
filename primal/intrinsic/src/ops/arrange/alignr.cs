@@ -105,9 +105,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vec256<ulong> alignr(Vec256<ulong> left, Vec256<ulong> right, byte offset)
             => AlignRight(left, right, offset);
-
-
-
     }
 
 }

@@ -34,11 +34,11 @@ namespace Z0
         {
             if(typeof(T) == typeof(byte))
                 return generic<T>(Bits.width(in uint8(in src)));
-            else if(typeof(T) == typeof(ushort))
+            else if(typematch<T,ushort>())
                 return generic<T>(Bits.width(in uint16(in src)));
-            else if(typeof(T) == typeof(uint))
+            else if(typematch<T,uint>())
                 return generic<T>(Bits.width(uint32(in src)));
-            else if(typeof(T) == typeof(ulong))
+            else if(typematch<T,ulong>())
                 return generic<T>(Bits.width(in uint64(in src)));
             else            
                 throw unsupported<T>();

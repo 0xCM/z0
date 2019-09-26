@@ -30,12 +30,12 @@ namespace Z0.Mkl
             where N : ITypeNat, new()
             where T : unmanaged
         {
-            if(typeof(T) == typeof(float))
+            if(typematch<T,float>())
             {
                 var Z = X.As<float>();
                 gemm(A.As<float>(), B.As<float>(), ref Z);
             }
-            else if(typeof(T) == typeof(double))
+            else if(typematch<T,double>())
             {
                 var x = X.As<double>();
                 gemm(A.As<double>(), B.As<double>(), ref x);
@@ -70,12 +70,12 @@ namespace Z0.Mkl
             where N : ITypeNat, new()
             where T : unmanaged
         {
-            if(typeof(T) == typeof(float))
+            if(typematch<T,float>())
             {
                 var Z = X.As<float>();
                 gemm(A.As<float>(), B.As<float>(), ref Z);
             }
-            else if(typeof(T) == typeof(double))
+            else if(typematch<T,double>())
             {
                 var x = X.As<double>();
                 gemm(A.As<double>(), B.As<double>(), ref x);

@@ -25,11 +25,11 @@ namespace Z0
         {
             if(typeof(T) == typeof(byte))
                 return generic<T>(Bits.posl(uint8(src)));
-            else if(typeof(T) == typeof(ushort))
+            else if(typematch<T,ushort>())
                 return generic<T>(Bits.posl(uint16(src)));
-            else if(typeof(T) == typeof(uint))
+            else if(typematch<T,uint>())
                 return generic<T>(Bits.posl(uint32(src)));
-            else if(typeof(T) == typeof(ulong))
+            else if(typematch<T,ulong>())
                 return generic<T>(Bits.posl(uint64(src)));
             else            
                 throw unsupported<T>();
@@ -39,7 +39,7 @@ namespace Z0
         public static ref T loff<T>(ref T src)
             where T : struct
         {
-            if(typeof(T) == typeof(sbyte))
+            if(typematch<T,sbyte>())
                  loff(ref int8(ref src));
             if(typeof(T) == typeof(byte))
                  loff(ref uint8(ref src));

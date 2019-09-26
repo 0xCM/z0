@@ -19,67 +19,47 @@ namespace Z0
         public static Vector128<T> add<T>(Vector128<T> lhs, Vector128<T> rhs)
             where T : struct
         {
-            if(typeof(T) == typeof(sbyte))
+            if(typematch<T,sbyte>())
                 return generic<T>(dinx.add(int8(lhs), int8(rhs)));
-            else if(typeof(T) == typeof(byte))
+            else if(typematch<T,byte>())
                 return generic<T>(dinx.add(uint8(lhs), uint8(rhs)));
-            else if(typeof(T) == typeof(short))
+            else if(typematch<T,short>())
                 return generic<T>(dinx.add(int16(lhs), int16(rhs)));
-            else if(typeof(T) == typeof(ushort))
+            else if(typematch<T,ushort>())
                 return generic<T>(dinx.add(uint16(lhs), uint16(rhs)));
-            else if(typeof(T) == typeof(int))
+            else if(typematch<T,int>())
                 return generic<T>(dinx.add(int32(lhs), int32(rhs)));
-            else if(typeof(T) == typeof(uint))
+            else if(typematch<T,uint>())
                 return generic<T>(dinx.add(uint32(lhs), uint32(rhs)));
-            else if(typeof(T) == typeof(long))
+            else if(typematch<T,long>())
                 return generic<T>(dinx.add(int64(lhs), int64(rhs)));
-            else if(typeof(T) == typeof(ulong))
+            else if(typematch<T,ulong>())
                 return generic<T>(dinx.add(uint64(lhs), uint64(rhs)));
-            else if(typeof(T) == typeof(float))
-                return generic<T>(dfp.add(float32(lhs), float32(rhs)));
-            else if(typeof(T) == typeof(double))
-                return generic<T>(dfp.add(float64(lhs), float64(rhs)));
-            else 
-                throw unsupported<T>();
+            else return gfp.add(lhs,rhs);
         }
 
         [MethodImpl(Inline)]
         public static Vector256<T> add<T>(Vector256<T> lhs, Vector256<T> rhs)
             where T : struct
         {
-            if(typeof(T) == typeof(sbyte))
-                return generic<T>(dinx.add(int8(lhs), int8(rhs)));
-            else if(typeof(T) == typeof(byte))
-                return generic<T>(dinx.add(uint8(lhs), uint8(rhs)));
-            else if(typeof(T) == typeof(short))
-                return generic<T>(dinx.add(int16(lhs), int16(rhs)));
-            else if(typeof(T) == typeof(ushort))
-                return generic<T>(dinx.add(uint16(lhs), uint16(rhs)));
-            else if(typeof(T) == typeof(int))
-                return generic<T>(dinx.add(int32(lhs), int32(rhs)));
-            else if(typeof(T) == typeof(uint))
-                return generic<T>(dinx.add(uint32(lhs), uint32(rhs)));
-            else if(typeof(T) == typeof(long))
-                return generic<T>(dinx.add(int64(lhs), int64(rhs)));
-            else if(typeof(T) == typeof(ulong))
-                return generic<T>(dinx.add(uint64(lhs), uint64(rhs)));
-            else if(typeof(T) == typeof(float))
-                return generic<T>(dfp.add(float32(lhs), float32(rhs)));
-            else if(typeof(T) == typeof(double))
-                return generic<T>(dfp.add(float64(lhs), float64(rhs)));
-            else 
-                throw unsupported<T>();
+            if(typematch<T,sbyte>())
+                return generic<T>(dinx.add(lhs.As<T,sbyte>(), rhs.As<T,sbyte>()));
+            else if(typematch<T,byte>())
+                return generic<T>(dinx.add(lhs.As<T,byte>(), rhs.As<T,byte>()));
+            else if(typematch<T,short>())
+                return generic<T>(dinx.add(lhs.As<T,short>(), rhs.As<T,short>()));
+            else if(typematch<T,ushort>())
+                return generic<T>(dinx.add(lhs.As<T,ushort>(), rhs.As<T,ushort>()));
+            else if(typematch<T,int>())
+                return generic<T>(dinx.add(lhs.As<T,int>(), rhs.As<T,int>()));
+            else if(typematch<T,uint>())
+                return generic<T>(dinx.add(lhs.As<T,uint>(), rhs.As<T,uint>()));
+            else if(typematch<T,long>())
+                return generic<T>(dinx.add(lhs.As<T,long>(), rhs.As<T,long>()));
+            else if(typematch<T,ulong>())
+                return generic<T>(dinx.add(lhs.As<T,ulong>(), rhs.As<T,ulong>()));
+            else return gfp.add(lhs,rhs);
         }    
-
-
-        // [MethodImpl(Inline)]
-        // public static ref BlockVector<N,T> add<N,T>(in BlockVector<N,T> x, in BlockVector<N,T> y, ref BlockVector<N,T> z)
-        //     where N : ITypeNat, new()
-        //     where T : struct    
-        // {
-        //     add(x, y, z.ToSpan256());
-        //     return ref z;
-        // }
 
 
     }

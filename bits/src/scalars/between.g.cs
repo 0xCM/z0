@@ -26,25 +26,25 @@ namespace Z0
         public static T between<T>(in T src, BitPos p0, BitPos p1)
             where T : unmanaged
         {
-            if(typeof(T) == typeof(sbyte))
+            if(typematch<T,sbyte>())
                  return generic<T>(Bits.between(in int8(in src), p0, p1));
-            else if(typeof(T) == typeof(byte))
+            else if(typematch<T,byte>())
                  return generic<T>(Bits.between(in uint8(in src), p0, p1));
-            else if(typeof(T) == typeof(short))
+            else if(typematch<T,short>())
                  return generic<T>(Bits.between(in int16(in src), p0, p1));
-            else if(typeof(T) == typeof(ushort))
+            else if(typematch<T,ushort>())
                  return generic<T>(Bits.between(in uint16(in src), p0, p1));
-            else if(typeof(T) == typeof(int))
+            else if(typematch<T,int>())
                  return generic<T>(Bits.between(in int32(in src), p0, p1));
-            else if(typeof(T) == typeof(uint))
+            else if(typematch<T,uint>())
                  return generic<T>(Bits.between(in uint32(in src), p0, p1));
-            else if(typeof(T) == typeof(long))
+            else if(typematch<T,long>())
                  return generic<T>(Bits.between(in int64(in src), p0, p1));
-            else if(typeof(T) == typeof(ulong))
+            else if(typematch<T,ulong>())
                  return generic<T>(Bits.between(in uint64(in src), p0, p1));
-            else if(typeof(T) == typeof(float))
+            else if(typematch<T,float>())
                  return generic<T>(Bits.between(in float32(in src), p0, p1));
-            else if(typeof(T) == typeof(double))
+            else if(typematch<T,double>())
                  return generic<T>(Bits.between(in float64(in src), p0, p1));
             else            
                 throw unsupported<T>();

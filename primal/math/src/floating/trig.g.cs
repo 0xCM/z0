@@ -16,9 +16,9 @@ namespace Z0
         public static T sin<T>(T src)
             where T : struct
         {
-            if(typeof(T) == typeof(float))
+            if(typematch<T,float>())
                 return generic<T>(fmath.sin(float32(src)));
-            else if(typeof(T) == typeof(double))
+            else if(typematch<T,double>())
                 return generic<T>(fmath.sin(float64(src)));
             else
                 throw unsupported<T>();
@@ -28,9 +28,9 @@ namespace Z0
         public static T cos<T>(T src)
             where T : struct
         {
-            if(typeof(T) == typeof(float))
+            if(typematch<T,float>())
                 return generic<T>(fmath.cos(float32(src)));
-            else if(typeof(T) == typeof(double))
+            else if(typematch<T,double>())
                 return generic<T>(fmath.cos(float64(src)));
             else
                 throw unsupported<T>();
@@ -40,9 +40,9 @@ namespace Z0
         public static T tan<T>(T src)
             where T : struct
         {
-            if(typeof(T) == typeof(float))
+            if(typematch<T,float>())
                 return generic<T>(fmath.tan(float32(src)));
-            else if(typeof(T) == typeof(double))
+            else if(typematch<T,double>())
                 return generic<T>(fmath.tan(float64(src)));
             else
                 throw unsupported<T>();
@@ -52,9 +52,9 @@ namespace Z0
         public static T asin<T>(T src)
             where T : struct
         {
-            if(typeof(T) == typeof(float))
+            if(typematch<T,float>())
                 return generic<T>(fmath.asin(float32(src)));
-            else if(typeof(T) == typeof(double))
+            else if(typematch<T,double>())
                 return generic<T>(fmath.asin(float64(src)));
             else
                 throw unsupported<T>();
@@ -65,9 +65,9 @@ namespace Z0
         public static T acos<T>(T src)
             where T : struct
         {
-            if(typeof(T) == typeof(float))
+            if(typematch<T,float>())
                 return generic<T>(fmath.acos(float32(src)));
-            else if(typeof(T) == typeof(double))
+            else if(typematch<T,double>())
                 return generic<T>(fmath.acos(float64(src)));
             else
                 throw unsupported<T>();
@@ -78,9 +78,9 @@ namespace Z0
         public static T atan<T>(T src)
             where T : struct
         {
-            if(typeof(T) == typeof(float))
+            if(typematch<T,float>())
                 return generic<T>(fmath.atan(float32(src)));
-            else if(typeof(T) == typeof(double))
+            else if(typematch<T,double>())
                 return generic<T>(fmath.atan(float64(src)));
             else
                 throw unsupported<T>();

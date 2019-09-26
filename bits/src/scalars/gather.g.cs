@@ -25,21 +25,21 @@ namespace Z0
         public static T gather<T>(T src, T mask)
             where T : unmanaged
         {
-            if(typeof(T) == typeof(sbyte))
+            if(typematch<T,sbyte>())
                 return generic<T>(Bits.gather(int8(src), int8(mask)));
-            else if(typeof(T) == typeof(byte))
+            else if(typematch<T,byte>())
                 return generic<T>(Bits.gather(uint8(src), uint8(mask)));
-            else if(typeof(T) == typeof(short))
+            else if(typematch<T,short>())
                 return generic<T>(Bits.gather(int16(src), int16(mask)));
-            else if(typeof(T) == typeof(ushort))
+            else if(typematch<T,ushort>())
                 return generic<T>(Bits.gather(uint16(src), uint16(mask)));
-            else if(typeof(T) == typeof(int))
+            else if(typematch<T,int>())
                 return generic<T>(Bits.gather(int32(src), int32(mask)));
-            else if(typeof(T) == typeof(uint))
+            else if(typematch<T,uint>())
                 return generic<T>(Bits.gather(uint32(src), uint32(mask)));
-            else if(typeof(T) == typeof(long))
+            else if(typematch<T,long>())
                 return generic<T>(Bits.gather(int64(src), int64(mask)));
-            else if(typeof(T) == typeof(ulong))
+            else if(typematch<T,ulong>())
                 return generic<T>(Bits.gather(uint64(src), uint64(mask)));
             else            
                 throw unsupported<T>();
@@ -56,21 +56,21 @@ namespace Z0
         public static ref T gather<T>(T src, T mask, ref T dst)
             where T : unmanaged
         {
-            if(typeof(T) == typeof(sbyte))
+            if(typematch<T,sbyte>())
                 Bits.gather(int8(src), int8(mask), ref int8(ref dst));
-            else if(typeof(T) == typeof(byte))
+            else if(typematch<T,byte>())
                 Bits.gather(uint8(src), uint8(mask), ref uint8(ref dst));
-            else if(typeof(T) == typeof(short))
+            else if(typematch<T,short>())
                 Bits.gather(int16(src), int16(mask), ref int16(ref dst));
-            else if(typeof(T) == typeof(ushort))
+            else if(typematch<T,ushort>())
                 Bits.gather(uint16(src), uint16(mask), ref uint16(ref dst));
-            else if(typeof(T) == typeof(int))
+            else if(typematch<T,int>())
                 Bits.gather(int32(src), int32(mask), ref int32(ref dst));
-            else if(typeof(T) == typeof(uint))
+            else if(typematch<T,uint>())
                 Bits.gather(uint32(src), uint32(mask), ref uint32(ref dst));
-            else if(typeof(T) == typeof(long))
+            else if(typematch<T,long>())
                 Bits.gather(int64(src), int64(mask), ref int64(ref dst));
-            else if(typeof(T) == typeof(ulong))
+            else if(typematch<T,ulong>())
                 Bits.gather(uint64(src), uint64(mask), ref uint64(ref dst));
             else            
                 throw unsupported<T>();

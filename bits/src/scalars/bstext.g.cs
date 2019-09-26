@@ -27,19 +27,19 @@ namespace Z0
         {
             if(typeof(T) == typeof(byte))
                 return bstext(uint8(in src));
-            else if(typeof(T) == typeof(sbyte))
+            else if(typematch<T,sbyte>())
                 return bstext(int8(in src));
-            else if(typeof(T) == typeof(ushort))
+            else if(typematch<T,ushort>())
                 return bstext(uint16(in src));
-            else if(typeof(T) == typeof(short))
+            else if(typematch<T,short>())
                 return bstext(int16(in src));
-            else if(typeof(T) == typeof(uint))
+            else if(typematch<T,uint>())
                 return bstext(uint32(in src));
-            else if(typeof(T) == typeof(int))
+            else if(typematch<T,int>())
                 return bstext(int32(in src));
-            else if(typeof(T) == typeof(ulong))
+            else if(typematch<T,ulong>())
                 return bstext(uint64(in src));
-            else if(typeof(T) == typeof(long))
+            else if(typematch<T,long>())
                 return bstext(int64(in src));
             else            
                 throw unsupported<T>();            

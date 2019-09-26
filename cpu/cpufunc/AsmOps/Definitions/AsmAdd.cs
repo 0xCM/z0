@@ -40,25 +40,25 @@ namespace Z0
         static AsmCode<T> AddCode<T>()
             where T : unmanaged
         {
-            if(typeof(T) == typeof(sbyte))
+            if(typematch<T,sbyte>())
                 return AsmCode.FromBytes<T>(add8iBytes);
-            else if(typeof(T) == typeof(byte))
+            else if(typematch<T,byte>())
                 return AsmCode.FromBytes<T>(add8uBytes);
-            else if(typeof(T) == typeof(short))
+            else if(typematch<T,short>())
                 return AsmCode.FromBytes<T>(add16iBytes);
-            else if(typeof(T) == typeof(ushort))
+            else if(typematch<T,ushort>())
                 return AsmCode.FromBytes<T>(add16uBytes);
-            else if(typeof(T) == typeof(int))
+            else if(typematch<T,int>())
                 return AsmCode.FromBytes<T>(add32iBytes);
-            else if(typeof(T) == typeof(uint))
+            else if(typematch<T,uint>())
                 return AsmCode.FromBytes<T>(add32uBytes);
-            else if(typeof(T) == typeof(long))
+            else if(typematch<T,long>())
                 return AsmCode.FromBytes<T>(add64iBytes);
-            else if(typeof(T) == typeof(ulong))
+            else if(typematch<T,ulong>())
                 return AsmCode.FromBytes<T>(add64uBytes);
-            else if(typeof(T) == typeof(float))
+            else if(typematch<T,float>())
                 return AsmCode.FromBytes<T>(add32fBytes);
-            else if(typeof(T) == typeof(double))
+            else if(typematch<T,double>())
                 return AsmCode.FromBytes<T>(add64fBytes);
             else 
                 throw unsupported<T>();

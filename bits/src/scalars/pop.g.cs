@@ -25,21 +25,21 @@ namespace Z0
         public static uint pop<T>(in T src)
             where T : struct
         {        
-            if(typeof(T) == typeof(sbyte))
+            if(typematch<T,sbyte>())
                  return Bits.pop(int8(in src));
-            else if(typeof(T) == typeof(byte))
+            else if(typematch<T,byte>())
                  return Bits.pop(uint8(in src));
-            else if(typeof(T) == typeof(short))
+            else if(typematch<T,short>())
                  return Bits.pop(int16(in src));
-            else if(typeof(T) == typeof(ushort))
+            else if(typematch<T,ushort>())
                  return Bits.pop(uint16(in src));
-            else if(typeof(T) == typeof(int))
+            else if(typematch<T,int>())
                  return Bits.pop(int32(in src));
-            else if(typeof(T) == typeof(uint))
+            else if(typematch<T,uint>())
                  return Bits.pop(uint32(in src));
-            else if(typeof(T) == typeof(long))
+            else if(typematch<T,long>())
                  return Bits.pop(int64(in src));
-            else if(typeof(T) == typeof(ulong))
+            else if(typematch<T,ulong>())
                  return Bits.pop(uint64(in src));
             else 
                 throw unsupported<T>();

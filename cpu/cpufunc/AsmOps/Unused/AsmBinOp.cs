@@ -24,25 +24,25 @@ namespace Z0
         public static AsmBinOp<T> CreateBinOpPI<T>(this AsmCode code)
             where T : unmanaged
         {
-            if(typeof(T) == typeof(sbyte))
+            if(typematch<T,sbyte>())
                 return code.CreateBinOpI8().ToGeneric<BinOpI8,T>();                
-            else if(typeof(T) == typeof(byte))
+            else if(typematch<T,byte>())
                 return code.CreateBinOpU8().ToGeneric<BinOpU8,T>();                
-            else if(typeof(T) == typeof(short))
+            else if(typematch<T,short>())
                 return code.CreateBinOpI16().ToGeneric<BinOpI16,T>();                
-            else if(typeof(T) == typeof(ushort))
+            else if(typematch<T,ushort>())
                 return code.CreateBinOpU16().ToGeneric<BinOpU16,T>();                
-            else if(typeof(T) == typeof(int))
+            else if(typematch<T,int>())
                 return code.CreateBinOpI32().ToGeneric<BinOpI32,T>();                
-            else if(typeof(T) == typeof(uint))
+            else if(typematch<T,uint>())
                 return code.CreateBinOpU32().ToGeneric<BinOpU32,T>();                
-            else if(typeof(T) == typeof(long))
+            else if(typematch<T,long>())
                 return code.CreateBinOpI64().ToGeneric<BinOpI64,T>();                
-            else if(typeof(T) == typeof(ulong))
+            else if(typematch<T,ulong>())
                 return code.CreateBinOpU64().ToGeneric<BinOpU64,T>();                
-            else if(typeof(T) == typeof(float))
+            else if(typematch<T,float>())
                 return code.CreateBinOpF32().ToGeneric<BinOpF32,T>();                
-            else if(typeof(T) == typeof(double))
+            else if(typematch<T,double>())
                 return code.CreateBinOpF64().ToGeneric<BinOpF64,T>();                
             else 
                 throw unsupported<T>();

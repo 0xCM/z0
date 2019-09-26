@@ -31,25 +31,25 @@ namespace Z0
             where T: unmanaged
         {
            
-            if(typeof(T) == typeof(sbyte))
+            if(typematch<T,sbyte>())
                return generic<T>(Avx2.LoadDquVector128(constptr(in AsIn.int8(in src))));
-            else if(typeof(T) == typeof(byte))
+            else if(typematch<T,byte>())
                return generic<T>(Avx2.LoadDquVector128(constptr(in AsIn.uint8(in src))));
-            else if(typeof(T) == typeof(short))
+            else if(typematch<T,short>())
                return generic<T>(Avx2.LoadDquVector128(constptr(in AsIn.int16(in src))));
-            else if(typeof(T) == typeof(ushort))
+            else if(typematch<T,ushort>())
                return generic<T>(Avx2.LoadDquVector128(constptr(in AsIn.uint8(in src))));
-            else if(typeof(T) == typeof(int))
+            else if(typematch<T,int>())
                return generic<T>(Avx2.LoadDquVector128(constptr(in AsIn.int32(in src))));
-            else if(typeof(T) == typeof(uint))
+            else if(typematch<T,uint>())
                return generic<T>(Avx2.LoadDquVector128(constptr(in AsIn.uint32(in src))));
-            else if(typeof(T) == typeof(long))
+            else if(typematch<T,long>())
                return generic<T>(Avx2.LoadDquVector128(constptr(in AsIn.int64(in src))));
-            else if(typeof(T) == typeof(ulong))
+            else if(typematch<T,ulong>())
                return generic<T>(Avx2.LoadDquVector128(constptr(in AsIn.uint64(in src))));
-            else if(typeof(T) == typeof(float))
+            else if(typematch<T,float>())
                return generic<T>(Avx2.LoadVector128(constptr(in AsIn.float32(in src))));
-            else if(typeof(T) == typeof(double))
+            else if(typematch<T,double>())
                return generic<T>(Avx2.LoadVector128(constptr(in AsIn.float64(in src))));
             else
                 throw unsupported<T>();

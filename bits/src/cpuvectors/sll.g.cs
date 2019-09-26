@@ -20,19 +20,19 @@ namespace Z0
         {
             if(typeof(T) == typeof(byte))
                 return generic<T>(Bits.sll(in uint8(in lhs), offset));
-            else if(typeof(T) == typeof(sbyte))
+            else if(typematch<T,sbyte>())
                 return generic<T>(Bits.sll(in int8(in lhs), offset));
-            else if(typeof(T) == typeof(short))
+            else if(typematch<T,short>())
                 return generic<T>(Bits.sll(in int16(in lhs), offset));
-            else if(typeof(T) == typeof(ushort))
+            else if(typematch<T,ushort>())
                 return generic<T>(Bits.sll(in uint16(in lhs), offset));
             if(typeof(T) == typeof(int))
                 return generic<T>(Bits.sll(in int32(in lhs), offset));
-            else if(typeof(T) == typeof(uint)) 
+            else if(typematch<T,uint>()) 
                 return generic<T>(Bits.sll(in uint32(in lhs), offset));
-            else if(typeof(T) == typeof(long))
+            else if(typematch<T,long>())
                 return generic<T>(Bits.sll(in int64(lhs), offset));
-            else if(typeof(T) == typeof(ulong))
+            else if(typematch<T,ulong>())
                 return generic<T>(Bits.sll(in uint64(lhs), offset));
             else
                 throw unsupported<T>();
@@ -45,17 +45,17 @@ namespace Z0
         {
             if(typeof(T) == typeof(byte))
                 return generic<T>(Bits.sll(in uint8(in lhs), offset));
-            else if(typeof(T) == typeof(short))
+            else if(typematch<T,short>())
                 return generic<T>(Bits.sll(in int16(in lhs), offset));
-            else if(typeof(T) == typeof(ushort))
+            else if(typematch<T,ushort>())
                 return generic<T>(Bits.sll(in uint16(in lhs), offset));
             if(typeof(T) == typeof(int))
                 return generic<T>(Bits.sll(in int32(in lhs), offset));
-            else if(typeof(T) == typeof(uint)) 
+            else if(typematch<T,uint>()) 
                 return generic<T>(Bits.sll(in uint32(in lhs), offset));
-            else if(typeof(T) == typeof(long))
+            else if(typematch<T,long>())
                 return generic<T>(Bits.sll(in int64(lhs), offset));
-            else if(typeof(T) == typeof(ulong))
+            else if(typematch<T,ulong>())
                 return generic<T>(Bits.sll(in uint64(lhs), offset));
             else
                 throw unsupported<T>();

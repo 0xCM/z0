@@ -19,21 +19,21 @@ namespace Z0
             where S : unmanaged
             where T : unmanaged
         {
-            if(typeof(T) == typeof(sbyte))
+            if(typematch<T,sbyte>())
                 return subset(int8(test), set);
-            else if(typeof(T) == typeof(byte))
+            else if(typematch<T,byte>())
                 return subset(uint8(test), set);
-            else if(typeof(T) == typeof(short))
+            else if(typematch<T,short>())
                 return subset(int16(test), set);
-            else if(typeof(T) == typeof(ushort))
+            else if(typematch<T,ushort>())
                 return subset(uint16(test), set);
-            else if(typeof(T) == typeof(int))
+            else if(typematch<T,int>())
                 return subset(int32(test), set);
-            else if(typeof(T) == typeof(uint))
+            else if(typematch<T,uint>())
                 return subset(uint32(test), set);
-            else if(typeof(T) == typeof(long))
+            else if(typematch<T,long>())
                 return subset(int64(test), set);
-            else if(typeof(T) == typeof(ulong))
+            else if(typematch<T,ulong>())
                 return subset(uint64(test), set);
             else            
                 throw unsupported<T>();

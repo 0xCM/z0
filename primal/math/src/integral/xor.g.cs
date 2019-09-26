@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// Copyright   :  (c) Chris Moxore, 2019
+// Copyright   :  (c) Chris Moore, 2019
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
@@ -12,113 +12,62 @@ namespace Z0
         
     using static zfunc;    
     using static As;
+    using static AsIn;
 
     partial class gmath
     {        
-        /// <summary>
-        /// Multiplies two primal values
-        /// </summary>
-        /// <param name="lhs">The left value</param>
-        /// <param name="rhs">The right value</param>
-        /// <typeparam name="T">The primal type</typeparam>
+
         [MethodImpl(Inline)]
         public static T xor<T>(T lhs, T rhs)
             where T : unmanaged
         {
-            if(typeof(T) == typeof(byte) 
-                || typeof(T) == typeof(ushort) 
-                || typeof(T) == typeof(uint) 
-                || typeof(T) == typeof(ulong))
-                    return xoru(lhs,rhs);
-            else if(typeof(T) == typeof(sbyte) 
-                || typeof(T) == typeof(short)
-                || typeof(T) == typeof(int) 
-                || typeof(T) == typeof(long))
-                return xori(lhs,rhs);
-            else
-                throw unsupported<T>();
+            if(typematch<T,sbyte>())
+                return generic<T>(math.xor(int8(lhs), int8(rhs)));
+            else if(typematch<T,byte>())
+                return generic<T>(math.xor(uint8(lhs), uint8(rhs)));
+            else if(typematch<T,short>())
+                return generic<T>(math.xor(int16(lhs), int16(rhs)));
+            else if(typematch<T,ushort>())
+                return generic<T>(math.xor(uint16(lhs), uint16(rhs)));
+            else if(typematch<T,int>())
+                return generic<T>(math.xor(int32(lhs), int32(rhs)));
+            else if(typematch<T,uint>())
+                return generic<T>(math.xor(uint32(lhs), uint32(rhs)));
+            else if(typematch<T,long>())
+                return generic<T>(math.xor(int64(lhs), int64(rhs)));
+            else if(typematch<T,ulong>())
+                return generic<T>(math.xor(uint64(lhs), uint64(rhs)));
+            else            
+                return gfp.xor(lhs,rhs);
+
         }
 
-        /// <summary>
-        /// Multiplies two primal values
-        /// </summary>
-        /// <param name="lhs">The left value</param>
-        /// <param name="rhs">The right value</param>
-        /// <typeparam name="T">The primal type</typeparam>
+
         [MethodImpl(Inline)]
         public static ref T xor<T>(ref T lhs, T rhs)
             where T : unmanaged
         {
-            if(typeof(T) == typeof(byte) 
-                || typeof(T) == typeof(ushort) 
-                || typeof(T) == typeof(uint) 
-                || typeof(T) == typeof(ulong))
-                    return ref xoru(ref lhs,rhs);
-            else if(typeof(T) == typeof(sbyte) 
-                || typeof(T) == typeof(short)
-                || typeof(T) == typeof(int) 
-                || typeof(T) == typeof(long))
-                return ref xori(ref lhs,rhs);
-            else
-                throw unsupported<T>();
-        }
-
-        [MethodImpl(Inline)]
-        static T xori<T>(T lhs, T rhs)
-            where T : struct
-        {
-            if(typeof(T) == typeof(sbyte))
-                 return generic<T>(math.xor(int8(lhs), int8(rhs)));
-            else if(typeof(T) == typeof(short))
-                 return generic<T>(math.xor(int16(lhs), int16(rhs)));
-            else if(typeof(T) == typeof(int))
-                 return generic<T>(math.xor(uint32(lhs), uint32(rhs)));
-            else
-                 return generic<T>(math.xor(int64(lhs), int64(rhs)));
-        }
-
-        [MethodImpl(Inline)]
-        static T xoru<T>(T lhs, T rhs)
-            where T : struct
-        {
-            if(typeof(T) == typeof(byte))
-                return generic<T>(math.xor(uint8(lhs), uint8(rhs)));
-            else if(typeof(T) == typeof(ushort))
-                return generic<T>(math.xor(uint16(lhs), uint16(rhs)));
-            else if(typeof(T) == typeof(uint))
-                return generic<T>(math.xor(uint32(lhs), uint32(rhs)));
-            else 
-                return generic<T>(math.xor(uint64(lhs), uint64(rhs)));
-        }
-
-        [MethodImpl(Inline)]
-        static ref T xori<T>(ref T lhs, T rhs)
-            where T : struct
-        {
-            if(typeof(T) == typeof(sbyte))
-                 math.xor(ref int8(ref lhs), int8(rhs));
-            else if(typeof(T) == typeof(short))
-                 math.xor(ref int16(ref lhs), int16(rhs));
-            else if(typeof(T) == typeof(int))
-                 math.xor(ref uint32(ref lhs), uint32(rhs));
-            else
-                 math.xor(ref int64(ref lhs), int64(rhs));
-            return ref lhs;
-        }
-
-        [MethodImpl(Inline)]
-        static ref T xoru<T>(ref T lhs, T rhs)
-            where T : struct
-        {
-            if(typeof(T) == typeof(byte))
+            if(typematch<T,sbyte>())
+                math.xor(ref int8(ref lhs), int8(rhs));
+            else if(typematch<T,byte>())
                 math.xor(ref uint8(ref lhs), uint8(rhs));
-            else if(typeof(T) == typeof(ushort))
+            else if(typematch<T,short>())
+                math.xor(ref int16(ref lhs), int16(rhs));
+            else if(typematch<T,ushort>())
                 math.xor(ref uint16(ref lhs), uint16(rhs));
-            else if(typeof(T) == typeof(uint))
+            else if(typematch<T,int>())
+                math.xor(ref int32(ref lhs), int32(rhs));
+            else if(typematch<T,uint>())
                 math.xor(ref uint32(ref lhs), uint32(rhs));
-            else 
+            else if(typematch<T,long>())
+                math.xor(ref int64(ref lhs), int64(rhs));
+            else if(typematch<T,ulong>())
                 math.xor(ref uint64(ref lhs), uint64(rhs));
+            else            
+                gfp.xor(ref lhs,rhs);
+        
             return ref lhs;
+
         }
 
     }

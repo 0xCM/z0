@@ -20,9 +20,9 @@ namespace Z0
         public static bool eq<T>(T lhs, T rhs)
             where T : struct
         {
-            if(typeof(T) == typeof(float))
+            if(typematch<T,float>())
                  return fmath.eq(float32(lhs), float32(rhs));
-            else if(typeof(T) == typeof(double))
+            else if(typematch<T,double>())
                  return fmath.eq(float64(lhs), float64(rhs));
             else            
                 throw unsupported<T>();
@@ -32,9 +32,9 @@ namespace Z0
         public static bool lt<T>(T lhs, T rhs)
             where T : struct
         {
-            if(typeof(T) == typeof(float))
+            if(typematch<T,float>())
                  return fmath.lt(float32(lhs), float32(rhs));
-            else if(typeof(T) == typeof(double))
+            else if(typematch<T,double>())
                  return fmath.lt(float64(lhs), float64(rhs));
             else            
                 throw unsupported<T>();
@@ -44,9 +44,9 @@ namespace Z0
         public static bool lteq<T>(T lhs, T rhs)
             where T : struct
         {
-            if(typeof(T) == typeof(float))
+            if(typematch<T,float>())
                  return fmath.lteq(float32(lhs), float32(rhs));
-            else if(typeof(T) == typeof(double))
+            else if(typematch<T,double>())
                  return fmath.lteq(float64(lhs), float64(rhs));
             else            
                 throw unsupported<T>();
@@ -58,9 +58,9 @@ namespace Z0
         public static bool neq<T>(T lhs, T rhs)
             where T : struct
         {
-            if(typeof(T) == typeof(float))
+            if(typematch<T,float>())
                  return !fmath.eq(float32(lhs), float32(rhs));
-            else if(typeof(T) == typeof(double))
+            else if(typematch<T,double>())
                  return !fmath.eq(float64(lhs), float64(rhs));
             else            
                 throw unsupported<T>();

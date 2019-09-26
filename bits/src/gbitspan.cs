@@ -116,11 +116,11 @@ namespace Z0
         {
             if(typeof(T) == typeof(byte))
                 return generic<T>(bitspan.rotr(uint8(src), uint8(in offset)));
-            else if(typeof(T) == typeof(ushort))
+            else if(typematch<T,ushort>())
                 return generic<T>(bitspan.rotr(uint16(src), uint16(in offset)));
-            else if(typeof(T) == typeof(uint))
+            else if(typematch<T,uint>())
                 return generic<T>(bitspan.rotr(uint32(src), uint32(in offset)));
-            else if(typeof(T) == typeof(ulong))
+            else if(typematch<T,ulong>())
                 return generic<T>(bitspan.rotr(uint64(src), uint64(in offset)));
             else            
                 throw unsupported<T>();
@@ -132,11 +132,11 @@ namespace Z0
         {
             if(typeof(T) == typeof(byte))
                 bitspan.rotr(uint8(src), uint8(in offset), uint8(dst));
-            else if(typeof(T) == typeof(ushort))
+            else if(typematch<T,ushort>())
                 bitspan.rotr(uint16(src), uint16(in offset), uint16(dst));
-            else if(typeof(T) == typeof(uint))
+            else if(typematch<T,uint>())
                 bitspan.rotr(uint32(src), uint32(in offset), uint32(dst));
-            else if(typeof(T) == typeof(ulong))
+            else if(typematch<T,ulong>())
                 bitspan.rotr(uint64(src), uint64(in offset), uint64(dst));
             else            
                 throw unsupported<T>();
@@ -149,11 +149,11 @@ namespace Z0
         {
             if(typeof(T) == typeof(byte))
                 bitspan.rotl(uint8(src), uint8(in offset), uint8(dst));
-            else if(typeof(T) == typeof(ushort))
+            else if(typematch<T,ushort>())
                 bitspan.rotl(uint16(src), uint16(in offset), uint16(dst));
-            else if(typeof(T) == typeof(uint))
+            else if(typematch<T,uint>())
                 bitspan.rotl(uint32(src), uint32(in offset), uint32(dst));
-            else if(typeof(T) == typeof(ulong))
+            else if(typematch<T,ulong>())
                 bitspan.rotl(uint64(src), uint64(in offset), uint64(dst));
             else            
                 throw unsupported<T>();
@@ -165,11 +165,11 @@ namespace Z0
         {
             if(typeof(T) == typeof(byte))
                 return generic<T>(bitspan.rotl(uint8(src), uint8(in offset)));
-            else if(typeof(T) == typeof(ushort))
+            else if(typematch<T,ushort>())
                 return generic<T>(bitspan.rotl(uint16(src), uint16(in offset)));
-            else if(typeof(T) == typeof(uint))
+            else if(typematch<T,uint>())
                 return generic<T>(bitspan.rotl(uint32(src), uint32(in offset)));
-            else if(typeof(T) == typeof(ulong))
+            else if(typematch<T,ulong>())
                 return generic<T>(bitspan.rotl(uint64(src), uint64(in offset)));
             else            
                 throw unsupported<T>();

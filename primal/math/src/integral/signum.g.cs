@@ -25,25 +25,25 @@ namespace Z0
         public static Sign signum<T>(T src)
             where T : unmanaged
         {
-            if(typeof(T) == typeof(sbyte))
+            if(typematch<T,sbyte>())
                 return math.signum(int8(src));
-            else if(typeof(T) == typeof(byte))
+            else if(typematch<T,byte>())
                 return math.signum(uint8(src));
-            else if(typeof(T) == typeof(short))
+            else if(typematch<T,short>())
                 return math.signum(int16(src));
-            else if(typeof(T) == typeof(ushort))
+            else if(typematch<T,ushort>())
                 return math.signum(uint16(src));
-            else if(typeof(T) == typeof(int))
+            else if(typematch<T,int>())
                 return math.signum(int32(src));
-            else if(typeof(T) == typeof(uint))
+            else if(typematch<T,uint>())
                 return math.signum(uint32(src));
-            else if(typeof(T) == typeof(long))
+            else if(typematch<T,long>())
                 return math.signum(int64(src));
-            else if(typeof(T) == typeof(ulong))
+            else if(typematch<T,ulong>())
                 return math.signum(uint64(src));
-            else if(typeof(T) == typeof(float))
+            else if(typematch<T,float>())
                 return math.signum(float32(src));
-            else if(typeof(T) == typeof(double))
+            else if(typematch<T,double>())
                 return math.signum(float64(src));
             else            
                 throw unsupported<T>();

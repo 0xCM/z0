@@ -25,23 +25,23 @@ namespace Z0
         {
             if(typeof(T) == typeof(byte))
                 return ReadSeq(uint8(src));
-            else if(typeof(T) == typeof(sbyte))
+            else if(typematch<T,sbyte>())
                 return ReadSeq(int8(src));
-            else if(typeof(T) == typeof(ushort))
+            else if(typematch<T,ushort>())
                 return ReadSeq(uint16(src));
-            else if(typeof(T) == typeof(short))
+            else if(typematch<T,short>())
                 return ReadSeq(int16(src));
-            else if(typeof(T) == typeof(int))
+            else if(typematch<T,int>())
                 return ReadSeq(int32(src));
-            else if(typeof(T) == typeof(long))
+            else if(typematch<T,long>())
                 return ReadSeq(int64(src));
-            else if(typeof(T) == typeof(uint))
+            else if(typematch<T,uint>())
                 return ReadSeq(uint32(src));
-            else if(typeof(T) == typeof(ulong))
+            else if(typematch<T,ulong>())
                 return ReadSeq(uint64(src));
-            else if(typeof(T) == typeof(float))
+            else if(typematch<T,float>())
                 return ReadSeq(float32(src));
-            else if(typeof(T) == typeof(double))
+            else if(typematch<T,double>())
                 return ReadSeq(float64(src));
             else            
                 throw unsupported<T>();            

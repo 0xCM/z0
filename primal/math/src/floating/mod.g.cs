@@ -26,9 +26,9 @@ namespace Z0
         public static T mod<T>(T lhs, T rhs)
             where T : struct
         {
-            if(typeof(T) == typeof(float))
+            if(typematch<T,float>())
                  return generic<T>(fmath.mod(float32(lhs), float32(rhs)));
-            else if(typeof(T) == typeof(double))
+            else if(typematch<T,double>())
                  return generic<T>(fmath.mod(float64(lhs), float64(rhs)));
             else            
                 throw unsupported<T>();
@@ -44,9 +44,9 @@ namespace Z0
         public static ref T mod<T>(ref T lhs, T rhs)
             where T : struct
         {
-            if(typeof(T) == typeof(float))
+            if(typematch<T,float>())
                  fmath.mod(ref float32(ref lhs), float32(rhs));
-            else if(typeof(T) == typeof(double))
+            else if(typematch<T,double>())
                  fmath.mod(ref float64(ref lhs), float64(rhs));
             else            
                 throw unsupported<T>();

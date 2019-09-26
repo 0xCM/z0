@@ -24,21 +24,21 @@ namespace Z0
         public static T srl<T>(T src, int offset)
             where T : struct
         {
-            if(typeof(T) == typeof(sbyte))
+            if(typematch<T,sbyte>())
                 return generic<T>(math.srl(ref int8(ref src), offset));
-            else if(typeof(T) == typeof(byte))
+            else if(typematch<T,byte>())
                 return generic<T>(math.srl(ref uint8(ref src), offset));
-            else if(typeof(T) == typeof(short))
+            else if(typematch<T,short>())
                 return generic<T>(math.srl(ref int16(ref src), offset));
-            else if(typeof(T) == typeof(ushort))
+            else if(typematch<T,ushort>())
                 return generic<T>(math.srl(ref uint16(ref src), offset));
-            else if(typeof(T) == typeof(int))
+            else if(typematch<T,int>())
                 return generic<T>(math.srl(ref int32(ref src), offset));
-            else if(typeof(T) == typeof(uint))
+            else if(typematch<T,uint>())
                 return generic<T>(math.srl(ref uint32(ref src), offset));
-            else if(typeof(T) == typeof(long))
+            else if(typematch<T,long>())
                 return generic<T>(math.srl(ref int64(ref src), offset));
-            else if(typeof(T) == typeof(ulong))
+            else if(typematch<T,ulong>())
                 return generic<T>(math.srl(ref uint64(ref src), offset));
             else
                 throw unsupported<T>();
@@ -53,21 +53,21 @@ namespace Z0
         public static ref T srl<T>(ref T src, int offset)
             where T : struct
         {
-            if(typeof(T) == typeof(sbyte))
+            if(typematch<T,sbyte>())
                 math.srl(ref int8(ref src), offset);
-            else if(typeof(T) == typeof(byte))
+            else if(typematch<T,byte>())
                 math.srl(ref uint8(ref src), offset);
-            else if(typeof(T) == typeof(short))
+            else if(typematch<T,short>())
                 math.srl(ref int16(ref src), offset);
-            else if(typeof(T) == typeof(ushort))
+            else if(typematch<T,ushort>())
                 math.srl(ref uint16(ref src), offset);
-            else if(typeof(T) == typeof(int))
+            else if(typematch<T,int>())
                 math.srl(ref int32(ref src), offset);
-            else if(typeof(T) == typeof(uint))
+            else if(typematch<T,uint>())
                 math.srl(ref uint32(ref src), offset);
-            else if(typeof(T) == typeof(long))
+            else if(typematch<T,long>())
                 math.srl(ref int64(ref src), offset);
-            else if(typeof(T) == typeof(ulong))
+            else if(typematch<T,ulong>())
                 math.srl(ref uint64(ref src), offset);
             else
                 throw unsupported<T>();

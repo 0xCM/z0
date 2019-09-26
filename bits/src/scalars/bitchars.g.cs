@@ -25,23 +25,23 @@ namespace Z0
         {
             if(typeof(T) == typeof(byte))
                 return bitchars(uint8(in src));
-            else if(typeof(T) == typeof(sbyte))
+            else if(typematch<T,sbyte>())
                 return bitchars(int8(in src));
-            else if(typeof(T) == typeof(short))
+            else if(typematch<T,short>())
                 return bitchars(int16(in src));
-            else if(typeof(T) == typeof(ushort))
+            else if(typematch<T,ushort>())
                 return bitchars(uint16(in src));
-            else if(typeof(T) == typeof(int))
+            else if(typematch<T,int>())
                 return bitchars(int32(in src));
-            else if(typeof(T) == typeof(uint))
+            else if(typematch<T,uint>())
                 return bitchars(uint32(in src));
-            else if(typeof(T) == typeof(long))
+            else if(typematch<T,long>())
                 return bitchars(int64(in src));
-            else if(typeof(T) == typeof(ulong))
+            else if(typematch<T,ulong>())
                 return bitchars(uint64(in src));
-            else if(typeof(T) == typeof(float))
+            else if(typematch<T,float>())
                 return bitchars(float32(in src));
-            else if(typeof(T) == typeof(double))
+            else if(typematch<T,double>())
                 return bitchars(float64(in src));
             else            
                 throw unsupported<T>();            

@@ -26,6 +26,10 @@ namespace Z0
         /// <param name="src">The source type</param>
         public static MethodDisassembly[] Deconstruct(this Type src)
             => Deconstructor.Deconstruct(src.DeclaredMethods().NonGeneric().Concrete().ToArray()).ToArray();
+        public static Option<MethodDisassembly> Deconstruct(this MethodInfo src, bool jit)
+        {
+            return Deconstructor.Deconstruct(src, jit);
+        }
 
         /// <summary>
         /// Disassembles the source methods

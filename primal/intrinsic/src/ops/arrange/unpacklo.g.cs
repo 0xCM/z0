@@ -8,6 +8,11 @@ namespace Z0
     using System.Runtime.CompilerServices;    
     using System.Runtime.Intrinsics;
     using System.Runtime.Intrinsics.X86;
+    using static System.Runtime.Intrinsics.X86.Sse;
+    using static System.Runtime.Intrinsics.X86.Sse2;
+    using static System.Runtime.Intrinsics.X86.Avx;
+    using static System.Runtime.Intrinsics.X86.Avx2;
+    
 
     using static zfunc;    
     using static As;
@@ -22,29 +27,25 @@ namespace Z0
         /// <param name="lhs">The left source vector</param>
         /// <param name="rhs">The right source vector</param>
         [MethodImpl(Inline)]
-        public static Vec128<T> unpacklo<T>(in Vec128<T> lhs, in Vec128<T> rhs)        
+        public static Vector128<T> unpacklo<T>(Vector128<T> lhs, Vector128<T> rhs)        
             where T : struct
         {
-            if(typeof(T) == typeof(sbyte))
-                return generic<T>(dinx.unpacklo(in int8(in lhs), in int8(in rhs)));
-            else if(typeof(T) == typeof(byte))
-                return generic<T>(dinx.unpacklo(in uint8(in lhs), in uint8(in rhs)));
-            else if(typeof(T) == typeof(short))
-                return generic<T>(dinx.unpacklo(in int16(in lhs), in int16(in rhs)));
-            else if(typeof(T) == typeof(ushort))
-                return generic<T>(dinx.unpacklo(in uint16(in lhs), in uint16(in rhs)));
-            else if(typeof(T) == typeof(int))
-                return generic<T>(dinx.unpacklo(in int32(in lhs), in int32(in rhs)));
-            else if(typeof(T) == typeof(uint))
-                return generic<T>(dinx.unpacklo(in uint32(in lhs), in uint32(in rhs)));
-            else if(typeof(T) == typeof(long))
-                return generic<T>(dinx.unpacklo(in int64(in lhs), in int64(in rhs)));
-            else if(typeof(T) == typeof(ulong))
-                return generic<T>(dinx.unpacklo(in uint64(in lhs), in uint64(in rhs)));
-            else if(typeof(T) == typeof(float))
-                return generic<T>(dfp.unpacklo(in float32(in lhs), in float32(in rhs)));
-            else if(typeof(T) == typeof(double))
-                return generic<T>(dfp.unpacklo(in float64(in lhs), in float64(in rhs)));
+            if(typematch<T,sbyte>())
+                return generic<T>(UnpackLow(lhs.As<T,sbyte>(), rhs.As<T,sbyte>()));
+            else if(typematch<T,byte>())
+                return generic<T>(UnpackLow(lhs.As<T,byte>(), rhs.As<T,byte>()));
+            else if(typematch<T,short>())
+                return generic<T>(UnpackLow(lhs.As<T,short>(), rhs.As<T,short>()));
+            else if(typematch<T,ushort>())
+                return generic<T>(UnpackLow(lhs.As<T,ushort>(), rhs.As<T,ushort>()));
+            else if(typematch<T,int>())
+                return generic<T>(UnpackLow(lhs.As<T,int>(), rhs.As<T,int>()));
+            else if(typematch<T,uint>())
+                return generic<T>(UnpackLow(lhs.As<T,uint>(), rhs.As<T,uint>()));
+            else if(typematch<T,long>())
+                return generic<T>(UnpackLow(lhs.As<T,long>(), rhs.As<T,long>()));
+            else if(typematch<T,ulong>())
+                return generic<T>(UnpackLow(lhs.As<T,ulong>(), rhs.As<T,ulong>()));
             else
                 throw unsupported<T>();
         }
@@ -57,29 +58,25 @@ namespace Z0
         /// <param name="lhs">The left source vector</param>
         /// <param name="rhs">The right source vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<T> unpacklo<T>(in Vec256<T> lhs, in Vec256<T> rhs)        
+        public static Vector256<T> unpacklo<T>(Vector256<T> lhs, Vector256<T> rhs)        
             where T : struct
         {
-            if(typeof(T) == typeof(sbyte))
-                return generic<T>(dinx.unpacklo(in int8(in lhs), in int8(in rhs)));
-            else if(typeof(T) == typeof(byte))
-                return generic<T>(dinx.unpacklo(in uint8(in lhs), in uint8(in rhs)));
-            else if(typeof(T) == typeof(short))
-                return generic<T>(dinx.unpacklo(in int16(in lhs), in int16(in rhs)));
-            else if(typeof(T) == typeof(ushort))
-                return generic<T>(dinx.unpacklo(in uint16(in lhs), in uint16(in rhs)));
-            else if(typeof(T) == typeof(int))
-                return generic<T>(dinx.unpacklo(in int32(in lhs), in int32(in rhs)));
-            else if(typeof(T) == typeof(uint))
-                return generic<T>(dinx.unpacklo(in uint32(in lhs), in uint32(in rhs)));
-            else if(typeof(T) == typeof(long))
-                return generic<T>(dinx.unpacklo(in int64(in lhs), in int64(in rhs)));
-            else if(typeof(T) == typeof(ulong))
-                return generic<T>(dinx.unpacklo(in uint64(in lhs), in uint64(in rhs)));
-            else if(typeof(T) == typeof(float))
-                return generic<T>(dfp.unpacklo(in float32(in lhs), in float32(in rhs)));
-            else if(typeof(T) == typeof(double))
-                return generic<T>(dfp.unpacklo(in float64(in lhs), in float64(in rhs)));
+            if(typematch<T,sbyte>())
+                return generic<T>(UnpackLow(lhs.As<T,sbyte>(), rhs.As<T,sbyte>()));
+            else if(typematch<T,byte>())
+                return generic<T>(UnpackLow(lhs.As<T,byte>(), rhs.As<T,byte>()));
+            else if(typematch<T,short>())
+                return generic<T>(UnpackLow(lhs.As<T,short>(), rhs.As<T,short>()));
+            else if(typematch<T,ushort>())
+                return generic<T>(UnpackLow(lhs.As<T,ushort>(), rhs.As<T,ushort>()));
+            else if(typematch<T,int>())
+                return generic<T>(UnpackLow(lhs.As<T,int>(), rhs.As<T,int>()));
+            else if(typematch<T,uint>())
+                return generic<T>(UnpackLow(lhs.As<T,uint>(), rhs.As<T,uint>()));
+            else if(typematch<T,long>())
+                return generic<T>(UnpackLow(lhs.As<T,long>(), rhs.As<T,long>()));
+            else if(typematch<T,ulong>())
+                return generic<T>(UnpackLow(lhs.As<T,ulong>(), rhs.As<T,ulong>()));
             else
                 throw unsupported<T>();
         }

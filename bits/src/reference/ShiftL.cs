@@ -26,13 +26,13 @@ namespace Z0
         public static Span<T> ShiftL<T>(ReadOnlySpan<T> src, ReadOnlySpan<int> offsets, Span<T> dst)
             where T : struct
         {
-            if (typeof(T) == typeof(sbyte))
+            if(typematch<T,sbyte>())
                 int8(src).ShiftL(offsets, int8(dst));
-            else if (typeof(T) == typeof(byte))
+            else if(typematch<T,byte>())
                 uint8(src).ShiftL(offsets, uint8(dst));
-            else if (typeof(T) == typeof(short))
+            else if(typematch<T,short>())
                 int16(src).ShiftL(offsets, int16(dst));
-            else if (typeof(T) == typeof(ushort))
+            else if(typematch<T,ushort>())
                 uint16(src).ShiftL(offsets, uint16(dst));
             else if (typeof(T) == typeof(int))
                 int32(src).ShiftL(offsets, int32(dst));
@@ -73,13 +73,13 @@ namespace Z0
         public static Span<T> ShiftL<T>(ReadOnlySpan<T> src, int offset, Span<T> dst)
             where T : struct
         {
-            if (typeof(T) == typeof(sbyte))
+            if(typematch<T,sbyte>())
                 int8(src).ShiftL(offset, int8(dst));
-            else if (typeof(T) == typeof(byte))
+            else if(typematch<T,byte>())
                 uint8(src).ShiftL(offset, uint8(dst));
-            else if (typeof(T) == typeof(short))
+            else if(typematch<T,short>())
                 int16(src).ShiftL(offset, int16(dst));
-            else if (typeof(T) == typeof(ushort))
+            else if(typematch<T,ushort>())
                 uint16(src).ShiftL(offset, uint16(dst));
             else if (typeof(T) == typeof(int))
                 int32(src).ShiftL(offset, int32(dst));

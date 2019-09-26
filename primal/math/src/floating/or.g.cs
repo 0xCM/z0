@@ -20,9 +20,9 @@ namespace Z0
        public static T or<T>(T lhs, T rhs)
             where T :unmanaged
         {
-            if(typeof(T) == typeof(float))
+            if(typematch<T,float>())
                 return generic<T>(BitConverter.Int32BitsToSingle(BitConverter.SingleToInt32Bits(float32(lhs)) |  BitConverter.SingleToInt32Bits(float32(rhs))));
-            else if(typeof(T) == typeof(float))
+            else if(typematch<T,float>())
                 return generic<T>(BitConverter.Int64BitsToDouble(BitConverter.DoubleToInt64Bits(float64(lhs)) |  BitConverter.DoubleToInt64Bits(float64(rhs))));
             else
                 throw unsupported<T>();
@@ -33,13 +33,13 @@ namespace Z0
        public static ref T or<T>(ref T lhs, T rhs)
             where T :unmanaged
         {
-            if(typeof(T) == typeof(float))
+            if(typematch<T,float>())
                 BitConverter.Int32BitsToSingle(BitConverter.SingleToInt32Bits(float32(lhs)) |  BitConverter.SingleToInt32Bits(float32(rhs)));
-            else if(typeof(T) == typeof(float))
+            else if(typematch<T,float>())
                 BitConverter.Int64BitsToDouble(BitConverter.DoubleToInt64Bits(float64(lhs)) |  BitConverter.DoubleToInt64Bits(float64(rhs)));
             else
                 throw unsupported<T>();
             return ref lhs;
-        }
+        }   
     }
 }

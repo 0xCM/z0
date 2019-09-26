@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;    
-    
+    using System.Runtime.Intrinsics;    
     using static System.Runtime.Intrinsics.X86.Avx;
     using static System.Runtime.Intrinsics.X86.Sse;
     using static System.Runtime.Intrinsics.X86.Sse2;
@@ -33,11 +33,11 @@ namespace Z0
             => Add(lhs, rhs);
 
         [MethodImpl(Inline)]
-        public static Vec256<float> add(in Vec256<float> lhs, in Vec256<float> rhs)
+        public static Vector256<float> add(Vector256<float> lhs, Vector256<float> rhs)
             => Add(lhs, rhs);
 
         [MethodImpl(Inline)]
-        public static Vec256<double> add(in Vec256<double> lhs, in Vec256<double> rhs)
+        public static Vector256<double> add(Vector256<double> lhs, Vector256<double> rhs)
             => Add(lhs, rhs); 
             
         public static Span128<float> add(ReadOnlySpan128<float> lhs, ReadOnlySpan128<float> rhs, Span128<float> dst)

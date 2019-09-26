@@ -27,21 +27,21 @@ namespace Z0
         public static Vec128<T> insert<T>(in T src, in Vec128<T> dst, byte index)
             where T : struct
         {
-            if(typeof(T) == typeof(sbyte))
+            if(typematch<T,sbyte>())
                 return generic<T>(dinx.insert(int8(src), in int8(in dst), index));
-            else if(typeof(T) == typeof(byte))
+            else if(typematch<T,byte>())
                 return generic<T>(dinx.insert(uint8(src), in uint8(in dst), index));
-            else if(typeof(T) == typeof(short))
+            else if(typematch<T,short>())
                 return generic<T>(dinx.insert(int16(src), in int16(in dst), index));
-            else if(typeof(T) == typeof(ushort))
+            else if(typematch<T,ushort>())
                 return generic<T>(dinx.insert(uint16(src), in uint16(in dst), index));
-            else if(typeof(T) == typeof(int))
+            else if(typematch<T,int>())
                 return generic<T>(dinx.insert(int32(src), in int32(in dst), index));
-            else if(typeof(T) == typeof(uint))
+            else if(typematch<T,uint>())
                 return generic<T>(dinx.insert(uint32(src), in uint32(in dst), index));
-            else if(typeof(T) == typeof(long))
+            else if(typematch<T,long>())
                 return generic<T>(dinx.insert(int64(src), in int64(in dst), index));
-            else if(typeof(T) == typeof(ulong))
+            else if(typematch<T,ulong>())
                 return generic<T>(dinx.insert(uint64(src), in uint64(in dst), index));
             else
                 throw unsupported<T>();
@@ -58,25 +58,25 @@ namespace Z0
         public static Vec256<T> insert<T>(Vec128<T> src, in Vec256<T> dst, byte index)        
             where T : struct
         {
-            if(typeof(T) == typeof(sbyte))
+            if(typematch<T,sbyte>())
                 return generic<T>(dinx.insert(in int8(in src), in int8(in dst), index));
-            else if(typeof(T) == typeof(byte))
+            else if(typematch<T,byte>())
                 return generic<T>(dinx.insert(in uint8(in src), in uint8(in dst), index));
-            else if(typeof(T) == typeof(short))
+            else if(typematch<T,short>())
                 return generic<T>(dinx.insert(in int16(in src), in int16(in dst), index));
-            else if(typeof(T) == typeof(ushort))
+            else if(typematch<T,ushort>())
                 return generic<T>(dinx.insert(in uint16(in src), in uint16(in dst), index));
-            else if(typeof(T) == typeof(int))
+            else if(typematch<T,int>())
                 return generic<T>(dinx.insert(in int32(in src), in int32(in dst), index));
-            else if(typeof(T) == typeof(uint))
+            else if(typematch<T,uint>())
                 return generic<T>(dinx.insert(in uint32(in src), in uint32(in dst), index));
-            else if(typeof(T) == typeof(long))
+            else if(typematch<T,long>())
                 return generic<T>(dinx.insert(in int64(in src), in int64(in dst), index));
-            else if(typeof(T) == typeof(ulong))
+            else if(typematch<T,ulong>())
                 return generic<T>(dinx.insert(in uint64(in src), in uint64(in dst), index));
-            else if(typeof(T) == typeof(float))
+            else if(typematch<T,float>())
                 return generic<T>(dfp.insert(in float32(in src), in float32(in dst), index));
-            else if(typeof(T) == typeof(double))
+            else if(typematch<T,double>())
                 return generic<T>(dfp.insert(in float64(in src), in float64(in dst), index));
             else
                 throw unsupported<T>();

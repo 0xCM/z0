@@ -25,7 +25,7 @@ namespace Z0.Mkl
         {
             if(typeof(T) == typeof(uint))
                 sample.bits(Source,  uint32(buffer));
-            else if(typeof(T) == typeof(ulong))
+            else if(typematch<T,ulong>())
                 sample.bits(Source,  uint64(buffer));
             else 
                 throw unsupported<T>();

@@ -397,25 +397,25 @@ partial class zfunc
     public static void vstore<T>(Vec128<T> src, ref T dst)
         where T : struct
     {            
-        if(typeof(T) == typeof(sbyte))
+        if(typematch<T,sbyte>())
             vstore(int8(src), ref int8(ref dst));
-        else if(typeof(T) == typeof(byte))
+        else if(typematch<T,byte>())
             vstore(uint8(src), ref uint8(ref dst));
-        else if(typeof(T) == typeof(short))
+        else if(typematch<T,short>())
             vstore(int16(src), ref int16(ref dst));
-        else if(typeof(T) == typeof(ushort))
+        else if(typematch<T,ushort>())
             vstore(uint16(src), ref uint16(ref dst));
-        else if(typeof(T) == typeof(int))
+        else if(typematch<T,int>())
             vstore(int32(src), ref int32(ref dst));
-        else if(typeof(T) == typeof(uint))
+        else if(typematch<T,uint>())
             vstore(uint32(src), ref uint32(ref dst));
-        else if(typeof(T) == typeof(long))
+        else if(typematch<T,long>())
             vstore(int64(src), ref int64(ref dst));
-        else if(typeof(T) == typeof(ulong))
+        else if(typematch<T,ulong>())
             vstore(uint64(src), ref uint64(ref dst));
-        else if(typeof(T) == typeof(float))
+        else if(typematch<T,float>())
             vstore(float32(src), ref float32(ref dst));
-        else if(typeof(T) == typeof(double))
+        else if(typematch<T,double>())
             vstore(float64(src), ref float64(ref dst));
         else
             throw unsupported<T>();
@@ -430,25 +430,25 @@ partial class zfunc
     public static void vstore<T>(Vector128<T> src, ref T dst)
         where T : struct
     {            
-        if(typeof(T) == typeof(sbyte))
+        if(typematch<T,sbyte>())
             vstore(int8(src), ref int8(ref dst));
-        else if(typeof(T) == typeof(byte))
+        else if(typematch<T,byte>())
             vstore(uint8(src), ref uint8(ref dst));
-        else if(typeof(T) == typeof(short))
+        else if(typematch<T,short>())
             vstore(int16(src), ref int16(ref dst));
-        else if(typeof(T) == typeof(ushort))
+        else if(typematch<T,ushort>())
             vstore(uint16(src), ref uint16(ref dst));
-        else if(typeof(T) == typeof(int))
+        else if(typematch<T,int>())
             vstore(int32(src), ref int32(ref dst));
-        else if(typeof(T) == typeof(uint))
+        else if(typematch<T,uint>())
             vstore(uint32(src), ref uint32(ref dst));
-        else if(typeof(T) == typeof(long))
+        else if(typematch<T,long>())
             vstore(int64(src), ref int64(ref dst));
-        else if(typeof(T) == typeof(ulong))
+        else if(typematch<T,ulong>())
             vstore(uint64(src), ref uint64(ref dst));
-        else if(typeof(T) == typeof(float))
+        else if(typematch<T,float>())
             vstore(float32(src), ref float32(ref dst));
-        else if(typeof(T) == typeof(double))
+        else if(typematch<T,double>())
             vstore(float64(src), ref float64(ref dst));
         else
             throw unsupported<T>();
@@ -464,25 +464,25 @@ partial class zfunc
     public static void vstore<T>(Vec256<T> src, ref T dst)
         where T : struct
     {            
-        if(typeof(T) == typeof(sbyte))
+        if(typematch<T,sbyte>())
             vstore(int8(src), ref int8(ref dst));
-        else if(typeof(T) == typeof(byte))
+        else if(typematch<T,byte>())
             vstore(uint8(src), ref uint8(ref dst));
-        else if(typeof(T) == typeof(short))
+        else if(typematch<T,short>())
             vstore(int16(src), ref int16(ref dst));
-        else if(typeof(T) == typeof(ushort))
+        else if(typematch<T,ushort>())
             vstore(uint16(src), ref uint16(ref dst));
-        else if(typeof(T) == typeof(int))
+        else if(typematch<T,int>())
             vstore(int32(src), ref int32(ref dst));
-        else if(typeof(T) == typeof(uint))
+        else if(typematch<T,uint>())
             vstore(uint32(src), ref uint32(ref dst));
-        else if(typeof(T) == typeof(long))
+        else if(typematch<T,long>())
             vstore(int64(src), ref int64(ref dst));
-        else if(typeof(T) == typeof(ulong))
+        else if(typematch<T,ulong>())
             vstore(uint64(src), ref uint64(ref dst));
-        else if(typeof(T) == typeof(float))
+        else if(typematch<T,float>())
             vstore(float32(src), ref float32(ref dst));
-        else if(typeof(T) == typeof(double))
+        else if(typematch<T,double>())
             vstore(float64(src), ref float64(ref dst));
         else
             throw unsupported<T>();
@@ -497,25 +497,25 @@ partial class zfunc
     public static void vstore<T>(Vector256<T> src, ref T dst)
         where T : struct
     {            
-        if(typeof(T) == typeof(sbyte))
+        if(typematch<T,sbyte>())
             vstore(int8(src), ref int8(ref dst));
-        else if(typeof(T) == typeof(byte))
+        else if(typematch<T,byte>())
             vstore(uint8(src), ref uint8(ref dst));
-        else if(typeof(T) == typeof(short))
+        else if(typematch<T,short>())
             vstore(int16(src), ref int16(ref dst));
-        else if(typeof(T) == typeof(ushort))
+        else if(typematch<T,ushort>())
             vstore(uint16(src), ref uint16(ref dst));
-        else if(typeof(T) == typeof(int))
+        else if(typematch<T,int>())
             vstore(int32(src), ref int32(ref dst));
-        else if(typeof(T) == typeof(uint))
+        else if(typematch<T,uint>())
             vstore(uint32(src), ref uint32(ref dst));
-        else if(typeof(T) == typeof(long))
+        else if(typematch<T,long>())
             vstore(int64(src), ref int64(ref dst));
-        else if(typeof(T) == typeof(ulong))
+        else if(typematch<T,ulong>())
             vstore(uint64(src), ref uint64(ref dst));
-        else if(typeof(T) == typeof(float))
+        else if(typematch<T,float>())
             vstore(float32(src), ref float32(ref dst));
-        else if(typeof(T) == typeof(double))
+        else if(typematch<T,double>())
             vstore(float64(src), ref float64(ref dst));
         else
             throw unsupported<T>();

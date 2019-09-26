@@ -18,25 +18,25 @@ namespace Z0
         public static Vec256<T> blendv<T>(in Vec256<T> lhs, in Vec256<T> rhs, in Vec256<T> control)        
             where T : struct
         {
-            if(typeof(T) == typeof(sbyte))
+            if(typematch<T,sbyte>())
                 return generic<T>(dinx.blendv(in int8(in lhs), in int8(in rhs), in int8(in control)));
-            else if(typeof(T) == typeof(byte))
+            else if(typematch<T,byte>())
                 return generic<T>(dinx.blendv(in uint8(in lhs), in uint8(in rhs), in uint8(in control)));
-            else if(typeof(T) == typeof(short))
+            else if(typematch<T,short>())
                 return generic<T>(dinx.blendv(in int16(in lhs), in int16(in rhs), in int16(in control)));
-            else if(typeof(T) == typeof(ushort))
+            else if(typematch<T,ushort>())
                 return generic<T>(dinx.blendv(in uint16(in lhs), in uint16(in rhs), in uint16(in control)));
-            else if(typeof(T) == typeof(int))
+            else if(typematch<T,int>())
                 return generic<T>(dinx.blendv(in int32(in lhs), in int32(in rhs), in int32(in control)));
-            else if(typeof(T) == typeof(uint))
+            else if(typematch<T,uint>())
                 return generic<T>(dinx.blendv(in uint32(in lhs), in uint32(in rhs), in uint32(in control)));
-            else if(typeof(T) == typeof(long))
+            else if(typematch<T,long>())
                 return generic<T>(dinx.blendv(in int64(in lhs), in int64(in rhs), in int64(in control)));
-            else if(typeof(T) == typeof(ulong))
+            else if(typematch<T,ulong>())
                 return generic<T>(dinx.blendv(in uint64(in lhs), in uint64(in rhs), in uint64(in control)));
-            else if(typeof(T) == typeof(float))
+            else if(typematch<T,float>())
                 return generic<T>(dfp.blendv(in float32(in lhs), in float32(in rhs), in float32(in control)));
-            else if(typeof(T) == typeof(double))
+            else if(typematch<T,double>())
                 return generic<T>(dfp.blendv(in float64(in lhs), in float64(in rhs), in float64(in control)));
             else 
                 throw unsupported<T>();

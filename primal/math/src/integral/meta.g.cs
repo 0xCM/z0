@@ -20,25 +20,25 @@ namespace Z0
         public static T zero<T>()
             where T : struct
         {        
-            if(typeof(T) == typeof(sbyte))
+            if(typematch<T,sbyte>())
                 return generic<T>(ref asRef((sbyte)0));
-            else if(typeof(T) == typeof(byte))
+            else if(typematch<T,byte>())
                 return generic<T>(ref asRef((byte)0));
-            else if(typeof(T) == typeof(short))
+            else if(typematch<T,short>())
                 return generic<T>(ref asRef((short)0));
-            else if(typeof(T) == typeof(ushort))
+            else if(typematch<T,ushort>())
                 return generic<T>(ref asRef((ushort)0));
-            else if(typeof(T) == typeof(int))
+            else if(typematch<T,int>())
                 return generic<T>(ref asRef(0));
-            else if(typeof(T) == typeof(uint))
+            else if(typematch<T,uint>())
                 return generic<T>(ref asRef(0u));
-            else if(typeof(T) == typeof(long))
+            else if(typematch<T,long>())
                 return generic<T>(ref asRef(0L));
-            else if(typeof(T) == typeof(ulong))
+            else if(typematch<T,ulong>())
                 return generic<T>(ref asRef(0ul));
-            else if(typeof(T) == typeof(float))
+            else if(typematch<T,float>())
                 return generic<T>(ref asRef(0f));
-            else if(typeof(T) == typeof(double))
+            else if(typematch<T,double>())
                 return generic<T>(ref asRef(0.0));
             else
                 throw unsupported<T>();
@@ -47,25 +47,25 @@ namespace Z0
         [MethodImpl(Inline)]
         public static T one<T>()
         {        
-            if(typeof(T) == typeof(sbyte))
+            if(typematch<T,sbyte>())
                 return generic<T>(ref asRef((sbyte)1));
-            else if(typeof(T) == typeof(byte))
+            else if(typematch<T,byte>())
                 return generic<T>(ref asRef((byte)1));
-            else if(typeof(T) == typeof(short))
+            else if(typematch<T,short>())
                 return generic<T>(ref asRef((short)1));
-            else if(typeof(T) == typeof(ushort))
+            else if(typematch<T,ushort>())
                 return generic<T>(ref asRef((ushort)1));
-            else if(typeof(T) == typeof(int))
+            else if(typematch<T,int>())
                 return generic<T>(ref asRef(1));
-            else if(typeof(T) == typeof(uint))
+            else if(typematch<T,uint>())
                 return generic<T>(ref asRef(1u));
-            else if(typeof(T) == typeof(long))
+            else if(typematch<T,long>())
                 return generic<T>(ref asRef(1L));
-            else if(typeof(T) == typeof(ulong))
+            else if(typematch<T,ulong>())
                 return generic<T>(ref asRef(1ul));
-            else if(typeof(T) == typeof(float))
+            else if(typematch<T,float>())
                 return generic<T>(ref asRef(1f));
-            else if(typeof(T) == typeof(double))
+            else if(typematch<T,double>())
                 return generic<T>(ref asRef(1.0));
             else
                 throw unsupported<T>();
@@ -75,25 +75,25 @@ namespace Z0
         public static T minval<T>()
             where T : struct
         {
-            if(typeof(T) == typeof(sbyte))
+            if(typematch<T,sbyte>())
                 return generic<T>(sbyte.MinValue);
-            else if(typeof(T) == typeof(byte))
+            else if(typematch<T,byte>())
                 return generic<T>(byte.MinValue);
-            else if(typeof(T) == typeof(short))
+            else if(typematch<T,short>())
                 return generic<T>(short.MinValue);
-            else if(typeof(T) == typeof(ushort))
+            else if(typematch<T,ushort>())
                 return generic<T>(ushort.MinValue);
-            else if(typeof(T) == typeof(int))
+            else if(typematch<T,int>())
                 return generic<T>(int.MinValue);
-            else if(typeof(T) == typeof(uint))
+            else if(typematch<T,uint>())
                 return generic<T>(uint.MinValue);
-            else if(typeof(T) == typeof(long))
+            else if(typematch<T,long>())
                 return generic<T>(long.MinValue);
-            else if(typeof(T) == typeof(ulong))
+            else if(typematch<T,ulong>())
                 return generic<T>(ulong.MinValue);
-            else if(typeof(T) == typeof(float))
+            else if(typematch<T,float>())
                 return generic<T>(float.MinValue);
-            else if(typeof(T) == typeof(double))
+            else if(typematch<T,double>())
                 return generic<T>(double.MinValue);
             else
                 throw unsupported<T>();
@@ -103,25 +103,25 @@ namespace Z0
         public static T maxval<T>()
             where T : struct
         {
-            if(typeof(T) == typeof(sbyte))
+            if(typematch<T,sbyte>())
                 return generic<T>(sbyte.MaxValue);
-            else if(typeof(T) == typeof(byte))
+            else if(typematch<T,byte>())
                 return generic<T>(byte.MaxValue);
-            else if(typeof(T) == typeof(short))
+            else if(typematch<T,short>())
                 return generic<T>(short.MaxValue);
-            else if(typeof(T) == typeof(ushort))
+            else if(typematch<T,ushort>())
                 return generic<T>(ushort.MaxValue);
-            else if(typeof(T) == typeof(int))
+            else if(typematch<T,int>())
                 return generic<T>(int.MaxValue);
-            else if(typeof(T) == typeof(uint))
+            else if(typematch<T,uint>())
                 return generic<T>(uint.MaxValue);
-            else if(typeof(T) == typeof(long))
+            else if(typematch<T,long>())
                 return generic<T>(long.MaxValue);
-            else if(typeof(T) == typeof(ulong))
+            else if(typematch<T,ulong>())
                 return generic<T>(ulong.MaxValue);
-            else if(typeof(T) == typeof(float))
+            else if(typematch<T,float>())
                 return generic<T>(float.MaxValue);
-            else if(typeof(T) == typeof(double))
+            else if(typematch<T,double>())
                 return generic<T>(double.MaxValue);
             else
                 throw unsupported<T>();
@@ -131,25 +131,25 @@ namespace Z0
         public static bool signed<T>()
             where T : struct
         {
-            if(typeof(T) == typeof(sbyte))
+            if(typematch<T,sbyte>())
                 return true;
-            else if(typeof(T) == typeof(byte))
+            else if(typematch<T,byte>())
                 return false;
-            else if(typeof(T) == typeof(short))
+            else if(typematch<T,short>())
                 return true;
-            else if(typeof(T) == typeof(ushort))
+            else if(typematch<T,ushort>())
                 return false;
-            else if(typeof(T) == typeof(int))
+            else if(typematch<T,int>())
                 return true;
-            else if(typeof(T) == typeof(uint))
+            else if(typematch<T,uint>())
                 return false;
-            else if(typeof(T) == typeof(long))
+            else if(typematch<T,long>())
                 return true;
-            else if(typeof(T) == typeof(ulong))
+            else if(typematch<T,ulong>())
                 return false;
-            else if(typeof(T) == typeof(float))
+            else if(typematch<T,float>())
                 return true;
-            else if(typeof(T) == typeof(double))
+            else if(typematch<T,double>())
                 return true;
             else
                 throw unsupported<T>();
@@ -164,9 +164,9 @@ namespace Z0
         public static bool floating<T>()
             where T : struct
         {
-            if(typeof(T) == typeof(float))
+            if(typematch<T,float>())
                 return true;
-            else if(typeof(T) == typeof(double))
+            else if(typematch<T,double>())
                 return true;
             else
                 return false;

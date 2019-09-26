@@ -77,25 +77,25 @@ namespace Z0
         // public static ref T inc<T>(ref T src)
         //     where T : struct
         // {
-        //     if(typeof(T) == typeof(sbyte))
+        //     if(typematch<T,sbyte>())
         //         math.inc(ref int8(ref src));
-        //     else if(typeof(T) == typeof(byte))
+        //     else if(typematch<T,byte>())
         //         math.inc(ref uint8(ref src));
-        //     else if(typeof(T) == typeof(short))
+        //     else if(typematch<T,short>())
         //         math.inc(ref int16(ref src));
-        //     else if(typeof(T) == typeof(ushort))
+        //     else if(typematch<T,ushort>())
         //         math.inc(ref uint16(ref src));
-        //     else if(typeof(T) == typeof(int))
+        //     else if(typematch<T,int>())
         //         math.inc(ref int32(ref src));
-        //     else if(typeof(T) == typeof(uint))
+        //     else if(typematch<T,uint>())
         //         math.inc(ref uint32(ref src));
-        //     else if(typeof(T) == typeof(long))
+        //     else if(typematch<T,long>())
         //         math.inc(ref int64(ref src));
-        //     else if(typeof(T) == typeof(ulong))
+        //     else if(typematch<T,ulong>())
         //         math.inc(ref uint64(ref src));
-        //     else if(typeof(T) == typeof(float))
+        //     else if(typematch<T,float>())
         //         fmath.inc(ref float32(ref src));
-        //     else if(typeof(T) == typeof(double))
+        //     else if(typematch<T,double>())
         //         fmath.inc(ref float64(ref src));
         //     else            
         //          throw unsupported<T>();                

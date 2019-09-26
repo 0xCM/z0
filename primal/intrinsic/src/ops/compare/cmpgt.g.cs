@@ -20,15 +20,15 @@ namespace Z0
         public static Vec128<T> cmpgt<T>(in Vec128<T> lhs, in Vec128<T> rhs)
             where T : struct
         {
-            if(typeof(T) == typeof(sbyte))
+            if(typematch<T,sbyte>())
                 return dinx.cmpgt(in int8(in lhs), in int8(in rhs)).As<T>();
-            else if(typeof(T) == typeof(short))
+            else if(typematch<T,short>())
                 return dinx.cmpgt(in int16(in lhs), in int16(in rhs)).As<T>();
-            else if(typeof(T) == typeof(int))
+            else if(typematch<T,int>())
                 return dinx.cmpgt(in int32(in lhs), in int32(in rhs)).As<T>();
-            else if(typeof(T) == typeof(float))
+            else if(typematch<T,float>())
                 return dfp.cmpgt(in float32(in lhs), in float32(in rhs)).As<T>();
-            else if(typeof(T) == typeof(double))
+            else if(typematch<T,double>())
                 return dfp.cmpgt(in float64(in lhs), in float64(in rhs)).As<T>();
             else 
                 throw unsupported<T>();
@@ -38,17 +38,17 @@ namespace Z0
         public static Vec256<T> cmpgt<T>(in Vec256<T> lhs, in Vec256<T> rhs)
             where T : struct
         {
-            if(typeof(T) == typeof(sbyte))
+            if(typematch<T,sbyte>())
                 return dinx.cmpgt(in int8(in lhs), in int8(in rhs)).As<T>();
-            else if(typeof(T) == typeof(short))
+            else if(typematch<T,short>())
                 return dinx.cmpgt(in int16(in lhs), in int16(in rhs)).As<T>();
-            else if(typeof(T) == typeof(int))
+            else if(typematch<T,int>())
                 return dinx.cmpgt(in int32(in lhs), in int32(in rhs)).As<T>();
-            else if(typeof(T) == typeof(long))
+            else if(typematch<T,long>())
                 return dinx.cmpgt(in int64(in lhs), in int64(in rhs)).As<T>();
-            else if(typeof(T) == typeof(float))
+            else if(typematch<T,float>())
                 return dfp.cmpgt(in float32(in lhs), in float32(in rhs)).As<T>();
-            else if(typeof(T) == typeof(double))
+            else if(typematch<T,double>())
                 return dfp.cmpgt(in float64(in lhs), in float64(in rhs)).As<T>();
             else 
                 throw unsupported<T>();

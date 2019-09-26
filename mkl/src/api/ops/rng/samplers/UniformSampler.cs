@@ -24,9 +24,9 @@ namespace Z0.Mkl
         {
             if(typeof(T) == typeof(int))
                 sample.uniform(Source, int32(DistSpec.Min), int32(DistSpec.Max), int32(buffer));
-            else if(typeof(T) == typeof(float))
+            else if(typematch<T,float>())
                 sample.uniform(Source, float32(DistSpec.Min), float32(DistSpec.Max), float32(buffer));
-            else if(typeof(T) == typeof(double))
+            else if(typematch<T,double>())
                 sample.uniform(Source, float64(DistSpec.Min), float64(DistSpec.Max), float64(buffer));
             else 
                 throw unsupported<T>();

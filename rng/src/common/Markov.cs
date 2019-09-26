@@ -23,9 +23,9 @@ namespace Z0
         public static BlockVector<T> MarkovVec<T>(this IPolyrand random, int length)
             where T : struct
         {
-            if(typeof(T) == typeof(float))                
+            if(typematch<T,float>())                
                 return random.MarkovVec(length, 1f, length << 4).As<T>();
-            else if(typeof(T) == typeof(double))
+            else if(typematch<T,double>())
                 return random.MarkovVec(length, 1.0, length << 4).As<T>();
             else
                 throw unsupported<T>();
@@ -40,9 +40,9 @@ namespace Z0
         public static void MarkovVec<T>(this IPolyrand random, Span<T> dst)
             where T : struct
         {
-            if(typeof(T) == typeof(float))                
+            if(typematch<T,float>())                
                 random.MarkovVec(As.float32(dst));
-            else if(typeof(T) == typeof(double))
+            else if(typematch<T,double>())
                 random.MarkovVec(As.float64(dst));
             else
                 throw unsupported<T>();

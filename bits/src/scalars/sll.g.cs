@@ -23,21 +23,21 @@ namespace Z0
         public static ref T sll<T>(ref T src, int offset)
             where T : struct
         {
-            if(typeof(T) == typeof(sbyte))
+            if(typematch<T,sbyte>())
                 Bits.sll(ref int8(ref src), offset);
-            else if(typeof(T) == typeof(byte))
+            else if(typematch<T,byte>())
                 Bits.sll(ref uint8(ref src), offset);
-            else if(typeof(T) == typeof(short))
+            else if(typematch<T,short>())
                 Bits.sll(ref int16(ref src), offset);
-            else if(typeof(T) == typeof(ushort))
+            else if(typematch<T,ushort>())
                 Bits.sll(ref uint16(ref src), offset);
-            else if(typeof(T) == typeof(int))
+            else if(typematch<T,int>())
                 Bits.sll(ref int32(ref src), offset);
-            else if(typeof(T) == typeof(uint))
+            else if(typematch<T,uint>())
                 Bits.sll(ref uint32(ref src), offset);
-            else if(typeof(T) == typeof(long))
+            else if(typematch<T,long>())
                 Bits.sll(ref int64(ref src), offset);
-            else if(typeof(T) == typeof(ulong))
+            else if(typematch<T,ulong>())
                 Bits.sll(ref uint64(ref src), offset);
             else
                 throw unsupported<T>();

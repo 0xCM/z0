@@ -47,12 +47,12 @@ namespace Z0
                 var imm = Imm16i.Define(src);
                 dst = Unsafe.As<Imm16i,T>(ref imm);
             }
-            else if(typeof(T) == typeof(int))
+            else if(typematch<T,int>())
             {
                 var imm = Imm32i.Define(src);
                 dst = Unsafe.As<Imm32i,T>(ref imm);
             }
-            else if(typeof(T) == typeof(long))
+            else if(typematch<T,long>())
             {
                 var imm = Imm64i.Define(src);
                 dst = Unsafe.As<Imm64i,T>(ref imm);

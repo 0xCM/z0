@@ -18,11 +18,11 @@ namespace Z0
         static T andi<T>(T lhs, T rhs)
             where T : struct
         {
-            if(typeof(T) == typeof(sbyte))
+            if(typematch<T,sbyte>())
                  return generic<T>(math.and(int8(lhs), int8(rhs)));
-            else if(typeof(T) == typeof(short))
+            else if(typematch<T,short>())
                  return generic<T>(math.and(int16(lhs), int16(rhs)));
-            else if(typeof(T) == typeof(int))
+            else if(typematch<T,int>())
                  return generic<T>(math.and(uint32(lhs), uint32(rhs)));
             else
                  return generic<T>(math.and(int64(lhs), int64(rhs)));
@@ -34,9 +34,9 @@ namespace Z0
         {
             if(typeof(T) == typeof(byte))
                 return generic<T>(math.and(uint8(lhs), uint8(rhs)));
-            else if(typeof(T) == typeof(ushort))
+            else if(typematch<T,ushort>())
                 return generic<T>(math.and(uint16(lhs), uint16(rhs)));
-            else if(typeof(T) == typeof(uint))
+            else if(typematch<T,uint>())
                 return generic<T>(math.and(uint32(lhs), uint32(rhs)));
             else 
                 return generic<T>(math.and(uint64(lhs), uint64(rhs)));

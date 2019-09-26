@@ -26,21 +26,21 @@ namespace Z0
         public static T sar<T>(T src, int offset)
             where T : struct
         {
-            if(typeof(T) == typeof(sbyte))
+            if(typematch<T,sbyte>())
                 return generic<T>(math.sar(ref int8(ref src), offset));
-            else if(typeof(T) == typeof(byte))
+            else if(typematch<T,byte>())
                 return generic<T>(math.sar(ref uint8(ref src), offset));
-            else if(typeof(T) == typeof(short))
+            else if(typematch<T,short>())
                 return generic<T>(math.sar(ref int16(ref src), offset));
-            else if(typeof(T) == typeof(ushort))
+            else if(typematch<T,ushort>())
                 return generic<T>(math.sar(ref uint16(ref src), offset));
-            else if(typeof(T) == typeof(int))
+            else if(typematch<T,int>())
                 return generic<T>(math.sar(ref int32(ref src), offset));
-            else if(typeof(T) == typeof(uint))
+            else if(typematch<T,uint>())
                 return generic<T>(math.sar(ref uint32(ref src), offset));
-            else if(typeof(T) == typeof(long))
+            else if(typematch<T,long>())
                 return generic<T>(math.sar(ref int64(ref src), offset));
-            else if(typeof(T) == typeof(ulong))
+            else if(typematch<T,ulong>())
                 return generic<T>(math.sar(ref uint64(ref src), offset));
             else            
                 throw unsupported<T>();
@@ -56,21 +56,21 @@ namespace Z0
         public static ref T sar<T>(ref T src, int offset)
             where T : struct
         {
-            if(typeof(T) == typeof(sbyte))
+            if(typematch<T,sbyte>())
                 math.sar(ref int8(ref src), offset);
-            else if(typeof(T) == typeof(byte))
+            else if(typematch<T,byte>())
                 math.sar(ref uint8(ref src), offset);
-            else if(typeof(T) == typeof(short))
+            else if(typematch<T,short>())
                 math.sar(ref int16(ref src), offset);
-            else if(typeof(T) == typeof(ushort))
+            else if(typematch<T,ushort>())
                 math.sar(ref uint16(ref src), offset);
-            else if(typeof(T) == typeof(int))
+            else if(typematch<T,int>())
                 math.sar(ref int32(ref src), offset);
-            else if(typeof(T) == typeof(uint))
+            else if(typematch<T,uint>())
                 math.sar(ref uint32(ref src), offset);
-            else if(typeof(T) == typeof(long))
+            else if(typematch<T,long>())
                 math.sar(ref int64(ref src), offset);
-            else if(typeof(T) == typeof(ulong))
+            else if(typematch<T,ulong>())
                 math.sar(ref uint64(ref src), offset);
             else
                 throw unsupported<T>();

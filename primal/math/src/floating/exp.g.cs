@@ -21,9 +21,9 @@ namespace Z0
         public static T exp<T>(T src)
             where T : struct
         {
-            if(typeof(T) == typeof(float))
+            if(typematch<T,float>())
                 return generic<T>(fmath.exp(float32(src)));
-            else if(typeof(T) == typeof(double))
+            else if(typematch<T,double>())
                 return generic<T>(fmath.exp(float64(src)));
             else
                 throw unsupported<T>();
@@ -38,9 +38,9 @@ namespace Z0
         public static ref T exp<T>(ref T src)
             where T : struct
         {
-            if(typeof(T) == typeof(float))
+            if(typematch<T,float>())
                 fmath.exp(ref float32(ref src));
-            else if(typeof(T) == typeof(double))
+            else if(typematch<T,double>())
                 fmath.exp(ref float64(ref src));
             else
                 throw unsupported<T>();

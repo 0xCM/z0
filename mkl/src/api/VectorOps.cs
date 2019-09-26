@@ -30,12 +30,12 @@ namespace Z0
             where N : ITypeNat, new()
             where T : struct    
         {
-            if(typeof(T) == typeof(float))
+            if(typematch<T,float>())
             {
                 var dst = z.As<float>();
                 mkl.add(x.As<float>(), y.As<float>(), ref dst);
             }
-            else if(typeof(T) == typeof(double))
+            else if(typematch<T,double>())
             {
                 var dst = z.As<double>();
                 mkl.add(x.As<double>(), y.As<double>(), ref dst);
@@ -52,9 +52,9 @@ namespace Z0
             where N : ITypeNat, new()
             where T : struct
         {
-            if(typeof(T) == typeof(float))
+            if(typematch<T,float>())
                 return generic<T>(mkl.dot(x.As<float>(), y.As<float>()));
-            else if(typeof(T) == typeof(double))
+            else if(typematch<T,double>())
                 return generic<T>(mkl.dot(x.As<double>(), y.As<double>()));
             else
                 return mathspan.dot<T>(x.Unsized, y.Unsized);                

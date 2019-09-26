@@ -243,25 +243,25 @@ namespace Z0
         {
             var digits = string.Empty;
             var fmt = "X";
-            if(typeof(T) == typeof(sbyte))
+            if(typematch<T,sbyte>())
                 digits = As.int8(src).ToString(fmt);
-            else if(typeof(T) == typeof(byte))
+            else if(typematch<T,byte>())
                 digits = As.uint8(src).ToString(fmt);
-            else if(typeof(T) == typeof(short))
+            else if(typematch<T,short>())
                 digits = As.int16(src).ToString(fmt);
-            else if(typeof(T) == typeof(ushort))
+            else if(typematch<T,ushort>())
                 digits = As.uint16(src).ToString(fmt);
-            else if(typeof(T) == typeof(int))
+            else if(typematch<T,int>())
                 digits = As.int32(src).ToString(fmt);
-            else if(typeof(T) == typeof(uint))
+            else if(typematch<T,uint>())
                 digits = As.uint32(src).ToString(fmt);
-            else if(typeof(T) == typeof(long))
+            else if(typematch<T,long>())
                 digits = As.int64(src).ToString(fmt);
-            else if(typeof(T) == typeof(ulong))
+            else if(typematch<T,ulong>())
                 digits = As.uint64(src).ToString(fmt);
-            else if(typeof(T) == typeof(float))
+            else if(typematch<T,float>())
                 digits = convert<float,int>(As.float32(src)).ToString(fmt);
-            else if(typeof(T) == typeof(double))
+            else if(typematch<T,double>())
                 digits = convert<double,long>(As.float64(src)).ToString(fmt);
             else
                 throw unsupported<T>();

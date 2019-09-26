@@ -14,6 +14,7 @@ dotnet sln add cpu/cpudata/z0.cpudata.csproj
 dotnet sln add cpu/cpufunc/z0.cpufunc.csproj
 dotnet sln add cpu/cpuemu/z0.cpuemu.csproj
 dotnet sln add cpu/test/z0.cpu.test.csproj
+dotnet sln add cpu/cpummx/z0.cpummx.csproj
 
 dotnet sln add primal/intrinsic/src/z0.intrinsic.csproj
 dotnet sln add primal/intrinsic/test/z0.intrinsic.test.csproj

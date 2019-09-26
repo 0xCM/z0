@@ -54,6 +54,7 @@ namespace Z0
         }
 
 
+
         static void Disassemble<T>(IDeconstructable<T> src)
         {
             var deconstructed = typeof(T).Deconstruct();
@@ -66,17 +67,8 @@ namespace Z0
             Disassemble(new PrimalScenarios());
             Disassemble(new ExperimentalScenarios());
             Disassemble(true, true, typeof(math));
-            //DeconstructGeneric(typeof(gmath), new string[]{"add"}, new Type[]{typeof(int), typeof(ulong)}, "gmath");
 
-
-
-
-            //Disassemble(true,true, typeof(math));
-            // Disassemble(true,true, typeof(BitRef));
-            // Disassemble(new PrimalScenarios());
-            // Disassemble(new SysMathCases());
-            // Disassemble(new CompositeScenarios());
-
+        
         }
 
         public unsafe static void ListMethods(Type t)

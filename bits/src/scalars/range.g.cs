@@ -24,25 +24,25 @@ namespace Z0
         [MethodImpl(Inline)]
         public static T range<T>(in T src, BitPos i0, BitPos i1)
         {
-            if(typeof(T) == typeof(sbyte))
+            if(typematch<T,sbyte>())
                 return generic<T>(Bits.range(int8(src),i0,i1));
-            else if(typeof(T) == typeof(byte))
+            else if(typematch<T,byte>())
                 return generic<T>(Bits.range(uint8(src),i0,i1));
-            else if(typeof(T) == typeof(short))
+            else if(typematch<T,short>())
                 return generic<T>(Bits.range(int16(src),i0,i1));
-            else if(typeof(T) == typeof(ushort))
+            else if(typematch<T,ushort>())
                 return generic<T>(Bits.range(uint16(src),i0,i1));
-            else if(typeof(T) == typeof(int))
+            else if(typematch<T,int>())
                 return generic<T>(Bits.range(int32(src),i0,i1));
-            else if(typeof(T) == typeof(uint))
+            else if(typematch<T,uint>())
                 return generic<T>(Bits.range(uint32(src),i0,i1));
-            else if(typeof(T) == typeof(long))
+            else if(typematch<T,long>())
                 return generic<T>(Bits.range(int64(src),i0,i1));
-            else if(typeof(T) == typeof(ulong))
+            else if(typematch<T,ulong>())
                 return generic<T>(Bits.range(uint64(src),i0,i1));
-            else if(typeof(T) == typeof(float))
+            else if(typematch<T,float>())
                 return generic<T>(Bits.range(float32(src),i0,i1));
-            else if(typeof(T) == typeof(double))
+            else if(typematch<T,double>())
                 return generic<T>(Bits.range(float64(src),i0,i1));
             else            
                 throw unsupported<T>();

@@ -21,9 +21,9 @@ namespace Z0
         public static T pow<T>(T b, uint exp)
             where T : struct
         {
-            if(typeof(T) == typeof(float))
+            if(typematch<T,float>())
                return generic<T>(fmath.pow(ref float32(ref b), exp));
-            else if(typeof(T) == typeof(double))
+            else if(typematch<T,double>())
                 return generic<T>(fmath.pow(ref float64(ref b), exp));
             else            
                throw unsupported<T>();            
@@ -33,9 +33,9 @@ namespace Z0
         public static ref T pow<T>(ref T b, uint exp)
             where T : struct
         {
-            if(typeof(T) == typeof(float))
+            if(typematch<T,float>())
                 fmath.pow(ref float32(ref b), exp);
-            else if(typeof(T) == typeof(double))
+            else if(typematch<T,double>())
                 fmath.pow(ref float64(ref b), exp);
             else            
                throw unsupported<T>();

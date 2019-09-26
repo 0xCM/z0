@@ -30,9 +30,9 @@ namespace Z0.Mkl
         public static void Set<T>(this VslSSTaskHandle<T> task, VslSSTaskParameter param, ref T value, [CallerFilePath]string file = null, [CallerLineNumber]int? line = null)
             where T : unmanaged
         {
-            if(typeof(T) == typeof(float))
+            if(typematch<T,float>())
                VSL.vslsSSEditTask(task, param, ref As.float32(ref value)).AutoThrow(file,line); 
-            else if(typeof(T) == typeof(double))
+            else if(typematch<T,double>())
                 VSL.vsldSSEditTask(task, param, ref As.float64(ref value)).AutoThrow(file,line); 
             else
                 throw unsupported<T>();
@@ -50,9 +50,9 @@ namespace Z0.Mkl
         public static void Compute<T>(this VslSSTaskHandle<T> task, VslSSComputeRoutine routine, VslSSComputeMethod method, [CallerFilePath] string file = null, [CallerLineNumber]int? line = null)
             where T : unmanaged
         {
-            if(typeof(T) == typeof(float))
+            if(typematch<T,float>())
                 VSL.vslsSSCompute(task, routine, method).AutoThrow(file, line);
-            else if(typeof(T) == typeof(double))
+            else if(typematch<T,double>())
                 VSL.vsldSSCompute(task, routine, method).AutoThrow(file, line);
             else
                 throw unsupported<T>();

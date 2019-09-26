@@ -28,23 +28,23 @@ namespace Z0
         {
             if(typeof(T) == typeof(byte))
                 Bits.bitmap(uint8(in src), srcOffset, len, dstOffset, ref uint8(ref dst));
-            else if(typeof(T) == typeof(sbyte))
+            else if(typematch<T,sbyte>())
                 Bits.bitmap(int8(in src), srcOffset, len, dstOffset, ref int8(ref dst));
-            else if(typeof(T) == typeof(short))
+            else if(typematch<T,short>())
                 Bits.bitmap(int16(in src),srcOffset, len, dstOffset, ref int16(ref dst));
-            else if(typeof(T) == typeof(ushort))
+            else if(typematch<T,ushort>())
                 Bits.bitmap(uint16(in src), srcOffset, len, dstOffset, ref uint16(ref dst));
-            else if(typeof(T) == typeof(int))
+            else if(typematch<T,int>())
                 Bits.bitmap(int32(in src), srcOffset, len, dstOffset, ref int32(ref dst));
-            else if(typeof(T) == typeof(uint))
+            else if(typematch<T,uint>())
                 Bits.bitmap(uint32(in src), srcOffset, len, dstOffset, ref uint32(ref dst));
-            else if(typeof(T) == typeof(long))
+            else if(typematch<T,long>())
                 Bits.bitmap(int64(in src), srcOffset, len, dstOffset, ref int64(ref dst));
-            else if(typeof(T) == typeof(ulong))
+            else if(typematch<T,ulong>())
                 Bits.bitmap(uint64(in src), srcOffset, len, dstOffset, ref uint64(ref dst));
-            else if(typeof(T) == typeof(float))
+            else if(typematch<T,float>())
                 Bits.bitmap(float32(in src), srcOffset, len, dstOffset, ref float32(ref dst));
-            else if(typeof(T) == typeof(double))
+            else if(typematch<T,double>())
                 Bits.bitmap(float64(in src), srcOffset, len, dstOffset, ref float64(ref dst));
             else            
                 throw unsupported<T>();            

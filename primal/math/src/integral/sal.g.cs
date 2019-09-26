@@ -24,21 +24,21 @@ namespace Z0
         public static T sal<T>(T src, int offset)
             where T : struct
         {
-            if(typeof(T) == typeof(sbyte))
+            if(typematch<T,sbyte>())
                 return generic<T>((sbyte)(int8(src) << offset));
-            else if(typeof(T) == typeof(byte))
+            else if(typematch<T,byte>())
                 return generic<T>((byte)(uint8(src) << offset));
-            else if(typeof(T) == typeof(short))
+            else if(typematch<T,short>())
                 return generic<T>((short)(int16(src) << offset));
-            else if(typeof(T) == typeof(ushort))
+            else if(typematch<T,ushort>())
                 return generic<T>((ushort)(uint16(src) << offset));
-            else if(typeof(T) == typeof(int))
+            else if(typematch<T,int>())
                 return generic<T>(int32(src) << offset);
-            else if(typeof(T) == typeof(uint))
+            else if(typematch<T,uint>())
                 return generic<T>(uint32(src) << offset);
-            else if(typeof(T) == typeof(long))
+            else if(typematch<T,long>())
                 return generic<T>(int64(src) << offset);
-            else if(typeof(T) == typeof(ulong))
+            else if(typematch<T,ulong>())
                 return generic<T>(uint64(src) << offset);
             else            
                 throw unsupported<T>();
@@ -54,13 +54,13 @@ namespace Z0
         public static ref T sal<T>(ref T src, int offset)
             where T : struct
         {
-            if (typeof(T) == typeof(sbyte))
+            if(typematch<T,sbyte>())
                 math.sal(ref int8(ref src), offset);
-            else if (typeof(T) == typeof(byte))
+            else if(typematch<T,byte>())
                 math.sal(ref uint8(ref src), offset);
-            else if (typeof(T) == typeof(short))
+            else if(typematch<T,short>())
                 math.sal(ref int16(ref src), offset);
-            else if (typeof(T) == typeof(ushort))
+            else if(typematch<T,ushort>())
                 math.sal(ref uint16(ref src), offset);
             else if (typeof(T) == typeof(int))
                 math.sal(ref int32(ref src), offset);

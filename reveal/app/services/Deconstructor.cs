@@ -31,6 +31,16 @@ namespace Z0
 
         readonly MetadataIndex MdIx;
 
+        public static Option<MethodDisassembly> Deconstruct(MethodInfo method, bool jit)
+        {
+            if(jit)
+                method.JitMethod();
+            using var dtor = new Deconstructor(new Module[]{method.Module});
+            return dtor.Disassemble(method, x => error(x));
+            
+        }
+
+        
         public static IEnumerable<MethodDisassembly> Deconstruct(params MethodInfo[] methods)
             => Disassemble(x => error(x), methods);
 

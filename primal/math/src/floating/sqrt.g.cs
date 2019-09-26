@@ -19,9 +19,9 @@ namespace Z0
         public static T sqrt<T>(T src)
             where T : struct
         {
-            if(typeof(T) == typeof(float))
+            if(typematch<T,float>())
                 return generic<T>(fmath.sqrt(float32(src)));
-            else if(typeof(T) == typeof(double))
+            else if(typematch<T,double>())
                 return generic<T>(fmath.sqrt(float64(src)));
             else            
                 throw unsupported<T>();
@@ -31,9 +31,9 @@ namespace Z0
         public static ref T sqrt<T>(ref T src)
             where T : struct
         {
-            if(typeof(T) == typeof(float))
+            if(typematch<T,float>())
                 fmath.sqrt(ref float32(ref src));
-            else if(typeof(T) == typeof(double))
+            else if(typematch<T,double>())
                 fmath.sqrt(ref float64(ref src));
             else 
                 throw unsupported<T>();

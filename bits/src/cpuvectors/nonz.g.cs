@@ -27,25 +27,25 @@ namespace Z0
         public static bool nonz<T>(in Vec128<T> src)
             where T : struct
         {
-            if(typeof(T) == typeof(sbyte))
+            if(typematch<T,sbyte>())
                 return Bits.nonz(in int8(in src));
-            else if(typeof(T) == typeof(byte))
+            else if(typematch<T,byte>())
                 return Bits.nonz(in uint8(in src));
-            else if(typeof(T) == typeof(short))
+            else if(typematch<T,short>())
                 return Bits.nonz(in int16(in src));
-            else if(typeof(T) == typeof(ushort))
+            else if(typematch<T,ushort>())
                 return Bits.nonz(in uint16(in src));
-            else if(typeof(T) == typeof(int))
+            else if(typematch<T,int>())
                 return Bits.nonz(in int32(in src));
-            else if(typeof(T) == typeof(uint))
+            else if(typematch<T,uint>())
                 return Bits.nonzero(in uint32(in src));
-            else if(typeof(T) == typeof(long))
+            else if(typematch<T,long>())
                 return Bits.nonz(in int64(in src));
-            else if(typeof(T) == typeof(ulong))
+            else if(typematch<T,ulong>())
                 return Bits.nonz(in uint64(in src));
-            else if(typeof(T) == typeof(float))
+            else if(typematch<T,float>())
                 return Bits.nonz(in float32(in src));
-            else if(typeof(T) == typeof(double))
+            else if(typematch<T,double>())
                 return Bits.nonz(in float64(in src));
             else 
                 throw unsupported<T>();
@@ -61,25 +61,25 @@ namespace Z0
         public static bool nonz<T>(in Vec256<T> src)
             where T : struct
         {
-            if(typeof(T) == typeof(sbyte))
+            if(typematch<T,sbyte>())
                 return Bits.nonz(in int8(in src));
-            else if(typeof(T) == typeof(byte))
+            else if(typematch<T,byte>())
                 return Bits.nonz(in uint8(in src));
-            else if(typeof(T) == typeof(short))
+            else if(typematch<T,short>())
                 return Bits.nonz(in int16(in src));
-            else if(typeof(T) == typeof(ushort))
+            else if(typematch<T,ushort>())
                 return Bits.nonz(in uint16(in src));
-            else if(typeof(T) == typeof(int))
+            else if(typematch<T,int>())
                 return Bits.nonz(in int32(in src));
-            else if(typeof(T) == typeof(uint))
+            else if(typematch<T,uint>())
                 return Bits.nonz(in uint32(in src));
-            else if(typeof(T) == typeof(long))
+            else if(typematch<T,long>())
                 return Bits.nonz(in int64(in src));
-            else if(typeof(T) == typeof(ulong))
+            else if(typematch<T,ulong>())
                 return Bits.nonz(in uint64(in src));
-            else if(typeof(T) == typeof(float))
+            else if(typematch<T,float>())
                 return Bits.nonz(in float32(in src));
-            else if(typeof(T) == typeof(double))
+            else if(typematch<T,double>())
                 return Bits.nonz(in float64(in src));
             else 
                 throw unsupported<T>();

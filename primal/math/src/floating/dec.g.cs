@@ -25,9 +25,9 @@ namespace Z0
         public static T dec<T>(T src)
             where T : struct
         {
-            if(typeof(T) == typeof(float))
+            if(typematch<T,float>())
                 return(generic<T>(fmath.dec(float32(src))));
-            else if(typeof(T) == typeof(double))
+            else if(typematch<T,double>())
                 return(generic<T>(fmath.dec(float64(src))));
             else            
                 throw unsupported<T>();
@@ -42,9 +42,9 @@ namespace Z0
         public static ref T dec<T>(ref T src)
             where T : struct
         {
-            if(typeof(T) == typeof(float))
+            if(typematch<T,float>())
                 fmath.dec(ref float32(ref src));
-            else if(typeof(T) == typeof(double))
+            else if(typematch<T,double>())
                 fmath.dec(ref float64(ref src));
             else            
                 throw unsupported<T>();

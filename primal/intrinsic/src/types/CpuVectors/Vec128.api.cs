@@ -46,25 +46,25 @@ namespace Z0
          public static Vec128<T> Fill<T>(T value)
             where T : struct
         {
-            if(typeof(T) == typeof(sbyte))
+            if(typematch<T,sbyte>())
                 return generic<T>(Vec128.fill(int8(value)));
-            else if(typeof(T) == typeof(byte))
+            else if(typematch<T,byte>())
                 return generic<T>(Vec128.fill(uint8(value)));
-            else if(typeof(T) == typeof(short))
+            else if(typematch<T,short>())
                 return generic<T>(Vec128.fill(int16(value)));
-            else if(typeof(T) == typeof(ushort))
+            else if(typematch<T,ushort>())
                 return generic<T>(Vec128.fill(uint16(value)));
-            else if(typeof(T) == typeof(int))
+            else if(typematch<T,int>())
                 return generic<T>(Vec128.fill(int32(value)));
-            else if(typeof(T) == typeof(uint))
+            else if(typematch<T,uint>())
                 return generic<T>(Vec128.fill(uint32(value)));
-            else if(typeof(T) == typeof(long))
+            else if(typematch<T,long>())
                 return generic<T>(Vec128.fill(int64(value)));
-            else if(typeof(T) == typeof(ulong))
+            else if(typematch<T,ulong>())
                 return generic<T>(Vec128.fill(uint64(value)));
-            else if(typeof(T) == typeof(float))
+            else if(typematch<T,float>())
                 return generic<T>(Vec128.fill(float32(value)));
-            else if(typeof(T) == typeof(double))
+            else if(typematch<T,double>())
                 return generic<T>(Vec128.fill(float64(value)));
             else
                 throw unsupported<T>();
@@ -79,25 +79,25 @@ namespace Z0
          public static ref readonly Vec128<T> Ones<T>()
             where T : struct
         {
-            if(typeof(T) == typeof(sbyte))
+            if(typematch<T,sbyte>())
                 return ref generic<T>(in OneI8);
-            else if(typeof(T) == typeof(byte))
+            else if(typematch<T,byte>())
                 return ref generic<T>(in OneU8);
-            else if(typeof(T) == typeof(short))
+            else if(typematch<T,short>())
                 return ref generic<T>(in OneI16);
-            else if(typeof(T) == typeof(ushort))
+            else if(typematch<T,ushort>())
                 return ref generic<T>(in OneU16);
-            else if(typeof(T) == typeof(int))
+            else if(typematch<T,int>())
                 return ref generic<T>(in OneI32);
-            else if(typeof(T) == typeof(uint))
+            else if(typematch<T,uint>())
                 return ref generic<T>(in OneU32);
-            else if(typeof(T) == typeof(long))
+            else if(typematch<T,long>())
                 return ref generic<T>(in OneI64);
-            else if(typeof(T) == typeof(ulong))
+            else if(typematch<T,ulong>())
                 return ref generic<T>(in OneU64);
-            else if(typeof(T) == typeof(float))
+            else if(typematch<T,float>())
                 return ref generic<T>(in OneF32);
-            else if(typeof(T) == typeof(double))
+            else if(typematch<T,double>())
                 return ref generic<T>(in OneF64);
             else
                 throw unsupported<T>();
@@ -114,25 +114,25 @@ namespace Z0
             where T : struct
         {            
 
-            if(typeof(T) == typeof(sbyte))
+            if(typematch<T,sbyte>())
                 vstore(int8(src), ref int8(ref dst));
-            else if(typeof(T) == typeof(byte))
+            else if(typematch<T,byte>())
                 vstore(uint8(src), ref uint8(ref dst));
-            else if(typeof(T) == typeof(short))
+            else if(typematch<T,short>())
                 vstore(int16(src), ref int16(ref dst));
-            else if(typeof(T) == typeof(ushort))
+            else if(typematch<T,ushort>())
                 vstore(uint16(src), ref uint16(ref dst));
-            else if(typeof(T) == typeof(int))
+            else if(typematch<T,int>())
                 vstore(int32(src), ref int32(ref dst));
-            else if(typeof(T) == typeof(uint))
+            else if(typematch<T,uint>())
                 vstore(uint32(src), ref uint32(ref dst));
-            else if(typeof(T) == typeof(long))
+            else if(typematch<T,long>())
                 vstore(int64(src), ref int64(ref dst));
-            else if(typeof(T) == typeof(ulong))
+            else if(typematch<T,ulong>())
                 vstore(uint64(src), ref uint64(ref dst));
-            else if(typeof(T) == typeof(float))
+            else if(typematch<T,float>())
                 vstore(float32(src), ref float32(ref dst));
-            else if(typeof(T) == typeof(double))
+            else if(typematch<T,double>())
                 vstore(float64(src), ref float64(ref dst));
             else
                 throw unsupported<T>();
@@ -158,25 +158,25 @@ namespace Z0
         public static Vec128<T> Load<T>(ref T src)
             where T : struct  
         {            
-            if(typeof(T) == typeof(sbyte))
+            if(typematch<T,sbyte>())
                 return generic<T>(load(ref int8(ref src)));
-            else if(typeof(T) == typeof(byte))
+            else if(typematch<T,byte>())
                 return generic<T>(load(ref uint8(ref src)));
-            else if(typeof(T) == typeof(short))
+            else if(typematch<T,short>())
                 return generic<T>(load(ref int16(ref src)));
-            else if(typeof(T) == typeof(ushort))
+            else if(typematch<T,ushort>())
                 return generic<T>(load(ref uint16(ref src)));
-            else if(typeof(T) == typeof(int))
+            else if(typematch<T,int>())
                 return generic<T>(load(ref int32(ref src)));
-            else if(typeof(T) == typeof(uint))
+            else if(typematch<T,uint>())
                 return generic<T>(load(ref uint32(ref src)));
-            else if(typeof(T) == typeof(long))
+            else if(typematch<T,long>())
                 return generic<T>(load(ref int64(ref src)));
-            else if(typeof(T) == typeof(ulong))
+            else if(typematch<T,ulong>())
                 return generic<T>(load(ref uint64(ref src)));
-            else if(typeof(T) == typeof(float))
+            else if(typematch<T,float>())
                 return generic<T>(load(ref float32(ref src)));
-            else if(typeof(T) == typeof(double))
+            else if(typematch<T,double>())
                 return  generic<T>(load(ref float64(ref src)));
             else 
                 throw unsupported<T>();            
@@ -186,25 +186,25 @@ namespace Z0
         public static Vector128<T> LoadVector<T>(ref T src)
             where T : struct  
         {            
-            if(typeof(T) == typeof(sbyte))
+            if(typematch<T,sbyte>())
                 return generic<T>(LoadVector(ref int8(ref src)));
-            else if(typeof(T) == typeof(byte))
+            else if(typematch<T,byte>())
                 return generic<T>(LoadVector(ref uint8(ref src)));
-            else if(typeof(T) == typeof(short))
+            else if(typematch<T,short>())
                 return generic<T>(LoadVector(ref int16(ref src)));
-            else if(typeof(T) == typeof(ushort))
+            else if(typematch<T,ushort>())
                 return generic<T>(LoadVector(ref uint16(ref src)));
-            else if(typeof(T) == typeof(int))
+            else if(typematch<T,int>())
                 return generic<T>(LoadVector(ref int32(ref src)));
-            else if(typeof(T) == typeof(uint))
+            else if(typematch<T,uint>())
                 return generic<T>(LoadVector(ref uint32(ref src)));
-            else if(typeof(T) == typeof(long))
+            else if(typematch<T,long>())
                 return generic<T>(LoadVector(ref int64(ref src)));
-            else if(typeof(T) == typeof(ulong))
+            else if(typematch<T,ulong>())
                 return generic<T>(LoadVector(ref uint64(ref src)));
-            else if(typeof(T) == typeof(float))
+            else if(typematch<T,float>())
                 return generic<T>(LoadVector(ref float32(ref src)));
-            else if(typeof(T) == typeof(double))
+            else if(typematch<T,double>())
                 return  generic<T>(LoadVector(ref float64(ref src)));
             else 
                 throw unsupported<T>();            
@@ -214,25 +214,25 @@ namespace Z0
         public static Vec128<T> Loadi<T>(in T src)
             where T : struct  
         {            
-            if(typeof(T) == typeof(sbyte))
+            if(typematch<T,sbyte>())
                 return generic<T>(load(ref int8(ref asRef(in src))));
-            else if(typeof(T) == typeof(byte))
+            else if(typematch<T,byte>())
                 return generic<T>(load(ref uint8(ref asRef(in src))));
-            else if(typeof(T) == typeof(short))
+            else if(typematch<T,short>())
                 return generic<T>(load(ref int16(ref asRef(in src))));
-            else if(typeof(T) == typeof(ushort))
+            else if(typematch<T,ushort>())
                 return generic<T>(load(ref uint16(ref asRef(in src))));
-            else if(typeof(T) == typeof(int))
+            else if(typematch<T,int>())
                 return generic<T>(load(ref int32(ref asRef(in src))));
-            else if(typeof(T) == typeof(uint))
+            else if(typematch<T,uint>())
                 return generic<T>(load(ref uint32(ref asRef(in src))));
-            else if(typeof(T) == typeof(long))
+            else if(typematch<T,long>())
                 return generic<T>(load(ref int64(ref asRef(in src))));
-            else if(typeof(T) == typeof(ulong))
+            else if(typematch<T,ulong>())
                 return generic<T>(load(ref uint64(ref asRef(in src))));
-            else if(typeof(T) == typeof(float))
+            else if(typematch<T,float>())
                 return generic<T>(load(ref float32(ref asRef(in src))));
-            else if(typeof(T) == typeof(double))
+            else if(typematch<T,double>())
                 return  generic<T>(load(ref float64(ref asRef(in src))));
             else 
                 throw unsupported<T>();            
@@ -243,25 +243,25 @@ namespace Z0
             where T : struct
         {            
             ref var head = ref asRef(in src.Block(block));            
-            if(typeof(T) == typeof(sbyte))
+            if(typematch<T,sbyte>())
                 dst = generic<T>(load(ref int8(ref head)));
-            else if(typeof(T) == typeof(byte))
+            else if(typematch<T,byte>())
                 dst = generic<T>(load(ref uint8(ref head)));
-            else if(typeof(T) == typeof(short))
+            else if(typematch<T,short>())
                 dst = generic<T>(load(ref int16(ref head)));
-            else if(typeof(T) == typeof(ushort))
+            else if(typematch<T,ushort>())
                 dst = generic<T>(load(ref uint16(ref head)));
-            else if(typeof(T) == typeof(int))
+            else if(typematch<T,int>())
                 dst = generic<T>(load(ref int32(ref head)));
-            else if(typeof(T) == typeof(uint))
+            else if(typematch<T,uint>())
                 dst = generic<T>(load(ref uint32(ref head)));
-            else if(typeof(T) == typeof(long))
+            else if(typematch<T,long>())
                 dst = generic<T>(load(ref int64(ref head)));
-            else if(typeof(T) == typeof(ulong))
+            else if(typematch<T,ulong>())
                 dst = generic<T>(load(ref uint64(ref head)));
-            else if(typeof(T) == typeof(float))
+            else if(typematch<T,float>())
                 dst = generic<T>(load(ref float32(ref head)));
-            else if(typeof(T) == typeof(double))
+            else if(typematch<T,double>())
                 dst = generic<T>(load(ref float64(ref head)));
             else 
                 throw unsupported<T>();
@@ -273,25 +273,25 @@ namespace Z0
             where T : struct
         {            
             ref var head = ref asRef(in src.Block(block));            
-            if(typeof(T) == typeof(sbyte))
+            if(typematch<T,sbyte>())
                 dst = generic<T>(load(ref int8(ref head)));
-            else if(typeof(T) == typeof(byte))
+            else if(typematch<T,byte>())
                 dst = generic<T>(load(ref uint8(ref head)));
-            else if(typeof(T) == typeof(short))
+            else if(typematch<T,short>())
                 dst = generic<T>(load(ref int16(ref head)));
-            else if(typeof(T) == typeof(ushort))
+            else if(typematch<T,ushort>())
                 dst = generic<T>(load(ref uint16(ref head)));
-            else if(typeof(T) == typeof(int))
+            else if(typematch<T,int>())
                 dst = generic<T>(load(ref int32(ref head)));
-            else if(typeof(T) == typeof(uint))
+            else if(typematch<T,uint>())
                 dst = generic<T>(load(ref uint32(ref head)));
-            else if(typeof(T) == typeof(long))
+            else if(typematch<T,long>())
                 dst = generic<T>(load(ref int64(ref head)));
-            else if(typeof(T) == typeof(ulong))
+            else if(typematch<T,ulong>())
                 dst = generic<T>(load(ref uint64(ref head)));
-            else if(typeof(T) == typeof(float))
+            else if(typematch<T,float>())
                 dst = generic<T>(load(ref float32(ref head)));
-            else if(typeof(T) == typeof(double))
+            else if(typematch<T,double>())
                 dst = generic<T>(load(ref float64(ref head)));
             else 
                 throw unsupported<T>();
@@ -307,25 +307,25 @@ namespace Z0
         public static Vec128<T> LoadScalar<T>(in T src)
             where T : struct
         {            
-            if(typeof(T) == typeof(sbyte))
+            if(typematch<T,sbyte>())
                 return generic<T>(LoadScalar(int8(src)));
-            else if(typeof(T) == typeof(byte))
+            else if(typematch<T,byte>())
                 return generic<T>(LoadScalar(uint8(src)));
-            else if(typeof(T) == typeof(short))
+            else if(typematch<T,short>())
                 return generic<T>(LoadScalar(int16(src)));
-            else if(typeof(T) == typeof(ushort))
+            else if(typematch<T,ushort>())
                 return generic<T>(LoadScalar(uint16(src)));
-            else if(typeof(T) == typeof(int))
+            else if(typematch<T,int>())
                 return generic<T>(LoadScalar(int32(src)));
-            else if(typeof(T) == typeof(uint))
+            else if(typematch<T,uint>())
                 return generic<T>(LoadScalar(uint32(src)));
-            else if(typeof(T) == typeof(long))
+            else if(typematch<T,long>())
                 return generic<T>(LoadScalar(int64(src)));
-            else if(typeof(T) == typeof(ulong))
+            else if(typematch<T,ulong>())
                 return generic<T>(LoadScalar(uint64(src)));
-            else if(typeof(T) == typeof(float))
+            else if(typematch<T,float>())
                 return generic<T>(LoadScalar(float32(src)));
-            else if(typeof(T) == typeof(double))
+            else if(typematch<T,double>())
                 return generic<T>(LoadScalar(float64(src)));
             else 
                 throw unsupported<T>();
@@ -386,25 +386,25 @@ namespace Z0
             where T : struct  
         {
             ref var head = ref asRef(in src[offset]);            
-            if(typeof(T) == typeof(sbyte))
+            if(typematch<T,sbyte>())
                 dst = generic<T>(load(ref int8(ref head)));
-            else if(typeof(T) == typeof(byte))
+            else if(typematch<T,byte>())
                 dst = generic<T>(load(ref uint8(ref head)));
-            else if(typeof(T) == typeof(short))
+            else if(typematch<T,short>())
                 dst = generic<T>(load(ref int16(ref head)));
-            else if(typeof(T) == typeof(ushort))
+            else if(typematch<T,ushort>())
                 dst = generic<T>(load(ref uint16(ref head)));
-            else if(typeof(T) == typeof(int))
+            else if(typematch<T,int>())
                 dst = generic<T>(load(ref int32(ref head)));
-            else if(typeof(T) == typeof(uint))
+            else if(typematch<T,uint>())
                 dst = generic<T>(load(ref uint32(ref head)));
-            else if(typeof(T) == typeof(long))
+            else if(typematch<T,long>())
                 dst = generic<T>(load(ref int64(ref head)));
-            else if(typeof(T) == typeof(ulong))
+            else if(typematch<T,ulong>())
                 dst = generic<T>(load(ref uint64(ref head)));
-            else if(typeof(T) == typeof(float))
+            else if(typematch<T,float>())
                 dst = generic<T>(load(ref float32(ref head)));
-            else if(typeof(T) == typeof(double))
+            else if(typematch<T,double>())
                 dst = generic<T>(load(ref float64(ref head)));
             else 
                 throw unsupported<T>();

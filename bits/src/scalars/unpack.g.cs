@@ -66,11 +66,11 @@ namespace Z0
         {
             if(typeof(T) == typeof(byte))
                 return Bits.unpack(uint8(src));
-            else if(typeof(T) == typeof(ushort))
+            else if(typematch<T,ushort>())
                 return Bits.unpack(uint16(src));
-            else if(typeof(T) == typeof(uint))
+            else if(typematch<T,uint>())
                 return Bits.unpack(uint32(src));
-            else if(typeof(T) == typeof(ulong))
+            else if(typematch<T,ulong>())
                 return Bits.unpack(uint64(src));
             else            
                 throw unsupported<T>();

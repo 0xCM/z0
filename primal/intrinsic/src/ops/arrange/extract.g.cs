@@ -25,23 +25,23 @@ namespace Z0
         {
             if(typeof(T) == typeof(byte))
                 return generic<T>(dinx.extract(in uint8(in src), index));
-            else if(typeof(T) == typeof(sbyte))
+            else if(typematch<T,sbyte>())
                 return generic<T>(int8(src[index]));
-            else if(typeof(T) == typeof(short))
+            else if(typematch<T,short>())
                 return generic<T>(int16(src[index]));
-            else if(typeof(T) == typeof(ushort))
+            else if(typematch<T,ushort>())
                 return generic<T>(dinx.extract(in uint16(in src), index));
-            else if(typeof(T) == typeof(int))
+            else if(typematch<T,int>())
                 return generic<T>(dinx.extract(in int32(in src), index));
-            else if(typeof(T) == typeof(uint))
+            else if(typematch<T,uint>())
                 return generic<T>(dinx.extract(in uint32(in src), index));
-            else if(typeof(T) == typeof(long))
+            else if(typematch<T,long>())
                 return generic<T>(dinx.extract(in int64(in src), index));
-            else if(typeof(T) == typeof(ulong))
+            else if(typematch<T,ulong>())
                 return generic<T>(dinx.extract(in uint64(in src), index));
-            else if(typeof(T) == typeof(float))
+            else if(typematch<T,float>())
                 return generic<T>(dinx.extract(in float32(in src), index));
-            else if(typeof(T) == typeof(double))
+            else if(typematch<T,double>())
                 return generic<T>(float64(src[index]));
             else 
                 throw unsupported<T>();
@@ -58,23 +58,23 @@ namespace Z0
         {
             if(typeof(T) == typeof(byte))
                 return generic<T>(dinx.extract128(in uint8(in src), index));
-            else if(typeof(T) == typeof(sbyte))
+            else if(typematch<T,sbyte>())
                 return generic<T>(dinx.extract128(in int8(in src), index));
-            else if(typeof(T) == typeof(short))
+            else if(typematch<T,short>())
                 return generic<T>(dinx.extract128(in int16(in src), index));
-            else if(typeof(T) == typeof(ushort))
+            else if(typematch<T,ushort>())
                 return generic<T>(dinx.extract128(in uint16(in src), index));
-            else if(typeof(T) == typeof(int))
+            else if(typematch<T,int>())
                 return generic<T>(dinx.extract128(in int32(in src), index));
-            else if(typeof(T) == typeof(uint))
+            else if(typematch<T,uint>())
                 return generic<T>(dinx.extract128(in uint32(in src), index));
-            else if(typeof(T) == typeof(long))
+            else if(typematch<T,long>())
                 return generic<T>(dinx.extract128(in int64(in src), index));
-            else if(typeof(T) == typeof(ulong))
+            else if(typematch<T,ulong>())
                 return generic<T>(dinx.extract128(in uint64(in src), index));
-            else if(typeof(T) == typeof(float))
+            else if(typematch<T,float>())
                 return generic<T>(dinx.extract128(in float32(in src), index));
-            else if(typeof(T) == typeof(double))
+            else if(typematch<T,double>())
                 return generic<T>(dinx.extract128(in float64(in src), index));
             else 
                 throw unsupported<T>();

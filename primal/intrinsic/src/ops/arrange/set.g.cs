@@ -26,25 +26,25 @@ namespace Z0
         public static Vec256<T> set<T>(in Vec128<T> lo, in Vec128<T> hi)
             where T : struct
         {
-            if(typeof(T) == typeof(sbyte))
+            if(typematch<T,sbyte>())
                 return generic<T>(Vec256.FromParts(in int8(in lo), in int8(in hi)));
-            else if(typeof(T) == typeof(byte))
+            else if(typematch<T,byte>())
                 return generic<T>(Vec256.FromParts(in uint8(in lo), in uint8(in hi)));
-            else if(typeof(T) == typeof(short))
+            else if(typematch<T,short>())
                 return generic<T>(Vec256.FromParts(in int16(in lo), in int16(in hi)));
-            else if(typeof(T) == typeof(ushort))
+            else if(typematch<T,ushort>())
                 return generic<T>(Vec256.FromParts(in uint16(in lo), in uint16(in hi)));
-            else if(typeof(T) == typeof(int))
+            else if(typematch<T,int>())
                 return generic<T>(Vec256.FromParts(in int32(in lo), in int32(in hi)));
-            else if(typeof(T) == typeof(uint))
+            else if(typematch<T,uint>())
                 return generic<T>(Vec256.FromParts(in uint32(in lo), in uint32(in hi)));
-            else if(typeof(T) == typeof(long))
+            else if(typematch<T,long>())
                 return generic<T>(Vec256.FromParts(in int64(in lo), in int64(in hi)));
-            else if(typeof(T) == typeof(ulong))
+            else if(typematch<T,ulong>())
                 return generic<T>(Vec256.FromParts(in uint64(in lo), in uint64(in hi)));
-            else if(typeof(T) == typeof(float))
+            else if(typematch<T,float>())
                 return generic<T>(Vec256.FromParts(in float32(in lo), in float32(in hi)));
-            else if(typeof(T) == typeof(double))
+            else if(typematch<T,double>())
                 return generic<T>(Vec256.FromParts(in float64(in lo), in float64(in hi)));
             else 
                 throw unsupported<T>();

@@ -24,13 +24,13 @@ namespace Z0
         public static int movemask<T>(in Vec128<T> src)
             where T : struct
         {
-            if(typeof(T) == typeof(sbyte))
+            if(typematch<T,sbyte>())
                 return dinx.movemask(in int8(in src));
-            else if(typeof(T) == typeof(byte))
+            else if(typematch<T,byte>())
                 return dinx.movemask(in uint8(in src));
-            else if(typeof(T) == typeof(float))
+            else if(typematch<T,float>())
                 return dinx.movemask(in float32(in src));
-            else if(typeof(T) == typeof(double))
+            else if(typematch<T,double>())
                 return dinx.movemask(in float64(in src));
             else 
                 throw unsupported<T>();
@@ -43,13 +43,13 @@ namespace Z0
         public static int movemask<T>(in Vec256<T> src)
             where T : struct
         {
-            if(typeof(T) == typeof(sbyte))
+            if(typematch<T,sbyte>())
                 return dinx.movemask(in int8(in src));
-            else if(typeof(T) == typeof(byte))
+            else if(typematch<T,byte>())
                 return dinx.movemask(in uint8(in src));
-            else if(typeof(T) == typeof(float))
+            else if(typematch<T,float>())
                 return dinx.movemask(in float32(in src));
-            else if(typeof(T) == typeof(double))
+            else if(typematch<T,double>())
                 return dinx.movemask(in float64(in src));
             else 
                 throw unsupported<T>();

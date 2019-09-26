@@ -21,21 +21,21 @@ namespace Z0
         public static Vec128<T> vxor<T>(in Vec128<T> lhs, in Vec128<T> rhs)
             where T : unmanaged
         {
-            if(typeof(T) == typeof(sbyte))
+            if(typematch<T,sbyte>())
                 return generic<T>(Bits.xor(in int8(in lhs), in int8(in rhs)));
-            else if(typeof(T) == typeof(byte))
+            else if(typematch<T,byte>())
                 return generic<T>(Bits.xor(in uint8(in lhs), in uint8(in rhs)));
-            else if(typeof(T) == typeof(short))
+            else if(typematch<T,short>())
                 return generic<T>(Bits.xor(in int16(in lhs), in int16(in rhs)));
-            else if(typeof(T) == typeof(ushort))
+            else if(typematch<T,ushort>())
                 return generic<T>(Bits.xor(in uint16(in lhs), in uint16(in rhs)));
-            else if(typeof(T) == typeof(int))
+            else if(typematch<T,int>())
                 return generic<T>(Bits.xor(in int32(in lhs), in int32(in rhs)));
-            else if(typeof(T) == typeof(uint))
+            else if(typematch<T,uint>())
                 return generic<T>(Bits.xor(in uint32(in lhs), in uint32(in rhs)));
-            else if(typeof(T) == typeof(long))
+            else if(typematch<T,long>())
                 return generic<T>(Bits.xor(in int64(in lhs), in int64(in rhs)));
-            else if(typeof(T) == typeof(ulong))
+            else if(typematch<T,ulong>())
                 return generic<T>(Bits.xor(in uint64(in lhs), in uint64(in rhs)));
             else 
                 throw unsupported<T>();
@@ -47,9 +47,9 @@ namespace Z0
         {
             if(typeof(T) == typeof(byte))
                 return generic<T>(Avx2.Xor(uint8(lhs), uint8(rhs)));
-            else if(typeof(T) == typeof(ushort))
+            else if(typematch<T,ushort>())
                 return generic<T>(Avx2.Xor(uint16(lhs), uint16(rhs)));
-            else if(typeof(T) == typeof(uint))
+            else if(typematch<T,uint>())
                 return generic<T>(Avx2.Xor(uint32(lhs), uint32(rhs)));
             else
                 return generic<T>(Avx2.Xor(uint64(lhs), uint64(rhs)));
@@ -60,11 +60,11 @@ namespace Z0
         static Vector256<T> vxor256i<T>(Vector256<T> lhs, Vector256<T> rhs)
             where T : unmanaged
         {
-            if(typeof(T) == typeof(sbyte))
+            if(typematch<T,sbyte>())
                 return generic<T>(Avx2.Xor(int8(lhs), int8(rhs)));
-            else if(typeof(T) == typeof(short))
+            else if(typematch<T,short>())
                 return generic<T>(Avx2.Xor(int16(lhs), int16(rhs)));
-            else if(typeof(T) == typeof(int))
+            else if(typematch<T,int>())
                 return generic<T>(Avx2.Xor(int32(lhs), int32(rhs)));
             else
                 return generic<T>(Avx2.Xor(int64(lhs), int64(rhs)));

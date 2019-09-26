@@ -24,25 +24,25 @@ namespace Z0
         public static bool testz<T>(Vector128<T> src,Vector128<T> mask)
             where T : struct
         {
-            if(typeof(T) == typeof(sbyte))
+            if(typematch<T,sbyte>())
                 return dinx.testz(int8(src), int8(mask));
-            else if(typeof(T) == typeof(byte))
+            else if(typematch<T,byte>())
                 return dinx.testz(uint8(src), uint8(mask));
-            else if(typeof(T) == typeof(short))
+            else if(typematch<T,short>())
                 return dinx.testz(int16(src), int16(mask));
-            else if(typeof(T) == typeof(ushort))
+            else if(typematch<T,ushort>())
                 return dinx.testz(uint16(src), uint16(mask));
-            else if(typeof(T) == typeof(int))
+            else if(typematch<T,int>())
                 return dinx.testz(int32(src), int32(mask));
-            else if(typeof(T) == typeof(uint))
+            else if(typematch<T,uint>())
                 return dinx.testz(uint32(src), uint32(mask));
-            else if(typeof(T) == typeof(long))
+            else if(typematch<T,long>())
                 return dinx.testz(int64(src), int64(mask));
-            else if(typeof(T) == typeof(ulong))
+            else if(typematch<T,ulong>())
                 return dinx.testz(uint64(src), uint64(mask));
-            else if(typeof(T) == typeof(float))
+            else if(typematch<T,float>())
                 return dfp.testz(float32(src), float32(mask));
-            else if(typeof(T) == typeof(double))
+            else if(typematch<T,double>())
                 return dfp.testz(float64(src), float64(mask));
             else 
                 throw unsupported<T>();
@@ -57,25 +57,25 @@ namespace Z0
         public static bool testz<T>(Vector256<T> lhs, Vector256<T> rhs)
             where T : struct
         {
-            if(typeof(T) == typeof(sbyte))
+            if(typematch<T,sbyte>())
                 return dinx.testz(int8(lhs), int8(rhs));
-            else if(typeof(T) == typeof(byte))
+            else if(typematch<T,byte>())
                 return dinx.testz(uint8(lhs), uint8(rhs));
-            else if(typeof(T) == typeof(short))
+            else if(typematch<T,short>())
                 return dinx.testz(int16(lhs), int16(rhs));
-            else if(typeof(T) == typeof(ushort))
+            else if(typematch<T,ushort>())
                 return dinx.testz(uint16(lhs), uint16(rhs));
-            else if(typeof(T) == typeof(int))
+            else if(typematch<T,int>())
                 return dinx.testz(int32(lhs), int32(rhs));
-            else if(typeof(T) == typeof(uint))
+            else if(typematch<T,uint>())
                 return dinx.testz(uint32(lhs), uint32(rhs));
-            else if(typeof(T) == typeof(long))
+            else if(typematch<T,long>())
                 return dinx.testz(int64(lhs), int64(rhs));
-            else if(typeof(T) == typeof(ulong))
+            else if(typematch<T,ulong>())
                 return dinx.testz(uint64(lhs), uint64(rhs));
-            else if(typeof(T) == typeof(float))
+            else if(typematch<T,float>())
                 return dfp.testz(float32(lhs), float32(rhs));
-            else if(typeof(T) == typeof(double))
+            else if(typematch<T,double>())
                 return dfp.testz(float64(lhs), float64(rhs));
             else 
                 throw unsupported<T>();

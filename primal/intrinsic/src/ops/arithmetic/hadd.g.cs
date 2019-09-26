@@ -22,7 +22,7 @@ namespace Z0
         {
             if(typeof(T) == typeof(short))
                 return generic<T>(dinx.hadd(int16(lhs), int16(rhs)));
-            else if(typeof(T) == typeof(int))
+            else if(typematch<T,int>())
                 return generic<T>(dinx.hadd(int32(lhs), int32(rhs)));
             else 
                 throw unsupported<T>();
@@ -34,7 +34,7 @@ namespace Z0
         {
             if(typeof(T) == typeof(short))
                 return generic<T>(dinx.hadd(int16(lhs), int16(rhs)));
-            else if(typeof(T) == typeof(int))
+            else if(typematch<T,int>())
                 return generic<T>(dinx.hadd(int32(lhs), int32(rhs)));
             else 
                 throw unsupported<T>();

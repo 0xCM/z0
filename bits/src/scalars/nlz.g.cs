@@ -24,11 +24,11 @@ namespace Z0
         {
             if(typeof(T) == typeof(byte))
                  return Bits.nlz(AsIn.uint8(in asRef(in src)));
-            else if(typeof(T) == typeof(ushort))
+            else if(typematch<T,ushort>())
                  return Bits.nlz(AsIn.uint16(in asRef(in src)));
-            else if(typeof(T) == typeof(uint))
+            else if(typematch<T,uint>())
                  return Bits.nlz(AsIn.uint32(in asRef(in src)));
-            else if(typeof(T) == typeof(ulong))
+            else if(typematch<T,ulong>())
                  return Bits.nlz(AsIn.uint64(in asRef(in src)));
             else 
                 throw unsupported<T>();

@@ -24,21 +24,21 @@ namespace Z0
         public static BitVector8 bv8<T>(T src)
             where T : unmanaged
         {
-            if(typeof(T) == typeof(sbyte))
+            if(typematch<T,sbyte>())
                     return (byte)int8(ref src);
-            else if(typeof(T) == typeof(byte))
+            else if(typematch<T,byte>())
                     return (byte)uint8(ref src);
-            else if(typeof(T) == typeof(short))
+            else if(typematch<T,short>())
                     return (byte)int16(ref src);
-            else if(typeof(T) == typeof(ushort))
+            else if(typematch<T,ushort>())
                     return (byte)uint16(ref src);
-            else if(typeof(T) == typeof(int))
+            else if(typematch<T,int>())
                     return (byte)int32(ref src);
-            else if(typeof(T) == typeof(uint))
+            else if(typematch<T,uint>())
                     return (byte)uint32(ref src);
-            else if(typeof(T) == typeof(long))
+            else if(typematch<T,long>())
                     return (byte)int64(ref src);
-            else if(typeof(T) == typeof(ulong))
+            else if(typematch<T,ulong>())
                     return (byte)uint64(ref src);
             else
                 throw unsupported<T>();
@@ -53,21 +53,21 @@ namespace Z0
         public static BitVector16 bv16<T>(T src)
             where T : unmanaged
         {
-            if(typeof(T) == typeof(sbyte))
+            if(typematch<T,sbyte>())
                     return (ushort)int8(ref src);
-            else if(typeof(T) == typeof(byte))
+            else if(typematch<T,byte>())
                     return (ushort)uint8(ref src);
-            else if(typeof(T) == typeof(short))
+            else if(typematch<T,short>())
                     return (ushort)int16(ref src);
-            else if(typeof(T) == typeof(ushort))
+            else if(typematch<T,ushort>())
                     return (ushort)uint16(ref src);
-            else if(typeof(T) == typeof(int))
+            else if(typematch<T,int>())
                     return (ushort)int32(ref src);
-            else if(typeof(T) == typeof(uint))
+            else if(typematch<T,uint>())
                     return (ushort)uint32(ref src);
-            else if(typeof(T) == typeof(long))
+            else if(typematch<T,long>())
                     return (ushort)int64(ref src);
-            else if(typeof(T) == typeof(ulong))
+            else if(typematch<T,ulong>())
                     return (ushort)uint64(ref src);
             else
                 throw unsupported<T>();
@@ -82,21 +82,21 @@ namespace Z0
         public static BitVector32 bv32<T>(T src)
             where T : unmanaged
         {
-            if(typeof(T) == typeof(sbyte))
+            if(typematch<T,sbyte>())
                     return (uint)int8(ref src);
-            else if(typeof(T) == typeof(byte))
+            else if(typematch<T,byte>())
                     return (uint)uint8(ref src);
-            else if(typeof(T) == typeof(short))
+            else if(typematch<T,short>())
                     return (uint)int16(ref src);
-            else if(typeof(T) == typeof(ushort))
+            else if(typematch<T,ushort>())
                     return (uint)uint16(ref src);
-            else if(typeof(T) == typeof(int))
+            else if(typematch<T,int>())
                     return (uint)int32(ref src);
-            else if(typeof(T) == typeof(uint))
+            else if(typematch<T,uint>())
                     return (uint)uint32(ref src);
-            else if(typeof(T) == typeof(long))
+            else if(typematch<T,long>())
                     return (uint)int64(ref src);
-            else if(typeof(T) == typeof(ulong))
+            else if(typematch<T,ulong>())
                     return (uint)uint64(ref src);
             else
                 throw unsupported<T>();
@@ -111,21 +111,21 @@ namespace Z0
         public static BitVector64 bv64<T>(T src)
             where T : unmanaged
         {
-            if(typeof(T) == typeof(sbyte))
+            if(typematch<T,sbyte>())
                 return (ulong)int8(ref src);
-            else if(typeof(T) == typeof(byte))
+            else if(typematch<T,byte>())
                 return (ulong)uint8(ref src);
-            else if(typeof(T) == typeof(short))
+            else if(typematch<T,short>())
                 return (ulong)int16(ref src);
-            else if(typeof(T) == typeof(uint))
+            else if(typematch<T,uint>())
                 return (ulong)uint16(ref src);
-            else if(typeof(T) == typeof(int))
+            else if(typematch<T,int>())
                 return (ulong)int32(ref src);
-            else if(typeof(T) == typeof(uint))
+            else if(typematch<T,uint>())
                 return (ulong)uint32(ref src);
-            else if(typeof(T) == typeof(long))
+            else if(typematch<T,long>())
                 return (ulong)int64(ref src);
-            else if(typeof(T) == typeof(ulong))
+            else if(typematch<T,ulong>())
                 return (ulong)uint64(ref src);
             else
                 throw unsupported<T>();

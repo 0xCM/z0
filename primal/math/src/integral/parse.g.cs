@@ -19,25 +19,25 @@ namespace Z0
         public static T parse<T>(string src)
             where T : struct
         {
-            if(typeof(T) == typeof(sbyte))
+            if(typematch<T,sbyte>())
                 return generic<T>(math.parse(src, out sbyte x));
-            else if(typeof(T) == typeof(byte))
+            else if(typematch<T,byte>())
                 return generic<T>(math.parse(src, out byte x));
-            else if(typeof(T) == typeof(short))
+            else if(typematch<T,short>())
                 return generic<T>(math.parse(src, out short x));
-            else if(typeof(T) == typeof(ushort))
+            else if(typematch<T,ushort>())
                 return generic<T>(math.parse(src, out ushort x));
-            else if(typeof(T) == typeof(int))
+            else if(typematch<T,int>())
                 return generic<T>(math.parse(src, out int x));
-            else if(typeof(T) == typeof(uint))
+            else if(typematch<T,uint>())
                 return generic<T>(math.parse(src, out uint x));
-            else if(typeof(T) == typeof(long))
+            else if(typematch<T,long>())
                 return generic<T>(math.parse(src, out long x));
-            else if(typeof(T) == typeof(ulong))
+            else if(typematch<T,ulong>())
                 return generic<T>(math.parse(src, out ulong x));
-            else if(typeof(T) == typeof(float))
+            else if(typematch<T,float>())
                 return generic<T>(math.parse(src, out float x));
-            else if(typeof(T) == typeof(double))
+            else if(typematch<T,double>())
                 return generic<T>(math.parse(src, out double x));
             else            
                 throw unsupported<T>();
@@ -47,25 +47,25 @@ namespace Z0
         public static ref T parse<T>(string src, out T dst)
             where T : struct
         {
-            if(typeof(T) == typeof(sbyte))
+            if(typematch<T,sbyte>())
                 dst = generic<T>(math.parse(src, out sbyte x));
-            else if(typeof(T) == typeof(byte))
+            else if(typematch<T,byte>())
                 dst = generic<T>(math.parse(src, out byte x));
-            else if(typeof(T) == typeof(short))
+            else if(typematch<T,short>())
                 dst = generic<T>(math.parse(src, out short x));
-            else if(typeof(T) == typeof(ushort))
+            else if(typematch<T,ushort>())
                 dst = generic<T>(math.parse(src, out ushort x));
-            else if(typeof(T) == typeof(int))
+            else if(typematch<T,int>())
                 dst = generic<T>(math.parse(src, out int x));
-            else if(typeof(T) == typeof(uint))
+            else if(typematch<T,uint>())
                 dst = generic<T>(math.parse(src, out uint x));
-            else if(typeof(T) == typeof(long))
+            else if(typematch<T,long>())
                 dst = generic<T>(math.parse(src, out long x));
-            else if(typeof(T) == typeof(ulong))
+            else if(typematch<T,ulong>())
                 dst = generic<T>(math.parse(src, out ulong x));
-            else if(typeof(T) == typeof(float))
+            else if(typematch<T,float>())
                 dst = generic<T>(math.parse(src, out float x));
-            else if(typeof(T) == typeof(double))
+            else if(typematch<T,double>())
                 dst = generic<T>(math.parse(src, out double x));
             else            
                 throw unsupported<T>();

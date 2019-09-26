@@ -24,25 +24,25 @@ namespace Z0
         public static Scalar128<T> define<T>(T value)
             where T : struct        
         {
-            if(typeof(T) == typeof(sbyte))
+            if(typematch<T,sbyte>())
                 return  scalar<T>(int8(value));
-            else if(typeof(T) == typeof(byte))
+            else if(typematch<T,byte>())
                 return  scalar<T>(uint8(value));
-            else if(typeof(T) == typeof(short))
+            else if(typematch<T,short>())
                 return  scalar<T>(int16(value));
-            else if(typeof(T) == typeof(ushort))
+            else if(typematch<T,ushort>())
                 return  scalar<T>(uint16(value));
-            else if(typeof(T) == typeof(int))
+            else if(typematch<T,int>())
                 return  scalar<T>(int32(value));
-            else if(typeof(T) == typeof(uint))
+            else if(typematch<T,uint>())
                 return  scalar<T>(uint32(value));
-            else if(typeof(T) == typeof(long))
+            else if(typematch<T,long>())
                 return  scalar<T>(int64(value));
-            else if(typeof(T) == typeof(ulong))
+            else if(typematch<T,ulong>())
                 return  scalar<T>(uint64(value));
-            else if(typeof(T) == typeof(float))
+            else if(typematch<T,float>())
                 return  scalar<T>(float32(value));
-            else if(typeof(T) == typeof(double))
+            else if(typematch<T,double>())
                 return  scalar<T>(float64(value));
             else
                 throw unsupported<T>();

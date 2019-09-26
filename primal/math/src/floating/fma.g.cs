@@ -27,9 +27,9 @@ namespace Z0
         public static T fma<T>(T x, T y, T z)
             where T : struct
         {            
-            if(typeof(T) == typeof(float))
+            if(typematch<T,float>())
                 return generic<T>(fmath.fma(float32(x), float32(y), float32(z)));
-            else if(typeof(T) == typeof(double))
+            else if(typematch<T,double>())
                 return generic<T>(fmath.fma(float64(x), float64(y), float64(z)));
             else            
                 throw unsupported<T>();
@@ -46,9 +46,9 @@ namespace Z0
         public static ref T fma<T>(ref T x, in T y, in T z)
             where T : struct
         {
-            if(typeof(T) == typeof(float))
+            if(typematch<T,float>())
                 fmath.fma(ref float32(ref x), in float32(in y), in float32(in z));
-            else if(typeof(T) == typeof(double))
+            else if(typematch<T,double>())
                 fmath.fma(ref float64(ref x), in float64(in y), in float64(in z));
             else            
                 throw unsupported<T>();

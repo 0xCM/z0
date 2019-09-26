@@ -20,17 +20,17 @@ namespace Z0
         public static Vector128<T> min<T>(Vector128<T> lhs, Vector128<T> rhs)
             where T : struct
         {
-            if(typeof(T) == typeof(sbyte))
+            if(typematch<T,sbyte>())
                 return generic<T>(dinx.min(int8(lhs), int8(rhs)));
-            else if(typeof(T) == typeof(byte))
+            else if(typematch<T,byte>())
                 return generic<T>(dinx.min(uint8(lhs), uint8(rhs)));
-            else if(typeof(T) == typeof(short))
+            else if(typematch<T,short>())
                 return generic<T>(dinx.min(int16(lhs), int16(rhs)));
-            else if(typeof(T) == typeof(ushort))
+            else if(typematch<T,ushort>())
                 return generic<T>(dinx.min(uint16(lhs), uint16(rhs)));
-            else if(typeof(T) == typeof(int))
+            else if(typematch<T,int>())
                 return generic<T>(dinx.min(int32(lhs), int32(rhs)));
-            else if(typeof(T) == typeof(uint))
+            else if(typematch<T,uint>())
                 return generic<T>(dinx.min(uint32(lhs), uint32(rhs)));
             else 
                 throw unsupported<T>();
@@ -41,17 +41,17 @@ namespace Z0
        public static Vector256<T> min<T>(Vector256<T> lhs, Vector256<T> rhs)
             where T : struct
         {
-            if(typeof(T) == typeof(sbyte))
+            if(typematch<T,sbyte>())
                 return generic<T>(dinx.min(int8(lhs), int8(rhs)));
-            else if(typeof(T) == typeof(byte))
+            else if(typematch<T,byte>())
                 return generic<T>(dinx.min(uint8(lhs), uint8(rhs)));
-            else if(typeof(T) == typeof(short))
+            else if(typematch<T,short>())
                 return generic<T>(dinx.min(int16(lhs), int16(rhs)));
-            else if(typeof(T) == typeof(ushort))
+            else if(typematch<T,ushort>())
                 return generic<T>(dinx.min(uint16(lhs), uint16(rhs)));
-            else if(typeof(T) == typeof(int))
+            else if(typematch<T,int>())
                 return generic<T>(dinx.min(int32(lhs), int32(rhs)));
-            else if(typeof(T) == typeof(uint))
+            else if(typematch<T,uint>())
                 return generic<T>(dinx.min(uint32(lhs), uint32(rhs)));
             else 
                 throw unsupported<T>();

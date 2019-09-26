@@ -16,21 +16,21 @@ namespace Z0
         public static Span<T> ShiftR<T>(ReadOnlySpan<T> src, ReadOnlySpan<int> offsets, Span<T> dst)
             where T : struct
         {
-            if(typeof(T) == typeof(sbyte))
+            if(typematch<T,sbyte>())
                 int8(src).ShiftR(offsets, int8(dst));
-            else if(typeof(T) == typeof(byte))
+            else if(typematch<T,byte>())
                 uint8(src).ShiftR(offsets, uint8(dst));
-            else if(typeof(T) == typeof(short))
+            else if(typematch<T,short>())
                 int16(src).ShiftR(offsets, int16(dst));
-            else if(typeof(T) == typeof(ushort))
+            else if(typematch<T,ushort>())
                 uint16(src).ShiftR(offsets, uint16(dst));
-            else if(typeof(T) == typeof(int))
+            else if(typematch<T,int>())
                 int32(src).ShiftR(offsets, int32(dst));
-            else if(typeof(T) == typeof(uint))
+            else if(typematch<T,uint>())
                 uint32(src).ShiftR(offsets, uint32(dst));
-            else if(typeof(T) == typeof(long))
+            else if(typematch<T,long>())
                 int64(src).ShiftR(offsets, int64(dst));
-            else if(typeof(T) == typeof(ulong))
+            else if(typematch<T,ulong>())
                 uint64(src).ShiftR(offsets, uint64(dst));
             else
                 throw unsupported<T>();
@@ -41,21 +41,21 @@ namespace Z0
         public static Span<T> ShiftR<T>(ReadOnlySpan<T> src, int offset, Span<T> dst)
             where T : struct
         {
-            if(typeof(T) == typeof(sbyte))
+            if(typematch<T,sbyte>())
                 int8(src).ShiftR(offset, int8(dst));
-            else if(typeof(T) == typeof(byte))
+            else if(typematch<T,byte>())
                 uint8(src).ShiftR(offset, uint8(dst));
-            else if(typeof(T) == typeof(short))
+            else if(typematch<T,short>())
                 int16(src).ShiftR(offset, int16(dst));
-            else if(typeof(T) == typeof(ushort))
+            else if(typematch<T,ushort>())
                 uint16(src).ShiftR(offset, uint16(dst));
-            else if(typeof(T) == typeof(int))
+            else if(typematch<T,int>())
                 int32(src).ShiftR(offset, int32(dst));
-            else if(typeof(T) == typeof(uint))
+            else if(typematch<T,uint>())
                 uint32(src).ShiftR(offset, uint32(dst));
-            else if(typeof(T) == typeof(long))
+            else if(typematch<T,long>())
                 int64(src).ShiftR(offset, int64(dst));
-            else if(typeof(T) == typeof(ulong))
+            else if(typematch<T,ulong>())
                 uint64(src).ShiftR(offset, uint64(dst));
             else
                 throw unsupported<T>();
@@ -70,21 +70,21 @@ namespace Z0
         public static Span<T> ShiftR<T>(Span<T> src, int offset)
             where T : struct
         {
-            if(typeof(T) == typeof(sbyte))
+            if(typematch<T,sbyte>())
                 int8(src).ShiftR(offset);
-            else if(typeof(T) == typeof(byte))
+            else if(typematch<T,byte>())
                 uint8(src).ShiftR(offset);
-            else if(typeof(T) == typeof(short))
+            else if(typematch<T,short>())
                 int16(src).ShiftR(offset);
-            else if(typeof(T) == typeof(ushort))
+            else if(typematch<T,ushort>())
                 uint16(src).ShiftR(offset);
-            else if(typeof(T) == typeof(int))
+            else if(typematch<T,int>())
                 int32(src).ShiftR(offset);
-            else if(typeof(T) == typeof(uint))
+            else if(typematch<T,uint>())
                 uint32(src).ShiftR(offset);
-            else if(typeof(T) == typeof(long))
+            else if(typematch<T,long>())
                 int64(src).ShiftR(offset);
-            else if(typeof(T) == typeof(ulong))
+            else if(typematch<T,ulong>())
                 uint64(src).ShiftR(offset);
             else
                 throw unsupported<T>();
@@ -95,21 +95,21 @@ namespace Z0
         public static ref Span<T> shiftr<T>(ref Span<T> src, Span<int> offsets)
             where T : struct
         {
-            if(typeof(T) == typeof(sbyte))
+            if(typematch<T,sbyte>())
                 int8(src).ShiftR(offsets);
-            else if(typeof(T) == typeof(byte))
+            else if(typematch<T,byte>())
                 uint8(src).ShiftR(offsets);
-            else if(typeof(T) == typeof(short))
+            else if(typematch<T,short>())
                 int16(src).ShiftR(offsets);
-            else if(typeof(T) == typeof(ushort))
+            else if(typematch<T,ushort>())
                 uint16(src).ShiftR(offsets);
-            else if(typeof(T) == typeof(int))
+            else if(typematch<T,int>())
                 int32(src).ShiftR(offsets);
-            else if(typeof(T) == typeof(uint))
+            else if(typematch<T,uint>())
                 uint32(src).ShiftR(offsets);
-            else if(typeof(T) == typeof(long))
+            else if(typematch<T,long>())
                 int64(src).ShiftR(offsets);
-            else if(typeof(T) == typeof(ulong))
+            else if(typematch<T,ulong>())
                 uint64(src).ShiftR(offsets);
             else
                 throw unsupported<T>();

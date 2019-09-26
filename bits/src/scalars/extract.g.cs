@@ -44,11 +44,11 @@ namespace Z0
         static T extracti<T>(T lhs, byte start, byte length)
             where T : struct
         {
-            if(typeof(T) == typeof(sbyte))
+            if(typematch<T,sbyte>())
                 return generic<T>(Bits.extract(int8(lhs), start, length));
-            else if(typeof(T) == typeof(short))
+            else if(typematch<T,short>())
                 return generic<T>(Bits.extract(int16(lhs), start, length));
-            else if(typeof(T) == typeof(int))
+            else if(typematch<T,int>())
                 return generic<T>(Bits.extract(int32(lhs), start, length));
             else 
                 return generic<T>(Bits.extract(int64(lhs), start, length));
@@ -60,9 +60,9 @@ namespace Z0
         {
             if(typeof(T) == typeof(byte))
                 return generic<T>(Bits.extract(uint8(lhs), start, length));
-            else if(typeof(T) == typeof(ushort))
+            else if(typematch<T,ushort>())
                 return generic<T>(Bits.extract(uint16(lhs), start, length));
-            else if(typeof(T) == typeof(uint))
+            else if(typematch<T,uint>())
                 return generic<T>(Bits.extract(uint32(lhs), start, length));
             else 
                 return generic<T>(Bits.extract(uint64(lhs), start, length));

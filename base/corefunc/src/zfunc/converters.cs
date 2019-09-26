@@ -69,25 +69,25 @@ namespace Z0
         public static T convert<T>(sbyte src, out T dst)
             where T : struct
         {
-            if(typeof(T) == typeof(sbyte))
+            if(typematch<T,sbyte>())
                   dst = generic<T>(convert(src, out sbyte x));
-            else if(typeof(T) == typeof(byte))
+            else if(typematch<T,byte>())
                   dst = generic<T>(convert(src, out byte x));
-            else if(typeof(T) == typeof(short))
+            else if(typematch<T,short>())
                   dst = generic<T>(convert(src, out short x));
-            else if(typeof(T) == typeof(ushort))
+            else if(typematch<T,ushort>())
                   dst = generic<T>(convert(src, out ushort x));
-            else if(typeof(T) == typeof(int))
+            else if(typematch<T,int>())
                   dst = generic<T>(convert(src, out int x));
-            else if(typeof(T) == typeof(uint))
+            else if(typematch<T,uint>())
                   dst = generic<T>(convert(src, out uint x));
-            else if(typeof(T) == typeof(long))
+            else if(typematch<T,long>())
                   dst = generic<T>(convert(src, out long x));
-            else if(typeof(T) == typeof(ulong))
+            else if(typematch<T,ulong>())
                   dst = generic<T>(convert(src, out ulong x));
-            else if(typeof(T) == typeof(float))
+            else if(typematch<T,float>())
                   dst = generic<T>(convert(src, out float x));
-            else if(typeof(T) == typeof(double))
+            else if(typematch<T,double>())
                   dst = generic<T>(convert(src, out double x));
             else if(typeof(T) == typeof(char))
                   dst = generic<T>(convert(src, out char x));
@@ -101,25 +101,25 @@ namespace Z0
         public static T convert<T>(byte src, out T dst)
             where T : struct
         {
-            if(typeof(T) == typeof(sbyte))
+            if(typematch<T,sbyte>())
                   dst = generic<T>(convert(src, out sbyte x));
-            else if(typeof(T) == typeof(byte))
+            else if(typematch<T,byte>())
                   dst = generic<T>(convert(src, out byte x));
-            else if(typeof(T) == typeof(short))
+            else if(typematch<T,short>())
                   dst = generic<T>(convert(src, out short x));
-            else if(typeof(T) == typeof(ushort))
+            else if(typematch<T,ushort>())
                   dst = generic<T>(convert(src, out ushort x));
-            else if(typeof(T) == typeof(int))
+            else if(typematch<T,int>())
                   dst = generic<T>(convert(src, out int x));
-            else if(typeof(T) == typeof(uint))
+            else if(typematch<T,uint>())
                   dst = generic<T>(convert(src, out uint x));
-            else if(typeof(T) == typeof(long))
+            else if(typematch<T,long>())
                   dst = generic<T>(convert(src, out long x));
-            else if(typeof(T) == typeof(ulong))
+            else if(typematch<T,ulong>())
                   dst = generic<T>(convert(src, out ulong x));
-            else if(typeof(T) == typeof(float))
+            else if(typematch<T,float>())
                   dst = generic<T>(convert(src, out float x));
-            else if(typeof(T) == typeof(double))
+            else if(typematch<T,double>())
                   dst = generic<T>(convert(src, out double x));
             else if(typeof(T) == typeof(char))
                   dst = generic<T>(convert(src, out char x));
@@ -133,25 +133,25 @@ namespace Z0
         public static T convert<T>(short src, out T dst)
             where T : struct
         {
-            if(typeof(T) == typeof(sbyte))
+            if(typematch<T,sbyte>())
                   dst = generic<T>(convert(src, out sbyte x));
-            else if(typeof(T) == typeof(byte))
+            else if(typematch<T,byte>())
                   dst = generic<T>(convert(src, out byte x));
-            else if(typeof(T) == typeof(short))
+            else if(typematch<T,short>())
                   dst = generic<T>(convert(src, out short x));
-            else if(typeof(T) == typeof(ushort))
+            else if(typematch<T,ushort>())
                   dst = generic<T>(convert(src, out ushort x));
-            else if(typeof(T) == typeof(int))
+            else if(typematch<T,int>())
                   dst = generic<T>(convert(src, out int x));
-            else if(typeof(T) == typeof(uint))
+            else if(typematch<T,uint>())
                   dst = generic<T>(convert(src, out uint x));
-            else if(typeof(T) == typeof(long))
+            else if(typematch<T,long>())
                   dst = generic<T>(convert(src, out long x));
-            else if(typeof(T) == typeof(ulong))
+            else if(typematch<T,ulong>())
                   dst = generic<T>(convert(src, out ulong x));
-            else if(typeof(T) == typeof(float))
+            else if(typematch<T,float>())
                   dst = generic<T>(convert(src, out float x));
-            else if(typeof(T) == typeof(double))
+            else if(typematch<T,double>())
                   dst = generic<T>(convert(src, out double x));
             else if(typeof(T) == typeof(char))
                   dst = generic<T>(convert(src, out char x));
@@ -165,25 +165,25 @@ namespace Z0
         public static T convert<T>(ushort src, out T dst)
             where T : struct
         {
-            if(typeof(T) == typeof(sbyte))
+            if(typematch<T,sbyte>())
                   dst = generic<T>(convert(src, out sbyte x));
-            else if(typeof(T) == typeof(byte))
+            else if(typematch<T,byte>())
                   dst = generic<T>(convert(src, out byte x));
-            else if(typeof(T) == typeof(short))
+            else if(typematch<T,short>())
                   dst = generic<T>(convert(src, out short x));
-            else if(typeof(T) == typeof(ushort))
+            else if(typematch<T,ushort>())
                   dst = generic<T>(convert(src, out ushort x));
-            else if(typeof(T) == typeof(int))
+            else if(typematch<T,int>())
                   dst = generic<T>(convert(src, out int x));
-            else if(typeof(T) == typeof(uint))
+            else if(typematch<T,uint>())
                   dst = generic<T>(convert(src, out uint x));
-            else if(typeof(T) == typeof(long))
+            else if(typematch<T,long>())
                   dst = generic<T>(convert(src, out long x));
-            else if(typeof(T) == typeof(ulong))
+            else if(typematch<T,ulong>())
                   dst = generic<T>(convert(src, out ulong x));
-            else if(typeof(T) == typeof(float))
+            else if(typematch<T,float>())
                   dst = generic<T>(convert(src, out float x));
-            else if(typeof(T) == typeof(double))
+            else if(typematch<T,double>())
                   dst = generic<T>(convert(src, out double x));
             else if(typeof(T) == typeof(char))
                   dst = generic<T>(convert(src, out char x));
@@ -197,25 +197,25 @@ namespace Z0
         public static T convert<T>(int src, out T dst)
             where T : struct
         {
-            if(typeof(T) == typeof(sbyte))
+            if(typematch<T,sbyte>())
                   dst = generic<T>(convert(src, out sbyte x));
-            else if(typeof(T) == typeof(byte))
+            else if(typematch<T,byte>())
                   dst = generic<T>(convert(src, out byte x));
-            else if(typeof(T) == typeof(short))
+            else if(typematch<T,short>())
                   dst = generic<T>(convert(src, out short x));
-            else if(typeof(T) == typeof(ushort))
+            else if(typematch<T,ushort>())
                   dst = generic<T>(convert(src, out ushort x));
-            else if(typeof(T) == typeof(int))
+            else if(typematch<T,int>())
                   dst = generic<T>(convert(src, out int x));
-            else if(typeof(T) == typeof(uint))
+            else if(typematch<T,uint>())
                   dst = generic<T>(convert(src, out uint x));
-            else if(typeof(T) == typeof(long))
+            else if(typematch<T,long>())
                   dst = generic<T>(convert(src, out long x));
-            else if(typeof(T) == typeof(ulong))
+            else if(typematch<T,ulong>())
                   dst = generic<T>(convert(src, out ulong x));
-            else if(typeof(T) == typeof(float))
+            else if(typematch<T,float>())
                   dst = generic<T>(convert(src, out float x));
-            else if(typeof(T) == typeof(double))
+            else if(typematch<T,double>())
                   dst = generic<T>(convert(src, out double x));
             else if(typeof(T) == typeof(char))
                   dst = generic<T>(convert(src, out char x));
@@ -229,25 +229,25 @@ namespace Z0
         public static T convert<T>(uint src, out T dst)
             where T : struct
         {
-            if(typeof(T) == typeof(sbyte))
+            if(typematch<T,sbyte>())
                   dst = generic<T>(convert(src, out sbyte x));
-            else if(typeof(T) == typeof(byte))
+            else if(typematch<T,byte>())
                   dst = generic<T>(convert(src, out byte x));
-            else if(typeof(T) == typeof(short))
+            else if(typematch<T,short>())
                   dst = generic<T>(convert(src, out short x));
-            else if(typeof(T) == typeof(ushort))
+            else if(typematch<T,ushort>())
                   dst = generic<T>(convert(src, out ushort x));
-            else if(typeof(T) == typeof(int))
+            else if(typematch<T,int>())
                   dst = generic<T>(convert(src, out int x));
-            else if(typeof(T) == typeof(uint))
+            else if(typematch<T,uint>())
                   dst = generic<T>(convert(src, out uint x));
-            else if(typeof(T) == typeof(long))
+            else if(typematch<T,long>())
                   dst = generic<T>(convert(src, out long x));
-            else if(typeof(T) == typeof(ulong))
+            else if(typematch<T,ulong>())
                   dst = generic<T>(convert(src, out ulong x));
-            else if(typeof(T) == typeof(float))
+            else if(typematch<T,float>())
                   dst = generic<T>(convert(src, out float x));
-            else if(typeof(T) == typeof(double))
+            else if(typematch<T,double>())
                   dst = generic<T>(convert(src, out double x));
             else if(typeof(T) == typeof(char))
                   dst = generic<T>(convert(src, out char x));
@@ -262,25 +262,25 @@ namespace Z0
         public static T convert<T>(long src, out T dst)
             where T : struct
         {
-            if(typeof(T) == typeof(sbyte))
+            if(typematch<T,sbyte>())
                   dst = generic<T>(convert(src, out sbyte x));
-            else if(typeof(T) == typeof(byte))
+            else if(typematch<T,byte>())
                   dst = generic<T>(convert(src, out byte x));
-            else if(typeof(T) == typeof(short))
+            else if(typematch<T,short>())
                   dst = generic<T>(convert(src, out short x));
-            else if(typeof(T) == typeof(ushort))
+            else if(typematch<T,ushort>())
                   dst = generic<T>(convert(src, out ushort x));
-            else if(typeof(T) == typeof(int))
+            else if(typematch<T,int>())
                   dst = generic<T>(convert(src, out int x));
-            else if(typeof(T) == typeof(uint))
+            else if(typematch<T,uint>())
                   dst = generic<T>(convert(src, out uint x));
-            else if(typeof(T) == typeof(long))
+            else if(typematch<T,long>())
                   dst = generic<T>(convert(src, out long x));
-            else if(typeof(T) == typeof(ulong))
+            else if(typematch<T,ulong>())
                   dst = generic<T>(convert(src, out ulong x));
-            else if(typeof(T) == typeof(float))
+            else if(typematch<T,float>())
                   dst = generic<T>(convert(src, out float x));
-            else if(typeof(T) == typeof(double))
+            else if(typematch<T,double>())
                   dst = generic<T>(convert(src, out double x));
             else if(typeof(T) == typeof(char))
                   dst = generic<T>(convert(src, out char x));
@@ -295,25 +295,25 @@ namespace Z0
         public static T convert<T>(ulong src, out T dst)
             where T : struct
         {
-            if(typeof(T) == typeof(sbyte))
+            if(typematch<T,sbyte>())
                   dst = generic<T>(convert(src, out sbyte x));
-            else if(typeof(T) == typeof(byte))
+            else if(typematch<T,byte>())
                   dst = generic<T>(convert(src, out byte x));
-            else if(typeof(T) == typeof(short))
+            else if(typematch<T,short>())
                   dst = generic<T>(convert(src, out short x));
-            else if(typeof(T) == typeof(ushort))
+            else if(typematch<T,ushort>())
                   dst = generic<T>(convert(src, out ushort x));
-            else if(typeof(T) == typeof(int))
+            else if(typematch<T,int>())
                   dst = generic<T>(convert(src, out int x));
-            else if(typeof(T) == typeof(uint))
+            else if(typematch<T,uint>())
                   dst = generic<T>(convert(src, out uint x));
-            else if(typeof(T) == typeof(long))
+            else if(typematch<T,long>())
                   dst = generic<T>(convert(src, out long x));
-            else if(typeof(T) == typeof(ulong))
+            else if(typematch<T,ulong>())
                   dst = generic<T>(convert(src, out ulong x));
-            else if(typeof(T) == typeof(float))
+            else if(typematch<T,float>())
                   dst = generic<T>(convert(src, out float x));
-            else if(typeof(T) == typeof(double))
+            else if(typematch<T,double>())
                   dst = generic<T>(convert(src, out double x));
             else if(typeof(T) == typeof(char))
                   dst = generic<T>(convert(src, out char x));
@@ -327,25 +327,25 @@ namespace Z0
         public static T convert<T>(float src, out T dst)
             where T : struct
         {
-            if(typeof(T) == typeof(sbyte))
+            if(typematch<T,sbyte>())
                   dst = generic<T>(convert(src, out sbyte x));
-            else if(typeof(T) == typeof(byte))
+            else if(typematch<T,byte>())
                   dst = generic<T>(convert(src, out byte x));
-            else if(typeof(T) == typeof(short))
+            else if(typematch<T,short>())
                   dst = generic<T>(convert(src, out short x));
-            else if(typeof(T) == typeof(ushort))
+            else if(typematch<T,ushort>())
                   dst = generic<T>(convert(src, out ushort x));
-            else if(typeof(T) == typeof(int))
+            else if(typematch<T,int>())
                   dst = generic<T>(convert(src, out int x));
-            else if(typeof(T) == typeof(uint))
+            else if(typematch<T,uint>())
                   dst = generic<T>(convert(src, out uint x));
-            else if(typeof(T) == typeof(long))
+            else if(typematch<T,long>())
                   dst = generic<T>(convert(src, out long x));
-            else if(typeof(T) == typeof(ulong))
+            else if(typematch<T,ulong>())
                   dst = generic<T>(convert(src, out ulong x));
-            else if(typeof(T) == typeof(float))
+            else if(typematch<T,float>())
                   dst = generic<T>(convert(src, out float x));
-            else if(typeof(T) == typeof(double))
+            else if(typematch<T,double>())
                   dst = generic<T>(convert(src, out double x));
             else if(typeof(T) == typeof(char))
                   dst = generic<T>(convert(src, out char x));
@@ -359,25 +359,25 @@ namespace Z0
         public static T convert<T>(double src, out T dst)
             where T : struct
         {
-            if(typeof(T) == typeof(sbyte))
+            if(typematch<T,sbyte>())
                   dst = generic<T>(convert(src, out sbyte x));
-            else if(typeof(T) == typeof(byte))
+            else if(typematch<T,byte>())
                   dst = generic<T>(convert(src, out byte x));
-            else if(typeof(T) == typeof(short))
+            else if(typematch<T,short>())
                   dst = generic<T>(convert(src, out short x));
-            else if(typeof(T) == typeof(ushort))
+            else if(typematch<T,ushort>())
                   dst = generic<T>(convert(src, out ushort x));
-            else if(typeof(T) == typeof(int))
+            else if(typematch<T,int>())
                   dst = generic<T>(convert(src, out int x));
-            else if(typeof(T) == typeof(uint))
+            else if(typematch<T,uint>())
                   dst = generic<T>(convert(src, out uint x));
-            else if(typeof(T) == typeof(long))
+            else if(typematch<T,long>())
                   dst = generic<T>(convert(src, out long x));
-            else if(typeof(T) == typeof(ulong))
+            else if(typematch<T,ulong>())
                   dst = generic<T>(convert(src, out ulong x));
-            else if(typeof(T) == typeof(float))
+            else if(typematch<T,float>())
                   dst = generic<T>(convert(src, out float x));
-            else if(typeof(T) == typeof(double))
+            else if(typematch<T,double>())
                   dst = generic<T>(convert(src, out double x));
             else if(typeof(T) == typeof(char))
                   dst = generic<T>(convert(src, out char x));
@@ -391,25 +391,25 @@ namespace Z0
         public static T convert<T>(char src, out T dst)
             where T : struct
         {
-            if(typeof(T) == typeof(sbyte))
+            if(typematch<T,sbyte>())
                   dst = generic<T>(convert(src, out sbyte x));
-            else if(typeof(T) == typeof(byte))
+            else if(typematch<T,byte>())
                   dst = generic<T>(convert(src, out byte x));
-            else if(typeof(T) == typeof(short))
+            else if(typematch<T,short>())
                   dst = generic<T>(convert(src, out short x));
-            else if(typeof(T) == typeof(ushort))
+            else if(typematch<T,ushort>())
                   dst = generic<T>(convert(src, out ushort x));
-            else if(typeof(T) == typeof(int))
+            else if(typematch<T,int>())
                   dst = generic<T>(convert(src, out int x));
-            else if(typeof(T) == typeof(uint))
+            else if(typematch<T,uint>())
                   dst = generic<T>(convert(src, out uint x));
-            else if(typeof(T) == typeof(long))
+            else if(typematch<T,long>())
                   dst = generic<T>(convert(src, out long x));
-            else if(typeof(T) == typeof(ulong))
+            else if(typematch<T,ulong>())
                   dst = generic<T>(convert(src, out ulong x));
-            else if(typeof(T) == typeof(float))
+            else if(typematch<T,float>())
                   dst = generic<T>(convert(src, out float x));
-            else if(typeof(T) == typeof(double))
+            else if(typematch<T,double>())
                   dst = generic<T>(convert(src, out double x));
             else if(typeof(T) == typeof(char))
                   dst = generic<T>(convert(src, out char x));
@@ -1134,25 +1134,25 @@ namespace Z0
             where S : struct
             where T : struct            
         {
-            if(typeof(T) == typeof(sbyte))
+            if(typematch<T,sbyte>())
                 convert(src, ref int8(ref dst));
-            else if(typeof(T) == typeof(byte))
+            else if(typematch<T,byte>())
                 convert(src, ref uint8(ref dst));
-            else if(typeof(T) == typeof(short))
+            else if(typematch<T,short>())
                 convert(src, ref int16(ref dst));
-            else if(typeof(T) == typeof(ushort))
+            else if(typematch<T,ushort>())
                 convert(src, ref uint16(ref dst));
-            else if(typeof(T) == typeof(int))
+            else if(typematch<T,int>())
                 convert(src, ref int32(ref dst));
-            else if(typeof(T) == typeof(uint))
+            else if(typematch<T,uint>())
                 convert(src, ref uint32(ref dst));
-            else if(typeof(T) == typeof(long))
+            else if(typematch<T,long>())
                 convert(src, ref int64(ref dst));
-            else if(typeof(T) == typeof(ulong))
+            else if(typematch<T,ulong>())
                 convert(src, ref uint64(ref dst));
-            else if(typeof(T) == typeof(float))
+            else if(typematch<T,float>())
                 convert(src, ref float32(ref dst));
-            else if(typeof(T) == typeof(double))
+            else if(typematch<T,double>())
                 convert(src, ref float64(ref dst));
             else            
                 throw unsupported<T>();

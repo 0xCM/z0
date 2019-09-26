@@ -22,7 +22,7 @@ namespace Z0.Mkl
 
         protected override int FillBuffer(Span<T> buffer)
         {            
-            if(typeof(T) == typeof(float))
+            if(typematch<T,float>())
                 sample.chi2(Source,  DistSpec, float32(buffer));
             else if (typeof(T) == typeof(double))
                 sample.chi2(Source,  DistSpec, float64(buffer));

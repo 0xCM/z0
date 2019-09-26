@@ -24,25 +24,25 @@ namespace Z0
         public static bool negative<T>(T src)
             where T : struct
         {
-            if(typeof(T) == typeof(sbyte))
+            if(typematch<T,sbyte>())
                 return int8(src) < 0;
-            else if(typeof(T) == typeof(byte))
+            else if(typematch<T,byte>())
                 return false;
-            else if(typeof(T) == typeof(short))
+            else if(typematch<T,short>())
                 return int16(src) < 0;
-            else if(typeof(T) == typeof(ushort))
+            else if(typematch<T,ushort>())
                 return false;
-            else if(typeof(T) == typeof(int))
+            else if(typematch<T,int>())
                 return int32(src) < 0;
-            else if(typeof(T) == typeof(uint))
+            else if(typematch<T,uint>())
                 return false;
-            else if(typeof(T) == typeof(long))
+            else if(typematch<T,long>())
                 return int64(src) < 0;
-            else if(typeof(T) == typeof(ulong))
+            else if(typematch<T,ulong>())
                 return false;
-            else if(typeof(T) == typeof(float))
+            else if(typematch<T,float>())
                 return float32(src) < 0;
-            else if(typeof(T) == typeof(double))
+            else if(typematch<T,double>())
                 return float64(src) < 0;
             else            
                  throw unsupported<T>();                

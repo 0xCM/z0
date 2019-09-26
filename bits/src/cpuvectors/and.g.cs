@@ -25,25 +25,25 @@ namespace Z0
         public static Vector128<T> vand<T>(Vector128<T> lhs, Vector128<T> rhs)
             where T : unmanaged
         {
-            if(typeof(T) == typeof(sbyte))
+            if(typematch<T,sbyte>())
                 return generic<T>(Bits.and(int8(lhs), int8(rhs)));
-            else if(typeof(T) == typeof(byte))
+            else if(typematch<T,byte>())
                 return generic<T>(Bits.and(uint8(lhs), uint8(rhs)));
-            else if(typeof(T) == typeof(short))
+            else if(typematch<T,short>())
                 return generic<T>(Bits.and(int16(lhs), int16(rhs)));
-            else if(typeof(T) == typeof(ushort))
+            else if(typematch<T,ushort>())
                 return generic<T>(Bits.and(uint16(lhs), uint16(rhs)));
-            else if(typeof(T) == typeof(int))
+            else if(typematch<T,int>())
                 return generic<T>(Bits.and(int32(lhs), int32(rhs)));
-            else if(typeof(T) == typeof(uint))
+            else if(typematch<T,uint>())
                 return generic<T>(Bits.and(uint32(lhs), uint32(rhs)));
-            else if(typeof(T) == typeof(long))
+            else if(typematch<T,long>())
                 return generic<T>(Bits.and(int64(lhs), int64(rhs)));
-            else if(typeof(T) == typeof(ulong))
+            else if(typematch<T,ulong>())
                 return generic<T>(Bits.and(uint64(lhs), uint64(rhs)));
-            else if(typeof(T) == typeof(float))
+            else if(typematch<T,float>())
                 return generic<T>(Bits.and(float32(lhs), float32(rhs)));
-            else if(typeof(T) == typeof(double))
+            else if(typematch<T,double>())
                 return generic<T>(Bits.and(float64(lhs), float64(rhs)));
             else 
                 throw unsupported<T>();
@@ -55,9 +55,9 @@ namespace Z0
         {
             if(typeof(T) == typeof(byte))
                 return generic<T>(Bits.and(uint8(lhs), uint8(rhs)));
-            else if(typeof(T) == typeof(ushort))
+            else if(typematch<T,ushort>())
                 return generic<T>(Bits.and(uint16(lhs), uint16(rhs)));
-            else if(typeof(T) == typeof(uint))
+            else if(typematch<T,uint>())
                 return generic<T>(Bits.and(uint32(lhs), uint32(rhs)));
             else
                 return generic<T>(Bits.and(uint64(lhs), uint64(rhs)));
@@ -67,11 +67,11 @@ namespace Z0
         static Vector256<T> vand256i<T>(Vector256<T> lhs, Vector256<T> rhs)
             where T : struct
         {
-            if(typeof(T) == typeof(sbyte))
+            if(typematch<T,sbyte>())
                 return generic<T>(Bits.and(int8(lhs), int8(rhs)));
-            else if(typeof(T) == typeof(short))
+            else if(typematch<T,short>())
                 return generic<T>(Bits.and(int16(lhs), int16(rhs)));
-            else if(typeof(T) == typeof(int))
+            else if(typematch<T,int>())
                 return generic<T>(Bits.and(int32(lhs), int32(rhs)));
             else
                 return generic<T>(Bits.and(int64(lhs), int64(rhs)));

@@ -25,9 +25,9 @@ namespace Z0
         public static T inc<T>(T src)
             where T : struct
         {
-            if(typeof(T) == typeof(float))
+            if(typematch<T,float>())
                 return generic<T>(fmath.inc(float32(src)));
-            else if(typeof(T) == typeof(double))
+            else if(typematch<T,double>())
                 return generic<T>(fmath.inc(float64(src)));
             else            
                 throw unsupported<T>();
@@ -42,9 +42,9 @@ namespace Z0
         public static ref T inc<T>(ref T src)
             where T : struct
         {
-            if(typeof(T) == typeof(float))
+            if(typematch<T,float>())
                 fmath.inc(ref float32(ref src));
-            else if(typeof(T) == typeof(double))
+            else if(typematch<T,double>())
                 fmath.inc(ref float64(ref src));
             else            
                 throw unsupported<T>();

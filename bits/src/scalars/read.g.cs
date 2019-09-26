@@ -23,25 +23,25 @@ namespace Z0
         public static ref Bit read<T>(in T src, in int pos, out Bit dst)
             where T : struct
         {
-            if(typeof(T) == typeof(sbyte))
+            if(typematch<T,sbyte>())
                  Bits.read(in int8(in src), in pos, out dst);
-            else if(typeof(T) == typeof(byte))
+            else if(typematch<T,byte>())
                  Bits.read(in uint8(in src), in pos, out dst);
-            else if(typeof(T) == typeof(short))
+            else if(typematch<T,short>())
                  Bits.read(in int16(in src), in pos, out dst);
-            else if(typeof(T) == typeof(ushort))
+            else if(typematch<T,ushort>())
                  Bits.read(in uint16(in src), in pos, out dst);
-            else if(typeof(T) == typeof(int))
+            else if(typematch<T,int>())
                  Bits.read(in int32(in src), in pos, out dst);
-            else if(typeof(T) == typeof(uint))
+            else if(typematch<T,uint>())
                  Bits.read(in uint32(in src), in pos, out dst);
-            else if(typeof(T) == typeof(long))
+            else if(typematch<T,long>())
                  Bits.read(in int64(in src), in pos, out dst);
-            else if(typeof(T) == typeof(ulong))
+            else if(typematch<T,ulong>())
                  Bits.read(in uint64(in src), in pos, out dst);
-            else if(typeof(T) == typeof(float))
+            else if(typematch<T,float>())
                  Bits.read(in float32(in src), in pos, out dst);
-            else if(typeof(T) == typeof(double))
+            else if(typematch<T,double>())
                  Bits.read(in float64(in src), in pos, out dst);
             else            
                 throw unsupported<T>();

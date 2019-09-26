@@ -93,15 +93,15 @@ namespace Z0
                 return new m256i<T>(uint8(src));
             else if(typeof(S) == typeof(short))
                 return new m256i<T>(int16(src));
-            else if(typeof(T) == typeof(ushort))
+            else if(typematch<T,ushort>())
                 return new m256i<T>(uint16(src));
-            else if(typeof(T) == typeof(int))
+            else if(typematch<T,int>())
                 return new m256i<T>(int32(src));
-            else if(typeof(T) == typeof(uint))
+            else if(typematch<T,uint>())
                 return new m256i<T>(uint32(src));
-            else if(typeof(T) == typeof(long))
+            else if(typematch<T,long>())
                 return new m256i<T>(int64(src));
-            else if(typeof(T) == typeof(ulong))
+            else if(typematch<T,ulong>())
                 return new m256i<T>(uint64(src));
             else
                 throw unsupported<T>();

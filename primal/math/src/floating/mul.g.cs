@@ -17,9 +17,9 @@ namespace Z0
         public static T mul<T>(T lhs, T rhs)
             where T : struct
         {
-            if(typeof(T) == typeof(float))
+            if(typematch<T,float>())
                 return generic<T>(fmath.mul(float32(lhs), float32(rhs)));
-            else if(typeof(T) == typeof(double))
+            else if(typematch<T,double>())
                 return generic<T>(fmath.mul(float64(lhs), float64(rhs)));
             else            
                 throw unsupported<T>();
@@ -29,9 +29,9 @@ namespace Z0
         public static ref T mul<T>(ref T lhs, T rhs)
             where T : struct
         {
-            if(typeof(T) == typeof(float))
+            if(typematch<T,float>())
                 fmath.mul(ref float32(ref lhs), float32(rhs));
-            else if(typeof(T) == typeof(double))
+            else if(typematch<T,double>())
                 fmath.mul(ref float64(ref lhs), float64(rhs));
             else            
                 throw unsupported<T>();

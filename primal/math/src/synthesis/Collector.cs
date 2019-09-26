@@ -49,25 +49,25 @@ namespace Z0
         public static void Create<T>(params T[] src)
             where T : unmanaged
         {
-            if(typeof(T) == typeof(sbyte))
+            if(typematch<T,sbyte>())
                 Create(src.ToSpan().As<T,sbyte>());
-            else if(typeof(T) == typeof(byte))
+            else if(typematch<T,byte>())
                 Create(src.ToSpan().As<T, byte>());
-            else if(typeof(T) == typeof(short))
+            else if(typematch<T,short>())
                 Create(src.ToSpan().As<T, short>());
-            else if(typeof(T) == typeof(ushort))
+            else if(typematch<T,ushort>())
                 Create(src.ToSpan().As<T,ushort>());
-            else if(typeof(T) == typeof(int))
+            else if(typematch<T,int>())
                 Create(src.ToSpan().As<T,int>());
-            else if(typeof(T) == typeof(uint))
+            else if(typematch<T,uint>())
                 Create(src.ToSpan().As<T,uint>());
-            else if(typeof(T) == typeof(long))
+            else if(typematch<T,long>())
                 Create(src.ToSpan().As<T,long>());
-            else if(typeof(T) == typeof(ulong))
+            else if(typematch<T,ulong>())
                 Create(src.ToSpan().As<T,ulong>());
-            else if(typeof(T) == typeof(float))
+            else if(typematch<T,float>())
                 Create(src.ToSpan().As<T,float>());
-            else if(typeof(T) == typeof(double))
+            else if(typematch<T,double>())
                 Create(src.ToSpan().As<T,double>());
         }
 
@@ -327,25 +327,25 @@ namespace Z0
         public void Collect<T>(IEnumerable<T> src)
             where T : unmanaged
         {
-            if(typeof(T) == typeof(sbyte))
+            if(typematch<T,sbyte>())
                 CollectStream(src.Cast<sbyte>());
-            else if(typeof(T) == typeof(byte))
+            else if(typematch<T,byte>())
                 CollectStream(src.Cast<byte>());
-            else if(typeof(T) == typeof(short))
+            else if(typematch<T,short>())
                 CollectStream(src.Cast<short>());
-            else if(typeof(T) == typeof(ushort))
+            else if(typematch<T,ushort>())
                 CollectStream(src.Cast<ushort>());
-            else if(typeof(T) == typeof(int))
+            else if(typematch<T,int>())
                 CollectStream(src.Cast<int>());
-            else if(typeof(T) == typeof(uint))
+            else if(typematch<T,uint>())
                 CollectStream(src.Cast<uint>());
-            else if(typeof(T) == typeof(long))
+            else if(typematch<T,long>())
                 CollectStream(src.Cast<long>());
-            else if(typeof(T) == typeof(ulong))
+            else if(typematch<T,ulong>())
                 CollectStream(src.Cast<ulong>());
-            else if(typeof(T) == typeof(float))
+            else if(typematch<T,float>())
                 CollectStream(src.Cast<float>());
-            else if(typeof(T) == typeof(double))
+            else if(typematch<T,double>())
                 CollectStream(src.Cast<double>());
         }
 
@@ -358,25 +358,25 @@ namespace Z0
         public void Collect<T>(params T[] src)
             where T : unmanaged
         {
-            if(typeof(T) == typeof(sbyte))
+            if(typematch<T,sbyte>())
                 CollectSpan(src.ToSpan().As<T,sbyte>());
-            else if(typeof(T) == typeof(byte))
+            else if(typematch<T,byte>())
                 CollectSpan(src.ToSpan().As<T, byte>());
-            else if(typeof(T) == typeof(short))
+            else if(typematch<T,short>())
                 CollectSpan(src.ToSpan().As<T, short>());
-            else if(typeof(T) == typeof(ushort))
+            else if(typematch<T,ushort>())
                 CollectSpan(src.ToSpan().As<T,ushort>());
-            else if(typeof(T) == typeof(int))
+            else if(typematch<T,int>())
                 CollectSpan(src.ToSpan().As<T,int>());
-            else if(typeof(T) == typeof(uint))
+            else if(typematch<T,uint>())
                 CollectSpan(src.ToSpan().As<T,uint>());
-            else if(typeof(T) == typeof(long))
+            else if(typematch<T,long>())
                 CollectSpan(src.ToSpan().As<T,long>());
-            else if(typeof(T) == typeof(ulong))
+            else if(typematch<T,ulong>())
                 CollectSpan(src.ToSpan().As<T,ulong>());
-            else if(typeof(T) == typeof(float))
+            else if(typematch<T,float>())
                 CollectSpan(src.ToSpan().As<T,float>());
-            else if(typeof(T) == typeof(double))
+            else if(typematch<T,double>())
                 CollectSpan(src.ToSpan().As<T,double>());
         }
 
@@ -389,25 +389,25 @@ namespace Z0
         public void Collect<T>(ReadOnlySpan<T> src)
             where T : unmanaged
         {
-            if(typeof(T) == typeof(sbyte))
+            if(typematch<T,sbyte>())
                 CollectSpan(src.As<T,sbyte>());
-            else if(typeof(T) == typeof(byte))
+            else if(typematch<T,byte>())
                 CollectSpan(src.As<T, byte>());
-            else if(typeof(T) == typeof(short))
+            else if(typematch<T,short>())
                 CollectSpan(src.As<T, short>());
-            else if(typeof(T) == typeof(ushort))
+            else if(typematch<T,ushort>())
                 CollectSpan(src.As<T,ushort>());
-            else if(typeof(T) == typeof(int))
+            else if(typematch<T,int>())
                 CollectSpan(src.As<T,int>());
-            else if(typeof(T) == typeof(uint))
+            else if(typematch<T,uint>())
                 CollectSpan(src.As<T,uint>());
-            else if(typeof(T) == typeof(long))
+            else if(typematch<T,long>())
                 CollectSpan(src.As<T,long>());
-            else if(typeof(T) == typeof(ulong))
+            else if(typematch<T,ulong>())
                 CollectSpan(src.As<T,ulong>());
-            else if(typeof(T) == typeof(float))
+            else if(typematch<T,float>())
                 CollectSpan(src.As<T,float>());
-            else if(typeof(T) == typeof(double))
+            else if(typematch<T,double>())
                 CollectSpan(src.As<T,double>());
         }
 
@@ -420,25 +420,25 @@ namespace Z0
         public void Collect<T>(T src)
             where T : unmanaged
         {
-            if(typeof(T) == typeof(sbyte))
+            if(typematch<T,sbyte>())
                 CollectValue(int8(src));
-            else if(typeof(T) == typeof(byte))
+            else if(typematch<T,byte>())
                 CollectValue(uint8(src));
-            else if(typeof(T) == typeof(short))
+            else if(typematch<T,short>())
                 CollectValue(int16(src));
-            else if(typeof(T) == typeof(ushort))
+            else if(typematch<T,ushort>())
                 CollectValue(uint16(src));
-            else if(typeof(T) == typeof(int))
+            else if(typematch<T,int>())
                 CollectValue(int32(src));
-            else if(typeof(T) == typeof(uint))
+            else if(typematch<T,uint>())
                 CollectValue(uint32(src));
-            else if(typeof(T) == typeof(long))
+            else if(typematch<T,long>())
                 CollectValue(int64(src));
-            else if(typeof(T) == typeof(ulong))
+            else if(typematch<T,ulong>())
                 CollectValue(uint64(src));
-            else if(typeof(T) == typeof(float))
+            else if(typematch<T,float>())
                 CollectValue(float32(src));
-            else if(typeof(T) == typeof(double))
+            else if(typematch<T,double>())
                 CollectValue(float64(src));
         }
 

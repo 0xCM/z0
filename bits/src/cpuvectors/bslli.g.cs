@@ -24,15 +24,15 @@ namespace Z0
         {
             if(typeof(T) == typeof(short))
                 return generic<T>(Bits.bslli(in int16(in lhs), count));
-            else if(typeof(T) == typeof(ushort))
+            else if(typematch<T,ushort>())
                 return generic<T>(Bits.bslli(in uint16(in lhs), count));
-            else if(typeof(T) == typeof(int))
+            else if(typematch<T,int>())
                 return generic<T>(Bits.bslli(in int32(in lhs), count));
-            else if(typeof(T) == typeof(uint)) 
+            else if(typematch<T,uint>()) 
                 return generic<T>(Bits.bslli(in uint32(in lhs), count));
-            else if(typeof(T) == typeof(long))
+            else if(typematch<T,long>())
                 return generic<T>(Bits.bslli(in int64(in lhs), count));
-            else if(typeof(T) == typeof(ulong))
+            else if(typematch<T,ulong>())
                 return generic<T>(Bits.bslli(in uint64(in lhs), count));
             else
                 throw unsupported<T>();
@@ -44,15 +44,15 @@ namespace Z0
         {
             if(typeof(T) == typeof(short))
                 return generic<T>(Bits.bslli(in int16(in lhs), count));
-            else if(typeof(T) == typeof(ushort))
+            else if(typematch<T,ushort>())
                 return generic<T>(Bits.bslli(in uint16(in lhs), count));
-            else if(typeof(T) == typeof(int))
+            else if(typematch<T,int>())
                 return generic<T>(Bits.bslli(in int32(in lhs), count));
-            else if(typeof(T) == typeof(uint)) 
+            else if(typematch<T,uint>()) 
                 return generic<T>(Bits.bslli(in uint32(in lhs), count));
-            else if(typeof(T) == typeof(long))
+            else if(typematch<T,long>())
                 return generic<T>(Bits.bslli(in int64(in lhs), count));
-            else if(typeof(T) == typeof(ulong))
+            else if(typematch<T,ulong>())
                 return generic<T>(Bits.bslli(in uint64(in lhs), count));
             else
                 throw unsupported<T>();
