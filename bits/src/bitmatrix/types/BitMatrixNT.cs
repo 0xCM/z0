@@ -307,7 +307,7 @@ namespace Z0
 
         static ref BitMatrix<N,T> And(ref BitMatrix<N,T> lhs, in BitMatrix<N,T> rhs)        
         {
-            gbitspan.and(lhs.Data, rhs.Data, lhs.Data);
+            mathspan.and(lhs.Data, rhs.Data, lhs.Data);
             return ref lhs;
         }
 

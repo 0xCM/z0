@@ -12,8 +12,6 @@ namespace Z0
     
     partial class Bits
     {         
-
-
         /// <summary>
         /// Populates a target span with 8 bits from the source
         /// </summary>
@@ -94,7 +92,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Span<byte> unpack(ulong src)
             => unpack(src, new byte[Pow2.T06]);
-
-
     }
 }

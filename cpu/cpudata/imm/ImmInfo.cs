@@ -12,15 +12,15 @@ namespace Z0
     /// <summary>
     /// Describes an immediate value in the context of an asm instruction operand
     /// </summary>
-    public class AsmImmInfo
+    public class ImmInfo
     {
-        public AsmImmInfo(BitSize size, ulong value)
+        public ImmInfo(BitSize size, ulong value)
         {
             this.Size = size;
             this.Value = value;
         }
 
-        public AsmImmInfo(BitSize size, long value)
+        public ImmInfo(BitSize size, long value)
         {
             this.Size = size;
             this.Value = (ulong)value;

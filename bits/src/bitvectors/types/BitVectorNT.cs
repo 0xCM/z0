@@ -113,7 +113,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static BitVector<N,T> operator &(BitVector<N,T> lhs, BitVector<N,T> rhs)
-            => new BitVector<N,T>(gbitspan.and(lhs.data, rhs.data));
+            => new BitVector<N,T>(mathspan.and(lhs.data, rhs.data));
 
         /// <summary>
         /// Computes the scalar product of the operands

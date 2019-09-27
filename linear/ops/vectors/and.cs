@@ -29,7 +29,7 @@ namespace Z0
             where T : unmanaged    
         {
             var dst = BlockVector.Alloc<N,T>();
-            gbitspan.and<T>(lhs.Data, rhs.Data, dst);
+            bitspan.and<T>(lhs.Data, rhs.Data, dst);
             return dst;
         }
 
@@ -38,7 +38,7 @@ namespace Z0
             where N : ITypeNat, new()
             where T : unmanaged    
         {
-            gbitspan.and<T>(lhs.Data, rhs.Data, dst);
+            bitspan.and<T>(lhs.Data, rhs.Data, dst);
             return ref dst;
         }
 
@@ -55,7 +55,7 @@ namespace Z0
             where T : unmanaged    
         {
             var dst = lhs.Replicate();
-            gbitspan.and(dst.Data, rhs);
+            mathspan.and(dst.Data, rhs);
             return dst;            
         }
 
@@ -65,7 +65,7 @@ namespace Z0
             where T : unmanaged    
         {
             lhs.Data.CopyTo(dst.Data);
-            gbitspan.and(dst.Data, rhs);
+            mathspan.and(dst.Data, rhs);
             return ref dst;            
         }
 

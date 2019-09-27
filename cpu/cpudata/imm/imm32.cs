@@ -9,15 +9,16 @@ namespace Z0
 
     using static zfunc;
 
+
     /// <summary>
-    /// Defines a 32-bit immediate that has been sign-extended from an 8-bit source value
+    /// Defines a 32-bit immediate
     /// </summary>    
-    public readonly struct Imm32i  : IImm<int>
+    public readonly struct Imm32 :  IImm<Imm32,uint>
     {
         /// <summary>
         /// The value of the immediate constant
         /// </summary>
-        public readonly int Value;
+        public readonly uint Value;
 
         /// <summary>
         /// Specifies the size of the immediate in bits
@@ -26,37 +27,40 @@ namespace Z0
 
 
         /// <summary>
-        /// Defines a 32-bit signed-extended immediate from an 8-bit source value
+        /// Defines an 32-bit immediate from a 32-bit source value
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
-        public static Imm32i Define(int src)
+        public static Imm32 Define(uint src)
             => src;
 
         /// <summary>
-        /// Converts an 8-bit source value to a 32-bit sign-extended immediate
+        /// Converts a 32-bit source value to a 32-bit immediate
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
-        public static implicit operator Imm32i(int src)
-            => new Imm32i(src);
+        public static implicit operator Imm32(uint src)
+            => new Imm32(src);
 
         [MethodImpl(Inline)]
-        public Imm32i(int src)
+        public Imm32(uint src)
             => this.Value = src;
 
-        public AsmImmInfo Description 
+        public ImmInfo Description 
         {
             [MethodImpl(Inline)]
-            get => new AsmImmInfo(Size,Value);
+            get => new ImmInfo(Size,Value);
         }
 
-        int IImm<int>.Value 
+        uint IImm<uint>.Value 
         {
             get => Value;
         }
 
-        public Imm32i Redefine(byte src)
-            => new Imm32i(src);
+        Imm32 IImm<Imm32,uint>.Redefine(uint src)
+            => new Imm32(src);
+
     }
+
+
 }

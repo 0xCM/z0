@@ -50,7 +50,7 @@ namespace Z0
        readonly struct Sar<T>
             where T : unmanaged
         {
-            public static readonly ShiftOp<T> Op = gbits.sar<T>;
+            public static readonly ShiftOp<T> Op = gmath.sar<T>;
         }
 
 

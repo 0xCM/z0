@@ -9,54 +9,54 @@ namespace Z0
 
     using static zfunc;
 
+
     /// <summary>
-    /// Defines a 16-bit immediate that has been sign-extended from an 8-bit source value
+    /// Defines a 64-bit immediate
     /// </summary>    
-    public readonly struct Imm16i : IImm<short>
+    public readonly struct Imm64 :  IImm<Imm64, ulong>
     {
         /// <summary>
         /// The value of the immediate constant
         /// </summary>
-        public readonly short Value;
+        public readonly ulong Value;
 
         /// <summary>
         /// Specifies the size of the immediate in bits
         /// </summary>
-        public static readonly BitSize Size = 16;
+        public static readonly BitSize Size = 64;
 
         /// <summary>
-        /// Defines a 16-bit sign-extended immediate from an 8-bit source value
+        /// Defines a 64-bit immediate from a 64-bit source value
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
-        public static Imm16i Define(short src)
+        public static Imm64 Define(ulong src)
             => src;
 
         /// <summary>
-        /// Converts an 8-bit source value to a 16-bit sign-extended immediate
+        /// Converts a source value to a 64-bit immediate
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
-        public static implicit operator Imm16i(short src)
-            => new Imm16i(src);
+        public static implicit operator Imm64(ulong src)
+            => new Imm64(src);
 
         [MethodImpl(Inline)]
-        public Imm16i(short src)
+        public Imm64(ulong src)
             => this.Value = src;
-
-        public AsmImmInfo Description 
+        
+        public ImmInfo Description 
         {
             [MethodImpl(Inline)]
-            get => new AsmImmInfo(Size,Value);
+            get => new ImmInfo(Size,Value);
         }
 
-        short IImm<short>.Value 
+        ulong IImm<ulong>.Value 
         {
-            [MethodImpl(Inline)]
             get => Value;
         }
-
+            
+        Imm64 IImm<Imm64,ulong>.Redefine(ulong src)
+            => new Imm64(src);
     }
-
-
 }

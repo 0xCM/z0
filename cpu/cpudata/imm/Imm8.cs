@@ -70,10 +70,10 @@ namespace Z0
         public Imm8(byte src)
             => this.Value = src;
 
-        public AsmImmInfo Description 
+        public ImmInfo Description 
         {
             [MethodImpl(Inline)]
-            get => new AsmImmInfo(Size,Value);
+            get => new ImmInfo(Size,Value);
         }
 
         /// <summary>

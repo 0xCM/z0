@@ -69,10 +69,10 @@ namespace Z0
             this.Value = Value;
         }
     
-        public AsmImmInfo Description 
+        public ImmInfo Description 
         {
             [MethodImpl(Inline)]
-            get => new AsmImmInfo(Size,Value);
+            get => new ImmInfo(Size,Value);
         }
 
         long IImm<long>.Value 

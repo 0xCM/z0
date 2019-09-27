@@ -37,7 +37,8 @@ namespace Z0
         [MethodImpl(Inline)]
         public static XMM vpblendw(XMM xmm2, XMM xmm3, Imm8 imm8)        
         {
-            return Blend(vload<ushort>(ref xmm2), vload<ushort>(ref xmm3), imm8);
+            return default;
+            //return Blend(vload<ushort>(ref xmm2), vload<ushort>(ref xmm3), imm8);
         }
             
 

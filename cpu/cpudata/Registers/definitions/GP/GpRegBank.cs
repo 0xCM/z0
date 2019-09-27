@@ -30,7 +30,6 @@ namespace Z0
         [FieldOffset(RaxOffset + 1)]
         public AH ah;
 
-        //!--
         
         [FieldOffset(RbxOffset)]
         public RBX rbx;
@@ -47,7 +46,6 @@ namespace Z0
         [FieldOffset(RbxOffset + 1)]
         public BH bh;
         
-        //!--
 
         [FieldOffset(RcxOffset)]        
         public RCX rcx;
@@ -64,8 +62,6 @@ namespace Z0
         [FieldOffset(RcxOffset + 1)]
         public CH ch;
 
-        //!--
-
         [FieldOffset(RdxOffset)]
         public RDX rdx;
 
@@ -81,8 +77,6 @@ namespace Z0
         [FieldOffset(RdxOffset + 1)]
         public DH dh;
 
-        //!--
-
         [FieldOffset(RsiOffset)]
         public RSI rsi;
 
@@ -95,7 +89,6 @@ namespace Z0
         [FieldOffset(RsiOffset)]
         public SIL sil;
 
-        //!--
 
         [FieldOffset(RdiOffset)]
         public RDI rdi;
@@ -109,7 +102,6 @@ namespace Z0
         [FieldOffset(RdiOffset)]
         public DIL dil;
 
-        //!--
 
         [FieldOffset(RspOffset)]
         public RSP rsp;
@@ -122,8 +114,7 @@ namespace Z0
 
         [FieldOffset(RspOffset)]
         public SPL spl;
-        
-        //!--
+
 
         [FieldOffset(RbpOffset)]
         public RBP rbp;

@@ -14,6 +14,8 @@ namespace Z0
     using static zfunc;
 
 
+
+
     public interface ICpuReg
     {
         
@@ -92,6 +94,11 @@ namespace Z0
         where T : unmanaged
     {        
 
+    }
+
+    public interface ISegReg : ICpuReg
+    {
+        
     }
 
     public interface IGpReg64<R> : IGpReg<N64, R, ulong>

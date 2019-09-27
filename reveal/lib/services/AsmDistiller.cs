@@ -172,9 +172,9 @@ namespace Z0
         /// </summary>
         /// <param name="inx">The source instruction</param>
         /// <param name="operand">The operand index</param>
-        static Option<AsmImmInfo> ImmediateInfo(this Instruction inx, int operand)
+        static Option<ImmInfo> ImmediateInfo(this Instruction inx, int operand)
         {
-            var result = none<AsmImmInfo>();
+            var result = none<ImmInfo>();
             var kind = inx.GetOpKind(operand);
             int size = kind.GetImmediateSize();
             if(size != 0)

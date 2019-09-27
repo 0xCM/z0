@@ -17,12 +17,6 @@ namespace Z0
     using static zfunc;
     using static IMM;
 
-
-    public static partial class AsmRef
-    {
-
-    }
-
     public class AsmEncodingAttribute : Attribute
     {
         public AsmEncodingAttribute(string Name, string Spec = null, string Call = null, string Code = null)

@@ -41,7 +41,7 @@ namespace Z0
 
                 var xBytes = A.Bytes.Replicate();
                 var yBytes = B.Bytes.Replicate();
-                var zBytes = gbitspan.and(xBytes,yBytes);
+                var zBytes = mathspan.and(xBytes,yBytes);
                 var expect = BitMatrix8.From(zBytes);
 
                 var C = A & B;
@@ -105,7 +105,7 @@ namespace Z0
 
                 var xBytes = A.Bytes.Replicate();
                 var yBytes = B.Bytes.Replicate();
-                var zBytes = gbitspan.and(xBytes,yBytes);
+                var zBytes = mathspan.and(xBytes,yBytes);
                 var expect = BitMatrix32.From(zBytes);
 
                 var C = A & B;
@@ -178,7 +178,7 @@ namespace Z0
 
                 var xBytes = A.Bytes.Replicate();
                 var yBytes = B.Bytes.Replicate();
-                var zBytes = gbitspan.and(xBytes,yBytes);
+                var zBytes = mathspan.and(xBytes,yBytes);
                 var expect = BitMatrix64.From(zBytes);
 
                 var C = A & B;

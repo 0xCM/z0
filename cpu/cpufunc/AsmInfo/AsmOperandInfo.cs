@@ -17,7 +17,7 @@ namespace Z0
     /// </summary>
     public class AsmOperandInfo
     {
-        public AsmOperandInfo(byte Index, string Kind, Option<AsmImmInfo> imminfo, 
+        public AsmOperandInfo(byte Index, string Kind, Option<ImmInfo> imminfo, 
             Option<AsmMemInfo> Memory, Option<AsmRegisterInfo> register, Option<AsmBranchInfo> branch)
         {
             this.Index = Index;
@@ -41,7 +41,7 @@ namespace Z0
         /// <summary>
         /// Operand immediate info, if applicable
         /// </summary>
-        public Option<AsmImmInfo> ImmInfo {get;}
+        public Option<ImmInfo> ImmInfo {get;}
 
         /// <summary>
         /// Operand memory info, if applicable

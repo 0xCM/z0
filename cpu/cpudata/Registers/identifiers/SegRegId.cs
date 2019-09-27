@@ -5,16 +5,26 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
 
-    using static zfunc;
-    using static As;
-    using static AsIn;
-    
-    partial class gbits
+
+    /// <summary>
+    /// Classifies the segment registers
+    /// </summary>
+    [Flags]
+    public enum SegRegId : ulong
     {
 
+        cs,
 
-   }    
+        ds,
+
+        fs,
+
+        gs,
+
+        ss
+
+
+    }
+
 }

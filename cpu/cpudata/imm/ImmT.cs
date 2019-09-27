@@ -102,8 +102,8 @@ namespace Z0
             get => Value;
         }
 
-        public AsmImmInfo Description 
-            => new AsmImmInfo(Width, imagine(ref Unsafe.AsRef(in Value), out ulong _));
+        public ImmInfo Description 
+            => new ImmInfo(Width, imagine(ref Unsafe.AsRef(in Value), out ulong _));
 
         [MethodImpl(Inline)]
         public Imm<T> Redefine(T src)         

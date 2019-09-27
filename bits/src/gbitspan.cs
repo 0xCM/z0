@@ -11,64 +11,10 @@ namespace Z0
     using static As;
     using static AsIn;
 
+
     public static class gbitspan
     {
-        public static Span<T> and<T>(Span<T> lhs, in T rhs)
-            where T : unmanaged
-        {
-            for(var i=0; i<lhs.Length; i++)
-                gmath.and(ref lhs[i],rhs);
-            return lhs;
-        }
 
-        public static Span<T> and<T>(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs, Span<T> dst)
-            where T : unmanaged
-        {
-            var len = length(lhs,rhs);
-            for(var i=0; i<len; i++)
-                dst[i] = gmath.and(lhs[i], rhs[i]);
-            return dst;
-        }
-
-        public static Span<T> and<T>(Span<T> lhs, ReadOnlySpan<T> rhs)
-            where T : unmanaged
-        {
-            var len = length(lhs,rhs);
-            for(var i=0; i<len; i++)
-                gmath.and(ref lhs[i], rhs[i]);
-            return lhs;
-        }
-
-        public static Span256<T> and<T>(ReadOnlySpan256<T> lhs, ReadOnlySpan256<T> rhs, Span256<T> dst)
-            where T : unmanaged
-        {
-            for(var i=0; i< blocks(lhs,rhs); i++)
-                vstore(gbits.vand<T>(lhs.LoadVec256(i), rhs.LoadVec256(i)), ref dst.Block(i));                             
-            return dst;        
-        } 
-        public static Span128<T> andn<T>(ReadOnlySpan128<T> lhs, ReadOnlySpan128<T> rhs, Span128<T> dst)
-            where T : unmanaged
-        {
-            for(var i=0; i< blocks(lhs,rhs); i++)
-                vstore(gbits.andn(lhs.LoadVec128(i), rhs.LoadVec128(i)), ref dst.Block(i));                             
-            return dst;        
-        }
-
-        public static Span256<T> andn<T>(ReadOnlySpan256<T> lhs, ReadOnlySpan256<T> rhs, Span256<T> dst)
-            where T : unmanaged
-        {
-            for(var i=0; i< blocks(lhs,rhs); i++)
-                vstore(gbits.andn(lhs.LoadVec256(i), rhs.LoadVec256(i)), ref dst.Block(i));                             
-            return dst;        
-        } 
-
-        public static Span128<T> or<T>(ReadOnlySpan128<T> lhs, ReadOnlySpan128<T> rhs, Span128<T> dst)
-            where T : unmanaged
-        {
-            for(var i=0; i< blocks(lhs,rhs); i++)
-                vstore(gbits.or(lhs.LoadVec128(i), rhs.LoadVec128(i)), ref dst.Block(i));                             
-            return dst;        
-        }
 
         public static Span256<T> or<T>(ReadOnlySpan256<T> lhs, ReadOnlySpan256<T> rhs, Span256<T> dst)
             where T : unmanaged
@@ -94,13 +40,6 @@ namespace Z0
             return dst;        
         } 
 
-        public static Span128<T> xor<T>(ReadOnlySpan128<T> lhs, ReadOnlySpan128<T> rhs, Span128<T> dst)
-            where T : unmanaged
-        {
-            for(var i=0; i< blocks(lhs,rhs); i++)
-                vstore(gbits.vxor(lhs.LoadVec128(i), rhs.LoadVec128(i)), ref dst.Block(i));                             
-            return dst;        
-        }
 
         public static Span256<T> xor<T>(ReadOnlySpan256<T> lhs, ReadOnlySpan256<T> rhs, Span256<T> dst)
             where T : unmanaged
@@ -110,68 +49,5 @@ namespace Z0
             return dst;        
         } 
 
-        public static Span<T> rotr<T>(ReadOnlySpan<T> src, T offset)        
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(byte))
-                return generic<T>(bitspan.rotr(uint8(src), uint8(in offset)));
-            else if(typematch<T,ushort>())
-                return generic<T>(bitspan.rotr(uint16(src), uint16(in offset)));
-            else if(typematch<T,uint>())
-                return generic<T>(bitspan.rotr(uint32(src), uint32(in offset)));
-            else if(typematch<T,ulong>())
-                return generic<T>(bitspan.rotr(uint64(src), uint64(in offset)));
-            else            
-                throw unsupported<T>();
-
-        }
-
-        public static Span<T> rotr<T>(ReadOnlySpan<T> src, T offset, Span<T> dst)        
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(byte))
-                bitspan.rotr(uint8(src), uint8(in offset), uint8(dst));
-            else if(typematch<T,ushort>())
-                bitspan.rotr(uint16(src), uint16(in offset), uint16(dst));
-            else if(typematch<T,uint>())
-                bitspan.rotr(uint32(src), uint32(in offset), uint32(dst));
-            else if(typematch<T,ulong>())
-                bitspan.rotr(uint64(src), uint64(in offset), uint64(dst));
-            else            
-                throw unsupported<T>();
-            return dst;
-
-        }
-
-        public static Span<T> rotl<T>(ReadOnlySpan<T> src, T offset, Span<T> dst)        
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(byte))
-                bitspan.rotl(uint8(src), uint8(in offset), uint8(dst));
-            else if(typematch<T,ushort>())
-                bitspan.rotl(uint16(src), uint16(in offset), uint16(dst));
-            else if(typematch<T,uint>())
-                bitspan.rotl(uint32(src), uint32(in offset), uint32(dst));
-            else if(typematch<T,ulong>())
-                bitspan.rotl(uint64(src), uint64(in offset), uint64(dst));
-            else            
-                throw unsupported<T>();
-            return dst;
-        }
-
-        public static Span<T> rotl<T>(ReadOnlySpan<T> src, T offset)        
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(byte))
-                return generic<T>(bitspan.rotl(uint8(src), uint8(in offset)));
-            else if(typematch<T,ushort>())
-                return generic<T>(bitspan.rotl(uint16(src), uint16(in offset)));
-            else if(typematch<T,uint>())
-                return generic<T>(bitspan.rotl(uint32(src), uint32(in offset)));
-            else if(typematch<T,ulong>())
-                return generic<T>(bitspan.rotl(uint64(src), uint64(in offset)));
-            else            
-                throw unsupported<T>();
-        }
     }
 }

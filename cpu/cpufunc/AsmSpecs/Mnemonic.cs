@@ -10,226 +10,1109 @@ namespace Z0
     /// <remarks>Derived from https://www.felixcloutier.com/x86/</remarks>
     public enum MnemonicKind
     {
-        AAA, // ASCII Adjust After Addition
-        AAD, // ASCII Adjust AX Before Division
-        AAM, // ASCII Adjust AX After Multiply
-        AAS, // ASCII Adjust AL After Subtraction
-        ADC, // Add with Carry
-        ADCX, // Unsigned Integer Addition of Two Operands with Carry Flag
-        ADD, // Add
-        ADDPD, // Add Packed Double-Precision Floating-Point Values
-        ADDPS, // Add Packed Single-Precision Floating-Point Values
+        /// <summary>
+        /// ASCII Adjust After Addition
+        /// </summary>     
+        AAA, 
+
+        /// <summary>
+        /// ASCII Adjust AX Before Division
+        /// </summary>     
+        AAD,  
+
+        /// <summary>
+        /// ASCII Adjust AX After Multiply
+        /// </summary>     
+        AAM,  
+
+        /// <summary>
+        /// ASCII Adjust AL After Subtraction
+        /// </summary>     
+        AAS,  
+
+        /// <summary>
+        /// Add with Carry
+        /// </summary>     
+        ADC,  
+
+        /// <summary>
+        /// Unsigned Integer Addition of Two Operands with Carry Flag
+        /// </summary>     
+        ADCX,  
+
+        /// <summary>
+        /// Add
+        /// </summary>     
+        ADD, 
+
+        /// <summary>
+        /// Add Packed Double-Precision Floating-Point Values
+        /// </summary>     
+        ADDPD,  
+
+        /// <summary>
+        /// Add Packed Single-Precision Floating-Point Values
+        /// </summary>     
+        ADDPS,
+
+        /// <summary>
+        ///
+        /// </summary>     
         ADDSD, // Add Scalar Double-Precision Floating-Point Values
+
+        /// <summary>
+        ///
+        /// </summary>     
         ADDSS, // Add Scalar Single-Precision Floating-Point Values
+
+        /// <summary>
+        ///
+        /// </summary>     
         ADDSUBPD, // Packed Double-FP Add/Subtract
+
+        /// <summary>
+        ///
+        /// </summary>     
         ADDSUBPS, // Packed Single-FP Add/Subtract
+
+        /// <summary>
+        ///
+        /// </summary>     
         ADOX, // Unsigned Integer Addition of Two Operands with Overflow Flag
+
+        /// <summary>
+        ///
+        /// </summary>     
         AESDEC, // Perform One Round of an AES Decryption Flow
+
+        /// <summary>
+        ///
+        /// </summary>     
         AESDECLAST, // Perform Last Round of an AES Decryption Flow
+
+        /// <summary>
+        ///
+        /// </summary>     
         AESENC, // Perform One Round of an AES Encryption Flow
+
+        /// <summary>
+        ///
+        /// </summary>     
         AESENCLAST, // Perform Last Round of an AES Encryption Flow
+
+        /// <summary>
+        ///
+        /// </summary>     
         AESIMC, // Perform the AES InvMixColumn Transformation
+
+        /// <summary>
+        ///
+        /// </summary>     
         AESKEYGENASSIST, // AES Round Key Generation Assist
+
+        /// <summary>
+        ///
+        /// </summary>     
         AND, // Logical AND
+
+        /// <summary>
+        ///
+        /// </summary>     
         ANDN, // Logical AND NOT
+
+        /// <summary>
+        ///
+        /// </summary>     
         ANDNPD, // Bitwise Logical AND NOT of Packed Double Precision Floating-Point Values
+
+        /// <summary>
+        ///
+        /// </summary>     
         ANDNPS, // Bitwise Logical AND NOT of Packed Single Precision Floating-Point Values
+
+        /// <summary>
+        ///
+        /// </summary>     
         ANDPD, // Bitwise Logical AND of Packed Double Precision Floating-Point Values
+
+        /// <summary>
+        ///
+        /// </summary>     
         ANDPS, // Bitwise Logical AND of Packed Single Precision Floating-Point Values
+
+        /// <summary>
+        ///
+        /// </summary>     
         ARPL, // Adjust RPL Field of Segment Selector
+
+        /// <summary>
+        ///
+        /// </summary>     
         BEXTR, // Bit Field Extract
+
+        /// <summary>
+        ///
+        /// </summary>     
         BLENDPD, // Blend Packed Double Precision Floating-Point Values
+
+        /// <summary>
+        ///
+        /// </summary>     
         BLENDPS, // Blend Packed Single Precision Floating-Point Values
+
+        /// <summary>
+        ///
+        /// </summary>     
         BLENDVPD, // Variable Blend Packed Double Precision Floating-Point Values
+
+        /// <summary>
+        ///
+        /// </summary>     
         BLENDVPS, // Variable Blend Packed Single Precision Floating-Point Values
+
+        /// <summary>
+        ///
+        /// </summary>     
         BLSI, // Extract Lowest Set Isolated Bit
+
+        /// <summary>
+        ///
+        /// </summary>     
         BLSMSK, // Get Mask Up to Lowest Set Bit
+
+        /// <summary>
+        ///
+        /// </summary>     
         BLSR, // Reset Lowest Set Bit
+
+        /// <summary>
+        ///
+        /// </summary>     
         BNDCL, // Check Lower Bound
+
+        /// <summary>
+        ///
+        /// </summary>     
         BNDCN, // Check Upper Bound
+
+        /// <summary>
+        ///
+        /// </summary>     
         BNDCU, // Check Upper Bound
+
+        /// <summary>
+        ///
+        /// </summary>     
         BNDLDX, // Load Extended Bounds Using Address Translation
+
+        /// <summary>
+        ///
+        /// </summary>     
         BNDMK, // Make Bounds
+
+        /// <summary>
+        ///
+        /// </summary>     
         BNDMOV, // Move Bounds
+
+        /// <summary>
+        ///
+        /// </summary>     
         BNDSTX, // Store Extended Bounds Using Address Translation
+
+        /// <summary>
+        ///
+        /// </summary>     
         BOUND, // Check Array Index Against Bounds
+
+        /// <summary>
+        ///
+        /// </summary>     
         BSF, // Bit Scan Forward
+
+        /// <summary>
+        ///
+        /// </summary>     
         BSR, // Bit Scan Reverse
+
+        /// <summary>
+        ///
+        /// </summary>     
         BSWAP, // Byte Swap
+
+        /// <summary>
+        ///
+        /// </summary>     
         BT, // Bit Test
+
+        /// <summary>
+        ///
+        /// </summary>     
         BTC, // Bit Test and Complement
+
+        /// <summary>
+        ///
+        /// </summary>     
         BTR, // Bit Test and Reset
+
+        /// <summary>
+        ///
+        /// </summary>     
         BTS, // Bit Test and Set
+
+        /// <summary>
+        ///
+        /// </summary>     
         BZHI, // Zero High Bits Starting with Specified Bit Position
+
+        /// <summary>
+        ///
+        /// </summary>     
         CALL, // Call Procedure
+
+        /// <summary>
+        ///
+        /// </summary>     
         CBW, // Convert Byte to Word/Convert Word to Doubleword/Convert Doubleword to Quadword
+
+        /// <summary>
+        ///
+        /// </summary>     
         CDQ, // Convert Word to Doubleword/Convert Doubleword to Quadword
+
+        /// <summary>
+        ///
+        /// </summary>     
         CDQE, // Convert Byte to Word/Convert Word to Doubleword/Convert Doubleword to Quadword
+
+        /// <summary>
+        ///
+        /// </summary>     
         CLAC, // Clear AC Flag in EFLAGS Register
+
+        /// <summary>
+        ///
+        /// </summary>     
         CLC, // Clear Carry Flag
+
+        /// <summary>
+        ///
+        /// </summary>     
         CLD, // Clear Direction Flag
+
+        /// <summary>
+        ///
+        /// </summary>     
         CLDEMOTE, // Cache Line Demote
+
+        /// <summary>
+        ///
+        /// </summary>     
         CLFLUSH, // Flush Cache Line
+
+        /// <summary>
+        ///
+        /// </summary>     
         CLFLUSHOPT, // Flush Cache Line Optimized
+
+        /// <summary>
+        ///
+        /// </summary>     
         CLI, // Clear Interrupt Flag
+
+        /// <summary>
+        ///
+        /// </summary>     
         CLTS, // Clear Task-Switched Flag in CR0
+
+        /// <summary>
+        ///
+        /// </summary>     
         CLWB, // Cache Line Write Back
-        CMC, // Complement Carry Flag
-        CMOVcc, // Conditional Move
-        CMP, // Compare Two Operands
-        CMPPD, // Compare Packed Double-Precision Floating-Point Values
+
+        /// <summary>
+        /// Complement Carry Flag
+        /// </summary>     
+        CMC,  
+
+        /// <summary>
+        /// Conditional Move
+        /// </summary>     
+        CMOVcc,
+
+        /// <summary>
+        /// Compare Two Operands
+        /// </summary>     
+        CMP, 
+
+        /// <summary>
+        /// Compare Packed Double-Precision Floating-Point Values
+        /// </summary>     
+        CMPPD,
+
+        /// <summary>
+        ///
+        /// </summary>     
         CMPPS, // Compare Packed Single-Precision Floating-Point Values
+
+        /// <summary>
+        ///
+        /// </summary>     
         CMPS, // Compare String Operands
+
+        /// <summary>
+        ///
+        /// </summary>     
         CMPSB, // Compare String Operands
+
+        /// <summary>
+        ///
+        /// </summary>     
         CMPSD, // Compare String Operands
+
+        /// <summary>
+        ///
+        /// </summary>     
         CMPSD_1, // Compare Scalar Double-Precision Floating-Point Value
+
+        /// <summary>
+        ///
+        /// </summary>     
         CMPSQ, // Compare String Operands
+
+        /// <summary>
+        ///
+        /// </summary>     
         CMPSS, // Compare Scalar Single-Precision Floating-Point Value
+
+        /// <summary>
+        ///
+        /// </summary>     
         CMPSW, // Compare String Operands
+
+        /// <summary>
+        ///
+        /// </summary>     
         CMPXCHG, // Compare and Exchange
+
+        /// <summary>
+        ///
+        /// </summary>     
         CMPXCHG16B, // Compare and Exchange Bytes
+
+        /// <summary>
+        ///
+        /// </summary>     
         CMPXCHG8B, // Compare and Exchange Bytes
+
+        /// <summary>
+        ///
+        /// </summary>     
         COMISD, // Compare Scalar Ordered Double-Precision Floating-Point Values and Set EFLAGS
+
+        /// <summary>
+        ///
+        /// </summary>     
         COMISS, // Compare Scalar Ordered Single-Precision Floating-Point Values and Set EFLAGS
+
+        /// <summary>
+        ///
+        /// </summary>     
         CPUID, // CPU Identification
+
+        /// <summary>
+        ///
+        /// </summary>     
         CQO, // Convert Word to Doubleword/Convert Doubleword to Quadword
+
+        /// <summary>
+        ///
+        /// </summary>     
         CRC32, // Accumulate CRC32 Value
+
+        /// <summary>
+        ///
+        /// </summary>     
         CVTDQ2PD, // Convert Packed Doubleword Integers to Packed Double-Precision Floating-Point Values
+
+        /// <summary>
+        ///
+        /// </summary>     
         CVTDQ2PS, // Convert Packed Doubleword Integers to Packed Single-Precision Floating-Point Values
+
+        /// <summary>
+        ///
+        /// </summary>     
         CVTPD2DQ, // Convert Packed Double-Precision Floating-Point Values to Packed Doubleword Integers
+
+        /// <summary>
+        ///
+        /// </summary>     
         CVTPD2PI, // Convert Packed Double-Precision FP Values to Packed Dword Integers
+
+        /// <summary>
+        ///
+        /// </summary>     
         CVTPD2PS, // Convert Packed Double-Precision Floating-Point Values to Packed Single-Precision Floating-Point Values
+
+        /// <summary>
+        ///
+        /// </summary>     
         CVTPI2PD, // Convert Packed Dword Integers to Packed Double-Precision FP Values
+
+        /// <summary>
+        ///
+        /// </summary>     
         CVTPI2PS, // Convert Packed Dword Integers to Packed Single-Precision FP Values
+
+        /// <summary>
+        ///
+        /// </summary>     
         CVTPS2DQ, // Convert Packed Single-Precision Floating-Point Values to Packed Signed Doubleword Integer Values
+
+        /// <summary>
+        ///
+        /// </summary>     
         CVTPS2PD, // Convert Packed Single-Precision Floating-Point Values to Packed Double-Precision Floating-Point Values
+
+        /// <summary>
+        ///
+        /// </summary>     
         CVTPS2PI, // Convert Packed Single-Precision FP Values to Packed Dword Integers
+
+        /// <summary>
+        ///
+        /// </summary>     
         CVTSD2SI, // Convert Scalar Double-Precision Floating-Point Value to Doubleword Integer
+
+        /// <summary>
+        ///
+        /// </summary>     
         CVTSD2SS, // Convert Scalar Double-Precision Floating-Point Value to Scalar Single-Precision Floating-Point Value
+
+        /// <summary>
+        ///
+        /// </summary>     
         CVTSI2SD, // Convert Doubleword Integer to Scalar Double-Precision Floating-Point Value
+
+        /// <summary>
+        ///
+        /// </summary>     
         CVTSI2SS, // Convert Doubleword Integer to Scalar Single-Precision Floating-Point Value
+
+        /// <summary>
+        ///
+        /// </summary>     
         CVTSS2SD, // Convert Scalar Single-Precision Floating-Point Value to Scalar Double-Precision Floating-Point Value
+
+        /// <summary>
+        ///
+        /// </summary>     
         CVTSS2SI, // Convert Scalar Single-Precision Floating-Point Value to Doubleword Integer
+
+        /// <summary>
+        ///
+        /// </summary>     
         CVTTPD2DQ, // Convert with Truncation Packed Double-Precision Floating-Point Values to Packed Doubleword Integers
+
+        /// <summary>
+        ///
+        /// </summary>     
         CVTTPD2PI, // Convert with Truncation Packed Double-Precision FP Values to Packed Dword Integers
+
+        /// <summary>
+        ///
+        /// </summary>     
         CVTTPS2DQ, // Convert with Truncation Packed Single-Precision Floating-Point Values to Packed Signed Doubleword Integer Values
+
+        /// <summary>
+        ///
+        /// </summary>     
         CVTTPS2PI, // Convert with Truncation Packed Single-Precision FP Values to Packed Dword Integers
+
+        /// <summary>
+        ///
+        /// </summary>     
         CVTTSD2SI, // Convert with Truncation Scalar Double-Precision Floating-Point Value to Signed Integer
+
+        /// <summary>
+        ///
+        /// </summary>     
         CVTTSS2SI, // Convert with Truncation Scalar Single-Precision Floating-Point Value to Integer
+
+        /// <summary>
+        ///
+        /// </summary>     
         CWD, // Convert Word to Doubleword/Convert Doubleword to Quadword
+
+        /// <summary>
+        ///
+        /// </summary>     
         CWDE, // Convert Byte to Word/Convert Word to Doubleword/Convert Doubleword to Quadword
+
+        /// <summary>
+        ///
+        /// </summary>     
         DAA, // Decimal Adjust AL after Addition
+
+        /// <summary>
+        ///
+        /// </summary>     
         DAS, // Decimal Adjust AL after Subtraction
+
+        /// <summary>
+        ///
+        /// </summary>     
         DEC, // Decrement by 1
+
+        /// <summary>
+        ///
+        /// </summary>     
         DIV, // Unsigned Divide
+
+        /// <summary>
+        ///
+        /// </summary>     
         DIVPD, // Divide Packed Double-Precision Floating-Point Values
+
+        /// <summary>
+        ///
+        /// </summary>     
         DIVPS, // Divide Packed Single-Precision Floating-Point Values
+
+        /// <summary>
+        ///
+        /// </summary>     
         DIVSD, // Divide Scalar Double-Precision Floating-Point Value
+
+        /// <summary>
+        ///
+        /// </summary>     
         DIVSS, // Divide Scalar Single-Precision Floating-Point Values
+
+        /// <summary>
+        ///
+        /// </summary>     
         DPPD, // Dot Product of Packed Double Precision Floating-Point Values
+
+        /// <summary>
+        ///
+        /// </summary>     
         DPPS, // Dot Product of Packed Single Precision Floating-Point Values
+
+        /// <summary>
+        ///
+        /// </summary>     
         EMMS, // Empty MMX Technology State
+
+        /// <summary>
+        ///
+        /// </summary>     
         ENTER, // Make Stack Frame for Procedure Parameters
+
+        /// <summary>
+        ///
+        /// </summary>     
         EXTRACTPS, // Extract Packed Floating-Point Values
+
+        /// <summary>
+        ///
+        /// </summary>     
         F2XM1, // Compute 2x–1
+        
+        /// <summary>
+        ///
+        /// </summary>     
         FABS, // Absolute Value
+
+        /// <summary>
+        ///
+        /// </summary>     
         FADD, // Add
+
+        /// <summary>
+        ///
+        /// </summary>     
         FADDP, // Add
+        
+        /// <summary>
+        ///
+        /// </summary>     
         FBLD, // Load Binary Coded Decimal
+
+        /// <summary>
+        ///
+        /// </summary>     
         FBSTP, // Store BCD Integer and Pop
+
+        /// <summary>
+        ///
+        /// </summary>     
         FCHS, // Change Sign
+
+        /// <summary>
+        ///
+        /// </summary>     
         FCLEX, // Clear Exceptions
+
+        /// <summary>
+        ///
+        /// </summary>     
         FCMOVcc, // Floating-Point Conditional Move
+
+        /// <summary>
+        ///
+        /// </summary>     
         FCOM, // Compare Floating Point Values
+
+        /// <summary>
+        ///
+        /// </summary>     
         FCOMI, // Compare Floating Point Values and Set EFLAGS
+
+        /// <summary>
+        ///
+        /// </summary>     
         FCOMIP, // Compare Floating Point Values and Set EFLAGS
+
+        /// <summary>
+        ///
+        /// </summary>     
         FCOMP, // Compare Floating Point Values
+
+        /// <summary>
+        ///
+        /// </summary>     
         FCOMPP, // Compare Floating Point Values
+
+        /// <summary>
+        ///
+        /// </summary>     
         FCOS, // Cosine
+
+        /// <summary>
+        ///
+        /// </summary>     
         FDECSTP, // Decrement Stack-Top Pointer
+
+        /// <summary>
+        ///
+        /// </summary>     
         FDIV, // Divide
+
+        /// <summary>
+        ///
+        /// </summary>     
         FDIVP, // Divide
+
+        /// <summary>
+        ///
+        /// </summary>     
         FDIVR, // Reverse Divide
+
+        /// <summary>
+        ///
+        /// </summary>     
         FDIVRP, // Reverse Divide
+
+        /// <summary>
+        ///
+        /// </summary>     
         FFREE, // Free Floating-Point Register
+
+        /// <summary>
+        ///
+        /// </summary>     
         FIADD, // Add
+
+        /// <summary>
+        ///
+        /// </summary>     
         FICOM, // Compare Integer
+
+        /// <summary>
+        ///
+        /// </summary>     
         FICOMP, // Compare Integer
+
+        /// <summary>
+        ///
+        /// </summary>     
         FIDIV, // Divide
+
+        /// <summary>
+        ///
+        /// </summary>     
         FIDIVR, // Reverse Divide
+
+        /// <summary>
+        ///
+        /// </summary>     
         FILD, // Load Integer
+
+        /// <summary>
+        ///
+        /// </summary>     
         FIMUL, // Multiply
+
+        /// <summary>
+        ///
+        /// </summary>     
         FINCSTP, // Increment Stack-Top Pointer
+
+        /// <summary>
+        ///
+        /// </summary>     
         FINIT, // Initialize Floating-Point Unit
+
+        /// <summary>
+        ///
+        /// </summary>     
         FIST, // Store Integer
+        
+        /// <summary>
+        ///
+        /// </summary>     
         FISTP, // Store Integer
+
+        /// <summary>
+        ///
+        /// </summary>     
         FISTTP, // Store Integer with Truncation
+
+        /// <summary>
+        ///
+        /// </summary>     
         FISUB, // Subtract
+
+        /// <summary>
+        ///
+        /// </summary>     
         FISUBR, // Reverse Subtract
+
+        /// <summary>
+        ///
+        /// </summary>     
         FLD, // Load Floating Point Value
+
+        /// <summary>
+        ///
+        /// </summary>     
         FLD1, // Load Constant
+
+        /// <summary>
+        ///
+        /// </summary>     
         FLDCW, // Load x87 FPU Control Word
+
+        /// <summary>
+        ///
+        /// </summary>     
         FLDENV, // Load x87 FPU Environment
+
+        /// <summary>
+        ///
+        /// </summary>     
         FLDL2E, // Load Constant
+
+        /// <summary>
+        ///
+        /// </summary>     
         FLDL2T, // Load Constant
+
+        /// <summary>
+        ///
+        /// </summary>     
         FLDLG2, // Load Constant
+
+        /// <summary>
+        ///
+        /// </summary>     
         FLDLN2, // Load Constant
+
+        /// <summary>
+        ///
+        /// </summary>     
         FLDPI, // Load Constant
+
+        /// <summary>
+        ///
+        /// </summary>     
         FLDZ, // Load Constant
+
+        /// <summary>
+        ///
+        /// </summary>     
         FMUL, // Multiply
+
+        /// <summary>
+        ///
+        /// </summary>     
         FMULP, // Multiply
+
+        /// <summary>
+        ///
+        /// </summary>     
         FNCLEX, // Clear Exceptions
+
+        /// <summary>
+        ///
+        /// </summary>     
         FNINIT, // Initialize Floating-Point Unit
+
+        /// <summary>
+        ///
+        /// </summary>     
         FNOP, // No Operation
+
+        /// <summary>
+        ///
+        /// </summary>     
         FNSAVE, // Store x87 FPU State
+
+        /// <summary>
+        ///
+        /// </summary>     
         FNSTCW, // Store x87 FPU Control Word
+
+        /// <summary>
+        ///
+        /// </summary>     
         FNSTENV, // Store x87 FPU Environment
+
+        /// <summary>
+        ///
+        /// </summary>     
         FNSTSW, // Store x87 FPU Status Word
+
+        /// <summary>
+        ///
+        /// </summary>     
         FPATAN, // Partial Arctangent
+
+        /// <summary>
+        ///
+        /// </summary>     
         FPREM, // Partial Remainder
+
+        /// <summary>
+        ///
+        /// </summary>     
         FPREM1, // Partial Remainder
+
+        /// <summary>
+        ///
+        /// </summary>     
         FPTAN, // Partial Tangent
+
+        /// <summary>
+        ///
+        /// </summary>     
         FRNDINT, // Round to Integer
+
+        /// <summary>
+        ///
+        /// </summary>     
         FRSTOR, // Restore x87 FPU State
+
+        /// <summary>
+        ///
+        /// </summary>     
         FSAVE, // Store x87 FPU State
+
+        /// <summary>
+        ///
+        /// </summary>     
         FSCALE, // Scale
+
+        /// <summary>
+        ///
+        /// </summary>     
         FSIN, // Sine
+
+        /// <summary>
+        ///
+        /// </summary>     
         FSINCOS, // Sine and Cosine
+
+        /// <summary>
+        ///
+        /// </summary>     
         FSQRT, // Square Root
+
+        /// <summary>
+        ///
+        /// </summary>     
         FST, // Store Floating Point Value
+
+        /// <summary>
+        ///
+        /// </summary>     
         FSTCW, // Store x87 FPU Control Word
+
+        /// <summary>
+        ///
+        /// </summary>     
         FSTENV, // Store x87 FPU Environment
+
+        /// <summary>
+        ///
+        /// </summary>     
         FSTP, // Store Floating Point Value
+
+        /// <summary>
+        ///
+        /// </summary>     
         FSTSW, // Store x87 FPU Status Word
+
+        /// <summary>
+        ///
+        /// </summary>     
         FSUB, // Subtract
+
+        /// <summary>
+        ///
+        /// </summary>     
         FSUBP, // Subtract
+
+        /// <summary>
+        ///
+        /// </summary>     
         FSUBR, // Reverse Subtract
+
+        /// <summary>
+        ///
+        /// </summary>     
         FSUBRP, // Reverse Subtract
+
+        /// <summary>
+        ///
+        /// </summary>     
         FTST, // TEST
+
+        /// <summary>
+        ///
+        /// </summary>     
         FUCOM, // Unordered Compare Floating Point Values
+
+        /// <summary>
+        ///
+        /// </summary>     
         FUCOMI, // Compare Floating Point Values and Set EFLAGS
+
+        /// <summary>
+        ///
+        /// </summary>     
         FUCOMIP, // Compare Floating Point Values and Set EFLAGS
+
+        /// <summary>
+        ///
+        /// </summary>     
         FUCOMP, // Unordered Compare Floating Point Values
+
+        /// <summary>
+        ///
+        /// </summary>     
         FUCOMPP, // Unordered Compare Floating Point Values
+
+        /// <summary>
+        ///
+        /// </summary>     
         FWAIT, // Wait
+
+        /// <summary>
+        ///
+        /// </summary>     
         FXAM, // Examine Floating-Point
+
+        /// <summary>
+        ///
+        /// </summary>     
         FXCH, // Exchange Register Contents
+
+        /// <summary>
+        ///
+        /// </summary>     
         FXRSTOR, // Restore x87 FPU, MMX, XMM, and MXCSR State
+
+        /// <summary>
+        ///
+        /// </summary>     
         FXSAVE, // Save x87 FPU, MMX Technology, and SSE State
+
+        /// <summary>
+        ///
+        /// </summary>     
         FXTRACT, // Extract Exponent and Significand
+
+        /// <summary>
+        ///
+        /// </summary>     
         FYL2X, // Compute y ∗ log2x
+
+        /// <summary>
+        ///
+        /// </summary>     
         FYL2XP1, // Compute y ∗ log2(x +1)
+
+        /// <summary>
+        ///
+        /// </summary>     
         GF2P8AFFINEINVQB, // Galois Field Affine Transformation Inverse
+
+        /// <summary>
+        ///
+        /// </summary>     
         GF2P8AFFINEQB, // Galois Field Affine Transformation
+
+        /// <summary>
+        ///
+        /// </summary>     
         GF2P8MULB, // Galois Field Multiply Bytes
+
+        /// <summary>
+        ///
+        /// </summary>     
         HADDPD, // Packed Double-FP Horizontal Add
+
+        /// <summary>
+        ///
+        /// </summary>     
         HADDPS, // Packed Single-FP Horizontal Add
+
+        /// <summary>
+        ///
+        /// </summary>     
         HLT, // Halt
+
+        /// <summary>
+        ///
+        /// </summary>     
         HSUBPD, // Packed Double-FP Horizontal Subtract
+
+        /// <summary>
+        ///
+        /// </summary>     
         HSUBPS, // Packed Single-FP Horizontal Subtract
+
+        /// <summary>
+        ///
+        /// </summary>     
         IDIV, // Signed Divide
+
+        /// <summary>
+        ///
+        /// </summary>     
         IMUL, // Signed Multiply
+
+        /// <summary>
+        ///
+        /// </summary>     
         IN, // Input from Port
+
+        /// <summary>
+        ///
+        /// </summary>     
         INC, // Increment by 1
         INS, // Input from Port to String
         INSB, // Input from Port to String

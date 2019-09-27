@@ -34,10 +34,7 @@ namespace Z0
                 return generic<T>(Bits.trunc(uint64(src), len));
             else
                 throw unsupported<T>();
-
         }
-
-
     }
 
 }

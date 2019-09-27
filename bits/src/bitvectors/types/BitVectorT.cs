@@ -148,7 +148,7 @@ namespace Z0
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
         public static BitVector<T> operator &(BitVector<T> x, in BitVector<T> y)
-            => new BitVector<T>(gbitspan.and(x.data, y.data));
+            => new BitVector<T>(mathspan.and(x.data, y.data));
 
         /// <summary>
         /// Computes the bitwias AND between the operands

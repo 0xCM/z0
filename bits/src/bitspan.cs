@@ -15,9 +15,13 @@ namespace Z0
 
     public static class bitspan
     {
-
-
- 
+        public static Span256<T> and<T>(ReadOnlySpan256<T> lhs, ReadOnlySpan256<T> rhs, Span256<T> dst)
+            where T : unmanaged
+        {
+            for(var i=0; i< blocks(lhs,rhs); i++)
+                vstore(gbits.vand<T>(lhs.LoadVec256(i), rhs.LoadVec256(i)), ref dst.Block(i));                             
+            return dst;        
+        } 
 
         /// <summary>
         /// Counts the total population of enabled bits in the source
