@@ -26,9 +26,9 @@ namespace Z0
         public static Vector256<T> vand<T>(Vector256<T> lhs, Vector256<T> rhs)
             where T : unmanaged
         {
-            if(typematch<T,float>())
+            if(typeof(T) == typeof(float))
                 return generic<T>(Bits.and(float32(lhs), float32(rhs)));
-            else if(typematch<T,double>())
+            else if(typeof(T) == typeof(double))
                 return generic<T>(Bits.and(float64(lhs), float64(rhs)));
             else 
                 throw unsupported<T>();
@@ -39,9 +39,9 @@ namespace Z0
         public static Vector128<T> vxor<T>(Vector128<T> lhs, Vector128<T> rhs)
             where T : unmanaged
         {
-            if(typematch<T,float>())
+            if(typeof(T) == typeof(float))
                 return generic<T>(Bits.xor(float32(lhs), float32(rhs)));
-            else if(typematch<T,double>())
+            else if(typeof(T) == typeof(double))
                 return generic<T>(Bits.xor(float64(lhs), float64(rhs)));
             else 
                 throw unsupported<T>();
@@ -51,9 +51,9 @@ namespace Z0
         public static Vector256<T> vxor<T>(Vector256<T> lhs, Vector256<T> rhs)
             where T : unmanaged
         {
-            if(typematch<T,float>())
+            if(typeof(T) == typeof(float))
                 return generic<T>(Bits.xor(float32(lhs), float32(rhs)));
-            else if(typematch<T,double>())
+            else if(typeof(T) == typeof(double))
                 return generic<T>(Bits.xor(float64(lhs), float64(rhs)));
             else 
                 throw unsupported<T>();

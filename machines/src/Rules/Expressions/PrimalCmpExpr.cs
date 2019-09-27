@@ -18,7 +18,7 @@ namespace Z0
     /// Defines a primal comparison expression
     /// </summary>    
     public readonly struct PrimalCmpExpr<T> : IRuleExpr<T>
-        where T : struct
+        where T : unmanaged
     {        
         public PrimalCmpExpr(T Value, PrimalCmpKind Comparison)
         {

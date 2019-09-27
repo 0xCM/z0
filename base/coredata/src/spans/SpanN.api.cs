@@ -26,7 +26,7 @@ namespace Z0
         public static Span<M,N,T> Load<M,N,T>(ref T src, M m = default, N n = default)    
             where M : ITypeNat, new()
             where N : ITypeNat, new()
-            where T : struct
+            where T : unmanaged
                 => new Span<M,N,T>(ref src);
 
         /// <summary>
@@ -38,7 +38,7 @@ namespace Z0
         [MethodImpl(Inline)]   
         public static ReadOnlySpan<N,T> ReadOnly<N,T>(ref ReadOnlySpan<T> src, N len = default(N))    
             where N : ITypeNat, new()
-            where T : struct
+            where T : unmanaged
                 => new ReadOnlySpan<N,T>(ref src);
 
         /// <summary>
@@ -50,7 +50,7 @@ namespace Z0
         [MethodImpl(Inline)]   
         public static Span<N,T> Load<N,T>(ReadOnlySpan<T> src, N len = default(N))    
             where N : ITypeNat, new()
-            where T : struct
+            where T : unmanaged
                 => new Span<N,T>(src);
 
         /// <summary>
@@ -62,33 +62,33 @@ namespace Z0
         [MethodImpl(Inline)]   
         public static Span<N,T> Load<N,T>(ref T src, N len = default(N))    
             where N : ITypeNat, new()
-            where T : struct
+            where T : unmanaged
                 => new Span<N,T>(ref src);
 
         [MethodImpl(Inline)]   
         public static ReadOnlySpan<M,N,T> Load<M,N,T>(ref ReadOnlySpan<T> src, N len = default(N))    
             where M : ITypeNat, new()
             where N : ITypeNat, new()
-            where T : struct
+            where T : unmanaged
                 => new ReadOnlySpan<M,N,T>(ref src);
 
         [MethodImpl(Inline)]   
         public static Span<M,N,T> Load<M,N,T>(ReadOnlySpan<T> src, M m = default, N n = default)    
             where M : ITypeNat, new()
             where N : ITypeNat, new()
-            where T : struct
+            where T : unmanaged
                 => new Span<M,N,T>(src);
 
         [MethodImpl(Inline)]   
         public static Span<N,T> Load<N,T>(Span<T> src, N n = default(N))    
             where N : ITypeNat, new()
-            where T : struct
+            where T : unmanaged
                 => new Span<N,T>(src);
 
         [MethodImpl(Inline)]   
         public static Span<N,T> Load<N,T>(Span<N,T> src, N n = default(N))    
             where N : ITypeNat, new()
-            where T : struct
+            where T : unmanaged
                 => new Span<N,T>(src);
 
 
@@ -96,33 +96,33 @@ namespace Z0
         public static Span<M,N,T> Load<M,N,T>(Span<T> src, M m = default, N n = default)    
             where M : ITypeNat, new()
             where N : ITypeNat, new()
-            where T : struct
+            where T : unmanaged
                 => new Span<M,N,T>(src);
 
         [MethodImpl(Inline)]   
         public static Span<N,T> Alloc<N,T>(T value = default(T), N n = default) 
             where N : ITypeNat, new()
-            where T : struct
+            where T : unmanaged
                 => new Span<N,T>(value);
 
         [MethodImpl(Inline)]   
         public static Span<M,N,T> Alloc<M,N,T>(T value = default(T), M m = default, N n = default) 
             where M : ITypeNat, new()
             where N : ITypeNat, new()
-            where T : struct
+            where T : unmanaged
                 => new Span<M,N,T>(value);
 
         [MethodImpl(Inline)]   
         public static Span<N,T> Zero<N,T>(N n = default) 
             where N : ITypeNat, new()
-            where T : struct
+            where T : unmanaged
                 => new Span<N,T>(default(T));
 
         [MethodImpl(Inline)]   
         public static Span<M,N,T> Zero<M,N,T>(M m = default, N n = default) 
             where M : ITypeNat, new()
             where N : ITypeNat, new()
-            where T : struct
+            where T : unmanaged
                 => new Span<M,N,T>(default(T));
 
     }

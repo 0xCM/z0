@@ -17,7 +17,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static ref T toggle<T>(ref T src, byte pos)
-            where T : struct
+            where T : unmanaged
         {
             if(typematch<T,sbyte>())
                 Bits.toggle(ref int8(ref src), pos);
@@ -35,9 +35,9 @@ namespace Z0
                 Bits.toggle(ref int64(ref src), pos);
             else if(typematch<T,ulong>())
                 Bits.toggle(ref uint64(ref src), pos);
-            else if(typematch<T,float>())
+            else if(typeof(T) == typeof(float))
                 Bits.toggle(ref float32(ref src), pos);
-            else if(typematch<T,double>())
+            else if(typeof(T) == typeof(double))
                 Bits.toggle(ref float64(ref src), pos);
             else
                 throw unsupported<T>();

@@ -36,7 +36,7 @@ namespace Z0
         }
 
         public BlockVector<N, T> Next<T>() 
-            where T : struct
+            where T : unmanaged
         {
             var dst = BlockVector.Alloc<N,T>();
             for(var i=0; i<n; i++)
@@ -45,7 +45,7 @@ namespace Z0
         }
 
         public BlockVector<N, T> Next<T>(T min) 
-            where T : struct
+            where T : unmanaged
         {
             var dst = BlockVector.Alloc<N,T>();
             for(var i=0; i<n; i++)
@@ -54,7 +54,7 @@ namespace Z0
         }
 
         public BlockVector<N, T> Next<T>(T min, T max) 
-            where T : struct
+            where T : unmanaged
         {
             var dst = BlockVector.Alloc<N,T>();
             for(var i=0; i<n; i++)
@@ -63,7 +63,7 @@ namespace Z0
         }
 
         public BlockVector<N, T> Next<T>(Interval<T> domain)
-             where T : struct
+             where T : unmanaged
         {
             var dst = BlockVector.Alloc<N,T>();
             for(var i=0; i<n; i++)

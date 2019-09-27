@@ -94,7 +94,7 @@ partial class zfunc
     /// <typeparam name="T">The type to test</typeparam>
     [MethodImpl(Inline)]
     public static bool isFloat<T>()
-        where T : struct
+        where T : unmanaged
             => typeof(T) == typeof(float) 
             || typeof(T) == typeof(double);
 
@@ -114,7 +114,7 @@ partial class zfunc
     /// <typeparam name="T">The type to test</typeparam>
     [MethodImpl(Inline)]
     public static bool isIntegral<T>()
-        where T : struct
+        where T : unmanaged
             => typeof(T) == typeof(sbyte) 
             || typeof(T) == typeof(byte)
             || typeof(T) == typeof(short)
@@ -130,7 +130,7 @@ partial class zfunc
     /// <typeparam name="T">The type to test</typeparam>
     [MethodImpl(Inline)]
     public static bool isSigned<T>()
-        where T : struct
+        where T : unmanaged
             => typeof(T) == typeof(sbyte) 
             || typeof(T) == typeof(short)
             || typeof(T) == typeof(int)
@@ -144,7 +144,7 @@ partial class zfunc
     /// <typeparam name="T">The type to test</typeparam>
     [MethodImpl(Inline)]
     public static bool isUnsigned<T>()
-        where T : struct
+        where T : unmanaged
             => typeof(T) == typeof(byte)
             || typeof(T) == typeof(ushort)
             || typeof(T) == typeof(uint)

@@ -62,7 +62,7 @@ namespace Z0.Test
         /// <param name="segMax">The maximum segment length</param>
         /// <typeparam name="T">The position's type</typeparam>
         IEnumerable<CellIndex<T>> BitPositions<T>(ushort segMin, ushort segMax)
-            where T : struct
+            where T : unmanaged
         {
             var tBits = Unsafe.SizeOf<T>()*8;
             var s2 = Random.Stream(closed(segMin,segMax)).GetEnumerator();            

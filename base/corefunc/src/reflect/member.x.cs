@@ -487,12 +487,18 @@ namespace Z0
         }    
  
         [MethodImpl(Inline)]
-        public static void JitMethod(this MethodBase method)
+        public static IntPtr JitMethod(this MethodBase method)
         {
             RuntimeHelpers.PrepareMethod(method.MethodHandle);
+            return method.MethodHandle.GetFunctionPointer();
         }
 
         public static void JitMethods(this IEnumerable<MethodBase> methods)
-            => iter(methods,JitMethod);
+        {
+            foreach(var m in methods)
+            {
+                m.JitMethod();                
+            }
+        }
     }
 }

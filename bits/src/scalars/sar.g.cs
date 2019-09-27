@@ -22,7 +22,7 @@ namespace Z0
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
         public static T sar<T>(T src, int offset)
-            where T : struct
+            where T : unmanaged
                 => gmath.sar(src,offset);
 
         /// <summary>
@@ -33,7 +33,7 @@ namespace Z0
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
         public static ref T sar<T>(ref T src, int offset)
-            where T : struct
+            where T : unmanaged
                 => ref gmath.sar(ref src, offset);
     }
 }

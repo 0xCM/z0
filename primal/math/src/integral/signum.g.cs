@@ -41,9 +41,9 @@ namespace Z0
                 return math.signum(int64(src));
             else if(typematch<T,ulong>())
                 return math.signum(uint64(src));
-            else if(typematch<T,float>())
+            else if(typeof(T) == typeof(float))
                 return math.signum(float32(src));
-            else if(typematch<T,double>())
+            else if(typeof(T) == typeof(double))
                 return math.signum(float64(src));
             else            
                 throw unsupported<T>();

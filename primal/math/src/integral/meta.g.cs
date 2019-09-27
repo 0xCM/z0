@@ -18,7 +18,7 @@ namespace Z0
     {
         [MethodImpl(Inline)]
         public static T zero<T>()
-            where T : struct
+            where T : unmanaged
         {        
             if(typematch<T,sbyte>())
                 return generic<T>(ref asRef((sbyte)0));
@@ -36,9 +36,9 @@ namespace Z0
                 return generic<T>(ref asRef(0L));
             else if(typematch<T,ulong>())
                 return generic<T>(ref asRef(0ul));
-            else if(typematch<T,float>())
+            else if(typeof(T) == typeof(float))
                 return generic<T>(ref asRef(0f));
-            else if(typematch<T,double>())
+            else if(typeof(T) == typeof(double))
                 return generic<T>(ref asRef(0.0));
             else
                 throw unsupported<T>();
@@ -63,9 +63,9 @@ namespace Z0
                 return generic<T>(ref asRef(1L));
             else if(typematch<T,ulong>())
                 return generic<T>(ref asRef(1ul));
-            else if(typematch<T,float>())
+            else if(typeof(T) == typeof(float))
                 return generic<T>(ref asRef(1f));
-            else if(typematch<T,double>())
+            else if(typeof(T) == typeof(double))
                 return generic<T>(ref asRef(1.0));
             else
                 throw unsupported<T>();
@@ -73,7 +73,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static T minval<T>()
-            where T : struct
+            where T : unmanaged
         {
             if(typematch<T,sbyte>())
                 return generic<T>(sbyte.MinValue);
@@ -91,9 +91,9 @@ namespace Z0
                 return generic<T>(long.MinValue);
             else if(typematch<T,ulong>())
                 return generic<T>(ulong.MinValue);
-            else if(typematch<T,float>())
+            else if(typeof(T) == typeof(float))
                 return generic<T>(float.MinValue);
-            else if(typematch<T,double>())
+            else if(typeof(T) == typeof(double))
                 return generic<T>(double.MinValue);
             else
                 throw unsupported<T>();
@@ -101,7 +101,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static T maxval<T>()
-            where T : struct
+            where T : unmanaged
         {
             if(typematch<T,sbyte>())
                 return generic<T>(sbyte.MaxValue);
@@ -119,9 +119,9 @@ namespace Z0
                 return generic<T>(long.MaxValue);
             else if(typematch<T,ulong>())
                 return generic<T>(ulong.MaxValue);
-            else if(typematch<T,float>())
+            else if(typeof(T) == typeof(float))
                 return generic<T>(float.MaxValue);
-            else if(typematch<T,double>())
+            else if(typeof(T) == typeof(double))
                 return generic<T>(double.MaxValue);
             else
                 throw unsupported<T>();
@@ -129,62 +129,56 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static bool signed<T>()
-            where T : struct
-        {
-            if(typematch<T,sbyte>())
-                return true;
-            else if(typematch<T,byte>())
-                return false;
-            else if(typematch<T,short>())
-                return true;
-            else if(typematch<T,ushort>())
-                return false;
-            else if(typematch<T,int>())
-                return true;
-            else if(typematch<T,uint>())
-                return false;
-            else if(typematch<T,long>())
-                return true;
-            else if(typematch<T,ulong>())
-                return false;
-            else if(typematch<T,float>())
-                return true;
-            else if(typematch<T,double>())
-                return true;
-            else
-                throw unsupported<T>();
-        }
+            where T : unmanaged
+            => !(typeof(T) == typeof(byte)
+                || typeof(T) == typeof(ushort)
+                || typeof(T) == typeof(uint)
+                || typeof(T) == typeof(ulong));
+            
 
         [MethodImpl(Inline)]
         public static bool unsigned<T>()
-            where T : struct
-                => !signed<T>();
-
+            where T : unmanaged
+                => (typeof(T) == typeof(byte)
+                    || typeof(T) == typeof(ushort)
+                    || typeof(T) == typeof(uint)
+                    || typeof(T) == typeof(ulong));
+                        
         [MethodImpl(Inline)]
         public static bool floating<T>()
-            where T : struct
-        {
-            if(typematch<T,float>())
-                return true;
-            else if(typematch<T,double>())
-                return true;
-            else
-                return false;
-        }
+            where T : unmanaged
+                => typeof(T) == typeof(float) || typeof(T) == typeof(double);
+
+        [MethodImpl(Inline)]
+        public static bool unsignedint<T>()
+            where T : unmanaged
+            => typeof(T) == typeof(byte) 
+            || typeof(T) == typeof(ushort) 
+            || typeof(T) == typeof(uint) 
+            || typeof(T) == typeof(ulong);
+
+
+        [MethodImpl(Inline)]
+        public static bool signedint<T>()
+            where T : unmanaged
+            => typeof(T) == typeof(sbyte) 
+            || typeof(T) == typeof(short) 
+            || typeof(T) == typeof(int) 
+            || typeof(T) == typeof(long);
 
         [MethodImpl(Inline)]
         public static bool integral<T>()
-            where T : struct
-                => !floating<T>();
+            where T : unmanaged
+                => signedint<T>() || unsignedint<T>();
 
         [MethodImpl(Inline)]
         public static ByteSize size<T>()
-            where T : struct
+            where T : unmanaged
                 => SizeOf<T>.Size;
 
         [MethodImpl(Inline)]
         public static BitSize bitsize<T>()
-            where T : struct
+            where T : unmanaged
                 => Unsafe.SizeOf<T>()* 8;
 
     }

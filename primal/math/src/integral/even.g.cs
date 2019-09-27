@@ -20,7 +20,7 @@ namespace Z0
         /// <typeparam name="T">The primal integer type</typeparam>
         [MethodImpl(Inline)]
         public static bool odd<T>(T src)
-            where T : struct
+            where T : unmanaged
         {
             if(typematch<T,sbyte>())
                 return zfunc.odd(int8(src));  
@@ -49,7 +49,7 @@ namespace Z0
         /// <typeparam name="T">The primal integer type</typeparam>
         [MethodImpl(Inline)]
         public static bool even<T>(T src)
-            where T : struct
+            where T : unmanaged
                 => !odd<T>(src);    
 
     }

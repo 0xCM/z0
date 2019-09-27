@@ -16,7 +16,7 @@ namespace Z0
     /// <param name="rhs">The right operand</param>
     /// <typeparam name="T">The primitive type</typeparam>
     public delegate Vector128<T> Vector128BinOp<T>(Vector128<T> lhs, Vector128<T> rhs)
-        where T : struct;
+        where T : unmanaged;
 
     /// <summary>
     /// Characterizes the signature of a canonical 128-bit vector binary operator
@@ -25,7 +25,7 @@ namespace Z0
     /// <param name="rhs">The right operand</param>
     /// <typeparam name="T">The primitive type</typeparam>
     public delegate Vector128<T> Vec128BinOp<T>(Vector128<T> lhs, Vector128<T> rhs)
-        where T : struct;
+        where T : unmanaged;
 
     /// <summary>
     /// Characterizes the signature of a function that loads a 128-bit vector from a pointer
@@ -33,7 +33,7 @@ namespace Z0
     /// <param name="src">Identifies the memory location from which to hydrate the vector</param>
     /// <typeparam name="T">The primitive type</typeparam>
     public unsafe delegate Vec128<T> Vec128LoadOp<T>(void* src)
-        where T : struct;
+        where T : unmanaged;
 
     /// <summary>
     /// Characterizes the signature of an unsafe data transfer from a 
@@ -43,7 +43,7 @@ namespace Z0
     /// <param name="dst">The target pointer</param>
     /// <typeparam name="T">The primitive type</typeparam>
     public unsafe delegate void Vec128StorePOp<T>(in Vec128<T> src, void* dst)
-        where T : struct;
+        where T : unmanaged;
 
     /// <summary>
     /// Characterizes the signature of an unsafe data transfer from a 
@@ -53,7 +53,7 @@ namespace Z0
     /// <param name="dst">The target pointer</param>
     /// <typeparam name="T">The primitive type</typeparam>
     public unsafe delegate void Vec128StoreAOp<T>(in Vec128<T> src, T[] dst, int offset = 0)
-        where T : struct;
+        where T : unmanaged;
 
 
     /// <summary>
@@ -64,7 +64,7 @@ namespace Z0
     /// <param name="rhs">The right operand</param>
     /// <typeparam name="T">The primitive type</typeparam>
     public delegate void Vec128BinOut<T>(in Vec128<T> lhs, in Vec128<T> rhs, out Vec128<T> dst)
-        where T : struct;
+        where T : unmanaged;
 
     /// <summary>
     /// Characterizes the signature of a 128-bit vector instrinsic binary operator that
@@ -74,7 +74,7 @@ namespace Z0
     /// <param name="rhs">The right operand</param>
     /// <typeparam name="T">The primitive type</typeparam>
     public unsafe delegate void Vec128BinPOut<T>(in Vec128<T> lhs, in Vec128<T> rhs, void* dst)
-        where T : struct;
+        where T : unmanaged;
 
     /// <summary>
     /// Characterizes the signature of a 128-bit vector instrinsic binary operator that
@@ -84,7 +84,7 @@ namespace Z0
     /// <param name="rhs">The right operand</param>
     /// <typeparam name="T">The primitive type</typeparam>
     public delegate void Vec128BinAOut<T>(in Vec128<T> lhs, in Vec128<T> rhs, T[] dst, int offset = 0)
-        where T : struct;
+        where T : unmanaged;
 
     /// <summary>
     /// Characterizes the signature of a 128-bit vector instrinsic binary operator that
@@ -94,7 +94,7 @@ namespace Z0
     /// <param name="rhs">The right operand</param>
     /// <typeparam name="T">The primitive type</typeparam>
     public delegate void Vec128BinSOut<T>(in Vec128<T> lhs, in Vec128<T> rhs, Span<T> dst, int offset = 0)
-        where T : struct;
+        where T : unmanaged;
 
     /// <summary>
     /// Characterizes the signature of a 128-bit vector intrinsic unary operator
@@ -102,7 +102,7 @@ namespace Z0
     /// <param name="src">The operand</param>
     /// <typeparam name="T">The primitive type</typeparam>
     public delegate Vec128<T> Vec128UnaryOp<T>(in Vec128<T> src)
-        where T : struct;
+        where T : unmanaged;
 
     /// <summary>
     /// Characterizes the signature of a function that transforms arrays into 128-bit vector streams
@@ -110,7 +110,7 @@ namespace Z0
     /// <param name="src">The data source</param>
     /// <typeparam name="T">The primitive type</typeparam>
     public delegate IEnumerable<Vec128<T>> Vec128StreamOp<T>(T[] src)
-        where T : struct;
+        where T : unmanaged;
 
     /// <summary>
     /// Characterizes the signature of a 256-bit vector intrinsic unary operator
@@ -118,7 +118,7 @@ namespace Z0
     /// <param name="src">The operand</param>
     /// <typeparam name="T">The primitive type</typeparam>
     public delegate Vector256<T> Vector256BinOp<T>(Vector256<T> lhs, Vector256<T> rhs)
-        where T : struct;
+        where T : unmanaged;
 
     /// <summary>
     /// Characterizes the signature of a canonical 256-bit vector heterogenous binary operator
@@ -127,8 +127,8 @@ namespace Z0
     /// <param name="rhs">The right operand</param>
     /// <typeparam name="T">The primitive type</typeparam>
     public delegate Vec256<T> Vec256BinOp<S, T>(in Vec256<S> lhs, in Vec256<S> rhs)
-        where T : struct
-        where S : struct;
+        where T : unmanaged
+        where S : unmanaged;
 
     /// <summary>
     /// Characterizes the signature of a 256-bit vector intrinsic unary operator
@@ -136,7 +136,7 @@ namespace Z0
     /// <param name="src">The operand</param>
     /// <typeparam name="T">The primitive type</typeparam>
     public delegate Vec256<T> Vec256UnaryOp<T>(in Vec256<T> src)
-        where T : struct;
+        where T : unmanaged;
 
     /// <summary>
     /// Characterizes the signature of a function that loads a 128-bit vector from a pointer
@@ -144,6 +144,6 @@ namespace Z0
     /// <param name="src">Identifies the memory location from which to hydrate the vector</param>
     /// <typeparam name="T">The primitive type</typeparam>
     public unsafe delegate Vec256<T> Vec256LoadOp<T>(void* src, out Vec256<T> dst)
-        where T : struct;
+        where T : unmanaged;
 
 }

@@ -21,7 +21,7 @@ namespace Z0
     /// enabling representations such as (-∞,3] and (-3, ∞).
     /// </remarks>
     public readonly struct Interval<T> : IInterval<T>
-        where T : struct
+        where T : unmanaged
     {
         /// <summary>
         /// Specifies the canonical unit interval over the underlying primitive
@@ -135,7 +135,7 @@ namespace Z0
         /// <typeparam name="U">The target type</typeparam>
         [MethodImpl(Inline)]
         public Interval<U> Convert<U>()
-            where U : struct
+            where U : unmanaged
                 => new Interval<U>(
                     convert(Left, out U x), LeftClosed, 
                     convert(Right, out U y), RightClosed
@@ -143,7 +143,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public Interval<U> As<U>()
-            where U : struct
+            where U : unmanaged
                 => new Interval<U>(
                     AsIn.generic<T,U>(in Left), LeftClosed, 
                     AsIn.generic<T,U>(in Right), RightClosed

@@ -16,33 +16,33 @@ namespace Z0
     {
         [MethodImpl(Inline)]
         public static T ValueOrElse<T>(this T? x,  Func<T> @else)
-            where T : struct
+            where T : unmanaged
                 => x != null ? x.Value : @else();
 
         [MethodImpl(Inline)]
         public static T ValueOrElse<T>(this T? x, T @else)
-            where T : struct
+            where T : unmanaged
                 => x != null ? x.Value : @else;
 
         [MethodImpl(Inline)]
         public static S MapValueOrDefault<T, S>(this T? x, Func<T, S> f, S @default = default(S))
-            where T : struct
+            where T : unmanaged
                 => x != null ? f(x.Value) : @default;
 
         [MethodImpl(Inline)]
         public static S? TryMapValue<T, S>(this T? x, Func<T, S> f)
-            where T : struct
-            where S : struct
+            where T : unmanaged
+            where S : unmanaged
                 => x != null ? f(x.Value) : (S?)null;
 
         [MethodImpl(Inline)]
         public static S Map<T, S>(this T? x, Func<T, S> ifSome, Func<S> ifNone)
-            where T : struct
+            where T : unmanaged
                  => x != null ? ifSome(x.Value) : ifNone();
 
         [MethodImpl(Inline)]
         public static S MapValueOrElse<T, S>(this T? x, Func<T, S> f, Func<S> @else)
-            where T : struct
+            where T : unmanaged
                 => x != null ? f(x.Value) : @else();
 
         /// <summary>
@@ -52,12 +52,12 @@ namespace Z0
         /// <param name="x">The potential value</param>
         [MethodImpl(Inline)]
         public static Option<T> ValueOrNone<T>(this T? x)
-            where T : struct
+            where T : unmanaged
                 => x != null ? x.Value : none<T>();
 
         [MethodImpl(Inline)]
         public static void OnValue<T>(this T? x, Action<T> action)
-            where T : struct
+            where T : unmanaged
                 => onTrue(x.HasValue, () => action(x.Value));
 
 
@@ -72,7 +72,7 @@ namespace Z0
         /// <param name="x"></param>
         [MethodImpl(Inline)]
         public static T Value<T>(this Option<T?> x)
-            where T : struct => x.ValueOrElse(() => default(T)).Value;
+            where T : unmanaged => x.ValueOrElse(() => default(T)).Value;
 
         /// <summary>
         /// Extracts the encapsluated value if present; otherwise returns the default value of the type
@@ -141,7 +141,7 @@ namespace Z0
         /// <typeparam name="T">The underlying CLR value type</typeparam>
         /// <param name="x">The potential value</param>
         [MethodImpl(Inline)]
-        public static T? ToNullable<T>(this Option<T> x) where T : struct
+        public static T? ToNullable<T>(this Option<T> x) where T : unmanaged
             => x.IsSome() ? new T?(x.ValueOrDefault()) : new T?();
 
         [MethodImpl(Inline)]

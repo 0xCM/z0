@@ -17,7 +17,7 @@ namespace Z0
     {
         [MethodImpl(Inline)]
         public static Vec256Cmp<T> Define<T>(Bit[] Results)
-            where T : struct
+            where T : unmanaged
                 => new Vec256Cmp<T>(Results);
 
         public static Vec256Cmp<T> Define<T>(Vector256<T> result)                

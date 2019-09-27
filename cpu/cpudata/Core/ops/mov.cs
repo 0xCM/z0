@@ -41,7 +41,7 @@ namespace Z0
         /// <param name="src">Source register identifier</param>
         /// <typeparam name="T">Target reference type</typeparam>
         public int mov<T>(ref T dst, GpRegId src)
-            where T : struct
+            where T : unmanaged
         {
             var srcLoc = src.Address();
             var dstSize = Unsafe.SizeOf<T>();
@@ -62,7 +62,7 @@ namespace Z0
         /// <param name="src">Source value</param>
         /// <typeparam name="T">Source value type</typeparam>
         public int mov<T>(GpRegId dst, T src)
-            where T : struct
+            where T : unmanaged
         {
             var dstLoc = dst.Address();
             var srcSize = Unsafe.SizeOf<T>();

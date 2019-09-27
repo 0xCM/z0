@@ -16,7 +16,7 @@ namespace Z0
     {
         [MethodImpl(Inline)]
         public static ref Vec128<T> broadcast<T>(in T src, out Vec128<T> dst)
-            where T : struct
+            where T : unmanaged
         {
             if(typematch<T,sbyte>())
                 dst = generic<T>(dinx.broadcast(in int8(in src), out Vec128<sbyte> x));
@@ -34,9 +34,9 @@ namespace Z0
                 dst = generic<T>(dinx.broadcast(in int64(in src), out Vec128<long> x));
             else if(typematch<T,ulong>())
                 dst = generic<T>(dinx.broadcast(in uint64(in src), out Vec128<ulong> x));
-            else if(typematch<T,float>())
+            else if(typeof(T) == typeof(float))
                 dst = generic<T>(dfp.broadcast(in float32(in src), out Vec128<float> x));
-            else if(typematch<T,double>())
+            else if(typeof(T) == typeof(double))
                 dst = generic<T>(dfp.broadcast(in float64(in src), out Vec128<double> x));
             else 
                 throw unsupported<T>();
@@ -45,7 +45,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static ref Vec256<T> broadcast<T>(in T src, out Vec256<T> dst)
-            where T : struct
+            where T : unmanaged
         {
             if(typematch<T,sbyte>())
                 dst = generic<T>(dinx.broadcast(in int8(in src), out Vec256<sbyte> x));
@@ -63,9 +63,9 @@ namespace Z0
                 dst = generic<T>(dinx.broadcast(in int64(in src), out Vec256<long> x));
             else if(typematch<T,ulong>())
                 dst = generic<T>(dinx.broadcast(in uint64(in src), out Vec256<ulong> x));
-            else if(typematch<T,float>())
+            else if(typeof(T) == typeof(float))
                 dst = generic<T>(dfp.broadcast(in float32(in src), out Vec256<float> x));
-            else if(typematch<T,double>())
+            else if(typeof(T) == typeof(double))
                 dst = generic<T>(dfp.broadcast(in float64(in src), out Vec256<double> x));
             else 
                 throw unsupported<T>();

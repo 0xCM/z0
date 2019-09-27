@@ -17,7 +17,7 @@ namespace Z0
     {
         [MethodImpl(Inline)]
         public static Vector128<T> add<T>(Vector128<T> lhs, Vector128<T> rhs)
-            where T : struct
+            where T : unmanaged
         {
             if(typematch<T,sbyte>())
                 return generic<T>(dinx.add(int8(lhs), int8(rhs)));
@@ -40,7 +40,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static Vector256<T> add<T>(Vector256<T> lhs, Vector256<T> rhs)
-            where T : struct
+            where T : unmanaged
         {
             if(typematch<T,sbyte>())
                 return generic<T>(dinx.add(lhs.As<T,sbyte>(), rhs.As<T,sbyte>()));

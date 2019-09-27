@@ -16,7 +16,7 @@ namespace Z0
     /// A variable value assignment
     /// </summary>
     public readonly struct VarValueExpr<T> : IRuleExpr<T>
-        where T : struct
+        where T : unmanaged
     {
         [MethodImpl(Inline)]
         public VarValueExpr(VarExpr<T> variable, T value)

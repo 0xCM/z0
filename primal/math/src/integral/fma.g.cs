@@ -18,7 +18,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static T fma<T>(T x, T y, T z)
-            where T : struct
+            where T : unmanaged
         {
             if(typematch<T,sbyte>())
                 return generic<T>(math.fma(int8(x), int8(y), int8(z)));
@@ -36,9 +36,9 @@ namespace Z0
                 return generic<T>(math.fma(int64(x), int64(y), int64(z)));
             else if(typematch<T,ulong>())
                 return generic<T>(math.fma(uint64(x), uint64(y), uint64(z)));
-            else if(typematch<T,float>())
+            else if(typeof(T) == typeof(float))
                 return generic<T>(fmath.fma(float32(x), float32(y), float32(z)));
-            else if(typematch<T,double>())
+            else if(typeof(T) == typeof(double))
                 return generic<T>(fmath.fma(float64(x), float64(y), float64(z)));
             else            
                 throw unsupported<T>();

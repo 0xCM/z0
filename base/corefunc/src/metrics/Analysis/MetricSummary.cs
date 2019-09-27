@@ -16,7 +16,7 @@ namespace Z0
         public static readonly MetricSummary Zero = new MetricSummary();
 
         public static MetricSummary<T> Define<T>(Metrics<T> metrics)        
-            where T : struct
+            where T : unmanaged
                 => new MetricSummary<T>(metrics);
 
         public static MetricSummary Define(IMetrics metrics)

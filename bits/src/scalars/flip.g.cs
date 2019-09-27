@@ -22,7 +22,7 @@ namespace Z0
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
         public static T flip<T>(T src)
-            where T : struct
+            where T : unmanaged
                 => gmath.flip(src);
 
         /// <summary>
@@ -33,7 +33,7 @@ namespace Z0
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
         public static ref T flip<T>(ref T src)
-            where T : struct
+            where T : unmanaged
                 => ref gmath.flip(ref src); 
 
 

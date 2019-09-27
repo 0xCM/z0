@@ -13,7 +13,7 @@ namespace Z0
     using static zfunc;
 
     public struct Scalar128<T>
-        where T : struct
+        where T : unmanaged
     {        
         Vector128<T> data;            
 

@@ -16,7 +16,7 @@ namespace Z0
     /// Encapsulates the result of a 128-bit cpu vector comparison operation
     /// </summary>
     public readonly struct Vec128Cmp<T>
-        where T : struct
+        where T : unmanaged
     {
         public static bool operator true(in Vec128Cmp<T> src)
             => src.Reduce();
@@ -41,7 +41,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public Vec128Cmp<S> As<S>()
-            where S : struct
+            where S : unmanaged
                 => new Vec128Cmp<S>(Results);
     
         /// <summary>

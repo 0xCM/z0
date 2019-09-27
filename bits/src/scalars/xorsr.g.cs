@@ -21,7 +21,7 @@ namespace Z0
         /// <param name="offset">The number of bits to shift the source value rightwards</param>
         [MethodImpl(Inline)]
         public static T xorsr<T>(T src, int offset)
-            where T : struct
+            where T : unmanaged
         {
             if(typematch<T,sbyte>())
                 return generic<T>(Bits.xorsr(int8(src), offset));
@@ -51,7 +51,7 @@ namespace Z0
         /// <param name="offset">The number of bits to shift the source value rightwards</param>
         [MethodImpl(Inline)]
         public static ref T xorsr<T>(ref T lhs, int offset)
-            where T : struct
+            where T : unmanaged
         {
             if(typematch<T,sbyte>())
                 Bits.xorsr(ref int8(ref lhs), offset);

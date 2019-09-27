@@ -12,19 +12,19 @@ namespace Z0.Test
     {
 
         void VerifySpanBytesToValue<T>(Span<byte> src, T expect)
-            where T : struct
+            where T : unmanaged
         {
             Claim.eq(expect, ByteSpan.ReadValue<T>(src));
         }
 
         void VerifySpanBytesToValues<T>(Span<byte> src, Span<T> expect)
-            where T : struct
+            where T : unmanaged
         {
             Claim.eq(expect, ByteSpan.ReadValues<T>(src));
         }
 
         void VerifyBytesToValues<T>()
-            where T : struct
+            where T : unmanaged
         {
             TypeCaseStart<T>();
             var x = Random.Next<T>();

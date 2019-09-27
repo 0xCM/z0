@@ -27,7 +27,7 @@ namespace Z0
         /// <typeparam name="T">The source matrix element type</typeparam>
         internal static Graph<V> FromMatrix<V,N,T>(BitMatrix<N,N,T> src, N dim = default, V v = default)
             where N : ITypeNat, new()
-            where V : struct
+            where V : unmanaged
             where T : unmanaged
         {
             var n = (int)dim.value;

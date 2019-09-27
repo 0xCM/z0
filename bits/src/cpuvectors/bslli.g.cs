@@ -20,7 +20,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static Vec128<T> bslli<T>(in Vec128<T> lhs, byte count)
-            where T : struct
+            where T : unmanaged
         {
             if(typeof(T) == typeof(short))
                 return generic<T>(Bits.bslli(in int16(in lhs), count));
@@ -40,7 +40,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static Vec256<T> bslli<T>(in Vec256<T> lhs, byte count)
-            where T : struct
+            where T : unmanaged
         {
             if(typeof(T) == typeof(short))
                 return generic<T>(Bits.bslli(in int16(in lhs), count));

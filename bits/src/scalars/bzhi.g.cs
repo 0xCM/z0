@@ -23,7 +23,7 @@ namespace Z0
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
         public static T bzhi<T>(T src, uint index)
-            where T : struct
+            where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
                 return generic<T>(Bits.bzhi(uint8(src), index));

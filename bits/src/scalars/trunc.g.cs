@@ -22,7 +22,7 @@ namespace Z0
         /// <param name="len">The count of lower bits that go unmolested</param>        
         [MethodImpl(Inline)]
         public static T trunc<T>(T src, byte len)
-            where T : struct
+            where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
                 return generic<T>(Bits.trunc(uint8(src), len));

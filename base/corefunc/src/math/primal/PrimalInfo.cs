@@ -13,7 +13,7 @@ namespace Z0
     
 
     class ScalarComparer<T> : Comparer<T>
-        where T : struct
+        where T : unmanaged
     {
         public ScalarComparer(Func<T,T,int> comparer)
         {
@@ -27,7 +27,7 @@ namespace Z0
     }
 
     public interface IPrimalInfo<T>
-        where T : struct
+        where T : unmanaged
     {
         T MinVal {get;}
         
@@ -54,7 +54,7 @@ namespace Z0
     }
 
     public interface IPrimalDescriptor<T>
-        where T : struct
+        where T : unmanaged
     {
         IPrimalInfo<T> Description {get;}
     }
@@ -62,12 +62,12 @@ namespace Z0
     public static class PrimalRep
     {
         public static PrimalRep<T> Get<T>(T exemplar = default)
-            where T : struct
+            where T : unmanaged
                 => PrimalRep<T>.TheOnly;
     }
 
     public readonly struct PrimalRep<T> 
-        where T : struct
+        where T : unmanaged
     {
 
         internal static PrimalRep<T> TheOnly = default;
@@ -94,65 +94,63 @@ namespace Z0
         IPrimalDescriptor<long>,
         IPrimalDescriptor<ulong>,            
         IPrimalDescriptor<float>, 
-        IPrimalDescriptor<double>, 
-        IPrimalDescriptor<decimal>,
-        IPrimalDescriptor<BigInteger>                    
+        IPrimalDescriptor<double> 
     {
         static readonly PrimalInfo Inhabitant = default;
 
         [MethodImpl(Inline)]
         public static IPrimalInfo<T> Get<T>()
-            where T : struct
+            where T : unmanaged
             => Provider<T>().Description;            
 
         [MethodImpl(Inline)]
         public static T zero<T>()
-            where T : struct
+            where T : unmanaged
                 => Get<T>().Zero;
 
         [MethodImpl(Inline)]
         public static T one<T>()
-            where T : struct
+            where T : unmanaged
                 => Get<T>().One;
 
         [MethodImpl(Inline)]
         public static T minval<T>()
-            where T : struct
+            where T : unmanaged
                 => Get<T>().MinVal;
 
         [MethodImpl(Inline)]
         public static T maxval<T>()
-            where T : struct
+            where T : unmanaged
                 => Get<T>().MaxVal;
 
         [MethodImpl(Inline)]
         public static bool signed<T>()
-            where T : struct
+            where T : unmanaged
                 => Get<T>().Signed;
 
         [MethodImpl(Inline)]
         public static bool unsigned<T>()
-            where T : struct
+            where T : unmanaged
                 => !Get<T>().Signed;
 
         [MethodImpl(Inline)]
         public static ulong bitsize<T>()
-            where T : struct
+            where T : unmanaged
                 => Get<T>().BitSize;
 
         [MethodImpl(Inline)]
         public static int bytesize<T>()
-            where T : struct
+            where T : unmanaged
                 => Get<T>().ByteSize;
 
         [MethodImpl(Inline)]
         public static Comparer<T> comparer<T>()
-            where T : struct
+            where T : unmanaged
                 => Get<T>().Comparer;
 
         [MethodImpl(Inline)]
         static IPrimalDescriptor<T> Provider<T>() 
-            where T : struct
+            where T : unmanaged
                 => cast<IPrimalDescriptor<T>>(Inhabitant);
 
         IPrimalInfo<sbyte> IPrimalDescriptor<sbyte>.Description 
@@ -184,13 +182,6 @@ namespace Z0
 
         IPrimalInfo<double> IPrimalDescriptor<double>.Description 
             => Float64Info.Summary;
-
-        IPrimalInfo<decimal> IPrimalDescriptor<decimal>.Description 
-            => DecimalInfo.Summary;
-
-        IPrimalInfo<BigInteger> IPrimalDescriptor<BigInteger>.Description 
-            => BigIntegerInfo.Summary;
-
     }
 
     readonly struct Int8Info
@@ -479,29 +470,9 @@ namespace Z0
 
     }                
 
-    readonly struct BigIntegerInfo
-    {
-        public static readonly BigInteger Zero = BigInteger.Zero;
-
-        public static readonly BigInteger One = BigInteger.One;
-
-        public const uint BitSize = 0;
-
-        public const bool Signed = true;
-        
-        public static readonly PrimalInfo<BigInteger> Summary 
-            = new PrimalInfo<BigInteger>((0,0), Signed, Zero, One, BitSize, Comparer,0,true);
-
-        [MethodImpl(Inline)]
-        static int Compare(BigInteger x, BigInteger y)
-            => x.CompareTo(y);
-        
-        public static readonly Comparer<BigInteger> Comparer 
-            = new ScalarComparer<BigInteger>(Compare);
-    }                   
 
     public readonly struct PrimalInfo<T> : IPrimalInfo<T>
-        where T : struct
+        where T : unmanaged
     {
         public PrimalInfo((T min, T max) range, bool signed, T zero, T one, ulong bitsize, Comparer<T> comparer, T epsilon = default, bool infinite = false)
         {

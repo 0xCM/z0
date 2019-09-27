@@ -26,8 +26,8 @@ namespace Z0
         /// <typeparam name="V">The vertex index type</typeparam>
         [MethodImpl(Inline)]    
         public static Graph<V,T> Define<V,T>(IEnumerable<Vertex<V,T>> vertices, IEnumerable<Edge<V>> edges)
-            where V : struct
-            where T : struct
+            where V : unmanaged
+            where T : unmanaged
                 => Graph<V,T>.Define(vertices,edges);
 
         /// <summary>
@@ -38,8 +38,8 @@ namespace Z0
         /// <typeparam name="V">The vertex index type</typeparam>
         [MethodImpl(Inline)]    
         public static Graph<V,T> Define<V,T>(Span<Vertex<V,T>> vertices, IEnumerable<Edge<V>> edges)
-            where V : struct
-            where T : struct
+            where V : unmanaged
+            where T : unmanaged
                 => Graph<V,T>.Define(vertices,edges);
 
         /// <summary>
@@ -50,7 +50,7 @@ namespace Z0
         /// <typeparam name="V">The vertex index type</typeparam>
         [MethodImpl(Inline)]    
         public static Graph<V> Define<V>(Span<Vertex<V>> vertices, IEnumerable<Edge<V>> edges)
-            where V : struct
+            where V : unmanaged
             => Graph<V>.Define(vertices, edges);
 
         /// <summary>
@@ -61,7 +61,7 @@ namespace Z0
         /// <typeparam name="V">The vertex index type</typeparam>
         [MethodImpl(Inline)]    
         public static Edge<V> Edge<V>(V src, V dst)
-            where V : struct
+            where V : unmanaged
                 => (src,dst);
 
         /// <summary>
@@ -72,8 +72,8 @@ namespace Z0
         /// <typeparam name="V">The vertex index type</typeparam>
         [MethodImpl(Inline)]    
         public static Edge<V,W> Edge<V,W>(V src, V dst, W weight)
-            where V : struct
-            where W : struct
+            where V : unmanaged
+            where W : unmanaged
                 => (src,dst,weight);
 
         /// <summary>
@@ -85,8 +85,8 @@ namespace Z0
         /// <typeparam name="T">The vertex payload type</typeparam>
         [MethodImpl(Inline)]    
         public static Edge<V> Connect<V,T>(in Vertex<V,T> src, in Vertex<V,T> dst)
-            where V : struct
-            where T : struct
+            where V : unmanaged
+            where T : unmanaged
                 => new Edge<V>(src.Index,dst.Index);
 
         /// <summary>
@@ -96,7 +96,7 @@ namespace Z0
         /// <param name="dst">The target vertex</param>
         /// <typeparam name="V">The vertex index type</typeparam>
         public static Edge<V> Connect<V>(in Vertex<V> src, in Vertex<V> dst)
-            where V : struct
+            where V : unmanaged
                 => new Edge<V>(src.Index,dst.Index);
 
         /// <summary>
@@ -106,7 +106,7 @@ namespace Z0
         /// unique identifier within the context of a graph</param>
         /// <typeparam name="V">The index type</typeparam>
         public static Vertex<V> Vertex<V>(V index)
-            where V : struct
+            where V : unmanaged
                 => new Vertex<V>(index);
 
         /// <summary>
@@ -115,7 +115,7 @@ namespace Z0
         /// <param name="count">The number of virtices in the sequence</param>
         /// <typeparam name="V">The index type</typeparam>
         public static Span<Vertex<V>> Vertices<V>(int count)
-            where V : struct
+            where V : unmanaged
         {
             Span<Vertex<V>> dst = new Vertex<V>[count];
             for(var i=0; i<count; i++)
@@ -130,8 +130,8 @@ namespace Z0
         /// <param name="data">The vertex payloads</param>
         /// <typeparam name="V">The index type</typeparam>
         public static Span<Vertex<V,T>> Vertices<V,T>(V s0, params T[] data)
-            where V : struct
-            where T : struct
+            where V : unmanaged
+            where T : unmanaged
         {
             var start = convert<V,ulong>(s0);
             Span<Vertex<V,T>> dst = new Vertex<V,T>[data.Length];
@@ -150,8 +150,8 @@ namespace Z0
         /// <typeparam name="V">The payload type</typeparam>
         [MethodImpl(Inline)]    
         public static Vertex<V,T> Vertex<V,T>(V index, T data)
-            where V : struct
-            where T : struct
+            where V : unmanaged
+            where T : unmanaged
                 => new Vertex<V, T>(index,data);
 
 
@@ -203,7 +203,7 @@ namespace Z0
         /// <param name="label">An optional label for the graph</param>
         /// <typeparam name="V">The verex index type</typeparam>
         public static string Format<V>(Graph<V> src, string label = null)
-            where V : struct
+            where V : unmanaged
         {
             var text = sbuild();
             text.AppendLine("digraph " +(label ?? "g") + "   {");

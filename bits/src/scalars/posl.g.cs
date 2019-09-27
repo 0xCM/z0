@@ -21,7 +21,7 @@ namespace Z0
         /// <typeparam name="T">The source type</typeparam>
         [MethodImpl(Inline)]
         public static T posl<T>(T src)
-            where T : struct
+            where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
                 return generic<T>(Bits.posl(uint8(src)));
@@ -37,7 +37,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static ref T loff<T>(ref T src)
-            where T : struct
+            where T : unmanaged
         {
             if(typematch<T,sbyte>())
                  loff(ref int8(ref src));

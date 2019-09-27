@@ -63,10 +63,10 @@ namespace Z0.Mkl
             var mformat = VslSSMatrixStorage.VSL_SS_MATRIX_STORAGE_ROWS;
             var taskPtr = IntPtr.Zero;
 
-            if(typematch<T,float>())
+            if(typeof(T) == typeof(float))
                 VSL.vslsSSNewTask(ref taskPtr, ref dim, ref sampleCount, ref mformat, 
                     ref MemoryMarshal.Cast<T,float>(samples)[0]).AutoThrow();
-            else if(typematch<T,double>())
+            else if(typeof(T) == typeof(double))
                 VSL.vsldSSNewTask(ref taskPtr, ref dim, ref sampleCount, ref mformat, 
                     ref MemoryMarshal.Cast<T,double>(samples)[0]).AutoThrow();
             else

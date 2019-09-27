@@ -27,7 +27,7 @@ namespace Z0
             => random.SampleDistinct(source.Length, count).Select(i => source[i]).ToHashSet();
 
         public static HashSet<T> SampleDistinct<T>(this IPolyrand random, T pool, int count)
-            where T : struct
+            where T : unmanaged
         {
             var src = random.Stream(default(T), pool);
             var set = src.Take(count).ToHashSet();
@@ -37,7 +37,7 @@ namespace Z0
         }
 
         public static HashSet<T> SampleDistinct<T>(this IPolyrand random, T pool, T count)
-            where T : struct
+            where T : unmanaged
         {
             var src = random.Stream(default(T), pool);
             var _count = convert<T,int>(count);
@@ -54,7 +54,7 @@ namespace Z0
         /// <param name="count">The number of points to take</param>
         /// <typeparam name="T">The element type</typeparam>
         public static HashSet<T> SampleDistinct<T>(this IPolyrand random, int count)
-            where T : struct
+            where T : unmanaged
         {
             var stream = random.Stream<T>();
             var set = stream.Take(count).ToHashSet();
@@ -70,7 +70,7 @@ namespace Z0
         /// <param name="count">The number of points to take</param>
         /// <typeparam name="T">The element type</typeparam>
         public static HashSet<T> TakeSet<T>(this IBoundPointSource<T> random, int count)
-            where T : struct
+            where T : unmanaged
         {
             var src =  random.Stream();
             var set = src.Take(count).ToHashSet();

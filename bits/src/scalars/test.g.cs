@@ -22,7 +22,7 @@ namespace Z0
         /// <typeparam name="T">The primal value type</typeparam>
         [MethodImpl(Inline)]
         public static bool test<T>(in T src, in int pos)
-            where T : struct
+            where T : unmanaged
                 => BitMaskG.test(in src, (byte)pos);
 
         /// <summary>
@@ -32,7 +32,7 @@ namespace Z0
         /// <param name="pos">The position to check</param>
         [MethodImpl(Inline)]
         public static bool test<T>(in T src, in byte pos)
-            where T : struct
+            where T : unmanaged
                 => BitMaskG.test(in src, pos);
 
 

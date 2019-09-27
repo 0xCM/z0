@@ -26,7 +26,7 @@ namespace Z0
             => BitConverter.DoubleToInt64Bits(src);
 
         public static Option<int> WriteTo<T>(this DivisorIndex<T> src, FolderPath dst)
-            where T : struct
+            where T : unmanaged
         {
             var filename = FileName.Define($"divisors{src.Range}.csv");
             var outpath = dst + filename;
@@ -36,7 +36,7 @@ namespace Z0
 
         //Adapted from corefx repo
         static bool SequenceEqual<T>(ref T first, ref T second, int length)
-            where T : struct
+            where T : unmanaged
         {
 
             if (Unsafe.AreSame(ref first, ref second))
@@ -171,7 +171,7 @@ namespace Z0
         }
 
         public static bool Identical<T>(this ReadOnlySpan128<T> lhs, ReadOnlySpan128<T> rhs)        
-                where T : struct        
+                where T : unmanaged        
         {
             for(var i = 0; i< Span128.Length(lhs,rhs); i++)
                 if(gmath.neq(lhs[i],rhs[i]))
@@ -180,7 +180,7 @@ namespace Z0
         }
 
         public static bool Identical<T>(this ReadOnlySpan256<T> lhs, ReadOnlySpan256<T> rhs)        
-            where T : struct        
+            where T : unmanaged        
         {
             for(var i = 0; i< length(lhs,rhs); i++)
                 if(gmath.neq(lhs[i],rhs[i]))
@@ -189,16 +189,16 @@ namespace Z0
         }
 
         public static bool Identical<T>(this Span256<T> lhs, Span256<T> rhs)        
-            where T : struct        
+            where T : unmanaged        
                 => lhs.ReadOnly().Identical(rhs);
 
         public static bool Identical<T>(this Span128<T> lhs, Span128<T> rhs)        
-            where T : struct        
+            where T : unmanaged        
                 => lhs.ReadOnly().Identical(rhs);
 
         [MethodImpl(Inline)]
         public static bool Identical<T>(this Span<T> lhs, Span<T> rhs)  
-            where T : struct       
+            where T : unmanaged       
         {
             
             if(lhs.Length != rhs.Length)
@@ -208,7 +208,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static bool Identical<T>(this ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs)  
-            where T : struct       
+            where T : unmanaged       
         {
             if(lhs.Length != rhs.Length)
                 return false;

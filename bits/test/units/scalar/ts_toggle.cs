@@ -118,7 +118,7 @@ namespace Z0.Test
         }
 
         void check_toggle<T>(int count = DefaultSampleSize)
-            where T : struct
+            where T : unmanaged
         {
             var src = Random.Span<T>(count).ReadOnly();
             var tLen = bitsize<T>();

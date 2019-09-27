@@ -15,7 +15,7 @@ partial class zfunc
 {
     [MethodImpl(Inline)]
     public static IEnumerable<T> concat<T>(params IEnumerable<T>[] src)
-        where T : struct
+        where T : unmanaged
         => src.SelectMany(x => x);
 
     /// <summary>

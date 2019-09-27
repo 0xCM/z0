@@ -27,7 +27,7 @@ namespace Z0
         /// </summary>
         /// <typeparam name="T">The primal type</typeparam>
         public static int MaxOffset<T>()
-            where T : struct
+            where T : unmanaged
                 => (Bytes.Length - 1) - Unsafe.SizeOf<T>();
 
         /// <summary>
@@ -36,7 +36,7 @@ namespace Z0
         /// <param name="offset">The source offset</param>
         /// <typeparam name="T">The data type</typeparam>
         public static T TakeSingle<T>(int offset)
-            where T : struct
+            where T : unmanaged
             => ByteSpan.ReadValue<T>(Bytes, VerifyIndex<T>(offset));
 
         /// <summary>
@@ -46,7 +46,7 @@ namespace Z0
         /// <param name="length">The number of values to take</param>
         /// <typeparam name="T">The data type</typeparam>
         public static ReadOnlySpan<T> TakeMany<T>(int offset, int length)
-            where T : struct
+            where T : unmanaged
         {
             VerifyIndex<T>(offset* Unsafe.SizeOf<T>() + length* Unsafe.SizeOf<T>());
             return ByteSpan.ReadValues<T>(Bytes, offset,length);            
@@ -58,7 +58,7 @@ namespace Z0
         /// <param name="offset">The source offset</param>
         /// <typeparam name="T">The data type</typeparam>
         static int VerifyIndex<T>(int offset)
-            where T : struct
+            where T : unmanaged
         {
             var needed = Unsafe.SizeOf<T>() + offset;
             if(needed < Bytes.Length)

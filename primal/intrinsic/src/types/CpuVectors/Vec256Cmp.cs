@@ -16,7 +16,7 @@ namespace Z0
     /// Represents the result obtained by comparing two 256-bit cpu vectors
     /// </summary>
     public readonly struct Vec256Cmp<T>
-        where T : struct
+        where T : unmanaged
     {    
         readonly Bit[] Results;
 
@@ -54,7 +54,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public Vec256Cmp<S> As<S>()
-            where S : struct
+            where S : unmanaged
                 => new Vec256Cmp<S>(Results);
 
     }

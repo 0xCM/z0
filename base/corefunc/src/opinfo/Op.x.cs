@@ -107,7 +107,7 @@ namespace Z0
             Genericity generic = Genericity.Direct, 
             OpFusion fusion = OpFusion.Atomic, 
             string title = null)
-                where T : struct
+                where T : unmanaged
                     => new OpId<T>(system, op, numKind, generic, fusion, title);        
 
 
@@ -115,7 +115,7 @@ namespace Z0
         /// Returns the identified primal generic operator
         /// </summary>
         public static OpId<T> PrimalGOpId<T>(this OpKind kind, NumericKind numKind = NumericKind.Native)
-            where T : struct
+            where T : unmanaged
                 => kind.OpId<T>(NumericSystem.Primal, generic: Genericity.Generic);
 
     }

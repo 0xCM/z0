@@ -23,7 +23,7 @@ namespace Z0
         /// <typeparam name="T">The underlying type</typeparam>
         [MethodImpl(Inline)]
         public static Interval<T> closed<T>(T left, T right)
-            where T : struct
+            where T : unmanaged
                 => new Interval<T>(left,true, right, true);
 
         /// <summary>
@@ -34,7 +34,7 @@ namespace Z0
         /// <typeparam name="T">The underlying type</typeparam>
         [MethodImpl(Inline)]
         public static Interval<T> leftopen<T>(T left, T right)
-            where T : struct
+            where T : unmanaged
                 => new Interval<T>(left, false, right, true);
 
         /// <summary>
@@ -45,7 +45,7 @@ namespace Z0
         /// <typeparam name="T">The underlying type</typeparam>
         [MethodImpl(Inline)]
         public static Interval<T> rightclosed<T>(T left, T right)
-            where T : struct
+            where T : unmanaged
                 => new Interval<T>(left, false, right, true);
 
         /// <summary>
@@ -56,7 +56,7 @@ namespace Z0
         /// <typeparam name="T">The underlying type</typeparam>
         [MethodImpl(Inline)]
         public static Interval<T> leftclosed<T>(T left, T right)
-            where T : struct
+            where T : unmanaged
                 => new Interval<T>(left, true, right, false);
 
         /// <summary>
@@ -67,7 +67,7 @@ namespace Z0
         /// <typeparam name="T">The underlying type</typeparam>
         [MethodImpl(Inline)]
         public static Interval<T> open<T>(T left, T right)
-            where T : struct
+            where T : unmanaged
                 => new Interval<T>(left, false, right, false);
     
     }

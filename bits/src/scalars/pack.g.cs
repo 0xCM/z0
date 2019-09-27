@@ -16,7 +16,7 @@ namespace Z0
         
 
         public static ref T pack<T>(ReadOnlySpan<Bit> src, ref T dst)         
-            where T : struct
+            where T : unmanaged
         {
             var maxbytes = Unsafe.SizeOf<T>();
             var maxbits = maxbytes * 8;
@@ -28,7 +28,7 @@ namespace Z0
         }
 
         public static Span<T> pack<T>(ReadOnlySpan<Bit> src, Span<T> dst)         
-            where T : struct
+            where T : unmanaged
         {
             Bits.pack(src, dst.AsBytes());
             return dst;
@@ -36,8 +36,8 @@ namespace Z0
         }
         
         public static Span<T> pack<S,T>(ReadOnlySpan<S> src, Span<T> dst)            
-            where S : struct
-            where T : struct
+            where S : unmanaged
+            where T : unmanaged
         {
             var srcIx = 0;
             var dstOffset = 0;

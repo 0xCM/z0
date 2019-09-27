@@ -60,7 +60,7 @@ namespace Z0
             => Config = config;
 
        protected K[] RandArray<K>(bool nonzero = false)
-            where K : struct
+            where K : unmanaged
         {
             var config = Config.Get<K>();
              return nonzero 
@@ -78,7 +78,7 @@ namespace Z0
             => Config.TraceEnabled;
 
         protected virtual Interval<K> SampleDomain<K>()
-            where K : struct
+            where K : unmanaged
                 => RngDefaults.get<K>().SampleDomain;
                 
         /// <summary>
@@ -270,21 +270,48 @@ namespace Z0
             return timing;
         }
 
+        protected void opcheck<K>(UnaryOp<K> baseline, UnaryOp<K> subject) 
+            where K : unmanaged
+        {
+            for(var i=0; i< SampleSize; i++)
+            {
+                var a = Random.Next<K>();
+                var x = baseline(a);
+                var y = subject(a);
+                Claim.eq(x,y);
+
+            }
+        }
+
+        protected void opcheck<K>(BinaryOp<K> baseline, BinaryOp<K> subject) 
+            where K : unmanaged
+        {
+            for(var i=0; i< SampleSize; i++)
+            {
+                var a = Random.Next<K>();
+                var b = Random.Next<K>();
+                var x = baseline(a,b);
+                var y = subject(a,b);
+                Claim.eq(x,y);
+
+            }
+        }
+
         protected void VerifyOp<K>(UnaryOp<K> subject, UnaryOp<K> baseline, bool nonzero = false, [CallerMemberName] string caller = null, 
             [CallerFilePath] string file = null, [CallerLineNumber] int? line = null)
-            where K : struct
+            where K : unmanaged
         {
             var kind = PrimalKinds.kind<K>();            
             var src = RandArray<K>(nonzero);
             var timing = stopwatch();                        
 
             for(var i = 0; i<src.Length; i++)
-                Claim.eq(baseline(src[i]),subject(src[i]), caller, file, line);            
+                Claim.eq(baseline(src[i]), subject(src[i]), caller, file, line);            
         }
 
         protected void VerifyOp<K>(OpKind opKind, UnaryOp<K> subject, UnaryOp<K> baseline, bool nonzero = false, [CallerMemberName] string caller = null, 
             [CallerFilePath] string file = null, [CallerLineNumber] int? line = null)
-            where K : struct
+            where K : unmanaged
         {
             var kind = PrimalKinds.kind<K>();            
             var opid = opKind.PrimalGOpId<K>();           
@@ -297,7 +324,7 @@ namespace Z0
 
         protected void VerifyOp<K>(BinaryPredicate<K> baseline, BinaryPredicate<K> op, bool nonzero = false, 
             [CallerMemberName] string caller = null, [CallerFilePath] string file = null, [CallerLineNumber] int? line = null)
-            where K : struct
+            where K : unmanaged
         {
             var kind = PrimalKinds.kind<K>();            
             var lhs = RandArray<K>();
@@ -311,7 +338,7 @@ namespace Z0
 
         protected void VerifyOp<K>(OpKind opKind, BinaryPredicate<K> baseline, BinaryPredicate<K> op, bool nonzero = false, 
             [CallerMemberName] string caller = null, [CallerFilePath] string file = null, [CallerLineNumber] int? line = null)
-            where K : struct
+            where K : unmanaged
         {
             var kind = PrimalKinds.kind<K>();            
             var opid = opKind.PrimalGOpId<K>();           
@@ -374,13 +401,13 @@ namespace Z0
         protected void TypeCaseStart<M,N,S>([CallerMemberName] string caller = null)
             where M : ITypeNat, new()
             where N : ITypeNat, new()
-            where S : struct
+            where S : unmanaged
                 => Enqueue(AppMsg.Define($"{typeof(T).DisplayName()}/{caller}<N{nati<M>()}xN{nati<N>()}:{typeof(S).DisplayName()}> executing", SeverityLevel.HiliteCL));
 
         protected void TypeCaseEnd<M,N,S>([CallerMemberName] string caller = null)
             where M : ITypeNat, new()
             where N : ITypeNat, new()
-            where S : struct
+            where S : unmanaged
                 => Enqueue(AppMsg.Define($"{typeof(T).Name}/{caller}<N{nati<M>()}xN{nati<N>()}:{typeof(S).DisplayName()}> succeeded", SeverityLevel.HiliteCL));
     }
 }

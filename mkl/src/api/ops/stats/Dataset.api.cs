@@ -15,7 +15,7 @@ namespace Z0
     public static class Dataset
     {
         /// <summary>
-        /// Loads a sample from a span
+        /// Loads a sample from an array
         /// </summary>
         /// <param name="src">The source span</param>
         /// <param name="dim">The sample dimension</param>
@@ -23,6 +23,18 @@ namespace Z0
         /// <typeparam name="T">The sample data type</typeparam>
         [MethodImpl(Inline)]
         public static Dataset<T> Load<T>(T[] src, int dim = 1)
+            where T : unmanaged
+                => Dataset<T>.Load(src, dim);
+
+        /// <summary>
+        /// Loads a sample from a span
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <param name="dim">The sample dimension</param>
+        /// <param name="offset">The offset into the source span from to begin the load</param>
+        /// <typeparam name="T">The sample data type</typeparam>
+        [MethodImpl(Inline)]
+        public static Dataset<T> Load<T>(Span<T> src, int dim = 1)
             where T : unmanaged
                 => Dataset<T>.Load(src, dim);
 

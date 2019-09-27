@@ -19,7 +19,7 @@ namespace Z0
         /// <typeparam name="T">The source type</typeparam>
         [MethodImpl(Inline)]
         public static Imm<T> Define<T>(T src)
-            where T : struct
+            where T : unmanaged
                 => new Imm<T>(src);
 
         [MethodImpl(Inline)]
@@ -40,7 +40,7 @@ namespace Z0
         
         [MethodImpl(Inline)]
         public static void SignExtend<T>(byte src, out T dst)
-            where T : struct, IImm<T>
+            where T : unmanaged, IImm<T>
         {
             if(typeof(T) == typeof(short))
             {

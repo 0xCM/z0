@@ -28,9 +28,9 @@ namespace Z0.Mkl
 
         protected override int FillBuffer(Span<T> buffer)
         {
-            if(typematch<T,float>())
+            if(typeof(T) == typeof(float))
                 sample.gaussian(Source, float32(DistSpec.Mean), float32(DistSpec.StdDev), float32(buffer));
-            else if(typematch<T,double>())
+            else if(typeof(T) == typeof(double))
                 sample.gaussian(Source, float64(DistSpec.Mean), float64(DistSpec.StdDev), float64(buffer));
             else 
                 throw unsupported<T>();

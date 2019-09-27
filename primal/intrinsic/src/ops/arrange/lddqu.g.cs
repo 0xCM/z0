@@ -18,7 +18,7 @@ namespace Z0
     {        
         [MethodImpl(Inline)]
         public static ref Vec128<T> lddqu<T>(in T src, ref Vec128<T> dst)
-            where T : struct
+            where T : unmanaged
         {
             if(typematch<T,sbyte>())
                 dinx.lddqu(in int8(in src), out int8(in dst));
@@ -43,7 +43,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static ref Vec256<T> lddqu<T>(in T src, ref Vec256<T> dst)
-            where T : struct
+            where T : unmanaged
         {
             if(typematch<T,sbyte>())
                 dinx.lddqu(in int8(in src), out int8(in dst));
@@ -68,7 +68,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static unsafe Vector256<T> lddqu256u<T>(in T src)
-            where T : struct
+            where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
                 return generic<T>(Avx2.LoadDquVector256(constptr(in uint8(in src))));
@@ -82,7 +82,7 @@ namespace Z0
         
         [MethodImpl(Inline)]
         static unsafe Vector256<T> lddqu256i<T>(in T src)
-            where T : struct
+            where T : unmanaged
         {
             if(typematch<T,sbyte>())
                 return generic<T>(Avx2.LoadDquVector256(constptr(in int8(in src))));
@@ -97,7 +97,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static unsafe Vector256<T> lddqu256<T>(in T src)
-            where T : struct
+            where T : unmanaged
         {
             if(typeof(T) == typeof(byte) || typeof(T) == typeof(ushort) || 
                 typeof(T) == typeof(uint) || typeof(T) == typeof(ulong))
@@ -112,7 +112,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static Vector128<T> lddqu128<T>(in T src)
-            where T : struct
+            where T : unmanaged
         {
             if(typematch<T,sbyte>())
                 return generic<T>(dinx.lddqu128(in int8(in src)));

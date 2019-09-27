@@ -17,7 +17,7 @@ namespace Z0
                          let def = om.GetGenericMethodDefinition()
                          let gm = def.MakeGenericMethod(t)
                          select gm;
-            var deconstructed = closed.Deconstruct();
+            var deconstructed = Deconstructor.Deconstruct(closed);
             deconstructed.Emit("ginx");
             return deconstructed;
         }
@@ -39,7 +39,7 @@ namespace Z0
             var closedUnaryOps = CloseOpenGenerics(gmath.UnaryOps().Where(m => unopnames.Contains(m.Name)), PrimalTypes.All);
             var closedOps = closedBinOps.Union(closedUnaryOps);
             
-            var deconstructed = closedOps.Deconstruct();
+            var deconstructed = Deconstructor.Deconstruct(closedOps);
             deconstructed.Emit("gmath");
             return deconstructed;
 

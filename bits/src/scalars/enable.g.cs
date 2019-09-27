@@ -23,7 +23,7 @@ namespace Z0
         /// <typeparam name="T">The source element type</typeparam>
         [MethodImpl(Inline)]
         public static ref T enable<T>(ref T src, in int pos)
-            where T : struct
+            where T : unmanaged
                 => ref BitMaskG.enable(ref src, in pos);
 
         /// <summary>
@@ -34,7 +34,7 @@ namespace Z0
         /// <typeparam name="T">The source element type</typeparam>
         [MethodImpl(Inline)]
         public static T enable<T>(T src, in int pos)
-            where T : struct
+            where T : unmanaged
                 => BitMaskG.enable(ref src, in pos);
 
     }

@@ -24,7 +24,7 @@ namespace Z0
      public ref struct Span<M,N,T>
         where M : ITypeNat, new()
         where N : ITypeNat, new()
-        where T : struct
+        where T : unmanaged
     {
         Span<T> data;
 

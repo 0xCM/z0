@@ -20,14 +20,12 @@ namespace Z0
         ISampleDefaults<long>,
         ISampleDefaults<ulong>,
         ISampleDefaults<float>,
-        ISampleDefaults<double>,
-        ISampleDefaults<decimal>,
-        ISampleDefaults<BigInteger>
+        ISampleDefaults<double>
     {
         static readonly RngDefaults TheOnly = default;
 
         public static ISampleDefaults<T> get<T>()
-            where T : struct
+            where T : unmanaged
                 => (ISampleDefaults<T>)(object)(TheOnly);
 
         const int SampleSize = (int)Pow2.T14;
@@ -125,23 +123,7 @@ namespace Z0
         Interval<double> ISampleDefaults<double>.SampleDomain 
             => Float64Domain;
 
-        const decimal DecimalMin = -250000.00m;
-        
-        const decimal DecimalMax = 250000.00m;
 
-        static readonly Interval<decimal> DecimalDomain = closed(DecimalMin,DecimalMax);
-
-        Interval<decimal> ISampleDefaults<decimal>.SampleDomain 
-            => DecimalDomain;
-
-        static readonly BigInteger BigIntMin = -250000;
-        
-        static readonly BigInteger BigIntMax = 250000;
-
-        static readonly Interval<BigInteger> BigIntRange = closed(BigIntMin,BigIntMax);
-
-        Interval<BigInteger> ISampleDefaults<BigInteger>.SampleDomain 
-            => BigIntRange;
-
+ 
     }
 }

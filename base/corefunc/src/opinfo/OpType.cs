@@ -13,7 +13,7 @@ namespace Z0
 
 
     public readonly struct OpType<T>
-        where T : struct
+        where T : unmanaged
     {
 
         public OpType(OpKind op)
@@ -35,7 +35,7 @@ namespace Z0
             => new OpType(op, prim);
 
         public static OpType<T> Define<T>(OpKind op)
-            where T : struct
+            where T : unmanaged
             => new OpType<T>(op);
 
         public static IEnumerable<OpType> Define(IEnumerable<OpKind> ops, IEnumerable<PrimalKind> prims)

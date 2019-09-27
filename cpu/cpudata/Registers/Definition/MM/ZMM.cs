@@ -19,11 +19,11 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static int Cellcount<T>()
-            where T : struct => BitWidth/Unsafe.SizeOf<T>();
+            where T : unmanaged => BitWidth/Unsafe.SizeOf<T>();
 
         [MethodImpl(Inline)]
         public ref T Part<T>(int pos)
-            where T : struct
+            where T : unmanaged
                 => ref Unsafe.Add(ref head<T>(), pos);
 
         /// <summary>
@@ -46,7 +46,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         unsafe ref T head<T>()
-            where T : struct
+            where T : unmanaged
         {
             fixed(void* pSrc = &this)
                 return ref Unsafe.AsRef<T>(pSrc);

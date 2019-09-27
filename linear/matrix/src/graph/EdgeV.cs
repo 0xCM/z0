@@ -16,7 +16,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="V">The vertex index type</typeparam>
     public readonly struct Edge<V> : IEdge<V>
-        where V : struct
+        where V : unmanaged
     {
         [MethodImpl(Inline)]
         public static implicit operator (V src, V dst)(Edge<V> edge)

@@ -20,7 +20,7 @@ namespace Z0
         /// <param name="src">The bit source</param>
         /// <typeparam name="T">The source type</typeparam>
         public static BitView<T> view<T>(ref T src)
-            where T: struct
+            where T: unmanaged
                 => new BitView<T>(ref src);
 
         /// <summary>
@@ -30,7 +30,7 @@ namespace Z0
         /// <typeparam name="T">The source type</typeparam>
         [MethodImpl(Inline)]
         public static T width<T>(in T src)
-            where T : struct
+            where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
                 return generic<T>(Bits.width(in uint8(in src)));

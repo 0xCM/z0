@@ -16,7 +16,7 @@ namespace Z0
 
     public ref struct BlockVector<N,T>
         where N : ITypeNat, new()
-        where T : struct    
+        where T : unmanaged    
     {
         Span256<T> data;
 
@@ -154,7 +154,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public BlockVector<N,U> As<U>()
-            where U : struct
+            where U : unmanaged
                 => new BlockVector<N, U>(MemoryMarshal.Cast<T,U>(Unsized));
 
         public bool Equals(BlockVector<N,T> rhs)
@@ -204,7 +204,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public BlockVector<N,U> Convert<U>()
-            where U : struct
+            where U : unmanaged
                => new BlockVector<N,U>(convert<T,U>(data));
 
         [MethodImpl(Inline)]

@@ -98,7 +98,6 @@ namespace Z0
             return dst;
         }
 
-
         class AsmFormatterOutput : FormatterOutput
         {
             TextWriter Writer {get;}
@@ -111,7 +110,6 @@ namespace Z0
                 this.BaseAddress = BaseAddress;
             }
             
-
             public override void Write(string text, FormatterOutputTextKind kind)
             {
                 switch(kind)

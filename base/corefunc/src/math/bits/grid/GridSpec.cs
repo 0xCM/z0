@@ -15,7 +15,7 @@ namespace Z0
     /// Characterizes the memory layout of a BitMatrix
     /// </summary>
     public readonly struct GridSpec<T>
-        where T : struct
+        where T : unmanaged
     {
         public static implicit operator GridSpec<T>((BitSize PrimalSize, int RowCount, int ColCount) x)
             => new GridSpec<T>(x.PrimalSize, x.RowCount, x.ColCount);

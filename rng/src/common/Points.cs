@@ -94,7 +94,7 @@ namespace Z0
         /// <param name="random">The point source</param>
         /// <typeparam name="T">The point type</typeparam>
         public static IEnumerable<T> Stream<T>(this IBoundPointSource<T> random)
-            where T : struct
+            where T : unmanaged
         {
             while(true)
                 yield return random.Next();
@@ -107,7 +107,7 @@ namespace Z0
         /// <param name="count">The number of values to select</param>
         /// <typeparam name="T">The value type</typeparam>
         public static IEnumerable<T> Take<T>(this IBoundPointSource<T> random, int count)
-            where T : struct
+            where T : unmanaged
                 => random.Stream().Take(count);
     }
 

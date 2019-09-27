@@ -12,14 +12,14 @@ namespace Z0
     using static zfunc;
 
     public interface IDistribution<T> : IEnumerable<T>
-        where T : struct
+        where T : unmanaged
     {
         IEnumerable<T> Sample();
     }
 
     public interface IDistribution<S,T> : IDistribution<T> 
         where S : IDistributionSpec
-        where T : struct
+        where T : unmanaged
     {
         
     }

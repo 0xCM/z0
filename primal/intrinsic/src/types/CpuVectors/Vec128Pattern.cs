@@ -90,9 +90,9 @@ namespace Z0
 
         static Vec128<T> CalcFpSignMask()
         {
-            if(typematch<T,float>())
+            if(typeof(T) == typeof(float))
                 return CalcFpSignMask32().As<T>();
-            else if(typematch<T,double>())
+            else if(typeof(T) == typeof(double))
                 return CalcFpSignMask64().As<T>();
             else 
                 return Vec128<T>.Zero;

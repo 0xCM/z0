@@ -151,7 +151,7 @@ partial class zfunc
     /// <param name="text"></param>
     /// <param name="default"></param>
     public static T parseEnum<T>(string text, T @default)
-        where T : struct
+        where T : unmanaged
     {
         var result = @default;
         Enum.TryParse(text, true, out result);

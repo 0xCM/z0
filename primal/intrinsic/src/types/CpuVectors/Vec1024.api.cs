@@ -18,12 +18,12 @@ namespace Z0
     {
         [MethodImpl(Inline)]
         public static Vec1024<T> Define<T>(in Vec256<T> v0, in Vec256<T> v1, in Vec256<T> v2, in Vec256<T> v3)        
-            where T : struct
+            where T : unmanaged
                 => new Vec1024<T>(v0, v1, v2, v3);        
 
         [MethodImpl(Inline)]
         public static unsafe Span<T> Segment<T>(this ref Vec1024<T> src, int offset, int len)
-            where T : struct
+            where T : unmanaged
         {
             var askByteOffset = offset * Vec1024<T>.CellSize;
             var askByteCount = len * Vec1024<T>.CellSize;

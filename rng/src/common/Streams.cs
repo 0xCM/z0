@@ -45,7 +45,7 @@ namespace Z0
         /// <param name="src">The random source</param>
         /// <typeparam name="T">The point type</typeparam>
         public static IRandomStream<T> Stream<T>(this IPointSource<T> src)
-            where T : struct
+            where T : unmanaged
         {
             IEnumerable<T> produce()
             {
@@ -64,7 +64,7 @@ namespace Z0
         /// <param name="dst">A reference to the target location</param>
         /// <typeparam name="T">The element type</typeparam>
         public static void StreamTo<T>(this IPointSource<T> src, int count, ref T dst)
-            where T : struct
+            where T : unmanaged
         {
             for(var i=0; i<count; i++)
                 Unsafe.Add(ref dst, i) = src.Next();
@@ -76,7 +76,7 @@ namespace Z0
         /// <param name="random">The point source</param>
         /// <typeparam name="T">The point type</typeparam>
         public static IRandomStream<T> Stream<T>(this IPolyrand random)
-            where T : struct
+            where T : unmanaged
         {
             IEnumerable<T> produce()
             {
@@ -95,7 +95,7 @@ namespace Z0
         /// <param name="filter">If specified, values that do not satisfy the predicate are excluded from the stream</param>
         /// <typeparam name="T">The element type</typeparam>
         public static IRandomStream<T> Stream<T>(this IPolyrand random, Interval<T>? domain = null, Func<T,bool> filter = null)
-            where T : struct
+            where T : unmanaged
                 => stream(random.UniformStream(domain,filter), random.RngKind);
 
         /// <summary>
@@ -106,7 +106,7 @@ namespace Z0
         /// <param name="filter">If specified, values that do not satisfy the predicate are excluded from the stream</param>
         /// <typeparam name="T">The element type</typeparam>
         public static IRandomStream<T> Stream<T>(this IPolyrand random, T max, Func<T,bool> filter = null)
-            where T : struct
+            where T : unmanaged
                 => stream(random.UniformStream(closed(gmath.minval<T>(), max),filter), random.RngKind);
 
         /// <summary>
@@ -117,7 +117,7 @@ namespace Z0
         /// <param name="filter">If specified, values that do not satisfy the predicate are excluded from the stream</param>
         /// <typeparam name="T">The element type</typeparam>
         public static IRandomStream<T> Stream<T>(this IPolyrand random, T min, T max, Func<T,bool> filter = null)
-            where T : struct
+            where T : unmanaged
                 => stream(random.UniformStream(closed(min,max),filter), random.RngKind);
 
         /// <summary>
@@ -128,7 +128,7 @@ namespace Z0
         /// <param name="filter">If specified, values that do not satisfy the predicate are excluded from the stream</param>
         /// <typeparam name="T">The element type</typeparam>
         public static IRandomStream<T> Stream<T>(this IPolyrand random, Interval<T> domain, Func<T,bool> filter = null)
-            where T : struct
+            where T : unmanaged
                 => stream(random.UniformStream(domain,filter), random.RngKind);
 
         /// <summary>
@@ -141,7 +141,7 @@ namespace Z0
         /// <param name="filter">If specified, values that do not satisfy the predicate are excluded from the stream</param>
         /// <typeparam name="T">The element type</typeparam>
         public static void StreamTo<T>(this IPolyrand random, Interval<T> domain, int count, ref T dst, Func<T,bool> filter = null)
-            where T : struct
+            where T : unmanaged
         {
             var it = random.Stream<T>(domain,filter).Take(count).GetEnumerator();
             var counter = 0;
@@ -157,7 +157,7 @@ namespace Z0
         /// <param name="dst">A reference to the target location</param>
         /// <typeparam name="T">The element type</typeparam>
         public static void StreamTo<T>(this IPolyrand random, int count, ref T dst)
-            where T : struct
+            where T : unmanaged
         {
             var it = random.Stream<T>().Take(count).GetEnumerator();
             var counter = 0;
@@ -172,7 +172,7 @@ namespace Z0
         /// <param name="domain">If specified, the domain of the random variable</param>
         /// <typeparam name="T">The element type</typeparam>
         public static IRandomStream<T> NonZeroStream<T>(this IPolyrand random, Interval<T>? domain = null)
-                where T : struct
+                where T : unmanaged
                     => stream(random.UniformStream(domain, gmath.nonzero), random.RngKind);
 
         /// <summary>
@@ -182,11 +182,11 @@ namespace Z0
         /// <param name="domain">The domain of the random variable</param>
         /// <typeparam name="T">The element type</typeparam>
         public static IRandomStream<T> NonZeroStream<T>(this IPolyrand random, Interval<T> domain)
-            where T : struct
+            where T : unmanaged
                 => stream(random.UniformStream(domain, gmath.nonzero), random.RngKind);
 
         static IEnumerable<T> UniformStream<T>(this IPolyrand src, Interval<T> domain, Func<T,bool> filter = null)
-            where T : struct
+            where T : unmanaged
         {
 
             if(filter != null)
@@ -196,7 +196,7 @@ namespace Z0
         }
 
         static IEnumerable<T> UniformStream<T>(this IPolyrand src, Interval<T>? domain = null, Func<T,bool> filter = null)
-            where T : struct
+            where T : unmanaged
         {
             var configured = domain.Configure();
             if(filter != null)
@@ -206,14 +206,14 @@ namespace Z0
         }
 
         static IEnumerable<T> UnfilteredStream<T>(this IPolyrand src, Interval<T> domain)
-            where T : struct
+            where T : unmanaged
         {
             while(true)
                 yield return src.Next<T>(domain.Left, domain.Right);
         }
 
         static IEnumerable<T> FilteredStream<T>(this IPolyrand src, Interval<T> domain, Func<T,bool> filter)
-            where T : struct
+            where T : unmanaged
         {
             var next = default(T);    
             var tries = 0;
@@ -236,9 +236,9 @@ namespace Z0
                     next = generic<T>(src.Next<long>(domain.As<long>()));                    
                 else if(typematch<T,ulong>())
                     next = generic<T>(src.Next<ulong>(domain.As<ulong>()));                    
-                else if(typematch<T,float>())
+                else if(typeof(T) == typeof(float))
                     next = generic<T>(src.Next<float>(domain.As<float>()));                    
-                else if(typematch<T,double>())
+                else if(typeof(T) == typeof(double))
                     next = generic<T>(src.Next<double>(domain.As<double>()));                    
                 else 
                     throw unsupported<T>();

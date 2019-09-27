@@ -14,7 +14,7 @@ namespace Z0
     public static class RVar
     {
         public static RVar<T> Define<T>(Interval<T> domain, IPolyrand random)
-            where T : struct
+            where T : unmanaged
                 => new RVar<T>(domain,random);
     }
 
@@ -22,7 +22,7 @@ namespace Z0
     /// Defines a random variable
     /// </summary>
     public class RVar<T>
-        where T : struct
+        where T : unmanaged
     {        
         public RVar(Interval<T> domain, IPolyrand random)
         {

@@ -60,12 +60,12 @@ partial class zfunc
 
     [MethodImpl(Inline)]   
     public static T[] alloc<T>(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs)
-        where T : struct
+        where T : unmanaged
             => alloc<T>(length(lhs,rhs));
 
     [MethodImpl(Inline)]   
     public static T[] alloc<T>(ReadOnlySpan<T> src)
-        where T : struct
+        where T : unmanaged
             => alloc<T>(src.Length);
 
     /// <summary>

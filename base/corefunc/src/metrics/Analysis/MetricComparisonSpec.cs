@@ -15,7 +15,7 @@ namespace Z0
     public readonly struct MetricComparisonSpec
     {
         public static MetricComparisonSpec Define<T>(MetricKind Baseline, MetricKind Bench, PrimalKind Primitive, OpKind Operator)
-            where T : struct
+            where T : unmanaged
                 => new MetricComparisonSpec(Baseline, Bench, PrimalKinds.kind<T>(), Operator);
 
         public static MetricComparisonSpec Define(MetricKind Baseline, MetricKind Bench, PrimalKind Primitive, OpKind Operator)

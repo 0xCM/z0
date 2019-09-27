@@ -22,7 +22,7 @@ namespace Z0
         /// <typeparam name="T">The primal component type</typeparam>
         [MethodImpl(Inline)]
         public static bool testc<T>(Vector128<T> src, Vector128<T> mask)
-            where T : struct
+            where T : unmanaged
         {
             if(typematch<T,sbyte>())
                 return dinx.testc(int8(src), int8(mask));
@@ -40,9 +40,9 @@ namespace Z0
                 return dinx.testc(int64(src), int64(mask));
             else if(typematch<T,ulong>())
                 return dinx.testc(uint64(src), uint64(mask));
-            else if(typematch<T,float>())
+            else if(typeof(T) == typeof(float))
                 return dfp.testc(float32(src), float32(mask));
-            else if(typematch<T,double>())
+            else if(typeof(T) == typeof(double))
                 return dfp.testc(float64(src), float64(mask));
             else 
                 throw unsupported<T>();
@@ -56,7 +56,7 @@ namespace Z0
         /// <typeparam name="T">The primal component type</typeparam>
         [MethodImpl(Inline)]
         public static bool testc<T>(Vector256<T> src, Vector256<T> mask)
-            where T : struct
+            where T : unmanaged
         {
             if(typematch<T,sbyte>())
                 return dinx.testc(int8(src), int8(mask));
@@ -74,9 +74,9 @@ namespace Z0
                 return dinx.testc(int64(src), int64(mask));
             else if(typematch<T,ulong>())
                 return dinx.testc(uint64(src), uint64(mask));
-            else if(typematch<T,float>())
+            else if(typeof(T) == typeof(float))
                 return dfp.testc(float32(src), float32(mask));
-            else if(typematch<T,double>())
+            else if(typeof(T) == typeof(double))
                 return dfp.testc(float64(src), float64(mask));
             else 
                 throw unsupported<T>();

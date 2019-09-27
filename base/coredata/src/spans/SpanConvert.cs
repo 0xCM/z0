@@ -21,8 +21,8 @@ namespace Z0
         /// <typeparam name="T">The target element type</typeparam>
         [MethodImpl(Inline)]
         public static ref T TakeSingle<S,T>(Span<S> src, int offset = 0, int? length = null)
-            where S : struct
-            where T : struct
+            where S : unmanaged
+            where T : unmanaged
                 => ref MemoryMarshal.AsRef<T>(src.AsBytes(offset,length));
 
         /// <summary>
@@ -35,8 +35,8 @@ namespace Z0
         /// <typeparam name="T">The target element type</typeparam>
         [MethodImpl(Inline)]
         public static ref readonly T TakeSingle<S,T>(ReadOnlySpan<S> src, int offset = 0, int? length = null)
-            where S : struct
-            where T : struct            
+            where S : unmanaged
+            where T : unmanaged            
                 => ref MemoryMarshal.AsRef<T>(src.AsBytes(offset, length));
 
         /// <summary>
@@ -47,8 +47,8 @@ namespace Z0
         /// <typeparam name="T">The target element type</typeparam>
         [MethodImpl(Inline)]
         public static unsafe Span<T> AsSpan<S,T>(ref S src)
-            where S : struct
-            where T : struct
+            where S : unmanaged
+            where T : unmanaged
                 => new Span<T>(Unsafe.AsPointer(ref src), Unsafe.SizeOf<S>() / Unsafe.SizeOf<T>());
 
         /// <summary>
@@ -59,8 +59,8 @@ namespace Z0
         /// <typeparam name="T">The target element type</typeparam>
         [MethodImpl(Inline)]
         public static unsafe ReadOnlySpan<T> AsReadOnlySpan<S,T>(ref S src)
-            where S : struct
-            where T : struct
+            where S : unmanaged
+            where T : unmanaged
                 => new ReadOnlySpan<T>(Unsafe.AsPointer(ref src), Unsafe.SizeOf<S>() / Unsafe.SizeOf<T>());
 
         [MethodImpl(Inline)]

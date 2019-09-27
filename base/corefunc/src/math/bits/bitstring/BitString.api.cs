@@ -46,7 +46,7 @@ namespace Z0
         /// <param name="reps">The number of times to repeat the pattern</param>
         /// <typeparam name="T">The primal source type</typeparam>
         public static BitString FromPattern<T>(T src, int reps)                
-            where T : struct
+            where T : unmanaged
         {
             BitSize capacity = Unsafe.SizeOf<T>() * 8;
             Span<byte> bitseq = new byte[capacity*reps];            
@@ -63,7 +63,7 @@ namespace Z0
         /// <typeparam name="T">The primal source type</typeparam>
         [MethodImpl(Inline)]
         public static BitString FromScalar<T>(in T src)
-            where T : struct
+            where T : unmanaged
                 => new BitString(BitStore.BitSeq(in src));
 
         /// <summary>
@@ -73,7 +73,7 @@ namespace Z0
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
         public static BitString FromScalars<T>(Span<T> src, BitSize? maxlen = null)
-            where T : struct
+            where T : unmanaged
         {
             var segbits = bitsize<T>();
             var bitcount = maxlen ?? segbits*src.Length;
@@ -95,7 +95,7 @@ namespace Z0
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
         public static BitString FromScalars<T>(params T[] parts)
-            where T : struct
+            where T : unmanaged
                 => FromScalars(parts.AsSpan());
 
         /// <summary>

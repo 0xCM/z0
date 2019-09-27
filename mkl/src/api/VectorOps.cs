@@ -28,14 +28,14 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ref BlockVector<N,T> Add<N,T>(in BlockVector<N,T> x, in BlockVector<N,T> y, ref BlockVector<N,T> z)
             where N : ITypeNat, new()
-            where T : struct    
+            where T : unmanaged    
         {
-            if(typematch<T,float>())
+            if(typeof(T) == typeof(float))
             {
                 var dst = z.As<float>();
                 mkl.add(x.As<float>(), y.As<float>(), ref dst);
             }
-            else if(typematch<T,double>())
+            else if(typeof(T) == typeof(double))
             {
                 var dst = z.As<double>();
                 mkl.add(x.As<double>(), y.As<double>(), ref dst);
@@ -50,11 +50,11 @@ namespace Z0
         [MethodImpl(Inline)]
         public static T Dot<N,T>(BlockVector<N,T> x, BlockVector<N,T> y)
             where N : ITypeNat, new()
-            where T : struct
+            where T : unmanaged
         {
-            if(typematch<T,float>())
+            if(typeof(T) == typeof(float))
                 return generic<T>(mkl.dot(x.As<float>(), y.As<float>()));
-            else if(typematch<T,double>())
+            else if(typeof(T) == typeof(double))
                 return generic<T>(mkl.dot(x.As<double>(), y.As<double>()));
             else
                 return mathspan.dot<T>(x.Unsized, y.Unsized);                

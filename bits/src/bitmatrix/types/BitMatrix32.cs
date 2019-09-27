@@ -415,7 +415,7 @@ namespace Z0
             for(var i=0; i< A.RowCount; i += rowstep)
             {
                 var x1 = load(ref A[i]);
-                Z0.Bits.flip(in x1).StoreTo(ref dst[i]);
+                Z0.Bits.vflip(in x1).StoreTo(ref dst[i]);
             }
             return dst;
         }

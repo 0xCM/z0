@@ -139,7 +139,7 @@ namespace  Z0
 
         [MethodImpl(Inline)]
         public static T ValueOrDefault<T>(this T? x, T @default = default)
-            where T : struct
+            where T : unmanaged
                 => x != null ? x.Value : @default;
 
         /// <summary>

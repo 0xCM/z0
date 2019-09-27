@@ -16,13 +16,13 @@ namespace Z0.Mkl
     {
         [MethodImpl(Inline)]
         internal static T dot<T>(in BlockVector<T> lhs, in BlockVector<T> rhs)
-            where T : struct
+            where T : unmanaged
                 => mathspan.dot<T>(lhs.Unblocked, rhs.Unblocked);
 
         [MethodImpl(Inline)]
         internal static T dot<N,T>(in BlockVector<N,T> lhs, in BlockVector<N,T> rhs)
             where N : ITypeNat, new()
-            where T : struct    
+            where T : unmanaged    
                 => mathspan.dot<T>(lhs.Unsized,rhs.Unsized);
 
         public void dot32f()

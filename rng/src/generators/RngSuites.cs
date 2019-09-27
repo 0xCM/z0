@@ -19,7 +19,7 @@ namespace Z0
         /// </summary>
         /// <param name="sources">A set of random point sources</param>
         public static Span<T> Next<T>(this Span<IBoundPointSource<T>> generators)
-            where T : struct
+            where T : unmanaged
         {
             Span<T> dst = new T[generators.Length];
             for(var i=0; i<generators.Length; i++)
@@ -32,7 +32,7 @@ namespace Z0
         /// </summary>
         /// <param name="sources">A set of random point sources</param>
         public static Span<T> Next<T>(this Span<IStepwiseSource<T>> generators)
-            where T : struct
+            where T : unmanaged
         {
             Span<T> dst = new T[generators.Length];
             for(var i=0; i<generators.Length; i++)
@@ -45,7 +45,7 @@ namespace Z0
         /// </summary>
         /// <param name="sources">A set of random point sources</param>
         public static T[] Next<T>(this IBoundPointSource<T>[] sources)
-            where T : struct
+            where T : unmanaged
         {
             var dst = new T[sources.Length];
             for(var i=0; i<sources.Length; i++)
@@ -58,7 +58,7 @@ namespace Z0
         /// </summary>
         /// <param name="sources">A set of random point sources</param>
         public static T[] Next<T>(this IStepwiseSource<T>[] sources)
-            where T : struct
+            where T : unmanaged
         {
             var dst = new T[sources.Length];
             for(var i=0; i<sources.Length; i++)

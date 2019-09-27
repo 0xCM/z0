@@ -122,7 +122,7 @@ namespace Z0
         }
 
         void rotl_check<T>()
-            where T : struct
+            where T : unmanaged
         {
             var offset = Random.Next(closed<uint>(1, bitsize<T>()));
             var offsetT = convert<uint,T>(offset);

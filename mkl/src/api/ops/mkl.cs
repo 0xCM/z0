@@ -43,7 +43,7 @@ namespace Z0.Mkl
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
         public static ref T head<T>(BlockVector<T> src)
-            where T : struct
+            where T : unmanaged
             =>  ref MemoryMarshal.GetReference<T>(src.Unblocked);
 
         /// <summary>
@@ -54,7 +54,7 @@ namespace Z0.Mkl
         [MethodImpl(Inline)]
         static ref T head<N,T>(BlockVector<N,T> src)
             where N : ITypeNat, new()
-            where T : struct
+            where T : unmanaged
                 =>  ref MemoryMarshal.GetReference<T>(src.Unsized);
 
         /// <summary>
@@ -96,7 +96,7 @@ namespace Z0.Mkl
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
         static ref T head<N,T>(Span<N,T> src)
-            where T : struct
+            where T : unmanaged
             where N : ITypeNat, new()
             =>  ref MemoryMarshal.GetReference<T>(src.Unsized);
 
@@ -104,15 +104,15 @@ namespace Z0.Mkl
         [MethodImpl(Inline)]   
         static int length<S,T>(Span<S> lhs, Span<T> rhs, [CallerMemberName] string caller = null, 
             [CallerFilePath] string file = null, [CallerLineNumber] int? line = null)
-            where T : struct
-            where S : struct
+            where T : unmanaged
+            where S : unmanaged
                 => zfunc.length(lhs,rhs);
 
         [MethodImpl(Inline)]   
         static int length<S,T>(BlockVector<S> lhs, BlockVector<T> rhs, [CallerMemberName] string caller = null, 
             [CallerFilePath] string file = null, [CallerLineNumber] int? line = null)
-            where T : struct
-            where S : struct
+            where T : unmanaged
+            where S : unmanaged
                 => lhs.Length == rhs.Length ? lhs.Length 
                     : throw Errors.LengthMismatch(lhs.Length, rhs.Length, caller, file, line);
 

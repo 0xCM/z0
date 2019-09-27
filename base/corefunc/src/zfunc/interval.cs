@@ -22,7 +22,7 @@ partial class zfunc
     /// <typeparam name="T">The underlying type</typeparam>
     [MethodImpl(Inline)]
     public static Interval<T> closed<T>(T left, T right)
-        where T : struct
+        where T : unmanaged
             => Interval.closed(left,right);
 
     /// <summary>
@@ -33,7 +33,7 @@ partial class zfunc
     /// <typeparam name="T">The underlying type</typeparam>
     [MethodImpl(Inline)]
     public static Interval<T> leftopen<T>(T left, T right)
-        where T : struct
+        where T : unmanaged
             => Interval.leftopen(left,right);
 
     /// <summary>
@@ -44,7 +44,7 @@ partial class zfunc
     /// <typeparam name="T">The underlying type</typeparam>
     [MethodImpl(Inline)]
     public static Interval<T> leftclosed<T>(T left, T right)
-        where T : struct
+        where T : unmanaged
             => Interval.leftclosed(left,right);
 
     /// <summary>
@@ -55,7 +55,7 @@ partial class zfunc
     /// <typeparam name="T">The underlying type</typeparam>
     [MethodImpl(Inline)]
     public static Interval<T> rightclosed<T>(T left, T right)
-        where T : struct
+        where T : unmanaged
             => Interval.rightclosed(left,right);
 
     /// <summary>
@@ -66,6 +66,6 @@ partial class zfunc
     /// <typeparam name="T">The underlying type</typeparam>
     [MethodImpl(Inline)]
     public static Interval<T> open<T>(T left, T right)
-        where T : struct
+        where T : unmanaged
             => Interval.open(left,right);
 }

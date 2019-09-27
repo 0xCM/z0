@@ -42,9 +42,9 @@ namespace Z0
                 return generic<T>(Bits.andn(int64(lhs), int64(rhs)));
             else if(typematch<T,ulong>())
                 return generic<T>(Bits.andn(uint64(lhs), uint64(rhs)));
-            else if(typematch<T,float>())
+            else if(typeof(T) == typeof(float))
                 return generic<T>(Bits.andn(float32(lhs), float32(rhs)));
-            else if(typematch<T,double>())
+            else if(typeof(T) == typeof(double))
                 return generic<T>(Bits.andn(float64(lhs), float64(rhs)));
             else 
                 throw unsupported<T>();
@@ -76,9 +76,9 @@ namespace Z0
                 return generic<T>(Bits.andn(int64(lhs), int64(rhs)));
             else if(typematch<T,ulong>())
                 return generic<T>(Bits.andn(uint64(lhs), uint64(rhs)));
-            else if(typematch<T,float>())
+            else if(typeof(T) == typeof(float))
                 return generic<T>(Bits.andn(float32(lhs), float32(rhs)));
-            else if(typematch<T,double>())
+            else if(typeof(T) == typeof(double))
                 return generic<T>(Bits.andn(float64(lhs), float64(rhs)));
             else 
                 throw unsupported<T>();

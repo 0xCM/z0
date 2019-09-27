@@ -44,7 +44,7 @@ namespace Z0
        readonly struct Sal<T>
             where T : unmanaged
         {
-            public static readonly ShiftOp<T> Op = gbits.sal<T>;
+            public static readonly ShiftOp<T> Op = gmath.sal<T>;
         }
 
        readonly struct Sar<T>

@@ -26,7 +26,7 @@ namespace Z0
         /// <param name="target">The target value to match</param>
         /// <typeparam name="T">The value type</typeparam>
         public static bool Contains<T>(this ReadOnlySpan<T> src, T target)        
-            where T : struct
+            where T : unmanaged
         {
             var enumerator = src.GetEnumerator();
             while(enumerator.MoveNext())
@@ -37,7 +37,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static bool Contains<T>(this Span<T> src, T match)        
-            where T : struct
+            where T : unmanaged
                 => src.ReadOnly().Contains(match);
 
         /// <summary>
@@ -115,7 +115,7 @@ namespace Z0
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
         public static bool Any<T>(this Span<T> src, Func<T,bool> f)
-             where T : struct
+             where T : unmanaged
                 => src.ReadOnly().Any(f);
 
         /// <summary>
@@ -125,7 +125,7 @@ namespace Z0
         /// <param name="f">The predicate to evaluate over each element</param>
         /// <typeparam name="T">The element type</typeparam>
         public static int Count<T>(this ReadOnlySpan<T> src, Func<T,bool> f)
-             where T : struct
+             where T : unmanaged
         {
             int count = 0;
             for(var i=0; i< src.Length; i++)
@@ -142,7 +142,7 @@ namespace Z0
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
         public static int Count<T>(this Span<T> src, Func<T,bool> f)
-             where T : struct
+             where T : unmanaged
              => src.ReadOnly().Count(f);
 
         /// <summary>
@@ -152,7 +152,7 @@ namespace Z0
         /// <param name="f">The predicate</param>
         /// <typeparam name="T">The element type</typeparam>
         public static bool All<T>(this ReadOnlySpan<T> src, Func<T,bool> f)
-             where T : struct
+             where T : unmanaged
         {
             var it = src.GetEnumerator();
             while(it.MoveNext())
@@ -169,7 +169,7 @@ namespace Z0
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
         public static bool All<T>(this Span<T> src, Func<T,bool> f)
-             where T : struct  
+             where T : unmanaged  
                 => src.ReadOnly().All(f);
 
         /// <summary>
@@ -180,7 +180,7 @@ namespace Z0
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
         public static ByteSize ByteCount<T>(this ReadOnlySpan<T> src, int offset = 0)
-            where T : struct        
+            where T : unmanaged        
                 => (src.Length - offset) * Unsafe.SizeOf<T>();
 
         public static T Reduce<T>(this ReadOnlySpan<T> src, Func<T,T,T> f)
@@ -199,7 +199,7 @@ namespace Z0
         public static T Reduce<M,N,T>(this Span<M,N,T> src, Func<T,T,T> f)
             where M : ITypeNat, new()
             where N : ITypeNat, new()
-            where T : struct
+            where T : unmanaged
                 => Reduce(src.ReadOnly(), f);
 
         [MethodImpl(Inline)]

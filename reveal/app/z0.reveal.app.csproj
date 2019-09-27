@@ -14,6 +14,8 @@
     <ProjectReference Include="$(TopDir)cpu/cpudata/z0.cpudata.csproj" />
     <ProjectReference Include="$(TopDir)cpu/cpufunc/z0.cpufunc.csproj" />
     <ProjectReference Include="$(TopDir)reveal/lib/z0.reveal.lib.csproj" />
+    <ProjectReference Include="$(TopDir)bits/src/z0.bits.csproj" />
+
   </ItemGroup>
 
   <ItemGroup>

@@ -119,7 +119,7 @@ namespace Z0
         /// <param name="blockWidth">The number of binary digits per block, if specified</param>
         /// <typeparam name="T">The primal component type</typeparam>
         public static string FormatBits<T>(this ReadOnlySpan<T> src, bool tlz = false, bool specifier = false, int? blockWidth = null)
-            where T : struct
+            where T : unmanaged
         {
             var sb = sbuild();
             for(var i=0; i<src.Length; i++)
@@ -143,7 +143,7 @@ namespace Z0
         /// <typeparam name="T">The primal component type</typeparam>
         [MethodImpl(Inline)]
         public static string FormatBits<T>(this Vec128<T> src, bool tlz = false, bool specifier = false, int? blockWidth = null)
-            where T : struct
+            where T : unmanaged
                 => src.ToReadOnlySpan().FormatBits(tlz,specifier, blockWidth);
 
         /// <summary>
@@ -156,7 +156,7 @@ namespace Z0
         /// <typeparam name="T">The primal component type</typeparam>
         [MethodImpl(Inline)]
         public static string FormatBits<T>(this Vec256<T> src, bool tlz = false, bool specifier = false, int? blockWidth = null)
-            where T : struct
+            where T : unmanaged
                 => src.ToReadOnlySpan().FormatBits(tlz,specifier, blockWidth);
 
         /// <summary>
@@ -169,7 +169,7 @@ namespace Z0
         /// <typeparam name="T">The primal component type</typeparam>
         [MethodImpl(Inline)]
         public static string FormatBits<T>(this Vec512<T> src, bool tlz = false, bool specifier = false, int? blockWidth = null)
-            where T : struct
+            where T : unmanaged
                 => src.ToReadOnlySpan().FormatBits(tlz,specifier, blockWidth);
 
         /// <summary>
@@ -182,7 +182,7 @@ namespace Z0
         /// <typeparam name="T">The primal component type</typeparam>
         [MethodImpl(Inline)]
         public static string FormatBits<T>(this Vec1024<T> src, bool tlz = false, bool specifier = false, int? blockWidth = null)
-            where T : struct
+            where T : unmanaged
                 => src.ToReadOnlySpan().FormatBits(tlz,specifier, blockWidth);
 
     }

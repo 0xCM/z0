@@ -17,6 +17,11 @@ namespace Z0
     {
 
         [MethodImpl(Inline)]
+        public static T add<T>(T x, T y)
+            where T : unmanaged        
+                => add<T>().apply(x,y);
+
+        [MethodImpl(Inline)]
         public static ref readonly AddOp<T> add<T>()
             where T : unmanaged        
                 => ref AddOp<T>.TheOnly;

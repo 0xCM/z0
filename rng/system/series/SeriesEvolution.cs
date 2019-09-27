@@ -15,12 +15,12 @@ namespace Z0
     {
         public static SeriesEvolution<T> Define<T>(in ulong[] Seed, in Interval<T> Domain, 
             in SeriesTerm<T> FirstTerm, in SeriesTerm<T> FinalTerm, in Duration Time)
-                where T : struct
+                where T : unmanaged
                     => new SeriesEvolution<T>(in Seed, in Domain, in FirstTerm, in FinalTerm, in Time);
     }
     
     public readonly struct SeriesEvolution<T>
-        where T : struct
+        where T : unmanaged
     {
         public SeriesEvolution(in ulong[] Seed, in Interval<T> Domain, in SeriesTerm<T> FirstTerm, in SeriesTerm<T> FinalTerm, in Duration Time)
         {

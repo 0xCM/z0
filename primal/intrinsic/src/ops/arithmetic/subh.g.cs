@@ -17,15 +17,15 @@ namespace Z0
     {
         [MethodImpl(Inline)]
         public static Vector128<T> subh<T>(Vector128<T> lhs, Vector128<T> rhs)
-            where T : struct
+            where T : unmanaged
         {
             if(typeof(T) == typeof(short))
                 return generic<T>(dinx.hsub(int16(lhs), int16(rhs)));
             else if(typematch<T,int>())
                 return generic<T>(dinx.hsub(int32(lhs), int32(rhs)));
-            else if(typematch<T,float>())
+            else if(typeof(T) == typeof(float))
                 return generic<T>(dfp.hsub(float32(lhs), float32(rhs)));
-            else if(typematch<T,double>())
+            else if(typeof(T) == typeof(double))
                 return generic<T>(dfp.hsub(float64(lhs), float64(rhs)));
             else 
                 throw unsupported<T>();
@@ -33,15 +33,15 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static Vector256<T> subh<T>(Vector256<T> lhs, Vector256<T> rhs)
-            where T : struct
+            where T : unmanaged
         {
             if(typeof(T) == typeof(short))
                 return generic<T>(dinx.subh(int16(lhs), int16(rhs)));
             else if(typematch<T,int>())
                 return generic<T>(dinx.hsub(int32(lhs), int32(rhs)));
-            else if(typematch<T,float>())
+            else if(typeof(T) == typeof(float))
                 return generic<T>(dfp.hsub(float32(lhs), float32(rhs)));
-            else if(typematch<T,double>())
+            else if(typeof(T) == typeof(double))
                 return generic<T>(dfp.hsub(float64(lhs), float64(rhs)));
             else 
                 throw unsupported<T>();

@@ -17,7 +17,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static unsafe void store<T>(Vec128<T> src, ref T dst)
-            where T : struct
+            where T : unmanaged
         {
             if(typematch<T,sbyte>())
                 vstore(int8(src), ref int8(ref dst));
@@ -35,9 +35,9 @@ namespace Z0
                 vstore(int64(src), ref int64(ref dst));
             else if(typematch<T,ulong>())
                 vstore(uint64(src), ref uint64(ref dst));
-            else if(typematch<T,float>())
+            else if(typeof(T) == typeof(float))
                 vstore(float32(src), ref float32(ref dst));
-            else if(typematch<T,double>())
+            else if(typeof(T) == typeof(double))
                 vstore(float64(src), ref float64(ref dst));
             else 
                 throw unsupported<T>();
@@ -45,7 +45,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static unsafe void store<T>(Vector128<T> src, ref T dst)
-            where T : struct
+            where T : unmanaged
         {
             if(typematch<T,sbyte>())
                 vstore(int8(src), ref int8(ref dst));
@@ -63,9 +63,9 @@ namespace Z0
                 vstore(int64(src), ref int64(ref dst));
             else if(typematch<T,ulong>())
                 vstore(uint64(src), ref uint64(ref dst));
-            else if(typematch<T,float>())
+            else if(typeof(T) == typeof(float))
                 vstore(float32(src), ref float32(ref dst));
-            else if(typematch<T,double>())
+            else if(typeof(T) == typeof(double))
                 vstore(float64(src), ref float64(ref dst));
             else 
                 throw unsupported<T>();
@@ -73,7 +73,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static unsafe void store<T>(Vector256<T> src, ref T dst)
-            where T : struct
+            where T : unmanaged
         {
             if(typematch<T,sbyte>())
                 vstore(int8(src), ref int8(ref dst));
@@ -91,9 +91,9 @@ namespace Z0
                 vstore(int64(src), ref int64(ref dst));
             else if(typematch<T,ulong>())
                 vstore(uint64(src), ref uint64(ref dst));
-            else if(typematch<T,float>())
+            else if(typeof(T) == typeof(float))
                 vstore(float32(src), ref float32(ref dst));
-            else if(typematch<T,double>())
+            else if(typeof(T) == typeof(double))
                 vstore(float64(src), ref float64(ref dst));
             else 
                 throw unsupported<T>();
@@ -101,7 +101,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static unsafe void store<T>(Vec256<T> src, ref T dst)
-            where T : struct
+            where T : unmanaged
         {
             if(typematch<T,sbyte>())
                 vstore(int8(src), ref int8(ref dst));
@@ -119,9 +119,9 @@ namespace Z0
                 vstore(int64(src), ref int64(ref dst));
             else if(typematch<T,ulong>())
                 vstore(uint64(src), ref uint64(ref dst));
-            else if(typematch<T,float>())
+            else if(typeof(T) == typeof(float))
                 vstore(float32(src), ref float32(ref dst));
-            else if(typematch<T,double>())
+            else if(typeof(T) == typeof(double))
                 vstore(float64(src), ref float64(ref dst));
             else 
                 throw unsupported<T>();

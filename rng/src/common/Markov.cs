@@ -21,11 +21,11 @@ namespace Z0
         /// <param name="len">The result vector length</param>
         [MethodImpl(Inline)]
         public static BlockVector<T> MarkovVec<T>(this IPolyrand random, int length)
-            where T : struct
+            where T : unmanaged
         {
-            if(typematch<T,float>())                
+            if(typeof(T) == typeof(float))                
                 return random.MarkovVec(length, 1f, length << 4).As<T>();
-            else if(typematch<T,double>())
+            else if(typeof(T) == typeof(double))
                 return random.MarkovVec(length, 1.0, length << 4).As<T>();
             else
                 throw unsupported<T>();
@@ -38,11 +38,11 @@ namespace Z0
         /// <param name="len">The result vector length</param>
         [MethodImpl(Inline)]
         public static void MarkovVec<T>(this IPolyrand random, Span<T> dst)
-            where T : struct
+            where T : unmanaged
         {
-            if(typematch<T,float>())                
+            if(typeof(T) == typeof(float))                
                 random.MarkovVec(As.float32(dst));
-            else if(typematch<T,double>())
+            else if(typeof(T) == typeof(double))
                 random.MarkovVec(As.float64(dst));
             else
                 throw unsupported<T>();
@@ -57,7 +57,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BlockVector<N,T> MarkovVec<N,T>(this IPolyrand random)
             where N : ITypeNat, new()
-            where T : struct
+            where T : unmanaged
         {
             var dst = BlockVector.Alloc<N,T>();
             random.MarkovVec(dst.Unsized);

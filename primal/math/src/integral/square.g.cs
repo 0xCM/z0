@@ -17,7 +17,7 @@ namespace Z0
     {
         [MethodImpl(Inline)]
         public static T square<T>(T src)
-            where T : struct
+            where T : unmanaged
         {
             if(typematch<T,sbyte>())
                 return generic<T>(math.square(int8(src)));
@@ -35,9 +35,9 @@ namespace Z0
                 return generic<T>(math.square(int64(src)));
             else if(typematch<T,ulong>())
                 return generic<T>(math.square(uint64(src)));
-            else if(typematch<T,float>())
+            else if(typeof(T) == typeof(float))
                 return generic<T>(math.square(float32(src)));
-            else if(typematch<T,double>())
+            else if(typeof(T) == typeof(double))
                 return generic<T>(math.square(float64(src)));
             else            
                 throw unsupported<T>();
@@ -45,7 +45,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static ref T square<T>(ref T src)
-            where T : struct
+            where T : unmanaged
         {
             if(typematch<T,sbyte>())
                 math.square(ref int8(ref src));
@@ -63,9 +63,9 @@ namespace Z0
                 math.square(ref int64(ref src));
             else if(typematch<T,ulong>())
                 math.square(ref uint64(ref src));
-            else if(typematch<T,float>())
+            else if(typeof(T) == typeof(float))
                 math.square(ref float32(ref src));
-            else if(typematch<T,double>())
+            else if(typeof(T) == typeof(double))
                 math.square(ref float64(ref src));
             else            
                 throw unsupported<T>();

@@ -21,7 +21,7 @@ namespace Z0
         /// <param name="random">The random source</param>
         /// <typeparam name="E">The enum type</typeparam>
         public static IEnumerable<E> EnumStream<E>(this IPolyrand random, Func<E,bool> filter = null)
-            where E : struct, Enum
+            where E : unmanaged, Enum
         {
             IEnumerable<E> produce()
             {

@@ -15,7 +15,7 @@ namespace Z0
 
 
     public class TimeSeries<T> : ITimeSeries<T>
-        where T : struct
+        where T : unmanaged
     {
         [MethodImpl]
         public TimeSeries(long Id, Interval<T> Domain, SeriesTerm<T> FirstTerm)

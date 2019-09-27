@@ -11,7 +11,7 @@ namespace Z0
     using static zfunc;    
 
     public readonly struct SeriesTerm<T>
-        where T : struct
+        where T : unmanaged
     {
         public SeriesTerm(long index, T observation)
         {

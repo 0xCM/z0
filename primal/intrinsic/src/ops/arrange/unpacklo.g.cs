@@ -28,7 +28,7 @@ namespace Z0
         /// <param name="rhs">The right source vector</param>
         [MethodImpl(Inline)]
         public static Vector128<T> unpacklo<T>(Vector128<T> lhs, Vector128<T> rhs)        
-            where T : struct
+            where T : unmanaged
         {
             if(typematch<T,sbyte>())
                 return generic<T>(UnpackLow(lhs.As<T,sbyte>(), rhs.As<T,sbyte>()));
@@ -59,7 +59,7 @@ namespace Z0
         /// <param name="rhs">The right source vector</param>
         [MethodImpl(Inline)]
         public static Vector256<T> unpacklo<T>(Vector256<T> lhs, Vector256<T> rhs)        
-            where T : struct
+            where T : unmanaged
         {
             if(typematch<T,sbyte>())
                 return generic<T>(UnpackLow(lhs.As<T,sbyte>(), rhs.As<T,sbyte>()));

@@ -36,17 +36,55 @@ namespace Z0.Test
             Claim.eq(y4,z4);            
 
         }
-
-        public void Negate()
+        public void negate_8i()
         {
-            VerifyOp(x => (sbyte)-x, D.negate<sbyte>());
-            VerifyOp(x => (short)-x, D.negate<short>());
-            VerifyOp(x => -x, D.negate<int>());
-            VerifyOp(x => -x, D.negate<long>());
-            VerifyOp(x => -x, D.negate<float>());
-            VerifyOp(x => -x, D.negate<double>());              
+            opcheck(x => (sbyte)-x, D.negate<sbyte>());
         }
 
+        public void negate_8u()
+        {
+            opcheck(math.negate, D.negate<byte>());
+        }
+
+        public void negate_16i()
+        {
+            opcheck(x => (short)-x, D.negate<short>());
+        }
+
+        public void negate_16u()
+        {
+            VerifyOp(math.negate, D.negate<ushort>());
+        }
+
+        public void negate_32i()
+        {
+            opcheck(x => -x, D.negate<int>());
+        }
+
+        public void negate_32u()
+        {
+            opcheck(math.negate, D.negate<uint>());
+        }
+
+        public void negate_64i()
+        {
+            opcheck(x => -x, D.negate<long>());
+        }
+
+        public void negate_64u()
+        {
+            opcheck(math.negate, D.negate<ulong>());
+        }
+
+        public void negate_32f()
+        {
+            opcheck(x => -x, D.negate<float>());
+        }
+
+        public void negate_64f()
+        {
+            opcheck(x => -x, D.negate<double>());              
+        }
 
 
     }

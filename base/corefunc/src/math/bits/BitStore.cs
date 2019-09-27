@@ -21,7 +21,7 @@ namespace Z0
         /// <typeparam name="T">The primal source type</typeparam>
         [MethodImpl(Inline)]
         public static ReadOnlySpan<byte> BitSeq<T>(in T src)
-            where T : struct
+            where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
                 return ReadSeq(uint8(src));
@@ -39,9 +39,9 @@ namespace Z0
                 return ReadSeq(uint32(src));
             else if(typematch<T,ulong>())
                 return ReadSeq(uint64(src));
-            else if(typematch<T,float>())
+            else if(typeof(T) == typeof(float))
                 return ReadSeq(float32(src));
-            else if(typematch<T,double>())
+            else if(typeof(T) == typeof(double))
                 return ReadSeq(float64(src));
             else            
                 throw unsupported<T>();            

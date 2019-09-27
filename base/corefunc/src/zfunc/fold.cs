@@ -21,7 +21,7 @@ partial class zfunc
     /// <typeparam name="T">The stream element type</typeparam>
     [MethodImpl(Inline)]
     public static T foldA<T>(IEnumerable<T> src)
-        where T : struct, IMonoidA<T>
+        where T : unmanaged, IMonoidA<T>
     {
         
         var cumulant = default(T).Zero;
@@ -37,7 +37,7 @@ partial class zfunc
     /// <typeparam name="T">The stream element type</typeparam>
     [MethodImpl(Inline)]
     public static T foldM<T>(IEnumerable<T> src)
-        where T : struct, IMonoidM<T>
+        where T : unmanaged, IMonoidM<T>
     {        
         var cumulant = default(T).One;
         foreach(var item in src)
@@ -52,7 +52,7 @@ partial class zfunc
     /// <typeparam name="T">The stream element type</typeparam>
     [MethodImpl(Inline)]
     public static T fold<T>(IEnumerable<T> src, IMonoidalOps<T> monoid)
-        where T : struct
+        where T : unmanaged
     {
         
         var cumulant = monoid.Identity;

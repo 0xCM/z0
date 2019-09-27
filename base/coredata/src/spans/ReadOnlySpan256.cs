@@ -18,7 +18,7 @@ namespace Z0
     /// of 16 bytes = 256 bits
     /// </summary>
     public ref struct ReadOnlySpan256<T>
-        where T : struct
+        where T : unmanaged
     {
         ReadOnlySpan<T> data;
 
@@ -174,7 +174,7 @@ namespace Z0
                 
         [MethodImpl(Inline)]
         public ReadOnlySpan256<S> As<S>()                
-            where S : struct
+            where S : unmanaged
                 => (ReadOnlySpan256<S>)MemoryMarshal.Cast<T,S>(data);                    
  
         /// <summary>

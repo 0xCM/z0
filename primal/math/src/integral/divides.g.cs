@@ -19,7 +19,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static bool divides<T>(T lhs, T rhs)
-            where T : struct
+            where T : unmanaged
         {
             if(typematch<T,sbyte>())
                 return math.divides(int8(lhs), int8(rhs));
@@ -37,9 +37,9 @@ namespace Z0
                 return math.divides(int64(lhs), int64(rhs));
             else if(typematch<T,ulong>())
                 return math.divides(uint64(lhs), uint64(rhs));
-            else if(typematch<T,float>())
+            else if(typeof(T) == typeof(float))
                 return fmath.divides(float32(lhs), float32(rhs));
-            else if(typematch<T,double>())
+            else if(typeof(T) == typeof(double))
                 return fmath.divides(float64(lhs), float64(rhs));
             else            
                 throw unsupported<T>();

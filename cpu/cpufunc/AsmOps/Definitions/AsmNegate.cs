@@ -50,9 +50,9 @@ namespace Z0
                 return AsmCode.FromBytes<T>(negate64iBytes);
             else if(typematch<T,ulong>())
                 return AsmCode.FromBytes<T>(negate64uBytes);
-            else if(typematch<T,float>())
+            else if(typeof(T) == typeof(float))
                 return AsmCode.FromBytes<T>(negate32fBytes);
-            else if(typematch<T,double>())
+            else if(typeof(T) == typeof(double))
                 return AsmCode.FromBytes<T>(negate64fBytes);
             else 
                 throw unsupported<T>();

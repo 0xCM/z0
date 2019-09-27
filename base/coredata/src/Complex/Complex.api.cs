@@ -19,13 +19,13 @@ namespace Z0
         /// <param name="im">The imaginary part</param>
         /// <typeparam name="T">The underlying primal type</typeparam>
         public static Complex<T> Define<T>(T re, T im = default)   
-            where T : struct
+            where T : unmanaged
                 => (re,im);
 
         
         public static Span<N,Complex<T>> FromPaired<N,T>(Span<N,T> re, Span<N,T> im)
             where N : ITypeNat, new()
-            where T : struct
+            where T : unmanaged
         {
             Span<Complex<T>> dst = new Complex<T>[nati<N>()];
             for(var i=0; i< dst.Length; i++)

@@ -94,26 +94,26 @@ partial class zfunc
 
     [MethodImpl(Inline)]
     public static ReadOnlySpan<T> cast<S,T>(ReadOnlySpan<S> src)                
-        where S : struct
-        where T : struct
+        where S : unmanaged
+        where T : unmanaged
             => MemoryMarshal.Cast<S,T>(src);
 
     [MethodImpl(Inline)]
     public static ReadOnlySpan<T> cast<S,T>(ReadOnlySpan<S> src, out ReadOnlySpan<T> dst)                
-        where S : struct
-        where T : struct
+        where S : unmanaged
+        where T : unmanaged
             => dst = MemoryMarshal.Cast<S,T>(src);
 
     [MethodImpl(Inline)]
     public static Span<T> cast<S,T>(Span<S> src)                
-        where S : struct
-        where T : struct
+        where S : unmanaged
+        where T : unmanaged
             => MemoryMarshal.Cast<S,T>(src);
 
     [MethodImpl(Inline)]
     public static Span<T> cast<S,T>(Span<S> src, out Span<T> dst)                
-        where S : struct
-        where T : struct
+        where S : unmanaged
+        where T : unmanaged
             => dst = MemoryMarshal.Cast<S,T>(src);
 
     /// <summary>
@@ -143,8 +143,8 @@ partial class zfunc
     /// <typeparam name="T">The target element type</typeparam>
     [MethodImpl(Inline)]   
     public static Span<T> span<S,T>(ref S src)
-        where T :struct
-        where S : struct
+        where T : unmanaged
+        where S : unmanaged
             => cast(span(ref src, 1), out Span<T> _);
 
     /// <summary>
@@ -154,7 +154,7 @@ partial class zfunc
     /// <typeparam name="T">The source type</typeparam>
     [MethodImpl(Inline)]   
     public static Span<byte> bytespan<T>(ref T src)
-        where T : struct
+        where T : unmanaged
             => MemoryMarshal.CreateSpan(ref byteref(ref src), size<T>()); 
 
     /// <summary>
@@ -164,7 +164,7 @@ partial class zfunc
     /// <typeparam name="T">The source value type</typeparam>
     [MethodImpl(Inline)]
     public static ReadOnlySpan<byte> bytespan<T>(ReadOnlySpan<T> src)
-        where T : struct
+        where T : unmanaged
             => MemoryMarshal.AsBytes(src);
 
     /// <summary>
@@ -174,7 +174,7 @@ partial class zfunc
     /// <typeparam name="T">The source value type</typeparam>
     [MethodImpl(Inline)]
     public static Span<byte> bytespan<T>(Span<T> src)
-        where T : struct
+        where T : unmanaged
             => MemoryMarshal.AsBytes(src);
 
     /// <summary>
@@ -184,7 +184,7 @@ partial class zfunc
     /// <typeparam name="T">The value type</typeparam>
     [MethodImpl(Inline)]
     public static ReadOnlySpan<byte> bytes<T>(in T src)
-        where T : struct
+        where T : unmanaged
             => bytespan(MemoryMarshal.CreateReadOnlySpan(ref As.asRef(in src), 1));         
 
     /// <summary>
@@ -194,7 +194,7 @@ partial class zfunc
     /// <typeparam name="T">The value type</typeparam>
     [MethodImpl(Inline)]
     public static void bytes<T>(in T src, Span<byte> dst)
-        where T : struct
+        where T : unmanaged
             => As.generic<T>(ref dst[0]) = src;
 
     /// <summary>
@@ -204,7 +204,7 @@ partial class zfunc
     /// <typeparam name="T">The source value type</typeparam>
     [MethodImpl(Inline)]
     public static Span<byte> bytes<T>(T src)
-        where T : struct
+        where T : unmanaged
             => MemoryMarshal.AsBytes(span(src));
 
     /// <summary>
@@ -225,7 +225,7 @@ partial class zfunc
     /// <typeparam name="T">The value type</typeparam>
     [MethodImpl(Inline)]
     public static T read<T>(ReadOnlySpan<byte> src)
-        where T : struct
+        where T : unmanaged
             =>  MemoryMarshal.Read<T>(src);
 
     /// <summary>
@@ -236,7 +236,7 @@ partial class zfunc
     /// <typeparam name="T">The value type</typeparam>
     [MethodImpl(Inline)]
     public static ref T read<T>(ReadOnlySpan<byte> src, out T dst)
-        where T : struct
+        where T : unmanaged
     {
         dst = read<T>(src);
         return ref dst;
@@ -250,7 +250,7 @@ partial class zfunc
     /// <typeparam name="T"></typeparam>
     [MethodImpl(Inline)]
     public static void write<T>(ref T src, Span<byte> dst)
-        where T : struct
+        where T : unmanaged
             => MemoryMarshal.Write(dst, ref src);
 
     /// <summary>
@@ -310,7 +310,7 @@ partial class zfunc
     /// <typeparam name="T">The element type</typeparam>
     [MethodImpl(Inline)]
     public static ref T head<T>(Span256<T> src)
-        where T : struct
+        where T : unmanaged
             =>  ref MemoryMarshal.GetReference<T>(src);
 
     /// <summary>
@@ -435,8 +435,8 @@ partial class zfunc
     [MethodImpl(Inline)]   
     public static int length<S,T>(ReadOnlySpan128<S> lhs, ReadOnlySpan128<T> rhs,  [CallerMemberName] string caller = null, 
         [CallerFilePath] string file = null, [CallerLineNumber] int? line = null)
-            where S : struct
-            where T : struct
+            where S : unmanaged
+            where T : unmanaged
             => lhs.Length == rhs.Length ? lhs.Length 
                 : throw Errors.LengthMismatch(lhs.Length, rhs.Length, caller, file, line);
 
@@ -448,8 +448,8 @@ partial class zfunc
     [MethodImpl(Inline)]   
     public static int length<S,T>(Span256<S> lhs, Span256<T> rhs, [CallerMemberName] string caller = null,
         [CallerFilePath] string file = null, [CallerLineNumber] int? line = null)
-            where T : struct
-            where S : struct
+            where T : unmanaged
+            where S : unmanaged
                 => lhs.Length == rhs.Length ? lhs.Length : throw Errors.LengthMismatch(lhs.Length, rhs.Length, caller, file, line);
 
 
@@ -464,8 +464,8 @@ partial class zfunc
     [MethodImpl(Inline)]   
     public static int length<S,T>(ReadOnlySpan256<S> lhs, ReadOnlySpan256<T> rhs,[CallerMemberName] string caller = null, 
         [CallerFilePath] string file = null, [CallerLineNumber] int? line = null)
-            where T : struct
-            where S :struct
+            where T : unmanaged
+            where S : unmanaged
                 =>  lhs.Length == rhs.Length ? lhs.Length : throw Errors.LengthMismatch(lhs.Length, rhs.Length, caller, file, line);
 
 
@@ -478,8 +478,8 @@ partial class zfunc
     [MethodImpl(Inline)]   
     public static int blocks<S,T>(Span128<S> lhs, Span128<T> rhs, [CallerMemberName] string caller = null,  
         [CallerFilePath] string file = null, [CallerLineNumber] int? line = null)
-            where S : struct
-            where T : struct                
+            where S : unmanaged
+            where T : unmanaged                
                 => lhs.BlockCount == rhs.BlockCount ? lhs.BlockCount 
                     : throw Errors.CountMismatch(lhs.BlockCount, rhs.BlockCount, caller, file, line);
 
@@ -492,8 +492,8 @@ partial class zfunc
     [MethodImpl(Inline)]   
     public static int blocks<S,T>(ReadOnlySpan128<S> lhs, ReadOnlySpan128<T> rhs, [CallerMemberName] string caller = null, 
         [CallerFilePath] string file = null, [CallerLineNumber] int? line = null)
-            where S : struct
-            where T : struct
+            where S : unmanaged
+            where T : unmanaged
                 => lhs.BlockCount == rhs.BlockCount ? lhs.BlockCount 
                     : throw Errors.CountMismatch(lhs.BlockCount, rhs.BlockCount, caller, file, line);
 
@@ -506,8 +506,8 @@ partial class zfunc
     [MethodImpl(Inline)]   
     public static int blocks<S,T>(Span256<S> lhs, Span256<T> rhs, [CallerMemberName] string caller = null,  
         [CallerFilePath] string file = null, [CallerLineNumber] int? line = null)
-            where S : struct
-            where T : struct                
+            where S : unmanaged
+            where T : unmanaged                
                 => lhs.BlockCount == rhs.BlockCount ? lhs.BlockCount 
                     : throw Errors.CountMismatch(lhs.BlockCount, rhs.BlockCount, caller, file, line);
 
@@ -520,8 +520,8 @@ partial class zfunc
     [MethodImpl(Inline)]   
     public static int blocks<S,T>(ReadOnlySpan256<S> lhs, ReadOnlySpan256<T> rhs, [CallerMemberName] string caller = null, 
         [CallerFilePath] string file = null, [CallerLineNumber] int? line = null)
-            where S : struct
-            where T : struct
+            where S : unmanaged
+            where T : unmanaged
                 => lhs.BlockCount == rhs.BlockCount ? lhs.BlockCount 
                     : throw Errors.CountMismatch(lhs.BlockCount, rhs.BlockCount, caller, file, line);
 

@@ -17,7 +17,7 @@ namespace Z0
     {
         [MethodImpl(Inline)]
         public static T Width<T>(this IInterval<T> src)
-            where T : struct
+            where T : unmanaged
                 => gmath.abs(gmath.sub(src.Right, src.Left));
 
         [MethodImpl(Inline)]
@@ -37,7 +37,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static IEnumerable<T> PartitionPointStream<T>(this Interval<T> src, T? stepWidth = null, int? precision = null)
-            where T : struct
+            where T : unmanaged
         {            
             var width = stepWidth ?? gmath.one<T>();            
             var scale = precision ?? 4;
@@ -136,14 +136,14 @@ namespace Z0
         }
 
         public static Interval<T> Add<T>(this ref Interval<T> lhs, Interval<T> rhs)
-            where T : struct
+            where T : unmanaged
             => lhs.WithEndpoints(
                     gmath.add(lhs.Left, rhs.Left), 
                     gmath.add(lhs.Right, rhs.Right)
                     );
 
         public static Interval<T> Sub<T>(this ref Interval<T> lhs, Interval<T> rhs)
-            where T : struct
+            where T : unmanaged
             => lhs.WithEndpoints(
                     gmath.sub(lhs.Left, rhs.Left), 
                     gmath.sub(lhs.Right, rhs.Right)

@@ -14,28 +14,28 @@ namespace Z0
     public static class gbitspan
     {
         public static Span<T> and<T>(Span<T> lhs, in T rhs)
-            where T : struct
+            where T : unmanaged
         {
             for(var i=0; i<lhs.Length; i++)
-                gmath.and(in lhs[i],in rhs, ref lhs[i]);
+                gmath.and(ref lhs[i],rhs);
             return lhs;
         }
 
         public static Span<T> and<T>(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs, Span<T> dst)
-            where T : struct
+            where T : unmanaged
         {
             var len = length(lhs,rhs);
             for(var i=0; i<len; i++)
-                gmath.and(in lhs[i], in rhs[i], ref dst[i]);
+                dst[i] = gmath.and(lhs[i], rhs[i]);
             return dst;
         }
 
         public static Span<T> and<T>(Span<T> lhs, ReadOnlySpan<T> rhs)
-            where T : struct
+            where T : unmanaged
         {
             var len = length(lhs,rhs);
             for(var i=0; i<len; i++)
-                gmath.and(in lhs[i], in rhs[i], ref lhs[i]);
+                gmath.and(ref lhs[i], rhs[i]);
             return lhs;
         }
 
@@ -61,7 +61,6 @@ namespace Z0
                 vstore(gbits.andn(lhs.LoadVec256(i), rhs.LoadVec256(i)), ref dst.Block(i));                             
             return dst;        
         } 
-
 
         public static Span128<T> or<T>(ReadOnlySpan128<T> lhs, ReadOnlySpan128<T> rhs, Span128<T> dst)
             where T : unmanaged
@@ -112,7 +111,7 @@ namespace Z0
         } 
 
         public static Span<T> rotr<T>(ReadOnlySpan<T> src, T offset)        
-            where T : struct
+            where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
                 return generic<T>(bitspan.rotr(uint8(src), uint8(in offset)));
@@ -128,7 +127,7 @@ namespace Z0
         }
 
         public static Span<T> rotr<T>(ReadOnlySpan<T> src, T offset, Span<T> dst)        
-            where T : struct
+            where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
                 bitspan.rotr(uint8(src), uint8(in offset), uint8(dst));
@@ -145,7 +144,7 @@ namespace Z0
         }
 
         public static Span<T> rotl<T>(ReadOnlySpan<T> src, T offset, Span<T> dst)        
-            where T : struct
+            where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
                 bitspan.rotl(uint8(src), uint8(in offset), uint8(dst));
@@ -161,7 +160,7 @@ namespace Z0
         }
 
         public static Span<T> rotl<T>(ReadOnlySpan<T> src, T offset)        
-            where T : struct
+            where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
                 return generic<T>(bitspan.rotl(uint8(src), uint8(in offset)));

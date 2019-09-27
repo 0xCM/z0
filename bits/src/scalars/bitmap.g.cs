@@ -42,9 +42,9 @@ namespace Z0
                 Bits.bitmap(int64(in src), srcOffset, len, dstOffset, ref int64(ref dst));
             else if(typematch<T,ulong>())
                 Bits.bitmap(uint64(in src), srcOffset, len, dstOffset, ref uint64(ref dst));
-            else if(typematch<T,float>())
+            else if(typeof(T) == typeof(float))
                 Bits.bitmap(float32(in src), srcOffset, len, dstOffset, ref float32(ref dst));
-            else if(typematch<T,double>())
+            else if(typeof(T) == typeof(double))
                 Bits.bitmap(float64(in src), srcOffset, len, dstOffset, ref float64(ref dst));
             else            
                 throw unsupported<T>();            

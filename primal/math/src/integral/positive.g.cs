@@ -22,7 +22,7 @@ namespace Z0
         /// <typeparam name="T">The source type</typeparam>
         [MethodImpl(Inline)]
         public static bool positive<T>(T src)
-            where T : struct
+            where T : unmanaged
         {
             if(typematch<T,sbyte>())
                 return int8(src) > 0;
@@ -40,9 +40,9 @@ namespace Z0
                 return int64(src) > 0;
             else if(typematch<T,ulong>())
                 return uint64(src) > 0;
-            else if(typematch<T,float>())
+            else if(typeof(T) == typeof(float))
                 return float32(src) > 0;
-            else if(typematch<T,double>())
+            else if(typeof(T) == typeof(double))
                 return float64(src) > 0;
             else            
                  throw unsupported<T>();                

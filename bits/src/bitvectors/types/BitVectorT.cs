@@ -503,7 +503,7 @@ namespace Z0
                 print($"firstCount = {firstCount}");
                 print($"LastCount = {lastCount}");
             }
-            gbits.sal(ref part2, firstCount);
+            gmath.sal(ref part2, firstCount);
             return gbits.or(in part1, in part2, ref part1);              
         }
 

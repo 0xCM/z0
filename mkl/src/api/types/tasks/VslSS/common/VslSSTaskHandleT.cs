@@ -40,10 +40,10 @@ namespace Z0.Mkl
             this.MatrixFormat = new VslSSMatrixStorage[]{VslSSMatrixStorage.VSL_SS_MATRIX_STORAGE_ROWS};
             this.TaskPtr = IntPtr.Zero;
 
-            if(typematch<T,float>())
+            if(typeof(T) == typeof(float))
                 VSL.vslsSSNewTask(ref TaskPtr, ref Dim[0], ref SampleCount[0], ref MatrixFormat[0], 
                     ref MemoryMarshal.Cast<T,float>(samples)[0]).AutoThrow();
-            else if(typematch<T,double>())
+            else if(typeof(T) == typeof(double))
                 VSL.vsldSSNewTask(ref TaskPtr, ref Dim[0], ref SampleCount[0], ref MatrixFormat[0], 
                     ref MemoryMarshal.Cast<T,double>(samples)[0]).AutoThrow();
             else

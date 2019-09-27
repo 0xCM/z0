@@ -14,7 +14,7 @@ namespace Z0.Mkl
     {
         public static EigenResult<N,T> Define<N,T>(Span<N,Complex<T>> values, Span256<T> lv = default,  Span256<T> rv = default)
             where N : ITypeNat, new()
-            where T : struct
+            where T : unmanaged
                 => new EigenResult<N, T>(values, lv, rv);
     }
 
@@ -23,7 +23,7 @@ namespace Z0.Mkl
     /// </summary>
     public readonly ref  struct EigenResult<N,T>
         where N : ITypeNat, new()
-        where T : struct
+        where T : unmanaged
     {
         public EigenResult(Span<N,Complex<T>> values, Span256<T> lv = default,  Span256<T> rv = default)
         {

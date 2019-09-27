@@ -95,8 +95,8 @@ namespace Z0
          /// <typeparam name="T">The matrix element type</typeparam>
          [MethodImpl(Inline)]
          public static BlockMatrix<N,float> BlockMatrixF32<N,S,T>(this IPolyrand random, int? min = null, int? max = null, N n = default)
-            where T : struct
-            where S : struct
+            where T : unmanaged
+            where S : unmanaged
             where N : ITypeNat, new()
                 => random.BlockMatrix<N,int, float>(closed(min ?? -25, max ?? 25));
 
@@ -112,8 +112,8 @@ namespace Z0
         /// <typeparam name="T">The matrix element type</typeparam>
         [MethodImpl(Inline)]
         public static  BlockMatrix<N,double> BlockMatrixF64<N,S,T>(this IPolyrand random, long? min = null, long? max = null, N n = default)
-            where T : struct
-            where S : struct
+            where T : unmanaged
+            where S : unmanaged
             where N : ITypeNat, new()
                 => random.BlockMatrix<N,long, double>(closed(min ?? -25L, max ?? 25L));
 
@@ -131,8 +131,8 @@ namespace Z0
         /// <typeparam name="T">The matrix element type</typeparam>
         [MethodImpl(Inline)]
         public static BlockMatrix<M,N,float> BlockMatrixF32<M,N,S,T>(this IPolyrand random, int? min = null, int? max = null, M m = default, N n = default)
-            where T : struct
-            where S : struct
+            where T : unmanaged
+            where S : unmanaged
             where M : ITypeNat, new()
             where N : ITypeNat, new()
                 => random.BlockMatrix<M,N,int, float>(closed(min ?? -25, max ?? 25));
@@ -151,8 +151,8 @@ namespace Z0
         /// <typeparam name="T">The matrix element type</typeparam>
         [MethodImpl(Inline)]
         public static BlockMatrix<M,N,double> BlockMatrixF64<M,N,S,T>(this IPolyrand random, long? min = null, long? max = null, M m = default,  N n = default)
-            where T : struct
-            where S : struct
+            where T : unmanaged
+            where S : unmanaged
             where M : ITypeNat, new()
             where N : ITypeNat, new()
                 => random.BlockMatrix<M,N,long, double>(closed(min ?? -25L, max ?? 25L));

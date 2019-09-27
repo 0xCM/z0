@@ -21,7 +21,7 @@ partial class zfunc
     /// <typeparam name="T">The value type</typeparam>
     [MethodImpl(Inline)]
     public static ByteSize size<T>()
-        where T : struct
+        where T : unmanaged
             => Unsafe.SizeOf<T>();
 
     /// <summary>
@@ -54,7 +54,7 @@ partial class zfunc
     /// <typeparam name="T">The source type</typeparam>
     [MethodImpl(Inline)]
     public static ref byte byteref<T>(ref T src)
-        where T : struct
+        where T : unmanaged
             => ref Unsafe.As<T,byte>(ref src);
 
     /// <summary>

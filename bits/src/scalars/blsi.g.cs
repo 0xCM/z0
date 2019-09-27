@@ -22,7 +22,7 @@ namespace Z0
         /// <param name="src">The bit source</param>
         [MethodImpl(Inline)]
         public static T blsi<T>(T src)
-            where T : struct
+            where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
                 return generic<T>(Bits.blsi(uint8(src)));

@@ -22,15 +22,15 @@ namespace Z0
         /// </summary>
         [MethodImpl(Inline)]
         public static int movemask<T>(in Vec128<T> src)
-            where T : struct
+            where T : unmanaged
         {
             if(typematch<T,sbyte>())
                 return dinx.movemask(in int8(in src));
             else if(typematch<T,byte>())
                 return dinx.movemask(in uint8(in src));
-            else if(typematch<T,float>())
+            else if(typeof(T) == typeof(float))
                 return dinx.movemask(in float32(in src));
-            else if(typematch<T,double>())
+            else if(typeof(T) == typeof(double))
                 return dinx.movemask(in float64(in src));
             else 
                 throw unsupported<T>();
@@ -41,15 +41,15 @@ namespace Z0
         /// </summary>
         [MethodImpl(Inline)]
         public static int movemask<T>(in Vec256<T> src)
-            where T : struct
+            where T : unmanaged
         {
             if(typematch<T,sbyte>())
                 return dinx.movemask(in int8(in src));
             else if(typematch<T,byte>())
                 return dinx.movemask(in uint8(in src));
-            else if(typematch<T,float>())
+            else if(typeof(T) == typeof(float))
                 return dinx.movemask(in float32(in src));
-            else if(typematch<T,double>())
+            else if(typeof(T) == typeof(double))
                 return dinx.movemask(in float64(in src));
             else 
                 throw unsupported<T>();

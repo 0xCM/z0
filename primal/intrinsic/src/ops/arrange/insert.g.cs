@@ -25,7 +25,7 @@ namespace Z0
         /// <param name="index">The 0-based index of the component to overwrite</param>
         [MethodImpl(Inline)]
         public static Vec128<T> insert<T>(in T src, in Vec128<T> dst, byte index)
-            where T : struct
+            where T : unmanaged
         {
             if(typematch<T,sbyte>())
                 return generic<T>(dinx.insert(int8(src), in int8(in dst), index));
@@ -56,7 +56,7 @@ namespace Z0
         /// identifing low or hi</param>
         [MethodImpl(Inline)]
         public static Vec256<T> insert<T>(Vec128<T> src, in Vec256<T> dst, byte index)        
-            where T : struct
+            where T : unmanaged
         {
             if(typematch<T,sbyte>())
                 return generic<T>(dinx.insert(in int8(in src), in int8(in dst), index));
@@ -74,9 +74,9 @@ namespace Z0
                 return generic<T>(dinx.insert(in int64(in src), in int64(in dst), index));
             else if(typematch<T,ulong>())
                 return generic<T>(dinx.insert(in uint64(in src), in uint64(in dst), index));
-            else if(typematch<T,float>())
+            else if(typeof(T) == typeof(float))
                 return generic<T>(dfp.insert(in float32(in src), in float32(in dst), index));
-            else if(typematch<T,double>())
+            else if(typeof(T) == typeof(double))
                 return generic<T>(dfp.insert(in float64(in src), in float64(in dst), index));
             else
                 throw unsupported<T>();

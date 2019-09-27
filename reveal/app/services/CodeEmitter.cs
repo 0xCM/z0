@@ -11,16 +11,21 @@ namespace Z0
     using System.Collections.Generic;
     using System.IO;
 
-    
-
     using static zfunc;
 
     public static class CodeEmitter
     {
+        public static void EmitAsm(this MethodDisassembly disassembly, FilePath dst)        
+        {
+            using var writer = EmissionWriter(dst);
+            var asm = disassembly.DistillAsm();
+            writer.Write(asm.Format());
+        }
+
         public static void EmitAsm(this IEnumerable<MethodDisassembly> disassembly, FilePath dst)        
         {
             using var writer = EmissionWriter(dst);
-            var asm = disassembly.Select(d => d.DistillAsm()).ToArray();
+            var asm = disassembly.DistillAsm().ToArray();
             asm.Emit(writer);
         }
 
@@ -36,7 +41,6 @@ namespace Z0
             using var writer = EmissionWriter(name, "asm", timestamped);
             var asm = disassembly.Select(d => d.DistillAsm()).ToArray();
             asm.Emit(writer);
-
         }
 
         public static void EmitCil(this IEnumerable<MethodDisassembly> disassembly, string name, bool timestamped = false)
@@ -56,6 +60,7 @@ namespace Z0
                 disassembly.EmitCil(name); 
         }
 
+
         public static void Emit(this AsmFuncInfo[] src, FilePath dstfile)
         {
             using var dst = EmissionWriter(dstfile);
@@ -69,10 +74,10 @@ namespace Z0
         }        
 
         public static void EmitAsm(this IEnumerable<MethodInfo> methods, FilePath dst)
-            => methods.Deconstruct().EmitAsm(dst);
+            => Deconstructor.Deconstruct(methods).EmitAsm(dst);
         
         public static void EmitCil(this IEnumerable<MethodInfo> methods, FilePath name)
-            => methods.Deconstruct().EmitCil(name);
+            => Deconstructor.Deconstruct(methods).EmitCil(name);
 
         static readonly string AsmSeparator = new string('-', 160);
 

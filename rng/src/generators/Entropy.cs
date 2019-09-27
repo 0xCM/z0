@@ -35,7 +35,7 @@ namespace Z0
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
         public static Span<T> Values<T>(int count)
-            where T : struct
+            where T : unmanaged
         {
             var typeBz = Unsafe.SizeOf<T>();
             var bz = count * typeBz;            
@@ -52,7 +52,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Span<N,T> Values<N,T>(N n = default)
             where N : ITypeNat, new()
-            where T : struct        
+            where T : unmanaged        
                 => Values<T>((int)n.value);
 
         /// <summary>
@@ -61,7 +61,7 @@ namespace Z0
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
         public static T Value<T>()
-            where T : struct
+            where T : unmanaged
         {
             var typeBz = Unsafe.SizeOf<T>();
             var src = Bytes(typeBz);

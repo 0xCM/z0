@@ -45,14 +45,15 @@ namespace Z0
        Duration WorkTime {get;}
 
         ReadOnlyMemory<R> Results<R>()
-            where R : struct;        
+            where R : unmanaged;        
+            
         AppMsg Describe(bool total = false, bool digitcommas = true);
 
         bool PrimalDirect {get;}
     }
 
     public interface IMetrics<T> : IMetrics
-        where T : struct
+        where T : unmanaged
     {
         ReadOnlyMemory<T> Results();
 

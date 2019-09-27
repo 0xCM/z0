@@ -18,7 +18,7 @@ namespace Z0
     /// </summary>
     public ref struct Span<N,T>
         where N : ITypeNat, new()
-        where T : struct
+        where T : unmanaged
     {
         Span<T> data;
 

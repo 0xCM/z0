@@ -18,7 +18,7 @@ namespace Z0
     {
         [MethodImpl(Inline)]
         public static bool neq<T>(T lhs, T rhs)
-            where T : struct
+            where T : unmanaged
         {
             if(typematch<T,sbyte>())
                 return math.neq(int8(lhs),int8(rhs));
@@ -36,9 +36,9 @@ namespace Z0
                 return math.neq(int64(lhs),int64(rhs));
             else if(typematch<T,ulong>())
                 return math.neq(uint64(lhs),uint64(rhs));
-            else if(typematch<T,float>())
+            else if(typeof(T) == typeof(float))
                 return math.neq(float32(lhs),float32(rhs));
-            else if(typematch<T,double>())
+            else if(typeof(T) == typeof(double))
                 return math.neq(float64(lhs),float64(rhs));
             else            
                 throw unsupported<T>();

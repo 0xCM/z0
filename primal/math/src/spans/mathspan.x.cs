@@ -18,34 +18,34 @@ namespace Z0
     {
 
         public static byte Sum(this ReadOnlySpan<byte> src)
-            => math.sum(src);
+            => mathspan.sum(src);
 
         public static sbyte Sum(this ReadOnlySpan<sbyte> src)
-            => math.sum(src);
+            => mathspan.sum(src);
 
         public static short Sum(this ReadOnlySpan<short> src)
-            => math.sum(src);
+            => mathspan.sum(src);
 
         public static ushort Sum(this ReadOnlySpan<ushort> src)
-            => math.sum(src);
+            => mathspan.sum(src);
 
         public static int Sum(this ReadOnlySpan<int> src)
-            => math.sum(src);
+            => mathspan.sum(src);
 
         public static uint Sum(this ReadOnlySpan<uint> src)
-            => math.sum(src);
+            => mathspan.sum(src);
 
         public static long Sum(this ReadOnlySpan<long> src)
-            => math.sum(src);
+            => mathspan.sum(src);
 
         public static ulong Sum(this ReadOnlySpan<ulong> src)
-            => math.sum(src);
+            => mathspan.sum(src);
 
         public static float Sum(this ReadOnlySpan<float> src)
-            => math.sum(src);
+            => mathspan.sum(src);
 
         public static double Sum(this ReadOnlySpan<double> src)
-            => math.sum(src);
+            => mathspan.sum(src);
 
         [MethodImpl(Inline)]
         public static byte Sum(this Span<byte> src)
@@ -87,6 +87,248 @@ namespace Z0
         public static double Sum(this Span<double> src)
             => src.ReadOnly().Sum();
 
+ 
+         [MethodImpl(Inline)]
+        public static sbyte Avg(this Span<sbyte> src)
+            => math.avg(src);
+
+        [MethodImpl(Inline)]
+        public static byte Avg(this Span<byte> src)
+            => math.avg(src);
+
+        [MethodImpl(Inline)]
+        public static short Avg(this Span<short> src)
+            => math.avg(src);
+
+        [MethodImpl(Inline)]
+        public static ushort Avg(this Span<ushort> src)
+            => math.avg(src);
+
+        [MethodImpl(Inline)]
+        public static int Avg(this Span<int> src)
+            => math.avg(src);
+
+        [MethodImpl(Inline)]
+        public static uint Avg(this Span<uint> src)
+            => math.avg(src);
+
+        [MethodImpl(Inline)]
+        public static long Avg(this Span<long> src)
+            => math.avg(src);
+
+        [MethodImpl(Inline)]
+        public static ulong Avg(this Span<ulong> src)
+            => math.avg(src);
+
+        [MethodImpl(Inline)]
+        public static float Avg(this Span<float> src)
+            => math.avg(src);
+
+        [MethodImpl(Inline)]
+        public static double Avg(this Span<double> src)
+            => math.avg(src);
+
+
+        [MethodImpl(Inline)]
+        public static sbyte Avg(this ReadOnlySpan<sbyte> src)
+            => math.avg(src);
+
+        [MethodImpl(Inline)]
+        public static byte Avg(this ReadOnlySpan<byte> src)
+            => math.avg(src);
+
+        [MethodImpl(Inline)]
+        public static short Avg(this ReadOnlySpan<short> src)
+            => math.avg(src);
+
+        [MethodImpl(Inline)]
+        public static ushort Avg(this ReadOnlySpan<ushort> src)
+            => math.avg(src);
+
+        [MethodImpl(Inline)]
+        public static int Avg(this ReadOnlySpan<int> src)
+            => math.avg(src);
+
+        [MethodImpl(Inline)]
+        public static uint Avg(this ReadOnlySpan<uint> src)
+            => math.avg(src);
+
+        [MethodImpl(Inline)]
+        public static long Avg(this ReadOnlySpan<long> src)
+            => math.avg(src);
+
+        [MethodImpl(Inline)]
+        public static ulong Avg(this ReadOnlySpan<ulong> src)
+            => math.avg(src);
+
+        [MethodImpl(Inline)]
+        public static float Avg(this ReadOnlySpan<float> src)
+            => math.avg(src);
+
+        [MethodImpl(Inline)]
+        public static double Avg(this ReadOnlySpan<double> src)
+            => math.avg(src);
+
+        [MethodImpl(Inline)]
+        public static float Avg(this Span256<float> src)
+            => math.avg(src);
+
+        [MethodImpl(Inline)]
+        public static double Avg(this Span256<double> src)
+            => math.avg(src);
+ 
+         [MethodImpl(Inline)]
+        public static sbyte Min(this ReadOnlySpan<sbyte> src)
+            => mathspan.min(src);
+
+        [MethodImpl(Inline)]
+        public static byte Min(this ReadOnlySpan<byte> src)
+            => mathspan.min(src);
+
+        [MethodImpl(Inline)]
+        public static short Min(this ReadOnlySpan<short> src)
+            => mathspan.min(src);
+
+        [MethodImpl(Inline)]
+        public static ushort Min(this ReadOnlySpan<ushort> src)
+            => mathspan.min(src);
+
+        [MethodImpl(Inline)]
+        public static int Min(this ReadOnlySpan<int> src)
+            => mathspan.min(src);
+
+        [MethodImpl(Inline)]
+        public static uint Min(this ReadOnlySpan<uint> src)
+            => mathspan.min(src);
+
+        [MethodImpl(Inline)]
+        public static long Min(this ReadOnlySpan<long> src)
+            => mathspan.min(src);
+
+        [MethodImpl(Inline)]
+        public static ulong Min(this ReadOnlySpan<ulong> src)
+            => mathspan.min(src);
+
+        [MethodImpl(Inline)]
+        public static sbyte Min(this Span<sbyte> src)
+            => mathspan.min(src.ReadOnly());
+
+        [MethodImpl(Inline)]
+        public static byte Min(this Span<byte> src)
+            => mathspan.min(src.ReadOnly());
+
+        [MethodImpl(Inline)]
+        public static short Min(this Span<short> src)
+            => mathspan.min(src.ReadOnly());
+
+        [MethodImpl(Inline)]
+        public static ushort Min(this Span<ushort> src)
+            => mathspan.min(src.ReadOnly());
+
+        [MethodImpl(Inline)]
+        public static int Min(this Span<int> src)
+            => mathspan.min(src.ReadOnly());
+
+        [MethodImpl(Inline)]
+        public static uint Min(this Span<uint> src)
+            => mathspan.min(src.ReadOnly());
+
+        [MethodImpl(Inline)]
+        public static long Min(this Span<long> src)
+            => mathspan.min(src.ReadOnly());
+
+        [MethodImpl(Inline)]
+        public static ulong Min(this Span<ulong> src)
+            => mathspan.min(src.ReadOnly());
+
+        [MethodImpl(Inline)]
+        public static float Min(this Span<float> src)
+            => mathspan.min(src.ReadOnly());
+
+        [MethodImpl(Inline)]
+        public static double Min(this Span<double> src)
+            => mathspan.min(src.ReadOnly());
+
+        [MethodImpl(Inline)]
+        public static sbyte Max(this Span<sbyte> src)
+            => mathspan.max(src);
+
+        [MethodImpl(Inline)]
+        public static byte Max(this Span<byte> src)
+            => mathspan.max(src);
+
+        [MethodImpl(Inline)]
+        public static short Max(this Span<short> src)
+            => mathspan.max(src);
+
+        [MethodImpl(Inline)]
+        public static ushort Max(this Span<ushort> src)
+            => mathspan.max(src);
+
+        [MethodImpl(Inline)]
+        public static int Max(this Span<int> src)
+            => mathspan.max(src);
+
+        [MethodImpl(Inline)]
+        public static uint Max(this Span<uint> src)
+            => mathspan.max(src);
+
+        [MethodImpl(Inline)]
+        public static long Max(this Span<long> src)
+            => mathspan.max(src);
+
+        [MethodImpl(Inline)]
+        public static ulong Max(this Span<ulong> src)
+            => mathspan.max(src);
+
+        [MethodImpl(Inline)]
+        public static float Max(this Span<float> src)
+            => mathspan.max(src);
+
+        [MethodImpl(Inline)]
+        public static double Max(this Span<double> src)
+            => mathspan.max(src);
+
+        [MethodImpl(Inline)]
+        public static sbyte Max(this ReadOnlySpan<sbyte> src)
+            => mathspan.max(src);
+
+        [MethodImpl(Inline)]
+        public static byte Max(this ReadOnlySpan<byte> src)
+            => mathspan.max(src);
+
+        [MethodImpl(Inline)]
+        public static short Max(this ReadOnlySpan<short> src)
+            => mathspan.max(src);
+
+        [MethodImpl(Inline)]
+        public static ushort Max(this ReadOnlySpan<ushort> src)
+            => mathspan.max(src);
+
+        [MethodImpl(Inline)]
+        public static int Max(this ReadOnlySpan<int> src)
+            => mathspan.max(src);
+
+        [MethodImpl(Inline)]
+        public static uint Max(this ReadOnlySpan<uint> src)
+            => mathspan.max(src);
+
+        [MethodImpl(Inline)]
+        public static long Max(this ReadOnlySpan<long> src)
+            => mathspan.max(src);
+
+        [MethodImpl(Inline)]
+        public static ulong Max(this ReadOnlySpan<ulong> src)
+            => mathspan.max(src);
+
+        [MethodImpl(Inline)]
+        public static float Max(this ReadOnlySpan<float> src)
+            => mathspan.max(src);
+
+        [MethodImpl(Inline)]
+        public static double Max(this ReadOnlySpan<double> src)
+            => mathspan.max(src);
+ 
     }
 
 }

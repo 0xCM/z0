@@ -14,7 +14,7 @@ namespace Z0
     
 
     public struct Metrics<T> : IMetrics<T>
-        where T : struct
+        where T : unmanaged
     {
         public static readonly Metrics<T> Zero = new Metrics<T>(OpId<T>.Zero, -1, Duration.Zero, new T[]{});
         
@@ -102,7 +102,7 @@ namespace Z0
             && OpId.Generic == Genericity.Direct;
 
         public Metrics<S> As<S>()
-            where S : struct
+            where S : unmanaged
                 => Unsafe.As<Metrics<T>, Metrics<S>>(ref this);
 
         ReadOnlyMemory<R> IMetrics.Results<R>() 

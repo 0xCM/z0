@@ -21,7 +21,7 @@ namespace Z0
             => new MetricComparison(LeftBench,RightBench);
 
         public static MetricComparison<T> Define<T>(MetricSummary<T> LeftBench, MetricSummary<T> RightBench)
-            where T : struct
+            where T : unmanaged
             => new MetricComparison<T>(LeftBench,RightBench);
 
         public MetricComparison(MetricSummary LeftSummary, MetricSummary RightSummary)

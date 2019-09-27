@@ -16,7 +16,7 @@ namespace Z0
     public ref struct BitGrid<M,N,T>
         where M : ITypeNat, new()        
         where N : ITypeNat, new()
-        where T : struct
+        where T : unmanaged
     {        
         Span<T> bits;
 

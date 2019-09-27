@@ -20,7 +20,7 @@ namespace Z0
         /// <param name="src">The bit source</param>
         [MethodImpl(Inline)]
         public static byte nlz<T>(in T src)
-            where T : struct
+            where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
                  return Bits.nlz(AsIn.uint8(in asRef(in src)));

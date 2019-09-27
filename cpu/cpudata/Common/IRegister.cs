@@ -42,7 +42,7 @@ namespace Z0
 
     public interface ICpuReg<N, T> : ICpuReg<N>
         where N : ITypeNat, INatPow2, new()
-        where T : struct
+        where T : unmanaged
     {
     }
 
@@ -89,7 +89,7 @@ namespace Z0
     public interface IGpReg<N,R,T> : ICpuReg<N,T>, IGpReg
         where N : ITypeNat, INatPow2, new()
         where R : struct, ICpuReg
-        where T : struct
+        where T : unmanaged
     {        
 
     }

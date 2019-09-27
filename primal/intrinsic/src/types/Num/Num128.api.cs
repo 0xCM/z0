@@ -22,7 +22,7 @@ namespace Z0
     {
         [MethodImpl(Inline)]
         public static Scalar128<T> define<T>(T value)
-            where T : struct        
+            where T : unmanaged        
         {
             if(typematch<T,sbyte>())
                 return  scalar<T>(int8(value));
@@ -40,9 +40,9 @@ namespace Z0
                 return  scalar<T>(int64(value));
             else if(typematch<T,ulong>())
                 return  scalar<T>(uint64(value));
-            else if(typematch<T,float>())
+            else if(typeof(T) == typeof(float))
                 return  scalar<T>(float32(value));
-            else if(typematch<T,double>())
+            else if(typeof(T) == typeof(double))
                 return  scalar<T>(float64(value));
             else
                 throw unsupported<T>();
@@ -81,27 +81,27 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static Scalar128<T> load<T>(in ReadOnlySpan128<T> src, int block = 0)
-            where T : struct  
+            where T : unmanaged  
                 => define<T>(src[block* Span128<T>.BlockLength]);
 
         [MethodImpl(Inline)]
         public static Scalar128<T> load<T>(in Span128<T> src, int block = 0)
-            where T : struct  
+            where T : unmanaged  
                 => define<T>(src[block* Span128<T>.BlockLength]);
 
         [MethodImpl(Inline)]
         public static Scalar128<T> recip<T>(in Scalar128<T> src)
-            where T : struct
+            where T : unmanaged
                 => throw unsupported<T>();
 
         [MethodImpl(Inline)]
         public static Scalar128<T> sqrt<T>(in Scalar128<T> src)
-            where T : struct
+            where T : unmanaged
                 => throw unsupported<T>();
 
         [MethodImpl(Inline)]
         static unsafe Scalar128<T> scalar<T>(byte src)
-            where T : struct
+            where T : unmanaged
         {
             var dst = stackalloc byte[16];            
             dst[0] = src;
@@ -110,7 +110,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static unsafe Scalar128<T> scalar<T>(sbyte src)
-            where T : struct
+            where T : unmanaged
         {
             var dst = stackalloc sbyte[16];            
             dst[0] = src;
@@ -119,7 +119,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static unsafe Scalar128<T> scalar<T>(short src)
-            where T : struct
+            where T : unmanaged
         {
             var dst = stackalloc short[8];            
             dst[0] = src;
@@ -128,7 +128,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static unsafe Scalar128<T> scalar<T>(ushort src)
-            where T : struct
+            where T : unmanaged
         {
             var dst = stackalloc ushort[8];            
             dst[0] = src;
@@ -137,7 +137,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static unsafe Scalar128<T> scalar<T>(int src)
-            where T : struct
+            where T : unmanaged
         {
             var dst = stackalloc int[4];            
             dst[0] = src;
@@ -146,7 +146,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static unsafe Scalar128<T> scalar<T>(uint src)
-            where T : struct
+            where T : unmanaged
         {
             var dst = stackalloc uint[4];            
             dst[0] = src;
@@ -155,7 +155,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static unsafe Scalar128<T> scalar<T>(long src)
-            where T : struct
+            where T : unmanaged
         {
             var dst = stackalloc long[2];            
             dst[0] = src;
@@ -164,7 +164,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static unsafe Scalar128<T> scalar<T>(ulong src)
-            where T : struct
+            where T : unmanaged
         {
             var dst = stackalloc ulong[2];            
             dst[0] = src;
@@ -173,7 +173,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static unsafe Scalar128<T> scalar<T>(float src)
-            where T : struct
+            where T : unmanaged
         {
             var dst = stackalloc float[4];            
             dst[0] = src;
@@ -182,7 +182,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static unsafe Scalar128<T> scalar<T>(double src)
-            where T : struct
+            where T : unmanaged
         {
             var dst = stackalloc double[2];            
             dst[0] = src;

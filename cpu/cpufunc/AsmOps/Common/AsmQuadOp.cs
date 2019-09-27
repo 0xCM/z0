@@ -12,7 +12,7 @@ namespace Z0
     using static zfunc;
 
     public delegate T AsmQuadOp<T>(T x, T y, out T a, out T b)
-        where T : struct;
+        where T : unmanaged;
 
     [SuppressUnmanagedCodeSecurity]
     public static unsafe class AsmQuadOp
@@ -34,7 +34,7 @@ namespace Z0
         [MethodImpl(Inline)]
         static AsmQuadOp<T> ToGeneric<S,T>(this S specific)            
             where S : Delegate
-            where T : struct
+            where T : unmanaged
                 => Unsafe.As<S, AsmQuadOp<T>>(ref specific);
 
         

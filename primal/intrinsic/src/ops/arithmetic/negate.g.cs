@@ -17,7 +17,7 @@ namespace Z0
     {
         [MethodImpl(Inline)]
         public static Vector128<T> negate<T>(Vector128<T> src)
-            where T : struct
+            where T : unmanaged
         {
             if(typematch<T,sbyte>())
                 return generic<T>(dinx.negate(int8(src)));
@@ -41,7 +41,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static Vector256<T> negate<T>(Vector256<T> src)
-            where T : struct
+            where T : unmanaged
         {
             if(typematch<T,sbyte>())
                 return generic<T>(dinx.negate(int8(src)));

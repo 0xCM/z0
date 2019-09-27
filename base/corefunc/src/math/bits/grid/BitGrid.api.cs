@@ -25,7 +25,7 @@ namespace Z0
         public static GridSpec<T> Specify<M,N,T>(M m = default, N n = default, T rep = default)
             where N : ITypeNat, new()
             where M : ITypeNat, new()
-            where T : struct
+            where T : unmanaged
                 => new GridSpec<T>(bitsize<T>(), (int)m.value, (int)n.value);
     }
 }

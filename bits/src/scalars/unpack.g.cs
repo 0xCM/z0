@@ -62,7 +62,7 @@ namespace Z0
         /// <param name="dst">The target span</param>
         [MethodImpl(Inline)]
         public static Span<byte> unpack<T>(T src)
-            where T : struct
+            where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
                 return Bits.unpack(uint8(src));

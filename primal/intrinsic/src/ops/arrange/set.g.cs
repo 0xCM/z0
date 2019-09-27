@@ -24,7 +24,7 @@ namespace Z0
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
         public static Vec256<T> set<T>(in Vec128<T> lo, in Vec128<T> hi)
-            where T : struct
+            where T : unmanaged
         {
             if(typematch<T,sbyte>())
                 return generic<T>(Vec256.FromParts(in int8(in lo), in int8(in hi)));
@@ -42,9 +42,9 @@ namespace Z0
                 return generic<T>(Vec256.FromParts(in int64(in lo), in int64(in hi)));
             else if(typematch<T,ulong>())
                 return generic<T>(Vec256.FromParts(in uint64(in lo), in uint64(in hi)));
-            else if(typematch<T,float>())
+            else if(typeof(T) == typeof(float))
                 return generic<T>(Vec256.FromParts(in float32(in lo), in float32(in hi)));
-            else if(typematch<T,double>())
+            else if(typeof(T) == typeof(double))
                 return generic<T>(Vec256.FromParts(in float64(in lo), in float64(in hi)));
             else 
                 throw unsupported<T>();
@@ -52,7 +52,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static Vec512<T> set<T>(in Vec256<T> lo, in Vec256<T> hi)
-            where T : struct
+            where T : unmanaged
                 => Vec512.FromParts(lo,hi);
         
     }

@@ -120,7 +120,7 @@ namespace Z0
     /// <typeparam name="S">The storage type</typeparam>
     public interface IBitVector<V,S> : IBitVector
         where V : struct, IBitVector
-        where S : struct
+        where S : unmanaged
     {
         /// <summary>
         /// Selects a contiguous range of bits
@@ -173,7 +173,7 @@ namespace Z0
     /// <typeparam name="S">The scalar type over which the bitvector is formed</typeparam>
     public interface IFixedBits<V,S> : IBitVector<V,S>, IEquatable<V>
         where V : unmanaged, IFixedBits<V,S>
-        where S : struct        
+        where S : unmanaged        
     {
         /// <summary>
         /// Extracts the scalar represented by the vector
@@ -243,7 +243,7 @@ namespace Z0
     /// <typeparam name="T">The storage type</typeparam>
     public interface INatBits<N,T> : IBitVector
         where N : ITypeNat, new()
-        where T : struct
+        where T : unmanaged
     {
 
     }
@@ -265,7 +265,7 @@ namespace Z0
     }
 
     public readonly struct BitVectorInfo<T>
-        where T : struct
+        where T : unmanaged
     {
         /// <summary>
         /// The maximum number of bits that can be represented by the vector
@@ -275,7 +275,7 @@ namespace Z0
 
     public readonly struct BitVectorInfo<N,T>
         where N : ITypeNat, new()
-        where T : struct
+        where T : unmanaged
    {
 
         /// <summary>

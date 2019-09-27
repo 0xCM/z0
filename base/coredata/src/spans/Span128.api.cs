@@ -23,7 +23,7 @@ namespace Z0
         /// <typeparam name="T">The primitive type</typeparam>
         [MethodImpl(Inline)]
         public static Span128<T> AllocBlocks<T>(int blocks, T? fill = null)
-            where T : struct        
+            where T : unmanaged        
                 => Span128<T>.AllocBlocks(blocks, fill);
 
         /// <summary>
@@ -33,7 +33,7 @@ namespace Z0
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
         public static Span128<T> AllocBlock<T>(T? fill = null)
-            where T : struct        
+            where T : unmanaged        
                 => Span128<T>.AllocBlocks(1, fill);
 
         /// <summary>
@@ -44,7 +44,7 @@ namespace Z0
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
         public static Span128<T> Alloc<T>(int minlen, T? fill = null)
-            where T : struct        
+            where T : unmanaged        
         {
             Span128.Alignment<T>(minlen, out int blocklen, out int fullBlocks, out int remainder);            
             if(remainder == 0)
@@ -60,7 +60,7 @@ namespace Z0
         /// <typeparam name="T">The primitive type</typeparam>
         [MethodImpl(Inline)]
         public static Span128<T> FromParts<T>(params T[] src)
-            where T : struct
+            where T : unmanaged
                 => Span128<T>.Load(src);
 
         /// <summary>
@@ -71,7 +71,7 @@ namespace Z0
         /// <typeparam name="T">The primitive type</typeparam>
         [MethodImpl(Inline)]
         public static Span128<T> Load<T>(Span<T> src, int offset = 0)
-            where T : struct
+            where T : unmanaged
                 => Span128<T>.Load(src, offset);
 
         /// <summary>
@@ -82,7 +82,7 @@ namespace Z0
         /// <typeparam name="T">The primitive type</typeparam>
         [MethodImpl(Inline)]
         public static Span128<T> Load<T>(ReadOnlySpan<T> src, int offset = 0)
-            where T : struct
+            where T : unmanaged
                 => Span128<T>.Load(src, offset);
 
         /// <summary>
@@ -91,7 +91,7 @@ namespace Z0
         /// <typeparam name="T">The block constituent type</typeparam>
         [MethodImpl(Inline)]
         public static int CellSize<T>()
-            where T : struct        
+            where T : unmanaged        
                 => Span128<T>.CellSize;
 
         /// <summary>
@@ -100,7 +100,7 @@ namespace Z0
         /// <typeparam name="T">The block constituent type</typeparam>
         [MethodImpl(Inline)]
         public static int BlockSize<T>()
-            where T : struct        
+            where T : unmanaged        
                 => Span128<T>.BlockSize;
 
         /// <summary>
@@ -110,7 +110,7 @@ namespace Z0
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
         public static ref T Head<T>(in Span128<T> src)
-            where T : struct
+            where T : unmanaged
                 =>  ref MemoryMarshal.GetReference<T>(src);
 
         /// <summary>
@@ -120,13 +120,13 @@ namespace Z0
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
         public static ref readonly T Head<T>(in ReadOnlySpan128<T> src)
-            where T : struct
+            where T : unmanaged
                 =>  ref MemoryMarshal.GetReference<T>(src);
 
 
         [MethodImpl(Inline)]
         public static ref T Offset<T>(in Span128<T> src, int index)
-            where T : struct
+            where T : unmanaged
         {
             ref var first = ref Head(in src);
             return ref Unsafe.Add(ref first, index);
@@ -134,7 +134,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static ref T BlockedOffset<T>(in Span128<T> src, int blocks)
-            where T : struct
+            where T : unmanaged
         {
             ref var first = ref Head(in src);
             var index = blocks * Span128<T>.BlockLength;
@@ -147,7 +147,7 @@ namespace Z0
         /// <typeparam name="T">The block constituent type</typeparam>
         [MethodImpl(Inline)]
         public static int BlockLength<T>(int blocks = 1)
-            where T : struct        
+            where T : unmanaged        
                 => blocks * Span128<T>.BlockLength;
 
         /// <summary>
@@ -157,7 +157,7 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
         public static int WholeBlocks<T>(int length)
-            where T : struct  
+            where T : unmanaged  
                 => length / BlockLength<T>();
 
         /// <summary>
@@ -167,7 +167,7 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
         public static ByteSize CellBytes<T>(int count)
-            where T : struct        
+            where T : unmanaged        
             => count * CellSize<T>();
 
         /// <summary>
@@ -178,12 +178,12 @@ namespace Z0
         /// <typeparam name="T">The block constituent type</typeparam>
         [MethodImpl(Inline)]
         public static bool IsAligned<T>(int length)
-            where T : struct        
+            where T : unmanaged        
                 => Span128<T>.Aligned(length);
 
         [MethodImpl(Inline)]
         public static int Align<T>(int length)
-            where T : struct        
+            where T : unmanaged        
         {
             var remainder = length % BlockLength<T>();
             if(remainder == 0)
@@ -202,7 +202,7 @@ namespace Z0
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
         public static void Alignment<T>(int srcLen, out int blocklen, out int fullBlocks, out int remainder)
-            where T : struct        
+            where T : unmanaged        
         {
             blocklen = BlockLength<T>();
             fullBlocks = srcLen / blocklen;
@@ -218,8 +218,8 @@ namespace Z0
         [MethodImpl(Inline)]   
         public static int Blocks<S,T>(Span128<S> lhs, Span128<T> rhs, [CallerFilePath] string caller = null,
             [CallerFilePath] string file = null, [CallerLineNumber] int? line = null)
-                where T : struct
-                where S : struct
+                where T : unmanaged
+                where S : unmanaged
                     => lhs.BlockCount == rhs.BlockCount ? lhs.BlockCount 
                         : throw CountMismatch(lhs.BlockCount, rhs.BlockCount, caller, file,line);
 
@@ -232,8 +232,8 @@ namespace Z0
         [MethodImpl(Inline)]   
         public static int Blocks<S,T>(ReadOnlySpan128<S> lhs, ReadOnlySpan128<T> rhs, [CallerFilePath] string caller = null,
             [CallerFilePath] string file = null, [CallerLineNumber] int? line = null)
-                where T : struct
-                where S : struct
+                where T : unmanaged
+                where S : unmanaged
                     => lhs.BlockCount == rhs.BlockCount ? lhs.BlockCount 
                         : throw CountMismatch(lhs.BlockCount, rhs.BlockCount, caller, file,line);
 
@@ -245,8 +245,8 @@ namespace Z0
         [MethodImpl(Inline)]   
         public static int Length<S,T>(ReadOnlySpan128<S> lhs, ReadOnlySpan128<T> rhs, [CallerFilePath] string caller = null, 
             [CallerFilePath] string file = null, [CallerLineNumber] int? line = null)        
-            where T : struct
-            where S : struct
+            where T : unmanaged
+            where S : unmanaged
                 => lhs.Length == rhs.Length ? lhs.Length 
                     : throw CountMismatch(lhs.Length, rhs.Length, caller, file, line);
 
@@ -258,8 +258,8 @@ namespace Z0
         [MethodImpl(Inline)]   
         public static int Length<S,T>(Span128<S> lhs, Span128<T> rhs, [CallerFilePath] string caller = null,
             [CallerFilePath] string file = null, [CallerLineNumber] int? line = null)
-                where S : struct
-                where T : struct
+                where S : unmanaged
+                where T : unmanaged
                     => lhs.Length == rhs.Length ? lhs.Length 
                         : throw CountMismatch(lhs.Length, rhs.Length, caller, file, line);
    

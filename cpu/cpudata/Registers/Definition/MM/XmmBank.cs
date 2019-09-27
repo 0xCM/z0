@@ -47,9 +47,9 @@ namespace Z0
                return generic<T>(Avx2.LoadDquVector128(constptr(in AsIn.int64(in src))));
             else if(typematch<T,ulong>())
                return generic<T>(Avx2.LoadDquVector128(constptr(in AsIn.uint64(in src))));
-            else if(typematch<T,float>())
+            else if(typeof(T) == typeof(float))
                return generic<T>(Avx2.LoadVector128(constptr(in AsIn.float32(in src))));
-            else if(typematch<T,double>())
+            else if(typeof(T) == typeof(double))
                return generic<T>(Avx2.LoadVector128(constptr(in AsIn.float64(in src))));
             else
                 throw unsupported<T>();

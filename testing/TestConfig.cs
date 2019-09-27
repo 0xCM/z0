@@ -13,7 +13,7 @@ namespace Z0
     public interface ITestConfig : ISampleDefaults
     {
         ITestConfig<T> Get<T>()
-            where T : struct;
+            where T : unmanaged;
         ITestConfig WithSampleSize(int SampleSize);
 
         ITestConfig WithTrace();
@@ -26,7 +26,7 @@ namespace Z0
     }
     
     public interface ITestConfig<T> : ITestConfig, ISampleDefaults<T>
-        where T : struct
+        where T : unmanaged
     {
         
     }
@@ -53,7 +53,7 @@ namespace Z0
             };
 
         public ITestConfig<T> Get<T>() 
-            where T : struct
+            where T : unmanaged
                 => new TestConfig<T>(Defaults.Get<T>());
 
         public ITestConfig WithTrace()
@@ -85,7 +85,7 @@ namespace Z0
     }
 
     public class TestConfig<T> : TestConfig, ITestConfig<T>
-        where T: struct
+        where T : unmanaged
     {
         public TestConfig(ITestConfig<T> Defaults)
             : base(Defaults)
@@ -113,9 +113,7 @@ namespace Z0
         ITestConfig<long>,
         ITestConfig<ulong>,
         ITestConfig<float>,
-        ITestConfig<double>,
-        ITestConfig<decimal>,
-        ITestConfig<BigInteger>
+        ITestConfig<double>
     {
         static readonly TestConfigDefaults TheOnly = default;
 
@@ -123,13 +121,13 @@ namespace Z0
             => TheOnly;
 
         public static ITestConfig<T> Default<T>()
-            where T : struct
+            where T : unmanaged
                 => (ITestConfig<T>)(object)(TheOnly);
 
         const int SampleSize = Pow2.T06;
 
         public ITestConfig<T> Get<T>()
-            where T : struct
+            where T : unmanaged
                 => cast<ITestConfig<T>>(this);
 
         public ITestConfig Replicate()
@@ -256,28 +254,6 @@ namespace Z0
 
         Interval<double> ISampleDefaults<double>.SampleDomain 
             => Float64Domain;
-
-        // ! Float64
-
-        const decimal DecimalMin = -250000.00m;
-        
-        const decimal DecimalMax = 250000.00m;
-
-        static readonly Interval<decimal> DecimalDomain = closed(DecimalMin,DecimalMax);
-
-        Interval<decimal> ISampleDefaults<decimal>.SampleDomain 
-            => DecimalDomain;
-
-       // ! BigInteger
-
-        static readonly BigInteger BigIntMin = -250000;
-        
-        static readonly BigInteger BigIntMax = 250000;
-
-        static readonly Interval<BigInteger> BigIntRange = closed(BigIntMin,BigIntMax);
-
-        Interval<BigInteger> ISampleDefaults<BigInteger>.SampleDomain 
-            => BigIntRange;
 
     }
 

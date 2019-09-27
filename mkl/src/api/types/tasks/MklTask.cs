@@ -16,7 +16,7 @@ namespace Z0.Mkl
 
     }
     public interface IMklTask<T> : IMklTask
-        where T : struct
+        where T : unmanaged
     {
         
     }
@@ -44,7 +44,7 @@ namespace Z0.Mkl
     }
 
     abstract class MklTask<T> : MklTask, IMklTask<T>
-        where T : struct
+        where T : unmanaged
     {
                 
 

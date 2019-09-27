@@ -14,7 +14,7 @@ namespace Z0
     /// Defines a generic immediate
     /// </summary>    
     public readonly struct Imm<T> :  IImm<Imm<T>, T>
-        where T : struct
+        where T : unmanaged
     {        
         /// <summary>
         /// The value of the immediate constant
@@ -111,12 +111,12 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public Imm<S> As<S>()
-            where S : struct
+            where S : unmanaged
                 => imagine<Imm<T>, Imm<S>>(ref Unsafe.AsRef(in this));            
 
         [MethodImpl(Inline)]
         public Imm<S> SignExtend<S>()
-            where S : struct
+            where S : unmanaged
         {
             if (this.IsSignExtended || !PrimalInfo.signed<S>())
                 throw new NotSupportedException();

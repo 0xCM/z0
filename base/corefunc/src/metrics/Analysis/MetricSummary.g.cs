@@ -12,7 +12,7 @@ namespace Z0
 
 
     public class MetricSummary<T> : IMetricSummary
-        where T : struct
+        where T : unmanaged
     {
         public MetricSummary(Metrics<T> Metrics)
         {

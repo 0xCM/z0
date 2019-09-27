@@ -22,7 +22,7 @@ namespace Z0
         /// <param name="mask">The mask</param>
         [MethodImpl(Inline)]
         public static bool testz<T>(Vector128<T> src,Vector128<T> mask)
-            where T : struct
+            where T : unmanaged
         {
             if(typematch<T,sbyte>())
                 return dinx.testz(int8(src), int8(mask));
@@ -40,9 +40,9 @@ namespace Z0
                 return dinx.testz(int64(src), int64(mask));
             else if(typematch<T,ulong>())
                 return dinx.testz(uint64(src), uint64(mask));
-            else if(typematch<T,float>())
+            else if(typeof(T) == typeof(float))
                 return dfp.testz(float32(src), float32(mask));
-            else if(typematch<T,double>())
+            else if(typeof(T) == typeof(double))
                 return dfp.testz(float64(src), float64(mask));
             else 
                 throw unsupported<T>();
@@ -55,7 +55,7 @@ namespace Z0
         /// <param name="mask">The mask</param>
         [MethodImpl(Inline)]
         public static bool testz<T>(Vector256<T> lhs, Vector256<T> rhs)
-            where T : struct
+            where T : unmanaged
         {
             if(typematch<T,sbyte>())
                 return dinx.testz(int8(lhs), int8(rhs));
@@ -73,9 +73,9 @@ namespace Z0
                 return dinx.testz(int64(lhs), int64(rhs));
             else if(typematch<T,ulong>())
                 return dinx.testz(uint64(lhs), uint64(rhs));
-            else if(typematch<T,float>())
+            else if(typeof(T) == typeof(float))
                 return dfp.testz(float32(lhs), float32(rhs));
-            else if(typematch<T,double>())
+            else if(typeof(T) == typeof(double))
                 return dfp.testz(float64(lhs), float64(rhs));
             else 
                 throw unsupported<T>();

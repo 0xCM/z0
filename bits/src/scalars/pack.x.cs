@@ -20,7 +20,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]   
         public static Span<byte> Unpack<T>(this ref T src, out Span<byte> dst)
-            where T : struct
+            where T : unmanaged
                 => dst = bytespan(ref src);
 
         /// <summary>

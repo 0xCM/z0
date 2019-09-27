@@ -16,14 +16,14 @@ partial class zfunc
 
     [MethodImpl(Inline)]   
     public static T convert<S,T>(S src, out T dst)
-        where T : struct
-        where S : struct
+        where T : unmanaged
+        where S : unmanaged
             => dst = Converter.convert(src, out T target);  
            
     [MethodImpl(Inline)]   
     public static T convert<S,T>(S src)
-        where T : struct
-        where S : struct
+        where T : unmanaged
+        where S : unmanaged
            => Converter.convert(src, out T dst);  
 
     /// <summary>
@@ -34,8 +34,8 @@ partial class zfunc
     /// <typeparam name="T">The target type</typeparam>
     [MethodImpl(Inline)]   
     public static Span256<T> convert<S,T>(Span256<S> src)
-        where T : struct
-        where S : struct
+        where T : unmanaged
+        where S : unmanaged
     {
         var dst = Span256.Alloc<T>(src.Length);
         for(var i=0; i< src.Length; i++)
@@ -51,8 +51,8 @@ partial class zfunc
     /// <typeparam name="T">The target type</typeparam>
     [MethodImpl(Inline)]   
     public static Span<T> convert<S,T>(Span<S> src)
-        where T : struct
-        where S : struct
+        where T : unmanaged
+        where S : unmanaged
     {
         Span<T> dst = new T[src.Length];
         for(var i=0; i< src.Length; i++)
@@ -87,8 +87,8 @@ partial class zfunc
     [MethodImpl(Inline)]   
     public static Span<T> convert<N,S,T>(Span<N,S> src)
         where N : ITypeNat, new()
-        where T : struct
-        where S : struct
+        where T : unmanaged
+        where S : unmanaged
     {
         Span<T> dst = new T[src.Length];
         for(var i=0; i< src.Length; i++)
@@ -99,8 +99,8 @@ partial class zfunc
 
     [MethodImpl(Inline)]   
     public static Span<T> convert<S,T>(ReadOnlySpan<S> src)
-        where T : struct
-        where S : struct
+        where T : unmanaged
+        where S : unmanaged
     {
         var dst = span<T>(src.Length);
         for(var i=0; i<src.Length; i++)
@@ -110,87 +110,87 @@ partial class zfunc
 
     [MethodImpl(Inline)]   
     public static T convert<T>(sbyte src)
-        where T : struct
+        where T : unmanaged
             => Converter.convert(src, out T dst);
 
     [MethodImpl(Inline)]   
     public static T convert<T>(byte src)
-        where T : struct
+        where T : unmanaged
             => Converter.convert(src, out T dst);
 
     [MethodImpl(Inline)]   
     public static T convert<T>(short src)
-        where T : struct
+        where T : unmanaged
             => Converter.convert(src, out T dst);
 
     [MethodImpl(Inline)]   
     public static T convert<T>(ushort src)
-        where T : struct
+        where T : unmanaged
             => Converter.convert(src, out T dst);
 
     [MethodImpl(Inline)]   
     public static T convert<T>(int src)
-        where T : struct
+        where T : unmanaged
             => Converter.convert(src, out T dst);
 
     [MethodImpl(Inline)]   
     public static Span<T> convert<T>(ReadOnlySpan<int> src)
-        where T : struct
+        where T : unmanaged
             => convert<int,T>(src);
 
     [MethodImpl(Inline)]   
     public static T convert<T>(uint src)
-        where T : struct
+        where T : unmanaged
             => Converter.convert(src, out T dst);
 
     [MethodImpl(Inline)]   
     public static Span<T> convert<T>(ReadOnlySpan<uint> src)
-        where T : struct
+        where T : unmanaged
             => convert<uint,T>(src);
 
     [MethodImpl(Inline)]   
     public static T convert<T>(long src)
-        where T : struct
+        where T : unmanaged
             => Converter.convert(src, out T dst);
 
     [MethodImpl(Inline)]   
     public static Span<T> convert<T>(ReadOnlySpan<long> src)
-        where T : struct
+        where T : unmanaged
             => convert<long,T>(src);
 
     [MethodImpl(Inline)]   
     public static T convert<T>(ulong src)
-        where T : struct
+        where T : unmanaged
             => Converter.convert(src, out T dst);
 
     [MethodImpl(Inline)]   
     public static Span<T> convert<T>(ReadOnlySpan<ulong> src)
-        where T : struct
+        where T : unmanaged
             => convert<ulong,T>(src);
 
     [MethodImpl(Inline)]   
     public static T convert<T>(float src)
-        where T : struct
+        where T : unmanaged
             => Converter.convert(src, out T dst);
 
     [MethodImpl(Inline)]   
     public static Span<T> convert<T>(ReadOnlySpan<float> src)
-        where T : struct
+        where T : unmanaged
             => convert<float,T>(src);
 
     [MethodImpl(Inline)]   
     public static T convert<T>(double src)
-        where T : struct
+        where T : unmanaged
             => Converter.convert(src, out T dst);
 
     [MethodImpl(Inline)]   
     public static T convert<T>(char src)
-        where T : struct
+        where T : unmanaged
             => Converter.convert(src, out T dst);
 
     [MethodImpl(Inline)]   
     public static Span<T> convert<T>(ReadOnlySpan<double> src)
-        where T : struct
+        where T : unmanaged
             => convert<double,T>(src);
 
     /// <summary>
@@ -200,7 +200,7 @@ partial class zfunc
     /// <typeparam name="T">The source type</typeparam>
     [MethodImpl(Inline)]
     public static Span<byte> bytes<T>(params T[] src)
-        where T : struct
+        where T : unmanaged
             =>  convert<T,byte>(src.ToReadOnlySpan());
 
     /// <summary>
@@ -210,7 +210,7 @@ partial class zfunc
     /// <typeparam name="T">The source type</typeparam>
     [MethodImpl(Inline)]
     public static Span<sbyte> sbytes<T>(params T[] src)
-        where T : struct
+        where T : unmanaged
             =>  convert<T,sbyte>(src.ToReadOnlySpan());
 
     /// <summary>
@@ -220,7 +220,7 @@ partial class zfunc
     /// <typeparam name="T">The source type</typeparam>
     [MethodImpl(Inline)]
     public static Span<ushort> ushorts<T>(params T[] src)
-        where T : struct
+        where T : unmanaged
             =>  convert<T,ushort>(src.ToReadOnlySpan());
 
     /// <summary>
@@ -230,7 +230,7 @@ partial class zfunc
     /// <typeparam name="T">The source type</typeparam>
     [MethodImpl(Inline)]
     public static Span<short> shorts<T>(params T[] src)
-        where T : struct
+        where T : unmanaged
             =>  convert<T,short>(src.ToReadOnlySpan());
 
     /// <summary>
@@ -240,7 +240,7 @@ partial class zfunc
     /// <typeparam name="T">The source type</typeparam>
     [MethodImpl(Inline)]
     public static Span<int> ints<T>(params T[] src)
-        where T : struct
+        where T : unmanaged
             =>  convert<T,int>(src.ToReadOnlySpan());
 
     /// <summary>
@@ -250,7 +250,7 @@ partial class zfunc
     /// <typeparam name="T">The source type</typeparam>
     [MethodImpl(Inline)]
     public static Span<uint> uints<T>(params T[] src)
-        where T : struct
+        where T : unmanaged
             =>  convert<T,uint>(src.ToReadOnlySpan());
 
     /// <summary>
@@ -260,7 +260,7 @@ partial class zfunc
     /// <typeparam name="T">The source type</typeparam>
     [MethodImpl(Inline)]
     public static Span<ulong> ulongs<T>(params T[] src)
-        where T : struct
+        where T : unmanaged
             =>  convert<T,ulong>(src.ToReadOnlySpan());
 
     /// <summary>
@@ -270,7 +270,7 @@ partial class zfunc
     /// <typeparam name="T">The source type</typeparam>
     [MethodImpl(Inline)]
     public static Span<long> longs<T>(params T[] src)
-        where T : struct
+        where T : unmanaged
             =>  convert<T,long>(src.ToReadOnlySpan());
 
     /// <summary>
@@ -280,7 +280,7 @@ partial class zfunc
     /// <typeparam name="T">The source type</typeparam>
     [MethodImpl(Inline)]
     public static Span<float> floats<T>(params T[] src)
-        where T : struct
+        where T : unmanaged
             =>  convert<T,float>(src.ToReadOnlySpan());
 
     /// <summary>
@@ -290,6 +290,6 @@ partial class zfunc
     /// <typeparam name="T">The source type</typeparam>
     [MethodImpl(Inline)]
     public static Span<double> doubles<T>(params T[] src)
-        where T : struct
+        where T : unmanaged
             =>  convert<T,double>(src.ToReadOnlySpan());
 }

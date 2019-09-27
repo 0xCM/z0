@@ -42,9 +42,9 @@ namespace Z0
                  return generic<T>(Bits.between(in int64(in src), p0, p1));
             else if(typematch<T,ulong>())
                  return generic<T>(Bits.between(in uint64(in src), p0, p1));
-            else if(typematch<T,float>())
+            else if(typeof(T) == typeof(float))
                  return generic<T>(Bits.between(in float32(in src), p0, p1));
-            else if(typematch<T,double>())
+            else if(typeof(T) == typeof(double))
                  return generic<T>(Bits.between(in float64(in src), p0, p1));
             else            
                 throw unsupported<T>();

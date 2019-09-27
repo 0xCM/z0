@@ -21,7 +21,7 @@ namespace Z0
         /// <typeparam name="T">The primal value type</typeparam>
         [MethodImpl(Inline)]
         public static ref Bit read<T>(in T src, in int pos, out Bit dst)
-            where T : struct
+            where T : unmanaged
         {
             if(typematch<T,sbyte>())
                  Bits.read(in int8(in src), in pos, out dst);
@@ -39,9 +39,9 @@ namespace Z0
                  Bits.read(in int64(in src), in pos, out dst);
             else if(typematch<T,ulong>())
                  Bits.read(in uint64(in src), in pos, out dst);
-            else if(typematch<T,float>())
+            else if(typeof(T) == typeof(float))
                  Bits.read(in float32(in src), in pos, out dst);
-            else if(typematch<T,double>())
+            else if(typeof(T) == typeof(double))
                  Bits.read(in float64(in src), in pos, out dst);
             else            
                 throw unsupported<T>();

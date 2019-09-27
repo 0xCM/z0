@@ -18,7 +18,7 @@ namespace Z0
     /// Characterizes an immediate
     /// </summary>
     public interface IImm<T> : IImm
-        where T : struct
+        where T : unmanaged
     {
         /// <summary>
         /// Specifies the size of the immediate
@@ -63,8 +63,8 @@ namespace Z0
     } 
 
     public interface IImm<I,T> : IImm<T>
-        where I:struct
-        where T:struct
+        where I : unmanaged
+        where T : unmanaged
     {
         I Redefine(T src);   
     }

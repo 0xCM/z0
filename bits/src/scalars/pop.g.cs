@@ -23,7 +23,7 @@ namespace Z0
         /// <typeparam name="T">The source value type</typeparam>
         [MethodImpl(Inline)]
         public static uint pop<T>(in T src)
-            where T : struct
+            where T : unmanaged
         {        
             if(typematch<T,sbyte>())
                  return Bits.pop(int8(in src));

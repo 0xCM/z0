@@ -24,7 +24,7 @@ namespace Z0
         /// <typeparam name="T">The generated value type</typeparam>
         [MethodImpl(Inline)]
         public static T[] Array<T>(this IPolyrand random, int length, Interval<T>? domain = null, Func<T,bool> filter = null)
-            where T : struct
+            where T : unmanaged
                 => random.Stream(domain,filter).TakeArray(length);
 
         /// <summary>
@@ -38,7 +38,7 @@ namespace Z0
         /// <typeparam name="T">The generated value type</typeparam>
         [MethodImpl(Inline)]
         public static T[] Array<T>(this IPolyrand random, int length, T min, T max, Func<T,bool> filter = null)
-            where T : struct
+            where T : unmanaged
                 => random.Stream((min,max),filter).TakeArray(length);
          
         /// <summary>
@@ -50,7 +50,7 @@ namespace Z0
         /// <typeparam name="T">The generated value type</typeparam>
         [MethodImpl(Inline)]
         public static T[] NonZeroArray<T>(this IPolyrand random, int length, Interval<T>? domain = null)
-            where T : struct
+            where T : unmanaged
                 => random.Stream(domain, gmath.nonzero).TakeArray(length);        
     }
 

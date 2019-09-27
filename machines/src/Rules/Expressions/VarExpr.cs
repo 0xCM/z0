@@ -15,7 +15,7 @@ namespace Z0
     /// Defines a variable expression
     /// </summary>
     public readonly struct VarExpr<T> : IRuleExpr<T>
-        where T : struct
+        where T : unmanaged
     {
         [MethodImpl(Inline)]
         public VarExpr(string Name = null, T? value = null)

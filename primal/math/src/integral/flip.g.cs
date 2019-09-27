@@ -16,7 +16,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static T flip<T>(T src)
-            where T : struct
+            where T : unmanaged
         {
             if(typematch<T,sbyte>())
                 return generic<T>(math.flip(int8(src)));  
@@ -40,7 +40,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static ref T flip<T>(ref T src)
-            where T : struct
+            where T : unmanaged
         {
             if(typematch<T,sbyte>())
                 math.flip(ref int8(ref src));

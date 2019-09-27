@@ -126,7 +126,7 @@ namespace Z0
         }
 
         public static void ClaimEqual<T>(this Span<T> lhs, Span<T> rhs, T tolerance, Action<int,T,T> handler,  [Member] string caller = null, [File] string file = null, [Line] int? line = null)
-            where T : struct 
+            where T : unmanaged 
         {
             for(var i = 0; i< length(lhs,rhs); i++)
                 if(!gmath.within(lhs[i],rhs[i],tolerance))
@@ -137,7 +137,7 @@ namespace Z0
         }
 
         public static void ClaimEqual<T>(this Span<T> lhs, Span<T> rhs, T tolerance, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
-            where T : struct 
+            where T : unmanaged 
         {
             for(var i = 0; i< length(lhs,rhs); i++)
                 if(!gmath.within(lhs[i],rhs[i],tolerance))
@@ -155,7 +155,7 @@ namespace Z0
         /// <param name="line">The file line number of invocation</param>
         /// <typeparam name="T">The element type</typeparam>
         public static void ClaimEqual<T>(this ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
-            where T : struct 
+            where T : unmanaged 
         {            
             for(var i = 0; i< length(lhs,rhs); i++)
                 if(gmath.neq(lhs[i],rhs[i]))
@@ -173,7 +173,7 @@ namespace Z0
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
         public static void ClaimEqual<T>(this Span<T> lhs, ReadOnlySpan<T> rhs, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
-            where T : struct 
+            where T : unmanaged 
                 => lhs.ReadOnly().ClaimEqual(rhs, caller, file, line);
 
         /// <summary>
@@ -191,7 +191,7 @@ namespace Z0
         public static void ClaimEqual<M,N,T>(Span<M,N,T> lhs, Span<M,N,T> rhs, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
             where N : ITypeNat, new()
             where M : ITypeNat, new()
-            where T : struct 
+            where T : unmanaged 
                 => lhs.Unsized.ClaimEqual(rhs.Unsized, caller, file, line);
 
         /// <summary>
@@ -207,7 +207,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static void ClaimEqual<N,T>(Span<N,T> lhs, Span<N,T> rhs, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
             where N : ITypeNat, new()
-            where T : struct 
+            where T : unmanaged 
                 => lhs.Unsized.ClaimEqual(rhs.Unsized, caller, file, line);
     }
 

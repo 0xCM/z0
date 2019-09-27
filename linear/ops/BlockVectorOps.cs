@@ -114,7 +114,7 @@ namespace Z0
         /// <typeparam name="T">The component type</typeparam>
         [MethodImpl(Inline)]
         public static ref BlockVector<T> mul<T>(ref BlockVector<T> lhs, in BlockVector<T> rhs)
-            where T : struct
+            where T : unmanaged
         {
             mathspan.mul(lhs.Unblocked, rhs.Unblocked);
             return ref lhs;
@@ -130,7 +130,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ref BlockVector<N,T> mul<N,T>(ref BlockVector<N,T> lhs, in BlockVector<N,T> rhs)
             where N : ITypeNat, new()
-            where T : struct    
+            where T : unmanaged    
         {
             mathspan.mul(lhs.Unsized, rhs.Unsized);
             return ref lhs;
@@ -236,7 +236,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static ref BlockVector<T> dec<T>(ref BlockVector<T> src)
-            where T : struct
+            where T : unmanaged
         {
             mathspan.dec(src.Unblocked);
             return ref src;
@@ -251,7 +251,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ref BlockVector<N,T> dec<N,T>(ref BlockVector<N,T> src)
             where N : ITypeNat, new()
-            where T : struct    
+            where T : unmanaged    
 
         {
             mathspan.dec(src.Unsized);
@@ -263,7 +263,7 @@ namespace Z0
         public static BlockVector<N,T> redim<M,N,T>(in BlockVector<M,T> src, N newdim = default)
             where M : ITypeNat, new()
             where N : ITypeNat, new()
-            where T : struct
+            where T : unmanaged
                 => BlockVector<N, T>.LoadAligned(src.Unsized);
 
 
@@ -272,7 +272,7 @@ namespace Z0
             where M : ITypeNat, new()
             where N : ITypeNat, new()
             where P : INatSum<M,N>, new()
-            where T : struct
+            where T : unmanaged
         {
             var dst = span<T>(new NatSum<M,N>());
             head.Unsized.CopyTo(dst);

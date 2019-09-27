@@ -42,7 +42,7 @@ partial class zfunc
     /// <typeparam name="T">The source value type</typeparam>
     [MethodImpl(Inline)]
     public static T coalesce<T>(T? x, Func<T> fallback)
-        where T : struct
+        where T : unmanaged
             => x == null ? fallback() : x.Value;
 
     /// <summary>
@@ -53,7 +53,7 @@ partial class zfunc
     /// <typeparam name="T">The source value type</typeparam>
     [MethodImpl(Inline)]
     public static T coalesce<T>(T? x, T fallback)
-        where T : struct
+        where T : unmanaged
             => x == null ? fallback : x.Value;
 
 }

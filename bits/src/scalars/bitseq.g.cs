@@ -21,7 +21,7 @@ namespace Z0
         /// <typeparam name="T">The primal source type</typeparam>
         [MethodImpl(Inline)]
         public static ReadOnlySpan<byte> bitseq<T>(T src)
-            where T : struct
+            where T : unmanaged
                 => BitStore.BitSeq(src);
 
 

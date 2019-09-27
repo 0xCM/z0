@@ -18,7 +18,7 @@ namespace Z0
     /// </summary>
     [StructLayout(LayoutKind.Sequential, Size = ByteCount)]
     public readonly struct Vec128<T> : IEquatable<Vec128<T>>
-        where T : struct
+        where T : unmanaged
     {            
         /// <summary>
         /// The backing data
@@ -82,7 +82,7 @@ namespace Z0
         /// <typeparam name="U">The target primal type</typeparam>
         [MethodImpl(Inline)]
         public Vec128<U> As<U>() 
-            where U : struct
+            where U : unmanaged
                 => Unsafe.As<Vector128<T>, Vec128<U>>(ref Unsafe.AsRef(in xmm));         
 
         [MethodImpl(Inline)]

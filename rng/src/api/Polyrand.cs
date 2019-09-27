@@ -35,7 +35,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public T Next<T>()
-            where T : struct
+            where T : unmanaged
         {
             if(typematch<T,sbyte>())
                 return generic<T>(Int8Source.Next());                
@@ -53,9 +53,9 @@ namespace Z0
                 return generic<T>(Int64Source.Next());                
             else if(typematch<T,ulong>())
                 return generic<T>(UInt64Source.Next());                
-            else if(typematch<T,float>())
+            else if(typeof(T) == typeof(float))
                 return generic<T>(Float32Source.Next());                
-            else if(typematch<T,double>())
+            else if(typeof(T) == typeof(double))
                 return generic<T>(Float64Source.Next());                
             else 
                 throw unsupported<T>();                
@@ -63,7 +63,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public T Next<T>(T max)
-            where T : struct
+            where T : unmanaged
         {
             if(typematch<T,sbyte>())
                 return generic<T>(Int8Source.Next(int8(max)));                
@@ -81,9 +81,9 @@ namespace Z0
                 return generic<T>(Int64Source.Next(int64(max)));                
             else if(typematch<T,ulong>())
                 return generic<T>(UInt64Source.Next(uint64(max)));                
-            else if(typematch<T,float>())
+            else if(typeof(T) == typeof(float))
                 return generic<T>(Float32Source.Next(float32(max)));                
-            else if(typematch<T,double>())
+            else if(typeof(T) == typeof(double))
                 return generic<T>(Float64Source.Next(float64(max)));                
             else 
                 throw unsupported<T>();                
@@ -91,7 +91,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public T Next<T>(T min, T max)
-            where T : struct
+            where T : unmanaged
         {
             if(typematch<T,sbyte>())
                 return generic<T>(Int8Source.Next(int8(min), int8(max)));                
@@ -109,9 +109,9 @@ namespace Z0
                 return generic<T>(Int64Source.Next(int64(min), int64(max)));                
             else if(typematch<T,ulong>())
                 return generic<T>(UInt64Source.Next(uint64(min), uint64(max)));                
-            else if(typematch<T,float>())
+            else if(typeof(T) == typeof(float))
                 return generic<T>(Float32Source.Next(float32(min), float32(max)));                
-            else if(typematch<T,double>())
+            else if(typeof(T) == typeof(double))
                 return generic<T>(Float64Source.Next(float64(min), float64(max)));                
             else 
                 throw unsupported<T>();                
@@ -119,11 +119,11 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public T Next<T>(Interval<T> domain)
-            where T : struct
+            where T : unmanaged
             => Next(domain.Left, domain.Right);
 
         public IEnumerable<T> Take<T>(int? count = null)
-            where T : struct
+            where T : unmanaged
         {
             if(count != null)
             {

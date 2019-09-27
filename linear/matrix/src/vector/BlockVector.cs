@@ -13,7 +13,7 @@ namespace Z0
     using static zfunc;
 
     public ref struct BlockVector<T>
-        where T : struct
+        where T : unmanaged
     {
         Span256<T> data;
 
@@ -90,7 +90,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public BlockVector<U> As<U>()
-            where U : struct
+            where U : unmanaged
                 => data.As<U>();
                 
         [MethodImpl(Inline)]
@@ -106,8 +106,8 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public BlockVector<U> Convert<U>()
-            where U : struct
-               => new BlockVector<U>(convert<T,U>(data));
+            where U : unmanaged
+              => new BlockVector<U>(convert<T,U>(data));
 
         public BlockVector<T> Replicate(bool structureOnly = false)
             => new BlockVector<T>(data.Replicate(structureOnly));

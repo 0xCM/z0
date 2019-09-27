@@ -18,7 +18,7 @@ namespace Z0
     {
         [MethodImpl(Inline)]
         public static Vector128<T> hadd<T>(Vector128<T> lhs, Vector128<T> rhs)
-            where T : struct
+            where T : unmanaged
         {
             if(typeof(T) == typeof(short))
                 return generic<T>(dinx.hadd(int16(lhs), int16(rhs)));
@@ -30,7 +30,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static Vector256<T> hadd<T>(Vector256<T> lhs, Vector256<T> rhs)
-            where T : struct
+            where T : unmanaged
         {
             if(typeof(T) == typeof(short))
                 return generic<T>(dinx.hadd(int16(lhs), int16(rhs)));

@@ -16,7 +16,7 @@ namespace Z0
     public static class Bin
     {
         public static Bin<T> Define<T>(Interval<T> domain, int count)
-            where T : struct
+            where T : unmanaged
             => new Bin<T>(domain,count);
     }
 
@@ -25,7 +25,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The value domain</typeparam>
     public class Bin<T>
-        where T : struct
+        where T : unmanaged
     {
         public static Bin<T> operator ++(Bin<T> src)
             => src;
@@ -58,7 +58,7 @@ namespace Z0
     public static class BinX
     {
         public static ulong TotalCount<T>(this ReadOnlySpan<Bin<T>> bins)
-            where T : struct
+            where T : unmanaged
         {
             var sum = 0ul;
             for(var i=0; i<bins.Length; i++)

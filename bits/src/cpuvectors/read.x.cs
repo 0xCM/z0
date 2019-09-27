@@ -227,7 +227,7 @@ namespace Z0
         /// <typeparam name="T">The primal bit source type</typeparam>
         [MethodImpl(Inline)]
         static Span<byte> range<T>(in T src, BitPos i0, BitPos i1)
-            where T : struct
+            where T : unmanaged
         {
             var dst = Alloc(i0,i1);
             gbits.range(in src, i0, i1, dst, 0);

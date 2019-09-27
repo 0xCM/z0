@@ -23,7 +23,7 @@ namespace Z0
     /// </remarks>
     [StructLayout(LayoutKind.Sequential, Size = ByteCount)]
     public struct Vec512<T>
-        where T : struct
+        where T : unmanaged
     {                    
         public Vec256<T> lo;
 
@@ -58,7 +58,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public Vec512<U> As<U>() 
-            where U : struct
+            where U : unmanaged
                 => Unsafe.As<Vec512<T>, Vec512<U>>(ref Unsafe.AsRef(in this));         
 
         

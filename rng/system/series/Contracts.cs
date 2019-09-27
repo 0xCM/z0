@@ -16,7 +16,7 @@ namespace Z0
     }
 
     public interface ITimeSeries<T> : ITimeSeries
-        where T : struct
+        where T : unmanaged
     {
         SeriesTerm<T> Observed {get;}
 

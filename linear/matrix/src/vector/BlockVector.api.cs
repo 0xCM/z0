@@ -26,7 +26,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BlockVector<N,T> Alloc<N,T>(N n = default)
             where N : ITypeNat, new()
-            where T : struct
+            where T : unmanaged
                 =>  BlockVector<N,T>.LoadAligned(Span256.Alloc<N,T>());
 
         /// <summary>
@@ -39,7 +39,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BlockVector<N,T> Alloc<N,T>(N n, T fill)
             where N : ITypeNat, new()
-            where T : struct
+            where T : unmanaged
                 =>  BlockVector<N,T>.LoadAligned(Span256.Alloc<N,T>(fill));
         
         /// <summary>
@@ -51,7 +51,7 @@ namespace Z0
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
         public static BlockVector<T> Alloc<T>(int n, T? fill = null)               
-            where T : struct
+            where T : unmanaged
                 => Span256.Alloc<T>(n, fill);
 
         /// <summary>
@@ -64,7 +64,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BlockVector<N,T> Load<N,T>(Span<T> src, N n = default)
             where N : ITypeNat, new()
-            where T : struct
+            where T : unmanaged
                 => BlockVector<N,T>.LoadAligned(Span256.Load(src));
 
         /// <summary>
@@ -78,7 +78,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BlockVector<N,T> Load<N,T>(N length, params T[] src)
             where N : ITypeNat, new()
-            where T : struct
+            where T : unmanaged
                 => BlockVector<N,T>.LoadAligned(Span256.Load<T>(src));
 
         /// <summary>
@@ -88,24 +88,24 @@ namespace Z0
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
         public static BlockVector<T> Load<T>(Span<T> src)
-            where T : struct
+            where T : unmanaged
                 => Span256.Load(src);
 
         [MethodImpl(Inline)]
         public static BlockVector<N,T> Load<N,T>(Span256<T> src)
             where N : ITypeNat, new()
-            where T : struct
+            where T : unmanaged
                 => BlockVector<N, T>.LoadAligned(src);
 
         [MethodImpl(Inline)]
         public static BlockVector<N,T> Load<N,T>(Span<N,T> src)
             where N : ITypeNat, new()
-            where T : struct
+            where T : unmanaged
                 => src;
 
         [MethodImpl(Inline)]
         public static BlockVector<T> Zero<T>(int minlen)
-            where T : struct
+            where T : unmanaged
                 => Alloc<T>(minlen);
 
         /// <summary>

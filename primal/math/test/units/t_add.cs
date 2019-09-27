@@ -14,7 +14,143 @@ namespace Z0.Test
 
     public class t_add : UnitTest<t_add>
     {
+        protected override int CycleCount => Pow2.T16;
 
+
+        public void add_g8i_bench()
+        {
+            gadd_bench<sbyte>();
+
+        }
+
+        public void add_g8u_bench()
+        {
+            gadd_bench<byte>();
+
+        }
+
+        public void add_g16i_bench()
+        {
+            gadd_bench<short>();
+        }
+
+        public void add_g16u_bench()
+        {
+            gadd_bench<ushort>();
+        }
+
+        public void add_g32i_bench()
+        {
+            gadd_bench<int>();
+        }
+
+        public void add_g32u_bench()
+        {
+            gadd_bench<uint>();
+        }
+
+        public void add_g64i_bench()
+        {
+            gadd_bench<long>();
+        }
+
+        public void add_g64u_bench()
+        {
+            gadd_bench<ulong>();
+        }
+
+        public void add_g32f_bench()
+        {
+            gadd_bench<float>();
+        }
+
+        public void add_g64f_bench()
+        {
+            gadd_bench<double>();
+        }
+
+        public void add_g8i_check()
+        {
+            opcheck((x,y) => (sbyte)(x + y), D.add<sbyte>());
+        }
+
+        public void add_g8u_check()
+        {
+            opcheck((x,y) => (byte)(x + y), D.add<byte>());
+        }
+
+        public void add_g16i_check()
+        {
+            opcheck((x,y) => (short)(x + y), D.add<short>());
+        }
+
+        public void add_g16u_check()
+        {
+            opcheck((x,y) => (ushort)(x + y), D.add<ushort>());
+        }
+
+        public void add_g32i_check()
+        {
+            opcheck((x,y) => (x + y), D.add<int>());
+        }
+
+        public void add_g32u_check()
+        {
+            opcheck((x,y) => (x + y), D.add<uint>());
+        }
+
+        public void add_g64i_check()
+        {
+            opcheck((x,y) => (x + y), D.add<long>());
+        }
+
+        public void add_g64u_check()
+        {
+            opcheck((x,y) => (x + y), D.add<ulong>());
+        }
+
+        public void add_g32f_check()
+        {
+            VerifyOp((x,y) => (x + y), D.add<float>());
+        }
+
+        public void add_g64f_check()
+        {
+            VerifyOp((x,y) => (x + y), D.add<double>());              
+        }
+
+        public void add_d32_baseline()
+        {
+            add_d32_bench();
+        }
+
+        public void add_ms32i_check()
+        {
+            var lhsSrc = Random.ReadOnlySpan<int>(Pow2.T10);  
+            var lhs = lhsSrc.Replicate();
+            var rhs = Random.ReadOnlySpan<int>(lhsSrc.Length);
+            mathspan.add(lhs, rhs);           
+
+            var expect = span<int>(lhs.Length);
+            for(var i =0; i< lhsSrc.Length; i++)
+                expect[i] = lhsSrc[i] + rhs[i];
+            
+            Claim.yea(lhs.Identical(expect));
+        }
+
+        public void add_ms64i_check()
+        {
+            var lhsSrc = Random.ReadOnlySpan<long>(Pow2.T10);  
+            var lhs = lhsSrc.Replicate();
+            var rhs = Random.ReadOnlySpan<long>(lhsSrc.Length);
+            mathspan.add(lhs,rhs);
+
+            var expect = span<long>(lhs.Length);
+            for(var i =0; i< lhsSrc.Length; i++)
+                expect[i] = lhsSrc[i] + rhs[i];
+            
+            Claim.yea(lhs.Identical(expect));
+        }
 
         public void polyadd()
         {
@@ -31,97 +167,22 @@ namespace Z0.Test
 
             
         }
+        
         public void polyadd_bench()
         {
-            Collect(polyadd_bench(in StructOps.add<sbyte>()));
-            Collect(polyadd_bench(in StructOps.add<byte>()));
-            Collect(polyadd_bench(in StructOps.add<short>()));
-            Collect(polyadd_bench(in StructOps.add<ushort>()));
-            Collect(polyadd_bench(in StructOps.add<int>()));
-            Collect(polyadd_bench(in StructOps.add<uint>()));
-            Collect(polyadd_bench(in StructOps.add<long>()));
-            Collect(polyadd_bench(in StructOps.add<ulong>()));
-            Collect(polyadd_bench(in StructOps.add<float>()));
-            Collect(polyadd_bench(in StructOps.add<double>()));
+            polyadd_bench(StructOps.add<sbyte>());
+            polyadd_bench(StructOps.add<byte>());
+            polyadd_bench(StructOps.add<short>());
+            polyadd_bench(StructOps.add<ushort>());
+            polyadd_bench(StructOps.add<int>());
+            polyadd_bench(StructOps.add<uint>());
+            polyadd_bench(StructOps.add<long>());
+            polyadd_bench(StructOps.add<ulong>());
+            polyadd_bench(StructOps.add<float>());
+            polyadd_bench(StructOps.add<double>());
 
         }
 
-        public void gadd_bench()
-        {
-            Collect(gadd_bench<sbyte>());
-            Collect(gadd_bench<byte>());
-            Collect(gadd_bench<short>());
-            Collect(gadd_bench<ushort>());
-            Collect(gadd_bench<int>());
-            Collect(gadd_bench<uint>());
-            Collect(gadd_bench<long>());
-            Collect(gadd_bench<ulong>());
-            Collect(gadd_bench<float>());
-            Collect(gadd_bench<double>());
-
-        }
-
-        OpTime gadd_bench<T>()
-            where T : unmanaged
-        {
-            var sw = stopwatch(false);
-            var accum = gmath.zero<T>();
-            for(var i = 0; i < OpCount; i++)
-            {
-                var a = Random.Next<T>();
-                var b = Random.Next<T>();
-                
-                sw.Start();
-                accum = gmath.add(a,b);
-                sw.Stop();
-            }
-            return (OpCount, sw, $"add{moniker<T>()}");
-        }
-
-
-        public void Add()
-        {
-            VerifyOp((x,y) => (sbyte)(x + y), D.add<sbyte>());
-            VerifyOp((x,y) => (byte)(x + y), D.add<byte>());
-            VerifyOp((x,y) => (short)(x + y), D.add<short>());
-            VerifyOp((x,y) => (ushort)(x + y), D.add<ushort>());
-            VerifyOp((x,y) => (x + y), D.add<int>());
-            VerifyOp((x,y) => (x + y), D.add<uint>());
-            VerifyOp((x,y) => (x + y), D.add<long>());
-            VerifyOp((x,y) => (x + y), D.add<ulong>());
-            VerifyOp((x,y) => (x + y), D.add<float>());
-            VerifyOp((x,y) => (x + y), D.add<double>());              
-        }
-
-
-        public void addi32_fused()
-        {
-            var lhsSrc = Random.ReadOnlySpan<int>(Pow2.T10);  
-            var lhs = lhsSrc.Replicate();
-            var rhs = Random.ReadOnlySpan<int>(lhsSrc.Length);
-            mathspan.add(lhs, rhs);           
-
-            var expect = span<int>(lhs.Length);
-            for(var i =0; i< lhsSrc.Length; i++)
-                expect[i] = lhsSrc[i] + rhs[i];
-            
-            Claim.yea(lhs.Identical(expect));
-
-        }
-
-        public void addi64_fused()
-        {
-            var lhsSrc = Random.ReadOnlySpan<long>(Pow2.T10);  
-            var lhs = lhsSrc.Replicate();
-            var rhs = Random.ReadOnlySpan<long>(lhsSrc.Length);
-            mathspan.add(lhs,rhs);
-
-            var expect = span<long>(lhs.Length);
-            for(var i =0; i< lhsSrc.Length; i++)
-                expect[i] = lhsSrc[i] + rhs[i];
-            
-            Claim.yea(lhs.Identical(expect));
-        }
 
         void polyadd_check<T>(in AddOp<T> op)
             where T : unmanaged
@@ -136,20 +197,55 @@ namespace Z0.Test
             }
         }
 
-        OpTime polyadd_bench<T>(in AddOp<T> op)
+        void gadd_bench<T>(SystemCounter counter = default)
+            where T : unmanaged
+        {
+            var last = gmath.zero<T>();
+            for(var i = 0; i < OpCount; i++)
+            {
+                var a = Random.Next<T>();
+                var b = Random.Next<T>();
+                
+                counter.Start();
+                last = gmath.add(a,b);
+                counter.Stop();
+            }
+            Benchmark($"add_g{moniker<T>()}", counter);
+
+        }
+
+        void add_d32_bench(SystemCounter counter = default)
+        {
+            var last = 0;
+            for(var i = 0; i < OpCount; i++)
+            {
+                var a = Random.Next<int>();
+                var b = Random.Next<int>();
+                
+                counter.Start();
+                last = a + b;
+                counter.Stop();
+            }
+            Benchmark($"add_d{moniker<int>()}", counter);
+
+        }
+
+        void polyadd_bench<T>(AddOp<T> op, SystemCounter counter = default)
             where T : unmanaged
         {
             var sw = stopwatch(false);
-            var applied = default(T);
+            var last = default(T);
             for(var i=0; i< OpCount; i++)
             {
                 var x = Random.Next<T>();
                 var y = Random.Next<T>();
-                sw.Start();
-                applied = op.apply(x,y);
-                sw.Stop();
+
+                counter.Start();
+                last = op.apply(x,y);
+                counter.Stop();
             }
-            return (OpCount, sw, $"add{moniker<T>()}");
+
+            Benchmark($"polyadd_g{moniker<T>()}", counter);
         }
 
     }

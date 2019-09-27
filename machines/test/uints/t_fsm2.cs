@@ -23,8 +23,8 @@ namespace Z0.Machines.Test
             var machineCount = Pow2.T04;
             var spec1 = PrimalFsm.Specify<ushort>("Fsm2",750,750,100,120,Pow2.T15);
             var stats = PrimalFsm.Run(spec1, machineCount);
-            var counts = stats.Select(x => x.ReceiptCount).ToArray();
-            var count = math.sum(counts);
+            var counts = stats.Select(x => x.ReceiptCount).ToArray().AsSpan().ReadOnly();
+            var count = mathspan.sum(counts);
             inform($"A total of {count} events were processed");
 
 

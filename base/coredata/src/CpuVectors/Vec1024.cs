@@ -16,7 +16,7 @@ namespace Z0
 
     [StructLayout(LayoutKind.Sequential, Size = ByteCount)]
     public struct Vec1024<T>
-        where T : struct
+        where T : unmanaged
     {            
         public Vec256<T> v00;
 
@@ -48,7 +48,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public Vec1024<U> As<U>() 
-            where U : struct
+            where U : unmanaged
                 => Unsafe.As<Vec1024<T>, Vec1024<U>>(ref Unsafe.AsRef(in this));         
 
         public override string ToString()

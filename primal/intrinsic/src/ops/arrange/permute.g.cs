@@ -17,7 +17,7 @@ namespace Z0
 
        [MethodImpl(Inline)]
         public static Vec256<T> permute2x128<T>(in Vec256<T> lhs, Vec256<T> rhs, byte control)
-            where T : struct
+            where T : unmanaged
         {
             if(typematch<T,sbyte>())
                 return generic<T>(dinx.perm2x128(in int8(in lhs), in int8(in rhs), control));
@@ -35,9 +35,9 @@ namespace Z0
                 return generic<T>(dinx.perm2x128(in int64(in lhs), in int64(in rhs), control));
             else if(typematch<T,ulong>())
                 return generic<T>(dinx.perm2x128(in uint64(in lhs), in uint64(in rhs), control));
-            else if(typematch<T,float>())
+            else if(typeof(T) == typeof(float))
                 return generic<T>(dinx.perm2x128(in float32(in lhs), in float32(in rhs), control));
-            else if(typematch<T,double>())
+            else if(typeof(T) == typeof(double))
                 return generic<T>(dinx.perm2x128(in float64(in lhs), in float64(in rhs), control));
             else 
                 throw unsupported<T>();

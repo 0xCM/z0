@@ -46,7 +46,7 @@ namespace Z0
     }
 
     public interface IDivisiveOps<T> : IModularOps<T>
-        where T : struct
+        where T : unmanaged
     {
         T Div(T lhs, T rhs);        
 

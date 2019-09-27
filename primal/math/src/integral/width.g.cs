@@ -17,8 +17,8 @@ namespace Z0
     {
         [MethodImpl(Inline)]
         public static ref T width<S,T>(S lhs, S rhs, out T dst)
-            where S : struct
-            where T : struct
+            where S : unmanaged
+            where T : unmanaged
         {
             if(typeof(S) == typeof(sbyte))
                 dst = convert<T>(math.width(int8(rhs), int8(lhs)));

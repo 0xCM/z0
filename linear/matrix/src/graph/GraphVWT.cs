@@ -18,9 +18,9 @@ namespace Z0
     /// <typeparam name="W">The weight type</typeparam>
     /// <typeparam name="T">The vertext payload type</typeparam>
     public class Graph<V,W,T>
-        where V : struct
-        where W : struct
-        where T : struct
+        where V : unmanaged
+        where W : unmanaged
+        where T : unmanaged
     {
         public static Graph<V,W,T> Define(IEnumerable<Vertex<V,T>> vertices, IEnumerable<Edge<V,W>> edges)
             => new Graph<V,W,T>(vertices.OrderBy(x => x.Index,PrimalInfo.comparer<V>()).ToArray(), edges.ToArray());

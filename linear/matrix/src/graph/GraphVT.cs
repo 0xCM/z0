@@ -17,8 +17,8 @@ namespace Z0
     /// <typeparam name="V">The vertex index type</typeparam>
     /// <typeparam name="T">The node payload type</typeparam>
     public class Graph<V,T>
-        where V : struct
-        where T : struct
+        where V : unmanaged
+        where T : unmanaged
     {
 
         /// <summary>

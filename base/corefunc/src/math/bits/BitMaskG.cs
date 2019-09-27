@@ -22,7 +22,7 @@ namespace Z0
         /// <param name="src">The value to interrogate</param>
         /// <param name="pos">The position to check</param>
         public static bool test<T>(in T src, byte pos)
-            where T : struct
+            where T : unmanaged
         {
             if(typematch<T,sbyte>())
                  return BitMask.test(in int8(in src), pos);
@@ -40,9 +40,9 @@ namespace Z0
                  return BitMask.test(in int64(in src), pos);
             else if(typematch<T,ulong>())
                  return BitMask.test(in uint64(in src), pos);
-            else if(typematch<T,float>())
+            else if(typeof(T) == typeof(float))
                  return BitMask.test(in float32(in src), pos);
-            else if(typematch<T,double>())
+            else if(typeof(T) == typeof(double))
                  return BitMask.test(in float64(in src), pos);
             else
                 throw unsupported<T>();
@@ -56,7 +56,7 @@ namespace Z0
         /// <typeparam name="T">The source element type</typeparam>
         [MethodImpl(Inline)]
         public static ref T enable<T>(ref T src, in int pos)
-            where T : struct
+            where T : unmanaged
         {
             if(typematch<T,sbyte>())
                 BitMask.enable(ref int8(ref src), in pos);
@@ -88,7 +88,7 @@ namespace Z0
         /// <typeparam name="T">The source element type</typeparam>
         [MethodImpl(Inline)]
         public static ref T disable<T>(ref T src, byte pos)
-            where T : struct
+            where T : unmanaged
         {
             if(typematch<T,sbyte>())
                 BitMask.disable(ref int8(ref src), pos);
@@ -106,9 +106,9 @@ namespace Z0
                 BitMask.disable(ref int64(ref src), pos);
             else if(typematch<T,ulong>())
                 BitMask.disable(ref uint64(ref src), pos);
-            else if(typematch<T,float>())
+            else if(typeof(T) == typeof(float))
                 BitMask.disable(ref float32(ref src), pos);
-            else if(typematch<T,double>())
+            else if(typeof(T) == typeof(double))
                 BitMask.disable(ref float64(ref src), pos);
             else
                 throw unsupported<T>();
@@ -125,7 +125,7 @@ namespace Z0
         /// <typeparam name="T">The source element type</typeparam>
         [MethodImpl(Inline)]
         public static ref T set<T>(ref T src, byte pos, in Bit value)            
-            where T : struct
+            where T : unmanaged
         {
             if(value)
                 enable(ref src, pos);
@@ -143,7 +143,7 @@ namespace Z0
         /// <param name="dstpos">The target bit position</param>
         [MethodImpl(Inline)]
         public static ref T setif<T>(in T src, int srcpos, ref T dst, int dstpos)
-            where T : struct
+            where T : unmanaged
         {
             if(typematch<T,sbyte>())
                 BitMask.setif(in int8(in src), srcpos, ref int8(ref dst), dstpos);
@@ -161,9 +161,9 @@ namespace Z0
                 BitMask.setif(in int64(in src), srcpos, ref int64(ref dst), dstpos);
             else if(typematch<T,ulong>())
                 BitMask.setif(in uint64(in src), srcpos, ref uint64(ref dst), dstpos);
-            else if(typematch<T,float>())
+            else if(typeof(T) == typeof(float))
                 BitMask.setif(in float32(in src), srcpos, ref float32(ref dst), dstpos);
-            else if(typematch<T,double>())
+            else if(typeof(T) == typeof(double))
                 BitMask.setif(in float64(in src), srcpos, ref float64(ref dst), dstpos);
             else
                 throw unsupported<T>();
@@ -179,7 +179,7 @@ namespace Z0
         /// <typeparam name="T">The source type</typeparam>
         [MethodImpl(Inline)]
         public static ref T toggle<T>(ref T src, in int pos)
-            where T : struct
+            where T : unmanaged
         {
             if(typematch<T,sbyte>())
                 BitMask.toggle(ref int8(ref src), pos);
@@ -197,9 +197,9 @@ namespace Z0
                 BitMask.toggle(ref int64(ref src), pos);
             else if(typematch<T,ulong>())
                 BitMask.toggle(ref uint64(ref src), pos);
-            else if(typematch<T,float>())
+            else if(typeof(T) == typeof(float))
                 BitMask.toggle(ref float32(ref src), pos);
-            else if(typematch<T,double>())
+            else if(typeof(T) == typeof(double))
                 BitMask.toggle(ref float64(ref src), pos);
             else
                 throw unsupported<T>();
@@ -215,7 +215,7 @@ namespace Z0
         /// <typeparam name="T">The source type</typeparam>
         [MethodImpl(Inline)]
         public static ref T toggle<T>(ref T src, byte pos)
-            where T : struct
+            where T : unmanaged
         {
             if(typematch<T,sbyte>())
                 BitMask.toggle(ref int8(ref src), pos);
@@ -233,9 +233,9 @@ namespace Z0
                 BitMask.toggle(ref int64(ref src), pos);
             else if(typematch<T,ulong>())
                 BitMask.toggle(ref uint64(ref src), pos);
-            else if(typematch<T,float>())
+            else if(typeof(T) == typeof(float))
                 BitMask.toggle(ref float32(ref src), pos);
-            else if(typematch<T,double>())
+            else if(typeof(T) == typeof(double))
                 BitMask.toggle(ref float64(ref src), pos);
             else
                 throw unsupported<T>();
@@ -252,7 +252,7 @@ namespace Z0
         /// <typeparam name="T">The source type</typeparam>
         [MethodImpl(Inline)]
         public static T toggle<T>(T src, int pos)
-            where T : struct
+            where T : unmanaged
         {
             if(typematch<T,sbyte>())
                 return generic<T>(BitMask.toggle(int8(src), pos));
@@ -270,9 +270,9 @@ namespace Z0
                 return generic<T>(BitMask.toggle(int64(src), pos));
             else if(typematch<T,ulong>())
                 return generic<T>(BitMask.toggle(uint64(src), pos));
-            else if(typematch<T,float>())
+            else if(typeof(T) == typeof(float))
                 return generic<T>(BitMask.toggle(float32(src), pos));
-            else if(typematch<T,double>())
+            else if(typeof(T) == typeof(double))
                 return generic<T>(BitMask.toggle(float64(src), pos));
             else
                 throw unsupported<T>();

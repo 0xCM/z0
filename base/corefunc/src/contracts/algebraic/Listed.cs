@@ -19,7 +19,7 @@ namespace Z0
 
     public interface IListed<S,T> : IListed<S>
         where S : IListed<S,T>, new()
-        where T : struct, IMonoidA<T>
+        where T : unmanaged, IMonoidA<T>
     {
         /// <summary>
         /// Returns the first constituent if it exits; otherwise, the zero element of T

@@ -19,7 +19,7 @@ namespace Z0.Test
             var src = Random.Array<sbyte>(SampleSize);            
             var offset = Random.Array<int>(SampleSize, closed(0, (int)SizeOf<sbyte>.BitSize));            
 
-            iter(SampleSize, i => Claim.eq((sbyte)(src[i] << offset[i]), gbits.sal(src[i], offset[i])));    
+            iter(SampleSize, i => Claim.eq((sbyte)(src[i] << offset[i]), gmath.sal(src[i], offset[i])));    
         }
 
         public void sar_8i()
@@ -33,7 +33,7 @@ namespace Z0.Test
         {
             var src = Random.Array<int>(SampleSize);            
             var offset = Random.Array<int>(SampleSize, closed(0, (int)SizeOf<int>.BitSize));            
-            iter(SampleSize, i => Claim.eq(src[i] << offset[i], gbits.sal(src[i], offset[i])));    
+            iter(SampleSize, i => Claim.eq(src[i] << offset[i], gmath.sal(src[i], offset[i])));    
         }
 
         public void sar_32i()
@@ -48,7 +48,7 @@ namespace Z0.Test
             var src = Random.Array<long>(SampleSize);            
             var offset = Random.Array<int>(SampleSize, closed(0, (int)SizeOf<long>.BitSize));            
 
-            iter(SampleSize, i => Claim.eq(src[i] << offset[i], gbits.sal(src[i], offset[i])));    
+            iter(SampleSize, i => Claim.eq(src[i] << offset[i], gmath.sal(src[i], offset[i])));    
         }
 
         public void sar_64i()

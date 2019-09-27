@@ -24,7 +24,7 @@ namespace Z0
         /// <typeparam name="T">The primal element type</typeparam>
         [MethodImpl(Inline)]
         public static Span<T> ShiftL<T>(ReadOnlySpan<T> src, ReadOnlySpan<int> offsets, Span<T> dst)
-            where T : struct
+            where T : unmanaged
         {
             if(typematch<T,sbyte>())
                 int8(src).ShiftL(offsets, int8(dst));
@@ -58,7 +58,7 @@ namespace Z0
         /// <typeparam name="T">The primal element type</typeparam>
         [MethodImpl(Inline)]
         public static Span<T> ShiftL<T>(Span<T> src, ReadOnlySpan<int> offsets, Span<T> dst)
-            where T : struct
+            where T : unmanaged
             => ShiftL(src.ReadOnly(),offsets, dst);
 
         /// <summary>
@@ -71,7 +71,7 @@ namespace Z0
         /// <typeparam name="T">The primal element type</typeparam>
         [MethodImpl(Inline)]
         public static Span<T> ShiftL<T>(ReadOnlySpan<T> src, int offset, Span<T> dst)
-            where T : struct
+            where T : unmanaged
         {
             if(typematch<T,sbyte>())
                 int8(src).ShiftL(offset, int8(dst));
@@ -104,7 +104,7 @@ namespace Z0
         /// <typeparam name="T">The primal element type</typeparam>
         [MethodImpl(Inline)]
         public static Span<T> ShiftL<T>(Span<T> src, int offset, Span<T> dst)
-            where T : struct
+            where T : unmanaged
                 => ShiftL(src.ReadOnly(), offset, dst);
 
         /// <summary>
@@ -117,7 +117,7 @@ namespace Z0
         /// <typeparam name="T">The primal element type</typeparam>
         [MethodImpl(Inline)]
         public static Span<T> ShiftL<T>(Span<T> src, int offset)
-            where T : struct
+            where T : unmanaged
                 => ShiftL(src, offset, span<T>(src.Length));
 
         /// <summary>
@@ -130,7 +130,7 @@ namespace Z0
         /// <typeparam name="T">The primal element type</typeparam>
         [MethodImpl(Inline)]
         public static Span<T> ShiftL<T>(ReadOnlySpan<T> src, int offset)
-            where T : struct
+            where T : unmanaged
                 => ShiftL(src, offset, span<T>(src.Length));
 
         static Span<sbyte> ShiftL(this ReadOnlySpan<sbyte> lhs, ReadOnlySpan<int> rhs, Span<sbyte> dst)

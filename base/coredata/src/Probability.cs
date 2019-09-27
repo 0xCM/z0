@@ -14,7 +14,7 @@ namespace Z0
     /// 2. Can be bijectively transformed to the unit interval
     /// </summary>
     public readonly struct Probability<T>
-        where T : struct
+        where T : unmanaged
     {
         public Probability(T Value)
             => this.Value = Value;

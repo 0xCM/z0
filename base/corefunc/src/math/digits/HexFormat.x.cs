@@ -32,7 +32,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static string FormatHexScalar<T>(T src, bool zpad = true, bool specifier = true, bool uppercase = false, bool prespec = true)
-            where T : struct
+            where T : unmanaged
         {
             if(typematch<T,sbyte>())
                 return int8(ref src).FormatHex(zpad,specifier,uppercase,prespec);
@@ -50,9 +50,9 @@ namespace Z0
                 return int64(ref src).FormatHex(zpad,specifier,uppercase,prespec);
             else if(typematch<T,ulong>())
                 return uint64(ref src).FormatHex(zpad,specifier,uppercase,prespec);
-            else if(typematch<T,float>())
+            else if(typeof(T) == typeof(float))
                 return float32(ref src).FormatHex(zpad,specifier,uppercase,prespec);
-            else if(typematch<T,double>())
+            else if(typeof(T) == typeof(double))
                 return float64(ref src).FormatHex(zpad,specifier,uppercase,prespec);
             else
                 throw unsupported<T>();

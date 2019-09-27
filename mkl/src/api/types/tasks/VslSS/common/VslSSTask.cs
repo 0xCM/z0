@@ -13,7 +13,7 @@ namespace Z0.Mkl
 
 
     public interface IVslSSTask<T> : IMklTask<T>
-        where T : struct
+        where T : unmanaged
     {
         /// <summary>
         /// Specifies the samples/observations over which computation will occur
@@ -31,7 +31,7 @@ namespace Z0.Mkl
     /// Represents a summary statistics task
     /// </summary>
     abstract class VslSSTask<T> : MklTask<T>, IVslSSTask<T>
-        where T : struct
+        where T : unmanaged
     {
         public VslSSTask(int Dim,  T[] Samples, bool autofill = false)
         {

@@ -12,11 +12,11 @@ namespace Z0
     public static class RegisterBank
     {
         public static RegisterBank<T> Define<T>(int count)
-            where T : struct
+            where T : unmanaged
                 => new RegisterBank<T>(count);
 
         public static RegisterBank<T> Define<T>(params T[] registers)
-            where T : struct
+            where T : unmanaged
                 => new RegisterBank<T>(registers);
 
     }
@@ -25,7 +25,7 @@ namespace Z0
     /// Defines a sequence of registers
     /// </summary>
     public struct RegisterBank<T>
-        where T : struct
+        where T : unmanaged
     {
         public RegisterBank(int count)
         {

@@ -17,7 +17,7 @@ namespace Z0
     {
         [MethodImpl(Inline)]
         public static T parse<T>(string src)
-            where T : struct
+            where T : unmanaged
         {
             if(typematch<T,sbyte>())
                 return generic<T>(math.parse(src, out sbyte x));
@@ -35,9 +35,9 @@ namespace Z0
                 return generic<T>(math.parse(src, out long x));
             else if(typematch<T,ulong>())
                 return generic<T>(math.parse(src, out ulong x));
-            else if(typematch<T,float>())
+            else if(typeof(T) == typeof(float))
                 return generic<T>(math.parse(src, out float x));
-            else if(typematch<T,double>())
+            else if(typeof(T) == typeof(double))
                 return generic<T>(math.parse(src, out double x));
             else            
                 throw unsupported<T>();
@@ -45,7 +45,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static ref T parse<T>(string src, out T dst)
-            where T : struct
+            where T : unmanaged
         {
             if(typematch<T,sbyte>())
                 dst = generic<T>(math.parse(src, out sbyte x));
@@ -63,9 +63,9 @@ namespace Z0
                 dst = generic<T>(math.parse(src, out long x));
             else if(typematch<T,ulong>())
                 dst = generic<T>(math.parse(src, out ulong x));
-            else if(typematch<T,float>())
+            else if(typeof(T) == typeof(float))
                 dst = generic<T>(math.parse(src, out float x));
-            else if(typematch<T,double>())
+            else if(typeof(T) == typeof(double))
                 dst = generic<T>(math.parse(src, out double x));
             else            
                 throw unsupported<T>();

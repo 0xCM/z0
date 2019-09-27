@@ -29,7 +29,7 @@ namespace Z0.Mkl
 
         protected override int FillBuffer(Span<T> buffer)
         {            
-            if(typematch<T,float>())
+            if(typeof(T) == typeof(float))
                 sample.laplace(Source, float32(DistSpec.Location), float32(DistSpec.Scale),  float32(buffer));
             else if (typeof(T) == typeof(double))
                 sample.laplace(Source, float64(DistSpec.Location), float64(DistSpec.Scale),  float64(buffer));

@@ -95,7 +95,7 @@ namespace Z0
         /// <param name="src">The matrix bits</param>
         [MethodImpl(Inline)]
         public static BitMatrix16 From<T>(Vector256<T> src)
-            where T : struct
+            where T : unmanaged
                 => BitMatrix16.From(ByteSpan.FromValue(src));
 
         /// <summary>
@@ -429,7 +429,7 @@ namespace Z0
         static ref BitMatrix16 Flip(ref BitMatrix16 src)
         {
             src.LoadCpuVec(out Vector256<ushort> vSrc);
-            Bits.flip(vSrc).StoreTo(ref src.data[0]);
+            Bits.vflip(vSrc).StoreTo(ref src.data[0]);
             return ref src;
         }
 

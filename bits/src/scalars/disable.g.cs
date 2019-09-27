@@ -23,7 +23,7 @@ namespace Z0
         /// <typeparam name="T">The source element type</typeparam>
         [MethodImpl(Inline)]
         public static ref T disable<T>(ref T src, byte pos)
-            where T : struct
+            where T : unmanaged
                 => ref BitMaskG.disable(ref src, (byte)pos);
     }
 

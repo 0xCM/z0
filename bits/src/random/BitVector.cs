@@ -18,7 +18,7 @@ namespace Z0
     {
         [MethodImpl(Inline)]
         static IRandomStream<T> stream<T>(IEnumerable<T> src, RngKind rng)
-            where T : struct
+            where T : unmanaged
                 =>  new RandomStream<T>(rng,src);
 
         /// <summary>

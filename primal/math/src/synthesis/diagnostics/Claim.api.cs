@@ -173,12 +173,12 @@ namespace Z0
                 => gmath.eq(lhs,rhs) ? true : throw Errors.Equal(lhs,rhs);
 
         public static void eq<T>(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
-            where T : struct 
+            where T : unmanaged 
                 => lhs.ClaimEqual(rhs, caller,file,line);
 
         [MethodImpl(Inline)]
         public static void eq<T>(Span<T> lhs, Span<T> rhs, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
-            where T : struct 
+            where T : unmanaged 
                 => lhs.ClaimEqual(rhs, caller,file,line);
  
         [MethodImpl(Inline)]
@@ -212,12 +212,12 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static bool between<T>(T x, T lhs, T rhs, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
-            where T : struct
+            where T : unmanaged
                 => gmath.between(x,lhs,rhs) ? true : throw failed(ClaimOpKind.Between, NotBetween(x, lhs, rhs, caller, file, line));
 
         [MethodImpl(Inline)]
         public static bool between<T>(BitSize x, T lhs, T rhs, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
-            where T : struct
+            where T : unmanaged
                 => gmath.between(x.Bits.Convert<T>(),lhs,rhs) ? true : throw failed(ClaimOpKind.Between, NotBetween(x.Bits.Convert<T>(),lhs, rhs, caller, file, line));
 
         [MethodImpl(Inline)]
@@ -227,7 +227,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static bool gt<T>(T lhs, T rhs, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
-            where T : struct
+            where T : unmanaged
                 => gmath.gt(lhs,rhs) ? true : throw failed(ClaimOpKind.Gt, NotGreaterThan(lhs, rhs, caller, file, line));
 
         [MethodImpl(Inline)]
@@ -237,12 +237,12 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static bool lt<T>(T lhs, T rhs, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
-            where T : struct
+            where T : unmanaged
                 => gmath.lt(lhs,rhs) ? true : throw failed(ClaimOpKind.Lt, NotLessThan(lhs, rhs, caller, file, line));
 
         [MethodImpl(Inline)]
         public static bool lteq<T>(T lhs, T rhs, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
-            where T : struct
+            where T : unmanaged
                 => gmath.lteq(lhs,rhs) ? true : throw failed(ClaimOpKind.GtEq, NotGreaterThanOrEqual(lhs, rhs, caller, file, line));
 
         /// <summary>
@@ -255,7 +255,7 @@ namespace Z0
         /// <typeparam name="T">The source value type</typeparam>
         [MethodImpl(Inline)]
         public static bool nonzero<T>(T x, [Member] string caller = null, [File] string file = null, [Line] int? line = null)        
-            where T : struct 
+            where T : unmanaged 
                 => gmath.nonzero(x) ? true : throw Errors.NotNonzero(caller,file,line);
 
         /// <summary>
@@ -268,7 +268,7 @@ namespace Z0
         /// <typeparam name="T">The source value type</typeparam>
         [MethodImpl(Inline)]
         public static bool zero<T>(T x, [Member] string caller = null, [File] string file = null, [Line] int? line = null)        
-            where T : struct 
+            where T : unmanaged 
                 => !gmath.nonzero(x) ? true : throw Errors.NotNonzero(caller,file,line);
 
         /// <summary>

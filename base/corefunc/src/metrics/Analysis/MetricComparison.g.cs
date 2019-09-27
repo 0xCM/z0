@@ -14,7 +14,7 @@ namespace Z0
 
 
     public class MetricComparison<T> : IMetricComparison
-        where T : struct 
+        where T : unmanaged 
     {
         public MetricComparison(MetricSummary<T> LeftBench, MetricSummary<T> RightBench)
         {

@@ -14,7 +14,7 @@ namespace Z0
     partial class BitRef
     {
         public static Span<T> ShiftR<T>(ReadOnlySpan<T> src, ReadOnlySpan<int> offsets, Span<T> dst)
-            where T : struct
+            where T : unmanaged
         {
             if(typematch<T,sbyte>())
                 int8(src).ShiftR(offsets, int8(dst));
@@ -39,7 +39,7 @@ namespace Z0
         }
 
         public static Span<T> ShiftR<T>(ReadOnlySpan<T> src, int offset, Span<T> dst)
-            where T : struct
+            where T : unmanaged
         {
             if(typematch<T,sbyte>())
                 int8(src).ShiftR(offset, int8(dst));
@@ -63,12 +63,12 @@ namespace Z0
         }
 
         public static Span<T> shiftr<T>(ReadOnlySpan<T> src, int offset)
-            where T : struct
+            where T : unmanaged
             => ShiftR(src, offset, span<T>(src.Length));
  
         [MethodImpl(Inline)]
         public static Span<T> ShiftR<T>(Span<T> src, int offset)
-            where T : struct
+            where T : unmanaged
         {
             if(typematch<T,sbyte>())
                 int8(src).ShiftR(offset);
@@ -93,7 +93,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static ref Span<T> shiftr<T>(ref Span<T> src, Span<int> offsets)
-            where T : struct
+            where T : unmanaged
         {
             if(typematch<T,sbyte>())
                 int8(src).ShiftR(offsets);

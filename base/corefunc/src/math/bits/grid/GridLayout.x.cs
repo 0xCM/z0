@@ -20,11 +20,11 @@ namespace Z0
         /// <typeparam name="T">The storage type</typeparam>
         [MethodImpl(Inline)]
         public static GridLayout<T> CalcLayout<T>(this GridSpec<T> spec)
-            where T: struct
+            where T : unmanaged
                 => new GridLayout<T>(spec, spec.GridCells());
 
         static IEnumerable<CellMap<T>> GridCells<T>(this GridSpec<T> spec)
-            where T: struct
+            where T : unmanaged
         {                                                        
             var bit = 0;
             var seg = 0;

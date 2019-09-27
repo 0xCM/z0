@@ -25,7 +25,7 @@ namespace Z0
         /// <typeparam name="T">The primal random value type</typeparam>
         [MethodImpl(Inline)]
         public static Span<T> Span<T>(this IPolyrand random, int length, Interval<T>? domain = null, Func<T,bool> filter = null)
-            where T : struct
+            where T : unmanaged
         {
             Span<T> dst = new T[length];
             random.StreamTo(domain.Configure(), length,ref head(dst), filter);
@@ -41,7 +41,7 @@ namespace Z0
         /// <typeparam name="T">The primal random value type</typeparam>
         [MethodImpl(Inline)]
         public static Span<T> Span<T>(this IPolyrand random, int length, Interval<T> domain)
-            where T : struct
+            where T : unmanaged
                 => random.Span<T>(length,domain,null);
 
         /// <summary>
@@ -54,7 +54,7 @@ namespace Z0
         /// <typeparam name="T">The primal random value type</typeparam>
         [MethodImpl(Inline)]
         public static ReadOnlySpan<T> ReadOnlySpan<T>(this IPolyrand random, int length, Interval<T>? domain = null, Func<T,bool> filter = null)
-            where T : struct
+            where T : unmanaged
                 => random.Span<T>(length, domain, filter);
 
         /// <summary>
@@ -67,7 +67,7 @@ namespace Z0
         /// <typeparam name="T">The primal random value type</typeparam>
         [MethodImpl(Inline)]
         public static Span<T> NonZeroSpan<T>(this IPolyrand random, int samples, Interval<T>? domain = null)
-                where T : struct
+                where T : unmanaged
                     => random.Span<T>(samples, domain, gmath.nonzero);        
 
         /// <summary>
@@ -81,7 +81,7 @@ namespace Z0
         /// <typeparam name="T">The primal random value type</typeparam>
         [MethodImpl(Inline)]
         public static Span<N,T> Span<N,T>(this IPolyrand random, N length = default, Interval<T>? domain = null, Func<T,bool> filter = null)
-            where T : struct  
+            where T : unmanaged  
             where N : ITypeNat, new()
                 => NatSpan.Load<N,T>(random.Span<T>((int)length.value, domain, filter));                                    
 
@@ -96,7 +96,7 @@ namespace Z0
         /// <typeparam name="T">The primal random value type</typeparam>
         [MethodImpl(Inline)]
         public static Span<M,N,T> Span<M,N,T>(this IPolyrand random, M rows = default, N cols = default)
-            where T : struct  
+            where T : unmanaged  
             where M : ITypeNat, new()
             where N : ITypeNat, new()
                 => NatSpan.Load<M,N,T>(random.Span<T>(nfunc.muli(rows,cols)), rows, cols);
@@ -114,7 +114,7 @@ namespace Z0
         /// <typeparam name="T">The primal random value type</typeparam>
         [MethodImpl(Inline)]
         public static Span<M,N,T> Span<M,N,T>(this IPolyrand random, M rows, N cols, Interval<T> domain)
-            where T : struct  
+            where T : unmanaged  
             where M : ITypeNat, new()
             where N : ITypeNat, new()
                 => NatSpan.Load<M,N,T>(random.Span<T>(nfunc.muli(rows,cols),domain), rows, cols);
@@ -129,7 +129,7 @@ namespace Z0
         /// <typeparam name="T">The primal random value type</typeparam>
         [MethodImpl(Inline)]
         public static Span128<T> Span128<T>(this IPolyrand random, int blocks = 1, Interval<T>? domain = null, Func<T,bool> filter = null)
-            where T : struct
+            where T : unmanaged
                 => random.Stream(domain,filter).TakeSpan(Z0.Span128.BlockLength<T>(blocks)).ToSpan128(); 
 
         /// <summary>
@@ -142,7 +142,7 @@ namespace Z0
         /// <typeparam name="T">The primal random value type</typeparam>
         [MethodImpl(Inline)]
         public static ReadOnlySpan128<T> ReadOnlySpan128<T>(this IPolyrand random, int blocks = 1, Interval<T>? domain = null, Func<T,bool> filter = null)
-            where T : struct
+            where T : unmanaged
                 => random.Span128<T>(blocks, domain, filter);
 
         /// <summary>
@@ -154,7 +154,7 @@ namespace Z0
         /// <typeparam name="T">The primal random value type</typeparam>
         [MethodImpl(Inline)]
         public static Span128<T> NonZeroSpan128<T>(this IPolyrand random, int blocks = 1, Interval<T>? domain = null)        
-            where T : struct  
+            where T : unmanaged  
                 => random.Span128(blocks, domain, gmath.nonzero);
 
         /// <summary>
@@ -167,7 +167,7 @@ namespace Z0
         /// <typeparam name="T">The primal random value type</typeparam>
         [MethodImpl(Inline)]
         public static Span256<T> Span256<T>(this IPolyrand random, int blocks = 1, Interval<T>? domain = null, Func<T,bool> filter = null)
-            where T : struct       
+            where T : unmanaged       
             => random.Stream(domain,filter).TakeSpan(Z0.Span256.BlockLength<T>(blocks)).ToSpan256();       
 
         /// <summary>
@@ -180,7 +180,7 @@ namespace Z0
         /// <typeparam name="T">The primal random value type</typeparam>
         [MethodImpl(Inline)]
         public static unsafe ReadOnlySpan256<T> ReadOnlySpan256<T>(this IPolyrand random, int blocks = 1, Interval<T>? domain = null, Func<T,bool> filter = null)
-            where T : struct
+            where T : unmanaged
                 => random.Span256<T>(blocks, domain, filter);
 
         /// <summary>
@@ -192,7 +192,7 @@ namespace Z0
         /// <typeparam name="T">The primal random value type</typeparam>
         [MethodImpl(Inline)]
         public static Span256<T> NonZeroSpan256<T>(this IPolyrand random, int blocks = 1, Interval<T>? domain = null)        
-            where T : struct  
+            where T : unmanaged  
                 => random.Span256(blocks, domain, gmath.nonzero); 
 
 

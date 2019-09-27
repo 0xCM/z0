@@ -57,7 +57,7 @@ namespace Z0
 
 
     public interface IRuleEvaluator<T,R,X>
-        where T : struct
+        where T : unmanaged
         where R : struct, IRule
         where X : struct, IRuleExpr<T>
     {

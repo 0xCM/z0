@@ -18,7 +18,7 @@ namespace Z0
     /// enabling representations such as (-∞,3] and (-3, ∞).
     /// </remarks>
     public interface IInterval<T>
-        where T : struct
+        where T : unmanaged
     {
     
         /// <summary>
@@ -68,7 +68,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The value type</typeparam>
     public interface IDiscreteInterval<T> : IInterval<T> 
-        where T : struct
+        where T : unmanaged
     {
 
     }

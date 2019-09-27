@@ -35,9 +35,9 @@ namespace Z0
                 return generic<T>(Bits.or(in int64(in lhs), in int64(in rhs)));
             else if(typematch<T,ulong>())
                 return generic<T>(Bits.or(in uint64(in lhs), in uint64(in rhs)));
-            else if(typematch<T,float>())
+            else if(typeof(T) == typeof(float))
                 return generic<T>(Bits.or(in float32(in lhs), in float32(in rhs)));
-            else if(typematch<T,double>())
+            else if(typeof(T) == typeof(double))
                 return generic<T>(Bits.or(in float64(in lhs), in float64(in rhs)));
             else 
                 throw unsupported<T>();
@@ -63,9 +63,9 @@ namespace Z0
                 Bits.or(int64(lhs), int64(rhs), ref int64(ref dst));
             else if(typematch<T,ulong>())
                 Bits.or(uint64(lhs), uint64(rhs), ref uint64(ref dst));
-            else if(typematch<T,float>())
+            else if(typeof(T) == typeof(float))
                 Bits.or(float32(lhs), float32(rhs), ref float32(ref dst));
-            else if(typematch<T,double>())
+            else if(typeof(T) == typeof(double))
                 Bits.or(float64(lhs), float64(rhs), ref float64(ref dst));                
             else    
                 throw unsupported<T>();
@@ -91,9 +91,9 @@ namespace Z0
                 return generic<T>(Bits.or(in int64(in lhs), in int64(in rhs)));
             else if(typematch<T,ulong>())
                 return generic<T>(Bits.or(in uint64(in lhs), in uint64(in rhs)));
-            else if(typematch<T,float>())
+            else if(typeof(T) == typeof(float))
                 return generic<T>(Bits.or(in float32(in lhs), in float32(in rhs)));
-            else if(typematch<T,double>())
+            else if(typeof(T) == typeof(double))
                 return generic<T>(Bits.or(in float64(in lhs), in float64(in rhs)));
             else 
                 throw unsupported<T>();
@@ -119,9 +119,9 @@ namespace Z0
                 Bits.or(int64(lhs), int64(rhs), ref int64(ref dst));
             else if(typematch<T,ulong>())
                 Bits.or(uint64(lhs), uint64(rhs), ref uint64(ref dst));
-            else if(typematch<T,float>())
+            else if(typeof(T) == typeof(float))
                 Bits.or(float32(lhs), float32(rhs), ref float32(ref dst));
-            else if(typematch<T,double>())
+            else if(typeof(T) == typeof(double))
                 Bits.or(float64(lhs), float64(rhs), ref float64(ref dst));                
             else    
                 throw unsupported<T>();

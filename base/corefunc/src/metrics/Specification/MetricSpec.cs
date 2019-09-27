@@ -18,7 +18,7 @@ namespace Z0
 
         public static MetricSpec<T> Define<T>(OpKind OpKind, NumericSystem NumSystem, NumericKind NumKind, 
             OpVariance Variance, ByteSize OperandSize)
-                where T : struct
+                where T : unmanaged
                 => new MetricSpec<T>(OpKind, NumSystem, NumKind, Variance, OperandSize);
 
         public MetricSpec(OpKind OpKind, NumericSystem NumSystem, NumericKind NumKind, PrimalKind OperandType, 
@@ -47,7 +47,7 @@ namespace Z0
     }
 
     public class MetricSpec<T> : MetricSpec
-        where T : struct
+        where T : unmanaged
     {
         public MetricSpec(OpKind OpKind, NumericSystem NumSystem, NumericKind NumKind, OpVariance Variance, ByteSize OperandSize)
             : base(OpKind, NumSystem, NumKind, PrimalKinds.kind<T>(), Variance, OperandSize)

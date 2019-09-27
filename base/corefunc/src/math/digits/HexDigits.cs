@@ -38,7 +38,7 @@ namespace Z0
 
         [MethodImpl(Inline)]    
         public static T Require<T>(this T? x)
-            where T : struct
+            where T : unmanaged
                 => x.HasValue ? x.Value : throw new Exception($"Nullable value is null");
 
         /// <summary>

@@ -18,6 +18,12 @@ namespace Z0
 
     public class App
     {                
+        static readonly FolderPath DumpFolder
+            = FolderPath.Define(Settings.ProjectDir("reveal")) +  FolderName.Define(".dumps");
+        
+        static FilePath DefineAsmOutPath(string label)
+            => DumpFolder + (FileName.Define(label) + FileExtension.Define("asm"));
+
         static void Disassemble(bool asm, bool cil, params Type[] types)
         {
             foreach(var t in types)
@@ -25,15 +31,27 @@ namespace Z0
                 var name = $"{t.DisplayName()}";
                 if(asm)
                 {
-                    t.DistillAsm().Emit(name);
+                    var dstPath = AsmCodeEmitter.OutPath(DumpFolder, t.DisplayName());
+                    var emitter = AsmCodeEmitter.Create(dstPath);
+                    emitter.EmitAsm(t.DistillAsm());                    
                 }
 
                 if(cil)
-                    t.Deconstruct().EmitCil(name);
+                    Deconstructor.Deconstruct(t).EmitCil(t.DisplayName());
             }
 
         }
 
+        public static Option<MethodDisassembly> DeconstructGeneric<T>(Type host, string opname)
+        {
+            var method = 
+                (from m in host.Methods().Public().OpenGeneric()
+                    where opname == m.Name
+                let parms = m.GetParameters()
+                where ! parms.Any(p => p.IsRetval || p.IsIn || p.IsOut)
+                select m).FirstOrDefault();
+            return method == null ? default : Deconstructor.DeconstructGeneric<T>(method);            
+        }
         public static MethodDisassembly[] DeconstructGeneric(Type host, string[] opnames, Type[] typeargs, string name)
         {
             var open = from m in host.Methods().Public().OpenGeneric()
@@ -47,19 +65,17 @@ namespace Z0
                          let def = om.GetGenericMethodDefinition()
                          let gm = def.MakeGenericMethod(t)
                          select gm).ToArray();
-            var deconstructed = closed.Deconstruct();
+            var deconstructed = Deconstructor.Deconstruct(closed);
             if(deconstructed.Length != 0)
                 deconstructed.Emit(name);
             return deconstructed;
         }
 
-
-
         static void Disassemble<T>(IDeconstructable<T> src)
         {
-            var deconstructed = typeof(T).Deconstruct();
-            CodeEmitter.EmitAsm(deconstructed, src.AsmTargetPath);
-            CodeEmitter.EmitCil(deconstructed, src.CilTargetPath);            
+            var deconstructed = Deconstructor.Deconstruct(typeof(T));
+            deconstructed.EmitAsm(src.AsmTargetPath);
+            deconstructed.EmitCil(src.CilTargetPath);            
         }
 
         void Disassemble(bool asm, bool cil)
@@ -67,19 +83,21 @@ namespace Z0
             Disassemble(new PrimalScenarios());
             Disassemble(new ExperimentalScenarios());
             Disassemble(true, true, typeof(math));
+            Disassemble(true, true, typeof(soc));    
 
-        
+            // var dst = DefineAsmOutPath("gmath.add");
+            // DeconstructGeneric<int>(typeof(gmath), "add").OnSome(d => d.EmitAsm(dst));
+            
         }
 
-        public unsafe static void ListMethods(Type t)
+        public unsafe void ListMethods(Type t)
         {
             var methods = (from m in t.DeclaredMethods()
-                          let loc = (long)m.MethodHandle.GetFunctionPointer()
+                          let loc = (long)m.JitMethod()
                           select (m, loc)).OrderBy(x => x.loc).ToArray();
             if(methods.Length == 0)
                 return;
 
-            methods.Iterate(x => x.m.JitMethod());
             var first = methods[0].loc;
             var last = 0L;
             foreach(var m in methods)
@@ -97,6 +115,7 @@ namespace Z0
 
             try
             {
+                //ListMethods(typeof(PrimalScenarios));
                 Disassemble(true,true);
             }
             catch(Exception e)

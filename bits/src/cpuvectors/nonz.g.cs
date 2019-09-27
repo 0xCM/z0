@@ -25,7 +25,7 @@ namespace Z0
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
         public static bool nonz<T>(in Vec128<T> src)
-            where T : struct
+            where T : unmanaged
         {
             if(typematch<T,sbyte>())
                 return Bits.nonz(in int8(in src));
@@ -43,9 +43,9 @@ namespace Z0
                 return Bits.nonz(in int64(in src));
             else if(typematch<T,ulong>())
                 return Bits.nonz(in uint64(in src));
-            else if(typematch<T,float>())
+            else if(typeof(T) == typeof(float))
                 return Bits.nonz(in float32(in src));
-            else if(typematch<T,double>())
+            else if(typeof(T) == typeof(double))
                 return Bits.nonz(in float64(in src));
             else 
                 throw unsupported<T>();
@@ -59,7 +59,7 @@ namespace Z0
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
         public static bool nonz<T>(in Vec256<T> src)
-            where T : struct
+            where T : unmanaged
         {
             if(typematch<T,sbyte>())
                 return Bits.nonz(in int8(in src));
@@ -77,9 +77,9 @@ namespace Z0
                 return Bits.nonz(in int64(in src));
             else if(typematch<T,ulong>())
                 return Bits.nonz(in uint64(in src));
-            else if(typematch<T,float>())
+            else if(typeof(T) == typeof(float))
                 return Bits.nonz(in float32(in src));
-            else if(typematch<T,double>())
+            else if(typeof(T) == typeof(double))
                 return Bits.nonz(in float64(in src));
             else 
                 throw unsupported<T>();

@@ -16,7 +16,7 @@ namespace Z0
     /// Encapsulates a divisor along with its dividends
     /// </summary>
     public readonly struct DivisorList<T> 
-        where T : struct
+        where T : unmanaged
     {
         public DivisorList(T Dividend, IReadOnlyList<T> Divisors)
         {

@@ -12,7 +12,7 @@ namespace Z0
     using static zfunc;
 
     public class OpId<T> : IOpId<T>
-        where T : struct
+        where T : unmanaged
     {
         public static readonly OpId<T> Zero 
             = new OpId<T>(NumericSystem.Primal, OpKind.None, NumericKind.Native, Genericity.Direct, OpFusion.Atomic, string.Empty);

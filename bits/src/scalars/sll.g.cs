@@ -21,7 +21,7 @@ namespace Z0
         /// <param name="offset">The number of bits to shift</param>
         [MethodImpl(Inline)]
         public static ref T sll<T>(ref T src, int offset)
-            where T : struct
+            where T : unmanaged
         {
             if(typematch<T,sbyte>())
                 Bits.sll(ref int8(ref src), offset);
@@ -51,7 +51,7 @@ namespace Z0
         /// <param name="offset">The number of bits to shift</param>
         [MethodImpl(Inline)]
         public static T sll<T>(T src, int offset)
-            where T : struct
+            where T : unmanaged
                 => sll(ref src, offset);
     }
 }

@@ -23,7 +23,7 @@ namespace Z0
             ISemiringOps<T>, 
             IDivisiveOps<T>, 
             IPoweredOps<T,int> 
-        where T : struct
+        where T : unmanaged
 
     {                                
         PrimalInfo<T> Description {get;}

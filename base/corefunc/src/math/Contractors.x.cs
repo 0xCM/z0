@@ -62,7 +62,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static T Contract<T>(T src, T max)
-            where T : struct
+            where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
                 return generic<T>(uint8(src).Contract(uint8(max)));

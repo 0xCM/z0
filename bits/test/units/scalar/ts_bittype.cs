@@ -16,7 +16,7 @@ namespace Z0.Test
         public void bit_convert()
         {
             static T toInt<T>(Bit b)
-                where T : struct
+                where T : unmanaged
                     => convert<int,T>((int)b); 
 
             Claim.eq((byte)0, (byte)Off);

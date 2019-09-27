@@ -37,9 +37,9 @@ namespace Z0
         static AsmCode<T> SqrtCode<T>()
             where T : unmanaged
         {
-            if(typematch<T,float>())
+            if(typeof(T) == typeof(float))
                 return AsmCode.FromBytes<T>(SqrtF32Bytes);
-            else if(typematch<T,double>())
+            else if(typeof(T) == typeof(double))
                 return AsmCode.FromBytes<T>(SqrtF64Bytes);
             else 
                 throw unsupported<T>();

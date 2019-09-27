@@ -21,7 +21,7 @@ namespace Z0
         /// <typeparam name="T">The source type</typeparam>
         [MethodImpl(Inline)]
         public static T rotr<T>(T src, T offset)
-            where T : struct
+            where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
                 return generic<T>(Bits.rotr(uint8(src), uint8(offset)));
@@ -43,7 +43,7 @@ namespace Z0
         /// <typeparam name="T">The source type</typeparam>
         [MethodImpl(Inline)]
         public static ref T rotr<T>(ref T src, in T offset)
-            where T : struct
+            where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
                 Bits.rotr(ref uint8(ref src), in uint8(in offset));

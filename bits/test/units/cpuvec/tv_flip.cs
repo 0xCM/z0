@@ -64,7 +64,7 @@ namespace Z0.Test
                 var src = Random.CpuVec256<T>();
                 var srcData = src.ToSpan();
                 var expect  = Vec256.Load(ref mathspan.flip(srcData)[0]);
-                var actual = gbits.flip(in src);
+                var actual = gbits.flip(src);
                 Claim.yea(expect.Equals(actual));
             }
             TypeCaseEnd<T>();            

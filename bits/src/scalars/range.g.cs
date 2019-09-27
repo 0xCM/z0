@@ -40,9 +40,9 @@ namespace Z0
                 return generic<T>(Bits.range(int64(src),i0,i1));
             else if(typematch<T,ulong>())
                 return generic<T>(Bits.range(uint64(src),i0,i1));
-            else if(typematch<T,float>())
+            else if(typeof(T) == typeof(float))
                 return generic<T>(Bits.range(float32(src),i0,i1));
-            else if(typematch<T,double>())
+            else if(typeof(T) == typeof(double))
                 return generic<T>(Bits.range(float64(src),i0,i1));
             else            
                 throw unsupported<T>();
@@ -57,7 +57,7 @@ namespace Z0
         /// <typeparam name="T">The primal bit source type</typeparam>
         [MethodImpl(Inline)]
         public static void range<T>(in T src, BitPos i0, BitPos i1, Span<byte> dst, int offset)
-            where T : struct
+            where T : unmanaged
                 => bytes(gbits.range(src,i0,i1)).Slice(0, ByteCount(i0,i1)).CopyTo(dst,offset);                 
 
         [MethodImpl(Inline)]

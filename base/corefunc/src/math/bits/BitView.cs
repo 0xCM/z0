@@ -21,7 +21,7 @@ namespace Z0
         /// <param name="src">The source reference</param>
         /// <typeparam name="T">The generic type</typeparam>
         public static BitView<T> ViewBits<T>(ref T src)
-            where T: struct
+            where T : unmanaged
                 => new BitView<T>(ref src);
     }
 
@@ -29,7 +29,7 @@ namespace Z0
     /// Represents a value as an ordered sequence of bits/bytes
     /// </summary>
     public unsafe ref struct BitView<T>
-        where T : struct
+        where T : unmanaged
     {
         public readonly Span<byte> Bytes;
 

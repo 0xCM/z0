@@ -123,7 +123,7 @@ namespace Z0
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
         public static Span256<T> ToSpan256<T>(this T[] src)
-            where T : struct
+            where T : unmanaged
             => Z0.Span256.Load<T>(src);
 
         /// <summary>
@@ -133,7 +133,7 @@ namespace Z0
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
         public static Span128<T> ToSpan128<T>(this Span<T> src)
-             where T : struct
+             where T : unmanaged
                 => Z0.Span128.Load(src);
 
         /// <summary>
@@ -143,7 +143,7 @@ namespace Z0
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
         public static Span256<T> ToSpan256<T>(this Span<T> src)
-             where T : struct
+             where T : unmanaged
                 => Z0.Span256.Load(src);
 
         /// <summary>
@@ -154,8 +154,8 @@ namespace Z0
         /// <typeparam name="T">The target span element type</typeparam>
         [MethodImpl(Inline)]        
         public static ReadOnlySpan<T> As<S,T>(this ReadOnlySpan<S> src)
-            where S : struct
-            where T : struct
+            where S : unmanaged
+            where T : unmanaged
                 => MemoryMarshal.Cast<S,T>(src);                                    
 
         /// <summary>
@@ -166,8 +166,8 @@ namespace Z0
         /// <typeparam name="T">The target span element type</typeparam>
         [MethodImpl(Inline)]        
         public static Span<T> As<S,T>(this Span<S> src)
-            where S : struct
-            where T : struct
+            where S : unmanaged
+            where T : unmanaged
                 => MemoryMarshal.Cast<S,T>(src);                                    
         
         /// <summary>
@@ -177,7 +177,7 @@ namespace Z0
         /// <typeparam name="T">The source value type</typeparam>
         [MethodImpl(Inline)]
         public static Span<byte> AsBytes<T>(this Span<T> src)
-            where T : struct
+            where T : unmanaged
                 => MemoryMarshal.AsBytes(src);
 
         /// <summary>
@@ -187,7 +187,7 @@ namespace Z0
         /// <typeparam name="T">The source value type</typeparam>
         [MethodImpl(Inline)]
         public static Span<ushort> AsUInt16<T>(this Span<T> src)
-            where T : struct        
+            where T : unmanaged        
                 => MemoryMarshal.Cast<T,ushort>(src);
 
         /// <summary>
@@ -197,7 +197,7 @@ namespace Z0
         /// <typeparam name="T">The source value type</typeparam>
         [MethodImpl(Inline)]
         public static Span<uint> AsUInt32<T>(this Span<T> src)
-            where T : struct        
+            where T : unmanaged        
                 => MemoryMarshal.Cast<T,uint>(src);
 
         /// Reimagines a span of generic values as a span of uint32
@@ -216,7 +216,7 @@ namespace Z0
         /// <typeparam name="T">The source value type</typeparam>
         [MethodImpl(Inline)]
         public static Span<ulong> AsUInt64<T>(this Span<T> src)
-            where T : struct        
+            where T : unmanaged        
                 => MemoryMarshal.Cast<T,ulong>(src);
 
         /// <summary>
@@ -226,7 +226,7 @@ namespace Z0
         /// <typeparam name="T">The source span element type</typeparam>
         [MethodImpl(Inline)]
         public static ReadOnlySpan<byte> AsBytes<T>(this ReadOnlySpan<T> src)
-            where T : struct
+            where T : unmanaged
                 => MemoryMarshal.AsBytes(src);
 
         /// <summary>

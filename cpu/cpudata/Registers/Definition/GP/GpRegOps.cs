@@ -45,7 +45,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static ref byte Head<T>(this ref T src)
-            where T : struct
+            where T : unmanaged
                 => ref Unsafe.As<T, byte>(ref As.asRef(in src));
 
         /// <summary>

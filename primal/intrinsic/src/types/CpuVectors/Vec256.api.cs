@@ -62,9 +62,9 @@ namespace Z0
                 return generic<T>(fill(int64(value)));
             else if(typematch<T,ulong>())
                 return generic<T>(fill(uint64(value)));
-            else if(typematch<T,float>())
+            else if(typeof(T) == typeof(float))
                 return generic<T>(fill(float32(value)));
-            else if(typematch<T,double>())
+            else if(typeof(T) == typeof(double))
                 return generic<T>(fill(float64(value)));
             else
                 throw unsupported<T>();
@@ -94,9 +94,9 @@ namespace Z0
                 return ref generic<T>(in OneI64);
             else if(typematch<T,ulong>())
                 return ref generic<T>(in OneU64);
-            else if(typematch<T,float>())
+            else if(typeof(T) == typeof(float))
                 return ref generic<T>(in OneF32);
-            else if(typematch<T,double>())
+            else if(typeof(T) == typeof(double))
                 return ref generic<T>(in OneF64);
             else
                 throw unsupported<T>();
@@ -127,9 +127,9 @@ namespace Z0
                 vstore(int64(src), ref int64(ref dst));
             else if(typematch<T,ulong>())
                 vstore(uint64(src), ref uint64(ref dst));
-            else if(typematch<T,float>())
+            else if(typeof(T) == typeof(float))
                 vstore(float32(src), ref float32(ref dst));
-            else if(typematch<T,double>())
+            else if(typeof(T) == typeof(double))
                 vstore(float64(src), ref float64(ref dst));
             else
                 throw unsupported<T>();
@@ -160,9 +160,9 @@ namespace Z0
                 return generic<T>(load(ref int64(ref src)));
             else if(typematch<T,ulong>())
                 return generic<T>(load(ref uint64(ref src)));
-            else if(typematch<T,float>())
+            else if(typeof(T) == typeof(float))
                 return generic<T>(load(ref float32(ref src)));
-            else if(typematch<T,double>())
+            else if(typeof(T) == typeof(double))
                 return  generic<T>(load(ref float64(ref src)));
             else 
                 throw unsupported<T>();            
@@ -170,7 +170,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static Vector256<T> LoadVector<T>(ref T src)
-            where T : struct  
+            where T : unmanaged  
         {            
             if(typematch<T,sbyte>())
                 return generic<T>(load(ref int8(ref src)));
@@ -188,9 +188,9 @@ namespace Z0
                 return generic<T>(load(ref int64(ref src)));
             else if(typematch<T,ulong>())
                 return generic<T>(load(ref uint64(ref src)));
-            else if(typematch<T,float>())
+            else if(typeof(T) == typeof(float))
                 return generic<T>(load(ref float32(ref src)));
-            else if(typematch<T,double>())
+            else if(typeof(T) == typeof(double))
                 return  generic<T>(load(ref float64(ref src)));
             else 
                 throw unsupported<T>();            
@@ -243,9 +243,9 @@ namespace Z0
                 return generic<T>(load(ref int64(ref asRef(in src))));
             else if(typematch<T,ulong>())
                 return generic<T>(load(ref uint64(ref asRef(in src))));
-            else if(typematch<T,float>())
+            else if(typeof(T) == typeof(float))
                 return generic<T>(load(ref float32(ref asRef(in src))));
-            else if(typematch<T,double>())
+            else if(typeof(T) == typeof(double))
                 return  generic<T>(load(ref float64(ref asRef(in src))));
             else 
                 throw unsupported<T>();            
@@ -280,9 +280,9 @@ namespace Z0
                 dst = generic<T>(load(ref int64(ref head)));
             else if(typematch<T,ulong>())
                 dst = generic<T>(load(ref uint64(ref head)));
-            else if(typematch<T,float>())
+            else if(typeof(T) == typeof(float))
                 dst = generic<T>(load(ref float32(ref head)));
-            else if(typematch<T,double>())
+            else if(typeof(T) == typeof(double))
                 dst = generic<T>(load(ref float64(ref head)));
             else 
                 throw unsupported<T>();
@@ -317,9 +317,9 @@ namespace Z0
                 dst = generic<T>(load(ref int64(ref head)));
             else if(typematch<T,ulong>())
                 dst = generic<T>(load(ref uint64(ref head)));
-            else if(typematch<T,float>())
+            else if(typeof(T) == typeof(float))
                 dst = generic<T>(load(ref float32(ref head)));
-            else if(typematch<T,double>())
+            else if(typeof(T) == typeof(double))
                 dst = generic<T>(load(ref float64(ref head)));
             else
                 throw unsupported<T>();

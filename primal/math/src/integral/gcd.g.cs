@@ -14,7 +14,7 @@ namespace Z0
     {
         [MethodImpl(Inline)]
         public static T gcd<T>(T lhs, T rhs)
-            where T : struct
+            where T : unmanaged
         {
             if(typematch<T,sbyte>())
                 return generic<T>((math.gcd(int8(lhs), int8(rhs))));
@@ -32,9 +32,9 @@ namespace Z0
                 return generic<T>((math.gcd(int64(lhs), int64(rhs))));
             else if(typematch<T,ulong>())
                 return generic<T>((math.gcd(uint64(lhs), uint64(rhs))));
-            else if(typematch<T,float>())
+            else if(typeof(T) == typeof(float))
                 return generic<T>((fmath.gcd(float32(lhs), float32(rhs))));
-            else if(typematch<T,double>())
+            else if(typeof(T) == typeof(double))
                 return generic<T>((fmath.gcd(float64(lhs), float64(rhs))));
             else            
                 throw unsupported<T>();
@@ -42,7 +42,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static T gcdbin<T>(T lhs, T rhs)
-            where T : struct
+            where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
                 return generic<T>((math.gcdbin(uint8(lhs), uint8(rhs))));

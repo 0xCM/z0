@@ -97,7 +97,7 @@ namespace Z0
         /// <typeparam name="T">The component type</typeparam>
         [MethodImpl(Inline)]
         public static string Fomat<N,T>(this BlockVector<N,T> src)
-            where T : struct    
+            where T : unmanaged    
             where N: ITypeNat, new()
                 => src.Unsized.FormatList();
 

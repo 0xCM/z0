@@ -44,7 +44,7 @@ namespace Z0
         /// <param name="bitcount">The number of bits</param>
         /// <typeparam name="T">The segment type</typeparam>
         public static int Segments<T>(BitSize bitcount)
-            where T : struct
+            where T : unmanaged
                 => Segments(bitsize<T>(), bitcount);
 
         /// <summary>
@@ -52,7 +52,7 @@ namespace Z0
         /// </summary>
         /// <param name="bitcount">The total number of bits to distribute over one or more segments</param>        
         public static CellIndex<T>[] BitMap<T>(BitSize bitcount)
-            where T : struct
+            where T : unmanaged
         {
             var dst =  new CellIndex<T>[bitcount];
             var capacity = bitsize<T>();            
@@ -162,7 +162,7 @@ namespace Z0
         /// <typeparam name="T">The type to evaluate</typeparam>
         [MethodImpl(Inline)]
         public static BitSize Size<T>()
-            where T : struct
+            where T : unmanaged
                 => Unsafe.SizeOf<T>()*8;
         
         [MethodImpl(Inline)]

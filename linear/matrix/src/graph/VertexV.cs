@@ -15,7 +15,7 @@ namespace Z0
     /// Defines a vertex within a graph
     /// </summary>
     public readonly struct Vertex<V> : IVertex<V>
-        where V : struct
+        where V : unmanaged
     {        
         [MethodImpl(Inline)]
         public static Edge<V> operator +(Vertex<V> source, Vertex<V> target)

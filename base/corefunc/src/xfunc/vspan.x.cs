@@ -21,7 +21,7 @@ namespace Z0
         /// <typeparam name="T">The component type</typeparam>
         [MethodImpl(Inline)]
         public static Span<T> ToSpan<T>(this Vec256<T> src, Span<T> dst, int offset = 0)
-            where T : struct
+            where T : unmanaged
         {            
             vstore(src, ref dst[offset]);
             return  dst;
@@ -36,7 +36,7 @@ namespace Z0
         /// <typeparam name="T">The component type</typeparam>
         [MethodImpl(Inline)]
         public static Span<T> ToSpan<T>(this Vec128<T> src, Span<T> dst, int offset = 0)
-            where T : struct
+            where T : unmanaged
         {            
             vstore(src, ref dst[offset]);
             return  dst;
@@ -49,7 +49,7 @@ namespace Z0
         /// <typeparam name="T">The primitive type</typeparam>
         [MethodImpl(Inline)]
         public static Span128<T> ToSpan128<T>(this Vec128<T> src)
-            where T : struct     
+            where T : unmanaged     
         {
             var dst = Span128.AllocBlocks<T>(1);
             vstore(src, ref dst[0]);
@@ -63,7 +63,7 @@ namespace Z0
         /// <typeparam name="T">The primitive type</typeparam>
         [MethodImpl(Inline)]
         public static Span128<T> ToReadOnlySpan128<T>(this Vec128<T> src)
-            where T : struct     
+            where T : unmanaged     
                 => src.ToSpan128();
         
         /// <summary>
@@ -73,7 +73,7 @@ namespace Z0
         /// <typeparam name="T">The primitive type</typeparam>
         [MethodImpl(Inline)]
         public static Span256<T> ToSpan256<T>(this Vec256<T> src)
-            where T : struct            
+            where T : unmanaged            
         {
             var dst = Span256.AllocBlocks<T>(1);
             vstore(src, ref dst[0]);
@@ -87,7 +87,7 @@ namespace Z0
         /// <typeparam name="T">The primitive type</typeparam>
         [MethodImpl(Inline)]
         public static Span256<T> ToReadOnlySpan256<T>(this Vec256<T> src)
-            where T : struct            
+            where T : unmanaged            
                 => src.ToSpan256();        
 
         /// <summary>
@@ -97,7 +97,7 @@ namespace Z0
         /// <typeparam name="T">The component type</typeparam>
         [MethodImpl(Inline)]
         public static Span<T> ToSpan<T>(this Vec128<T> src)
-            where T : struct            
+            where T : unmanaged            
                 => src.ToSpan128();
 
         /// <summary>
@@ -107,7 +107,7 @@ namespace Z0
         /// <typeparam name="T">The component type</typeparam>
         [MethodImpl(Inline)]
         public static T[] ToArray<T>(this Vec128<T> src)
-            where T : struct            
+            where T : unmanaged            
         {
             var dst = new T[Vec128<T>.Length];
             vstore(src, ref head(dst));
@@ -121,7 +121,7 @@ namespace Z0
         /// <typeparam name="T">The component type</typeparam>
         [MethodImpl(Inline)]
         public static ReadOnlySpan<T> ToReadOnlySpan<T>(this Vec128<T> src)
-            where T : struct            
+            where T : unmanaged            
                 => src.ToSpan128();
 
         /// <summary>
@@ -131,7 +131,7 @@ namespace Z0
         /// <typeparam name="T">The primal component type</typeparam>
         [MethodImpl(Inline)]
         public static unsafe Span<T> ToSpan<T>(this Vec512<T> src)
-            where T : struct        
+            where T : unmanaged        
                 => new Span<T>(As.pvoid(ref Unsafe.Add(ref src, 0)), Vec512<T>.Length);        
 
         /// <summary>
@@ -141,7 +141,7 @@ namespace Z0
         /// <typeparam name="T">The component type</typeparam>
         [MethodImpl(Inline)]
         public static Span<T> ToSpan<T>(this Vec256<T> src)
-            where T : struct            
+            where T : unmanaged            
                 => src.ToSpan256();
 
         /// <summary>
@@ -151,7 +151,7 @@ namespace Z0
         /// <typeparam name="T">The component type</typeparam>
         [MethodImpl(Inline)]
         public static T[] ToArray<T>(this Vec256<T> src)
-            where T : struct            
+            where T : unmanaged            
         {
             var dst = new T[Vec256<T>.Length];
             vstore(src, ref head(dst));
@@ -165,7 +165,7 @@ namespace Z0
         /// <typeparam name="T">The component type</typeparam>
         [MethodImpl(Inline)]
         public static ReadOnlySpan<T> ToReadOnlySpan<T>(this Vec256<T> src)
-            where T : struct            
+            where T : unmanaged            
                 => src.ToSpan256();
 
         /// <summary>
@@ -175,7 +175,7 @@ namespace Z0
         /// <typeparam name="T">The component type</typeparam>
         [MethodImpl(Inline)]
         public static Span256<T> ToSpan256<T>(this Vec512<T> src)
-            where T : struct            
+            where T : unmanaged            
          {
             var dst = Span256.AllocBlocks<T>(2);
             vstore(src.lo, ref dst[0]);
@@ -190,7 +190,7 @@ namespace Z0
         /// <typeparam name="T">The component type</typeparam>
         [MethodImpl(Inline)]
         public static ReadOnlySpan<T> ToReadOnlySpan<T>(this Vec512<T> src)
-            where T : struct            
+            where T : unmanaged            
                 => src.ToSpan();
          
         /// <summary>
@@ -200,7 +200,7 @@ namespace Z0
         /// <typeparam name="T">The component type</typeparam>
         [MethodImpl(Inline)]
         public static Span256<T> ToSpan256<T>(this Vec1024<T> src)
-            where T : struct            
+            where T : unmanaged            
          {
             var dst = Span256.AllocBlocks<T>(4);
             vstore(src.v00, ref dst[0]);
@@ -217,7 +217,7 @@ namespace Z0
         /// <typeparam name="T">The component type</typeparam>
         [MethodImpl(Inline)]
         public static Span<T> ToSpan<T>(this Vec1024<T> src)
-            where T : struct           
+            where T : unmanaged           
                 => src.ToSpan256(); 
 
         /// <summary>
@@ -227,7 +227,7 @@ namespace Z0
         /// <typeparam name="T">The component type</typeparam>
         [MethodImpl(Inline)]
         public static ReadOnlySpan<T> ToReadOnlySpan<T>(this Vec1024<T> src)
-            where T : struct            
+            where T : unmanaged            
                 => src.ToSpan();
     }
 

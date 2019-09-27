@@ -21,7 +21,7 @@ namespace Z0
         /// <typeparam name="T">The component type</typeparam>
         [MethodImpl(Inline)]
         public static T extract<T>(in Vec128<T> src, byte index)
-            where T : struct
+            where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
                 return generic<T>(dinx.extract(in uint8(in src), index));
@@ -39,9 +39,9 @@ namespace Z0
                 return generic<T>(dinx.extract(in int64(in src), index));
             else if(typematch<T,ulong>())
                 return generic<T>(dinx.extract(in uint64(in src), index));
-            else if(typematch<T,float>())
+            else if(typeof(T) == typeof(float))
                 return generic<T>(dinx.extract(in float32(in src), index));
-            else if(typematch<T,double>())
+            else if(typeof(T) == typeof(double))
                 return generic<T>(float64(src[index]));
             else 
                 throw unsupported<T>();
@@ -54,7 +54,7 @@ namespace Z0
         /// <param name="pos">The index of the lane to extract</param>
         [MethodImpl(Inline)]
         public static Vec128<T> extract128<T>(in Vec256<T> src, byte index)
-            where T : struct
+            where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
                 return generic<T>(dinx.extract128(in uint8(in src), index));
@@ -72,9 +72,9 @@ namespace Z0
                 return generic<T>(dinx.extract128(in int64(in src), index));
             else if(typematch<T,ulong>())
                 return generic<T>(dinx.extract128(in uint64(in src), index));
-            else if(typematch<T,float>())
+            else if(typeof(T) == typeof(float))
                 return generic<T>(dinx.extract128(in float32(in src), index));
-            else if(typematch<T,double>())
+            else if(typeof(T) == typeof(double))
                 return generic<T>(dinx.extract128(in float64(in src), index));
             else 
                 throw unsupported<T>();

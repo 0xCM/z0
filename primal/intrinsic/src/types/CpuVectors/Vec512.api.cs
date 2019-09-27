@@ -25,7 +25,7 @@ namespace Z0
         /// <typeparam name="T">The primal component type</typeparam>
         [MethodImpl(Inline)]
         public static Vec512<T> FromParts<T>(Vec128<T> v00, Vec128<T> v01, Vec128<T> v10, Vec128<T> v11)        
-            where T : struct
+            where T : unmanaged
         {
             Vec256<T> lo = ginx.set(v00,v01);            
             Vec256<T> hi = ginx.set(v10,v11);
@@ -40,7 +40,7 @@ namespace Z0
         /// <typeparam name="T">The primal component type</typeparam>
         [MethodImpl(Inline)]
         public static Vec512<T> FromParts<T>(in Vec256<T> lo, in Vec256<T> hi)        
-            where T : struct
+            where T : unmanaged
                 => new Vec512<T>(lo, hi);
 
         /// <summary>
@@ -51,7 +51,7 @@ namespace Z0
         /// <typeparam name="T">The primal component type</typeparam>
         [MethodImpl(Inline)]
         public static Vec512<T> FromParts<T>(in Vector256<T> lo, in Vector256<T> hi)        
-            where T : struct
+            where T : unmanaged
                 => new Vec512<T>(lo, hi);
 
         /// <summary>
@@ -61,7 +61,7 @@ namespace Z0
         /// <param name="len">The number of components included in the extract</param>
         /// <typeparam name="T">The primal component type</typeparam>
         static void CheckSegment<T>(int offset, int len)
-            where T : struct
+            where T : unmanaged
         {
             var offsetBytes = offset * Vec512<T>.CellSize;
             var wantedBytes = len * Vec512<T>.CellSize;
@@ -80,7 +80,7 @@ namespace Z0
         /// <typeparam name="T">The primal component type</typeparam>
         [MethodImpl(Inline)]
         public static unsafe Span<T> Segment<T>(this ref Vec512<T> src, int offset, int len)
-            where T : struct
+            where T : unmanaged
         {
             CheckSegment<T>(offset,len);
             return new Span<T>(pvoid(ref Unsafe.Add(ref src, offset)),len);

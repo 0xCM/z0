@@ -75,7 +75,7 @@ namespace Z0
         /// <param name="j">The second index</param>
         /// <typeparam name="T">The element type</typeparam>
         public static Span<T> Swap<T>(this Span<T> io, params Swap[] swaps)           
-            where T : struct
+            where T : unmanaged
         {
             for(var k = 0; k< swaps.Length; k++)
             {
@@ -94,7 +94,7 @@ namespace Z0
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
         public static Span256<T> Swap<T>(this Span256<T> src, params Swap[] swaps)           
-            where T : struct
+            where T : unmanaged
         {
              if(swaps.Length == 0)
                 return src;
@@ -112,7 +112,7 @@ namespace Z0
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
         public static Span128<T> Swap<T>(this Span128<T> src, params Swap[] swaps)           
-            where T : struct
+            where T : unmanaged
         {
              if(swaps.Length == 0)
                 return src;

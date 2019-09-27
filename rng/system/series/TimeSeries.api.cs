@@ -26,11 +26,11 @@ namespace Z0
             = new ConcurrentDictionary<long, IPolyrand>();
 
         public static SeriesTerm<T> Term<T>(long index, T value)
-            where T : struct
+            where T : unmanaged
                 => new SeriesTerm<T>(index, value);  
 
         public static SeriesTerm<T> NextTerm<T>(TimeSeries<T> series)      
-            where T : struct
+            where T : unmanaged
         {
             if(States.TryGetValue(series.Id, out IPolyrand random))
             {                
@@ -43,7 +43,7 @@ namespace Z0
         }
 
         internal static IEnumerable<SeriesTerm<T>> Evolve<T>(TimeSeries<T> series)
-            where T : struct
+            where T : unmanaged
         {
             if(States.TryGetValue(series.Id, out IPolyrand random))
             {                
@@ -57,7 +57,7 @@ namespace Z0
         }
 
         public static TimeSeries<T> Define<T>(Interval<T> domain, ulong[] seed)
-            where T : struct
+            where T : unmanaged
         {
             var id = NextId(ref LastSeriesId);
             var rng = Rng.XOrShift1024(seed);
@@ -67,7 +67,7 @@ namespace Z0
         }
 
         public static void EvolveSeries<T>(Interval<T> domain, ulong[] seed, int count, Action<TimeSeries<T>,Duration> complete)
-            where T : struct
+            where T : unmanaged
         {
             var sw = stopwatch();
             var series = Define(domain, seed); 
@@ -79,7 +79,7 @@ namespace Z0
         }
 
         static SeriesEvolution<T> Execute<T>(in ulong[] seed, in Interval<T> domain, int steps)
-            where T : struct
+            where T : unmanaged
         {
             var sw = stopwatch();
             var series = Define(domain, seed); 
@@ -92,11 +92,11 @@ namespace Z0
         }
 
         public static Task<SeriesEvolution<T>> Evolve<T>(ulong[] seed, Interval<T> domain, int steps)
-            where T : struct        
+            where T : unmanaged        
             => Task.Factory.StartNew(() => Execute(seed, domain, steps));    
         
         public static async Task Evolve<T>(Interval<T> domain, Action<SeriesEvolution<T>> receiver, int count = Pow2.T06, int steps = Pow2.T19)
-            where T : struct
+            where T : unmanaged
         {
             var sw = stopwatch();
             var variations = from i in range(count) 

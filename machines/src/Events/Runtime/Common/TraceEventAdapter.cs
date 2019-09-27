@@ -54,7 +54,7 @@ namespace Z0.Events
 
     public abstract class TraceEventAdapter<A,T> : TraceEventAdapter<A>
         where A : TraceEventAdapter<A,T>, new()
-        where T : struct
+        where T : unmanaged
     {
         public virtual T Body
             => ByteSpan.ReadValue<T>(Subject.Payload<byte[]>(nameof(Body)).ToSpan());

@@ -21,7 +21,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
         public static T log2<T>(in T src)
-            where T : struct
+            where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
                  return generic<T>(Bits.log2(AsIn.uint8(in asRef(in src))));

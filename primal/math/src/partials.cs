@@ -46,6 +46,14 @@ namespace Z0
 
     }
 
+    /// <summary>
+    /// Scalar op codes
+    /// </summary>
+    public static partial class soc
+    {
+
+    }
+
     static class App
     {
         public static void Main(params string[] args) { }

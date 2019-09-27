@@ -24,7 +24,7 @@ namespace Z0
     /// <param name="src">The scalar upon which the vector is predicated</param>
     /// <typeparam name="T">The primitive type</typeparam>
     public delegate Scalar128<T> Num128Factory<T>(T src)
-        where T : struct;
+        where T : unmanaged;
 
     /// <summary>
     /// Characterizes the signature of a 128-bit scalar intrinsic binary operator
@@ -33,7 +33,7 @@ namespace Z0
     /// <param name="rhs">The right operand</param>
     /// <typeparam name="T">The primitive type</typeparam>
     public delegate Scalar128<T> Num128BinOp<T>(in Scalar128<T> lhs, in Scalar128<T> rhs)
-        where T : struct;
+        where T : unmanaged;
 
     /// <summary>
     /// Characterizes the signature of a 128-bit scalar intrinsic unary operator
@@ -41,10 +41,10 @@ namespace Z0
     /// <param name="lhs">The operand</param>
     /// <typeparam name="T">The primitive type</typeparam>
     public delegate Scalar128<T> Num128UnaryOp<T>(in Scalar128<T> src)
-        where T : struct;
+        where T : unmanaged;
 
     public delegate Scalar128<T> Num128TernaryOp<T>(in Scalar128<T> x, in Scalar128<T> y, in Scalar128<T> z)
-        where T : struct;
+        where T : unmanaged;
 
     /// <summary>
     /// Characterizes the signature of an unsafe data transfer from a 
@@ -54,13 +54,13 @@ namespace Z0
     /// <param name="dst">The target pointer</param>
     /// <typeparam name="T">The primitive type</typeparam>
     public unsafe delegate void Num128PStore<T>(in Scalar128<T> src, void* dst)
-        where T : struct;
+        where T : unmanaged;
 
     public delegate bool Num128CmpFloat<T>(in Scalar128<T> lhs, in Scalar128<T> rhs, FloatComparisonMode mode)
-        where T : struct;
+        where T : unmanaged;
 
     public delegate bool Num128BinPred<T>(in Scalar128<T> lhs, in Scalar128<T> rhs)
-        where T : struct;
+        where T : unmanaged;
 
     partial class ginx
     {

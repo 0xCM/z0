@@ -143,7 +143,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static unsafe P* refptr<P,T>(ref T src)
-            where T : struct
+            where T : unmanaged
             where P : unmanaged
                 => (P*)Unsafe.AsPointer(ref src);
 

@@ -17,8 +17,8 @@ namespace Z0
     /// <typeparam name="V">The vertex index type</typeparam>
     /// <typeparam name="T">The payload type</typeparam>
     public readonly struct Vertex<V,T> : IVertex<V,T>
-        where T : struct
-        where V : struct
+        where T : unmanaged
+        where V : unmanaged
     {
         [MethodImpl(Inline)]
         public static Edge<V> operator +(Vertex<V,T> source, Vertex<V,T> target)

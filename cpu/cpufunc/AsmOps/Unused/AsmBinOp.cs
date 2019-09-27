@@ -40,9 +40,9 @@ namespace Z0
                 return code.CreateBinOpI64().ToGeneric<BinOpI64,T>();                
             else if(typematch<T,ulong>())
                 return code.CreateBinOpU64().ToGeneric<BinOpU64,T>();                
-            else if(typematch<T,float>())
+            else if(typeof(T) == typeof(float))
                 return code.CreateBinOpF32().ToGeneric<BinOpF32,T>();                
-            else if(typematch<T,double>())
+            else if(typeof(T) == typeof(double))
                 return code.CreateBinOpF64().ToGeneric<BinOpF64,T>();                
             else 
                 throw unsupported<T>();

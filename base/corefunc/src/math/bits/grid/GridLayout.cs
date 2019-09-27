@@ -12,7 +12,7 @@ namespace Z0
     using static zfunc;
 
     public class GridLayout<T>
-        where T : struct
+        where T : unmanaged
     {        
         public GridLayout(GridSpec<T> spec, IEnumerable<CellMap<T>> Cells)
         {

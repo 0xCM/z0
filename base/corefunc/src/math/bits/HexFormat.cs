@@ -40,7 +40,7 @@ namespace Z0
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
         public static string FormatHex<T>(this ReadOnlySpan<T> src, bool vectorize = false, char? sep = null)
-                where T : struct
+                where T : unmanaged
             {
                 var delimiter = sep ?? (vectorize ? AsciSym.Comma : AsciSym.Space);
                 var fmt = sbuild();
@@ -70,7 +70,7 @@ namespace Z0
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
         public static string FormatHex<T>(this T[] src, bool vectorize = false, char? sep = null)
-                where T : struct
+                where T : unmanaged
                     => FormatHex(src.ToReadOnlySpan(),vectorize,sep);
 
         /// <summary>
@@ -82,7 +82,7 @@ namespace Z0
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
         public static string FormatHex<T>(this Span<T> src, bool vectorize = false, char? sep = null)
-                where T : struct
+                where T : unmanaged
                     => src.ReadOnly().FormatHex(vectorize, sep);
 
         /// <summary>
@@ -95,7 +95,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static string FormatHex<N,T>(this Span<N,T> src, bool vectorize = false, char? sep = null)
                 where N : ITypeNat, new()
-                where T : struct
+                where T : unmanaged
                     => src.Unsize().FormatHex(vectorize, sep);
 
         /// <summary>
@@ -109,7 +109,7 @@ namespace Z0
        [MethodImpl(Inline)]
        public static string FormatHex<N,T>(this ReadOnlySpan<N,T> src, bool vectorize = false, char? sep = null)
             where N : ITypeNat, new()
-            where T : struct
+            where T : unmanaged
                 => src.Unsize().FormatHex(vectorize, sep);
 
         /// <summary>
@@ -122,7 +122,7 @@ namespace Z0
         /// <typeparam name="T">The primal component type</typeparam>
         [MethodImpl(Inline)]
         public static string FormatHex<T>(this Vec128<T> src, bool vectorize = true, char? sep = null)
-            where T : struct
+            where T : unmanaged
                 => src.ToSpan().FormatHex(vectorize, sep);
 
         /// <summary>
@@ -135,7 +135,7 @@ namespace Z0
         /// <typeparam name="T">The primal component type</typeparam>
         [MethodImpl(Inline)]
         public static string FormatHex<T>(this Vec256<T> src, bool vectorize = true, char? sep = null)
-             where T : struct
+             where T : unmanaged
                 => src.ToSpan().FormatHex(vectorize,sep); 
 
         /// <summary>
@@ -148,7 +148,7 @@ namespace Z0
         /// <typeparam name="T">The primal component type</typeparam>
         [MethodImpl(Inline)]
         public static string FormatHex<T>(this Vec512<T> src, bool vectorize = true, char? sep = null)
-            where T : struct
+            where T : unmanaged
                 => src.ToSpan().FormatHex(vectorize,sep);
 
         /// <summary>
@@ -161,7 +161,7 @@ namespace Z0
         /// <typeparam name="T">The primal component type</typeparam>
         [MethodImpl(Inline)]
         public static string FormatHex<T>(this Vec1024<T> src, bool vectorize = true, char? sep = null)
-            where T : struct
+            where T : unmanaged
                 => src.ToSpan().FormatHex(vectorize,sep);
 
         /// <summary>
@@ -173,7 +173,7 @@ namespace Z0
         /// <typeparam name="T">The cell component type</typeparam>
         [MethodImpl(Inline)]
         public static string FormatHexBlocks<T>(this ReadOnlySpan<T> src, int? width = null, char? sep = null)
-                where T : struct
+                where T : unmanaged
                     => src.FormatHex().SeparateBlocks(width ?? Unsafe.SizeOf<T>(), sep ?? AsciSym.Space);
 
         /// <summary>
@@ -185,7 +185,7 @@ namespace Z0
         /// <typeparam name="T">The cell component type</typeparam>
         [MethodImpl(Inline)]
         public static string FormatHexBlocks<T>(this Span<T> src, int? width = null, char? sep = null)
-                where T : struct
+                where T : unmanaged
                     => src.ReadOnly().FormatHexBlocks(width, sep);
 
         /// <summary>
@@ -198,7 +198,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static string FormatHexBlocks<N,T>(this Span<N,T> src, int? width = null, char? sep = null)
                 where N : ITypeNat, new()
-                where T : struct
+                where T : unmanaged
                     => src.Unsize().FormatHexBlocks(width,sep);
 
         /// <summary>
@@ -211,7 +211,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static string FormatHexBlocks<N,T>(this ReadOnlySpan<N,T> src, int? width = null, char? sep = null)
                 where N : ITypeNat, new()
-                where T : struct
+                where T : unmanaged
                     => src.Unsize().FormatHexBlocks(width,sep);
 
         /// <summary>
@@ -223,7 +223,7 @@ namespace Z0
         /// <typeparam name="T">The cell component type</typeparam>
         [MethodImpl(Inline)]
         public static string FormatHexBlocks<T>(this Vec256<T> src)
-            where T : struct
+            where T : unmanaged
                 => src.FormatHex(false, AsciSym.Space);
 
         /// <summary>
@@ -235,11 +235,11 @@ namespace Z0
         /// <typeparam name="T">The cell component type</typeparam>
         [MethodImpl(Inline)]
         public static string FormatHexBlocks<T>(this Vec512<T> src)
-                where T : struct
+                where T : unmanaged
                     => src.FormatHex(false, AsciSym.Space);
         
         static string hexstring<T>(T src, bool zpad = true, bool specifier = true)
-            where T : struct
+            where T : unmanaged
         {
             var digits = string.Empty;
             var fmt = "X";
@@ -259,9 +259,9 @@ namespace Z0
                 digits = As.int64(src).ToString(fmt);
             else if(typematch<T,ulong>())
                 digits = As.uint64(src).ToString(fmt);
-            else if(typematch<T,float>())
+            else if(typeof(T) == typeof(float))
                 digits = convert<float,int>(As.float32(src)).ToString(fmt);
-            else if(typematch<T,double>())
+            else if(typeof(T) == typeof(double))
                 digits = convert<double,long>(As.float64(src)).ToString(fmt);
             else
                 throw unsupported<T>();

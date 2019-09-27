@@ -27,7 +27,7 @@ namespace Z0
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
         public static ref readonly Vec128<T> Zero<T>() 
-            where T : struct
+            where T : unmanaged
                 => ref Vec128<T>.Zero;
 
         /// <summary>
@@ -35,7 +35,7 @@ namespace Z0
         /// </summary>
         /// <typeparam name="T">The primal type</typeparam>
         public static int Length<T>()
-            where T : struct
+            where T : unmanaged
                 => Vec128<T>.Length;
 
         /// <summary>
@@ -44,7 +44,7 @@ namespace Z0
         /// <param name="src">The fill value</param>
          [MethodImpl(Inline)]
          public static Vec128<T> Fill<T>(T value)
-            where T : struct
+            where T : unmanaged
         {
             if(typematch<T,sbyte>())
                 return generic<T>(Vec128.fill(int8(value)));
@@ -62,9 +62,9 @@ namespace Z0
                 return generic<T>(Vec128.fill(int64(value)));
             else if(typematch<T,ulong>())
                 return generic<T>(Vec128.fill(uint64(value)));
-            else if(typematch<T,float>())
+            else if(typeof(T) == typeof(float))
                 return generic<T>(Vec128.fill(float32(value)));
-            else if(typematch<T,double>())
+            else if(typeof(T) == typeof(double))
                 return generic<T>(Vec128.fill(float64(value)));
             else
                 throw unsupported<T>();
@@ -77,7 +77,7 @@ namespace Z0
         /// <typeparam name="T">The component primitive type</typeparam>
         [MethodImpl(Inline)]
          public static ref readonly Vec128<T> Ones<T>()
-            where T : struct
+            where T : unmanaged
         {
             if(typematch<T,sbyte>())
                 return ref generic<T>(in OneI8);
@@ -95,9 +95,9 @@ namespace Z0
                 return ref generic<T>(in OneI64);
             else if(typematch<T,ulong>())
                 return ref generic<T>(in OneU64);
-            else if(typematch<T,float>())
+            else if(typeof(T) == typeof(float))
                 return ref generic<T>(in OneF32);
-            else if(typematch<T,double>())
+            else if(typeof(T) == typeof(double))
                 return ref generic<T>(in OneF64);
             else
                 throw unsupported<T>();
@@ -111,7 +111,7 @@ namespace Z0
         /// <typeparam name="T">The primal component type</typeparam>
         [MethodImpl(Inline)]
         public unsafe static void Store<T>(Vector128<T> src, ref T dst)
-            where T : struct
+            where T : unmanaged
         {            
 
             if(typematch<T,sbyte>())
@@ -130,9 +130,9 @@ namespace Z0
                 vstore(int64(src), ref int64(ref dst));
             else if(typematch<T,ulong>())
                 vstore(uint64(src), ref uint64(ref dst));
-            else if(typematch<T,float>())
+            else if(typeof(T) == typeof(float))
                 vstore(float32(src), ref float32(ref dst));
-            else if(typematch<T,double>())
+            else if(typeof(T) == typeof(double))
                 vstore(float64(src), ref float64(ref dst));
             else
                 throw unsupported<T>();
@@ -147,7 +147,7 @@ namespace Z0
         /// <typeparam name="T">The primal component type</typeparam>
         [MethodImpl(Inline)]
         public static Span128<T> Store<T>(Vec128<T> src, Span128<T> dst, int blockIndex)
-            where T : struct        
+            where T : unmanaged        
         {
             var offset = Span128.BlockLength<T>(blockIndex);
             Vec128.Store(src, ref dst[offset]);
@@ -156,7 +156,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static Vec128<T> Load<T>(ref T src)
-            where T : struct  
+            where T : unmanaged  
         {            
             if(typematch<T,sbyte>())
                 return generic<T>(load(ref int8(ref src)));
@@ -174,9 +174,9 @@ namespace Z0
                 return generic<T>(load(ref int64(ref src)));
             else if(typematch<T,ulong>())
                 return generic<T>(load(ref uint64(ref src)));
-            else if(typematch<T,float>())
+            else if(typeof(T) == typeof(float))
                 return generic<T>(load(ref float32(ref src)));
-            else if(typematch<T,double>())
+            else if(typeof(T) == typeof(double))
                 return  generic<T>(load(ref float64(ref src)));
             else 
                 throw unsupported<T>();            
@@ -184,7 +184,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static Vector128<T> LoadVector<T>(ref T src)
-            where T : struct  
+            where T : unmanaged  
         {            
             if(typematch<T,sbyte>())
                 return generic<T>(LoadVector(ref int8(ref src)));
@@ -202,9 +202,9 @@ namespace Z0
                 return generic<T>(LoadVector(ref int64(ref src)));
             else if(typematch<T,ulong>())
                 return generic<T>(LoadVector(ref uint64(ref src)));
-            else if(typematch<T,float>())
+            else if(typeof(T) == typeof(float))
                 return generic<T>(LoadVector(ref float32(ref src)));
-            else if(typematch<T,double>())
+            else if(typeof(T) == typeof(double))
                 return  generic<T>(LoadVector(ref float64(ref src)));
             else 
                 throw unsupported<T>();            
@@ -212,7 +212,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static Vec128<T> Loadi<T>(in T src)
-            where T : struct  
+            where T : unmanaged  
         {            
             if(typematch<T,sbyte>())
                 return generic<T>(load(ref int8(ref asRef(in src))));
@@ -230,9 +230,9 @@ namespace Z0
                 return generic<T>(load(ref int64(ref asRef(in src))));
             else if(typematch<T,ulong>())
                 return generic<T>(load(ref uint64(ref asRef(in src))));
-            else if(typematch<T,float>())
+            else if(typeof(T) == typeof(float))
                 return generic<T>(load(ref float32(ref asRef(in src))));
-            else if(typematch<T,double>())
+            else if(typeof(T) == typeof(double))
                 return  generic<T>(load(ref float64(ref asRef(in src))));
             else 
                 throw unsupported<T>();            
@@ -240,7 +240,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static ref Vec128<T> Load<T>(ReadOnlySpan128<T> src, int block, out Vec128<T> dst)
-            where T : struct
+            where T : unmanaged
         {            
             ref var head = ref asRef(in src.Block(block));            
             if(typematch<T,sbyte>())
@@ -259,9 +259,9 @@ namespace Z0
                 dst = generic<T>(load(ref int64(ref head)));
             else if(typematch<T,ulong>())
                 dst = generic<T>(load(ref uint64(ref head)));
-            else if(typematch<T,float>())
+            else if(typeof(T) == typeof(float))
                 dst = generic<T>(load(ref float32(ref head)));
-            else if(typematch<T,double>())
+            else if(typeof(T) == typeof(double))
                 dst = generic<T>(load(ref float64(ref head)));
             else 
                 throw unsupported<T>();
@@ -270,7 +270,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static ref Vec128<T> Load<T>(Span128<T> src, int block, out Vec128<T> dst)
-            where T : struct
+            where T : unmanaged
         {            
             ref var head = ref asRef(in src.Block(block));            
             if(typematch<T,sbyte>())
@@ -289,9 +289,9 @@ namespace Z0
                 dst = generic<T>(load(ref int64(ref head)));
             else if(typematch<T,ulong>())
                 dst = generic<T>(load(ref uint64(ref head)));
-            else if(typematch<T,float>())
+            else if(typeof(T) == typeof(float))
                 dst = generic<T>(load(ref float32(ref head)));
-            else if(typematch<T,double>())
+            else if(typeof(T) == typeof(double))
                 dst = generic<T>(load(ref float64(ref head)));
             else 
                 throw unsupported<T>();
@@ -305,7 +305,7 @@ namespace Z0
         /// <typeparam name="T">The primal component type</typeparam>
         [MethodImpl(Inline)]
         public static Vec128<T> LoadScalar<T>(in T src)
-            where T : struct
+            where T : unmanaged
         {            
             if(typematch<T,sbyte>())
                 return generic<T>(LoadScalar(int8(src)));
@@ -323,9 +323,9 @@ namespace Z0
                 return generic<T>(LoadScalar(int64(src)));
             else if(typematch<T,ulong>())
                 return generic<T>(LoadScalar(uint64(src)));
-            else if(typematch<T,float>())
+            else if(typeof(T) == typeof(float))
                 return generic<T>(LoadScalar(float32(src)));
-            else if(typematch<T,double>())
+            else if(typeof(T) == typeof(double))
                 return generic<T>(LoadScalar(float64(src)));
             else 
                 throw unsupported<T>();
@@ -358,7 +358,7 @@ namespace Z0
         /// <param name="last">The value of the first component</param>
         /// <typeparam name="T">The primal component type</typeparam>
         public static Vec128<T> Decrements<T>(T last = default, params Swap[] swaps)
-            where T : struct  
+            where T : unmanaged  
         {
             var dst = Alloc<T>();
             var n = dst.Length;
@@ -373,17 +373,17 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static Vec128<T> Load<T>(Span128<T> src, int block = 0)
-            where T : struct  
+            where T : unmanaged  
                 => Load(src, block, out Vec128<T> _);
 
         [MethodImpl(Inline)]
         public static Vec128<T> Load<T>(ReadOnlySpan128<T> src, int block = 0)
-            where T : struct  
+            where T : unmanaged  
                 => Load(src, block, out Vec128<T> _);
 
         [MethodImpl(Inline)]
         public static ref Vec128<T> Load<T>(ReadOnlySpan<T> src, int offset, out Vec128<T> dst)
-            where T : struct  
+            where T : unmanaged  
         {
             ref var head = ref asRef(in src[offset]);            
             if(typematch<T,sbyte>())
@@ -402,9 +402,9 @@ namespace Z0
                 dst = generic<T>(load(ref int64(ref head)));
             else if(typematch<T,ulong>())
                 dst = generic<T>(load(ref uint64(ref head)));
-            else if(typematch<T,float>())
+            else if(typeof(T) == typeof(float))
                 dst = generic<T>(load(ref float32(ref head)));
-            else if(typematch<T,double>())
+            else if(typeof(T) == typeof(double))
                 dst = generic<T>(load(ref float64(ref head)));
             else 
                 throw unsupported<T>();
@@ -413,7 +413,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static Vec128<T> Load<T>(in ReadOnlySpan<T> src, int offset = 0)
-            where T : struct  
+            where T : unmanaged  
                 =>  Load<T>(src, offset, out Vec128<T> _);    
 
         /// <summary>
@@ -424,7 +424,7 @@ namespace Z0
         /// <param name="b">The second operand</param>
         /// <typeparam name="T">The primal component type</typeparam>
         public static Vec128<T> Alternate<T>(T a, T b)
-            where T : struct
+            where T : unmanaged
         {            
             var dst = Span128.AllocBlock<T>();
             var len = Vec128<T>.Length;
@@ -791,7 +791,7 @@ namespace Z0
         /// </summary>
         /// <typeparam name="T">The component type</typeparam>
         static Span128<T> Alloc<T>()
-            where T : struct
+            where T : unmanaged
             => Span128.Alloc<T>(Length<T>());
 
         static readonly Vec128<byte> OneU8 = Vec128.fill((byte)1);

@@ -25,7 +25,7 @@ namespace Z0
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
         public static bool within<T>(T lhs, T rhs, T epsilon)
-            where T : struct
+            where T : unmanaged
         {
             if(typematch<T,sbyte>())
                 return math.within(int8(lhs), int8(rhs), int8(epsilon));
@@ -43,9 +43,9 @@ namespace Z0
                 return math.within(int64(lhs), int64(rhs), int64(epsilon));
             else if(typematch<T,ulong>())
                 return math.within(uint64(lhs), uint64(rhs), uint64(epsilon));
-            else if(typematch<T,float>())
+            else if(typeof(T) == typeof(float))
                 return math.within(float32(lhs), float32(rhs), float32(epsilon));
-            else if(typematch<T,double>())
+            else if(typeof(T) == typeof(double))
                 return math.within(float64(lhs), float64(rhs), float64(epsilon));
             else            
                 throw unsupported<T>();

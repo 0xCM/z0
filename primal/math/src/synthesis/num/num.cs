@@ -180,7 +180,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static num<T> operator & (in num<T> lhs, in num<T> rhs) 
         {
-            ref var result = ref gmath.and(unwrap(in lhs), in unwrap(in rhs), ref unwrap(in lhs));
+            ref var result = ref gmath.and(ref unwrap(in lhs), unwrap(in rhs));
             return Unsafe.As<T,num<T>>(ref result);
         }
 
@@ -252,14 +252,14 @@ namespace Z0
         [MethodImpl(Inline)]
         public num<T> max(in num<T> rhs)
         {
-            var result = gmath.max(in unwrap(in this), in unwrap(in rhs));
+            var result = gmath.max(unwrap(in this), unwrap(in rhs));
             return Unsafe.As<T,num<T>>(ref result);
         }
 
         [MethodImpl(Inline)]
         public num<T> min(in num<T> rhs)
         {
-            var result = gmath.min(in unwrap(in this), in unwrap(in rhs));
+            var result = gmath.min(unwrap(in this), unwrap(in rhs));
             return Unsafe.As<T,num<T>>(ref result);
         }
 

@@ -65,7 +65,7 @@ partial class zfunc
     /// <param name="step">The step size</param>
     /// <typeparam name="T">The primal type</typeparam>
     public static IEnumerable<T> range<T>(T x0, T x1, T? step = null)
-        where T : struct
+        where T : unmanaged
     {
         if(typematch<T,sbyte>())
         {
@@ -131,7 +131,7 @@ partial class zfunc
             for(var i = min; i <= max; i += _step)            
                 yield return generic<T>(i);
         }
-        else if(typematch<T,float>())
+        else if(typeof(T) == typeof(float))
         {
             var min = float32(x0);
             var max = float32(x1);
@@ -139,7 +139,7 @@ partial class zfunc
             for(var i = min; i <= max; i += _step)            
                 yield return generic<T>(i);
         }
-        else if(typematch<T,double>())
+        else if(typeof(T) == typeof(double))
         {
             var min = float64(x0);
             var max = float64(x1);
@@ -159,7 +159,7 @@ partial class zfunc
     /// <typeparam name="T">The underlying primal type</typeparam>
     [MethodImpl(Inline)]
     public static Complex<T> complex<T>(T re, T im = default)
-        where T : struct, IEquatable<T>
+        where T : unmanaged, IEquatable<T>
             => ComplexNumber.Define(re,im);
 
     /// <summary>
@@ -169,6 +169,6 @@ partial class zfunc
     /// <typeparam name="T">The primal type</typeparam>
     [MethodImpl(Inline)]
     public static IEnumerable<T> range<T>(T count)
-        where T : struct
+        where T : unmanaged
             => range(default(T), count);
 }

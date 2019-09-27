@@ -50,7 +50,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static ref T ipow<T>(ref T b, uint exp)
-            where T : struct
+            where T : unmanaged
         {
             if(typematch<T,sbyte>())
                 math.pow(ref int8(ref b), exp);
@@ -77,7 +77,7 @@ namespace Z0
  
         [MethodImpl(Inline)]
         public static bool isPow2<T>(T src)
-            where T : struct
+            where T : unmanaged
         {
             if(typematch<T,sbyte>())
                 return math.isPow2(int8(src));

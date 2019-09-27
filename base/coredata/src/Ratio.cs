@@ -19,7 +19,7 @@ namespace Z0
     /// </summary>
     /// <remarks>See https://en.wikipedia.org/wiki/Ratio</remarks>
     public readonly ref struct Ratio<T>
-        where T : struct
+        where T : unmanaged
     {
         [MethodImpl(Inline)]
         public static implicit operator (T A, T B)(Ratio<T> src)

@@ -17,7 +17,7 @@ namespace Z0
     /// <typeparam name="V">The vertex index type</typeparam>
     /// <remarks>For terminology consult, for example, https://xlinux.nist.gov/dads/<remarks>
     public class Graph<V>
-        where V : struct
+        where V : unmanaged
     {
         /// <summary>
         /// Creates a graph from supplied vertices and edges, sorting the provided vertices according to their index

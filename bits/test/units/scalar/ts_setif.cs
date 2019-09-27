@@ -63,7 +63,7 @@ namespace Z0.Test
         }
 
         void setif_check<T>()
-            where T : struct
+            where T : unmanaged
         {
     
             var bitcount = bitsize<T>();

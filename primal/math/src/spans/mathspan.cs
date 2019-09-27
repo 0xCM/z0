@@ -17,7 +17,7 @@ namespace Z0
     public static partial class mathspan
     {
         public static Span<T> sub<T>(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs, Span<T> dst)
-            where T :  struct
+            where T : unmanaged
         {
             var len = length(lhs,rhs);
             for(var i = 0; i< len; i++)
@@ -26,7 +26,7 @@ namespace Z0
         }
 
         public static Span<T> sub<T>(Span<T> lhs, ReadOnlySpan<T> rhs)
-            where T : struct
+            where T : unmanaged
         {
             var len = length(lhs,rhs);
             for(var i = 0; i< len; i++)
@@ -41,7 +41,7 @@ namespace Z0
         /// <param name="rhs">The right operand</param>
         /// <typeparam name="T">The primal element type</typeparam>
         public static Span<T> sub<T>(ReadOnlySpan<T> lhs, T rhs)
-            where T : struct
+            where T : unmanaged
         {
             Span<T> dst = new T[lhs.Length];
             dst.Fill(rhs);   
@@ -49,9 +49,24 @@ namespace Z0
             return dst;
         }
 
+        public static T sum<T>(ReadOnlySpan<T> src)
+            where T : unmanaged
+        {
+            checked
+            {
+                var result = default(T);
+                for(var i=0; i< src.Length; i++)
+                    result = gmath.add(result, src[i]);
+                return result;
+            }
+        }
 
+        public static T sum<T>(Span<T> src)
+            where T : unmanaged
+            => sum(src.ReadOnly());
+            
         public static Span<T> add<T>(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs, Span<T> dst)
-            where T : struct
+            where T : unmanaged
         {
             for(var i=0; i< length(lhs,rhs); i++)
                 dst[i] = gmath.add(lhs[i],rhs[i]);
@@ -59,10 +74,10 @@ namespace Z0
         }
 
         public static Span<T> add<T>(Span<T> lhs, ReadOnlySpan<T> rhs)
-            where T : struct        
+            where T : unmanaged        
         {
             for(var i=0; i< length(lhs,rhs); i++)
-                gmath.add(ref lhs[i],rhs[i]);
+                gmath.add(ref lhs[i], rhs[i]);
             return lhs;
         }
 
@@ -73,7 +88,7 @@ namespace Z0
         /// <param name="scalar">The scalar value</param>
         /// <typeparam name="T">The span element type</typeparam>
         public static Span<T> add<T>(Span<T> src, T scalar)
-            where T : struct
+            where T : unmanaged
         {
             for(var i=0; i< src.Length; i++)
                 gmath.add(ref src[i],scalar);
@@ -81,7 +96,7 @@ namespace Z0
         }
 
         public static Span<T> fabs<T>(ReadOnlySpan<T> src, Span<T> dst)
-            where T : struct
+            where T : unmanaged
         {
             var len = length(src,dst);
             for(var i=0; i< len; i++)
@@ -90,7 +105,7 @@ namespace Z0
         }
 
         public static Span<T> abs<T>(ReadOnlySpan<T> src, Span<T> dst)
-            where T : struct
+            where T : unmanaged
         {
             var len = length(src,dst);
             for(var i=0; i< len; i++)
@@ -108,7 +123,7 @@ namespace Z0
         /// <typeparam name="T">The primal floating-point type</typeparam>
         [MethodImpl(Inline)]
         public static Span<T> fmod<T>(Span<T> lhs, ReadOnlySpan<T> rhs)
-            where T : struct
+            where T : unmanaged
         {
             var len = length(lhs,rhs);
             for(var i = 0; i< len; i++)
@@ -134,7 +149,7 @@ namespace Z0
         }
 
         public static Span<T> floor<T>(ReadOnlySpan<T> src, Span<T> dst)
-            where T : struct
+            where T : unmanaged
         {
             var len = length(src,dst);
             for(var i =0; i<len; i++)
@@ -143,11 +158,11 @@ namespace Z0
         }
 
         public static Span<T> floor<T>(ReadOnlySpan<T> src)
-            where T : struct
+            where T : unmanaged
             => floor(src, src.Replicate(true));
 
         public static Span<T> floor<T>(Span<T> io)
-            where T : struct
+            where T : unmanaged
         {
             for(var i =0; i<io.Length; i++)
                 io[i] = gfp.floor(io[i]);
@@ -155,7 +170,7 @@ namespace Z0
         } 
         
         public static Span<T> ceil<T>(ReadOnlySpan<T> src, Span<T> dst)
-            where T : struct
+            where T : unmanaged
         {
             var len = length(src,dst);
             for(var i =0; i<len; i++)
@@ -184,7 +199,7 @@ namespace Z0
         /// <param name="dst">The target span</param>
         /// <typeparam name="T">The span element type</typeparam>
         public static Span<T> mul<T>(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs, Span<T> dst)
-            where T : struct
+            where T : unmanaged
         {
             var len = length(lhs,rhs);
             for(var i = 0; i< len; i++)
@@ -288,7 +303,7 @@ namespace Z0
         }
 
         public static Span<T> mul<T>(Span<T> lhs, ReadOnlySpan<T> rhs)
-            where T : struct
+            where T : unmanaged
         {
             var len = length(lhs,rhs);
             for(var i=0; i<len; i++)
@@ -303,7 +318,7 @@ namespace Z0
         /// <param name="rhs">The right vector</param>
         /// <typeparam name="T">The primal scalar type</typeparam>
         public static T dot<T>(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs)
-            where T : struct
+            where T : unmanaged
         {
             if(typematch<T,sbyte>())
                 return generic<T>(math.dot(int8(lhs), int8(rhs)));
@@ -321,9 +336,9 @@ namespace Z0
                 return generic<T>(math.dot(int64(lhs), int64(rhs)));
             else if(typematch<T,ulong>())
                 return generic<T>(math.dot(uint64(lhs), uint64(rhs)));
-            else if(typematch<T,float>())
+            else if(typeof(T) == typeof(float))
                 return generic<T>(fmath.dot(float32(lhs), float32(rhs)));
-            else if(typematch<T,double>())
+            else if(typeof(T) == typeof(double))
                 return generic<T>(fmath.dot(float64(lhs), float64(rhs)));
             else
                 throw unsupported<T>();
@@ -331,7 +346,7 @@ namespace Z0
 
  
         public static Span<T> dec<T>(ReadOnlySpan<T> src, Span<T> dst)
-            where T : struct
+            where T : unmanaged
         {
             var len = length(src,dst);
             for(var i = 0; i< len; i++)
@@ -340,7 +355,7 @@ namespace Z0
         }        
 
         public static Span<T> dec<T>(Span<T> src)
-            where T : struct
+            where T : unmanaged
         {
             for(var i = 0; i< src.Length; i++)
                 gmath.dec(ref src[i]);
@@ -348,11 +363,11 @@ namespace Z0
         }       
 
         public static Span<bool> neq<T>(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs)
-            where T : struct
+            where T : unmanaged
                 => neq(lhs,rhs,span<bool>(length(lhs,rhs)));
 
         public static Span<bool> neq<T>(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs, Span<bool> dst)
-            where T : struct
+            where T : unmanaged
         {
             for(var i = 0; i< lhs.Length; i++)
                 dst[i] = gmath.neq(lhs[i], rhs[i]);
@@ -367,7 +382,7 @@ namespace Z0
         /// <param name="dst">The target span</param>
         /// <typeparam name="T">The primal type</typeparam>
         public static Span<T> negate<T>(Span<T> src)
-            where T : struct
+            where T : unmanaged
         {
             for(var i = 0; i< src.Length; i++)
                 gmath.negate(ref src[i]);
@@ -419,7 +434,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static Span<bool> gt<T>(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs, Span<bool> dst)
-            where T : struct
+            where T : unmanaged
         {
             var len = length(lhs,rhs);
             for(var i=0; i< len; i++)
@@ -428,12 +443,12 @@ namespace Z0
         }
 
         public static Span<bool> gt<T>(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs)
-            where T : struct
+            where T : unmanaged
                 => gt(lhs,rhs,span<bool>(length(lhs,rhs)));
 
 
         public static Span<bool> lt<T>(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs, Span<bool> dst)
-            where T : struct
+            where T : unmanaged
         {
             for(var i = 0; i< lhs.Length; i++)
                 dst[i] = gmath.lt(lhs[i], rhs[i]);
@@ -441,11 +456,11 @@ namespace Z0
         }
 
         public static Span<bool> lt<T>(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs)
-            where T : struct
+            where T : unmanaged
                 => lt(lhs,rhs, span<bool>(length(lhs,rhs)));
 
         public static Span<bool> lteq<T>(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs, Span<bool> dst)
-            where T : struct
+            where T : unmanaged
         {
             for(var i = 0; i< lhs.Length; i++)
                 dst[i] = gmath.lteq(lhs[i], rhs[i]);
@@ -453,7 +468,7 @@ namespace Z0
         }
 
         public static Span<bool> lteq<T>(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs)
-            where T : struct
+            where T : unmanaged
                 => lteq(lhs,rhs,span<bool>(length(lhs,rhs)));
 
         /// <summary>
@@ -505,67 +520,53 @@ namespace Z0
             where T : unmanaged
                 => max(src.ReadOnly());
 
-        [MethodImpl(Inline)]
-        public static T sum<T>(ReadOnlySpan<T> src)
-            where T :  struct
-        {
-            if(typematch<T,sbyte>())
-                return generic<T>(math.sum(int8(src)));
-            else if(typematch<T,byte>())
-                return generic<T>(math.sum(uint8(src)));
-            else if(typematch<T,short>())
-                return generic<T>(math.sum(int16(src)));
-            else if(typematch<T,ushort>())
-                return generic<T>(math.sum(uint16(src)));
-            else if(typematch<T,int>())
-                return generic<T>(math.sum(int32(src)));
-            else if(typematch<T,uint>())
-                return generic<T>(math.sum(uint32(src)));
-            else if(typematch<T,long>())
-                return generic<T>(math.sum(int64(src)));
-            else if(typematch<T,ulong>())
-                return generic<T>(math.sum(uint64(src)));
-            else if(typematch<T,float>())
-                return generic<T>(math.sum(float32(src)));
-            else if(typematch<T,double>())
-                return generic<T>(math.sum(float64(src)));
-            else
-                throw unsupported<T>();
-        }
-
-        [MethodImpl(Inline)]
-        public static T sum<T>(Span<T> src)
-            where T :  struct
-                => sum(src.ReadOnly());
-
-
         public static T min<T>(ReadOnlySpan<T> src)
-            where T : struct
+            where T : unmanaged
+        {
+            if(src.IsEmpty)
+                return default(T);
+            
+            var result = src[0];
+            for(var i = 1; i< src.Length; i++)
+                if(gmath.lt(src[i], result))
+                    result = src[i];
+
+            return result;
+        }
+
+
+        public static T avg<T>(ReadOnlySpan<T> src)
+            where T : unmanaged
         {
             if(typematch<T,sbyte>())
-                return generic<T>(math.min(int8(src)));
+                return generic<T>(math.avg(int8(src)));
             else if(typematch<T,byte>())
-                return generic<T>(math.min(uint8(src)));
+                return generic<T>(math.avg(uint8(src)));
             else if(typematch<T,short>())
-                return generic<T>(math.min(int16(src)));
+                return generic<T>(math.avg(int16(src)));
             else if(typematch<T,ushort>())
-                return generic<T>(math.min(uint16(src)));
+                return generic<T>(math.avg(uint16(src)));
             else if(typematch<T,int>())
-                return generic<T>(math.min(int32(src)));
+                return generic<T>(math.avg(int32(src)));
             else if(typematch<T,uint>())
-                return generic<T>(math.min(uint32(src)));
+                return generic<T>(math.avg(uint32(src)));
             else if(typematch<T,long>())
-                return generic<T>(math.min(int64(src)));
+                return generic<T>(math.avg(int64(src)));
             else if(typematch<T,ulong>())
-                return generic<T>(math.min(uint64(src)));
-            else if(typematch<T,float>())
-                return generic<T>(math.min(float32(src)));
-            else if(typematch<T,double>())
-                return generic<T>(math.min(float64(src)));
-            else
+                return generic<T>(math.avg(uint64(src)));
+            else if(typeof(T) == typeof(float))
+                return generic<T>(math.avg(float32(src)));
+            else if(typeof(T) == typeof(double))
+                return generic<T>(math.avg(float64(src)));
+            else            
                 throw unsupported<T>();
-            
-        }
+        }           
+
+        [MethodImpl(Inline)]
+        public static T avg<T>(Span<T> src)
+            where T : unmanaged
+            => avg(src.ReadOnly());
+
 
         public static Span<T> or<T>(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs, Span<T> dst)
             where T : unmanaged
@@ -646,7 +647,7 @@ namespace Z0
         /// <param name="rhs"></param>
         /// <typeparam name="T">The primal floating-point type</typeparam>
         public static Span<T> fdiv<T>(Span<T> src, T rhs)
-            where T : struct
+            where T : unmanaged
         {
             for(var i = 0; i< src.Length; i++)
                 gfp.div(ref src[i], rhs);
@@ -654,7 +655,7 @@ namespace Z0
         }
 
         public static Span<T> round<T>(ReadOnlySpan<T> src, int scale, Span<T> dst)
-            where T : struct
+            where T : unmanaged
         {            
             static Span<float> round32(ReadOnlySpan<float> src, int scale, Span<float> dst)
             {
@@ -672,9 +673,9 @@ namespace Z0
                 return dst;
             }            
             
-            if(typematch<T,float>())
+            if(typeof(T) == typeof(float))
                 round32(float32(src), scale, float32(dst));
-            else if(typematch<T,double>())
+            else if(typeof(T) == typeof(double))
                 round64(float64(src), scale, float64(dst));
             else
                 return src.Replicate();
@@ -682,11 +683,11 @@ namespace Z0
         }
 
         public static Span<T> round<T>(ReadOnlySpan<T> src, int scale)
-            where T : struct
+            where T : unmanaged
                 => round(src, scale, span<T>(src.Length));
 
         public static Span<T> round<T>(Span<T> io, int scale)
-            where T : struct
+            where T : unmanaged
         {
          
             static void round32(Span<float> io, int scale)
@@ -701,9 +702,9 @@ namespace Z0
                     fmath.round(ref io[i], scale);
             }
          
-            if(typematch<T,float>())
+            if(typeof(T) == typeof(float))
                 round32(float32(io), scale);
-            else if(typematch<T,double>())
+            else if(typeof(T) == typeof(double))
                 round64(float64(io), scale);
             return io;        
         }
@@ -711,7 +712,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static Span<T> sqrt<T>(Span<T> src)
-            where T : struct
+            where T : unmanaged
         {
             for(var i=0; i< src.Length; i++)
                 gfp.sqrt(ref src[i]);

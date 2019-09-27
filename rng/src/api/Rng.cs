@@ -18,15 +18,15 @@ namespace Z0
     {
         [MethodImpl(Inline)]
         static T TypeMin<T>()
-            where T : struct
+            where T : unmanaged
                 => gmath.minval<T>();
         
         static T TypeMax<T>()
-            where T : struct
+            where T : unmanaged
                 => gmath.maxval<T>();
 
         public static Interval<T> TypeDomain<T>()
-            where T : struct
+            where T : unmanaged
         {
             var min = gmath.signed<T>() && !gmath.floating<T>()
                 ? gmath.negate(gmath.sar(TypeMax<T>(), 1)) 
@@ -38,7 +38,6 @@ namespace Z0
                 : gmath.maxval<T>();
             return (min,max);
 
-            //return leftclosed(TypeMin<T>(),TypeMax<T>());
         }
 
         /// <summary>
@@ -47,7 +46,7 @@ namespace Z0
         /// <typeparam name="T">The seed type</typeparam>
         [MethodImpl(Inline)]
         public static T EntropicSeed<T>()            
-            where T : struct
+            where T : unmanaged
                 => Entropy.Value<T>();
         
         /// <summary>
@@ -57,7 +56,7 @@ namespace Z0
         /// <typeparam name="T">The seed type</typeparam>
         [MethodImpl(Inline)]
         public static T FixedSeed<T>(T index)
-            where T : struct
+            where T : unmanaged
                 => RngSeed.TakeSingle<T>(convert<T,int>(index));
 
         /// <summary>
@@ -68,7 +67,7 @@ namespace Z0
         /// <typeparam name="T">The type relative to which the maximum index is computed</typeparam>
         [MethodImpl(Inline)]
         public static (ByteSize ByteCount, int MaxIndex) FixedSeedStats<T>()
-            where T : struct
+            where T : unmanaged
                 => (RngSeed.SourceLength, RngSeed.MaxOffset<T>());
 
         /// <summary>

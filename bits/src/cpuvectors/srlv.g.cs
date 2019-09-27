@@ -24,8 +24,8 @@ namespace Z0
         /// <param name="control">The control vector</param>
        [MethodImpl(Inline)]
         public static Vec128<S> srlv<S,T>(in Vec128<S> lhs, in Vec128<T> shifts)
-            where S : struct
-            where T : struct
+            where S : unmanaged
+            where T : unmanaged
         {
             if(typeof(S) == typeof(int))
                 return generic<S>(Bits.srlv(in int32(in lhs), in uint32(in shifts)));
@@ -48,8 +48,8 @@ namespace Z0
         /// <param name="control">The control vector</param>
         [MethodImpl(Inline)]
         public static Vec256<S> srlv<S,T>(in Vec256<S> lhs, in Vec256<T> shifts)
-            where S : struct
-            where T : struct
+            where S : unmanaged
+            where T : unmanaged
         {
             if(typeof(S) == typeof(int))
                 return generic<S>(Bits.srlv(in int32(in lhs),  shifts.As<uint>()));

@@ -23,7 +23,7 @@ namespace Z0
         /// <param name="rhs">The right source vector</param>
         [MethodImpl(Inline)]
         public static Vec128<T> unpackhi<T>(in Vec128<T> lhs, in Vec128<T> rhs)        
-            where T : struct
+            where T : unmanaged
         {
             if(typematch<T,sbyte>())
                 return generic<T>(dinx.unpackhi(in int8(in lhs), in int8(in rhs)));
@@ -41,9 +41,9 @@ namespace Z0
                 return generic<T>(dinx.unpackhi(in int64(in lhs), in int64(in rhs)));
             else if(typematch<T,ulong>())
                 return generic<T>(dinx.unpackhi(in uint64(in lhs), in uint64(in rhs)));
-            else if(typematch<T,float>())
+            else if(typeof(T) == typeof(float))
                 return generic<T>(dfp.unpackhi(in float32(in lhs), in float32(in rhs)));
-            else if(typematch<T,double>())
+            else if(typeof(T) == typeof(double))
                 return generic<T>(dfp.unpackhi(in float64(in lhs), in float64(in rhs)));
             else
                 throw unsupported<T>();
@@ -59,7 +59,7 @@ namespace Z0
         /// <param name="rhs">The right source vector</param>
        [MethodImpl(Inline)]
         public static Vec256<T> unpackhi<T>(in Vec256<T> lhs, in Vec256<T> rhs)        
-            where T : struct
+            where T : unmanaged
         {
             if(typematch<T,sbyte>())
                 return generic<T>(dinx.unpackhi(in int8(in lhs), in int8(in rhs)));
@@ -77,9 +77,9 @@ namespace Z0
                 return generic<T>(dinx.unpackhi(in int64(in lhs), in int64(in rhs)));
             else if(typematch<T,ulong>())
                 return generic<T>(dinx.unpackhi(in uint64(in lhs), in uint64(in rhs)));
-            else if(typematch<T,float>())
+            else if(typeof(T) == typeof(float))
                 return generic<T>(dfp.unpackhi(in float32(in lhs), in float32(in rhs)));
-            else if(typematch<T,double>())
+            else if(typeof(T) == typeof(double))
                 return generic<T>(dfp.unpackhi(in float64(in lhs), in float64(in rhs)));
             else
                 throw unsupported<T>();

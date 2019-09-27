@@ -25,7 +25,7 @@ namespace Z0
         /// <typeparam name="T">The source element type</typeparam>
         [MethodImpl(Inline)]
         public static ReadOnlySpan<byte> AsBytes<T>(this ReadOnlySpan<T> src, int offset = 0, int ? length = null)
-            where T : struct
+            where T : unmanaged
             =>   (offset == 0 && length == null) 
                 ? MemoryMarshal.AsBytes(src)
                 : length == null  
@@ -41,7 +41,7 @@ namespace Z0
         /// <typeparam name="T">The source element type</typeparam>
         [MethodImpl(Inline)]
         public static Span<byte> AsBytes<T>(this Span<T> src, int offset = 0, int ? length = null)
-            where T : struct
+            where T : unmanaged
             =>   (offset == 0 && length == null) 
                 ? MemoryMarshal.AsBytes(src)
                 : length == null  
@@ -125,7 +125,7 @@ namespace Z0
         /// <typeparam name="T">The element type</typeparam>
         public static void StreamTo<N,T>(this IEnumerable<T> src, Span<N,T> dst, N n = default)
             where N : ITypeNat, new()
-            where T : struct
+            where T : unmanaged
                 => src.Take(nati<N>()).StreamTo(dst.Unsized);
 
         /// <summary>
@@ -139,7 +139,7 @@ namespace Z0
         public static void StreamTo<M,N,T>(this IEnumerable<T> src, Span<M,N,T> dst)
             where M : ITypeNat, new()
             where N : ITypeNat, new()
-            where T : struct
+            where T : unmanaged
                 => src.Take(nati<M>() *nati<N>()).StreamTo(dst.Unsized);
 
         /// <summary>
@@ -202,7 +202,7 @@ namespace Z0
         /// <param name="rhs">The right span</param>
         /// <typeparam name="T">The value type</typeparam>
         public static bool Eq<T>(this ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs)
-            where T : struct, IEquatable<T>
+            where T : unmanaged, IEquatable<T>
         {
             if(lhs.Length != rhs.Length)
                 return false;
@@ -233,7 +233,7 @@ namespace Z0
         /// <returns>The manipulated span</returns>
         [MethodImpl(Inline)]
         public static Span<T> ZeroFill<T>(this Span<T> io)
-            where T : struct
+            where T : unmanaged
         {
             io.Fill(default(T));
             return io;
@@ -260,7 +260,7 @@ namespace Z0
         /// <typeparam name="T">The value type</typeparam>
         [MethodImpl(Inline)]
         public static bool Eq<T>(this Span<T> lhs, ReadOnlySpan<T> rhs)
-            where T : struct, IEquatable<T>
+            where T : unmanaged, IEquatable<T>
                 => lhs.ReadOnly().Eq(rhs);
         
         /// <summary>
@@ -273,7 +273,7 @@ namespace Z0
         [MethodImpl(Inline)]        
         public static Span<N,T> ToNatural<N,T>(this Span<T> src, N size = default)
             where N : ITypeNat, new()
-            where T : struct
+            where T : unmanaged
                 => new Span<N, T>(src);       
 
         /// <summary>
@@ -283,7 +283,7 @@ namespace Z0
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
         public static Span256<T> Replicate<T>(this Span256<T> src, bool structureOnly = false)
-            where T : struct
+            where T : unmanaged
         {
             Span<T> dst = new T[src.Length];
             if(!structureOnly)
@@ -298,7 +298,7 @@ namespace Z0
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
         public static Span256<T> Replicate<T>(this ReadOnlySpan256<T> src, bool structureOnly = false)
-            where T : struct
+            where T : unmanaged
         {
             Span<T> dst = new T[src.Length];
             if(!structureOnly)
@@ -330,7 +330,7 @@ namespace Z0
         [MethodImpl(Inline)]   
         public static Span<N,T> Replicate<N,T>(this ReadOnlySpan<N,T> src)    
             where N : ITypeNat, new()
-            where T : struct
+            where T : unmanaged
                 => new Span<N,T>(src);
 
         /// <summary>
@@ -377,8 +377,8 @@ namespace Z0
         public static Span<T> Map<M,N,S,T>(this Span<M,N,S> src, Func<S, T> f)
             where M : ITypeNat, new()
             where N : ITypeNat, new()
-            where S : struct
-            where T : struct
+            where S : unmanaged
+            where T : unmanaged
         {
             var dst = NatSpan.Alloc<M,N,T>();
             var m = nfunc.nati<M>();

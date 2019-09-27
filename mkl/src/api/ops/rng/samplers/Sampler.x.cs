@@ -58,9 +58,9 @@ namespace Z0.Mkl
             var sampler = default(ISampler<T>);
             if(typeof(T) == typeof(int))
                 sampler = samplers.uniform(rng, _spec.ToInt32()) as ISampler<T>;
-            else if(typematch<T,float>())
+            else if(typeof(T) == typeof(float))
                 sampler = samplers.uniform(rng, _spec.ToFloat32()) as ISampler<T>;
-            else if(typematch<T,double>())                    
+            else if(typeof(T) == typeof(double))                    
                 sampler = samplers.uniform(rng, _spec.ToFloat64()) as ISampler<T>;
             else
                 throw unsupported<T>();                                        
@@ -117,9 +117,9 @@ namespace Z0.Mkl
             where T : unmanaged
         {
             var sampler = default(ISampler<T>);
-            if(typematch<T,float>())
+            if(typeof(T) == typeof(float))
                 sampler = samplers.gaussian(rng, spec.ToFloat32()) as ISampler<T>;
-            else if(typematch<T,double>())
+            else if(typeof(T) == typeof(double))
                 sampler = samplers.gaussian(rng, spec.ToFloat64()) as ISampler<T>;
             else
                 throw unsupported<T>();                                        

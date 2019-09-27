@@ -23,7 +23,7 @@ namespace Z0
         /// are bound only by the domain of the type
         /// </summary>
         BlockVector<N,T> Next<T>()
-            where T : struct;
+            where T : unmanaged;
 
         /// <summary>
         /// Retrieves the next vector from the suite, where each component is 
@@ -32,7 +32,7 @@ namespace Z0
         /// <param name="max">The exclusive upper bound</param>
         /// <typeparam name="T">The point type</typeparam>
         BlockVector<N,T> Next<T>(T max)
-            where T : struct;
+            where T : unmanaged;
 
         /// <summary>
         /// Retrieves the next vector from the suite, where each component is 
@@ -42,7 +42,7 @@ namespace Z0
         /// <param name="max">The exclusive upper bound</param>
         /// <typeparam name="T">The point type</typeparam>
         BlockVector<N,T> Next<T>(T min, T max)
-            where T : struct;
+            where T : unmanaged;
 
         /// <summary>
         /// Retrieves the next vector from the suite, where each component is 
@@ -51,7 +51,7 @@ namespace Z0
         /// <param name="domain">The range</param>
         /// <typeparam name="T">The point type</typeparam>
         BlockVector<N,T> Next<T>(Interval<T> domain)
-            where T : struct;
+            where T : unmanaged;
         
         /// <summary>
         /// Retrieves the generator corresponding to a specified index that
@@ -68,7 +68,7 @@ namespace Z0
     /// <typeparam name="T">The primal component type</typeparam>
     public interface IPointSource<N,T>
         where N : ITypeNat, new()
-        where T : struct
+        where T : unmanaged
     {
         Span<N,T> Next();
     }

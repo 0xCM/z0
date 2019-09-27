@@ -132,7 +132,7 @@ namespace Z0
         }
 
         OpTime rng_bench<T>(IRandomStream<T> stream)
-            where T : struct
+            where T : unmanaged
         {
             var segment = Pow2.T08;
             var total = Pow2.T17;

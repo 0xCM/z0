@@ -22,8 +22,8 @@ namespace Z0
         /// <typeparam name="V">The vertex index type</typeparam>
         /// <typeparam name="T">The vertex payload type</typeparam>
         public static Edge<V> Connect<V,T>(this Vertex<V,T> src, Vertex<V,T> dst)
-            where V : struct
-            where T : struct
+            where V : unmanaged
+            where T : unmanaged
                 => Graph.Connect(src,dst);
 
         /// <summary>
@@ -33,7 +33,7 @@ namespace Z0
         /// <param name="dst">The target vertex</param>
         /// <typeparam name="V">The vertex index type</typeparam>
         public static Edge<V> Connect<V>(this Vertex<V> src, Vertex<V> dst)
-            where V : struct
+            where V : unmanaged
                 => Graph.Connect(src,dst);
         
         /// <summary>
@@ -43,7 +43,7 @@ namespace Z0
         /// <typeparam name="V">The vertex index type</typeparam>
         [MethodImpl(Inline)]
         public static Arrow<V> ToArrow<V>(this Edge<V> e)
-            where V : struct
+            where V : unmanaged
                 => new Arrow<V>(e.Source, e.Target);
 
         /// <summary>
@@ -53,7 +53,7 @@ namespace Z0
         /// <param name="label">An optional label for the graph</param>
         /// <typeparam name="V">The verex index type</typeparam>
         public static string Format<V>(this Graph<V> graph, string label = null)
-            where V : struct
+            where V : unmanaged
                 => Graph.Format(graph,label);
 
         /// <summary>

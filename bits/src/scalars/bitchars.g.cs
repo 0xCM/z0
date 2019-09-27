@@ -39,9 +39,9 @@ namespace Z0
                 return bitchars(int64(in src));
             else if(typematch<T,ulong>())
                 return bitchars(uint64(in src));
-            else if(typematch<T,float>())
+            else if(typeof(T) == typeof(float))
                 return bitchars(float32(in src));
-            else if(typematch<T,double>())
+            else if(typeof(T) == typeof(double))
                 return bitchars(float64(in src));
             else            
                 throw unsupported<T>();            
@@ -53,7 +53,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The source type</typeparam>
         public static Span<char> bitchars<T>(ReadOnlySpan<T> src, int? maxlen = null)
-            where T : struct
+            where T : unmanaged
         {
             var seglen = Unsafe.SizeOf<T>()*8;
             Span<char> dst = new char[src.Length * seglen];
@@ -64,11 +64,11 @@ namespace Z0
         
         [MethodImpl(Inline)]
         public static Span<char> bitchars<T>(Span<T> src, int? maxlen = null)
-            where T : struct
+            where T : unmanaged
                 => bitchars(src.ReadOnly(), maxlen);    
         
         public static ref T parse<T>(ReadOnlySpan<char> src, int offset, out T dst)
-            where T : struct
+            where T : unmanaged
         {            
             var last = Math.Min(Unsafe.SizeOf<T>()*8, src.Length) - 1;                                    
             dst = gmath.zero<T>();

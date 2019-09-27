@@ -104,7 +104,7 @@ namespace Z0.Test
                 time = add64i_bench();
             else if(typematch<T,ulong>())
                 time = add64u_bench();
-            else if(typematch<T,double>())
+            else if(typeof(T) == typeof(double))
                 time = add64f_bench();
             
             var opname = $"direct<{typeof(T).DisplayName()}>_add";

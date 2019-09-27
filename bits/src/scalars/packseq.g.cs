@@ -17,7 +17,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static ref T packseq<T>(ReadOnlySpan<byte> src, out T dst)
-            where T : struct
+            where T : unmanaged
         {
             if(typeof(T) == typeof(byte) || typeof(T) == typeof(sbyte))
                 dst = generic<T>(ref Bits.packseq(src, out byte _));

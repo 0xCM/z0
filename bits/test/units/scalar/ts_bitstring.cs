@@ -316,7 +316,7 @@ namespace Z0.Test
         }
 
          void bsshiftr_check<T>()
-            where T : struct
+            where T : unmanaged
         {
             TypeCaseStart<T>();
 
@@ -339,7 +339,7 @@ namespace Z0.Test
 
 
         void bsrep_check<T>()
-            where T : struct
+            where T : unmanaged
         {
             TypeCaseStart<T>();
             var src = Random.Span<T>(SampleSize);
@@ -357,7 +357,7 @@ namespace Z0.Test
 
 
         void bschars_check<T>()
-            where T : struct
+            where T : unmanaged
         {
             TypeCaseStart<T>();
             var src = Random.Span<T>(SampleSize);
@@ -374,7 +374,7 @@ namespace Z0.Test
         }
 
         void bsfromscalar_check<T>()
-            where T : struct
+            where T : unmanaged
         {
             TypeCaseStart<T>();
             var src = Random.Span<T>(SampleSize);
@@ -391,7 +391,7 @@ namespace Z0.Test
         }
 
         void bsseq_check1<T>()
-            where T : struct
+            where T : unmanaged
         {
             TypeCaseStart<T>();
             var src = Random.Span<T>(SampleSize);
@@ -406,7 +406,7 @@ namespace Z0.Test
         }
 
         void bsseq_check2<T>()
-            where T : struct
+            where T : unmanaged
         {
             TypeCaseStart<T>();
             var src = Random.Span<T>(SampleSize);
@@ -426,7 +426,7 @@ namespace Z0.Test
 
  
          void bsconvert_check<T>()
-            where T : struct
+            where T : unmanaged
         {
             TypeCaseStart<T>();
             var src = Random.Span<T>(SampleSize);
@@ -440,7 +440,7 @@ namespace Z0.Test
         }
 
         void bsparse_check1<T>()
-            where T : struct
+            where T : unmanaged
         {
             TypeCaseStart<T>();
             var src = Random.Span<T>(SampleSize);

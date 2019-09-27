@@ -16,7 +16,7 @@ namespace Z0
     {
         [MethodImpl(Inline)]
         public static Vec128Cmp<T> Define<T>(Bit[] Results)
-            where T : struct
+            where T : unmanaged
                 => new Vec128Cmp<T>(Results);
 
         public static Vec128Cmp<T> Define<T>(Vector128<T> result)                

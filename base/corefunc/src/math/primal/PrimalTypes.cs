@@ -75,7 +75,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static string PrialNumericName<T>()
-            where T : struct
+            where T : unmanaged
                 => typeof(T).PrialNumericName();
         
     

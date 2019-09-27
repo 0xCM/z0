@@ -17,7 +17,7 @@ namespace Z0
     /// A System.Span[T] clone with length a multiple of 16 bytes = 128 bits
     /// </summary>
     public ref struct ReadOnlySpan128<T>
-        where T : struct
+        where T : unmanaged
     {
         ReadOnlySpan<T> data;
 
@@ -187,7 +187,7 @@ namespace Z0
                 
         [MethodImpl(Inline)]
         public ReadOnlySpan128<S> As<S>()                
-            where S : struct
+            where S : unmanaged
                 => (ReadOnlySpan128<S>)MemoryMarshal.Cast<T,S>(data);                    
 
         /// <summary>

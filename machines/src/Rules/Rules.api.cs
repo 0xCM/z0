@@ -32,7 +32,7 @@ namespace Z0
         /// <param name="value">The initial value, if any</param>
         /// <typeparam name="T">The variable type</typeparam>
         public static VarExpr<T> Var<T>(string name, T? value = null)
-            where T : struct
+            where T : unmanaged
                 => new VarExpr<T>(name, value);
         
         public static MembershipExpr<T> IsMember<T>(HashSet<T> matches)

@@ -18,7 +18,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T"></typeparam>
     public class DivisorIndex<T> 
-        where T : struct
+        where T : unmanaged
     {
         public DivisorIndex(Interval<T> Range, IReadOnlyList<DivisorList<T>> Lists)
         {

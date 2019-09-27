@@ -12,7 +12,7 @@ namespace Z0
 	/// Identifies a bit position within a contiguous sequence of T-element values
 	/// </summary>
 	public struct CellIndex<T> 
-        where T : struct
+        where T : unmanaged
 	{
 		/// <summary>
 		/// The container-relative 0-based offset of the segment

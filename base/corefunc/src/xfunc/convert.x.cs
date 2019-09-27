@@ -30,7 +30,7 @@ namespace Z0
         /// <typeparam name="T">The target type</typeparam>
         [MethodImpl(Inline)]
         public static T Convert<T>(this sbyte src)
-            where T : struct
+            where T : unmanaged
                 => convert<T>(src);
         
         /// <summary>
@@ -40,7 +40,7 @@ namespace Z0
         /// <typeparam name="T">The target type</typeparam>
         [MethodImpl(Inline)]
         public static T Convert<T>(this byte src)
-            where T : struct
+            where T : unmanaged
                 => convert<T>(src);
 
         /// <summary>
@@ -50,7 +50,7 @@ namespace Z0
         /// <typeparam name="T">The target type</typeparam>
         [MethodImpl(Inline)]
         public static T Convert<T>(this short src)
-            where T : struct
+            where T : unmanaged
                 => convert<T>(src);
 
         /// <summary>
@@ -60,7 +60,7 @@ namespace Z0
         /// <typeparam name="T">The target type</typeparam>
         [MethodImpl(Inline)]
         public static T Convert<T>(this ushort src)
-            where T : struct
+            where T : unmanaged
                 => convert<T>(src);
 
         /// <summary>
@@ -70,7 +70,7 @@ namespace Z0
         /// <typeparam name="T">The target type</typeparam>
         [MethodImpl(Inline)]
         public static T Convert<T>(this int src)
-            where T : struct
+            where T : unmanaged
                 => convert<T>(src);
 
         /// <summary>
@@ -80,7 +80,7 @@ namespace Z0
         /// <typeparam name="T">The target type</typeparam>
         [MethodImpl(Inline)]
         public static T Convert<T>(this uint src)
-            where T : struct
+            where T : unmanaged
                 => convert<T>(src);
 
         /// <summary>
@@ -90,7 +90,7 @@ namespace Z0
         /// <typeparam name="T">The target type</typeparam>
         [MethodImpl(Inline)]
         public static T Convert<T>(this long src)
-            where T : struct
+            where T : unmanaged
                 => convert<T>(src);
 
         /// <summary>
@@ -100,7 +100,7 @@ namespace Z0
         /// <typeparam name="T">The target type</typeparam>
         [MethodImpl(Inline)]
         public static T Convert<T>(this ulong src)
-            where T : struct
+            where T : unmanaged
                 => convert<T>(src);
 
         /// <summary>
@@ -110,7 +110,7 @@ namespace Z0
         /// <typeparam name="T">The target type</typeparam>
         [MethodImpl(Inline)]
         public static T Convert<T>(this float src)
-            where T : struct
+            where T : unmanaged
                 => convert<T>(src);
 
         /// <summary>
@@ -120,7 +120,7 @@ namespace Z0
         /// <typeparam name="T">The target type</typeparam>
         [MethodImpl(Inline)]
         public static T Convert<T>(this double src)
-            where T : struct
+            where T : unmanaged
                 => convert<T>(src);
 
         /// <summary>
@@ -130,7 +130,7 @@ namespace Z0
         /// <typeparam name="T">The target type</typeparam>
         [MethodImpl(Inline)]
         public static T Convert<T>(this char src)
-            where T : struct
+            where T : unmanaged
                 => convert<T>(src);
 
         /// <summary>
@@ -139,7 +139,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The target type</typeparam>
         public static IEnumerable<T> Convert<T>(this IEnumerable<sbyte> src)
-            where T : struct
+            where T : unmanaged
                 => from item in src select convert<T>(item);
 
         /// <summary>
@@ -148,7 +148,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The target type</typeparam>
         public static IEnumerable<T> Convert<T>(this IEnumerable<byte> src)
-            where T : struct
+            where T : unmanaged
                 => from item in src select convert<T>(item);
         
         /// <summary>
@@ -157,7 +157,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The target type</typeparam>
         public static IEnumerable<T> Convert<T>(this IEnumerable<short> src)
-            where T : struct
+            where T : unmanaged
                 => from item in src select convert<T>(item);
 
         /// <summary>
@@ -166,7 +166,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The target type</typeparam>
         public static IEnumerable<T> Convert<T>(this IEnumerable<ushort> src)
-            where T : struct
+            where T : unmanaged
                 => from item in src select convert<T>(item);
 
         /// <summary>
@@ -175,7 +175,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The target type</typeparam>
         public static IEnumerable<T> Convert<T>(this IEnumerable<int> src)
-            where T : struct
+            where T : unmanaged
                 => from item in src select convert<T>(item);
 
         /// <summary>
@@ -184,7 +184,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The target type</typeparam>
         public static IEnumerable<T> Convert<T>(this IEnumerable<uint> src)
-            where T : struct
+            where T : unmanaged
                 => from item in src select convert<T>(item);
 
         /// <summary>
@@ -193,7 +193,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The target type</typeparam>
         public static IEnumerable<T> Convert<T>(this IEnumerable<long> src)
-            where T : struct
+            where T : unmanaged
                 => from item in src select convert<T>(item);
 
         /// <summary>
@@ -202,7 +202,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The target type</typeparam>
         public static IEnumerable<T> Convert<T>(this IEnumerable<ulong> src)
-            where T : struct            
+            where T : unmanaged            
                 => from item in src select convert<T>(item);
 
         /// <summary>
@@ -211,7 +211,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The target type</typeparam>
         public static IEnumerable<T> Convert<T>(this IEnumerable<float> src)
-            where T : struct            
+            where T : unmanaged            
                 => from item in src select convert<T>(item);
 
         /// <summary>
@@ -220,7 +220,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The target type</typeparam>
         public static IEnumerable<T> Convert<T>(this IEnumerable<double> src)
-            where T : struct            
+            where T : unmanaged            
                 => from item in src select convert<T>(item);
 
         /// <summary>
@@ -229,7 +229,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The target type</typeparam>
         public static IEnumerable<T> Convert<T>(this IEnumerable<char> src)
-            where T : struct            
+            where T : unmanaged            
                 => from item in src select convert<T>(item);
 
         /// <summary>
@@ -238,8 +238,8 @@ namespace Z0
         /// <param name="src">The source values</param>
         /// <typeparam name="T">The target type</typeparam>
         static Span<T> Convert<S,T>(this ReadOnlySpan<S> src)
-            where S : struct
-            where T : struct
+            where S : unmanaged
+            where T : unmanaged
         {
             Span<T> dst = new T[src.Length];
             for(var i=0; i<src.Length; i++)
@@ -248,8 +248,8 @@ namespace Z0
         }
 
         static T[] Convert<S,T>(this S[] src)
-            where S : struct
-            where T : struct
+            where S : unmanaged
+            where T : unmanaged
         {
             var dst = new T[src.Length];
             for(var i=0; i<src.Length; i++)
@@ -258,158 +258,158 @@ namespace Z0
         }
 
         static Span<T> Convert<S,T>(this Span<S> src)
-            where S : struct
-            where T : struct
+            where S : unmanaged
+            where T : unmanaged
                 => src.ReadOnly().Convert<S,T>();
 
         [MethodImpl(Inline)]
         public static Span<T> Convert<T>(this ReadOnlySpan<sbyte> src)
-            where T : struct
+            where T : unmanaged
                 => src.Convert<sbyte,T>();
 
         [MethodImpl(Inline)]
         public static Span<T> Convert<T>(this ReadOnlySpan<byte> src)
-            where T : struct
+            where T : unmanaged
                 => src.Convert<byte,T>();
 
         [MethodImpl(Inline)]
         public static Span<T> Convert<T>(this ReadOnlySpan<short> src)
-            where T : struct
+            where T : unmanaged
                 => src.Convert<short,T>();
 
         [MethodImpl(Inline)]
         public static Span<T> Convert<T>(this ReadOnlySpan<ushort> src)
-            where T : struct
+            where T : unmanaged
                 => src.Convert<ushort,T>();
 
         [MethodImpl(Inline)]
         public static Span<T> Convert<T>(this ReadOnlySpan<int> src)
-            where T : struct
+            where T : unmanaged
                 => src.Convert<int,T>();
 
         [MethodImpl(Inline)]
         public static Span<T> Convert<T>(this ReadOnlySpan<uint> src)
-            where T : struct
+            where T : unmanaged
                 => src.Convert<uint,T>();
 
         [MethodImpl(Inline)]
         public static Span<T> Convert<T>(this ReadOnlySpan<long> src)
-            where T : struct
+            where T : unmanaged
                 => src.Convert<long,T>();
 
         [MethodImpl(Inline)]
         public static Span<T> Convert<T>(this ReadOnlySpan<ulong> src)
-            where T : struct
+            where T : unmanaged
                 => src.Convert<ulong,T>();
 
         [MethodImpl(Inline)]
         public static Span<T> Convert<T>(this ReadOnlySpan<float> src)
-            where T : struct
+            where T : unmanaged
                 => src.Convert<float,T>();
 
         [MethodImpl(Inline)]
         public static Span<T> Convert<T>(this ReadOnlySpan<double> src)
-            where T : struct
+            where T : unmanaged
                 => src.Convert<double,T>();
 
         [MethodImpl(Inline)]
         public static Span<T> Convert<T>(this Span<sbyte> src)
-            where T : struct
+            where T : unmanaged
                 => src.Convert<sbyte,T>();
 
         [MethodImpl(Inline)]
         public static Span<T> Convert<T>(this Span<byte> src)
-            where T : struct
+            where T : unmanaged
                 => src.Convert<byte,T>();
 
         [MethodImpl(Inline)]
         public static Span<T> Convert<T>(this Span<short> src)
-            where T : struct
+            where T : unmanaged
                 => src.Convert<short,T>();
 
         [MethodImpl(Inline)]
         public static Span<T> Convert<T>(this Span<ushort> src)
-            where T : struct
+            where T : unmanaged
                 => src.Convert<ushort,T>();
 
         [MethodImpl(Inline)]
         public static Span<T> Convert<T>(this Span<int> src)
-            where T : struct
+            where T : unmanaged
                 => src.Convert<int,T>();
 
         [MethodImpl(Inline)]
         public static Span<T> Convert<T>(this Span<uint> src)
-            where T : struct
+            where T : unmanaged
                 => src.Convert<uint,T>();
 
         [MethodImpl(Inline)]
         public static Span<T> Convert<T>(this Span<long> src)
-            where T : struct
+            where T : unmanaged
                 => src.Convert<long,T>();
 
         [MethodImpl(Inline)]
         public static Span<T> Convert<T>(this Span<ulong> src)
-            where T : struct
+            where T : unmanaged
                 => src.Convert<ulong,T>();
 
         [MethodImpl(Inline)]
         public static Span<T> Convert<T>(this Span<float> src)
-            where T : struct
+            where T : unmanaged
                 => src.Convert<float,T>();
 
         [MethodImpl(Inline)]
         public static Span<T> Convert<T>(this Span<double> src)
-            where T : struct
+            where T : unmanaged
                 => src.Convert<double,T>();
 
         [MethodImpl(Inline)]
         public static T[] Convert<T>(this sbyte[] src)
-            where T : struct
+            where T : unmanaged
                 => src.Convert<sbyte,T>();
 
         [MethodImpl(Inline)]
         public static T[] Convert<T>(this byte[] src)
-            where T : struct
+            where T : unmanaged
                 => src.Convert<byte,T>();
 
         [MethodImpl(Inline)]
         public static T[] Convert<T>(this short[] src)
-            where T : struct
+            where T : unmanaged
                 => src.Convert<short,T>();
 
         [MethodImpl(Inline)]
         public static T[] Convert<T>(this ushort[] src)
-            where T : struct
+            where T : unmanaged
                 => src.Convert<ushort,T>();
 
         [MethodImpl(Inline)]
         public static T[] Convert<T>(this int[] src)
-            where T : struct
+            where T : unmanaged
                 => src.Convert<int,T>();
 
         [MethodImpl(Inline)]
         public static T[] Convert<T>(this uint[] src)
-            where T : struct
+            where T : unmanaged
                 => src.Convert<uint,T>();
 
         [MethodImpl(Inline)]
         public static T[] Convert<T>(this long[] src)
-            where T : struct
+            where T : unmanaged
                 => src.Convert<long,T>();
 
         [MethodImpl(Inline)]
         public static T[] Convert<T>(this ulong[] src)
-            where T : struct
+            where T : unmanaged
                 => src.Convert<ulong,T>();
 
         [MethodImpl(Inline)]
         public static T[] Convert<T>(this float[] src)
-            where T : struct
+            where T : unmanaged
                 => src.Convert<float,T>();
 
         [MethodImpl(Inline)]
         public static T[] Convert<T>(this double[] src)
-            where T : struct
+            where T : unmanaged
                 => src.Convert<double,T>();
 
     }

@@ -110,7 +110,7 @@ namespace Z0
         /// <param name="src">The source bits</param>
         [MethodImpl(Inline)]        
         public static BitString ToBitString<T>(this Span<T> src, BitSize? maxlen = null)
-            where T : struct
+            where T : unmanaged
                 => BitString.FromScalars(src, maxlen); 
 
         /// <summary>
@@ -119,27 +119,9 @@ namespace Z0
         /// <param name="src">The source bits</param>
         [MethodImpl(Inline)]        
         public static BitString ToBitString<T>(this T[] src)
-            where T : struct
+            where T : unmanaged
                 => BitString.FromScalars(src); 
 
-
-        /// <summary>
-        /// Converts a sequence of memory cells to a bitstring
-        /// </summary>
-        /// <param name="src">The source bits</param>
-        [MethodImpl(Inline)]        
-        public static BitString ToBitString<T>(this ReadOnlyMemory<T> src)
-            where T : struct
-                => BitString.FromScalars(src); 
-
-        /// <summary>
-        /// Converts a sequence of memory cells to a bitstring
-        /// </summary>
-        /// <param name="src">The source bits</param>
-        [MethodImpl(Inline)]        
-        public static BitString ToBitString<T>(this Memory<T> src)
-            where T : struct
-                => BitString.FromScalars(src); 
 
         /// <summary>
         /// Converts a bitspan to a bitstring
@@ -164,7 +146,7 @@ namespace Z0
         /// <typeparam name="T">The data type on which the view is predicated</typeparam>
         [MethodImpl(Inline)]   
         public static BitString ToBitString<T>(this BitView<T> src)
-            where T : struct
+            where T : unmanaged
                 => src.Bytes.ToBitString();
     
         /// <summary>
@@ -182,7 +164,7 @@ namespace Z0
         /// <typeparam name="T">The underlying primal type</typeparam>
         [MethodImpl(Inline)]   
         public static BitString ToBitString<T>(this Vec128<T> src)
-            where T : struct        
+            where T : unmanaged        
                 => BitString.FromScalars(src.ToSpan());
         
         /// <summary>
@@ -192,7 +174,7 @@ namespace Z0
         /// <typeparam name="T">The underlying primal type</typeparam>
         [MethodImpl(Inline)]   
         public static BitString ToBitString<T>(this Vec256<T> src)
-            where T : struct        
+            where T : unmanaged        
                 => BitString.FromScalars(src.ToSpan());        
 
     }

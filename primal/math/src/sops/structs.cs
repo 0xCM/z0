@@ -13,7 +13,7 @@ namespace Z0
 
     using static As;
 
-    public struct AddOp<T>
+    public readonly struct AddOp<T>
         where T : unmanaged        
     {
         public static readonly AddOp<T> TheOnly = default;
@@ -28,7 +28,7 @@ namespace Z0
 
     }
 
-    public struct SubOp<T>
+    public readonly struct SubOp<T>
         where T : unmanaged        
     {
         public static readonly SubOp<T> TheOnly = default;
@@ -39,11 +39,11 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public readonly ref T apply(ref T x, in T y)
-            => ref gmath.sub(ref x, in y);
+            => ref gmath.sub(ref x, y);
     }
 
 
-    public struct MulOp<T>
+    public readonly struct MulOp<T>
         where T : unmanaged        
     {
         public static readonly MulOp<T> TheOnly = default;
@@ -57,7 +57,7 @@ namespace Z0
             => ref gmath.mul(ref x, y);
     }
 
-    public struct DivOp<T>
+    public readonly struct DivOp<T>
         where T : unmanaged        
     {
         public static readonly DivOp<T> TheOnly = default;
@@ -71,7 +71,7 @@ namespace Z0
             => ref gmath.div(ref x,y);
     }
 
-    public struct ModOp<T>
+    public readonly struct ModOp<T>
         where T : unmanaged        
     {
         public static readonly ModOp<T> TheOnly = default;
@@ -86,7 +86,7 @@ namespace Z0
 
     }
 
-   public struct AbsOp<T>
+   public readonly struct AbsOp<T>
         where T : unmanaged        
     {
         public static readonly AbsOp<T> TheOnly = default;
@@ -100,7 +100,7 @@ namespace Z0
             => ref gmath.abs(ref x);
     }
 
-    public struct IncOp<T>
+    public readonly struct IncOp<T>
         where T : unmanaged        
     {
         public static readonly IncOp<T> TheOnly = default;
@@ -115,7 +115,7 @@ namespace Z0
 
     }
 
-    public struct DecOp<T>
+    public readonly struct DecOp<T>
         where T : unmanaged        
     {
         public static readonly DecOp<T> TheOnly = default;
@@ -130,7 +130,7 @@ namespace Z0
 
     }
 
-    public struct NegateOp<T>
+    public readonly struct NegateOp<T>
         where T : unmanaged        
     {
         public static readonly NegateOp<T> TheOnly = default;
@@ -144,7 +144,7 @@ namespace Z0
             => ref gmath.negate(ref x);
     }
 
-    public struct FlipOp<T>
+    public readonly struct FlipOp<T>
         where T : unmanaged        
     {
         public static readonly FlipOp<T> TheOnly = default;

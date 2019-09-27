@@ -22,7 +22,7 @@ namespace Z0
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
         public static T andn<T>(in T lhs, in T rhs)
-            where T : struct
+            where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
                 return generic<T>(Bits.andn(in uint8(in lhs), in uint8(in rhs)));

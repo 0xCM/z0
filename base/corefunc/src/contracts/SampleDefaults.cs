@@ -19,7 +19,7 @@ namespace Z0
     }
     
     public interface ISampleDefaults<T> : ISampleDefaults
-        where T : struct
+        where T : unmanaged
     {
         /// <summary>
         /// The domain of potential values

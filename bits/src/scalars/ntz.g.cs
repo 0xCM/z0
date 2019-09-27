@@ -21,7 +21,7 @@ namespace Z0
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
         public static ulong ntz<T>(in T src)
-            where T : struct
+            where T : unmanaged
         {
             if(typematch<T,sbyte>())
                  return Bits.ntz(int8(in asRef(in src)));

@@ -29,7 +29,7 @@ namespace Z0
         /// <typeparam name="T">The span element type</typeparam>
         public static string FormatTable<T>(this Span<T> src, int rowcount, int colcount, 
             int? padlen = null, char? padchar = null, char? rowsep = null, char? cellsep = null)
-                where T : struct
+                where T : unmanaged
         {
             var rowlen = colcount;
             var cells = rowcount * colcount;            
@@ -78,7 +78,7 @@ namespace Z0
             int? padlen = null, char? padchar = null, char? rowsep = null, char? cellsep = null)
                 where M : ITypeNat, new()
                 where N : ITypeNat, new()
-                where T : struct
+                where T : unmanaged
                     => src.Unsized.FormatTable(nati<M>(), nati<N>(),  padlen, padchar, rowsep, cellsep); 
 
         /// <summary>
@@ -166,7 +166,7 @@ namespace Z0
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]        
         public static string FormatList<T>(this ReadOnlySpan128<T> src, char delimiter = ',', int offset = 0)
-            where T : struct
+            where T : unmanaged
                 => src.Unblocked.FormatList(delimiter, offset);
 
         /// <summary>
@@ -178,7 +178,7 @@ namespace Z0
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]        
         public static string FormatList<T>(this Span128<T> src, char delimiter = ',', int offset = 0)
-            where T : struct
+            where T : unmanaged
                 => src.Unblocked.FormatList(delimiter, offset);
 
         /// <summary>
@@ -190,7 +190,7 @@ namespace Z0
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]        
         public static string FormatList<T>(this ReadOnlySpan256<T> src, char delimiter = ',', int offset = 0)
-            where T : struct
+            where T : unmanaged
             => src.Unblocked.FormatList(delimiter, offset);
 
         /// <summary>
@@ -202,7 +202,7 @@ namespace Z0
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]        
         public static string FormatList<T>(this Span256<T> src, char delimiter = ',', int offset = 0)
-            where T : struct
+            where T : unmanaged
                 => src.Unblocked.FormatList(delimiter, offset);
 
         /// <summary>
@@ -216,7 +216,7 @@ namespace Z0
         [MethodImpl(Inline)]        
         public static string FormatList<N,T>(this Span<N,T> src, char delimiter = ',', int offset = 0)
             where N : ITypeNat, new()
-            where T : struct 
+            where T : unmanaged 
                 => src.Unsize().FormatList(delimiter,offset);
 
         public static string Concat(this Span<string> src, string sep = null)

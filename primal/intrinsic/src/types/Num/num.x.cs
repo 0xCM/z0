@@ -15,7 +15,7 @@ namespace Z0
     {
         [MethodImpl(Inline)]
         public static Scalar128<T> ToScalar128<T>(this Vec128<T> src, int index)
-            where T : struct            
+            where T : unmanaged            
                 => Num128.define(src[index]);
 
         /// <summary>
@@ -26,7 +26,7 @@ namespace Z0
         /// <typeparam name="T">The primitive type</typeparam>
         [MethodImpl(Inline)]
         public static Scalar128<T> ToScalar128<T>(this ReadOnlySpan128<T> src, int block = 0)            
-            where T : struct            
+            where T : unmanaged            
                 => Num128.load(src,block);
 
 

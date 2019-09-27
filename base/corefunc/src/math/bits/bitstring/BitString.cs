@@ -179,7 +179,7 @@ namespace Z0
         /// <param name="offset">The index of the first bit </param>
         [MethodImpl(Inline)]
         public T TakeValue<T>(int offset = 0)
-            where T : struct
+            where T : unmanaged
                 => PackSingle<T>(offset, Unsafe.SizeOf<T>());
 
         /// <summary>
@@ -468,7 +468,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         readonly T PackSingle<T>(int offset = 0, int? minlen = null)
-            where T : struct
+            where T : unmanaged
         {                        
             var src = bitseq.ToReadOnlySpan();
             var packed = PackedBits(src, offset, minlen);
@@ -503,11 +503,11 @@ namespace Z0
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
         static BitString FromScalars<T>(ReadOnlySpan<T> src, int? maxlen = null)
-            where T : struct
+            where T : unmanaged
                  => new BitString(ReadBitSeq(src, maxlen));
 
         static Span<byte> ReadBitSeq<T>(ReadOnlySpan<T> src, int? maxlen = null)
-            where T : struct
+            where T : unmanaged
         {
             require(typeof(T) != typeof(char));            
             var seglen = Unsafe.SizeOf<T>()*8;

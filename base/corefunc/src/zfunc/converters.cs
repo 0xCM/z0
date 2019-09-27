@@ -18,8 +18,8 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static T convert<S,T>(S src, out T dst)
-            where S : struct
-            where T : struct
+            where S : unmanaged
+            where T : unmanaged
         {
             if(typeof(S) == typeof(sbyte))
                     convert(int8(src), out dst);
@@ -56,8 +56,8 @@ namespace Z0
         /// <typeparam name="S">The soruce type</typeparam>
         /// <typeparam name="T">The target type</typeparam>
         public static T[] convert<S,T>(S[] src)
-            where T : struct
-            where S : struct
+            where T : unmanaged
+            where S : unmanaged
         {
             var dst = new T[src.Length];
             for(var i=0; i<src.Length; i++)
@@ -67,7 +67,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static T convert<T>(sbyte src, out T dst)
-            where T : struct
+            where T : unmanaged
         {
             if(typematch<T,sbyte>())
                   dst = generic<T>(convert(src, out sbyte x));
@@ -85,9 +85,9 @@ namespace Z0
                   dst = generic<T>(convert(src, out long x));
             else if(typematch<T,ulong>())
                   dst = generic<T>(convert(src, out ulong x));
-            else if(typematch<T,float>())
+            else if(typeof(T) == typeof(float))
                   dst = generic<T>(convert(src, out float x));
-            else if(typematch<T,double>())
+            else if(typeof(T) == typeof(double))
                   dst = generic<T>(convert(src, out double x));
             else if(typeof(T) == typeof(char))
                   dst = generic<T>(convert(src, out char x));
@@ -99,7 +99,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static T convert<T>(byte src, out T dst)
-            where T : struct
+            where T : unmanaged
         {
             if(typematch<T,sbyte>())
                   dst = generic<T>(convert(src, out sbyte x));
@@ -117,9 +117,9 @@ namespace Z0
                   dst = generic<T>(convert(src, out long x));
             else if(typematch<T,ulong>())
                   dst = generic<T>(convert(src, out ulong x));
-            else if(typematch<T,float>())
+            else if(typeof(T) == typeof(float))
                   dst = generic<T>(convert(src, out float x));
-            else if(typematch<T,double>())
+            else if(typeof(T) == typeof(double))
                   dst = generic<T>(convert(src, out double x));
             else if(typeof(T) == typeof(char))
                   dst = generic<T>(convert(src, out char x));
@@ -131,7 +131,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static T convert<T>(short src, out T dst)
-            where T : struct
+            where T : unmanaged
         {
             if(typematch<T,sbyte>())
                   dst = generic<T>(convert(src, out sbyte x));
@@ -149,9 +149,9 @@ namespace Z0
                   dst = generic<T>(convert(src, out long x));
             else if(typematch<T,ulong>())
                   dst = generic<T>(convert(src, out ulong x));
-            else if(typematch<T,float>())
+            else if(typeof(T) == typeof(float))
                   dst = generic<T>(convert(src, out float x));
-            else if(typematch<T,double>())
+            else if(typeof(T) == typeof(double))
                   dst = generic<T>(convert(src, out double x));
             else if(typeof(T) == typeof(char))
                   dst = generic<T>(convert(src, out char x));
@@ -163,7 +163,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static T convert<T>(ushort src, out T dst)
-            where T : struct
+            where T : unmanaged
         {
             if(typematch<T,sbyte>())
                   dst = generic<T>(convert(src, out sbyte x));
@@ -181,9 +181,9 @@ namespace Z0
                   dst = generic<T>(convert(src, out long x));
             else if(typematch<T,ulong>())
                   dst = generic<T>(convert(src, out ulong x));
-            else if(typematch<T,float>())
+            else if(typeof(T) == typeof(float))
                   dst = generic<T>(convert(src, out float x));
-            else if(typematch<T,double>())
+            else if(typeof(T) == typeof(double))
                   dst = generic<T>(convert(src, out double x));
             else if(typeof(T) == typeof(char))
                   dst = generic<T>(convert(src, out char x));
@@ -195,7 +195,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static T convert<T>(int src, out T dst)
-            where T : struct
+            where T : unmanaged
         {
             if(typematch<T,sbyte>())
                   dst = generic<T>(convert(src, out sbyte x));
@@ -213,9 +213,9 @@ namespace Z0
                   dst = generic<T>(convert(src, out long x));
             else if(typematch<T,ulong>())
                   dst = generic<T>(convert(src, out ulong x));
-            else if(typematch<T,float>())
+            else if(typeof(T) == typeof(float))
                   dst = generic<T>(convert(src, out float x));
-            else if(typematch<T,double>())
+            else if(typeof(T) == typeof(double))
                   dst = generic<T>(convert(src, out double x));
             else if(typeof(T) == typeof(char))
                   dst = generic<T>(convert(src, out char x));
@@ -227,7 +227,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static T convert<T>(uint src, out T dst)
-            where T : struct
+            where T : unmanaged
         {
             if(typematch<T,sbyte>())
                   dst = generic<T>(convert(src, out sbyte x));
@@ -245,9 +245,9 @@ namespace Z0
                   dst = generic<T>(convert(src, out long x));
             else if(typematch<T,ulong>())
                   dst = generic<T>(convert(src, out ulong x));
-            else if(typematch<T,float>())
+            else if(typeof(T) == typeof(float))
                   dst = generic<T>(convert(src, out float x));
-            else if(typematch<T,double>())
+            else if(typeof(T) == typeof(double))
                   dst = generic<T>(convert(src, out double x));
             else if(typeof(T) == typeof(char))
                   dst = generic<T>(convert(src, out char x));
@@ -260,7 +260,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static T convert<T>(long src, out T dst)
-            where T : struct
+            where T : unmanaged
         {
             if(typematch<T,sbyte>())
                   dst = generic<T>(convert(src, out sbyte x));
@@ -278,9 +278,9 @@ namespace Z0
                   dst = generic<T>(convert(src, out long x));
             else if(typematch<T,ulong>())
                   dst = generic<T>(convert(src, out ulong x));
-            else if(typematch<T,float>())
+            else if(typeof(T) == typeof(float))
                   dst = generic<T>(convert(src, out float x));
-            else if(typematch<T,double>())
+            else if(typeof(T) == typeof(double))
                   dst = generic<T>(convert(src, out double x));
             else if(typeof(T) == typeof(char))
                   dst = generic<T>(convert(src, out char x));
@@ -293,7 +293,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static T convert<T>(ulong src, out T dst)
-            where T : struct
+            where T : unmanaged
         {
             if(typematch<T,sbyte>())
                   dst = generic<T>(convert(src, out sbyte x));
@@ -311,9 +311,9 @@ namespace Z0
                   dst = generic<T>(convert(src, out long x));
             else if(typematch<T,ulong>())
                   dst = generic<T>(convert(src, out ulong x));
-            else if(typematch<T,float>())
+            else if(typeof(T) == typeof(float))
                   dst = generic<T>(convert(src, out float x));
-            else if(typematch<T,double>())
+            else if(typeof(T) == typeof(double))
                   dst = generic<T>(convert(src, out double x));
             else if(typeof(T) == typeof(char))
                   dst = generic<T>(convert(src, out char x));
@@ -325,7 +325,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static T convert<T>(float src, out T dst)
-            where T : struct
+            where T : unmanaged
         {
             if(typematch<T,sbyte>())
                   dst = generic<T>(convert(src, out sbyte x));
@@ -343,9 +343,9 @@ namespace Z0
                   dst = generic<T>(convert(src, out long x));
             else if(typematch<T,ulong>())
                   dst = generic<T>(convert(src, out ulong x));
-            else if(typematch<T,float>())
+            else if(typeof(T) == typeof(float))
                   dst = generic<T>(convert(src, out float x));
-            else if(typematch<T,double>())
+            else if(typeof(T) == typeof(double))
                   dst = generic<T>(convert(src, out double x));
             else if(typeof(T) == typeof(char))
                   dst = generic<T>(convert(src, out char x));
@@ -357,7 +357,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static T convert<T>(double src, out T dst)
-            where T : struct
+            where T : unmanaged
         {
             if(typematch<T,sbyte>())
                   dst = generic<T>(convert(src, out sbyte x));
@@ -375,9 +375,9 @@ namespace Z0
                   dst = generic<T>(convert(src, out long x));
             else if(typematch<T,ulong>())
                   dst = generic<T>(convert(src, out ulong x));
-            else if(typematch<T,float>())
+            else if(typeof(T) == typeof(float))
                   dst = generic<T>(convert(src, out float x));
-            else if(typematch<T,double>())
+            else if(typeof(T) == typeof(double))
                   dst = generic<T>(convert(src, out double x));
             else if(typeof(T) == typeof(char))
                   dst = generic<T>(convert(src, out char x));
@@ -389,7 +389,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static T convert<T>(char src, out T dst)
-            where T : struct
+            where T : unmanaged
         {
             if(typematch<T,sbyte>())
                   dst = generic<T>(convert(src, out sbyte x));
@@ -407,9 +407,9 @@ namespace Z0
                   dst = generic<T>(convert(src, out long x));
             else if(typematch<T,ulong>())
                   dst = generic<T>(convert(src, out ulong x));
-            else if(typematch<T,float>())
+            else if(typeof(T) == typeof(float))
                   dst = generic<T>(convert(src, out float x));
-            else if(typematch<T,double>())
+            else if(typeof(T) == typeof(double))
                   dst = generic<T>(convert(src, out double x));
             else if(typeof(T) == typeof(char))
                   dst = generic<T>(convert(src, out char x));
@@ -1131,8 +1131,8 @@ namespace Z0
 
        [MethodImpl(Inline)]
        public static ref T to<S,T>(S src, ref T dst)
-            where S : struct
-            where T : struct            
+            where S : unmanaged
+            where T : unmanaged            
         {
             if(typematch<T,sbyte>())
                 convert(src, ref int8(ref dst));
@@ -1150,9 +1150,9 @@ namespace Z0
                 convert(src, ref int64(ref dst));
             else if(typematch<T,ulong>())
                 convert(src, ref uint64(ref dst));
-            else if(typematch<T,float>())
+            else if(typeof(T) == typeof(float))
                 convert(src, ref float32(ref dst));
-            else if(typematch<T,double>())
+            else if(typeof(T) == typeof(double))
                 convert(src, ref float64(ref dst));
             else            
                 throw unsupported<T>();
@@ -1162,7 +1162,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static sbyte convert<S>(S src, ref sbyte dst)
-            where S : struct
+            where S : unmanaged
         {
             if(typeof(S) == typeof(sbyte))
                 return convert(int8(src), out dst);
@@ -1190,7 +1190,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static byte convert<S>(S src, ref byte dst)
-            where S : struct
+            where S : unmanaged
         {
             if(typeof(S) == typeof(sbyte))
                 return convert(int8(src), out dst);
@@ -1219,7 +1219,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static short convert<S>(S src, ref short dst)
-            where S : struct
+            where S : unmanaged
         {
             if(typeof(S) == typeof(sbyte))
                 return convert(int8(src), out dst);
@@ -1247,7 +1247,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static ushort convert<S>(S src, ref ushort dst)
-            where S : struct
+            where S : unmanaged
         {
             if(typeof(S) == typeof(sbyte))
                 return convert(int8(src), out dst);
@@ -1275,7 +1275,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static int convert<S>(S src, ref int dst)
-            where S : struct
+            where S : unmanaged
         {
             if(typeof(S) == typeof(sbyte))
                 return convert(int8(src), out dst);
@@ -1303,7 +1303,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static uint convert<S>(S src, ref uint dst)
-            where S : struct
+            where S : unmanaged
         {
             if(typeof(S) == typeof(sbyte))
                 return convert(int8(src), out dst);
@@ -1331,7 +1331,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static long convert<S>(S src, ref long dst)
-            where S : struct
+            where S : unmanaged
         {
             if(typeof(S) == typeof(sbyte))
                 return convert(int8(src), out dst);
@@ -1359,7 +1359,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static ulong convert<S>(S src, ref ulong dst)
-            where S : struct
+            where S : unmanaged
         {
             if(typeof(S) == typeof(sbyte))
                 return convert(int8(src), out dst);
@@ -1387,7 +1387,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static float convert<S>(S src, ref float dst)
-            where S : struct
+            where S : unmanaged
         {
             if(typeof(S) == typeof(sbyte))
                 return convert(int8(src), out dst);
@@ -1416,7 +1416,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static double convert<S>(S src, ref double dst)
-            where S : struct
+            where S : unmanaged
         {
             if(typeof(S) == typeof(sbyte))
                 return convert(int8(src), out dst);

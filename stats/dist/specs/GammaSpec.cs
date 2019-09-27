@@ -75,7 +75,7 @@ namespace Z0
     {
         [MethodImpl(Inline)]
         public static T recip<T>(T value)
-            where T : struct
+            where T : unmanaged
         {
             var x = convert<T,double>(value);
             var r = 1.0/x;

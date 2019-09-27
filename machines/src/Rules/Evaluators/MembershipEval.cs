@@ -16,7 +16,7 @@ namespace Z0
 
 
     readonly struct MembershipEval<T>
-        where T : struct
+        where T : unmanaged
     {
         public static readonly DateCmpEval TheOnly = default;
 

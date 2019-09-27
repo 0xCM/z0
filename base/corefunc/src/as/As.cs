@@ -23,8 +23,8 @@ namespace Z0
         /// <typeparam name="T">The target element type</typeparam>
         [MethodImpl(Inline)]
         internal static Span<T> cast<S,T>(in Span<S> src)                
-            where S : struct
-            where T : struct
+            where S : unmanaged
+            where T : unmanaged
                 => MemoryMarshal.Cast<S,T>(src);
 
         /// <summary>
@@ -35,8 +35,8 @@ namespace Z0
         /// <typeparam name="T">The target element type</typeparam>
         [MethodImpl(Inline)]
         internal static ReadOnlySpan<T> cast<S,T>(in ReadOnlySpan<S> src)                
-            where S : struct
-            where T : struct
+            where S : unmanaged
+            where T : unmanaged
                 => MemoryMarshal.Cast<S,T>(src);
 
         /// <summary>
@@ -47,8 +47,8 @@ namespace Z0
         /// <typeparam name="T">The target element type</typeparam>
         [MethodImpl(Inline)]
         internal static Span256<T> cast<S,T>(in Span256<S> src)                
-            where S : struct
-            where T : struct
+            where S : unmanaged
+            where T : unmanaged
                 => Span256<T>.LoadAligned(MemoryMarshal.Cast<S,T>(src));
 
         /// <summary>
@@ -59,8 +59,8 @@ namespace Z0
         /// <typeparam name="T">The target element type</typeparam>
         [MethodImpl(Inline)]
         internal static ReadOnlySpan256<T> cast<S,T>(in ReadOnlySpan256<S> src)                
-            where S : struct
-            where T : struct
+            where S : unmanaged
+            where T : unmanaged
                 => (ReadOnlySpan256<T>)MemoryMarshal.Cast<S,T>(src);
                 
         /// <summary>
@@ -71,8 +71,8 @@ namespace Z0
         /// <typeparam name="T">The target element type</typeparam>
         [MethodImpl(Inline)]
         internal static Span128<T> cast<S,T>(in Span128<S> src)                
-            where S : struct
-            where T : struct
+            where S : unmanaged
+            where T : unmanaged
                 =>  Span128.Load(MemoryMarshal.Cast<S,T>(src));
 
         /// <summary>
@@ -83,8 +83,8 @@ namespace Z0
         /// <typeparam name="T">The target element type</typeparam>
         [MethodImpl(Inline)]
         internal  static ReadOnlySpan128<T> cast<S,T>(in ReadOnlySpan128<S> src)                
-            where S : struct
-            where T : struct
+            where S : unmanaged
+            where T : unmanaged
                 => (ReadOnlySpan128<T>)MemoryMarshal.Cast<S,T>(src);
 
 

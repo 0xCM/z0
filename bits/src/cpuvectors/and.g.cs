@@ -41,9 +41,9 @@ namespace Z0
                 return generic<T>(Bits.and(int64(lhs), int64(rhs)));
             else if(typematch<T,ulong>())
                 return generic<T>(Bits.and(uint64(lhs), uint64(rhs)));
-            else if(typematch<T,float>())
+            else if(typeof(T) == typeof(float))
                 return generic<T>(Bits.and(float32(lhs), float32(rhs)));
-            else if(typematch<T,double>())
+            else if(typeof(T) == typeof(double))
                 return generic<T>(Bits.and(float64(lhs), float64(rhs)));
             else 
                 throw unsupported<T>();
@@ -51,7 +51,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static Vector256<T> vand256u<T>(Vector256<T> lhs, Vector256<T> rhs)
-            where T : struct
+            where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
                 return generic<T>(Bits.and(uint8(lhs), uint8(rhs)));
@@ -65,7 +65,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static Vector256<T> vand256i<T>(Vector256<T> lhs, Vector256<T> rhs)
-            where T : struct
+            where T : unmanaged
         {
             if(typematch<T,sbyte>())
                 return generic<T>(Bits.and(int8(lhs), int8(rhs)));
@@ -85,7 +85,7 @@ namespace Z0
         /// <typeparam name="T">The primal component type</typeparam>
         [MethodImpl(Inline)]
         public static Vector256<T> vand<T>(Vector256<T> lhs, Vector256<T> rhs)
-            where T : struct
+            where T : unmanaged
         {
             if(typeof(T) == typeof(byte) || typeof(T) == typeof(ushort) || 
                 typeof(T) == typeof(uint) || typeof(T) == typeof(ulong))

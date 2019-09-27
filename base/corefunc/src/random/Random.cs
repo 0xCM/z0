@@ -29,7 +29,7 @@ namespace System
     }
 
     public interface IPointStream<T> : IPointSource<T>
-        where T : unmanaged
+        where T : struct
     {
         IEnumerable<T> Stream {get;}
     }
@@ -39,7 +39,7 @@ namespace System
     /// </summary>
     /// <typeparam name="T">The random value type</typeparam>
     public interface IRandomStream<T> : IPointSource<T>, IEnumerable<T>
-        where T: struct
+        where T : struct
     {
         /// <summary>
         /// Retrieves a specified number points from the source
@@ -49,7 +49,7 @@ namespace System
     }
 
     public interface ISampler<T> : IRandomStream<T>
-        where T : unmanaged
+        where T : struct
     {
         /// <summary>
         /// The length of the sampler's internal buffer
@@ -136,7 +136,7 @@ namespace System
         /// </summary>
         /// <typeparam name="T">The point type</typeparam>
         T Next<T>()
-            where T : struct;
+            where T : unmanaged;
 
         /// <summary>
         /// Retrieves the next point from the source, constrained by an upper bounds
@@ -144,7 +144,7 @@ namespace System
         /// <param name="max">The exclusive max value</param>
         /// <typeparam name="T">The point type</typeparam>
         T Next<T>(T max)
-            where T : struct;
+            where T : unmanaged;
 
         /// <summary>
         /// Retrieves the next point from the source, constrained by upper and lower bounds
@@ -153,7 +153,7 @@ namespace System
         /// <param name="max">The exclusive max value</param>
         /// <typeparam name="T">The point type</typeparam>
         T Next<T>(T min, T max)
-            where T : struct;
+            where T : unmanaged;
 
         /// <summary>
         /// Retrieves the next point from the source, bound within a specified interval
@@ -162,7 +162,7 @@ namespace System
         /// <param name="domain">The domain of the random variable</param>
         /// <typeparam name="T">The point type</typeparam>
         T Next<T>(Interval<T> domain)
-            where T : struct;
+            where T : unmanaged;
 
         /// <summary>
         /// Retrieves the random  stream navigator, if supported

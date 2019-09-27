@@ -18,7 +18,7 @@ namespace Z0
     {
         [MethodImpl(Inline)]
         public static bool nonzero<T>(T src)
-            where T : struct
+            where T : unmanaged
         {
             if(typematch<T,sbyte>())
                 return math.nonzero(int8(in src));
@@ -36,9 +36,9 @@ namespace Z0
                 return math.nonzero(int64(in src));
             else if(typematch<T,ulong>())
                 return math.nonzero(uint64(in src));
-            else if(typematch<T,float>())
+            else if(typeof(T) == typeof(float))
                 return math.nonzero(float32(in src));
-            else if(typematch<T,double>())
+            else if(typeof(T) == typeof(double))
                 return math.nonzero(float64(in src));
             else            
                 throw unsupported<T>();

@@ -16,7 +16,7 @@ namespace Z0
     }
 
     public interface IEdge<V> : IEdge
-        where V : struct
+        where V : unmanaged
     {
         V Source {get;}
 
@@ -24,8 +24,8 @@ namespace Z0
     }
 
     public interface IEdge<V,W> : IEdge<V>
-        where V : struct
-        where W : struct
+        where V : unmanaged
+        where W : unmanaged
     {
         W Weight {get;}
     }
@@ -36,7 +36,7 @@ namespace Z0
     }    
 
     public interface IVertex<V> : IVertex
-        where V : struct
+        where V : unmanaged
     {
         /// <summary>
         /// The index of the vertex that uniquely identifies
@@ -46,8 +46,8 @@ namespace Z0
     }    
 
     public interface IVertex<V,T> : IVertex<V>
-        where V : struct
-        where T : struct
+        where V : unmanaged
+        where T : unmanaged
     {
         T Data {get;} 
     }    
@@ -59,7 +59,7 @@ namespace Z0
     }
 
     public interface IGraph<V> : IGraph
-        where V : struct
+        where V : unmanaged
     {
         ReadOnlySpan<Vertex<V>> Vertices{get;}
 
@@ -67,8 +67,8 @@ namespace Z0
     }
 
     public interface IGraph<V,T> : IGraph<V>
-        where V : struct
-        where T : struct
+        where V : unmanaged
+        where T : unmanaged
     {
 
     }

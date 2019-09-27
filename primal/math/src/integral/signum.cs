@@ -17,6 +17,22 @@ namespace Z0
     partial class math
     {
         [MethodImpl(Inline)]
+        public static Sign signum(sbyte src)
+            => signum((int)src);
+
+        [MethodImpl(Inline)]
+        public static Sign signum(byte src)
+            => signum((uint)src);
+
+        [MethodImpl(Inline)]
+        public static Sign signum(short src)
+            => signum((int)src);
+
+        [MethodImpl(Inline)]
+        public static Sign signum(ushort src)
+            => signum((uint)src);
+
+        [MethodImpl(Inline)]
         public static Sign signum(int src)
             => (Sign)((src >> 31) | (int)(negate((uint)src) >> 31)); 
 
@@ -38,25 +54,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static Sign signum(double src)
-            => (Sign)Math.Sign(src);
-                
-        [MethodImpl(Inline)]
-        public static Sign signum(sbyte src)
-            => signum((int)src);
-
-        [MethodImpl(Inline)]
-        public static Sign signum(byte src)
-            => signum((uint)src);
-
-        [MethodImpl(Inline)]
-        public static Sign signum(short src)
-            => signum((int)src);
-
-        [MethodImpl(Inline)]
-        public static Sign signum(ushort src)
-            => signum((uint)src);
-
-
+            => (Sign)Math.Sign(src);            
 
     }
 

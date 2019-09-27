@@ -14,13 +14,13 @@ namespace Z0
     {
         [MethodImpl(Inline)]
         public static Vec128<T> Flip<T>(this Vec128<T> src)
-            where T : struct
+            where T : unmanaged
                 => gbits.flip(in src);
 
         [MethodImpl(Inline)]
         public static Vec256<T> Flip<T>(this Vec256<T> src)
-            where T : struct
-                => gbits.flip(in src);
+            where T : unmanaged
+                => gbits.vflip(src);
 
 
 

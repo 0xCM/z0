@@ -22,7 +22,7 @@ namespace Z0
         /// <param name="rhs">The right vector</param>
         [MethodImpl(Inline)]
         public static Vec128Cmp<T> eq<T>(in Vec128<T> lhs, in Vec128<T> rhs)
-            where T : struct
+            where T : unmanaged
         {
             if(typematch<T,sbyte>())
                 return dinx.eq(in int8(in lhs), in int8(in rhs)).As<T>();
@@ -40,9 +40,9 @@ namespace Z0
                 return dinx.eq(in int64(in lhs), in int64(in rhs)).As<T>();
             else if(typematch<T,ulong>())
                 return dinx.eq(in uint64(in lhs), in uint64(in rhs)).As<T>();
-            else if(typematch<T,float>())
+            else if(typeof(T) == typeof(float))
                 return dfp.eq(in float32(in lhs), in float32(in rhs)).As<T>();
-            else if(typematch<T,double>())
+            else if(typeof(T) == typeof(double))
                 return dfp.eq(in float64(in lhs), in float64(in rhs)).As<T>();
             else 
                 throw unsupported<T>();
@@ -56,7 +56,7 @@ namespace Z0
         /// <param name="rhs">The right vector</param>
         [MethodImpl(Inline)]
         public static Vec256Cmp<T> eq<T>(in Vec256<T> lhs, in Vec256<T> rhs)
-            where T : struct
+            where T : unmanaged
         {
             if(typematch<T,sbyte>())
                 return dinx.eq(in int8(in lhs), in int8(in rhs)).As<T>();
@@ -74,9 +74,9 @@ namespace Z0
                 return dinx.eq(in int64(in lhs), in int64(in rhs)).As<T>();
             else if(typematch<T,ulong>())
                 return dinx.eq(in uint64(in lhs), in uint64(in rhs)).As<T>();
-            else if(typematch<T,float>())
+            else if(typeof(T) == typeof(float))
                 return dfp.eq(in float32(in lhs), in float32(in rhs)).As<T>();
-            else if(typematch<T,double>())
+            else if(typeof(T) == typeof(double))
                 return dfp.eq(in float64(in lhs), in float64(in rhs)).As<T>();
             else 
                 throw unsupported<T>();

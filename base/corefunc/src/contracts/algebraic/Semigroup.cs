@@ -67,7 +67,7 @@ namespace Z0
 
     public interface IImplicitSemigroup<S,T> : INullary<S>, ISemigroup<S>, INullaryOps<T>, ISemigroupOps<T>
         where S : IImplicitSemigroup<S,T>, new()
-        where T : struct
+        where T : unmanaged
     
     {
         /// <summary>

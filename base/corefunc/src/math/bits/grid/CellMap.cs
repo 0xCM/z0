@@ -15,7 +15,7 @@ namespace Z0
     /// Correlates a bit position with a grid row and column
     /// </summary>
     public readonly struct CellMap<T>
-        where T : struct
+        where T : unmanaged
     {           
         public CellMap(ushort Segment, byte Offset, int LinearIndex, int Row, int Col)
         {

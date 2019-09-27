@@ -27,7 +27,7 @@ namespace Z0
         /// <typeparam name="T">The unsigned primal type</typeparam>
          public static BlockVector<N,T> Contract<N,T>(this BlockVector<N,T> src, BlockVector<N,T> max)
             where N : ITypeNat, new()
-            where T : struct
+            where T : unmanaged
         {
             var dst = NatSpan.Alloc<N,T>();
             for(var i=0; i<dst.Length; i++)
@@ -37,7 +37,7 @@ namespace Z0
 
          public static Span<N,T> Contract<N,T>(this Span<N,T> src, Span<N,T> max)
             where N : ITypeNat, new()
-            where T : struct
+            where T : unmanaged
         {
             var dst = NatSpan.Alloc<N,T>();
             for(var i=0; i<dst.Length; i++)
@@ -54,7 +54,7 @@ namespace Z0
         /// <typeparam name="N">The length type</typeparam>
         /// <typeparam name="T">The unsigned primal type</typeparam>
          public static BlockVector<T> Contract<T>(this BlockVector<T> src, BlockVector<T> max)
-            where T : struct
+            where T : unmanaged
         {
             var len = src.Length;
             require(len == max.Length);
@@ -66,17 +66,17 @@ namespace Z0
  
         [MethodImpl(Inline)]
         internal static Interval<T> Configure<T>(this Interval<T>? domain)        
-            where T : struct
+            where T : unmanaged
                 => domain.ValueOrElse(() => Rng.TypeDomain<T>());
 
         [MethodImpl(Inline)]
         static T TypeMin<T>()
-            where T : struct
+            where T : unmanaged
                 => gmath.minval<T>();
         
         [MethodImpl(Inline)]
         static T TypeMax<T>()
-            where T : struct
+            where T : unmanaged
                 => gmath.maxval<T>();
 
     }

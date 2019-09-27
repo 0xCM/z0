@@ -16,7 +16,7 @@ namespace Z0
     /// Defines a complex number parameterized over the primal types
     /// </summary>
     public readonly struct Complex<T> : IEquatable<Complex<T>>
-        where T : struct
+        where T : unmanaged
     {
         public readonly T re;
 

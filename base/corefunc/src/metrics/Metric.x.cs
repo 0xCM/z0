@@ -18,21 +18,21 @@ namespace Z0
             => MetricId.Define(metric, primitive, op);
 
         public static MetricId Identify<T>(this MetricKind metric, OpKind op)
-            where T : struct
+            where T : unmanaged
                 => MetricId.Define(metric, PrimalKinds.kind<T>(), op);
 
         public static MetricDelta CalcDelta(this IMetricComparison comparison)
             => MetricDelta.Calc(comparison);
     
         public static MetricSummary<T> Summarize<T>(this Metrics<T> metrics)        
-            where T : struct
+            where T : unmanaged
             => MetricSummary.Define(metrics);
 
         public static MetricSummary Summarize(this IMetrics metrics)        
             => MetricSummary.Define(metrics);
 
         public static MetricComparison<T> Compare<T>(this Metrics<T> lhs, Metrics<T> rhs)
-            where T : struct
+            where T : unmanaged
                 => MetricComparison.Define(lhs.Summarize(), rhs.Summarize());
         
         public static void Deconstruct(this MetricId metric, out MetricKind Classifier, out PrimalKind Primitive, out OpKind Operator)
@@ -46,7 +46,7 @@ namespace Z0
             => MetricComparisonSpec.Define(Baseline, Bench, Primitive, Operator);
 
         public static MetricComparisonSpec DefineComparison<T>(this MetricKind Baseline, MetricKind Bench, OpKind Operator)
-            where T : struct
+            where T : unmanaged
                 => MetricComparisonSpec.Define(Baseline, Bench, PrimalKinds.kind<T>(), Operator);
     
         public static MetricComparison Compare(this IMetrics lhs, IMetrics rhs)        
@@ -69,11 +69,11 @@ namespace Z0
         }
 
         public static Metrics<T> CaptureMetrics<T>(this OpId<T> OpId, long OpCount, Duration WorkTime, T[] results)
-            where T : struct
+            where T : unmanaged
                 => (OpId, OpCount, WorkTime, results);
 
         public static Metrics<T> CaptureMetrics<T>(this OpId OpId, long OpCount, Duration WorkTime, Span<T> results)
-            where T : struct
+            where T : unmanaged
                 => new Metrics<T>(OpId, OpCount, WorkTime, results);
 
     }

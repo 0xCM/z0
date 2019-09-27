@@ -24,7 +24,7 @@ namespace Z0
         /// <param name="length">The number of bits that should be extracted</param>
         [MethodImpl(Inline)]
         public static T extract<T>(T lhs, byte start, byte length)
-            where T : struct
+            where T : unmanaged
         {
             if(typeof(T) == typeof(byte) 
                 || typeof(T) == typeof(ushort) 
@@ -42,7 +42,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static T extracti<T>(T lhs, byte start, byte length)
-            where T : struct
+            where T : unmanaged
         {
             if(typematch<T,sbyte>())
                 return generic<T>(Bits.extract(int8(lhs), start, length));
@@ -56,7 +56,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static T extractu<T>(T lhs, byte start, byte length)
-            where T : struct
+            where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
                 return generic<T>(Bits.extract(uint8(lhs), start, length));

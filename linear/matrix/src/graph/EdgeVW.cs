@@ -16,8 +16,8 @@ namespace Z0
     /// Defines a weighted edge, parameterized by the vertex index type and the weight type
     /// </summary>
     public readonly struct Edge<V,W> : IEdge<V,W>
-        where V : struct
-        where W : struct
+        where V : unmanaged
+        where W : unmanaged
     {
         /// <summary>
         /// Sheds the associated weight to form a weight-free edge

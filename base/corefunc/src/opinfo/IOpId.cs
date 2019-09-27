@@ -32,7 +32,7 @@ namespace Z0
     }
 
     public interface IOpId<T> : IOpId
-        where T : struct
+        where T : unmanaged
     {
 
     }
