@@ -123,6 +123,15 @@ namespace Z0
             return dst;
         }
 
+        public static Span<byte> pack(ReadOnlySpan<byte> src, Span<byte> dst)
+        {
+            int srcLen = src.Length;
+            for (int i = 0; i < srcLen; i++)
+                if (src[i] == 1)
+                    dst[i >> 3] |= (byte)((byte)1 << (i & 0x07));
+            return dst;
+        }
+
         /// <summary>
         /// Packs bools into bytes
         /// </summary>

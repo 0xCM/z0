@@ -13,60 +13,60 @@ namespace Z0
     partial class soc
     {
 
-        public static bool between_8i(sbyte x, sbyte a, sbyte b)    
+        public static bool between_d8i(sbyte x, sbyte a, sbyte b)    
             => math.between(x,a,b);
 
         public static bool between_g8i(sbyte x, sbyte a, sbyte b)    
             => gmath.between(x,a,b);
 
-        public static bool between_8u(byte x, byte a, byte b)    
+        public static bool between_d8u(byte x, byte a, byte b)    
             => math.between(x,a,b);
 
         public static bool between_g8u(byte x, byte a, byte b)    
             => gmath.between(x,a,b);
 
-        public static bool between_16i(short x, short a, short b)    
+        public static bool between_d16i(short x, short a, short b)    
             => math.between(x,a,b);
 
         public static bool between_g16i(short x, short a, short b)    
             => gmath.between(x,a,b);
 
-        public static bool between_16u(ushort x, ushort a, ushort b)    
+        public static bool between_d16u(ushort x, ushort a, ushort b)    
             => math.between(x,a,b);
 
         public static bool between_g16u(ushort x, ushort a, ushort b)    
             => gmath.between(x,a,b);
 
-        public static bool between_32i(int x, int a, int b)    
+        public static bool between_d32i(int x, int a, int b)    
             => math.between(x,a,b);
 
         public static bool between_g32i(int x, int a, int b)    
             => gmath.between(x,a,b);
 
-        public static bool between_32u(uint x, uint a, uint b)    
+        public static bool between_d32u(uint x, uint a, uint b)    
             => math.between(x,a,b);
  
         public static bool between_g32u(uint x, uint a, uint b)    
             => gmath.between(x,a,b);
         
-        public static bool between_64i(long x, long a, long b)    
+        public static bool between_d64i(long x, long a, long b)    
             => math.between(x,a,b);
         public static bool between_g64i(long x, long a, long b)    
             => gmath.between(x,a,b);
 
-        public static bool between_64u(ulong x, ulong a, ulong b)    
+        public static bool between_d64u(ulong x, ulong a, ulong b)    
             => math.between(x,a,b);
 
         public static bool between_g64u(ulong x, ulong a, ulong b)    
             => gmath.between(x,a,b);
 
-        public static bool between_32f(float x, float a, float b)    
+        public static bool between_d32f(float x, float a, float b)    
             => fmath.between(x,a,b);
 
         public static bool between_g32f(float x, float a, float b)    
             => gmath.between(x,a,b);
 
-        public static bool between_64f(double x, double a, double b)    
+        public static bool between_d64f(double x, double a, double b)    
             => fmath.between(x,a,b);
 
         public static bool between_g64f(double x, double a, double b)    

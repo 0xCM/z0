@@ -153,7 +153,7 @@ namespace Z0
         /// <param name="rhs">The right vector</param>
         [MethodImpl(Inline)]
         public static BitVector16 operator ^(BitVector16 lhs, BitVector16 rhs)
-            => (ushort)(lhs.data ^ rhs.data);
+            => bitvector.xor(lhs,rhs);
 
         /// <summary>
         /// Raises a vector b to a power n where n >= 0
@@ -171,7 +171,7 @@ namespace Z0
         /// <param name="rhs">The right vector</param>
         [MethodImpl(Inline)]
         public static BitVector16 operator &(BitVector16 lhs, BitVector16 rhs)
-            => (ushort)(lhs.data & rhs.data);
+            => bitvector.and(lhs,rhs);
 
         /// <summary>
         /// Computes the bitwise OR of the source operands
@@ -180,7 +180,7 @@ namespace Z0
         /// <param name="rhs">The right vector</param>
         [MethodImpl(Inline)]
         public static BitVector16 operator |(BitVector16 lhs, BitVector16 rhs)
-            => (ushort)(lhs.data | rhs.data);
+            => bitvector.or(lhs,rhs);
 
         /// <summary>
         /// Computes the bitwise complement of the operand. 
@@ -189,7 +189,7 @@ namespace Z0
         /// <param name="lhs">The source operand</param>
         [MethodImpl(Inline)]
         public static BitVector16 operator ~(BitVector16 src)
-            => (ushort) ~ src.data;
+            => bitvector.flip(src);
 
         /// <summary>
         /// Computes the sum of the source operands
@@ -216,7 +216,7 @@ namespace Z0
         /// <param name="lhs">The source operand</param>
         [MethodImpl(Inline)]
         public static BitVector16 operator -(in BitVector16 src)
-            => (ushort)(~src.data + 1);
+            => bitvector.negate(src);
 
         /// <summary>
         /// Subtracts the second operand from the first. Note that this operator is equivalent to
@@ -227,7 +227,7 @@ namespace Z0
         /// <param name="rhs">The right vector</param>
         [MethodImpl(Inline)]
         public static BitVector16 operator - (BitVector16 lhs, BitVector16 rhs)
-            => lhs + -rhs;
+            => bitvector.sub(lhs,rhs);
 
         /// <summary>
         /// Computes the scalar product of the operands
@@ -236,7 +236,7 @@ namespace Z0
         /// <param name="rhs">The right operand</param>
         [MethodImpl(Inline)]
         public static Bit operator %( BitVector16 lhs, BitVector16 rhs)
-            => mod<N2>(Bits.pop(lhs.data & rhs.data));              
+            => bitvector.dot(lhs,rhs);
 
         /// <summary>
         /// Left-shifts the bits in the source
@@ -244,7 +244,7 @@ namespace Z0
         /// <param name="lhs">The source operand</param>
         [MethodImpl(Inline)]
         public static BitVector16 operator <<(BitVector16 lhs, int offset)
-            => (ushort)(lhs.data << offset);
+            => bitvector.sll(lhs,offset);
 
         /// <summary>
         /// Right-shifts the bits in the source
@@ -252,7 +252,7 @@ namespace Z0
         /// <param name="lhs">The source operand</param>
         [MethodImpl(Inline)]
         public static BitVector16 operator >>(BitVector16 lhs, int offset)
-            => (ushort)(lhs.data >> offset);
+            => bitvector.srl(lhs,offset);
 
         /// <summary>
         /// Returns true if the source vector is nonzero, false otherwise
@@ -475,7 +475,7 @@ namespace Z0
         /// <param name="rhs">The right operand</param>
         [MethodImpl(Inline)]
         public Bit Dot(BitVector16 rhs)
-            => mod<N2>(Bits.pop(data & rhs.data));              
+            => bitvector.dot(this,rhs);
 
         /// <summary>
         /// Extracts a contiguous sequence of bits defined by an inclusive range

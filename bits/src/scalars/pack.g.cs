@@ -27,6 +27,18 @@ namespace Z0
             return ref dst;
         }
 
+        public static ref T pack<T>(ReadOnlySpan<byte> src, ref T dst)         
+            where T : unmanaged
+        {
+            var maxbytes = Unsafe.SizeOf<T>();
+            var maxbits = maxbytes * 8;
+            var slicelen = math.min(src.Length, maxbits);
+
+            Span<byte> bs = stackalloc byte[maxbytes];
+            dst = MemoryMarshal.Cast<byte,T>(Bits.pack(src.Slice(0, slicelen), bs)).First();
+            return ref dst;
+        }
+
         public static Span<T> pack<T>(ReadOnlySpan<Bit> src, Span<T> dst)         
             where T : unmanaged
         {

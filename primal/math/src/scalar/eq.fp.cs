@@ -22,6 +22,14 @@ namespace Z0
         public static bool eq(double lhs, double rhs)
             => lhs == rhs;
 
+        [MethodImpl(Inline)]
+        public static bool neq(float lhs, float rhs)
+            => lhs != rhs;
+
+        [MethodImpl(Inline)]
+        public static bool neq(double lhs, double rhs)
+            => lhs != rhs;
+
     }
 
 }

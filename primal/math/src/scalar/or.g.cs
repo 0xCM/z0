@@ -12,6 +12,7 @@ namespace Z0
         
     using static zfunc;    
     using static As;
+    using static AsIn;
 
     partial class gmath
     {        
@@ -29,7 +30,7 @@ namespace Z0
                 return oru(lhs,rhs);
             else if(signedint<T>())
                 return ori(lhs,rhs);
-            else return gfp.or(lhs,rhs);
+            else throw unsupported<T>(); //return gfp.or(lhs,rhs);
         }
 
         /// <summary>

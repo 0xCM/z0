@@ -18,35 +18,6 @@ namespace Z0
 
     partial class dfp
     {
-        /// <summary>
-        /// __m128 _mm_cmp_ss (__m128 a, __m128 b, const int imm8) VCMPSD xmm, xmm, xmm/m64, imm8
-        /// </summary>
-        /// <param name="lhs"></param>
-        /// <param name="rhs"></param>
-        /// <param name="mode"></param>
-        /// <returns></returns>
-        [MethodImpl(Inline)]
-        public static Scalar128<float> cmp(in Scalar128<float> lhs, in Scalar128<float> rhs, FpCmpMode mode)
-            => CompareScalar(lhs,rhs, fpmode(mode));
-   
-        /// <summary>
-        /// __m128d _mm_cmp_sd (__m128d a, __m128d b, const int imm8) VCMPSS xmm, xmm, xmm/m32, imm8
-        /// </summary>
-        /// <param name="lhs"></param>
-        /// <param name="rhs"></param>
-        /// <param name="mode"></param>
-        /// <returns></returns>
-        [MethodImpl(Inline)]
-        public static Scalar128<double> cmp(in Scalar128<double> lhs, in Scalar128<double> rhs, FpCmpMode mode)
-            => CompareScalar(lhs,rhs, fpmode(mode));
-    
-        [MethodImpl(Inline)]
-        public static bool lteq(in Scalar128<float> lhs, in Scalar128<float> rhs)
-            => CompareScalarUnorderedLessThanOrEqual(lhs,rhs);
-        
-        [MethodImpl(Inline)]
-        public static bool lteq(in Scalar128<double> lhs, in Scalar128<double> rhs)
-            => CompareScalarUnorderedLessThanOrEqual(lhs, rhs);
 
         /// <summary>
         /// __m128 _mm_cmple_ps (__m128 a, __m128 b) CMPPS xmm, xmm/m128, imm8(2)
@@ -110,7 +81,8 @@ namespace Z0
         public static Vec128Cmp<float> nlt(in Vec128<float> lhs, in Vec128<float> rhs)
             => Vec128Cmp.Define<float>(CompareNotLessThan(lhs,rhs));
 
-
+   
+ 
         /// <summary>
         /// __m128 _mm_cmpnge_ps (__m128 a, __m128 b) CMPPS xmm, xmm/m128, imm8(1)
         /// </summary>

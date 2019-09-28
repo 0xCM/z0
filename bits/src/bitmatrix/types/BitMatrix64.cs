@@ -477,9 +477,9 @@ namespace Z0
             const int rowstep = 4;
             for(var i=0; i< lhs.RowCount; i += rowstep)
             {
-                lhs.LoadCpuVector(i, out Vector256<ulong> vLhs);
-                rhs.LoadCpuVector(i, out Vector256<ulong> vRhs);
-                gbits.or(vLhs,vRhs).StoreTo(ref lhs.data[i]);
+                lhs.LoadCpuVec(i, out Vec256<ulong> vLhs);
+                rhs.LoadCpuVec(i, out Vec256<ulong> vRhs);
+                gbits.vor(vLhs,vRhs).StoreTo(ref lhs.data[i]);
             }
             return ref lhs;
         }

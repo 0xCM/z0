@@ -33,14 +33,14 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitMatrix16 or(in BitMatrix16 lhs, in BitMatrix16 rhs)
         {
-            ref var A = ref lhs.LoadCpuVec(out Vector256<ushort> _);
-            ref var B = ref rhs.LoadCpuVec(out Vector256<ushort> _);
+            ref var A = ref lhs.LoadCpuVec(out Vec256<ushort> _);
+            ref var B = ref rhs.LoadCpuVec(out Vec256<ushort> _);
             var C = dinx.or(A,B);
-            return BitMatrix16.From(C);
+            return BitMatrix16.From(in C);
         }
 
         /// <summary>
-        /// Computes the logical AND between two primal bitmatrices of order 16
+        /// Computes the logical Or between two primal bitmatrices of order 32
         /// </summary>
         /// <param name="lhs">The left matrix</param>
         /// <param name="rhs">The right matrix</param>
@@ -49,7 +49,11 @@ namespace Z0
             const int rowstep = 8;
             var dst = BitMatrix32.Alloc();
             for(var i=0; i< A.RowCount; i += rowstep)
-                dinx.or(Vec256.Load(ref A[i]), Vec256.Load(ref B[i])).StoreTo(ref dst[i]);
+            {
+                var x1 = vload256(ref A[i]);
+                var x2 = vload256(ref B[i]);
+                Bits.vor(in x1, in x2).StoreTo(ref dst[i]);
+            }
             return dst;
         }
 

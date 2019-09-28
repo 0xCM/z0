@@ -16,22 +16,6 @@ namespace Z0
     partial class dfp
     {
         /// <summary>
-        /// __m128 _mm_sqrt_ss (__m128 a) SQRTSS xmm, xmm/m32
-        /// </summary>
-        /// <param name="src"></param>
-        [MethodImpl(Inline)]
-        public static Scalar128<float> sqrt(in Scalar128<float> src)
-            => SqrtScalar(src);
-
-        /// <summary>
-        /// _m128d _mm_sqrt_sd (__m128d a) SQRTSD xmm, xmm/64 
-        /// </summary>
-        /// <param name="src"></param>
-        [MethodImpl(Inline)]
-        public static Scalar128<double> sqrt(in Scalar128<double> src)
-            => SqrtScalar(src);
-
-        /// <summary>
         /// __m128 _mm_sqrt_ps (__m128 a) SQRTPS xmm, xmm/m128
         /// </summary>
         /// <param name="src">The source vector</param>

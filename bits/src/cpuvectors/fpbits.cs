@@ -40,9 +40,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return generic<T>(Bits.xor(float32(lhs), float32(rhs)));
+                return generic<T>(Bits.vxor(float32(lhs), float32(rhs)));
             else if(typeof(T) == typeof(double))
-                return generic<T>(Bits.xor(float64(lhs), float64(rhs)));
+                return generic<T>(Bits.vxor(float64(lhs), float64(rhs)));
             else 
                 throw unsupported<T>();
         }
@@ -52,9 +52,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return generic<T>(Bits.xor(float32(lhs), float32(rhs)));
+                return generic<T>(Bits.vxor(float32(lhs), float32(rhs)));
             else if(typeof(T) == typeof(double))
-                return generic<T>(Bits.xor(float64(lhs), float64(rhs)));
+                return generic<T>(Bits.vxor(float64(lhs), float64(rhs)));
             else 
                 throw unsupported<T>();
         }

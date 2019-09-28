@@ -48,14 +48,11 @@ namespace Z0
             => Abs(src);        
  
         [MethodImpl(Inline)]
-        public static Vec256<long> abs(Vec256<long> src)
+        public static Vec256<long> abs(in Vec256<long> src)
         {
-            var mask = negate(srl(src, 63));
-            return sub(xor(mask, src), mask);
+            var mask = negate(srl(in src, 63));
+            return sub(xor(in mask, in src), mask);
         }
- 
- 
-
     }
 
 }

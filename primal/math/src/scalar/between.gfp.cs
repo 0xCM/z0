@@ -24,6 +24,7 @@ namespace Z0
             else            
                 throw unsupported<T>();
         }        
+
     }
 
 }

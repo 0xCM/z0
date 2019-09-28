@@ -15,13 +15,32 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Sse41;
     using static System.Runtime.Intrinsics.X86.Sse2;
     using static System.Runtime.Intrinsics.X86.Sse;
+    using static System.Runtime.Intrinsics.X86.Ssse3;
 
     using static zfunc;
     using static As;
 
     partial class dinx
     {
-        
+        /// <summary>
+        ///  __m256i _mm256_mulhrs_epi16 (__m256i a, __m256i b)VPMULHRSW ymm, ymm, ymm/m256
+        /// </summary>
+        /// <param name="lhs"></param>
+        /// <param name="rhs"></param>
+        /// <returns></returns>
+        public static Vec256<short> mulhrs(in Vec256<short> lhs, in Vec256<short> rhs)
+            => MultiplyHighRoundScale(lhs.ymm,rhs.ymm);
+
+        /// <summary>
+        /// __m128i _mm_mulhrs_epi16 (__m128i a, __m128i b)PMULHRSW xmm, xmm/m128
+        /// </summary>
+        /// <param name="lhs"></param>
+        /// <param name="rhs"></param>
+        /// <returns></returns>
+        [MethodImpl(Inline)]
+        public static Vec128<short> mulhrs(in Vec128<short> lhs, in Vec128<short> rhs)
+            => MultiplyHighRoundScale(lhs.xmm,rhs.xmm);
+
         /// <summary>
         /// _mm_mul_epi32
         /// </summary>
@@ -68,10 +87,10 @@ namespace Z0
         public static Vec256<ulong> mul(in Vec256<ulong> x, in Vec256<ulong> y)    
         {
             var loMask = Vec256.Fill(0x00000000fffffffful);    
-            var xl = dinx.and(x, loMask).As<ulong,uint>();
-            var xh = dinx.srl(x, 32).As<ulong,uint>();
-            var yl = dinx.and(y, loMask).As<ulong,uint>();
-            var yh = dinx.srl(y, 32).As<ulong,uint>();
+            var xl = dinx.and(x, loMask).As<uint>();
+            var xh = dinx.srl(x, 32).As<uint>();
+            var yl = dinx.and(y, loMask).As<uint>();
+            var yh = dinx.srl(y, 32).As<uint>();
 
             var xh_yl = dinx.mul(xh, yl);
             var hl = dinx.sll(in xh_yl, 32);
@@ -81,8 +100,8 @@ namespace Z0
 
             var xl_yl = dinx.mul(xl, yl);
 
-            var hl_lh = dinx.add(hl, lh);
-            var z = dinx.add(xl_yl, hl_lh);
+            var hl_lh = dinx.vadd(hl, lh);
+            var z = dinx.vadd(xl_yl, hl_lh);
             return z;
         }
     }

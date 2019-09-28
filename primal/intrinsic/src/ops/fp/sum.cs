@@ -30,8 +30,8 @@ namespace Z0
                 offset += veclen;
                 var v2 = Vec128.Load(src, offset);
                 offset += veclen;
-                var vSum = dfp.hadd(v1, v2);
-                dst = dfp.add(dst,vSum);                
+                var vSum = dfp.vhadd(v1, v2);
+                dst = dfp.vadd(dst,vSum);                
             }
             
             Span<float> final = stackalloc float[veclen];
@@ -62,8 +62,8 @@ namespace Z0
                 offset += veclen;
                 var v2 = Vec128.Load(src, offset);
                 offset += veclen;
-                var vSum = dfp.hadd(v1, v2);
-                dst = dfp.add(dst,vSum);                
+                var vSum = dfp.vhadd(v1, v2);
+                dst = dfp.vadd(dst,vSum);                
             }
             
             Span<double> final = stackalloc double[veclen];

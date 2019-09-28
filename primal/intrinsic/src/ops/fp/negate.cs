@@ -21,7 +21,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
-        public static Vec128<float> negate(in Vec128<float> src)
+        public static Vec128<float> vnegate(in Vec128<float> src)
             =>  fsub(Vec128<float>.Zero, src);
 
         /// <summary>
@@ -29,7 +29,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
-        public static Vec128<double> negate(in Vec128<double> src)
+        public static Vec128<double> vnegate(in Vec128<double> src)
             =>  fsub(Vec128<double>.Zero, src);
 
         /// <summary>
@@ -37,7 +37,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<float> negate(in Vec256<float> src)
+        public static Vec256<float> vnegate(in Vec256<float> src)
             =>  fsub(Vec256<float>.Zero, src);
 
         /// <summary>
@@ -45,7 +45,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<double> negate(in Vec256<double> src)
+        public static Vec256<double> vnegate(in Vec256<double> src)
             =>  fsub(Vec256<double>.Zero, src);
 
     }

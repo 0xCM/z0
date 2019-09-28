@@ -18,13 +18,6 @@ namespace Z0
 
     partial class dfp
     {
-        [MethodImpl(Inline)]
-        public static bool gt(in Scalar128<float> lhs, in Scalar128<float> rhs)
-            => CompareScalarOrderedGreaterThan(lhs, rhs);
-        
-        [MethodImpl(Inline)]
-        public static bool gt(in Scalar128<double> lhs, in Scalar128<double> rhs)
-            => CompareScalarOrderedGreaterThan(lhs, rhs);
 
         /// <summary>
         /// __m128 _mm_cmpgt_ps (__m128 a, __m128 b) CMPPS xmm, xmm/m128, imm8(6)

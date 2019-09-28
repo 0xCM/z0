@@ -32,7 +32,7 @@ namespace Z0
                 return generic<T>(math.abs(int32(src)));
             else if(typeof(T) == typeof(long))
                 return generic<T>(math.abs(int64(src)));
-            else if(unsigned<T>())
+            else if(unsignedint<T>())
                 return src;
             else return gfp.abs(src);
         }           
@@ -54,7 +54,7 @@ namespace Z0
                 math.abs(ref int32(ref src));
             else if(typeof(T) == typeof(long))
                 math.abs(ref int64(ref src));
-            else if(unsigned<T>())
+            else if(unsignedint<T>())
                 return ref src;
             else gfp.abs(ref src);
             return ref src;

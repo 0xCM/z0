@@ -24,7 +24,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vec128<T> next<T>(in Vec128<T> src)
             where T : unmanaged
-                => add<T>(src, Vec128Pattern.Units<T>());
+                => vadd<T>(src, Vec128Pattern.Units<T>());
 
         /// <summary>
         /// Increments each source vector component by a unit
@@ -34,7 +34,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vec256<T> next<T>(in Vec256<T> src)
             where T : unmanaged
-                => add<T>(src, Vec256Pattern.Units<T>());
+                => vadd<T>(src, Vec256Pattern.Units<T>());
 
         /// <summary>
         /// Decrements each source vector component by a unit

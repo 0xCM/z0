@@ -94,8 +94,7 @@ namespace Z0
         {
             dst = Unsafe.As<Vector256<T>, Vec256<U>>(ref Unsafe.AsRef(in ymm));
             return ref dst;
-        }
-        
+        }        
 
         [MethodImpl(Inline)]
         public bool Equals(Vec256<T> rhs)

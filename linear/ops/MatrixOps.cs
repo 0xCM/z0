@@ -32,7 +32,7 @@ namespace Z0
             where N : ITypeNat, new()
             where T : unmanaged    
         {
-            ginx.add(A.Unsized, B.Unsized, C.Unsized);
+            inxspan.add(A.Unsized, B.Unsized, C.Unsized);
             return ref C;
         }
 
@@ -51,7 +51,7 @@ namespace Z0
             where N : ITypeNat, new()
             where T : unmanaged    
         {
-            ginx.sub(A.Unsized, B.Unsized, C.Unsized);
+            inxspan.sub(A.Unsized, B.Unsized, C.Unsized);
             return ref C;
         }
 

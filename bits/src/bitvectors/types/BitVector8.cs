@@ -147,7 +147,7 @@ namespace Z0
         /// <param name="rhs">The right operand</param>
         [MethodImpl(Inline)]
         public static BitVector8 operator ^(BitVector8 lhs, BitVector8 rhs)
-            => (byte)(lhs.data ^ rhs.data);
+            => bitvector.xor(lhs,rhs);
 
         /// <summary>
         /// Raises a vector b to a power n where n >= 0
@@ -165,7 +165,7 @@ namespace Z0
         /// <param name="rhs">The right operand</param>
         [MethodImpl(Inline)]
         public static BitVector8 operator &(BitVector8 lhs, BitVector8 rhs)
-            => (byte)(lhs.data & rhs.data);
+            => bitvector.and(lhs,rhs);
 
         /// <summary>
         /// Computes the bitwise OR of the source operands
@@ -174,7 +174,7 @@ namespace Z0
         /// <param name="rhs">The right vector</param>
         [MethodImpl(Inline)]
         public static BitVector8 operator |(BitVector8 lhs, BitVector8 rhs)
-            => (byte)(lhs.data | rhs.data);
+            => bitvector.or(lhs,rhs);
 
         /// <summary>
         /// Left-shifts the bits in the source
@@ -182,7 +182,7 @@ namespace Z0
         /// <param name="lhs">The source operand</param>
         [MethodImpl(Inline)]
         public static BitVector8 operator <<(BitVector8 lhs, int offset)
-            => (byte)(lhs.data << offset);
+            => bitvector.sll(lhs,offset);
 
         /// <summary>
         /// Right-shifts the bits in the source
@@ -190,7 +190,7 @@ namespace Z0
         /// <param name="lhs">The source operand</param>
         [MethodImpl(Inline)]
         public static BitVector8 operator >>(BitVector8 lhs, int offset)
-            => (byte)(lhs.data >> offset);
+            => bitvector.srl(lhs,offset);
 
         /// <summary>
         /// Computes the bitwise complement of the operand. 
@@ -199,7 +199,7 @@ namespace Z0
         /// <param name="src">The source operand</param>
         [MethodImpl(Inline)]
         public static BitVector8 operator ~(BitVector8 src)
-            => (byte) ~ src.data;
+            => bitvector.flip(src);
 
         /// <summary>
         /// Computes the component-wise sum of the source operands. 
@@ -209,7 +209,7 @@ namespace Z0
         /// <param name="rhs">The right operand</param>
         [MethodImpl(Inline)]
         public static BitVector8 operator +(BitVector8 lhs, BitVector8 rhs)
-            => lhs ^ rhs;
+            => bitvector.xor(lhs,rhs);
 
         /// <summary>
         /// Computes the product of the operands. 
@@ -222,24 +222,21 @@ namespace Z0
             => Gf256.mul(lhs,rhs);
 
         /// <summary>
-        /// Negates the operand. Note that this operator is equivalent to the 
-        /// complement operator (~)
+        /// Negates the operand. 
         /// </summary>
         /// <param name="lhs">The source operand</param>
         [MethodImpl(Inline)]
         public static BitVector8 operator -(in BitVector8 src)
-            => (byte)(~src.data + 1);
+            => bitvector.negate(src);
 
         /// <summary>
-        /// Subtracts the second operand from the first. Note that this operator is equivalent to
-        /// the composite operation of applying the XOR operator to the left operand and the
-        /// complement of the second
+        /// Subtracts the second operand from the first. 
         /// </summary>
         /// <param name="lhs">The left vector</param>
         /// <param name="rhs">The right vector</param>
         [MethodImpl(Inline)]
         public static BitVector8 operator - (BitVector8 lhs, BitVector8 rhs)
-            => lhs + -rhs;
+            => bitvector.sub(lhs,rhs);
 
         /// <summary>
         /// Computes the scalar product of the operands
@@ -248,7 +245,7 @@ namespace Z0
         /// <param name="rhs">The right operand</param>
         [MethodImpl(Inline)]
         public static Bit operator %(BitVector8 lhs, BitVector8 rhs)
-            => lhs.Dot(rhs);
+            => bitvector.dot(lhs,rhs);
 
         [MethodImpl(Inline)]
         public static BitVector8 operator ++(BitVector8 src)
@@ -418,7 +415,7 @@ namespace Z0
         /// <param name="rhs">The right operand</param>
         [MethodImpl(Inline)]
         public readonly Bit Dot(BitVector8 rhs)
-            => Mod<N2>.mod((uint)Bits.pop(data & rhs.data));              
+            => bitvector.dot(this,rhs);
 
         /// <summary>
         /// The number of bits represented by the vector

@@ -16,25 +16,6 @@ namespace Z0
     partial class dfp
     {
         /// <summary>
-        /// __m128 _mm_sub_ss (__m128 a, __m128 b) SUBSS xmm, xmm/m32
-        /// </summary>
-        /// <param name="lhs">The left vectorized scalar</param>
-        /// <param name="rhs">The right vectorized scalar</param>
-        [MethodImpl(Inline)]
-        public static Scalar128<float> fsub(in Scalar128<float> lhs, in Scalar128<float> rhs)
-            => SubtractScalar(lhs, rhs);
-            
-        /// <summary>
-        /// __m128d _mm_sub_sd (__m128d a, __m128d b) SUBSD xmm, xmm/m64
-        /// </summary>
-        /// <param name="lhs">The left vectorized scalar</param>
-        /// <param name="rhs">The right vectorized scalar</param>
-        /// <returns></returns>
-        [MethodImpl(Inline)]
-        public static Scalar128<double> fsub(in Scalar128<double> lhs, in Scalar128<double> rhs)
-            => SubtractScalar(lhs, rhs);
-
-        /// <summary>
         /// __m256 _mm256_sub_ps (__m256 a, __m256 b) VSUBPS ymm, ymm, ymm/m256
         /// Subtracts the right vector from the left
         /// </summary>

@@ -28,12 +28,12 @@ namespace Z0
         public static Interval<T> TypeDomain<T>()
             where T : unmanaged
         {
-            var min = gmath.signed<T>() && !gmath.floating<T>()
+            var min = signedint<T>()
                 ? gmath.negate(gmath.sar(TypeMax<T>(), 1)) 
                 : gmath.zero<T>();
             
             var max = 
-                gmath.signed<T>() && !gmath.floating<T>()
+                signedint<T>() && !floating<T>()
                 ? gmath.sar(TypeMax<T>(), 1)
                 : gmath.maxval<T>();
             return (min,max);

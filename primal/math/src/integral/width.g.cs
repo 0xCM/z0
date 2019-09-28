@@ -37,9 +37,9 @@ namespace Z0
             else if(typeof(S) == typeof(ulong))
                 dst = convert<T>(math.width(uint64(rhs), uint64(lhs)));
             else if(typeof(S) == typeof(float))
-                dst = convert<T>(math.width(float32(rhs), float32(lhs)));
+                dst = convert<T>(fmath.width(float32(rhs), float32(lhs)));
             else if(typeof(S) == typeof(double))
-                dst = convert<T>(math.width(float64(rhs), float64(lhs)));
+                dst = convert<T>(fmath.width(float64(rhs), float64(lhs)));
             else            
                 throw unsupported<T>();
             return ref dst;

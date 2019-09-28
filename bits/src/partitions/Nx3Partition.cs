@@ -48,7 +48,6 @@ namespace Z0
             dst[1] = project<byte>(select(src, Part12x3.Part1), Part12x3.First);
             dst[2] = project<byte>(select(src, Part12x3.Part2), Part12x3.First);
             dst[3] = project<byte>(select(src, Part12x3.Part3), Part12x3.First);
-
         }
 
         /// <summary>
@@ -151,8 +150,6 @@ namespace Z0
             dst[7] = project<byte>(select(src, Part30x3.Part7), Part30x3.First);
             dst[8] = project<byte>(select(src, Part30x3.Part8), Part30x3.First);
             dst[9] = project<byte>(select(src, Part30x3.Part9), Part30x3.First);
-
         }
-
     }
 }

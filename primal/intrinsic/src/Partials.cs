@@ -22,7 +22,7 @@ namespace Z0
         
     }
 
-    public static partial class ginxs
+    public static partial class ginxx
     {        
 
     }

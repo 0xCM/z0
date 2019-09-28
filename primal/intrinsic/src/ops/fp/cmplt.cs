@@ -18,13 +18,6 @@ namespace Z0
 
     partial class dfp
     {
-        [MethodImpl(Inline)]
-        public static bool lt(in Scalar128<float> lhs, in Scalar128<float> rhs)
-            => CompareScalarOrderedLessThan(lhs, rhs);                
-
-        [MethodImpl(Inline)]
-        public static bool lt(in Scalar128<double> lhs, in Scalar128<double> rhs)
-            => CompareScalarOrderedLessThan(lhs, rhs);
 
         /// <summary>
         ///  __m128 _mm_cmplt_ps (__m128 a, __m128 b) CMPPS xmm, xmm/m128, imm8(1)

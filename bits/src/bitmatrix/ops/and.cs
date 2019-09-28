@@ -34,8 +34,8 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitMatrix16 and(in BitMatrix16 lhs, in BitMatrix16 rhs)
         {
-            ref var A = ref lhs.LoadCpuVec(out Vector256<ushort> _);
-            ref var B = ref rhs.LoadCpuVec(out Vector256<ushort> _);
+            ref var A = ref lhs.LoadCpuVec(out Vec256<ushort> _);
+            ref var B = ref rhs.LoadCpuVec(out Vec256<ushort> _);
             var C = dinx.and(A,B);
             return BitMatrix16.From(C);
         }

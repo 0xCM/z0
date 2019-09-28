@@ -22,7 +22,7 @@ namespace Z0
         {
             if(typeof(T) == typeof(float))
                 return generic<T>(BitConverter.Int32BitsToSingle(BitConverter.SingleToInt32Bits(float32(lhs)) ^ BitConverter.SingleToInt32Bits(float32(rhs))));
-            else if(typeof(T) == typeof(float))
+            else if(typeof(T) == typeof(double))
                 return generic<T>(BitConverter.Int64BitsToDouble(BitConverter.DoubleToInt64Bits(float64(lhs)) ^  BitConverter.DoubleToInt64Bits(float64(rhs))));
             else
                 throw unsupported<T>();
@@ -34,7 +34,7 @@ namespace Z0
         {
             if(typeof(T) == typeof(float))
                 BitConverter.Int32BitsToSingle(BitConverter.SingleToInt32Bits(float32(lhs)) ^ BitConverter.SingleToInt32Bits(float32(rhs)));
-            else if(typeof(T) == typeof(float))
+            else if(typeof(T) == typeof(double))
                 BitConverter.Int64BitsToDouble(BitConverter.DoubleToInt64Bits(float64(lhs)) ^ BitConverter.DoubleToInt64Bits(float64(rhs)));
             else
                 throw unsupported<T>();

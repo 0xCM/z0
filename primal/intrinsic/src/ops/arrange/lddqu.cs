@@ -136,132 +136,132 @@ namespace Z0
 
 
         [MethodImpl(Inline)]
-        public static unsafe Vector128<byte> lddqu128(in byte src)
+        public static unsafe Vec128<byte> lddqu128(in byte src)
             => LoadDquVector128(constptr(in src));
 
         [MethodImpl(Inline)]
-        public static unsafe Vector128<sbyte> lddqu128(in sbyte src)
+        public static unsafe Vec128<sbyte> lddqu128(in sbyte src)
             => LoadDquVector128(constptr(in src));
 
         [MethodImpl(Inline)]
-        public static unsafe Vector128<short> lddqu128(in short src)
+        public static unsafe Vec128<short> lddqu128(in short src)
             => LoadDquVector128(constptr(in src));
 
         [MethodImpl(Inline)]
-        public static unsafe Vector128<ushort> lddqu128(in ushort src)
+        public static unsafe Vec128<ushort> lddqu128(in ushort src)
             => LoadDquVector128(constptr(in src));
 
         [MethodImpl(Inline)]
-        public static unsafe Vector128<int> lddqu128(in int src)
+        public static unsafe Vec128<int> lddqu128(in int src)
             => LoadDquVector128(constptr(in src));
 
         [MethodImpl(Inline)]
-        public static unsafe Vector128<uint> lddqu128(in uint src)
+        public static unsafe Vec128<uint> lddqu128(in uint src)
             => LoadDquVector128(constptr(in src));
 
         [MethodImpl(Inline)]
-        public static unsafe Vector128<long> lddqu128(in long src)
+        public static unsafe Vec128<long> lddqu128(in long src)
             => LoadDquVector128(constptr(in src));
 
         [MethodImpl(Inline)]
-        public static unsafe Vector128<ulong> lddqu128(in ulong src)
+        public static unsafe Vec128<ulong> lddqu128(in ulong src)
             => LoadDquVector128(constptr(in src));
 
         [MethodImpl(Inline)]
-        public static unsafe Vector256<byte> lddqu256(in byte src)
+        public static unsafe Vec256<byte> lddqu256(in byte src)
             => LoadDquVector256(constptr(in src));
 
         [MethodImpl(Inline)]
-        public static unsafe Vector256<sbyte> lddqu256(in sbyte src)
+        public static unsafe Vec256<sbyte> lddqu256(in sbyte src)
             => LoadDquVector256(constptr(in src));
 
         [MethodImpl(Inline)]
-        public static unsafe Vector256<short> lddqu256(in short src)
+        public static unsafe Vec256<short> lddqu256(in short src)
             => LoadDquVector256(constptr(in src));
 
         [MethodImpl(Inline)]
-        public static unsafe Vector256<ushort> lddqu256(in ushort src)
+        public static unsafe Vec256<ushort> lddqu256(in ushort src)
             => LoadDquVector256(constptr(in src));
 
         [MethodImpl(Inline)]
-        public static unsafe Vector256<int> lddqu256(in int src)
+        public static unsafe Vec256<int> lddqu256(in int src)
             => LoadDquVector256(constptr(in src));
 
         [MethodImpl(Inline)]
-        public static unsafe Vector256<uint> lddqu256(in uint src)
+        public static unsafe Vec256<uint> lddqu256(in uint src)
             => LoadDquVector256(constptr(in src));
 
         [MethodImpl(Inline)]
-        public static unsafe Vector256<long> lddqu256(in long src)
+        public static unsafe Vec256<long> lddqu256(in long src)
             => LoadDquVector256(constptr(in src));
 
         [MethodImpl(Inline)]
-        public static unsafe Vector256<ulong> lddqu256(in ulong src)
+        public static unsafe Vec256<ulong> lddqu256(in ulong src)
             => LoadDquVector256(constptr(in src));
 
 
         [MethodImpl(Inline)]
-        public static unsafe Vector128<byte> load128(in byte src)
+        public static unsafe Vec128<byte> load128(in byte src)
             => LoadAlignedVector128(constptr(in src));
 
         [MethodImpl(Inline)]
-        public static unsafe Vector128<sbyte> load128(in sbyte src)
+        public static unsafe Vec128<sbyte> load128(in sbyte src)
             => LoadAlignedVector128(constptr(in src));
 
         [MethodImpl(Inline)]
-        public static unsafe Vector128<short> load128(in short src)
+        public static unsafe Vec128<short> load128(in short src)
             => LoadAlignedVector128(constptr(in src));
 
         [MethodImpl(Inline)]
-        public static unsafe Vector128<ushort> load128(in ushort src)
+        public static unsafe Vec128<ushort> load128(in ushort src)
             => LoadAlignedVector128(constptr(in src));
 
         [MethodImpl(Inline)]
-        public static unsafe Vector128<int> load128(in int src)
+        public static unsafe Vec128<int> load128(in int src)
             => LoadAlignedVector128(constptr(in src));
 
         [MethodImpl(Inline)]
-        public static unsafe Vector128<uint> load128(in uint src)
+        public static unsafe Vec128<uint> load128(in uint src)
             => LoadAlignedVector128(constptr(in src));
 
         [MethodImpl(Inline)]
-        public static unsafe Vector128<long> load128(in long src)
+        public static unsafe Vec128<long> load128(in long src)
             => LoadAlignedVector128(constptr(in src));
  
         [MethodImpl(Inline)]
-        public static unsafe Vector128<ulong> load128(in ulong src)
+        public static unsafe Vec128<ulong> load128(in ulong src)
             => LoadAlignedVector128(constptr(in src));
 
         [MethodImpl(Inline)]
-        public static unsafe Vector256<byte> load256(in byte src)
+        public static unsafe Vec256<byte> load256(in byte src)
             => LoadAlignedVector256(constptr(in src));
 
         [MethodImpl(Inline)]
-        public static unsafe Vector256<sbyte> load256(in sbyte src)
+        public static unsafe Vec256<sbyte> load256(in sbyte src)
             => LoadAlignedVector256(constptr(in src));
 
         [MethodImpl(Inline)]
-        public static unsafe Vector256<short> load256(in short src)
+        public static unsafe Vec256<short> load256(in short src)
             => LoadAlignedVector256(constptr(in src));
 
         [MethodImpl(Inline)]
-        public static unsafe Vector256<ushort> load256(in ushort src)
+        public static unsafe Vec256<ushort> load256(in ushort src)
             => LoadAlignedVector256(constptr(in src));
 
         [MethodImpl(Inline)]
-        public static unsafe Vector256<int> load256(in int src)
+        public static unsafe Vec256<int> load256(in int src)
             => LoadAlignedVector256(constptr(in src));
 
         [MethodImpl(Inline)]
-        public static unsafe Vector256<uint> load256(in uint src)
+        public static unsafe Vec256<uint> load256(in uint src)
             => LoadAlignedVector256(constptr(in src));
 
         [MethodImpl(Inline)]
-        public static unsafe Vector256<long> load256(in long src)
+        public static unsafe Vec256<long> load256(in long src)
             => LoadAlignedVector256(constptr(in src));
  
         [MethodImpl(Inline)]
-        public static unsafe Vector256<ulong> load256(in ulong src)
+        public static unsafe Vec256<ulong> load256(in ulong src)
             => LoadAlignedVector256(constptr(in src));
 
         [MethodImpl(Inline)]

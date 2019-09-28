@@ -102,11 +102,11 @@ namespace Z0
         static ref T andu<T>(ref T lhs, T rhs)
             where T : unmanaged
         {
-            if(typeof(T) == typeof(sbyte))
+            if(typeof(T) == typeof(byte))
                  math.and(ref uint8(ref lhs), uint8(rhs));
-            if(typeof(T) == typeof(short))
+            if(typeof(T) == typeof(ushort))
                  math.and(ref uint16(ref lhs), uint16(rhs));
-            if(typeof(T) == typeof(int))
+            if(typeof(T) == typeof(uint))
                  math.and(ref uint32(ref lhs), uint32(rhs));
             else
                  math.and(ref uint64(ref lhs), uint64(rhs));

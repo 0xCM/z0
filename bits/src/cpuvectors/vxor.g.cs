@@ -22,21 +22,21 @@ namespace Z0
             where T : unmanaged
         {
             if(typematch<T,sbyte>())
-                return generic<T>(Bits.xor(in int8(in lhs), in int8(in rhs)));
+                return generic<T>(Bits.vxor(in int8(in lhs), in int8(in rhs)));
             else if(typematch<T,byte>())
-                return generic<T>(Bits.xor(in uint8(in lhs), in uint8(in rhs)));
+                return generic<T>(Bits.vxor(in uint8(in lhs), in uint8(in rhs)));
             else if(typematch<T,short>())
-                return generic<T>(Bits.xor(in int16(in lhs), in int16(in rhs)));
+                return generic<T>(Bits.vxor(in int16(in lhs), in int16(in rhs)));
             else if(typematch<T,ushort>())
-                return generic<T>(Bits.xor(in uint16(in lhs), in uint16(in rhs)));
+                return generic<T>(Bits.vxor(in uint16(in lhs), in uint16(in rhs)));
             else if(typematch<T,int>())
-                return generic<T>(Bits.xor(in int32(in lhs), in int32(in rhs)));
+                return generic<T>(Bits.vxor(in int32(in lhs), in int32(in rhs)));
             else if(typematch<T,uint>())
-                return generic<T>(Bits.xor(in uint32(in lhs), in uint32(in rhs)));
+                return generic<T>(Bits.vxor(in uint32(in lhs), in uint32(in rhs)));
             else if(typematch<T,long>())
-                return generic<T>(Bits.xor(in int64(in lhs), in int64(in rhs)));
+                return generic<T>(Bits.vxor(in int64(in lhs), in int64(in rhs)));
             else if(typematch<T,ulong>())
-                return generic<T>(Bits.xor(in uint64(in lhs), in uint64(in rhs)));
+                return generic<T>(Bits.vxor(in uint64(in lhs), in uint64(in rhs)));
             else 
                 throw unsupported<T>();
         }

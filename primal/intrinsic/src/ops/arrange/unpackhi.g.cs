@@ -22,29 +22,29 @@ namespace Z0
         /// <param name="lhs">The left source vector</param>
         /// <param name="rhs">The right source vector</param>
         [MethodImpl(Inline)]
-        public static Vec128<T> unpackhi<T>(in Vec128<T> lhs, in Vec128<T> rhs)        
+        public static Vec128<T> unpackhi<T>(Vec128<T> lhs, Vec128<T> rhs)        
             where T : unmanaged
         {
             if(typematch<T,sbyte>())
-                return generic<T>(dinx.unpackhi(in int8(in lhs), in int8(in rhs)));
+                return generic<T>(dinx.unpackhi(int8(lhs), int8(rhs)));
             else if(typematch<T,byte>())
-                return generic<T>(dinx.unpackhi(in uint8(in lhs), in uint8(in rhs)));
+                return generic<T>(dinx.unpackhi(uint8(lhs), uint8(rhs)));
             else if(typematch<T,short>())
-                return generic<T>(dinx.unpackhi(in int16(in lhs), in int16(in rhs)));
+                return generic<T>(dinx.unpackhi(int16(lhs), int16(rhs)));
             else if(typematch<T,ushort>())
-                return generic<T>(dinx.unpackhi(in uint16(in lhs), in uint16(in rhs)));
+                return generic<T>(dinx.unpackhi(uint16(lhs), uint16(rhs)));
             else if(typematch<T,int>())
-                return generic<T>(dinx.unpackhi(in int32(in lhs), in int32(in rhs)));
+                return generic<T>(dinx.unpackhi(int32(lhs), int32(rhs)));
             else if(typematch<T,uint>())
-                return generic<T>(dinx.unpackhi(in uint32(in lhs), in uint32(in rhs)));
+                return generic<T>(dinx.unpackhi(uint32(lhs), uint32(rhs)));
             else if(typematch<T,long>())
-                return generic<T>(dinx.unpackhi(in int64(in lhs), in int64(in rhs)));
+                return generic<T>(dinx.unpackhi(int64(lhs), int64(rhs)));
             else if(typematch<T,ulong>())
-                return generic<T>(dinx.unpackhi(in uint64(in lhs), in uint64(in rhs)));
+                return generic<T>(dinx.unpackhi(uint64(lhs), uint64(rhs)));
             else if(typeof(T) == typeof(float))
-                return generic<T>(dfp.unpackhi(in float32(in lhs), in float32(in rhs)));
+                return generic<T>(dfp.unpackhi(float32(lhs), float32(rhs)));
             else if(typeof(T) == typeof(double))
-                return generic<T>(dfp.unpackhi(in float64(in lhs), in float64(in rhs)));
+                return generic<T>(dfp.unpackhi(float64(lhs), float64(rhs)));
             else
                 throw unsupported<T>();
         }
@@ -58,29 +58,29 @@ namespace Z0
         /// <param name="lhs">The left source vector</param>
         /// <param name="rhs">The right source vector</param>
        [MethodImpl(Inline)]
-        public static Vec256<T> unpackhi<T>(in Vec256<T> lhs, in Vec256<T> rhs)        
+        public static Vec256<T> unpackhi<T>(Vec256<T> lhs, Vec256<T> rhs)        
             where T : unmanaged
         {
             if(typematch<T,sbyte>())
-                return generic<T>(dinx.unpackhi(in int8(in lhs), in int8(in rhs)));
+                return generic<T>(dinx.unpackhi(int8(lhs), int8(rhs)));
             else if(typematch<T,byte>())
-                return generic<T>(dinx.unpackhi(in uint8(in lhs), in uint8(in rhs)));
+                return generic<T>(dinx.unpackhi(uint8(lhs), uint8(rhs)));
             else if(typematch<T,short>())
-                return generic<T>(dinx.unpackhi(in int16(in lhs), in int16(in rhs)));
+                return generic<T>(dinx.unpackhi(int16(lhs), int16(rhs)));
             else if(typematch<T,ushort>())
-                return generic<T>(dinx.unpackhi(in uint16(in lhs), in uint16(in rhs)));
+                return generic<T>(dinx.unpackhi(uint16(lhs), uint16(rhs)));
             else if(typematch<T,int>())
-                return generic<T>(dinx.unpackhi(in int32(in lhs), in int32(in rhs)));
+                return generic<T>(dinx.unpackhi(int32(lhs), int32(rhs)));
             else if(typematch<T,uint>())
-                return generic<T>(dinx.unpackhi(in uint32(in lhs), in uint32(in rhs)));
+                return generic<T>(dinx.unpackhi(uint32(lhs), uint32(rhs)));
             else if(typematch<T,long>())
-                return generic<T>(dinx.unpackhi(in int64(in lhs), in int64(in rhs)));
+                return generic<T>(dinx.unpackhi(int64(lhs), int64(rhs)));
             else if(typematch<T,ulong>())
-                return generic<T>(dinx.unpackhi(in uint64(in lhs), in uint64(in rhs)));
+                return generic<T>(dinx.unpackhi(uint64(lhs), uint64(rhs)));
             else if(typeof(T) == typeof(float))
-                return generic<T>(dfp.unpackhi(in float32(in lhs), in float32(in rhs)));
+                return generic<T>(dfp.unpackhi(float32(lhs), float32(rhs)));
             else if(typeof(T) == typeof(double))
-                return generic<T>(dfp.unpackhi(in float64(in lhs), in float64(in rhs)));
+                return generic<T>(dfp.unpackhi(float64(lhs), float64(rhs)));
             else
                 throw unsupported<T>();
         }

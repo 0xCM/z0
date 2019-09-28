@@ -56,7 +56,7 @@ namespace Z0
 
                 var units128 = Vec128Pattern.Units<T>();
                 
-                Claim.yea(ginx.add<T>(xp,units128).Equals(x));
+                Claim.yea(ginx.vadd<T>(xp,units128).Equals(x));
                 Claim.yea(ginx.sub<T>(xn,units128).Equals(x));
 
                 for(var j=0; j< x.Length(); j++)
@@ -72,7 +72,7 @@ namespace Z0
 
                 var units256 = Vec256Pattern.Units<T>();
                 
-                Claim.yea(ginx.add<T>(yp,units256).Equals(y));
+                Claim.yea(ginx.vadd<T>(yp,units256).Equals(y));
                 Claim.yea(ginx.sub<T>(yn,units256).Equals(y));
                 for(var j=0; j< x.Length(); j++)
                 {

@@ -42,8 +42,8 @@ namespace Z0
         {
             var a = src;
             var b = swaphl(in src);
-            var s1 = shuffle(in a, add(in spec, in K0));
-            var s2 = shuffle(in b, add(in spec, in K1));
+            var s1 = shuffle(in a, vadd(in spec, in K0));
+            var s2 = shuffle(in b, vadd(in spec, in K1));
             return or(s1,s2);
         }
 

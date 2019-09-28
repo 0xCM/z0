@@ -15,7 +15,6 @@ namespace Z0
 
     partial class dfp
     {
-
         /// <summary>
         /// int _mm_testc_ps (__m128 a, __m128 b) VTESTPS xmm, xmm/m128
         /// Determines whether mask-specified source bits are all on

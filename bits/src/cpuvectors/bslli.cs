@@ -16,16 +16,6 @@ namespace Z0
     partial class Bits
     {
         /// <summary>
-        /// __m128i _mm_bslli_si128 (__m128i a, int imm8) PSLLDQ xmm, imm8    
-        /// Shifts the source value leftwards with byte-level resolution
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <param name="bytes">The number of bytes to shift</param>
-        [MethodImpl(Inline)]
-        public static UInt128 bslli(UInt128 src, byte bytes)        
-            => ShiftLeftLogical128BitLane(src, bytes).ToUInt128();                            
-
-        /// <summary>
         ///  __m128i _mm_bslli_si128 (__m128i a, int imm8) PSLLDQ xmm, imm8
         /// Shifts the source vector leftwards with byte-level resolution
         /// </summary>

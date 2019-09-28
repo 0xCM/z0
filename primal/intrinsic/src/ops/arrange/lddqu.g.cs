@@ -67,7 +67,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static unsafe Vector256<T> lddqu256u<T>(in T src)
+        static unsafe Vec256<T> lddqu256u<T>(in T src)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -81,7 +81,7 @@ namespace Z0
         }
         
         [MethodImpl(Inline)]
-        static unsafe Vector256<T> lddqu256i<T>(in T src)
+        static unsafe Vec256<T> lddqu256i<T>(in T src)
             where T : unmanaged
         {
             if(typematch<T,sbyte>())
@@ -96,7 +96,7 @@ namespace Z0
 
 
         [MethodImpl(Inline)]
-        public static unsafe Vector256<T> lddqu256<T>(in T src)
+        public static unsafe Vec256<T> lddqu256<T>(in T src)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte) || typeof(T) == typeof(ushort) || 
@@ -111,7 +111,7 @@ namespace Z0
 
 
         [MethodImpl(Inline)]
-        public static Vector128<T> lddqu128<T>(in T src)
+        public static Vec128<T> lddqu128<T>(in T src)
             where T : unmanaged
         {
             if(typematch<T,sbyte>())

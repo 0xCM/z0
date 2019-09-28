@@ -44,9 +44,9 @@ namespace Z0
             else if(typematch<T,ulong>())
                 return math.within(uint64(lhs), uint64(rhs), uint64(epsilon));
             else if(typeof(T) == typeof(float))
-                return math.within(float32(lhs), float32(rhs), float32(epsilon));
+                return fmath.within(float32(lhs), float32(rhs), float32(epsilon));
             else if(typeof(T) == typeof(double))
-                return math.within(float64(lhs), float64(rhs), float64(epsilon));
+                return fmath.within(float64(lhs), float64(rhs), float64(epsilon));
             else            
                 throw unsupported<T>();
 

@@ -262,14 +262,14 @@ namespace Z0.Test
         void pack1xN_check<T>()
             where T : unmanaged
         {
-            Span<Bit> _dst = new Bit[bitsize<T>()];
+            Span<byte> _dst = new byte[bitsize<T>()];
 
             for(var cycle=0; cycle<SampleSize; cycle++)
             {
                 var src = Random.Next<T>();
                 var unpacked = gbits.unpack(src, _dst);
                 for(var j = 0; j<unpacked.Length; j++)
-                    Claim.eq(gbits.test(in src, in j), (bool)unpacked[j]);
+                    Claim.eq((Bit)gbits.test(in src, in j), (Bit)unpacked[j]);
                 
                 var dst = default(T);
                 gbits.pack(unpacked, ref dst);

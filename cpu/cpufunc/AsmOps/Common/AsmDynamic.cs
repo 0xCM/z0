@@ -17,7 +17,7 @@ namespace Z0
     public delegate T AsmBinOp<T>(T x, T y)
         where T : unmanaged;
 
-    public delegate Vector128<T> Asm128BinOp<T>(Vector128<T> x, Vector128<T> y)
+    public delegate Vec128<T> Asm128BinOp<T>(in Vec128<T> x, in Vec128<T> y)
         where T : unmanaged;
 
     public delegate T AsmUnaryOp<T>(T x)

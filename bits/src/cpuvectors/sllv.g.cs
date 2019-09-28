@@ -26,13 +26,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(S) == typeof(int))
-                return generic<S>(Bits.sllv(in int32(in lhs), in uint32(in shifts)));
+                return generic<S>(Bits.vsllv(in int32(in lhs), in uint32(in shifts)));
             else if(typeof(S) == typeof(uint)) 
-                return generic<S>(Bits.sllv(in uint32(in lhs), in uint32(in shifts)));
+                return generic<S>(Bits.vsllv(in uint32(in lhs), in uint32(in shifts)));
             else if(typeof(S) == typeof(long))
-                return generic<S>(Bits.sllv(in int64(lhs), in uint64(in shifts)));
+                return generic<S>(Bits.vsllv(in int64(lhs), in uint64(in shifts)));
             else if(typeof(S) == typeof(ulong))
-                return generic<S>(Bits.sllv(in uint64(lhs), in uint64(in shifts)));
+                return generic<S>(Bits.vsllv(in uint64(lhs), in uint64(in shifts)));
             else
                 throw unsupported<S>();
         }
@@ -49,13 +49,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(S) == typeof(int))
-                return generic<S>(Bits.sllv(in int32(in lhs), in uint32(in shifts)));
+                return generic<S>(Bits.vsllv(in int32(in lhs), in uint32(in shifts)));
             else if(typeof(S) == typeof(uint)) 
-                return generic<S>(Bits.sllv(in uint32(in lhs), in uint32(in shifts)));
+                return generic<S>(Bits.vsllv(in uint32(in lhs), in uint32(in shifts)));
             else if(typeof(S) == typeof(long))
-                return generic<S>(Bits.sllv(in int64(lhs), in uint64(in shifts)));
+                return generic<S>(Bits.vsllv(in int64(lhs), in uint64(in shifts)));
             else if(typeof(S) == typeof(ulong))
-                return generic<S>(Bits.sllv(in uint64(lhs), in uint64(in shifts)));
+                return generic<S>(Bits.vsllv(in uint64(lhs), in uint64(in shifts)));
             else
                 throw unsupported<S>();
         }

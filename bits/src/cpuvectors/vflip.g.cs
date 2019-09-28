@@ -20,7 +20,7 @@ namespace Z0
     {
 
         [MethodImpl(Inline)]
-        public static Vec128<T> flip<T>(in Vec128<T> src)
+        public static Vec128<T> vflip<T>(in Vec128<T> src)
             where T : unmanaged
         {
             if(typematch<T,sbyte>())
@@ -44,53 +44,29 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static Vec256<T> vflip<T>(Vec256<T> src)
+        public static Vec256<T> vflip<T>(in Vec256<T> src)
             where T : unmanaged
         {
-            // if(typematch<T,sbyte>())
-            //     return generic<T>(Bits.flip(in int8(in src)));
+            if(typematch<T,sbyte>())
+                return generic<T>(Bits.vflip(in int8(in src)));
             if(typeof(T) == typeof(byte))
                 return generic<T>(Bits.vflip(in uint8(in src)));
-            // else if(typematch<T,short>())
-            //     return generic<T>(Bits.flip(in int16(in src)));
+            else if(typematch<T,short>())
+                return generic<T>(Bits.vflip(in int16(in src)));
             else if(typeof(T) == typeof(ushort))
                 return generic<T>(Bits.vflip(in uint16(in src)));
-            // else if(typematch<T,int>())
-            //     return generic<T>(Bits.flip(in int32(in src)));
+            else if(typematch<T,int>())
+                return generic<T>(Bits.vflip(in int32(in src)));
             else if(typeof(T) == typeof(uint))
                 return generic<T>(Bits.vflip(in uint32(in src)));
-            // else if(typematch<T,long>())
-            //     return generic<T>(Bits.flip(in int64(in src)));
+            else if(typematch<T,long>())
+                return generic<T>(Bits.vflip(in int64(in src)));
             else if(typeof(T) == typeof(ulong))
                 return generic<T>(Bits.vflip(in uint64(in src)));
             else 
                 throw unsupported<T>();
         }
          
-
-        [MethodImpl(Inline)]
-        public static Vector256<T> flip2<T>(Vector256<T> src)
-            where T : unmanaged
-        {
-            // if(typematch<T,sbyte>())
-            //     return generic<T>(Bits.flip(in int8(in src)));
-            if(typeof(T) == typeof(byte))
-                return generic<T>(Bits.vflip(uint8(src)));
-            // else if(typematch<T,short>())
-            //     return generic<T>(Bits.flip(in int16(in src)));
-            else if(typeof(T) == typeof(ushort))
-                return generic<T>(Bits.vflip(uint16(src)));
-            // else if(typematch<T,int>())
-            //     return generic<T>(Bits.flip(in int32(in src)));
-            else if(typeof(T) == typeof(uint))
-                return generic<T>(Bits.vflip(uint32(src)));
-            // else if(typematch<T,long>())
-            //     return generic<T>(Bits.flip(in int64(in src)));
-            else if(typeof(T) == typeof(ulong))
-                return generic<T>(Bits.vflip(uint64(src)));
-            else 
-                throw unsupported<T>();
-        }
 
 
 

@@ -11,7 +11,7 @@ namespace Z0
     
     using static zfunc;    
 
-    partial class ginxs
+    partial class ginxx
     {
 
         /// <summary>

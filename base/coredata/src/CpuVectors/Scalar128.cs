@@ -15,7 +15,7 @@ namespace Z0
     public struct Scalar128<T>
         where T : unmanaged
     {        
-        Vector128<T> data;            
+        public Vector128<T> data;            
 
         [MethodImpl(Inline)]
         public static implicit operator Scalar128<T>(Vector128<T> src)
@@ -42,6 +42,7 @@ namespace Z0
             [MethodImpl(Inline)]
             get => data.GetElement(0);
         }
+
 
         [MethodImpl(Inline)]
         public bool Equals(Scalar128<T> rhs)

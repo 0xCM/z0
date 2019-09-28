@@ -14,324 +14,178 @@ namespace Z0
     
     public static class gfpv
     {
-        [MethodImpl(Inline)]
-        public static Scalar128<T> add<T>(in Scalar128<T> lhs, in Scalar128<T> rhs)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(float))
-                return dfp.add(in float32(in lhs), in float32(in rhs)).As<T>();
-            else if(typeof(T) == typeof(double))
-                return dfp.add(in float64(in lhs), in float64(in rhs)).As<T>();
-            else
-                throw unsupported<T>();
-        }
 
         [MethodImpl(Inline)]
-        public static Vector128<T> hadd<T>(Vector128<T> lhs, Vector128<T> rhs)
+        public static Vector128<T> vhadd<T>(Vector128<T> lhs, Vector128<T> rhs)
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return generic<T>(dfp.hadd(float32(lhs), float32(rhs)));
+                return generic<T>(dfp.vhadd(float32(lhs), float32(rhs)));
             else if(typeof(T) == typeof(double))
-                return generic<T>(dfp.hadd(float64(lhs), float64(rhs)));
+                return generic<T>(dfp.vhadd(float64(lhs), float64(rhs)));
             else 
                 throw unsupported<T>();
         }
 
         [MethodImpl(Inline)]
-        public static Vector256<T> hadd<T>(Vector256<T> lhs, Vector256<T> rhs)
+        public static Vector256<T> vhadd<T>(Vector256<T> lhs, Vector256<T> rhs)
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return generic<T>(dfp.hadd(float32(lhs), float32(rhs)));
+                return generic<T>(dfp.vhadd(float32(lhs), float32(rhs)));
             else if(typeof(T) == typeof(double))
-                return generic<T>(dfp.hadd(float64(lhs), float64(rhs)));
+                return generic<T>(dfp.vhadd(float64(lhs), float64(rhs)));
             else 
                 throw unsupported<T>();
         }
 
         [MethodImpl(Inline)]
-        public static Scalar128<T> sub<T>(in Scalar128<T> lhs, in Scalar128<T> rhs)
+        public static Vec128<T> vdiv<T>(in Vec128<T> lhs, in Vec128<T> rhs)
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return dfp.fsub(in float32(in lhs), in float32(in rhs)).As<T>();
+                return generic<T>(dfp.vdiv(in float32(in lhs), in float32(in rhs)));
             else if(typeof(T) == typeof(double))
-                return dfp.fsub(in float64(in lhs), in float64(in rhs)).As<T>();
-            throw 
-                unsupported<T>();
-        }
-
-        [MethodImpl(Inline)]
-        public static Scalar128<T> mul<T>(in Scalar128<T> lhs, in Scalar128<T> rhs)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(float))
-                return dfp.fmul(in float32(in lhs), in float32(in rhs)).As<T>();            
-            else if(typeof(T) == typeof(double))
-                return dfp.fmul(in float64(in lhs), in float64(in rhs)).As<T>();
-            else                
-                throw unsupported<T>();
-        }
-
-
-        [MethodImpl(Inline)]
-        public static Vec128<T> div<T>(in Vec128<T> lhs, in Vec128<T> rhs)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(float))
-                return generic<T>(dfp.div(in float32(in lhs), in float32(in rhs)));
-            else if(typeof(T) == typeof(double))
-                return generic<T>(dfp.div(in float64(in lhs), in float64(in rhs)));
-            else 
-                throw unsupported<T>();
-        }
-
-        [MethodImpl(Inline)]
-        public static Scalar128<T> div<T>(in Scalar128<T> lhs, in Scalar128<T> rhs)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(float))
-                return dfp.div(in float32(in lhs), in float32(in rhs)).As<T>();            
-            else if(typeof(T) == typeof(double))
-                return dfp.div(in float64(in lhs), in float64(in rhs)).As<T>();
-            else                
-                throw unsupported<T>();
-        }
-
-        [MethodImpl(Inline)]
-        public static Vec256<T> div<T>(in Vec256<T> lhs, in Vec256<T> rhs)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(float))
-                return generic<T>(dfp.div(in float32(in lhs), in float32(in rhs)));
-            else if(typeof(T) == typeof(double))
-                return generic<T>(dfp.div(in float64(in lhs), in float64(in rhs)));
+                return generic<T>(dfp.vdiv(in float64(in lhs), in float64(in rhs)));
             else 
                 throw unsupported<T>();
         }
 
 
         [MethodImpl(Inline)]
-        public static Scalar128<T> fmax<T>(in Scalar128<T> lhs, in Scalar128<T> rhs)
+        public static Vec256<T> vdiv<T>(in Vec256<T> lhs, in Vec256<T> rhs)
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return dfp.max(in float32(in lhs), in float32(in rhs)).As<T>();            
+                return generic<T>(dfp.vdiv(in float32(in lhs), in float32(in rhs)));
             else if(typeof(T) == typeof(double))
-                return dfp.max(in float64(in lhs), in float64(in rhs)).As<T>();
-            else                
+                return generic<T>(dfp.vdiv(in float64(in lhs), in float64(in rhs)));
+            else 
                 throw unsupported<T>();
         }
 
-        [MethodImpl(Inline)]
-        public static Scalar128<T> fmin<T>(in Scalar128<T> lhs, in Scalar128<T> rhs)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(float))
-                return dfp.min(in float32(in lhs), in float32(in rhs)).As<T>();            
-            else if(typeof(T) == typeof(double))
-                return dfp.min(in float64(in lhs), in float64(in rhs)).As<T>();
-            else                
-                throw unsupported<T>();
-        }
 
        [MethodImpl(Inline)]
-       public static Vec128<T> fmax<T>(in Vec128<T> lhs, in Vec128<T> rhs)
+       public static Vec128<T> vmax<T>(in Vec128<T> lhs, in Vec128<T> rhs)
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return generic<T>(dfp.max(in float32(in lhs), in float32(in rhs)));
+                return generic<T>(dfp.vmax(in float32(in lhs), in float32(in rhs)));
             else if(typeof(T) == typeof(double))
-                return generic<T>(dfp.max(in float64(in lhs), in float64(in rhs)));
+                return generic<T>(dfp.vmax(in float64(in lhs), in float64(in rhs)));
             else 
                 throw unsupported<T>();
         }        
 
 
        [MethodImpl(Inline)]
-       public static Vec256<T> fmax<T>(in Vec256<T> lhs, in Vec256<T> rhs)
+       public static Vec256<T> vmax<T>(in Vec256<T> lhs, in Vec256<T> rhs)
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return generic<T>(dfp.max(in float32(in lhs), in float32(in rhs)));
+                return generic<T>(dfp.vmax(in float32(in lhs), in float32(in rhs)));
             else if(typeof(T) == typeof(double))
-                return generic<T>(dfp.max(in float64(in lhs), in float64(in rhs)));
+                return generic<T>(dfp.vmax(in float64(in lhs), in float64(in rhs)));
             else 
                 throw unsupported<T>();
         }        
 
         [MethodImpl(Inline)]
-        public static Vec128<T> fmin<T>(in Vec128<T> lhs, in Vec128<T> rhs)
+        public static Vec128<T> vmin<T>(in Vec128<T> lhs, in Vec128<T> rhs)
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return generic<T>(dfp.min(in float32(in lhs), in float32(in rhs)));
+                return generic<T>(dfp.vmin(in float32(in lhs), in float32(in rhs)));
             else if(typeof(T) == typeof(double))
-                return generic<T>(dfp.min(in float64(in lhs), in float64(in rhs)));
+                return generic<T>(dfp.vmin(in float64(in lhs), in float64(in rhs)));
             else 
                 throw unsupported<T>();
 
         }
          
        [MethodImpl(Inline)]
-       public static Vec256<T> fmin<T>(in Vec256<T> lhs, in Vec256<T> rhs)
+       public static Vec256<T> vmin<T>(in Vec256<T> lhs, in Vec256<T> rhs)
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return generic<T>(dfp.min(in float32(in lhs), in float32(in rhs)));
+                return generic<T>(dfp.vmin(in float32(in lhs), in float32(in rhs)));
             else if(typeof(T) == typeof(double))
-                return generic<T>(dfp.min(in float64(in lhs), in float64(in rhs)));
+                return generic<T>(dfp.vmin(in float64(in lhs), in float64(in rhs)));
             else 
                 throw unsupported<T>();
         }        
 
        [MethodImpl(Inline)]
-       public static Vector256<T> add<T>(Vector256<T> lhs, Vector256<T> rhs)
+       public static Vec128<T> vadd<T>(in Vec128<T> lhs, in Vec128<T> rhs)
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return generic<T>(dfp.add(float32(lhs), float32(rhs)));
+                return generic<T>(dfp.vadd(in float32(in lhs), in float32(in rhs)));
             else if(typeof(T) == typeof(double))
-                return generic<T>(dfp.add(float64(lhs), float64(rhs)));
+                return generic<T>(dfp.vadd(in float64(in lhs), in float64(in rhs)));
             else 
                 throw unsupported<T>();
         }        
 
-        [MethodImpl(Inline)]
-        public static bool eq<T>(in Scalar128<T> lhs, in Scalar128<T> rhs)
+       [MethodImpl(Inline)]
+       public static Vec256<T> vadd<T>(in Vec256<T> lhs, in Vec256<T> rhs)
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return dfp.eq(in float32(in lhs), in float32(in rhs));
+                return generic<T>(dfp.vadd(in float32(in lhs), in float32(in rhs)));
             else if(typeof(T) == typeof(double))
-                return dfp.eq(in float64(in lhs), in float64(in rhs));
-            throw 
-                unsupported<T>();
-        }
+                return generic<T>(dfp.vadd(in float64(in lhs), in float64(in rhs)));
+            else 
+                throw unsupported<T>();
+        }        
+
+       [MethodImpl(Inline)]
+       public static Vector128<T> vadd<T>(Vector128<T> lhs, Vector128<T> rhs)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(float))
+                return generic<T>(dfp.vadd(float32(lhs), float32(rhs)));
+            else if(typeof(T) == typeof(double))
+                return generic<T>(dfp.vadd(float64(lhs), float64(rhs)));
+            else 
+                throw unsupported<T>();
+        }        
+
+       [MethodImpl(Inline)]
+       public static Vector256<T> vadd<T>(Vector256<T> lhs, Vector256<T> rhs)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(float))
+                return generic<T>(dfp.vadd(float32(lhs), float32(rhs)));
+            else if(typeof(T) == typeof(double))
+                return generic<T>(dfp.vadd(float64(lhs), float64(rhs)));
+            else 
+                throw unsupported<T>();
+        }        
+
 
         [MethodImpl(Inline)]
-        public static bool neq<T>(in Scalar128<T> lhs, in Scalar128<T> rhs)
+        public static Vector128<T> vnegate<T>(Vector128<T> src)
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return dfp.cmpneq(in float32(in lhs), in float32(in rhs));
+                return generic<T>(dfp.vnegate(float32(src)));
             else if(typeof(T) == typeof(double))
-                return dfp.cmpneq(in float64(in lhs), in float64(in rhs));
+                return generic<T>(dfp.vnegate(float64(src)));
             else 
                 throw unsupported<T>();
         }
 
         [MethodImpl(Inline)]
-        public static bool gt<T>(in Scalar128<T> lhs, in Scalar128<T> rhs)
+        public static Vector256<T> vnegate<T>(Vector256<T> src)
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return dfp.gt(in float32(in lhs), in float32(in rhs));
+                return generic<T>(dfp.vnegate(float32(src)));
             else if(typeof(T) == typeof(double))
-                return dfp.gt(in float64(in lhs), in float64(in rhs));
-            else
-                throw unsupported<T>();
-        }
-
-        [MethodImpl(Inline)]
-        public static bool gteq<T>(in Scalar128<T> lhs, in Scalar128<T> rhs)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(float))
-                return dfp.gteq(in float32(in lhs), in float32(in rhs));
-            else if(typeof(T) == typeof(double))
-                return dfp.gteq(in float64(in lhs), in float64(in rhs));
-            else
-                throw unsupported<T>();
-        }
-
-        [MethodImpl(Inline)]
-        public static bool lt<T>(in Scalar128<T> lhs, in Scalar128<T> rhs)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(float))
-                return dfp.lt(in float32(in lhs), in float32(in rhs));
-            else if(typeof(T) == typeof(double))
-                return dfp.lt(in float64(in lhs), in float64(in rhs));
-            throw unsupported<T>();
-        }
-
-
-
-        [MethodImpl(Inline)]
-        public static bool ngt<T>(in Scalar128<T> lhs, in Scalar128<T> rhs)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(float))
-                return dinx.ngt(in float32(in lhs), in float32(in rhs));            
-            else if(typeof(T) == typeof(double))
-                return dinx.ngt(in float32(in lhs), in float32(in rhs));
-            else                
-                throw unsupported<T>();
-        }
-
-        [MethodImpl(Inline)]
-        public static bool nlt<T>(in Scalar128<T> lhs, in Scalar128<T> rhs)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(float))
-                return dinx.nlt(in float32(in lhs), in float32(in rhs));            
-            else if(typeof(T) == typeof(double))
-                return dinx.nlt(in float32(in lhs), in float32(in rhs));
-            else                
-                throw unsupported<T>();
-        }
-
-        [MethodImpl(Inline)]
-        public static bool lteq<T>(in Scalar128<T> lhs, in Scalar128<T> rhs)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(float))
-                return dfp.lteq(in float32(in lhs), in float32(in rhs));            
-            else if(typeof(T) == typeof(double))
-                return dfp.lteq(in float32(in lhs), in float32(in rhs));
-            else                
-                throw unsupported<T>();
-        }
- 
-        [MethodImpl(Inline)]
-        public static Scalar128<T> fmadd<T>(ref Scalar128<T> x, in Scalar128<T> y, in Scalar128<T> z)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(float))
-                return dfp.fmadd(in float32(in x), in float32(in y), in float32(in z)).As<T>();                
-            else if(typeof(T) == typeof(double))
-                return dfp.fmadd(in float64(in x), in float64(in y), in float64(in z)).As<T>();
-            else                
-                throw unsupported<T>();
-        }
-
-
-        [MethodImpl(Inline)]
-        public static Vector128<T> negate<T>(Vector128<T> src)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(float))
-                return generic<T>(dfp.negate(float32(src)));
-            else if(typeof(T) == typeof(double))
-                return generic<T>(dfp.negate(float64(src)));
+                return generic<T>(dfp.vnegate(float64(src)));
             else 
                 throw unsupported<T>();
         }
-
-        [MethodImpl(Inline)]
-        public static Vector256<T> negate<T>(Vector256<T> src)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(float))
-                return generic<T>(dfp.negate(float32(src)));
-            else if(typeof(T) == typeof(double))
-                return generic<T>(dfp.negate(float64(src)));
-            else 
-                throw unsupported<T>();
-        }
-
-
     }
 }

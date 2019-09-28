@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;    
+    using System.Runtime.Intrinsics;    
     using static System.Runtime.Intrinsics.X86.Avx;
     using static System.Runtime.Intrinsics.X86.Avx2;
     using static System.Runtime.Intrinsics.X86.Sse;
@@ -25,7 +26,7 @@ namespace Z0
         /// <param name="y">The right vector</param>
         /// <param name="control">The blend specification</param>
         [MethodImpl(Inline)]
-        public static Vec128<float> blend(in Vec128<float> x, in Vec128<float> y, byte control)        
+        public static Vector128<float> blend(Vector128<float> x, Vector128<float> y, byte control)        
             => Blend(x,y,control);
 
         /// <summary>
@@ -36,7 +37,7 @@ namespace Z0
         /// <param name="y">The right vector</param>
         /// <param name="control">The blend specification</param>
         [MethodImpl(Inline)]
-        public static Vec128<double> blend(in Vec128<double> x, in Vec128<double> y, byte control)        
+        public static Vector128<double> blend(Vector128<double> x, Vector128<double> y, byte control)        
             => Blend(x,y,control);
 
         /// <summary>
@@ -46,7 +47,7 @@ namespace Z0
         /// <param name="y">The right vector</param>
         /// <param name="control"></param>
         [MethodImpl(Inline)]
-        public static Vec128<float> shuffle(in Vec128<float> x, in Vec128<float> y,  byte control)
+        public static Vector128<float> shuffle(Vector128<float> x, Vector128<float> y,  byte control)
             => Shuffle(x,y, control);
 
         /// <summary>
@@ -56,12 +57,12 @@ namespace Z0
         /// <param name="y">The right vector</param>
         /// <param name="control"></param>
         [MethodImpl(Inline)]
-        public static Vec128<double> shuffle(in Vec128<double> x, in Vec128<double> y, byte control)
+        public static Vector128<double> shuffle(Vector128<double> x, Vector128<double> y, byte control)
             =>  Shuffle(x,y, control);
 
         ///<summary>__m128 _mm_permute_ps (__m128 a, int imm8) VPERMILPS xmm, xmm, imm8</summary>
         [MethodImpl(Inline)]
-        public static Vec128<float> permute(in Vec128<float> x, byte control)
+        public static Vector128<float> permute(Vector128<float> x, byte control)
             => Permute(x, control);
 
         /// <summary>
@@ -71,7 +72,7 @@ namespace Z0
         /// <param name="control"></param>
         /// <returns></returns>
         [MethodImpl(Inline)]
-        public static Vec128<double> permute(in Vec128<double> x, byte control)
+        public static Vector128<double> permute(Vector128<double> x, byte control)
             => Permute(x, control);
 
         /// <summary>
@@ -80,7 +81,7 @@ namespace Z0
         /// <param name="x"></param>
         /// <param name="control"></param>
         [MethodImpl(Inline)]
-        public static Vec256<float> permute(in Vec256<float> x, byte control)
+        public static Vector256<float> permute(Vector256<float> x, byte control)
             => Permute(x, control);
 
         /// <summary>
@@ -89,12 +90,12 @@ namespace Z0
         /// <param name="x"></param>
         /// <param name="control"></param>
         [MethodImpl(Inline)]
-        public static Vec256<double> permute(in Vec256<double> x, byte control)
+        public static Vector256<double> permute(Vector256<double> x, byte control)
             => Permute(x, control);
 
         ///<summary>__m128 _mm_permutevar_ps (__m128 a, __m128i b) VPERMILPS xmm, xmm, xmm/m128</summary>
         [MethodImpl(Inline)]
-        public static Vec128<float> permvar(in Vec128<float> x, in Vec128<int> control)
+        public static Vector128<float> permvar(Vector128<float> x, Vector128<int> control)
             => PermuteVar(x, control);
 
         /// <summary>
@@ -104,7 +105,7 @@ namespace Z0
         /// <param name="control"></param>
         /// <returns></returns>
         [MethodImpl(Inline)]
-        public static Vec128<double> permvar(in Vec128<double> x, in Vec128<long> control)
+        public static Vector128<double> permvar(Vector128<double> x, Vector128<long> control)
             => PermuteVar(x, control);
 
         /// <summary>
@@ -114,7 +115,7 @@ namespace Z0
         /// <param name="control"></param>
         /// <returns></returns>
         [MethodImpl(Inline)]
-        public static Vec256<float> permvar(Vec256<float> x, in Vec256<int> control)
+        public static Vector256<float> permvar(Vector256<float> x, Vector256<int> control)
             => PermuteVar(x, control);
 
         /// <summary>
@@ -124,7 +125,7 @@ namespace Z0
         /// <param name="control"></param>
         /// <returns></returns>
         [MethodImpl(Inline)]
-        public static Vec256<double> permvar(Vec256<double> x, in Vec256<long> control)
+        public static Vector256<double> permvar(Vector256<double> x, Vector256<long> control)
             => PermuteVar(x, control);
 
         /// <summary>
@@ -134,7 +135,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="control">The control byte</param>
         [MethodImpl(Inline)]
-        public static Vec256<double> perm4x64(in Vec256<double> x, byte control)
+        public static Vector256<double> perm4x64(Vector256<double> x, byte control)
             => Permute4x64(x,control); 
 
         /// <summary>
@@ -145,7 +146,7 @@ namespace Z0
         /// <param name="y">The right vector</param>
         /// <param name="control">The blend specification</param>
         [MethodImpl(Inline)]
-        public static Vec256<float> blend(in Vec256<float> x, in Vec256<float> y, byte control)        
+        public static Vector256<float> blend(Vector256<float> x, Vector256<float> y, byte control)        
             => Blend(x,y,control);
 
         /// <summary>
@@ -156,7 +157,7 @@ namespace Z0
         /// <param name="y">The right vector</param>
         /// <param name="control">The blend specification</param>
         [MethodImpl(Inline)]
-        public static Vec256<double> blend(in Vec256<double> x, in Vec256<double> y, byte control)        
+        public static Vector256<double> blend(Vector256<double> x, Vector256<double> y, byte control)        
             => Blend(x,y,control);
 
         /// <summary>
@@ -167,7 +168,7 @@ namespace Z0
         /// <param name="y">The right vector</param>
         /// <param name="control">The blend specification</param>
         [MethodImpl(Inline)]
-        public static Vec256<float> blendv(in Vec256<float> x, in Vec256<float> y, in Vec256<float> control)        
+        public static Vector256<float> blendv(Vector256<float> x, Vector256<float> y, Vector256<float> control)        
             => BlendVariable(x,y,control);
 
         /// <summary>
@@ -178,7 +179,7 @@ namespace Z0
         /// <param name="y">The right vector</param>
         /// <param name="control">The blend specification</param>
         [MethodImpl(Inline)]
-        public static Vec256<double> blendv(in Vec256<double> x, in Vec256<double> y, in Vec256<double> control)        
+        public static Vector256<double> blendv(Vector256<double> x, Vector256<double> y, Vector256<double> control)        
             => BlendVariable(x,y,control);
  
          /// <summary>
@@ -189,7 +190,7 @@ namespace Z0
         /// <param name="row2">The third row</param>
         /// <param name="row3">The fourth row</param>
         [MethodImpl(Inline)]
-        public static void transpose(ref Vec128<float> row0,ref Vec128<float> row1,ref Vec128<float> row2,ref Vec128<float> row3)
+        public static void transpose(ref Vector128<float> row0,ref Vector128<float> row1,ref Vector128<float> row2,ref Vector128<float> row3)
         {
             var tmp0 = Shuffle(row0,row1, 0x44);
             var tmp2 = Shuffle(row0, row1, 0xEE);
@@ -271,7 +272,7 @@ namespace Z0
         /// <param name="src">The memory source</param>
         /// <param name="mask">Hi bit on selects the memory, otherwise set to zero</param>
         [MethodImpl(Inline)]
-        public static unsafe Vec256<float> maskload(ref float src, Vec256<float> mask)
+        public static unsafe Vector256<float> maskload(ref float src, Vector256<float> mask)
             => MaskLoad(refptr(ref src), mask);
 
         /// <summary>
@@ -280,7 +281,7 @@ namespace Z0
         /// <param name="src">The memory source</param>
         /// <param name="mask">Hi bit on selects the memory, otherwise set to zero</param>
         [MethodImpl(Inline)]
-        public static unsafe Vec256<double> maskload(ref double src, Vec256<double> mask)
+        public static unsafe Vector256<double> maskload(ref double src, Vector256<double> mask)
             => MaskLoad(refptr(ref src), mask);
 
         /// <summary>
@@ -290,7 +291,7 @@ namespace Z0
         /// <param name="mask">The mask</param>
         /// <param name="dst">The memory reference</param>
         [MethodImpl(Inline)]
-        public static unsafe void maskstore(Vec128<float> src, Vec128<float> mask, ref float dst)
+        public static unsafe void maskstore(Vector128<float> src, Vector128<float> mask, ref float dst)
             => MaskStore(refptr(ref dst), src,mask);
 
         /// <summary>
@@ -300,7 +301,7 @@ namespace Z0
         /// <param name="mask">The mask</param>
         /// <param name="dst">The memory reference</param>
         [MethodImpl(Inline)]
-        public static unsafe void maskstore(Vec128<double> src, Vec128<double> mask, ref double dst)
+        public static unsafe void maskstore(Vector128<double> src, Vector128<double> mask, ref double dst)
             => MaskStore(refptr(ref dst), src,mask);
 
         /// <summary>
@@ -310,7 +311,7 @@ namespace Z0
         /// <param name="mask">The mask</param>
         /// <param name="dst">The memory reference</param>
         [MethodImpl(Inline)]
-        public static unsafe void maskstore(Vec256<float> src, Vec256<float> mask, ref float dst)
+        public static unsafe void maskstore(Vector256<float> src, Vector256<float> mask, ref float dst)
             => MaskStore(refptr(ref dst), src,mask);
 
         /// <summary>
@@ -320,7 +321,7 @@ namespace Z0
         /// <param name="mask">The mask</param>
         /// <param name="dst">The memory reference</param>
         [MethodImpl(Inline)]
-        public static unsafe void maskstore(Vec256<double> src, Vec256<double> mask, ref double dst)
+        public static unsafe void maskstore(Vector256<double> src, Vector256<double> mask, ref double dst)
             => MaskStore(refptr(ref dst), src,mask);
 
         /// <summary>
@@ -329,7 +330,7 @@ namespace Z0
         /// the upper 3 elements from a to the upper elements of dst.
         /// </summary>
         [MethodImpl(Inline)]
-        public static Vec128<float> movescalar(in Vec128<float> x, in Vec128<float> y)
+        public static Vector128<float> movescalar(Vector128<float> x, Vector128<float> y)
             => MoveScalar(y,x);
 
         /// <summary>
@@ -340,7 +341,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vec128<double> movescalar(in Vec128<double> x, in Vec128<double> y)
+        public static Vector128<double> movescalar(Vector128<double> x, Vector128<double> y)
             => MoveScalar(x,y);
 
         /// <summary>
@@ -348,10 +349,10 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
-        /// <param name="index">Identifies the lane in the target to overwrite, either 0 or 1 respectively 
+        /// <param name="index">Identifies the lane the target to overwrite, either 0 or 1 respectively 
         /// identifing low or hi</param>
         [MethodImpl(Inline)]
-        public static Vec256<float> insert(in Vec128<float> src, in Vec256<float> dst, byte index)        
+        public static Vector256<float> insert(Vector128<float> src, Vector256<float> dst, byte index)        
             => InsertVector128(dst,src,index);
 
         /// <summary>
@@ -362,7 +363,7 @@ namespace Z0
         /// <param name="index">Identifies the lane in the target to overwrite, either 0 or 1 respectively 
         /// identifing low or hi</param>
         [MethodImpl(Inline)]
-        public static Vec256<double> insert(in Vec128<double> src, in Vec256<double> dst, byte index)        
+        public static Vector256<double> insert(Vector128<double> src, Vector256<double> dst, byte index)        
             => InsertVector128(dst,src,index);
 
         /// <summary>
@@ -374,7 +375,7 @@ namespace Z0
         /// <param name="x">The left source vector</param>
         /// <param name="y">The right source vector</param>
         [MethodImpl(Inline)]
-        public static Vec128<float> unpacklo(in Vec128<float> x, in Vec128<float> y)
+        public static Vector128<float> unpacklo(Vector128<float> x, Vector128<float> y)
             => UnpackLow(x,y);
 
         /// <summary>
@@ -386,7 +387,7 @@ namespace Z0
         /// <param name="x">The left source vector</param>
         /// <param name="y">The right source vector</param>
         [MethodImpl(Inline)]
-        public static Vec128<double> unpacklo(in Vec128<double> x, in Vec128<double> y)
+        public static Vector128<double> unpacklo(Vector128<double> x, Vector128<double> y)
             => UnpackLow(x,y);
 
         /// <summary>
@@ -398,7 +399,7 @@ namespace Z0
         /// <param name="x">The left source vector</param>
         /// <param name="y">The right source vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<float> unpacklo(in Vec256<float> x, in Vec256<float> y)
+        public static Vector256<float> unpacklo(Vector256<float> x, Vector256<float> y)
             => UnpackLow(x,y);
 
         /// <summary>
@@ -410,7 +411,7 @@ namespace Z0
         /// <param name="x">The left source vector</param>
         /// <param name="y">The right source vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<double> unpacklo(in Vec256<double> x, in Vec256<double> y)
+        public static Vector256<double> unpacklo(Vector256<double> x, Vector256<double> y)
             => UnpackLow(x,y);
  
          /// <summary>
@@ -422,7 +423,7 @@ namespace Z0
         /// <param name="x">The left source vector</param>
         /// <param name="y">The right source vector</param>
         [MethodImpl(Inline)]
-        public static Vec128<float> unpackhi(in Vec128<float> x, in Vec128<float> y)
+        public static Vector128<float> unpackhi(Vector128<float> x, Vector128<float> y)
             => UnpackHigh(x,y);
 
         /// <summary>
@@ -434,7 +435,7 @@ namespace Z0
         /// <param name="x">The left source vector</param>
         /// <param name="y">The right source vector</param>
         [MethodImpl(Inline)]
-        public static Vec128<double> unpackhi(in Vec128<double> x, in Vec128<double> y)
+        public static Vector128<double> unpackhi(Vector128<double> x, Vector128<double> y)
             => UnpackHigh(x,y);
 
         /// <summary>
@@ -446,7 +447,7 @@ namespace Z0
         /// <param name="x">The left source vector</param>
         /// <param name="y">The right source vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<float> unpackhi(in Vec256<float> x, in Vec256<float> y)
+        public static Vec256<float> unpackhi(Vec256<float> x, Vec256<float> y)
             => UnpackHigh(x,y);
 
         /// <summary>
@@ -458,7 +459,7 @@ namespace Z0
         /// <param name="x">The left source vector</param>
         /// <param name="y">The right source vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<double> unpackhi(in Vec256<double> x, in Vec256<double> y)
+        public static Vector256<double> unpackhi(Vec256<double> x, Vec256<double> y)
             => UnpackHigh(x,y);
 
     }

@@ -14,7 +14,7 @@ namespace Z0
     using static zfunc;
     using static As;
 
-    public static partial class ginxs
+    public static partial class ginxx
     {
         /// <summary>
         /// Loads a 128-bit vector from a blocked span

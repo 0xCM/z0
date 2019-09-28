@@ -14,6 +14,8 @@ namespace Z0
 
     public static class Int128X
     {
+
+
         [MethodImpl(Inline)]
         public static ref Int128 EnableBit(this ref Int128 src, int pos)
         {

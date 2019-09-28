@@ -30,7 +30,7 @@ namespace Z0
                 var v2 = Vec128.Load(src, offset);
                 offset += veclen;
                 var vSum = hadd(v1, v2);
-                dst = add(dst,vSum);                
+                dst = vadd(dst,vSum);                
             }
             
             Span<short> final = stackalloc short[veclen];
@@ -59,7 +59,7 @@ namespace Z0
                 var v2 = Vec128.Load(src, offset);
                 offset += veclen;
                 var vSum = hadd(v1, v2);
-                dst = add(dst,vSum);                
+                dst = vadd(dst,vSum);                
             }
             
             Span<int> final = stackalloc int[veclen];

@@ -17,34 +17,27 @@ namespace Z0
     {
 
         [MethodImpl(Inline)]
-        public static Vec128<float> div(in Vec128<float> lhs, in Vec128<float> rhs)
+        public static Vec128<float> vdiv(in Vec128<float> lhs, in Vec128<float> rhs)
             => Divide(lhs, rhs);
 
         [MethodImpl(Inline)]
-        public static Vec128<double> div(in Vec128<double> lhs, in Vec128<double> rhs)
+        public static Vec128<double> vdiv(in Vec128<double> lhs, in Vec128<double> rhs)
+            => Divide(lhs, rhs);
+
+
+        [MethodImpl(Inline)]
+        public static Vec256<float> vdiv(in Vec256<float> lhs, in Vec256<float> rhs)
             => Divide(lhs, rhs);
 
         [MethodImpl(Inline)]
-        public static Scalar128<float> div(in Scalar128<float> lhs, in Scalar128<float> rhs)
-            => DivideScalar(lhs, rhs);
-            
-        [MethodImpl(Inline)]
-        public static Scalar128<double> div(in Scalar128<double> lhs, in Scalar128<double> rhs)
-            => DivideScalar(lhs, rhs);
-
-        [MethodImpl(Inline)]
-        public static Vec256<float> div(in Vec256<float> lhs, in Vec256<float> rhs)
-            => Divide(lhs, rhs);
-
-        [MethodImpl(Inline)]
-        public static Vec256<double> div(in Vec256<double> lhs, in Vec256<double> rhs)
+        public static Vec256<double> vdiv(in Vec256<double> lhs, in Vec256<double> rhs)
             => Divide(lhs, rhs);
 
         public static Span128<float> div(ReadOnlySpan128<float> lhs, ReadOnlySpan128<float> rhs, Span128<float> dst)
         {
             var blocks = dst.BlockCount;
             for(var block = 0; block < blocks; block++)
-                vstore(dfp.div(lhs.LoadVec128(block), rhs.LoadVec128(block)), ref dst[block]);            
+                vstore(dfp.vdiv(lhs.LoadVec128(block), rhs.LoadVec128(block)), ref dst[block]);            
             return dst;            
         }
 
@@ -52,7 +45,7 @@ namespace Z0
         {
             var blocks = dst.BlockCount;
             for(var block = 0; block < blocks; block++)
-                vstore(dfp.div(lhs.LoadVec128(block), rhs.LoadVec128(block)), ref dst[block]);            
+                vstore(dfp.vdiv(lhs.LoadVec128(block), rhs.LoadVec128(block)), ref dst[block]);            
             return dst;            
         }
 
@@ -60,7 +53,7 @@ namespace Z0
         {
             var blocks = dst.BlockCount;
             for(var block = 0; block < blocks; block++)
-                vstore(dfp.div(lhs.LoadVec256(block), rhs.LoadVec256(block)), ref dst[block]);            
+                vstore(dfp.vdiv(lhs.LoadVec256(block), rhs.LoadVec256(block)), ref dst[block]);            
             return dst;            
         }
 
@@ -68,7 +61,7 @@ namespace Z0
         {
             var blocks = dst.BlockCount;
             for(var block = 0; block < blocks; block++)
-                vstore(dfp.div(lhs.LoadVec256(block), rhs.LoadVec256(block)), ref dst[block]);            
+                vstore(dfp.vdiv(lhs.LoadVec256(block), rhs.LoadVec256(block)), ref dst[block]);            
             return dst;            
         }     
     }

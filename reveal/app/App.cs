@@ -80,10 +80,12 @@ namespace Z0
 
         void Disassemble(bool asm, bool cil)
         {
-            Disassemble(new PrimalScenarios());
-            Disassemble(new ExperimentalScenarios());
-            Disassemble(true, true, typeof(math));
+            // Disassemble(new PrimalScenarios());
+            // Disassemble(new ExperimentalScenarios());
+            // Disassemble(true, true, typeof(math));
             Disassemble(true, true, typeof(soc));    
+            Disassemble(true, true, typeof(voc));    
+            Disassemble(true, true, typeof(boc));    
 
             // var dst = DefineAsmOutPath("gmath.add");
             // DeconstructGeneric<int>(typeof(gmath), "add").OnSome(d => d.EmitAsm(dst));

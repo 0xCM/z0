@@ -57,7 +57,7 @@ namespace Z0
             where N : ITypeNat, new()
             where T : unmanaged    
         {
-            ginx.add(x.Data, y.Data, dst.Data);
+            inxspan.add(x.Data, y.Data, dst.Data);
             return ref dst;
         }
 
@@ -112,7 +112,7 @@ namespace Z0
             where N : ITypeNat, new()
             where T : unmanaged    
         {
-            ginx.add<T>(x,y,x);
+            inxspan.add<T>(x,y,x);
             return ref x;
         }
 

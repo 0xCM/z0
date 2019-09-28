@@ -20,83 +20,83 @@ namespace Z0
     {
         
         [MethodImpl(Inline)]
-        public static Vector128<byte> or(Vector128<byte> lhs, Vector128<byte> rhs)
+        public static Vec128<byte> or(Vec128<byte> lhs, Vec128<byte> rhs)
             => Or(lhs, rhs);
 
         [MethodImpl(Inline)]
-        public static Vector128<short> or(Vector128<short> lhs, Vector128<short> rhs)
+        public static Vec128<short> or(Vec128<short> lhs, Vec128<short> rhs)
             => Or(lhs, rhs);
 
         [MethodImpl(Inline)]
-        public static Vector128<sbyte> or(Vector128<sbyte> lhs, Vector128<sbyte> rhs)
+        public static Vec128<sbyte> or(Vec128<sbyte> lhs, Vec128<sbyte> rhs)
             => Or(lhs, rhs);
 
         [MethodImpl(Inline)]
-        public static Vector128<ushort> or(Vector128<ushort> lhs, Vector128<ushort> rhs)
+        public static Vec128<ushort> or(Vec128<ushort> lhs, Vec128<ushort> rhs)
             => Or(lhs, rhs);
 
         [MethodImpl(Inline)]
-        public static Vector128<int> or(Vector128<int> lhs, Vector128<int> rhs)
+        public static Vec128<int> or(Vec128<int> lhs, Vec128<int> rhs)
             => Or(lhs, rhs);
 
         [MethodImpl(Inline)]
-        public static Vector128<uint> or(Vector128<uint> lhs, Vector128<uint> rhs)
+        public static Vec128<uint> or(Vec128<uint> lhs, Vec128<uint> rhs)
             => Or(lhs, rhs);
 
         [MethodImpl(Inline)]
-        public static Vector128<long> or(Vector128<long> lhs, Vector128<long> rhs)
+        public static Vec128<long> or(Vec128<long> lhs, Vec128<long> rhs)
             => Or(lhs, rhs);
 
         [MethodImpl(Inline)]
-        public static Vector128<ulong> or(Vector128<ulong> lhs, Vector128<ulong> rhs)
+        public static Vec128<ulong> or(Vec128<ulong> lhs, Vec128<ulong> rhs)
             => Or(lhs, rhs);
 
         [MethodImpl(Inline)]
-        public static Vector128<float> or(Vector128<float> lhs, Vector128<float> rhs)
+        public static Vec128<float> or(Vec128<float> lhs, Vec128<float> rhs)
             => Or(lhs, rhs);
         
         [MethodImpl(Inline)]
-        public static Vector128<double> or(Vector128<double> lhs, Vector128<double> rhs)
+        public static Vec128<double> or(Vec128<double> lhs, Vec128<double> rhs)
             => Or(lhs, rhs);
 
         [MethodImpl(Inline)]
-        public static Vector256<byte> or(Vector256<byte> lhs, Vector256<byte> rhs)
+        public static Vec256<byte> or(Vec256<byte> lhs, Vec256<byte> rhs)
             => Or(lhs, rhs);
 
         [MethodImpl(Inline)]
-        public static Vector256<short> or(Vector256<short> lhs, Vector256<short> rhs)
+        public static Vec256<short> or(Vec256<short> lhs, Vec256<short> rhs)
             => Or(lhs, rhs);
 
         [MethodImpl(Inline)]
-        public static Vector256<sbyte> or(Vector256<sbyte> lhs, Vector256<sbyte> rhs)
+        public static Vec256<sbyte> or(Vec256<sbyte> lhs, Vec256<sbyte> rhs)
             => Or(lhs, rhs);
 
         [MethodImpl(Inline)]
-        public static Vector256<ushort> or(Vector256<ushort> lhs, Vector256<ushort> rhs)
+        public static Vec256<ushort> or(Vec256<ushort> lhs, Vec256<ushort> rhs)
             => Or(lhs, rhs);
 
         [MethodImpl(Inline)]
-        public static Vector256<int> or(Vector256<int> lhs, Vector256<int> rhs)
+        public static Vec256<int> or(Vec256<int> lhs, Vec256<int> rhs)
             => Or(lhs, rhs);
 
         [MethodImpl(Inline)]
-        public static Vector256<uint> or(Vector256<uint> lhs, Vector256<uint> rhs)
+        public static Vec256<uint> or(Vec256<uint> lhs, Vec256<uint> rhs)
             => Or(lhs, rhs);
 
         [MethodImpl(Inline)]
-        public static Vector256<long> or(Vector256<long> lhs, Vector256<long> rhs)
+        public static Vec256<long> or(Vec256<long> lhs, Vec256<long> rhs)
             => Or(lhs, rhs);
 
         [MethodImpl(Inline)]
-        public static Vector256<ulong> or(Vector256<ulong> lhs, Vector256<ulong> rhs)
+        public static Vec256<ulong> or(Vec256<ulong> lhs, Vec256<ulong> rhs)
             => Or(lhs, rhs);
 
         [MethodImpl(Inline)]
-        public static Vector256<float> or(Vector256<float> lhs, Vector256<float> rhs)
+        public static Vec256<float> or(Vec256<float> lhs, Vec256<float> rhs)
             => Or(lhs, rhs);
         
         [MethodImpl(Inline)]
-        public static Vector256<double> or(Vector256<double> lhs, Vector256<double> rhs)
+        public static Vec256<double> or(Vec256<double> lhs, Vec256<double> rhs)
             => Or(lhs, rhs);
     }
 

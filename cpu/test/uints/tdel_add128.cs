@@ -24,7 +24,7 @@ namespace Z0
             where T : unmanaged
         {
             var last = default(Vector128<T>);
-            var del = new Asm128BinOp<T>(ginx.add);
+            var del = new Asm128BinOp<T>(ginx.vadd);
             
             for(var i=0; i<OpCount; i++)
             {
@@ -34,10 +34,10 @@ namespace Z0
                 last = del(a,b);
                 subject.Stop();
 
-                var c = Random.CpuVector128<T>();
-                var d = Random.CpuVector128<T>();
+                var c = Random.CpuVec128<T>();
+                var d = Random.CpuVec128<T>();
                 compare.Start();
-                last = ginx.add(c,d);
+                last = ginx.vadd(c,d);
                 compare.Stop();
 
             }

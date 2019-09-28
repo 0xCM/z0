@@ -586,11 +586,11 @@ namespace Z0.Test
             var tmp5 = dinx.clmul(a, b, ClMulMask.X01);
             var tmp6 = dinx.clmul(a, b, ClMulMask.X11);
             
-            tmp4 = Bits.xor(tmp4, tmp5);            
+            tmp4 = Bits.vxor(tmp4, tmp5);            
             tmp5 = Bits.sll(tmp4, 8);
             tmp4 = Bits.srl(tmp4, 8);            
-            tmp3 = Bits.xor(tmp3, tmp5);            
-            tmp6 = Bits.xor(tmp6, tmp4);
+            tmp3 = Bits.vxor(tmp3, tmp5);            
+            tmp6 = Bits.vxor(tmp6, tmp4);
             
             var tmp7 = Bits.srl(tmp3, 31);
             var tmp8 = Bits.srl(tmp6, 31);            
@@ -600,28 +600,28 @@ namespace Z0.Test
             var tmp9 = Bits.srl(tmp7, 12);            
             tmp8 = Bits.sll(tmp8, 4);
             tmp7 = Bits.sll(tmp7, 4);
-            tmp3 = Bits.or(tmp3, tmp7);
-            tmp6 = Bits.or(tmp6, tmp8);
-            tmp6 = Bits.or(tmp6, tmp9);
+            tmp3 = Bits.vor(tmp3, tmp7);
+            tmp6 = Bits.vor(tmp6, tmp8);
+            tmp6 = Bits.vor(tmp6, tmp9);
 
             tmp7 = Bits.sll(tmp3, 31);
             tmp8 = Bits.sll(tmp3, 30);
             tmp9 = Bits.sll(tmp3, 25);
 
-            tmp7 = Bits.xor(tmp7, tmp8);
-            tmp7 = Bits.xor(tmp7, tmp9);            
+            tmp7 = Bits.vxor(tmp7, tmp8);
+            tmp7 = Bits.vxor(tmp7, tmp9);            
             tmp8 = Bits.srl(tmp7, 4);
             tmp7 = Bits.sll(tmp7, 12);            
-            tmp3 = Bits.xor(tmp3, tmp7);
+            tmp3 = Bits.vxor(tmp3, tmp7);
 
             var tmp2 = dinx.srl(tmp3, 1);
             tmp4 = Bits.srl(tmp3, 2);
             tmp5 = Bits.sll(tmp3, 7);
-            tmp2 = Bits.xor(tmp2, tmp4);
-            tmp2 = Bits.xor(tmp2, tmp5);
-            tmp2 = Bits.xor(tmp2, tmp8);
-            tmp3 = Bits.xor(tmp3, tmp2);
-            tmp6 = Bits.xor(tmp6, tmp3);
+            tmp2 = Bits.vxor(tmp2, tmp4);
+            tmp2 = Bits.vxor(tmp2, tmp5);
+            tmp2 = Bits.vxor(tmp2, tmp8);
+            tmp3 = Bits.vxor(tmp3, tmp2);
+            tmp6 = Bits.vxor(tmp6, tmp3);
 
             return tmp6;            
         }

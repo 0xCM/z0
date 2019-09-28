@@ -23,18 +23,6 @@ namespace Z0
              => BitMatrix8.From((ulong)A ^ (ulong)B);             
 
         /// <summary>
-        /// Computes the logical XOR between two primal bitmatrices of order 8
-        /// </summary>
-        /// <param name="A">The left matrix</param>
-        /// <param name="B">The right matrix</param>
-        [MethodImpl(Inline)]
-        public static ref BitMatrix8 xor(in BitMatrix8 A, in BitMatrix8 B, ref BitMatrix8 C)
-        {
-             C = BitMatrix8.From((ulong)A ^ (ulong)B); 
-             return ref C;
-        }            
-
-        /// <summary>
         /// Computes the logical XOR between two primal bitmatrices of order 16
         /// </summary>
         /// <param name="A">The left matrix</param>
@@ -46,17 +34,29 @@ namespace Z0
             return ref C;
         }
 
-        /// <summary>
-        /// Computes the logical XOR between two primal bitmatrices of order 16
-        /// </summary>
-        /// <param name="A">The left matrix</param>
-        /// <param name="B">The right matrix</param>
         [MethodImpl(Inline)]
-        public static BitMatrix16 xor(in BitMatrix16 A, in BitMatrix16 B)
+        public static BitMatrix16 xor(in BitMatrix16 lhs, in BitMatrix16 rhs)
         {
-            var C = BitMatrix16.Alloc();
-            return xor(in A, in B, ref C);
+            var dst = BitMatrix16.Alloc();
+            lhs.LoadCpuVec(out Vec256<ushort> vLhs);
+            rhs.LoadCpuVec(out Vec256<ushort> vRhs);
+            dinx.xor(vLhs,vRhs).StoreTo(ref dst.Data[0]);
+            return lhs;
         }
+
+        public static BitMatrix32 xor(in BitMatrix32 A, in BitMatrix32 B)
+        {
+            const int rowstep = 8;
+            var dst = BitMatrix32.Alloc();
+            for(var i=0; i< A.RowCount; i += rowstep)
+            {
+                var x1 = vload256(ref A[i]);
+                var x2 = vload256(ref B[i]);
+                Z0.Bits.vxor(in x1,in x2).StoreTo(ref dst[i]);
+            }
+            return dst;
+        }
+
 
         /// <summary>
         /// Computes the logical XOR between two primal bitmatrices of order 32
@@ -69,17 +69,6 @@ namespace Z0
             for(var i=0; i< A.RowCount; i += rowstep)
                 dinx.xor(Vec256.Load(ref A[i]), Vec256.Load(ref B[i])).StoreTo(ref C[i]);
             return ref C;
-        }
-
-        /// <summary>
-        /// Computes the logical XOR between two primal bitmatrices of order 32
-        /// </summary>
-        /// <param name="lhs">The left matrix</param>
-        /// <param name="rhs">The right matrix</param>
-        public static BitMatrix32 xor(in BitMatrix32 A, in BitMatrix32 B)
-        {
-            var C = BitMatrix32.Alloc();
-            return xor(in A, in B, ref C);
         }
 
         /// <summary>

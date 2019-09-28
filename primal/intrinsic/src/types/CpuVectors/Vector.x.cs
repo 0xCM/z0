@@ -33,9 +33,66 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <typeparam name="T">The primitive type</typeparam>
         [MethodImpl(Inline)]
+        public static int Length<T>(this Vector128<T> src)
+            where T : unmanaged            
+                => Vec128<T>.Length;
+
+        [MethodImpl(Inline)]
+        public static Span<T> StoreTo<T>(this Vector128<T> src, Span<T> dst)
+            where T : unmanaged            
+        {
+            vstore(src, ref head(dst));
+            return dst;
+        }
+
+        [MethodImpl(Inline)]
+        public static Span<T> ToSpan<T>(this Vector128<T> src)
+            where T : unmanaged            
+        {
+            Span<T> dst = new T[Vec128<T>.Length];
+            vstore(src, ref head(dst));
+            return dst;
+        }
+
+        /// <summary>
+        /// Specifies the length, i.e. the number of components, of an
+        /// intrnsic vector
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <typeparam name="T">The primitive type</typeparam>
+        [MethodImpl(Inline)]
         public static int Length<T>(this in Vec256<T> src)
             where T : unmanaged            
                 => Vec256<T>.Length;    
+
+        /// <summary>
+        /// Specifies the length, i.e. the number of components, of an
+        /// intrnsic vector
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <typeparam name="T">The primitive type</typeparam>
+        [MethodImpl(Inline)]
+        public static int Length<T>(this Vector256<T> src)
+            where T : unmanaged            
+                => Vec256<T>.Length;    
+
+
+        [MethodImpl(Inline)]
+        public static Span<T> StoreTo<T>(this Vector256<T> src, Span<T> dst)
+            where T : unmanaged            
+        {
+            vstore(src, ref head(dst));
+            return dst;
+        }
+
+        [MethodImpl(Inline)]
+        public static Span<T> ToSpan<T>(this Vector256<T> src)
+            where T : unmanaged            
+        {
+            Span<T> dst = new T[Vec256<T>.Length];
+            vstore(src, ref head(dst));
+            return dst;
+        }
 
         /// <summary>
         /// Loads a 256-bit cpu vector from a blocked span

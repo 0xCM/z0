@@ -445,7 +445,7 @@ namespace Z0
         {
             var len =  b.Length;
             for(var i = 0; i<len; i++) 
-                b[i] = gmath.ipow(b[i], exp[i]);
+                b[i] = gmath.pow(b[i], exp[i]);
             return b;
         }
 
@@ -454,7 +454,7 @@ namespace Z0
         {
             var len =  b.Length;
             for(var i = 0; i<len; i++) 
-                b[i] = gmath.ipow(b[i], exp);
+                b[i] = gmath.pow(b[i], exp);
             return b;
         }
 

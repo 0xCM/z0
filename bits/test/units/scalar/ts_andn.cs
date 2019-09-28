@@ -43,15 +43,6 @@ namespace Z0.Test
             scalar_andn_check<ulong>();
         }
 
-        public void scalar_andn_32f()
-        {
-            scalar_andn_check<float>();
-        }
-
-        public void scalar_andn_64f()
-        {
-            scalar_andn_check<double>();
-        }
 
         void scalar_andn_check<T>()
             where T : unmanaged
@@ -59,21 +50,12 @@ namespace Z0.Test
             var vZero = Vec128<T>.Zero;
             for(var i=0; i<SampleSize; i++)
             {
-                var x1 = Random.CpuVec128<T>();                    
-                var y1 = Random.CpuVec128<T>();                    
-                var z1 = gbits.andn(in x1, in y1);
-                var z2 = gbits.andn(in x1, in x1);
+                var x = Random.Next<T>();                    
+                var y = Random.Next<T>();                    
+                var z1 = gbits.andn(in x, in y);
+                var z2 = gmath.and(gmath.flip(x),y);
+                Claim.eq(z1,z2);
 
-                var z = PrimalInfo.Get<T>().Zero;
-                for(var j = 0; j<z1.Length(); j++)
-                {
-                    gbits.or(in z, z1[j], ref z);
-                    Claim.nea(gmath.nonzero(z2[j]));
-                }
-                
-                Claim.yea(gmath.nonzero(z));
-
-                Claim.yea(z2 == vZero);
             }
         }
 

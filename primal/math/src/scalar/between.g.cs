@@ -55,7 +55,7 @@ namespace Z0
             if(typeof(T) == typeof(byte))
                 return math.between(uint8(x), uint8(a), uint8(b));
             else if(typeof(T) == typeof(ushort))
-                return math.between(int32(x), int32(a), int32(b));
+                return math.between(uint16(x), uint16(a), uint16(b));
             else if(typeof(T) == typeof(uint))
                 return math.between(uint32(x), uint32(a), uint32(b));
             else 

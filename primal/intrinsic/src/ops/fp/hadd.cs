@@ -22,7 +22,7 @@ namespace Z0
         /// <param name="lhs">The left vector</param>
         /// <param name="rhs">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vector128<float> hadd(Vector128<float> lhs, Vector128<float> rhs)
+        public static Vector128<float> vhadd(Vector128<float> lhs, Vector128<float> rhs)
             => HorizontalAdd(lhs, rhs);
 
         /// <summary>
@@ -31,7 +31,7 @@ namespace Z0
         /// <param name="lhs">The left vector</param>
         /// <param name="rhs">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vector128<double> hadd(Vector128<double> lhs, Vector128<double> rhs)
+        public static Vector128<double> vhadd(Vector128<double> lhs, Vector128<double> rhs)
             => HorizontalAdd(lhs, rhs);
 
         /// <summary>
@@ -40,7 +40,7 @@ namespace Z0
         /// <param name="lhs">The left vector</param>
         /// <param name="rhs">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vector256<float> hadd(Vector256<float> lhs, Vector256<float> rhs)
+        public static Vector256<float> vhadd(Vector256<float> lhs, Vector256<float> rhs)
             => HorizontalAdd(lhs, rhs);
 
         /// <summary>
@@ -49,7 +49,7 @@ namespace Z0
         /// <param name="lhs">The left vector</param>
         /// <param name="rhs">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vector256<double> hadd(Vector256<double> lhs, Vector256<double> rhs)
+        public static Vector256<double> vhadd(Vector256<double> lhs, Vector256<double> rhs)
             => HorizontalAdd(lhs, rhs);
  
     }

@@ -217,8 +217,7 @@ namespace Z0
         /// <param name="rhs">The right vector</param>
         [MethodImpl(Inline)]
         public static BitVector64 operator ^(BitVector64 lhs, BitVector64 rhs)
-            => lhs.data ^ rhs.data;
-
+            => bitvector.xor(lhs,rhs);
         /// <summary>
         /// Computes the bitwise AND of the source operands
         /// Note that the AND operator is equivalent to the (*) operator
@@ -227,7 +226,7 @@ namespace Z0
         /// <param name="rhs">The right vector</param>
         [MethodImpl(Inline)]
         public static BitVector64 operator &(BitVector64 lhs, BitVector64 rhs)
-            => lhs.data & rhs.data;
+            => bitvector.and(lhs,rhs);
 
         /// <summary>
         /// Computes the bitwise OR of the source operands
@@ -236,7 +235,7 @@ namespace Z0
         /// <param name="rhs">The right vector</param>
         [MethodImpl(Inline)]
         public static BitVector64 operator |(BitVector64 lhs, BitVector64 rhs)
-            => lhs.data | rhs.data;
+            => bitvector.or(lhs,rhs);
 
         /// <summary>
         /// Computes the scalar product of the operands
@@ -245,7 +244,7 @@ namespace Z0
         /// <param name="rhs">The right operand</param>
         [MethodImpl(Inline)]
         public static Bit operator %(in BitVector64 lhs, in BitVector64 rhs)
-            => Mod<N2>.mod(Bits.pop(lhs.data & rhs.data));              
+            => bitvector.dot(lhs,rhs);
 
         /// <summary>
         /// Computes the sum of the source operands
@@ -258,22 +257,12 @@ namespace Z0
             => lhs ^ rhs;
 
         /// <summary>
-        /// Computes the product of the operands. 
-        /// Note that this operator is equivalent to the AND operator (&)
-        /// </summary>
-        /// <param name="lhs">The left operand</param>
-        /// <param name="rhs">The right operand</param>
-        [MethodImpl(Inline)]
-        public static BitVector64 operator *(BitVector64 lhs, BitVector64 rhs)
-            => lhs & rhs;
-
-        /// <summary>
         /// Computes the bitwise complement of the operand
         /// </summary>
         /// <param name="lhs">The source operand</param>
         [MethodImpl(Inline)]
         public static BitVector64 operator ~(BitVector64 src)
-            => ~src.data;
+            => bitvector.flip(src);
 
         /// <summary>
         /// Negates the operand via two'2 complement
@@ -281,7 +270,7 @@ namespace Z0
         /// <param name="lhs">The source operand</param>
         [MethodImpl(Inline)]
         public static BitVector64 operator -(BitVector64 src)
-            => ~src.data + 1ul;
+            => bitvector.negate(src);
 
         /// <summary>
         /// Subtracts the second operand from the first. Note that this operator is equivalent to
@@ -292,7 +281,7 @@ namespace Z0
         /// <param name="rhs">The right vector</param>
         [MethodImpl(Inline)]
         public static BitVector64 operator - (BitVector64 lhs, BitVector64 rhs)
-            => lhs + -rhs;    
+            => bitvector.sub(lhs,rhs);
 
         /// <summary>
         /// Shifts the source bits leftwards
@@ -300,7 +289,7 @@ namespace Z0
         /// <param name="lhs">The source operand</param>
         [MethodImpl(Inline)]
         public static BitVector64 operator <<(BitVector64 lhs, int offset)
-            => lhs.data << offset;
+            => bitvector.sll(lhs,offset);
 
         /// <summary>
         /// Shifts the source bits rightwards
@@ -308,7 +297,7 @@ namespace Z0
         /// <param name="lhs">The source operand</param>
         [MethodImpl(Inline)]
         public static BitVector64 operator >>(BitVector64 lhs, int offset)
-            => lhs.data >> offset;
+            => bitvector.srl(lhs,offset);
 
         /// <summary>
         /// Increments the vector arithmetically
@@ -490,7 +479,7 @@ namespace Z0
         /// <param name="rhs">The right operand</param>
         [MethodImpl(Inline)]
         public readonly Bit Dot(BitVector64 rhs)
-            => mod<N2>(Bits.pop(data & rhs.data));              
+            => bitvector.dot(this,rhs);
 
         /// <summary>
         /// Selects an index-identified byte where index = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7

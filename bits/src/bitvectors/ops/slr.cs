@@ -15,6 +15,14 @@ namespace Z0
 
     partial class bitvector
     {
+        /// <summary>
+        /// Applies a logical right shift to the source vector
+        /// </summary>
+        /// <param name="x">The source bitvector</param>
+        /// <param name="y">The shift offset</param>
+        [MethodImpl(Inline)]
+        public static BitVector4 srl(BitVector4 x, int offset)
+            => math.srl(x.data,offset);
 
         /// <summary>
         /// Applies a logical right shift to the source vector
@@ -52,57 +60,6 @@ namespace Z0
         public static BitVector64 srl(BitVector64 x, int offset)
             => math.srl(x.data,offset);
  
-        /// <summary>
-        /// Computes z = x >> offset for a caller-supplied target bitvector z and source bitvector x
-        /// </summary>
-        /// <param name="x">The source bitvector</param>
-        /// <param name="offset">The amount to shift rightwards</param>
-        /// <param name="z">The target bitvector</param>
-        [MethodImpl(Inline)]
-        public static ref BitVector8 srl(BitVector8 x, int offset, ref BitVector8 z)
-        {
-            z.assign(math.srl(x.data, offset));
-            return ref z;
-        }
-
-        /// <summary>
-        /// Computes z = x >> offset for a caller-supplied target bitvector z and source bitvector x
-        /// </summary>
-        /// <param name="x">The source bitvector</param>
-        /// <param name="offset">The amount to shift rightwards</param>
-        /// <param name="z">The target bitvector</param>
-        [MethodImpl(Inline)]
-        public static ref BitVector16 srl(BitVector16 x, int offset, ref BitVector16 z)
-        {
-            z.data = math.srl(x.data, offset);
-            return ref z;
-        }
-
-        /// <summary>
-        /// Computes z = x >> offset for a caller-supplied target bitvector z and source bitvector x
-        /// </summary>
-        /// <param name="x">The source bitvector</param>
-        /// <param name="offset">The amount to shift rightwards</param>
-        /// <param name="z">The target bitvector</param>
-        [MethodImpl(Inline)]
-        public static ref BitVector32 srl(BitVector32 x, int offset, ref BitVector32 z)
-        {
-            z.assign(math.srl(x.data, offset));
-            return ref z;
-        }
-
-        /// <summary>
-        /// Computes z = x >> offset for a caller-supplied target bitvector z and source bitvector x
-        /// </summary>
-        /// <param name="x">The source bitvector</param>
-        /// <param name="offset">The amount to shift rightwards</param>
-        /// <param name="z">The target bitvector</param>
-        [MethodImpl(Inline)]
-        public static ref BitVector64 srl(BitVector64 x, int offset, ref BitVector64 z)
-        {
-            z.assign(math.srl(x.data, offset));
-            return ref z;
-        }
 
         /// <summary>
         /// Computes a righwards shift in-place

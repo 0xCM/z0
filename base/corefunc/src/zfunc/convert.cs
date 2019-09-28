@@ -122,7 +122,7 @@ partial class zfunc
     public static T convert<T>(short src)
         where T : unmanaged
             => Converter.convert(src, out T dst);
-
+    
     [MethodImpl(Inline)]   
     public static T convert<T>(ushort src)
         where T : unmanaged

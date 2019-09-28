@@ -49,6 +49,7 @@ namespace Z0
         public static ulong or(ulong lhs, ulong rhs)
             => lhs | rhs;
 
+
         [MethodImpl(Inline)]
         public static float or(float lhs, float rhs)
             => BitConverter.Int32BitsToSingle(lhs.ToBits() | rhs.ToBits());

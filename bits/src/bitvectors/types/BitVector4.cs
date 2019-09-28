@@ -19,7 +19,7 @@ namespace Z0
     /// </summary>
     public struct BitVector4 : IFixedBits<BitVector4,UInt4>
     {
-        UInt4 data;
+        internal UInt4 data;
 
         public static readonly BitVector4 Zero = default;
 
@@ -111,7 +111,7 @@ namespace Z0
         /// <param name="rhs">The right vector</param>
         [MethodImpl(Inline)]
         public static BitVector4 operator &(in BitVector4 lhs, in BitVector4 rhs)
-            => (byte)(lhs.data & rhs.data);
+            => bitvector.and(lhs,rhs);
 
         /// <summary>
         /// Computes the bitwise OR of the source operands
@@ -120,11 +120,15 @@ namespace Z0
         /// <param name="rhs">The right vector</param>
         [MethodImpl(Inline)]
         public static BitVector4 operator |(in BitVector4 lhs, in BitVector4 rhs)
-            => (byte)(lhs.data | rhs.data);
+            => bitvector.or(lhs,rhs);
 
+        /// <summary>
+        /// Computes the bitwise complement
+        /// </summary>
+        /// <param name="x">The left bitvector</param>
         [MethodImpl(Inline)]
         public static BitVector4 operator ~(BitVector4 src)
-            => new BitVector4(~src.data);
+            => bitvector.flip(src);
 
         /// <summary>
         /// Computes the component-wise sum of the source operands. 
@@ -134,7 +138,7 @@ namespace Z0
         /// <param name="rhs">The right operand</param>
         [MethodImpl(Inline)]
         public static BitVector4 operator +(in BitVector4 lhs, in BitVector4 rhs)
-            => lhs ^ rhs;
+            => bitvector.xor(lhs,rhs);
 
         /// <summary>
         /// Computes the product of the operands. 
@@ -144,7 +148,7 @@ namespace Z0
         /// <param name="rhs">The right operand</param>
         [MethodImpl(Inline)]
         public static BitVector4 operator *(in BitVector4 lhs, in BitVector4 rhs)
-            => lhs & rhs;
+            => bitvector.and(lhs,rhs);
 
         /// <summary>
         /// Computes the scalar product of the operands
@@ -152,21 +156,29 @@ namespace Z0
         /// <param name="lhs">The left operand</param>
         /// <param name="rhs">The right operand</param>
         [MethodImpl(Inline)]
-        public static Bit operator %(in BitVector4 lhs, in BitVector4 rhs)
-            => lhs.Dot(rhs);
+        public static Bit operator %(BitVector4 lhs, BitVector4 rhs)
+            => bitvector.dot(lhs,rhs);
 
         [MethodImpl(Inline)]
         public static BitVector4 operator -(in BitVector4 src)
-            => (byte)(~src.data + 1);
+            => bitvector.negate(src);
+
+        /// <summary>
+        /// Subtracts the second operand from the first. 
+        /// </summary>
+        /// <param name="lhs">The left vector</param>
+        /// <param name="rhs">The right vector</param>
+        [MethodImpl(Inline)]
+        public static BitVector4 operator - (BitVector4 lhs, BitVector4 rhs)
+            => bitvector.sub(lhs,rhs);
 
         [MethodImpl(Inline)]
-        public static BitVector4 operator >>(BitVector4 lhs, int rhs)
-            => new BitVector4(lhs.data >> rhs);
+        public static BitVector4 operator >>(BitVector4 lhs, int offset)
+            => bitvector.srl(lhs,offset);
 
         [MethodImpl(Inline)]
-        public static BitVector4 operator <<(BitVector4 lhs, int rhs)
-            => new BitVector4(lhs.data << rhs);
-
+        public static BitVector4 operator <<(BitVector4 lhs, int offset)
+            => bitvector.sll(lhs,offset);
 
         [MethodImpl(Inline)]
         public static bool operator ==(in BitVector4 lhs, in BitVector4 rhs)
@@ -250,7 +262,7 @@ namespace Z0
         /// </summary>
         /// <param name="rhs">The right operand</param>
         public readonly Bit Dot(BitVector4 rhs)
-            => Mod<N2>.mod((uint)Bits.pop(data & rhs.data));              
+            => bitvector.dot(this,rhs);
 
         /// <summary>
         /// Enables a bit if it is disabled
@@ -376,7 +388,6 @@ namespace Z0
                 this[i] = src[spec[i]];
 
         }
-            //=> data = (UInt4)Bits.scatter(data,Mask(spec));
 
         /// <summary>
         /// Reverses the vector's bits

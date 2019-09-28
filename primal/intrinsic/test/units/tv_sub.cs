@@ -62,7 +62,7 @@ namespace Z0.Test
             where T : unmanaged
         {
             TypeCaseStart<T>();
-            CpuOpVerify.VerifyBinOp(Random, SampleSize, new Vector256BinOp<T>(ginx.sub), gmath.sub<T>);
+            CpuOpVerify.VerifyBinOp(Random, SampleSize, new Vec256BinOp<T>(ginx.sub), gmath.sub<T>);
             TypeCaseEnd<T>();
         }
 
@@ -72,7 +72,7 @@ namespace Z0.Test
             TypeCaseStart<T>();
             var lhs = Random.Span256<T>(SampleSize).ReadOnly();
             var rhs = Random.Span256<T>(SampleSize).ReadOnly();
-            var dstA = ginx.sub(lhs, rhs, lhs.Replicate());
+            var dstA = inxspan.sub(lhs, rhs, lhs.Replicate());
             var dstB = Span256.AllocBlocks<T>(lhs.BlockCount);
             for(var i = 0; i < dstA.Length; i++)
                 dstB[i] = gmath.sub(lhs[i], rhs[i]);

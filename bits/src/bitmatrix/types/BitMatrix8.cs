@@ -120,8 +120,32 @@ namespace Z0
             => new BitMatrix8(src);
 
         [MethodImpl(Inline)]
+        public static BitMatrix8 operator ~ (BitMatrix8 src)
+            => BitMatrix.flip(src);
+
+        [MethodImpl(Inline)]
+        public static BitMatrix8 operator & (BitMatrix8 lhs, BitMatrix8 rhs)
+            =>  BitMatrix.and(lhs,rhs);
+
+        [MethodImpl(Inline)]
+        public static BitMatrix8 operator * (BitMatrix8 lhs, BitMatrix8 rhs)
+            => BitMatrix.mul(lhs,rhs);
+
+        [MethodImpl(Inline)]
+        public static BitMatrix8 operator | (BitMatrix8 lhs, BitMatrix8 rhs)
+            => BitMatrix.or(lhs,rhs);
+
+        [MethodImpl(Inline)]
+        public static BitMatrix8 operator ^ (BitMatrix8 lhs, BitMatrix8 rhs)
+            => BitMatrix.xor(lhs,rhs);
+
+        [MethodImpl(Inline)]
+        public static BitVector8 operator * (BitMatrix8 lhs, BitVector8 rhs)
+            => BitMatrix.mul(lhs,rhs);
+
+        [MethodImpl(Inline)]
         public static BitMatrix8 operator + (BitMatrix8 lhs, BitMatrix8 rhs)
-            => XOr(ref lhs,rhs);
+            => BitMatrix.xor(lhs,rhs);
 
         [MethodImpl(Inline)]
         public static BitMatrix8 operator - (BitMatrix8 lhs, BitMatrix8 rhs)
@@ -129,23 +153,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static BitMatrix8 operator - (BitMatrix8 src)
-            => Flip(ref src);
-
-        [MethodImpl(Inline)]
-        public static BitMatrix8 operator & (BitMatrix8 lhs, BitMatrix8 rhs)
-            => And(ref lhs,rhs);
-
-        [MethodImpl(Inline)]
-        public static BitMatrix8 operator * (BitMatrix8 lhs, BitMatrix8 rhs)
-            => Mul(ref lhs,rhs);
-
-        [MethodImpl(Inline)]
-        public static BitVector8 operator * (BitMatrix8 lhs, BitVector8 rhs)
-            => Mul(lhs,rhs);
-
-        [MethodImpl(Inline)]
-        public static BitMatrix8 operator | (BitMatrix8 lhs, BitMatrix8 rhs)
-            => Or(ref lhs, rhs);
+            => BitMatrix.flip(src);
 
         [MethodImpl(Inline)]
         public static bool operator ==(BitMatrix8 lhs, BitMatrix8 rhs)
@@ -182,7 +190,6 @@ namespace Z0
         {
             this.data = src.ToBytes();
         }
-
 
         /// <summary>
         /// The number of rows in the matrix
@@ -389,59 +396,10 @@ namespace Z0
         public readonly bool Equals(BitMatrix8 rhs)
             => BitConverter.ToUInt64(data) == BitConverter.ToUInt64(rhs.data);
 
-        [MethodImpl(Inline)]
-        static ref BitMatrix8 And(ref BitMatrix8 lhs, in BitMatrix8 rhs)
-        {
-             lhs.data = BitConverter.GetBytes((ulong)lhs & (ulong)rhs);
-             return ref lhs;
-        }
+
+
 
         [MethodImpl(Inline)]
-        static ref BitMatrix8 Or(ref BitMatrix8 lhs, in BitMatrix8 rhs)
-        {
-             lhs.data = BitConverter.GetBytes((ulong)lhs | (ulong)rhs);
-             return ref lhs;
-        }
-
-        [MethodImpl(Inline)]
-        static ref BitMatrix8 XOr(ref BitMatrix8 lhs, in BitMatrix8 rhs)
-        {
-             lhs.data = BitConverter.GetBytes((ulong)lhs ^ (ulong)rhs);
-             return ref lhs;
-        }
-
-        [MethodImpl(Inline)]
-        static ref BitMatrix8 Flip(ref BitMatrix8 src)
-        {
-             src.data = BitConverter.GetBytes((~(ulong)src));
-             return ref src;
-        }
-
-        static BitVector8 Mul(in BitMatrix8 lhs, in BitVector8 rhs)
-        {
-            var dst = BitVector8.Alloc();
-            for(var i=0; i< N; i++)
-                dst[i] = lhs.RowVector(i) % rhs;
-            return dst;        
-        }
-
-        static ref BitMatrix8 Mul(ref BitMatrix8 lhs, in BitMatrix8 rhs)
-        {
-            var x = lhs;
-            var y = rhs.Transpose();
-            ref var dst = ref lhs;
-
-            for(var i=0; i< N; i++)
-            {
-                var r = x.RowVector(i);
-                var z = BitVector8.Alloc();
-                for(var j = 0; j< N; j++)
-                    z[j] = r % y.RowVector(j);
-                dst[i] = (byte)z;
-            }
-            return ref dst;
-        }
-        
 
         public override bool Equals(object obj)
             => throw new NotSupportedException();

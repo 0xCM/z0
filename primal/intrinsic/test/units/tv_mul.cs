@@ -182,7 +182,7 @@ namespace Z0
                 var src = Random.Stream(domain).Select(x => (double)x);
                 var u = Vec256.Load(src.TakeSpan(4));
                 var v = Vec256.Load(src.TakeSpan(4));
-                var x = dfp.fmul(u,v);
+                var x = dfp.mul(u,v);
                 var y = Vec256.Load(mathspan.mul(u.ToSpan(), v.ToSpan(), v.ToSpan().Replicate(true)));
                 Claim.eq(x,y);
 

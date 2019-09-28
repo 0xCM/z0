@@ -21,6 +21,15 @@ namespace Z0
         /// <param name="x">The left bitvector</param>
         /// <param name="y">The right bitvector</param>
         [MethodImpl(Inline)]
+        public static BitVector4 or(BitVector4 x, BitVector4 y)
+            => math.or(x.data,y.data);
+
+        /// <summary>
+        /// Computes a new bitvector z = x & y from bitvectors x or y
+        /// </summary>
+        /// <param name="x">The left bitvector</param>
+        /// <param name="y">The right bitvector</param>
+        [MethodImpl(Inline)]
         public static BitVector8 or(BitVector8 x, BitVector8 y)
             => math.or(x.data,y.data);
 
@@ -51,56 +60,5 @@ namespace Z0
         public static BitVector64 or(BitVector64 x, BitVector64 y)
             => math.or(x.data, y.data);
  
-        /// <summary>
-        /// Computes a new bitvector z = x & y from bitvectors x or y
-        /// </summary>
-        /// <param name="x">The left bitvector</param>
-        /// <param name="y">The right bitvector</param>
-        /// <param name="z">The target bitvector</param>
-        [MethodImpl(Inline)]
-        public static ref BitVector8 or(BitVector8 x, BitVector8 y, ref BitVector8 z)
-        {
-            math.or(x.data, y.data, ref z.data);
-            return ref z;
-        }
-
-        /// <summary>
-        /// Computes a new bitvector z = x & y from bitvectors x or y
-        /// </summary>
-        /// <param name="x">The left bitvector</param>
-        /// <param name="y">The right bitvector</param>
-        /// <param name="z">The target bitvector</param>
-        [MethodImpl(Inline)]
-        public static ref BitVector16 or(BitVector16 x, BitVector16 y, ref BitVector16 z)
-        {
-            math.or(x.data, y.data, ref z.data);
-            return ref z;
-        }
-
-        /// <summary>
-        /// Computes a new bitvector z = x & y from bitvectors x or y
-        /// </summary>
-        /// <param name="x">The left bitvector</param>
-        /// <param name="y">The right bitvector</param>
-        /// <param name="z">The target bitvector</param>
-        [MethodImpl(Inline)]
-        public static ref BitVector32 or(BitVector32 x, BitVector32 y, ref BitVector32 z)
-        {
-            math.or(x.data, y.data, ref z.data);
-            return ref z;
-        }
-
-        /// <summary>
-        /// Computes a new bitvector z = x & y from bitvectors x or y
-        /// </summary>
-        /// <param name="x">The left bitvector</param>
-        /// <param name="y">The right bitvector</param>
-        /// <param name="z">The target bitvector</param>
-        [MethodImpl(Inline)]
-        public static ref BitVector64 or(BitVector64 x, BitVector64 y, ref BitVector64 z)
-        {
-            math.or(x.data, y.data, ref z.data);
-            return ref z;
-        }
     }
 }

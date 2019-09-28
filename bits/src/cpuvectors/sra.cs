@@ -57,8 +57,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vec256<int> srav(in Vec256<int> src, in Vec256<uint> control)
             => ShiftRightArithmeticVariable(src, control);
-
-
     }
-
 }

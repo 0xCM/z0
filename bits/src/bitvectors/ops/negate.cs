@@ -20,6 +20,14 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left bitvector</param>
         [MethodImpl(Inline)]
+        public static BitVector4 negate(BitVector4 x)
+            => math.negate(x.data);
+            
+        /// <summary>
+        /// Computes the two's complement bitvector -x from the source bitvector x
+        /// </summary>
+        /// <param name="x">The left bitvector</param>
+        [MethodImpl(Inline)]
         public static BitVector8 negate(BitVector8 x)
             => math.negate(x.data);
             
@@ -47,54 +55,6 @@ namespace Z0
         public static BitVector64 negate(BitVector64 x)
             => math.negate(x.data);
  
-        /// <summary>
-        /// Computes the two's complement bitvector z = -x from the source bitvector x
-        /// </summary>
-        /// <param name="x">The left bitvector</param>
-        /// <param name="z">The target bitvector</param>
-        [MethodImpl(Inline)]
-        public static ref BitVector8 negate(BitVector8 x, ref BitVector8 z)
-        {
-            math.negate(x.data, ref z.data);
-            return ref z;
-        }
-
-        /// <summary>
-        /// Computes the two's complement bitvector z = -x from the source bitvector x
-        /// </summary>
-        /// <param name="x">The source bitvector</param>
-        /// <param name="z">The target bitvector</param>
-        [MethodImpl(Inline)]
-        public static ref BitVector16 negate(BitVector16 x, ref BitVector16 z)
-        {
-            math.negate(x.data, ref z.data);
-            return ref z;
-        }
-
-        /// <summary>
-        /// Computes the two's complement bitvector z = -x from the source bitvector x
-        /// </summary>
-        /// <param name="x">The source bitvector</param>
-        /// <param name="z">The target bitvector</param>
-        [MethodImpl(Inline)]
-        public static ref BitVector32 negate(BitVector32 x, ref BitVector32 z)
-        {
-            math.negate(x.data, ref z.data);
-            return ref z;
-        }
-
-        /// <summary>
-        /// Computes the two's complement bitvector z = -x from the source bitvector x
-        /// </summary>
-        /// <param name="x">The source bitvector</param>
-        /// <param name="z">The target bitvector</param>
-        [MethodImpl(Inline)]
-        public static ref BitVector64 negate(BitVector64 x, ref BitVector64 z)
-        {
-            math.negate(x.data, ref z.data);
-            return ref z;
-        }
-
         /// <summary>
         /// Computes the two's complement bitvector in-place
         /// </summary>

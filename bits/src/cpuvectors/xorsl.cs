@@ -19,8 +19,8 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="offset">Specifies the shift offset for each corresponding component</param>
         [MethodImpl(Inline)]
-        public static Vec128<ushort> xorsl(in Vec128<ushort> src, byte offset)
-            => xor(src,sll(src,offset));
+        public static Vec128<ushort> vxorsl(in Vec128<ushort> src, byte offset)
+            => vxor(in src,sll(in src,offset));
 
         /// <summary>
         /// A composite operation that shifts the source vector components leftward
@@ -30,8 +30,8 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="offset">Specifies the shift offset for each corresponding component</param>
         [MethodImpl(Inline)]
-        public static Vec128<uint> xorsl(in Vec128<uint> src, byte offset)
-            => xor(src,sll(src,offset));
+        public static Vec128<uint> vxorsl(in Vec128<uint> src, byte offset)
+            => vxor(in src,sll(in src,offset));
 
         /// <summary>
         /// A composite operation that shifts the source vector components leftward
@@ -41,8 +41,8 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="offset">Specifies the shift offset for each corresponding component</param>
         [MethodImpl(Inline)]
-        public static Vec128<ulong> xorsl(in Vec128<ulong> src, byte offset)
-            => xor(src,sll(src,offset));
+        public static Vec128<ulong> vxorsl(in Vec128<ulong> src, byte offset)
+            => vxor(in src,sll(in src,offset));
 
         /// <summary>
         /// A composite operation that shifts the source vector components leftward
@@ -52,8 +52,8 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="offset">Specifies the shift offset for each corresponding component</param>
         [MethodImpl(Inline)]
-        public static Vec256<ushort> xorsl(in Vec256<ushort> src, byte offset)
-            => xor(src,sll(src,offset));
+        public static Vec256<ushort> vxorsl(in Vec256<ushort> src, byte offset)
+            => vxor(in src,sll(in src,offset));
 
         /// <summary>
         /// A composite operation that shifts the source vector components leftward
@@ -63,8 +63,8 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="offset">Specifies the shift offset for each corresponding component</param>
         [MethodImpl(Inline)]
-        public static Vec256<uint> xorsl(in Vec256<uint> src, byte offset)
-            => xor(src,sll(src,offset));
+        public static Vec256<uint> vxorsl(in Vec256<uint> src, byte offset)
+            => vxor(in src,sll(in src,offset));
 
         /// <summary>
         /// A composite operation that shifts the source vector components leftward
@@ -74,8 +74,8 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="offset">Specifies the shift offset for each corresponding component</param>
         [MethodImpl(Inline)]
-        public static Vec256<ulong> xorsl(in Vec256<ulong> src, byte offset)
-            => xor(src,sll(src,offset));
+        public static Vec256<ulong> vxorsl(in Vec256<ulong> src, byte offset)
+            => vxor(in src,sll(in src,offset));
 
         /// <summary>
         /// A composite operation that shifts the source vector components leftward
@@ -85,8 +85,8 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="offset">Specifies the shift offset for each corresponding component</param>
         [MethodImpl(Inline)]
-        public static Vec128<uint> xorslv(in Vec128<uint> src, in Vec128<uint> offsets)
-            => xor(src, sllv(src,offsets));
+        public static Vec128<uint> vxorslv(in Vec128<uint> src, in Vec128<uint> offsets)
+            => vxor(in src,vsllv(in src,in offsets));
 
         /// <summary>
         /// A composite operation that shifts the source vector components leftward
@@ -97,7 +97,7 @@ namespace Z0
         /// <param name="offset">Specifies the shift offset for each corresponding component</param>
         [MethodImpl(Inline)]
         public static Vec128<ulong> xorslv(in Vec128<ulong> src, in Vec128<ulong> offsets)
-            => xor(src, sllv(src,offsets));
+            => vxor(in src,vsllv(in src,in offsets));
 
         /// <summary>
         /// A composite operation that shifts the source vector components leftward
@@ -107,8 +107,8 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="offset">Specifies the shift offset for each corresponding component</param>
         [MethodImpl(Inline)]
-        public static Vec256<uint> xorslv(in Vec256<uint> src, in Vec256<uint> offsets)
-            => xor(src,sllv(src,offsets));
+        public static Vec256<uint> vxorslv(in Vec256<uint> src, in Vec256<uint> offsets)
+            => vxor(in src,vsllv(in src,in offsets));
 
         /// <summary>
         /// A composite operation that shifts the source vector components leftward
@@ -118,8 +118,8 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="offset">Specifies the shift offset for each corresponding component</param>
         [MethodImpl(Inline)]
-        public static Vec256<ulong> xorslv(in Vec256<ulong> src, in Vec256<ulong> offsets)
-            => xor(src,sllv(src,offsets));
+        public static Vec256<ulong> vxorslv(in Vec256<ulong> src, in Vec256<ulong> offsets)
+            => vxor(in src,vsllv(in src,in offsets));
 
     }
 

@@ -218,8 +218,6 @@ namespace Z0
             dinx.insert(dinx.extract128(in permA,0), dinx.extract128(in permB,0), ref result);            
             
             return result;            
-        }
- 
+        } 
     }
-
 }

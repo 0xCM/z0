@@ -147,8 +147,8 @@ namespace Z0
         public static BitVector64 clmulr(BitVector64 a, BitVector64 b, BitVector128 poly)
         {
             var prod = clmul(a,b);
-            prod = Bits.xor(prod, dinx.clmul(srl(prod, 64), poly, ClMulMask.X00));
-            prod = Bits.xor(prod, dinx.clmul(srl(prod, 64), poly, ClMulMask.X00));
+            prod = Bits.vxor(prod, dinx.clmul(srl(prod, 64), poly, ClMulMask.X00));
+            prod = Bits.vxor(prod, dinx.clmul(srl(prod, 64), poly, ClMulMask.X00));
             return (BitVector64)prod;
         }
 
@@ -162,8 +162,8 @@ namespace Z0
         public static Scalar128<ulong> clmulr(Scalar128<ulong> a, Scalar128<ulong> b, Vec128<ulong> poly)
         {
             var prod = dinx.clmul(a,b);
-            prod = Bits.xor(prod, dinx.clmul(srl(prod, 64), poly, ClMulMask.X00));
-            prod = Bits.xor(prod, dinx.clmul(srl(prod, 64), poly, ClMulMask.X00));
+            prod = Bits.vxor(prod, dinx.clmul(srl(prod, 64), poly, ClMulMask.X00));
+            prod = Bits.vxor(prod, dinx.clmul(srl(prod, 64), poly, ClMulMask.X00));
             return prod;
         }
     }

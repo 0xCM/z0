@@ -72,7 +72,7 @@ namespace Z0
         {
             (var lo, var hi) = Bits.split(src);
             unpack8x1(lo, dst);
-            unpack8x1(hi, dst.Slice(7));
+            unpack8x1(hi, dst.Slice(8));
             return dst;
         }
 
@@ -80,7 +80,7 @@ namespace Z0
         {
             (var lo, var hi) = Bits.split(src);
             unpack16x1(lo, dst);
-            unpack16x1(hi, dst.Slice(15));
+            unpack16x1(hi, dst.Slice(16));
             return dst;
         }
 
@@ -89,7 +89,7 @@ namespace Z0
         {
             (var lo, var hi) = Bits.split(src);
             unpack32x1(lo, dst);
-            unpack32x1(hi, dst.Slice(31));
+            unpack32x1(hi, dst.Slice(32));
             return dst;
         }
 

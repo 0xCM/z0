@@ -21,8 +21,8 @@ namespace Z0
         /// <param name="lhs">The left vector</param>
         /// <param name="rhs">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vector128<float> hsub(Vector128<float> lhs, Vector128<float> rhs)
-            => HorizontalSubtract(lhs, rhs);
+        public static Vec128<float> hsub(in Vec128<float> lhs, in Vec128<float> rhs)
+            => HorizontalSubtract(lhs.xmm, rhs.xmm);
 
         /// <summary>
         /// __m128d _mm_hsub_pd (__m128d a, __m128d b) HSUBPD xmm, xmm/m128
@@ -30,8 +30,8 @@ namespace Z0
         /// <param name="lhs">The left vector</param>
         /// <param name="rhs">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vector128<double> hsub(Vector128<double> lhs, Vector128<double> rhs)
-            => HorizontalSubtract(lhs, rhs);
+        public static Vec128<double> hsub(in Vec128<double> lhs, in Vec128<double> rhs)
+            => HorizontalSubtract(lhs.xmm, rhs.xmm);
 
         /// <summary>
         /// __m256 _mm256_hsub_ps (__m256 a, __m256 b) VHSUBPS ymm, ymm, ymm/m256
@@ -39,8 +39,8 @@ namespace Z0
         /// <param name="lhs">The left vector</param>
         /// <param name="rhs">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vector256<float> hsub(Vector256<float> lhs, Vector256<float> rhs)
-            => HorizontalSubtract(lhs, rhs);
+        public static Vec256<float> hsub(in Vec256<float> lhs, in Vec256<float> rhs)
+            => HorizontalSubtract(lhs.ymm, rhs.ymm);
 
         /// <summary>
         /// __m256d _mm256_hsub_pd (__m256d a, __m256d b) VHSUBPD ymm, ymm, ymm/m256
@@ -48,8 +48,8 @@ namespace Z0
         /// <param name="lhs">The left vector</param>
         /// <param name="rhs">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vector256<double> hsub(Vector256<double> lhs, Vector256<double> rhs)
-            => HorizontalSubtract(lhs, rhs);
+        public static Vec256<double> hsub(in Vec256<double> lhs, in Vec256<double> rhs)
+            => HorizontalSubtract(lhs.ymm, rhs.ymm);
     }
 
 }

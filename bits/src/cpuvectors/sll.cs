@@ -58,7 +58,6 @@ namespace Z0
             );
         }
 
-
         /// <summary>
         /// __m128i _mm_slli_epi16 (__m128i a, int immediate) PSLLW xmm, imm8
         /// Shifts each component of the source vector leftwards by a common number of bits
@@ -147,7 +146,6 @@ namespace Z0
             return result;            
         }
 
-
         /// <summary>
         /// __m256i _mm256_slli_epi16 (__m256i a, int imm8) VPSLLW ymm, ymm, imm8
         /// Shifts each component of the source vector leftwards by a common number of bits
@@ -208,5 +206,4 @@ namespace Z0
         public static Vec256<ulong> sll(in Vec256<ulong> src, byte offset)
             => ShiftLeftLogical(src, offset); 
     }
-
 }

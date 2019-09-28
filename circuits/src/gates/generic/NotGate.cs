@@ -25,7 +25,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public Vec128<T> Send(in Vec128<T> x)
-            => gbits.flip(in x);
+            => gbits.vflip(in x);
 
         [MethodImpl(Inline)]
         public Vec256<T> Send(in Vec256<T> x)

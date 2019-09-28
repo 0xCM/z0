@@ -22,7 +22,7 @@ namespace Z0
         /// <param name="rhs">The right operand</param>
         /// <typeparam name="T">The primal component type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector128<T> vand<T>(Vector128<T> lhs, Vector128<T> rhs)
+        public static Vec128<T> vand<T>(in Vec128<T> lhs, in Vec128<T> rhs)
             where T : unmanaged
         {
             if(typematch<T,sbyte>())

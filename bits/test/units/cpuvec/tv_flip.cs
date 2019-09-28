@@ -13,61 +13,105 @@ namespace Z0.Test
     using static zfunc;
     using D = BitwiseDelegates;
 
-    public class tv_flip : UnitTest<tv_flip>
+    public class t_vflip : UnitTest<t_vflip>
     {
+        public void vflip_g128x8u_check()
+        {
+            vflip_128_check<byte>();
+        }
 
-        public void flip128()
+        public void vflip_g128x8i_check()
+        {
+            vflip_128_check<sbyte>();
+        }
+
+        public void vflip_g128x16i_check()
+        {
+            vflip_128_check<short>();
+        }
+
+        public void vflip_g128x16u_check()
+        {
+            vflip_128_check<ushort>();
+        }
+
+        public void vflip_g128x32i_check()
         {
             
-            Flip128<byte>();
-            Flip128<sbyte>();
-            Flip128<short>();
-            Flip128<ushort>();
-            Flip128<int>();
-            Flip128<uint>();
+            vflip_128_check<int>();
+        }
+
+        public void vflip_g128x32u_check()
+        {
+            vflip_128_check<uint>();
         }
         
-        public void flip256()
+        public void vflip_g256x8u_check()
         {
-            
-            Flip256<byte>();
-            Flip256<sbyte>();
-            Flip256<short>();
-            Flip256<ushort>();
-            Flip256<int>();
-            Flip256<uint>();
-            Flip256<long>();
-            Flip256<ulong>();
+            vflip_256_check<byte>();
         }
 
-        void Flip128<T>()
+        public void vflip_g256x8i_check()
+        {
+            vflip_256_check<sbyte>();
+        }        
+
+        public void vflip_g256x16i_check()
+        {
+            vflip_256_check<short>();
+        }        
+
+        public void vflip_g256x16u_check()
+        {
+            vflip_256_check<ushort>();
+        }        
+
+        public void vflip_g256x32i_check()
+        {
+            vflip_256_check<int>();
+        }        
+
+        public void vflip_g256x32u_check()
+        {
+            vflip_256_check<uint>();
+        }        
+
+        public void vflip_g256x64i_check()
+        {
+            
+            vflip_256_check<long>();
+        }
+
+        public void vflip_g256x64u_check()
+        {
+            vflip_256_check<ulong>();
+        }        
+
+
+        void vflip_128_check<T>()
             where T : unmanaged
         {
-            TypeCaseStart<T>();
-            for(var i=0; i<Pow2.T06; i++)                        
+            for(var i=0; i<SampleSize; i++)                        
             {
                 var src = Random.CpuVec128<T>();
                 var srcData = src.ToSpan();
                 var expect  = Vec128.Load(ref mathspan.flip(srcData)[0]);
-                var actual = gbits.flip(in src);
+                var actual = gbits.vflip(in src);
                 Claim.yea(expect.Equals(actual));
             }
-            TypeCaseEnd<T>();            
         }
 
-        void Flip256<T>()
+        void vflip_256_check<T>()
             where T : unmanaged
         {
-            TypeCaseStart<T>();
-            for(var i=0; i<Pow2.T06; i++)                        
+            for(var i=0; i<SampleSize; i++)                        
             {
                 var src = Random.CpuVec256<T>();
                 var srcData = src.ToSpan();
                 var expect  = Vec256.Load(ref mathspan.flip(srcData)[0]);
-                var actual = gbits.flip(src);
+                var actual = gbits.vflip(in src);
                 Claim.yea(expect.Equals(actual));
             }
-            TypeCaseEnd<T>();            
         }
 
     }

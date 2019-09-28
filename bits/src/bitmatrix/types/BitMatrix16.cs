@@ -94,9 +94,12 @@ namespace Z0
         /// </summary>
         /// <param name="src">The matrix bits</param>
         [MethodImpl(Inline)]
-        public static BitMatrix16 From<T>(Vector256<T> src)
-            where T : unmanaged
-                => BitMatrix16.From(ByteSpan.FromValue(src));
+        public static BitMatrix16 From(in Vec256<ushort> src)
+        {
+            Span<ushort> dst = new ushort[Vec256<short>.Length];
+            vstore(src, ref dst[0]);
+            return new BitMatrix16(dst);
+        }
 
         /// <summary>
         /// Computes the bitwise and of the operands
@@ -109,41 +112,40 @@ namespace Z0
         /// Computes the bitwise or of the operands
         /// </summary>
         [MethodImpl(Inline)]
-        public static BitMatrix16 operator | (BitMatrix16 lhs, BitMatrix16 rhs)
-            => Or(ref lhs, rhs);
+        public static BitMatrix16 operator | (in BitMatrix16 lhs, in BitMatrix16 rhs)
+            => BitMatrix.or(in lhs,in rhs);
 
         [MethodImpl(Inline)]
-        public static BitMatrix16 operator ^ (BitMatrix16 lhs, BitMatrix16 rhs)
-            => XOr(ref lhs, rhs);
+        public static BitMatrix16 operator ^ (in BitMatrix16 lhs, in BitMatrix16 rhs)
+            => BitMatrix.xor(in lhs,in rhs);
 
         [MethodImpl(Inline)]
-        public static BitMatrix16 operator + (BitMatrix16 lhs, BitMatrix16 rhs)
-            => XOr(ref lhs, rhs);
+        public static BitMatrix16 operator + (in BitMatrix16 lhs, in BitMatrix16 rhs)
+            => BitMatrix.xor(in lhs,in rhs);
 
         [MethodImpl(Inline)]
-        public static BitMatrix16 operator - (BitMatrix16 src)
-            => Flip(ref src);
+        public static BitMatrix16 operator - (in BitMatrix16 src)
+            => BitMatrix.flip(in src);
 
         [MethodImpl(Inline)]
-        public static BitMatrix16 operator - (BitMatrix16 lhs, BitMatrix16 rhs)
+        public static BitMatrix16 operator - (in BitMatrix16 lhs, in BitMatrix16 rhs)
             => lhs + -rhs;
 
         [MethodImpl(Inline)]
-        public static BitMatrix16 operator * (BitMatrix16 lhs, BitMatrix16 rhs)
-            => Mul(ref lhs, rhs);
+        public static BitMatrix16 operator * (in BitMatrix16 lhs, in BitMatrix16 rhs)
+            => BitMatrix.mul(in lhs,in rhs);
 
         [MethodImpl(Inline)]
-        public static BitVector16 operator * (BitMatrix16 lhs, BitVector16 rhs)
-            => Mul(lhs,rhs);
-
+        public static BitVector16 operator * (in BitMatrix16 lhs, in BitVector16 rhs)
+            => BitMatrix.mul(in lhs,in rhs);
 
         /// <summary>
         /// Computes the complement of the operand
         /// </summary>
         /// <param name="src">The source matrix</param>
         [MethodImpl(Inline)]
-        public static BitMatrix16 operator ~ (BitMatrix16 src)
-            => Flip(ref src);
+        public static BitMatrix16 operator ~ (in BitMatrix16 src)
+            => BitMatrix.flip(in src);
 
         [MethodImpl(Inline)]
         public static bool operator ==(BitMatrix16 lhs, BitMatrix16 rhs)
@@ -277,8 +279,8 @@ namespace Z0
         [MethodImpl(Inline)]
         public readonly BitMatrix16 AndNot(in BitMatrix16 rhs)
         {
-            this.LoadCpuVec(out Vector256<ushort> vLhs);
-            rhs.LoadCpuVec(out Vector256<ushort> vRhs);
+            this.LoadCpuVec(out Vec256<ushort> vLhs);
+            rhs.LoadCpuVec(out Vec256<ushort> vRhs);
             Bits.andn(vLhs,vRhs).StoreTo(ref data[0]);
             return this;
         }
@@ -346,7 +348,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public bool IsZero()
         {
-            this.LoadCpuVec(out Vector256<ushort> vSrc);
+            this.LoadCpuVec(out Vec256<ushort> vSrc);
             return dinx.testz(vSrc,vSrc);
         }
 
@@ -391,7 +393,7 @@ namespace Z0
         /// </summary>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline)]
-        public readonly ref Vector256<ushort> LoadCpuVec(out Vector256<ushort> dst)
+        public readonly ref Vec256<ushort> LoadCpuVec(out Vec256<ushort> dst)
         {
             dst = load(ref data[0]);
             return ref dst;
@@ -401,59 +403,21 @@ namespace Z0
         [MethodImpl(Inline)]
         static ref BitMatrix16 And(ref BitMatrix16 lhs, in BitMatrix16 rhs)
         {
-            lhs.LoadCpuVec(out Vector256<ushort> vLhs);
-            rhs.LoadCpuVec(out Vector256<ushort> vRhs);
+            lhs.LoadCpuVec(out Vec256<ushort> vLhs);
+            rhs.LoadCpuVec(out Vec256<ushort> vRhs);
             gbits.vand<ushort>(vLhs,vRhs).StoreTo(ref lhs.data[0]);
             return ref lhs;
         }
 
-        [MethodImpl(Inline)]
-        static ref BitMatrix16 Or(ref BitMatrix16 lhs, in BitMatrix16 rhs)
-        {
-            lhs.LoadCpuVec(out Vector256<ushort> vLhs);
-            rhs.LoadCpuVec(out Vector256<ushort> vRhs);
-            dinx.or(vLhs,vRhs).StoreTo(ref lhs.data[0]);
-            return ref lhs;
-        }
-
-        [MethodImpl(Inline)]
-        static ref BitMatrix16 XOr(ref BitMatrix16 lhs, in BitMatrix16 rhs)
-        {
-            lhs.LoadCpuVec(out Vector256<ushort> vLhs);
-            rhs.LoadCpuVec(out Vector256<ushort> vRhs);
-            dinx.xor(vLhs,vRhs).StoreTo(ref lhs.data[0]);
-            return ref lhs;
-        }
-
+ 
         [MethodImpl(Inline)]
         static ref BitMatrix16 Flip(ref BitMatrix16 src)
         {
-            src.LoadCpuVec(out Vector256<ushort> vSrc);
+            src.LoadCpuVec(out Vec256<ushort> vSrc);
             Bits.vflip(vSrc).StoreTo(ref src.data[0]);
             return ref src;
         }
 
-        static BitVector16 Mul(in BitMatrix16 m, in BitVector16 y)
-        {
-            var dst = BitVector16.Alloc();
-            for(var i=0; i< N; i++)
-                dst[i] = m.RowVector(i) % y;
-            return dst;        
-        }
-
-        static ref BitMatrix16 Mul(ref BitMatrix16 lhs, in BitMatrix16 rhs)
-        {
-            var x = lhs.Replicate();
-            var y = rhs.Transpose();
-
-            for(var i=0; i< N; i++)
-            {
-                var r = x.RowVector(i);
-                for(var j = 0; j< N; j++)
-                    lhs[i,j] = y.RowVector(j) % r;
-            }
-            return ref lhs;
-        }
 
         static ReadOnlySpan<byte> Identity16x16 => new byte[]
         {

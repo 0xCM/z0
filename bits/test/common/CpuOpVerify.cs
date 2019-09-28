@@ -110,7 +110,7 @@ namespace Z0
                 for(var i =0; i<blocklen; i++)
                     tmp[i] = primalOp(lhs[offset + i], rhs[offset + i]);
 
-                var vExpect = Vec128.LoadVector<T>(ref tmp[0]);
+                var vExpect = Vec128.Load<T>(ref tmp[0]);
              
                 var vX = lhs.LoadVec128(block);
                 var vY = rhs.LoadVec128(block);

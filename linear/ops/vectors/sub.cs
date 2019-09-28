@@ -28,7 +28,7 @@ namespace Z0
             where N : ITypeNat, new()
             where T : unmanaged    
         {
-            ginx.sub(x.Data,y.Data,z.Data);
+            inxspan.sub(x.Data,y.Data,z.Data);
             return ref z;
         }
 

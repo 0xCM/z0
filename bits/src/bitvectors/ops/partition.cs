@@ -14,6 +14,21 @@ namespace Z0
 
     partial class bitvector
     {
+        [MethodImpl(Inline)]
+        public static Span<BitVector4> partition(BitVector16 src, Span<BitVector4> dst)
+        {
+            var bs = dst.AsBytes();
+            BitParts.part16x4(src,bs);
+            return dst;
+        }
+
+        [MethodImpl(Inline)]
+        public static Span<BitVector4> partition(BitVector32 src, Span<BitVector4> dst)
+        {
+            var bs = dst.AsBytes();
+            BitParts.part32x4(src,bs);
+            return dst;
+        }
 
         [MethodImpl(Inline)]
         public static Span<BitVector8> partition(BitVector32 src, Span<BitVector8> dst)
@@ -30,7 +45,6 @@ namespace Z0
             BitParts.part32x16(src,bs);
             return dst;
         }
-
 
     }
 }

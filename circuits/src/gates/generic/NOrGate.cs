@@ -26,7 +26,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public Vec128<T> Send(in Vec128<T> x, in Vec128<T> y)
-            => gbits.flip(gbits.or(in x, in y));
+            => gbits.vflip(gbits.vor(in x, in y));
 
         [MethodImpl(Inline)]
         public Vector256<T> Send(in Vector256<T> x, in Vector256<T> y)

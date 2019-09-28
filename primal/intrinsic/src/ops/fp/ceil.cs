@@ -20,7 +20,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
         public static Vec128<float> ceil(in Vec128<float> src)
-            => Ceiling(src);
+            => Ceiling(src.xmm);
 
         /// <summary>
         /// __m128d _mm_ceil_pd (__m128d a) ROUNDPD xmm, xmm/m128, imm8(10)
@@ -28,7 +28,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
         public static Vec128<double> ceil(in Vec128<double> src)
-            => Ceiling(src);
+            => Ceiling(src.xmm);
 
         /// <summary>
         /// __m256 _mm256_ceil_ps (__m256 a) VROUNDPS ymm, ymm/m256, imm8(10)
@@ -36,7 +36,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
         public static Vec256<float> ceil(in Vec256<float> src)
-            => Ceiling(src);
+            => Ceiling(src.ymm);
 
         /// <summary>
         /// __m256 _mm256_ceil_pd (__m256 a) VROUNDPS ymm, ymm/m256, imm8(10)
@@ -44,22 +44,9 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
         public static Vec256<double> ceil(in Vec256<double> src)
-            => Ceiling(src);
+            => Ceiling(src.ymm);
 
 
-        [MethodImpl(Inline)]
-        public static ref Scalar128<float> ceil(ref Scalar128<float> src)
-        {
-            src = CeilingScalar(src);
-            return ref src;
-        }
-        
-        [MethodImpl(Inline)]
-        public static ref Scalar128<double> ceil(ref Scalar128<double> src)
-        {
-            src = CeilingScalar(src);
-            return ref src;
-        }
 
  
     }

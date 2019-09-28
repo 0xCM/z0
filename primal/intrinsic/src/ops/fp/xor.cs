@@ -20,7 +20,6 @@ namespace Z0
         /// </summary>
         /// <param name="lhs"></param>
         /// <param name="rhs"></param>
-        /// <returns></returns>
         [MethodImpl(Inline)]
         public static Vec128<float> xor(in Vec128<float> lhs, in Vec128<float> rhs)
             => Xor(lhs, rhs);
@@ -30,7 +29,6 @@ namespace Z0
         /// </summary>
         /// <param name="lhs"></param>
         /// <param name="rhs"></param>
-        /// <returns></returns>
         [MethodImpl(Inline)]
         public static Vec128<double> xor(in Vec128<double> lhs, in Vec128<double> rhs)
             => Xor(lhs, rhs);

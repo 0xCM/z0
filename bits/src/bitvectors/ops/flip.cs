@@ -20,6 +20,14 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left bitvector</param>
         [MethodImpl(Inline)]
+        public static BitVector4 flip(BitVector4 x)
+            => math.flip(x.data);
+
+        /// <summary>
+        /// Computes the complememt bitvector ~x from the source bitvector x
+        /// </summary>
+        /// <param name="x">The left bitvector</param>
+        [MethodImpl(Inline)]
         public static BitVector8 flip(BitVector8 x)
             => math.flip(x.data);
             

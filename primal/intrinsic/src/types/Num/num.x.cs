@@ -11,7 +11,7 @@ namespace Z0
     
     using static zfunc;    
 
-    partial class ginxs
+    partial class ginxx
     {
         [MethodImpl(Inline)]
         public static Scalar128<T> ToScalar128<T>(this Vec128<T> src, int index)

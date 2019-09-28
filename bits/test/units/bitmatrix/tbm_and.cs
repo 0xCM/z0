@@ -32,19 +32,35 @@ namespace Z0
             }
         }
 
+
+        public void ms_and_8u_check()
+        {
+            for(var i=0; i<SampleSize; i++)
+            {
+                var x = Random.Span<byte>(SampleSize);
+                var y = Random.Span<byte>(SampleSize);
+                var z0 = mathspan.and(x,y);
+                for(var j=0; j<z0.Length; j++)
+                    Claim.eq((byte)(x[i] & y[i]), z0[i]);
+            }
+        }
+
         public void bm_and_8x8_check()
         {
             for(var i=0; i<SampleSize; i++)
             {
                 var A = Random.BitMatrix(n8);
                 var B = Random.BitMatrix(n8);
+                Span<byte> dst = new byte[8];
+                for(var j=0; j<dst.Length; j++)
+                    dst[j] = (byte)(A.Bytes[j] & B.Bytes[j]);
+                var expect = BitMatrix8.From(dst);
 
-                var xBytes = A.Bytes.Replicate();
-                var yBytes = B.Bytes.Replicate();
-                var zBytes = mathspan.and(xBytes,yBytes);
-                var expect = BitMatrix8.From(zBytes);
+
+                //var expect = BitMatrix8.From(mathspan.and(A.Bytes.Replicate(), B.Bytes));
 
                 var C = A & B;
+
                 Claim.yea(expect == C);                
             }
         }

@@ -320,7 +320,7 @@ namespace Z0.Test
         {
             TypeCaseStart<T>();
 
-            var signed = gmath.signed<T>();
+            var signed = signedint<T>();
             var bitsize = BitSize.Size<T>();
             var bs10 = BitString.Parse("1" + repeat('0', bitsize - 1).Concat());
             var x10 = bs10.TakeValue<T>();

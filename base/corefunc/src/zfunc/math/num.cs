@@ -58,6 +58,48 @@ partial class zfunc
             => PrimalInfo.signed<T>();
 
     /// <summary>
+    /// Returns true if the specified type is an unsigned primal integral type
+    /// </summary>
+    /// <typeparam name="T">The type to evaluate</typeparam>
+    [MethodImpl(Inline)]
+    public static bool unsignedint<T>()
+        where T : unmanaged
+        => typeof(T) == typeof(byte) 
+        || typeof(T) == typeof(ushort) 
+        || typeof(T) == typeof(uint) 
+        || typeof(T) == typeof(ulong);
+
+    /// <summary>
+    /// Returns true if the specified type is a signed primal integral type
+    /// </summary>
+    /// <typeparam name="T">The type to evaluate</typeparam>
+    [MethodImpl(Inline)]
+    public static bool signedint<T>()
+        where T : unmanaged
+        => typeof(T) == typeof(sbyte) 
+        || typeof(T) == typeof(short) 
+        || typeof(T) == typeof(int) 
+        || typeof(T) == typeof(long);
+
+    /// <summary>
+    /// Returns true if the specified type is a primal integer
+    /// </summary>
+    /// <typeparam name="T">The type to evaluate</typeparam>
+    [MethodImpl(Inline)]
+    public static bool integral<T>()
+        where T : unmanaged
+            => signedint<T>() || unsignedint<T>();
+
+    /// <summary>
+    /// Returns true if the spedified type is a 32-bit or 64-bit floating point
+    /// </summary>
+    /// <typeparam name="T">The type to evaluate</typeparam>
+    [MethodImpl(Inline)]
+    public static bool floating<T>()
+        where T : unmanaged
+            => typeof(T) == typeof(float) || typeof(T) == typeof(double);
+
+    /// <summary>
     /// Creates an enumerable sequence that ranges between inclusive upper and lower bounds
     /// </summary>
     /// <param name="x0">The lower bound</param>

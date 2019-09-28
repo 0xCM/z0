@@ -106,15 +106,25 @@ namespace Z0
             where T : unmanaged        
                 => ref Unsafe.As<Vector128<T>,Vector128<ulong>>(ref asRef(in src));
 
-        [MethodImpl(Inline)]
-        public static ref Vector128<float> float32<T>(in Vector128<T> src)
-            where T : unmanaged        
-                => ref Unsafe.As<Vector128<T>,Vector128<float>>(ref asRef(in src));
+        // [MethodImpl(Inline)]
+        // public static ref Scalar128<float> float32<T>(in Scalar128<T> src)
+        //     where T : unmanaged        
+        //         => ref Unsafe.As<Scalar128<T>,Scalar128<float>>(ref asRef(in src));
+
+        // [MethodImpl(Inline)]
+        // public static ref Scalar128<double> float64<T>(in Scalar128<T> src)
+        //     where T : unmanaged        
+        //         => ref Unsafe.As<Scalar128<T>,Scalar128<double>>(ref asRef(in src));
 
         [MethodImpl(Inline)]
         public static ref Vector128<double> float64<T>(in Vector128<T> src)
             where T : unmanaged        
                 => ref Unsafe.As<Vector128<T>,Vector128<double>>(ref asRef(in src));
+
+        [MethodImpl(Inline)]
+        public static ref Vector128<float> float32<T>(in Vector128<T> src)
+            where T : unmanaged        
+                => ref Unsafe.As<Vector128<T>,Vector128<float>>(ref asRef(in src));
 
         [MethodImpl(Inline)]
         public static ref Vec128<T> generic<T>(in Vec128<sbyte> src)

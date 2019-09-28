@@ -19,13 +19,6 @@ namespace Z0
     partial class dfp
     {
 
-       [MethodImpl(Inline)]
-        public static bool eq(in Scalar128<float> lhs,in Scalar128<float> rhs)
-            => CompareScalarUnorderedEqual(lhs, rhs);
-        
-        [MethodImpl(Inline)]
-        public static bool eq(in Scalar128<double> lhs,in Scalar128<double> rhs)
-            => CompareScalarUnorderedEqual(lhs, rhs);
 
         /// <summary>
         ///  __m128 _mm_cmpeq_ps (__m128 a, __m128 b) CMPPS xmm, xmm/m128, imm8(0)
