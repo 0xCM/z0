@@ -23,8 +23,8 @@ namespace Z0
             public const GpRegId Id = GpRegId.bl;            
 
             [MethodImpl(Inline)]
-            public static implicit operator byte(BL src)
-                => src.bl;
+            public static byte operator !(BL r)
+                => r.bl;
 
             [MethodImpl(Inline)]
             public static implicit operator BL(byte src)

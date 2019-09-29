@@ -51,7 +51,6 @@ namespace Z0
                 throw unsupported<T>();
         }
 
-
         [MethodImpl(Inline)]
         public static Vec256<T> vdiv<T>(in Vec256<T> lhs, in Vec256<T> rhs)
             where T : unmanaged
@@ -63,7 +62,6 @@ namespace Z0
             else 
                 throw unsupported<T>();
         }
-
 
        [MethodImpl(Inline)]
        public static Vec128<T> vmax<T>(in Vec128<T> lhs, in Vec128<T> rhs)
@@ -139,51 +137,26 @@ namespace Z0
                 throw unsupported<T>();
         }        
 
-       [MethodImpl(Inline)]
-       public static Vector128<T> vadd<T>(Vector128<T> lhs, Vector128<T> rhs)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(float))
-                return generic<T>(dfp.vadd(float32(lhs), float32(rhs)));
-            else if(typeof(T) == typeof(double))
-                return generic<T>(dfp.vadd(float64(lhs), float64(rhs)));
-            else 
-                throw unsupported<T>();
-        }        
-
-       [MethodImpl(Inline)]
-       public static Vector256<T> vadd<T>(Vector256<T> lhs, Vector256<T> rhs)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(float))
-                return generic<T>(dfp.vadd(float32(lhs), float32(rhs)));
-            else if(typeof(T) == typeof(double))
-                return generic<T>(dfp.vadd(float64(lhs), float64(rhs)));
-            else 
-                throw unsupported<T>();
-        }        
-
-
         [MethodImpl(Inline)]
-        public static Vector128<T> vnegate<T>(Vector128<T> src)
+        public static Vec128<T> vnegate<T>(in Vec128<T> src)
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return generic<T>(dfp.vnegate(float32(src)));
+                return generic<T>(dfp.vnegate(in float32(in src)));
             else if(typeof(T) == typeof(double))
-                return generic<T>(dfp.vnegate(float64(src)));
+                return generic<T>(dfp.vnegate(in float64(in src)));
             else 
                 throw unsupported<T>();
         }
 
         [MethodImpl(Inline)]
-        public static Vector256<T> vnegate<T>(Vector256<T> src)
+        public static Vec256<T> vnegate<T>(in Vec256<T> src)
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return generic<T>(dfp.vnegate(float32(src)));
+                return generic<T>(dfp.vnegate(in float32(in src)));
             else if(typeof(T) == typeof(double))
-                return generic<T>(dfp.vnegate(float64(src)));
+                return generic<T>(dfp.vnegate(in float64(in src)));
             else 
                 throw unsupported<T>();
         }

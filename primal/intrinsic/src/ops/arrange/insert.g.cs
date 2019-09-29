@@ -17,35 +17,6 @@ namespace Z0
     partial class ginx
     {
 
-        /// <summary>
-        /// Overwrites an identified component in the target vector with a specified value
-        /// </summary>
-        /// <param name="src">The source value</param>
-        /// <param name="dst">The target vector</param>
-        /// <param name="index">The 0-based index of the component to overwrite</param>
-        [MethodImpl(Inline)]
-        public static Vec128<T> insert<T>(T src, Vec128<T> dst, byte index)
-            where T : unmanaged
-        {
-            if(typematch<T,sbyte>())
-                return generic<T>(dinx.insert(int8(src), int8(dst), index));
-            else if(typematch<T,byte>())
-                return generic<T>(dinx.insert(uint8(src), uint8(dst), index));
-            else if(typematch<T,short>())
-                return generic<T>(dinx.insert(int16(src), int16(dst), index));
-            else if(typematch<T,ushort>())
-                return generic<T>(dinx.insert(uint16(src), uint16(dst), index));
-            else if(typematch<T,int>())
-                return generic<T>(dinx.insert(int32(src), int32(dst), index));
-            else if(typematch<T,uint>())
-                return generic<T>(dinx.insert(uint32(src), uint32(dst), index));
-            else if(typematch<T,long>())
-                return generic<T>(dinx.insert(int64(src), int64(dst), index));
-            else if(typematch<T,ulong>())
-                return generic<T>(dinx.insert(uint64(src), uint64(dst), index));
-            else
-                throw unsupported<T>();
-        }
 
         /// <summary>
         /// Overwrites a 128-bit lane in the target with the content of the source vector

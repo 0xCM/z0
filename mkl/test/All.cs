@@ -169,7 +169,7 @@ namespace Z0.Mkl
             (var method, var msg) = intro(silent);
             var n = 10;
             var incx = 1;
-            var x = floats(1.0,  -2.0,  3.0,  4.0,  -5.0,  6.0,  -7.0,  8.0,  -9.0,  10.0);
+            Span<float> x = new float[]{1.0f,  -2.0f,  3.0f,  4.0f,  -5.0f,  6.0f,  -7.0f,  8.0f,  -9.0f,  10.0f};
             input(x.FormatVector());
 
             var sw = stopwatch();
@@ -188,7 +188,7 @@ namespace Z0.Mkl
 
             var n = 4;
             var incx = 1;
-            var x =  ComplexF64.Load(doubles(1.2, 2.5, 3.0, 1.7, 4.0, 0.53, -5.5, -0.29));
+            var x =  ComplexF64.Load(new double[]{1.2, 2.5, 3.0, 1.7, 4.0, 0.53, -5.5, -0.29});
             msg += input(x.FormatVector(),silent);
             
             var expect = x.Map(z => Math.Abs(z.re) + Math.Abs(z.im)).Reduce((a,b) => a + b);
@@ -208,8 +208,8 @@ namespace Z0.Mkl
             var incx = 1;
             var incy = 1;
             var alpha = .5f;
-            var x = floats(1, 2, 3, 4, 5);
-            var y = floats(.5, .5, .5, .5, .5);
+            Span<float> x = new float[]{1, 2, 3, 4, 5};
+            Span<float> y = new float[]{.5f, .5f, .5f, .5f, .5f};
             input($"alpha={alpha}, x = {x.FormatVector()}, y = {y.FormatVector()}");
 
             var sw = stopwatch();

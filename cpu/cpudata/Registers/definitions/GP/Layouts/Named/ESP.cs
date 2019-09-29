@@ -30,8 +30,8 @@ namespace Z0
             public const GpRegId Id = GpRegId.esp;
 
             [MethodImpl(Inline)]
-            public static implicit operator uint(ESP src)
-                => src.esp;
+            public static uint operator !(ESP r)
+                => r.esp;
 
             [MethodImpl(Inline)]
             public static implicit operator ESP(uint src)
@@ -47,7 +47,7 @@ namespace Z0
             byte IGpReg32<ESP>.Lo8 
             { 
                 [MethodImpl(Inline)]
-                get => spl; 
+                get => !spl; 
  
                 [MethodImpl(Inline)]
                 set => spl = value;
@@ -56,7 +56,7 @@ namespace Z0
             ushort IGpReg32<ESP>.Lo16 
             { 
                 [MethodImpl(Inline)]
-                get => sp; 
+                get => !sp; 
  
                 [MethodImpl(Inline)]
                 set => sp = value;

@@ -17,12 +17,16 @@ namespace Z0
         {
             [FieldOffset(0)]
             public byte ah;
+            
+            /// <summary>
+            /// Dereferences ah to produce its content [ah]
+            /// </summary>
+            /// <param name="r">The source register</param>
+            [MethodImpl(Inline)]
+            public static byte operator !(AH r)
+                => r.ah;
 
             public const GpRegId Id = GpRegId.ah;            
-
-            [MethodImpl(Inline)]
-            public static implicit operator byte(AH src)
-                => src.ah;
 
             [MethodImpl(Inline)]
             public static implicit operator AH(byte src)
@@ -30,7 +34,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public AH(byte src)
-                =>ah = src;
+                => ah = src;
                 
             GpRegId IGpReg.Id 
                 => Id;

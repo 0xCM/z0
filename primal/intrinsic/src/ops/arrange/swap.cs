@@ -48,8 +48,8 @@ namespace Z0
         public static Vec256<byte> swaphl(in Vec256<byte> src)
         {
             Vec256<byte> dst = default;
-            dst = insert(extract128(src, 1), dst, 0);
-            dst = insert(extract128(src, 0), dst, 1);
+            dst = insert(extract128(src.ymm, 1), dst.ymm, 0);
+            dst = insert(extract128(src.ymm, 0), dst.ymm, 1);
             return dst;         
         }
 
@@ -61,8 +61,8 @@ namespace Z0
         public static Vec256<sbyte> swaphl(in Vec256<sbyte> src)
         {
             Vec256<sbyte> dst = default;
-            dst = insert(extract128(src, 1), dst, 0);
-            dst = insert(extract128(src, 0), dst, 1);
+            dst = insert(extract128(src.ymm, 1), dst.ymm, 0);
+            dst = insert(extract128(src.ymm, 0), dst.ymm, 1);
             return dst;         
         }
 
@@ -74,8 +74,8 @@ namespace Z0
         public static Vec256<short> swaphl(in Vec256<short> src)
         {
             Vec256<short> dst = default;
-            dst = insert(extract128(src, 1), dst, 0);
-            dst = insert(extract128(src, 0), dst, 1);
+            dst = insert(extract128(src.ymm, 1), dst.ymm, 0);
+            dst = insert(extract128(src.ymm, 0), dst.ymm, 1);
             return dst;         
         }
 
@@ -87,8 +87,8 @@ namespace Z0
         public static Vec256<ushort> swaphl(in Vec256<ushort> src)
         {
             Vec256<ushort> dst = default;
-            dst = insert(extract128(src, 1), dst, 0);
-            dst = insert(extract128(src, 0), dst, 1);
+            dst = insert(extract128(src.ymm, 1), dst.ymm, 0);
+            dst = insert(extract128(src.ymm, 0), dst.ymm, 1);
             return dst;         
         }
 
@@ -98,7 +98,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
         public static Vec256<long> swaphl(in Vec256<long> src)
-            => Permute4x64(src,MSwapHiLo);
+            => Permute4x64(src.ymm, MSwapHiLo);
 
         /// <summary>
         /// Swaps hi/lo 128-bit lanes
@@ -106,7 +106,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
         public static Vec256<ulong> swaphl(in Vec256<ulong> src)
-            => Permute4x64(src,MSwapHiLo);
+            => Permute4x64(src.ymm, MSwapHiLo);
 
         /// <summary>
         /// Swaps hi/lo 128-bit lanes
@@ -114,7 +114,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
         public static Vec256<double> swaphl(in Vec256<double> src)
-            => Permute4x64(src,MSwapHiLo);
+            => Permute4x64(src.ymm, MSwapHiLo);
     }
 
 }

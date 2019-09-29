@@ -106,11 +106,11 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static explicit operator num<T>(in float src)
-            => toNum(ref generic<T>(ref asRef(in src)));
+            => toNum(ref g32f<T>(in src));
 
         [MethodImpl(Inline)]
         public static explicit operator num<T>(in double src)
-            => toNum(ref generic<T>(ref asRef(in src)));
+            => toNum(ref g64f<T>(in src));
 
         static ref num<T> toNum(ref T src)
             => ref Unsafe.As<T,num<T>>(ref  src);

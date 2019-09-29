@@ -24,7 +24,7 @@ partial class zfunc
     public static T convert<S,T>(S src)
         where T : unmanaged
         where S : unmanaged
-           => Converter.convert(src, out T dst);  
+           => Converter.convert<S,T>(src);
 
     /// <summary>
     /// Converts a blocked span of one value type to a blocked span of another value type
@@ -77,7 +77,6 @@ partial class zfunc
         return dst;
     }
 
-
     /// <summary>
     /// Converts a natural span of one value type to a natural span of another value type
     /// </summary>
@@ -95,7 +94,6 @@ partial class zfunc
             dst[i] = convert<S,T>(src[i]);
         return dst;
     }
-
 
     [MethodImpl(Inline)]   
     public static Span<T> convert<S,T>(ReadOnlySpan<S> src)
@@ -134,19 +132,9 @@ partial class zfunc
             => Converter.convert(src, out T dst);
 
     [MethodImpl(Inline)]   
-    public static Span<T> convert<T>(ReadOnlySpan<int> src)
-        where T : unmanaged
-            => convert<int,T>(src);
-
-    [MethodImpl(Inline)]   
     public static T convert<T>(uint src)
         where T : unmanaged
             => Converter.convert(src, out T dst);
-
-    [MethodImpl(Inline)]   
-    public static Span<T> convert<T>(ReadOnlySpan<uint> src)
-        where T : unmanaged
-            => convert<uint,T>(src);
 
     [MethodImpl(Inline)]   
     public static T convert<T>(long src)
@@ -154,29 +142,14 @@ partial class zfunc
             => Converter.convert(src, out T dst);
 
     [MethodImpl(Inline)]   
-    public static Span<T> convert<T>(ReadOnlySpan<long> src)
-        where T : unmanaged
-            => convert<long,T>(src);
-
-    [MethodImpl(Inline)]   
     public static T convert<T>(ulong src)
         where T : unmanaged
             => Converter.convert(src, out T dst);
 
     [MethodImpl(Inline)]   
-    public static Span<T> convert<T>(ReadOnlySpan<ulong> src)
-        where T : unmanaged
-            => convert<ulong,T>(src);
-
-    [MethodImpl(Inline)]   
     public static T convert<T>(float src)
         where T : unmanaged
             => Converter.convert(src, out T dst);
-
-    [MethodImpl(Inline)]   
-    public static Span<T> convert<T>(ReadOnlySpan<float> src)
-        where T : unmanaged
-            => convert<float,T>(src);
 
     [MethodImpl(Inline)]   
     public static T convert<T>(double src)
@@ -188,108 +161,5 @@ partial class zfunc
         where T : unmanaged
             => Converter.convert(src, out T dst);
 
-    [MethodImpl(Inline)]   
-    public static Span<T> convert<T>(ReadOnlySpan<double> src)
-        where T : unmanaged
-            => convert<double,T>(src);
 
-    /// <summary>
-    /// Converts a parameter array to a span of 8-bit unsigned integers
-    /// </summary>
-    /// <param name="src">The source array</param>
-    /// <typeparam name="T">The source type</typeparam>
-    [MethodImpl(Inline)]
-    public static Span<byte> bytes<T>(params T[] src)
-        where T : unmanaged
-            =>  convert<T,byte>(src.ToReadOnlySpan());
-
-    /// <summary>
-    /// Converts a parameter array to a span of 8-bit signed integers
-    /// </summary>
-    /// <param name="src">The source array</param>
-    /// <typeparam name="T">The source type</typeparam>
-    [MethodImpl(Inline)]
-    public static Span<sbyte> sbytes<T>(params T[] src)
-        where T : unmanaged
-            =>  convert<T,sbyte>(src.ToReadOnlySpan());
-
-    /// <summary>
-    /// Converts a parameter array to a span of 16-bit signed integers
-    /// </summary>
-    /// <param name="src">The source array</param>
-    /// <typeparam name="T">The source type</typeparam>
-    [MethodImpl(Inline)]
-    public static Span<ushort> ushorts<T>(params T[] src)
-        where T : unmanaged
-            =>  convert<T,ushort>(src.ToReadOnlySpan());
-
-    /// <summary>
-    /// Converts a parameter array to a span of 16-bit signed integers
-    /// </summary>
-    /// <param name="src">The source array</param>
-    /// <typeparam name="T">The source type</typeparam>
-    [MethodImpl(Inline)]
-    public static Span<short> shorts<T>(params T[] src)
-        where T : unmanaged
-            =>  convert<T,short>(src.ToReadOnlySpan());
-
-    /// <summary>
-    /// Converts a parameter array to a span of 32-bit signed integers
-    /// </summary>
-    /// <param name="src">The source array</param>
-    /// <typeparam name="T">The source type</typeparam>
-    [MethodImpl(Inline)]
-    public static Span<int> ints<T>(params T[] src)
-        where T : unmanaged
-            =>  convert<T,int>(src.ToReadOnlySpan());
-
-    /// <summary>
-    /// Converts a parameter array to a span of 32-bit unsigned integers
-    /// </summary>
-    /// <param name="src">The source array</param>
-    /// <typeparam name="T">The source type</typeparam>
-    [MethodImpl(Inline)]
-    public static Span<uint> uints<T>(params T[] src)
-        where T : unmanaged
-            =>  convert<T,uint>(src.ToReadOnlySpan());
-
-    /// <summary>
-    /// Converts a parameter array to a span of 64-bit unsigned integers
-    /// </summary>
-    /// <param name="src">The source array</param>
-    /// <typeparam name="T">The source type</typeparam>
-    [MethodImpl(Inline)]
-    public static Span<ulong> ulongs<T>(params T[] src)
-        where T : unmanaged
-            =>  convert<T,ulong>(src.ToReadOnlySpan());
-
-    /// <summary>
-    /// Converts a parameter array to a span of 64-bit signed integers
-    /// </summary>
-    /// <param name="src">The source array</param>
-    /// <typeparam name="T">The source type</typeparam>
-    [MethodImpl(Inline)]
-    public static Span<long> longs<T>(params T[] src)
-        where T : unmanaged
-            =>  convert<T,long>(src.ToReadOnlySpan());
-
-    /// <summary>
-    /// Converts a parameter array to a span of 32-bit floats
-    /// </summary>
-    /// <param name="src">The source array</param>
-    /// <typeparam name="T">The source type</typeparam>
-    [MethodImpl(Inline)]
-    public static Span<float> floats<T>(params T[] src)
-        where T : unmanaged
-            =>  convert<T,float>(src.ToReadOnlySpan());
-
-    /// <summary>
-    /// Converts a parameter array to a span of 64-bit floats
-    /// </summary>
-    /// <param name="src">The source array</param>
-    /// <typeparam name="T">The source type</typeparam>
-    [MethodImpl(Inline)]
-    public static Span<double> doubles<T>(params T[] src)
-        where T : unmanaged
-            =>  convert<T,double>(src.ToReadOnlySpan());
 }

@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
     
-    
 
     using static zfunc;
     
@@ -23,8 +22,8 @@ namespace Z0
             public const GpRegId Id = GpRegId.ch;            
 
             [MethodImpl(Inline)]
-            public static implicit operator byte(CH src)
-                => src.ch;
+            public static byte operator !(CH r)
+                => r.ch;
 
             [MethodImpl(Inline)]
             public static implicit operator CH(byte src)

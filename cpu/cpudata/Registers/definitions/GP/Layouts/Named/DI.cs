@@ -6,9 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
-    
-    
+    using System.Runtime.InteropServices;        
 
     using static zfunc;
 
@@ -17,7 +15,6 @@ namespace Z0
         [StructLayout(LayoutKind.Explicit)]
         public struct DI : IGpReg16<DI>
         {
-
             [FieldOffset(0)]
             public ushort di;
 
@@ -27,8 +24,8 @@ namespace Z0
             public const GpRegId Id = GpRegId.edi;          
 
             [MethodImpl(Inline)]
-            public static implicit operator ushort(DI src)
-                => src.di;
+            public static ushort operator !(DI r)
+                => r.di;
 
             [MethodImpl(Inline)]
             public static implicit operator DI(ushort src)
@@ -53,7 +50,7 @@ namespace Z0
             byte IGpReg16<DI>.Lo8 
             { 
                 [MethodImpl(Inline)]
-                get => dil; 
+                get => !dil; 
  
                 [MethodImpl(Inline)]
                 set => dil = value;

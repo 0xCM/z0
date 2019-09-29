@@ -22,9 +22,13 @@ namespace Z0
 
             public const GpRegId Id = GpRegId.bh;            
 
+            /// <summary>
+            /// Dereferences bh to produce its content [bh]
+            /// </summary>
+            /// <param name="r">The source register</param>
             [MethodImpl(Inline)]
-            public static implicit operator byte(BH src)
-                => src.bh;
+            public static byte operator !(BH r)
+                => r.bh;
 
             [MethodImpl(Inline)]
             public static implicit operator BH(byte src)

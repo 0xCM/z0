@@ -28,7 +28,7 @@ namespace Z0
         /// <param name="dst"></param>
         [MethodImpl(Inline)]
         public static unsafe void maskmove(in Vec128<sbyte> src, in Vec128<sbyte> mask, ref sbyte dst)
-            => MaskMove(src,mask,refptr(ref dst));
+            => MaskMove(src.xmm, mask.xmm, refptr(ref dst));
 
         /// <summary>
         /// _mm_maskmoveu_si128 (__m128i a, __m128i mask, char* mem_address) MASKMOVDQU xmm, xmm
@@ -41,7 +41,7 @@ namespace Z0
         /// <param name="dst"></param>
         [MethodImpl(Inline)]
         public static unsafe void maskmove(in Vec128<byte> src, in Vec128<byte> mask, ref byte dst)
-            =>  MaskMove(src,mask,refptr(ref dst));
+            =>  MaskMove(src.xmm, mask.xmm, refptr(ref dst));
 
 
     }

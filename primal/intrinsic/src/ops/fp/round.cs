@@ -24,72 +24,72 @@ namespace Z0
         /// _mm_round_ps:
         /// Round to nearest integer
         /// </summary>
-        /// <param name="src">The source vector</param>
+        /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
-        public static Vec128<float> round(in Vec128<float> src)
-            => RoundToNearestInteger(src);
+        public static Vec128<float> vround(in Vec128<float> x)
+            => RoundToNearestInteger(x.xmm);
 
         /// <summary>
         /// _mm_round_pd:
         /// Round to nearest integer
         /// </summary>
-        /// <param name="src">The source vector</param>
+        /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
-        public static Vec128<double> round(in Vec128<double> src)
-            => RoundToNearestInteger(src);
+        public static Vec128<double> vround(in Vec128<double> x)
+            => RoundToNearestInteger(x.xmm);
 
         /// <summary>
         /// _mm_round_ss:
         /// Round towards zero
         /// </summary>
-        /// <param name="src">The source vector</param>
+        /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
-        public static Vec128<float> roundz(in Vec128<float> src)
-            => RoundToZero(src);
+        public static Vec128<float> vroundz(in Vec128<float> x)
+            => RoundToZero(x.xmm);
 
         /// <summary>
         /// _mm_round_sd:
         /// Round towards zero
         /// </summary>
-        /// <param name="src">The source vector</param>
+        /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
-        public static Vec128<double> roundz(in Vec128<double> src)
-            => RoundToZero(src);
+        public static Vec128<double> vroundz(in Vec128<double> x)
+            => RoundToZero(x.xmm);
 
         /// <summary>
         /// _mm256_round_ps:
         /// Round to nearest integer
         /// </summary>
-        /// <param name="src">The source vector</param>
+        /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<float> round(in Vec256<float> src)
-            => RoundToNearestInteger(src);
+        public static Vec256<float> vround(in Vec256<float> x)
+            => RoundToNearestInteger(x.ymm);
 
         /// <summary>
-        /// _mm256_round_pd:
+        /// __m256d _mm256_round_pd (__m256d a, _MM_FROUND_TO_NEAREST_INT | _MM_FROUND_NO_EXC) VROUNDPD ymm, ymm/m256, imm8(8)
         /// Round to nearest integer
         /// </summary>
-        /// <param name="src">The source vector</param>
+        /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<double> round(in Vec256<double> src)
-            => RoundToNearestInteger(src);
+        public static Vec256<double> vround(in Vec256<double> x)
+            => RoundToNearestInteger(x.ymm);
 
         /// <summary>
-        /// _mm256_round_ps:
+        /// __m256 _mm256_round_ps (__m256 a, _MM_FROUND_TO_ZERO | _MM_FROUND_NO_EXC)VROUNDPS ymm, ymm/m256, imm8(11)
         /// Round towards zero
         /// </summary>
-        /// <param name="src">The source vector</param>
+        /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<float> roundz(in Vec256<float> src)
-            => RoundToZero(src);
+        public static Vec256<float> vroundz(in Vec256<float> x)
+            => RoundToZero(x.ymm);
 
         /// <summary>
-        /// _mm256_round_pd:
+        /// __m256d _mm256_round_pd (__m256d a, _MM_FROUND_TO_ZERO | _MM_FROUND_NO_EXC) VROUNDPD ymm, ymm/m256, imm8(11)
         /// Round towards zero
         /// </summary>
-        /// <param name="src">The source vector</param>
+        /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<double> roundz(in Vec256<double> src)
-            => RoundToZero(src);
+        public static Vec256<double> vroundz(in Vec256<double> x)
+            => RoundToZero(x.ymm);
     }
 }

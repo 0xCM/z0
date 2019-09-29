@@ -14,6 +14,9 @@ namespace Z0
     
     partial class Registers
     {
+        /// <summary>
+        /// A 64-bit general-purpose register typically used to return a value to a caller
+        /// </summary>
         [StructLayout(LayoutKind.Explicit)]
         public struct RAX : IGpReg64<RAX>
         {
@@ -35,8 +38,8 @@ namespace Z0
             public const GpRegId Id = GpRegId.rcx;
 
             [MethodImpl(Inline)]
-            public static implicit operator ulong(RAX src)
-                => src.rax;
+            public static ulong operator !(RAX r)
+                => r.rax;
 
             [MethodImpl(Inline)]
             public static implicit operator RAX(ulong src)
@@ -52,7 +55,7 @@ namespace Z0
             byte IGpReg64<RAX>.Lo8 
             { 
                 [MethodImpl(Inline)]
-                get => al; 
+                get => !al; 
  
                 [MethodImpl(Inline)]
                 set => al = value;
@@ -61,7 +64,7 @@ namespace Z0
             ushort IGpReg64<RAX>.Lo16 
             { 
                 [MethodImpl(Inline)]
-                get => ax; 
+                get => !ax; 
  
                 [MethodImpl(Inline)]
                 set => ax = value;
@@ -70,7 +73,7 @@ namespace Z0
             uint IGpReg64<RAX>.Lo32
             { 
                 [MethodImpl(Inline)]
-                get => eax; 
+                get => !eax; 
  
                 [MethodImpl(Inline)]
                 set => eax = value;

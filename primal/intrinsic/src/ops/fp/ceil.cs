@@ -44,11 +44,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
         public static Vec256<double> ceil(in Vec256<double> src)
-            => Ceiling(src.ymm);
-
-
-
- 
+            => Ceiling(src.ymm); 
     }
 
 }

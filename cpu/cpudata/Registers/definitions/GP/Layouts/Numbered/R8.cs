@@ -12,6 +12,12 @@ namespace Z0
 
     partial class Registers 
     {
+        /// <summary>
+        /// If applicable, receives the fifth integral/pointer parameter 
+        /// to an called function, preceded respectively by rdi, rsi, rdx 
+        /// and rcx for the first four parameters and followed by r9
+        /// for an additional parameter
+        /// </summary>
         [StructLayout(LayoutKind.Explicit)]
         public struct R8 : IGpReg64<R8>
         {

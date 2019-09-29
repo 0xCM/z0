@@ -15,6 +15,9 @@ namespace Z0
     partial class Registers
     {
 
+        /// <summary>
+        /// Holds a stack pointer that references the topmost element in the stack
+        /// </summary>
         [StructLayout(LayoutKind.Explicit)]
         public struct RSP : IGpReg64<RSP>
         {
@@ -33,8 +36,8 @@ namespace Z0
             public const GpRegId Id = GpRegId.rsp;
 
             [MethodImpl(Inline)]
-            public static implicit operator ulong(RSP src)
-                => src.rsp;
+            public static ulong operator !(RSP r)
+                => r.rsp;
 
             [MethodImpl(Inline)]
             public static implicit operator RSP(ulong src)
@@ -50,7 +53,7 @@ namespace Z0
             byte IGpReg64<RSP>.Lo8 
             { 
                 [MethodImpl(Inline)]
-                get => spl; 
+                get => !spl; 
  
                 [MethodImpl(Inline)]
                 set => spl = value;
@@ -59,7 +62,7 @@ namespace Z0
             ushort IGpReg64<RSP>.Lo16 
             { 
                 [MethodImpl(Inline)]
-                get => sp; 
+                get => !sp; 
  
                 [MethodImpl(Inline)]
                 set => sp = value;
@@ -68,7 +71,7 @@ namespace Z0
             uint IGpReg64<RSP>.Lo32
             { 
                 [MethodImpl(Inline)]
-                get => esp; 
+                get => !esp; 
  
                 [MethodImpl(Inline)]
                 set => esp = value;

@@ -8,8 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
     
-    
-
     using static zfunc;
     
     partial class Registers
@@ -56,7 +54,7 @@ namespace Z0
             byte IGpReg32<EDI>.Lo8 
             { 
                 [MethodImpl(Inline)]
-                get => dil; 
+                get => !dil; 
  
                 [MethodImpl(Inline)]
                 set => dil = value;
@@ -65,7 +63,7 @@ namespace Z0
             ushort IGpReg32<EDI>.Lo16 
             { 
                 [MethodImpl(Inline)]
-                get => di; 
+                get => !di; 
  
                 [MethodImpl(Inline)]
                 set => di = value;

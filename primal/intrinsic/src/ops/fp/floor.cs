@@ -19,41 +19,36 @@ namespace Z0
 
     partial class dfp
     {
+        /// <summary>
+        /// __m128 _mm_floor_ps (__m128 a) ROUNDPS xmm, xmm/m128, imm8(9)
+        /// </summary>
+        /// <param name="x">The source vector</param>
+        [MethodImpl(Inline)]
+        public static Vec128<float> vfloor(in Vec128<float> x)
+            => Floor(x.xmm);
 
         /// <summary>
         /// __m128 _mm_floor_ps (__m128 a) ROUNDPS xmm, xmm/m128, imm8(9)
         /// </summary>
-        /// <param name="src">The source vector</param>
+        /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
-        public static Vec128<float> vfloor(in Vec128<float> src)
-            => Floor(src.xmm);
-
-        /// <summary>
-        /// __m128 _mm_floor_ps (__m128 a) ROUNDPS xmm, xmm/m128, imm8(9)
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        [MethodImpl(Inline)]
-        public static Vec128<double> vfloor(in Vec128<double> src)
-            => Floor(src.xmm);
+        public static Vec128<double> vfloor(in Vec128<double> x)
+            => Floor(x.xmm);
         
         /// <summary>
         /// __m256 _mm256_floor_ps (__m256 a) VROUNDPS ymm, ymm/m256, imm8(9)
         /// </summary>
-        /// <param name="src">The source vector</param>
+        /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<float> vfloor(in Vec256<float> src)
-            => Floor(src.ymm);
+        public static Vec256<float> vfloor(in Vec256<float> x)
+            => Floor(x.ymm);
 
         /// <summary>
         ///  __m256d _mm256_floor_pd (__m256d a) VROUNDPS ymm, ymm/m256, imm8(9)
         /// </summary>
-        /// <param name="src">The source vector</param>
+        /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<double> vfloor(in Vec256<double> src)
-            => Floor(src.ymm);
- 
-
-
+        public static Vec256<double> vfloor(in Vec256<double> x)
+            => Floor(x.ymm);
     }
-
 }

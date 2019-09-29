@@ -22,9 +22,13 @@ namespace Z0
 
             public const GpRegId Id = GpRegId.al;            
 
+            /// <summary>
+            /// Dereferences al to produce its content [al]
+            /// </summary>
+            /// <param name="r">The source register</param>
             [MethodImpl(Inline)]
-            public static implicit operator byte(AL src)
-                => src.al;
+            public static byte operator !(AL r)
+                => r.al;
 
             [MethodImpl(Inline)]
             public static implicit operator AL(byte src)

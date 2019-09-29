@@ -36,8 +36,8 @@ namespace Z0
             public const GpRegId Id = GpRegId.rbx;
 
             [MethodImpl(Inline)]
-            public static implicit operator ulong(RBX src)
-                => src.rbx;
+            public static ulong operator !(RBX r)
+                => r.rbx;
 
             [MethodImpl(Inline)]
             public static implicit operator RBX(ulong src)
@@ -53,7 +53,7 @@ namespace Z0
             byte IGpReg64<RBX>.Lo8 
             { 
                 [MethodImpl(Inline)]
-                get => bl; 
+                get => !bl; 
  
                 [MethodImpl(Inline)]
                 set => bl = value;
@@ -62,7 +62,7 @@ namespace Z0
             ushort IGpReg64<RBX>.Lo16 
             { 
                 [MethodImpl(Inline)]
-                get => bx; 
+                get => !bx; 
  
                 [MethodImpl(Inline)]
                 set => bx = value;
@@ -71,7 +71,7 @@ namespace Z0
             uint IGpReg64<RBX>.Lo32
             { 
                 [MethodImpl(Inline)]
-                get => ebx; 
+                get => !ebx; 
  
                 [MethodImpl(Inline)]
                 set => ebx = value;

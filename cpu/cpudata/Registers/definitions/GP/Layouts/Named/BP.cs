@@ -25,9 +25,13 @@ namespace Z0
 
             public const GpRegId Id = GpRegId.bp;
 
+            /// <summary>
+            /// Dereferences bp to produce its content [bp]
+            /// </summary>
+            /// <param name="r">The source register</param>
             [MethodImpl(Inline)]
-            public static implicit operator ushort(BP src)
-                => src.bp;
+            public static ushort operator !(BP r)
+                => r.bp;
 
             [MethodImpl(Inline)]
             public static implicit operator BP(ushort src)
@@ -50,7 +54,6 @@ namespace Z0
                 set => bpl = value;
             }
             
- 
             GpRegId IGpReg.Id 
                 => Id;
         }

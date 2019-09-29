@@ -29,8 +29,8 @@ namespace Z0
             public const GpRegId Id = GpRegId.bx;            
 
             [MethodImpl(Inline)]
-            public static implicit operator ushort(BX src)
-                => src.bx;
+            public static ushort operator !(BX r)
+                => r.bx;
 
             [MethodImpl(Inline)]
             public static implicit operator BX(ushort src)
@@ -46,7 +46,7 @@ namespace Z0
             byte IGpReg16<BX>.Lo8 
             { 
                 [MethodImpl(Inline)]
-                get => bl; 
+                get => !bl; 
  
                 [MethodImpl(Inline)]
                 set => bl = value;

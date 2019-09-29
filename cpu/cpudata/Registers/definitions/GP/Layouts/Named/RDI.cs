@@ -6,14 +6,17 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
-    
-    
+    using System.Runtime.InteropServices;    
 
     using static zfunc;
     
     partial class Registers
     {
+        /// <summary>
+        /// If applicable, receives the first integral/pointer parameter to
+        /// a called function, followed by rsi, rdx, rcx, r8 and r9
+        /// respectively for the next 5 function parameters
+        /// </summary>
         [StructLayout(LayoutKind.Explicit)]
         public struct RDI : IGpReg64<RDI>
         {
@@ -32,8 +35,8 @@ namespace Z0
             public const GpRegId Id = GpRegId.rdi;
 
             [MethodImpl(Inline)]
-            public static implicit operator ulong(RDI src)
-                => src.rdi;
+            public static ulong operator !(RDI r)
+                => r.rdi;
 
             [MethodImpl(Inline)]
             public static implicit operator RDI(ulong src)
@@ -49,7 +52,7 @@ namespace Z0
             byte IGpReg64<RDI>.Lo8 
             { 
                 [MethodImpl(Inline)]
-                get => dil; 
+                get => !dil; 
  
                 [MethodImpl(Inline)]
                 set => dil = value;
@@ -58,7 +61,7 @@ namespace Z0
             ushort IGpReg64<RDI>.Lo16 
             { 
                 [MethodImpl(Inline)]
-                get => di; 
+                get => !di; 
  
                 [MethodImpl(Inline)]
                 set => di = value;

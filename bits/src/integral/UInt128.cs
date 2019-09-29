@@ -16,24 +16,35 @@ namespace Z0
     partial class Bits
     {
         [MethodImpl(Inline)]
+        public static UInt128 and(in UInt128 lhs, in UInt128 rhs)
+            => And(lhs.ToVector128(), rhs.ToVector128()).ToUInt128();
+
+        [MethodImpl(Inline)]
+        public static ref UInt128 and(in UInt128 lhs, in UInt128 rhs, out UInt128 dst)
+        {
+            dst = And(lhs.ToVector128(), rhs.ToVector128()).ToUInt128();
+            return ref dst;            
+        }
+
+        [MethodImpl(Inline)]
         public static UInt128 or(in UInt128 lhs, in UInt128 rhs)
-            => vor(lhs.ToVec128(), rhs.ToVec128()).ToUInt128();
+            => Or(lhs.ToVec128(), rhs.ToVec128()).ToUInt128();
 
         [MethodImpl(Inline)]
         public static ref UInt128 or(in UInt128 lhs, in UInt128 rhs, out UInt128 dst)
         {
-            dst = vor(lhs.ToVec128(), rhs.ToVec128()).ToUInt128();
+            dst = Or(lhs.ToVec128(), rhs.ToVec128()).ToUInt128();
             return ref dst;            
         }
 
         [MethodImpl(Inline)]
         public static UInt128 xor(in UInt128 lhs, in UInt128 rhs)
-            => vxor(lhs.ToVec128(), rhs.ToVec128()).ToUInt128();
+            => Xor(lhs.ToVec128(), rhs.ToVec128()).ToUInt128();
 
         [MethodImpl(Inline)]
         public static ref UInt128 xor(in UInt128 lhs, in UInt128 rhs, out UInt128 dst)
         {
-            dst = vxor(lhs.ToVec128(), rhs.ToVec128()).ToUInt128();
+            dst = Xor(lhs.ToVec128(), rhs.ToVec128()).ToUInt128();
             return ref dst;            
         }
 

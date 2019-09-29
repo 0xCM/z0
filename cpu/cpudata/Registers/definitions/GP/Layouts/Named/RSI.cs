@@ -15,6 +15,11 @@ namespace Z0
     partial class Registers
     {
 
+        /// <summary>
+        /// If applicable, receives the second integral/pointer parameter to a 
+        /// called function, preceded by rdi that receives the first parameter
+        /// and followed respecively by rdx, rcx, r8 and r9 for four additional parameters
+        /// </summary>
         [StructLayout(LayoutKind.Explicit)]
         public struct RSI : IGpReg64<RSI>
         {
@@ -32,10 +37,9 @@ namespace Z0
 
             public const GpRegId Id = GpRegId.rsi;
 
-
             [MethodImpl(Inline)]
-            public static implicit operator ulong(RSI src)
-                => src.rsi;
+            public static ulong operator !(RSI r)
+                => r.rsi;
 
             [MethodImpl(Inline)]
             public static implicit operator RSI(ulong src)

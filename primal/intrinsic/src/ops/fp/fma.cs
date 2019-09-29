@@ -38,27 +38,6 @@ namespace Z0
         public static Vec128<double> fnmadd(in Vec128<double> x, in Vec128<double> y, in Vec128<double> z)
             => MultiplyAddNegated(x,y,z);
 
-        /// <summary>
-        /// __m128 _mm_fnmadd_ss (__m128 a, __m128 b, __m128 c) VFNMADDSS xmm, xmm, xmm/m32
-        /// dst = -(x*y + z)
-        /// </summary>
-        /// <param name="x">The first operand</param>
-        /// <param name="y">The second operand</param>
-        /// <param name="z">The third operand</param>
-        [MethodImpl(Inline)]
-        public static Scalar128<float> fnmadd(in Scalar128<float> x, in Scalar128<float> y, in Scalar128<float> z)
-            => MultiplyAddNegatedScalar(x,y,z);
-
-        /// <summary>
-        /// __m128d _mm_fnmadd_sd (__m128d a, __m128d b, __m128d c) VFNMADDSD xmm, xmm, xmm/m64
-        /// dst = -(x*y + z)
-        /// </summary>
-        /// <param name="x">The first operand</param>
-        /// <param name="y">The second operand</param>
-        /// <param name="z">The third operand</param>
-        [MethodImpl(Inline)]
-        public static Scalar128<double> fnmadd(in Scalar128<double> x, in Scalar128<double> y, in Scalar128<double> z)
-            => MultiplyAddNegatedScalar(x,y,z);
 
         /// <summary>
         /// __m128 _mm_fmaddsub_ps (__m128 a, __m128 b, __m128 c) VFMADDSUBPS xmm, xmm, xmm/m128

@@ -20,196 +20,196 @@ namespace Z0
     {
         /// <summary>
         /// __m128i _mm_unpacklo_epi8 (__m128i a, __m128i b) PUNPCKLBW xmm, xmm/m128
-        /// Creates a 128-bit Vectortor where the lower 64 bits are taken from the
-        /// lower 64 bits of the first source Vectortor and the higher 64 bits are taken 
-        /// from the lower 64 bits of the second source Vectortor
+        /// Creates a 128-bit vector where the lower 64 bits are taken from the
+        /// lower 64 bits of the first source vector and the higher 64 bits are taken 
+        /// from the lower 64 bits of the second source vector
         /// </summary>
-        /// <param name="lhs">The left source Vectortor</param>
-        /// <param name="rhs">The right source Vectortor</param>
+        /// <param name="x">The left source vector</param>
+        /// <param name="y">The right source vector</param>
         [MethodImpl(Inline)]
-        public static Vector128<sbyte> unpacklo(Vector128<sbyte> lhs, Vector128<sbyte> rhs)
-            => UnpackLow(lhs,rhs);
+        public static Vec128<sbyte> unpacklo(in Vec128<sbyte> x, in Vec128<sbyte> y)
+            => UnpackLow(x.xmm, y.xmm);
 
         /// <summary>
         /// __m128i _mm_unpacklo_epi8 (__m128i a, __m128i b) PUNPCKLBW xmm, xmm/m128
-        /// Creates a 128-bit Vectortor where the lower 64 bits are taken from the
-        /// lower 64 bits of the first source Vectortor and the higher 64 bits are taken 
-        /// from the lower 64 bits of the second source Vectortor
+        /// Creates a 128-bit vector where the lower 64 bits are taken from the
+        /// lower 64 bits of the first source vector and the higher 64 bits are taken 
+        /// from the lower 64 bits of the second source vector
         /// </summary>
-        /// <param name="lhs">The left source Vectortor</param>
-        /// <param name="rhs">The right source Vectortor</param>
+        /// <param name="x">The left source vector</param>
+        /// <param name="y">The right source vector</param>
         [MethodImpl(Inline)]
-        public static Vector128<byte> unpacklo(Vector128<byte> lhs, Vector128<byte> rhs)
-            => UnpackLow(lhs,rhs);
+        public static Vec128<byte> unpacklo(in Vec128<byte> x, in Vec128<byte> y)
+            => UnpackLow(x.xmm, y.xmm);
 
         /// <summary>
         /// __m128i _mm_unpacklo_epi16 (__m128i a, __m128i b) PUNPCKLWD xmm, xmm/m128
-        /// Creates a 128-bit Vectortor where the lower 64 bits are taken from the
-        /// lower 64 bits of the first source Vectortor and the higher 64 bits are taken 
-        /// from the lower 64 bits of the second source Vectortor
+        /// Creates a 128-bit vector where the lower 64 bits are taken from the
+        /// lower 64 bits of the first source vector and the higher 64 bits are taken 
+        /// from the lower 64 bits of the second source vector
         /// </summary>
-        /// <param name="lhs">The left source Vectortor</param>
-        /// <param name="rhs">The right source Vectortor</param>
+        /// <param name="x">The left source vector</param>
+        /// <param name="y">The right source vector</param>
         [MethodImpl(Inline)]
-        public static Vector128<short> unpacklo(Vector128<short> lhs, Vector128<short> rhs)
-            => UnpackLow(lhs,rhs);
+        public static Vec128<short> unpacklo(in Vec128<short> x, in Vec128<short> y)
+            => UnpackLow(x.xmm, y.xmm);
 
         /// <summary>
         /// __m128i _mm_unpacklo_epi16 (__m128i a, __m128i b) PUNPCKLWD xmm, xmm/m128
-        /// Creates a 128-bit Vectortor where the lower 64 bits are taken from the
-        /// lower 64 bits of the first source Vectortor and the higher 64 bits are taken 
-        /// from the lower 64 bits of the second source Vectortor
+        /// Creates a 128-bit vector where the lower 64 bits are taken from the
+        /// lower 64 bits of the first source vector and the higher 64 bits are taken 
+        /// from the lower 64 bits of the second source vector
         /// </summary>
-        /// <param name="lhs">The left source Vectortor</param>
-        /// <param name="rhs">The right source Vectortor</param>
+        /// <param name="x">The left source vector</param>
+        /// <param name="y">The right source vector</param>
         [MethodImpl(Inline)]
-        public static Vector128<ushort> unpacklo(Vector128<ushort> lhs, Vector128<ushort> rhs)
-            => UnpackLow(lhs,rhs);
+        public static Vec128<ushort> unpacklo(in Vec128<ushort> x, in Vec128<ushort> y)
+            => UnpackLow(x.xmm, y.xmm);
 
         /// <summary>
         /// __m128i _mm_unpacklo_epi32 (__m128i a, __m128i b) PUNPCKLDQ xmm, xmm/m128
-        /// Creates a 128-bit Vectortor where the lower 64 bits are taken from the
-        /// lower 64 bits of the first source Vectortor and the higher 64 bits are taken 
-        /// from the lower 64 bits of the second source Vectortor
+        /// Creates a 128-bit vector where the lower 64 bits are taken from the
+        /// lower 64 bits of the first source vector and the higher 64 bits are taken 
+        /// from the lower 64 bits of the second source vector
         /// </summary>
-        /// <param name="lhs">The left source Vectortor</param>
-        /// <param name="rhs">The right source Vectortor</param>
+        /// <param name="x">The left source vector</param>
+        /// <param name="y">The right source vector</param>
         [MethodImpl(Inline)]
-        public static Vector128<int> unpacklo(Vector128<int> lhs, Vector128<int> rhs)
-            => UnpackLow(lhs,rhs);
+        public static Vec128<int> unpacklo(in Vec128<int> x, in Vec128<int> y)
+            => UnpackLow(x.xmm, y.xmm);
 
         /// <summary>
         /// __m128i _mm_unpacklo_epi32 (__m128i a, __m128i b) PUNPCKLDQ xmm, xmm/m128
-        /// Creates a 128-bit Vectortor where the lower 64 bits are taken from the
-        /// lower 64 bits of the first source Vectortor and the higher 64 bits are taken 
-        /// from the lower 64 bits of the second source Vectortor
+        /// Creates a 128-bit vector where the lower 64 bits are taken from the
+        /// lower 64 bits of the first source vector and the higher 64 bits are taken 
+        /// from the lower 64 bits of the second source vector
         /// </summary>
-        /// <param name="lhs">The left source Vectortor</param>
-        /// <param name="rhs">The right source Vectortor</param>
+        /// <param name="x">The left source vector</param>
+        /// <param name="y">The right source vector</param>
         [MethodImpl(Inline)]
-        public static Vector128<uint> unpacklo(Vector128<uint> lhs, Vector128<uint> rhs)
-            => UnpackLow(lhs,rhs);
+        public static Vec128<uint> unpacklo(in Vec128<uint> x, in Vec128<uint> y)
+            => UnpackLow(x.xmm, y.xmm);
 
         /// <summary>
         ///  __m128i _mm_unpacklo_epi64 (__m128i a, __m128i b) PUNPCKLQDQ xmm, xmm/m128
-        /// Creates a 128-bit Vectortor where the lower 64 bits are taken from the
-        /// lower 64 bits of the first source Vectortor and the higher 64 bits are taken 
-        /// from the lower 64 bits of the second source Vectortor
+        /// Creates a 128-bit vector where the lower 64 bits are taken from the
+        /// lower 64 bits of the first source vector and the higher 64 bits are taken 
+        /// from the lower 64 bits of the second source vector
         /// </summary>
-        /// <param name="lhs">The left source Vectortor</param>
-        /// <param name="rhs">The right source Vectortor</param>
+        /// <param name="x">The left source vector</param>
+        /// <param name="y">The right source vector</param>
         [MethodImpl(Inline)]
-        public static Vector128<long> unpacklo(Vector128<long> lhs, Vector128<long> rhs)
-            => UnpackLow(lhs,rhs);
+        public static Vec128<long> unpacklo(in Vec128<long> x, in Vec128<long> y)
+            => UnpackLow(x.xmm, y.xmm);
 
         /// <summary>
         ///  __m128i _mm_unpacklo_epi64 (__m128i a, __m128i b) PUNPCKLQDQ xmm, xmm/m128
-        /// Creates a 128-bit Vectortor where the lower 64 bits are taken from the
-        /// lower 64 bits of the first source Vectortor and the higher 64 bits are taken 
-        /// from the lower 64 bits of the second source Vectortor
+        /// Creates a 128-bit vector where the lower 64 bits are taken from the
+        /// lower 64 bits of the first source vector and the higher 64 bits are taken 
+        /// from the lower 64 bits of the second source vector
         /// </summary>
-        /// <param name="lhs">The left source Vectortor</param>
-        /// <param name="rhs">The right source Vectortor</param>
+        /// <param name="x">The left source vector</param>
+        /// <param name="y">The right source vector</param>
         [MethodImpl(Inline)]
-        public static Vector128<ulong> unpacklo(Vector128<ulong> lhs, Vector128<ulong> rhs)
-            => UnpackLow(lhs,rhs);
+        public static Vec128<ulong> unpacklo(in Vec128<ulong> x, in Vec128<ulong> y)
+            => UnpackLow(x.xmm, y.xmm);
 
         /// <summary>
         /// __m256i _mm256_unpacklo_epi8 (__m256i a, __m256i b) VPUNPCKLBW ymm, ymm, ymm/m256
-        /// Creates a 256-bit Vectortor where the lower 128 bits are taken from the
-        /// lower 128 bits of the first source Vectortor and the higher 128 bits are taken 
-        /// from the lower 128 bits of the second source Vectortor
+        /// Creates a 256-bit vector where the lower 128 bits are taken from the
+        /// lower 128 bits of the first source vector and the higher 128 bits are taken 
+        /// from the lower 128 bits of the second source vector
         /// </summary>
-        /// <param name="lhs">The left source Vectortor</param>
-        /// <param name="rhs">The right source Vectortor</param>
+        /// <param name="x">The left source vector</param>
+        /// <param name="y">The right source vector</param>
         [MethodImpl(Inline)]
-        public static Vector256<byte> unpacklo(Vector256<byte> lhs, Vector256<byte> rhs)
-            => UnpackLow(lhs,rhs);
+        public static Vec256<byte> unpacklo(in Vec256<byte> x, in Vec256<byte> y)
+            => UnpackLow(x.ymm, y.ymm);
 
         /// <summary>
         /// __m256i _mm256_unpacklo_epi8 (__m256i a, __m256i b) VPUNPCKLBW ymm, ymm, ymm/m256
-        /// Creates a 256-bit Vectortor where the lower 128 bits are taken from the
-        /// lower 128 bits of the first source Vectortor and the higher 128 bits are taken 
-        /// from the lower 128 bits of the second source Vectortor
+        /// Creates a 256-bit vector where the lower 128 bits are taken from the
+        /// lower 128 bits of the first source vector and the higher 128 bits are taken 
+        /// from the lower 128 bits of the second source vector
         /// </summary>
-        /// <param name="lhs">The left source Vectortor</param>
-        /// <param name="rhs">The right source Vectortor</param>
+        /// <param name="x">The left source vector</param>
+        /// <param name="y">The right source vector</param>
         [MethodImpl(Inline)]
-        public static Vector256<sbyte> unpacklo(Vector256<sbyte> lhs, Vector256<sbyte> rhs)
-            => UnpackLow(lhs,rhs);
+        public static Vec256<sbyte> unpacklo(in Vec256<sbyte> x, in Vec256<sbyte> y)
+            => UnpackLow(x.ymm, y.ymm);
 
         /// <summary>
         /// __m256i _mm256_unpacklo_epi16 (__m256i a, __m256i b) VPUNPCKLWD ymm, ymm, ymm/m256
-        /// Creates a 256-bit Vectortor where the lower 128 bits are taken from the
-        /// lower 128 bits of the first source Vectortor and the higher 128 bits are taken 
-        /// from the lower 128 bits of the second source Vectortor
+        /// Creates a 256-bit vector where the lower 128 bits are taken from the
+        /// lower 128 bits of the first source vector and the higher 128 bits are taken 
+        /// from the lower 128 bits of the second source vector
         /// </summary>
-        /// <param name="lhs">The left source Vectortor</param>
-        /// <param name="rhs">The right source Vectortor</param>
+        /// <param name="x">The left source vector</param>
+        /// <param name="y">The right source vector</param>
         [MethodImpl(Inline)]
-        public static Vector256<short> unpacklo(Vector256<short> lhs, Vector256<short> rhs)
-            => UnpackLow(lhs,rhs);
+        public static Vec256<short> unpacklo(in Vec256<short> x, in Vec256<short> y)
+            => UnpackLow(x.ymm, y.ymm);
 
         /// <summary>
         /// __m256i _mm256_unpacklo_epi16 (__m256i a, __m256i b) VPUNPCKLWD ymm, ymm, ymm/m256
-        /// Creates a 256-bit Vectortor where the lower 128 bits are taken from the
-        /// lower 128 bits of the first source Vectortor and the higher 128 bits are taken 
-        /// from the lower 128 bits of the second source Vectortor
+        /// Creates a 256-bit vector where the lower 128 bits are taken from the
+        /// lower 128 bits of the first source vector and the higher 128 bits are taken 
+        /// from the lower 128 bits of the second source vector
         /// </summary>
-        /// <param name="lhs">The left source Vectortor</param>
-        /// <param name="rhs">The right source Vectortor</param>
+        /// <param name="x">The left source vector</param>
+        /// <param name="y">The right source vector</param>
         [MethodImpl(Inline)]
-        public static Vector256<ushort> unpacklo(Vector256<ushort> lhs, Vector256<ushort> rhs)
-            => UnpackLow(lhs,rhs);
+        public static Vec256<ushort> unpacklo(in Vec256<ushort> x, in Vec256<ushort> y)
+            => UnpackLow(x.ymm, y.ymm);
 
         /// <summary>
         /// __m256i _mm256_unpacklo_epi32 (__m256i a, __m256i b) VPUNPCKLDQ ymm, ymm, ymm/m256
-        /// Creates a 256-bit Vectortor where the lower 128 bits are taken from the
-        /// lower 128 bits of the first source Vectortor and the higher 128 bits are taken 
-        /// from the lower 128 bits of the second source Vectortor
+        /// Creates a 256-bit vector where the lower 128 bits are taken from the
+        /// lower 128 bits of the first source vector and the higher 128 bits are taken 
+        /// from the lower 128 bits of the second source vector
         /// </summary>
-        /// <param name="lhs">The left source Vectortor</param>
-        /// <param name="rhs">The right source Vectortor</param>
+        /// <param name="x">The left source vector</param>
+        /// <param name="y">The right source vector</param>
         [MethodImpl(Inline)]
-        public static Vector256<int> unpacklo(Vector256<int> lhs, Vector256<int> rhs)
-            => UnpackLow(lhs,rhs);
+        public static Vec256<int> unpacklo(in Vec256<int> x, in Vec256<int> y)
+            => UnpackLow(x.ymm, y.ymm);
 
         /// <summary>
         /// __m256i _mm256_unpacklo_epi32 (__m256i a, __m256i b) VPUNPCKLDQ ymm, ymm, ymm/m256
-        /// Creates a 256-bit Vectortor where the lower 128 bits are taken from the
-        /// lower 128 bits of the first source Vectortor and the higher 128 bits are taken 
-        /// from the lower 128 bits of the second source Vectortor
+        /// Creates a 256-bit vector where the lower 128 bits are taken from the
+        /// lower 128 bits of the first source vector and the higher 128 bits are taken 
+        /// from the lower 128 bits of the second source vector
         /// </summary>
-        /// <param name="lhs">The left source Vectortor</param>
-        /// <param name="rhs">The right source Vectortor</param>
+        /// <param name="x">The left source vector</param>
+        /// <param name="y">The right source vector</param>
         [MethodImpl(Inline)]
-        public static Vector256<uint> unpacklo(Vector256<uint> lhs, Vector256<uint> rhs)
-            => UnpackLow(lhs,rhs);
+        public static Vec256<uint> unpacklo(in Vec256<uint> x, in Vec256<uint> y)
+            => UnpackLow(x.ymm, y.ymm);
 
         /// <summary>
         /// __m256i _mm256_unpacklo_epi64 (__m256i a, __m256i b) VPUNPCKLQDQ ymm, ymm, ymm/m256
-        /// Creates a 256-bit Vectortor where the lower 128 bits are taken from the
-        /// lower 128 bits of the first source Vectortor and the higher 128 bits are taken 
-        /// from the lower 128 bits of the second source Vectortor
+        /// Creates a 256-bit vector where the lower 128 bits are taken from the
+        /// lower 128 bits of the first source vector and the higher 128 bits are taken 
+        /// from the lower 128 bits of the second source vector
         /// </summary>
-        /// <param name="lhs">The left source Vectortor</param>
-        /// <param name="rhs">The right source Vectortor</param>
+        /// <param name="x">The left source vector</param>
+        /// <param name="y">The right source vector</param>
         [MethodImpl(Inline)]
-        public static Vector256<long> unpacklo(Vector256<long> lhs, Vector256<long> rhs)
-            => UnpackLow(lhs,rhs);
+        public static Vec256<long> unpacklo(in Vec256<long> x, in Vec256<long> y)
+            => UnpackLow(x.ymm, y.ymm);
 
         /// <summary>
         /// __m256i _mm256_unpacklo_epi64 (__m256i a, __m256i b) VPUNPCKLQDQ ymm, ymm, ymm/m256
         /// </summary>
-        /// Creates a 256-bit Vectortor where the lower 128 bits are taken from the
-        /// lower 128 bits of the first source Vectortor and the higher 128 bits are taken 
-        /// from the lower 128 bits of the second source Vectortor
+        /// Creates a 256-bit vector where the lower 128 bits are taken from the
+        /// lower 128 bits of the first source vector and the higher 128 bits are taken 
+        /// from the lower 128 bits of the second source vector
         /// </summary>
-        /// <param name="lhs">The left source Vectortor</param>
-        /// <param name="rhs">The right source Vectortor</param>
+        /// <param name="x">The left source vector</param>
+        /// <param name="y">The right source vector</param>
         [MethodImpl(Inline)]
-        public static Vector256<ulong> unpacklo(Vector256<ulong> lhs, Vector256<ulong> rhs)
-            => UnpackLow(lhs,rhs);
+        public static Vec256<ulong> unpacklo(in Vec256<ulong> x, in Vec256<ulong> y)
+            => UnpackLow(x.ymm, y.ymm);
    }
 
 }

@@ -16,45 +16,41 @@ namespace Z0
     partial class dfp
     {
         /// <summary>
+        /// __m128d _mm_sub_ps (__m128d a, __m128d b) SUBPS xmm, xmm/m128
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        [MethodImpl(Inline)]
+        public static Vec128<float> vsub(in Vec128<float> x, in Vec128<float> y)
+            => Subtract(x.xmm,y.xmm);
+
+        /// <summary>
+        /// __m128d _mm_sub_pd (__m128d a, __m128d b) SUBPD xmm, xmm/m128
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        [MethodImpl(Inline)]
+        public static Vec128<double> vsub(in Vec128<double> x, in Vec128<double> y)
+            => Subtract(x.xmm,y.xmm);
+
+        /// <summary>
         /// __m256 _mm256_sub_ps (__m256 a, __m256 b) VSUBPS ymm, ymm, ymm/m256
         /// Subtracts the right vector from the left
         /// </summary>
-        /// <param name="lhs">The left vector</param>
-        /// <param name="rhs">The right vector</param>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<float> fsub(in Vec256<float> lhs, in Vec256<float> rhs)
-            => Subtract(lhs, rhs);
+        public static Vec256<float> vsub(in Vec256<float> x, in Vec256<float> y)
+            => Subtract(x.ymm, y.ymm);
 
         /// <summary>
         /// __m256d _mm256_sub_pd (__m256d a, __m256d b) VSUBPD ymm, ymm, ymm/m256
         /// Subtracts the right vector from the left
         /// </summary>
-        /// <param name="lhs">The left vector</param>
-        /// <param name="rhs">The right vector</param>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<double> fsub(in Vec256<double> lhs, in Vec256<double> rhs)  
-            => Subtract(lhs, rhs);
-
-        /// <summary>
-        /// __m128d _mm_sub_ps (__m128d a, __m128d b) SUBPS xmm, xmm/m128
-        /// </summary>
-        /// <param name="lhs"></param>
-        /// <param name="rhs"></param>
-        [MethodImpl(Inline)]
-        public static Vec128<float> fsub(in Vec128<float> lhs, in Vec128<float> rhs)
-            => Subtract(lhs,rhs);
-
-        /// <summary>
-        /// __m128d _mm_sub_pd (__m128d a, __m128d b) SUBPD xmm, xmm/m128
-        /// </summary>
-        /// <param name="lhs"></param>
-        /// <param name="rhs"></param>
-        /// <returns></returns>
-        [MethodImpl(Inline)]
-        public static Vec128<double> fsub(in Vec128<double> lhs, in Vec128<double> rhs)
-            => Subtract(lhs,rhs);
-
-
+        public static Vec256<double> vsub(in Vec256<double> x, in Vec256<double> y)  
+            => Subtract(x.ymm, y.ymm);
     }
-
 }

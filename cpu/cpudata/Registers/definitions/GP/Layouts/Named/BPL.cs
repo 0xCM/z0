@@ -8,8 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
     
-    
-
     using static zfunc;
 
     partial class Registers
@@ -21,6 +19,14 @@ namespace Z0
             public byte bpl;
 
             public const GpRegId Id = GpRegId.bpl;
+
+            /// <summary>
+            /// Dereferences bp to produce its content [bp]
+            /// </summary>
+            /// <param name="r">The source register</param>
+            [MethodImpl(Inline)]
+            public static byte operator !(BPL r)
+                => r.bpl;
 
             [MethodImpl(Inline)]
             public static implicit operator byte(BPL src)

@@ -28,10 +28,14 @@ namespace Z0
 
             public const GpRegId Id = GpRegId.ax;            
 
+            /// <summary>
+            /// Dereferences al to produce its content [al]
+            /// </summary>
+            /// <param name="r">The source register</param>
             [MethodImpl(Inline)]
-            public static implicit operator ushort(AX src)
-                => src.ax;
-
+            public static ushort operator !(AX r)
+                => r.ax;
+            
             [MethodImpl(Inline)]
             public static implicit operator AX(ushort src)
                 => new AX(src);
@@ -47,7 +51,7 @@ namespace Z0
             byte IGpReg16<AX>.Lo8 
             { 
                 [MethodImpl(Inline)]
-                get => al; 
+                get => !al; 
  
                 [MethodImpl(Inline)]
                 set => al = value;

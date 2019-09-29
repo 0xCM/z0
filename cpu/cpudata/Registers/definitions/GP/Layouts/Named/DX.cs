@@ -35,8 +35,8 @@ namespace Z0
             public const GpRegId Id = GpRegId.dx;            
 
             [MethodImpl(Inline)]
-            public static implicit operator ushort(DX src)
-                => src.dx;
+            public static ushort operator !(DX r)
+                => r.dx;
 
             [MethodImpl(Inline)]
             public static implicit operator DX(ushort src)

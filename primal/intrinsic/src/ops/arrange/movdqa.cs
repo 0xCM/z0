@@ -24,7 +24,7 @@ namespace Z0
         /// <param name="dst">The memory target</param>
         [MethodImpl(Inline)]
         public static unsafe void movdqa(in Vec128<sbyte> src, ref sbyte dst)
-            => StoreAligned(refptr(ref dst), src);
+            => StoreAligned(refptr(ref dst), src.xmm);
 
         /// <summary>
         /// void _mm_store_si128 (__m128i* mem_addr, __m128i a) MOVDQA m128, xmm
@@ -33,7 +33,7 @@ namespace Z0
         /// <param name="dst">The memory target</param>
         [MethodImpl(Inline)]
         public static unsafe void movdqa(in Vec128<byte> src, ref byte dst)
-            => StoreAligned(refptr(ref dst), src);
+            => StoreAligned(refptr(ref dst), src.xmm);
         
         /// <summary>
         /// void _mm_store_si128 (__m128i* mem_addr, __m128i a) MOVDQA m128, xmm
@@ -42,7 +42,7 @@ namespace Z0
         /// <param name="dst">The memory target</param>
         [MethodImpl(Inline)]
         public static unsafe void movdqa(in Vec128<short> src, ref short dst)
-            => StoreAligned(refptr(ref dst), src);
+            => StoreAligned(refptr(ref dst), src.xmm);
 
         /// <summary>
         /// void _mm_store_si128 (__m128i* mem_addr, __m128i a) MOVDQA m128, xmm
@@ -51,7 +51,7 @@ namespace Z0
         /// <param name="dst">The memory target</param>
         [MethodImpl(Inline)]
         public static unsafe void movdqa(in Vec128<ushort> src, ref ushort dst)
-            => StoreAligned(refptr(ref dst), src);
+            => StoreAligned(refptr(ref dst), src.xmm);
 
         /// <summary>
         /// void _mm_store_si128 (__m128i* mem_addr, __m128i a) MOVDQA m128, xmm
@@ -60,7 +60,7 @@ namespace Z0
         /// <param name="dst">The memory target</param>
         [MethodImpl(Inline)]
         public static unsafe void movdqa(in Vec128<int> src, ref int dst)
-            => StoreAligned(refptr(ref dst), src);
+            => StoreAligned(refptr(ref dst), src.xmm);
 
         /// <summary>
         /// void _mm_store_si128 (__m128i* mem_addr, __m128i a) MOVDQA m128, xmm
@@ -69,7 +69,7 @@ namespace Z0
         /// <param name="dst">The memory target</param>
         [MethodImpl(Inline)]
         public static unsafe void movdqa(in Vec128<uint> src, ref uint dst)
-            => StoreAligned(refptr(ref dst), src);
+            => StoreAligned(refptr(ref dst), src.xmm);
 
         /// <summary>
         /// void _mm_store_si128 (__m128i* mem_addr, __m128i a) MOVDQA m128, xmm
@@ -78,7 +78,7 @@ namespace Z0
         /// <param name="dst">The memory target</param>
         [MethodImpl(Inline)]
         public static unsafe void movdqa(in Vec128<long> src, ref long dst)
-            => StoreAligned(refptr(ref dst), src);
+            => StoreAligned(refptr(ref dst), src.xmm);
 
         /// <summary>
         /// void _mm_store_si128 (__m128i* mem_addr, __m128i a) MOVDQA m128, xmm
@@ -87,7 +87,7 @@ namespace Z0
         /// <param name="dst">The memory target</param>
         [MethodImpl(Inline)]
         public static unsafe void movdqa(in Vec128<ulong> src, ref ulong dst)
-            => StoreAligned(refptr(ref dst), src); 
+            => StoreAligned(refptr(ref dst), src.xmm); 
 
         /// <summary>
         /// void _mm256_store_si256 (__m256i * mem_addr, __m256i a) MOVDQA m256, ymm
@@ -96,7 +96,7 @@ namespace Z0
         /// <param name="dst">The memory target</param>
         [MethodImpl(Inline)]
         public static unsafe void movdqa(in Vec256<sbyte> src, ref sbyte dst)
-            => StoreAligned(refptr(ref dst), src);
+            => StoreAligned(refptr(ref dst), src.ymm);
 
         /// <summary>
         /// void _mm256_store_si256 (__m256i * mem_addr, __m256i a) MOVDQA m256, ymm
@@ -105,7 +105,7 @@ namespace Z0
         /// <param name="dst">The memory target</param>
         [MethodImpl(Inline)]
         public static unsafe void movdqa(in Vec256<byte> src, ref byte dst)
-            => StoreAligned(refptr(ref dst), src);
+            => StoreAligned(refptr(ref dst), src.ymm);
         
         /// <summary>
         /// void _mm256_store_si256 (__m256i * mem_addr, __m256i a) MOVDQA m256, ymm
@@ -114,7 +114,7 @@ namespace Z0
         /// <param name="dst">The memory target</param>
         [MethodImpl(Inline)]
         public static unsafe void movdqa(in Vec256<short> src, ref short dst)
-            => StoreAligned(refptr(ref dst), src);
+            => StoreAligned(refptr(ref dst), src.ymm);
 
         /// <summary>
         /// void _mm256_store_si256 (__m256i * mem_addr, __m256i a) MOVDQA m256, ymm
@@ -123,7 +123,7 @@ namespace Z0
         /// <param name="dst">The memory target</param>
         [MethodImpl(Inline)]
         public static unsafe void movdqa(in Vec256<ushort> src, ref ushort dst)
-            => StoreAligned(refptr(ref dst), src);
+            => StoreAligned(refptr(ref dst), src.ymm);
 
         /// <summary>
         /// void _mm256_store_si256 (__m256i * mem_addr, __m256i a) MOVDQA m256, ymm
@@ -132,7 +132,7 @@ namespace Z0
         /// <param name="dst">The memory target</param>
         [MethodImpl(Inline)]
         public static unsafe void movdqa(in Vec256<int> src, ref int dst)
-            => StoreAligned(refptr(ref dst), src);
+            => StoreAligned(refptr(ref dst), src.ymm);
 
         /// <summary>
         /// void _mm256_store_si256 (__m256i * mem_addr, __m256i a) MOVDQA m256, ymm
@@ -141,7 +141,7 @@ namespace Z0
         /// <param name="dst">The memory target</param>
         [MethodImpl(Inline)]
         public static unsafe void movdqa(in Vec256<uint> src, ref uint dst)
-            => StoreAligned(refptr(ref dst), src);
+            => StoreAligned(refptr(ref dst), src.ymm);
 
         /// <summary>
         /// void _mm256_store_si256 (__m256i * mem_addr, __m256i a) MOVDQA m256, ymm
@@ -150,7 +150,7 @@ namespace Z0
         /// <param name="dst">The memory target</param>
         [MethodImpl(Inline)]
         public static unsafe void movdqa(in Vec256<long> src, ref long dst)
-            => StoreAligned(refptr(ref dst), src);
+            => StoreAligned(refptr(ref dst), src.ymm);
 
         /// <summary>
         /// void _mm256_store_si256 (__m256i * mem_addr, __m256i a) MOVDQA m256, ymm
@@ -159,6 +159,6 @@ namespace Z0
         /// <param name="dst">The memory target</param>
         [MethodImpl(Inline)]
         public static unsafe void movdqa(in Vec256<ulong> src, ref ulong dst)
-            => StoreAligned(refptr(ref dst), src); 
+            => StoreAligned(refptr(ref dst), src.ymm); 
     }
 }

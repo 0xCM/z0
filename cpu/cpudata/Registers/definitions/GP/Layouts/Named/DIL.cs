@@ -9,7 +9,6 @@ namespace Z0
     using System.Runtime.InteropServices;
     
     
-
     using static zfunc;
     
     partial class Registers
@@ -23,8 +22,8 @@ namespace Z0
             public const GpRegId Id = GpRegId.dil;            
 
             [MethodImpl(Inline)]
-            public static implicit operator byte(DIL src)
-                => src.dil;
+            public static byte operator !(DIL r)
+                => r.dil;
 
             [MethodImpl(Inline)]
             public static implicit operator DIL(byte src)
@@ -33,7 +32,6 @@ namespace Z0
             [MethodImpl(Inline)]
             public DIL(byte src)
                 =>dil = src;
-
 
             GpRegId IGpReg.Id 
                 => Id;

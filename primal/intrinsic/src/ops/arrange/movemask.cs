@@ -22,13 +22,13 @@ namespace Z0
     {
         
         /// <summary>
-        /// Constructs an integer from the most significant bit of each source vector component
         /// _mm_movemask_epi8 (__m128i a) PMOVMSKB reg, xmm
+        /// Constructs an integer from the most significant bit of each source vector component
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
         public static int movemask(in Vec128<byte> src)
-            =>  MoveMask(src);
+            => MoveMask(src.xmm);
 
         /// <summary>
         /// Constructs an integer from the most significant bit of each source vector component
@@ -36,61 +36,58 @@ namespace Z0
         /// </summary>
         [MethodImpl(Inline)]
         public static int movemask(in Vec128<sbyte> src)
-            => MoveMask(src);
+            => MoveMask(src.xmm);
 
         /// <summary>
-        /// Constructs an integer from the most significant bit of each source vector component
         /// int _mm_movemask_ps (__m128 a) MOVMSKPS reg, xmm<
+        /// Constructs an integer from the most significant bit of each source vector component
         /// </summary>
         [MethodImpl(Inline)]
         public static int movemask(in Vec128<float> src)
-            => MoveMask(src);
+            => MoveMask(src.xmm);
 
         /// <summary>
-        /// Constructs an integer from the most significant bit of each source vector component
         /// int _mm_movemask_pd (__m128d a) MOVMSKPD reg, xmm
+        /// Constructs an integer from the most significant bit of each source vector component
         /// </summary>
         [MethodImpl(Inline)]
         public static int movemask(in Vec128<double> src)
-            => MoveMask(src);
+            => MoveMask(src.xmm);
 
         /// <summary>
-        /// Constructs an integer from the most significant bit of each source vector component
         /// int _mm256_movemask_epi8 (__m256i a) VPMOVMSKB reg, ymm
+        /// Constructs an integer from the most significant bit of each source vector component
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
         public static int movemask(in Vec256<sbyte> src)
-            => MoveMask(src);
+            => MoveMask(src.ymm);
                 
         /// <summary>
-        /// Constructs an integer from the most significant bit of each source vector component
         /// int _mm256_movemask_epi8 (__m256i a) VPMOVMSKB reg, ymm
+        /// Constructs an integer from the most significant bit of each source vector component
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
         public static int movemask(in Vec256<byte> src)
-            => MoveMask(src);
+            => MoveMask(src.ymm);
                  
         /// <summary>
-        /// Constructs an integer from the most significant bit of each source vector component
         /// int _mm256_movemask_ps (__m256 a) VMOVMSKPS reg, ymm
+        /// Constructs an integer from the most significant bit of each source vector component
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
         public static int movemask(in Vec256<float> src)
-            => MoveMask(src);
+            => MoveMask(src.ymm);
 
         /// <summary>
-        /// Constructs an integer from the most significant bit of each source vector component
         /// int _mm256_movemask_pd (__m256d a) VMOVMSKPD reg, ymm
+        /// Constructs an integer from the most significant bit of each source vector component
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
         public static int movemask(in Vec256<double> src)
-            => MoveMask(src);
-
-
+            => MoveMask(src.ymm);
     }
-
 }

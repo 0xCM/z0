@@ -40,7 +40,7 @@ namespace Z0
             else if(typematch<T,ulong>())
                 return generic<T>(dinx.extract(in uint64(in src), index));
             else if(typeof(T) == typeof(float))
-                return generic<T>(dinx.extract(in float32(in src), index));
+                return generic<T>(dfp.extract(in float32(in src), index));
             else if(typeof(T) == typeof(double))
                 return generic<T>(float64(src[index]));
             else 
@@ -73,9 +73,9 @@ namespace Z0
             else if(typematch<T,ulong>())
                 return generic<T>(dinx.extract128(in uint64(in src), index));
             else if(typeof(T) == typeof(float))
-                return generic<T>(dinx.extract128(in float32(in src), index));
+                return generic<T>(dfp.extract128(in float32(in src), index));
             else if(typeof(T) == typeof(double))
-                return generic<T>(dinx.extract128(in float64(in src), index));
+                return generic<T>(dfp.extract128(in float64(in src), index));
             else 
                 throw unsupported<T>();
         }

@@ -21,7 +21,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
         public static Vec128<float> sqrt(in Vec128<float> src)
-            => Sqrt(src);
+            => Sqrt(src.xmm);
 
         /// <summary>
         /// __m128d _mm_sqrt_pd (__m128d a) SQRTPD xmm, xmm/m128
@@ -29,7 +29,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
         public static Vec128<double> sqrt(in Vec128<double> src)
-            => Sqrt(src);
+            => Sqrt(src.xmm);
  
         /// <summary>
         /// __m256 _mm256_sqrt_ps (__m256 a) VSQRTPS ymm, ymm/m256
@@ -37,7 +37,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
         public static Vec256<float> sqrt(in Vec256<float> src)
-            => Sqrt(src);
+            => Sqrt(src.ymm);
 
         /// <summary>
         /// __m256d _mm256_sqrt_pd (__m256d a) VSQRTPD ymm, ymm/m256
@@ -45,47 +45,14 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
         public static Vec256<double> sqrt(in Vec256<double> src)
-            => Sqrt(src);
+            => Sqrt(src.ymm);
  
         /// <summary>
         /// __m128 _mm_rsqrt_ps (__m128 a) RSQRTPS xmm, xmm/m128
         /// </summary>
         /// <param name="src"></param>
         [MethodImpl(Inline)]
-        public static Vec128<float> rsqrt(Vec128<float> src)
-            => ReciprocalSqrt(src);    
-     
-        /// <summary>
-        /// __m128 _mm_rsqrt_ss (__m128 a) RSQRTSS xmm, xmm/m32
-        /// </summary>
-        /// <param name="src"></param>
-        [MethodImpl(Inline)]
-        public static ref Scalar128<float> rsqrt(ref Scalar128<float> src)
-        {
-            src = ReciprocalSqrtScalar(src);
-            return ref src;
-        }
-
-        public static Span256<double> sqrt(Span256<double> src, Span256<double> dst)
-        {
-            for(var block = 0; block <src.BlockCount; block ++)                
-            {
-                var x =  Vec256.Load(ref src.Block(block));
-                vstore(dfp.sqrt(x), ref dst[block]);                
-            }
-            return dst;
-        }
-
-        public static Span256<float> sqrt(Span256<float> src, Span256<float> dst)
-        {
-            for(var block = 0; block <src.BlockCount; block ++)                
-            {
-                var x =  Vec256.Load(ref src.Block(block));
-                vstore(dfp.sqrt(x), ref dst[block]);                
-            }
-            return dst;
-        }
-
+        public static Vec128<float> rsqrt(in Vec128<float> src)
+            => ReciprocalSqrt(src.xmm);         
     }
-
 }

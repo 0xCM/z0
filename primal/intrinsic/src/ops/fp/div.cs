@@ -16,53 +16,42 @@ namespace Z0
     partial class dfp
     {
 
+        /// <summary>
+        /// __m128 _mm_div_ps (__m128 a, __m128 b)DIVPS xmm, xmm/m128
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
         [MethodImpl(Inline)]
-        public static Vec128<float> vdiv(in Vec128<float> lhs, in Vec128<float> rhs)
-            => Divide(lhs, rhs);
+        public static Vec128<float> vdiv(in Vec128<float> x, in Vec128<float> y)
+            => Divide(x.xmm, y.xmm);
 
+        /// <summary>
+        ///  __m128d _mm_div_pd (__m128d a, __m128d b)DIVPD xmm, xmm/m128
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
         [MethodImpl(Inline)]
-        public static Vec128<double> vdiv(in Vec128<double> lhs, in Vec128<double> rhs)
-            => Divide(lhs, rhs);
+        public static Vec128<double> vdiv(in Vec128<double> x, in Vec128<double> y)
+            => Divide(x.xmm, y.xmm);
 
-
+        /// <summary>
+        /// __m256 _mm256_div_ps (__m256 a, __m256 b)VDIVPS ymm, ymm, ymm/m256
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <returns></returns>
         [MethodImpl(Inline)]
-        public static Vec256<float> vdiv(in Vec256<float> lhs, in Vec256<float> rhs)
-            => Divide(lhs, rhs);
+        public static Vec256<float> vdiv(in Vec256<float> x, in Vec256<float> y)
+            => Divide(x.ymm, y.ymm);
 
+        /// <summary>
+        /// __m256d _mm256_div_pd (__m256d a, __m256d b)VDIVPD ymm, ymm, ymm/m256
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
         [MethodImpl(Inline)]
-        public static Vec256<double> vdiv(in Vec256<double> lhs, in Vec256<double> rhs)
-            => Divide(lhs, rhs);
+        public static Vec256<double> vdiv(in Vec256<double> x, in Vec256<double> y)
+            => Divide(x.ymm, y.ymm);
 
-        public static Span128<float> div(ReadOnlySpan128<float> lhs, ReadOnlySpan128<float> rhs, Span128<float> dst)
-        {
-            var blocks = dst.BlockCount;
-            for(var block = 0; block < blocks; block++)
-                vstore(dfp.vdiv(lhs.LoadVec128(block), rhs.LoadVec128(block)), ref dst[block]);            
-            return dst;            
-        }
-
-        public static Span128<double> div(ReadOnlySpan128<double> lhs, ReadOnlySpan128<double> rhs, Span128<double> dst)
-        {
-            var blocks = dst.BlockCount;
-            for(var block = 0; block < blocks; block++)
-                vstore(dfp.vdiv(lhs.LoadVec128(block), rhs.LoadVec128(block)), ref dst[block]);            
-            return dst;            
-        }
-
-        public static Span256<float> div(ReadOnlySpan256<float> lhs, ReadOnlySpan256<float> rhs, Span256<float> dst)
-        {
-            var blocks = dst.BlockCount;
-            for(var block = 0; block < blocks; block++)
-                vstore(dfp.vdiv(lhs.LoadVec256(block), rhs.LoadVec256(block)), ref dst[block]);            
-            return dst;            
-        }
-
-        public static Span256<double> div(ReadOnlySpan256<double> lhs, ReadOnlySpan256<double> rhs, Span256<double> dst)
-        {
-            var blocks = dst.BlockCount;
-            for(var block = 0; block < blocks; block++)
-                vstore(dfp.vdiv(lhs.LoadVec256(block), rhs.LoadVec256(block)), ref dst[block]);            
-            return dst;            
-        }     
     }
 }

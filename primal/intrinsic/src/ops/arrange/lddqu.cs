@@ -20,121 +20,11 @@ namespace Z0
 
     partial class dinx
     {
-        ///<intrinsic>__m128i _mm_lddqu_si128 (__m128i const* mem_addr) LDDQU xmm, m128</intrinsic>
-        [MethodImpl(Inline)]
-        public static unsafe ref Vec128<sbyte> lddqu(in sbyte src, out Vec128<sbyte> dst)
-        {
-            dst = LoadDquVector128(constptr(in src));
-            return ref dst;
-        }
-
-        [MethodImpl(Inline)]
-        public static unsafe ref Vec128<byte> lddqu(in byte src, out Vec128<byte> dst)
-        {
-            dst = LoadDquVector128(constptr(in src));
-            return ref dst;
-        }
-
-        [MethodImpl(Inline)]
-        public static unsafe ref Vec128<short> lddqu(in short src, out Vec128<short> dst)
-        {
-            dst = LoadDquVector128(constptr(in src));
-            return ref dst;
-        }
-
-        [MethodImpl(Inline)]
-        public static unsafe ref Vec128<ushort> lddqu(in ushort src, out Vec128<ushort> dst)
-        {
-            dst = LoadDquVector128(constptr(in src));
-            return ref dst;
-        }
-
-        [MethodImpl(Inline)]
-        public static unsafe ref Vec128<int> lddqu(in int src, out Vec128<int> dst)
-        {
-            dst = LoadDquVector128(constptr(in src));
-            return ref dst;
-        }
-
-        [MethodImpl(Inline)]
-        public static unsafe ref Vec128<uint> lddqu(in uint src, out Vec128<uint> dst)
-        {
-            dst = LoadDquVector128(constptr(in src));
-            return ref dst;
-        }
-
-        [MethodImpl(Inline)]
-        public static unsafe ref Vec128<long> lddqu(in long src, out Vec128<long> dst)
-        {
-            dst = LoadDquVector128(constptr(in src));
-            return ref dst;
-        }
-
-        [MethodImpl(Inline)]
-        public static unsafe ref Vec128<ulong> lddqu(in ulong src, out Vec128<ulong> dst)
-        {
-            dst = LoadDquVector128(constptr(in src));
-            return ref dst;
-        }
-
-        [MethodImpl(Inline)]
-        public static unsafe ref Vec256<sbyte> lddqu(in sbyte src, out Vec256<sbyte> dst)
-        {
-            dst = LoadDquVector256(constptr(in src));
-            return ref dst;
-        }
-
-        [MethodImpl(Inline)]
-        public static unsafe ref Vec256<byte> lddqu(in byte src, out Vec256<byte> dst)
-        {
-            dst = LoadDquVector256(constptr(in src));
-            return ref dst;
-        }
-
-        [MethodImpl(Inline)]
-        public static unsafe ref Vec256<short> lddqu(in short src, out Vec256<short> dst)
-        {
-            dst = LoadDquVector256(constptr(in src));
-            return ref dst;
-        }
-
-        [MethodImpl(Inline)]
-        public static unsafe ref Vec256<ushort> lddqu(in ushort src, out Vec256<ushort> dst)
-        {
-            dst = LoadDquVector256(constptr(in src));
-            return ref dst;
-        }
-
-        [MethodImpl(Inline)]
-        public static unsafe ref Vec256<int> lddqu(in int src, out Vec256<int> dst)
-        {
-            dst = LoadDquVector256(constptr(in src));
-            return ref dst;
-        }
-
-        [MethodImpl(Inline)]
-        public static unsafe ref Vec256<uint> lddqu(in uint src, out Vec256<uint> dst)
-        {
-            dst = LoadDquVector256(constptr(in src));
-            return ref dst;
-        }
-
-        [MethodImpl(Inline)]
-        public static unsafe ref Vec256<long> lddqu(in long src, out Vec256<long> dst)
-        {
-            dst = LoadDquVector256(constptr(in src));
-            return ref dst;
-        }
-
-
-        [MethodImpl(Inline)]
-        public static unsafe ref Vec256<ulong> lddqu(in ulong src, out Vec256<ulong> dst)
-        {
-            dst = LoadDquVector256(constptr(in src));
-            return ref dst;
-        }
-
-
+        /// <summary>
+        /// _m128i _mm_lddqu_si128 (__m128i const* mem_addr)LDDQU xmm, m128
+        /// </summary>
+        /// <param name="src"></param>
+        /// <returns></returns>
         [MethodImpl(Inline)]
         public static unsafe Vec128<byte> lddqu128(in byte src)
             => LoadDquVector128(constptr(in src));
@@ -195,6 +85,10 @@ namespace Z0
         public static unsafe Vec256<long> lddqu256(in long src)
             => LoadDquVector256(constptr(in src));
 
+        /// <summary>
+        /// __m256i _mm256_lddqu_si256 (__m256i const * mem_addr)VLDDQU ymm, m256
+        /// </summary>
+        /// <param name="src"></param>
         [MethodImpl(Inline)]
         public static unsafe Vec256<ulong> lddqu256(in ulong src)
             => LoadDquVector256(constptr(in src));
@@ -265,38 +159,38 @@ namespace Z0
             => LoadAlignedVector256(constptr(in src));
 
         [MethodImpl(Inline)]
-        public static void load256(in byte ymem0, out Vector256<byte> ymm0)
+        public static void load256(in byte ymem0, out Vec256<byte> ymm0)
         {
             ymm0 = dinx.load256(ymem0);
         }
 
 
         [MethodImpl(Inline)]
-        public static void load256(in int ymem0, out Vector256<int> ymm0)
+        public static void load256(in int ymem0, out Vec256<int> ymm0)
         {
             ymm0 = dinx.load256(ymem0);
         }
 
         [MethodImpl(Inline)]
-        public static void load256(in byte ymem0, in byte ymem1, out Vector256<byte> ymm0, out Vector256<byte> ymm1)
+        public static void load256(in byte src1, in byte src2, out Vec256<byte> dst1, out Vec256<byte> dst2)
         {
-            load256(ymem0, out ymm0);
-            load256(ymem1, out ymm1);
+            load256(src1, out dst1);
+            load256(src2, out dst2);
         }
 
         [MethodImpl(Inline)]
-        public static void load256(in byte ymem0, in byte ymem1, in byte ymem2, in byte ymem3, 
-            out Vector256<byte> ymm0, out Vector256<byte> ymm1, out Vector256<byte> ymm2, out Vector256<byte> ymm3)
+        public static void load256(in byte src1, in byte src2, in byte src3, in byte src4, 
+            out Vec256<byte> dst1, out Vec256<byte> dst2, out Vec256<byte> dst3, out Vec256<byte> dst4)
         {
-            load256(in ymem0, in ymem1, out ymm0, out ymm1);
-            load256(in ymem2, in ymem3, out ymm2, out ymm3);
+            load256(in src1, in src2, out dst1, out dst2);
+            load256(in src3, in src4, out dst3, out dst4);
         }
 
         [MethodImpl(Inline)]
-        public static void load256(in int ymem0, in int ymem1, out Vector256<int> ymm0, out Vector256<int> ymm1)
+        public static void load256(in int src1, in int src2, out Vec256<int> dst1, out Vec256<int> dst2)
         {
-            ymm0 = dinx.load256(ymem0);
-            ymm1 = dinx.load256(ymem1);
+            dst1 = dinx.load256(src1);
+            dst2 = dinx.load256(src2);
         }
 
     }

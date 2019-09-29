@@ -106,15 +106,6 @@ namespace Z0
             where T : unmanaged        
                 => ref Unsafe.As<Vector128<T>,Vector128<ulong>>(ref asRef(in src));
 
-        // [MethodImpl(Inline)]
-        // public static ref Scalar128<float> float32<T>(in Scalar128<T> src)
-        //     where T : unmanaged        
-        //         => ref Unsafe.As<Scalar128<T>,Scalar128<float>>(ref asRef(in src));
-
-        // [MethodImpl(Inline)]
-        // public static ref Scalar128<double> float64<T>(in Scalar128<T> src)
-        //     where T : unmanaged        
-        //         => ref Unsafe.As<Scalar128<T>,Scalar128<double>>(ref asRef(in src));
 
         [MethodImpl(Inline)]
         public static ref Vector128<double> float64<T>(in Vector128<T> src)
@@ -428,6 +419,7 @@ namespace Z0
                 => ref Unsafe.As<Vector256<double>,Vector256<T>>(ref asRef(in src));
 
 
+
         [MethodImpl(Inline)]
         public static ref Scalar128<sbyte> primal<T>(ref Scalar128<T> src, out Scalar128<sbyte> dst)
             where T : unmanaged        
@@ -560,54 +552,54 @@ namespace Z0
                 => ref Unsafe.As<Scalar128<T>,Scalar128<double>>(ref asRef(in src));
 
         [MethodImpl(Inline)]
-        public static ref Scalar128<T> generic<T>(ref Scalar128<sbyte> src)
+        public static ref Scalar128<T> generic<T>(in Scalar128<sbyte> src)
             where T : unmanaged        
-            => ref Unsafe.As<Scalar128<sbyte>,Scalar128<T>>(ref src);
+                => ref Unsafe.As<Scalar128<sbyte>,Scalar128<T>>(ref asRef(in src));
 
         [MethodImpl(Inline)]
-        public static ref Scalar128<T> generic<T>(ref Scalar128<byte> src)
+        public static ref Scalar128<T> generic<T>(in Scalar128<byte> src)
             where T : unmanaged        
-            => ref Unsafe.As<Scalar128<byte>,Scalar128<T>>(ref src);
+                => ref Unsafe.As<Scalar128<byte>,Scalar128<T>>(ref asRef(in src));
 
         [MethodImpl(Inline)]
-        public static ref Scalar128<T> generic<T>(ref Scalar128<short> src)
+        public static ref Scalar128<T> generic<T>(in Scalar128<short> src)
             where T : unmanaged        
-            => ref Unsafe.As<Scalar128<short>,Scalar128<T>>(ref src);
+                => ref Unsafe.As<Scalar128<short>,Scalar128<T>>(ref asRef(in src));
 
         [MethodImpl(Inline)]
-        public static ref Scalar128<T> generic<T>(ref Scalar128<ushort> src)
+        public static ref Scalar128<T> generic<T>(in Scalar128<ushort> src)
             where T : unmanaged        
-                => ref Unsafe.As<Scalar128<ushort>,Scalar128<T>>(ref src);
+                => ref Unsafe.As<Scalar128<ushort>,Scalar128<T>>(ref asRef(in src));
 
         [MethodImpl(Inline)]
-        public static ref Scalar128<T> generic<T>(ref Scalar128<int> src)
+        public static ref Scalar128<T> generic<T>(in Scalar128<int> src)
             where T : unmanaged        
-            => ref Unsafe.As<Scalar128<int>,Scalar128<T>>(ref src);
+                => ref Unsafe.As<Scalar128<int>,Scalar128<T>>(ref asRef(in src));
 
         [MethodImpl(Inline)]
-        public static ref Scalar128<T> generic<T>(ref Scalar128<uint> src)
+        public static ref Scalar128<T> generic<T>(in Scalar128<uint> src)
             where T : unmanaged        
-            => ref Unsafe.As<Scalar128<uint>,Scalar128<T>>(ref src);
+                => ref Unsafe.As<Scalar128<uint>,Scalar128<T>>(ref asRef(in src));
 
         [MethodImpl(Inline)]
-        public static ref Scalar128<T> generic<T>(ref Scalar128<long> src)
+        public static ref Scalar128<T> generic<T>(in Scalar128<long> src)
             where T : unmanaged        
-            => ref Unsafe.As<Scalar128<long>,Scalar128<T>>(ref src);
+                => ref Unsafe.As<Scalar128<long>,Scalar128<T>>(ref asRef(in src));
 
         [MethodImpl(Inline)]
-        public static ref Scalar128<T> generic<T>(ref Scalar128<ulong> src)
+        public static ref Scalar128<T> generic<T>(in Scalar128<ulong> src)
             where T : unmanaged        
-            => ref Unsafe.As<Scalar128<ulong>,Scalar128<T>>(ref src);
+                => ref Unsafe.As<Scalar128<ulong>,Scalar128<T>>(ref asRef(in src));
 
         [MethodImpl(Inline)]
-        public static ref Scalar128<T> generic<T>(ref Scalar128<float> src)
+        public static ref Scalar128<T> generic<T>(in Scalar128<float> src)
             where T : unmanaged        
-            => ref Unsafe.As<Scalar128<float>,Scalar128<T>>(ref src);
+                => ref Unsafe.As<Scalar128<float>,Scalar128<T>>(ref asRef(in src));
 
         [MethodImpl(Inline)]
-        public static ref Scalar128<T> generic<T>(ref Scalar128<double> src)
+        public static ref Scalar128<T> generic<T>(in Scalar128<double> src)
             where T : unmanaged        
-            => ref Unsafe.As<Scalar128<double>,Scalar128<T>>(ref src);
+                => ref Unsafe.As<Scalar128<double>,Scalar128<T>>(ref asRef(in src));
     }
 
 }

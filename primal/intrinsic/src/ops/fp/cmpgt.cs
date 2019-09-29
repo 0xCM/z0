@@ -18,42 +18,41 @@ namespace Z0
 
     partial class dfp
     {
-
         /// <summary>
         /// __m128 _mm_cmpgt_ps (__m128 a, __m128 b) CMPPS xmm, xmm/m128, imm8(6)
         /// </summary>
-        /// <param name="lhs">The left vector</param>
-        /// <param name="rhs">The right vector</param>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vec128<float> cmpgt(in Vec128<float> lhs, in Vec128<float> rhs)
-            => CompareGreaterThan(lhs,rhs);
+        public static Vec128<float> cmpgt(in Vec128<float> x, in Vec128<float> y)
+            => CompareGreaterThan(x.xmm, y.xmm);
         
         /// <summary>
         /// __m128d _mm_cmpgt_pd (__m128d a, __m128d b) CMPPD xmm, xmm/m128, imm8(6)
         /// </summary>
-        /// <param name="lhs">The left vector</param>
-        /// <param name="rhs">The right vector</param>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vec128<double> cmpgt(in Vec128<double> lhs, in Vec128<double> rhs)
-            => CompareGreaterThan(lhs,rhs);
+        public static Vec128<double> cmpgt(in Vec128<double> x, in Vec128<double> y)
+            => CompareGreaterThan(x.xmm, y.xmm);
 
         /// <summary>
         /// __m256 _mm256_cmp_ps (__m256 a, __m256 b, const int imm8) VCMPPS ymm, ymm, ymm/m256, imm8
         /// </summary>
-        /// <param name="lhs">The left vector</param>
-        /// <param name="rhs">The right vector</param>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<float> cmpgt(in Vec256<float> lhs, in Vec256<float> rhs)
-            => Compare(lhs,rhs,FloatComparisonMode.OrderedGreaterThanNonSignaling);
+        public static Vec256<float> cmpgt(in Vec256<float> x, in Vec256<float> y)
+            => Compare(x.ymm, y.ymm, FloatComparisonMode.OrderedGreaterThanNonSignaling);
 
         /// <summary>
         /// __m256d _mm256_cmp_pd (__m256d a, __m256d b, const int imm8) VCMPPD ymm, ymm,ymm/m256, imm8
         /// </summary>
-        /// <param name="lhs">The left vector</param>
-        /// <param name="rhs">The right vector</param>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<double> cmpgt(in Vec256<double> lhs, in Vec256<double> rhs)
-            => Compare(lhs,rhs,FloatComparisonMode.OrderedGreaterThanNonSignaling);
+        public static Vec256<double> cmpgt(in Vec256<double> x, in Vec256<double> y)
+            => Compare(x.ymm, y.ymm, FloatComparisonMode.OrderedGreaterThanNonSignaling);
  
     }
 

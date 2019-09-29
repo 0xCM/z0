@@ -9,22 +9,22 @@ namespace Z0
     using System.Runtime.Intrinsics;
     using System.Runtime.Intrinsics.X86;
 
+    using static System.Runtime.Intrinsics.X86.Sse;
+    using static System.Runtime.Intrinsics.X86.Sse41;
     using static System.Runtime.Intrinsics.X86.Avx;    
     using static System.Runtime.Intrinsics.X86.Avx2;    
-    using static System.Runtime.Intrinsics.X86.Sse41;
      
     using static As;
     using static zfunc;
 
     partial class dinx
-    {
+    {        
         
         /// <summary>
         /// __m128i _mm_cvtepi8_epi16 (__m128i a) PMOVSXBW xmm, xmm/m64
         /// </summary>
         /// <param name="src"></param>
         /// <param name="dst"></param>
-        /// <returns></returns>
         [MethodImpl(Inline)]
         public static ref Vec128<short> convert(in Vec128<sbyte> src, out Vec128<short> dst)
         {
@@ -176,7 +176,6 @@ namespace Z0
             dst = ConvertToVector256Int16(src);
             return ref dst;
         }
-
 
         /// <summary>
         /// __m256i _mm256_cvtepi8_epi32 (__m128i a) VPMOVSXBD ymm, xmm/m128

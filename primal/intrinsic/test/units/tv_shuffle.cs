@@ -26,19 +26,19 @@ namespace Z0.Test
         public void shuffle_lo_128x16u()
         {
             var id = Vec128.FromParts(0,1,2,3,6,7,8,9);
-            Claim.eq(Arrange.shufflelo(id, Perm4.ADCB), Vec128.FromParts(0,3,2,1,6,7,8,9));
+            Claim.eq(dinx.shufflelo(id, Perm4.ADCB), Vec128.FromParts(0,3,2,1,6,7,8,9));
         }
 
         public void shuffle_hi_128x16u()
         {
             var id = Vec128.FromParts(0,1,2,3,6,7,8,9);
-            Claim.eq(Arrange.shufflehi(id, Perm4.ADCB), Vec128.FromParts(0,1,2,3,6,9,8,7));
+            Claim.eq(dinx.shufflehi(id, Perm4.ADCB), Vec128.FromParts(0,1,2,3,6,9,8,7));
         }
 
         public void shuffle_128x16u()
         {
             var id = Vec128.FromParts(0,1,2,3,6,7,8,9);
-            Claim.eq(Arrange.shuffle(id,Perm4.ADCB, Perm4.ADCB), Vec128.FromParts(0,3,2,1,6,9,8,7));
+            Claim.eq(dinx.shuffle(id,Perm4.ADCB, Perm4.ADCB), Vec128.FromParts(0,3,2,1,6,9,8,7));
         }
 
         public void permute128i32()

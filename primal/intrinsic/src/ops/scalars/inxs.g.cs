@@ -19,6 +19,18 @@ namespace Z0
     public static class ginxs
     {
         [MethodImpl(Inline)]
+        public static Scalar128<T> load<T>(in T src)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(float))
+                return As.generic<T>(inxs.load(float32(in src)));
+            else if(typeof(T) == typeof(double))
+                return As.generic<T>(inxs.load(float64(in src)));
+            else
+                throw unsupported<T>();
+        }
+
+        [MethodImpl(Inline)]
         public static Vector128<T> add<T>(in Scalar128<T> lhs, in Scalar128<T> rhs)
             where T : unmanaged
         {
@@ -91,13 +103,13 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static Scalar128<T> fmadd<T>(ref Scalar128<T> x, in Scalar128<T> y, in Scalar128<T> z)
+        public static Scalar128<T> fmadd<T>(in Scalar128<T> x, in Scalar128<T> y, in Scalar128<T> z)
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return dfp.fmadd(in float32(in x), float32(in y), in float32(in z)).As<T>();                
+                return inxs.fmadd(in float32(in x), float32(in y), in float32(in z)).As<T>();                
             else if(typeof(T) == typeof(double))
-                return dfp.fmadd(in float64(in x), float64(in y), in float64(in z)).As<T>();
+                return inxs.fmadd(in float64(in x), float64(in y), in float64(in z)).As<T>();
             else                
                 throw unsupported<T>();
         }
@@ -119,9 +131,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return inxs.cmpneq(in float32(in lhs), in float32(in rhs));
+                return inxs.neq(in float32(in lhs), in float32(in rhs));
             else if(typeof(T) == typeof(double))
-                return inxs.cmpneq(in float64(in lhs), in float64(in rhs));
+                return inxs.neq(in float64(in lhs), in float64(in rhs));
             else 
                 throw unsupported<T>();
         }
@@ -182,9 +194,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return dfp.gteq(in float32(in lhs), in float32(in rhs));
+                return inxs.gteq(in float32(in lhs), in float32(in rhs));
             else if(typeof(T) == typeof(double))
-                return dfp.gteq(in float64(in lhs), in float64(in rhs));
+                return inxs.gteq(in float64(in lhs), in float64(in rhs));
             else
                 throw unsupported<T>();
         }

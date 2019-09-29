@@ -67,7 +67,7 @@ namespace Z0
             ushort IGpReg32<EDX>.Lo16 
             { 
                 [MethodImpl(Inline)]
-                get => dx; 
+                get => !dx; 
  
                 [MethodImpl(Inline)]
                 set => dx = value;

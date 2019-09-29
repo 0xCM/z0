@@ -17,56 +17,6 @@ namespace Z0
     partial class ginx
     {        
         [MethodImpl(Inline)]
-        public static ref Vec128<T> lddqu<T>(in T src, ref Vec128<T> dst)
-            where T : unmanaged
-        {
-            if(typematch<T,sbyte>())
-                dinx.lddqu(in int8(in src), out int8(in dst));
-            else if(typematch<T,byte>())
-                dinx.lddqu(in uint8(in src), out uint8(in dst));
-            else if(typematch<T,short>())
-                dinx.lddqu(in int16(in src), out int16(in dst));
-            else if(typematch<T,ushort>())
-                dinx.lddqu(in uint16(in src), out uint16(in dst));
-            else if(typematch<T,int>())
-                dinx.lddqu(in int32(in src), out int32(in dst));
-            else if(typematch<T,uint>())
-                dinx.lddqu(in uint32(in src), out uint32(in dst));
-            else if(typematch<T,long>())
-                dinx.lddqu(in int64(in src), out int64(in dst));
-            else if(typematch<T,ulong>())
-                dinx.lddqu(in uint64(in src), out uint64(in dst));
-            else
-                throw unsupported<T>();
-            return ref dst;
-        }
-
-        [MethodImpl(Inline)]
-        public static ref Vec256<T> lddqu<T>(in T src, ref Vec256<T> dst)
-            where T : unmanaged
-        {
-            if(typematch<T,sbyte>())
-                dinx.lddqu(in int8(in src), out int8(in dst));
-            else if(typematch<T,byte>())
-                dinx.lddqu(in uint8(in src), out uint8(in dst));
-            else if(typematch<T,short>())
-                dinx.lddqu(in int16(in src), out int16(in dst));
-            else if(typematch<T,ushort>())
-                dinx.lddqu(in uint16(in src), out uint16(in dst));
-            else if(typematch<T,int>())
-                dinx.lddqu(in int32(in src), out int32(in dst));
-            else if(typematch<T,uint>())
-                dinx.lddqu(in uint32(in src), out uint32(in dst));
-            else if(typematch<T,long>())
-                dinx.lddqu(in int64(in src), out int64(in dst));
-            else if(typematch<T,ulong>())
-                dinx.lddqu(in uint64(in src), out uint64(in dst));
-            else
-                throw unsupported<T>();
-            return ref dst;
-        }
-
-        [MethodImpl(Inline)]
         static unsafe Vec256<T> lddqu256u<T>(in T src)
             where T : unmanaged
         {

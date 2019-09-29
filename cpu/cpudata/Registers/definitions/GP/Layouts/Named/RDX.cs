@@ -14,6 +14,12 @@ namespace Z0
     
     partial class Registers
     {
+        /// <summary>
+        /// If applicable, receives the third integral/pointer parameter 
+        /// to a called function, preceded respectively by rdi and rsi for 
+        /// the first two parametes and followed respecively by rcx, r8 and r9 
+        /// for three additional parameters
+        /// </summary>
         [StructLayout(LayoutKind.Explicit)]
         public struct RDX : IGpReg64<RDX>
         {
@@ -34,10 +40,13 @@ namespace Z0
 
             public const GpRegId Id = GpRegId.rdx;
 
-
+            /// <summary>
+            /// Dereferences rdx to produce its content [rdx]
+            /// </summary>
+            /// <param name="r">The source register</param>
             [MethodImpl(Inline)]
-            public static implicit operator ulong(RDX src)
-                => src.rdx;
+            public static ulong operator !(RDX r)
+                => r.rdx;
 
             [MethodImpl(Inline)]
             public static implicit operator RDX(ulong src)
@@ -62,7 +71,7 @@ namespace Z0
             ushort IGpReg64<RDX>.Lo16 
             { 
                 [MethodImpl(Inline)]
-                get => dx; 
+                get => !dx; 
  
                 [MethodImpl(Inline)]
                 set => dx = value;

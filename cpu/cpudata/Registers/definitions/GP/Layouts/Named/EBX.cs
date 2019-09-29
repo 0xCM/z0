@@ -34,8 +34,8 @@ namespace Z0
             public const GpRegId Id = GpRegId.ebx;
 
             [MethodImpl(Inline)]
-            public static implicit operator uint(EBX src)
-                => src.ebx;
+            public static uint operator !(EBX r)
+                => r.ebx;
 
             [MethodImpl(Inline)]
             public static implicit operator EBX(uint src)
@@ -51,7 +51,7 @@ namespace Z0
             byte IGpReg32<EBX>.Lo8 
             { 
                 [MethodImpl(Inline)]
-                get => bl; 
+                get => !bl; 
  
                 [MethodImpl(Inline)]
                 set => bl = value;
@@ -60,7 +60,7 @@ namespace Z0
             ushort IGpReg32<EBX>.Lo16 
             { 
                 [MethodImpl(Inline)]
-                get => bx; 
+                get => !bx; 
  
                 [MethodImpl(Inline)]
                 set => bx = value;

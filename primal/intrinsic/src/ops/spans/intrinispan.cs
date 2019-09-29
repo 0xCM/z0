@@ -52,6 +52,58 @@ namespace Z0
         } 
 
 
+        public static Span256<double> sqrt(Span256<double> src, Span256<double> dst)
+        {
+            for(var block = 0; block <src.BlockCount; block ++)                
+            {
+                var x =  Vec256.Load(ref src.Block(block));
+                vstore(dfp.sqrt(x), ref dst[block]);                
+            }
+            return dst;
+        }
+
+        public static Span256<float> sqrt(Span256<float> src, Span256<float> dst)
+        {
+            for(var block = 0; block <src.BlockCount; block ++)                
+            {
+                var x =  Vec256.Load(ref src.Block(block));
+                vstore(dfp.sqrt(x), ref dst[block]);                
+            }
+            return dst;
+        }
+
+        public static Span128<float> div(ReadOnlySpan128<float> lhs, ReadOnlySpan128<float> rhs, Span128<float> dst)
+        {
+            var blocks = dst.BlockCount;
+            for(var block = 0; block < blocks; block++)
+                vstore(dfp.vdiv(lhs.LoadVec128(block), rhs.LoadVec128(block)), ref dst[block]);            
+            return dst;            
+        }
+
+        public static Span128<double> div(ReadOnlySpan128<double> lhs, ReadOnlySpan128<double> rhs, Span128<double> dst)
+        {
+            var blocks = dst.BlockCount;
+            for(var block = 0; block < blocks; block++)
+                vstore(dfp.vdiv(lhs.LoadVec128(block), rhs.LoadVec128(block)), ref dst[block]);            
+            return dst;            
+        }
+
+        public static Span256<float> div(ReadOnlySpan256<float> lhs, ReadOnlySpan256<float> rhs, Span256<float> dst)
+        {
+            var blocks = dst.BlockCount;
+            for(var block = 0; block < blocks; block++)
+                vstore(dfp.vdiv(lhs.LoadVec256(block), rhs.LoadVec256(block)), ref dst[block]);            
+            return dst;            
+        }
+
+        public static Span256<double> div(ReadOnlySpan256<double> lhs, ReadOnlySpan256<double> rhs, Span256<double> dst)
+        {
+            var blocks = dst.BlockCount;
+            for(var block = 0; block < blocks; block++)
+                vstore(dfp.vdiv(lhs.LoadVec256(block), rhs.LoadVec256(block)), ref dst[block]);            
+            return dst;            
+        }     
+
     }
 
 

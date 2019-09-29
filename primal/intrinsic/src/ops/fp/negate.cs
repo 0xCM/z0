@@ -19,35 +19,34 @@ namespace Z0
         /// <summary>
         /// Negates each source vector component
         /// </summary>
-        /// <param name="src">The source vector</param>
+        /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
-        public static Vec128<float> vnegate(in Vec128<float> src)
-            =>  fsub(Vec128<float>.Zero, src);
+        public static Vec128<float> vnegate(in Vec128<float> x)
+            =>  vsub(Vec128<float>.Zero, x);
 
         /// <summary>
         /// Negates each source vector component
         /// </summary>
-        /// <param name="src">The source vector</param>
+        /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
-        public static Vec128<double> vnegate(in Vec128<double> src)
-            =>  fsub(Vec128<double>.Zero, src);
+        public static Vec128<double> vnegate(in Vec128<double> x)
+            =>  vsub(Vec128<double>.Zero, x);
 
         /// <summary>
         /// Negates each source vector component
         /// </summary>
-        /// <param name="src">The source vector</param>
+        /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<float> vnegate(in Vec256<float> src)
-            =>  fsub(Vec256<float>.Zero, src);
+        public static Vec256<float> vnegate(in Vec256<float> x)
+            =>  vsub(Vec256<float>.Zero, x);
 
         /// <summary>
         /// Negates each source vector component
         /// </summary>
-        /// <param name="src">The source vector</param>
+        /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<double> vnegate(in Vec256<double> src)
-            =>  fsub(Vec256<double>.Zero, src);
-
+        public static Vec256<double> vnegate(in Vec256<double> x)
+            =>  vsub(Vec256<double>.Zero, x);
     }
 
 }

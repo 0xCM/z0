@@ -34,10 +34,9 @@ namespace Z0
 
             public const GpRegId Id = GpRegId.eax;          
 
-
             [MethodImpl(Inline)]
-            public static implicit operator uint(EAX src)
-                => src.eax;
+            public static uint operator !(EAX r)
+                => r.eax;
 
             [MethodImpl(Inline)]
             public static implicit operator EAX(uint src)
@@ -62,7 +61,7 @@ namespace Z0
             byte IGpReg32<EAX>.Lo8 
             { 
                 [MethodImpl(Inline)]
-                get => al; 
+                get => !al; 
  
                 [MethodImpl(Inline)]
                 set => al = value;
@@ -72,7 +71,7 @@ namespace Z0
             ushort IGpReg32<EAX>.Lo16 
             { 
                 [MethodImpl(Inline)]
-                get => ax; 
+                get => !ax; 
  
                 [MethodImpl(Inline)]
                 set => ax = value;

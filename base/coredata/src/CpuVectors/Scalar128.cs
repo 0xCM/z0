@@ -15,7 +15,7 @@ namespace Z0
     public struct Scalar128<T>
         where T : unmanaged
     {        
-        public Vector128<T> data;            
+        public Vector128<T> mm;            
 
         [MethodImpl(Inline)]
         public static implicit operator Scalar128<T>(Vector128<T> src)
@@ -35,18 +35,18 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public Scalar128(Vector128<T> src)
-            => this.data = src;
+            => this.mm = src;
 
         public T value
         {
             [MethodImpl(Inline)]
-            get => data.GetElement(0);
+            get => mm.GetElement(0);
         }
 
 
         [MethodImpl(Inline)]
         public bool Equals(Scalar128<T> rhs)
-            => data.Equals(rhs.data);
+            => mm.Equals(rhs.mm);
 
         public override string ToString()
             => value.ToString();
@@ -54,6 +54,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public Vector128<U> As<U>() 
             where U : struct        
-                => Unsafe.As<Vector128<T>, Vector128<U>>(ref Unsafe.AsRef(in data));        
+                => Unsafe.As<Vector128<T>, Vector128<U>>(ref Unsafe.AsRef(in mm));        
     }     
 }
