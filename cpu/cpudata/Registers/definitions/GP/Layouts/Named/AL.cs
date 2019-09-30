@@ -7,8 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
-    
-    
+        
 
     using static zfunc;
     
@@ -18,17 +17,13 @@ namespace Z0
         public struct AL : IGpReg8<AL>
         {
             [FieldOffset(0)]
-            public byte al;
+            internal byte content;
 
             public const GpRegId Id = GpRegId.al;            
 
-            /// <summary>
-            /// Dereferences al to produce its content [al]
-            /// </summary>
-            /// <param name="r">The source register</param>
             [MethodImpl(Inline)]
             public static byte operator !(AL r)
-                => r.al;
+                => r.content;
 
             [MethodImpl(Inline)]
             public static implicit operator AL(byte src)
@@ -36,7 +31,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public AL(byte src)
-                =>al = src;
+                =>content = src;
 
             GpRegId IGpReg.Id 
                 => Id;

@@ -10,7 +10,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static zfunc;
-
+    
     public static class IMM
     {
 

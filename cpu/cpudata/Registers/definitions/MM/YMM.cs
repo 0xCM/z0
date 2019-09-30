@@ -107,46 +107,6 @@ namespace Z0
                 => Unsafe.As<Vector256<T>,YMM>(ref src);
 
         [MethodImpl(Inline)]
-        public static implicit operator YMM(Vector256<sbyte> src)
-            => From(src);
-
-        [MethodImpl(Inline)]
-        public static implicit operator YMM(Vector256<byte> src)
-            => From(src);
-
-        [MethodImpl(Inline)]
-        public static implicit operator YMM(Vector256<short> src)
-            => From(src);
-
-        [MethodImpl(Inline)]
-        public static implicit operator YMM(Vector256<ushort> src)
-            => From(src);
-
-        [MethodImpl(Inline)]
-        public static implicit operator YMM(Vector256<int> src)
-            => From(src);
-
-        [MethodImpl(Inline)]
-        public static implicit operator YMM(Vector256<uint> src)
-            => From(src);
-
-        [MethodImpl(Inline)]
-        public static implicit operator YMM(Vector256<long> src)
-            => From(src);
-
-        [MethodImpl(Inline)]
-        public static implicit operator YMM(Vector256<ulong> src)
-            => From(src);
-
-        [MethodImpl(Inline)]
-        public static implicit operator YMM(Vector256<float> src)
-            => From(src);
-
-        [MethodImpl(Inline)]
-        public static implicit operator YMM(Vector256<double> src)
-            => From(src);
-
-        [MethodImpl(Inline)]
         public static bool operator ==(in YMM lhs, in YMM rhs)
             => lhs.Equals(rhs);
 
@@ -155,12 +115,40 @@ namespace Z0
             =>!lhs.Equals(rhs);
 
         /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="index"></param>
+        /// <remarks>
+        /// XMM registers 6 - 15 are non-volatile
+        /// The high part of every YMM register is volatile
+        /// </remarks>
+        public Volatility Volatility(int index)
+        {
+            return index <= 5 ? Z0.Volatility.Volatile : Z0.Volatility.Mixed;
+        }
+
+        public Volatility Volatility(int index, int part)
+        {
+            if(part == 0)
+            {
+                if(index <= 5)
+                    return Z0.Volatility.Volatile;
+                else
+                    return Z0.Volatility.NonVolatile;
+            }
+            else if(part == 1)
+                return Z0.Volatility.Volatile;
+            else
+                return default;
+        }
+
+        /// <summary>
         /// Replaces the content of the target register with source vector content
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        public void Assign<T>(Vector256<T> src)
+        public void Assign<T>(Vec256<T> src)
             where T : unmanaged
         {
             bytes(src).CopyTo(this.AsSpan<byte>());

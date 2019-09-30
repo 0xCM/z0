@@ -18,13 +18,13 @@ namespace Z0
         public struct BL : IGpReg8<BL>
         {
             [FieldOffset(0)]
-            public byte bl;
+            byte content;
 
             public const GpRegId Id = GpRegId.bl;            
 
             [MethodImpl(Inline)]
             public static byte operator !(BL r)
-                => r.bl;
+                => r.content;
 
             [MethodImpl(Inline)]
             public static implicit operator BL(byte src)
@@ -32,7 +32,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public BL(byte src)
-                => bl = src;
+                => content = src;
                 
             GpRegId IGpReg.Id 
                 => Id;

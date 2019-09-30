@@ -14,17 +14,17 @@ namespace Z0
         
     partial class Registers
     {
-        [StructLayout(LayoutKind.Explicit)]
+        [StructLayout(LayoutKind.Explicit, Size = ByteCount)]
         public struct DX : IGpReg16<DX>
         {
             [FieldOffset(0)]
-            public ushort dx;
+            ushort content;
 
             [FieldOffset(0)]
-            public DL dl;
+            DL dl;
 
             [FieldOffset(1)]
-            public DH dh;
+            DH dh;
 
             public const int BitWidth = 16;        
 
@@ -36,7 +36,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public static ushort operator !(DX r)
-                => r.dx;
+                => r.content;
 
             [MethodImpl(Inline)]
             public static implicit operator DX(ushort src)
@@ -46,13 +46,13 @@ namespace Z0
             public DX(ushort src)
                 : this()
             {
-                this.dx = src;
+                this.content = src;
             }
  
             byte IGpReg16<DX>.Lo8 
             { 
                 [MethodImpl(Inline)]
-                get => dl; 
+                get => !dl; 
  
                 [MethodImpl(Inline)]
                 set => dl = value;

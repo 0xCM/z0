@@ -18,22 +18,22 @@ namespace Z0
         public struct ECX : IGpReg32<ECX>
         {
             [FieldOffset(0)]
-            public uint ecx;
+            uint content;
 
             [FieldOffset(0)]
-            public CX cx;
+            CX cx;
 
             [FieldOffset(0)]
-            public CL cl;
+            CL cl;
 
             [FieldOffset(1)]
-            public CH ch;
+            CH ch;
 
             public const GpRegId Id = GpRegId.ecx;          
 
             [MethodImpl(Inline)]
             public static implicit operator uint(ECX src)
-                => src.ecx;
+                => src.content;
 
             [MethodImpl(Inline)]
             public static implicit operator ECX(uint src)
@@ -43,22 +43,22 @@ namespace Z0
             public ECX(uint src)
                 : this()
             {
-                this.ecx = src;
+                this.content = src;
             }
 
             public uint Content 
             { 
                 [MethodImpl(Inline)]
-                get => ecx; 
+                get => content; 
 
                 [MethodImpl(Inline)]
-                set => ecx = value;
+                set => content = value;
             }
 
             byte IGpReg32<ECX>.Lo8 
             { 
                 [MethodImpl(Inline)]
-                get => cl; 
+                get => !cl; 
  
                 [MethodImpl(Inline)]
                 set => cl = value;
@@ -67,7 +67,7 @@ namespace Z0
             ushort IGpReg32<ECX>.Lo16 
             { 
                 [MethodImpl(Inline)]
-                get => cx; 
+                get => !cx; 
  
                 [MethodImpl(Inline)]
                 set => cx = value;

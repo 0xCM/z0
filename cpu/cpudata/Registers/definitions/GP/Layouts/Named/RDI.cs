@@ -49,6 +49,9 @@ namespace Z0
                 rdi = src;
             }
 
+            public GpRegId64 RegKind 
+                => GpRegId64.rdi;
+
             byte IGpReg64<RDI>.Lo8 
             { 
                 [MethodImpl(Inline)]

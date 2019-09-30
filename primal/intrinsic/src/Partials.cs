@@ -51,4 +51,13 @@ namespace Z0
         }
 
     }
+
+    /// <summary>
+    /// Opcodes for intrinsic operations
+    /// </summary>
+    public static partial class inxoc
+    {
+
+    }
+
 }

@@ -17,13 +17,13 @@ namespace Z0
         public struct DIL : IGpReg8<DIL>
         {
             [FieldOffset(0)]
-            public byte dil;
+            byte content;
 
             public const GpRegId Id = GpRegId.dil;            
 
             [MethodImpl(Inline)]
             public static byte operator !(DIL r)
-                => r.dil;
+                => r.content;
 
             [MethodImpl(Inline)]
             public static implicit operator DIL(byte src)
@@ -31,7 +31,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public DIL(byte src)
-                =>dil = src;
+                => content = src;
 
             GpRegId IGpReg.Id 
                 => Id;

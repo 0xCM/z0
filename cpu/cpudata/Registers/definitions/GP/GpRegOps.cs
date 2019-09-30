@@ -41,7 +41,7 @@ namespace Z0
         /// <param name="bank">The source bank</param>
         [MethodImpl(Inline)]
         public static ref byte Head(this ref GpRegBank bank)
-            => ref bank.al.al;
+            => ref bank.al.content;
 
         [MethodImpl(Inline)]
         public static ref byte Head<T>(this ref T src)

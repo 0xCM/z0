@@ -12,7 +12,7 @@ namespace Z0
 
     using static zfunc;    
 
-    public static partial class voc
+    partial class inxoc
     {
         [MethodImpl(Inline)]
         public static Vector128<sbyte> vadd_n128x8i(Vector128<sbyte> lhs, Vector128<sbyte> rhs)

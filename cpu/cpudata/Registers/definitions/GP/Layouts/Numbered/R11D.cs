@@ -18,19 +18,19 @@ namespace Z0
         public struct R11D : IGpReg32<R11>
         {
             [FieldOffset(0)]
-            public uint r11d;
+            uint content;
 
             [FieldOffset(0)]
-            public R11W r11w;
+            R11W r11w;
 
             [FieldOffset(0)]
-            public R11B r11b;
+            R11B r11b;
  
             public const GpRegId Id = GpRegId.r11;            
 
             [MethodImpl(Inline)]
             public static implicit operator uint(R11D src)
-                => src.r11d;
+                => src.content;
 
             [MethodImpl(Inline)]
             public static implicit operator R11D(uint src)
@@ -40,13 +40,13 @@ namespace Z0
             public R11D(uint src)
                 : this()
             {
-                r11d = src;
+                content = src;
             }
 
             byte IGpReg32<R11>.Lo8 
             { 
                 [MethodImpl(Inline)]
-                get => r11b; 
+                get => !r11b; 
  
                 [MethodImpl(Inline)]
                 set => r11b = value;

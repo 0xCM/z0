@@ -18,16 +18,16 @@ namespace Z0
         public struct SP : IGpReg16<SP>
         {
             [FieldOffset(0)]
-            public ushort sp;
+            ushort content;
 
             [FieldOffset(0)]
             public SPL spl;
-
+        
             public const GpRegId Id = GpRegId.bx;            
 
             [MethodImpl(Inline)]
             public static ushort operator !(SP r)
-                => r.sp;
+                => r.content;
 
             [MethodImpl(Inline)]
             public static implicit operator SP(ushort src)
@@ -37,7 +37,7 @@ namespace Z0
             public SP(ushort src)
                 : this()
             {
-                this.sp = src;
+                this.content = src;
             }
  
             byte IGpReg16<SP>.Lo8 

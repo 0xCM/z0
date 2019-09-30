@@ -16,16 +16,16 @@ namespace Z0
         public struct DI : IGpReg16<DI>
         {
             [FieldOffset(0)]
-            public ushort di;
+            ushort content;
 
             [FieldOffset(0)]
-            public DIL dil;
+            DIL dil;
 
             public const GpRegId Id = GpRegId.edi;          
 
             [MethodImpl(Inline)]
             public static ushort operator !(DI r)
-                => r.di;
+                => r.content;
 
             [MethodImpl(Inline)]
             public static implicit operator DI(ushort src)
@@ -35,16 +35,16 @@ namespace Z0
             public DI(ushort src)
                 : this()
             {
-                this.di = src;
+                this.content = src;
             }
 
             public ushort Content 
             { 
                 [MethodImpl(Inline)]
-                get => di; 
+                get => content; 
 
                 [MethodImpl(Inline)]
-                set => di = value;
+                set => content = value;
             }
 
             byte IGpReg16<DI>.Lo8 

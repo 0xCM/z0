@@ -14,27 +14,25 @@ namespace Z0
     
     partial class Registers
     {
-        [StructLayout(LayoutKind.Explicit)]
+        [StructLayout(LayoutKind.Explicit, Size = Size)]
         public struct AX : IGpReg16<AX>
         {
             [FieldOffset(0)]
-            public ushort ax;
+            ushort content;
 
             [FieldOffset(0)]
-            public AL al;
+            AL al;
 
             [FieldOffset(1)]
-            public AH ah;
+            AH ah;
+
+            public const int Size = 2;
 
             public const GpRegId Id = GpRegId.ax;            
 
-            /// <summary>
-            /// Dereferences al to produce its content [al]
-            /// </summary>
-            /// <param name="r">The source register</param>
             [MethodImpl(Inline)]
             public static ushort operator !(AX r)
-                => r.ax;
+                => r.content;
             
             [MethodImpl(Inline)]
             public static implicit operator AX(ushort src)
@@ -44,9 +42,8 @@ namespace Z0
             public AX(ushort src)
                 : this()
             {
-                this.ax = src;
+                this.content = src;
             }
-
 
             byte IGpReg16<AX>.Lo8 
             { 

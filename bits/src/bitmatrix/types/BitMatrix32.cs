@@ -375,7 +375,7 @@ namespace Z0
             {
                 var x1 = load(ref A[i]);
                 var x2 = load(ref B[i]);
-                dinx.and(x1,x2).StoreTo(ref dst[i]);
+                dinx.vand(x1,x2).StoreTo(ref dst[i]);
             }
             return dst;
         }

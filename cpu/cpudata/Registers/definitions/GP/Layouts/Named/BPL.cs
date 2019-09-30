@@ -16,32 +16,23 @@ namespace Z0
         public struct BPL : IGpReg8<BPL>
         {
             [FieldOffset(0)]
-            public byte bpl;
+            byte content;
 
             public const GpRegId Id = GpRegId.bpl;
 
-            /// <summary>
-            /// Dereferences bp to produce its content [bp]
-            /// </summary>
-            /// <param name="r">The source register</param>
             [MethodImpl(Inline)]
             public static byte operator !(BPL r)
-                => r.bpl;
-
-            [MethodImpl(Inline)]
-            public static implicit operator byte(BPL src)
-                => src.bpl;
+                => r.content;
 
             [MethodImpl(Inline)]
             public static implicit operator BPL(byte src)
                 => new BPL(src);
 
-
             [MethodImpl(Inline)]
             public BPL(byte src)
                 : this()
             {
-                bpl = src;
+                content = src;
             }
             
             GpRegId IGpReg.Id 

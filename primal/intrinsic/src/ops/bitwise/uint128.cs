@@ -17,12 +17,12 @@ namespace Z0
     {
         [MethodImpl(Inline)]
         public static UInt128 and(in UInt128 lhs, in UInt128 rhs)
-            => and(lhs.ToVec128(), rhs.ToVec128()).ToUInt128();
+            => vand(lhs.ToVec128(), rhs.ToVec128()).ToUInt128();
 
         [MethodImpl(Inline)]
         public static ref UInt128 and(in UInt128 lhs, in UInt128 rhs, out UInt128 dst)
         {
-            dst = and(lhs.ToVec128(), rhs.ToVec128()).ToUInt128();
+            dst = vand(lhs.ToVec128(), rhs.ToVec128()).ToUInt128();
             return ref dst;            
         }
 

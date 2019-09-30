@@ -444,7 +444,7 @@ namespace Z0
             {
                 lhs.LoadCpuVec(i, out Vec256<ulong> vLhs);
                 rhs.LoadCpuVec(i, out Vec256<ulong> vRhs);
-                gbits.vand<ulong>(vLhs,vRhs).StoreTo(ref lhs.data[i]);
+                dinx.vand(vLhs,vRhs).StoreTo(ref lhs.data[i]);
             }
             return ref lhs;
         }
@@ -479,7 +479,7 @@ namespace Z0
             {
                 lhs.LoadCpuVec(i, out Vec256<ulong> vLhs);
                 rhs.LoadCpuVec(i, out Vec256<ulong> vRhs);
-                gbits.vor(vLhs,vRhs).StoreTo(ref lhs.data[i]);
+                ginx.vor(vLhs,vRhs).StoreTo(ref lhs.data[i]);
             }
             return ref lhs;
         }

@@ -8,8 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
     
-    
-
     using static zfunc;
     
     partial class Registers
@@ -18,16 +16,16 @@ namespace Z0
         public struct SI : IGpReg16<SI>
         {
             [FieldOffset(0)]
-            public ushort si;
+            ushort content;
 
             [FieldOffset(0)]
-            public SIL sil;
+            SIL sil;
 
             public const GpRegId Id = GpRegId.si;            
 
             [MethodImpl(Inline)]
-            public static implicit operator ushort(SI src)
-                => src.si;
+            public static ushort operator !(SI r)
+                => r.content;
 
             [MethodImpl(Inline)]
             public static implicit operator SI(ushort src)
@@ -37,7 +35,7 @@ namespace Z0
             public SI(ushort src)
                 : this()
             {
-                this.si = src;
+                this.content = src;
             }
 
             byte IGpReg16<SI>.Lo8 

@@ -18,22 +18,22 @@ namespace Z0
         public struct R12 : IGpReg64<R12>
         { 
             [FieldOffset(0)]
-            public ulong r12;
+            ulong content;
 
             [FieldOffset(0)]
-            public R12D r12d;
+            R12D r12d;
 
             [FieldOffset(0)]
-            public R12W r12w;
+            R12W r12w;
 
             [FieldOffset(0)]
-            public R12B r12b;
+            R12B r12b;
 
             public const GpRegId Id = GpRegId.r12;            
 
             [MethodImpl(Inline)]
             public static implicit operator ulong(R12 src)
-                => src.r12;
+                => src.content;
 
             [MethodImpl(Inline)]
             public static implicit operator R12(ulong src)
@@ -43,13 +43,16 @@ namespace Z0
             public R12(ulong src)
                 : this()
             {
-                r12 = src;
+                content = src;
             }
+
+            public GpRegId64 RegKind 
+                => GpRegId64.r12;
 
             byte IGpReg64<R12>.Lo8 
             { 
                 [MethodImpl(Inline)]
-                get => r12b; 
+                get => !r12b; 
  
                 [MethodImpl(Inline)]
                 set => r12b = value;

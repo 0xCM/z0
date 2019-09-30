@@ -35,7 +35,7 @@ namespace Z0
         {
             ref var A = ref lhs.LoadCpuVec(out Vec256<ushort> _);
             ref var B = ref rhs.LoadCpuVec(out Vec256<ushort> _);
-            var C = dinx.or(A,B);
+            var C = dinx.vor(A,B);
             return BitMatrix16.From(in C);
         }
 

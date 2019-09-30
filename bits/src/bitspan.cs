@@ -19,7 +19,7 @@ namespace Z0
             where T : unmanaged
         {
             for(var i=0; i< blocks(lhs,rhs); i++)
-                vstore(gbits.vand<T>(lhs.LoadVec256(i), rhs.LoadVec256(i)), ref dst.Block(i));                             
+                vstore(ginx.vand<T>(lhs.LoadVec256(i), rhs.LoadVec256(i)), ref dst.Block(i));                             
             return dst;        
         } 
 

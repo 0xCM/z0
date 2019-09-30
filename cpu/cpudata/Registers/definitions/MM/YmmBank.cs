@@ -13,49 +13,14 @@ namespace Z0
     using static zfunc;
     using static As;
 
-    [StructLayout(LayoutKind.Explicit, Size = SegLen*SegCount)]
+    [StructLayout(LayoutKind.Explicit, Size = Size)]
     public unsafe struct YmmBank
     {
         public const int SegLen = 32;
 
         public const int SegCount = 16;
-
-        const int HiPart = 16;
-
-
-        /// <summary>
-        /// Loads the registger from an unaligned memory reference
-        /// </summary>
-        /// <param name="src">The memory source</param>
-        /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline)]
-        public static unsafe Vector256<T> LoadDqu<T>(in T src)
-            where T: unmanaged
-        {
-            if(typematch<T,sbyte>())
-               return generic<T>(Avx2.LoadDquVector256(constptr(in AsIn.int8(in src))));
-            else if(typematch<T,byte>())
-               return generic<T>(Avx2.LoadDquVector256(constptr(in AsIn.uint8(in src))));
-            else if(typematch<T,short>())
-               return generic<T>(Avx2.LoadDquVector256(constptr(in AsIn.int16(in src))));
-            else if(typematch<T,ushort>())
-               return generic<T>(Avx2.LoadDquVector256(constptr(in AsIn.uint8(in src))));
-            else if(typematch<T,int>())
-               return generic<T>(Avx2.LoadDquVector256(constptr(in AsIn.int32(in src))));
-            else if(typematch<T,uint>())
-               return generic<T>(Avx2.LoadDquVector256(constptr(in AsIn.uint32(in src))));
-            else if(typematch<T,long>())
-               return generic<T>(Avx2.LoadDquVector256(constptr(in AsIn.int64(in src))));
-            else if(typematch<T,ulong>())
-               return generic<T>(Avx2.LoadDquVector256(constptr(in AsIn.uint64(in src))));
-            else if(typeof(T) == typeof(float))
-               return generic<T>(Avx2.LoadVector256(constptr(in AsIn.float32(in src))));
-            else if(typeof(T) == typeof(double))
-               return generic<T>(Avx2.LoadVector256(constptr(in AsIn.float64(in src))));
-            else
-                throw unsupported<T>();
-        }
-
+        
+        public const int Size = SegLen * SegCount;
 
 
         [FieldOffset(0)]        
@@ -143,7 +108,6 @@ namespace Z0
 
         [FieldOffset(SegLen*8)]
         XMM xmm8;
-
 
         [FieldOffset(SegLen*9)]
         YMM ymm9;

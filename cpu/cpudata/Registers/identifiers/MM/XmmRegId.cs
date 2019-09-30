@@ -12,69 +12,69 @@ namespace Z0
     [Flags]
     public enum XmmRegId : ulong
     {
-        xmm0 = ((RegOffsets.XMM << 32) + 0) | Pow2.T07,
+        xmm0 = 0,
 
-        xmm1 = ((RegOffsets.XMM << 32) + 8) | Pow2.T07,
+        xmm1 = xmm0 + 1,
 
-        xmm2 = ((RegOffsets.XMM << 32) + 16) | Pow2.T07,
+        xmm2 = xmm1 + 1,
 
-        xmm3 = ((RegOffsets.XMM << 32) + 24) | Pow2.T07,
+        xmm3 = xmm2 + 1,
 
-        xmm4 =((RegOffsets.XMM << 32) + 32) | Pow2.T07,
+        xmm4 = xmm3 + 1,
 
-        xmm5 = ((RegOffsets.XMM << 32) + 40) | Pow2.T07,
+        xmm5 = xmm4 + 1,
 
-        xmm6 = ((RegOffsets.XMM << 32) + 48) | Pow2.T07,
+        xmm6 = xmm5 + 1,
 
-        xmm7 = ((RegOffsets.XMM << 32) + 56) | Pow2.T07,
+        xmm7 = xmm6 + 1,
 
-        xmm8 = ((RegOffsets.XMM << 32) + 64) | Pow2.T07,
+        xmm8 = xmm7 + 1,
 
-        xmm9 = ((RegOffsets.XMM << 32) + 70) | Pow2.T07,
+        xmm9 = xmm8 + 1,
 
-        xmm10 = ((RegOffsets.XMM << 32) + 78) | Pow2.T07,
+        xmm10 = xmm9 + 1,
 
-        xmm11 = ((RegOffsets.XMM << 32) + 86) | Pow2.T07,
+        xmm11 = xmm10 + 1,
 
-        xmm12 = ((RegOffsets.XMM << 32) + 94) | Pow2.T07,
+        xmm12 = xmm11 + 1,
 
-        xmm13 = ((RegOffsets.XMM << 32) + 102) | Pow2.T07,
+        xmm13 = xmm12 + 1,
 
-        xmm14 = ((RegOffsets.XMM << 32) + 110) | Pow2.T07,
+        xmm14 = xmm13 + 1,
 
-        xmm15 = ((RegOffsets.XMM << 32) + 118) | Pow2.T07,
+        xmm15 = xmm14 + 1,
 
-        xmm16 = ((RegOffsets.XMM << 32) + 126) | Pow2.T07,
+        xmm16 = xmm15 + 1,
 
-        xmm17 = ((RegOffsets.XMM << 32) + 134) | Pow2.T07,
+        xmm17 = xmm16 + 1,
 
-        xmm18 = ((RegOffsets.XMM << 32) + 142) | Pow2.T07,
+        xmm18 = xmm17 + 1,
 
-        xmm19 = ((RegOffsets.XMM << 32) + 150) | Pow2.T07,
+        xmm19 = xmm18 + 1,
 
-        xmm20 = ((RegOffsets.XMM << 32) + 158) | Pow2.T07,
+        xmm20 = xmm19 + 1,
 
-        xmm21 = ((RegOffsets.XMM << 32) + 166) | Pow2.T07,
+        xmm21 = xmm20 + 1,
 
-        xmm22 = ((RegOffsets.XMM << 32) + 174) | Pow2.T07,
+        xmm22 = xmm21 + 1,
 
-        xmm23 = ((RegOffsets.XMM << 32) + 182) | Pow2.T07,
+        xmm23 = xmm22 + 1,
 
-        xmm24 = ((RegOffsets.XMM << 32) + 190) | Pow2.T07,
+        xmm24 = xmm23 + 1,
 
-        xmm25 = ((RegOffsets.XMM << 32) + 198) | Pow2.T07,
+        xmm25 = xmm24 + 1,
 
-        xmm26 = ((RegOffsets.XMM << 32) + 206) | Pow2.T07,
+        xmm26 = xmm25 + 1,
 
-        xmm27 = ((RegOffsets.XMM << 32) + 214) | Pow2.T07,
+        xmm27 = xmm26 + 1,
 
-        xmm28 = ((RegOffsets.XMM << 32) + 222) | Pow2.T07,
+        xmm28 = xmm27 + 1,
 
-        xmm29 = ((RegOffsets.XMM << 32) + 230) | Pow2.T07,
+        xmm29 = xmm28 + 1,
 
-        xmm30 = ((RegOffsets.XMM << 32) + 236) | Pow2.T07,
+        xmm30 = xmm29 + 1,
 
-        xmm31 = ((RegOffsets.XMM << 32) + 244) | Pow2.T07,
+        xmm31 = xmm30 + 1,
 
     }
 }

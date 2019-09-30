@@ -13,14 +13,21 @@ public static partial class zfunc
     public const MethodImplOptions NotInline = MethodImplOptions.NoInlining;
 
     public const MethodImplOptions Optimize = MethodImplOptions.AggressiveOptimization;
-
 }   
 
 namespace Z0
 {
+
     public static partial class xfunc
     {
         
     }
 
+    [OpCodeHost]
+    public static partial class zfoc
+    {
+        
+    }
+
 }
+

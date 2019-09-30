@@ -59,10 +59,16 @@ namespace Z0
                 rdx = src;
             }
 
+            public GpRegId64 RegKind 
+                => GpRegId64.rdx;
+
+            public Volatility Volatility
+                => Volatility.Volatile;
+
             byte IGpReg64<RDX>.Lo8 
             { 
                 [MethodImpl(Inline)]
-                get => dl; 
+                get => !dl; 
  
                 [MethodImpl(Inline)]
                 set => dl = value;
@@ -80,7 +86,7 @@ namespace Z0
             uint IGpReg64<RDX>.Lo32
             { 
                 [MethodImpl(Inline)]
-                get => edx; 
+                get => !edx; 
  
                 [MethodImpl(Inline)]
                 set => edx = value;

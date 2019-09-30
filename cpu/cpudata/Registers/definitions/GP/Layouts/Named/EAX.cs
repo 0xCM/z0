@@ -21,22 +21,22 @@ namespace Z0
         public struct EAX : IGpReg32<EAX>
         {
             [FieldOffset(0)]
-            public uint eax;
+            uint content;
 
             [FieldOffset(0)]
-            public AX ax;
+            AX ax;
 
             [FieldOffset(0)]
-            public AL al;
+            AL al;
 
             [FieldOffset(1)]
-            public AH ah;
+            AH ah;
 
             public const GpRegId Id = GpRegId.eax;          
 
             [MethodImpl(Inline)]
             public static uint operator !(EAX r)
-                => r.eax;
+                => r.content;
 
             [MethodImpl(Inline)]
             public static implicit operator EAX(uint src)
@@ -46,17 +46,9 @@ namespace Z0
             public EAX(uint src)
                 : this()
             {
-                this.eax = src;
+                this.content = src;
             }
 
-            public uint Content 
-            { 
-                [MethodImpl(Inline)]
-                get => eax; 
-
-                [MethodImpl(Inline)]
-                set => eax = value;
-            }
 
             byte IGpReg32<EAX>.Lo8 
             { 
@@ -66,7 +58,6 @@ namespace Z0
                 [MethodImpl(Inline)]
                 set => al = value;
             }
-
             
             ushort IGpReg32<EAX>.Lo16 
             { 

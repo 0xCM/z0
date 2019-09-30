@@ -17,12 +17,14 @@ namespace Z0
         [StructLayout(LayoutKind.Explicit)]
         public struct DL : IGpReg8<DL>
         {
+            [FieldOffset(0)]
+            byte content;
+
             public const GpRegId Id = GpRegId.dl;          
 
-
             [MethodImpl(Inline)]
-            public static implicit operator byte(DL src)
-                => src.dl;
+            public static byte operator !(DL r)
+                => r.content;
 
             [MethodImpl(Inline)]
             public static implicit operator DL(byte src)
@@ -31,10 +33,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public DL(byte src)
-                => this.dl = src;
-
-            [FieldOffset(0)]
-            public byte dl;
+                => this.content = src;
 
             GpRegId IGpReg.Id 
                 => Id;

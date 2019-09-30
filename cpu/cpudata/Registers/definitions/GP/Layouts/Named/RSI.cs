@@ -24,22 +24,22 @@ namespace Z0
         public struct RSI : IGpReg64<RSI>
         {
             [FieldOffset(0)]
-            public ulong rsi;
+            ulong content;
 
             [FieldOffset(0)]
-            public ESI esi;
+            ESI esi;
 
             [FieldOffset(0)]
-            public SI si;
+            SI si;
 
             [FieldOffset(0)]
-            public SIL sil;
+            SIL sil;
 
             public const GpRegId Id = GpRegId.rsi;
 
             [MethodImpl(Inline)]
             public static ulong operator !(RSI r)
-                => r.rsi;
+                => r.content;
 
             [MethodImpl(Inline)]
             public static implicit operator RSI(ulong src)
@@ -49,8 +49,11 @@ namespace Z0
             public RSI(ulong src)
                 : this()
             {
-                rsi = src;
+                content = src;
             }
+
+            public GpRegId64 RegKind 
+                => GpRegId64.rsi;
 
             byte IGpReg64<RSI>.Lo8 
             { 
@@ -64,7 +67,7 @@ namespace Z0
             ushort IGpReg64<RSI>.Lo16 
             { 
                 [MethodImpl(Inline)]
-                get => si; 
+                get => !si; 
  
                 [MethodImpl(Inline)]
                 set => si = value;

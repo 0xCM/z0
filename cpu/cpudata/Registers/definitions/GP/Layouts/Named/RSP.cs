@@ -22,22 +22,22 @@ namespace Z0
         public struct RSP : IGpReg64<RSP>
         {
             [FieldOffset(0)]
-            public ulong rsp;
+            ulong content;
 
             [FieldOffset(0)]
-            public ESP esp;
+            ESP esp;
 
             [FieldOffset(0)]
-            public SP sp;
+            SP sp;
 
             [FieldOffset(0)]
-            public SPL spl;
+            SPL spl;
 
             public const GpRegId Id = GpRegId.rsp;
 
             [MethodImpl(Inline)]
             public static ulong operator !(RSP r)
-                => r.rsp;
+                => r.content;
 
             [MethodImpl(Inline)]
             public static implicit operator RSP(ulong src)
@@ -47,8 +47,11 @@ namespace Z0
             public RSP(ulong src)
                 : this()
             {
-                rsp = src;
+                content = src;
             }
+
+            public GpRegId64 RegKind 
+                => GpRegId64.rsp;
 
             byte IGpReg64<RSP>.Lo8 
             { 
@@ -79,6 +82,7 @@ namespace Z0
 
             GpRegId IGpReg.Id 
                 => Id;
+
         }
     }
 }

@@ -44,7 +44,7 @@ namespace Z0
             var b = swaphl(in src);
             var s1 = shuffle(in a, vadd(in spec, in K0));
             var s2 = shuffle(in b, vadd(in spec, in K1));
-            return or(s1,s2);
+            return vor(s1,s2);
         }
 
 

@@ -16,13 +16,13 @@ namespace Z0
         public struct R9B : IGpReg8<R9B>
         {
             [FieldOffset(0)]
-            public byte r9b;
+            byte content;
 
             public const GpRegId Id = GpRegId.r9b;          
 
             [MethodImpl(Inline)]
-            public static implicit operator byte(R9B src)
-                => src.r9b;
+            public static byte operator !(R9B r)
+                => r.content;
 
             [MethodImpl(Inline)]
             public static implicit operator R9B(byte src)
@@ -30,7 +30,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public R9B(byte src)
-                => this.r9b = src;
+                => this.content = src;
 
             GpRegId IGpReg.Id 
                 => Id; 

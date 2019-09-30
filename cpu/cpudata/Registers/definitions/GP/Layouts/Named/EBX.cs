@@ -20,22 +20,22 @@ namespace Z0
         {
 
             [FieldOffset(0)]
-            public uint ebx;
+            uint content;
 
             [FieldOffset(0)]
-            public BX bx;
+            BX bx;
 
             [FieldOffset(0)]
-            public BL bl;
+            BL bl;
 
             [FieldOffset(1)]
-            public BH bh;
+            BH bh;
 
             public const GpRegId Id = GpRegId.ebx;
 
             [MethodImpl(Inline)]
             public static uint operator !(EBX r)
-                => r.ebx;
+                => r.content;
 
             [MethodImpl(Inline)]
             public static implicit operator EBX(uint src)
@@ -45,7 +45,7 @@ namespace Z0
             public EBX(uint src)
                 : this()
             {
-                ebx = src;
+                content = src;
             }
  
             byte IGpReg32<EBX>.Lo8 

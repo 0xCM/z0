@@ -18,22 +18,22 @@ namespace Z0
         public struct EDX : IGpReg32<EDX>
         {
             [FieldOffset(0)]
-            public uint edx;
+            uint content;
 
             [FieldOffset(0)]
-            public DX dx;
+            DX dx;
 
             [FieldOffset(0)]
-            public DL dl;
+            DL dl;
 
             [FieldOffset(1)]
-            public DH dh;
+            DH dh;
 
             public const GpRegId Id = GpRegId.edx;          
 
             [MethodImpl(Inline)]
-            public static implicit operator uint(EDX src)
-                => src.edx;
+            public static uint operator !(EDX r)
+                => r.content;
 
             [MethodImpl(Inline)]
             public static implicit operator EDX(uint src)
@@ -43,22 +43,22 @@ namespace Z0
             public EDX(uint src)
                 : this()
             {
-                this.edx = src;
+                this.content = src;
             }
 
             public uint Content 
             { 
                 [MethodImpl(Inline)]
-                get => edx; 
+                get => content; 
 
                 [MethodImpl(Inline)]
-                set => edx = value;
+                set => content = value;
             }
 
             byte IGpReg32<EDX>.Lo8 
             { 
                 [MethodImpl(Inline)]
-                get => dl; 
+                get => !dl; 
  
                 [MethodImpl(Inline)]
                 set => dl = value;

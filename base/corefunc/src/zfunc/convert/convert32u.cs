@@ -12,24 +12,6 @@ namespace Z0
 
     partial class Converter
     {
-        [MethodImpl(Inline)]
-        public static T convert<T>(uint src, out T dst)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(sbyte) 
-            || typeof(T) == typeof(short) 
-            || typeof(T) == typeof(int) 
-            || typeof(T) == typeof(long))
-                dst = converti<T>(src);
-            else if(typeof(T) == typeof(byte) 
-            || typeof(T) == typeof(ushort) 
-            || typeof(T) == typeof(uint) 
-            || typeof(T) == typeof(ulong))
-                dst = convertu<T>(src);
-            else
-                dst = convertx<T>(src);
-            return dst;
-        }
 
         [MethodImpl(Inline)]
         public static T convert<T>(uint src)
@@ -46,7 +28,9 @@ namespace Z0
             || typeof(T) == typeof(ulong))
                 return convertu<T>(src);
             else
+            {
                 return convertx<T>(src);
+            }
         }
 
 
@@ -81,13 +65,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return g32f<T>(((float)(int)src));
+                return generic<T>(((float)(int)src));
             else if(typeof(T) == typeof(double))
-                return g64f<T>((double)(long)src);
+                return generic<T>((double)(long)src);
             else if(typeof(T) == typeof(char))
-                return g16ch<T>((char)src);
+                return generic<T>((char)src);
             else            
-                throw unsupported<T>();
+                 throw unsupported<T>();
         }
     }
 }

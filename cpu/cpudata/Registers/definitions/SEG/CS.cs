@@ -31,8 +31,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public CS(ushort src)
-                => cs = src;        
- 
+                => cs = src;         
        }
     }
 }

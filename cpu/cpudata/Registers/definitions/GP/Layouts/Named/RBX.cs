@@ -50,6 +50,9 @@ namespace Z0
                 rbx = src;
             }
  
+             public GpRegId64 RegKind 
+                => GpRegId64.rbx;
+
             byte IGpReg64<RBX>.Lo8 
             { 
                 [MethodImpl(Inline)]

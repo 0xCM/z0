@@ -9,72 +9,72 @@ namespace Z0
     /// <summary>
     ///  Classifies ZMM registers
     /// </summary>
-    [Flags]
     public enum ZmmRegId : ulong
     {
-        zmm0 = ((RegOffsets.ZMM << 32) + 0) | Pow2.T09,
+        zmm0 = 0,
 
-        zmm1 = ((RegOffsets.ZMM << 32) + 8) | Pow2.T09,
+        zmm1 = zmm0 + 1,
 
-        zmm2 = ((RegOffsets.ZMM << 32) + 16) | Pow2.T09,
+        zmm2 = zmm1 + 1,
 
-        zmm3 = ((RegOffsets.ZMM << 32) + 24) | Pow2.T09,
+        zmm3 = zmm2 + 1,
 
-        zmm4 =((RegOffsets.ZMM << 32) + 32) | Pow2.T09,
+        zmm4 = zmm3 + 1,
 
-        zmm5 = ((RegOffsets.ZMM << 32) + 40) | Pow2.T09,
+        zmm5 = zmm4 + 1,
 
-        zmm6 = ((RegOffsets.ZMM << 32) + 48) | Pow2.T09,
+        zmm6 = zmm5 + 1,
 
-        zmm7 = ((RegOffsets.ZMM << 32) + 56) | Pow2.T09,
+        zmm7 = zmm6 + 1,
 
-        zmm8 = ((RegOffsets.ZMM << 32) + 64) | Pow2.T09,
+        zmm8 = zmm7 + 1,
 
-        zmm9 = ((RegOffsets.ZMM << 32) + 70) | Pow2.T09,
+        zmm9 = zmm8 + 1,
 
-        zmm10 = ((RegOffsets.ZMM << 32) + 78) | Pow2.T09,
+        zmm10 = zmm9 + 1,
 
-        zmm11 = ((RegOffsets.ZMM << 32) + 86) | Pow2.T09,
+        zmm11 = zmm10 + 1,
 
-        zmm12 = ((RegOffsets.ZMM << 32) + 94) | Pow2.T09,
+        zmm12 = zmm11 + 1,
 
-        zmm13 = ((RegOffsets.ZMM << 32) + 102) | Pow2.T09,
+        zmm13 = zmm12 + 1,
 
-        zmm14 = ((RegOffsets.ZMM << 32) + 110) | Pow2.T09,
+        zmm14 = zmm13 + 1,
 
-        zmm15 = ((RegOffsets.ZMM << 32) + 118) | Pow2.T09,
+        zmm15 = zmm14 + 1,
 
-        zmm16 = ((RegOffsets.ZMM << 32) + 126) | Pow2.T09,
+        zmm16 = zmm15 + 1,
 
-        zmm17 = ((RegOffsets.ZMM << 32) + 134) | Pow2.T09,
+        zmm17 = zmm16 + 1,
 
-        zmm18 = ((RegOffsets.ZMM << 32) + 142) | Pow2.T09,
+        zmm18 = zmm17 + 1,
 
-        zmm19 = ((RegOffsets.ZMM << 32) + 150) | Pow2.T09,
+        zmm19 = zmm18 + 1,
 
-        zmm20 = ((RegOffsets.ZMM << 32) + 158) | Pow2.T09,
+        zmm20 = zmm19 + 1,
 
-        zmm21 = ((RegOffsets.ZMM << 32) + 166) | Pow2.T09,
+        zmm21 = zmm20 + 1,
 
-        zmm22 = ((RegOffsets.ZMM << 32) + 174) | Pow2.T09,
+        zmm22 = zmm21 + 1,
 
-        zmm23 = ((RegOffsets.ZMM << 32) + 182) | Pow2.T09,
+        zmm23 = zmm22 + 1,
 
-        zmm24 = ((RegOffsets.ZMM << 32) + 190) | Pow2.T09,
+        zmm24 = zmm23 + 1,
 
-        zmm25 = ((RegOffsets.ZMM << 32) + 198) | Pow2.T09,
+        zmm25 = zmm24 + 1,
 
-        zmm26 = ((RegOffsets.ZMM << 32) + 206) | Pow2.T09,
+        zmm26 = zmm25 + 1,
 
-        zmm27 = ((RegOffsets.ZMM << 32) + 214) | Pow2.T09,
+        zmm27 = zmm26 + 1,
 
-        zmm28 = ((RegOffsets.ZMM << 32) + 222) | Pow2.T09,
+        zmm28 = zmm27 + 1,
 
-        zmm29 = ((RegOffsets.ZMM << 32) + 230) | Pow2.T09,
+        zmm29 = zmm28 + 1,
 
-        zmm30 = ((RegOffsets.ZMM << 32) + 236) | Pow2.T09,
+        zmm30 = zmm29 + 1,
 
-        zmm31 = ((RegOffsets.ZMM << 32) + 244) | Pow2.T09,
+        zmm31 = zmm30 + 1,
+
   }
 
 }

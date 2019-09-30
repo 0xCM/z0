@@ -21,203 +21,164 @@ namespace Z0
     {
 
         /// <summary>
-        /// _mm_and_si128:
+        /// __m128i _mm_and_si128 (__m128i a, __m128i b) PAND xmm, xmm/m128
         /// Computes the logical and of the operands
         /// </summary>
-        /// <param name="lhs">The left vector</param>
-        /// <param name="rhs">The right vector</param>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vec128<byte> and(in Vec128<byte> lhs, in Vec128<byte> rhs)
-            => And(lhs, rhs.xmm);
+        public static Vec128<byte> vand(in Vec128<byte> x, in Vec128<byte> y)
+            => And(x, y.xmm);
 
         /// <summary>
-        /// _mm_and_si128:
+        /// __m128i _mm_and_si128 (__m128i a, __m128i b) PAND xmm, xmm/m128
         /// Computes the logical and of the operands
         /// </summary>
-        /// <param name="lhs">The left vector</param>
-        /// <param name="rhs">The right vector</param>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vec128<short> and(in Vec128<short> lhs, in Vec128<short> rhs)
-            => And(lhs.xmm, rhs.xmm);
+        public static Vec128<short> vand(in Vec128<short> x, in Vec128<short> y)
+            => And(x.xmm, y.xmm);
 
         /// <summary>
-        /// _mm_and_si128:
+        /// __m128i _mm_and_si128 (__m128i a, __m128i b) PAND xmm, xmm/m128
         /// Computes the logical and of the operands
         /// </summary>
-        /// <param name="lhs">The left vector</param>
-        /// <param name="rhs">The right vector</param>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vec128<sbyte> and(in Vec128<sbyte> lhs, in Vec128<sbyte> rhs)
-            => And(lhs.xmm, rhs.xmm);
+        public static Vec128<sbyte> vand(in Vec128<sbyte> x, in Vec128<sbyte> y)
+            => And(x.xmm, y.xmm);
 
         /// <summary>
-        /// _mm_and_si128:
+        /// __m128i _mm_and_si128 (__m128i a, __m128i b) PAND xmm, xmm/m128
         /// Computes the logical and of the operands
         /// </summary>
-        /// <param name="lhs">The left vector</param>
-        /// <param name="rhs">The right vector</param>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vec128<ushort> and(in Vec128<ushort> lhs, in Vec128<ushort> rhs)
-            => And(lhs.xmm, rhs.xmm);
+        public static Vec128<ushort> vand(in Vec128<ushort> x, in Vec128<ushort> y)
+            => And(x.xmm, y.xmm);
 
         /// <summary>
-        /// _mm_and_si128:
+        /// __m128i _mm_and_si128 (__m128i a, __m128i b) PAND xmm, xmm/m128
         /// Computes the logical and of the operands
         /// </summary>
-        /// <param name="lhs">The left vector</param>
-        /// <param name="rhs">The right vector</param>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vec128<int> and(in Vec128<int> lhs, in Vec128<int> rhs)
-            => And(lhs.xmm, rhs.xmm);
+        public static Vec128<int> vand(in Vec128<int> x, in Vec128<int> y)
+            => And(x.xmm, y.xmm);
 
         /// <summary>
-        /// _mm_and_si128:
+        /// __m128i _mm_and_si128 (__m128i a, __m128i b) PAND xmm, xmm/m128
         /// Computes the logical and of the operands
         /// </summary>
-        /// <param name="lhs">The left vector</param>
-        /// <param name="rhs">The right vector</param>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vec128<uint> and(in Vec128<uint> lhs, in Vec128<uint> rhs)
-            => And(lhs.xmm, rhs.xmm);
+        public static Vec128<uint> vand(in Vec128<uint> x, in Vec128<uint> y)
+            => And(x.xmm, y.xmm);
 
         /// <summary>
-        /// _mm_and_si128:
+        /// __m128i _mm_and_si128 (__m128i a, __m128i b) PAND xmm, xmm/m128
         /// Computes the logical and of the operands
         /// </summary>
-        /// <param name="lhs">The left vector</param>
-        /// <param name="rhs">The right vector</param>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vec128<long> and(in Vec128<long> lhs, in Vec128<long> rhs)
-            => And(lhs.xmm, rhs.xmm);
+        public static Vec128<long> vand(in Vec128<long> x, in Vec128<long> y)
+            => And(x.xmm, y.xmm);
 
         /// <summary>
-        /// _mm_and_si128:
+        /// __m128i _mm_and_si128 (__m128i a, __m128i b) PAND xmm, xmm/m128
         /// Computes the logical and of the operands
         /// </summary>
-        /// <param name="lhs">The left vector</param>
-        /// <param name="rhs">The right vector</param>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vec128<ulong> and(in Vec128<ulong> lhs, in Vec128<ulong> rhs)
-            => And(lhs.xmm, rhs.xmm);
+        public static Vec128<ulong> vand(in Vec128<ulong> x, in Vec128<ulong> y)
+            => And(x.xmm, y.xmm);
 
         /// <summary>
-        /// _mm_and_ps:
+        /// __m256i _mm256_and_si256 (__m256i a, __m256i b) VPAND ymm, ymm, ymm/m256
         /// Computes the logical and of the operands
         /// </summary>
-        /// <param name="lhs">The left vector</param>
-        /// <param name="rhs">The right vector</param>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vec128<float> and(in Vec128<float> lhs, in Vec128<float> rhs)
-            => And(lhs.xmm, rhs.xmm);
-        
-        /// <summary>
-        /// _mm_and_pd:
-        /// Computes the logical and of the operands
-        /// </summary>
-        /// <param name="lhs">The left vector</param>
-        /// <param name="rhs">The right vector</param>
-        [MethodImpl(Inline)]
-        public static Vec128<double> and(in Vec128<double> lhs, in Vec128<double> rhs)
-            => And(lhs.xmm, rhs.xmm);
+        public static Vec256<byte> vand(in Vec256<byte> x, in Vec256<byte> y)
+            => And(x.ymm, y.ymm);
 
         /// <summary>
-        /// _mm256_and_si256, avx2:
+        /// __m256i _mm256_and_si256 (__m256i a, __m256i b) VPAND ymm, ymm, ymm/m256
         /// Computes the logical and of the operands
         /// </summary>
-        /// <param name="lhs">The left vector</param>
-        /// <param name="rhs">The right vector</param>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<byte> and(in Vec256<byte> lhs, in Vec256<byte> rhs)
-            => And(lhs.ymm, rhs.ymm);
+        public static Vec256<short> vand(in Vec256<short> x, in Vec256<short> y)
+            => And(x.ymm, y.ymm);
 
         /// <summary>
-        /// _mm256_and_si256, avx2:
+        /// __m256i _mm256_and_si256 (__m256i a, __m256i b) VPAND ymm, ymm, ymm/m256
         /// Computes the logical and of the operands
         /// </summary>
-        /// <param name="lhs">The left vector</param>
-        /// <param name="rhs">The right vector</param>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<short> and(in Vec256<short> lhs, in Vec256<short> rhs)
-            => And(lhs.ymm, rhs.ymm);
+        public static Vec256<sbyte> vand(in Vec256<sbyte> x, in Vec256<sbyte> y)
+            => And(x.ymm, y.ymm);
 
         /// <summary>
-        /// _mm256_and_si256, avx2:
+        /// __m256i _mm256_and_si256 (__m256i a, __m256i b) VPAND ymm, ymm, ymm/m256
         /// Computes the logical and of the operands
         /// </summary>
-        /// <param name="lhs">The left vector</param>
-        /// <param name="rhs">The right vector</param>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<sbyte> and(in Vec256<sbyte> lhs, in Vec256<sbyte> rhs)
-            => And(lhs.ymm, rhs.ymm);
+        public static Vec256<ushort> vand(in Vec256<ushort> x, in Vec256<ushort> y)
+            => And(x.ymm, y.ymm);
 
         /// <summary>
-        /// _mm256_and_si256, avx2:
+        /// __m256i _mm256_and_si256 (__m256i a, __m256i b) VPAND ymm, ymm, ymm/m256
         /// Computes the logical and of the operands
         /// </summary>
-        /// <param name="lhs">The left vector</param>
-        /// <param name="rhs">The right vector</param>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<ushort> and(in Vec256<ushort> lhs, in Vec256<ushort> rhs)
-            => And(lhs.ymm, rhs.ymm);
+        public static Vec256<int> vand(in Vec256<int> x, in Vec256<int> y)
+            => And(x.ymm, y.ymm);
 
         /// <summary>
-        /// _mm256_and_si256, avx2:
+        /// __m256i _mm256_and_si256 (__m256i a, __m256i b) VPAND ymm, ymm, ymm/m256
         /// Computes the logical and of the operands
         /// </summary>
-        /// <param name="lhs">The left vector</param>
-        /// <param name="rhs">The right vector</param>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<int> and(in Vec256<int> lhs, in Vec256<int> rhs)
-            => And(lhs.ymm, rhs.ymm);
+        public static Vec256<uint> vand(in Vec256<uint> x, in Vec256<uint> y)
+            => And(x.ymm, y.ymm);
 
         /// <summary>
-        /// _mm256_and_si256, avx2:
+        /// __m256i _mm256_and_si256 (__m256i a, __m256i b) VPAND ymm, ymm, ymm/m256
         /// Computes the logical and of the operands
         /// </summary>
-        /// <param name="lhs">The left vector</param>
-        /// <param name="rhs">The right vector</param>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<uint> and(in Vec256<uint> lhs, in Vec256<uint> rhs)
-            => And(lhs.ymm, rhs.ymm);
+        public static Vec256<long> vand(in Vec256<long> x, in Vec256<long> y)
+            => And(x.ymm, y.ymm);
 
         /// <summary>
-        /// _mm256_and_si256, avx2:
+        /// __m256i _mm256_and_si256 (__m256i a, __m256i b) VPAND ymm, ymm, ymm/m256
         /// Computes the logical and of the operands
         /// </summary>
-        /// <param name="lhs">The left vector</param>
-        /// <param name="rhs">The right vector</param>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<long> and(in Vec256<long> lhs, in Vec256<long> rhs)
-            => And(lhs.ymm, rhs.ymm);
+        public static Vec256<ulong> vand(in Vec256<ulong> x, in Vec256<ulong> y)
+            => And(x.ymm, y.ymm);
 
-        /// <summary>
-        /// _mm256_and_si256, avx2:
-        /// Computes the logical and of the operands
-        /// </summary>
-        /// <param name="lhs">The left vector</param>
-        /// <param name="rhs">The right vector</param>
-        [MethodImpl(Inline)]
-        public static Vec256<ulong> and(in Vec256<ulong> lhs, in Vec256<ulong> rhs)
-            => And(lhs.ymm, rhs.ymm);
-
-        /// <summary>
-        /// _mm256_and_ps, avx:
-        /// Computes the logical and of the operands
-        /// </summary>
-        /// <param name="lhs">The left vector</param>
-        /// <param name="rhs">The right vector</param>
-        [MethodImpl(Inline)]
-        public static Vec256<float> and(in Vec256<float> lhs, in Vec256<float> rhs)
-            => And(lhs.ymm, rhs.ymm);
-        
-        /// <summary>
-        /// _mm256_and_pd, avx:
-        /// Computes the logical and of the operands
-        /// </summary>
-        /// <param name="lhs">The left vector</param>
-        /// <param name="rhs">The right vector</param>
-        [MethodImpl(Inline)]
-        public static Vec256<double> and(in Vec256<double> lhs, in Vec256<double> rhs)
-            => And(lhs.ymm, rhs.ymm);
      }
 }

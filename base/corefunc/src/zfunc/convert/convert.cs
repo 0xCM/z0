@@ -18,7 +18,7 @@ partial class zfunc
     public static T convert<S,T>(S src, out T dst)
         where T : unmanaged
         where S : unmanaged
-            => dst = Converter.convert(src, out T target);  
+            => dst = Converter.convert<S,T>(src);
            
     [MethodImpl(Inline)]   
     public static T convert<S,T>(S src)
@@ -109,57 +109,57 @@ partial class zfunc
     [MethodImpl(Inline)]   
     public static T convert<T>(sbyte src)
         where T : unmanaged
-            => Converter.convert(src, out T dst);
+            => Converter.convert<T>(src);
 
     [MethodImpl(Inline)]   
     public static T convert<T>(byte src)
         where T : unmanaged
-            => Converter.convert(src, out T dst);
+            => Converter.convert<T>(src);
 
     [MethodImpl(Inline)]   
     public static T convert<T>(short src)
         where T : unmanaged
-            => Converter.convert(src, out T dst);
+            => Converter.convert<T>(src);
     
     [MethodImpl(Inline)]   
     public static T convert<T>(ushort src)
         where T : unmanaged
-            => Converter.convert(src, out T dst);
+            => Converter.convert<T>(src);
 
     [MethodImpl(Inline)]   
     public static T convert<T>(int src)
         where T : unmanaged
-            => Converter.convert(src, out T dst);
+            => Converter.convert<T>(src);
 
     [MethodImpl(Inline)]   
     public static T convert<T>(uint src)
         where T : unmanaged
-            => Converter.convert(src, out T dst);
+            => Converter.convert<T>(src);
 
     [MethodImpl(Inline)]   
     public static T convert<T>(long src)
         where T : unmanaged
-            => Converter.convert(src, out T dst);
+            => Converter.convert<T>(src);
 
     [MethodImpl(Inline)]   
     public static T convert<T>(ulong src)
         where T : unmanaged
-            => Converter.convert(src, out T dst);
+            => Converter.convert<T>(src);
 
     [MethodImpl(Inline)]   
     public static T convert<T>(float src)
         where T : unmanaged
-            => Converter.convert(src, out T dst);
+            => Converter.convert<T>(src);
 
     [MethodImpl(Inline)]   
     public static T convert<T>(double src)
         where T : unmanaged
-            => Converter.convert(src, out T dst);
+            => Converter.convert<T>(src);
 
     [MethodImpl(Inline)]   
     public static T convert<T>(char src)
         where T : unmanaged
-            => Converter.convert(src, out T dst);
+            => Converter.convert<T>(src);
 
 
 }

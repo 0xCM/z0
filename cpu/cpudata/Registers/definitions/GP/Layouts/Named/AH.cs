@@ -16,15 +16,11 @@ namespace Z0
         public struct AH : IGpReg8<AH>
         {
             [FieldOffset(0)]
-            public byte ah;
+            byte content;
             
-            /// <summary>
-            /// Dereferences ah to produce its content [ah]
-            /// </summary>
-            /// <param name="r">The source register</param>
             [MethodImpl(Inline)]
             public static byte operator !(AH r)
-                => r.ah;
+                => r.content;
 
             public const GpRegId Id = GpRegId.ah;            
 
@@ -34,7 +30,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public AH(byte src)
-                => ah = src;
+                => content = src;
                 
             GpRegId IGpReg.Id 
                 => Id;

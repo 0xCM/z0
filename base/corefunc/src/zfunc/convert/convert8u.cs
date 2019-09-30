@@ -12,24 +12,6 @@ namespace Z0
 
     partial class Converter
     {
-        [MethodImpl(Inline)]
-        public static T convert<T>(byte src, out T dst)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(sbyte) 
-            || typeof(T) == typeof(short) 
-            || typeof(T) == typeof(int) 
-            || typeof(T) == typeof(long))
-                dst = converti<T>(src);
-            else if(typeof(T) == typeof(byte) 
-            || typeof(T) == typeof(ushort) 
-            || typeof(T) == typeof(uint) 
-            || typeof(T) == typeof(ulong))
-                dst = convertu<T>(src);
-            else
-                dst = convertx<T>(src);
-            return dst;
-        }
 
         [MethodImpl(Inline)]
         public static T convert<T>(byte src)

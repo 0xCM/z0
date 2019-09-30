@@ -552,7 +552,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public BitVector128 And(BitVector128 rhs)
         {
-            xmm = Bits.and(xmm, rhs.xmm);
+            xmm = dinx.vand(xmm, rhs.xmm);
             return this;
         }
 

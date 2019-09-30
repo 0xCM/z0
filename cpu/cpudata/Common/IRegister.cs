@@ -9,20 +9,16 @@ namespace Z0
     using System.Runtime.InteropServices;
     using System.Runtime.CompilerServices;
 
-    
-    
+        
     using static zfunc;
-
-
-
 
     public interface ICpuReg
     {
-        
+    
     }
 
     public interface ICpuReg<N> : ICpuReg
-        where N : ITypeNat, INatPow2, new()
+        where N : ITypeNat, new()
     {
         static readonly BitSize BW =new N().value;
 
@@ -43,9 +39,16 @@ namespace Z0
     }
 
     public interface ICpuReg<N, T> : ICpuReg<N>
-        where N : ITypeNat, INatPow2, new()
+        where N : ITypeNat, new()
         where T : unmanaged
     {
+    
+    }
+
+    public interface IVectorReg<N> : ICpuReg<N>
+        where N : ITypeNat, INatPow2, new()
+    {
+        Volatility Volatility(int index);
     }
 
     public interface ICpuReg8 : ICpuReg<N8, ushort>
@@ -68,17 +71,17 @@ namespace Z0
 
     }
 
-    public interface ICpuReg128 : ICpuReg<N128>
+    public interface ICpuReg128 : IVectorReg<N128>
     {
-
+        
     }
 
-    public interface ICpuReg256 : ICpuReg<N256>
+    public interface ICpuReg256 : IVectorReg<N256>
     {
-
+        Volatility Volatility(int index, int part);
     }
 
-    public interface ICpuReg512 : ICpuReg<N512>
+    public interface ICpuReg512 : IVectorReg<N512>
     {
 
     }
@@ -86,6 +89,10 @@ namespace Z0
     public interface IGpReg : ICpuReg
     {
         GpRegId Id {get;}   
+
+        Volatility Volatility 
+            => Volatility.NonVolatile;
+
     }
 
     public interface IGpReg<N,R,T> : ICpuReg<N,T>, IGpReg
@@ -109,6 +116,9 @@ namespace Z0
         ushort Lo16 {get; set;}
 
         uint Lo32 {get; set;}        
+
+        GpRegId64 RegKind {get;}
+
     }
 
     public interface IGpReg32<R> : IGpReg<N32, R, uint>
@@ -129,6 +139,24 @@ namespace Z0
         where R : struct, ICpuReg 
     {        
         
+    }
+
+    public interface IFpuReg32 : ICpuReg<N32,float>
+    {
+
+
+    }
+
+    public interface IFpuReg64 : ICpuReg<N64,double>, IFpuReg32
+    {
+
+
+    }
+
+    public interface IFpuReg80 : ICpuReg<N80,Float80>, IFpuReg64
+    {
+
+
     }
 
     public interface IMMReg : ICpuReg

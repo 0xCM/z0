@@ -14,15 +14,18 @@ namespace Z0
     public enum SegRegId : ulong
     {
 
-        cs,
+        es = 0,
 
-        ds,
+        cs = es + 1,
 
-        fs,
+        ss = cs + 1,
 
-        gs,
+        ds = ss + 1,
 
-        ss
+        fs = ds + 1,
+
+        gs = fs + 1,
+
 
 
     }

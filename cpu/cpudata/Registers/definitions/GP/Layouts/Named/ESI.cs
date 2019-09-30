@@ -58,7 +58,7 @@ namespace Z0
             ushort IGpReg32<ESI>.Lo16 
             { 
                 [MethodImpl(Inline)]
-                get => si; 
+                get => !si; 
  
                 [MethodImpl(Inline)]
                 set => si = value;

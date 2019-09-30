@@ -405,7 +405,7 @@ namespace Z0
         {
             lhs.LoadCpuVec(out Vec256<ushort> vLhs);
             rhs.LoadCpuVec(out Vec256<ushort> vRhs);
-            gbits.vand<ushort>(vLhs,vRhs).StoreTo(ref lhs.data[0]);
+            dinx.vand(vLhs,vRhs).StoreTo(ref lhs.data[0]);
             return ref lhs;
         }
 

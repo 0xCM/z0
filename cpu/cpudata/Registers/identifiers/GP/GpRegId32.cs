@@ -9,88 +9,87 @@ namespace Z0
     /// <summary>
     /// Classifies 32-bit general purpose registers
     /// </summary>
-    [Flags]
-    public enum GpRegId32 : ulong
+    public enum GpRegId32 : uint
     {
         /// <summary>
-        /// Identifies RAX[31:0]
+        /// Identifies the 32-bit register EAX = RAX[31:0]
         /// </summary>
-        eax =  Pow2.T32 | Pow2.T05,  
+        eax = 0,  
         
         /// <summary>
-        /// Identifies RBX[31:0]
+        /// Identifies the 32-bit register ECX = RCX[31:0]
         /// </summary>
-        ebx = (RegOffsets.RBX << 32) | Pow2.T05,
+        ecx = eax + 1,
 
         /// <summary>
-        /// Identifies RCX[31:0]
+        /// Identifies the 32-bit register EDX = RDX[31:0]
         /// </summary>
-        ecx =  (RegOffsets.RCX << 32) | Pow2.T05,
+        edx = ecx + 1,
 
         /// <summary>
-        /// Identifies EDX[31:0]
+        /// Identifies the 32-bit register RBX = RBX[31:0]
         /// </summary>
-        edx =  (RegOffsets.RDX << 32) | Pow2.T05,
+        ebx = edx + 1,
 
         /// <summary>
-        /// Identifies RSI[31:0]
+        /// Identifies the 32-bit register ESP = RSP[31:0]
         /// </summary>
-        esi =  (RegOffsets.RSI << 32) | Pow2.T05,
+        esp = ebx + 1,
 
         /// <summary>
-        /// Identifies RDI[31:0]
+        /// Identifies the 32-bit register EBP = RBP[31:0]
         /// </summary>
-        edi =  (RegOffsets.RDI << 32) | Pow2.T05,
+        ebp = esp + 1,
 
         /// <summary>
-        /// Identifies RSP[31:0]
+        /// Identifies the 32-bit register ESI = RSI[31:0]
         /// </summary>
-        esp =  (RegOffsets.RSP << 32) | Pow2.T05,
+        esi = ebp + 1,
 
         /// <summary>
-        /// Identifies RBP[31:0]
+        /// Identifies the 32-bit register EDI = RDI[31:0]
         /// </summary>
-        ebp =  (RegOffsets.RBP << 32) | Pow2.T05,
+        edi = esi + 1,
 
         /// <summary>
-        /// Identifies R8[31:0]
+        /// Identifies the 32-bit register R8D = R8[31:0]
         /// </summary>
-        r8d = (RegOffsets.R8 << 32) | Pow2.T05,
+        r8d = edi + 1,
 
         /// <summary>
-        /// Identifies R9[31:0]
+        /// Identifies the 32-bit register R9d = R9[31:0]
         /// </summary>
-        r9d = (RegOffsets.R9 << 32) | Pow2.T05,
+        r9d = r8d + 1,
 
         /// <summary>
-        /// Identifies R10[31:0]
+        /// Identifies the 32-bit register R10d = R10[31:0]
         /// </summary>
-        r10d = (RegOffsets.R10 << 32) | Pow2.T05,
+        r10d = r9d + 1,
 
         /// <summary>
-        /// Identifies R11[31:0]
+        /// Identifies the 32-bit register R11d = R11[31:0]
         /// </summary>
-        r11d = (RegOffsets.R11 << 32) | Pow2.T05,
+        r11d =  r10d + 1,
 
         /// <summary>
-        /// Identifies R12[31:0]
+        /// Identifies the 32-bit register R12d = R12[31:0]
         /// </summary>
-        r12d = (RegOffsets.R12 << 32) | Pow2.T05,
+        r12d =  r11d + 1,
 
         /// <summary>
-        /// Identifies R13[31:0]
+        /// Identifies the 32-bit register R13d = R13[31:0]
         /// </summary>
-        r13d = (RegOffsets.R13 << 32) | Pow2.T05,
+        r13d =  r12d + 1,
 
         /// <summary>
-        /// Identifies R14[31:0]
+        /// Identifies the 32-bit register R14d = R14[31:0]
         /// </summary>
-        r14d = (RegOffsets.R14 << 32) | Pow2.T05,
+        r14d =  r13d + 1,
 
         /// <summary>
-        /// Identifies R15[31:0]
+        /// Identifies the 32-bit register R15d = R15[31:0]
         /// </summary>
-        r15d = (RegOffsets.R15 << 32) | Pow2.T05,
+        r15d =  r14d + 1,
 
     }
 }

@@ -46,10 +46,13 @@ namespace Z0
                 r15 = src;
             }
 
+            public GpRegId64 RegKind 
+                => GpRegId64.r15;
+
             byte IGpReg64<R15>.Lo8 
             { 
                 [MethodImpl(Inline)]
-                get => r15b; 
+                get => !r15b; 
  
                 [MethodImpl(Inline)]
                 set => r15b = value;

@@ -35,6 +35,11 @@ namespace Z0
             where T : unmanaged
             => ref As.generic<T>(ref Bytes[0]);
 
+        public Volatility Volatility(int index)
+        {
+            return default;
+        }
+
         public Bit this[BitPos r]
         {
             [MethodImpl(Inline)]

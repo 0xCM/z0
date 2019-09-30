@@ -86,6 +86,7 @@ namespace Z0
             Disassemble(true, true, typeof(soc));    
             Disassemble(true, true, typeof(voc));    
             Disassemble(true, true, typeof(boc));    
+            Disassemble(true, true, typeof(inxoc));    
             Disassemble(true, true, typeof(zfoc));    
             Disassemble(true, true, typeof(Float64Convert));    
 

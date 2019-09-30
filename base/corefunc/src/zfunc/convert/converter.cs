@@ -17,27 +17,9 @@ namespace Z0
 
     public static partial class Converter
     {
-        [MethodImpl(Inline)]
-        public static T convert<S,T>(in S src, out T dst)
-            where S : unmanaged
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(sbyte) 
-            || typeof(T) == typeof(short) 
-            || typeof(T) == typeof(int) 
-            || typeof(T) == typeof(long))
-                return converti<S,T>(src, out dst);
-            else if(typeof(T) == typeof(byte) 
-            || typeof(T) == typeof(ushort) 
-            || typeof(T) == typeof(uint) 
-            || typeof(T) == typeof(ulong))
-                return convertu<S,T>(src, out dst);
-            else
-                return convertx<S,T>(src, out dst);
-        }
 
         [MethodImpl(Inline)]   
-        public static T convert<S,T>(S src)
+        public static T convert<S,T>(in S src)
             where T : unmanaged
             where S : unmanaged
         {
@@ -45,165 +27,122 @@ namespace Z0
             || typeof(T) == typeof(short) 
             || typeof(T) == typeof(int) 
             || typeof(T) == typeof(long))
-                return converti<S,T>(src);
+                return converti<S,T>(ref asRef(in src));
             else if(typeof(T) == typeof(byte) 
             || typeof(T) == typeof(ushort) 
             || typeof(T) == typeof(uint) 
             || typeof(T) == typeof(ulong))
-                return convertu<S,T>(src);
+                return convertu<S,T>(ref asRef(in src));
             else
-                return convertx<S,T>(src);
+                return convertx<S,T>(ref asRef(in src));
         }
 
         
+
         [MethodImpl(Inline)]
-        static T converti<S,T>(in S src, out T dst)
+        static T converti<S,T>(ref S src)
                 where S : unmanaged
                 where T : unmanaged
         {
             if(typeof(S) == typeof(sbyte))
-                return convert(int8(in src), out dst);
+                return convert<T>(int8(ref src));
             else if(typeof(S) == typeof(short))
-                return convert(int16(in src), out dst);
+                return convert<T>(int16(ref src));
             else if(typeof(S) == typeof(int))
-                return convert(int32(in src), out dst);
+                return convert<T>(int32(ref src));
             else 
-                return convert(int64(in src), out dst);                            
-        }
-
-        [MethodImpl(Inline)]
-        static T converti<S,T>(S src)
-                where S : unmanaged
-                where T : unmanaged
-        {
-            if(typeof(S) == typeof(sbyte))
-                return convert<T>(int8(src));
-            else if(typeof(S) == typeof(short))
-                return convert<T>(int16(src));
-            else if(typeof(S) == typeof(int))
-                return convert<T>(int32(src));
-            else 
-                return convert<T>(int64(src));                            
+                return convert<T>(int64(ref src));                            
         }
 
 
         [MethodImpl(Inline)]
-        static T convertu<S,T>(in S src, out T dst)
+        static T convertu<S,T>(ref S src)
             where S : unmanaged
             where T : unmanaged
         {
             if(typeof(S) == typeof(byte))
-                return convert(uint8(in src), out dst);
+                return convert<T>(uint8(ref src));
             else if(typeof(S) == typeof(ushort))
-                return convert(uint16(in src), out dst);
+                return convert<T>(uint16(ref src));
             else if(typeof(S) == typeof(uint))
-                return convert(uint32(in src), out dst);
+                return convert<T>(uint32(ref src));
             else
-                return convert(uint64(in src), out dst);
-        }
-
-        [MethodImpl(Inline)]
-        static T convertu<S,T>(in S src)
-            where S : unmanaged
-            where T : unmanaged
-        {
-            if(typeof(S) == typeof(byte))
-                return convert<T>(uint8(in src));
-            else if(typeof(S) == typeof(ushort))
-                return convert<T>(uint16(in src));
-            else if(typeof(S) == typeof(uint))
-                return convert<T>(uint32(in src));
-            else
-                return convert<T>(uint64(in src));
+                return convert<T>(uint64(ref src));
         }
 
 
+
+
         [MethodImpl(Inline)]
-        static T convertx<S,T>(in S src, out T dst)
+        static T convertx<S,T>(ref S src)
             where S : unmanaged
             where T : unmanaged
         {
             if(typeof(S) == typeof(float))
-                return convert(float32(in src), out dst);
+                return convert<T>(float32(ref src));
             else if(typeof(S) == typeof(double))
-                return convert(float64(in src), out dst);
+                return convert<T>(float64(ref src));
             else if(typeof(S) == typeof(char))
-                return convert(char16(in src), out dst);
+                return convert<T>(char16(ref src));
             else            
                 throw unsupported<T>();                            
         }
 
 
         [MethodImpl(Inline)]
-        static T convertx<S,T>(in S src)
-            where S : unmanaged
+        static ref sbyte int8<T>(ref T src)
             where T : unmanaged
-        {
-            if(typeof(S) == typeof(float))
-                return convert<T>(float32(in src));
-            else if(typeof(S) == typeof(double))
-                return convert<T>(float64(in src));
-            else if(typeof(S) == typeof(char))
-                return convert<T>(char16(in src));
-            else            
-                throw unsupported<T>();                            
-        }
-
+                => ref Unsafe.As<T,sbyte>(ref src);
 
         [MethodImpl(Inline)]
-        static unsafe sbyte int8<T>(in T src)
+        static ref byte uint8<T>(ref T src)
             where T : unmanaged
-                => *(sbyte*)(Unsafe.AsPointer(ref asRef(in src)));
+                => ref Unsafe.As<T,byte>(ref src);
 
         [MethodImpl(Inline)]
-        static unsafe byte uint8<T>(in T src)
+        static ref short int16<T>(ref T src)
             where T : unmanaged
-                => *(byte*)(Unsafe.AsPointer(ref asRef(in src)));
+                => ref Unsafe.As<T,short>(ref src);
 
         [MethodImpl(Inline)]
-        static unsafe short int16<T>(in T src)
+        static ref ushort uint16<T>(ref T src)
             where T : unmanaged
-                => *(short*)(Unsafe.AsPointer(ref asRef(in src)));
+                => ref Unsafe.As<T,ushort>(ref src);
 
         [MethodImpl(Inline)]
-        static unsafe ushort uint16<T>(in T src)
+        static ref int int32<T>(ref T src)
             where T : unmanaged
-                => *(ushort*)(Unsafe.AsPointer(ref asRef(in src)));
+                => ref Unsafe.As<T,int>(ref src);
 
         [MethodImpl(Inline)]
-        static unsafe int int32<T>(in T src)
+        static ref uint uint32<T>(ref T src)
             where T : unmanaged
-                => *(int*)(Unsafe.AsPointer(ref asRef(in src)));
+                => ref Unsafe.As<T,uint>(ref src);
 
         [MethodImpl(Inline)]
-        static unsafe uint uint32<T>(in T src)
+        static ref long int64<T>(ref T src)
             where T : unmanaged
-                => *(uint*)(Unsafe.AsPointer(ref asRef(in src)));
+                => ref Unsafe.As<T,long>(ref src);
 
         [MethodImpl(Inline)]
-        static unsafe long int64<T>(in T src)
+        static ref ulong uint64<T>(ref T src)
             where T : unmanaged
-                => *(long*)(Unsafe.AsPointer(ref asRef(in src)));
+                => ref Unsafe.As<T,ulong>(ref src);
 
         [MethodImpl(Inline)]
-        static unsafe ulong uint64<T>(in T src)
+        static ref float float32<T>(ref T src)
             where T : unmanaged
-                => *(ulong*)(Unsafe.AsPointer(ref asRef(in src)));
+                => ref Unsafe.As<T,float>(ref src);
 
-        // [MethodImpl(Inline)]
-        // static unsafe float float32<T>(in T src)
-        //     where T : unmanaged
-        //         => *(float*)(Unsafe.AsPointer(ref asRef(in src)));
+        [MethodImpl(Inline)]
+        static ref double float64<T>(ref T src)
+            where T : unmanaged
+                => ref Unsafe.As<T,double>(ref src); //*(double*)(Unsafe.AsPointer(ref src));
 
-        // [MethodImpl(Inline)]
-        // static unsafe double float64<T>(in T src)
-        //     where T : unmanaged
-        //         => *(double*)(Unsafe.AsPointer(ref asRef(in src)));
-
-        // [MethodImpl(Inline)]
-        // static unsafe char char16<T>(in T src)
-        //     where T : unmanaged
-        //         => *(char*)(Unsafe.AsPointer(ref asRef(in src)));
+        [MethodImpl(Inline)]
+        static ref char char16<T>(ref T src)
+            where T : unmanaged
+                => ref Unsafe.As<T,char>(ref src);
 
 
 

@@ -30,7 +30,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ref BitMatrix16 xor(in BitMatrix16 A, in BitMatrix16 B, ref BitMatrix16 C)
         {
-            dinx.xor(Vec256.Load(ref A[0]), Vec256.Load(ref B[0])).StoreTo(ref C[0]);
+            dinx.vxor(Vec256.Load(ref A[0]), Vec256.Load(ref B[0])).StoreTo(ref C[0]);
             return ref C;
         }
 
@@ -40,7 +40,7 @@ namespace Z0
             var dst = BitMatrix16.Alloc();
             lhs.LoadCpuVec(out Vec256<ushort> vLhs);
             rhs.LoadCpuVec(out Vec256<ushort> vRhs);
-            dinx.xor(vLhs,vRhs).StoreTo(ref dst.Data[0]);
+            dinx.vxor(vLhs,vRhs).StoreTo(ref dst.Data[0]);
             return lhs;
         }
 
@@ -67,7 +67,7 @@ namespace Z0
         {
             const int rowstep = 8;
             for(var i=0; i< A.RowCount; i += rowstep)
-                dinx.xor(Vec256.Load(ref A[i]), Vec256.Load(ref B[i])).StoreTo(ref C[i]);
+                dinx.vxor(Vec256.Load(ref A[i]), Vec256.Load(ref B[i])).StoreTo(ref C[i]);
             return ref C;
         }
 
@@ -80,7 +80,7 @@ namespace Z0
         {
             const int rowstep = 4;
             for(var i=0; i< A.RowCount; i += rowstep)
-                dinx.xor(Vec256.Load(ref A[i]), Vec256.Load(ref B[i])).StoreTo(ref C[i]);
+                dinx.vxor(Vec256.Load(ref A[i]), Vec256.Load(ref B[i])).StoreTo(ref C[i]);
             return ref C;
         }
 

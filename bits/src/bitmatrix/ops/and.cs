@@ -36,7 +36,7 @@ namespace Z0
         {
             ref var A = ref lhs.LoadCpuVec(out Vec256<ushort> _);
             ref var B = ref rhs.LoadCpuVec(out Vec256<ushort> _);
-            var C = dinx.and(A,B);
+            var C = dinx.vand(A,B);
             return BitMatrix16.From(C);
         }
 
@@ -50,7 +50,7 @@ namespace Z0
             const int rowstep = 8;
             var dst = BitMatrix32.Alloc();
             for(var i=0; i< A.RowCount; i += rowstep)
-                dinx.and(Vec256.Load(ref A[i]), Vec256.Load(ref B[i])).StoreTo(ref dst[i]);
+                dinx.vand(Vec256.Load(ref A[i]), Vec256.Load(ref B[i])).StoreTo(ref dst[i]);
             return dst;
         }
 

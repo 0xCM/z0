@@ -87,9 +87,9 @@ namespace Z0
         public static Vec256<ulong> mul(in Vec256<ulong> x, in Vec256<ulong> y)    
         {
             var loMask = Vec256.Fill(0x00000000fffffffful);    
-            var xl = dinx.and(x, loMask).As<uint>();
+            var xl = dinx.vand(x, loMask).As<uint>();
             var xh = dinx.srl(x, 32).As<uint>();
-            var yl = dinx.and(y, loMask).As<uint>();
+            var yl = dinx.vand(y, loMask).As<uint>();
             var yh = dinx.srl(y, 32).As<uint>();
 
             var xh_yl = dinx.mul(xh, yl);

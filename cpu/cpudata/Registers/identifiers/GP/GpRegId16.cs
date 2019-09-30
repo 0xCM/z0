@@ -9,89 +9,87 @@ namespace Z0
     /// <summary>
     /// Classifies 16-bit general purpose registers
     /// </summary>
-    [Flags]
-    public enum GpRegId16 : ulong
+    public enum GpRegId16 : uint
     {        
         /// <summary>
-        /// Identifies RAX[15:0] or EAX[15:0]
+        /// Identifies the 16-bit register AX = EAX[15:0] = RAX[15:0] 
         /// </summary>
-        ax =  (RegOffsets.RAX << 32) | Pow2.T04,  
+        ax =  0,  
 
         /// <summary>
-        /// Identifies RBX[15:0] or EBX[15:0]
+        /// Identifies the 16-bit register CX = ECX[15:0] = RCX[15:0] 
         /// </summary>
-        bx = (RegOffsets.RBX << 32) | Pow2.T04,
+        cx = ax + 1,
 
         /// <summary>
-        /// Identifies RCX[15:0] or ECX[15:0]
+        /// Identifies the 16-bit register DX = EDX[15:0] = RDX[15:0]
         /// </summary>
-        cx = (RegOffsets.RCX << 32) | Pow2.T04,
+        dx = cx + 1,
 
         /// <summary>
-        /// Identifies RDX[15:0] or EDX[15:0]
+        /// Identifies the 16-bit register BX = RBX[15:0] or EBX[15:0]
         /// </summary>
-        dx = (RegOffsets.RDX << 32) | Pow2.T04,
-        
-        /// <summary>
-        /// Identifies RSI[15:0] or ESI[15:0]
-        /// </summary>
-        si  = (RegOffsets.RSI << 32) | Pow2.T04,
-
+        bx = dx + 1,
 
         /// <summary>
-        /// Identifies RDI[15:0] or EDI[15:0]
+        /// Identifies the 16-bit register SP = ESP[15:0] = RSP[15:0]
         /// </summary>
-        di = (RegOffsets.RDI << 32) | Pow2.T04,
+        sp = bx + 1,
 
         /// <summary>
-        /// Identifies RBP[15:0] or EBP[15:0]
+        /// Identifies the 16-bit register BP = EBP[15:0] = RBP[15:0]
         /// </summary>
-        bp = (RegOffsets.RBP << 32) | Pow2.T04,
+        bp = sp + 1,
 
         /// <summary>
-        /// Identifies RSP[15:0] or ESP[15:0]
+        /// Identifies the 16-bit register SI = ESI[15:0] = RSI[15:0]
         /// </summary>
-        sp = (RegOffsets.RSP << 32) | Pow2.T04,
+        si  = bp + 1,
 
         /// <summary>
-        /// Identifies R8[15:0] or R8d[15:0]
+        /// Identifies the 16-bit register DI = EDI[15:0] = RDI[15:0]
         /// </summary>
-        r8w = (RegOffsets.R8 << 32) | Pow2.T04,
+        di = si + 1,
 
         /// <summary>
-        /// Identifies R9[15:0] or R9d[15:0]
+        /// Identifies the 16-bit register R8w = R8d[15:0] = R8[15:0]
         /// </summary>
-        r9w = (RegOffsets.R9 << 32) | Pow2.T04,
+        r8w = di + 1,
 
         /// <summary>
-        /// Identifies R10[15:0] or R10d[15:0]
+        /// Identifies the 16-bit register R9w = R9d[15:0] = R9[15:0]
         /// </summary>
-        r10w = (RegOffsets.R10 << 32) | Pow2.T04,
+        r9w = r8w + 1,
 
         /// <summary>
-        /// Identifies R11[15:0] or R11d[15:0]
+        /// Identifies the 16-bit register R10w = R10d[15:0] = R10[15:0]
         /// </summary>
-        r11w = (RegOffsets.R11 << 32) | Pow2.T04,
+        r10w = r9w + 1,
 
         /// <summary>
-        /// Identifies R12[15:0] or R12d[15:0]
+        /// Identifies the 16-bit register R11w = R11d[15:0] = R11[15:0]
         /// </summary>
-        r12w = (RegOffsets.R12 << 32) | Pow2.T04,
+        r11w = r10w + 1,
 
         /// <summary>
-        /// Identifies R13[15:0] or R13d[15:0]
+        /// Identifies the 16-bit register R11w = R12d[15:0] = R12[15:0]
         /// </summary>
-        r13w = (RegOffsets.R13 << 32) | Pow2.T04,
+        r12w = r11w + 1,
 
         /// <summary>
-        /// Identifies R14[15:0] or R14d[15:0]
+        /// Identifies the 16-bit register R13w = R13d[15:0] = R13[15:0]
         /// </summary>
-        r14w = (RegOffsets.R14 << 32) | Pow2.T04,
+        r13w = r12w + 1,
+
+        /// <summary>
+        /// Identifies the 16-bit register R14w = R14d[15:0] = R14[15:0]
+        /// </summary>
+        r14w = r13w + 1,
  
         /// <summary>
-        /// Identifies R15[15:0] or R15d[15:0]
+        /// Identifies the 16-bit register R15w = R15d[15:0] = R15[15:0]
         /// </summary>
-        r15w = (RegOffsets.R15 << 32) | Pow2.T04,
+        r15w = r14w + 1
     }
 
 }

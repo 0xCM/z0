@@ -20,6 +20,7 @@ namespace Z0
             public uint flags;            
         }
 
+
         public enum EFLAG : byte
         {
             /// <summary>

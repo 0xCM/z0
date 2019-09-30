@@ -19,19 +19,19 @@ namespace Z0
         {
 
             [FieldOffset(0)]
-            public uint r12d;
+            uint content;
 
             [FieldOffset(0)]
-            public R12W r12w;
+            R12W r12w;
 
             [FieldOffset(0)]
-            public R12B r12b;
+            R12B r12b;
  
             public const GpRegId Id = GpRegId.r12;            
 
             [MethodImpl(Inline)]
             public static implicit operator uint(R12D src)
-                => src.r12d;
+                => src.content;
 
             [MethodImpl(Inline)]
             public static implicit operator R12D(uint src)
@@ -41,13 +41,13 @@ namespace Z0
             public R12D(uint src)
                 : this()
             {
-                r12d = src;
+                content = src;
             }
 
             byte IGpReg32<R12>.Lo8 
             { 
                 [MethodImpl(Inline)]
-                get => r12b; 
+                get => !r12b; 
  
                 [MethodImpl(Inline)]
                 set => r12b = value;

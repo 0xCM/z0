@@ -9,7 +9,6 @@ namespace Z0
 
     using static zfunc;
 
-
     /// <summary>
     /// Defines a 32-bit immediate
     /// </summary>    

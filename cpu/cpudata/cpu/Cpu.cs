@@ -361,7 +361,7 @@ namespace Z0
         public ref R11B r11b
         {
             [MethodImpl(Inline)]
-            get => ref Gpr.r11.r11b;
+            get => ref Gpr.r11b;
         }
 
         public ref R11W r11w

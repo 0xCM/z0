@@ -77,13 +77,13 @@ namespace Z0
         void and_128_check<T>(int blocks = DefaultSampleSize)
             where T : unmanaged
         {
-            CpuOpVerify.VerifyBinOp(Random, blocks, new Vec128BinOp<T>(gbits.vand), gmath.and<T>);
+            CpuOpVerify.VerifyBinOp(Random, blocks, new Vec128BinOp<T>(ginx.vand), gmath.and<T>);
         }
 
         void and_256_check<T>(int blocks = DefaultSampleSize)
             where T : unmanaged
         {
-            CpuOpVerify.VerifyBinOp(Random, blocks, new Vector256BinOp<T>(gbits.vand<T>), gmath.and<T>);
+            CpuOpVerify.VerifyBinOp(Random, blocks, new Vec256BinOp<T>(ginx.vand<T>), gmath.and<T>);
         }
     }
 

@@ -15,7 +15,7 @@ namespace Z0
     partial class Registers
     {
         /// <summary>
-        /// A 64-bit general-purpose register typically used to return a value to a caller
+        /// A 64-bit general-purpose register typically used to return an integer value to a caller
         /// </summary>
         [StructLayout(LayoutKind.Explicit)]
         public struct RAX : IGpReg64<RAX>
@@ -37,6 +37,9 @@ namespace Z0
 
             public const GpRegId Id = GpRegId.rcx;
 
+            public Volatility Volatility
+                => Volatility.Volatile;
+
             [MethodImpl(Inline)]
             public static ulong operator !(RAX r)
                 => r.rax;
@@ -51,6 +54,9 @@ namespace Z0
             {
                 rax = src;
             }
+
+            public GpRegId64 RegKind 
+                => GpRegId64.rax;
 
             byte IGpReg64<RAX>.Lo8 
             { 

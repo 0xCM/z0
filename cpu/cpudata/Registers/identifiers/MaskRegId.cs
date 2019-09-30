@@ -6,24 +6,23 @@ namespace Z0
 {
     using System;
     
-    [Flags]
     public enum MaskRegId : ulong
     {
-        c0 = (RegOffsets.Mask << 32) | Pow2.T06,
+        k0 = 0,
         
-        c1 = ((RegOffsets.Mask << 32) + 8) | Pow2.T06,
+        k1 = k0 + 1,
 
-        c2 = ((RegOffsets.Mask << 32) + 16) | Pow2.T06,
+        k2 = k1 + 1,
 
-        c3 = ((RegOffsets.Mask << 32) + 24) | Pow2.T06,
+        k3 = k2 + 1,
 
-        c4 = ((RegOffsets.Mask << 32) + 32) | Pow2.T06,
+        k4 = k3 + 1,
 
-        c5 = ((RegOffsets.Mask << 32) + 40) | Pow2.T06,
+        k5 = k4 + 1,
 
-        c6 = ((RegOffsets.Mask << 32) + 48) | Pow2.T06,
+        k6 = k5 + 1,
 
-        c7 = ((RegOffsets.Mask << 32) + 56) | Pow2.T06,
+        k7 = k6 + 1,
 
     }
 }

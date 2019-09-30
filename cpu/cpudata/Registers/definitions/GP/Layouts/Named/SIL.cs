@@ -18,13 +18,13 @@ namespace Z0
         public struct SIL : IGpReg8<SIL>
         {
             [FieldOffset(0)]
-            public byte sil;
+            byte content;
 
             public const GpRegId Id = GpRegId.sil;            
 
             [MethodImpl(Inline)]
             public static implicit operator byte(SIL src)
-                => src.sil;
+                => src.content;
 
             [MethodImpl(Inline)]
             public static implicit operator SIL(byte src)
@@ -32,7 +32,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public SIL(byte src)
-                => sil = src;
+                => content = src;
 
             GpRegId IGpReg.Id 
                 => Id;

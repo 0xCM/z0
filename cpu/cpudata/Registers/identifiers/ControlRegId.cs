@@ -10,37 +10,86 @@ namespace Z0
     [Flags]
     public enum ControlRegId : ulong
     {
-        c0 = (RegOffsets.Control << 32) | Pow2.T06,
         
-        c1 = ((RegOffsets.Control << 32) + 8) | Pow2.T06,
+        /// <summary>
+        /// Identifies the 32-bit control register C0
+        /// </summary>
+        c0 = 0,
+        
+        /// <summary>
+        /// Identifies the 32-bit control register C1
+        /// </summary>
+        c1 = c0 + 1,
 
-        c2 = ((RegOffsets.Control << 32) + 16) | Pow2.T06,
+        /// <summary>
+        /// Identifies the 32-bit control register C2
+        /// </summary>
+        c2 = c1 + 1,
 
-        c3 = ((RegOffsets.Control << 32) + 24) | Pow2.T06,
+        /// <summary>
+        /// Identifies the 32-bit control register C3
+        /// </summary>
+        c3 = c2 + 1,
 
-        c4 = ((RegOffsets.Control << 32) + 32) | Pow2.T06,
+        /// <summary>
+        /// Identifies the 32-bit control register C4
+        /// </summary>
+        c4 = c3 + 1,
 
-        c5 = ((RegOffsets.Control << 32) + 40) | Pow2.T06,
+        /// <summary>
+        /// Identifies the 32-bit control register C5
+        /// </summary>
+        c5 = c4 + 1,
 
-        c6 = ((RegOffsets.Control << 32) + 48) | Pow2.T06,
+        /// <summary>
+        /// Identifies the 32-bit control register C6
+        /// </summary>
+        c6 = c5 + 1,
 
-        c7 = ((RegOffsets.Control << 32) + 56) | Pow2.T06,
+        /// <summary>
+        /// Identifies the 32-bit control register C7
+        /// </summary>
+        c7 = c6 + 1,
 
-        c8 = ((RegOffsets.Control << 32) + 64) | Pow2.T06,
+        /// <summary>
+        /// Identifies the 32-bit control register C8
+        /// </summary>
+        c8 = c7 + 1,
 
-        c9 = ((RegOffsets.Control << 32) + 72) | Pow2.T06,
+        /// <summary>
+        /// Identifies the 32-bit control register C9
+        /// </summary>
+        c9 = c8 + 1,
 
-        c10 = ((RegOffsets.Control << 32) + 80) | Pow2.T06,
+        /// <summary>
+        /// Identifies the 32-bit control register C10
+        /// </summary>
+        c10 = c9 + 1,
 
-        c11 = ((RegOffsets.Control << 32) + 88) | Pow2.T06,
+        /// <summary>
+        /// Identifies the 32-bit control register C11
+        /// </summary>
+        c11 = c10 + 1,
 
-        c12 = ((RegOffsets.Control << 32) + 96) | Pow2.T06,
+        /// <summary>
+        /// Identifies the 32-bit control register C12
+        /// </summary>
+        c12 = c11 + 1,
 
-        c13 = ((RegOffsets.Control << 32) + 104) | Pow2.T06,
+        /// <summary>
+        /// Identifies the 32-bit control register C13
+        /// </summary>
+        c13 = c12 + 1,
 
-        c14 = ((RegOffsets.Control << 32) + 112) | Pow2.T06,
+        /// <summary>
+        /// Identifies the 32-bit control register C14
+        /// </summary>
+        c14 = c13 + 1,
 
-        c15 = ((RegOffsets.Control << 32) + 120) | Pow2.T06,
+        /// <summary>
+        /// Identifies the 32-bit control register C15
+        /// </summary>
+        c15 = c14 + 1,
 
     }
 }

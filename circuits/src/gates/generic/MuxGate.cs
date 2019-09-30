@@ -11,7 +11,7 @@ namespace Z0
 
     using static zfunc;
 
-    public readonly struct MuxGate<T> : ITernaryGate<T>,  ITernaryGate<Vec128<T>>, ITernaryGate<Vector256<T>>
+    public readonly struct MuxGate<T> : ITernaryGate<T>,  ITernaryGate<Vec128<T>>, ITernaryGate<Vec256<T>>
         where T : unmanaged
     {
         internal static readonly MuxGate<T> Gate = default;
@@ -26,11 +26,11 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public Vec128<T> Send(in Vec128<T> x, in Vec128<T> y, in Vec128<T> control)
-            => gbits.vor(gbits.andn(in x, control), gbits.vand(y, control));
+            => ginx.vor(gbits.andn(in x, control), ginx.vand(y, control));
 
         [MethodImpl(Inline)]
-        public Vector256<T> Send(in Vector256<T> x, in Vector256<T> y, in Vector256<T> control)
-            => gbits.or(gbits.andn(x, control), gbits.vand<T>(y, control));
+        public Vec256<T> Send(in Vec256<T> x, in Vec256<T> y, in Vec256<T> control)
+            => ginx.vor(gbits.andn(x, control), ginx.vand<T>(y, control));
 
     }
 }

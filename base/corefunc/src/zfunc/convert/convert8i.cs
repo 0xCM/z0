@@ -12,24 +12,6 @@ namespace Z0
 
     partial class Converter
     {
-        [MethodImpl(Inline)]
-        public static T convert<T>(sbyte src, out T dst)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(sbyte) 
-            || typeof(T) == typeof(short) 
-            || typeof(T) == typeof(int) 
-            || typeof(T) == typeof(long))
-                dst = converti<T>(src);
-            else if(typeof(T) == typeof(byte) 
-            || typeof(T) == typeof(ushort) 
-            || typeof(T) == typeof(uint) 
-            || typeof(T) == typeof(ulong))
-                dst = convertu<T>(src);
-            else
-                dst = convertx<T>(src);
-            return dst;
-        }
 
         [MethodImpl(Inline)]
         public static T convert<T>(sbyte src)
@@ -82,7 +64,7 @@ namespace Z0
             if(typeof(T) == typeof(float))
                 return generic<T>((float)src);
             else if(typeof(T) == typeof(double))
-                return generic<T>(Float64Convert.to64f(src));
+                return generic<T>((double)((long)src));
             else if(typeof(T) == typeof(char))
                 return  generic<T>((char)src);
             else            

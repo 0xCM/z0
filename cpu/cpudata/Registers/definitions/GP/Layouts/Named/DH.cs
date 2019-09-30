@@ -18,24 +18,21 @@ namespace Z0
         public struct DH : IGpReg8<DH>
         {
             [FieldOffset(0)]
-            public byte dh;
-
-            public const string Name = nameof(DH);
+            byte content;            
 
             public const GpRegId Id = GpRegId.dh;          
 
             [MethodImpl(Inline)]
-            public static implicit operator byte(DH src)
-                => src.dh;
+            public static byte operator !(DH r)
+                => r.content;
 
             [MethodImpl(Inline)]
             public static implicit operator DH(byte src)
-                => new DH(src);
-            
+                => new DH(src);            
 
             [MethodImpl(Inline)]
             public DH(byte src)
-                => this.dh = src;
+                => this.content = src;
 
             GpRegId IGpReg.Id 
                 => Id; 

@@ -46,10 +46,13 @@ namespace Z0
                 rbp = src;
             }
 
+            public GpRegId64 RegKind 
+                => GpRegId64.rbp;
+
             byte IGpReg64<RBP>.Lo8 
             { 
                 [MethodImpl(Inline)]
-                get => bpl; 
+                get => !bpl; 
  
                 [MethodImpl(Inline)]
                 set => bpl = value;

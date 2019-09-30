@@ -13,7 +13,7 @@ namespace Z0
     
     using static zfunc;
 
-    public static class zfoc
+    partial class zfoc
     {
         //~ 8i -> x
 
@@ -668,14 +668,23 @@ namespace Z0
 
         // ~ ch -> x
 
+        public static sbyte convert_ch16_to_8i(char src)
+            => (sbyte)src;
+
         public static sbyte convert_ch16_to_g8i(char src)
             => Converter.convert<sbyte>(src);
 
         public static byte convert_ch16_to_g8u(char src)
             => Converter.convert<byte>(src);
-            
+
+        public static short convert_ch16_to_16i(char src)
+            => (short)src;
+
         public static short convert_ch16_to_g16i(char src)
             => Converter.convert<short>(src);
+
+        public static ushort convert_ch16_to_16u(char src)
+            => (ushort)src;
 
         public static ushort convert_ch16_to_g16u(char src)
             => Converter.convert<ushort>(src);

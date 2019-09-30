@@ -11,11 +11,18 @@ namespace Z0
 
     using static zfunc;
 
-
+    /// <summary>
+    /// Represents a 128-bit vector register
+    /// </summary>
+    /// <remarks>
+    /// When invoking a function that accepts XMM arguments, registers
+    /// xmm(0), xmm(1), xmm(2), xmm(3), xmm(4) and xmm(5) specify
+    /// the first 6 function arguments when applicable. Moreover, the lo 80 bits of
+    /// xmm(0) holds a floating-point return value (when in 64-bit mode)
+    /// </remarks>
     [StructLayout(LayoutKind.Sequential, Size = ByteCount)]
-    public unsafe struct XMM : IMMReg, ICpuReg128, IEquatable<XMM>
+    public struct XMM : IMMReg, ICpuReg128, IEquatable<XMM>
     {
-
         ulong x0;
 
         ulong x1;
@@ -34,11 +41,30 @@ namespace Z0
         /// </summary>
         public static readonly XMM Zero = FromCells(0ul, 0ul);
 
+        /// <summary>
+        /// Presents a generic cpu vector as a register
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static XMM From<T>(Vec128<T> src)
+            where T : unmanaged
+                => Unsafe.As<Vec128<T>,XMM>(ref src);
+
+        /// <summary>
+        /// Presents a generic cpu vector as a register
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static XMM From<T>(Vector128<T> src)
+            where T : unmanaged
+                => Unsafe.As<Vector128<T>,XMM>(ref src);
+
         [MethodImpl(Inline)]
         public static ref readonly BitMap128<T> BitMap<T>()
             where T : unmanaged
                 => ref Z0.BitMap.Map128<T>();
-
 
         /// <summary>
         /// Creates a register with content from a cell parameter array
@@ -66,69 +92,6 @@ namespace Z0
                 Unsafe.Add(ref head, i) = src[i];
             return target;
         }
-
-        /// <summary>
-        /// Replaces the content of the target register with source vector content
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
-        public void Assign<T>(Vector128<T> src)
-            where T : unmanaged
-        {
-            bytes(src).CopyTo(this.AsSpan<byte>());
-        }
-        
-
-        /// <summary>
-        /// Presents a generic cpu vector as a register
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
-        public static XMM From<T>(Vector128<T> src)
-            where T : unmanaged
-                => Unsafe.As<Vector128<T>,XMM>(ref src);
-
-        [MethodImpl(Inline)]
-        public static implicit operator XMM(Vector128<sbyte> src)
-            => From(src);
-
-        [MethodImpl(Inline)]
-        public static implicit operator XMM(Vector128<byte> src)
-            => From(src);
-
-        [MethodImpl(Inline)]
-        public static implicit operator XMM(Vector128<short> src)
-            => From(src);
-
-        [MethodImpl(Inline)]
-        public static implicit operator XMM(Vector128<ushort> src)
-            => From(src);
-
-        [MethodImpl(Inline)]
-        public static implicit operator XMM(Vector128<int> src)
-            => From(src);
-
-        [MethodImpl(Inline)]
-        public static implicit operator XMM(Vector128<uint> src)
-            => From(src);
-
-        [MethodImpl(Inline)]
-        public static implicit operator XMM(Vector128<long> src)
-            => From(src);
-
-        [MethodImpl(Inline)]
-        public static implicit operator XMM(Vector128<ulong> src)
-            => From(src);
-
-        [MethodImpl(Inline)]
-        public static implicit operator XMM(Vector128<float> src)
-            => From(src);
-
-        [MethodImpl(Inline)]
-        public static implicit operator XMM(Vector128<double> src)
-            => From(src);
 
         [MethodImpl(Inline)]
         public static bool operator ==(XMM lhs, XMM rhs)
@@ -188,7 +151,28 @@ namespace Z0
         public ref T Cell<T>(uint index)
             where T : unmanaged
                 => ref Unsafe.Add(ref First<T>(), (int)index);
-        
+
+        /// <summary>
+        /// Specifies the intrinsic volatility of the register
+        /// </summary>
+        /// <param name="index">The 0-based register index</param>
+        /// <remarks>See https://docs.microsoft.com/en-us/cpp/build/x64-software-conventions?view=vs-2019</remarks>
+        [MethodImpl(Inline)]
+        public Volatility Volatility(int index)
+            => index <= 5 ? Z0.Volatility.Volatile : Z0.Volatility.NonVolatile;
+
+        /// <summary>
+        /// Replaces the content of the target register with source vector content
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]
+        public void Assign<T>(Vec128<T> src)
+            where T : unmanaged
+        {
+            bytes(src.xmm).CopyTo(this.AsSpan<byte>());
+        }
+
         public Bit this[BitPos bitpos]
         {
             [MethodImpl(Inline)]
@@ -222,8 +206,6 @@ namespace Z0
             BitMask.set(ref cell, index.CellOffset, value);
         }
     
-
-
         /// <summary>
         /// Evaluates registers for content equality
         /// </summary>
@@ -239,13 +221,11 @@ namespace Z0
         public override string ToString()
             => Format<ulong>();
 
-
         public override bool Equals(object obj)
             => obj is XMM x ? Equals(x) : false;
         
         public override int GetHashCode()
             => x0.GetHashCode() + x1.GetHashCode();
-        
 
     }
 }    

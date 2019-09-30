@@ -10,84 +10,108 @@ namespace Z0
     /// <summary>
     /// Classifies 8-bit general purpose registers
     /// </summary>
-    [Flags]
-    public enum GpRegId8 : ulong
+    public enum GpRegId8 : uint
     {
         /// <summary>
-        /// Identifies RAX[7:0]
+        /// Identifies the 8-bit register AL = AX[7:0] = EAX[7:0] = RAX[7:0] 
         /// </summary>
-        al = (RegOffsets.RAX << 32) | Pow2.T03,
+        al = 0,
 
         /// <summary>
-        /// Identifies RAX[15:7]
+        /// Identifies the 8-bit register CL = CX[7:0] = ECX[7:0] = RCX[7:0]
         /// </summary>
-        ah =  ((RegOffsets.RAX << 32) + 4)  | Pow2.T03,
-        
-        /// <summary>
-        /// Identifies RBX[7:0]
-        /// </summary>
-        bl = (RegOffsets.RBX << 32) | Pow2.T03,
+        cl = al + 1,
 
         /// <summary>
-        /// Identifies RBX[15:7]
+        /// Identifies the 8-bit register DL = DX[7:0] = EDX[7:0] = RDX[7:0]
         /// </summary>
-        bh = ((RegOffsets.RBX << 32) + 4) | Pow2.T03,
+        dl = cl + 1,
 
         /// <summary>
-        /// Identifies RCX[7:0]
+        /// Identifies the 8-bit register BL = BX[7:0] = EBX[7:0] = RBX[7:0]
         /// </summary>
-        cl = (RegOffsets.RCX << 32) | Pow2.T03,
+        bl = dl + 1,
 
         /// <summary>
-        /// Identifies RCX[15:7]
+        /// Identifies the 8-bit register AH = RAX[15:7]
         /// </summary>
-        ch = ((RegOffsets.RCX << 32) + 4) | Pow2.T03,
+        ah =  bl + 1,
 
         /// <summary>
-        /// Identifies RDX[7:0]
+        /// Identifies the 8-bit register CH = RCX[15:7]
         /// </summary>
-        dl = (RegOffsets.RDX << 32) | Pow2.T03,
+        ch = ah + 1,
 
         /// <summary>
-        /// Identifies RDX[15:7]
+        /// Identifies the 8-bit register DH = RDX[15:7]
         /// </summary>
-        dh = ((RegOffsets.RDX << 32) + 4)| Pow2.T03,
+        dh = ch + 1,
 
         /// <summary>
-        /// Identifies RSI[7:0]
+        /// Identifies the 8-bit register BH = RBX[15:7]
         /// </summary>
-        sil = (RegOffsets.RSI << 32) | Pow2.T03,
+        bh = dh + 1,
 
         /// <summary>
-        /// Identifies RDI[7:0]
+        /// Identifies the 8-bit register R8b = R8[7:0]
         /// </summary>
-        dil = (RegOffsets.RDI << 32) | Pow2.T03,
+        r8b = bh + 1,
 
         /// <summary>
-        /// Identifies RBP[7:0]
+        /// Identifies the 8-bit register R9b = R9[7:0]
         /// </summary>
-        bpl = (RegOffsets.RBP << 32) | Pow2.T03,
+        r9b = r8b + 1,
 
         /// <summary>
-        /// Identifies RSP[7:0]
+        /// Identifies the 8-bit register R10b = R10[7:0]
         /// </summary>
-        spl = (RegOffsets.RSP << 32) | Pow2.T03,
+        r10b = r9b + 1,
 
-        r8b = (RegOffsets.R8 << 32) | Pow2.T03,
+        /// <summary>
+        /// Identifies the 8-bit register R11b = R11[7:0]
+        /// </summary>
+        r11b = r10b + 1,
 
-        r9b = (RegOffsets.R9 << 32) | Pow2.T03,
+        /// <summary>
+        /// Identifies the 8-bit register R12b = R12[7:0]
+        /// </summary>
+        r12b = r11b + 1,
 
-        r10b = (RegOffsets.R10 << 32) | Pow2.T03,
+        /// <summary>
+        /// Identifies the 8-bit register R13b = R13[7:0]
+        /// </summary>
+        r13b = r12b + 1,
 
-        r11b = (RegOffsets.R11 << 32) | Pow2.T03,
+        /// <summary>
+        /// Identifies the 8-bit register R14b = R14[7:0]
+        /// </summary>
+        r14b = r13b + 1,
 
-        r12b = (RegOffsets.R12 << 32) | Pow2.T03,
+        /// <summary>
+        /// Identifies the 8-bit register R15b = R15[7:0]
+        /// </summary>
+        r15b = r14b + 1,
 
-        r13b = (RegOffsets.R13 << 32) | Pow2.T03,
+        /// <summary>
+        /// Identifies the 8-bit register SIL = RSI[7:0]
+        /// </summary>
+        sil = dh << 8,
 
-        r14b = (RegOffsets.R14 << 32) | Pow2.T03,
+        /// <summary>
+        /// Identifies  the 8-bit register DIL = RDI[7:0]
+        /// </summary>
+        dil = bh << 8,
 
-        r15b = (RegOffsets.R15 << 32) | Pow2.T03,
+        /// <summary>
+        /// Identifies the 8-bit register BPL = RBP[7:0]
+        /// </summary>
+        bpl = ch << 8,
+
+        /// <summary>
+        /// Identifies the 8-bit register SPL = RSP[7:0]
+        /// </summary>
+        spl = ah << 8
+
 
     }
 

@@ -124,7 +124,7 @@ namespace Z0
             Claim.eq(expect, actual);
         }
 
-        public static void VerifyBinOp<T>(IPolyrand random, int blocks, Vector256BinOp<T> inXOp, Func<T,T,T> primalOp)
+        public static void VerifyBinOp<T>(IPolyrand random, int blocks, Vec256BinOp<T> inXOp, Func<T,T,T> primalOp)
             where T : unmanaged
         {
             var blocklen = Span256<T>.BlockLength;                     
@@ -149,7 +149,7 @@ namespace Z0
                 for(var i =0; i<blocklen; i++)
                     tmp[i] = primalOp(lhs[offset + i], rhs[offset + i]);
 
-                var vExpect = Vec256.LoadVector<T>(ref tmp[0]);
+                var vExpect = Vec256.Load<T>(ref tmp[0]);
              
                 var vX = lhs.LoadVec256(block);
                 var vY = rhs.LoadVec256(block);

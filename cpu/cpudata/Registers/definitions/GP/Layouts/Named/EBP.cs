@@ -46,7 +46,7 @@ namespace Z0
             byte IGpReg32<EBP>.Lo8 
             { 
                 [MethodImpl(Inline)]
-                get => bpl; 
+                get => !bpl; 
  
                 [MethodImpl(Inline)]
                 set => bpl = value;

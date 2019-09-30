@@ -26,7 +26,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public Vec128<T> Send(in Vec128<T> a, in Vec128<T> b)
-            => gbits.vor(in a,in b);
+            => ginx.vor(in a,in b);
 
         [MethodImpl(Inline)]
         public Vector256<T> Send(in Vector256<T> a, in Vector256<T> b)

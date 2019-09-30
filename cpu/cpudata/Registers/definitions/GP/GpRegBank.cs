@@ -170,7 +170,6 @@ namespace Z0
         [FieldOffset(R10Offset)]
         public R10B r10b;
 
-        //!--
 
         [FieldOffset(R11Offset)]
         public R11 r11;
