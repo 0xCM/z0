@@ -563,7 +563,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public BitVector128 Or(BitVector128 rhs)
         {
-            xmm = Bits.vor(xmm, rhs.xmm);
+            xmm = dinx.vor(xmm, rhs.xmm);
             return this;
         }
 
@@ -574,7 +574,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public BitVector128 XOr(BitVector128 rhs)
         {
-            xmm = Bits.vxor(xmm,rhs.xmm);
+            xmm = dinx.vxor(xmm,rhs.xmm);
             return this;
         }
 
@@ -594,7 +594,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public BitVector128 Flip()
         {
-            xmm = Bits.flip(xmm);
+            xmm = dinx.vflip(xmm);
             return this;
         }
 
@@ -605,7 +605,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public BitVector128 Sll(byte offset)
         {
-            xmm = Bits.sll(xmm,offset);
+            xmm = dinx.sll(xmm,offset);
             return this;
         }
 
@@ -616,7 +616,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public BitVector128 Srl(byte offset)
         {
-            xmm = Bits.srl(xmm,offset);
+            xmm = dinx.srl(xmm,offset);
             return this;
         }
 
@@ -708,7 +708,7 @@ namespace Z0
         /// <param name="pos">The position of the bit to enable</param>
         [MethodImpl(Inline)]
         public void Enable(BitPos pos)
-            => xmm = Bits.vor(xmm, One << pos);            
+            => xmm = dinx.vor(xmm, One << pos);            
 
         // [MethodImpl(Inline)]
         // public void Disable(BitPos pos)

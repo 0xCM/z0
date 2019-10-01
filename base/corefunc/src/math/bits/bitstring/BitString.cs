@@ -223,15 +223,6 @@ namespace Z0
         public readonly Span<byte> Pack(int offset = 0, int? minlen = null)
             => PackedBits(bitseq, offset, minlen);
 
-
-        static ref byte pack(in Span<byte> src, ref byte dst)
-        {
-            var last = Math.Min(Pow2.T03, src.Length) - 1;
-            for(var i = 0; i <= last; i++)
-                dst |= (byte)(src[i] << i);
-            return ref dst;
-        }
-
         /// <summary>
         /// Counts the number of leading zero bits
         /// </summary>
@@ -348,6 +339,12 @@ namespace Z0
         }
 
         /// <summary>
+        /// Packs the bitsequence into a bytespan
+        /// </summary>
+        public Span<byte> ToPackedBytes()
+            => PackedBits(bitseq);
+
+        /// <summary>
         /// Determines whether this bitstring represents the same value as another, ignoring
         /// leading zeroes
         /// </summary>
@@ -461,9 +458,6 @@ namespace Z0
                 result = $"0b{result}";
             return result;
 
-            // return  
-            //     (specifier ? "0b" : string.Empty) 
-            //   + (tlz ? x.TrimStart('0') : x);
         }
 
         [MethodImpl(Inline)]

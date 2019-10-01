@@ -102,9 +102,174 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
+        public static YMM From<T>(Vec256<T> src)
+            where T : unmanaged
+                => Unsafe.As<Vec256<T>,YMM>(ref src);
+
+        [MethodImpl(Inline)]
         public static YMM From<T>(Vector256<T> src)
             where T : unmanaged
                 => Unsafe.As<Vector256<T>,YMM>(ref src);
+
+        /// <summary>
+        /// Implicitly converts a source vector to a 256-bit memory block
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        [MethodImpl(Inline)]
+        public static implicit operator YMM(Vec256<sbyte> src)
+            => From(src);
+
+        /// <summary>
+        /// Implicitly converts a source vector to a 256-bit memory block
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        [MethodImpl(Inline)]
+        public static implicit operator YMM(Vec256<byte> src)
+            => From(src);
+
+        /// <summary>
+        /// Implicitly converts a source vector to a 256-bit memory block
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        [MethodImpl(Inline)]
+        public static implicit operator YMM(Vec256<short> src)
+            => From(src);
+
+        /// <summary>
+        /// Implicitly converts a source vector to a 256-bit memory block
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        [MethodImpl(Inline)]
+        public static implicit operator YMM(Vec256<ushort> src)
+            => From(src);
+
+        /// <summary>
+        /// Implicitly converts a source vector to a 256-bit memory block
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        [MethodImpl(Inline)]
+        public static implicit operator YMM(Vec256<int> src)
+            => From(src);
+
+        /// <summary>
+        /// Implicitly converts a source vector to a 256-bit memory block
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        [MethodImpl(Inline)]
+        public static implicit operator YMM(Vec256<uint> src)
+            => From(src);
+
+        /// <summary>
+        /// Implicitly converts a source vector to a 256-bit memory block
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        [MethodImpl(Inline)]
+        public static implicit operator YMM(Vec256<long> src)
+            => From(src);
+
+        /// <summary>
+        /// Implicitly converts a source vector to a 256-bit memory block
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        [MethodImpl(Inline)]
+        public static implicit operator YMM(Vec256<ulong> src)
+            => From(src);
+        
+        /// <summary>
+        /// Implicitly converts a source vector to a 256-bit memory block
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        [MethodImpl(Inline)]
+        public static implicit operator YMM(Vec256<float> src)
+            => From(src);
+
+        /// <summary>
+        /// Implicitly converts a source vector to a 256-bit memory block
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        [MethodImpl(Inline)]
+        public static implicit operator YMM(Vec256<double> src)
+            => From(src);
+
+        /// <summary>
+        /// Implicitly converts a source vector to a 256-bit memory block
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        [MethodImpl(Inline)]
+        public static implicit operator YMM(Vector256<sbyte> src)
+            => From(src);
+
+        /// <summary>
+        /// Implicitly converts a source vector to a 256-bit memory block
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        [MethodImpl(Inline)]
+        public static implicit operator YMM(Vector256<byte> src)
+            => From(src);
+
+        /// <summary>
+        /// Implicitly converts a source vector to a 256-bit memory block
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        [MethodImpl(Inline)]
+        public static implicit operator YMM(Vector256<short> src)
+            => From(src);
+
+        /// <summary>
+        /// Implicitly converts a source vector to a 256-bit memory block
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        [MethodImpl(Inline)]
+        public static implicit operator YMM(Vector256<ushort> src)
+            => From(src);
+
+        /// <summary>
+        /// Implicitly converts a source vector to a 256-bit memory block
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        [MethodImpl(Inline)]
+        public static implicit operator YMM(Vector256<int> src)
+            => From(src);
+
+        /// <summary>
+        /// Implicitly converts a source vector to a 256-bit memory block
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        [MethodImpl(Inline)]
+        public static implicit operator YMM(Vector256<uint> src)
+            => From(src);
+
+        /// <summary>
+        /// Implicitly converts a source vector to a 256-bit memory block
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        [MethodImpl(Inline)]
+        public static implicit operator YMM(Vector256<long> src)
+            => From(src);
+
+        /// <summary>
+        /// Implicitly converts a source vector to a 256-bit memory block
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        [MethodImpl(Inline)]
+        public static implicit operator YMM(Vector256<ulong> src)
+            => From(src);
+        
+        /// <summary>
+        /// Implicitly converts a source vector to a 256-bit memory block
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        [MethodImpl(Inline)]
+        public static implicit operator YMM(Vector256<float> src)
+            => From(src);
+
+        /// <summary>
+        /// Implicitly converts a source vector to a 256-bit memory block
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        [MethodImpl(Inline)]
+        public static implicit operator YMM(Vector256<double> src)
+            => From(src);
 
         [MethodImpl(Inline)]
         public static bool operator ==(in YMM lhs, in YMM rhs)

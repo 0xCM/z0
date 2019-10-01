@@ -15,7 +15,7 @@ namespace Z0
     /// Defines a 32-bit bitvector
     /// </summary>
     [StructLayout(LayoutKind.Explicit, Size = 4)]
-    public struct BitVector32 : IFixedBits<BitVector32,uint>
+    public struct BitVector32 : IFixedScalarBits<BitVector32,uint>
     {
         [FieldOffset(0)]
         internal uint data;
@@ -32,11 +32,11 @@ namespace Z0
 
         public static readonly BitVector32 Ones = uint.MaxValue;
 
-        public static readonly BitSize BitSize = 32;
+        public static readonly BitSize Width = 32;
 
         public static readonly BitPos FirstPos = 0;
 
-        public static readonly BitPos LastPos = BitSize - 1;
+        public static readonly BitPos LastPos = Width - 1;
 
         /// <summary>
         /// Allocates a zero-filled vector
@@ -114,6 +114,14 @@ namespace Z0
         public static BitVector32 FromBitString(in BitString src)        
             => src.TakeUInt32();
 
+        public static BitVector32 Parse(string src)
+        {
+            var bs = BitString.Parse(src);
+            var len = math.min(bs.Length, Width);
+            Bits.packseq(bs.BitSeq, out uint dst);
+            return dst;
+        }
+
         [MethodImpl(Inline)]
         public static BitVector32 Load(in ReadOnlySpan<byte> src, int offset = 0)
             => FromParts(src[offset + 0], src[offset + 1], src[offset + 2], src[offset + 3]);
@@ -137,6 +145,10 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator BitVector64(BitVector32 src)
             => src.Expand();
+
+        [MethodImpl(Inline)]
+        public static explicit operator BitVector4(BitVector32 src)
+            => BitVector4.FromScalar((byte)src.data);
 
         [MethodImpl(Inline)]
         public static explicit operator BitVector8(BitVector32 src)
@@ -408,7 +420,7 @@ namespace Z0
         public readonly BitSize Length
         {
             [MethodImpl(Inline)]
-            get => BitSize;
+            get => Width;
         }
 
         /// <summary>
@@ -427,6 +439,53 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => Bits.width(in data);
+        }
+
+        /// <summary>
+        /// Computes in-place the bitwise AND of the source vector and another,
+        /// returning the result to the caller
+        /// </summary>
+        /// <param name="y">The other vector</param>
+        [MethodImpl(Inline)]
+        public BitVector32 And(BitVector32 y)
+        {
+            data &= y.data;
+            return this;
+        }
+
+        /// <summary>
+        /// Computes in-place the bitwise OR of the source vector and another,
+        /// returning the result to the caller
+        /// </summary>
+        /// <param name="y">The other vector</param>
+        [MethodImpl(Inline)]
+        public BitVector32 Or(BitVector32 y)
+        {
+            data |= y.data;
+            return this;
+        }
+
+        /// <summary>
+        /// Computes in-place the bitwise XOR of the source vector and another,
+        /// returning the result to the caller
+        /// </summary>
+        /// <param name="y">The other vector</param>
+        [MethodImpl(Inline)]
+        public BitVector32 XOr(BitVector32 y)
+        {
+            data ^= y.data;
+            return this;
+        }
+
+        /// <summary>
+        /// Computes in-place the bitwise complement of the source vector,
+        /// returning the result to the caller
+        /// </summary>
+        [MethodImpl(Inline)]
+        public BitVector32 Flip()
+        {
+            data = (byte)~data;
+            return this;
         }
 
         /// <summary>

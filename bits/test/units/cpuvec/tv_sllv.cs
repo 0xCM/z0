@@ -36,7 +36,7 @@ namespace Z0.Test
                 expect[i] = gmath.sal(src[i], (int)shifts[i]);
             
             var v1 = expect.LoadVec256();
-            var v2 = gbits.sllv(src, shifts);            
+            var v2 = ginx.vsllv(src, shifts);            
 
             Claim.eq(v1,v2);            
         }
@@ -51,7 +51,7 @@ namespace Z0.Test
                 expect[i] = gmath.sal(src[i], (int)shifts[i]);
             
             var v1 = expect.LoadVec128();
-            var v2 = gbits.sllv(src, shifts);            
+            var v2 = ginx.vsllv(src, shifts);            
 
             Claim.eq(v1,v2);            
         }
@@ -66,7 +66,7 @@ namespace Z0.Test
                 expect[i] = gmath.sal(src[i], (int)shifts[i]);
             
             var v1 = expect.LoadVec128();
-            var v2 = gbits.sllv(src, shifts);            
+            var v2 = ginx.vsllv(src, shifts);            
 
             Claim.eq(v1,v2);            
         }
@@ -81,7 +81,7 @@ namespace Z0.Test
                 expect[i] = gmath.sal(src[i], (int)shifts[i]);
             
             var v1 = expect.LoadVec256();
-            var v2 = gbits.sllv(src, shifts);            
+            var v2 = ginx.vsllv(src, shifts);            
 
             Claim.eq(v1,v2);            
         }

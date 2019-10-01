@@ -36,7 +36,6 @@ namespace Z0
         public static Vec128<sbyte> cmpgt(in Vec128<sbyte> lhs, in Vec128<sbyte> rhs)
             => CompareGreaterThan(lhs,rhs);
 
-
         /// <summary>
         /// Determines whether component values in the left vector are larger than the
         /// corresponding components in the right vector. When a left value is larger 

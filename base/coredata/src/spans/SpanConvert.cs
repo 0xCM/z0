@@ -12,7 +12,7 @@ namespace Z0
     public static class SpanConvert
     {
         /// <summary>
-        /// Renders a non-allocating mutable view over a source span segment that presents as an individual value of a target type
+        /// Renders a non-allocating mutable view over a source span segment that is presented as an individual target value
         /// </summary>
         /// <param name="src">The source span</param>
         /// <param name="offset">The index of the first source element</param>

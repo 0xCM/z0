@@ -15,7 +15,7 @@ namespace Z0
     using static FixedBitOps;
 
     public struct FixedBits<V,S>
-        where V : unmanaged, IFixedBits<V,S>
+        where V : unmanaged, IFixedScalarBits<V,S>
         where S : unmanaged
     {   
         internal BitVector64 data;
@@ -225,7 +225,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static ref FixedBits<U,D> As<U,D>(ref FixedBits<V,S> src)
-            where U : unmanaged, IFixedBits<U,D>
+            where U : unmanaged, IFixedScalarBits<U,D>
             where D : unmanaged            
                 => ref Unsafe.As<FixedBits<V,S>, FixedBits<U,D>>(ref src);
     }

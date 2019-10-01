@@ -64,6 +64,11 @@ namespace Z0
         ADCB = A | (D << 2) | (C << 4) | (B << 6), 
 
         /// <summary>
+        /// ABCD -> BACD
+        /// </summary>
+        BACD = B | (A << 2) | (C << 4) | (D << 6), 
+
+        /// <summary>
         /// ABCD -> BADC
         /// </summary>
         BADC = B | (A << 2) | (D << 4) | (C << 6), 

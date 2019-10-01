@@ -29,7 +29,7 @@ namespace Z0
             || typeof(T) == typeof(long))
                 return vor128i(lhs,rhs);
             else 
-                return vor128f(lhs,rhs);
+                throw unsupported<T>();
         }
 
         [MethodImpl(Inline)]
@@ -47,7 +47,7 @@ namespace Z0
             || typeof(T) == typeof(long))
                 return vor256i(lhs,rhs);
             else 
-                return vor256f(lhs,rhs);
+                throw unsupported<T>();
         }
 
         [MethodImpl(Inline)]
@@ -78,16 +78,6 @@ namespace Z0
                 return generic<T>(dinx.vor(int64(lhs), int64(rhs)));
         }
 
-        static Vec128<T> vor128f<T>(in Vec128<T> lhs, in Vec128<T> rhs)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(float))
-                return generic<T>(dinx.vor(float32(lhs), float32(rhs)));
-            else if(typeof(T) == typeof(double))
-                return generic<T>(dinx.vor(float64(lhs), float64(rhs)));
-            else 
-                throw unsupported<T>();                    
-        }
 
         [MethodImpl(Inline)]
         static Vec256<T> vor256u<T>(in Vec256<T> lhs, in Vec256<T> rhs)
@@ -117,15 +107,5 @@ namespace Z0
                 return generic<T>(dinx.vor(int64(lhs), int64(rhs)));
         }
 
-        static Vec256<T> vor256f<T>(in Vec256<T> lhs, in Vec256<T> rhs)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(float))
-                return generic<T>(dinx.vor(float32(lhs), float32(rhs)));
-            else if(typeof(T) == typeof(double))
-                return generic<T>(dinx.vor(float64(lhs), float64(rhs)));
-            else 
-                throw unsupported<T>();                    
-        }
     }
 }

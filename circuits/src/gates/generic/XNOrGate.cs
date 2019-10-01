@@ -11,10 +11,10 @@ namespace Z0
     
     using static zfunc;
 
-    public readonly struct XNOrGate<T> : IBinaryGate<T>, IBinaryGate<Vec128<T>>, IBinaryGate<Vector256<T>>
+    public readonly struct XnorGate<T> : IBinaryGate<T>, IBinaryGate<Vec128<T>>, IBinaryGate<Vec256<T>>
         where T : unmanaged
     {
-        internal static readonly XNOrGate<T> Gate = default;
+        internal static readonly XnorGate<T> Gate = default;
 
         [MethodImpl(Inline)]
         public Bit Send(Bit x, Bit y)
@@ -26,11 +26,11 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public Vec128<T> Send(in Vec128<T> x, in Vec128<T> y)
-            => gbits.vflip(gbits.vxor(in x,in y));
+            => ginx.vflip(ginx.vxor(in x,in y));
 
         [MethodImpl(Inline)]
-        public Vector256<T> Send(in Vector256<T> x, in Vector256<T> y)
-            => gbits.flip(gbits.vxor(x,y));
+        public Vec256<T> Send(in Vec256<T> x, in Vec256<T> y)
+            => ginx.vflip(ginx.vxor(x,y));
 
     }
 

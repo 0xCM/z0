@@ -64,6 +64,18 @@ namespace Z0.Test
             Claim.eq(p, Perm.Identity(16));
         }
 
+        public void perm_4x64()
+        {
+            for(var i=0; i<SampleSize; i++)
+            {
+                var src = Vec256Pattern.Increments<ulong>();
+                var x = dinx.perm4x64(src,Perm4.BADC);
+                var y = Vec256.FromParts(src[1], src[0], src[3], src[2]);
+                Claim.eq(x,y);
+            }
+
+        }
+
 
         public void cycle16()
         {
@@ -73,7 +85,7 @@ namespace Z0.Test
         public void perm_swaps()
         {            
             
-            var src = Vec128.Increments((byte)0);
+            var src = Vec128Pattern.Increments((byte)0);
 
             Swap s = (0,1);
             var x1 = dinx.swap(src, s);

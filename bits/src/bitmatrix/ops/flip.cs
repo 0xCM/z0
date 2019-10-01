@@ -18,28 +18,45 @@ namespace Z0
     partial class BitMatrix
     {
         [MethodImpl(Inline)]
-        public static BitMatrix8 flip(in BitMatrix8 src)
+        public static BitMatrix8 flip(BitMatrix8 src)
              => BitMatrix8.From(BitConverter.GetBytes((~(ulong)src)));
 
         [MethodImpl(Inline)]
-        public static BitMatrix16 flip(in BitMatrix16 src)
+        public static BitMatrix16 flip(BitMatrix16 src)
         {
-            src.LoadCpuVec(out Vec256<ushort> vSrc);
-            Bits.vflip(vSrc).StoreTo(ref src.Data[0]);
+            src.GetCells(out Vec256<ushort> vSrc);
+            dinx.vflip(vSrc).StoreTo(ref src.Data[0]);
             return src;
         }
 
-
-        public static BitMatrix32 flip(in BitMatrix32 A)
+        public static BitMatrix32 flip(BitMatrix32 A)
         {
             const int rowstep = 8;
             var dst = BitMatrix32.Alloc();
             for(var i=0; i< A.RowCount; i += rowstep)
             {
                 var x1 = vload256(ref A[i]);
-                Z0.Bits.vflip(in x1).StoreTo(ref dst[i]);
+                dinx.vflip(in x1).StoreTo(ref dst[i]);
             }
             return dst;
+        }
+
+        public static ref BitMatrix64 flip(ref BitMatrix64 A)
+        {
+            const int rowstep = 4;
+            for(var i=0; i< A.RowCount; i += rowstep)
+            {
+                A.GetCells(i, out Vec256<ulong> vSrc);
+                dinx.vflip(vSrc).StoreTo(ref A[i]);
+            }
+            return ref A;
+        }
+
+        [MethodImpl(Inline)]
+        public static BitMatrix64 flip(BitMatrix64 A)
+        {
+            var dst = A.Replicate();
+            return flip(ref dst);
         }
 
         /// <summary>

@@ -14,7 +14,7 @@ namespace Z0.Designators
     /// <summary>
     /// Represents the assembly
     /// </summary>
-    public sealed class Reveal : AssemblyDesignator<Reveal>
+    public sealed class RevealApp : AssemblyDesignator<RevealApp>
     {
 
     }

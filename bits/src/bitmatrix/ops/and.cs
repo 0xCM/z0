@@ -32,12 +32,24 @@ namespace Z0
         /// <param name="lhs">The left matrix</param>
         /// <param name="rhs">The right matrix</param>
         [MethodImpl(Inline)]
-        public static BitMatrix16 and(in BitMatrix16 lhs, in BitMatrix16 rhs)
+        public static BitMatrix16 and(BitMatrix16 lhs, BitMatrix16 rhs)
         {
-            ref var A = ref lhs.LoadCpuVec(out Vec256<ushort> _);
-            ref var B = ref rhs.LoadCpuVec(out Vec256<ushort> _);
+            ref var A = ref lhs.GetCells(out Vec256<ushort> _);
+            ref var B = ref rhs.GetCells(out Vec256<ushort> _);
             var C = dinx.vand(A,B);
             return BitMatrix16.From(C);
+        }
+
+        public static ref BitMatrix32 and(ref BitMatrix32 A, BitMatrix32 B)
+        {
+            const int rowstep = 8;
+            for(var i=0; i< A.RowCount; i += rowstep)
+            {
+                A.GetCells(i, out Vec256<uint> x);
+                B.GetCells(i, out Vec256<uint> y);
+                dinx.vand(x,y).StoreTo(ref A[i]);
+            }
+            return ref A;
         }
 
         /// <summary>
@@ -45,13 +57,30 @@ namespace Z0
         /// </summary>
         /// <param name="lhs">The left matrix</param>
         /// <param name="rhs">The right matrix</param>
-        public static BitMatrix32 and(in BitMatrix32 A, in BitMatrix32 B)
+        [MethodImpl(Inline)]
+        public static BitMatrix32 and(BitMatrix32 A, BitMatrix32 B)
         {
-            const int rowstep = 8;
-            var dst = BitMatrix32.Alloc();
+            var C = A.Replicate();
+            return and(ref C, B);
+        }
+
+        public static ref BitMatrix64 and(ref BitMatrix64 A, BitMatrix64 B)
+        {
+            const int rowstep = 4;
             for(var i=0; i< A.RowCount; i += rowstep)
-                dinx.vand(Vec256.Load(ref A[i]), Vec256.Load(ref B[i])).StoreTo(ref dst[i]);
-            return dst;
+            {
+                A.GetCells(i, out Vec256<ulong> vLhs);
+                B.GetCells(i, out Vec256<ulong> vRhs);
+                dinx.vand(vLhs,vRhs).StoreTo(ref A[i]);
+            }
+            return ref A;
+        }
+
+        [MethodImpl(Inline)]
+        public static BitMatrix64 and(BitMatrix64 A, BitMatrix64 B)
+        {
+            var C = A.Replicate();
+            return and(ref C, B);
         }
 
         /// <summary>

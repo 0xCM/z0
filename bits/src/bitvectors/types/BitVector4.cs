@@ -17,7 +17,7 @@ namespace Z0
     /// <summary>
     /// Defines a 4-bit bitvector
     /// </summary>
-    public struct BitVector4 : IFixedBits<BitVector4,UInt4>
+    public struct BitVector4 : IFixedScalarBits<BitVector4,UInt4>
     {
         internal UInt4 data;
 
@@ -263,6 +263,54 @@ namespace Z0
         /// <param name="rhs">The right operand</param>
         public readonly Bit Dot(BitVector4 rhs)
             => bitvector.dot(this,rhs);
+
+        /// <summary>
+        /// Computes in-place the bitwise AND of the source vector and another,
+        /// returning the result to the caller
+        /// </summary>
+        /// <param name="y">The other vector</param>
+        [MethodImpl(Inline)]
+        public BitVector4 And(BitVector4 y)
+        {
+            data &= y.data;
+            return this;
+        }
+
+        /// <summary>
+        /// Computes in-place the bitwise OR of the source vector and another,
+        /// returning the result to the caller
+        /// </summary>
+        /// <param name="y">The other vector</param>
+        [MethodImpl(Inline)]
+        public BitVector4 Or(BitVector4 y)
+        {
+            data |= y.data;
+            return this;
+        }
+
+        /// <summary>
+        /// Computes in-place the bitwise XOR of the source vector and another,
+        /// returning the result to the caller
+        /// </summary>
+        /// <param name="y">The other vector</param>
+        [MethodImpl(Inline)]
+        public BitVector4 XOr(BitVector4 y)
+        {
+            data ^= y.data;
+            return this;
+        }
+
+        /// <summary>
+        /// Computes in-place the bitwise complement of the source vector,
+        /// returning the result to the caller
+        /// </summary>
+        [MethodImpl(Inline)]
+        public BitVector4 Flip()
+        {
+            data = ~data;
+            return this;
+        }
+
 
         /// <summary>
         /// Enables a bit if it is disabled

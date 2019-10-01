@@ -22,7 +22,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static YMM vpaddq(YMM ymm0, YMM ymm1)
         {            
-            return Add(vload<ulong>(ref ymm0),vload<ulong>(ref ymm1));
+            return YMM.From(Add(vload<ulong>(ref ymm0),vload<ulong>(ref ymm1)));
         }
 
         [MethodImpl(Inline)]

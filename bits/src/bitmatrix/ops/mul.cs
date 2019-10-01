@@ -42,7 +42,7 @@ namespace Z0
             return dst;
         }
 
-        public static BitVector16 mul(in BitMatrix16 m, in BitVector16 y)
+        public static BitVector16 mul(BitMatrix16 m, BitVector16 y)
         {
             const int N = 16;
             var dst = BitVector16.Alloc();
@@ -51,7 +51,7 @@ namespace Z0
             return dst;        
         }
 
-        public static BitMatrix16 mul(in BitMatrix16 lhs, in BitMatrix16 rhs)
+        public static BitMatrix16 mul(BitMatrix16 lhs, BitMatrix16 rhs)
         {
             var x = lhs.Replicate();
             var y = rhs.Transpose();
@@ -67,80 +67,75 @@ namespace Z0
             return dst;
         }
 
-
-        /// <summary>
-        /// Computes the product of 64-bit bitmatrices
-        /// </summary>
-        /// <param name="A">The left matrix</param>
-        /// <param name="B">The right matrix</param>
-        /// <param name="C">The target matrix</param>
-        public static BitMatrix64 mul(in BitMatrix64 A, in BitMatrix64 B)
+        public static ref BitMatrix32 mul(ref BitMatrix32 A, BitMatrix32 B)
         {
+            const int N = 32;
+
             var x = A;
             var y = B.Transpose();
-            var C = BitMatrix64.Alloc();
-            const int N = 64;
+            ref var dst = ref A;
 
             for(var i=0; i< N; i++)
             {
                 var r = x.RowVector(i);
-                var z = BitVector64.Alloc();
+                var z = BitVector32.Alloc();
                 for(var j = 0; j< N; j++)
                     z[j] = r % y.RowVector(j);
-                C[i] = (ulong)z;
+                dst[i] = (uint)z;
             }
-            return C;
+            return ref dst;
+
         }
 
-        /// <summary>
-        /// Computes the product of 64-bit bitmatrices and stores the result to a caller-supplied target matrix
-        /// </summary>
-        /// <param name="A">The left matrix</param>
-        /// <param name="B">The right matrix</param>
-        /// <param name="C">The target matrix</param>
-        public static ref BitMatrix64 mul(in BitMatrix64 A, in BitMatrix64 B, ref BitMatrix64 C)
+        [MethodImpl(Inline)]
+        public static BitMatrix32 mul(BitMatrix32 A, BitMatrix32 B)
         {
-            var x = A;
-            var y = B.Transpose();
-            const int N = 64;
-
-            for(var i=0; i< N; i++)
-            {
-                var r = x.RowVector(i);
-                var z = BitVector64.Alloc();
-                for(var j = 0; j< N; j++)
-                    z[j] = r % y.RowVector(j);
-                C[i] = (ulong)z;
-            }
-            return ref C;
+            var C = A.Replicate();
+            return mul(ref C, B);
         }
 
-        public static BitMatrix32 mul(in BitMatrix32 A, in BitMatrix32 B)
-        {
-            var dst = BitMatrix32.Alloc();
-            var x = A;
-            var y = B.Transpose();
-            const int N = 32;
-
-            for(var row=0; row < N; row++)
-            {
-                var r = x.RowVector(row);
-                for(var col = 0; col < N; col++)
-                    dst[row,col] = y.RowVector(col) % r;
-            }
-            return dst;
-        }
-
-        public static BitVector32 mul(in BitMatrix32 A, in BitVector32 x)
+        public static BitVector32 mul(BitMatrix32 A, BitVector32 x)
         {
             const int N = 32;
-
             var dst = BitVector32.Alloc();
             for(var i=0; i< N; i++)
                 dst[i] = A.RowVector(i) % x;
             return dst;        
         }
 
+        public static ref BitMatrix64 mul(ref BitMatrix64 A, BitMatrix64 B)
+        {
+            const int N = 64;                        
+            var x = A;
+            var y = B.Transpose();
+            ref var dst = ref A;
+
+            for(var i=0; i< N; i++)
+            {
+                var r = x.RowVector(i);
+                var z = BitVector64.Alloc();
+                for(var j = 0; j< N; j++)
+                    z[j] = r % y.RowVector(j);
+                dst[i] = (ulong)z;
+            }
+            return ref dst;
+        }
+
+        public static BitMatrix64 mul(BitMatrix64 A, BitMatrix64 B)
+        {
+            var C = A.Replicate();
+            return mul(ref C, B);
+        }
+
+        public static BitVector64 mul(BitMatrix64 A, BitVector64 B)
+        {
+            const int N = 64;                        
+            var dst = BitVector64.Alloc();
+            for(var i=0; i< N; i++)
+                dst[i] = A.RowVector(i) % B;
+            return dst;        
+        }
+        
 
         /// <summary>
         /// Computes the product of bitmatrices of comparible natural dimensions and stores the

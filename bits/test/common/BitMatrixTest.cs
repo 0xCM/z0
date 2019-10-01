@@ -14,7 +14,9 @@ namespace Z0
     public abstract class BitMatrixTest<T> : UnitTest<T>
         where T : BitMatrixTest<T>, new()
     {
-        protected override int CycleCount => Pow2.T14;
+        protected override int SampleSize => Pow2.T04;
+
+        protected override int CycleCount => Pow2.T03;
 
 
 

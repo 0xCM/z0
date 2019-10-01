@@ -23,6 +23,14 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
+        public static Span<BitVector8> partition(BitVector16 src, Span<BitVector8> dst)
+        {
+            var bs = dst.AsBytes();
+            BitParts.part16x8(src,bs);
+            return dst;
+        }
+
+        [MethodImpl(Inline)]
         public static Span<BitVector4> partition(BitVector32 src, Span<BitVector4> dst)
         {
             var bs = dst.AsBytes();

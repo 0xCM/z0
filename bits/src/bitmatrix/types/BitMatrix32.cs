@@ -88,28 +88,28 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source matrix</param>
         [MethodImpl(Inline)]
-        public static BitMatrix32 operator - (in BitMatrix32 src)
-            => BitMatrix.flip(in src);
+        public static BitMatrix32 operator - (BitMatrix32 src)
+            => BitMatrix.flip(src);
 
         [MethodImpl(Inline)]
-        public static BitMatrix32 operator - (in BitMatrix32 lhs, in BitMatrix32 rhs)
-            => lhs ^( -rhs);
+        public static BitMatrix32 operator - (BitMatrix32 lhs, BitMatrix32 rhs)
+            => BitMatrix.sub(lhs,rhs);
 
         [MethodImpl(Inline)]
-        public static BitMatrix32 operator * (in BitMatrix32 lhs, in BitMatrix32 rhs)
-            => BitMatrix.mul(in lhs, in rhs);
+        public static BitMatrix32 operator * (BitMatrix32 lhs, BitMatrix32 rhs)
+            => BitMatrix.mul(lhs, rhs);
 
         [MethodImpl(Inline)]
-        public static BitVector32 operator * (in BitMatrix32 lhs, in BitVector32 rhs)
-            => BitMatrix.mul(in lhs,in rhs);
+        public static BitVector32 operator * (BitMatrix32 lhs, BitVector32 rhs)
+            => BitMatrix.mul(lhs, rhs);
 
         [MethodImpl(Inline)]
-        public static BitMatrix32 operator & (in BitMatrix32 lhs, in BitMatrix32 rhs)
-            => And(in lhs, in rhs);
+        public static BitMatrix32 operator & (BitMatrix32 lhs, BitMatrix32 rhs)
+            => BitMatrix.and(lhs,rhs);
 
         [MethodImpl(Inline)]
-        public static BitMatrix32 operator | (in BitMatrix32 lhs, in BitMatrix32 rhs)
-            => BitMatrix.or(in lhs, in rhs);
+        public static BitMatrix32 operator | (BitMatrix32 lhs, BitMatrix32 rhs)
+            => BitMatrix.or(lhs, rhs);
 
         /// <summary>
         /// Applies element-wise XOR to corresponding operand entries. Note that this
@@ -118,16 +118,16 @@ namespace Z0
         /// <param name="lhs">The left matrix</param>
         /// <param name="rhs">The right matrix</param>
         [MethodImpl(Inline)]
-        public static BitMatrix32 operator ^ (in BitMatrix32 lhs, in BitMatrix32 rhs)
-            => BitMatrix.xor(in lhs, in rhs);
+        public static BitMatrix32 operator ^ (BitMatrix32 lhs, BitMatrix32 rhs)
+            => BitMatrix.xor(lhs, rhs);
 
         /// <summary>
         /// Computes the complement of the operand. 
         /// </summary>
         /// <param name="src">The source matrix</param>
         [MethodImpl(Inline)]
-        public static BitMatrix32 operator ~ (in BitMatrix32 src)
-            => BitMatrix.flip(in src);
+        public static BitMatrix32 operator ~ (BitMatrix32 src)
+            => BitMatrix.flip(src);
 
         [MethodImpl(Inline)]
         public static bool operator ==(BitMatrix32 lhs, BitMatrix32 rhs)
@@ -136,7 +136,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bool operator !=(BitMatrix32 lhs, BitMatrix32 rhs)
             => !(lhs.Equals(rhs));
-
 
         [MethodImpl(Inline)]
         BitMatrix32(Span<uint> src)
@@ -280,20 +279,20 @@ namespace Z0
             const int rowstep = 8;
             for(var i=0; i< RowCount; i += rowstep)
             {
-                this.LoadCpuVec(i, out Vec256<uint> vSrc);
+                this.GetCells(i, out Vec256<uint> vSrc);
                 if(!ginx.testz<uint>(vSrc,vSrc))
                     return false;
             }
             return true;
         }
 
-        public readonly BitMatrix32 AndNot(in BitMatrix32 rhs)
+        public readonly BitMatrix32 AndNot(BitMatrix32 rhs)
         {
             const int rowstep = 8;
             for(var i=0; i< RowCount; i += rowstep)
             {
-                this.LoadCpuVec(i, out Vec256<uint> vLhs);
-                rhs.LoadCpuVec(i, out Vec256<uint> vRhs);
+                this.GetCells(i, out Vec256<uint> vLhs);
+                rhs.GetCells(i, out Vec256<uint> vRhs);
                 Bits.andn(vLhs,vRhs).StoreTo(ref data[i]);
             }
             return this;
@@ -326,7 +325,7 @@ namespace Z0
         /// <param name="dst">The target vector</param>
         /// <param name="row">The row index of where the load should begin</param>
         [MethodImpl(Inline)]
-        public readonly ref Vec256<uint> LoadCpuVec(int row, out Vec256<uint> dst)
+        public readonly ref Vec256<uint> GetCells(int row, out Vec256<uint> dst)
         {
             dst = load(ref data[row]);
             return ref dst;
@@ -367,18 +366,6 @@ namespace Z0
         public override string ToString()
             => Format();
 
-        static BitMatrix32 And(in BitMatrix32 A, in BitMatrix32 B)
-        {
-            const int rowstep = 8;
-            var dst = Alloc();
-            for(var i=0; i< A.RowCount; i += rowstep)
-            {
-                var x1 = load(ref A[i]);
-                var x2 = load(ref B[i]);
-                dinx.vand(x1,x2).StoreTo(ref dst[i]);
-            }
-            return dst;
-        }
 
         [MethodImpl(Inline)]
         static unsafe Vec256<uint> load(ref uint head)

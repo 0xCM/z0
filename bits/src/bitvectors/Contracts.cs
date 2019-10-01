@@ -119,7 +119,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="S">The storage type</typeparam>
     public interface IBitVector<V,S> : IBitVector
-        where V : struct, IBitVector
+        where V : IBitVector, new()
         where S : unmanaged
     {
         /// <summary>
@@ -164,21 +164,54 @@ namespace Z0
         /// <param name="p">The permutation</param>
         V Replicate(Perm p);
 
+        /// <summary>
+        /// Computes in-place the bitwise AND of the source vector and another,
+        /// returning the result to the caller
+        /// </summary>
+        /// <param name="y">The other vector</param>
+        V And(V y);
+
+        /// <summary>
+        /// Computes in-place the bitwise OR of the source vector and another,
+        /// returning the result to the caller
+        /// </summary>
+        /// <param name="y">The other vector</param>
+        V Or(V y);
+
+        /// <summary>
+        /// Computes in-place the bitwise XOR of the source vector and another,
+        /// returning the result to the caller
+        /// </summary>
+        /// <param name="y">The other vector</param>
+        V XOr(V y);
+
+        /// <summary>
+        /// Computes in-place the bitwise complement of the source vector,
+        /// returning the result to the caller
+        /// </summary>
+        V Flip();
+
     }
 
     /// <summary>
-    /// Characterizes a bitvector type that represents a fixed number of bits
+    /// Characterizes a bitvector type that represents a fixed number of bits 
+    /// contained within a scalar of specified type
     /// </summary>
     /// <typeparam name="V">The concrete type</typeparam>
     /// <typeparam name="S">The scalar type over which the bitvector is formed</typeparam>
-    public interface IFixedBits<V,S> : IBitVector<V,S>, IEquatable<V>
-        where V : unmanaged, IFixedBits<V,S>
+    public interface IFixedScalarBits<V,S> : IBitVector<V,S>, IEquatable<V>
+        where V : IFixedScalarBits<V,S>, new()
         where S : unmanaged        
     {
         /// <summary>
-        /// Extracts the scalar represented by the vector
+        /// The scalar value that defines the vector
         /// </summary>
         S Scalar {get;}
+
+        /// <summary>
+        /// Vector content represented as a bytespan
+        /// </summary>
+        Span<byte> Bytes {get;}
 
         /// <summary>
         /// Populates a target vector with specified source bits
@@ -231,10 +264,6 @@ namespace Z0
         /// <param name="index">The segment index</param>
         ref byte Byte(int index);
 
-        /// <summary>
-        /// Vector content represented as a bytespan
-        /// </summary>
-        Span<byte> Bytes {get;}
     }
 
     /// <summary>
@@ -248,42 +277,5 @@ namespace Z0
 
     }
 
-    public readonly struct BitVectorInfo
-    {
-        public static BitVectorInfo Define(BitSize capacity)
-            => new BitVectorInfo(capacity);
-
-        BitVectorInfo(BitSize capacity)
-        {
-            this.Capacity = capacity;
-        }
-
-        /// <summary>
-        /// The maximum number of bits that can be represented by the vector
-        /// </summary>
-        public readonly BitSize Capacity;
-    }
-
-    public readonly struct BitVectorInfo<T>
-        where T : unmanaged
-    {
-        /// <summary>
-        /// The maximum number of bits that can be represented by the vector
-        /// </summary>
-        public readonly BitSize Capacity;
-    }
-
-    public readonly struct BitVectorInfo<N,T>
-        where N : ITypeNat, new()
-        where T : unmanaged
-   {
-
-        /// <summary>
-        /// The maximum number of bits that can be represented by the vector
-        /// </summary>
-        public readonly BitSize Capacity
-            => bitsize<T>() * nati<N>();
-            
-    }
 
 }

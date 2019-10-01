@@ -15,7 +15,7 @@ namespace Z0
     /// Defines a 16-bit bitvector
     /// </summary>
     [StructLayout(LayoutKind.Explicit, Size = 2)]
-    public struct BitVector16 : IFixedBits<BitVector16, ushort>
+    public struct BitVector16 : IFixedScalarBits<BitVector16, ushort>
     {
         [FieldOffset(0)]
         internal ushort data;
@@ -100,6 +100,14 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitVector16 FromBitString(in BitString src)
             => src.TakeUInt16();    
+
+        public static BitVector16 Parse(string src)
+        {
+            var bs = BitString.Parse(src);
+            var len = math.min(bs.Length, Width);
+            Bits.packseq(bs.BitSeq, out ushort dst);
+            return dst;
+        }
 
         /// <summary>
         /// Enumerates all 16-bit bitvectors whose width is less than or equal to a specified maximum width
@@ -407,6 +415,53 @@ namespace Z0
         [MethodImpl(Inline)]
         public ref byte Byte(int index)        
             => ref Bytes[index];
+
+        /// <summary>
+        /// Computes in-place the bitwise AND of the source vector and another,
+        /// returning the result to the caller
+        /// </summary>
+        /// <param name="y">The other vector</param>
+        [MethodImpl(Inline)]
+        public BitVector16 And(BitVector16 y)
+        {
+            data &= y.data;
+            return this;
+        }
+
+        /// <summary>
+        /// Computes in-place the bitwise OR of the source vector and another,
+        /// returning the result to the caller
+        /// </summary>
+        /// <param name="y">The other vector</param>
+        [MethodImpl(Inline)]
+        public BitVector16 Or(BitVector16 y)
+        {
+            data |= y.data;
+            return this;
+        }
+
+        /// <summary>
+        /// Computes in-place the bitwise XOR of the source vector and another,
+        /// returning the result to the caller
+        /// </summary>
+        /// <param name="y">The other vector</param>
+        [MethodImpl(Inline)]
+        public BitVector16 XOr(BitVector16 y)
+        {
+            data ^= y.data;
+            return this;
+        }
+
+        /// <summary>
+        /// Computes in-place the bitwise complement of the source vector,
+        /// returning the result to the caller
+        /// </summary>
+        [MethodImpl(Inline)]
+        public BitVector16 Flip()
+        {
+            data = (byte)~data;
+            return this;
+        }
 
         /// <summary>
         /// Shifts the bits in the vector leftwards

@@ -105,55 +105,55 @@ namespace Z0
         /// Computes the bitwise and of the operands
         /// </summary>
         [MethodImpl(Inline)]
-        public static BitMatrix16 operator & (BitMatrix16 lhs, BitMatrix16 rhs)
-            => And(ref lhs, rhs);
+        public static BitMatrix16 operator & (BitMatrix16 A, BitMatrix16 B)
+            => BitMatrix.and(A,B);
 
         /// <summary>
         /// Computes the bitwise or of the operands
         /// </summary>
         [MethodImpl(Inline)]
-        public static BitMatrix16 operator | (in BitMatrix16 lhs, in BitMatrix16 rhs)
-            => BitMatrix.or(in lhs,in rhs);
+        public static BitMatrix16 operator | (BitMatrix16 A, BitMatrix16 B)
+            => BitMatrix.or(A,B);
 
         [MethodImpl(Inline)]
-        public static BitMatrix16 operator ^ (in BitMatrix16 lhs, in BitMatrix16 rhs)
-            => BitMatrix.xor(in lhs,in rhs);
+        public static BitMatrix16 operator ^ (BitMatrix16 A, BitMatrix16 B)
+            => BitMatrix.xor(A,B);
 
         [MethodImpl(Inline)]
-        public static BitMatrix16 operator + (in BitMatrix16 lhs, in BitMatrix16 rhs)
-            => BitMatrix.xor(in lhs,in rhs);
+        public static BitMatrix16 operator + (BitMatrix16 A, BitMatrix16 B)
+            => BitMatrix.xor(A,B);
 
         [MethodImpl(Inline)]
-        public static BitMatrix16 operator - (in BitMatrix16 src)
-            => BitMatrix.flip(in src);
+        public static BitMatrix16 operator - (BitMatrix16 src)
+            => BitMatrix.flip(src);
 
         [MethodImpl(Inline)]
-        public static BitMatrix16 operator - (in BitMatrix16 lhs, in BitMatrix16 rhs)
-            => lhs + -rhs;
+        public static BitMatrix16 operator - (BitMatrix16 A, BitMatrix16 B)
+            => BitMatrix.sub(A,B);
 
         [MethodImpl(Inline)]
-        public static BitMatrix16 operator * (in BitMatrix16 lhs, in BitMatrix16 rhs)
-            => BitMatrix.mul(in lhs,in rhs);
+        public static BitMatrix16 operator * (BitMatrix16 A, BitMatrix16 B)
+            => BitMatrix.mul(A, B);
 
         [MethodImpl(Inline)]
-        public static BitVector16 operator * (in BitMatrix16 lhs, in BitVector16 rhs)
-            => BitMatrix.mul(in lhs,in rhs);
+        public static BitVector16 operator * (BitMatrix16 A, BitVector16 B)
+            => BitMatrix.mul(A, B);
 
         /// <summary>
         /// Computes the complement of the operand
         /// </summary>
-        /// <param name="src">The source matrix</param>
+        /// <param name="A">The source matrix</param>
         [MethodImpl(Inline)]
-        public static BitMatrix16 operator ~ (in BitMatrix16 src)
-            => BitMatrix.flip(in src);
+        public static BitMatrix16 operator ~ (BitMatrix16 A)
+            => BitMatrix.flip(A);
 
         [MethodImpl(Inline)]
-        public static bool operator ==(BitMatrix16 lhs, BitMatrix16 rhs)
-            => lhs.Equals(rhs);
+        public static bool operator ==(BitMatrix16 A, BitMatrix16 B)
+            => A.Equals(B);
 
         [MethodImpl(Inline)]
-        public static bool operator !=(BitMatrix16 lhs, BitMatrix16 rhs)
-            => !lhs.Equals(rhs);
+        public static bool operator !=(BitMatrix16 A, BitMatrix16 B)
+            => !A.Equals(B);
 
         [MethodImpl(Inline)]
         BitMatrix16(ushort[] src)
@@ -279,8 +279,8 @@ namespace Z0
         [MethodImpl(Inline)]
         public readonly BitMatrix16 AndNot(in BitMatrix16 rhs)
         {
-            this.LoadCpuVec(out Vec256<ushort> vLhs);
-            rhs.LoadCpuVec(out Vec256<ushort> vRhs);
+            this.GetCells(out Vec256<ushort> vLhs);
+            rhs.GetCells(out Vec256<ushort> vRhs);
             Bits.andn(vLhs,vRhs).StoreTo(ref data[0]);
             return this;
         }
@@ -348,7 +348,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public bool IsZero()
         {
-            this.LoadCpuVec(out Vec256<ushort> vSrc);
+            this.GetCells(out Vec256<ushort> vSrc);
             return dinx.testz(vSrc,vSrc);
         }
 
@@ -374,8 +374,8 @@ namespace Z0
             => BitVector.Load(data, zfunc.n256);
 
         [MethodImpl(Inline)]
-        static unsafe Vector256<ushort> load(ref ushort head)
-            => Avx.LoadVector256(refptr(ref head));
+        unsafe readonly Vector256<ushort> GetCpuVec()
+            => Avx.LoadVector256(refptr(ref data[0]));
 
         [MethodImpl(Inline)]
         public bool Equals(BitMatrix16 rhs)
@@ -388,36 +388,17 @@ namespace Z0
         public override int GetHashCode()
             => throw new NotSupportedException();
 
+
         /// <summary>
         /// Loads a cpu vector with the full content of the matrix
         /// </summary>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline)]
-        public readonly ref Vec256<ushort> LoadCpuVec(out Vec256<ushort> dst)
+        public readonly ref Vec256<ushort> GetCells(out Vec256<ushort> dst)
         {
-            dst = load(ref data[0]);
+            dst = GetCpuVec();
             return ref dst;
         }
-
-
-        [MethodImpl(Inline)]
-        static ref BitMatrix16 And(ref BitMatrix16 lhs, in BitMatrix16 rhs)
-        {
-            lhs.LoadCpuVec(out Vec256<ushort> vLhs);
-            rhs.LoadCpuVec(out Vec256<ushort> vRhs);
-            dinx.vand(vLhs,vRhs).StoreTo(ref lhs.data[0]);
-            return ref lhs;
-        }
-
- 
-        [MethodImpl(Inline)]
-        static ref BitMatrix16 Flip(ref BitMatrix16 src)
-        {
-            src.LoadCpuVec(out Vec256<ushort> vSrc);
-            Bits.vflip(vSrc).StoreTo(ref src.data[0]);
-            return ref src;
-        }
-
 
         static ReadOnlySpan<byte> Identity16x16 => new byte[]
         {

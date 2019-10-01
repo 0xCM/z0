@@ -26,7 +26,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public unsafe static ref XMM movdqa(XMM src, ref XMM dst)
         {
-            dst = vload<ulong>(ref src);
+            dst = XMM.From(vload<ulong>(ref src));
             return ref dst;
         }
         
@@ -39,7 +39,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public unsafe static ref XMEM movdqa(XMM src, ref XMEM dst)
         {
-            dst = vload<ulong>(ref src);
+            dst = XMEM.From(vload<ulong>(ref src));
             return ref dst;
         }
 
@@ -52,7 +52,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public unsafe static ref YMM vmovdqa(YMM src, ref YMM dst)
         {
-            dst = vload<ulong>(ref src);
+            dst = YMM.From(vload<ulong>(ref src));
             return ref dst;
         }
         

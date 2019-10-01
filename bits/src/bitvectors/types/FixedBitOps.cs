@@ -18,7 +18,7 @@ namespace Z0
     {
         [MethodImpl(Inline)]
         public static FixedBits<V,S> and<V,S>(in FixedBits<V,S> x, in FixedBits<V,S> y)
-            where V : unmanaged, IFixedBits<V,S>
+            where V : unmanaged, IFixedScalarBits<V,S>
             where S : unmanaged
         {
             if(typeof(V) == typeof(BitVector4))
@@ -37,7 +37,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static FixedBits<V,S> or<V,S>(in FixedBits<V,S> x, in FixedBits<V,S> y)
-            where V : unmanaged, IFixedBits<V,S>
+            where V : unmanaged, IFixedScalarBits<V,S>
             where S : unmanaged
         {
             if(typeof(V) == typeof(BitVector4))
@@ -56,7 +56,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static FixedBits<V,S> xor<V,S>(in FixedBits<V,S> x, in FixedBits<V,S> y)
-            where V : unmanaged, IFixedBits<V,S>
+            where V : unmanaged, IFixedScalarBits<V,S>
             where S : unmanaged
         {
             if(typeof(V) == typeof(BitVector4))
@@ -75,7 +75,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static FixedBits<V,S> sll<V,S>(in FixedBits<V,S> src, int offset)
-            where V : unmanaged, IFixedBits<V,S>
+            where V : unmanaged, IFixedScalarBits<V,S>
             where S : unmanaged
         {
             if(typeof(V) == typeof(BitVector4))
@@ -94,7 +94,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static FixedBits<V,S> srl<V,S>(in FixedBits<V,S> src, int offset)
-            where V : unmanaged, IFixedBits<V,S>
+            where V : unmanaged, IFixedScalarBits<V,S>
             where S : unmanaged
         {
             if(typeof(V) == typeof(BitVector4))
@@ -114,7 +114,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static FixedBits<V,S> flip<V,S>(in FixedBits<V,S> x)
-            where V : unmanaged, IFixedBits<V,S>
+            where V : unmanaged, IFixedScalarBits<V,S>
             where S : unmanaged
         {
             if(typeof(V) == typeof(BitVector4))
@@ -137,37 +137,37 @@ namespace Z0
 
         [MethodImpl(Inline)]
         internal static ref FixedBits<V,S> generic<V,S>(in BitVector4 bv)
-            where V : unmanaged, IFixedBits<V,S>
+            where V : unmanaged, IFixedScalarBits<V,S>
             where S : unmanaged
                 => ref Unsafe.As<BitVector4,FixedBits<V,S>>(ref asRef(in bv));
 
         [MethodImpl(Inline)]
         internal static ref FixedBits<V,S> generic<V,S>(in BitVector8 bv)
-            where V : unmanaged, IFixedBits<V,S>
+            where V : unmanaged, IFixedScalarBits<V,S>
             where S : unmanaged
                 => ref Unsafe.As<BitVector8,FixedBits<V,S>>(ref asRef(in bv));
 
         [MethodImpl(Inline)]
         internal static ref FixedBits<V,S> generic<V,S>(in BitVector16 bv)
-            where V : unmanaged, IFixedBits<V,S>
+            where V : unmanaged, IFixedScalarBits<V,S>
             where S : unmanaged
                 => ref Unsafe.As<BitVector16,FixedBits<V,S>>(ref asRef(in bv));
 
         [MethodImpl(Inline)]
         internal static ref FixedBits<V,S> generic<V,S>(in BitVector32 bv)
-            where V : unmanaged, IFixedBits<V,S>
+            where V : unmanaged, IFixedScalarBits<V,S>
             where S : unmanaged
                 => ref Unsafe.As<BitVector32,FixedBits<V,S>>(ref asRef(in bv));
 
         [MethodImpl(Inline)]
         internal static ref FixedBits<V,S> generic<V,S>(in BitVector64 bv)
-            where V : unmanaged, IFixedBits<V,S>
+            where V : unmanaged, IFixedScalarBits<V,S>
             where S : unmanaged
                 => ref Unsafe.As<BitVector64,FixedBits<V,S>>(ref asRef(in bv));
 
         [MethodImpl(Inline)]
         internal static S scalar4<V,S>(in FixedBits<V,S> src)
-            where V : unmanaged, IFixedBits<V,S>
+            where V : unmanaged, IFixedScalarBits<V,S>
             where S : unmanaged
         {                
             var s = src.bv4.Scalar;
@@ -176,7 +176,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         internal static S scalar8<V,S>(in FixedBits<V,S> src)
-            where V : unmanaged, IFixedBits<V,S>
+            where V : unmanaged, IFixedScalarBits<V,S>
             where S : unmanaged
         {                
             var s = src.bv8.Scalar;
@@ -185,7 +185,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         internal static S scalar16<V,S>(in FixedBits<V,S> src)
-            where V : unmanaged, IFixedBits<V,S>
+            where V : unmanaged, IFixedScalarBits<V,S>
             where S : unmanaged
         {                
             var s = src.bv16.Scalar;
@@ -194,7 +194,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         internal static S scalar32<V,S>(in FixedBits<V,S> src)
-            where V : unmanaged, IFixedBits<V,S>
+            where V : unmanaged, IFixedScalarBits<V,S>
             where S : unmanaged
         {                
             var s = src.bv32.Scalar;                
@@ -203,7 +203,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         internal static S scalar64<V,S>(in FixedBits<V,S> src)
-            where V : unmanaged, IFixedBits<V,S>
+            where V : unmanaged, IFixedScalarBits<V,S>
             where S : unmanaged
         {                
             var s = src.data.Scalar;                
@@ -212,7 +212,7 @@ namespace Z0
     
         [MethodImpl(Inline)]
         internal static S scalar<V,S>(in FixedBits<V,S> src)
-            where V : unmanaged, IFixedBits<V,S>
+            where V : unmanaged, IFixedScalarBits<V,S>
             where S : unmanaged
         {
             if(typeof(S) == typeof(UInt4))
@@ -231,7 +231,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         internal static V primalbits<V,S>(in FixedBits<V,S> src)
-            where V : unmanaged, IFixedBits<V,S>
+            where V : unmanaged, IFixedScalarBits<V,S>
             where S : unmanaged
         {
             if(typeof(V) == typeof(BitVector4))

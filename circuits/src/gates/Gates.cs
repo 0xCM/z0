@@ -14,50 +14,50 @@ namespace Z0
     public static class Gates
     {
         [MethodImpl(Inline)]
-        public static ref readonly AndGate andg()
+        public static ref readonly AndGate and()
             => ref AndGate.Gate;
 
         [MethodImpl(Inline)]
-        public static ref readonly XOrGate xorg()
+        public static ref readonly XOrGate xor()
             => ref XOrGate.Gate;
             
         [MethodImpl(Inline)]
-        public static ref readonly AndGate<T> andg<T>()
+        public static ref readonly AndGate<T> and<T>()
             where T : unmanaged
                 => ref AndGate<T>.Gate;
 
         [MethodImpl(Inline)]
-        public static ref readonly OrGate<T> org<T>()
+        public static ref readonly OrGate<T> or<T>()
             where T : unmanaged
                 => ref OrGate<T>.Gate;
 
         [MethodImpl(Inline)]
-        public static ref readonly XOrGate<T> xorg<T>()
+        public static ref readonly XOrGate<T> xor<T>()
             where T : unmanaged
                 => ref XOrGate<T>.Gate;
 
         [MethodImpl(Inline)]
-        public static ref readonly NotGate<T> notg<T>()
+        public static ref readonly NotGate<T> not<T>()
             where T : unmanaged
                 => ref NotGate<T>.Gate;
 
         [MethodImpl(Inline)]
-        public static ref readonly NAndGate<T> nandg<T>()
+        public static ref readonly NandGate<T> nand<T>()
             where T : unmanaged
-                => ref NAndGate<T>.Gate;
+                => ref NandGate<T>.Gate;
 
         [MethodImpl(Inline)]
-        public static ref readonly NOrGate<T> norg<T>()
+        public static ref readonly NorGate<T> norg<T>()
             where T : unmanaged
-                => ref NOrGate<T>.Gate;
+                => ref NorGate<T>.Gate;
 
         [MethodImpl(Inline)]
-        public static ref readonly XNOrGate<T> xnorg<T>()
+        public static ref readonly XnorGate<T> xnor<T>()
             where T : unmanaged
-                => ref XNOrGate<T>.Gate;
+                => ref XnorGate<T>.Gate;
 
         [MethodImpl(Inline)]
-        public static ref readonly MuxGate<T> muxg<T>()
+        public static ref readonly MuxGate<T> mux<T>()
             where T : unmanaged
                 => ref MuxGate<T>.Gate;
 

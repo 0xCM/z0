@@ -10,11 +10,9 @@ namespace Z0
     using System.Collections.Generic;
 
     using static zfunc;    
-    using static nfunc;
 
     public static class BitVector
     {   
-
         /// <summary>
         /// Allocates a generic bitvector of natural length
         /// </summary>
@@ -86,7 +84,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitVector<T> Load<T>(T[] src, BitSize? n = null)
             where T : unmanaged
-                => BitVector<T>.Load(src, n);
+                => BitVector<T>.From(src, n);
 
         /// <summary>
         /// Loads a generic bitvector from a span
@@ -97,7 +95,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitVector<T> Load<T>(Span<T> src, BitSize? n = null)
             where T : unmanaged
-                => BitVector<T>.Load(src, n);
+                => BitVector<T>.From(src, n);
 
         /// <summary>
         /// Defines a generic bitvector with a specified number of components and bitlength
@@ -108,7 +106,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitVector<T> Load<T>(T[] src, BitSize n)
             where T : unmanaged
-                => BitVector<T>.Load(src,n);
+                => BitVector<T>.From(src,n);
 
 
         /// <summary>
@@ -118,7 +116,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitVector<T> Load<T>(params T[] src)
             where T : unmanaged
-                => BitVector<T>.Load(src);
+                => BitVector<T>.From(src,null);
 
  
         /// <summary>

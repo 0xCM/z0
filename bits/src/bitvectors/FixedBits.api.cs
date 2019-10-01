@@ -34,7 +34,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static FixedBits<V,S> FromScalar<V,S>(in S src)
-            where V : unmanaged, IFixedBits<V,S>
+            where V : unmanaged, IFixedScalarBits<V,S>
             where S : unmanaged
         {
             if(typeof(S) == typeof(UInt4))
@@ -53,7 +53,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static ref FixedBits<V,S> FromScalar<V,S>(in S s, ref FixedBits<V,S> src)
-            where V : unmanaged, IFixedBits<V,S>
+            where V : unmanaged, IFixedScalarBits<V,S>
             where S : unmanaged
         {            
             src = FixedBits.FromScalar<V,S>(in s);
@@ -67,7 +67,7 @@ namespace Z0
         /// <typeparam name="V">The nonparametric vector of fixed size</typeparam>
         /// <typeparam name="S">A supported scalar type</typeparam>
         public static FixedBits<V,S> FromVector<V,S>(in V v, S rep = default)
-            where V : unmanaged, IFixedBits<V,S>
+            where V : unmanaged, IFixedScalarBits<V,S>
             where S : unmanaged
         {
             if(typeof(V) == typeof(BitVector4))

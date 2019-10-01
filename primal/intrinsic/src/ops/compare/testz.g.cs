@@ -21,7 +21,7 @@ namespace Z0
         /// <param name="src">The bit source</param>
         /// <param name="mask">The mask</param>
         [MethodImpl(Inline)]
-        public static bool testz<T>(Vector128<T> src,Vector128<T> mask)
+        public static bool testz<T>(in Vec128<T> src, in Vec128<T> mask)
             where T : unmanaged
         {
             if(typematch<T,sbyte>())
@@ -54,7 +54,7 @@ namespace Z0
         /// <param name="src">The bit source</param>
         /// <param name="mask">The mask</param>
         [MethodImpl(Inline)]
-        public static bool testz<T>(Vector256<T> lhs, Vector256<T> rhs)
+        public static bool testz<T>(in Vec256<T> lhs, in Vec256<T> rhs)
             where T : unmanaged
         {
             if(typematch<T,sbyte>())
@@ -80,7 +80,5 @@ namespace Z0
             else 
                 throw unsupported<T>();
         }
-
     }
-
 }

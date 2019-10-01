@@ -16,7 +16,7 @@ namespace Z0
     /// Defines a 64-bit bitvector
     /// </summary>
     [StructLayout(LayoutKind.Explicit, Size = 8)]
-    public struct BitVector64 : IFixedBits<BitVector64,ulong>
+    public struct BitVector64 : IFixedScalarBits<BitVector64,ulong>
     {
         
         [FieldOffset(0)]
@@ -82,9 +82,9 @@ namespace Z0
 
         public static readonly BitVector64 Ones = ulong.MaxValue;
 
-        public static readonly BitSize BitSize = 64;
+        public static readonly BitSize Width = 64;
 
-        public static readonly BitPos LastPos = BitSize - 1;
+        public static readonly BitPos LastPos = Width - 1;
 
         /// <summary>
         /// Allocates a new empty vector
@@ -153,6 +153,18 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitVector64 FromBitString(BitString src)
             => src.TakeUInt64();
+
+        /// <summary>
+        /// Parses a bitvector from a 0-1 string
+        /// </summary>
+        /// <param name="src">The source text</param>
+        public static BitVector64 Parse(string src)
+        {
+            var bs = BitString.Parse(src);
+            var len = math.min(bs.Length, Width);
+            Bits.packseq(bs.BitSeq, out ulong dst);
+            return dst;
+        }
 
         /// <summary>
         /// Enumerates all 32-bit bitvectors whose width is less than or equal to a specified maximum
@@ -416,7 +428,7 @@ namespace Z0
         public readonly BitSize Length
         {
             [MethodImpl(Inline)]
-            get => BitSize;
+            get => Width;
         }
 
         /// <summary>
@@ -488,6 +500,54 @@ namespace Z0
         [MethodImpl(Inline)]
         public ref byte Byte(int index)        
             => ref Bytes[index];
+
+
+        /// <summary>
+        /// Computes in-place the bitwise AND of the source vector and another,
+        /// returning the result to the caller
+        /// </summary>
+        /// <param name="y">The other vector</param>
+        [MethodImpl(Inline)]
+        public BitVector64 And(BitVector64 y)
+        {
+            data &= y.data;
+            return this;
+        }
+
+        /// <summary>
+        /// Computes in-place the bitwise OR of the source vector and another,
+        /// returning the result to the caller
+        /// </summary>
+        /// <param name="y">The other vector</param>
+        [MethodImpl(Inline)]
+        public BitVector64 Or(BitVector64 y)
+        {
+            data |= y.data;
+            return this;
+        }
+
+        /// <summary>
+        /// Computes in-place the bitwise XOR of the source vector and another,
+        /// returning the result to the caller
+        /// </summary>
+        /// <param name="y">The other vector</param>
+        [MethodImpl(Inline)]
+        public BitVector64 XOr(BitVector64 y)
+        {
+            data ^= y.data;
+            return this;
+        }
+
+        /// <summary>
+        /// Computes in-place the bitwise complement of the source vector,
+        /// returning the result to the caller
+        /// </summary>
+        [MethodImpl(Inline)]
+        public BitVector64 Flip()
+        {
+            data = (byte)~data;
+            return this;
+        }
 
         /// <summary>
         /// Shifts the bits in the vector leftwards

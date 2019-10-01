@@ -45,12 +45,12 @@ namespace Z0
             || typeof(T) == typeof(ushort) 
             || typeof(T) == typeof(uint) 
             || typeof(T) == typeof(ulong))
-                andu(ref lhs,rhs);
+                andu(ref lhs, rhs);
             else if(typeof(T) == typeof(sbyte) 
             || typeof(T) == typeof(short) 
             || typeof(T) == typeof(int) 
             || typeof(T) == typeof(long))
-                andi(ref lhs,rhs);
+                andi(ref lhs, rhs);
             else gfp.and(ref lhs,rhs);
             return ref lhs;
         }

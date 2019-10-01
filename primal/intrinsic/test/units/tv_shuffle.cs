@@ -44,8 +44,8 @@ namespace Z0.Test
         public void permute128i32()
         {
             var id = Vec128.FromParts(0,1,2,3);
-            Claim.eq(dinx.permute(id, Perm4.ADCB), Vec128.FromParts(0,3,2,1));
-            Claim.eq(dinx.permute(id, Perm4.DBCA), Vec128.FromParts(3,1,2,0));
+            Claim.eq(dinx.perm4x32(id, Perm4.ADCB), Vec128.FromParts(0,3,2,1));
+            Claim.eq(dinx.perm4x32(id, Perm4.DBCA), Vec128.FromParts(3,1,2,0));
             Permute4i32();        
         }
 
@@ -89,7 +89,7 @@ namespace Z0.Test
                 Claim.eq(p,q);
 
                 // Permute vector via api
-                var v2 = dinx.permute(v1,p);
+                var v2 = dinx.perm4x32(v1,p);
 
                 // Permute vector manually
                 var v3 = Vec128.FromParts(v1[p0],v1[p1],v1[p2],v1[p3]);

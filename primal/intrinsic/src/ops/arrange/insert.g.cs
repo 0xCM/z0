@@ -26,7 +26,7 @@ namespace Z0
         /// <param name="index">Identifies the lane in the target to overwrite, either 0 or 1 respectively 
         /// identifing low or hi</param>
         [MethodImpl(Inline)]
-        public static Vec256<T> insert<T>(Vec128<T> src, Vec256<T> dst, byte index)        
+        public static Vec256<T> insert<T>(in Vec128<T> src, in Vec256<T> dst, byte index)        
             where T : unmanaged
         {
             if(typematch<T,sbyte>())

@@ -234,19 +234,26 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The target type</typeparam>
-        [MethodImpl(Inline)]
         public static T TakeScalar<T>(this Span<byte> src)
             where T : unmanaged
         {
-            if(src.Length >= Unsafe.SizeOf<T>())
-                return MemoryMarshal.Read<T>(src);
-            else if(src.Length == 0)
+            if(src.Length == 0)
                 return default;
+
+            var tsize = Unsafe.SizeOf<T>();
+            var srclen = src.Length;
+            if(srclen >= tsize)
+                return MemoryMarshal.Read<T>(src);
             else
             {
-                Span<byte> tmp = stackalloc byte[Unsafe.SizeOf<T>()];
-                src.CopyTo(tmp);
-                return MemoryMarshal.Read<T>(tmp);
+                var remaining = tsize - src.Length;
+                Span<T> dst = stackalloc T[1];
+                src.CopyTo(dst.AsBytes());            
+                return dst[0];
+                
+                // Span<byte> tmp = stackalloc byte[remaining];
+                // src.CopyTo(tmp);
+                // return MemoryMarshal.Read<T>(tmp);
             }
         }
 

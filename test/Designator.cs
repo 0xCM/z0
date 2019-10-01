@@ -20,22 +20,49 @@ namespace Z0.Designators
     {
         public override IEnumerable<Assembly> Dependencies 
             => items(
-            typeof(Bit).Assembly,
             typeof(ITypeNat).Assembly,
             D.NatTest.Assembly,
+            
+            D.CoreData.Assembly,
+            
             D.CoreFunc.Assembly, 
             D.CoreFuncTest.Assembly, 
+            
             D.CpuData.Assembly,
             D.CpuFunc.Assembly,
             D.CpuTest.Assembly,
+
             D.Intrinsics.Assembly,
+            D.IntrinsicsTest.Assembly,
+
             D.PrimalMath.Assembly,
             D.PrimalMathTest.Assembly,
+
+            D.MklApi.Assembly,
+            D.MklTest.Assembly,
+
+            D.LinearOps.Assembly,
+            D.LinearTest.Assembly,
+            D.Matrix.Assembly,
+
+            D.Machines.Assembly,
+            D.MachineTest.Assembly,
+
             D.Bits.Assembly,
             D.BitTest.Assembly,
+
             D.Circuits.Assembly,
             D.CircuitTest.Assembly,
-            D.Rng.Assembly
+
+            D.Rng.Assembly,
+
+            D.LibM.Assembly,            
+            D.LibMTest.Assembly,
+
+            D.StatDist.Assembly,
+
+            D.RevealLib.Assembly,
+            D.RevealApp.Assembly
             );
     }
 

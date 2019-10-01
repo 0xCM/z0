@@ -12,9 +12,9 @@ namespace Z0
 
     public readonly struct HalfAdder
     {
-        static readonly AndGate andg = Gates.andg();
+        static readonly AndGate andg = Gates.and();
         
-        static readonly XOrGate xorg = Gates.xorg();
+        static readonly XOrGate xorg = Gates.xor();
 
         [MethodImpl(Inline)]
         public (Bit s, Bit c) Send(Bit a, Bit b)        
@@ -29,9 +29,9 @@ namespace Z0
     {
         public static readonly HalfAdder<T> Circuit = default;
         
-        static readonly XOrGate<T> xorg = Gates.xorg<T>();
+        static readonly XOrGate<T> xorg = Gates.xor<T>();
 
-        static readonly AndGate<T> andg = Gates.andg<T>();
+        static readonly AndGate<T> andg = Gates.and<T>();
 
 
         [MethodImpl(Inline)]

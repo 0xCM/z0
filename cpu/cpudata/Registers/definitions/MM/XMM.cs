@@ -93,6 +93,166 @@ namespace Z0
             return target;
         }
 
+        /// <summary>
+        /// Implicitly converts a source vector to a 256-bit memory block
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        [MethodImpl(Inline)]
+        public static implicit operator XMM(Vec128<sbyte> src)
+            => From(src);
+
+        /// <summary>
+        /// Implicitly converts a source vector to a 256-bit memory block
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        [MethodImpl(Inline)]
+        public static implicit operator XMM(Vec128<byte> src)
+            => From(src);
+
+        /// <summary>
+        /// Implicitly converts a source vector to a 256-bit memory block
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        [MethodImpl(Inline)]
+        public static implicit operator XMM(Vec128<short> src)
+            => From(src);
+
+        /// <summary>
+        /// Implicitly converts a source vector to a 256-bit memory block
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        [MethodImpl(Inline)]
+        public static implicit operator XMM(Vec128<ushort> src)
+            => From(src);
+
+        /// <summary>
+        /// Implicitly converts a source vector to a 256-bit memory block
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        [MethodImpl(Inline)]
+        public static implicit operator XMM(Vec128<int> src)
+            => From(src);
+
+        /// <summary>
+        /// Implicitly converts a source vector to a 256-bit memory block
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        [MethodImpl(Inline)]
+        public static implicit operator XMM(Vec128<uint> src)
+            => From(src);
+
+        /// <summary>
+        /// Implicitly converts a source vector to a 256-bit memory block
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        [MethodImpl(Inline)]
+        public static implicit operator XMM(Vec128<long> src)
+            => From(src);
+
+        /// <summary>
+        /// Implicitly converts a source vector to a 256-bit memory block
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        [MethodImpl(Inline)]
+        public static implicit operator XMM(Vec128<ulong> src)
+            => From(src);
+        
+        /// <summary>
+        /// Implicitly converts a source vector to a 256-bit memory block
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        [MethodImpl(Inline)]
+        public static implicit operator XMM(Vec128<float> src)
+            => From(src);
+
+        /// <summary>
+        /// Implicitly converts a source vector to a 256-bit memory block
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        [MethodImpl(Inline)]
+        public static implicit operator XMM(Vec128<double> src)
+            => From(src);
+
+        /// <summary>
+        /// Implicitly converts a source vector to a 256-bit memory block
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        [MethodImpl(Inline)]
+        public static implicit operator XMM(Vector128<sbyte> src)
+            => From(src);
+
+        /// <summary>
+        /// Implicitly converts a source vector to a 256-bit memory block
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        [MethodImpl(Inline)]
+        public static implicit operator XMM(Vector128<byte> src)
+            => From(src);
+
+        /// <summary>
+        /// Implicitly converts a source vector to a 256-bit memory block
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        [MethodImpl(Inline)]
+        public static implicit operator XMM(Vector128<short> src)
+            => From(src);
+
+        /// <summary>
+        /// Implicitly converts a source vector to a 256-bit memory block
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        [MethodImpl(Inline)]
+        public static implicit operator XMM(Vector128<ushort> src)
+            => From(src);
+
+        /// <summary>
+        /// Implicitly converts a source vector to a 256-bit memory block
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        [MethodImpl(Inline)]
+        public static implicit operator XMM(Vector128<int> src)
+            => From(src);
+
+        /// <summary>
+        /// Implicitly converts a source vector to a 256-bit memory block
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        [MethodImpl(Inline)]
+        public static implicit operator XMM(Vector128<uint> src)
+            => From(src);
+
+        /// <summary>
+        /// Implicitly converts a source vector to a 256-bit memory block
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        [MethodImpl(Inline)]
+        public static implicit operator XMM(Vector128<long> src)
+            => From(src);
+
+        /// <summary>
+        /// Implicitly converts a source vector to a 256-bit memory block
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        [MethodImpl(Inline)]
+        public static implicit operator XMM(Vector128<ulong> src)
+            => From(src);
+        
+        /// <summary>
+        /// Implicitly converts a source vector to a 256-bit memory block
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        [MethodImpl(Inline)]
+        public static implicit operator XMM(Vector128<float> src)
+            => From(src);
+
+        /// <summary>
+        /// Implicitly converts a source vector to a 256-bit memory block
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        [MethodImpl(Inline)]
+        public static implicit operator XMM(Vector128<double> src)
+            => From(src);
+
         [MethodImpl(Inline)]
         public static bool operator ==(XMM lhs, XMM rhs)
             =>lhs.Equals(rhs);

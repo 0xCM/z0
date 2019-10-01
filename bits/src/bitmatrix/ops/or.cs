@@ -33,8 +33,8 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitMatrix16 or(in BitMatrix16 lhs, in BitMatrix16 rhs)
         {
-            ref var A = ref lhs.LoadCpuVec(out Vec256<ushort> _);
-            ref var B = ref rhs.LoadCpuVec(out Vec256<ushort> _);
+            ref var A = ref lhs.GetCells(out Vec256<ushort> _);
+            ref var B = ref rhs.GetCells(out Vec256<ushort> _);
             var C = dinx.vor(A,B);
             return BitMatrix16.From(in C);
         }
@@ -44,7 +44,7 @@ namespace Z0
         /// </summary>
         /// <param name="lhs">The left matrix</param>
         /// <param name="rhs">The right matrix</param>
-        public static BitMatrix32 or(in BitMatrix32 A, in BitMatrix32 B)
+        public static BitMatrix32 or(BitMatrix32 A, BitMatrix32 B)
         {
             const int rowstep = 8;
             var dst = BitMatrix32.Alloc();
@@ -52,9 +52,28 @@ namespace Z0
             {
                 var x1 = vload256(ref A[i]);
                 var x2 = vload256(ref B[i]);
-                Bits.vor(in x1, in x2).StoreTo(ref dst[i]);
+                dinx.vor(in x1, in x2).StoreTo(ref dst[i]);
             }
             return dst;
+        }
+
+        public static ref BitMatrix64 or(ref BitMatrix64 A, in BitMatrix64 B)
+        {
+            const int rowstep = 4;
+            for(var i=0; i< A.RowCount; i += rowstep)
+            {
+                A.GetCells(i, out Vec256<ulong> vLhs);
+                B.GetCells(i, out Vec256<ulong> vRhs);
+                ginx.vor(vLhs,vRhs).StoreTo(ref A[i]);
+            }
+            return ref A;
+        }
+
+        [MethodImpl(Inline)]
+        public static BitMatrix64 Or(BitMatrix64 A, BitMatrix64 B)        
+        {
+            var C = A.Replicate();
+            return or(ref C, B);
         }
 
         /// <summary>

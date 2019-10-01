@@ -93,23 +93,6 @@ namespace Z0
         public static Vec128<ulong> vor_g128x64u(Vec128<ulong> x, Vec128<ulong> y)
             => ginx.vor(x,y);
 
-        public static Vector128<float> vor_n128x32f(Vector128<float> x, Vector128<float> y)
-            => And(x,y);
-
-        public static Vec128<float> vor_d128x32f(Vec128<float> x, Vec128<float> y)
-            => dinx.vor(x,y);
-
-        public static Vec128<float> vor_g128x32f(Vec128<float> x, Vec128<float> y)
-            => ginx.vor(x,y);
-
-        public static Vector128<double> vor_n128x64f(Vector128<double> x, Vector128<double> y)
-            => And(x,y);
-
-        public static Vec128<double> vor_d128x64f(Vec128<double> x, Vec128<double> y)
-            => dinx.vor(x,y);
-
-        public static Vec128<double> vor_g128x64f(Vec128<double> x, Vec128<double> y)
-            => ginx.vor(x,y);
  
          public static Vector256<sbyte> vor_n256x8i(Vector256<sbyte> x, Vector256<sbyte> y)
             => And(x,y);
@@ -183,22 +166,5 @@ namespace Z0
         public static Vec256<ulong> vor_g256x64u(Vec256<ulong> x, Vec256<ulong> y)
             => ginx.vor(x,y);
 
-        public static Vector256<float> vor_n256x32f(Vector256<float> x, Vector256<float> y)
-            => And(x,y);
-
-        public static Vec256<float> vor_d256x32f(Vec256<float> x, Vec256<float> y)
-            => dinx.vor(x,y);
-
-        public static Vec256<float> vor_g256x32f(Vec256<float> x, Vec256<float> y)
-            => ginx.vor(x,y);
-
-        public static Vector256<double> vor_n256x64f(Vector256<double> x, Vector256<double> y)
-            => And(x,y);
-
-        public static Vec256<double> vor_d256x64f(Vec256<double> x, Vec256<double> y)
-            => dinx.vor(x,y);
-
-        public static Vec256<double> vor_g256x64f(Vec256<double> x, Vec256<double> y)
-            => ginx.vor(x,y);
     }
 }

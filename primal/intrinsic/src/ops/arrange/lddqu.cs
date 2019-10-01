@@ -93,7 +93,6 @@ namespace Z0
         public static unsafe Vec256<ulong> lddqu256(in ulong src)
             => LoadDquVector256(constptr(in src));
 
-
         [MethodImpl(Inline)]
         public static unsafe Vec128<byte> load128(in byte src)
             => LoadAlignedVector128(constptr(in src));

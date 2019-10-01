@@ -20,7 +20,7 @@ namespace Z0
         public static Vec128<byte> rotl(in Vec128<byte> src, byte offset)
         {
             const byte bitsize = 8;
-            return Bits.vor(
+            return dinx.vor(
                 Bits.sll(in src, offset),
                 Bits.srl(in src, (byte)(bitsize - offset))
                 );             
@@ -35,9 +35,9 @@ namespace Z0
         public static Vec128<ushort> rotl(in Vec128<ushort> src, byte offset)
         {
             const byte bitsize = 16;
-            return Bits.vor(
-                Bits.sll(in src, offset),
-                Bits.srl(in src, (byte)(bitsize - offset))
+            return dinx.vor(
+                dinx.sll(in src, offset),
+                dinx.srl(in src, (byte)(bitsize - offset))
                 );             
         }
 
@@ -50,9 +50,9 @@ namespace Z0
         public static Vec128<uint> rotl(in Vec128<uint> src, byte offset)
         {
             const byte bitsize = 32;
-            var x = Bits.sll(in src, offset);
-            var y = Bits.srl(in src, (byte)(bitsize-offset));   
-            return Bits.vor(x,y);             
+            var x = dinx.sll(in src, offset);
+            var y = dinx.srl(in src, (byte)(bitsize-offset));   
+            return dinx.vor(x,y);             
         }
 
         /// <summary>
@@ -64,9 +64,9 @@ namespace Z0
         public static Vec128<ulong> rotl(in Vec128<ulong> src, byte offset)
         {
             const byte bitsize = 64;
-            var x = Bits.sll(in src, offset);
-            var y = Bits.srl(in src, (byte)(bitsize-offset));   
-            return Bits.vor(x,y);             
+            var x = dinx.sll(in src, offset);
+            var y = dinx.srl(in src, (byte)(bitsize-offset));   
+            return dinx.vor(x,y);             
         }
 
 
@@ -81,7 +81,7 @@ namespace Z0
             const byte bitsize = 8;
             var x = Bits.sll(in src, offset);
             var y = Bits.srl(in src, (byte)(bitsize - offset));   
-            return Bits.vor(x,y);             
+            return dinx.vor(x,y);             
         }
 
         /// <summary>
@@ -93,9 +93,9 @@ namespace Z0
         public static Vec256<ushort> rotl(in Vec256<ushort> src, byte offset)
         {
             const byte bitsize = 16;
-            var x = Bits.sll(in src, offset);
-            var y = Bits.srl(in src, (byte)(bitsize - offset));   
-            return Bits.vor(x,y);             
+            var x = dinx.sll(in src, offset);
+            var y = dinx.srl(in src, (byte)(bitsize - offset));   
+            return dinx.vor(x,y);             
         }
 
         /// <summary>
@@ -107,9 +107,9 @@ namespace Z0
         public static Vec256<uint> rotl(in Vec256<uint> src, byte offset)
         {
             const byte bitsize = 32;
-            var x = Bits.sll(in src, offset);
-            var y = Bits.srl(in src, (byte)(bitsize - offset));   
-            return Bits.vor(x,y);             
+            var x = dinx.sll(in src, offset);
+            var y = dinx.srl(in src, (byte)(bitsize - offset));   
+            return dinx.vor(x,y);             
         }
 
         /// <summary>
@@ -121,9 +121,9 @@ namespace Z0
         public static Vec256<ulong> rotl(in Vec256<ulong> src, byte offset)
         {
             const byte bitsize = 64;
-            var x = Bits.sll(in src, offset);
-            var y = Bits.srl(in src, (byte)(bitsize - offset));   
-            return Bits.vor(x,y);             
+            var x = dinx.sll(in src, offset);
+            var y = dinx.srl(in src, (byte)(bitsize - offset));   
+            return dinx.vor(x,y);             
         }
 
         /// <summary>
@@ -135,9 +135,9 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vec128<ulong> rotl(in Vec128<ulong> src, in Vec128<ulong> offsets)
         {
-            var x = Bits.vsllv(src,offsets);
-            var y = Bits.srlv(src, dinx.sub(Vec128u64,offsets));
-            return Bits.vor(x,y);
+            var x = dinx.vsllv(src,offsets);
+            var y = dinx.srlv(src, dinx.sub(Vec128u64,offsets));
+            return dinx.vor(x,y);
         }
 
         /// <summary>
@@ -149,9 +149,9 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vec128<uint> rotl(in Vec128<uint> src, in Vec128<uint> offsets)
         {
-            var x = Bits.vsllv(src, offsets);
-            var y = Bits.srlv(src, dinx.sub(Vec128u32, offsets));
-            return Bits.vor(x,y);
+            var x = dinx.vsllv(src, offsets);
+            var y = dinx.srlv(src, dinx.sub(Vec128u32, offsets));
+            return dinx.vor(x,y);
         }
 
         /// <summary>
@@ -163,9 +163,9 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vec256<ulong> rotl(in Vec256<ulong> src, in Vec256<ulong> offsets)
         {
-            var x = Bits.vsllv(src,offsets);
-            var y = Bits.srlv(src, dinx.sub(Vec256u64,offsets));
-            return Bits.vor(x,y);
+            var x = dinx.vsllv(src,offsets);
+            var y = dinx.srlv(src, dinx.sub(Vec256u64,offsets));
+            return dinx.vor(x,y);
         }
 
         /// <summary>
@@ -177,9 +177,9 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vec256<uint> rotl(in Vec256<uint> src, in Vec256<uint> offsets)
         {
-            var x = Bits.vsllv(src,offsets);
-            var y = Bits.srlv(src, dinx.sub(Vec256u32,offsets));
-            return Bits.vor(x,y);
+            var x = dinx.vsllv(src,offsets);
+            var y = dinx.srlv(src, dinx.sub(Vec256u32,offsets));
+            return dinx.vor(x,y);
         }
 
         static readonly Vec128<uint> Vec128u32 = Vec128.Fill(32u);

@@ -18,7 +18,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static BitVector16 mul(BitVector16 a, BitVector16 b)
-            => Bits.clmulr(a,b,Redux);
+            => dinx.clmulr(a.Scalar,b.Scalar,Redux.Scalar);
 
         public static BitVector16 mul_ref(BitVector16 a, BitVector16 b)
         {
@@ -79,7 +79,6 @@ namespace Z0
                 dst[i, j] = Gf512.mul(i,j);
             return ref dst;
         }
-
     }
 
     public static class Gf256
@@ -108,8 +107,8 @@ namespace Z0
 
 
         [MethodImpl(Inline)]
-        public static byte mul(byte a, byte b)
-            => Bits.clmulr(a,b,Redux);
+        public static byte clmul(byte a, byte b)
+            => dinx.clmulr(a,b,Redux);
 
 
         /// <summary>
@@ -124,7 +123,7 @@ namespace Z0
             var index = 0;
             for(byte i=min; i<= max; i++)
             for(byte j=min; j<= max; j++)
-                Unsafe.Add(ref dst,index++) = mul(i,j);
+                Unsafe.Add(ref dst,index++) = clmul(i,j);
         }
 
         /// <summary>
@@ -162,7 +161,7 @@ namespace Z0
             dst = BlockMatrix.Alloc<N256,byte>();
             for(uint i=1; i < 256; i++)
             for(uint j=1; j < 256; j++)
-                dst[i, j] = Gf256.mul((byte)i,(byte)j);
+                dst[i, j] = Gf256.clmul((byte)i,(byte)j);
             return ref dst;
         }
 

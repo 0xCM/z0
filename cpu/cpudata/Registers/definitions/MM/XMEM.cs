@@ -25,13 +25,13 @@ namespace Z0
         fixed byte mem[ByteCount];
 
         [FieldOffset(0)]
-        Vector128<byte> vxmm;
+        Vec128<byte> vxmm;
 
         [FieldOffset(0)]
         XMM xmm;
 
         [MethodImpl(Inline)]
-        XMEM(Vector128<byte> vxmm)
+        XMEM(Vec128<byte> vxmm)
             : this()
         {
             this.vxmm = vxmm;
@@ -43,6 +43,11 @@ namespace Z0
         {
             this.xmm = xmm;
         }
+
+        [MethodImpl(Inline)]
+        public static XMEM From<T>(Vec128<T> src)
+            where T : unmanaged
+                => Unsafe.As<Vec128<T>,XMEM>(ref src);
 
         [MethodImpl(Inline)]
         public static XMEM From<T>(Vector128<T> src)
@@ -62,7 +67,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
-        public static implicit operator XMEM(Vector128<sbyte> src)
+        public static implicit operator XMEM(Vec128<sbyte> src)
             => From(src);
 
         /// <summary>
@@ -70,7 +75,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
-        public static implicit operator XMEM(Vector128<byte> src)
+        public static implicit operator XMEM(Vec128<byte> src)
             => From(src);
 
         /// <summary>
@@ -78,7 +83,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
-        public static implicit operator XMEM(Vector128<short> src)
+        public static implicit operator XMEM(Vec128<short> src)
             => From(src);
 
         /// <summary>
@@ -86,7 +91,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
-        public static implicit operator XMEM(Vector128<ushort> src)
+        public static implicit operator XMEM(Vec128<ushort> src)
             => From(src);
 
         /// <summary>
@@ -94,7 +99,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
-        public static implicit operator XMEM(Vector128<int> src)
+        public static implicit operator XMEM(Vec128<int> src)
             => From(src);
 
         /// <summary>
@@ -102,7 +107,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
-        public static implicit operator XMEM(Vector128<uint> src)
+        public static implicit operator XMEM(Vec128<uint> src)
             => From(src);
 
         /// <summary>
@@ -110,7 +115,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
-        public static implicit operator XMEM(Vector128<long> src)
+        public static implicit operator XMEM(Vec128<long> src)
             => From(src);
 
         /// <summary>
@@ -118,7 +123,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
-        public static implicit operator XMEM(Vector128<ulong> src)
+        public static implicit operator XMEM(Vec128<ulong> src)
             => From(src);
         
         /// <summary>
@@ -126,7 +131,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
-        public static implicit operator XMEM(Vector128<float> src)
+        public static implicit operator XMEM(Vec128<float> src)
             => From(src);
 
         /// <summary>
@@ -134,7 +139,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
-        public static implicit operator XMEM(Vector128<double> src)
+        public static implicit operator XMEM(Vec128<double> src)
             => From(src);
 
         /// <summary>
@@ -142,7 +147,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
-        public static implicit operator Vector128<byte>(in XMEM src)
+        public static implicit operator Vec128<byte>(in XMEM src)
             => src.Vec<byte>();
 
         /// <summary>
@@ -150,7 +155,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
-        public static implicit operator Vector128<sbyte>(in XMEM src)
+        public static implicit operator Vec128<sbyte>(in XMEM src)
             => src.Vec<sbyte>();
 
         /// <summary>
@@ -158,7 +163,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
-        public static implicit operator Vector128<short>(in XMEM src)
+        public static implicit operator Vec128<short>(in XMEM src)
             => src.Vec<short>();
 
         /// <summary>
@@ -166,19 +171,19 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
-        public static implicit operator Vector128<ushort>(in XMEM src)
+        public static implicit operator Vec128<ushort>(in XMEM src)
             => src.Vec<ushort>();
 
         [MethodImpl(Inline)]
-        public static implicit operator Vector128<int>(in XMEM src)
+        public static implicit operator Vec128<int>(in XMEM src)
             => src.Vec<int>();
 
         [MethodImpl(Inline)]
-        public static implicit operator Vector128<uint>(in XMEM src)
+        public static implicit operator Vec128<uint>(in XMEM src)
             => src.Vec<uint>();
 
         [MethodImpl(Inline)]
-        public static implicit operator Vector128<long>(in XMEM src)
+        public static implicit operator Vec128<long>(in XMEM src)
             => src.Vec<long>();
 
         /// <summary>
@@ -186,7 +191,7 @@ namespace Z0
         /// </summary>
         /// <typeparam name="T">The primal vector component type</typeparam>
         [MethodImpl(Inline)]
-        public static implicit operator Vector128<ulong>(in XMEM src)
+        public static implicit operator Vec128<ulong>(in XMEM src)
             => src.Vec<ulong>();
 
         /// <summary>
@@ -194,7 +199,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
-        public static implicit operator Vector128<float>(in XMEM src)
+        public static implicit operator Vec128<float>(in XMEM src)
             => src.Vec<float>();
 
         /// <summary>
@@ -202,7 +207,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
-        public static implicit operator Vector128<double>(in XMEM src)
+        public static implicit operator Vec128<double>(in XMEM src)
             => src.Vec<double>();
 
         /// <summary>
@@ -213,16 +218,15 @@ namespace Z0
         public ref T First<T>()
             where T : unmanaged
                 => ref As.generic<T>(ref mem[0]);
-
             
         /// <summary>
         /// Presents the source content as a 128-bit cpu vector
         /// </summary>
         /// <typeparam name="T">The primal vector component type</typeparam>
         [MethodImpl(Inline)]
-        public Vector128<T> Vec<T>()
+        public Vec128<T> Vec<T>()
             where T : unmanaged
-                => Vector128.As<byte,T>(vxmm);
+                => vxmm.As<T>();
     }
 }
 

@@ -81,14 +81,22 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ref byte pack(in byte x0, in byte x1, in byte x2, in byte x3, in byte x4, in byte x5, in byte x6, in byte x7, in byte pos, ref byte dst)
         {
-          if(BitMask.test(x0, pos)) BitMask.enable(ref dst, 0);
-          if(BitMask.test(x1, pos)) BitMask.enable(ref dst, 1);
-          if(BitMask.test(x2, pos)) BitMask.enable(ref dst, 2);
-          if(BitMask.test(x3, pos)) BitMask.enable(ref dst, 3);
-          if(BitMask.test(x4, pos)) BitMask.enable(ref dst, 4);
-          if(BitMask.test(x5, pos)) BitMask.enable(ref dst, 5);
-          if(BitMask.test(x6, pos)) BitMask.enable(ref dst, 6);
-          if(BitMask.test(x7, pos)) BitMask.enable(ref dst, 7);
+          if(BitMask.test(x0, pos)) 
+            BitMask.enable(ref dst, 0);
+          if(BitMask.test(x1, pos)) 
+            BitMask.enable(ref dst, 1);
+          if(BitMask.test(x2, pos)) 
+            BitMask.enable(ref dst, 2);
+          if(BitMask.test(x3, pos)) 
+            BitMask.enable(ref dst, 3);
+          if(BitMask.test(x4, pos)) 
+            BitMask.enable(ref dst, 4);
+          if(BitMask.test(x5, pos)) 
+            BitMask.enable(ref dst, 5);
+          if(BitMask.test(x6, pos)) 
+            BitMask.enable(ref dst, 6);
+          if(BitMask.test(x7, pos)) 
+            BitMask.enable(ref dst, 7);
           return ref dst;
         }
 

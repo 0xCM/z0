@@ -1,0 +1,66 @@
+//-----------------------------------------------------------------------------
+// Copyright   :  (c) Chris Moore, 2019
+// License     :  MIT
+//-----------------------------------------------------------------------------
+namespace Z0
+{
+    using System;
+    using System.Collections.Generic;
+    using System.Runtime.CompilerServices;
+    using System.Runtime.InteropServices;
+    using static zfunc;
+    using static As;
+    using static AsIn;
+    
+    partial class ginx
+    {
+        /// <summary>
+        /// Applies a leftward logical shift to each source vector component as 
+        /// specified by the amount in the corresponding control vector component
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="control">The control vector</param>
+        [MethodImpl(Inline)]
+        public static Vec128<S> vsllv<S,T>(in Vec128<S> lhs, in Vec128<T> shifts)
+            where S : unmanaged
+            where T : unmanaged
+        {
+            if(typeof(S) == typeof(int))
+                return generic<S>(dinx.vsllv(in int32(in lhs), in uint32(in shifts)));
+            else if(typeof(S) == typeof(uint)) 
+                return generic<S>(dinx.vsllv(in uint32(in lhs), in uint32(in shifts)));
+            else if(typeof(S) == typeof(long))
+                return generic<S>(dinx.vsllv(in int64(lhs), in uint64(in shifts)));
+            else if(typeof(S) == typeof(ulong))
+                return generic<S>(dinx.vsllv(in uint64(lhs), in uint64(in shifts)));
+            else
+                throw unsupported<S>();
+        }
+
+        /// <summary>
+        /// Applies a leftward logical shift to each source vector component as 
+        /// specified by the amount in the corresponding control vector component
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="control">The control vector</param>
+        [MethodImpl(Inline)]
+        public static Vec256<S> vsllv<S,T>(in Vec256<S> lhs, in Vec256<T> shifts)
+            where S : unmanaged
+            where T : unmanaged
+        {
+            if(typeof(S) == typeof(int))
+                return generic<S>(dinx.vsllv(in int32(in lhs), in uint32(in shifts)));
+            else if(typeof(S) == typeof(uint)) 
+                return generic<S>(dinx.vsllv(in uint32(in lhs), in uint32(in shifts)));
+            else if(typeof(S) == typeof(long))
+                return generic<S>(dinx.vsllv(in int64(lhs), in uint64(in shifts)));
+            else if(typeof(S) == typeof(ulong))
+                return generic<S>(dinx.vsllv(in uint64(lhs), in uint64(in shifts)));
+            else
+                throw unsupported<S>();
+        }
+
+
+    }
+
+}

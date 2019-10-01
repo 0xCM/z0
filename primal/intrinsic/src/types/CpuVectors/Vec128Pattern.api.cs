@@ -46,9 +46,9 @@ namespace Z0
         /// For a vector of length N, returns a reference to the vector [0, 1, ..., N - 1]
         /// </summary>
         /// <typeparam name="T">The primal component type</typeparam>
-        public static ref readonly Vec128<T> Increasing<T>()
+        public static Vec128<T> Increasing<T>()
             where T : unmanaged
-                => ref Vec128Pattern<T>.Increasing;
+                => Vec128Pattern<T>.Increasing;
 
         /// <summary>
         /// For a vector of length N, returns a reference to the vector [N - 1, N - 2, , ..., 0]
@@ -86,7 +86,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vec128<T> Swap<T>(params Swap[] swaps)
             where T : unmanaged  
-                => Vec128.Increments(default(T), swaps);
+                => Vec128Pattern<T>.Increments(default(T), swaps);
 
     }
 

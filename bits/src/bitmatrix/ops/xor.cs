@@ -35,13 +35,13 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static BitMatrix16 xor(in BitMatrix16 lhs, in BitMatrix16 rhs)
+        public static BitMatrix16 xor(BitMatrix16 lhs, BitMatrix16 rhs)
         {
             var dst = BitMatrix16.Alloc();
-            lhs.LoadCpuVec(out Vec256<ushort> vLhs);
-            rhs.LoadCpuVec(out Vec256<ushort> vRhs);
+            lhs.GetCells(out Vec256<ushort> vLhs);
+            rhs.GetCells(out Vec256<ushort> vRhs);
             dinx.vxor(vLhs,vRhs).StoreTo(ref dst.Data[0]);
-            return lhs;
+            return dst;
         }
 
         public static BitMatrix32 xor(in BitMatrix32 A, in BitMatrix32 B)
@@ -52,7 +52,7 @@ namespace Z0
             {
                 var x1 = vload256(ref A[i]);
                 var x2 = vload256(ref B[i]);
-                Z0.Bits.vxor(in x1,in x2).StoreTo(ref dst[i]);
+                dinx.vxor(in x1,in x2).StoreTo(ref dst[i]);
             }
             return dst;
         }
@@ -71,18 +71,18 @@ namespace Z0
             return ref C;
         }
 
-        /// <summary>
-        /// Computes the logical XOR between two primal bitmatrices of order 64
-        /// </summary>
-        /// <param name="A">The left matrix</param>
-        /// <param name="B">The right matrix</param>
-        public static ref BitMatrix64 xor(in BitMatrix64 A, in BitMatrix64 B, ref BitMatrix64 C)
+        public static ref BitMatrix64 xor(ref BitMatrix64 A, BitMatrix64 B)
         {
             const int rowstep = 4;
             for(var i=0; i< A.RowCount; i += rowstep)
-                dinx.vxor(Vec256.Load(ref A[i]), Vec256.Load(ref B[i])).StoreTo(ref C[i]);
-            return ref C;
+            {
+                A.GetCells(i, out Vec256<ulong> vLhs);
+                B.GetCells(i, out Vec256<ulong> vRhs);
+                dinx.vxor(vLhs,vRhs).StoreTo(ref A[i]);
+            }
+            return ref A;
         }
+
 
         /// <summary>
         /// Computes the logical XOR between two primal bitmatrices of order 64
@@ -92,8 +92,8 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitMatrix64 xor(in BitMatrix64 A, in BitMatrix64 B)
         {
-            var C = BitMatrix64.Alloc();
-            return xor(in A,in B, ref C);
+            var C = A.Replicate();
+            return xor(ref C, B);
         }
 
         /// <summary>

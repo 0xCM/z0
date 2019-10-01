@@ -28,13 +28,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(S) == typeof(int))
-                return generic<S>(Bits.srlv(in int32(in lhs), in uint32(in shifts)));
+                return generic<S>(dinx.srlv(in int32(in lhs), in uint32(in shifts)));
             else if(typeof(S) == typeof(uint)) 
-                return generic<S>(Bits.srlv(in uint32(in lhs), in uint32(in shifts)));
+                return generic<S>(dinx.srlv(in uint32(in lhs), in uint32(in shifts)));
             else if(typeof(S) == typeof(long))
-                return generic<S>(Bits.srlv(in int64(lhs), in uint64(in shifts)));
+                return generic<S>(dinx.srlv(in int64(lhs), in uint64(in shifts)));
             else if(typeof(S) == typeof(ulong))
-                return generic<S>(Bits.srlv(in uint64(lhs), in uint64(in shifts)));
+                return generic<S>(dinx.srlv(in uint64(lhs), in uint64(in shifts)));
             else
                 throw unsupported<S>();
         }
@@ -52,13 +52,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(S) == typeof(int))
-                return generic<S>(Bits.srlv(in int32(in lhs),  shifts.As<uint>()));
+                return generic<S>(dinx.srlv(in int32(in lhs),  shifts.As<uint>()));
             else if(typeof(S) == typeof(uint)) 
-                return generic<S>(Bits.srlv(in uint32(in lhs), in uint32(in shifts)));
+                return generic<S>(dinx.srlv(in uint32(in lhs), in uint32(in shifts)));
             else if(typeof(S) == typeof(long))
-                return generic<S>(Bits.srlv(in int64(lhs), in uint64(in shifts)));
+                return generic<S>(dinx.srlv(in int64(lhs), in uint64(in shifts)));
             else if(typeof(S) == typeof(ulong))
-                return generic<S>(Bits.srlv(in uint64(lhs), in uint64(in shifts)));
+                return generic<S>(dinx.srlv(in uint64(lhs), in uint64(in shifts)));
             else
                 throw unsupported<S>();
         }

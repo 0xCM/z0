@@ -11,39 +11,6 @@ namespace Z0
 
     using static zfunc;    
 
-    public readonly struct BitVectorProxy<T>
-        where T : unmanaged
-    {
-        readonly T[] data;
-
-        [MethodImpl(Inline)]
-        public static BitVectorProxy<T> From(BitVector<T> src)
-            => new BitVectorProxy<T>(src);
-        
-        [MethodImpl(Inline)]
-        public static implicit operator BitVectorProxy<T>(BitVector<T> src)
-            => From(src);
-
-        [MethodImpl(Inline)]
-        public static implicit operator BitVector<T>(BitVectorProxy<T> src)
-            => src.BitVector;
-        
-        [MethodImpl(Inline)]
-        public BitVectorProxy(BitVector<T> src)
-        {
-            data = src.Data.ToArray();
-        }
-
-        /// <summary>
-        /// The subject of the proxy, in this case a T-bitvector
-        /// </summary>
-        public BitVector<T> BitVector
-        {
-            [MethodImpl(Inline)]
-            get => BitVector<T>.Load(data);
-        }
-
-    }
 
     public ref struct BitVector<T>
         where T : unmanaged
@@ -76,7 +43,7 @@ namespace Z0
         /// <summary>
         /// The maximum number of bits that can be placed a single segment segment
         /// </summary>
-        public static readonly BitSize SegmentCapacity = bitsize<T>();
+        public static readonly BitSize CellCapacity = bitsize<T>();
 
         /// <summary>
         /// Creates a bitvector defined by a single cell or portion thereof
@@ -94,7 +61,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static int CellCount(BitSize len)
         {
-            var q = Math.DivRem(len, SegmentCapacity, out int r);            
+            var q = Math.DivRem(len, CellCapacity, out int r);            
             return r == 0 ? q : q + 1;
         }
 
@@ -111,26 +78,8 @@ namespace Z0
             Span<T> cells = new T[CellCount(len)];            
             if(fill.HasValue)
                 cells.Fill(fill.Value);
-            return Load(cells);
+            return From(cells);
         }
-
-        /// <summary>
-        /// Creates a bitvector from a cell array, subject to a specified bitsize
-        /// </summary>
-        /// <param name="n">The length of the bitvector</param>
-        /// <param name="src">The source bits</param>
-        [MethodImpl(Inline)]
-        public static BitVector<T> Load(T[] src, BitSize? n)
-            => new BitVector<T>(src, n);
-
-        /// <summary>
-        /// Creates a bitvector from a cell parameter array
-        /// </summary>
-        /// <param name="n">The length of the bitvector</param>
-        /// <param name="src">The source bits</param>
-        [MethodImpl(Inline)]
-        public static BitVector<T> Load(params T[] src)
-            => new BitVector<T>(src);
 
         /// <summary>
         /// Creates a bitvector from a cell span
@@ -138,8 +87,39 @@ namespace Z0
         /// <param name="n">The length of the bitvector</param>
         /// <param name="src">The source bits</param>
         [MethodImpl(Inline)]
-        public static BitVector<T> Load(Span<T> src, BitSize? n = null)
+        public static BitVector<T> From(Span<T> src, BitSize? n = null)
             => new BitVector<T>(src,n);
+
+        public static BitVector<T> From(Span<byte> src, BitSize? n)
+        {
+            var q = Math.DivRem(src.Length, size<T>(), out int r);
+            var cellcount = r == 0 ? q : q + 1;
+            ByteSize capacity = (ByteSize)CellCapacity;
+            
+            var cells = new T[cellcount];
+            for(int i=0, offset = 0; i< cellcount; i++, offset += capacity)
+            {                
+                var seg = src.Slice(offset);
+                cells[i] = seg.TakeScalar<T>();
+            }
+            return From(cells,n);
+        }
+
+        /// <summary>
+        /// Loads an bitvector of minimal size from a source bitstring
+        /// </summary>
+        /// <param name="src">The bitstring source</param>
+        public static BitVector<T> From(BitString src)
+            => From(src.ToPackedBytes(),src.Length);
+        
+        /// <summary>
+        /// Creates a bitvector from a cell array, subject to a specified bitsize
+        /// </summary>
+        /// <param name="n">The length of the bitvector</param>
+        /// <param name="src">The source bits</param>
+        [MethodImpl(Inline)]
+        public static BitVector<T> From(T[] src, BitSize? n)
+            => new BitVector<T>(src, n);
 
         /// <summary>
         /// Computes the bitwias AND between the operands
@@ -185,7 +165,6 @@ namespace Z0
         public static BitVector<T> operator ~(BitVector<T> src)
             => new BitVector<T>(mathspan.flip(src.data));
 
-
         /// <summary>
         /// Returns true if the source vector is nonzero, false otherwise
         /// </summary>
@@ -214,7 +193,7 @@ namespace Z0
         BitVector(T src, BitSize? n = null)
         {            
             this.data = new T[]{src};
-            this.MaxBitCount = SegmentCapacity;
+            this.MaxBitCount = CellCapacity;
             this.SegLength = MaxBitCount;
             this.BitCount = (int)(n ?? (uint)MaxBitCount);
             this.BitMap = BitSize.BitMap<T>(MaxBitCount);
@@ -224,7 +203,7 @@ namespace Z0
         BitVector(Span<T> src, BitSize? n = null)
         {            
             this.data = src;
-            this.MaxBitCount = src.Length * (int)SegmentCapacity;
+            this.MaxBitCount = src.Length * (int)CellCapacity;
             this.BitCount = (int)(n ?? (uint)MaxBitCount);
             this.SegLength = BitSize.Segments<T>(MaxBitCount);            
             this.BitMap = BitSize.BitMap<T>(MaxBitCount);
@@ -291,7 +270,7 @@ namespace Z0
         public readonly BitSize Capacity
         {
             [MethodImpl(Inline)]
-            get => data.Length * SegmentCapacity;
+            get => data.Length * CellCapacity;
         }
 
         /// <summary>
@@ -480,11 +459,11 @@ namespace Z0
 
             var sameSeg = first.Segment == last.Segment;
             var wantedCount = last - first;
-            var firstCount = sameSeg ? wantedCount : (int)SegmentCapacity - first.Offset;
+            var firstCount = sameSeg ? wantedCount : (int)CellCapacity - first.Offset;
             var lastCount = wantedCount - firstCount;
             
-            if(wantedCount > SegmentCapacity)
-                throw new ArgumentException($"The total count {wantedCount} exceeds segment capacity of {SegmentCapacity}");
+            if(wantedCount > CellCapacity)
+                throw new ArgumentException($"The total count {wantedCount} exceeds segment capacity of {CellCapacity}");
 
             ref var seg1 = ref Segment(in first);
             var part1 = gbits.extract(seg1, first.Offset, (byte)firstCount);
@@ -524,6 +503,40 @@ namespace Z0
         public override string ToString()
             => throw new NotImplementedException();
 
+
+    }
+
+    public readonly struct BitVectorProxy<T>
+        where T : unmanaged
+    {
+        readonly T[] data;
+
+        [MethodImpl(Inline)]
+        public static BitVectorProxy<T> From(BitVector<T> src)
+            => new BitVectorProxy<T>(src);
+        
+        [MethodImpl(Inline)]
+        public static implicit operator BitVectorProxy<T>(BitVector<T> src)
+            => From(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator BitVector<T>(BitVectorProxy<T> src)
+            => src.BitVector;
+        
+        [MethodImpl(Inline)]
+        public BitVectorProxy(BitVector<T> src)
+        {
+            data = src.Data.ToArray();
+        }
+
+        /// <summary>
+        /// The subject of the proxy, in this case a T-bitvector
+        /// </summary>
+        public BitVector<T> BitVector
+        {
+            [MethodImpl(Inline)]
+            get => BitVector<T>.From(data,null);
+        }
 
     }
 

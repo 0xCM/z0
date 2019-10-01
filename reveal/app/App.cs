@@ -16,7 +16,7 @@ namespace Z0
     using static zfunc;
 
 
-    public class App
+    class App
     {                
         static readonly FolderPath DumpFolder
             = FolderPath.Define(Settings.ProjectDir("reveal")) +  FolderName.Define(".dumps");

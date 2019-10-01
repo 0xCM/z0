@@ -30,7 +30,7 @@ namespace Z0
             || typeof(T) == typeof(long))
                 return vand128i(lhs,rhs);
             else 
-                return vand128f(lhs,rhs);
+                throw unsupported<T>();
         }
 
         [MethodImpl(Inline)]
@@ -48,7 +48,7 @@ namespace Z0
             || typeof(T) == typeof(long))
                 return vand256i(lhs,rhs);
             else 
-                return vand256f(lhs,rhs);
+                throw unsupported<T>();
         }
 
 
@@ -80,17 +80,6 @@ namespace Z0
                 return generic<T>(dinx.vand(int64(lhs), int64(rhs)));
         }
 
-        static Vec128<T> vand128f<T>(in Vec128<T> lhs, in Vec128<T> rhs)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(float))
-                return generic<T>(dfp.vand(float32(lhs), float32(rhs)));
-            else if(typeof(T) == typeof(double))
-                return generic<T>(dfp.vand(float64(lhs), float64(rhs)));
-            else 
-                throw unsupported<T>();
-                    
-        }
 
 
         [MethodImpl(Inline)]
@@ -120,18 +109,5 @@ namespace Z0
             else
                 return generic<T>(dinx.vand(int64(lhs), int64(rhs)));
         }
-
-        static Vec256<T> vand256f<T>(in Vec256<T> lhs, in Vec256<T> rhs)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(float))
-                return generic<T>(dfp.vand(float32(lhs), float32(rhs)));
-            else if(typeof(T) == typeof(double))
-                return generic<T>(dfp.vand(float64(lhs), float64(rhs)));
-            else 
-                throw unsupported<T>();
-                    
-        }
-
     }
 }

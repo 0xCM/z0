@@ -11,40 +11,6 @@ namespace Z0
 
     using static zfunc;    
 
-    public readonly struct BitVectorProxy<N,T>
-        where T : unmanaged
-        where N : ITypeNat, new()
-    {
-        readonly T[] data;
-
-        [MethodImpl(Inline)]
-        public static BitVectorProxy<N,T> From(in BitVector<N,T> src)
-            => new BitVectorProxy<N,T>(src);
-        
-        [MethodImpl(Inline)]
-        public static implicit operator BitVectorProxy<N,T>(in BitVector<N,T> src)
-            => From(src);
-
-        [MethodImpl(Inline)]
-        public static implicit operator BitVector<N,T>(BitVectorProxy<N,T> src)
-            => src.BitVector;
-        
-        [MethodImpl(Inline)]
-        public BitVectorProxy(in BitVector<N,T> src)
-        {
-            data = src.Data.ToArray();
-        }
-
-        /// <summary>
-        /// The subject of the proxy, in this case a T-bitvector
-        /// </summary>
-        public BitVector<N,T> BitVector
-        {
-            [MethodImpl(Inline)]
-            get => BitVector<N,T>.LoadUnchecked(data);
-        }
-
-    }
 
     /// <summary>
     /// Defines a natural bitvector parametrized by a primal component type
@@ -105,7 +71,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator BitVector<T>(BitVector<N,T> src)
-            => BitVector<T>.Load(src.data);
+            => BitVector<T>.From(src.data);
 
         [MethodImpl(Inline)]
         public static BitVector<N,T> operator ^(BitVector<N,T> lhs, BitVector<N,T> rhs)
@@ -414,6 +380,41 @@ namespace Z0
  
         public override string ToString()
             => throw new NotImplementedException();
+    }
+
+    public readonly struct BitVectorProxy<N,T>
+        where T : unmanaged
+        where N : ITypeNat, new()
+    {
+        readonly T[] data;
+
+        [MethodImpl(Inline)]
+        public static BitVectorProxy<N,T> From(in BitVector<N,T> src)
+            => new BitVectorProxy<N,T>(src);
+        
+        [MethodImpl(Inline)]
+        public static implicit operator BitVectorProxy<N,T>(in BitVector<N,T> src)
+            => From(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator BitVector<N,T>(BitVectorProxy<N,T> src)
+            => src.BitVector;
+        
+        [MethodImpl(Inline)]
+        public BitVectorProxy(in BitVector<N,T> src)
+        {
+            data = src.Data.ToArray();
+        }
+
+        /// <summary>
+        /// The subject of the proxy, in this case a T-bitvector
+        /// </summary>
+        public BitVector<N,T> BitVector
+        {
+            [MethodImpl(Inline)]
+            get => BitVector<N,T>.LoadUnchecked(data);
+        }
 
     }
+
 }

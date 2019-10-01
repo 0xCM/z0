@@ -108,11 +108,11 @@ namespace Z0
         static ref T salu<T>(ref T lhs, int rhs)
             where T : unmanaged
         {
-            if(typeof(T) == typeof(sbyte))
+            if(typeof(T) == typeof(byte))
                  math.sal(ref uint8(ref lhs), rhs);
-            else if(typeof(T) == typeof(short))
+            else if(typeof(T) == typeof(ushort))
                  math.sal(ref uint16(ref lhs), rhs);
-            else if(typeof(T) == typeof(int))
+            else if(typeof(T) == typeof(uint))
                  math.sal(ref uint32(ref lhs), rhs);
             else
                  math.sal(ref uint64(ref lhs), rhs);

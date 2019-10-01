@@ -93,16 +93,17 @@ namespace Z0
         /// <param name="j">The second index</param>
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
-        public static Span256<T> Swap<T>(this Span256<T> src, params Swap[] swaps)           
+        public static Span128<T> Swap<T>(this Span128<T> src, params Swap[] swaps)           
             where T : unmanaged
         {
-             if(swaps.Length == 0)
+             if(swaps == null || swaps.Length == 0)
                 return src;
-
+                
              src.Unblocked.Swap(swaps);
              return src;
-        }
-                
+        }        
+
+
         /// <summary>
         /// Applies a sequence of transpositions to source span elements
         /// </summary>
@@ -111,16 +112,16 @@ namespace Z0
         /// <param name="j">The second index</param>
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
-        public static Span128<T> Swap<T>(this Span128<T> src, params Swap[] swaps)           
+        public static Span256<T> Swap<T>(this Span256<T> src, params Swap[] swaps)           
             where T : unmanaged
         {
-             if(swaps.Length == 0)
+             if(swaps == null || swaps.Length == 0)
                 return src;
-                
+
              src.Unblocked.Swap(swaps);
              return src;
-        }        
-
+        }
+                
         /// <summary>
         /// Effects (i j) -> ((i + 1) (j+ 1))
         /// </summary>

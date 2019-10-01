@@ -15,8 +15,8 @@ namespace Z0.Test
     {     
         public void increments_128x16u()
         {
-            var v1 = Vec128.Increments((ushort)0);
-            var v2 = Vec128.Decrements((ushort)7);
+            var v1 = Vec128Pattern.Increments((ushort)0);
+            var v2 = Vec128Pattern.Decrements((ushort)7);
             var v3 = reverse_check(v1);
             Claim.eq(v2,v3);
         }

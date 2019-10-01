@@ -25,17 +25,10 @@ namespace Z0
         fixed byte mem[ByteCount];
 
         [FieldOffset(0)]
-        Vector256<byte> vymm;
+        Vec256<byte> vymm;
 
         [FieldOffset(0)]
         YMM ymm;
-
-        [MethodImpl(Inline)]
-        YMEM(Vector256<byte> vymm)
-            : this()
-        {
-            this.vymm = vymm;
-        }
 
         [MethodImpl(Inline)]
         YMEM(Vec256<byte> vymm)
@@ -44,12 +37,16 @@ namespace Z0
             this.vymm = vymm;
         }
 
+        [MethodImpl(Inline)]
+        public static YMEM From<T>(Vec256<T> src)
+            where T : unmanaged
+                => Unsafe.As<Vec256<T>,YMEM>(ref src);
 
         [MethodImpl(Inline)]
         public static YMEM From<T>(Vector256<T> src)
             where T : unmanaged
                 => Unsafe.As<Vector256<T>,YMEM>(ref src);
-                
+
         /// <summary>
         /// Implicitly converts ymem source value to a ymm register
         /// </summary>
@@ -63,7 +60,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
-        public static implicit operator Vector256<sbyte>(in YMEM src)
+        public static implicit operator Vec256<sbyte>(in YMEM src)
             => src.Vec<sbyte>();
 
         /// <summary>
@@ -71,7 +68,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
-        public static implicit operator Vector256<short>(in YMEM src)
+        public static implicit operator Vec256<short>(in YMEM src)
             => src.Vec<short>();
 
         /// <summary>
@@ -79,19 +76,19 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
-        public static implicit operator Vector256<byte>(in YMEM src)
+        public static implicit operator Vec256<byte>(in YMEM src)
             => src.Vec<byte>();
 
         [MethodImpl(Inline)]
-        public static implicit operator Vector256<ushort>(in YMEM src)
+        public static implicit operator Vec256<ushort>(in YMEM src)
             => src.Vec<ushort>();
 
         [MethodImpl(Inline)]
-        public static implicit operator Vector256<int>(in YMEM src)
+        public static implicit operator Vec256<int>(in YMEM src)
             => src.Vec<int>();
 
         [MethodImpl(Inline)]
-        public static implicit operator Vector256<uint>(in YMEM src)
+        public static implicit operator Vec256<uint>(in YMEM src)
             => src.Vec<uint>();
 
         /// <summary>
@@ -99,7 +96,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
-        public static implicit operator Vector256<long>(in YMEM src)
+        public static implicit operator Vec256<long>(in YMEM src)
             => src.Vec<long>();
 
         /// <summary>
@@ -107,7 +104,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
-        public static implicit operator Vector256<ulong>(in YMEM src)
+        public static implicit operator Vec256<ulong>(in YMEM src)
             => src.Vec<ulong>();
 
         /// <summary>
@@ -115,7 +112,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
-        public static implicit operator Vector256<float>(in YMEM src)
+        public static implicit operator Vec256<float>(in YMEM src)
             => src.Vec<float>();
 
         /// <summary>
@@ -123,7 +120,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
-        public static implicit operator Vector256<double>(in YMEM src)
+        public static implicit operator Vec256<double>(in YMEM src)
             => src.Vec<double>();
 
         /// <summary>
@@ -131,7 +128,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
-        public static implicit operator YMEM(Vector256<sbyte> src)
+        public static implicit operator YMEM(Vec256<sbyte> src)
             => From(src);
 
         /// <summary>
@@ -139,7 +136,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
-        public static implicit operator YMEM(Vector256<byte> src)
+        public static implicit operator YMEM(Vec256<byte> src)
             => From(src);
 
         /// <summary>
@@ -147,7 +144,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
-        public static implicit operator YMEM(Vector256<short> src)
+        public static implicit operator YMEM(Vec256<short> src)
             => From(src);
 
         /// <summary>
@@ -155,7 +152,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
-        public static implicit operator YMEM(Vector256<ushort> src)
+        public static implicit operator YMEM(Vec256<ushort> src)
             => From(src);
 
         /// <summary>
@@ -163,7 +160,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
-        public static implicit operator YMEM(Vector256<int> src)
+        public static implicit operator YMEM(Vec256<int> src)
             => From(src);
 
         /// <summary>
@@ -171,7 +168,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
-        public static implicit operator YMEM(Vector256<uint> src)
+        public static implicit operator YMEM(Vec256<uint> src)
             => From(src);
 
         /// <summary>
@@ -179,7 +176,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
-        public static implicit operator YMEM(Vector256<long> src)
+        public static implicit operator YMEM(Vec256<long> src)
             => From(src);
 
         /// <summary>
@@ -187,7 +184,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
-        public static implicit operator YMEM(Vector256<ulong> src)
+        public static implicit operator YMEM(Vec256<ulong> src)
             => From(src);
         
         /// <summary>
@@ -195,7 +192,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
-        public static implicit operator YMEM(Vector256<float> src)
+        public static implicit operator YMEM(Vec256<float> src)
             => From(src);
 
         /// <summary>
@@ -203,7 +200,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
-        public static implicit operator YMEM(Vector256<double> src)
+        public static implicit operator YMEM(Vec256<double> src)
             => From(src);
 
         /// <summary>
@@ -230,9 +227,9 @@ namespace Z0
         /// </summary>
         /// <typeparam name="T">The primal vector component type</typeparam>
         [MethodImpl(Inline)]
-        public Vector256<T> Vec<T>()
+        public Vec256<T> Vec<T>()
             where T : unmanaged
-                => Vector256.As<byte,T>(vymm);
+                => vymm.As<T>();
 
     }
 

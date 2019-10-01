@@ -602,7 +602,7 @@ namespace Z0
         /// <param name="v">The source vector</param>
         [MethodImpl(Inline)]
         public static V ToPrimalBits<V,S>(this FixedBits<V,S> v)
-            where V : unmanaged, IFixedBits<V,S>
+            where V : unmanaged, IFixedScalarBits<V,S>
             where S : unmanaged
                 => v;
 

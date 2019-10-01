@@ -14,7 +14,7 @@ namespace Z0
     using static Bits;
 
     [StructLayout(LayoutKind.Explicit, Size = 1)]
-    public struct BitVector8 : IFixedBits<BitVector8,byte>
+    public struct BitVector8 : IFixedScalarBits<BitVector8, byte>
     {
         [FieldOffset(0)]
         internal byte data;
@@ -28,17 +28,18 @@ namespace Z0
 
         public static readonly BitVector8 Ones = byte.MaxValue;
         
-        public static readonly BitSize BitSize = 8;
+        public static readonly BitSize Width = 8;
 
         public static readonly BitPos FirstPos = 0;
 
-        public static readonly BitPos LastPos = BitSize - 1;
+        public static readonly BitPos LastPos = Width - 1;
         
         /// <summary>
         /// Allocates a zero-filled vector
         /// </summary>
         public static BitVector8 Alloc()
             => new BitVector8();
+
 
         /// <summary>
         /// Creates a permutation-defined mask
@@ -98,6 +99,16 @@ namespace Z0
             => src.TakeUInt8();    
 
         /// <summary>
+        /// Creates a generic 8-bit bitvector
+        /// </summary>
+        /// <param name="src"></param>
+        /// <typeparam name="T"></typeparam>
+        [MethodImpl(Inline)]
+        public static BitVector8<T> From<T>(T src)
+            where T : unmanaged
+                => BitVector8<T>.From(src);
+
+        /// <summary>
         /// Enumerates each and every 8-bit bitvector exactly once
         /// </summary>
         public static IEnumerable<BitVector8> All
@@ -140,24 +151,6 @@ namespace Z0
             => src.ToBitVector64();
 
         /// <summary>
-        /// Computes the XOR of the source operands. 
-        /// Note that this operator is equivalent to the addition operator (+)
-        /// </summary>
-        /// <param name="lhs">The left operand</param>
-        /// <param name="rhs">The right operand</param>
-        [MethodImpl(Inline)]
-        public static BitVector8 operator ^(BitVector8 lhs, BitVector8 rhs)
-            => bitvector.xor(lhs,rhs);
-
-        /// <summary>
-        /// Raises a vector b to a power n where n >= 0
-        /// </summary>
-        /// <param name="b">The base vector</param>
-        /// <param name="n">The power</param>
-        [MethodImpl(Inline)]        
-        public static BitVector8 operator ^(BitVector8 b, int n)
-            => b.Pow(n);
-            
         /// <summary>
         /// Computes the component-wise AND of the operands
         /// </summary>
@@ -175,6 +168,14 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitVector8 operator |(BitVector8 lhs, BitVector8 rhs)
             => bitvector.or(lhs,rhs);
+
+        /// Computes the XOR of the source operands. 
+        /// </summary>
+        /// <param name="lhs">The left operand</param>
+        /// <param name="rhs">The right operand</param>
+        [MethodImpl(Inline)]
+        public static BitVector8 operator ^(BitVector8 lhs, BitVector8 rhs)
+            => bitvector.xor(lhs,rhs);
 
         /// <summary>
         /// Left-shifts the bits in the source
@@ -194,12 +195,19 @@ namespace Z0
 
         /// <summary>
         /// Computes the bitwise complement of the operand. 
-        /// Note that this operator is closely related to the negation operator (-)
         /// </summary>
         /// <param name="src">The source operand</param>
         [MethodImpl(Inline)]
         public static BitVector8 operator ~(BitVector8 src)
             => bitvector.flip(src);
+
+        /// <summary>
+        /// Negates the operand. 
+        /// </summary>
+        /// <param name="lhs">The source operand</param>
+        [MethodImpl(Inline)]
+        public static BitVector8 operator -(in BitVector8 src)
+            => bitvector.negate(src);
 
         /// <summary>
         /// Computes the component-wise sum of the source operands. 
@@ -219,15 +227,8 @@ namespace Z0
         /// <param name="rhs">The right operand</param>
         [MethodImpl(Inline)]
         public static BitVector8 operator *(BitVector8 lhs, BitVector8 rhs)
-            => Gf256.mul(lhs,rhs);
+            => Gf256.clmul(lhs,rhs);
 
-        /// <summary>
-        /// Negates the operand. 
-        /// </summary>
-        /// <param name="lhs">The source operand</param>
-        [MethodImpl(Inline)]
-        public static BitVector8 operator -(in BitVector8 src)
-            => bitvector.negate(src);
 
         /// <summary>
         /// Subtracts the second operand from the first. 
@@ -237,6 +238,15 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitVector8 operator - (BitVector8 lhs, BitVector8 rhs)
             => bitvector.sub(lhs,rhs);
+
+        /// <summary>
+        /// Raises a vector b to a power n where n >= 0
+        /// </summary>
+        /// <param name="b">The base vector</param>
+        /// <param name="n">The power</param>
+        [MethodImpl(Inline)]        
+        public static BitVector8 operator ^(BitVector8 b, int n)
+            => b.Pow(n);            
 
         /// <summary>
         /// Computes the scalar product of the operands
@@ -445,6 +455,53 @@ namespace Z0
         }
 
         /// <summary>
+        /// Computes in-place the bitwise AND of the source vector and another,
+        /// returning the result to the caller
+        /// </summary>
+        /// <param name="y">The other vector</param>
+        [MethodImpl(Inline)]
+        public BitVector8 And(BitVector8 y)
+        {
+            data &= y.data;
+            return this;
+        }
+
+        /// <summary>
+        /// Computes in-place the bitwise OR of the source vector and another,
+        /// returning the result to the caller
+        /// </summary>
+        /// <param name="y">The other vector</param>
+        [MethodImpl(Inline)]
+        public BitVector8 Or(BitVector8 y)
+        {
+            data |= y.data;
+            return this;
+        }
+
+        /// <summary>
+        /// Computes in-place the bitwise XOR of the source vector and another,
+        /// returning the result to the caller
+        /// </summary>
+        /// <param name="y">The other vector</param>
+        [MethodImpl(Inline)]
+        public BitVector8 XOr(BitVector8 y)
+        {
+            data ^= y.data;
+            return this;
+        }
+
+        /// <summary>
+        /// Computes in-place the bitwise complement of the source vector,
+        /// returning the result to the caller
+        /// </summary>
+        [MethodImpl(Inline)]
+        public BitVector8 Flip()
+        {
+            data = (byte)~data;
+            return this;
+        }
+
+        /// <summary>
         /// Enables a bit if it is disabled
         /// </summary>
         /// <param name="pos">The position of the bit to enable</param>
@@ -599,7 +656,7 @@ namespace Z0
         [MethodImpl(Inline)]
         BitVector8 Mul(in BitVector8 rhs)
         {
-            Gf256.mul(data, rhs.data);
+            Gf256.clmul(data, rhs.data);
             return this;
         }
 
@@ -733,13 +790,13 @@ namespace Z0
         public BitVector64 ToBitVector64()
             => BitVector64.FromScalar(data);
 
-         /// <summary>
+        /// <summary>
         /// Formats the bitvector as a bitstring
         /// </summary>
         /// <param name="tlz">True if leadzing zeros should be trimmed, false otherwise</param>
         /// <param name="specifier">True if the prefix specifier '0b' should be prepended</param>
         /// <param name="blockWidth">The width of the blocks, if any</param>
-       [MethodImpl(Inline)]
+        [MethodImpl(Inline)]
         public string Format(bool tlz = false, bool specifier = false, int? blockWidth = null)
             => ToBitString().Format(tlz, specifier, blockWidth);
 
@@ -754,7 +811,7 @@ namespace Z0
             => data.GetHashCode();
         
         public override string ToString()
-            => Format();   
-    
+            => Format();
+
     }
 }

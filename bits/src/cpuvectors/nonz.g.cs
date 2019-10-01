@@ -28,25 +28,25 @@ namespace Z0
             where T : unmanaged
         {
             if(typematch<T,sbyte>())
-                return Bits.nonz(in int8(in src));
+                return dinx.nonz(in int8(in src));
             else if(typematch<T,byte>())
-                return Bits.nonz(in uint8(in src));
+                return dinx.nonz(in uint8(in src));
             else if(typematch<T,short>())
-                return Bits.nonz(in int16(in src));
+                return dinx.nonz(in int16(in src));
             else if(typematch<T,ushort>())
-                return Bits.nonz(in uint16(in src));
+                return dinx.nonz(in uint16(in src));
             else if(typematch<T,int>())
-                return Bits.nonz(in int32(in src));
+                return dinx.nonz(in int32(in src));
             else if(typematch<T,uint>())
-                return Bits.nonzero(in uint32(in src));
+                return dinx.nonzero(in uint32(in src));
             else if(typematch<T,long>())
-                return Bits.nonz(in int64(in src));
+                return dinx.nonz(in int64(in src));
             else if(typematch<T,ulong>())
-                return Bits.nonz(in uint64(in src));
+                return dinx.nonz(in uint64(in src));
             else if(typeof(T) == typeof(float))
-                return Bits.nonz(in float32(in src));
+                return dinx.nonz(in float32(in src));
             else if(typeof(T) == typeof(double))
-                return Bits.nonz(in float64(in src));
+                return dinx.nonz(in float64(in src));
             else 
                 throw unsupported<T>();
         }
@@ -62,25 +62,25 @@ namespace Z0
             where T : unmanaged
         {
             if(typematch<T,sbyte>())
-                return Bits.nonz(in int8(in src));
+                return dinx.nonz(in int8(in src));
             else if(typematch<T,byte>())
-                return Bits.nonz(in uint8(in src));
+                return dinx.nonz(in uint8(in src));
             else if(typematch<T,short>())
-                return Bits.nonz(in int16(in src));
+                return dinx.nonz(in int16(in src));
             else if(typematch<T,ushort>())
-                return Bits.nonz(in uint16(in src));
+                return dinx.nonz(in uint16(in src));
             else if(typematch<T,int>())
-                return Bits.nonz(in int32(in src));
+                return dinx.nonz(in int32(in src));
             else if(typematch<T,uint>())
-                return Bits.nonz(in uint32(in src));
+                return dinx.nonz(in uint32(in src));
             else if(typematch<T,long>())
-                return Bits.nonz(in int64(in src));
+                return dinx.nonz(in int64(in src));
             else if(typematch<T,ulong>())
-                return Bits.nonz(in uint64(in src));
+                return dinx.nonz(in uint64(in src));
             else if(typeof(T) == typeof(float))
-                return Bits.nonz(in float32(in src));
+                return dinx.nonz(in float32(in src));
             else if(typeof(T) == typeof(double))
-                return Bits.nonz(in float64(in src));
+                return dinx.nonz(in float64(in src));
             else 
                 throw unsupported<T>();
         }         

@@ -47,9 +47,9 @@ namespace Z0
         /// For a vector of length N, returns a reference to the vector [0, 1, ..., N - 1]
         /// </summary>
         /// <typeparam name="T">The primal component type</typeparam>
-        public static ref readonly Vec256<T> Increasing<T>()
+        public static Vec256<T> Increasing<T>()
             where T : unmanaged
-                => ref Vec256Pattern<T>.Increasing;
+                => Vec256Pattern<T>.Increasing;
 
         /// <summary>
         /// For a vector of length N, returns a reference to the vector [N - 1, N - 2, , ..., 0]
@@ -81,9 +81,9 @@ namespace Z0
         /// </summary>
         /// <param name="first">The value of the first component</param>
         /// <typeparam name="T">The primal component type</typeparam>
-        public static Vec256<T> Increments<T>(T first = default, params Swap[] swaps)
+        public static Vec256<T> Increments<T>(T first = default)
             where T : unmanaged  
-                => Vec256Pattern<T>.Increments(first,swaps);
+                => Vec256Pattern<T>.Increments(first);
 
         /// <summary>
         /// Creates a vector with decrementing components v[0] = last and v[i-1] = v[i] - 1 for i=1...N-1
@@ -91,9 +91,9 @@ namespace Z0
         /// <param name="last">The value of the first component</param>
         /// <param name="swaps">Transpositions applied to decrements prior to vector creation</param>
         /// <typeparam name="T">The primal component type</typeparam>        
-        public static Vec256<T> Decrements<T>(T last = default, params Swap[] swaps)
+        public static Vec256<T> Decrements<T>(T last = default)
             where T : unmanaged  
-                => Vec256Pattern<T>.Decrements(last, swaps);
+                => Vec256Pattern<T>.Decrements(last);
 
         /// <summary>
         /// Creates a vector populated with component values that alternate between the first operand and the second

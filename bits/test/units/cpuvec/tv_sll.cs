@@ -452,7 +452,7 @@ namespace Z0.Test
                 var x = Vec256.Load(src.TakeSpan(blocklen));
                 var offset = offsets.First();
                 sw.Start();
-                Bits.sll(x,offset);
+                dinx.sll(x,offset);
                 sw.Stop();
             
             }
@@ -586,42 +586,42 @@ namespace Z0.Test
             var tmp5 = dinx.clmul(a, b, ClMulMask.X01);
             var tmp6 = dinx.clmul(a, b, ClMulMask.X11);
             
-            tmp4 = Bits.vxor(tmp4, tmp5);            
-            tmp5 = Bits.sll(tmp4, 8);
-            tmp4 = Bits.srl(tmp4, 8);            
-            tmp3 = Bits.vxor(tmp3, tmp5);            
-            tmp6 = Bits.vxor(tmp6, tmp4);
+            tmp4 = dinx.vxor(tmp4, tmp5);            
+            tmp5 = dinx.sll(tmp4, 8);
+            tmp4 = dinx.srl(tmp4, 8);            
+            tmp3 = dinx.vxor(tmp3, tmp5);            
+            tmp6 = dinx.vxor(tmp6, tmp4);
             
-            var tmp7 = Bits.srl(tmp3, 31);
-            var tmp8 = Bits.srl(tmp6, 31);            
-            tmp3 = Bits.sll(tmp3, 1);
-            tmp6 = Bits.sll(tmp6, 1);
+            var tmp7 = dinx.srl(tmp3, 31);
+            var tmp8 = dinx.srl(tmp6, 31);            
+            tmp3 = dinx.sll(tmp3, 1);
+            tmp6 = dinx.sll(tmp6, 1);
 
-            var tmp9 = Bits.srl(tmp7, 12);            
-            tmp8 = Bits.sll(tmp8, 4);
-            tmp7 = Bits.sll(tmp7, 4);
-            tmp3 = Bits.vor(tmp3, tmp7);
-            tmp6 = Bits.vor(tmp6, tmp8);
-            tmp6 = Bits.vor(tmp6, tmp9);
+            var tmp9 = dinx.srl(tmp7, 12);            
+            tmp8 = dinx.sll(tmp8, 4);
+            tmp7 = dinx.sll(tmp7, 4);
+            tmp3 = dinx.vor(tmp3, tmp7);
+            tmp6 = dinx.vor(tmp6, tmp8);
+            tmp6 = dinx.vor(tmp6, tmp9);
 
-            tmp7 = Bits.sll(tmp3, 31);
-            tmp8 = Bits.sll(tmp3, 30);
-            tmp9 = Bits.sll(tmp3, 25);
+            tmp7 = dinx.sll(tmp3, 31);
+            tmp8 = dinx.sll(tmp3, 30);
+            tmp9 = dinx.sll(tmp3, 25);
 
-            tmp7 = Bits.vxor(tmp7, tmp8);
-            tmp7 = Bits.vxor(tmp7, tmp9);            
-            tmp8 = Bits.srl(tmp7, 4);
-            tmp7 = Bits.sll(tmp7, 12);            
-            tmp3 = Bits.vxor(tmp3, tmp7);
+            tmp7 = dinx.vxor(tmp7, tmp8);
+            tmp7 = dinx.vxor(tmp7, tmp9);            
+            tmp8 = dinx.srl(tmp7, 4);
+            tmp7 = dinx.sll(tmp7, 12);            
+            tmp3 = dinx.vxor(tmp3, tmp7);
 
             var tmp2 = dinx.srl(tmp3, 1);
-            tmp4 = Bits.srl(tmp3, 2);
-            tmp5 = Bits.sll(tmp3, 7);
-            tmp2 = Bits.vxor(tmp2, tmp4);
-            tmp2 = Bits.vxor(tmp2, tmp5);
-            tmp2 = Bits.vxor(tmp2, tmp8);
-            tmp3 = Bits.vxor(tmp3, tmp2);
-            tmp6 = Bits.vxor(tmp6, tmp3);
+            tmp4 = dinx.srl(tmp3, 2);
+            tmp5 = dinx.sll(tmp3, 7);
+            tmp2 = dinx.vxor(tmp2, tmp4);
+            tmp2 = dinx.vxor(tmp2, tmp5);
+            tmp2 = dinx.vxor(tmp2, tmp8);
+            tmp3 = dinx.vxor(tmp3, tmp2);
+            tmp6 = dinx.vxor(tmp6, tmp3);
 
             return tmp6;            
         }

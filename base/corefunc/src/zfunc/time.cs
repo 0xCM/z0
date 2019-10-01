@@ -19,7 +19,7 @@ partial class zfunc
     /// </summary>
     [MethodImpl(Inline)]   
     public static SystemCounter counter() 
-        => SystemCounter.New();
+        => default;
 
     /// <summary>
     /// Creates a new stopwatch and optionally start it

@@ -23,17 +23,17 @@ namespace Z0
             else if(typematch<T,sbyte>())
                 return generic<T>(Bits.srl(in int8(in lhs), offset));
             if(typeof(T) == typeof(short))
-                return generic<T>(Bits.srl(in int16(in lhs), offset));
+                return generic<T>(dinx.srl(in int16(in lhs), offset));
             else if(typematch<T,ushort>())
-                return generic<T>(Bits.srl(in uint16(in lhs), offset));
+                return generic<T>(dinx.srl(in uint16(in lhs), offset));
             if(typeof(T) == typeof(int))
-                return generic<T>(Bits.srl(in int32(in lhs), offset));
+                return generic<T>(dinx.srl(in int32(in lhs), offset));
             else if(typematch<T,uint>()) 
-                return generic<T>(Bits.srl(in uint32(in lhs), offset));
+                return generic<T>(dinx.srl(in uint32(in lhs), offset));
             else if(typematch<T,long>())
-                return generic<T>(Bits.srl(in int64(lhs), offset));
+                return generic<T>(dinx.srl(in int64(lhs), offset));
             else if(typematch<T,ulong>())
-                return generic<T>(Bits.srl(in uint64(lhs), offset));
+                return generic<T>(dinx.srl(in uint64(lhs), offset));
             else
                 throw unsupported<T>();
         }
@@ -45,17 +45,17 @@ namespace Z0
             if(typeof(T) == typeof(byte))
                 return generic<T>(Bits.srl(in uint8(in lhs), offset));
             else if(typematch<T,short>())
-                return generic<T>(Bits.srl(in int16(in lhs), offset));
+                return generic<T>(dinx.srl(in int16(in lhs), offset));
             else if(typematch<T,ushort>())
-                return generic<T>(Bits.srl(in uint16(in lhs), offset));
+                return generic<T>(dinx.srl(in uint16(in lhs), offset));
             if(typeof(T) == typeof(int))
-                return generic<T>(Bits.srl(in int32(in lhs), offset));
+                return generic<T>(dinx.srl(in int32(in lhs), offset));
             else if(typematch<T,uint>()) 
-                return generic<T>(Bits.srl(in uint32(in lhs), offset));
+                return generic<T>(dinx.srl(in uint32(in lhs), offset));
             else if(typematch<T,long>())
-                return generic<T>(Bits.srl(in int64(lhs), offset));
+                return generic<T>(dinx.srl(in int64(lhs), offset));
             else if(typematch<T,ulong>())
-                return generic<T>(Bits.srl(in uint64(lhs), offset));
+                return generic<T>(dinx.srl(in uint64(lhs), offset));
             else
                 throw unsupported<T>();
         }

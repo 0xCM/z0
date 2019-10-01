@@ -96,22 +96,8 @@ namespace Z0
         public static Vector128<float> vand_n128x32f(Vector128<float> x, Vector128<float> y)
             => And(x,y);
 
-        public static Vec128<float> vand_d128x32f(Vec128<float> x, Vec128<float> y)
-            => dfp.vand(x,y);
-
-        public static Vec128<float> vand_g128x32f(Vec128<float> x, Vec128<float> y)
-            => ginx.vand(x,y);
-
-        public static Vector128<double> vand_n128x64f(Vector128<double> x, Vector128<double> y)
-            => And(x,y);
-
-        public static Vec128<double> vand_d128x64f(Vec128<double> x, Vec128<double> y)
-            => dfp.vand(x,y);
-
-        public static Vec128<double> vand_g128x64f(Vec128<double> x, Vec128<double> y)
-            => ginx.vand(x,y);
  
-         public static Vector256<sbyte> vand_n256x8i(Vector256<sbyte> x, Vector256<sbyte> y)
+        public static Vector256<sbyte> vand_n256x8i(Vector256<sbyte> x, Vector256<sbyte> y)
             => And(x,y);
 
         public static Vec256<sbyte> vand_d256x8i(Vec256<sbyte> x, Vec256<sbyte> y)
@@ -182,23 +168,5 @@ namespace Z0
 
         public static Vec256<ulong> vand_g256x64u(Vec256<ulong> x, Vec256<ulong> y)
             => ginx.vand(x,y);
-
-        public static Vector256<float> vand_n256x32f(Vector256<float> x, Vector256<float> y)
-            => And(x,y);
-
-        public static Vec256<float> vand_d256x32f(Vec256<float> x, Vec256<float> y)
-            => dfp.vand(x,y);
-
-        public static Vec256<float> vand_g256x32f(Vec256<float> x, Vec256<float> y)
-            => ginx.vand(x,y);
-
-        public static Vector256<double> vand_n256x64f(Vector256<double> x, Vector256<double> y)
-            => And(x,y);
-
-        public static Vec256<double> vand_d256x64f(Vec256<double> x, Vec256<double> y)
-            => dfp.vand(x,y);
-
-        public static Vec256<double> vand_g256x64f(Vec256<double> x, Vec256<double> y)
-            => ginx.vand(x,y);
-    }
+   }
 }

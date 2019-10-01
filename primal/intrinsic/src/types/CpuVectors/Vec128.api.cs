@@ -331,25 +331,6 @@ namespace Z0
                 throw unsupported<T>();
         }        
 
-        /// <summary>
-        /// Creates a vector with incrementing components
-        /// v[0] = first and v[i+1] = v[i] + 1 for i=1...N-1
-        /// </summary>
-        /// <param name="first">The value of the first component</param>
-        /// <typeparam name="T">The primal component type</typeparam>
-        public static Vec128<T> Increments<T>(T first = default, params Swap[] swaps)
-            where T : unmanaged  
-        {
-            var dst = Alloc<T>();
-            var n = dst.Length;
-            var val = first;
-            for(var i=0; i < n; i++)
-            {
-                dst[i] = val;
-                gmath.inc(ref val);
-            }
-            return Load(dst.Swap(swaps));
-        }
 
         /// <summary>
         /// Creates a vector with decrementing components

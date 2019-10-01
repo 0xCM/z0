@@ -29,7 +29,6 @@ namespace Z0
         public static XMM pmovzxbw(XMM a)        
             => ConvertToVector128Int16(vload<byte>(ref a));
 
-
         /// <summary>
         /// __m128i _mm_cvtepu8_epi32 (__m128i a) PMOVZXBD xmm1, xmm2/m32
         /// Zero extend 4 packed 8-bit integers in the low 4 bytes of xmm2/m32 to 4 packed 32-bit integers in xmm1.
@@ -48,7 +47,6 @@ namespace Z0
             dst = ConvertToVector128Int32(vload<byte>(ref a));
             return ref dst;
         }
-
 
         /// <summary>
         /// __m128i _mm_cvtepu8_epi64 (__m128i a) PMOVZXBQ xmm1, xmm2/m16

@@ -79,44 +79,48 @@ namespace Z0
             => new BitMatrix64(src.AsUInt64());
 
         [MethodImpl(Inline)]
-        public static BitMatrix64 operator + (BitMatrix64 lhs, BitMatrix64 rhs)
-            => XOr(ref lhs, rhs);
+        public static BitMatrix64 operator ^ (BitMatrix64 A, BitMatrix64 B)
+            => BitMatrix.xor(A,B);
 
         [MethodImpl(Inline)]
-        public static BitMatrix64 operator - (BitMatrix64 lhs, BitMatrix64 rhs)
-            => lhs + -rhs;
+        public static BitMatrix64 operator + (BitMatrix64 A, BitMatrix64 B)
+            => BitMatrix.xor(A,B);
 
         [MethodImpl(Inline)]
-        public static BitMatrix64 operator * (BitMatrix64 lhs, BitMatrix64 rhs)
-            => Mul(ref lhs, rhs);
+        public static BitMatrix64 operator - (BitMatrix64 A, BitMatrix64 B)
+            => BitMatrix.sub(A,B);
 
         [MethodImpl(Inline)]
-        public static BitVector64 operator * (BitMatrix64 lhs, BitVector64 rhs)
-            => Mul(lhs,rhs);
+        public static BitMatrix64 operator * (BitMatrix64 A, BitMatrix64 B)
+            => BitMatrix.mul(A,B);
 
         [MethodImpl(Inline)]
-        public static BitMatrix64 operator & (BitMatrix64 lhs, BitMatrix64 rhs)
-            => And(ref lhs, rhs);
+        public static BitVector64 operator * (BitMatrix64 A, BitVector64 B)
+            => BitMatrix.mul(A,B);
 
         [MethodImpl(Inline)]
-        public static BitMatrix64 operator - (BitMatrix64 src)
-            => Flip(ref src);
+        public static BitMatrix64 operator & (BitMatrix64 A, BitMatrix64 B)
+            => BitMatrix.and(A,B);
 
         [MethodImpl(Inline)]
-        public static BitMatrix64 operator ~ (BitMatrix64 src)
-            => Flip(ref src);
+        public static BitMatrix64 operator - (BitMatrix64 A)
+            => BitMatrix.negate(A);
 
         [MethodImpl(Inline)]
-        public static BitMatrix64 operator | (BitMatrix64 lhs, BitMatrix64 rhs)
-            => Or(ref lhs,rhs);
+        public static BitMatrix64 operator ~ (BitMatrix64 A)
+            => BitMatrix.flip(A);
 
         [MethodImpl(Inline)]
-        public static bool operator ==(BitMatrix64 lhs, BitMatrix64 rhs)
-            => lhs.Equals(rhs);
+        public static BitMatrix64 operator | (BitMatrix64 A, BitMatrix64 B)
+            => BitMatrix.or(ref A,B);
 
         [MethodImpl(Inline)]
-        public static bool operator !=(BitMatrix64 lhs, BitMatrix64 rhs)
-            => !lhs.Equals(rhs);
+        public static bool operator ==(BitMatrix64 A, BitMatrix64 B)
+            => A.Equals(B);
+
+        [MethodImpl(Inline)]
+        public static bool operator !=(BitMatrix64 A, BitMatrix64 B)
+            => !A.Equals(B);
 
         [MethodImpl(Inline)]
         BitMatrix64(ulong[] src)
@@ -275,8 +279,8 @@ namespace Z0
             const int rowstep = 4;
             for(var i=0; i< RowCount; i += rowstep)
             {
-                this.LoadCpuVector(i, out Vector256<ulong> vSrc);
-                if(!vSrc.TestZ(vSrc))
+                this.GetCells(i, out Vec256<ulong> vSrc);
+                if(!dinx.testz(vSrc,vSrc))
                     return false;
             }
             return true;
@@ -296,8 +300,8 @@ namespace Z0
             const int rowstep = 4;
             for(var i=0; i< RowCount; i += rowstep)
             {
-                this.LoadCpuVector(i, out Vector256<ulong> vLhs);
-                rhs.LoadCpuVector(i, out Vector256<ulong> vRhs);
+                this.GetCells(i, out Vec256<ulong> vLhs);
+                rhs.GetCells(i, out Vec256<ulong> vRhs);
                 Bits.andn(vLhs,vRhs).StoreTo(ref data[i]);                
             }
             return this;
@@ -331,18 +335,12 @@ namespace Z0
         /// <param name="dst">The target vector</param>
         /// <param name="row">The row index of where the load should begin</param>
         [MethodImpl(Inline)]
-        public readonly ref Vec256<ulong> LoadCpuVec(int row, out Vec256<ulong> dst)
+        public readonly ref Vec256<ulong> GetCells(int row, out Vec256<ulong> dst)
         {
             dst = load(ref data[row]);
             return ref dst;
         }
 
-        [MethodImpl(Inline)]
-        public readonly ref Vector256<ulong> LoadCpuVector(int row, out Vector256<ulong> dst)
-        {
-            dst = load(ref data[row]);
-            return ref dst;
-        }
 
         /// <summary>
         /// Counts the number of enabled bits in the matrix
@@ -358,7 +356,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public void Mul(in BitMatrix64 rhs)
         {
-            Mul(ref this, rhs);
+            BitMatrix.mul(ref this, rhs);
         }
 
         /// <summary>
@@ -368,7 +366,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public void And(in BitMatrix64 rhs)
         {
-            And(ref this, rhs);
+            BitMatrix.and(ref this, rhs);
         }
 
         /// <summary>
@@ -378,7 +376,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public void Or(in BitMatrix64 rhs)
         {
-            Or(ref this, rhs);
+            BitMatrix.or(ref this, rhs);
         }
 
         /// <summary>
@@ -388,7 +386,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public void XOr(in BitMatrix64 rhs)
         {
-            XOr(ref this, rhs);
+            BitMatrix.xor(ref this, rhs);
         }
 
         /// <summary>
@@ -398,7 +396,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public void Flip()
         {
-            Flip(ref this);
+            BitMatrix.flip(ref this);
         }
 
         /// <summary>
@@ -436,78 +434,7 @@ namespace Z0
         
         public override string ToString()
             => throw new NotSupportedException();
-
-        static ref BitMatrix64 And(ref BitMatrix64 lhs, in BitMatrix64 rhs)
-        {
-            const int rowstep = 4;
-            for(var i=0; i< lhs.RowCount; i += rowstep)
-            {
-                lhs.LoadCpuVec(i, out Vec256<ulong> vLhs);
-                rhs.LoadCpuVec(i, out Vec256<ulong> vRhs);
-                dinx.vand(vLhs,vRhs).StoreTo(ref lhs.data[i]);
-            }
-            return ref lhs;
-        }
-
-        static ref BitMatrix64 XOr(ref BitMatrix64 lhs, in BitMatrix64 rhs)
-        {
-            const int rowstep = 4;
-            for(var i=0; i< lhs.RowCount; i += rowstep)
-            {
-                lhs.LoadCpuVector(i, out Vector256<ulong> vLhs);
-                rhs.LoadCpuVector(i, out Vector256<ulong> vRhs);
-                gbits.vxor(vLhs,vRhs).StoreTo(ref lhs.data[i]);
-            }
-            return ref lhs;
-        }
-
-        static ref BitMatrix64 Flip(ref BitMatrix64 src)
-        {
-            const int rowstep = 4;
-            for(var i=0; i< src.RowCount; i += rowstep)
-            {
-                src.LoadCpuVector(i, out Vector256<ulong> vSrc);
-                gbits.flip(vSrc).StoreTo(ref src.data[i]);
-            }
-            return ref src;
-        }
-
-        static ref BitMatrix64 Or(ref BitMatrix64 lhs, in BitMatrix64 rhs)
-        {
-            const int rowstep = 4;
-            for(var i=0; i< lhs.RowCount; i += rowstep)
-            {
-                lhs.LoadCpuVec(i, out Vec256<ulong> vLhs);
-                rhs.LoadCpuVec(i, out Vec256<ulong> vRhs);
-                ginx.vor(vLhs,vRhs).StoreTo(ref lhs.data[i]);
-            }
-            return ref lhs;
-        }
-        
-        static BitVector64 Mul(in BitMatrix64 lhs, in BitVector64 rhs)
-        {
-            var dst = BitVector64.Alloc();
-            for(var i=0; i< N; i++)
-                dst[i] = lhs.RowVector(i) % rhs;
-            return dst;        
-        }
-
-        static ref BitMatrix64 Mul(ref BitMatrix64 lhs, in BitMatrix64 rhs)
-        {
-            var x = lhs;
-            var y = rhs.Transpose();
-            ref var dst = ref lhs;
-
-            for(var i=0; i< N; i++)
-            {
-                var r = x.RowVector(i);
-                var z = BitVector64.Alloc();
-                for(var j = 0; j< N; j++)
-                    z[j] = r % y.RowVector(j);
-                dst[i] = (ulong)z;
-            }
-            return ref dst;
-        }
+       
 
         [MethodImpl(Inline)]
         static unsafe Vec256<ulong> load(ref ulong head)

@@ -75,6 +75,81 @@ namespace Z0
                 throw unsupported<T>();
         }        
 
+        [MethodImpl(Inline)]
+        public static Vec128<T> vand<T>(in Vec128<T> lhs, in Vec128<T> rhs)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(float))
+                return generic<T>(dfp.vand(float32(lhs), float32(rhs)));
+            else if(typeof(T) == typeof(double))
+                return generic<T>(dfp.vand(float64(lhs), float64(rhs)));
+            else 
+                throw unsupported<T>();
+                    
+        }
+
+        [MethodImpl(Inline)]
+        public static Vec256<T> vand<T>(in Vec256<T> lhs, in Vec256<T> rhs)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(float))
+                return generic<T>(dfp.vand(float32(lhs), float32(rhs)));
+            else if(typeof(T) == typeof(double))
+                return generic<T>(dfp.vand(float64(lhs), float64(rhs)));
+            else 
+                throw unsupported<T>();
+                    
+        }
+
+        [MethodImpl(Inline)]
+        public static Vec128<T> vor<T>(in Vec128<T> lhs, in Vec128<T> rhs)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(float))
+                return generic<T>(dinx.vor(float32(lhs), float32(rhs)));
+            else if(typeof(T) == typeof(double))
+                return generic<T>(dinx.vor(float64(lhs), float64(rhs)));
+            else 
+                throw unsupported<T>();                    
+        }
+
+        [MethodImpl(Inline)]
+        public static Vec256<T> vor<T>(in Vec256<T> lhs, in Vec256<T> rhs)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(float))
+                return generic<T>(dinx.vor(float32(lhs), float32(rhs)));
+            else if(typeof(T) == typeof(double))
+                return generic<T>(dinx.vor(float64(lhs), float64(rhs)));
+            else 
+                throw unsupported<T>();                    
+        }
+
+        [MethodImpl(Inline)]
+        public static Vec128<T> vxor<T>(in Vec128<T> lhs, in Vec128<T> rhs)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(float))
+                return generic<T>(dfp.vxor(float32(lhs), float32(rhs)));
+            else if(typeof(T) == typeof(double))
+                return generic<T>(dfp.vxor(float64(lhs), float64(rhs)));
+            else 
+                throw unsupported<T>();
+                    
+        }
+
+        [MethodImpl(Inline)]
+        public static Vec256<T> vxor<T>(in Vec256<T> lhs, in Vec256<T> rhs)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(float))
+                return generic<T>(dfp.vxor(float32(lhs), float32(rhs)));
+            else if(typeof(T) == typeof(double))
+                return generic<T>(dfp.vxor(float64(lhs), float64(rhs)));
+            else 
+                throw unsupported<T>();
+                    
+        }
 
        [MethodImpl(Inline)]
        public static Vec256<T> vmax<T>(in Vec256<T> lhs, in Vec256<T> rhs)
