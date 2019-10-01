@@ -19,51 +19,44 @@ namespace Z0
     using static As;
     using static zfunc;    
 
-    public static partial class voc
+    partial class inxsoc
     {
-        public static Vector128<float> vadd_scalar128_n32f(Vector128<float> x, Vector128<float> y)
-            => Sse.AddScalar(x,y);
-
-        public static Scalar128<float> vadd_scalar128_d32f(in Scalar128<float> x, in Scalar128<float> y)
+        public static unsafe float inxs_add_32f(float x, float y)        
+            => AddScalar(LoadScalarVector128(constptr(in x)), LoadScalarVector128(constptr(in y))).GetElement(0);
+        
+        public static double inxs_add64f(double x, double y)        
             => inxs.add(x,y);
 
-        public static Scalar128<float> vadd_scalar128_g32f(in Scalar128<float> x, in Scalar128<float> y)
-            => ginxs.add(in x, in y);
+        public static float inxs_sub32f(float x, float y)        
+            => inxs.sub(x,y);
+        
+        public static double inxs_sub64f(double x, double y)        
+            => inxs.sub(x,y);
 
-        public static unsafe Vector128<float> load_scalar128_n32f(float src)
-            => LoadScalarVector128(refptr(ref asRef(in src)));
+        public static float inxs_mul32f(float x, float y)        
+            => inxs.mul(x,y);
+        
+        public static double inxs_mul64f(double x, double y)        
+            => inxs.mul(x,y);
 
-        public static Scalar128<float> load_scalar128_d32f(float src)
-            => inxs.load(src);
+        public static float inxs_div32f(float x, float y)        
+            => inxs.div(x,y);
+        
+        public static double inxs_div64f(double x, double y)        
+            => inxs.div(x,y);
 
-        public static Scalar128<float> load_scalar128_g32f(float src)
-            => ginxs.load(src);
+        public static float inxs_max32f(float x, float y)        
+            => inxs.max(x,y);
+        
+        public static double inxs_max64f(double x, double y)        
+            => inxs.max(x,y);
 
-        public static unsafe Vector128<double> load_scalar128_n64f(double src)
-            => LoadScalarVector128(refptr(ref asRef(in src)));
-
-        public static Scalar128<double> load_scalar128_d64f(double src)
-            => inxs.load(src);
-
-        public static Scalar128<double> load_scalar128_g64f(double src)
-            => ginxs.load(in src);
-
-
-        public static float to32f(int src)        
-            => ConvertScalarToVector128Single(default, src).GetElement(0);
-
-        public static unsafe int to32i(float src)
-            => ConvertToInt32WithTruncation(LoadScalarVector128(refptr(ref src)));
-
-        public static unsafe int to32i(double src)
-            => ConvertToInt32WithTruncation(LoadScalarVector128(refptr(ref src)));
-
-        public static float to32f(long src)        
-            => ConvertScalarToVector128Single(default, src).GetElement(0);
-
-
-        public static unsafe long to64i(float src)
-            => ConvertToInt64WithTruncation(LoadScalarVector128(refptr(ref src)));
+        public static float inxs_min32f(float x, float y)        
+            => inxs.min(x,y);
+        
+        public static double inxs_min64f(double x, double y)        
+            => inxs.min(x,y);
+        
 
     }
 

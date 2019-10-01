@@ -60,17 +60,5 @@ namespace Z0
         public static ulong dec_g64u(ulong x)
             => gmath.dec(x);
 
-        public static float dec_g32f(float x)
-            => gfp.dec(x);
-
-        public static float dec_d32f(float x)
-            => fmath.dec(x);
-
-        public static double dec_d64f(double x)
-            => fmath.dec(x);
-
-        public static double dec_g64f(double x)
-            => gfp.dec(x);
-
     }
 }

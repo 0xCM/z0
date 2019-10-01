@@ -6,31 +6,28 @@ namespace Z0
 {
     using System;
     using System.Linq;
-    using System.Reflection;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     using System.Diagnostics;
-
+    
     using static zfunc;    
     
-    partial class fpx
+    partial class fmath
     {
 
         [MethodImpl(Inline)]
-        public static float Round(this float src, int scale)
-            => fmath.round(src, scale);
+        public static bool eq(float lhs, float rhs)
+            => lhs == rhs;
 
         [MethodImpl(Inline)]
-        public static double Round(this double src, int scale)
-            => fmath.round(src, scale);
+        public static bool eq(double lhs, double rhs)
+            => lhs == rhs;
 
         [MethodImpl(Inline)]
-        public static float Truncate(this float src)
-            => (int)src;
+        public static bool neq(float lhs, float rhs)
+            => lhs != rhs;
 
         [MethodImpl(Inline)]
-        public static double Truncate(this double src)
-            => (long)src;
-
+        public static bool neq(double lhs, double rhs)
+            => lhs != rhs;
     }
 }

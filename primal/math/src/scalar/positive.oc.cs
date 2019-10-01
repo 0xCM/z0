@@ -59,18 +59,5 @@ namespace Z0
 
         public static bool positive_g64u(ulong x)
             => gmath.positive(x);
-
-        public static bool positive_n32f(float x)
-            => x > 0;
-
-        public static bool positive_g32f(float x)
-            => gmath.positive(x);
-
-        public static bool positive_n64f(double x)
-            => x > 0;
-
-        public static bool positive_g64f(double x)
-            => gmath.positive(x);
-
     }
 }

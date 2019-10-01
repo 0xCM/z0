@@ -53,9 +53,17 @@ namespace Z0
     }
 
     /// <summary>
-    /// Opcodes for intrinsic operations
+    /// Opcodes for intrinsic vectorized operations
     /// </summary>
-    public static partial class inxoc
+    public static partial class inxvoc
+    {
+
+    }
+
+    /// <summary>
+    /// Opcodes for intrinsic scalar operations
+    /// </summary>
+    public static partial class inxsoc    
     {
 
     }

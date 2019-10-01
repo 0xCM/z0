@@ -31,13 +31,13 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static Vector128<T> add<T>(in Scalar128<T> lhs, in Scalar128<T> rhs)
+        public static Scalar128<T> add<T>(in Scalar128<T> lhs, in Scalar128<T> rhs)
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return inxs.add(in float32(in lhs), in float32(in rhs)).As<float,T>();
+                return inxs.add(in float32(in lhs), in float32(in rhs)).As<T>();
             else if(typeof(T) == typeof(double))
-                return inxs.add(in float64(in lhs), in float64(in rhs)).As<double,T>();
+                return inxs.add(in float64(in lhs), in float64(in rhs)).As<T>();
             else
                 throw unsupported<T>();
         }

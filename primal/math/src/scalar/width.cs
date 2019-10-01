@@ -48,6 +48,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ulong width(ulong lhs, ulong rhs)
             => lhs > rhs ? lhs - rhs : rhs - lhs;
- 
     }
 }

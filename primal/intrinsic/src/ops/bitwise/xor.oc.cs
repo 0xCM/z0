@@ -19,7 +19,7 @@ namespace Z0
     using static As;
     using static AsIn;
 
-    partial class inxoc
+    partial class inxvoc
     {
         public static Vector128<sbyte> vxor_n128x8i(Vector128<sbyte> x, Vector128<sbyte> y)
             => Xor(x,y);

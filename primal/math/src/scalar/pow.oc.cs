@@ -59,19 +59,6 @@ namespace Z0
 
         public static ulong pow_g64u(ulong b, uint exp)
             => gmath.pow(b,exp);
-
-        public static float pow_d32f(float b, uint exp)
-            => fmath.pow(b,exp);
-
-        public static float pow_g32f(float b, uint exp)
-            => gfp.pow(b,exp);
-
-        public static double pow_d64f(double b, uint exp)
-            => fmath.pow(b,exp);
-
-        public static double pow_g64f(double b, uint exp)
-            => gfp.pow(b,exp);
-
     }
 
 }

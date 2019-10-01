@@ -19,7 +19,7 @@ namespace Z0
     public delegate Vec256<T> Perm64x4<T>(Vec256<T> src)
         where T : unmanaged;
 
-    partial class inxoc
+    partial class inxvoc
     {
         [MethodImpl(Inline)]
         public static Vec256<ulong> perm4x64(Vec256<ulong> src, uint x0, uint x1, uint x2, uint x3)            

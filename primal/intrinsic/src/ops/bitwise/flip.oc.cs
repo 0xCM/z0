@@ -19,7 +19,7 @@ namespace Z0
     using static As;
     using static AsIn;
 
-    partial class inxoc
+    partial class inxvoc
     {
         public static Vec128<sbyte> vflip_d128x8i(Vec128<sbyte> src)
             => dinx.vflip(src);

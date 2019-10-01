@@ -1,4 +1,4 @@
-// 2019-10-01 04:44:12:726
+// 2019-10-01 10:52:13:936
 Vector128<uint> vor_n128x32u(Vector128<uint> x, Vector128<uint> y)
 {
     IL_0000: ldarg.0
@@ -1028,7 +1028,7 @@ Vec256<ulong> perm4x64(Vec256<ulong> src, uint x0, uint x1, uint x2, uint x3)
     IL_0009: stloc.0
     IL_000A: ldarg.0
     IL_000B: ldloc.0
-    IL_000C: call Z0.Vec256`1<System.UInt64> Z0.inxoc::perm4x64(Z0.Vec256`1<System.UInt64>,Z0.Perm4)
+    IL_000C: call Z0.Vec256`1<System.UInt64> Z0.inxvoc::perm4x64(Z0.Vec256`1<System.UInt64>,Z0.Perm4)
     IL_0011: ret
 
 }

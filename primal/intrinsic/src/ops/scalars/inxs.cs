@@ -20,11 +20,148 @@ namespace Z0
 
     public static class inxs
     {
+        [MethodImpl(Inline)]
+        public static float add(in float x, in float y)        
+            => add(load(in x), load(in y));
+        
+        [MethodImpl(Inline)]
+        public static double add(in double x, in double y)        
+            => add(load(in x), load(in y));
+
+        [MethodImpl(Inline)]
+        public static float sub(float x, float y)        
+            => sub(load(x), load(y));
+        
+        [MethodImpl(Inline)]
+        public static double sub(double x, double y)        
+            => sub(load(x), load(y));
+
+        [MethodImpl(Inline)]
+        public static float mul(float x, float y)        
+            => mul(load(x), load(y));
+        
+        [MethodImpl(Inline)]
+        public static double mul(double x, double y)        
+            => mul(load(x), load(y));
+
+        [MethodImpl(Inline)]
+        public static float div(float x, float y)        
+            => div(load(x), load(y));
+        
+        [MethodImpl(Inline)]
+        public static double div(double x, double y)        
+            => div(load(x), load(y));
+
+        [MethodImpl(Inline)]
+        public static float max(float x, float y)        
+            => max(load(x), load(y));
+        
+        [MethodImpl(Inline)]
+        public static double max(double x, double y)        
+            => max(load(x), load(y));
+
+        [MethodImpl(Inline)]
+        public static float min(float x, float y)        
+            => min(load(x), load(y));
+        
+        [MethodImpl(Inline)]
+        public static double min(double x, double y)        
+            => min(load(x), load(y));
+
+        [MethodImpl(Inline)]
+        public static float ceil(float x)        
+            => ceil(load(x));
+        
+        [MethodImpl(Inline)]
+        public static double ceil(double x)        
+            => ceil(load(x));
+
+        [MethodImpl(Inline)]
+        public static float floor(float x)        
+            => floor(load(x));
+        
+        [MethodImpl(Inline)]
+        public static double floor(double x)        
+            => floor(load(x));
+
+        [MethodImpl(Inline)]
+        public static float sqrt(float x)        
+            => sqrt(load(x));
+        
+        [MethodImpl(Inline)]
+        public static double sqrt(double x)        
+            => sqrt(load(x));
+
+        [MethodImpl(Inline)]
+        public static bool eq(float x, float y)        
+            => eq(load(x), load(y));
+        
+        [MethodImpl(Inline)]
+        public static bool eq(double x, double y)        
+            => eq(load(x), load(y));
+
+        [MethodImpl(Inline)]
+        public static bool neq(float x, float y)        
+            => neq(load(x), load(y));
+        
+        [MethodImpl(Inline)]
+        public static bool neq(double x, double y)        
+            => neq(load(x), load(y));
+
+        [MethodImpl(Inline)]
+        public static bool lt(float x, float y)        
+            => lt(load(x), load(y));
+        
+        [MethodImpl(Inline)]
+        public static bool lt(double x, double y)        
+            => lt(load(x), load(y));
+
+        [MethodImpl(Inline)]
+        public static bool lteq(float x, float y)        
+            => lteq(load(x), load(y));
+        
+        [MethodImpl(Inline)]
+        public static bool lteq(double x, double y)        
+            => lteq(load(x), load(y));
+
+        [MethodImpl(Inline)]
+        public static bool gt(float x, float y)        
+            => gt(load(x), load(y));
+        
+        [MethodImpl(Inline)]
+        public static bool gt(double x, double y)        
+            => gt(load(x), load(y));
+
+        [MethodImpl(Inline)]
+        public static bool gteq(float x, float y)        
+            => gteq(load(x), load(y));
+        
+        [MethodImpl(Inline)]
+        public static bool gteq(double x, double y)        
+            => gteq(load(x), load(y));
+
+        [MethodImpl(Inline)]
+        public static float fmadd(float x, float y, float z)        
+            => fmadd(load(x), load(y), load(z));
+        
+        [MethodImpl(Inline)]
+        public static double fmadd(double x, double y, double z)        
+            => fmadd(load(x), load(y), load(z));
+
+        [MethodImpl(Inline)]
+        public static float fmsub(float x, float y, float z)        
+            => fmsub(load(x), load(y), load(z));
+        
+        [MethodImpl(Inline)]
+        public static double fmsub(double x, double y, double z)        
+            => fmsub(load(x), load(y), load(z));
+
         /// <summary>
         ///  __m128i _mm_cvtsi32_si128 (int a)MOVD xmm, reg/m32
         /// Copies a 32-bit source value to the least vector component, and zero-out the remaining vector components
         /// </summary>
         /// <param name="src">THe source value</param>
+        [MethodImpl(Inline)]
         public static Scalar128<int> load(int src)
             => ConvertScalarToVector128Int32(src);
             
@@ -34,6 +171,7 @@ namespace Z0
         /// </summary>
         /// <param name="src"></param>
         /// <param name="dst"></param>
+        [MethodImpl(Inline)]
         public static Scalar128<uint> load(uint src)
             => ConvertScalarToVector128UInt32(src);
 
@@ -118,11 +256,32 @@ namespace Z0
         /// </summary>
         /// <param name="src"></param>
         /// <param name="dst"></param>
+        [MethodImpl(Inline)]
         public static int convert(in Scalar128<double> src, out int dst)
         {
             dst = ConvertToInt32WithTruncation(src.mm);
             return dst;
         }
+
+        [MethodImpl(Inline)]
+        public static float to32f(int src)        
+            => ConvertScalarToVector128Single(default, src).GetElement(0);
+
+        [MethodImpl(Inline)]
+        public static unsafe int to32i(float src)
+            => ConvertToInt32WithTruncation(LoadScalarVector128(refptr(ref src)));
+
+        [MethodImpl(Inline)]
+        public static unsafe int to32i(double src)
+            => ConvertToInt32WithTruncation(LoadScalarVector128(refptr(ref src)));
+
+        [MethodImpl(Inline)]
+        public static float to32f(long src)        
+            => ConvertScalarToVector128Single(default, src).GetElement(0);
+
+        [MethodImpl(Inline)]
+        public static unsafe long to64i(float src)
+            => ConvertToInt64WithTruncation(LoadScalarVector128(refptr(ref src)));
 
         /// <summary>
         /// __m128 _mm_add_ss (__m128 a, __m128 b)ADDSS xmm, xmm/m32
@@ -130,7 +289,7 @@ namespace Z0
         /// <param name="x"></param>
         /// <param name="y"></param>
         [MethodImpl(Inline)]
-        public static Vector128<float> add(in Scalar128<float> x, in Scalar128<float> y)
+        public static Scalar128<float> add(in Scalar128<float> x, in Scalar128<float> y)
             => AddScalar(x.mm, y.mm);
 
         /// <summary>
@@ -139,7 +298,7 @@ namespace Z0
         /// <param name="x"></param>
         /// <param name="y"></param>
         [MethodImpl(Inline)]
-        public static Vector128<double> add(in Scalar128<double> x, in Scalar128<double> y)
+        public static Scalar128<double> add(in Scalar128<double> x, in Scalar128<double> y)
             => AddScalar(x.mm, y.mm);
 
         /// <summary>

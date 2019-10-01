@@ -60,17 +60,6 @@ namespace Z0
         public static ulong min_g64u(ulong lhs, ulong rhs)
             => gmath.min(lhs,rhs);
 
-        public static float min_d32f(float lhs, float rhs)
-            => fmath.min(lhs,rhs);
-
-        public static float min_g32f(float lhs, float rhs)
-            => gfp.min(lhs,rhs);
-
-        public static double min_d64f(double lhs, double rhs)
-            => fmath.min(lhs,rhs);
-        
-        public static double min_g64f(double lhs, double rhs)
-            => gfp.min(lhs,rhs);
     }
 
 }

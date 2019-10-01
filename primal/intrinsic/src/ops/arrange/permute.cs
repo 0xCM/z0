@@ -48,19 +48,7 @@ namespace Z0
         }
 
 
-        /// <summary>
-        /// Rearranges the components of the source vector according to an identified permutation
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <param name="spec">The permutation identifier</param>
-        [MethodImpl(Inline)]
-        public static Vec128<int> perm4x32(in Vec128<int> src, Perm4 spec)
-            => Shuffle(src.xmm, (byte)spec);
-
-        [MethodImpl(Inline)]
-        public static Vec128<uint> perm4x32(in Vec128<uint> src, Perm4 spec)
-            => Shuffle(src.xmm, (byte)spec);
-
+ 
 
  
     }

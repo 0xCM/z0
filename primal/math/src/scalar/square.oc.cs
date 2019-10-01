@@ -59,18 +59,5 @@ namespace Z0
 
         public static ulong square_g64u(ulong x)
             => gmath.square(x);
-
-        public static float square_g32f(float x)
-            => gfp.square(x);
-
-        public static float square_d32f(float x)
-            => fmath.square(x);
-
-        public static double square_d64f(double x)
-            => fmath.square(x);
-
-        public static double square_g64f(double x)
-            => gfp.square(x);
-
     }
 }

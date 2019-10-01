@@ -60,17 +60,6 @@ namespace Z0
         public static bool lt_g64u(ulong lhs, ulong rhs)
             => gmath.lt(lhs,rhs);
 
-        public static bool lt_d32f(float lhs, float rhs)
-            => fmath.lt(lhs,rhs);
-
-        public static bool lt_g32f(float lhs, float rhs)
-            => gfp.lt(lhs,rhs);
-
-        public static bool lt_d64f(double lhs, double rhs)
-            => fmath.lt(lhs,rhs);
-        
-        public static bool lt_g64f(double lhs, double rhs)
-            => gfp.lt(lhs,rhs);
  
          public static bool lteq_d8i(sbyte lhs, sbyte rhs)
             => math.lteq(lhs,rhs);
@@ -119,19 +108,6 @@ namespace Z0
 
         public static bool lteq_g64u(ulong lhs, ulong rhs)
             => gmath.lteq(lhs,rhs);
-
-        public static bool lteq_d32f(float lhs, float rhs)
-            => fmath.lteq(lhs,rhs);
-
-        public static bool lteq_g32f(float lhs, float rhs)
-            => gfp.lteq(lhs,rhs);
-
-        public static bool lteq_d64f(double lhs, double rhs)
-            => fmath.lteq(lhs,rhs);
-        
-        public static bool lteq_g64f(double lhs, double rhs)
-            => gfp.lteq(lhs,rhs);
- 
     }
 
 }

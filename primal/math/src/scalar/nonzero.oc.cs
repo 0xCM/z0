@@ -59,18 +59,5 @@ namespace Z0
 
         public static bool nonzero_g64u(ulong x)
             => gmath.nonzero(x);
-
-        public static bool nonzero_n32f(float x)
-            => x != 0;
-
-        public static bool nonzero_g32f(float x)
-            => gmath.nonzero(x);
-
-        public static bool nonzero_n64f(double x)
-            => x != 0;
-
-        public static bool nonzero_g64f(double x)
-            => gmath.nonzero(x);
-
     }
 }

@@ -19,7 +19,7 @@ namespace Z0
     using static As;
     using static AsIn;
 
-    partial class inxoc
+    partial class inxvoc
     {
 
         public static Vec128<int> vsllv_d128x32i(Vec128<int> src, Vec128<uint> offset)

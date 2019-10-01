@@ -60,17 +60,6 @@ namespace Z0
         public static bool between_g64u(ulong x, ulong a, ulong b)    
             => gmath.between(x,a,b);
 
-        public static bool between_d32f(float x, float a, float b)    
-            => fmath.between(x,a,b);
-
-        public static bool between_g32f(float x, float a, float b)    
-            => gmath.between(x,a,b);
-
-        public static bool between_d64f(double x, double a, double b)    
-            => fmath.between(x,a,b);
-
-        public static bool between_g64f(double x, double a, double b)    
-            => gmath.between(x,a,b);
     }
 
 }

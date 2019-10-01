@@ -30,8 +30,7 @@ namespace Z0
         public static Span128<byte> From<T>(Span128<T> src)
             where T : unmanaged
                 => Span128.Load(MemoryMarshal.AsBytes(src.Unblock()));
-        
-        
+                
         [MethodImpl(Inline)]
         public static Span<byte> FromValue<T>(T src)
             where T : unmanaged
@@ -105,8 +104,6 @@ namespace Z0
                 rem = src.Slice(dst.Length*tSize);
             return dst;
         }
-
-
 
     }
 

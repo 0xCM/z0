@@ -60,17 +60,6 @@ namespace Z0
         public static ulong max_g64u(ulong lhs, ulong rhs)
             => gmath.max(lhs,rhs);
 
-        public static float max_d32f(float lhs, float rhs)
-            => fmath.max(lhs,rhs);
-
-        public static float max_g32f(float lhs, float rhs)
-            => gfp.max(lhs,rhs);
-
-        public static double max_d64f(double lhs, double rhs)
-            => fmath.max(lhs,rhs);
-        
-        public static double max_g64f(double lhs, double rhs)
-            => gfp.max(lhs,rhs);
     }
 
 }

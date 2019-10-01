@@ -59,18 +59,6 @@ namespace Z0
 
         public static ulong mul_g64u(ulong lhs, ulong rhs)
             => gmath.mul(lhs,rhs);
-
-        public static float mul_d32f(float lhs, float rhs)
-            => fmath.mul(lhs,rhs);
-
-        public static float mul_g32f(float lhs, float rhs)
-            => gfp.mul(lhs,rhs);
-
-        public static double mul_d64f(double lhs, double rhs)
-            => fmath.mul(lhs,rhs);
-        
-        public static double mul_g64f(double lhs, double rhs)
-            => gfp.mul(lhs,rhs);
     }
 
 }

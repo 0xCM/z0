@@ -35,18 +35,5 @@ namespace Z0
 
         public static long abs_g64i(long x)
             => gmath.abs(x);
-
-        public static float abs_g32f(float x)
-            => gfp.abs(x);
-
-        public static float abs_d32f(float x)
-            => fmath.abs(x);
-
-        public static double abs_d64f(double x)
-            => fmath.abs(x);
-
-        public static double abs_g64f(double x)
-            => gfp.abs(x);
-
     }
 }

@@ -59,18 +59,5 @@ namespace Z0
 
         public static Sign signum_g64u(ulong x)
             => gmath.signum(x);
-
-        public static Sign signum_g32f(float x)
-            => gfp.signum(x);
-
-        public static Sign signum_d32f(float x)
-            => fmath.signum(x);
-
-        public static Sign signum_d64f(double x)
-            => fmath.signum(x);
-
-        public static Sign signum_g64f(double x)
-            => gfp.signum(x);
-
     }
 }

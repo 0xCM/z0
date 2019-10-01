@@ -54,6 +54,14 @@ namespace Z0
 
     }
 
+    /// <summary>
+    /// Floating-point op codes
+    /// </summary>
+    public static partial class foc
+    {
+
+    }
+
     static class App
     {
         public static void Main(params string[] args) { }

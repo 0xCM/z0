@@ -50,6 +50,5 @@ namespace Z0
             src--;
             return ref src;
         }
- 
     }
 }

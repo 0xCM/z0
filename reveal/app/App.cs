@@ -84,11 +84,11 @@ namespace Z0
             // Disassemble(new ExperimentalScenarios());
             // Disassemble(true, true, typeof(math));
             Disassemble(true, true, typeof(soc));    
-            Disassemble(true, true, typeof(voc));    
             Disassemble(true, true, typeof(boc));    
-            Disassemble(true, true, typeof(inxoc));    
+            Disassemble(true, true, typeof(inxsoc));    
+            Disassemble(true, true, typeof(inxvoc));    
             Disassemble(true, true, typeof(zfoc));    
-            Disassemble(true, true, typeof(Float64Convert));    
+            Disassemble(true, true, typeof(foc));    
 
             // var dst = DefineAsmOutPath("gmath.add");
             // DeconstructGeneric<int>(typeof(gmath), "add").OnSome(d => d.EmitAsm(dst));

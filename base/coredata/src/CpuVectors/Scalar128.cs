@@ -52,8 +52,8 @@ namespace Z0
             => value.ToString();
 
         [MethodImpl(Inline)]
-        public Vector128<U> As<U>() 
-            where U : struct        
-                => Unsafe.As<Vector128<T>, Vector128<U>>(ref Unsafe.AsRef(in mm));        
+        public Scalar128<U> As<U>() 
+            where U : unmanaged        
+                => Unsafe.As<Vector128<T>, Scalar128<U>>(ref Unsafe.AsRef(in mm));        
     }     
 }
