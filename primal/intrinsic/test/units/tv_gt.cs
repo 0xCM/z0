@@ -12,10 +12,10 @@ namespace Z0.Test
     
     using static zfunc;
 
-    public class tv_gt : UnitTest<tv_gt>
+    public class t_vgt : UnitTest<t_vgt>
     {
 
-        public void gt128_i8()
+        public void vgt_128x8i()
         {
             gt128_check<sbyte>();
         }
@@ -53,7 +53,7 @@ namespace Z0.Test
                 var v1 = Random.CpuVec128<T>();                
                 var v2 = v1.Next();
                 var cmp =  ginx.cmpgt(v2,v1);
-                //Claim.yea(cmp);                    
+                //Claim.yea(cmp);   
             }
         }
 

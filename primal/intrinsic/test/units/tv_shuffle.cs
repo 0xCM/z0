@@ -12,7 +12,7 @@ namespace Z0.Test
     
     using static zfunc;
     
-    public class tv_shuffle : UnitTest<tv_shuffle>
+    public class tv_shuffle : IntrinsicTest<tv_shuffle>
     {        
         public void shuffle_128x8u()
         {

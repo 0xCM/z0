@@ -15,16 +15,8 @@ namespace Z0
     {       
 
         /// <summary>
-        /// Interprets the source as an array of bytes
-        /// </summary>
-        /// <param name="src">The source value</param>
-        [MethodImpl(Inline)]   
-        public static Span<byte> Unpack<T>(this ref T src, out Span<byte> dst)
-            where T : unmanaged
-                => dst = bytespan(ref src);
-
-        /// <summary>
-        /// Converts the source value to an array of bits
+        /// Converts a source value to a span of 8 bytes, 
+        /// each of which represent a single int in the source
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
@@ -32,7 +24,8 @@ namespace Z0
             => Bits.unpack(src);
 
         /// <summary>
-        /// Converts the source value to an array of bits
+        /// Converts a source value to a span of 16 bytes, 
+        /// each of which represent a single int in the source
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
@@ -40,7 +33,8 @@ namespace Z0
             => Bits.unpack(src);
 
         /// <summary>
-        /// Converts the source value to an array of bits
+        /// Converts a source value to a span of 64 bytes, 
+        /// each of which represent a single int in the source
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]

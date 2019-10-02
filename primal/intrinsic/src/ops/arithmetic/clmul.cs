@@ -133,8 +133,8 @@ namespace Z0
         public static Scalar128<ulong> clmulr(Scalar128<ulong> a, Scalar128<ulong> b, Vec128<ulong> poly)
         {
             var prod = dinx.clmul(a,b);
-            prod = dinx.vxor(prod, dinx.clmul(srl(prod, 64), poly, ClMulMask.X00));
-            prod = dinx.vxor(prod, dinx.clmul(srl(prod, 64), poly, ClMulMask.X00));
+            prod = dinx.vxor(prod, dinx.clmul(vsrl(prod, 64), poly, ClMulMask.X00));
+            prod = dinx.vxor(prod, dinx.clmul(vsrl(prod, 64), poly, ClMulMask.X00));
             return prod;
         }
 

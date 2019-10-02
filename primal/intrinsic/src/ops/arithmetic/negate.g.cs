@@ -16,51 +16,94 @@ namespace Z0
     partial class ginx
     {
         [MethodImpl(Inline)]
-        public static Vector128<T> negate<T>(Vector128<T> src)
+        public static Vec128<T> vnegate<T>(in Vec128<T> src)
             where T : unmanaged
         {
-            if(typematch<T,sbyte>())
-                return generic<T>(dinx.negate(int8(src)));
-            else if(typematch<T,byte>())
-                return generic<T>(dinx.negate(uint8(src)));
-            else if(typematch<T,short>())
-                return generic<T>(dinx.negate(int16(src)));
-            else if(typematch<T,ushort>())
-                return generic<T>(dinx.negate(uint16(src)));
-            else if(typematch<T,int>())
-                return generic<T>(dinx.negate(int32(src)));
-            else if(typematch<T,uint>())
-                return generic<T>(dinx.negate(uint32(src)));
-            else if(typematch<T,long>())
-                return generic<T>(dinx.negate(int64(src)));
-            else if(typematch<T,ulong>())
-                return generic<T>(dinx.negate(uint64(src)));
-            else 
-                throw unsupported<T>();
+            if(typeof(T) == typeof(byte) 
+            || typeof(T) == typeof(ushort) 
+            || typeof(T) == typeof(uint) 
+            || typeof(T) == typeof(ulong))
+                return vnegateu(in src);
+            else if(typeof(T) == typeof(sbyte) 
+            || typeof(T) == typeof(short) 
+            || typeof(T) == typeof(int) 
+            || typeof(T) == typeof(long))
+                return vnegatei(src);
+            else return gfpv.vnegate(in src);
         }
 
         [MethodImpl(Inline)]
-        public static Vector256<T> negate<T>(Vector256<T> src)
+        public static Vec256<T> vnegate<T>(in Vec256<T> src)
             where T : unmanaged
         {
-            if(typematch<T,sbyte>())
-                return generic<T>(dinx.negate(int8(src)));
-            else if(typematch<T,byte>())
-                return generic<T>(dinx.negate(uint8(src)));
-            else if(typematch<T,short>())
-                return generic<T>(dinx.negate(int16(src)));
-            else if(typematch<T,ushort>())
-                return generic<T>(dinx.negate(uint16(src)));
-            else if(typematch<T,int>())
-                return generic<T>(dinx.negate(int32(src)));
-            else if(typematch<T,uint>())
-                return generic<T>(dinx.negate(uint32(src)));
-            else if(typematch<T,long>())
-                return generic<T>(dinx.negate(int64(src)));
-            else if(typematch<T,ulong>())
-                return generic<T>(dinx.negate(uint64(src)));
-            else 
-                throw unsupported<T>();
+            if(typeof(T) == typeof(byte) 
+            || typeof(T) == typeof(ushort) 
+            || typeof(T) == typeof(uint) 
+            || typeof(T) == typeof(ulong))
+                return vnegateu(in src);
+            else if(typeof(T) == typeof(sbyte) 
+            || typeof(T) == typeof(short) 
+            || typeof(T) == typeof(int) 
+            || typeof(T) == typeof(long))
+                return vnegatei(src);
+            else return gfpv.vnegate(in src);
         }
+
+        [MethodImpl(Inline)]
+        static Vec128<T> vnegatei<T>(in Vec128<T> lhs)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(sbyte))
+                 return generic<T>(dinx.vnegate(in int8(in lhs)));
+            else if(typeof(T) == typeof(short))
+                 return generic<T>(dinx.vnegate(in int16(in lhs)));
+            else if(typeof(T) == typeof(int))
+                 return generic<T>(dinx.vnegate(in int32(in lhs)));
+            else
+                 return generic<T>(dinx.vnegate(in int64(in lhs)));
+        }
+
+        [MethodImpl(Inline)]
+        static Vec128<T> vnegateu<T>(in Vec128<T> lhs)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(byte))
+                return generic<T>(dinx.vnegate(in uint8(in lhs)));
+            else if(typeof(T) == typeof(ushort))
+                return generic<T>(dinx.vnegate(in uint16(in lhs)));
+            else if(typeof(T) == typeof(uint))
+                return generic<T>(dinx.vnegate(in uint32(lhs)));
+            else 
+                return generic<T>(dinx.vnegate(in uint64(in lhs)));
+        }
+
+        [MethodImpl(Inline)]
+        static Vec256<T> vnegatei<T>(in Vec256<T> lhs)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(sbyte))
+                 return generic<T>(dinx.vnegate(in int8(in lhs)));
+            else if(typeof(T) == typeof(short))
+                 return generic<T>(dinx.vnegate(in int16(in lhs)));
+            else if(typeof(T) == typeof(int))
+                 return generic<T>(dinx.vnegate(in int32(in lhs)));
+            else
+                 return generic<T>(dinx.vnegate(in int64(in lhs)));
+        }
+
+        [MethodImpl(Inline)]
+        static Vec256<T> vnegateu<T>(in Vec256<T> lhs)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(byte))
+                return generic<T>(dinx.vnegate(in uint8(in lhs)));
+            else if(typeof(T) == typeof(ushort))
+                return generic<T>(dinx.vnegate(in uint16(in lhs)));
+            else if(typeof(T) == typeof(uint))
+                return generic<T>(dinx.vnegate(in uint32(lhs)));
+            else 
+                return generic<T>(dinx.vnegate(in uint64(in lhs)));
+        }
+
     }
 }

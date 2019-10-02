@@ -28,7 +28,8 @@ dotnet sln add mkl/src/z0.mkl.csproj
 dotnet sln add mkl/test/z0.mkl.test.csproj
 
 
-dotnet sln add rng/src/z0.rng.csproj
+dotnet sln add rng/core/z0.rng.core.csproj
+
 
 dotnet sln add bits/src/z0.bits.csproj
 dotnet sln add bits/test/z0.bits.test.csproj

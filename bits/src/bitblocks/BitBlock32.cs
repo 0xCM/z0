@@ -316,6 +316,54 @@ namespace Z0
         public BitBlock2 Block2x15;
 
         /// <summary>
+        /// Block 0 of width 4
+        /// </summary>
+        [FieldOffset(0)]
+        public BitBlock4 Block4x0;
+
+        /// <summary>
+        /// Block 1 of width 4
+        /// </summary>
+        [FieldOffset(4)]
+        public BitBlock4 Block4x1;
+
+        /// <summary>
+        /// Block 2 of width 4
+        /// </summary>
+        [FieldOffset(8)]
+        public BitBlock4 Block4x2;
+
+        /// <summary>
+        /// Block 3 of width 4
+        /// </summary>
+        [FieldOffset(12)]
+        public BitBlock4 Block4x3;
+
+        /// <summary>
+        /// Block 4 of width 4
+        /// </summary>
+        [FieldOffset(16)]
+        public BitBlock4 Block4x4;
+
+        /// <summary>
+        /// Block 5 of width 4
+        /// </summary>
+        [FieldOffset(20)]
+        public BitBlock4 Block4x5;
+
+        /// <summary>
+        /// Block 6 of width 4
+        /// </summary>
+        [FieldOffset(24)]
+        public BitBlock4 Block4x6;
+
+        /// <summary>
+        /// Block 7 of width 4
+        /// </summary>
+        [FieldOffset(28)]
+        public BitBlock4 Block4x7;
+
+        /// <summary>
         /// Block 0 of width 8
         /// </summary>
         [FieldOffset(0)]
@@ -339,10 +387,27 @@ namespace Z0
         [FieldOffset(24)]
         public BitBlock8 Block8x3;
 
+        /// <summary>
+        /// Block 0 of width 16
+        /// </summary>
+        [FieldOffset(0)]
+        public BitBlock16 Block16x0;
+         
+        /// <summary>
+        /// Block 1 of width 16
+        /// </summary>
+        [FieldOffset(16)]
+        public BitBlock16 Block16x1;
+
         [MethodImpl(Inline)]
         public Span<byte> AsSpan()
-            => BitView.ViewBits(ref this).Bytes;        
-                
+            => Spans.AsSpan(ref this);
+
+        [MethodImpl(Inline)]
+        public Span<T> AsSpan<T>()
+            where T : unmanaged
+            => Spans.AsSpan<BitBlock32, T>(ref this);
+
         [MethodImpl(Inline)]
         public byte GetPart(int i)
             => Unsafe.Add(ref Unsafe.As<BitBlock32, byte>(ref this), i);

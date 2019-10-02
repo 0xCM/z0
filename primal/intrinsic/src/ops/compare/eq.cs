@@ -35,7 +35,7 @@ namespace Z0
         /// </algirithm>
         [MethodImpl(Inline)]
         public static Vec128Cmp<sbyte> eq(in Vec128<sbyte> lhs, in Vec128<sbyte> rhs)
-            => Vec128Cmp.Define<sbyte>(CompareEqual(lhs,rhs));
+            => Vec128Cmp.Define<sbyte>(CompareEqual(lhs.xmm, rhs.xmm));
             
         /// <summary>
         /// __m128i _mm_cmpeq_epi8 (__m128i a, __m128i b) PCMPEQB xmm, xmm/m128
@@ -51,7 +51,7 @@ namespace Z0
         /// </algirithm>
         [MethodImpl(Inline)]
         public static Vec128Cmp<byte> eq(in Vec128<byte> lhs, in Vec128<byte> rhs)
-            => Vec128Cmp.Define<byte>(CompareEqual(lhs,rhs));
+            => Vec128Cmp.Define<byte>(CompareEqual(lhs.xmm, rhs.xmm));
 
         /// <summary>
         ///  __m128i _mm_cmpeq_epi16 (__m128i a, __m128i b) PCMPEQW xmm, xmm/m128 
@@ -61,7 +61,7 @@ namespace Z0
         /// <param name="rhs">The right vector</param>
         [MethodImpl(Inline)]
         public static Vec128Cmp<short> eq(in Vec128<short> lhs, in Vec128<short> rhs)
-            => Vec128Cmp.Define<short>(CompareEqual(lhs,rhs));
+            => Vec128Cmp.Define<short>(CompareEqual(lhs.xmm, rhs.xmm));
 
         /// <summary>
         ///  __m128i _mm_cmpeq_epi16 (__m128i a, __m128i b) PCMPEQW xmm, xmm/m128 
@@ -71,7 +71,7 @@ namespace Z0
         /// <param name="rhs">The right vector</param>
         [MethodImpl(Inline)]
         public static Vec128Cmp<ushort> eq(in Vec128<ushort> lhs, in Vec128<ushort> rhs)
-            => Vec128Cmp.Define<ushort>(CompareEqual(lhs,rhs));
+            => Vec128Cmp.Define<ushort>(CompareEqual(lhs.xmm, rhs.xmm));
 
         /// <summary>
         /// __m128i _mm_cmpeq_epi32 (__m128i a, __m128i b) PCMPEQD xmm, xmm/m128
@@ -81,7 +81,7 @@ namespace Z0
         /// <param name="rhs">The right vector</param>
         [MethodImpl(Inline)]
         public static Vec128Cmp<int> eq(in Vec128<int> lhs, in Vec128<int> rhs)
-            => Vec128Cmp.Define<int>(CompareEqual(lhs,rhs));
+            => Vec128Cmp.Define<int>(CompareEqual(lhs.xmm, rhs.xmm));
 
         /// <summary>
         /// __m128i _mm_cmpeq_epi32 (__m128i a, __m128i b) PCMPEQD xmm, xmm/m128
@@ -91,7 +91,7 @@ namespace Z0
         /// <param name="rhs">The right vector</param>
         [MethodImpl(Inline)]
         public static Vec128Cmp<uint> eq(in Vec128<uint> lhs, in Vec128<uint> rhs)
-            => Vec128Cmp.Define<uint>(CompareEqual(lhs,rhs));
+            => Vec128Cmp.Define<uint>(CompareEqual(lhs.xmm, rhs.xmm));
 
         /// <summary>
         /// __m128i _mm_cmpeq_epi64 (__m128i a, __m128i b) PCMPEQQ xmm, xmm/m128
@@ -101,7 +101,7 @@ namespace Z0
         /// <param name="rhs">The right vector</param>
         [MethodImpl(Inline)]
         public static Vec128Cmp<long> eq(in Vec128<long> lhs, in Vec128<long> rhs)
-            => Vec128Cmp.Define<long>(CompareEqual(lhs,rhs));
+            => Vec128Cmp.Define<long>(CompareEqual(lhs.xmm, rhs.xmm));
 
         /// <summary>
         /// __m128i _mm_cmpeq_epi64 (__m128i a, __m128i b) PCMPEQQ xmm, xmm/m128
@@ -111,7 +111,7 @@ namespace Z0
         /// <param name="rhs">The right vector</param>
         [MethodImpl(Inline)]
         public static Vec128Cmp<ulong> eq(in Vec128<ulong> lhs, in Vec128<ulong> rhs)
-            => Vec128Cmp.Define<ulong>(CompareEqual(lhs,rhs));
+            => Vec128Cmp.Define<ulong>(CompareEqual(lhs.xmm, rhs.xmm));
 
         /// <summary>
         /// __m256i _mm256_cmpeq_epi8 (__m256i a, __m256i b) VPCMPEQB ymm, ymm, ymm/m256
@@ -128,7 +128,7 @@ namespace Z0
         /// </algorithm>
         [MethodImpl(Inline)]
         public static Vec256Cmp<sbyte> eq(in Vec256<sbyte> lhs, in Vec256<sbyte> rhs)
-            => Vec256Cmp.Define<sbyte>(CompareEqual(lhs,rhs));
+            => Vec256Cmp.Define<sbyte>(CompareEqual(lhs.ymm, rhs.ymm));
             
         /// <summary>
         /// __m256i _mm256_cmpeq_epi8 (__m256i a, __m256i b) VPCMPEQB ymm, ymm, ymm/m256
@@ -145,7 +145,7 @@ namespace Z0
         /// </algorithm>
         [MethodImpl(Inline)]
         public static Vec256Cmp<byte> eq(in Vec256<byte> lhs, in Vec256<byte> rhs)
-            => Vec256Cmp.Define<byte>(CompareEqual(lhs,rhs));
+            => Vec256Cmp.Define<byte>(CompareEqual(lhs.ymm, rhs.ymm));
 
         /// <summary>
         ///  __m256i _mm256_cmpeq_epi16 (__m256i a, __m256i b) VPCMPEQW ymm, ymm, ymm/m256
@@ -162,7 +162,7 @@ namespace Z0
         /// </algorithm>
         [MethodImpl(Inline)]
         public static Vec256Cmp<short> eq(in Vec256<short> lhs, in Vec256<short> rhs)
-            => Vec256Cmp.Define<short>(CompareEqual(lhs,rhs));
+            => Vec256Cmp.Define<short>(CompareEqual(lhs.ymm, rhs.ymm));
 
         /// <summary>
         /// __m256i _mm256_cmpeq_epi16 (__m256i a, __m256i b) VPCMPEQW ymm, ymm, ymm/m256 
@@ -179,7 +179,7 @@ namespace Z0
         /// </algorithm>
         [MethodImpl(Inline)]
         public static Vec256Cmp<ushort> eq(in Vec256<ushort> lhs, in Vec256<ushort> rhs)
-            => Vec256Cmp.Define<ushort>(CompareEqual(lhs,rhs));
+            => Vec256Cmp.Define<ushort>(CompareEqual(lhs.ymm, rhs.ymm));
 
         /// <summary>
         /// _mm256_cmpeq_epi32 (__m256i a, __m256i b) VPCMPEQD ymm, ymm, ymm/m256
@@ -196,7 +196,7 @@ namespace Z0
         /// </algorithm>
         [MethodImpl(Inline)]
         public static Vec256Cmp<int> eq(in Vec256<int> lhs, in Vec256<int> rhs)
-            => Vec256Cmp.Define<int>(CompareEqual(lhs,rhs));
+            => Vec256Cmp.Define<int>(CompareEqual(lhs.ymm, rhs.ymm));
 
         /// <summary>
         /// __m256i _mm256_cmpeq_epi32 (__m256i a, __m256i b) VPCMPEQD ymm, ymm, ymm/m256
@@ -213,7 +213,7 @@ namespace Z0
         /// </algorithm>
         [MethodImpl(Inline)]
         public static Vec256Cmp<uint> eq(in Vec256<uint> lhs, in Vec256<uint> rhs)
-            => Vec256Cmp.Define<uint>(CompareEqual(lhs,rhs));
+            => Vec256Cmp.Define<uint>(CompareEqual(lhs.ymm, rhs.ymm));
 
         /// <summary>
         /// __m256i _mm256_cmpeq_epi64 (__m256i a, __m256i b) VPCMPEQQ ymm, ymm, ymm/m256
@@ -230,7 +230,7 @@ namespace Z0
         /// </algorithm>
         [MethodImpl(Inline)]
         public static Vec256Cmp<long> eq(in Vec256<long> lhs, in Vec256<long> rhs)
-            => Vec256Cmp.Define<long>(CompareEqual(lhs,rhs));
+            => Vec256Cmp.Define<long>(CompareEqual(lhs.ymm, rhs.ymm));
 
         /// <summary>
         ///  __m256i _mm256_cmpeq_epi64 (__m256i a, __m256i b) VPCMPEQQ ymm, ymm, ymm/m256
@@ -247,6 +247,6 @@ namespace Z0
         /// </algorithm>
         [MethodImpl(Inline)]
         public static Vec256Cmp<ulong> eq(in Vec256<ulong> lhs, in Vec256<ulong> rhs)
-            => Vec256Cmp.Define<ulong>(CompareEqual(lhs,rhs));
+            => Vec256Cmp.Define<ulong>(CompareEqual(lhs.ymm, rhs.ymm));
     }
 }

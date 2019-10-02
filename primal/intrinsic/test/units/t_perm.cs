@@ -13,7 +13,7 @@ namespace Z0.Test
     using static zfunc;
     using static nfunc;
 
-    public class t_perm : UnitTest<t_perm>
+    public class t_perm : IntrinsicTest<t_perm>
     {
         public void perm_invert()
         {

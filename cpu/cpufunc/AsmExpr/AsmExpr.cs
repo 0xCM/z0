@@ -9,12 +9,11 @@ namespace Z0
 
     using static zfunc;
 
-
     public abstract class AsmExpr
     {
 
+        public static AsmInstrExpr Define(MnemonicKind mnemonic, params AsmExpr[] args)
+            => new AsmInstrExpr(mnemonic, args);
     }
-
-
 
 }

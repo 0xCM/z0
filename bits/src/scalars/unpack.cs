@@ -52,7 +52,6 @@ namespace Z0
         public static Span<byte> unpack(ushort src)
             => unpack(src, new byte[Pow2.T04]);
 
-
         /// <summary>
         /// Populates a target span with 32 bits from the source
         /// </summary>

@@ -13,7 +13,7 @@
     <ProjectReference Include="$(TopDir)primal/intrinsic/src/z0.intrinsic.csproj" />
     <ProjectReference Include="$(TopDir)bits/src/z0.bits.csproj" />
 
-    <ProjectReference Include="$(TopDir)rng/src/z0.rng.csproj" />
+    <ProjectReference Include="$(TopDir)rng/core/z0.rng.core.csproj" />    
     <ProjectReference Include="$(TopDir)rng/system/z0.rng.system.csproj" />
     <ProjectReference Include="$(TopDir)machines/src/z0.machines.csproj" />
     <ProjectReference Include="$(TopDir)testing/z0.testing.csproj" />

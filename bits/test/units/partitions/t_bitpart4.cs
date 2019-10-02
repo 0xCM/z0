@@ -13,8 +13,6 @@ namespace Z0
 
     public class t_bitpart4 : BitPartTest<t_bitpart4>
     {
-
-
         public void bitpart_32x4()
         {
             var count = (int)Part32x4.Count;

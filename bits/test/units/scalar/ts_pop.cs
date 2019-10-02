@@ -19,7 +19,8 @@ namespace Z0.Test
             var bitsPC = bits.PopCount();
             Claim.eq(6,bitsPC);
 
-            src.Unpack(out Span<byte> bytes);
+            var bytes = Unmanaged.ByteSpan(ref src);
+            //src.Unpack(out Span<byte> bytes);
             Claim.eq(2, bytes.Length);
             
             var bytesPC = bytes.PopCount();

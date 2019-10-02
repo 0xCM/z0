@@ -13,7 +13,7 @@ namespace Z0.Test
     using static zfunc;
 
 
-    public class tv_sub : UnitTest<tv_sub>
+    public class tv_sub : IntrinsicTest<tv_sub>
     {
         public void sub128()
         {

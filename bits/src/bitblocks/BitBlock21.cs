@@ -141,11 +141,6 @@ namespace Z0
         [FieldOffset(20)]
         public byte Bit20;
 
-        /// <summary>
-        ///  Bit 21
-        /// </summary>
-        [FieldOffset(21)]
-        public byte Bit21;
 
         /// <summary>
         /// Block 0 of width 3

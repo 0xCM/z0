@@ -16,7 +16,7 @@ namespace Z0
     partial class ginx
     {        
         [MethodImpl(Inline)]
-        public static Vector128<T> max<T>(Vector128<T> lhs, Vector128<T> rhs)
+        public static Vec128<T> max<T>(in Vec128<T> lhs, in Vec128<T> rhs)
             where T : unmanaged
         {
             if(typematch<T,sbyte>())
@@ -36,7 +36,7 @@ namespace Z0
         }
          
        [MethodImpl(Inline)]
-       public static Vector256<T> max<T>(Vector256<T> lhs, Vector256<T> rhs)
+       public static Vec256<T> max<T>(in Vec256<T> lhs, in Vec256<T> rhs)
             where T : unmanaged
         {
             if(typematch<T,sbyte>())

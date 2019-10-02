@@ -69,20 +69,6 @@ namespace Z0
             set => bits[0,System.Convert.ToByte(id)] = value;
         }
             
-        // public string FormatBits()
-        //     => bits.ToBitString().Format(blockWidth:8);
-
-
-        // public string Format()
-        // {
-        //     var bs = bits.ToBitString();
-        //     var maxix = Math.Min(DataSize, SlotNames.Length);
-        //     var sb = sbuild();
-        //     for(var i=0; i< maxix; i++)
-        //         sb.AppendLine($"{SlotNames[i]} = {bs[i]}");
-        //     return sb.ToString();
-        // }
-
         public ReadOnlySpan<T> Available
         {
             get

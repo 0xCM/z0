@@ -584,7 +584,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public BitVector128 Negate()
         {
-            xmm = dinx.negate(xmm);
+            xmm = dinx.vnegate(xmm);
             return this;
         }
 
@@ -605,7 +605,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public BitVector128 Sll(byte offset)
         {
-            xmm = dinx.sll(xmm,offset);
+            xmm = dinx.vsll(xmm,offset);
             return this;
         }
 
@@ -616,7 +616,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public BitVector128 Srl(byte offset)
         {
-            xmm = dinx.srl(xmm,offset);
+            xmm = dinx.vsrl(xmm,offset);
             return this;
         }
 
@@ -627,7 +627,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public BitVector128 RotR(byte offset)
         {
-            xmm = Bits.rotr(xmm, offset);
+            xmm = dinx.rotr(xmm, offset);
             return this;
         }
 
@@ -638,7 +638,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public BitVector128 RotL(byte offset)
         {
-            xmm = Bits.rotl(xmm, offset);
+            xmm = dinx.rotl(xmm, offset);
             return this;
         }
 

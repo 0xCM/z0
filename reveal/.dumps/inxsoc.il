@@ -1,4 +1,4 @@
-// 2019-10-01 10:52:13:732
+// 2019-10-01 18:19:09:859
 float inxs_add_32f(float x, float y)
 {
     IL_0000: ldarga.s x
@@ -11,14 +11,6 @@ float inxs_add_32f(float x, float y)
     IL_001D: ldc.i4.0
     IL_001E: call System.Single System.Runtime.Intrinsics.Vector128::GetElement<System.Single>(System.Runtime.Intrinsics.Vector128`1<System.Single>,System.Int32)
     IL_0023: ret
-
-}
-float inx_add_n32f(float x, float y)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: add
-    IL_0003: ret
 
 }
 double inxs_add64f(double x, double y)

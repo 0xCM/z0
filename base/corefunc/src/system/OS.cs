@@ -95,6 +95,13 @@ namespace Z0
             throw new Exception($"Attempting to liberate the memory range [{start.FormatHex(false)},{end.FormatHex(false)}] ({src.Length} bytes) for execution failed");     
         }
 
+        static void ThrowLiberationError(IntPtr pCode, ByteSize Length)
+        {
+            var start = (ulong)pCode;
+            var end = start + (ulong)Length;            
+            throw new Exception($"Attempting to liberate the memory range [{start.FormatHex(false)},{end.FormatHex(false)}] ({Length} bytes) for execution failed");     
+        }
+
         [MethodImpl(Inline)]
         public static IntPtr Liberate(ReadOnlySpan<byte> src)
         {
@@ -104,6 +111,14 @@ namespace Z0
             return pCode;
         }
 
+
+        [MethodImpl(Inline)]
+        public static IntPtr Liberate(MemoryBuffer buffer)
+        {
+            if (!OS.VirtualProtectEx(CurrentProcess, buffer.Pointer, (UIntPtr)(ulong)buffer.Length, 0x40, out uint _))
+                ThrowLiberationError(buffer.Pointer, buffer.Length);
+            return buffer.Pointer;
+        }
 
         static OS()
         {

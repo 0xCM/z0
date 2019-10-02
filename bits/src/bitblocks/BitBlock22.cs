@@ -10,7 +10,7 @@ namespace Z0
     using static zfunc;
 
     /// <summary>
-    /// Represents 21 bits with 21 bytes
+    /// Represents 22 bits with 22 bytes
     /// </summary>
     [StructLayout(LayoutKind.Explicit, Size=22)]
     public struct BitBlock22 : IBitBlock
@@ -146,12 +146,6 @@ namespace Z0
         /// </summary>
         [FieldOffset(21)]
         public byte Bit21;
-
-        /// <summary>
-        ///  Bit 21
-        /// </summary>
-        [FieldOffset(22)]
-        public byte Bit22;
 
         /// <summary>
         /// Block 0 of width 2

@@ -393,7 +393,12 @@ namespace Z0
         } 
 
         [MethodImpl(Inline)]
-        public static Vec128<T> Load<T>(in ReadOnlySpan<T> src, int offset = 0)
+        public static Vec128<T> Load<T>(ReadOnlySpan<T> src, int offset = 0)
+            where T : unmanaged  
+                =>  Load<T>(src, offset, out Vec128<T> _);    
+
+        [MethodImpl(Inline)]
+        public static Vec128<T> Load<T>(Span<T> src, int offset = 0)
             where T : unmanaged  
                 =>  Load<T>(src, offset, out Vec128<T> _);    
 

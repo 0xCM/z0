@@ -6,7 +6,7 @@ dotnet sln add ../base/corefunc/src/z0.corefunc.csproj
 dotnet sln add ../primal/math/src/z0.math.csproj
 dotnet sln add ../primal/intrinsic/src/z0.intrinsic.csproj
 
-dotnet sln add ../rng/src/z0.rng.csproj
+dotnet sln add ../rng/core/z0.rng.core.csproj
 dotnet sln add ../testing/z0.testing.csproj
 
 dotnet sln add src/z0.libm.csproj

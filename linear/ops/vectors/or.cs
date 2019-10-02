@@ -21,7 +21,7 @@ namespace Z0
             where N : ITypeNat, new()
             where T : unmanaged    
         {
-            gbitspan.or(x.Data,y.Data,dst.Data);
+            inxspan.or(x.Data,y.Data,dst.Data);
             return ref dst;
         }
 
@@ -30,7 +30,7 @@ namespace Z0
             where T : unmanaged
         {
             var dst = lhs.Replicate(true);
-            gbitspan.or(lhs.Data, rhs.Data, dst.Data);
+            inxspan.or(lhs.Data, rhs.Data, dst.Data);
             return dst;
         }
 

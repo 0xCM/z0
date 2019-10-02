@@ -67,6 +67,12 @@ namespace Z0
         public void SetPart(int i, byte value)
             => Unsafe.Add(ref Unsafe.As<BitBlock4, byte>(ref this), i) = value;
         
+        [MethodImpl(Inline)]
+        public byte Compress()
+        {
+            return math.or(Block2x0.Compress(), math.sll(Block2x1.Compress(), 2));
+        }
+
         public byte this [int i]
         {
             [MethodImpl(Inline)]

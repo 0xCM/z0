@@ -130,7 +130,7 @@ namespace Z0.Test
             var src = 32093283484328432ul;
             var bits = src.Unpack();
             var bitsPC = bits.PopCount();
-            src.Unpack(out Span<byte> bytes);
+            var bytes = Unmanaged.ByteSpan(ref src);
             var bytesPC = bytes.PopCount();
             Claim.eq(bitsPC, bytesPC);        
         }

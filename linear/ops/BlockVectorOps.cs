@@ -22,7 +22,7 @@ namespace Z0
             where T : unmanaged    
         {
             var dst = x.Replicate(true);
-            gbitspan.xor(x.Data,y.Data,dst.Data);
+            inxspan.xor(x.Data,y.Data,dst.Data);
             return dst;
         }
 
@@ -31,7 +31,7 @@ namespace Z0
             where N : ITypeNat, new()
             where T : unmanaged    
         {
-            gbitspan.sll(src.Data, offset, dst.Data);
+            inxspan.sll(src.Data, offset, dst.Data);
             return dst;
         }
 
@@ -50,7 +50,7 @@ namespace Z0
             where N : ITypeNat, new()
             where T : unmanaged    
         {
-            gbitspan.srl(src.Data,offset,dst.Data);
+            inxspan.srl(src.Data,offset,dst.Data);
             return ref dst;
         }
 

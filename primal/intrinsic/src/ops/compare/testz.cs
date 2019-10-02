@@ -22,13 +22,6 @@ namespace Z0
         /// </summary>
         /// <param name="src">The bit source</param>
         /// <param name="mask">The mask</param>
-        /// <algorithm>
-        /// IF (a[127:0] AND b[127:0] == 0)
-        /// 	ZF := 1
-        /// ELSE
-        /// 	ZF := 0
-        /// FI
-        /// </algorithm>
         [MethodImpl(Inline)]
         public static bool testz(in Vec128<byte> src, in Vec128<byte> mask)
             => TestZ(src.xmm, mask.xmm);        
@@ -179,13 +172,6 @@ namespace Z0
         /// </summary>
         /// <param name="src">The bit source</param>
         /// <param name="mask">The mask</param>
-        /// <algorithm>
-        /// IF (a[255:0] AND b[255:0] == 0)
-        /// 	ZF := 1
-        /// ELSE
-        /// 	ZF := 0
-        /// FI
-        /// </algorithm>
         [MethodImpl(Inline)]
         public static bool testz(in Vec256<ulong> src, in Vec256<ulong> mask)
             => TestZ(src.ymm, mask.ymm);        

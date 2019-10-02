@@ -20,36 +20,55 @@ namespace Z0
     public unsafe readonly ref struct MemoryBuffer
     {
         /// <summary>
-        /// Allocates a buffer
+        /// Allocates a a zero-filled unmanged buffer of specified size
         /// </summary>
         /// <param name="size">The buffer size in bytes</param>
         [MethodImpl(Inline)]
         public static MemoryBuffer Alloc(ByteSize size)
             => new MemoryBuffer(size);        
-        
+
+        /// <summary>
+        /// Allocates and fills an unmanaged buffer
+        /// </summary>
+        /// <param name="size">The buffer size in bytes</param>
+        [MethodImpl(Inline)]
+        public static MemoryBuffer Alloc(ReadOnlySpan<byte> content)
+            => new MemoryBuffer(content);        
+
         readonly IntPtr source;
 
         readonly IntPtr aligned;
 
-        readonly Span<byte> Buffer;
+        readonly Span<byte> content;
 
         [MethodImpl(Inline)]
         MemoryBuffer(ByteSize size)
         {
             this.source = Marshal.AllocHGlobal(size + 8);         
             this.aligned =new IntPtr(16 * ((long)source + 15)/16);
-            this.Buffer = new Span<byte>(aligned.ToPointer(), size);
+            this.content = new Span<byte>(aligned.ToPointer(), size);
             Clear();
+        }
+
+        [MethodImpl(Inline)]
+        MemoryBuffer(ReadOnlySpan<byte> content)
+            : this(content.Length)
+        {
+            
+            Fill(content);
         }
 
         /// <summary>
         /// Specifies the size of the buffer
         /// </summary>
-        public readonly ByteSize Size
+        public readonly ByteSize Length
         {
             [MethodImpl(Inline)]
-            get => Buffer.Length;
+            get => content.Length;
         }
+
+        public IntPtr Pointer
+            => aligned;
 
         /// <summary>
         /// Presents buffer content as span of specified cell type
@@ -58,14 +77,14 @@ namespace Z0
         [MethodImpl(Inline)]
         public Span<T> As<T>()
             where T : unmanaged
-                => Buffer.As<T>();
+                => content.As<T>();
 
         /// <summary>
         /// Zero-fills the buffer
         /// </summary>
         [MethodImpl(Inline)]
         public void Clear()
-            => Buffer.Clear();
+            => content.Clear();
 
         /// <summary>
         /// The first memory cell in the buffer, presented as a specified type
@@ -80,18 +99,18 @@ namespace Z0
         /// </summary>
         /// <param name="content">The source content</param>
         /// <typeparam name="T">The cell type</typeparam>
-        public void Fill<T>(Span<T> content)
+        public void Fill<T>(ReadOnlySpan<T> content)
             where T : unmanaged
         {
             var src = content.AsBytes();
-            if(src.Length <=  Buffer.Length)
+            if(src.Length <=  this.content.Length)
             {
-                if(src.Length < Buffer.Length)
+                if(src.Length < this.content.Length)
                     Clear();
-                src.CopyTo(Buffer);
+                src.CopyTo(this.content);
             }
             else
-                src.Slice(Size).CopyTo(Buffer);        
+                src.Slice(Length).CopyTo(this.content);        
         }
 
         /// <summary>
@@ -114,8 +133,8 @@ namespace Z0
         [MethodImpl(Inline)]
         public MemoryBuffer Replicate()
         {
-            var dst = Alloc(Size);
-            Buffer.CopyTo(dst.Buffer);
+            var dst = Alloc(Length);
+            content.CopyTo(dst.content);
             return dst;
         }
 
@@ -123,6 +142,7 @@ namespace Z0
         {
             Marshal.FreeHGlobal(source);
         }
+
 
     }
 
