@@ -23,14 +23,20 @@ namespace Z0
         /// <param name="rhs">The right value</param>
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
-        public static T or<T>(T lhs, T rhs)
+        public static T or<T>(in T lhs, in T rhs)
             where T : unmanaged
         {
-            if(unsignedint<T>())
+            if(typeof(T) == typeof(byte) 
+            || typeof(T) == typeof(ushort) 
+            || typeof(T) == typeof(uint) 
+            || typeof(T) == typeof(ulong))
                 return oru(lhs,rhs);
-            else if(signedint<T>())
+            else if(typeof(T) == typeof(sbyte) 
+            || typeof(T) == typeof(short) 
+            || typeof(T) == typeof(int) 
+            || typeof(T) == typeof(long))
                 return ori(lhs,rhs);
-            else throw unsupported<T>(); //return gfp.or(lhs,rhs);
+            else throw unsupported<T>();
         }
 
         /// <summary>
@@ -52,7 +58,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static T ori<T>(T lhs, T rhs)
+        static T ori<T>(in T lhs, in T rhs)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
@@ -66,7 +72,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static T oru<T>(T lhs, T rhs)
+        static T oru<T>(in T lhs, in T rhs)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))

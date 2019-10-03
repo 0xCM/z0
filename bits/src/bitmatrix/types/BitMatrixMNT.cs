@@ -258,11 +258,11 @@ namespace Z0
         /// <param name="index">The 0-based row index</param>
         [MethodImpl(Inline)]
         public BitVector<N,T> RowVector(int index)                    
-            => BitVector<N,T>.Load(RowData(index));                
+            => BitVector<N,T>.FromCells(RowData(index));                
 
         [MethodImpl(Inline)]
         public readonly BitVector<N,T> CopyRow(int index)                    
-            => BitVector<N,T>.Load(data.Slice(RowOffset(index), Layout.RowCellCount).Replicate());
+            => BitVector<N,T>.FromCells(data.Slice(RowOffset(index), Layout.RowCellCount).Replicate());
 
         /// <summary>
         /// Replaces an index-identied column of data with the content of a column vector

@@ -78,7 +78,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bool gteq(ulong lhs, ulong rhs)
             => lhs >= rhs;
-
-
     }
 }

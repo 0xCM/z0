@@ -22,7 +22,7 @@ namespace Z0
           /// <param name="lhs"></param>
           /// <param name="rhs"></param>
           [MethodImpl(Inline)]          
-          public static Vec128<byte> avg(in Vec128<byte> lhs, in Vec128<byte> rhs)
+          public static Vec128<byte> vavg(in Vec128<byte> lhs, in Vec128<byte> rhs)
                => Average(lhs,rhs);
 
           /// <summary>
@@ -31,7 +31,7 @@ namespace Z0
           /// <param name="lhs"></param>
           /// <param name="rhs"></param>
           [MethodImpl(Inline)]          
-          public static Vec128<ushort> avg(in Vec128<ushort> lhs,in Vec128<ushort> rhs)
+          public static Vec128<ushort> vavg(in Vec128<ushort> lhs,in Vec128<ushort> rhs)
                => Average(lhs,rhs);
 
           /// <summary>
@@ -41,7 +41,7 @@ namespace Z0
           /// <param name="rhs"></param>
           /// <returns></returns>
           [MethodImpl(Inline)]          
-          public static Vec256<byte> avg(in Vec256<byte> lhs,in Vec256<byte> rhs)
+          public static Vec256<byte> vavg(in Vec256<byte> lhs,in Vec256<byte> rhs)
                => Average(lhs,rhs);
 
           /// <summary>
@@ -50,7 +50,7 @@ namespace Z0
           /// <param name="lhs"></param>
           /// <param name="rhs"></param>
           [MethodImpl(Inline)]          
-          public static Vec256<ushort> avg(in Vec256<ushort> lhs,in Vec256<ushort> rhs)
+          public static Vec256<ushort> vavg(in Vec256<ushort> lhs,in Vec256<ushort> rhs)
                => Average(lhs,rhs);
      }
 

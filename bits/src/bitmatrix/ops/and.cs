@@ -130,9 +130,6 @@ namespace Z0
         {
             mathspan.and(A.Data, B.Data, C.Data);
             return ref C;
-        }
-
-
+        } 
     }
-
 }

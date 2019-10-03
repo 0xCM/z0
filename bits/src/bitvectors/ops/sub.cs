@@ -22,7 +22,7 @@ namespace Z0
         /// <param name="y">The right bitvector</param>
         [MethodImpl(Inline)]
         public static BitVector4 sub(BitVector4 x, BitVector4 y)
-            => math.add(x.data, negate(y.data));
+            => x + -y;
 
         /// <summary>
         /// Computes a new bitvector z = x & y from bitvectors x sub y

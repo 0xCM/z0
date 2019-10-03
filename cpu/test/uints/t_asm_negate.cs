@@ -10,19 +10,53 @@ namespace Z0
 
     public class t_asm_negate : AsmOpTest<t_asm_negate>
     {        
-        public void VerifyNegate()
+
+        public void negate_asm_8i()
         {
-            VerifyOp(AsmOps.Negate<sbyte>(), math.negate, SampleSize);
-            VerifyOp(AsmOps.Negate<byte>(), math.negate, SampleSize);
-            VerifyOp(AsmOps.Negate<short>(), math.negate, SampleSize);
-            VerifyOp(AsmOps.Negate<ushort>(), math.negate, SampleSize);
-            VerifyOp(AsmOps.Negate<int>(), math.negate, SampleSize);
-            VerifyOp(AsmOps.Negate<uint>(), math.negate, SampleSize);            
-            VerifyOp(AsmOps.Negate<long>(), math.negate, SampleSize);
-            VerifyOp(AsmOps.Negate<ulong>(), math.negate, SampleSize);
-            VerifyOp(AsmOps.Negate<float>(), math.negate, SampleSize);
-            VerifyOp(AsmOps.Negate<double>(), math.negate, SampleSize);
+            VerifyOp(AsmOps.Negate<sbyte>(), math.negate);
         }
+
+        public void negate_asm_8u()
+        {
+            VerifyOp(AsmOps.Negate<byte>(), math.negate);
+        }
+
+        public void negate_asm_16i()
+        {
+            VerifyOp(AsmOps.Negate<short>(), math.negate);
+        }
+
+        public void negate_asm_16u()
+        {
+            VerifyOp(AsmOps.Negate<ushort>(), math.negate);
+        }
+
+        public void negate_asm_32i()
+        {
+            VerifyOp(AsmOps.Negate<int>(), math.negate);
+        }
+
+        public void negate_asm_32u()
+        {
+            VerifyOp(AsmOps.Negate<uint>(), math.negate);            
+        }
+
+        public void negate_asm_64i()
+        {
+            VerifyOp(AsmOps.Negate<long>(), math.negate);
+        }
+
+        public void negate_asm_64u()
+        {
+            VerifyOp(AsmOps.Negate<ulong>(), math.negate);
+        }
+
+        public void negate_asm64f()
+        {
+            VerifyOp(AsmOps.Negate<float>(), math.negate);
+            VerifyOp(AsmOps.Negate<double>(), math.negate);
+        }
+
 
 
         void negate_bench<T>(SystemCounter subject = default, SystemCounter compare = default)

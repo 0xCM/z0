@@ -293,7 +293,7 @@ namespace Z0
             {
                 this.GetCells(i, out Vec256<uint> vLhs);
                 rhs.GetCells(i, out Vec256<uint> vRhs);
-                Bits.andn(vLhs,vRhs).StoreTo(ref data[i]);
+                dinx.vandn(vLhs,vRhs).StoreTo(ref data[i]);
             }
             return this;
         }
@@ -306,18 +306,6 @@ namespace Z0
             return dst;
         }
 
-        /// <summary>
-        /// Computes the Hadamard product of the source matrix and another of the same dimension
-        /// </summary>
-        /// <remarks>See https://en.wikipedia.org/wiki/Hadamard_product_(matrices)</remarks>
-        public readonly BitMatrix32 HProd(BitMatrix32 rhs)
-        {
-            var dst = Alloc();
-            for(var i=0; i<RowCount; i++)
-            for(var j=0; j<ColCount; j++)
-                dst[i,j] = GetBit(i,j) & rhs[i,j];
-            return dst;
-        }
 
         /// <summary>
         /// Loads a CPU vector from matrix content
@@ -338,20 +326,6 @@ namespace Z0
         public readonly BitSize Pop()
             => bitspan.pop(data);
 
-        /// <summary>
-        /// Converts the matrix to a bitvector
-        /// </summary>
-        [MethodImpl(Inline)]
-        public readonly BitVector<N1024,uint> ToBitVector()
-            => BitVector.Load(data, zfunc.n1024);
-
-        /// <summary>
-        /// Constructs a 32-node graph via the adjacency matrix interpretation
-        /// </summary>
-        /// <param name="src">The source matrix</param>
-        [MethodImpl(Inline)]    
-        public Graph<byte> ToGraph()
-            => BitGraph.FromMatrix<byte,N32,byte>(BitMatrix<N32,N32,byte>.Load(Bytes));
 
         [MethodImpl(Inline)]
         public string Format()

@@ -78,7 +78,6 @@ namespace Z0
         [FieldOffset(4)]
         public BitBlock4 Block4x1;
 
-
         [MethodImpl(Inline)]
         public byte GetPart(int i)
             => Unsafe.Add(ref Unsafe.As<BitBlock8, byte>(ref this), i);
@@ -87,8 +86,6 @@ namespace Z0
         public void SetPart(int i, byte value)
             => Unsafe.Add(ref Unsafe.As<BitBlock8, byte>(ref this), i) = value;
         
-
-
         public byte this [int i]
         {
             [MethodImpl(Inline)]
@@ -103,7 +100,6 @@ namespace Z0
 
         public override string ToString() 
             => Format();
-
     }
 
 }

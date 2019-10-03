@@ -13,14 +13,10 @@ namespace Z0
     using static zfunc;    
     using static Bits;
 
-    [StructLayout(LayoutKind.Explicit, Size = 1)]
+    [StructLayout(LayoutKind.Sequential, Size = 1)]
     public struct BitVector8 : IFixedScalarBits<BitVector8, byte>
     {
-        [FieldOffset(0)]
         internal byte data;
-
-        [FieldOffset(0)]
-        BitVector4 bv4;
 
         public static readonly BitVector8 Zero = 0;
 
@@ -124,7 +120,7 @@ namespace Z0
          
         [MethodImpl(Inline)]
         public static implicit operator BitVector<N8,byte>(in BitVector8 src)
-            => BitVector<N8,byte>.Load(src.data);
+            => BitVector<N8,byte>.FromCells(src.data);
 
         [MethodImpl(Inline)]
         public static implicit operator BitVector8(byte src)
@@ -335,17 +331,6 @@ namespace Z0
             set => Set(pos,value);
         }
 
-        /// <summary>
-        /// The vector's 4 least significant bits
-        /// </summary>
-        public BitVector4 Lo
-        {
-            [MethodImpl(Inline)]
-            get => bv4;
-            
-            [MethodImpl(Inline)]
-            set => bv4 = value;
-        }
 
         /// <summary>
         /// The vector's 4 most significant bits
@@ -391,15 +376,6 @@ namespace Z0
             get => Between(first, last);
         }
 
-        /// <summary>
-        /// Specifies the parity of the vector: 1 if the population count is odd, otherwise 0
-        /// </summary>
-        /// <remarks>See https://en.wikipedia.org/wiki/Parity_function</remarks>
-        public Bit Parity
-        {
-            [MethodImpl(Inline)]
-            get => odd(Pop());
-        }
 
         /// <summary>
         /// Extracts a contiguous sequence of bits defined by an inclusive range

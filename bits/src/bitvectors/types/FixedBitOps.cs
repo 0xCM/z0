@@ -171,7 +171,7 @@ namespace Z0
             where S : unmanaged
         {                
             var s = src.bv4.Scalar;
-            return Unsafe.As<UInt4,S>(ref s);
+            return Unsafe.As<byte,S>(ref s);
         }
 
         [MethodImpl(Inline)]
@@ -235,13 +235,13 @@ namespace Z0
             where S : unmanaged
         {
             if(typeof(V) == typeof(BitVector4))
-                return Unsafe.As<BitVector4,V>(ref asRef(in src.data.bv4));
+                return Unsafe.As<BitVector4,V>(ref asRef((BitVector4)src.data));
             else if(typeof(V) == typeof(BitVector8))
-                return Unsafe.As<BitVector8,V>(ref asRef(in src.data.bv8));
+                return Unsafe.As<BitVector8,V>(ref asRef((BitVector8)src.data));
             else if(typeof(V) == typeof(BitVector16))
-                return Unsafe.As<BitVector16,V>(ref asRef(in src.data.bv16));
+                return Unsafe.As<BitVector16,V>(ref asRef((BitVector16)src.data));
             else if(typeof(V) == typeof(BitVector32))
-                return Unsafe.As<BitVector32,V>(ref asRef(in src.data.bv32));
+                return Unsafe.As<BitVector32,V>(ref asRef((BitVector32)src.data));
             else if(typeof(V) == typeof(BitVector64))
                 return Unsafe.As<BitVector64,V>(ref asRef(in src.data));
             else 

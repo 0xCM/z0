@@ -15,27 +15,27 @@ namespace Z0.Test
 
     public class t_bvdot : BitVectorTest<t_bvdot>
     {
-        public void dot4()
+        public void bvdot_4u()
         {
             dot4_check();            
         }
 
-        public void dot8()
+        public void bvdot_8u()
         {
             dot8_check();            
         }
 
-        public void dot16()
+        public void bvdot_16u()
         {
             dot16_check();            
         }
 
-        public void dot32()
+        public void bv_dot_32u()
         {
             dot32_check();            
         }
 
-        public void dot64()
+        public void bv_dot_64u()
         {
             dot64_check();            
         }

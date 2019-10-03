@@ -21,7 +21,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public T Send(in T x)
-            => gbits.flip(x);
+            => gmath.flip(x);
 
         [MethodImpl(Inline)]
         public Vec128<T> Send(in Vec128<T> x)
@@ -29,7 +29,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public Vec256<T> Send(in Vec256<T> x)
-            => gbits.flip(x);
+            => ginx.vflip(x);
  
 
     }

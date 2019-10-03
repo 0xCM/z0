@@ -22,7 +22,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public T Send(in T x, in T y)
-            => gbits.flip(gbits.or(in x,in y));
+            => gmath.flip(gbits.or(in x,in y));
 
         [MethodImpl(Inline)]
         public Vec128<T> Send(in Vec128<T> x, in Vec128<T> y)

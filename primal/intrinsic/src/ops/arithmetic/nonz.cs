@@ -31,7 +31,7 @@ namespace Z0
         /// <param name="src">The vector to test</param>
         [MethodImpl(Inline)]
         public static bool nonz(in Vec128<sbyte> src)
-            => ! TestZ(src,src);        
+            => ! TestZ(src.xmm, src.xmm);        
 
         /// <summary>
         /// Returns true if the source vector is nonzero, false otherwise
@@ -39,7 +39,7 @@ namespace Z0
         /// <param name="src">The vector to test</param>
         [MethodImpl(Inline)]
         public static bool nonz(in Vec128<short> src)
-            => ! TestZ(src,src);        
+            => ! TestZ(src.xmm, src.xmm);        
 
         /// <summary>
         /// Returns true if the source vector is nonzero, false otherwise
@@ -47,7 +47,7 @@ namespace Z0
         /// <param name="src">The vector to test</param>
         [MethodImpl(Inline)]
         public static bool nonz(in Vec128<ushort> src)
-            => ! TestZ(src,src);        
+            => ! TestZ(src.xmm, src.xmm);        
 
         /// <summary>
         /// Returns true if the source vector is nonzero, false otherwise
@@ -55,7 +55,7 @@ namespace Z0
         /// <param name="src">The vector to test</param>
         [MethodImpl(Inline)]
         public static bool nonz(in Vec128<int> src)
-            => ! TestZ(src,src);        
+            => ! TestZ(src.xmm, src.xmm);        
 
         /// <summary>
         /// Returns true if the source vector is nonzero, false otherwise
@@ -63,7 +63,7 @@ namespace Z0
         /// <param name="src">The vector to test</param>
         [MethodImpl(Inline)]
         public static bool nonzero(in Vec128<uint> src)
-            => ! TestZ(src,src);        
+            => ! TestZ(src.xmm, src.xmm);        
 
         /// <summary>
         /// Returns true if the source vector is nonzero, false otherwise
@@ -71,7 +71,7 @@ namespace Z0
         /// <param name="src">The vector to test</param>
         [MethodImpl(Inline)]
         public static bool nonz(in Vec128<long> src)
-            => ! TestZ(src,src);        
+            => ! TestZ(src.xmm, src.xmm);        
 
         /// <summary>
         /// Returns true if the source vector is nonzero, false otherwise
@@ -79,7 +79,7 @@ namespace Z0
         /// <param name="src">The vector to test</param>
         [MethodImpl(Inline)]
         public static bool nonz(in Vec128<ulong> src) 
-            => ! TestZ(src,src);        
+            => ! TestZ(src.xmm, src.xmm);        
 
         /// <summary>
         /// Returns true if the source vector is nonzero, false otherwise
@@ -87,7 +87,7 @@ namespace Z0
         /// <param name="src">The vector to test</param>
         [MethodImpl(Inline)]
         public static bool nonz(in Vec128<float> src) 
-            => ! TestZ(src,src);        
+            => ! TestZ(src.xmm, src.xmm);        
 
         /// <summary>
         /// Returns true if the source vector is nonzero, false otherwise
@@ -95,7 +95,7 @@ namespace Z0
         /// <param name="src">The vector to test</param>
         [MethodImpl(Inline)]
         public static bool nonz(in Vec128<double> src) 
-            => ! TestZ(src,src);        
+            => ! TestZ(src.xmm, src.xmm);        
  
         /// <summary>
         /// Returns true if the source vector is nonzero, false otherwise

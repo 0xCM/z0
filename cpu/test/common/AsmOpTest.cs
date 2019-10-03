@@ -32,7 +32,6 @@ namespace Z0
         protected void VerifyOp<T>(AsmUnaryOp<T> asmop, Func<T,T> refop, int? n = null)
             where T : unmanaged
         {
-            TypeCaseStart<T>();
             var src = Random.Array<T>(n ?? SampleSize);
             var setup = from arg in src
                           let expect = refop(arg)
@@ -42,7 +41,6 @@ namespace Z0
                           where !r.success
                           select (r.expect, r.actual);
             Claim.eq(0, execute.Count());            
-            TypeCaseEnd<T>();
         }
 
         protected void VerifyOp<T>(AsmCode<T> code, Func<T,T,T> refop)

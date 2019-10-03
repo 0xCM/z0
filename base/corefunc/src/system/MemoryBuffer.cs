@@ -14,8 +14,7 @@ namespace Z0
     using static As;
 
     /// <summary>
-    /// Defines an immovable and unmanaged buffer that requires
-    /// explicit allocation as disposal
+    /// Defines an immovable and unmanaged buffer that requires explicit allocation as disposal
     /// </summary>
     public unsafe readonly ref struct MemoryBuffer
     {
@@ -35,20 +34,26 @@ namespace Z0
         public static MemoryBuffer Alloc(ReadOnlySpan<byte> content)
             => new MemoryBuffer(content);        
 
-        readonly IntPtr source;
-
-        readonly IntPtr aligned;
+        readonly IntPtr pMem;
 
         readonly Span<byte> content;
 
         [MethodImpl(Inline)]
         MemoryBuffer(ByteSize size)
         {
-            this.source = Marshal.AllocHGlobal(size + 8);         
-            this.aligned =new IntPtr(16 * ((long)source + 15)/16);
-            this.content = new Span<byte>(aligned.ToPointer(), size);
+            this.pMem = Marshal.AllocHGlobal(size);         
+            this.content = new Span<byte>(pMem.ToPointer(), size);
             Clear();
         }
+
+        // [MethodImpl(Inline)]
+        // MemoryBuffer(ByteSize size)
+        // {
+        //     this.source = Marshal.AllocHGlobal(size + 8);         
+        //     this.aligned =new IntPtr(16 * ((long)source + 15)/16);
+        //     this.content = new Span<byte>(aligned.ToPointer(), size);
+        //     Clear();
+        // }
 
         [MethodImpl(Inline)]
         MemoryBuffer(ReadOnlySpan<byte> content)
@@ -68,7 +73,7 @@ namespace Z0
         }
 
         public IntPtr Pointer
-            => aligned;
+            => pMem;
 
         /// <summary>
         /// Presents buffer content as span of specified cell type
@@ -140,7 +145,7 @@ namespace Z0
 
         public void Dispose()
         {
-            Marshal.FreeHGlobal(source);
+            Marshal.FreeHGlobal(pMem);
         }
 
 

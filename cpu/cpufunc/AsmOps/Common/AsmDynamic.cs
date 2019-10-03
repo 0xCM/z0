@@ -15,51 +15,81 @@ namespace Z0
     
     using static zfunc;
 
-
-    public readonly ref struct AsmDynamic
+    #if Experiment
+    public static class AsmDynamic
     {
-        public static AsmDynamic Create(params byte[] code)
-            => new AsmDynamic(code);
+        public static AsmDynamic32 Create(ReadOnlySpan<byte> code, N32 n)
+            => AsmDynamic32.Create(code);
 
-        public static AsmDynamic Create(ReadOnlySpan<byte> code)
-            => new AsmDynamic(code);
-
-        readonly MemoryBuffer code;
-
-        readonly string name;
-
-        readonly long pCode;
-
-        public AsmDynamic(ReadOnlySpan<byte> code, string name  = null)
-        {
-            this.code = MemoryBuffer.Alloc(code);
-            this.name = name ?? "anon";
-            this.pCode = (long)OS.Liberate(code);
-        }
-
-        public void Dispose()
-        {
-            code.Dispose();
-        }
-
-        public AsmBinOp<T> BinOp<T>()
-            where T : unmanaged
-        {
-            return AsmDelegate.CreateBinOp<T>(pCode,name);
-            // var t = typeof(T);
-            // var argTypes = new Type[]{t,t};
-            // var returnType = t;
-            // var method = new DynamicMethod(name, returnType, argTypes, t.Module);            
-            // var g = method.GetILGenerator();
-            // g.Emit(OpCodes.Ldarg_0);
-            // g.Emit(OpCodes.Ldarg_1);
-            // g.Emit(OpCodes.Ldc_I8, pCode);
-            // g.EmitCalli(OpCodes.Calli, CallingConvention.StdCall, returnType, argTypes);
-            // g.Emit(OpCodes.Ret);
-            // return (AsmBinOp<T>)method.CreateDelegate(typeof(AsmBinOp<T>));
-        }
+        public static AsmDynamic64 Create(ReadOnlySpan<byte> code, N64 n)
+            => AsmDynamic64.Create(code);
 
     }
 
+   /// <summary>
+    /// Encapsulates excecutable assembly blocks that are no more than 64 bytes in length
+    /// </summary>
+    public unsafe ref struct AsmDynamic32
+    {        
+        public const int BufferLength = 32;
 
+        public static AsmDynamic32 Create(ReadOnlySpan<byte> code)
+        {
+            if(code.Length > BufferLength)
+                throw Errors.TooManyBytes(code.Length, BufferLength);
+            return new AsmDynamic32(code);
+        }
+
+        fixed byte code[BufferLength];
+
+        byte* pCode;
+
+        AsmDynamic32(ReadOnlySpan<byte> src)
+        {            
+            for(var i=0; i<src.Length; i++)
+                this.code[i] =  src[i];
+            
+            fixed(byte* p = code)
+            {                
+                pCode = OS.Liberate(p, BufferLength);
+            }
+        }
+            
+        public AsmBinOp<T> BinOp<T>()
+            where T : unmanaged
+                => AsmDelegate.CreateBinOp<T>(pCode);
+    }
+
+    public unsafe ref struct AsmDynamic64
+    {        
+        public const int BufferLength = 64;        
+
+        public static AsmDynamic64 Create(ReadOnlySpan<byte> code)
+        {
+            if(code.Length > BufferLength)
+                throw Errors.TooManyBytes(code.Length, BufferLength);
+            return new AsmDynamic64(code);
+        }
+
+        fixed byte code[BufferLength];
+
+        byte* pCode;
+
+        AsmDynamic64(ReadOnlySpan<byte> src)
+        {            
+            for(var i=0; i<src.Length; i++)
+                this.code[i] =  src[i];
+            
+            fixed(byte* p = code)
+            {                
+                pCode = OS.Liberate(p, BufferLength);
+            }
+        }
+            
+        public AsmBinOp<T> BinOp<T>()
+            where T : unmanaged
+                => AsmDelegate.CreateBinOp<T>(pCode);
+    }
+
+    #endif
 }

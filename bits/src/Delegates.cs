@@ -76,7 +76,7 @@ namespace Z0
        readonly struct Flip<T>
             where T : unmanaged
         {
-            public static readonly UnaryOp<T> Op = gbits.flip<T>;
+            public static readonly UnaryOp<T> Op = gmath.flip<T>;
         }
     }
 }

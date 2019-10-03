@@ -172,7 +172,6 @@ namespace Z0
             return ref dst;
         }
 
-
         /// <summary>
         /// Partitions 32 bits from the source into 16 target segments of effective width 1 
         /// </summary>

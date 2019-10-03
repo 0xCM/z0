@@ -16,7 +16,7 @@ namespace Z0.Test
     public class t_bvdisable : BitVectorTest<t_bvdisable>
     {        
 
-        public void disable_after_16()
+        public void bv_disable_after_16()
         {
             var src = BitVector16.Ones;
             var dst = src.Replicate();
@@ -27,19 +27,19 @@ namespace Z0.Test
         public void bv_disable_g16()
         {
             bv_disable_check<ushort>(16);
-            bv_disable_check<N16,ushort>();
+            bv_disable_ng_check<N16,ushort>();
         }
 
         public void bv_disable_g32()
         {
             bv_disable_check<uint>(32);
-            bv_disable_check<N32,uint>();
+            bv_disable_ng_check<N32,uint>();
         }
 
         public void bv_disable_g64()
         {
             bv_disable_check<ulong>(64);
-            bv_disable_check<N64,ulong>();
+            bv_disable_ng_check<N64,ulong>();
         }
 
         public void bv_disable_g213()
@@ -50,11 +50,22 @@ namespace Z0.Test
             bv_disable_check<uint>(len);
             bv_disable_check<ulong>(len);
 
+        }
+
+        public void bv_disable_ng213()
+        {
             var n213 = nat(n2,n1,n3);
-            bv_disable_check(n213, (byte)0);
-            bv_disable_check(n213, (ushort)0);
-            bv_disable_check(n213, (uint)0);
-            bv_disable_check(n213, (ulong)0);
+            bv_disable_ng_check(n213, (byte)0);
+            bv_disable_ng_check(n213, (ushort)0);
+            bv_disable_ng_check(n213, (uint)0);
+            bv_disable_ng_check(n213, (ulong)0);
+        }
+
+        void bv_disable_ng707x64u()
+        {
+            var n707 = nat(n7,n0,n7);
+            Claim.eq(707,(int)n707.value);
+            bv_disable_ng_check(n707, (ulong)0);
 
         }
 
@@ -77,7 +88,7 @@ namespace Z0.Test
             }
         }
 
-        void bv_disable_check<N,T>(N n = default, T rep = default)
+        void bv_disable_ng_check<N,T>(N n = default, T rep = default)
             where T : unmanaged
             where N : ITypeNat, new()
         {

@@ -11,7 +11,7 @@ namespace Z0
     using static zfunc;
     using static BitParts;
 
-    public abstract class ScalarBitTest<T> : UnitTest<T>
+    public abstract class ScalarBitTest<T> : BitLibTest<T>
         where T : ScalarBitTest<T>, new()
     {
 

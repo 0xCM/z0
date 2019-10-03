@@ -48,10 +48,10 @@ namespace Z0.Test
             for(var i = 0; i< src.BlockCount; i++)
             {
                 var v = Vec128.Load(ref src.Block(i));
-                Claim.yea(gbits.nonz(v));
+                Claim.yea(ginx.nonz(v));
             }
             
-            Claim.nea(gbits.nonz(Vec128.Zero<T>()));
+            Claim.nea(ginx.nonz(Vec128.Zero<T>()));
             TypeCaseEnd<T>();
         }
 
@@ -63,10 +63,10 @@ namespace Z0.Test
             for(var i = 0; i< src.BlockCount; i++)
             {
                 var v = Vec256.Load(ref src.Block(i));
-                Claim.yea(gbits.nonz(v));
+                Claim.yea(ginx.nonz(v));
             }
             
-            Claim.nea(gbits.nonz(Vec256.Zero<T>()));
+            Claim.nea(ginx.nonz(Vec256.Zero<T>()));
             TypeCaseEnd<T>();
         }
 

@@ -12,7 +12,7 @@ namespace Z0
     using static zfunc;
     using static BitParts;
 
-    partial class Bits
+    partial class BitParts
     {
         /// <summary>
         /// Replicates the low bits of a source to an identified partition of an empty target

@@ -11,10 +11,8 @@ namespace Z0
 
     using static zfunc;    
 
-    [StructLayout(LayoutKind.Explicit, Size = 1)]
     public struct UInt4 : IEquatable<UInt4>
     {
-        [FieldOffset(0)]
         byte data;
 
         const byte MinValue = 0;
@@ -31,13 +29,13 @@ namespace Z0
         static readonly char[] HexMap 
             = new char[]{'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
 
-        static readonly byte[] ReverseMap
-            = new byte[]{
-                0b0000, 0b1000, 0b0100, 0b1100, 
-                0b0010, 0b1010, 0b0110, 0b1110, 
-                0b0001, 0b1001, 0b0101, 0b1101, 
-                0b0011, 0b1011, 0b0111, 0b1111, 
-                };
+        // static readonly byte[] ReverseMap
+        //     = new byte[]{
+        //         0b0000, 0b1000, 0b0100, 0b1100, 
+        //         0b0010, 0b1010, 0b0110, 0b1110, 
+        //         0b0001, 0b1001, 0b0101, 0b1101, 
+        //         0b0011, 0b1011, 0b0111, 0b1111, 
+        //         };
 
         /// <summary>
         /// Constructs a <see cref='UInt4'/> from a byte value in the range [0, 15]
@@ -130,25 +128,6 @@ namespace Z0
             if(x2 == 1) data |= (1 << 2);
             if(x3 == 1) data |= (1 << 3);
             return new UInt4(data);
-        }
-
-        /// <summary>
-        /// Constructs a <see cref='UInt4'/> from a sequence of bits presented in a bitspan
-        /// </summary>
-        /// <param name="src">The source bits, from lo to high, from which at most 4 will be consumed</param>
-        /// <param name="offset">The index in the span at which consumption should begin</param>
-        [MethodImpl(Inline)]
-        public static UInt4 FromBitSpan(ReadOnlySpan<Bit> src, int offset = 0)
-        {
-            var available = src.Length - offset;
-            if(available <= 0)
-                return FromByte(0);
-
-            return FromBits(
-                available > 0 ? src[offset + 0] : (Bit?)null,
-                available > 1 ? src[offset + 1] : (Bit?)null,
-                available > 2 ? src[offset + 2] : (Bit?)null,
-                available > 3 ? src[offset + 3] : (Bit?)null);
         }
 
         [MethodImpl(Inline)]

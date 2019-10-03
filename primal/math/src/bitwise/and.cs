@@ -125,7 +125,6 @@ namespace Z0
             return ref dst;
         }
             
-
         [MethodImpl(Inline)]
         public static ref sbyte and(ref sbyte lhs, sbyte rhs)
         {

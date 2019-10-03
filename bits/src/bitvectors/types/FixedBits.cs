@@ -102,65 +102,65 @@ namespace Z0
         internal BitVector4 bv4
         {
             [MethodImpl(Inline)]
-            get => data.bv4;
+            get => (BitVector4)data;
 
-            [MethodImpl(Inline)]
-            set => data.bv4 = value;
+            // [MethodImpl(Inline)]
+            // set => data.bv4 = value;
         }
 
         internal BitVector8 bv8
         {
             [MethodImpl(Inline)]
-            get => data.bv8;
+            get => (BitVector8)data;
 
-            [MethodImpl(Inline)]
-            set => data.bv8 = value;
+            // [MethodImpl(Inline)]
+            // set => data.bv8 = value;
         }
 
         internal BitVector16 bv16
         {
             [MethodImpl(Inline)]
-            get => data.bv16;
+            get => (BitVector16)data;
 
-            [MethodImpl(Inline)]
-            set => data.bv16 = value;
+            // [MethodImpl(Inline)]
+            // set => data.bv16 = value;
         }
 
         internal BitVector32 bv32
         {
             [MethodImpl(Inline)]
-            get => data.bv32;
+            get => (BitVector32)data;
             
-            [MethodImpl(Inline)]
-            set => data.bv32 = value;
+            // [MethodImpl(Inline)]
+            // set => data.bv32 = value;
         }
 
         [MethodImpl(Inline)]
         internal FixedBits(UInt4 bv)
             : this()
         {
-            this.bv4 = bv;
+            this.data = (byte)bv;
         }
 
         [MethodImpl(Inline)]
         internal FixedBits(byte bv)
             : this()
         {
-            this.bv8 = bv;
+            this.data = bv;
         }
 
         [MethodImpl(Inline)]
         internal FixedBits(ushort bv)
             : this()
         {
-            this.bv16 = bv;
+            this.data = bv;
         }
 
         [MethodImpl(Inline)]
         internal FixedBits(uint bv)
             : this()
         {
-            this.bv32 = bv;
+            this.data = bv;
         }
 
         [MethodImpl(Inline)]
@@ -174,28 +174,28 @@ namespace Z0
         internal FixedBits(BitVector4 bv)
             : this()
         {
-            this.bv4 = bv;
+            this.data = (byte)bv.Scalar;
         }
 
         [MethodImpl(Inline)]
         internal FixedBits(BitVector8 bv)
             : this()
         {
-            this.bv8 = bv;
+            this.data = bv;
         }
 
         [MethodImpl(Inline)]
         internal FixedBits(BitVector16 bv)
             : this()
         {
-            this.bv16 = bv;
+            this.data = bv;
         }
 
         [MethodImpl(Inline)]
         internal FixedBits(BitVector32 bv)
             : this()
         {
-            this.bv32 = bv;
+            this.data = bv;
         }
 
         [MethodImpl(Inline)]

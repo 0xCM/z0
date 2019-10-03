@@ -14,25 +14,7 @@ namespace Z0
     
     using static zfunc;
 
-    public readonly struct InputPair<T>
-        where T : unmanaged
-    {
-        public static implicit operator (T x, T y)(InputPair<T> src)
-            => (src.x, src.y);
 
-        public static implicit operator InputPair<T> ((T x, T y) src)
-            => new InputPair<T>(src.x, src.y);
-
-        public InputPair(T x, T y)
-        {
-            this.x = x;
-            this.y = y;
-        }
-
-        public readonly T x;
-
-        public readonly T y; 
-    }
 
     public readonly struct InPort<T>
         where T : unmanaged
@@ -77,7 +59,7 @@ namespace Z0
         where T : unmanaged
     {
 
-        public void Send(ReadOnlySequence<InputPair<T>> pairs)    
+        public void Send(ReadOnlySequence<InPair<T>> pairs)    
         {
 
         }

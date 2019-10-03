@@ -15,66 +15,10 @@ namespace Z0
     /// <summary>
     /// Defines a 64-bit bitvector
     /// </summary>
-    [StructLayout(LayoutKind.Explicit, Size = 8)]
+    [StructLayout(LayoutKind.Sequential, Size = 8)]
     public struct BitVector64 : IFixedScalarBits<BitVector64,ulong>
-    {
-        
-        [FieldOffset(0)]
-        internal BitVector4 bv4;
-
-        [FieldOffset(0)]
-        internal BitVector8 bv8;
-
-        [FieldOffset(0)]
-        internal BitVector16 bv16;
-
-        [FieldOffset(0)]
-        internal BitVector32 bv32;
-
-        [FieldOffset(0)]
+    {    
         internal ulong data;
-
-        [FieldOffset(0)]
-        uint x00;
-
-        [FieldOffset(4)]
-        uint x01;
-
-        [FieldOffset(0)]
-        ushort x000;
-
-        [FieldOffset(2)]
-        ushort x001;
-
-        [FieldOffset(4)]
-        ushort x010;
-
-        [FieldOffset(6)]
-        ushort x011;
-
-        [FieldOffset(0)]        
-        byte x0000;
-        
-        [FieldOffset(1)]
-        byte x0001;
-        
-        [FieldOffset(2)]
-        byte x0010;
-        
-        [FieldOffset(3)]
-        byte x0011;
-
-        [FieldOffset(4)]
-        byte x0100;
-        
-        [FieldOffset(5)]
-        byte x0101;
-        
-        [FieldOffset(6)]
-        byte x0110;
-        
-        [FieldOffset(7)]
-        byte x0111;
 
         public static readonly BitVector64 Zero = default;
 
@@ -179,7 +123,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator BitVector<N64,ulong>(in BitVector64 src)
-            => BitVector<N64,ulong>.Load(src.data);
+            => BitVector<N64,ulong>.FromCells(src.data);
 
         /// <summary>
         /// Implicitly converts an unsigned 64-bit integer to a 64-bit bitvector
@@ -196,6 +140,40 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator ulong(BitVector64 src)
             => src.data;        
+
+        /// <summary>
+        /// Explicitly converts a a 64-bit bitvector to an 8-bit bitvector
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        [MethodImpl(Inline)]
+        public static explicit operator BitVector4(BitVector64 src)
+            => BitVector4.FromScalar((byte)src.data);        
+
+
+
+        /// <summary>
+        /// Explicitly converts a a 64-bit bitvector to an 8-bit bitvector
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        [MethodImpl(Inline)]
+        public static explicit operator BitVector8(BitVector64 src)
+            => BitVector8.FromScalar((byte)src.data);        
+
+        /// <summary>
+        /// Explicitly converts a a 64-bit bitvector to a 16-bit bitvector
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        [MethodImpl(Inline)]
+        public static explicit operator BitVector16(BitVector64 src)
+            => BitVector16.FromScalar((ushort)src.data);        
+
+        /// <summary>
+        /// Explicitly converts a a 64-bit bitvector to a 32-bit bitvector
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        [MethodImpl(Inline)]
+        public static explicit operator BitVector32(BitVector64 src)
+            => BitVector32.FromScalar((uint)src.data);        
 
         /// <summary>
         /// Implicitly converts a scalar value to a 64-bit bitvector
@@ -402,24 +380,19 @@ namespace Z0
         /// <summary>
         /// The vector's 32 least significant bits
         /// </summary>
-        public BitVector32 Lo
+        public readonly BitVector32 Lo
         {
             [MethodImpl(Inline)]
-            get => bv32;
-
-            [MethodImpl(Inline)]
-            set => bv32 = value;
+            get => BitVector32.FromScalar((uint)data);
         }
 
         /// <summary>
         /// The vector's 32 most significant bits
         /// </summary>
-        public BitVector32 Hi
+        public readonly BitVector32 Hi
         {
             [MethodImpl(Inline)]
-            get => x01;
-            [MethodImpl(Inline)]
-            set => x01 = value;
+            get => BitVector32.FromScalar((uint)(data >> 32));
         }        
 
         /// <summary>

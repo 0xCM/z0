@@ -14,13 +14,6 @@ namespace Z0
 
     partial class bitvector
     {
-        /// <summary>
-        /// Defines an 4-bit bitvector from a 4-bit unsigned integer
-        /// </summary>
-        /// <param name="src">The source value</param>
-        [MethodImpl(Inline)]
-        public static BitVector4 from(UInt4 src)
-            => src;
 
         /// <summary>
         /// Defines an 8-bit bitvector from an 8-bit signed integer
@@ -120,7 +113,7 @@ namespace Z0
         /// <param name="src">The source segment</param>
         /// <param name="n">The bitvector length</param>
         [MethodImpl(Inline)]
-        public static BitVector<T> from<T>(T src, BitSize? n = null)
+        public static BitVector<T> from<T>(T src, BitSize n)
             where T : unmanaged
                 => BitVector<T>.FromCell(src,n);
 

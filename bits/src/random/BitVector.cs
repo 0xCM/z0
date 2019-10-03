@@ -38,7 +38,7 @@ namespace Z0
         /// <param name="random">The random source</param>
         [MethodImpl(Inline)]
         public static BitVector4 BitVector4(this IPolyrand random)
-            => random.NextUInt4();
+            => random.Next<byte>(0, 17);
 
         /// <summary>
         /// Produces a random 8-bit bitvector
@@ -148,7 +148,7 @@ namespace Z0
             IEnumerable<BitVector4> produce()
             {            
                 while(true)
-                    yield return random.NextUInt4();
+                    yield return random.BitVector4();
             }
 
             return stream(produce(), random.RngKind);            

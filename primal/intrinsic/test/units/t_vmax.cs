@@ -35,7 +35,7 @@ namespace Z0.Test
              
                 var vX = lhs.LoadVec128(block);
                 var vY = rhs.LoadVec128(block);
-                var vActual = ginx.max<int>(vX,vY);
+                var vActual = ginx.vmax<int>(vX,vY);
 
                 Claim.eq(vExpect, vActual);
 
@@ -65,7 +65,7 @@ namespace Z0.Test
              
                 var vX = lhs.LoadVec256(block);
                 var vY = rhs.LoadVec256(block);
-                var vActual = ginx.max<int>(vX,vY);
+                var vActual = ginx.vmax<int>(vX,vY);
 
                 Claim.eq(vExpect, vActual);
 

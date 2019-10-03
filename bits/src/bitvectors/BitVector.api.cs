@@ -47,7 +47,7 @@ namespace Z0
         public static BitVector<N,T> Load<N,T>(Span<T> src, N n = default)
             where N : ITypeNat, new()
             where T : unmanaged
-                => BitVector<N, T>.Load(src);
+                => BitVector<N, T>.FromCells(src);
 
         /// <summary>
         /// Loads a bitvector of natural length from a primal span
@@ -60,7 +60,7 @@ namespace Z0
         public static BitVector<N,T> Load<N,T>(ReadOnlySpan<T> src, N n = default)
             where N : ITypeNat, new()
             where T : unmanaged
-                => BitVector<N, T>.Load(src.ToSpan());
+                => BitVector<N, T>.FromCells(src.ToSpan());
 
         /// <summary>
         /// Loads a bitvector of natural length from an array
@@ -73,18 +73,8 @@ namespace Z0
         public static BitVector<N,T> Load<N,T>(T[] src, N n = default)
             where N : ITypeNat, new()
             where T : unmanaged
-                => BitVector<N, T>.Load(src);
+                => BitVector<N, T>.FromCells(src);
 
-        /// <summary>
-        /// Loads a generic bitvector from an array
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <param name="n">The vector length</param>
-        /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline)]
-        public static BitVector<T> Load<T>(T[] src, BitSize? n = null)
-            where T : unmanaged
-                => BitVector<T>.From(src, n);
 
         /// <summary>
         /// Loads a generic bitvector from a span
@@ -93,9 +83,9 @@ namespace Z0
         /// <param name="n">The vector length</param>
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
-        public static BitVector<T> Load<T>(Span<T> src, BitSize? n = null)
+        public static BitVector<T> Load<T>(Span<T> src, BitSize n)
             where T : unmanaged
-                => BitVector<T>.From(src, n);
+                => BitVector<T>.FromCells(src, n);
 
         /// <summary>
         /// Defines a generic bitvector with a specified number of components and bitlength
@@ -116,8 +106,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitVector<T> Load<T>(params T[] src)
             where T : unmanaged
-                => BitVector<T>.From(src,null);
-
+                => BitVector<T>.From(src, bitsize<T>()*src.Length);
  
         /// <summary>
         /// Computes the number of cells required to hold a specified number of bits
@@ -138,7 +127,7 @@ namespace Z0
         public static int CellCount<N,T>(N n = default)
             where T : unmanaged
             where N : ITypeNat, new()
-                => BitVector<N,T>.CellCount;
+                => BitVector<N,T>.MinCellCount;
 
     }
 }

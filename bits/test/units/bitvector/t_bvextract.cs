@@ -22,7 +22,7 @@ namespace Z0.Test
             {
                 var v1 = BitVector.Load(src[i]);
                 var v2 = BitVector64.FromScalar(src[i]);
-                Claim.eq(v1.ToBitVector(n64), v2);
+                Claim.eq(v1.ToPrimal(n64), v2);
 
                 var r1 = v1.SliceCell(lower[i], upper[i]);
                 var r2 = v2.Between(lower[i], upper[i]);
@@ -49,7 +49,7 @@ namespace Z0.Test
             {
                 var v1 = BitVector.Load(src[i]);
                 var v2 = BitVector32.FromScalar(src[i]);
-                Claim.eq(v1.ToBitVector32(),v2);
+                Claim.eq(v1.ToPrimal32(),v2);
 
                 var r1 = v1.SliceCell(lower[i], upper[i]);
                 var r2 = v2.Between(lower[i], upper[i]);
@@ -66,7 +66,7 @@ namespace Z0.Test
             {
                 var v1 = BitVector.Load(src[i]);
                 var v2 = BitVector16.FromScalar(src[i]);
-                Claim.eq(v1.ToBitVector16(),v2);
+                Claim.eq(v1.ToPrimal16(),v2);
 
                 var r1 = v1.SliceCell(lower[i], upper[i]);
                 var r2 = v2.Between(lower[i], upper[i]);

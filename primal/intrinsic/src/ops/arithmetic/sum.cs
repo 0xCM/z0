@@ -29,7 +29,7 @@ namespace Z0
                 offset += veclen;
                 var v2 = Vec128.Load(src, offset);
                 offset += veclen;
-                var vSum = hadd(v1, v2);
+                var vSum = vhadd(v1, v2);
                 dst = vadd(dst,vSum);                
             }
             
@@ -58,7 +58,7 @@ namespace Z0
                 offset += veclen;
                 var v2 = Vec128.Load(src, offset);
                 offset += veclen;
-                var vSum = hadd(v1, v2);
+                var vSum = vhadd(v1, v2);
                 dst = vadd(dst,vSum);                
             }
             

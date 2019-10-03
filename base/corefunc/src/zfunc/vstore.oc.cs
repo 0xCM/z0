@@ -25,16 +25,6 @@ namespace Z0
 
         public static void vstore_g128x8u(Vec128<byte> src, ref byte dst)
             => vstore(src, ref dst);
-        /*
-        VEX.[NDS].<BitWidth>.[66 | F2 | F3].[0F | 0F3A | 0F38].<WIG | W0 | W1>
-                             ^ VEX.pp        ^ Opcocde map     ^ Treatment of VEX.W field
-        ;VEX.128.66.0F.WIG 10 /r VMOVUPD xmm1, xmm2/m128
-        ;Moves 128 bits of packed double-precision floating-point values from the source operand (second operand) to the destination operand (first operand)
-        ;Op1 = ModRM:reg (w)
-        ;Op2 = ModRM:r/m (r)
-        ;c5 f9 10 01
-        vmovupd xmm0,[rcx]            
-        */
 
         public static unsafe void vstore_n128x8i(Vector128<sbyte> src, ref sbyte dst)
             => Store(refptr(ref dst), src);            

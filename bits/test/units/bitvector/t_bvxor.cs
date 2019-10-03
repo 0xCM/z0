@@ -29,6 +29,17 @@ namespace Z0
                     
         }
 
+        public void bvxor_n13x8u_check()
+        {
+            var x0 = Random.BitVector<N13,byte>();
+            var y0 = Random.BitVector<N13,byte>();
+            var z0 = x0 ^ y0;
+            var x1 = x0.ToPrimal16();
+            var y1 = y0.ToPrimal16();
+            var z1 = x1 ^ y1;
+            Claim.eq(z0.ToPrimal16(),z1);
+        }
+
         public void bvxor_g8_fixed()
         {
             bv_xor_check<BitVector8,byte>();

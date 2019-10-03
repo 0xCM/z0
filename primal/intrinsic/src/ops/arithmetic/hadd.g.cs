@@ -21,9 +21,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(short))
-                return generic<T>(dinx.hadd(int16(lhs), int16(rhs)));
+                return generic<T>(dinx.vhadd(int16(lhs), int16(rhs)));
             else if(typematch<T,int>())
-                return generic<T>(dinx.hadd(int32(lhs), int32(rhs)));
+                return generic<T>(dinx.vhadd(int32(lhs), int32(rhs)));
             else 
                 throw unsupported<T>();
         }
@@ -33,9 +33,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(short))
-                return generic<T>(dinx.hadd(int16(lhs), int16(rhs)));
+                return generic<T>(dinx.vhadd(int16(lhs), int16(rhs)));
             else if(typematch<T,int>())
-                return generic<T>(dinx.hadd(int32(lhs), int32(rhs)));
+                return generic<T>(dinx.vhadd(int32(lhs), int32(rhs)));
             else 
                 throw unsupported<T>();
         }

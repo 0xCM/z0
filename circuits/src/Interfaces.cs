@@ -12,8 +12,10 @@ namespace Z0
     using static zfunc;
 
     /// <summary>
-    /// Characterizes a logic gate, a device of sorts that receives one or more input
-    /// values and emits a single value
+    /// Represents one (or more) logic gates
+    /// A logic gate is a physical component that receives one 
+    /// or more bits of input and emits a single bit of output; in other words,
+    /// it reifies a boolean function
     /// </summary>
     public interface ILogicGate
     {
@@ -46,7 +48,7 @@ namespace Z0
 
 
     /// <summary>
-    /// Characterizes a logic gate that accepts one parametric input
+    /// Characterizes a set of logic gates where each member accepts 1 bit of input
     /// </summary>
     /// <typeparam name="T">A type that defines a finite sequence of bits</typeparam>
     public interface IUnaryGate<T> : IUnaryBitGate
@@ -56,7 +58,7 @@ namespace Z0
     }
 
     /// <summary>
-    /// Characterizes a logic gate that accepts two parametric inputs 
+    /// Characterizes a set of logic gates where each member accepts 2 bits of input 
     /// </summary>
     /// <typeparam name="T">A type that defines a finite sequence of bits</typeparam>
     public interface IBinaryGate<T> : IBinaryBitGate
@@ -66,7 +68,7 @@ namespace Z0
     }
 
     /// <summary>
-    /// Characterizes a logic gate that accepts three parametric inputs 
+    /// Characterizes a set of logic gates where each member accepts 3 bits of input 
     /// </summary>
     /// <typeparam name="T">A type that defines a finite sequence of bits</typeparam>
     public interface ITernaryGate<T> : ITernaryBitGate

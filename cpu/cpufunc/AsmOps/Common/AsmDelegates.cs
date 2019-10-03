@@ -100,6 +100,7 @@ namespace Z0
                 
         }
 
+
         public static AsmBinOp<T> CreateBinOp<T>(long pCode, string name = null)
             where T : unmanaged
         {
@@ -114,6 +115,30 @@ namespace Z0
             g.EmitCalli(OpCodes.Calli, CallingConvention.StdCall, returnType, argTypes);
             g.Emit(OpCodes.Ret);
             return (AsmBinOp<T>)method.CreateDelegate(typeof(AsmBinOp<T>));
+        }
+
+
+        /// <summary>
+        /// Creates a binary assembly operator 
+        /// </summary>
+        /// <param name="code">The code to execute</param>
+        /// <param name="name">The operator name</param>
+        /// <typeparam name="T">The operand type</typeparam>
+        public static AsmBinOp<T> CreateBinOp<T>(byte* pCode, string name = null)
+            where T : unmanaged
+        {
+            var t = typeof(T);
+            var argTypes = new Type[]{t,t};
+            var returnType = t;
+            var method = new DynamicMethod(name ?? "anon", returnType, argTypes, t.Module);            
+            var g = method.GetILGenerator();
+            g.Emit(OpCodes.Ldarg_0);
+            g.Emit(OpCodes.Ldarg_1);
+            g.Emit(OpCodes.Ldc_I8, (long)pCode);
+            g.EmitCalli(OpCodes.Calli, CallingConvention.StdCall, returnType, argTypes);
+            g.Emit(OpCodes.Ret);
+            return (AsmBinOp<T>)method.CreateDelegate(typeof(AsmBinOp<T>));
+                
         }
 
     }

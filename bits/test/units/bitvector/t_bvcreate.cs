@@ -63,27 +63,60 @@ namespace Z0.Test
             }
         }
 
-        public void bvcreate_8g_fixed()
+        
+        public void bvcreate_ng13x8u()
         {
-            bv_create_fixedG<BitVector8,byte>();
+            var dim = n13;
+            var bv = Random.BitVector<N13,byte>();
+            ClaimEqual(bv,bv.ToBitString());
+            
+            Claim.eq(dim, bv.Length);
+            Claim.eq(bitsize<byte>() * bv.CellCount, bv.Capacity);
+            Claim.eq(bv.Capacity - dim, bv.Unused);
+            bv.Fill(Bit.On);
+            Claim.eq(dim, bv.Pop());                    
         }
 
-        public void bvcreate_16g_fixed()
+        public void bvcreate_ng63x64u()
         {
-            bv_create_fixedG<BitVector16,ushort>();
+            bvcreate_natg_check<N63,ulong>();
+
         }
 
-        public void bvcreate_32g_fixed()
+        public void bvcreate_ng13x16u()
         {
-            bv_create_fixedG<BitVector32,uint>();
+            bvcreate_natg_check<N13,ushort>();
+
         }
 
-        public void bvcreate_64g_fixed()
+        public void bvcreate_ng32x32u()
         {
-            bv_create_fixedG<BitVector64,ulong>();
+            bvcreate_natg_check<N32,uint>();
+
         }
 
-        void bv_create_fixedG<V,S>()
+
+        public void bvcreate_p8g()
+        {
+            bv_create_gPrimal<BitVector8,byte>();
+        }
+
+        public void bvcreate_p16g()
+        {
+            bv_create_gPrimal<BitVector16,ushort>();
+        }
+
+        public void bvcreate_p32g()
+        {
+            bv_create_gPrimal<BitVector32,uint>();
+        }
+
+        public void bvcreate_p64g()
+        {
+            bv_create_gPrimal<BitVector64,ulong>();
+        }
+
+        void bv_create_gPrimal<V,S>()
             where V : unmanaged, IFixedScalarBits<V,S>
             where S : unmanaged
         {
@@ -97,66 +130,56 @@ namespace Z0.Test
             }
         }
 
-        public void bvcreate_g8u_unfixed()
+        public void bvcreate_g8u()
         {
-            create_generic_unfixed_check<byte>(128u);
-            create_generic_unfixed_check<byte>(124u);
-
+            create_generic_check<byte>(128u);
+            create_generic_check<byte>(124u);
         }
 
-        public void bvcreate_g16u_unfixed()
+        public void bvcreate_g16u()
         {
-            create_generic_unfixed_check<ushort>(125u);
-            create_generic_unfixed_check<ushort>(128u);
-            create_generic_unfixed_check<ushort>(13);
+            create_generic_check<ushort>(125u);
+            create_generic_check<ushort>(128u);
+            create_generic_check<ushort>(13);
         }
 
-        public void bvcreate_g32u_unfixed()
+        public void bvcreate_g32u()
         {
-            create_generic_unfixed_check<uint>(128u);
-            create_generic_unfixed_check<uint>(126);
-            create_generic_unfixed_check<uint>(32);            
+            create_generic_check<uint>(128u);
+            create_generic_check<uint>(126);
+            create_generic_check<uint>(32);            
         }
 
-        public void bvcreate_g64u_unfixed()
+        public void bvcreate_g64u()
         {
-            create_generic_unfixed_check<ulong>(127u);
-            create_generic_unfixed_check<ulong>(128u);
-            create_generic_unfixed_check<ulong>(63);
-
-        }
-
-        public void bvcreate_gnat_unfixed()
-        {
-            create_ngunfixed_check<N63,ulong>();
-            create_ngunfixed_check<N13,ushort>();
-            create_ngunfixed_check<N32,uint>();
+            create_generic_check<ulong>(127u);
+            create_generic_check<ulong>(128u);
+            create_generic_check<ulong>(63);
         }
 
         public void span_bits()
         {
             var src = Random.Span<byte>(Pow2.T03);
-            var bvSrc = BitVector64.FromScalar(BitConverter.ToUInt64(src));
+            var bv = BitVector64.FromScalar(BitConverter.ToUInt64(src));
+            Claim.eq(src.ToBitString(), bv.ToBitString());
 
             for(var i=0; i<src.Length; i++)
-            {
-                ref var x = ref src[i];
-                for(var j = 0; j < Pow2.T03; j++)
-                    Claim.eq(gbits.test(x,j), bvSrc.Test(i*Pow2.T03 + j));
-            }
+            for(var j = 0; j < Pow2.T03; j++)
+                Claim.eq(gbits.test(src[i],j), bv.Test(i*Pow2.T03 + j));
         }
 
 
         public void absolute_index()
         {
-            ulong z = 0b01011_00010_01110_11010_00111_00101_01110_10110;           
-            var bvz = bitvector.from(z,40);
+            ulong z = 0b01011_00010_01110_11010_00111_00101_01110_10110;     
+            var n = 40;      
+            var bvz = bitvector.from(z,n);
             Span<byte> xSrc =  BitConverter.GetBytes(z);
             var bvx = BitVector.Load(xSrc.Slice(0,5).ToArray());
             Claim.eq(gbits.pop(z), bvz.Pop());
             Claim.eq(gbits.pop(z), bvx.Pop());
 
-            for(var i=0; i<40; i++)
+            for(var i=0; i<n; i++)
                 Claim.eq(bvz[i], bvx[i]);
         }
 
@@ -255,7 +278,7 @@ namespace Z0.Test
 
         }
 
-        void create_ngunfixed_check<N,T>()
+        void bvcreate_natg_check<N,T>()
             where N : ITypeNat, new()
             where T : unmanaged
         {
@@ -266,14 +289,23 @@ namespace Z0.Test
             {
                 var bvSrc = src.Slice(i,segcount);
                 var bv = bvSrc.ToBitVector(dim);
+                ClaimEqual(bv,bv.ToBitString());
+                Claim.eq(dim.value, bv.Length);
+                Claim.eq(bitsize<T>() * bv.CellCount, bv.Capacity);
+                Claim.eq(bv.Capacity - dim.value, bv.Unused);
+
                 var x = src[i];
                 for(byte j = 0; j < (int)dim.value; j++)
-                    Claim.eq(gbits.test(x,j).ToBit(), bv[j]);                
+                    Claim.eq(gbits.test(x,j).ToBit(), bv[j]);     
+
+                // bv.Fill(Bit.On);
+                // Claim.eq(dim.value, bv.Pop());                    
 
             }
         }
 
-        void create_generic_unfixed_check<T>(BitSize dim)
+
+        void create_generic_check<T>(BitSize dim)
             where T : unmanaged
         {
             var segcount = BitSize.Segments<T>(dim);

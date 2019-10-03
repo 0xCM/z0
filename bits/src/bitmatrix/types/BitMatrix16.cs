@@ -281,7 +281,7 @@ namespace Z0
         {
             this.GetCells(out Vec256<ushort> vLhs);
             rhs.GetCells(out Vec256<ushort> vRhs);
-            Bits.andn(vLhs,vRhs).StoreTo(ref data[0]);
+            dinx.vandn(vLhs,vRhs).StoreTo(ref data[0]);
             return this;
         }
 
@@ -305,14 +305,6 @@ namespace Z0
                 dst.data[i] = ColData(i);
             return dst;
         }
-
-        /// <summary>
-        /// Constructs a 16-node graph via the adjacency matrix interpretation
-        /// </summary>
-        /// <param name="src">The source matrix</param>
-        [MethodImpl(Inline)]    
-        public Graph<byte> ToGraph()
-            => BitGraph.FromMatrix<byte,N16,byte>(BitMatrix<N16,N16,byte>.Load(Bytes));            
 
         /// <summary>
         /// Computes the Hadamard product of the source matrix and another of the same dimension
@@ -352,26 +344,9 @@ namespace Z0
             return dinx.testz(vSrc,vSrc);
         }
 
-        public readonly BitMatrix8 Block(N0 r0, N0 c0)
-        {
-            var r1 = r0 + 8;
-            var c1 = c0 + 8;
-            var dst = new byte[8];
-            for(int i=r0; i< r0; i++)                
-                dst[i] = Bits.lo(data[i]);
-            return BitMatrix8.From(dst);
-        }
-
         [MethodImpl(Inline)]
         public string Format()
             => Bytes.FormatMatrixBits(16);
-
-        /// <summary>
-        /// Converts the matrix to a bitvector
-        /// </summary>
-        [MethodImpl(Inline)]
-        public readonly BitVector<N256,ushort> ToBitVector()
-            => BitVector.Load(data, zfunc.n256);
 
         [MethodImpl(Inline)]
         unsafe readonly Vector256<ushort> GetCpuVec()

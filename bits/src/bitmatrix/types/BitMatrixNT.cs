@@ -199,7 +199,7 @@ namespace Z0
         /// <param name="index">The 0-based row index</param>
         [MethodImpl(Inline)]
         public BitVector<N,T> RowVector(int index)                    
-            => BitVector<N,T>.Load(RowData(index));                
+            => BitVector<N,T>.FromCells(RowData(index));                
 
         public readonly BitVector<N,T> Diagonal()
         {

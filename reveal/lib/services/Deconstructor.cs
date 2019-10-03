@@ -15,6 +15,17 @@ namespace Z0
 
     using static zfunc;
     
+    public class NoCodeException : Exception
+    {
+        public NoCodeException(string method)
+            : base($"No code was found for the method ${method}")
+        {
+            this.MethodName = method;
+        }
+
+        public string MethodName {get;}        
+    }
+
     /// <summary>
     /// Disassembles CLR methods
     /// </summary>
@@ -113,8 +124,10 @@ namespace Z0
                 }
                 
                 var asmBody = DecodeAsm(method);
-                var ilBytes = ReadCilBytes(clrMethod);            
-                Claim.eq(ilBytes, method.GetMethodBody().GetILAsByteArray()) ;
+                var ilBytes = ReadCilBytes(clrMethod);    
+                var ilBytes2 = method.GetMethodBody().GetILAsByteArray();
+                if(!ilBytes.ReallyEqual(ilBytes2))
+                    warn($"{method.DisplayName()}: IL byte mismatch");
                         
                 var d = new MethodDisassembly
                 {
@@ -130,6 +143,11 @@ namespace Z0
 
                 return d;            
             }
+            catch(NoCodeException)
+            {
+                warn($"{method.DisplayName()}: No code was found");
+                return none<MethodDisassembly>();
+            }
             catch(Exception e)
             {
                 onError(e.ToString());
@@ -141,7 +159,7 @@ namespace Z0
         {
             var data = ReadNativeContent(method);
             if(data.NativeCode.Length == 0)
-                throw new Exception($"No code found for method {method}");
+                throw new NoCodeException(method.ToString());
                 
             var instructions = new List<Instruction>();
             var blocks = new List<CodeBlock>();

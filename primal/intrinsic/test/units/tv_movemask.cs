@@ -23,7 +23,7 @@ namespace Z0.Test
             {
                 var srcVector = src.ToCpuVec256(i);
                 var extract = srcVector.ToArray();
-                var srcBv = extract.ToBitVector();
+                var srcBv = extract.ToBitVector(256);
                 Claim.eq(256, srcBv.Length);
 
                 var srcBvBs = srcBv.ToBitString();

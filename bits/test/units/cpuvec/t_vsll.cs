@@ -24,7 +24,6 @@ namespace Z0
             }
         }
 
-
         public void vsll_128x8u()
         {
             vsll_128_check<byte>();

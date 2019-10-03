@@ -295,17 +295,18 @@ namespace Z0
             return dst;                    
         }
 
-        public readonly BitMatrix64 AndNot(in BitMatrix64 rhs)
-        {
-            const int rowstep = 4;
-            for(var i=0; i< RowCount; i += rowstep)
-            {
-                this.GetCells(i, out Vec256<ulong> vLhs);
-                rhs.GetCells(i, out Vec256<ulong> vRhs);
-                Bits.andn(vLhs,vRhs).StoreTo(ref data[i]);                
-            }
-            return this;
-        }
+        public BitMatrix64 AndNot(in BitMatrix64 rhs)
+            => BitMatrix.andn(this, rhs, ref this);
+        // {
+        //     const int rowstep = 4;
+        //     for(var i=0; i< RowCount; i += rowstep)
+        //     {
+        //         this.GetCells(i, out Vec256<ulong> vLhs);
+        //         rhs.GetCells(i, out Vec256<ulong> vRhs);
+        //         dinx.vandn(vLhs,vRhs).StoreTo(ref data[i]);                
+        //     }
+        //     return this;
+        // }
 
         public readonly BitMatrix64 Transpose()
         {
@@ -317,19 +318,6 @@ namespace Z0
 
 
         /// <summary>
-        /// Computes the Hadamard product of the source matrix and another of the same dimension
-        /// </summary>
-        /// <remarks>See https://en.wikipedia.org/wiki/Hadamard_product_(matrices)</remarks>
-        public readonly BitMatrix64 HProd(BitMatrix64 rhs)
-        {
-            var dst = Alloc();
-            for(var i=0; i<RowCount; i++)
-            for(var j=0; j<ColCount; j++)
-                dst[i,j] = GetBit(i,j) & rhs[i,j];
-            return dst;
-        }
- 
-        /// <summary>
         /// Loads a CPU vector from matrix content
         /// </summary>
         /// <param name="dst">The target vector</param>
@@ -340,7 +328,6 @@ namespace Z0
             dst = load(ref data[row]);
             return ref dst;
         }
-
 
         /// <summary>
         /// Counts the number of enabled bits in the matrix
@@ -398,22 +385,7 @@ namespace Z0
         {
             BitMatrix.flip(ref this);
         }
-
-        /// <summary>
-        /// Converts the matrix to a bitvector
-        /// </summary>
-        [MethodImpl(Inline)]
-        public readonly BitVector<N4096,ulong> ToBitVector()
-            => BitVector.Load(data, zfunc.n4096);
-
-        /// <summary>
-        /// Constructs a 64-node graph via the adjacency matrix interpretation
-        /// </summary>
-        /// <param name="src">The source matrix</param>
-        [MethodImpl(Inline)]    
-        public Graph<byte> ToGraph()
-            => BitGraph.FromMatrix<byte,N32,byte>(BitMatrix<N32,N32,byte>.Load(Bytes));            
-
+ 
         [MethodImpl(Inline)] 
         public readonly BitMatrix64 Replicate()
             => From(data.ToArray()); 
@@ -423,7 +395,7 @@ namespace Z0
             => data.FormatMatrixBits(64);
 
         [MethodImpl(Inline)]
-        public readonly bool Equals(BitMatrix64 rhs)
+        public bool Equals(BitMatrix64 rhs)
             => this.AndNot(rhs).IsZero();
 
         public override bool Equals(object obj)

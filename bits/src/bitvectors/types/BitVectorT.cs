@@ -11,7 +11,6 @@ namespace Z0
 
     using static zfunc;    
 
-
     public ref struct BitVector<T>
         where T : unmanaged
     {
@@ -46,14 +45,6 @@ namespace Z0
         public static readonly BitSize CellCapacity = bitsize<T>();
 
         /// <summary>
-        /// Creates a bitvector defined by a single cell or portion thereof
-        /// </summary>
-        /// <param name="src">The source cell</param>
-        [MethodImpl(Inline)]
-        public static BitVector<T> FromCell(T src, BitSize? n = null)
-            => new BitVector<T>(src,n);
-
-        /// <summary>
         /// Computes the number of cells required to hold a specified number of bits
         /// </summary>
         /// <param name="len">The number of bits to store</param>
@@ -64,6 +55,57 @@ namespace Z0
             var q = Math.DivRem(len, CellCapacity, out int r);            
             return r == 0 ? q : q + 1;
         }
+
+        /// <summary>
+        /// Creates a bitvector defined by a single cell or portion thereof
+        /// </summary>
+        /// <param name="src">The source cell</param>
+        [MethodImpl(Inline)]
+        public static BitVector<T> FromCell(T src, BitSize n)
+            => new BitVector<T>(src,n);
+
+        /// <summary>
+        /// Creates a bitvector from a cell span
+        /// </summary>
+        /// <param name="src">The source bits</param>
+        /// <param name="n">The bitvector length</param>
+        [MethodImpl(Inline)]
+        public static BitVector<T> FromCells(Span<T> src, BitSize n)
+            => new BitVector<T>(src,n);
+        
+        /// <summary>
+        /// Creates a bitvector from a cell array, subject to a specified bitsize
+        /// </summary>
+        /// <param name="n">The length of the bitvector</param>
+        /// <param name="src">The source bits</param>
+        [MethodImpl(Inline)]
+        public static BitVector<T> From(T[] src, BitSize n)
+            => new BitVector<T>(src, n);
+
+        /// <summary>
+        /// Creates a bitvector from a span of bytes
+        /// </summary>
+        /// <param name="src">The source bits</param>
+        /// <param name="n">The bitvector length</param>
+        public static BitVector<T> FromBytes(Span<byte> src, BitSize n)
+        {
+            var q = Math.DivRem(src.Length, size<T>(), out int r);
+            var cellcount = r == 0 ? q : q + 1;
+            var capacity = (ByteSize)CellCapacity;
+            
+            var cells = new T[cellcount];
+            for(int i=0, offset = 0; i< cellcount; i++, offset += capacity)
+                cells[i] = src.Slice(offset).TakeScalar<T>();
+            return From(cells,n);
+        }
+
+        /// <summary>
+        /// Loads an bitvector of minimal size from a source bitstring
+        /// </summary>
+        /// <param name="src">The bitstring source</param>
+        [MethodImpl(Inline)]
+        public static BitVector<T> From(BitString src)
+            => FromBytes(src.ToPackedBytes(), src.Length);
 
         /// <summary>
         /// Allocates a generic bitvector
@@ -78,48 +120,8 @@ namespace Z0
             Span<T> cells = new T[CellCount(len)];            
             if(fill.HasValue)
                 cells.Fill(fill.Value);
-            return From(cells);
-        }
-
-        /// <summary>
-        /// Creates a bitvector from a cell span
-        /// </summary>
-        /// <param name="n">The length of the bitvector</param>
-        /// <param name="src">The source bits</param>
-        [MethodImpl(Inline)]
-        public static BitVector<T> From(Span<T> src, BitSize? n = null)
-            => new BitVector<T>(src,n);
-
-        public static BitVector<T> From(Span<byte> src, BitSize? n)
-        {
-            var q = Math.DivRem(src.Length, size<T>(), out int r);
-            var cellcount = r == 0 ? q : q + 1;
-            ByteSize capacity = (ByteSize)CellCapacity;
-            
-            var cells = new T[cellcount];
-            for(int i=0, offset = 0; i< cellcount; i++, offset += capacity)
-            {                
-                var seg = src.Slice(offset);
-                cells[i] = seg.TakeScalar<T>();
-            }
-            return From(cells,n);
-        }
-
-        /// <summary>
-        /// Loads an bitvector of minimal size from a source bitstring
-        /// </summary>
-        /// <param name="src">The bitstring source</param>
-        public static BitVector<T> From(BitString src)
-            => From(src.ToPackedBytes(),src.Length);
-        
-        /// <summary>
-        /// Creates a bitvector from a cell array, subject to a specified bitsize
-        /// </summary>
-        /// <param name="n">The length of the bitvector</param>
-        /// <param name="src">The source bits</param>
-        [MethodImpl(Inline)]
-        public static BitVector<T> From(T[] src, BitSize? n)
-            => new BitVector<T>(src, n);
+            return FromCells(cells,len);
+        }        
 
         /// <summary>
         /// Computes the bitwias AND between the operands
@@ -128,7 +130,7 @@ namespace Z0
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
         public static BitVector<T> operator &(BitVector<T> x, in BitVector<T> y)
-            => new BitVector<T>(mathspan.and(x.data, y.data));
+            => new BitVector<T>(mathspan.and(x.data, y.data),x.BitCount);
 
         /// <summary>
         /// Computes the bitwias AND between the operands
@@ -137,7 +139,7 @@ namespace Z0
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
         public static BitVector<T> operator |(BitVector<T> x, in BitVector<T> y)
-            => new BitVector<T>(mathspan.or(x.data, y.data));
+            => new BitVector<T>(mathspan.or(x.data, y.data),x.BitCount);
 
         /// <summary>
         /// Computes the bitwise XOR between the operands
@@ -146,7 +148,7 @@ namespace Z0
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
         public static BitVector<T> operator ^(BitVector<T> x, in BitVector<T> y)
-            => new BitVector<T>(mathspan.xor(x.data, y.data));
+            => new BitVector<T>(mathspan.xor(x.data, y.data),x.BitCount);
 
         /// <summary>
         /// Computes the scalar product of the operands
@@ -163,7 +165,7 @@ namespace Z0
         /// <param name="lhs">The source operand</param>
         [MethodImpl(Inline)]
         public static BitVector<T> operator ~(BitVector<T> src)
-            => new BitVector<T>(mathspan.flip(src.data));
+            => new BitVector<T>(mathspan.flip(src.data),src.BitCount);
 
         /// <summary>
         /// Returns true if the source vector is nonzero, false otherwise
@@ -190,28 +192,28 @@ namespace Z0
             => !lhs.Equals(rhs);
 
         [MethodImpl(Inline)]
-        BitVector(T src, BitSize? n = null)
+        BitVector(T src, BitSize n)
         {            
             this.data = new T[]{src};
             this.MaxBitCount = CellCapacity;
             this.SegLength = MaxBitCount;
-            this.BitCount = (int)(n ?? (uint)MaxBitCount);
+            this.BitCount = n;
             this.BitMap = BitSize.BitMap<T>(MaxBitCount);
         }
 
         [MethodImpl(Inline)]
-        BitVector(Span<T> src, BitSize? n = null)
+        BitVector(Span<T> src, BitSize n)
         {            
             this.data = src;
             this.MaxBitCount = src.Length * (int)CellCapacity;
-            this.BitCount = (int)(n ?? (uint)MaxBitCount);
+            this.BitCount = n;
             this.SegLength = BitSize.Segments<T>(MaxBitCount);            
             this.BitMap = BitSize.BitMap<T>(MaxBitCount);
         }
 
         [MethodImpl(Inline)]
-        BitVector(T[] src, BitSize? n = null)
-            : this(src.AsSpan(),n)
+        BitVector(T[] src, BitSize n)
+            : this(src.AsSpan(), n)
         {            
 
         }
@@ -271,15 +273,6 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => data.Length * CellCapacity;
-        }
-
-        /// <summary>
-        /// Returns a proxy that can be used where ref structs can't, but it's not free
-        /// </summary>
-        public readonly BitVectorProxy<T> Proxy
-        {
-            [MethodImpl(Inline)]
-            get => this;
         }
 
         /// <summary>
@@ -506,38 +499,38 @@ namespace Z0
 
     }
 
-    public readonly struct BitVectorProxy<T>
-        where T : unmanaged
-    {
-        readonly T[] data;
+    // public readonly struct BitVectorProxy<T>
+    //     where T : unmanaged
+    // {
+    //     readonly T[] data;
 
-        [MethodImpl(Inline)]
-        public static BitVectorProxy<T> From(BitVector<T> src)
-            => new BitVectorProxy<T>(src);
+    //     [MethodImpl(Inline)]
+    //     public static BitVectorProxy<T> From(BitVector<T> src)
+    //         => new BitVectorProxy<T>(src);
         
-        [MethodImpl(Inline)]
-        public static implicit operator BitVectorProxy<T>(BitVector<T> src)
-            => From(src);
+    //     [MethodImpl(Inline)]
+    //     public static implicit operator BitVectorProxy<T>(BitVector<T> src)
+    //         => From(src);
 
-        [MethodImpl(Inline)]
-        public static implicit operator BitVector<T>(BitVectorProxy<T> src)
-            => src.BitVector;
+    //     [MethodImpl(Inline)]
+    //     public static implicit operator BitVector<T>(BitVectorProxy<T> src)
+    //         => src.BitVector;
         
-        [MethodImpl(Inline)]
-        public BitVectorProxy(BitVector<T> src)
-        {
-            data = src.Data.ToArray();
-        }
+    //     [MethodImpl(Inline)]
+    //     public BitVectorProxy(BitVector<T> src)
+    //     {
+    //         data = src.Data.ToArray();
+    //     }
 
-        /// <summary>
-        /// The subject of the proxy, in this case a T-bitvector
-        /// </summary>
-        public BitVector<T> BitVector
-        {
-            [MethodImpl(Inline)]
-            get => BitVector<T>.From(data,null);
-        }
+    //     /// <summary>
+    //     /// The subject of the proxy, in this case a T-bitvector
+    //     /// </summary>
+    //     public BitVector<T> BitVector
+    //     {
+    //         [MethodImpl(Inline)]
+    //         get => BitVector<T>.From(data,null);
+    //     }
 
-    }
+    // }
 
 }

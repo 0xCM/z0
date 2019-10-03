@@ -19,6 +19,39 @@ namespace Z0
     partial class dfp
     {
         /// <summary>
+        /// Returns true if the source vector is nonzero, false otherwise
+        /// </summary>
+        /// <param name="src">The vector to test</param>
+        [MethodImpl(Inline)]
+        public static bool nonz(in Vec128<float> src) 
+            => ! TestZ(src.xmm, src.xmm);        
+
+        /// <summary>
+        /// Returns true if the source vector is nonzero, false otherwise
+        /// </summary>
+        /// <param name="src">The vector to test</param>
+        [MethodImpl(Inline)]
+        public static bool nonz(in Vec128<double> src) 
+            => ! TestZ(src.xmm, src.xmm);        
+ 
+         /// <summary>
+        /// Returns true if the source vector is nonzero, false otherwise
+        /// </summary>
+        /// <param name="src">The vector to test</param>
+        [MethodImpl(Inline)]
+        public static bool nonz(in Vec256<float> src) 
+            => ! TestZ(src,src);        
+
+        /// <summary>
+        /// Returns true if the source vector is nonzero, false otherwise
+        /// </summary>
+        /// <param name="src">The vector to test</param>
+        [MethodImpl(Inline)]
+        public static bool nonz(in Vec256<double> src) 
+            => ! TestZ(src,src);          
+
+
+        /// <summary>
         /// __m128 _mm_cmple_ps (__m128 a, __m128 b) CMPPS xmm, xmm/m128, imm8(2)
         /// </summary>
         /// <param name="x">The left vector</param>

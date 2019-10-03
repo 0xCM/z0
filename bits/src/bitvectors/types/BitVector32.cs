@@ -14,17 +14,10 @@ namespace Z0
     /// <summary>
     /// Defines a 32-bit bitvector
     /// </summary>
-    [StructLayout(LayoutKind.Explicit, Size = 4)]
+    [StructLayout(LayoutKind.Sequential, Size = 4)]
     public struct BitVector32 : IFixedScalarBits<BitVector32,uint>
     {
-        [FieldOffset(0)]
         internal uint data;
-
-        [FieldOffset(0)]
-        BitVector16 bv16Lo;
-
-        [FieldOffset(2)]
-        BitVector16 bv16Hi;
 
         public static readonly BitVector32 Zero = default;
 
@@ -139,7 +132,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator BitVector<N32,uint>(BitVector32 src)
-            => BitVector<N32,uint>.Load(src.data);
+            => BitVector<N32,uint>.FromCells(src.data);
 
 
         [MethodImpl(Inline)]
@@ -193,7 +186,7 @@ namespace Z0
         /// <param name="lhs">The left vector</param>
         /// <param name="rhs">The right vector</param>
         [MethodImpl(Inline)]
-        public static BitVector32 operator ^(BitVector32 lhs, BitVector32 rhs)
+        public static BitVector32 operator ^(in BitVector32 lhs, in BitVector32 rhs)
             => bitvector.xor(lhs,rhs);
 
         /// <summary>
@@ -203,7 +196,7 @@ namespace Z0
         /// <param name="lhs">The left vector</param>
         /// <param name="rhs">The right vector</param>
         [MethodImpl(Inline)]
-        public static BitVector32 operator &(BitVector32 lhs, BitVector32 rhs)
+        public static BitVector32 operator &(in BitVector32 lhs, in BitVector32 rhs)
             => bitvector.and(lhs,rhs);
 
         /// <summary>
@@ -212,7 +205,7 @@ namespace Z0
         /// <param name="lhs">The left operand</param>
         /// <param name="rhs">The right operand</param>
         [MethodImpl(Inline)]
-        public static Bit operator %(BitVector32 lhs, BitVector32 rhs)
+        public static Bit operator %(in BitVector32 lhs, in BitVector32 rhs)
             => bitvector.dot(lhs,rhs);
 
         /// <summary>
@@ -221,7 +214,7 @@ namespace Z0
         /// <param name="lhs">The left vector</param>
         /// <param name="rhs">The right vector</param>
         [MethodImpl(Inline)]
-        public static BitVector32 operator |(BitVector32 lhs, BitVector32 rhs)
+        public static BitVector32 operator |(in BitVector32 lhs, in BitVector32 rhs)
             => bitvector.or(lhs,rhs);
 
         /// <summary>
@@ -374,19 +367,25 @@ namespace Z0
         public BitVector16 Lo
         {
             [MethodImpl(Inline)]
-            get => bv16Lo;
+            get => Bits.split(data).x0;
             
             [MethodImpl(Inline)]
-            set => bv16Lo = value;
+            set
+            {
+
+            }
         }
 
         public BitVector16 Hi
         {
             [MethodImpl(Inline)]
-            get => bv16Hi;
+            get => Bits.split(data).x1;
 
             [MethodImpl(Inline)]
-            set => bv16Hi = value;
+            set
+            {
+
+            }
         }
         
         /// <summary>

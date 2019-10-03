@@ -15,18 +15,18 @@ namespace Z0
     partial class dinx
     {        
         [MethodImpl(Inline)]
-        public static long dot(Vec256<int> lhs, Vec256<int> rhs)
+        public static long vdot(Vec256<int> lhs, Vec256<int> rhs)
         {
-            var product = mul(lhs,rhs);
+            var product = vmul(lhs,rhs);
             var sum = vadd(extract128(product,0),extract128(product,1));
             var span = sum.ToSpan128();
             return span[0] + span[1];            
         }
 
         [MethodImpl(Inline)]
-        public static ulong dot(Vec256<uint> lhs, Vec256<uint> rhs)
+        public static ulong vdot(Vec256<uint> lhs, Vec256<uint> rhs)
         {
-            var product = mul(lhs,rhs);
+            var product = vmul(lhs,rhs);
             var sum = vadd(extract128(product,0),extract128(product,1));
             var span = sum.ToSpan128();
             return span[0] + span[1];            

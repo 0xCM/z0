@@ -78,17 +78,22 @@ namespace Z0
             deconstructed.EmitCil(src.CilTargetPath);            
         }
 
+        void Disassemble(Type t)
+            => Disassemble(true, true, t);
         void Disassemble(bool asm, bool cil)
         {
             // Disassemble(new PrimalScenarios());
             // Disassemble(new ExperimentalScenarios());
-            // Disassemble(true, true, typeof(math));
-            Disassemble(true, true, typeof(soc));    
-            Disassemble(true, true, typeof(boc));    
-            Disassemble(true, true, typeof(inxsoc));    
-            Disassemble(true, true, typeof(inxvoc));    
-            Disassemble(true, true, typeof(zfoc));    
-            Disassemble(true, true, typeof(foc));    
+            Disassemble(typeof(math));
+            Disassemble(typeof(dinx));    
+            Disassemble(typeof(bitvector));    
+            Disassemble(typeof(soc));    
+            Disassemble(typeof(boc));    
+            Disassemble(typeof(inxsoc));    
+            Disassemble(typeof(inxvoc));    
+            Disassemble(typeof(zfoc));    
+            Disassemble(typeof(foc));    
+            Disassemble(typeof(circop));    
 
             // var dst = DefineAsmOutPath("gmath.add");
             // DeconstructGeneric<int>(typeof(gmath), "add").OnSome(d => d.EmitAsm(dst));

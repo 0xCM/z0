@@ -1,4 +1,4 @@
-// 2019-10-01 18:19:10:117
+// 2019-10-03 01:55:31:987
 bool vtestz_d256x64u(Vec256<ulong> src, Vec256<ulong> mask)
 {
     IL_0000: ldarga.s src
@@ -228,30 +228,6 @@ Vec256<uint> vor_g256x32u(Vec256<uint> x, Vec256<uint> y)
     IL_0000: ldarga.s x
     IL_0002: ldarga.s y
     IL_0004: call Z0.Vec256`1<System.UInt32> Z0.ginx::vor<System.UInt32>(Z0.Vec256`1<System.UInt32>&,Z0.Vec256`1<System.UInt32>&)
-    IL_0009: ret
-
-}
-Vector256<long> vor_n256x64i(Vector256<long> x, Vector256<long> y)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: call System.Runtime.Intrinsics.Vector256`1<System.Int64> System.Runtime.Intrinsics.X86.Avx2::And(System.Runtime.Intrinsics.Vector256`1<System.Int64>,System.Runtime.Intrinsics.Vector256`1<System.Int64>)
-    IL_0007: ret
-
-}
-Vec256<long> vor_d256x64i(Vec256<long> x, Vec256<long> y)
-{
-    IL_0000: ldarga.s x
-    IL_0002: ldarga.s y
-    IL_0004: call Z0.Vec256`1<System.Int64> Z0.dinx::vor(Z0.Vec256`1<System.Int64>&,Z0.Vec256`1<System.Int64>&)
-    IL_0009: ret
-
-}
-Vec256<long> vor_g256x64i(Vec256<long> x, Vec256<long> y)
-{
-    IL_0000: ldarga.s x
-    IL_0002: ldarga.s y
-    IL_0004: call Z0.Vec256`1<System.Int64> Z0.ginx::vor<System.Int64>(Z0.Vec256`1<System.Int64>&,Z0.Vec256`1<System.Int64>&)
     IL_0009: ret
 
 }
@@ -881,6 +857,30 @@ bool vtestz_g128x32i(Vec128<int> src, Vec128<int> mask)
     IL_0009: ret
 
 }
+bool vtestz_d128x32u(Vec128<uint> src, Vec128<uint> mask)
+{
+    IL_0000: ldarga.s src
+    IL_0002: ldarga.s mask
+    IL_0004: call System.Boolean Z0.dinx::testz(Z0.Vec128`1<System.UInt32>&,Z0.Vec128`1<System.UInt32>&)
+    IL_0009: ret
+
+}
+bool vtestz_g128x32u(Vec128<uint> src, Vec128<uint> mask)
+{
+    IL_0000: ldarga.s src
+    IL_0002: ldarga.s mask
+    IL_0004: call System.Boolean Z0.ginx::testz<System.UInt32>(Z0.Vec128`1<System.UInt32>&,Z0.Vec128`1<System.UInt32>&)
+    IL_0009: ret
+
+}
+bool vtestz_d128x64i(Vec128<long> src, Vec128<long> mask)
+{
+    IL_0000: ldarga.s src
+    IL_0002: ldarga.s mask
+    IL_0004: call System.Boolean Z0.dinx::testz(Z0.Vec128`1<System.Int64>&,Z0.Vec128`1<System.Int64>&)
+    IL_0009: ret
+
+}
 bool vtestz_g128x64i(Vec128<long> src, Vec128<long> mask)
 {
     IL_0000: ldarga.s src
@@ -894,6 +894,14 @@ bool vtestz_d128x64u(Vec128<ulong> src, Vec128<ulong> mask)
     IL_0000: ldarga.s src
     IL_0002: ldarga.s mask
     IL_0004: call System.Boolean Z0.dinx::testz(Z0.Vec128`1<System.UInt64>&,Z0.Vec128`1<System.UInt64>&)
+    IL_0009: ret
+
+}
+bool vtestz_g128x64u(Vec128<ulong> src, Vec128<ulong> mask)
+{
+    IL_0000: ldarga.s src
+    IL_0002: ldarga.s mask
+    IL_0004: call System.Boolean Z0.ginx::testz<System.UInt64>(Z0.Vec128`1<System.UInt64>&,Z0.Vec128`1<System.UInt64>&)
     IL_0009: ret
 
 }

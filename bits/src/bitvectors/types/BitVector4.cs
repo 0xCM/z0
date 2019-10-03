@@ -12,14 +12,13 @@ namespace Z0
     using static zfunc;
     using static Bits;
     using static Bytes;
-    using System.Diagnostics.CodeAnalysis;
 
     /// <summary>
     /// Defines a 4-bit bitvector
     /// </summary>
-    public struct BitVector4 : IFixedScalarBits<BitVector4,UInt4>
+    public struct BitVector4 : IFixedScalarBits<BitVector4,byte>
     {
-        internal UInt4 data;
+        internal byte data;
 
         public static readonly BitVector4 Zero = default;
 
@@ -51,7 +50,30 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static BitVector4 FromParts(Bit? x0 = null, Bit? x1 = null, Bit? x2 = null, Bit? x3 = null)
-            => UInt4.FromBits(x0,x1,x2,x3);
+        {
+            var data = (byte)0;
+            if(x0 == 1) data |= (1 << 0);
+            if(x1 == 1) data |= (1 << 1);
+            if(x2 == 1) data |= (1 << 2);
+            if(x3 == 1) data |= (1 << 3);
+            return data;
+        }
+
+        /// <summary>
+        /// Constructs a bitvector from the 4 least significant bits of the source value
+        /// </summary>
+        /// <param name="src">The source value</param>
+        [MethodImpl(Inline)]
+        public static BitVector4 FromLo(byte src)        
+            => new BitVector4((byte)(src & 0xF));
+
+        /// <summary>
+        /// Constructs a bitvector from the 4 most significant bits of the source value
+        /// </summary>
+        /// <param name="src">The source value</param>
+        [MethodImpl(Inline)]
+        public static BitVector4 FromHi(byte src)        
+            => new BitVector4((byte)((src >> 4) & 0xF));
 
         /// <summary>
         /// Creates a vector from the lower 4 bits of a byte
@@ -59,15 +81,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
         public static BitVector4 FromScalar(byte src)
-            => new BitVector4(src);            
-
-        /// <summary>
-        /// Creates a vector from the primal source value with which it aligns
-        /// </summary>
-        /// <param name="src">The source value</param>
-        [MethodImpl(Inline)]
-        public static BitVector4 FromScalar(UInt4 src)
-            => new BitVector4(src);            
+            => FromLo(src);
 
         /// <summary>
         /// Creates a vector from the primal source value with which it aligns
@@ -79,7 +93,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator BitVector<N4,byte>(in BitVector4 src)
-            => BitVector<N4,byte>.Load(src.data);
+            => BitVector<N4,byte>.FromCells(src.data);
 
         [MethodImpl(Inline)]
         public static implicit operator BitVector4(in byte src)
@@ -88,10 +102,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator byte(in BitVector4 src)
             => src.data;
-
-        [MethodImpl(Inline)]
-        public static implicit operator BitVector4(UInt4 src)
-            => new BitVector4(src);
 
         /// <summary>
         /// Computes the XOR of the source operands. 
@@ -111,7 +121,7 @@ namespace Z0
         /// <param name="rhs">The right vector</param>
         [MethodImpl(Inline)]
         public static BitVector4 operator &(in BitVector4 lhs, in BitVector4 rhs)
-            => bitvector.and(lhs,rhs);
+            => (byte)(lhs.data & rhs.data);
 
         /// <summary>
         /// Computes the bitwise OR of the source operands
@@ -148,7 +158,7 @@ namespace Z0
         /// <param name="rhs">The right operand</param>
         [MethodImpl(Inline)]
         public static BitVector4 operator *(in BitVector4 lhs, in BitVector4 rhs)
-            => bitvector.and(lhs,rhs);
+            => (byte)(lhs.data & rhs.data);
 
         /// <summary>
         /// Computes the scalar product of the operands
@@ -191,13 +201,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public BitVector4(byte data)
         {
-            this.data = (UInt4)data;
-        }
-
-        [MethodImpl(Inline)]
-        public BitVector4(UInt4 data)
-        {
-            this.data = data;
+            this.data = TakeHi(math.sll(data,4));
         }
 
         public Bit this[BitPos pos]
@@ -300,6 +304,7 @@ namespace Z0
             return this;
         }
 
+
         /// <summary>
         /// Computes in-place the bitwise complement of the source vector,
         /// returning the result to the caller
@@ -307,9 +312,13 @@ namespace Z0
         [MethodImpl(Inline)]
         public BitVector4 Flip()
         {
-            data = ~data;
+            data = TakeHi((byte)((byte)(~data) << 4));
             return this;
         }
+
+        [MethodImpl(Inline)]
+        static byte TakeHi(byte src)        
+            => (byte)((src >> 4) & 0xF);
 
 
         /// <summary>
@@ -318,7 +327,7 @@ namespace Z0
         /// <param name="pos">The position of the bit to enable</param>
         [MethodImpl(Inline)]
         public void Enable(BitPos pos)
-            => data |= (UInt4)(1 << pos);
+            => data |= (byte)(1 << pos);
 
         /// <summary>
         /// Disables a bit if it is enabled
@@ -326,7 +335,7 @@ namespace Z0
         /// <param name="pos">The bit position</param>
         [MethodImpl(Inline)]
         public void Disable(BitPos pos)
-            => data &= (UInt4)~((UInt4)(1 << pos));
+            => data &= (byte)~((byte)(1 << pos));
 
         /// <summary>
         /// Sets a bit value
@@ -337,9 +346,9 @@ namespace Z0
         public void Set(BitPos pos, Bit value)
         {
             if(value) 
-                data |= (UInt4)(1 << pos);
+                data |= (byte)(1 << pos);
             else
-                data &= (UInt4)~((UInt4)(1 << pos));
+                data &= (byte)~((byte)(1 << pos));
         }
 
         /// <summary>
@@ -442,7 +451,7 @@ namespace Z0
         /// </summary>
         [MethodImpl(Inline)]
         public void Reverse()
-            => data = (UInt4)Bits.rev(data);
+            => data = Bits.rev(data);
 
         /// <summary>
         /// Extracts a contiguous sequence of bits defined by an inclusive range
@@ -472,7 +481,7 @@ namespace Z0
         /// <summary>
         /// Extracts the scalar represented by the vector
         /// </summary>
-        public UInt4 Scalar
+        public byte Scalar
         {
             [MethodImpl(Inline)]
             get => data;

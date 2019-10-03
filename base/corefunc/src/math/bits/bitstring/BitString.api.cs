@@ -96,7 +96,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitString FromScalars<T>(params T[] parts)
             where T : unmanaged
-                => FromScalars(parts.AsSpan());
+                => FromScalars(parts.AsSpan(), bitsize<T>() * parts.Length);
 
         /// <summary>
         /// Constructs a bitstring from a power of 2

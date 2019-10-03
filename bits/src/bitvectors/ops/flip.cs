@@ -20,8 +20,12 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left bitvector</param>
         [MethodImpl(Inline)]
-        public static BitVector4 flip(BitVector4 x)
-            => math.flip(x.data);
+        public static BitVector4 flip(BitVector4 src)
+            => TakeHi((byte)((byte)(~src.data) << 4));
+
+        [MethodImpl(Inline)]
+        static byte TakeHi(byte src)        
+            => (byte)((src >> 4) & 0xF);
 
         /// <summary>
         /// Computes the complememt bitvector ~x from the source bitvector x

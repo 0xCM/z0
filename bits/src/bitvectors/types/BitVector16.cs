@@ -14,24 +14,10 @@ namespace Z0
     /// <summary>
     /// Defines a 16-bit bitvector
     /// </summary>
-    [StructLayout(LayoutKind.Explicit, Size = 2)]
+    [StructLayout(LayoutKind.Sequential, Size = 2)]
     public struct BitVector16 : IFixedScalarBits<BitVector16, ushort>
     {
-        [FieldOffset(0)]
         internal ushort data;
-
-        [FieldOffset(0)]
-        BitVector4 bv4;
-
-        [FieldOffset(0)]
-        BitVector8 bv8;
-
-
-        [FieldOffset(0)]        
-        byte x0000;
-        
-        [FieldOffset(1)]
-        byte x0001;
 
         public static readonly BitVector16 Zero = 0;
 
@@ -122,7 +108,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator BitVector<N16,ushort>(BitVector16 src)
-            => BitVector<N16,ushort>.Load(src.data);
+            => BitVector<N16,ushort>.FromCells(src.data);
 
         [MethodImpl(Inline)]
         public static implicit operator BitVector16(ushort src)
@@ -369,10 +355,8 @@ namespace Z0
         public BitVector8 Lo
         {
             [MethodImpl(Inline)]
-            get => bv8;
+            get => (byte)data;
 
-            [MethodImpl(Inline)]
-            set => bv8 = value;
         }
 
         /// <summary>
@@ -381,10 +365,8 @@ namespace Z0
         public BitVector8 Hi
         {
             [MethodImpl(Inline)]
-            get => x0001;
+            get => (byte)(data >> 8);
 
-            [MethodImpl(Inline)]
-            set => x0001 = value;
         }
         
         /// <summary>

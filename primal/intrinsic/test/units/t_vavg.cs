@@ -19,8 +19,8 @@ namespace Z0.Test
             {
                 var x = Random.CpuVec256<byte>();
                 var y = Random.CpuVec256<byte>();
-                var a = dinx.avg(x,y);
-                var b = math.avgi(x.ToSpan(), y.ToSpan());
+                var a = dinx.vavg(x,y);
+                var b = mathspan.avgi(x.ToSpan(), y.ToSpan());
                 for(var i=0; i< b.Length; i++)
                     Claim.eq(a[i], b[i]);
             }
@@ -32,8 +32,8 @@ namespace Z0.Test
             {
                 var x = Random.CpuVec256<ushort>();
                 var y = Random.CpuVec256<ushort>();
-                var a = dinx.avg(x,y);
-                var b = math.avgi(x.ToSpan(), y.ToSpan());
+                var a = dinx.vavg(x,y);
+                var b = mathspan.avgi(x.ToSpan(), y.ToSpan());
                 for(var i=0; i< b.Length; i++)
                     Claim.eq(a[i], b[i]);
             }
@@ -56,7 +56,7 @@ namespace Z0.Test
                     var x = Random.Span256<byte>();
                     var y = Random.Span256<byte>();
                     sw.Start();
-                    var b = math.avgi(x, y);
+                    var b = mathspan.avgi(x, y);
                     sw.Stop();
                 }
                 return OpTime.Define<byte>(SampleSize, sw, $"vavg-ref");
@@ -70,7 +70,7 @@ namespace Z0.Test
                     var x = Random.CpuVec256<byte>();
                     var y = Random.CpuVec256<byte>();
                     sw.Start();
-                    var a = dinx.avg(x,y);
+                    var a = dinx.vavg(x,y);
                     sw.Stop();
                 }
                 return OpTime.Define<byte>(SampleSize, sw, $"vavg");        

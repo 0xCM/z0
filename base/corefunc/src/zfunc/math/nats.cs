@@ -186,14 +186,67 @@ partial class zfunc
     /// <param name="k1">The first term</param>
     /// <param name="k2">The second term</param>
     /// <param name="k3">The third term</param>
+    /// <param name="k4">The fourth term</param>
     /// <typeparam name="K1">The first term type</typeparam>
     /// <typeparam name="K2">The second term type</typeparam>
     /// <typeparam name="K3">The third term type</typeparam>
+    /// <typeparam name="K4">The fourth term type</typeparam>
     [MethodImpl(Inline)]
-    public static NatSeq<K1,K2,K3,K4> nat<K1,K2,K3,K4>(K1 k1 = default, K2 k2 = default, K3 k3 = default, K4 k4 = default)
+    public static NatSeq<K1,K2,K3,K4> nat<K1,K2,K3,K4>(K1 k1 = default, K2 k2 = default, K3 k3 = default,
+            K4 k4 = default)
         where K1 : INatPrimitive<K1>, new()
         where K2 : INatPrimitive<K2>, new()
         where K3 : INatPrimitive<K3>, new()
         where K4 : INatPrimitive<K4>, new()
             => NatSeq<K1,K2,K3,K4>.Rep;
+
+    /// <summary>
+    /// Creates a natural sequence of length 5
+    /// </summary>
+    /// <param name="k1">The first term</param>
+    /// <param name="k2">The second term</param>
+    /// <param name="k3">The third term</param>
+    /// <param name="k4">The fourth term</param>
+    /// <param name="k5">The fifth term</param>
+    /// <typeparam name="K1">The first term type</typeparam>
+    /// <typeparam name="K2">The second term type</typeparam>
+    /// <typeparam name="K3">The third term type</typeparam>
+    /// <typeparam name="K4">The fourth term type</typeparam>
+    /// <typeparam name="K5">The fifth term type</typeparam>
+    [MethodImpl(Inline)]
+    public static NatSeq<K1,K2,K3,K4,K5> nat<K1,K2,K3,K4,K5>(K1 k1 = default, K2 k2 = default, K3 k3 = default, 
+            K4 k4 = default, K5 k5 = default)
+        where K1 : INatPrimitive<K1>, new()
+        where K2 : INatPrimitive<K2>, new()
+        where K3 : INatPrimitive<K3>, new()
+        where K4 : INatPrimitive<K4>, new()
+        where K5 : INatPrimitive<K5>, new()
+            => NatSeq<K1,K2,K3,K4,K5>.Rep;
+
+    /// <summary>
+    /// Creates a natural sequence of length 6
+    /// </summary>
+    /// <param name="k1">The first term</param>
+    /// <param name="k2">The second term</param>
+    /// <param name="k3">The third term</param>
+    /// <param name="k4">The fourth term</param>
+    /// <param name="k5">The fifth term</param>
+    /// <param name="k6">The sixth term</param>
+    /// <typeparam name="K1">The first term type</typeparam>
+    /// <typeparam name="K2">The second term type</typeparam>
+    /// <typeparam name="K3">The third term type</typeparam>
+    /// <typeparam name="K4">The fourth term type</typeparam>
+    /// <typeparam name="K5">The fifth term type</typeparam>
+    /// <typeparam name="K6">The sixth term type</typeparam>
+    [MethodImpl(Inline)]
+    public static NatSeq<K1,K2,K3,K4,K5,K6> nat<K1,K2,K3,K4,K5,K6>(K1 k1 = default, K2 k2 = default, K3 k3 = default, 
+            K4 k4 = default, K5 k5 = default, K6 k6 = default)
+        where K1 : INatPrimitive<K1>, new()
+        where K2 : INatPrimitive<K2>, new()
+        where K3 : INatPrimitive<K3>, new()
+        where K4 : INatPrimitive<K4>, new()
+        where K5 : INatPrimitive<K5>, new()
+        where K6 : INatPrimitive<K6>, new()
+            => NatSeq<K1,K2,K3,K4,K5,K6>.Rep;
+
 }

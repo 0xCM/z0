@@ -78,9 +78,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static bool lteq(ulong lhs, ulong rhs)
-            => lhs <= rhs;
-
- 
+            => lhs <= rhs; 
     }
-
 }

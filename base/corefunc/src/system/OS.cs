@@ -175,6 +175,17 @@ namespace Z0
         /// </summary>
         [DllImport("kernel32.dll")]
         public static extern bool VirtualProtectEx(IntPtr hProc, IntPtr pCode, UIntPtr codelen, uint flags, out uint oldFlags); 
-               
+
+
+        [MethodImpl(Inline)]
+        public static T* Liberate<T>(T* pBuffer, ulong length)
+            where T : unmanaged
+        {
+            IntPtr buffer = (IntPtr)(void*)pBuffer;
+            if (!OS.VirtualProtectEx(CurrentProcess, buffer, (UIntPtr)length, 0x40, out uint _))
+                ThrowLiberationError(buffer, length);
+            return pBuffer;
+        }
+              
     }
 }

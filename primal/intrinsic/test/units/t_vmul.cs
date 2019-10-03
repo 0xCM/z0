@@ -55,7 +55,7 @@ namespace Z0
             // var v4 = dinx.insert(v2, Vec256<int>.Zero,0);
             var v3 = Vec256.FromParts(1,0,2,0,3,0,4,0);
             var v4 = Vec256.FromParts(5,0,6,0,7,0,8,0);
-            var v5 = dinx.mul(v3,v4);
+            var v5 = dinx.vmul(v3,v4);
             Trace(() => v3);
             Trace(() => v4);
             Trace(() => v5);
@@ -86,7 +86,7 @@ namespace Z0
                 {
                     var x = lhs.LoadVec256(block);
                     var y = rhs.LoadVec256(block);
-                    var z = dinx.mul(x,y); 
+                    var z = dinx.vmul(x,y); 
 
                     var a = x.ToSpan().Replicate();
                     var b = y.ToSpan();
@@ -147,7 +147,7 @@ namespace Z0
                 var x = Random.CpuVec256(domain);
                 var y = Random.CpuVec256(domain);
                 sw.Start();
-                var z = dinx.mul(x,y);
+                var z = dinx.vmul(x,y);
                 sw.Stop();
                 counter += 4;
             }

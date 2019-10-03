@@ -10,6 +10,15 @@ namespace Z0
 
     using static zfunc;
 
+    /// <summary>
+    /// Circuit-related op codes
+    /// </summary>
+    public static partial class circop
+    {
+
+    }
+
+
     public static class Circuits
     {
 

@@ -20,7 +20,7 @@ namespace Z0
     public partial class dinx
     {
         [MethodImpl(Inline)]
-        public static Vec128<byte> min(in Vec128<byte> x, in Vec128<byte> y)
+        public static Vec128<byte> vmin(in Vec128<byte> x, in Vec128<byte> y)
             => Min(x.xmm, y.xmm);
 
         /// <summary>
@@ -29,11 +29,11 @@ namespace Z0
         /// <param name="x"></param>
         /// <param name="y"></param>
         [MethodImpl(Inline)]
-        public static Vec128<sbyte> min(in Vec128<sbyte> x, in Vec128<sbyte> y)
+        public static Vec128<sbyte> vmin(in Vec128<sbyte> x, in Vec128<sbyte> y)
             => Min(x.xmm, y.xmm);
 
         [MethodImpl(Inline)]
-        public static Vec128<short> min(in Vec128<short> x, in Vec128<short> y)
+        public static Vec128<short> vmin(in Vec128<short> x, in Vec128<short> y)
             => Min(x.xmm, y.xmm);
 
         /// <summary>
@@ -42,7 +42,7 @@ namespace Z0
         /// <param name="x"></param>
         /// <param name="y"></param>
         [MethodImpl(Inline)]
-        public static Vec128<ushort> min(in Vec128<ushort> x, in Vec128<ushort> y)
+        public static Vec128<ushort> vmin(in Vec128<ushort> x, in Vec128<ushort> y)
             => Min(x.xmm, y.xmm);
 
         /// <summary>
@@ -51,7 +51,7 @@ namespace Z0
         /// <param name="x"></param>
         /// <param name="y"></param>
         [MethodImpl(Inline)]
-        public static Vec128<int> min(in Vec128<int> x, in Vec128<int> y)
+        public static Vec128<int> vmin(in Vec128<int> x, in Vec128<int> y)
             => Min(x.xmm, y.xmm);
 
         /// <summary>
@@ -60,7 +60,7 @@ namespace Z0
         /// <param name="x"></param>
         /// <param name="y"></param>
         [MethodImpl(Inline)]
-        public static Vec128<uint> min(in Vec128<uint> x, in Vec128<uint> y)
+        public static Vec128<uint> vmin(in Vec128<uint> x, in Vec128<uint> y)
             => Min(x.xmm, y.xmm);
 
         /// <summary>
@@ -69,7 +69,7 @@ namespace Z0
         /// <param name="x"></param>
         /// <param name="y"></param>
         [MethodImpl(Inline)]
-        public static Vec256<byte> min(in Vec256<byte> x, in Vec256<byte> y)
+        public static Vec256<byte> vmin(in Vec256<byte> x, in Vec256<byte> y)
             => Min(x.ymm, y.ymm);
 
         /// <summary>
@@ -78,7 +78,7 @@ namespace Z0
         /// <param name="x"></param>
         /// <param name="y"></param>
         [MethodImpl(Inline)]
-        public static Vec256<sbyte> min(in Vec256<sbyte> x, in Vec256<sbyte> y)
+        public static Vec256<sbyte> vmin(in Vec256<sbyte> x, in Vec256<sbyte> y)
             => Min(x.ymm, y.ymm);
 
         /// <summary>
@@ -87,7 +87,7 @@ namespace Z0
         /// <param name="x"></param>
         /// <param name="y"></param>
         [MethodImpl(Inline)]
-        public static Vec256<short> min(in Vec256<short> x, in Vec256<short> y)
+        public static Vec256<short> vmin(in Vec256<short> x, in Vec256<short> y)
             => Min(x.ymm, y.ymm);
 
         /// <summary>
@@ -96,7 +96,7 @@ namespace Z0
         /// <param name="x"></param>
         /// <param name="y"></param>
         [MethodImpl(Inline)]
-        public static Vec256<ushort> min(in Vec256<ushort> x, in Vec256<ushort> y)
+        public static Vec256<ushort> vmin(in Vec256<ushort> x, in Vec256<ushort> y)
             => Min(x.ymm, y.ymm);
 
         /// <summary>
@@ -105,7 +105,7 @@ namespace Z0
         /// <param name="x"></param>
         /// <param name="y"></param>
         [MethodImpl(Inline)]
-        public static Vec256<int> min(in Vec256<int> x, in Vec256<int> y)
+        public static Vec256<int> vmin(in Vec256<int> x, in Vec256<int> y)
             => Min(x.ymm, y.ymm);
 
         /// <summary>
@@ -114,7 +114,7 @@ namespace Z0
         /// <param name="x"></param>
         /// <param name="y"></param>
         [MethodImpl(Inline)]
-        public static Vec256<uint> min(in Vec256<uint> x, in Vec256<uint> y)
+        public static Vec256<uint> vmin(in Vec256<uint> x, in Vec256<uint> y)
             => Min(x.ymm, y.ymm);
 
 

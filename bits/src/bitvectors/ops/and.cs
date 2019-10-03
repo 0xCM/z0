@@ -15,6 +15,9 @@ namespace Z0
 
     partial class bitvector
     {
+        public static UInt4 and(UInt4 x, UInt4 y)
+            => x & y;
+
         /// <summary>
         /// Computes a new bitvector z = x & y from bitvectors x and y
         /// </summary>
@@ -22,7 +25,7 @@ namespace Z0
         /// <param name="y">The right bitvector</param>
         [MethodImpl(Inline)]
         public static BitVector4 and(BitVector4 x, BitVector4 y)
-            => math.and(x.data,y.data);
+            => math.and(x.data, y.data);
 
         /// <summary>
         /// Computes a new bitvector z = x & y from bitvectors x and y
@@ -48,7 +51,7 @@ namespace Z0
         /// <param name="x">The left bitvector</param>
         /// <param name="y">The right bitvector</param>
         [MethodImpl(Inline)]
-        public static BitVector32 and(BitVector32 x, BitVector32 y)
+        public static BitVector32 and(in BitVector32 x, in BitVector32 y)
             => math.and(x.data, y.data);
 
         /// <summary>

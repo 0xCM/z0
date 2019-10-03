@@ -12,7 +12,7 @@ namespace Z0
     using static zfunc;
     using static BitParts;
 
-    partial class Bits
+    partial class BitParts
     {
 
 
