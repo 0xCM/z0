@@ -2,11 +2,11 @@
 // Copyright   :  (c) Chris Moore, 2019
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Events
+namespace Z0
 {
     using System.Runtime.InteropServices;
 
-    public enum EventKind : ushort
+    public enum CommonEventKinds : ulong
     {
         PulseEvent = 10,
     }
@@ -14,10 +14,9 @@ namespace Z0.Events
     /// <summary>
     /// Represents a pulse/tick/heartbeat relative to some frequency
     /// </summary>
-    [StructLayout(LayoutKind.Explicit)]
     public readonly struct PulseEvent
     {
-        public const EventKind Kind = EventKind.PulseEvent;
+        public const CommonEventKinds Kind = CommonEventKinds.PulseEvent;
 
     
         public static PulseEvent Define(uint ServerId, uint AgentId, ulong Timestamp)
@@ -28,7 +27,6 @@ namespace Z0.Events
             this.Identity = Identity;
         }
 
-        [FieldOffset(0)]
         public readonly EventIdentity Identity;
     }
 }

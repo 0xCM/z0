@@ -2,14 +2,15 @@
 // Copyright   :  (c) Chris Moore, 2019
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Events
+namespace Z0
 {
-    using System.Runtime.InteropServices;
+    using System.Runtime.CompilerServices;
+
+    using static zfunc;
 
     /// <summary>
     /// Defines logical event identity
     /// </summary>
-    [StructLayout(LayoutKind.Explicit)]
     public readonly struct EventIdentity
     {
         /// <summary>
@@ -18,9 +19,11 @@ namespace Z0.Events
         /// <param name="loc">The location of occurence</param>
         /// <param name="time">The time of occurrence</param>
         /// <param name="kind">The kind of event that occurred</param>
+        [MethodImpl(Inline)]
         public static implicit operator EventIdentity((uint server, uint agent, ulong time, ulong kind) src)
             => new EventIdentity(src.server, src.agent, src.time,src.kind);
 
+        [MethodImpl(Inline)]
         public EventIdentity(uint ServerId, uint AgentId, ulong Timestamp, ulong Kind)
         {
             this.ServerId = ServerId;
@@ -32,36 +35,39 @@ namespace Z0.Events
         /// <summary>
         /// The originating server
         /// </summary>
-        [FieldOffset(0)]
         public readonly uint ServerId;
 
         /// <summary>
         /// The originating agent
         /// </summary>
-        [FieldOffset(4)]
         public readonly uint AgentId;
 
         /// <summary>
         /// Represents the time at which the event originated
         /// </summary>
-        [FieldOffset(8)]
         public readonly ulong Timestamp;
 
         /// <summary>
         /// The event classifier/discriminator
         /// </summary>        
-        [FieldOffset(16)]
         public readonly ulong EventKind;
 
         public ulong Location
-            => ((ulong)ServerId << 32) & AgentId; 
+        {
+            [MethodImpl(Inline)]
+            get => ((ulong)ServerId << 32) & AgentId; 
+        }
 
         /// <summary>
         /// Specifies the spacetime event origin
         /// </summary>
-        public Origin Origin
-            => (Location, Timestamp);
+        public EventOrigin Origin
+        {
+            [MethodImpl(Inline)]
+            get => (Location, Timestamp);
+        }
 
+        [MethodImpl(Inline)]
         public void Deconstruct(out ulong kind, out uint server, out uint agent, out ulong time)
         {
             kind = EventKind;

@@ -52,9 +52,6 @@ namespace Z0
                 dst[i] = Bits.hi(A[i]);
             return BitMatrix8.From(dst);
         }
-
-
-
     }
 
 }

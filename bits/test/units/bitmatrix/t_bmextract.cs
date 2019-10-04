@@ -62,7 +62,7 @@ namespace Z0.Test
         {
             for(var j = 0; j< cycles; j++)
             {
-                var src = Random.BitMatrix64();
+                var src = Random.BitMatrix(n64);
                 for(var c = 0; c < src.ColCount; c ++)
                 {
                     var col = src.ColVector(c);
@@ -77,7 +77,7 @@ namespace Z0.Test
         {
             for(var j = 0; j< cycles; j++)
             {
-                var src = Random.BitMatrix32();
+                var src = Random.BitMatrix(n32);
                 for(var c = 0; c < src.ColCount; c ++)
                 {
                     var col = src.ColVec(c);
@@ -119,8 +119,8 @@ namespace Z0.Test
 
         public void eq32()
         {
-            var x = Random.BitMatrix32();
-            var y = Random.BitMatrix32();
+            var x = Random.BitMatrix(n32);
+            var y = Random.BitMatrix(n32);
             Claim.nea(x.Equals(y));
             Claim.yea(x.Equals(x));
             Claim.yea(y.Equals(y));
@@ -128,8 +128,8 @@ namespace Z0.Test
 
         public void eq64()
         {
-            var x = Random.BitMatrix64();
-            var y = Random.BitMatrix64();
+            var x = Random.BitMatrix(n64);
+            var y = Random.BitMatrix(n64);
             Claim.nea(x.Equals(y));
             Claim.nea(x == y);
             Claim.yea(x != y);
@@ -144,17 +144,17 @@ namespace Z0.Test
         public void flip64()
         {
             
-            var x = Random.BitMatrix64();
+            var x = Random.BitMatrix(n64);
             var y = x.Replicate();
-            var xff = -(-x);
+            var xff = ~(~x);
             Claim.yea(xff == y);
 
-            var c = Random.BitMatrix64();
+            var c = Random.BitMatrix(n64);
             var a = new ulong[64];
             for(var i = 0; i<64; i++)
                 a[i] = ~ c.RowData(i);
             var b = BitMatrix64.From(a);
-            Claim.yea(b == -c);        
+            Claim.yea(b == ~c);        
         }
 
 

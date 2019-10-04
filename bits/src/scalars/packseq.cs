@@ -28,6 +28,26 @@ namespace Z0
             return ref dst;
         }
 
+        public static ref byte packseq(out byte dst, params byte[] src)        
+        {
+            dst = 0;
+            var count = Math.Min(8, src.Length);
+            for(var i=0; i< count; i++)
+                if(src[i] == 1)
+                    dst |= (byte)(1 << i);
+            return ref dst;
+        }
+
+        public static ref uint packseq(out uint dst, params byte[] src)        
+        {
+            dst = 0;
+            var count = Math.Min(32, src.Length);
+            for(var i=0; i< count; i++)
+                if(src[i] == 1)
+                    dst |= (byte)(1 << i);
+            return ref dst;
+        }
+
         /// <summary>
         /// Packs a bitsequence determined by the first 16 (or fewer) bytes from the source into an unsigned short
         /// </summary>

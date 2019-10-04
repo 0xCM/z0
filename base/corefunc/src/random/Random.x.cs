@@ -74,5 +74,30 @@ namespace  Z0
             copy.Shuffle(random);
             return copy;
         }
+
+        /// <summary>
+        /// Returns the next pair of random primal values
+        /// </summary>
+        /// <param name="a">The first element in the pair</param>
+        /// <param name="b">The second element in the pair</param>
+        /// <typeparam name="T">The primal type</typeparam>
+        [MethodImpl(Inline)]
+        public static (T a, T b) NextPair<T>(this IPolyrand random)
+            where T : unmanaged
+                => (random.Next<T>(), random.Next<T>());
+
+        /// <summary>
+        /// Returns the next pair of random primal values within a specified range
+        /// </summary>
+        /// <param name="min">The inclusive minimum value</param>
+        /// <param name="max">The exclusive maximum value</param>
+        /// <param name="a">The first element in the pair</param>
+        /// <param name="b">The second element in the pair</param>
+        /// <typeparam name="T">The primal type</typeparam>
+        [MethodImpl(Inline)]
+        public static (T a, T b) NextPair<T>(this IPolyrand random, T min, T max)
+            where T : unmanaged
+                => (random.Next<T>(min,max), random.Next<T>(min,max));
+
     }
 }

@@ -38,7 +38,7 @@ namespace Z0
         where T : BitVectorTest<T>, new()
     {
 
-        protected override int SampleSize => Pow2.T04;
+        protected override int SampleSize => Pow2.T08;
 
         protected override int CycleCount => Pow2.T03;
 

@@ -14,7 +14,7 @@ namespace Z0
 
     public ref struct BitMatrix4
     {        
-        Span<byte> data;
+        internal Span<byte> data;
 
         public static readonly N4 N = default;
 
@@ -74,6 +74,28 @@ namespace Z0
         public static explicit operator BitMatrix4(ushort src)
             => Define(src);
 
+
+        [MethodImpl(Inline)]
+        public static BitMatrix4 operator & (BitMatrix4 lhs, BitMatrix4 rhs)
+            => BitMatrix.and(lhs,rhs);
+
+        [MethodImpl(Inline)]
+        public static BitMatrix4 operator | (BitMatrix4 lhs, BitMatrix4 rhs)
+            => Or(ref lhs, rhs);
+
+        [MethodImpl(Inline)]
+        public static BitMatrix4 operator ^ (BitMatrix4 lhs, BitMatrix4 rhs)
+            => XOr(ref lhs,rhs);
+
+        [MethodImpl(Inline)]
+        public static BitMatrix4 operator ~ (BitMatrix4 src)
+            => Flip(ref src);
+
+        [MethodImpl(Inline)]
+        public static BitMatrix4 operator * (BitMatrix4 lhs, BitMatrix4 rhs)
+            => Mul(ref lhs,rhs);
+
+
         [MethodImpl(Inline)]
         public static bool operator ==(BitMatrix4 lhs, BitMatrix4 rhs)
             => lhs.Equals(rhs);
@@ -82,22 +104,7 @@ namespace Z0
         public static bool operator !=(BitMatrix4 lhs, BitMatrix4 rhs)
             => !(lhs.Equals(rhs));
 
-        [MethodImpl(Inline)]
-        public static BitMatrix4 operator + (BitMatrix4 lhs, BitMatrix4 rhs)
-            => XOr(ref lhs,rhs);
 
-        [MethodImpl(Inline)]
-        public static BitMatrix4 operator * (BitMatrix4 lhs, BitMatrix4 rhs)
-            => And(ref lhs,rhs);
-
-        [MethodImpl(Inline)]
-        public static BitMatrix4 operator - (BitMatrix4 src)
-            => Flip(ref src);
-
-        [MethodImpl(Inline)]
-        public static BitMatrix4 operator | (BitMatrix4 lhs, BitMatrix4 rhs)
-            => Or(ref lhs, rhs);
-            
         [MethodImpl(Inline)]
         BitMatrix4(params byte[] src)
         {                    
@@ -105,13 +112,6 @@ namespace Z0
             this.data = src;
             
         }
-
-        // [MethodImpl(Inline)]
-        // BitMatrix4(Span<UInt4> src)
-        // {                    
-        //     require(src.Length == Pow2.T02);
-            
-        // }
 
         [MethodImpl(Inline)]
         BitMatrix4(ushort src)
@@ -291,12 +291,6 @@ namespace Z0
         public BitVector16 ToBitVector()
             => BitVector16.FromScalar((ushort)this);
 
-        [MethodImpl(Inline)]
-        static ref BitMatrix4 And(ref BitMatrix4 lhs, in BitMatrix4 rhs)
-        {
-             lhs.data = BitConverter.GetBytes((ushort) ((ushort)lhs & (ushort)rhs));
-             return ref lhs;
-        }
 
         [MethodImpl(Inline)]
         static ref BitMatrix4 XOr(ref BitMatrix4 lhs, in BitMatrix4 rhs)

@@ -15,25 +15,22 @@ namespace Z0
     /// <summary>
     /// Represents 3 bits with 3 8-bit values that may range over {0,1}
     /// </summary>
-    [StructLayout(LayoutKind.Explicit, Size=3)]
+    [StructLayout(LayoutKind.Sequential, Size=3)]
     public struct BitBlock3  : IBitBlock
     {
         /// <summary>
         ///  Bit 0
         /// </summary>
-        [FieldOffset(0)]
         public byte Bit0;
 
         /// <summary>
         ///  Bit 1
         /// </summary>
-        [FieldOffset(1)]
         public byte Bit1;
 
         /// <summary>
         ///  Bit 2
         /// </summary>
-        [FieldOffset(2)]
         public byte Bit2;
         
         [MethodImpl(Inline)]
@@ -44,6 +41,15 @@ namespace Z0
         public void SetPart(int i, byte value)
             => Unsafe.Add(ref Unsafe.As<BitBlock3, byte>(ref this), i) = value;
         
+        [MethodImpl(Inline)]
+        public byte Compress()
+        {
+            uint dst = Bit0;
+            dst |= ((uint)Bit1 << 1);
+            dst |= ((uint)Bit2 << 2);
+            return (byte)dst;
+        }
+
         public byte this [int i]
         {
             [MethodImpl(Inline)]
@@ -52,12 +58,6 @@ namespace Z0
             [MethodImpl(Inline)]
             set => SetPart(i,value);
         }
-
-        public string Format()
-            => this.AsGeneric().Format(); 
-
-        public override string ToString() 
-            => Format();
 
     }
 

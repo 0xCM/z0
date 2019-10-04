@@ -15,19 +15,17 @@ namespace Z0
     /// <summary>
     /// Represents 2 bits with 2 8-bit values that may range over {0,1}
     /// </summary>
-    [StructLayout(LayoutKind.Explicit, Size = 2)]
+    [StructLayout(LayoutKind.Sequential, Size = 2)]
     public struct BitBlock2 : IBitBlock
     {
         /// <summary>
         ///  Bit 0
         /// </summary>
-        [FieldOffset(0)]
         public byte Bit0;
 
         /// <summary>
         ///  Bit 0
         /// </summary>
-        [FieldOffset(0)]
         public byte Bit1;
 
         [MethodImpl(Inline)]
@@ -41,9 +39,11 @@ namespace Z0
         [MethodImpl(Inline)]
         public byte Compress()
         {
-            return math.or(Bit1, math.sll(Bit1,1));            
+            uint dst = Bit0;
+            dst |= ((uint)Bit1 << 1);
+            return (byte)dst;
         }
-
+        
         public byte this [int i]
         {
             [MethodImpl(Inline)]

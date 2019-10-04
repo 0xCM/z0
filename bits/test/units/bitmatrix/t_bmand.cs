@@ -14,7 +14,6 @@ namespace Z0
     
     public class tbm_and : BitMatrixTest<tbm_and>
     {
-
         public void bm_and_4x4_check()
         {            
             for(var i=0; i<SampleSize; i++)
@@ -27,7 +26,7 @@ namespace Z0
                 var zBytes = mathspan.xor(xBytes, yBytes);
                 var expect = BitMatrix4.Define(zBytes);
 
-                var actual = x + y;
+                var actual = x ^ y;
                 Claim.yea(expect == actual);                
             }
         }

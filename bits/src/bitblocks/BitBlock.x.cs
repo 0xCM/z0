@@ -75,6 +75,15 @@ namespace Z0
         public static BitBlock<BitBlock8> ToBitBlock(this BitString src, N8 n)
             => BitBlock.FromSpan<BitBlock8>(src.BitSeq);
 
+        [MethodImpl(Inline)]
+        public static BitBlock<BitBlock8> BlockedBits(this IPolyrand random, N8 n)
+        {
+            var src = random.Next<byte>();
+            var dst = BitBlock.Alloc<BitBlock8>();
+            dst.Data.Distribute(src);
+            return dst;
+        }    
+
         /// <summary>
         /// Populates a bitblock of length 9 from a bitstring
         /// </summary>
@@ -184,13 +193,49 @@ namespace Z0
             => BitBlock.FromSpan<BitBlock20>(src.BitSeq);
 
         /// <summary>
-        /// Populates a bitblock of length 20 from a bitstring
+        /// Populates a bitblock of length 21 from a bitstring
         /// </summary>
         /// <param name="src">The source bitstring</param>
         /// <param name="n">The block length for overload resolution</param>
         [MethodImpl(Inline)]
         public static BitBlock<BitBlock21> ToBitBlock(this BitString src, N21 n)
             => BitBlock.FromSpan<BitBlock21>(src.BitSeq);
+
+        /// <summary>
+        /// Populates a bitblock of length 22 from a bitstring
+        /// </summary>
+        /// <param name="src">The source bitstring</param>
+        /// <param name="n">The block length for overload resolution</param>
+        [MethodImpl(Inline)]
+        public static BitBlock<BitBlock22> ToBitBlock(this BitString src, N22 n)
+            => BitBlock.FromSpan<BitBlock22>(src.BitSeq);
+
+        /// <summary>
+        /// Populates a bitblock of length 23 from a bitstring
+        /// </summary>
+        /// <param name="src">The source bitstring</param>
+        /// <param name="n">The block length for overload resolution</param>
+        [MethodImpl(Inline)]
+        public static BitBlock<BitBlock23> ToBitBlock(this BitString src, N23 n)
+            => BitBlock.FromSpan<BitBlock23>(src.BitSeq);
+
+        /// <summary>
+        /// Populates a bitblock of length 24 from a bitstring
+        /// </summary>
+        /// <param name="src">The source bitstring</param>
+        /// <param name="n">The block length for overload resolution</param>
+        [MethodImpl(Inline)]
+        public static BitBlock<BitBlock24> ToBitBlock(this BitString src, N24 n)
+            => BitBlock.FromSpan<BitBlock24>(src.BitSeq);
+
+        /// <summary>
+        /// Populates a bitblock of length 25 from a bitstring
+        /// </summary>
+        /// <param name="src">The source bitstring</param>
+        /// <param name="n">The block length for overload resolution</param>
+        [MethodImpl(Inline)]
+        public static BitBlock<BitBlock25> ToBitBlock(this BitString src, N25 n)
+            => BitBlock.FromSpan<BitBlock25>(src.BitSeq);
 
         /// <summary>
         /// Populates a bitblock of length 32 from a bitstring
@@ -202,6 +247,15 @@ namespace Z0
             => BitBlock.FromSpan<BitBlock32>(src.BitSeq);
 
         /// <summary>
+        /// Populates a bitblock of length 64 from a bitstring
+        /// </summary>
+        /// <param name="src">The source bitstring</param>
+        /// <param name="n">The block length for overload resolution</param>
+        [MethodImpl(Inline)]
+        public static BitBlock<BitBlock64> ToBitBlock(this BitString src, N64 n)
+            => BitBlock.FromSpan<BitBlock64>(src.BitSeq);
+
+        /// <summary>
         /// Presents a non-parametric bitblock as a generic bitblock
         /// </summary>
         /// <param name="src">The source bits</param>
@@ -209,7 +263,5 @@ namespace Z0
         public static BitBlock<T> AsGeneric<T>(this ref T src)
             where T : unmanaged, IBitBlock
                 => BitBlock.AsGeneric(ref src);
-
     }
-
 }

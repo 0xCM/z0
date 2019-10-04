@@ -15,19 +15,6 @@ namespace Z0
     public class tbv_xor : BitVectorTest<tbv_xor>
     {
 
-        public void bvxor_g8_parametric()
-        {
-            var x1  = BitVector8.From(Choice8.Choice2 | Choice8.Choice4 | Choice8.Choice6);
-            var y1  = BitVector8.From(Choice8.Choice3);
-            var z1 = x1 ^ y1;
-
-            BitVector8 x2 = x1;
-            BitVector8 y2 = y1;
-            BitVector8 z2 = z1;
-
-            Claim.eq(x2 ^ y2, z2);
-                    
-        }
 
         public void bvxor_n13x8u_check()
         {

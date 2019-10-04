@@ -83,7 +83,7 @@ namespace Z0
         void Disassemble(bool asm, bool cil)
         {
             // Disassemble(new PrimalScenarios());
-            // Disassemble(new ExperimentalScenarios());
+            Disassemble(new ExperimentalScenarios());
             Disassemble(typeof(math));
             Disassemble(typeof(dinx));    
             Disassemble(typeof(bitvector));    

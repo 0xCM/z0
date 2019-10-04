@@ -89,8 +89,8 @@ namespace Z0.Test
         {
             for(var i=0; i<cycles; i++)
             {
-                var x = Random.BitVector4();
-                var y = Random.BitVector4();
+                var x = Random.BitVector(n4);
+                var y = Random.BitVector(n4);
                 var a = x % y;
                 var b = ModProd(x,y);
                 Claim.yea(a == b);            
@@ -101,8 +101,8 @@ namespace Z0.Test
         {
             for(var i=0; i<SampleSize; i++)
             {
-                var x = Random.BitVector8();
-                var y = Random.BitVector8();
+                var x = Random.BitVector(n8);
+                var y = Random.BitVector(n8);
                 var a = x % y;
                 var b = ModProd(x,y);
                 Claim.yea(a == b);            
@@ -119,8 +119,8 @@ namespace Z0.Test
         {
             for(var i=0; i<SampleSize; i++)
             {
-                var x = Random.BitVector16();
-                var y = Random.BitVector16();
+                var x = Random.BitVector(n16);
+                var y = Random.BitVector(n16);
                 var a = x % y;
                 var b = ModProd(x,y);
                 Claim.yea(a == b);   
@@ -155,8 +155,8 @@ namespace Z0.Test
         {
             for(var i=0; i<SampleSize; i++)
             {
-                var x = Random.BitVector64();
-                var y = Random.BitVector64();
+                var x = Random.BitVector(n64);
+                var y = Random.BitVector(n64);
                 var a = x % y;
                 var b = ModProd(x,y);
                 Claim.yea(a == b);

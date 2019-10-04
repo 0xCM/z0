@@ -14,7 +14,6 @@ namespace Z0.Events
     /// </summary>
     public abstract class EventEmitter : ServiceAgent, IEventEmitter
     {        
-
         protected EventEmitter(AgentContext Context, AgentIdentity Identity)
             :base(Context,Identity)
         {

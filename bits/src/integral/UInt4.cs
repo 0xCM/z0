@@ -7,7 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
-    using System.Numerics;
 
     using static zfunc;    
 
@@ -44,8 +43,15 @@ namespace Z0
         [MethodImpl(Inline)]
         UInt4(byte src)
         {
-            require(src <= MaxValue);
-            this.data = src;
+            
+            this.data = (byte)Nibble.reduce(src);
+        }
+
+        [MethodImpl(Inline)]
+        UInt4(uint src)
+        {
+            
+            this.data = (byte)Nibble.reduce(src);
         }
 
         [MethodImpl(Inline)]
@@ -93,8 +99,8 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
-        public static explicit operator UInt4(uint src)
-            => FromLo(src);
+        public static implicit operator UInt4(uint src)
+            => FromUInt32(src);
 
         /// <summary>
         /// Creates a 4-bit integer from the least four bits of the source value
@@ -120,15 +126,8 @@ namespace Z0
         /// <param name="x2">The third bit value, if specified; otherwise, defaults to 0</param>
         /// <param name="x3">The fourth/highest bit value, if specified; otherwise, defaults to 0</param>
         [MethodImpl(Inline)]
-        public static UInt4 FromBits(Bit? x0 = null, Bit? x1 = null, Bit? x2 = null, Bit? x3 = null)
-        {
-            var data = (byte)0;
-            if(x0 == 1) data |= (1 << 0);
-            if(x1 == 1) data |= (1 << 1);
-            if(x2 == 1) data |= (1 << 2);
-            if(x3 == 1) data |= (1 << 3);
-            return new UInt4(data);
-        }
+        public static UInt4 FromBits(Bit x0, Bit x1, Bit x2, Bit x3)
+            => Nibble.create(x0,x1,x2,x3);
 
         [MethodImpl(Inline)]
         public static UInt4 FromBitSeq(ReadOnlySpan<byte> src, int offset = 0)
@@ -148,30 +147,24 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
+        public static UInt4 FromUInt32(uint src)
+            => new UInt4((byte)src);
+
+        [MethodImpl(Inline)]
         public static UInt4 FromByte(byte src)
             => new UInt4(src);
 
         [MethodImpl(Inline)]
         public static UInt4 operator + (UInt4 lhs, UInt4 rhs)
-        {
-            var sum = (byte)(lhs.data + rhs.data);
-            return (sum >= Modulus) 
-                ? new UInt4((byte)(sum - Modulus))
-                : new UInt4(sum);                    
-        }
+            => Nibble.add(lhs,rhs);
 
         [MethodImpl(Inline)]
         public static UInt4 operator - (UInt4 lhs, UInt4 rhs)
-        {
-            var diff = lhs.data - rhs.data;
-            return diff < 0 
-                ? new UInt4((byte)(diff + Modulus)) 
-                : new UInt4((byte)diff);            
-        }
+            => Nibble.sub(lhs,rhs);
 
         [MethodImpl(Inline)]
         public static UInt4 operator * (UInt4 lhs, UInt4 rhs)
-            => FromByte(MulMod16(lhs.data, rhs.data));
+            => Nibble.mul(lhs,rhs);
 
         [MethodImpl(Inline)]
         public static bool operator ==(UInt4 lhs, UInt4 rhs)
@@ -208,12 +201,10 @@ namespace Z0
         [MethodImpl(Inline)]
         public static UInt4 operator ++(UInt4 src)
         {
-            if(src.data != MaxValue)
-                src.data++;
-            else
-                src.data = MinValue;
-            return src;
+            uint x = src;
+            return Nibble.inc(ref x);
         }
+            
 
         [MethodImpl(Inline)]
         public static UInt4 operator --(UInt4 src)

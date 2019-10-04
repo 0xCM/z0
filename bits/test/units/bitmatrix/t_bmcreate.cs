@@ -22,7 +22,7 @@ namespace Z0
                 var perm = Perm.Identity(n8).Reverse();
                 var mat = perm.ToBitMatrix();
 
-                var v1 = Random.BitVector8();
+                var v1 = Random.BitVector(n8);
                 var v2 = mat * v1;
                 var v3 = v1.Replicate();
                 v3.Reverse();
@@ -108,6 +108,9 @@ namespace Z0
                 }
             }
         }
+
+
+
 
         public void create64x64_from_perm()
         {

@@ -18,24 +18,26 @@ namespace Z0
         /// <summary>
         /// Creates the matrix determined by a permutation
         /// </summary>
-        /// <param name="src">The source permutation</param>
-        public static BitMatrix8 ToBitMatrix(this Perm<N8> src)
+        /// <param name="perm">The source permutation</param>
+        [MethodImpl(Inline)]
+        public static BitMatrix8 ToBitMatrix(this Perm<N8> perm)
         {
             var dst = BitMatrix8.Alloc();
-            for(var row = 0; row<src.Length; row++)
-                dst[row,src[row]] = Bit.On;
+            for(var row = 0; row<perm.Length; row++)
+                dst[row, perm[row]] = Bit.On;
             return dst;
         }
 
         /// <summary>
         /// Creates the matrix determined by a permutation
         /// </summary>
-        /// <param name="src">The source permutation</param>
-        public static BitMatrix16 ToBitMatrix(this Perm<N16> src)
+        /// <param name="perm">The source permutation</param>
+        [MethodImpl(Inline)]
+        public static BitMatrix16 ToBitMatrix(this Perm<N16> perm)
         {
             var dst = BitMatrix16.Alloc();
-            for(var row = 0; row<src.Length; row++)
-                dst[row,src[row]] = Bit.On;
+            for(var row = 0; row<perm.Length; row++)
+                dst[row,perm[row]] = Bit.On;
             return dst;
         }
 
@@ -43,23 +45,25 @@ namespace Z0
         /// Creates the matrix determined by a permutation
         /// </summary>
         /// <param name="src">The source permutation</param>
-        public static BitMatrix32 ToBitMatrix(this Perm<N32> src)
+        [MethodImpl(Inline)]
+        public static BitMatrix32 ToBitMatrix(this Perm<N32> perm)
         {
             var dst = BitMatrix32.Alloc();
-            for(var row = 0; row<src.Length; row++)
-                dst[row,src[row]] = Bit.On;
+            for(var row = 0; row<perm.Length; row++)
+                dst[row,perm[row]] = Bit.On;
             return dst;
         }
 
         /// <summary>
         /// Creates the matrix determined by a permutation
         /// </summary>
-        /// <param name="src">The source permutation</param>
-        public static BitMatrix64 ToBitMatrix(this Perm<N64> src)
+        /// <param name="perm">The source permutation</param>
+        [MethodImpl(Inline)]
+        public static BitMatrix64 ToBitMatrix(this Perm<N64> perm)            
         {
             var dst = BitMatrix64.Alloc();
-            for(var row = 0; row<src.Length; row++)
-                dst[row,src[row]] = Bit.On;
+            for(var row = 0; row<perm.Length; row++)
+                dst[row,perm[row]] = Bit.On;
             return dst;
         }
 

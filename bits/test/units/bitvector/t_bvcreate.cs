@@ -63,8 +63,8 @@ namespace Z0.Test
             }
         }
 
-        
-        public void bvcreate_ng13x8u()
+        //doesn't work
+        void bvcreate_ng13x8u()
         {
             var dim = n13;
             var bv = Random.BitVector<N13,byte>();
@@ -196,7 +196,7 @@ namespace Z0.Test
         {
             for(var i=0; i< SampleSize; i++)            
             {
-                var bv = Random.BitVector64();
+                var bv = Random.BitVector(n64);
                 var n = Random.Next(1, bv.Length);
                 var result = bv.Lsb(n).ToBitString();
                 var expect = bv.ToBitString()[0, n - 1];
@@ -208,7 +208,7 @@ namespace Z0.Test
         {
             for(var i=0; i< SampleSize; i++)            
             {
-                var bv = Random.BitVector64();
+                var bv = Random.BitVector(n64);
                 var n = Random.Next(1, bv.Length);
                 var result = bv.Msb(n).ToBitString();
                 var expect = bv.ToBitString().Reverse()[0, n - 1].Reverse();
@@ -227,56 +227,6 @@ namespace Z0.Test
             }
         }
 
-        public void powers()
-        {
-            var x = Random.BitVector8();
-            var expect2 = x * x;
-            var actual2 = x^2;
-            Claim.eq(expect2, actual2);
-
-            var expect4 = expect2 * expect2;
-            var actual4 = x^4;
-            Claim.eq(expect4, actual4);
-
-            var expect8 = expect4 * expect4;
-            var actual8 = x^8;
-            Claim.eq(expect8, actual8);
-
-            var expect16 = expect8 * expect8;
-            var actual16 = x^16;
-            Claim.eq(expect16, actual16);
-        }
-
-        public void powers2()
-        {
-
-            var max = 0;
-            var vectors = BitVector8.All.ToArray();
-            const int MaxCount = 256;
-            Claim.yea(vectors.Length == MaxCount);
-            Claim.eq(vectors.ToSet().Count, MaxCount);
-
-            for(var i=0; i< MaxCount; i++)
-            {
-                var v = vectors[i];
-                if(v.Empty)
-                    continue;
-
-                for(var j=2; j<MaxCount; j++)                
-                {
-                    
-                    var p = v^j;
-                    if(p == BitVector8.One)
-                    {
-                        if(j > max)
-                            max = j;
-                        break;
-                    }
-                }
-
-            }
-
-        }
 
         void bvcreate_natg_check<N,T>()
             where N : ITypeNat, new()

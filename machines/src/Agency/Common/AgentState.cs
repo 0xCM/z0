@@ -10,7 +10,7 @@ namespace Z0
     /// Defines the states in the agent lifecycle
     /// </summary>
     /// <remarks>
-    /// The agent lifecycle goes as follows:
+    /// The agent lifecycle is as follows:
     /// 1. New/activate/etc instantiates the ageent which leaves it in a Created state
     /// 2. If configuration data is supplied as part of instantiation, then the agent will
     /// transition to the Configured state automatically
@@ -24,7 +24,7 @@ namespace Z0
     /// 5. From the running state, either the agent or an external part, may transition to
     /// through Stopping -> Stopped sequence.
     /// </remarks>
-    public enum AgentState : short
+    public enum AgentState : uint
     {
         Created = T00,
 
@@ -46,7 +46,7 @@ namespace Z0
 
         Terminated = T09,
 
-        Error = -1
+        Error = uint.MaxValue
 
     }
 

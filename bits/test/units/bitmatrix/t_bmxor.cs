@@ -30,8 +30,8 @@ namespace Z0
         {
             for(var i=0; i<SampleSize; i++)
             {
-                var A = Random.BitMatrix32();
-                var B = Random.BitMatrix32();
+                var A = Random.BitMatrix(n32);
+                var B = Random.BitMatrix(n32);
                 var C = A ^ B;
 
                 var D = BitMatrix32.From(mathspan.xor(A.Bytes, B.Bytes));

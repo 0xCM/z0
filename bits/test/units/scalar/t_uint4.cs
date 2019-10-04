@@ -11,8 +11,74 @@ namespace Z0
     
     using static zfunc;
 
-    public class UInt4Test : UnitTest<UInt4Test>
+    public class UInt4Test : ScalarBitTest<UInt4Test>
     {
+
+        public void add_4u_check()
+        {
+            Claim.eq(8,Nibble.add(3,5));
+            Claim.eq(Nibble.MaxValue,Nibble.add(10,5));
+            Claim.eq(20 % 16,Nibble.add(10,10));
+
+        }
+
+        public void inc_4u_check()
+        {
+            var i = Nibble.MinValue;
+            Nibble.inc(ref i);
+            Nibble.inc(ref i);
+            Nibble.inc(ref i);
+            Nibble.inc(ref i);
+            Claim.eq(i,Nibble.add(Nibble.MinValue, 4));
+
+            Nibble.inc(ref i);
+            Nibble.inc(ref i);
+            Nibble.inc(ref i);
+            Nibble.inc(ref i);
+            Claim.eq(i,Nibble.add(Nibble.MinValue, 8));
+
+            Nibble.inc(ref i);
+            Nibble.inc(ref i);
+            Nibble.inc(ref i);
+            Nibble.inc(ref i);
+            Claim.eq(i,Nibble.add(Nibble.MinValue, 12));
+
+            Nibble.inc(ref i);
+            Nibble.inc(ref i);
+            Nibble.inc(ref i);
+            Nibble.inc(ref i);
+            Claim.eq(i,Nibble.MinValue);
+
+        }
+
+        public void dec_4u_check()
+        {
+            var i = Nibble.MaxValue;
+            Nibble.dec(ref i);
+            Nibble.dec(ref i);
+            Nibble.dec(ref i);
+            Nibble.dec(ref i);
+            Claim.eq(i, Nibble.sub(Nibble.MaxValue, 4));
+
+            Nibble.dec(ref i);
+            Nibble.dec(ref i);
+            Nibble.dec(ref i);
+            Nibble.dec(ref i);
+            Claim.eq(i, Nibble.sub(Nibble.MaxValue, 8));
+
+            Nibble.dec(ref i);
+            Nibble.dec(ref i);
+            Nibble.dec(ref i);
+            Nibble.dec(ref i);
+            Claim.eq(i, Nibble.sub(Nibble.MaxValue, 12));
+
+            Nibble.dec(ref i);
+            Nibble.dec(ref i);
+            Nibble.dec(ref i);
+            Nibble.dec(ref i);
+            Claim.eq(i,Nibble.MaxValue);
+
+        }
 
         public void uint4_create()
         {

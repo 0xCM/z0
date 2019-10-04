@@ -52,56 +52,56 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ref sbyte sub(ref sbyte lhs, sbyte rhs)
         {
-            lhs = (sbyte)(lhs - rhs);
+            lhs -= rhs;
             return ref lhs;
         }
 
         [MethodImpl(Inline)]
         public static ref byte sub(ref byte lhs, byte rhs)
         {
-            lhs = (byte)(lhs - rhs);
+            lhs -= rhs;
             return ref lhs;
         }
 
         [MethodImpl(Inline)]
         public static ref short sub(ref short lhs, short rhs)
         {
-            lhs = (short)(lhs - rhs);
+            lhs -= rhs;
             return ref lhs;
         }
 
         [MethodImpl(Inline)]
         public static ref ushort sub(ref ushort lhs, ushort rhs)
         {
-            lhs = (ushort)(lhs - rhs);
+            lhs -= rhs;
             return ref lhs;
         }
 
         [MethodImpl(Inline)]
         public static ref int sub(ref int lhs, int rhs)
         {
-            lhs = lhs - rhs;
+            lhs -= rhs;
             return ref lhs;
         }
 
         [MethodImpl(Inline)]
         public static ref uint sub(ref uint lhs, uint rhs)
         {
-            lhs = lhs - rhs;
+            lhs -= rhs;
             return ref lhs;
         }
 
         [MethodImpl(Inline)]
         public static ref long sub(ref long lhs, long rhs)
         {
-            lhs = lhs - rhs;
+            lhs -= rhs;
             return ref lhs;
         }
 
         [MethodImpl(Inline)]
         public static ref ulong sub(ref ulong lhs, ulong rhs)
         {
-            lhs = lhs - rhs;
+            lhs -= rhs;
             return ref lhs;
         }
     }

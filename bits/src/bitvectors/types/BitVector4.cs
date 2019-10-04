@@ -32,6 +32,7 @@ namespace Z0
         /// <summary>
         /// Allocates a zero-filled vector
         /// </summary>
+        [MethodImpl(Inline)]
         public static BitVector4 Alloc()
             => new BitVector4();
 
@@ -39,23 +40,22 @@ namespace Z0
         /// Creates a permutation-defined mask
         /// </summary>
         /// <param name="spec">The permutation</param>
+        [MethodImpl(Inline)]
         public static BitVector4 Mask(Perm spec)
-        {
-            var mask = Alloc();
-            var n = math.min(spec.Length, mask.Length);
-            for(var i = 0; i < n; i++)
-                mask[spec[i]] = i; 
-            return mask;
-        }
+            => bitvector.mask(spec, out BitVector4 dst);
 
         [MethodImpl(Inline)]
-        public static BitVector4 FromParts(Bit? x0 = null, Bit? x1 = null, Bit? x2 = null, Bit? x3 = null)
+        public static BitVector4 FromParts(Bit x0, Bit x1, Bit x2, Bit x3)
         {
             var data = (byte)0;
-            if(x0 == 1) data |= (1 << 0);
-            if(x1 == 1) data |= (1 << 1);
-            if(x2 == 1) data |= (1 << 2);
-            if(x3 == 1) data |= (1 << 3);
+            if(x0) 
+                data |= (1 << 0);
+            if(x1) 
+                data |= (1 << 1);
+            if(x2) 
+                data |= (1 << 2);
+            if(x3) 
+                data |= (1 << 3);
             return data;
         }
 
@@ -141,14 +141,13 @@ namespace Z0
             => bitvector.flip(src);
 
         /// <summary>
-        /// Computes the component-wise sum of the source operands. 
-        /// Note that this operator is equivalent to the XOR operator (^)
+        /// Computes the arithmetic sum of the source operands. 
         /// </summary>
         /// <param name="lhs">The left operand</param>
         /// <param name="rhs">The right operand</param>
         [MethodImpl(Inline)]
         public static BitVector4 operator +(in BitVector4 lhs, in BitVector4 rhs)
-            => bitvector.xor(lhs,rhs);
+            => bitvector.add(lhs,rhs);
 
         /// <summary>
         /// Computes the product of the operands. 
@@ -378,9 +377,9 @@ namespace Z0
         /// </summary>
         /// <param name="offset">The number of bits to shift</param>
         [MethodImpl(Inline)]
-        public BitVector4 Sll(uint offset)
+        public BitVector4 Sll(int offset)
         {
-            data <<= (int)offset;
+            data <<= offset;
             return this;
         }
 
@@ -389,9 +388,9 @@ namespace Z0
         /// </summary>
         /// <param name="offset">The number of bits to shift</param>
         [MethodImpl(Inline)]
-        public BitVector4 Srl(uint offset)
+        public BitVector4 Srl(int offset)
         {
-            data >>= (int)offset;
+            data >>= offset;
             return this;
         }
 
@@ -438,12 +437,12 @@ namespace Z0
         /// </summary>
         /// <param name="spec">The permutation</param>
         [MethodImpl(Inline)]
-        public void Permute(Perm spec)
+        public BitVector4 Permute(Perm spec)
         {
             var src = Replicate();
             for(var i=0; i<Length; i++)
                 this[i] = src[spec[i]];
-
+            return this;
         }
 
         /// <summary>

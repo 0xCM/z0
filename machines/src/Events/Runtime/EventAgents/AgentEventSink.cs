@@ -12,12 +12,12 @@ namespace Z0.Events
     using Microsoft.Diagnostics.Tracing.Session;
     using static zfunc;
 
-    public sealed class SystemEventSink : EventSink
+    public sealed class AgentEventSink : ServiceAgent
     {        
         public static IServiceAgent Define(AgentContext Context, AgentIdentity Identity)
-            => new SystemEventSink(Context, Identity);
+            => new AgentEventSink(Context, Identity);
 
-        SystemEventSink(AgentContext Context, AgentIdentity Identity)
+        AgentEventSink(AgentContext Context, AgentIdentity Identity)
             : base(Context, Identity)
         {
 
@@ -57,7 +57,7 @@ namespace Z0.Events
 
         protected override void OnStart()
         {
-            Session = new TraceEventSession(nameof(SystemEventSink));
+            Session = new TraceEventSession(nameof(AgentEventSink));
             var restarted = Session.EnableProvider(SystemEventWriter.SourceName);
             if(restarted)
                 warn($"Session was already in progress");            

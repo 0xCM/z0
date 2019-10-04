@@ -614,7 +614,7 @@ namespace Z0
         /// </summary>
         [MethodImpl(Inline)]
         public readonly BitString ToBitString()
-            => ToUInt128().ToBitString();
+            => BitString.FromScalar(x1) + BitString.FromScalar(x0);
 
         [MethodImpl(Inline)]
         public readonly string FormatBits(bool tlz = false, bool specifier = false, int? blockWidth = null)

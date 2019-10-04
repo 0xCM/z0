@@ -20,6 +20,9 @@ namespace Z0
 
         }
 
+        public static uint bb_pack23(in BitBlock23 src)
+            => src.Compress();
+
         static ReadOnlySpan<byte> U8Data => new byte[]
         {
             0x20, 0xda, 0x1f, 0x32, 0x4b, 0xca, 0x42, 0x5b,
@@ -44,29 +47,6 @@ namespace Z0
             0x4b708684, 0x64ee2b04
         };
 
-        [MethodImpl(Inline)]
-        public static int AddI32LoopInline()
-        {
-            var sum = 0;
-            for(var i=0; i<100; i++)
-                sum += i;
-            return sum;
-        }
-
-        [MethodImpl(NotInline)]
-        public static int AddI32Loop()
-        {
-            var sum = 0;
-            for(var i=0; i<100; i++)
-                sum += i;
-            return sum;
-        }
-
-        public static int AddI32LoopInlineCall()
-            => AddI32LoopInline();
-
-        public static int AddI32LoopCall()
-            => AddI32Loop();
 
         [MethodImpl(Inline)]
         public static uint Or8Inline(uint x0, uint x1, uint x2, uint x3, uint x4, uint x5, uint x6, uint x7)
@@ -106,8 +86,6 @@ namespace Z0
 
         public TypeCode GetTypeCodeUInt32()
             => GetTypeCode<uint>();
-
-
 
         public int CheckMatches()
         {
@@ -204,15 +182,7 @@ namespace Z0
         {
             return ChoiceIfElse10Inline(x);
         }
-
-        public uint CallRotLU32Inline(uint x, int offset)
-            => RotLU32Inline(x,offset);
         
-        public uint CallOr8InlineConst()
-            => Or8Inline(2, 4, 8, 12, 16, 32, 68, 64);
-
-        public uint CallOr8InlineVar(uint x0, uint x1, uint x2, uint x3, uint x4, uint x5, uint x6, uint x7)
-            => Or8Inline(x0, x1, x2, x3, x4, x5, x6, x7);
 
          public ReadOnlySpan<byte> ReadU8Data(int count)
             => U8Data.Slice(0,count);

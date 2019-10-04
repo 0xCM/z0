@@ -79,16 +79,20 @@ namespace Z0
             => new BitMatrix64(src.AsUInt64());
 
         [MethodImpl(Inline)]
+        public static BitMatrix64 operator & (BitMatrix64 A, BitMatrix64 B)
+            => BitMatrix.and(A,B);
+
+        [MethodImpl(Inline)]
+        public static BitMatrix64 operator | (BitMatrix64 A, BitMatrix64 B)
+            => BitMatrix.or(ref A,B);
+
+        [MethodImpl(Inline)]
         public static BitMatrix64 operator ^ (BitMatrix64 A, BitMatrix64 B)
             => BitMatrix.xor(A,B);
 
         [MethodImpl(Inline)]
-        public static BitMatrix64 operator + (BitMatrix64 A, BitMatrix64 B)
-            => BitMatrix.xor(A,B);
-
-        [MethodImpl(Inline)]
-        public static BitMatrix64 operator - (BitMatrix64 A, BitMatrix64 B)
-            => BitMatrix.sub(A,B);
+        public static BitMatrix64 operator ~ (BitMatrix64 A)
+            => BitMatrix.flip(A);
 
         [MethodImpl(Inline)]
         public static BitMatrix64 operator * (BitMatrix64 A, BitMatrix64 B)
@@ -97,22 +101,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitVector64 operator * (BitMatrix64 A, BitVector64 B)
             => BitMatrix.mul(A,B);
-
-        [MethodImpl(Inline)]
-        public static BitMatrix64 operator & (BitMatrix64 A, BitMatrix64 B)
-            => BitMatrix.and(A,B);
-
-        [MethodImpl(Inline)]
-        public static BitMatrix64 operator - (BitMatrix64 A)
-            => BitMatrix.negate(A);
-
-        [MethodImpl(Inline)]
-        public static BitMatrix64 operator ~ (BitMatrix64 A)
-            => BitMatrix.flip(A);
-
-        [MethodImpl(Inline)]
-        public static BitMatrix64 operator | (BitMatrix64 A, BitMatrix64 B)
-            => BitMatrix.or(ref A,B);
 
         [MethodImpl(Inline)]
         public static bool operator ==(BitMatrix64 A, BitMatrix64 B)
@@ -242,6 +230,15 @@ namespace Z0
             => data.Swap(i,j);
 
         /// <summary>
+        /// Applies a permutation to the matrix by swapping the rows
+        /// as indicated by permutation transpositions
+        /// </summary>
+        /// <param name="spec">The permutation definition</param>
+        [MethodImpl(Inline)]
+        public BitMatrix64 Apply(Perm<N64> perm)
+            => BitMatrix.apply(perm, ref this);
+
+        /// <summary>
         /// Returns the data for an index-identified column
         /// </summary>
         public readonly ulong ColData(int index)
@@ -275,16 +272,7 @@ namespace Z0
         /// Determines whether this matrix is equivalent to the canonical 0 matrix
         /// </summary>
         public readonly bool IsZero()
-        {
-            const int rowstep = 4;
-            for(var i=0; i< RowCount; i += rowstep)
-            {
-                this.GetCells(i, out Vec256<ulong> vSrc);
-                if(!dinx.testz(vSrc,vSrc))
-                    return false;
-            }
-            return true;
-        }        
+            => BitMatrix.testz(this);
 
         public readonly BitVector64 Diagonal()
         {
@@ -297,16 +285,6 @@ namespace Z0
 
         public BitMatrix64 AndNot(in BitMatrix64 rhs)
             => BitMatrix.andn(this, rhs, ref this);
-        // {
-        //     const int rowstep = 4;
-        //     for(var i=0; i< RowCount; i += rowstep)
-        //     {
-        //         this.GetCells(i, out Vec256<ulong> vLhs);
-        //         rhs.GetCells(i, out Vec256<ulong> vRhs);
-        //         dinx.vandn(vLhs,vRhs).StoreTo(ref data[i]);                
-        //     }
-        //     return this;
-        // }
 
         public readonly BitMatrix64 Transpose()
         {
@@ -315,7 +293,6 @@ namespace Z0
                 dst.data[i] = ColData(i);
             return dst;
         }
-
 
         /// <summary>
         /// Loads a CPU vector from matrix content
@@ -396,7 +373,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public bool Equals(BitMatrix64 rhs)
-            => this.AndNot(rhs).IsZero();
+            => BitMatrix.eq(this,rhs);
 
         public override bool Equals(object obj)
             => throw new NotSupportedException();

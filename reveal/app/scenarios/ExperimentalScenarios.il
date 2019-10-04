@@ -1,4 +1,14 @@
-// 2019-09-27 16:58:02:113
+// 2019-10-03 12:22:08:560
+uint bb_pack23(in BitBlock23 src)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldobj Z0.BitBlock23
+    IL_0006: stloc.0
+    IL_0007: ldloca.s V_0
+    IL_0009: call System.UInt32 Z0.BitBlock23::Compress()
+    IL_000E: ret
+
+}
 ReadOnlySpan<byte> get_U8Data()
 {
     IL_0000: ldsflda <PrivateImplementationDetails>/__StaticArrayInitTypeSize=64 <PrivateImplementationDetails>::4C95376F0126070C5E113DDFB17BBF8C2071FC7B
@@ -16,62 +26,6 @@ ReadOnlySpan<uint> get_U32Data()
     IL_000D: call System.Void System.Runtime.CompilerServices.RuntimeHelpers::InitializeArray(System.Array,System.RuntimeFieldHandle)
     IL_0012: call System.ReadOnlySpan`1<System.UInt32> System.ReadOnlySpan`1<System.UInt32>::op_Implicit(System.UInt32[])
     IL_0017: ret
-
-}
-int AddI32LoopInline()
-{
-    IL_0000: ldc.i4.0
-    IL_0001: stloc.0
-    IL_0002: ldc.i4.0
-    IL_0003: stloc.1
-    IL_0004: br.s IL_000E
-    IL_0006: ldloc.0
-    IL_0007: ldloc.1
-    IL_0008: add
-    IL_0009: stloc.0
-    IL_000A: ldloc.1
-    IL_000B: ldc.i4.1
-    IL_000C: add
-    IL_000D: stloc.1
-    IL_000E: ldloc.1
-    IL_000F: ldc.i4.s 100
-    IL_0011: blt.s IL_0006
-    IL_0013: ldloc.0
-    IL_0014: ret
-
-}
-int AddI32Loop()
-{
-    IL_0000: ldc.i4.0
-    IL_0001: stloc.0
-    IL_0002: ldc.i4.0
-    IL_0003: stloc.1
-    IL_0004: br.s IL_000E
-    IL_0006: ldloc.0
-    IL_0007: ldloc.1
-    IL_0008: add
-    IL_0009: stloc.0
-    IL_000A: ldloc.1
-    IL_000B: ldc.i4.1
-    IL_000C: add
-    IL_000D: stloc.1
-    IL_000E: ldloc.1
-    IL_000F: ldc.i4.s 100
-    IL_0011: blt.s IL_0006
-    IL_0013: ldloc.0
-    IL_0014: ret
-
-}
-int AddI32LoopInlineCall()
-{
-    IL_0000: call System.Int32 Z0.ExperimentalScenarios::AddI32LoopInline()
-    IL_0005: ret
-
-}
-int AddI32LoopCall()
-{
-    IL_0000: call System.Int32 Z0.ExperimentalScenarios::AddI32Loop()
-    IL_0005: ret
 
 }
 uint Or8Inline(uint x0, uint x1, uint x2, uint x3, uint x4, uint x5, uint x6, uint x7)
@@ -314,42 +268,6 @@ int CallChoiceIfElse10Inline(int x)
     IL_0001: ldarg.1
     IL_0002: call System.Int32 Z0.ExperimentalScenarios::ChoiceIfElse10Inline(System.Int32)
     IL_0007: ret
-
-}
-uint CallRotLU32Inline(uint x, int offset)
-{
-    IL_0000: ldarg.1
-    IL_0001: ldarg.2
-    IL_0002: call System.UInt32 Z0.ExperimentalScenarios::RotLU32Inline(System.UInt32,System.Int32)
-    IL_0007: ret
-
-}
-uint CallOr8InlineConst()
-{
-    IL_0000: ldc.i4.2
-    IL_0001: ldc.i4.4
-    IL_0002: ldc.i4.8
-    IL_0003: ldc.i4.s 12
-    IL_0005: ldc.i4.s 16
-    IL_0007: ldc.i4.s 32
-    IL_0009: ldc.i4.s 68
-    IL_000B: ldc.i4.s 64
-    IL_000D: call System.UInt32 Z0.ExperimentalScenarios::Or8Inline(System.UInt32,System.UInt32,System.UInt32,System.UInt32,System.UInt32,System.UInt32,System.UInt32,System.UInt32)
-    IL_0012: ret
-
-}
-uint CallOr8InlineVar(uint x0, uint x1, uint x2, uint x3, uint x4, uint x5, uint x6, uint x7)
-{
-    IL_0000: ldarg.1
-    IL_0001: ldarg.2
-    IL_0002: ldarg.3
-    IL_0003: ldarg.s x3
-    IL_0005: ldarg.s x4
-    IL_0007: ldarg.s x5
-    IL_0009: ldarg.s x6
-    IL_000B: ldarg.s x7
-    IL_000D: call System.UInt32 Z0.ExperimentalScenarios::Or8Inline(System.UInt32,System.UInt32,System.UInt32,System.UInt32,System.UInt32,System.UInt32,System.UInt32,System.UInt32)
-    IL_0012: ret
 
 }
 ReadOnlySpan<byte> ReadU8Data(int count)

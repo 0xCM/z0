@@ -14,9 +14,28 @@ namespace Z0
     /// <summary>
     /// Specifies a transition that occurred 
     /// </summary>
-    [StructLayout(LayoutKind.Explicit)]
     public readonly struct AgentTransition
     {
+        /// <summary>
+        /// Specifies the agent that experienced the transition
+        /// </summary>
+        public readonly AgentIdentity Agent;
+
+        /// <summary>
+        /// Indicates the relative time at which the transition ocurred
+        /// </summary>
+        public readonly ulong Timestamp;
+        
+        /// <summary>
+        /// Specifies the state of the agent before the transition
+        /// </summary>
+        public readonly AgentState SourceState;
+
+        /// <summary>
+        /// Specifies the state of the agent ater the transition
+        /// </summary>
+        public readonly AgentState TargetState;
+
         public AgentTransition(AgentIdentity Agent, ulong Timestamp, AgentState SourceState, AgentState TargetState)
         {
             this.Agent = Agent;
@@ -24,29 +43,6 @@ namespace Z0
             this.SourceState = SourceState;
             this.TargetState = TargetState;
         }
-        /// <summary>
-        /// Specifies the agent that experienced the transition
-        /// </summary>
-        [FieldOffset(0)]
-        public readonly AgentIdentity Agent;
-
-        /// <summary>
-        /// Indicates the relative time at which the transition ocurred
-        /// </summary>
-        [FieldOffset(8)]
-        public readonly ulong Timestamp;
-        
-        /// <summary>
-        /// Specifies the state of the agent before the transition
-        /// </summary>
-        [FieldOffset(16)]
-        public readonly AgentState SourceState;
-
-        /// <summary>
-        /// Specifies the state of the agent ater the transition
-        /// </summary>
-        [FieldOffset(18)]
-        public readonly AgentState TargetState;
 
         public override string ToString()
             => $"Agent {Agent}: {SourceState} -> {TargetState}";

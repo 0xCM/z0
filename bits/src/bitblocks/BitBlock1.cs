@@ -15,13 +15,12 @@ namespace Z0
     /// <summary>
     /// Represents 1 bit with 1 8-bit value that may range over {0,1}
     /// </summary>
-    [StructLayout(LayoutKind.Explicit, Size = 1)]
+    [StructLayout(LayoutKind.Sequential, Size = 1)]
     public struct BitBlock1 : IBitBlock
     {
         /// <summary>
         ///  Bit 0
         /// </summary>
-        [FieldOffset(0)]
         public byte Bit0;
 
         [MethodImpl(Inline)]

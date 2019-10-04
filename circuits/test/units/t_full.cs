@@ -88,8 +88,8 @@ namespace Z0
 
         public void fa_32x32x64_bv()
         {
-            var x = Random.BitVector32();
-            var y = Random.BitVector32();
+            var x = Random.BitVector(n32);
+            var y = Random.BitVector(n32);
             var cin = BitVector32.Zero;
 
             var v64 = FullAdder.Compute(x,y,cin);

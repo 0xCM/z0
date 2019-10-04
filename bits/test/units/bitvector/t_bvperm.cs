@@ -14,6 +14,8 @@ namespace Z0.Test
     public class t_bvperm : BitVectorTest<t_bvperm>
     {
 
+
+        
         public void perm8_example()
         {        
             var perm = Perm.Define<N8>((2,3), (6,7));
@@ -24,25 +26,6 @@ namespace Z0.Test
 
         }
 
-
-        public void Experiment()
-        {
-            //Create an explicit bit pattern
-            var pattern = Random.Bits().Select(x => (byte)x).TakeArray(32);
-
-            //Push pattern into a 256-bit vector
-            var vPattern = Vec256.Load(pattern);
-
-            //Define permutation
-            var perm = Perm.Define<N32>((1,10), (2,11), (3, 8));
-
-            var vPerm = Vec256.Load(perm.Terms);
-
-            //var result = dinx.permute(vPattern, vPerm)
-
-            
-
-        }
 
         public void perm32()
         {
@@ -66,16 +49,24 @@ namespace Z0.Test
             Claim.eq(v1[29],v2[2]);
         }
 
-        public void perm64()
+        public void perm64_A()
         {
             for(var j=0; j<SampleSize; j++)
             {
                 var p1 = Random.Perm(n64);
-                var v1 = Random.BitVector64();
+                var v1 = Random.BitVector(n64);
                 var v2 = v1.Replicate(p1);
                 for(var i=0; i<v1.Length; i++)
                     Claim.eq(v1[p1[i]], v2[i]);
             }
+        }
+
+        public void perm64_B()
+        {
+            var p = Perm.Define(n64, (0,1),(1,2),(2,3),(3,4),(4,5),(5,6));
+            var bv = BitVector64.One;
+            bv.Permute(p);
+            Claim.eq(bv[6], Bit.On);
         }
 
         public void perm16()

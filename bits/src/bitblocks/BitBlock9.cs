@@ -15,81 +15,63 @@ namespace Z0
     /// <summary>
     /// Represents 9 bits with 9 8-bit values that may range over {0,1}
     /// </summary>
-    [StructLayout(LayoutKind.Explicit, Size=9)]
+    [StructLayout(LayoutKind.Sequential, Size=9)]
     public struct BitBlock9 : IBitBlock
     {
         /// <summary>
         ///  Bit 0
         /// </summary>
-        [FieldOffset(0)]
         public byte Bit0;
 
         /// <summary>
         ///  Bit 1
         /// </summary>
-        [FieldOffset(1)]
         public byte Bit1;
 
         /// <summary>
         ///  Bit 2
         /// </summary>
-        [FieldOffset(2)]
         public byte Bit2;
 
         /// <summary>
         ///  Bit 2
         /// </summary>
-        [FieldOffset(3)]
         public byte Bit3;
         
         /// <summary>
         ///  Bit 4
         /// </summary>
-        [FieldOffset(4)]
         public byte Bit4;
 
         /// <summary>
         ///  Bit 5
         /// </summary>
-        [FieldOffset(5)]
         public byte Bit5;
 
         /// <summary>
         ///  Bit 6
         /// </summary>
-        [FieldOffset(6)]
         public byte Bit6;
 
         /// <summary>
         ///  Bit 7
         /// </summary>
-        [FieldOffset(7)]
         public byte Bit7;
 
         /// <summary>
         ///  Bit 8
         /// </summary>
-        [FieldOffset(8)]
         public byte Bit8;
 
-        /// <summary>
-        /// Block 0 of width 3
-        /// </summary>
-        [FieldOffset(0)]
-        public BitBlock3 Block3x0;
 
-        /// <summary>
-        /// Block 1 of width 3
-        /// </summary>
-        [FieldOffset(3)]
-        public BitBlock3 Block3x1;
-
-        /// <summary>
-        /// Block 2 of width 3
-        /// </summary>
-        [FieldOffset(6)]
-        public BitBlock3 Block3x2;
-
+        [MethodImpl(Inline)]
+        public ushort Compress()
+        {
+           uint dst = (uint)Unsafe.As<BitBlock9,BitBlock8>(ref this).Compress();
+           dst |= ((uint)Bit8 << 8);
+           return (ushort)dst;
+        }
+            
         [MethodImpl(Inline)]
         public byte GetPart(int i)
             => Unsafe.Add(ref Unsafe.As<BitBlock9, byte>(ref this), i);

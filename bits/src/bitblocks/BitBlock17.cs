@@ -117,7 +117,6 @@ namespace Z0
         [FieldOffset(16)]
         public byte Bit16;
 
-
         [MethodImpl(Inline)]
         public Span<byte> AsSpan()
             => BitView.ViewBits(ref this).Bytes;        
@@ -129,7 +128,15 @@ namespace Z0
         [MethodImpl(Inline)]
         public void SetPart(int i, byte value)
             => Unsafe.Add(ref Unsafe.As<BitBlock17, byte>(ref this), i) = value;
-        
+
+        [MethodImpl(Inline)]
+        public uint Compress()
+        {
+           uint dst = (uint)Unsafe.As<BitBlock17, BitBlock16>(ref this).Compress();
+           dst |= ((uint)Bit16 << 16);
+           return dst;
+        }
+
         public byte this [int i]
         {
             [MethodImpl(Inline)]

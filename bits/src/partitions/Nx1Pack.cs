@@ -30,13 +30,9 @@ namespace Z0
         static ref ulong uint64(ref BitBlock16 src, N1 hi)
             => ref Unsafe.As<BitBlock8,ulong>(ref src.Block8x1);
 
-
         [MethodImpl(Inline)]
         public static byte pack8x1(BitBlock8 src)
-        {            
-            return (byte)Bits.gather(uint64(ref src), (ulong)BitMask64.Lsb8);
-            
-        }
+            => (byte)Bits.gather(uint64(ref src), (ulong)BitMask64.Lsb8);            
 
         [MethodImpl(Inline)]
         public static ref ushort pack16x1(BitBlock16 src, ref ushort dst)
@@ -54,7 +50,6 @@ namespace Z0
             dst |= (uint)(Bits.gather(uint64c(in src.Block8x3), (ulong)BitMask64.Lsb8) << 24);            
             return ref dst;
         }
-
 
         public static ref BitBlock8 unpack8x1(byte src, ref BitBlock8 dst)
         {

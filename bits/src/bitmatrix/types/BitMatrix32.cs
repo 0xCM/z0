@@ -83,26 +83,6 @@ namespace Z0
         public static BitMatrix32 From(Span<byte> src)        
             => new BitMatrix32(src.AsUInt32());
 
-        /// <summary>
-        /// Negates the operand. 
-        /// </summary>
-        /// <param name="src">The source matrix</param>
-        [MethodImpl(Inline)]
-        public static BitMatrix32 operator - (BitMatrix32 src)
-            => BitMatrix.flip(src);
-
-        [MethodImpl(Inline)]
-        public static BitMatrix32 operator - (BitMatrix32 lhs, BitMatrix32 rhs)
-            => BitMatrix.sub(lhs,rhs);
-
-        [MethodImpl(Inline)]
-        public static BitMatrix32 operator * (BitMatrix32 lhs, BitMatrix32 rhs)
-            => BitMatrix.mul(lhs, rhs);
-
-        [MethodImpl(Inline)]
-        public static BitVector32 operator * (BitMatrix32 lhs, BitVector32 rhs)
-            => BitMatrix.mul(lhs, rhs);
-
         [MethodImpl(Inline)]
         public static BitMatrix32 operator & (BitMatrix32 lhs, BitMatrix32 rhs)
             => BitMatrix.and(lhs,rhs);
@@ -112,8 +92,7 @@ namespace Z0
             => BitMatrix.or(lhs, rhs);
 
         /// <summary>
-        /// Applies element-wise XOR to corresponding operand entries. Note that this
-        /// is equivalent to the addition operator (+) 
+        /// Applies element-wise XOR to corresponding operand entries.
         /// </summary>
         /// <param name="lhs">The left matrix</param>
         /// <param name="rhs">The right matrix</param>
@@ -128,6 +107,14 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitMatrix32 operator ~ (BitMatrix32 src)
             => BitMatrix.flip(src);
+
+        [MethodImpl(Inline)]
+        public static BitMatrix32 operator * (BitMatrix32 lhs, BitMatrix32 rhs)
+            => BitMatrix.mul(lhs, rhs);
+
+        [MethodImpl(Inline)]
+        public static BitVector32 operator * (BitMatrix32 lhs, BitVector32 rhs)
+            => BitMatrix.mul(lhs, rhs);
 
         [MethodImpl(Inline)]
         public static bool operator ==(BitMatrix32 lhs, BitMatrix32 rhs)
@@ -258,6 +245,15 @@ namespace Z0
         public void RowSwap(int i, int j)
             => data.Swap(i,j);
 
+        /// <summary>
+        /// Applies a permutation to the matrix by swapping the rows
+        /// as indicated by permutation transpositions
+        /// </summary>
+        /// <param name="spec">The permutation definition</param>
+        [MethodImpl(Inline)]
+        public BitMatrix32 Apply(Perm<N32> perm)
+            => BitMatrix.apply(perm, ref this);
+
         public readonly uint ColData(int index)
         {
             uint col = 0;
@@ -272,19 +268,11 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public bool Equals(BitMatrix32 rhs)
-            => this.AndNot(rhs).IsZero();
+            => BitMatrix.eq(this,rhs);
 
+        [MethodImpl(Inline)]
         public readonly bool IsZero()
-        {
-            const int rowstep = 8;
-            for(var i=0; i< RowCount; i += rowstep)
-            {
-                this.GetCells(i, out Vec256<uint> vSrc);
-                if(!ginx.testz<uint>(vSrc,vSrc))
-                    return false;
-            }
-            return true;
-        }
+            => BitMatrix.testz(this);
 
         public readonly BitMatrix32 AndNot(BitMatrix32 rhs)
         {

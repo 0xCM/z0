@@ -45,7 +45,6 @@ namespace Z0
             return (ushort)prod;
         }
 
-
         /// <summary>
         /// Computes the carryless product of the operands reduced by a specified polynomial
         /// </summary>
@@ -155,8 +154,6 @@ namespace Z0
                 );
             return ref dst;
         }
-
-
     }
 
     /// <summary>

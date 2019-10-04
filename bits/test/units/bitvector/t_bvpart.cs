@@ -18,7 +18,7 @@ namespace Z0.Test
             Span<BitVector16> dst = stackalloc BitVector16[2];
             for(var i=0; i<SampleSize; i++)
             {
-                var x = Random.BitVector32();
+                var x = Random.BitVector(n32);
                 bitvector.partition(x, dst);
                 Claim.eq(dst[0], x.Lo);
                 Claim.eq(dst[1], x.Hi);
@@ -30,7 +30,7 @@ namespace Z0.Test
             Span<BitVector4> dst = stackalloc BitVector4[8];
             for(var i=0; i<SampleSize; i++)
             {
-                var x = Random.BitVector32();
+                var x = Random.BitVector(n32);
                 bitvector.partition(x,dst);
                 for(int j=0,k=0; j<28; j+=4, k++)
                 {

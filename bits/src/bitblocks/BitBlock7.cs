@@ -15,49 +15,42 @@ namespace Z0
     /// <summary>
     /// Represents 6 bits with 6 8-bit values that may range over {0,1}
     /// </summary>
-    [StructLayout(LayoutKind.Explicit, Size=7)]
+    [StructLayout(LayoutKind.Sequential, Size=7)]
     public struct BitBlock7 : IBitBlock
     {
         /// <summary>
         ///  Bit 0
         /// </summary>
-        [FieldOffset(0)]
         public byte Bit0;
 
         /// <summary>
         ///  Bit 1
         /// </summary>
-        [FieldOffset(1)]
         public byte Bit1;
 
         /// <summary>
         ///  Bit 2
         /// </summary>
-        [FieldOffset(2)]
         public byte Bit2;
 
         /// <summary>
         ///  Bit 2
         /// </summary>
-        [FieldOffset(3)]
         public byte Bit3;
         
         /// <summary>
         ///  Bit 4
         /// </summary>
-        [FieldOffset(4)]
         public byte Bit4;
 
         /// <summary>
         ///  Bit 5
         /// </summary>
-        [FieldOffset(5)]
         public byte Bit5;
 
         /// <summary>
-        ///  Bit 5
+        ///  Bit 6
         /// </summary>
-        [FieldOffset(6)]
         public byte Bit6;
 
        [MethodImpl(Inline)]        
@@ -72,6 +65,14 @@ namespace Z0
         public void SetPart(int i, byte value)
             => Unsafe.Add(ref Unsafe.As<BitBlock7, byte>(ref this), i) = value;
         
+        [MethodImpl(Inline)]
+        public byte Compress()
+        {
+            uint dst = (uint)Unsafe.As<BitBlock7,BitBlock6>(ref this).Compress();
+            dst |= ((uint)Bit6 << 6);
+            return (byte)dst;
+        }
+
         public byte this [int i]
         {
             [MethodImpl(Inline)]

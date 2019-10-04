@@ -13,6 +13,7 @@ namespace Z0
     public struct BitBlock<T> : IBitBlock<T>
         where T : unmanaged, IBitBlock
     {
+        T data;
 
         /// <summary>
         /// Queries/manipulates an index-identified bit
@@ -23,7 +24,19 @@ namespace Z0
         public static ref byte Bit(ref BitBlock<T> src, BitPos i)
             => ref Unsafe.Add(ref Unsafe.As<BitBlock<T>, byte>(ref src), i);
 
-        T data;
+        /// <summary>
+        /// Implicitly unwraps the encapsulated data
+        /// </summary>
+        /// <param name="src">The generic source</param>
+        public static implicit operator T(in BitBlock<T> src)
+            => src.data;
+
+        /// <summary>
+        /// Implicitly wraps blocked data
+        /// </summary>
+        /// <param name="src">The generic source</param>
+        public static implicit operator BitBlock<T>(in T src)
+            => new BitBlock<T>(src);
 
         /// <summary>
         /// The count of represented bits and the number of bytes occupied by the representation

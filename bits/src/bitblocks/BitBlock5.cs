@@ -15,39 +15,33 @@ namespace Z0
     /// <summary>
     /// Represents 5 bits with 5 8-bit values that may range over {0,1}
     /// </summary>
-    [StructLayout(LayoutKind.Explicit, Size=5)]
+    [StructLayout(LayoutKind.Sequential, Size=5)]
     public struct BitBlock5 : IBitBlock
     {
         /// <summary>
         ///  Bit 0
         /// </summary>
-        [FieldOffset(0)]
         public byte Bit0;
 
         /// <summary>
         ///  Bit 1
         /// </summary>
-        [FieldOffset(1)]
         public byte Bit1;
 
         /// <summary>
         ///  Bit 2
         /// </summary>
-        [FieldOffset(2)]
         public byte Bit2;
 
         /// <summary>
         ///  Bit 2
         /// </summary>
-        [FieldOffset(3)]
         public byte Bit3;
         
         /// <summary>
         ///  Bit 4
         /// </summary>
-        [FieldOffset(4)]
         public byte Bit4;
-
  
         [MethodImpl(Inline)]
         public byte GetPart(int i)
@@ -65,6 +59,15 @@ namespace Z0
             [MethodImpl(Inline)]
             set => SetPart(i,value);
         }
+
+        [MethodImpl(Inline)]
+        public byte Compress()
+        {
+            uint dst = (uint)Unsafe.As<BitBlock5,BitBlock4>(ref this).Compress();
+            dst |= ((uint)Bit4 << 4);
+            return (byte)dst;
+        }
+
 
         public string Format()
             => this.AsGeneric().Format(); 

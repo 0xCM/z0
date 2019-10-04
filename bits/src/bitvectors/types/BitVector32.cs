@@ -42,14 +42,9 @@ namespace Z0
         /// Creates a permutation-defined mask
         /// </summary>
         /// <param name="spec">The permutation</param>
+        [MethodImpl(Inline)]
         public static BitVector32 Mask(Perm spec)
-        {
-            var mask = Alloc();
-            var n = math.min(spec.Length, mask.Length);
-            for(var i = 0; i < n; i++)
-                mask[spec[i]] = i; 
-            return mask;
-        }
+            => bitvector.mask(spec, out BitVector32 dst);
 
         /// <summary>
         /// Creates a vector from an usigned 32-bit integer
@@ -183,84 +178,86 @@ namespace Z0
         /// Computes the bitwise XOR of the source operands
         /// Note that the XOR operator is equivalent to the (+) operator
         /// </summary>
-        /// <param name="lhs">The left vector</param>
-        /// <param name="rhs">The right vector</param>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static BitVector32 operator ^(in BitVector32 lhs, in BitVector32 rhs)
-            => bitvector.xor(lhs,rhs);
+        public static BitVector32 operator ^(in BitVector32 x, in BitVector32 y)
+            => bitvector.xor(x,y);
 
         /// <summary>
         /// Computes the bitwise AND of the source operands
-        /// Note that the AND operator is equivalent to the (*) operator
         /// </summary>
-        /// <param name="lhs">The left vector</param>
-        /// <param name="rhs">The right vector</param>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static BitVector32 operator &(in BitVector32 lhs, in BitVector32 rhs)
-            => bitvector.and(lhs,rhs);
+        public static BitVector32 operator &(in BitVector32 x, in BitVector32 y)
+            => bitvector.and(x,y);
 
         /// <summary>
         /// Computes the scalar product of the operands
         /// </summary>
-        /// <param name="lhs">The left operand</param>
-        /// <param name="rhs">The right operand</param>
+        /// <param name="x">The left operand</param>
+        /// <param name="y">The right operand</param>
         [MethodImpl(Inline)]
-        public static Bit operator %(in BitVector32 lhs, in BitVector32 rhs)
-            => bitvector.dot(lhs,rhs);
+        public static Bit operator %(in BitVector32 x, in BitVector32 y)
+            => bitvector.dot(x,y);
 
         /// <summary>
         /// Computes the bitwise OR of the source operands
         /// </summary>
-        /// <param name="lhs">The left vector</param>
-        /// <param name="rhs">The right vector</param>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static BitVector32 operator |(in BitVector32 lhs, in BitVector32 rhs)
-            => bitvector.or(lhs,rhs);
+        public static BitVector32 operator |(in BitVector32 x, in BitVector32 y)
+            => bitvector.or(x,y);
 
         /// <summary>
         /// Computes the bitwise complement of the operand. 
         /// </summary>
-        /// <param name="lhs">The source operand</param>
+        /// <param name="x">The source operand</param>
         [MethodImpl(Inline)]
         public static BitVector32 operator ~(BitVector32 src)
             => bitvector.flip(src);
 
         /// <summary>
-        /// Computes the sum of the source operands
-        /// Note that the addition operator is equivalent to the (^) operator
+        /// Computes the arithmetic sum of the source operands. 
         /// </summary>
-        /// <param name="lhs">The left vector</param>
-        /// <param name="rhs">The right vector</param>
+        /// <param name="x">The left operand</param>
+        /// <param name="y">The right operand</param>
         [MethodImpl(Inline)]
-        public static BitVector32 operator +(BitVector32 lhs, BitVector32 rhs)
-            => lhs ^ rhs;
+        public static BitVector32 operator +(BitVector32 x, BitVector32 y)
+            => bitvector.add(x,y);
 
         /// <summary>
-        /// Computes the product of the operands. 
-        /// Note that this operator is equivalent to the AND operator (&)
+        /// Arithmetically increments the source vector 
         /// </summary>
-        /// <param name="lhs">The left operand</param>
-        /// <param name="rhs">The right operand</param>
+        /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
-        public static BitVector32 operator *(BitVector32 lhs, BitVector32 rhs)
-            => lhs & rhs;
+        public static BitVector32 operator ++(BitVector32 src)
+            => bitvector.inc(src);
 
         /// <summary>
-        /// Subtracts the second operand from the first. Note that this operator is equivalent to
-        /// the composite operation of applying the XOR operator to the left operand and the
-        /// complement of the second
+        /// Arithmetically decrements the source vector 
         /// </summary>
-        /// <param name="lhs">The left vector</param>
-        /// <param name="rhs">The right vector</param>
+        /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
-        public static BitVector32 operator - (BitVector32 lhs, BitVector32 rhs)
-            => bitvector.sub(lhs,rhs);
+        public static BitVector32 operator --(BitVector32 src)
+            => bitvector.dec(src);
+
+        /// <summary>
+        /// Subtracts the second operand from the first. 
+        /// </summary>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
+        [MethodImpl(Inline)]
+        public static BitVector32 operator - (BitVector32 x, BitVector32 y)
+            => bitvector.sub(x,y);
 
         /// <summary>
         /// Negates the operand. Note that this operator is equivalent to the 
         /// complement operator (~)
         /// </summary>
-        /// <param name="lhs">The source operand</param>
+        /// <param name="x">The source operand</param>
         [MethodImpl(Inline)]
         public static BitVector32 operator -(BitVector32 src)
             => bitvector.negate(src);
@@ -268,18 +265,18 @@ namespace Z0
         /// <summary>
         /// Left-shifts the bits in the source
         /// </summary>
-        /// <param name="lhs">The source operand</param>
+        /// <param name="x">The source operand</param>
         [MethodImpl(Inline)]
-        public static BitVector32 operator <<(BitVector32 lhs, int offset)
-            => bitvector.sll(lhs,offset);
+        public static BitVector32 operator <<(BitVector32 x, int offset)
+            => bitvector.sll(x,offset);
 
         /// <summary>
         /// Right-shifts the bits in the source
         /// </summary>
-        /// <param name="lhs">The source operand</param>
+        /// <param name="x">The source operand</param>
         [MethodImpl(Inline)]
-        public static BitVector32 operator >>(BitVector32 lhs, int offset)
-            => bitvector.srl(lhs,offset);
+        public static BitVector32 operator >>(BitVector32 x, int offset)
+            => bitvector.srl(x,offset);
 
         /// <summary>
         /// Returns true if the source vector is nonzero, false otherwise
@@ -298,12 +295,12 @@ namespace Z0
             => !src.Nonempty;
 
         [MethodImpl(Inline)]
-        public static bool operator ==(in BitVector32 lhs, in BitVector32 rhs)
-            => lhs.Equals(rhs);
+        public static bool operator ==(in BitVector32 x, in BitVector32 y)
+            => x.Equals(y);
 
         [MethodImpl(Inline)]
-        public static bool operator !=(in BitVector32 lhs, in BitVector32 rhs)
-            => !lhs.Equals(rhs);
+        public static bool operator !=(in BitVector32 x, in BitVector32 y)
+            => !x.Equals(y);
 
         /// <summary>
         /// Initializes the vector with the source value it represents
@@ -367,13 +364,7 @@ namespace Z0
         public BitVector16 Lo
         {
             [MethodImpl(Inline)]
-            get => Bits.split(data).x0;
-            
-            [MethodImpl(Inline)]
-            set
-            {
-
-            }
+            get => Bits.split(data).x0;            
         }
 
         public BitVector16 Hi
@@ -381,11 +372,6 @@ namespace Z0
             [MethodImpl(Inline)]
             get => Bits.split(data).x1;
 
-            [MethodImpl(Inline)]
-            set
-            {
-
-            }
         }
         
         /// <summary>
@@ -483,7 +469,40 @@ namespace Z0
         [MethodImpl(Inline)]
         public BitVector32 Flip()
         {
-            data = (byte)~data;
+            data = ~data;
+            return this;
+        }
+
+        /// <summary>
+        /// Increments the vector arithmetically
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        [MethodImpl(Inline)]
+        public BitVector32 Inc()
+        {
+            bitvector.inc(ref this);
+            return this;
+        }
+
+        /// <summary>
+        /// Decrements the vector arithmetically
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        [MethodImpl(Inline)]
+        public BitVector32 Dec()
+        {
+            bitvector.dec(ref this);
+            return this;
+        }
+
+        /// <summary>
+        /// Computes the in-place arithmetic difference between the source vector and another
+        /// </summary>
+        /// <param name="y">The vector to subtract from the source</param>
+        [MethodImpl(Inline)]
+        public BitVector32 Sub(BitVector32 y)
+        {
+            bitvector.sub(ref this, y);
             return this;
         }
 
@@ -557,13 +576,8 @@ namespace Z0
         /// </summary>
         /// <param name="spec">The permutation</param>
         [MethodImpl(Inline)]
-        public void Permute(Perm spec)        
-        {
-            var src = Replicate();
-            for(var i=0; i<Length; i++)
-                this[i] = src[spec[i]];
-
-        }
+        public BitVector32 Permute(Perm spec)
+            => bitvector.perm(ref this, spec);
             
         /// <summary>
         /// Constructs a bitvector formed from the n lest significant bits of the current vector
@@ -586,9 +600,9 @@ namespace Z0
         /// </summary>
         /// <param name="offset">The number of bits to shift</param>
         [MethodImpl(Inline)]
-        public BitVector32 Sll(uint offset)
+        public BitVector32 Sll(int offset)
         {
-            data <<= (int)offset;
+            data <<= offset;
             return this;
         }
 
@@ -597,9 +611,9 @@ namespace Z0
         /// </summary>
         /// <param name="offset">The number of bits to shift</param>
         [MethodImpl(Inline)]
-        public BitVector32 Srl(uint offset)
+        public BitVector32 Srl(int offset)
         {
-            data >>= (int)offset;
+            data >>= offset;
             return this;
         }
 
@@ -652,10 +666,10 @@ namespace Z0
         /// <summary>
         /// Computes the bitwise and of the vector the complement of the right operand
         /// </summary>
-        /// <param name="rhs">The right vector</param>
+        /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public BitVector32 AndNot(in BitVector32 rhs)
-            => Bits.andn((uint)this, (uint)rhs);
+        public BitVector32 AndNot(in BitVector32 y)
+            => Bits.andn((uint)this, (uint)y);
 
         [MethodImpl(Inline)]
         public readonly bool AllOnes()
@@ -709,10 +723,10 @@ namespace Z0
         /// <summary>
         /// Computes the scalar product of the source vector and another
         /// </summary>
-        /// <param name="rhs">The right operand</param>
+        /// <param name="y">The right operand</param>
         [MethodImpl(Inline)]
-        public readonly Bit Dot(BitVector32 rhs)
-            => bitvector.dot(this,rhs);
+        public readonly Bit Dot(BitVector32 y)
+            => bitvector.dot(this,y);
 
 
         [MethodImpl(Inline)]
@@ -790,8 +804,8 @@ namespace Z0
             => ToBitString().Format(tlz, specifier, blockWidth);
 
         [MethodImpl(Inline)]
-        public bool Equals(BitVector32 rhs)
-            => data == rhs.data;
+        public bool Equals(BitVector32 y)
+            => data == y.data;
 
         public override bool Equals(object obj)
             => obj is BitVector32 x ? Equals(x) : false;
@@ -807,11 +821,11 @@ namespace Z0
             => BitConverter.ToUInt32(array(x0, x1, x2, x3), 0);
 
         [MethodImpl(Inline)]
-        Bit DotRef(BitVector32 rhs)
+        Bit DotRef(BitVector32 y)
         {
             var result = Bit.Off;
             for(var i=0; i<Length; i++)
-                result ^= this[i] & rhs[i];
+                result ^= this[i] & y[i];
             return result;
         }
 

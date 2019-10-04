@@ -9,12 +9,8 @@ namespace Z0.Events
     using System.Threading.Tasks;
     using static zfunc;
     
-    public abstract class EventSink : ServiceAgent, IEventSink
+    public abstract class EventSink : IEventSink
     {
-        protected EventSink(AgentContext Context, AgentIdentity Identity)
-            : base(Context, Identity)
-        {
-            
-        }
+
     }
 }

@@ -55,17 +55,6 @@ namespace Z0
         }
 
         /// <summary>
-        /// Interchanges cells i and j
-        /// </summary>
-        /// <param name="src">The source segment</param>
-        /// <param name="i">An index of a memory cell</param>
-        /// <param name="j">An index of a memory cell</param>
-        /// <typeparam name="T">The memory cell type type</typeparam>
-        [MethodImpl(Inline)]
-        public static void Swap<T>(this Memory<T> src, int i, int j)
-            => src.Span.Swap(i,j);
-
-        /// <summary>
         /// If the length of a source span is less than a specified length, a new span of the desired length
         /// is allocated and then filled with the source span content; otherwise, the source span is returned
         /// </summary>

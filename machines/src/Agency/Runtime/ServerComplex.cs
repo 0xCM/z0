@@ -45,7 +45,7 @@ namespace Z0
                     corenum = 0;
             }
             
-            var eventSink = SystemEventSink.Define(context, (complex.ServerId, complex.AgentId));
+            var eventSink = AgentEventSink.Define(context, (complex.ServerId, complex.AgentId));
             complex.Configure(configs, eventSink);
             await complex.Start();
             Complex = complex;

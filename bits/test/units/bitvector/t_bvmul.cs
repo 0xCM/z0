@@ -18,8 +18,8 @@ namespace Z0.Test
         {
             for(var i=0; i<SampleSize; i++)
             {
-                var v1 = Random.BitVector8();
-                var v2 = Random.BitVector8();
+                var v1 = Random.BitVector(n8);
+                var v2 = Random.BitVector(n8);
                 var p1 = Gf256.clmul(v1,v2); 
                 var p2 = Gf256.clmul((byte)v1, (byte)v2);
                 var p4 = Gf256.mul_ref(v1,v2);
@@ -47,81 +47,6 @@ namespace Z0.Test
         }
 
 
-        public void bvmul_16u_check()
-        {
-            for(var i=0; i< CycleCount; i++)
-            {
-                var x1 = Random.BitVector16(2*32);
-                var x2 = Random.BitVector16(2*32);
-                var p1 = Gf512.mul(x1,x2); 
-                var p2 = Gf512.mul_ref(x1,x2);
-                Claim.eq(p1,p2);       
-
-                if(x1.Nonempty)
-                {
-                    var order = x1.Order();
-                    Claim.eq(BitVector16.One, x1.Pow(order));
-                }
-
-            }
-        
-        }
-
-        public void gfmul256_table()
-        {
-            ref var table = ref Gf256.products(out BlockMatrix<N256,byte> _);
-
-            foreach(var v in BitVector8.All)
-                if(v.Nonempty)
-                    table.First(x => x * v == BitVector8.One, out (int i, int j) _).Require();
-        }
-
-        void gfmul512_table()
-        {
-            ref var table = ref Gf512.products(out BlockMatrix<N512,ushort> _);
-            var all = BitVector16.All(9).ToSet();
-            Claim.eq(all.Count,512);
-
-            foreach(var v in BitVector16.All(9))
-            {
-                if(v.Nonempty)
-                {
-                    var square = v*v;
-                    table.First(x => square == x).Require();
-                    table.First(x => x == v).Require();
-                }
-            }
-            
-        }
-
-        public void gfmul256_bench()
-        {
-            var lhsSrc = Random.Array<byte>(SampleSize);
-            var rhsSrc = Random.Array<byte>(SampleSize);
-            var result = (byte)0;
-                        
-            int Bench()
-            {                
-                for(var i=0; i< CycleCount; i++)
-                for(var j=0; j< SampleSize; j++)
-                    result &= Gf256.clmul(lhsSrc[j],rhsSrc[j]);
-                return CycleCount*SampleSize;
-            }   
-
-            Measure(Bench);
-        }
-
-        public void gford256()
-        {                        
-            foreach(var v in BitVector8.All)
-            {
-                if(v.Nonempty)
-                {
-                    var order = v.Order();
-                    Claim.eq(BitVector8.One, v.Pow(order));
-                }
-            }
-        }
 
         public void gfmul8()
         {

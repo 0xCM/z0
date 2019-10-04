@@ -11,7 +11,7 @@ namespace Z0
     using static zfunc;
     using static BitParts;
 
-    public class t_bitpar16 : BitPartTest<t_bitpar16>
+    public class t_bitpart16 : BitPartTest<t_bitpart16>
     {                    
 
 

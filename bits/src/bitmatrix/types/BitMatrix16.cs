@@ -119,17 +119,14 @@ namespace Z0
         public static BitMatrix16 operator ^ (BitMatrix16 A, BitMatrix16 B)
             => BitMatrix.xor(A,B);
 
+        /// <summary>
+        /// Computes the complement of the operand
+        /// </summary>
+        /// <param name="A">The source matrix</param>
         [MethodImpl(Inline)]
-        public static BitMatrix16 operator + (BitMatrix16 A, BitMatrix16 B)
-            => BitMatrix.xor(A,B);
+        public static BitMatrix16 operator ~ (BitMatrix16 A)
+            => BitMatrix.flip(A);
 
-        [MethodImpl(Inline)]
-        public static BitMatrix16 operator - (BitMatrix16 src)
-            => BitMatrix.flip(src);
-
-        [MethodImpl(Inline)]
-        public static BitMatrix16 operator - (BitMatrix16 A, BitMatrix16 B)
-            => BitMatrix.sub(A,B);
 
         [MethodImpl(Inline)]
         public static BitMatrix16 operator * (BitMatrix16 A, BitMatrix16 B)
@@ -138,14 +135,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitVector16 operator * (BitMatrix16 A, BitVector16 B)
             => BitMatrix.mul(A, B);
-
-        /// <summary>
-        /// Computes the complement of the operand
-        /// </summary>
-        /// <param name="A">The source matrix</param>
-        [MethodImpl(Inline)]
-        public static BitMatrix16 operator ~ (BitMatrix16 A)
-            => BitMatrix.flip(A);
 
         [MethodImpl(Inline)]
         public static bool operator ==(BitMatrix16 A, BitMatrix16 B)
@@ -254,6 +243,15 @@ namespace Z0
         public void RowSwap(int i, int j)
             => data.Swap(i,j);
 
+        /// <summary>
+        /// Applies a permutation to the matrix by swapping the rows
+        /// as indicated by permutation transpositions
+        /// </summary>
+        /// <param name="spec">The permutation definition</param>
+        [MethodImpl(Inline)]
+        public BitMatrix16 Apply(Perm<N16> perm)
+            => BitMatrix.apply(perm, ref this);
+
         [MethodImpl(Inline)]
         public readonly BitVector16 RowVector(int index)
             => data[index];
@@ -277,17 +275,9 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public readonly BitMatrix16 AndNot(in BitMatrix16 rhs)
-        {
-            this.GetCells(out Vec256<ushort> vLhs);
-            rhs.GetCells(out Vec256<ushort> vRhs);
-            dinx.vandn(vLhs,vRhs).StoreTo(ref data[0]);
-            return this;
-        }
+        public BitMatrix16 AndNot(in BitMatrix16 rhs)
+            => BitMatrix.andn(ref this, rhs);
 
-        [MethodImpl(Inline)]
-        public BitMatrix16 Compare(in BitMatrix16 rhs)
-            => this.AndNot(in rhs);
 
         public readonly BitVector16 Diagonal()
         {
@@ -306,18 +296,6 @@ namespace Z0
             return dst;
         }
 
-        /// <summary>
-        /// Computes the Hadamard product of the source matrix and another of the same dimension
-        /// </summary>
-        /// <remarks>See https://en.wikipedia.org/wiki/Hadamard_product_(matrices)</remarks>
-        public readonly BitMatrix16 HProd(BitMatrix16 rhs)
-        {
-            var dst = Alloc();
-            for(var i=0; i<RowCount; i++)
-            for(var j=0; j<ColCount; j++)
-                dst[i,j] = GetBit(i,j) & rhs[i,j];
-            return dst;
-        }
 
         [MethodImpl(Inline)] 
         public readonly BitMatrix16 Replicate()
@@ -339,22 +317,15 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public bool IsZero()
-        {
-            this.GetCells(out Vec256<ushort> vSrc);
-            return dinx.testz(vSrc,vSrc);
-        }
+            => BitMatrix.testz(this);
 
         [MethodImpl(Inline)]
         public string Format()
             => Bytes.FormatMatrixBits(16);
 
         [MethodImpl(Inline)]
-        unsafe readonly Vector256<ushort> GetCpuVec()
-            => Avx.LoadVector256(refptr(ref data[0]));
-
-        [MethodImpl(Inline)]
         public bool Equals(BitMatrix16 rhs)
-            => this.AndNot(rhs).IsZero();
+            => BitMatrix.eq(this,rhs);
 
         [MethodImpl(Inline)]
         public override bool Equals(object obj)
@@ -369,9 +340,9 @@ namespace Z0
         /// </summary>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline)]
-        public readonly ref Vec256<ushort> GetCells(out Vec256<ushort> dst)
+        public unsafe readonly ref Vec256<ushort> GetCells(out Vec256<ushort> dst)
         {
-            dst = GetCpuVec();
+            dst = Avx.LoadVector256(refptr(ref data[0]));
             return ref dst;
         }
 

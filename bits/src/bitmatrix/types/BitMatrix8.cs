@@ -120,16 +120,8 @@ namespace Z0
             => new BitMatrix8(src);
 
         [MethodImpl(Inline)]
-        public static BitMatrix8 operator ~ (BitMatrix8 src)
-            => BitMatrix.flip(src);
-
-        [MethodImpl(Inline)]
         public static BitMatrix8 operator & (BitMatrix8 lhs, BitMatrix8 rhs)
             =>  BitMatrix.and(lhs,rhs);
-
-        [MethodImpl(Inline)]
-        public static BitMatrix8 operator * (BitMatrix8 lhs, BitMatrix8 rhs)
-            => BitMatrix.mul(lhs,rhs);
 
         [MethodImpl(Inline)]
         public static BitMatrix8 operator | (BitMatrix8 lhs, BitMatrix8 rhs)
@@ -140,20 +132,16 @@ namespace Z0
             => BitMatrix.xor(lhs,rhs);
 
         [MethodImpl(Inline)]
-        public static BitVector8 operator * (BitMatrix8 lhs, BitVector8 rhs)
+        public static BitMatrix8 operator ~ (BitMatrix8 src)
+            => BitMatrix.flip(src);
+
+        [MethodImpl(Inline)]
+        public static BitMatrix8 operator * (BitMatrix8 lhs, BitMatrix8 rhs)
             => BitMatrix.mul(lhs,rhs);
 
         [MethodImpl(Inline)]
-        public static BitMatrix8 operator + (BitMatrix8 lhs, BitMatrix8 rhs)
-            => BitMatrix.xor(lhs,rhs);
-
-        [MethodImpl(Inline)]
-        public static BitMatrix8 operator - (BitMatrix8 lhs, BitMatrix8 rhs)
-            => lhs + -rhs;
-
-        [MethodImpl(Inline)]
-        public static BitMatrix8 operator - (BitMatrix8 src)
-            => BitMatrix.flip(src);
+        public static BitVector8 operator * (BitMatrix8 lhs, BitVector8 rhs)
+            => BitMatrix.mul(lhs,rhs);
 
         [MethodImpl(Inline)]
         public static bool operator ==(BitMatrix8 lhs, BitMatrix8 rhs)
@@ -277,7 +265,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public readonly bool IsZero()
-            => BitConverter.ToUInt64(data) == 0;
+            => BitMatrix.testz(this);
 
         [MethodImpl(Inline)]
         public BitMatrix8 AndNot(in BitMatrix8 rhs)
@@ -305,6 +293,15 @@ namespace Z0
         [MethodImpl(Inline)]
         public ref byte RowData(int row)
             => ref data[row];
+
+        /// <summary>
+        /// Interchanges the i'th and j'th rows where  0 <= i,j < 32
+        /// </summary>
+        /// <param name="i">A row index</param>
+        /// <param name="j">A row index</param>
+        [MethodImpl(Inline)]
+        public void RowSwap(int i, int j)
+            => data.Swap(i,j);
 
         /// <summary>
         /// Queries the matrix for the data in an index-identified row and returns
@@ -356,6 +353,15 @@ namespace Z0
         [MethodImpl(Inline)]
         public readonly BitVector8 ColVector(int index)
             => ColData(index);
+
+        /// <summary>
+        /// Applies a permutation to the matrix by swapping the rows
+        /// as indicated by permutation transpositions
+        /// </summary>
+        /// <param name="spec">The permutation definition</param>
+        [MethodImpl(Inline)]
+        public BitMatrix8 Apply(Perm<N8> perm)
+            => BitMatrix.apply(perm, ref this);
 
         /// <summary>
         /// Creates a new matrix by cloning the existing matrix or allocating

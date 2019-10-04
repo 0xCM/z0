@@ -88,9 +88,9 @@ namespace Z0.Test
         {
             for(var i=0; i< SampleSize; i++)
             {
-                var m1 = Random.BitMatrix32();
+                var m1 = Random.BitMatrix(n32);
                 var m2 = m1.Replicate();
-                var m3 = Random.BitMatrix32();
+                var m3 = Random.BitMatrix(n32);
                 var m4 = m2 * m3;
                 var m5 = BitRef.bmm(m1,m3);
                 Claim.yea(m4 == m5);
@@ -106,8 +106,8 @@ namespace Z0.Test
             var dst = BitMatrix32.Alloc();
             for(var i=0; i< opcount; i++)
             {
-                var m1 = Random.BitMatrix32();
-                var m3 = Random.BitMatrix32();
+                var m1 = Random.BitMatrix(n32);
+                var m3 = Random.BitMatrix(n32);
                 sw.Start();
                 last = BitMatrixOps.Mul(in m1, in m3, ref dst);
                 sw.Stop();                    
@@ -138,7 +138,7 @@ namespace Z0.Test
             for(var sample = 0; sample < SampleSize; sample++)            
             {
                 var A = Random.BitMatrix64();
-                var x = Random.BitVector64();
+                var x = Random.BitVector(n64);
                 var z = A * x;            
                 var y = BitVector64.Alloc();
                 for(var i = 0; i<A.RowCount; i++)           
@@ -146,8 +146,6 @@ namespace Z0.Test
                     var r = A.RowVector(i);
                     y[i] = r % x;
                 }
-
-
                 
                 Claim.yea(z == y);
             }
@@ -195,7 +193,7 @@ namespace Z0.Test
             for(var sample = 0; sample < SampleSize; sample++)            
             {
                 var m = Random.BitMatrix8();
-                var c = Random.BitVector8();
+                var c = Random.BitVector(n8);
                 var z1 = m * c;            
                 var z2 = BitVector8.Alloc();
                 for(var i = 0; i<m.RowCount; i++)           
@@ -213,7 +211,7 @@ namespace Z0.Test
             for(var sample = 0; sample < SampleSize; sample++)            
             {
                 var m = Random.BitMatrix16();
-                var c = Random.BitVector16();
+                var c = Random.BitVector(n16);
                 var z1 = m * c;            
                 var z2 = BitVector16.Alloc();
                 for(var i = 0; i<m.RowCount; i++)           

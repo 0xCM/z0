@@ -33,8 +33,5 @@ namespace Z0
             var agent = context.Memberhsip.FirstOrDefault(a => a.AgentId == identity.AgentId && a.ServerId == identity.ServerId);
             return agent != null ? some(agent) : none<IServiceAgent>();
         }
-
-
-
     }
 }

@@ -59,12 +59,6 @@ namespace Z0
         BitString ToBitString();
 
         /// <summary>
-        /// Rearranges the vector in-place as specified by a permutation
-        /// </summary>
-        /// <param name="spec">The permutation</param>
-        void Permute(Perm p);
-
-        /// <summary>
         /// Reverses the vector's bits in-place
         /// </summary>
         void Reverse();
@@ -191,6 +185,13 @@ namespace Z0
         /// </summary>
         V Flip();
 
+        /// <summary>
+        /// Rearranges the vector in-place as specified by a permutation
+        /// </summary>
+        /// <param name="spec">The permutation</param>
+        V Permute(Perm p);
+
+
     }
 
     /// <summary>
@@ -230,13 +231,13 @@ namespace Z0
         /// Shifts the bits in the vector leftwards
         /// </summary>
         /// <param name="offset">The number of bits to shift</param>
-        V Sll(uint offset);
+        V Sll(int offset);
 
         /// <summary>
         /// Shifts the bits in the vector rightwards
         /// </summary>
         /// <param name="offset">The number of bits to shift</param>
-        V Srl(uint offset);
+        V Srl(int offset);
         
         /// <summary>
         /// Rotates vector bits rightwards by a specified offset

@@ -15,44 +15,28 @@ namespace Z0
     /// <summary>
     /// Represents 4 bits with 4 8-bit values that may range over {0,1}
     /// </summary>
-    [StructLayout(LayoutKind.Explicit, Size=4)]
+    [StructLayout(LayoutKind.Sequential, Size=4)]
     public struct BitBlock4 : IBitBlock
     {
         /// <summary>
         ///  Bit 0
         /// </summary>
-        [FieldOffset(0)]
         public byte Bit0;
 
         /// <summary>
         ///  Bit 1
         /// </summary>
-        [FieldOffset(1)]
         public byte Bit1;
 
         /// <summary>
         ///  Bit 2
         /// </summary>
-        [FieldOffset(2)]
         public byte Bit2;
         
         /// <summary>
         ///  Bit 2
         /// </summary>
-        [FieldOffset(3)]
         public byte Bit3;
-
-        /// <summary>
-        /// Block 0 of width 2
-        /// </summary>
-        [FieldOffset(0)]
-        public BitBlock2 Block2x0;
-
-        /// <summary>
-        /// Block 1 of width 2
-        /// </summary>
-        [FieldOffset(2)]
-        public BitBlock2 Block2x1;    
 
 
         [MethodImpl(Inline)]        
@@ -70,7 +54,11 @@ namespace Z0
         [MethodImpl(Inline)]
         public byte Compress()
         {
-            return math.or(Block2x0.Compress(), math.sll(Block2x1.Compress(), 2));
+            uint dst = Bit0;
+            dst |= ((uint)Bit1 << 1);
+            dst |= ((uint)Bit2 << 2);
+            dst |= ((uint)Bit3 << 3);
+            return (byte)dst;
         }
 
         public byte this [int i]
@@ -82,11 +70,6 @@ namespace Z0
             set => SetPart(i,value);
         }
 
-        public string Format()
-            => this.AsGeneric().Format(); 
-
-        public override string ToString() 
-            => Format();
 
     }
 

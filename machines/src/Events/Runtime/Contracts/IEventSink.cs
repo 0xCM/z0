@@ -12,7 +12,7 @@ namespace Z0.Events
     /// <summary>
     /// Characterizes an event receiver
     /// </summary>
-    public interface IEventSink : IServiceAgent
+    public interface IEventSink
     {
         
     }

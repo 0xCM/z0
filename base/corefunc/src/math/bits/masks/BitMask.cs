@@ -283,8 +283,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ref uint disable(ref uint src, in int pos)
         {
-            var m = 1u << pos;
-            src &= ~m;
+            src &= ~(1u << pos);
             return ref src;
         }
 

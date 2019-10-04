@@ -170,7 +170,15 @@ namespace Z0
         [MethodImpl(Inline)]
         public void SetPart(int i, byte value)
             => Unsafe.Add(ref Unsafe.As<BitBlock23, byte>(ref this), i) = value;
-        
+
+        [MethodImpl(Inline)]
+        public uint Compress()
+        {
+           uint dst = (uint)Unsafe.As<BitBlock23, BitBlock22>(ref this).Compress();
+           dst |= ((uint)Bit22 << 22);
+           return dst;
+        }
+       
         public byte this [int i]
         {
             [MethodImpl(Inline)]

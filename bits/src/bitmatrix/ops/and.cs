@@ -17,27 +17,41 @@ namespace Z0
 
     partial class BitMatrix
     {
+        [MethodImpl(Inline)]
+        public static ref BitMatrix4 and(ref BitMatrix4 A, in BitMatrix4 B)
+        {
+             A.data = BitConverter.GetBytes((ushort) ((ushort)A & (ushort)B));
+             return ref A;
+        }
+
+        [MethodImpl(Inline)]
+        public static BitMatrix4 and(BitMatrix4 A, BitMatrix4 B)
+        {
+            var dst = A.Replicate();
+            return and(ref dst, B);
+        }
+
         /// <summary>
         /// Computes the logical AND between two primal bitmatrices of order 8
         /// </summary>
-        /// <param name="lhs">The left matrix</param>
-        /// <param name="rhs">The right matrix</param>
+        /// <param name="A">The left matrix</param>
+        /// <param name="B">The right matrix</param>
         [MethodImpl(Inline)]
-        public static BitMatrix8 and(BitMatrix8 lhs, BitMatrix8 rhs)
-             => BitMatrix8.From((ulong)lhs & (ulong)rhs);             
+        public static BitMatrix8 and(BitMatrix8 A, BitMatrix8 B)
+             => BitMatrix8.From((ulong)A & (ulong)B);             
 
         /// <summary>
         /// Computes the logical AND between two primal bitmatrices of order 16
         /// </summary>
-        /// <param name="lhs">The left matrix</param>
-        /// <param name="rhs">The right matrix</param>
+        /// <param name="A">The left matrix</param>
+        /// <param name="B">The right matrix</param>
         [MethodImpl(Inline)]
-        public static BitMatrix16 and(BitMatrix16 lhs, BitMatrix16 rhs)
+        public static BitMatrix16 and(BitMatrix16 A, BitMatrix16 B)
         {
-            ref var A = ref lhs.GetCells(out Vec256<ushort> _);
-            ref var B = ref rhs.GetCells(out Vec256<ushort> _);
-            var C = dinx.vand(A,B);
-            return BitMatrix16.From(C);
+            ref var a = ref A.GetCells(out Vec256<ushort> _);
+            ref var b = ref B.GetCells(out Vec256<ushort> _);
+            var c = dinx.vand(a,b);
+            return BitMatrix16.From(c);
         }
 
         public static ref BitMatrix32 and(ref BitMatrix32 A, BitMatrix32 B)
