@@ -1,12 +1,129 @@
-// 2019-10-03 12:22:08:560
-uint bb_pack23(in BitBlock23 src)
+// 2019-10-05 04:38:06:733
+Vec256<uint> blend(Vec256<uint> x, Vec256<uint> y)
 {
-    IL_0000: ldarg.0
-    IL_0001: ldobj Z0.BitBlock23
-    IL_0006: stloc.0
-    IL_0007: ldloca.s V_0
-    IL_0009: call System.UInt32 Z0.BitBlock23::Compress()
+    IL_0000: ldarga.s x
+    IL_0002: ldarga.s y
+    IL_0004: ldc.i4 170
+    IL_0009: call Z0.Vec256`1<System.UInt32> Z0.dinx::vblend(Z0.Vec256`1<System.UInt32>&,Z0.Vec256`1<System.UInt32>&,Z0.Blend32x8)
     IL_000E: ret
+
+}
+Vec128<uint> blend(Vec128<uint> x, Vec128<uint> y)
+{
+    IL_0000: ldarga.s x
+    IL_0002: ldarga.s y
+    IL_0004: ldc.i4.s 10
+    IL_0006: call Z0.Vec128`1<System.UInt32> Z0.dinx::vblend(Z0.Vec128`1<System.UInt32>&,Z0.Vec128`1<System.UInt32>&,Z0.Blend32x4)
+    IL_000B: ret
+
+}
+int Switch14(int x)
+{
+    IL_0000: ldarg.1
+    IL_0001: ldc.i4.1
+    IL_0002: sub
+    IL_0003: switch(IL_0062,IL_0064,IL_0066,IL_0068,IL_006B,IL_006E,IL_0071,IL_0077,IL_007D,IL_0083,IL_0089,IL_008F,IL_0092,IL_0095)
+    IL_0040: ldarg.1
+    IL_0041: ldc.i4 7000
+    IL_0046: sub
+    IL_0047: switch(IL_0098,IL_009E,IL_00A4,IL_00A7,IL_00AA)
+    IL_0060: br.s IL_00AD
+    IL_0062: ldc.i4.1
+    IL_0063: ret
+    IL_0064: ldc.i4.4
+    IL_0065: ret
+    IL_0066: ldc.i4.8
+    IL_0067: ret
+    IL_0068: ldc.i4.s 16
+    IL_006A: ret
+    IL_006B: ldc.i4.s 32
+    IL_006D: ret
+    IL_006E: ldc.i4.s 64
+    IL_0070: ret
+    IL_0071: ldc.i4 128
+    IL_0076: ret
+    IL_0077: ldc.i4 256
+    IL_007C: ret
+    IL_007D: ldc.i4 512
+    IL_0082: ret
+    IL_0083: ldc.i4 1024
+    IL_0088: ret
+    IL_0089: ldc.i4 2028
+    IL_008E: ret
+    IL_008F: ldc.i4.s 10
+    IL_0091: ret
+    IL_0092: ldc.i4.s 20
+    IL_0094: ret
+    IL_0095: ldc.i4.s 30
+    IL_0097: ret
+    IL_0098: ldc.i4 1024
+    IL_009D: ret
+    IL_009E: ldc.i4 2028
+    IL_00A3: ret
+    IL_00A4: ldc.i4.s 10
+    IL_00A6: ret
+    IL_00A7: ldc.i4.s 20
+    IL_00A9: ret
+    IL_00AA: ldc.i4.s 30
+    IL_00AC: ret
+    IL_00AD: ldc.i4.0
+    IL_00AE: ret
+
+}
+int IfElse10(int x)
+{
+    IL_0000: ldarg.1
+    IL_0001: ldc.i4.1
+    IL_0002: bne.un.s IL_0006
+    IL_0004: ldc.i4.1
+    IL_0005: ret
+    IL_0006: ldarg.1
+    IL_0007: ldc.i4.2
+    IL_0008: bne.un.s IL_000C
+    IL_000A: ldc.i4.4
+    IL_000B: ret
+    IL_000C: ldarg.1
+    IL_000D: ldc.i4.3
+    IL_000E: bne.un.s IL_0012
+    IL_0010: ldc.i4.8
+    IL_0011: ret
+    IL_0012: ldarg.1
+    IL_0013: ldc.i4.4
+    IL_0014: bne.un.s IL_0019
+    IL_0016: ldc.i4.s 16
+    IL_0018: ret
+    IL_0019: ldarg.1
+    IL_001A: ldc.i4.5
+    IL_001B: bne.un.s IL_0020
+    IL_001D: ldc.i4.s 32
+    IL_001F: ret
+    IL_0020: ldarg.1
+    IL_0021: ldc.i4.6
+    IL_0022: bne.un.s IL_0027
+    IL_0024: ldc.i4.s 64
+    IL_0026: ret
+    IL_0027: ldarg.1
+    IL_0028: ldc.i4.7
+    IL_0029: bne.un.s IL_0031
+    IL_002B: ldc.i4 128
+    IL_0030: ret
+    IL_0031: ldarg.1
+    IL_0032: ldc.i4.8
+    IL_0033: bne.un.s IL_003B
+    IL_0035: ldc.i4 256
+    IL_003A: ret
+    IL_003B: ldarg.1
+    IL_003C: ldc.i4.s 9
+    IL_003E: bne.un.s IL_0046
+    IL_0040: ldc.i4 512
+    IL_0045: ret
+    IL_0046: ldarg.1
+    IL_0047: ldc.i4.s 10
+    IL_0049: bne.un.s IL_0051
+    IL_004B: ldc.i4 1024
+    IL_0050: ret
+    IL_0051: ldc.i4.0
+    IL_0052: ret
 
 }
 ReadOnlySpan<byte> get_U8Data()
@@ -66,27 +183,6 @@ uint RotLU32Inline(uint x, int offset)
     IL_0010: ret
 
 }
-int ChoiceSwitchInline(int x)
-{
-    IL_0000: ldarg.1
-    IL_0001: ldc.i4.1
-    IL_0002: sub
-    IL_0003: switch(IL_001E,IL_0020,IL_0022,IL_0024,IL_0027)
-    IL_001C: br.s IL_002A
-    IL_001E: ldc.i4.1
-    IL_001F: ret
-    IL_0020: ldc.i4.4
-    IL_0021: ret
-    IL_0022: ldc.i4.8
-    IL_0023: ret
-    IL_0024: ldc.i4.s 16
-    IL_0026: ret
-    IL_0027: ldc.i4.s 32
-    IL_0029: ret
-    IL_002A: ldc.i4.0
-    IL_002B: ret
-
-}
 int ChoiceIfElse5Inline(int x)
 {
     IL_0000: ldarg.1
@@ -116,20 +212,6 @@ int ChoiceIfElse5Inline(int x)
     IL_001F: ret
     IL_0020: ldc.i4.0
     IL_0021: ret
-
-}
-TypeCode:int GetTypeCodeInt32()
-{
-    IL_0000: ldarg.0
-    IL_0001: call System.TypeCode Z0.ExperimentalScenarios::GetTypeCode<System.Int32>()
-    IL_0006: ret
-
-}
-TypeCode:int GetTypeCodeUInt32()
-{
-    IL_0000: ldarg.0
-    IL_0001: call System.TypeCode Z0.ExperimentalScenarios::GetTypeCode<System.UInt32>()
-    IL_0006: ret
 
 }
 int CheckMatches()
@@ -190,106 +272,16 @@ int CheckMatches()
     IL_005D: ret
 
 }
-int ChoiceIfElse10Inline(int x)
-{
-    IL_0000: ldarg.1
-    IL_0001: ldc.i4.1
-    IL_0002: bne.un.s IL_0006
-    IL_0004: ldc.i4.1
-    IL_0005: ret
-    IL_0006: ldarg.1
-    IL_0007: ldc.i4.2
-    IL_0008: bne.un.s IL_000C
-    IL_000A: ldc.i4.4
-    IL_000B: ret
-    IL_000C: ldarg.1
-    IL_000D: ldc.i4.3
-    IL_000E: bne.un.s IL_0012
-    IL_0010: ldc.i4.8
-    IL_0011: ret
-    IL_0012: ldarg.1
-    IL_0013: ldc.i4.4
-    IL_0014: bne.un.s IL_0019
-    IL_0016: ldc.i4.s 16
-    IL_0018: ret
-    IL_0019: ldarg.1
-    IL_001A: ldc.i4.5
-    IL_001B: bne.un.s IL_0020
-    IL_001D: ldc.i4.s 32
-    IL_001F: ret
-    IL_0020: ldarg.1
-    IL_0021: ldc.i4.6
-    IL_0022: bne.un.s IL_0027
-    IL_0024: ldc.i4.s 64
-    IL_0026: ret
-    IL_0027: ldarg.1
-    IL_0028: ldc.i4.7
-    IL_0029: bne.un.s IL_0031
-    IL_002B: ldc.i4 128
-    IL_0030: ret
-    IL_0031: ldarg.1
-    IL_0032: ldc.i4.8
-    IL_0033: bne.un.s IL_003B
-    IL_0035: ldc.i4 256
-    IL_003A: ret
-    IL_003B: ldarg.1
-    IL_003C: ldc.i4.s 9
-    IL_003E: bne.un.s IL_0046
-    IL_0040: ldc.i4 512
-    IL_0045: ret
-    IL_0046: ldarg.1
-    IL_0047: ldc.i4.s 10
-    IL_0049: bne.un.s IL_0051
-    IL_004B: ldc.i4 1024
-    IL_0050: ret
-    IL_0051: ldc.i4.0
-    IL_0052: ret
-
-}
-int CallChoiceSwitchInline(int x)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: call System.Int32 Z0.ExperimentalScenarios::ChoiceSwitchInline(System.Int32)
-    IL_0007: ret
-
-}
-int CallChoiceIfElse5Inline(int x)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: call System.Int32 Z0.ExperimentalScenarios::ChoiceIfElse5Inline(System.Int32)
-    IL_0007: ret
-
-}
-int CallChoiceIfElse10Inline(int x)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: call System.Int32 Z0.ExperimentalScenarios::ChoiceIfElse10Inline(System.Int32)
-    IL_0007: ret
-
-}
 ReadOnlySpan<byte> ReadU8Data(int count)
 {
     IL_0000: call System.ReadOnlySpan`1<System.Byte> Z0.ExperimentalScenarios::get_U8Data()
-    IL_0005: stloc.0
-    IL_0006: ldloca.s V_0
-    IL_0008: ldc.i4.0
-    IL_0009: ldarg.1
-    IL_000A: call System.ReadOnlySpan`1<System.Byte> System.ReadOnlySpan`1<System.Byte>::Slice(System.Int32,System.Int32)
-    IL_000F: ret
+    IL_0005: ret
 
 }
 ReadOnlySpan<uint> ReadU32Data(int count)
 {
     IL_0000: call System.ReadOnlySpan`1<System.UInt32> Z0.ExperimentalScenarios::get_U32Data()
-    IL_0005: stloc.0
-    IL_0006: ldloca.s V_0
-    IL_0008: ldc.i4.0
-    IL_0009: ldarg.1
-    IL_000A: call System.ReadOnlySpan`1<System.UInt32> System.ReadOnlySpan`1<System.UInt32>::Slice(System.Int32,System.Int32)
-    IL_000F: ret
+    IL_0005: ret
 
 }
 void VoidReturn()
@@ -455,47 +447,5 @@ int Jump(int target)
     IL_0021: ldarg.0
     IL_0022: call System.Int32 Z0.ExperimentalScenarios::JumpTarget1()
     IL_0027: ret
-
-}
-void divrem32i(int x, int y, out int q, out int r)
-{
-    IL_0000: ldarg.2
-    IL_0001: ldarg.0
-    IL_0002: ldarg.1
-    IL_0003: div
-    IL_0004: stind.i4
-    IL_0005: ldarg.3
-    IL_0006: ldarg.0
-    IL_0007: ldarg.1
-    IL_0008: rem
-    IL_0009: stind.i4
-    IL_000A: ret
-
-}
-void divrem64i(long x, long y, out long q, out long r)
-{
-    IL_0000: ldarg.2
-    IL_0001: ldarg.0
-    IL_0002: ldarg.1
-    IL_0003: div
-    IL_0004: stind.i8
-    IL_0005: ldarg.3
-    IL_0006: ldarg.0
-    IL_0007: ldarg.1
-    IL_0008: rem
-    IL_0009: stind.i8
-    IL_000A: ret
-
-}
-ValueTuple<ulong,ulong> divrem64u(ulong x, ulong y)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: div.un
-    IL_0003: ldarg.0
-    IL_0004: ldarg.1
-    IL_0005: rem.un
-    IL_0006: newobj System.Void System.ValueTuple`2<System.UInt64,System.UInt64>::.ctor(System.UInt64,System.UInt64)
-    IL_000B: ret
 
 }

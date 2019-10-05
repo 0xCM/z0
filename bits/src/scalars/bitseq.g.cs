@@ -22,7 +22,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ReadOnlySpan<byte> bitseq<T>(T src)
             where T : unmanaged
-                => BitStore.BitSeq(src);
+                => BitStore.bitseq(src);
 
 
     }

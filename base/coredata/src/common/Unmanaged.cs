@@ -38,7 +38,6 @@ namespace Z0
             where T : unmanaged
                 => MemoryMarshal.CreateSpan(ref ByteRef(ref src), Unsafe.SizeOf<T>()); 
 
-
         /// <summary>
         /// Quries/manipulates an index-identified byte wihin an unmanaged data structure
         /// </summary>
@@ -62,7 +61,5 @@ namespace Z0
             where T : unmanaged
             where S : unmanaged
                 => ref Unsafe.Add(ref Unsafe.As<S, T>(ref src), index);
-
-
     }
 }

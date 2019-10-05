@@ -15,6 +15,64 @@ using Z0;
 
 partial class zfunc
 {
+    /// <summary>
+    /// Interprets 8 elements of a bytespan as an unsigned 64-bit integer
+    /// </summary>
+    /// <param name="src">The source span</param>
+    /// <param name="offset">The offset at which the first byte begins</param>
+    [MethodImpl(Inline)]
+    public static ref ulong block64u(Span<byte> src, int offset)
+        => ref MemoryMarshal.Cast<byte,ulong>(src.Slice(offset, 8))[0];
+
+    [MethodImpl(Inline)]
+    public static ref byte head8u(Span<ulong> src, int index)
+        => ref MemoryMarshal.AsBytes(src)[index];
+
+    /// <summary>
+    /// Interprets 4 elements of a span of unsigned 16-bit integers as an unsigned 64-bit integer
+    /// </summary>
+    /// <param name="src">The source span</param>
+    /// <param name="offset">The offset at which the first byte begins</param>
+    [MethodImpl(Inline)]
+    public static ref ulong block64u(Span<ushort> src, int offset)
+        => ref MemoryMarshal.Cast<ushort,ulong>(src.Slice(offset, 4))[0];
+
+    /// <summary>
+    /// Interprets 2 elements of a span of unsigned 32-bit integers as an unsigned 64-bit integer
+    /// </summary>
+    /// <param name="src">The source span</param>
+    /// <param name="offset">The offset at which the first byte begins</param>
+    [MethodImpl(Inline)]
+    public static ref ulong block64u(Span<uint> src, int offset)
+        => ref MemoryMarshal.Cast<uint,ulong>(src.Slice(offset, 2))[0];
+
+    /// <summary>
+    /// Interprets 4 elements of a bytespan as an unsigned 32-bit integer
+    /// </summary>
+    /// <param name="src">The source span</param>
+    /// <param name="offset">The offset at which the first byte begins</param>
+    [MethodImpl(Inline)]
+    public static ref uint block34u(Span<byte> src, int offset)
+        => ref MemoryMarshal.Cast<byte,uint>(src.Slice(offset, 4))[0];
+
+    /// <summary>
+    /// Interprets 2 elements of a span of unsigned 16-bit integers as an unsigned 32-bit integer
+    /// </summary>
+    /// <param name="src">The source span</param>
+    /// <param name="offset">The offset at which the first byte begins</param>
+    [MethodImpl(Inline)]
+    public static ref uint block34u(Span<short> src, int offset)
+        => ref MemoryMarshal.Cast<short,uint>(src.Slice(offset, 2))[0];
+
+    /// <summary>
+    /// Interprets 2 elements of a bytespan as an unsigned 16-bit integer
+    /// </summary>
+    /// <param name="src">The source span</param>
+    /// <param name="offset">The offset at which the first byte begins</param>
+    [MethodImpl(Inline)]
+    public static ref ushort block16u(Span<byte> src, int offset)
+        => ref MemoryMarshal.Cast<byte,ushort>(src.Slice(offset, 2))[0];
+
     [MethodImpl(Inline)]
     public static unsafe void memcpy<S,T>(ref S src, ref T dst, ByteSize srclen)
         =>  Unsafe.CopyBlock(Unsafe.AsPointer(ref dst), Unsafe.AsPointer(ref src), srclen);

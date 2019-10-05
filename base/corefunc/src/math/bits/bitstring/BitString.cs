@@ -507,7 +507,7 @@ namespace Z0
             var seglen = Unsafe.SizeOf<T>()*8;
             Span<byte> dst = new byte[src.Length * seglen];
             for(var i=0; i<src.Length; i++)
-                BitStore.BitSeq(src[i]).CopyTo(dst, i*seglen);
+                BitStore.bitseq(src[i]).CopyTo(dst, i*seglen);
             return maxlen != null && dst.Length >= maxlen ?  dst.Slice(0,maxlen.Value) :  dst;
         }
 

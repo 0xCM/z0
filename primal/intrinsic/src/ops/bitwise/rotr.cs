@@ -134,7 +134,7 @@ namespace Z0
         public static Vec128<uint> rotr(in Vec128<uint> src, Vec128<uint> offsets)
         {
             var x = dinx.srlv(in src, offsets);
-            var y = dinx.vsllv(in src, dinx.sub(Vec128u32, offsets));
+            var y = dinx.vsllv(in src, dinx.vsub(Vec128u32, offsets));
             return dinx.vor(x,y);             
         }
 
@@ -148,7 +148,7 @@ namespace Z0
         public static Vec128<ulong> rotr(in Vec128<ulong> src, in Vec128<ulong> offsets)
         {
             var x = dinx.srlv(in src, offsets);
-            var y = dinx.vsllv(in src, dinx.sub(Vec128u64, offsets));
+            var y = dinx.vsllv(in src, dinx.vsub(Vec128u64, offsets));
             return dinx.vor(x,y);             
         }
 
@@ -162,7 +162,7 @@ namespace Z0
         public static Vec256<uint> rotr(in Vec256<uint> src, in Vec256<uint> offsets)
         {
             var x = dinx.srlv(in src, offsets);
-            var y = dinx.vsllv(in src, dinx.sub(Vec256u32, offsets));
+            var y = dinx.vsllv(in src, dinx.vsub(Vec256u32, offsets));
             return dinx.vor(x,y);             
         }
 
@@ -176,7 +176,7 @@ namespace Z0
         public static Vec256<ulong> rotr(in Vec256<ulong> src, in Vec256<ulong> offsets)
         {
             var x = dinx.srlv(in src, offsets);
-            var y = dinx.vsllv(in src, dinx.sub(Vec256u64, offsets));
+            var y = dinx.vsllv(in src, dinx.vsub(Vec256u64, offsets));
             return dinx.vor(x,y);             
         }
     }

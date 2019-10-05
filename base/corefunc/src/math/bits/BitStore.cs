@@ -11,8 +11,17 @@ namespace Z0
     using static zfunc;
     using static As;
 
+
     public static class BitStore
     {
+        /// <summary>
+        /// Selects an identified bit sequence
+        /// </summary>
+        /// <param name="index">A value from 0 - 255 indicating the byte of interest</param>
+        [MethodImpl(Inline)]
+        public static ReadOnlySpan<byte> select(byte index)
+            => BitSeqData.Slice(index*8,8);
+
         /// <summary>
         /// Constructs a span of bytes where each byte, ordered from lo to hi, 
         /// represents a single bit in the source value
@@ -20,26 +29,28 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The primal source type</typeparam>
         [MethodImpl(Inline)]
-        public static ReadOnlySpan<byte> BitSeq<T>(in T src)
+        public static ReadOnlySpan<byte> bitseq<T>(in T src)
             where T : unmanaged
         {
-            if(typeof(T) == typeof(byte))
-                return ReadSeq(uint8(src));
-            else if(typematch<T,sbyte>())
-                return ReadSeq(int8(src));
-            else if(typematch<T,ushort>())
-                return ReadSeq(uint16(src));
-            else if(typematch<T,short>())
-                return ReadSeq(int16(src));
-            else if(typematch<T,int>())
-                return ReadSeq(int32(src));
-            else if(typematch<T,long>())
-                return ReadSeq(int64(src));
-            else if(typematch<T,uint>())
-                return ReadSeq(uint32(src));
-            else if(typematch<T,ulong>())
-                return ReadSeq(uint64(src));
-            else if(typeof(T) == typeof(float))
+            if(typeof(T) == typeof(byte) 
+            || typeof(T) == typeof(ushort) 
+            || typeof(T) == typeof(uint) 
+            || typeof(T) == typeof(ulong))
+                return bitsequ(in src);
+            else if(typeof(T) == typeof(sbyte) 
+            || typeof(T) == typeof(short) 
+            || typeof(T) == typeof(int) 
+            || typeof(T) == typeof(long))
+                return bitseqi(in src);
+            else 
+                return bitseqf(in src);
+        }        
+
+        [MethodImpl(Inline)]
+        static ReadOnlySpan<byte> bitseqf<T>(in T src)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(float))
                 return ReadSeq(float32(src));
             else if(typeof(T) == typeof(double))
                 return ReadSeq(float64(src));
@@ -48,20 +59,64 @@ namespace Z0
         }        
 
         [MethodImpl(Inline)]
-        public static ReadOnlySpan<char> BitChars(byte index)
+        static ReadOnlySpan<byte> bitseqi<T>(in T src)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(sbyte))
+                return ReadSeq(int8(src));
+            else if(typeof(T) == typeof(short))
+                return ReadSeq(int16(src));
+            else if(typeof(T) == typeof(int))
+                return ReadSeq(int32(src));
+            else 
+                return ReadSeq(int64(src));
+        }        
+
+        [MethodImpl(Inline)]
+        static ReadOnlySpan<byte> bitsequ<T>(in T src)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(byte))
+                return ReadSeq(uint8(src));
+            else if(typeof(T) == typeof(ushort))
+                return ReadSeq(uint16(src));
+            else if(typeof(T) == typeof(uint))
+                return ReadSeq(uint32(src));
+            else 
+                return ReadSeq(uint64(src));
+        }   
+
+        /// <summary>
+        /// Describes an identified byte
+        /// </summary>
+        /// <param name="value">The value of the byte to describe</param>
+        public static ByteInfo info(byte value)
+        {
+            ref readonly var b = ref U8Index[value];
+            return new ByteInfo(b.index, b.bitseq, b.bitchars, b.text);
+        }
+            
+        /// <summary>
+        /// Constructs a sequence of 8 characters {ci} := [c7,...c0] over the domain {'0','1'} according to whether the
+        /// bit in the i'th position of the source is respecively disabled/enabled
+        /// </summary>
+        /// <param name="value">The source value</param>
+        [MethodImpl(Inline)]
+        public static ReadOnlySpan<char> bitchars(byte index)
             => U8Index[index].bitchars;
+
+        /// <summary>
+        /// Constructs a sequence of 8 characters {ci} := [c7,...c0] over the domain {'0','1'} according to whether the
+        /// bit in the i'th position of the source is respecively disabled/enabled
+        /// </summary>
+        /// <param name="value">The source value</param>
+        [MethodImpl(Inline)]
+        public static ReadOnlySpan<char> bitchars(sbyte index)
+            => I8Index[index + SByte.MaxValue + 1].bitchars;
 
         [MethodImpl(Inline)]
         public static string BitText(byte index)
             => U8Index[index].text;
-
-        [MethodImpl(Inline)]
-        public static ReadOnlySpan<char> BitChars(sbyte index)
-            => I8Index[index + SByte.MaxValue + 1].bitchars;
-
-        [MethodImpl(Inline)]
-        public static ReadOnlySpan<sbyte> BitSeq(sbyte index)
-            => I8Index[index + SByte.MaxValue + 1].bitseq;
 
         [MethodImpl(Inline)]
         public static string BitText(sbyte index)
@@ -72,16 +127,14 @@ namespace Z0
         /// bit in the i'th position of the source is respecively disabled/enabled
         /// </summary>
         /// <param name="value">The source value</param>
-        [MethodImpl(Inline)]
         static ReadOnlySpan<byte> ReadSeq(byte value)
             => U8Index[value].bitseq;
-
+        
         /// <summary>
         /// Constructs a sequence of 8 bytes {bi} := [b7,...b0] over the domain {0,1} according to whether the
         /// bit in the i'th position of the source is respecively disabled/enabled. The uppermost bit b7 determines
         /// the sign
         /// </summary>
-        [MethodImpl(Inline)]
         static ReadOnlySpan<byte> ReadSeq(sbyte src)
             => ReadSeq((byte)src);
 
@@ -113,8 +166,7 @@ namespace Z0
         /// Constructs a sequence of 32 bytes {bi} := [b31,...b0] over the domain {0,1} according to whether the
         /// bit in the i'th position of the source is respecively disabled/enabled
         /// </summary>
-        /// <param name="src">The source value</param>
-        [MethodImpl(Inline)]
+        /// <param name="src">The source value</param>        
         static ReadOnlySpan<byte> ReadSeq(uint src)
         {
             (var lo, var hi) = ((ushort)(src), (ushort)(src >> 16));
@@ -147,7 +199,6 @@ namespace Z0
         /// bit in the i'th position of the source is respecively disabled/enabled
         /// </summary>
         /// <param name="src">The source value</param>
-        [MethodImpl(Inline)]
         static ReadOnlySpan<byte> ReadSeq(ulong src)
         {
             (var lo, var hi) =  ((uint)src, (uint)(src >> 32));
@@ -180,7 +231,283 @@ namespace Z0
 
         static (sbyte index, sbyte[] bitseq, char[] bitchars, string text)[] I8Index
             = DefineI8Index();        
-    
+
+        /// <summary>
+        /// Selects unpacked bits from a block of 8*256 bytes, where each byte represents 1 bit
+        /// </summary>
+        /// <param name="offset">The bit offset index</param>
+        /// <param name="length">The number of bits to select</param>
+        /// <returns></returns>    
+        [MethodImpl(Inline)]
+        public static ReadOnlySpan<byte> select(BitSize offset, BitSize length)
+            => BitSeqData.Slice(offset,length);
+
+        static ref readonly byte BitSeqHead 
+            => ref BitSeqData[0];
+
+        static ReadOnlySpan<byte> BitSeqData 
+            => new byte[]
+            {
+
+                0,0,0,0,0,0,0,0,
+                1,0,0,0,0,0,0,0,
+                0,1,0,0,0,0,0,0,
+                1,1,0,0,0,0,0,0,
+                0,0,1,0,0,0,0,0,
+                1,0,1,0,0,0,0,0,
+                0,1,1,0,0,0,0,0,
+                1,1,1,0,0,0,0,0,
+                0,0,0,1,0,0,0,0,
+                1,0,0,1,0,0,0,0,
+                0,1,0,1,0,0,0,0,
+                1,1,0,1,0,0,0,0,
+                0,0,1,1,0,0,0,0,
+                1,0,1,1,0,0,0,0,
+                0,1,1,1,0,0,0,0,
+                1,1,1,1,0,0,0,0,
+                0,0,0,0,1,0,0,0,
+                1,0,0,0,1,0,0,0,
+                0,1,0,0,1,0,0,0,
+                1,1,0,0,1,0,0,0,
+                0,0,1,0,1,0,0,0,
+                1,0,1,0,1,0,0,0,
+                0,1,1,0,1,0,0,0,
+                1,1,1,0,1,0,0,0,
+                0,0,0,1,1,0,0,0,
+                1,0,0,1,1,0,0,0,
+                0,1,0,1,1,0,0,0,
+                1,1,0,1,1,0,0,0,
+                0,0,1,1,1,0,0,0,
+                1,0,1,1,1,0,0,0,
+                0,1,1,1,1,0,0,0,
+                1,1,1,1,1,0,0,0,
+                0,0,0,0,0,1,0,0,
+                1,0,0,0,0,1,0,0,
+                0,1,0,0,0,1,0,0,
+                1,1,0,0,0,1,0,0,
+                0,0,1,0,0,1,0,0,
+                1,0,1,0,0,1,0,0,
+                0,1,1,0,0,1,0,0,
+                1,1,1,0,0,1,0,0,
+                0,0,0,1,0,1,0,0,
+                1,0,0,1,0,1,0,0,
+                0,1,0,1,0,1,0,0,
+                1,1,0,1,0,1,0,0,
+                0,0,1,1,0,1,0,0,
+                1,0,1,1,0,1,0,0,
+                0,1,1,1,0,1,0,0,
+                1,1,1,1,0,1,0,0,
+                0,0,0,0,1,1,0,0,
+                1,0,0,0,1,1,0,0,
+                0,1,0,0,1,1,0,0,
+                1,1,0,0,1,1,0,0,
+                0,0,1,0,1,1,0,0,
+                1,0,1,0,1,1,0,0,
+                0,1,1,0,1,1,0,0,
+                1,1,1,0,1,1,0,0,
+                0,0,0,1,1,1,0,0,
+                1,0,0,1,1,1,0,0,
+                0,1,0,1,1,1,0,0,
+                1,1,0,1,1,1,0,0,
+                0,0,1,1,1,1,0,0,
+                1,0,1,1,1,1,0,0,
+                0,1,1,1,1,1,0,0,
+                1,1,1,1,1,1,0,0,
+                0,0,0,0,0,0,1,0,
+                1,0,0,0,0,0,1,0,
+                0,1,0,0,0,0,1,0,
+                1,1,0,0,0,0,1,0,
+                0,0,1,0,0,0,1,0,
+                1,0,1,0,0,0,1,0,
+                0,1,1,0,0,0,1,0,
+                1,1,1,0,0,0,1,0,
+                0,0,0,1,0,0,1,0,
+                1,0,0,1,0,0,1,0,
+                0,1,0,1,0,0,1,0,
+                1,1,0,1,0,0,1,0,
+                0,0,1,1,0,0,1,0,
+                1,0,1,1,0,0,1,0,
+                0,1,1,1,0,0,1,0,
+                1,1,1,1,0,0,1,0,
+                0,0,0,0,1,0,1,0,
+                1,0,0,0,1,0,1,0,
+                0,1,0,0,1,0,1,0,
+                1,1,0,0,1,0,1,0,
+                0,0,1,0,1,0,1,0,
+                1,0,1,0,1,0,1,0,
+                0,1,1,0,1,0,1,0,
+                1,1,1,0,1,0,1,0,
+                0,0,0,1,1,0,1,0,
+                1,0,0,1,1,0,1,0,
+                0,1,0,1,1,0,1,0,
+                1,1,0,1,1,0,1,0,
+                0,0,1,1,1,0,1,0,
+                1,0,1,1,1,0,1,0,
+                0,1,1,1,1,0,1,0,
+                1,1,1,1,1,0,1,0,
+                0,0,0,0,0,1,1,0,
+                1,0,0,0,0,1,1,0,
+                0,1,0,0,0,1,1,0,
+                1,1,0,0,0,1,1,0,
+                0,0,1,0,0,1,1,0,
+                1,0,1,0,0,1,1,0,
+                0,1,1,0,0,1,1,0,
+                1,1,1,0,0,1,1,0,
+                0,0,0,1,0,1,1,0,
+                1,0,0,1,0,1,1,0,
+                0,1,0,1,0,1,1,0,
+                1,1,0,1,0,1,1,0,
+                0,0,1,1,0,1,1,0,
+                1,0,1,1,0,1,1,0,
+                0,1,1,1,0,1,1,0,
+                1,1,1,1,0,1,1,0,
+                0,0,0,0,1,1,1,0,
+                1,0,0,0,1,1,1,0,
+                0,1,0,0,1,1,1,0,
+                1,1,0,0,1,1,1,0,
+                0,0,1,0,1,1,1,0,
+                1,0,1,0,1,1,1,0,
+                0,1,1,0,1,1,1,0,
+                1,1,1,0,1,1,1,0,
+                0,0,0,1,1,1,1,0,
+                1,0,0,1,1,1,1,0,
+                0,1,0,1,1,1,1,0,
+                1,1,0,1,1,1,1,0,
+                0,0,1,1,1,1,1,0,
+                1,0,1,1,1,1,1,0,
+                0,1,1,1,1,1,1,0,
+                1,1,1,1,1,1,1,0,
+                0,0,0,0,0,0,0,1,
+                1,0,0,0,0,0,0,1,
+                0,1,0,0,0,0,0,1,
+                1,1,0,0,0,0,0,1,
+                0,0,1,0,0,0,0,1,
+                1,0,1,0,0,0,0,1,
+                0,1,1,0,0,0,0,1,
+                1,1,1,0,0,0,0,1,
+                0,0,0,1,0,0,0,1,
+                1,0,0,1,0,0,0,1,
+                0,1,0,1,0,0,0,1,
+                1,1,0,1,0,0,0,1,
+                0,0,1,1,0,0,0,1,
+                1,0,1,1,0,0,0,1,
+                0,1,1,1,0,0,0,1,
+                1,1,1,1,0,0,0,1,
+                0,0,0,0,1,0,0,1,
+                1,0,0,0,1,0,0,1,
+                0,1,0,0,1,0,0,1,
+                1,1,0,0,1,0,0,1,
+                0,0,1,0,1,0,0,1,
+                1,0,1,0,1,0,0,1,
+                0,1,1,0,1,0,0,1,
+                1,1,1,0,1,0,0,1,
+                0,0,0,1,1,0,0,1,
+                1,0,0,1,1,0,0,1,
+                0,1,0,1,1,0,0,1,
+                1,1,0,1,1,0,0,1,
+                0,0,1,1,1,0,0,1,
+                1,0,1,1,1,0,0,1,
+                0,1,1,1,1,0,0,1,
+                1,1,1,1,1,0,0,1,
+                0,0,0,0,0,1,0,1,
+                1,0,0,0,0,1,0,1,
+                0,1,0,0,0,1,0,1,
+                1,1,0,0,0,1,0,1,
+                0,0,1,0,0,1,0,1,
+                1,0,1,0,0,1,0,1,
+                0,1,1,0,0,1,0,1,
+                1,1,1,0,0,1,0,1,
+                0,0,0,1,0,1,0,1,
+                1,0,0,1,0,1,0,1,
+                0,1,0,1,0,1,0,1,
+                1,1,0,1,0,1,0,1,
+                0,0,1,1,0,1,0,1,
+                1,0,1,1,0,1,0,1,
+                0,1,1,1,0,1,0,1,
+                1,1,1,1,0,1,0,1,
+                0,0,0,0,1,1,0,1,
+                1,0,0,0,1,1,0,1,
+                0,1,0,0,1,1,0,1,
+                1,1,0,0,1,1,0,1,
+                0,0,1,0,1,1,0,1,
+                1,0,1,0,1,1,0,1,
+                0,1,1,0,1,1,0,1,
+                1,1,1,0,1,1,0,1,
+                0,0,0,1,1,1,0,1,
+                1,0,0,1,1,1,0,1,
+                0,1,0,1,1,1,0,1,
+                1,1,0,1,1,1,0,1,
+                0,0,1,1,1,1,0,1,
+                1,0,1,1,1,1,0,1,
+                0,1,1,1,1,1,0,1,
+                1,1,1,1,1,1,0,1,
+                0,0,0,0,0,0,1,1,
+                1,0,0,0,0,0,1,1,
+                0,1,0,0,0,0,1,1,
+                1,1,0,0,0,0,1,1,
+                0,0,1,0,0,0,1,1,
+                1,0,1,0,0,0,1,1,
+                0,1,1,0,0,0,1,1,
+                1,1,1,0,0,0,1,1,
+                0,0,0,1,0,0,1,1,
+                1,0,0,1,0,0,1,1,
+                0,1,0,1,0,0,1,1,
+                1,1,0,1,0,0,1,1,
+                0,0,1,1,0,0,1,1,
+                1,0,1,1,0,0,1,1,
+                0,1,1,1,0,0,1,1,
+                1,1,1,1,0,0,1,1,
+                0,0,0,0,1,0,1,1,
+                1,0,0,0,1,0,1,1,
+                0,1,0,0,1,0,1,1,
+                1,1,0,0,1,0,1,1,
+                0,0,1,0,1,0,1,1,
+                1,0,1,0,1,0,1,1,
+                0,1,1,0,1,0,1,1,
+                1,1,1,0,1,0,1,1,
+                0,0,0,1,1,0,1,1,
+                1,0,0,1,1,0,1,1,
+                0,1,0,1,1,0,1,1,
+                1,1,0,1,1,0,1,1,
+                0,0,1,1,1,0,1,1,
+                1,0,1,1,1,0,1,1,
+                0,1,1,1,1,0,1,1,
+                1,1,1,1,1,0,1,1,
+                0,0,0,0,0,1,1,1,
+                1,0,0,0,0,1,1,1,
+                0,1,0,0,0,1,1,1,
+                1,1,0,0,0,1,1,1,
+                0,0,1,0,0,1,1,1,
+                1,0,1,0,0,1,1,1,
+                0,1,1,0,0,1,1,1,
+                1,1,1,0,0,1,1,1,
+                0,0,0,1,0,1,1,1,
+                1,0,0,1,0,1,1,1,
+                0,1,0,1,0,1,1,1,
+                1,1,0,1,0,1,1,1,
+                0,0,1,1,0,1,1,1,
+                1,0,1,1,0,1,1,1,
+                0,1,1,1,0,1,1,1,
+                1,1,1,1,0,1,1,1,
+                0,0,0,0,1,1,1,1,
+                1,0,0,0,1,1,1,1,
+                0,1,0,0,1,1,1,1,
+                1,1,0,0,1,1,1,1,
+                0,0,1,0,1,1,1,1,
+                1,0,1,0,1,1,1,1,
+                0,1,1,0,1,1,1,1,
+                1,1,1,0,1,1,1,1,
+                0,0,0,1,1,1,1,1,
+                1,0,0,1,1,1,1,1,
+                0,1,0,1,1,1,1,1,
+                1,1,0,1,1,1,1,1,
+                0,0,1,1,1,1,1,1,
+                1,0,1,1,1,1,1,1,
+                0,1,1,1,1,1,1,1,
+                1,1,1,1,1,1,1,1,
+
+            };
+
         static (byte index, byte[] bitseq, char[] bitchars, string text)[] DefineU8Index()
         {
             var dst = new (byte index, byte[] bitseq, char[] bitchars, string text)[256];

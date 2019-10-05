@@ -33,5 +33,9 @@ namespace Z0
         public static Vec256<T> Replicate<T>(this Vec256<T> src)
             where T : unmanaged
                 => Vec256.Load(src.ToSpan256());    
+
+        [MethodImpl(Inline)]
+        public static string Format(this Blend32x4 src)                
+            => BitString.FromScalar((byte)src).Format(true);
     }
 }

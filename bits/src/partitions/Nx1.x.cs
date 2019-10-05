@@ -117,5 +117,22 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ushort ToScalar(this Part13x1 src)
             => (ushort)src;
+
+        /// <summary>
+        /// Converts the source to its underlying scalar value
+        /// </summary>
+        /// <param name="src">The source value</param>
+        [MethodImpl(Inline)]
+        public static uint ToScalar(this Part32x1 src)
+            => (uint)src;
+
+        /// <summary>
+        /// Converts the source to its underlying scalar value
+        /// </summary>
+        /// <param name="src">The source value</param>
+        [MethodImpl(Inline)]
+        public static ulong ToScalar(this Part64x1 src)
+            => (ulong)src;
+
     }
 }

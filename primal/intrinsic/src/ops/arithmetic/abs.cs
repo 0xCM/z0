@@ -32,7 +32,7 @@ namespace Z0
         public static Vec128<long> abs(in Vec128<long> src)
         {
             var mask = vnegate(vsrl(src, 63));                        
-            return sub(vxor(mask, src), mask);
+            return vsub(vxor(mask, src), mask);
         }
 
         [MethodImpl(Inline)]
@@ -51,7 +51,7 @@ namespace Z0
         public static Vec256<long> abs(in Vec256<long> src)
         {
             var mask = vnegate(vsrl(in src, 63));
-            return sub(vxor(in mask, in src), mask);
+            return vsub(vxor(in mask, in src), mask);
         }
     }
 

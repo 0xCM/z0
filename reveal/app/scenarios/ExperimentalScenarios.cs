@@ -20,8 +20,53 @@ namespace Z0
 
         }
 
-        public static uint bb_pack23(in BitBlock23 src)
-            => src.Compress();
+        public static Vec256<uint> blend(Vec256<uint> x, Vec256<uint> y)
+            => dinx.vblend(x,y, Blend32x8.LRLRLRLR);
+
+        public static Vec128<uint> blend(Vec128<uint> x, Vec128<uint> y)
+            => dinx.vblend(x,y, Blend32x4.LRLR);
+
+        public int Switch14(int x)
+        {
+            switch(x)
+            {
+                case 1: return 1;
+                case 2: return 4;
+                case 3: return 8;
+                case 4: return 16;
+                case 5: return 32;
+                case 6: return 64;
+                case 7: return 128;
+                case 8: return 256;
+                case 9: return 512;
+                case 10: return 1024;
+                case 11: return 2028;
+                case 12: return 10;
+                case 13: return 20;
+                case 14: return 30;
+                case 7000: return 1024;
+                case 7001: return 2028;
+                case 7002: return 10;
+                case 7003: return 20;
+                case 7004: return 30;
+                default: return 0;
+            }
+        }
+
+        public int IfElse10(int x)
+        {
+            if(x == 1) return 1;
+            else if(x == 2) return 4;
+            else if(x == 3) return 8;
+            else if(x == 4) return 16;
+            else if(x == 5) return 32;
+            else if(x == 6) return 64;
+            else if(x == 7) return 128;
+            else if(x == 8) return 256;
+            else if(x == 9) return 512;
+            else if(x == 10) return 1024;
+            else return 0;
+        }
 
         static ReadOnlySpan<byte> U8Data => new byte[]
         {
@@ -56,19 +101,7 @@ namespace Z0
         public static uint RotLU32Inline(uint x, int offset)
             => (x << (int)offset) | (x >> (32 - offset));
 
-        [MethodImpl(Inline)]
-        public int ChoiceSwitchInline(int x)
-        {
-            switch(x)
-            {
-                case 1: return 1;
-                case 2: return 4;
-                case 3: return 8;
-                case 4: return 16;
-                case 5: return 32;
-                default: return 0;
-            }
-        }
+
 
         [MethodImpl(Inline)]
         public int ChoiceIfElse5Inline(int x)
@@ -81,11 +114,7 @@ namespace Z0
             else return 0;
         }
 
-        public TypeCode GetTypeCodeInt32()
-            => GetTypeCode<int>();
 
-        public TypeCode GetTypeCodeUInt32()
-            => GetTypeCode<uint>();
 
         public int CheckMatches()
         {
@@ -137,58 +166,15 @@ namespace Z0
             => typeof(S) == typeof(T);
 
 
-        [MethodImpl(Inline)]
-        TypeCode GetTypeCode<T>()
-        {
-            if(Type.GetTypeCode(typeof(T)) == TypeCode.Int16) return TypeCode.Int16;
-            else if(Type.GetTypeCode(typeof(T)) == TypeCode.Int32) return TypeCode.Int32;
-            else if(Type.GetTypeCode(typeof(T)) == TypeCode.Int64) return TypeCode.Int64;
-            else if(Type.GetTypeCode(typeof(T)) == TypeCode.UInt64) return TypeCode.UInt64;
-            else if(Type.GetTypeCode(typeof(T)) == TypeCode.UInt32) return TypeCode.UInt32;
-            else if(Type.GetTypeCode(typeof(T)) == TypeCode.UInt16) return TypeCode.UInt16;
-            else if(Type.GetTypeCode(typeof(T)) == TypeCode.Single) return TypeCode.Single;
-            else if(Type.GetTypeCode(typeof(T)) == TypeCode.Byte) return TypeCode.Byte;
-            else if(Type.GetTypeCode(typeof(T)) == TypeCode.SByte) return TypeCode.SByte;
-            else throw unsupported<T>();
-        }
 
-        [MethodImpl(Inline)]
-        public int ChoiceIfElse10Inline(int x)
-        {
-            if(x == 1) return 1;
-            else if(x == 2) return 4;
-            else if(x == 3) return 8;
-            else if(x == 4) return 16;
-            else if(x == 5) return 32;
-            else if(x == 6) return 64;
-            else if(x == 7) return 128;
-            else if(x == 8) return 256;
-            else if(x == 9) return 512;
-            else if(x == 10) return 1024;
-            else return 0;
-        }
 
-        public int CallChoiceSwitchInline(int x)
-        {
-            return ChoiceSwitchInline(x);
-        }
 
-        public int CallChoiceIfElse5Inline(int x)
-        {
-            return ChoiceIfElse5Inline(x);
-        }
-
-        public int CallChoiceIfElse10Inline(int x)
-        {
-            return ChoiceIfElse10Inline(x);
-        }
-        
 
          public ReadOnlySpan<byte> ReadU8Data(int count)
-            => U8Data.Slice(0,count);
+            => U8Data;
 
         public ReadOnlySpan<uint> ReadU32Data(int count)
-            => U32Data.Slice(0,count);
+            => U32Data;
 
         [MethodImpl(NotInline)]
         public void VoidReturn()
@@ -267,21 +253,8 @@ namespace Z0
              : target == 3 ? JumpTarget3()
              : JumpTarget4();
 
-        public static void divrem32i(int x, int y, out int q, out int r)
-        {
-            q = x / y;
-            r = x % y;
-        }
 
-        public static void divrem64i(long x, long y, out long q, out long r)
-        {
-            q = x / y;
-            r = x % y;
-        }
-
-        public static (ulong q, ulong r) divrem64u(ulong x, ulong y)
-            => (x/y, x % y);
-
+            
 
     }
 

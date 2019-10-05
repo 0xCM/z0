@@ -32,35 +32,57 @@ namespace Z0
         /// The number of bits apprehended by the matrix = 64
         /// </summary>
         public static readonly BitSize TotalBitCount = RowBitCount * ColBitCount;
-                        
-        /// <summary>
-        /// The (aligned) number of bytes needed for a row
-        /// </summary>
-        public static readonly ByteSize RowByteCount = (ByteSize)RowBitCount;                        
-
-        /// <summary>
-        /// The (aligned) number of bytes needed for a column
-        /// </summary>
-        public static readonly ByteSize ColByteCount = (ByteSize)ColBitCount;
-        
+                                
+        static ReadOnlySpan<byte> Identity4x8 => new byte[]
+        {
+            1 << 0, 
+            1 << 1, 
+            1 << 2, 
+            1 << 3
+        };
+                
         public static BitMatrix4 Identity 
         {
             [MethodImpl(Inline)]
-            get => Define(Identity4x4.ToSpan());
+            get => Define(Identity4x8);
         }
 
         public static BitMatrix4 Zero 
         {            
             [MethodImpl(Inline)]
-            get => Define(0,0);
+            get => Define(0,0,0,0);
+        }
+
+        public static BitMatrix4 Ones 
+        {            
+            [MethodImpl(Inline)]
+            get => Define(0xF,0xF,0xF,0xF);
+        }
+
+
+        [MethodImpl(Inline)]
+        public static BitMatrix4 Define(byte r0, byte r1, byte r2, byte r3)        
+            => new BitMatrix4(r0,r1,r2,r3);
+
+        [MethodImpl(Inline)]
+        public static BitMatrix4 Define(ushort src)        
+        {
+            (var x0, var x1) = Bits.split(src);
+            (var r0, var r1) = Bits.split(x0);
+            (var r2, var r3) = Bits.split(x1);
+            return Define(r0,r1,r2,r3);
         }
 
         [MethodImpl(Inline)]
-        public static BitMatrix4 Define(params byte[] src)        
-            => src.Length == 0 ? new BitMatrix4(0,0)  : new BitMatrix4(src);
+        public static BitMatrix4 Define(uint src)
+        {
+            Span<uint> dst = new uint[1]{src};
+            return Define(dst.AsBytes());
+        }
 
-        public static BitMatrix4 Define(ushort src)
-            => Define(BitConverter.GetBytes(src));
+        [MethodImpl(Inline)]
+        public static BitMatrix4 Define(ReadOnlySpan<byte> src)        
+            => new BitMatrix4(src.Replicate());
 
         [MethodImpl(Inline)]
         public static BitMatrix4 Define(Span<byte> src)        
@@ -68,12 +90,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static explicit operator ushort(BitMatrix4 src)
-            => BitConverter.ToUInt16(src.data);
-
-        [MethodImpl(Inline)]
-        public static explicit operator BitMatrix4(ushort src)
-            => Define(src);
-
+            => src.ToScalar();
 
         [MethodImpl(Inline)]
         public static BitMatrix4 operator & (BitMatrix4 lhs, BitMatrix4 rhs)
@@ -106,33 +123,15 @@ namespace Z0
 
 
         [MethodImpl(Inline)]
-        BitMatrix4(params byte[] src)
-        {                    
-            require(src.Length == Pow2.T01);
-            this.data = src;
-            
-        }
-
-        [MethodImpl(Inline)]
-        BitMatrix4(ushort src)
-        {                    
-            this.data = BitConverter.GetBytes(src);            
-        }
-
+        BitMatrix4(byte r0, byte r1, byte r2, byte r3)                                        
+            => this.data = new byte[4]{r0,r1,r2,r3};
+                
         [MethodImpl(Inline)]
         BitMatrix4(Span<byte> src)
         {                    
-            require(src.Length == Pow2.T01);
+            require(src.Length == 4);
             this.data = src;
         }
-
-        /// <summary>
-        /// Loads a matrix from the source value
-        /// </summary>
-        /// <param name="src">The bit source</param>
-        [MethodImpl(Inline)]
-        public static BitMatrix4 Load(ushort src)        
-            => new BitMatrix4(src);
 
         /// <summary>
         /// Allocates a matrix, optionally assigning each element to the
@@ -140,7 +139,7 @@ namespace Z0
         /// </summary>
         [MethodImpl(Inline)]
         public static BitMatrix4 Alloc(Bit? fill = null)                
-            => fill == Bit.On ? Load(UInt16.MaxValue) : Load(0);
+            => fill == Bit.On ? new BitMatrix4(0xF,0xF,0xF,0xF) : new BitMatrix4(0,0,0,0);
         public int RowCount
         {
             [MethodImpl(Inline)]
@@ -172,19 +171,11 @@ namespace Z0
 
         [MethodImpl(Inline)]
         readonly Bit GetBit(int row, int col)
-        {
-            var index = row <= 1 ? 0 : 1;
-            var pos = (row == 0 || row == 2) ? col : col + 4;
-            return gbits.test(in data[index], pos);
-        }
+            => BitMask.test(in data[row], col);
 
         [MethodImpl(Inline)]
-        void SetBit(int row, int col, Bit value)
-        {
-            var index = row <= 1 ? 0 : 1;
-            var pos = (row == 0 || row == 2) ? col : col + 4;
-            gbits.set(ref data[index], (byte)pos, value);
-        }
+        void SetBit(int row, int col, Bit b)
+            => BitMask.set(ref data[row], (byte)col, b);
 
         public Bit this[int row, int col]
         {
@@ -194,6 +185,15 @@ namespace Z0
             [MethodImpl(Inline)]
             set => SetBit(row, col,value);
         }            
+
+        public readonly ushort ToScalar()
+        {
+            var dst = (uint)data[0];
+            dst |= (uint)data[1] << 4;            
+            dst |= (uint)data[2] << 8;            
+            dst |= (uint)data[3] << 12;            
+            return (ushort)dst;
+        }
 
         /// <summary>
         /// A mutable indexer
@@ -207,7 +207,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public readonly bool IsZero()
-            => BitConverter.ToUInt16(data) == 0;
+            => data.TakeUInt32() == 0;
 
         /// <summary>
         /// The underlying matrix data
@@ -231,12 +231,6 @@ namespace Z0
             return dst;                    
         }
 
-        /// <summary>
-        /// Extracts the bits that comprise the matrix in row-major order
-        /// </summary>
-        [MethodImpl(Inline)]
-        public readonly Span<byte> Unpack()
-            => data.Unpack();
 
         [MethodImpl(Inline)] 
         public readonly BitMatrix4 Replicate()
@@ -248,8 +242,12 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public readonly string Format()
-            => data.FormatMatrixBits(4);
-
+        {
+            Span<ushort> packed = stackalloc ushort[1];
+            packed[0] = ToScalar();
+            return packed.FormatMatrixBits(4);            
+        }
+            
         /// <summary>
         /// Creates a new matrix by cloning the existing matrix or allocating
         /// a matrix with the same structure
@@ -343,11 +341,6 @@ namespace Z0
         public override int GetHashCode()
             => throw new NotSupportedException();
 
-        static ReadOnlySpan<byte> Identity4x4 => new byte[] 
-        {
-            0b1000_0100, 
-            0b0010_0001
-        };
 
     }
 }

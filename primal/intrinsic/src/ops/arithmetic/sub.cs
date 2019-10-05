@@ -29,7 +29,7 @@ namespace Z0
         /// <param name="lhs">The left vector</param>
         /// <param name="rhs">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vec128<byte> sub(in Vec128<byte> lhs, in Vec128<byte> rhs)
+        public static Vec128<byte> vsub(in Vec128<byte> lhs, in Vec128<byte> rhs)
             => Subtract(lhs,rhs);
 
         /// <summary>
@@ -39,7 +39,7 @@ namespace Z0
         /// <param name="lhs">The left vector</param>
         /// <param name="rhs">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vec128<sbyte> sub(in Vec128<sbyte> lhs, in Vec128<sbyte> rhs)
+        public static Vec128<sbyte> vsub(in Vec128<sbyte> lhs, in Vec128<sbyte> rhs)
             => Subtract(lhs,rhs);
 
         /// <summary>
@@ -49,7 +49,7 @@ namespace Z0
         /// <param name="lhs">The left vector</param>
         /// <param name="rhs">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vec128<short> sub(in Vec128<short> lhs, in Vec128<short> rhs)
+        public static Vec128<short> vsub(in Vec128<short> lhs, in Vec128<short> rhs)
             => Subtract(lhs,rhs);
 
         /// <summary>
@@ -59,7 +59,7 @@ namespace Z0
         /// <param name="lhs">The left vector</param>
         /// <param name="rhs">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vec128<ushort> sub(in Vec128<ushort> lhs, in Vec128<ushort> rhs)
+        public static Vec128<ushort> vsub(in Vec128<ushort> lhs, in Vec128<ushort> rhs)
             => Subtract(lhs,rhs);
 
         /// <summary>
@@ -69,7 +69,7 @@ namespace Z0
         /// <param name="lhs">The left vector</param>
         /// <param name="rhs">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vec128<int> sub(in Vec128<int> lhs, in Vec128<int> rhs)
+        public static Vec128<int> vsub(in Vec128<int> lhs, in Vec128<int> rhs)
             => Subtract(lhs,rhs);
 
         /// <summary>
@@ -79,7 +79,7 @@ namespace Z0
         /// <param name="lhs">The left vector</param>
         /// <param name="rhs">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vec128<uint> sub(in Vec128<uint> lhs, in Vec128<uint> rhs)
+        public static Vec128<uint> vsub(in Vec128<uint> lhs, in Vec128<uint> rhs)
             => Subtract(lhs,rhs);
 
         /// <summary>
@@ -89,7 +89,7 @@ namespace Z0
         /// <param name="lhs">The left vector</param>
         /// <param name="rhs">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vec128<long> sub(in Vec128<long> lhs, in Vec128<long> rhs)
+        public static Vec128<long> vsub(in Vec128<long> lhs, in Vec128<long> rhs)
             => Subtract(lhs,rhs);
 
         /// <summary>
@@ -98,7 +98,7 @@ namespace Z0
         /// <param name="lhs">The left vector</param>
         /// <param name="rhs">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vec128<ulong> sub(in Vec128<ulong> lhs, in Vec128<ulong> rhs)
+        public static Vec128<ulong> vsub(in Vec128<ulong> lhs, in Vec128<ulong> rhs)
             => Subtract(lhs,rhs);
 
         /// <summary>
@@ -108,7 +108,7 @@ namespace Z0
         /// <param name="lhs">The left vector</param>
         /// <param name="rhs">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<byte> sub(in Vec256<byte> lhs, in Vec256<byte> rhs)
+        public static Vec256<byte> vsub(in Vec256<byte> lhs, in Vec256<byte> rhs)
             => Subtract(lhs, rhs);
 
         /// <summary>
@@ -118,7 +118,7 @@ namespace Z0
         /// <param name="lhs">The left vector</param>
         /// <param name="rhs">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<sbyte> sub(in Vec256<sbyte> lhs, in Vec256<sbyte> rhs)
+        public static Vec256<sbyte> vsub(in Vec256<sbyte> lhs, in Vec256<sbyte> rhs)
             => Subtract(lhs, rhs);
 
         /// <summary>
@@ -128,7 +128,7 @@ namespace Z0
         /// <param name="lhs">The left vector</param>
         /// <param name="rhs">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<short> sub(in Vec256<short> lhs, in Vec256<short> rhs)
+        public static Vec256<short> vsub(in Vec256<short> lhs, in Vec256<short> rhs)
             => Subtract(lhs, rhs);
 
         /// <summary>
@@ -138,7 +138,7 @@ namespace Z0
         /// <param name="lhs">The left vector</param>
         /// <param name="rhs">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<ushort> sub(in Vec256<ushort> lhs, in Vec256<ushort> rhs)
+        public static Vec256<ushort> vsub(in Vec256<ushort> lhs, in Vec256<ushort> rhs)
             => Subtract(lhs, rhs);
 
         /// <summary>
@@ -148,7 +148,7 @@ namespace Z0
         /// <param name="lhs">The left vector</param>
         /// <param name="rhs">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<int> sub(in Vec256<int> lhs, in Vec256<int> rhs)
+        public static Vec256<int> vsub(in Vec256<int> lhs, in Vec256<int> rhs)
             => Subtract(lhs, rhs);
 
         /// <summary>
@@ -158,7 +158,7 @@ namespace Z0
         /// <param name="lhs">The left vector</param>
         /// <param name="rhs">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<uint> sub(in Vec256<uint> lhs, in Vec256<uint> rhs)
+        public static Vec256<uint> vsub(in Vec256<uint> lhs, in Vec256<uint> rhs)
             => Subtract(lhs, rhs);
 
         /// <summary>
@@ -168,7 +168,7 @@ namespace Z0
         /// <param name="lhs">The left vector</param>
         /// <param name="rhs">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<long> sub(in Vec256<long> lhs, in Vec256<long> rhs)
+        public static Vec256<long> vsub(in Vec256<long> lhs, in Vec256<long> rhs)
             => Subtract(lhs, rhs);
 
         /// <summary>
@@ -178,7 +178,7 @@ namespace Z0
         /// <param name="lhs">The left vector</param>
         /// <param name="rhs">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<ulong> sub(in Vec256<ulong> lhs, in Vec256<ulong> rhs)
+        public static Vec256<ulong> vsub(in Vec256<ulong> lhs, in Vec256<ulong> rhs)
             => Subtract(lhs, rhs);
 
     }

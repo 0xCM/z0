@@ -122,8 +122,8 @@ namespace Z0
         public static Vec256<byte> vsrl(in Vec256<byte> src, byte offset)
         {
             //Fan the hi/lo parts of the u8 source vector across 2 u16 vectors
-            ref var srcX = ref convert(dinx.extract128(src,0), out Vec256<ushort> _);
-            ref var srcY = ref convert(dinx.extract128(src,1), out Vec256<ushort> _);
+            ref var srcX = ref convert(dinx.lo(src), out Vec256<ushort> _);
+            ref var srcY = ref convert(dinx.hi(src), out Vec256<ushort> _);
             
             //Shift each part with a concrete intrinsic anc convert back to bytes
             var dstA = dinx.vsrl(srcX, offset).As<byte>();
@@ -142,7 +142,7 @@ namespace Z0
             var permA = dinx.permute(trA, permSpec);
             var permB = dinx.permute(trB, permSpec);
             var result = default(Vec256<byte>);
-            dinx.insert(dinx.extract128(in permA,0), dinx.extract128(in permB,0), ref result);            
+            dinx.insert(dinx.lo(in permA), dinx.lo(in permB), ref result);            
             
             return result;            
         } 

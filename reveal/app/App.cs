@@ -94,6 +94,8 @@ namespace Z0
             Disassemble(typeof(zfoc));    
             Disassemble(typeof(foc));    
             Disassemble(typeof(circop));    
+            Disassemble(typeof(BitParts));    
+
 
             // var dst = DefineAsmOutPath("gmath.add");
             // DeconstructGeneric<int>(typeof(gmath), "add").OnSome(d => d.EmitAsm(dst));

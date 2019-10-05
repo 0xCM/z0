@@ -29,7 +29,30 @@ namespace Z0
     /// </summary>
     public static partial class BitParts
     {        
-    
+        
+
+        [MethodImpl(Inline)]
+        public static ref ushort pack16x1(ReadOnlySpan<byte> src, ref ushort dst)
+        {
+            dst |= src[0];
+            dst |= (ushort)(src[1] << 1);
+            dst |= (ushort)(src[2] << 2);
+            dst |= (ushort)(src[3] << 3);
+            dst |= (ushort)(src[4] << 4);
+            dst |= (ushort)(src[5] << 5);
+            dst |= (ushort)(src[6] << 6);
+            dst |= (ushort)(src[7] << 7);
+            dst |= (ushort)(src[8] << 8);
+            dst |= (ushort)(src[9] << 9);
+            dst |= (ushort)(src[10] << 10);
+            dst |= (ushort)(src[11] << 11);
+            dst |= (ushort)(src[12] << 12);
+            dst |= (ushort)(src[13] << 13);
+            dst |= (ushort)(src[14] << 14);
+            dst |= (ushort)(src[15] << 15);
+            return ref dst;
+        }
+
     
     }
 

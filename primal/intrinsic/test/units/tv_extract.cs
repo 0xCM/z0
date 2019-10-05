@@ -12,6 +12,8 @@ namespace Z0.Test
 
     public class tv_extract : UnitTest<tv_extract>
     {     
+
+
         public void extract128()
         {
             extract128_check<byte>();
@@ -22,8 +24,6 @@ namespace Z0.Test
             extract128_check<uint>();
             extract128_check<long>();
             extract128_check<ulong>();
-            extract128_check<float>();
-            extract128_check<double>();
 
         }
 
@@ -37,47 +37,41 @@ namespace Z0.Test
             extract256_check<uint>();
             extract256_check<long>();
             extract256_check<ulong>();
-            extract256_check<float>();
-            extract256_check<double>();
             
         }
 
         void extract128_check<T>()
             where T : unmanaged
         {
-            TypeCaseStart<T>();
 
             var len = Vec128<T>.Length;
             var src = Random.CpuVec128<T>();
             var expect = span<T>(len);
             src.ToSpan(expect);
             for(byte i = 0; i< len; i++)
-                Claim.eq(expect[i], ginx.extract(in src, i));
+                Claim.eq(expect[i], src[i]);
 
-            TypeCaseEnd<T>();                
         }
             
         public void extract256_check<T>()
             where T : unmanaged
         {
-            TypeCaseStart<T>();
 
             var len = Vec256<T>.Length;
             var half = len >> 1;
             var src = Random.CpuVec256<T>();
             var srcData = src.ToSpan(span<T>(len));
             
-            var x0 = ginx.extract128(in src,0);
+            var x0 = ginx.lo(in src);
             var y0 = x0.ToSpan(span<T>(half));
             var z0 = srcData.Slice(0, half);
             Claim.eq(y0,z0);
 
-            var x1 = ginx.extract128(in src,1);
+            var x1 = ginx.hi(in src);
             var y1 = x1.ToSpan(span<T>(half));
             var z1 = srcData.Slice(half);
             Claim.eq(y1,z1);
 
-            TypeCaseEnd<T>();                
         }
 
     }

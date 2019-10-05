@@ -27,27 +27,6 @@ namespace Z0
             return dst;
         }                       
 
-        /// <summary>
-        /// Extracts the index-identified 128-bit component from the source
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <param name="index">The component index; either 0, 1, 2 or 3</param>
-        /// <typeparam name="T">The primal component type</typeparam>
-        [MethodImpl(Inline)]
-        public static Vec128<T> Extract128<T>(this Vec512<T> src, byte index)
-            where T : unmanaged            
-        {
-            if(index == 0)
-                return ginx.extract128(src.lo,0);
-            else if(index == 1)
-                return ginx.extract128(src.lo,1);
-            if(index == 2)
-                return ginx.extract128(src.hi,0);
-            else if(index == 3)
-                return ginx.extract128(src.hi,1);
-            else
-                throw unsupported<T>();
-        }
 
 
         /// <summary>

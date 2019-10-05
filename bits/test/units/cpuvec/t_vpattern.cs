@@ -16,7 +16,7 @@ namespace Z0
         public void pattern_clearalt_256x8()
         {
             var tr = Vec256Pattern.ClearAlt<byte>();
-            for(var i=0; i<DefaltCycleCount; i++)
+            for(var i=0; i<SampleSize; i++)
             {
                 var x = Random.CpuVec256<byte>();
                 var y = dinx.shuffle(x, tr);

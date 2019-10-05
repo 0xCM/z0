@@ -25,7 +25,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vec128<sbyte> vadd_g128x8i(in Vec128<sbyte> lhs, in Vec128<sbyte> rhs) 
             => ginx.vadd(in lhs, in rhs);
-
+            
         // ~
 
         [MethodImpl(Inline)]

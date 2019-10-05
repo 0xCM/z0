@@ -37,6 +37,21 @@ namespace Z0
             );
         }
 
+        const ushort ByteMask = 0x00FF;
+
+        static Vec256<ushort> VByteMask
+        {
+            [MethodImpl(Inline)]
+            get => broadcast(ByteMask, out Vec256<ushort> dst);
+        }
+
+        [MethodImpl(Inline)]
+        public static Vec256<ushort> vsll_2(in Vec128<byte> src, byte offset)
+        {
+            convert(in src, out Vec256<ushort> dst);
+            var x = dinx.vand(dinx.vsll(dst,offset), VByteMask);
+            return x;
+        }
         /// <summary>
         /// Shifts each component of the source vector leftwards by a common number of bits
         /// </summary>
@@ -46,8 +61,8 @@ namespace Z0
         /// for a potentially better approach</remarks>
         public static Vec128<byte> vsll(in Vec128<byte> src, byte offset)
         {
-            convert(in src, out Vec256<ushort> dst);
             Span<ushort> data = stackalloc ushort[Vec256<ushort>.Length];
+            convert(in src, out Vec256<ushort> dst);
             vstore(dinx.vsll(dst, offset), ref data[0]);
             var i = 0;
             return Vec128.FromBytes(
@@ -122,8 +137,8 @@ namespace Z0
         public static Vec256<byte> vsll(in Vec256<byte> src, byte offset)
         {
             //Fan the hi/lo parts of the u8 source vector across 2 u16 vectors
-            ref var srcX = ref convert(dinx.extract128(src,0), out Vec256<ushort> _);
-            ref var srcY = ref convert(dinx.extract128(src,1), out Vec256<ushort> _);
+            ref var srcX = ref convert(dinx.lo(src), out Vec256<ushort> _);
+            ref var srcY = ref convert(dinx.hi(src), out Vec256<ushort> _);
             
             //Shift each part with a concrete intrinsic anc convert back to bytes
             var dstA = dinx.vsll(srcX, offset).As<byte>();
@@ -142,7 +157,7 @@ namespace Z0
             var permA = dinx.permute(trA, permSpec);
             var permB = dinx.permute(trB, permSpec);
             var result = default(Vec256<byte>);
-            dinx.insert(dinx.extract128(in permA,0), dinx.extract128(in permB,0), ref result);            
+            dinx.insert(dinx.lo(in permA), dinx.lo(in permB), ref result);            
             
             return result;            
         }
@@ -207,19 +222,6 @@ namespace Z0
         public static Vec256<ulong> vsll(in Vec256<ulong> src, byte offset)
             => ShiftLeftLogical(src.ymm, offset); 
    
-        /// <summary>
-        /// Zero extends packed unsigned 8-bit integers in the source vector to packed 16-bit integers in the target vector 
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <param name="dst">The target vector</param>
-        /// <summary>__m256i _mm256_cvtepu8_epi16 (__m128i a) </summary>
-        [MethodImpl(Inline)]
-        static ref Vec256<ushort> convert(in Vec128<byte> src, out Vec256<ushort> dst)
-        {
-            dst = ConvertToVector256Int16(src.xmm).AsUInt16();
-            return ref dst;
-        }
-
     }
 
 }

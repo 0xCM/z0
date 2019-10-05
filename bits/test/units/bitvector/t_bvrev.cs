@@ -14,19 +14,6 @@ namespace Z0
 
     public class t_bvrev : BitVectorTest<t_bvrev>
     {
-        public void bvrev_check()
-        {
-            for(var sample=0; sample<SampleSize; sample++)
-            {
-                var bs = Random.BitString(n20);
-                var block1 = bs.Replicate().ToBitBlock(n20);
-                block1.Reverse();
-                bs.Reverse();
-                for(var j=0; j<bs.Length; j++)
-                    Claim.yea( bs[j] == block1[j]);
-                            
-            }
-        }
 
     }
 

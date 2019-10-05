@@ -106,7 +106,5 @@ namespace Z0
             else 
                 return generic<T>(dinx.vadd(in uint64(in lhs), in uint64(in rhs)));
         }    
-
-
     }
 }

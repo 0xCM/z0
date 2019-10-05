@@ -19,7 +19,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
         public static Vec128<sbyte> vnegate(in Vec128<sbyte> src)
-            =>  sub(Vec128<sbyte>.Zero, src);
+            =>  vsub(Vec128<sbyte>.Zero, src);
 
         /// <summary>
         /// Negates the source vector (Two's complement)
@@ -35,7 +35,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
         public static Vec128<short> vnegate(in Vec128<short> src)
-            =>  sub(Vec128<short>.Zero, src);
+            =>  vsub(Vec128<short>.Zero, src);
 
         /// <summary>
         /// Negates the source vector (Two's complement)
@@ -51,7 +51,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
         public static Vec128<int> vnegate(in Vec128<int> src)
-            =>  sub(Vec128<int>.Zero, src);
+            =>  vsub(Vec128<int>.Zero, src);
 
         /// <summary>
         /// Negates the source vector (Two's complement)
@@ -67,7 +67,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
         public static Vec128<long> vnegate(in Vec128<long> src)
-            =>  sub(Vec128<long>.Zero, src);
+            =>  vsub(Vec128<long>.Zero, src);
 
         /// <summary>
         /// Negates the source vector (Two's complement)
@@ -91,7 +91,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
         public static Vec256<short> vnegate(in Vec256<short> src)
-            =>  sub(Vec256<short>.Zero, src);
+            =>  vsub(Vec256<short>.Zero, src);
 
         /// <summary>
         /// Negates the source vector (Two's complement)
@@ -107,7 +107,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
         public static Vec256<int> vnegate(in Vec256<int> src)
-            =>  sub(Vec256<int>.Zero, src);
+            =>  vsub(Vec256<int>.Zero, src);
 
         /// <summary>
         /// Negates the source vector (Two's complement)
@@ -123,7 +123,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
         public static Vec256<long> vnegate(in Vec256<long> src)
-            =>  sub(Vec256<long>.Zero, src);
+            =>  vsub(Vec256<long>.Zero, src);
 
         /// <summary>
         /// Negates the source vector (Two's complement)
@@ -139,7 +139,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
         public static Vec256<sbyte> vnegate(in Vec256<sbyte> src)
-            =>  sub(Vec256<sbyte>.Zero, src);
+            =>  vsub(Vec256<sbyte>.Zero, src);
 
     }
 }

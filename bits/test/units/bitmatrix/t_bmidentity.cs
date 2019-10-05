@@ -13,28 +13,51 @@ namespace Z0.Test
 
     public class tbm_identity : BitMatrixTest<tbm_identity>
     {
-        public void identityng()
-        {   
-            identity_check<N8,byte>();
-            identity_check<N8,short>();
-            identity_check<N16,byte>();
-            identity_check<N18,byte>();
-            identity_check<N19,byte>();                    
-            identity_check<N12,ushort>();
-        }
-
-
-        public void bm_identity_4x4()
+        public void bm_identity_ng8x8u_check()
         {
-            var lhs = BitMatrix4.Identity;
-            var rhs = BitMatrix4.Identity;
-            var result = lhs * rhs;
-            for(var row=0; row<result.RowCount; row++)
-            for(var col=0; col<result.ColCount; col++)    
-                Claim.eq(result[row,col], rhs[row,col]);
+            bm_identity_ng_check<N8,byte>();
         }
 
-        public void bm_identity_8x8()
+        public void bm_identity_ng8x16u_check()
+        {
+            bm_identity_ng_check<N8,short>();
+        }
+
+        public void bm_identity_ng16x8u_check()
+        {
+            bm_identity_ng_check<N16,byte>();
+        }
+
+        public void bm_identity_ng18x8u_check()
+        {
+            bm_identity_ng_check<N18,byte>();
+        }
+
+        public void bm_identity_ng19x8u_check()
+        {
+            bm_identity_ng_check<N18,byte>();
+        }
+
+        public void bm_indentity_ng12x16u_check()
+        {   
+            bm_identity_ng_check<N12,ushort>();
+        }
+
+        public void bm_identity_4x8u_check()
+        {
+            var I = BitMatrix4.Identity;
+
+            for(var i=0; i<4; i++)
+            for(var j=0; j<4; j++)
+            {
+                if(i == j)
+                    Claim.eq(Bit.On, I[i,j]);
+                else
+                    Claim.eq(Bit.Off, I[i,j]);
+            }                
+        }
+
+        public void bm_identity_8x8u_check()
         {
             var m = BitMatrix8.Identity;
             for(byte i=0; i < m.RowCount; i++)
@@ -50,7 +73,7 @@ namespace Z0.Test
 
         }
 
-        public void bm_identity_16x16()
+        public void bm_identity_16x16u_check()
         {
             var m = BitMatrix16.Identity;
             for(byte i=0; i < m.RowCount; i++)
@@ -58,7 +81,7 @@ namespace Z0.Test
             Claim.yea(m.Diagonal().AllOnes());
         }
 
-        public void bm_identity_32x32()
+        public void bm_identity_32x32u_check()
         {        
             var m = BitMatrix32.Identity;
             for(byte i=0; i < m.RowCount; i++)
@@ -66,7 +89,7 @@ namespace Z0.Test
             Claim.yea(m.Diagonal().AllOnes());
         }
     
-        public void bm_identity_64x64()
+        public void bm_identity_64x64_check()
         {
             var m = BitMatrix64.Identity;
             for(byte i=0; i < m.RowCount; i++)
@@ -81,7 +104,7 @@ namespace Z0.Test
                 Claim.eq(result[row,col], rhs[row,col]);
         }
 
-        public void bm_iszero()
+        public void bm_iszero_check()
         {
             Claim.yea(BitMatrix8.Zero.IsZero());
             Claim.nea(BitMatrix8.Identity.IsZero());
@@ -101,7 +124,7 @@ namespace Z0.Test
         }
 
         
-        void identity_check<N,T>()
+        void bm_identity_ng_check<N,T>()
             where N : ITypeNat, new()
             where T : unmanaged
        {

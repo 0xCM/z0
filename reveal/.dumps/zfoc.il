@@ -1,4 +1,112 @@
-// 2019-10-03 12:22:10:973
+// 2019-10-05 04:38:09:149
+void vstore_d128x64i(Vec128<long> src, ref long dst)
+{
+    IL_0000: ldarga.s src
+    IL_0002: ldarg.1
+    IL_0003: call System.Void Z0.cpuvec::vstore(Z0.Vec128`1<System.Int64>&,System.Int64&)
+    IL_0008: ret
+
+}
+void vstore_g128x64i(Vec128<long> src, ref long dst)
+{
+    IL_0000: ldarga.s src
+    IL_0002: ldarg.1
+    IL_0003: call System.Void zfunc::vstore<System.Int64>(Z0.Vec128`1<System.Int64>&,System.Int64&)
+    IL_0008: ret
+
+}
+void vstore_n128x64u(Vector128<ulong> src, ref ulong dst)
+{
+    IL_0000: ldarg.1
+    IL_0001: call System.UInt64* Z0.As::refptr(System.UInt64&)
+    IL_0006: ldarg.0
+    IL_0007: call System.Void System.Runtime.Intrinsics.X86.Sse2::Store(System.UInt64*,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
+    IL_000C: ret
+
+}
+void vstore_d128x64u(Vec128<ulong> src, ref ulong dst)
+{
+    IL_0000: ldarga.s src
+    IL_0002: ldarg.1
+    IL_0003: call System.Void Z0.cpuvec::vstore(Z0.Vec128`1<System.UInt64>&,System.UInt64&)
+    IL_0008: ret
+
+}
+void vstore_g128x64u(Vec128<ulong> src, ref ulong dst)
+{
+    IL_0000: ldarga.s src
+    IL_0002: ldarg.1
+    IL_0003: call System.Void zfunc::vstore<System.UInt64>(Z0.Vec128`1<System.UInt64>&,System.UInt64&)
+    IL_0008: ret
+
+}
+void vstore_n128x32f(Vector128<float> src, ref float dst)
+{
+    IL_0000: ldarg.1
+    IL_0001: call System.Single* Z0.As::refptr(System.Single&)
+    IL_0006: ldarg.0
+    IL_0007: call System.Void System.Runtime.Intrinsics.X86.Sse::Store(System.Single*,System.Runtime.Intrinsics.Vector128`1<System.Single>)
+    IL_000C: ret
+
+}
+void vstore_d128x32f(Vec128<float> src, ref float dst)
+{
+    IL_0000: ldarga.s src
+    IL_0002: ldarg.1
+    IL_0003: call System.Void Z0.cpuvec::vstore(Z0.Vec128`1<System.Single>&,System.Single&)
+    IL_0008: ret
+
+}
+void vstore_g128x32f(Vec128<float> src, ref float dst)
+{
+    IL_0000: ldarga.s src
+    IL_0002: ldarg.1
+    IL_0003: call System.Void zfunc::vstore<System.Single>(Z0.Vec128`1<System.Single>&,System.Single&)
+    IL_0008: ret
+
+}
+void vstore_n128x64f(Vector128<double> src, ref double dst)
+{
+    IL_0000: ldarg.1
+    IL_0001: call System.Double* Z0.As::refptr(System.Double&)
+    IL_0006: ldarg.0
+    IL_0007: call System.Void System.Runtime.Intrinsics.X86.Sse2::Store(System.Double*,System.Runtime.Intrinsics.Vector128`1<System.Double>)
+    IL_000C: ret
+
+}
+void vstore_d128x64f(Vec128<double> src, ref double dst)
+{
+    IL_0000: ldarga.s src
+    IL_0002: ldarg.1
+    IL_0003: call System.Void Z0.cpuvec::vstore(Z0.Vec128`1<System.Double>&,System.Double&)
+    IL_0008: ret
+
+}
+void vstore_g128x64f(Vec128<double> src, ref double dst)
+{
+    IL_0000: ldarga.s src
+    IL_0002: ldarg.1
+    IL_0003: call System.Void zfunc::vstore<System.Double>(Z0.Vec128`1<System.Double>&,System.Double&)
+    IL_0008: ret
+
+}
+void vstore_n256x8u(Vector256<byte> src, ref byte dst)
+{
+    IL_0000: ldarg.1
+    IL_0001: call System.Byte* Z0.As::refptr(System.Byte&)
+    IL_0006: ldarg.0
+    IL_0007: call System.Void System.Runtime.Intrinsics.X86.Avx::Store(System.Byte*,System.Runtime.Intrinsics.Vector256`1<System.Byte>)
+    IL_000C: ret
+
+}
+void vstore_d256x8u(Vec256<byte> src, ref byte dst)
+{
+    IL_0000: ldarga.s src
+    IL_0002: ldarg.1
+    IL_0003: call System.Void Z0.cpuvec::vstore(Z0.Vec256`1<System.Byte>&,System.Byte&)
+    IL_0008: ret
+
+}
 void vstore_g256x8u(Vec256<byte> src, ref byte dst)
 {
     IL_0000: ldarga.s src
@@ -230,6 +338,97 @@ void vstore_g256x64f(Vec256<double> src, ref double dst)
     IL_0002: ldarg.1
     IL_0003: call System.Void zfunc::vstore<System.Double>(Z0.Vec256`1<System.Double>&,System.Double&)
     IL_0008: ret
+
+}
+Char convert_32i_to_gch16(int src)
+{
+    IL_0000: ldarg.0
+    IL_0001: call System.Char Z0.Converter::convert<System.Char>(System.Int32)
+    IL_0006: ret
+
+}
+Char convert_g32i_to_gch16(int src)
+{
+    IL_0000: ldarga.s src
+    IL_0002: call System.Char Z0.Converter::convert<System.Int32,System.Char>(System.Int32&)
+    IL_0007: ret
+
+}
+sbyte convert_32u_to_8i(uint src)
+{
+    IL_0000: ldarg.0
+    IL_0001: conv.i1
+    IL_0002: ret
+
+}
+sbyte convert_32u_to_g8i(uint src)
+{
+    IL_0000: ldarg.0
+    IL_0001: call System.SByte Z0.Converter::convert<System.SByte>(System.UInt32)
+    IL_0006: ret
+
+}
+sbyte convert_g32u_to_g8i(uint src)
+{
+    IL_0000: ldarga.s src
+    IL_0002: call System.SByte Z0.Converter::convert<System.UInt32,System.SByte>(System.UInt32&)
+    IL_0007: ret
+
+}
+byte convert_32u_to_8u(uint src)
+{
+    IL_0000: ldarg.0
+    IL_0001: conv.u1
+    IL_0002: ret
+
+}
+byte convert_32u_to_g8u(uint src)
+{
+    IL_0000: ldarg.0
+    IL_0001: call System.Byte Z0.Converter::convert<System.Byte>(System.UInt32)
+    IL_0006: ret
+
+}
+byte convert_g32u_to_g8u(uint src)
+{
+    IL_0000: ldarga.s src
+    IL_0002: call System.Byte Z0.Converter::convert<System.UInt32,System.Byte>(System.UInt32&)
+    IL_0007: ret
+
+}
+short convert_32u_to_16i(uint src)
+{
+    IL_0000: ldarg.0
+    IL_0001: conv.i2
+    IL_0002: ret
+
+}
+short convert_32u_to_g16i(uint src)
+{
+    IL_0000: ldarg.0
+    IL_0001: call System.Int16 Z0.Converter::convert<System.Int16>(System.UInt32)
+    IL_0006: ret
+
+}
+short convert_g32u_to_g16i(uint src)
+{
+    IL_0000: ldarga.s src
+    IL_0002: call System.Int16 Z0.Converter::convert<System.UInt32,System.Int16>(System.UInt32&)
+    IL_0007: ret
+
+}
+ushort convert_32u_to_16u(uint src)
+{
+    IL_0000: ldarg.0
+    IL_0001: conv.u2
+    IL_0002: ret
+
+}
+ushort convert_32u_to_g16u(uint src)
+{
+    IL_0000: ldarg.0
+    IL_0001: call System.UInt16 Z0.Converter::convert<System.UInt16>(System.UInt32)
+    IL_0006: ret
 
 }
 ushort convert_g32u_to_g16u(uint src)
@@ -1063,112 +1262,96 @@ void vstore_n128x64i(Vector128<long> src, ref long dst)
     IL_000C: ret
 
 }
-void vstore_d128x64i(Vec128<long> src, ref long dst)
+ReadOnlySpan<byte> bitseq(byte value)
+{
+    IL_0000: ldarg.0
+    IL_0001: call System.ReadOnlySpan`1<System.Byte> Z0.BitStore::select(System.Byte)
+    IL_0006: ret
+
+}
+ReadOnlySpan<byte> bitseq(BitSize offset, BitSize count)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call System.ReadOnlySpan`1<System.Byte> Z0.BitStore::select(Z0.BitSize,Z0.BitSize)
+    IL_0007: ret
+
+}
+ByteInfo byteinfo(byte src)
+{
+    IL_0000: ldarg.0
+    IL_0001: call Z0.ByteInfo Z0.BitStore::info(System.Byte)
+    IL_0006: ret
+
+}
+ReadOnlySpan<byte> bitseq8i(sbyte src)
 {
     IL_0000: ldarga.s src
-    IL_0002: ldarg.1
-    IL_0003: call System.Void Z0.cpuvec::vstore(Z0.Vec128`1<System.Int64>&,System.Int64&)
-    IL_0008: ret
+    IL_0002: call System.ReadOnlySpan`1<System.Byte> Z0.BitStore::bitseq<System.SByte>(System.SByte&)
+    IL_0007: ret
 
 }
-void vstore_g128x64i(Vec128<long> src, ref long dst)
+ReadOnlySpan<byte> bitseq8u(byte src)
 {
     IL_0000: ldarga.s src
-    IL_0002: ldarg.1
-    IL_0003: call System.Void zfunc::vstore<System.Int64>(Z0.Vec128`1<System.Int64>&,System.Int64&)
-    IL_0008: ret
+    IL_0002: call System.ReadOnlySpan`1<System.Byte> Z0.BitStore::bitseq<System.Byte>(System.Byte&)
+    IL_0007: ret
 
 }
-void vstore_n128x64u(Vector128<ulong> src, ref ulong dst)
-{
-    IL_0000: ldarg.1
-    IL_0001: call System.UInt64* Z0.As::refptr(System.UInt64&)
-    IL_0006: ldarg.0
-    IL_0007: call System.Void System.Runtime.Intrinsics.X86.Sse2::Store(System.UInt64*,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
-    IL_000C: ret
-
-}
-void vstore_d128x64u(Vec128<ulong> src, ref ulong dst)
+ReadOnlySpan<byte> bitseq16i(short src)
 {
     IL_0000: ldarga.s src
-    IL_0002: ldarg.1
-    IL_0003: call System.Void Z0.cpuvec::vstore(Z0.Vec128`1<System.UInt64>&,System.UInt64&)
-    IL_0008: ret
+    IL_0002: call System.ReadOnlySpan`1<System.Byte> Z0.BitStore::bitseq<System.Int16>(System.Int16&)
+    IL_0007: ret
 
 }
-void vstore_g128x64u(Vec128<ulong> src, ref ulong dst)
+ReadOnlySpan<byte> bitseq16u(ushort src)
 {
     IL_0000: ldarga.s src
-    IL_0002: ldarg.1
-    IL_0003: call System.Void zfunc::vstore<System.UInt64>(Z0.Vec128`1<System.UInt64>&,System.UInt64&)
-    IL_0008: ret
+    IL_0002: call System.ReadOnlySpan`1<System.Byte> Z0.BitStore::bitseq<System.UInt16>(System.UInt16&)
+    IL_0007: ret
 
 }
-void vstore_n128x32f(Vector128<float> src, ref float dst)
-{
-    IL_0000: ldarg.1
-    IL_0001: call System.Single* Z0.As::refptr(System.Single&)
-    IL_0006: ldarg.0
-    IL_0007: call System.Void System.Runtime.Intrinsics.X86.Sse::Store(System.Single*,System.Runtime.Intrinsics.Vector128`1<System.Single>)
-    IL_000C: ret
-
-}
-void vstore_d128x32f(Vec128<float> src, ref float dst)
+ReadOnlySpan<byte> bitseq32i(int src)
 {
     IL_0000: ldarga.s src
-    IL_0002: ldarg.1
-    IL_0003: call System.Void Z0.cpuvec::vstore(Z0.Vec128`1<System.Single>&,System.Single&)
-    IL_0008: ret
+    IL_0002: call System.ReadOnlySpan`1<System.Byte> Z0.BitStore::bitseq<System.Int32>(System.Int32&)
+    IL_0007: ret
 
 }
-void vstore_g128x32f(Vec128<float> src, ref float dst)
+ReadOnlySpan<byte> bitseq32u(uint src)
 {
     IL_0000: ldarga.s src
-    IL_0002: ldarg.1
-    IL_0003: call System.Void zfunc::vstore<System.Single>(Z0.Vec128`1<System.Single>&,System.Single&)
-    IL_0008: ret
+    IL_0002: call System.ReadOnlySpan`1<System.Byte> Z0.BitStore::bitseq<System.UInt32>(System.UInt32&)
+    IL_0007: ret
 
 }
-void vstore_n128x64f(Vector128<double> src, ref double dst)
-{
-    IL_0000: ldarg.1
-    IL_0001: call System.Double* Z0.As::refptr(System.Double&)
-    IL_0006: ldarg.0
-    IL_0007: call System.Void System.Runtime.Intrinsics.X86.Sse2::Store(System.Double*,System.Runtime.Intrinsics.Vector128`1<System.Double>)
-    IL_000C: ret
-
-}
-void vstore_d128x64f(Vec128<double> src, ref double dst)
+ReadOnlySpan<byte> bitseq64i(long src)
 {
     IL_0000: ldarga.s src
-    IL_0002: ldarg.1
-    IL_0003: call System.Void Z0.cpuvec::vstore(Z0.Vec128`1<System.Double>&,System.Double&)
-    IL_0008: ret
+    IL_0002: call System.ReadOnlySpan`1<System.Byte> Z0.BitStore::bitseq<System.Int64>(System.Int64&)
+    IL_0007: ret
 
 }
-void vstore_g128x64f(Vec128<double> src, ref double dst)
+ReadOnlySpan<byte> bitseq64u(ulong src)
 {
     IL_0000: ldarga.s src
-    IL_0002: ldarg.1
-    IL_0003: call System.Void zfunc::vstore<System.Double>(Z0.Vec128`1<System.Double>&,System.Double&)
-    IL_0008: ret
+    IL_0002: call System.ReadOnlySpan`1<System.Byte> Z0.BitStore::bitseq<System.UInt64>(System.UInt64&)
+    IL_0007: ret
 
 }
-void vstore_n256x8u(Vector256<byte> src, ref byte dst)
-{
-    IL_0000: ldarg.1
-    IL_0001: call System.Byte* Z0.As::refptr(System.Byte&)
-    IL_0006: ldarg.0
-    IL_0007: call System.Void System.Runtime.Intrinsics.X86.Avx::Store(System.Byte*,System.Runtime.Intrinsics.Vector256`1<System.Byte>)
-    IL_000C: ret
-
-}
-void vstore_d256x8u(Vec256<byte> src, ref byte dst)
+ReadOnlySpan<byte> bitseq32f(float src)
 {
     IL_0000: ldarga.s src
-    IL_0002: ldarg.1
-    IL_0003: call System.Void Z0.cpuvec::vstore(Z0.Vec256`1<System.Byte>&,System.Byte&)
-    IL_0008: ret
+    IL_0002: call System.ReadOnlySpan`1<System.Byte> Z0.BitStore::bitseq<System.Single>(System.Single&)
+    IL_0007: ret
+
+}
+ReadOnlySpan<byte> bitseq64f(double src)
+{
+    IL_0000: ldarga.s src
+    IL_0002: call System.ReadOnlySpan`1<System.Byte> Z0.BitStore::bitseq<System.Double>(System.Double&)
+    IL_0007: ret
 
 }
 byte convert_8i_to_8u(sbyte src)
@@ -1966,96 +2149,5 @@ Char convert_32i_to_ch16(int src)
     IL_0000: ldarg.0
     IL_0001: conv.u2
     IL_0002: ret
-
-}
-Char convert_32i_to_gch16(int src)
-{
-    IL_0000: ldarg.0
-    IL_0001: call System.Char Z0.Converter::convert<System.Char>(System.Int32)
-    IL_0006: ret
-
-}
-Char convert_g32i_to_gch16(int src)
-{
-    IL_0000: ldarga.s src
-    IL_0002: call System.Char Z0.Converter::convert<System.Int32,System.Char>(System.Int32&)
-    IL_0007: ret
-
-}
-sbyte convert_32u_to_8i(uint src)
-{
-    IL_0000: ldarg.0
-    IL_0001: conv.i1
-    IL_0002: ret
-
-}
-sbyte convert_32u_to_g8i(uint src)
-{
-    IL_0000: ldarg.0
-    IL_0001: call System.SByte Z0.Converter::convert<System.SByte>(System.UInt32)
-    IL_0006: ret
-
-}
-sbyte convert_g32u_to_g8i(uint src)
-{
-    IL_0000: ldarga.s src
-    IL_0002: call System.SByte Z0.Converter::convert<System.UInt32,System.SByte>(System.UInt32&)
-    IL_0007: ret
-
-}
-byte convert_32u_to_8u(uint src)
-{
-    IL_0000: ldarg.0
-    IL_0001: conv.u1
-    IL_0002: ret
-
-}
-byte convert_32u_to_g8u(uint src)
-{
-    IL_0000: ldarg.0
-    IL_0001: call System.Byte Z0.Converter::convert<System.Byte>(System.UInt32)
-    IL_0006: ret
-
-}
-byte convert_g32u_to_g8u(uint src)
-{
-    IL_0000: ldarga.s src
-    IL_0002: call System.Byte Z0.Converter::convert<System.UInt32,System.Byte>(System.UInt32&)
-    IL_0007: ret
-
-}
-short convert_32u_to_16i(uint src)
-{
-    IL_0000: ldarg.0
-    IL_0001: conv.i2
-    IL_0002: ret
-
-}
-short convert_32u_to_g16i(uint src)
-{
-    IL_0000: ldarg.0
-    IL_0001: call System.Int16 Z0.Converter::convert<System.Int16>(System.UInt32)
-    IL_0006: ret
-
-}
-short convert_g32u_to_g16i(uint src)
-{
-    IL_0000: ldarga.s src
-    IL_0002: call System.Int16 Z0.Converter::convert<System.UInt32,System.Int16>(System.UInt32&)
-    IL_0007: ret
-
-}
-ushort convert_32u_to_16u(uint src)
-{
-    IL_0000: ldarg.0
-    IL_0001: conv.u2
-    IL_0002: ret
-
-}
-ushort convert_32u_to_g16u(uint src)
-{
-    IL_0000: ldarg.0
-    IL_0001: call System.UInt16 Z0.Converter::convert<System.UInt16>(System.UInt32)
-    IL_0006: ret
 
 }

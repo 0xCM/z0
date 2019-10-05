@@ -13,7 +13,7 @@ namespace Z0
     public struct BitBlock<T> : IBitBlock<T>
         where T : unmanaged, IBitBlock
     {
-        T data;
+        internal T data;
 
         /// <summary>
         /// Queries/manipulates an index-identified bit

@@ -14,7 +14,7 @@ namespace Z0
     
     public class tbm_and : BitMatrixTest<tbm_and>
     {
-        public void bm_and_4x4_check()
+        void bm_and_4x4_check_fixme()
         {            
             for(var i=0; i<SampleSize; i++)
             {

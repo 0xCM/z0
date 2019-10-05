@@ -125,16 +125,6 @@ namespace Z0.Test
             Claim.eq(e3, r3[0]);
         }
 
-        public void unpack_bitspan()
-        {
-            var src = 32093283484328432ul;
-            var bits = src.Unpack();
-            var bitsPC = bits.PopCount();
-            var bytes = Unmanaged.ByteSpan(ref src);
-            var bytesPC = bytes.PopCount();
-            Claim.eq(bitsPC, bytesPC);        
-        }
-
         public void pack_bistring()
         {
             var x =  0b111010010110011010111001110000100001101ul;

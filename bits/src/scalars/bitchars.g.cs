@@ -24,9 +24,9 @@ namespace Z0
         public static ReadOnlySpan<char> bitchars<T>(in T src)
         {
             if(typeof(T) == typeof(byte))
-                return bitchars(uint8(in src));
+                return BitStore.bitchars(uint8(in src));
             else if(typematch<T,sbyte>())
-                return bitchars(int8(in src));
+                return BitStore.bitchars(int8(in src));
             else if(typematch<T,short>())
                 return bitchars(int16(in src));
             else if(typematch<T,ushort>())
@@ -79,24 +79,6 @@ namespace Z0
         }
 
         /// <summary>
-        /// Constructs a sequence of 8 characters {ci} := [c7,...c0] over the domain {'0','1'} according to whether the
-        /// bit in the i'th position of the source is respecively disabled/enabled
-        /// </summary>
-        /// <param name="value">The source value</param>
-        [MethodImpl(Inline)]
-        static ReadOnlySpan<char> bitchars(byte src)
-            => BitStore.BitChars(src);
-
-        /// <summary>
-        /// Constructs a sequence of 8 characters {ci} := [c7,...c0] over the domain {'0','1'} according to whether the
-        /// bit in the i'th position of the source is respecively disabled/enabled
-        /// </summary>
-        /// <param name="value">The source value</param>
-        [MethodImpl(Inline)]
-        static ReadOnlySpan<char> bitchars(sbyte src)
-            => BitStore.BitChars(src);
-
-        /// <summary>
         /// Constructs a sequence of 16 characters {ci} := [c15,...c0] over the domain {'0','1'} according to whether the
         /// bit in the i'th position of the source is respecively disabled/enabled
         /// </summary>
@@ -108,8 +90,8 @@ namespace Z0
             const int midpoint = 8;
             (var lo, var hi) = Bits.split(src);
             Span<char> dst = new char[len];
-            bitchars(lo).CopyTo(dst,0);
-            bitchars(hi).CopyTo(dst,midpoint);
+            BitStore.bitchars(lo).CopyTo(dst,0);
+            BitStore.bitchars(hi).CopyTo(dst,midpoint);
             return dst;            
         }
 
@@ -125,8 +107,8 @@ namespace Z0
             const int midpoint = 8;
             (var lo, var hi) = Bits.split(src);
             Span<char> dst = new char[len];
-            bitchars(lo).CopyTo(dst,0);
-            bitchars(hi).CopyTo(dst,midpoint);
+            BitStore.bitchars(lo).CopyTo(dst,0);
+            BitStore.bitchars(hi).CopyTo(dst,midpoint);
             return dst;            
         }
 

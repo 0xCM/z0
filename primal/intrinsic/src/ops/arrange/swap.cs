@@ -48,8 +48,8 @@ namespace Z0
         public static Vec256<byte> swaphl(in Vec256<byte> src)
         {
             Vec256<byte> dst = default;
-            dst = insert(extract128(src.ymm, 1), dst.ymm, 0);
-            dst = insert(extract128(src.ymm, 0), dst.ymm, 1);
+            dst = insert(hi(src.ymm), dst.ymm, 0);
+            dst = insert(lo(src.ymm), dst.ymm, 1);
             return dst;         
         }
 
@@ -61,8 +61,8 @@ namespace Z0
         public static Vec256<sbyte> swaphl(in Vec256<sbyte> src)
         {
             Vec256<sbyte> dst = default;
-            dst = insert(extract128(src.ymm, 1), dst.ymm, 0);
-            dst = insert(extract128(src.ymm, 0), dst.ymm, 1);
+            dst = lo(hi(src.ymm), dst.ymm);
+            dst = hi(lo(src.ymm), dst.ymm);
             return dst;         
         }
 
@@ -74,8 +74,8 @@ namespace Z0
         public static Vec256<short> swaphl(in Vec256<short> src)
         {
             Vec256<short> dst = default;
-            dst = insert(extract128(src.ymm, 1), dst.ymm, 0);
-            dst = insert(extract128(src.ymm, 0), dst.ymm, 1);
+            dst = insert(hi(src.ymm), dst.ymm, 0);
+            dst = insert(lo(src.ymm), dst.ymm, 1);
             return dst;         
         }
 
@@ -87,8 +87,8 @@ namespace Z0
         public static Vec256<ushort> swaphl(in Vec256<ushort> src)
         {
             Vec256<ushort> dst = default;
-            dst = insert(extract128(src.ymm, 1), dst.ymm, 0);
-            dst = insert(extract128(src.ymm, 0), dst.ymm, 1);
+            dst = insert(hi(src.ymm), dst.ymm, 0);
+            dst = insert(lo(src.ymm), dst.ymm, 1);
             return dst;         
         }
 

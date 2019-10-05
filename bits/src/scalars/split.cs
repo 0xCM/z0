@@ -14,6 +14,18 @@ namespace Z0
     partial class Bits
     {                        
         /// <summary>
+        /// Partitions an 8-bit unsigned integer into a pair of unsigned 8-bit integers
+        /// (x0, x1), wich with a maximum value of 0xF, that repectively represent the lo and hi bits of the source where
+        /// x0 := src[0..3] and x1 = src[4..7] 
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <param name="x0">Taken from bits 0-15 of the source value</param>
+        /// <param name="x1">Taken from bits 16-31 of the source value</param>
+        [MethodImpl(Inline)]
+        public static (byte x0, byte x1) split(byte src, N2 parts = default)
+          => ((byte)(src &0xF), (byte)(src >> 4));
+
+        /// <summary>
         /// Partitions a 16-bit signed integer into a pair of signed 8-bit integers
         /// (x0, x1) that repectively represent the lo and hi bits of the source where
         /// x0 := src[0..7] and x1 = src[8..15] 

@@ -15,12 +15,11 @@ namespace Z0.Test
         public void pop1()
         {
             var src = (ushort)0b11001111;
-            var bits = src.Unpack();            
+            var bits = BitParts.unpack16x1(src);
             var bitsPC = bits.PopCount();
             Claim.eq(6,bitsPC);
 
             var bytes = Unmanaged.ByteSpan(ref src);
-            //src.Unpack(out Span<byte> bytes);
             Claim.eq(2, bytes.Length);
             
             var bytesPC = bytes.PopCount();
@@ -28,14 +27,16 @@ namespace Z0.Test
         }
 
 
-        public void pop5()
+        public void pop_64u_check()
         {
-            var xBytes = BitConverter.GetBytes(0b111010010110011010111001110000100001101ul).ToSpan();
-            var xBits = xBytes.Unpack();
-            var xBitsPC = xBits.PopCount();
-            var xBytesPC = xBytes.PopCount();
-
-            Claim.eq(xBitsPC, xBytesPC);
+            Span<byte> x = stackalloc byte[64];
+    
+            for(var i=0; i< SampleSize; i++)
+            {
+                var y = BitConverter.GetBytes(Random.Next<ulong>()).ToSpan();
+                BitParts.unpack8x1(y, x);            
+                Claim.eq(x.PopCount(), y.PopCount());
+            }
         }
 
         public void pop6()

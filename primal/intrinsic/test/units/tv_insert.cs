@@ -31,7 +31,6 @@ namespace Z0.Test
         void insert128_check<T>()
             where T : unmanaged
         {
-            TypeCaseStart<T>();
             for(var i=0; i < SampleSize; i++)
             {
                 var v128Src = Random.CpuVec128<T>();
@@ -48,7 +47,6 @@ namespace Z0.Test
                 Claim.eq(srcSpan, vLoSpan);
                 Claim.eq(srcSpan, vHiSpan);
             }
-            TypeCaseEnd<T>();
         }
         
 

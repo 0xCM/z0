@@ -149,5 +149,14 @@ namespace Z0
         public static uint select(uint src, Part32x1 part)
             => Bits.gather(src, (uint)part);
 
+        /// <summary>
+        /// Replicates an identified partition of a bit source to the low bit of a target 
+        /// </summary>
+        /// <param name="src">The bit source</param>
+        /// <param name="part">The source partition to select/extract</param>
+        [MethodImpl(Inline)]
+        public static ulong select(ulong src, Part64x1 part)
+            => Bits.gather(src, (ulong)part);
+
     }
 }

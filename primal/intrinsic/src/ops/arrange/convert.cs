@@ -216,6 +216,19 @@ namespace Z0
         }
 
         /// <summary>
+        /// Zero extends packed unsigned 8-bit integers in the source vector to packed 16-bit integers in the target vector 
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="dst">The target vector</param>
+        /// <summary>__m256i _mm256_cvtepu8_epi16 (__m128i a) </summary>
+        [MethodImpl(Inline)]
+        public static ref Vec256<ushort> convert(in Vec128<byte> src, out Vec256<ushort> dst)
+        {
+            dst = ConvertToVector256Int16(src.xmm).AsUInt16();
+            return ref dst;
+        }
+
+        /// <summary>
         /// __m256i _mm256_cvtepu8_epi32 (__m128i a) vpmovzxbd ymm, xmm
         /// Zero extends packed unsigned 8-bit integers in the source vector to packed 32-bit integers in the target vector 
         /// </summary>
@@ -240,6 +253,7 @@ namespace Z0
             dst =ConvertToVector256Int64(src);
             return ref dst;
         }
+
 
         /// <summary>
         /// __m256i _mm256_cvtepi16_epi32 (__m128i a) vpmovsxwd ymm, xmm
@@ -293,9 +307,9 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static unsafe ref Vec256<int> convert(ref ushort src, out Vec256<int> dst)
+        public static ref Vec256<uint> convert(in Vec128<ushort> src, out Vec256<uint> dst)
         {
-            dst = ConvertToVector256Int32(refptr(ref src));
+            dst = ConvertToVector256Int32(src).AsUInt32();
             return ref dst;
         }
 
@@ -311,12 +325,6 @@ namespace Z0
             return ref dst;
         }
 
-        [MethodImpl(Inline)]
-        public static unsafe ref Vec256<long> convert(ref ushort src, out Vec256<long> dst)
-        {
-            dst = ConvertToVector256Int64(refptr(ref src));
-            return ref dst;
-        }
 
         /// <summary>
         /// Zero-extends packed unsigned 32-bit integers in the source vector to packed 64-bit integers in the target vector 
@@ -330,11 +338,5 @@ namespace Z0
             return ref dst;
         }
 
-        [MethodImpl(Inline)]
-        public static unsafe ref Vec256<long> convert(ref uint src, out Vec256<long> dst)
-        {
-            dst = ConvertToVector256Int64(refptr(ref src));
-            return ref dst;
-        }
     }
 }

@@ -64,7 +64,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitString FromScalar<T>(in T src)
             where T : unmanaged
-                => new BitString(BitStore.BitSeq(in src));
+                => new BitString(BitStore.bitseq(in src));
 
         /// <summary>
         /// Constructs a bitstring from span of scalar values
@@ -81,7 +81,7 @@ namespace Z0
             var bitseq = new byte[bitcount];
             for(int i=0; i<src.Length; i++)
             {
-                var bits = BitStore.BitSeq(in src[i]);
+                var bits = BitStore.bitseq(in src[i]);
                 for(var j = 0; j<segbits && k<bitcount; j++, k++)
                     bitseq[k] = bits[j];                        
             }

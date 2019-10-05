@@ -55,26 +55,6 @@ namespace Z0
             return dst;
         }
 
-        /// <summary>
-        /// Populates a target span with bits from the source
-        /// </summary>
-        /// <param name="src">The source bits</param>
-        /// <param name="dst">The target span</param>
-        [MethodImpl(Inline)]
-        public static Span<byte> unpack<T>(T src)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(byte))
-                return Bits.unpack(uint8(src));
-            else if(typematch<T,ushort>())
-                return Bits.unpack(uint16(src));
-            else if(typematch<T,uint>())
-                return Bits.unpack(uint32(src));
-            else if(typematch<T,ulong>())
-                return Bits.unpack(uint64(src));
-            else            
-                throw unsupported<T>();
-        }           
 
 
     }

@@ -56,7 +56,29 @@ namespace Z0
         [MethodImpl(Inline)]
         public static T project<T>(uint src, Part32x8 part)
             where T : unmanaged
-                => convert<T>(Bits.scatter(src, (uint)part));
+                => convert<T>(project(src,part));
+
+        /// <summary>
+        /// Replicates the low bits of a source to an identified partition of an empty target
+        /// </summary>
+        /// <param name="src">The bit source</param>
+        /// <param name="part">The target partition</param>
+        [MethodImpl(Inline)]
+        public static ulong project(ulong src, Part64x8 part)
+            => Bits.scatter(src, (ulong)part);
+
+
+        /// <summary>
+        /// Replicates the low bits of a source to an identified partition of an empty target
+        /// which is then converted to a specified primal type
+        /// </summary>
+        /// <param name="src">The bit source</param>
+        /// <param name="part">The target partition</param>
+        /// <typeparam name="T">The primal conversion type</typeparam>
+        [MethodImpl(Inline)]
+        public static T project<T>(ulong src, Part64x8 part)
+            where T : unmanaged
+                => convert<T>(project(src, part));
 
     }
 }
