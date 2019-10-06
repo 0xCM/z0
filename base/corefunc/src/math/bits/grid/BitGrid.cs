@@ -46,7 +46,7 @@ namespace Z0
             var length = BitSize.Size<T>();
             for(var i=0; i<data.Length; i++)
                 for(var j = 0; j< length; j++)
-                    BitMaskG.enable(ref data[i], j);
+                    BitMaskG.enable(ref data[i], (byte)j);
             return new BitGrid<M, N, T>(data);
         }
 
@@ -70,7 +70,7 @@ namespace Z0
         Bit GetBit(int row, int col)
         {
             var cell = GridLayout.Row(row)[col];
-            return BitMaskG.test(in bits[cell.Segment], cell.Offset);                    
+            return BitMaskG.testbit(in bits[cell.Segment], cell.Offset);                    
         }
 
         [MethodImpl(Inline)]

@@ -26,14 +26,14 @@ namespace Z0
 
 
         [MethodImpl(Inline)]
-        public static YMM<uint> vpermd(YMM<uint> ymm0, Perm8 spec)
+        public static YMM<uint> vpermd(YMM<uint> ymm0, Perm8Select spec)
         {
             var control = vload<uint>(ref spec);
             return PermuteVar8x32(ymm0, control);
         }
 
         [MethodImpl(Inline)]
-        public static YMM vpermd(YMM src, Perm8 spec)
+        public static YMM vpermd(YMM src, Perm8Select spec)
         {
             var control = vload<uint>(ref spec);
             var subject = vload<uint>(ref src);

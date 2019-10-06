@@ -25,11 +25,11 @@ namespace Z0
                 return generic<T>(dinx.vmax(uint8(x), uint8(y)));
             else if(typematch<T,short>())
                 return generic<T>(dinx.vmax(int16(x), int16(y)));
-            else if(typematch<T,ushort>())
+            else if(typeof(T) == typeof(ushort))
                 return generic<T>(dinx.vmax(uint16(x), uint16(y)));
             else if(typematch<T,int>())
                 return generic<T>(dinx.vmax(int32(x), int32(y)));
-            else if(typematch<T,uint>())
+            else if(typeof(T) == typeof(uint))
                 return generic<T>(dinx.vmax(uint32(x), uint32(y)));
             else 
                 throw unsupported<T>();
@@ -45,11 +45,11 @@ namespace Z0
                 return generic<T>(dinx.vmax(uint8(x), uint8(y)));
             else if(typematch<T,short>())
                 return generic<T>(dinx.vmax(int16(x), int16(y)));
-            else if(typematch<T,ushort>())
+            else if(typeof(T) == typeof(ushort))
                 return generic<T>(dinx.vmax(uint16(x), uint16(y)));
             else if(typematch<T,int>())
                 return generic<T>(dinx.vmax(int32(x), int32(y)));
-            else if(typematch<T,uint>())
+            else if(typeof(T) == typeof(uint))
                 return generic<T>(dinx.vmax(uint32(x), uint32(y)));
             else 
                 throw unsupported<T>();

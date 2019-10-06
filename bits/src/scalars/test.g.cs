@@ -23,7 +23,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bool test<T>(in T src, in int pos)
             where T : unmanaged
-                => BitMaskG.test(in src, (byte)pos);
+                => BitMaskG.testbit(in src, (byte)pos);
 
         /// <summary>
         /// Determines whether a bit in a specified position is enabled
@@ -33,7 +33,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bool test<T>(in T src, in byte pos)
             where T : unmanaged
-                => BitMaskG.test(in src, pos);
+                => BitMaskG.testbit(in src, pos);
 
 
     }

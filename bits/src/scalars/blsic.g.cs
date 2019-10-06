@@ -27,11 +27,11 @@ namespace Z0
         {
             if(typeof(T) == typeof(byte))
                 return generic<T>(Bits.blsic(uint8(src)));
-            else if(typematch<T,ushort>())
+            else if(typeof(T) == typeof(ushort))
                 return generic<T>(Bits.blsic(uint16(src)));
-            else if(typematch<T,uint>())
+            else if(typeof(T) == typeof(uint))
                 return generic<T>(Bits.blsic(uint32(src)));
-            else if(typematch<T,ulong>())
+            else if(typeof(T) == typeof(ulong))
                 return generic<T>(Bits.blsic(uint64(src)));
             else            
                 throw unsupported<T>();

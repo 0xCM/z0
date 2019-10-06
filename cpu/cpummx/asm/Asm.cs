@@ -27,7 +27,7 @@ namespace Z0
             => ginx.lddqu128(in src.As<T>());
 
         [MethodImpl(Inline)]
-        static Vec256<T> vload<T>(ref Perm8 src)
+        static Vec256<T> vload<T>(ref Perm8Select src)
             where T : unmanaged
                 => ginx.lddqu256(in head(src.ToSpan<T>()));
 

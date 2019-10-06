@@ -101,7 +101,7 @@ namespace Z0
         {
             if(typeof(T) == typeof(byte))
                 return MergeLanesU8().As<T>();
-            else if(typematch<T,ushort>())
+            else if(typeof(T) == typeof(ushort))
                 return MergeLanesU16().As<T>();
             else 
                 return Zero;

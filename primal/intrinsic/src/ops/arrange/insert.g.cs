@@ -35,15 +35,15 @@ namespace Z0
                 return generic<T>(dinx.insert(uint8(src), uint8(dst), index));
             else if(typematch<T,short>())
                 return generic<T>(dinx.insert(int16(src), int16(dst), index));
-            else if(typematch<T,ushort>())
+            else if(typeof(T) == typeof(ushort))
                 return generic<T>(dinx.insert(uint16(src), uint16(dst), index));
             else if(typematch<T,int>())
                 return generic<T>(dinx.insert(int32(src), int32(dst), index));
-            else if(typematch<T,uint>())
+            else if(typeof(T) == typeof(uint))
                 return generic<T>(dinx.insert(uint32(src), uint32(dst), index));
             else if(typematch<T,long>())
                 return generic<T>(dinx.insert(int64(src), int64(dst), index));
-            else if(typematch<T,ulong>())
+            else if(typeof(T) == typeof(ulong))
                 return generic<T>(dinx.insert(uint64(src), uint64(dst), index));
             else if(typeof(T) == typeof(float))
                 return generic<T>(dfp.insert(float32(src), float32(dst), index));

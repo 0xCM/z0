@@ -21,7 +21,7 @@ namespace Z0
         /// <param name="src">The source value to manipulate</param>
         /// <param name="pos">The position of the bit to enable</param>
         [MethodImpl(Inline)]
-        public static ref sbyte enable(ref sbyte src, in int pos)
+        public static ref sbyte enable(ref sbyte src, int pos)
         {              
             src |= (sbyte)(1 << pos);
             return ref src;
@@ -33,7 +33,7 @@ namespace Z0
         /// <param name="src">The source value to manipulate</param>
         /// <param name="pos">The position of the bit to enable</param>
         [MethodImpl(Inline)]
-        public static ref byte enable(ref byte src, in int pos)
+        public static ref byte enable(ref byte src, int pos)
         {
             src |= (byte)(1 << pos);
             return ref src;
@@ -45,7 +45,7 @@ namespace Z0
         /// <param name="src">The source value to manipulate</param>
         /// <param name="pos">The position of the bit to enable</param>
         [MethodImpl(Inline)]
-        public static ref short enable(ref short src, in int pos)
+        public static ref short enable(ref short src, int pos)
         {
             src |= (short)(1 << pos);
             return ref src;
@@ -57,7 +57,7 @@ namespace Z0
         /// <param name="src">The source value to manipulate</param>
         /// <param name="pos">The position of the bit to enable</param>
         [MethodImpl(Inline)]
-        public static ref ushort enable(ref ushort src, in int pos)
+        public static ref ushort enable(ref ushort src, int pos)
         {
             src |= (ushort)(1 << pos);
             return ref src;
@@ -69,7 +69,7 @@ namespace Z0
         /// <param name="src">The source value to manipulate</param>
         /// <param name="pos">The position of the bit to enable</param>
         [MethodImpl(Inline)]
-        public static ref int enable(ref int src, in int pos)
+        public static ref int enable(ref int src, int pos)
         {
             src |= (1 << pos);
             return ref src;
@@ -81,7 +81,7 @@ namespace Z0
         /// <param name="src">The source value to manipulate</param>
         /// <param name="pos">The position of the bit to enable</param>
         [MethodImpl(Inline)]
-        public static ref uint enable(ref uint src, in int pos)
+        public static ref uint enable(ref uint src, int pos)
         {
             src |= (1u << pos);
             return ref src;
@@ -93,7 +93,7 @@ namespace Z0
         /// <param name="src">The source value to manipulate</param>
         /// <param name="pos">The position of the bit to enable</param>
         [MethodImpl(Inline)]
-        public static ref long enable(ref long src, in int pos)
+        public static ref long enable(ref long src, int pos)
         {
             src |= (1L << pos);
             return ref src;
@@ -105,7 +105,7 @@ namespace Z0
         /// <param name="src">The source value to manipulate</param>
         /// <param name="pos">The position of the bit to enable</param>
         [MethodImpl(Inline)]
-        public static ref ulong enable(ref ulong src, in int pos)
+        public static ref ulong enable(ref ulong src, int pos)
         {
             src |= (1ul << pos);
             return ref src;
@@ -117,7 +117,7 @@ namespace Z0
         /// <param name="src">The source value to manipulate</param>
         /// <param name="pos">The position of the bit to enable</param>
         [MethodImpl(Inline)]
-        public static ref float enable(ref float src, in int pos)
+        public static ref float enable(ref float src, int pos)
         {
             var srcBits = BitConverter.SingleToInt32Bits(src);
             srcBits |= 1 << pos;
@@ -131,7 +131,7 @@ namespace Z0
         /// <param name="src">The source value to manipulate</param>
         /// <param name="pos">The position of the bit to enable</param>
         [MethodImpl(Inline)]
-        public static ref double enable(ref double src, in int pos)
+        public static ref double enable(ref double src, int pos)
         {               
             var srcBits = BitConverter.DoubleToInt64Bits(src);
             srcBits |= 1L << pos;

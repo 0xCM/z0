@@ -17,17 +17,24 @@ namespace Z0
     /// </summary>
     public struct Perm
     {
-        public static Perm8Symbol Assemble8(params Perm8Symbol[] src)
-        {            
+        /// <summary>
+        /// Constructs a permutation of length four from four symbols
+        /// </summary>
+        /// <param name="s0">The symbol in the first position</param>
+        /// <param name="s1">The symbol in the second position</param>
+        /// <param name="s2">The symbol in the third position</param>
+        /// <param name="s3">The symbol in the fourth position</param>
+        [MethodImpl(Inline)]
+        public static Perm4 Assemble(Perm4 s0, Perm4 s1, Perm4 s2, Perm4 s3)
+        {               
             var dst = 0u;
-            for(int i=0, offset = 0; i< 8; i++, offset +=3)
-            {
-                var k = i < src.Length ? (uint)src[i] : (uint)i;
-                dst |=  k << offset;
-
-            }
-            return (Perm8Symbol)dst;            
+            dst |= (uint)s0;
+            dst |= (uint)s1 << 2;
+            dst |= (uint)s2 << 4;
+            dst |= (uint)s3 << 6;
+            return (Perm4)dst;
         }
+
         /// <summary>
         /// Formats the terms of a permutation
         /// </summary>

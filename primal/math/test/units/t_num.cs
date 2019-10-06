@@ -102,7 +102,7 @@ namespace Z0.Test
                 time = add32i_bench();
             else if(typematch<T,long>())
                 time = add64i_bench();
-            else if(typematch<T,ulong>())
+            else if(typeof(T) == typeof(ulong))
                 time = add64u_bench();
             else if(typeof(T) == typeof(double))
                 time = add64f_bench();

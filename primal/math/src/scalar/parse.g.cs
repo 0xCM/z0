@@ -25,15 +25,15 @@ namespace Z0
                 return generic<T>(math.parse(src, out byte x));
             else if(typematch<T,short>())
                 return generic<T>(math.parse(src, out short x));
-            else if(typematch<T,ushort>())
+            else if(typeof(T) == typeof(ushort))
                 return generic<T>(math.parse(src, out ushort x));
             else if(typematch<T,int>())
                 return generic<T>(math.parse(src, out int x));
-            else if(typematch<T,uint>())
+            else if(typeof(T) == typeof(uint))
                 return generic<T>(math.parse(src, out uint x));
             else if(typematch<T,long>())
                 return generic<T>(math.parse(src, out long x));
-            else if(typematch<T,ulong>())
+            else if(typeof(T) == typeof(ulong))
                 return generic<T>(math.parse(src, out ulong x));
             else if(typeof(T) == typeof(float))
                 return generic<T>(math.parse(src, out float x));
@@ -53,15 +53,15 @@ namespace Z0
                 dst = generic<T>(math.parse(src, out byte x));
             else if(typematch<T,short>())
                 dst = generic<T>(math.parse(src, out short x));
-            else if(typematch<T,ushort>())
+            else if(typeof(T) == typeof(ushort))
                 dst = generic<T>(math.parse(src, out ushort x));
             else if(typematch<T,int>())
                 dst = generic<T>(math.parse(src, out int x));
-            else if(typematch<T,uint>())
+            else if(typeof(T) == typeof(uint))
                 dst = generic<T>(math.parse(src, out uint x));
             else if(typematch<T,long>())
                 dst = generic<T>(math.parse(src, out long x));
-            else if(typematch<T,ulong>())
+            else if(typeof(T) == typeof(ulong))
                 dst = generic<T>(math.parse(src, out ulong x));
             else if(typeof(T) == typeof(float))
                 dst = generic<T>(math.parse(src, out float x));

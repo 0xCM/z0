@@ -29,15 +29,15 @@ namespace Z0
                  return Bits.ntz(uint8(in asRef(in src)));
             else if(typematch<T,short>())
                  return Bits.ntz(int16(in asRef(in src)));
-            else if(typematch<T,ushort>())
+            else if(typeof(T) == typeof(ushort))
                  return Bits.ntz(uint16(in asRef(in src)));
             else if(typematch<T,int>())
                  return Bits.ntz(int32(in asRef(in src)));
-            else if(typematch<T,uint>())
+            else if(typeof(T) == typeof(uint))
                  return Bits.ntz(uint32(in asRef(in src)));
             else if(typematch<T,long>())
                  return Bits.ntz(int64(in asRef(in src)));
-            else if(typematch<T,ulong>())
+            else if(typeof(T) == typeof(ulong))
                  return Bits.ntz(uint64(in asRef(in src)));
             else 
                 throw unsupported<T>();

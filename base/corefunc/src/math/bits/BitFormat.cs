@@ -130,7 +130,6 @@ namespace Z0
                     sb.Append(AsciSym.Space);                    
             }
             return sb.ToString();
-
         }
 
         /// <summary>
@@ -184,7 +183,6 @@ namespace Z0
         public static string FormatBits<T>(this Vec1024<T> src, bool tlz = false, bool specifier = false, int? blockWidth = null)
             where T : unmanaged
                 => src.ToReadOnlySpan().FormatBits(tlz,specifier, blockWidth);
-
     }
 
 }

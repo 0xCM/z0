@@ -109,10 +109,6 @@ namespace Z0
             Bits.packseq(bs.BitSeq, out uint dst);
             return dst;
         }
-
-        [MethodImpl(Inline)]
-        public static BitVector32 Load(in ReadOnlySpan<byte> src, int offset = 0)
-            => FromParts(src[offset + 0], src[offset + 1], src[offset + 2], src[offset + 3]);
     
         /// <summary>
         /// Enumerates all 32-bit bitvectors whose width is less than or equal to a specified maximum

@@ -40,15 +40,15 @@ namespace Z0
                 return uint8(ref src).FormatHex(zpad,specifier,uppercase,prespec);
             else if(typematch<T,short>())
                 return int16(ref src).FormatHex(zpad,specifier,uppercase,prespec);
-            else if(typematch<T,ushort>())
+            else if(typeof(T) == typeof(ushort))
                 return uint16(ref src).FormatHex(zpad,specifier,uppercase,prespec);
             else if(typematch<T,int>())
                 return int32(ref src).FormatHex(zpad,specifier,uppercase,prespec);
-            else if(typematch<T,uint>())
+            else if(typeof(T) == typeof(uint))
                 return uint32(ref src).FormatHex(zpad,specifier,uppercase,prespec);
             else if(typematch<T,long>())
                 return int64(ref src).FormatHex(zpad,specifier,uppercase,prespec);
-            else if(typematch<T,ulong>())
+            else if(typeof(T) == typeof(ulong))
                 return uint64(ref src).FormatHex(zpad,specifier,uppercase,prespec);
             else if(typeof(T) == typeof(float))
                 return float32(ref src).FormatHex(zpad,specifier,uppercase,prespec);

@@ -22,15 +22,15 @@ namespace Z0
                 uint8(src).ShiftR(offsets, uint8(dst));
             else if(typematch<T,short>())
                 int16(src).ShiftR(offsets, int16(dst));
-            else if(typematch<T,ushort>())
+            else if(typeof(T) == typeof(ushort))
                 uint16(src).ShiftR(offsets, uint16(dst));
             else if(typematch<T,int>())
                 int32(src).ShiftR(offsets, int32(dst));
-            else if(typematch<T,uint>())
+            else if(typeof(T) == typeof(uint))
                 uint32(src).ShiftR(offsets, uint32(dst));
             else if(typematch<T,long>())
                 int64(src).ShiftR(offsets, int64(dst));
-            else if(typematch<T,ulong>())
+            else if(typeof(T) == typeof(ulong))
                 uint64(src).ShiftR(offsets, uint64(dst));
             else
                 throw unsupported<T>();
@@ -47,15 +47,15 @@ namespace Z0
                 uint8(src).ShiftR(offset, uint8(dst));
             else if(typematch<T,short>())
                 int16(src).ShiftR(offset, int16(dst));
-            else if(typematch<T,ushort>())
+            else if(typeof(T) == typeof(ushort))
                 uint16(src).ShiftR(offset, uint16(dst));
             else if(typematch<T,int>())
                 int32(src).ShiftR(offset, int32(dst));
-            else if(typematch<T,uint>())
+            else if(typeof(T) == typeof(uint))
                 uint32(src).ShiftR(offset, uint32(dst));
             else if(typematch<T,long>())
                 int64(src).ShiftR(offset, int64(dst));
-            else if(typematch<T,ulong>())
+            else if(typeof(T) == typeof(ulong))
                 uint64(src).ShiftR(offset, uint64(dst));
             else
                 throw unsupported<T>();
@@ -76,15 +76,15 @@ namespace Z0
                 uint8(src).ShiftR(offset);
             else if(typematch<T,short>())
                 int16(src).ShiftR(offset);
-            else if(typematch<T,ushort>())
+            else if(typeof(T) == typeof(ushort))
                 uint16(src).ShiftR(offset);
             else if(typematch<T,int>())
                 int32(src).ShiftR(offset);
-            else if(typematch<T,uint>())
+            else if(typeof(T) == typeof(uint))
                 uint32(src).ShiftR(offset);
             else if(typematch<T,long>())
                 int64(src).ShiftR(offset);
-            else if(typematch<T,ulong>())
+            else if(typeof(T) == typeof(ulong))
                 uint64(src).ShiftR(offset);
             else
                 throw unsupported<T>();
@@ -101,15 +101,15 @@ namespace Z0
                 uint8(src).ShiftR(offsets);
             else if(typematch<T,short>())
                 int16(src).ShiftR(offsets);
-            else if(typematch<T,ushort>())
+            else if(typeof(T) == typeof(ushort))
                 uint16(src).ShiftR(offsets);
             else if(typematch<T,int>())
                 int32(src).ShiftR(offsets);
-            else if(typematch<T,uint>())
+            else if(typeof(T) == typeof(uint))
                 uint32(src).ShiftR(offsets);
             else if(typematch<T,long>())
                 int64(src).ShiftR(offsets);
-            else if(typematch<T,ulong>())
+            else if(typeof(T) == typeof(ulong))
                 uint64(src).ShiftR(offsets);
             else
                 throw unsupported<T>();

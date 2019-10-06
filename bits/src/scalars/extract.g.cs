@@ -60,9 +60,9 @@ namespace Z0
         {
             if(typeof(T) == typeof(byte))
                 return generic<T>(Bits.extract(uint8(lhs), start, length));
-            else if(typematch<T,ushort>())
+            else if(typeof(T) == typeof(ushort))
                 return generic<T>(Bits.extract(uint16(lhs), start, length));
-            else if(typematch<T,uint>())
+            else if(typeof(T) == typeof(uint))
                 return generic<T>(Bits.extract(uint32(lhs), start, length));
             else 
                 return generic<T>(Bits.extract(uint64(lhs), start, length));

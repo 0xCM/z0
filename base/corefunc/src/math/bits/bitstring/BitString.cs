@@ -529,7 +529,7 @@ namespace Z0
                 {
                     var srcIx = i + k + offset;
                     if(srcIx < srcLen && src[srcIx] != 0)
-                        BitMask.enable(ref x, in k);
+                        BitMask.enable(ref x, k);
                 }
             }
             return dst;

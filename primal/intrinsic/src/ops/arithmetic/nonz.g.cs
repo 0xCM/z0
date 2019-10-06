@@ -32,15 +32,15 @@ namespace Z0
                 return dinx.nonz(in uint8(in src));
             else if(typematch<T,short>())
                 return dinx.nonz(in int16(in src));
-            else if(typematch<T,ushort>())
+            else if(typeof(T) == typeof(ushort))
                 return dinx.nonz(in uint16(in src));
             else if(typematch<T,int>())
                 return dinx.nonz(in int32(in src));
-            else if(typematch<T,uint>())
+            else if(typeof(T) == typeof(uint))
                 return dinx.nonzero(in uint32(in src));
             else if(typematch<T,long>())
                 return dinx.nonz(in int64(in src));
-            else if(typematch<T,ulong>())
+            else if(typeof(T) == typeof(ulong))
                 return dinx.nonz(in uint64(in src));
             else if(typeof(T) == typeof(float))
                 return dfp.nonz(in float32(in src));
@@ -66,15 +66,15 @@ namespace Z0
                 return dinx.nonz(in uint8(in src));
             else if(typematch<T,short>())
                 return dinx.nonz(in int16(in src));
-            else if(typematch<T,ushort>())
+            else if(typeof(T) == typeof(ushort))
                 return dinx.nonz(in uint16(in src));
             else if(typematch<T,int>())
                 return dinx.nonz(in int32(in src));
-            else if(typematch<T,uint>())
+            else if(typeof(T) == typeof(uint))
                 return dinx.nonz(in uint32(in src));
             else if(typematch<T,long>())
                 return dinx.nonz(in int64(in src));
-            else if(typematch<T,ulong>())
+            else if(typeof(T) == typeof(ulong))
                 return dinx.nonz(in uint64(in src));
             else if(typeof(T) == typeof(float))
                 return dfp.nonz(in float32(in src));

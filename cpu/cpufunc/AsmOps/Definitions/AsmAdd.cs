@@ -46,15 +46,15 @@ namespace Z0
                 return AsmCode.FromBytes<T>(add8uBytes);
             else if(typematch<T,short>())
                 return AsmCode.FromBytes<T>(add16iBytes);
-            else if(typematch<T,ushort>())
+            else if(typeof(T) == typeof(ushort))
                 return AsmCode.FromBytes<T>(add16uBytes);
             else if(typematch<T,int>())
                 return AsmCode.FromBytes<T>(add32iBytes);
-            else if(typematch<T,uint>())
+            else if(typeof(T) == typeof(uint))
                 return AsmCode.FromBytes<T>(add32uBytes);
             else if(typematch<T,long>())
                 return AsmCode.FromBytes<T>(add64iBytes);
-            else if(typematch<T,ulong>())
+            else if(typeof(T) == typeof(ulong))
                 return AsmCode.FromBytes<T>(add64uBytes);
             else if(typeof(T) == typeof(float))
                 return AsmCode.FromBytes<T>(add32fBytes);

@@ -352,15 +352,15 @@ namespace Z0
                 return generic<T>(mathspan.dot(uint8(lhs), uint8(rhs)));
             else if(typematch<T,short>())
                 return generic<T>(mathspan.dot(int16(lhs), int16(rhs)));
-            else if(typematch<T,ushort>())
+            else if(typeof(T) == typeof(ushort))
                 return generic<T>(mathspan.dot(uint16(lhs), uint16(rhs)));
             else if(typematch<T,int>())
                 return generic<T>(mathspan.dot(int32(lhs), int32(rhs)));
-            else if(typematch<T,uint>())
+            else if(typeof(T) == typeof(uint))
                 return generic<T>(mathspan.dot(uint32(lhs), uint32(rhs)));
             else if(typematch<T,long>())
                 return generic<T>(mathspan.dot(int64(lhs), int64(rhs)));
-            else if(typematch<T,ulong>())
+            else if(typeof(T) == typeof(ulong))
                 return generic<T>(mathspan.dot(uint64(lhs), uint64(rhs)));
             else if(typeof(T) == typeof(float))
                 return generic<T>(fmath.dot(float32(lhs), float32(rhs)));
@@ -808,15 +808,15 @@ namespace Z0
                 return generic<T>(avg8u(uint8(src)));
             else if(typematch<T,short>())
                 return generic<T>(avg16i(int16(src)));
-            else if(typematch<T,ushort>())
+            else if(typeof(T) == typeof(ushort))
                 return generic<T>(avg16u(uint16(src)));
             else if(typematch<T,int>())
                 return generic<T>(avg32i(int32(src)));
-            else if(typematch<T,uint>())
+            else if(typeof(T) == typeof(uint))
                 return generic<T>(avg32u(uint32(src)));
             else if(typematch<T,long>())
                 return generic<T>(avg64i(int64(src)));
-            else if(typematch<T,ulong>())
+            else if(typeof(T) == typeof(ulong))
                 return generic<T>(avg64u(uint64(src)));
             else if(typeof(T) == typeof(float))
                 return generic<T>(avg32f(float32(src)));

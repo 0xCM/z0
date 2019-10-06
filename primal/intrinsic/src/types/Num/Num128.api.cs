@@ -30,15 +30,15 @@ namespace Z0
                 return  scalar<T>(uint8(value));
             else if(typematch<T,short>())
                 return  scalar<T>(int16(value));
-            else if(typematch<T,ushort>())
+            else if(typeof(T) == typeof(ushort))
                 return  scalar<T>(uint16(value));
             else if(typematch<T,int>())
                 return  scalar<T>(int32(value));
-            else if(typematch<T,uint>())
+            else if(typeof(T) == typeof(uint))
                 return  scalar<T>(uint32(value));
             else if(typematch<T,long>())
                 return  scalar<T>(int64(value));
-            else if(typematch<T,ulong>())
+            else if(typeof(T) == typeof(ulong))
                 return  scalar<T>(uint64(value));
             else if(typeof(T) == typeof(float))
                 return  scalar<T>(float32(value));

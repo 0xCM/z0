@@ -44,7 +44,7 @@ namespace Z0
 
         /// <summary>
         /// unsigned __int64 _bzhi_u64 (unsigned __int64 a, unsigned int index) BZHI r64a,reg/m32, r64b 
-        /// Replicates the source bits to the target and disables the high target bits starting at a specified index.
+        /// Disables the high target bits starting at a specified index.
         /// </summary>
         /// <param name="src">The bit source</param>
         /// <param name="index">The index at which to begin disabling bits</param>
@@ -52,6 +52,53 @@ namespace Z0
         public static ulong bzhi(ulong src, uint index)
             => ZeroHighBits(src, index);
 
-    }
+        /// <summary>
+        /// unsigned int _bzhi_u32 (unsigned int a, unsigned int index) BZHI r32a, reg/m32, r32b
+        /// Replicates the source bits to the target and disables the high target bits starting at a specified index.
+        /// </summary>
+        /// <param name="src">The bit source</param>
+        [MethodImpl(Inline)]
+        public static ref byte bzhi(ref byte src, uint index)
+        {
+           src = (byte)ZeroHighBits(src, index);
+           return ref src;
+        }
 
+        /// <summary>
+        /// unsigned int _bzhi_u32 (unsigned int a, unsigned int index) BZHI r32a, reg/m32, r32b
+        /// Disables the high target bits starting at a specified index.
+        /// </summary>
+        /// <param name="src">The bit source</param>
+        [MethodImpl(Inline)]
+        public static ref ushort bzhi(ref ushort src, uint index)
+        {
+           src = (ushort)ZeroHighBits(src, index);
+           return ref src;
+        }
+
+        /// <summary>
+        /// unsigned int _bzhi_u32 (unsigned int a, unsigned int index) BZHI r32a, reg/m32, r32b
+        /// Disables the high target bits starting at a specified index.
+        /// </summary>
+        /// <param name="src">The bit source</param>
+        [MethodImpl(Inline)]
+        public static ref uint bzhi(ref uint src, uint index)
+        {
+           src = ZeroHighBits(src, index);
+           return ref src;
+        }
+
+        /// <summary>
+        /// unsigned __int64 _bzhi_u64 (unsigned __int64 a, unsigned int index) BZHI r64a,reg/m32, r64b 
+        /// Disables the high target bits starting at a specified index.
+        /// </summary>
+        /// <param name="src">The bit source</param>
+        /// <param name="index">The index at which to begin disabling bits</param>
+        [MethodImpl(Inline)]
+        public static ref ulong bzhi(ref ulong src, uint index)
+        {
+            src = ZeroHighBits(src, index);
+            return ref src;
+        }
+    }
 }

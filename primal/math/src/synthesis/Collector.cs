@@ -55,15 +55,15 @@ namespace Z0
                 Create(src.ToSpan().As<T, byte>());
             else if(typematch<T,short>())
                 Create(src.ToSpan().As<T, short>());
-            else if(typematch<T,ushort>())
+            else if(typeof(T) == typeof(ushort))
                 Create(src.ToSpan().As<T,ushort>());
             else if(typematch<T,int>())
                 Create(src.ToSpan().As<T,int>());
-            else if(typematch<T,uint>())
+            else if(typeof(T) == typeof(uint))
                 Create(src.ToSpan().As<T,uint>());
             else if(typematch<T,long>())
                 Create(src.ToSpan().As<T,long>());
-            else if(typematch<T,ulong>())
+            else if(typeof(T) == typeof(ulong))
                 Create(src.ToSpan().As<T,ulong>());
             else if(typeof(T) == typeof(float))
                 Create(src.ToSpan().As<T,float>());
@@ -333,15 +333,15 @@ namespace Z0
                 CollectStream(src.Cast<byte>());
             else if(typematch<T,short>())
                 CollectStream(src.Cast<short>());
-            else if(typematch<T,ushort>())
+            else if(typeof(T) == typeof(ushort))
                 CollectStream(src.Cast<ushort>());
             else if(typematch<T,int>())
                 CollectStream(src.Cast<int>());
-            else if(typematch<T,uint>())
+            else if(typeof(T) == typeof(uint))
                 CollectStream(src.Cast<uint>());
             else if(typematch<T,long>())
                 CollectStream(src.Cast<long>());
-            else if(typematch<T,ulong>())
+            else if(typeof(T) == typeof(ulong))
                 CollectStream(src.Cast<ulong>());
             else if(typeof(T) == typeof(float))
                 CollectStream(src.Cast<float>());
@@ -364,15 +364,15 @@ namespace Z0
                 CollectSpan(src.ToSpan().As<T, byte>());
             else if(typematch<T,short>())
                 CollectSpan(src.ToSpan().As<T, short>());
-            else if(typematch<T,ushort>())
+            else if(typeof(T) == typeof(ushort))
                 CollectSpan(src.ToSpan().As<T,ushort>());
             else if(typematch<T,int>())
                 CollectSpan(src.ToSpan().As<T,int>());
-            else if(typematch<T,uint>())
+            else if(typeof(T) == typeof(uint))
                 CollectSpan(src.ToSpan().As<T,uint>());
             else if(typematch<T,long>())
                 CollectSpan(src.ToSpan().As<T,long>());
-            else if(typematch<T,ulong>())
+            else if(typeof(T) == typeof(ulong))
                 CollectSpan(src.ToSpan().As<T,ulong>());
             else if(typeof(T) == typeof(float))
                 CollectSpan(src.ToSpan().As<T,float>());
@@ -395,15 +395,15 @@ namespace Z0
                 CollectSpan(src.As<T, byte>());
             else if(typematch<T,short>())
                 CollectSpan(src.As<T, short>());
-            else if(typematch<T,ushort>())
+            else if(typeof(T) == typeof(ushort))
                 CollectSpan(src.As<T,ushort>());
             else if(typematch<T,int>())
                 CollectSpan(src.As<T,int>());
-            else if(typematch<T,uint>())
+            else if(typeof(T) == typeof(uint))
                 CollectSpan(src.As<T,uint>());
             else if(typematch<T,long>())
                 CollectSpan(src.As<T,long>());
-            else if(typematch<T,ulong>())
+            else if(typeof(T) == typeof(ulong))
                 CollectSpan(src.As<T,ulong>());
             else if(typeof(T) == typeof(float))
                 CollectSpan(src.As<T,float>());
@@ -426,15 +426,15 @@ namespace Z0
                 CollectValue(uint8(src));
             else if(typematch<T,short>())
                 CollectValue(int16(src));
-            else if(typematch<T,ushort>())
+            else if(typeof(T) == typeof(ushort))
                 CollectValue(uint16(src));
             else if(typematch<T,int>())
                 CollectValue(int32(src));
-            else if(typematch<T,uint>())
+            else if(typeof(T) == typeof(uint))
                 CollectValue(uint32(src));
             else if(typematch<T,long>())
                 CollectValue(int64(src));
-            else if(typematch<T,ulong>())
+            else if(typeof(T) == typeof(ulong))
                 CollectValue(uint64(src));
             else if(typeof(T) == typeof(float))
                 CollectValue(float32(src));

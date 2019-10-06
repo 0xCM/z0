@@ -133,7 +133,7 @@ partial class zfunc
             for(var i = min; i <= max; i += _step)            
                 yield return generic<T>(i);
         }
-        else if(typematch<T,ushort>())
+        else if(typeof(T) == typeof(ushort))
         {
             var min = uint16(x0);
             var max = uint16(x1);
@@ -149,7 +149,7 @@ partial class zfunc
             for(var i = min; i <= max; i += _step)            
                 yield return generic<T>(i);
         }
-        else if(typematch<T,uint>())
+        else if(typeof(T) == typeof(uint))
         {
             var min = uint32(x0);
             var max = uint32(x1);
@@ -165,7 +165,7 @@ partial class zfunc
             for(var i = min; i <= max; i += _step)            
                 yield return generic<T>(i);
         }
-        else if(typematch<T,ulong>())
+        else if(typeof(T) == typeof(ulong))
         {
             var min = uint64(x0);
             var max = uint64(x1);

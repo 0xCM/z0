@@ -21,7 +21,7 @@ namespace Z0.Test
             Claim.eq(v2,v3);
         }
 
-        public void increments_128x8u()
+        public void reverse_128x8u()
         {
             var v1 = Vec128Pattern.Increments<byte>(0);
             var v2 = Vec128Pattern.Decrements<byte>(15);
@@ -29,8 +29,7 @@ namespace Z0.Test
             Claim.eq(v2,v4);
         }
 
-
-        public void arrange_128_i32()
+        public void shuffle_128x32i()
         {
             var u = Vec128Pattern.Increments<int>();
             Claim.eq(Vec128.FromParts(0,1,2,3), u);
@@ -42,7 +41,7 @@ namespace Z0.Test
             Claim.eq(u, dinx.shuffle(v, Perm4.DCBA));
         }
 
-        public void reverse_256_u8()
+        public void reverse_256x8u()
         {
             var inc = Vec256Pattern.Increments((byte)0);
             for(var i=0; i<inc.Length(); i++)
@@ -58,7 +57,7 @@ namespace Z0.Test
 
         }
 
-        public void reverse_256_u32()
+        public void reverse_256x32u()
         {
             var src = Random.CpuVec256Stream<uint>().Take(Pow2.T14);
             foreach(var v in src)
@@ -75,7 +74,7 @@ namespace Z0.Test
             }
         }
 
-        public void reverse_256_f32()
+        public void reverse_256x32f()
         {
             var src = Random.CpuVec256Stream<float>().Take(Pow2.T14);
             foreach(var v in src)
@@ -185,15 +184,6 @@ namespace Z0.Test
             fmt.AppendLine(dstFmt);
             return fmt.ToString();
         }
-
-        void DescribeShuffle256u32()
-        {
-            var x = Vec256.FromParts(0u,1u,2u,3u,4u,5u,6u,7u);
-            for(var i=0; i<255; i++)
-                Trace(DescribeShuffle(x, (byte)i, dinx.shuffle(x,(byte)i)));
-
-        }
-
 
         //Not an efficient approach, used for comparison
         static Vec128<ushort> reverse_check(in Vec128<ushort> src)

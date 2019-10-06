@@ -190,19 +190,19 @@ namespace Z0
         /// Maps a permutation on 8 symbols to its canonical scalar representation
         /// </summary>
         /// <param name="src">The source permutation</param>
-        public static Perm8Symbol ToScalar(this Perm<N8> src)
+        public static Perm8 ToScalar(this Perm<N8> src)
         {
             var dst = 0u;            
             for(int i=0, offset = 0; i< src.Length; i++, offset +=3)
                 dst |= (uint)src[i] << offset;                        
-            return (Perm8Symbol)dst;
+            return (Perm8)dst;
         }
 
         /// <summary>
         /// Reifies a permutation of length 8 from its canonical scalar representative 
         /// </summary>
         /// <param name="rep">The representative</param>
-        public static Perm<N8> ToPerm(this Perm8Symbol rep)
+        public static Perm<N8> ToPerm(this Perm8 rep)
         {
             uint data = (uint)rep;
             var dst = Perm<N8>.Alloc();
@@ -240,10 +240,44 @@ namespace Z0
         /// Returns the source enum's underlying scalar value
         /// </summary>
         /// <param name="src">The source enum value</param>
-        [MethodImpl]
+        [MethodImpl(Inline)]
         public static ulong ToScalar(this Perm16 src)
             => (ulong)src;
         
+        /// <summary>
+        /// Formats the value as a permutation map, i.e., [00 01 10 11]: ABCD -> ABDC
+        /// </summary>
+        /// <param name="src"></param>
+        public static string FormatMap(this Perm4 src)
+        {
+            static char letter(byte x, byte y)
+                => (x,y) switch 
+                {
+                    (0,0) => 'A',
+                    (1,0) => 'B',
+                    (0,1) => 'C',  
+                    (1,1) => 'D',
+                    _ => '0'
+                };
+
+            static string letters(BitString bs)
+            {
+                Span<char> letters = stackalloc char[4];
+                int i=0, j=0;
+                letters[i++] = letter(bs[j++], bs[j++]);
+                letters[i++] = letter(bs[j++], bs[j++]);
+                letters[i++] = letter(bs[j++], bs[j++]);            
+                letters[i++] = letter(bs[j++], bs[j++]);            
+                return new string(letters);
+            }
+
+            var bs = BitString.FromScalar((byte)src);
+            var block = bracket(bs.Format(false,false,2, AsciSym.Space));
+            var domain = $"{Perm4.A}{Perm4.B}{Perm4.C}{Perm4.D}";
+            var codomain = letters(bs);
+            var mapping = $"{block}: {domain} -> {codomain}";
+            return mapping;
+        }
 
     }
 }

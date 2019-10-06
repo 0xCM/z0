@@ -25,15 +25,15 @@ namespace Z0
                 vstore(uint8(src), ref uint8(ref dst));
             else if(typematch<T,short>())
                 vstore(int16(src), ref int16(ref dst));
-            else if(typematch<T,ushort>())
+            else if(typeof(T) == typeof(ushort))
                 vstore(uint16(src), ref uint16(ref dst));
             else if(typematch<T,int>())
                 vstore(int32(src), ref int32(ref dst));
-            else if(typematch<T,uint>())
+            else if(typeof(T) == typeof(uint))
                 vstore(uint32(src), ref uint32(ref dst));
             else if(typematch<T,long>())
                 vstore(int64(src), ref int64(ref dst));
-            else if(typematch<T,ulong>())
+            else if(typeof(T) == typeof(ulong))
                 vstore(uint64(src), ref uint64(ref dst));
             else if(typeof(T) == typeof(float))
                 vstore(float32(src), ref float32(ref dst));
@@ -53,15 +53,15 @@ namespace Z0
                 vstore(uint8(src), ref uint8(ref dst));
             else if(typematch<T,short>())
                 vstore(int16(src), ref int16(ref dst));
-            else if(typematch<T,ushort>())
+            else if(typeof(T) == typeof(ushort))
                 vstore(uint16(src), ref uint16(ref dst));
             else if(typematch<T,int>())
                 vstore(int32(src), ref int32(ref dst));
-            else if(typematch<T,uint>())
+            else if(typeof(T) == typeof(uint))
                 vstore(uint32(src), ref uint32(ref dst));
             else if(typematch<T,long>())
                 vstore(int64(src), ref int64(ref dst));
-            else if(typematch<T,ulong>())
+            else if(typeof(T) == typeof(ulong))
                 vstore(uint64(src), ref uint64(ref dst));
             else if(typeof(T) == typeof(float))
                 vstore(float32(src), ref float32(ref dst));
@@ -81,15 +81,15 @@ namespace Z0
                 vstore(uint8(src), ref uint8(ref dst));
             else if(typematch<T,short>())
                 vstore(int16(src), ref int16(ref dst));
-            else if(typematch<T,ushort>())
+            else if(typeof(T) == typeof(ushort))
                 vstore(uint16(src), ref uint16(ref dst));
             else if(typematch<T,int>())
                 vstore(int32(src), ref int32(ref dst));
-            else if(typematch<T,uint>())
+            else if(typeof(T) == typeof(uint))
                 vstore(uint32(src), ref uint32(ref dst));
             else if(typematch<T,long>())
                 vstore(int64(src), ref int64(ref dst));
-            else if(typematch<T,ulong>())
+            else if(typeof(T) == typeof(ulong))
                 vstore(uint64(src), ref uint64(ref dst));
             else if(typeof(T) == typeof(float))
                 vstore(float32(src), ref float32(ref dst));
@@ -109,15 +109,15 @@ namespace Z0
                 vstore(uint8(src), ref uint8(ref dst));
             else if(typematch<T,short>())
                 vstore(int16(src), ref int16(ref dst));
-            else if(typematch<T,ushort>())
+            else if(typeof(T) == typeof(ushort))
                 vstore(uint16(src), ref uint16(ref dst));
             else if(typematch<T,int>())
                 vstore(int32(src), ref int32(ref dst));
-            else if(typematch<T,uint>())
+            else if(typeof(T) == typeof(uint))
                 vstore(uint32(src), ref uint32(ref dst));
             else if(typematch<T,long>())
                 vstore(int64(src), ref int64(ref dst));
-            else if(typematch<T,ulong>())
+            else if(typeof(T) == typeof(ulong))
                 vstore(uint64(src), ref uint64(ref dst));
             else if(typeof(T) == typeof(float))
                 vstore(float32(src), ref float32(ref dst));

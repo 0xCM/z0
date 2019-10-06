@@ -14,15 +14,10 @@ namespace Z0
     public class t_bitpart16 : BitPartTest<t_bitpart16>
     {                    
 
-
         public void bitpart_32x16()
         {                 
             bitpart_check<uint,ushort>(BitParts.part32x16, (int)Part32x16.Count, (int)Part32x16.Width);
         }
-
-        
-
-
 
     }
 

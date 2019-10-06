@@ -29,15 +29,15 @@ namespace Z0
                 return generic<T>(Bits.xorsl(uint8(src), offset));
             else if(typematch<T,short>())
                 return generic<T>(Bits.xorsl(int16(src), offset));
-            else if(typematch<T,ushort>())
+            else if(typeof(T) == typeof(ushort))
                 return generic<T>(Bits.xorsl(uint16(src), offset));
             else if(typematch<T,int>())
                 return generic<T>(Bits.xorsl(int32(src), offset));
-            else if(typematch<T,uint>())
+            else if(typeof(T) == typeof(uint))
                 return generic<T>(Bits.xorsl(uint32(src), offset));
             else if(typematch<T,long>())
                 return generic<T>(Bits.xorsl(int64(src), offset));
-            else if(typematch<T,ulong>())
+            else if(typeof(T) == typeof(ulong))
                 return generic<T>(Bits.xorsl(uint64(src), offset));
             else            
                 throw unsupported<T>();
@@ -59,15 +59,15 @@ namespace Z0
                 Bits.xorsl(ref uint8(ref lhs), offset);
             else if(typematch<T,short>())
                 Bits.xorsl(ref int16(ref lhs), offset);
-            else if(typematch<T,ushort>())
+            else if(typeof(T) == typeof(ushort))
                 Bits.xorsl(ref uint16(ref lhs), offset);
             else if(typematch<T,int>())
                 Bits.xorsl(ref int32(ref lhs), offset);
-            else if(typematch<T,uint>())
+            else if(typeof(T) == typeof(uint))
                 Bits.xorsl(ref uint32(ref lhs), offset);
             else if(typematch<T,long>())
                 Bits.xorsl(ref int64(ref lhs), offset);
-            else if(typematch<T,ulong>())
+            else if(typeof(T) == typeof(ulong))
                 Bits.xorsl(ref uint64(ref lhs), offset);
             else            
                 throw unsupported<T>();

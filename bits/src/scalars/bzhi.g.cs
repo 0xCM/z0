@@ -14,7 +14,6 @@ namespace Z0
 
     partial class gbits
     {
-
         /// <summary>
         /// Replicates the source bits to the target and disables the high target bits starting at a specified index.
         /// </summary>
@@ -27,14 +26,31 @@ namespace Z0
         {
             if(typeof(T) == typeof(byte))
                 return generic<T>(Bits.bzhi(uint8(src), index));
-            else if(typematch<T,ushort>())
+            else if(typeof(T) == typeof(ushort))
                 return generic<T>(Bits.bzhi(uint16(src), index));
-            else if(typematch<T,uint>())
+            else if(typeof(T) == typeof(uint))
                 return generic<T>(Bits.bzhi(uint32(src), index));
-            else if(typematch<T,ulong>())
+            else if(typeof(T) == typeof(ulong))
                 return generic<T>(Bits.bzhi(uint64(src),index));
             else            
                 throw unsupported<T>();
+        }           
+
+        [MethodImpl(Inline)]
+        public static ref T bzhi<T>(ref T src, uint index)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(byte))
+                Bits.bzhi(ref uint8(ref src), index);
+            else if(typeof(T) == typeof(ushort))
+                Bits.bzhi(ref uint16(ref src), index);
+            else if(typeof(T) == typeof(uint))
+                Bits.bzhi(ref uint32(ref src), index);
+            else if(typeof(T) == typeof(ulong))
+                Bits.bzhi(ref uint64(ref src),index);
+            else            
+                throw unsupported<T>();
+            return ref src;
         }           
 
     }

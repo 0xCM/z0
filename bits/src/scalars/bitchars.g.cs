@@ -29,15 +29,15 @@ namespace Z0
                 return BitStore.bitchars(int8(in src));
             else if(typematch<T,short>())
                 return bitchars(int16(in src));
-            else if(typematch<T,ushort>())
+            else if(typeof(T) == typeof(ushort))
                 return bitchars(uint16(in src));
             else if(typematch<T,int>())
                 return bitchars(int32(in src));
-            else if(typematch<T,uint>())
+            else if(typeof(T) == typeof(uint))
                 return bitchars(uint32(in src));
             else if(typematch<T,long>())
                 return bitchars(int64(in src));
-            else if(typematch<T,ulong>())
+            else if(typeof(T) == typeof(ulong))
                 return bitchars(uint64(in src));
             else if(typeof(T) == typeof(float))
                 return bitchars(float32(in src));

@@ -32,15 +32,15 @@ namespace Z0
                 return generic<T>(Vec256.FromParts(in uint8(in lo), in uint8(in hi)));
             else if(typematch<T,short>())
                 return generic<T>(Vec256.FromParts(in int16(in lo), in int16(in hi)));
-            else if(typematch<T,ushort>())
+            else if(typeof(T) == typeof(ushort))
                 return generic<T>(Vec256.FromParts(in uint16(in lo), in uint16(in hi)));
             else if(typematch<T,int>())
                 return generic<T>(Vec256.FromParts(in int32(in lo), in int32(in hi)));
-            else if(typematch<T,uint>())
+            else if(typeof(T) == typeof(uint))
                 return generic<T>(Vec256.FromParts(in uint32(in lo), in uint32(in hi)));
             else if(typematch<T,long>())
                 return generic<T>(Vec256.FromParts(in int64(in lo), in int64(in hi)));
-            else if(typematch<T,ulong>())
+            else if(typeof(T) == typeof(ulong))
                 return generic<T>(Vec256.FromParts(in uint64(in lo), in uint64(in hi)));
             else if(typeof(T) == typeof(float))
                 return generic<T>(Vec256.FromParts(in float32(in lo), in float32(in hi)));

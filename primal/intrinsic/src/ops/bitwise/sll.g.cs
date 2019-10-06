@@ -24,15 +24,15 @@ namespace Z0
                 return generic<T>(dinx.vsll(in int8(in lhs), offset));
             else if(typematch<T,short>())
                 return generic<T>(dinx.vsll(in int16(in lhs), offset));
-            else if(typematch<T,ushort>())
+            else if(typeof(T) == typeof(ushort))
                 return generic<T>(dinx.vsll(in uint16(in lhs), offset));
             else if(typeof(T) == typeof(int))
                 return generic<T>(dinx.vsll(in int32(in lhs), offset));
-            else if(typematch<T,uint>()) 
+            else if(typeof(T) == typeof(uint)) 
                 return generic<T>(dinx.vsll(in uint32(in lhs), offset));
             else if(typematch<T,long>())
                 return generic<T>(dinx.vsll(in int64(lhs), offset));
-            else if(typematch<T,ulong>())
+            else if(typeof(T) == typeof(ulong))
                 return generic<T>(dinx.vsll(in uint64(lhs), offset));
             else
                 throw unsupported<T>();
@@ -47,15 +47,15 @@ namespace Z0
                 return generic<T>(dinx.vsll(in uint8(in lhs), offset));
             else if(typematch<T,short>())
                 return generic<T>(dinx.vsll(in int16(in lhs), offset));
-            else if(typematch<T,ushort>())
+            else if(typeof(T) == typeof(ushort))
                 return generic<T>(dinx.vsll(in uint16(in lhs), offset));
             else if(typeof(T) == typeof(int))
                 return generic<T>(dinx.vsll(in int32(in lhs), offset));
-            else if(typematch<T,uint>()) 
+            else if(typeof(T) == typeof(uint)) 
                 return generic<T>(dinx.vsll(in uint32(in lhs), offset));
             else if(typematch<T,long>())
                 return generic<T>(dinx.vsll(in int64(in lhs), offset));
-            else if(typematch<T,ulong>())
+            else if(typeof(T) == typeof(ulong))
                 return generic<T>(dinx.vsll(in uint64(in lhs), offset));
             else
                 throw unsupported<T>();

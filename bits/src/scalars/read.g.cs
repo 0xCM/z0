@@ -29,15 +29,15 @@ namespace Z0
                  Bits.read(in uint8(in src), in pos, out dst);
             else if(typematch<T,short>())
                  Bits.read(in int16(in src), in pos, out dst);
-            else if(typematch<T,ushort>())
+            else if(typeof(T) == typeof(ushort))
                  Bits.read(in uint16(in src), in pos, out dst);
             else if(typematch<T,int>())
                  Bits.read(in int32(in src), in pos, out dst);
-            else if(typematch<T,uint>())
+            else if(typeof(T) == typeof(uint))
                  Bits.read(in uint32(in src), in pos, out dst);
             else if(typematch<T,long>())
                  Bits.read(in int64(in src), in pos, out dst);
-            else if(typematch<T,ulong>())
+            else if(typeof(T) == typeof(ulong))
                  Bits.read(in uint64(in src), in pos, out dst);
             else if(typeof(T) == typeof(float))
                  Bits.read(in float32(in src), in pos, out dst);

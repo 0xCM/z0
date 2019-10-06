@@ -30,15 +30,15 @@ namespace Z0
                 return dinx.testc(uint8(src), uint8(mask));
             else if(typematch<T,short>())
                 return dinx.testc(int16(src), int16(mask));
-            else if(typematch<T,ushort>())
+            else if(typeof(T) == typeof(ushort))
                 return dinx.testc(uint16(src), uint16(mask));
             else if(typematch<T,int>())
                 return dinx.testc(int32(src), int32(mask));
-            else if(typematch<T,uint>())
+            else if(typeof(T) == typeof(uint))
                 return dinx.testc(uint32(src), uint32(mask));
             else if(typematch<T,long>())
                 return dinx.testc(int64(src), int64(mask));
-            else if(typematch<T,ulong>())
+            else if(typeof(T) == typeof(ulong))
                 return dinx.testc(uint64(src), uint64(mask));
             else if(typeof(T) == typeof(float))
                 return dfp.testc(float32(src), float32(mask));
@@ -64,15 +64,15 @@ namespace Z0
                 return dinx.testc(uint8(src), uint8(mask));
             else if(typematch<T,short>())
                 return dinx.testc(int16(src), int16(mask));
-            else if(typematch<T,ushort>())
+            else if(typeof(T) == typeof(ushort))
                 return dinx.testc(uint16(src), uint16(mask));
             else if(typematch<T,int>())
                 return dinx.testc(int32(src), int32(mask));
-            else if(typematch<T,uint>())
+            else if(typeof(T) == typeof(uint))
                 return dinx.testc(uint32(src), uint32(mask));
             else if(typematch<T,long>())
                 return dinx.testc(int64(src), int64(mask));
-            else if(typematch<T,ulong>())
+            else if(typeof(T) == typeof(ulong))
                 return dinx.testc(uint64(src), uint64(mask));
             else if(typeof(T) == typeof(float))
                 return dfp.testc(float32(src), float32(mask));

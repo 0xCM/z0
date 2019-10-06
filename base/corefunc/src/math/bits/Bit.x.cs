@@ -40,13 +40,5 @@ namespace Z0
             where T : unmanaged
                 => src.GetEnumerator().ToBitStream();
 
-        [MethodImpl(Inline)]
-        public static ref byte PackByte(this ReadOnlySpan<Bit> src, int offset, ref byte dst)
-        {
-            var lastIndex = Math.Min(7, src.Length - offset);
-            for(var i = 0; i<= lastIndex; i++)
-                dst ^= (byte) ((byte)src[i + offset] << i); 
-            return ref dst;                       
-        }
     }
 }

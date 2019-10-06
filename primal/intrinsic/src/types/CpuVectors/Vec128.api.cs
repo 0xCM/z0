@@ -52,15 +52,15 @@ namespace Z0
                 return generic<T>(Vec128.fill(uint8(value)));
             else if(typematch<T,short>())
                 return generic<T>(Vec128.fill(int16(value)));
-            else if(typematch<T,ushort>())
+            else if(typeof(T) == typeof(ushort))
                 return generic<T>(Vec128.fill(uint16(value)));
             else if(typematch<T,int>())
                 return generic<T>(Vec128.fill(int32(value)));
-            else if(typematch<T,uint>())
+            else if(typeof(T) == typeof(uint))
                 return generic<T>(Vec128.fill(uint32(value)));
             else if(typematch<T,long>())
                 return generic<T>(Vec128.fill(int64(value)));
-            else if(typematch<T,ulong>())
+            else if(typeof(T) == typeof(ulong))
                 return generic<T>(Vec128.fill(uint64(value)));
             else if(typeof(T) == typeof(float))
                 return generic<T>(Vec128.fill(float32(value)));
@@ -85,15 +85,15 @@ namespace Z0
                 return ref generic<T>(in OneU8);
             else if(typematch<T,short>())
                 return ref generic<T>(in OneI16);
-            else if(typematch<T,ushort>())
+            else if(typeof(T) == typeof(ushort))
                 return ref generic<T>(in OneU16);
             else if(typematch<T,int>())
                 return ref generic<T>(in OneI32);
-            else if(typematch<T,uint>())
+            else if(typeof(T) == typeof(uint))
                 return ref generic<T>(in OneU32);
             else if(typematch<T,long>())
                 return ref generic<T>(in OneI64);
-            else if(typematch<T,ulong>())
+            else if(typeof(T) == typeof(ulong))
                 return ref generic<T>(in OneU64);
             else if(typeof(T) == typeof(float))
                 return ref generic<T>(in OneF32);
@@ -120,15 +120,15 @@ namespace Z0
                 vstore(uint8(src), ref uint8(ref dst));
             else if(typematch<T,short>())
                 vstore(int16(src), ref int16(ref dst));
-            else if(typematch<T,ushort>())
+            else if(typeof(T) == typeof(ushort))
                 vstore(uint16(src), ref uint16(ref dst));
             else if(typematch<T,int>())
                 vstore(int32(src), ref int32(ref dst));
-            else if(typematch<T,uint>())
+            else if(typeof(T) == typeof(uint))
                 vstore(uint32(src), ref uint32(ref dst));
             else if(typematch<T,long>())
                 vstore(int64(src), ref int64(ref dst));
-            else if(typematch<T,ulong>())
+            else if(typeof(T) == typeof(ulong))
                 vstore(uint64(src), ref uint64(ref dst));
             else if(typeof(T) == typeof(float))
                 vstore(float32(src), ref float32(ref dst));
@@ -164,15 +164,15 @@ namespace Z0
                 return generic<T>(load(ref uint8(ref src)));
             else if(typematch<T,short>())
                 return generic<T>(load(ref int16(ref src)));
-            else if(typematch<T,ushort>())
+            else if(typeof(T) == typeof(ushort))
                 return generic<T>(load(ref uint16(ref src)));
             else if(typematch<T,int>())
                 return generic<T>(load(ref int32(ref src)));
-            else if(typematch<T,uint>())
+            else if(typeof(T) == typeof(uint))
                 return generic<T>(load(ref uint32(ref src)));
             else if(typematch<T,long>())
                 return generic<T>(load(ref int64(ref src)));
-            else if(typematch<T,ulong>())
+            else if(typeof(T) == typeof(ulong))
                 return generic<T>(load(ref uint64(ref src)));
             else if(typeof(T) == typeof(float))
                 return generic<T>(load(ref float32(ref src)));
@@ -192,15 +192,15 @@ namespace Z0
                 return generic<T>(LoadVector(ref uint8(ref src)));
             else if(typematch<T,short>())
                 return generic<T>(LoadVector(ref int16(ref src)));
-            else if(typematch<T,ushort>())
+            else if(typeof(T) == typeof(ushort))
                 return generic<T>(LoadVector(ref uint16(ref src)));
             else if(typematch<T,int>())
                 return generic<T>(LoadVector(ref int32(ref src)));
-            else if(typematch<T,uint>())
+            else if(typeof(T) == typeof(uint))
                 return generic<T>(LoadVector(ref uint32(ref src)));
             else if(typematch<T,long>())
                 return generic<T>(LoadVector(ref int64(ref src)));
-            else if(typematch<T,ulong>())
+            else if(typeof(T) == typeof(ulong))
                 return generic<T>(LoadVector(ref uint64(ref src)));
             else if(typeof(T) == typeof(float))
                 return generic<T>(LoadVector(ref float32(ref src)));
@@ -220,15 +220,15 @@ namespace Z0
                 return generic<T>(load(ref uint8(ref asRef(in src))));
             else if(typematch<T,short>())
                 return generic<T>(load(ref int16(ref asRef(in src))));
-            else if(typematch<T,ushort>())
+            else if(typeof(T) == typeof(ushort))
                 return generic<T>(load(ref uint16(ref asRef(in src))));
             else if(typematch<T,int>())
                 return generic<T>(load(ref int32(ref asRef(in src))));
-            else if(typematch<T,uint>())
+            else if(typeof(T) == typeof(uint))
                 return generic<T>(load(ref uint32(ref asRef(in src))));
             else if(typematch<T,long>())
                 return generic<T>(load(ref int64(ref asRef(in src))));
-            else if(typematch<T,ulong>())
+            else if(typeof(T) == typeof(ulong))
                 return generic<T>(load(ref uint64(ref asRef(in src))));
             else if(typeof(T) == typeof(float))
                 return generic<T>(load(ref float32(ref asRef(in src))));
@@ -249,15 +249,15 @@ namespace Z0
                 dst = generic<T>(load(ref uint8(ref head)));
             else if(typematch<T,short>())
                 dst = generic<T>(load(ref int16(ref head)));
-            else if(typematch<T,ushort>())
+            else if(typeof(T) == typeof(ushort))
                 dst = generic<T>(load(ref uint16(ref head)));
             else if(typematch<T,int>())
                 dst = generic<T>(load(ref int32(ref head)));
-            else if(typematch<T,uint>())
+            else if(typeof(T) == typeof(uint))
                 dst = generic<T>(load(ref uint32(ref head)));
             else if(typematch<T,long>())
                 dst = generic<T>(load(ref int64(ref head)));
-            else if(typematch<T,ulong>())
+            else if(typeof(T) == typeof(ulong))
                 dst = generic<T>(load(ref uint64(ref head)));
             else if(typeof(T) == typeof(float))
                 dst = generic<T>(load(ref float32(ref head)));
@@ -279,15 +279,15 @@ namespace Z0
                 dst = generic<T>(load(ref uint8(ref head)));
             else if(typematch<T,short>())
                 dst = generic<T>(load(ref int16(ref head)));
-            else if(typematch<T,ushort>())
+            else if(typeof(T) == typeof(ushort))
                 dst = generic<T>(load(ref uint16(ref head)));
             else if(typematch<T,int>())
                 dst = generic<T>(load(ref int32(ref head)));
-            else if(typematch<T,uint>())
+            else if(typeof(T) == typeof(uint))
                 dst = generic<T>(load(ref uint32(ref head)));
             else if(typematch<T,long>())
                 dst = generic<T>(load(ref int64(ref head)));
-            else if(typematch<T,ulong>())
+            else if(typeof(T) == typeof(ulong))
                 dst = generic<T>(load(ref uint64(ref head)));
             else if(typeof(T) == typeof(float))
                 dst = generic<T>(load(ref float32(ref head)));
@@ -313,15 +313,15 @@ namespace Z0
                 return generic<T>(LoadScalar(uint8(src)));
             else if(typematch<T,short>())
                 return generic<T>(LoadScalar(int16(src)));
-            else if(typematch<T,ushort>())
+            else if(typeof(T) == typeof(ushort))
                 return generic<T>(LoadScalar(uint16(src)));
             else if(typematch<T,int>())
                 return generic<T>(LoadScalar(int32(src)));
-            else if(typematch<T,uint>())
+            else if(typeof(T) == typeof(uint))
                 return generic<T>(LoadScalar(uint32(src)));
             else if(typematch<T,long>())
                 return generic<T>(LoadScalar(int64(src)));
-            else if(typematch<T,ulong>())
+            else if(typeof(T) == typeof(ulong))
                 return generic<T>(LoadScalar(uint64(src)));
             else if(typeof(T) == typeof(float))
                 return generic<T>(LoadScalar(float32(src)));
@@ -373,15 +373,15 @@ namespace Z0
                 dst = generic<T>(load(ref uint8(ref head)));
             else if(typematch<T,short>())
                 dst = generic<T>(load(ref int16(ref head)));
-            else if(typematch<T,ushort>())
+            else if(typeof(T) == typeof(ushort))
                 dst = generic<T>(load(ref uint16(ref head)));
             else if(typematch<T,int>())
                 dst = generic<T>(load(ref int32(ref head)));
-            else if(typematch<T,uint>())
+            else if(typeof(T) == typeof(uint))
                 dst = generic<T>(load(ref uint32(ref head)));
             else if(typematch<T,long>())
                 dst = generic<T>(load(ref int64(ref head)));
-            else if(typematch<T,ulong>())
+            else if(typeof(T) == typeof(ulong))
                 dst = generic<T>(load(ref uint64(ref head)));
             else if(typeof(T) == typeof(float))
                 dst = generic<T>(load(ref float32(ref head)));

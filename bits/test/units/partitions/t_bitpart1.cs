@@ -14,7 +14,6 @@ namespace Z0
     public class t_bitpart1 : BitPartTest<t_bitpart1>
     {
 
-        protected override int CycleCount => Pow2.T18;        
 
         public void bitpart_32x1()
         {

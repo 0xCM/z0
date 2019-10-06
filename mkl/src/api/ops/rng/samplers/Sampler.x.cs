@@ -81,7 +81,7 @@ namespace Z0.Mkl
             var _spec = spec ?? UniformBitsSpec.Define<T>();
             if(typeof(T) == typeof(uint))
                 sampler = samplers.bits(rng, _spec.ToUInt32()) as ISampler<T>;
-            else if(typematch<T,ulong>())
+            else if(typeof(T) == typeof(ulong))
                 sampler = samplers.bits(rng, _spec.ToUInt64()) as ISampler<T>;
             else
                 throw unsupported<T>();                                        

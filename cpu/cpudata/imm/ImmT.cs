@@ -40,11 +40,11 @@ namespace Z0
         {
             if(typeof(T) == typeof(byte))
                 return new Imm<byte>(Z0.As.uint8(ref src)).As<T>();
-            else if(typematch<T,ushort>())
+            else if(typeof(T) == typeof(ushort))
                 return new Imm<ushort>(Z0.As.uint16(ref src)).As<T>();
-            else if(typematch<T,uint>())
+            else if(typeof(T) == typeof(uint))
                 return new Imm<uint>(Z0.As.uint32(ref src)).As<T>();
-            else if(typematch<T,ulong>())
+            else if(typeof(T) == typeof(ulong))
                 return new Imm<ulong>(Z0.As.uint64(ref src)).As<T>();
             else 
                 throw unsupported<T>();                

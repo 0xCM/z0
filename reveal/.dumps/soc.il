@@ -1,4 +1,4 @@
-// 2019-10-05 04:38:08:182
+// 2019-10-05 19:16:27:726
 ushort sub_d16u(ushort lhs, ushort rhs)
 {
     IL_0000: ldarg.0

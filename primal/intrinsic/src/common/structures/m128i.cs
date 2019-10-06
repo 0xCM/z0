@@ -92,15 +92,15 @@ namespace Z0
                 return new m128i<T>(uint8(src));
             else if(typeof(S) == typeof(short))
                 return new m128i<T>(int16(src));
-            else if(typematch<T,ushort>())
+            else if(typeof(T) == typeof(ushort))
                 return new m128i<T>(uint16(src));
             else if(typematch<T,int>())
                 return new m128i<T>(int32(src));
-            else if(typematch<T,uint>())
+            else if(typeof(T) == typeof(uint))
                 return new m128i<T>(uint32(src));
             else if(typematch<T,long>())
                 return new m128i<T>(int64(src));
-            else if(typematch<T,ulong>())
+            else if(typeof(T) == typeof(ulong))
                 return new m128i<T>(uint64(src));
             else
                 throw unsupported<T>();

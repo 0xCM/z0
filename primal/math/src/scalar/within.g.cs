@@ -33,15 +33,15 @@ namespace Z0
                 return math.within(uint8(lhs), uint8(rhs), uint8(epsilon));
             else if(typematch<T,short>())
                 return math.within(int16(lhs), int16(rhs), int16(epsilon));
-            else if(typematch<T,ushort>())
+            else if(typeof(T) == typeof(ushort))
                 return math.within(uint16(lhs), uint16(rhs), uint16(epsilon));
             else if(typematch<T,int>())
                 return math.within(int32(lhs), int32(rhs), int32(epsilon));
-            else if(typematch<T,uint>())
+            else if(typeof(T) == typeof(uint))
                 return math.within(uint32(lhs), uint32(rhs), uint32(epsilon));
             else if(typematch<T,long>())
                 return math.within(int64(lhs), int64(rhs), int64(epsilon));
-            else if(typematch<T,ulong>())
+            else if(typeof(T) == typeof(ulong))
                 return math.within(uint64(lhs), uint64(rhs), uint64(epsilon));
             else if(typeof(T) == typeof(float))
                 return fmath.within(float32(lhs), float32(rhs), float32(epsilon));

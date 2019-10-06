@@ -38,6 +38,7 @@ namespace Z0
         /// </summary>
         D = 0b11,
 
+        
         /// <summary>
         /// [00 01 10 11]: ABCD -> ABDC
         /// </summary>
@@ -54,12 +55,12 @@ namespace Z0
         ACDB = A | (C << 2) | (D << 4) | (B << 6), 
 
         /// <summary>
-        /// ABCD -> ADBC
+        /// [00 11 01 10] ABCD -> ADBC
         /// </summary>
         ADBC = A | (D << 2) | (B << 4) | (C << 6), 
 
         /// <summary>
-        /// ABCD -> ADCB
+        /// [00 11 10 01]: ABCD -> ADCB
         /// </summary>
         ADCB = A | (D << 2) | (C << 4) | (B << 6), 
 
@@ -149,7 +150,7 @@ namespace Z0
         DCAB = D | (C << 2) | (A << 4) | (B << 6), 
 
         /// <summary>
-        /// ABCD -> DCBA
+        /// [00 01 10 11]: ABCD -> DCBA
         /// </summary>
         DCBA = D | (C << 2) | (B << 4) | (A << 6), 
     }

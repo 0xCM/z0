@@ -23,6 +23,30 @@ namespace Z0.Test
             Claim.eq(dst,zed);                        
         }
 
+        public void shuffle_128x32u()
+        {
+            var src = Vec128.FromParts(1u,2u,3u,4u);
+            var spec = Perm4.ABCD;
+            var y = Vec128.FromParts(4u,3u,2u,1u);
+            var x = dinx.shuffle(src, Perm4.ABCD);
+            Claim.eq(x, src);
+            Trace($"shuffle({x},{spec}) = {y}");           
+
+            y = Vec128.FromParts(4u,3u,2u,1u);
+            spec = Perm4.DCBA;
+            x = dinx.shuffle(src,spec);
+            Claim.eq(x, y); 
+            Trace($"shuffle({x},{spec}) = {y}");           
+
+            y = Vec128.FromParts(4u,3u,2u,1u);
+            spec = Perm4.DCBA;
+            x = dinx.shuffle(src,spec);
+            Claim.eq(x, y); 
+            Trace($"shuffle({x},{spec}) = {y}");           
+
+        }
+
+
         public void shuffle_lo_128x16u()
         {
             var id = Vec128.FromParts(0,1,2,3,6,7,8,9);

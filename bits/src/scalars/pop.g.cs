@@ -31,15 +31,15 @@ namespace Z0
                  return Bits.pop(uint8(in src));
             else if(typematch<T,short>())
                  return Bits.pop(int16(in src));
-            else if(typematch<T,ushort>())
+            else if(typeof(T) == typeof(ushort))
                  return Bits.pop(uint16(in src));
             else if(typematch<T,int>())
                  return Bits.pop(int32(in src));
-            else if(typematch<T,uint>())
+            else if(typeof(T) == typeof(uint))
                  return Bits.pop(uint32(in src));
             else if(typematch<T,long>())
                  return Bits.pop(int64(in src));
-            else if(typematch<T,ulong>())
+            else if(typeof(T) == typeof(ulong))
                  return Bits.pop(uint64(in src));
             else 
                 throw unsupported<T>();

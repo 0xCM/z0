@@ -60,9 +60,9 @@ namespace Z0
         {
             if(typeof(T) == typeof(byte))
                 return generic<T>(Avx2.LoadDquVector128(constptr(in uint8(in src))));
-            else if(typematch<T,ushort>())
+            else if(typeof(T) == typeof(ushort))
                 return generic<T>(Avx2.LoadDquVector128(constptr(in uint16(in src))));
-            else if(typematch<T,uint>())
+            else if(typeof(T) == typeof(uint))
                 return generic<T>(Avx2.LoadDquVector128(constptr(in uint32(in src))));
             else
                 return generic<T>(Avx2.LoadDquVector128(constptr(in uint64(in src))));
@@ -88,9 +88,9 @@ namespace Z0
         {
             if(typeof(T) == typeof(byte))
                 return generic<T>(Avx2.LoadDquVector256(constptr(in uint8(in src))));
-            else if(typematch<T,ushort>())
+            else if(typeof(T) == typeof(ushort))
                 return generic<T>(Avx2.LoadDquVector256(constptr(in uint16(in src))));
-            else if(typematch<T,uint>())
+            else if(typeof(T) == typeof(uint))
                 return generic<T>(Avx2.LoadDquVector256(constptr(in uint32(in src))));
             else
                 return generic<T>(Avx2.LoadDquVector256(constptr(in uint64(in src))));

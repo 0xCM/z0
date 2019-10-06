@@ -14,9 +14,6 @@ namespace Z0.Test
     public class tbm_mul : BitMatrixTest<tbm_mul>
     {
 
-        protected override int RoundCount => Pow2.T01;
-
-        protected override int CycleCount => Pow2.T12;
 
         public void bmm_4x4_bench()
         {

@@ -25,15 +25,15 @@ namespace Z0
                 return subset(uint8(test), set);
             else if(typematch<T,short>())
                 return subset(int16(test), set);
-            else if(typematch<T,ushort>())
+            else if(typeof(T) == typeof(ushort))
                 return subset(uint16(test), set);
             else if(typematch<T,int>())
                 return subset(int32(test), set);
-            else if(typematch<T,uint>())
+            else if(typeof(T) == typeof(uint))
                 return subset(uint32(test), set);
             else if(typematch<T,long>())
                 return subset(int64(test), set);
-            else if(typematch<T,ulong>())
+            else if(typeof(T) == typeof(ulong))
                 return subset(uint64(test), set);
             else            
                 throw unsupported<T>();

@@ -31,15 +31,15 @@ namespace Z0
                 return math.signum(uint8(src));
             else if(typematch<T,short>())
                 return math.signum(int16(src));
-            else if(typematch<T,ushort>())
+            else if(typeof(T) == typeof(ushort))
                 return math.signum(uint16(src));
             else if(typematch<T,int>())
                 return math.signum(int32(src));
-            else if(typematch<T,uint>())
+            else if(typeof(T) == typeof(uint))
                 return math.signum(uint32(src));
             else if(typematch<T,long>())
                 return math.signum(int64(src));
-            else if(typematch<T,ulong>())
+            else if(typeof(T) == typeof(ulong))
                 return math.signum(uint64(src));
             else if(typeof(T) == typeof(float))
                 return fmath.signum(float32(src));

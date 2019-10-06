@@ -249,15 +249,15 @@ namespace Z0
                 digits = As.uint8(src).ToString(fmt);
             else if(typematch<T,short>())
                 digits = As.int16(src).ToString(fmt);
-            else if(typematch<T,ushort>())
+            else if(typeof(T) == typeof(ushort))
                 digits = As.uint16(src).ToString(fmt);
             else if(typematch<T,int>())
                 digits = As.int32(src).ToString(fmt);
-            else if(typematch<T,uint>())
+            else if(typeof(T) == typeof(uint))
                 digits = As.uint32(src).ToString(fmt);
             else if(typematch<T,long>())
                 digits = As.int64(src).ToString(fmt);
-            else if(typematch<T,ulong>())
+            else if(typeof(T) == typeof(ulong))
                 digits = As.uint64(src).ToString(fmt);
             else if(typeof(T) == typeof(float))
                 digits = convert<float,int>(As.float32(src)).ToString(fmt);

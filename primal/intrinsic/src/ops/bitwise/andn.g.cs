@@ -31,15 +31,15 @@ namespace Z0
                 return generic<T>(dinx.vandn(uint8(lhs), uint8(rhs)));
             else if(typematch<T,short>())
                 return generic<T>(dinx.vandn(int16(lhs), int16(rhs)));
-            else if(typematch<T,ushort>())
+            else if(typeof(T) == typeof(ushort))
                 return generic<T>(dinx.vandn(uint16(lhs), uint16(rhs)));
             else if(typematch<T,int>())
                 return generic<T>(dinx.vandn(int32(lhs), int32(rhs)));
-            else if(typematch<T,uint>())
+            else if(typeof(T) == typeof(uint))
                 return generic<T>(dinx.vandn(uint32(lhs), uint32(rhs)));
             else if(typematch<T,long>())
                 return generic<T>(dinx.vandn(int64(lhs), int64(rhs)));
-            else if(typematch<T,ulong>())
+            else if(typeof(T) == typeof(ulong))
                 return generic<T>(dinx.vandn(uint64(lhs), uint64(rhs)));
             else if(typeof(T) == typeof(float))
                 return generic<T>(dinx.vandn(float32(lhs), float32(rhs)));
@@ -65,15 +65,15 @@ namespace Z0
                 return generic<T>(dinx.vandn(uint8(lhs), uint8(rhs)));
             else if(typematch<T,short>())
                 return generic<T>(dinx.vandn(int16(lhs), int16(rhs)));
-            else if(typematch<T,ushort>())
+            else if(typeof(T) == typeof(ushort))
                 return generic<T>(dinx.vandn(uint16(lhs), uint16(rhs)));
             else if(typematch<T,int>())
                 return generic<T>(dinx.vandn(int32(lhs), int32(rhs)));
-            else if(typematch<T,uint>())
+            else if(typeof(T) == typeof(uint))
                 return generic<T>(dinx.vandn(uint32(lhs), uint32(rhs)));
             else if(typematch<T,long>())
                 return generic<T>(dinx.vandn(int64(lhs), int64(rhs)));
-            else if(typematch<T,ulong>())
+            else if(typeof(T) == typeof(ulong))
                 return generic<T>(dinx.vandn(uint64(lhs), uint64(rhs)));
             else if(typeof(T) == typeof(float))
                 return generic<T>(dinx.vandn(float32(lhs), float32(rhs)));

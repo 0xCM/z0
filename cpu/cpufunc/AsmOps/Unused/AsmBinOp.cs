@@ -30,15 +30,15 @@ namespace Z0
                 return code.CreateBinOpU8().ToGeneric<BinOpU8,T>();                
             else if(typematch<T,short>())
                 return code.CreateBinOpI16().ToGeneric<BinOpI16,T>();                
-            else if(typematch<T,ushort>())
+            else if(typeof(T) == typeof(ushort))
                 return code.CreateBinOpU16().ToGeneric<BinOpU16,T>();                
             else if(typematch<T,int>())
                 return code.CreateBinOpI32().ToGeneric<BinOpI32,T>();                
-            else if(typematch<T,uint>())
+            else if(typeof(T) == typeof(uint))
                 return code.CreateBinOpU32().ToGeneric<BinOpU32,T>();                
             else if(typematch<T,long>())
                 return code.CreateBinOpI64().ToGeneric<BinOpI64,T>();                
-            else if(typematch<T,ulong>())
+            else if(typeof(T) == typeof(ulong))
                 return code.CreateBinOpU64().ToGeneric<BinOpU64,T>();                
             else if(typeof(T) == typeof(float))
                 return code.CreateBinOpF32().ToGeneric<BinOpF32,T>();                

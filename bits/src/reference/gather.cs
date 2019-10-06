@@ -27,11 +27,11 @@ namespace Z0
         {
             if(typeof(T) == typeof(byte))
                 return generic<T>(gather(uint8(src), uint8(mask)));
-            else if(typematch<T,ushort>())
+            else if(typeof(T) == typeof(ushort))
                 return generic<T>(gather(uint16(src), uint16(mask)));
-            else if(typematch<T,uint>())
+            else if(typeof(T) == typeof(uint))
                 return generic<T>(gather(uint32(src), uint32(mask)));
-            else if(typematch<T,ulong>())
+            else if(typeof(T) == typeof(ulong))
                 return generic<T>(gather(uint64(src), uint64(mask)));
             else            
                 throw unsupported<T>();

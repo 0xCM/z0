@@ -13,18 +13,18 @@ namespace Z0
     using static zfunc;    
 
     [StructLayout(LayoutKind.Sequential, Size = 32)]
-    public struct Perm8
+    public struct Perm8Select
     {
-        public static readonly Perm8 Identity = new Perm8(
-            Perm8Symbol.A, Perm8Symbol.B, Perm8Symbol.C, Perm8Symbol.D, 
-            Perm8Symbol.E, Perm8Symbol.F, Perm8Symbol.G, Perm8Symbol.H);
+        public static readonly Perm8Select Identity = new Perm8Select(
+            Perm8.A, Perm8.B, Perm8.C, Perm8.D, 
+            Perm8.E, Perm8.F, Perm8.G, Perm8.H);
 
-        Perm8Symbol[] terms;
+        Perm8[] terms;
 
-        Perm8(params Perm8Symbol[] terms)
+        Perm8Select(params Perm8[] terms)
             => this.terms = terms;
 
-        public Perm8Symbol this[Perm8Symbol index]
+        public Perm8 this[Perm8 index]
         {
             [MethodImpl(Inline)]
             get => terms[(int)index];
@@ -33,20 +33,20 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public Perm8 Replicate()
+        public Perm8Select Replicate()
         {
-            var dst = new Perm8Symbol[8];
+            var dst = new Perm8[8];
             terms.CopyTo(dst);
-            return new Perm8(dst);
+            return new Perm8Select(dst);
         }
 
         public string Format(int? colwidth = null)
-            => Perm.Format<Perm8Symbol>(terms,colwidth);
+            => Perm.Format<Perm8>(terms,colwidth);
 
         [MethodImpl(Inline)]        
         public Span<T> ToSpan<T>()
             where T : unmanaged
-                => terms.AsSpan().As<Perm8Symbol, T>();
+                => terms.AsSpan().As<Perm8, T>();
 
     }
 
@@ -54,7 +54,7 @@ namespace Z0
     /// Defines canonical literals for representing terms of permutations on 8 symbols
     /// </summary>
     [Flags]
-    public enum Perm8Symbol : uint
+    public enum Perm8 : uint
     {
         /// <summary>
         /// Identifies the first permutation symbol

@@ -32,15 +32,15 @@ namespace Z0
                 Bits.bitmap(int8(in src), srcOffset, len, dstOffset, ref int8(ref dst));
             else if(typematch<T,short>())
                 Bits.bitmap(int16(in src),srcOffset, len, dstOffset, ref int16(ref dst));
-            else if(typematch<T,ushort>())
+            else if(typeof(T) == typeof(ushort))
                 Bits.bitmap(uint16(in src), srcOffset, len, dstOffset, ref uint16(ref dst));
             else if(typematch<T,int>())
                 Bits.bitmap(int32(in src), srcOffset, len, dstOffset, ref int32(ref dst));
-            else if(typematch<T,uint>())
+            else if(typeof(T) == typeof(uint))
                 Bits.bitmap(uint32(in src), srcOffset, len, dstOffset, ref uint32(ref dst));
             else if(typematch<T,long>())
                 Bits.bitmap(int64(in src), srcOffset, len, dstOffset, ref int64(ref dst));
-            else if(typematch<T,ulong>())
+            else if(typeof(T) == typeof(ulong))
                 Bits.bitmap(uint64(in src), srcOffset, len, dstOffset, ref uint64(ref dst));
             else if(typeof(T) == typeof(float))
                 Bits.bitmap(float32(in src), srcOffset, len, dstOffset, ref float32(ref dst));

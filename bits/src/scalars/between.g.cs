@@ -32,15 +32,15 @@ namespace Z0
                  return generic<T>(Bits.between(in uint8(in src), p0, p1));
             else if(typematch<T,short>())
                  return generic<T>(Bits.between(in int16(in src), p0, p1));
-            else if(typematch<T,ushort>())
+            else if(typeof(T) == typeof(ushort))
                  return generic<T>(Bits.between(in uint16(in src), p0, p1));
             else if(typematch<T,int>())
                  return generic<T>(Bits.between(in int32(in src), p0, p1));
-            else if(typematch<T,uint>())
+            else if(typeof(T) == typeof(uint))
                  return generic<T>(Bits.between(in uint32(in src), p0, p1));
             else if(typematch<T,long>())
                  return generic<T>(Bits.between(in int64(in src), p0, p1));
-            else if(typematch<T,ulong>())
+            else if(typeof(T) == typeof(ulong))
                  return generic<T>(Bits.between(in uint64(in src), p0, p1));
             else if(typeof(T) == typeof(float))
                  return generic<T>(Bits.between(in float32(in src), p0, p1));

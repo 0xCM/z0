@@ -30,15 +30,15 @@ namespace Z0
                 return Bits.rank(uint8(src), pos);
             else if(typematch<T,short>())
                 return Bits.rank(int16(src), pos);
-            else if(typematch<T,ushort>())
+            else if(typeof(T) == typeof(ushort))
                 return Bits.rank(uint16(src), pos);
             else if(typematch<T,int>())
                 return Bits.rank(int32(src), pos);
-            else if(typematch<T,uint>())
+            else if(typeof(T) == typeof(uint))
                 return Bits.rank(uint32(src), pos);
             else if(typematch<T,long>())
                 return Bits.rank(int64(src), pos);
-            else if(typematch<T,ulong>())
+            else if(typeof(T) == typeof(ulong))
                 return Bits.rank(uint64(src), pos);
             else            
                 throw unsupported<T>();

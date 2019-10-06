@@ -24,13 +24,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                 return generic<T>(Bits.log2(AsIn.uint8(in asRef(in src))));
-            else if(typematch<T,ushort>())
-                 return generic<T>(Bits.log2(AsIn.uint16(in asRef(in src))));
-            else if(typematch<T,uint>())
-                 return generic<T>(Bits.log2(AsIn.uint32(in asRef(in src))));
-            else if(typematch<T,ulong>())
-                 return generic<T>(Bits.log2(AsIn.uint64(in asRef(in src))));
+                 return generic<T>(Bits.log2(uint8(in asRef(in src))));
+            else if(typeof(T) == typeof(ushort))
+                 return generic<T>(Bits.log2(uint16(in asRef(in src))));
+            else if(typeof(T) == typeof(uint))
+                 return generic<T>(Bits.log2(uint32(in asRef(in src))));
+            else if(typeof(T) == typeof(ulong))
+                 return generic<T>(Bits.log2(uint64(in asRef(in src))));
             else 
                 throw unsupported<T>();
         }

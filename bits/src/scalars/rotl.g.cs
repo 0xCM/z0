@@ -25,11 +25,11 @@ namespace Z0
         {
             if(typeof(T) == typeof(byte))
                 return generic<T>(Bits.rotl(uint8(src), uint8(offset)));
-            else if(typematch<T,ushort>())
+            else if(typeof(T) == typeof(ushort))
                 return generic<T>(Bits.rotl(uint16(src), uint16(offset)));
-            else if(typematch<T,uint>())
+            else if(typeof(T) == typeof(uint))
                 return generic<T>(Bits.rotl(uint32(src), uint32(offset)));
-            else if(typematch<T,ulong>())
+            else if(typeof(T) == typeof(ulong))
                 return generic<T>(Bits.rotl(uint64(src), uint64(offset)));
             else            
                 throw unsupported<T>();
@@ -47,11 +47,11 @@ namespace Z0
         {
             if(typeof(T) == typeof(byte))
                 Bits.rotl(ref uint8(ref src), uint8(in offset));
-            else if(typematch<T,ushort>())
+            else if(typeof(T) == typeof(ushort))
                 Bits.rotl(ref uint16(ref src), uint16(in offset));
-            else if(typematch<T,uint>())
+            else if(typeof(T) == typeof(uint))
                 Bits.rotl(ref uint32(ref src), uint32(in offset));
-            else if(typematch<T,ulong>())
+            else if(typeof(T) == typeof(ulong))
                 Bits.rotl(ref uint64(ref src), uint64(in offset));
             else            
                 throw unsupported<T>();

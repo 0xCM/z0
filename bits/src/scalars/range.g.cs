@@ -30,15 +30,15 @@ namespace Z0
                 return generic<T>(Bits.range(uint8(src),i0,i1));
             else if(typematch<T,short>())
                 return generic<T>(Bits.range(int16(src),i0,i1));
-            else if(typematch<T,ushort>())
+            else if(typeof(T) == typeof(ushort))
                 return generic<T>(Bits.range(uint16(src),i0,i1));
             else if(typematch<T,int>())
                 return generic<T>(Bits.range(int32(src),i0,i1));
-            else if(typematch<T,uint>())
+            else if(typeof(T) == typeof(uint))
                 return generic<T>(Bits.range(uint32(src),i0,i1));
             else if(typematch<T,long>())
                 return generic<T>(Bits.range(int64(src),i0,i1));
-            else if(typematch<T,ulong>())
+            else if(typeof(T) == typeof(ulong))
                 return generic<T>(Bits.range(uint64(src),i0,i1));
             else if(typeof(T) == typeof(float))
                 return generic<T>(Bits.range(float32(src),i0,i1));

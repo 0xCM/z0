@@ -28,15 +28,15 @@ namespace Z0
                 return zfunc.odd(uint8(src));  
             else if(typematch<T,short>())
                 return zfunc.odd(int16(src));  
-            else if(typematch<T,ushort>())
+            else if(typeof(T) == typeof(ushort))
                 return zfunc.odd(uint16(src));  
             else if(typematch<T,int>())
                 return zfunc.odd(int32(src));  
-            else if(typematch<T,uint>())
+            else if(typeof(T) == typeof(uint))
                 return zfunc.odd(uint32(src));  
             else if(typematch<T,long>())
                 return zfunc.odd(int64(src));  
-            else if(typematch<T,ulong>())
+            else if(typeof(T) == typeof(ulong))
                 return zfunc.odd(uint64(src));  
             else            
                 throw unsupported<T>();

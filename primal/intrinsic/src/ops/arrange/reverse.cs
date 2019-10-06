@@ -18,10 +18,6 @@ namespace Z0
         
         static readonly Vec256<int> MRev256f32 = Vec256.FromParts(7, 6, 5, 4, 3, 2, 1, 0);    
 
-        const byte MRev128i32 = 0b00_01_10_11;
-
-        const byte MRev128u32 = 0b00_01_10_11;
-        
 
         [MethodImpl(Inline)]
         public static Vec128<byte> swap(in Vec128<byte> src, params Swap[] swaps)
@@ -49,7 +45,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
         public static Vec128<int> reverse(in Vec128<int> src)
-            => shuffle(src, MRev128i32);
+            => shuffle(src, Perm4.DCBA);
 
         /// <summary>
         /// Creates a new vector by reversing the componets in the source vector
@@ -57,7 +53,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
         public static Vec128<uint> reverse(in Vec128<uint> src)
-            => shuffle(src, MRev128u32);
+            => shuffle(src, Perm4.DCBA);
 
         [MethodImpl(Inline)]
         public static Vec256<byte> reverse(in Vec256<byte> src)

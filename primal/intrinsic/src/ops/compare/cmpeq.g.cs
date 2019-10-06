@@ -31,15 +31,15 @@ namespace Z0
                 return dinx.cmpeq(in uint8(in lhs), in uint8(in rhs)).As<T>();
             else if(typematch<T,short>())
                 return dinx.cmpeq(in int16(in lhs), in int16(in rhs)).As<T>();
-            else if(typematch<T,ushort>())
+            else if(typeof(T) == typeof(ushort))
                 return dinx.cmpeq(in uint16(in lhs), in uint16(in rhs)).As<T>();
             else if(typematch<T,int>())
                 return dinx.cmpeq(in int32(in lhs), in int32(in rhs)).As<T>();
-            else if(typematch<T,uint>())
+            else if(typeof(T) == typeof(uint))
                 return dinx.cmpeq(in uint32(in lhs), in uint32(in rhs)).As<T>();
             else if(typematch<T,long>())
                 return dinx.cmpeq(in int64(in lhs), in int64(in rhs)).As<T>();
-            else if(typematch<T,ulong>())
+            else if(typeof(T) == typeof(ulong))
                 return dinx.cmpeq(in uint64(in lhs), in uint64(in rhs)).As<T>();
             else if(typeof(T) == typeof(float))
                 return dfp.cmpeq(in float32(in lhs), in float32(in rhs)).As<T>();
@@ -66,15 +66,15 @@ namespace Z0
                 return dinx.cmpeq(in uint8(in lhs), in uint8(in rhs)).As<T>();
             else if(typematch<T,short>())
                 return dinx.cmpeq(in int16(in lhs), in int16(in rhs)).As<T>();
-            else if(typematch<T,ushort>())
+            else if(typeof(T) == typeof(ushort))
                 return dinx.cmpeq(in uint16(in lhs), in uint16(in rhs)).As<T>();
             else if(typematch<T,int>())
                 return dinx.cmpeq(in int32(in lhs), in int32(in rhs)).As<T>();
-            else if(typematch<T,uint>())
+            else if(typeof(T) == typeof(uint))
                 return dinx.cmpeq(in uint32(in lhs), in uint32(in rhs)).As<T>();
             else if(typematch<T,long>())
                 return dinx.cmpeq(in int64(in lhs), in int64(in rhs)).As<T>();
-            else if(typematch<T,ulong>())
+            else if(typeof(T) == typeof(ulong))
                 return dinx.cmpeq(in uint64(in lhs), in uint64(in rhs)).As<T>();
             else if(typeof(T) == typeof(float))
                 return dfp.cmpeq(in float32(in lhs), in float32(in rhs)).As<T>();

@@ -226,15 +226,15 @@ namespace Z0
                     next = generic<T>(src.Next<byte>(domain.As<byte>()));                    
                 else if(typematch<T,short>())
                     next = generic<T>(src.Next<short>(domain.As<short>()));                    
-                else if(typematch<T,ushort>())
+                else if(typeof(T) == typeof(ushort))
                     next = generic<T>(src.Next<ushort>(domain.As<ushort>()));                    
                 else if(typematch<T,int>())
                     next = generic<T>(src.Next<int>(domain.As<int>()));                    
-                else if(typematch<T,uint>())
+                else if(typeof(T) == typeof(uint))
                     next = generic<T>(src.Next<uint>(domain.As<uint>()));                    
                 else if(typematch<T,long>())
                     next = generic<T>(src.Next<long>(domain.As<long>()));                    
-                else if(typematch<T,ulong>())
+                else if(typeof(T) == typeof(ulong))
                     next = generic<T>(src.Next<ulong>(domain.As<ulong>()));                    
                 else if(typeof(T) == typeof(float))
                     next = generic<T>(src.Next<float>(domain.As<float>()));                    

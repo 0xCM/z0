@@ -25,15 +25,15 @@ namespace Z0
                 return math.isPow2(uint8(src));
             else if(typematch<T,short>())
                 return math.isPow2(int16(src));
-            else if(typematch<T,ushort>())
+            else if(typeof(T) == typeof(ushort))
                 return math.isPow2(uint16(src));
             else if(typematch<T,int>())
                 return math.isPow2(int32(src));
-            else if(typematch<T,uint>())
+            else if(typeof(T) == typeof(uint))
                 return math.isPow2(uint32(src));
             else if(typematch<T,long>())
                 return math.isPow2(int64(src));
-            else if(typematch<T,ulong>())
+            else if(typeof(T) == typeof(ulong))
                 return math.isPow2(uint64(src));
             else            
                 throw unsupported<T>();

@@ -66,11 +66,11 @@ namespace Z0
         {
             if(typeof(T) == typeof(byte))
                 return generic<T>(uint8(src).Contract(uint8(max)));
-            else if(typematch<T,ushort>())
+            else if(typeof(T) == typeof(ushort))
                 return generic<T>(uint16(src).Contract(uint16(max)));
-            else if(typematch<T,uint>())
+            else if(typeof(T) == typeof(uint))
                 return generic<T>(uint32(src).Contract(uint32(max)));
-            else if(typematch<T,ulong>())
+            else if(typeof(T) == typeof(ulong))
                 return generic<T>(uint64(src).Contract(uint64(max)));
             else
                 throw unsupported<T>();

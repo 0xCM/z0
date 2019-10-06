@@ -32,7 +32,7 @@ namespace Z0
                 uint8(src).ShiftL(offsets, uint8(dst));
             else if(typematch<T,short>())
                 int16(src).ShiftL(offsets, int16(dst));
-            else if(typematch<T,ushort>())
+            else if(typeof(T) == typeof(ushort))
                 uint16(src).ShiftL(offsets, uint16(dst));
             else if (typeof(T) == typeof(int))
                 int32(src).ShiftL(offsets, int32(dst));
@@ -79,7 +79,7 @@ namespace Z0
                 uint8(src).ShiftL(offset, uint8(dst));
             else if(typematch<T,short>())
                 int16(src).ShiftL(offset, int16(dst));
-            else if(typematch<T,ushort>())
+            else if(typeof(T) == typeof(ushort))
                 uint16(src).ShiftL(offset, uint16(dst));
             else if (typeof(T) == typeof(int))
                 int32(src).ShiftL(offset, int32(dst));
