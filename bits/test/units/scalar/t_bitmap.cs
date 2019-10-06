@@ -13,6 +13,8 @@ namespace Z0
 
     public class t_bitmap : ScalarBitTest<t_bitmap>
     {
+        
+        
         void bitmap_assorted()
         {
             var x1 = 0b1110101_10111_0011111u;

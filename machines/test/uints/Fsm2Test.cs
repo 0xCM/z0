@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2019
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Machines.Test
+namespace Z0.Machines
 {        
     using System;
     using System.Linq;
@@ -14,7 +14,7 @@ namespace Z0.Machines.Test
 
     using static zfunc;
     
-    public class t_fsm2 : UnitTest<t_fsm2>
+    public class Fsm2Test : UnitTest<Fsm2Test>
     {
 
 

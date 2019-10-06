@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2019
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Events
+namespace Z0
 {
     using System;
     using System.Timers;
@@ -26,8 +26,7 @@ namespace Z0.Events
         
         void OnPulse(object sender, ElapsedEventArgs args)
         {
-            var e = PulseEvent.Define(ServerId, AgentId, SystemTime.Timestamp());            
-            SystemEventWriter.Log.Pulse(e);
+            Context.EventLog.Pulse(PulseEvent.Define(ServerId, AgentId, SystemTime.Timestamp()));      
         }
 
         Timer Timer {get;}

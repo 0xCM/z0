@@ -38,13 +38,6 @@ namespace Z0
         public static BitVector32 Alloc()
             => new BitVector32(0);
 
-        /// <summary>
-        /// Creates a permutation-defined mask
-        /// </summary>
-        /// <param name="spec">The permutation</param>
-        [MethodImpl(Inline)]
-        public static BitVector32 Mask(Perm spec)
-            => bitvector.mask(spec, out BitVector32 dst);
 
         /// <summary>
         /// Creates a vector from an usigned 32-bit integer

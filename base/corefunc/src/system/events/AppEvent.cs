@@ -19,6 +19,8 @@ namespace Z0
     /// </summary>
     public readonly struct AppEvent
     {
+        public readonly EventIdentity EventId;
+
         [MethodImpl(Inline)]
         public static AppEvent Define(EventIdentity id)
             => new AppEvent(id);
@@ -28,13 +30,10 @@ namespace Z0
             where T : unmanaged
             => new AppEvent<T>(id, data);
 
-        public readonly EventIdentity EventId;
-
         [MethodImpl(Inline)]
         public AppEvent(EventIdentity id)
             => EventId = id;
     }
-
 
     /// <summary>
     /// Represents an application-level/logical event with which data
@@ -50,6 +49,13 @@ namespace Z0
         /// </summary>
         public readonly T Payload;
 
+        /// <summary>
+        /// Reconstitutes an event from a sequence of bytes
+        /// </summary>
+        [MethodImpl(Inline)]
+        public static AppEvent<T> Materialize(Span<byte> src)
+            => ByteSpan.ReadValue<AppEvent<T>>(src);
+
         [MethodImpl(Inline)]
         public static implicit operator AppEvent(AppEvent<T> src)
             => new AppEvent(src.EventId);
@@ -61,6 +67,12 @@ namespace Z0
             Payload = data;
         }            
 
+        /// <summary>
+        /// Renders the event as a sequence of bytes
+        /// </summary>
+        [MethodImpl(Inline)]
+        public Span<byte> Serialize()
+            => ByteSpan.FromValue(this);
+        
     }
-
 }

@@ -26,11 +26,11 @@ namespace Z0
         public static Span<T> ShiftL<T>(ReadOnlySpan<T> src, ReadOnlySpan<int> offsets, Span<T> dst)
             where T : unmanaged
         {
-            if(typematch<T,sbyte>())
+            if(typeof(T) == typeof(sbyte))
                 int8(src).ShiftL(offsets, int8(dst));
-            else if(typematch<T,byte>())
+            else if(typeof(T) == typeof(byte))
                 uint8(src).ShiftL(offsets, uint8(dst));
-            else if(typematch<T,short>())
+            else if(typeof(T) == typeof(short))
                 int16(src).ShiftL(offsets, int16(dst));
             else if(typeof(T) == typeof(ushort))
                 uint16(src).ShiftL(offsets, uint16(dst));
@@ -73,11 +73,11 @@ namespace Z0
         public static Span<T> ShiftL<T>(ReadOnlySpan<T> src, int offset, Span<T> dst)
             where T : unmanaged
         {
-            if(typematch<T,sbyte>())
+            if(typeof(T) == typeof(sbyte))
                 int8(src).ShiftL(offset, int8(dst));
-            else if(typematch<T,byte>())
+            else if(typeof(T) == typeof(byte))
                 uint8(src).ShiftL(offset, uint8(dst));
-            else if(typematch<T,short>())
+            else if(typeof(T) == typeof(short))
                 int16(src).ShiftL(offset, int16(dst));
             else if(typeof(T) == typeof(ushort))
                 uint16(src).ShiftL(offset, uint16(dst));

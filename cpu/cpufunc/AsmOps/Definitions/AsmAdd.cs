@@ -40,19 +40,19 @@ namespace Z0
         static AsmCode<T> AddCode<T>()
             where T : unmanaged
         {
-            if(typematch<T,sbyte>())
+            if(typeof(T) == typeof(sbyte))
                 return AsmCode.FromBytes<T>(add8iBytes);
-            else if(typematch<T,byte>())
+            else if(typeof(T) == typeof(byte))
                 return AsmCode.FromBytes<T>(add8uBytes);
-            else if(typematch<T,short>())
+            else if(typeof(T) == typeof(short))
                 return AsmCode.FromBytes<T>(add16iBytes);
             else if(typeof(T) == typeof(ushort))
                 return AsmCode.FromBytes<T>(add16uBytes);
-            else if(typematch<T,int>())
+            else if(typeof(T) == typeof(int))
                 return AsmCode.FromBytes<T>(add32iBytes);
             else if(typeof(T) == typeof(uint))
                 return AsmCode.FromBytes<T>(add32uBytes);
-            else if(typematch<T,long>())
+            else if(typeof(T) == typeof(long))
                 return AsmCode.FromBytes<T>(add64iBytes);
             else if(typeof(T) == typeof(ulong))
                 return AsmCode.FromBytes<T>(add64uBytes);

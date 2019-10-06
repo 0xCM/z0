@@ -22,7 +22,7 @@ namespace Z0
         /// <param name="y">The right bitvector</param>
         [MethodImpl(Inline)]
         public static BitVector4 add(BitVector4 x, BitVector4 y)
-            => (byte)Mod<N16>.mod(math.add(x.Scalar, y.Scalar));
+            => new BitVector4((byte)Mod16.mod(math.add(x.data, y.data)));
 
         /// <summary>
         /// Computes the arithmetic sum of two bitvectors

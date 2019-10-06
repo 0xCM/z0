@@ -668,13 +668,6 @@ namespace Z0
             data = Bits.rev(data);
         }
 
-        /// <summary>
-        /// Creates a permutation-defined mask
-        /// </summary>
-        /// <param name="spec">The permutation</param>
-        [MethodImpl(Inline)]
-        public static BitVector16 Mask(Perm spec)
-            => bitvector.mask(spec, out BitVector16 dst);
 
         /// <summary>
         /// Rearranges the vector in-place as specified by a permutation

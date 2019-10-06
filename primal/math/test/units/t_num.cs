@@ -100,7 +100,7 @@ namespace Z0.Test
 
             if(typeof(T) == typeof(int))
                 time = add32i_bench();
-            else if(typematch<T,long>())
+            else if(typeof(T) == typeof(long))
                 time = add64i_bench();
             else if(typeof(T) == typeof(ulong))
                 time = add64u_bench();

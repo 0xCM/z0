@@ -121,7 +121,5 @@ namespace Z0.Machines
         }
 
         static int MachineCounter = 0;
-
-
      }
 }

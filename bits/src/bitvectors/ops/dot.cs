@@ -20,7 +20,7 @@ namespace Z0
         /// </summary>
         /// <param name="rhs">The right operand</param>
         public static Bit dot(BitVector4 lhs, BitVector4 rhs)
-            => Mod<N2>.mod((uint)Bits.pop(lhs.data & rhs.data));              
+            => odd((uint)Bits.pop(lhs.data & rhs.data));              
 
         /// <summary>
         /// Computes the scalar product of the source vector and another
@@ -28,7 +28,7 @@ namespace Z0
         /// <param name="rhs">The right operand</param>
         [MethodImpl(Inline)]
         public static Bit dot(BitVector8 lhs, BitVector8 rhs)
-            => mod<N2>(Bits.pop(lhs.data & rhs.data));              
+            => odd(Bits.pop(lhs.data & rhs.data));              
 
         /// <summary>
         /// Computes the scalar product of the source vector and another
@@ -36,7 +36,7 @@ namespace Z0
         /// <param name="rhs">The right operand</param>
         [MethodImpl(Inline)]
         public static Bit dot(BitVector16 lhs, BitVector16 rhs)
-            => mod<N2>(Bits.pop(lhs.data & rhs.data));              
+            => odd(Bits.pop(lhs.data & rhs.data));              
 
         /// <summary>
         /// Computes the scalar product of the source vector and another
@@ -44,7 +44,7 @@ namespace Z0
         /// <param name="rhs">The right operand</param>
         [MethodImpl(Inline)]
         public static Bit dot(BitVector32 lhs, BitVector32 rhs)
-            => mod<N2>(Bits.pop(lhs.data & rhs.data));              
+            => odd(Bits.pop(lhs.data & rhs.data));              
 
 
         /// <summary>
@@ -53,7 +53,7 @@ namespace Z0
         /// <param name="rhs">The right operand</param>
         [MethodImpl(Inline)]
         public static Bit dot(BitVector64 lhs, BitVector64 rhs)
-            => mod<N2>(Bits.pop(lhs.data & rhs.data));              
+            => odd(Bits.pop(lhs.data & rhs.data));   //mod<N2>(Bits.pop(lhs.data & rhs.data));              
 
     }
 

@@ -19,19 +19,19 @@ namespace Z0
         public static T parse<T>(string src)
             where T : unmanaged
         {
-            if(typematch<T,sbyte>())
+            if(typeof(T) == typeof(sbyte))
                 return generic<T>(math.parse(src, out sbyte x));
-            else if(typematch<T,byte>())
+            else if(typeof(T) == typeof(byte))
                 return generic<T>(math.parse(src, out byte x));
-            else if(typematch<T,short>())
+            else if(typeof(T) == typeof(short))
                 return generic<T>(math.parse(src, out short x));
             else if(typeof(T) == typeof(ushort))
                 return generic<T>(math.parse(src, out ushort x));
-            else if(typematch<T,int>())
+            else if(typeof(T) == typeof(int))
                 return generic<T>(math.parse(src, out int x));
             else if(typeof(T) == typeof(uint))
                 return generic<T>(math.parse(src, out uint x));
-            else if(typematch<T,long>())
+            else if(typeof(T) == typeof(long))
                 return generic<T>(math.parse(src, out long x));
             else if(typeof(T) == typeof(ulong))
                 return generic<T>(math.parse(src, out ulong x));
@@ -47,19 +47,19 @@ namespace Z0
         public static ref T parse<T>(string src, out T dst)
             where T : unmanaged
         {
-            if(typematch<T,sbyte>())
+            if(typeof(T) == typeof(sbyte))
                 dst = generic<T>(math.parse(src, out sbyte x));
-            else if(typematch<T,byte>())
+            else if(typeof(T) == typeof(byte))
                 dst = generic<T>(math.parse(src, out byte x));
-            else if(typematch<T,short>())
+            else if(typeof(T) == typeof(short))
                 dst = generic<T>(math.parse(src, out short x));
             else if(typeof(T) == typeof(ushort))
                 dst = generic<T>(math.parse(src, out ushort x));
-            else if(typematch<T,int>())
+            else if(typeof(T) == typeof(int))
                 dst = generic<T>(math.parse(src, out int x));
             else if(typeof(T) == typeof(uint))
                 dst = generic<T>(math.parse(src, out uint x));
-            else if(typematch<T,long>())
+            else if(typeof(T) == typeof(long))
                 dst = generic<T>(math.parse(src, out long x));
             else if(typeof(T) == typeof(ulong))
                 dst = generic<T>(math.parse(src, out ulong x));

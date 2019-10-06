@@ -18,19 +18,10 @@ namespace  Z0
         /// Determines whether a collection contains any elements
         /// </summary>
         /// <typeparam name="T">The type of item contained by the collection</typeparam>
-        /// <param name="collection">The collection to examine</param>
+        /// <param name="src">The collection to examine</param>
         [MethodImpl(Inline)]
-        public static bool IsEmpty<T>(this IReadOnlyCollection<T> collection)
-             => collection.Count == 0;
-
-        /// <summary>
-        /// Determines whether a collection contains at least one element
-        /// </summary>
-        /// <typeparam name="T">The type of item contained by the collection</typeparam>
-        /// <param name="collection">The collection to examine</param>
-        [MethodImpl(Inline)]
-        public static bool IsNonEmpty<T>(this IReadOnlyCollection<T> collection)
-            => collection.Count != 0;
+        public static bool IsEmpty<T>(this IReadOnlyCollection<T> src)
+             => src.Count == 0;
 
         /// <summary>
         /// Adds items to a list

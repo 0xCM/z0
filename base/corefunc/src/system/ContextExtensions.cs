@@ -16,12 +16,6 @@ namespace Z0
 
     public static class ContextExtensions
     {
-        /// <summary>
-        /// Determines the identiy of an agent
-        /// </summary>
-        /// <param name="agent">The agent</param>
-        public static AgentIdentity Identity(this IServiceAgent agent)
-            => (agent.ServerId, agent.AgentId);
    
         /// <summary>
         /// Searches a context for an active agent wth a specified identity

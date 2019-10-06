@@ -30,6 +30,7 @@ namespace Z0
             return (byte)prod;
         }
 
+    
         /// <summary>
         /// Computes the carryless product of the operands reduced by a specified polynomial
         /// </summary>

@@ -24,13 +24,13 @@ namespace Z0
         public static bool negative<T>(T src)
             where T : unmanaged
         {                        
-            if(typematch<T,sbyte>())
+            if(typeof(T) == typeof(sbyte))
                 return int8(src) < 0;
-            else if(typematch<T,short>())
+            else if(typeof(T) == typeof(short))
                 return int16(src) < 0;
-            else if(typematch<T,int>())
+            else if(typeof(T) == typeof(int))
                 return int32(src) < 0;
-            else if(typematch<T,long>())
+            else if(typeof(T) == typeof(long))
                 return int64(src) < 0;
             else if(typematch<T,float>())
                 return float32(src) < 0;

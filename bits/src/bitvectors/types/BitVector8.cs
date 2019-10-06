@@ -36,13 +36,6 @@ namespace Z0
         public static BitVector8 Alloc()
             => new BitVector8();
 
-        /// <summary>
-        /// Creates a permutation-defined mask
-        /// </summary>
-        /// <param name="spec">The permutation</param>
-        [MethodImpl(Inline)]
-        public static BitVector8 Mask(Perm spec)
-            => bitvector.mask(spec, out BitVector8 dst);
 
         [MethodImpl(Inline)]
         public static BitVector8 Parse(string src)

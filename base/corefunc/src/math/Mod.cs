@@ -11,6 +11,37 @@ namespace Z0
         
     using static zfunc;    
 
+    public readonly struct Mod16
+    {
+        const ulong N = 16;
+
+        const ulong M = UInt64.MaxValue / N + 1;
+
+        /// <summary>
+        /// Computes a % N
+        /// </summary>
+        /// <param name="a">The dividend</param>
+        [MethodImpl(Inline)]
+        public static uint mod(uint a)
+            => (uint) UMul.himul(M * a, N);
+
+        /// <summary>
+        /// Computes the quotient a / N
+        /// </summary>
+        /// <param name="a">The dividend</param>
+        [MethodImpl(Inline)]
+        public static uint div(uint a)        
+            => (uint) UMul.himul(M, a);
+
+        /// <summary>
+        /// Computes both the quotient and remainder
+        /// </summary>
+        /// <param name="a"></param>
+        [MethodImpl(Inline)]
+        public static (uint q, uint r) divrem(uint a)
+            => (div(a), mod(a));            
+    }
+
     /// <summary>
     /// Defines mod/div operations
     /// </summary>
@@ -183,7 +214,7 @@ namespace Z0
         /// <param name="a">The dividend</param>
         [MethodImpl(Inline)]
         public uint mod(uint a)
-            => (uint) UMul.mulHi(M * a, n);
+            => (uint) UMul.himul(M * a, n);
 
         /// <summary>
         /// Computes the quotient a / n
@@ -191,7 +222,7 @@ namespace Z0
         /// <param name="a">The dividend</param>
         [MethodImpl(Inline)]
         public uint div(uint a)        
-            => (uint) UMul.mulHi(M, a);
+            => (uint) UMul.himul(M, a);
 
         /// <summary>
         /// Computes the quotient and remainder

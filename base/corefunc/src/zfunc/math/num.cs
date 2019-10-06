@@ -109,7 +109,7 @@ partial class zfunc
     public static IEnumerable<T> range<T>(T x0, T x1, T? step = null)
         where T : unmanaged
     {
-        if(typematch<T,sbyte>())
+        if(typeof(T) == typeof(sbyte))
         {
             var min = int8(x0);
             var max = int8(x1);
@@ -117,7 +117,7 @@ partial class zfunc
             for(var i = min; i <= max; i += _step)            
                 yield return generic<T>(i);
         }
-        else if(typematch<T,byte>())
+        else if(typeof(T) == typeof(byte))
         {
             var min = uint8(x0);
             var max = uint8(x1);
@@ -125,7 +125,7 @@ partial class zfunc
             for(var i = min; i <= max; i += _step)            
                 yield return generic<T>(i);
         }
-        else if(typematch<T,short>())
+        else if(typeof(T) == typeof(short))
         {
             var min = int16(x0);
             var max = int16(x1);
@@ -141,7 +141,7 @@ partial class zfunc
             for(var i = min; i <= max; i += _step)            
                 yield return generic<T>(i);
         }
-        else if(typematch<T,int>())
+        else if(typeof(T) == typeof(int))
         {
             var min = int32(x0);
             var max = int32(x1);
@@ -157,7 +157,7 @@ partial class zfunc
             for(var i = min; i <= max; i += _step)            
                 yield return generic<T>(i);
         }
-        else if(typematch<T,long>())
+        else if(typeof(T) == typeof(long))
         {
             var min = int64(x0);
             var max = int64(x1);

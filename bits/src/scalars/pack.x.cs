@@ -13,7 +13,6 @@ namespace Z0
 
     partial class BitsX
     {       
-
         [MethodImpl(Inline)]        
         public static Span<byte> Unpack(this Span<byte> src)
             => BitParts.unpack8x1(src, new byte[src.Length*8]);

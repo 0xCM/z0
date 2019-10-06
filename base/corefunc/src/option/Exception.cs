@@ -8,7 +8,6 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
     using System.Collections;
-    
 
     /// <summary>
     /// An exception to which typed error data can be attached
@@ -16,13 +15,11 @@ namespace Z0
     /// <typeparam name="T">The error data type</typeparam>
     public class Exception<T> : Exception
     {
-
         public Exception(string message, T Content = default)
         {
             this.AppMessage = AppMessage;
             this.Content = Content;
         }
-
 
         public Exception(string reason, string member, string path, int line)
             : base(reason)

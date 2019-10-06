@@ -39,7 +39,7 @@ namespace Z0
         public static ref T loff<T>(ref T src)
             where T : unmanaged
         {
-            if(typematch<T,sbyte>())
+            if(typeof(T) == typeof(sbyte))
                  loff(ref int8(ref src));
             if(typeof(T) == typeof(byte))
                  loff(ref uint8(ref src));

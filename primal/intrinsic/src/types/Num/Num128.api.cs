@@ -24,19 +24,19 @@ namespace Z0
         public static Scalar128<T> define<T>(T value)
             where T : unmanaged        
         {
-            if(typematch<T,sbyte>())
+            if(typeof(T) == typeof(sbyte))
                 return  scalar<T>(int8(value));
-            else if(typematch<T,byte>())
+            else if(typeof(T) == typeof(byte))
                 return  scalar<T>(uint8(value));
-            else if(typematch<T,short>())
+            else if(typeof(T) == typeof(short))
                 return  scalar<T>(int16(value));
             else if(typeof(T) == typeof(ushort))
                 return  scalar<T>(uint16(value));
-            else if(typematch<T,int>())
+            else if(typeof(T) == typeof(int))
                 return  scalar<T>(int32(value));
             else if(typeof(T) == typeof(uint))
                 return  scalar<T>(uint32(value));
-            else if(typematch<T,long>())
+            else if(typeof(T) == typeof(long))
                 return  scalar<T>(int64(value));
             else if(typeof(T) == typeof(ulong))
                 return  scalar<T>(uint64(value));

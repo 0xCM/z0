@@ -17,22 +17,17 @@ namespace Z0
         ConcurrentDictionary<ulong, IServiceAgent> Agents {get;}
             = new ConcurrentDictionary<ulong, IServiceAgent>();
 
-        public AgentContext(IPolyrand random)
+        public AgentContext(IPolyrand random, ISystemEvents EventLog)
             : base(random)
         {
-
+            this.EventLog = EventLog;
         }
 
-        public AgentContext()
-            : base(Rng.XOrShift1024(Seed1024.AppSeed).ToPolyrand())
-        {
-
-
-        }
+        public ISystemEvents EventLog {get;}
 
         public void Register(IServiceAgent agent)
         {
-            Agents.TryAdd(agent.Identity(), agent);
+            Agents.TryAdd(agent.Identity, agent);
         }
         
 

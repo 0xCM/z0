@@ -346,19 +346,19 @@ namespace Z0
         public static T dot<T>(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs)
             where T : unmanaged
         {
-            if(typematch<T,sbyte>())
+            if(typeof(T) == typeof(sbyte))
                 return generic<T>(mathspan.dot(int8(lhs), int8(rhs)));
-            else if(typematch<T,byte>())
+            else if(typeof(T) == typeof(byte))
                 return generic<T>(mathspan.dot(uint8(lhs), uint8(rhs)));
-            else if(typematch<T,short>())
+            else if(typeof(T) == typeof(short))
                 return generic<T>(mathspan.dot(int16(lhs), int16(rhs)));
             else if(typeof(T) == typeof(ushort))
                 return generic<T>(mathspan.dot(uint16(lhs), uint16(rhs)));
-            else if(typematch<T,int>())
+            else if(typeof(T) == typeof(int))
                 return generic<T>(mathspan.dot(int32(lhs), int32(rhs)));
             else if(typeof(T) == typeof(uint))
                 return generic<T>(mathspan.dot(uint32(lhs), uint32(rhs)));
-            else if(typematch<T,long>())
+            else if(typeof(T) == typeof(long))
                 return generic<T>(mathspan.dot(int64(lhs), int64(rhs)));
             else if(typeof(T) == typeof(ulong))
                 return generic<T>(mathspan.dot(uint64(lhs), uint64(rhs)));
@@ -802,19 +802,19 @@ namespace Z0
             }
 
 
-            if(typematch<T,sbyte>())
+            if(typeof(T) == typeof(sbyte))
                 return generic<T>(avg8i(int8(src)));
-            else if(typematch<T,byte>())
+            else if(typeof(T) == typeof(byte))
                 return generic<T>(avg8u(uint8(src)));
-            else if(typematch<T,short>())
+            else if(typeof(T) == typeof(short))
                 return generic<T>(avg16i(int16(src)));
             else if(typeof(T) == typeof(ushort))
                 return generic<T>(avg16u(uint16(src)));
-            else if(typematch<T,int>())
+            else if(typeof(T) == typeof(int))
                 return generic<T>(avg32i(int32(src)));
             else if(typeof(T) == typeof(uint))
                 return generic<T>(avg32u(uint32(src)));
-            else if(typematch<T,long>())
+            else if(typeof(T) == typeof(long))
                 return generic<T>(avg64i(int64(src)));
             else if(typeof(T) == typeof(ulong))
                 return generic<T>(avg64u(uint64(src)));

@@ -17,6 +17,13 @@ namespace Z0
     /// </summary>
     public static unsafe class UMul
     {
+        [MethodImpl(Inline)]
+        public static (ulong lo, ulong hi)  mul(ulong lhs, ulong rhs)
+        {
+            var lo = 0ul;
+            var hi = Bmi2.X64.MultiplyNoFlags(lhs,rhs, refptr(ref lo));
+            return (lo,hi);
+        }
 
         /// <summary>
         /// Computes the 128-bit product of two 64-bit unsigned integers
@@ -62,10 +69,17 @@ namespace Z0
         /// the result is obtained from the hi 64 bits of the 128-bit product
         /// </summary>
         [MethodImpl(Inline)]
-        public static ulong mulHi(ulong lhs, ulong rhs)
+        public static ulong himul(ulong lhs, ulong rhs)
         {
-            UMul.mulHi(lhs,rhs, out ulong hi);
+            UMul.himul(lhs,rhs, out ulong hi);
             return hi;
+        }
+
+        [MethodImpl(Inline)]
+        public static ulong lomul(ulong lhs, ulong rhs)
+        {
+            UMul.lomul(lhs,rhs, out ulong lo);
+            return lo;
         }
 
         /// <summary>
@@ -75,7 +89,7 @@ namespace Z0
         /// <param name="rhs">The right operand</param>
         /// <param name="dst">The receiver</param>
         [MethodImpl(Inline)]
-        public static void mulHi(ulong lhs, ulong rhs, out ulong dst)
+        public static void himul(ulong lhs, ulong rhs, out ulong dst)
             => mul(lhs, rhs, out ulong lo, out dst);
 
         /// <summary>
@@ -85,7 +99,7 @@ namespace Z0
         /// <param name="rhs">The right operand</param>
         /// <param name="dst">The receiver</param>
         [MethodImpl(Inline)]
-        public static void mulLo(ulong lhs, ulong rhs, out ulong dst)
+        public static void lomul(ulong lhs, ulong rhs, out ulong dst)
             => mul(lhs,rhs, out dst, out ulong hi);
 
         /// <summary>

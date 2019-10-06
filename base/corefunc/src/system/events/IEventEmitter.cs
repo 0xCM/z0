@@ -5,15 +5,15 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics.X86;
-    using Z0;
- 
-    using static zfunc;
-    
-    partial class Bits
-    {                
-             
+    using System.Threading.Tasks;
+
+    /// <summary>
+    /// Characterizes an event orignator
+    /// </summary>
+    public interface IEventEmitter : IServiceAgent
+    {        
+
     }
+
 
 }

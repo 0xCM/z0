@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2019
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Events
+namespace Z0
 {
     /// <summary>
     /// Bears witness to an occurence of something of identifiable interest 

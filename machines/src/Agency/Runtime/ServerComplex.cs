@@ -8,7 +8,6 @@ namespace Z0
     using System.Linq;
     using System.Collections.Generic;
     using System.Threading.Tasks;
-    using Z0.Events;
 
     using static zfunc;
 
@@ -45,7 +44,7 @@ namespace Z0
                     corenum = 0;
             }
             
-            var eventSink = AgentEventSink.Define(context, (complex.ServerId, complex.AgentId));
+            var eventSink = TraceEventSink.Define(context, (complex.ServerId, complex.AgentId));
             complex.Configure(configs, eventSink);
             await complex.Start();
             Complex = complex;

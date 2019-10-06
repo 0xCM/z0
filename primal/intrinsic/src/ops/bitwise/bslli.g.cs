@@ -26,11 +26,11 @@ namespace Z0
                 return generic<T>(dinx.bslli(in int16(in lhs), count));
             else if(typeof(T) == typeof(ushort))
                 return generic<T>(dinx.bslli(in uint16(in lhs), count));
-            else if(typematch<T,int>())
+            else if(typeof(T) == typeof(int))
                 return generic<T>(dinx.bslli(in int32(in lhs), count));
             else if(typeof(T) == typeof(uint)) 
                 return generic<T>(dinx.bslli(in uint32(in lhs), count));
-            else if(typematch<T,long>())
+            else if(typeof(T) == typeof(long))
                 return generic<T>(dinx.bslli(in int64(in lhs), count));
             else if(typeof(T) == typeof(ulong))
                 return generic<T>(dinx.bslli(in uint64(in lhs), count));
@@ -46,11 +46,11 @@ namespace Z0
                 return generic<T>(dinx.bslli(in int16(in lhs), count));
             else if(typeof(T) == typeof(ushort))
                 return generic<T>(dinx.bslli(in uint16(in lhs), count));
-            else if(typematch<T,int>())
+            else if(typeof(T) == typeof(int))
                 return generic<T>(dinx.bslli(in int32(in lhs), count));
             else if(typeof(T) == typeof(uint)) 
                 return generic<T>(dinx.bslli(in uint32(in lhs), count));
-            else if(typematch<T,long>())
+            else if(typeof(T) == typeof(long))
                 return generic<T>(dinx.bslli(in int64(in lhs), count));
             else if(typeof(T) == typeof(ulong))
                 return generic<T>(dinx.bslli(in uint64(in lhs), count));

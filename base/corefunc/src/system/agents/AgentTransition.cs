@@ -5,11 +5,11 @@
 namespace Z0
 {
     using System;
-    using System.Threading.Tasks;
-    using System.Collections.Generic;
-    using System.Threading;
-    using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
+
+    public struct AgentStats
+    {
+        public int AgentCount;
+    }
 
     /// <summary>
     /// Specifies a transition that occurred 

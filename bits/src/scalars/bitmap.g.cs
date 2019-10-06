@@ -25,33 +25,68 @@ namespace Z0
         /// <param name="dst">The target</param>
         [MethodImpl(Inline)]
         public static ref T bitmap<T>(in T src, byte srcOffset, byte len,  byte dstOffset, ref T dst)
+            where T : unmanaged
         {
-            if(typeof(T) == typeof(byte))
-                Bits.bitmap(uint8(in src), srcOffset, len, dstOffset, ref uint8(ref dst));
-            else if(typematch<T,sbyte>())
-                Bits.bitmap(int8(in src), srcOffset, len, dstOffset, ref int8(ref dst));
-            else if(typematch<T,short>())
-                Bits.bitmap(int16(in src),srcOffset, len, dstOffset, ref int16(ref dst));
-            else if(typeof(T) == typeof(ushort))
-                Bits.bitmap(uint16(in src), srcOffset, len, dstOffset, ref uint16(ref dst));
-            else if(typematch<T,int>())
-                Bits.bitmap(int32(in src), srcOffset, len, dstOffset, ref int32(ref dst));
-            else if(typeof(T) == typeof(uint))
-                Bits.bitmap(uint32(in src), srcOffset, len, dstOffset, ref uint32(ref dst));
-            else if(typematch<T,long>())
-                Bits.bitmap(int64(in src), srcOffset, len, dstOffset, ref int64(ref dst));
-            else if(typeof(T) == typeof(ulong))
-                Bits.bitmap(uint64(in src), srcOffset, len, dstOffset, ref uint64(ref dst));
-            else if(typeof(T) == typeof(float))
-                Bits.bitmap(float32(in src), srcOffset, len, dstOffset, ref float32(ref dst));
-            else if(typeof(T) == typeof(double))
-                Bits.bitmap(float64(in src), srcOffset, len, dstOffset, ref float64(ref dst));
-            else            
-                throw unsupported<T>();            
+            if(typeof(T) == typeof(byte) 
+            || typeof(T) == typeof(ushort) 
+            || typeof(T) == typeof(uint) 
+            || typeof(T) == typeof(ulong))
+                bitmapu(src,srcOffset,len,dstOffset, ref dst);
+            else if(typeof(T) == typeof(sbyte) 
+            || typeof(T) == typeof(short) 
+            || typeof(T) == typeof(int) 
+            || typeof(T) == typeof(long))
+                bitmapi(src,srcOffset,len,dstOffset, ref dst);
+            else 
+                bitmapf(src,srcOffset,len,dstOffset, ref dst);
             
             return ref dst;
         }
 
+        [MethodImpl(Inline)]
+        static ref T bitmapi<T>(in T src, byte srcOffset, byte len,  byte dstOffset, ref T dst)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(sbyte))
+                Bits.bitmap(int8(in src), srcOffset, len, dstOffset, ref int8(ref dst));
+            else if(typeof(T) == typeof(short))
+                Bits.bitmap(int16(in src),srcOffset, len, dstOffset, ref int16(ref dst));
+            else if(typeof(T) == typeof(int))
+                Bits.bitmap(int32(in src), srcOffset, len, dstOffset, ref int32(ref dst));
+            else 
+                Bits.bitmap(int64(in src), srcOffset, len, dstOffset, ref int64(ref dst));
+
+            return ref dst;
+        }
+
+        [MethodImpl(Inline)]
+        static ref T bitmapu<T>(in T src, byte srcOffset, byte len,  byte dstOffset, ref T dst)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(byte))
+                Bits.bitmap(uint8(in src), srcOffset, len, dstOffset, ref uint8(ref dst));
+            else if(typeof(T) == typeof(ushort))
+                Bits.bitmap(uint16(in src), srcOffset, len, dstOffset, ref uint16(ref dst));
+            else if(typeof(T) == typeof(uint))
+                Bits.bitmap(uint32(in src), srcOffset, len, dstOffset, ref uint32(ref dst));
+            else 
+                Bits.bitmap(uint64(in src), srcOffset, len, dstOffset, ref uint64(ref dst));            
+            return ref dst;
+
+        }
+
+        [MethodImpl(Inline)]
+        static ref T bitmapf<T>(in T src, byte srcOffset, byte len,  byte dstOffset, ref T dst)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(float))
+                Bits.bitmap(float32(in src), srcOffset, len, dstOffset, ref float32(ref dst));
+            else if(typeof(T) == typeof(double))
+                Bits.bitmap(float64(in src), srcOffset, len, dstOffset, ref float64(ref dst));
+            else            
+                throw unsupported<T>();                        
+            return ref dst;
+        }
     }
 
 }

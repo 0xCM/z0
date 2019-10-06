@@ -14,8 +14,8 @@ namespace Z0
     partial class gbits
     {
         /// <summary>
-        /// Computes the XOR of the source value and the result of right-shifting 
-        /// the source by a specified offset
+        /// Computes the XOR of the source value and the result of right-shifting the source by a specified offset:
+        /// dst = src^(src >> offset);
         /// </summary>
         /// <param name="src">The source value</param>
         /// <param name="offset">The number of bits to shift the source value rightwards</param>
@@ -36,26 +36,26 @@ namespace Z0
         }           
 
         /// <summary>
-        /// Computes in-place the XOR of the source value and the result of right-shifting 
-        /// the source by a specified offset
+        /// Computes in-place the XOR of the source value and the result of right-shifting the source by a specified offset
+        /// src = src^(src >> offset);
         /// </summary>
         /// <param name="src">The source value</param>
         /// <param name="offset">The number of bits to shift the source value rightwards</param>
         [MethodImpl(Inline)]
-        public static ref T xorsr<T>(ref T lhs, int offset)
+        public static ref T xorsr<T>(ref T src, int offset)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                Bits.xorsr(ref uint8(ref lhs), offset);
+                Bits.xorsr(ref uint8(ref src), offset);
             else if(typeof(T) == typeof(ushort))
-                Bits.xorsr(ref uint16(ref lhs), offset);
+                Bits.xorsr(ref uint16(ref src), offset);
             else if(typeof(T) == typeof(uint))
-                Bits.xorsr(ref uint32(ref lhs), offset);
+                Bits.xorsr(ref uint32(ref src), offset);
             else if(typeof(T) == typeof(ulong))
-                Bits.xorsr(ref uint64(ref lhs), offset);
+                Bits.xorsr(ref uint64(ref src), offset);
             else            
                 throw unsupported<T>();
-            return ref lhs;
+            return ref src;
         }
     }
 }

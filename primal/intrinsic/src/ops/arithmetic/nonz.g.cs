@@ -26,19 +26,19 @@ namespace Z0
         public static bool nonz<T>(in Vec128<T> src)
             where T : unmanaged
         {
-            if(typematch<T,sbyte>())
+            if(typeof(T) == typeof(sbyte))
                 return dinx.nonz(in int8(in src));
-            else if(typematch<T,byte>())
+            else if(typeof(T) == typeof(byte))
                 return dinx.nonz(in uint8(in src));
-            else if(typematch<T,short>())
+            else if(typeof(T) == typeof(short))
                 return dinx.nonz(in int16(in src));
             else if(typeof(T) == typeof(ushort))
                 return dinx.nonz(in uint16(in src));
-            else if(typematch<T,int>())
+            else if(typeof(T) == typeof(int))
                 return dinx.nonz(in int32(in src));
             else if(typeof(T) == typeof(uint))
                 return dinx.nonzero(in uint32(in src));
-            else if(typematch<T,long>())
+            else if(typeof(T) == typeof(long))
                 return dinx.nonz(in int64(in src));
             else if(typeof(T) == typeof(ulong))
                 return dinx.nonz(in uint64(in src));
@@ -60,19 +60,19 @@ namespace Z0
         public static bool nonz<T>(in Vec256<T> src)
             where T : unmanaged
         {
-            if(typematch<T,sbyte>())
+            if(typeof(T) == typeof(sbyte))
                 return dinx.nonz(in int8(in src));
-            else if(typematch<T,byte>())
+            else if(typeof(T) == typeof(byte))
                 return dinx.nonz(in uint8(in src));
-            else if(typematch<T,short>())
+            else if(typeof(T) == typeof(short))
                 return dinx.nonz(in int16(in src));
             else if(typeof(T) == typeof(ushort))
                 return dinx.nonz(in uint16(in src));
-            else if(typematch<T,int>())
+            else if(typeof(T) == typeof(int))
                 return dinx.nonz(in int32(in src));
             else if(typeof(T) == typeof(uint))
                 return dinx.nonz(in uint32(in src));
-            else if(typematch<T,long>())
+            else if(typeof(T) == typeof(long))
                 return dinx.nonz(in int64(in src));
             else if(typeof(T) == typeof(ulong))
                 return dinx.nonz(in uint64(in src));

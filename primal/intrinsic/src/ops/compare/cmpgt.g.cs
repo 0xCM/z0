@@ -20,11 +20,11 @@ namespace Z0
         public static Vec128<T> cmpgt<T>(in Vec128<T> lhs, in Vec128<T> rhs)
             where T : unmanaged
         {
-            if(typematch<T,sbyte>())
+            if(typeof(T) == typeof(sbyte))
                 return dinx.cmpgt(in int8(in lhs), in int8(in rhs)).As<T>();
-            else if(typematch<T,short>())
+            else if(typeof(T) == typeof(short))
                 return dinx.cmpgt(in int16(in lhs), in int16(in rhs)).As<T>();
-            else if(typematch<T,int>())
+            else if(typeof(T) == typeof(int))
                 return dinx.cmpgt(in int32(in lhs), in int32(in rhs)).As<T>();
             else if(typeof(T) == typeof(float))
                 return dfp.cmpgt(in float32(in lhs), in float32(in rhs)).As<T>();
@@ -38,13 +38,13 @@ namespace Z0
         public static Vec256<T> cmpgt<T>(in Vec256<T> lhs, in Vec256<T> rhs)
             where T : unmanaged
         {
-            if(typematch<T,sbyte>())
+            if(typeof(T) == typeof(sbyte))
                 return dinx.cmpgt(in int8(in lhs), in int8(in rhs)).As<T>();
-            else if(typematch<T,short>())
+            else if(typeof(T) == typeof(short))
                 return dinx.cmpgt(in int16(in lhs), in int16(in rhs)).As<T>();
-            else if(typematch<T,int>())
+            else if(typeof(T) == typeof(int))
                 return dinx.cmpgt(in int32(in lhs), in int32(in rhs)).As<T>();
-            else if(typematch<T,long>())
+            else if(typeof(T) == typeof(long))
                 return dinx.cmpgt(in int64(in lhs), in int64(in rhs)).As<T>();
             else if(typeof(T) == typeof(float))
                 return dfp.cmpgt(in float32(in lhs), in float32(in rhs)).As<T>();

@@ -12,9 +12,12 @@ namespace Z0
 
     using static zfunc;
 
-    [StructLayout(LayoutKind.Explicit, Size = 16)]
-    public unsafe struct UInt128
+    public struct UInt128
     {
+        public ulong lo;
+
+        public ulong hi;
+
         /// <summary>
         /// The 128-bit zero value
         /// </summary>
@@ -40,102 +43,10 @@ namespace Z0
         /// </summary>
         /// <param name="lo">The lo 64 bits</param>
         /// <param name="hi">The hi 64 bits</param>
+        [MethodImpl(Inline)]
         public static UInt128 From(ulong lo, ulong hi)
             => new UInt128(lo,hi);
-
-        [FieldOffset(0)]
-        public ulong lo;
-
-        [FieldOffset(8)]
-        public ulong hi;
-
-        [FieldOffset(8)]
-        fixed byte bytes[16];
-
-        [FieldOffset(0)]
-        uint x00;
-
-        [FieldOffset(4)]
-        uint x01;
-
-        [FieldOffset(8)]
-        uint x10;
-
-        [FieldOffset(12)]
-        uint x11;
-
-        [FieldOffset(0)]
-        ushort x000;
-
-        [FieldOffset(2)]
-        ushort x001;
-
-        [FieldOffset(4)]
-        ushort x010;
-
-        [FieldOffset(6)]
-        ushort x011;
-
-        [FieldOffset(8)]
-        ushort x100;
-
-        [FieldOffset(10)]
-        ushort x101;
-
-        [FieldOffset(12)]
-        ushort x110;
-
-        [FieldOffset(12)]
-        ushort x111;
-
-        [FieldOffset(0)]        
-        byte x0000;
         
-        [FieldOffset(1)]
-        byte x0001;
-        
-        [FieldOffset(2)]
-        byte x0010;
-        
-        [FieldOffset(3)]
-        byte x0011;
-
-        [FieldOffset(4)]
-        byte x0100;
-        
-        [FieldOffset(5)]
-        byte x0101;
-        
-        [FieldOffset(6)]
-        byte x0110;
-        
-        [FieldOffset(7)]
-        byte x0111;
-
-        [FieldOffset(8)]        
-        byte x1000;
-        
-        [FieldOffset(9)]
-        byte x1001;
-        
-        [FieldOffset(10)]
-        byte x1010;
-        
-        [FieldOffset(11)]
-        byte x1011;
-
-        [FieldOffset(12)]
-        byte x1100;
-        
-        [FieldOffset(13)]
-        byte x1101;
-        
-        [FieldOffset(14)]
-        byte x1110;
-        
-        [FieldOffset(15)]
-        byte x1111;
-
         [MethodImpl(Inline)]
         public static implicit operator Vector128<ulong>(in UInt128 src)
             => Vector128.Create(src.lo, src.hi);
@@ -220,14 +131,6 @@ namespace Z0
                 lo--;
         }
 
-        /// <summary>
-        /// Queries/manipulates an index-identified byte
-        /// </summary>
-        public ref byte this[int index]
-        {
-            [MethodImpl(Inline)]
-            get => ref bytes[index];
-        }
 
         [MethodImpl(Inline)]
         public bool Equals(UInt128 lhs)

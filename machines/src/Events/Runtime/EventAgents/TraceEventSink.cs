@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2019
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Events
+namespace Z0
 {
     using System;
     using System.Threading.Tasks;
@@ -12,12 +12,12 @@ namespace Z0.Events
     using Microsoft.Diagnostics.Tracing.Session;
     using static zfunc;
 
-    public sealed class AgentEventSink : ServiceAgent
+    public sealed class TraceEventSink : ServiceAgent
     {        
         public static IServiceAgent Define(AgentContext Context, AgentIdentity Identity)
-            => new AgentEventSink(Context, Identity);
+            => new TraceEventSink(Context, Identity);
 
-        AgentEventSink(AgentContext Context, AgentIdentity Identity)
+        TraceEventSink(AgentContext Context, AgentIdentity Identity)
             : base(Context, Identity)
         {
 
@@ -26,7 +26,6 @@ namespace Z0.Events
         TraceEventSession Session;
         
         ConcurrentQueue<EventIdentity> RecieptQueue = new ConcurrentQueue<EventIdentity>();
-
 
         void OnPulse(TraceEvent data)
         {
@@ -49,22 +48,25 @@ namespace Z0.Events
                 babble("GOT UNHANDLED EVENT: " + data.Dump());
         }
 
-        void ConfigureCallbacks()
+        void ConfigureSession()
         {
+            Session = new TraceEventSession(nameof(TraceEventSink));
+            var restarted = Session.EnableProvider(SystemEventWriter.SourceName);
+            if(restarted)
+                warn($"Session was already in progress");            
+
+            Session.Source.UnhandledEvents += OnUnhandled;
+
             Session.Source.Dynamic.AddCallbackForProviderEvent(SystemEventWriter.SourceName, "Pulse", OnPulse);
             Session.Source.Dynamic.AddCallbackForProviderEvent(SystemEventWriter.SourceName, "AgentTransitioned", OnAgentTransitioned);            
         }
 
         protected override void OnStart()
         {
-            Session = new TraceEventSession(nameof(AgentEventSink));
-            var restarted = Session.EnableProvider(SystemEventWriter.SourceName);
-            if(restarted)
-                warn($"Session was already in progress");            
+            ConfigureSession();
 
             Console.CancelKeyPress += delegate (object sender, ConsoleCancelEventArgs e) { OnStop(); };
-            Session.Source.UnhandledEvents += OnUnhandled;
-            ConfigureCallbacks();
+
         }
 
         protected override void OnRun()

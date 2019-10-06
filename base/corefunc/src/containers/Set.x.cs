@@ -73,13 +73,26 @@ namespace Z0
         public static bool IsNonEmpty<T>(this ISet<T> set)
             => set.Count != 0; 
         
-        [MethodImpl(Inline)]
         public static Span<T> ToSpan<T>(this ISet<T> src)
         {
             var dst = span<T>(src.Count);
             var i = 0;
             foreach(var item in src)
                 dst[i++] = item;
+            return dst;
+        }
+
+        /// <summary>
+        /// Constructs a hash set from span content
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <typeparam name="T">The item type</typeparam>
+        public static HashSet<T> ToHashSet<T>(this Span<T> src)        
+            where T : unmanaged
+        {
+            var dst = new HashSet<T>(src.Length);
+            for(var i=0; i< src.Length; i++)
+                dst.Add(src[i]);
             return dst;
         }
 

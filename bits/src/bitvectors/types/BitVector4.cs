@@ -36,13 +36,6 @@ namespace Z0
         public static BitVector4 Alloc()
             => new BitVector4();
 
-        /// <summary>
-        /// Creates a permutation-defined mask
-        /// </summary>
-        /// <param name="spec">The permutation</param>
-        [MethodImpl(Inline)]
-        public static BitVector4 Mask(Perm spec)
-            => bitvector.mask(spec, out BitVector4 dst);
 
         [MethodImpl(Inline)]
         public static BitVector4 FromParts(Bit x0, Bit x1, Bit x2, Bit x3)
@@ -146,8 +139,8 @@ namespace Z0
         /// <param name="lhs">The left operand</param>
         /// <param name="rhs">The right operand</param>
         [MethodImpl(Inline)]
-        public static BitVector4 operator +(in BitVector4 lhs, in BitVector4 rhs)
-            => bitvector.add(lhs,rhs);
+        public static BitVector4 operator +(BitVector4 x, BitVector4 y)
+            => bitvector.add(x,y);
 
         /// <summary>
         /// Computes the product of the operands. 
@@ -200,7 +193,8 @@ namespace Z0
         [MethodImpl(Inline)]
         public BitVector4(byte data)
         {
-            this.data = TakeHi(math.sll(data,4));
+            //require(data < 16);
+            this.data = data;
         }
 
         public Bit this[BitPos pos]

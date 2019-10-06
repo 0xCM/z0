@@ -59,4 +59,20 @@ namespace Z0
             await Configure((TConfig)config);
         }
     }
+
+    [AttributeUsage(AttributeTargets.Class)]
+    public class AppServiceAttribute : Attribute
+    {
+        public static string GetLabel(Type host)
+            => host.CustomAttribute<AppServiceAttribute>().TryMap(x => x.Label).ValueOrDefault(string.Empty);
+            
+        public AppServiceAttribute(string Label = null)
+        {
+            this.Label = Label ?? string.Empty;
+        }
+
+        public string Label {get;}
+    }
+
+
 }

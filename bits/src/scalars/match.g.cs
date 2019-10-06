@@ -25,10 +25,10 @@ namespace Z0
         /// <typeparam name="S">The left operand type</typeparam>
         /// <typeparam name="T">The right operand type</typeparam>
         [MethodImpl(Inline)]
-        public static bool match<S,T>(in S lhs, in int nx, T rhs, in int ny)
+        public static bool match<S,T>(in S lhs, int nx, in T rhs, int ny)
             where S : unmanaged
             where T : unmanaged
-                => test(in lhs, in nx) == test(in rhs, in ny);     
+                => test(in lhs,nx) == test(in rhs,ny);     
 
 
     }

@@ -15,6 +15,7 @@ namespace Z0.Machines
     /// Specifies a state machine rule of the form (input:E, source:S) -> output:O
     /// </summary>
     /// <typeparam name="E">The event type</typeparam>
+    /// <typeparam name="S">The state type</typeparam>
     /// <typeparam name="O">The output type</typeparam>
     public readonly struct OutputRule<E,S,O> : IOutputRule<E,S,O>
     {

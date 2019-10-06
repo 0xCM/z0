@@ -7,7 +7,6 @@ namespace Z0
     using System;
     using System.Threading.Tasks;
     using System.Collections.Generic;
-    using Z0.Events;
     
     /// <summary>
     /// Defines a server within a complex

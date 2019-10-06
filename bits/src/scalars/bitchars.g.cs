@@ -25,17 +25,17 @@ namespace Z0
         {
             if(typeof(T) == typeof(byte))
                 return BitStore.bitchars(uint8(in src));
-            else if(typematch<T,sbyte>())
+            else if(typeof(T) == typeof(sbyte))
                 return BitStore.bitchars(int8(in src));
-            else if(typematch<T,short>())
+            else if(typeof(T) == typeof(short))
                 return bitchars(int16(in src));
             else if(typeof(T) == typeof(ushort))
                 return bitchars(uint16(in src));
-            else if(typematch<T,int>())
+            else if(typeof(T) == typeof(int))
                 return bitchars(int32(in src));
             else if(typeof(T) == typeof(uint))
                 return bitchars(uint32(in src));
-            else if(typematch<T,long>())
+            else if(typeof(T) == typeof(long))
                 return bitchars(int64(in src));
             else if(typeof(T) == typeof(ulong))
                 return bitchars(uint64(in src));

@@ -23,19 +23,19 @@ namespace Z0
         public static ulong ntz<T>(in T src)
             where T : unmanaged
         {
-            if(typematch<T,sbyte>())
+            if(typeof(T) == typeof(sbyte))
                  return Bits.ntz(int8(in asRef(in src)));
-            else if(typematch<T,byte>())
+            else if(typeof(T) == typeof(byte))
                  return Bits.ntz(uint8(in asRef(in src)));
-            else if(typematch<T,short>())
+            else if(typeof(T) == typeof(short))
                  return Bits.ntz(int16(in asRef(in src)));
             else if(typeof(T) == typeof(ushort))
                  return Bits.ntz(uint16(in asRef(in src)));
-            else if(typematch<T,int>())
+            else if(typeof(T) == typeof(int))
                  return Bits.ntz(int32(in asRef(in src)));
             else if(typeof(T) == typeof(uint))
                  return Bits.ntz(uint32(in asRef(in src)));
-            else if(typematch<T,long>())
+            else if(typeof(T) == typeof(long))
                  return Bits.ntz(int64(in asRef(in src)));
             else if(typeof(T) == typeof(ulong))
                  return Bits.ntz(uint64(in asRef(in src)));

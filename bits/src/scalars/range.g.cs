@@ -24,19 +24,19 @@ namespace Z0
         [MethodImpl(Inline)]
         public static T range<T>(in T src, BitPos i0, BitPos i1)
         {
-            if(typematch<T,sbyte>())
+            if(typeof(T) == typeof(sbyte))
                 return generic<T>(Bits.range(int8(src),i0,i1));
-            else if(typematch<T,byte>())
+            else if(typeof(T) == typeof(byte))
                 return generic<T>(Bits.range(uint8(src),i0,i1));
-            else if(typematch<T,short>())
+            else if(typeof(T) == typeof(short))
                 return generic<T>(Bits.range(int16(src),i0,i1));
             else if(typeof(T) == typeof(ushort))
                 return generic<T>(Bits.range(uint16(src),i0,i1));
-            else if(typematch<T,int>())
+            else if(typeof(T) == typeof(int))
                 return generic<T>(Bits.range(int32(src),i0,i1));
             else if(typeof(T) == typeof(uint))
                 return generic<T>(Bits.range(uint32(src),i0,i1));
-            else if(typematch<T,long>())
+            else if(typeof(T) == typeof(long))
                 return generic<T>(Bits.range(int64(src),i0,i1));
             else if(typeof(T) == typeof(ulong))
                 return generic<T>(Bits.range(uint64(src),i0,i1));

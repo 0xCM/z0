@@ -11,13 +11,6 @@ namespace Z0
 
     using static zfunc;
 
-
-    public struct AgentStats
-    {
-        public int AgentCount;
-    }
-
-
     public class AgentControl : AppService<IAgentControl,IAgentContext>, IAgentControl
     {
         public static IAgentControl FromContext(IContext Context)
@@ -47,6 +40,5 @@ namespace Z0
         {
             await Task.Factory.StartNew(() => UpdateAgentContext(AgentContext));
         }
-
     }
 }

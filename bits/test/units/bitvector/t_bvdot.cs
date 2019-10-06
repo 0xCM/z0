@@ -37,7 +37,18 @@ namespace Z0.Test
 
         public void bv_dot_64u()
         {
-            dot64_check();            
+            dot64_check();  
+
+            for(var i=0; i< SampleSize; i++)          
+            {
+                var x32 = Random.BitVector(n32);
+                var y32 = Random.BitVector(n32);
+                var dot32 = bitvector.dot(x32,y32);
+                var x64 = x32.ToBitVector64();
+                var y64 = y32.ToBitVector64();
+                var dot64 = bitvector.dot(x64,y64);
+                Claim.eq(dot32,dot64);
+            }
         }
 
         public void dotg()

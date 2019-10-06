@@ -15,8 +15,6 @@ namespace Z0
 
     partial class bitvector
     {
-        public static UInt4 and(UInt4 x, UInt4 y)
-            => x & y;
 
         /// <summary>
         /// Computes a new bitvector z = x & y from bitvectors x and y

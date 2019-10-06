@@ -25,19 +25,19 @@ namespace Z0
         public static Vector128<T> andn<T>(Vector128<T> lhs, Vector128<T> rhs)
             where T : unmanaged
         {
-            if(typematch<T,sbyte>())
+            if(typeof(T) == typeof(sbyte))
                 return generic<T>(dinx.vandn(int8(lhs), int8(rhs)));
-            else if(typematch<T,byte>())
+            else if(typeof(T) == typeof(byte))
                 return generic<T>(dinx.vandn(uint8(lhs), uint8(rhs)));
-            else if(typematch<T,short>())
+            else if(typeof(T) == typeof(short))
                 return generic<T>(dinx.vandn(int16(lhs), int16(rhs)));
             else if(typeof(T) == typeof(ushort))
                 return generic<T>(dinx.vandn(uint16(lhs), uint16(rhs)));
-            else if(typematch<T,int>())
+            else if(typeof(T) == typeof(int))
                 return generic<T>(dinx.vandn(int32(lhs), int32(rhs)));
             else if(typeof(T) == typeof(uint))
                 return generic<T>(dinx.vandn(uint32(lhs), uint32(rhs)));
-            else if(typematch<T,long>())
+            else if(typeof(T) == typeof(long))
                 return generic<T>(dinx.vandn(int64(lhs), int64(rhs)));
             else if(typeof(T) == typeof(ulong))
                 return generic<T>(dinx.vandn(uint64(lhs), uint64(rhs)));
@@ -59,19 +59,19 @@ namespace Z0
         public static Vector256<T> andn<T>(Vector256<T> lhs, Vector256<T> rhs)
             where T : unmanaged
         {
-            if(typematch<T,sbyte>())
+            if(typeof(T) == typeof(sbyte))
                 return generic<T>(dinx.vandn(int8(lhs), int8(rhs)));
-            else if(typematch<T,byte>())
+            else if(typeof(T) == typeof(byte))
                 return generic<T>(dinx.vandn(uint8(lhs), uint8(rhs)));
-            else if(typematch<T,short>())
+            else if(typeof(T) == typeof(short))
                 return generic<T>(dinx.vandn(int16(lhs), int16(rhs)));
             else if(typeof(T) == typeof(ushort))
                 return generic<T>(dinx.vandn(uint16(lhs), uint16(rhs)));
-            else if(typematch<T,int>())
+            else if(typeof(T) == typeof(int))
                 return generic<T>(dinx.vandn(int32(lhs), int32(rhs)));
             else if(typeof(T) == typeof(uint))
                 return generic<T>(dinx.vandn(uint32(lhs), uint32(rhs)));
-            else if(typematch<T,long>())
+            else if(typeof(T) == typeof(long))
                 return generic<T>(dinx.vandn(int64(lhs), int64(rhs)));
             else if(typeof(T) == typeof(ulong))
                 return generic<T>(dinx.vandn(uint64(lhs), uint64(rhs)));

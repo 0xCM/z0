@@ -22,7 +22,7 @@ namespace Z0
         /// <param name="y">The right bitvector</param>
         [MethodImpl(Inline)]
         public static BitVector4 sub(BitVector4 x, BitVector4 y)
-            => (byte)Mod<N16>.mod(math.sub(x.Scalar, y.Scalar));
+            => (byte)Mod16.mod(math.sub((uint)x.data, (uint)y.data));
 
         /// <summary>
         /// Computes a new vector z := x - y that forms the arithmetic difference between the operands

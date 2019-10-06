@@ -19,19 +19,19 @@ namespace Z0
         public static unsafe void store<T>(Vec128<T> src, ref T dst)
             where T : unmanaged
         {
-            if(typematch<T,sbyte>())
+            if(typeof(T) == typeof(sbyte))
                 vstore(int8(src), ref int8(ref dst));
-            else if(typematch<T,byte>())
+            else if(typeof(T) == typeof(byte))
                 vstore(uint8(src), ref uint8(ref dst));
-            else if(typematch<T,short>())
+            else if(typeof(T) == typeof(short))
                 vstore(int16(src), ref int16(ref dst));
             else if(typeof(T) == typeof(ushort))
                 vstore(uint16(src), ref uint16(ref dst));
-            else if(typematch<T,int>())
+            else if(typeof(T) == typeof(int))
                 vstore(int32(src), ref int32(ref dst));
             else if(typeof(T) == typeof(uint))
                 vstore(uint32(src), ref uint32(ref dst));
-            else if(typematch<T,long>())
+            else if(typeof(T) == typeof(long))
                 vstore(int64(src), ref int64(ref dst));
             else if(typeof(T) == typeof(ulong))
                 vstore(uint64(src), ref uint64(ref dst));
@@ -47,19 +47,19 @@ namespace Z0
         public static unsafe void store<T>(Vector128<T> src, ref T dst)
             where T : unmanaged
         {
-            if(typematch<T,sbyte>())
+            if(typeof(T) == typeof(sbyte))
                 vstore(int8(src), ref int8(ref dst));
-            else if(typematch<T,byte>())
+            else if(typeof(T) == typeof(byte))
                 vstore(uint8(src), ref uint8(ref dst));
-            else if(typematch<T,short>())
+            else if(typeof(T) == typeof(short))
                 vstore(int16(src), ref int16(ref dst));
             else if(typeof(T) == typeof(ushort))
                 vstore(uint16(src), ref uint16(ref dst));
-            else if(typematch<T,int>())
+            else if(typeof(T) == typeof(int))
                 vstore(int32(src), ref int32(ref dst));
             else if(typeof(T) == typeof(uint))
                 vstore(uint32(src), ref uint32(ref dst));
-            else if(typematch<T,long>())
+            else if(typeof(T) == typeof(long))
                 vstore(int64(src), ref int64(ref dst));
             else if(typeof(T) == typeof(ulong))
                 vstore(uint64(src), ref uint64(ref dst));
@@ -75,19 +75,19 @@ namespace Z0
         public static unsafe void store<T>(Vector256<T> src, ref T dst)
             where T : unmanaged
         {
-            if(typematch<T,sbyte>())
+            if(typeof(T) == typeof(sbyte))
                 vstore(int8(src), ref int8(ref dst));
-            else if(typematch<T,byte>())
+            else if(typeof(T) == typeof(byte))
                 vstore(uint8(src), ref uint8(ref dst));
-            else if(typematch<T,short>())
+            else if(typeof(T) == typeof(short))
                 vstore(int16(src), ref int16(ref dst));
             else if(typeof(T) == typeof(ushort))
                 vstore(uint16(src), ref uint16(ref dst));
-            else if(typematch<T,int>())
+            else if(typeof(T) == typeof(int))
                 vstore(int32(src), ref int32(ref dst));
             else if(typeof(T) == typeof(uint))
                 vstore(uint32(src), ref uint32(ref dst));
-            else if(typematch<T,long>())
+            else if(typeof(T) == typeof(long))
                 vstore(int64(src), ref int64(ref dst));
             else if(typeof(T) == typeof(ulong))
                 vstore(uint64(src), ref uint64(ref dst));
@@ -103,19 +103,19 @@ namespace Z0
         public static unsafe void store<T>(Vec256<T> src, ref T dst)
             where T : unmanaged
         {
-            if(typematch<T,sbyte>())
+            if(typeof(T) == typeof(sbyte))
                 vstore(int8(src), ref int8(ref dst));
-            else if(typematch<T,byte>())
+            else if(typeof(T) == typeof(byte))
                 vstore(uint8(src), ref uint8(ref dst));
-            else if(typematch<T,short>())
+            else if(typeof(T) == typeof(short))
                 vstore(int16(src), ref int16(ref dst));
             else if(typeof(T) == typeof(ushort))
                 vstore(uint16(src), ref uint16(ref dst));
-            else if(typematch<T,int>())
+            else if(typeof(T) == typeof(int))
                 vstore(int32(src), ref int32(ref dst));
             else if(typeof(T) == typeof(uint))
                 vstore(uint32(src), ref uint32(ref dst));
-            else if(typematch<T,long>())
+            else if(typeof(T) == typeof(long))
                 vstore(int64(src), ref int64(ref dst));
             else if(typeof(T) == typeof(ulong))
                 vstore(uint64(src), ref uint64(ref dst));

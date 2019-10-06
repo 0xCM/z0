@@ -34,19 +34,19 @@ namespace Z0
         static string FormatHexScalar<T>(T src, bool zpad = true, bool specifier = true, bool uppercase = false, bool prespec = true)
             where T : unmanaged
         {
-            if(typematch<T,sbyte>())
+            if(typeof(T) == typeof(sbyte))
                 return int8(ref src).FormatHex(zpad,specifier,uppercase,prespec);
-            else if(typematch<T,byte>())
+            else if(typeof(T) == typeof(byte))
                 return uint8(ref src).FormatHex(zpad,specifier,uppercase,prespec);
-            else if(typematch<T,short>())
+            else if(typeof(T) == typeof(short))
                 return int16(ref src).FormatHex(zpad,specifier,uppercase,prespec);
             else if(typeof(T) == typeof(ushort))
                 return uint16(ref src).FormatHex(zpad,specifier,uppercase,prespec);
-            else if(typematch<T,int>())
+            else if(typeof(T) == typeof(int))
                 return int32(ref src).FormatHex(zpad,specifier,uppercase,prespec);
             else if(typeof(T) == typeof(uint))
                 return uint32(ref src).FormatHex(zpad,specifier,uppercase,prespec);
-            else if(typematch<T,long>())
+            else if(typeof(T) == typeof(long))
                 return int64(ref src).FormatHex(zpad,specifier,uppercase,prespec);
             else if(typeof(T) == typeof(ulong))
                 return uint64(ref src).FormatHex(zpad,specifier,uppercase,prespec);

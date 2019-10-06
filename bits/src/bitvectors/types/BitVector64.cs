@@ -37,13 +37,6 @@ namespace Z0
         public static BitVector64 Alloc()
             => new BitVector64(0);
 
-        /// <summary>
-        /// Creates a permutation-defined mask
-        /// </summary>
-        /// <param name="spec">The permutation</param>
-        [MethodImpl(Inline)]
-        public static BitVector64 Mask(Perm spec)
-            => bitvector.mask(spec, out BitVector64 dst);
 
         /// <summary>
         /// Creates a vector from a primal source value

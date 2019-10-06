@@ -44,11 +44,11 @@ namespace Z0
         static T extracti<T>(T lhs, byte start, byte length)
             where T : unmanaged
         {
-            if(typematch<T,sbyte>())
+            if(typeof(T) == typeof(sbyte))
                 return generic<T>(Bits.extract(int8(lhs), start, length));
-            else if(typematch<T,short>())
+            else if(typeof(T) == typeof(short))
                 return generic<T>(Bits.extract(int16(lhs), start, length));
-            else if(typematch<T,int>())
+            else if(typeof(T) == typeof(int))
                 return generic<T>(Bits.extract(int32(lhs), start, length));
             else 
                 return generic<T>(Bits.extract(int64(lhs), start, length));

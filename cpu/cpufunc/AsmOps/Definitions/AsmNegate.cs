@@ -34,19 +34,19 @@ namespace Z0
         static AsmCode<T> NegateCode<T>()
             where T : unmanaged
         {
-            if(typematch<T,sbyte>())
+            if(typeof(T) == typeof(sbyte))
                 return AsmCode.FromBytes<T>(negate8iBytes);
-            else if(typematch<T,byte>())
+            else if(typeof(T) == typeof(byte))
                 return AsmCode.FromBytes<T>(negate8uBytes);
-            else if(typematch<T,short>())
+            else if(typeof(T) == typeof(short))
                 return AsmCode.FromBytes<T>(negate16iBytes);
             else if(typeof(T) == typeof(ushort))
                 return AsmCode.FromBytes<T>(negate16uBytes);
-            else if(typematch<T,int>())
+            else if(typeof(T) == typeof(int))
                 return AsmCode.FromBytes<T>(negate32iBytes);
             else if(typeof(T) == typeof(uint))
                 return AsmCode.FromBytes<T>(negate32uBytes);
-            else if(typematch<T,long>())
+            else if(typeof(T) == typeof(long))
                 return AsmCode.FromBytes<T>(negate64iBytes);
             else if(typeof(T) == typeof(ulong))
                 return AsmCode.FromBytes<T>(negate64uBytes);

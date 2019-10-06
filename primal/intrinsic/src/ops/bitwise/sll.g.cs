@@ -20,9 +20,9 @@ namespace Z0
         {
             if(typeof(T) == typeof(byte))
                 return generic<T>(dinx.vsll(in uint8(in lhs), offset));
-            else if(typematch<T,sbyte>())
+            else if(typeof(T) == typeof(sbyte))
                 return generic<T>(dinx.vsll(in int8(in lhs), offset));
-            else if(typematch<T,short>())
+            else if(typeof(T) == typeof(short))
                 return generic<T>(dinx.vsll(in int16(in lhs), offset));
             else if(typeof(T) == typeof(ushort))
                 return generic<T>(dinx.vsll(in uint16(in lhs), offset));
@@ -30,7 +30,7 @@ namespace Z0
                 return generic<T>(dinx.vsll(in int32(in lhs), offset));
             else if(typeof(T) == typeof(uint)) 
                 return generic<T>(dinx.vsll(in uint32(in lhs), offset));
-            else if(typematch<T,long>())
+            else if(typeof(T) == typeof(long))
                 return generic<T>(dinx.vsll(in int64(lhs), offset));
             else if(typeof(T) == typeof(ulong))
                 return generic<T>(dinx.vsll(in uint64(lhs), offset));
@@ -45,7 +45,7 @@ namespace Z0
         {
             if(typeof(T) == typeof(byte))
                 return generic<T>(dinx.vsll(in uint8(in lhs), offset));
-            else if(typematch<T,short>())
+            else if(typeof(T) == typeof(short))
                 return generic<T>(dinx.vsll(in int16(in lhs), offset));
             else if(typeof(T) == typeof(ushort))
                 return generic<T>(dinx.vsll(in uint16(in lhs), offset));
@@ -53,7 +53,7 @@ namespace Z0
                 return generic<T>(dinx.vsll(in int32(in lhs), offset));
             else if(typeof(T) == typeof(uint)) 
                 return generic<T>(dinx.vsll(in uint32(in lhs), offset));
-            else if(typematch<T,long>())
+            else if(typeof(T) == typeof(long))
                 return generic<T>(dinx.vsll(in int64(in lhs), offset));
             else if(typeof(T) == typeof(ulong))
                 return generic<T>(dinx.vsll(in uint64(in lhs), offset));

@@ -16,19 +16,19 @@ namespace Z0
         public static Span<T> ShiftR<T>(ReadOnlySpan<T> src, ReadOnlySpan<int> offsets, Span<T> dst)
             where T : unmanaged
         {
-            if(typematch<T,sbyte>())
+            if(typeof(T) == typeof(sbyte))
                 int8(src).ShiftR(offsets, int8(dst));
-            else if(typematch<T,byte>())
+            else if(typeof(T) == typeof(byte))
                 uint8(src).ShiftR(offsets, uint8(dst));
-            else if(typematch<T,short>())
+            else if(typeof(T) == typeof(short))
                 int16(src).ShiftR(offsets, int16(dst));
             else if(typeof(T) == typeof(ushort))
                 uint16(src).ShiftR(offsets, uint16(dst));
-            else if(typematch<T,int>())
+            else if(typeof(T) == typeof(int))
                 int32(src).ShiftR(offsets, int32(dst));
             else if(typeof(T) == typeof(uint))
                 uint32(src).ShiftR(offsets, uint32(dst));
-            else if(typematch<T,long>())
+            else if(typeof(T) == typeof(long))
                 int64(src).ShiftR(offsets, int64(dst));
             else if(typeof(T) == typeof(ulong))
                 uint64(src).ShiftR(offsets, uint64(dst));
@@ -41,19 +41,19 @@ namespace Z0
         public static Span<T> ShiftR<T>(ReadOnlySpan<T> src, int offset, Span<T> dst)
             where T : unmanaged
         {
-            if(typematch<T,sbyte>())
+            if(typeof(T) == typeof(sbyte))
                 int8(src).ShiftR(offset, int8(dst));
-            else if(typematch<T,byte>())
+            else if(typeof(T) == typeof(byte))
                 uint8(src).ShiftR(offset, uint8(dst));
-            else if(typematch<T,short>())
+            else if(typeof(T) == typeof(short))
                 int16(src).ShiftR(offset, int16(dst));
             else if(typeof(T) == typeof(ushort))
                 uint16(src).ShiftR(offset, uint16(dst));
-            else if(typematch<T,int>())
+            else if(typeof(T) == typeof(int))
                 int32(src).ShiftR(offset, int32(dst));
             else if(typeof(T) == typeof(uint))
                 uint32(src).ShiftR(offset, uint32(dst));
-            else if(typematch<T,long>())
+            else if(typeof(T) == typeof(long))
                 int64(src).ShiftR(offset, int64(dst));
             else if(typeof(T) == typeof(ulong))
                 uint64(src).ShiftR(offset, uint64(dst));
@@ -70,19 +70,19 @@ namespace Z0
         public static Span<T> ShiftR<T>(Span<T> src, int offset)
             where T : unmanaged
         {
-            if(typematch<T,sbyte>())
+            if(typeof(T) == typeof(sbyte))
                 int8(src).ShiftR(offset);
-            else if(typematch<T,byte>())
+            else if(typeof(T) == typeof(byte))
                 uint8(src).ShiftR(offset);
-            else if(typematch<T,short>())
+            else if(typeof(T) == typeof(short))
                 int16(src).ShiftR(offset);
             else if(typeof(T) == typeof(ushort))
                 uint16(src).ShiftR(offset);
-            else if(typematch<T,int>())
+            else if(typeof(T) == typeof(int))
                 int32(src).ShiftR(offset);
             else if(typeof(T) == typeof(uint))
                 uint32(src).ShiftR(offset);
-            else if(typematch<T,long>())
+            else if(typeof(T) == typeof(long))
                 int64(src).ShiftR(offset);
             else if(typeof(T) == typeof(ulong))
                 uint64(src).ShiftR(offset);
@@ -95,19 +95,19 @@ namespace Z0
         public static ref Span<T> shiftr<T>(ref Span<T> src, Span<int> offsets)
             where T : unmanaged
         {
-            if(typematch<T,sbyte>())
+            if(typeof(T) == typeof(sbyte))
                 int8(src).ShiftR(offsets);
-            else if(typematch<T,byte>())
+            else if(typeof(T) == typeof(byte))
                 uint8(src).ShiftR(offsets);
-            else if(typematch<T,short>())
+            else if(typeof(T) == typeof(short))
                 int16(src).ShiftR(offsets);
             else if(typeof(T) == typeof(ushort))
                 uint16(src).ShiftR(offsets);
-            else if(typematch<T,int>())
+            else if(typeof(T) == typeof(int))
                 int32(src).ShiftR(offsets);
             else if(typeof(T) == typeof(uint))
                 uint32(src).ShiftR(offsets);
-            else if(typematch<T,long>())
+            else if(typeof(T) == typeof(long))
                 int64(src).ShiftR(offsets);
             else if(typeof(T) == typeof(ulong))
                 uint64(src).ShiftR(offsets);

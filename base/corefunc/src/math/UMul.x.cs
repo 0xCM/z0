@@ -19,7 +19,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ulong MulLo(this ulong lhs, ulong rhs)
         {
-            UMul.mulLo(lhs, rhs, out ulong dst);
+            UMul.lomul(lhs, rhs, out ulong dst);
             return dst;
         }            
 
@@ -31,7 +31,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ulong MulHi(this ulong lhs, ulong rhs)
         {
-            UMul.mulHi(lhs, rhs, out ulong dst);
+            UMul.himul(lhs, rhs, out ulong dst);
             return dst;
         }
 

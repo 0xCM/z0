@@ -26,19 +26,19 @@ namespace Z0
         public static Vec256<T> set<T>(in Vec128<T> lo, in Vec128<T> hi)
             where T : unmanaged
         {
-            if(typematch<T,sbyte>())
+            if(typeof(T) == typeof(sbyte))
                 return generic<T>(Vec256.FromParts(in int8(in lo), in int8(in hi)));
-            else if(typematch<T,byte>())
+            else if(typeof(T) == typeof(byte))
                 return generic<T>(Vec256.FromParts(in uint8(in lo), in uint8(in hi)));
-            else if(typematch<T,short>())
+            else if(typeof(T) == typeof(short))
                 return generic<T>(Vec256.FromParts(in int16(in lo), in int16(in hi)));
             else if(typeof(T) == typeof(ushort))
                 return generic<T>(Vec256.FromParts(in uint16(in lo), in uint16(in hi)));
-            else if(typematch<T,int>())
+            else if(typeof(T) == typeof(int))
                 return generic<T>(Vec256.FromParts(in int32(in lo), in int32(in hi)));
             else if(typeof(T) == typeof(uint))
                 return generic<T>(Vec256.FromParts(in uint32(in lo), in uint32(in hi)));
-            else if(typematch<T,long>())
+            else if(typeof(T) == typeof(long))
                 return generic<T>(Vec256.FromParts(in int64(in lo), in int64(in hi)));
             else if(typeof(T) == typeof(ulong))
                 return generic<T>(Vec256.FromParts(in uint64(in lo), in uint64(in hi)));

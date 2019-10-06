@@ -45,19 +45,19 @@ namespace Z0
         public static ref T setif<T>(in T src, int srcpos, ref T dst, int dstpos)
             where T : unmanaged
         {
-            if(typematch<T,sbyte>())
+            if(typeof(T) == typeof(sbyte))
                 BitMask.setif(in int8(in src), srcpos, ref int8(ref dst), dstpos);
-            else if(typematch<T,byte>())
+            else if(typeof(T) == typeof(byte))
                 BitMask.setif(in uint8(in src), srcpos, ref uint8(ref dst), dstpos);
-            else if(typematch<T,short>())
+            else if(typeof(T) == typeof(short))
                 BitMask.setif(in int16(in src), srcpos, ref int16(ref dst), dstpos);
             else if(typeof(T) == typeof(ushort))
                 BitMask.setif(in uint16(in src), srcpos, ref uint16(ref dst), dstpos);
-            else if(typematch<T,int>())
+            else if(typeof(T) == typeof(int))
                 BitMask.setif(in int32(in src), srcpos, ref int32(ref dst), dstpos);
             else if(typeof(T) == typeof(uint))
                 BitMask.setif(in uint32(in src), srcpos, ref uint32(ref dst), dstpos);
-            else if(typematch<T,long>())
+            else if(typeof(T) == typeof(long))
                 BitMask.setif(in int64(in src), srcpos, ref int64(ref dst), dstpos);
             else if(typeof(T) == typeof(ulong))
                 BitMask.setif(in uint64(in src), srcpos, ref uint64(ref dst), dstpos);

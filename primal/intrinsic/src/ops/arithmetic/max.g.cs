@@ -19,15 +19,15 @@ namespace Z0
         public static Vec128<T> vmax<T>(in Vec128<T> x, in Vec128<T> y)
             where T : unmanaged
         {
-            if(typematch<T,sbyte>())
+            if(typeof(T) == typeof(sbyte))
                 return generic<T>(dinx.vmax(int8(x), int8(y)));
-            else if(typematch<T,byte>())
+            else if(typeof(T) == typeof(byte))
                 return generic<T>(dinx.vmax(uint8(x), uint8(y)));
-            else if(typematch<T,short>())
+            else if(typeof(T) == typeof(short))
                 return generic<T>(dinx.vmax(int16(x), int16(y)));
             else if(typeof(T) == typeof(ushort))
                 return generic<T>(dinx.vmax(uint16(x), uint16(y)));
-            else if(typematch<T,int>())
+            else if(typeof(T) == typeof(int))
                 return generic<T>(dinx.vmax(int32(x), int32(y)));
             else if(typeof(T) == typeof(uint))
                 return generic<T>(dinx.vmax(uint32(x), uint32(y)));
@@ -39,15 +39,15 @@ namespace Z0
        public static Vec256<T> vmax<T>(in Vec256<T> x, in Vec256<T> y)
             where T : unmanaged
         {
-            if(typematch<T,sbyte>())
+            if(typeof(T) == typeof(sbyte))
                 return generic<T>(dinx.vmax(int8(x), int8(y)));
-            else if(typematch<T,byte>())
+            else if(typeof(T) == typeof(byte))
                 return generic<T>(dinx.vmax(uint8(x), uint8(y)));
-            else if(typematch<T,short>())
+            else if(typeof(T) == typeof(short))
                 return generic<T>(dinx.vmax(int16(x), int16(y)));
             else if(typeof(T) == typeof(ushort))
                 return generic<T>(dinx.vmax(uint16(x), uint16(y)));
-            else if(typematch<T,int>())
+            else if(typeof(T) == typeof(int))
                 return generic<T>(dinx.vmax(int32(x), int32(y)));
             else if(typeof(T) == typeof(uint))
                 return generic<T>(dinx.vmax(uint32(x), uint32(y)));

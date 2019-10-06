@@ -72,11 +72,11 @@ namespace Z0
         static unsafe Vec128<T> lddqu128i<T>(in T src)
             where T : unmanaged
         {
-            if(typematch<T,sbyte>())
+            if(typeof(T) == typeof(sbyte))
                 return generic<T>(Avx2.LoadDquVector128(constptr(in int8(in src))));
-            else if(typematch<T,short>())
+            else if(typeof(T) == typeof(short))
                 return generic<T>(Avx2.LoadDquVector128(constptr(in int16(in src))));
-            else if(typematch<T,int>())
+            else if(typeof(T) == typeof(int))
                 return generic<T>(Avx2.LoadDquVector128(constptr(in int32(in src))));
             else
                 return generic<T>(Avx2.LoadDquVector128(constptr(in uint64(in src))));
@@ -100,11 +100,11 @@ namespace Z0
         static unsafe Vec256<T> lddqu256i<T>(in T src)
             where T : unmanaged
         {
-            if(typematch<T,sbyte>())
+            if(typeof(T) == typeof(sbyte))
                 return generic<T>(Avx2.LoadDquVector256(constptr(in int8(in src))));
-            else if(typematch<T,short>())
+            else if(typeof(T) == typeof(short))
                 return generic<T>(Avx2.LoadDquVector256(constptr(in int16(in src))));
-            else if(typematch<T,int>())
+            else if(typeof(T) == typeof(int))
                 return generic<T>(Avx2.LoadDquVector256(constptr(in int32(in src))));
             else
                 return generic<T>(Avx2.LoadDquVector256(constptr(in uint64(in src))));

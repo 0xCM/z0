@@ -259,7 +259,7 @@ namespace Z0.Test
                 var src = Random.Next<T>();
                 var unpacked = gbits.unpack(src, _dst);
                 for(var j = 0; j<unpacked.Length; j++)
-                    Claim.eq((Bit)gbits.test(in src, in j), (Bit)unpacked[j]);
+                    Claim.eq((Bit)gbits.test(in src, j), (Bit)unpacked[j]);
                 
                 var dst = default(T);
                 gbits.pack(unpacked, ref dst);

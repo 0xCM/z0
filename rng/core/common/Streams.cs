@@ -220,19 +220,19 @@ namespace Z0
             var tryMax = 10;
             while(true)            
             {
-                if(typematch<T,sbyte>())
+                if(typeof(T) == typeof(sbyte))
                     next = generic<T>(src.Next<sbyte>(domain.As<sbyte>()));                    
-                else if(typematch<T,byte>())
+                else if(typeof(T) == typeof(byte))
                     next = generic<T>(src.Next<byte>(domain.As<byte>()));                    
-                else if(typematch<T,short>())
+                else if(typeof(T) == typeof(short))
                     next = generic<T>(src.Next<short>(domain.As<short>()));                    
                 else if(typeof(T) == typeof(ushort))
                     next = generic<T>(src.Next<ushort>(domain.As<ushort>()));                    
-                else if(typematch<T,int>())
+                else if(typeof(T) == typeof(int))
                     next = generic<T>(src.Next<int>(domain.As<int>()));                    
                 else if(typeof(T) == typeof(uint))
                     next = generic<T>(src.Next<uint>(domain.As<uint>()));                    
-                else if(typematch<T,long>())
+                else if(typeof(T) == typeof(long))
                     next = generic<T>(src.Next<long>(domain.As<long>()));                    
                 else if(typeof(T) == typeof(ulong))
                     next = generic<T>(src.Next<ulong>(domain.As<ulong>()));                    

@@ -22,19 +22,19 @@ namespace Z0
         public static bool odd<T>(T src)
             where T : unmanaged
         {
-            if(typematch<T,sbyte>())
+            if(typeof(T) == typeof(sbyte))
                 return zfunc.odd(int8(src));  
-            else if(typematch<T,byte>())
+            else if(typeof(T) == typeof(byte))
                 return zfunc.odd(uint8(src));  
-            else if(typematch<T,short>())
+            else if(typeof(T) == typeof(short))
                 return zfunc.odd(int16(src));  
             else if(typeof(T) == typeof(ushort))
                 return zfunc.odd(uint16(src));  
-            else if(typematch<T,int>())
+            else if(typeof(T) == typeof(int))
                 return zfunc.odd(int32(src));  
             else if(typeof(T) == typeof(uint))
                 return zfunc.odd(uint32(src));  
-            else if(typematch<T,long>())
+            else if(typeof(T) == typeof(long))
                 return zfunc.odd(int64(src));  
             else if(typeof(T) == typeof(ulong))
                 return zfunc.odd(uint64(src));  

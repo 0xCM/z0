@@ -24,19 +24,19 @@ namespace Z0
         public static AsmBinOp<T> CreateBinOpPI<T>(this AsmCode code)
             where T : unmanaged
         {
-            if(typematch<T,sbyte>())
+            if(typeof(T) == typeof(sbyte))
                 return code.CreateBinOpI8().ToGeneric<BinOpI8,T>();                
-            else if(typematch<T,byte>())
+            else if(typeof(T) == typeof(byte))
                 return code.CreateBinOpU8().ToGeneric<BinOpU8,T>();                
-            else if(typematch<T,short>())
+            else if(typeof(T) == typeof(short))
                 return code.CreateBinOpI16().ToGeneric<BinOpI16,T>();                
             else if(typeof(T) == typeof(ushort))
                 return code.CreateBinOpU16().ToGeneric<BinOpU16,T>();                
-            else if(typematch<T,int>())
+            else if(typeof(T) == typeof(int))
                 return code.CreateBinOpI32().ToGeneric<BinOpI32,T>();                
             else if(typeof(T) == typeof(uint))
                 return code.CreateBinOpU32().ToGeneric<BinOpU32,T>();                
-            else if(typematch<T,long>())
+            else if(typeof(T) == typeof(long))
                 return code.CreateBinOpI64().ToGeneric<BinOpI64,T>();                
             else if(typeof(T) == typeof(ulong))
                 return code.CreateBinOpU64().ToGeneric<BinOpU64,T>();                

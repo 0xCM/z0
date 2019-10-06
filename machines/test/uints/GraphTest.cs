@@ -2,17 +2,16 @@
 // Copyright   :  (c) Chris Moore, 2019
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Test
+namespace Z0
 {        
     using System;
     using System.Linq;
     using System.Threading;
     using static zfunc;
 
-
     public class GraphTest : UnitTest<GraphTest>
     {
-       public void Create8()
+        public void Create8()
         {                    
             var m = BitMatrix8.From(
                 0b00001000, //0 -> 3

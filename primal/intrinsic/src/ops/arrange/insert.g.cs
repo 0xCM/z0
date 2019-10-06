@@ -29,19 +29,19 @@ namespace Z0
         public static Vec256<T> insert<T>(in Vec128<T> src, in Vec256<T> dst, byte index)        
             where T : unmanaged
         {
-            if(typematch<T,sbyte>())
+            if(typeof(T) == typeof(sbyte))
                 return generic<T>(dinx.insert(int8(src), int8(dst), index));
-            else if(typematch<T,byte>())
+            else if(typeof(T) == typeof(byte))
                 return generic<T>(dinx.insert(uint8(src), uint8(dst), index));
-            else if(typematch<T,short>())
+            else if(typeof(T) == typeof(short))
                 return generic<T>(dinx.insert(int16(src), int16(dst), index));
             else if(typeof(T) == typeof(ushort))
                 return generic<T>(dinx.insert(uint16(src), uint16(dst), index));
-            else if(typematch<T,int>())
+            else if(typeof(T) == typeof(int))
                 return generic<T>(dinx.insert(int32(src), int32(dst), index));
             else if(typeof(T) == typeof(uint))
                 return generic<T>(dinx.insert(uint32(src), uint32(dst), index));
-            else if(typematch<T,long>())
+            else if(typeof(T) == typeof(long))
                 return generic<T>(dinx.insert(int64(src), int64(dst), index));
             else if(typeof(T) == typeof(ulong))
                 return generic<T>(dinx.insert(uint64(src), uint64(dst), index));

@@ -24,19 +24,19 @@ namespace Z0
         public static Vec128Cmp<T> eq<T>(in Vec128<T> lhs, in Vec128<T> rhs)
             where T : unmanaged
         {
-            if(typematch<T,sbyte>())
+            if(typeof(T) == typeof(sbyte))
                 return dinx.eq(in int8(in lhs), in int8(in rhs)).As<T>();
-            else if(typematch<T,byte>())
+            else if(typeof(T) == typeof(byte))
                 return dinx.eq(in uint8(in lhs), in uint8(in rhs)).As<T>();
-            else if(typematch<T,short>())
+            else if(typeof(T) == typeof(short))
                 return dinx.eq(in int16(in lhs), in int16(in rhs)).As<T>();
             else if(typeof(T) == typeof(ushort))
                 return dinx.eq(in uint16(in lhs), in uint16(in rhs)).As<T>();
-            else if(typematch<T,int>())
+            else if(typeof(T) == typeof(int))
                 return dinx.eq(in int32(in lhs), in int32(in rhs)).As<T>();
             else if(typeof(T) == typeof(uint))
                 return dinx.eq(in uint32(in lhs), in uint32(in rhs)).As<T>();
-            else if(typematch<T,long>())
+            else if(typeof(T) == typeof(long))
                 return dinx.eq(in int64(in lhs), in int64(in rhs)).As<T>();
             else if(typeof(T) == typeof(ulong))
                 return dinx.eq(in uint64(in lhs), in uint64(in rhs)).As<T>();
@@ -58,19 +58,19 @@ namespace Z0
         public static Vec256Cmp<T> eq<T>(in Vec256<T> lhs, in Vec256<T> rhs)
             where T : unmanaged
         {
-            if(typematch<T,sbyte>())
+            if(typeof(T) == typeof(sbyte))
                 return dinx.eq(in int8(in lhs), in int8(in rhs)).As<T>();
-            else if(typematch<T,byte>())
+            else if(typeof(T) == typeof(byte))
                 return dinx.eq(in uint8(in lhs), in uint8(in rhs)).As<T>();
-            else if(typematch<T,short>())
+            else if(typeof(T) == typeof(short))
                 return dinx.eq(in int16(in lhs), in int16(in rhs)).As<T>();
             else if(typeof(T) == typeof(ushort))
                 return dinx.eq(in uint16(in lhs), in uint16(in rhs)).As<T>();
-            else if(typematch<T,int>())
+            else if(typeof(T) == typeof(int))
                 return dinx.eq(in int32(in lhs), in int32(in rhs)).As<T>();
             else if(typeof(T) == typeof(uint))
                 return dinx.eq(in uint32(in lhs), in uint32(in rhs)).As<T>();
-            else if(typematch<T,long>())
+            else if(typeof(T) == typeof(long))
                 return dinx.eq(in int64(in lhs), in int64(in rhs)).As<T>();
             else if(typeof(T) == typeof(ulong))
                 return dinx.eq(in uint64(in lhs), in uint64(in rhs)).As<T>();

@@ -24,19 +24,19 @@ namespace Z0
         public static uint rank<T>(in T src, BitPos pos)
             where T : unmanaged
         {
-            if(typematch<T,sbyte>())
+            if(typeof(T) == typeof(sbyte))
                 return Bits.rank(int8(src), pos);
-            else if(typematch<T,byte>())
+            else if(typeof(T) == typeof(byte))
                 return Bits.rank(uint8(src), pos);
-            else if(typematch<T,short>())
+            else if(typeof(T) == typeof(short))
                 return Bits.rank(int16(src), pos);
             else if(typeof(T) == typeof(ushort))
                 return Bits.rank(uint16(src), pos);
-            else if(typematch<T,int>())
+            else if(typeof(T) == typeof(int))
                 return Bits.rank(int32(src), pos);
             else if(typeof(T) == typeof(uint))
                 return Bits.rank(uint32(src), pos);
-            else if(typematch<T,long>())
+            else if(typeof(T) == typeof(long))
                 return Bits.rank(int64(src), pos);
             else if(typeof(T) == typeof(ulong))
                 return Bits.rank(uint64(src), pos);

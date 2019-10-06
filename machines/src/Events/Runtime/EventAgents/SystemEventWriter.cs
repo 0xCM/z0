@@ -9,15 +9,7 @@ namespace Z0
     using System.Collections.Generic;
     using static zfunc;
 
-    using Z0.Events;
     
-    public interface ISystemEvents
-    {
-        void Pulse(PulseEvent e);
-        
-        void AgentTransitioned(AgentTransition data);
-    }
-
     [EventSource(Name = SourceName)]    
     public sealed class SystemEventWriter : EventWriter, ISystemEvents
     {
@@ -32,7 +24,6 @@ namespace Z0
 
         protected override void OnEventCommand(EventCommandEventArgs command)        
             => inform($"Received the {command.Command} command");    
-
 
         void Pulse(ulong EventKind, uint ServerId, uint AgentId, ulong Timestamp)
             => WriteEvent(1, EventKind, ServerId, AgentId, Timestamp);    

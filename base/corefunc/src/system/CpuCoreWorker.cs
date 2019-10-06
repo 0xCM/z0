@@ -31,7 +31,6 @@ namespace Z0
             this.CycleCount = 0;
         }
 
-
         public readonly uint CoreNumber;
 
         public readonly TimeSpan Frequency;
