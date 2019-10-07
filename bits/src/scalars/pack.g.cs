@@ -12,9 +12,7 @@ namespace Z0
     using static AsIn;
 
     partial class gbits
-    {
-        
-
+    {    
         public static ref T pack<T>(ReadOnlySpan<Bit> src, ref T dst)         
             where T : unmanaged
         {

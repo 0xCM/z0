@@ -1,4 +1,4 @@
-// 2019-10-06 02:25:57:866
+// 2019-10-06 23:48:39:958
 Vec128<int> vxor_d128x32i(Vec128<int> x, Vec128<int> y)
 {
     IL_0000: ldarga.s x
@@ -2449,19 +2449,19 @@ Vec256<sbyte> vand_g256x8i(Vec256<sbyte> x, Vec256<sbyte> y)
     IL_0009: ret
 
 }
-Vector256<byte> vand_n256x8u(Vector256<byte> x, Vector256<byte> y)
+Vector256<short> vand_n256x16i(Vector256<short> x, Vector256<short> y)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: call System.Runtime.Intrinsics.Vector256`1<System.Byte> System.Runtime.Intrinsics.X86.Avx2::And(System.Runtime.Intrinsics.Vector256`1<System.Byte>,System.Runtime.Intrinsics.Vector256`1<System.Byte>)
+    IL_0002: call System.Runtime.Intrinsics.Vector256`1<System.Int16> System.Runtime.Intrinsics.X86.Avx2::And(System.Runtime.Intrinsics.Vector256`1<System.Int16>,System.Runtime.Intrinsics.Vector256`1<System.Int16>)
     IL_0007: ret
 
 }
-Vec256<byte> vand_d256x8u(Vec256<byte> x, Vec256<byte> y)
+Vec256<short> vand_d256x16i(Vec256<short> x, Vec256<short> y)
 {
     IL_0000: ldarga.s x
     IL_0002: ldarga.s y
-    IL_0004: call Z0.Vec256`1<System.Byte> Z0.dinx::vand(Z0.Vec256`1<System.Byte>&,Z0.Vec256`1<System.Byte>&)
+    IL_0004: call Z0.Vec256`1<System.Int16> Z0.dinx::vand(Z0.Vec256`1<System.Int16>&,Z0.Vec256`1<System.Int16>&)
     IL_0009: ret
 
 }

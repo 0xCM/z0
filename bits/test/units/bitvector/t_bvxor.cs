@@ -63,8 +63,8 @@ namespace Z0
                 var y = Random.Next<S>();
                 var z = gmath.xor(x, y);
 
-                var v1 = gbits.fixedbits<V,S>(x);
-                var v2 = gbits.fixedbits<V,S>(y);
+                var v1 = PrimalBits.define<V,S>(x);
+                var v2 = PrimalBits.define<V,S>(y);
                 var v3 = v1 ^ v2;
                 Claim.eq(v3.Scalar, z);
             }

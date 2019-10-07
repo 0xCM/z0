@@ -82,23 +82,19 @@ namespace Z0
             => Disassemble(true, true, t);
         void Disassemble(bool asm, bool cil)
         {
-            // Disassemble(new PrimalScenarios());
             Disassemble(new ExperimentalScenarios());
             Disassemble(typeof(math));
             Disassemble(typeof(dinx));    
             Disassemble(typeof(bitvector));    
             Disassemble(typeof(soc));    
             Disassemble(typeof(boc));    
+            Disassemble(typeof(bmoc));    
             Disassemble(typeof(inxsoc));    
             Disassemble(typeof(inxvoc));    
             Disassemble(typeof(zfoc));    
             Disassemble(typeof(foc));    
             Disassemble(typeof(circop));    
             Disassemble(typeof(BitParts));    
-
-
-            // var dst = DefineAsmOutPath("gmath.add");
-            // DeconstructGeneric<int>(typeof(gmath), "add").OnSome(d => d.EmitAsm(dst));
             
         }
 

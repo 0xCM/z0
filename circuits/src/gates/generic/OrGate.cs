@@ -22,7 +22,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public T Send(in T x, in T y)
-            => gbits.or(in x, in y);
+            => gmath.or(in x, in y);
 
         [MethodImpl(Inline)]
         public Vec128<T> Send(in Vec128<T> a, in Vec128<T> b)
@@ -30,7 +30,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public Vector256<T> Send(in Vector256<T> a, in Vector256<T> b)
-            => gbits.or(in a, in b);
+            => gmath.or(in a, in b);
     }
 
 

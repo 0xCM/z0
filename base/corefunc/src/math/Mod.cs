@@ -11,6 +11,46 @@ namespace Z0
         
     using static zfunc;    
 
+
+    public readonly struct Mod8
+    {
+        const ulong N = 8;
+
+        const ulong M = UInt64.MaxValue / N + 1;
+
+        /// <summary>
+        /// Computes a % N
+        /// </summary>
+        /// <param name="a">The dividend</param>
+        [MethodImpl(Inline)]
+        public static uint mod(uint a)
+            => (uint) UMul.himul(M * a, N);
+
+        /// <summary>
+        /// Computes the quotient a / N
+        /// </summary>
+        /// <param name="a">The dividend</param>
+        [MethodImpl(Inline)]
+        public static uint div(uint a)        
+            => (uint) UMul.himul(M, a);
+
+        /// <summary>
+        /// Returns true if the operand is divisible by N
+        /// </summary>
+        /// <param name="a"></param>
+        public static bool divisible(uint a)
+            => (a & 7) == 0;
+
+        /// <summary>
+        /// Computes both the quotient and remainder
+        /// </summary>
+        /// <param name="a">The dividend</param>
+        [MethodImpl(Inline)]
+        public static (uint q, uint r) divrem(uint a)
+            => (div(a), mod(a));            
+
+    }
+
     public readonly struct Mod16
     {
         const ulong N = 16;
@@ -36,7 +76,7 @@ namespace Z0
         /// <summary>
         /// Computes both the quotient and remainder
         /// </summary>
-        /// <param name="a"></param>
+        /// <param name="a">The dividend</param>
         [MethodImpl(Inline)]
         public static (uint q, uint r) divrem(uint a)
             => (div(a), mod(a));            

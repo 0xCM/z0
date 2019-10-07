@@ -19,41 +19,41 @@ namespace Z0
     {
 
         [MethodImpl(Inline)]
-        public static Vec128<T> bslli<T>(in Vec128<T> lhs, byte count)
+        public static Vec128<T> vbsll<T>(in Vec128<T> lhs, byte count)
             where T : unmanaged
         {
             if(typeof(T) == typeof(short))
-                return generic<T>(dinx.bslli(in int16(in lhs), count));
+                return generic<T>(dinx.vbsll(in int16(in lhs), count));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(dinx.bslli(in uint16(in lhs), count));
+                return generic<T>(dinx.vbsll(in uint16(in lhs), count));
             else if(typeof(T) == typeof(int))
-                return generic<T>(dinx.bslli(in int32(in lhs), count));
+                return generic<T>(dinx.vbsll(in int32(in lhs), count));
             else if(typeof(T) == typeof(uint)) 
-                return generic<T>(dinx.bslli(in uint32(in lhs), count));
+                return generic<T>(dinx.vbsll(in uint32(in lhs), count));
             else if(typeof(T) == typeof(long))
-                return generic<T>(dinx.bslli(in int64(in lhs), count));
+                return generic<T>(dinx.vbsll(in int64(in lhs), count));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(dinx.bslli(in uint64(in lhs), count));
+                return generic<T>(dinx.vbsll(in uint64(in lhs), count));
             else
                 throw unsupported<T>();
         }
 
         [MethodImpl(Inline)]
-        public static Vec256<T> bslli<T>(in Vec256<T> lhs, byte count)
+        public static Vec256<T> vbsll<T>(in Vec256<T> lhs, byte count)
             where T : unmanaged
         {
             if(typeof(T) == typeof(short))
-                return generic<T>(dinx.bslli(in int16(in lhs), count));
+                return generic<T>(dinx.vbsll(in int16(in lhs), count));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(dinx.bslli(in uint16(in lhs), count));
+                return generic<T>(dinx.vbsll(in uint16(in lhs), count));
             else if(typeof(T) == typeof(int))
-                return generic<T>(dinx.bslli(in int32(in lhs), count));
+                return generic<T>(dinx.vbsll(in int32(in lhs), count));
             else if(typeof(T) == typeof(uint)) 
-                return generic<T>(dinx.bslli(in uint32(in lhs), count));
+                return generic<T>(dinx.vbsll(in uint32(in lhs), count));
             else if(typeof(T) == typeof(long))
-                return generic<T>(dinx.bslli(in int64(in lhs), count));
+                return generic<T>(dinx.vbsll(in int64(in lhs), count));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(dinx.bslli(in uint64(in lhs), count));
+                return generic<T>(dinx.vbsll(in uint64(in lhs), count));
             else
                 throw unsupported<T>();
         }

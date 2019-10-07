@@ -1,4 +1,52 @@
-// 2019-10-06 02:25:57:387
+// 2019-10-06 23:48:39:394
+sbyte sub_d8i(sbyte lhs, sbyte rhs)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call System.SByte Z0.math::sub(System.SByte,System.SByte)
+    IL_0007: ret
+
+}
+sbyte sub_g8i(sbyte lhs, sbyte rhs)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call System.SByte Z0.gmath::sub<System.SByte>(System.SByte,System.SByte)
+    IL_0007: ret
+
+}
+byte sub_d8u(byte lhs, byte rhs)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call System.Byte Z0.math::sub(System.Byte,System.Byte)
+    IL_0007: ret
+
+}
+byte sub_g8u(byte lhs, byte rhs)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call System.Byte Z0.gmath::sub<System.Byte>(System.Byte,System.Byte)
+    IL_0007: ret
+
+}
+short sub_d16i(short lhs, short rhs)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call System.Int16 Z0.math::sub(System.Int16,System.Int16)
+    IL_0007: ret
+
+}
+short sub_g16i(short lhs, short rhs)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call System.Int16 Z0.gmath::sub<System.Int16>(System.Int16,System.Int16)
+    IL_0007: ret
+
+}
 ushort sub_d16u(ushort lhs, ushort rhs)
 {
     IL_0000: ldarg.0
@@ -76,6 +124,54 @@ ulong sub_g64u(ulong lhs, ulong rhs)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: call System.UInt64 Z0.gmath::sub<System.UInt64>(System.UInt64,System.UInt64)
+    IL_0007: ret
+
+}
+short mul_d16i(short lhs, short rhs)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call System.Int16 Z0.math::mul(System.Int16,System.Int16)
+    IL_0007: ret
+
+}
+short mul_g16i(short lhs, short rhs)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call System.Int16 Z0.gmath::mul<System.Int16>(System.Int16,System.Int16)
+    IL_0007: ret
+
+}
+ushort mul_d16u(ushort lhs, ushort rhs)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call System.UInt16 Z0.math::mul(System.UInt16,System.UInt16)
+    IL_0007: ret
+
+}
+ushort mul_g16u(ushort lhs, ushort rhs)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call System.UInt16 Z0.gmath::mul<System.UInt16>(System.UInt16,System.UInt16)
+    IL_0007: ret
+
+}
+int mul_d32i(int lhs, int rhs)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call System.Int32 Z0.math::mul(System.Int32,System.Int32)
+    IL_0007: ret
+
+}
+int mul_g32i(int lhs, int rhs)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call System.Int32 Z0.gmath::mul<System.Int32>(System.Int32,System.Int32)
     IL_0007: ret
 
 }
@@ -1001,51 +1097,51 @@ ulong square_g64u(ulong x)
     IL_0006: ret
 
 }
-sbyte sub_d8i(sbyte lhs, sbyte rhs)
+bool gt_d64f(double lhs, double rhs)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: call System.SByte Z0.math::sub(System.SByte,System.SByte)
+    IL_0002: call System.Boolean Z0.fmath::gt(System.Double,System.Double)
     IL_0007: ret
 
 }
-sbyte sub_g8i(sbyte lhs, sbyte rhs)
+bool gt_g64f(double lhs, double rhs)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: call System.SByte Z0.gmath::sub<System.SByte>(System.SByte,System.SByte)
+    IL_0002: call System.Boolean Z0.gfp::gt<System.Double>(System.Double,System.Double)
     IL_0007: ret
 
 }
-byte sub_d8u(byte lhs, byte rhs)
+bool gteq_d8i(sbyte lhs, sbyte rhs)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: call System.Byte Z0.math::sub(System.Byte,System.Byte)
+    IL_0002: call System.Boolean Z0.math::gteq(System.SByte,System.SByte)
     IL_0007: ret
 
 }
-byte sub_g8u(byte lhs, byte rhs)
+bool gteq_g8i(sbyte lhs, sbyte rhs)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: call System.Byte Z0.gmath::sub<System.Byte>(System.Byte,System.Byte)
+    IL_0002: call System.Boolean Z0.gmath::gteq<System.SByte>(System.SByte,System.SByte)
     IL_0007: ret
 
 }
-short sub_d16i(short lhs, short rhs)
+bool gteq_d8u(byte lhs, byte rhs)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: call System.Int16 Z0.math::sub(System.Int16,System.Int16)
+    IL_0002: call System.Boolean Z0.math::gteq(System.Byte,System.Byte)
     IL_0007: ret
 
 }
-short sub_g16i(short lhs, short rhs)
+bool gteq_g8u(byte lhs, byte rhs)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: call System.Int16 Z0.gmath::sub<System.Int16>(System.Int16,System.Int16)
+    IL_0002: call System.Boolean Z0.gmath::gteq<System.Byte>(System.Byte,System.Byte)
     IL_0007: ret
 
 }
@@ -1345,30 +1441,6 @@ bool lt_d16u(ushort lhs, ushort rhs)
     IL_0007: ret
 
 }
-bool lt_g16u(ushort lhs, ushort rhs)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: call System.Boolean Z0.gmath::lt<System.UInt16>(System.UInt16,System.UInt16)
-    IL_0007: ret
-
-}
-bool lt_d32i(int lhs, int rhs)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: call System.Boolean Z0.math::lt(System.Int32,System.Int32)
-    IL_0007: ret
-
-}
-bool lt_g32i(int lhs, int rhs)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: call System.Boolean Z0.gmath::lt<System.Int32>(System.Int32,System.Int32)
-    IL_0007: ret
-
-}
 bool lt_d32u(uint lhs, uint rhs)
 {
     IL_0000: ldarg.0
@@ -1390,6 +1462,30 @@ bool lt_d64i(long lhs, long rhs)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: call System.Boolean Z0.math::lt(System.Int64,System.Int64)
+    IL_0007: ret
+
+}
+bool lt_g64i(long lhs, long rhs)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call System.Boolean Z0.gmath::lt<System.Int64>(System.Int64,System.Int64)
+    IL_0007: ret
+
+}
+bool lt_d64u(ulong lhs, ulong rhs)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call System.Boolean Z0.math::lt(System.UInt64,System.UInt64)
+    IL_0007: ret
+
+}
+bool lt_g64u(ulong lhs, ulong rhs)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call System.Boolean Z0.gmath::lt<System.UInt64>(System.UInt64,System.UInt64)
     IL_0007: ret
 
 }
@@ -1987,51 +2083,51 @@ byte mul_g8u(byte lhs, byte rhs)
     IL_0007: ret
 
 }
-short mul_d16i(short lhs, short rhs)
+bool divides_d8u(byte lhs, byte rhs)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: call System.Int16 Z0.math::mul(System.Int16,System.Int16)
+    IL_0002: call System.Boolean Z0.math::divides(System.Byte,System.Byte)
     IL_0007: ret
 
 }
-short mul_g16i(short lhs, short rhs)
+bool divides_g8u(byte lhs, byte rhs)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: call System.Int16 Z0.gmath::mul<System.Int16>(System.Int16,System.Int16)
+    IL_0002: call System.Boolean Z0.gmath::divides<System.Byte>(System.Byte,System.Byte)
     IL_0007: ret
 
 }
-ushort mul_d16u(ushort lhs, ushort rhs)
+bool divides_d16i(short lhs, short rhs)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: call System.UInt16 Z0.math::mul(System.UInt16,System.UInt16)
+    IL_0002: call System.Boolean Z0.math::divides(System.Int16,System.Int16)
     IL_0007: ret
 
 }
-ushort mul_g16u(ushort lhs, ushort rhs)
+bool divides_g16i(short lhs, short rhs)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: call System.UInt16 Z0.gmath::mul<System.UInt16>(System.UInt16,System.UInt16)
+    IL_0002: call System.Boolean Z0.gmath::divides<System.Int16>(System.Int16,System.Int16)
     IL_0007: ret
 
 }
-int mul_d32i(int lhs, int rhs)
+bool divides_d16u(ushort lhs, ushort rhs)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: call System.Int32 Z0.math::mul(System.Int32,System.Int32)
+    IL_0002: call System.Boolean Z0.math::divides(System.UInt16,System.UInt16)
     IL_0007: ret
 
 }
-int mul_g32i(int lhs, int rhs)
+bool divides_g16u(ushort lhs, ushort rhs)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: call System.Int32 Z0.gmath::mul<System.Int32>(System.Int32,System.Int32)
+    IL_0002: call System.Boolean Z0.gmath::divides<System.UInt16>(System.UInt16,System.UInt16)
     IL_0007: ret
 
 }
@@ -2999,54 +3095,6 @@ bool gt_g32f(float lhs, float rhs)
     IL_0007: ret
 
 }
-bool gt_d64f(double lhs, double rhs)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: call System.Boolean Z0.fmath::gt(System.Double,System.Double)
-    IL_0007: ret
-
-}
-bool gt_g64f(double lhs, double rhs)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: call System.Boolean Z0.gfp::gt<System.Double>(System.Double,System.Double)
-    IL_0007: ret
-
-}
-bool gteq_d8i(sbyte lhs, sbyte rhs)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: call System.Boolean Z0.math::gteq(System.SByte,System.SByte)
-    IL_0007: ret
-
-}
-bool gteq_g8i(sbyte lhs, sbyte rhs)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: call System.Boolean Z0.gmath::gteq<System.SByte>(System.SByte,System.SByte)
-    IL_0007: ret
-
-}
-bool gteq_d8u(byte lhs, byte rhs)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: call System.Boolean Z0.math::gteq(System.Byte,System.Byte)
-    IL_0007: ret
-
-}
-bool gteq_g8u(byte lhs, byte rhs)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: call System.Boolean Z0.gmath::gteq<System.Byte>(System.Byte,System.Byte)
-    IL_0007: ret
-
-}
 sbyte add_d8i(sbyte lhs, sbyte rhs)
 {
     IL_0000: ldarg.0
@@ -3525,6 +3573,12 @@ byte minval_g8u()
     IL_0005: ret
 
 }
+short minval_n16i()
+{
+    IL_0000: ldc.i4 -32768
+    IL_0005: ret
+
+}
 short minval_g16i()
 {
     IL_0000: call System.Int16 Z0.gmath::minval<System.Int16>()
@@ -3537,10 +3591,22 @@ ushort minval_g16u()
     IL_0005: ret
 
 }
+int minval_32i()
+{
+    IL_0000: ldc.i4 -2147483648
+    IL_0005: ret
+
+}
 int minval_g32i()
 {
     IL_0000: call System.Int32 Z0.gmath::minval<System.Int32>()
     IL_0005: ret
+
+}
+uint minval_32u()
+{
+    IL_0000: ldc.i4.0
+    IL_0001: ret
 
 }
 uint minval_g32u()
@@ -3597,10 +3663,22 @@ ushort maxval_g16u()
     IL_0005: ret
 
 }
+int maxval_n32i()
+{
+    IL_0000: ldc.i4 2147483647
+    IL_0005: ret
+
+}
 int maxval_g32i()
 {
     IL_0000: call System.Int32 Z0.gmath::maxval<System.Int32>()
     IL_0005: ret
+
+}
+uint maxval_n32u()
+{
+    IL_0000: ldc.i4.m1
+    IL_0001: ret
 
 }
 uint maxval_g32u()
@@ -3625,6 +3703,12 @@ float maxval_g32f()
 {
     IL_0000: call System.Single Z0.gmath::maxval<System.Single>()
     IL_0005: ret
+
+}
+double maxval_n64f()
+{
+    IL_0000: ldc.r8 1.7976931348623157E+308
+    IL_0009: ret
 
 }
 double maxval_g64f()
@@ -3918,54 +4002,6 @@ bool divides_g8i(sbyte lhs, sbyte rhs)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: call System.Boolean Z0.gmath::divides<System.SByte>(System.SByte,System.SByte)
-    IL_0007: ret
-
-}
-bool divides_d8u(byte lhs, byte rhs)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: call System.Boolean Z0.math::divides(System.Byte,System.Byte)
-    IL_0007: ret
-
-}
-bool divides_g8u(byte lhs, byte rhs)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: call System.Boolean Z0.gmath::divides<System.Byte>(System.Byte,System.Byte)
-    IL_0007: ret
-
-}
-bool divides_d16i(short lhs, short rhs)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: call System.Boolean Z0.math::divides(System.Int16,System.Int16)
-    IL_0007: ret
-
-}
-bool divides_g16i(short lhs, short rhs)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: call System.Boolean Z0.gmath::divides<System.Int16>(System.Int16,System.Int16)
-    IL_0007: ret
-
-}
-bool divides_d16u(ushort lhs, ushort rhs)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: call System.Boolean Z0.math::divides(System.UInt16,System.UInt16)
-    IL_0007: ret
-
-}
-bool divides_g16u(ushort lhs, ushort rhs)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: call System.Boolean Z0.gmath::divides<System.UInt16>(System.UInt16,System.UInt16)
     IL_0007: ret
 
 }

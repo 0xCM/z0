@@ -24,23 +24,51 @@ namespace Z0
         [MethodImpl(Inline)]
         public static T range<T>(in T src, BitPos i0, BitPos i1)
         {
+            if(typeof(T) == typeof(byte) 
+                || typeof(T) == typeof(ushort) 
+                || typeof(T) == typeof(uint) 
+                || typeof(T) == typeof(ulong))
+                    return rangeu(src,i0,i1);
+            else if(typeof(T) == typeof(sbyte) 
+                || typeof(T) == typeof(short)
+                || typeof(T) == typeof(int) 
+                || typeof(T) == typeof(long))
+                    return rangei(src,i0,i1);
+            else
+                return rangef(src,i0,i1);
+        }
+
+        [MethodImpl(Inline)]
+        static T rangei<T>(in T src, BitPos i0, BitPos i1)
+        {
             if(typeof(T) == typeof(sbyte))
                 return generic<T>(Bits.range(int8(src),i0,i1));
-            else if(typeof(T) == typeof(byte))
-                return generic<T>(Bits.range(uint8(src),i0,i1));
             else if(typeof(T) == typeof(short))
                 return generic<T>(Bits.range(int16(src),i0,i1));
-            else if(typeof(T) == typeof(ushort))
-                return generic<T>(Bits.range(uint16(src),i0,i1));
             else if(typeof(T) == typeof(int))
                 return generic<T>(Bits.range(int32(src),i0,i1));
+            else 
+                return generic<T>(Bits.range(int64(src),i0,i1));
+        }
+
+        [MethodImpl(Inline)]
+        static T rangeu<T>(in T src, BitPos i0, BitPos i1)
+        {
+            if(typeof(T) == typeof(byte))
+                return generic<T>(Bits.range(uint8(src),i0,i1));
+            else if(typeof(T) == typeof(ushort))
+                return generic<T>(Bits.range(uint16(src),i0,i1));
             else if(typeof(T) == typeof(uint))
                 return generic<T>(Bits.range(uint32(src),i0,i1));
-            else if(typeof(T) == typeof(long))
-                return generic<T>(Bits.range(int64(src),i0,i1));
-            else if(typeof(T) == typeof(ulong))
+            else 
                 return generic<T>(Bits.range(uint64(src),i0,i1));
-            else if(typeof(T) == typeof(float))
+            
+        }
+
+        [MethodImpl(Inline)]
+        static T rangef<T>(in T src, BitPos i0, BitPos i1)
+        {
+            if(typeof(T) == typeof(float))
                 return generic<T>(Bits.range(float32(src),i0,i1));
             else if(typeof(T) == typeof(double))
                 return generic<T>(Bits.range(float64(src),i0,i1));
@@ -66,7 +94,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static ByteSize ByteCount(uint bitcount)
-            => (uint)(Mod<N8>.div(bitcount) + (Mod<N8>.mod(bitcount) == 0 ? 0 : 1));
+            => (uint)(Mod8.div(bitcount) + (Mod8.mod(bitcount) == 0 ? 0 : 1));
 
     }
 

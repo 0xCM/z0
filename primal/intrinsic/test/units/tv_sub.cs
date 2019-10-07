@@ -15,33 +15,87 @@ namespace Z0.Test
 
     public class tv_sub : IntrinsicTest<tv_sub>
     {
-        public void sub128()
+        
+        public void vsub_128x8i_check()
         {
             sub128_check<sbyte>();
-            sub128_check<byte>();
-            sub128_check<short>();
-            sub128_check<ushort>();
-            sub128_check<int>();
-            sub128_check<uint>();
-            sub128_check<long>();
-            sub128_check<ulong>();
-            sub128_check<float>();
-            sub128_check<double>();
         }
 
-        public void sub256()
+        public void vsub_128x8u_check()
+        {
+            sub128_check<byte>();            
+        }
+
+        public void vsub_128x16i_check()
+        {
+            sub128_check<short>();            
+        }
+
+        public void vsub_128x16u_check()
+        {
+            sub128_check<ushort>();
+        }
+
+        public void vsub_128x32i_check()
+        {
+            sub128_check<int>();            
+        }
+
+        public void vsub_128x32u_check()
+        {
+            sub128_check<uint>();            
+        }
+
+        public void vsub_128x64i_check()
+        {
+            sub128_check<long>();
+        }
+
+        public void vsub_128x64u_check()
+        {
+            sub128_check<ulong>();
+        }
+
+        public void vsub_256x8i_check()
         {
             sub256_check<sbyte>();
-            sub256_check<byte>();
-            sub256_check<short>();
-            sub256_check<ushort>();
-            sub256_check<int>();
-            sub256_check<uint>();
-            sub256_check<long>();
-            sub256_check<ulong>();
-            sub256_check<float>();
-            sub256_check<double>();
         }
+
+        public void vsub_256x8u_check()
+        {
+            sub256_check<byte>();            
+        }
+
+        public void vsub_256x16i_check()
+        {
+            sub256_check<short>();            
+        }
+
+        public void vsub_256x16u_check()
+        {
+            sub256_check<ushort>();
+        }
+
+        public void vsub_256x32i_check()
+        {
+            sub256_check<int>();            
+        }
+
+        public void vsub_256x32u_check()
+        {
+            sub256_check<uint>();            
+        }
+
+        public void vsub_256x64i_check()
+        {
+            sub256_check<long>();
+        }
+
+        public void vsub_256x64u_check()
+        {
+            sub256_check<ulong>();
+        }
+
 
         public void sub256_batch()
         {
@@ -52,19 +106,11 @@ namespace Z0.Test
 
         void sub128_check<T>(int blocks = 0)
             where T : unmanaged
-        {
-            TypeCaseStart<T>();
-            CpuOpVerify.VerifyBinOp(Random, SampleSize, new Vec128BinOp<T>(ginx.vsub), gmath.sub<T>);
-            TypeCaseEnd<T>();
-        }
+            => CpuOpVerify.VerifyBinOp(Random, SampleSize, new Vec128BinOp<T>(ginx.vsub), gmath.sub<T>);
 
         void sub256_check<T>(int blocks = 0)
             where T : unmanaged
-        {
-            TypeCaseStart<T>();
-            CpuOpVerify.VerifyBinOp(Random, SampleSize, new Vec256BinOp<T>(ginx.vsub), gmath.sub<T>);
-            TypeCaseEnd<T>();
-        }
+                => CpuOpVerify.VerifyBinOp(Random, SampleSize, new Vec256BinOp<T>(ginx.vsub), gmath.sub<T>);
 
         void sub256_batch_check<T>()
             where T : unmanaged

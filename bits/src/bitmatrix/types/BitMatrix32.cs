@@ -73,7 +73,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static BitMatrix32 From(BitMatrix<N32,uint> src)        
-            => From(src.Data);
+            => new BitMatrix32(src);
 
         [MethodImpl(Inline)]
         public static BitMatrix32 From(Span<uint> src)        
@@ -91,22 +91,17 @@ namespace Z0
         public static BitMatrix32 operator | (BitMatrix32 lhs, BitMatrix32 rhs)
             => BitMatrix.or(lhs, rhs);
 
-        /// <summary>
-        /// Applies element-wise XOR to corresponding operand entries.
-        /// </summary>
-        /// <param name="lhs">The left matrix</param>
-        /// <param name="rhs">The right matrix</param>
         [MethodImpl(Inline)]
         public static BitMatrix32 operator ^ (BitMatrix32 lhs, BitMatrix32 rhs)
             => BitMatrix.xor(lhs, rhs);
 
-        /// <summary>
-        /// Computes the complement of the operand. 
-        /// </summary>
-        /// <param name="src">The source matrix</param>
         [MethodImpl(Inline)]
         public static BitMatrix32 operator ~ (BitMatrix32 src)
             => BitMatrix.flip(src);
+
+        [MethodImpl(Inline)]
+        public static BitMatrix32 operator - (BitMatrix32 A, BitMatrix32 B)
+            => BitMatrix.sub(A,B);
 
         [MethodImpl(Inline)]
         public static BitMatrix32 operator * (BitMatrix32 lhs, BitMatrix32 rhs)
@@ -118,11 +113,11 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static bool operator ==(BitMatrix32 lhs, BitMatrix32 rhs)
-            => lhs.Equals(rhs);
+            => BitMatrix.eq(lhs,rhs);
 
         [MethodImpl(Inline)]
         public static bool operator !=(BitMatrix32 lhs, BitMatrix32 rhs)
-            => !(lhs.Equals(rhs));
+            => !BitMatrix.eq(lhs,rhs);
 
         [MethodImpl(Inline)]
         BitMatrix32(Span<uint> src)
@@ -137,6 +132,12 @@ namespace Z0
             require(src.Length == Pow2.T05);
             this.data = src;
         }        
+
+        [MethodImpl(Inline)]
+        BitMatrix32(BitMatrix<N32,uint> src)
+        {
+            this.data = src.Data;
+        }
 
         public readonly int RowCount
         {
@@ -183,14 +184,9 @@ namespace Z0
             set => SetBit(row,col,value);
         }            
 
+        [MethodImpl(Inline)] 
         public readonly BitVector32 Diagonal()
-        {
-            var dst = (uint)0;
-            for(byte i=0; i < BitMatrix32.N; i++)
-                if(GetBit(i,i))
-                    BitMask.enable(ref dst, i);
-            return dst;                    
-        }
+            => BitMatrix.diagonal(this);
 
         [MethodImpl(Inline)] 
         public readonly BitMatrix32 Replicate()
@@ -274,17 +270,19 @@ namespace Z0
         public readonly bool IsZero()
             => BitMatrix.testz(this);
 
-        public readonly BitMatrix32 AndNot(BitMatrix32 rhs)
-        {
-            const int rowstep = 8;
-            for(var i=0; i< RowCount; i += rowstep)
-            {
-                this.GetCells(i, out Vec256<uint> vLhs);
-                rhs.GetCells(i, out Vec256<uint> vRhs);
-                dinx.vandn(vLhs,vRhs).StoreTo(ref data[i]);
-            }
-            return this;
-        }
+        [MethodImpl(Inline)]
+        public  BitMatrix32 AndNot(BitMatrix32 rhs)
+            => BitMatrix.andn(ref this, rhs);
+        // {
+        //     const int rowstep = 8;
+        //     for(var i=0; i< RowCount; i += rowstep)
+        //     {
+        //         this.GetCells(i, out Vec256<uint> vLhs);
+        //         rhs.GetCells(i, out Vec256<uint> vRhs);
+        //         dinx.vandn(vLhs,vRhs).StoreTo(ref data[i]);
+        //     }
+        //     return this;
+        // }
         
         public readonly BitMatrix32 Transpose()
         {

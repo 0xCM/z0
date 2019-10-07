@@ -64,7 +64,7 @@ namespace Z0
         readonly struct Or<T>
             where T : unmanaged
         {
-            public static readonly BinaryOp<T> Op = gbits.or<T>;
+            public static readonly BinaryOp<T> Op = gmath.or<T>;
         }
 
         readonly struct XOr<T>

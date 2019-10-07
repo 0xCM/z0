@@ -530,39 +530,39 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source scalar</param>
         [MethodImpl(Inline)]
-        public static FixedBits<BitVector8,byte> ToFixedBits(this byte src)
-            => FixedBits.FromScalar(src);
+        public static PrimalBits<BitVector8,byte> ToPrimalBits(this byte src)
+            => PrimalBits.define<BitVector8,byte>(src);
 
         /// <summary>
         /// Converts a scalar value to a type-parametric fixed-bits bitvector
         /// </summary>
         /// <param name="src">The source scalar</param>
         [MethodImpl(Inline)]
-        public static FixedBits<BitVector16,ushort> ToFixedBits(this ushort src)
-            => FixedBits.FromScalar(src);
+        public static PrimalBits<BitVector16,ushort> ToPrimalBits(this ushort src)
+            => PrimalBits.define<BitVector16,ushort>(src);
 
         /// <summary>
         /// Converts a scalar value to a type-parametric fixed-bits bitvector
         /// </summary>
         /// <param name="src">The source scalar</param>
         [MethodImpl(Inline)]
-        public static FixedBits<BitVector32,uint> ToFixedBits(this uint src)
-            => FixedBits.FromScalar(src);
+        public static PrimalBits<BitVector32,uint> ToPrimalBits(this uint src)
+            => PrimalBits.define<BitVector32,uint>(src);
 
         /// <summary>
         /// Converts a scalar value to a type-parametric fixed-bits bitvector
         /// </summary>
         /// <param name="src">The source scalar</param>
         [MethodImpl(Inline)]
-        public static FixedBits<BitVector64,ulong> ToFixedBits(this ulong src)
-            => FixedBits.FromScalar(src);
+        public static PrimalBits<BitVector64,ulong> ToPrimalBits(this ulong src)
+            => PrimalBits.define<BitVector64,ulong>(src);
 
         /// <summary>
         /// Converts a primal bitvector to the corresponding type-parametric fixed-bits bitvector
         /// </summary>
         /// <param name="src">The source scalar</param>
         [MethodImpl(Inline)]
-        public static FixedBits<BitVector8,byte> ToFixedBits(this BitVector8 src)
+        public static PrimalBits<BitVector8,byte> ToPrimalBits(this BitVector8 src)
             => src;
 
         /// <summary>
@@ -570,7 +570,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source scalar</param>
         [MethodImpl(Inline)]
-        public static FixedBits<BitVector16,ushort> ToFixedBits(this BitVector16 src)
+        public static PrimalBits<BitVector16,ushort> ToPrimalBits(this BitVector16 src)
             => src;
 
         /// <summary>
@@ -578,7 +578,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source scalar</param>
         [MethodImpl(Inline)]
-        public static FixedBits<BitVector32,uint> ToFixedBits(this BitVector32 src)
+        public static PrimalBits<BitVector32,uint> ToPrimalBits(this BitVector32 src)
             => src;
 
         /// <summary>
@@ -586,18 +586,8 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source scalar</param>
         [MethodImpl(Inline)]
-        public static FixedBits<BitVector64,ulong> ToFixedBits(this BitVector64 src)
+        public static PrimalBits<BitVector64,ulong> ToPrimalBits(this BitVector64 src)
             => src;
-
-        /// <summary>
-        /// Converts a parametric fixed bitvector to a primal bitvector
-        /// </summary>
-        /// <param name="v">The source vector</param>
-        [MethodImpl(Inline)]
-        public static V ToPrimalBits<V,S>(this FixedBits<V,S> v)
-            where V : unmanaged, IFixedScalarBits<V,S>
-            where S : unmanaged
-                => v;
 
 
     }

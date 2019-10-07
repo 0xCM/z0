@@ -1,4 +1,24 @@
-// 2019-10-06 02:25:56:841
+// 2019-10-06 23:48:38:769
+bool testznc(in Vec128<short> x, in Vec128<short> y)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldfld System.Runtime.Intrinsics.Vector128`1<System.Int16> Z0.Vec128`1<System.Int16>::xmm
+    IL_0006: ldarg.1
+    IL_0007: ldfld System.Runtime.Intrinsics.Vector128`1<System.Int16> Z0.Vec128`1<System.Int16>::xmm
+    IL_000C: call System.Boolean System.Runtime.Intrinsics.X86.Sse41::TestNotZAndNotC(System.Runtime.Intrinsics.Vector128`1<System.Int16>,System.Runtime.Intrinsics.Vector128`1<System.Int16>)
+    IL_0011: ret
+
+}
+bool testznc(in Vec128<ushort> x, in Vec128<ushort> y)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldfld System.Runtime.Intrinsics.Vector128`1<System.UInt16> Z0.Vec128`1<System.UInt16>::xmm
+    IL_0006: ldarg.1
+    IL_0007: ldfld System.Runtime.Intrinsics.Vector128`1<System.UInt16> Z0.Vec128`1<System.UInt16>::xmm
+    IL_000C: call System.Boolean System.Runtime.Intrinsics.X86.Sse41::TestNotZAndNotC(System.Runtime.Intrinsics.Vector128`1<System.UInt16>,System.Runtime.Intrinsics.Vector128`1<System.UInt16>)
+    IL_0011: ret
+
+}
 bool testznc(in Vec128<int> x, in Vec128<int> y)
 {
     IL_0000: ldarg.0
@@ -150,6 +170,28 @@ ref UInt128 and(in UInt128 lhs, in UInt128 rhs, out UInt128 dst)
     IL_002A: stobj Z0.UInt128
     IL_002F: ldarg.2
     IL_0030: ret
+
+}
+Vec256<sbyte> vxor(in Vec256<sbyte> x, in Vec256<sbyte> y)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldfld System.Runtime.Intrinsics.Vector256`1<System.SByte> Z0.Vec256`1<System.SByte>::ymm
+    IL_0006: ldarg.1
+    IL_0007: ldfld System.Runtime.Intrinsics.Vector256`1<System.SByte> Z0.Vec256`1<System.SByte>::ymm
+    IL_000C: call System.Runtime.Intrinsics.Vector256`1<System.SByte> System.Runtime.Intrinsics.X86.Avx2::Xor(System.Runtime.Intrinsics.Vector256`1<System.SByte>,System.Runtime.Intrinsics.Vector256`1<System.SByte>)
+    IL_0011: call Z0.Vec256`1<System.SByte> Z0.Vec256`1<System.SByte>::op_Implicit(System.Runtime.Intrinsics.Vector256`1<System.SByte>)
+    IL_0016: ret
+
+}
+Vec256<ushort> vxor(in Vec256<ushort> x, in Vec256<ushort> y)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldfld System.Runtime.Intrinsics.Vector256`1<System.UInt16> Z0.Vec256`1<System.UInt16>::ymm
+    IL_0006: ldarg.1
+    IL_0007: ldfld System.Runtime.Intrinsics.Vector256`1<System.UInt16> Z0.Vec256`1<System.UInt16>::ymm
+    IL_000C: call System.Runtime.Intrinsics.Vector256`1<System.UInt16> System.Runtime.Intrinsics.X86.Avx2::Xor(System.Runtime.Intrinsics.Vector256`1<System.UInt16>,System.Runtime.Intrinsics.Vector256`1<System.UInt16>)
+    IL_0011: call Z0.Vec256`1<System.UInt16> Z0.Vec256`1<System.UInt16>::op_Implicit(System.Runtime.Intrinsics.Vector256`1<System.UInt16>)
+    IL_0016: ret
 
 }
 Vec256<int> vxor(in Vec256<int> x, in Vec256<int> y)
@@ -1647,26 +1689,6 @@ bool testznc(in Vec128<byte> x, in Vec128<byte> y)
     IL_0011: ret
 
 }
-bool testznc(in Vec128<short> x, in Vec128<short> y)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldfld System.Runtime.Intrinsics.Vector128`1<System.Int16> Z0.Vec128`1<System.Int16>::xmm
-    IL_0006: ldarg.1
-    IL_0007: ldfld System.Runtime.Intrinsics.Vector128`1<System.Int16> Z0.Vec128`1<System.Int16>::xmm
-    IL_000C: call System.Boolean System.Runtime.Intrinsics.X86.Sse41::TestNotZAndNotC(System.Runtime.Intrinsics.Vector128`1<System.Int16>,System.Runtime.Intrinsics.Vector128`1<System.Int16>)
-    IL_0011: ret
-
-}
-bool testznc(in Vec128<ushort> x, in Vec128<ushort> y)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldfld System.Runtime.Intrinsics.Vector128`1<System.UInt16> Z0.Vec128`1<System.UInt16>::xmm
-    IL_0006: ldarg.1
-    IL_0007: ldfld System.Runtime.Intrinsics.Vector128`1<System.UInt16> Z0.Vec128`1<System.UInt16>::xmm
-    IL_000C: call System.Boolean System.Runtime.Intrinsics.X86.Sse41::TestNotZAndNotC(System.Runtime.Intrinsics.Vector128`1<System.UInt16>,System.Runtime.Intrinsics.Vector128`1<System.UInt16>)
-    IL_0011: ret
-
-}
 Vec128<byte> vflip(in Vec128<byte> src)
 {
     IL_0000: ldarg.0
@@ -2592,6 +2614,52 @@ Vec256<ulong> rotr(in Vec256<ulong> src, in Vec256<ulong> offsets)
     IL_001D: ldloca.s V_0
     IL_001F: ldloca.s V_1
     IL_0021: call Z0.Vec256`1<System.UInt64> Z0.dinx::vor(Z0.Vec256`1<System.UInt64>&,Z0.Vec256`1<System.UInt64>&)
+    IL_0026: ret
+
+}
+Vec128<ulong> vsllx(in Vec128<ulong> src, byte offset)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldc.i4.8
+    IL_0002: call Z0.Vec128`1<System.UInt64> Z0.dinx::vbsll(Z0.Vec128`1<System.UInt64>&,System.Byte)
+    IL_0007: stloc.0
+    IL_0008: ldarg.0
+    IL_0009: ldarg.1
+    IL_000A: call Z0.Vec128`1<System.UInt64> Z0.dinx::vsll(Z0.Vec128`1<System.UInt64>&,System.Byte)
+    IL_000F: stloc.1
+    IL_0010: ldloca.s V_0
+    IL_0012: ldc.i4.s 64
+    IL_0014: ldarg.1
+    IL_0015: sub
+    IL_0016: conv.u1
+    IL_0017: call Z0.Vec128`1<System.UInt64> Z0.dinx::vsrl(Z0.Vec128`1<System.UInt64>&,System.Byte)
+    IL_001C: stloc.0
+    IL_001D: ldloca.s V_1
+    IL_001F: ldloca.s V_0
+    IL_0021: call Z0.Vec128`1<System.UInt64> Z0.dinx::vor(Z0.Vec128`1<System.UInt64>&,Z0.Vec128`1<System.UInt64>&)
+    IL_0026: ret
+
+}
+Vec128<ulong> vslrx(in Vec128<ulong> src, byte offset)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldc.i4.8
+    IL_0002: call Z0.Vec128`1<System.UInt64> Z0.dinx::vbsrl(Z0.Vec128`1<System.UInt64>&,System.Byte)
+    IL_0007: stloc.0
+    IL_0008: ldarg.0
+    IL_0009: ldarg.1
+    IL_000A: call Z0.Vec128`1<System.UInt64> Z0.dinx::vsrl(Z0.Vec128`1<System.UInt64>&,System.Byte)
+    IL_000F: stloc.1
+    IL_0010: ldloca.s V_0
+    IL_0012: ldc.i4.s 64
+    IL_0014: ldarg.1
+    IL_0015: sub
+    IL_0016: conv.u1
+    IL_0017: call Z0.Vec128`1<System.UInt64> Z0.dinx::vsll(Z0.Vec128`1<System.UInt64>&,System.Byte)
+    IL_001C: stloc.0
+    IL_001D: ldloca.s V_1
+    IL_001F: ldloca.s V_0
+    IL_0021: call Z0.Vec128`1<System.UInt64> Z0.dinx::vor(Z0.Vec128`1<System.UInt64>&,Z0.Vec128`1<System.UInt64>&)
     IL_0026: ret
 
 }
@@ -4064,28 +4132,6 @@ Vec256<short> vxor(in Vec256<short> x, in Vec256<short> y)
     IL_0016: ret
 
 }
-Vec256<sbyte> vxor(in Vec256<sbyte> x, in Vec256<sbyte> y)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldfld System.Runtime.Intrinsics.Vector256`1<System.SByte> Z0.Vec256`1<System.SByte>::ymm
-    IL_0006: ldarg.1
-    IL_0007: ldfld System.Runtime.Intrinsics.Vector256`1<System.SByte> Z0.Vec256`1<System.SByte>::ymm
-    IL_000C: call System.Runtime.Intrinsics.Vector256`1<System.SByte> System.Runtime.Intrinsics.X86.Avx2::Xor(System.Runtime.Intrinsics.Vector256`1<System.SByte>,System.Runtime.Intrinsics.Vector256`1<System.SByte>)
-    IL_0011: call Z0.Vec256`1<System.SByte> Z0.Vec256`1<System.SByte>::op_Implicit(System.Runtime.Intrinsics.Vector256`1<System.SByte>)
-    IL_0016: ret
-
-}
-Vec256<ushort> vxor(in Vec256<ushort> x, in Vec256<ushort> y)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldfld System.Runtime.Intrinsics.Vector256`1<System.UInt16> Z0.Vec256`1<System.UInt16>::ymm
-    IL_0006: ldarg.1
-    IL_0007: ldfld System.Runtime.Intrinsics.Vector256`1<System.UInt16> Z0.Vec256`1<System.UInt16>::ymm
-    IL_000C: call System.Runtime.Intrinsics.Vector256`1<System.UInt16> System.Runtime.Intrinsics.X86.Avx2::Xor(System.Runtime.Intrinsics.Vector256`1<System.UInt16>,System.Runtime.Intrinsics.Vector256`1<System.UInt16>)
-    IL_0011: call Z0.Vec256`1<System.UInt16> Z0.Vec256`1<System.UInt16>::op_Implicit(System.Runtime.Intrinsics.Vector256`1<System.UInt16>)
-    IL_0016: ret
-
-}
 Vec128<short> shufflehi(in Vec128<short> src, Perm4:byte control)
 {
     IL_0000: ldarg.0
@@ -5147,7 +5193,7 @@ Vec256<ulong> vand(in Vec256<ulong> x, in Vec256<ulong> y)
     IL_0016: ret
 
 }
-Vec128<sbyte> vandn(in Vec128<sbyte> lhs, in Vec128<sbyte> rhs)
+Vec128<sbyte> vandn(in Vec128<sbyte> x, in Vec128<sbyte> y)
 {
     IL_0000: ldarg.0
     IL_0001: ldfld System.Runtime.Intrinsics.Vector128`1<System.SByte> Z0.Vec128`1<System.SByte>::xmm
@@ -5158,7 +5204,7 @@ Vec128<sbyte> vandn(in Vec128<sbyte> lhs, in Vec128<sbyte> rhs)
     IL_0016: ret
 
 }
-Vec128<byte> vandn(in Vec128<byte> lhs, in Vec128<byte> rhs)
+Vec128<byte> vandn(in Vec128<byte> x, in Vec128<byte> y)
 {
     IL_0000: ldarg.0
     IL_0001: ldfld System.Runtime.Intrinsics.Vector128`1<System.Byte> Z0.Vec128`1<System.Byte>::xmm
@@ -5169,7 +5215,7 @@ Vec128<byte> vandn(in Vec128<byte> lhs, in Vec128<byte> rhs)
     IL_0016: ret
 
 }
-Vec128<short> vandn(in Vec128<short> lhs, in Vec128<short> rhs)
+Vec128<short> vandn(in Vec128<short> x, in Vec128<short> y)
 {
     IL_0000: ldarg.0
     IL_0001: ldfld System.Runtime.Intrinsics.Vector128`1<System.Int16> Z0.Vec128`1<System.Int16>::xmm
@@ -5180,7 +5226,7 @@ Vec128<short> vandn(in Vec128<short> lhs, in Vec128<short> rhs)
     IL_0016: ret
 
 }
-Vec128<ushort> vandn(in Vec128<ushort> lhs, in Vec128<ushort> rhs)
+Vec128<ushort> vandn(in Vec128<ushort> x, in Vec128<ushort> y)
 {
     IL_0000: ldarg.0
     IL_0001: ldfld System.Runtime.Intrinsics.Vector128`1<System.UInt16> Z0.Vec128`1<System.UInt16>::xmm
@@ -5191,7 +5237,7 @@ Vec128<ushort> vandn(in Vec128<ushort> lhs, in Vec128<ushort> rhs)
     IL_0016: ret
 
 }
-Vec128<int> vandn(in Vec128<int> lhs, in Vec128<int> rhs)
+Vec128<int> vandn(in Vec128<int> x, in Vec128<int> y)
 {
     IL_0000: ldarg.0
     IL_0001: ldfld System.Runtime.Intrinsics.Vector128`1<System.Int32> Z0.Vec128`1<System.Int32>::xmm
@@ -5202,7 +5248,7 @@ Vec128<int> vandn(in Vec128<int> lhs, in Vec128<int> rhs)
     IL_0016: ret
 
 }
-Vec128<uint> vandn(in Vec128<uint> lhs, in Vec128<uint> rhs)
+Vec128<uint> vandn(in Vec128<uint> x, in Vec128<uint> y)
 {
     IL_0000: ldarg.0
     IL_0001: ldfld System.Runtime.Intrinsics.Vector128`1<System.UInt32> Z0.Vec128`1<System.UInt32>::xmm
@@ -5213,7 +5259,7 @@ Vec128<uint> vandn(in Vec128<uint> lhs, in Vec128<uint> rhs)
     IL_0016: ret
 
 }
-Vec128<long> vandn(in Vec128<long> lhs, in Vec128<long> rhs)
+Vec128<long> vandn(in Vec128<long> x, in Vec128<long> y)
 {
     IL_0000: ldarg.0
     IL_0001: ldfld System.Runtime.Intrinsics.Vector128`1<System.Int64> Z0.Vec128`1<System.Int64>::xmm
@@ -5224,7 +5270,7 @@ Vec128<long> vandn(in Vec128<long> lhs, in Vec128<long> rhs)
     IL_0016: ret
 
 }
-Vec128<ulong> vandn(in Vec128<ulong> lhs, in Vec128<ulong> rhs)
+Vec128<ulong> vandn(in Vec128<ulong> x, in Vec128<ulong> y)
 {
     IL_0000: ldarg.0
     IL_0001: ldfld System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Vec128`1<System.UInt64>::xmm
@@ -5235,7 +5281,7 @@ Vec128<ulong> vandn(in Vec128<ulong> lhs, in Vec128<ulong> rhs)
     IL_0016: ret
 
 }
-Vec128<float> vandn(in Vec128<float> lhs, in Vec128<float> rhs)
+Vec128<float> vandn(in Vec128<float> x, in Vec128<float> y)
 {
     IL_0000: ldarg.0
     IL_0001: ldfld System.Runtime.Intrinsics.Vector128`1<System.Single> Z0.Vec128`1<System.Single>::xmm
@@ -5246,7 +5292,7 @@ Vec128<float> vandn(in Vec128<float> lhs, in Vec128<float> rhs)
     IL_0016: ret
 
 }
-Vec128<double> vandn(in Vec128<double> lhs, in Vec128<double> rhs)
+Vec128<double> vandn(in Vec128<double> x, in Vec128<double> y)
 {
     IL_0000: ldarg.0
     IL_0001: ldfld System.Runtime.Intrinsics.Vector128`1<System.Double> Z0.Vec128`1<System.Double>::xmm
@@ -5257,7 +5303,7 @@ Vec128<double> vandn(in Vec128<double> lhs, in Vec128<double> rhs)
     IL_0016: ret
 
 }
-Vec256<sbyte> vandn(in Vec256<sbyte> lhs, in Vec256<sbyte> rhs)
+Vec256<sbyte> vandn(in Vec256<sbyte> x, in Vec256<sbyte> y)
 {
     IL_0000: ldarg.0
     IL_0001: ldfld System.Runtime.Intrinsics.Vector256`1<System.SByte> Z0.Vec256`1<System.SByte>::ymm
@@ -5268,7 +5314,7 @@ Vec256<sbyte> vandn(in Vec256<sbyte> lhs, in Vec256<sbyte> rhs)
     IL_0016: ret
 
 }
-Vec256<byte> vandn(in Vec256<byte> lhs, in Vec256<byte> rhs)
+Vec256<byte> vandn(in Vec256<byte> x, in Vec256<byte> y)
 {
     IL_0000: ldarg.0
     IL_0001: ldfld System.Runtime.Intrinsics.Vector256`1<System.Byte> Z0.Vec256`1<System.Byte>::ymm
@@ -5279,7 +5325,7 @@ Vec256<byte> vandn(in Vec256<byte> lhs, in Vec256<byte> rhs)
     IL_0016: ret
 
 }
-Vec256<short> vandn(in Vec256<short> lhs, in Vec256<short> rhs)
+Vec256<short> vandn(in Vec256<short> x, in Vec256<short> y)
 {
     IL_0000: ldarg.0
     IL_0001: ldfld System.Runtime.Intrinsics.Vector256`1<System.Int16> Z0.Vec256`1<System.Int16>::ymm
@@ -5290,7 +5336,7 @@ Vec256<short> vandn(in Vec256<short> lhs, in Vec256<short> rhs)
     IL_0016: ret
 
 }
-Vec256<ushort> vandn(in Vec256<ushort> lhs, in Vec256<ushort> rhs)
+Vec256<ushort> vandn(in Vec256<ushort> x, in Vec256<ushort> y)
 {
     IL_0000: ldarg.0
     IL_0001: ldfld System.Runtime.Intrinsics.Vector256`1<System.UInt16> Z0.Vec256`1<System.UInt16>::ymm
@@ -5301,7 +5347,7 @@ Vec256<ushort> vandn(in Vec256<ushort> lhs, in Vec256<ushort> rhs)
     IL_0016: ret
 
 }
-Vec256<int> vandn(in Vec256<int> lhs, in Vec256<int> rhs)
+Vec256<int> vandn(in Vec256<int> x, in Vec256<int> y)
 {
     IL_0000: ldarg.0
     IL_0001: ldfld System.Runtime.Intrinsics.Vector256`1<System.Int32> Z0.Vec256`1<System.Int32>::ymm
@@ -5312,7 +5358,7 @@ Vec256<int> vandn(in Vec256<int> lhs, in Vec256<int> rhs)
     IL_0016: ret
 
 }
-Vec256<uint> vandn(in Vec256<uint> lhs, in Vec256<uint> rhs)
+Vec256<uint> vandn(in Vec256<uint> x, in Vec256<uint> y)
 {
     IL_0000: ldarg.0
     IL_0001: ldfld System.Runtime.Intrinsics.Vector256`1<System.UInt32> Z0.Vec256`1<System.UInt32>::ymm
@@ -5323,7 +5369,7 @@ Vec256<uint> vandn(in Vec256<uint> lhs, in Vec256<uint> rhs)
     IL_0016: ret
 
 }
-Vec256<long> vandn(in Vec256<long> lhs, in Vec256<long> rhs)
+Vec256<long> vandn(in Vec256<long> x, in Vec256<long> y)
 {
     IL_0000: ldarg.0
     IL_0001: ldfld System.Runtime.Intrinsics.Vector256`1<System.Int64> Z0.Vec256`1<System.Int64>::ymm
@@ -5334,7 +5380,7 @@ Vec256<long> vandn(in Vec256<long> lhs, in Vec256<long> rhs)
     IL_0016: ret
 
 }
-Vec256<ulong> vandn(in Vec256<ulong> lhs, in Vec256<ulong> rhs)
+Vec256<ulong> vandn(in Vec256<ulong> x, in Vec256<ulong> y)
 {
     IL_0000: ldarg.0
     IL_0001: ldfld System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Vec256`1<System.UInt64>::ymm
@@ -5345,7 +5391,7 @@ Vec256<ulong> vandn(in Vec256<ulong> lhs, in Vec256<ulong> rhs)
     IL_0016: ret
 
 }
-Vec256<float> vandn(in Vec256<float> lhs, in Vec256<float> rhs)
+Vec256<float> vandn(in Vec256<float> x, in Vec256<float> y)
 {
     IL_0000: ldarg.0
     IL_0001: ldfld System.Runtime.Intrinsics.Vector256`1<System.Single> Z0.Vec256`1<System.Single>::ymm
@@ -5356,7 +5402,7 @@ Vec256<float> vandn(in Vec256<float> lhs, in Vec256<float> rhs)
     IL_0016: ret
 
 }
-Vec256<double> vandn(in Vec256<double> lhs, in Vec256<double> rhs)
+Vec256<double> vandn(in Vec256<double> x, in Vec256<double> y)
 {
     IL_0000: ldarg.0
     IL_0001: ldfld System.Runtime.Intrinsics.Vector256`1<System.Double> Z0.Vec256`1<System.Double>::ymm
@@ -5367,7 +5413,7 @@ Vec256<double> vandn(in Vec256<double> lhs, in Vec256<double> rhs)
     IL_0016: ret
 
 }
-Vec128<short> bslli(in Vec128<short> src, byte bytes)
+Vec128<short> vbsll(in Vec128<short> src, byte bytes)
 {
     IL_0000: ldarg.0
     IL_0001: ldobj Z0.Vec128`1<System.Int16>
@@ -5378,7 +5424,7 @@ Vec128<short> bslli(in Vec128<short> src, byte bytes)
     IL_0016: ret
 
 }
-Vec128<ushort> bslli(in Vec128<ushort> src, byte bytes)
+Vec128<ushort> vbsll(in Vec128<ushort> src, byte bytes)
 {
     IL_0000: ldarg.0
     IL_0001: ldobj Z0.Vec128`1<System.UInt16>
@@ -5389,7 +5435,7 @@ Vec128<ushort> bslli(in Vec128<ushort> src, byte bytes)
     IL_0016: ret
 
 }
-Vec128<int> bslli(in Vec128<int> src, byte bytes)
+Vec128<int> vbsll(in Vec128<int> src, byte bytes)
 {
     IL_0000: ldarg.0
     IL_0001: ldobj Z0.Vec128`1<System.Int32>
@@ -5400,7 +5446,7 @@ Vec128<int> bslli(in Vec128<int> src, byte bytes)
     IL_0016: ret
 
 }
-Vec128<uint> bslli(in Vec128<uint> src, byte bytes)
+Vec128<uint> vbsll(in Vec128<uint> src, byte bytes)
 {
     IL_0000: ldarg.0
     IL_0001: ldobj Z0.Vec128`1<System.UInt32>
@@ -5411,7 +5457,7 @@ Vec128<uint> bslli(in Vec128<uint> src, byte bytes)
     IL_0016: ret
 
 }
-Vec128<long> bslli(in Vec128<long> src, byte bytes)
+Vec128<long> vbsll(in Vec128<long> src, byte bytes)
 {
     IL_0000: ldarg.0
     IL_0001: ldobj Z0.Vec128`1<System.Int64>
@@ -5422,7 +5468,7 @@ Vec128<long> bslli(in Vec128<long> src, byte bytes)
     IL_0016: ret
 
 }
-Vec128<ulong> bslli(in Vec128<ulong> src, byte bytes)
+Vec128<ulong> vbsll(in Vec128<ulong> src, byte bytes)
 {
     IL_0000: ldarg.0
     IL_0001: ldobj Z0.Vec128`1<System.UInt64>
@@ -5433,7 +5479,7 @@ Vec128<ulong> bslli(in Vec128<ulong> src, byte bytes)
     IL_0016: ret
 
 }
-Vec256<short> bslli(in Vec256<short> src, byte bytes)
+Vec256<short> vbsll(in Vec256<short> src, byte bytes)
 {
     IL_0000: ldarg.0
     IL_0001: ldobj Z0.Vec256`1<System.Int16>
@@ -5444,7 +5490,7 @@ Vec256<short> bslli(in Vec256<short> src, byte bytes)
     IL_0016: ret
 
 }
-Vec256<ushort> bslli(in Vec256<ushort> src, byte bytes)
+Vec256<ushort> vbsll(in Vec256<ushort> src, byte bytes)
 {
     IL_0000: ldarg.0
     IL_0001: ldobj Z0.Vec256`1<System.UInt16>
@@ -5455,7 +5501,7 @@ Vec256<ushort> bslli(in Vec256<ushort> src, byte bytes)
     IL_0016: ret
 
 }
-Vec256<int> bslli(in Vec256<int> src, byte bytes)
+Vec256<int> vbsll(in Vec256<int> src, byte bytes)
 {
     IL_0000: ldarg.0
     IL_0001: ldobj Z0.Vec256`1<System.Int32>
@@ -5466,7 +5512,7 @@ Vec256<int> bslli(in Vec256<int> src, byte bytes)
     IL_0016: ret
 
 }
-Vec256<uint> bslli(in Vec256<uint> src, byte bytes)
+Vec256<uint> vbsll(in Vec256<uint> src, byte bytes)
 {
     IL_0000: ldarg.0
     IL_0001: ldobj Z0.Vec256`1<System.UInt32>
@@ -5477,7 +5523,7 @@ Vec256<uint> bslli(in Vec256<uint> src, byte bytes)
     IL_0016: ret
 
 }
-Vec256<long> bslli(in Vec256<long> src, byte bytes)
+Vec256<long> vbsll(in Vec256<long> src, byte bytes)
 {
     IL_0000: ldarg.0
     IL_0001: ldobj Z0.Vec256`1<System.Int64>
@@ -5488,7 +5534,7 @@ Vec256<long> bslli(in Vec256<long> src, byte bytes)
     IL_0016: ret
 
 }
-Vec256<ulong> bslli(in Vec256<ulong> src, byte bytes)
+Vec256<ulong> vbsll(in Vec256<ulong> src, byte bytes)
 {
     IL_0000: ldarg.0
     IL_0001: ldobj Z0.Vec256`1<System.UInt64>
@@ -5499,7 +5545,7 @@ Vec256<ulong> bslli(in Vec256<ulong> src, byte bytes)
     IL_0016: ret
 
 }
-Vec128<short> bsrl(in Vec128<short> src, byte bytes)
+Vec128<short> vbsrl(in Vec128<short> src, byte bytes)
 {
     IL_0000: ldarg.0
     IL_0001: ldobj Z0.Vec128`1<System.Int16>
@@ -5510,7 +5556,7 @@ Vec128<short> bsrl(in Vec128<short> src, byte bytes)
     IL_0016: ret
 
 }
-Vec128<ushort> bsrl(in Vec128<ushort> src, byte bytes)
+Vec128<ushort> vbsrl(in Vec128<ushort> src, byte bytes)
 {
     IL_0000: ldarg.0
     IL_0001: ldobj Z0.Vec128`1<System.UInt16>
@@ -5521,7 +5567,7 @@ Vec128<ushort> bsrl(in Vec128<ushort> src, byte bytes)
     IL_0016: ret
 
 }
-Vec128<int> bsrl(in Vec128<int> src, byte bytes)
+Vec128<int> vbsrl(in Vec128<int> src, byte bytes)
 {
     IL_0000: ldarg.0
     IL_0001: ldobj Z0.Vec128`1<System.Int32>
@@ -5532,7 +5578,7 @@ Vec128<int> bsrl(in Vec128<int> src, byte bytes)
     IL_0016: ret
 
 }
-Vec128<uint> bsrl(in Vec128<uint> src, byte bytes)
+Vec128<uint> vbsrl(in Vec128<uint> src, byte bytes)
 {
     IL_0000: ldarg.0
     IL_0001: ldobj Z0.Vec128`1<System.UInt32>
@@ -5543,7 +5589,7 @@ Vec128<uint> bsrl(in Vec128<uint> src, byte bytes)
     IL_0016: ret
 
 }
-Vec128<long> bsrl(in Vec128<long> src, byte bytes)
+Vec128<long> vbsrl(in Vec128<long> src, byte bytes)
 {
     IL_0000: ldarg.0
     IL_0001: ldobj Z0.Vec128`1<System.Int64>
@@ -5554,7 +5600,7 @@ Vec128<long> bsrl(in Vec128<long> src, byte bytes)
     IL_0016: ret
 
 }
-Vec128<ulong> bsrl(in Vec128<ulong> src, byte bytes)
+Vec128<ulong> vbsrl(in Vec128<ulong> src, byte bytes)
 {
     IL_0000: ldarg.0
     IL_0001: ldobj Z0.Vec128`1<System.UInt64>
@@ -5565,7 +5611,7 @@ Vec128<ulong> bsrl(in Vec128<ulong> src, byte bytes)
     IL_0016: ret
 
 }
-Vec256<short> bsrl(in Vec256<short> src, byte bytes)
+Vec256<short> vbsrl(in Vec256<short> src, byte bytes)
 {
     IL_0000: ldarg.0
     IL_0001: ldobj Z0.Vec256`1<System.Int16>
@@ -5576,7 +5622,7 @@ Vec256<short> bsrl(in Vec256<short> src, byte bytes)
     IL_0016: ret
 
 }
-Vec256<ushort> bsrl(in Vec256<ushort> src, byte bytes)
+Vec256<ushort> vbsrl(in Vec256<ushort> src, byte bytes)
 {
     IL_0000: ldarg.0
     IL_0001: ldobj Z0.Vec256`1<System.UInt16>
@@ -5587,7 +5633,7 @@ Vec256<ushort> bsrl(in Vec256<ushort> src, byte bytes)
     IL_0016: ret
 
 }
-Vec256<int> bsrl(in Vec256<int> src, byte bytes)
+Vec256<int> vbsrl(in Vec256<int> src, byte bytes)
 {
     IL_0000: ldarg.0
     IL_0001: ldobj Z0.Vec256`1<System.Int32>
@@ -5598,7 +5644,7 @@ Vec256<int> bsrl(in Vec256<int> src, byte bytes)
     IL_0016: ret
 
 }
-Vec256<uint> bsrl(in Vec256<uint> src, byte bytes)
+Vec256<uint> vbsrl(in Vec256<uint> src, byte bytes)
 {
     IL_0000: ldarg.0
     IL_0001: ldobj Z0.Vec256`1<System.UInt32>
@@ -5609,7 +5655,7 @@ Vec256<uint> bsrl(in Vec256<uint> src, byte bytes)
     IL_0016: ret
 
 }
-Vec256<long> bsrl(in Vec256<long> src, byte bytes)
+Vec256<long> vbsrl(in Vec256<long> src, byte bytes)
 {
     IL_0000: ldarg.0
     IL_0001: ldobj Z0.Vec256`1<System.Int64>
@@ -5620,7 +5666,7 @@ Vec256<long> bsrl(in Vec256<long> src, byte bytes)
     IL_0016: ret
 
 }
-Vec256<ulong> bsrl(in Vec256<ulong> src, byte bytes)
+Vec256<ulong> vbsrl(in Vec256<ulong> src, byte bytes)
 {
     IL_0000: ldarg.0
     IL_0001: ldobj Z0.Vec256`1<System.UInt64>
@@ -7022,7 +7068,7 @@ Vec256<float> reverse(in Vec256<float> src)
     IL_000B: ret
 
 }
-Vec128<byte> vsub(in Vec128<byte> lhs, in Vec128<byte> rhs)
+Vec128<byte> vsub(in Vec128<byte> x, in Vec128<byte> y)
 {
     IL_0000: ldarg.0
     IL_0001: ldobj Z0.Vec128`1<System.Byte>
@@ -7035,7 +7081,7 @@ Vec128<byte> vsub(in Vec128<byte> lhs, in Vec128<byte> rhs)
     IL_0020: ret
 
 }
-Vec128<sbyte> vsub(in Vec128<sbyte> lhs, in Vec128<sbyte> rhs)
+Vec128<sbyte> vsub(in Vec128<sbyte> x, in Vec128<sbyte> y)
 {
     IL_0000: ldarg.0
     IL_0001: ldobj Z0.Vec128`1<System.SByte>
@@ -7048,7 +7094,7 @@ Vec128<sbyte> vsub(in Vec128<sbyte> lhs, in Vec128<sbyte> rhs)
     IL_0020: ret
 
 }
-Vec128<short> vsub(in Vec128<short> lhs, in Vec128<short> rhs)
+Vec128<short> vsub(in Vec128<short> x, in Vec128<short> y)
 {
     IL_0000: ldarg.0
     IL_0001: ldobj Z0.Vec128`1<System.Int16>
@@ -7061,7 +7107,7 @@ Vec128<short> vsub(in Vec128<short> lhs, in Vec128<short> rhs)
     IL_0020: ret
 
 }
-Vec128<ushort> vsub(in Vec128<ushort> lhs, in Vec128<ushort> rhs)
+Vec128<ushort> vsub(in Vec128<ushort> x, in Vec128<ushort> y)
 {
     IL_0000: ldarg.0
     IL_0001: ldobj Z0.Vec128`1<System.UInt16>
@@ -7074,7 +7120,7 @@ Vec128<ushort> vsub(in Vec128<ushort> lhs, in Vec128<ushort> rhs)
     IL_0020: ret
 
 }
-Vec128<int> vsub(in Vec128<int> lhs, in Vec128<int> rhs)
+Vec128<int> vsub(in Vec128<int> x, in Vec128<int> y)
 {
     IL_0000: ldarg.0
     IL_0001: ldobj Z0.Vec128`1<System.Int32>
@@ -7087,7 +7133,7 @@ Vec128<int> vsub(in Vec128<int> lhs, in Vec128<int> rhs)
     IL_0020: ret
 
 }
-Vec128<uint> vsub(in Vec128<uint> lhs, in Vec128<uint> rhs)
+Vec128<uint> vsub(in Vec128<uint> x, in Vec128<uint> y)
 {
     IL_0000: ldarg.0
     IL_0001: ldobj Z0.Vec128`1<System.UInt32>
@@ -7100,7 +7146,7 @@ Vec128<uint> vsub(in Vec128<uint> lhs, in Vec128<uint> rhs)
     IL_0020: ret
 
 }
-Vec128<long> vsub(in Vec128<long> lhs, in Vec128<long> rhs)
+Vec128<long> vsub(in Vec128<long> x, in Vec128<long> y)
 {
     IL_0000: ldarg.0
     IL_0001: ldobj Z0.Vec128`1<System.Int64>
@@ -7113,7 +7159,7 @@ Vec128<long> vsub(in Vec128<long> lhs, in Vec128<long> rhs)
     IL_0020: ret
 
 }
-Vec128<ulong> vsub(in Vec128<ulong> lhs, in Vec128<ulong> rhs)
+Vec128<ulong> vsub(in Vec128<ulong> x, in Vec128<ulong> y)
 {
     IL_0000: ldarg.0
     IL_0001: ldobj Z0.Vec128`1<System.UInt64>
@@ -7126,7 +7172,7 @@ Vec128<ulong> vsub(in Vec128<ulong> lhs, in Vec128<ulong> rhs)
     IL_0020: ret
 
 }
-Vec256<byte> vsub(in Vec256<byte> lhs, in Vec256<byte> rhs)
+Vec256<byte> vsub(in Vec256<byte> x, in Vec256<byte> y)
 {
     IL_0000: ldarg.0
     IL_0001: ldobj Z0.Vec256`1<System.Byte>
@@ -7139,7 +7185,7 @@ Vec256<byte> vsub(in Vec256<byte> lhs, in Vec256<byte> rhs)
     IL_0020: ret
 
 }
-Vec256<sbyte> vsub(in Vec256<sbyte> lhs, in Vec256<sbyte> rhs)
+Vec256<sbyte> vsub(in Vec256<sbyte> x, in Vec256<sbyte> y)
 {
     IL_0000: ldarg.0
     IL_0001: ldobj Z0.Vec256`1<System.SByte>
@@ -7152,7 +7198,7 @@ Vec256<sbyte> vsub(in Vec256<sbyte> lhs, in Vec256<sbyte> rhs)
     IL_0020: ret
 
 }
-Vec256<short> vsub(in Vec256<short> lhs, in Vec256<short> rhs)
+Vec256<short> vsub(in Vec256<short> x, in Vec256<short> y)
 {
     IL_0000: ldarg.0
     IL_0001: ldobj Z0.Vec256`1<System.Int16>
@@ -7165,7 +7211,7 @@ Vec256<short> vsub(in Vec256<short> lhs, in Vec256<short> rhs)
     IL_0020: ret
 
 }
-Vec256<ushort> vsub(in Vec256<ushort> lhs, in Vec256<ushort> rhs)
+Vec256<ushort> vsub(in Vec256<ushort> x, in Vec256<ushort> y)
 {
     IL_0000: ldarg.0
     IL_0001: ldobj Z0.Vec256`1<System.UInt16>
@@ -7178,7 +7224,7 @@ Vec256<ushort> vsub(in Vec256<ushort> lhs, in Vec256<ushort> rhs)
     IL_0020: ret
 
 }
-Vec256<int> vsub(in Vec256<int> lhs, in Vec256<int> rhs)
+Vec256<int> vsub(in Vec256<int> x, in Vec256<int> y)
 {
     IL_0000: ldarg.0
     IL_0001: ldobj Z0.Vec256`1<System.Int32>
@@ -7191,7 +7237,7 @@ Vec256<int> vsub(in Vec256<int> lhs, in Vec256<int> rhs)
     IL_0020: ret
 
 }
-Vec256<uint> vsub(in Vec256<uint> lhs, in Vec256<uint> rhs)
+Vec256<uint> vsub(in Vec256<uint> x, in Vec256<uint> y)
 {
     IL_0000: ldarg.0
     IL_0001: ldobj Z0.Vec256`1<System.UInt32>
@@ -7204,7 +7250,7 @@ Vec256<uint> vsub(in Vec256<uint> lhs, in Vec256<uint> rhs)
     IL_0020: ret
 
 }
-Vec256<long> vsub(in Vec256<long> lhs, in Vec256<long> rhs)
+Vec256<long> vsub(in Vec256<long> x, in Vec256<long> y)
 {
     IL_0000: ldarg.0
     IL_0001: ldobj Z0.Vec256`1<System.Int64>
@@ -7217,7 +7263,7 @@ Vec256<long> vsub(in Vec256<long> lhs, in Vec256<long> rhs)
     IL_0020: ret
 
 }
-Vec256<ulong> vsub(in Vec256<ulong> lhs, in Vec256<ulong> rhs)
+Vec256<ulong> vsub(in Vec256<ulong> x, in Vec256<ulong> y)
 {
     IL_0000: ldarg.0
     IL_0001: ldobj Z0.Vec256`1<System.UInt64>

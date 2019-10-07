@@ -18,42 +18,73 @@ namespace Z0
         /// <summary>
         /// Computes the scalar product of the source vector and another
         /// </summary>
-        /// <param name="rhs">The right operand</param>
-        public static Bit dot(BitVector4 lhs, BitVector4 rhs)
-            => odd((uint)Bits.pop(lhs.data & rhs.data));              
+        /// <param name="y">The right operand</param>
+        public static Bit dot(BitVector4 x, BitVector4 y)
+            => odd((uint)Bits.pop(x.data & y.data));              
 
         /// <summary>
         /// Computes the scalar product of the source vector and another
         /// </summary>
-        /// <param name="rhs">The right operand</param>
+        /// <param name="y">The right operand</param>
         [MethodImpl(Inline)]
-        public static Bit dot(BitVector8 lhs, BitVector8 rhs)
-            => odd(Bits.pop(lhs.data & rhs.data));              
+        public static Bit dot(byte x, byte y)
+            => odd(Bits.pop(x & y));              
 
         /// <summary>
         /// Computes the scalar product of the source vector and another
         /// </summary>
-        /// <param name="rhs">The right operand</param>
+        /// <param name="y">The right operand</param>
         [MethodImpl(Inline)]
-        public static Bit dot(BitVector16 lhs, BitVector16 rhs)
-            => odd(Bits.pop(lhs.data & rhs.data));              
+        public static Bit dot(BitVector8 x, BitVector8 y)
+            => odd(Bits.pop(x.data & y.data));              
 
         /// <summary>
         /// Computes the scalar product of the source vector and another
         /// </summary>
-        /// <param name="rhs">The right operand</param>
+        /// <param name="y">The right operand</param>
         [MethodImpl(Inline)]
-        public static Bit dot(BitVector32 lhs, BitVector32 rhs)
-            => odd(Bits.pop(lhs.data & rhs.data));              
-
+        public static Bit dot(ushort x, ushort y)
+            => odd(Bits.pop(x & y));              
 
         /// <summary>
         /// Computes the scalar product of the source vector and another
         /// </summary>
-        /// <param name="rhs">The right operand</param>
+        /// <param name="y">The right operand</param>
         [MethodImpl(Inline)]
-        public static Bit dot(BitVector64 lhs, BitVector64 rhs)
-            => odd(Bits.pop(lhs.data & rhs.data));   //mod<N2>(Bits.pop(lhs.data & rhs.data));              
+        public static Bit dot(BitVector16 x, BitVector16 y)
+            => odd(Bits.pop(x.data & y.data));              
+
+        /// <summary>
+        /// Computes the scalar product of the source vector and another
+        /// </summary>
+        /// <param name="y">The right operand</param>
+        [MethodImpl(Inline)]
+        public static Bit dot(uint x, uint y)
+            => odd(Bits.pop(x & y));              
+
+        /// <summary>
+        /// Computes the scalar product of the source vector and another
+        /// </summary>
+        /// <param name="y">The right operand</param>
+        [MethodImpl(Inline)]
+        public static Bit dot(BitVector32 x, BitVector32 y)
+            => odd(Bits.pop(x.data & y.data));              
+
+        /// <summary>
+        /// Computes the scalar product of the source vector and another
+        /// </summary>
+        /// <param name="y">The right operand</param>
+        [MethodImpl(Inline)]
+        public static Bit dot(ulong x, ulong y)
+            => odd(Bits.pop(x & y));              
+
+        /// <summary>
+        /// Computes the scalar product of the source vector and another
+        /// </summary>
+        /// <param name="y">The right operand</param>
+        [MethodImpl(Inline)]
+        public static Bit dot(BitVector64 x, BitVector64 y)
+            => odd(Bits.pop(x.data & y.data));   //mod<N2>(Bits.pop(x.data & y.data));              
 
     }
 

@@ -476,7 +476,7 @@ namespace Z0
                 print($"LastCount = {lastCount}");
             }
             gmath.sal(ref part2, firstCount);
-            return gbits.or(in part1, in part2, ref part1);              
+            return gmath.or(ref part1, part2);              
         }
 
         [MethodImpl(Inline)]

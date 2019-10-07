@@ -17,8 +17,7 @@ namespace Z0
     {                
         /// <summary>
         /// unsigned int _blsmsk_u32 (unsigned int a) BLSMSK reg, reg/m32
-        /// Set all the lower bits of the result up to and including the lowest set bit in the source
-        /// Equivalent to the composite operation (a-1) ^ a
+        /// Logically equivalent to the composite operation (src-1) ^ src that enables the lower bits of the source up to and including the least set bit
         /// </summary>
         /// <param name="src">The bit source</param>
         [MethodImpl(Inline)]
@@ -27,8 +26,7 @@ namespace Z0
 
         /// <summary>
         /// unsigned int _blsmsk_u32 (unsigned int a) BLSMSK reg, reg/m32
-        /// Set all the lower bits of the result up to and including the lowest set bit in the source
-        /// Equivalent to the composite operation (a-1) ^ a
+        /// Logically equivalent to the composite operation (src-1) ^ src that enables the lower bits of the source up to and including the least set bit
         /// </summary>
         /// <param name="src">The bit source</param>
         [MethodImpl(Inline)]
@@ -37,8 +35,7 @@ namespace Z0
 
         /// <summary>
         /// unsigned int _blsmsk_u32 (unsigned int a) BLSMSK reg, reg/m32
-        /// Set all the lower bits of the result up to and including the lowest set bit in the source
-        /// Equivalent to the composite operation (a-1) ^ a
+        /// Logically equivalent to the composite operation (src-1) ^ src that enables the lower bits of the source up to and including the least set bit
         /// </summary>
         /// <param name="src">The bit source</param>
         [MethodImpl(Inline)]
@@ -47,8 +44,7 @@ namespace Z0
 
         /// <summary>
         /// unsigned __int64 _blsmsk_u64 (unsigned __int64 a) BLSMSK reg, reg/m6
-        /// Set all the lower bits of the result up to and including the lowest set bit in the source
-        /// Equivalent to the composite operation (a-1) ^ a
+        /// Logically equivalent to the composite operation (src-1) ^ src that enables the lower bits of the source up to and including the least set bit
         /// </summary>
         /// <param name="src">The bit source</param>
         [MethodImpl(Inline)]

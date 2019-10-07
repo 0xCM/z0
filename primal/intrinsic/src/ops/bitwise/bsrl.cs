@@ -22,7 +22,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="bytes">The number of bytes to shift</param>
         [MethodImpl(Inline)]
-        public static Vec128<short> bsrl(in Vec128<short> src, byte bytes)
+        public static Vec128<short> vbsrl(in Vec128<short> src, byte bytes)
             => ShiftRightLogical128BitLane(src, bytes);
 
         /// <summary>
@@ -32,7 +32,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="bytes">The number of bytes to shift</param>
         [MethodImpl(Inline)]
-        public static Vec128<ushort> bsrl(in Vec128<ushort> src, byte bytes)
+        public static Vec128<ushort> vbsrl(in Vec128<ushort> src, byte bytes)
             => ShiftRightLogical128BitLane(src, bytes);
 
         /// <summary>
@@ -42,7 +42,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="bytes">The number of bytes to shift</param>
         [MethodImpl(Inline)]
-        public static Vec128<int> bsrl(in Vec128<int> src, byte bytes)
+        public static Vec128<int> vbsrl(in Vec128<int> src, byte bytes)
             => ShiftRightLogical128BitLane(src, bytes);
 
         /// <summary>
@@ -52,7 +52,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="bytes">The number of bytes to shift</param>
         [MethodImpl(Inline)]
-        public static Vec128<uint> bsrl(in Vec128<uint> src, byte bytes)
+        public static Vec128<uint> vbsrl(in Vec128<uint> src, byte bytes)
             => ShiftRightLogical128BitLane(src, bytes);
 
         /// <summary>
@@ -62,7 +62,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="bytes">The number of bytes to shift</param>
         [MethodImpl(Inline)]
-        public static Vec128<long> bsrl(in Vec128<long> src, byte bytes)
+        public static Vec128<long> vbsrl(in Vec128<long> src, byte bytes)
             => ShiftRightLogical128BitLane(src, bytes);
 
         /// <summary>
@@ -72,7 +72,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="bytes">The number of bytes to shift</param>
         [MethodImpl(Inline)]
-        public static Vec128<ulong> bsrl(in Vec128<ulong> src, byte bytes)
+        public static Vec128<ulong> vbsrl(in Vec128<ulong> src, byte bytes)
             => ShiftRightLogical128BitLane(src, bytes);
         
         /// <summary>
@@ -82,7 +82,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="bytes">The number of bytes to shift</param>
         [MethodImpl(Inline)]
-        public static Vec256<short> bsrl(in Vec256<short> src, byte bytes)
+        public static Vec256<short> vbsrl(in Vec256<short> src, byte bytes)
             => ShiftRightLogical128BitLane(src, bytes);
 
         /// <summary>
@@ -92,7 +92,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="bytes">The number of bytes to shift</param>
         [MethodImpl(Inline)]
-        public static Vec256<ushort> bsrl(in Vec256<ushort> src, byte bytes)
+        public static Vec256<ushort> vbsrl(in Vec256<ushort> src, byte bytes)
             => ShiftRightLogical128BitLane(src, bytes);
 
         /// <summary>
@@ -102,7 +102,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="bytes">The number of bytes to shift</param>
         [MethodImpl(Inline)]
-        public static Vec256<int> bsrl(in Vec256<int> src, byte bytes)
+        public static Vec256<int> vbsrl(in Vec256<int> src, byte bytes)
             => ShiftRightLogical128BitLane(src, bytes);
 
         /// <summary>
@@ -112,7 +112,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="bytes">The number of bytes to shift</param>
         [MethodImpl(Inline)]
-        public static Vec256<uint> bsrl(in Vec256<uint> src, byte bytes)
+        public static Vec256<uint> vbsrl(in Vec256<uint> src, byte bytes)
             => ShiftRightLogical128BitLane(src, bytes);
 
         /// <summary>
@@ -122,7 +122,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="bytes">The number of bytes to shift</param>
         [MethodImpl(Inline)]
-        public static Vec256<long> bsrl(in Vec256<long> src, byte bytes)
+        public static Vec256<long> vbsrl(in Vec256<long> src, byte bytes)
             => ShiftRightLogical128BitLane(src, bytes);
 
         /// <summary>
@@ -132,7 +132,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="bytes">The number of bytes to shift</param>
         [MethodImpl(Inline)]
-        public static Vec256<ulong> bsrl(in Vec256<ulong> src, byte bytes)
+        public static Vec256<ulong> vbsrl(in Vec256<ulong> src, byte bytes)
             => ShiftRightLogical128BitLane(src, bytes); 
     }
 }

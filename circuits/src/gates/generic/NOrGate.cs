@@ -22,7 +22,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public T Send(in T x, in T y)
-            => gmath.flip(gbits.or(in x,in y));
+            => gmath.flip(gmath.or(in x,in y));
 
         [MethodImpl(Inline)]
         public Vec128<T> Send(in Vec128<T> x, in Vec128<T> y)
@@ -30,6 +30,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public Vec256<T> Send(in Vec256<T> x, in Vec256<T> y)
-            => ginx.vflip(gbits.or(in x,in y));
+            => ginx.vflip(ginx.vor(in x,in y));
     }
 }

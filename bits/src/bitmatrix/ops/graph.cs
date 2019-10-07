@@ -11,8 +11,17 @@ namespace Z0
     using static zfunc;
     using static As;
 
+    
+
     partial class BitMatrix
     {
+        /// <summary>
+        /// Constructs a 16-node graph via the adjacency matrix interpretation
+        /// </summary>
+        /// <param name="src">The source matrix</param>
+        [MethodImpl(Inline)]    
+        public static Graph<byte> graph(BitMatrix8 A)
+            => BitGraph.FromMatrix<byte,N8,byte>(BitMatrix<N8,N8,byte>.Load(A.Bytes));            
 
         /// <summary>
         /// Constructs a 16-node graph via the adjacency matrix interpretation

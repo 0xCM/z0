@@ -123,7 +123,7 @@ namespace Z0.Test
             for(var i=0; i<SampleSize; i++)
             {
                 var src = Random.Next<S>();
-                var bv = gbits.bitvector<V,S>(src);
+                var bv = PrimalBits.define<V,S>(src).Subject;
                 var bs = BitString.FromScalar(src);
                 for(var j=0; j< bv.Length; j++)
                     Claim.eq(bv[j], bs[j]);            

@@ -13,6 +13,16 @@ namespace Z0.Test
 
     public class t_varrange : IntrinsicTest<t_varrange>
     {     
+        public void shift128()
+        {
+            var x = Vec128Pattern.AllOnes<ulong>();
+            var y = dinx.vsllx(x,19);
+            var z = dinx.vslrx(x,19);
+            Trace(x.ToBitString());
+            Trace(y.ToBitString());
+            Trace(z.ToBitString());
+        }
+
         public void increments_128x16u()
         {
             var v1 = Vec128Pattern.Increments((ushort)0);

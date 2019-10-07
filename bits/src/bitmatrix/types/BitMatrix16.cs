@@ -108,9 +108,6 @@ namespace Z0
         public static BitMatrix16 operator & (BitMatrix16 A, BitMatrix16 B)
             => BitMatrix.and(A,B);
 
-        /// <summary>
-        /// Computes the bitwise or of the operands
-        /// </summary>
         [MethodImpl(Inline)]
         public static BitMatrix16 operator | (BitMatrix16 A, BitMatrix16 B)
             => BitMatrix.or(A,B);
@@ -119,14 +116,13 @@ namespace Z0
         public static BitMatrix16 operator ^ (BitMatrix16 A, BitMatrix16 B)
             => BitMatrix.xor(A,B);
 
-        /// <summary>
-        /// Computes the complement of the operand
-        /// </summary>
-        /// <param name="A">The source matrix</param>
         [MethodImpl(Inline)]
         public static BitMatrix16 operator ~ (BitMatrix16 A)
             => BitMatrix.flip(A);
 
+        [MethodImpl(Inline)]
+        public static BitMatrix16 operator - (BitMatrix16 A, BitMatrix16 B)
+            => BitMatrix.sub(A,B);
 
         [MethodImpl(Inline)]
         public static BitMatrix16 operator * (BitMatrix16 A, BitMatrix16 B)
@@ -278,15 +274,9 @@ namespace Z0
         public BitMatrix16 AndNot(in BitMatrix16 rhs)
             => BitMatrix.andn(ref this, rhs);
 
-
+        [MethodImpl(Inline)]
         public readonly BitVector16 Diagonal()
-        {
-            var dst = (ushort)0;
-            for(byte i=0; i < BitMatrix16.N; i++)
-                if(GetBit(i,i))
-                    BitMask.enable(ref dst, i);
-            return dst;                    
-        }
+            => BitMatrix.diagonal(this);
 
         public readonly BitMatrix16 Transpose()
         {

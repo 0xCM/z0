@@ -1,4 +1,20 @@
-// 2019-10-06 02:25:58:650
+// 2019-10-06 23:48:40:872
+uint project(uint src, Part6x3:uint part)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call System.UInt32 Z0.Bits::scatter(System.UInt32,System.UInt32)
+    IL_0007: ret
+
+}
+uint project(uint src, Part9x3:uint part)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call System.UInt32 Z0.Bits::scatter(System.UInt32,System.UInt32)
+    IL_0007: ret
+
+}
 uint project(uint src, Part12x3:uint part)
 {
     IL_0000: ldarg.0
@@ -794,6 +810,38 @@ ref ushort pack16x1(ReadOnlySpan<byte> src, ref ushort dst)
     IL_012A: stind.i2
     IL_012B: ldarg.1
     IL_012C: ret
+
+}
+byte select(byte src, BitMask8:byte spec)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call System.Byte Z0.Bits::gather(System.Byte,System.Byte)
+    IL_0007: ret
+
+}
+ushort select(ushort src, BitMask16:ushort spec)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call System.UInt16 Z0.Bits::gather(System.UInt16,System.UInt16)
+    IL_0007: ret
+
+}
+uint select(uint src, BitMask32:uint spec)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call System.UInt32 Z0.Bits::gather(System.UInt32,System.UInt32)
+    IL_0007: ret
+
+}
+ulong select(ulong src, BitMask64:ulong spec)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call System.UInt64 Z0.Bits::gather(System.UInt64,System.UInt64)
+    IL_0007: ret
 
 }
 void part32x16(uint src, Span<ushort> dst)
@@ -2958,21 +3006,5 @@ void part30x3(uint src, Span<byte> dst)
     IL_00F8: call System.Byte Z0.BitParts::project<System.Byte>(System.UInt32,Z0.BitParts/Part30x3)
     IL_00FD: stind.i1
     IL_00FE: ret
-
-}
-uint project(uint src, Part6x3:uint part)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: call System.UInt32 Z0.Bits::scatter(System.UInt32,System.UInt32)
-    IL_0007: ret
-
-}
-uint project(uint src, Part9x3:uint part)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: call System.UInt32 Z0.Bits::scatter(System.UInt32,System.UInt32)
-    IL_0007: ret
 
 }

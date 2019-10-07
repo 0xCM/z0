@@ -12,9 +12,7 @@ namespace Z0
 
     public class t_bzhi : ScalarBitTest<t_blsic>
     {
-
-        protected override int CycleCount => Pow2.T17;
-
+    
         public void bzhi_64u_check()
         {
             bzhi_check<ulong>();

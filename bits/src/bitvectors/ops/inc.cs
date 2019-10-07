@@ -83,8 +83,6 @@ namespace Z0
         /// <param name="x">The source vector</param>
         public static BitVector64 inc(BitVector64 x)        
             => math.inc(x.data);
-
-
     }
 
 }

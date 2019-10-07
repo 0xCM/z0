@@ -136,6 +136,10 @@ namespace Z0
             => BitMatrix.flip(src);
 
         [MethodImpl(Inline)]
+        public static BitMatrix8 operator - (BitMatrix8 A, BitMatrix8 B)
+            => BitMatrix.sub(A,B);
+
+        [MethodImpl(Inline)]
         public static BitMatrix8 operator * (BitMatrix8 lhs, BitMatrix8 rhs)
             => BitMatrix.mul(lhs,rhs);
 
@@ -212,7 +216,6 @@ namespace Z0
             get => data;
         }
 
-
         /// <summary>
         /// Constructs an 8-node graph via the adjacency matrix interpretation
         /// </summary>
@@ -269,22 +272,14 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public BitMatrix8 AndNot(in BitMatrix8 rhs)
-        {
-             data = BitConverter.GetBytes(((ulong)this &~ (ulong)rhs));
-             return this;
-        }
+            => BitMatrix.andn(ref this, rhs);
 
         /// <summary>
         /// Retrives the bitvector determined by the matrix diagonal
         /// </summary>
+        [MethodImpl(Inline)]
         public readonly BitVector8 Diagonal()
-        {
-            var dst = (byte)0;
-            for(byte i=0; i < RowCount; i++)
-                if(GetBit(i,i))
-                    BitMask.enable(ref dst, i);
-            return dst;                    
-        }
+            => BitMatrix.diagonal(this);
 
         /// <summary>
         /// Returns a mutable reference for an index-identified matrix row
@@ -325,12 +320,13 @@ namespace Z0
         /// Transposes a copy of the matrix
         /// </summary>
         public readonly BitMatrix8 Transpose()
-        {
-            var dst = Replicate();
-            for(var i=0; i<N; i++)
-                dst.data[i] = ColData(i);
-            return dst;
-        }
+            => BitMatrix.transpose(this);
+        // {
+        //     var dst = Replicate();
+        //     for(var i=0; i<N; i++)
+        //         dst.data[i] = ColData(i);
+        //     return dst;
+        // }
 
         /// <summary>
         /// Queries the matrix for the data in an index-identified column 
@@ -360,7 +356,7 @@ namespace Z0
         /// </summary>
         /// <param name="spec">The permutation definition</param>
         [MethodImpl(Inline)]
-        public BitMatrix8 Apply(Perm<N8> perm)
+        public BitMatrix8 Apply(Perm<N8> perm)    
             => BitMatrix.apply(perm, ref this);
 
         /// <summary>
@@ -385,13 +381,6 @@ namespace Z0
             => data.FormatMatrixBits(8);
 
         /// <summary>
-        /// Extracts the bits that comprise the matrix in row-major order
-        /// </summary>
-        [MethodImpl(Inline)]
-        public Span<byte> Unpack()
-            => Bytes.Unpack();
-
-        /// <summary>
         /// Converts the matrix to a bitvector
         /// </summary>
         [MethodImpl(Inline)]
@@ -400,10 +389,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public readonly bool Equals(BitMatrix8 rhs)
-            => BitConverter.ToUInt64(data) == BitConverter.ToUInt64(rhs.data);
-
-
-
+            => BitMatrix.eq(this,rhs);
 
         [MethodImpl(Inline)]
 

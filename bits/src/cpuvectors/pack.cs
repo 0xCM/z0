@@ -18,7 +18,9 @@ namespace Z0
     using static zfunc;
  
     partial class Bits
-    {        
+    {    
+
+
         [MethodImpl(Inline)]
         public static Vec128<sbyte> vpackss(in Vec128<short> lhs, in Vec128<short> rhs)
             => PackSignedSaturate(lhs,rhs);

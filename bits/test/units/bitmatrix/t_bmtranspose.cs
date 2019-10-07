@@ -36,9 +36,13 @@ namespace Z0.Test
         public void bm_transpose_8x8x8()
         {
             var m1 = Random.BitMatrix(n8);
-            var m2 = m1.Transpose();
-            var m3 = m2.Transpose();            
-            Claim.yea(m1 == m3);
+            var m2 = BitMatrix.transpose(m1);
+            for(var i=0; i<m2.RowCount; i++)
+            for(var j=0; j<m2.ColCount; j++)
+                Claim.eq(m1[i,j], m2[j,i]);
+            
+            var m3 = BitMatrix.transpose(m2);
+            Claim.yea(m3 == m1);
         }
 
 

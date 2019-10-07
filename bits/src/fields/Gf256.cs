@@ -16,7 +16,7 @@ namespace Z0
     {
         public const int MemberCount = 256;
 
-        static readonly ushort Redux =  GfPoly.Lookup<N8,ushort>().Scalar;                        
+        static readonly ushort Redux = GfPoly.Lookup<N8,ushort>().Scalar;
 
         /// <summary>
         /// Computes the GF(256) product reduced by the canonical polynomial

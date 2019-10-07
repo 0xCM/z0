@@ -307,30 +307,60 @@ namespace Z0
         public static Vec128<T> LoadScalar<T>(in T src)
             where T : unmanaged
         {            
+            if(typeof(T) == typeof(byte) 
+            || typeof(T) == typeof(ushort) 
+            || typeof(T) == typeof(uint) 
+            || typeof(T) == typeof(ulong))
+                return LoadScalaru(in src);
+            else if(typeof(T) == typeof(sbyte) 
+            || typeof(T) == typeof(short) 
+            || typeof(T) == typeof(int) 
+            || typeof(T) == typeof(long))
+                return LoadScalari(in src);
+            else 
+                return LoadScalarf(in src);
+        }        
+
+
+        [MethodImpl(Inline)]
+        static Vec128<T> LoadScalari<T>(in T src)
+            where T : unmanaged
+        {            
             if(typeof(T) == typeof(sbyte))
                 return generic<T>(LoadScalar(int8(src)));
-            else if(typeof(T) == typeof(byte))
-                return generic<T>(LoadScalar(uint8(src)));
             else if(typeof(T) == typeof(short))
                 return generic<T>(LoadScalar(int16(src)));
-            else if(typeof(T) == typeof(ushort))
-                return generic<T>(LoadScalar(uint16(src)));
             else if(typeof(T) == typeof(int))
                 return generic<T>(LoadScalar(int32(src)));
+            else 
+                return generic<T>(LoadScalar(int64(src)));
+        }        
+
+        [MethodImpl(Inline)]
+        static Vec128<T> LoadScalaru<T>(in T src)
+            where T : unmanaged
+        {            
+            if(typeof(T) == typeof(byte))
+                return generic<T>(LoadScalar(uint8(src)));
+            else if(typeof(T) == typeof(ushort))
+                return generic<T>(LoadScalar(uint16(src)));
             else if(typeof(T) == typeof(uint))
                 return generic<T>(LoadScalar(uint32(src)));
-            else if(typeof(T) == typeof(long))
-                return generic<T>(LoadScalar(int64(src)));
-            else if(typeof(T) == typeof(ulong))
+            else 
                 return generic<T>(LoadScalar(uint64(src)));
-            else if(typeof(T) == typeof(float))
+        }        
+
+        [MethodImpl(Inline)]
+        static Vec128<T> LoadScalarf<T>(in T src)
+            where T : unmanaged
+        {            
+            if(typeof(T) == typeof(float))
                 return generic<T>(LoadScalar(float32(src)));
             else if(typeof(T) == typeof(double))
                 return generic<T>(LoadScalar(float64(src)));
             else 
                 throw unsupported<T>();
         }        
-
 
         /// <summary>
         /// Creates a vector with decrementing components
@@ -418,7 +448,6 @@ namespace Z0
                 dst[i] = even(i) ? a : b;
             return Vec128.Load(ref dst[0]);
         }
-
 
         /// <summary>
         /// Creates a new vector via component-wise specification

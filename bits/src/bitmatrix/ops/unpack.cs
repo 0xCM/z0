@@ -13,7 +13,6 @@ namespace Z0
 
     partial class BitMatrix
     {
-
         /// <summary>
         /// Projects the bits of a fixed primal bitmatrix into a generic target matrix of the same order
         /// </summary>

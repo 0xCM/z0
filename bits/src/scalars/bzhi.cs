@@ -8,6 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics.X86;
 
+    using static System.Runtime.Intrinsics.X86.Bmi1;
+    using static System.Runtime.Intrinsics.X86.Bmi1.X64;
     using static System.Runtime.Intrinsics.X86.Bmi2;
     using static System.Runtime.Intrinsics.X86.Bmi2.X64;
 
@@ -22,7 +24,7 @@ namespace Z0
         /// <param name="src">The bit source</param>
         [MethodImpl(Inline)]
         public static byte bzhi(byte src, uint index)
-            => (byte)ZeroHighBits(src, index);
+            =>  (byte)ZeroHighBits(src, index);
 
         /// <summary>
         /// unsigned int _bzhi_u32 (unsigned int a, unsigned int index) BZHI r32a, reg/m32, r32b
@@ -100,5 +102,7 @@ namespace Z0
             src = ZeroHighBits(src, index);
             return ref src;
         }
+
+        
     }
 }

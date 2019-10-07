@@ -21,7 +21,7 @@ namespace Z0
         /// where all bits in the target are set except for the least set bit in the source
         /// For example, [11101010] |> blisc = [11111101]
         /// </summary>
-        /// <param name="src">The source valeu</param>
+        /// <param name="src">The source vale</param>
         [MethodImpl(Inline)]
         public static byte blsic(byte src)
             => (byte)(~src | (src - 1));

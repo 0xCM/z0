@@ -15,8 +15,7 @@ namespace Z0
     partial class gbits
     {
         /// <summary>
-        /// Disables the least enabled bit, equivalent to the 
-        /// composite operation (src - 1) & src
+        /// Logically equivalent to the composite operation (src - 1) & src that disables the least set bit in the source
         /// </summary>
         /// <param name="src">The bit source</param>
         [MethodImpl(Inline)]

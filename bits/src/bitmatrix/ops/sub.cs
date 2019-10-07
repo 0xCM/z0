@@ -27,8 +27,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitMatrix64 sub(BitMatrix64 A, BitMatrix64 B)
             => A ^(~ B);
-
-
     }
 
 }

@@ -75,6 +75,14 @@ namespace Z0
             => From(src.Data.AsBytes());
 
         [MethodImpl(Inline)]
+        public static BitMatrix64 From(Span<ulong> src)        
+            => new BitMatrix64(src);
+
+        [MethodImpl(Inline)]
+        public static BitMatrix64 From(in Span<N64,ulong> src)        
+            => new BitMatrix64(src);
+
+        [MethodImpl(Inline)]
         public static BitMatrix64 From(Span<byte> src)        
             => new BitMatrix64(src.AsUInt64());
 
@@ -93,6 +101,10 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitMatrix64 operator ~ (BitMatrix64 A)
             => BitMatrix.flip(A);
+
+        [MethodImpl(Inline)]
+        public static BitMatrix64 operator - (BitMatrix64 A, BitMatrix64 B)
+            => BitMatrix.sub(A,B);
 
         [MethodImpl(Inline)]
         public static BitMatrix64 operator * (BitMatrix64 A, BitMatrix64 B)
@@ -121,6 +133,12 @@ namespace Z0
         BitMatrix64(Span<ulong> src)
         {                        
             require(src.Length == Pow2.T06);
+            this.data = src;
+        }
+
+        [MethodImpl(Inline)]
+        BitMatrix64(in Span<N64,ulong> src)
+        {                        
             this.data = src;
         }
 
@@ -246,7 +264,7 @@ namespace Z0
             ulong col = 0;
             for(var r = 0; r < N; r++)
                 BitMask.setif(in data[r], index, ref col, r);
-            return  col;
+            return col;
         }
         
         /// <summary>
@@ -271,18 +289,15 @@ namespace Z0
         /// <summary>
         /// Determines whether this matrix is equivalent to the canonical 0 matrix
         /// </summary>
+        [MethodImpl(Inline)] 
         public readonly bool IsZero()
             => BitMatrix.testz(this);
 
+        [MethodImpl(Inline)] 
         public readonly BitVector64 Diagonal()
-        {
-            var dst = (ulong)0;
-            for(byte i=0; i < N; i++)
-                if(GetBit(i,i))
-                    BitMask.enable(ref dst, i);
-            return dst;                    
-        }
+            => BitMatrix.diagonal(this);
 
+        [MethodImpl(Inline)] 
         public BitMatrix64 AndNot(in BitMatrix64 rhs)
             => BitMatrix.andn(this, rhs, ref this);
 

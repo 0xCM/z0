@@ -13,11 +13,25 @@ namespace Z0
     partial class BitMatrix
     {
         [MethodImpl(Inline)]
+        public static ref BitMatrix8 andn(ref BitMatrix8 A, in BitMatrix8 B)
+        {
+             BitConverter.GetBytes(~(ulong)A & (ulong)B).CopyTo(A.Bytes);
+             return ref A;
+        }
+
+        [MethodImpl(Inline)]
+        public static BitMatrix8 andn(BitMatrix8 A, BitMatrix8 B)
+        {
+            var C = A.Replicate();
+            return andn(ref C, B);
+        }
+
+        [MethodImpl(Inline)]
         public static ref BitMatrix16 andn(ref BitMatrix16 A, in BitMatrix16 B)
         {
-            A.GetCells(out Vec256<ushort> vLhs);
-            B.GetCells(out Vec256<ushort> vRhs);
-            dinx.vandn(vLhs,vRhs).StoreTo(ref A[0]);
+            A.GetCells(out Vec256<ushort> x);
+            B.GetCells(out Vec256<ushort> y);
+            dinx.vandn(x,y).StoreTo(ref A[0]);
             return ref A;
         }
 

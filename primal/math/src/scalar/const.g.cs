@@ -24,7 +24,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static T one<T>()
             where T : unmanaged
-                => PrimalInfo.one<T>();
+                => convert<T>(1);
 
         [MethodImpl(Inline)]
         public static T minval<T>()

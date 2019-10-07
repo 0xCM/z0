@@ -30,7 +30,7 @@ namespace Z0.Test
                 var z = PrimalInfo.Get<T>().Zero;
                 for(var j = 0; j<z1s.Length; j++)
                 {
-                    gbits.or(in z, z1s[j], ref z);
+                    gmath.or(ref z, z1s[j]);
                     Claim.nea(gmath.nonzero(z2s[j]));
                 }
                 

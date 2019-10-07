@@ -17,9 +17,7 @@ namespace Z0
     {                
         /// <summary>
         /// unsigned int _blsr_u32 (unsigned int a) BLSR reg, reg/m32
-        /// Copies all bits from the source to the result, and disable the bit in the 
-        /// result that corresponds to the lowest set bit in a. 
-        /// Exquivalent to the composite operation (src - 1) & src
+        /// Logically equivalent to the composite operation (src - 1) & src that disables the least set bit in the source
         /// </summary>
         /// <param name="src">The bit source</param>
         [MethodImpl(Inline)]
@@ -28,9 +26,7 @@ namespace Z0
  
         /// <summary>
         /// unsigned int _blsr_u32 (unsigned int a) BLSR reg, reg/m32
-        /// Copies all bits from the source to the result, and disable the bit in the 
-        /// result that corresponds to the lowest set bit in a. 
-        /// Exquivalent to the composite operation (src - 1) & src
+        /// Logically equivalent to the composite operation (src - 1) & src that disables the least set bit in the source
         /// </summary>
         /// <param name="src">The bit source</param>
         [MethodImpl(Inline)]
@@ -39,9 +35,7 @@ namespace Z0
  
         /// <summary>
         /// unsigned int _blsr_u32 (unsigned int a) BLSR reg, reg/m32
-        /// Copies all bits from the source to the result, and disable the bit in the 
-        /// result that corresponds to the lowest set bit in a. 
-        /// Exquivalent to the composite operation (src - 1) & src
+        /// Logically equivalent to the composite operation (src - 1) & src that disables the least set bit in the source
         /// </summary>
         /// <param name="src">The bit source</param>
         [MethodImpl(Inline)]
@@ -50,9 +44,7 @@ namespace Z0
 
         /// <summary>
         /// unsigned __int64 _blsr_u64 (unsigned __int64 a) BLSR reg, reg/m64
-        /// Copies all bits from the source to the result, and disable the bit in the 
-        /// result that corresponds to the lowest set bit in a. 
-        /// Exquivalent to the composite operation (src - 1) & src
+        /// Logically equivalent to the composite operation (src - 1) & src that disables the least set bit in the source
         /// </summary>
         /// <param name="src">The bit source</param>
         [MethodImpl(Inline)]

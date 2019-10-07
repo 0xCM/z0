@@ -26,160 +26,160 @@ namespace Z0
         /// __m128i _mm_sub_epi8 (__m128i a, __m128i b) PSUBB xmm, xmm/m128
         /// Subtracts the right vector from the left
         /// </summary>
-        /// <param name="lhs">The left vector</param>
-        /// <param name="rhs">The right vector</param>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vec128<byte> vsub(in Vec128<byte> lhs, in Vec128<byte> rhs)
-            => Subtract(lhs,rhs);
+        public static Vec128<byte> vsub(in Vec128<byte> x, in Vec128<byte> y)
+            => Subtract(x,y);
 
         /// <summary>
         ///  __m128i _mm_sub_epi8 (__m128i a, __m128i b) PSUBB xmm, xmm/m128
         /// Subtracts the right vector from the left
         /// </summary>
-        /// <param name="lhs">The left vector</param>
-        /// <param name="rhs">The right vector</param>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vec128<sbyte> vsub(in Vec128<sbyte> lhs, in Vec128<sbyte> rhs)
-            => Subtract(lhs,rhs);
+        public static Vec128<sbyte> vsub(in Vec128<sbyte> x, in Vec128<sbyte> y)
+            => Subtract(x,y);
 
         /// <summary>
         /// __m128i _mm_sub_epi16 (__m128i a, __m128i b) PSUBW xmm, xmm/m128
         /// Subtracts the right vector from the left
         /// </summary>
-        /// <param name="lhs">The left vector</param>
-        /// <param name="rhs">The right vector</param>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vec128<short> vsub(in Vec128<short> lhs, in Vec128<short> rhs)
-            => Subtract(lhs,rhs);
+        public static Vec128<short> vsub(in Vec128<short> x, in Vec128<short> y)
+            => Subtract(x,y);
 
         /// <summary>
         /// __m128i _mm_sub_epi16 (__m128i a, __m128i b) PSUBW xmm, xmm/m128
         /// Subtracts the right vector from the left
         /// </summary>
-        /// <param name="lhs">The left vector</param>
-        /// <param name="rhs">The right vector</param>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vec128<ushort> vsub(in Vec128<ushort> lhs, in Vec128<ushort> rhs)
-            => Subtract(lhs,rhs);
+        public static Vec128<ushort> vsub(in Vec128<ushort> x, in Vec128<ushort> y)
+            => Subtract(x,y);
 
         /// <summary>
         /// __m128i _mm_sub_epi32 (__m128i a, __m128i b) PSUBD xmm, xmm/m12
         /// Subtracts the right vector from the left
         /// </summary>
-        /// <param name="lhs">The left vector</param>
-        /// <param name="rhs">The right vector</param>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vec128<int> vsub(in Vec128<int> lhs, in Vec128<int> rhs)
-            => Subtract(lhs,rhs);
+        public static Vec128<int> vsub(in Vec128<int> x, in Vec128<int> y)
+            => Subtract(x,y);
 
         /// <summary>
         /// __m128i _mm_sub_epi32 (__m128i a, __m128i b) PSUBD xmm, xmm/m128
         /// Subtracts the right vector from the left
         /// </summary>
-        /// <param name="lhs">The left vector</param>
-        /// <param name="rhs">The right vector</param>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vec128<uint> vsub(in Vec128<uint> lhs, in Vec128<uint> rhs)
-            => Subtract(lhs,rhs);
+        public static Vec128<uint> vsub(in Vec128<uint> x, in Vec128<uint> y)
+            => Subtract(x,y);
 
         /// <summary>
         /// __m128i _mm_sub_epi64 (__m128i a, __m128i b) PSUBQ xmm, xmm/m128
         /// Subtracts the right vector from the left
         /// </summary>
-        /// <param name="lhs">The left vector</param>
-        /// <param name="rhs">The right vector</param>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vec128<long> vsub(in Vec128<long> lhs, in Vec128<long> rhs)
-            => Subtract(lhs,rhs);
+        public static Vec128<long> vsub(in Vec128<long> x, in Vec128<long> y)
+            => Subtract(x,y);
 
         /// <summary>
         /// __m128i _mm_sub_epi64 (__m128i a, __m128i b) PSUBQ xmm, xmm/m128
         /// </summary>
-        /// <param name="lhs">The left vector</param>
-        /// <param name="rhs">The right vector</param>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vec128<ulong> vsub(in Vec128<ulong> lhs, in Vec128<ulong> rhs)
-            => Subtract(lhs,rhs);
+        public static Vec128<ulong> vsub(in Vec128<ulong> x, in Vec128<ulong> y)
+            => Subtract(x,y);
 
         /// <summary>
         /// __m256i _mm256_sub_epi8 (__m256i a, __m256i b) VPSUBB ymm, ymm, ymm/m256
         /// Subtracts the right vector from the left
         /// </summary>
-        /// <param name="lhs">The left vector</param>
-        /// <param name="rhs">The right vector</param>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<byte> vsub(in Vec256<byte> lhs, in Vec256<byte> rhs)
-            => Subtract(lhs, rhs);
+        public static Vec256<byte> vsub(in Vec256<byte> x, in Vec256<byte> y)
+            => Subtract(x, y);
 
         /// <summary>
         /// __m256i _mm256_sub_epi8 (__m256i a, __m256i b) VPSUBB ymm, ymm, ymm/m256
         /// Subtracts the right vector from the left
         /// </summary>
-        /// <param name="lhs">The left vector</param>
-        /// <param name="rhs">The right vector</param>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<sbyte> vsub(in Vec256<sbyte> lhs, in Vec256<sbyte> rhs)
-            => Subtract(lhs, rhs);
+        public static Vec256<sbyte> vsub(in Vec256<sbyte> x, in Vec256<sbyte> y)
+            => Subtract(x, y);
 
         /// <summary>
         /// __m256i _mm256_sub_epi16 (__m256i a, __m256i b) VPSUBW ymm, ymm, ymm/m256
         /// Subtracts the right vector from the left
         /// </summary>
-        /// <param name="lhs">The left vector</param>
-        /// <param name="rhs">The right vector</param>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<short> vsub(in Vec256<short> lhs, in Vec256<short> rhs)
-            => Subtract(lhs, rhs);
+        public static Vec256<short> vsub(in Vec256<short> x, in Vec256<short> y)
+            => Subtract(x, y);
 
         /// <summary>
         /// __m256i _mm256_sub_epi16 (__m256i a, __m256i b) VPSUBW ymm, ymm, ymm/m256
         /// Subtracts the right vector from the left
         /// </summary>
-        /// <param name="lhs">The left vector</param>
-        /// <param name="rhs">The right vector</param>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<ushort> vsub(in Vec256<ushort> lhs, in Vec256<ushort> rhs)
-            => Subtract(lhs, rhs);
+        public static Vec256<ushort> vsub(in Vec256<ushort> x, in Vec256<ushort> y)
+            => Subtract(x, y);
 
         /// <summary>
         ///  __m256i _mm256_sub_epi32 (__m256i a, __m256i b) VPSUBD ymm, ymm, ymm/m256
         /// Subtracts the right vector from the left
         /// </summary>
-        /// <param name="lhs">The left vector</param>
-        /// <param name="rhs">The right vector</param>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<int> vsub(in Vec256<int> lhs, in Vec256<int> rhs)
-            => Subtract(lhs, rhs);
+        public static Vec256<int> vsub(in Vec256<int> x, in Vec256<int> y)
+            => Subtract(x, y);
 
         /// <summary>
         ///  __m256i _mm256_sub_epi32 (__m256i a, __m256i b) VPSUBD ymm, ymm, ymm/m256
         /// Subtracts the right vector from the left
         /// </summary>
-        /// <param name="lhs">The left vector</param>
-        /// <param name="rhs">The right vector</param>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<uint> vsub(in Vec256<uint> lhs, in Vec256<uint> rhs)
-            => Subtract(lhs, rhs);
+        public static Vec256<uint> vsub(in Vec256<uint> x, in Vec256<uint> y)
+            => Subtract(x, y);
 
         /// <summary>
         /// __m256i _mm256_sub_epi64 (__m256i a, __m256i b) VPSUBQ ymm, ymm, ymm/m256
         /// Subtracts the right vector from the left
         /// </summary>
-        /// <param name="lhs">The left vector</param>
-        /// <param name="rhs">The right vector</param>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<long> vsub(in Vec256<long> lhs, in Vec256<long> rhs)
-            => Subtract(lhs, rhs);
+        public static Vec256<long> vsub(in Vec256<long> x, in Vec256<long> y)
+            => Subtract(x, y);
 
         /// <summary>
         /// __m256i _mm256_sub_epi64 (__m256i a, __m256i b) VPSUBQ ymm, ymm, ymm/m256
         /// Subtracts the right vector from the left
         /// </summary>
-        /// <param name="lhs">The left vector</param>
-        /// <param name="rhs">The right vector</param>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<ulong> vsub(in Vec256<ulong> lhs, in Vec256<ulong> rhs)
-            => Subtract(lhs, rhs);
+        public static Vec256<ulong> vsub(in Vec256<ulong> x, in Vec256<ulong> y)
+            => Subtract(x, y);
 
     }
 }

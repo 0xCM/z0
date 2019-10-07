@@ -106,22 +106,128 @@ namespace Z0
         [MethodImpl(Inline)]
         public static T zero<T>()
             where T : unmanaged
-                => Get<T>().Zero;
+                => default(T);
 
         [MethodImpl(Inline)]
         public static T one<T>()
             where T : unmanaged
-                => Get<T>().One;
+                => convert<T>(1);
 
         [MethodImpl(Inline)]
         public static T minval<T>()
             where T : unmanaged
-                => Get<T>().MinVal;
+        {
+            if(typeof(T) == typeof(sbyte) 
+            || typeof(T) == typeof(short) 
+            || typeof(T) == typeof(int) 
+            || typeof(T) == typeof(long))
+                return minvali<T>();
+            else if(typeof(T) == typeof(byte) 
+            || typeof(T) == typeof(ushort) 
+            || typeof(T) == typeof(uint) 
+            || typeof(T) == typeof(ulong))
+                return minvalu<T>();
+            else
+                return minvalf<T>();
+        }                
+
+        [MethodImpl(Inline)]
+        static T minvali<T>()
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(sbyte))
+                return convert<T>(sbyte.MinValue);
+            else if(typeof(T) == typeof(short))
+                return convert<T>(short.MinValue);
+            else if(typeof(T) == typeof(int))
+                return convert<T>(int.MinValue);
+            else
+                return convert<T>(long.MinValue);
+        }
+
+        [MethodImpl(Inline)]
+        static T minvalu<T>()
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(byte))
+                return convert<T>(byte.MinValue);
+            else if(typeof(T) == typeof(ushort))
+                return convert<T>(ushort.MinValue);
+            else if(typeof(T) == typeof(uint))
+                return convert<T>(uint.MinValue);
+            else
+                return convert<T>(ulong.MinValue);
+        }
+
+        [MethodImpl(Inline)]
+        static T minvalf<T>()
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(float))
+                return convert<T>(float.MinValue);
+            else if(typeof(T) == typeof(double))
+                return convert<T>(double.MinValue);
+            else
+                throw unsupported<T>();
+        }
 
         [MethodImpl(Inline)]
         public static T maxval<T>()
             where T : unmanaged
-                => Get<T>().MaxVal;
+        {
+            if(typeof(T) == typeof(sbyte) 
+            || typeof(T) == typeof(short) 
+            || typeof(T) == typeof(int) 
+            || typeof(T) == typeof(long))
+                return maxvali<T>();
+            else if(typeof(T) == typeof(byte) 
+            || typeof(T) == typeof(ushort) 
+            || typeof(T) == typeof(uint) 
+            || typeof(T) == typeof(ulong))
+                return maxvalu<T>();
+            else
+                return maxvalf<T>();
+        }                
+
+        [MethodImpl(Inline)]
+        static T maxvali<T>()
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(sbyte))
+                return convert<T>(sbyte.MaxValue);
+            else if(typeof(T) == typeof(short))
+                return convert<T>(short.MaxValue);
+            else if(typeof(T) == typeof(int))
+                return convert<T>(int.MaxValue);
+            else
+                return convert<T>(long.MaxValue);
+        }
+
+        [MethodImpl(Inline)]
+        static T maxvalu<T>()
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(byte))
+                return convert<T>(byte.MaxValue);
+            else if(typeof(T) == typeof(ushort))
+                return convert<T>(ushort.MaxValue);
+            else if(typeof(T) == typeof(uint))
+                return convert<T>(uint.MaxValue);
+            else
+                return convert<T>(ulong.MaxValue);
+        }
+
+        [MethodImpl(Inline)]
+        static T maxvalf<T>()
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(float))
+                return convert<T>(float.MaxValue);
+            else if(typeof(T) == typeof(double))
+                return convert<T>(double.MaxValue);
+            else
+                throw unsupported<T>();
+        }
 
         [MethodImpl(Inline)]
         public static bool signed<T>()

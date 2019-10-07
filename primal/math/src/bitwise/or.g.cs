@@ -23,7 +23,7 @@ namespace Z0
         /// <param name="rhs">The right value</param>
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
-        public static T or<T>(in T lhs, in T rhs)
+        public static T or<T>(T lhs, T rhs)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte) 
@@ -58,7 +58,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static T ori<T>(in T lhs, in T rhs)
+        static T ori<T>(T lhs, T rhs)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
@@ -72,7 +72,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static T oru<T>(in T lhs, in T rhs)
+        static T oru<T>(T lhs, T rhs)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))

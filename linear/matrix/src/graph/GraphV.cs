@@ -235,7 +235,6 @@ namespace Z0
         /// </summary>
         /// <param name="v0">The start vertex</param>
         /// <param name="vEnd">An optional endpoint</param>
-        /// <returns></returns>
         public IEnumerable<V> Path(V v0,  V vEnd = default)
         {
             foreach(var target in Targets(v0))

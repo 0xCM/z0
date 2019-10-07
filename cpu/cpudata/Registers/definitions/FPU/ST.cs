@@ -12,10 +12,8 @@ namespace Z0
     
     partial class Registers
     {
-        [StructLayout(LayoutKind.Explicit, Size = 10)]
         public struct ST : IFpuReg80
         {
-            [FieldOffset(0)]
             Float80 data;
 
             [MethodImpl(Inline)]

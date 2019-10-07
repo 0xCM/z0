@@ -115,14 +115,23 @@ namespace Z0
         public static byte minval_g8u()
             => gmath.minval<byte>();
 
+        public static short minval_n16i()
+            => short.MinValue;
+
         public static short minval_g16i()
             => gmath.minval<short>();
 
         public static ushort minval_g16u()
             => gmath.minval<ushort>();
 
+        public static int minval_32i()
+            => int.MinValue;
+
         public static int minval_g32i()
             => gmath.minval<int>();
+
+        public static uint minval_32u()
+            => uint.MinValue;
 
         public static uint minval_g32u()
             => gmath.minval<uint>();
@@ -151,8 +160,14 @@ namespace Z0
         public static ushort maxval_g16u()
             => gmath.maxval<ushort>();
 
+        public static int maxval_n32i()
+            => int.MaxValue;
+
         public static int maxval_g32i()
             => gmath.maxval<int>();
+
+        public static uint maxval_n32u()
+            => uint.MaxValue;
 
         public static uint maxval_g32u()
             => gmath.maxval<uint>();
@@ -165,6 +180,9 @@ namespace Z0
 
         public static float maxval_g32f()
             => gmath.maxval<float>();
+
+        public static double maxval_n64f()
+            => double.MaxValue;
 
         public static double maxval_g64f()
             => gmath.maxval<double>();

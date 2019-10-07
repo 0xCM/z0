@@ -40,5 +40,13 @@ namespace Z0
 
     }
 
+    /// <summary>
+    /// Opcodes for bitmatrix operations
+    /// </summary>
+    public static partial class bmoc
+    {
+
+    }
+
 
 }

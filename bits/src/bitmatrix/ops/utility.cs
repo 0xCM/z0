@@ -15,17 +15,6 @@ namespace Z0
     partial class BitMatrix
     {
         
-        [MethodImpl(Inline)]
-        public static bool eq(BitMatrix16 A, BitMatrix16 B)
-            => testz(andn(A,B));
-
-        [MethodImpl(Inline)]
-        public static bool eq(BitMatrix32 A, BitMatrix32 B)
-            => testz(andn(A,B));
-
-        [MethodImpl(Inline)]
-        public static bool eq(BitMatrix64 A, BitMatrix64 B)
-            => testz(andn(A,B));
 
         [MethodImpl(Inline)]
         static unsafe Vec256<uint> vload256(ref uint head)

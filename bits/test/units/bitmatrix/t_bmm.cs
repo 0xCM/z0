@@ -17,11 +17,10 @@ namespace Z0.Test
 
         public void bmm_4x4_bench()
         {
-            var opcount = RoundCount*CycleCount;
             var sw = stopwatch(false);
             var last = BitMatrix4.Zero;
 
-            for(var i=0; i< opcount; i++)
+            for(var i=0; i< OpCount; i++)
             {
                 var m1 = Random.BitMatrix4();
                 var m2 = Random.BitMatrix4();
@@ -29,7 +28,7 @@ namespace Z0.Test
                 last = m1 * m2;
                 sw.Stop();
             }
-            Collect((opcount, snapshot(sw), "bmm_4x4"));
+            Collect((OpCount, snapshot(sw), "bmm_4x4"));
         }
 
         public void bmm_8x8()
@@ -47,11 +46,10 @@ namespace Z0.Test
 
         public void bmm_8x8_bench()
         {
-            var opcount = RoundCount*CycleCount;
             var sw = stopwatch(false);
             var last = BitMatrix8.Zero;
             
-            for(var i = 0; i < opcount; i++)
+            for(var i = 0; i < OpCount; i++)
             {
                 var m1 = Random.BitMatrix8();
                 var m2 = Random.BitMatrix8();
@@ -60,16 +58,16 @@ namespace Z0.Test
                 sw.Stop();
             }
 
-            Collect((opcount, snapshot(sw), "bmm_8x8"));
+            Collect((OpCount, snapshot(sw), "bmm_8x8"));
         }
 
         public void bmm_16x16_bench()
         {
-            var opcount = RoundCount*CycleCount;
+            
             var last = BitMatrix16.Zero;
 
             var sw = stopwatch(false);
-            for(var i=0; i< opcount; i++)
+            for(var i=0; i< OpCount; i++)
             {
                 var m1 = Random.BitMatrix16();
                 var m2 = Random.BitMatrix16();
@@ -78,7 +76,7 @@ namespace Z0.Test
                 sw.Stop();
             }
 
-            Collect((opcount, snapshot(sw), "bmm_16x16"));
+            Collect((OpCount, snapshot(sw), "bmm_16x16"));
         }
 
         public void bmm_32x32()
@@ -98,22 +96,21 @@ namespace Z0.Test
         {
             var last = BitMatrix32.Zero;            
             var sw = stopwatch(false);
-            var opcount = RoundCount*CycleCount;
 
             var dst = BitMatrix32.Alloc();
-            for(var i=0; i< opcount; i++)
+            for(var i=0; i< OpCount; i++)
             {
                 var m1 = Random.BitMatrix(n32);
                 var m3 = Random.BitMatrix(n32);
                 sw.Start();
-                last = BitMatrixOps.Mul(in m1, in m3, ref dst);
+                last = m1 * m3;
                 sw.Stop();                    
             }
 
-            Collect((opcount, snapshot(sw), "bmm_32x32_prealloc"));
+            Collect((OpCount, snapshot(sw), "bmm_32x32_op"));
         }
 
-        void bmm_64x64x64()
+        void bmm_64x64x64_()
         {
             var Aup = Matrix.Alloc<N64,byte>();
             var Bup = Matrix.Alloc<N64,byte>();
@@ -130,7 +127,19 @@ namespace Z0.Test
             Trace(Cup.Format());
 
         }
-        public void bmv_64x64x8()
+        
+        public void bmm_64x64x64u_check()
+        {
+            for(var sample = 0; sample < SampleSize; sample++)
+            {
+                var A = Random.BitMatrix64();
+                var B = Random.BitMatrix64();
+                var C1 = BitMatrix.mul(A,B);
+                //TODO
+            }
+        }
+
+        public void bmv_64x64x64u_64u()
         {
             for(var sample = 0; sample < SampleSize; sample++)            
             {
@@ -148,42 +157,29 @@ namespace Z0.Test
             }
         }
 
-        public void bmm_64x64_bench()
+
+        public void bmm_64x64x64u_bench()
         {
-            var opcount = RoundCount*CycleCount;
+            run_bmm_64x64_bench();
+        }
+
+        void run_bmm_64x64_bench(SystemCounter counter = default)
+        {
             var last = BitMatrix64.Zero;  
-            
-            var sw = stopwatch(false);            
-            for(var i=0; i < opcount; i++)
+                        
+            for(var i=0; i < OpCount; i++)
             {
                 var m1 = Random.BitMatrix64();
                 var m2 = Random.BitMatrix64();
-                sw.Start();
-                last = BitMatrixOps.Mul(m1, m2);
-                sw.Stop();                
+                counter.Start();
+                last = BitMatrix.mul(m1, m2);
+                counter.Stop();                
             }
 
-            Collect((opcount, snapshot(sw), "bmm_64x64"));
+            Benchmark($"bmm_64x64x64u_new",counter);
         }
 
-        public void bmm_64x64_prealloc_bench()
-        {
-            var opcount = RoundCount*CycleCount;
-            var last = BitMatrix64.Zero;  
-            var dst = BitMatrix64.Alloc();          
 
-            var sw = stopwatch(false);
-            for(var i=0; i < opcount; i++)
-            {
-                var m1 = Random.BitMatrix64();
-                var m2 = Random.BitMatrix64();
-                sw.Start();
-                last = BitMatrixOps.Mul(m1, m2, ref dst);
-                sw.Stop();                
-            }
-
-            Collect((opcount, snapshot(sw), "bmm_64x64_prealloc"));
-        }
 
         public void bmv_8x8()
         {

@@ -33,7 +33,7 @@ namespace Z0
         {
             var components = default(T);
             for(var i=0; i< exponents.Length; i++)
-                components = gbits.or(components, Pow2.pow<T>(exponents[i]));
+                components = gmath.or(components, Pow2.pow<T>(exponents[i]));
             data = components;
         }
 
