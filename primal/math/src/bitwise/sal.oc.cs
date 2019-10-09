@@ -10,7 +10,7 @@ namespace Z0
     
     using static zfunc;    
 
-    partial class soc
+    partial class pmoc
     {
         public static sbyte sal_d8i(sbyte lhs, int offset)
             => math.sal(lhs,offset);

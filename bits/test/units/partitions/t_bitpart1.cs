@@ -9,12 +9,9 @@ namespace Z0
     using System.Reflection;
 
     using static zfunc;
-    using static BitParts;
 
     public class t_bitpart1 : BitPartTest<t_bitpart1>
     {
-
-
         public void bitpart_32x1()
         {
             Span<byte> dst = stackalloc byte[32];
@@ -25,9 +22,7 @@ namespace Z0
                 var bs = src.ToBitString();
 
                 for(var j=0; j<dst.Length; j++)
-                    Claim.eq(src[j],(Bit)dst[j]);
-                
-
+                    Claim.eq(src[j],(Bit)dst[j]);            
             }
         }
 
@@ -40,9 +35,7 @@ namespace Z0
                 BitParts.part64x1(src, dst);
                 var bs = src.ToBitString();
                 for(var j=0; j<dst.Length; j++)
-                    Claim.eq(src[j],(Bit)dst[j]);
-                
-
+                    Claim.eq(src[j],(Bit)dst[j]);            
             }
         }
 

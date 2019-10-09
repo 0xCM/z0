@@ -13,8 +13,6 @@ namespace Z0
 
     public class t_packing : BitPartTest<t_packing>
     {                    
-
-
         public void unpack_8x1_check()
         {
             for(var i=0; i<= 255; i++)            

@@ -13,8 +13,8 @@ namespace Z0
     using static zfunc;    
 
     /// <summary>
-    /// Defines a transposition, i.e. a specification for the transposition
-    /// of two elements, denoted by an ordered pair of space-delimited indices (i j)
+    /// Defines a transposition, i.e. a specification for a two-element position exchange
+    /// Typically denoted by an ordered pair of space-delimited indices (i j)
     /// </summary>
     public struct Swap
     {
@@ -39,7 +39,7 @@ namespace Z0
         public static readonly Swap Zero = (0,0);
 
         /// <summary>
-        /// Creates a chain of transpositions, that includes the initial transposition
+        /// Creates a sequence of transpositions
         /// </summary>
         /// <param name="s0">The leading transposition</param>
         /// <param name="len">The length of the chain</param>

@@ -16,7 +16,7 @@ namespace Z0
     partial class gmath
     {
         /// <summary>
-        /// Determines whether a value is strictly less than zero
+        /// Determines whether a value is less than zero
         /// </summary>
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The source type</typeparam>
@@ -25,17 +25,17 @@ namespace Z0
             where T : unmanaged
         {                        
             if(typeof(T) == typeof(sbyte))
-                return int8(src) < 0;
+                return math.negative(int8(src));
             else if(typeof(T) == typeof(short))
-                return int16(src) < 0;
+                return math.negative(int16(src));
             else if(typeof(T) == typeof(int))
-                return int32(src) < 0;
+                return math.negative(int32(src));
             else if(typeof(T) == typeof(long))
-                return int64(src) < 0;
-            else if(typematch<T,float>())
-                return float32(src) < 0;
-            else if(typematch<T,double>())
-                return float64(src) < 0;
+                return math.negative(int64(src));
+            else if(typeof(T) == typeof(float))
+                return math.negative(float32(src));
+            else if(typeof(T) == typeof(double))
+                return math.negative(float64(src));
             else            
                  return false;
        }           

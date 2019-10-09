@@ -75,7 +75,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public Vector<N,T> Transpose()
-            => Vector.Load<N,T>(data);
+            => Vector.load<N,T>(data);
  
         public bool Equals(Covector<N,T> rhs)
         {

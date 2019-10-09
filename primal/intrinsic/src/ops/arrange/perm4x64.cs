@@ -15,33 +15,20 @@ namespace Z0
 
     partial class dinx    
     {        
-        /// <summary>
-        /// __m256i _mm256_permute4x64_epi64 (__m256i a, const int imm8)VPERMQ ymm, ymm/m256, imm8
-        /// Permutes components in the source vector across lanes as specified by the control byte
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <param name="control">The control byte</param>
-        [MethodImpl(Inline)]
-        public static Vec256<long> perm4x64(in Vec256<long> value, byte control)
-            => Permute4x64(value.ymm, control);
 
         [MethodImpl(Inline)]
-        public static Vec256<long> perm4x64(in Vec256<long> value, Perm4 control)
-            => Permute4x64(value.ymm, (byte)control);
+        public static Vec256<long> vperm4x64(in Vec256<long> x, Perm4 spec)
+            => Permute4x64(x.ymm, (byte)spec);
 
         /// <summary>
         /// __m256i _mm256_permute4x64_epi64 (__m256i a, const int imm8)VPERMQ ymm, ymm/m256, imm8
-        /// Permutes components in the source vector across lanes as specified by the control byte
+        /// Permutes components in the source vector across lanes per the supplied specification
         /// </summary>
         /// <param name="src">The source vector</param>
-        /// <param name="control">The control byte</param>
+        /// <param name="spec">The control byte</param>
         [MethodImpl(Inline)]
-        public static Vec256<ulong> perm4x64(in Vec256<ulong> value, byte control)
-            => Permute4x64(value.ymm, control); 
-
-        [MethodImpl(Inline)]
-        public static Vec256<ulong> perm4x64(in Vec256<ulong> value, Perm4 control)
-            => Permute4x64(value.ymm, (byte)control); 
+        public static Vec256<ulong> vperm4x64(in Vec256<ulong> x, Perm4 spec)
+            => Permute4x64(x.ymm, (byte)spec); 
     }
 
 }

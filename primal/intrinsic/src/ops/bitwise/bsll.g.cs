@@ -22,16 +22,10 @@ namespace Z0
         public static Vec128<T> vbsll<T>(in Vec128<T> lhs, byte count)
             where T : unmanaged
         {
-            if(typeof(T) == typeof(short))
-                return generic<T>(dinx.vbsll(in int16(in lhs), count));
-            else if(typeof(T) == typeof(ushort))
+            if(typeof(T) == typeof(ushort))
                 return generic<T>(dinx.vbsll(in uint16(in lhs), count));
-            else if(typeof(T) == typeof(int))
-                return generic<T>(dinx.vbsll(in int32(in lhs), count));
             else if(typeof(T) == typeof(uint)) 
                 return generic<T>(dinx.vbsll(in uint32(in lhs), count));
-            else if(typeof(T) == typeof(long))
-                return generic<T>(dinx.vbsll(in int64(in lhs), count));
             else if(typeof(T) == typeof(ulong))
                 return generic<T>(dinx.vbsll(in uint64(in lhs), count));
             else
@@ -42,16 +36,10 @@ namespace Z0
         public static Vec256<T> vbsll<T>(in Vec256<T> lhs, byte count)
             where T : unmanaged
         {
-            if(typeof(T) == typeof(short))
-                return generic<T>(dinx.vbsll(in int16(in lhs), count));
-            else if(typeof(T) == typeof(ushort))
+            if(typeof(T) == typeof(ushort))
                 return generic<T>(dinx.vbsll(in uint16(in lhs), count));
-            else if(typeof(T) == typeof(int))
-                return generic<T>(dinx.vbsll(in int32(in lhs), count));
             else if(typeof(T) == typeof(uint)) 
                 return generic<T>(dinx.vbsll(in uint32(in lhs), count));
-            else if(typeof(T) == typeof(long))
-                return generic<T>(dinx.vbsll(in int64(in lhs), count));
             else if(typeof(T) == typeof(ulong))
                 return generic<T>(dinx.vbsll(in uint64(in lhs), count));
             else

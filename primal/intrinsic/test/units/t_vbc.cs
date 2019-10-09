@@ -118,7 +118,7 @@ namespace Z0
             where T : unmanaged
         {
             var x = Random.Next<T>();
-            ref var vX = ref ginx.broadcast(in x, out Vec128<T> _);
+            var vX = ginx.vbroadcast128(x);
             var vY = Vec128.Fill(x);
             Claim.eq(vX,vY);
         }
@@ -127,7 +127,7 @@ namespace Z0
             where T : unmanaged
         {
             var x = Random.Next<T>();
-            ref var vX = ref ginx.broadcast(in x, out Vec256<T> _);
+            var vX = ginx.vbroadcast256(x);
             var vY = Vec256.Fill(x);
             Claim.eq(vX,vY);
         }

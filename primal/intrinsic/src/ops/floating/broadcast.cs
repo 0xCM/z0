@@ -25,11 +25,9 @@ namespace Z0
         /// <param name="src"></param>
         /// <param name="dst"></param>
         [MethodImpl(Inline)]
-        public static unsafe ref Vec256<float> vbroadcast(in float src, out Vec256<float> dst)
-        {
-            dst = BroadcastScalarToVector256(refptr(ref asRef(in src)));
-            return ref dst;
-        }
+        public static unsafe Vec256<float> vbroadcast256(float src)
+            => BroadcastScalarToVector256(refptr(ref asRef(in src)));
+
 
         /// <summary>
         /// __m256d _mm256_broadcast_sd (double const * mem_addr) VBROADCASTSD ymm, m64
@@ -37,31 +35,24 @@ namespace Z0
         /// <param name="src"></param>
         /// <param name="dst"></param>
         [MethodImpl(Inline)]
-        public static unsafe ref Vec256<double> vbroadcast(in double src, out Vec256<double> dst)
-        {
-            dst = BroadcastScalarToVector256(refptr(ref asRef(in src)));
-            return ref dst;
-        }
+        public static unsafe Vec256<double> vbroadcast256(double src)
+            => BroadcastScalarToVector256(refptr(ref asRef(in src)));
  
+
         /// <summary>
         /// __m128 _mm_broadcast_ss (float const * mem_addr) VBROADCASTSS xmm, m32
         /// </summary>
         /// <param name="src"></param>
         /// <param name="dst"></param>
         [MethodImpl(Inline)]
-        public static unsafe ref Vec128<float> vbroadcast(in float src, out Vec128<float> dst)
-        {
-            dst = BroadcastScalarToVector128(refptr(ref asRef(in src)));
-            return ref dst;
-        }
+        public static unsafe Vec128<float> vbroadcast128(float src)
+            => BroadcastScalarToVector128(refptr(ref asRef(in src)));
+
 
         [MethodImpl(Inline)]
-        public static unsafe ref Vec128<double> vbroadcast(in double src, out Vec128<double> dst)
-        {
-            dst = Vec128.FromParts(src,src);
-            return ref dst;
-        }
-
+        public static Vec128<double> vbroadcast128(double src)
+            => Vec128.FromParts(src,src);
+            
 
 
     }

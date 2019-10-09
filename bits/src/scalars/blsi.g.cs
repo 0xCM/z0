@@ -17,7 +17,7 @@ namespace Z0
 
         /// <summary>
         /// Extracts the lowest set bit from the source, if any, and is logically equivalent to
-        /// the composite operation (-src) & src
+        /// the composite operation (-src) & src that extracts the least set bit, if any from the source
         /// </summary>
         /// <param name="src">The bit source</param>
         [MethodImpl(Inline)]

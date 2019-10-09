@@ -13,15 +13,14 @@ namespace Z0
     using static zfunc;
     
     partial class Bits
-    {                
-
+    {                    
         /// <summary>
         /// Extracts the lower 4 bits from the source
         /// </summary>
         /// <param name="src">The soruce value</param>
         [MethodImpl(Inline)]
         public static sbyte lo(sbyte src)
-            => (sbyte)(((sbyte)(src << 4)) >> 4);
+            => (sbyte)(0xF & src);
 
         /// <summary>
         /// Extracts the lower 4 bits from the source
@@ -29,7 +28,7 @@ namespace Z0
         /// <param name="src">The soruce value</param>
         [MethodImpl(Inline)]
         public static byte lo(byte src)
-            => (byte)(((byte)(src << 4)) >> 4);
+            => (byte)(0xF & src);
 
         /// <summary>
         /// Extracts the lower 8 bits from the source
@@ -78,7 +77,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static uint lo(ulong src)
             => (uint)src;
-
     }
-
 }

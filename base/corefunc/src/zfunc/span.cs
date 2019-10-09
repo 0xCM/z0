@@ -24,10 +24,6 @@ partial class zfunc
     public static ref ulong block64u(Span<byte> src, int offset)
         => ref MemoryMarshal.Cast<byte,ulong>(src.Slice(offset, 8))[0];
 
-    [MethodImpl(Inline)]
-    public static ref byte head8u(Span<ulong> src, int index)
-        => ref MemoryMarshal.AsBytes(src)[index];
-
     /// <summary>
     /// Interprets 4 elements of a span of unsigned 16-bit integers as an unsigned 64-bit integer
     /// </summary>
@@ -72,6 +68,10 @@ partial class zfunc
     [MethodImpl(Inline)]
     public static ref ushort block16u(Span<byte> src, int offset)
         => ref MemoryMarshal.Cast<byte,ushort>(src.Slice(offset, 2))[0];
+
+    [MethodImpl(Inline)]
+    public static ref byte head8u(Span<ulong> src, int index)
+        => ref MemoryMarshal.AsBytes(src)[index];
 
     [MethodImpl(Inline)]
     public static unsafe void memcpy<S,T>(ref S src, ref T dst, ByteSize srclen)

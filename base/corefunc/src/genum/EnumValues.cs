@@ -20,10 +20,10 @@ namespace Z0
         internal static readonly EnumValues<E> TheOnly = default;
 
         static readonly E[] Cache
-            = typeof(E).GetEnumValues().AsQueryable().Cast<E>().ToArray();
+            = typeof(E).GetEnumValues().AsQueryable().Cast<E>().Distinct().ToArray();
 
-        static readonly Dictionary<E,int> PositionIndex
-            = Cache.Mapi((i,v) => (v,i)).ToDictionary();
+        // static readonly Dictionary<E,int> PositionIndex
+        //     = Cache.Mapi((i,v) => (v,i)).ToDictionary();
 
         static readonly Dictionary<string, E> NameIndex
             = Cache.Select(e => (e.ToString(), e)).ToDictionary();
@@ -47,22 +47,19 @@ namespace Z0
             return default;
         }
         
-        /// <summary>
-        /// The index at which a specified value is positioned
-        /// </summary>
-        [MethodImpl(Inline)]
-        public int ToIndex(E value)
-        {
-            if(PositionIndex.TryGetValue(value, out int index))
-                return index;
-            else 
-                return - 1;
-        }
+        // [MethodImpl(Inline)]
+        // public int ToIndex(E value)
+        // {
+        //     if(PositionIndex.TryGetValue(value, out int index))
+        //         return index;
+        //     else 
+        //         return - 1;
+        // }
 
-        [MethodImpl(Inline)]
-        public T ToScalar<T>(E src)
-            where T : unmanaged
-                => EnumValues<E,T>.TheOnly.ToScalar(src);
+        // [MethodImpl(Inline)]
+        // public T ToScalar<T>(E src)
+        //     where T : unmanaged
+        //         => EnumValues<E,T>.TheOnly.ToScalar(src);
 
         [MethodImpl(Inline)]
         public ReadOnlySpan<E> ToSpan()
@@ -124,12 +121,9 @@ namespace Z0
                 return (T)Convert.ChangeType(src,typeof(T));
         }
 
-        /// <summary>
-        /// The index at which a specified value is positioned
-        /// </summary>
-        [MethodImpl(Inline)]
-        public int ToIndex(E value)
-            => Values.ToIndex(value);
+        // [MethodImpl(Inline)]
+        // public int ToIndex(E value)
+        //     => Values.ToIndex(value);
 
         [MethodImpl(Inline)]
         public IReadOnlyDictionary<string,NamedValue<E>> NamedValues()

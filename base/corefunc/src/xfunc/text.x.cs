@@ -13,6 +13,7 @@ namespace Z0
     using System.Text;
 
     using static zfunc;
+    using static nfunc;
 
     partial class xfunc
     {
@@ -284,38 +285,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static string Bracket(this string src)
             => bracket(src);
-
-        /// <summary>
-        /// Formats a stream as a vector
-        /// </summary>
-        /// <param name="src">The source stream</param>
-        /// <param name="sep">The item separator</param>
-        /// <typeparam name="T">The item type</typeparam>
-        public static string FormatAsVector<T>(this IEnumerable<T> src, string sep = ", ")
-            => AsciSym.Lt + string.Join(sep, src.Select(x => x.ToString())).TrimEnd() + AsciSym.Gt;
  
-        /// <summary>
-        /// Formats a stream as a delimited sequence with an optional custom value formatter
-        /// </summary>
-        /// <param name="src">The source stream</param>
-        /// <param name="sep">The item separator</param>
-        /// <param name="formatter">An optional custom value formatter</formatter>
-        /// <typeparam name="T">The item type</typeparam>
-        public static string FormatSequence<T>(this IEnumerable<T> src, string sep = ", ",  Func<T,string> formatter = null)
-            => string.Join(sep, src.Select(x => formatter?.Invoke(x) ?? x.ToString())).TrimEnd();
-
-        /// <summary>
-        /// Formats a readonly span of characters by forming implied string
-        /// </summary>
-        /// <param name="src">The source span</param>
-        [MethodImpl(Inline)]   
-        public static string Format(this ReadOnlySpan<char> src)
-            => new string(src);
-
-        [MethodImpl(Inline)]   
-        public static string Format(this Span<char> src)
-            => new string(src);
-
         [MethodImpl(Inline)]   
         public static ReadOnlySpan<char> Concat(this ReadOnlySpan<char> lhs, ReadOnlySpan<char> rhs)
             => lhs.Format() + rhs.Format();
@@ -332,15 +302,6 @@ namespace Z0
             }
             return sb.ToString();
         }
-
-        /// <summary>
-        /// Defines an unsigned alterantive to the intrinsic Count property
-        /// </summary>
-        /// <param name="src">The source list</param>
-        /// <typeparam name="T">The element type</typeparam>
-        [MethodImpl(Inline)]
-        public static uint Length<T>(this IReadOnlyList<T> src)
-            => (uint)src.Count;
 
         /// <summary>
         /// Creates a new string from the first n - 1 characters of a string of length n
@@ -618,6 +579,21 @@ namespace Z0
         public static string Concat(this IEnumerable<string> src, string sep = null)
             => string.Join(sep ?? string.Empty, src);
 
+        public static string Concat(this Span<string> src, string sep = null)
+        {
+            var sb = new StringBuilder();
+            var delim = sep ?? string.Empty;
+            for(var i=0; i<src.Length; i++)   
+            {
+                ref var cell = ref src[i];
+                if(i != src.Length - 1)
+                    sb.Append($"{cell}{delim}");
+                else
+                    sb.Append(cell);
+            }
+            return sb.ToString();
+        }
+
         /// <summary>
         /// Block-formats a string using specified block length and separator
         /// </summary>
@@ -688,5 +664,10 @@ namespace Z0
         [MethodImpl(Inline)]
         public static string RemoveWhitespace(this string src)
             => src.RemoveAny(items(AsciSym.Space, AsciEscape.LineFeed, AsciEscape.NewLine, AsciEscape.Tab));
+ 
+        [MethodImpl(Inline)]
+        static bool IsRowHead(int index, int rowlen)
+            => index == 0 || index % rowlen == 0; 
+
     }
 }

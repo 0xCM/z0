@@ -51,15 +51,6 @@ namespace Z0
         public static Vec256<double> vpermute(in Vec256<double> x, byte imm8)
             => Permute(x.ymm, imm8);
     
-            /// <summary>
-        /// __m256d _mm256_permute4x64_pd (__m256d a, const int imm8) VPERMPD ymm, ymm/m256, imm8
-        /// Permutes components in the source vector across lanes as specified by the control byte
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <param name="control">The control byte</param>
-        [MethodImpl(Inline)]
-        public static Vec256<double> vperm4x64(in Vec256<double> x, byte control)
-            => Permute4x64(x,control); 
 
 
     }

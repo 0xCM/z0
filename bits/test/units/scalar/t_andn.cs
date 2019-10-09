@@ -23,19 +23,9 @@ namespace Z0.Test
             scalar_andn_check<ushort>();
         }
 
-        public void scalar_and_32i()
-        {
-            scalar_andn_check<int>();
-        }
-
         public void scalar_andn_32u()
         {
             scalar_andn_check<uint>();
-        }
-
-        public void scalar_andn_64i()
-        {
-            scalar_andn_check<long>();
         }
 
         public void scalar_andn_64u()

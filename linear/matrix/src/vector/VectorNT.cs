@@ -43,7 +43,6 @@ namespace Z0
         public static implicit operator Vector<N,T>(T[] src)
             => new Vector<N, T>(src);
 
-
         [MethodImpl(Inline)]   
         public static implicit operator Vector<N,T>(Vector<T> src)
             => new Vector<N, T>(src.Data);
@@ -67,7 +66,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public Vector(T[] src)
         {
-            require(src.Length >= Dim);
+            require(src.Length >= Dim, $"{src.Length} < {Dim}");
             data = src;
         }
                     
@@ -108,7 +107,7 @@ namespace Z0
         public Vector<N,U> Map<U>(Func<T,U> f)
             where U:unmanaged
         {
-            var dst = Vector.Alloc<N,U>();
+            var dst = Vector.alloc<N,U>();
             return Map(f, ref dst);
         }
 

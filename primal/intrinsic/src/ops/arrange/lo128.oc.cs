@@ -35,8 +35,6 @@ namespace Z0
 
         public static Vec128<ulong> lo128x64u(in Vec256<ulong> src)         
             => ginx.lo(src);
-
-
     }
 
 }

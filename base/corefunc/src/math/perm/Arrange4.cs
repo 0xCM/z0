@@ -20,22 +20,22 @@ namespace Z0
          /// <summary>
         /// Identifies the first of four symbols
         /// </summary>
-        A = 0b00,
+        A = Perm4.A,
 
         /// <summary>
         /// Identifies the second of four symbols
         /// </summary>
-        B = 0b01,
+        B = Perm4.B,
 
         /// <summary>
         /// Identifies the third of four ssymbols
         /// </summary>
-        C = 0b10,
+        C = Perm4.C,
 
         /// <summary>
         /// Identifies the fourth of four symbols
         /// </summary>
-        D = 0b11,
+        D = Perm4.D,
 
         AAAA = A | (A << 2) | (A << 4) | (A << 6),
         

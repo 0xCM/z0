@@ -1,4 +1,99 @@
-// 2019-10-06 23:48:40:872
+// 2019-10-09 00:23:44:152
+void part30x3(uint src, Span<byte> dst)
+{
+    IL_0000: ldarga.s dst
+    IL_0002: ldc.i4.0
+    IL_0003: call System.Byte& System.Span`1<System.Byte>::get_Item(System.Int32)
+    IL_0008: ldarg.0
+    IL_0009: ldc.i4.7
+    IL_000A: call System.UInt32 Z0.BitParts::select(System.UInt32,Z0.BitParts/Part30x3)
+    IL_000F: ldc.i4.7
+    IL_0010: call System.Byte Z0.BitParts::project<System.Byte>(System.UInt32,Z0.BitParts/Part30x3)
+    IL_0015: stind.i1
+    IL_0016: ldarga.s dst
+    IL_0018: ldc.i4.1
+    IL_0019: call System.Byte& System.Span`1<System.Byte>::get_Item(System.Int32)
+    IL_001E: ldarg.0
+    IL_001F: ldc.i4.s 56
+    IL_0021: call System.UInt32 Z0.BitParts::select(System.UInt32,Z0.BitParts/Part30x3)
+    IL_0026: ldc.i4.7
+    IL_0027: call System.Byte Z0.BitParts::project<System.Byte>(System.UInt32,Z0.BitParts/Part30x3)
+    IL_002C: stind.i1
+    IL_002D: ldarga.s dst
+    IL_002F: ldc.i4.2
+    IL_0030: call System.Byte& System.Span`1<System.Byte>::get_Item(System.Int32)
+    IL_0035: ldarg.0
+    IL_0036: ldc.i4 448
+    IL_003B: call System.UInt32 Z0.BitParts::select(System.UInt32,Z0.BitParts/Part30x3)
+    IL_0040: ldc.i4.7
+    IL_0041: call System.Byte Z0.BitParts::project<System.Byte>(System.UInt32,Z0.BitParts/Part30x3)
+    IL_0046: stind.i1
+    IL_0047: ldarga.s dst
+    IL_0049: ldc.i4.3
+    IL_004A: call System.Byte& System.Span`1<System.Byte>::get_Item(System.Int32)
+    IL_004F: ldarg.0
+    IL_0050: ldc.i4 3584
+    IL_0055: call System.UInt32 Z0.BitParts::select(System.UInt32,Z0.BitParts/Part30x3)
+    IL_005A: ldc.i4.7
+    IL_005B: call System.Byte Z0.BitParts::project<System.Byte>(System.UInt32,Z0.BitParts/Part30x3)
+    IL_0060: stind.i1
+    IL_0061: ldarga.s dst
+    IL_0063: ldc.i4.4
+    IL_0064: call System.Byte& System.Span`1<System.Byte>::get_Item(System.Int32)
+    IL_0069: ldarg.0
+    IL_006A: ldc.i4 28672
+    IL_006F: call System.UInt32 Z0.BitParts::select(System.UInt32,Z0.BitParts/Part30x3)
+    IL_0074: ldc.i4.7
+    IL_0075: call System.Byte Z0.BitParts::project<System.Byte>(System.UInt32,Z0.BitParts/Part30x3)
+    IL_007A: stind.i1
+    IL_007B: ldarga.s dst
+    IL_007D: ldc.i4.5
+    IL_007E: call System.Byte& System.Span`1<System.Byte>::get_Item(System.Int32)
+    IL_0083: ldarg.0
+    IL_0084: ldc.i4 229376
+    IL_0089: call System.UInt32 Z0.BitParts::select(System.UInt32,Z0.BitParts/Part30x3)
+    IL_008E: ldc.i4.7
+    IL_008F: call System.Byte Z0.BitParts::project<System.Byte>(System.UInt32,Z0.BitParts/Part30x3)
+    IL_0094: stind.i1
+    IL_0095: ldarga.s dst
+    IL_0097: ldc.i4.6
+    IL_0098: call System.Byte& System.Span`1<System.Byte>::get_Item(System.Int32)
+    IL_009D: ldarg.0
+    IL_009E: ldc.i4 1835008
+    IL_00A3: call System.UInt32 Z0.BitParts::select(System.UInt32,Z0.BitParts/Part30x3)
+    IL_00A8: ldc.i4.7
+    IL_00A9: call System.Byte Z0.BitParts::project<System.Byte>(System.UInt32,Z0.BitParts/Part30x3)
+    IL_00AE: stind.i1
+    IL_00AF: ldarga.s dst
+    IL_00B1: ldc.i4.7
+    IL_00B2: call System.Byte& System.Span`1<System.Byte>::get_Item(System.Int32)
+    IL_00B7: ldarg.0
+    IL_00B8: ldc.i4 14680064
+    IL_00BD: call System.UInt32 Z0.BitParts::select(System.UInt32,Z0.BitParts/Part30x3)
+    IL_00C2: ldc.i4.7
+    IL_00C3: call System.Byte Z0.BitParts::project<System.Byte>(System.UInt32,Z0.BitParts/Part30x3)
+    IL_00C8: stind.i1
+    IL_00C9: ldarga.s dst
+    IL_00CB: ldc.i4.8
+    IL_00CC: call System.Byte& System.Span`1<System.Byte>::get_Item(System.Int32)
+    IL_00D1: ldarg.0
+    IL_00D2: ldc.i4 117440512
+    IL_00D7: call System.UInt32 Z0.BitParts::select(System.UInt32,Z0.BitParts/Part30x3)
+    IL_00DC: ldc.i4.7
+    IL_00DD: call System.Byte Z0.BitParts::project<System.Byte>(System.UInt32,Z0.BitParts/Part30x3)
+    IL_00E2: stind.i1
+    IL_00E3: ldarga.s dst
+    IL_00E5: ldc.i4.s 9
+    IL_00E7: call System.Byte& System.Span`1<System.Byte>::get_Item(System.Int32)
+    IL_00EC: ldarg.0
+    IL_00ED: ldc.i4 939524096
+    IL_00F2: call System.UInt32 Z0.BitParts::select(System.UInt32,Z0.BitParts/Part30x3)
+    IL_00F7: ldc.i4.7
+    IL_00F8: call System.Byte Z0.BitParts::project<System.Byte>(System.UInt32,Z0.BitParts/Part30x3)
+    IL_00FD: stind.i1
+    IL_00FE: ret
+
+}
 uint project(uint src, Part6x3:uint part)
 {
     IL_0000: ldarg.0
@@ -810,6 +905,14 @@ ref ushort pack16x1(ReadOnlySpan<byte> src, ref ushort dst)
     IL_012A: stind.i2
     IL_012B: ldarg.1
     IL_012C: ret
+
+}
+ulong project(ulong src, ulong mask)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call System.UInt64 Z0.Bits::scatter(System.UInt64,System.UInt64)
+    IL_0007: ret
 
 }
 byte select(byte src, BitMask8:byte spec)
@@ -1756,7 +1859,7 @@ void part64x1(ulong src, Span<byte> dst)
     IL_000E: call System.Byte Z0.BitParts::select(System.UInt64,Z0.BitParts/Part64x8)
     IL_0013: conv.u8
     IL_0014: ldc.i8 72340172838076673
-    IL_001D: call System.UInt64 Z0.Bits::scatter(System.UInt64,System.UInt64)
+    IL_001D: call System.UInt64 Z0.BitParts::project(System.UInt64,System.UInt64)
     IL_0022: stind.i8
     IL_0023: ldarg.1
     IL_0024: ldc.i4.8
@@ -1767,7 +1870,7 @@ void part64x1(ulong src, Span<byte> dst)
     IL_0031: call System.Byte Z0.BitParts::select(System.UInt64,Z0.BitParts/Part64x8)
     IL_0036: conv.u8
     IL_0037: ldc.i8 72340172838076673
-    IL_0040: call System.UInt64 Z0.Bits::scatter(System.UInt64,System.UInt64)
+    IL_0040: call System.UInt64 Z0.BitParts::project(System.UInt64,System.UInt64)
     IL_0045: stind.i8
     IL_0046: ldarg.1
     IL_0047: ldc.i4.s 16
@@ -1778,7 +1881,7 @@ void part64x1(ulong src, Span<byte> dst)
     IL_0055: call System.Byte Z0.BitParts::select(System.UInt64,Z0.BitParts/Part64x8)
     IL_005A: conv.u8
     IL_005B: ldc.i8 72340172838076673
-    IL_0064: call System.UInt64 Z0.Bits::scatter(System.UInt64,System.UInt64)
+    IL_0064: call System.UInt64 Z0.BitParts::project(System.UInt64,System.UInt64)
     IL_0069: stind.i8
     IL_006A: ldarg.1
     IL_006B: ldc.i4.s 24
@@ -1789,7 +1892,7 @@ void part64x1(ulong src, Span<byte> dst)
     IL_0079: call System.Byte Z0.BitParts::select(System.UInt64,Z0.BitParts/Part64x8)
     IL_007E: conv.u8
     IL_007F: ldc.i8 72340172838076673
-    IL_0088: call System.UInt64 Z0.Bits::scatter(System.UInt64,System.UInt64)
+    IL_0088: call System.UInt64 Z0.BitParts::project(System.UInt64,System.UInt64)
     IL_008D: stind.i8
     IL_008E: ldarg.1
     IL_008F: ldc.i4.s 32
@@ -1799,7 +1902,7 @@ void part64x1(ulong src, Span<byte> dst)
     IL_00A0: call System.Byte Z0.BitParts::select(System.UInt64,Z0.BitParts/Part64x8)
     IL_00A5: conv.u8
     IL_00A6: ldc.i8 72340172838076673
-    IL_00AF: call System.UInt64 Z0.Bits::scatter(System.UInt64,System.UInt64)
+    IL_00AF: call System.UInt64 Z0.BitParts::project(System.UInt64,System.UInt64)
     IL_00B4: stind.i8
     IL_00B5: ldarg.1
     IL_00B6: ldc.i4.s 40
@@ -1809,7 +1912,7 @@ void part64x1(ulong src, Span<byte> dst)
     IL_00C7: call System.Byte Z0.BitParts::select(System.UInt64,Z0.BitParts/Part64x8)
     IL_00CC: conv.u8
     IL_00CD: ldc.i8 72340172838076673
-    IL_00D6: call System.UInt64 Z0.Bits::scatter(System.UInt64,System.UInt64)
+    IL_00D6: call System.UInt64 Z0.BitParts::project(System.UInt64,System.UInt64)
     IL_00DB: stind.i8
     IL_00DC: ldarg.1
     IL_00DD: ldc.i4.s 48
@@ -1819,7 +1922,7 @@ void part64x1(ulong src, Span<byte> dst)
     IL_00EE: call System.Byte Z0.BitParts::select(System.UInt64,Z0.BitParts/Part64x8)
     IL_00F3: conv.u8
     IL_00F4: ldc.i8 72340172838076673
-    IL_00FD: call System.UInt64 Z0.Bits::scatter(System.UInt64,System.UInt64)
+    IL_00FD: call System.UInt64 Z0.BitParts::project(System.UInt64,System.UInt64)
     IL_0102: stind.i8
     IL_0103: ldarg.1
     IL_0104: ldc.i4.s 56
@@ -1829,7 +1932,7 @@ void part64x1(ulong src, Span<byte> dst)
     IL_0115: call System.Byte Z0.BitParts::select(System.UInt64,Z0.BitParts/Part64x8)
     IL_011A: conv.u8
     IL_011B: ldc.i8 72340172838076673
-    IL_0124: call System.UInt64 Z0.Bits::scatter(System.UInt64,System.UInt64)
+    IL_0124: call System.UInt64 Z0.BitParts::project(System.UInt64,System.UInt64)
     IL_0129: stind.i8
     IL_012A: ret
 
@@ -2911,100 +3014,5 @@ void part27x3(uint src, Span<byte> dst)
     IL_00DD: call System.Byte Z0.BitParts::project<System.Byte>(System.UInt32,Z0.BitParts/Part27x3)
     IL_00E2: stind.i1
     IL_00E3: ret
-
-}
-void part30x3(uint src, Span<byte> dst)
-{
-    IL_0000: ldarga.s dst
-    IL_0002: ldc.i4.0
-    IL_0003: call System.Byte& System.Span`1<System.Byte>::get_Item(System.Int32)
-    IL_0008: ldarg.0
-    IL_0009: ldc.i4.7
-    IL_000A: call System.UInt32 Z0.BitParts::select(System.UInt32,Z0.BitParts/Part30x3)
-    IL_000F: ldc.i4.7
-    IL_0010: call System.Byte Z0.BitParts::project<System.Byte>(System.UInt32,Z0.BitParts/Part30x3)
-    IL_0015: stind.i1
-    IL_0016: ldarga.s dst
-    IL_0018: ldc.i4.1
-    IL_0019: call System.Byte& System.Span`1<System.Byte>::get_Item(System.Int32)
-    IL_001E: ldarg.0
-    IL_001F: ldc.i4.s 56
-    IL_0021: call System.UInt32 Z0.BitParts::select(System.UInt32,Z0.BitParts/Part30x3)
-    IL_0026: ldc.i4.7
-    IL_0027: call System.Byte Z0.BitParts::project<System.Byte>(System.UInt32,Z0.BitParts/Part30x3)
-    IL_002C: stind.i1
-    IL_002D: ldarga.s dst
-    IL_002F: ldc.i4.2
-    IL_0030: call System.Byte& System.Span`1<System.Byte>::get_Item(System.Int32)
-    IL_0035: ldarg.0
-    IL_0036: ldc.i4 448
-    IL_003B: call System.UInt32 Z0.BitParts::select(System.UInt32,Z0.BitParts/Part30x3)
-    IL_0040: ldc.i4.7
-    IL_0041: call System.Byte Z0.BitParts::project<System.Byte>(System.UInt32,Z0.BitParts/Part30x3)
-    IL_0046: stind.i1
-    IL_0047: ldarga.s dst
-    IL_0049: ldc.i4.3
-    IL_004A: call System.Byte& System.Span`1<System.Byte>::get_Item(System.Int32)
-    IL_004F: ldarg.0
-    IL_0050: ldc.i4 3584
-    IL_0055: call System.UInt32 Z0.BitParts::select(System.UInt32,Z0.BitParts/Part30x3)
-    IL_005A: ldc.i4.7
-    IL_005B: call System.Byte Z0.BitParts::project<System.Byte>(System.UInt32,Z0.BitParts/Part30x3)
-    IL_0060: stind.i1
-    IL_0061: ldarga.s dst
-    IL_0063: ldc.i4.4
-    IL_0064: call System.Byte& System.Span`1<System.Byte>::get_Item(System.Int32)
-    IL_0069: ldarg.0
-    IL_006A: ldc.i4 28672
-    IL_006F: call System.UInt32 Z0.BitParts::select(System.UInt32,Z0.BitParts/Part30x3)
-    IL_0074: ldc.i4.7
-    IL_0075: call System.Byte Z0.BitParts::project<System.Byte>(System.UInt32,Z0.BitParts/Part30x3)
-    IL_007A: stind.i1
-    IL_007B: ldarga.s dst
-    IL_007D: ldc.i4.5
-    IL_007E: call System.Byte& System.Span`1<System.Byte>::get_Item(System.Int32)
-    IL_0083: ldarg.0
-    IL_0084: ldc.i4 229376
-    IL_0089: call System.UInt32 Z0.BitParts::select(System.UInt32,Z0.BitParts/Part30x3)
-    IL_008E: ldc.i4.7
-    IL_008F: call System.Byte Z0.BitParts::project<System.Byte>(System.UInt32,Z0.BitParts/Part30x3)
-    IL_0094: stind.i1
-    IL_0095: ldarga.s dst
-    IL_0097: ldc.i4.6
-    IL_0098: call System.Byte& System.Span`1<System.Byte>::get_Item(System.Int32)
-    IL_009D: ldarg.0
-    IL_009E: ldc.i4 1835008
-    IL_00A3: call System.UInt32 Z0.BitParts::select(System.UInt32,Z0.BitParts/Part30x3)
-    IL_00A8: ldc.i4.7
-    IL_00A9: call System.Byte Z0.BitParts::project<System.Byte>(System.UInt32,Z0.BitParts/Part30x3)
-    IL_00AE: stind.i1
-    IL_00AF: ldarga.s dst
-    IL_00B1: ldc.i4.7
-    IL_00B2: call System.Byte& System.Span`1<System.Byte>::get_Item(System.Int32)
-    IL_00B7: ldarg.0
-    IL_00B8: ldc.i4 14680064
-    IL_00BD: call System.UInt32 Z0.BitParts::select(System.UInt32,Z0.BitParts/Part30x3)
-    IL_00C2: ldc.i4.7
-    IL_00C3: call System.Byte Z0.BitParts::project<System.Byte>(System.UInt32,Z0.BitParts/Part30x3)
-    IL_00C8: stind.i1
-    IL_00C9: ldarga.s dst
-    IL_00CB: ldc.i4.8
-    IL_00CC: call System.Byte& System.Span`1<System.Byte>::get_Item(System.Int32)
-    IL_00D1: ldarg.0
-    IL_00D2: ldc.i4 117440512
-    IL_00D7: call System.UInt32 Z0.BitParts::select(System.UInt32,Z0.BitParts/Part30x3)
-    IL_00DC: ldc.i4.7
-    IL_00DD: call System.Byte Z0.BitParts::project<System.Byte>(System.UInt32,Z0.BitParts/Part30x3)
-    IL_00E2: stind.i1
-    IL_00E3: ldarga.s dst
-    IL_00E5: ldc.i4.s 9
-    IL_00E7: call System.Byte& System.Span`1<System.Byte>::get_Item(System.Int32)
-    IL_00EC: ldarg.0
-    IL_00ED: ldc.i4 939524096
-    IL_00F2: call System.UInt32 Z0.BitParts::select(System.UInt32,Z0.BitParts/Part30x3)
-    IL_00F7: ldc.i4.7
-    IL_00F8: call System.Byte Z0.BitParts::project<System.Byte>(System.UInt32,Z0.BitParts/Part30x3)
-    IL_00FD: stind.i1
-    IL_00FE: ret
 
 }

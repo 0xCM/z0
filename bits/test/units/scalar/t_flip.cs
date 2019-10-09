@@ -11,7 +11,7 @@ namespace Z0.Test
     using System.IO;
     
     using static zfunc;
-    using D = BitwiseDelegates;
+    using D = PrimalDelegates;
 
     public class t_flip : ScalarBitTest<t_flip>
     {

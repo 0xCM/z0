@@ -183,7 +183,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public Vector<N,T> Row(int row)
         {            
-            var alloc = Vector.Alloc<N,T>();
+            var alloc = Vector.alloc<N,T>();
             return GetRow(row, ref alloc);
         }
 
@@ -235,7 +235,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public Vector<N,T> Col(int col)
         {
-            var alloc = Vector.Alloc<N,T>();
+            var alloc = Vector.alloc<N,T>();
             return GetCol(col, ref alloc);
         }
 

@@ -15,7 +15,6 @@ namespace Z0
 
     partial class Bits
     {                
-
         /// <summary>
         /// Isolate least set bit and complement, computed by dst := ~src | (src - 1),
         /// where all bits in the target are set except for the least set bit in the source

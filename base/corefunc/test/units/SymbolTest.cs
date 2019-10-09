@@ -5,6 +5,9 @@
 namespace Z0.Test
 {
     using System;
+    using System.Linq;
+    using System.Collections.Generic;
+
     using System.Runtime.CompilerServices;
     using static zfunc;
 
@@ -13,6 +16,13 @@ namespace Z0.Test
         public void MultiCharSymbols()
         {
             Claim.eq(2, BlackBoard.A.Length);
+        }
+
+        void Utf8()
+        {
+            foreach(var point in Utf8AsciPoint.All)
+                Trace(point.Format());
+
         }
 
     }

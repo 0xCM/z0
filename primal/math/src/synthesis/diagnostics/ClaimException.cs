@@ -70,7 +70,9 @@ namespace Z0
 
         Nonzero,
         
-        Between
+        Between,
+
+        NotIn
     }
 
 }

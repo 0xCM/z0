@@ -57,7 +57,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static Vec256<byte> reverse(in Vec256<byte> src)
-            => permute(src, Vec256Pattern.Decrements<byte>(31));
+            => vperm32x8(src, Vec256Pattern.Decrements<byte>(31));
 
         [MethodImpl(Inline)]
         public static Vec256<int> reverse(in Vec256<int> src)

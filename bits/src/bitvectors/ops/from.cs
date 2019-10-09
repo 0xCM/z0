@@ -14,9 +14,6 @@ namespace Z0
 
     partial class bitvector
     {
-
-
-
         /// <summary>
         /// Creates a generic bitvector of natural length from a single cell
         /// </summary>

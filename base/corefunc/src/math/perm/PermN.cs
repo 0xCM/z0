@@ -13,7 +13,7 @@ namespace Z0
     using static zfunc;    
 
     /// <summary>
-    /// Defines a permutation of natural length N over the intergers
+    /// Defines a permutation of natural length N over the natural numbers 0,1,...,N-1
     /// </summary>
     public struct Perm<N>
         where N : ITypeNat, new()
@@ -276,7 +276,6 @@ namespace Z0
             => perm.GetHashCode();
 
          public override bool Equals(object o)
-            => (o is Perm<N> p)  ? p.perm.Equals(perm)  : false;
-
+            => o is Perm<N> p  && p.perm.Equals(perm);
     }
 }

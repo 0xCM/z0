@@ -88,6 +88,28 @@ namespace Z0
             where T : unmanaged  
                 => Vec128Pattern<T>.Increments(default(T), swaps);
 
+ 
+        /// <summary>
+        /// Creates a vector with components that increase by a specified step
+        /// </summary>
+        /// <param name="start">The value of the first component</param>
+        /// <param name="step">The distance between components</param>
+        /// <typeparam name="T">The primal component type</typeparam>
+        public static Vec128<T> Increasing<T>(T start, T step)
+            where T : unmanaged
+        {
+            var n = Vec128<T>.Length;
+            var current = start;
+            var dst = Span256.AllocBlock<T>();
+            for(var i=0; i<n; i++)
+            {
+                dst[i] = current;
+                gmath.add(ref current, step);
+            }
+            return Vec128.Load(ref head(dst));
+
+        }
+
     }
 
 

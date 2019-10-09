@@ -19,8 +19,6 @@ namespace Z0
  
     partial class Bits
     {    
-
-
         [MethodImpl(Inline)]
         public static Vec128<sbyte> vpackss(in Vec128<short> lhs, in Vec128<short> rhs)
             => PackSignedSaturate(lhs,rhs);
@@ -37,7 +35,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vec128<short> vpackss(in Vec128<int> lhs, in Vec128<int> rhs)
             => PackSignedSaturate(lhs,rhs);
-
 
         /// <summary>
         /// __m256i _mm256_packs_epi16 (__m256i a, __m256i b)VPACKSSWB ymm, ymm, ymm/m256

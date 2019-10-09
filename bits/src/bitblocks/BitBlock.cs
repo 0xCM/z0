@@ -10,107 +10,14 @@ namespace Z0
     using System.Runtime.InteropServices;
     using static zfunc;
 
-    public struct BitBlock<T> : IBitBlock<T>
-        where T : unmanaged, IBitBlock
+    public ref struct BitBlock<N>
+        where N : ITypeNat, INatPow2, new()
     {
-        internal T data;
-
-        /// <summary>
-        /// Queries/manipulates an index-identified bit
-        /// </summary>
-        /// <param name="src">The subject block</param>
-        /// <param name="i">The 0-based bit index</param>
-        [MethodImpl(Inline)]
-        public static ref byte Bit(ref BitBlock<T> src, BitPos i)
-            => ref Unsafe.Add(ref Unsafe.As<BitBlock<T>, byte>(ref src), i);
-
-        /// <summary>
-        /// Implicitly unwraps the encapsulated data
-        /// </summary>
-        /// <param name="src">The generic source</param>
-        public static implicit operator T(in BitBlock<T> src)
-            => src.data;
-
-        /// <summary>
-        /// Implicitly wraps blocked data
-        /// </summary>
-        /// <param name="src">The generic source</param>
-        public static implicit operator BitBlock<T>(in T src)
-            => new BitBlock<T>(src);
-
-        /// <summary>
-        /// The count of represented bits and the number of bytes occupied by the representation
-        /// </summary>
-        /// <typeparam name="T">The block type</typeparam>
-        public static readonly int Size = Unsafe.SizeOf<T>();
+        Span<N,byte> bits;
 
         [MethodImpl(Inline)]
-        public static BitBlock<T> FromSpan(Span<byte> src)
-            => new BitBlock<T>(MemoryMarshal.AsRef<T>(src));
-
-        [MethodImpl(Inline)]
-        public static BitBlock<T> Alloc()
-            => default;
-
-        [MethodImpl(Inline)]
-        public BitBlock(T src)
-        {
-            this.data = src;
-        }
-
-        [MethodImpl(Inline)]
-        public Span<byte> AsSpan()
-            => BitView.ViewBits(ref this).Bytes;        
-        
-        [MethodImpl(Inline)]        
-        public void CopyTo(Span<byte> dst)        
-            => BitView.ViewBits(ref this).CopyTo(dst);            
-        
-        [MethodImpl(Inline)]
-        public byte GetPart(int i)
-            => Unsafe.Add(ref Unsafe.As<T, byte>(ref data), i);
-
-        [MethodImpl(Inline)]
-        public void SetPart(int i, byte value)
-            => Unsafe.Add(ref Unsafe.As<T, byte>(ref data), i) = value;
-        
-        public byte this [int i]
-        {
-            [MethodImpl(Inline)]
-            get => GetPart(i);
-            
-            [MethodImpl(Inline)]
-            set => SetPart(i,value);
-        }
-
-        public int Length
-        {
-            [MethodImpl(Inline)]
-            get => Size;
-        }
-
-        public T Data
-        {
-            [MethodImpl(Inline)]
-            get => data;
-        }
-
-        /// <summary>
-        /// Reverses the bits in the block
-        /// </summary>
-        public void Reverse()
-        {
-            var span = AsSpan();
-            span.Reverse();
-            data = MemoryMarshal.AsRef<T>(span);
-        }
-
-        [MethodImpl(Inline)]
-        public BitString ToBitString()
-            => BitString.FromBitSeq(AsSpan());
-    
-        public string Format(bool tlz = false, bool specifier = false, int? blockWidth = null, char? blocksep = null)
-            => ToBitString().Format(tlz, specifier,blockWidth,blocksep);
+        public BitBlock(Span<N,byte> bits)
+            => this.bits = bits;
     }
 
 }

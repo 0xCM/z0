@@ -73,6 +73,28 @@ namespace Z0.Test
             }
         }
 
+        public void range16u()
+        {
+            for(var i=0; i< SampleSize; i++)
+            {
+                var x = Random.Next<ushort>();
+                
+                var x0 = gbits.range(x,0, 2);                
+                var x1 = gmath.sll(gbits.range(x,3, 5),3);
+                var x2 = gmath.sll(gbits.range(x,6, 8),6);
+                var x3 = gmath.sll(gbits.range(x,9, 11),9);
+                var x4 = gmath.sll(gbits.range(x,12, 14),12);
+                var x5 = gmath.sll(gbits.range(x,15, 15),15);
+                var y = x0;
+                y |= x1;
+                y |= x2;
+                y |= x3;
+                y |= x4;
+                y |= x5;
+                Claim.eq(x,y);
+            }
+        }
+
 
     }
 }

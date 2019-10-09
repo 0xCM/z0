@@ -10,7 +10,7 @@ namespace Z0
     
     using static zfunc;    
 
-    partial class soc
+    partial class pmoc
     {
         public static sbyte xor_d8i(sbyte lhs, sbyte rhs)
             => math.xor(lhs,rhs);

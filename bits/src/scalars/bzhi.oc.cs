@@ -14,7 +14,6 @@ namespace Z0
 
     partial class boc
     {
-
         public static byte bzhi_d8u(byte src, uint index)
             => Bits.bzhi(src,index);
 

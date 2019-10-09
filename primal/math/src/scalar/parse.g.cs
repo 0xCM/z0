@@ -19,23 +19,56 @@ namespace Z0
         public static T parse<T>(string src)
             where T : unmanaged
         {
+            if(typeof(T) == typeof(byte) 
+            || typeof(T) == typeof(ushort) 
+            || typeof(T) == typeof(uint) 
+            || typeof(T) == typeof(ulong))
+                return parseU<T>(src);
+            else if(typeof(T) == typeof(sbyte) 
+            || typeof(T) == typeof(short) 
+            || typeof(T) == typeof(int) 
+            || typeof(T) == typeof(long))
+                return parseI<T>(src);
+            else 
+                return parseF<T>(src);
+        }
+
+        [MethodImpl(Inline)]
+        static T parseI<T>(string src)
+            where T : unmanaged
+        {
             if(typeof(T) == typeof(sbyte))
                 return generic<T>(math.parse(src, out sbyte x));
-            else if(typeof(T) == typeof(byte))
-                return generic<T>(math.parse(src, out byte x));
             else if(typeof(T) == typeof(short))
                 return generic<T>(math.parse(src, out short x));
-            else if(typeof(T) == typeof(ushort))
-                return generic<T>(math.parse(src, out ushort x));
             else if(typeof(T) == typeof(int))
                 return generic<T>(math.parse(src, out int x));
+            else 
+                return generic<T>(math.parse(src, out long x));
+
+        }
+
+        [MethodImpl(Inline)]
+        static T parseU<T>(string src)
+            where T : unmanaged
+        {
+
+            if(typeof(T) == typeof(byte))
+                return generic<T>(math.parse(src, out byte x));
+            else if(typeof(T) == typeof(ushort))
+                return generic<T>(math.parse(src, out ushort x));
             else if(typeof(T) == typeof(uint))
                 return generic<T>(math.parse(src, out uint x));
-            else if(typeof(T) == typeof(long))
-                return generic<T>(math.parse(src, out long x));
-            else if(typeof(T) == typeof(ulong))
+            else
                 return generic<T>(math.parse(src, out ulong x));
-            else if(typeof(T) == typeof(float))
+        }
+
+        [MethodImpl(Inline)]
+        static T parseF<T>(string src)
+            where T : unmanaged
+        {
+
+            if(typeof(T) == typeof(float))
                 return generic<T>(math.parse(src, out float x));
             else if(typeof(T) == typeof(double))
                 return generic<T>(math.parse(src, out double x));

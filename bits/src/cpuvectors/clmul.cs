@@ -19,7 +19,6 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        /// <returns></returns>
         public static BitVector128 clmul_ref(BitVector64 x, BitVector64 y)
         {
             var temp1 = x;

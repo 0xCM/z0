@@ -16,6 +16,31 @@ namespace Z0
         public void bzhi_64u_check()
         {
             bzhi_check<ulong>();
+
+            var dst = 0ul;
+            Bits.puthi(7,ref dst);
+            (var lo, var hi) = Bits.split(dst);
+
+            Claim.eq(7,hi);
+            Claim.eq(0,lo);
+        }
+
+        public void bzhi_8u_check()
+        {
+            bzhi_8u_check(2);
+            bzhi_8u_check(3);
+            bzhi_8u_check(4);
+            bzhi_8u_check(5);
+        }
+
+        public void bzhi_16u_check()
+        {
+            bzhi_16u_check(3);
+            bzhi_16u_check(5);
+            bzhi_16u_check(8);
+            bzhi_16u_check(9);
+            bzhi_16u_check(13);
+
         }
 
         public void bzhi_32u_check()
@@ -31,6 +56,56 @@ namespace Z0
         public void bzhi_32u_bench()
         {
             bzhi_bench<uint>();
+        }
+
+        void bzhi_8u_check(byte maxlen)
+        {
+            byte source = 0xFF;
+            var srclen = 8;
+
+            var bs0 = source.ToBitString();
+            var bv0 = bs0.ToBitVector(n8);
+
+            Claim.eq(srclen, bs0.PopCount());
+            Claim.eq(srclen, bs0.Length);
+
+            Claim.eq(srclen, bv0.Pop());
+            
+            var bs1 = bs0.Truncate(maxlen);
+            Claim.eq(maxlen, bs1.PopCount());
+            Claim.eq(maxlen, bs1.Length);
+
+            var bv1 = Bits.bzhi(bv0.Scalar, maxlen).ToBitVector();
+            Claim.eq(maxlen, bv1.Pop());
+
+            var bs2 = bs1.Pad(srclen);
+            Claim.eq(srclen, bs2.Length);
+            Claim.eq(maxlen, bs2.PopCount());
+        }
+
+        void bzhi_16u_check(byte maxlen)
+        {
+            var source = UInt16.MaxValue; 
+            var srclen = 16;
+
+            var bs0 = source.ToBitString();
+            var bv0 = bs0.ToBitVector(n16);
+
+            Claim.eq(srclen, bs0.PopCount());
+            Claim.eq(srclen, bs0.Length);
+
+            Claim.eq(srclen, bv0.Pop());
+            
+            var bs1 = bs0.Truncate(maxlen);
+            Claim.eq(maxlen, bs1.PopCount());
+            Claim.eq(maxlen, bs1.Length);
+
+            var bv1 = Bits.bzhi(bv0.Scalar, maxlen).ToBitVector();
+            Claim.eq(maxlen, bv1.Pop());
+
+            var bs2 = bs1.Pad(srclen);
+            Claim.eq(srclen, bs2.Length);
+            Claim.eq(maxlen, bs2.PopCount());
         }
 
         void bzhi_check<T>()

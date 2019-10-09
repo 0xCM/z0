@@ -10,7 +10,7 @@ namespace Z0
     
     using static zfunc;    
 
-    partial class soc
+    partial class pmoc
     {
         public static bool divides_d8i(sbyte lhs, sbyte rhs)
             => math.divides(lhs,rhs);

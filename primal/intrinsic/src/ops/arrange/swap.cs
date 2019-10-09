@@ -16,15 +16,6 @@ namespace Z0
 
     partial class dinx
     {        
-        /// <summary>
-        /// 00 -> 10 | 0 -> 2
-        /// 01 -> 11 | 1 -> 3
-        /// 02 -> 00 | 2 -> 0
-        /// 03 -> 01 | 3 -> 1
-        /// </summary>
-        const byte MSwapHiLo = 0b_01_00_11_10;
-
-        [MethodImpl(Inline)]
         public static Vec256<int> swap(Vec256<int> src, byte i, byte j)
         {
             Span<int> control = stackalloc int[Vec256<int>.Length];
@@ -40,81 +31,71 @@ namespace Z0
             return perm8x32(src, Vec256.Load(control));
         }
 
+
         /// <summary>
         /// Swaps hi/lo 128-bit lanes
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<byte> swaphl(in Vec256<byte> src)
+        public static Vec256<byte> swaphl_ref(in Vec256<byte> x)
         {
-            Vec256<byte> dst = default;
-            dst = insert(hi(src.ymm), dst.ymm, 0);
-            dst = insert(lo(src.ymm), dst.ymm, 1);
-            return dst;         
+            Vec256<byte> y = default;
+            y = dinx.insert(dinx.hi(x), y, 0);
+            y = dinx.insert(dinx.lo(x), y, 1);
+            return y;
         }
 
-        /// <summary>
-        /// Swaps hi/lo 128-bit lanes
-        /// </summary>
-        /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<sbyte> swaphl(in Vec256<sbyte> src)
-        {
-            Vec256<sbyte> dst = default;
-            dst = lo(hi(src.ymm), dst.ymm);
-            dst = hi(lo(src.ymm), dst.ymm);
-            return dst;         
-        }
+        public static Vec256<byte> swaphl(in Vec256<byte> x)
+            => dinx.vperm2x128(x,x, Perm2x128.AD);
 
         /// <summary>
         /// Swaps hi/lo 128-bit lanes
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<short> swaphl(in Vec256<short> src)
-        {
-            Vec256<short> dst = default;
-            dst = insert(hi(src.ymm), dst.ymm, 0);
-            dst = insert(lo(src.ymm), dst.ymm, 1);
-            return dst;         
-        }
+        public static Vec256<sbyte> swaphl(in Vec256<sbyte> x)
+            => dinx.vperm2x128(x,x, Perm2x128.AD);
+
+        /// <summary>
+        /// Swaps hi/lo 128-bit lanes
+        /// </summary>
+        /// <param name="x">The source vector</param>
+        [MethodImpl(Inline)]
+        public static Vec256<short> swaphl(in Vec256<short> x)
+            => dinx.vperm2x128(x,x, Perm2x128.DA);
+
+        /// <summary>
+        /// Swaps hi/lo 128-bit lanes
+        /// </summary>
+        /// <param name="x">The source vector</param>
+        [MethodImpl(Inline)]
+        public static Vec256<ushort> swaphl(in Vec256<ushort> x)
+            => dinx.vperm2x128(x,x, Perm2x128.AD);
+
+        /// <summary>
+        /// Swaps hi/lo 128-bit lanes
+        /// </summary>
+        /// <param name="x">The source vector</param>
+        [MethodImpl(Inline)]
+        public static Vec256<long> swaphl(in Vec256<long> x)
+            => dinx.vperm2x128(x,x, Perm2x128.AD);
 
         /// <summary>
         /// Swaps hi/lo 128-bit lanes
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<ushort> swaphl(in Vec256<ushort> src)
-        {
-            Vec256<ushort> dst = default;
-            dst = insert(hi(src.ymm), dst.ymm, 0);
-            dst = insert(lo(src.ymm), dst.ymm, 1);
-            return dst;         
-        }
+        public static Vec256<ulong> swaphl(in Vec256<ulong> x)
+            => dinx.vperm2x128(x,x, Perm2x128.AD);
 
         /// <summary>
         /// Swaps hi/lo 128-bit lanes
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<long> swaphl(in Vec256<long> src)
-            => Permute4x64(src.ymm, MSwapHiLo);
-
-        /// <summary>
-        /// Swaps hi/lo 128-bit lanes
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        [MethodImpl(Inline)]
-        public static Vec256<ulong> swaphl(in Vec256<ulong> src)
-            => Permute4x64(src.ymm, MSwapHiLo);
-
-        /// <summary>
-        /// Swaps hi/lo 128-bit lanes
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        [MethodImpl(Inline)]
-        public static Vec256<double> swaphl(in Vec256<double> src)
-            => Permute4x64(src.ymm, MSwapHiLo);
+        public static Vec256<double> swaphl(in Vec256<double> x)
+            => dinx.vperm2x128(x,x, Perm2x128.AD);
     }
 
 }

@@ -23,7 +23,7 @@ namespace Z0
         public static Vector<T> Vector<T>(this IPolyrand random, int len, Interval<T>? domain = null)
             where T : unmanaged
         {
-            var dst = Z0.Vector.Alloc<T>(len);
+            var dst = Z0.Vector.alloc<T>(len);
             if(domain != null)
                 random.StreamTo(domain.Value, len, ref dst[0]);
             else
@@ -43,7 +43,7 @@ namespace Z0
             where T : unmanaged
             where N : ITypeNat, new()
         {
-            var dst = Z0.Vector.Alloc<N,T>();
+            var dst = Z0.Vector.alloc<N,T>();
             random.Fill(domain, ref dst);
             return dst;
         }
@@ -59,7 +59,7 @@ namespace Z0
             where T : unmanaged
             where N : ITypeNat, new()
         {
-            var dst = Z0.Vector.Alloc<N,T>();
+            var dst = Z0.Vector.alloc<N,T>();
             random.Fill(closed(min,max), ref dst);
             return dst;
         }
@@ -75,7 +75,7 @@ namespace Z0
             where T : unmanaged
             where N : ITypeNat, new()
         {
-            var dst = Z0.Vector.Alloc<N,T>();
+            var dst = Z0.Vector.alloc<N,T>();
             random.Fill(ref dst);
             return dst;
         }

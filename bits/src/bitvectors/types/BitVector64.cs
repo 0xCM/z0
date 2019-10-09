@@ -575,7 +575,7 @@ namespace Z0
         /// <param name="pos">The bit position</param>
         [MethodImpl(Inline)]
         public void DisableAfter(BitPos pos)
-            => Bits.trunc(ref data, ++pos);
+            => Bits.bzhi(ref data, ++pos);
 
         /// <summary>
         /// Sets a bit to a specified value

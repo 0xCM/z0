@@ -10,7 +10,7 @@ namespace Z0
     
     using static zfunc;    
 
-    partial class soc
+    partial class pmoc
     {
 
         public static bool between_d8i(sbyte x, sbyte a, sbyte b)    

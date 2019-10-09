@@ -47,9 +47,9 @@ namespace Z0
     }
 
     /// <summary>
-    /// Scalar op codes
+    /// Primal math op codes
     /// </summary>
-    public static partial class soc
+    public static partial class pmoc
     {
 
     }
@@ -57,7 +57,7 @@ namespace Z0
     /// <summary>
     /// Floating-point op codes
     /// </summary>
-    public static partial class foc
+    public static partial class fpoc
     {
 
     }

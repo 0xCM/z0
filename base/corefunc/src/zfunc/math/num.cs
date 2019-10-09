@@ -213,4 +213,22 @@ partial class zfunc
     public static IEnumerable<T> range<T>(T count)
         where T : unmanaged
             => range(default(T), count);
+
+
+    /// <summary>
+    /// Defines a scalar sequence [first, ..., (first + N)]
+    /// </summary>
+    /// <param name="first"></param>
+    /// <typeparam name="N"></typeparam>
+    /// <typeparam name="T"></typeparam>
+    [MethodImpl(Inline)]
+    public static IEnumerable<T> range<N,T>(T first, N n = default)
+        where T : unmanaged
+        where N : ITypeNat, new()
+    {
+        var last = convert<T>(n.value);
+        return range(first,last);
+    }
+
+
 }

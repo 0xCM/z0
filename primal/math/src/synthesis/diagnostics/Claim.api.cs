@@ -47,6 +47,10 @@ namespace Z0
             => lhs.Equals(rhs) ? true
                 : throw failed(ClaimOpKind.Eq, NotEqual(lhs,rhs, caller, file, line));
 
+        [MethodImpl(Inline)]
+        public static bool contains<T>(ISet<T> set, T item, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
+            => set.Contains(item) ? true : throw  failed(ClaimOpKind.NotIn, AppMsg.Error($"Item {item} not in set"));
+
         /// <summary>
         /// Asserts the equality of two strings
         /// </summary>

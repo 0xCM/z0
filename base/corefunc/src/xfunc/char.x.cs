@@ -16,7 +16,6 @@ partial class zfunc
     /// </summary>
     /// <param name="src"></param>
     /// <param name="count"></param>
-    /// <returns></returns>
     [MethodImpl(Inline)]
     public static ReadOnlySpan<char> Replicate(this char src, int count)
         => new string(src,count);

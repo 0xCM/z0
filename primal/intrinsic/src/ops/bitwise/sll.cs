@@ -42,7 +42,7 @@ namespace Z0
         static Vec256<ushort> VByteMask
         {
             [MethodImpl(Inline)]
-            get => broadcast(ByteMask, out Vec256<ushort> dst);
+            get => vbroadcast256(ByteMask);
         }
 
         [MethodImpl(Inline)]
@@ -154,8 +154,8 @@ namespace Z0
             // each vector via the "lane merge" pattern and construct
             // the result vector via insertion of these condensed vectors
             ref readonly var permSpec = ref Vec256Pattern.LaneMerge<byte>();
-            var permA = dinx.permute(trA, permSpec);
-            var permB = dinx.permute(trB, permSpec);
+            var permA = dinx.vperm32x8(trA, permSpec);
+            var permB = dinx.vperm32x8(trB, permSpec);
             var result = default(Vec256<byte>);
             dinx.insert(dinx.lo(in permA), dinx.lo(in permB), ref result);            
             

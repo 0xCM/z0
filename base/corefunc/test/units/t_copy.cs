@@ -5,9 +5,11 @@
 namespace Z0.Test
 {
     using System;
+    using System.Linq;
+
     using System.Runtime.CompilerServices;
     using static zfunc;
-
+    using static nfunc;
  
     public sealed class t_copy : UnitTest<t_copy>
     {
@@ -28,7 +30,7 @@ namespace Z0.Test
 
         }
 
-
+ 
     }
 
 

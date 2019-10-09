@@ -10,7 +10,7 @@ namespace Z0
     
     using static zfunc;    
 
-    partial class soc
+    partial class pmoc
     {
         public static bool nonzero_n8i(sbyte x)
             => !x.Equals(0);

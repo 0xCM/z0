@@ -16,11 +16,11 @@ namespace Z0
     {
 
         /// <summary>
-        /// Produces a stream values sampled from an enum
+        /// Produces a stream of values sampled from an enum
         /// </summary>
         /// <param name="random">The random source</param>
         /// <typeparam name="E">The enum type</typeparam>
-        public static IEnumerable<E> EnumStream<E>(this IPolyrand random, Func<E,bool> filter = null)
+        public static IEnumerable<E> EnumValues<E>(this IPolyrand random, Func<E,bool> filter)
             where E : unmanaged, Enum
         {
             IEnumerable<E> produce()
@@ -45,6 +45,32 @@ namespace Z0
 
             return stream(produce(), random.RngKind);
         }
+
+        /// <summary>
+        /// Produces a stream of enum values enum
+        /// </summary>
+        /// <param name="random">The random source</param>
+        /// <param name="exclusions">Enum literals to exclude</param>
+        /// <typeparam name="E">The enum type</typeparam>
+        public static IEnumerable<E> EnumValues<E>(this IPolyrand random, params E[] exclusions)
+            where E : unmanaged, Enum
+        {
+
+            IEnumerable<E> produce()
+            {
+                var excluded = exclusions.Select(x => x.ToString()).ToHashSet();
+                var available = Enum.GetNames(typeof(E)).Where(n => !excluded.Contains(n)).ToArray();
+                var names = available.Mapi((index, name) => (index, name)).ToDictionary();
+                var stream = random.Stream(closed(0, names.Count));
+
+                while(true)
+                    yield return Enum.Parse<E>(names[stream.Next()]);
+            }
+
+            return stream(produce(), random.RngKind);
+        }
+
+
     }
 
 }

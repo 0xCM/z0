@@ -25,10 +25,8 @@ namespace Z0.Test
             var src = Random.Span(n4, n5, closed(1,1000));
             Claim.eq(src.Dim.I, m);
             Claim.eq(src.Dim.J, n);            
-            Trace($"A = {src.Format()}");
 
             var dst = src.Transpose();
-            Trace($"A{Super.T} = {dst.Format()}");
 
             Claim.eq(dst.Dim.I, n);
             Claim.eq(dst.Dim.J, m);

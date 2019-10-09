@@ -40,8 +40,8 @@ namespace Z0
             return new Perm8Select(dst);
         }
 
-        public string Format(int? colwidth = null)
-            => Perm.Format<Perm8>(terms,colwidth);
+        // public string Format(int? colwidth = null)
+        //     => Perm.Format<Perm8>(terms,colwidth);
 
         [MethodImpl(Inline)]        
         public Span<T> ToSpan<T>()
@@ -64,37 +64,37 @@ namespace Z0
         /// <summary>
         /// Identifies the second permutation symbol
         /// </summary>
-        B = 1,
+        B = A + 1,
 
         /// <summary>
         /// Identifies the third permutation symbol
         /// </summary>
-        C = 2,
+        C = B + 1,
 
         /// <summary>
         /// Identifies the fourth permutation symbol
         /// </summary>
-        D = 3, 
+        D = C + 1, 
 
         /// <summary>
         /// Identifies the fifth permutation symbol
         /// </summary>
-        E = 4, 
+        E = D + 1, 
 
         /// <summary>
         /// Identifies the sixth permutation symbol
         /// </summary>
-        F = 5,
+        F = E + 1,
 
         /// <summary>
         /// Identifies the seventh permutation symbol
         /// </summary>
-        G = 6, 
+        G = F + 1, 
 
         /// <summary>
         /// Identifies the eighth permutation symbol
         /// </summary>
-        H = 7, 
+        H = G + 1, 
 
         /// <summary>
         /// Represents the 8 symbol identity permutation
@@ -105,6 +105,37 @@ namespace Z0
         /// Represents the reversed identity permutation
         /// </summary>
         Reverse =  H | G << 3 | F << 6 | E << 9 | D << 12 | C << 15 | B << 18 | A << 21,
+    }
+
+    partial class xfunc
+    {
+
+        /// <summary>
+        /// Reifies a permutation of length 8 from its canonical scalar specification
+        /// </summary>
+        /// <param name="spec">The representative</param>
+        public static Perm<N8> ToPerm(this Perm8 spec)
+        {
+            uint data = (uint)spec;
+            var dst = Perm<N8>.Alloc();
+            for(int i=0, offset = 0; i<dst.Length; i++, offset +=3)
+                dst[i] = (int)BitMask.between(in data, offset, offset + 2);
+            return dst;
+        }
+
+        /// <summary>
+        /// Maps a permutation on 8 symbols to its canonical scalar specification
+        /// </summary>
+        /// <param name="src">The source permutation</param>
+        public static Perm8 ToSpec(this Perm<N8> src)
+        {
+            var dst = 0u;            
+            for(int i=0, offset = 0; i< src.Length; i++, offset +=3)
+                dst |= (uint)src[i] << offset;                        
+            return (Perm8)dst;
+        }
+
+
     }
 
 

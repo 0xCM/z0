@@ -10,7 +10,7 @@ namespace Z0
     
     using static zfunc;    
 
-    partial class soc
+    partial class pmoc
     {
         public static sbyte one_n8i()
             => 1;
@@ -101,7 +101,6 @@ namespace Z0
 
         public static double zero_g64f()
             => gmath.one<double>();
-
 
         public static sbyte minval_n8i()
             => sbyte.MinValue;

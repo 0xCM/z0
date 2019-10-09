@@ -1,4 +1,4 @@
-// 2019-10-06 23:48:39:521
+// 2019-10-09 00:23:42:603
 ref sbyte bitmap_d8i_to_8i(in sbyte src, byte srcOffset, byte len, byte dstOffset, ref sbyte dst)
 {
     IL_0000: ldarg.0
@@ -217,6 +217,62 @@ ref double bitmap_g64f_to_64f(in double src, byte srcOffset, byte len, byte dstO
     IL_0004: ldarg.s dst
     IL_0006: call System.Double& Z0.gbits::bitmap<System.Double>(System.Double&,System.Byte,System.Byte,System.Byte,System.Double&)
     IL_000B: ret
+
+}
+byte blsmsk_d8u(byte src)
+{
+    IL_0000: ldarg.0
+    IL_0001: call System.Byte Z0.Bits::blsmsk(System.Byte)
+    IL_0006: ret
+
+}
+byte blsmsk_g8u(byte src)
+{
+    IL_0000: ldarg.0
+    IL_0001: call System.Byte Z0.gbits::blsmsk<System.Byte>(System.Byte)
+    IL_0006: ret
+
+}
+ushort blsmsk_d16u(ushort src)
+{
+    IL_0000: ldarg.0
+    IL_0001: call System.UInt16 Z0.Bits::blsmsk(System.UInt16)
+    IL_0006: ret
+
+}
+ushort blsmsk_g16u(ushort src)
+{
+    IL_0000: ldarg.0
+    IL_0001: call System.UInt16 Z0.gbits::blsmsk<System.UInt16>(System.UInt16)
+    IL_0006: ret
+
+}
+uint blsmsk_d32u(uint src)
+{
+    IL_0000: ldarg.0
+    IL_0001: call System.UInt32 Z0.Bits::blsmsk(System.UInt32)
+    IL_0006: ret
+
+}
+uint blsmsk_g32u(uint src)
+{
+    IL_0000: ldarg.0
+    IL_0001: call System.UInt32 Z0.gbits::blsmsk<System.UInt32>(System.UInt32)
+    IL_0006: ret
+
+}
+ulong blsmsk_g64u(ulong src)
+{
+    IL_0000: ldarg.0
+    IL_0001: call System.UInt64 Z0.gbits::blsmsk<System.UInt64>(System.UInt64)
+    IL_0006: ret
+
+}
+ulong blsmsk_d64u(ulong src)
+{
+    IL_0000: ldarg.0
+    IL_0001: call System.UInt64 Z0.Bits::blsmsk(System.UInt64)
+    IL_0006: ret
 
 }
 byte bzhi_d8u(byte src, uint index)

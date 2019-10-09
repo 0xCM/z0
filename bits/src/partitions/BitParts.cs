@@ -53,6 +53,9 @@ namespace Z0
             return ref dst;
         }
 
+        [MethodImpl(Inline)]
+        static ulong project(ulong src, ulong mask)
+            => Bits.scatter(src,mask);
     
     }
 

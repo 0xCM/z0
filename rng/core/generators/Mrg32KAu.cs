@@ -103,7 +103,7 @@ namespace Z0
         {
             Ig = seed;
             Bg = Ig.Replicate();
-            Cg = Vector.Alloc<N6,long>();
+            Cg = Vector.alloc<N6,long>();
             Cg[0] = Bg[0];
             Cg[1] = Bg[1];
             Cg[2] = Bg[2];

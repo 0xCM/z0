@@ -24,7 +24,7 @@ namespace Z0
         /// <param name="src">The bit source</param>
         [MethodImpl(Inline)]
         public static byte bzhi(byte src, uint index)
-            =>  (byte)ZeroHighBits(src, index);
+            =>  (byte)ZeroHighBits((uint)src, index);
 
         /// <summary>
         /// unsigned int _bzhi_u32 (unsigned int a, unsigned int index) BZHI r32a, reg/m32, r32b
@@ -33,7 +33,7 @@ namespace Z0
         /// <param name="src">The bit source</param>
         [MethodImpl(Inline)]
         public static ushort bzhi(ushort src, uint index)
-            => (ushort)ZeroHighBits(src, index);
+            => (ushort)ZeroHighBits((uint)src, index);
 
         /// <summary>
         /// unsigned int _bzhi_u32 (unsigned int a, unsigned int index) BZHI r32a, reg/m32, r32b

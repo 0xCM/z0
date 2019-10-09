@@ -110,5 +110,48 @@ namespace Z0
                 dst[i] = even(i) ? a : b;
             return Vec256.Load(ref head(dst));
         }
+
+        /// <summary>
+        /// Creates a vector with components that increase by a specified step
+        /// </summary>
+        /// <param name="start">The value of the first component</param>
+        /// <param name="step">The distance between components</param>
+        /// <typeparam name="T">The primal component type</typeparam>
+        public static Vec256<T> Increasing<T>(T start, T step)
+            where T : unmanaged
+        {
+            var n = Vec256<T>.Length;
+            var current = start;
+            var dst = Span256.AllocBlock<T>();
+            for(var i=0; i<n; i++)
+            {
+                dst[i] = current;
+                gmath.add(ref current, step);
+            }
+            return Vec256.Load(ref head(dst));
+
+        }
+
+        /// <summary>
+        /// Creates a vector with components that increase by a specified step
+        /// </summary>
+        /// <param name="start">The value of the first component</param>
+        /// <param name="step">The distance between components</param>
+        /// <typeparam name="T">The primal component type</typeparam>
+        public static Vec256<T> Decreasing<T>(T start, T step)
+            where T : unmanaged
+        {
+            var n = Vec256<T>.Length;
+            var current = start;
+            var dst = Span256.AllocBlock<T>();
+            for(var i=0; i<n; i++)
+            {
+                dst[i] = current;
+                gmath.sub(ref current, step);
+            }
+            return Vec256.Load(ref head(dst));
+
+        }
+
     }
 }

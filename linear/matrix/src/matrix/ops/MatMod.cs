@@ -31,7 +31,7 @@ namespace Z0
             where N : ITypeNat, new()
         {
             //var x = new uint[v.Length];
-            var x = Vector.Alloc<N,uint>();
+            var x = Vector.alloc<N,uint>();
 
             for(var i = 0; i < u.Length; ++i) 
             for(int j = 0; j < v.Length; j++)
@@ -55,7 +55,7 @@ namespace Z0
             //var x = new ulong[v.Length];
             var rc = A.RowCount;
             var cc = A.ColCount;
-            var temp = Vector.Alloc<N,ulong>();
+            var temp = Vector.alloc<N,ulong>();
             for(var i = 0; i < rc;  ++i) 
             for(var j = 0; j < cc; j++)
                 temp[i] = Mod.fma(A[i,j], v[j], temp[i], m);
@@ -101,7 +101,7 @@ namespace Z0
             var rc = C.RowCount;
             var cc = C.ColCount;
             var W = Matrix.Alloc<N,uint>();
-            var v = Vector.Alloc<N,uint>();
+            var v = Vector.alloc<N,uint>();
 
             for (var i = 0; i < cc;  ++i) 
             {
@@ -135,7 +135,7 @@ namespace Z0
             var cc = C.ColCount;
             
             var W = Matrix.Alloc<N,ulong>();
-            var v = Vector.Alloc<N,ulong>();
+            var v = Vector.alloc<N,ulong>();
 
             for (var i = 0; i < cc;  ++i) 
             {
@@ -166,7 +166,7 @@ namespace Z0
         {
             int r = C.RowCount;
             int c = B.ColCount;
-            var V = Vector.Alloc<N,double>();
+            var V = Vector.alloc<N,double>();
             var W = Matrix.Alloc<N,double>();
             for (var i = 0; i < c;  ++i) 
             {

@@ -82,7 +82,7 @@ namespace Z0
         /// <param name="rhs">The maximum bit position</param>
         [MethodImpl(Inline)]
         public static BitSize operator -(in BitPos i0, in BitPos i1)
-            => new BitSize(i1.index - i0.index + 1);  //Math.Abs((int)i1.index - (int)i0.index) + 1;
+            => Math.Abs((int)i1.index - (int)i0.index) + 1;
         
         [MethodImpl(Inline)]
         public static BitPos operator ++(in BitPos lhs)

@@ -55,8 +55,26 @@ namespace Z0
         /// <param name="terms">The permutation terms</param>
         /// <param name="colwidth">The width of each column</param>
         /// <typeparam name="T">The term type</typeparam>
-        internal static string FormatPerm<T>(this ReadOnlySpan<T> terms,  int? colwidth = null)
-            => Perm.Format(terms, colwidth);
+        public static string FormatAsPerm<T>(this ReadOnlySpan<T> terms,  int? colwidth = null)
+        {
+            var line1 = sbuild();
+            var line2 = sbuild();
+            var pad = colwidth ?? 3;
+            var leftBoundary = $"{AsciSym.Pipe}".PadRight(2);
+            var rightBoundary = $"{AsciSym.Pipe}";
+            
+            line1.Append(leftBoundary);
+            line2.Append(leftBoundary);
+            for(var i=0; i < terms.Length; i++)
+            {
+                line1.Append($"{i}".PadRight(pad));
+                line2.Append($"{terms[i]}".PadRight(pad));
+            }
+            line1.Append(rightBoundary);
+            line2.Append(rightBoundary);
+            
+            return line1.ToString() + eol() + line2.ToString();
+        }
 
         /// <summary>
         /// Formats the terms of a permutation
@@ -64,25 +82,25 @@ namespace Z0
         /// <param name="terms">The permutation terms</param>
         /// <param name="colwidth">The width of each column</param>
         /// <typeparam name="T">The term type</typeparam>
-        internal static string FormatPerm<T>(this Span<T> terms,  int? colwidth = null)
-            => terms.ReadOnly().FormatPerm(colwidth);
+        public static string FormatAsPerm<T>(this Span<T> terms,  int? colwidth = null)
+            => terms.ReadOnly().FormatAsPerm(colwidth);
 
         /// <summary>
         /// Applies a sequence of transpositions to source span elements
         /// </summary>
-        /// <param name="io">The source and target span</param>
+        /// <param name="src">The source and target span</param>
         /// <param name="i">The first index</param>
         /// <param name="j">The second index</param>
         /// <typeparam name="T">The element type</typeparam>
-        public static Span<T> Swap<T>(this Span<T> io, params Swap[] swaps)           
+        public static Span<T> Swap<T>(this Span<T> src, params Swap[] swaps)           
             where T : unmanaged
         {
             for(var k = 0; k< swaps.Length; k++)
             {
                 (var i, var j) = swaps[k];
-                swap(ref io[i], ref io[j]);
+                swap(ref src[i], ref src[j]);
             }
-            return io;
+            return src;
         }
 
         /// <summary>
@@ -102,7 +120,6 @@ namespace Z0
              src.Unblocked.Swap(swaps);
              return src;
         }        
-
 
         /// <summary>
         /// Applies a sequence of transpositions to source span elements
@@ -158,126 +175,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static string Format(this Swap[] src)
             => string.Join(" -> ", src.Map(x => x.Format()));
-
-        /// <summary>
-        /// Usefully formats the permutation spec
-        /// </summary>
-        /// <param name="src">The permutation spec</param>
-        [MethodImpl(Inline)]
-        public static string Format(this Perm4 src)
-            => $"{src} = {((byte)src).ToBitString()} = {((byte)src).FormatHex()}"; 
- 
-        [MethodImpl(Inline)]
-        public static bool Includes(this Perm16 src, int index)
-            => (((int)src & (4 << index)) != 0);
-
-        [MethodImpl(Inline)]
-        public static PermCycle Cycle(this Perm16 src)
-        {            
-            Span<PermTerm> terms = stackalloc PermTerm[16];
-            var counter = 0;
-            for(var i=0; i<16; i++)   
-            {
-                if(src.Includes(i))
-                    terms[counter] = new PermTerm(counter,i);
-                counter++;
-            }
-            return new PermCycle(terms.Slice(0, counter));
-
-        }
-
-        /// <summary>
-        /// Maps a permutation on 8 symbols to its canonical scalar representation
-        /// </summary>
-        /// <param name="src">The source permutation</param>
-        public static Perm8 ToScalar(this Perm<N8> src)
-        {
-            var dst = 0u;            
-            for(int i=0, offset = 0; i< src.Length; i++, offset +=3)
-                dst |= (uint)src[i] << offset;                        
-            return (Perm8)dst;
-        }
-
-        /// <summary>
-        /// Reifies a permutation of length 8 from its canonical scalar representative 
-        /// </summary>
-        /// <param name="rep">The representative</param>
-        public static Perm<N8> ToPerm(this Perm8 rep)
-        {
-            uint data = (uint)rep;
-            var dst = Perm<N8>.Alloc();
-            for(int i=0, offset = 0; i<dst.Length; i++, offset +=3)
-                dst[i] = (int)BitMask.between(in data, offset, offset + 2);
-            return dst;
-        }
- 
-        /// <summary>
-        /// Maps a permutation on 16 symbols to its canonical scalar representation
-        /// </summary>
-        /// <param name="src">The source permutation</param>
-        public static Perm16 ToEnum(this Perm<N16> src)
-        {
-            var dst = 0ul;            
-            for(int i=0, offset = 0; i< src.Length; i++, offset +=3)
-                dst |= (ulong)src[i] << offset;                        
-            return (Perm16)dst;
-        }
-
-        /// <summary>
-        /// Reifies a permutation of length 16 from its canonical scalar representative 
-        /// </summary>
-        /// <param name="rep">The representative</param>
-        public static Perm<N16> ToPerm(this Perm16 rep)
-        {
-            uint data = (uint)rep;
-            var dst = Perm<N16>.Alloc();
-            for(int i=0, offset = 0; i<dst.Length; i++, offset +=4)
-                dst[i] = (int)BitMask.between(in data, offset, offset + 3);
-            return dst;
-        }
-
-        /// <summary>
-        /// Returns the source enum's underlying scalar value
-        /// </summary>
-        /// <param name="src">The source enum value</param>
-        [MethodImpl(Inline)]
-        public static ulong ToScalar(this Perm16 src)
-            => (ulong)src;
-        
-        /// <summary>
-        /// Formats the value as a permutation map, i.e., [00 01 10 11]: ABCD -> ABDC
-        /// </summary>
-        /// <param name="src"></param>
-        public static string FormatMap(this Perm4 src)
-        {
-            static char letter(byte x, byte y)
-                => (x,y) switch 
-                {
-                    (0,0) => 'A',
-                    (1,0) => 'B',
-                    (0,1) => 'C',  
-                    (1,1) => 'D',
-                    _ => '0'
-                };
-
-            static string letters(BitString bs)
-            {
-                Span<char> letters = stackalloc char[4];
-                int i=0, j=0;
-                letters[i++] = letter(bs[j++], bs[j++]);
-                letters[i++] = letter(bs[j++], bs[j++]);
-                letters[i++] = letter(bs[j++], bs[j++]);            
-                letters[i++] = letter(bs[j++], bs[j++]);            
-                return new string(letters);
-            }
-
-            var bs = BitString.FromScalar((byte)src);
-            var block = bracket(bs.Format(false,false,2, AsciSym.Space));
-            var domain = $"{Perm4.A}{Perm4.B}{Perm4.C}{Perm4.D}";
-            var codomain = letters(bs);
-            var mapping = $"{block}: {domain} -> {codomain}";
-            return mapping;
-        }
-
     }
 }

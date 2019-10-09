@@ -132,23 +132,19 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <param name="dst">A target span of sufficient length</param>
-        [MethodImpl(Inline)]
         public static void part64x1(ulong src, Span<byte> dst)
         {                    
             const int step = 8;
             const ulong selected = (ulong)BitMasks.Lsb64x8.Select;
 
-            block64u(dst, 0*step) = Bits.scatter(select(src, Part64x8.Part0), selected);
-            block64u(dst, 1*step) = Bits.scatter(select(src, Part64x8.Part1), selected);
-            block64u(dst, 2*step) = Bits.scatter(select(src, Part64x8.Part2), selected);
-            block64u(dst, 3*step) = Bits.scatter(select(src, Part64x8.Part3), selected);
-            block64u(dst, 4*step) = Bits.scatter(select(src, Part64x8.Part4), selected);
-            block64u(dst, 5*step) = Bits.scatter(select(src, Part64x8.Part5), selected);
-            block64u(dst, 6*step) = Bits.scatter(select(src, Part64x8.Part6), selected);
-            block64u(dst, 7*step) = Bits.scatter(select(src, Part64x8.Part7), selected);
+            block64u(dst, 0*step) = project(select(src, Part64x8.Part0), selected);
+            block64u(dst, 1*step) = project(select(src, Part64x8.Part1), selected);
+            block64u(dst, 2*step) = project(select(src, Part64x8.Part2), selected);
+            block64u(dst, 3*step) = project(select(src, Part64x8.Part3), selected);
+            block64u(dst, 4*step) = project(select(src, Part64x8.Part4), selected);
+            block64u(dst, 5*step) = project(select(src, Part64x8.Part5), selected);
+            block64u(dst, 6*step) = project(select(src, Part64x8.Part6), selected);
+            block64u(dst, 7*step) = project(select(src, Part64x8.Part7), selected);
         }
-
     }
-
-
 }

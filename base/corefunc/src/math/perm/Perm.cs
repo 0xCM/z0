@@ -17,51 +17,6 @@ namespace Z0
     /// </summary>
     public struct Perm
     {
-        /// <summary>
-        /// Constructs a permutation of length four from four symbols
-        /// </summary>
-        /// <param name="s0">The symbol in the first position</param>
-        /// <param name="s1">The symbol in the second position</param>
-        /// <param name="s2">The symbol in the third position</param>
-        /// <param name="s3">The symbol in the fourth position</param>
-        [MethodImpl(Inline)]
-        public static Perm4 Assemble(Perm4 s0, Perm4 s1, Perm4 s2, Perm4 s3)
-        {               
-            var dst = 0u;
-            dst |= (uint)s0;
-            dst |= (uint)s1 << 2;
-            dst |= (uint)s2 << 4;
-            dst |= (uint)s3 << 6;
-            return (Perm4)dst;
-        }
-
-        /// <summary>
-        /// Formats the terms of a permutation
-        /// </summary>
-        /// <param name="terms">The permutation terms</param>
-        /// <param name="colwidth">The width of each column</param>
-        /// <typeparam name="T">The term type</typeparam>
-        internal static string Format<T>(ReadOnlySpan<T> terms,  int? colwidth = null)
-        {
-            var line1 = sbuild();
-            var line2 = sbuild();
-            var pad = colwidth ?? 3;
-            var leftBoundary = $"{AsciSym.Pipe}".PadRight(2);
-            var rightBoundary = $"{AsciSym.Pipe}";
-            
-            line1.Append(leftBoundary);
-            line2.Append(leftBoundary);
-            for(var i=0; i < terms.Length; i++)
-            {
-                line1.Append($"{i}".PadRight(pad));
-                line2.Append($"{terms[i]}".PadRight(pad));
-            }
-            line1.Append(rightBoundary);
-            line2.Append(rightBoundary);
-            
-            return line1.ToString() + eol() + line2.ToString();
-        }
-
 
         /// <summary>
         /// Defines the permutation (0 -> terms[0], 1 -> terms[1], ..., n - 1 -> terms[n-1])
@@ -400,7 +355,7 @@ namespace Z0
         /// <param name="colwidth">The width of the matrix columns, if specified</param>
         [MethodImpl(Inline)]
         public string Format(int? colwidth = null)        
-            => Terms.FormatPerm(colwidth);
+            => Terms.FormatAsPerm(colwidth);
 
         public override int GetHashCode()
             => terms.GetHashCode();
