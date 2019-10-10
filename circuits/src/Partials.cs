@@ -18,6 +18,15 @@ namespace Z0
 
     }
 
+    public static partial class Bitwise
+    {
+
+    }
+
+    public static partial class BitLogic
+    {
+
+    }
 
     public static class Circuits
     {

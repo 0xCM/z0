@@ -325,7 +325,6 @@ namespace Z0
             return ref dst;
         }
 
-
         /// <summary>
         /// Zero-extends packed unsigned 32-bit integers in the source vector to packed 64-bit integers in the target vector 
         /// </summary>
@@ -335,6 +334,19 @@ namespace Z0
         public static ref Vec256<long> convert(in Vec128<uint> src, out Vec256<long> dst)
         {
             dst = ConvertToVector256Int64(src);
+            return ref dst;
+        }
+
+        /// <summary>
+        /// Zero-extends packed unsigned 32-bit integers in the source vector 
+        /// to packed unsigned 64-bit integers in the target vector 
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="dst">The target vector</param>
+        [MethodImpl(Inline)]
+        public static ref Vec256<ulong> convert(in Vec128<uint> src, out Vec256<ulong> dst)
+        {
+            dst = ConvertToVector256Int64(src).AsUInt64();
             return ref dst;
         }
 

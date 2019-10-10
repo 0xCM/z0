@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TopDir>$(MSBuildThisFileDirectory)</TopDir>
-    
+    <PlatformTarget>x64</PlatformTarget>    
     <BuildRootDir>$(TopDir)bin\</BuildRootDir>
     <LibBuildDir>$(BuildRootDir)lib\</LibBuildDir>
     <OutputDir>$(LibBuildDir)</OutputDir>

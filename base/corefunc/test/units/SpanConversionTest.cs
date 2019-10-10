@@ -20,7 +20,7 @@ namespace Z0.Test
         void VerifySpanBytesToValues<T>(Span<byte> src, Span<T> expect)
             where T : unmanaged
         {
-            Claim.eq(expect, ByteSpan.ReadValues<T>(src));
+            Claim.eq(expect, ByteSpan.Cast<T>(src));
         }
 
         void VerifyBytesToValues<T>()

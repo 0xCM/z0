@@ -122,7 +122,6 @@ namespace Z0
         public static implicit operator ushort(BitVector16 src)
             => src.data;        
 
-
         [MethodImpl(Inline)]
         public static implicit operator BitVector32(BitVector16 src)
             => src.ToBitVector32();

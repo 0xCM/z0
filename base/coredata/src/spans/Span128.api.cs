@@ -17,6 +17,16 @@ namespace Z0
     public static class Span128
     {
         /// <summary>
+        /// Reimagines a 128-bit bloocked span of generic values as a span of bytes
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <typeparam name="T">The source value type</typeparam>
+        [MethodImpl(Inline)]
+        public static Span128<byte> AsBytes<T>(Span128<T> src)
+            where T : unmanaged
+                => Span128.Load(MemoryMarshal.AsBytes(src.Unblock()));
+
+        /// <summary>
         /// Allocates a span to hold a specified number of blocks
         /// </summary>
         /// <param name="blocks">The number of blocks for which memory should be alocated</param>

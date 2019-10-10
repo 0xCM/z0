@@ -49,7 +49,7 @@ namespace Z0
             where T : unmanaged
         {
             VerifyIndex<T>(offset* Unsafe.SizeOf<T>() + length* Unsafe.SizeOf<T>());
-            return ByteSpan.ReadValues<T>(Bytes, offset,length);            
+            return ByteSpan.Cast<T>(Bytes, offset,length);            
         }
                      
         /// <summary>

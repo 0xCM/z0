@@ -133,19 +133,18 @@ namespace Z0
         public static Vec128<ulong> vsll(in Vec128<ulong> src, byte offset)
             => ShiftLeftLogical(src.xmm, offset);
     
-
         public static Vec256<byte> vsll(in Vec256<byte> src, byte offset)
         {
             //Fan the hi/lo parts of the u8 source vector across 2 u16 vectors
-            ref var srcX = ref convert(dinx.lo(src), out Vec256<ushort> _);
-            ref var srcY = ref convert(dinx.hi(src), out Vec256<ushort> _);
+            var srcX = convert(dinx.lo(src), out Vec256<ushort> _);
+            var srcY = convert(dinx.hi(src), out Vec256<ushort> _);
             
             //Shift each part with a concrete intrinsic anc convert back to bytes
             var dstA = dinx.vsll(srcX, offset).As<byte>();
             var dstB = dinx.vsll(srcY, offset).As<byte>();
 
             // Truncate overflows to sets up the component pattern [X 0 X 0 ... X 0] in each vector
-            ref readonly var trm = ref Vec256Pattern.ClearAlt<byte>();
+            var trm =  Vec256Pattern.ClearAlt<byte>();
             var trA = dinx.shuffle(in dstA, trm);
             var trB = dinx.shuffle(in dstB, trm);
                         
@@ -153,13 +152,12 @@ namespace Z0
             // back into a single vector. The strategey is to condense
             // each vector via the "lane merge" pattern and construct
             // the result vector via insertion of these condensed vectors
-            ref readonly var permSpec = ref Vec256Pattern.LaneMerge<byte>();
+            var permSpec = Vec256Pattern.LaneMerge<byte>();
             var permA = dinx.vperm32x8(trA, permSpec);
             var permB = dinx.vperm32x8(trB, permSpec);
             var result = default(Vec256<byte>);
-            dinx.insert(dinx.lo(in permA), dinx.lo(in permB), ref result);            
+            return dinx.insert(dinx.lo(in permA), dinx.lo(in permB), ref result);            
             
-            return result;            
         }
 
         /// <summary>

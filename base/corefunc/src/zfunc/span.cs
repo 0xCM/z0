@@ -42,37 +42,6 @@ partial class zfunc
     public static ref ulong block64u(Span<uint> src, int offset)
         => ref MemoryMarshal.Cast<uint,ulong>(src.Slice(offset, 2))[0];
 
-    /// <summary>
-    /// Interprets 4 elements of a bytespan as an unsigned 32-bit integer
-    /// </summary>
-    /// <param name="src">The source span</param>
-    /// <param name="offset">The offset at which the first byte begins</param>
-    [MethodImpl(Inline)]
-    public static ref uint block34u(Span<byte> src, int offset)
-        => ref MemoryMarshal.Cast<byte,uint>(src.Slice(offset, 4))[0];
-
-    /// <summary>
-    /// Interprets 2 elements of a span of unsigned 16-bit integers as an unsigned 32-bit integer
-    /// </summary>
-    /// <param name="src">The source span</param>
-    /// <param name="offset">The offset at which the first byte begins</param>
-    [MethodImpl(Inline)]
-    public static ref uint block34u(Span<short> src, int offset)
-        => ref MemoryMarshal.Cast<short,uint>(src.Slice(offset, 2))[0];
-
-    /// <summary>
-    /// Interprets 2 elements of a bytespan as an unsigned 16-bit integer
-    /// </summary>
-    /// <param name="src">The source span</param>
-    /// <param name="offset">The offset at which the first byte begins</param>
-    [MethodImpl(Inline)]
-    public static ref ushort block16u(Span<byte> src, int offset)
-        => ref MemoryMarshal.Cast<byte,ushort>(src.Slice(offset, 2))[0];
-
-    [MethodImpl(Inline)]
-    public static ref byte head8u(Span<ulong> src, int index)
-        => ref MemoryMarshal.AsBytes(src)[index];
-
     [MethodImpl(Inline)]
     public static unsafe void memcpy<S,T>(ref S src, ref T dst, ByteSize srclen)
         =>  Unsafe.CopyBlock(Unsafe.AsPointer(ref dst), Unsafe.AsPointer(ref src), srclen);
@@ -263,7 +232,7 @@ partial class zfunc
     [MethodImpl(Inline)]
     public static Span<byte> bytes<T>(T src)
         where T : unmanaged
-            => MemoryMarshal.AsBytes(span(src));
+            =>  MemoryMarshal.AsBytes(span(src));
 
     /// <summary>
     /// Constructs a span from a sequence selection
@@ -275,41 +244,6 @@ partial class zfunc
     [MethodImpl(Inline)]
     public static Span<T> span<T>(IEnumerable<T> src, int? offset = null, int? length = null)
         => span(length == null ? src.Skip(offset ?? 0) : src.Skip(offset ?? 0).Take(length.Value));
-
-    /// <summary>
-    /// Reconstitutes a value from a bytespan
-    /// </summary>
-    /// <param name="src">The source span</param>
-    /// <typeparam name="T">The value type</typeparam>
-    [MethodImpl(Inline)]
-    public static T read<T>(ReadOnlySpan<byte> src)
-        where T : unmanaged
-            =>  MemoryMarshal.Read<T>(src);
-
-    /// <summary>
-    /// Reconstitutes a value from a bytespan
-    /// </summary>
-    /// <param name="src">The source span</param>
-    /// <param name="dst">A reference to the target value</param>
-    /// <typeparam name="T">The value type</typeparam>
-    [MethodImpl(Inline)]
-    public static ref T read<T>(ReadOnlySpan<byte> src, out T dst)
-        where T : unmanaged
-    {
-        dst = read<T>(src);
-        return ref dst;
-    }
-            
-    /// <summary>
-    /// Serializes a value into a bytespan
-    /// </summary>
-    /// <param name="src">A reference to the source value</param>
-    /// <param name="dst">The client-allocated destination span</param>
-    /// <typeparam name="T"></typeparam>
-    [MethodImpl(Inline)]
-    public static void write<T>(ref T src, Span<byte> dst)
-        where T : unmanaged
-            => MemoryMarshal.Write(dst, ref src);
 
     /// <summary>
     /// Returns a reference to the location of the first span element
@@ -509,8 +443,6 @@ partial class zfunc
             where T : unmanaged
             where S : unmanaged
                 => lhs.Length == rhs.Length ? lhs.Length : throw Errors.LengthMismatch(lhs.Length, rhs.Length, caller, file, line);
-
-
 
     /// <summary>
     /// Returns the common length of the operands if they are the same; otherwise, raises an error

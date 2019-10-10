@@ -22,7 +22,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="offset">The magnitude of the rotation</param>
         [MethodImpl(Inline)]
-        public static Vec128<T> rotl<T>(in Vec128<T> src, byte offset)
+        public static Vec128<T> vrotl<T>(in Vec128<T> src, byte offset)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -43,7 +43,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="offset">The magnitude of the rotation</param>
         [MethodImpl(Inline)]
-        public static Vec256<T> rotl<T>(in Vec256<T> src, byte offset)
+        public static Vec256<T> vrotl<T>(in Vec256<T> src, byte offset)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))

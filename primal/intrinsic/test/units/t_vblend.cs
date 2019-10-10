@@ -12,11 +12,30 @@ namespace Z0
 
     public class t_vblend : IntrinsicTest<t_vblend>
     {
+
+        public void vblend_128x16u_check()
+        {
+            var x = v128(0,2,4,6,8,10,12,14); 
+            var y = v128(1,3,5,7,9,11,13,15); 
+            
+            var z = dinx.vblend(x,y, Blend16x8.LLLLLLLL);
+            Claim.eq(x,z);          
+
+            z = dinx.vblend(x,y, Blend16x8.RRRRRRRR);
+            Claim.eq(z,y);
+
+            z = dinx.vblend(x,y, Blend16x8.LLLLRRRR);
+            Claim.eq(v128(0,2,4,6,9,11,13,15),z);
+
+            z = dinx.vblend(x,y, Blend16x8.RRRRLLLL);
+            Claim.eq(v128(1,3,5,7,8,10,12,14),z);
+
+        }
         public void vblend_128x32u_check()
         {
 
-            var x = Vec128.FromParts(1u,3,5,7);
-            var y = Vec128.FromParts(2u,4,6,8);
+            var x = v128(1u,3,5,7);
+            var y = v128(2u,4,6,8);
 
             var spec = Blend32x4.LLLL;
             var z = dinx.vblend(x,y, spec);
@@ -24,19 +43,19 @@ namespace Z0
 
             spec = Blend32x4.LLLR;
             z = dinx.vblend(x,y, spec);
-            Claim.eq(z, Vec128.FromParts(1u,3,5,8));
+            Claim.eq(z, v128(1u,3,5,8));
 
             spec = Blend32x4.LLRL;
             z = dinx.vblend(x,y, spec);
-            Claim.eq(z, Vec128.FromParts(1u,3,6,7));
+            Claim.eq(z, v128(1u,3,6,7));
 
             spec = Blend32x4.LLRR;
             z = dinx.vblend(x,y, spec);
-            Claim.eq(z, Vec128.FromParts(1u,3,6,8));
+            Claim.eq(z, v128(1u,3,6,8));
 
             spec = Blend32x4.RLLL;
             z = dinx.vblend(x,y, spec);
-            Claim.eq(z, Vec128.FromParts(2u,3,5,7));
+            Claim.eq(z, v128(2u,3,5,7));
 
 
             spec = Blend32x4.RRRR;

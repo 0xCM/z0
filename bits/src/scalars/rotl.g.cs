@@ -35,6 +35,22 @@ namespace Z0
                 throw unsupported<T>();
         }           
 
+        [MethodImpl(Inline)]
+        public static T rotl<T>(T src, uint offset)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(byte))
+                return generic<T>(Bits.rotl(uint8(src), uint8(offset)));
+            else if(typeof(T) == typeof(ushort))
+                return generic<T>(Bits.rotl(uint16(src), uint16(offset)));
+            else if(typeof(T) == typeof(uint))
+                return generic<T>(Bits.rotl(uint32(src), uint32(offset)));
+            else if(typeof(T) == typeof(ulong))
+                return generic<T>(Bits.rotl(uint64(src), uint64(offset)));
+            else            
+                throw unsupported<T>();
+        }           
+
         /// <summary>
         /// Rotates bits in the source leftwards by a specified offset
         /// </summary>

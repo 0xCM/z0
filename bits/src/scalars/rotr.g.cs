@@ -42,6 +42,28 @@ namespace Z0
         /// <param name="offset">The magnitude of the rotation</param>
         /// <typeparam name="T">The source type</typeparam>
         [MethodImpl(Inline)]
+        public static T rotr<T>(T src, uint offset)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(byte))
+                return generic<T>(Bits.rotr(uint8(src), uint8(offset)));
+            else if(typeof(T) == typeof(ushort))
+                return generic<T>(Bits.rotr(uint16(src), uint16(offset)));
+            else if(typeof(T) == typeof(uint))
+                return generic<T>(Bits.rotr(uint32(src), uint32(offset)));
+            else if(typeof(T) == typeof(ulong))
+                return generic<T>(Bits.rotr(uint64(src), uint64(offset)));
+            else            
+                throw unsupported<T>();
+        }           
+
+        /// <summary>
+        /// Rotates bits in the source rightwards by a specified offset
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <param name="offset">The magnitude of the rotation</param>
+        /// <typeparam name="T">The source type</typeparam>
+        [MethodImpl(Inline)]
         public static ref T rotr<T>(ref T src, in T offset)
             where T : unmanaged
         {

@@ -14,7 +14,6 @@ namespace Z0
 
     partial class RngX
     {
-
         /// <summary>
         /// Produces a stream of values sampled from an enum
         /// </summary>

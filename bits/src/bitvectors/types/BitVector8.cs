@@ -104,7 +104,6 @@ namespace Z0
             }
         }
 
-
         /// <summary>
         /// Enumerates each and every nonmpty 8-bit bitvector exactly once
         /// </summary>

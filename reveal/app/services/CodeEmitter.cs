@@ -15,11 +15,40 @@ namespace Z0
 
     public static class CodeEmitter
     {
-        public static void EmitAsm(this MethodDisassembly disassembly, FilePath dst)        
+
+        /// <summary>
+        /// Writes asm code to a file
+        /// </summary>
+        /// <param name="src">The assembly source</param>
+        /// <param name="dst">The target path</param>
+        /// <param name="append">Wheter to append content to an existing file or overwrite an existing file</param>
+        public static void EmitAsm(this AsmFuncInfo src, FilePath dst, bool append = false)
         {
-            using var writer = EmissionWriter(dst);
-            var asm = disassembly.DistillAsm();
-            writer.Write(asm.Format());
+            using var writer = EmissionWriter(dst, append);
+            if(append)
+                writer.WriteLine(AsmSeparator);
+            
+            writer.WriteLine($"; {now().ToLexicalString()}");
+            writer.Write(src.Format());
+        }
+
+        public static void EmitAsm(this MethodDisassembly disassembly, FilePath dst, bool append = false)        
+            => disassembly.DistillAsm().EmitAsm(dst,append);
+
+        /// <summary>
+        /// Writes each disasesembled method to file derived from the name of the method
+        /// </summary>
+        /// <param name="disassembly">Disassembled methods to emit</param>
+        /// <param name="dst">The target folder</param>
+        /// <param name="append">Whether existing files should be appended or replaced</param>
+        public static void EmitAsmFiles(this IEnumerable<MethodDisassembly> disassembly, FolderPath dst, bool append = false)
+        {
+            foreach(var asm in disassembly.DistillAsm())
+            {
+                var filename = FileName.Define(asm.FunctionName, "asm");
+                asm.EmitAsm(dst + filename,append);
+            }
+
         }
 
         public static void EmitAsm(this IEnumerable<MethodDisassembly> disassembly, FilePath dst)        
@@ -79,12 +108,13 @@ namespace Z0
         public static void EmitCil(this IEnumerable<MethodInfo> methods, FilePath name)
             => Deconstructor.Deconstruct(methods).EmitCil(name);
 
+
         static readonly string AsmSeparator = new string('-', 160);
 
-        static StreamWriter EmissionWriter(FilePath dst)   
+        static StreamWriter EmissionWriter(FilePath dst, bool append = false)   
         {
             dst.FolderPath.CreateIfMissing();
-            return new StreamWriter(dst.FullPath, false);
+            return new StreamWriter(dst.FullPath, append);
         }
 
         static void Emit(this AsmFuncInfo[] src, StreamWriter dst)
@@ -98,6 +128,7 @@ namespace Z0
                     dst.WriteLine(AsmSeparator);
             }
         }
+
 
         static void EmitCil(this IEnumerable<MethodDisassembly> disassembly, StreamWriter dst)
         {
