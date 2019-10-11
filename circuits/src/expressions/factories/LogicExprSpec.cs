@@ -244,6 +244,26 @@ namespace Z0
                 => BitLogicSeq.FromBits(length,terms);
 
         /// <summary>
+        /// Creates a varied expression predicated on a specified variable sequence
+        /// </summary>
+        /// <param name="subject">The variable-dependent expression</param>
+        /// <param name="variables">The variable sequence</param>
+        [MethodImpl(Inline)]
+        public static VariedExpr varied(ILogicExpr subject, params ILogicVarExpr[] variables)
+            => VariedExpr.Define(subject, variables);
+
+        /// <summary>
+        /// Creates a varied expression predicated on a specified variable sequence of natural length
+        /// </summary>
+        /// <param name="n">The natural length of the variable sequence</param>
+        /// <param name="subject">The variable-dependent expression</param>
+        /// <param name="variables">The variable sequence</param>
+        [MethodImpl(Inline)]
+        public static VariedExpr<N> varied<N>(N n, ILogicExpr subject, params ILogicVarExpr[] variables)
+            where N : ITypeNat, new()
+                => VariedExpr.Define(n,subject, variables);
+
+        /// <summary>
         /// Computes all bit sequence expressions of length 1
         /// </summary>
         /// <param name="n">The natural selector</param>

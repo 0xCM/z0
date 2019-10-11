@@ -213,6 +213,22 @@ namespace Z0
             return default;
         }
 
+        public static BitLitExpr<Vec256<T>> eval<T>(IBitExpr<Vec256<T>> expr)
+            where T : unmanaged
+        {
+            switch(expr)
+            {
+                case IBitLiteralExpr<Vec256<T>> x:
+                    return eval(x);
+                case IBitVarExpr<Vec256<T>> x:
+                    return eval(x);
+                case IBitOpExpr<Vec256<T>> x:
+                    return eval(x);
+            }
+
+            return default;
+        }
+
         public static BitLitExpr<Vec256<T>> eval<T>(IBitLiteralExpr<Vec256<T>> expr)
             where T : unmanaged
         {
@@ -227,7 +243,6 @@ namespace Z0
             else
                 return eval(expr.Value);
         }
-
 
         public static BitLitExpr<Vec256<T>> eval<T>(IBitOpExpr<Vec256<T>> expr)
             where T : unmanaged

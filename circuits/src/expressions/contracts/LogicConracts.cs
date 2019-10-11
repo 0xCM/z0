@@ -15,6 +15,7 @@ namespace Z0
 
     }
 
+
     public interface ILogicLiteralExpr : ILogicExpr, ILiteralExpr<Bit>
     {
 
@@ -34,6 +35,16 @@ namespace Z0
 
     }
 
+    public interface IVariedLogicExpr : ILogicExpr, IVariedExpr<ILogicExpr,ILogicVarExpr>
+    {
+
+    }
+
+    public interface IVariedLogicExpr<N> : ILogicExpr, IVariedExpr<N,ILogicExpr,ILogicVarExpr>
+        where N : ITypeNat, new()
+    {
+
+    }
 
     public interface IUnaryLogicExpr : ILogicOpExpr
     {
@@ -41,7 +52,6 @@ namespace Z0
         /// The operand
         /// </summary>
         ILogicExpr Operand {get;}
-
     }
 
 

@@ -328,6 +328,7 @@ namespace Z0
             where T : unmanaged
                 => new BitVarExpr<T>(name.ToString(), literal(value));
 
+        
     }       
 
 

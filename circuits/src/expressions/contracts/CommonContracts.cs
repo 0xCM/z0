@@ -15,6 +15,31 @@ namespace Z0
         ExprArity Arity {get;}
     }
 
+    public interface IVariedExpr : IExpr
+    {
+
+    }
+
+    public interface IVariedExpr<E,V> : IVariedExpr
+        where E : IExpr
+        where V : IVariableExpr
+    {
+
+        E BaseExpr {get;}        
+
+        V[] Vars {get;}        
+
+        void SetVarValues(params E[] values);        
+    }
+
+    public interface IVariedExpr<N,E,V> : IVariedExpr<E,V>
+        where E : IExpr
+        where V : IVariableExpr
+        where N : ITypeNat, new()
+    {
+        
+    }
+
     public interface IExpr<T> : IExpr
         where T : unmanaged
     {
