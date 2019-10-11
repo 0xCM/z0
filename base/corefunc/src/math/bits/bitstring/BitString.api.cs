@@ -135,20 +135,20 @@ namespace Z0
             => new BitString(src);
 
         /// <summary>
+        /// Constructs a bitstring from a parameter array of bits, ordered lo -> hi
+        /// </summary>
+        /// <param name="src">The bit source</param>
+        [MethodImpl(Inline)]
+        public static BitString FromBits(Bit[] src)                
+            => new BitString(src);
+
+        /// <summary>
         /// Constructs a bitstring from a parameter array of bits, ordered hi -> lo
         /// </summary>
         /// <param name="src">The bit source</param>
         [MethodImpl(Inline)]
         public static BitString FromHiToLo(params Bit[] src)                
             => new BitString(src.Reverse());
-
-        /// <summary>
-        /// Constructs a bitstring bitstream
-        /// </summary>
-        /// <param name="src">The bit source</param>
-        [MethodImpl(Inline)]
-        public static BitString FromBits(IEnumerable<Bit> src)                
-            => new BitString(src.ToArray());
 
         /// <summary>
         /// Assembles a bistring given parts ordered from lo to hi

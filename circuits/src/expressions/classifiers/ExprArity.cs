@@ -6,23 +6,22 @@ namespace Z0
 {
     using System;
     using System.Linq;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     
     using static zfunc;
 
-    partial class Bitwise
+    public enum ExprArity
     {
+        Literal = 0,
 
-        readonly struct RangeExprEval<T> : IExprEval<T,RangeExpr<T>>
-            where T : unmanaged
-        {
-            public static RangeExprEval<T> TheOnly = new RangeExprEval<T>();
+        Unary = 1,
 
-            public IEnumerable<T> Eval(RangeExpr<T> expr)
-                => range(expr.Min, expr.Max);
-        }
+        Binary = 2,
 
+        Ternary = 3,
+
+        Sequence = 4
     }
+
 
 }

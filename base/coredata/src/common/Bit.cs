@@ -9,8 +9,10 @@ namespace Z0
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
-    
+    using System.Linq;
+
     using static zfunc;
+
 
     /// <summary>
     /// Defines the value of a bit
@@ -30,6 +32,11 @@ namespace Z0
         public const char Zero = '0';
 
         public const char One = '1';
+
+        /// <summary>
+        /// The values in the type's domain
+        /// </summary>
+        public static readonly Bit[] B01 = new Bit[2]{Bit.Off,Bit.On};
 
         [MethodImpl(Inline)]
         public static char And(char lhs, char rhs)

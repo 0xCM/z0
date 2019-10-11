@@ -10,8 +10,18 @@ namespace Z0
     
     using static zfunc;
 
-    partial class Bitwise
+    public static class BitExprSpec
     {
+        /// <summary>
+        /// Creates a bit literal expression
+        /// </summary>
+        /// <param name="value">The literal value</param>
+        /// <typeparam name="T">The literal type</typeparam>
+        [MethodImpl(Inline)]
+        public static BitLitExpr<T> literal<T>(T value)
+            where T : unmanaged
+                => new BitLitExpr<T>(value);
+
         /// <summary>
         /// Creates a bitwise unary expression
         /// </summary>
@@ -19,7 +29,7 @@ namespace Z0
         /// <param name="operand">The operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static UnaryBitsExpr<T> unaryxpr<T>(BitOpKind op, IBitwiseExpr<T> operand)
+        public static UnaryBitsExpr<T> unary<T>(BitOpKind op, IBitExpr<T> operand)
             where T : unmanaged
                 => new UnaryBitsExpr<T>(op,operand);
 
@@ -31,7 +41,7 @@ namespace Z0
         /// <param name="right">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static BinaryBitsExpr<T> binaryxpr<T>(BitOpKind op, IBitwiseExpr<T> left, IBitwiseExpr<T> right)
+        public static BinaryBitsExpr<T> binary<T>(BitOpKind op, IBitExpr<T> left, IBitExpr<T> right)
             where T : unmanaged
                 => new BinaryBitsExpr<T>(op,left,right);
 
@@ -43,9 +53,9 @@ namespace Z0
         /// <param name="b">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static TernaryExpr<T> ternaryxpr<T>(BitOpKind op, IBitwiseExpr<T> a, IBitwiseExpr<T> b, IBitwiseExpr<T> c)
+        public static TernaryBitsExpr<T> ternary<T>(BitOpKind op, IBitExpr<T> a, IBitExpr<T> b, IBitExpr<T> c)
             where T : unmanaged
-                => new TernaryExpr<T>(op,a,b,c);
+                => new TernaryBitsExpr<T>(op,a,b,c);
 
         /// <summary>
         /// Creates a mixed bitwise expression
@@ -55,55 +65,34 @@ namespace Z0
         /// <param name="right">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static MixedBitsExpr<T> mixedxpr<T>(BitOpKind op, IBitwiseExpr<T> left, uint right)
+        public static MixedBitsExpr<T> mixed<T>(BitOpKind op, IBitExpr<T> left, uint right)
             where T : unmanaged
-                => new MixedBitsExpr<T>(op,left,right);
+                => new MixedBitsExpr<T>(op,left, literal(right));
 
         /// <summary>
-        /// Creates a literal expression
-        /// </summary>
-        /// <param name="value">The literal value</param>
-        /// <typeparam name="T">The literal type</typeparam>
-        [MethodImpl(Inline)]
-        public static LiteralExpr<T> literal<T>(T value)
-            where T : unmanaged
-                => new LiteralExpr<T>(value);
-
-        /// <summary>
-        /// Defines a binary logic expression
+        /// Creates a mixed bitwise expression
         /// </summary>
         /// <param name="op">The operator classifier</param>
         /// <param name="left">The left operand</param>
         /// <param name="right">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static BinaryLogicExpr<T> logicxpr<T>(LogicOpKind op, IBitwiseExpr<T> left, IBitwiseExpr<T> right)
+        public static MixedBitsExpr<T> mixed<T>(BitOpKind op, IBitExpr<T> left, IBitExpr<uint> right)
             where T : unmanaged
-                => new BinaryLogicExpr<T>(op,left,right);
+                => new MixedBitsExpr<T>(op,left,right);
 
         /// <summary>
-        /// Defines a unary logic expression
-        /// </summary>
-        /// <param name="op">The operator classifier</param>
-        /// <param name="operand">The operand</param>
-        /// <typeparam name="T">The operand type</typeparam>
-        [MethodImpl(Inline)]
-        public static UnaryLogicExpr<T> logicxpr<T>(LogicOpKind op, IBitwiseExpr<T> operand)
-            where T : unmanaged
-                => new UnaryLogicExpr<T>(op,operand);
-
-        /// <summary>
-        /// Defines a btwise flip expression
+        /// Defines a a bitwise complement expression
         /// </summary>
         /// <param name="operand">The expression operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static UnaryBitsExpr<T> not<T>(IBitwiseExpr<T> operand)
+        public static UnaryBitsExpr<T> not<T>(IBitExpr<T> operand)
             where T : unmanaged
-                => unaryxpr(BitOpKind.Not, operand);
+                => unary(BitOpKind.Not, operand);
 
         /// <summary>
-        /// Defines a btwise flip expression with a literal operand
+        /// Defines a a bitwise complement expression with a literal operand
         /// </summary>
         /// <param name="operand">The expression operand</param>
         /// <typeparam name="T">The operand type</typeparam>
@@ -118,9 +107,9 @@ namespace Z0
         /// <param name="operand">The expression operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static UnaryBitsExpr<T> negate<T>(IBitwiseExpr<T> operand)
+        public static UnaryBitsExpr<T> negate<T>(IBitExpr<T> operand)
             where T : unmanaged
-                => unaryxpr(BitOpKind.Negate, operand);
+                => unary(BitOpKind.Negate, operand);
 
         /// <summary>
         /// Defines a btwise negation expression with a literal operand
@@ -139,9 +128,9 @@ namespace Z0
         /// <param name="rhs">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static BinaryBitsExpr<T> and<T>(IBitwiseExpr<T> lhs, IBitwiseExpr<T> rhs)
+        public static BinaryBitsExpr<T> and<T>(IBitExpr<T> lhs, IBitExpr<T> rhs)
             where T : unmanaged
-                => binaryxpr(BitOpKind.And, lhs,rhs);
+                => binary(BitOpKind.And, lhs,rhs);
 
         /// <summary>
         /// Defines a bitwise and expression with literal operands
@@ -161,9 +150,9 @@ namespace Z0
         /// <param name="rhs">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static BinaryBitsExpr<T> or<T>(IBitwiseExpr<T> lhs, IBitwiseExpr<T> rhs)
+        public static BinaryBitsExpr<T> or<T>(IBitExpr<T> lhs, IBitExpr<T> rhs)
             where T : unmanaged
-                => binaryxpr(BitOpKind.Or, lhs,rhs);
+                => binary(BitOpKind.Or, lhs,rhs);
 
         /// <summary>
         /// Defines a bitwise or expression with literal operands
@@ -183,9 +172,9 @@ namespace Z0
         /// <param name="rhs">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static BinaryBitsExpr<T> xor<T>(IBitwiseExpr<T> lhs, IBitwiseExpr<T> rhs)
+        public static BinaryBitsExpr<T> xor<T>(IBitExpr<T> lhs, IBitExpr<T> rhs)
             where T : unmanaged
-                => binaryxpr(BitOpKind.XOr, lhs,rhs);
+                => binary(BitOpKind.XOr, lhs,rhs);
 
         /// <summary>
         /// Defines a bitwise xor expression with literal operands
@@ -205,9 +194,9 @@ namespace Z0
         /// <param name="rhs">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static MixedBitsExpr<T> sll<T>(IBitwiseExpr<T> lhs, uint rhs)
+        public static MixedBitsExpr<T> sll<T>(IBitExpr<T> lhs, uint rhs)
             where T : unmanaged
-                => mixedxpr(BitOpKind.Sll, lhs, rhs);
+                => mixed(BitOpKind.Sll, lhs, rhs);
 
         /// <summary>
         /// Defines a bitwise sll expression with literal operands
@@ -227,9 +216,9 @@ namespace Z0
         /// <param name="rhs">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static MixedBitsExpr<T> srl<T>(IBitwiseExpr<T> lhs, uint rhs)
+        public static MixedBitsExpr<T> srl<T>(IBitExpr<T> lhs, uint rhs)
             where T : unmanaged
-                => mixedxpr(BitOpKind.Srl, lhs, rhs);
+                => mixed(BitOpKind.Srl, lhs, rhs);
 
         /// <summary>
         /// Defines a bitwise srl expression with literal operands
@@ -241,7 +230,7 @@ namespace Z0
         public static MixedBitsExpr<T> srl<T>(T lhs, uint rhs)
             where T : unmanaged
                 => srl(literal(lhs), rhs);
- 
+
         /// <summary>
         /// Defines a bitwise rotl expression
         /// </summary>
@@ -249,9 +238,9 @@ namespace Z0
         /// <param name="rhs">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static MixedBitsExpr<T> rotl<T>(IBitwiseExpr<T> lhs, uint rhs)
+        public static MixedBitsExpr<T> rotl<T>(IBitExpr<T> lhs, uint rhs)
             where T : unmanaged
-                => mixedxpr(BitOpKind.Rotl, lhs, rhs);
+                => mixed(BitOpKind.Rotl, lhs, rhs);
 
         /// <summary>
         /// Defines a bitwise rotl expression with literal operands
@@ -271,9 +260,9 @@ namespace Z0
         /// <param name="rhs">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static MixedBitsExpr<T> rotr<T>(IBitwiseExpr<T> lhs, uint rhs)
+        public static MixedBitsExpr<T> rotr<T>(IBitExpr<T> lhs, uint rhs)
             where T : unmanaged
-                => mixedxpr(BitOpKind.Rotr, lhs, rhs);
+                => mixed(BitOpKind.Rotr, lhs, rhs);
 
         /// <summary>
         /// Defines a bitwise rotr expression with literal operands
@@ -286,86 +275,6 @@ namespace Z0
             where T : unmanaged
                 => rotr(literal(lhs), rhs);
 
-        /// <summary>
-        /// Defines a bitwise equality comparison expression
-        /// </summary>
-        /// <param name="lhs">The left operand</param>
-        /// <param name="rhs">The right operand</param>
-        /// <typeparam name="T">The operand type</typeparam>
-        [MethodImpl(Inline)]
-        public static BinaryLogicExpr<T> eq<T>(IBitwiseExpr<T> lhs, IBitwiseExpr<T> rhs)
-            where T : unmanaged
-                =>  logicxpr(LogicOpKind.Eq, lhs, rhs);
-
-        /// <summary>
-        /// Defines a bitwise equality comparison expression with literal operands
-        /// </summary>
-        /// <param name="lhs">The left operand</param>
-        /// <param name="rhs">The right operand</param>
-        /// <typeparam name="T">The operand type</typeparam>
-        [MethodImpl(Inline)]
-        public static BinaryLogicExpr<T> eq<T>(T lhs, T rhs)
-            where T : unmanaged
-                =>  eq(literal(lhs), literal(rhs));
-
-        /// <summary>
-        /// Defines a bitwise non-equality comparison expression
-        /// </summary>
-        /// <param name="lhs">The left operand</param>
-        /// <param name="rhs">The right operand</param>
-        /// <typeparam name="T">The operand type</typeparam>
-        [MethodImpl(Inline)]
-        public static BinaryLogicExpr<T> neq<T>(IBitwiseExpr<T> lhs, IBitwiseExpr<T> rhs)
-            where T : unmanaged
-                =>  logicxpr(LogicOpKind.NEq, lhs, rhs);
-
-
-        /// <summary>
-        /// Defines a bitwise non-equality comparison expression with literal operands
-        /// </summary>
-        /// <param name="lhs">The left operand</param>
-        /// <param name="rhs">The right operand</param>
-        /// <typeparam name="T">The operand type</typeparam>
-        [MethodImpl(Inline)]
-        public static BinaryLogicExpr<T> neq<T>(T lhs, T rhs)
-            where T : unmanaged
-                =>  neq(literal(lhs), literal(rhs));
-
-        /// <summary>
-        /// Defines a test expression for a binary operator
-        /// </summary>
-        /// <param name="test">The logical operator to use for the test</param>
-        /// <param name="control">The control expression</param>
-        /// <param name="subject">The test subject</param>
-        /// <typeparam name="T">The operand type</typeparam>
-        [MethodImpl(Inline)]
-        public static BinaryTestExpr<T> testxpr<T>(LogicOpKind test, Expr<T> control, BinaryBitsExpr<T> subject)
-            where T : unmanaged
-                => new BinaryTestExpr<T>(test,control,subject);
-
-        /// <summary>
-        /// Defines a test expression for a unary operator
-        /// </summary>
-        /// <param name="test">The logical operator to use for the test</param>
-        /// <param name="control">The control expression</param>
-        /// <param name="subject">The test subject</param>
-        /// <typeparam name="T">The operand type</typeparam>
-        [MethodImpl(Inline)]
-        public static UnaryTestExpr<T> testxpr<T>(LogicOpKind test, Expr<T> control, UnaryBitsExpr<T> subject)
-            where T : unmanaged
-                => new UnaryTestExpr<T>(test,control,subject);
-
-        /// <summary>
-        /// Defines a test expression for a mixed operator
-        /// </summary>
-        /// <param name="test">The logical operator to use for the test</param>
-        /// <param name="control">The control expression</param>
-        /// <param name="subject">The test subject</param>
-        /// <typeparam name="T">The operand type</typeparam>
-        [MethodImpl(Inline)]
-        public static MixedTestExpr<T> testxpr<T>(LogicOpKind test, Expr<T> control, MixedBitsExpr<T> subject)
-            where T : unmanaged
-                => new MixedTestExpr<T>(test,control,subject);
         
         /// <summary>
         /// Defines a scalar range expression
@@ -377,11 +286,49 @@ namespace Z0
         public static RangeExpr<T> rangexpr<T>(T min, T max)
             where T : unmanaged
                 => new RangeExpr<T>(min,max);
-    
 
+        /// <summary>
+        /// Defines a variable expression
+        /// </summary>
+        /// <param name="value">The initial value of the variable</param>
+        /// <typeparam name="T">The variable type</typeparam>
+        [MethodImpl(Inline)]
+        public static BitVarExpr<T> bitvar<T>(string name, IBitExpr<T> value)
+            where T : unmanaged
+                => new BitVarExpr<T>(name, value);
 
+        /// <summary>
+        /// Defines a bit variable expression where the variable name is defined by an integer
+        /// </summary>
+        /// <param name="name">The variable's name</param>
+        /// <param name="init">The variable's initial value</param>
+        [MethodImpl(Inline)]
+        public static BitVarExpr<T> bitvar<T>(uint name, IBitExpr<T> init)
+            where T : unmanaged
+            => new BitVarExpr<T>(name.ToString(), init);
 
-        
-    }
+        /// <summary>
+        /// Defines a variable expression with an initial value specified by a literal
+        /// </summary>
+        /// <param name="value">The initial value of the variable</param>
+        /// <typeparam name="T">The variable type</typeparam>
+        [MethodImpl(Inline)]
+        public static BitVarExpr<T> bitvar<T>(string name, T value = default)
+            where T : unmanaged
+                => new BitVarExpr<T>(name, literal(value));
+
+        /// <summary>
+        /// Defines a variable expression where the variable name is defined by an integer and 
+        /// an initial value is specified by a literal
+        /// </summary>
+        /// <param name="value">The initial value of the variable</param>
+        /// <typeparam name="T">The variable type</typeparam>
+        [MethodImpl(Inline)]
+        public static BitVarExpr<T> bitvar<T>(uint name, T value = default)
+            where T : unmanaged
+                => new BitVarExpr<T>(name.ToString(), literal(value));
+
+    }       
+
 
 }
