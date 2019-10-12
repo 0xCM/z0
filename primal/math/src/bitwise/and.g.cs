@@ -28,12 +28,12 @@ namespace Z0
             || typeof(T) == typeof(ushort) 
             || typeof(T) == typeof(uint) 
             || typeof(T) == typeof(ulong))
-                return andu(lhs,rhs);
+                return and_u(lhs,rhs);
             else if(typeof(T) == typeof(sbyte) 
             || typeof(T) == typeof(short) 
             || typeof(T) == typeof(int) 
             || typeof(T) == typeof(long))
-                return andi(lhs,rhs);
+                return and_i(lhs,rhs);
             else return gfp.and(lhs,rhs);
         }
 
@@ -45,18 +45,18 @@ namespace Z0
             || typeof(T) == typeof(ushort) 
             || typeof(T) == typeof(uint) 
             || typeof(T) == typeof(ulong))
-                andu(ref lhs, rhs);
+                and_u(ref lhs, rhs);
             else if(typeof(T) == typeof(sbyte) 
             || typeof(T) == typeof(short) 
             || typeof(T) == typeof(int) 
             || typeof(T) == typeof(long))
-                andi(ref lhs, rhs);
+                and_i(ref lhs, rhs);
             else gfp.and(ref lhs,rhs);
             return ref lhs;
         }
 
         [MethodImpl(Inline)]
-        static T andi<T>(T lhs, T rhs)
+        static T and_i<T>(T lhs, T rhs)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
@@ -70,7 +70,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static T andu<T>(T lhs, T rhs)
+        static T and_u<T>(T lhs, T rhs)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -84,7 +84,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static ref T andi<T>(ref T lhs, T rhs)
+        static ref T and_i<T>(ref T lhs, T rhs)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
@@ -99,7 +99,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static ref T andu<T>(ref T lhs, T rhs)
+        static ref T and_u<T>(ref T lhs, T rhs)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -112,8 +112,5 @@ namespace Z0
                  math.and(ref uint64(ref lhs), uint64(rhs));
             return ref lhs;
         }
-
-
-
     }
 }

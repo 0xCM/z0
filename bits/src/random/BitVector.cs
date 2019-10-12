@@ -99,7 +99,7 @@ namespace Z0
         public static BitVector<N,T> BitVector<N,T>(this IPolyrand random, N len = default, T rep = default)
             where T : unmanaged
             where N : ITypeNat, new()
-                => BV.Load<N,T>(random.Stream<T>().TakeSpan(BV.CellCount<N,T>()));
+                => BV.Load<N,T>(random.Stream<T>().ToSpan(BV.CellCount<N,T>()));
 
         /// <summary>
         /// Produces a random generic bitvector of specified length
@@ -110,7 +110,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitVector<T> BitVector<T>(this IPolyrand random, BitSize len)
             where T : unmanaged
-                => BV.Load<T>(random.Stream<T>().TakeSpan(BV.CellCount<T>(len)), len);
+                => BV.Load<T>(random.Stream<T>().ToSpan(BV.CellCount<T>(len)), len);
 
         /// <summary>
         /// Produces a random generic bitvector of randomized length

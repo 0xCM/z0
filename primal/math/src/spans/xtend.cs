@@ -16,7 +16,6 @@ namespace Z0
     
     partial class MathX
     {
-
         public static byte Sum(this ReadOnlySpan<byte> src)
             => mathspan.sum(src);
 
@@ -88,7 +87,7 @@ namespace Z0
             => src.ReadOnly().Sum();
 
  
-         [MethodImpl(Inline)]
+        [MethodImpl(Inline)]
         public static sbyte Avg(this Span<sbyte> src)
             => mathspan.avg(src);
 

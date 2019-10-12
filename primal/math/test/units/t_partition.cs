@@ -39,7 +39,7 @@ namespace Z0
             var dst = src.StepwisePartitionPoints(1);
             var fmt = dst.Map(x => x.ToString()).Concat(", ");
             Claim.eq(src.Width() + 1, dst.Length);            
-            items(5,6,7,8,9,10,11,12).TakeSpan().ClaimEqual(dst);
+            items(5,6,7,8,9,10,11,12).ToSpan().ClaimEqual(dst);
         }
 
         public void part1()

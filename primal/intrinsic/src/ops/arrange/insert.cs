@@ -108,7 +108,8 @@ namespace Z0
             => Insert(dst.xmm, src, index);
 
         /// <summary>
-        /// _mm256_insertf128_si256: Overwrites a 128-bit lane in the target with the content of the source vector
+        ///  __m256i _mm256_inserti128_si256 (__m256i a, __m128i b, const int imm8) VINSERTI128 ymm, ymm, xmm, imm8
+        /// Overwrites a 128-bit lane in the target with the content of the source vector
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
@@ -119,20 +120,8 @@ namespace Z0
             => InsertVector128(dst.ymm, src.xmm, index);
 
         /// <summary>
-        /// Overwrites the target vector with two 128-bit source vectors
-        /// </summary>
-        /// <param name="lo">The vector that will be inserted into the lo 128-bit lane of the target</param>
-        /// <param name="hi">The vector that will be inserted into the hi 128-bit lane of the target</param>
-        /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
-        public static ref Vec256<sbyte> insert(in Vec128<sbyte> lo, in Vec128<sbyte> hi,  ref Vec256<sbyte> dst)        
-        {
-            dst = InsertVector128(InsertVector128(dst.ymm, lo.xmm, 0), hi.xmm, 1);
-            return ref dst;
-        }
-
-        /// <summary>
-        /// _mm256_insertf128_si256: Overwrites a 128-bit lane in the target with the content of the source vector
+        ///  __m256i _mm256_inserti128_si256 (__m256i a, __m128i b, const int imm8) VINSERTI128 ymm, ymm, xmm, imm8
+        /// Overwrites a 128-bit lane in the target with the content of the source vector
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
@@ -143,21 +132,8 @@ namespace Z0
             => InsertVector128(dst.ymm, src.xmm, index);
 
         /// <summary>
-        /// Overwrites the target vector with two 128-bit source vectors
-        /// </summary>
-        /// <param name="lo">The vector that will be inserted into the lo 128-bit lane of the target</param>
-        /// <param name="hi">The vector that will be inserted into the hi 128-bit lane of the target</param>
-        /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
-        public static ref Vec256<byte> insert(in Vec128<byte> lo, in Vec128<byte> hi, ref Vec256<byte> dst)        
-        {
-            dst = InsertVector128(InsertVector128(dst.ymm, lo.xmm, 0), hi.xmm, 1);
-            return ref dst;
-        }
-
-
-        /// <summary>
-        /// _mm256_insertf128_si256: Overwrites a 128-bit lane in the target with the content of the source vector
+        ///  __m256i _mm256_inserti128_si256 (__m256i a, __m128i b, const int imm8) VINSERTI128 ymm, ymm, xmm, imm8
+        /// Overwrites a 128-bit lane in the target with the content of the source vector
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
@@ -168,20 +144,8 @@ namespace Z0
             => InsertVector128(dst.ymm, src.xmm, index);
 
         /// <summary>
-        /// Overwrites the target vector with two 128-bit source vectors
-        /// </summary>
-        /// <param name="lo">The vector that will be inserted into the lo 128-bit lane of the target</param>
-        /// <param name="hi">The vector that will be inserted into the hi 128-bit lane of the target</param>
-        /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
-        public static ref Vec256<short> insert(in Vec128<short> lo, in Vec128<short> hi,  ref Vec256<short> dst)        
-        {
-            dst = InsertVector128(InsertVector128(dst.ymm, lo.xmm, 0), hi.xmm, 1);
-            return ref dst;
-        }
-
-        /// <summary>
-        /// _mm256_insertf128_si256: Overwrites a 128-bit lane in the target with the content of the source vector
+        ///  __m256i _mm256_inserti128_si256 (__m256i a, __m128i b, const int imm8) VINSERTI128 ymm, ymm, xmm, imm8
+        /// Overwrites a 128-bit lane in the target with the content of the source vector
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
@@ -192,7 +156,8 @@ namespace Z0
             => InsertVector128(dst.ymm, src.xmm, index);
 
         /// <summary>
-        /// _mm256_insertf128_si256: Overwrites a 128-bit lane in the target with the content of the source vector
+        ///  __m256i _mm256_inserti128_si256 (__m256i a, __m128i b, const int imm8) VINSERTI128 ymm, ymm, xmm, imm8
+        /// Overwrites a 128-bit lane in the target with the content of the source vector
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
@@ -203,7 +168,8 @@ namespace Z0
             => InsertVector128(dst.ymm, src.xmm, index);
 
         /// <summary>
-        /// _mm256_insertf128_si256: Overwrites a 128-bit lane in the target with the content of the source vector
+        ///  __m256i _mm256_inserti128_si256 (__m256i a, __m128i b, const int imm8) VINSERTI128 ymm, ymm, xmm, imm8
+        /// Overwrites a 128-bit lane in the target with the content of the source vector
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
@@ -214,7 +180,8 @@ namespace Z0
             => InsertVector128(dst.ymm, src.xmm, index);
 
         /// <summary>
-        /// _mm256_insertf128_si256: Overwrites a 128-bit lane in the target with the content of the source vector
+        ///  __m256i _mm256_inserti128_si256 (__m256i a, __m128i b, const int imm8) VINSERTI128 ymm, ymm, xmm, imm8
+        /// Overwrites a 128-bit lane in the target with the content of the source vector
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
@@ -225,7 +192,8 @@ namespace Z0
             => InsertVector128(dst.ymm, src.xmm, index);
 
         /// <summary>
-        /// _mm256_insertf128_si256: Overwrites a 128-bit lane in the target with the content of the source vector
+        ///  __m256i _mm256_inserti128_si256 (__m256i a, __m128i b, const int imm8) VINSERTI128 ymm, ymm, xmm, imm8
+        /// Overwrites a 128-bit lane in the target with the content of the source vector
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
@@ -234,7 +202,18 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vec256<ulong> insert(in Vec128<ulong> src, in Vec256<ulong> dst, byte index)        
             => InsertVector128(dst.ymm, src.xmm, index);
-        
 
+        /// <summary>
+        /// Overwrites the target vector with two 128-bit source vectors
+        /// </summary>
+        /// <param name="lo">The vector that will be inserted into the lo 128-bit lane of the target</param>
+        /// <param name="hi">The vector that will be inserted into the hi 128-bit lane of the target</param>
+        /// <param name="dst">The target vector</param>
+        [MethodImpl(Inline)]
+        public static ref Vec256<byte> insert(in Vec128<byte> lo, in Vec128<byte> hi, out Vec256<byte> dst)        
+        {
+            dst = InsertVector128(InsertVector128(default, lo.xmm, 0), hi.xmm, 1);
+            return ref dst;
+        }    
     }
 }

@@ -185,7 +185,13 @@ namespace Z0
         public static void eq<T>(Span<T> lhs, Span<T> rhs, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
             where T : unmanaged 
                 => lhs.ClaimEqual(rhs, caller,file,line);
- 
+
+        [MethodImpl(Inline)]
+        public static void eq<N,T>(Span<N,T> lhs, Span<N,T> rhs, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
+            where T : unmanaged 
+            where N : ITypeNat, new()             
+                => lhs.Unsized.ClaimEqual(rhs.Unsized, caller,file,line);
+
         [MethodImpl(Inline)]
         public static void eq<T>(Span128<T> lhs, Span128<T> rhs, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
             where T : unmanaged 

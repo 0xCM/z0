@@ -15,8 +15,23 @@ namespace Z0
 
     partial class gmath
     {        
+        [MethodImpl(Inline)]
+        public static T xor1<T>(T a)
+        {
+            if(typeof(T) == typeof(byte))
+                return generic<T>(math.xor1(uint8(a)));
+            else if(typeof(T) == typeof(ushort))
+                return generic<T>(math.xor1(uint16(a)));
+            else if(typeof(T) == typeof(uint))
+                return generic<T>(math.xor1(uint32(a)));
+            else if(typeof(T) == typeof(ulong))
+                return generic<T>(math.xor1(uint64(a)));
+            else
+                throw unsupported<T>();
+        }
+
         /// <summary>
-        /// xortiplies two primal values
+        /// Computes the XOR of two primal values
         /// </summary>
         /// <param name="lhs">The left value</param>
         /// <param name="rhs">The right value</param>
@@ -29,17 +44,18 @@ namespace Z0
             || typeof(T) == typeof(ushort) 
             || typeof(T) == typeof(uint) 
             || typeof(T) == typeof(ulong))
-                return xoru(lhs,rhs);
+                return xor_u(lhs,rhs);
             else if(typeof(T) == typeof(sbyte) 
             || typeof(T) == typeof(short) 
             || typeof(T) == typeof(int) 
             || typeof(T) == typeof(long))
-                return xori(lhs,rhs);
-            else return gfp.xor(lhs,rhs);
+                return xor_i(lhs,rhs);
+            else 
+                return gfp.xor(lhs,rhs);
         }
 
         /// <summary>
-        /// xortiplies two primal values
+        /// Computes the XOR of two primal values
         /// </summary>
         /// <param name="lhs">The left value</param>
         /// <param name="rhs">The right value</param>
@@ -52,18 +68,20 @@ namespace Z0
             || typeof(T) == typeof(ushort) 
             || typeof(T) == typeof(uint) 
             || typeof(T) == typeof(ulong))
-                xoru(ref lhs,rhs);
+                xor_u(ref lhs,rhs);
             else if(typeof(T) == typeof(sbyte) 
             || typeof(T) == typeof(short) 
             || typeof(T) == typeof(int) 
             || typeof(T) == typeof(long))
-                xori(ref lhs,rhs);
-            else gfp.xor(ref lhs,rhs);
+                xor_i(ref lhs,rhs);
+            else 
+                gfp.xor(ref lhs,rhs);
+            
             return ref lhs;
         }
 
         [MethodImpl(Inline)]
-        static T xori<T>(T lhs, T rhs)
+        static T xor_i<T>(T lhs, T rhs)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
@@ -77,7 +95,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static T xoru<T>(T lhs, T rhs)
+        static T xor_u<T>(T lhs, T rhs)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -91,7 +109,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static ref T xori<T>(ref T lhs, T rhs)
+        static ref T xor_i<T>(ref T lhs, T rhs)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -106,7 +124,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static ref T xoru<T>(ref T lhs, T rhs)
+        static ref T xor_u<T>(ref T lhs, T rhs)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))

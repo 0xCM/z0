@@ -33,16 +33,29 @@ namespace Z0
             where T : unmanaged
                 => ref Vec256Pattern<T>.AllOnes;
 
+        [MethodImpl(Inline)]
+        static Vec256<T> LoadPattern<T>(ReadOnlySpan<byte> src)
+            where T : unmanaged
+                => dinx.vloadu256(in src[0]).As<T>();
+
         /// <summary>
-        /// Returns an immutable reference to a vector that decribes a lo/hi lane merge permutation
-        /// For example, if X = [A E B F | C G D H] then the lane merge pattern M will
-        /// describe a permutation that has the following effect: permute(X,M) = [A B C D | E F G H]
+        /// Returns a vector that decribes a lo/hi lane merge permutation
+        /// For example, if X = [A E B F | C G D H] then the lane merge pattern P will
+        /// describe a permutation that has the following effect: permute(X,P) = [A B C D | E F G H]
         /// </summary>
         /// <typeparam name="T">The primal component type</typeparam>
-        public static ref readonly Vec256<T> LaneMerge<T>()
+        [MethodImpl(Inline)]
+        public static Vec256<T> LaneMerge<T>()
             where T : unmanaged
-                => ref Vec256Pattern<T>.LaneMerge;
-
+        {
+            if(typeof(T) == typeof(byte))
+                return LoadPattern<T>(Vec256PatternData.LaneMerge256x8u);
+            else if(typeof(T) == typeof(ushort))
+                return LoadPattern<T>(Vec256PatternData.LaneMerge256x16u);
+            else 
+                return Vec256<T>.Zero;            
+        }
+                
         /// <summary>
         /// For a vector of length N, returns a reference to the vector [0, 1, ..., N - 1]
         /// </summary>
@@ -63,9 +76,16 @@ namespace Z0
         /// Describes a shuffle mask that clears ever-other vector component
         /// </summary>
         /// <typeparam name="T">The primal component type</typeparam>
-        public static ref readonly Vec256<T> ClearAlt<T>()
+        public static Vec256<T> ClearAlt<T>()
             where T : unmanaged
-                => ref Vec256Pattern<T>.ClearAlt;
+        {
+            if(typeof(T) == typeof(byte))
+                return LoadPattern<T>(Vec256PatternData.ClearAlt256x8u);
+            else if(typeof(T) == typeof(ushort))
+                return LoadPattern<T>(Vec256PatternData.ClearAlt256x16u);
+            else 
+                return Vec256<T>.Zero;            
+        }
 
         /// <summary>
         /// Defines a vector of 32 or 64-bit floating point values where each component 
@@ -152,6 +172,7 @@ namespace Z0
             return Vec256.Load(ref head(dst));
 
         }
+
 
     }
 }

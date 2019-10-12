@@ -28,9 +28,8 @@ namespace Z0
                 else
                     control[k] = k;
             }
-            return perm8x32(src, Vec256.Load(control));
+            return vpermvar8x32(src, Vec256.Load(control));
         }
-
 
         /// <summary>
         /// Swaps hi/lo 128-bit lanes
@@ -40,8 +39,8 @@ namespace Z0
         public static Vec256<byte> swaphl_ref(in Vec256<byte> x)
         {
             Vec256<byte> y = default;
-            y = dinx.insert(dinx.hi(x), y, 0);
-            y = dinx.insert(dinx.lo(x), y, 1);
+            y = dinx.insert(dinx.vhi(x), y, 0);
+            y = dinx.insert(dinx.vlo(x), y, 1);
             return y;
         }
 

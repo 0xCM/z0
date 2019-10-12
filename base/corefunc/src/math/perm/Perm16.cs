@@ -14,40 +14,39 @@ namespace Z0
     /// <summary>
     /// Defines canonical literals for representing terms of permutations on 16 symbols
     /// </summary>
-    [Flags]
     public enum Perm16 : ulong
     {
-        X0 = 0b0000,
+        X0 = 0,
         
-        X1 = X0 + 1,
+        X1 = 1,
         
-        X2 = X1 + 1,
+        X2 = 2,
 
-        X3 = X2 + 1,
+        X3 = 3,
 
-        X4 = X3 + 1,
+        X4 = 4,
 
-        X5 = X4 + 1,
+        X5 = 5,
 
-        X6 = X5 + 1,
+        X6 = 6,
 
-        X7 = X6 + 1,
+        X7 = 7,
 
-        X8 = X7 + 1,
+        X8 = 8,
 
-        X9 = X8 + 1,
+        X9 = 9,
 
-        XA = X9 + 1,
+        XA = 0xA,
 
-        XB = XA + 1,
+        XB = 0xB,
 
-        XC = XB + 1,
+        XC = 0xC,
 
-        XD = XC + 1,
+        XD = 0xD,
 
-        XE = XD + 1,
+        XE = 0xE,
 
-        XF = XE + 1,
+        XF = 0xF,
 
     }
 
@@ -60,7 +59,8 @@ namespace Z0
             Perm16 x8, Perm16 x9, Perm16 xA, Perm16 xB, 
             Perm16 xC, Perm16 xD, Perm16 xE, Perm16 xF) 
         {               
-            var dst = (ulong)x0  |  (ulong)x1 << 4  | (ulong)x2 << 8  | (ulong)x3 << 12 
+            var dst = 
+                  (ulong)x0       | (ulong)x1 << 4  | (ulong)x2 << 8  | (ulong)x3 << 12 
                 | (ulong)x4 << 16 | (ulong)x5 << 20 | (ulong)x6 << 24 | (ulong)x7 << 28 
                 | (ulong)x8 << 32 | (ulong)x9 << 36 | (ulong)xA << 40 | (ulong)xB << 44 
                 | (ulong)xC << 48 | (ulong)xD << 52 | (ulong)xE << 56 | (ulong)xF << 60;
@@ -70,10 +70,10 @@ namespace Z0
 
         public static readonly Perm16 Identity
             = Assemble(
-                Perm16.X0,Perm16.X1,Perm16.X2,Perm16.X3,
-                Perm16.X4,Perm16.X5,Perm16.X6,Perm16.X7,
-                Perm16.X8,Perm16.X9,Perm16.XA,Perm16.XB,
-                Perm16.XC,Perm16.XD,Perm16.XE,Perm16.XF);
+                Perm16.X0, Perm16.X1, Perm16.X2, Perm16.X3,
+                Perm16.X4, Perm16.X5, Perm16.X6, Perm16.X7,
+                Perm16.X8, Perm16.X9, Perm16.XA, Perm16.XB,
+                Perm16.XC, Perm16.XD, Perm16.XE, Perm16.XF);
         
         public static readonly Perm16 Reverse
             = Assemble(
@@ -122,7 +122,7 @@ namespace Z0
         /// <param name="spec">The representative</param>
         public static Perm<N16> ToPerm(this Perm16 spec)
         {
-            uint data = (uint)spec;
+            ulong data = (ulong)spec;
             var dst = Perm<N16>.Alloc();
             for(int i=0, offset = 0; i<dst.Length; i++, offset +=4)
                 dst[i] = (int)BitMask.between(in data, offset, offset + 3);

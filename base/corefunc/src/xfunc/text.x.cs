@@ -103,9 +103,9 @@ namespace Z0
         public static string Concat(this IEnumerable<char> chars, char? sep = null)
         {
             if(sep == null)
-                return new string(chars.TakeSpan());
+                return new string(chars.ToSpan());
             else
-                return new string(chars.Intersperse(sep.Value).TakeSpan());                        
+                return new string(chars.Intersperse(sep.Value).ToSpan());                        
         }
 
         /// <summary>
@@ -613,6 +613,30 @@ namespace Z0
         [MethodImpl(Inline)]
         public static string SeparateBlocks(this string src, int blocklen, char sep)
             => src.Partition(blocklen).Concat(sep.ToString());
+
+        /// <summary>
+        /// Block-formats a string using specified block length, separator and block prefix
+        /// </summary>
+        /// <param name="src">The source string</param>
+        /// <param name="blocklen">The number of characters in each block, save the last</param>
+        /// <param name="sep">The block separator</param>
+        /// <param name="prefix">Content that immediately precedes each block</param>
+        [MethodImpl(Inline)]
+        public static string SeparateBlocks(this string src, int blocklen, char sep, string blockprefix)
+        {
+            var parts = src.Partition(blocklen).ToArray();            
+            var result = sbuild();
+            var prefix = blockprefix ?? string.Empty;
+            var lastindex = parts.Length - 1;
+            for(var i=0; i<parts.Length; i++)
+            {
+                result.Append(prefix);
+                result.Append(parts[i]);
+                if(i != lastindex)
+                    result.Append(sep);
+            }
+            return result.ToString();
+        }    
 
         /// <summary>
         /// Creates a new string by weaving a specified character between each character in a source string

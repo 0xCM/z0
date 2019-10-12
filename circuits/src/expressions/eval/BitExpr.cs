@@ -70,6 +70,10 @@ namespace Z0
                     return not(expr.Operand);
                 case BitOpKind.Negate:
                     return negate(expr.Operand);
+                case BitOpKind.Inc:
+                    return inc(expr.Operand);
+                case BitOpKind.Dec:
+                    return dec(expr.Operand);
             }
 
             return default;
@@ -131,7 +135,6 @@ namespace Z0
             return default;
         }
 
-
         public static BitLitExpr<Vec128<T>> eval<T>(IBitLiteralExpr<Vec128<T>> expr)
             where T : unmanaged
         {
@@ -174,6 +177,10 @@ namespace Z0
                     return not(expr.Operand);
                 case BitOpKind.Negate:
                     return negate(expr.Operand);
+                case BitOpKind.Inc:
+                    return inc(expr.Operand);
+                case BitOpKind.Dec:
+                    return dec(expr.Operand);
             }
 
             return default;
@@ -271,6 +278,10 @@ namespace Z0
                     return not(expr.Operand);
                 case BitOpKind.Negate:
                     return negate(expr.Operand);
+                case BitOpKind.Inc:
+                    return inc(expr.Operand);
+                case BitOpKind.Dec:
+                    return dec(expr.Operand);
             }
 
             return default;
@@ -315,6 +326,7 @@ namespace Z0
             where T : unmanaged
                 => gmath.flip(eval(a).Value);
 
+
         [MethodImpl(Inline)]
         static BitLitExpr<T> negate<T>(IBitExpr<T> a)
             where T : unmanaged
@@ -354,6 +366,16 @@ namespace Z0
         static BitLitExpr<T> rotr<T>(IBitExpr<T> a, IBitExpr<uint> b)
             where T : unmanaged
                 => gbits.rotr(eval(a).Value, eval(b).Value);
+
+        [MethodImpl(Inline)]
+        static BitLitExpr<T> inc<T>(IBitExpr<T> a)
+            where T : unmanaged
+                => gmath.inc(eval(a).Value);
+
+        [MethodImpl(Inline)]
+        static BitLitExpr<T> dec<T>(IBitExpr<T> a)
+            where T : unmanaged
+                => gmath.dec(eval(a).Value);
 
         [MethodImpl(Inline)]
         static BitLitExpr<Vec128<T>> not<T>(IBitExpr<Vec128<T>> a)
@@ -402,6 +424,16 @@ namespace Z0
 
 
         [MethodImpl(Inline)]
+        static BitLitExpr<Vec128<T>> inc<T>(IBitExpr<Vec128<T>> a)
+            where T : unmanaged
+                => ginx.vinc(eval(a).Value);
+
+        [MethodImpl(Inline)]
+        static BitLitExpr<Vec128<T>> dec<T>(IBitExpr<Vec128<T>> a)
+            where T : unmanaged
+                => ginx.vdec(eval(a).Value);
+
+        [MethodImpl(Inline)]
         static BitLitExpr<Vec256<T>> not<T>(IBitExpr<Vec256<T>> a)
             where T : unmanaged
                 => ginx.vflip(eval(a).Value);
@@ -446,6 +478,15 @@ namespace Z0
         static BitLitExpr<Vec256<T>> rotr<T>(IBitExpr<Vec256<T>> a, IBitExpr<uint> b)
             where T : unmanaged
                 => ginx.vrotr(eval(a).Value, (byte)eval(b).Value);
-   }
+ 
+        [MethodImpl(Inline)]
+        static BitLitExpr<Vec256<T>> inc<T>(IBitExpr<Vec256<T>> a)
+            where T : unmanaged
+                => ginx.vinc(eval(a).Value);
 
+        [MethodImpl(Inline)]
+        static BitLitExpr<Vec256<T>> dec<T>(IBitExpr<Vec256<T>> a)
+            where T : unmanaged
+                => ginx.vdec(eval(a).Value);
+   }
 }

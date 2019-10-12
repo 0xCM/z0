@@ -19,7 +19,7 @@ namespace Z0
             for(var i=0; i<DefaltCycleCount; i++)
             {
                 var x = Random.CpuVec256<byte>();
-                var y = dinx.shuffle(x, id);
+                var y = dinx.vshuffle(x, id);
                 Claim.eq(x,y);
             }
         }
@@ -427,7 +427,7 @@ namespace Z0
             for(var cycle=0; cycle<cycles; cycle++)
             for(var block = 0; block<blocks; block++)
             {
-                var x = Vec256.Load(src.TakeSpan(blocklen));
+                var x = Vec256.Load(src.ToSpan(blocklen));
                 var offset = offsets.First();
                 sw.Start();
                 dinx.vsll(x,offset);
@@ -450,7 +450,7 @@ namespace Z0
             for(var cycle=0; cycle<cycles; cycle++)
             for(var block = 0; block<blocks; block++)
             {
-                var x = src.TakeSpan(blocklen);
+                var x = src.ToSpan(blocklen);
                 var offset = offsets.First();
                 
                 sw.Start();                

@@ -1,4 +1,75 @@
-// 2019-10-09 16:40:44:080
+// 2019-10-12 06:44:36:920
+Sign:int signum(sbyte src)
+{
+    IL_0000: ldarg.0
+    IL_0001: call Z0.Sign Z0.math::signum(System.Int32)
+    IL_0006: ret
+
+}
+Sign:int signum(byte src)
+{
+    IL_0000: ldarg.0
+    IL_0001: call Z0.Sign Z0.math::signum(System.UInt32)
+    IL_0006: ret
+
+}
+Sign:int signum(short src)
+{
+    IL_0000: ldarg.0
+    IL_0001: call Z0.Sign Z0.math::signum(System.Int32)
+    IL_0006: ret
+
+}
+Sign:int signum(ushort src)
+{
+    IL_0000: ldarg.0
+    IL_0001: call Z0.Sign Z0.math::signum(System.UInt32)
+    IL_0006: ret
+
+}
+Sign:int signum(int src)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldc.i4.s 31
+    IL_0003: shr
+    IL_0004: ldarg.0
+    IL_0005: call System.UInt32 Z0.math::negate(System.UInt32)
+    IL_000A: ldc.i4.s 31
+    IL_000C: shr.un
+    IL_000D: or
+    IL_000E: ret
+
+}
+Sign:int signum(uint src)
+{
+    IL_0000: ldarg.0
+    IL_0001: call System.Boolean Z0.math::nonzero(System.UInt32)
+    IL_0006: call System.Byte Z0.xfunc::ToByte(System.Boolean)
+    IL_000B: ret
+
+}
+Sign:int signum(long src)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldc.i4.s 63
+    IL_0003: shr
+    IL_0004: ldarg.0
+    IL_0005: call System.UInt64 Z0.math::negate(System.UInt64)
+    IL_000A: ldc.i4.s 63
+    IL_000C: shr.un
+    IL_000D: or
+    IL_000E: conv.i4
+    IL_000F: ret
+
+}
+Sign:int signum(ulong src)
+{
+    IL_0000: ldarg.0
+    IL_0001: call System.Boolean Z0.math::nonzero(System.UInt64)
+    IL_0006: call System.Byte Z0.xfunc::ToByte(System.Boolean)
+    IL_000B: ret
+
+}
 sbyte square(sbyte src)
 {
     IL_0000: ldarg.0
@@ -522,6 +593,104 @@ bool within(ulong lhs, ulong rhs, ulong epsilon)
     IL_0014: ldc.i4.0
     IL_0015: ceq
     IL_0017: ret
+
+}
+short min(short lhs, short rhs)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: blt.s IL_0006
+    IL_0004: ldarg.1
+    IL_0005: ret
+    IL_0006: ldarg.0
+    IL_0007: ret
+
+}
+ushort min(ushort lhs, ushort rhs)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: blt.s IL_0006
+    IL_0004: ldarg.1
+    IL_0005: ret
+    IL_0006: ldarg.0
+    IL_0007: ret
+
+}
+int min(int lhs, int rhs)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: blt.s IL_0006
+    IL_0004: ldarg.1
+    IL_0005: ret
+    IL_0006: ldarg.0
+    IL_0007: ret
+
+}
+uint min(uint lhs, uint rhs)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: blt.un.s IL_0006
+    IL_0004: ldarg.1
+    IL_0005: ret
+    IL_0006: ldarg.0
+    IL_0007: ret
+
+}
+long min(long lhs, long rhs)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: blt.s IL_0006
+    IL_0004: ldarg.1
+    IL_0005: ret
+    IL_0006: ldarg.0
+    IL_0007: ret
+
+}
+ulong min(ulong lhs, ulong rhs)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: blt.un.s IL_0006
+    IL_0004: ldarg.1
+    IL_0005: ret
+    IL_0006: ldarg.0
+    IL_0007: ret
+
+}
+ref sbyte min(ref sbyte lhs, sbyte rhs)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.0
+    IL_0002: ldind.i1
+    IL_0003: ldarg.1
+    IL_0004: blt.s IL_0009
+    IL_0006: ldarg.1
+    IL_0007: br.s IL_000B
+    IL_0009: ldarg.0
+    IL_000A: ldind.i1
+    IL_000B: stind.i1
+    IL_000C: ldarg.0
+    IL_000D: ret
+
+}
+ref byte min(ref byte lhs, byte rhs)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.0
+    IL_0002: ldind.u1
+    IL_0003: ldarg.1
+    IL_0004: blt.s IL_0009
+    IL_0006: ldarg.1
+    IL_0007: br.s IL_000B
+    IL_0009: ldarg.0
+    IL_000A: ldind.u1
+    IL_000B: stind.i1
+    IL_000C: ldarg.0
+    IL_000D: ret
 
 }
 ref short min(ref short lhs, short rhs)
@@ -1954,75 +2123,82 @@ ref ulong pow(ref ulong src, uint exp)
     IL_000B: ret
 
 }
-Sign:int signum(sbyte src)
+short div(short lhs, short rhs)
 {
     IL_0000: ldarg.0
-    IL_0001: call Z0.Sign Z0.math::signum(System.Int32)
-    IL_0006: ret
+    IL_0001: ldarg.1
+    IL_0002: div
+    IL_0003: conv.i2
+    IL_0004: ret
 
 }
-Sign:int signum(byte src)
+ushort div(ushort lhs, ushort rhs)
 {
     IL_0000: ldarg.0
-    IL_0001: call Z0.Sign Z0.math::signum(System.UInt32)
-    IL_0006: ret
+    IL_0001: ldarg.1
+    IL_0002: div
+    IL_0003: conv.u2
+    IL_0004: ret
 
 }
-Sign:int signum(short src)
+int div(int lhs, int rhs)
 {
     IL_0000: ldarg.0
-    IL_0001: call Z0.Sign Z0.math::signum(System.Int32)
-    IL_0006: ret
+    IL_0001: ldarg.1
+    IL_0002: div
+    IL_0003: ret
 
 }
-Sign:int signum(ushort src)
+uint div(uint lhs, uint rhs)
 {
     IL_0000: ldarg.0
-    IL_0001: call Z0.Sign Z0.math::signum(System.UInt32)
-    IL_0006: ret
+    IL_0001: ldarg.1
+    IL_0002: div.un
+    IL_0003: ret
 
 }
-Sign:int signum(int src)
+long div(long lhs, long rhs)
 {
     IL_0000: ldarg.0
-    IL_0001: ldc.i4.s 31
-    IL_0003: shr
-    IL_0004: ldarg.0
-    IL_0005: call System.UInt32 Z0.math::negate(System.UInt32)
-    IL_000A: ldc.i4.s 31
-    IL_000C: shr.un
-    IL_000D: or
-    IL_000E: ret
+    IL_0001: ldarg.1
+    IL_0002: div
+    IL_0003: ret
 
 }
-Sign:int signum(uint src)
+ulong div(ulong lhs, ulong rhs)
 {
     IL_0000: ldarg.0
-    IL_0001: call System.Boolean Z0.math::nonzero(System.UInt32)
-    IL_0006: call System.Byte Z0.xfunc::ToByte(System.Boolean)
-    IL_000B: ret
+    IL_0001: ldarg.1
+    IL_0002: div.un
+    IL_0003: ret
 
 }
-Sign:int signum(long src)
+ref sbyte div(ref sbyte lhs, in sbyte rhs)
 {
     IL_0000: ldarg.0
-    IL_0001: ldc.i4.s 63
-    IL_0003: shr
-    IL_0004: ldarg.0
-    IL_0005: call System.UInt64 Z0.math::negate(System.UInt64)
-    IL_000A: ldc.i4.s 63
-    IL_000C: shr.un
-    IL_000D: or
-    IL_000E: conv.i4
-    IL_000F: ret
+    IL_0001: ldarg.0
+    IL_0002: ldind.i1
+    IL_0003: ldarg.1
+    IL_0004: ldind.i1
+    IL_0005: div
+    IL_0006: conv.i1
+    IL_0007: stind.i1
+    IL_0008: ldarg.0
+    IL_0009: ret
 
 }
-Sign:int signum(ulong src)
+ref byte div(ref byte lhs, in byte rhs)
 {
     IL_0000: ldarg.0
-    IL_0001: call System.Boolean Z0.math::nonzero(System.UInt64)
-    IL_0006: call System.Byte Z0.xfunc::ToByte(System.Boolean)
-    IL_000B: ret
+    IL_0001: ldarg.0
+    IL_0002: ldind.u1
+    IL_0003: ldarg.1
+    IL_0004: ldind.u1
+    IL_0005: div
+    IL_0006: conv.u1
+    IL_0007: stind.i1
+    IL_0008: ldarg.0
+    IL_0009: ret
 
 }
 ref short div(ref short lhs, in short rhs)
@@ -3571,104 +3747,6 @@ byte min(byte lhs, byte rhs)
     IL_0007: ret
 
 }
-short min(short lhs, short rhs)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: blt.s IL_0006
-    IL_0004: ldarg.1
-    IL_0005: ret
-    IL_0006: ldarg.0
-    IL_0007: ret
-
-}
-ushort min(ushort lhs, ushort rhs)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: blt.s IL_0006
-    IL_0004: ldarg.1
-    IL_0005: ret
-    IL_0006: ldarg.0
-    IL_0007: ret
-
-}
-int min(int lhs, int rhs)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: blt.s IL_0006
-    IL_0004: ldarg.1
-    IL_0005: ret
-    IL_0006: ldarg.0
-    IL_0007: ret
-
-}
-uint min(uint lhs, uint rhs)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: blt.un.s IL_0006
-    IL_0004: ldarg.1
-    IL_0005: ret
-    IL_0006: ldarg.0
-    IL_0007: ret
-
-}
-long min(long lhs, long rhs)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: blt.s IL_0006
-    IL_0004: ldarg.1
-    IL_0005: ret
-    IL_0006: ldarg.0
-    IL_0007: ret
-
-}
-ulong min(ulong lhs, ulong rhs)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: blt.un.s IL_0006
-    IL_0004: ldarg.1
-    IL_0005: ret
-    IL_0006: ldarg.0
-    IL_0007: ret
-
-}
-ref sbyte min(ref sbyte lhs, sbyte rhs)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.0
-    IL_0002: ldind.i1
-    IL_0003: ldarg.1
-    IL_0004: blt.s IL_0009
-    IL_0006: ldarg.1
-    IL_0007: br.s IL_000B
-    IL_0009: ldarg.0
-    IL_000A: ldind.i1
-    IL_000B: stind.i1
-    IL_000C: ldarg.0
-    IL_000D: ret
-
-}
-ref byte min(ref byte lhs, byte rhs)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.0
-    IL_0002: ldind.u1
-    IL_0003: ldarg.1
-    IL_0004: blt.s IL_0009
-    IL_0006: ldarg.1
-    IL_0007: br.s IL_000B
-    IL_0009: ldarg.0
-    IL_000A: ldind.u1
-    IL_000B: stind.i1
-    IL_000C: ldarg.0
-    IL_000D: ret
-
-}
 long srl(long src, int offset)
 {
     IL_0000: ldarg.0
@@ -3819,6 +3897,79 @@ ulong srl64u(ulong src, int offset)
     IL_0004: and
     IL_0005: shr.un
     IL_0006: ret
+
+}
+sbyte xor1(sbyte a)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldc.i4 255
+    IL_0006: xor
+    IL_0007: conv.i1
+    IL_0008: ret
+
+}
+byte xor1(byte a)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldc.i4 255
+    IL_0006: xor
+    IL_0007: conv.u1
+    IL_0008: ret
+
+}
+short xor1(short a)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldc.i4 65535
+    IL_0006: xor
+    IL_0007: conv.i2
+    IL_0008: ret
+
+}
+ushort xor1(ushort a)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldc.i4 65535
+    IL_0006: xor
+    IL_0007: conv.u2
+    IL_0008: ret
+
+}
+int xor1(int a)
+{
+    IL_0000: ldarg.0
+    IL_0001: conv.i8
+    IL_0002: ldc.i4.m1
+    IL_0003: conv.u8
+    IL_0004: xor
+    IL_0005: conv.i4
+    IL_0006: ret
+
+}
+uint xor1(uint a)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldc.i4.m1
+    IL_0002: xor
+    IL_0003: ret
+
+}
+long xor1(long a)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldc.i4.m1
+    IL_0002: conv.i8
+    IL_0003: xor
+    IL_0004: ret
+
+}
+ulong xor1(ulong a)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldc.i4.m1
+    IL_0002: conv.i8
+    IL_0003: xor
+    IL_0004: ret
 
 }
 sbyte xor(sbyte lhs, sbyte rhs)
@@ -5103,84 +5254,6 @@ byte div(byte lhs, byte rhs)
     IL_0002: div
     IL_0003: conv.u1
     IL_0004: ret
-
-}
-short div(short lhs, short rhs)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: div
-    IL_0003: conv.i2
-    IL_0004: ret
-
-}
-ushort div(ushort lhs, ushort rhs)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: div
-    IL_0003: conv.u2
-    IL_0004: ret
-
-}
-int div(int lhs, int rhs)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: div
-    IL_0003: ret
-
-}
-uint div(uint lhs, uint rhs)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: div.un
-    IL_0003: ret
-
-}
-long div(long lhs, long rhs)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: div
-    IL_0003: ret
-
-}
-ulong div(ulong lhs, ulong rhs)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: div.un
-    IL_0003: ret
-
-}
-ref sbyte div(ref sbyte lhs, in sbyte rhs)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.0
-    IL_0002: ldind.i1
-    IL_0003: ldarg.1
-    IL_0004: ldind.i1
-    IL_0005: div
-    IL_0006: conv.i1
-    IL_0007: stind.i1
-    IL_0008: ldarg.0
-    IL_0009: ret
-
-}
-ref byte div(ref byte lhs, in byte rhs)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.0
-    IL_0002: ldind.u1
-    IL_0003: ldarg.1
-    IL_0004: ldind.u1
-    IL_0005: div
-    IL_0006: conv.u1
-    IL_0007: stind.i1
-    IL_0008: ldarg.0
-    IL_0009: ret
 
 }
 sbyte and(sbyte lhs, sbyte rhs)

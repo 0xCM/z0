@@ -83,7 +83,6 @@ namespace Z0
             return dst;
         } 
 
-
         public static Span256<double> sqrt(Span256<double> src, Span256<double> dst)
         {
             for(var block = 0; block <src.BlockCount; block ++)                

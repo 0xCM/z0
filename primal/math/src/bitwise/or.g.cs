@@ -30,13 +30,14 @@ namespace Z0
             || typeof(T) == typeof(ushort) 
             || typeof(T) == typeof(uint) 
             || typeof(T) == typeof(ulong))
-                return oru(lhs,rhs);
+                return or_u(lhs,rhs);
             else if(typeof(T) == typeof(sbyte) 
             || typeof(T) == typeof(short) 
             || typeof(T) == typeof(int) 
             || typeof(T) == typeof(long))
-                return ori(lhs,rhs);
-            else throw unsupported<T>();
+                return or_i(lhs,rhs);
+            else 
+                return gfp.or(lhs,rhs);
         }
 
         /// <summary>
@@ -50,15 +51,16 @@ namespace Z0
             where T : unmanaged
         {
             if(unsignedint<T>())
-                oru(ref lhs,rhs);
+                or_u(ref lhs,rhs);
             else if(signedint<T>())
-                ori(ref lhs,rhs);
-            else gfp.or(ref lhs,rhs);
+                or_i(ref lhs,rhs);
+            else 
+                gfp.or(ref lhs,rhs);
             return ref lhs;
         }
 
         [MethodImpl(Inline)]
-        static T ori<T>(T lhs, T rhs)
+        static T or_i<T>(T lhs, T rhs)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
@@ -72,7 +74,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static T oru<T>(T lhs, T rhs)
+        static T or_u<T>(T lhs, T rhs)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -86,7 +88,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static ref T ori<T>(ref T lhs, T rhs)
+        static ref T or_i<T>(ref T lhs, T rhs)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -101,7 +103,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static ref T oru<T>(ref T lhs, T rhs)
+        static ref T or_u<T>(ref T lhs, T rhs)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))

@@ -56,14 +56,14 @@ namespace Z0
         /// Creates a vector with decrementing components
         /// v[0] = last and v[i-1] = v[i] - 1 for i=1...N-1
         /// </summary>
-        /// <param name="last">The value of the first component</param>
+        /// <param name="first">The value of the first component</param>
         /// <param name="swaps">Transpositions applied to decrements prior to vector creation</param>
         /// <typeparam name="T">The primal component type</typeparam>        
-        public static Vec128<T> Decrements(T last = default, params Swap[] swaps)
+        public static Vec128<T> Decrements(T first = default, params Swap[] swaps)
         {
             var n = Length;
             var dst = Span128.AllocBlock<T>();
-            var val = last;
+            var val = first;
             for(var i=0; i<n; i++)
             {
                 dst[i] = val;

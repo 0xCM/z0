@@ -106,6 +106,18 @@ namespace Z0
                 => new Span<N,T>(value);
 
         [MethodImpl(Inline)]   
+        public static Span<N,T> Define<N,T>(N n, params T[] elements) 
+            where N : ITypeNat, new()
+            where T : unmanaged
+                => new Span<N,T>(elements);
+
+        [MethodImpl(Inline)]   
+        public static Span<N,T> Define<N,T>(params T[] elements) 
+            where N : ITypeNat, new()
+            where T : unmanaged
+                => new Span<N,T>(elements);
+
+        [MethodImpl(Inline)]   
         public static Span<M,N,T> Alloc<M,N,T>(T value = default(T), M m = default, N n = default) 
             where M : ITypeNat, new()
             where N : ITypeNat, new()

@@ -23,7 +23,7 @@ namespace Z0.Mkl
             
             var sum = 0.0;
             var buffer = samplers.bernoulli(src,pTarget);
-            foreach(var point in buffer.TakeSpan(count))
+            foreach(var point in buffer.ToSpan(count))
                 if(point != 0) 
                     sum++;
 

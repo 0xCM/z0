@@ -35,7 +35,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static bool operator ==(BitView<T> lhs, BitView<T> rhs)
-            => lhs.Bytes.Eq(rhs.Bytes);
+            => lhs.Bytes.ValuesEqual(rhs.Bytes);
 
         [MethodImpl(Inline)]
         public static bool operator !=(BitView<T> lhs, BitView<T> rhs)

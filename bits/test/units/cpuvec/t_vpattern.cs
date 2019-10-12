@@ -19,7 +19,7 @@ namespace Z0
             for(var i=0; i<SampleSize; i++)
             {
                 var x = Random.CpuVec256<byte>();
-                var y = dinx.shuffle(x, tr);
+                var y = dinx.vshuffle(x, tr);
                 var xs = x.ToSpan256();
                 for(var j =0; j< xs.Length; j++)
                 {

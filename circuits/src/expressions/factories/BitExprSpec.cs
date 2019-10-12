@@ -122,6 +122,46 @@ namespace Z0
                 => negate(literal(operand));
 
         /// <summary>
+        /// Defines a unary increment expression
+        /// </summary>
+        /// <param name="operand">The expression operand</param>
+        /// <typeparam name="T">The operand type</typeparam>
+        [MethodImpl(Inline)]
+        public static UnaryBitsExpr<T> inc<T>(IBitExpr<T> operand)
+            where T : unmanaged
+                => unary(BitOpKind.Inc, operand);
+
+        /// <summary>
+        /// Defines a unary increment expression with a literal operand
+        /// </summary>
+        /// <param name="operand">The expression operand</param>
+        /// <typeparam name="T">The operand type</typeparam>
+        [MethodImpl(Inline)]
+        public static UnaryBitsExpr<T> inc<T>(T operand)
+            where T : unmanaged
+                => inc(literal(operand));
+
+        /// <summary>
+        /// Defines a unary decrement expression
+        /// </summary>
+        /// <param name="operand">The expression operand</param>
+        /// <typeparam name="T">The operand type</typeparam>
+        [MethodImpl(Inline)]
+        public static UnaryBitsExpr<T> dec<T>(IBitExpr<T> operand)
+            where T : unmanaged
+                => unary(BitOpKind.Dec, operand);
+
+        /// <summary>
+        /// Defines a decrement increment expression with a literal operand
+        /// </summary>
+        /// <param name="operand">The expression operand</param>
+        /// <typeparam name="T">The operand type</typeparam>
+        [MethodImpl(Inline)]
+        public static UnaryBitsExpr<T> dec<T>(T operand)
+            where T : unmanaged
+                => dec(literal(operand));
+
+        /// <summary>
         /// Defines a bitwise and expression
         /// </summary>
         /// <param name="lhs">The left operand</param>
@@ -274,7 +314,6 @@ namespace Z0
         public static MixedBitsExpr<T> rotr<T>(T lhs, uint rhs)
             where T : unmanaged
                 => rotr(literal(lhs), rhs);
-
         
         /// <summary>
         /// Defines a scalar range expression
@@ -326,10 +365,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitVarExpr<T> bitvar<T>(uint name, T value = default)
             where T : unmanaged
-                => new BitVarExpr<T>(name.ToString(), literal(value));
-
-        
+                => new BitVarExpr<T>(name.ToString(), literal(value));        
     }       
-
-
 }

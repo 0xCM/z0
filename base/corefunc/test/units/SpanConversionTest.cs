@@ -32,7 +32,7 @@ namespace Z0.Test
             VerifySpanBytesToValue(y,x);
 
             var valSize = Unsafe.SizeOf<T>();
-            var values = Random.Stream<T>().TakeSpan(Pow2.T08);
+            var values = Random.Stream<T>().ToSpan(Pow2.T08);
             var bytes = span<byte>(valSize*values.Length);
             for(int i = 0, offset = 0; i< values.Length; i++, offset += valSize)
             {
@@ -77,7 +77,7 @@ namespace Z0.Test
 
         public void VerifyNonPrimal()
         {
-            var bits = Random.Bits().TakeSpan(Pow2.T08);
+            var bits = Random.Bits().ToSpan(Pow2.T08);
             var bytes = bits.AsBytes();
             Claim.eq(bits.Length, bytes.Length);
             for(var i = 0; i<bits.Length; i++)
@@ -91,7 +91,7 @@ namespace Z0.Test
             VerifySpanBytesToValue(y,x);
 
             var valSize = sizeof(int);
-            var values = Random.Stream<int>().TakeSpan(Pow2.T08);
+            var values = Random.Stream<int>().ToSpan(Pow2.T08);
             var bytes = span<byte>(sizeof(int)*values.Length);
             for(int i = 0, offset = 0; i< values.Length; i++, offset += valSize)
             {

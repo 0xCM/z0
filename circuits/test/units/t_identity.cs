@@ -218,9 +218,6 @@ namespace Z0
                 var y = eval(expr2);
                 Claim.eq(x.Value,y.Value);
             }
-
         }
-
     }
-
 }

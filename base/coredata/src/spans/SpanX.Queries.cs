@@ -17,7 +17,7 @@ namespace Z0
     /// <summary>
     /// Defines various methods that extract/interrogate span content
     /// </summary>
-    public static class SpanQueries
+    partial class SpanExtensions
     {
         /// <summary>
         /// Determines whether any elements of the source match the target

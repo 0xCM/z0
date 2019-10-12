@@ -100,6 +100,19 @@ partial class zfunc
             => typeof(T) == typeof(float) || typeof(T) == typeof(double);
 
     /// <summary>
+    /// Returns the types numeric suffix character, if any; either i, u or f
+    /// which respectively denote signed integers, unsigned integers and floating-point
+    /// </summary>
+    /// <typeparam name="T">The type to evaluate</typeparam>
+    [MethodImpl(Inline)]
+    public static char suffix<T>(bool general = true)
+        where T : unmanaged
+            =>  floating<T>() ? AsciLower.f  
+              : signedint<T>() ? AsciLower.i  
+              : unsignedint<T>() ?  AsciLower.u 
+              : AsciSym.Question;
+
+    /// <summary>
     /// Creates an enumerable sequence that ranges between inclusive upper and lower bounds
     /// </summary>
     /// <param name="x0">The lower bound</param>

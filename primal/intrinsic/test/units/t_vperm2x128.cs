@@ -11,14 +11,9 @@ namespace Z0
     using System.Runtime.InteropServices;
     
     using static zfunc;
-    using static Reg;
-    //using static Asm;
-
 
     public class t_vperm : UnitTest<t_vperm>
     {
-
-
         public void perm_2x128_check()
         {
             var x = Vec256Pattern.Increasing<ulong>(0,2);
@@ -51,7 +46,7 @@ namespace Z0
 
             var x = Vec256Pattern.Increasing<byte>();
             var y = Vec256Pattern.Decreasing<byte>();
-            var z = dinx.vperm32x8(x,y);
+            var z = dinx.vpermvar32x8(x,y);
             for(var i=0; i<31; i++)
                 Claim.eq(x[31 - i], z[i]);
         
@@ -74,11 +69,8 @@ namespace Z0
 
             var vIn = Vec128.FromParts(0,1,2,3);
             var vExpect = Vec128.FromParts(3,2,1,0);
-            var vActual = dinx.vperm4x32(vIn,p);
-            Claim.eq(vExpect, vActual);
-
-                                
-        }
-        
+            var vActual = dinx.vshuffle(vIn,p);
+            Claim.eq(vExpect, vActual);                                
+        }        
     }
 }

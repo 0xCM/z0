@@ -25,7 +25,7 @@ namespace Z0
         /// for a potentially better approach</remarks>
         public static Vec128<sbyte> vsll(in Vec128<sbyte> src, byte offset)
         {
-            dinx.convert(in src, out Vec256<short> dst);
+            dinx.vconvert(in src, out Vec256<short> dst);
             Span<short> data = stackalloc short[Vec256<short>.Length];
             vstore(dinx.vsll(dst, offset), ref data[0]);
             var i = 0;
@@ -48,7 +48,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vec256<ushort> vsll_2(in Vec128<byte> src, byte offset)
         {
-            convert(in src, out Vec256<ushort> dst);
+            vconvert(in src, out Vec256<ushort> dst);
             var x = dinx.vand(dinx.vsll(dst,offset), VByteMask);
             return x;
         }
@@ -62,7 +62,7 @@ namespace Z0
         public static Vec128<byte> vsll(in Vec128<byte> src, byte offset)
         {
             Span<ushort> data = stackalloc ushort[Vec256<ushort>.Length];
-            convert(in src, out Vec256<ushort> dst);
+            vconvert(in src, out Vec256<ushort> dst);
             vstore(dinx.vsll(dst, offset), ref data[0]);
             var i = 0;
             return Vec128.FromBytes(
@@ -136,8 +136,8 @@ namespace Z0
         public static Vec256<byte> vsll(in Vec256<byte> src, byte offset)
         {
             //Fan the hi/lo parts of the u8 source vector across 2 u16 vectors
-            var srcX = convert(dinx.lo(src), out Vec256<ushort> _);
-            var srcY = convert(dinx.hi(src), out Vec256<ushort> _);
+            var srcX = vconvert(dinx.vlo(src), out Vec256<ushort> _);
+            var srcY = vconvert(dinx.vhi(src), out Vec256<ushort> _);
             
             //Shift each part with a concrete intrinsic anc convert back to bytes
             var dstA = dinx.vsll(srcX, offset).As<byte>();
@@ -145,19 +145,17 @@ namespace Z0
 
             // Truncate overflows to sets up the component pattern [X 0 X 0 ... X 0] in each vector
             var trm =  Vec256Pattern.ClearAlt<byte>();
-            var trA = dinx.shuffle(in dstA, trm);
-            var trB = dinx.shuffle(in dstB, trm);
+            var trA = dinx.vshuffle(in dstA, trm);
+            var trB = dinx.vshuffle(in dstB, trm);
                         
             // Each vector contains 16 values that need to be merged
             // back into a single vector. The strategey is to condense
             // each vector via the "lane merge" pattern and construct
             // the result vector via insertion of these condensed vectors
             var permSpec = Vec256Pattern.LaneMerge<byte>();
-            var permA = dinx.vperm32x8(trA, permSpec);
-            var permB = dinx.vperm32x8(trB, permSpec);
-            var result = default(Vec256<byte>);
-            return dinx.insert(dinx.lo(in permA), dinx.lo(in permB), ref result);            
-            
+            var permA = dinx.vpermvar32x8(trA, permSpec);
+            var permB = dinx.vpermvar32x8(trB, permSpec);
+            return dinx.insert(dinx.vlo(in permA), dinx.vlo(in permB), out Vec256<byte> _);            
         }
 
         /// <summary>

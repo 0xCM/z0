@@ -16,7 +16,7 @@ namespace Z0
         public static ref BitMatrix<N8,N16,uint> Transpose(this ref BitMatrix<N8,N16,uint> A)
         {
             var vec = Vec128.Load(ref head(A.Bytes));
-            vstore(dinx.shuffle(in vec, Tr8x16Mask), ref head(A.Bytes));
+            vstore(dinx.vshuffle(in vec, Tr8x16Mask), ref head(A.Bytes));
             return ref A;
         }
 

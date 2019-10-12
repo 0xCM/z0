@@ -84,7 +84,6 @@ namespace Z0
         public static Vec256<ushort> loadu_g256x16u(in ushort src)
             => ginx.loadu256(in src);
 
-
         public static Vec256<int> loadu_d256x32i(in int src)
             => dinx.vloadu256(in src);
 
@@ -108,7 +107,5 @@ namespace Z0
 
         public static Vec256<ulong> loadu_g256x64u(in ulong src)
             => ginx.loadu256(in src);
-
     }
-
 }

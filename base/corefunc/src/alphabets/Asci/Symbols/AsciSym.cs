@@ -48,95 +48,119 @@ namespace Z0
         public const char Dollar = '$';
 
         /// <summary>
-        /// Defines the '.' symbol
+        /// Defines the '.' character
         /// </summary>
         public const char Dot = '.';
 
         /// <summary>
-        /// Defines the '=' symbol
+        /// Defines the '=' character
         /// </summary>
         public const char Eq = '=';
 
         /// <summary>
-        /// Defines the '/' symbol
+        /// Defines the '/' character
         /// </summary>
         public const char FSlash = '/';
 
         /// <summary>
-        /// Defines the '>' symbol
+        /// Defines the '>' character
         /// </summary>
         public const char Gt = '>';
 
         /// <summary>
-        /// Defines the '#' symbol
+        /// Defines the '#' character
         /// </summary>
         public const char Hash = '#';
 
         /// <summary>
-        /// Defines the '{' symbol
+        /// Defines the '{' character
         /// </summary>
         public const char LBrace = '{';
 
         /// <summary>
-        /// Defines the '[' symbol
+        /// Defines the '[' character
         /// </summary>
         public const char LBracket = '[';
 
         /// <summary>
-        /// Defines the '(' symbol
+        /// Defines the '(' character
         /// </summary>
         public const char LParen = '(';        
 
         /// <summary>
-        /// Defines the '<' symbol
+        /// Defines the '<' character
         /// </summary>
         public const char Lt = '<';
 
         /// <summary>
-        /// Defines the '-' symbol
+        /// Defines the '-' character
         /// </summary>
         public const char Minus = '-';
 
         /// <summary>
-        /// Defines the '%' symbol
+        /// Defines the '%' character
         /// </summary>
         public const char Percent = '%';
 
         /// <summary>
-        /// Defines the '|' symbol
+        /// Defines the '|' character
         /// </summary>
         public const char Pipe = '|';
 
+        /// <summary>
+        /// Defines the '+' character
+        /// </summary>
         public const char Plus = '+';
 
         /// <summary>
-        /// Specifies '"', the double-quote symbol
+        /// Specifies '"', the double-quote character
         /// </summary>
         public const char Quote = '\"';
 
+        /// <summary>
+        /// Defines the ')' character
+        /// </summary>
         public const char RParen = ')';        
         
+        /// <summary>
+        /// Defines the '}' character
+        /// </summary>
         public const char RBrace = '}';
 
+        /// <summary>
+        /// Defines the ']' character
+        /// </summary>
         public const char RBracket = ']';
 
+        /// <summary>
+        /// Defines the ';' character
+        /// </summary>
         public const char Semicolon = ';';
 
+        
+        /// <summary>
+        /// Defines the ' ' character
+        /// </summary>
         public const char Space = ' ';
 
         /// <summary>
-        /// Defines the ''' symbol
+        /// Defines the ''' character
         /// </summary>
         public const char SQuote = '\'';
 
         /// <summary>
-        /// Defines the '*' symbol
+        /// Defines the '*' character
         /// </summary>
         public const char Star = '*';
 
         /// <summary>
-        /// Defines the '~' symbol
+        /// Defines the '~' character
         /// </summary>
         public const char Tilde = '~'; 
+
+        /// <summary>
+        /// Defines the '?' character
+        /// </summary>
+        public const char Question = '?';
     }
 }

@@ -117,7 +117,7 @@ partial class zfunc
     /// <typeparam name="T">The element type</typeparam>
     [MethodImpl(Inline)]
     public static Span<T> span<T>(IEnumerable<T> src)
-        => src.TakeSpan();
+        => src.ToSpan();
 
     [MethodImpl(Inline)]
     public static ReadOnlySpan<T> cast<S,T>(ReadOnlySpan<S> src)                

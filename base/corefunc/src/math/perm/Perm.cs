@@ -57,6 +57,11 @@ namespace Z0
         public static Perm Define(ReadOnlySpan<int> src)
             => new Perm(src.ToArray());
 
+        [MethodImpl(Inline)]
+        public static Perm<N> Define<N>(N n, ReadOnlySpan<int> src)
+            where N : ITypeNat, new()
+                => new Perm<N>(src.ToArray());
+
         /// <summary>
         /// Defines a permutation of natural length
         /// </summary>

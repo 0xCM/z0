@@ -130,7 +130,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Span128<T> Span128<T>(this IPolyrand random, int blocks = 1, Interval<T>? domain = null, Func<T,bool> filter = null)
             where T : unmanaged
-                => random.Stream(domain,filter).TakeSpan(Z0.Span128.BlockLength<T>(blocks)).ToSpan128(); 
+                => random.Stream(domain,filter).ToSpan(Z0.Span128.BlockLength<T>(blocks)).ToSpan128(); 
 
         /// <summary>
         /// Allocates a 128-bit blocked span and populates it with random values and returns a readonly view to the caller
@@ -168,7 +168,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Span256<T> Span256<T>(this IPolyrand random, int blocks = 1, Interval<T>? domain = null, Func<T,bool> filter = null)
             where T : unmanaged       
-            => random.Stream(domain,filter).TakeSpan(Z0.Span256.BlockLength<T>(blocks)).ToSpan256();       
+            => random.Stream(domain,filter).ToSpan(Z0.Span256.BlockLength<T>(blocks)).ToSpan256();       
 
         /// <summary>
         /// Allocates populates a 256-bit blocked readonly span with random values

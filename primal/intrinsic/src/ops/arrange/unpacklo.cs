@@ -27,7 +27,7 @@ namespace Z0
         /// <param name="x">The left source vector</param>
         /// <param name="y">The right source vector</param>
         [MethodImpl(Inline)]
-        public static Vec128<sbyte> unpacklo(in Vec128<sbyte> x, in Vec128<sbyte> y)
+        public static Vec128<sbyte> vunpacklo(in Vec128<sbyte> x, in Vec128<sbyte> y)
             => UnpackLow(x.xmm, y.xmm);
 
         /// <summary>
@@ -39,7 +39,7 @@ namespace Z0
         /// <param name="x">The left source vector</param>
         /// <param name="y">The right source vector</param>
         [MethodImpl(Inline)]
-        public static Vec128<byte> unpacklo(in Vec128<byte> x, in Vec128<byte> y)
+        public static Vec128<byte> vunpacklo(in Vec128<byte> x, in Vec128<byte> y)
             => UnpackLow(x.xmm, y.xmm);
 
         /// <summary>
@@ -51,7 +51,7 @@ namespace Z0
         /// <param name="x">The left source vector</param>
         /// <param name="y">The right source vector</param>
         [MethodImpl(Inline)]
-        public static Vec128<short> unpacklo(in Vec128<short> x, in Vec128<short> y)
+        public static Vec128<short> vunpacklo(in Vec128<short> x, in Vec128<short> y)
             => UnpackLow(x.xmm, y.xmm);
 
         /// <summary>
@@ -63,7 +63,7 @@ namespace Z0
         /// <param name="x">The left source vector</param>
         /// <param name="y">The right source vector</param>
         [MethodImpl(Inline)]
-        public static Vec128<ushort> unpacklo(in Vec128<ushort> x, in Vec128<ushort> y)
+        public static Vec128<ushort> vunpacklo(in Vec128<ushort> x, in Vec128<ushort> y)
             => UnpackLow(x.xmm, y.xmm);
 
         /// <summary>
@@ -75,7 +75,7 @@ namespace Z0
         /// <param name="x">The left source vector</param>
         /// <param name="y">The right source vector</param>
         [MethodImpl(Inline)]
-        public static Vec128<int> unpacklo(in Vec128<int> x, in Vec128<int> y)
+        public static Vec128<int> vunpacklo(in Vec128<int> x, in Vec128<int> y)
             => UnpackLow(x.xmm, y.xmm);
 
         /// <summary>
@@ -87,7 +87,7 @@ namespace Z0
         /// <param name="x">The left source vector</param>
         /// <param name="y">The right source vector</param>
         [MethodImpl(Inline)]
-        public static Vec128<uint> unpacklo(in Vec128<uint> x, in Vec128<uint> y)
+        public static Vec128<uint> vunpacklo(in Vec128<uint> x, in Vec128<uint> y)
             => UnpackLow(x.xmm, y.xmm);
 
         /// <summary>
@@ -99,7 +99,7 @@ namespace Z0
         /// <param name="x">The left source vector</param>
         /// <param name="y">The right source vector</param>
         [MethodImpl(Inline)]
-        public static Vec128<long> unpacklo(in Vec128<long> x, in Vec128<long> y)
+        public static Vec128<long> vunpacklo(in Vec128<long> x, in Vec128<long> y)
             => UnpackLow(x.xmm, y.xmm);
 
         /// <summary>
@@ -111,7 +111,7 @@ namespace Z0
         /// <param name="x">The left source vector</param>
         /// <param name="y">The right source vector</param>
         [MethodImpl(Inline)]
-        public static Vec128<ulong> unpacklo(in Vec128<ulong> x, in Vec128<ulong> y)
+        public static Vec128<ulong> vunpacklo(in Vec128<ulong> x, in Vec128<ulong> y)
             => UnpackLow(x.xmm, y.xmm);
 
         /// <summary>
@@ -123,7 +123,7 @@ namespace Z0
         /// <param name="x">The left source vector</param>
         /// <param name="y">The right source vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<byte> unpacklo(in Vec256<byte> x, in Vec256<byte> y)
+        public static Vec256<byte> vunpacklo(in Vec256<byte> x, in Vec256<byte> y)
             => UnpackLow(x.ymm, y.ymm);
 
         /// <summary>
@@ -135,7 +135,7 @@ namespace Z0
         /// <param name="x">The left source vector</param>
         /// <param name="y">The right source vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<sbyte> unpacklo(in Vec256<sbyte> x, in Vec256<sbyte> y)
+        public static Vec256<sbyte> vunpacklo(in Vec256<sbyte> x, in Vec256<sbyte> y)
             => UnpackLow(x.ymm, y.ymm);
 
         /// <summary>
@@ -147,7 +147,7 @@ namespace Z0
         /// <param name="x">The left source vector</param>
         /// <param name="y">The right source vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<short> unpacklo(in Vec256<short> x, in Vec256<short> y)
+        public static Vec256<short> vunpacklo(in Vec256<short> x, in Vec256<short> y)
             => UnpackLow(x.ymm, y.ymm);
 
         /// <summary>
@@ -159,7 +159,7 @@ namespace Z0
         /// <param name="x">The left source vector</param>
         /// <param name="y">The right source vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<ushort> unpacklo(in Vec256<ushort> x, in Vec256<ushort> y)
+        public static Vec256<ushort> vunpacklo(in Vec256<ushort> x, in Vec256<ushort> y)
             => UnpackLow(x.ymm, y.ymm);
 
         /// <summary>
@@ -171,7 +171,7 @@ namespace Z0
         /// <param name="x">The left source vector</param>
         /// <param name="y">The right source vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<int> unpacklo(in Vec256<int> x, in Vec256<int> y)
+        public static Vec256<int> vunpacklo(in Vec256<int> x, in Vec256<int> y)
             => UnpackLow(x.ymm, y.ymm);
 
         /// <summary>
@@ -183,7 +183,7 @@ namespace Z0
         /// <param name="x">The left source vector</param>
         /// <param name="y">The right source vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<uint> unpacklo(in Vec256<uint> x, in Vec256<uint> y)
+        public static Vec256<uint> vunpacklo(in Vec256<uint> x, in Vec256<uint> y)
             => UnpackLow(x.ymm, y.ymm);
 
         /// <summary>
@@ -195,7 +195,7 @@ namespace Z0
         /// <param name="x">The left source vector</param>
         /// <param name="y">The right source vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<long> unpacklo(in Vec256<long> x, in Vec256<long> y)
+        public static Vec256<long> vunpacklo(in Vec256<long> x, in Vec256<long> y)
             => UnpackLow(x.ymm, y.ymm);
 
         /// <summary>
@@ -208,7 +208,7 @@ namespace Z0
         /// <param name="x">The left source vector</param>
         /// <param name="y">The right source vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<ulong> unpacklo(in Vec256<ulong> x, in Vec256<ulong> y)
+        public static Vec256<ulong> vunpacklo(in Vec256<ulong> x, in Vec256<ulong> y)
             => UnpackLow(x.ymm, y.ymm);
    }
 

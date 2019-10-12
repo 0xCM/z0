@@ -64,6 +64,14 @@ namespace Z0
         /// </summary>
         Rotr = Rotl << 1,
 
-    }
+        /// <summary>
+        /// Arightmetic increment
+        /// </summary>
+        Inc = Rotr << 1,
 
+        /// <summary>
+        /// Arightmetic decrement
+        /// </summary>
+        Dec = Inc << 1,
+    }
 }

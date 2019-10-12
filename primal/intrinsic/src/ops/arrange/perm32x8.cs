@@ -19,17 +19,35 @@ namespace Z0
 
         const byte MF0 = 0b11110000;
 
-        static readonly Vec256<byte> K0 = Vec256.FromBytes(
-            M70, M70, M70, M70, M70, M70, M70, M70, 
-            M70, M70, M70, M70, M70, M70, M70, M70,            
-            MF0, MF0, MF0, MF0, MF0, MF0, MF0, MF0, 
-            MF0, MF0, MF0, MF0, MF0, MF0, MF0, MF0);
+        static ReadOnlySpan<byte> K0Bytes
+            => new byte[]
+                {
+                    M70, M70, M70, M70, M70, M70, M70, M70, 
+                    M70, M70, M70, M70, M70, M70, M70, M70,            
+                    MF0, MF0, MF0, MF0, MF0, MF0, MF0, MF0, 
+                    MF0, MF0, MF0, MF0, MF0, MF0, MF0, MF0
+                };
 
-        static readonly Vec256<byte> K1 = Vec256.FromBytes(
-            MF0, MF0, MF0, MF0, MF0, MF0, MF0, MF0, 
-            MF0, MF0, MF0, MF0, MF0, MF0, MF0, MF0,            
-            M70, M70, M70, M70, M70, M70, M70, M70, 
-            M70, M70, M70, M70, M70, M70, M70, M70);            
+        static ReadOnlySpan<byte> K1Bytes
+            => new byte[]
+                {
+                    MF0, MF0, MF0, MF0, MF0, MF0, MF0, MF0, 
+                    MF0, MF0, MF0, MF0, MF0, MF0, MF0, MF0,            
+                    M70, M70, M70, M70, M70, M70, M70, M70, 
+                    M70, M70, M70, M70, M70, M70, M70, M70
+                };
+
+        static Vec256<byte> K0 
+        {
+            [MethodImpl(Inline)]
+            get => dinx.vloadu256(in K0Bytes[0]);
+        }
+
+        static Vec256<byte> K1 
+        {
+            [MethodImpl(Inline)]
+            get => dinx.vloadu256(in K1Bytes[0]);
+        }
 
         /// <summary>
         /// Rearranges the source vector according to the indices specified in the control vector
@@ -38,13 +56,12 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="spec">The control vector that defines the permutation</param>
         /// <remarks>Approach follows https://stackoverflow.com/questions/30669556/shuffle-elements-of-m256i-vector/30669632#30669632</remarks>
-        public static Vec256<byte> vperm32x8(in Vec256<byte> src, in Vec256<byte> spec)
-        {
-            var a = src;
-            var b = swaphl(in src);
-            var s1 = shuffle(in a, vadd(in spec, in K0));
-            var s2 = shuffle(in b, vadd(in spec, in K1));
-            return vor(s1,s2);
+        [MethodImpl(Inline)]
+        public static Vec256<byte> vpermvar32x8(in Vec256<byte> a, in Vec256<byte> spec)
+        {            
+            var x = vshuffle(a, vadd(spec, K0));
+            var y = vshuffle(swaphl(a), vadd(spec, K1));
+            return vor(x,y);
         }
  
     }

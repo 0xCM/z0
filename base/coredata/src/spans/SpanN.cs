@@ -57,6 +57,13 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
+        public Span(T[] src)
+        {
+            require(src.Length >= SpanLength, $"length(src) = {src.Length} < {SpanLength} = SpanLength");
+            this.data = src;
+        }
+
+        [MethodImpl(Inline)]
         public Span(ReadOnlySpan<T> src)
         {
             require(src.Length >= SpanLength, $"length(src) = {src.Length} < {SpanLength} = SpanLength");         

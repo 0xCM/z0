@@ -47,8 +47,8 @@ namespace Z0.Test
             var v = Vec128Pattern.Decrements<int>(3);
             Claim.eq(Vec128.FromParts(3,2,1,0),v);
 
-            Claim.eq(v, dinx.shuffle(u, Perm4.DCBA));
-            Claim.eq(u, dinx.shuffle(v, Perm4.DCBA));
+            Claim.eq(v, dinx.vshuffle(u, Perm4.DCBA));
+            Claim.eq(u, dinx.vshuffle(v, Perm4.DCBA));
         }
 
         public void reverse_256x8u()
@@ -107,7 +107,7 @@ namespace Z0.Test
             var y = Vec256.FromParts(5ul,6ul,7ul,8ul);
             var expect = Vec256.FromParts(2ul,6ul,4ul,8ul);
 
-            var actual = dinx.unpackhi(x,y);
+            var actual = dinx.vunpackhi(x,y);
             Claim.eq(expect, actual);
         }
 
@@ -116,7 +116,7 @@ namespace Z0.Test
             var x = Vec256.FromParts(1u, 2u,  3u,4u,   5u,6u,   7u,8u);
             var y = Vec256.FromParts(10u,12u, 13u,14u, 15u,16u, 17u,18u);
 
-            var actual = dinx.unpackhi(x,y);
+            var actual = dinx.vunpackhi(x,y);
             var expect = Vec256.FromParts(3u,13u,4u,14u,7u,17u,8u,18u);
             Claim.eq(expect, actual);
         }
@@ -129,7 +129,6 @@ namespace Z0.Test
             Claim.eq(expect, swapped);
         }
 
-
         public void blend_256_u8()
         {
             void Test1()
@@ -138,7 +137,7 @@ namespace Z0.Test
                 var v1 = Random.CpuVec256<byte>();
                 var bits = Random.BitString<N32>();
                 var mask = Vec256.Load(bits.Map(x => x ? (byte)0xFF : (byte)0));
-                var v3 = dinx.vblendv(v0,v1, mask);
+                var v3 = dinx.vblendvar(v0,v1, mask);
                 
                 var selection = Span256.AllocBlocks<byte>(1);
                 for(var i=0; i< selection.Length; i++)
@@ -153,7 +152,7 @@ namespace Z0.Test
             var v1 = Vec256.Fill<byte>(3);
             var v2 = Vec256.Fill<byte>(4);
             var control = Vec256Pattern.Alternate<byte>(0, 0xFF);
-            var v3 = dinx.vblendv(v1,v2, control);
+            var v3 = dinx.vblendvar(v1,v2, control);
             var block = Span256.AllocBlocks<byte>(1);
             for(var i=0; i<32; i++)
                 block[i] = (byte) (even(i) ? 3 : 4);
@@ -198,7 +197,8 @@ namespace Z0.Test
         //Not an efficient approach, used for comparison
         static Vec128<ushort> reverse_check(in Vec128<ushort> src)
         {
-            var v = dinx.shufflelo(dinx.shufflehi(src, 0b00_01_10_11), 0b00_01_10_11).As<ulong>();        
+            //var v = dinx.shufflelo(dinx.shufflehi(src, Perm4.ABCD), Perm4.ABCD).As<ulong>();
+            var v = dinx.vshufflelo(dinx.vshufflehi(src, 0b00_01_10_11), 0b00_01_10_11).As<ulong>();        
             return Vec128.FromParts(v[1], v[0]).As<ushort>();
         }
     }

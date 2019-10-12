@@ -18,7 +18,7 @@ namespace Z0
         public static long vdot(Vec256<int> lhs, Vec256<int> rhs)
         {
             var product = vmul(lhs,rhs);
-            var sum = vadd(lo(product),hi(product));
+            var sum = vadd(vlo(product),vhi(product));
             var span = sum.ToSpan128();
             return span[0] + span[1];            
         }
@@ -27,11 +27,9 @@ namespace Z0
         public static ulong vdot(Vec256<uint> lhs, Vec256<uint> rhs)
         {
             var product = vmul(lhs,rhs);
-            var sum = vadd(lo(product),hi(product));
+            var sum = vadd(vlo(product),vhi(product));
             var span = sum.ToSpan128();
             return span[0] + span[1];            
         }
-
     }
-
 }

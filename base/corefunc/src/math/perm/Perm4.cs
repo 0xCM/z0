@@ -39,7 +39,6 @@ namespace Z0
         /// Identifies the fourth of four permutation symbols
         /// </summary>
         D = 0b11,
-
         
         /// <summary>
         /// [00 01 10 11]: ABCD -> ABDC
@@ -82,27 +81,27 @@ namespace Z0
         BADC = B | (A << 2) | (D << 4) | (C << 6), 
 
         /// <summary>
-        /// [10 10 00 11]: ABCD -> BCAD
+        /// [01 10 00 11]: ABCD -> BCAD
         /// </summary>
         BCAD = B | (C << 2) | (A << 4) | (D << 6), 
 
         /// <summary>
-        /// ABCD -> BCDA
+        /// [01 10 11 00]: ABCD -> BCDA
         /// </summary>
         BCDA = B | (C << 2) | (D << 4) | (A << 6), 
 
         /// <summary>
-        /// ABCD -> BDAC
+        /// [01 11 01 10]: ABCD -> BDAC
         /// </summary>
         BDAC = B | (D << 2) | (A << 4) | (C << 6), 
 
         /// <summary>
-        /// ABCD -> BDCA
+        /// [01 11 10 00]: ABCD -> BDCA
         /// </summary>
         BDCA = B | (D << 2) | (C << 4) | (A << 6), 
 
         /// <summary>
-        /// ABCD -> CABD
+        /// [10 00 10 11]: ABCD -> CABD
         /// </summary>
         CABD = C | (A << 2) | (B << 4) | (D << 6), 
 
@@ -122,12 +121,12 @@ namespace Z0
         CBDA = C | (B << 2) | (D << 4) | (A << 6), 
 
         /// <summary>
-        /// ABCD -> CDAB
+        /// [10 11 00 01]: ABCD -> CDAB
         /// </summary>
         CDAB = C | (D << 2) | (A << 4) | (B << 6), 
 
         /// <summary>
-        /// ABCD -> CDBA
+        /// [10 11 01 00]: ABCD -> CDBA
         /// </summary>
         CDBA = C | (D << 2) | (B << 4) | (A << 6), 
 
@@ -152,12 +151,12 @@ namespace Z0
         DBCA = D | (B << 2) | (C << 4) | (A << 6), 
 
         /// <summary>
-        /// ABCD -> DCAB
+        /// [11 10 00 01]: ABCD -> DCAB
         /// </summary>
         DCAB = D | (C << 2) | (A << 4) | (B << 6), 
 
         /// <summary>
-        /// [00 01 10 11]: ABCD -> DCBA
+        /// [11 10 01 00]: ABCD -> DCBA
         /// </summary>
         DCBA = D | (C << 2) | (B << 4) | (A << 6), 
  
@@ -258,6 +257,21 @@ namespace Z0
                     return new Perm4[0]{};
                 sym.OnSome(s => dst[i] = s);
             }
+            return dst;
+        }
+
+        /// <summary>
+        /// Computes the digigs corresponding to each 2-segment of the permutation spec
+        /// </summary>
+        /// <param name="src">The perm spec</param>
+        public static Span<N4, byte> Digits(this Perm4 src)
+        {
+            var scalar = (byte)src;
+            var dst = NatSpan.Alloc<N4,byte>();
+            dst[0] = BitMask.between(scalar, 0, 1);
+            dst[1] = BitMask.between(scalar, 2, 3);
+            dst[2] = BitMask.between(scalar, 4, 5);
+            dst[3] = BitMask.between(scalar, 6, 7);
             return dst;
         }
 

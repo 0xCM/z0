@@ -14,6 +14,7 @@ namespace Z0
     
     using static zfunc;    
 
+
     [StructLayout(LayoutKind.Sequential, Size = ByteCount)]
     public struct Vec1024<T>
         where T : unmanaged

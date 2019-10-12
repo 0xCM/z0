@@ -32,16 +32,17 @@ namespace Z0
         }
 
         /// <summary>
-        /// Formats a span pf presumed integral values as a hexadecimal string
+        /// Formats a span pf presumed integral values as a sequence of hex values
         /// </summary>
         /// <param name="src">The source span</param>
         /// <param name="vectorize">Whether to format the result as a vector</param>
         /// <param name="sep">The character to use when separating digits</param>
+        /// <param name="specifier">Whether to prefix each number with the canonical hex specifier, "0x"</param>
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
-        public static string FormatHex<T>(this ReadOnlySpan<T> src, bool vectorize = false, char? sep = null)
-                where T : unmanaged
-            {
+        public static string FormatHex<T>(this ReadOnlySpan<T> src, bool vectorize = false, char? sep = null, bool specifier = false)
+            where T : unmanaged
+        {
                 var delimiter = sep ?? (vectorize ? AsciSym.Comma : AsciSym.Space);
                 var fmt = sbuild();
                 if(vectorize)
@@ -49,7 +50,7 @@ namespace Z0
 
                 for(var i = 0; i<src.Length; i++)
                 {
-                    fmt.Append(hexstring(src[i], true, false));
+                    fmt.Append(hexstring(src[i], true, specifier));
                     if(i != src.Length - 1)
                         fmt.Append((char)delimiter);
                 }
@@ -58,114 +59,115 @@ namespace Z0
                     fmt.Append(AsciSym.Gt);
                 
                 return fmt.ToString();
-
-            }
+        }
 
         /// <summary>
-        /// Formats an array pf presumed integral values as a hexadecimal string
+        /// Formats a span of integral type as a sequence of hex values
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <param name="vectorize">Whether to render comma-separated values enclosed by angular brackets</param>
+        /// <param name="sep">The character to use when separating digits</param>
+        /// <typeparam name="T">The primal type</typeparam>
+        [MethodImpl(Inline)]
+        public static string FormatHex<T>(this T[] src, bool vectorize = false, char? sep = null, bool specifier = false)
+            where T : unmanaged
+                => FormatHex(src.ToReadOnlySpan(),vectorize,sep, specifier);
+
+        /// <summary>
+        /// Formats a span of integral type as a sequence of hex values
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <param name="vectorize">Whether to render comma-separated values enclosed by angular brackets</param>
+        /// <param name="sep">The character to use when separating digits</param>
+        /// <param name="specifier">Whether to prefix each number with the canonical hex specifier, "0x"</param>
+        /// <typeparam name="T">The primal type</typeparam>
+        [MethodImpl(Inline)]
+        public static string FormatHex<T>(this Span<T> src, bool vectorize = false, char? sep = null, bool specifier = false)
+            where T : unmanaged
+                => src.ReadOnly().FormatHex(vectorize, sep, specifier);
+
+        /// <summary>
+        /// Formats a span of natural length and integral type as a sequence of hex values
         /// </summary>
         /// <param name="src">The source span</param>
         /// <param name="vectorize">Whether to format the result as a vector</param>
         /// <param name="sep">The character to use when separating digits</param>
+        /// <param name="specifier">Whether to prefix each number with the canonical hex specifier, "0x"</param>
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
-        public static string FormatHex<T>(this T[] src, bool vectorize = false, char? sep = null)
-                where T : unmanaged
-                    => FormatHex(src.ToReadOnlySpan(),vectorize,sep);
-
-        /// <summary>
-        /// Formats a span of presumed integral values as a hexadecimal string
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <param name="vectorize">Whether to format the result as a vector</param>
-        /// <param name="sep">The character to use when separating digits</param>
-        /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline)]
-        public static string FormatHex<T>(this Span<T> src, bool vectorize = false, char? sep = null)
-                where T : unmanaged
-                    => src.ReadOnly().FormatHex(vectorize, sep);
-
-        /// <summary>
-        /// Formats a span of natural length over an integral type as a hexadecimal string
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <param name="vectorize">Whether to format the result as a vector</param>
-        /// <param name="sep">The character to use when separating digits</param>
-        /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline)]
-        public static string FormatHex<N,T>(this Span<N,T> src, bool vectorize = false, char? sep = null)
-                where N : ITypeNat, new()
-                where T : unmanaged
-                    => src.Unsize().FormatHex(vectorize, sep);
-
-        /// <summary>
-        /// Formats the span cell values in base-16
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <param name="vectorize">Whether to render to content as a vector, i.e. components comma-separated 
-        /// and enclosed by angular brackets</param>
-        /// <param name="sep">The character to use as a separator, if applicable</param>
-        /// <typeparam name="T">The primal cell type</typeparam>
-       [MethodImpl(Inline)]
-       public static string FormatHex<N,T>(this ReadOnlySpan<N,T> src, bool vectorize = false, char? sep = null)
+        public static string FormatHex<N,T>(this Span<N,T> src, bool vectorize = false, char? sep = null, bool specifier = false)
             where N : ITypeNat, new()
             where T : unmanaged
-                => src.Unsize().FormatHex(vectorize, sep);
+                => src.Unsize().FormatHex(vectorize, sep, specifier);
 
         /// <summary>
-        /// Formats the vector component values in base-16
+        /// Formats a span of natural length and integral type as a sequence of hex values
         /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <param name="vectorize">Whether to render to content as a vector, i.e. components comma-separated 
-        /// and enclosed by angular brackets</param>
+        /// <param name="src">The source span</param>
+        /// <param name="vectorize">Whether to render comma-separated values enclosed by angular brackets</param>
         /// <param name="sep">The character to use as a separator, if applicable</param>
-        /// <typeparam name="T">The primal component type</typeparam>
+        /// <param name="specifier">Whether to prefix each number with the canonical hex specifier, "0x"</param>
+        /// <typeparam name="T">The primal cell type</typeparam>
         [MethodImpl(Inline)]
-        public static string FormatHex<T>(this Vec128<T> src, bool vectorize = true, char? sep = null)
+        public static string FormatHex<N,T>(this ReadOnlySpan<N,T> src, bool vectorize = false, char? sep = null, bool specifier = false)
+            where N : ITypeNat, new()
             where T : unmanaged
-                => src.ToSpan().FormatHex(vectorize, sep);
+                => src.Unsize().FormatHex(vectorize, sep, specifier);
 
         /// <summary>
-        /// Formats the vector component values in base-16
+        /// Formats cpu vector components of integral type as a sequence of hex values
         /// </summary>
         /// <param name="src">The source vector</param>
-        /// <param name="vectorize">Whether to render to content as a vector, i.e. components comma-separated 
-        /// and enclosed by angular brackets</param>
+        /// <param name="vectorize">Whether to render comma-separated values enclosed by angular brackets</param>
         /// <param name="sep">The character to use as a separator, if applicable</param>
+        /// <param name="specifier">Whether to prefix each number with the canonical hex specifier, "0x"</param>
         /// <typeparam name="T">The primal component type</typeparam>
         [MethodImpl(Inline)]
-        public static string FormatHex<T>(this Vec256<T> src, bool vectorize = true, char? sep = null)
+        public static string FormatHex<T>(this Vec128<T> src, bool vectorize = true, char? sep = null, bool specifier = false)
+            where T : unmanaged
+                => src.ToSpan().FormatHex(vectorize, sep, specifier);
+
+        /// <summary>
+        /// Formats cpu vector components of integral type as a sequence of hex values
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="vectorize">Whether to render comma-separated values enclosed by angular brackets</param>
+        /// <param name="sep">The character to use as a separator, if applicable</param>
+        /// <param name="specifier">Whether to prefix each number with the canonical hex specifier, "0x"</param>
+        /// <typeparam name="T">The primal component type</typeparam>
+        [MethodImpl(Inline)]
+        public static string FormatHex<T>(this Vec256<T> src, bool vectorize = true, char? sep = null, bool specifier = false)
              where T : unmanaged
-                => src.ToSpan().FormatHex(vectorize,sep); 
+                => src.ToSpan().FormatHex(vectorize,sep, specifier); 
 
         /// <summary>
-        /// Formats the vector component values in base-16
+        /// Formats cpu vector components of integral type as a sequence of hex values
         /// </summary>
         /// <param name="src">The source vector</param>
-        /// <param name="vectorize">Whether to render to content as a vector, i.e. components comma-separated 
-        /// and enclosed by angular brackets</param>
+        /// <param name="vectorize">Whether to render comma-separated values enclosed by angular brackets</param>
         /// <param name="sep">The character to use as a separator, if applicable</param>
+        /// <param name="specifier">Whether to prefix each number with the canonical hex specifier, "0x"</param>
         /// <typeparam name="T">The primal component type</typeparam>
         [MethodImpl(Inline)]
-        public static string FormatHex<T>(this Vec512<T> src, bool vectorize = true, char? sep = null)
+        public static string FormatHex<T>(this Vec512<T> src, bool vectorize = true, char? sep = null, bool specifier = false)
             where T : unmanaged
-                => src.ToSpan().FormatHex(vectorize,sep);
+                => src.ToSpan().FormatHex(vectorize,sep, specifier);
 
         /// <summary>
-        /// Formats vector component values in base-16
+        /// Formats cpu vector components of integral type as a sequence of hex values
         /// </summary>
         /// <param name="src">The source vector</param>
-        /// <param name="vectorize">Whether to render to content as a vector, i.e. components comma-separated 
-        /// and enclosed by angular brackets</param>
+        /// <param name="vectorize">Whether to render comma-separated values enclosed by angular brackets</param>
         /// <param name="sep">The character to use as a separator, if applicable</param>
+        /// <param name="specifier">Whether to prefix each number with the canonical hex specifier, "0x"</param>
         /// <typeparam name="T">The primal component type</typeparam>
         [MethodImpl(Inline)]
-        public static string FormatHex<T>(this Vec1024<T> src, bool vectorize = true, char? sep = null)
+        public static string FormatHex<T>(this Vec1024<T> src, bool vectorize = true, char? sep = null, bool specifier = false)
             where T : unmanaged
-                => src.ToSpan().FormatHex(vectorize,sep);
+                => src.ToSpan().FormatHex(vectorize,sep, specifier);
 
         /// <summary>
-        /// Formats span cells as blocked hex
+        /// Formats a span of integral type as a blocked hex
         /// </summary>
         /// <param name="src">The source span</param>
         /// <param name="width">The block width</param>
@@ -173,8 +175,32 @@ namespace Z0
         /// <typeparam name="T">The cell component type</typeparam>
         [MethodImpl(Inline)]
         public static string FormatHexBlocks<T>(this ReadOnlySpan<T> src, int? width = null, char? sep = null)
-                where T : unmanaged
-                    => src.FormatHex().SeparateBlocks(width ?? Unsafe.SizeOf<T>(), sep ?? AsciSym.Space);
+            where T : unmanaged
+                => src.FormatHex().SeparateBlocks(width ?? Unsafe.SizeOf<T>(), sep ?? AsciSym.Space);
+
+        /// <summary>
+        /// Formats a span of integral type as a blocked hex
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <param name="sep">The character to use as a separator, if applicable</param>
+        /// <param name="specifier">Whether to prefix each block with the canonical hex specifier, "0x"</param>
+        /// <typeparam name="T">The primal cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static string FormatHexBlocks<T>(this ReadOnlySpan<T> src, int? width, char? sep, bool specifier)
+            where T : unmanaged
+                => src.FormatHex().SeparateBlocks(width ?? Unsafe.SizeOf<T>(), sep ?? AsciSym.Space, specifier ? "0x" : string.Empty);
+
+        /// <summary>
+        /// Formats a span of integral type as a blocked hex
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <param name="sep">The character to use as a separator, if applicable</param>
+        /// <param name="specifier">Whether to prefix each block with the canonical hex specifier, "0x"</param>
+        /// <typeparam name="T">The primal cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static string FormatHexBlocks<T>(this Span<T> src, int? width, char? sep, bool specifier)
+            where T : unmanaged
+                => src.ReadOnly().FormatHexBlocks(width,sep,specifier);
 
         /// <summary>
         /// Formats span cells as blocked hex

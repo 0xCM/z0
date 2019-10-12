@@ -27,8 +27,8 @@ namespace Z0
         public static Vec512<T> FromParts<T>(Vec128<T> v00, Vec128<T> v01, Vec128<T> v10, Vec128<T> v11)        
             where T : unmanaged
         {
-            Vec256<T> lo = ginx.set(v00,v01);            
-            Vec256<T> hi = ginx.set(v10,v11);
+            Vec256<T> lo = ginx.vset(v00,v01);            
+            Vec256<T> hi = ginx.vset(v10,v11);
             return new Vec512<T>(in lo, in hi);
         }
 

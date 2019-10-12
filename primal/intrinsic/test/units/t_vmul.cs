@@ -180,8 +180,8 @@ namespace Z0
             {
                 var domain = closed((long)Int32.MinValue, (long)Int32.MaxValue);
                 var src = Random.Stream(domain).Select(x => (double)x);
-                var u = Vec256.Load(src.TakeSpan(4));
-                var v = Vec256.Load(src.TakeSpan(4));
+                var u = Vec256.Load(src.ToSpan(4));
+                var v = Vec256.Load(src.ToSpan(4));
                 var x = dfp.vmul(u,v);
                 var y = Vec256.Load(mathspan.mul(u.ToSpan(), v.ToSpan(), v.ToSpan().Replicate(true)));
                 Claim.eq(x,y);

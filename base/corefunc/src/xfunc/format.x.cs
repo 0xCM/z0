@@ -291,6 +291,32 @@ namespace Z0
             where T : unmanaged
                 => src.Unblocked.FormatList(delimiter, offset); 
 
+        /// <summary>
+        /// Formats a property declaration that specifies the span content
+        /// </summary>
+        /// <param name="src">The source data</param>
+        /// <param name="name">The property name</param>
+        /// <typeparam name="T">The serialization type</typeparam>
+        public static string FormatProperty<T>(this ReadOnlySpan<T> src, string name)
+            where T : unmanaged
+        {
+            var bytes = src.AsBytes();
+            var decl = $"public static ReadOnlySpan<byte> {name}{bitsize<T>()}{suffix<T>()}";
+            var data = embrace(bytes.FormatHex(sep: AsciSym.Comma, specifier:true));
+            var rhs = $"new byte[{bytes.Length}]" + data;
+            return $"{decl} => {rhs};";
+        }
+
+        /// <summary>
+        /// Formats a property declaration that specifies the span content
+        /// </summary>
+        /// <param name="src">The source data</param>
+        /// <param name="name">The property name</param>
+        /// <typeparam name="T">The serialization type</typeparam>
+        public static string FormatProperty<T>(this Span<T> src, string name)
+            where T : unmanaged
+                => src.ReadOnly().FormatProperty<T>(name);
+        
         public static string Format<T>(this Vec128<T> src, SeqFmtKind sfmt = SeqFmtKind.List)
             where T : unmanaged
         {
@@ -300,8 +326,7 @@ namespace Z0
                 case SeqFmtKind.Vector:
                     return elements.FormatVector();
                 default:
-                    return elements.FormatList();
-                    
+                    return elements.FormatList();                    
             }
         }
 

@@ -71,7 +71,7 @@ namespace Z0
         {
             var sw = stopwatch();
             var series = Define(domain, seed); 
-            var terms = series.Terms().TakeSpan(count);
+            var terms = series.Terms().ToSpan(count);
             var time = snapshot(sw);
             Claim.eq(terms.Length, count);
             Claim.eq(series.Observed.Observed, terms[count - 1].Observed);
@@ -84,7 +84,7 @@ namespace Z0
             var sw = stopwatch();
             var series = Define(domain, seed); 
             var s0 = series.Snapshot();                     
-            var terms = series.Terms().TakeSpan(steps);
+            var terms = series.Terms().ToSpan(steps);
             Claim.eq(terms.Length, steps);
             Claim.eq(series.Observed.Observed, terms[steps - 1].Observed);
             var evolved = SeriesEvolution.Define(seed, domain, s0.Observed, series.Observed, snapshot(sw));

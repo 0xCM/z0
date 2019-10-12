@@ -30,12 +30,12 @@ namespace Z0
             || typeof(T) == typeof(ushort) 
             || typeof(T) == typeof(uint) 
             || typeof(T) == typeof(ulong))
-                return flipu(src);
+                return flip_u(src);
             else if(typeof(T) == typeof(sbyte) 
             || typeof(T) == typeof(short) 
             || typeof(T) == typeof(int) 
             || typeof(T) == typeof(long))
-                return flipi(src);
+                return flip_i(src);
             else throw unsupported<T>();
         }           
 
@@ -54,18 +54,18 @@ namespace Z0
             || typeof(T) == typeof(ushort) 
             || typeof(T) == typeof(uint) 
             || typeof(T) == typeof(ulong))
-                flipu(ref src);
+                flip_u(ref src);
             else if(typeof(T) == typeof(sbyte) 
             || typeof(T) == typeof(short) 
             || typeof(T) == typeof(int) 
             || typeof(T) == typeof(long))
-                flipi(ref src);
+                flip_i(ref src);
             else throw unsupported<T>();
             return ref src;
         }           
 
         [MethodImpl(Inline)]
-        static T flipi<T>(T src)
+        static T flip_i<T>(T src)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
@@ -79,7 +79,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static T flipu<T>(T src)
+        static T flip_u<T>(T src)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -93,7 +93,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static ref T flipi<T>(ref T src)
+        static ref T flip_i<T>(ref T src)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
@@ -108,7 +108,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static ref T flipu<T>(ref T src)
+        static ref T flip_u<T>(ref T src)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -121,7 +121,5 @@ namespace Z0
                  math.flip(ref uint64(ref src));
             return ref src;
         }
-
-
     }
 }

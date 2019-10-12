@@ -78,6 +78,14 @@ namespace Z0
             =>  vadd(BitUtil.flip(src), Vec128.Ones<ulong>());
 
         /// <summary>
+        /// Negates the source vector
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        [MethodImpl(Inline)]
+        public static Vec256<sbyte> vnegate(in Vec256<sbyte> src)
+            =>  vsub(Vec256<sbyte>.Zero, src);
+
+        /// <summary>
         /// Negates the source vector (Two's complement)
         /// </summary>
         /// <param name="src">The source vector</param>
@@ -133,13 +141,6 @@ namespace Z0
         public static Vec256<ulong> vnegate(in Vec256<ulong> src)
             =>  vadd(BitUtil.flip(src), Vec256.Ones<ulong>());
 
-        /// <summary>
-        /// Negates the source vector
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        [MethodImpl(Inline)]
-        public static Vec256<sbyte> vnegate(in Vec256<sbyte> src)
-            =>  vsub(Vec256<sbyte>.Zero, src);
 
     }
 }
