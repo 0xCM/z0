@@ -13,11 +13,11 @@ namespace Z0
     /// <summary>
     /// Represents a comparison between a control expression and the result of applying a unary binary operator to specified operands
     /// </summary>
-    public sealed class UnaryTestExpr<T> : TestExpr<T, UnaryBitsExpr<T>>
+    public sealed class UnaryTestExpr<T> : TestExpr<T, UnaryBitExpr<T>>
         where T : unmanaged
     {
         [MethodImpl(Inline)]
-        public UnaryTestExpr(LogicOpKind testop, IBitExpr<T> control, UnaryBitsExpr<T> expr)
+        public UnaryTestExpr(LogicOpKind testop, IBitExpr<T> control, UnaryBitExpr<T> expr)
             : base(testop, ExprArity.Unary, control,expr)
         {
                 
@@ -28,11 +28,11 @@ namespace Z0
     /// <summary>
     /// Represents a comparison between a control expression and the result of applying a bitwise binary operator to specified operands
     /// </summary>
-    public sealed class BinaryTestExpr<T> : TestExpr<T, BinaryBitsExpr<T>>
+    public sealed class BinaryTestExpr<T> : TestExpr<T, BinaryBitExpr<T>>
         where T : unmanaged
     {
         [MethodImpl(Inline)]
-        public BinaryTestExpr(LogicOpKind testop, IBitExpr<T> control, BinaryBitsExpr<T> expr)
+        public BinaryTestExpr(LogicOpKind testop, IBitExpr<T> control, BinaryBitExpr<T> expr)
             : base(testop, ExprArity.Binary, control,expr)
         {
                 
@@ -43,11 +43,11 @@ namespace Z0
     /// <summary>
     /// Represents a comparison between a control expression and the result of applying a mixed bitwise operator to specified operands
     /// </summary>
-    public sealed class MixedTestExpr<T> : TestExpr<T, MixedBitsExpr<T>>
+    public sealed class MixedTestExpr<T> : TestExpr<T, BitShiftExpr<T>>
         where T : unmanaged
     {
         [MethodImpl(Inline)]
-        public MixedTestExpr(LogicOpKind testop, IBitExpr<T> control, MixedBitsExpr<T> expr)
+        public MixedTestExpr(LogicOpKind testop, IBitExpr<T> control, BitShiftExpr<T> expr)
             : base(testop, ExprArity.Binary, control,expr)
         {
                 

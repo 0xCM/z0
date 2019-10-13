@@ -11,8 +11,7 @@ namespace Z0
     using static zfunc;
 
     /// <summary>
-    /// Defines primitive operator classes in the expression language
-    /// which can be combined to specify user-defined operator classes
+    /// Defines primitive operator classes that can be combined to specify user-defined operator classes
     /// </summary>
     [Flags]
     public enum BitOpKind : uint
@@ -23,21 +22,36 @@ namespace Z0
         /// Bitwise AND
         /// </summary>
         And = Pow2.T00,
+        
+        /// <summary>
+        /// Bitwise complement of AND
+        /// </summary>
+        Nand = And << 1,
 
         /// <summary>
         /// Bitwise OR
         /// </summary>
-        Or = And << 1,
+        Or = Nand << 1,
 
+        /// <summary>
+        /// Bitwise complement of OR
+        /// </summary>
+        Nor = Or << 1,
+        
         /// <summary>
         /// Bitwise XOR
         /// </summary>
-        XOr = Or << 1,
+        XOr = Nor << 1,
 
         /// <summary>
-        /// One's complement
+        /// Bitwise complement of XOR and logical equivalent of value equality operator
         /// </summary>
-        Not = XOr << 1,
+        XNor = XOr << 1,
+
+        /// <summary>
+        /// Bitwise complement
+        /// </summary>
+        Not = XNor << 1,
 
         /// <summary>
         /// Two's complement
@@ -73,5 +87,32 @@ namespace Z0
         /// Arightmetic decrement
         /// </summary>
         Dec = Inc << 1,
+    }
+
+    /// <summary>
+    /// Classifies shift operators
+    /// </summary>
+    [Flags]
+    public enum ShiftOpKind : uint
+    {
+        /// <summary>
+        /// Logical left-shift
+        /// </summary>
+        Sll = BitOpKind.Sll,
+
+        /// <summary>
+        /// Logical right-shift
+        /// </summary>
+        Srl = BitOpKind.Srl,
+
+        /// <summary>
+        /// Left circular shift
+        /// </summary>
+        Rotl = BitOpKind.Rotl,
+
+        /// <summary>
+        /// Right circular shift
+        /// </summary>
+        Rotr  = BitOpKind.Rotr,
     }
 }

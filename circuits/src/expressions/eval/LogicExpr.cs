@@ -22,7 +22,7 @@ namespace Z0
         {
             switch(expr)
             {
-                case ILogicLiteralExpr x:
+                case ILogicLitExpr x:
                     return eval(x);
                 case ILogicOpExpr x:
                     return eval(x);
@@ -39,7 +39,7 @@ namespace Z0
         /// </summary>
         /// <param name="expr">The expression to evaluate</param>
         [MethodImpl(Inline)]
-        public static Bit eval(ILogicLiteralExpr expr)
+        public static Bit eval(ILogicLitExpr expr)
             => expr.Value;
 
         /// <summary>
@@ -87,9 +87,9 @@ namespace Z0
             switch(expr.Operator)
             {
                 case LogicOpKind.Not:
-                    return BitOps.not(eval(expr.Operand));
+                    return BitOps.not(eval(expr.Subject));
                 case LogicOpKind.Identity:
-                    return eval(expr.Operand);
+                    return eval(expr.Subject);
             }
             return Bit.Off;
         }

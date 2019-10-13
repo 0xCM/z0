@@ -16,73 +16,35 @@ namespace Z0
     partial class bitvector
     {
         /// <summary>
-        /// Increments a vector in-place
+        /// Decrements the source vector
         /// </summary>
         /// <param name="x">The source vector</param>
-        public static ref BitVector8 inc(ref BitVector8 x)
-        {
-            math.inc(ref x.data);
-            return ref x;
-        }
-
-        /// <summary>
-        /// Increments the source vector
-        /// </summary>
-        /// <param name="x">The source vector</param>
+        [MethodImpl(Inline)]
         public static BitVector8 inc(BitVector8 x)        
             => math.inc(x.data);
         
-
         /// <summary>
-        /// Increments a vector in-place
+        /// Decrements the source vector
         /// </summary>
         /// <param name="x">The source vector</param>
-        public static ref BitVector16 inc(ref BitVector16 x)
-        {
-            math.inc(ref x.data);
-            return ref x;
-        }
-
-        /// <summary>
-        /// Increments the source vector
-        /// </summary>
-        /// <param name="x">The source vector</param>
+        [MethodImpl(Inline)]
         public static BitVector16 inc(BitVector16 x)        
             => math.inc(x.data);
-        
-        /// <summary>
-        /// Increments a vector in-place
-        /// </summary>
-        /// <param name="x">The source vector</param>
-        public static ref BitVector32 inc(ref BitVector32 x)
-        {
-            math.inc(ref x.data);
-            return ref x;
-        }
 
         /// <summary>
-        /// Increments the source vector
+        /// Decrements the source vector
         /// </summary>
         /// <param name="x">The source vector</param>
+        [MethodImpl(Inline)]
         public static BitVector32 inc(BitVector32 x)        
             => math.inc(x.data);
 
         /// <summary>
-        /// Increments a vector in-place
+        /// Decrements the source vector
         /// </summary>
         /// <param name="x">The source vector</param>
-        public static ref BitVector64 inc(ref BitVector64 x)
-        {
-            math.inc(ref x.data);
-            return ref x;
-        }
-
-        /// <summary>
-        /// Increments the source vector
-        /// </summary>
-        /// <param name="x">The source vector</param>
+        [MethodImpl(Inline)]
         public static BitVector64 inc(BitVector64 x)        
             => math.inc(x.data);
     }
-
 }

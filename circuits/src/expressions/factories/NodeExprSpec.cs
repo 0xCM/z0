@@ -43,7 +43,7 @@ namespace Z0
             /// <param name="subject">The test subject</param>
             /// <typeparam name="T">The operand type</typeparam>
             [MethodImpl(Inline)]
-            public static BinaryTestExpr<T> test<T>(LogicOpKind test, IBitExpr<T> control, BinaryBitsExpr<T> subject)
+            public static BinaryTestExpr<T> test<T>(LogicOpKind test, IBitExpr<T> control, BinaryBitExpr<T> subject)
                 where T : unmanaged
                     => new BinaryTestExpr<T>(test,control,subject);
 
@@ -55,7 +55,7 @@ namespace Z0
             /// <param name="subject">The test subject</param>
             /// <typeparam name="T">The operand type</typeparam>
             [MethodImpl(Inline)]
-            public static UnaryTestExpr<T> test<T>(LogicOpKind test, IBitExpr<T> control, UnaryBitsExpr<T> subject)
+            public static UnaryTestExpr<T> test<T>(LogicOpKind test, IBitExpr<T> control, UnaryBitExpr<T> subject)
                 where T : unmanaged
                     => new UnaryTestExpr<T>(test,control,subject);
 
@@ -67,7 +67,7 @@ namespace Z0
             /// <param name="subject">The test subject</param>
             /// <typeparam name="T">The operand type</typeparam>
             [MethodImpl(Inline)]
-            public static MixedTestExpr<T> test<T>(LogicOpKind test, IBitExpr<T> control, MixedBitsExpr<T> subject)
+            public static MixedTestExpr<T> test<T>(LogicOpKind test, IBitExpr<T> control, BitShiftExpr<T> subject)
                 where T : unmanaged
                     => new MixedTestExpr<T>(test,control,subject);
      

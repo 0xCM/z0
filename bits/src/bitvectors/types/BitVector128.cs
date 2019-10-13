@@ -491,7 +491,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public BitVector128 Flip()
         {
-            xmm = dinx.vflip(xmm);
+            xmm = dinx.vnot(xmm);
             return this;
         }
 

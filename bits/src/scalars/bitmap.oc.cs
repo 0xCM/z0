@@ -12,7 +12,7 @@ namespace Z0
     using static As;
     using static AsIn;
 
-    partial class boc
+    partial class bvoc
     {
           public static ref sbyte bitmap_d8i_to_8i(in sbyte src, byte srcOffset, byte len, byte dstOffset, ref sbyte dst)
             => ref Bits.bitmap(src,srcOffset,len,dstOffset,ref dst);

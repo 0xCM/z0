@@ -5,30 +5,23 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;    
-    using System.Runtime.Intrinsics;
-    using System.Runtime.Intrinsics.X86;
 
+    public delegate T UnaryOp<T>(T a)
+        where T : unmanaged;
 
-    public delegate T BinaryOp<T>(T lhs, T rhs);
+    public delegate T BinaryOp<T>(T a, T b)
+        where T : unmanaged;
 
-    public delegate S BinaryOp<S,T>(S lhs, T rhs);
+    public delegate T TernaryOp<T>(T a, T b, T c)
+        where T : unmanaged;
 
-    public delegate T ShiftOp<T>(T lhs, int units);
+    public delegate T Shifter<T>(T a, int offset)
+        where T : unmanaged;
 
-    public delegate T BinaryOpIn<T>(in T lhs, in T rhs);
+    public delegate bool UnaryPred<T>(T a)
+        where T : unmanaged;
 
-    public delegate ref T BinaryOpRef<T>(ref T lhs, T rhs);
-    
-    public delegate T BinaryOpOut<T>(T lhs, T rhs, out T dst);
-
-    public delegate T UnaryOp<T>(T src);
-
-    public delegate T UnaryOpOut<T>(T src, out T dst);
-
-    public delegate ref T UnaryOpRef<T>(ref T io);
-
-    public delegate bool BinaryPredicate<T>(T lhs, T rhs);
-
+    public delegate bool BinaryPred<T>(T a, T b)
+        where T : unmanaged;
 }

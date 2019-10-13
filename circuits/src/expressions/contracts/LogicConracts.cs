@@ -16,7 +16,7 @@ namespace Z0
     }
 
 
-    public interface ILogicLiteralExpr : ILogicExpr, ILiteralExpr<Bit>
+    public interface ILogicLitExpr : ILogicExpr, ILiteralExpr<Bit>
     {
 
     }
@@ -49,9 +49,9 @@ namespace Z0
     public interface IUnaryLogicExpr : ILogicOpExpr
     {
         /// <summary>
-        /// The operand
+        /// The one and only operand
         /// </summary>
-        ILogicExpr Operand {get;}
+        ILogicExpr Subject {get;}
     }
 
 
@@ -67,7 +67,6 @@ namespace Z0
         /// The right operand
         /// </summary>
         ILogicExpr Right {get;}
-
 
     }
 

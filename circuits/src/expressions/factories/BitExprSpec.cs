@@ -29,9 +29,9 @@ namespace Z0
         /// <param name="operand">The operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static UnaryBitsExpr<T> unary<T>(BitOpKind op, IBitExpr<T> operand)
+        public static UnaryBitExpr<T> unary<T>(BitOpKind op, IBitExpr<T> operand)
             where T : unmanaged
-                => new UnaryBitsExpr<T>(op,operand);
+                => new UnaryBitExpr<T>(op,operand);
 
         /// <summary>
         /// Creates a bitwise binary expression
@@ -41,9 +41,9 @@ namespace Z0
         /// <param name="right">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static BinaryBitsExpr<T> binary<T>(BitOpKind op, IBitExpr<T> left, IBitExpr<T> right)
+        public static BinaryBitExpr<T> binary<T>(BitOpKind op, IBitExpr<T> left, IBitExpr<T> right)
             where T : unmanaged
-                => new BinaryBitsExpr<T>(op,left,right);
+                => new BinaryBitExpr<T>(op,left,right);
 
         /// <summary>
         /// Creates a bitwise ternary expression
@@ -53,9 +53,9 @@ namespace Z0
         /// <param name="b">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static TernaryBitsExpr<T> ternary<T>(BitOpKind op, IBitExpr<T> a, IBitExpr<T> b, IBitExpr<T> c)
+        public static TernaryBitExpr<T> ternary<T>(BitOpKind op, IBitExpr<T> a, IBitExpr<T> b, IBitExpr<T> c)
             where T : unmanaged
-                => new TernaryBitsExpr<T>(op,a,b,c);
+                => new TernaryBitExpr<T>(op,a,b,c);
 
         /// <summary>
         /// Creates a mixed bitwise expression
@@ -65,9 +65,9 @@ namespace Z0
         /// <param name="right">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static MixedBitsExpr<T> mixed<T>(BitOpKind op, IBitExpr<T> left, uint right)
+        public static BitShiftExpr<T> mixed<T>(BitOpKind op, IBitExpr<T> left, int right)
             where T : unmanaged
-                => new MixedBitsExpr<T>(op,left, literal(right));
+                => new BitShiftExpr<T>(op,left, literal(right));
 
         /// <summary>
         /// Creates a mixed bitwise expression
@@ -77,9 +77,9 @@ namespace Z0
         /// <param name="right">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static MixedBitsExpr<T> mixed<T>(BitOpKind op, IBitExpr<T> left, IBitExpr<uint> right)
+        public static BitShiftExpr<T> mixed<T>(BitOpKind op, IBitExpr<T> left, IBitExpr<int> right)
             where T : unmanaged
-                => new MixedBitsExpr<T>(op,left,right);
+                => new BitShiftExpr<T>(op,left,right);
 
         /// <summary>
         /// Defines a a bitwise complement expression
@@ -87,7 +87,7 @@ namespace Z0
         /// <param name="operand">The expression operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static UnaryBitsExpr<T> not<T>(IBitExpr<T> operand)
+        public static UnaryBitExpr<T> not<T>(IBitExpr<T> operand)
             where T : unmanaged
                 => unary(BitOpKind.Not, operand);
 
@@ -97,7 +97,7 @@ namespace Z0
         /// <param name="operand">The expression operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static UnaryBitsExpr<T> not<T>(T operand)
+        public static UnaryBitExpr<T> not<T>(T operand)
             where T : unmanaged
                 => not(literal(operand));
 
@@ -107,7 +107,7 @@ namespace Z0
         /// <param name="operand">The expression operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static UnaryBitsExpr<T> negate<T>(IBitExpr<T> operand)
+        public static UnaryBitExpr<T> negate<T>(IBitExpr<T> operand)
             where T : unmanaged
                 => unary(BitOpKind.Negate, operand);
 
@@ -117,7 +117,7 @@ namespace Z0
         /// <param name="operand">The expression operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static UnaryBitsExpr<T> negate<T>(T operand)
+        public static UnaryBitExpr<T> negate<T>(T operand)
             where T : unmanaged
                 => negate(literal(operand));
 
@@ -127,7 +127,7 @@ namespace Z0
         /// <param name="operand">The expression operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static UnaryBitsExpr<T> inc<T>(IBitExpr<T> operand)
+        public static UnaryBitExpr<T> inc<T>(IBitExpr<T> operand)
             where T : unmanaged
                 => unary(BitOpKind.Inc, operand);
 
@@ -137,7 +137,7 @@ namespace Z0
         /// <param name="operand">The expression operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static UnaryBitsExpr<T> inc<T>(T operand)
+        public static UnaryBitExpr<T> inc<T>(T operand)
             where T : unmanaged
                 => inc(literal(operand));
 
@@ -147,7 +147,7 @@ namespace Z0
         /// <param name="operand">The expression operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static UnaryBitsExpr<T> dec<T>(IBitExpr<T> operand)
+        public static UnaryBitExpr<T> dec<T>(IBitExpr<T> operand)
             where T : unmanaged
                 => unary(BitOpKind.Dec, operand);
 
@@ -157,7 +157,7 @@ namespace Z0
         /// <param name="operand">The expression operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static UnaryBitsExpr<T> dec<T>(T operand)
+        public static UnaryBitExpr<T> dec<T>(T operand)
             where T : unmanaged
                 => dec(literal(operand));
 
@@ -168,7 +168,7 @@ namespace Z0
         /// <param name="rhs">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static BinaryBitsExpr<T> and<T>(IBitExpr<T> lhs, IBitExpr<T> rhs)
+        public static BinaryBitExpr<T> and<T>(IBitExpr<T> lhs, IBitExpr<T> rhs)
             where T : unmanaged
                 => binary(BitOpKind.And, lhs,rhs);
 
@@ -179,7 +179,7 @@ namespace Z0
         /// <param name="rhs">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static BinaryBitsExpr<T> and<T>(T lhs, T rhs)
+        public static BinaryBitExpr<T> and<T>(T lhs, T rhs)
             where T : unmanaged
                 => and(literal(lhs), literal(rhs));
 
@@ -190,7 +190,7 @@ namespace Z0
         /// <param name="rhs">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static BinaryBitsExpr<T> or<T>(IBitExpr<T> lhs, IBitExpr<T> rhs)
+        public static BinaryBitExpr<T> or<T>(IBitExpr<T> lhs, IBitExpr<T> rhs)
             where T : unmanaged
                 => binary(BitOpKind.Or, lhs,rhs);
 
@@ -201,7 +201,7 @@ namespace Z0
         /// <param name="rhs">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static BinaryBitsExpr<T> or<T>(T lhs, T rhs)
+        public static BinaryBitExpr<T> or<T>(T lhs, T rhs)
             where T : unmanaged
                 => or(literal(lhs), literal(rhs));
 
@@ -212,7 +212,7 @@ namespace Z0
         /// <param name="rhs">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static BinaryBitsExpr<T> xor<T>(IBitExpr<T> lhs, IBitExpr<T> rhs)
+        public static BinaryBitExpr<T> xor<T>(IBitExpr<T> lhs, IBitExpr<T> rhs)
             where T : unmanaged
                 => binary(BitOpKind.XOr, lhs,rhs);
 
@@ -223,7 +223,7 @@ namespace Z0
         /// <param name="rhs">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static BinaryBitsExpr<T> xor<T>(T lhs, T rhs)
+        public static BinaryBitExpr<T> xor<T>(T lhs, T rhs)
             where T : unmanaged
                 => xor(literal(lhs), literal(rhs));
 
@@ -234,7 +234,7 @@ namespace Z0
         /// <param name="rhs">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static MixedBitsExpr<T> sll<T>(IBitExpr<T> lhs, uint rhs)
+        public static BitShiftExpr<T> sll<T>(IBitExpr<T> lhs, int rhs)
             where T : unmanaged
                 => mixed(BitOpKind.Sll, lhs, rhs);
 
@@ -245,7 +245,7 @@ namespace Z0
         /// <param name="rhs">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static MixedBitsExpr<T> sll<T>(T lhs, uint rhs)
+        public static BitShiftExpr<T> sll<T>(T lhs, int rhs)
             where T : unmanaged
                 => sll(literal(lhs), rhs);
 
@@ -256,7 +256,7 @@ namespace Z0
         /// <param name="rhs">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static MixedBitsExpr<T> srl<T>(IBitExpr<T> lhs, uint rhs)
+        public static BitShiftExpr<T> srl<T>(IBitExpr<T> lhs, int rhs)
             where T : unmanaged
                 => mixed(BitOpKind.Srl, lhs, rhs);
 
@@ -267,7 +267,7 @@ namespace Z0
         /// <param name="rhs">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static MixedBitsExpr<T> srl<T>(T lhs, uint rhs)
+        public static BitShiftExpr<T> srl<T>(T lhs, int rhs)
             where T : unmanaged
                 => srl(literal(lhs), rhs);
 
@@ -278,7 +278,7 @@ namespace Z0
         /// <param name="rhs">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static MixedBitsExpr<T> rotl<T>(IBitExpr<T> lhs, uint rhs)
+        public static BitShiftExpr<T> rotl<T>(IBitExpr<T> lhs, int rhs)
             where T : unmanaged
                 => mixed(BitOpKind.Rotl, lhs, rhs);
 
@@ -289,7 +289,7 @@ namespace Z0
         /// <param name="rhs">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static MixedBitsExpr<T> rotl<T>(T lhs, uint rhs)
+        public static BitShiftExpr<T> rotl<T>(T lhs, int rhs)
             where T : unmanaged
                 => rotl(literal(lhs), rhs);
 
@@ -300,7 +300,7 @@ namespace Z0
         /// <param name="rhs">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static MixedBitsExpr<T> rotr<T>(IBitExpr<T> lhs, uint rhs)
+        public static BitShiftExpr<T> rotr<T>(IBitExpr<T> lhs, int rhs)
             where T : unmanaged
                 => mixed(BitOpKind.Rotr, lhs, rhs);
 
@@ -311,7 +311,7 @@ namespace Z0
         /// <param name="rhs">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static MixedBitsExpr<T> rotr<T>(T lhs, uint rhs)
+        public static BitShiftExpr<T> rotr<T>(T lhs, int rhs)
             where T : unmanaged
                 => rotr(literal(lhs), rhs);
         

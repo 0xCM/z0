@@ -54,7 +54,7 @@ namespace Z0
         }
 
         void bv_xor_check<V,S>()
-            where V : unmanaged, IFixedScalarBits<V,S>
+            where V : unmanaged, IPrimalBitVector<V,S>
             where S : unmanaged
         {
             for(var i = 0; i< SampleSize; i++)

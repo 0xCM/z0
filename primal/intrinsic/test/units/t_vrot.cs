@@ -381,45 +381,18 @@ namespace Z0
             Trace("rotr(rotl(src))", vX.FormatHex(), 20);
         }
 
-        void rotv_128<T>(Interval<T> shiftRange)
-            where T : unmanaged
-        {
-            for(var sample=0; sample < SampleSize; sample++)
-            {
-                var src = Random.CpuVec128<T>();
-                var offsets = Random.CpuVec128(shiftRange);
-                
-                var vL = gbits.rotl(src,offsets);
-                var vRL = gbits.rotr(vL,offsets);
-                Claim.eq(src,vRL);
-                
-                var vR = gbits.rotr(src,offsets);
-                var vLR = gbits.rotl(vR,offsets);
-                Claim.eq(src,vLR);
-
-
-                for(var i=0; i<src.Length(); i++)
-                {
-                    Claim.eq(gbits.rotl(src[i], offsets[i]), vL[i]);
-                    Claim.eq(gbits.rotr(vL[i], offsets[i]), vRL[i]);
-                    
-                    Claim.eq(gbits.rotr(src[i], offsets[i]), vR[i]);
-                    Claim.eq(gbits.rotl(vR[i], offsets[i]), vLR[i]);
-                }        
-            }
-        }
 
         void vrotl_128_check<T>()
             where T : unmanaged
         {
-            byte offMin = 2;
-            byte offMax = (byte)(bitsize<T>() - 2);
+            var offMin = 2;
+            var offMax = bitsize<T>() - 2;
             for(var sample=0; sample<SampleSize; sample++)
             {
                 var x = Random.CpuVec128<T>();
                 var offset = Random.Next(offMin,offMax);
-                var result = ginx.vrotl(x,offset).ToSpan();
-                var expect = x.ToSpan().Map(src => gbits.rotl(src, convert<T>(offset)));
+                var result = ginx.vrotl(x,(byte)offset).ToSpan();
+                var expect = x.ToSpan().Map(src => gbits.rotl(src, offset));
                 for(var i=0; i<expect.Length; i++)
                     Claim.eq(expect[i],result[i]);
             }
@@ -527,7 +500,7 @@ namespace Z0
                 var x = Random.CpuVec256<T>();
                 var offset = Random.Next(offMin,offMax);
                 var result = ginx.vrotl(x,offset).ToSpan();
-                var expect = x.ToSpan().Map(src => gbits.rotl(src, convert<T>(offset)));
+                var expect = x.ToSpan().Map(src => gbits.rotl(src, (int)offset));
                 for(var i=0; i<expect.Length; i++)
                     Claim.eq(expect[i],result[i]);
             }
@@ -543,7 +516,7 @@ namespace Z0
                 var x = Random.CpuVec128<T>();
                 var offset = Random.Next(offMin,offMax);
                 var result = ginx.vrotr(x,offset).ToSpan();
-                var expect = x.ToSpan().Map(src => gbits.rotr(src, convert<T>(offset)));
+                var expect = x.ToSpan().Map(src => gbits.rotr(src, (int)offset));
                 for(var i=0; i<expect.Length; i++)
                     Claim.eq(expect[i],result[i]);
             }
@@ -559,7 +532,7 @@ namespace Z0
                 var x = Random.CpuVec256<T>();
                 var offset = Random.Next(offMin,offMax);
                 var result = ginx.vrotr(x,offset).ToSpan();
-                var expect = x.ToSpan().Map(src => gbits.rotr(src, convert<T>(offset)));
+                var expect = x.ToSpan().Map(src => gbits.rotr(src, (int)offset));
                 for(var i=0; i<expect.Length; i++)
                     Claim.eq(expect[i],result[i]);
             }

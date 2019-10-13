@@ -12,7 +12,7 @@ namespace Z0
     using static As;
     using static AsIn;
 
-    partial class boc
+    partial class bvoc
     {
         public static byte bzhi_d8u(byte src, uint index)
             => Bits.bzhi(src,index);

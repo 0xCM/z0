@@ -73,9 +73,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Bit parity(BitVector64 src)
             => odd(pop(src));
-
-
-
     }
-
 }

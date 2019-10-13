@@ -264,16 +264,16 @@ namespace Z0
         /// Rotates the bits leftwards by a specified offset
         /// </summary>
         /// <param name="offset">The magnitude of the rotation</param>
-        public void RotL(uint offset)
+        public void RotL(int offset)
         {
             Span<byte> dst = bitseq;
             Span<byte> src = stackalloc byte[Length];
             dst.CopyTo(src);
-            var cut = Length - (int)offset;
+            var cut = Length - offset;
             var seg1 = src.Slice(0, cut);
             var seg2 = src.Slice(cut);
             seg2.CopyTo(dst, 0);
-            seg1.CopyTo(dst, (int)offset);
+            seg1.CopyTo(dst, offset);
         }
 
         /// <summary>

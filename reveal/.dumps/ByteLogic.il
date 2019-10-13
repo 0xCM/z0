@@ -1,4 +1,4 @@
-// 2019-10-12 06:44:40:750
+// 2019-10-13 04:28:20:299
 ByteKind:byte and(ByteKind:byte a, ByteKind:byte b)
 {
     IL_0000: ldarg.0
@@ -251,6 +251,113 @@ ByteKind:byte f12(ByteKind:byte a, ByteKind:byte b, ByteKind:byte c)
     IL_0007: ldarg.2
     IL_0008: call Z0.ByteKind Z0.ByteLogic::xor(Z0.ByteKind,Z0.ByteKind)
     IL_000D: call Z0.ByteKind Z0.ByteLogic::and(Z0.ByteKind,Z0.ByteKind)
+    IL_0012: ret
+
+}
+ByteKind:byte f13(ByteKind:byte a, ByteKind:byte b, ByteKind:byte c)
+{
+    IL_0000: ldarg.1
+    IL_0001: ldarg.0
+    IL_0002: ldarg.2
+    IL_0003: call Z0.ByteKind Z0.ByteLogic::and(Z0.ByteKind,Z0.ByteKind)
+    IL_0008: call Z0.ByteKind Z0.ByteLogic::nor(Z0.ByteKind,Z0.ByteKind)
+    IL_000D: ret
+
+}
+ByteKind:byte f14(ByteKind:byte a, ByteKind:byte b, ByteKind:byte c)
+{
+    IL_0000: ldarg.2
+    IL_0001: call Z0.ByteKind Z0.ByteLogic::not(Z0.ByteKind)
+    IL_0006: ldarg.0
+    IL_0007: ldarg.1
+    IL_0008: call Z0.ByteKind Z0.ByteLogic::xor(Z0.ByteKind,Z0.ByteKind)
+    IL_000D: call Z0.ByteKind Z0.ByteLogic::and(Z0.ByteKind,Z0.ByteKind)
+    IL_0012: ret
+
+}
+ByteKind:byte f15(ByteKind:byte a, ByteKind:byte b, ByteKind:byte c)
+{
+    IL_0000: ldarg.2
+    IL_0001: ldarg.0
+    IL_0002: ldarg.1
+    IL_0003: call Z0.ByteKind Z0.ByteLogic::and(Z0.ByteKind,Z0.ByteKind)
+    IL_0008: call Z0.ByteKind Z0.ByteLogic::nor(Z0.ByteKind,Z0.ByteKind)
+    IL_000D: ret
+
+}
+ByteKind:byte f16(ByteKind:byte a, ByteKind:byte b, ByteKind:byte c)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: ldarg.2
+    IL_0003: call Z0.ByteKind Z0.ByteLogic::nor(Z0.ByteKind,Z0.ByteKind)
+    IL_0008: ldarg.1
+    IL_0009: ldarg.2
+    IL_000A: call Z0.ByteKind Z0.ByteLogic::xor(Z0.ByteKind,Z0.ByteKind)
+    IL_000F: call Z0.ByteKind Z0.ByteLogic::select(Z0.ByteKind,Z0.ByteKind,Z0.ByteKind)
+    IL_0014: ret
+
+}
+ByteKind:byte f17(ByteKind:byte a, ByteKind:byte b, ByteKind:byte c)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: ldarg.2
+    IL_0003: call Z0.ByteKind Z0.ByteLogic::or(Z0.ByteKind,Z0.ByteKind)
+    IL_0008: ldarg.1
+    IL_0009: ldarg.2
+    IL_000A: call Z0.ByteKind Z0.ByteLogic::and(Z0.ByteKind,Z0.ByteKind)
+    IL_000F: call Z0.ByteKind Z0.ByteLogic::select(Z0.ByteKind,Z0.ByteKind,Z0.ByteKind)
+    IL_0014: ret
+
+}
+ByteKind:byte f18(ByteKind:byte a, ByteKind:byte b, ByteKind:byte c)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call Z0.ByteKind Z0.ByteLogic::xor(Z0.ByteKind,Z0.ByteKind)
+    IL_0007: ldarg.0
+    IL_0008: ldarg.2
+    IL_0009: call Z0.ByteKind Z0.ByteLogic::xor(Z0.ByteKind,Z0.ByteKind)
+    IL_000E: call Z0.ByteKind Z0.ByteLogic::and(Z0.ByteKind,Z0.ByteKind)
+    IL_0013: ret
+
+}
+ByteKind:byte f19(ByteKind:byte a, ByteKind:byte b, ByteKind:byte c)
+{
+    IL_0000: ldarg.1
+    IL_0001: ldarg.2
+    IL_0002: call Z0.ByteKind Z0.ByteLogic::xor(Z0.ByteKind,Z0.ByteKind)
+    IL_0007: ldarg.0
+    IL_0008: ldarg.1
+    IL_0009: ldarg.2
+    IL_000A: call Z0.ByteKind Z0.ByteLogic::and(Z0.ByteKind,Z0.ByteKind)
+    IL_000F: call Z0.ByteKind Z0.ByteLogic::and(Z0.ByteKind,Z0.ByteKind)
+    IL_0014: call Z0.ByteKind Z0.ByteLogic::xor(Z0.ByteKind,Z0.ByteKind)
+    IL_0019: ret
+
+}
+ByteKind:byte f1a(ByteKind:byte a, ByteKind:byte b, ByteKind:byte c)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call Z0.ByteKind Z0.ByteLogic::and(Z0.ByteKind,Z0.ByteKind)
+    IL_0007: ldarg.0
+    IL_0008: ldarg.2
+    IL_0009: call Z0.ByteKind Z0.ByteLogic::xor(Z0.ByteKind,Z0.ByteKind)
+    IL_000E: call Z0.ByteKind Z0.ByteLogic::and(Z0.ByteKind,Z0.ByteKind)
+    IL_0013: call Z0.ByteKind Z0.ByteLogic::not(Z0.ByteKind)
+    IL_0018: ret
+
+}
+ByteKind:byte f1b(ByteKind:byte a, ByteKind:byte b, ByteKind:byte c)
+{
+    IL_0000: ldarg.2
+    IL_0001: ldarg.0
+    IL_0002: call Z0.ByteKind Z0.ByteLogic::not(Z0.ByteKind)
+    IL_0007: ldarg.1
+    IL_0008: call Z0.ByteKind Z0.ByteLogic::not(Z0.ByteKind)
+    IL_000D: call Z0.ByteKind Z0.ByteLogic::select(Z0.ByteKind,Z0.ByteKind,Z0.ByteKind)
     IL_0012: ret
 
 }

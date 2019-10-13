@@ -17,7 +17,7 @@ namespace Z0
         {
             switch(expr)
             {
-                case IBitLiteralExpr<T> x:
+                case IBitLitExpr<T> x:
                     return eval(x);
                 case IBitVarExpr<T> x:
                     return eval(x);
@@ -29,7 +29,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static BitLitExpr<T> eval<T>(IBitLiteralExpr<T> expr)
+        public static BitLitExpr<T> eval<T>(IBitLitExpr<T> expr)
             where T : unmanaged
             => expr.Value;
 
@@ -48,38 +48,38 @@ namespace Z0
         {
             switch(expr)               
             {
-                case IUnaryBitwiseExpr<T> x:
+                case IUnaryBitExpr<T> x:
                     return eval(x);
-                case IBinaryBitwiseExpr<T> x:
+                case IBinaryBitExpr<T> x:
                     return eval(x);
-                case IMixedBitwiseExpr<T> x:
+                case IBitShiftExpr<T> x:
                     return eval(x);
-                case ITernaryBitwiseExpr<T> x:
+                case ITernaryBitExpr<T> x:
                     return eval(x);
             }
 
             return default;
         }
 
-        public static BitLitExpr<T> eval<T>(IUnaryBitwiseExpr<T> expr)
+        public static BitLitExpr<T> eval<T>(IUnaryBitExpr<T> expr)
             where T : unmanaged
         {
             switch(expr.Operator)
             {
                 case BitOpKind.Not:
-                    return not(expr.Operand);
+                    return not(expr.Subject);
                 case BitOpKind.Negate:
-                    return negate(expr.Operand);
+                    return negate(expr.Subject);
                 case BitOpKind.Inc:
-                    return inc(expr.Operand);
+                    return inc(expr.Subject);
                 case BitOpKind.Dec:
-                    return dec(expr.Operand);
+                    return dec(expr.Subject);
             }
 
             return default;
         }
 
-        public static BitLitExpr<T> eval<T>(IBinaryBitwiseExpr<T> expr)
+        public static BitLitExpr<T> eval<T>(IBinaryBitExpr<T> expr)
             where T : unmanaged
         {
             switch(expr.Operator)
@@ -95,25 +95,25 @@ namespace Z0
             return default;
         }
 
-        public static BitLitExpr<T> eval<T>(IMixedBitwiseExpr<T> expr)
+        public static BitLitExpr<T> eval<T>(IBitShiftExpr<T> expr)
             where T : unmanaged
         {
             switch(expr.Operator)
             {
                 case BitOpKind.Sll:
-                    return sll(expr.Left, expr.Right);
+                    return sll(expr.Subject, expr.Offset);
                 case BitOpKind.Srl:
-                    return srl(expr.Left, expr.Right);
+                    return srl(expr.Subject, expr.Offset);
                 case BitOpKind.Rotl:
-                    return rotl(expr.Left, expr.Right);
+                    return rotl(expr.Subject, expr.Offset);
                 case BitOpKind.Rotr:
-                    return rotr(expr.Left, expr.Right);
+                    return rotr(expr.Subject, expr.Offset);
             }
 
             return default;
         }
 
-        public static BitLitExpr<T> eval<T>(ITernaryBitwiseExpr<T> expr)
+        public static BitLitExpr<T> eval<T>(ITernaryBitExpr<T> expr)
             where T : unmanaged
         {
             return default;
@@ -124,7 +124,7 @@ namespace Z0
         {
             switch(expr)
             {
-                case IBitLiteralExpr<Vec128<T>> x:
+                case IBitLitExpr<Vec128<T>> x:
                     return eval(x);
                 case IBitVarExpr<Vec128<T>> x:
                     return eval(x);
@@ -135,7 +135,7 @@ namespace Z0
             return default;
         }
 
-        public static BitLitExpr<Vec128<T>> eval<T>(IBitLiteralExpr<Vec128<T>> expr)
+        public static BitLitExpr<Vec128<T>> eval<T>(IBitLitExpr<Vec128<T>> expr)
             where T : unmanaged
         {
             return expr.Value;
@@ -155,38 +155,38 @@ namespace Z0
         {
             switch(expr)               
             {
-                case IUnaryBitwiseExpr<Vec128<T>> x:
+                case IUnaryBitExpr<Vec128<T>> x:
                     return eval(x);
-                case IBinaryBitwiseExpr<Vec128<T>> x:
+                case IBinaryBitExpr<Vec128<T>> x:
                     return eval(x);
-                case IMixedBitwiseExpr<Vec128<T>> x:
+                case IBitShiftExpr<Vec128<T>> x:
                     return eval(x);
-                case ITernaryBitwiseExpr<Vec128<T>> x:
+                case ITernaryBitExpr<Vec128<T>> x:
                     return eval(x);
             }
 
             return default;
         }
 
-        public static BitLitExpr<Vec128<T>> eval<T>(IUnaryBitwiseExpr<Vec128<T>> expr)
+        public static BitLitExpr<Vec128<T>> eval<T>(IUnaryBitExpr<Vec128<T>> expr)
             where T : unmanaged
         {
             switch(expr.Operator)
             {
                 case BitOpKind.Not:
-                    return not(expr.Operand);
+                    return not(expr.Subject);
                 case BitOpKind.Negate:
-                    return negate(expr.Operand);
+                    return negate(expr.Subject);
                 case BitOpKind.Inc:
-                    return inc(expr.Operand);
+                    return inc(expr.Subject);
                 case BitOpKind.Dec:
-                    return dec(expr.Operand);
+                    return dec(expr.Subject);
             }
 
             return default;
         }
 
-        public static BitLitExpr<Vec128<T>> eval<T>(IBinaryBitwiseExpr<Vec128<T>> expr)
+        public static BitLitExpr<Vec128<T>> eval<T>(IBinaryBitExpr<Vec128<T>> expr)
             where T : unmanaged
         {
             switch(expr.Operator)
@@ -202,19 +202,19 @@ namespace Z0
             return default;
         }
 
-        public static BitLitExpr<Vec128<T>> eval<T>(IMixedBitwiseExpr<Vec128<T>> expr)
+        public static BitLitExpr<Vec128<T>> eval<T>(IBitShiftExpr<Vec128<T>> expr)
             where T : unmanaged
         {
             switch(expr.Operator)
             {
                 case BitOpKind.Sll:
-                    return sll(expr.Left, expr.Right);
+                    return sll(expr.Subject, expr.Offset);
                 case BitOpKind.Srl:
-                    return srl(expr.Left, expr.Right);
+                    return srl(expr.Subject, expr.Offset);
                 case BitOpKind.Rotl:
-                    return rotl(expr.Left, expr.Right);
+                    return rotl(expr.Subject, expr.Offset);
                 case BitOpKind.Rotr:
-                    return rotr(expr.Left, expr.Right);
+                    return rotr(expr.Subject, expr.Offset);
             }
 
             return default;
@@ -225,7 +225,7 @@ namespace Z0
         {
             switch(expr)
             {
-                case IBitLiteralExpr<Vec256<T>> x:
+                case IBitLitExpr<Vec256<T>> x:
                     return eval(x);
                 case IBitVarExpr<Vec256<T>> x:
                     return eval(x);
@@ -236,7 +236,7 @@ namespace Z0
             return default;
         }
 
-        public static BitLitExpr<Vec256<T>> eval<T>(IBitLiteralExpr<Vec256<T>> expr)
+        public static BitLitExpr<Vec256<T>> eval<T>(IBitLitExpr<Vec256<T>> expr)
             where T : unmanaged
         {
             return expr.Value;
@@ -256,38 +256,38 @@ namespace Z0
         {
             switch(expr)               
             {
-                case IUnaryBitwiseExpr<Vec256<T>> x:
+                case IUnaryBitExpr<Vec256<T>> x:
                     return eval(x);
-                case IBinaryBitwiseExpr<Vec256<T>> x:
+                case IBinaryBitExpr<Vec256<T>> x:
                     return eval(x);
-                case IMixedBitwiseExpr<Vec256<T>> x:
+                case IBitShiftExpr<Vec256<T>> x:
                     return eval(x);
-                case ITernaryBitwiseExpr<Vec256<T>> x:
+                case ITernaryBitExpr<Vec256<T>> x:
                     return eval(x);
             }
 
             return default;
         }
 
-        public static BitLitExpr<Vec256<T>> eval<T>(IUnaryBitwiseExpr<Vec256<T>> expr)
+        public static BitLitExpr<Vec256<T>> eval<T>(IUnaryBitExpr<Vec256<T>> expr)
             where T : unmanaged
         {
             switch(expr.Operator)
             {
                 case BitOpKind.Not:
-                    return not(expr.Operand);
+                    return not(expr.Subject);
                 case BitOpKind.Negate:
-                    return negate(expr.Operand);
+                    return negate(expr.Subject);
                 case BitOpKind.Inc:
-                    return inc(expr.Operand);
+                    return inc(expr.Subject);
                 case BitOpKind.Dec:
-                    return dec(expr.Operand);
+                    return dec(expr.Subject);
             }
 
             return default;
         }
 
-        public static BitLitExpr<Vec256<T>> eval<T>(IBinaryBitwiseExpr<Vec256<T>> expr)
+        public static BitLitExpr<Vec256<T>> eval<T>(IBinaryBitExpr<Vec256<T>> expr)
             where T : unmanaged
         {
             switch(expr.Operator)
@@ -303,19 +303,19 @@ namespace Z0
             return default;
         }
 
-        public static BitLitExpr<Vec256<T>> eval<T>(IMixedBitwiseExpr<Vec256<T>> expr)
+        public static BitLitExpr<Vec256<T>> eval<T>(IBitShiftExpr<Vec256<T>> expr)
             where T : unmanaged
         {
             switch(expr.Operator)
             {
                 case BitOpKind.Sll:
-                    return sll(expr.Left, expr.Right);
+                    return sll(expr.Subject, expr.Offset);
                 case BitOpKind.Srl:
-                    return srl(expr.Left, expr.Right);
+                    return srl(expr.Subject, expr.Offset);
                 case BitOpKind.Rotl:
-                    return rotl(expr.Left, expr.Right);
+                    return rotl(expr.Subject, expr.Offset);
                 case BitOpKind.Rotr:
-                    return rotr(expr.Left, expr.Right);
+                    return rotr(expr.Subject, expr.Offset);
             }
 
             return default;
@@ -348,22 +348,22 @@ namespace Z0
                 => gmath.xor(eval(a).Value, eval(b).Value);
 
         [MethodImpl(Inline)]
-        static BitLitExpr<T> sll<T>(IBitExpr<T> a, IBitExpr<uint> b)
+        static BitLitExpr<T> sll<T>(IBitExpr<T> a, IBitExpr<int> b)
             where T : unmanaged
-                => gmath.sll(eval(a).Value, (int)eval(b).Value);
+                => gmath.sll(eval(a).Value, eval(b).Value);
 
         [MethodImpl(Inline)]
-        static BitLitExpr<T> srl<T>(IBitExpr<T> a, IBitExpr<uint> b)
+        static BitLitExpr<T> srl<T>(IBitExpr<T> a, IBitExpr<int> b)
             where T : unmanaged
-                => gmath.srl(eval(a).Value, (int)eval(b).Value);
+                => gmath.srl(eval(a).Value, eval(b).Value);
 
         [MethodImpl(Inline)]
-        static BitLitExpr<T> rotl<T>(IBitExpr<T> a, IBitExpr<uint> b)
+        static BitLitExpr<T> rotl<T>(IBitExpr<T> a, IBitExpr<int> b)
             where T : unmanaged
                 => gbits.rotl(eval(a).Value, eval(b).Value);
 
         [MethodImpl(Inline)]
-        static BitLitExpr<T> rotr<T>(IBitExpr<T> a, IBitExpr<uint> b)
+        static BitLitExpr<T> rotr<T>(IBitExpr<T> a, IBitExpr<int> b)
             where T : unmanaged
                 => gbits.rotr(eval(a).Value, eval(b).Value);
 
@@ -380,7 +380,7 @@ namespace Z0
         [MethodImpl(Inline)]
         static BitLitExpr<Vec128<T>> not<T>(IBitExpr<Vec128<T>> a)
             where T : unmanaged
-                => ginx.vflip(eval(a).Value);
+                => ginx.vnot(eval(a).Value);
 
         [MethodImpl(Inline)]
         static BitLitExpr<Vec128<T>> negate<T>(IBitExpr<Vec128<T>> a)
@@ -403,22 +403,22 @@ namespace Z0
                 => ginx.vxor(eval(a).Value, eval(b).Value);
 
         [MethodImpl(Inline)]
-        static BitLitExpr<Vec128<T>> sll<T>(IBitExpr<Vec128<T>> a, IBitExpr<uint> b)
+        static BitLitExpr<Vec128<T>> sll<T>(IBitExpr<Vec128<T>> a, IBitExpr<int> b)
             where T : unmanaged
                 => ginx.vsll(eval(a).Value, (byte)eval(b).Value);
 
         [MethodImpl(Inline)]
-        static BitLitExpr<Vec128<T>> srl<T>(IBitExpr<Vec128<T>> a, IBitExpr<uint> b)
+        static BitLitExpr<Vec128<T>> srl<T>(IBitExpr<Vec128<T>> a, IBitExpr<int> b)
             where T : unmanaged
                 => ginx.vsrl(eval(a).Value, (byte)eval(b).Value);
 
         [MethodImpl(Inline)]
-        static BitLitExpr<Vec128<T>> rotl<T>(IBitExpr<Vec128<T>> a, IBitExpr<uint> b)
+        static BitLitExpr<Vec128<T>> rotl<T>(IBitExpr<Vec128<T>> a, IBitExpr<int> b)
             where T : unmanaged
                 => ginx.vrotl(eval(a).Value, (byte)eval(b).Value);
 
         [MethodImpl(Inline)]
-        static BitLitExpr<Vec128<T>> rotr<T>(IBitExpr<Vec128<T>> a, IBitExpr<uint> b)
+        static BitLitExpr<Vec128<T>> rotr<T>(IBitExpr<Vec128<T>> a, IBitExpr<int> b)
             where T : unmanaged
                 => ginx.vrotr(eval(a).Value, (byte)eval(b).Value);
 
@@ -436,7 +436,7 @@ namespace Z0
         [MethodImpl(Inline)]
         static BitLitExpr<Vec256<T>> not<T>(IBitExpr<Vec256<T>> a)
             where T : unmanaged
-                => ginx.vflip(eval(a).Value);
+                => ginx.vnot(eval(a).Value);
 
         [MethodImpl(Inline)]
         static BitLitExpr<Vec256<T>> negate<T>(IBitExpr<Vec256<T>> a)
@@ -460,22 +460,22 @@ namespace Z0
                 => ginx.vxor(eval(a).Value, eval(b).Value);
 
          [MethodImpl(Inline)]
-        static BitLitExpr<Vec256<T>> sll<T>(IBitExpr<Vec256<T>> a, IBitExpr<uint> b)
+        static BitLitExpr<Vec256<T>> sll<T>(IBitExpr<Vec256<T>> a, IBitExpr<int> b)
             where T : unmanaged
                 => ginx.vsll(eval(a).Value, (byte)eval(b).Value);
 
         [MethodImpl(Inline)]
-        static BitLitExpr<Vec256<T>> srl<T>(IBitExpr<Vec256<T>> a, IBitExpr<uint> b)
+        static BitLitExpr<Vec256<T>> srl<T>(IBitExpr<Vec256<T>> a, IBitExpr<int> b)
             where T : unmanaged
                 => ginx.vsrl(eval(a).Value, (byte)eval(b).Value);
 
         [MethodImpl(Inline)]
-        static BitLitExpr<Vec256<T>> rotl<T>(IBitExpr<Vec256<T>> a, IBitExpr<uint> b)
+        static BitLitExpr<Vec256<T>> rotl<T>(IBitExpr<Vec256<T>> a, IBitExpr<int> b)
             where T : unmanaged
                 => ginx.vrotl(eval(a).Value, (byte)eval(b).Value);
 
         [MethodImpl(Inline)]
-        static BitLitExpr<Vec256<T>> rotr<T>(IBitExpr<Vec256<T>> a, IBitExpr<uint> b)
+        static BitLitExpr<Vec256<T>> rotr<T>(IBitExpr<Vec256<T>> a, IBitExpr<int> b)
             where T : unmanaged
                 => ginx.vrotr(eval(a).Value, (byte)eval(b).Value);
  

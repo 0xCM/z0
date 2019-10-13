@@ -12,7 +12,7 @@ namespace Z0
     partial class Bits
     {                
         /// <summary>
-        /// Rotates bits in the source rightwards by a specified offset
+        /// Rotates the source bits rightward by a specified offset
         /// </summary>
         /// <param name="src">The source value</param>
         /// <param name="offset">The magnitude of the rotation</param>
@@ -21,7 +21,16 @@ namespace Z0
             => (byte)((src >> offset) | (src << (8 - offset)));
 
         /// <summary>
-        /// Rotates bits in the source rightwards by a specified offset
+        /// Rotates the source bits rightward by a specified offset
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <param name="offset">The magnitude of the rotation</param>
+        [MethodImpl(Inline)]
+        public static byte rotr(byte src, int offset)
+            => (byte)((src >> offset) | (src << (8 - offset)));
+
+        /// <summary>
+        /// Rotates the source bits rightward by a specified offset
         /// </summary>
         /// <param name="src">The source value</param>
         /// <param name="offset">The magnitude of the rotation</param>
@@ -30,7 +39,16 @@ namespace Z0
             => (ushort)((src  >> offset) | (src << (16 - offset)));
 
         /// <summary>
-        /// Rotates bits in the source rightwards by a specified offset
+        /// Rotates the source bits rightward by a specified offset
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <param name="offset">The magnitude of the rotation</param>
+        [MethodImpl(Inline)]
+        public static ushort rotr(ushort src, int offset)
+            => (ushort)((src  >> offset) | (src << (16 - offset)));
+
+        /// <summary>
+        /// Rotates the source bits rightward by a specified offset
         /// </summary>
         /// <param name="src">The source value</param>
         /// <param name="offset">The magnitude of the rotation</param>
@@ -39,7 +57,16 @@ namespace Z0
             => (src >> (int)offset) | (src << (32 - (int)offset));
 
         /// <summary>
-        /// Rotates bits in the source rightwards by a specified offset
+        /// Rotates the source bits rightward by a specified offset
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <param name="offset">The magnitude of the rotation</param>
+        [MethodImpl(Inline)]
+        public static uint rotr(uint src, int offset)
+            => (src >> offset) | (src << (32 - offset));
+
+        /// <summary>
+        /// Rotates the source bits rightward by a specified offset
         /// </summary>
         /// <param name="src">The source value</param>
         /// <param name="offset">The magnitude of the rotation</param>
@@ -47,33 +74,18 @@ namespace Z0
         public static ulong rotr(ulong src, ulong offset)
             => (src >> (int)offset) | (src << (64 - (int)offset));
 
+        /// <summary>
+        /// Rotates the source bits rightward by a specified offset
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <param name="offset">The magnitude of the rotation</param>
         [MethodImpl(Inline)]
-        public static ref byte rotr(ref byte src, in byte offset)
-        {
-            src = rotr(src,offset);
-            return ref src;
-        }
+        public static ulong rotr(ulong src, int offset)
+            => (src >> offset) | (src << (64 - offset));
 
-        [MethodImpl(Inline)]
-        public static ref ushort rotr(ref ushort src, in ushort offset)
-        {
-            src = rotr(src,offset);
-            return ref src;
-        }
 
-        [MethodImpl(Inline)]
-        public static ref uint rotr(ref uint src, in uint offset)
-        {
-            src = rotr(src,offset);
-            return ref src;
-        }
 
-        [MethodImpl(Inline)]
-        public static ref ulong rotr(ref ulong src, in ulong offset)
-        {
-            src = rotr(src,offset);
-            return ref src;
-        }
+ 
     }
 
 }

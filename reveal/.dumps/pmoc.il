@@ -1,4 +1,4 @@
-// 2019-10-12 06:44:38:305
+// 2019-10-13 04:28:18:081
 Sign:int signum_d8i(sbyte x)
 {
     IL_0000: ldarg.0
@@ -1337,30 +1337,6 @@ ulong pow_g64u(ulong b, uint exp)
     IL_0007: ret
 
 }
-bool gt_d8u(byte lhs, byte rhs)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: call System.Boolean Z0.math::gt(System.Byte,System.Byte)
-    IL_0007: ret
-
-}
-bool gt_g8u(byte lhs, byte rhs)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: call System.Boolean Z0.gmath::gt<System.Byte>(System.Byte,System.Byte)
-    IL_0007: ret
-
-}
-bool gt_d16i(short lhs, short rhs)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: call System.Boolean Z0.math::gt(System.Int16,System.Int16)
-    IL_0007: ret
-
-}
 bool gt_g16i(short lhs, short rhs)
 {
     IL_0000: ldarg.0
@@ -1430,6 +1406,30 @@ bool gt_g64i(long lhs, long rhs)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: call System.Boolean Z0.gmath::gt<System.Int64>(System.Int64,System.Int64)
+    IL_0007: ret
+
+}
+bool gt_d64u(ulong lhs, ulong rhs)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call System.Boolean Z0.math::gt(System.UInt64,System.UInt64)
+    IL_0007: ret
+
+}
+bool gt_g64u(ulong lhs, ulong rhs)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call System.Boolean Z0.gmath::gt<System.UInt64>(System.UInt64,System.UInt64)
+    IL_0007: ret
+
+}
+bool gt_d32f(float lhs, float rhs)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call System.Boolean Z0.fmath::gt(System.Single,System.Single)
     IL_0007: ret
 
 }

@@ -11,13 +11,13 @@ namespace Z0
     using static zfunc;
 
     /// <summary>
-    /// Joins a mixed operator with left and right operands
+    /// Joins an operator with left and right operands
     /// </summary>
-    public sealed class MixedBitsExpr<T> : IMixedBitwiseExpr<T>
+    public sealed class BinaryBitExpr<T> : IBinaryBitExpr<T>
         where T : unmanaged
     {
         [MethodImpl(Inline)]
-        public MixedBitsExpr(BitOpKind op, IBitExpr<T> left, IBitExpr<uint> right)
+        public BinaryBitExpr(BitOpKind op, IBitExpr<T> left, IBitExpr<T> right)
         {
             this.Operator = op;
             this.Left = left;
@@ -30,7 +30,7 @@ namespace Z0
         public BitOpKind Operator {get;}
 
         /// <summary>
-        /// The number of parameters accepted by the expression
+        /// Specifies the number of parameters accepted by the expression
         /// </summary>
         public ExprArity Arity => ExprArity.Binary;
 
@@ -42,10 +42,9 @@ namespace Z0
         /// <summary>
         /// The right operand
         /// </summary>
-        public IBitExpr<uint> Right {get;}
-
+        public IBitExpr<T> Right {get;}
 
     }
 
- 
+
 }

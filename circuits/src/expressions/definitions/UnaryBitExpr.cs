@@ -13,13 +13,13 @@ namespace Z0
     /// <summary>
     /// Joins an operator with left and right operands
     /// </summary>
-    public sealed class UnaryBitsExpr<T> : IUnaryBitwiseExpr<T>
+    public sealed class UnaryBitExpr<T> : IUnaryBitExpr<T>
         where T : unmanaged
     {
-        public UnaryBitsExpr(BitOpKind op, IBitExpr<T> operand)
+        public UnaryBitExpr(BitOpKind op, IBitExpr<T> operand)
         {
             this.Operator = op;
-            this.Operand = operand;
+            this.Subject = operand;
         }
         
         /// <summary>
@@ -35,7 +35,7 @@ namespace Z0
         /// <summary>
         /// The operand
         /// </summary>
-        public IBitExpr<T> Operand {get;}
+        public IBitExpr<T> Subject {get;}
 
     }
 

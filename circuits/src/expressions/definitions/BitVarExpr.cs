@@ -10,51 +10,6 @@ namespace Z0
     
     using static zfunc;
 
-    public sealed class BitVarExpr : ILogicVarExpr
-    {
-
-        [MethodImpl(Inline)]
-        public BitVarExpr(string name, ILogicExpr init)
-        {
-            this.Name = name;
-            this.Value = init;
-        }
-
-        /// <summary>
-        /// The expression arity
-        /// </summary>
-        public ExprArity Arity => ExprArity.Unary;
-        
-        /// <summary>
-        /// The variable name
-        /// </summary>
-        public string Name {get;}
-
-        /// <summary>
-        /// The varible value
-        /// </summary>
-        public ILogicExpr Value {get; private set;}
-
-        [MethodImpl(Inline)]
-        public void Set(ILogicExpr value)
-        {
-            this.Value = value;
-        }
-
-        [MethodImpl(Inline)]
-        public void Set(BitLitExpr value)
-        {
-            this.Value = value;
-        }
-
-
-        public string Format()
-            => $"{Name} := {Value}";
-        
-        public override string ToString()
-            => Format();
-    }
-
     public sealed class BitVarExpr<T> : IBitVarExpr<T>
         where T : unmanaged
     {

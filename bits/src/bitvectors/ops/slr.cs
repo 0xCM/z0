@@ -49,7 +49,7 @@ namespace Z0
         /// <param name="y">The shift offset</param>
         [MethodImpl(Inline)]
         public static BitVector32 srl(BitVector32 x, int offset)
-            => math.srl(x.data,offset);
+            => math.srl(x.data, offset);
 
         /// <summary>
         /// Applies a logical right shift to the source vector
@@ -60,54 +60,6 @@ namespace Z0
         public static BitVector64 srl(BitVector64 x, int offset)
             => math.srl(x.data,offset);
  
-
-        /// <summary>
-        /// Computes a righwards shift in-place
-        /// </summary>
-        /// <param name="x">The source bitvector</param>
-        /// <param name="offset">The bit offset amount</param>
-        [MethodImpl(Inline)]
-        public static ref BitVector8 srl(ref BitVector8 x, int offset)
-        {
-            math.srl(ref x.data,offset);
-            return ref x;
-        }
-
-        /// <summary>
-        /// Computes a righwards shift in-place
-        /// </summary>
-        /// <param name="x">The source bitvector</param>
-        /// <param name="offset">The bit offset amount</param>
-        [MethodImpl(Inline)]
-        public static ref BitVector16 srl(ref BitVector16 x, int offset)
-        {
-            math.srl(ref x.data,offset);
-            return ref x;
-        }
-
-        /// <summary>
-        /// Computes a righwards shift in-place
-        /// </summary>
-        /// <param name="x">The source bitvector</param>
-        /// <param name="offset">The bit offset amount</param>
-        [MethodImpl(Inline)]
-        public static ref BitVector32 srl(ref BitVector32 x, int offset)
-        {
-            math.srl(ref x.data,offset);
-            return ref x;
-        }
-
-        /// <summary>
-        /// Computes a righwards shift in-place
-        /// </summary>
-        /// <param name="x">The source bitvector</param>
-        /// <param name="offset">The bit offset amount</param>
-        [MethodImpl(Inline)]
-        public static ref BitVector64 srl(ref BitVector64 x, int offset)
-        {
-            math.srl(ref x.data,offset);
-            return ref x;
-        }
 
     }
 

@@ -16,75 +16,35 @@ namespace Z0
     partial class bitvector
     {
         /// <summary>
-        /// Increments a vector in-place
+        /// Decrements the source vector
         /// </summary>
         /// <param name="x">The source vector</param>
-        public static ref BitVector8 dec(ref BitVector8 x)
-        {
-            math.dec(ref x.data);
-            return ref x;
-        }
-
-        /// <summary>
-        /// Increments the source vector
-        /// </summary>
-        /// <param name="x">The source vector</param>
+        [MethodImpl(Inline)]
         public static BitVector8 dec(BitVector8 x)        
             => math.dec(x.data);
         
-
         /// <summary>
-        /// Increments a vector in-place
+        /// Decrements the source vector
         /// </summary>
         /// <param name="x">The source vector</param>
-        public static ref BitVector16 dec(ref BitVector16 x)
-        {
-            math.dec(ref x.data);
-            return ref x;
-        }
-
-        /// <summary>
-        /// Increments the source vector
-        /// </summary>
-        /// <param name="x">The source vector</param>
+        [MethodImpl(Inline)]
         public static BitVector16 dec(BitVector16 x)        
             => math.dec(x.data);
-        
-        /// <summary>
-        /// Increments a vector in-place
-        /// </summary>
-        /// <param name="x">The source vector</param>
-        public static ref BitVector32 dec(ref BitVector32 x)
-        {
-            math.dec(ref x.data);
-            return ref x;
-        }
 
         /// <summary>
-        /// Increments the source vector
+        /// Decrements the source vector
         /// </summary>
         /// <param name="x">The source vector</param>
+        [MethodImpl(Inline)]
         public static BitVector32 dec(BitVector32 x)        
             => math.dec(x.data);
 
         /// <summary>
-        /// Increments a vector in-place
+        /// Decrements the source vector
         /// </summary>
         /// <param name="x">The source vector</param>
-        public static ref BitVector64 dec(ref BitVector64 x)
-        {
-            math.dec(ref x.data);
-            return ref x;
-        }
-
-        /// <summary>
-        /// Increments the source vector
-        /// </summary>
-        /// <param name="x">The source vector</param>
+        [MethodImpl(Inline)]
         public static BitVector64 dec(BitVector64 x)        
             => math.dec(x.data);
-
-
     }
-
 }

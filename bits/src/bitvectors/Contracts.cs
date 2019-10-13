@@ -106,15 +106,29 @@ namespace Z0
         /// </summary>
         Bit this[BitPos pos] {get; set;}            
 
+        /// <summary>
+        /// Vector content represented as a bytespan
+        /// </summary>
+        Span<byte> Bytes {get;}
+
+        /// <summary>
+        /// Formats the bitvector as a bitstring
+        /// </summary>
+        /// <param name="tlz">True if leadzing zeros should be trimmed, false otherwise</param>
+        /// <param name="specifier">True if the prefix specifier '0b' should be prepended</param>
+        /// <param name="blockWidth">The width of the blocks, if any</param>
+        string Format(bool tlz, bool specifier, int? blockWidth);
+ 
+        /// <summary>
+        /// Retrieves an index-identied segment (1 byte)
+        /// </summary>
+        /// <param name="index">The segment index</param>
+        ref byte Byte(int index);
+
     }
 
-    /// <summary>
-    /// Characterizes a bitvector parametrized by the storage cell type
-    /// </summary>
-    /// <typeparam name="S">The storage type</typeparam>
-    public interface IBitVector<V,S> : IBitVector
-        where V : IBitVector, new()
-        where S : unmanaged
+    public interface IBitVector<V> : IBitVector
+        where V : unmanaged, IBitVector
     {
         /// <summary>
         /// Selects a contiguous range of bits
@@ -153,79 +167,80 @@ namespace Z0
         V Replicate();
 
         /// <summary>
-        /// Applies a permutation to a replicated vector
+        /// Replicates a vector to which a permutation is then applied
         /// </summary>
         /// <param name="p">The permutation</param>
         V Replicate(Perm p);
 
         /// <summary>
-        /// Computes in-place the bitwise AND of the source vector and another,
-        /// returning the result to the caller
+        /// Computes in-place the bitwise AND of the source vector and another and returns the result to the caller
         /// </summary>
         /// <param name="y">The other vector</param>
         V And(V y);
 
         /// <summary>
-        /// Computes in-place the bitwise OR of the source vector and another,
-        /// returning the result to the caller
+        /// Computes in-place the bitwise OR of the source vector and another and returns the result to the caller
+        /// 
         /// </summary>
         /// <param name="y">The other vector</param>
         V Or(V y);
 
         /// <summary>
-        /// Computes in-place the bitwise XOR of the source vector and another,
-        /// returning the result to the caller
+        /// Computes in-place the bitwise XOR of the source vector and another and returns the result to the caller
+        /// 
         /// </summary>
         /// <param name="y">The other vector</param>
         V XOr(V y);
 
         /// <summary>
-        /// Computes in-place the bitwise complement of the source vector,
-        /// returning the result to the caller
+        /// Computes in-place the bitwise XNOR of the source vector and another and returns the result to the caller
         /// </summary>
-        V Flip();
+        /// <param name="y">The other vector</param>
+        V XNor(V y);
 
         /// <summary>
-        /// Rearranges the vector in-place as specified by a permutation
+        /// Computes in-place the bitwise NAND of the source vector and another and returns the result to the caller
         /// </summary>
-        /// <param name="spec">The permutation</param>
-        V Permute(Perm p);
-
-
-    }
-
-    /// <summary>
-    /// Characterizes a bitvector type that represents a fixed number of bits 
-    /// contained within a scalar of specified type
-    /// </summary>
-    /// <typeparam name="V">The concrete type</typeparam>
-    /// <typeparam name="S">The scalar type over which the bitvector is formed</typeparam>
-    public interface IFixedScalarBits<V,S> : IBitVector<V,S>, IEquatable<V>
-        where V : IFixedScalarBits<V,S>, new()
-        where S : unmanaged        
-    {
-        /// <summary>
-        /// The scalar value that defines the vector
-        /// </summary>
-        S Scalar {get;}
+        /// <param name="y">The other vector</param>
+        V Nand(V y);
 
         /// <summary>
-        /// Vector content represented as a bytespan
+        /// Computes in-place the bitwise NOR of the source vector and another and returns the result to the caller
         /// </summary>
-        Span<byte> Bytes {get;}
+        /// <param name="y">The other vector</param>
+        V Nor(V y);
 
         /// <summary>
-        /// Populates a target vector with specified source bits
+        /// Computes in-place the bitwise AND of the source vector and the complement of another and returns the result to the caller
         /// </summary>
-        /// <param name="spec">Identifies the source bits of interest</param>
-        /// <param name="dst">Receives the identified bits</param>
-        V Gather(V mask);
+        /// <param name="y">The other vector</param>
+        V AndNot(V y);
 
         /// <summary>
-        /// Computes the scalar product of the source vector and another
+        /// Computes in-place the bitwise ternary select between the source vector and the operands and returns the result to the caller
         /// </summary>
-        /// <param name="rhs">The right operand</param>
-        Bit Dot(V rhs);
+        /// <param name="y">The other vector</param>
+        V Select(V y, V z);
+
+        /// <summary>
+        /// Computes the source vector's bitwise complement in-place and returns the result to the caller
+        /// </summary>
+        V Not();
+
+        /// <summary>
+        /// Computes the source vector's two's complement in-place and returns the result to the caller
+        /// </summary>
+        V Negate();
+
+        /// <summary>
+        /// Increments the source vector in-place and returns the result to the caller
+        /// </summary>
+        V Inc();
+
+        /// <summary>
+        /// Decrements the source vector in-place and returns the result to the caller
+        /// </summary>
+        V Dec();
 
         /// <summary>
         /// Shifts the bits in the vector leftwards
@@ -243,40 +258,62 @@ namespace Z0
         /// Rotates vector bits rightwards by a specified offset
         /// </summary>
         /// <param name="offset">The magnitude of the rotation</param>
-        V Ror(uint offset);
+        V Rotr(int offset);
 
         /// <summary>
         /// Rotates vector bits leftwards by a specified offset
         /// </summary>
         /// <param name="offset">The magnitude of the rotation</param>
-        V Rol(uint offset);
+        V Rotl(int offset);
 
         /// <summary>
-        /// Formats the bitvector as a bitstring
+        /// Rearranges vector in-place as specified by a permutation and returns the result to the caller
         /// </summary>
-        /// <param name="tlz">True if leadzing zeros should be trimmed, false otherwise</param>
-        /// <param name="specifier">True if the prefix specifier '0b' should be prepended</param>
-        /// <param name="blockWidth">The width of the blocks, if any</param>
-        string Format(bool tlz, bool specifier, int? blockWidth);
- 
+        /// <param name="spec">The permutation</param>
+        V Permute(Perm p);
+
         /// <summary>
-        /// Retrieves an index-identied segment (1 byte)
+        /// Populates a target vector with specified source bits
         /// </summary>
-        /// <param name="index">The segment index</param>
-        ref byte Byte(int index);
+        /// <param name="spec">Identifies the source bits of interest</param>
+        /// <param name="dst">Receives the identified bits</param>
+        V Gather(V mask);
+
+        /// <summary>
+        /// Computes the scalar product of the source vector and another
+        /// </summary>
+        /// <param name="rhs">The right operand</param>
+        Bit Dot(V rhs);
+
+        T ToScalar<T>()
+            where T : unmanaged;
+
+    }
+
+    public interface IPrimalBitVector<V> : IBitVector<V>, IEquatable<V>
+        where V : unmanaged, IBitVector
+
+    {
+
 
     }
 
     /// <summary>
-    /// Characterizes a bitvector parametrized by its natural length and cell storage type
+    /// Characterizes a bitvector defined over a primal scalar, i.e. one of {BitVector8, BitVector16, BitVector32, BitVector64}
     /// </summary>
-    /// <typeparam name="T">The storage type</typeparam>
-    public interface INatBits<N,T> : IBitVector
-        where N : ITypeNat, new()
-        where T : unmanaged
+    /// <typeparam name="V">The primal vector type</typeparam>
+    /// <typeparam name="T">The primal scalar type</typeparam>
+    public interface IPrimalBitVector<V,T> : IPrimalBitVector<V>
+        where V : unmanaged, IPrimalBitVector<V,T>
+        where T : unmanaged        
     {
+        /// <summary>
+        /// The scalar value that defines the vector
+        /// </summary>
+        T Scalar {get;}
 
     }
+
 
 
 }

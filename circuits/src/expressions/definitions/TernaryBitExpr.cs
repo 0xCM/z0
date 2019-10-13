@@ -11,17 +11,18 @@ namespace Z0
     using static zfunc;
 
     /// <summary>
-    /// Joins an operator with left and right operands
+    /// Represents a bitwise operator over three operands
     /// </summary>
-    public sealed class BinaryBitsExpr<T> : IBinaryBitwiseExpr<T>
+    public sealed class TernaryBitExpr<T> : ITernaryBitExpr<T>
         where T : unmanaged
     {
         [MethodImpl(Inline)]
-        public BinaryBitsExpr(BitOpKind op, IBitExpr<T> left, IBitExpr<T> right)
+        public TernaryBitExpr(BitOpKind op, IBitExpr<T> first, IBitExpr<T> second, IBitExpr<T> third)
         {
             this.Operator = op;
-            this.Left = left;
-            this.Right = right;
+            this.First = first;
+            this.Second = second;
+            this.Third = third;
         }
         
         /// <summary>
@@ -30,21 +31,26 @@ namespace Z0
         public BitOpKind Operator {get;}
 
         /// <summary>
-        /// Specifies the number of parameters accepted by the expression
+        /// The first operand
         /// </summary>
-        public ExprArity Arity => ExprArity.Binary;
+        public IBitExpr<T> First {get;}
 
         /// <summary>
-        /// The left operand
+        /// The second operand
         /// </summary>
-        public IBitExpr<T> Left {get;}
+        public IBitExpr<T> Second {get;}
 
         /// <summary>
-        /// The right operand
+        /// The third operand
         /// </summary>
-        public IBitExpr<T> Right {get;}
+        public IBitExpr<T> Third {get;}
+
+        /// <summary>
+        /// The number of parameters accepted by the expression
+        /// </summary>
+        public ExprArity Arity => ExprArity.Ternary;     
 
     }
 
-
+ 
 }

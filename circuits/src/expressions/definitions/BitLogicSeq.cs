@@ -88,10 +88,6 @@ namespace Z0
             => Terms.Length;
 
         public BitString ToBitString()
-            => BitString.FromBits(Terms);
-        
+            => BitString.FromBits(Terms);        
     }
-
-
-
 }

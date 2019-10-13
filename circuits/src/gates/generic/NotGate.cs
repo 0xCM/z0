@@ -25,11 +25,11 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public Vec128<T> Send(in Vec128<T> x)
-            => ginx.vflip(in x);
+            => ginx.vnot(in x);
 
         [MethodImpl(Inline)]
         public Vec256<T> Send(in Vec256<T> x)
-            => ginx.vflip(x);
+            => ginx.vnot(x);
  
 
     }

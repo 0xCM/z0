@@ -20,7 +20,7 @@ namespace Z0
         public static BitMatrix16 flip(BitMatrix16 src)
         {
             src.GetCells(out Vec256<ushort> vSrc);
-            dinx.vflip(vSrc).StoreTo(ref src.Data[0]);
+            dinx.vnot(vSrc).StoreTo(ref src.Data[0]);
             return src;
         }
 
@@ -31,7 +31,7 @@ namespace Z0
             for(var i=0; i< A.RowCount; i += rowstep)
             {
                 var x1 = vload256(ref A[i]);
-                dinx.vflip(in x1).StoreTo(ref dst[i]);
+                dinx.vnot(in x1).StoreTo(ref dst[i]);
             }
             return dst;
         }
@@ -42,7 +42,7 @@ namespace Z0
             for(var i=0; i< A.RowCount; i += rowstep)
             {
                 A.GetCells(i, out Vec256<ulong> vSrc);
-                dinx.vflip(vSrc).StoreTo(ref A[i]);
+                dinx.vnot(vSrc).StoreTo(ref A[i]);
             }
             return ref A;
         }

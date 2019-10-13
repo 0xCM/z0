@@ -320,15 +320,15 @@ namespace Z0
             return default;
         }
 
-        T eval_mixedop<T>(BitOpKind op, T lhs, uint rhs)
+        T eval_mixedop<T>(BitOpKind op, T lhs, int rhs)
             where T : unmanaged
         {
             switch(op)
             {
                 case BitOpKind.Sll:
-                    return gmath.sll(lhs,(int)rhs);
+                    return gmath.sll(lhs,rhs);
                 case BitOpKind.Srl:
-                    return gmath.srl(lhs,(int)rhs);
+                    return gmath.srl(lhs,rhs);
                 case BitOpKind.Rotl:
                     return gbits.rotl(lhs,rhs);
                 case BitOpKind.Rotr:
@@ -338,33 +338,33 @@ namespace Z0
             return default;
         }
 
-        Vec128<T> eval_unaryop<T>(BitOpKind op, Vec128<T> lhs)
+        Vec128<T> eval_vunaryop<T>(BitOpKind op, Vec128<T> lhs)
             where T : unmanaged
         {
             switch(op)
             {
                 case BitOpKind.Not:
-                    return ginx.vflip(lhs);
+                    return ginx.vnot(lhs);
                 case BitOpKind.Negate:
                     return ginx.vnegate(lhs);
             }
             return default;
         }
 
-        Vec256<T> eval_unaryop<T>(BitOpKind op, Vec256<T> lhs)
+        Vec256<T> eval_vunaryop<T>(BitOpKind op, Vec256<T> lhs)
             where T : unmanaged
         {
             switch(op)
             {
                 case BitOpKind.Not:
-                    return ginx.vflip(lhs);
+                    return ginx.vnot(lhs);
                 case BitOpKind.Negate:
                     return ginx.vnegate(lhs);
             }
             return default;
         }
 
-        Vec128<T> eval_mixedop<T>(BitOpKind op, Vec128<T> lhs, uint rhs)
+        Vec128<T> eval_vmixedop<T>(BitOpKind op, Vec128<T> lhs, int rhs)
             where T : unmanaged
         {
             switch(op)
@@ -382,7 +382,7 @@ namespace Z0
             return default;
         }
 
-        Vec256<T> eval_mixedop<T>(BitOpKind op, Vec256<T> lhs, uint rhs)
+        Vec256<T> eval_vmixedop<T>(BitOpKind op, Vec256<T> lhs, int rhs)
             where T : unmanaged
         {
             switch(op)
@@ -415,7 +415,7 @@ namespace Z0
             return default;
         }
 
-        Vec128<T> eval_binop<T>(BitOpKind op, Vec128<T> lhs, Vec128<T> rhs)
+        Vec128<T> eval_vbinop<T>(BitOpKind op, Vec128<T> lhs, Vec128<T> rhs)
             where T : unmanaged
         {
             switch(op)
@@ -430,7 +430,7 @@ namespace Z0
             return default;
         }
 
-        Vec256<T> eval_binop<T>(BitOpKind op, Vec256<T> lhs, Vec256<T> rhs)
+        Vec256<T> eval_vbinop<T>(BitOpKind op, Vec256<T> lhs, Vec256<T> rhs)
             where T : unmanaged
         {
             switch(op)
@@ -491,7 +491,7 @@ namespace Z0
                 var a = Random.CpuVec128<T>();
                 v1.Set(a);   
                 Vec128<T> actual = BitExpr.eval(expr);
-                Vec128<T> expect = eval_unaryop(op,a);
+                Vec128<T> expect = eval_vunaryop(op,a);
                 Claim.eq(actual,expect);                            
             }
         }
@@ -507,7 +507,7 @@ namespace Z0
                 var a = Random.CpuVec256<T>();
                 v1.Set(a);   
                 Vec256<T> actual = BitExpr.eval(expr);
-                Vec256<T> expect = eval_unaryop(op,a);
+                Vec256<T> expect = eval_vunaryop(op,a);
                 Claim.eq(actual,expect);                            
             }
         }
@@ -527,7 +527,7 @@ namespace Z0
                 v1.Set(a);   
                 v2.Set(b);
                 Vec128<T> actual = BitExpr.eval(expr);
-                Vec128<T> expect = eval_binop(op,a,b);
+                Vec128<T> expect = eval_vbinop(op,a,b);
                 Claim.eq(actual,expect);                            
             }
         }
@@ -546,7 +546,7 @@ namespace Z0
                 v1.Set(a);   
                 v2.Set(b);
                 Vec256<T> actual = BitExpr.eval(expr);
-                Vec256<T> expect = eval_binop(op,a,b);
+                Vec256<T> expect = eval_vbinop(op,a,b);
                 Claim.eq(actual,expect);                            
             }
         }
@@ -555,10 +555,10 @@ namespace Z0
             where T : unmanaged
         {
             var v1 = bitvar<T>(1);
-            var v2 = bitvar(2, 0u);
+            var v2 = bitvar(2, 0);
             var expr = mixed(op,v1,v2);
-            var minoffset = 2u;
-            var maxoffset = bitsize<T>() - 2u;
+            var minoffset = 2;
+            var maxoffset = bitsize<T>() - 2;
             
             for(var i=0; i< SampleSize; i++)
             {
@@ -576,10 +576,10 @@ namespace Z0
             where T : unmanaged
         {
             var v1 = bitvar(1, Vec128<T>.Zero);
-            var v2 = bitvar(2, 0u);
+            var v2 = bitvar(2, 0);
             var expr = mixed(op,v1,v2);
-            var minoffset = 2u;
-            var maxoffset = bitsize<T>() - 2u;
+            var minoffset = 2;
+            var maxoffset = bitsize<T>() - 2;
             
             for(var i=0; i< SampleSize; i++)
             {
@@ -588,7 +588,7 @@ namespace Z0
                 v1.Set(a);   
                 v2.Set(b);
                 Vec128<T> actual = BitExpr.eval(expr);
-                Vec128<T> expect = eval_mixedop(op,a,b);
+                Vec128<T> expect = eval_vmixedop(op,a,b);
                 Claim.eq(actual,expect);                            
             }
         }
@@ -599,10 +599,10 @@ namespace Z0
             where T : unmanaged
         {
             var v1 = bitvar(1, Vec256<T>.Zero);
-            var v2 = bitvar(2, 0u);
+            var v2 = bitvar(2, 0);
             var expr = mixed(op,v1,v2);
-            var minoffset = 2u;
-            var maxoffset = bitsize<T>() - 2u;
+            var minoffset = 2;
+            var maxoffset = bitsize<T>() - 2;
             
             for(var i=0; i< SampleSize; i++)
             {
@@ -611,7 +611,7 @@ namespace Z0
                 v1.Set(a);   
                 v2.Set(b);
                 Vec256<T> actual = BitExpr.eval(expr);
-                Vec256<T> expect = eval_mixedop(op,a,b);
+                Vec256<T> expect = eval_vmixedop(op,a,b);
                 Claim.eq(actual,expect);                            
             }
         }

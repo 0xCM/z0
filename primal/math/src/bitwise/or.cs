@@ -18,172 +18,117 @@ namespace Z0
     {
 
         [MethodImpl(Inline)]
-        public static sbyte or(sbyte lhs, sbyte rhs)
-            => (sbyte)(lhs | rhs);
+        public static sbyte or(sbyte a, sbyte b)
+            => (sbyte)(a | b);
             
         [MethodImpl(Inline)]
-        public static byte or(byte lhs, byte rhs)
-            => (byte)(lhs | rhs);
+        public static byte or(byte a, byte b)
+            => (byte)(a | b);
 
         [MethodImpl(Inline)]
-        public static short or(short lhs, short rhs)
-            => (short)(lhs | rhs);
+        public static short or(short a, short b)
+            => (short)(a | b);
 
         [MethodImpl(Inline)]
-        public static ushort or(ushort lhs, ushort rhs)
-            => (ushort)(lhs | rhs);
+        public static ushort or(ushort a, ushort b)
+            => (ushort)(a | b);
 
         [MethodImpl(Inline)]
-        public static int or(int lhs, int rhs)
-            => lhs | rhs;
+        public static int or(int a, int b)
+            => a | b;
 
         [MethodImpl(Inline)]
-        public static uint or(uint lhs, uint rhs)
-            => lhs | rhs;
+        public static uint or(uint a, uint b)
+            => a | b;
 
         [MethodImpl(Inline)]
-        public static long or(long lhs, long rhs)
-            => lhs | rhs;
+        public static long or(long a, long b)
+            => a | b;
 
         [MethodImpl(Inline)]
-        public static ulong or(ulong lhs, ulong rhs)
-            => lhs | rhs;
+        public static ulong or(ulong a, ulong b)
+            => a | b;
 
 
         [MethodImpl(Inline)]
-        public static float or(float lhs, float rhs)
-            => BitConverter.Int32BitsToSingle(lhs.ToBits() | rhs.ToBits());
+        public static float or(float a, float b)
+            => BitConverter.Int32BitsToSingle(a.ToBits() | b.ToBits());
 
         [MethodImpl(Inline)]
-        public static double or(double lhs, double rhs)
-            => BitConverter.Int64BitsToDouble(lhs.ToBits() | rhs.ToBits());         
+        public static double or(double a, double b)
+            => BitConverter.Int64BitsToDouble(a.ToBits() | b.ToBits());         
  
         [MethodImpl(Inline)]
-        public static ref sbyte or(ref sbyte lhs, sbyte rhs)
+        public static ref sbyte or(ref sbyte a, sbyte b)
         {
-            lhs = (sbyte)(lhs | rhs);
-            return ref lhs;
+            a = (sbyte)(a | b);
+            return ref a;
         }
 
         [MethodImpl(Inline)]
-        public static ref byte or(ref byte lhs, byte rhs)
+        public static ref byte or(ref byte a, byte b)
         {
-            lhs = (byte)(lhs | rhs);
-            return ref lhs;
+            a = (byte)(a | b);
+            return ref a;
         }
 
         [MethodImpl(Inline)]
-        public static ref short or(ref short lhs, short rhs)
+        public static ref short or(ref short a, short b)
         {
-            lhs = (short)(lhs | rhs);
-            return ref lhs;
+            a = (short)(a | b);
+            return ref a;
         }
 
         [MethodImpl(Inline)]
-        public static ref ushort or(ref ushort lhs, ushort rhs)
+        public static ref ushort or(ref ushort a, ushort b)
         {
-            lhs = (ushort)(lhs | rhs);
-            return ref lhs;
+            a = (ushort)(a | b);
+            return ref a;
         }
 
         [MethodImpl(Inline)]
-        public static ref int or(ref int lhs, int rhs)
+        public static ref int or(ref int a, int b)
         {
-            lhs = lhs | rhs;
-            return ref lhs;
+            a = a | b;
+            return ref a;
         }
 
         [MethodImpl(Inline)]
-        public static ref uint or(ref uint lhs, uint rhs)
+        public static ref uint or(ref uint a, uint b)
         {
-            lhs = lhs | rhs;
-            return ref lhs;
+            a = a | b;
+            return ref a;
         }
 
         [MethodImpl(Inline)]
-        public static ref long or(ref long lhs, long rhs)
+        public static ref long or(ref long a, long b)
         {
-            lhs = lhs | rhs;
-            return ref lhs;
+            a = a | b;
+            return ref a;
         }
 
         [MethodImpl(Inline)]
-        public static ref ulong or(ref ulong lhs, ulong rhs)
+        public static ref ulong or(ref ulong a, ulong b)
         {
-            lhs = lhs | rhs;
-            return ref lhs;
+            a = a | b;
+            return ref a;
         }
 
         [MethodImpl(Inline)]
-        public static ref float or(ref float lhs, float rhs)
+        public static ref float or(ref float a, float b)
         {
-            lhs = or(lhs,rhs);
-            return ref lhs;
+            a = or(a,b);
+            return ref a;
         }
 
 
         [MethodImpl(Inline)]
-        public static ref double or(ref double lhs, double rhs)
+        public static ref double or(ref double a, double b)
         {
-            lhs = or(lhs,rhs);
-            return ref lhs;
+            a = or(a,b);
+            return ref a;
         }
 
-        [MethodImpl(Inline)]
-        public static ref sbyte or(in sbyte lhs, in sbyte rhs, ref sbyte dst)
-        {
-            dst = (sbyte)(lhs | rhs);
-            return ref dst;
-        }
-
-        [MethodImpl(Inline)]
-        public static ref byte or(in byte lhs, in byte rhs, ref byte dst)
-        {
-            dst = (byte)(lhs | rhs);
-            return ref dst;
-        }
-
-        [MethodImpl(Inline)]
-        public static ref short or(in short lhs, in short rhs, ref short dst)
-        {
-            dst = (short)(lhs | rhs);
-            return ref dst;
-        }
-
-        [MethodImpl(Inline)]
-        public static ref ushort or(in ushort lhs, in ushort rhs, ref ushort dst)
-        {
-            dst = (ushort)(lhs | rhs);
-            return ref dst;
-        }
-
-        [MethodImpl(Inline)]
-        public static ref int or(in int lhs, in int rhs, ref int dst)
-        {
-            dst = lhs | rhs;
-            return ref dst;
-        }
-
-        [MethodImpl(Inline)]
-        public static ref uint or(in uint lhs, in uint rhs, ref uint dst)
-        {
-            dst = lhs | rhs;
-            return ref dst;
-        }
-
-        [MethodImpl(Inline)]
-        public static ref long or(in long lhs, in long rhs, ref long dst)
-        {
-            dst = lhs | rhs;
-            return ref dst;
-        }
-
-        [MethodImpl(Inline)]
-        public static ref ulong or(in ulong lhs, in ulong rhs, ref ulong dst)
-        {
-            dst = lhs | rhs;
-            return ref dst;
-        }            
  
     }
 }

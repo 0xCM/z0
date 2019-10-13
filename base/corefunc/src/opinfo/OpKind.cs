@@ -218,6 +218,12 @@ namespace Z0
         /// </summary>
         [Symbol(AsciSym.Amp), Arity(OpArity.Binary)]
         And,
+        
+        /// <summary>
+        /// Indicates a binary operator that computes the composite operation not(a & b)
+        /// </summary>
+        [Arity(OpArity.Binary)]
+        Nand,
 
         /// <summary>
         /// Indicates a binary operator that computes the bitwise or of the source operands
@@ -226,10 +232,28 @@ namespace Z0
         Or,
 
         /// <summary>
+        /// Indicates a binary operator that computes the composite operation not(a | b)
+        /// </summary>
+        [Arity(OpArity.Binary)]
+        Nor,
+
+        /// <summary>
         /// Indicates a binary operator that computes the bitwise xor of the source operands
         /// </summary>
         [Symbol(AsciSym.Caret), Arity(OpArity.Binary)]
         XOr,
+
+        /// <summary>
+        /// Indicates a binary operator that computes the composite operation not(a ^ b)
+        /// </summary>
+        [Arity(OpArity.Binary)]
+        XNor,
+
+        /// <summary>
+        /// Indicates the ternary operator a ? b : c
+        /// </summary>
+        [Arity(OpArity.Ternary)]
+        AltSelect,
 
         /// <summary>
         /// Indicates a left-shift bitwise operator
@@ -253,9 +277,17 @@ namespace Z0
             Description("Indicates a bitwise operator that rotates the bits of an operand rightwards")]
         RotR,
 
-        [Symbol(AsciSym.Tilde), Arity(OpArity.Unary),
-            Description("Indicates a two's complement bitwise operator that reverses that state over every bit in the operand")]
-        Flip,
+        /// <summary>
+        /// Indicates the bitwise complement operator ~
+        /// </summary>
+        [Arity(OpArity.Unary)]
+        Not,
+
+        /// <summary>
+        /// Indicates the identity operator x -> x for all x
+        /// </summary>
+        [Arity(OpArity.Unary)]
+        Identity,
 
         /// <summary>
         /// Indicates a bit test operator

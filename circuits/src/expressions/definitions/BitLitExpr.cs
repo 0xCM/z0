@@ -10,52 +10,10 @@ namespace Z0
     
     using static zfunc;
 
-    /// <summary>    
-    /// Lifts a literal bit value to an expression
-    /// </summary>
-    public sealed class BitLitExpr : ILogicLiteralExpr
-    {
-        /// <summary>
-        /// Implicitly converts a literal expression to the underlying value 
-        /// </summary>
-        /// <param name="src">The source epxression</param>
-        [MethodImpl(Inline)]
-        public static implicit operator Bit(BitLitExpr src)
-            => src.Value;
-
-        /// <summary>
-        /// Implicitly converts a value to a literal expression
-        /// </summary>
-        /// <param name="src">The source value</param>
-        [MethodImpl(Inline)]
-        public static implicit operator BitLitExpr(Bit src)
-            => new BitLitExpr(src);
-
-        [MethodImpl(Inline)]
-        public BitLitExpr(Bit value)
-        {                
-            this.Value= value;
-        }            
-
-        /// <summary>
-        /// The literal value
-        /// </summary>
-        public Bit Value {get;}
-
-        public ExprArity Arity => ExprArity.Literal;
-
-        public string Format(bool digit = false)
-            => digit ? Value.ToString() 
-                : Value ? "T" : "F";
-
-        public override string ToString() 
-            => Format();
-    }
-
     /// <summary>
     /// Lifts a literal value to an expression
     /// </summary>
-    public sealed class BitLitExpr<T> : IBitLiteralExpr<T>
+    public sealed class BitLitExpr<T> : IBitLitExpr<T>
         where T : unmanaged
     {
         /// <summary>

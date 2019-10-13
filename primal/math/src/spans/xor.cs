@@ -23,7 +23,7 @@ namespace Z0
             where T : unmanaged
         {
             for(var i=0; i< length(lhs,rhs); i++)
-                gmath.xor(ref lhs[i], rhs[i]);
+                lhs[i] = gmath.xor(lhs[i], rhs[i]);
            return lhs;
         }
 
@@ -31,7 +31,7 @@ namespace Z0
             where T : unmanaged
         {
             for(var i=0; i< lhs.Length; i++)
-                gmath.xor(ref lhs[i],rhs);
+                lhs[i] = gmath.xor(lhs[i], rhs);
             return lhs;
         }
     }

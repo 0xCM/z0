@@ -60,54 +60,6 @@ namespace Z0
         public static BitVector64 sll(BitVector64 x, int offset)
             => math.sll(x.Scalar,offset);
  
-        /// <summary>
-        /// Computes a leftwards shift in-place
-        /// </summary>
-        /// <param name="x">The source bitvector</param>
-        /// <param name="offset">The bit offset amount</param>
-        [MethodImpl(Inline)]
-        public static ref BitVector8 sll(ref BitVector8 x, int offset)
-        {
-            x.assign(math.sll(x.Scalar,offset));
-            return ref x;
-        }
-
-        /// <summary>
-        /// Computes a leftwards shift in-place
-        /// </summary>
-        /// <param name="x">The source bitvector</param>
-        /// <param name="offset">The bit offset amount</param>
-        [MethodImpl(Inline)]
-        public static ref BitVector16 sll(ref BitVector16 x, int offset)
-        {
-            x.assign(math.sll(x.Scalar,offset));
-            return ref x;
-        }
-
-        /// <summary>
-        /// Computes a leftwards shift in-place
-        /// </summary>
-        /// <param name="x">The source bitvector</param>
-        /// <param name="offset">The bit offset amount</param>
-        [MethodImpl(Inline)]
-        public static ref BitVector32 sll(ref BitVector32 x, int offset)
-        {
-            x.assign(math.sll(x.Scalar,offset));
-            return ref x;
-        }
-
-        /// <summary>
-        /// Computes a leftwards shift in-place
-        /// </summary>
-        /// <param name="x">The source bitvector</param>
-        /// <param name="offset">The bit offset amount</param>
-        [MethodImpl(Inline)]
-        public static ref BitVector64 sll(ref BitVector64 x, int offset)
-        {
-            x.assign(math.sll(x.Scalar,offset));
-            return ref x;
-        }
-
 
     }
 

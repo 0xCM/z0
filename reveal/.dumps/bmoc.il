@@ -1,4 +1,4 @@
-// 2019-10-12 06:44:38:691
+// 2019-10-13 04:28:18:540
 BitMatrix64 bm_from_natspan_64x64x64u(in Span<N64,ulong> src)
 {
     IL_0000: ldarg.0

@@ -62,8 +62,8 @@ namespace Z0
             => not(or(a,b));
 
         /// <summary>
-        /// Evaluates the logical XNOR of two bits, also known as the logical biconditional
-        /// and which in practice is equivalent to value-based equality
+        /// Evaluates the logical XNOR of two bits, also known as the logical biconditional and which 
+        /// in practice is equivalent to value-based equality
         /// </summary>
         /// <param name="a">The first operand</param>
         /// <param name="b">The second operand</param>
@@ -73,7 +73,7 @@ namespace Z0
             => not(xor(a,b));
 
         /// <summary>
-        /// Evaludates the logical NAND of two bits, which is true iff one or both bits are off
+        /// Evaluates the logical NAND of two bits, which is true iff one or both bits are off
         /// </summary>
         /// <param name="a">The first operand</param>
         /// <param name="b">The second operand</param>
@@ -91,6 +91,15 @@ namespace Z0
         public static Bit implies(Bit antecedent, Bit consequent)
             => not(antecedent == Bit.On && consequent == Bit.Off);
 
+        /// <summary>
+        /// Evaluates the ternary select where the second operand is returned if the first 
+        /// operand is true and otherwise the third operand is returned: a ? b : c
+        /// </summary>
+        /// <param name="a">The first operand</param>
+        /// <param name="b">The second operand</param>
+        [MethodImpl(Inline)]
+        public static Bit select(Bit a, Bit b, Bit c)
+            => a ? b : c;
     }
 
 }

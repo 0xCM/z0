@@ -18,21 +18,21 @@ namespace Z0
         /// </summary>
         /// <param name="value">The literal value</param>
         [MethodImpl(Inline)]
-        public static BitLitExpr literal(Bit value)
-            => new BitLitExpr(value);
+        public static LogicLitExpr literal(Bit value)
+            => new LogicLitExpr(value);
 
         /// <summary>
         /// Creates a logical TRUE expression, i.e. an expression that is always true
         /// </summary>
         [MethodImpl(Inline)]
-        public static BitLitExpr on()
+        public static LogicLitExpr on()
             => literal(Bit.On);
 
         /// <summary>
         /// Creates a logical FALSE expression, i.e. an expression that is always false
         /// </summary>
         [MethodImpl(Inline)]
-        public static BitLitExpr off()
+        public static LogicLitExpr off()
             => literal(Bit.Off);
 
         /// <summary>
@@ -86,7 +86,7 @@ namespace Z0
         /// <param name="a">The first operand</param>
         /// <param name="b">The second operand</param>
         [MethodImpl(Inline)]
-        public static BinaryLogicExpr and(BitLitExpr a, BitLitExpr b)
+        public static BinaryLogicExpr and(LogicLitExpr a, LogicLitExpr b)
             => binary(LogicOpKind.Or, a, b);
 
         /// <summary>
@@ -104,7 +104,7 @@ namespace Z0
         /// <param name="a">The first operand</param>
         /// <param name="b">The second operand</param>
         [MethodImpl(Inline)]
-        public static BinaryLogicExpr or(BitLitExpr a, BitLitExpr b)
+        public static BinaryLogicExpr or(LogicLitExpr a, LogicLitExpr b)
             => binary(LogicOpKind.Or, a, b);
 
         /// <summary>
@@ -122,7 +122,7 @@ namespace Z0
         /// <param name="a">The first operand</param>
         /// <param name="b">The second operand</param>
         [MethodImpl(Inline)]
-        public static BinaryLogicExpr xor(BitLitExpr a, BitLitExpr b)
+        public static BinaryLogicExpr xor(LogicLitExpr a, LogicLitExpr b)
             => binary(LogicOpKind.XOr, a, b);
 
         /// <summary>
@@ -140,7 +140,7 @@ namespace Z0
         /// <param name="a">The first operand</param>
         /// <param name="b">The second operand</param>
         [MethodImpl(Inline)]
-        public static BinaryLogicExpr nor(BitLitExpr a, BitLitExpr b)
+        public static BinaryLogicExpr nor(LogicLitExpr a, LogicLitExpr b)
             => binary(LogicOpKind.Nor, a, b);
 
         /// <summary>
@@ -158,7 +158,7 @@ namespace Z0
         /// <param name="a">The first operand</param>
         /// <param name="b">The second operand</param>
         [MethodImpl(Inline)]
-        public static BinaryLogicExpr xnor(BitLitExpr a, BitLitExpr b)
+        public static BinaryLogicExpr xnor(LogicLitExpr a, LogicLitExpr b)
             => binary(LogicOpKind.XNor, a, b);
 
         /// <summary>
@@ -176,7 +176,7 @@ namespace Z0
         /// <param name="a">The first operand</param>
         /// <param name="b">The second operand</param>
         [MethodImpl(Inline)]
-        public static BinaryLogicExpr nand(BitLitExpr a, BitLitExpr b)
+        public static BinaryLogicExpr nand(LogicLitExpr a, LogicLitExpr b)
             => binary(LogicOpKind.Nand, a, b);
 
         /// <summary>
@@ -194,8 +194,8 @@ namespace Z0
         /// <param name="name">The variable's name</param>
         /// <param name="init">The variable's initial value</param>
         [MethodImpl(Inline)]
-        public static BitVarExpr bitvar(string name, ILogicExpr init)
-            => new BitVarExpr(name,init);
+        public static LogicVarExpr bitvar(string name, ILogicExpr init)
+            => new LogicVarExpr(name,init);
 
         /// <summary>
         /// Defines a bit variable expression where the variable name is defined by an integer
@@ -203,8 +203,8 @@ namespace Z0
         /// <param name="name">The variable's name</param>
         /// <param name="init">The variable's initial value</param>
         [MethodImpl(Inline)]
-        public static BitVarExpr bitvar(uint name, ILogicExpr init)
-            => new BitVarExpr(name.ToString(), init);
+        public static LogicVarExpr bitvar(uint name, ILogicExpr init)
+            => new LogicVarExpr(name.ToString(), init);
 
         /// <summary>
         /// Defines a bit variable expression initialized to a literal value
@@ -212,8 +212,8 @@ namespace Z0
         /// <param name="name">The variable's name</param>
         /// <param name="init">The variable's initial value</param>
         [MethodImpl(Inline)]
-        public static BitVarExpr bitvar(string name, Bit init = default)
-            => new BitVarExpr(name,literal(init));
+        public static LogicVarExpr bitvar(string name, Bit init = default)
+            => new LogicVarExpr(name,literal(init));
 
         /// <summary>
         /// Defines a bit variable expression initialized to a literal value
@@ -222,7 +222,7 @@ namespace Z0
         /// <param name="name">The variable's name</param>
         /// <param name="init">The variable's initial value</param>
         [MethodImpl(Inline)]
-        public static BitVarExpr bitvar(uint name, Bit init = default)
+        public static LogicVarExpr bitvar(uint name, Bit init = default)
             => bitvar(name.ToString(),init);
 
         /// <summary>

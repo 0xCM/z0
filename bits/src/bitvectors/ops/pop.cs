@@ -15,8 +15,6 @@ namespace Z0
 
     partial class bitvector
     {
-
-
         /// <summary>
         /// Counts the number of enabled bits in the source vector
         /// </summary>

@@ -42,22 +42,22 @@ namespace Z0
 
     }
 
-    public interface IBitLiteralExpr<T> : ILiteralExpr<T>,  IBitExpr<T>
+    public interface IBitLitExpr<T> : ILiteralExpr<T>,  IBitExpr<T>
         where T : unmanaged
     {
     }
 
-    public interface IUnaryBitwiseExpr<T> : IBitOpExpr<T>
+    public interface IUnaryBitExpr<T> : IBitOpExpr<T>
         where T : unmanaged
     {
         /// <summary>
-        /// The left operand
+        /// The one and only operand
         /// </summary>
-        IBitExpr<T> Operand {get;}
+        IBitExpr<T> Subject {get;}
 
     }
 
-    public interface IBinaryBitwiseExpr<T> : IBitOpExpr<T>
+    public interface IBinaryBitExpr<T> : IBitOpExpr<T>
         where T : unmanaged
     {
         /// <summary>
@@ -71,21 +71,8 @@ namespace Z0
         IBitExpr<T> Right {get;}
     }
 
-    public interface IMixedBitwiseExpr<T> : IBitOpExpr<T>
-        where T : unmanaged
-    {
-        /// <summary>
-        /// The left operand
-        /// </summary>
-        IBitExpr<T> Left {get;}
 
-        /// <summary>
-        /// The right operand
-        /// </summary>
-        IBitExpr<uint> Right {get;}
-    }
-
-    public interface ITernaryBitwiseExpr<T> : IBitOpExpr<T>
+    public interface ITernaryBitExpr<T> : IBitOpExpr<T>
         where T : unmanaged
     {
         /// <summary>
@@ -105,6 +92,19 @@ namespace Z0
 
     }
 
+    public interface IBitShiftExpr<T> : IBitOpExpr<T>
+        where T : unmanaged
+    {
+        /// <summary>
+        /// The thing to shift
+        /// </summary>
+        IBitExpr<T> Subject {get;}
+
+        /// <summary>
+        /// The amount to shift
+        /// </summary>
+        IBitExpr<int> Offset {get;}
+    }
 
 
 }

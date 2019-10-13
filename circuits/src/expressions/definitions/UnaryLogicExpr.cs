@@ -11,7 +11,7 @@ namespace Z0
     using static zfunc;
 
     /// <summary>
-    /// Represents a logical operator with two bitwise expressions
+    /// Represents a logical operator over one operand
     /// </summary>
     public sealed class UnaryLogicExpr : IUnaryLogicExpr
     {
@@ -19,7 +19,7 @@ namespace Z0
         public UnaryLogicExpr(LogicOpKind op, ILogicExpr operand)
         {
             this.Operator = op;
-            this.Operand = operand;
+            this.Subject = operand;
         }
         
         /// <summary>
@@ -35,14 +35,13 @@ namespace Z0
         /// <summary>
         /// The left operand
         /// </summary>
-        public ILogicExpr Operand {get;}
+        public ILogicExpr Subject {get;}
 
         public string Format()
-            => $"{Operator} {Operand}";
+            => $"{Operator} {Subject}";
 
         public override string ToString()
             => Format();
-
     }
 
 }

@@ -79,7 +79,6 @@ namespace Z0
         public static ulong inc(ulong src)
             => ++src;
 
-
         /// <summary>
         /// Increments the source value in-place
         /// </summary>
@@ -167,8 +166,6 @@ namespace Z0
             src++;
             return ref src;
         }
-
-
 
     }
 }

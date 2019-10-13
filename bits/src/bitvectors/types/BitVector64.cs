@@ -16,7 +16,7 @@ namespace Z0
     /// Defines a 64-bit bitvector
     /// </summary>
     [StructLayout(LayoutKind.Sequential, Size = 8)]
-    public struct BitVector64 : IFixedScalarBits<BitVector64,ulong>
+    public struct BitVector64 : IPrimalBitVector<BitVector64,ulong>
     {    
         internal ulong data;
 
@@ -328,6 +328,22 @@ namespace Z0
             => this.data = src;
 
         /// <summary>
+        /// Presents vector content as a span of bytes
+        /// </summary>
+        [MethodImpl(Inline)]
+        public Span<byte> AsBytes()
+            => bytespan(ref data);
+
+        /// <summary>
+        /// Presents vector content as a parametric primal scalar
+        /// </summary>
+        /// <typeparam name="S">The primal scalar type</typeparam>
+        [MethodImpl(Inline)]
+        public S AsScalar<S>()
+            where S : unmanaged
+                => As.generic<S>(data);
+
+        /// <summary>
         /// Reads/Manipulates a source bit at a specified position
         /// </summary>
         public Bit this[BitPos pos]
@@ -456,7 +472,6 @@ namespace Z0
         public ref byte Byte(int index)        
             => ref Bytes[index];
 
-
         /// <summary>
         /// Computes in-place the bitwise AND of the source vector and another,
         /// returning the result to the caller
@@ -466,6 +481,17 @@ namespace Z0
         public BitVector64 And(BitVector64 y)
         {
             data &= y.data;
+            return this;
+        }
+
+        /// <summary>
+        /// Computes in-place the bitwise NAND of the source vector and another and returns the result to the caller
+        /// </summary>
+        /// <param name="y">The other vector</param>
+        [MethodImpl(Inline)]
+        public BitVector64 Nand(BitVector64 y)
+        {
+            data = math.nand(data,y.data);
             return this;
         }
 
@@ -482,8 +508,18 @@ namespace Z0
         }
 
         /// <summary>
-        /// Computes in-place the bitwise XOR of the source vector and another,
-        /// returning the result to the caller
+        /// Computes in-place the bitwise NOR of the source vector and another and returns the result to the caller
+        /// </summary>
+        /// <param name="y">The other vector</param>
+        [MethodImpl(Inline)]
+        public BitVector64 Nor(BitVector64 y)
+        {
+            data = math.nor(data,y.data);
+            return this;
+        }
+
+        /// <summary>
+        /// Computes in-place the bitwise XOR of the source vector and another and returns the result to the caller
         /// </summary>
         /// <param name="y">The other vector</param>
         [MethodImpl(Inline)]
@@ -494,13 +530,39 @@ namespace Z0
         }
 
         /// <summary>
+        /// Computes in-place the bitwise XNOR of the source vector and another and returns the result to the caller
+        /// </summary>
+        /// <param name="y">The other vector</param>
+        [MethodImpl(Inline)]
+        public BitVector64 XNor(BitVector64 y)
+        {
+            data = math.xnor(data,y.data);
+            return this;
+        }
+
+        [MethodImpl(Inline)]
+        public BitVector64 Select(BitVector64 y, BitVector64 z)
+        {
+            data = math.select(data,y.data,z.data);
+            return this;
+        }
+
+
+        /// <summary>
         /// Computes in-place the bitwise complement of the source vector,
         /// returning the result to the caller
         /// </summary>
         [MethodImpl(Inline)]
-        public BitVector64 Flip()
+        public BitVector64 Not()
         {
             data = ~data;
+            return this;
+        }
+
+        [MethodImpl(Inline)]
+        public BitVector64 Negate()
+        {
+            data = math.negate(data);
             return this;
         }
 
@@ -511,7 +573,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public BitVector64 Sub(BitVector64 y)
         {
-            bitvector.sub(ref this, y);
+            data -= y.data;
             return this;
         }
 
@@ -542,16 +604,22 @@ namespace Z0
         /// </summary>
         /// <param name="offset">The magnitude of the rotation</param>
         [MethodImpl(Inline)]
-        public BitVector64 Ror(uint offset)
-            => Bits.rotr(ref data, offset);
+        public BitVector64 Rotr(int offset)
+        {
+            data = Bits.rotr(data, offset);
+            return this;
+        }
 
         /// <summary>
         /// Applies in-place leftward bit rotation by a specified offset
         /// </summary>
         /// <param name="offset">The magnitude of the rotation</param>
         [MethodImpl(Inline)]
-        public BitVector64 Rol(uint offset)
-            => Bits.rotl(ref data, offset);
+        public BitVector64 Rotl(int offset)
+        {
+            data = Bits.rotl(data, offset);
+            return this;
+        }
 
         /// <summary>
         /// Enables a bit in-place
@@ -593,7 +661,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public BitVector64 Inc()
         {
-            bitvector.inc(ref this);
+            data++;
             return this;
         }
 
@@ -604,7 +672,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public BitVector64 Dec()
         {
-            bitvector.dec(ref this);
+            data--;
             return this;
         }
 
@@ -620,9 +688,9 @@ namespace Z0
         /// </summary>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public BitVector64 AndNot(in BitVector64 y)
+        public BitVector64 AndNot(BitVector64 y)
         {
-            data = Bits.andn((ulong)this, (ulong)y);            
+            data = Bits.andnot(data, y.data);            
             return this;
         }
 
@@ -755,6 +823,11 @@ namespace Z0
             get => data;
         }
             
+        [MethodImpl(Inline)]
+        public T ToScalar<T>()
+            where T : unmanaged
+                => Unsafe.As<ulong,T>(ref data);
+
         /// <summary>
         /// Applies a truncating reduction Bv64 -> Bv8
         /// </summary>

@@ -21,7 +21,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
         public static sbyte dec(sbyte src)
-            => (sbyte)(src - 1);
+            => --src;
 
         /// <summary>
         /// Decrements the source value
@@ -29,7 +29,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
         public static byte dec(byte src)
-            => (byte)(src - 1);
+            => --src;
 
         /// <summary>
         /// Decrements the source value
@@ -37,7 +37,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
         public static short dec(short src)
-            => (short)(src - 1);
+            => --src;
 
         /// <summary>
         /// Decrements the source value
@@ -45,7 +45,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
         public static ushort dec(ushort src)
-            => (ushort)(src - 1);
+            => --src;
 
         /// <summary>
         /// Decrements the source value
@@ -53,7 +53,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
         public static int dec(int src)
-            => src - 1;
+            => --src;
 
         /// <summary>
         /// Decrements the source value
@@ -61,7 +61,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
         public static uint dec(uint src)
-            => src - 1;
+            => --src;
 
         /// <summary>
         /// Decrements the source value
@@ -69,7 +69,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
         public static long dec(long src)
-            => src - 1;
+            => --src;
 
         /// <summary>
         /// Decrements the source value
@@ -77,7 +77,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
         public static ulong dec(ulong src)
-            => src - 1;
+            => --src;
 
         /// <summary>
         /// Decrements the source value in-place

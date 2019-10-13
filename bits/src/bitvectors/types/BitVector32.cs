@@ -15,7 +15,7 @@ namespace Z0
     /// Defines a 32-bit bitvector
     /// </summary>
     [StructLayout(LayoutKind.Sequential, Size = 4)]
-    public struct BitVector32 : IFixedScalarBits<BitVector32,uint>
+    public struct BitVector32 : IPrimalBitVector<BitVector32,uint>
     {
         internal uint data;
 
@@ -314,6 +314,22 @@ namespace Z0
         }
 
         /// <summary>
+        /// Presents vector content as a span of bytes
+        /// </summary>
+        [MethodImpl(Inline)]
+        public Span<byte> AsBytes()
+            => bytespan(ref data);
+
+        /// <summary>
+        /// Presents vector content as a parametric primal scalar
+        /// </summary>
+        /// <typeparam name="S">The primal scalar type</typeparam>
+        [MethodImpl(Inline)]
+        public S AsScalar<S>()
+            where S : unmanaged
+                => As.generic<S>(data);
+
+        /// <summary>
         /// Assigns the bitvector a specified value
         /// </summary>
         /// <param name="src">The source value</param>
@@ -427,6 +443,13 @@ namespace Z0
             return this;
         }
 
+        [MethodImpl(Inline)]
+        public BitVector32 Nand(BitVector32 y)
+        {
+            data = math.nand(data,y.data);
+            return this;
+        }
+
         /// <summary>
         /// Computes in-place the bitwise OR of the source vector and another,
         /// returning the result to the caller
@@ -436,6 +459,13 @@ namespace Z0
         public BitVector32 Or(BitVector32 y)
         {
             data |= y.data;
+            return this;
+        }
+
+        [MethodImpl(Inline)]
+        public BitVector32 Nor(BitVector32 y)
+        {
+            data = math.nor(data,y.data);
             return this;
         }
 
@@ -451,14 +481,35 @@ namespace Z0
             return this;
         }
 
+        [MethodImpl(Inline)]
+        public BitVector32 XNor(BitVector32 y)
+        {
+            data = math.xnor(data,y.data);
+            return this;
+        }
+
+        [MethodImpl(Inline)]
+        public BitVector32 Select(BitVector32 y, BitVector32 z)
+        {
+            data = math.select(data,y.data,z.data);
+            return this;
+        }
+
         /// <summary>
         /// Computes in-place the bitwise complement of the source vector,
         /// returning the result to the caller
         /// </summary>
         [MethodImpl(Inline)]
-        public BitVector32 Flip()
+        public BitVector32 Not()
         {
             data = ~data;
+            return this;
+        }
+
+        [MethodImpl(Inline)]
+        public BitVector32 Negate()
+        {
+            data = math.negate(data);
             return this;
         }
 
@@ -469,7 +520,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public BitVector32 Inc()
         {
-            bitvector.inc(ref this);
+            data++;
             return this;
         }
 
@@ -480,7 +531,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public BitVector32 Dec()
         {
-            bitvector.dec(ref this);
+            data--;
             return this;
         }
 
@@ -491,7 +542,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public BitVector32 Sub(BitVector32 y)
         {
-            bitvector.sub(ref this, y);
+            data -= y.data;
             return this;
         }
 
@@ -611,16 +662,22 @@ namespace Z0
         /// </summary>
         /// <param name="offset">The magnitude of the rotation</param>
         [MethodImpl(Inline)]
-        public BitVector32 Ror(uint offset)
-            => Bits.rotr(ref data, offset);
+        public BitVector32 Rotr(int offset)
+        {
+            data = Bits.rotr(data,offset);
+            return this;
+        }
 
         /// <summary>
         /// Rotates bits in the source leftwards by a specified offset
         /// </summary>
         /// <param name="offset">The magnitude of the rotation</param>
         [MethodImpl(Inline)]
-        public BitVector32 Rol(uint offset)
-            => Bits.rotl(ref data, offset);
+        public BitVector32 Rotl(int offset)
+        {
+            data = Bits.rotl(data,offset);
+            return this;
+        }
 
         /// <summary>
         /// Counts the number of enabled bits in the source
@@ -657,8 +714,11 @@ namespace Z0
         /// </summary>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public BitVector32 AndNot(in BitVector32 y)
-            => Bits.andn((uint)this, (uint)y);
+        public BitVector32 AndNot(BitVector32 y)
+        {
+            data = Bits.andnot(data, y.data);            
+            return this;
+        }        
 
         [MethodImpl(Inline)]
         public readonly bool AllOnes()
@@ -730,6 +790,12 @@ namespace Z0
             [MethodImpl(Inline)]
             get => data;
         }
+
+        [MethodImpl(Inline)]
+        public T ToScalar<T>()
+            where T : unmanaged
+                => Unsafe.As<uint,T>(ref data);
+
 
         /// <summary>
         /// Applies a truncating reduction Bv32 -> Bv8

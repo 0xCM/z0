@@ -15,21 +15,6 @@ namespace Z0
 
     partial class gmath
     {        
-        [MethodImpl(Inline)]
-        public static T xor1<T>(T a)
-        {
-            if(typeof(T) == typeof(byte))
-                return generic<T>(math.xor1(uint8(a)));
-            else if(typeof(T) == typeof(ushort))
-                return generic<T>(math.xor1(uint16(a)));
-            else if(typeof(T) == typeof(uint))
-                return generic<T>(math.xor1(uint32(a)));
-            else if(typeof(T) == typeof(ulong))
-                return generic<T>(math.xor1(uint64(a)));
-            else
-                throw unsupported<T>();
-        }
-
         /// <summary>
         /// Computes the XOR of two primal values
         /// </summary>

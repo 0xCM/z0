@@ -12,7 +12,7 @@ namespace Z0
     using static As;
     using static AsIn;
 
-    partial class boc
+    partial class bvoc
     {
         public static sbyte bitrange_d8i(sbyte src, BitPos i0, BitPos i1)
             => Bits.range(src, i0, i1);

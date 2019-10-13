@@ -62,13 +62,6 @@ namespace Z0
 
     }
 
-    /// <summary>
-    /// Scalar logic op oces
-    /// </summary>
-    public static partial class sloc
-    {
-
-    }
 
     public static partial class mathspan
     {    

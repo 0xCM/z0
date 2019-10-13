@@ -14,7 +14,7 @@ namespace Z0
     using static Bits;
 
     [StructLayout(LayoutKind.Sequential, Size = 1)]
-    public struct BitVector8 : IFixedScalarBits<BitVector8, byte>
+    public struct BitVector8 : IPrimalBitVector<BitVector8, byte>
     {
         internal byte data;
 
@@ -74,6 +74,14 @@ namespace Z0
             => new BitVector8((byte)src);
 
         /// <summary>
+        /// Creates a vector from a byte classifier
+        /// </summary>
+        /// <param name="src">The source value</param>
+        [MethodImpl(Inline)]
+        public static BitVector8 FromKind(ByteKind src)
+            => new BitVector8((byte)src);
+
+        /// <summary>
         /// Creates a vector from a bitstring
         /// </summary>
         /// <param name="src">The source bitstring</param>
@@ -125,6 +133,22 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator BitVector8(byte src)
             => new BitVector8(src);
+
+        /// <summary>
+        /// Implicitly converts a byte classifier to a vector
+        /// </summary>
+        /// <param name="src">The classifier</param>
+        [MethodImpl(Inline)]
+        public static implicit operator BitVector8(ByteKind src)
+            => FromKind(src);
+
+        /// <summary>
+        /// Implicitly converts a vector to a byte classifier
+        /// </summary>
+        /// <param name="src">The vector</param>
+        [MethodImpl(Inline)]
+        public static implicit operator ByteKind(BitVector8 src)
+            => (ByteKind)src.data;
 
         /// <summary>
         /// Converts the source vector to the underlying value it represents
@@ -329,6 +353,14 @@ namespace Z0
             set => Set(pos,value);
         }
 
+        /// <summary>
+        /// Presents vector content as a parametric primal scalar
+        /// </summary>
+        /// <typeparam name="S">The primal scalar type</typeparam>
+        [MethodImpl(Inline)]
+        public S AsScalar<S>()
+            where S : unmanaged
+                => As.generic<S>(data);
 
         /// <summary>
         /// The vector's 4 most significant bits
@@ -440,6 +472,13 @@ namespace Z0
             return this;
         }
 
+        [MethodImpl(Inline)]
+        public BitVector8 Nand(BitVector8 y)
+        {
+            data = math.nand(data,y.data);
+            return this;
+        }
+
         /// <summary>
         /// Computes in-place the bitwise OR of the source vector and another,
         /// returning the result to the caller
@@ -449,6 +488,13 @@ namespace Z0
         public BitVector8 Or(BitVector8 y)
         {
             data |= y.data;
+            return this;
+        }
+
+        [MethodImpl(Inline)]
+        public BitVector8 Nor(BitVector8 y)
+        {
+            data = math.nor(data,y.data);
             return this;
         }
 
@@ -464,12 +510,26 @@ namespace Z0
             return this;
         }
 
+        [MethodImpl(Inline)]
+        public BitVector8 XNor(BitVector8 y)
+        {
+            data = math.xnor(data,y.data);
+            return this;
+        }
+
+        [MethodImpl(Inline)]
+        public BitVector8 Select(BitVector8 y, BitVector8 z)
+        {
+            data = math.select(data,y.data,z.data);
+            return this;
+        }
+
         /// <summary>
         /// Computes in-place the bitwise complement of the source vector,
         /// returning the result to the caller
         /// </summary>
         [MethodImpl(Inline)]
-        public BitVector8 Flip()
+        public BitVector8 Not()
         {
             data = math.flip(data);
             return this;
@@ -482,10 +542,16 @@ namespace Z0
         [MethodImpl(Inline)]
         public BitVector8 Sub(BitVector8 y)
         {
-            bitvector.sub(ref this, y);
+            data -= y.data;
             return this;
         }
 
+        [MethodImpl(Inline)]
+        public BitVector8 Negate()
+        {
+            data = math.negate(data);
+            return this;
+        }
 
         /// <summary>
         /// Enables a bit if it is disabled
@@ -565,7 +631,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public BitVector8 Inc()
         {
-            bitvector.inc(ref this);
+            data++;
             return this;
         }
 
@@ -576,7 +642,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public BitVector8 Dec()
         {
-            bitvector.dec(ref this);
+            data--;
             return this;
         }
 
@@ -585,16 +651,22 @@ namespace Z0
         /// </summary>
         /// <param name="offset">The magnitude of the rotation</param>
         [MethodImpl(Inline)]
-        public BitVector8 Ror(uint offset)
-            => Bits.rotr(ref data, (byte)offset);
+        public BitVector8 Rotr(int offset)
+        {
+            data = Bits.rotr(data, offset);
+            return this;
+        }
 
         /// <summary>
         /// Rotates bits in the source leftwards by a specified offset
         /// </summary>
         /// <param name="offset">The magnitude of the rotation</param>
         [MethodImpl(Inline)]
-        public BitVector8 Rol(uint offset)
-            => Bits.rotl(ref data, (byte)offset);
+        public BitVector8 Rotl(int offset)
+        {
+            data = Bits.rotl(data, offset);
+            return this;
+        }
 
         /// <summary>
         /// Counts the number of enabled bits in the vector
@@ -651,8 +723,11 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public BitVector8 AndNot(in BitVector8 y)
-            => Bits.andn((byte)this, (byte)y);
+        public BitVector8 AndNot(BitVector8 y)
+        {
+            data = Bits.andnot(data, y.data);            
+            return this;
+        }        
 
         [MethodImpl(Inline)]
         public readonly bool AllOnes()
@@ -752,6 +827,12 @@ namespace Z0
             [MethodImpl(Inline)]
             get => data;
         }
+
+        [MethodImpl(Inline)]
+        public T ToScalar<T>()
+            where T : unmanaged
+                => Unsafe.As<byte,T>(ref data);
+
 
         /// <summary>
         /// Returns the vector's bitstring representation

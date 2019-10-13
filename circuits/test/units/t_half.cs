@@ -22,10 +22,6 @@ namespace Z0
 
 
             (BitVector8 s, BitVector8 c) = circuit.Send(a, b);
-            Trace(a.Format());
-            Trace(b.Format());
-            Trace(s.Format());
-            Trace(c.Format());
         }
     }
 }

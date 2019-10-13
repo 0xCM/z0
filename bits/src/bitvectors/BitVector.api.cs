@@ -14,12 +14,45 @@ namespace Z0
     public static class BitVector
     {   
         /// <summary>
+        /// Allocates a primal 8-bit bitvector
+        /// </summary>
+        /// <param name="n">The width discriminator</param>
+        [MethodImpl(Inline)]
+        public static BitVector8 Alloc(N8 n)
+            => BitVector8.Alloc();
+
+        /// <summary>
+        /// Allocates a primal 16-bit bitvector
+        /// </summary>
+        /// <param name="n">The width discriminator</param>
+        [MethodImpl(Inline)]
+        public static BitVector16 Alloc(N16 n)
+            => BitVector16.Alloc();
+
+        /// <summary>
+        /// Allocates a primal 32-bit bitvector
+        /// </summary>
+        /// <param name="n">The width discriminator</param>
+        [MethodImpl(Inline)]
+        public static BitVector32 Alloc(N32 n)
+            => BitVector32.Alloc();
+
+        /// <summary>
+        /// Allocates a primal 64-bit bitvector
+        /// </summary>
+        /// <param name="n">The width discriminator</param>
+        [MethodImpl(Inline)]
+        public static BitVector64 Alloc(N64 n)
+            => BitVector64.Alloc();
+
+        /// <summary>
         /// Allocates a generic bitvector of natural length
         /// </summary>
         /// <param name="len">The length</param>
         /// <param name="fill">The fill value</param>
         /// <typeparam name="N">The length type</typeparam>
         /// <typeparam name="T">The component type</typeparam>
+        [MethodImpl(Inline)]
         public static BitVector<N,T> Alloc<N,T>(N len = default, T? fill = null)
             where N : ITypeNat, new()
             where T : unmanaged
@@ -32,6 +65,7 @@ namespace Z0
         /// <param name="fill">The fill value</param>
         /// <typeparam name="N">The length type</typeparam>
         /// <typeparam name="T">The component type</typeparam>
+        [MethodImpl(Inline)]
         public static BitVector<T> Alloc<T>(BitSize len, T? fill = null)
             where T : unmanaged
                 => BitVector<T>.Alloc(len, fill);
@@ -98,7 +132,6 @@ namespace Z0
             where T : unmanaged
                 => BitVector<T>.From(src,n);
 
-
         /// <summary>
         /// Creates a generic bitvector defined by an arbitrary number of segments
         /// </summary>
@@ -128,6 +161,5 @@ namespace Z0
             where T : unmanaged
             where N : ITypeNat, new()
                 => BitVector<N,T>.MinCellCount;
-
     }
 }

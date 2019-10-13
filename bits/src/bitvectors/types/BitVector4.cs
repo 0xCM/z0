@@ -16,7 +16,7 @@ namespace Z0
     /// <summary>
     /// Defines a 4-bit bitvector
     /// </summary>
-    public struct BitVector4 : IFixedScalarBits<BitVector4,byte>
+    public struct BitVector4 : IPrimalBitVector<BitVector4,byte>
     {
         internal byte data;
 
@@ -219,6 +219,15 @@ namespace Z0
         }
 
         /// <summary>
+        /// Presents vector content as a parametric primal scalar
+        /// </summary>
+        /// <typeparam name="S">The primal scalar type</typeparam>
+        [MethodImpl(Inline)]
+        public S AsScalar<S>()
+            where S : unmanaged
+                => As.generic<S>(data);
+
+        /// <summary>
         /// The number of bits represented by the vector
         /// </summary>
         public readonly BitSize Length
@@ -297,13 +306,19 @@ namespace Z0
             return this;
         }
 
+        [MethodImpl(Inline)]
+        public BitVector4 Select(BitVector4 y, BitVector4 z)
+        {
+            data = math.select(data,y.data,z.data);
+            return this;
+        }
 
         /// <summary>
         /// Computes in-place the bitwise complement of the source vector,
         /// returning the result to the caller
         /// </summary>
         [MethodImpl(Inline)]
-        public BitVector4 Flip()
+        public BitVector4 Not()
         {
             data = TakeHi((byte)((byte)(~data) << 4));
             return this;
@@ -313,6 +328,9 @@ namespace Z0
         static byte TakeHi(byte src)        
             => (byte)((src >> 4) & 0xF);
 
+        [MethodImpl(Inline)]
+        static byte TakeLo(byte src)        
+            => (byte)(src & 0xF);
 
         /// <summary>
         /// Enables a bit if it is disabled
@@ -480,6 +498,11 @@ namespace Z0
             get => data;
         }
 
+        [MethodImpl(Inline)]
+        public T ToScalar<T>()
+            where T : unmanaged
+                => Unsafe.As<byte,T>(ref data);
+
         /// <summary>
         /// Returns a copy of the vector
         /// </summary>
@@ -497,6 +520,13 @@ namespace Z0
             var dst = Replicate();
             dst.Permute(p);
             return dst;
+        }
+
+        [MethodImpl(Inline)]
+        public BitVector4 Negate()
+        {
+            data = TakeLo(math.negate(data));
+            return this;
         }
 
         /// <summary>
@@ -532,13 +562,13 @@ namespace Z0
         public override string ToString()
             => Format();
 
-        public BitVector4 Ror(uint offset)
+        public BitVector4 Rotr(int offset)
         {
             throw new NotImplementedException();
             
         }
 
-        public BitVector4 Rol(uint offset)
+        public BitVector4 Rotl(int offset)
         {
             throw new NotImplementedException();
         }
@@ -547,6 +577,36 @@ namespace Z0
         {
             throw new NotImplementedException();
         }
+
+        public BitVector4 Inc()
+        {
+            throw new NotImplementedException();
+        }
+
+        public BitVector4 Dec()
+        {
+            throw new NotImplementedException();
+        }
+
+        public BitVector4 XNor(BitVector4 y)
+        {
+            throw new NotImplementedException();
+        }
+
+        public BitVector4 Nand(BitVector4 y)
+        {
+            throw new NotImplementedException();
+        }
+
+        public BitVector4 Nor(BitVector4 y)
+        {
+            throw new NotImplementedException();
+        }
+
+        public BitVector4 AndNot(BitVector4 y)
+        {
+            throw new NotImplementedException();
+        }        
 
     }
 }

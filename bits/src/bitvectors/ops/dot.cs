@@ -27,24 +27,8 @@ namespace Z0
         /// </summary>
         /// <param name="y">The right operand</param>
         [MethodImpl(Inline)]
-        public static Bit dot(byte x, byte y)
-            => odd(Bits.pop(x & y));              
-
-        /// <summary>
-        /// Computes the scalar product of the source vector and another
-        /// </summary>
-        /// <param name="y">The right operand</param>
-        [MethodImpl(Inline)]
         public static Bit dot(BitVector8 x, BitVector8 y)
             => odd(Bits.pop(x.data & y.data));              
-
-        /// <summary>
-        /// Computes the scalar product of the source vector and another
-        /// </summary>
-        /// <param name="y">The right operand</param>
-        [MethodImpl(Inline)]
-        public static Bit dot(ushort x, ushort y)
-            => odd(Bits.pop(x & y));              
 
         /// <summary>
         /// Computes the scalar product of the source vector and another
@@ -59,14 +43,6 @@ namespace Z0
         /// </summary>
         /// <param name="y">The right operand</param>
         [MethodImpl(Inline)]
-        public static Bit dot(uint x, uint y)
-            => odd(Bits.pop(x & y));              
-
-        /// <summary>
-        /// Computes the scalar product of the source vector and another
-        /// </summary>
-        /// <param name="y">The right operand</param>
-        [MethodImpl(Inline)]
         public static Bit dot(BitVector32 x, BitVector32 y)
             => odd(Bits.pop(x.data & y.data));              
 
@@ -75,16 +51,8 @@ namespace Z0
         /// </summary>
         /// <param name="y">The right operand</param>
         [MethodImpl(Inline)]
-        public static Bit dot(ulong x, ulong y)
-            => odd(Bits.pop(x & y));              
-
-        /// <summary>
-        /// Computes the scalar product of the source vector and another
-        /// </summary>
-        /// <param name="y">The right operand</param>
-        [MethodImpl(Inline)]
         public static Bit dot(BitVector64 x, BitVector64 y)
-            => odd(Bits.pop(x.data & y.data));   //mod<N2>(Bits.pop(x.data & y.data));              
+            => odd(Bits.pop(x.data & y.data));
 
     }
 

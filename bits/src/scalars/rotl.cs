@@ -16,7 +16,7 @@ namespace Z0
     partial class Bits
     {                
         /// <summary>
-        /// Rotates bits in the source leftwards by a specified offset
+        /// Rotates the source bits leftward by a specified offset
         /// </summary>
         /// <param name="src">The source value</param>
         /// <param name="offset">The magnitude of the rotation</param>
@@ -25,7 +25,7 @@ namespace Z0
             => (byte)((src << offset) | (src >> (8 - offset)));
 
         /// <summary>
-        /// Rotates bits in the source leftwards by a specified offset
+        /// Rotates the source bits leftward by a specified offset
         /// </summary>
         /// <param name="src">The source value</param>
         /// <param name="offset">The magnitude of the rotation</param>
@@ -34,7 +34,7 @@ namespace Z0
             => (ushort)((src << offset) | (src >> (16 - offset)));
 
         /// <summary>
-        /// Rotates bits in the source leftwards by a specified offset
+        /// Rotates the source bits leftward by a specified offset
         /// </summary>
         /// <param name="src">The source value</param>
         /// <param name="offset">The magnitude of the rotation</param>
@@ -43,62 +43,49 @@ namespace Z0
             => (src << (int)offset) | (src >> (32 - (int)offset));
 
         /// <summary>
-        /// Rotates bits in the source leftwards by a specified offset
+        /// Rotates the source bits leftward by a specified offset
         /// </summary>
         /// <param name="src">The source value</param>
         /// <param name="offset">The magnitude of the rotation</param>
         [MethodImpl(Inline)]
         public static ulong rotl(ulong src, ulong offset)
             => (src << (int)offset) | (src >> (64 - (int)offset));
-    
+
         /// <summary>
-        /// Rotates source bits leftwards by a specified offset
+        /// Rotates the source bits leftward by a specified offset
         /// </summary>
         /// <param name="src">The source value</param>
         /// <param name="offset">The magnitude of the rotation</param>
         [MethodImpl(Inline)]
-        public static ref byte rotl(ref byte src, in byte offset)
-        {
-            src = rotl(src,offset);
-            return ref src;
-        }
+        public static byte rotl(byte src, int offset)
+            => (byte)((src << offset) | (src >> (8 - offset)));
 
         /// <summary>
-        /// Rotates source bits leftwards by a specified offset
+        /// Rotates the source bits leftward by a specified offset
         /// </summary>
         /// <param name="src">The source value</param>
         /// <param name="offset">The magnitude of the rotation</param>
         [MethodImpl(Inline)]
-        public static ref ushort rotl(ref ushort src, in ushort offset)
-        {
-            src = rotl(src,offset);
-            return ref src;
-        }
+        public static ushort rotl(ushort src, int offset)
+            => (ushort)((src << offset) | (src >> (16 - offset)));
 
         /// <summary>
-        /// Rotates source bits leftwards by a specified offset
+        /// Rotates the source bits leftward by a specified offset
         /// </summary>
         /// <param name="src">The source value</param>
         /// <param name="offset">The magnitude of the rotation</param>
         [MethodImpl(Inline)]
-        public static ref uint rotl(ref uint src, in uint offset)
-        {
-            src = rotl(src,offset);
-            return ref src;
-        }
+        public static uint rotl(uint src, int offset)
+            => (src << offset) | (src >> (32 - offset));
 
         /// <summary>
-        /// Rotates source bits leftwards by a specified offset
+        /// Rotates the source bits leftward by a specified offset
         /// </summary>
         /// <param name="src">The source value</param>
         /// <param name="offset">The magnitude of the rotation</param>
         [MethodImpl(Inline)]
-        public static ref ulong rotl(ref ulong src, in ulong offset)
-        {
-            src = rotl(src,offset);
-            return ref src;
-        }    
-
+        public static ulong rotl(ulong src, int offset)
+            => (src << offset) | (src >> (64 - offset));
 
     }
 }

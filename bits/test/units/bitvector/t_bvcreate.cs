@@ -117,7 +117,7 @@ namespace Z0.Test
         }
 
         void bv_create_gPrimal<V,S>()
-            where V : unmanaged, IFixedScalarBits<V,S>
+            where V : unmanaged, IPrimalBitVector<V,S>
             where S : unmanaged
         {
             for(var i=0; i<SampleSize; i++)
@@ -223,7 +223,7 @@ namespace Z0.Test
             while(++x)
             {
                 var y = x.Replicate();
-                Trace($"rotl({y}:{offset}) = {y.Rol((byte)offset)}"); 
+                Trace($"rotl({y}:{offset}) = {y.Rotl((byte)offset)}"); 
             }
         }
 

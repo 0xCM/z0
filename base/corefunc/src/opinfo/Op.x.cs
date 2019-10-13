@@ -71,7 +71,7 @@ namespace Z0
             => op == OpKind.And 
             || op == OpKind.Or 
             || op == OpKind.XOr 
-            || op == OpKind.Flip;
+            || op == OpKind.Not;
 
         [MethodImpl(Inline)]
         public static bool IsBitwise(this OpKind op)
@@ -79,7 +79,7 @@ namespace Z0
             || op == OpKind.And 
             || op == OpKind.Or 
             || op == OpKind.XOr 
-            || op == OpKind.Flip;
+            || op == OpKind.Not;
 
         [MethodImpl(Inline)]
         public static bool IsGeneric(this Genericity src)

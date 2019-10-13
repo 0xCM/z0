@@ -11,7 +11,7 @@ namespace Z0
     using static zfunc;
 
     /// <summary>
-    /// Represents a logical operator with two bitwise expressions
+    /// Represents a logical operator over two operands
     /// </summary>
     public sealed class BinaryLogicExpr : IBinaryLogicExpr
     {
@@ -49,8 +49,6 @@ namespace Z0
         public override string ToString()
             => Format();
 
-    }
-
- 
+    } 
 
 }

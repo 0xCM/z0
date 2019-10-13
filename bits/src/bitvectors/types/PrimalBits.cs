@@ -11,22 +11,26 @@ namespace Z0
 
     using static zfunc;    
     using static PrimalBits;
+    using static As;
+    using static AsIn;
 
+    /// <summary>
+    /// Defines a bit-polymorphic structure over a primal bitvector
+    /// </summary>
+    /// <remarks>There are four possible closed types that can be formed coresponding to the four primal bitvectors:
+    /// {PrimalBits[BitVector8,byte], PrimalBits[BitVector16,ushort], PrimalBits[BitVector32,uint], PrimalBits[BitVector64,ulong]}
+    /// </remarks>
     public struct PrimalBits<V,S>
-        where V : unmanaged, IFixedScalarBits<V,S>
+        where V : unmanaged, IPrimalBitVector<V,S>
         where S : unmanaged
     {   
-        internal BitVector64 data;
-
+        V bv;
+        
         public static readonly PrimalBits<V,S> Zero = default;
 
         [MethodImpl(Inline)]
         public static implicit operator V(PrimalBits<V,S> src)
             => src.Subject;
-
-        [MethodImpl(Inline)]
-        public static implicit operator PrimalBits<V,S>(BitVector4 src)
-            => new PrimalBits<V, S>(src);
 
         [MethodImpl(Inline)]
         public static implicit operator PrimalBits<V,S>(BitVector8 src)
@@ -50,8 +54,8 @@ namespace Z0
         /// <param name="lhs">The left vector</param>
         /// <param name="rhs">The right vector</param>
         [MethodImpl(Inline)]
-        public static PrimalBits<V,S> operator &(in PrimalBits<V,S> lhs, in PrimalBits<V,S> rhs)
-            => and(in lhs,in rhs);
+        public static PrimalBits<V,S> operator &(PrimalBits<V,S> lhs, PrimalBits<V,S> rhs)
+            => and(lhs,rhs);
 
         /// <summary>
         /// Computes the bitwise OR of the source operands
@@ -59,8 +63,8 @@ namespace Z0
         /// <param name="lhs">The left vector</param>
         /// <param name="rhs">The right vector</param>
         [MethodImpl(Inline)]
-        public static PrimalBits<V,S> operator |(in PrimalBits<V,S> lhs, in PrimalBits<V,S> rhs)
-            => or(in lhs,in rhs);
+        public static PrimalBits<V,S> operator |(PrimalBits<V,S> lhs, PrimalBits<V,S> rhs)
+            => or(lhs,rhs);
 
         /// <summary>
         /// Computes the bitwise XOR of the source operands
@@ -68,16 +72,40 @@ namespace Z0
         /// <param name="lhs">The left vector</param>
         /// <param name="rhs">The right vector</param>
         [MethodImpl(Inline)]
-        public static PrimalBits<V,S> operator ^(in PrimalBits<V,S> lhs, in PrimalBits<V,S> rhs)
-            => xor(in lhs,in rhs);
+        public static PrimalBits<V,S> operator ^(PrimalBits<V,S> lhs, PrimalBits<V,S> rhs)
+            => xor(lhs,rhs);
 
         /// <summary>
         /// Computes the bitwise complement of the operand
         /// </summary>
         /// <param name="lhs">The left vector</param>
         [MethodImpl(Inline)]
-        public static PrimalBits<V,S> operator ~(in PrimalBits<V,S> src)
-            => flip(in src);
+        public static PrimalBits<V,S> operator ~(PrimalBits<V,S> src)
+            => flip(src);
+
+        /// <summary>
+        /// Computes the two's complement of the operand
+        /// </summary>
+        /// <param name="lhs">The left vector</param>
+        [MethodImpl(Inline)]
+        public static PrimalBits<V,S> operator -(PrimalBits<V,S> src)
+            => negate(src);
+
+        /// <summary>
+        /// Arithmetically increments the operand
+        /// </summary>
+        /// <param name="lhs">The left vector</param>
+        [MethodImpl(Inline)]
+        public static PrimalBits<V,S> operator ++(PrimalBits<V,S> src)
+            => inc(src);
+
+        /// <summary>
+        /// Arithmetically increments the operand
+        /// </summary>
+        /// <param name="lhs">The left vector</param>
+        [MethodImpl(Inline)]
+        public static PrimalBits<V,S> operator --(PrimalBits<V,S> src)
+            => dec(src);
 
         /// <summary>
         /// Applies a logical left-shift
@@ -85,114 +113,109 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="rhs">The number of bits to shift</param>
         [MethodImpl(Inline)]
-        public static PrimalBits<V,S> operator <<(in PrimalBits<V,S> src, int offset)
-            => sll(in src,offset);
+        public static PrimalBits<V,S> operator <<(PrimalBits<V,S> src, int offset)
+            => sll(src,offset);
 
         /// <summary>
-        /// Applies a logical left-shift
+        /// Applies a logical right-shift
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="rhs">The number of bits to shift</param>
         [MethodImpl(Inline)]
         public static PrimalBits<V,S> operator >>(in PrimalBits<V,S> src, int offset)
-            => srl(in src,offset);
-
+            => srl(src,offset);
 
         internal BitVector8 bv8
         {
             [MethodImpl(Inline)]
-            get => (BitVector8)data;
+            get => Unsafe.As<V,BitVector8>(ref bv);
 
             [MethodImpl(Inline)]
-            set => data = value;
+            set => Unsafe.As<V,BitVector8>(ref bv) = value;
         }
 
         internal BitVector16 bv16
         {
             [MethodImpl(Inline)]
-            get => (BitVector16)data;
+            get => Unsafe.As<V,BitVector16>(ref bv);
 
             [MethodImpl(Inline)]
-            set => data = value;
+            set => Unsafe.As<V,BitVector16>(ref bv) = value;
         }
 
         internal BitVector32 bv32
         {
             [MethodImpl(Inline)]
-            get => (BitVector32)data;
+            get => Unsafe.As<V,BitVector32>(ref bv);
             
             [MethodImpl(Inline)]
-            set => data = value;
+            set => Unsafe.As<V,BitVector32>(ref bv) = value;
+        }
+
+        internal BitVector64 bv64
+        {
+            [MethodImpl(Inline)]
+            get => Unsafe.As<V,BitVector64>(ref bv);
+            
+            [MethodImpl(Inline)]
+            set => Unsafe.As<V,BitVector64>(ref bv) = value;
         }
 
         [MethodImpl(Inline)]
-        internal PrimalBits(UInt4 bv)
-            : this()
+        internal PrimalBits(byte scalar)
+            : this(scalar.ToBitVector())
         {
-            this.data = (byte)bv;
+            
         }
 
         [MethodImpl(Inline)]
-        internal PrimalBits(byte bv)
-            : this()
+        internal PrimalBits(ushort scalar)
+            : this(scalar.ToBitVector())
         {
-            this.data = bv;
+            
         }
 
         [MethodImpl(Inline)]
-        internal PrimalBits(ushort bv)
-            : this()
+        internal PrimalBits(uint scalar)
+            : this(scalar.ToBitVector())
         {
-            this.data = bv;
+            
         }
 
         [MethodImpl(Inline)]
-        internal PrimalBits(uint bv)
-            : this()
+        internal PrimalBits(ulong scalar)
+            : this(scalar.ToBitVector())
         {
-            this.data = bv;
+
         }
 
-        [MethodImpl(Inline)]
-        internal PrimalBits(ulong bv)
-            : this()
-        {
-            this.data = bv;
-        }
 
         [MethodImpl(Inline)]
-        internal PrimalBits(BitVector4 bv)
+        internal PrimalBits(in BitVector8 bv)
             : this()
         {
-            this.data = (byte)bv.Scalar;
-        }
-
-        [MethodImpl(Inline)]
-        internal PrimalBits(BitVector8 bv)
-            : this()
-        {
-            this.data = bv;
+            this.bv = Unsafe.As<BitVector8,V>(ref asRef(in bv));
         }
 
         [MethodImpl(Inline)]
         internal PrimalBits(BitVector16 bv)
             : this()
         {
-            this.data = bv;
+            this.bv = Unsafe.As<BitVector16,V>(ref asRef(in bv));
         }
 
         [MethodImpl(Inline)]
         internal PrimalBits(BitVector32 bv)
             : this()
         {
-            this.data = bv;
+            this.bv = Unsafe.As<BitVector32,V>(ref asRef(in bv));
         }
 
         [MethodImpl(Inline)]
         internal PrimalBits(BitVector64 bv)
             : this()
         {
-            this.data = bv;
+            this.bv = Unsafe.As<BitVector64,V>(ref asRef(in bv));
         }
 
         /// <summary>
@@ -201,7 +224,7 @@ namespace Z0
         public S Scalar
         {
             [MethodImpl(Inline)]
-            get => scalar(in this);
+            get => bv.Scalar;
         }
 
         /// <summary>
@@ -210,12 +233,12 @@ namespace Z0
         public V Subject
         {
             [MethodImpl(Inline)]
-            get => vector(in this);
+            get => bv;
         }
 
         [MethodImpl(Inline)]
         public static ref PrimalBits<U,D> As<U,D>(ref PrimalBits<V,S> src)
-            where U : unmanaged, IFixedScalarBits<U,D>
+            where U : unmanaged, IPrimalBitVector<U,D>
             where D : unmanaged            
                 => ref Unsafe.As<PrimalBits<V,S>, PrimalBits<U,D>>(ref src);
     }

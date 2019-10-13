@@ -11,46 +11,38 @@ namespace Z0
     using static zfunc;
 
     /// <summary>
-    /// Joins an operator with left and right operands
+    /// Defines a bitwise shift, including circular shifts, over subject and offset operands
     /// </summary>
-    public sealed class TernaryBitsExpr<T> : ITernaryBitwiseExpr<T>
+    public sealed class BitShiftExpr<T> : IBitShiftExpr<T>
         where T : unmanaged
     {
         [MethodImpl(Inline)]
-        public TernaryBitsExpr(BitOpKind op, IBitExpr<T> first, IBitExpr<T> second, IBitExpr<T> third)
+        public BitShiftExpr(BitOpKind op, IBitExpr<T> subject, IBitExpr<int> offset)
         {
             this.Operator = op;
-            this.First = first;
-            this.Second = second;
-            this.Third = third;
+            this.Subject = subject;
+            this.Offset = offset;
         }
         
         /// <summary>
-        /// The operator
+        /// The shift operaator
         /// </summary>
         public BitOpKind Operator {get;}
 
         /// <summary>
-        /// The first operand
-        /// </summary>
-        public IBitExpr<T> First {get;}
-
-        /// <summary>
-        /// The second operand
-        /// </summary>
-        public IBitExpr<T> Second {get;}
-
-        /// <summary>
-        /// The third operand
-        /// </summary>
-        public IBitExpr<T> Third {get;}
-
-        /// <summary>
         /// The number of parameters accepted by the expression
         /// </summary>
-        public ExprArity Arity => ExprArity.Ternary;     
+        public ExprArity Arity => ExprArity.Binary;
 
-    }
+        /// <summary>
+        /// The shiftee
+        /// </summary>
+        public IBitExpr<T> Subject {get;}
 
- 
+        /// <summary>
+        /// The right operand
+        /// </summary>
+        public IBitExpr<int> Offset {get;}
+
+    } 
 }

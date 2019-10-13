@@ -140,6 +140,49 @@ namespace Z0
         public static Byte f12(Byte a, Byte b, Byte c)
             => and(not(b), xor(a,c));
 
+        // b nor (a and c)
+        [MethodImpl(Inline)]
+        public static Byte f13(Byte a, Byte b, Byte c)
+            => nor(b, and(a,c));
+
+        // not c and (a xor b)
+        [MethodImpl(Inline)]
+        public static Byte f14(Byte a, Byte b, Byte c)
+            => and(not(c), xor(a,b));
+
+        // c nor (b and a)
+        [MethodImpl(Inline)]
+        public static Byte f15(Byte a, Byte b, Byte c)
+            => nor(c, and(a,b));
+
+        [MethodImpl(Inline)]
+        public static Byte f16(Byte a, Byte b, Byte c)
+            => select(a, nor(b,c), xor(b,c));
+
+        // a ? (b or c) : (b and c)
+        [MethodImpl(Inline)]
+        public static Byte f17(Byte a, Byte b, Byte c)
+            => select(a, or(b,c), and(b,c));
+
+        // (a xor b) and (a xor c)
+        [MethodImpl(Inline)]
+        public static Byte f18(Byte a, Byte b, Byte c)
+            => and(xor(a,b), xor(a,c));
+
+        // ((b xor c) xor (a and (b and c))
+        [MethodImpl(Inline)]
+        public static Byte f19(Byte a, Byte b, Byte c)
+            => xor(xor(b,c), and(a, and(b,c)));
+
+        // not ((a and b)) and (a xor c)
+        [MethodImpl(Inline)]
+        public static Byte f1a(Byte a, Byte b, Byte c)
+            => not(and(and(a,b), xor(a, c)));
+
+        // c ? not a : not b
+        [MethodImpl(Inline)]
+        public static Byte f1b(Byte a, Byte b, Byte c)
+            => select(c, not(a), not(b));
     }
 
 }

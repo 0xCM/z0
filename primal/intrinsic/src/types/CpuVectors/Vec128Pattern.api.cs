@@ -26,12 +26,12 @@ namespace Z0
                 => ref Vec128Pattern<T>.Units;
 
         /// <summary>
-        /// Returns an immutable reference to a vector with all bits turned on
+        /// Returns a vector with all bits turned on
         /// </summary>
         /// <typeparam name="T">The primal type</typeparam>
-        public static ref readonly Vec128<T> AllOnes<T>()
+        public static Vec128<T> AllOnes<T>()
             where T : unmanaged
-                => ref Vec128Pattern<T>.AllOnes;
+                => Vec128Pattern<T>.AllOnes;
 
         /// <summary>
         /// Creates a vector where each the component value at index i + 1, except the first, is obtained by 

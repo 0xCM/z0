@@ -99,8 +99,8 @@ namespace Z0
             var opcount = RoundCount*CycleCount;
             var last = default(T);
 
-            var offMin = convert<T>(2);
-            var offMax = convert<T>(bz - 2);
+            var offMin = 2;
+            var offMax = bz - 2;
             
             for(var rep=0; rep < opcount; rep++)
             {
@@ -122,8 +122,8 @@ namespace Z0
             var opcount = RoundCount*CycleCount;
             var last = default(T);
 
-            var offMin = convert<T>(2);
-            var offMax = convert<T>(bz - 2);
+            var offMin = 2;
+            var offMax = bz - 2;
             
             for(var rep=0; rep < opcount; rep++)
             {
@@ -139,15 +139,14 @@ namespace Z0
         void rotl_check<T>()
             where T : unmanaged
         {
-            var offset = Random.Next(closed<uint>(1, bitsize<T>()));
-            var offsetT = convert<uint,T>(offset);
+            var offset = Random.Next(1, bitsize<T>());
             for(var i=0; i<SampleSize; i++)
             {
                 var x = Random.Next<T>();                
                 var bsx = BitString.FromScalar(in x);
                 var bsxRef = bsx.Replicate();
                 Claim.eq(x,bsx.TakeValue<T>());
-                gbits.rotl(ref x, offsetT);
+                x = gbits.rotl(x, offset);
                 bsx.RotL(offset);
                 
                 var y = bsx.TakeValue<T>();

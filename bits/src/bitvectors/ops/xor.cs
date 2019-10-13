@@ -48,7 +48,7 @@ namespace Z0
         /// <param name="x">The left bitvector</param>
         /// <param name="y">The right bitvector</param>
         [MethodImpl(Inline)]
-        public static BitVector32 xor(in BitVector32 x, in BitVector32 y)
+        public static BitVector32 xor(BitVector32 x, BitVector32 y)
             => math.xor(x.data, y.data);
 
         /// <summary>

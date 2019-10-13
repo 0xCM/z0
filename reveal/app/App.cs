@@ -87,8 +87,8 @@ namespace Z0
             Disassemble(typeof(dinx));    
             Disassemble(typeof(bitvector));    
             Disassemble(typeof(pmoc));    
-            Disassemble(typeof(sloc));    
-            Disassemble(typeof(boc));    
+            Disassemble(typeof(loc));    
+            Disassemble(typeof(bvoc));    
             Disassemble(typeof(bmoc));    
             Disassemble(typeof(inxsoc));    
             Disassemble(typeof(inxvoc));    
@@ -98,6 +98,7 @@ namespace Z0
             Disassemble(typeof(BitParts));                
             Disassemble(typeof(ByteLogic));                
             Disassemble(typeof(BitLogic));                
+            Disassemble(typeof(BoolLogic));                
         }
 
         public unsafe void ListMethods(Type t)

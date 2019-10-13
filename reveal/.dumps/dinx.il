@@ -1,4 +1,4 @@
-// 2019-10-12 06:44:37:618
+// 2019-10-13 04:28:17:344
 Vec128Cmp<ulong> eq(in Vec128<ulong> lhs, in Vec128<ulong> rhs)
 {
     IL_0000: ldarg.0
@@ -3003,7 +3003,7 @@ Vec256<ulong> vbsrl(in Vec256<ulong> src, byte bytes)
     IL_0016: ret
 
 }
-Vec128<sbyte> vflip(in Vec128<sbyte> src)
+Vec128<sbyte> vnot(in Vec128<sbyte> src)
 {
     IL_0000: ldarg.0
     IL_0001: ldfld System.Runtime.Intrinsics.Vector128`1<System.SByte> Z0.Vec128`1<System.SByte>::xmm
@@ -3017,7 +3017,7 @@ Vec128<sbyte> vflip(in Vec128<sbyte> src)
     IL_0021: ret
 
 }
-Vec128<byte> vflip(in Vec128<byte> src)
+Vec128<byte> vnot(in Vec128<byte> src)
 {
     IL_0000: ldarg.0
     IL_0001: ldfld System.Runtime.Intrinsics.Vector128`1<System.Byte> Z0.Vec128`1<System.Byte>::xmm
@@ -3031,7 +3031,7 @@ Vec128<byte> vflip(in Vec128<byte> src)
     IL_0021: ret
 
 }
-Vec128<short> vflip(in Vec128<short> src)
+Vec128<short> vnot(in Vec128<short> src)
 {
     IL_0000: ldarg.0
     IL_0001: ldfld System.Runtime.Intrinsics.Vector128`1<System.Int16> Z0.Vec128`1<System.Int16>::xmm
@@ -3045,7 +3045,7 @@ Vec128<short> vflip(in Vec128<short> src)
     IL_0021: ret
 
 }
-Vec128<ushort> vflip(in Vec128<ushort> src)
+Vec128<ushort> vnot(in Vec128<ushort> src)
 {
     IL_0000: ldarg.0
     IL_0001: ldfld System.Runtime.Intrinsics.Vector128`1<System.UInt16> Z0.Vec128`1<System.UInt16>::xmm
@@ -3059,7 +3059,7 @@ Vec128<ushort> vflip(in Vec128<ushort> src)
     IL_0021: ret
 
 }
-Vec128<int> vflip(in Vec128<int> src)
+Vec128<int> vnot(in Vec128<int> src)
 {
     IL_0000: ldarg.0
     IL_0001: ldfld System.Runtime.Intrinsics.Vector128`1<System.Int32> Z0.Vec128`1<System.Int32>::xmm
@@ -3073,7 +3073,7 @@ Vec128<int> vflip(in Vec128<int> src)
     IL_0021: ret
 
 }
-Vec128<uint> vflip(in Vec128<uint> src)
+Vec128<uint> vnot(in Vec128<uint> src)
 {
     IL_0000: ldarg.0
     IL_0001: ldfld System.Runtime.Intrinsics.Vector128`1<System.UInt32> Z0.Vec128`1<System.UInt32>::xmm
@@ -3087,33 +3087,33 @@ Vec128<uint> vflip(in Vec128<uint> src)
     IL_0021: ret
 
 }
-Vec128<long> vflip(in Vec128<long> src)
+Vec128<long> vnot(in Vec128<long> src)
 {
     IL_0000: ldarg.0
     IL_0001: call Z0.Vec128`1<System.UInt32> Z0.Vec128`1<System.Int64>::As<System.UInt32>()
     IL_0006: stloc.0
     IL_0007: ldloca.s V_0
-    IL_0009: call Z0.Vec128`1<System.UInt32> Z0.dinx::vflip(Z0.Vec128`1<System.UInt32>&)
+    IL_0009: call Z0.Vec128`1<System.UInt32> Z0.dinx::vnot(Z0.Vec128`1<System.UInt32>&)
     IL_000E: stloc.1
     IL_000F: ldloca.s V_1
     IL_0011: call Z0.Vec128`1<System.Int64> Z0.Vec128`1<System.UInt32>::As<System.Int64>()
     IL_0016: ret
 
 }
-Vec128<ulong> vflip(in Vec128<ulong> src)
+Vec128<ulong> vnot(in Vec128<ulong> src)
 {
     IL_0000: ldarg.0
     IL_0001: call Z0.Vec128`1<System.UInt32> Z0.Vec128`1<System.UInt64>::As<System.UInt32>()
     IL_0006: stloc.0
     IL_0007: ldloca.s V_0
-    IL_0009: call Z0.Vec128`1<System.UInt32> Z0.dinx::vflip(Z0.Vec128`1<System.UInt32>&)
+    IL_0009: call Z0.Vec128`1<System.UInt32> Z0.dinx::vnot(Z0.Vec128`1<System.UInt32>&)
     IL_000E: stloc.1
     IL_000F: ldloca.s V_1
     IL_0011: call Z0.Vec128`1<System.UInt64> Z0.Vec128`1<System.UInt32>::As<System.UInt64>()
     IL_0016: ret
 
 }
-Vec256<sbyte> vflip(in Vec256<sbyte> src)
+Vec256<sbyte> vnot(in Vec256<sbyte> src)
 {
     IL_0000: ldarg.0
     IL_0001: ldfld System.Runtime.Intrinsics.Vector256`1<System.SByte> Z0.Vec256`1<System.SByte>::ymm
@@ -3127,7 +3127,7 @@ Vec256<sbyte> vflip(in Vec256<sbyte> src)
     IL_0021: ret
 
 }
-Vec256<byte> vflip(in Vec256<byte> src)
+Vec256<byte> vnot(in Vec256<byte> src)
 {
     IL_0000: ldarg.0
     IL_0001: ldfld System.Runtime.Intrinsics.Vector256`1<System.Byte> Z0.Vec256`1<System.Byte>::ymm
@@ -3141,7 +3141,7 @@ Vec256<byte> vflip(in Vec256<byte> src)
     IL_0021: ret
 
 }
-Vec256<short> vflip(in Vec256<short> src)
+Vec256<short> vnot(in Vec256<short> src)
 {
     IL_0000: ldarg.0
     IL_0001: ldfld System.Runtime.Intrinsics.Vector256`1<System.Int16> Z0.Vec256`1<System.Int16>::ymm
@@ -3155,7 +3155,7 @@ Vec256<short> vflip(in Vec256<short> src)
     IL_0021: ret
 
 }
-Vec256<ushort> vflip(in Vec256<ushort> src)
+Vec256<ushort> vnot(in Vec256<ushort> src)
 {
     IL_0000: ldarg.0
     IL_0001: ldfld System.Runtime.Intrinsics.Vector256`1<System.UInt16> Z0.Vec256`1<System.UInt16>::ymm
@@ -3169,7 +3169,7 @@ Vec256<ushort> vflip(in Vec256<ushort> src)
     IL_0021: ret
 
 }
-Vec256<int> vflip(in Vec256<int> src)
+Vec256<int> vnot(in Vec256<int> src)
 {
     IL_0000: ldarg.0
     IL_0001: ldfld System.Runtime.Intrinsics.Vector256`1<System.Int32> Z0.Vec256`1<System.Int32>::ymm
@@ -3183,7 +3183,7 @@ Vec256<int> vflip(in Vec256<int> src)
     IL_0021: ret
 
 }
-Vec256<uint> vflip(in Vec256<uint> src)
+Vec256<uint> vnot(in Vec256<uint> src)
 {
     IL_0000: ldarg.0
     IL_0001: ldfld System.Runtime.Intrinsics.Vector256`1<System.UInt32> Z0.Vec256`1<System.UInt32>::ymm
@@ -3197,7 +3197,7 @@ Vec256<uint> vflip(in Vec256<uint> src)
     IL_0021: ret
 
 }
-Vec256<long> vflip(in Vec256<long> src)
+Vec256<long> vnot(in Vec256<long> src)
 {
     IL_0000: ldarg.0
     IL_0001: ldfld System.Runtime.Intrinsics.Vector256`1<System.Int64> Z0.Vec256`1<System.Int64>::ymm
@@ -3211,7 +3211,7 @@ Vec256<long> vflip(in Vec256<long> src)
     IL_0021: ret
 
 }
-Vec256<ulong> vflip(in Vec256<ulong> src)
+Vec256<ulong> vnot(in Vec256<ulong> src)
 {
     IL_0000: ldarg.0
     IL_0001: ldfld System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Vec256`1<System.UInt64>::ymm

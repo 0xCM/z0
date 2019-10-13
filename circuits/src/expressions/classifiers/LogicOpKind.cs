@@ -47,8 +47,7 @@ namespace Z0
         Nor = Identity << 1,
         
         /// <summary>
-        /// A binary operator that computes the negation of XOR and is
-        /// functionally equivalent to bit value equality
+        /// A binary operator that computes the negation of XOR and is functionally equivalent to bit value equality
         /// </summary>
         XNor = Nor << 1,
 
@@ -61,6 +60,11 @@ namespace Z0
         /// A binary operator that evaluates the implication a -> b that means if p is true then b is true
         /// </summary>
         Implies = Nand << 1,
+
+        /// <summary>
+        /// The ternary operator a ? b : c
+        /// </summary>
+        Select = Implies << 1,
 
     } 
 }
