@@ -244,10 +244,16 @@ namespace Z0
         XOr,
 
         /// <summary>
-        /// Indicates a binary operator that computes the composite operation not(a ^ b)
+        /// Indicates a binary operator that computes the composite operation ~(a ^ b)
         /// </summary>
         [Arity(OpArity.Binary)]
         XNor,
+
+        /// <summary>
+        /// Indicates a binary operator that computes the composite operation a & (~b)
+        /// </summary>
+        [Arity(OpArity.Binary)]
+        AndNot,
 
         /// <summary>
         /// Indicates the ternary operator a ? b : c

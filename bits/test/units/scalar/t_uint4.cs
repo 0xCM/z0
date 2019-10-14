@@ -92,7 +92,7 @@ namespace Z0
             var z1 = (byte)5;
             Claim.eq(y1,z1);
 
-            var x2 = UInt4.FromBits(1,0,1,1);
+            var x2 = UInt4.FromBits(true,false,true,true);
             byte y2 = x2;
             var z2 = (byte)0b1101;
             Claim.eq(y2,z2);

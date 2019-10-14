@@ -37,12 +37,12 @@ namespace Z0
 
             for(var i=64; i<128; i++)
             {
-                tmp[i] = 0;
+                tmp[i] = false;
                 for(var j=(i - 63); j< 64; j++)
                     tmp[i] = tmp[i] ^(temp1[j] & temp2[i-j]);
                 dst[i] = tmp[i];
             }
-            dst[127] = 0;
+            dst[127] = false;
             
             return dst;
         }

@@ -19,7 +19,7 @@ namespace Z0
         public void perm_swaps()
         {            
             
-            var src = Vec128Pattern.Increments((byte)0);
+            var src = Vec128Pattern.increments((byte)0);
 
             Swap s = (0,1);
             var x1 = dinx.swap(src, s);

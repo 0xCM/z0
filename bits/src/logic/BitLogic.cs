@@ -5,17 +5,17 @@
 namespace Z0
 {
     using System;
+    using System.Collections.Generic;
+    using System.Linq;
     using System.Runtime.CompilerServices;
-    using System.IO;
 
     using static zfunc;
-    using static ByteKind;
+    using static TernaryLogic;
 
     public static class BitLogic
     {        
-        public static readonly Bit one = Bit.On;
-
-        public static readonly Bit zero = Bit.Off;
+        public const bool one = true;
+        
 
         [MethodImpl(Inline)]
         public static Bit identity(Bit a)
@@ -26,39 +26,42 @@ namespace Z0
             => ~a;
 
         [MethodImpl(Inline)]
+        public static Bit xor1(Bit a)
+            => a.Xor1();
+
+        [MethodImpl(Inline)]
         public static Bit and(Bit a, Bit b)
             => a & b;
 
+        [MethodImpl(Inline)]
+        public static Bit nand(Bit a, Bit b)
+            => a.Nand(b);
 
         [MethodImpl(Inline)]
         public static Bit or(Bit a, Bit b)
             => a | b;
 
+        [MethodImpl(Inline)]
+        public static Bit nor(Bit a, Bit b)
+            => a.Nor(b);
 
         [MethodImpl(Inline)]
         public static Bit xor(Bit a, Bit b)
             => a ^ b;
 
-
         [MethodImpl(Inline)]
-        public static Bit select(Bit a, Bit b, Bit c)
-            => a ? b : c;
-
-        [MethodImpl(Inline)]
-        public static Bit nand(Bit a, Bit b)
-            => not(and(a,b));
+        public static Bit xnor(Bit a, Bit b)
+            => a.Xnor(b);
 
         [MethodImpl(Inline)]
         public static Bit andnot(Bit a, Bit b)
-            => and(a, not(b));
+            => a.AndNot(b);
+
 
         [MethodImpl(Inline)]
-        public static Bit nor(Bit a, Bit b)
-            => not(or(a,b));
+        public static Bit select(Bit a, Bit b, Bit c)
+            => a.Select(b,c);
 
-        [MethodImpl(Inline)]
-        public static Bit xnor(Bit a, Bit b)
-            => not(xor(a,b));
 
         // a nor (b or c)
         [MethodImpl(Inline)]
@@ -138,12 +141,12 @@ namespace Z0
         // a and (b nor c)
         [MethodImpl(Inline)]
         public static Bit f10(Bit a, Bit b, Bit c)
-            => and(a, nor(b, c));
+            => and(a, nor(b, c));        
         
-        // a and (b nor c)
+        // c nor b
         [MethodImpl(Inline)]
         public static Bit f11(Bit a, Bit b, Bit c)
-            => and(a,nor(c,b));
+            => nor(c,b);
         
         // not b and (a xor c) 
         [MethodImpl(Inline)]
@@ -170,10 +173,10 @@ namespace Z0
         public static Bit f16(Bit a, Bit b, Bit c)
             => select(a, nor(b,c), xor(b,c));
 
-        // a ? (b or c) : (b and c)
+        // not(a ? (b or c) : (b and c))
         [MethodImpl(Inline)]
         public static Bit f17(Bit a, Bit b, Bit c)
-            => select(a, or(b,c), and(b,c));
+            => not(select(a, or(b,c), and(b,c)));
 
         // (a xor b) and (a xor c)
         [MethodImpl(Inline)]
@@ -195,33 +198,90 @@ namespace Z0
         public static Bit f1b(Bit a, Bit b, Bit c)
             => select(c, not(a), not(b));
 
-        public static UnaryOp<Bit> unaryop(OpKind id)
+        //not ((a and c)) and (a xor b)
+        [MethodImpl(Inline)]
+        public static Bit f1c(Bit a, Bit b, Bit c)
+            => and(not(and(a,c)), xor(a,b));
+
+        //b ? (not a) : (not c)
+        [MethodImpl(Inline)]
+        public static Bit f1d(Bit a, Bit b, Bit c)
+            => select(b, not(a), not(c));
+
+        //a xor (b or c)
+        [MethodImpl(Inline)]
+        public static Bit f1e(Bit a, Bit b, Bit c)
+            => xor(a, or(b,c));
+
+        // a nand (b or c)
+        [MethodImpl(Inline)]
+        public static Bit f1f(Bit a, Bit b, Bit c)
+            => nand(a, or(b,c));
+
+        //((not b) and a) and C
+        [MethodImpl(Inline)]
+        public static Bit f20(Bit a, Bit b, Bit c)
+            => and(andnot(a,b),c);
+
+        // b nor (a xor c)
+        [MethodImpl(Inline)]
+        public static Bit f21(Bit a, Bit b, Bit c)
+            => nor(b, xor(a,c));
+
+        // c and (not b)
+        [MethodImpl(Inline)]
+        public static Bit f22(Bit a, Bit b, Bit c)
+            => andnot(c,b);
+
+        // not (B) and ((A xor 1) or C)
+        [MethodImpl(Inline)]
+        public static Bit f23(Bit a, Bit b, Bit c)
+            => and(not(b),or(xor1(a),c));
+
+        // (a xor b) and (b xor c)
+        [MethodImpl(Inline)]
+        public static Bit f24(Bit a, Bit b, Bit c)
+            => and(xor(a,b), xor(b,c));
+
+        // (not ((A and B)) and (A xor (C xor 1)))
+        [MethodImpl(Inline)]
+        public static Bit f25(Bit a, Bit b, Bit c)
+            => and(not(and(a,b)), xor(a, xor1(c)));
+
+        public static UnaryOp<Bit> unaryop(UnaryLogic id)
         {
             switch(id)
             {
-                case OpKind.Not: return not;
-                case OpKind.Identity: return identity;
+                case UnaryLogic.Not: return not;
+                case UnaryLogic.Identity: return identity;
                 default:
                     throw unsupported<Bit>();
             }
         }
 
-        public static BinaryOp<Bit> binop(OpKind id)
+        public static BinaryOp<Bit> binop(BinaryLogic id)
         {
             switch(id)
             {
-                case OpKind.And: return and;
-                case OpKind.Nand: return nand;
-                case OpKind.Or: return or;
-                case OpKind.Nor: return nor;
-                case OpKind.XOr: return xor;
-                case OpKind.XNor: return xnor;
+                case BinaryLogic.And: return and;
+                case BinaryLogic.Nand: return nand;
+                case BinaryLogic.Or: return or;
+                case BinaryLogic.Nor: return nor;
+                case BinaryLogic.XOr: return xor;
+                case BinaryLogic.XNor: return xnor;
+                case BinaryLogic.AndNot: return andnot;
                 default:
                     throw unsupported<Bit>();
             }
         }
 
-        public static TernaryOp<Bit> ternop(ByteKind id)
+        /// <summary>
+        /// Advertises the supported operations
+        /// </summary>
+        public static IEnumerable<TernaryLogic> ternops
+            => range((byte)1,0xf1b).Cast<TernaryLogic>();
+
+        public static TernaryOp<Bit> ternop(TernaryLogic id)
         {
             switch(id)
             {
@@ -252,11 +312,50 @@ namespace Z0
                 case X19: return f19;
                 case X1A: return f1a;
                 case X1B: return f1b;
+                case X1C: return f1c;
+                case X1D: return f1d;
+                case X1E: return f1e;
+                case X1F: return f1f;
+                case X20: return f20;
+                case X21: return f21;
+                case X22: return f22;
+                case X23: return f23;
+                case X24: return f24;
+                case X25: return f25;
                 default: return select;
 
             }
         }
- 
+
+        public static BitMatrix<N4,N3,byte> table(BinaryLogic op)
+        {
+            var tt = BitMatrix.Alloc<N4,N3,byte>();
+            var f = binop(op);
+            tt[0] = BitVector.Define<N3,byte>(Bits.pack3(f(Bit.Off, Bit.Off), Bit.Off, Bit.Off));
+            tt[1] = BitVector.Define<N3,byte>(Bits.pack3(f(Bit.On, Bit.Off), Bit.Off, Bit.On));
+            tt[2] = BitVector.Define<N3,byte>(Bits.pack3(f(Bit.Off, Bit.On), Bit.On, Bit.Off));
+            tt[3] = BitVector.Define<N3,byte>(Bits.pack3(f(Bit.On, Bit.On),  Bit.On, Bit.On));
+            return tt;
+        }
+
+        static readonly Bit off = Bit.Off;
+        static readonly Bit on = Bit.On;
+
+        public static BitMatrix<N8,N4, byte> table(TernaryLogic op)
+        {
+            var tt = BitMatrix.Alloc<N8,N4,byte>();
+            var f = ternop(op);
+            tt[0] = BitVector.Define<N4,byte>(Bits.pack4(f(off, off, off), off, off, off));
+            tt[1] = BitVector.Define<N4,byte>(Bits.pack4(f(off, off, on), off, off, on));
+            tt[2] = BitVector.Define<N4,byte>(Bits.pack4(f(off, on, off), off, on, off));
+            tt[3] = BitVector.Define<N4,byte>(Bits.pack4(f(off, on, on), off, on, on));
+            tt[4] = BitVector.Define<N4,byte>(Bits.pack4(f(on, off, off), on, off, off));
+            tt[5] = BitVector.Define<N4,byte>(Bits.pack4(f(on, off, on), on, off, on));
+            tt[6] = BitVector.Define<N4,byte>(Bits.pack4(f(on, on, off), off, on, on));
+            tt[7] = BitVector.Define<N4,byte>(Bits.pack4(f(on, on, on), on, on, on));
+            return tt;
+        }
+
     }
 
 }

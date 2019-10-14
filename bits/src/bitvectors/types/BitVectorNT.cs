@@ -370,7 +370,7 @@ namespace Z0
             => BitString.FromScalars<T>(Data, Length); 
 
         [MethodImpl(Inline)]
-        public string FormatBits(bool tlz = false, bool specifier = false, int? blockWidth = null)
+        public string Format(bool tlz = false, bool specifier = false, int? blockWidth = null)
             => ToBitString().Format(tlz, specifier, blockWidth);
 
         [MethodImpl(Inline)]

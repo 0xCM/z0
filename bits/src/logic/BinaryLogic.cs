@@ -8,28 +8,35 @@ namespace Z0
     
     using static zfunc;
 
+
     /// <summary>
     /// Defines logical operators whose operands are bitwise expressions
     /// </summary>
     [Flags]
-    public enum LogicOpKind : uint
+    public enum BinaryLogic : uint
     {
-        None = 0,
+        
+        /// <summary>
+        /// Logical FALSE
+        /// </summary>
+        False = 0b0000,
         
         /// <summary>
         /// Logical AND
         /// </summary>
-        And = Pow2.T00,
+        And = 0b1000,
 
+        AndNot = 0b0010,
+        
         /// <summary>
         /// Logical OR
         /// </summary>
-        Or = And << 1,
+        Or = 0b1110,
 
         /// <summary>
         /// Logical XOR
         /// </summary>
-        XOr = Or << 1,
+        XOr = 0b0110,
 
         /// <summary>
         /// Logial NOT
@@ -44,27 +51,25 @@ namespace Z0
         /// <summary>
         /// A binary operator that computes the negation of OR
         /// </summary>
-        Nor = Identity << 1,
+        Nor = 0b0001,
         
         /// <summary>
         /// A binary operator that computes the negation of XOR and is functionally equivalent to bit value equality
         /// </summary>
-        XNor = Nor << 1,
+        XNor = 0b1001,
 
         /// <summary>
         /// A binary operator that evaluates to true iff one or both operands are false
         /// </summary>
-        Nand = XNor << 1,
+        Nand = 0b0111,
+
+        True = 0b1111,
 
         /// <summary>
         /// A binary operator that evaluates the implication a -> b that means if p is true then b is true
         /// </summary>
-        Implies = Nand << 1,
+        Implies = Pow2.T08,
 
-        /// <summary>
-        /// The ternary operator a ? b : c
-        /// </summary>
-        Select = Implies << 1,
 
     } 
 }

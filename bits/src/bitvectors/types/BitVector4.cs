@@ -543,7 +543,7 @@ namespace Z0
         /// </summary>
         [MethodImpl(Inline)]
         public BitString ToBitString()
-            => data.ToBitString();
+            => data.ToBitString().Truncate(4);
 
         [MethodImpl(Inline)]
         public string Format(bool tlz = false, bool specifier = false, int? blockWidth = null)

@@ -24,4 +24,24 @@ namespace Z0
 
     public delegate bool BinaryPred<T>(T a, T b)
         where T : unmanaged;
+
+
+    public delegate T UnaryOpIn<T>(in T a)
+        where T : unmanaged;
+
+    public delegate T BinaryOpIn<T>(in T a, in T b)
+        where T : unmanaged;
+
+    public delegate T TernaryOpIn<T>(in T a, in T b, in T c)
+        where T : unmanaged;
+
+    public delegate T ShifterIn<T>(in T a, int offset)
+        where T : unmanaged;
+
+    public delegate bool UnaryPredIn<T>(in T a)
+        where T : unmanaged;
+
+    public delegate bool BinaryPredIn<T>(in T a, in T b)
+        where T : unmanaged;
+
 }

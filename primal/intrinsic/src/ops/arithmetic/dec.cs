@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
         public static Vec128<sbyte> vdec(in Vec128<sbyte> src)
-            =>  vsub(src, Vec128Pattern.Units<sbyte>());
+            =>  vsub(src, Vec128Pattern.units<sbyte>());
 
         /// <summary>
         /// Inrements each component by 1
@@ -26,7 +26,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
         public static Vec128<byte> vdec(in Vec128<byte> src)
-            =>  vsub(src, Vec128Pattern.Units<byte>());
+            =>  vsub(src, Vec128Pattern.units<byte>());
 
         /// <summary>
         /// Inrements each component by 1
@@ -34,7 +34,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
         public static Vec128<short> vdec(in Vec128<short> src)
-            =>  vsub(src, Vec128Pattern.Units<short>());
+            =>  vsub(src, Vec128Pattern.units<short>());
 
         /// <summary>
         /// Inrements each component by 1
@@ -42,7 +42,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
         public static Vec128<ushort> vdec(in Vec128<ushort> src)
-            =>  vsub(src, Vec128Pattern.Units<ushort>());
+            =>  vsub(src, Vec128Pattern.units<ushort>());
 
         /// <summary>
         /// Inrements each component by 1
@@ -50,7 +50,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
         public static Vec128<int> vdec(in Vec128<int> src)
-            =>  vsub(src, Vec128Pattern.Units<int>());
+            =>  vsub(src, Vec128Pattern.units<int>());
 
         /// <summary>
         /// Inrements each component by 1
@@ -58,7 +58,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
         public static Vec128<uint> vdec(in Vec128<uint> src)
-            =>  vsub(src, Vec128Pattern.Units<uint>());
+            =>  vsub(src, Vec128Pattern.units<uint>());
 
         /// <summary>
         /// Inrements each component by 1
@@ -66,7 +66,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
         public static Vec128<long> vdec(in Vec128<long> src)
-            =>  vsub(src, Vec128Pattern.Units<long>());
+            =>  vsub(src, Vec128Pattern.units<long>());
 
         /// <summary>
         /// Inrements each component by 1
@@ -74,7 +74,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
         public static Vec128<ulong> vdec(in Vec128<ulong> src)
-            =>  vsub(src, Vec128Pattern.Units<ulong>());
+            =>  vsub(src, Vec128Pattern.units<ulong>());
 
         /// <summary>
         /// Inrements each component by 1

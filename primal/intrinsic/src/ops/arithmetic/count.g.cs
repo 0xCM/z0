@@ -24,7 +24,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vec128<T> next<T>(in Vec128<T> src)
             where T : unmanaged
-                => vadd<T>(src, Vec128Pattern.Units<T>());
+                => vadd<T>(src, Vec128Pattern.units<T>());
 
         /// <summary>
         /// Increments each source vector component by a unit
@@ -44,7 +44,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vec128<T> prior<T>(Vector128<T> src)
             where T : unmanaged
-                => vsub(src, Vec128Pattern.Units<T>());
+                => vsub(src, Vec128Pattern.units<T>());
 
         /// <summary>
         /// Decrements each source vector component by a unit

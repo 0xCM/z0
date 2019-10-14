@@ -1,4 +1,4 @@
-// 2019-10-13 04:28:19:170
+// 2019-10-14 04:37:02:863
 Vector128<ushort> vxor_n128x16u(Vector128<ushort> x, Vector128<ushort> y)
 {
     IL_0000: ldarg.0
@@ -311,6 +311,38 @@ Vec256<ulong> vxor_g256x64u(Vec256<ulong> x, Vec256<ulong> y)
     IL_0009: ret
 
 }
+Vec128<byte> vcmpeq_d128x8u(Vec128<byte> x, Vec128<byte> y)
+{
+    IL_0000: ldarga.s x
+    IL_0002: ldarga.s y
+    IL_0004: call Z0.Vec128`1<System.Byte> Z0.dinx::vcmpeq(Z0.Vec128`1<System.Byte>&,Z0.Vec128`1<System.Byte>&)
+    IL_0009: ret
+
+}
+Vec128<byte> vcmpeq_g128x8u(Vec128<byte> x, Vec128<byte> y)
+{
+    IL_0000: ldarga.s x
+    IL_0002: ldarga.s y
+    IL_0004: call Z0.Vec128`1<System.Byte> Z0.ginx::vcmpeq<System.Byte>(Z0.Vec128`1<System.Byte>&,Z0.Vec128`1<System.Byte>&)
+    IL_0009: ret
+
+}
+Vec256<byte> vcmpeq_d256x8u(Vec256<byte> x, Vec256<byte> y)
+{
+    IL_0000: ldarga.s x
+    IL_0002: ldarga.s y
+    IL_0004: call Z0.Vec256`1<System.Byte> Z0.dinx::vcmpeq(Z0.Vec256`1<System.Byte>&,Z0.Vec256`1<System.Byte>&)
+    IL_0009: ret
+
+}
+Vec256<byte> vcmpeq_g256x8u(Vec256<byte> x, Vec256<byte> y)
+{
+    IL_0000: ldarga.s x
+    IL_0002: ldarga.s y
+    IL_0004: call Z0.Vec256`1<System.Byte> Z0.ginx::vcmpeq<System.Byte>(Z0.Vec256`1<System.Byte>&,Z0.Vec256`1<System.Byte>&)
+    IL_0009: ret
+
+}
 bool vtestz_n128x8u(Vec128<byte> src, Vec128<byte> mask)
 {
     IL_0000: ldarg.0
@@ -586,6 +618,36 @@ Vec256<byte> pattern_lanemerge_8u()
 Vec256<ushort> pattern_lanemerge_16u()
 {
     IL_0000: call Z0.Vec256`1<System.UInt16> Z0.Vec256Pattern::LaneMerge<System.UInt16>()
+    IL_0005: ret
+
+}
+Vec128<byte> ones_128x8u()
+{
+    IL_0000: call Z0.Vec128`1<System.Byte> Z0.Vec128Pattern::ones<System.Byte>()
+    IL_0005: ret
+
+}
+Vec128<ulong> ones_128x64u()
+{
+    IL_0000: call Z0.Vec128`1<System.UInt64> Z0.Vec128Pattern::ones<System.UInt64>()
+    IL_0005: ret
+
+}
+Vec256<byte> ones_256x8u()
+{
+    IL_0000: call Z0.Vec256`1<System.Byte> Z0.Vec256Pattern::ones<System.Byte>()
+    IL_0005: ret
+
+}
+Vec256<ulong> ones_256x64u()
+{
+    IL_0000: call Z0.Vec256`1<System.UInt64> Z0.Vec256Pattern::ones<System.UInt64>()
+    IL_0005: ret
+
+}
+Vec256<double> ones_256x64f()
+{
+    IL_0000: call Z0.Vec256`1<System.Double> Z0.Vec256Pattern::ones<System.Double>()
     IL_0005: ret
 
 }
@@ -3029,6 +3091,30 @@ Vec256<ulong> vbroadcast_g256x64u(ulong src)
     IL_0000: ldarg.0
     IL_0001: call Z0.Vec256`1<System.UInt64> Z0.ginx::vbroadcast256<System.UInt64>(System.UInt64)
     IL_0006: ret
+
+}
+ref Vec128<short> vconvert_128x8i_to_128x16i(in Vec128<sbyte> src, out Vec128<short> dst)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call Z0.Vec128`1<System.Int16>& Z0.dinx::vconvert(Z0.Vec128`1<System.SByte>&,Z0.Vec128`1<System.Int16>&)
+    IL_0007: ret
+
+}
+ref Vec128<int> vconvert_128x8i_to_128x32i(in Vec128<sbyte> src, out Vec128<int> dst)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call Z0.Vec128`1<System.Int32>& Z0.dinx::vconvert(Z0.Vec128`1<System.SByte>&,Z0.Vec128`1<System.Int32>&)
+    IL_0007: ret
+
+}
+ref Vec128<long> vconvert_128x8i_to_128x64i(in Vec128<sbyte> src, out Vec128<long> dst)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call Z0.Vec128`1<System.Int64>& Z0.dinx::vconvert(Z0.Vec128`1<System.SByte>&,Z0.Vec128`1<System.Int64>&)
+    IL_0007: ret
 
 }
 ref Vec128<short> vconvert_128x8u_to_128x16i(in Vec128<byte> src, out Vec128<short> dst)

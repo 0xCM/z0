@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;    
+    using System.Linq;
 
     using System.Runtime.Intrinsics;
     using System.Runtime.Intrinsics.X86;
@@ -21,7 +22,7 @@ namespace Z0
         /// Returns an immutable reference to a vector where each component is assigned the numeric value 1
         /// </summary>
         /// <typeparam name="T">The primal type</typeparam>
-        public static ref readonly Vec128<T> Units<T>()
+        public static ref readonly Vec128<T> units<T>()
             where T : unmanaged
                 => ref Vec128Pattern<T>.Units;
 
@@ -29,9 +30,19 @@ namespace Z0
         /// Returns a vector with all bits turned on
         /// </summary>
         /// <typeparam name="T">The primal type</typeparam>
-        public static Vec128<T> AllOnes<T>()
-            where T : unmanaged
-                => Vec128Pattern<T>.AllOnes;
+        [MethodImpl(Inline)]
+        public static Vec128<T> ones<T>()
+            where T : unmanaged                    
+                 => ginx.ones128<T>();
+
+        /// <summary>
+        /// Returns a vector with all bits turned off
+        /// </summary>
+        /// <typeparam name="T">The primal type</typeparam>
+        [MethodImpl(Inline)]
+        public static Vec128<T> zeroes<T>()
+            where T : unmanaged        
+                => default;
 
         /// <summary>
         /// Creates a vector where each the component value at index i + 1, except the first, is obtained by 
@@ -39,9 +50,10 @@ namespace Z0
         /// </summary>
         /// <param name="first">The value of the first component</param>
         /// <typeparam name="T">The primal component type</typeparam>
-        public static Vec128<T> Increments<T>(T first = default, params Swap[] swaps)
+        [MethodImpl(Inline)]
+        public static Vec128<T> increments<T>(T first = default, params Swap[] swaps)
             where T : unmanaged  
-                => Vec128Pattern<T>.Increments(first,swaps);
+                => Vec128PatternData.increments<T>(first, swaps);
 
         /// <summary>
         /// Creates a vector where each the component value at index i + 1, except the first, is obtained by 
@@ -50,7 +62,7 @@ namespace Z0
         /// <param name="first">The value of the first component</param>
         /// <param name="swaps">Transpositions applied to the decreasing sequence prior to vector creation</param>
         /// <typeparam name="T">The primal component type</typeparam>        
-        public static Vec128<T> Decrements<T>(T first = default, params Swap[] swaps)
+        public static Vec128<T> decrements<T>(T first = default, params Swap[] swaps)
             where T : unmanaged  
                 => Vec128Pattern<T>.Decrements(first, swaps);
 
@@ -62,27 +74,6 @@ namespace Z0
         public static Vec128<T> Swap<T>(params Swap[] swaps)
             where T : unmanaged  
                 => Vec128Pattern<T>.Increments(default(T), swaps);
- 
-        /// <summary>
-        /// Creates a vector with components that increase by a specified step
-        /// </summary>
-        /// <param name="start">The value of the first component</param>
-        /// <param name="step">The distance between components</param>
-        /// <typeparam name="T">The primal component type</typeparam>
-        public static Vec128<T> Increasing<T>(T start, T step)
-            where T : unmanaged
-        {
-            var n = Vec128<T>.Length;
-            var current = start;
-            var dst = Span256.AllocBlock<T>();
-            for(var i=0; i<n; i++)
-            {
-                dst[i] = current;
-                gmath.add(ref current, step);
-            }
-            return Vec128.Load(ref head(dst));
-
-        }
 
     }
 

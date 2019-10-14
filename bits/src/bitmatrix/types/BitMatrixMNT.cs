@@ -282,9 +282,10 @@ namespace Z0
         [MethodImpl(Inline)]
         public BitVector<M,T> GetCol(int col)
         {
-            var cv = default(BitVector<M,T>);
-            for(var row=0; row < RowCount; row++)
-                cv[row] = this[row, col];
+            var cidx = ColCount - col - 1;
+            var cv = BitVector.Alloc<M,T>();
+            for(var row = 0; row < RowCount; row++)            
+                cv[row] = this[row, cidx];                        
             return cv;
         }
 
@@ -325,9 +326,10 @@ namespace Z0
         {
             var sb = sbuild();
             for(var i=0; i< RowCount; i++)
-                 sb.AppendLine(RowVector(i).FormatBits());
+                 sb.AppendLine(RowVector(i).Format(blockWidth:1));
             return sb.ToString();
         }
+
 
         public bool Equals(BitMatrix<M,N,T> rhs)        
         {

@@ -307,7 +307,7 @@ namespace Z0
         /// <param name="rhs">The right operand</param>
         [MethodImpl(Inline)]
         public static Bit operator %(BitVector128 lhs,BitVector128 rhs)
-            => Mod<N2>.mod((lhs & rhs).Pop());              
+            => (Bit)Mod<N2>.mod((lhs & rhs).Pop());              
 
         /// <summary>
         /// Returns true if the source vector is nonzero, false otherwise
@@ -436,7 +436,7 @@ namespace Z0
         public Bit this[BitPos pos]
         {
             [MethodImpl(Inline)]
-            get => 0;
+            get => false;
             
             [MethodImpl(Inline)]
             set => Set(pos,value);

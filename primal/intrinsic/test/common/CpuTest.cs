@@ -42,7 +42,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         protected Imm8 imm8(Bit? b0 = null, Bit? b1 = null, Bit? b2 = null, Bit? b3 = null,Bit? b4 = null, Bit? b5 = null, Bit? b6 = null, Bit? b7 = null)
-            => Imm8.From(b0 ?? 0, b1 ?? 0, b2 ?? 0, b3 ?? 0, b4 ?? 0, b5 ?? 0, b6 ?? 0, b7 ?? 0);
+            => Imm8.From(b0 ?? false, b1 ?? false, b2 ?? false, b3 ?? false, b4 ?? false, b5 ?? false, b6 ?? false, b7 ?? false);
 
         /// <summary>
         /// Formats a slot-identified XMM register as cells of specified type

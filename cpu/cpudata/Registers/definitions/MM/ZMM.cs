@@ -45,7 +45,7 @@ namespace Z0
             [MethodImpl(Inline)]
             get
             {
-                return 0;
+                return false;
             }
         }        
 

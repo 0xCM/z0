@@ -21,24 +21,10 @@ namespace Z0
     {
         static readonly int Length = Vec128<T>.Length;
 
-        static readonly Vec128<T> Zero = Vec128<T>.Zero;
-
-        /// <summary>
-        /// A vector with all bits turned on
-        /// </summary>
-        public static readonly Vec128<T> AllOnes = ginx.cmpeq(Zero,Zero);
-
         /// <summary>
         /// A vector where each component is assigned the numeric value 1
         /// </summary>
         public static readonly Vec128<T> Units = CalcUnits();
-
-        public static Vec128<T> Increasing 
-            => Increments(zero<T>());
-
-        public static readonly Vec128<T> Decreasing = Decrements(convert<T>(Length - 1));
-
-        public static readonly Vec128<T> FpSignMask = CalcFpSignMask();
 
         /// <summary>
         /// Creates a vector with incrementing components
@@ -46,6 +32,7 @@ namespace Z0
         /// </summary>
         /// <param name="first">The value of the first component</param>
         /// <typeparam name="T">The primal component type</typeparam>
+        [MethodImpl(Inline)]
         public static Vec128<T> Increments(T first = default, params Swap[] swaps)
         {
             var src = Span128.Load(range(first, gmath.add(first, convert<T>(Length - 1))).ToArray().AsSpan());
@@ -73,7 +60,7 @@ namespace Z0
             return Vec128.Load(dst.Swap(swaps));
         }
 
-       static Vec128<T> CalcUnits()
+        static Vec128<T> CalcUnits()
         {
             var n = Length;
             var dst = Span128.Alloc<T>(n);

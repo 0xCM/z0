@@ -11,7 +11,7 @@ namespace Z0
 
     using static zfunc;    
     using static As;
-    using static ByteKind;
+    using static TernaryLogic;
 
     public static class BvLogic
     {
@@ -181,12 +181,12 @@ namespace Z0
         public static T f10<T>(T a, T b, T c)
             where T : unmanaged, IBitVector<T>
                 => and(a, nor(b, c));
-        
-        // a and (b nor c)
+                
+        // c nor b
         [MethodImpl(Inline)]
         public static T f11<T>(T a, T b, T c)
             where T : unmanaged, IBitVector<T>
-                => and(a,nor(c,b));
+                => nor(c,b);
         
         // not b and (a xor c) 
         [MethodImpl(Inline)]
@@ -218,11 +218,12 @@ namespace Z0
             where T : unmanaged, IBitVector<T>
                 => select(a, nor(b,c), xor(b,c));
 
-        // a ? (b or c) : (b and c)
+        // not(a ? (b or c) : (b and c))
         [MethodImpl(Inline)]
         public static T f17<T>(T a, T b, T c)
             where T : unmanaged, IBitVector<T>
-                => select(a, or(b,c), and(b,c));
+                => not(select(a, or(b,c), and(b,c)));
+
 
         // (a xor b) and (a xor c)
         [MethodImpl(Inline)]
@@ -248,38 +249,37 @@ namespace Z0
             where T : unmanaged, IBitVector<T>
                 => select(c, not(a), not(b));
 
-        public static UnaryOp<T> unaryop<T>(OpKind id)
+        public static UnaryOp<T> unaryop<T>(UnaryLogic id)
             where T : unmanaged, IBitVector<T>
         {
 
             switch(id)
             {
-                case OpKind.Not: return not;
-                case OpKind.Negate: return negate;
-                case OpKind.Identity: return identity;
+                case UnaryLogic.Not: return not;
+                case UnaryLogic.Identity: return identity;
                 default:
                     throw unsupported<T>();
             }
 
         }
 
-        public static BinaryOp<T> binop<T>(OpKind id)
+        public static BinaryOp<T> binop<T>(BinaryLogic id)
             where T : unmanaged, IBitVector<T>
         {
             switch(id)
             {
-                case OpKind.And: return and;
-                case OpKind.Nand: return nand;
-                case OpKind.Or: return or;
-                case OpKind.Nor: return nor;
-                case OpKind.XOr: return xor;
-                case OpKind.XNor: return xnor;
+                case BinaryLogic.And: return and;
+                case BinaryLogic.Nand: return nand;
+                case BinaryLogic.Or: return or;
+                case BinaryLogic.Nor: return nor;
+                case BinaryLogic.XOr: return xor;
+                case BinaryLogic.XNor: return xnor;
                 default:
                     throw unsupported<T>();
             }
         }
 
-        public static TernaryOp<T> ternop<T>(ByteKind id)
+        public static TernaryOp<T> ternop<T>(TernaryLogic id)
             where T : unmanaged, IBitVector<T>
         {
             switch(id)

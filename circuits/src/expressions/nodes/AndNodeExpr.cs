@@ -31,8 +31,8 @@ namespace Z0
         /// </summary>
         public ILogicOpExpr[] Terms {get;}
 
-        public LogicOpKind Operator 
-            => LogicOpKind.And;        
+        public BinaryLogic Operator 
+            => BinaryLogic.And;        
     }
 
     /// <summary>

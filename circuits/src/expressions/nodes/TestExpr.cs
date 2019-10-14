@@ -17,7 +17,7 @@ namespace Z0
         where T : unmanaged
     {
         [MethodImpl(Inline)]
-        public UnaryTestExpr(LogicOpKind testop, IBitExpr<T> control, UnaryBitExpr<T> expr)
+        public UnaryTestExpr(BinaryLogic testop, IBitExpr<T> control, UnaryBitExpr<T> expr)
             : base(testop, ExprArity.Unary, control,expr)
         {
                 
@@ -32,7 +32,7 @@ namespace Z0
         where T : unmanaged
     {
         [MethodImpl(Inline)]
-        public BinaryTestExpr(LogicOpKind testop, IBitExpr<T> control, BinaryBitExpr<T> expr)
+        public BinaryTestExpr(BinaryLogic testop, IBitExpr<T> control, BinaryBitExpr<T> expr)
             : base(testop, ExprArity.Binary, control,expr)
         {
                 
@@ -47,7 +47,7 @@ namespace Z0
         where T : unmanaged
     {
         [MethodImpl(Inline)]
-        public MixedTestExpr(LogicOpKind testop, IBitExpr<T> control, BitShiftExpr<T> expr)
+        public MixedTestExpr(BinaryLogic testop, IBitExpr<T> control, BitShiftExpr<T> expr)
             : base(testop, ExprArity.Binary, control,expr)
         {
                 
@@ -60,7 +60,7 @@ namespace Z0
         where E : IBitOpExpr
     {
 
-        protected TestExpr(LogicOpKind op, ExprArity arity, IBitExpr<T> control, E subject)
+        protected TestExpr(BinaryLogic op, ExprArity arity, IBitExpr<T> control, E subject)
         {
             this.Operator = op;
             this.Arity = arity;
@@ -71,7 +71,7 @@ namespace Z0
         /// <summary>
         /// The test operator
         /// </summary>
-        public LogicOpKind Operator {get;}
+        public BinaryLogic Operator {get;}
 
         /// <summary>
         /// The number of parameters accepted by the expression

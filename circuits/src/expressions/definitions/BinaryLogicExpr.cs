@@ -16,7 +16,7 @@ namespace Z0
     public sealed class BinaryLogicExpr : IBinaryLogicExpr
     {
         [MethodImpl(Inline)]
-        public BinaryLogicExpr(LogicOpKind op, ILogicExpr left, ILogicExpr right)
+        public BinaryLogicExpr(BinaryLogic op, ILogicExpr left, ILogicExpr right)
         {
             this.Operator = op;
             this.Left = left;
@@ -26,7 +26,7 @@ namespace Z0
         /// <summary>
         /// The operator
         /// </summary>
-        public LogicOpKind Operator {get;}
+        public BinaryLogic Operator {get;}
 
         /// <summary>
         /// Specifies the number of parameters accepted by the expression

@@ -24,17 +24,15 @@ namespace Z0
         static readonly Vec256<T> Zero = Vec256<T>.Zero;
 
         /// <summary>
-        /// A vector with all bits turned on
-        /// </summary>
-        public static readonly Vec256<T> AllOnes = ginx.cmpeq(Zero, Zero);
-
-        /// <summary>
         /// A vector where each component is assigned the numeric value 1
         /// </summary>
         public static readonly Vec256<T> Units = CalcUnits();
 
         public static Vec256<T> Increasing 
-            => Increments(zero<T>());
+        {
+            [MethodImpl(Inline)]
+            get => Increments(zero<T>());
+        }
 
         public static readonly Vec256<T> Decreasing = Decrements(convert<T>(Length - 1));
         
@@ -49,6 +47,7 @@ namespace Z0
         /// </summary>
         /// <param name="first">The value of the first component</param>
         /// <typeparam name="T">The primal component type</typeparam>
+        [MethodImpl(Inline)]
         public static Vec256<T> Increments(T first = default, params Swap[] swaps)
         {
             var src = Span256.Load(range(first, gmath.add(first, convert<T>(Length - 1))).ToArray().AsSpan());
@@ -124,7 +123,6 @@ namespace Z0
             return Vec256.Load(mask);
         }
             
-    
         static Vec256<double> CalcFpSignMask64()
             => Vec256.Fill(-0.0);
 

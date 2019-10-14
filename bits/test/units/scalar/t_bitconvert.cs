@@ -31,8 +31,8 @@ namespace Z0
             Claim.eq(0ul, (ulong)Off);
             Claim.eq(1ul, (ulong)On);
 
-            Claim.eq(BinaryDigit.Zed, Off);
-            Claim.eq(BinaryDigit.One, On);
+            Claim.eq(BinaryDigit.Zed, (BinaryDigit)Off);
+            Claim.eq(BinaryDigit.One, (BinaryDigit)On);
 
 
             Claim.eq(1, toInt<int>(Bit.On)); 

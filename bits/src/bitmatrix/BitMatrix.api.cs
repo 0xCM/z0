@@ -59,7 +59,7 @@ namespace Z0
         /// <param name="n">The matrix order</param>
         /// <typeparam name="N">The matrix order type</typeparam>
         /// <typeparam name="T">The matrix cell type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(NotInline)]
         public static BitMatrix<M,N,T> Load<M,N,T>(T[] src, M m = default, N n = default)        
             where M : ITypeNat, new()
             where N : ITypeNat, new()

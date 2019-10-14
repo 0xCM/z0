@@ -129,9 +129,9 @@ namespace Z0
         // a and (b nor c)
         [MethodImpl(Inline)]
         public static Byte f10(Byte a, Byte b, Byte c)
-            => and(a, nor(b, c));
+            =>and(a, nor(b,c));
         
-        // a and (b nor c)
+        // c nor b
         [MethodImpl(Inline)]
         public static Byte f11(Byte a, Byte b, Byte c)
             => nor(c,b);
@@ -159,10 +159,10 @@ namespace Z0
         public static Byte f16(Byte a, Byte b, Byte c)
             => select(a, nor(b,c), xor(b,c));
 
-        // a ? (b or c) : (b and c)
+        // not(a ? (b or c) : (b and c))
         [MethodImpl(Inline)]
         public static Byte f17(Byte a, Byte b, Byte c)
-            => select(a, or(b,c), and(b,c));
+            => not(select(a, or(b,c), and(b,c)));
 
         // (a xor b) and (a xor c)
         [MethodImpl(Inline)]

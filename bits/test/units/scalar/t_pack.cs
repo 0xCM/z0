@@ -152,7 +152,7 @@ namespace Z0.Test
                 {
                     var dst = (byte)0;
                     var pos = (byte)(Pow2.pow(i) - 1);
-                    Bits.pack(in x0, in x1, in x2, in x3, in x4, in x5, in x6, in x7, pos, ref dst);
+                    Bits.pack(x0, x1, x2, x3, x4, x5, x6, x7, pos, ref dst);
                     
                     var j = 0;
                     Claim.yea(gbits.match(dst, j++, x0, pos));

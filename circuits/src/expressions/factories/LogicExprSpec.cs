@@ -42,7 +42,7 @@ namespace Z0
         /// <param name="operand">The operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static UnaryLogicExpr unary(LogicOpKind op, ILogicExpr operand)
+        public static UnaryLogicExpr unary(UnaryLogic op, ILogicExpr operand)
             => new UnaryLogicExpr(op,operand);
 
         /// <summary>
@@ -52,7 +52,7 @@ namespace Z0
         /// <param name="left">The first operand</param>
         /// <param name="right">The second operand</param>
         [MethodImpl(Inline)]
-        public static BinaryLogicExpr binary(LogicOpKind op, ILogicExpr left, ILogicExpr right)
+        public static BinaryLogicExpr binary(BinaryLogic op, ILogicExpr left, ILogicExpr right)
             => new BinaryLogicExpr(op,left,right);
 
         /// <summary>
@@ -61,7 +61,7 @@ namespace Z0
         /// <param name="a">The operand</param>
         [MethodImpl(Inline)]
         public static UnaryLogicExpr not(ILogicExpr a)
-            => unary(LogicOpKind.Not, a);
+            => unary(UnaryLogic.Not, a);
 
         /// <summary>
         /// Defines a logical identity expression
@@ -69,7 +69,7 @@ namespace Z0
         /// <param name="a">The operand</param>
         [MethodImpl(Inline)]
         public static UnaryLogicExpr identity(ILogicExpr a)
-            => unary(LogicOpKind.Identity, a);
+            => unary(UnaryLogic.Identity, a);
 
         /// <summary>
         /// Defines a logical AND expression
@@ -78,7 +78,7 @@ namespace Z0
         /// <param name="b">The second operand</param>
         [MethodImpl(Inline)]
         public static BinaryLogicExpr and(ILogicExpr a, ILogicExpr b)
-            => binary(LogicOpKind.And, a, b);
+            => binary(BinaryLogic.And, a, b);
 
         /// <summary>
         /// Defines a logical AND expression between literals
@@ -87,7 +87,7 @@ namespace Z0
         /// <param name="b">The second operand</param>
         [MethodImpl(Inline)]
         public static BinaryLogicExpr and(LogicLitExpr a, LogicLitExpr b)
-            => binary(LogicOpKind.Or, a, b);
+            => binary(BinaryLogic.Or, a, b);
 
         /// <summary>
         /// Defines a logical OR expression
@@ -96,7 +96,7 @@ namespace Z0
         /// <param name="b">The second operand</param>
         [MethodImpl(Inline)]
         public static BinaryLogicExpr or(ILogicExpr a, ILogicExpr b)
-            => binary(LogicOpKind.Or, a, b);
+            => binary(BinaryLogic.Or, a, b);
 
         /// <summary>
         /// Defines a logical OR expression between literals
@@ -105,7 +105,7 @@ namespace Z0
         /// <param name="b">The second operand</param>
         [MethodImpl(Inline)]
         public static BinaryLogicExpr or(LogicLitExpr a, LogicLitExpr b)
-            => binary(LogicOpKind.Or, a, b);
+            => binary(BinaryLogic.Or, a, b);
 
         /// <summary>
         /// Defines a logical XOR expression
@@ -114,7 +114,7 @@ namespace Z0
         /// <param name="b">The second operand</param>
         [MethodImpl(Inline)]
         public static BinaryLogicExpr xor(ILogicExpr a, ILogicExpr b)
-            => binary(LogicOpKind.XOr, a, b);
+            => binary(BinaryLogic.XOr, a, b);
 
         /// <summary>
         /// Defines a logical XOR expression between literals
@@ -123,7 +123,7 @@ namespace Z0
         /// <param name="b">The second operand</param>
         [MethodImpl(Inline)]
         public static BinaryLogicExpr xor(LogicLitExpr a, LogicLitExpr b)
-            => binary(LogicOpKind.XOr, a, b);
+            => binary(BinaryLogic.XOr, a, b);
 
         /// <summary>
         /// Defines a logical NOR expression
@@ -132,7 +132,7 @@ namespace Z0
         /// <param name="b">The second operand</param>
         [MethodImpl(Inline)]
         public static BinaryLogicExpr nor(ILogicExpr a, ILogicExpr b)
-            => binary(LogicOpKind.Nor, a, b);
+            => binary(BinaryLogic.Nor, a, b);
 
         /// <summary>
         /// Defines a logical NOR expression between literals
@@ -141,7 +141,7 @@ namespace Z0
         /// <param name="b">The second operand</param>
         [MethodImpl(Inline)]
         public static BinaryLogicExpr nor(LogicLitExpr a, LogicLitExpr b)
-            => binary(LogicOpKind.Nor, a, b);
+            => binary(BinaryLogic.Nor, a, b);
 
         /// <summary>
         /// Defines a logical XNOR expression
@@ -150,7 +150,7 @@ namespace Z0
         /// <param name="b">The second operand</param>
         [MethodImpl(Inline)]
         public static BinaryLogicExpr xnor(ILogicExpr a, ILogicExpr b)
-            => binary(LogicOpKind.XNor, a, b);
+            => binary(BinaryLogic.XNor, a, b);
 
         /// <summary>
         /// Defines a logical XNOR expression between literals
@@ -159,7 +159,7 @@ namespace Z0
         /// <param name="b">The second operand</param>
         [MethodImpl(Inline)]
         public static BinaryLogicExpr xnor(LogicLitExpr a, LogicLitExpr b)
-            => binary(LogicOpKind.XNor, a, b);
+            => binary(BinaryLogic.XNor, a, b);
 
         /// <summary>
         /// Defines an equality expression
@@ -168,7 +168,7 @@ namespace Z0
         /// <param name="b">The second operand</param>
         [MethodImpl(Inline)]
         public static BinaryLogicExpr nand(ILogicExpr a, ILogicExpr b)
-            => binary(LogicOpKind.Nand, a, b);
+            => binary(BinaryLogic.Nand, a, b);
 
         /// <summary>
         /// Defines a logical NAND expression between literals
@@ -177,7 +177,7 @@ namespace Z0
         /// <param name="b">The second operand</param>
         [MethodImpl(Inline)]
         public static BinaryLogicExpr nand(LogicLitExpr a, LogicLitExpr b)
-            => binary(LogicOpKind.Nand, a, b);
+            => binary(BinaryLogic.Nand, a, b);
 
         /// <summary>
         /// Defines a material conditional, otherwise known as an implication operator
@@ -186,7 +186,7 @@ namespace Z0
         /// <param name="consequent">The second operand</param>
         [MethodImpl(Inline)]
         public static BinaryLogicExpr implies(ILogicExpr antecedent, ILogicExpr consequent)
-            => binary(LogicOpKind.Implies, antecedent, consequent);
+            => binary(BinaryLogic.Implies, antecedent, consequent);
 
         /// <summary>
         /// Defines a bit variable expression

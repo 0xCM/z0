@@ -137,8 +137,44 @@ namespace Z0
         public static ulong f1a_64u(ulong a, ulong b, ulong c)
             => ScalarLogic.f1a(a,b,c);
 
+        // c ? not a : not b
         public static ulong f1b_64u(ulong a, ulong b, ulong c)
             => ScalarLogic.f1b(a,b,c);
+
+        //not ((a and c)) and (a xor b)
+        public static ulong f1c_64u(ulong a, ulong b, ulong c)
+            => ScalarLogic.f1c(a,b,c);
+
+        //b ? (not a) : (not c)
+        public static ulong f1d(ulong a, ulong b, ulong c)
+            => ScalarLogic.f1d(a,b,c);
+
+        //a xor (b or c)
+        public static ulong f1e(ulong a, ulong b, ulong c)
+            => ScalarLogic.f1e(a,b,c);
+
+        //a nand (b or c)
+        public static ulong f1f(ulong a, ulong b, ulong c)
+            => ScalarLogic.f1f(a,b,c);
+
+        //(not (B) and A) and C
+        public static ulong f20(ulong a, ulong b, ulong c)
+            => ScalarLogic.f20(a,b,c);
+
+        public static ulong f21(ulong a, ulong b, ulong c)
+            => ScalarLogic.f21(a,b,c);
+
+        public static ulong f22(ulong a, ulong b, ulong c)
+            => ScalarLogic.f22(a,b,c);
+
+        public static ulong f23(ulong a, ulong b, ulong c)
+            => ScalarLogic.f23(a,b,c);
+
+        public static ulong f24(ulong a, ulong b, ulong c)
+            => ScalarLogic.f24(a,b,c);
+
+        public static ulong f25(ulong a, ulong b, ulong c)
+            => ScalarLogic.f25(a,b,c);
 
         public static ulong f97_64u(ulong a, ulong b, ulong c)
             => ScalarLogic.f97(a,b,c);

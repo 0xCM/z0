@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
         public static Vec128<sbyte> vinc(in Vec128<sbyte> src)
-            =>  vadd(src, Vec128Pattern.Units<sbyte>());
+            =>  vadd(src, Vec128Pattern.units<sbyte>());
 
         /// <summary>
         /// Inrements each component by 1
@@ -26,7 +26,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
         public static Vec128<byte> vinc(in Vec128<byte> src)
-            =>  vadd(src, Vec128Pattern.Units<byte>());
+            =>  vadd(src, Vec128Pattern.units<byte>());
 
         /// <summary>
         /// Inrements each component by 1
@@ -34,7 +34,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
         public static Vec128<short> vinc(in Vec128<short> src)
-            =>  vadd(src, Vec128Pattern.Units<short>());
+            =>  vadd(src, Vec128Pattern.units<short>());
 
         /// <summary>
         /// Inrements each component by 1
@@ -42,7 +42,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
         public static Vec128<ushort> vinc(in Vec128<ushort> src)
-            =>  vadd(src, Vec128Pattern.Units<ushort>());
+            =>  vadd(src, Vec128Pattern.units<ushort>());
 
         /// <summary>
         /// Inrements each component by 1
@@ -50,7 +50,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
         public static Vec128<int> vinc(in Vec128<int> src)
-            =>  vadd(src, Vec128Pattern.Units<int>());
+            =>  vadd(src, Vec128Pattern.units<int>());
 
         /// <summary>
         /// Inrements each component by 1
@@ -58,7 +58,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
         public static Vec128<uint> vinc(in Vec128<uint> src)
-            =>  vadd(src, Vec128Pattern.Units<uint>());
+            =>  vadd(src, Vec128Pattern.units<uint>());
 
         /// <summary>
         /// Inrements each component by 1
@@ -66,7 +66,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
         public static Vec128<long> vinc(in Vec128<long> src)
-            =>  vadd(src, Vec128Pattern.Units<long>());
+            =>  vadd(src, Vec128Pattern.units<long>());
 
         /// <summary>
         /// Inrements each component by 1
@@ -74,7 +74,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
         public static Vec128<ulong> vinc(in Vec128<ulong> src)
-            =>  vadd(src, Vec128Pattern.Units<ulong>());
+            =>  vadd(src, Vec128Pattern.units<ulong>());
 
         /// <summary>
         /// Inrements each component by 1

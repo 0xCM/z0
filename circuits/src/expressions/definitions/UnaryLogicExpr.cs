@@ -16,7 +16,7 @@ namespace Z0
     public sealed class UnaryLogicExpr : IUnaryLogicExpr
     {
         [MethodImpl(Inline)]
-        public UnaryLogicExpr(LogicOpKind op, ILogicExpr operand)
+        public UnaryLogicExpr(UnaryLogic op, ILogicExpr operand)
         {
             this.Operator = op;
             this.Subject = operand;
@@ -25,7 +25,7 @@ namespace Z0
         /// <summary>
         /// The operator
         /// </summary>
-        public LogicOpKind Operator {get;}
+        public UnaryLogic Operator {get;}
 
         /// <summary>
         /// The number of parameters accepted by the expression

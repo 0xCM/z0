@@ -54,7 +54,7 @@ namespace Z0
                 var xn = x.Next();
                 var xp = x.Prior();
 
-                var units128 = Vec128Pattern.Units<T>();
+                var units128 = Vec128Pattern.units<T>();
                 
                 Claim.yea(ginx.vadd<T>(xp,units128).Equals(x));
                 Claim.yea(ginx.vsub<T>(xn,units128).Equals(x));

@@ -23,11 +23,13 @@ namespace Z0
 
     public interface ILogicOpExpr : ILogicExpr
     {
-        /// <summary>
-        /// The operator
-        /// </summary>
-        LogicOpKind Operator {get;}
 
+    }
+
+    public interface ILogicOpExpr<K> : ILogicOpExpr
+        where K : Enum
+    {
+        K Operator {get;}
     }
 
     public interface ILogicVarExpr : ILogicExpr, IVariableExpr<ILogicExpr>
@@ -46,7 +48,8 @@ namespace Z0
 
     }
 
-    public interface IUnaryLogicExpr : ILogicOpExpr
+
+    public interface IUnaryLogicExpr : ILogicOpExpr<UnaryLogic>
     {
         /// <summary>
         /// The one and only operand
@@ -55,7 +58,7 @@ namespace Z0
     }
 
 
-    public interface IBinaryLogicExpr : ILogicOpExpr
+    public interface IBinaryLogicExpr : ILogicOpExpr<BinaryLogic>
     {
 
         /// <summary>
@@ -70,7 +73,7 @@ namespace Z0
 
     }
 
-    public interface ITernaryLogicExpr : ILogicOpExpr
+    public interface ITernaryLogicExpr : ILogicOpExpr<TernaryLogic>
     {
 
         /// <summary>

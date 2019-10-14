@@ -23,7 +23,7 @@ namespace Z0
                 for(var j =0; j< rhs.ColCount; j++)
                 {
                     var col = rhs.RowVector(j);
-                    dst[i,j] = ModProd(row,col);
+                    dst[i,j] = (Bit)ModProd(row,col);
                 }
             }
             return dst;
@@ -39,7 +39,7 @@ namespace Z0
                 for(var j =0; j< rhs.ColCount; j++)
                 {
                     var col = rhs.RowVector(j);
-                    dst[i,j] = ModProd(row,col);
+                    dst[i,j] = (Bit)ModProd(row,col);
                 }
             }
             return dst;
@@ -55,7 +55,7 @@ namespace Z0
                 for(var j =0; j< rhs.ColCount; j++)
                 {
                     var col = rhs.RowVector(j);
-                    dst[i,j] = ModProd(row,col);
+                    dst[i,j] = (Bit)ModProd(row,col);
                 }
             }
             return dst;
@@ -71,7 +71,7 @@ namespace Z0
                 for(var j =0; j< rhs.ColCount; j++)
                 {
                     var col = rhs.RowVector(j);
-                    dst[i,j] = ModProd(row,col);
+                    dst[i,j] = (Bit)ModProd(row,col);
                 }
             }
             return dst;

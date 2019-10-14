@@ -52,6 +52,19 @@ namespace Z0
             |  (ulong)x1 << 2 * 16
             |  (ulong)x1 << 3 * 16;
 
+        
+        /// <summary>
+        /// Packs 8 bytes into an unsigned 64-bit integer, ordered from least significant to most significant
+        /// </summary>
+        /// <param name="x0">Specifies the bit range [7:0]</param>
+        /// <param name="x1">Specifies the bit range [15:8]</param>
+        /// <param name="x2">Specifies the bit range [23:6]</param>
+        /// <param name="x3">Specifies the bit range [31:24]</param>
+        /// <param name="x4"></param>
+        /// <param name="x5"></param>
+        /// <param name="x6"></param>
+        /// <param name="x7"></param>
+        /// <returns></returns>
         [MethodImpl(Inline)]
         public static ulong pack(byte x0, byte x1, byte x2, byte x3, byte x4, byte x5, byte x6, byte x7)
         {            
@@ -79,7 +92,7 @@ namespace Z0
         /// <param name="x06">The seventh value</param>
         /// <param name="x00">The value to be packed into the most significant bit</param>
         [MethodImpl(Inline)]
-        public static ref byte pack(in byte x0, in byte x1, in byte x2, in byte x3, in byte x4, in byte x5, in byte x6, in byte x7, in byte pos, ref byte dst)
+        public static ref byte pack(byte x0, byte x1, byte x2, byte x3, byte x4, byte x5, byte x6, byte x7, byte pos, ref byte dst)
         {
           if(BitMask.test(x0, pos)) 
             BitMask.enable(ref dst, 0);
@@ -98,6 +111,120 @@ namespace Z0
           if(BitMask.test(x7, pos)) 
             BitMask.enable(ref dst, 7);
           return ref dst;
+        }
+
+        /// <summary>
+        /// Packs two bits into the first two bits of a byte
+        /// </summary>
+        /// <param name="b0">The bit value at index 0</param>
+        /// <param name="b1">The bit value at index 1</param>
+        [MethodImpl(Inline)]
+        public static byte pack2(bool b0, bool b1)
+        {
+            byte dst = 0;
+            if(b0)
+              BitMask.enable(ref dst, 0);
+            
+            if(b1)
+              BitMask.enable(ref dst, 1);
+          
+            return dst;
+        }
+
+        /// <summary>
+        /// Packs three bits into the the first three bits of a byte
+        /// </summary>
+        /// <param name="b0">The bit value at index 0</param>
+        /// <param name="b1">The bit value at index 1</param>
+        /// <param name="b2">The bit value at index 2</param>
+        [MethodImpl(Inline)]
+        public static byte pack3(bool b0, bool b1, bool b2)
+        {
+            var dst = pack2(b0,b1);
+
+            if(b2)
+              BitMask.enable(ref dst, 2);
+          
+            return dst;
+        }
+
+        /// <summary>
+        /// Packs four bits into the the first four bits of a byte
+        /// </summary>
+        /// <param name="b0">The bit value at index 0</param>
+        /// <param name="b1">The bit value at index 1</param>
+        /// <param name="b2">The bit value at index 2</param>
+        /// <param name="b3">The bit value at index 3</param>
+        [MethodImpl(Inline)]
+        public static byte pack4(bool b0, bool b1, bool b2, bool b3)
+        {
+            var dst = pack3(b0,b1,b2);
+
+            if(b3)
+              BitMask.enable(ref dst, 3);
+          
+            return dst;
+        }
+
+        /// <summary>
+        /// Packs five bits into the the first five bits of a byte
+        /// </summary>
+        /// <param name="b0">The bit value at index 0</param>
+        /// <param name="b1">The bit value at index 1</param>
+        /// <param name="b2">The bit value at index 2</param>
+        /// <param name="b3">The bit value at index 3</param>
+        /// <param name="b4">The bit value at index 4</param>
+        [MethodImpl(Inline)]
+        public static byte pack5(bool b0, bool b1, bool b2, bool b3, bool b4)
+        {
+            var dst = pack4(b0,b1,b2,b3);
+
+            if(b4)
+              BitMask.enable(ref dst, 4);            
+
+            return dst;
+        }
+
+        /// <summary>
+        /// Packs six bits into the the first six bits of a byte
+        /// </summary>
+        /// <param name="b0">The bit value at index 0</param>
+        /// <param name="b1">The bit value at index 1</param>
+        /// <param name="b2">The bit value at index 2</param>
+        /// <param name="b3">The bit value at index 3</param>
+        /// <param name="b4">The bit value at index 4</param>
+        /// <param name="b5">The bit value at index 5</param>
+        [MethodImpl(Inline)]
+        public static byte pack6(bool b0, bool b1, bool b2, bool b3, bool b4, bool b5)
+        {
+            var dst = pack5(b0,b1,b2,b3,b4);
+            
+            if(b5)
+              BitMask.enable(ref dst, 5);
+
+            return dst;
+        }
+
+        [MethodImpl(Inline)]
+        public static byte pack7(bool b0, bool b1, bool b2, bool b3, bool b4, bool b5, bool b6)
+        {
+            var dst = pack6(b0,b0,b2,b3,b4,b5);
+
+            if(b6)
+              BitMask.enable(ref dst, 6);
+
+            return dst;
+        }
+
+        [MethodImpl(Inline)]
+        public static byte pack8(bool b0, bool b1, bool b2, bool b3, bool b4, bool b5, bool b6, bool b7)
+        {
+            var dst = pack7(b0,b0,b2,b3,b4,b5,b6);
+            
+            if(b7)
+              BitMask.enable(ref dst, 7);
+            
+            return dst;
         }
 
         /// <summary>
@@ -159,7 +286,6 @@ namespace Z0
                     dst[i >> 3] |= (byte)((byte)1 << (i & 0x07));
             
             return dst;
-        }
- 
+        } 
     }
 }

@@ -15,7 +15,7 @@ namespace Z0.Test
     {     
         public void shift128()
         {
-            var x = Vec128Pattern.AllOnes<ulong>();
+            var x = Vec128Pattern.ones<ulong>();
             var y = dinx.vsllx(x,19);
             var z = dinx.vslrx(x,19);
             Trace(x.ToBitString());
@@ -25,26 +25,26 @@ namespace Z0.Test
 
         public void increments_128x16u()
         {
-            var v1 = Vec128Pattern.Increments((ushort)0);
-            var v2 = Vec128Pattern.Decrements((ushort)7);
+            var v1 = Vec128Pattern.increments((ushort)0);
+            var v2 = Vec128Pattern.decrements((ushort)7);
             var v3 = reverse_check(v1);
             Claim.eq(v2,v3);
         }
 
         public void reverse_128x8u()
         {
-            var v1 = Vec128Pattern.Increments<byte>(0);
-            var v2 = Vec128Pattern.Decrements<byte>(15);
+            var v1 = Vec128Pattern.increments<byte>(0);
+            var v2 = Vec128Pattern.decrements<byte>(15);
             var v4 = dinx.reverse(v1);
             Claim.eq(v2,v4);
         }
 
         public void shuffle_128x32i()
         {
-            var u = Vec128Pattern.Increments<int>();
+            var u = Vec128Pattern.increments<int>();
             Claim.eq(Vec128.FromParts(0,1,2,3), u);
 
-            var v = Vec128Pattern.Decrements<int>(3);
+            var v = Vec128Pattern.decrements<int>(3);
             Claim.eq(Vec128.FromParts(3,2,1,0),v);
 
             Claim.eq(v, dinx.vshuffle(u, Perm4.DCBA));

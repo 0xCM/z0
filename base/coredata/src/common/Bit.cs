@@ -74,6 +74,15 @@ namespace Z0
         public static implicit operator byte(Bit src)
             => src.ToByte();
 
+        /// <summary>
+        /// Implicitly converts an integral value to a bit where nonzero values
+        /// are interpreted as an On bit
+        /// </summary>
+        /// <param name="src">The source value</param>
+        [MethodImpl(Inline)]
+        public static implicit operator Bit(byte src)
+            => src == 0 ? Off : On;
+
         [MethodImpl(Inline)]
         public static explicit operator char(Bit src)
             => src ? One : Zero;
@@ -104,7 +113,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
-        public static implicit operator Bit(sbyte src)
+        public static explicit operator Bit(sbyte src)
             => src == 0 ? Off : On;
 
         /// <summary>
@@ -113,69 +122,40 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
-        public static implicit operator Bit(byte src)
+        public static explicit operator Bit(short src)
             => src == 0 ? Off : On;
 
         /// <summary>
-        /// Implicitly converts an integral value to a bit where nonzero values
-        /// are interpreted as an On bit
+        /// Explicitly converts an integral value to a bit where nonzero values are interpreted as an On bit
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
-        public static implicit operator Bit(short src)
+        public static explicit operator Bit(ushort src)
             => src == 0 ? Off : On;
 
         /// <summary>
-        /// Implicitly converts an integral value to a bit where nonzero values
-        /// are interpreted as an On bit
+        /// Explicitly converts an integral value to a bit where nonzero values are interpreted as an On bit
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
-        public static implicit operator Bit(ushort src)
+        public static explicit operator Bit(int src)
             => src == 0 ? Off : On;
 
         /// <summary>
-        /// Implicitly converts an integral value to a bit where nonzero values
-        /// are interpreted as an On bit
+        /// Explicitly converts an integral value to a bit where nonzero values are interpreted as an On bit
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
-        public static implicit operator Bit(int src)
+        public static explicit operator Bit(uint src)
             => src == 0 ? Off : On;
 
-        /// <summary>
-        /// Implicitly converts an integral value to a bit where nonzero values
-        /// are interpreted as an On bit
-        /// </summary>
-        /// <param name="src">The source value</param>
-        [MethodImpl(Inline)]
-        public static implicit operator Bit(uint src)
-            => src == 0 ? Off : On;
-
-        /// <summary>
-        /// Implicitly converts an integral value to a bit where nonzero values
-        /// are interpreted as an On bit
-        /// </summary>
-        /// <param name="src">The source value</param>
-        [MethodImpl(Inline)]
-        public static implicit operator Bit(long src)
-            => src == 0 ? Off : On;
-
-        /// <summary>
-        /// Implicitly converts an integral value to a bit where nonzero values
-        /// are interpreted as an On bit
-        /// </summary>
-        /// <param name="src">The source value</param>
-        [MethodImpl(Inline)]
-        public static implicit operator Bit(ulong src)
-            => src == 0 ? Off : On;
 
         [MethodImpl(Inline)]
-        public static implicit operator BinaryDigit(Bit src)
+        public static explicit operator BinaryDigit(Bit src)
             => src.value ? BinaryDigit.One : BinaryDigit.Zed;
 
         [MethodImpl(Inline)]
-        public static implicit operator Bit(BinaryDigit src)
+        public static explicit operator Bit(BinaryDigit src)
             => new Bit(src == BinaryDigit.One);
 
         [MethodImpl(Inline)]
@@ -242,6 +222,47 @@ namespace Z0
         [MethodImpl(Inline)]
         static unsafe byte ToByte(bool src)
             =>  *((byte*)(&src));
+
+        [MethodImpl(Inline)]
+        public Bit And(Bit y)
+            => value & y.value;
+
+        [MethodImpl(Inline)]
+        public Bit Or(Bit y)
+            => value | y.value;
+
+        [MethodImpl(Inline)]
+        public Bit XOr(Bit y)
+            => value ^ y.value;
+
+        [MethodImpl(Inline)]
+        public Bit Not()
+            => !value;
+
+        [MethodImpl(Inline)]
+        public Bit Nand(Bit y)
+            => !(value & y.value);
+
+        [MethodImpl(Inline)]
+        public Bit Nor(Bit y)
+            => !(value | y.value);
+
+        [MethodImpl(Inline)]
+        public Bit Xnor(Bit y)
+            => !(value ^ y.value);
+
+        [MethodImpl(Inline)]
+        public Bit AndNot(Bit y)
+            => value & (!y.value);
+
+
+        [MethodImpl(Inline)]
+        public Bit Xor1()
+            => !(value ^ true);
+
+        [MethodImpl(Inline)]
+        public Bit Select(Bit b, Bit c)
+            => value ? b : c;
 
         [MethodImpl(Inline)]
         public byte ToByte()

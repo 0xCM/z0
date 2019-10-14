@@ -30,7 +30,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
         public static Vec128<byte> reverse(in Vec128<byte> src)
-            => vshuffle(src, Vec128Pattern.Decrements<byte>(15));
+            => vshuffle(src, Vec128Pattern.decrements<byte>(15));
 
         /// <summary>
         /// Creates a new vector by reversing the componets in the source vector
@@ -38,7 +38,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
         public static Vec128<sbyte> reverse(in Vec128<sbyte> src)
-            => vshuffle(src, Vec128Pattern.Decrements<sbyte>(15));
+            => vshuffle(src, Vec128Pattern.decrements<sbyte>(15));
 
         /// <summary>
         /// Creates a new vector by reversing the componets in the source vector

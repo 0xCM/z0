@@ -83,6 +83,12 @@ namespace Z0
             where T : unmanaged
                 => BitVector<N, T>.FromCells(src);
 
+        [MethodImpl(Inline)]
+        public static BitVector<N,T> Define<N,T>(params T[] src)
+            where N : ITypeNat, new()
+            where T : unmanaged
+                => BitVector<N, T>.FromCells(src);
+
         /// <summary>
         /// Loads a bitvector of natural length from a primal span
         /// </summary>

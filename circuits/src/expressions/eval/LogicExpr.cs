@@ -86,14 +86,13 @@ namespace Z0
         
             switch(expr.Operator)
             {
-                case LogicOpKind.Not:
+                case UnaryLogic.Not:
                     return BitOps.not(eval(expr.Subject));
-                case LogicOpKind.Identity:
+                case UnaryLogic.Identity:
                     return eval(expr.Subject);
             }
             return Bit.Off;
         }
-
 
         /// <summary>
         /// Evaluates a binary logic expression
@@ -103,19 +102,19 @@ namespace Z0
         {
             switch(expr.Operator)
             {
-                case LogicOpKind.And:
+                case BinaryLogic.And:
                     return BitOps.and(eval(expr.Left), eval(expr.Right));
-                case LogicOpKind.Or:
+                case BinaryLogic.Or:
                     return BitOps.or(eval(expr.Left), eval(expr.Right));
-                case LogicOpKind.XOr:
+                case BinaryLogic.XOr:
                     return BitOps.xor(eval(expr.Left), eval(expr.Right));
-                case LogicOpKind.Nor:
+                case BinaryLogic.Nor:
                     return BitOps.nor(eval(expr.Left), eval(expr.Right));
-                case LogicOpKind.XNor:
+                case BinaryLogic.XNor:
                     return BitOps.xnor(eval(expr.Left), eval(expr.Right));
-                case LogicOpKind.Nand:
+                case BinaryLogic.Nand:
                     return BitOps.nand(eval(expr.Left), eval(expr.Right));
-                case LogicOpKind.Implies:
+                case BinaryLogic.Implies:
                     return BitOps.implies(eval(expr.Left), eval(expr.Right));
 
             }

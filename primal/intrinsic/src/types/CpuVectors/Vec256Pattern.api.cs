@@ -26,12 +26,22 @@ namespace Z0
                 => ref Vec256Pattern<T>.Units;
 
         /// <summary>
-        /// Returns an immutable reference to a vector with all bits turned on
+        /// Returns a vector with all bits turned on
         /// </summary>
         /// <typeparam name="T">The primal type</typeparam>
-        public static ref readonly Vec256<T> AllOnes<T>()
-            where T : unmanaged
-                => ref Vec256Pattern<T>.AllOnes;
+        [MethodImpl(Inline)]
+        public static  Vec256<T> ones<T>()
+            where T : unmanaged        
+                => ginx.ones256<T>();
+
+        /// <summary>
+        /// Returns a vector with all bits turned off
+        /// </summary>
+        /// <typeparam name="T">The primal type</typeparam>
+        [MethodImpl(Inline)]
+        public static  Vec256<T> zeroes<T>()
+            where T : unmanaged        
+                => default;
 
         [MethodImpl(Inline)]
         static Vec256<T> LoadPattern<T>(ReadOnlySpan<byte> src)
@@ -60,6 +70,7 @@ namespace Z0
         /// For a vector of length N, returns a reference to the vector [0, 1, ..., N - 1]
         /// </summary>
         /// <typeparam name="T">The primal component type</typeparam>
+        [MethodImpl(Inline)]
         public static Vec256<T> Increasing<T>()
             where T : unmanaged
                 => Vec256Pattern<T>.Increasing;
@@ -76,6 +87,7 @@ namespace Z0
         /// Describes a shuffle mask that clears ever-other vector component
         /// </summary>
         /// <typeparam name="T">The primal component type</typeparam>
+        [MethodImpl(Inline)]
         public static Vec256<T> ClearAlt<T>()
             where T : unmanaged
         {

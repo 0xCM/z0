@@ -275,7 +275,7 @@ namespace Z0
         {
             var sb = sbuild();
             for(var i=0; i< RowCount; i++)
-                 sb.AppendLine(RowVector(i).FormatBits());
+                 sb.AppendLine(RowVector(i).Format());
             return sb.ToString();
         }
  
@@ -354,7 +354,7 @@ namespace Z0
             for(var row = 0; row < dst.RowCount; row++)
             for(var col = 0; col < dst.ColCount; col++)
                 if(row == col)
-                    dst[row,col] = 1;            
+                    dst[row,col] = true;            
             return dst;
         }    
 

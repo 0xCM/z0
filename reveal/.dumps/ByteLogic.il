@@ -1,4 +1,4 @@
-// 2019-10-13 04:28:20:299
+// 2019-10-14 04:37:04:052
 ByteKind:byte and(ByteKind:byte a, ByteKind:byte b)
 {
     IL_0000: ldarg.0
@@ -308,7 +308,8 @@ ByteKind:byte f17(ByteKind:byte a, ByteKind:byte b, ByteKind:byte c)
     IL_0009: ldarg.2
     IL_000A: call Z0.ByteKind Z0.ByteLogic::and(Z0.ByteKind,Z0.ByteKind)
     IL_000F: call Z0.ByteKind Z0.ByteLogic::select(Z0.ByteKind,Z0.ByteKind,Z0.ByteKind)
-    IL_0014: ret
+    IL_0014: call Z0.ByteKind Z0.ByteLogic::not(Z0.ByteKind)
+    IL_0019: ret
 
 }
 ByteKind:byte f18(ByteKind:byte a, ByteKind:byte b, ByteKind:byte c)
