@@ -88,7 +88,7 @@ namespace Z0
         /// <param name="index">Identifies the lane the target to overwrite, either 0 or 1 respectively 
         /// identifing low or hi</param>
         [MethodImpl(Inline)]
-        public static Vec256<float> insert(in Vec128<float> src, in Vec256<float> dst, byte index)        
+        public static Vec256<float> vinsert(in Vec128<float> src, in Vec256<float> dst, byte index)        
             => InsertVector128(dst.ymm, src.xmm, index);
 
         /// <summary>
@@ -99,7 +99,7 @@ namespace Z0
         /// <param name="index">Identifies the lane in the target to overwrite, either 0 or 1 respectively 
         /// identifing low or hi</param>
         [MethodImpl(Inline)]
-        public static Vec256<double> insert(in Vec128<double> src, in Vec256<double> dst, byte index)        
+        public static Vec256<double> vinsert(in Vec128<double> src, in Vec256<double> dst, byte index)        
             => InsertVector128(dst.ymm, src.xmm, index);
  
     }

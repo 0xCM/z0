@@ -76,7 +76,6 @@ namespace Z0
                 throw unsupported<T>();
         }
 
-
         /// <summary>
         /// Reads a contiguous range of bits and deposits the result in a bytespan
         /// </summary>

@@ -92,7 +92,7 @@ namespace Z0
             where T : unmanaged    
 
         {
-            mathspan.flip(src.Span);
+            mathspan.not(src.Span);
             return ref src;
         }
 
@@ -202,7 +202,7 @@ namespace Z0
             where T : unmanaged    
 
         {
-            mathspan.flip(src.Unsized);
+            mathspan.not(src.Unsized);
             return ref src;
         }
 

@@ -28,13 +28,16 @@ namespace Z0
             return dst;
         }
 
+        [MethodImpl(Inline)]
         public static Span<T> and<T>(Span<T> lhs, ReadOnlySpan<T> rhs)
             where T : unmanaged
-        {
-            var len = length(lhs,rhs);
-            for(var i=0; i<len; i++)
-                gmath.and(ref lhs[i], rhs[i]);
-            return lhs;
-        }
+                => and(lhs,rhs,lhs);
+
+        [MethodImpl(Inline)]
+        public static Span<T> and<T>(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs)
+            where T : unmanaged
+                => and(lhs,rhs,lhs.Replicate(true));
+
+ 
     }
 }

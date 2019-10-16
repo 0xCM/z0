@@ -174,7 +174,7 @@ namespace Z0
         /// <param name="x">The source operand</param>
         [MethodImpl(Inline)]
         public static BitVector16 operator ~(BitVector16 src)
-            => bitvector.flip(src);
+            => bitvector.not(src);
 
         /// <summary>
         /// Computes the arithmetic sum of the source operands. 

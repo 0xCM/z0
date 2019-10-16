@@ -33,7 +33,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vec128<T> ones<T>()
             where T : unmanaged                    
-                 => ginx.ones128<T>();
+                 => ginx.vones128<T>();
 
         /// <summary>
         /// Returns a vector with all bits turned off

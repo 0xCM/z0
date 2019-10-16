@@ -360,7 +360,7 @@ namespace Z0
 
         static ref BitMatrix<M,N,T> Flip(ref BitMatrix<M,N,T> src)        
         {
-            mathspan.flip(src.Data);
+            mathspan.not(src.Data);
             return ref src;
         }
 

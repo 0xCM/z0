@@ -133,7 +133,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static BitMatrix8 operator ~ (BitMatrix8 src)
-            => BitMatrix.flip(src);
+            => BitMatrix.not(src);
 
         [MethodImpl(Inline)]
         public static BitMatrix8 operator - (BitMatrix8 A, BitMatrix8 B)
@@ -321,12 +321,6 @@ namespace Z0
         /// </summary>
         public readonly BitMatrix8 Transpose()
             => BitMatrix.transpose(this);
-        // {
-        //     var dst = Replicate();
-        //     for(var i=0; i<N; i++)
-        //         dst.data[i] = ColData(i);
-        //     return dst;
-        // }
 
         /// <summary>
         /// Queries the matrix for the data in an index-identified column 

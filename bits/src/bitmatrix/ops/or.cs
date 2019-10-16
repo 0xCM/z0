@@ -16,6 +16,16 @@ namespace Z0
 
     partial class BitMatrix
     {
+        public static BitMatrix<T> or<T>(BitMatrix<T> A, BitMatrix<T> B)
+            where T : unmanaged
+        {
+            var rc = math.min(A.RowCount, B.RowCount);
+            var C = BitMatrix.Alloc<T>(rc);
+            for(var i=0; i<rc; i++)
+                C[i] = bitvector.or(A[i], B[i]);
+            return C;
+        }
+
         /// <summary>
         /// Computes the logical OR between two primal bitmatrices of order 8
         /// </summary>
@@ -64,13 +74,13 @@ namespace Z0
             {
                 A.GetCells(i, out Vec256<ulong> vLhs);
                 B.GetCells(i, out Vec256<ulong> vRhs);
-                ginx.vor(vLhs,vRhs).StoreTo(ref A[i]);
+                dinx.vor(vLhs,vRhs).StoreTo(ref A[i]);
             }
             return ref A;
         }
 
         [MethodImpl(Inline)]
-        public static BitMatrix64 Or(BitMatrix64 A, BitMatrix64 B)        
+        public static BitMatrix64 or(BitMatrix64 A, BitMatrix64 B)        
         {
             var C = A.Replicate();
             return or(ref C, B);

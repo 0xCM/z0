@@ -38,7 +38,6 @@ namespace Z0
             return A;
         }
 
-
         /// <summary>
         /// Applies a permutation to a target matrix by swapping the rows
         /// according to permutation transpositions

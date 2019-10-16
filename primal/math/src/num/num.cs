@@ -201,7 +201,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static num<T> operator ~ (in num<T> lhs) 
         {
-            ref var result = ref gmath.flip(ref unwrap(in lhs));
+            ref var result = ref gmath.not(ref unwrap(in lhs));
             return Unsafe.As<T,num<T>>(ref result);
         }
 

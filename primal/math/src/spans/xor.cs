@@ -11,6 +11,14 @@ namespace Z0
 
     partial class mathspan
     {
+        public static Span<T> xor<T>(Span<T> lhs, T rhs)
+            where T : unmanaged
+        {
+            for(var i=0; i< lhs.Length; i++)
+                lhs[i] = gmath.xor(lhs[i], rhs);
+            return lhs;
+        }
+
         public static Span<T> xor<T>(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs, Span<T> dst)
             where T : unmanaged
         {
@@ -19,20 +27,17 @@ namespace Z0
            return dst;        
         }
 
+        [MethodImpl(Inline)]
         public static Span<T> xor<T>(Span<T> lhs, ReadOnlySpan<T> rhs)
             where T : unmanaged
-        {
-            for(var i=0; i< length(lhs,rhs); i++)
-                lhs[i] = gmath.xor(lhs[i], rhs[i]);
-           return lhs;
-        }
+                => xor(lhs,rhs, lhs);
 
-        public static Span<T> xor<T>(Span<T> lhs, T rhs)
+
+        [MethodImpl(Inline)]
+        public static Span<T> xor<T>(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs)
             where T : unmanaged
-        {
-            for(var i=0; i< lhs.Length; i++)
-                lhs[i] = gmath.xor(lhs[i], rhs);
-            return lhs;
-        }
+                => xor(lhs,rhs,lhs.Replicate(true));
+
+
     }
 }

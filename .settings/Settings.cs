@@ -8,7 +8,7 @@ namespace Z0
         /// Gets the root development directory where the topmost solution resides
         /// </summary>
         public static string SlnDir 
-            => @"J:\dev\projects\z0_release\"; 
+            => @"J:\dev\projects\z0\"; 
 
         /// <summary>
         /// Gets the source directory for a specified project

@@ -151,10 +151,10 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public readonly T apply(T x)
-            => gmath.flip(x);
+            => gmath.not(x);
 
         [MethodImpl(Inline)]
         public readonly ref T apply(ref T x)
-            => ref gmath.flip(ref x);
+            => ref gmath.not(ref x);
     }
 }

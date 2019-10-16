@@ -17,7 +17,7 @@ namespace Z0
             => (sbyte)(~ src);
 
         [MethodImpl(Inline)]
-        public static byte flip(byte src)
+        public static byte not(byte src)
             => (byte)(~ src);
 
         [MethodImpl(Inline)]

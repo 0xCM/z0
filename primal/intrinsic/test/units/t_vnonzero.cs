@@ -48,10 +48,10 @@ namespace Z0.Test
             for(var i = 0; i< src.BlockCount; i++)
             {
                 var v = Vec128.Load(ref src.Block(i));
-                Claim.yea(ginx.nonz(v));
+                Claim.yea(ginx.vnonz(v));
             }
             
-            Claim.nea(ginx.nonz(Vec128.Zero<T>()));
+            Claim.nea(ginx.vnonz(Vec128.Zero<T>()));
             TypeCaseEnd<T>();
         }
 

@@ -149,7 +149,7 @@ namespace Z0
        readonly struct Flip<T>
             where T : unmanaged
         {
-            public static readonly UnaryOp<T> Op = gmath.flip<T>;
+            public static readonly UnaryOp<T> Op = gmath.not<T>;
         }
          
         readonly struct Add<T>

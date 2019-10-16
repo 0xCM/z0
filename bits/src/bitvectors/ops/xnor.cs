@@ -15,6 +15,17 @@ namespace Z0
 
     partial class bitvector
     {
+        
+        [MethodImpl(Inline)]
+        public static BitVector<T> xnor<T>(BitVector<T> x, BitVector<T> y)
+            where T : unmanaged
+        {
+            if(x.SingleCell && y.SingleCell)
+                return gmath.xnor(x.Data[0], y.Data[0]);
+            else
+                return xnor_multicell(x,y);
+        }
+
         /// <summary>
         /// Computes a new bitvector z = x & y from bitvectors x xnor y
         /// </summary>
@@ -57,7 +68,13 @@ namespace Z0
         /// <param name="x">The left bitvector</param>
         /// <param name="y">The right bitvector</param>
         [MethodImpl(Inline)]
-        public static BitVector64 xnor(BitVector64 x, BitVector64 y)
+        public static BitVector64 xnor(BitVector64 x, BitVector64 y) 
             => math.xnor(x.data, y.data);
+
+        [MethodImpl(NotInline)]
+        static BitVector<T> xnor_multicell<T>(BitVector<T> x, BitVector<T> y)
+            where T : unmanaged
+                => mathspan.xnor(x.Data.ReadOnly(),y.Data.ReadOnly());
+
     }
 }

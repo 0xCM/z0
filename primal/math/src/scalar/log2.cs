@@ -44,8 +44,17 @@ namespace Z0
             => log2((ulong)src);
 
         [MethodImpl(Inline)]
-        public static ulong log2(uint src)
-            => log2((ulong)src);
+        public static uint log2(uint src)
+            => (uint)log2((ulong)src);
+
+        [MethodImpl(Inline)]
+        public static byte log2(byte src)
+            => (byte)log2((ulong)src);
+
+        [MethodImpl(Inline)]
+        public static ushort log2(ushort src)
+            => (ushort)log2((ulong)src);
+
     }
 
 }

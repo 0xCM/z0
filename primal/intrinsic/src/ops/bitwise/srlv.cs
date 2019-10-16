@@ -24,7 +24,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="control">The control vector</param>
         [MethodImpl(Inline)]
-        public static Vec128<int> srlv(in Vec128<int> src, in Vec128<uint> control)
+        public static Vec128<int> vsrlv(in Vec128<int> src, in Vec128<uint> control)
             => ShiftRightLogicalVariable(src.xmm, control.xmm);
 
         /// <summary>
@@ -35,7 +35,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="offset">The shift offset vector</param>
         [MethodImpl(Inline)]
-        public static Vec128<uint> srlv(in Vec128<uint> src, in Vec128<uint> offset)
+        public static Vec128<uint> vsrlv(in Vec128<uint> src, in Vec128<uint> offset)
             => ShiftRightLogicalVariable(src.xmm, offset.xmm);
 
         /// <summary>
@@ -46,7 +46,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="offset">The shift offset vector</param>
         [MethodImpl(Inline)]
-        public static Vec128<long> srlv(in Vec128<long> src, in Vec128<ulong> offset)
+        public static Vec128<long> vsrlv(in Vec128<long> src, in Vec128<ulong> offset)
             => ShiftRightLogicalVariable(src.xmm, offset.xmm);
 
         /// <summary>
@@ -57,7 +57,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="offset">The shift offset vector</param>
         [MethodImpl(Inline)]
-        public static Vec128<ulong> srlv(in Vec128<ulong> src, in Vec128<ulong> offset)
+        public static Vec128<ulong> vsrlv(in Vec128<ulong> src, in Vec128<ulong> offset)
             => ShiftRightLogicalVariable(src.xmm, offset.xmm);       
  
         /// <summary>
@@ -68,7 +68,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="offset">The shift offset vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<int> srlv(in Vec256<int> src, in Vec256<uint> offset)
+        public static Vec256<int> vsrlv(in Vec256<int> src, in Vec256<uint> offset)
             => ShiftRightLogicalVariable(src.ymm, offset.ymm);
 
         /// <summary>
@@ -79,7 +79,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="offset">The shift offset vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<uint> srlv(in Vec256<uint> src, in Vec256<uint> offset)
+        public static Vec256<uint> vsrlv(in Vec256<uint> src, in Vec256<uint> offset)
             => ShiftRightLogicalVariable(src.ymm, offset.ymm);
 
         /// <summary>
@@ -90,7 +90,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="offset">The shift offset vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<long> srlv(in Vec256<long> src, in Vec256<ulong> offset)
+        public static Vec256<long> vsrlv(in Vec256<long> src, in Vec256<ulong> offset)
             => ShiftRightLogicalVariable(src.ymm, offset.ymm);
 
         /// <summary>
@@ -101,7 +101,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="offset">The shift offset vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<ulong> srlv(in Vec256<ulong> src, in Vec256<ulong> offset)
+        public static Vec256<ulong> vsrlv(in Vec256<ulong> src, in Vec256<ulong> offset)
             => ShiftRightLogicalVariable(src.ymm, offset.ymm); 
     
     }

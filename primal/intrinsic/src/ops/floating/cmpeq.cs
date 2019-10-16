@@ -22,14 +22,14 @@ namespace Z0
         /// Returns a 128x32f vector where all bits are enabled
         /// </summary>
         [MethodImpl(Inline)]
-        public static Vec128<float> ones_128x32f()
+        public static Vec128<float> vones_128x32f()
             => CompareEqual(default(Vector128<float>), default(Vector128<float>));
 
         /// <summary>
         /// Returns a 128x64f vector where all bits are enabled
         /// </summary>
         [MethodImpl(Inline)]
-        public static Vec128<double> ones_128x64f()
+        public static Vec128<double> vones_128x64f()
             => CompareEqual(default(Vector128<double>), default(Vector128<double>));
 
         /// <summary>

@@ -100,7 +100,7 @@ namespace Z0
         /// <param name="lhs">The source operand</param>
         [MethodImpl(Inline)]
         public static BitVector<N,T> operator ~(BitVector<N,T> src)
-            => new BitVector<N,T>(mathspan.flip(src.data, src.data.Replicate(true)));                        
+            => new BitVector<N,T>(mathspan.not(src.data, src.data.Replicate(true)));                        
 
         /// <summary>
         /// Computes the bitwise complement of the operand

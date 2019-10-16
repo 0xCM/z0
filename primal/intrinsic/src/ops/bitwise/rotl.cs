@@ -17,7 +17,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="offset">The magnitude of the rotation</param>
         [MethodImpl(Inline)]
-        public static Vec128<byte> rotl(in Vec128<byte> src, byte offset)
+        public static Vec128<byte> vrotl(in Vec128<byte> src, byte offset)
         {
             const byte bitsize = 8;
             return dinx.vor(
@@ -32,7 +32,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="offset">The magnitude of the rotation</param>
         [MethodImpl(Inline)]
-        public static Vec128<ushort> rotl(in Vec128<ushort> src, byte offset)
+        public static Vec128<ushort> vrotl(in Vec128<ushort> src, byte offset)
         {
             const byte bitsize = 16;
             return dinx.vor(
@@ -47,7 +47,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="offset">The magnitude of the rotation</param>
         [MethodImpl(Inline)]
-        public static Vec128<uint> rotl(in Vec128<uint> src, byte offset)
+        public static Vec128<uint> vrotl(in Vec128<uint> src, byte offset)
         {
             const byte bitsize = 32;
             var x = dinx.vsll(in src, offset);
@@ -61,7 +61,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="offset">The magnitude of the rotation</param>
         [MethodImpl(Inline)]
-        public static Vec128<ulong> rotl(in Vec128<ulong> src, byte offset)
+        public static Vec128<ulong> vrotl(in Vec128<ulong> src, byte offset)
         {
             const byte bitsize = 64;
             var x = dinx.vsll(in src, offset);
@@ -76,7 +76,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="offset">The magnitude of the rotation</param>
         [MethodImpl(Inline)]
-        public static Vec256<byte> rotl(in Vec256<byte> src, byte offset)
+        public static Vec256<byte> vrotl(in Vec256<byte> src, byte offset)
         {
             const byte bitsize = 8;
             var x = dinx.vsll(in src, offset);
@@ -90,7 +90,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="offset">The magnitude of the rotation</param>
         [MethodImpl(Inline)]
-        public static Vec256<ushort> rotl(in Vec256<ushort> src, byte offset)
+        public static Vec256<ushort> vrotl(in Vec256<ushort> src, byte offset)
         {
             const byte bitsize = 16;
             var x = dinx.vsll(in src, offset);
@@ -104,7 +104,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="offset">The magnitude of the rotation</param>
         [MethodImpl(Inline)]
-        public static Vec256<uint> rotl(in Vec256<uint> src, byte offset)
+        public static Vec256<uint> vrotl(in Vec256<uint> src, byte offset)
         {
             const byte bitsize = 32;
             var x = dinx.vsll(in src, offset);
@@ -118,7 +118,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="offset">The magnitude of the rotation</param>
         [MethodImpl(Inline)]
-        public static Vec256<ulong> rotl(in Vec256<ulong> src, byte offset)
+        public static Vec256<ulong> vrotl(in Vec256<ulong> src, byte offset)
         {
             const byte bitsize = 64;
             var x = dinx.vsll(in src, offset);
@@ -133,10 +133,10 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="offsets">The offset vector</param>
         [MethodImpl(Inline)]
-        public static Vec128<ulong> rotl(in Vec128<ulong> src, in Vec128<ulong> offsets)
+        public static Vec128<ulong> vrotl(in Vec128<ulong> src, in Vec128<ulong> offsets)
         {
             var x = dinx.vsllv(src,offsets);
-            var y = dinx.srlv(src, dinx.vsub(Vec128u64,offsets));
+            var y = dinx.vsrlv(src, dinx.vsub(Vec128u64,offsets));
             return dinx.vor(x,y);
         }
 
@@ -147,10 +147,10 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="offsets">The offset vector</param>
         [MethodImpl(Inline)]
-        public static Vec128<uint> rotl(in Vec128<uint> src, in Vec128<uint> offsets)
+        public static Vec128<uint> vrotl(in Vec128<uint> src, in Vec128<uint> offsets)
         {
             var x = dinx.vsllv(src, offsets);
-            var y = dinx.srlv(src, dinx.vsub(Vec128u32, offsets));
+            var y = dinx.vsrlv(src, dinx.vsub(Vec128u32, offsets));
             return dinx.vor(x,y);
         }
 
@@ -161,10 +161,10 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="offsets">The offset vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<ulong> rotl(in Vec256<ulong> src, in Vec256<ulong> offsets)
+        public static Vec256<ulong> vrotl(in Vec256<ulong> src, in Vec256<ulong> offsets)
         {
             var x = dinx.vsllv(src,offsets);
-            var y = dinx.srlv(src, dinx.vsub(Vec256u64,offsets));
+            var y = dinx.vsrlv(src, dinx.vsub(Vec256u64,offsets));
             return dinx.vor(x,y);
         }
 
@@ -175,10 +175,10 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="offsets">The offset vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<uint> rotl(in Vec256<uint> src, in Vec256<uint> offsets)
+        public static Vec256<uint> vrotl(in Vec256<uint> src, in Vec256<uint> offsets)
         {
             var x = dinx.vsllv(src,offsets);
-            var y = dinx.srlv(src, dinx.vsub(Vec256u32,offsets));
+            var y = dinx.vsrlv(src, dinx.vsub(Vec256u32,offsets));
             return dinx.vor(x,y);
         }
 

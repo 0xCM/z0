@@ -27,6 +27,10 @@ namespace Z0
             => Define(src.OpCount, src.WorkTime);        
 
         [MethodImpl(Inline)]
+        public static implicit operator OpTime((string opName, long opCount, SystemCounter tickCount) src)
+            => Define(src.opName, src.opCount, src.tickCount);        
+
+        [MethodImpl(Inline)]
         public static implicit operator OpTime((long OpCount, Duration WorkTime, string Label) src)
             => Define(src.OpCount, src.WorkTime, src.Label);        
 
@@ -41,6 +45,10 @@ namespace Z0
         [MethodImpl(Inline)]
         public static OpTime Define(long OpCount, Stopwatch WorkTime, string label = null)
             => new OpTime(OpCount, snapshot(WorkTime), label);
+
+        [MethodImpl(Inline)]
+        public static OpTime Define(string name, long count, TimeSpan time)
+            => new OpTime(count, time, name);
 
         [MethodImpl(Inline)]
         public static OpTime Define<T>(long OpCount, Stopwatch WorkTime, string label = null)

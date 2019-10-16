@@ -1,4 +1,4 @@
-// 2019-10-14 04:37:04:458
+// 2019-10-15 01:38:29:700
 bool and(bool a, bool b)
 {
     IL_0000: ldarg.0
@@ -499,8 +499,8 @@ UnaryOp<bool> unaryop(UnaryLogic:uint id)
     IL_0018: ldftn System.Boolean zfunc::identity<System.Boolean>(System.Boolean)
     IL_001E: newobj System.Void Z0.UnaryOp`1<System.Boolean>::.ctor(System.Object,System.IntPtr)
     IL_0023: ret
-    IL_0024: ldstr "J:\\dev\\projects\\z0_release\\bits\\src\\logic\\BoolLogic.cs"
-    IL_0029: ldstr "J:\\dev\\projects\\z0_release\\bits\\src\\logic\\BoolLogic.cs"
+    IL_0024: ldstr "J:\\dev\\projects\\z0\\bits\\src\\logic\\BoolLogic.cs"
+    IL_0029: ldstr "J:\\dev\\projects\\z0\\bits\\src\\logic\\BoolLogic.cs"
     IL_002E: ldc.i4 257
     IL_0033: newobj System.Void System.Nullable`1<System.Int32>::.ctor(System.Int32)
     IL_0038: call Z0.AppException zfunc::unsupported<System.Boolean>(System.String,System.String,System.Nullable`1<System.Int32>)
@@ -541,8 +541,8 @@ BinaryOp<bool> binop(BinaryLogic:uint id)
     IL_0075: ldftn System.Boolean Z0.BoolLogic::xnor(System.Boolean,System.Boolean)
     IL_007B: newobj System.Void Z0.BinaryOp`1<System.Boolean>::.ctor(System.Object,System.IntPtr)
     IL_0080: ret
-    IL_0081: ldstr "J:\\dev\\projects\\z0_release\\bits\\src\\logic\\BoolLogic.cs"
-    IL_0086: ldstr "J:\\dev\\projects\\z0_release\\bits\\src\\logic\\BoolLogic.cs"
+    IL_0081: ldstr "J:\\dev\\projects\\z0\\bits\\src\\logic\\BoolLogic.cs"
+    IL_0086: ldstr "J:\\dev\\projects\\z0\\bits\\src\\logic\\BoolLogic.cs"
     IL_008B: ldc.i4 272
     IL_0090: newobj System.Void System.Nullable`1<System.Int32>::.ctor(System.Int32)
     IL_0095: call Z0.AppException zfunc::unsupported<System.Boolean>(System.String,System.String,System.Nullable`1<System.Int32>)

@@ -124,7 +124,7 @@ namespace Z0.Test
         public void swap_256_i32()
         {
             var subject = Vec256.FromParts(2, 4, 6, 8, 10, 12, 14, 16);
-            var swapped = dinx.swap(subject, 2, 3);
+            var swapped = dinx.vswap(subject, 2, 3);
             var expect = Vec256.FromParts(2, 4, 8, 6, 10, 12, 14, 16);
             Claim.eq(expect, swapped);
         }

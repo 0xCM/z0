@@ -57,7 +57,9 @@ namespace Z0
             || typeof(T) == typeof(int) 
             || typeof(T) == typeof(long))
                 slli(ref lhs,offset);
-            else throw unsupported<T>();
+            else 
+                throw unsupported<T>();
+                
             return ref lhs;
         }
 
@@ -108,11 +110,11 @@ namespace Z0
         static ref T sllu<T>(ref T lhs, int rhs)
             where T : unmanaged
         {
-            if(typeof(T) == typeof(sbyte))
+            if(typeof(T) == typeof(byte))
                  math.sll(ref uint8(ref lhs), rhs);
-            if(typeof(T) == typeof(short))
+            if(typeof(T) == typeof(ushort))
                  math.sll(ref uint16(ref lhs), rhs);
-            if(typeof(T) == typeof(int))
+            if(typeof(T) == typeof(uint))
                  math.sll(ref uint32(ref lhs), rhs);
             else
                  math.sll(ref uint64(ref lhs), rhs);

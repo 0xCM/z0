@@ -25,12 +25,16 @@ namespace Z0
         /// <param name="src">The source span</param>
         /// <param name="dst">The target span</param>
         /// <typeparam name="T">The primal type</typeparam>
+        [MethodImpl(Inline)]
         public static Span<T> negate<T>(Span<T> src)
             where T : unmanaged
-        {
-            for(var i = 0; i< src.Length; i++)
-                gmath.negate(ref src[i]);
-            return src;
-        }
+                => negate(src,src);
+
+
+        [MethodImpl(Inline)]
+        public static Span<T> negate<T>(ReadOnlySpan<T> src)
+            where T : unmanaged
+                => negate(src,src.Replicate(true));
+
     }
 }

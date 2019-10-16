@@ -97,7 +97,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static BitMatrix32 operator ~ (BitMatrix32 src)
-            => BitMatrix.flip(src);
+            => BitMatrix.not(src);
 
         [MethodImpl(Inline)]
         public static BitMatrix32 operator - (BitMatrix32 A, BitMatrix32 B)

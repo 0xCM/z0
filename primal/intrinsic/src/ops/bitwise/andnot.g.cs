@@ -23,7 +23,7 @@ namespace Z0
         /// <param name="y">The right vector</param>
         /// <typeparam name="T">The primal component type</typeparam>
         [MethodImpl(Inline)]
-        public static Vec128<T> vandnot<T>(Vec128<T> x, Vec128<T> y)
+        public static Vec128<T> vandnot<T>(in Vec128<T> x, in Vec128<T> y)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -46,7 +46,7 @@ namespace Z0
         /// <param name="y">The right vector</param>
         /// <typeparam name="T">The primal component type</typeparam>
         [MethodImpl(Inline)]
-        public static Vec256<T> vandnot<T>(Vec256<T> x, Vec256<T> y)
+        public static Vec256<T> vandnot<T>(in Vec256<T> x, in Vec256<T> y)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))

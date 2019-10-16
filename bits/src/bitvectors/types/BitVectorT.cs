@@ -57,6 +57,15 @@ namespace Z0
         }
 
         /// <summary>
+        /// Creates a single-cell bitvector where the bit width is determined by the cell type
+        /// </summary>
+        /// <param name="src">The source cell</param>
+        [MethodImpl(Inline)]
+        public static BitVector<T> FromCell(T src)
+            => new BitVector<T>(src,bitsize<T>());
+
+
+        /// <summary>
         /// Creates a bitvector defined by a single cell or portion thereof
         /// </summary>
         /// <param name="src">The source cell</param>
@@ -123,14 +132,13 @@ namespace Z0
             return FromCells(cells,len);
         }        
 
-        /// <summary>
-        /// Computes the bitwias AND between the operands
-        /// </summary>
-        /// <param name="x">The left vector</param>
-        /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static BitVector<T> operator &(BitVector<T> x, in BitVector<T> y)
-            => new BitVector<T>(mathspan.and(x.data, y.data),x.BitCount);
+        public static implicit operator BitVector<T>(Span<T> src)
+            => new BitVector<T>(src, bitsize<T>());
+
+        [MethodImpl(Inline)]
+        public static implicit operator BitVector<T>(T src)
+            => new BitVector<T>(src, bitsize<T>());
 
         /// <summary>
         /// Computes the bitwias AND between the operands
@@ -138,8 +146,17 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static BitVector<T> operator |(BitVector<T> x, in BitVector<T> y)
-            => new BitVector<T>(mathspan.or(x.data, y.data),x.BitCount);
+        public static BitVector<T> operator &(BitVector<T> x, BitVector<T> y)
+            => bitvector.and(x,y);
+
+        /// <summary>
+        /// Computes the bitwias AND between the operands
+        /// </summary>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
+        [MethodImpl(Inline)]
+        public static BitVector<T> operator |(BitVector<T> x, BitVector<T> y)
+            => bitvector.or(x,y);
 
         /// <summary>
         /// Computes the bitwise XOR between the operands
@@ -147,25 +164,25 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static BitVector<T> operator ^(BitVector<T> x, in BitVector<T> y)
-            => new BitVector<T>(mathspan.xor(x.data, y.data),x.BitCount);
+        public static BitVector<T> operator ^(BitVector<T> x, BitVector<T> y)
+            => bitvector.xor(x,y);
 
         /// <summary>
         /// Computes the scalar product of the operands
         /// </summary>
-        /// <param name="lhs">The left operand</param>
-        /// <param name="rhs">The right operand</param>
+        /// <param name="x">The left operand</param>
+        /// <param name="y">The right operand</param>
         [MethodImpl(Inline)]
-        public static Bit operator %(BitVector<T> lhs, BitVector<T> rhs)
-            => lhs.Dot(rhs);
+        public static Bit operator %(BitVector<T> x, BitVector<T> y)
+            => bitvector.dot(x,y);
 
         /// <summary>
         /// Computes the bitwise complement of the operand
         /// </summary>
-        /// <param name="lhs">The source operand</param>
+        /// <param name="x">The source operand</param>
         [MethodImpl(Inline)]
         public static BitVector<T> operator ~(BitVector<T> src)
-            => new BitVector<T>(mathspan.flip(src.data),src.BitCount);
+            => bitvector.not(src);
 
         /// <summary>
         /// Returns true if the source vector is nonzero, false otherwise
@@ -184,12 +201,12 @@ namespace Z0
             => !src.Nonempty;
 
         [MethodImpl(Inline)]
-        public static bool operator ==(in BitVector<T> lhs, in BitVector<T> rhs)
-            => lhs.Equals(rhs);
+        public static bool operator ==(in BitVector<T> x, in BitVector<T> y)
+            => x.Equals(y);
 
         [MethodImpl(Inline)]
-        public static bool operator !=(in BitVector<T> lhs, in BitVector<T> rhs)
-            => !lhs.Equals(rhs);
+        public static bool operator !=(in BitVector<T> x, in BitVector<T> y)
+            => !x.Equals(y);
 
         [MethodImpl(Inline)]
         BitVector(T src, BitSize n)
@@ -217,6 +234,7 @@ namespace Z0
         {            
 
         }
+
 
         /// <summary>
         /// The number of bits represented by the vector
@@ -264,6 +282,15 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => Pop() != 0;
+        }
+
+        /// <summary>
+        /// Is true if the bitvector is define of a single cell value
+        /// </summary>
+        public bool SingleCell
+        {
+            [MethodImpl(Inline)]
+            get => data.Length == 1;
         }
 
         /// <summary>
@@ -337,15 +364,24 @@ namespace Z0
         /// <summary>
         /// Computes the scalar product between this vector and another of identical length
         /// </summary>
-        /// <param name="rhs">The right vector</param>
-        public Bit Dot(BitVector<T> rhs)
+        /// <param name="y">The right vector</param>
+        public Bit Dot(BitVector<T> y)
         {
-            require(this.Length == rhs.Length);
+            require(this.Length == y.Length);
 
             var result = Bit.Off;
             for(var i=0; i<Length; i++)
-                result ^= this[i] & rhs[i];
+                result ^= this[i] & y[i];
             return result;
+        }
+
+        /// <summary>
+        /// Specifies a reference to the leading cell
+        /// </summary>
+        public ref T Head
+        {
+            [MethodImpl(Inline)]
+            get => ref Data[0];
         }
 
         [MethodImpl(Inline)]
@@ -480,8 +516,8 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public bool Equals(in BitVector<T> rhs)
-            => ToBitString().Equals(rhs.ToBitString());
+        public bool Equals(in BitVector<T> y)
+            => ToBitString().Equals(y.ToBitString());
 
         [MethodImpl(Inline)]
         public string Format(bool tlz = false, bool specifier = false, int? blockWidth = null)

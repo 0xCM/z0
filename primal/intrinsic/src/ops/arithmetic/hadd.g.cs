@@ -17,7 +17,7 @@ namespace Z0
     partial class ginx
     {
         [MethodImpl(Inline)]
-        public static Vector128<T> hadd<T>(Vector128<T> lhs, Vector128<T> rhs)
+        public static Vector128<T> vhadd<T>(Vector128<T> lhs, Vector128<T> rhs)
             where T : unmanaged
         {
             if(typeof(T) == typeof(short))
@@ -29,7 +29,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static Vector256<T> hadd<T>(Vector256<T> lhs, Vector256<T> rhs)
+        public static Vector256<T> vhadd<T>(Vector256<T> lhs, Vector256<T> rhs)
             where T : unmanaged
         {
             if(typeof(T) == typeof(short))

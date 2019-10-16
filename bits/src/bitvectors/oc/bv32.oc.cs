@@ -60,7 +60,7 @@ namespace Z0
             => gbv.srl(x,offset);
 
         public static BitVector32 flip_bv_32u(BitVector32 x)
-            => bitvector.flip(x);
+            => bitvector.not(x);
 
         public static BitVector32 flip_bv_o32u(BitVector32 x)
             => ~x;

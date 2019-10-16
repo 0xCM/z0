@@ -21,7 +21,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vec128<T> Next<T>(this Vec128<T> src)
             where T : unmanaged
-                => ginx.next(src);
+                => ginx.vnext(src);
 
         /// <summary>
         /// Increments each source vector component by a unit
@@ -31,7 +31,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vec256<T> Next<T>(this Vec256<T> src)
             where T : unmanaged
-                => ginx.next(src);
+                => ginx.vnext(src);
 
         /// <summary>
         /// Decrements each source vector component by a unit
@@ -41,7 +41,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vec128<T> Prior<T>(this Vec128<T> src)
             where T : unmanaged
-                => ginx.prior<T>(src);
+                => ginx.vprior<T>(src);
 
         /// <summary>
         /// Decrements each source vector component by a unit
@@ -51,7 +51,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vec256<T> Prior<T>(this Vec256<T> src)
             where T : unmanaged
-                => ginx.prior<T>(src);
+                => ginx.vprior<T>(src);
 
     }
 }

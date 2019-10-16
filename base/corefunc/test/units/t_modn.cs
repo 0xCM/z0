@@ -1,0 +1,44 @@
+//-----------------------------------------------------------------------------
+// Copyright   :  (c) Chris Moore, 2019
+// License     :  MIT
+//-----------------------------------------------------------------------------
+namespace Z0
+{
+    using System;
+    using System.Linq;
+    using System.Collections.Generic;
+
+    using System.Runtime.CompilerServices;
+    using static zfunc;
+
+    public sealed class t_modn : UnitTest<t_modn>
+    {
+
+        public void mod16()
+        {
+            var ops = ModN.Ops(16);
+            for(var i=0; i< SampleSize; i++)
+            {
+                var a = Random.Next<uint>();
+                var m0 = a % ops.N;
+                var m1 = ops.mod(a);
+                Claim.eq(m0,m1);
+            }
+
+        }
+
+        public void mod18()
+        {
+            var ops = ModN.Ops(18);
+            for(var i=0; i< SampleSize; i++)
+            {
+                var a = Random.Next<uint>();
+                var m0 = a % ops.N;
+                var m1 = ops.mod(a);
+                Claim.eq(m0,m1);
+            }
+
+        }
+
+    }
+}

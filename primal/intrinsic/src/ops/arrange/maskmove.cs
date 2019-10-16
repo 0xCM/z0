@@ -27,7 +27,7 @@ namespace Z0
         /// <param name="mask"></param>
         /// <param name="dst"></param>
         [MethodImpl(Inline)]
-        public static unsafe void maskmove(in Vec128<sbyte> src, in Vec128<sbyte> mask, ref sbyte dst)
+        public static unsafe void vmaskmove(in Vec128<sbyte> src, in Vec128<sbyte> mask, ref sbyte dst)
             => MaskMove(src.xmm, mask.xmm, refptr(ref dst));
 
         /// <summary>
@@ -40,7 +40,7 @@ namespace Z0
         /// <param name="mask"></param>
         /// <param name="dst"></param>
         [MethodImpl(Inline)]
-        public static unsafe void maskmove(in Vec128<byte> src, in Vec128<byte> mask, ref byte dst)
+        public static unsafe void vmaskmove(in Vec128<byte> src, in Vec128<byte> mask, ref byte dst)
             =>  MaskMove(src.xmm, mask.xmm, refptr(ref dst));
 
 

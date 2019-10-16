@@ -118,7 +118,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static BitMatrix16 operator ~ (BitMatrix16 A)
-            => BitMatrix.flip(A);
+            => BitMatrix.not(A);
 
         [MethodImpl(Inline)]
         public static BitMatrix16 operator - (BitMatrix16 A, BitMatrix16 B)

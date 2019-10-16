@@ -27,7 +27,7 @@ namespace Z0
         /// <param name="dst">The target vector</param>
         /// <param name="index">The 0-based index of the component to overwrite</param>
         [MethodImpl(Inline)]
-        public static Vec128<byte> insert(byte src, in Vec128<byte> dst, byte index)        
+        public static Vec128<byte> vinsert(byte src, in Vec128<byte> dst, byte index)        
             => Insert(dst.xmm, src, index);
 
         /// <summary>
@@ -38,7 +38,7 @@ namespace Z0
         /// <param name="dst">The target vector</param>
         /// <param name="index">The 0-based index of the component to overwrite</param>
         [MethodImpl(Inline)]
-        public static Vec128<sbyte> insert(sbyte src, in Vec128<sbyte> dst, byte index)        
+        public static Vec128<sbyte> vinsert(sbyte src, in Vec128<sbyte> dst, byte index)        
             => Insert(dst.xmm, src, index);
 
         /// <summary>
@@ -49,7 +49,7 @@ namespace Z0
         /// <param name="dst">The target vector</param>
         /// <param name="index">The 0-based index of the component to overwrite</param>
         [MethodImpl(Inline)]
-        public static Vec128<short> insert(short src, in Vec128<short> dst, byte index)        
+        public static Vec128<short> vinsert(short src, in Vec128<short> dst, byte index)        
             => Insert(dst.xmm, src, index);
 
         /// <summary>
@@ -60,7 +60,7 @@ namespace Z0
         /// <param name="dst">The target vector</param>
         /// <param name="index">The 0-based index of the component to overwrite</param>
         [MethodImpl(Inline)]
-        public static Vec128<ushort> insert(ushort src, in Vec128<ushort> dst, byte index)        
+        public static Vec128<ushort> vinsert(ushort src, in Vec128<ushort> dst, byte index)        
             => Insert(dst.xmm, src, index);
 
         /// <summary>
@@ -71,7 +71,7 @@ namespace Z0
         /// <param name="dst">The target vector</param>
         /// <param name="index">The 0-based index of the component to overwrite</param>
         [MethodImpl(Inline)]
-        public static Vec128<int> insert(int src, in Vec128<int> dst, byte index)        
+        public static Vec128<int> vinsert(int src, in Vec128<int> dst, byte index)        
             => Insert(dst.xmm, src, index);
 
         /// <summary>
@@ -82,7 +82,7 @@ namespace Z0
         /// <param name="dst">The target vector</param>
         /// <param name="index">The 0-based index of the component to overwrite</param>
         [MethodImpl(Inline)]
-        public static Vec128<uint> insert(uint src, in Vec128<uint> dst, byte index)        
+        public static Vec128<uint> vinsert(uint src, in Vec128<uint> dst, byte index)        
             => Insert(dst.xmm, src, index);
 
         /// <summary>
@@ -93,7 +93,7 @@ namespace Z0
         /// <param name="dst">The target vector</param>
         /// <param name="index">The 0-based index of the component to overwrite</param>
         [MethodImpl(Inline)]
-        public static Vec128<long> insert(long src, in Vec128<long> dst, byte index)        
+        public static Vec128<long> vinsert(long src, in Vec128<long> dst, byte index)        
             => Insert(dst.xmm, src, index);
 
         /// <summary>
@@ -104,7 +104,7 @@ namespace Z0
         /// <param name="dst">The target vector</param>
         /// <param name="index">The 0-based index of the component to overwrite</param>
         [MethodImpl(Inline)]
-        public static Vec128<ulong> insert(ulong src, in Vec128<ulong> dst, byte index)        
+        public static Vec128<ulong> vinsert(ulong src, in Vec128<ulong> dst, byte index)        
             => Insert(dst.xmm, src, index);
 
         /// <summary>
@@ -116,7 +116,7 @@ namespace Z0
         /// <param name="index">Identifies the lane in the target to overwrite, either 0 or 1 respectively 
         /// identifing low or hi</param>
         [MethodImpl(Inline)]
-        public static Vec256<sbyte> insert(in Vec128<sbyte> src, in Vec256<sbyte> dst, byte index)        
+        public static Vec256<sbyte> vinsert(in Vec128<sbyte> src, in Vec256<sbyte> dst, byte index)        
             => InsertVector128(dst.ymm, src.xmm, index);
 
         /// <summary>
@@ -128,7 +128,7 @@ namespace Z0
         /// <param name="index">Identifies the lane in the target to overwrite, either 0 or 1 respectively 
         /// identifing low or hi</param>
         [MethodImpl(Inline)]
-        public static Vec256<byte> insert(in Vec128<byte> src, in Vec256<byte> dst, byte index)        
+        public static Vec256<byte> vinsert(in Vec128<byte> src, in Vec256<byte> dst, byte index)        
             => InsertVector128(dst.ymm, src.xmm, index);
 
         /// <summary>
@@ -140,7 +140,7 @@ namespace Z0
         /// <param name="index">Identifies the lane in the target to overwrite, either 0 or 1 respectively 
         /// identifing low or hi</param>
         [MethodImpl(Inline)]
-        public static Vec256<short> insert(in Vec128<short> src, in Vec256<short> dst, byte index)        
+        public static Vec256<short> vinsert(in Vec128<short> src, in Vec256<short> dst, byte index)        
             => InsertVector128(dst.ymm, src.xmm, index);
 
         /// <summary>
@@ -152,7 +152,7 @@ namespace Z0
         /// <param name="index">Identifies the lane in the target to overwrite, either 0 or 1 respectively 
         /// identifing low or hi</param>
         [MethodImpl(Inline)]
-        public static Vec256<ushort> insert(in Vec128<ushort> src, in Vec256<ushort> dst, byte index)        
+        public static Vec256<ushort> vinsert(in Vec128<ushort> src, in Vec256<ushort> dst, byte index)        
             => InsertVector128(dst.ymm, src.xmm, index);
 
         /// <summary>
@@ -164,7 +164,7 @@ namespace Z0
         /// <param name="index">Identifies the lane in the target to overwrite, either 0 or 1 respectively 
         /// identifing low or hi</param>
         [MethodImpl(Inline)]
-        public static Vec256<int> insert(in Vec128<int> src, in Vec256<int> dst, byte index)        
+        public static Vec256<int> vinsert(in Vec128<int> src, in Vec256<int> dst, byte index)        
             => InsertVector128(dst.ymm, src.xmm, index);
 
         /// <summary>
@@ -188,7 +188,7 @@ namespace Z0
         /// <param name="index">Identifies the lane in the target to overwrite, either 0 or 1 respectively 
         /// identifing low or hi</param>
         [MethodImpl(Inline)]
-        public static Vec256<long> insert(in Vec128<long> src, in Vec256<long> dst, byte index)        
+        public static Vec256<long> vinsert(in Vec128<long> src, in Vec256<long> dst, byte index)        
             => InsertVector128(dst.ymm, src.xmm, index);
 
         /// <summary>
@@ -200,7 +200,7 @@ namespace Z0
         /// <param name="index">Identifies the lane in the target to overwrite, either 0 or 1 respectively 
         /// identifing low or hi</param>
         [MethodImpl(Inline)]
-        public static Vec256<ulong> insert(in Vec128<ulong> src, in Vec256<ulong> dst, byte index)        
+        public static Vec256<ulong> vinsert(in Vec128<ulong> src, in Vec256<ulong> dst, byte index)        
             => InsertVector128(dst.ymm, src.xmm, index);
 
         /// <summary>

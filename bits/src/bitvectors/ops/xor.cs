@@ -16,6 +16,22 @@ namespace Z0
     partial class bitvector
     {
         /// <summary>
+        /// Computes the XOR between two generic bitvectors
+        /// </summary>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
+        /// <typeparam name="T">The primal type</typeparam>
+        [MethodImpl(Inline)]
+        public static BitVector<T> xor<T>(BitVector<T> x, BitVector<T> y)
+            where T : unmanaged
+        {
+            if(x.SingleCell && y.SingleCell)
+                return gmath.xor(x.Data[0], y.Data[0]);
+            else
+                return xor_multicell(x,y);
+        }
+
+        /// <summary>
         /// Computes a new bitvector z = x & y from bitvectors x xor y
         /// </summary>
         /// <param name="x">The left bitvector</param>
@@ -60,5 +76,9 @@ namespace Z0
         public static BitVector64 xor(BitVector64 x, BitVector64 y)
             => math.xor(x.data, y.data);
  
+        [MethodImpl(Inline)]
+        static BitVector<T> xor_multicell<T>(BitVector<T> x, BitVector<T> y)
+            where T : unmanaged
+                => mathspan.xor(x.Data.ReadOnly(),y.Data.ReadOnly());
     }
 }

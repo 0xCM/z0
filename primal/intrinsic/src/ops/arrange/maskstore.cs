@@ -24,7 +24,7 @@ namespace Z0
         /// <param name="mask">The mask</param>
         /// <param name="dst">The memory reference</param>
         [MethodImpl(Inline)]
-        public static unsafe void maskstore(Vec128<int> src, Vec128<int> mask, ref int dst)
+        public static unsafe void vmaskstore(Vec128<int> src, Vec128<int> mask, ref int dst)
             => MaskStore(refptr(ref dst), src,mask);
 
         /// <summary>
@@ -34,7 +34,7 @@ namespace Z0
         /// <param name="mask">The mask</param>
         /// <param name="dst">The memory reference</param>
         [MethodImpl(Inline)]
-        public static unsafe void maskstore(Vec256<int> src, Vec256<int> mask, ref int dst)
+        public static unsafe void vmaskstore(Vec256<int> src, Vec256<int> mask, ref int dst)
             => MaskStore(refptr(ref dst), src,mask);
 
         /// <summary>
@@ -44,7 +44,7 @@ namespace Z0
         /// <param name="mask">The mask</param>
         /// <param name="dst">The memory reference</param>
         [MethodImpl(Inline)]
-        public static unsafe void maskstore(Vec256<uint> src, Vec256<uint> mask, ref uint dst)
+        public static unsafe void vmaskstore(Vec256<uint> src, Vec256<uint> mask, ref uint dst)
             => MaskStore(refptr(ref dst), src,mask);
 
         /// <summary>
@@ -54,7 +54,7 @@ namespace Z0
         /// <param name="mask">The mask</param>
         /// <param name="dst">The memory reference</param>
         [MethodImpl(Inline)]
-        public static unsafe void maskstore(Vec256<long> src, Vec256<long> mask, ref long dst)
+        public static unsafe void vmaskstore(Vec256<long> src, Vec256<long> mask, ref long dst)
             => MaskStore(refptr(ref dst), src,mask);
 
         /// <summary>
@@ -64,7 +64,7 @@ namespace Z0
         /// <param name="mask">The mask</param>
         /// <param name="dst">The memory reference</param>
         [MethodImpl(Inline)]
-        public static unsafe void maskstore(Vec256<ulong> src, Vec256<ulong> mask, ref ulong dst)
+        public static unsafe void vmaskstore(Vec256<ulong> src, Vec256<ulong> mask, ref ulong dst)
             => MaskStore(refptr(ref dst), src,mask);
     }
 

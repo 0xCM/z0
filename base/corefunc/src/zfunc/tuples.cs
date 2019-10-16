@@ -367,7 +367,7 @@ partial class zfunc
     internal static Func<string, string> boundaryFn(TupleFormat style)
         => style == TupleFormat.List ? new Func<string, string>(bracket)
         : style == TupleFormat.Record ? new Func<string, string>(embrace)
-        : new Func<string, string>(x => paren(x));
+        : new Func<string, string>(x => parenthetical(x));
 
 
     /// <summary>

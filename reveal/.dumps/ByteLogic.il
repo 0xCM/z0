@@ -1,4 +1,4 @@
-// 2019-10-14 04:37:04:052
+// 2019-10-15 01:38:29:334
 ByteKind:byte and(ByteKind:byte a, ByteKind:byte b)
 {
     IL_0000: ldarg.0

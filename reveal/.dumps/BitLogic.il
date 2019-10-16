@@ -1,4 +1,4 @@
-// 2019-10-14 04:37:04:259
+// 2019-10-15 01:38:29:529
 Bit identity(Bit a)
 {
     IL_0000: ldarg.0
@@ -500,8 +500,8 @@ UnaryOp<Bit> unaryop(UnaryLogic:uint id)
     IL_0018: ldftn Z0.Bit Z0.BitLogic::identity(Z0.Bit)
     IL_001E: newobj System.Void Z0.UnaryOp`1<Z0.Bit>::.ctor(System.Object,System.IntPtr)
     IL_0023: ret
-    IL_0024: ldstr "J:\\dev\\projects\\z0_release\\bits\\src\\logic\\BitLogic.cs"
-    IL_0029: ldstr "J:\\dev\\projects\\z0_release\\bits\\src\\logic\\BitLogic.cs"
+    IL_0024: ldstr "J:\\dev\\projects\\z0\\bits\\src\\logic\\BitLogic.cs"
+    IL_0029: ldstr "J:\\dev\\projects\\z0\\bits\\src\\logic\\BitLogic.cs"
     IL_002E: ldc.i4 258
     IL_0033: newobj System.Void System.Nullable`1<System.Int32>::.ctor(System.Int32)
     IL_0038: call Z0.AppException zfunc::unsupported<Z0.Bit>(System.String,System.String,System.Nullable`1<System.Int32>)
@@ -546,8 +546,8 @@ BinaryOp<Bit> binop(BinaryLogic:uint id)
     IL_0082: ldftn Z0.Bit Z0.BitLogic::andnot(Z0.Bit,Z0.Bit)
     IL_0088: newobj System.Void Z0.BinaryOp`1<Z0.Bit>::.ctor(System.Object,System.IntPtr)
     IL_008D: ret
-    IL_008E: ldstr "J:\\dev\\projects\\z0_release\\bits\\src\\logic\\BitLogic.cs"
-    IL_0093: ldstr "J:\\dev\\projects\\z0_release\\bits\\src\\logic\\BitLogic.cs"
+    IL_008E: ldstr "J:\\dev\\projects\\z0\\bits\\src\\logic\\BitLogic.cs"
+    IL_0093: ldstr "J:\\dev\\projects\\z0\\bits\\src\\logic\\BitLogic.cs"
     IL_0098: ldc.i4 274
     IL_009D: newobj System.Void System.Nullable`1<System.Int32>::.ctor(System.Int32)
     IL_00A2: call Z0.AppException zfunc::unsupported<Z0.Bit>(System.String,System.String,System.Nullable`1<System.Int32>)

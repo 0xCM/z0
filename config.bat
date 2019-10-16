@@ -38,6 +38,9 @@ dotnet sln add reveal/app/z0.reveal.app.csproj
 dotnet sln add reveal/lib/z0.reveal.lib.csproj
 
 
+dotnet sln add logix/src/z0.logix.csproj
+dotnet sln add logix/test/z0.logix.test.csproj
+
 dotnet sln add circuits/src/z0.circuits.csproj
 dotnet sln add circuits/test/z0.circuits.test.csproj
 

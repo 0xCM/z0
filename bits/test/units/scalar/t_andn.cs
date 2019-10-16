@@ -43,7 +43,7 @@ namespace Z0.Test
                 var x = Random.Next<T>();                    
                 var y = Random.Next<T>();                    
                 var z1 = gbits.andn(in x, in y);
-                var z2 = gmath.and(gmath.flip(x),y);
+                var z2 = gmath.and(gmath.not(x),y);
                 Claim.eq(z1,z2);
 
             }

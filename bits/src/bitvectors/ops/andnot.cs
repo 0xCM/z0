@@ -22,7 +22,7 @@ namespace Z0
         /// <param name="y">The right bitvector</param>
         [MethodImpl(Inline)]
         public static BitVector4 andnot(BitVector4 x, BitVector4 y)
-            => gbits.andnot(x.data,y.data);
+            => Bits.andnot(x.data,y.data);
 
         /// <summary>
         /// Computes the vector z = x & ~y from bitvectors x and y
@@ -31,7 +31,7 @@ namespace Z0
         /// <param name="y">The right bitvector</param>
         [MethodImpl(Inline)]
         public static BitVector8 andnot(BitVector8 x, BitVector8 y)
-            => gbits.andnot(x.data,y.data);
+            => Bits.andnot(x.data,y.data);
 
         /// <summary>
         /// Computes the vector z = x & ~y from bitvectors x and y
@@ -40,7 +40,7 @@ namespace Z0
         /// <param name="y">The right bitvector</param>
         [MethodImpl(Inline)]
         public static BitVector16 andnot(BitVector16 x, BitVector16 y)
-            => gbits.andnot(x.data, y.data);
+            => Bits.andnot(x.data, y.data);
 
         /// <summary>
         /// Computes the vector z = x & ~y from bitvectors x and y
@@ -49,7 +49,7 @@ namespace Z0
         /// <param name="y">The right bitvector</param>
         [MethodImpl(Inline)]
         public static BitVector32 andnot(BitVector32 x, BitVector32 y)
-            => gbits.andnot(x.data, y.data);
+            => Bits.andnot(x.data, y.data);
 
         /// <summary>
         /// Computes the vector z = x & ~y from bitvectors x and y
@@ -58,7 +58,7 @@ namespace Z0
         /// <param name="y">The right bitvector</param>
         [MethodImpl(Inline)]
         public static BitVector64 andnot(BitVector64 x, BitVector64 y)
-            => gbits.andnot(x.data, y.data);
+            => Bits.andnot(x.data, y.data);
  
     }
 }

@@ -99,6 +99,7 @@ namespace Z0
             Disassemble(typeof(ByteLogic));                
             Disassemble(typeof(BitLogic));                
             Disassemble(typeof(BoolLogic));                
+            Disassemble(typeof(BitOps));                
         }
 
         public unsafe void ListMethods(Type t)

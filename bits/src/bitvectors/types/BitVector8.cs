@@ -13,7 +13,6 @@ namespace Z0
     using static zfunc;    
     using static Bits;
 
-    [StructLayout(LayoutKind.Sequential, Size = 1)]
     public struct BitVector8 : IPrimalBitVector<BitVector8, byte>
     {
         internal byte data;
@@ -219,7 +218,7 @@ namespace Z0
         /// <param name="src">The source operand</param>
         [MethodImpl(Inline)]
         public static BitVector8 operator ~(BitVector8 src)
-            => bitvector.flip(src);
+            => bitvector.not(src);
 
         /// <summary>
         /// Computes the two's complement of the operand
@@ -531,7 +530,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public BitVector8 Not()
         {
-            data = math.flip(data);
+            data = math.not(data);
             return this;
         }
 

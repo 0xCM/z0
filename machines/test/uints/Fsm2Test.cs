@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2019
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Machines
+namespace Z0
 {        
     using System;
     using System.Linq;
@@ -10,7 +10,7 @@ namespace Z0.Machines
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
-    using Z0.Test;
+    using Z0.Machines;
 
     using static zfunc;
     

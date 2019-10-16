@@ -28,7 +28,7 @@ namespace Z0
         public int Classifier {get;}
 
         public string Format(bool withKind = false)
-            => Value.ToString() + (withKind ? paren(Classifier) : string.Empty);
+            => Value.ToString() + (withKind ? parenthetical(Classifier) : string.Empty);
     
         public override string ToString()
             => Format();

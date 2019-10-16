@@ -60,7 +60,7 @@ namespace Z0
         public static Vec256<byte> vpermvar32x8(in Vec256<byte> a, in Vec256<byte> spec)
         {            
             var x = vshuffle(a, vadd(spec, K0));
-            var y = vshuffle(swaphl(a), vadd(spec, K1));
+            var y = vshuffle(vswaphl(a), vadd(spec, K1));
             return vor(x,y);
         }
  

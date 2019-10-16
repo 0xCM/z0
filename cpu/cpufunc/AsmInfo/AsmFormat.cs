@@ -167,7 +167,7 @@ namespace Z0
                     sb.Append(AsciSym.Comma);
             
             }
-            return "mem" + paren(sb.ToString());
+            return "mem" + parenthetical(sb.ToString());
 
         }
     }

@@ -26,8 +26,18 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="pos">The zero-based index of the source component to extract</param>
         [MethodImpl(Inline)]
-        public static byte extract(in Vec128<byte> src, byte pos)
+        public static byte vextract(in Vec128<byte> src, byte pos)
             => Extract(src.xmm, pos);
+
+        /// <summary>
+        /// int _mm_extract_epi8 (__m128i a, const int imm8) PEXTRB reg/m8, xmm, imm8
+        /// Extracts the value of an identified source vector component
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="pos">The zero-based index of the source component to extract</param>
+        [MethodImpl(Inline)]
+        public static sbyte vextract(in Vec128<sbyte> src, byte pos)
+            => (sbyte)Extract(src.xmm.AsByte(), pos);
 
         /// <summary>
         /// int _mm_extract_epi16 (__m128i a, int immediate) PEXTRW reg, xmm, imm8
@@ -36,7 +46,17 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="pos">The zero-based index of the source component to extract</param>
         [MethodImpl(Inline)]
-        public static uint extract(in Vec128<ushort> src, byte pos)
+        public static short vextract(in Vec128<short> src, byte pos)
+            => (short)Extract(src.xmm.AsUInt16(), pos);
+
+        /// <summary>
+        /// int _mm_extract_epi16 (__m128i a, int immediate) PEXTRW reg, xmm, imm8
+        /// Extracts the value of an identified source vector component
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="pos">The zero-based index of the source component to extract</param>
+        [MethodImpl(Inline)]
+        public static ushort vextract(in Vec128<ushort> src, byte pos)
             => Extract(src.xmm, pos);
 
         /// <summary>
@@ -46,7 +66,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="pos">The zero-based index of the source component to extract</param>
         [MethodImpl(Inline)]
-        public static int extract(in Vec128<int> src, byte pos)
+        public static int vextract(in Vec128<int> src, byte pos)
             => Extract(src.xmm, pos);
 
         /// <summary>
@@ -56,7 +76,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="pos">The zero-based index of the source component to extract</param>
         [MethodImpl(Inline)]
-        public static uint extract(in Vec128<uint> src, byte pos)
+        public static uint vextract(in Vec128<uint> src, byte pos)
             => Extract(src.xmm, pos);
 
         /// <summary>
@@ -66,7 +86,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="pos">The zero-based index of the source component to extract</param>
         [MethodImpl(Inline)]
-        public static long extract(in Vec128<long> src, byte pos)
+        public static long vextract(in Vec128<long> src, byte pos)
             => Extract(src.xmm, pos);
 
         /// <summary>
@@ -76,7 +96,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="pos">The zero-based index of the source component to extract</param>
         [MethodImpl(Inline)]
-        public static ulong extract(in Vec128<ulong> src, byte pos)
+        public static ulong vextract(in Vec128<ulong> src, byte pos)
             => Extract(src.xmm, pos);
 
     }

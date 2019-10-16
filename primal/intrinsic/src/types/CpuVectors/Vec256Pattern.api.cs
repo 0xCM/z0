@@ -32,7 +32,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static  Vec256<T> ones<T>()
             where T : unmanaged        
-                => ginx.ones256<T>();
+                => ginx.vones256<T>();
 
         /// <summary>
         /// Returns a vector with all bits turned off

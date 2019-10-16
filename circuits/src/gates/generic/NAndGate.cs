@@ -22,7 +22,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public T Send(in T x, in T y)
-            => gmath.flip(gmath.and(x,y));
+            => gmath.not(gmath.and(x,y));
 
         [MethodImpl(Inline)]
         public Vec128<T> Send(in Vec128<T> x, in Vec128<T> y)

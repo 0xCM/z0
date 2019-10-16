@@ -1,4 +1,96 @@
-// 2019-10-14 04:37:03:355
+// 2019-10-15 01:38:28:642
+float convert_32f_to_g32f(float src)
+{
+    IL_0000: ldarg.0
+    IL_0001: call System.Single Z0.Converter::convert<System.Single>(System.Single)
+    IL_0006: ret
+
+}
+double convert_32f_to_g64f(float src)
+{
+    IL_0000: ldarg.0
+    IL_0001: call System.Double Z0.Converter::convert<System.Double>(System.Single)
+    IL_0006: ret
+
+}
+Char convert_32f_to_gch16(float src)
+{
+    IL_0000: ldarg.0
+    IL_0001: call System.Char Z0.Converter::convert<System.Char>(System.Single)
+    IL_0006: ret
+
+}
+sbyte convert_64f_to_8i(double src)
+{
+    IL_0000: ldarg.0
+    IL_0001: conv.i1
+    IL_0002: ret
+
+}
+sbyte convert_64f_to_g8i(double src)
+{
+    IL_0000: ldarg.0
+    IL_0001: call System.SByte Z0.Converter::convert<System.SByte>(System.Double)
+    IL_0006: ret
+
+}
+sbyte convert_g64f_to_g8i(double src)
+{
+    IL_0000: ldarga.s src
+    IL_0002: call System.SByte Z0.Converter::convert<System.Double,System.SByte>(System.Double&)
+    IL_0007: ret
+
+}
+byte convert_64f_to_8u(double src)
+{
+    IL_0000: ldarg.0
+    IL_0001: conv.i8
+    IL_0002: conv.u1
+    IL_0003: ret
+
+}
+byte convert_64f_to_g8u(double src)
+{
+    IL_0000: ldarg.0
+    IL_0001: call System.Byte Z0.Converter::convert<System.Byte>(System.Double)
+    IL_0006: ret
+
+}
+byte convert_g64f_to_g8u(double src)
+{
+    IL_0000: ldarga.s src
+    IL_0002: call System.Byte Z0.Converter::convert<System.Double,System.Byte>(System.Double&)
+    IL_0007: ret
+
+}
+short convert_64f_to_16i(double src)
+{
+    IL_0000: ldarg.0
+    IL_0001: conv.i2
+    IL_0002: ret
+
+}
+short convert_64f_to_g16i(double src)
+{
+    IL_0000: ldarg.0
+    IL_0001: call System.Int16 Z0.Converter::convert<System.Int16>(System.Double)
+    IL_0006: ret
+
+}
+short convert_g64f_to_g16i(double src)
+{
+    IL_0000: ldarga.s src
+    IL_0002: call System.Int16 Z0.Converter::convert<System.Double,System.Int16>(System.Double&)
+    IL_0007: ret
+
+}
+ushort convert_64f_to_g16u(double src)
+{
+    IL_0000: ldarg.0
+    IL_0001: call System.UInt16 Z0.Converter::convert<System.UInt16>(System.Double)
+    IL_0006: ret
+
+}
 ushort convert_g64f_to_g16u(double src)
 {
     IL_0000: ldarga.s src
@@ -678,6 +770,97 @@ void vstore_g256x64f(Vec256<double> src, ref double dst)
     IL_0002: ldarg.1
     IL_0003: call System.Void zfunc::vstore<System.Double>(Z0.Vec256`1<System.Double>&,System.Double&)
     IL_0008: ret
+
+}
+byte convert_16i_to_g8u(short src)
+{
+    IL_0000: ldarg.0
+    IL_0001: call System.Byte Z0.Converter::convert<System.Byte>(System.Int16)
+    IL_0006: ret
+
+}
+sbyte convert_16i_to_g8i(short src)
+{
+    IL_0000: ldarg.0
+    IL_0001: call System.SByte Z0.Converter::convert<System.SByte>(System.Int16)
+    IL_0006: ret
+
+}
+ushort convert_16i_to_g16u(short src)
+{
+    IL_0000: ldarg.0
+    IL_0001: call System.UInt16 Z0.Converter::convert<System.UInt16>(System.Int16)
+    IL_0006: ret
+
+}
+short convert_16i_to_g16i(short src)
+{
+    IL_0000: ldarg.0
+    IL_0001: call System.Int16 Z0.Converter::convert<System.Int16>(System.Int16)
+    IL_0006: ret
+
+}
+int convert_16i_to_g32i(short src)
+{
+    IL_0000: ldarg.0
+    IL_0001: call System.Int32 Z0.Converter::convert<System.Int32>(System.Int16)
+    IL_0006: ret
+
+}
+uint convert_16i_to_g32u(short src)
+{
+    IL_0000: ldarg.0
+    IL_0001: call System.UInt32 Z0.Converter::convert<System.UInt32>(System.Int16)
+    IL_0006: ret
+
+}
+long convert_16i_to_g64i(short src)
+{
+    IL_0000: ldarg.0
+    IL_0001: call System.Int64 Z0.Converter::convert<System.Int64>(System.Int16)
+    IL_0006: ret
+
+}
+ulong convert_16i_to_g64u(short src)
+{
+    IL_0000: ldarg.0
+    IL_0001: call System.UInt64 Z0.Converter::convert<System.UInt64>(System.Int16)
+    IL_0006: ret
+
+}
+ulong convert_g16i_to_g64u(short src)
+{
+    IL_0000: ldarga.s src
+    IL_0002: call System.UInt64 Z0.Converter::convert<System.Int16,System.UInt64>(System.Int16&)
+    IL_0007: ret
+
+}
+float convert_16i_to_g32f(short src)
+{
+    IL_0000: ldarg.0
+    IL_0001: call System.Single Z0.Converter::convert<System.Single>(System.Int16)
+    IL_0006: ret
+
+}
+float convert_g16i_to_g32f(short src)
+{
+    IL_0000: ldarga.s src
+    IL_0002: call System.Single Z0.Converter::convert<System.Int16,System.Single>(System.Int16&)
+    IL_0007: ret
+
+}
+double convert_16i_to_g64f(short src)
+{
+    IL_0000: ldarg.0
+    IL_0001: call System.Double Z0.Converter::convert<System.Double>(System.Int16)
+    IL_0006: ret
+
+}
+double convert_g16i_to_g64f(short src)
+{
+    IL_0000: ldarga.s src
+    IL_0002: call System.Double Z0.Converter::convert<System.Int16,System.Double>(System.Int16&)
+    IL_0007: ret
 
 }
 Char convert_16i_to_gch16(short src)
@@ -1483,98 +1666,6 @@ ulong convert_32f_to_g64u(float src)
     IL_0006: ret
 
 }
-float convert_32f_to_g32f(float src)
-{
-    IL_0000: ldarg.0
-    IL_0001: call System.Single Z0.Converter::convert<System.Single>(System.Single)
-    IL_0006: ret
-
-}
-double convert_32f_to_g64f(float src)
-{
-    IL_0000: ldarg.0
-    IL_0001: call System.Double Z0.Converter::convert<System.Double>(System.Single)
-    IL_0006: ret
-
-}
-Char convert_32f_to_gch16(float src)
-{
-    IL_0000: ldarg.0
-    IL_0001: call System.Char Z0.Converter::convert<System.Char>(System.Single)
-    IL_0006: ret
-
-}
-sbyte convert_64f_to_8i(double src)
-{
-    IL_0000: ldarg.0
-    IL_0001: conv.i1
-    IL_0002: ret
-
-}
-sbyte convert_64f_to_g8i(double src)
-{
-    IL_0000: ldarg.0
-    IL_0001: call System.SByte Z0.Converter::convert<System.SByte>(System.Double)
-    IL_0006: ret
-
-}
-sbyte convert_g64f_to_g8i(double src)
-{
-    IL_0000: ldarga.s src
-    IL_0002: call System.SByte Z0.Converter::convert<System.Double,System.SByte>(System.Double&)
-    IL_0007: ret
-
-}
-byte convert_64f_to_8u(double src)
-{
-    IL_0000: ldarg.0
-    IL_0001: conv.i8
-    IL_0002: conv.u1
-    IL_0003: ret
-
-}
-byte convert_64f_to_g8u(double src)
-{
-    IL_0000: ldarg.0
-    IL_0001: call System.Byte Z0.Converter::convert<System.Byte>(System.Double)
-    IL_0006: ret
-
-}
-byte convert_g64f_to_g8u(double src)
-{
-    IL_0000: ldarga.s src
-    IL_0002: call System.Byte Z0.Converter::convert<System.Double,System.Byte>(System.Double&)
-    IL_0007: ret
-
-}
-short convert_64f_to_16i(double src)
-{
-    IL_0000: ldarg.0
-    IL_0001: conv.i2
-    IL_0002: ret
-
-}
-short convert_64f_to_g16i(double src)
-{
-    IL_0000: ldarg.0
-    IL_0001: call System.Int16 Z0.Converter::convert<System.Int16>(System.Double)
-    IL_0006: ret
-
-}
-short convert_g64f_to_g16i(double src)
-{
-    IL_0000: ldarga.s src
-    IL_0002: call System.Int16 Z0.Converter::convert<System.Double,System.Int16>(System.Double&)
-    IL_0007: ret
-
-}
-ushort convert_64f_to_g16u(double src)
-{
-    IL_0000: ldarg.0
-    IL_0001: call System.UInt16 Z0.Converter::convert<System.UInt16>(System.Double)
-    IL_0006: ret
-
-}
 ReadOnlySpan<byte> bitseq(byte value)
 {
     IL_0000: ldarg.0
@@ -1987,46 +2078,146 @@ bool testbit_g64f(double src, int pos)
     IL_0008: ret
 
 }
-ValueTuple<ulong,ulong> umul_128u(ulong lhs, ulong rhs)
+BitView8 bitview8_and(BitView8 a, BitView8 b)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: call System.ValueTuple`2<System.UInt64,System.UInt64> Z0.UMul::mul(System.UInt64,System.UInt64)
+    IL_0002: call Z0.BitView8 Z0.BitView8::op_BitwiseAnd(Z0.BitView8,Z0.BitView8)
     IL_0007: ret
 
 }
-void umul_128u_out(ulong lhs, ulong rhs, out ulong lo, out ulong hi)
+BitView8 bitview8_sll(BitView8 a, int offset)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call Z0.BitView8 Z0.BitView8::op_LeftShift(Z0.BitView8,System.Int32)
+    IL_0007: ret
+
+}
+BitView8 bitview8_rotl(BitView8 a, int offset)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call Z0.BitView8 Z0.BitView8::rotl(Z0.BitView8,System.Int32)
+    IL_0007: ret
+
+}
+BitView8 bitview8_rotr(BitView8 a, int offset)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call Z0.BitView8 Z0.BitView8::rotr(Z0.BitView8,System.Int32)
+    IL_0007: ret
+
+}
+BitView8 bitview8_mul(BitView8 a, BitView8 b)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call Z0.BitView8 Z0.BitView8::op_Multiply(Z0.BitView8,Z0.BitView8)
+    IL_0007: ret
+
+}
+BitView8 bitview8_or(BitView8 a, BitView8 b)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call Z0.BitView8 Z0.BitView8::op_BitwiseOr(Z0.BitView8,Z0.BitView8)
+    IL_0007: ret
+
+}
+uint mod_const_16(uint a)
+{
+    IL_0000: ldarg.0
+    IL_0001: call System.UInt32 Z0.Mod16::mod(System.UInt32)
+    IL_0006: ret
+
+}
+uint div_const_16(uint a)
+{
+    IL_0000: ldarg.0
+    IL_0001: call System.UInt32 Z0.Mod16::div(System.UInt32)
+    IL_0006: ret
+
+}
+uint mod_const_25(uint a)
+{
+    IL_0000: ldarg.0
+    IL_0001: call System.UInt32 Z0.Mod25::mod(System.UInt32)
+    IL_0006: ret
+
+}
+uint div_const_25(uint a)
+{
+    IL_0000: ldarg.0
+    IL_0001: call System.UInt32 Z0.Mod25::div(System.UInt32)
+    IL_0006: ret
+
+}
+uint mod_const_32(uint a)
+{
+    IL_0000: ldarg.0
+    IL_0001: call System.UInt32 Z0.Mod32::mod(System.UInt32)
+    IL_0006: ret
+
+}
+uint div_const_32(uint a)
+{
+    IL_0000: ldarg.0
+    IL_0001: call System.UInt32 Z0.Mod32::div(System.UInt32)
+    IL_0006: ret
+
+}
+uint mul_lo_32u(uint x, uint y)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call System.UInt32 Z0.MulOps::lo(System.UInt32,System.UInt32)
+    IL_0007: ret
+
+}
+ulong mul_lo_64u(ulong x, ulong y)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call System.UInt64 Z0.MulOps::lo(System.UInt64,System.UInt64)
+    IL_0007: ret
+
+}
+uint mul_hi_32u(uint x, uint y)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call System.UInt32 Z0.MulOps::hi(System.UInt32,System.UInt32)
+    IL_0007: ret
+
+}
+ulong mul_hi_64u(ulong x, ulong y)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call System.UInt64 Z0.MulOps::hi(System.UInt64,System.UInt64)
+    IL_0007: ret
+
+}
+void mul_full_32u(uint a, uint b, out uint lo, out uint hi)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
     IL_0003: ldarg.3
-    IL_0004: call System.Void Z0.UMul::mul(System.UInt64,System.UInt64,System.UInt64&,System.UInt64&)
+    IL_0004: call System.Void Z0.MulOps::full(System.UInt32,System.UInt32,System.UInt32&,System.UInt32&)
     IL_0009: ret
 
 }
-ulong umul_64u(uint lhs, uint rhs)
+void mul_full_64u(ulong x, ulong y, out ulong lo, out ulong hi)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: call System.UInt64 Z0.UMul::mul(System.UInt32,System.UInt32)
-    IL_0007: ret
-
-}
-ulong umul_64u_hi(ulong lhs, ulong rhs)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: call System.UInt64 Z0.UMul::himul(System.UInt64,System.UInt64)
-    IL_0007: ret
-
-}
-ulong umul_64u_lo(ulong lhs, ulong rhs)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: call System.UInt64 Z0.UMul::lomul(System.UInt64,System.UInt64)
-    IL_0007: ret
+    IL_0002: ldarg.2
+    IL_0003: ldarg.3
+    IL_0004: call System.Void Z0.MulOps::full(System.UInt64,System.UInt64,System.UInt64&,System.UInt64&)
+    IL_0009: ret
 
 }
 byte convert_8i_to_8u(sbyte src)
@@ -2419,97 +2610,6 @@ Char convert_g8u_to_gch16(byte src)
 {
     IL_0000: ldarga.s src
     IL_0002: call System.Char Z0.Converter::convert<System.Byte,System.Char>(System.Byte&)
-    IL_0007: ret
-
-}
-byte convert_16i_to_g8u(short src)
-{
-    IL_0000: ldarg.0
-    IL_0001: call System.Byte Z0.Converter::convert<System.Byte>(System.Int16)
-    IL_0006: ret
-
-}
-sbyte convert_16i_to_g8i(short src)
-{
-    IL_0000: ldarg.0
-    IL_0001: call System.SByte Z0.Converter::convert<System.SByte>(System.Int16)
-    IL_0006: ret
-
-}
-ushort convert_16i_to_g16u(short src)
-{
-    IL_0000: ldarg.0
-    IL_0001: call System.UInt16 Z0.Converter::convert<System.UInt16>(System.Int16)
-    IL_0006: ret
-
-}
-short convert_16i_to_g16i(short src)
-{
-    IL_0000: ldarg.0
-    IL_0001: call System.Int16 Z0.Converter::convert<System.Int16>(System.Int16)
-    IL_0006: ret
-
-}
-int convert_16i_to_g32i(short src)
-{
-    IL_0000: ldarg.0
-    IL_0001: call System.Int32 Z0.Converter::convert<System.Int32>(System.Int16)
-    IL_0006: ret
-
-}
-uint convert_16i_to_g32u(short src)
-{
-    IL_0000: ldarg.0
-    IL_0001: call System.UInt32 Z0.Converter::convert<System.UInt32>(System.Int16)
-    IL_0006: ret
-
-}
-long convert_16i_to_g64i(short src)
-{
-    IL_0000: ldarg.0
-    IL_0001: call System.Int64 Z0.Converter::convert<System.Int64>(System.Int16)
-    IL_0006: ret
-
-}
-ulong convert_16i_to_g64u(short src)
-{
-    IL_0000: ldarg.0
-    IL_0001: call System.UInt64 Z0.Converter::convert<System.UInt64>(System.Int16)
-    IL_0006: ret
-
-}
-ulong convert_g16i_to_g64u(short src)
-{
-    IL_0000: ldarga.s src
-    IL_0002: call System.UInt64 Z0.Converter::convert<System.Int16,System.UInt64>(System.Int16&)
-    IL_0007: ret
-
-}
-float convert_16i_to_g32f(short src)
-{
-    IL_0000: ldarg.0
-    IL_0001: call System.Single Z0.Converter::convert<System.Single>(System.Int16)
-    IL_0006: ret
-
-}
-float convert_g16i_to_g32f(short src)
-{
-    IL_0000: ldarga.s src
-    IL_0002: call System.Single Z0.Converter::convert<System.Int16,System.Single>(System.Int16&)
-    IL_0007: ret
-
-}
-double convert_16i_to_g64f(short src)
-{
-    IL_0000: ldarg.0
-    IL_0001: call System.Double Z0.Converter::convert<System.Double>(System.Int16)
-    IL_0006: ret
-
-}
-double convert_g16i_to_g64f(short src)
-{
-    IL_0000: ldarga.s src
-    IL_0002: call System.Double Z0.Converter::convert<System.Int16,System.Double>(System.Int16&)
     IL_0007: ret
 
 }

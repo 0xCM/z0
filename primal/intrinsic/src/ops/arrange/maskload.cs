@@ -23,7 +23,7 @@ namespace Z0
         /// <param name="src">The memory source</param>
         /// <param name="mask">Hi bit on selects the memory, otherwise set to zero</param>
         [MethodImpl(Inline)]
-        public static unsafe Vec128<int> maskload(ref int src, Vec128<int> mask)
+        public static unsafe Vec128<int> vmaskload(ref int src, Vec128<int> mask)
             => MaskLoad(refptr(ref src), mask.xmm);
 
         /// <summary>
@@ -32,7 +32,7 @@ namespace Z0
         /// <param name="src">The memory source</param>
         /// <param name="mask">Hi bit on selects the memory, otherwise set to zero</param>
         [MethodImpl(Inline)]
-        public static unsafe Vec256<int> maskload(ref int src, Vec256<int> mask)
+        public static unsafe Vec256<int> vmaskload(ref int src, Vec256<int> mask)
             => MaskLoad(refptr(ref src), mask.ymm);
 
         /// <summary>
@@ -41,7 +41,7 @@ namespace Z0
         /// <param name="src">The memory source</param>
         /// <param name="mask">Hi bit on selects the memory, otherwise set to zero</param>
         [MethodImpl(Inline)]
-        public static unsafe Vec256<uint> maskload(ref uint src, Vec256<uint> mask)
+        public static unsafe Vec256<uint> vmaskload(ref uint src, Vec256<uint> mask)
             => MaskLoad(refptr(ref src), mask.ymm);
 
         /// <summary>
@@ -50,7 +50,7 @@ namespace Z0
         /// <param name="src">The memory source</param>
         /// <param name="mask">Hi bit on selects the memory, otherwise set to zero</param>
         [MethodImpl(Inline)]
-        public static unsafe Vec256<long> maskload(ref long src, Vec256<long> mask)
+        public static unsafe Vec256<long> vmaskload(ref long src, Vec256<long> mask)
             => MaskLoad(refptr(ref src), mask.ymm);
 
         /// <summary>
@@ -59,7 +59,7 @@ namespace Z0
         /// <param name="src">The memory source</param>
         /// <param name="mask">Hi bit on selects the memory, otherwise set to zero</param>
         [MethodImpl(Inline)]
-        public static unsafe Vec256<ulong> maskload(ref ulong src, Vec256<ulong> mask)
+        public static unsafe Vec256<ulong> vmaskload(ref ulong src, Vec256<ulong> mask)
             => MaskLoad(refptr(ref src), mask.ymm);
     }
 

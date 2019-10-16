@@ -209,13 +209,13 @@ namespace Z0
             where S : unmanaged
         {
             if(typeof(V) == typeof(BitVector8))
-                return generic<V,S>(bitvector.flip(x.bv8));
+                return generic<V,S>(bitvector.not(x.bv8));
             else if(typeof(V) == typeof(BitVector16))
-                return generic<V,S>(bitvector.flip(x.bv16));
+                return generic<V,S>(bitvector.not(x.bv16));
             else if(typeof(V) == typeof(BitVector32))
-                return generic<V,S>(bitvector.flip(x.bv32));
+                return generic<V,S>(bitvector.not(x.bv32));
             else if(typeof(V) == typeof(BitVector64))
-                return generic<V,S>(bitvector.flip(x.bv64));
+                return generic<V,S>(bitvector.not(x.bv64));
             else
                 throw unsupported<S>();
         }

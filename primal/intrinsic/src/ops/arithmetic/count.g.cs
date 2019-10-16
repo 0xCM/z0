@@ -22,7 +22,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <typeparam name="T">The primal component type</typeparam>
         [MethodImpl(Inline)]
-        public static Vec128<T> next<T>(in Vec128<T> src)
+        public static Vec128<T> vnext<T>(in Vec128<T> src)
             where T : unmanaged
                 => vadd<T>(src, Vec128Pattern.units<T>());
 
@@ -32,7 +32,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <typeparam name="T">The primal component type</typeparam>
         [MethodImpl(Inline)]
-        public static Vec256<T> next<T>(in Vec256<T> src)
+        public static Vec256<T> vnext<T>(in Vec256<T> src)
             where T : unmanaged
                 => vadd<T>(src, Vec256Pattern.Units<T>());
 
@@ -42,7 +42,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <typeparam name="T">The primal component type</typeparam>
         [MethodImpl(Inline)]
-        public static Vec128<T> prior<T>(Vector128<T> src)
+        public static Vec128<T> vprior<T>(in Vec128<T> src)
             where T : unmanaged
                 => vsub(src, Vec128Pattern.units<T>());
 
@@ -52,7 +52,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <typeparam name="T">The primal component type</typeparam>
         [MethodImpl(Inline)]
-        public static Vec256<T> prior<T>(Vector256<T> src)
+        public static Vec256<T> vprior<T>(in Vec256<T> src)
             where T : unmanaged
                 => vsub(src, Vec256Pattern.Units<T>());
     }

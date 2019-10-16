@@ -99,17 +99,6 @@ namespace Z0
         public static Vec256<double> vor(in Vec256<double> lhs, in Vec256<double> rhs)
             => Or(lhs.ymm, rhs.ymm);
 
-        [MethodImpl(Inline)]
-        public static unsafe void vor(in Vec256<sbyte> lhs, in Vec256<sbyte> rhs, ref sbyte dst)
-            => vstore(vor(lhs, rhs), ref dst);
-
-        [MethodImpl(Inline)]
-        public static unsafe void vor(in Vec256<byte> lhs, in Vec256<byte> rhs, ref byte dst)
-            => vstore(vor(lhs, rhs), ref dst);
-
-        [MethodImpl(Inline)]
-        public static unsafe void vor(in Vec256<short> lhs, in Vec256<short> rhs, ref short dst)
-            => vstore(vor(lhs, rhs), ref dst);
     }
 
 }

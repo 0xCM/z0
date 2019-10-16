@@ -38,10 +38,10 @@ namespace Z0.Test
 
                 var dst = Vec256.Zero<T>();
                 
-                var vLo = ginx.insert(v128Src, dst,0);
+                var vLo = ginx.vinsert(v128Src, dst,0);
                 var vLoSpan = vLo.ToSpan().Slice(0, vLo.Length()/2);
 
-                var vHi = ginx.insert(v128Src, dst, 1);
+                var vHi = ginx.vinsert(v128Src, dst, 1);
                 var vHiSpan = vHi.ToSpan().Slice(vLo.Length()/2);
 
                 Claim.eq(srcSpan, vLoSpan);

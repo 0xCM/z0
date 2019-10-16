@@ -20,4 +20,8 @@ partial class zfunc
     public static ReadOnlySpan<char> Replicate(this char src, int count)
         => new string(src,count);
 
+    [MethodImpl(Inline)]
+    public static ReadOnlySpan<char> Replicate(this char src, uint count)
+        => new string(src,(int)count);
+
 }

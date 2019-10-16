@@ -236,7 +236,7 @@ namespace Z0
         /// <param name="src">The source operand</param>
         [MethodImpl(Inline)]
         public static BitVector64 operator ~(BitVector64 src)
-            => bitvector.flip(src);
+            => bitvector.not(src);
 
         /// <summary>
         /// Negates the operand via two's complement

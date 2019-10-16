@@ -34,8 +34,8 @@ namespace Z0
             for(var i=0; i < SampleSize; i++)
             {
                 var x = Random.CpuVec256<byte>();
-                var y = dinx.swaphl_ref(x);
-                var z = dinx.swaphl(x);
+                var y = dinx.vswaphl_ref(x);
+                var z = dinx.vswaphl(x);
                 Claim.eq(y,z);
             }
         }

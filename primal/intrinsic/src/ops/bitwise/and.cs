@@ -19,7 +19,6 @@ namespace Z0
 
     partial class dinx
     {
-
         /// <summary>
         /// __m128i _mm_and_si128 (__m128i a, __m128i b) PAND xmm, xmm/m128
         /// Computes the logical and of the operands

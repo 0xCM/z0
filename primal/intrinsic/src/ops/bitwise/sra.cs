@@ -23,7 +23,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="offset">The number of bits to shift rightwards</param>
         [MethodImpl(Inline)]
-        public static Vec256<short> sra(in Vec256<short> src, byte offset)
+        public static Vec256<short> vsra(in Vec256<short> src, byte offset)
             => ShiftRightArithmetic(src, offset);
 
         /// <summary>
@@ -33,7 +33,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="offset">The number of bits to shift rightwards</param>
         [MethodImpl(Inline)]
-        public static Vec256<int> sra(in Vec256<int> src, byte offset)
+        public static Vec256<int> vsra(in Vec256<int> src, byte offset)
             => ShiftRightArithmetic(src, offset);
 
         /// <summary>
@@ -44,7 +44,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="control">The control vector</param>
         [MethodImpl(Inline)]
-        public static Vec128<int> srav(in Vec128<int> src, in Vec128<uint> control)
+        public static Vec128<int> vsrav(in Vec128<int> src, in Vec128<uint> control)
             => ShiftRightArithmeticVariable(src, control);
 
         /// <summary>
@@ -55,7 +55,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="control">The control vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<int> srav(in Vec256<int> src, in Vec256<uint> control)
+        public static Vec256<int> vsrav(in Vec256<int> src, in Vec256<uint> control)
             => ShiftRightArithmeticVariable(src, control);
     }
 }

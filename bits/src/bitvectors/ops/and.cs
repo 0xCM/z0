@@ -17,6 +17,22 @@ namespace Z0
     {
 
         /// <summary>
+        /// Computes the bitwise AND between two generic bitvectors
+        /// </summary>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
+        /// <typeparam name="T">The primal type</typeparam>
+        [MethodImpl(Inline)]
+        public static BitVector<T> and<T>(BitVector<T> x, BitVector<T> y)
+            where T : unmanaged
+        {
+            if(x.SingleCell && y.SingleCell)
+                return gmath.and(x.Data[0], y.Data[0]);
+            else
+                return and_multicell(x,y);
+        }
+
+        /// <summary>
         /// Computes a new bitvector z = x & y from bitvectors x and y
         /// </summary>
         /// <param name="x">The left bitvector</param>
@@ -61,6 +77,10 @@ namespace Z0
         public static BitVector64 and(BitVector64 x, BitVector64 y)
             => math.and(x.data, y.data);
  
-
+       [MethodImpl(Inline)]
+        static BitVector<T> and_multicell<T>(BitVector<T> x, BitVector<T> y)
+            where T : unmanaged
+                => mathspan.and(x.Data.ReadOnly(),y.Data.ReadOnly());
+ 
     }
 }

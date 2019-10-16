@@ -393,7 +393,7 @@ partial class zfunc
     /// </summary>
     /// <param name="content">The items to be enclosed</param>
     [MethodImpl(Inline)]
-    public static string paren(params object[] content)
+    public static string parenthetical(params object[] content)
         => enclose(concat(content.Select(x => x.ToString())), lparen(), rparen());
 
     /// <summary>

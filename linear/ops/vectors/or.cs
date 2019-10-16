@@ -44,21 +44,6 @@ namespace Z0
             return or(x,y,ref dst);
         }
 
-        /// <summary>
-        /// Computes lhs[i] := lhs[i] | rhs for i = 0...N-1
-        /// </summary>
-        /// <param name="x">The left operand which will be updated in-place</param>
-        /// <param name="k">The right operand</param>
-        /// <typeparam name="N">The length type</typeparam>
-        /// <typeparam name="T">The component type</typeparam>
-        [MethodImpl(Inline)]
-        public static ref BlockVector<N,T> or<N,T>(BlockVector<N,T> x, T k, ref BlockVector<N,T> z)
-            where N : ITypeNat, new()
-            where T : unmanaged    
-        {
-            mathspan.or(x.Unsized, k, z.Unsized);
-            return ref z;
-        }
 
     }
 

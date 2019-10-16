@@ -135,7 +135,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static string Format<X,Y>(this (X x,Y y) src)
-            => paren(src.x.ToString(), ",", src.y.ToString());
+            => parenthetical(src.x.ToString(), ",", src.y.ToString());
         
         [MethodImpl(Inline)]
         public static string Format<X,Y>(this IEnumerable<(X x,Y y)> src)

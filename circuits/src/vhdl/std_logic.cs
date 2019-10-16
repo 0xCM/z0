@@ -5,7 +5,7 @@
 namespace Z0.Vhdl
 {
 
-    public enum STD_ULOGIC : byte
+    public enum STD_ULOGIC : uint
     {
         ///<summary>
         /// Uninitialized

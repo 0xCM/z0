@@ -13,275 +13,158 @@ namespace Z0
 
     using static zfunc;
 
-
-    /// <summary>
-    /// Defines the value of a bit
-    /// </summary>
-    public readonly struct Bit
+    public readonly struct bit
     {
-        readonly bool value;
+        readonly uint state;
+
+        /// <summary>
+        /// Constructs an enabled bit
+        /// </summary>
+        public static bit On => true;
+
+        /// <summary>
+        /// Constructs a disabled bit
+        /// </summary>
+        public static bit Off => false;
+        
+        /// <summary>
+        /// Returns true if the bit is enabled, false otherwise
+        /// </summary>
+        /// <param name="b">The bit to test</param>
+        public static bool operator true(bit b)
+            => b.state == 1;
+
+        /// <summary>
+        /// Returns false if the bit is disabled, true otherwise
+        /// </summary>
+        /// <param name="b">The bit to test</param>
+        public static bool operator false(bit b)
+            => b.state == 0;
+
+        /// <summary>
+        /// Implicitly constructs a bit from a bool
+        /// </summary>
+        /// <param name="state">The state of the bit to construct</param>
+        [MethodImpl(Inline)]
+        public static implicit operator bit(bool state)
+            => new bit(state);
+
+        /// <summary>
+        /// Implicitly constructs a bool from a bit
+        /// </summary>
+        /// <param name="state">The state of the bit to construct</param>
+        [MethodImpl(Inline)]
+        public static implicit operator bool(bit src)
+            => src.state == 1;
+
+        /// <summary>
+        /// Combines the states of the source bits
+        /// </summary>
+        /// <param name="a">The left bit</param>
+        /// <param name="b">The right bit</param>
+        [MethodImpl(Inline)]
+        public static bit operator + (bit a, bit b) 
+            => Wrap(a.state ^ b.state);
+
+        /// <summary>
+        /// Computes the bitwise AND between the operands
+        /// </summary>
+        /// <param name="a">The left bit</param>
+        /// <param name="b">The right bit</param>
+        [MethodImpl(Inline)]
+        public static bit operator & (bit a, bit b) 
+            => Wrap(a.state & b.state);
+
+        /// <summary>
+        /// Computes the bitwise OR between the operands
+        /// </summary>
+        /// <param name="a">The left bit</param>
+        /// <param name="b">The right bit</param>
+        [MethodImpl(Inline)]
+        public static bit operator | (bit a, bit b) 
+            => Wrap(a.state | b.state);
+
+        /// <summary>
+        /// Computes the bitwise XOR between the operands
+        /// </summary>
+        /// <param name="a">The left bit</param>
+        /// <param name="b">The right bit</param>
+        [MethodImpl(Inline)]
+        public static bit operator ^ (bit a, bit b) 
+            => Wrap(a.state ^ b.state);
+
+        /// <summary>
+        /// Inverts the state of the source bit
+        /// </summary>
+        /// <param name="a">The source bit</param>
+        [MethodImpl(Inline)]
+        public static bit operator ~ (bit a) 
+            => SafeWrap(~a.state);
+
+        /// <summary>
+        /// Inverts the state of the source bit
+        /// </summary>
+        /// <param name="a">The source bit</param>
+        [MethodImpl(Inline)]
+        public static bit operator ! (bit a) 
+            => SafeWrap(~a.state);
+
+        [MethodImpl(Inline)]
+        public static bool operator ==(bit a, bit b)
+            => a.state == b.state;
+
+        [MethodImpl(Inline)]
+        public static bool operator !=(bit a, bit b)
+            => a.state != b.state;
+
+        [MethodImpl(Inline)]
+        bit(bool on)
+            => this.state  = on ? 1u : 0u;
+
+        [MethodImpl(Inline)]
+        bit(uint state)
+            => this.state = state;
         
         [MethodImpl(Inline)]
-        public Bit(bool value)        
-            => this.value = value;
-
-        public static readonly Bit Off = false;
-
-        public static readonly Bit On = true;
-
-        public const char Zero = '0';
-
-        public const char One = '1';
-
-        /// <summary>
-        /// The values in the type's domain
-        /// </summary>
-        public static readonly Bit[] B01 = new Bit[2]{Bit.Off,Bit.On};
+        public static bit nand(bit a, bit b)
+            => SafeWrap(~(a.state & b.state));
 
         [MethodImpl(Inline)]
-        public static char And(char lhs, char rhs)
-            => (lhs == One & rhs == One) ? One : Zero;
+        public static bit nor(bit a, bit b)
+            => SafeWrap(~(a.state | b.state));
 
         [MethodImpl(Inline)]
-        public static char Or(char lhs, char rhs)
-            => (lhs == One | rhs == One) ? One : Zero;
+        public static bit xnor(bit a, bit b)
+            => SafeWrap(~(a.state ^ b.state));
 
         [MethodImpl(Inline)]
-        public static char XOr(char lhs, char rhs)
-            => (lhs == One ^ rhs == One) ? One : Zero;
+        public static bit andnot(bit a, bit b)
+            => SafeWrap(a.state & ~b.state);
 
         [MethodImpl(Inline)]
-        public static char Flip(char src)
-            => src == One ? Zero : One;
-            
-        const string ZeroS = "0";
-
-        const string OneS = "1";
-        
-        [MethodImpl(Inline)]
-        public static Bit Parse(char c)
-            => c == One;
+        public static bit select(bit a, bit b, bit c)
+            => a ? b : c;
 
         [MethodImpl(Inline)]
-        public static implicit operator bool(Bit src)
-            => src.value;
+        static bit Wrap(uint state)
+            => new bit(state);
 
         [MethodImpl(Inline)]
-        public static implicit operator Bit(bool src)
-            => new Bit(src);
-
-        [MethodImpl(Inline)]
-        public static implicit operator byte(Bit src)
-            => src.ToByte();
-
-        /// <summary>
-        /// Implicitly converts an integral value to a bit where nonzero values
-        /// are interpreted as an On bit
-        /// </summary>
-        /// <param name="src">The source value</param>
-        [MethodImpl(Inline)]
-        public static implicit operator Bit(byte src)
-            => src == 0 ? Off : On;
-
-        [MethodImpl(Inline)]
-        public static explicit operator char(Bit src)
-            => src ? One : Zero;
-
-        [MethodImpl(Inline)]
-        public static explicit operator ushort(Bit src)
-            => src.ToByte();
-
-        [MethodImpl(Inline)]
-        public static explicit operator int(Bit src)
-            => src.ToByte();
-
-        [MethodImpl(Inline)]
-        public static explicit operator uint(Bit src)
-            => src.ToByte();
-
-        [MethodImpl(Inline)]
-        public static explicit operator long(Bit src)
-            => src.ToByte();
-
-        [MethodImpl(Inline)]
-        public static explicit operator ulong(Bit src)
-            => src.ToByte();
-
-        /// <summary>
-        /// Implicitly converts an integral value to a bit where nonzero values
-        /// are interpreted as an On bit
-        /// </summary>
-        /// <param name="src">The source value</param>
-        [MethodImpl(Inline)]
-        public static explicit operator Bit(sbyte src)
-            => src == 0 ? Off : On;
-
-        /// <summary>
-        /// Implicitly converts an integral value to a bit where nonzero values
-        /// are interpreted as an On bit
-        /// </summary>
-        /// <param name="src">The source value</param>
-        [MethodImpl(Inline)]
-        public static explicit operator Bit(short src)
-            => src == 0 ? Off : On;
-
-        /// <summary>
-        /// Explicitly converts an integral value to a bit where nonzero values are interpreted as an On bit
-        /// </summary>
-        /// <param name="src">The source value</param>
-        [MethodImpl(Inline)]
-        public static explicit operator Bit(ushort src)
-            => src == 0 ? Off : On;
-
-        /// <summary>
-        /// Explicitly converts an integral value to a bit where nonzero values are interpreted as an On bit
-        /// </summary>
-        /// <param name="src">The source value</param>
-        [MethodImpl(Inline)]
-        public static explicit operator Bit(int src)
-            => src == 0 ? Off : On;
-
-        /// <summary>
-        /// Explicitly converts an integral value to a bit where nonzero values are interpreted as an On bit
-        /// </summary>
-        /// <param name="src">The source value</param>
-        [MethodImpl(Inline)]
-        public static explicit operator Bit(uint src)
-            => src == 0 ? Off : On;
+        static bit SafeWrap(uint state)
+            => new bit(state & 1);
 
 
         [MethodImpl(Inline)]
-        public static explicit operator BinaryDigit(Bit src)
-            => src.value ? BinaryDigit.One : BinaryDigit.Zed;
+        public bool Equals(bit b)
+            => state == b.state;
 
-        [MethodImpl(Inline)]
-        public static explicit operator Bit(BinaryDigit src)
-            => new Bit(src == BinaryDigit.One);
+        public override bool Equals(object b)
+            => throw new NotSupportedException();
 
-        [MethodImpl(Inline)]
-        public static bool operator ==(Bit lhs, Bit rhs)
-            => lhs.value == rhs.value;
-
-        [MethodImpl(Inline)]
-        public static bool operator !=(Bit lhs, Bit rhs)
-            => lhs.value != rhs.value;
-
-        [MethodImpl(Inline)]
-        public static Bit operator & (Bit lhs, Bit rhs) 
-            => lhs.value & rhs.value;
-
-        [MethodImpl(Inline)]
-        public static Bit operator | (Bit lhs, Bit rhs) 
-            => lhs.value | rhs.value;
-
-        [MethodImpl(Inline)]
-        public static Bit operator ^ (Bit lhs, Bit rhs) 
-            => lhs.value ^ rhs.value;
-
-        [MethodImpl(Inline)]
-        public static Bit operator ~ (Bit src) 
-            => ! src.value;
-
-        [MethodImpl(Inline)]
-        public static Bit operator ! (Bit src) 
-            => !src.value;
-
-        [MethodImpl(Inline)]
-        public static bool operator true(Bit src)
-            => src.value;
-
-        [MethodImpl(Inline)]
-        public static bool operator false(Bit src)
-            => !src.value;
-
-        [MethodImpl(Inline)]
-        public static Bit operator + (Bit lhs, Bit rhs) 
-            => (lhs.value,rhs.value) switch
-                {
-                    (true, true) => false,
-                    (false, false) => false,
-                    (false, true) => true,
-                    (true, false) => true
-                };
-
-        [MethodImpl(Inline)]
-        public static Bit operator * (Bit lhs, Bit rhs) 
-            => (lhs.value,rhs.value) switch
-                {
-                    (true, true) => true,
-                    (false, false) => false,
-                    (false, true) => false,
-                    (true, false) => false
-                };
-
-        /// <summary>
-        /// Converts a bool to a byte quickly
-        /// </summary>
-        /// <param name="src"></param>
-        /// <remarks>Taken from https://stackoverflow.com/questions/4980881/what-is-fastest-way-to-convert-bool-to-byte</remarks>
-        [MethodImpl(Inline)]
-        static unsafe byte ToByte(bool src)
-            =>  *((byte*)(&src));
-
-        [MethodImpl(Inline)]
-        public Bit And(Bit y)
-            => value & y.value;
-
-        [MethodImpl(Inline)]
-        public Bit Or(Bit y)
-            => value | y.value;
-
-        [MethodImpl(Inline)]
-        public Bit XOr(Bit y)
-            => value ^ y.value;
-
-        [MethodImpl(Inline)]
-        public Bit Not()
-            => !value;
-
-        [MethodImpl(Inline)]
-        public Bit Nand(Bit y)
-            => !(value & y.value);
-
-        [MethodImpl(Inline)]
-        public Bit Nor(Bit y)
-            => !(value | y.value);
-
-        [MethodImpl(Inline)]
-        public Bit Xnor(Bit y)
-            => !(value ^ y.value);
-
-        [MethodImpl(Inline)]
-        public Bit AndNot(Bit y)
-            => value & (!y.value);
-
-
-        [MethodImpl(Inline)]
-        public Bit Xor1()
-            => !(value ^ true);
-
-        [MethodImpl(Inline)]
-        public Bit Select(Bit b, Bit c)
-            => value ? b : c;
-
-        [MethodImpl(Inline)]
-        public byte ToByte()
-            => ToByte(value);
-
-        [MethodImpl(Inline)]
-        public bool Equals(Bit rhs)
-            => value == rhs.value;
-
-        [MethodImpl(Inline)]
-        public override bool Equals(object rhs)
-            => rhs is Bit ? Equals((Bit)rhs) : false;
-
-        [MethodImpl(Inline)]
         public override int GetHashCode()
-            => value ? 1 : 0;
-    
-        [MethodImpl(Inline)]
-        public override string ToString()
-            => value  ? OneS : ZeroS;
+            => throw new NotSupportedException();
+  
     }
+
+
 }

@@ -16,6 +16,42 @@ namespace Z0
     public static partial class BitMatrix
     {
         /// <summary>
+        /// Allocates a generic bitmatrix with a specified number of rows
+        /// </summary>
+        /// <param name="rows">The row count</param>
+        /// <typeparam name="T">The primal type that implicitly defines the number of matrix coluns</typeparam>
+        public static BitMatrix<T> Alloc<T>(int rows)
+            where T : unmanaged
+                => BitMatrix<T>.Alloc(rows);
+        
+        /// <summary>
+        /// Loads a generic bitmatrix from a byte span
+        /// </summary>
+        /// <param name="src">The data source</param>
+        /// <typeparam name="T">The primal type that implicitly defines the number of matrix coluns</typeparam>
+        public static BitMatrix<T> Load<T>(Span<byte> src)
+            where T : unmanaged
+                => BitMatrix<T>.From(src);
+
+        /// <summary>
+        /// Loads a generic bitmatrix from generic span
+        /// </summary>
+        /// <param name="src">The data source</param>
+        /// <typeparam name="T">The primal type that implicitly defines the number of matrix coluns</typeparam>
+        public static BitMatrix<T> Load<T>(Span<T> src)
+            where T : unmanaged
+                => BitMatrix<T>.From(src);
+
+        /// <summary>
+        /// Loads a generic bitmatrix from an array
+        /// </summary>
+        /// <param name="src">The data source</param>
+        /// <typeparam name="T">The primal type that implicitly defines the number of matrix coluns</typeparam>
+        public static BitMatrix<T> Load<T>(T[] src)
+            where T : unmanaged
+                => BitMatrix<T>.From(src);
+
+        /// <summary>
         /// Allocates a zero-filled n-square matrix
         /// </summary>
         /// <typeparam name="N">The square dimension</typeparam>

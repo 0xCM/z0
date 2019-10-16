@@ -28,14 +28,15 @@ namespace Z0
             return dst;
         }
 
+        [MethodImpl(Inline)]
         public static Span<T> mul<T>(Span<T> lhs, ReadOnlySpan<T> rhs)
             where T : unmanaged
-        {
-            var len = length(lhs,rhs);
-            for(var i=0; i<len; i++)
-                gmath.mul(ref lhs[i],rhs[i]);
-            return lhs;
-        }
+                => mul(lhs,rhs,lhs);
+
+        [MethodImpl(Inline)]
+        public static Span<T> mul<T>(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs)
+            where T : unmanaged
+                => mul(lhs,rhs,lhs.Replicate(true));
 
 
     }

@@ -33,7 +33,6 @@ namespace Z0
                 throw unsupported<T>();
         }
 
-
         [MethodImpl(Inline)]
         public static Vec256<T> vnot<T>(in Vec256<T> src)
             where T : unmanaged

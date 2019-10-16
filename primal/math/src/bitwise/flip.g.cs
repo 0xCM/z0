@@ -23,7 +23,7 @@ namespace Z0
         /// <typeparam name="T">The primal type</typeparam>
         /// <remarks>See https://en.wikipedia.org/wiki/Two%27s_complement</remarks>
         [MethodImpl(Inline)]
-        public static T flip<T>(T src)
+        public static T not<T>(T src)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte) 
@@ -47,7 +47,7 @@ namespace Z0
         /// <typeparam name="T">The primal type</typeparam>
         /// <remarks>See https://en.wikipedia.org/wiki/Two%27s_complement</remarks>
         [MethodImpl(Inline)]
-        public static ref T flip<T>(ref T src)
+        public static ref T not<T>(ref T src)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte) 
@@ -83,7 +83,7 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(math.flip(uint8(src)));
+                return generic<T>(math.not(uint8(src)));
             else if(typeof(T) == typeof(ushort))
                 return generic<T>(math.flip(uint16(src)));
             else if(typeof(T) == typeof(uint))

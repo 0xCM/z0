@@ -21,7 +21,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public T Send(in T x)
-            => gmath.flip(x);
+            => gmath.not(x);
 
         [MethodImpl(Inline)]
         public Vec128<T> Send(in Vec128<T> x)

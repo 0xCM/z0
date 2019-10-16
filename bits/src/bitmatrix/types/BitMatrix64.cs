@@ -25,32 +25,32 @@ namespace Z0
         /// <summary>
         /// The matrix order
         /// </summary>
-        public static readonly N64 N = default;
+        public const int N = 64;
 
         /// <summary>
         /// The number of bits per row
         /// </summary>
-        public static readonly BitSize RowBitCount = N.value;        
+        public const uint RowBitCount = N;
 
         /// <summary>
         /// The number of bits per column
         /// </summary>
-        public static readonly BitSize ColBitCount = N.value;
+        public const uint ColBitCount = N;
 
         /// <summary>
         /// The number of bits apprehended by the matrix
         /// </summary>
-        public static readonly BitSize TotalBitCount = RowBitCount * ColBitCount;
+        public const uint TotalBitCount = N * N;
                         
         /// <summary>
         /// The (aligned) number of bytes needed for a row
         /// </summary>
-        public static readonly ByteSize RowByteCount = (ByteSize)RowBitCount;                        
+        public const uint RowByteCount = RowBitCount/8;
 
         /// <summary>
         /// The (aligned) number of bytes needed for a column
         /// </summary>
-        public static readonly ByteSize ColByteCount = (ByteSize)ColBitCount;
+        public const uint ColByteCount = ColBitCount/8;
 
         /// <summary>
         /// Defines the 64x64 identity bitmatrix
@@ -100,7 +100,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static BitMatrix64 operator ~ (BitMatrix64 A)
-            => BitMatrix.flip(A);
+            => BitMatrix.not(A);
 
         [MethodImpl(Inline)]
         public static BitMatrix64 operator - (BitMatrix64 A, BitMatrix64 B)
@@ -137,7 +137,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        BitMatrix64(in Span<N64,ulong> src)
+        BitMatrix64(Span<N64,ulong> src)
         {                        
             this.data = src;
         }
@@ -333,7 +333,7 @@ namespace Z0
         /// </summary>
         /// <param name="rhs">The operand</param>
         [MethodImpl(Inline)]
-        public void Mul(in BitMatrix64 rhs)
+        public void Mul(BitMatrix64 rhs)
         {
             BitMatrix.mul(ref this, rhs);
         }
@@ -343,7 +343,7 @@ namespace Z0
         /// </summary>
         /// <param name="rhs">The operand</param>
         [MethodImpl(Inline)]
-        public void And(in BitMatrix64 rhs)
+        public void And(BitMatrix64 rhs)
         {
             BitMatrix.and(ref this, rhs);
         }
@@ -353,7 +353,7 @@ namespace Z0
         /// </summary>
         /// <param name="rhs">The operand</param>
         [MethodImpl(Inline)]
-        public void Or(in BitMatrix64 rhs)
+        public void Or(BitMatrix64 rhs)
         {
             BitMatrix.or(ref this, rhs);
         }
@@ -363,7 +363,7 @@ namespace Z0
         /// </summary>
         /// <param name="rhs">The operand</param>
         [MethodImpl(Inline)]
-        public void XOr(in BitMatrix64 rhs)
+        public void XOr(BitMatrix64 rhs)
         {
             BitMatrix.xor(ref this, rhs);
         }
@@ -373,9 +373,9 @@ namespace Z0
         /// </summary>
         /// <param name="rhs">The operand</param>
         [MethodImpl(Inline)]
-        public void Flip()
+        public void Not()
         {
-            BitMatrix.flip(ref this);
+            BitMatrix.not(ref this);
         }
  
         [MethodImpl(Inline)] 

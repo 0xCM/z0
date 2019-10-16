@@ -24,6 +24,10 @@ namespace Z0
             => (byte)(lhs + rhs);
 
         [MethodImpl(Inline)]
+        public static UInt8 add(UInt8 lhs, UInt8 rhs)
+            => lhs + rhs;
+
+        [MethodImpl(Inline)]
         public static short add(short lhs, short rhs)
             => (short)(lhs + rhs);
 

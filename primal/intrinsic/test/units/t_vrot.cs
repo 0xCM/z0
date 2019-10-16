@@ -182,12 +182,12 @@ namespace Z0
                 var src = Random.CpuVec128<ulong>();
                 var offsets = Random.CpuVec128(closed(2ul, 30ul));
                 
-                var vL = dinx.rotl(src,offsets);
+                var vL = dinx.vrotl(src,offsets);
                 var vRL = dinx.rotr(vL,offsets);
                 Claim.eq(src,vRL);
                 
                 var vR = dinx.rotr(src,offsets);
-                var vLR = dinx.rotl(vR,offsets);
+                var vLR = dinx.vrotl(vR,offsets);
                 Claim.eq(src,vLR);
 
 
@@ -209,12 +209,12 @@ namespace Z0
                 var src = Random.CpuVec256<ulong>();
                 var offsets = Random.CpuVec256(closed(2ul, 30ul));
                 
-                var vL = dinx.rotl(src,offsets);
+                var vL = dinx.vrotl(src,offsets);
                 var vRL = dinx.rotr(vL,offsets);
                 Claim.eq(src,vRL);
                 
                 var vR = dinx.rotr(src,offsets);
-                var vLR = dinx.rotl(vR,offsets);
+                var vLR = dinx.vrotl(vR,offsets);
                 Claim.eq(src,vLR);
 
                 for(var i=0; i<src.Length(); i++)
@@ -241,12 +241,12 @@ namespace Z0
                 var src = Random.CpuVec256<byte>();
                 var offset = Random.Next(closed<byte>(2, 6));
                 
-                var vL = dinx.rotl(src,offset);                
+                var vL = dinx.vrotl(src,offset);                
                 var vRL = dinx.vrotr(vL,offset);                
                 Claim.eq(src,vRL);
                 
                 var vR = dinx.vrotr(src,offset);
-                var vLR = dinx.rotl(vR,offset);
+                var vLR = dinx.vrotl(vR,offset);
                 Claim.eq(src,vLR);
 
                 rotl_check(src, offset, vL);
@@ -272,12 +272,12 @@ namespace Z0
                 var src = Random.CpuVec256<ushort>();
                 var offset = Random.Next(closed<byte>(2, 14));
                 
-                var vL = dinx.rotl(src,offset);
+                var vL = dinx.vrotl(src,offset);
                 var vRL = dinx.vrotr(vL,offset);                
                 Claim.eq(src,vRL);
                 
                 var vR = dinx.vrotr(src,offset);
-                var vLR = dinx.rotl(vR,offset);
+                var vLR = dinx.vrotl(vR,offset);
                 Claim.eq(src,vLR);
 
                 rotl_check(src, offset, vL);
@@ -300,12 +300,12 @@ namespace Z0
                 var src = Random.CpuVec256<uint>();
                 var offset = Random.Next(closed<byte>(2, 14));
                 
-                var vL = dinx.rotl(src,offset);
+                var vL = dinx.vrotl(src,offset);
                 var vRL = dinx.vrotr(vL,offset);                
                 Claim.eq(src,vRL);
                 
                 var vR = dinx.vrotr(src,offset);
-                var vLR = dinx.rotl(vR,offset);
+                var vLR = dinx.vrotl(vR,offset);
                 Claim.eq(src,vLR);
 
                 rotl_check(src, offset, vL);
@@ -328,12 +328,12 @@ namespace Z0
                 var src = Random.CpuVec256<ulong>();
                 var offset = Random.Next(closed<byte>(2, 14));
                 
-                var vL = dinx.rotl(src,offset);
+                var vL = dinx.vrotl(src,offset);
                 var vRL = dinx.vrotr(vL,offset);                
                 Claim.eq(src,vRL);
                 
                 var vR = dinx.vrotr(src,offset);
-                var vLR = dinx.rotl(vR,offset);
+                var vLR = dinx.vrotl(vR,offset);
                 Claim.eq(src,vLR);
 
                 rotl_check(src, offset, vL);
@@ -351,12 +351,12 @@ namespace Z0
                 var src = Random.CpuVec256<uint>();
                 var offsets = Random.CpuVec256(closed(2u, 30u));
                 
-                var vL = dinx.rotl(src,offsets);
+                var vL = dinx.vrotl(src,offsets);
                 var vRL = dinx.rotr(vL,offsets);
                 Claim.eq(src,vRL);
                 
                 var vR = dinx.rotr(src,offsets);
-                var vLR = dinx.rotl(vR,offsets);
+                var vLR = dinx.vrotl(vR,offsets);
                 Claim.eq(src,vLR);
 
                 for(var i=0; i<src.Length(); i++)
@@ -372,7 +372,7 @@ namespace Z0
 
         void TraceRot(Vec256<uint> src, Vec256<uint> offsets)
         {
-            var vL = dinx.rotl(src, offsets);
+            var vL = dinx.vrotl(src, offsets);
             var vX = dinx.rotr(vL, offsets);
 
             Trace("src", src.FormatHex(), 20);

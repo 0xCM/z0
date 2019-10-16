@@ -16,6 +16,34 @@ namespace Z0
     public static partial class BitMatrixOps
     {   
         /// <summary>
+        /// Converts the matrix to a bitvector
+        /// </summary>
+        [MethodImpl(Inline)]
+        public static BitVector64 ToBitvector(this BitMatrix8 A)
+            => A.Data.AsUInt64()[0];
+
+        /// <summary>
+        /// Converts the matrix to a bitvector
+        /// </summary>
+        [MethodImpl(Inline)]
+        public static BitVector<N256,ushort> ToBitvector(this BitMatrix16 A)
+            => BitVector.Load(A.Data, n256);
+
+        /// <summary>
+        /// Converts the matrix to a bitvector
+        /// </summary>
+        [MethodImpl(Inline)]
+        public static BitVector<N1024,uint> ToBitvector(this BitMatrix32 A)
+            => BitVector.Load(A.Data, n1024);
+
+        /// <summary>
+        /// Converts the matrix to a bitvector
+        /// </summary>
+        [MethodImpl(Inline)]
+        public static BitVector<N4096,ulong> ToBitvector(this BitMatrix64 A)
+            => BitVector.Load(A.Data, n4096);
+
+        /// <summary>
         /// Creates the matrix determined by a permutation
         /// </summary>
         /// <param name="perm">The source permutation</param>

@@ -59,6 +59,17 @@ namespace Z0
                 => BitVector<N,T>.Alloc(fill);
 
         /// <summary>
+        /// Allocates a 1-cell generic bitvector, optionally initialized to a specified value
+        /// </summary>
+        /// <param name="init">The initial value</param>
+        /// <typeparam name="T">The component type</typeparam>
+        [MethodImpl(Inline)]
+        public static BitVector<T> Alloc<T>(T? init = null)
+            where T : unmanaged
+                => BitVector<T>.FromCell(init ?? default);
+            
+
+        /// <summary>
         /// Allocates a generic bitvector
         /// </summary>
         /// <param name="len">The length</param>

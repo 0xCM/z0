@@ -80,8 +80,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static Vec256<ulong> vnot(in Vec256<ulong> src)
-            => Xor(src.ymm, CompareEqual(src.ymm, src.ymm));
-    
+            => Xor(src.ymm, CompareEqual(src.ymm, src.ymm));    
     
         [MethodImpl(Inline)]
         static Vector128<sbyte> vnot_d(Vector128<sbyte> src)

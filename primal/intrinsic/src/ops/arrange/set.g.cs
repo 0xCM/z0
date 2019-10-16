@@ -23,6 +23,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vec256<T> vset<T>(in Vec128<T> lo, in Vec128<T> hi)
             where T : unmanaged
-                => insert(hi, insert(lo, default,0), 1);        
+                => vinsert(hi, vinsert(lo, default,0), 1);        
     }
 }

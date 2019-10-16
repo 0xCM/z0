@@ -13,25 +13,5 @@ namespace Z0
 
     partial class BitMatrix
     {
-        /// <summary>
-        /// Converts the matrix to a bitvector
-        /// </summary>
-        [MethodImpl(Inline)]
-        public static BitVector<N256,ushort> bitvector(in BitMatrix16 A)
-            => BitVector.Load(A.Data, n256);
-
-        /// <summary>
-        /// Converts the matrix to a bitvector
-        /// </summary>
-        [MethodImpl(Inline)]
-        public static BitVector<N1024,uint> bitvector(in BitMatrix32 A)
-            => BitVector.Load(A.Data, n1024);
-
-        /// <summary>
-        /// Converts the matrix to a bitvector
-        /// </summary>
-        [MethodImpl(Inline)]
-        public static BitVector<N4096,ulong> bitvector(in BitMatrix64 A)
-            => BitVector.Load(A.Data, n4096);
     }
 }

@@ -23,25 +23,25 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
-        public static bool nonz<T>(in Vec128<T> src)
+        public static bool vnonz<T>(in Vec128<T> src)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return dinx.nonz(in int8(in src));
+                return dinx.vnonz(in int8(in src));
             else if(typeof(T) == typeof(byte))
-                return dinx.nonz(in uint8(in src));
+                return dinx.vnonz(in uint8(in src));
             else if(typeof(T) == typeof(short))
-                return dinx.nonz(in int16(in src));
+                return dinx.vnonz(in int16(in src));
             else if(typeof(T) == typeof(ushort))
-                return dinx.nonz(in uint16(in src));
+                return dinx.vnonz(in uint16(in src));
             else if(typeof(T) == typeof(int))
-                return dinx.nonz(in int32(in src));
+                return dinx.vnonz(in int32(in src));
             else if(typeof(T) == typeof(uint))
-                return dinx.nonzero(in uint32(in src));
+                return dinx.vnonz(in uint32(in src));
             else if(typeof(T) == typeof(long))
-                return dinx.nonz(in int64(in src));
+                return dinx.vnonz(in int64(in src));
             else if(typeof(T) == typeof(ulong))
-                return dinx.nonz(in uint64(in src));
+                return dinx.vnonz(in uint64(in src));
             else if(typeof(T) == typeof(float))
                 return dfp.nonz(in float32(in src));
             else if(typeof(T) == typeof(double))
@@ -61,21 +61,21 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return dinx.nonz(in int8(in src));
+                return dinx.vnonz(in int8(in src));
             else if(typeof(T) == typeof(byte))
-                return dinx.nonz(in uint8(in src));
+                return dinx.vnonz(in uint8(in src));
             else if(typeof(T) == typeof(short))
-                return dinx.nonz(in int16(in src));
+                return dinx.vnonz(in int16(in src));
             else if(typeof(T) == typeof(ushort))
-                return dinx.nonz(in uint16(in src));
+                return dinx.vnonz(in uint16(in src));
             else if(typeof(T) == typeof(int))
-                return dinx.nonz(in int32(in src));
+                return dinx.vnonz(in int32(in src));
             else if(typeof(T) == typeof(uint))
-                return dinx.nonz(in uint32(in src));
+                return dinx.vnonz(in uint32(in src));
             else if(typeof(T) == typeof(long))
-                return dinx.nonz(in int64(in src));
+                return dinx.vnonz(in int64(in src));
             else if(typeof(T) == typeof(ulong))
-                return dinx.nonz(in uint64(in src));
+                return dinx.vnonz(in uint64(in src));
             else if(typeof(T) == typeof(float))
                 return dfp.nonz(in float32(in src));
             else if(typeof(T) == typeof(double))

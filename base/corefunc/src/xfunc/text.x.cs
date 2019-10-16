@@ -267,7 +267,7 @@ namespace Z0
         /// <typeparam name="T">The item type</typeparam>
         [MethodImpl(Inline)]
         public static string Parenthetical<T>(this IEnumerable<T> src, string sep = ", ")
-            => paren(string.Join(sep, src.Select(x => x.ToString())).TrimEnd());
+            => parenthetical(string.Join(sep, src.Select(x => x.ToString())).TrimEnd());
 
         /// <summary>
         /// Formats a sequence of values between brackets 

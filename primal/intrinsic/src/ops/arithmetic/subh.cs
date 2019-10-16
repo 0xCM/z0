@@ -23,7 +23,7 @@ namespace Z0
         /// <param name="lhs"></param>
         /// <param name="rhs"></param>
         [MethodImpl(Inline)]
-        public static Vec128<short> hsub(in Vec128<short> lhs, in Vec128<short> rhs)
+        public static Vec128<short> vhsub(in Vec128<short> lhs, in Vec128<short> rhs)
             => HorizontalSubtract(lhs.xmm, rhs.xmm);
 
         /// <summary>
@@ -32,7 +32,7 @@ namespace Z0
         /// <param name="lhs"></param>
         /// <param name="rhs"></param>
         [MethodImpl(Inline)]
-        public static Vec128<int> hsub(in Vec128<int> lhs, in Vec128<int> rhs)
+        public static Vec128<int> vhsub(in Vec128<int> lhs, in Vec128<int> rhs)
             => HorizontalSubtract(lhs.xmm, rhs.xmm);
 
         /// <summary>
@@ -42,11 +42,11 @@ namespace Z0
         /// <param name="rhs"></param>
         /// <returns></returns>
         [MethodImpl(Inline)]
-        public static Vec256<short> subh(in Vec256<short> lhs, in Vec256<short> rhs)
+        public static Vec256<short> vhsub(in Vec256<short> lhs, in Vec256<short> rhs)
             => HorizontalSubtract(lhs.ymm, rhs.ymm);
 
         [MethodImpl(Inline)]
-        public static Vec256<int> hsub(in Vec256<int> lhs, in Vec256<int> rhs)
+        public static Vec256<int> vhsub(in Vec256<int> lhs, in Vec256<int> rhs)
             => HorizontalSubtract(lhs.ymm, rhs.ymm);
     }
 }

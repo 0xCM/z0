@@ -330,7 +330,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ref Vec256<long> vconvert(in Vec128<byte> src, out Vec256<long> dst)
         {
-            dst =ConvertToVector256Int64(src);
+            dst = ConvertToVector256Int64(src);
             return ref dst;
         }
 

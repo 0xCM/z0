@@ -22,6 +22,8 @@
     <ProjectReference Include="$(TopDir)linear/ops/z0.linops.csproj" />
     <ProjectReference Include="$(TopDir)mkl/src/z0.mkl.csproj" />
     <ProjectReference Include="$(TopDir)libm/src/z0.libm.csproj" />
+    <ProjectReference Include="$(TopDir)logix/src/z0.logix.csproj" />
+
     <ProjectReference Include="$(TopDir)reveal/app/z0.reveal.app.csproj" />
     <ProjectReference Include="$(TopDir)reveal/lib/z0.reveal.lib.csproj" />
     
@@ -37,6 +39,8 @@
     <ProjectReference Include="$(TopDir)mkl/test/z0.mkl.test.csproj" />
     <ProjectReference Include="$(TopDir)libm/test/z0.libm.test.csproj" />
     <ProjectReference Include="$(TopDir)linear/test/z0.linops.test.csproj" />
+    <ProjectReference Include="$(TopDir)logix/test/z0.logix.test.csproj" />
+
 
     <ProjectReference Include="$(TopDir)testing/z0.testing.csproj" />
 

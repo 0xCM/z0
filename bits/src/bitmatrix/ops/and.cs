@@ -17,6 +17,17 @@ namespace Z0
 
     partial class BitMatrix
     {
+
+        public static BitMatrix<T> and<T>(BitMatrix<T> A, BitMatrix<T> B)
+            where T : unmanaged
+        {
+            var rc = math.min(A.RowCount, B.RowCount);
+            var C = BitMatrix.Alloc<T>(rc);
+            for(var i=0; i<rc; i++)
+                C[i] = bitvector.and(A[i],B[i]);
+            return C;
+        }
+
         [MethodImpl(Inline)]
         public static ref BitMatrix4 and(ref BitMatrix4 A, in BitMatrix4 B)
         {

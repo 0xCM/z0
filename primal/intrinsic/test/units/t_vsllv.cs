@@ -21,9 +21,9 @@ namespace Z0.Test
             Claim.yea(ginx.nonz(Vec256.FromParts(1ul, 0ul, 0ul, 0ul)));
             Claim.nea(ginx.nonz(Vec256.FromParts(0ul, 0ul, 0ul, 0ul)));
 
-            Claim.yea(ginx.nonz(Vec128.FromParts(1u, 2u, 3u, 4u)));
-            Claim.yea(ginx.nonz(Vec128.FromParts(1u, 0u, 0u, 0u)));
-            Claim.nea(ginx.nonz(Vec128.FromParts(0u, 0u, 0u, 0u)));
+            Claim.yea(ginx.vnonz(Vec128.FromParts(1u, 2u, 3u, 4u)));
+            Claim.yea(ginx.vnonz(Vec128.FromParts(1u, 0u, 0u, 0u)));
+            Claim.nea(ginx.vnonz(Vec128.FromParts(0u, 0u, 0u, 0u)));
         }
 
         public void vsllv_256x32u()

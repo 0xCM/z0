@@ -86,11 +86,11 @@ namespace Z0
             => Or(ref lhs, rhs);
 
         /// <summary>
-        /// Negates the operand via complemnt
+        /// Computes the bitwise complement of the source matrix
         /// </summary>
         /// <param name="src">The source matrix</param>
         [MethodImpl(Inline)]
-        public static BitMatrix<N,T> operator -(BitMatrix<N,T> src)
+        public static BitMatrix<N,T> operator ~(BitMatrix<N,T> src)
             => Flip(ref src);
 
         [MethodImpl(Inline)]
@@ -171,27 +171,8 @@ namespace Z0
             => GridLayout.Row(row)[0].Segment;
                 
         [MethodImpl(Inline)]
-        public Span<T> RowData(int row)
+        public Span<T> RowCells(int row)
             => data.Slice(RowOffset(row), GridLayout.RowCellCount);
-
-        [MethodImpl(Inline)]
-        public ref Span<T> RowData(int row, out Span<T> dst)
-        {
-            dst = data.Slice(RowOffset(row), GridLayout.RowCellCount);
-            return ref dst;
-        }
-
-        [MethodImpl(Inline)]
-        void ReplaceRow(int row, Span<T> data)
-            => data.CopyTo(this.data.Slice(RowOffset(row), GridLayout.RowCellCount));     
-
-        /// <summary>
-        /// Replaces an index-identied column of data with the content of a row vector
-        /// </summary>
-        /// <param name="col">The column index</param>
-        [MethodImpl(Inline)]
-        public readonly void RowVector(int row, BitVector<N,T> src)
-            => src.Data.CopyTo(Data.Slice(RowOffset(row), GridLayout.RowCellCount));     
 
         /// <summary>
         /// Retrives an identified row of bits
@@ -199,7 +180,15 @@ namespace Z0
         /// <param name="index">The 0-based row index</param>
         [MethodImpl(Inline)]
         public BitVector<N,T> RowVector(int index)                    
-            => BitVector<N,T>.FromCells(RowData(index));                
+            => BitVector<N,T>.FromCells(RowCells(index));                
+
+        /// <summary>
+        /// Replaces an index-identied column of data with the content of a row vector
+        /// </summary>
+        /// <param name="col">The column index</param>
+        [MethodImpl(Inline)]
+        public readonly void ReplaceRow(int row, BitVector<N,T> src)
+            => src.Data.CopyTo(Data.Slice(RowOffset(row), GridLayout.RowCellCount));     
 
         public readonly BitVector<N,T> Diagonal()
         {
@@ -218,7 +207,7 @@ namespace Z0
             get => RowVector(row);
             
             [MethodImpl(Inline)]
-            set => RowVector(row,value);
+            set => ReplaceRow(row,value);
         }
 
         /// <summary>
@@ -329,7 +318,6 @@ namespace Z0
             return ref dst;
         }
 
-
         static ref BitMatrix<N,T> XOr(ref BitMatrix<N,T> lhs, in BitMatrix<N,T> rhs)        
         {
             mathspan.xor(lhs.Data, rhs.Data, lhs.Data);
@@ -344,7 +332,7 @@ namespace Z0
 
         static ref BitMatrix<N,T> Flip(ref BitMatrix<N,T> src)        
         {
-            mathspan.flip(src.Data);
+            mathspan.not(src.Data);
             return ref src;
         }
         
