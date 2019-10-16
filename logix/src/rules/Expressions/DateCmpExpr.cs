@@ -18,7 +18,7 @@ namespace Z0
     /// </summary>
     public readonly struct DateCmpExpr
     {        
-        public DateCmpExpr(TimeMarker reference, VarExpr<Date> param1, VarExpr<Date>? param2 = null)
+        public DateCmpExpr(TimeMarker reference, VarRuleExpr<Date> param1, VarRuleExpr<Date>? param2 = null)
         {
             this.Kind = reference;
             this.Param1 = param1;
@@ -30,9 +30,9 @@ namespace Z0
         /// </summary>
         public readonly TimeMarker Kind;
 
-        public readonly VarExpr<Date> Param1;
+        public readonly VarRuleExpr<Date> Param1;
 
-        public readonly VarExpr<Date>? Param2;
+        public readonly VarRuleExpr<Date>? Param2;
 
     }
 

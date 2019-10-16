@@ -28,7 +28,7 @@ namespace Z0
 
         public readonly T Max;
 
-        public ExprArity Arity => ExprArity.Binary;     
+        public ArityKind Arity => ArityKind.Binary;     
     }
 
 }

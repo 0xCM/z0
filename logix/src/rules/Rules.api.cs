@@ -22,8 +22,8 @@ namespace Z0
         /// </summary>
         /// <param name="value">The literal value</param>
         /// <typeparam name="T">The literal type</typeparam>
-        public static LiteralExpr<T> Literal<T>(T value)
-            => new LiteralExpr<T>(value);
+        public static LiteralRuleExpr<T> Literal<T>(T value)
+            => new LiteralRuleExpr<T>(value);
         
         /// <summary>
         /// Defines a variable expression
@@ -31,9 +31,9 @@ namespace Z0
         /// <param name="name">The variable name</param>
         /// <param name="value">The initial value, if any</param>
         /// <typeparam name="T">The variable type</typeparam>
-        public static VarExpr<T> Var<T>(string name, T? value = null)
+        public static VarRuleExpr<T> Var<T>(string name, T? value = null)
             where T : unmanaged
-                => new VarExpr<T>(name, value);
+                => new VarRuleExpr<T>(name, value);
         
         public static MembershipExpr<T> IsMember<T>(HashSet<T> matches)
             => new MembershipExpr<T>(MembershipTest.IsMember, matches);

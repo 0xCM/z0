@@ -19,7 +19,7 @@ namespace Z0
         where T : unmanaged
     {
         [MethodImpl(Inline)]
-        public VarValueExpr(VarExpr<T> variable, T value)
+        public VarValueExpr(VarRuleExpr<T> variable, T value)
         {
             this.Variable = variable;
             this.Value = value;
@@ -28,7 +28,7 @@ namespace Z0
         /// <summary>
         /// The variable to which a value is assigned
         /// </summary>
-        public VarExpr<T> Variable {get;}
+        public VarRuleExpr<T> Variable {get;}
 
         /// <summary>
         /// The assigned value

@@ -586,6 +586,24 @@ namespace Z0
             => BitMask.set(ref data, pos, value);
 
         /// <summary>
+        /// Gets the value of an index-identified bit
+        /// </summary>
+        /// <param name="pos">The bit index</param>
+        [MethodImpl(Inline)]
+        public bit GetBit(BitPos pos)
+            => this[pos] == true;
+
+        /// <summary>
+        /// Sets the state of an index-identified bit
+        /// </summary>
+        /// <param name="pos">The bit index</param>
+        /// <param name="value">The bit value</param>
+        [MethodImpl(Inline)]
+        public void SetBit(BitPos pos, bit value)
+            => this[pos] = value == true;
+
+
+        /// <summary>
         /// Determines whether a bit is enabled
         /// </summary>
         /// <param name="pos">The bit position</param>

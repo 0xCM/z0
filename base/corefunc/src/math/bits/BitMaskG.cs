@@ -24,7 +24,7 @@ namespace Z0
         /// <param name="value">The value to be applied</param>
         /// <typeparam name="T">The source element type</typeparam>
         [MethodImpl(Inline)]
-        public static ref T set<T>(ref T src, byte pos, in Bit value)            
+        public static ref T set<T>(ref T src, byte pos, Bit value)            
             where T : unmanaged
         {
             if(value)

@@ -8,6 +8,7 @@ namespace Z0
     using System.Linq;
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
+    using System.Runtime.Intrinsics;
     
     using static zfunc;
 
@@ -28,15 +29,15 @@ namespace Z0
 
         public void ternary_table()
         {
-            BitVector8 id = (byte)TernaryLogic.X09;
-            var tt = table(TernaryLogic.X09);
+            BitVector8 id = (byte)TernaryLogicKind.X09;
+            var tt = table(TernaryLogicKind.X09);
             Trace($"Table {id.Format()}");
             Trace(tt.Format());
 
         }
 
-        BitMatrix<N8,N4, byte> table(TernaryLogic op)
-            => BitLogic.table(op);
+        BitMatrix<N8,N4, byte> table(TernaryLogicKind op)
+            => BooleanLogic.table(op);
 
 
         void truth_tables_all()
@@ -59,50 +60,50 @@ namespace Z0
         {
             BitMatrix<N4,N3,byte> table = default;
             BitVector<N4,byte> result = default;
-            var op = BinaryLogic.And;
-            table = BitLogic.table(op);
+            var op = BinaryLogicKind.And;
+            table = BooleanLogic.table(op);
             result = table.GetCol(2);
             Trace($"{op.ToString()} {result.Format()}");
             Trace(table.Format());
 
-            op = BinaryLogic.Nand;
-            table = BitLogic.table(op);
-            result = table.GetCol(2);
-
-            Trace($"{op.ToString()} {result.Format()}");
-            Trace(table.Format());
-
-            op = BinaryLogic.Or;
-            table = BitLogic.table(op);
+            op = BinaryLogicKind.Nand;
+            table = BooleanLogic.table(op);
             result = table.GetCol(2);
 
             Trace($"{op.ToString()} {result.Format()}");
             Trace(table.Format());
 
-            op = BinaryLogic.Nor;
-            table = BitLogic.table(op);
+            op = BinaryLogicKind.Or;
+            table = BooleanLogic.table(op);
+            result = table.GetCol(2);
+
+            Trace($"{op.ToString()} {result.Format()}");
+            Trace(table.Format());
+
+            op = BinaryLogicKind.Nor;
+            table = BooleanLogic.table(op);
             result = table.GetCol(2);
 
             Trace($"{op.ToString()} {result.Format()}");
             Trace(table.Format());
 
 
-            op = BinaryLogic.XOr;
-            table = BitLogic.table(op);
+            op = BinaryLogicKind.XOr;
+            table = BooleanLogic.table(op);
             result = table.GetCol(2);
 
             Trace($"{op.ToString()} {result.Format()}");
             Trace(table.Format());
 
-            op = BinaryLogic.XNor;
-            table = BitLogic.table(op);
+            op = BinaryLogicKind.Xnor;
+            table = BooleanLogic.table(op);
             result = table.GetCol(2);
 
             Trace($"{op.ToString()} {result.Format()}");
             Trace(table.Format());
 
-            op = BinaryLogic.AndNot;
-            table = BitLogic.table(op);
+            op = BinaryLogicKind.AndNot;
+            table = BooleanLogic.table(op);
             result = table.GetCol(2);
 
             Trace($"{op.ToString()} {result.Format()}");
@@ -110,30 +111,30 @@ namespace Z0
 
         }
         public void check_and() 
-            => check_binary_ops(BinaryLogic.And);
+            => check_binary_ops(BinaryLogicKind.And);
 
         public void check_nand()        
-            => check_binary_ops(BinaryLogic.Nand);
+            => check_binary_ops(BinaryLogicKind.Nand);
 
         public void check_or()        
-            => check_binary_ops(BinaryLogic.Or);
+            => check_binary_ops(BinaryLogicKind.Or);
 
         public void check_nor()        
-            => check_binary_ops(BinaryLogic.Nor);
+            => check_binary_ops(BinaryLogicKind.Nor);
 
         public void check_xor()        
-            => check_binary_ops(BinaryLogic.XOr);
+            => check_binary_ops(BinaryLogicKind.XOr);
 
         public void check_xnor()        
-            => check_binary_ops(BinaryLogic.XNor);
+            => check_binary_ops(BinaryLogicKind.Xnor);
 
 
         public void check_not()  
         {      
-            check_unary_ops<BitVector8,byte>(UnaryLogic.Not);
-            check_unary_ops<BitVector16,ushort>(UnaryLogic.Not);
-            check_unary_ops<BitVector32,uint>(UnaryLogic.Not);
-            check_unary_ops<BitVector64,ulong>(UnaryLogic.Not);
+            check_unary_ops<BitVector8,byte>(UnaryLogicKind.Not);
+            check_unary_ops<BitVector16,ushort>(UnaryLogicKind.Not);
+            check_unary_ops<BitVector32,uint>(UnaryLogicKind.Not);
+            check_unary_ops<BitVector64,ulong>(UnaryLogicKind.Not);
         }
 
 
@@ -146,58 +147,58 @@ namespace Z0
         }
 
         public void check_f01()
-            => check_ternary_ops(TernaryLogic.X01);
+            => check_ternary_ops(TernaryLogicKind.X01);
 
         public void check_f02()
-            => check_ternary_ops(TernaryLogic.X02);
+            => check_ternary_ops(TernaryLogicKind.X02);
 
         public void check_f03()
-            => check_ternary_ops(TernaryLogic.X03);
+            => check_ternary_ops(TernaryLogicKind.X03);
 
         public void check_f04()
-            => check_ternary_ops(TernaryLogic.X04);
+            => check_ternary_ops(TernaryLogicKind.X04);
 
         public void check_f05()
-            => check_ternary_ops(TernaryLogic.X05);
+            => check_ternary_ops(TernaryLogicKind.X05);
 
         public void check_f06()
-            => check_ternary_ops(TernaryLogic.X06);
+            => check_ternary_ops(TernaryLogicKind.X06);
 
         public void check_f07()
-            => check_ternary_ops(TernaryLogic.X07);
+            => check_ternary_ops(TernaryLogicKind.X07);
 
         public void check_f08()
-            => check_ternary_ops(TernaryLogic.X08);
+            => check_ternary_ops(TernaryLogicKind.X08);
 
         public void check_f09()
-            => check_ternary_ops(TernaryLogic.X09);
+            => check_ternary_ops(TernaryLogicKind.X09);
 
         public void check_f0a()
-            => check_ternary_ops(TernaryLogic.X0A);
+            => check_ternary_ops(TernaryLogicKind.X0A);
 
         public void check_f0b()
-            => check_ternary_ops(TernaryLogic.X0B);
+            => check_ternary_ops(TernaryLogicKind.X0B);
 
         public void check_f0c()
-            => check_ternary_ops(TernaryLogic.X0C);
+            => check_ternary_ops(TernaryLogicKind.X0C);
 
         public void check_f0d()
-            => check_ternary_ops(TernaryLogic.X0D);
+            => check_ternary_ops(TernaryLogicKind.X0D);
 
         public void check_f0e()
-            => check_ternary_ops(TernaryLogic.X0E);
+            => check_ternary_ops(TernaryLogicKind.X0E);
 
         public void check_f0f()
-            => check_ternary_ops(TernaryLogic.X0F);
+            => check_ternary_ops(TernaryLogicKind.X0F);
 
         public void check_f10()
-            => check_ternary_ops(TernaryLogic.X10);
+            => check_ternary_ops(TernaryLogicKind.X10);
 
         public void check_f11()
-            => check_ternary_ops(TernaryLogic.X11);
+            => check_ternary_ops(TernaryLogicKind.X11);
            
 
-        void check_ternary_ops(TernaryLogic op)
+        void check_ternary_ops(TernaryLogicKind op)
         {
             check_ternary_ops<BitVector8,byte>(op);
             check_ternary_ops<BitVector16,ushort>(op);
@@ -205,7 +206,7 @@ namespace Z0
             check_ternary_ops<BitVector64,ulong>(op);
         }
 
-        void check_binary_ops(BinaryLogic op)
+        void check_binary_ops(BinaryLogicKind op)
         {
             check_binary_ops<BitVector8,byte>(op);
             check_binary_ops<BitVector16,ushort>(op);
@@ -213,7 +214,7 @@ namespace Z0
             check_binary_ops<BitVector64,ulong>(op);
         }
 
-        void check_op_identity<T>(TernaryLogic id)
+        void check_op_identity<T>(TernaryLogicKind id)
             where T: unmanaged
         {
             var a = convert<T>(0b1111_0000);
@@ -226,14 +227,13 @@ namespace Z0
             Claim.eq(expect.FormatHex(), actual.FormatHex());
         }
 
-        void check_unary_ops<V,T>(UnaryLogic id)
+        void check_unary_ops<V,T>(UnaryLogicKind id)
             where V : unmanaged, IBitVector<V>
             where T : unmanaged
         {
-            var BL = BitLogic.unaryop(id);
+            var BL = BooleanLogic.unaryop(id);
             var SC = ScalarLogic.unaryop<T>(id);
-            var BV = BvLogic.unaryop<V>(id);
-            var BO = BoolLogic.unaryop(id);
+            var BV = VectorLogic.unaryop<V>(id);
             
             for(var sample = 0; sample< SampleSize; sample++)
             {
@@ -251,14 +251,13 @@ namespace Z0
             }
         }
 
-        void check_binary_ops<V,T>(BinaryLogic id)
+        void check_binary_ops<V,T>(BinaryLogicKind id)
             where V : unmanaged, IBitVector<V>
             where T : unmanaged
         {
-            var BL = BitLogic.binop(id);
+            var BL = BooleanLogic.binop(id);
             var SC = ScalarLogic.binop<T>(id);
-            var BV = BvLogic.binop<V>(id);
-            var BO = BoolLogic.binop(id);
+            var BV = VectorLogic.binop<V>(id);
             
             for(var sample = 0; sample< SampleSize; sample++)
             {
@@ -277,14 +276,13 @@ namespace Z0
             }
         }
 
-        void check_ternary_ops<V,T>(TernaryLogic id)
+        void check_ternary_ops<V,T>(TernaryLogicKind id)
             where V : unmanaged, IBitVector<V>
             where T : unmanaged
         {
-            var BL = BitLogic.ternop(id);
-            var BO = BoolLogic.ternop(id);
+            var BL = BooleanLogic.ternop(id);
             var SC = ScalarLogic.ternop<T>(id);
-            var BV = BvLogic.ternop<V>(id);
+            var BV = VectorLogic.ternop<V>(id);
             var V128 = CpuLogic128.ternop<T>(id);
             var V256 = CpuLogic256.ternop<T>(id);
             check_op_identity<T>(id);
@@ -302,29 +300,25 @@ namespace Z0
                 for(var i=0; i< z0.Length; i++)
                     z0[i] = BL(a[i],b[i],c[i]);
 
-                var zb = gbv.alloc<V>();
-                for(var i=0; i< z0.Length; i++)
-                    zb[i] = BO(a[i],b[i],c[i]);
 
                 var z2 = BV(a,b,c);
                 var z3 = SC(sa, sb, sc);
                                 
                 Claim.eq(z3, z0.ToScalar<T>());                                
-                Claim.eq(z3, zb.ToScalar<T>());                                
                 Claim.eq(z0, z2);
 
                 var v1 = ginx.vbroadcast256(sa);
                 var v2 = ginx.vbroadcast256(sb);
                 var v3 = ginx.vbroadcast256(sc);
-                var v4 = V256(v1,v2,v3);
-                Claim.eq(v4[0],z3);
+                var v4 = Vector256.GetElement(V256(v1,v2,v3), 0);
+                Claim.eq(v4,z3);
 
 
                 var u1 = ginx.vlo(v1);
                 var u2 = ginx.vlo(v2);
                 var u3 = ginx.vlo(v3);
-                var u4 = V128(u1,u2,u3);
-                Claim.eq(u4[0], z3);
+                var u4 = Vector128.GetElement(V128(u1,u2,u3),0);
+                Claim.eq(u4, z3);
             }
         }
 
@@ -340,9 +334,9 @@ namespace Z0
                 
                 var z0 = gbv.alloc<V>();
                 for(var i=0; i< z0.Length; i++)
-                    z0[i] = BitLogic.select(a[i],b[i],c[i]);
+                    z0[i] = bit.select(a[i],b[i],c[i]);
                 
-                var z2 = BvLogic.select(a,b,c);
+                var z2 = VectorLogic.select(a,b,c);
                 var z3 = ScalarLogic.select(a.ToScalar<T>(), b.ToScalar<T>(), c.ToScalar<T>());
                 Claim.eq(z3, z0.ToScalar<T>());                                
                 Claim.eq(z0, z2);

@@ -13,32 +13,32 @@ namespace Z0
     /// <summary>
     /// Represents a logical operator over one operand
     /// </summary>
-    public sealed class UnaryLogicExpr : IUnaryLogicExpr
+    public sealed class UnaryLogicExpr : IUnaryLogicOp
     {
         [MethodImpl(Inline)]
-        public UnaryLogicExpr(UnaryLogic op, ILogicExpr operand)
+        public UnaryLogicExpr(UnaryLogicKind op, ILogicExpr operand)
         {
             this.Operator = op;
-            this.Subject = operand;
+            this.Operand = operand;
         }
         
         /// <summary>
         /// The operator
         /// </summary>
-        public UnaryLogic Operator {get;}
+        public UnaryLogicKind Operator {get;}
 
         /// <summary>
         /// The number of parameters accepted by the expression
         /// </summary>
-        public ExprArity Arity => ExprArity.Unary;
+        public ArityKind Arity => ArityKind.Unary;
 
         /// <summary>
         /// The left operand
         /// </summary>
-        public ILogicExpr Subject {get;}
+        public ILogicExpr Operand {get;}
 
         public string Format()
-            => $"{Operator} {Subject}";
+            => $"{Operator} {Operand}";
 
         public override string ToString()
             => Format();

@@ -178,6 +178,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vec256<ulong> vand(in Vec256<ulong> x, in Vec256<ulong> y)
             => And(x.ymm, y.ymm);
-
      }
 }

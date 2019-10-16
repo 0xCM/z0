@@ -7,10 +7,10 @@ namespace Z0
     using System;
 
     /// <summary>
-    /// Specifies ternary logic operator identifiers consistent with AVX-512 encoding
+    /// Classifies logical operators that accept no input
     /// </summary>
     [Flags]
-    public enum NullaryLogic : byte
+    public enum NullaryLogicKind : byte
     {
         
         /// <summary>

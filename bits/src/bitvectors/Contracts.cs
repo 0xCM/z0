@@ -81,6 +81,10 @@ namespace Z0
         /// <param name="pos">The bit position</param>
         Bit Get(BitPos pos);
 
+        bit GetBit(BitPos pos);
+
+        void SetBit(BitPos pos, bit value);
+
         /// <summary>
         /// Sets a bit value
         /// </summary>
@@ -124,6 +128,12 @@ namespace Z0
         /// </summary>
         /// <param name="index">The segment index</param>
         ref byte Byte(int index);
+
+    }
+
+    public interface ILogicVector<T> : IBitVector
+        where T : unmanaged
+    {
 
     }
 

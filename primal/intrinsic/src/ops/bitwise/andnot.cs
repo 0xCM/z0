@@ -98,25 +98,6 @@ namespace Z0
         public static Vec128<ulong> vandnot(in Vec128<ulong> x, in Vec128<ulong> y)
             => AndNot(y.xmm, x.xmm);
  
-        /// <summary>
-        /// __m128 _mm_andnot_ps (__m128 a, __m128 b) ANDNPS xmm, xmm/m128
-        /// Effects the composite operation x & (~y) for the left and right operands
-        /// </summary>
-        /// <param name="x">The left operand</param>
-        /// <param name="y">The right operand</param>
-        [MethodImpl(Inline)]
-        public static Vec128<float> vandnot(in Vec128<float> x, in Vec128<float> y)
-            => AndNot(y.xmm, x.xmm);
-
-        /// <summary>
-        /// _mm_andnot_pd:
-        /// Effects the composite operation x & (~y) for the left and right operands
-        /// </summary>
-        /// <param name="x">The left operand</param>
-        /// <param name="y">The right operand</param>
-        [MethodImpl(Inline)]
-        public static Vec128<double> vandnot(in Vec128<double> x, in Vec128<double> y)
-            => AndNot(y.xmm, x.xmm);        
     
         /// <summary>
         /// __m256i _mm256_andnot_si256 (__m256i a, __m256i b) VPANDN ymm, ymm, ymm/m256
@@ -198,24 +179,5 @@ namespace Z0
         public static Vec256<ulong> vandnot(in Vec256<ulong> x, in Vec256<ulong> y)
             => AndNot(y.ymm, x.ymm);
 
-        /// <summary>
-        /// __m256 _mm256_andnot_ps (__m256 a, __m256 b) VANDNPS ymm, ymm, ymm/m256
-        /// Effects the composite operation x & (~y) for the left and right operands
-        /// </summary>
-        /// <param name="x">The left operand</param>
-        /// <param name="y">The right operand</param>
-        [MethodImpl(Inline)]
-        public static Vec256<float> vandnot(in Vec256<float> x, in Vec256<float> y)
-            => AndNot(y.ymm, x.ymm);
-
-        /// <summary>
-        /// __m256d _mm256_andnot_pd (__m256d a, __m256d b) VANDNPD ymm, ymm, ymm/m256
-        /// Effects the composite operation x & (~y) for the left and right operands
-        /// </summary>
-        /// <param name="x">The left operand</param>
-        /// <param name="y">The right operand</param>
-        [MethodImpl(Inline)]
-        public static Vec256<double> vandnot(in Vec256<double> x, in Vec256<double> y)
-            => AndNot(y.ymm, x.ymm);
     }
 }

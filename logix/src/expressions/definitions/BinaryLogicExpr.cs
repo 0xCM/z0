@@ -13,10 +13,10 @@ namespace Z0
     /// <summary>
     /// Represents a logical operator over two operands
     /// </summary>
-    public sealed class BinaryLogicExpr : IBinaryLogicExpr
+    public sealed class BinaryLogicExpr : IBinaryLogicOp
     {
         [MethodImpl(Inline)]
-        public BinaryLogicExpr(BinaryLogic op, ILogicExpr left, ILogicExpr right)
+        public BinaryLogicExpr(BinaryLogicKind op, ILogicExpr left, ILogicExpr right)
         {
             this.Operator = op;
             this.Left = left;
@@ -26,12 +26,12 @@ namespace Z0
         /// <summary>
         /// The operator
         /// </summary>
-        public BinaryLogic Operator {get;}
+        public BinaryLogicKind Operator {get;}
 
         /// <summary>
         /// Specifies the number of parameters accepted by the expression
         /// </summary>
-        public ExprArity Arity => ExprArity.Binary;
+        public ArityKind Arity => ArityKind.Binary;
 
         /// <summary>
         /// The left operand

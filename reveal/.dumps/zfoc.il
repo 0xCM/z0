@@ -1,4 +1,4 @@
-// 2019-10-15 01:38:28:642
+// 2019-10-16 02:15:35:349
 float convert_32f_to_g32f(float src)
 {
     IL_0000: ldarg.0
@@ -2078,54 +2078,6 @@ bool testbit_g64f(double src, int pos)
     IL_0008: ret
 
 }
-BitView8 bitview8_and(BitView8 a, BitView8 b)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: call Z0.BitView8 Z0.BitView8::op_BitwiseAnd(Z0.BitView8,Z0.BitView8)
-    IL_0007: ret
-
-}
-BitView8 bitview8_sll(BitView8 a, int offset)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: call Z0.BitView8 Z0.BitView8::op_LeftShift(Z0.BitView8,System.Int32)
-    IL_0007: ret
-
-}
-BitView8 bitview8_rotl(BitView8 a, int offset)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: call Z0.BitView8 Z0.BitView8::rotl(Z0.BitView8,System.Int32)
-    IL_0007: ret
-
-}
-BitView8 bitview8_rotr(BitView8 a, int offset)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: call Z0.BitView8 Z0.BitView8::rotr(Z0.BitView8,System.Int32)
-    IL_0007: ret
-
-}
-BitView8 bitview8_mul(BitView8 a, BitView8 b)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: call Z0.BitView8 Z0.BitView8::op_Multiply(Z0.BitView8,Z0.BitView8)
-    IL_0007: ret
-
-}
-BitView8 bitview8_or(BitView8 a, BitView8 b)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: call Z0.BitView8 Z0.BitView8::op_BitwiseOr(Z0.BitView8,Z0.BitView8)
-    IL_0007: ret
-
-}
 uint mod_const_16(uint a)
 {
     IL_0000: ldarg.0
@@ -2218,6 +2170,54 @@ void mul_full_64u(ulong x, ulong y, out ulong lo, out ulong hi)
     IL_0003: ldarg.3
     IL_0004: call System.Void Z0.MulOps::full(System.UInt64,System.UInt64,System.UInt64&,System.UInt64&)
     IL_0009: ret
+
+}
+UInt8 bitview8_and(UInt8 a, UInt8 b)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call Z0.UInt8 Z0.UInt8::op_BitwiseAnd(Z0.UInt8,Z0.UInt8)
+    IL_0007: ret
+
+}
+UInt8 bitview8_sll(UInt8 a, int offset)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call Z0.UInt8 Z0.UInt8::op_LeftShift(Z0.UInt8,System.Int32)
+    IL_0007: ret
+
+}
+UInt8 bitview8_rotl(UInt8 a, int offset)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call Z0.UInt8 Z0.UInt8::rotl(Z0.UInt8,System.Int32)
+    IL_0007: ret
+
+}
+UInt8 bitview8_rotr(UInt8 a, int offset)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call Z0.UInt8 Z0.UInt8::rotr(Z0.UInt8,System.Int32)
+    IL_0007: ret
+
+}
+UInt8 bitview8_mul(UInt8 a, UInt8 b)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call Z0.UInt8 Z0.UInt8::op_Multiply(Z0.UInt8,Z0.UInt8)
+    IL_0007: ret
+
+}
+UInt8 bitview8_or(UInt8 a, UInt8 b)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call Z0.UInt8 Z0.UInt8::op_BitwiseOr(Z0.UInt8,Z0.UInt8)
+    IL_0007: ret
 
 }
 byte convert_8i_to_8u(sbyte src)

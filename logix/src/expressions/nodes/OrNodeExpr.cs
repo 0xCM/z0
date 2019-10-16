@@ -16,7 +16,7 @@ namespace Z0
     public sealed class OrNodeExpr : ILogicNodeExpr
     {
         [MethodImpl(Inline)]
-        public OrNodeExpr(params ILogicOpExpr[] terms)
+        public OrNodeExpr(params ILogicOp[] terms)
         {
             this.Terms = terms;
         }
@@ -24,26 +24,26 @@ namespace Z0
         /// <summary>
         /// Specifies the number of parameters accepted by the expression
         /// </summary>
-        public ExprArity Arity => ExprArity.Sequence;
+        public ArityKind Arity => ArityKind.Sequence;
 
         /// <summary>
         /// The left operand
         /// </summary>
-        public ILogicOpExpr[] Terms {get;}
+        public ILogicOp[] Terms {get;}
 
-        public BinaryLogic Operator 
-            => BinaryLogic.Or;        
+        public BinaryLogicKind Operator 
+            => BinaryLogicKind.Or;        
     }
 
 
     /// <summary>
     /// Represents a bitwise expression sequence disjunction
     /// </summary>
-    public sealed class OrNodeExpr<T> : IBitNodeExpr<T>
+    public sealed class OrNodeExpr<T> : ILogicNodeExpr<T>
         where T : unmanaged
     {
         [MethodImpl(Inline)]
-        public OrNodeExpr(params IBitOpExpr<T>[] terms)
+        public OrNodeExpr(params IOpExpr<T>[] terms)
         {
             this.Terms = terms;
         }
@@ -51,15 +51,13 @@ namespace Z0
         /// <summary>
         /// Specifies the number of parameters accepted by the expression
         /// </summary>
-        public ExprArity Arity => ExprArity.Sequence;
+        public ArityKind Arity => ArityKind.Sequence;
 
         /// <summary>
         /// The left operand
         /// </summary>
-        public IBitOpExpr<T>[] Terms {get;}
+        public IOpExpr<T>[] Terms {get;}
 
-        public BitOpKind Operator 
-            => BitOpKind.Or;
     }
 
 

@@ -17,120 +17,120 @@ namespace Z0
     public class t_logic : UnitTest<t_logic>
     {
 
-        public void t_and_expr()
-        {
-            var v1 = bitvar(1);
-            var v2 = bitvar(2);
-            var expr = and(v1,v2);
+        // public void t_and_expr()
+        // {
+        //     var v1 = bitvar(1);
+        //     var v2 = bitvar(2);
+        //     var expr = and(v1,v2);
 
-            foreach(var seq in bitcombo(n2)) 
-            {
-                var s1 = seq[0];
-                var s2 = seq[1];
-                v1.Set(s1);   
-                v2.Set(s2);
-                var actual = eval(expr);
-                var expect = s1 & s2;
-                Claim.eq(expect,actual);
-            }
+        //     foreach(var seq in bitcombo(n2)) 
+        //     {
+        //         var s1 = seq[0];
+        //         var s2 = seq[1];
+        //         v1.Set(s1);
+        //         v2.Set(s2);
+        //         var actual = eval(expr);
+        //         var expect = s1 & s2;
+        //         Claim.eq(expect,actual);
+        //     }
             
-        }
+        // }
 
-        public void t_or_expr()
-        {
-            var v1 = bitvar(1);
-            var v2 = bitvar(2);
-            var expr = or(v1,v2);
+        // public void t_or_expr()
+        // {
+        //     var v1 = bitvar(1);
+        //     var v2 = bitvar(2);
+        //     var expr = or(v1,v2);
             
-            foreach(var seq in bitcombo(n2)) 
-            {
-                var s1 = seq[0];
-                var s2 = seq[1];
-                v1.Set(s1);   
-                v2.Set(s2);
-                var actual = eval(expr);
-                var expect = s1 | s2;
-                Claim.eq(expect,actual);
-            }
-        }
+        //     foreach(var seq in bitcombo(n2)) 
+        //     {
+        //         var s1 = seq[0];
+        //         var s2 = seq[1];
+        //         v1.Set(s1);
+        //         v2.Set(s2);
+        //         var actual = eval(expr);
+        //         var expect = s1 | s2;
+        //         Claim.eq(expect,actual);
+        //     }
+        // }
 
-        public void t_xor_expr()
-        {
-            var v1 = bitvar(1);
-            var v2 = bitvar(2);
-            var expr = xor(v1,v2);
+        // public void t_xor_expr()
+        // {
+        //     var v1 = bitvar(1);
+        //     var v2 = bitvar(2);
+        //     var expr = xor(v1,v2);
             
-            foreach(var seq in bitcombo(n2)) 
-            {
-                var s1 = seq[0];
-                var s2 = seq[1];
-                v1.Set(s1);   
-                v2.Set(s2);
-                var actual = eval(expr);
-                var expect = s1 ^ s2;
-                Claim.eq(expect,actual);
-            }
-        }
+        //     foreach(var seq in bitcombo(n2)) 
+        //     {
+        //         var s1 = seq[0];
+        //         var s2 = seq[1];
+        //         v1.Set(s1);
+        //         v2.Set(s2);
+        //         var actual = eval(expr);
+        //         var expect = s1 ^ s2;
+        //         Claim.eq(expect,actual);
+        //     }
+        // }
 
-        public void t_xnor_expr()
-        {
-            var v1 = bitvar(1);
-            var v2 = bitvar(2);
-            var expr = xnor(v1,v2);
+        // public void t_xnor_expr()
+        // {
+        //     var v1 = bitvar(1);
+        //     var v2 = bitvar(2);
+        //     var expr = xnor(v1,v2);
 
-            foreach(var seq in bitcombo(n2))
-            {
-                var s1 = seq[0];
-                var s2 = seq[1];
-                v1.Set(s1);   
-                v2.Set(s2);
+        //     foreach(var seq in bitcombo(n2))
+        //     {
+        //         var s1 = seq[0];
+        //         var s2 = seq[1];
+        //         v1.Set(s1);
+        //         v2.Set(s2);
 
-                Bit expect = s1 == s2;
-                var actual = eval(expr);
-                Claim.eq(expect,actual);
-            }
-        }
+        //         Bit expect = s1 == s2;
+        //         var actual = eval(expr);
+        //         Claim.eq(expect,actual);
+        //     }
+        // }
 
-        public void t_sop_expr()
-        {
-            var v1 = bitvar(1);
-            var v2 = bitvar(2);
-            var v3 = bitvar(3);
-            var expr = or(and(v1,v2), and(v2,v3));
+        // public void t_sop_expr()
+        // {
+        //     var v1 = bitvar(1);
+        //     var v2 = bitvar(2);
+        //     var v3 = bitvar(3);
+        //     var expr = or(and(v1,v2), and(v2,v3));
 
-            foreach(var seq in bitcombo(n4))
-            {
-                var s1 = seq[0];
-                var s2 = seq[1];
-                var s3 = seq[2];
-                v1.Set(s1);   
-                v2.Set(s2);
-                v3.Set(s3);
+        //     foreach(var seq in bitcombo(n4))
+        //     {
+        //         var s1 = seq[0];
+        //         var s2 = seq[1];
+        //         var s3 = seq[2];
+        //         v1.Set(s1);
+        //         v2.Set(s2);
+        //         v3.Set(s3);
 
-                var actual = eval(expr);
-                var expect = (s1 & s2) | (s2 & s3);
-                Claim.eq(expect,actual);
-            }
-        }
+        //         var actual = eval(expr);
+        //         var expect = (s1 & s2) | (s2 & s3);
+        //         Claim.eq(expect,actual);
+        //     }
+        // }
 
         
-        public void t_andnot_expr()
-        {
-            var v1 = bitvar(1);
-            var v2 = bitvar(2);
-            var expr = and(v1,not(v2));
-            foreach(var seq in bitcombo(n2))
-            {
-                var s1 = seq[0];
-                var s2 = seq[1];
-                v1.Set(s1);   
-                v2.Set(s2);
-                var actual = eval(expr);
-                var expect = s1 & ~s2;
-                Claim.eq(expect,actual);
+        // public void t_andnot_expr()
+        // {
+        //     var v1 = bitvar(1);
+        //     var v2 = bitvar(2);
+        //     var expr = and(v1,not(v2));
+        //     foreach(var seq in bitcombo(n2))
+        //     {
+        //         var s1 = seq[0];
+        //         var s2 = seq[1];
+        //         v1.Set(s1);
+        //         v2.Set(s2);
+        //         var actual = eval(expr);
+        //         var expect = s1 & ~s2;
+        //         Claim.eq(expect,actual);
 
-            }
-        }
+        //     }
+        // }
 
         public void t_bitcombo_check()
         {

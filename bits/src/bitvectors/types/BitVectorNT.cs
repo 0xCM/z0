@@ -191,7 +191,7 @@ namespace Z0
         public void Set(BitPos pos, Bit value)
         {
             ref readonly var cell = ref BitMap[CheckIndex(pos)];
-            gbits.set(ref Data[cell.Segment], cell.Offset, in value);
+            gbits.set(ref Data[cell.Segment], cell.Offset, value);
         }
 
         /// <summary>

@@ -16,7 +16,7 @@ namespace Z0
     public sealed class AndNodeExpr : ILogicNodeExpr
     {
         [MethodImpl(Inline)]
-        public AndNodeExpr(params ILogicOpExpr[] terms)
+        public AndNodeExpr(params ILogicOp[] terms)
         {
             this.Terms = terms;
         }
@@ -24,25 +24,25 @@ namespace Z0
         /// <summary>
         /// Specifies the number of parameters accepted by the expression
         /// </summary>
-        public ExprArity Arity => ExprArity.Sequence;
+        public ArityKind Arity => ArityKind.Sequence;
 
         /// <summary>
         /// The left operand
         /// </summary>
-        public ILogicOpExpr[] Terms {get;}
+        public ILogicOp[] Terms {get;}
 
-        public BinaryLogic Operator 
-            => BinaryLogic.And;        
+        public BinaryLogicKind Operator 
+            => BinaryLogicKind.And;        
     }
 
     /// <summary>
     /// Represents a bitwise expression sequence conjunction
     /// </summary>
-    public sealed class AndNodeExpr<T> : IBitNodeExpr<T>
+    public sealed class AndNodeExpr<T> : ILogicNodeExpr<T>
         where T : unmanaged
     {
         [MethodImpl(Inline)]
-        public AndNodeExpr(params IBitOpExpr<T>[] terms)
+        public AndNodeExpr(params IOpExpr<T>[] terms)
         {
             this.Terms = terms;
         }
@@ -50,15 +50,13 @@ namespace Z0
         /// <summary>
         /// Specifies the number of parameters accepted by the expression
         /// </summary>
-        public ExprArity Arity => ExprArity.Sequence;
+        public ArityKind Arity => ArityKind.Sequence;
 
         /// <summary>
         /// The left operand
         /// </summary>
-        public IBitOpExpr<T>[] Terms {get;}
+        public IOpExpr<T>[] Terms {get;}
 
-        public BitOpKind Operator 
-            => BitOpKind.And;
     }
 
 

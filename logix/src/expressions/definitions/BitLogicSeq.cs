@@ -43,7 +43,7 @@ namespace Z0
             set => Terms[index] = value;
         }
 
-        public ExprArity Arity => ExprArity.Literal;
+        public ArityKind Arity => ArityKind.Literal;
 
         public int Length
             => Terms.Length;
@@ -76,7 +76,7 @@ namespace Z0
             
         public Bit[] Terms {get;}
         
-        public ExprArity Arity => ExprArity.Literal;
+        public ArityKind Arity => ArityKind.Literal;
 
         public Bit this[int index]
         {

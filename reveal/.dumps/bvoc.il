@@ -1,4 +1,4 @@
-// 2019-10-15 01:38:27:385
+// 2019-10-16 02:15:33:937
 BitVector32 and_bv_32u(BitVector32 x, BitVector32 y)
 {
     IL_0000: ldarga.s x
@@ -122,7 +122,7 @@ BitVector32 srl_bv_g32u(BitVector32 x, int offset)
 BitVector32 flip_bv_32u(BitVector32 x)
 {
     IL_0000: ldarg.0
-    IL_0001: call Z0.BitVector32 Z0.bitvector::flip(Z0.BitVector32)
+    IL_0001: call Z0.BitVector32 Z0.bitvector::not(Z0.BitVector32)
     IL_0006: ret
 
 }

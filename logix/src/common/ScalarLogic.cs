@@ -10,7 +10,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static zfunc;    
-    using static TernaryLogic;
+    using static TernaryLogicKind;
 
 
     public static class ScalarLogic
@@ -519,30 +519,30 @@ namespace Z0
             where T : unmanaged
                 => select(c, xnor(b,c), nand(b,c));
 
-        public static UnaryOp<T> unaryop<T>(UnaryLogic id)
+        public static UnaryOp<T> unaryop<T>(UnaryLogicKind id)
             where T : unmanaged            
         {
             switch(id)
             {
-                case UnaryLogic.Not: return not;
-                case UnaryLogic.Identity: return identity;
+                case UnaryLogicKind.Not: return not;
+                case UnaryLogicKind.Identity: return identity;
                 default:
                     throw unsupported<T>();
             }
 
         }
 
-        public static BinaryOp<T> binop<T>(BinaryLogic id)
+        public static BinaryOp<T> binop<T>(BinaryLogicKind id)
             where T : unmanaged
         {
             switch(id)
             {
-                case BinaryLogic.And: return and;
-                case BinaryLogic.Nand: return nand;
-                case BinaryLogic.Or: return or;
-                case BinaryLogic.Nor: return nor;
-                case BinaryLogic.XOr: return xor;
-                case BinaryLogic.XNor: return xnor;
+                case BinaryLogicKind.And: return and;
+                case BinaryLogicKind.Nand: return nand;
+                case BinaryLogicKind.Or: return or;
+                case BinaryLogicKind.Nor: return nor;
+                case BinaryLogicKind.XOr: return xor;
+                case BinaryLogicKind.Xnor: return xnor;
                 default:
                     throw unsupported<T>();
             }
@@ -551,10 +551,10 @@ namespace Z0
         /// <summary>
         /// Advertises the supported ternary opeators
         /// </summary>
-        public static IEnumerable<TernaryLogic> ternops
-            => range((byte)1,(byte)X25).Cast<TernaryLogic>();
+        public static IEnumerable<TernaryLogicKind> ternops
+            => range((byte)1,(byte)X25).Cast<TernaryLogicKind>();
 
-       public static TernaryOp<T> ternop<T>(TernaryLogic id)
+       public static TernaryOp<T> ternop<T>(TernaryLogicKind id)
             where T : unmanaged
         {
             switch(id)

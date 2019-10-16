@@ -16,22 +16,22 @@ namespace Z0
         public static class NodeExprSpec
         {
             [MethodImpl(Inline)]
-            public static OrNodeExpr and<T>(params ILogicOpExpr[] terms)
+            public static OrNodeExpr and<T>(params ILogicOp[] terms)
                 where T : unmanaged
                     => new OrNodeExpr(terms);
 
             [MethodImpl(Inline)]
-            public static OrNodeExpr or<T>(params ILogicOpExpr[] terms)
+            public static OrNodeExpr or<T>(params ILogicOp[] terms)
                 where T : unmanaged
                     => new OrNodeExpr(terms);
 
             [MethodImpl(Inline)]
-            public static AndNodeExpr<T> and<T>(params IBitOpExpr<T>[] terms)
+            public static AndNodeExpr<T> and<T>(params IOpExpr<T>[] terms)
                 where T : unmanaged
                     => new AndNodeExpr<T>(terms);
 
             [MethodImpl(Inline)]
-            public static OrNodeExpr<T> or<T>(params IBitOpExpr<T>[] terms)
+            public static OrNodeExpr<T> or<T>(params IOpExpr<T>[] terms)
                 where T : unmanaged
                     => new OrNodeExpr<T>(terms);
      
@@ -43,7 +43,7 @@ namespace Z0
             /// <param name="subject">The test subject</param>
             /// <typeparam name="T">The operand type</typeparam>
             [MethodImpl(Inline)]
-            public static BinaryTestExpr<T> test<T>(BinaryLogic test, IBitExpr<T> control, BinaryBitExpr<T> subject)
+            public static BinaryTestExpr<T> test<T>(BinaryLogicKind test, IExpr<T> control, BinaryLogicExpr<T> subject)
                 where T : unmanaged
                     => new BinaryTestExpr<T>(test,control,subject);
 
@@ -55,7 +55,7 @@ namespace Z0
             /// <param name="subject">The test subject</param>
             /// <typeparam name="T">The operand type</typeparam>
             [MethodImpl(Inline)]
-            public static UnaryTestExpr<T> test<T>(BinaryLogic test, IBitExpr<T> control, UnaryBitExpr<T> subject)
+            public static UnaryTestExpr<T> test<T>(BinaryLogicKind test, IExpr<T> control, UnaryLogicExpr<T> subject)
                 where T : unmanaged
                     => new UnaryTestExpr<T>(test,control,subject);
 
@@ -67,9 +67,9 @@ namespace Z0
             /// <param name="subject">The test subject</param>
             /// <typeparam name="T">The operand type</typeparam>
             [MethodImpl(Inline)]
-            public static MixedTestExpr<T> test<T>(BinaryLogic test, IBitExpr<T> control, BitShiftExpr<T> subject)
+            public static ShiftTestExpr<T> test<T>(BinaryLogicKind test, IExpr<T> control, BitShiftExpr<T> subject)
                 where T : unmanaged
-                    => new MixedTestExpr<T>(test,control,subject);
+                    => new ShiftTestExpr<T>(test,control,subject);
      
         }
     }

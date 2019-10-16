@@ -18,20 +18,20 @@ namespace Z0
         /// </summary>
         /// <param name="expr">The expression to evaluate</param>
         [MethodImpl(Inline)]
-        public static Bit eval(ILogicExpr expr)
+        public static bit eval(IExpr expr)
         {
             switch(expr)
             {
-                case ILogicLitExpr x:
-                    return eval(x);
-                case ILogicOpExpr x:
-                    return eval(x);
-                case ILogicVarExpr x:
-                    return eval(x);
                 case IVariedLogicExpr x:
                     return eval(x);
+                case IBitLiteral x:
+                    return eval(x);
+                case ILogicOp x:
+                    return eval(x);
+                case IExpr x:
+                    return eval(x);
             }
-            return Bit.Off;
+            return bit.Off;
         }   
 
         /// <summary>
@@ -39,7 +39,7 @@ namespace Z0
         /// </summary>
         /// <param name="expr">The expression to evaluate</param>
         [MethodImpl(Inline)]
-        public static Bit eval(ILogicLitExpr expr)
+        public static bit eval(IBitLiteral expr)
             => expr.Value;
 
         /// <summary>
@@ -47,7 +47,7 @@ namespace Z0
         /// </summary>
         /// <param name="expr">The expression to evaluate</param>
         [MethodImpl(Inline)]
-        public static Bit eval(ILogicVarExpr expr)
+        public static bit eval(ILogicVar expr)
             => eval(expr.Value);
 
         /// <summary>
@@ -55,7 +55,7 @@ namespace Z0
         /// </summary>
         /// <param name="expr">The expression to evaluate</param>
         [MethodImpl(Inline)]
-        public static Bit eval(IVariedLogicExpr expr)
+        public static bit eval(IVariedLogicExpr expr)
             => eval(expr.BaseExpr);
 
         /// <summary>
@@ -63,62 +63,76 @@ namespace Z0
         /// </summary>
         /// <param name="expr">The expression to evaluate</param>
         [MethodImpl(Inline)]
-        public static Bit eval(ILogicOpExpr expr)
+        public static bit eval(ILogicOp expr)
         {
             switch(expr)               
             {
-                case IUnaryLogicExpr x:
+                case IUnaryLogicOp x:
                     return eval(x);
-                case IBinaryLogicExpr x:
+                case IBinaryLogicOp x:
                     return eval(x);
-                case ITernaryLogicExpr x:
+                case ITernaryLogicOp x:
                     return eval(x);
             }
-            return Bit.Off;
+            return bit.Off;
         }
 
         /// <summary>
         /// Evaluates a unary logic expression
         /// </summary>
         /// <param name="expr">The expression to evaluate</param>
-        public static Bit eval(IUnaryLogicExpr expr)
+        public static bit eval(IUnaryLogicOp expr)
         {
         
             switch(expr.Operator)
             {
-                case UnaryLogic.Not:
-                    return BitOps.not(eval(expr.Subject));
-                case UnaryLogic.Identity:
-                    return eval(expr.Subject);
+                case UnaryLogicKind.Not:
+                    return bit.not(eval(expr.Operand));
+                case UnaryLogicKind.Identity:
+                    return eval(expr.Operand);
             }
-            return Bit.Off;
+            return bit.Off;
         }
 
+        public static bit eval(ILogicExpr expr)
+        {
+            switch(expr)               
+            {
+                case IBitLiteral x:
+                    return x.Value;
+                case ILogicVar x:
+                    return eval(x.Value);
+                case ILogicOp x:
+                    return eval(x);
+            }
+            return bit.Off;
+
+        }
         /// <summary>
         /// Evaluates a binary logic expression
         /// </summary>
         /// <param name="expr">The expression to evaluate</param>
-        public static Bit eval(IBinaryLogicExpr expr)
+        public static bit eval(IBinaryLogicOp expr)
         {
             switch(expr.Operator)
             {
-                case BinaryLogic.And:
-                    return BitOps.and(eval(expr.Left), eval(expr.Right));
-                case BinaryLogic.Or:
-                    return BitOps.or(eval(expr.Left), eval(expr.Right));
-                case BinaryLogic.XOr:
-                    return BitOps.xor(eval(expr.Left), eval(expr.Right));
-                case BinaryLogic.Nor:
-                    return BitOps.nor(eval(expr.Left), eval(expr.Right));
-                case BinaryLogic.XNor:
-                    return BitOps.xnor(eval(expr.Left), eval(expr.Right));
-                case BinaryLogic.Nand:
-                    return BitOps.nand(eval(expr.Left), eval(expr.Right));
-                case BinaryLogic.Implies:
-                    return BitOps.implies(eval(expr.Left), eval(expr.Right));
+                case BinaryLogicKind.And:
+                    return bit.and(eval(expr.Left), eval(expr.Right));
+                case BinaryLogicKind.Or:
+                    return bit.or(eval(expr.Left), eval(expr.Right));
+                case BinaryLogicKind.XOr:
+                    return bit.xor(eval(expr.Left), eval(expr.Right));
+                case BinaryLogicKind.Nor:
+                    return bit.nor(eval(expr.Left), eval(expr.Right));
+                case BinaryLogicKind.Xnor:
+                    return bit.xnor(eval(expr.Left), eval(expr.Right));
+                case BinaryLogicKind.Nand:
+                    return bit.nand(eval(expr.Left), eval(expr.Right));
+                case BinaryLogicKind.Implies:
+                    return bit.implies(eval(expr.Left), eval(expr.Right));
 
             }
-            return Bit.Off;
+            return bit.Off;
         }
 
         /// <summary>
@@ -126,10 +140,10 @@ namespace Z0
         /// </summary>
         /// <param name="expr">The expression to evaluate</param>
         [MethodImpl(Inline)]
-        public static Bit eval(ITernaryLogicExpr expr)
+        public static bit eval(ITernaryLogicOp expr)
             => eval(expr.First) ? eval(expr.Second) : eval(expr.Third);
 
-        public static Bit same(VariedExpr lhs, VariedExpr rhs)
+        public static bit same(VariedLogicExpr lhs, VariedLogicExpr rhs)
         {
             var count = length(lhs.Vars, rhs.Vars);
             switch(count)
@@ -146,7 +160,7 @@ namespace Z0
 
         }
 
-        static Bit same(N1 n, VariedExpr lhs, VariedExpr rhs)
+        static bit same(N1 n, VariedLogicExpr lhs, VariedLogicExpr rhs)
         {
             foreach(var seq in LogicExprSpec.bitcombo(n1))                    
             {
@@ -162,7 +176,7 @@ namespace Z0
 
         }
 
-        static Bit same(N2 n, VariedExpr lhs, VariedExpr rhs)
+        static bit same(N2 n, VariedLogicExpr lhs, VariedLogicExpr rhs)
         {
             foreach(var seq in LogicExprSpec.bitcombo(n2))
             {
@@ -179,7 +193,7 @@ namespace Z0
 
         }
 
-        static Bit same(N3 n, VariedExpr lhs, VariedExpr rhs)
+        static bit same(N3 n, VariedLogicExpr lhs, VariedLogicExpr rhs)
         {
             foreach(var seq in LogicExprSpec.bitcombo(n3))                    
             {

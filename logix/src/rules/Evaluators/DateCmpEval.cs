@@ -19,7 +19,7 @@ namespace Z0
     {
         public static readonly DateCmpEval TheOnly = default;
         
-        public bool Satisfies(DateCmpExpr rule, LiteralExpr<Date> test)
+        public bool Satisfies(DateCmpExpr rule, LiteralRuleExpr<Date> test)
             => (rule.Kind == TimeMarker.Before && test.Value < rule.Param1.Value)
             || (rule.Kind == TimeMarker.After && test.Value > rule.Param1.Value)
             || (rule.Kind == TimeMarker.Matches &&  test.Value == rule.Param1.Value)

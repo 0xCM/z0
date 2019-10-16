@@ -20,7 +20,7 @@ namespace Z0
     {
         public static readonly DateCmpEval TheOnly = default;
 
-        public bool Satisfies(MembershipExpr<T> rule, LiteralExpr<T> test)
+        public bool Satisfies(MembershipExpr<T> rule, LiteralRuleExpr<T> test)
             => (rule.Test == MembershipTest.IsMember && rule.Value.Contains(test.Value))
             || (rule.Test == MembershipTest.IsNotMember && !rule.Value.Contains(test.Value));
     }

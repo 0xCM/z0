@@ -1,4 +1,101 @@
-// 2019-10-15 01:38:25:452
+// 2019-10-16 02:15:32:008
+uint pow(uint b, uint exp)
+{
+    IL_0000: ldarg.1
+    IL_0001: brtrue.s IL_0005
+    IL_0003: ldc.i4.1
+    IL_0004: ret
+    IL_0005: ldc.i4.1
+    IL_0006: stloc.0
+    IL_0007: ldarg.1
+    IL_0008: ldc.i4.1
+    IL_0009: and
+    IL_000A: brfalse.s IL_0010
+    IL_000C: ldloc.0
+    IL_000D: ldarg.0
+    IL_000E: mul
+    IL_000F: stloc.0
+    IL_0010: ldarg.1
+    IL_0011: ldc.i4.1
+    IL_0012: shr.un
+    IL_0013: starg.s exp
+    IL_0015: ldarg.1
+    IL_0016: brfalse.s IL_001F
+    IL_0018: ldarg.0
+    IL_0019: ldarg.0
+    IL_001A: mul
+    IL_001B: starg.s b
+    IL_001D: br.s IL_0007
+    IL_001F: ldloc.0
+    IL_0020: ret
+
+}
+long pow(long b, uint exp)
+{
+    IL_0000: ldarg.1
+    IL_0001: brtrue.s IL_0006
+    IL_0003: ldc.i4.1
+    IL_0004: conv.i8
+    IL_0005: ret
+    IL_0006: ldc.i4.1
+    IL_0007: conv.i8
+    IL_0008: stloc.0
+    IL_0009: ldarg.1
+    IL_000A: ldc.i4.1
+    IL_000B: and
+    IL_000C: brfalse.s IL_0012
+    IL_000E: ldloc.0
+    IL_000F: ldarg.0
+    IL_0010: mul
+    IL_0011: stloc.0
+    IL_0012: ldarg.1
+    IL_0013: ldc.i4.1
+    IL_0014: shr.un
+    IL_0015: starg.s exp
+    IL_0017: ldarg.1
+    IL_0018: brfalse.s IL_0021
+    IL_001A: ldarg.0
+    IL_001B: ldarg.0
+    IL_001C: mul
+    IL_001D: starg.s b
+    IL_001F: br.s IL_0009
+    IL_0021: ldloc.0
+    IL_0022: ret
+
+}
+ulong pow(ulong b, uint exp)
+{
+    IL_0000: ldarg.1
+    IL_0001: brtrue.s IL_0006
+    IL_0003: ldc.i4.1
+    IL_0004: conv.i8
+    IL_0005: ret
+    IL_0006: ldc.i4.1
+    IL_0007: conv.i8
+    IL_0008: stloc.0
+    IL_0009: ldarg.1
+    IL_000A: ldc.i4.1
+    IL_000B: and
+    IL_000C: brfalse.s IL_0012
+    IL_000E: ldloc.0
+    IL_000F: ldarg.0
+    IL_0010: mul
+    IL_0011: stloc.0
+    IL_0012: ldarg.1
+    IL_0013: ldc.i4.1
+    IL_0014: shr.un
+    IL_0015: starg.s exp
+    IL_0017: ldarg.1
+    IL_0018: brfalse.s IL_0021
+    IL_001A: ldarg.0
+    IL_001B: ldarg.0
+    IL_001C: mul
+    IL_001D: starg.s b
+    IL_001F: br.s IL_0009
+    IL_0021: ldloc.0
+    IL_0022: ret
+
+}
 ref sbyte pow(ref sbyte src, uint exp)
 {
     IL_0000: ldarg.0
@@ -689,6 +786,49 @@ bool within(ulong lhs, ulong rhs, ulong epsilon)
     IL_0014: ldc.i4.0
     IL_0015: ceq
     IL_0017: ret
+
+}
+ulong max(ulong lhs, ulong rhs)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: bgt.un.s IL_0006
+    IL_0004: ldarg.1
+    IL_0005: ret
+    IL_0006: ldarg.0
+    IL_0007: ret
+
+}
+ref sbyte max(ref sbyte lhs, sbyte rhs)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.0
+    IL_0002: ldind.i1
+    IL_0003: ldarg.1
+    IL_0004: bgt.s IL_0009
+    IL_0006: ldarg.1
+    IL_0007: br.s IL_000B
+    IL_0009: ldarg.0
+    IL_000A: ldind.i1
+    IL_000B: stind.i1
+    IL_000C: ldarg.0
+    IL_000D: ret
+
+}
+ref byte max(ref byte lhs, byte rhs)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.0
+    IL_0002: ldind.u1
+    IL_0003: ldarg.1
+    IL_0004: bgt.s IL_0009
+    IL_0006: ldarg.1
+    IL_0007: br.s IL_000B
+    IL_0009: ldarg.0
+    IL_000A: ldind.u1
+    IL_000B: stind.i1
+    IL_000C: ldarg.0
+    IL_000D: ret
 
 }
 ref short max(ref short lhs, short rhs)
@@ -2144,101 +2284,21 @@ int pow(int b, uint exp)
     IL_0020: ret
 
 }
-uint pow(uint b, uint exp)
+ulong dist(sbyte a, sbyte b)
 {
-    IL_0000: ldarg.1
-    IL_0001: brtrue.s IL_0005
-    IL_0003: ldc.i4.1
-    IL_0004: ret
-    IL_0005: ldc.i4.1
-    IL_0006: stloc.0
-    IL_0007: ldarg.1
-    IL_0008: ldc.i4.1
-    IL_0009: and
-    IL_000A: brfalse.s IL_0010
-    IL_000C: ldloc.0
-    IL_000D: ldarg.0
-    IL_000E: mul
-    IL_000F: stloc.0
-    IL_0010: ldarg.1
-    IL_0011: ldc.i4.1
-    IL_0012: shr.un
-    IL_0013: starg.s exp
-    IL_0015: ldarg.1
-    IL_0016: brfalse.s IL_001F
-    IL_0018: ldarg.0
-    IL_0019: ldarg.0
-    IL_001A: mul
-    IL_001B: starg.s b
-    IL_001D: br.s IL_0007
-    IL_001F: ldloc.0
-    IL_0020: ret
-
-}
-long pow(long b, uint exp)
-{
-    IL_0000: ldarg.1
-    IL_0001: brtrue.s IL_0006
-    IL_0003: ldc.i4.1
-    IL_0004: conv.i8
-    IL_0005: ret
-    IL_0006: ldc.i4.1
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: bge.s IL_0009
+    IL_0004: ldarg.1
+    IL_0005: ldarg.0
+    IL_0006: sub
     IL_0007: conv.i8
-    IL_0008: stloc.0
-    IL_0009: ldarg.1
-    IL_000A: ldc.i4.1
-    IL_000B: and
-    IL_000C: brfalse.s IL_0012
-    IL_000E: ldloc.0
-    IL_000F: ldarg.0
-    IL_0010: mul
-    IL_0011: stloc.0
-    IL_0012: ldarg.1
-    IL_0013: ldc.i4.1
-    IL_0014: shr.un
-    IL_0015: starg.s exp
-    IL_0017: ldarg.1
-    IL_0018: brfalse.s IL_0021
-    IL_001A: ldarg.0
-    IL_001B: ldarg.0
-    IL_001C: mul
-    IL_001D: starg.s b
-    IL_001F: br.s IL_0009
-    IL_0021: ldloc.0
-    IL_0022: ret
-
-}
-ulong pow(ulong b, uint exp)
-{
-    IL_0000: ldarg.1
-    IL_0001: brtrue.s IL_0006
-    IL_0003: ldc.i4.1
-    IL_0004: conv.i8
-    IL_0005: ret
-    IL_0006: ldc.i4.1
-    IL_0007: conv.i8
-    IL_0008: stloc.0
-    IL_0009: ldarg.1
-    IL_000A: ldc.i4.1
-    IL_000B: and
-    IL_000C: brfalse.s IL_0012
-    IL_000E: ldloc.0
-    IL_000F: ldarg.0
-    IL_0010: mul
-    IL_0011: stloc.0
-    IL_0012: ldarg.1
-    IL_0013: ldc.i4.1
-    IL_0014: shr.un
-    IL_0015: starg.s exp
-    IL_0017: ldarg.1
-    IL_0018: brfalse.s IL_0021
-    IL_001A: ldarg.0
-    IL_001B: ldarg.0
-    IL_001C: mul
-    IL_001D: starg.s b
-    IL_001F: br.s IL_0009
-    IL_0021: ldloc.0
-    IL_0022: ret
+    IL_0008: ret
+    IL_0009: ldarg.0
+    IL_000A: ldarg.1
+    IL_000B: sub
+    IL_000C: conv.i8
+    IL_000D: ret
 
 }
 ulong dist(short a, short b)
@@ -3591,12 +3651,31 @@ ulong log2(int src)
     IL_0007: ret
 
 }
-ulong log2(uint src)
+uint log2(uint src)
 {
     IL_0000: ldarg.0
     IL_0001: conv.u8
     IL_0002: call System.UInt64 Z0.math::log2(System.UInt64)
-    IL_0007: ret
+    IL_0007: conv.u4
+    IL_0008: ret
+
+}
+byte log2(byte src)
+{
+    IL_0000: ldarg.0
+    IL_0001: conv.u8
+    IL_0002: call System.UInt64 Z0.math::log2(System.UInt64)
+    IL_0007: conv.u1
+    IL_0008: ret
+
+}
+ushort log2(ushort src)
+{
+    IL_0000: ldarg.0
+    IL_0001: conv.u8
+    IL_0002: call System.UInt64 Z0.math::log2(System.UInt64)
+    IL_0007: conv.u2
+    IL_0008: ret
 
 }
 bool lt(sbyte lhs, sbyte rhs)
@@ -3818,49 +3897,6 @@ long max(long lhs, long rhs)
     IL_0005: ret
     IL_0006: ldarg.0
     IL_0007: ret
-
-}
-ulong max(ulong lhs, ulong rhs)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: bgt.un.s IL_0006
-    IL_0004: ldarg.1
-    IL_0005: ret
-    IL_0006: ldarg.0
-    IL_0007: ret
-
-}
-ref sbyte max(ref sbyte lhs, sbyte rhs)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.0
-    IL_0002: ldind.i1
-    IL_0003: ldarg.1
-    IL_0004: bgt.s IL_0009
-    IL_0006: ldarg.1
-    IL_0007: br.s IL_000B
-    IL_0009: ldarg.0
-    IL_000A: ldind.i1
-    IL_000B: stind.i1
-    IL_000C: ldarg.0
-    IL_000D: ret
-
-}
-ref byte max(ref byte lhs, byte rhs)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.0
-    IL_0002: ldind.u1
-    IL_0003: ldarg.1
-    IL_0004: bgt.s IL_0009
-    IL_0006: ldarg.1
-    IL_0007: br.s IL_000B
-    IL_0009: ldarg.0
-    IL_000A: ldind.u1
-    IL_000B: stind.i1
-    IL_000C: ldarg.0
-    IL_000D: ret
 
 }
 short srl(short src, int offset)
@@ -4682,6 +4718,14 @@ byte add(byte lhs, byte rhs)
     IL_0004: ret
 
 }
+UInt8 add(UInt8 lhs, UInt8 rhs)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call Z0.UInt8 Z0.UInt8::op_Addition(Z0.UInt8,Z0.UInt8)
+    IL_0007: ret
+
+}
 short add(short lhs, short rhs)
 {
     IL_0000: ldarg.0
@@ -5325,23 +5369,6 @@ ulong dist(byte a, byte b)
     IL_000D: ret
 
 }
-ulong dist(sbyte a, sbyte b)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: bge.s IL_0009
-    IL_0004: ldarg.1
-    IL_0005: ldarg.0
-    IL_0006: sub
-    IL_0007: conv.i8
-    IL_0008: ret
-    IL_0009: ldarg.0
-    IL_000A: ldarg.1
-    IL_000B: sub
-    IL_000C: conv.i8
-    IL_000D: ret
-
-}
 sbyte and(sbyte lhs, sbyte rhs)
 {
     IL_0000: ldarg.0
@@ -5704,7 +5731,7 @@ sbyte flip(sbyte src)
     IL_0003: ret
 
 }
-byte flip(byte src)
+byte not(byte src)
 {
     IL_0000: ldarg.0
     IL_0001: not

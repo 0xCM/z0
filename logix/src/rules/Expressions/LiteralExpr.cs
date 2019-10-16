@@ -16,10 +16,10 @@ namespace Z0
     /// <summary>
     /// Defines a literal expression
     /// </summary>
-    public readonly struct LiteralExpr<T> : IRuleExpr<T>
+    public readonly struct LiteralRuleExpr<T> : IRuleExpr<T>
     {
         [MethodImpl(Inline)]
-        public LiteralExpr(T Value)
+        public LiteralRuleExpr(T Value)
             => this.Value = Value;
         
         /// <summary>

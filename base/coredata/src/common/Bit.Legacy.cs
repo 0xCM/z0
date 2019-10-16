@@ -149,6 +149,14 @@ namespace Z0
             => src == 0 ? Off : On;
 
         [MethodImpl(Inline)]
+        public static implicit operator bit(Bit src)
+            => src ? bit.On : bit.Off;
+
+        [MethodImpl(Inline)]
+        public static implicit operator Bit(bit src)
+            => src ? On : Off;
+
+        [MethodImpl(Inline)]
         public static explicit operator BinaryDigit(Bit src)
             => src.value ? BinaryDigit.One : BinaryDigit.Zed;
 

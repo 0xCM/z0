@@ -1,4 +1,4 @@
-// 2019-10-15 01:38:26:934
+// 2019-10-16 02:15:33:555
 Sign:int signum_d8i(sbyte x)
 {
     IL_0000: ldarg.0
@@ -1334,6 +1334,30 @@ ulong pow_g64u(ulong b, uint exp)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: call System.UInt64 Z0.gmath::pow<System.UInt64>(System.UInt64,System.UInt32)
+    IL_0007: ret
+
+}
+bool gt_d8u(byte lhs, byte rhs)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call System.Boolean Z0.math::gt(System.Byte,System.Byte)
+    IL_0007: ret
+
+}
+bool gt_g8u(byte lhs, byte rhs)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call System.Boolean Z0.gmath::gt<System.Byte>(System.Byte,System.Byte)
+    IL_0007: ret
+
+}
+bool gt_d16i(short lhs, short rhs)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call System.Boolean Z0.math::gt(System.Int16,System.Int16)
     IL_0007: ret
 
 }
@@ -3310,31 +3334,6 @@ double fma_d64f(double x, double a, double b)
     IL_0008: ret
 
 }
-double fma_g64f(double x, double a, double b)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: ldarg.2
-    IL_0003: call System.Double Z0.gmath::fma<System.Double>(System.Double,System.Double,System.Double)
-    IL_0008: ret
-
-}
-bool gt_d8i(sbyte lhs, sbyte rhs)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: call System.Boolean Z0.math::gt(System.SByte,System.SByte)
-    IL_0007: ret
-
-}
-bool gt_g8i(sbyte lhs, sbyte rhs)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: call System.Boolean Z0.gmath::gt<System.SByte>(System.SByte,System.SByte)
-    IL_0007: ret
-
-}
 sbyte add_d8i(sbyte lhs, sbyte rhs)
 {
     IL_0000: ldarg.0
@@ -4415,21 +4414,21 @@ sbyte flip_d8i(sbyte x)
 sbyte flip_g8i(sbyte x)
 {
     IL_0000: ldarg.0
-    IL_0001: call System.SByte Z0.gmath::flip<System.SByte>(System.SByte)
+    IL_0001: call System.SByte Z0.gmath::not<System.SByte>(System.SByte)
     IL_0006: ret
 
 }
 byte flip_d8u(byte x)
 {
     IL_0000: ldarg.0
-    IL_0001: call System.Byte Z0.math::flip(System.Byte)
+    IL_0001: call System.Byte Z0.math::not(System.Byte)
     IL_0006: ret
 
 }
 byte flip_g8u(byte x)
 {
     IL_0000: ldarg.0
-    IL_0001: call System.Byte Z0.gmath::flip<System.Byte>(System.Byte)
+    IL_0001: call System.Byte Z0.gmath::not<System.Byte>(System.Byte)
     IL_0006: ret
 
 }
@@ -4443,7 +4442,7 @@ short flip_d16i(short x)
 short flip_g16i(short x)
 {
     IL_0000: ldarg.0
-    IL_0001: call System.Int16 Z0.gmath::flip<System.Int16>(System.Int16)
+    IL_0001: call System.Int16 Z0.gmath::not<System.Int16>(System.Int16)
     IL_0006: ret
 
 }
@@ -4457,7 +4456,7 @@ ushort flip_d16u(ushort x)
 ushort flip_g16u(ushort x)
 {
     IL_0000: ldarg.0
-    IL_0001: call System.UInt16 Z0.gmath::flip<System.UInt16>(System.UInt16)
+    IL_0001: call System.UInt16 Z0.gmath::not<System.UInt16>(System.UInt16)
     IL_0006: ret
 
 }
@@ -4471,7 +4470,7 @@ int flip_d32i(int x)
 int flip_g32i(int x)
 {
     IL_0000: ldarg.0
-    IL_0001: call System.Int32 Z0.gmath::flip<System.Int32>(System.Int32)
+    IL_0001: call System.Int32 Z0.gmath::not<System.Int32>(System.Int32)
     IL_0006: ret
 
 }
@@ -4485,7 +4484,7 @@ uint flip_d32u(uint x)
 uint flip_g32u(uint x)
 {
     IL_0000: ldarg.0
-    IL_0001: call System.UInt32 Z0.gmath::flip<System.UInt32>(System.UInt32)
+    IL_0001: call System.UInt32 Z0.gmath::not<System.UInt32>(System.UInt32)
     IL_0006: ret
 
 }
@@ -4499,7 +4498,7 @@ long flip_d64i(long x)
 long flip_g64i(long x)
 {
     IL_0000: ldarg.0
-    IL_0001: call System.Int64 Z0.gmath::flip<System.Int64>(System.Int64)
+    IL_0001: call System.Int64 Z0.gmath::not<System.Int64>(System.Int64)
     IL_0006: ret
 
 }
@@ -4513,7 +4512,7 @@ ulong flip_d64u(ulong x)
 ulong flip_g64u(ulong x)
 {
     IL_0000: ldarg.0
-    IL_0001: call System.UInt64 Z0.gmath::flip<System.UInt64>(System.UInt64)
+    IL_0001: call System.UInt64 Z0.gmath::not<System.UInt64>(System.UInt64)
     IL_0006: ret
 
 }

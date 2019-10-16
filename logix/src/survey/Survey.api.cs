@@ -23,7 +23,7 @@ namespace Z0
             var questions = new Question<T>[questionCount];
             for(uint i=0u, questionId = 1; i< questionCount; i++, questionId++)
             {
-                var choices = new Choice<T>[ql];
+                var choices = new QuestionChoice<T>[ql];
                 var choiceId = gmath.one<T>();
                 for(var j = 0u; j< ql; j++)
                 {                    
@@ -36,12 +36,12 @@ namespace Z0
         }
     
         [MethodImpl(Inline)]
-        public static Choice<T> CreateChoice<T>(T id, string label)
+        public static QuestionChoice<T> CreateChoice<T>(T id, string label)
             where T : unmanaged
-                => new Choice<T>(id,label);
+                => new QuestionChoice<T>(id,label);
 
         [MethodImpl(Inline)]
-        public static Question<T> CreateQuestion<T>(uint id, string label, int maxselect,  params Choice<T>[] choices)
+        public static Question<T> CreateQuestion<T>(uint id, string label, int maxselect,  params QuestionChoice<T>[] choices)
             where T : unmanaged
                 => new Question<T>(id, label, maxselect, choices);
 

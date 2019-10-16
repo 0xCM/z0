@@ -18,14 +18,16 @@ namespace Z0
         readonly uint state;
 
         /// <summary>
+        /// Constructs a disabled bit
+        /// </summary>
+        public static bit Off => false;
+
+        /// <summary>
         /// Constructs an enabled bit
         /// </summary>
         public static bit On => true;
 
-        /// <summary>
-        /// Constructs a disabled bit
-        /// </summary>
-        public static bit Off => false;
+        public static bit[] B01 => new bit[]{Off,On};
         
         /// <summary>
         /// Returns true if the bit is enabled, false otherwise
@@ -73,7 +75,7 @@ namespace Z0
         /// <param name="b">The right bit</param>
         [MethodImpl(Inline)]
         public static bit operator & (bit a, bit b) 
-            => Wrap(a.state & b.state);
+            => and(a,b);
 
         /// <summary>
         /// Computes the bitwise OR between the operands
@@ -82,8 +84,8 @@ namespace Z0
         /// <param name="b">The right bit</param>
         [MethodImpl(Inline)]
         public static bit operator | (bit a, bit b) 
-            => Wrap(a.state | b.state);
-
+            => or(a,b);
+            
         /// <summary>
         /// Computes the bitwise XOR between the operands
         /// </summary>
@@ -91,7 +93,7 @@ namespace Z0
         /// <param name="b">The right bit</param>
         [MethodImpl(Inline)]
         public static bit operator ^ (bit a, bit b) 
-            => Wrap(a.state ^ b.state);
+            => xor(a,b);
 
         /// <summary>
         /// Inverts the state of the source bit
@@ -99,7 +101,7 @@ namespace Z0
         /// <param name="a">The source bit</param>
         [MethodImpl(Inline)]
         public static bit operator ~ (bit a) 
-            => SafeWrap(~a.state);
+            => not(a);
 
         /// <summary>
         /// Inverts the state of the source bit
@@ -107,7 +109,7 @@ namespace Z0
         /// <param name="a">The source bit</param>
         [MethodImpl(Inline)]
         public static bit operator ! (bit a) 
-            => SafeWrap(~a.state);
+            => not(a);
 
         [MethodImpl(Inline)]
         public static bool operator ==(bit a, bit b)
@@ -124,26 +126,113 @@ namespace Z0
         [MethodImpl(Inline)]
         bit(uint state)
             => this.state = state;
-        
+
+        /// <summary>
+        /// The identity function
+        /// </summary>
+        /// <param name="b">The source bit</param>
+        [MethodImpl(Inline)]
+        public static bit identity(bit b)
+            => b;
+
+        /// <summary>
+        /// Computes the bitwise AND between the operands
+        /// </summary>
+        /// <param name="a">The left bit</param>
+        /// <param name="b">The right bit</param>
+        [MethodImpl(Inline)]
+        public static bit and(bit a, bit b) 
+            => Wrap(a.state & b.state);
+
+        /// <summary>
+        /// Computes the bitwise OR between the operands
+        /// </summary>
+        /// <param name="a">The left bit</param>
+        /// <param name="b">The right bit</param>
+        [MethodImpl(Inline)]
+        public static bit or(bit a, bit b) 
+            => Wrap(a.state | b.state);
+
+        /// <summary>
+        /// Computes the bitwise XOR between the operands
+        /// </summary>
+        /// <param name="a">The left bit</param>
+        /// <param name="b">The right bit</param>
+        [MethodImpl(Inline)]
+        public static bit xor(bit a, bit b)
+            => Wrap(a.state ^ b.state);
+
+        /// <summary>
+        /// Inverts the state of the source bit
+        /// </summary>
+        /// <param name="a">The source bit</param>
+        [MethodImpl(Inline)]
+        public static bit not(bit a)
+            => SafeWrap(~a.state);
+
+        /// <summary>
+        /// Evaluates the logical NAND of two bits, which is true iff one or both bits are off
+        /// </summary>
+        /// <param name="a">The first operand</param>
+        /// <param name="b">The second operand</param>
         [MethodImpl(Inline)]
         public static bit nand(bit a, bit b)
             => SafeWrap(~(a.state & b.state));
 
+        /// <summary>
+        /// Evaluates the logical XNOR of two bits, also known as the logical biconditional and which 
+        /// in practice is equivalent to value-based equality
+        /// </summary>
+        /// <param name="a">The first operand</param>
+        /// <param name="b">The second operand</param>
+        /// <remarks>See https://en.wikipedia.org/wiki/Logical_biconditional</remarks>
         [MethodImpl(Inline)]
         public static bit nor(bit a, bit b)
             => SafeWrap(~(a.state | b.state));
 
+        /// <summary>
+        /// Evaluates the logical XNOR of two bits, also known as the logical biconditional and which 
+        /// in practice is equivalent to value-based equality
+        /// </summary>
+        /// <param name="a">The first operand</param>
+        /// <param name="b">The second operand</param>
+        /// <remarks>See https://en.wikipedia.org/wiki/Logical_biconditional</remarks>
         [MethodImpl(Inline)]
         public static bit xnor(bit a, bit b)
             => SafeWrap(~(a.state ^ b.state));
 
+        /// <summary>
+        /// Computes a & ~b
+        /// </summary>
+        /// <param name="a"></param>
+        /// <param name="b"></param>    
         [MethodImpl(Inline)]
         public static bit andnot(bit a, bit b)
             => SafeWrap(a.state & ~b.state);
 
+        /// <summary>
+        /// Evaluates the implication a -> b that means if p is true then b is true
+        /// </summary>
+        /// <param name="antecedent">The first operand</param>
+        /// <param name="consequent">The second operand</param>
+        /// <remarks>See https://en.wikipedia.org/wiki/Material_conditional</remarks>
+        [MethodImpl(Inline)]
+        public static bit implies(bit antecedent, bit consequent)
+            => !(antecedent == On && consequent == Off);
+
+        /// <summary>
+        /// Evaluates the ternary select where the second operand is returned if the first 
+        /// operand is true and otherwise the third operand is returned: a ? b : c
+        /// </summary>
+        /// <param name="a">The first operand</param>
+        /// <param name="b">The second operand</param>
         [MethodImpl(Inline)]
         public static bit select(bit a, bit b, bit c)
             => a ? b : c;
+
+        [MethodImpl(Inline)]
+        public static bit xor1(bit a)
+            => !(a ^ On);
 
         [MethodImpl(Inline)]
         static bit Wrap(uint state)

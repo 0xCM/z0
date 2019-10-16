@@ -15,7 +15,7 @@ namespace Z0
     partial class ginx
     {
         [MethodImpl(Inline)]
-        public static Vec128<T> vxor1<T>(in Vec128<T> x)
+        public static Vector128<T> vxor1<T>(Vector128<T> x)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte) 
@@ -33,7 +33,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static Vec256<T> vxor1<T>(in Vec256<T> x)
+        public static Vector256<T> vxor1<T>(Vector256<T> x)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte) 
@@ -51,7 +51,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static Vec128<T> vxor1_128u<T>(in Vec128<T> x)
+        static Vector128<T> vxor1_128u<T>(Vector128<T> x)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -65,7 +65,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static Vec128<T> vxor1_128i<T>(in Vec128<T> x)
+        static Vector128<T> vxor1_128i<T>(Vector128<T> x)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
@@ -79,20 +79,20 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static Vec128<T> vxor1_128f<T>(in Vec128<T> x)
+        static Vector128<T> vxor1_128f<T>(Vector128<T> x)
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return generic<T>(dinx.vxor1(float32(x)));
+                return generic<T>(dfp.vxor1(float32(x)));
             else if(typeof(T) == typeof(double))
-                return generic<T>(dinx.vxor1(float64(x)));
+                return generic<T>(dfp.vxor1(float64(x)));
             else
                 throw unsupported<T>();
         }
 
 
         [MethodImpl(Inline)]
-        static Vec256<T> vxor1_256u<T>(in Vec256<T> x)
+        static Vector256<T> vxor1_256u<T>(Vector256<T> x)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -106,7 +106,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static Vec256<T> vxor1_256i<T>(in Vec256<T> x)
+        static Vector256<T> vxor1_256i<T>(Vector256<T> x)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
@@ -120,13 +120,13 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static Vec256<T> vxor1_256f<T>(in Vec256<T> x)
+        static Vector256<T> vxor1_256f<T>(Vector256<T> x)
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return generic<T>(dinx.vxor1(float32(x)));
+                return generic<T>(dfp.vxor1(float32(x)));
             else if(typeof(T) == typeof(double))
-                return generic<T>(dinx.vxor1(float64(x)));
+                return generic<T>(dfp.vxor1(float64(x)));
             else
                 throw unsupported<T>();
         }

@@ -14,11 +14,11 @@ namespace Z0
     /// <summary>
     /// Defines a variable expression
     /// </summary>
-    public readonly struct VarExpr<T> : IRuleExpr<T>
+    public readonly struct VarRuleExpr<T> : IRuleExpr<T>
         where T : unmanaged
     {
         [MethodImpl(Inline)]
-        public VarExpr(string Name = null, T? value = null)
+        public VarRuleExpr(string Name = null, T? value = null)
         {
             this.Name = Name ?? "anon";
             this.Value = value;
@@ -46,7 +46,7 @@ namespace Z0
             => new VarValueExpr<T>(this, value ?? this.Value.Require());
 
         [MethodImpl(Inline)]
-        static string Format(VarExpr<T> src)
+        static string Format(VarRuleExpr<T> src)
             => src.Value.Map(v => $"{src.Name} := {v}", () => src.Name);
         
         [MethodImpl(Inline)]

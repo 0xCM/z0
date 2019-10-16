@@ -15,17 +15,17 @@ namespace Z0
     /// Chooses a question based on prior answer
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class Branch<T>
+    public class SurveyBranch<T>
         where T : unmanaged
     {
         
     }
 
-    public class Choice<T> 
+    public class QuestionChoice<T> 
         where T : unmanaged
     {
         [MethodImpl(Inline)]
-        public Choice(T Id, string Label)
+        public QuestionChoice(T Id, string Label)
         {
             this.Id = Id;
             this.Label = Label;
@@ -55,7 +55,7 @@ namespace Z0
         where T : unmanaged
     {
         [MethodImpl(Inline)]
-        public Question(uint Id, string Label, int? MaxSelect, params Choice<T>[] choices)
+        public Question(uint Id, string Label, int? MaxSelect, params QuestionChoice<T>[] choices)
         {
             this.Id = Id;
             this.Label = Label;
@@ -82,7 +82,7 @@ namespace Z0
         public string Title
             => $"{Id} - {Label}";
 
-        public IReadOnlyList<Choice<T>> Choices {get;}
+        public IReadOnlyList<QuestionChoice<T>> Choices {get;}
 
         public string Format()
         {

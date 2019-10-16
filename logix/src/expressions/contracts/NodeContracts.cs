@@ -27,12 +27,12 @@ namespace Z0
         E[] Terms {get;}
     }
 
-    public interface ILogicNodeExpr : ILogicOpExpr, INodeExpr<Bit,ILogicOpExpr>
+    public interface ILogicNodeExpr : ILogicOp, INodeExpr<Bit,ILogicOp>
     {
         
     }
 
-    public interface IBitNodeExpr<T> : IBitOpExpr<T>, INodeExpr<T, IBitOpExpr<T>>
+    public interface ILogicNodeExpr<T> : IOpExpr<T>, INodeExpr<T, IOpExpr<T>>
         where T : unmanaged
     {
         

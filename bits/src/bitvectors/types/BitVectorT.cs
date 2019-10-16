@@ -328,37 +328,37 @@ namespace Z0
         /// <param name="pos">The absolute bit position</param>
         /// <param name="value">The value the bit will receive</param>
         [MethodImpl(Inline)]
-        public void Set(BitPos pos, Bit value)
+        public void Set(BitPos pos, bit value)
         {
             ref readonly var loc = ref Location(pos);
-            gbits.set(ref data[loc.Segment], loc.Offset, in value);
+            gbits.set(ref data[loc.Segment], loc.Offset, value);
         }
 
         /// <summary>
         /// Tests the status of an identified bit
         /// </summary>
-        /// <param name="bit">The position of the bit to test</param>
+        /// <param name="pos">The position of the bit to test</param>
         [MethodImpl(Inline)]
-        public bool Test(BitPos bit)
-            => Get(bit);
+        public bool Test(BitPos pos)
+            => Get(pos);
 
         /// <summary>
         /// Enables an identified bit
         /// </summary>
         /// <param name="pos">The position of the bit to enable</param>
         [MethodImpl(Inline)]
-        public void Enable(BitPos bit)
-            => Set(bit, Bit.On);
+        public void Enable(BitPos pos)
+            => Set(pos, bit.On);
 
         /// <summary>
         /// Disables an identified bit
         /// </summary>
         /// <param name="pos">The position of the bit to disable</param>
         [MethodImpl(Inline)]
-        public void Disable(BitPos bit)
+        public void Disable(BitPos pos)
         {
-            ref readonly var pos = ref BitMap[bit];
-            gbits.disable(ref data[pos.Segment], pos.Offset);
+            ref readonly var cell = ref BitMap[pos];
+            gbits.disable(ref data[cell.Segment], cell.Offset);
         }
 
         /// <summary>
@@ -433,7 +433,7 @@ namespace Z0
         /// </summary>
         /// <param name="value">The source value</param>
         [MethodImpl(Inline)]
-        public void Fill(Bit value)
+        public void Fill(bit value)
         {
             var primal = PrimalInfo.Get<T>();
             if(value)
@@ -532,41 +532,6 @@ namespace Z0
         public override string ToString()
             => throw new NotImplementedException();
 
-
     }
-
-    // public readonly struct BitVectorProxy<T>
-    //     where T : unmanaged
-    // {
-    //     readonly T[] data;
-
-    //     [MethodImpl(Inline)]
-    //     public static BitVectorProxy<T> From(BitVector<T> src)
-    //         => new BitVectorProxy<T>(src);
-        
-    //     [MethodImpl(Inline)]
-    //     public static implicit operator BitVectorProxy<T>(BitVector<T> src)
-    //         => From(src);
-
-    //     [MethodImpl(Inline)]
-    //     public static implicit operator BitVector<T>(BitVectorProxy<T> src)
-    //         => src.BitVector;
-        
-    //     [MethodImpl(Inline)]
-    //     public BitVectorProxy(BitVector<T> src)
-    //     {
-    //         data = src.Data.ToArray();
-    //     }
-
-    //     /// <summary>
-    //     /// The subject of the proxy, in this case a T-bitvector
-    //     /// </summary>
-    //     public BitVector<T> BitVector
-    //     {
-    //         [MethodImpl(Inline)]
-    //         get => BitVector<T>.From(data,null);
-    //     }
-
-    // }
 
 }

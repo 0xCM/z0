@@ -13,11 +13,11 @@ namespace Z0
     /// <summary>
     /// Defines a bitwise shift, including circular shifts, over subject and offset operands
     /// </summary>
-    public sealed class BitShiftExpr<T> : IBitShiftExpr<T>
+    public sealed class BitShiftExpr<T> : IShiftOp<T>
         where T : unmanaged
     {
         [MethodImpl(Inline)]
-        public BitShiftExpr(BitOpKind op, IBitExpr<T> subject, IBitExpr<int> offset)
+        public BitShiftExpr(ShiftOpKind op, IExpr<T> subject, IExpr<int> offset)
         {
             this.Operator = op;
             this.Subject = subject;
@@ -27,22 +27,22 @@ namespace Z0
         /// <summary>
         /// The shift operaator
         /// </summary>
-        public BitOpKind Operator {get;}
+        public ShiftOpKind Operator {get;}
 
         /// <summary>
         /// The number of parameters accepted by the expression
         /// </summary>
-        public ExprArity Arity => ExprArity.Binary;
+        public ArityKind Arity => ArityKind.Binary;
 
         /// <summary>
         /// The shiftee
         /// </summary>
-        public IBitExpr<T> Subject {get;}
+        public IExpr<T> Subject {get;}
 
         /// <summary>
         /// The right operand
         /// </summary>
-        public IBitExpr<int> Offset {get;}
+        public IExpr<int> Offset {get;}
 
     } 
 }

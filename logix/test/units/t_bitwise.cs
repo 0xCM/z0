@@ -16,436 +16,399 @@ namespace Z0
     {
         // ~ and
         public void check_and_8u()
-            => check_binop<byte>(BitOpKind.And);
+            => check_binary_op<byte>(BinaryLogicKind.And);
         public void check_and_16u()
-            => check_binop<ushort>(BitOpKind.And);
+            => check_binary_op<ushort>(BinaryLogicKind.And);
         public void check_and_32u()
-            => check_binop<uint>(BitOpKind.And);
+            => check_binary_op<uint>(BinaryLogicKind.And);
         public void check_and_64u()
-            => check_binop<ulong>(BitOpKind.And);
+            => check_binary_op<ulong>(BinaryLogicKind.And);
 
         public void check_and_128x8u()
-            => check_binop_128<byte>(BitOpKind.And);
+            => check_binary_op_128<byte>(BinaryLogicKind.And);
 
         public void check_and_128x16u()
-            => check_binop_128<ushort>(BitOpKind.And);
+            => check_binary_op_128<ushort>(BinaryLogicKind.And);
 
         public void check_and_128x32u()
-            => check_binop_128<uint>(BitOpKind.And);
+            => check_binary_op_128<uint>(BinaryLogicKind.And);
 
         public void check_and_128x64u()
-            => check_binop_128<ulong>(BitOpKind.And);
+            => check_binary_op_128<ulong>(BinaryLogicKind.And);
 
         public void check_and_256x8u()
-            => check_binop_256<byte>(BitOpKind.And);
+            => check_binary_op_256<byte>(BinaryLogicKind.And);
 
         public void check_and_256x16u()
-            => check_binop_256<ushort>(BitOpKind.And);
+            => check_binary_op_256<ushort>(BinaryLogicKind.And);
 
         public void check_and_256x32u()
-            => check_binop_256<uint>(BitOpKind.And);
+            => check_binary_op_256<uint>(BinaryLogicKind.And);
 
         public void check_and_256x64u()
-            => check_binop_256<ulong>(BitOpKind.And);
+            => check_binary_op_256<ulong>(BinaryLogicKind.And);
 
         // ~ or
 
         public void check_or_8u()
-            => check_binop<byte>(BitOpKind.Or);
+            => check_binary_op<byte>(BinaryLogicKind.Or);
 
         public void check_or_128x8u()
-            => check_binop_128<byte>(BitOpKind.Or);
+            => check_binary_op_128<byte>(BinaryLogicKind.Or);
 
         public void check_or_256x8u()
-            => check_binop_256<byte>(BitOpKind.Or);
+            => check_binary_op_256<byte>(BinaryLogicKind.Or);
 
         public void check_or_32u()
-            => check_binop<uint>(BitOpKind.Or);
+            => check_binary_op<uint>(BinaryLogicKind.Or);
 
         public void check_or_128x32u()
-            => check_binop_128<uint>(BitOpKind.Or);
+            => check_binary_op_128<uint>(BinaryLogicKind.Or);
 
         public void check_or_256x32u()
-            => check_binop_256<uint>(BitOpKind.Or);
+            => check_binary_op_256<uint>(BinaryLogicKind.Or);
 
         public void check_or_64u()
-            => check_binop<ulong>(BitOpKind.Or);
+            => check_binary_op<ulong>(BinaryLogicKind.Or);
 
         public void check_or_128x64u()
-            => check_binop_128<ulong>(BitOpKind.Or);
+            => check_binary_op_128<ulong>(BinaryLogicKind.Or);
 
         public void check_or_256x64u()
-            => check_binop_256<ulong>(BitOpKind.Or);
+            => check_binary_op_256<ulong>(BinaryLogicKind.Or);
 
         // ~ xor
 
         public void check_xor_8u()
-            => check_binop<byte>(BitOpKind.XOr);
+            => check_binary_op<byte>(BinaryLogicKind.XOr);
 
         public void check_xor_128x8u()
-            => check_binop_128<byte>(BitOpKind.XOr);
+            => check_binary_op_128<byte>(BinaryLogicKind.XOr);
 
         public void check_xor_256x8u()
-            => check_binop_256<byte>(BitOpKind.XOr);
+            => check_binary_op_256<byte>(BinaryLogicKind.XOr);
 
         public void check_xor_32u()
-            => check_binop<uint>(BitOpKind.XOr);
+            => check_binary_op<uint>(BinaryLogicKind.XOr);
 
         public void check_xor_128x32u()
-            => check_binop_128<uint>(BitOpKind.XOr);
+            => check_binary_op_128<uint>(BinaryLogicKind.XOr);
 
         public void check_xor_256x32u()
-            => check_binop_256<uint>(BitOpKind.XOr);
+            => check_binary_op_256<uint>(BinaryLogicKind.XOr);
 
         public void check_xor_64u()
-            => check_binop<ulong>(BitOpKind.XOr);
+            => check_binary_op<ulong>(BinaryLogicKind.XOr);
 
         public void check_xor_128x64u()
-            => check_binop_128<ulong>(BitOpKind.XOr);
+            => check_binary_op_128<ulong>(BinaryLogicKind.XOr);
 
         public void check_xor_256x64u()
-            => check_binop_256<ulong>(BitOpKind.XOr);
+            => check_binary_op_256<ulong>(BinaryLogicKind.XOr);
 
         // ~ sll
 
         public void check_sll_8u()
-            => check_mixedop<byte>(BitOpKind.Sll);
+            => check_shift_op<byte>(ShiftOpKind.Sll);
 
         public void check_sll_128x8u()
-            => check_mixedop_128<byte>(BitOpKind.Sll);
+            => check_shift_op_128<byte>(ShiftOpKind.Sll);
 
         public void check_sll_256x8u()
-            => check_mixedop_256<byte>(BitOpKind.Sll);
+            => check_shift_op_256<byte>(ShiftOpKind.Sll);
 
         public void check_sll_32u()
-            => check_mixedop<uint>(BitOpKind.Sll);
+            => check_shift_op<uint>(ShiftOpKind.Sll);
 
         public void check_sll_128x32u()
-            => check_mixedop_128<uint>(BitOpKind.Sll);
+            => check_shift_op_128<uint>(ShiftOpKind.Sll);
 
         public void check_sll_256x32u()
-            => check_mixedop_256<uint>(BitOpKind.Sll);
+            => check_shift_op_256<uint>(ShiftOpKind.Sll);
 
         public void check_sll_64u()
-            => check_mixedop<ulong>(BitOpKind.Sll);
+            => check_shift_op<ulong>(ShiftOpKind.Sll);
 
         public void check_sll_128x64u()
-            => check_mixedop_128<ulong>(BitOpKind.Sll);
+            => check_shift_op_128<ulong>(ShiftOpKind.Sll);
 
         public void check_sll_256x64u()
-            => check_mixedop_256<ulong>(BitOpKind.Sll);
+            => check_shift_op_256<ulong>(ShiftOpKind.Sll);
 
         // ~ srl
 
         public void check_srl_8u()
-            => check_mixedop<byte>(BitOpKind.Srl);
+            => check_shift_op<byte>(ShiftOpKind.Srl);
 
         public void check_srl_128x8u()
-            => check_mixedop_128<byte>(BitOpKind.Srl);
+            => check_shift_op_128<byte>(ShiftOpKind.Srl);
 
         public void check_srl_256x8u()
-            => check_mixedop_256<byte>(BitOpKind.Srl);
+            => check_shift_op_256<byte>(ShiftOpKind.Srl);
 
         public void check_srl_32u()
-            => check_mixedop<uint>(BitOpKind.Srl);
+            => check_shift_op<uint>(ShiftOpKind.Srl);
 
         public void check_srl_128x32u()
-            => check_mixedop_128<uint>(BitOpKind.Srl);
+            => check_shift_op_128<uint>(ShiftOpKind.Srl);
 
         public void check_srl_256x32u()
-            => check_mixedop_256<uint>(BitOpKind.Srl);
+            => check_shift_op_256<uint>(ShiftOpKind.Srl);
 
         public void check_srl_64u()
-            => check_mixedop<ulong>(BitOpKind.Srl);
+            => check_shift_op<ulong>(ShiftOpKind.Srl);
 
         public void check_srl_128x64u()
-            => check_mixedop_128<ulong>(BitOpKind.Srl);
+            => check_shift_op_128<ulong>(ShiftOpKind.Srl);
 
         public void check_srl_256x64u()
-            => check_mixedop_256<ulong>(BitOpKind.Srl);
+            => check_shift_op_256<ulong>(ShiftOpKind.Srl);
 
         // ~ rotl
 
         public void check_rotl_8u()
-            => check_mixedop<byte>(BitOpKind.Rotl);
+            => check_shift_op<byte>(ShiftOpKind.Rotl);
 
         public void check_rotl_128x8u()
-            => check_mixedop_128<byte>(BitOpKind.Rotl);
+            => check_shift_op_128<byte>(ShiftOpKind.Rotl);
 
         public void check_rotl_256x8u()
-            => check_mixedop_256<byte>(BitOpKind.Rotl);
+            => check_shift_op_256<byte>(ShiftOpKind.Rotl);
 
         public void check_rotl_32u()
-            => check_mixedop<uint>(BitOpKind.Rotl);
+            => check_shift_op<uint>(ShiftOpKind.Rotl);
 
         public void check_rotl_128x32u()
-            => check_mixedop_128<uint>(BitOpKind.Rotl);
+            => check_shift_op_128<uint>(ShiftOpKind.Rotl);
 
         public void check_rotl_256x32u()
-            => check_mixedop_256<uint>(BitOpKind.Rotl);
+            => check_shift_op_256<uint>(ShiftOpKind.Rotl);
 
         public void check_rotl_64u()
-            => check_mixedop<ulong>(BitOpKind.Rotl);
+            => check_shift_op<ulong>(ShiftOpKind.Rotl);
 
         public void check_rotl_128x64u()
-            => check_mixedop_128<ulong>(BitOpKind.Rotl);
+            => check_shift_op_128<ulong>(ShiftOpKind.Rotl);
 
         public void check_rotl_256x64u()
-            => check_mixedop_256<ulong>(BitOpKind.Rotl);
+            => check_shift_op_256<ulong>(ShiftOpKind.Rotl);
 
         // ~ rotl
 
         public void check_rotr_8u()
-            => check_mixedop<byte>(BitOpKind.Rotr);
+            => check_shift_op<byte>(ShiftOpKind.Rotr);
 
         public void check_rotr_128x8u()
-            => check_mixedop_128<byte>(BitOpKind.Rotr);
+            => check_shift_op_128<byte>(ShiftOpKind.Rotr);
 
         public void check_rotr_256x8u()
-            => check_mixedop_256<byte>(BitOpKind.Rotr);
+            => check_shift_op_256<byte>(ShiftOpKind.Rotr);
 
         public void check_rotr_16u()
-            => check_mixedop<ushort>(BitOpKind.Rotr);
+            => check_shift_op<ushort>(ShiftOpKind.Rotr);
 
         public void check_rotr_128x16u()
-            => check_mixedop_128<ushort>(BitOpKind.Rotr);
+            => check_shift_op_128<ushort>(ShiftOpKind.Rotr);
 
         public void check_rotr_256x16u()
-            => check_mixedop_256<ushort>(BitOpKind.Rotr);
+            => check_shift_op_256<ushort>(ShiftOpKind.Rotr);
 
         public void check_rotr_32u()
-            => check_mixedop<uint>(BitOpKind.Rotr);
+            => check_shift_op<uint>(ShiftOpKind.Rotr);
 
         public void check_rotr_128x32u()
-            => check_mixedop_128<uint>(BitOpKind.Rotr);
+            => check_shift_op_128<uint>(ShiftOpKind.Rotr);
 
         public void check_rotr_256x32u()
-            => check_mixedop_256<uint>(BitOpKind.Rotr);
+            => check_shift_op_256<uint>(ShiftOpKind.Rotr);
 
         public void check_rotr_64u()
-            => check_mixedop<ulong>(BitOpKind.Rotr);
+            => check_shift_op<ulong>(ShiftOpKind.Rotr);
 
         public void check_rotr_128x64u()
-            => check_mixedop_128<ulong>(BitOpKind.Rotr);
+            => check_shift_op_128<ulong>(ShiftOpKind.Rotr);
 
         public void check_rotr_256x64u()
-            => check_mixedop_256<ulong>(BitOpKind.Rotr);
+            => check_shift_op_256<ulong>(ShiftOpKind.Rotr);
 
         // ~ not
 
         public void eval_not_8u()
-            => check_unaryop<byte>(BitOpKind.Not);
+            => check_unary_op<byte>(UnaryLogicKind.Not);
 
         public void eval_not_128x8u()
-            => check_unaryop_128<byte>(BitOpKind.Not);
+            => check_unary_op_128<byte>(UnaryLogicKind.Not);
 
         public void eval_not_256x8u()
-            => check_unaryop_256<byte>(BitOpKind.Not);
+            => check_unary_op_256<byte>(UnaryLogicKind.Not);
 
         public void eval_not_16u()
-            => check_unaryop<ushort>(BitOpKind.Not);
+            => check_unary_op<ushort>(UnaryLogicKind.Not);
 
         public void eval_not_128x16u()
-            => check_unaryop_128<ushort>(BitOpKind.Not);
+            => check_unary_op_128<ushort>(UnaryLogicKind.Not);
 
         public void eval_not_256x16u()
-            => check_unaryop_256<ushort>(BitOpKind.Not);
+            => check_unary_op_256<ushort>(UnaryLogicKind.Not);
 
         public void eval_not_32u()
-            => check_unaryop<uint>(BitOpKind.Not);
+            => check_unary_op<uint>(UnaryLogicKind.Not);
 
         public void eval_not_128x32u()
-            => check_unaryop_128<uint>(BitOpKind.Not);
+            => check_unary_op_128<uint>(UnaryLogicKind.Not);
 
         public void eval_not_256x32u()
-            => check_unaryop_256<uint>(BitOpKind.Not);
+            => check_unary_op_256<uint>(UnaryLogicKind.Not);
 
         public void eval_not_64u()
-            => check_unaryop<ulong>(BitOpKind.Not);
+            => check_unary_op<ulong>(UnaryLogicKind.Not);
 
         public void eval_not_128x64u()
-            => check_unaryop_128<ulong>(BitOpKind.Not);
+            => check_unary_op_128<ulong>(UnaryLogicKind.Not);
 
         public void eval_not_256x64u()
-            => check_unaryop_256<ulong>(BitOpKind.Not);
+            => check_unary_op_256<ulong>(UnaryLogicKind.Not);
 
-        // ~ negate
 
-        public void eval_negate_8u()
-            => check_unaryop<byte>(BitOpKind.Negate);
-
-        public void eval_negate_128x8u()
-            => check_unaryop_128<byte>(BitOpKind.Negate);
-
-        public void eval_negate_256x8u()
-            => check_unaryop_256<byte>(BitOpKind.Negate);
-
-        public void eval_negate_16u()
-            => check_unaryop<ushort>(BitOpKind.Negate);
-
-        public void eval_negate_128x16u()
-            => check_unaryop_128<ushort>(BitOpKind.Negate);
-
-        public void eval_negate_256x16u()
-            => check_unaryop_256<ushort>(BitOpKind.Negate);
-
-        public void eval_negate_32u()
-            => check_unaryop<uint>(BitOpKind.Negate);
-
-        public void eval_negate_128x32u()
-            => check_unaryop_128<uint>(BitOpKind.Negate);
-
-        public void eval_negate_256x32u()
-            => check_unaryop_256<uint>(BitOpKind.Negate);
-
-        public void eval_negate_64u()
-            => check_unaryop<ulong>(BitOpKind.Negate);
-
-        public void eval_negate_128x64u()
-            => check_unaryop_128<ulong>(BitOpKind.Negate);
-
-        public void eval_negate_256x64u()
-            => check_unaryop_256<ulong>(BitOpKind.Negate);
-
-        T eval_unaryop<T>(BitOpKind op, T lhs)
+        T eval_unaryop<T>(UnaryLogicKind op, T lhs)
             where T : unmanaged
         {
             switch(op)
             {
-                case BitOpKind.Not:
+                case UnaryLogicKind.Not:
                     return gmath.not(lhs);
-                case BitOpKind.Negate:
+                case UnaryLogicKind.Negate:
                     return gmath.negate(lhs);
             }
             return default;
         }
 
-        T eval_mixedop<T>(BitOpKind op, T lhs, int rhs)
+        T eval_shift_op<T>(ShiftOpKind op, T lhs, int rhs)
             where T : unmanaged
         {
             switch(op)
             {
-                case BitOpKind.Sll:
+                case ShiftOpKind.Sll:
                     return gmath.sll(lhs,rhs);
-                case BitOpKind.Srl:
+                case ShiftOpKind.Srl:
                     return gmath.srl(lhs,rhs);
-                case BitOpKind.Rotl:
+                case ShiftOpKind.Rotl:
                     return gbits.rotl(lhs,rhs);
-                case BitOpKind.Rotr:
+                case ShiftOpKind.Rotr:
                     return gbits.rotr(lhs,rhs);
 
             }
             return default;
         }
 
-        Vec128<T> eval_vunaryop<T>(BitOpKind op, Vec128<T> lhs)
+        Vec128<T> eval_unary_op<T>(UnaryLogicKind op, Vec128<T> lhs)
             where T : unmanaged
         {
             switch(op)
             {
-                case BitOpKind.Not:
+                case UnaryLogicKind.Not:
                     return ginx.vnot(lhs);
-                case BitOpKind.Negate:
+                case UnaryLogicKind.Negate:
                     return ginx.vnegate(lhs);
             }
             return default;
         }
 
-        Vec256<T> eval_vunaryop<T>(BitOpKind op, Vec256<T> lhs)
+        Vec256<T> eval_unary_op<T>(UnaryLogicKind op, Vec256<T> lhs)
             where T : unmanaged
         {
             switch(op)
             {
-                case BitOpKind.Not:
+                case UnaryLogicKind.Not:
                     return ginx.vnot(lhs);
-                case BitOpKind.Negate:
+                case UnaryLogicKind.Negate:
                     return ginx.vnegate(lhs);
             }
             return default;
         }
 
-        Vec128<T> eval_vmixedop<T>(BitOpKind op, Vec128<T> lhs, int rhs)
+        Vec128<T> eval_shift_op<T>(ShiftOpKind op, Vec128<T> lhs, int rhs)
             where T : unmanaged
         {
             switch(op)
             {
-                case BitOpKind.Sll:
+                case ShiftOpKind.Sll:
                     return ginx.vsll(lhs,(byte)rhs);
-                case BitOpKind.Srl:
+                case ShiftOpKind.Srl:
                     return ginx.vsrl(lhs,(byte)rhs);
-                case BitOpKind.Rotl:
+                case ShiftOpKind.Rotl:
                     return ginx.vrotl(lhs,(byte)rhs);
-                case BitOpKind.Rotr:
+                case ShiftOpKind.Rotr:
                     return ginx.vrotr(lhs,(byte)rhs);
 
             }
             return default;
         }
 
-        Vec256<T> eval_vmixedop<T>(BitOpKind op, Vec256<T> lhs, int rhs)
+        Vec256<T> eval_shift_op<T>(ShiftOpKind op, Vec256<T> lhs, int rhs)
             where T : unmanaged
         {
             switch(op)
             {
-                case BitOpKind.Sll:
+                case ShiftOpKind.Sll:
                     return ginx.vsll(lhs,(byte)rhs);
-                case BitOpKind.Srl:
+                case ShiftOpKind.Srl:
                     return ginx.vsrl(lhs,(byte)rhs);
-                case BitOpKind.Rotl:
+                case ShiftOpKind.Rotl:
                     return ginx.vrotl(lhs,(byte)rhs);
-                case BitOpKind.Rotr:
+                case ShiftOpKind.Rotr:
                     return ginx.vrotr(lhs,(byte)rhs);
 
             }
             return default;
         }
 
-        T eval_binop<T>(BitOpKind op, T lhs, T rhs)
+        T eval_binary_op<T>(BinaryLogicKind op, T lhs, T rhs)
             where T : unmanaged
         {
             switch(op)
             {
-                case BitOpKind.And:
+                case BinaryLogicKind.And:
                     return gmath.and(lhs,rhs);
-                case BitOpKind.Or:
+                case BinaryLogicKind.Or:
                     return gmath.or(lhs,rhs);
-                case BitOpKind.XOr:
+                case BinaryLogicKind.XOr:
                     return gmath.xor(lhs,rhs);
             }
             return default;
         }
 
-        Vec128<T> eval_vbinop<T>(BitOpKind op, Vec128<T> lhs, Vec128<T> rhs)
+        Vec128<T> eval_binary_op<T>(BinaryLogicKind op, Vec128<T> lhs, Vec128<T> rhs)
             where T : unmanaged
         {
             switch(op)
             {
-                case BitOpKind.And:
+                case BinaryLogicKind.And:
                     return ginx.vand(lhs,rhs);
-                case BitOpKind.Or:
+                case BinaryLogicKind.Or:
                     return ginx.vor(lhs,rhs);
-                case BitOpKind.XOr:
+                case BinaryLogicKind.XOr:
                     return ginx.vxor(lhs,rhs);
             }
             return default;
         }
 
-        Vec256<T> eval_vbinop<T>(BitOpKind op, Vec256<T> lhs, Vec256<T> rhs)
+        Vec256<T> eval_binary_op<T>(BinaryLogicKind op, Vec256<T> lhs, Vec256<T> rhs)
             where T : unmanaged
         {
             switch(op)
             {
-                case BitOpKind.And:
+                case BinaryLogicKind.And:
                     return ginx.vand(lhs,rhs);
-                case BitOpKind.Or:
+                case BinaryLogicKind.Or:
                     return ginx.vor(lhs,rhs);
-                case BitOpKind.XOr:
+                case BinaryLogicKind.XOr:
                     return ginx.vxor(lhs,rhs);
             }
             return default;
         }
 
-        void check_binop<T>(BitOpKind op)
+        void check_binary_op<T>(BinaryLogicKind op)
             where T : unmanaged
         {
             var v1 = bitvar<T>(1);
@@ -456,19 +419,19 @@ namespace Z0
             {
                 var a = Random.Next<T>();
                 var b = Random.Next<T>();
-                v1.Set(a);   
+                v1.Set(a);
                 v2.Set(b);
                 T actual = BitExpr.eval(expr);
-                T expect = eval_binop(op,a,b);
+                T expect = eval_binary_op(op,a,b);
                 Claim.eq(actual,expect);                            
             }
         }
 
-        void check_unaryop<T>(BitOpKind op)
+        void check_unary_op<T>(UnaryLogicKind op)
             where T : unmanaged
         {
             var v1 = bitvar<T>(1);
-            var expr = unary(op,v1);
+            var expr = unary<T>(op,v1);
             
             for(var i=0; i< SampleSize; i++)
             {
@@ -480,7 +443,7 @@ namespace Z0
             }
         }
 
-        void check_unaryop_128<T>(BitOpKind op)
+        void check_unary_op_128<T>(UnaryLogicKind op)
             where T : unmanaged
         {
             var v1 = bitvar(1, Vec128<T>.Zero);
@@ -491,12 +454,12 @@ namespace Z0
                 var a = Random.CpuVec128<T>();
                 v1.Set(a);   
                 Vec128<T> actual = BitExpr.eval(expr);
-                Vec128<T> expect = eval_vunaryop(op,a);
+                Vec128<T> expect = eval_unary_op(op,a);
                 Claim.eq(actual,expect);                            
             }
         }
 
-        void check_unaryop_256<T>(BitOpKind op)
+        void check_unary_op_256<T>(UnaryLogicKind op)
             where T : unmanaged
         {
             var v1 = bitvar(1, Vec256<T>.Zero);
@@ -507,13 +470,13 @@ namespace Z0
                 var a = Random.CpuVec256<T>();
                 v1.Set(a);   
                 Vec256<T> actual = BitExpr.eval(expr);
-                Vec256<T> expect = eval_vunaryop(op,a);
+                Vec256<T> expect = eval_unary_op(op,a);
                 Claim.eq(actual,expect);                            
             }
         }
 
 
-        void check_binop_128<T>(BitOpKind op)
+        void check_binary_op_128<T>(BinaryLogicKind op)
             where T : unmanaged
         {
             var v1 = bitvar(1, Vec128<T>.Zero);
@@ -527,12 +490,12 @@ namespace Z0
                 v1.Set(a);   
                 v2.Set(b);
                 Vec128<T> actual = BitExpr.eval(expr);
-                Vec128<T> expect = eval_vbinop(op,a,b);
+                Vec128<T> expect = eval_binary_op(op,a,b);
                 Claim.eq(actual,expect);                            
             }
         }
 
-        void check_binop_256<T>(BitOpKind op)
+        void check_binary_op_256<T>(BinaryLogicKind op)
             where T : unmanaged
         {
             var v1 = bitvar(1, Vec256<T>.Zero);
@@ -546,17 +509,17 @@ namespace Z0
                 v1.Set(a);   
                 v2.Set(b);
                 Vec256<T> actual = BitExpr.eval(expr);
-                Vec256<T> expect = eval_vbinop(op,a,b);
+                Vec256<T> expect = eval_binary_op(op,a,b);
                 Claim.eq(actual,expect);                            
             }
         }
 
-        void check_mixedop<T>(BitOpKind op)
+        void check_shift_op<T>(ShiftOpKind op)
             where T : unmanaged
         {
             var v1 = bitvar<T>(1);
             var v2 = bitvar(2, 0);
-            var expr = mixed(op,v1,v2);
+            var expr = shift(op,v1,v2);
             var minoffset = 2;
             var maxoffset = bitsize<T>() - 2;
             
@@ -567,17 +530,17 @@ namespace Z0
                 v1.Set(a);   
                 v2.Set(b);
                 T actual = BitExpr.eval(expr);
-                T expect = eval_mixedop(op,a,b);
+                T expect = eval_shift_op(op,a,b);
                 Claim.eq(actual,expect);                            
             }
         }
 
-        void check_mixedop_128<T>(BitOpKind op)
+        void check_shift_op_128<T>(ShiftOpKind op)
             where T : unmanaged
         {
             var v1 = bitvar(1, Vec128<T>.Zero);
             var v2 = bitvar(2, 0);
-            var expr = mixed(op,v1,v2);
+            var expr = shift(op,v1,v2);
             var minoffset = 2;
             var maxoffset = bitsize<T>() - 2;
             
@@ -588,19 +551,17 @@ namespace Z0
                 v1.Set(a);   
                 v2.Set(b);
                 Vec128<T> actual = BitExpr.eval(expr);
-                Vec128<T> expect = eval_vmixedop(op,a,b);
+                Vec128<T> expect = eval_shift_op(op,a,b);
                 Claim.eq(actual,expect);                            
             }
         }
 
-
-
-        void check_mixedop_256<T>(BitOpKind op)
+        void check_shift_op_256<T>(ShiftOpKind op)
             where T : unmanaged
         {
             var v1 = bitvar(1, Vec256<T>.Zero);
             var v2 = bitvar(2, 0);
-            var expr = mixed(op,v1,v2);
+            var expr = shift(op,v1,v2);
             var minoffset = 2;
             var maxoffset = bitsize<T>() - 2;
             
@@ -611,12 +572,10 @@ namespace Z0
                 v1.Set(a);   
                 v2.Set(b);
                 Vec256<T> actual = BitExpr.eval(expr);
-                Vec256<T> expect = eval_vmixedop(op,a,b);
+                Vec256<T> expect = eval_shift_op(op,a,b);
                 Claim.eq(actual,expect);                            
             }
         }
-
-
     }
 
 }

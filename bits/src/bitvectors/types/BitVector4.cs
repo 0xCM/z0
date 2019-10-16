@@ -606,7 +606,16 @@ namespace Z0
         public BitVector4 AndNot(BitVector4 y)
         {
             throw new NotImplementedException();
-        }        
+        }
 
+        public bit GetBit(BitPos pos)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void SetBit(BitPos pos, bit value)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

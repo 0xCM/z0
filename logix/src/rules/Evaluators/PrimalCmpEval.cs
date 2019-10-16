@@ -19,7 +19,7 @@ namespace Z0
     {
         public static readonly PrimalCmpEval<T> TheOnly = default;
 
-        public bool Satisfies(PrimalCmpExpr<T> rule, LiteralExpr<T> test)
+        public bool Satisfies(PrimalCmpExpr<T> rule, LiteralRuleExpr<T> test)
             => (rule.Kind == PrimalCmpKind.Eq && gmath.eq(rule.Value, test.Value))
             || (rule.Kind == PrimalCmpKind.NEq && gmath.neq(rule.Value, test.Value))
             || (rule.Kind == PrimalCmpKind.Lt && gmath.lt(rule.Value, test.Value))

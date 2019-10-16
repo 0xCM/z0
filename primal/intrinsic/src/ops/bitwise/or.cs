@@ -20,84 +20,70 @@ namespace Z0
     {
         
         [MethodImpl(Inline)]
-        public static Vec128<byte> vor(in Vec128<byte> lhs, in Vec128<byte> rhs)
-            => Or(lhs.xmm, rhs.xmm);
+        public static Vec128<byte> vor(in Vec128<byte> x, in Vec128<byte> y)
+            => Or(x.xmm, y.xmm);
 
         [MethodImpl(Inline)]
-        public static Vec128<short> vor(in Vec128<short> lhs, in Vec128<short> rhs)
-            => Or(lhs.xmm, rhs.xmm);
+        public static Vec128<short> vor(in Vec128<short> x, in Vec128<short> y)
+            => Or(x.xmm, y.xmm);
 
         [MethodImpl(Inline)]
-        public static Vec128<sbyte> vor(in Vec128<sbyte> lhs, in Vec128<sbyte> rhs)
-            => Or(lhs.xmm, rhs.xmm);
+        public static Vec128<sbyte> vor(in Vec128<sbyte> x, in Vec128<sbyte> y)
+            => Or(x.xmm, y.xmm);
 
         [MethodImpl(Inline)]
-        public static Vec128<ushort> vor(in Vec128<ushort> lhs, in Vec128<ushort> rhs)
-            => Or(lhs.xmm, rhs.xmm);
+        public static Vec128<ushort> vor(in Vec128<ushort> x, in Vec128<ushort> y)
+            => Or(x.xmm, y.xmm);
 
         [MethodImpl(Inline)]
-        public static Vec128<int> vor(in Vec128<int> lhs, in Vec128<int> rhs)
-            => Or(lhs.xmm, rhs.xmm);
+        public static Vec128<int> vor(in Vec128<int> x, in Vec128<int> y)
+            => Or(x.xmm, y.xmm);
 
         [MethodImpl(Inline)]
-        public static Vec128<uint> vor(in Vec128<uint> lhs, in Vec128<uint> rhs)
-            => Or(lhs.xmm, rhs.xmm);
+        public static Vec128<uint> vor(in Vec128<uint> x, in Vec128<uint> y)
+            => Or(x.xmm, y.xmm);
 
         [MethodImpl(Inline)]
-        public static Vec128<long> vor(in Vec128<long> lhs, in Vec128<long> rhs)
-            => Or(lhs.xmm, rhs.xmm);
+        public static Vec128<long> vor(in Vec128<long> x, in Vec128<long> y)
+            => Or(x.xmm, y.xmm);
+
 
         [MethodImpl(Inline)]
-        public static Vec128<ulong> vor(in Vec128<ulong> lhs, in Vec128<ulong> rhs)
-            => Or(lhs.xmm, rhs.xmm);
+        public static Vec128<ulong> vor(in Vec128<ulong> x, in Vec128<ulong> y)
+            => Or(x.xmm, y.xmm);
+
 
         [MethodImpl(Inline)]
-        public static Vec128<float> vor(in Vec128<float> lhs, in Vec128<float> rhs)
-            => Or(lhs.xmm, rhs.xmm);
-        
-        [MethodImpl(Inline)]
-        public static Vec128<double> vor(in Vec128<double> lhs, in Vec128<double> rhs)
-            => Or(lhs.xmm, rhs.xmm);
+        public static Vec256<byte> vor(in Vec256<byte> x, in Vec256<byte> y)
+            => Or(x.ymm, y.ymm);
 
         [MethodImpl(Inline)]
-        public static Vec256<byte> vor(in Vec256<byte> lhs, in Vec256<byte> rhs)
-            => Or(lhs.ymm, rhs.ymm);
+        public static Vec256<short> vor(in Vec256<short> x, in Vec256<short> y)
+            => Or(x.ymm, y.ymm);
 
         [MethodImpl(Inline)]
-        public static Vec256<short> vor(in Vec256<short> lhs, in Vec256<short> rhs)
-            => Or(lhs.ymm, rhs.ymm);
+        public static Vec256<sbyte> vor(in Vec256<sbyte> x, in Vec256<sbyte> y)
+            => Or(x.ymm, y.ymm);
 
         [MethodImpl(Inline)]
-        public static Vec256<sbyte> vor(in Vec256<sbyte> lhs, in Vec256<sbyte> rhs)
-            => Or(lhs.ymm, rhs.ymm);
+        public static Vec256<ushort> vor(in Vec256<ushort> x, in Vec256<ushort> y)
+            => Or(x.ymm, y.ymm);
 
         [MethodImpl(Inline)]
-        public static Vec256<ushort> vor(in Vec256<ushort> lhs, in Vec256<ushort> rhs)
-            => Or(lhs.ymm, rhs.ymm);
+        public static Vec256<int> vor(in Vec256<int> x, in Vec256<int> y)
+            => Or(x.ymm, y.ymm);
 
         [MethodImpl(Inline)]
-        public static Vec256<int> vor(in Vec256<int> lhs, in Vec256<int> rhs)
-            => Or(lhs.ymm, rhs.ymm);
+        public static Vec256<uint> vor(in Vec256<uint> x, in Vec256<uint> y)
+            => Or(x.ymm, y.ymm);
 
         [MethodImpl(Inline)]
-        public static Vec256<uint> vor(in Vec256<uint> lhs, in Vec256<uint> rhs)
-            => Or(lhs.ymm, rhs.ymm);
+        public static Vec256<long> vor(in Vec256<long> x, in Vec256<long> y)
+            => Or(x.ymm, y.ymm);
 
         [MethodImpl(Inline)]
-        public static Vec256<long> vor(in Vec256<long> lhs, in Vec256<long> rhs)
-            => Or(lhs.ymm, rhs.ymm);
-
-        [MethodImpl(Inline)]
-        public static Vec256<ulong> vor(in Vec256<ulong> lhs, in Vec256<ulong> rhs)
-            => Or(lhs.ymm, rhs.ymm);
-
-        [MethodImpl(Inline)]
-        public static Vec256<float> vor(in Vec256<float> lhs, in Vec256<float> rhs)
-            => Or(lhs.ymm, rhs.ymm);
-        
-        [MethodImpl(Inline)]
-        public static Vec256<double> vor(in Vec256<double> lhs, in Vec256<double> rhs)
-            => Or(lhs.ymm, rhs.ymm);
+        public static Vec256<ulong> vor(in Vec256<ulong> x, in Vec256<ulong> y)
+            => Or(x.ymm, y.ymm);
 
     }
 

@@ -71,7 +71,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static V and<V>(V x, V y)
             where V : unmanaged, IBitVector<V>
-                => x.And(y);
+                => x.And(y);        
 
         [MethodImpl(Inline)]
         public static V nand<V>(V x, V y)
