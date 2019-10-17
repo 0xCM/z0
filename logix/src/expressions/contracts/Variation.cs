@@ -14,7 +14,7 @@ namespace Z0
     /// <summary>
     /// Characterizes an untyped variable expression
     /// </summary>
-    public interface IVarExpr : IExpr
+    public interface IVariable : IExpr
     {
         /// <summary>
         /// The name of the variable
@@ -29,7 +29,7 @@ namespace Z0
     /// <summary>
     /// Characterizes a typed variable expression
     /// </summary>
-    public interface IVarExpr<T> : IVarExpr, IExpr<T>
+    public interface IVariable<T> : IVariable, IExpr<T>
         where T : unmanaged
     {
         /// <summary>
@@ -43,19 +43,22 @@ namespace Z0
         void Set(IExpr<T> value);
     }
 
-    public interface ILogicVar : ILogicExpr, IVarExpr<Bit>
+    public interface IlogicVariable : ILogicExpr, IVariable
+    {
+        void Set(ILogicExpr value);
+
+        new ILogicExpr Value {get;}
+
+    }
+
+    public interface IVaried : IExpr
     {
 
     }
 
-    public interface IVariedExpr : IExpr
-    {
-
-    }
-
-    public interface IVariedExpr<E,V> : IVariedExpr
+    public interface IVaried<E,V> : IVaried
         where E : IExpr
-        where V : IVarExpr
+        where V : IVariable
     {
 
         E BaseExpr {get;}        
@@ -65,20 +68,20 @@ namespace Z0
         void SetVarValues(params E[] values);        
     }
 
-    public interface IVariedExpr<N,E,V> : IVariedExpr<E,V>
+    public interface IVaried<N,E,V> : IVaried<E,V>
         where E : IExpr
-        where V : IVarExpr
+        where V : IVariable
         where N : ITypeNat, new()
     {
         
     }
 
-    public interface IVariedLogicExpr : ILogicExpr, IVariedExpr<IExpr,ILogicVar>
+    public interface IVariedLogicExpr : ILogicExpr, IVaried<IExpr,IlogicVariable>
     {
 
     }
 
-    public interface IVariedLogicExpr<N> : ILogicExpr, IVariedExpr<N,IExpr,IVarExpr>
+    public interface IVariedLogicExpr<N> : ILogicExpr, IVaried<N,IExpr,IVariable>
         where N : ITypeNat, new()
     {
 

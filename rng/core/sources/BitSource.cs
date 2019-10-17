@@ -12,13 +12,13 @@ namespace Z0
 
     using static zfunc;
 
-    public class BitSource<T> : IRandomStream<Bit>, IPointStream<Bit>
+    public class BitSource<T> : IRandomStream<bit>, IPointStream<bit>
         where T : unmanaged
     {
         const int BufferSize = Pow2.T10;
 
         [MethodImpl(Inline)]
-        public static IRandomStream<Bit> From(IPointSource<T> src)
+        public static IRandomStream<bit> From(IPointSource<T> src)
                 => new BitSource<T>(src);
         
         [MethodImpl(Inline)]
@@ -26,32 +26,32 @@ namespace Z0
         {
             this.RngKind = random.RngKind;
             this.Stream = random.Stream().GetEnumerator().ToBitStream();
-            this.BitQueue = new Queue<Bit>(BufferSize);
+            this.BitQueue = new Queue<bit>(BufferSize);
         }
                 
-        Queue<Bit> BitQueue {get;}
+        Queue<bit> BitQueue {get;}
 
         public RngKind RngKind {get;}
 
-        public IEnumerable<Bit> Stream {get;}
+        public IEnumerable<bit> Stream {get;}
 
         [MethodImpl(Inline)]
-        public Bit Next()
+        public bit Next()
         {
-            if(BitQueue.TryDequeue(out Bit bit))
+            if(BitQueue.TryDequeue(out bit bit))
                 return bit;
 
             BitQueue.Enqueue(Stream.Take(BufferSize));
             return Next();
         }
 
-        public IEnumerable<Bit> Next(int count)
+        public IEnumerable<bit> Next(int count)
         {
             for(var i=0; i<count; i++)
                 yield return Next();
         }
 
-        public IEnumerator<Bit> GetEnumerator()
+        public IEnumerator<bit> GetEnumerator()
             => Stream.GetEnumerator();
 
         IEnumerator IEnumerable.GetEnumerator()

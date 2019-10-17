@@ -24,15 +24,15 @@ namespace Z0
         /// <summary>
         /// Specifies the number of parameters accepted by the expression
         /// </summary>
-        public ArityKind Arity => ArityKind.Sequence;
+        public OpArityKind Arity => OpArityKind.Sequence;
 
         /// <summary>
         /// The left operand
         /// </summary>
         public ILogicOp[] Terms {get;}
 
-        public BinaryLogicKind Operator 
-            => BinaryLogicKind.And;        
+        public BinaryLogicOpKind Operator 
+            => BinaryLogicOpKind.And;        
     }
 
     /// <summary>
@@ -50,7 +50,7 @@ namespace Z0
         /// <summary>
         /// Specifies the number of parameters accepted by the expression
         /// </summary>
-        public ArityKind Arity => ArityKind.Sequence;
+        public OpArityKind Arity => OpArityKind.Sequence;
 
         /// <summary>
         /// The left operand

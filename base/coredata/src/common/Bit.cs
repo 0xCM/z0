@@ -60,6 +60,30 @@ namespace Z0
             => src.state == 1;
 
         /// <summary>
+        /// Defines an explicit bit -> byte conversion
+        /// </summary>
+        /// <param name="src">The source bit</param>
+        [MethodImpl(Inline)]
+        public static explicit operator byte(bit src)
+            => (byte)src.state;
+
+        /// <summary>
+        /// Defines an explicit bit -> ushort conversion
+        /// </summary>
+        /// <param name="src">The source bit</param>
+        [MethodImpl(Inline)]
+        public static explicit operator ushort(bit src)
+            => (ushort)src.state;
+
+        /// <summary>
+        /// Defines an explicit bit -> uint conversion
+        /// </summary>
+        /// <param name="src">The source bit</param>
+        [MethodImpl(Inline)]
+        public static explicit operator uint(bit src)
+            => src.state;
+
+        /// <summary>
         /// Combines the states of the source bits
         /// </summary>
         /// <param name="a">The left bit</param>
@@ -248,10 +272,10 @@ namespace Z0
             => state == b.state;
 
         public override bool Equals(object b)
-            => throw new NotSupportedException();
+            => b is bit x && Equals(x);
 
         public override int GetHashCode()
-            => throw new NotSupportedException();
+            => state.GetHashCode();
   
     }
 

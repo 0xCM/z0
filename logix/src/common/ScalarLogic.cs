@@ -10,7 +10,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static zfunc;    
-    using static TernaryLogicKind;
+    using static TernaryLogicOpKind;
 
 
     public static class ScalarLogic
@@ -313,25 +313,29 @@ namespace Z0
             where T : unmanaged
                 => and(not(and(a,b)), xor(a, xor1(c)));
 
+        // not ((A and B)) and (B xor C)
         [MethodImpl(Inline)]
         public static T f26<T>(T a, T b, T c)
             where T : unmanaged
-                => default;
+                => and(not(and(a,b)),xor(b,c));
 
+        //C ? not (B) : not (A)
         [MethodImpl(Inline)]
         public static T f27<T>(T a, T b, T c)
             where T : unmanaged
-                => default;
+                => select(c,not(b),not(a));
 
+        //C and (B xor A)
         [MethodImpl(Inline)]
         public static T f28<T>(T a, T b, T c)
             where T : unmanaged
-                => default;
+                => and(c,xor(b,a));
 
+        // C ? (B xor A) : (B nor A)
         [MethodImpl(Inline)]
         public static T f29<T>(T a, T b, T c)
             where T : unmanaged
-                => default;
+                => select(c, xor(b,a),nor(b,a));
 
         [MethodImpl(Inline)]
         public static T f2A<T>(T a, T b, T c)
@@ -519,30 +523,30 @@ namespace Z0
             where T : unmanaged
                 => select(c, xnor(b,c), nand(b,c));
 
-        public static UnaryOp<T> unaryop<T>(UnaryLogicKind id)
+        public static UnaryOp<T> unaryop<T>(UnaryLogicOpKind id)
             where T : unmanaged            
         {
             switch(id)
             {
-                case UnaryLogicKind.Not: return not;
-                case UnaryLogicKind.Identity: return identity;
+                case UnaryLogicOpKind.Not: return not;
+                case UnaryLogicOpKind.Identity: return identity;
                 default:
                     throw unsupported<T>();
             }
 
         }
 
-        public static BinaryOp<T> binop<T>(BinaryLogicKind id)
+        public static BinaryOp<T> binop<T>(BinaryLogicOpKind id)
             where T : unmanaged
         {
             switch(id)
             {
-                case BinaryLogicKind.And: return and;
-                case BinaryLogicKind.Nand: return nand;
-                case BinaryLogicKind.Or: return or;
-                case BinaryLogicKind.Nor: return nor;
-                case BinaryLogicKind.XOr: return xor;
-                case BinaryLogicKind.Xnor: return xnor;
+                case BinaryLogicOpKind.And: return and;
+                case BinaryLogicOpKind.Nand: return nand;
+                case BinaryLogicOpKind.Or: return or;
+                case BinaryLogicOpKind.Nor: return nor;
+                case BinaryLogicOpKind.XOr: return xor;
+                case BinaryLogicOpKind.Xnor: return xnor;
                 default:
                     throw unsupported<T>();
             }
@@ -551,10 +555,10 @@ namespace Z0
         /// <summary>
         /// Advertises the supported ternary opeators
         /// </summary>
-        public static IEnumerable<TernaryLogicKind> ternops
-            => range((byte)1,(byte)X25).Cast<TernaryLogicKind>();
+        public static IEnumerable<TernaryLogicOpKind> ternops
+            => range((byte)1,(byte)X25).Cast<TernaryLogicOpKind>();
 
-       public static TernaryOp<T> ternop<T>(TernaryLogicKind id)
+       public static TernaryOp<T> ternop<T>(TernaryLogicOpKind id)
             where T : unmanaged
         {
             switch(id)
@@ -596,6 +600,10 @@ namespace Z0
                 case X23: return f23;
                 case X24: return f24;
                 case X25: return f25;
+                case X26: return f26;
+                case X27: return f27;
+                case X28: return f28;
+                case X29: return f29;
 
                 default: return select;
 

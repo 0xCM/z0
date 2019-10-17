@@ -121,6 +121,22 @@ namespace Z0
                 this.bitseq[i] = (byte)src[i];
         }
 
+        [MethodImpl(Inline)]
+        BitString(ReadOnlySpan<bit> src)
+        {
+            this.bitseq = new byte[src.Length];
+            for(var i=0; i<src.Length; i++)
+                this.bitseq[i] = (byte)src[i];
+        }
+
+        [MethodImpl(Inline)]
+        BitString(bit[] src)
+        {
+            this.bitseq = new byte[src.Length];
+            for(var i=0; i<src.Length; i++)
+                this.bitseq[i] = (byte)src[i];
+        }
+
         /// <summary>
         /// Queries/manipulates bit at specified index
         /// </summary>

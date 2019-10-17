@@ -16,30 +16,30 @@ namespace Z0
     public sealed class VariedLogicExpr : IVariedLogicExpr
     {        
         [MethodImpl(Inline)]
-        public static VariedLogicExpr Define(IExpr baseExpr, params ILogicVar[] variables)
+        public static VariedLogicExpr Define(ILogicExpr baseExpr, params IlogicVariable[] variables)
             => new VariedLogicExpr(baseExpr, variables);
 
         [MethodImpl(Inline)]
-        public static VariedExpr<N> Define<N>(N n, IExpr baseExpr, params ILogicVar[] variables)
+        public static VariedLogicExpr<N> Define<N>(N n, ILogicExpr baseExpr, params IlogicVariable[] variables)
             where N : ITypeNat, new()
         {
             Nat.require<N>(variables.Length);
-            return new VariedExpr<N>(baseExpr, variables);
+            return new VariedLogicExpr<N>(baseExpr, variables);
         }
 
         [MethodImpl(Inline)]
-        public VariedLogicExpr(IExpr baseExpr, params ILogicVar[] variables)
+        public VariedLogicExpr(ILogicExpr baseExpr, params IlogicVariable[] variables)
         {
             this.BaseExpr = baseExpr;
             this.Vars = variables;
         }
 
-        public IExpr BaseExpr {get;}
+        public ILogicExpr BaseExpr {get;}
 
-        public ArityKind Arity 
-            => BaseExpr.Arity;
+        public IlogicVariable[] Vars {get;}
 
-        public ILogicVar[] Vars {get;}
+        IExpr IVaried<IExpr, IlogicVariable>.BaseExpr 
+            => BaseExpr;
 
         public void SetVarValues(params IExpr[] values)
         {
@@ -50,22 +50,23 @@ namespace Z0
 
     }
 
-    public sealed class VariedExpr<N>  : IVariedLogicExpr<N>
+    public sealed class VariedLogicExpr<N>  : IVariedLogicExpr<N>
         where N : ITypeNat,new()
     {
         [MethodImpl(Inline)]
-        internal VariedExpr(IExpr baseExpr, params IVarExpr[] variables)
+        internal VariedLogicExpr(ILogicExpr baseExpr, params IVariable[] variables)
         {
             this.BaseExpr = baseExpr;
             this.Vars = variables;
         }
 
-        public IExpr BaseExpr {get;}
+        public ILogicExpr BaseExpr {get;}
 
-        public ArityKind Arity 
-            => BaseExpr.Arity;
 
-        public IVarExpr[] Vars {get;}
+        public IVariable[] Vars {get;}
+
+        IExpr IVaried<IExpr, IVariable>.BaseExpr 
+            => BaseExpr;
 
         public void SetVarValues(params IExpr[] values)
         {

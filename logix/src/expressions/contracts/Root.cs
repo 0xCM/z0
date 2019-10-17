@@ -12,7 +12,7 @@ namespace Z0
 
     public interface IExpr
     {
-        ArityKind Arity {get;}
+        
     }
 
 
@@ -22,7 +22,15 @@ namespace Z0
 
     }
 
-    public interface IOpExpr<T> : IExpr<T>, IExpr
+    public interface IOpExpr : IExpr
+    {
+        /// <summary>
+        /// The operator arity
+        /// </summary>
+        OpArityKind Arity {get;}
+    }
+
+    public interface IOpExpr<T> : IExpr<T>, IOpExpr
         where T : unmanaged
     {
 
@@ -32,10 +40,10 @@ namespace Z0
         where T : unmanaged
         where K : Enum
     {
-        K Operator {get;}
+        K OpKind {get;}
     }
 
-    public interface ILogicExpr : ILogicExpr<Bit>
+    public interface ILogicExpr : ILogicExpr<bit>
     {
         
     }
@@ -46,7 +54,7 @@ namespace Z0
 
     }
 
-    public interface ILogicOp : ILogicExpr
+    public interface ILogicOp : ILogicExpr, IOpExpr
     {
 
     }
@@ -54,10 +62,8 @@ namespace Z0
     public interface ILogicOp<K> : ILogicOp
         where K : Enum
     {
-        K Operator {get;}
+        K OpKind {get;}
     }
-
-
 
 
 }

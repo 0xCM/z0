@@ -12,16 +12,12 @@ namespace Z0
 
     using static zfunc;    
 
-    [StructLayout(LayoutKind.Explicit, Size = 16)]
+    [StructLayout(LayoutKind.Sequential)]
     public struct BitVector128
     {
-        [FieldOffset(0)]
-        Vec128<ulong> xmm;
 
-        [FieldOffset(0)]
         ulong x0;
 
-        [FieldOffset(8)]
         ulong x1;
 
         /// <summary>
@@ -117,13 +113,6 @@ namespace Z0
         public static implicit operator (ulong x0, ulong x1)(BitVector128 src)
             => (src.x0, src.x1);
 
-        /// <summary>
-        /// Implicitly converts a cpu vector to a bitvector
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        [MethodImpl(Inline)]    
-        public static implicit operator BitVector128(Vec128<ulong> src)
-            => new BitVector128(src);
 
         /// <summary>
         /// Implicitly converts an unsigned 128-bit integer to a bitvector
@@ -267,14 +256,13 @@ namespace Z0
         public static BitVector128 operator |(BitVector128 lhs, BitVector128 rhs)
             => lhs.Or(rhs);
 
-
         /// <summary>
         /// Computes the bitwise complement of the operand
         /// </summary>
         /// <param name="lhs">The source operand</param>
         [MethodImpl(Inline)]
         public static BitVector128 operator ~(BitVector128 src)
-            => src.Flip();
+            => src.Not();
 
         /// <summary>
         /// Negates the operand via two'2 complement
@@ -283,22 +271,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitVector128 operator -(BitVector128 src)
             => src.Negate();
-
-        /// <summary>
-        /// Increments the vector arithmetically
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        [MethodImpl(Inline)]
-        public static BitVector128 operator ++(BitVector128 src)
-            => src.Inc();
-
-        /// <summary>
-        /// Decrements the vector arithmetically
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        [MethodImpl(Inline)]
-        public static BitVector128 operator --(BitVector128 src)
-            => src.Dec();
 
         /// <summary>
         /// Computes the scalar product of the operands
@@ -349,13 +321,6 @@ namespace Z0
             this.x1 = Bits.pack(x10, x11);
         }
 
-        [MethodImpl(Inline)]    
-        public BitVector128(Vec128<ulong> src)
-            : this()
-        {
-            this.x0 = src[0];
-            this.x1 = src[1];
-        }
 
         [MethodImpl(Inline)]    
         public BitVector128(UInt128 src)
@@ -449,7 +414,9 @@ namespace Z0
         [MethodImpl(Inline)]
         public BitVector128 And(BitVector128 rhs)
         {
-            xmm = dinx.vand(xmm, rhs.xmm);
+            var x = dinx.vloadu128(in x0);
+            var y = dinx.vloadu128(in rhs.x0);
+            vstore(dinx.vand(x,y), ref x0);
             return this;
         }
 
@@ -460,7 +427,9 @@ namespace Z0
         [MethodImpl(Inline)]
         public BitVector128 Or(BitVector128 rhs)
         {
-            xmm = dinx.vor(xmm, rhs.xmm);
+            var x = dinx.vloadu128(in x0);
+            var y = dinx.vloadu128(in rhs.x0);
+            vstore(dinx.vor(x,y), ref x0);
             return this;
         }
 
@@ -471,7 +440,9 @@ namespace Z0
         [MethodImpl(Inline)]
         public BitVector128 XOr(BitVector128 rhs)
         {
-            xmm = dinx.vxor(xmm,rhs.xmm);
+            var x = dinx.vloadu128(in x0);
+            var y = dinx.vloadu128(in rhs.x0);
+            vstore(dinx.vxor(x,y), ref x0);
             return this;
         }
 
@@ -481,7 +452,8 @@ namespace Z0
         [MethodImpl(Inline)]
         public BitVector128 Negate()
         {
-            xmm = dinx.vnegate(xmm);
+            var x = dinx.vloadu128(in x0);
+            vstore(dinx.vnegate(x), ref x0);
             return this;
         }
 
@@ -489,9 +461,10 @@ namespace Z0
         /// Applies the bitwise complement
         /// </summary>
         [MethodImpl(Inline)]
-        public BitVector128 Flip()
+        public BitVector128 Not()
         {
-            xmm = dinx.vnot(xmm);
+            var x = dinx.vloadu128(in x0);
+            vstore(dinx.vnot(x), ref x0);
             return this;
         }
 
@@ -527,30 +500,6 @@ namespace Z0
             else
                 return Bits.ntz(x0);
         }
-
-
-        /// <summary>
-        /// Increments the vector arithmetically
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        [MethodImpl(Inline)]
-        public BitVector128 Inc()
-        {
-            xmm = ginx.vnext(xmm);
-            return this;
-        }
-
-        /// <summary>
-        /// Decrements the vector arithmetically
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        [MethodImpl(Inline)]
-        public BitVector128 Dec()
-        {
-            xmm = ginx.vprior<ulong>(xmm);
-            return this;
-        }
-
 
         /// <summary>
         /// Sets a bit to a specified value

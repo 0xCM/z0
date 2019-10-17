@@ -23,23 +23,56 @@ namespace Z0
         public static IPointSource<BitString> BitStringSource(this IPolyrand random, Interval<int> length)        
             => new BitStringSource(random, length);
 
-        /// <summary>
-        /// Converts a point source to a bitstram
-        /// </summary>
-        /// <param name="src">The point source</param>
-        /// <typeparam name="T">The point type</typeparam>
         [MethodImpl(Inline)]
-        public static IRandomStream<Bit> ToBitStream<T>(this IPointSource<T> src)
+        public static IRandomStream<bit> ToBitStream<T>(this IPointSource<T> src)
             where T : unmanaged
                 => BitSource<T>.From(src);    
         
         /// <summary>
-        /// Produces a stream of random bits
+        /// Produces an interminable stream of random bits
+        /// </summary>
+        /// <param name="random">The random source</param>
+        public static IEnumerable<bit> Bits(this IPolyrand random)
+        {
+            while(true)
+            {
+                var scalar = random.Next<ulong>();
+                var bs = Z0.BitString.FromScalar(scalar);
+                for(var i=0; i<bs.Length; i++)
+                {
+                    yield return bs[i];
+                }
+            }
+        }
+
+        /// <summary>
+        /// Produces a specified number of random bits
         /// </summary>
         /// <param name="random">The random source</param>
         [MethodImpl(Inline)]
-        public static IRandomStream<Bit> Bits(this IPolyrand random)
-            => random.PointSource<ulong>().ToBitStream();
+        public static IEnumerable<bit> Bits(this IPolyrand random, int count)
+            => random.Bits().Take(count);
+
+        /// <summary>
+        /// Produces a span populated with a specified number of random bits
+        /// </summary>
+        /// <param name="random">The random source</param>
+        [MethodImpl(Inline)]
+        public static Span<bit> BitSpan(this IPolyrand random, int length)
+            => random.Bits(length).ToArray();
+
+        /// <summary>
+        /// Produces a span populated with a specified number of random bits
+        /// </summary>
+        /// <param name="random">The random source</param>
+        public static void BitSpan(this IPolyrand random, Span<bit> dst)
+        {
+            var src = random.Bits(dst.Length);
+            var it = src.GetEnumerator();
+            var index = 0;
+            while(it.MoveNext())
+                dst[index++] = it.Current;            
+        }
 
         /// <summary>
         /// Produces a bitstring with a specified length

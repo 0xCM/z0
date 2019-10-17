@@ -11,10 +11,6 @@ namespace Z0
     using System.Threading;
     using static zfunc;
 
-    /// <summary>
-    /// Chooses a question based on prior answer
-    /// </summary>
-    /// <typeparam name="T"></typeparam>
     public class SurveyBranch<T>
         where T : unmanaged
     {
@@ -99,6 +95,20 @@ namespace Z0
         public override string ToString()
             => Title;
     }
+
+    public class Answer<T>
+        where T : unmanaged
+    {
+        public Answer(uint questionId, QuestionChoice<T> choice)
+        {
+            this.QuestionId = questionId;
+            this.Choice = choice;
+        }
+        public uint QuestionId {get;}
+
+        public QuestionChoice<T> Choice {get;}
+
+    }
     
     public class Survey<T>
         where T : unmanaged
@@ -119,6 +129,7 @@ namespace Z0
             => Label;
 
         public IReadOnlyList<Question<T>> Questions {get;}
+
 
         public string Format()
         {

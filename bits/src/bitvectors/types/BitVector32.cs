@@ -813,7 +813,6 @@ namespace Z0
             where T : unmanaged
                 => Unsafe.As<uint,T>(ref data);
 
-
         /// <summary>
         /// Applies a truncating reduction Bv32 -> Bv8
         /// </summary>

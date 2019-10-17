@@ -24,7 +24,7 @@ namespace Z0
         T Value {get;}                
     }
 
-    public interface IBitLiteral : ILogicExpr, ILiteral<bit>
+    public interface IBitLiteralExpr : ILogicExpr, ILiteral<bit>
     {
 
     }

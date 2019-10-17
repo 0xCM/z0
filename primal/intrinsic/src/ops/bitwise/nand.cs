@@ -25,8 +25,8 @@ namespace Z0
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
         [MethodImpl(Inline)]
-        public static Vec128<sbyte> vnand(in Vec128<sbyte> x, in Vec128<sbyte> y)
-            => vnot(And(x.xmm, y.xmm));
+        public static Vector128<sbyte> vnand(Vector128<sbyte> x, Vector128<sbyte> y)
+            => vnot(And(x, y));
 
         /// <summary>
         /// Computes the bitwise XOR between operands
@@ -34,8 +34,8 @@ namespace Z0
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
         [MethodImpl(Inline)]
-        public static Vec128<byte> vnand(in Vec128<byte> x, in Vec128<byte> y)
-            => vnot(And(x.xmm, y.xmm));
+        public static Vector128<byte> vnand(Vector128<byte> x, Vector128<byte> y)
+            => vnot(And(x, y));
 
         /// <summary>
         /// Computes the bitwise XOR between operands
@@ -43,8 +43,8 @@ namespace Z0
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
         [MethodImpl(Inline)]
-        public static Vec128<short> vnand(in Vec128<short> x, in Vec128<short> y)
-            => vnot(And(x.xmm, y.xmm));
+        public static Vector128<short> vnand(Vector128<short> x, Vector128<short> y)
+            => vnot(And(x, y));
 
         /// <summary>
         /// Computes the bitwise XOR between operands
@@ -52,8 +52,8 @@ namespace Z0
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
         [MethodImpl(Inline)]
-        public static Vec128<ushort> vnand(in Vec128<ushort> x, in Vec128<ushort> y)
-            => vnot(And(x.xmm, y.xmm));
+        public static Vector128<ushort> vnand(Vector128<ushort> x, Vector128<ushort> y)
+            => vnot(And(x, y));
 
         /// <summary>
         /// Computes the bitwise XOR between operands
@@ -61,8 +61,8 @@ namespace Z0
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
         [MethodImpl(Inline)]
-        public static Vec128<int> vnand(in Vec128<int> x, in Vec128<int> y)
-            => vnot(And(x.xmm, y.xmm));
+        public static Vector128<int> vnand(Vector128<int> x, Vector128<int> y)
+            => vnot(And(x, y));
 
         /// <summary>
         /// Computes the bitwise XOR between operands
@@ -70,8 +70,8 @@ namespace Z0
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
         [MethodImpl(Inline)]
-        public static Vec128<uint> vnand(in Vec128<uint> x, in Vec128<uint> y)
-            => vnot(And(x.xmm, y.xmm));
+        public static Vector128<uint> vnand(Vector128<uint> x, Vector128<uint> y)
+            => vnot(And(x, y));
 
         /// <summary>
         /// Computes the bitwise XOR between operands
@@ -79,8 +79,8 @@ namespace Z0
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
         [MethodImpl(Inline)]
-        public static Vec128<long> vnand(in Vec128<long> x, in Vec128<long> y)
-            => vnot(And(x.xmm, y.xmm));
+        public static Vector128<long> vnand(Vector128<long> x, Vector128<long> y)
+            => vnot(And(x, y));
 
         /// <summary>
         /// Computes the bitwise XOR between operands
@@ -88,8 +88,8 @@ namespace Z0
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
         [MethodImpl(Inline)]
-        public static Vec128<ulong> vnand(in Vec128<ulong> x, in Vec128<ulong> y)
-            => vnot(And(x.xmm, y.xmm));
+        public static Vector128<ulong> vnand(Vector128<ulong> x, Vector128<ulong> y)
+            => vnot(And(x, y));
 
         /// <summary>
         /// Computes the bitwise XOR between operands
@@ -97,8 +97,8 @@ namespace Z0
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
         [MethodImpl(Inline)]
-        public static Vec128<float> vnand(in Vec128<float> x, in Vec128<float> y)
-            => dfp.vnot(And(x.xmm, y.xmm));
+        public static Vector128<float> vnand(Vector128<float> x, Vector128<float> y)
+            => dfp.vnot(And(x, y));
         
         /// <summary>
         /// Computes the bitwise XOR between operands
@@ -106,8 +106,8 @@ namespace Z0
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
         [MethodImpl(Inline)]
-        public static Vec128<double> vnand(in Vec128<double> x, in Vec128<double> y)
-            => dfp.vnot(And(x.xmm, y.xmm));
+        public static Vector128<double> vnand(Vector128<double> x, Vector128<double> y)
+            => dfp.vnot(And(x, y));
 
         /// <summary>
         /// Computes the bitwise XOR between operands
@@ -115,8 +115,8 @@ namespace Z0
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
         [MethodImpl(Inline)]
-        public static Vec256<byte> vnand(in Vec256<byte> x, in Vec256<byte> y)
-            => vnot(And(x.ymm, y.ymm));
+        public static Vector256<byte> vnand(Vector256<byte> x, Vector256<byte> y)
+            => vnot(And(x, y));
 
         /// <summary>
         /// Computes the bitwise XOR between operands
@@ -124,8 +124,8 @@ namespace Z0
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
         [MethodImpl(Inline)]
-        public static Vec256<short> vnand(in Vec256<short> x, in Vec256<short> y)
-            => vnot(And(x.ymm, y.ymm));
+        public static Vector256<short> vnand(Vector256<short> x, Vector256<short> y)
+            => vnot(And(x, y));
 
         /// <summary>
         /// Computes the bitwise XOR between operands
@@ -133,8 +133,8 @@ namespace Z0
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
         [MethodImpl(Inline)]
-        public static Vec256<sbyte> vnand(in Vec256<sbyte> x, in Vec256<sbyte> y)
-            => vnot(And(x.ymm, y.ymm));
+        public static Vector256<sbyte> vnand(Vector256<sbyte> x, Vector256<sbyte> y)
+            => vnot(And(x, y));
 
         /// <summary>
         /// Computes the bitwise XOR between operands
@@ -142,8 +142,8 @@ namespace Z0
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
         [MethodImpl(Inline)]
-        public static Vec256<ushort> vnand(in Vec256<ushort> x, in Vec256<ushort> y)
-            => vnot(And(x.ymm, y.ymm));
+        public static Vector256<ushort> vnand(Vector256<ushort> x, Vector256<ushort> y)
+            => vnot(And(x, y));
 
         /// <summary>
         /// Computes the bitwise XOR between operands
@@ -151,8 +151,8 @@ namespace Z0
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
         [MethodImpl(Inline)]
-        public static Vec256<int> vnand(in Vec256<int> x, in Vec256<int> y)
-            => vnot(And(x.ymm, y.ymm));
+        public static Vector256<int> vnand(Vector256<int> x, Vector256<int> y)
+            => vnot(And(x, y));
 
         /// <summary>
         /// Computes the bitwise XOR between operands
@@ -160,8 +160,8 @@ namespace Z0
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
         [MethodImpl(Inline)]
-        public static Vec256<uint> vnand(in Vec256<uint> x, in Vec256<uint> y)
-            => vnot(And(x.ymm, y.ymm));
+        public static Vector256<uint> vnand(Vector256<uint> x, Vector256<uint> y)
+            => vnot(And(x, y));
 
         /// <summary>
         /// Computes the bitwise XOR between operands
@@ -169,8 +169,8 @@ namespace Z0
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
         [MethodImpl(Inline)]
-        public static Vec256<long> vnand(in Vec256<long> x, in Vec256<long> y)
-            => vnot(And(x.ymm, y.ymm));
+        public static Vector256<long> vnand(Vector256<long> x, Vector256<long> y)
+            => vnot(And(x, y));
 
         /// <summary>
         /// Computes the bitwise XOR between operands
@@ -178,8 +178,8 @@ namespace Z0
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
         [MethodImpl(Inline)]
-        public static Vec256<ulong> vnand(in Vec256<ulong> x, in Vec256<ulong> y)
-            => vnot(And(x.ymm, y.ymm));
+        public static Vector256<ulong> vnand(Vector256<ulong> x, Vector256<ulong> y)
+            => vnot(And(x, y));
 
         /// <summary>
         /// Computes the bitwise XOR between operands
@@ -187,8 +187,8 @@ namespace Z0
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
         [MethodImpl(Inline)]
-        public static Vec256<float> vnand(in Vec256<float> x, in Vec256<float> y)
-            => dfp.vnot(And(x.ymm, y.ymm));
+        public static Vector256<float> vnand(Vector256<float> x, Vector256<float> y)
+            => dfp.vnot(And(x, y));
         
         /// <summary>
         /// Computes the bitwise XOR between operands
@@ -196,8 +196,8 @@ namespace Z0
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
         [MethodImpl(Inline)]
-        public static Vec256<double> vnand(in Vec256<double> x, in Vec256<double> y)
-            => dfp.vnot(And(x.ymm, y.ymm));
+        public static Vector256<double> vnand(Vector256<double> x, Vector256<double> y)
+            => dfp.vnot(And(x, y));
 
    }
 

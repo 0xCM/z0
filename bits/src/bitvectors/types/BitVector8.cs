@@ -88,6 +88,15 @@ namespace Z0
         public static BitVector8 FromBitString(in BitString src)
             => src.TakeUInt8();    
 
+        public static BitVector8 FromBits(params bit[] src)
+        {
+            var len = Math.Min(src.Length, 8);
+            var dst = 0u;
+            for(var i=0; i< len; i++)
+                if(src[i]) dst |= (1u << i);
+            return FromScalar(dst);                
+        }
+
         /// <summary>
         /// Enumerates each and every 8-bit bitvector exactly once
         /// </summary>

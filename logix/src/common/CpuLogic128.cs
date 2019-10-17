@@ -11,7 +11,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static zfunc;    
-    using static TernaryLogicKind;
+    using static TernaryLogicOpKind;
     using static As;
 
     public static class CpuLogic128
@@ -251,36 +251,36 @@ namespace Z0
             where T : unmanaged
                 => select(c, xnor(b,c), nand(b,c));
 
-        public static UnaryOp<Vector128<T>> unaryop<T>(UnaryLogicKind id)
+        public static UnaryOp<Vector128<T>> unaryop<T>(UnaryLogicOpKind id)
             where T : unmanaged            
         {
             switch(id)
             {
-                case UnaryLogicKind.Not: return not;
-                case UnaryLogicKind.Identity: return identity;
+                case UnaryLogicOpKind.Not: return not;
+                case UnaryLogicOpKind.Identity: return identity;
                 default:
                     throw unsupported<T>();
             }
 
         }
 
-       public static BinaryOp<Vector128<T>> binop<T>(BinaryLogicKind id)
+       public static BinaryOp<Vector128<T>> binop<T>(BinaryLogicOpKind id)
             where T : unmanaged
         {
             switch(id)
             {
-                case BinaryLogicKind.And: return and;
-                case BinaryLogicKind.Nand: return nand;
-                case BinaryLogicKind.Or: return or;
-                case BinaryLogicKind.Nor: return nor;
-                case BinaryLogicKind.XOr: return xor;
-                case BinaryLogicKind.Xnor: return xnor;
+                case BinaryLogicOpKind.And: return and;
+                case BinaryLogicOpKind.Nand: return nand;
+                case BinaryLogicOpKind.Or: return or;
+                case BinaryLogicOpKind.Nor: return nor;
+                case BinaryLogicOpKind.XOr: return xor;
+                case BinaryLogicOpKind.Xnor: return xnor;
                 default:
                     throw unsupported<T>();
             }
         }
 
-        public static TernaryOp<Vector128<T>> ternop<T>(TernaryLogicKind id)
+        public static TernaryOp<Vector128<T>> ternop<T>(TernaryLogicOpKind id)
             where T : unmanaged
         {
             switch(id)

@@ -10,42 +10,42 @@ namespace Z0
     
     using static zfunc;
 
-    public interface ITernaryLogicOp : ILogicOp<TernaryLogicKind>
+    public interface ITernaryLogicOp : ILogicOp<TernaryLogicOpKind>
     {
 
         /// <summary>
         /// The first operand
         /// </summary>
-        ILogicExpr First {get;}
+        ILogicExpr FirstArg {get;}
 
         /// <summary>
         /// The second operand
         /// </summary>
-        ILogicExpr Second {get;}
+        ILogicExpr SecondArg {get;}
 
         /// <summary>
         /// The third operand
         /// </summary>
-        ILogicExpr Third {get;}
+        ILogicExpr ThirdArg {get;}
     }
 
-    public interface ITernaryLogicOp<T> : IOpExpr<T,TernaryLogicKind>
+    public interface ITernaryLogicOp<T> : IOpExpr<T,TernaryLogicOpKind>
         where T : unmanaged
     {
         /// <summary>
         /// The first operand
         /// </summary>
-        ILogicExpr<T> First {get;}
+        ILogicExpr<T> FirstArg {get;}
 
         /// <summary>
         /// The second operand
         /// </summary>
-        ILogicExpr<T> Second {get;}
+        ILogicExpr<T> SecondArg {get;}
 
         /// <summary>
         /// The third operand
         /// </summary>
-        ILogicExpr<T> Third {get;}
+        ILogicExpr<T> ThirdArg {get;}
 
     }
 

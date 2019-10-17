@@ -11,7 +11,7 @@ namespace Z0
 
     using static zfunc;    
     using static As;
-    using static TernaryLogicKind;
+    using static TernaryLogicOpKind;
 
     public static class VectorLogic
     {
@@ -249,37 +249,37 @@ namespace Z0
             where T : unmanaged, IBitVector<T>
                 => select(c, not(a), not(b));
 
-        public static UnaryOp<T> unaryop<T>(UnaryLogicKind id)
+        public static UnaryOp<T> unaryop<T>(UnaryLogicOpKind id)
             where T : unmanaged, IBitVector<T>
         {
 
             switch(id)
             {
-                case UnaryLogicKind.Not: return not;
-                case UnaryLogicKind.Identity: return identity;
+                case UnaryLogicOpKind.Not: return not;
+                case UnaryLogicOpKind.Identity: return identity;
                 default:
                     throw unsupported<T>();
             }
 
         }
 
-        public static BinaryOp<T> binop<T>(BinaryLogicKind id)
+        public static BinaryOp<T> binop<T>(BinaryLogicOpKind id)
             where T : unmanaged, IBitVector<T>
         {
             switch(id)
             {
-                case BinaryLogicKind.And: return and;
-                case BinaryLogicKind.Nand: return nand;
-                case BinaryLogicKind.Or: return or;
-                case BinaryLogicKind.Nor: return nor;
-                case BinaryLogicKind.XOr: return xor;
-                case BinaryLogicKind.Xnor: return xnor;
+                case BinaryLogicOpKind.And: return and;
+                case BinaryLogicOpKind.Nand: return nand;
+                case BinaryLogicOpKind.Or: return or;
+                case BinaryLogicOpKind.Nor: return nor;
+                case BinaryLogicOpKind.XOr: return xor;
+                case BinaryLogicOpKind.Xnor: return xnor;
                 default:
                     throw unsupported<T>();
             }
         }
 
-        public static TernaryOp<T> ternop<T>(TernaryLogicKind id)
+        public static TernaryOp<T> ternop<T>(TernaryLogicOpKind id)
             where T : unmanaged, IBitVector<T>
         {
             switch(id)

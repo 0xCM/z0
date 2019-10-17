@@ -10,32 +10,32 @@ namespace Z0
     
     using static zfunc;
 
-    public interface IBinaryLogicOp : ILogicOp<BinaryLogicKind>
+    public interface IBinaryLogicOp : ILogicOp<BinaryLogicOpKind>
     {
         /// <summary>
         /// The left operand
         /// </summary>
-        ILogicExpr Left {get;}
+        ILogicExpr LeftArg {get;}
 
         /// <summary>
         /// The right operand
         /// </summary>
-        ILogicExpr Right {get;}
+        ILogicExpr RightArg {get;}
 
     }
 
-    public interface IBinaryLogicOp<T> : IOpExpr<T,BinaryLogicKind>
+    public interface IBinaryLogicOp<T> : IOpExpr<T,BinaryLogicOpKind>
         where T : unmanaged
     {
         /// <summary>
         /// The left operand
         /// </summary>
-        IExpr<T> Left {get;}
+        IExpr<T> LeftArg {get;}
 
         /// <summary>
         /// The right operand
         /// </summary>
-        IExpr<T> Right {get;}
+        IExpr<T> RightArg {get;}
 
         
     }

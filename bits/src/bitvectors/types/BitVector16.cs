@@ -148,7 +148,6 @@ namespace Z0
         public static BitVector16 operator ^(BitVector16 x, BitVector16 y)
             => bitvector.xor(x,y);
 
-
         /// <summary>
         /// Computes the bitwise AND of the source operands
         /// </summary>
@@ -244,7 +243,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitVector16 operator --(BitVector16 src)
             => bitvector.dec(src);
-
 
         /// <summary>
         /// Returns true if the source vector is nonzero, false otherwise

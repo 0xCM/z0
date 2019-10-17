@@ -19,7 +19,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source stream</param>
         /// <typeparam name="T">The primal type</typeparam>
-        public static IEnumerable<Bit> ToBitStream<T>(this IEnumerator<T> src)
+        public static IEnumerable<bit> ToBitStream<T>(this IEnumerator<T> src)
             where T : unmanaged
         {
             while(src.MoveNext())
@@ -36,7 +36,7 @@ namespace Z0
         /// <param name="src">The source stream</param>
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
-        public static IEnumerable<Bit> ToBitStream<T>(this IEnumerable<T> src)
+        public static IEnumerable<bit> ToBitStream<T>(this IEnumerable<T> src)
             where T : unmanaged
                 => src.GetEnumerator().ToBitStream();
 

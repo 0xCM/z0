@@ -37,7 +37,6 @@ namespace Z0
         public static BitVector64 Alloc()
             => new BitVector64(0);
 
-
         /// <summary>
         /// Creates a vector from a primal source value
         /// </summary>

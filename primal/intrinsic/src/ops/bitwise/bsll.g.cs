@@ -8,6 +8,7 @@ namespace Z0
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
+    using System.Runtime.Intrinsics;
     using static zfunc;
     using static As;
     using static AsIn;
@@ -19,29 +20,29 @@ namespace Z0
     {
 
         [MethodImpl(Inline)]
-        public static Vec128<T> vbsll<T>(in Vec128<T> lhs, byte count)
+        public static Vector128<T> vbsll<T>(Vector128<T> lhs, byte count)
             where T : unmanaged
         {
             if(typeof(T) == typeof(ushort))
-                return generic<T>(dinx.vbsll(in uint16(in lhs), count));
+                return generic<T>(dinx.vbsll(uint16(lhs), count));
             else if(typeof(T) == typeof(uint)) 
-                return generic<T>(dinx.vbsll(in uint32(in lhs), count));
+                return generic<T>(dinx.vbsll(uint32(lhs), count));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(dinx.vbsll(in uint64(in lhs), count));
+                return generic<T>(dinx.vbsll(uint64(lhs), count));
             else
                 throw unsupported<T>();
         }
 
         [MethodImpl(Inline)]
-        public static Vec256<T> vbsll<T>(in Vec256<T> lhs, byte count)
+        public static Vector256<T> vbsll<T>(Vector256<T> lhs, byte count)
             where T : unmanaged
         {
             if(typeof(T) == typeof(ushort))
-                return generic<T>(dinx.vbsll(in uint16(in lhs), count));
+                return generic<T>(dinx.vbsll(uint16(lhs), count));
             else if(typeof(T) == typeof(uint)) 
-                return generic<T>(dinx.vbsll(in uint32(in lhs), count));
+                return generic<T>(dinx.vbsll(uint32(lhs), count));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(dinx.vbsll(in uint64(in lhs), count));
+                return generic<T>(dinx.vbsll(uint64(lhs), count));
             else
                 throw unsupported<T>();
         }

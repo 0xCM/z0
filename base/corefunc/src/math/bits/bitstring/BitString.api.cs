@@ -135,11 +135,19 @@ namespace Z0
             => new BitString(src);
 
         /// <summary>
+        /// Constructs a bitstring from bitspan
+        /// </summary>
+        /// <param name="src">The bit source</param>
+        [MethodImpl(Inline)]
+        public static BitString FromBits(ReadOnlySpan<bit> src)                
+            => new BitString(src);
+
+        /// <summary>
         /// Constructs a bitstring from a parameter array of bits, ordered lo -> hi
         /// </summary>
         /// <param name="src">The bit source</param>
         [MethodImpl(Inline)]
-        public static BitString FromBits(Bit[] src)                
+        public static BitString FromBits(bit[] src)                
             => new BitString(src);
 
         /// <summary>
@@ -147,7 +155,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The bit source</param>
         [MethodImpl(Inline)]
-        public static BitString FromHiToLo(params Bit[] src)                
+        public static BitString FromHiToLo(params bit[] src)                
             => new BitString(src.Reverse());
 
         /// <summary>

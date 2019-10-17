@@ -131,11 +131,6 @@ namespace Z0
 
     }
 
-    public interface ILogicVector<T> : IBitVector
-        where T : unmanaged
-    {
-
-    }
 
     public interface IBitVector<V> : IBitVector
         where V : unmanaged, IBitVector
@@ -323,7 +318,6 @@ namespace Z0
         T Scalar {get;}
 
     }
-
 
 
 }

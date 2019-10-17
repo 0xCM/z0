@@ -13,12 +13,12 @@ namespace Z0
     /// <summary>
     /// Represents a comparison between a control expression and the result of applying a unary binary operator to specified operands
     /// </summary>
-    public sealed class UnaryTestExpr<T> : TestExpr<T, UnaryLogicExpr<T>>
+    public sealed class UnaryTestExpr<T> : TestExpr<T, UnaryLogicOp<T>>
         where T : unmanaged
     {
         [MethodImpl(Inline)]
-        public UnaryTestExpr(BinaryLogicKind testop, IExpr<T> control, UnaryLogicExpr<T> expr)
-            : base(testop, ArityKind.Unary, control,expr)
+        public UnaryTestExpr(BinaryLogicOpKind testop, IExpr<T> control, UnaryLogicOp<T> expr)
+            : base(testop, OpArityKind.Unary, control,expr)
         {
                 
         }        
@@ -28,12 +28,12 @@ namespace Z0
     /// <summary>
     /// Represents a comparison between a control expression and the result of applying a bitwise binary operator to specified operands
     /// </summary>
-    public sealed class BinaryTestExpr<T> : TestExpr<T, BinaryLogicExpr<T>>
+    public sealed class BinaryTestExpr<T> : TestExpr<T, BinaryLogicOp<T>>
         where T : unmanaged
     {
         [MethodImpl(Inline)]
-        public BinaryTestExpr(BinaryLogicKind testop, IExpr<T> control, BinaryLogicExpr<T> expr)
-            : base(testop, ArityKind.Binary, control,expr)
+        public BinaryTestExpr(BinaryLogicOpKind testop, IExpr<T> control, BinaryLogicOp<T> expr)
+            : base(testop, OpArityKind.Binary, control,expr)
         {
                 
         }        
@@ -43,12 +43,12 @@ namespace Z0
     /// <summary>
     /// Represents a comparison between a control expression and the result of applying a mixed bitwise operator to specified operands
     /// </summary>
-    public sealed class ShiftTestExpr<T> : TestExpr<T, BitShiftExpr<T>>
+    public sealed class ShiftTestExpr<T> : TestExpr<T, BitShiftOp<T>>
         where T : unmanaged
     {
         [MethodImpl(Inline)]
-        public ShiftTestExpr(BinaryLogicKind testop, IExpr<T> control, BitShiftExpr<T> expr)
-            : base(testop, ArityKind.Binary, control,expr)
+        public ShiftTestExpr(BinaryLogicOpKind testop, IExpr<T> control, BitShiftOp<T> expr)
+            : base(testop, OpArityKind.Binary, control,expr)
         {
                 
         }        
@@ -60,7 +60,7 @@ namespace Z0
         where E : IExpr
     {
 
-        protected TestExpr(BinaryLogicKind op, ArityKind arity, IExpr<T> control, E subject)
+        protected TestExpr(BinaryLogicOpKind op, OpArityKind arity, IExpr<T> control, E subject)
         {
             this.Operator = op;
             this.Arity = arity;
@@ -71,12 +71,12 @@ namespace Z0
         /// <summary>
         /// The test operator
         /// </summary>
-        public BinaryLogicKind Operator {get;}
+        public BinaryLogicOpKind Operator {get;}
 
         /// <summary>
         /// The number of parameters accepted by the expression
         /// </summary>
-        public ArityKind Arity {get;}
+        public OpArityKind Arity {get;}
 
         /// <summary>
         /// The control expression

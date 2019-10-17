@@ -36,9 +36,8 @@ namespace Z0
         public static BitVector4 Alloc()
             => new BitVector4();
 
-
         [MethodImpl(Inline)]
-        public static BitVector4 FromParts(Bit x0, Bit x1, Bit x2, Bit x3)
+        public static BitVector4 FromBits(bit x0, bit x1, bit x2, bit x3)
         {
             var data = (byte)0;
             if(x0) 
