@@ -30,9 +30,6 @@ namespace Z0
         /// </summary>
         public IExpr<T> Value {get; private set;}
         
-        public OpArityKind Arity 
-            => OpArityKind.Unary;
-
         IExpr IVariable.Value 
             => Value;
 
@@ -52,14 +49,17 @@ namespace Z0
             Value = new Literal<T>(value);
         }
 
-
+        [MethodImpl(Inline)]
         public void Set(IExpr value)
             => Value = (IExpr<T>)value;
 
+        public string Format()
+            => Format(true);
+
+        public string Format(bool withValue)
+            => $"v_{Name}" + (withValue ? $" := {Value}" : string.Empty);
+        
         public override string ToString()
-            => $"{Name} := {Value}";
+            => Format();
     }
-
-
-
 }

@@ -30,7 +30,7 @@ namespace Z0
         /// </summary>
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
-        public static  Vec256<T> ones<T>()
+        public static Vec256<T> ones<T>()
             where T : unmanaged        
                 => ginx.vones256<T>();
 
@@ -39,7 +39,7 @@ namespace Z0
         /// </summary>
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
-        public static  Vec256<T> zeroes<T>()
+        public static Vector256<T> zeroes<T>()
             where T : unmanaged        
                 => default;
 

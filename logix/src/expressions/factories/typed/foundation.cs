@@ -10,6 +10,11 @@ namespace Z0
     
     using static zfunc;
 
+    public static class TypedExprSpec
+    {
+        
+    }
+
     public static partial class TypedLogicSpec
     {
         /// <summary>

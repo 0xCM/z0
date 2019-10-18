@@ -96,7 +96,7 @@ namespace Z0
             Disassemble(typeof(fpoc));    
             Disassemble(typeof(circop));    
             Disassemble(typeof(BitParts));                
-            Disassemble(typeof(BooleanLogic));                
+            Disassemble(typeof(BitLogic));                
         }
 
         public unsafe void ListMethods(Type t)

@@ -10,7 +10,12 @@ namespace Z0
     
     using static zfunc;
 
-    public interface IShiftOp<T> : IOpExpr<T, ShiftOpKind>
+    public interface IShiftOp : IOpExpr
+    {
+        
+    }
+
+    public interface IShiftOp<T> : IShiftOp, IOpExpr<T, ShiftOpKind>
         where T : unmanaged
     {
         /// <summary>

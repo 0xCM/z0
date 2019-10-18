@@ -87,5 +87,8 @@ namespace Z0
         /// The expression to be tested
         /// </summary>
         public E Subject {get;}
+
+        public string Format()
+            => Control.Format() + " ?=? " + Operator.Format();
     }
 }

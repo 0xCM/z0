@@ -79,14 +79,14 @@ namespace Z0
         }
 
         /// <summary>
-        /// Constructs a display name for a method that includes the name of a typee
+        /// Constructs a display name for a generic method specialized for a specified type
         /// </summary>
         /// <typeparam name="T">The relative type</typeparam>
         /// <param name="src">The source method</param> 
         [MethodImpl(Inline)]
-        public static string TypedDisplayName<T>(this MethodBase src)
-            => typeof(T).Name
-                + $"/{src.Name.Replace(typeof(T).FullName + ".", string.Empty)}";
+        public static string SpecializeName<T>(this MethodBase src)
+            => src.DeclaringType.DisplayName() + "/" + src.Name + "<" + typeof(T).DisplayName() + ">";
+                
 
         /// <summary>
         /// Constructs a display name for a method

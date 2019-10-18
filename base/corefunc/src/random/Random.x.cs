@@ -6,7 +6,8 @@ namespace  Z0
 {
     using System;
     using System.Runtime.CompilerServices;    
-    
+    using System.Collections.Generic;
+
     using static zfunc;
     
     partial class xfunc
@@ -98,6 +99,66 @@ namespace  Z0
         public static (T a, T b) NextPair<T>(this IPolyrand random, T min, T max)
             where T : unmanaged
                 => (random.Next<T>(min,max), random.Next<T>(min,max));
+
+        /// <summary>
+        /// A random power of 2 within the primal type domain
+        /// </summary>
+        /// <param name="random">The random source</param>
+        /// <typeparam name="T">The primal type</typeparam>
+        [MethodImpl(Inline)]
+        public static T Pow2<T>(this IPolyrand random)
+            where T : unmanaged
+        {
+            var exp = random.Next<byte>(0,(byte)bitsize<T>());
+            return convert<ulong,T>(Z0.Pow2.pow(exp));
+        }
+
+        /// <summary>
+        /// A random power of 2 with specified min/max exponent values
+        /// </summary>
+        /// <param name="random">The random source</param>
+        /// <param name="min">The min exponent value</param>
+        /// <param name="min">The max exponent value</param>
+        /// <typeparam name="T">The primal type</typeparam>
+        [MethodImpl(Inline)]
+        public static T Pow2<T>(this IPolyrand random, int minexp, int maxexp)
+            where T : unmanaged
+        {
+            var exp = random.Next((byte)minexp, (byte)(maxexp + 1));
+            return convert<ulong,T>(Z0.Pow2.pow(exp));
+        }
+
+        /// <summary>
+        /// A stream of random powers of 2 within the primal type domain
+        /// </summary>
+        /// <param name="random">The random source</param>
+        /// <typeparam name="T">The primal type</typeparam>
+        public static IEnumerable<T> Pow2Stream<T>(this IPolyrand random)
+            where T : unmanaged
+        {
+            var width = (byte)bitsize<T>();
+            while(true)
+            {
+                var exp = random.Next<byte>(0,width);
+                yield return convert<ulong,T>(Z0.Pow2.pow(exp));
+            }
+        }
+
+        [MethodImpl(Inline)]
+        public static T Pow2Cut<T>(this IPolyrand random)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(byte))
+                return convert<T>(random.Pow2<byte>(0, 7));
+            else if (typeof(T) == typeof(ushort))
+                return convert<T>(random.Pow2<ushort>(8, 15));
+            else if (typeof(T) == typeof(uint))
+                return convert<T>(random.Pow2<uint>(16, 31));
+            else if (typeof(T) == typeof(ulong))
+                return convert<T>(random.Pow2<ulong>(32, 63));                
+            else
+                return default;
+        }
 
     }
 }

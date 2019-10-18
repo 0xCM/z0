@@ -54,6 +54,45 @@ namespace Z0
         }
 
 
+        [MethodImpl(Inline)]
+        public static Vector128<T> loadu<T>(in T src, out Vector128<T> dst)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(byte) 
+            || typeof(T) == typeof(ushort) 
+            || typeof(T) == typeof(uint) 
+            || typeof(T) == typeof(ulong))
+                loadu_u(in src, out dst);
+            else if(typeof(T) == typeof(sbyte) 
+            || typeof(T) == typeof(short) 
+            || typeof(T) == typeof(int) 
+            || typeof(T) == typeof(long))
+                loadu_i(in src, out dst);
+            else
+                throw unsupported<T>();
+            return dst;
+        }
+
+
+        [MethodImpl(Inline)]
+        public static unsafe Vec256<T> loadu<T>(in T src, out Vector256<T> dst)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(byte) 
+            || typeof(T) == typeof(ushort) 
+            || typeof(T) == typeof(uint) 
+            || typeof(T) == typeof(ulong))
+                loadu_u(in src, out dst);
+            else if(typeof(T) == typeof(sbyte) 
+            || typeof(T) == typeof(short) 
+            || typeof(T) == typeof(int) 
+            || typeof(T) == typeof(long))
+                loadu_i(in src, out dst);
+            else
+                throw unsupported<T>();
+            return dst;
+        }
+
 
         [MethodImpl(Inline)]
         static unsafe Vec128<T> loadu128u<T>(in T src)
@@ -110,5 +149,67 @@ namespace Z0
             else
                 return generic<T>(dinx.vloadu256(in int64(in src)));
         }
+
+
+        [MethodImpl(Inline)]
+        static unsafe Vector128<T> loadu_u<T>(in T src, out Vector128<T> dst)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(byte))
+                dst = generic<T>(dinx.vloadu(uint8(src), out Vector128<byte> _));
+            else if(typeof(T) == typeof(ushort))
+                dst = generic<T>(dinx.vloadu(uint16(src), out Vector128<ushort> _));
+            else if(typeof(T) == typeof(uint))
+                dst = generic<T>(dinx.vloadu(uint32(src), out Vector128<uint> _));
+            else
+                dst = generic<T>(dinx.vloadu(uint64(src), out Vector128<ulong> _));
+            return dst;
+        }
+        
+        [MethodImpl(Inline)]
+        static unsafe Vector128<T> loadu_i<T>(in T src, out Vector128<T> dst)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(sbyte))
+                dst = generic<T>(dinx.vloadu(int8(src), out Vector128<sbyte> _));
+            else if(typeof(T) == typeof(short))
+                dst = generic<T>(dinx.vloadu(int16(src), out Vector128<short> _));
+            else if(typeof(T) == typeof(int))
+                dst = generic<T>(dinx.vloadu(int32(src), out Vector128<int> _));
+            else
+                dst = generic<T>(dinx.vloadu(int64(src), out Vector128<long> _));
+            return dst;
+        }
+
+        [MethodImpl(Inline)]
+        static unsafe Vector256<T> loadu_u<T>(in T src, out Vector256<T> dst)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(byte))
+                dst = generic<T>(dinx.vloadu(uint8(src), out Vector256<byte> _));
+            else if(typeof(T) == typeof(ushort))
+                dst = generic<T>(dinx.vloadu(uint16(src), out Vector256<ushort> _));
+            else if(typeof(T) == typeof(uint))
+                dst = generic<T>(dinx.vloadu(uint32(src), out Vector256<uint> _));
+            else
+                dst = generic<T>(dinx.vloadu(uint64(src), out Vector256<ulong> _));
+            return dst;
+        }
+        
+        [MethodImpl(Inline)]
+        static unsafe Vector256<T> loadu_i<T>(in T src, out Vector256<T> dst)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(sbyte))
+                dst = generic<T>(dinx.vloadu(int8(src), out Vector256<sbyte> _));
+            else if(typeof(T) == typeof(short))
+                dst = generic<T>(dinx.vloadu(int16(src), out Vector256<short> _));
+            else if(typeof(T) == typeof(int))
+                dst = generic<T>(dinx.vloadu(int32(src), out Vector256<int> _));
+            else
+                dst = generic<T>(dinx.vloadu(int64(src), out Vector256<long> _));
+            return dst;
+        }
+
     }
 }

@@ -8,11 +8,10 @@ namespace Z0
     using System.Linq;
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
+    using System.Runtime.Intrinsics;
     
     using static zfunc;
     using static TypedLogicSpec;
-    using static VectorOpEval;
-    using static ScalarOpEval;
 
     public class t_typed_logic : UnitTest<t_typed_logic>
     {
@@ -416,7 +415,7 @@ namespace Z0
                 v1.Set(a);
                 v2.Set(b);
                 T actual = LogicEngine.eval(expr);
-                T expect = eval(op,a,b);
+                T expect = ScalarOps.eval(op,a,b);
                 Claim.eq(actual,expect);                            
             }
         }
@@ -432,7 +431,7 @@ namespace Z0
                 var a = Random.Next<T>();
                 v1.Set(a);   
                 T actual = LogicEngine.eval(expr);
-                T expect = eval(op,a);
+                T expect = ScalarOps.eval(op,a);
                 Claim.eq(actual,expect);                            
             }
         }
@@ -440,15 +439,15 @@ namespace Z0
         void check_op_128<T>(UnaryLogicOpKind op)
             where T : unmanaged
         {
-            var v1 = variable(1, Vec128<T>.Zero);
+            var v1 = variable(1, default(Vector128<T>));
             var expr = unary(op,v1);
             
             for(var i=0; i< SampleSize; i++)
             {
-                var a = Random.CpuVec128<T>();
+                var a = Random.CpuVector128<T>();
                 v1.Set(a);   
-                Vec128<T> actual = LogicEngine.eval(expr);
-                Vec128<T> expect = eval(op,a);
+                Vector128<T> actual = LogicEngine.eval(expr);
+                Vector128<T> expect = Cpu128Ops.eval(op,a);
                 Claim.eq(actual,expect);                            
             }
         }
@@ -456,15 +455,15 @@ namespace Z0
         void check_op_256<T>(UnaryLogicOpKind op)
             where T : unmanaged
         {
-            var v1 = variable(1, Vec256<T>.Zero);
+            var v1 = variable(1, default(Vector256<T>));
             var expr = unary(op,v1);
             
             for(var i=0; i< SampleSize; i++)
             {
-                var a = Random.CpuVec256<T>();
+                var a = Random.CpuVector256<T>();
                 v1.Set(a);   
-                Vec256<T> actual = LogicEngine.eval(expr);
-                Vec256<T> expect = eval(op,a);
+                Vector256<T> actual = LogicEngine.eval(expr);
+                Vector256<T> expect = Cpu256Ops.eval(op,a);
                 Claim.eq(actual,expect);                            
             }
         }
@@ -473,18 +472,18 @@ namespace Z0
         void check_op_128<T>(BinaryLogicOpKind op)
             where T : unmanaged
         {
-            var v1 = variable(1, Vec128<T>.Zero);
-            var v2 = variable(2, Vec128<T>.Zero);
+            var v1 = variable(1, default(Vector128<T>));
+            var v2 = variable(2, default(Vector128<T>));
             var expr = binary(op,v1,v2);
             
             for(var i=0; i< SampleSize; i++)
             {
-                var a = Random.CpuVec128<T>();
-                var b = Random.CpuVec128<T>();
+                var a = Random.CpuVector128<T>();
+                var b = Random.CpuVector128<T>();
                 v1.Set(a);   
                 v2.Set(b);
-                Vec128<T> actual = LogicEngine.eval(expr);
-                Vec128<T> expect = eval(op,a,b);
+                Vector128<T> actual = LogicEngine.eval(expr);
+                Vector128<T> expect = Cpu128Ops.eval(op,a,b);
                 Claim.eq(actual,expect);                            
             }
         }
@@ -492,18 +491,19 @@ namespace Z0
         void check_op_256<T>(BinaryLogicOpKind op)
             where T : unmanaged
         {
-            var v1 = variable(1, Vec256<T>.Zero);
-            var v2 = variable(2, Vec256<T>.Zero);
+            
+            var v1 = variable(1, default(Vector256<T>));
+            var v2 = variable(2, default(Vector256<T>));
             var expr = binary(op,v1,v2);
             
             for(var i=0; i< SampleSize; i++)
             {
-                var a = Random.CpuVec256<T>();
-                var b = Random.CpuVec256<T>();
+                var a = Random.CpuVector256<T>();
+                var b = Random.CpuVector256<T>();
                 v1.Set(a);   
                 v2.Set(b);
-                Vec256<T> actual = LogicEngine.eval(expr);
-                Vec256<T> expect = eval(op,a,b);
+                Vector256<T> actual = LogicEngine.eval(expr);
+                Vector256<T> expect = Cpu256Ops.eval(op,a,b);
                 Claim.eq(actual,expect);                            
             }
         }
@@ -524,7 +524,7 @@ namespace Z0
                 v1.Set(a);   
                 v2.Set(b);
                 T actual = LogicEngine.eval(expr);
-                T expect = eval(op,a,b);
+                T expect = ScalarOps.eval(op,a,b);
                 Claim.eq(actual,expect);                            
             }
         }
@@ -532,7 +532,7 @@ namespace Z0
         void check_op_128<T>(ShiftOpKind op)
             where T : unmanaged
         {
-            var v1 = variable(1, Vec128<T>.Zero);
+            var v1 = variable(1, default(Vector128<T>));
             var v2 = variable(2, 0);
             var expr = shift(op,v1,v2);
             var minoffset = 2;
@@ -540,12 +540,12 @@ namespace Z0
             
             for(var i=0; i< SampleSize; i++)
             {
-                var a = Random.CpuVec128<T>();
+                var a = Random.CpuVector128<T>();
                 var b = Random.Next(minoffset, maxoffset);
                 v1.Set(a);   
                 v2.Set(b);
-                Vec128<T> actual = LogicEngine.eval(expr);
-                Vec128<T> expect = eval(op,a,b);
+                Vector128<T> actual = LogicEngine.eval(expr);
+                Vector128<T> expect = Cpu128Ops.eval(op,a,b);
                 Claim.eq(actual,expect);                            
             }
         }
@@ -553,7 +553,7 @@ namespace Z0
         void check_op_256<T>(ShiftOpKind op)
             where T : unmanaged
         {
-            var v1 = variable(1, Vec256<T>.Zero);
+            var v1 = variable(1, default(Vector256<T>));
             var v2 = variable(2, 0);
             var expr = shift(op,v1,v2);
             var minoffset = 2;
@@ -561,12 +561,12 @@ namespace Z0
             
             for(var i=0; i< SampleSize; i++)
             {
-                var a = Random.CpuVec256<T>();
+                var a = Random.CpuVector256<T>();
                 var b = Random.Next(minoffset, maxoffset);
                 v1.Set(a);   
                 v2.Set(b);
-                Vec256<T> actual = LogicEngine.eval(expr);
-                Vec256<T> expect = eval(op,a,b);
+                Vector256<T> actual = LogicEngine.eval(expr);
+                Vector256<T> expect = Cpu256Ops.eval(op,a,b);
                 Claim.eq(actual,expect);                            
             }
         }

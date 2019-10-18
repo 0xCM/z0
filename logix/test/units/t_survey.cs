@@ -14,7 +14,7 @@ namespace Z0
     public class SurveyTest : UnitTest<SurveyTest>
     {
 
-        public void survey_max8()
+        void survey_max8()
         {
             var s1 = Survey.Template(1, "Survey 1", 20, (byte)8);
             Trace(s1.Format());

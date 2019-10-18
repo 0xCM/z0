@@ -14,11 +14,11 @@ namespace Z0
         //or(and(a, b), and(not(a), c));            
         [MethodImpl(Inline)]
         public static uint select(uint a, uint b, uint c)
-            => or(and(a, b), and(flip(a), c));            
+            => or(and(a, b), and(not(a), c));            
 
         [MethodImpl(Inline)]
         public static ulong select(ulong a, ulong b, ulong c)
-            => or(and(a, b), and(flip(a), c));            //(a & b) | (~a & c);
+            => or(and(a, b), and(not(a), c));            //(a & b) | (~a & c);
 
         [MethodImpl(Inline)]
         public static byte select(byte a, byte b, byte c)

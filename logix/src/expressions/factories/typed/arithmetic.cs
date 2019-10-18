@@ -9,9 +9,21 @@ namespace Z0
     using System.Runtime.CompilerServices;
     
     using static zfunc;
+    using static TypedLogicSpec;
 
-    partial class TypedLogicSpec
+    public static class ArithmeticSpec
     {
+
+        /// <summary>
+        /// Creates an arithmetic unary expression
+        /// </summary>
+        /// <param name="op">The operator classifier</param>
+        /// <param name="operand">The operand</param>
+        /// <typeparam name="T">The operand type</typeparam>
+        [MethodImpl(Inline)]
+        public static UnaryAritheticOp<T> unary<T>(UnaryArithmeticOpKind op, IExpr<T> operand)
+            where T : unmanaged
+                => new UnaryAritheticOp<T>(op,operand);
 
         /// <summary>
         /// Defines a unary increment expression
@@ -19,9 +31,9 @@ namespace Z0
         /// <param name="operand">The expression operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static UnaryLogicOp<T> inc<T>(IExpr<T> operand)
+        public static UnaryAritheticOp<T> inc<T>(IExpr<T> operand)
             where T : unmanaged
-                => unary(UnaryLogicOpKind.Inc, operand);
+                => unary(UnaryArithmeticOpKind.Inc, operand);
 
         /// <summary>
         /// Defines a unary increment expression with a literal operand
@@ -29,7 +41,7 @@ namespace Z0
         /// <param name="operand">The expression operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static UnaryLogicOp<T> inc<T>(T operand)
+        public static UnaryAritheticOp<T> inc<T>(T operand)
             where T : unmanaged
                 => inc(literal(operand));
 
@@ -39,9 +51,9 @@ namespace Z0
         /// <param name="operand">The expression operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static UnaryLogicOp<T> dec<T>(IExpr<T> operand)
+        public static UnaryAritheticOp<T> dec<T>(IExpr<T> operand)
             where T : unmanaged
-                => unary(UnaryLogicOpKind.Dec, operand);
+                => unary(UnaryArithmeticOpKind.Dec, operand);
 
         /// <summary>
         /// Defines a decrement increment expression with a literal operand
@@ -49,10 +61,29 @@ namespace Z0
         /// <param name="operand">The expression operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static UnaryLogicOp<T> dec<T>(T operand)
+        public static UnaryAritheticOp<T> dec<T>(T operand)
             where T : unmanaged
                 => dec(literal(operand));
 
+        /// <summary>
+        /// Defines a unary decrement expression
+        /// </summary>
+        /// <param name="operand">The expression operand</param>
+        /// <typeparam name="T">The operand type</typeparam>
+        [MethodImpl(Inline)]
+        public static UnaryAritheticOp<T> negate<T>(IExpr<T> operand)
+            where T : unmanaged
+                => unary(UnaryArithmeticOpKind.Negate, operand);
+
+        /// <summary>
+        /// Defines a decrement increment expression with a literal operand
+        /// </summary>
+        /// <param name="operand">The expression operand</param>
+        /// <typeparam name="T">The operand type</typeparam>
+        [MethodImpl(Inline)]
+        public static UnaryAritheticOp<T> negate<T>(T operand)
+            where T : unmanaged
+                => negate(literal(operand));
 
     }
 

@@ -28,7 +28,11 @@ namespace Z0
 
         public readonly T Max;
 
-        public OpArityKind Arity => OpArityKind.Binary;     
+        public string Format()
+            => embrace($"{Min}...{Max}");
+
+        public override string ToString()
+            => Format();
     }
 
 }

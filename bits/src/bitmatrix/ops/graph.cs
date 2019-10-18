@@ -45,7 +45,7 @@ namespace Z0
         /// <param name="src">The source matrix</param>
         [MethodImpl(Inline)]    
         public static Graph<byte> graph(BitMatrix64 A)
-            => BitGraph.FromMatrix<byte,N32,byte>(BitMatrix<N32,N32,byte>.Load(A.Bytes));            
+            => BitGraph.FromMatrix<byte,N64,byte>(BitMatrix<N64,N64,byte>.Load(A.Bytes));            
 
 
 

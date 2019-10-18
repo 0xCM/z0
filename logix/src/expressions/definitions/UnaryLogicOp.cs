@@ -27,10 +27,6 @@ namespace Z0
         /// </summary>
         public UnaryLogicOpKind OpKind {get;}
 
-        /// <summary>
-        /// The number of parameters accepted by the expression
-        /// </summary>
-        public OpArityKind Arity => OpArityKind.Unary;
 
         /// <summary>
         /// The left operand
@@ -38,7 +34,7 @@ namespace Z0
         public ILogicExpr Operand {get;}
 
         public string Format()
-            => $"{OpKind} {Operand}";
+            => OpKind.Format(Operand);
 
         public override string ToString()
             => Format();

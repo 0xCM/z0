@@ -17,22 +17,39 @@ namespace Z0
     {
         readonly uint state;
 
+        const uint _off = 0;
+
+        const uint _on = 1;
+
         /// <summary>
         /// Constructs a disabled bit
         /// </summary>
-        public static bit Off => false;
+        public static bit Off 
+        {
+             [MethodImpl(Inline)]
+             get  => new bit(_off);
+        }
 
         /// <summary>
         /// Constructs an enabled bit
         /// </summary>
-        public static bit On => true;
+        public static bit On 
+        {
+             [MethodImpl(Inline)]
+             get  => new bit(_on);
+        }
 
-        public static bit[] B01 => new bit[]{Off,On};
+        public static bit[] B01 
+        {
+            [MethodImpl(Inline)]
+            get => new bit[]{Off,On};
+        }
         
         /// <summary>
         /// Returns true if the bit is enabled, false otherwise
         /// </summary>
         /// <param name="b">The bit to test</param>
+        [MethodImpl(Inline)]
         public static bool operator true(bit b)
             => b.state == 1;
 
@@ -40,6 +57,7 @@ namespace Z0
         /// Returns false if the bit is disabled, true otherwise
         /// </summary>
         /// <param name="b">The bit to test</param>
+        [MethodImpl(Inline)]
         public static bool operator false(bit b)
             => b.state == 0;
 
@@ -265,7 +283,6 @@ namespace Z0
         [MethodImpl(Inline)]
         static bit SafeWrap(uint state)
             => new bit(state & 1);
-
 
         [MethodImpl(Inline)]
         public bool Equals(bit b)

@@ -15,6 +15,23 @@ namespace Z0
 
     partial class bitvector
     {
+        public static BitVector4 inc(BitVector4 x)
+        {
+            if(x.data < 0xF)
+                return x.data++;
+            else
+                return BitVector4.Zero;
+        }
+
+        public static BitVector4 dec(BitVector4 x)
+        {
+            if(x.data > 0)
+                return x.data--;
+            else
+                return  0xF;
+        }
+
+
         /// <summary>
         /// Decrements the source vector
         /// </summary>

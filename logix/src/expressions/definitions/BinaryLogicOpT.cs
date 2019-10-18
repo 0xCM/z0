@@ -30,11 +30,6 @@ namespace Z0
         public BinaryLogicOpKind OpKind {get;}
 
         /// <summary>
-        /// Specifies the number of parameters accepted by the expression
-        /// </summary>
-        public OpArityKind Arity => OpArityKind.Binary;
-
-        /// <summary>
         /// The left operand
         /// </summary>
         public IExpr<T> LeftArg {get;}
@@ -43,6 +38,12 @@ namespace Z0
         /// The right operand
         /// </summary>
         public IExpr<T> RightArg {get;}
+
+        public string Format()
+            => OpKind.Format(LeftArg,RightArg);
+        
+        public override string ToString()
+            => Format();
 
     }
 

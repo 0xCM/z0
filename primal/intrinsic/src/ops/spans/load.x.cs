@@ -108,7 +108,19 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<T> LoadVector128<T>(this Span128<T> src, int block = 0)            
             where T : unmanaged            
-                => Vec128.LoadVector(ref src.Block(block));
+                => ginx.loadu128(in src.Block(block));
+
+        /// <summary>
+        /// Loads a 256-bit vector from a blocked span
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <param name="block">The block index</param>
+        /// <typeparam name="T">The primitive type</typeparam>
+        [MethodImpl(Inline)]
+        public static Vector256<T> LoadVector256<T>(this Span256<T> src, int block = 0)            
+            where T : unmanaged            
+                => ginx.loadu256(in src.Block(block));
+
     }
 
 }

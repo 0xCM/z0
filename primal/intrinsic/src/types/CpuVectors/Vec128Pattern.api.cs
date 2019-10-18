@@ -40,7 +40,7 @@ namespace Z0
         /// </summary>
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
-        public static Vec128<T> zeroes<T>()
+        public static Vector128<T> zeroes<T>()
             where T : unmanaged        
                 => default;
 

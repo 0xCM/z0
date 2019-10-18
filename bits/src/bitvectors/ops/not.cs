@@ -52,7 +52,7 @@ namespace Z0
         /// <param name="x">The source bitvector</param>
         [MethodImpl(Inline)]
         public static BitVector16 not(BitVector16 x)
-            => math.flip(x.data);
+            => math.not(x.data);
 
         /// <summary>
         /// Computes the bitwise complement ~x from the source bitvector x
@@ -60,7 +60,7 @@ namespace Z0
         /// <param name="x">The source bitvector</param>
         [MethodImpl(Inline)]
         public static BitVector32 not(BitVector32 x)
-            => math.flip(x.data);
+            => math.not(x.data);
 
         /// <summary>
         /// Computes the bitwise complement ~x from the source bitvector x
@@ -68,7 +68,7 @@ namespace Z0
         /// <param name="x">The source bitvector</param>
         [MethodImpl(Inline)]
         public static BitVector64 not(BitVector64 x)
-            => math.flip(x.data);
+            => math.not(x.data);
  
         [MethodImpl(Inline)]
         static byte TakeHi(byte src)        

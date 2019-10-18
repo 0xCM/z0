@@ -29,6 +29,34 @@ namespace Z0
             Claim.eq(11, g.EdgeCount);
         }
  
+        public void Create64()
+        {
+            var first = 0;
+            var last = 63;
+            var penultimate = last - 1;
+
+            // creates a dag with 
+            // a) one node per level
+            // b) Except for the last level, the node on level i is directly 
+            // connected to a single node at level i + 1 or greater
+            var m = BitMatrix64.Alloc();
+            m[first] = Pow2.T01;
+            m[last] = 0;
+            for(var i=1; i<last; i++)
+            {
+                if(i == penultimate)
+                    m[i] = Pow2.pow(last);
+                else
+                    m[i] = Random.Pow2<ulong>(i + 1, penultimate);            
+            }
+            var g = BitMatrix.graph(m);
+
+            Claim.eq(64,g.VertexCount);
+            Claim.eq(63,g.EdgeCount);
+        
+            // Trace(m.Format());
+            // Trace(g.Format());                
+        }
 
     }
 

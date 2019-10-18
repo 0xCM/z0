@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+//---------------------------------------------------------------------------
 // Copyright   :  (c) Chris Moore, 2019
 // License     :  MIT
 //-----------------------------------------------------------------------------
@@ -20,14 +20,17 @@ namespace Z0
     {
         internal byte data;
 
-        public static readonly BitVector4 Zero = default;
+        public static BitVector4 Zero => default;
 
-        public static readonly BitSize BitSize = 4;
+        public static BitVector4 One => 1;
 
-        public static readonly BitPos FirstPos = 0;
+        public static BitVector4 Ones => 0xFF;
 
-        public static readonly BitPos LastPos = BitSize - 1;
+        public const uint BitSize = 4;
 
+        public const uint FirstPos = 0;
+
+        public const uint LastPos = BitSize - 1;
 
         /// <summary>
         /// Allocates a zero-filled vector
@@ -35,17 +38,52 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitVector4 Alloc()
             => new BitVector4();
-
+        
+        /// <summary>
+        /// Creates a bitvector where the first bit is determined by a supplied bit and the hi 3 bits are disabled
+        /// </summary>
+        /// <param name="x0">The least bit</param>
+        /// <param name="x1">The second bit</param>
         [MethodImpl(Inline)]
-        public static BitVector4 FromBits(bit x0, bit x1, bit x2, bit x3)
+        public static BitVector4 FromBit(bit x0)
+            => x0 ? (byte)1 : (byte)0;        
+
+        /// <summary>
+        /// Creates a bitvector where the first two bits a specified by the caller and the last two bits are disabled
+        /// </summary>
+        /// <param name="x0">The least bit</param>
+        /// <param name="x1">The second bit</param>
+        [MethodImpl(Inline)]
+        public static BitVector4 FromBits(bit x0, bit x1)
         {
-            var data = (byte)0;
+            var data = 0u;
             if(x0) 
                 data |= (1 << 0);
             if(x1) 
                 data |= (1 << 1);
+
+            return (byte)data;
+        }
+        /// <summary>
+        /// Creates a bitvector where the first three bits a specified by the caller
+        /// and the hi bit is disabled
+        /// </summary>
+        /// <param name="x0">The least bit</param>
+        /// <param name="x1">The second bit</param>
+        /// <param name="x2">The third bit</param>
+        [MethodImpl(Inline)]
+        public static BitVector4 FromBits(bit x0, bit x1, bit x2)
+        {
+            var data = FromBits(x0,x1);
             if(x2) 
                 data |= (1 << 2);
+            return (byte)data;
+        }
+
+        [MethodImpl(Inline)]
+        public static BitVector4 FromBits(bit x0, bit x1, bit x2, bit x3)
+        {
+            var data = FromBits(x0,x1,x2);
             if(x3) 
                 data |= (1 << 3);
             return data;
@@ -478,7 +516,7 @@ namespace Z0
         /// <param name="n">The count of least significant bits</param>
         [MethodImpl(Inline)]
         public BitVector4 Lsb(int n)                
-            => Between(0, n - 1);                
+            => Between(0, (uint)n - 1u);                
 
         /// <summary>
         /// Constructs a bitvector formed from the n most significant bits of the current vector
@@ -486,7 +524,7 @@ namespace Z0
         /// <param name="n">The count of most significant bits</param>
         [MethodImpl(Inline)]
         public BitVector4 Msb(int n)                
-            => Between(LastPos - n, LastPos);                
+            => Between(LastPos - (uint)n, LastPos);                
 
         /// <summary>
         /// Extracts the scalar represented by the vector
@@ -579,42 +617,80 @@ namespace Z0
 
         public BitVector4 Inc()
         {
-            throw new NotImplementedException();
+            if(data < 0xF)
+                data++;
+            else
+                data = 0;
+            return this;
         }
 
         public BitVector4 Dec()
         {
-            throw new NotImplementedException();
+            if(data > 0)
+                data--;
+            else
+                data = 0xF;
+            return this;
         }
 
+        [MethodImpl(Inline)]
         public BitVector4 XNor(BitVector4 y)
-        {
-            throw new NotImplementedException();
-        }
+            => math.xnor(data, y.data);
 
+        [MethodImpl(Inline)]
         public BitVector4 Nand(BitVector4 y)
-        {
-            throw new NotImplementedException();
-        }
+            => math.nand(data, y.data);
 
+        [MethodImpl(Inline)]
         public BitVector4 Nor(BitVector4 y)
-        {
-            throw new NotImplementedException();
-        }
+            => math.nor(data, y.data);
 
+        [MethodImpl(Inline)]
         public BitVector4 AndNot(BitVector4 y)
-        {
-            throw new NotImplementedException();
-        }
+            => math.and(data, math.and(math.not(y) , (byte)0xF));
 
+        [MethodImpl(Inline)]
         public bit GetBit(BitPos pos)
+            => Test(pos);
+
+        [MethodImpl(Inline)]
+        public void SetBit(BitPos pos, bit value)
+            => Set(pos,value);
+
+        /// <summary>
+        /// Gets the state of the first bit
+        /// </summary>
+        public bit b0001
         {
-            throw new NotImplementedException();
+            [MethodImpl(Inline)]
+            get => Test(0);
         }
 
-        public void SetBit(BitPos pos, bit value)
+        /// <summary>
+        /// Gets the state of the second bit
+        /// </summary>
+        public bit b0010
         {
-            throw new NotImplementedException();
+            [MethodImpl(Inline)]
+            get => Test(1);
+        }
+
+        /// <summary>
+        /// Gets the state of the third bit
+        /// </summary>
+        public bit b0100
+        {
+            [MethodImpl(Inline)]
+            get => Test(2);
+        }
+
+        /// <summary>
+        /// Gets the state of the fourth bit
+        /// </summary>
+        public bit b1000
+        {
+            [MethodImpl(Inline)]
+            get => Test(3);
         }
     }
 }

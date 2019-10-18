@@ -482,7 +482,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public BitVector16 Not()
         {
-            data = math.flip(data);
+            data = math.not(data);
             return this;
         }
 

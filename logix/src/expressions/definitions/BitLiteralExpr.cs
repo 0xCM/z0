@@ -42,7 +42,10 @@ namespace Z0
         /// </summary>
         public bit Value {get;}
 
-        public string Format(bool digit = false)
+        public string Format()
+            =>Format(false);
+         
+        public string Format(bool digit)
             => digit ? Value.ToString() 
                 : Value ? "T" : "F";
 

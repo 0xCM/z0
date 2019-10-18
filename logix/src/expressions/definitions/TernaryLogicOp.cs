@@ -44,10 +44,12 @@ namespace Z0
         /// </summary>
         public ILogicExpr ThirdArg {get;}
 
-        /// <summary>
-        /// The number of parameters accepted by the expression
-        /// </summary>
-        public OpArityKind Arity => OpArityKind.Ternary;     
+        public string Format()
+            => OpKind.Format(FirstArg,SecondArg,ThirdArg);
+        
+        public override string ToString()
+            => Format();
+
 
     }
 

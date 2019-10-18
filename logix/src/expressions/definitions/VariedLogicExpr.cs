@@ -21,7 +21,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static VariedLogicExpr<N> Define<N>(N n, ILogicExpr baseExpr, params IlogicVariable[] variables)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
         {
             Nat.require<N>(variables.Length);
             return new VariedLogicExpr<N>(baseExpr, variables);
@@ -38,7 +38,7 @@ namespace Z0
 
         public IlogicVariable[] Vars {get;}
 
-        IExpr IVaried<IExpr, IlogicVariable>.BaseExpr 
+        IExpr IVariedExpr<IExpr, IlogicVariable>.BaseExpr 
             => BaseExpr;
 
         public void SetVarValues(params IExpr[] values)
@@ -48,10 +48,14 @@ namespace Z0
                 Vars[i].Set(values[i]);
         }
 
+        public string Format()
+            => string.Empty;
+
+
     }
 
     public sealed class VariedLogicExpr<N>  : IVariedLogicExpr<N>
-        where N : ITypeNat,new()
+        where N : unmanaged, ITypeNat
     {
         [MethodImpl(Inline)]
         internal VariedLogicExpr(ILogicExpr baseExpr, params IVariable[] variables)
@@ -65,7 +69,7 @@ namespace Z0
 
         public IVariable[] Vars {get;}
 
-        IExpr IVaried<IExpr, IVariable>.BaseExpr 
+        IExpr IVariedExpr<IExpr, IVariable>.BaseExpr 
             => BaseExpr;
 
         public void SetVarValues(params IExpr[] values)
@@ -74,7 +78,9 @@ namespace Z0
             for(var i=0; i<n; i++)
                 Vars[i].Set(values[i]);
         }
+ 
+         public string Format()
+            => string.Empty;
 
     }
-
 }

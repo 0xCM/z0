@@ -45,15 +45,17 @@ namespace Z0
             get => Terms[index];
             set => Terms[index] = value;
         }
-
         
         public int Length
             => Terms.Length;
 
         public BitString ToBitString()
             => BitString.FromBits(Terms);
-
+        
+        public string Format()
+            => ToBitString().Format();
+    
+        public override string ToString()
+            => Format();
     }
-
-
 }

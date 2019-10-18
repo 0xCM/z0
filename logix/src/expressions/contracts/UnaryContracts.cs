@@ -10,7 +10,8 @@ namespace Z0
     
     using static zfunc;
 
-    public interface IUnaryLogicOp : ILogicOp<UnaryLogicOpKind>
+
+    public interface IUnaryLogicOp : IUnaryOp, ILogicOp<UnaryLogicOpKind>
     {
         /// <summary>
         /// The one and only operand
@@ -18,7 +19,7 @@ namespace Z0
         ILogicExpr Operand {get;}
     }
 
-    public interface IUnaryLogicOp<T> : IOpExpr<T,UnaryLogicOpKind>
+    public interface IUnaryLogicOp<T> : IUnaryOp<T>, IOpExpr<T,UnaryLogicOpKind>
         where T : unmanaged
     {
         /// <summary>
@@ -29,5 +30,5 @@ namespace Z0
 
     }
 
-
+ 
 }

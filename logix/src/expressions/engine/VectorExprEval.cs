@@ -7,22 +7,22 @@ namespace Z0
     using System;
     using System.Linq;
     using System.Runtime.CompilerServices;
+    using System.Runtime.Intrinsics;
     
     using static zfunc;
 
-
     static class VectorExprEval
     {
-         public static Literal<Vec128<T>> eval<T>(IExpr<Vec128<T>> expr)
+         public static Literal<Vector128<T>> eval<T>(IExpr<Vector128<T>> expr)
             where T : unmanaged
         {
             switch(expr)
             {
-                case ILiteral<Vec128<T>> x:
+                case ILiteral<Vector128<T>> x:
                     return eval(x);
-                case IVariable<Vec128<T>> x:
+                case IVariable<Vector128<T>> x:
                     return eval(x);
-                case IOpExpr<Vec128<T>> x:
+                case IOpExpr<Vector128<T>> x:
                     return eval(x);
                 default:
                     return unhandled(expr);
@@ -30,56 +30,58 @@ namespace Z0
 
         }
 
-        public static Literal<Vec256<T>> eval<T>(IExpr<Vec256<T>> expr)
+        public static Literal<Vector256<T>> eval<T>(IExpr<Vector256<T>> expr)
             where T : unmanaged
         {
             switch(expr)
             {
-                case ILiteral<Vec256<T>> x:
+                case ILiteral<Vector256<T>> x:
                     return eval(x);
-                case IVariable<Vec256<T>> x:
+                case IVariable<Vector256<T>> x:
                     return eval(x);
-                case IOpExpr<Vec256<T>> x:
+                case IOpExpr<Vector256<T>> x:
                     return eval(x);
                 default:
                     return unhandled(expr);
             }
         }
+
 
         [MethodImpl(Inline)]
-        static Literal<Vec128<T>> eval<T>(ILiteral<Vec128<T>> expr)
+        static Literal<Vector128<T>> eval<T>(ILiteral<Vector128<T>> expr)
             where T : unmanaged        
                 => expr.Value;        
 
+
         [MethodImpl(Inline)]
-        static Literal<Vec128<T>> eval<T>(IVariable<Vec128<T>> expr)
+        static Literal<Vector128<T>> eval<T>(IVariable<Vector128<T>> expr)
             where T : unmanaged
         {
-            if(expr.Value is Literal<Vec128<T>> x)
+            if(expr.Value is Literal<Vector128<T>> x)
                 return x.Value;
             else
                 return eval(expr.Value);
         }
 
-        static Literal<Vec128<T>> eval<T>(IOpExpr<Vec128<T>> expr)
+        static Literal<Vector128<T>> eval<T>(IOpExpr<Vector128<T>> expr)
             where T : unmanaged
         {
             switch(expr)               
             {
-                case IUnaryLogicOp<Vec128<T>> x:
+                case IUnaryLogicOp<Vector128<T>> x:
                     return eval(x);
-                case IBinaryLogicOp<Vec128<T>> x:
+                case IBinaryLogicOp<Vector128<T>> x:
                     return eval(x);
-                case IShiftOp<Vec128<T>> x:
+                case IShiftOp<Vector128<T>> x:
                     return eval(x);
-                case ITernaryLogicOp<Vec128<T>> x:
+                case ITernaryLogicOp<Vector128<T>> x:
                     return eval(x);
                 default:
                     return unhandled(expr);
             }
         }
 
-        static Literal<Vec128<T>> eval<T>(IUnaryLogicOp<Vec128<T>> expr)
+        static Literal<Vector128<T>> eval<T>(IUnaryLogicOp<Vector128<T>> expr)
             where T : unmanaged
         {
             switch(expr.OpKind)
@@ -97,7 +99,7 @@ namespace Z0
             }
         }
 
-        static Literal<Vec128<T>> eval<T>(IBinaryLogicOp<Vec128<T>> expr)
+        static Literal<Vector128<T>> eval<T>(IBinaryLogicOp<Vector128<T>> expr)
             where T : unmanaged
         {
             switch(expr.OpKind)
@@ -119,7 +121,7 @@ namespace Z0
             }
         }
 
-        static Literal<Vec128<T>> eval<T>(IShiftOp<Vec128<T>> expr)
+        static Literal<Vector128<T>> eval<T>(IShiftOp<Vector128<T>> expr)
             where T : unmanaged
         {
             switch(expr.OpKind)
@@ -136,42 +138,42 @@ namespace Z0
                     return unhandled(expr);
             }
         }
-
+        
         [MethodImpl(Inline)]
-        static Literal<Vec256<T>> eval<T>(ILiteral<Vec256<T>> expr)
+        static Literal<Vector256<T>> eval<T>(ILiteral<Vector256<T>> expr)
             where T : unmanaged        
                 => expr.Value;
         
 
         [MethodImpl(Inline)]
-        static Literal<Vec256<T>> eval<T>(IVariable<Vec256<T>> expr)
+        static Literal<Vector256<T>> eval<T>(IVariable<Vector256<T>> expr)
             where T : unmanaged
         {
-            if(expr.Value is Literal<Vec256<T>> x)
+            if(expr.Value is Literal<Vector256<T>> x)
                 return x.Value;
             else
                 return eval(expr.Value);
         }
 
-        static Literal<Vec256<T>> eval<T>(IOpExpr<Vec256<T>> expr)
+        static Literal<Vector256<T>> eval<T>(IOpExpr<Vector256<T>> expr)
             where T : unmanaged
         {
             switch(expr)               
             {
-                case IUnaryLogicOp<Vec256<T>> x:
+                case IUnaryLogicOp<Vector256<T>> x:
                     return eval(x);
-                case IBinaryLogicOp<Vec256<T>> x:
+                case IBinaryLogicOp<Vector256<T>> x:
                     return eval(x);
-                case IShiftOp<Vec256<T>> x:
+                case IShiftOp<Vector256<T>> x:
                     return eval(x);
-                case ITernaryLogicOp<Vec256<T>> x:
+                case ITernaryLogicOp<Vector256<T>> x:
                     return eval(x);
                 default:
                     return unhandled(expr);
             }
         }
 
-        static Literal<Vec256<T>> eval<T>(IUnaryLogicOp<Vec256<T>> expr)
+        static Literal<Vector256<T>> eval<T>(IUnaryLogicOp<Vector256<T>> expr)
             where T : unmanaged
         {
             switch(expr.OpKind)
@@ -190,7 +192,7 @@ namespace Z0
 
         }
 
-        static Literal<Vec256<T>> eval<T>(IBinaryLogicOp<Vec256<T>> expr)
+        static Literal<Vector256<T>> eval<T>(IBinaryLogicOp<Vector256<T>> expr)
             where T : unmanaged
         {
             switch(expr.OpKind)
@@ -213,7 +215,7 @@ namespace Z0
 
         }
 
-        static Literal<Vec256<T>> eval<T>(IShiftOp<Vec256<T>> expr)
+        static Literal<Vector256<T>> eval<T>(IShiftOp<Vector256<T>> expr)
             where T : unmanaged
         {
             switch(expr.OpKind)
@@ -233,151 +235,193 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static Literal<Vec128<T>> not<T>(IExpr<Vec128<T>> a)
+        static Literal<Vector128<T>> not<T>(IExpr<Vector128<T>> a)
             where T : unmanaged
                 => ginx.vnot(eval(a).Value);
 
         [MethodImpl(Inline)]
-        static Literal<Vec128<T>> negate<T>(IExpr<Vec128<T>> a)
+        static Literal<Vector128<T>> negate<T>(IExpr<Vector128<T>> a)
             where T : unmanaged
-                => ginx.vnegate(eval(a).Value);
-
+        {
+            Vector128<T> b =  ginx.vnegate<T>(eval(a).Value);
+            return b;
+        }
+                
         [MethodImpl(Inline)]
-        static Literal<Vec128<T>> and<T>(IExpr<Vec128<T>> a, IExpr<Vec128<T>> b)
+        static Literal<Vector128<T>> and<T>(IExpr<Vector128<T>> a, IExpr<Vector128<T>> b)
             where T : unmanaged
                 => ginx.vand(eval(a).Value, eval(b).Value);
 
         [MethodImpl(Inline)]
-        static Literal<Vec128<T>> nand<T>(IExpr<Vec128<T>> a, IExpr<Vec128<T>> b)
+        static Literal<Vector128<T>> nand<T>(IExpr<Vector128<T>> a, IExpr<Vector128<T>> b)
             where T : unmanaged
                 => ginx.vnand(eval(a).Value, eval(b).Value);
 
         [MethodImpl(Inline)]
-        static Literal<Vec128<T>> or<T>(IExpr<Vec128<T>> a, IExpr<Vec128<T>> b)
+        static Literal<Vector128<T>> or<T>(IExpr<Vector128<T>> a, IExpr<Vector128<T>> b)
             where T : unmanaged
                 => ginx.vor(eval(a).Value, eval(b).Value);
 
         [MethodImpl(Inline)]
-        static Literal<Vec128<T>> nor<T>(IExpr<Vec128<T>> a, IExpr<Vec128<T>> b)
+        static Literal<Vector128<T>> nor<T>(IExpr<Vector128<T>> a, IExpr<Vector128<T>> b)
             where T : unmanaged
                 => ginx.vnor(eval(a).Value, eval(b).Value);
 
         [MethodImpl(Inline)]
-        static Literal<Vec128<T>> xor<T>(IExpr<Vec128<T>> a, IExpr<Vec128<T>> b)
+        static Literal<Vector128<T>> xor<T>(IExpr<Vector128<T>> a, IExpr<Vector128<T>> b)
             where T : unmanaged
                 => ginx.vxor(eval(a).Value, eval(b).Value);
 
         [MethodImpl(Inline)]
-        static Literal<Vec128<T>> xnor<T>(IExpr<Vec128<T>> a, IExpr<Vec128<T>> b)
+        static Literal<Vector128<T>> xnor<T>(IExpr<Vector128<T>> a, IExpr<Vector128<T>> b)
             where T : unmanaged
                 => ginx.vxnor(eval(a).Value, eval(b).Value);
 
         [MethodImpl(Inline)]
-        static Literal<Vec128<T>> sll<T>(IExpr<Vec128<T>> a, IExpr<int> b)
+        static Literal<Vector128<T>> sll<T>(IExpr<Vector128<T>> x, IExpr<int> b)
             where T : unmanaged
-                => ginx.vsll(eval(a).Value, (byte)ScalarExprEval.eval(b).Value);
+        {
+            Vector128<T> y = ginx.vsll<T>(eval(x).Value, (byte)ScalarExprEval.eval(b).Value);
+            return y;
+        }
 
         [MethodImpl(Inline)]
-        static Literal<Vec128<T>> srl<T>(IExpr<Vec128<T>> a, IExpr<int> b)
+        static Literal<Vector128<T>> srl<T>(IExpr<Vector128<T>> x, IExpr<int> b)
             where T : unmanaged
-                => ginx.vsrl(eval(a).Value, (byte)ScalarExprEval.eval(b).Value);
+        {
+            Vector128<T> y = ginx.vsrl<T>(eval(x).Value, (byte)ScalarExprEval.eval(b).Value);
+            return y;
+        }
 
         [MethodImpl(Inline)]
-        static Literal<Vec128<T>> rotl<T>(IExpr<Vec128<T>> a, IExpr<int> b)
+        static Literal<Vector128<T>> rotl<T>(IExpr<Vector128<T>> a, IExpr<int> b)
             where T : unmanaged
-                => ginx.vrotl(eval(a).Value, (byte)ScalarExprEval.eval(b).Value);
+        {
+            Vector128<T> y = ginx.vrotl<T>(eval(a).Value, (byte)ScalarExprEval.eval(b).Value);
+            return y;
+        }
 
         [MethodImpl(Inline)]
-        static Literal<Vec128<T>> rotr<T>(IExpr<Vec128<T>> a, IExpr<int> b)
+        static Literal<Vector128<T>> rotr<T>(IExpr<Vector128<T>> a, IExpr<int> b)
             where T : unmanaged
-                => ginx.vrotr(eval(a).Value, (byte)ScalarExprEval.eval(b).Value);
+        {
+            Vector128<T> y = ginx.vrotr<T>(eval(a).Value, (byte)ScalarExprEval.eval(b).Value);
+            return y;
+        }
 
         [MethodImpl(Inline)]
-        static Literal<Vec128<T>> inc<T>(IExpr<Vec128<T>> a)
+        static Literal<Vector128<T>> inc<T>(IExpr<Vector128<T>> a)
             where T : unmanaged
-                => ginx.vinc(eval(a).Value);
+        {
+                Vector128<T> y = ginx.vinc<T>(eval(a).Value);
+                return y;
+        }
 
         [MethodImpl(Inline)]
-        static Literal<Vec128<T>> dec<T>(IExpr<Vec128<T>> a)
+        static Literal<Vector128<T>> dec<T>(IExpr<Vector128<T>> a)
             where T : unmanaged
-                => ginx.vdec(eval(a).Value);
+        {
+                Vector128<T> y = ginx.vdec<T>(eval(a).Value);
+                return y;
+        }
 
         [MethodImpl(Inline)]
-        static Literal<Vec256<T>> not<T>(IExpr<Vec256<T>> a)
+        static Literal<Vector256<T>> not<T>(IExpr<Vector256<T>> a)
             where T : unmanaged
                 => ginx.vnot(eval(a).Value);
 
         [MethodImpl(Inline)]
-        static Literal<Vec256<T>> negate<T>(IExpr<Vec256<T>> a)
+        static Literal<Vector256<T>> negate<T>(IExpr<Vector256<T>> a)
             where T : unmanaged
-                => ginx.vnegate(eval(a).Value);
+        {
+                Vector256<T> y = ginx.vnegate<T>(eval(a).Value);
+                return y;
+        }
 
         [MethodImpl(Inline)]
-        static Literal<Vec256<T>> and<T>(IExpr<Vec256<T>> a, IExpr<Vec256<T>> b)
+        static Literal<Vector256<T>> and<T>(IExpr<Vector256<T>> a, IExpr<Vector256<T>> b)
             where T : unmanaged
                 => ginx.vand(eval(a).Value, eval(b).Value);
 
         [MethodImpl(Inline)]
-        static Literal<Vec256<T>> or<T>(IExpr<Vec256<T>> a, IExpr<Vec256<T>> b)
+        static Literal<Vector256<T>> or<T>(IExpr<Vector256<T>> a, IExpr<Vector256<T>> b)
             where T : unmanaged
                 => ginx.vor(eval(a).Value, eval(b).Value);
 
         [MethodImpl(Inline)]
-        static Literal<Vec256<T>> xor<T>(IExpr<Vec256<T>> a, IExpr<Vec256<T>> b)
+        static Literal<Vector256<T>> xor<T>(IExpr<Vector256<T>> a, IExpr<Vector256<T>> b)
             where T : unmanaged
                 => ginx.vxor(eval(a).Value, eval(b).Value);
 
         [MethodImpl(Inline)]
-        static Literal<Vec256<T>> nand<T>(IExpr<Vec256<T>> a, IExpr<Vec256<T>> b)
+        static Literal<Vector256<T>> nand<T>(IExpr<Vector256<T>> a, IExpr<Vector256<T>> b)
             where T : unmanaged
                 => ginx.vnand(eval(a).Value, eval(b).Value);
 
         [MethodImpl(Inline)]
-        static Literal<Vec256<T>> nor<T>(IExpr<Vec256<T>> a, IExpr<Vec256<T>> b)
+        static Literal<Vector256<T>> nor<T>(IExpr<Vector256<T>> a, IExpr<Vector256<T>> b)
             where T : unmanaged
                 => ginx.vnor(eval(a).Value, eval(b).Value);
 
         [MethodImpl(Inline)]
-        static Literal<Vec256<T>> xnor<T>(IExpr<Vec256<T>> a, IExpr<Vec256<T>> b)
+        static Literal<Vector256<T>> xnor<T>(IExpr<Vector256<T>> a, IExpr<Vector256<T>> b)
             where T : unmanaged
                 => ginx.vxnor(eval(a).Value, eval(b).Value);
 
 
-         [MethodImpl(Inline)]
-        static Literal<Vec256<T>> sll<T>(IExpr<Vec256<T>> a, IExpr<int> b)
+        [MethodImpl(Inline)]
+        static Literal<Vector256<T>> sll<T>(IExpr<Vector256<T>> x, IExpr<int> b)
             where T : unmanaged
-                => ginx.vsll(eval(a).Value, (byte)ScalarExprEval.eval(b).Value);
+        {
+            Vector256<T> y = ginx.vsll<T>(eval(x).Value, (byte)ScalarExprEval.eval(b).Value);
+            return y;
+        }
 
         [MethodImpl(Inline)]
-        static Literal<Vec256<T>> srl<T>(IExpr<Vec256<T>> a, IExpr<int> b)
+        static Literal<Vector256<T>> srl<T>(IExpr<Vector256<T>> x, IExpr<int> b)
             where T : unmanaged
-                => ginx.vsrl(eval(a).Value, (byte)ScalarExprEval.eval(b).Value);
+        {
+            Vector256<T> y = ginx.vsrl<T>(eval(x).Value, (byte)ScalarExprEval.eval(b).Value);
+            return y;
+        }
 
         [MethodImpl(Inline)]
-        static Literal<Vec256<T>> rotl<T>(IExpr<Vec256<T>> a, IExpr<int> b)
+        static Literal<Vector256<T>> rotl<T>(IExpr<Vector256<T>> x, IExpr<int> b)
             where T : unmanaged
-                => ginx.vrotl(eval(a).Value, (byte)ScalarExprEval.eval(b).Value);
+        {
+            Vector256<T> y = ginx.vrotl<T>(eval(x).Value, (byte)ScalarExprEval.eval(b).Value);
+            return y;
+        }
 
         [MethodImpl(Inline)]
-        static Literal<Vec256<T>> rotr<T>(IExpr<Vec256<T>> a, IExpr<int> b)
+        static Literal<Vector256<T>> rotr<T>(IExpr<Vector256<T>> a, IExpr<int> b)
             where T : unmanaged
-                => ginx.vrotr(eval(a).Value, (byte)ScalarExprEval.eval(b).Value);
+        {
+            Vector256<T> y = ginx.vrotr<T>(eval(a).Value, (byte)ScalarExprEval.eval(b).Value);
+            return y;
+        }
  
         [MethodImpl(Inline)]
-        static Literal<Vec256<T>> inc<T>(IExpr<Vec256<T>> a)
+        static Literal<Vector256<T>> inc<T>(IExpr<Vector256<T>> a)
             where T : unmanaged
-                => ginx.vinc(eval(a).Value);
+        {
+            Vector256<T> b = ginx.vinc<T>(eval(a).Value);
+            return b;
+        }
 
         [MethodImpl(Inline)]
-        static Literal<Vec256<T>> dec<T>(IExpr<Vec256<T>> a)
+        static Literal<Vector256<T>> dec<T>(IExpr<Vector256<T>> a)
             where T : unmanaged
-                => ginx.vdec(eval(a).Value);
+        {
+            Vector256<T> b = ginx.vdec<T>(eval(a).Value);
+            return b;
+        }
 
-        public static Literal<Vec128<T>> unhandled<T>(IExpr<Vec128<T>> expr)       
+        static Literal<Vector128<T>> unhandled<T>(IExpr<Vector128<T>> expr)       
             where T : unmanaged
                 => throw new Exception($"{expr} unhandled");
 
-        public static Literal<Vec256<T>> unhandled<T>(IExpr<Vec256<T>> expr)       
+        static Literal<Vector256<T>> unhandled<T>(IExpr<Vector256<T>> expr)       
             where T : unmanaged
                 => throw new Exception($"{expr} unhandled");
     }

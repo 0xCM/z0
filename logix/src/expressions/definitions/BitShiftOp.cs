@@ -29,10 +29,6 @@ namespace Z0
         /// </summary>
         public ShiftOpKind OpKind {get;}
 
-        /// <summary>
-        /// The number of parameters accepted by the expression
-        /// </summary>
-        public OpArityKind Arity => OpArityKind.Binary;
 
         /// <summary>
         /// The shiftee
@@ -43,6 +39,12 @@ namespace Z0
         /// The right operand
         /// </summary>
         public IExpr<int> Offset {get;}
+
+        public string Format()
+            => OpKind.Format(Subject,Offset);
+        
+        public override string ToString()
+            => Format();
 
     } 
 }

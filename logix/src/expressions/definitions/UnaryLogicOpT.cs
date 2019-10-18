@@ -27,15 +27,17 @@ namespace Z0
         /// </summary>
         public UnaryLogicOpKind OpKind {get;}
 
-        /// <summary>
-        /// The number of parameters accepted by the expression
-        /// </summary>
-        public OpArityKind Arity => OpArityKind.Unary;
 
         /// <summary>
         /// The operand
         /// </summary>
         public IExpr<T> Operand {get;}
+
+        public string Format()
+            => OpKind.Format(Operand);
+
+        public override string ToString()
+            => Format();
 
     }
 

@@ -92,7 +92,6 @@ namespace Z0
         public static Vec128<ulong> vxor(in Vec128<ulong> x, in Vec128<ulong> y)
             => Xor(x.xmm, y.xmm);
 
-
         /// <summary>
         /// Computes the bitwise XOR between operands
         /// </summary>

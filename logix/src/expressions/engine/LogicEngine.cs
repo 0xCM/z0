@@ -7,6 +7,7 @@ namespace Z0
     using System;
     using System.Linq;
     using System.Runtime.CompilerServices;
+    using System.Runtime.Intrinsics;
     
     using static zfunc;
 
@@ -23,12 +24,12 @@ namespace Z0
                 => ScalarExprEval.eval(expr);
 
         [MethodImpl(Inline)]
-        public static Literal<Vec128<T>> eval<T>(IExpr<Vec128<T>> expr)
+        public static Literal<Vector128<T>> eval<T>(IExpr<Vector128<T>> expr)
             where T : unmanaged
                 => VectorExprEval.eval(expr);
 
         [MethodImpl(Inline)]
-        public static Literal<Vec256<T>> eval<T>(IExpr<Vec256<T>> expr)
+        public static Literal<Vector256<T>> eval<T>(IExpr<Vector256<T>> expr)
             where T : unmanaged
                 => VectorExprEval.eval(expr);
   }

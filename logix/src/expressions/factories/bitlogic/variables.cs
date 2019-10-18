@@ -49,7 +49,7 @@ namespace Z0
         /// <param name="variables">The variable sequence</param>
         [MethodImpl(Inline)]
         public static VariedLogicExpr<N> varied<N>(N n, ILogicExpr subject, params IlogicVariable[] variables)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
                 => VariedLogicExpr.Define(n,subject, variables);
 
     }

@@ -43,7 +43,6 @@ namespace Z0
         /// </summary>
         public T Value {get;}
 
-        public OpArityKind Arity => OpArityKind.Literal;
 
         public string Format()
             => Value.ToString();

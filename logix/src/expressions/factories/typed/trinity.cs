@@ -23,7 +23,6 @@ namespace Z0
             where T : unmanaged
                 => binary(BinaryLogicOpKind.And, lhs,rhs);
 
-
         /// <summary>
         /// Defines a bitwise and expression with literal operands
         /// </summary>
