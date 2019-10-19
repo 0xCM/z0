@@ -13,7 +13,7 @@ namespace Z0
     
     partial class BitLogicSpec
     {
-       /// <summary>
+        /// <summary>
         /// Defines a bit sequence expression with an arbitrary number of terms
         /// </summary>
         /// <param name="terms">The sequence terms</param>

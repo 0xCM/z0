@@ -74,9 +74,10 @@ namespace Z0
     public interface ITernaryGate<T> : ITernaryBitGate
         where T : unmanaged
     {
-        T Send(in T a, in T b, in T c);
+        T Send(T a, T b, T c);
 
     }
+
 
     public interface ICircuit<A, out B>
     {

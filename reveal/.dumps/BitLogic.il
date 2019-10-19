@@ -1,4 +1,4 @@
-// 2019-10-18 00:25:29:487
+// 2019-10-18 14:45:56:924
 bit get_Off()
 {
     IL_0000: call Z0.bit Z0.bit::get_Off()
@@ -26,6 +26,12 @@ bit identity(bit a)
 bit one()
 {
     IL_0000: call Z0.bit Z0.bit::get_On()
+    IL_0005: ret
+
+}
+bit false(bit a, bit b)
+{
+    IL_0000: call Z0.bit Z0.BitLogic::get_Off()
     IL_0005: ret
 
 }
@@ -82,6 +88,20 @@ bit xnor(bit a, bit b)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: call Z0.bit Z0.bit::xnor(Z0.bit,Z0.bit)
+    IL_0007: ret
+
+}
+bit true(bit a, bit b)
+{
+    IL_0000: call Z0.bit Z0.BitLogic::get_On()
+    IL_0005: ret
+
+}
+bit implies(bit antecedent, bit consequent)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call Z0.bit Z0.bit::implies(Z0.bit,Z0.bit)
     IL_0007: ret
 
 }

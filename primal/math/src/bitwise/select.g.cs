@@ -14,22 +14,18 @@ namespace Z0
 
     partial class gmath
     {
-
+        /// <summary>
+        /// Defines the ternary bitwise select operator
+        /// </summary>
+        /// <param name="a">The first operand</param>
+        /// <param name="b">The second operand</param>
+        /// <param name="c">The third operand</param>
+        /// <typeparam name="T">The primal type</typeparam>
+        /// <remarks>Code generation for this is good and there is no need to define type-specific specializations</remarks>
         [MethodImpl(Inline)]
         public static T select<T>(T a, T b, T c)
             where T : unmanaged
-        {
-            if(typeof(T) == typeof(byte))
-                return generic<T>(math.select(uint8(a), uint8(b), uint8(c)));
-            else if(typeof(T) == typeof(ushort))
-                return generic<T>(math.select(uint16(a), uint16(b), uint16(c)));
-            else if(typeof(T) == typeof(uint))
-                return generic<T>(math.select(uint32(a), uint32(b), uint32(b)));
-            else if(typeof(T) == typeof(ulong))
-                return generic<T>(math.select(uint64(a), uint64(b), uint64(b)));
-            else
-                throw unsupported<T>();
-        }
+                => or(and(a, b), and(not(a), c));
     }
 
 }

@@ -471,7 +471,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public BitVector16 Select(BitVector16 y, BitVector16 z)
         {
-            data = math.select(data,y.data,z.data);
+            data = gmath.select(data,y.data,z.data);
             return this;
         }
 
@@ -573,7 +573,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public BitVector16 AndNot(BitVector16 y)
         {
-            data = Bits.andnot(data, y.data);            
+            data = math.andnot(data, y.data);            
             return this;
         }        
 
@@ -731,9 +731,10 @@ namespace Z0
         /// Reverses the vector's bits
         /// </summary>
         [MethodImpl(Inline)]
-        public void Reverse()
-        {
+        public BitVector16 Reverse()
+        {     
             data = Bits.rev(data);
+            return this;
         }
 
 

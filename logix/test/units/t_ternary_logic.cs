@@ -21,95 +21,15 @@ namespace Z0
         public void check_op_identities()
         {
             
-             ScalarOps.TernaryKinds.Iterate(op => check_op_identity<byte>(op));
-             ScalarOps.TernaryKinds.Iterate(op => check_op_identity<ushort>(op));
-             ScalarOps.TernaryKinds.Iterate(op => check_op_identity<uint>(op));
-             ScalarOps.TernaryKinds.Iterate(op => check_op_identity<ulong>(op));
+             
+             ScalarOpApi.TernaryKinds.Iterate(op => check_op_identity<byte>(op));
+             ScalarOpApi.TernaryKinds.Iterate(op => check_op_identity<ushort>(op));
+             ScalarOpApi.TernaryKinds.Iterate(op => check_op_identity<uint>(op));
+             ScalarOpApi.TernaryKinds.Iterate(op => check_op_identity<ulong>(op));
         }
 
-        void ternary_table()
-        {
-            BitVector8 id = (byte)TernaryLogicOpKind.X09;
-            var tt = table(TernaryLogicOpKind.X09);
-            Trace($"Table {id.Format()}");
-            Trace(tt.Format());
-
-        }
-
-        BitMatrix<N8,N4, byte> table(TernaryLogicOpKind op)
-            => BitOps.table(op);
 
 
-        void truth_tables_all()
-        {
-            for(var i=0; i< 16; i++)
-            {
-                BitVector4 result = (byte)i;
-                var tt = BitMatrix.Alloc<N4,N3,byte>();
-                tt[0] = BitVector.Define<N3,byte>(Bits.pack3(result[0], Bit.Off, Bit.Off));
-                tt[1] = BitVector.Define<N3,byte>(Bits.pack3(result[1], Bit.Off, Bit.On));
-                tt[2] = BitVector.Define<N3,byte>(Bits.pack3(result[2], Bit.On, Bit.Off));
-                tt[3] = BitVector.Define<N3,byte>(Bits.pack3(result[3], Bit.On, Bit.On));
-                Trace($"Table {result.Format()}");
-                Trace(tt.Format());
-
-            }
-        }
-
-        void truth_tables()
-        {
-            BitMatrix<N4,N3,byte> table = default;
-            BitVector<N4,byte> result = default;
-            var op = BinaryLogicOpKind.And;
-            table = BitOps.table(op);
-            result = table.GetCol(2);
-            Trace($"{op.ToString()} {result.Format()}");
-            Trace(table.Format());
-
-            op = BinaryLogicOpKind.Nand;
-            table = BitOps.table(op);
-            result = table.GetCol(2);
-
-            Trace($"{op.ToString()} {result.Format()}");
-            Trace(table.Format());
-
-            op = BinaryLogicOpKind.Or;
-            table = BitOps.table(op);
-            result = table.GetCol(2);
-
-            Trace($"{op.ToString()} {result.Format()}");
-            Trace(table.Format());
-
-            op = BinaryLogicOpKind.Nor;
-            table = BitOps.table(op);
-            result = table.GetCol(2);
-
-            Trace($"{op.ToString()} {result.Format()}");
-            Trace(table.Format());
-
-
-            op = BinaryLogicOpKind.XOr;
-            table = BitOps.table(op);
-            result = table.GetCol(2);
-
-            Trace($"{op.ToString()} {result.Format()}");
-            Trace(table.Format());
-
-            op = BinaryLogicOpKind.Xnor;
-            table = BitOps.table(op);
-            result = table.GetCol(2);
-
-            Trace($"{op.ToString()} {result.Format()}");
-            Trace(table.Format());
-
-            op = BinaryLogicOpKind.AndNot;
-            table = BitOps.table(op);
-            result = table.GetCol(2);
-
-            Trace($"{op.ToString()} {result.Format()}");
-            Trace(table.Format());
-
-        }
         public void check_and() 
             => check_binary_ops(BinaryLogicOpKind.And);
 
@@ -226,7 +146,7 @@ namespace Z0
             var b = convert<T>(0b1100_1100);
             var c = convert<T>(0b1010_1010);
             var mask = convert<T>(0xFF);
-            var f = ScalarOps.lookup<T>(id);
+            var f = ScalarOpApi.lookup<T>(id);
             var actual = convert<T,byte>(gmath.and(f(a,b,c), mask));
             var expect = (byte)id;
             Claim.eq(expect.FormatHex(), actual.FormatHex());
@@ -236,9 +156,9 @@ namespace Z0
             where V : unmanaged, IBitVector<V>
             where T : unmanaged
         {
-            var BL = BitOps.lookup(id);
-            var SC = ScalarOps.lookup<T>(id);
-            var BV = BitVectorOps.lookup<V>(id);
+            var BL = BitOpApi.lookup(id);
+            var SC = ScalarOpApi.lookup<T>(id);
+            var BV = BitVectorOpApi.lookup<V>(id);
             
             for(var sample = 0; sample< SampleSize; sample++)
             {
@@ -260,9 +180,9 @@ namespace Z0
             where V : unmanaged, IBitVector<V>
             where T : unmanaged
         {
-            var BL = BitOps.lookup(id);
-            var SC = ScalarOps.lookup<T>(id);
-            var BV = BitVectorOps.lookup<V>(id);
+            var BL = BitOpApi.lookup(id);
+            var SC = ScalarOpApi.lookup<T>(id);
+            var BV = BitVectorOpApi.lookup<V>(id);
             
             for(var sample = 0; sample< SampleSize; sample++)
             {
@@ -285,11 +205,11 @@ namespace Z0
             where V : unmanaged, IBitVector<V>
             where T : unmanaged
         {
-            var BL = BitOps.lookup(id);
-            var SC = ScalarOps.lookup<T>(id);
-            var BV = BitVectorOps.lookup<V>(id);
-            var V128 = Cpu128Ops.lookup<T>(id);
-            var V256 = Cpu256Ops.lookup<T>(id);
+            var BL = BitOpApi.lookup(id);
+            var SC = ScalarOpApi.lookup<T>(id);
+            var BV = BitVectorOpApi.lookup<V>(id);
+            var V128 = Cpu128OpApi.lookup<T>(id);
+            var V256 = Cpu256OpApi.lookup<T>(id);
             check_op_identity<T>(id);
 
             for(var sample = 0; sample< SampleSize; sample++)
@@ -341,8 +261,8 @@ namespace Z0
                 for(var i=0; i< z0.Length; i++)
                     z0[i] = bit.select(a[i],b[i],c[i]);
                 
-                var z2 = BitVectorLogic.select(a,b,c);
-                var z3 = ScalarLogic.select(a.ToScalar<T>(), b.ToScalar<T>(), c.ToScalar<T>());
+                var z2 = BitVectorOps.select(a,b,c);
+                var z3 = ScalarOps.select(a.ToScalar<T>(), b.ToScalar<T>(), c.ToScalar<T>());
                 Claim.eq(z3, z0.ToScalar<T>());                                
                 Claim.eq(z0, z2);
             }

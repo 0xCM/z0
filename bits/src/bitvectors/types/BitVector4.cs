@@ -346,7 +346,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public BitVector4 Select(BitVector4 y, BitVector4 z)
         {
-            data = math.select(data,y.data,z.data);
+            data = gmath.select(data,y.data,z.data);
             return this;
         }
 
@@ -498,8 +498,11 @@ namespace Z0
         /// Reverses the vector's bits
         /// </summary>
         [MethodImpl(Inline)]
-        public void Reverse()
-            => data = Bits.rev(data);
+        public BitVector4 Reverse()
+        {
+            data = Bits.rev(data);
+            return this;
+        }
 
         /// <summary>
         /// Extracts a contiguous sequence of bits defined by an inclusive range

@@ -10,7 +10,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
     
     using static zfunc;
-    //using static BitExprEval;
     using static BitLogicSpec;
     using static LogicEngine;
 

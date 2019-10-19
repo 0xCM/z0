@@ -1,4 +1,4 @@
-// 2019-10-18 00:25:26:048
+// 2019-10-18 23:21:10:681
 uint pow(uint b, uint exp)
 {
     IL_0000: ldarg.1
@@ -5723,156 +5723,38 @@ ref double and(ref double lhs, double rhs)
     IL_000B: ret
 
 }
-sbyte flip(sbyte src)
+ulong andnot(ulong a, ulong b)
 {
-    IL_0000: ldarg.0
-    IL_0001: not
-    IL_0002: conv.i1
-    IL_0003: ret
-
-}
-byte not(byte src)
-{
-    IL_0000: ldarg.0
-    IL_0001: not
-    IL_0002: conv.u1
-    IL_0003: ret
-
-}
-short flip(short src)
-{
-    IL_0000: ldarg.0
-    IL_0001: not
-    IL_0002: conv.i2
-    IL_0003: ret
-
-}
-ushort flip(ushort src)
-{
-    IL_0000: ldarg.0
-    IL_0001: not
-    IL_0002: conv.u2
-    IL_0003: ret
-
-}
-int flip(int src)
-{
-    IL_0000: ldarg.0
-    IL_0001: not
-    IL_0002: ret
-
-}
-uint flip(uint src)
-{
-    IL_0000: ldarg.0
-    IL_0001: not
-    IL_0002: ret
-
-}
-long flip(long src)
-{
-    IL_0000: ldarg.0
-    IL_0001: not
-    IL_0002: ret
-
-}
-ulong flip(ulong src)
-{
-    IL_0000: ldarg.0
-    IL_0001: not
-    IL_0002: ret
-
-}
-ref sbyte flip(ref sbyte src)
-{
-    IL_0000: ldarg.0
+    IL_0000: ldarg.1
     IL_0001: ldarg.0
-    IL_0002: ldind.i1
-    IL_0003: not
-    IL_0004: conv.i1
-    IL_0005: stind.i1
-    IL_0006: ldarg.0
+    IL_0002: call System.UInt64 System.Runtime.Intrinsics.X86.Bmi1/X64::AndNot(System.UInt64,System.UInt64)
     IL_0007: ret
 
 }
-ref byte flip(ref byte src)
+uint andnot(uint a, uint b)
 {
-    IL_0000: ldarg.0
+    IL_0000: ldarg.1
     IL_0001: ldarg.0
-    IL_0002: ldind.u1
-    IL_0003: not
-    IL_0004: conv.u1
-    IL_0005: stind.i1
-    IL_0006: ldarg.0
+    IL_0002: call System.UInt32 System.Runtime.Intrinsics.X86.Bmi1::AndNot(System.UInt32,System.UInt32)
     IL_0007: ret
 
 }
-ref short flip(ref short src)
+byte andnot(byte a, byte b)
 {
-    IL_0000: ldarg.0
+    IL_0000: ldarg.1
     IL_0001: ldarg.0
-    IL_0002: ldind.i2
-    IL_0003: not
-    IL_0004: conv.i2
-    IL_0005: stind.i2
-    IL_0006: ldarg.0
-    IL_0007: ret
+    IL_0002: call System.UInt32 System.Runtime.Intrinsics.X86.Bmi1::AndNot(System.UInt32,System.UInt32)
+    IL_0007: conv.u1
+    IL_0008: ret
 
 }
-ref ushort flip(ref ushort src)
+ushort andnot(ushort a, ushort b)
 {
-    IL_0000: ldarg.0
+    IL_0000: ldarg.1
     IL_0001: ldarg.0
-    IL_0002: ldind.u2
-    IL_0003: not
-    IL_0004: conv.u2
-    IL_0005: stind.i2
-    IL_0006: ldarg.0
-    IL_0007: ret
-
-}
-ref int flip(ref int src)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.0
-    IL_0002: ldind.i4
-    IL_0003: not
-    IL_0004: stind.i4
-    IL_0005: ldarg.0
-    IL_0006: ret
-
-}
-ref uint flip(ref uint src)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.0
-    IL_0002: ldind.u4
-    IL_0003: not
-    IL_0004: stind.i4
-    IL_0005: ldarg.0
-    IL_0006: ret
-
-}
-ref long flip(ref long src)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.0
-    IL_0002: ldind.i8
-    IL_0003: not
-    IL_0004: stind.i8
-    IL_0005: ldarg.0
-    IL_0006: ret
-
-}
-ref ulong flip(ref ulong src)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.0
-    IL_0002: ldind.i8
-    IL_0003: not
-    IL_0004: stind.i8
-    IL_0005: ldarg.0
-    IL_0006: ret
+    IL_0002: call System.UInt32 System.Runtime.Intrinsics.X86.Bmi1::AndNot(System.UInt32,System.UInt32)
+    IL_0007: conv.u2
+    IL_0008: ret
 
 }
 uint nand(uint a, uint b)
@@ -5945,6 +5827,158 @@ ushort nor(ushort a, ushort b)
     IL_0002: call System.UInt32 Z0.math::nor(System.UInt32,System.UInt32)
     IL_0007: conv.u2
     IL_0008: ret
+
+}
+sbyte not(sbyte src)
+{
+    IL_0000: ldarg.0
+    IL_0001: not
+    IL_0002: conv.i1
+    IL_0003: ret
+
+}
+byte not(byte src)
+{
+    IL_0000: ldarg.0
+    IL_0001: not
+    IL_0002: conv.u1
+    IL_0003: ret
+
+}
+short not(short src)
+{
+    IL_0000: ldarg.0
+    IL_0001: not
+    IL_0002: conv.i2
+    IL_0003: ret
+
+}
+ushort not(ushort src)
+{
+    IL_0000: ldarg.0
+    IL_0001: not
+    IL_0002: conv.u2
+    IL_0003: ret
+
+}
+int not(int src)
+{
+    IL_0000: ldarg.0
+    IL_0001: not
+    IL_0002: ret
+
+}
+uint not(uint src)
+{
+    IL_0000: ldarg.0
+    IL_0001: not
+    IL_0002: ret
+
+}
+long not(long src)
+{
+    IL_0000: ldarg.0
+    IL_0001: not
+    IL_0002: ret
+
+}
+ulong not(ulong src)
+{
+    IL_0000: ldarg.0
+    IL_0001: not
+    IL_0002: ret
+
+}
+ref sbyte not(ref sbyte src)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.0
+    IL_0002: ldind.i1
+    IL_0003: not
+    IL_0004: conv.i1
+    IL_0005: stind.i1
+    IL_0006: ldarg.0
+    IL_0007: ret
+
+}
+ref byte not(ref byte src)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.0
+    IL_0002: ldind.u1
+    IL_0003: not
+    IL_0004: conv.u1
+    IL_0005: stind.i1
+    IL_0006: ldarg.0
+    IL_0007: ret
+
+}
+ref short not(ref short src)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.0
+    IL_0002: ldind.i2
+    IL_0003: not
+    IL_0004: conv.i2
+    IL_0005: stind.i2
+    IL_0006: ldarg.0
+    IL_0007: ret
+
+}
+ref ushort not(ref ushort src)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.0
+    IL_0002: ldind.u2
+    IL_0003: not
+    IL_0004: conv.u2
+    IL_0005: stind.i2
+    IL_0006: ldarg.0
+    IL_0007: ret
+
+}
+ref int not(ref int src)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.0
+    IL_0002: ldind.i4
+    IL_0003: not
+    IL_0004: stind.i4
+    IL_0005: ldarg.0
+    IL_0006: ret
+
+}
+ref uint not(ref uint src)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.0
+    IL_0002: ldind.u4
+    IL_0003: not
+    IL_0004: stind.i4
+    IL_0005: ldarg.0
+    IL_0006: ret
+
+}
+ref long not(ref long src)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.0
+    IL_0002: ldind.i8
+    IL_0003: not
+    IL_0004: stind.i8
+    IL_0005: ldarg.0
+    IL_0006: ret
+
+}
+ref ulong not(ref ulong src)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.0
+    IL_0002: ldind.i8
+    IL_0003: not
+    IL_0004: stind.i8
+    IL_0005: ldarg.0
+    IL_0006: ret
 
 }
 sbyte or(sbyte a, sbyte b)
@@ -6559,52 +6593,6 @@ ref ulong sar(ref ulong src, int offset)
     IL_0008: stind.i8
     IL_0009: ldarg.0
     IL_000A: ret
-
-}
-uint select(uint a, uint b, uint c)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: call System.UInt32 Z0.math::and(System.UInt32,System.UInt32)
-    IL_0007: ldarg.0
-    IL_0008: call System.UInt32 Z0.math::flip(System.UInt32)
-    IL_000D: ldarg.2
-    IL_000E: call System.UInt32 Z0.math::and(System.UInt32,System.UInt32)
-    IL_0013: call System.UInt32 Z0.math::or(System.UInt32,System.UInt32)
-    IL_0018: ret
-
-}
-ulong select(ulong a, ulong b, ulong c)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: call System.UInt64 Z0.math::and(System.UInt64,System.UInt64)
-    IL_0007: ldarg.0
-    IL_0008: call System.UInt64 Z0.math::flip(System.UInt64)
-    IL_000D: ldarg.2
-    IL_000E: call System.UInt64 Z0.math::and(System.UInt64,System.UInt64)
-    IL_0013: call System.UInt64 Z0.math::or(System.UInt64,System.UInt64)
-    IL_0018: ret
-
-}
-byte select(byte a, byte b, byte c)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: ldarg.2
-    IL_0003: call System.UInt32 Z0.math::select(System.UInt32,System.UInt32,System.UInt32)
-    IL_0008: conv.u1
-    IL_0009: ret
-
-}
-ushort select(ushort a, ushort b, ushort c)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: ldarg.2
-    IL_0003: call System.UInt32 Z0.math::select(System.UInt32,System.UInt32,System.UInt32)
-    IL_0008: conv.u2
-    IL_0009: ret
 
 }
 sbyte sll(sbyte src, int offset)

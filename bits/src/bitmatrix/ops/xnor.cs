@@ -14,17 +14,19 @@ namespace Z0
     partial class BitMatrix
     {
     
-        public static BitMatrix<T> xnor<T>(BitMatrix<T> A, BitMatrix<T> B)
+        public static BitMatrix<T> xnor<T>(BitMatrix<T> A, BitMatrix<T> B, BitMatrix<T> C)
             where T : unmanaged
         {
-            var rc = math.min(A.RowCount, B.RowCount);
-            var C = BitMatrix.Alloc<T>(rc);
+            var rc = rowdim(A,B,C);
             for(var i=0; i<rc; i++)
-                C[i] = bitvector.xnor(A[i], B[i]);
+                C[i] = bitvector.xnor(A[i],B[i]);
             return C;
         }
 
-
+        [MethodImpl(Inline)]
+        public static BitMatrix<T> xnor<T>(BitMatrix<T> A, BitMatrix<T> B)
+            where T : unmanaged
+                => xnor(A,B, A.Replicate(true));
     }
 
 }

@@ -559,7 +559,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public BitVector64 Select(BitVector64 y, BitVector64 z)
         {
-            data = math.select(data,y.data,z.data);
+            data = gmath.select(data,y.data,z.data);
             return this;
         }
 
@@ -696,8 +696,11 @@ namespace Z0
         /// Reverses the vector's bits
         /// </summary>
         [MethodImpl(Inline)]
-        public void Reverse()
-            => data = Bits.rev(data);
+        public BitVector64 Reverse()
+        {     
+            data = Bits.rev(data);
+            return this;
+        }
 
         /// <summary>
         /// Computes the vector src = src & ~ y in-place
@@ -706,7 +709,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public BitVector64 AndNot(BitVector64 y)
         {
-            data = Bits.andnot(data, y.data);            
+            data = math.andnot(data, y.data);            
             return this;
         }
 

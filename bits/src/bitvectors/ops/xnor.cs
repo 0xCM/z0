@@ -21,7 +21,7 @@ namespace Z0
             where T : unmanaged
         {
             if(x.SingleCell && y.SingleCell)
-                return gmath.xnor(x.Data[0], y.Data[0]);
+                return gmath.xnor(x.Head, y.Head);
             else
                 return xnor_multicell(x,y);
         }

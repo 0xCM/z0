@@ -23,9 +23,7 @@ namespace Z0
         /// </summary>
         IExpr<T> Subject {get;}
 
-        /// <summary>
-        /// The amount to shift
-        /// </summary>
+
         IExpr<int> Offset {get;}
     }
 

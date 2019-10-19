@@ -27,8 +27,8 @@ namespace Z0
         /// <param name="y">The right vector</param>
         /// <param name="control">The blend specification</param>
         [MethodImpl(Inline)]
-        public static Vec128<float> vblend(in Vec128<float> x, in Vec128<float> y, byte control)        
-            => Blend(x.xmm, y.xmm, control);
+        public static Vector128<float> vblend(Vector128<float> x, Vector128<float> y, byte control)        
+            => Blend(x, y, control);
 
         /// <summary>
         /// __m128d _mm_blend_pd (__m128d a, __m128d b, const int imm8) BLENDPD xmm, xmm/m128, imm8
@@ -38,8 +38,8 @@ namespace Z0
         /// <param name="y">The right vector</param>
         /// <param name="control">The blend specification</param>
         [MethodImpl(Inline)]
-        public static Vec128<double> vblend(in Vec128<double> x, in Vec128<double> y, byte control)        
-            => Blend(x.xmm, y.xmm, control);
+        public static Vector128<double> vblend(Vector128<double> x, Vector128<double> y, byte control)        
+            => Blend(x, y, control);
 
         /// <summary>
         /// __m256 _mm256_blend_ps (__m256 a, __m256 b, const int imm8) VBLENDPS ymm, ymm, ymm/m256, imm8
@@ -49,8 +49,8 @@ namespace Z0
         /// <param name="y">The right vector</param>
         /// <param name="control">The blend specification</param>
         [MethodImpl(Inline)]
-        public static Vec256<float> vblend(in Vec256<float> x, in Vec256<float> y, byte control)        
-            => Blend(x.ymm, y.ymm, control);
+        public static Vector256<float> vblend(Vector256<float> x, Vector256<float> y, byte control)        
+            => Blend(x, y, control);
 
         /// <summary>
         /// __m256d _mm256_blend_pd (__m256d a, __m256d b, const int imm8) VBLENDPD ymm, ymm, ymm/m256, imm8
@@ -60,8 +60,8 @@ namespace Z0
         /// <param name="y">The right vector</param>
         /// <param name="control">The blend specification</param>
         [MethodImpl(Inline)]
-        public static Vec256<double> vblend(in Vec256<double> x, in Vec256<double> y, byte control)        
-            => Blend(x.ymm, y.ymm, control);
+        public static Vector256<double> vblend(Vector256<double> x, Vector256<double> y, byte control)        
+            => Blend(x, y, control);
 
         /// <summary>
         ///  __m256 _mm256_blendv_ps (__m256 a, __m256 b, __m256 mask) VBLENDVPS ymm, ymm,ymm/m256, ymm
@@ -71,8 +71,8 @@ namespace Z0
         /// <param name="y">The right vector</param>
         /// <param name="control">The blend specification</param>
         [MethodImpl(Inline)]
-        public static Vec256<float> vblendv(in Vec256<float> x, in Vec256<float> y, Vec256<float> control)        
-            => BlendVariable(x.ymm, y.ymm, control);
+        public static Vector256<float> vblendv(Vector256<float> x, Vector256<float> y, Vector256<float> control)        
+            => BlendVariable(x, y, control);
 
         /// <summary>
         /// _mm256_blendv_ps
@@ -82,8 +82,8 @@ namespace Z0
         /// <param name="y">The right vector</param>
         /// <param name="control">The blend specification</param>
         [MethodImpl(Inline)]
-        public static Vec256<double> vblendv(in Vec256<double> x, in Vec256<double> y, in Vec256<double> control)        
-            => BlendVariable(x.ymm, y.ymm, control);
+        public static Vector256<double> vblendv(Vector256<double> x, Vector256<double> y, Vector256<double> control)        
+            => BlendVariable(x, y, control);
 
     }
 

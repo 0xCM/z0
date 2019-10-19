@@ -11,7 +11,7 @@ namespace Z0
     using static zfunc;
 
 
-    public static class LogicOps
+    internal static class LogicOps
     {
        internal static UnaryLogicOp<T> nologic<T>(UnaryLogicOpKind id, T x = default)        
             where T : unmanaged
@@ -30,6 +30,10 @@ namespace Z0
                 => throw new NotSupportedException($"{id}");
 
        internal static BinaryOp<T> dne<T>(BinaryLogicOpKind id, T x = default)        
+            where T : unmanaged
+                => throw new NotSupportedException($"{id}");
+
+       internal static Shifter<T> dne<T>(ShiftOpKind id, T x = default)        
             where T : unmanaged
                 => throw new NotSupportedException($"{id}");
 

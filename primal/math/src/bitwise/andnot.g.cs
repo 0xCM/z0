@@ -12,9 +12,8 @@ namespace Z0
     using static As;
     using static AsIn;
 
-    partial class gbits
+    partial class gmath
     {
-
         /// <summary>
         /// Computes a & (~b)
         /// </summary>
@@ -25,13 +24,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(Bits.andnot(uint8(lhs), uint8(rhs)));
+                return generic<T>(math.andnot(uint8(lhs), uint8(rhs)));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(Bits.andnot(uint16(lhs), uint16(rhs)));
+                return generic<T>(math.andnot(uint16(lhs), uint16(rhs)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(Bits.andnot(uint32(lhs), uint32(rhs)));
+                return generic<T>(math.andnot(uint32(lhs), uint32(rhs)));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(Bits.andnot(uint64(lhs), uint64(rhs)));
+                return generic<T>(math.andnot(uint64(lhs), uint64(rhs)));
             else
                 throw unsupported<T>();
         }

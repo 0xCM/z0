@@ -65,7 +65,7 @@ namespace Z0
 
         public IReadOnlyList<AppMsg> DequeueMessages(params AppMsg[] addenda)
         {
-            Enqueue(addenda);
+            Notify(addenda);
             var messages = MsgQueue.ToArray();
             MsgQueue.Clear();
             return messages;
@@ -75,36 +75,15 @@ namespace Z0
         /// Enqueues an application message
         /// </summary>
         /// <param name="msg">The timings to enqueue</param>
-        protected void Enqueue(AppMsg msg)
+        protected void Notify(AppMsg msg)
             => MsgQueue.Add(msg);
 
         /// <summary>
         /// Enqueues application messages
         /// </summary>
         /// <param name="msg">The messages to enqueue</param>
-        protected void Enqueue(params AppMsg[] messages)
+        protected void Notify(params AppMsg[] messages)
             => MsgQueue.AddRange(messages);
-
-        /// <summary>
-        /// Enqueues operation timing
-        /// </summary>
-        /// <param name="timing">The timing to enqueue</param>
-        protected void Enqueue(OpTime timing)
-            => OpTimes.Add(timing);
-
-        /// <summary>
-        /// Enqueues operation timings
-        /// </summary>
-        /// <param name="timings">The timings to enqueue</param>
-        protected void Enqueue(params OpTime[] timings)
-            => OpTimes.AddRange(timings);
-
-        /// <summary>
-        /// Enqueues operation timings
-        /// </summary>
-        /// <param name="timings">The timings to enqueue</param>
-        protected void Enqueue(IEnumerable<OpTime> timings)
-            => OpTimes.AddRange(timings);
 
         protected void NotifyError(Exception e)
         {
@@ -112,20 +91,41 @@ namespace Z0
             (this as IContext).EmitMessages(msg);
         }
 
+        /// <summary>
+        /// Enqueues operation timing
+        /// </summary>
+        /// <param name="timing">The timing to enqueue</param>
+        protected void Mark(OpTime timing)
+            => OpTimes.Add(timing);
+
+        /// <summary>
+        /// Enqueues operation timings
+        /// </summary>
+        /// <param name="timings">The timings to enqueue</param>
+        protected void Mark(params OpTime[] timings)
+            => OpTimes.AddRange(timings);
+
+        /// <summary>
+        /// Enqueues operation timings
+        /// </summary>
+        /// <param name="timings">The timings to enqueue</param>
+        protected void Mark(IEnumerable<OpTime> timings)
+            => OpTimes.AddRange(timings);
+
         protected void HiLite(string msg, [CallerMemberName] string caller = null, [CallerFilePath] string file = null, [CallerLineNumber] int? line = null)
-                => Enqueue(AppMsg.Define(msg, SeverityLevel.HiliteCL, caller, file, line));
+                => Notify(AppMsg.Define(msg, SeverityLevel.HiliteCL, caller, file, line));
 
         protected void Trace(string msg, SeverityLevel? severity = null)
         {
             if(TraceEnabled)
-                Enqueue(AppMsg.Define($"{msg}", severity ?? SeverityLevel.Babble));
+                Notify(AppMsg.Define($"{msg}", severity ?? SeverityLevel.Babble));
         }
 
         protected void Trace(string title, string msg, int? tpad = null, SeverityLevel? severity = null)
         {
             var titleFmt = tpad.Map(pad => title.PadRight(pad), () => title.PadRight(20));        
             if(TraceEnabled)
-                Enqueue(AppMsg.Define($"{titleFmt}: {msg}", severity ?? SeverityLevel.Babble));
+                Notify(AppMsg.Define($"{titleFmt}: {msg}", severity ?? SeverityLevel.Babble));
         }
 
         protected void Trace<T>(NamedValue<T> nv, int? npad = null, SeverityLevel? severity = null)
@@ -151,49 +151,7 @@ namespace Z0
         protected void Trace(AppMsg msg, SeverityLevel? severity = null)
         {
             if(TraceEnabled)
-                Enqueue(msg.WithLevel(severity ?? SeverityLevel.Babble));
-        }
-
-        /// <summary>
-        /// Submits a diagnostic message to the queue related to performance/benchmarking
-        /// </summary>
-        /// <param name="msg">The message to emit</param>
-        protected void TracePerf(AppMsg msg)
-        {
-            if(TraceEnabled)
-                Enqueue(msg.WithLevel(SeverityLevel.Benchmark));
-        }
-
-        protected void TracePerf(OpTimePair timing, int? labelPad = null)
-        {
-            if(TraceEnabled)
-                TracePerf(timing.Format(labelPad));
-        }
-
-        protected void TracePerf(OpTime time, int? labelPad = null)
-        {
-            if(TraceEnabled)
-                TracePerf(time.Format(labelPad));
-        }
-
-        /// <summary>
-        /// Submits a diagnostic message to the queue related to performance/benchmarking
-        /// </summary>
-        /// <param name="msg">The message to emit</param>
-        protected void TracePerf(string label, Duration time, int? cycles = null, int? samples = null, int? pad = null)
-        {
-            if(TraceEnabled)
-            {
-                var cyclesFmt = cycles != null ? (cycles.ToString() + " cycles").PadRight(16) : string.Empty;
-                var samplesFmt = samples != null ? (samples.ToString() + " samples").PadRight(16) : string.Empty;
-                var content = concat(
-                    $"{label}".PadRight(pad ?? 30), 
-                    cyclesFmt,
-                    samplesFmt,  
-                    $"{time.Ms} ms"
-                    );
-                Enqueue(AppMsg.Define(content, SeverityLevel.Benchmark));
-            }
+                Notify(msg.WithLevel(severity ?? SeverityLevel.Babble));
         }
 
         /// <summary>
@@ -203,7 +161,7 @@ namespace Z0
         protected void TracePerf(string msg)
         {
             if(TraceEnabled)
-                Enqueue(AppMsg.Define($"{msg}", SeverityLevel.Benchmark));
+                Notify(AppMsg.Define($"{msg}", SeverityLevel.Benchmark));
         }
 
         /// <summary>
@@ -213,7 +171,7 @@ namespace Z0
         /// <param name="labelPad">For tracing, the width of the timing label</param>
         protected void Collect(OpTimePair time, int? labelPad = null)
         {
-            Enqueue(time.Left,time.Right);
+            Mark(time.Left,time.Right);
 
             if(TraceEnabled)
                 TracePerf(time.Format(labelPad));
@@ -226,7 +184,7 @@ namespace Z0
         /// <param name="labelPad">For tracing, the width of the timing label</param>
         protected void Collect(OpTime time, int? labelPad = null)
         {
-            Enqueue(time);
+            Mark(time);
 
             if(TraceEnabled)
                 TracePerf(time.Format(labelPad));
@@ -243,7 +201,7 @@ namespace Z0
             var sw = stopwatch();
             var ops = f();
             var time = OpTime.Define(ops, snapshot(sw), label);
-            Enqueue(time);
+            Mark(time);
 
             if(TraceEnabled)
                 TracePerf(time.Format(labelPad));

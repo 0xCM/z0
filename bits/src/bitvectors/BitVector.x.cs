@@ -134,7 +134,29 @@ namespace Z0
                 => src.Data.TakeUInt32();
 
         /// <summary>
-        /// Converts the leading elements of generic bitvector to a 32-bit primal bitvector
+        /// Converts the least significant elements of a generic natural bitvector to a 8-bit primal bitvector
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <typeparam name="T">The primal source type</typeparam>        
+        [MethodImpl(Inline)]
+        public static BitVector8 ToPrimal<N,T>(this BitVector<N,T> src, N8 n)        
+            where T : unmanaged
+            where N : ITypeNat, new()
+                => src.Data.TakeUInt8();
+
+        /// <summary>
+        /// Converts the least significant elements of a generic natural bitvector to a 16-bit primal bitvector
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <typeparam name="T">The primal source type</typeparam>        
+        [MethodImpl(Inline)]
+        public static BitVector16 ToPrimal<N,T>(this BitVector<N,T> src, N16 n)        
+            where T : unmanaged
+            where N : ITypeNat, new()
+                => src.Data.TakeUInt16();
+
+        /// <summary>
+        /// Converts the least significant elements of generic natural bitvector to a 32-bit primal bitvector
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <typeparam name="T">The primal source type</typeparam>        

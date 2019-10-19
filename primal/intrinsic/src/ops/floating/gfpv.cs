@@ -201,6 +201,31 @@ namespace Z0
         }        
 
        [MethodImpl(Inline)]
+       public static Vector128<T> vadd<T>(Vector128<T> lhs, Vector128<T> rhs)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(float))
+                return generic<T>(dfp.vadd(float32(lhs), float32(rhs)));
+            else if(typeof(T) == typeof(double))
+                return generic<T>(dfp.vadd(float64(lhs), float64(rhs)));
+            else 
+                throw unsupported<T>();
+        }        
+
+
+       [MethodImpl(Inline)]
+       public static Vector256<T> vadd<T>(Vector256<T> lhs, Vector256<T> rhs)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(float))
+                return generic<T>(dfp.vadd(float32(lhs), float32(rhs)));
+            else if(typeof(T) == typeof(double))
+                return generic<T>(dfp.vadd(float64(lhs), float64(rhs)));
+            else 
+                throw unsupported<T>();
+        }        
+
+       [MethodImpl(Inline)]
        public static Vec256<T> vadd<T>(in Vec256<T> lhs, in Vec256<T> rhs)
             where T : unmanaged
         {

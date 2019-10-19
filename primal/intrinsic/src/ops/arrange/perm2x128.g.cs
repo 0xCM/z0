@@ -22,14 +22,32 @@ namespace Z0
             || typeof(T) == typeof(ushort) 
             || typeof(T) == typeof(uint) 
             || typeof(T) == typeof(ulong))
-                return vperm2x128u(lhs,rhs,spec);
+                return vperm2x128_u(lhs,rhs,spec);
             else if(typeof(T) == typeof(sbyte) 
             || typeof(T) == typeof(short) 
             || typeof(T) == typeof(int) 
             || typeof(T) == typeof(long))
-                return vperm2x128i(lhs,rhs,spec);
+                return vperm2x128_i(lhs,rhs,spec);
             else 
-                return vperm2x128f(lhs,rhs,spec);
+                return vperm2x128_f(lhs,rhs,spec);
+        }
+
+        [MethodImpl(Inline)]
+        public static Vector256<T> vperm2x128<T>(Vector256<T> lhs, Vector256<T> rhs, Perm2x128 spec)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(byte) 
+            || typeof(T) == typeof(ushort) 
+            || typeof(T) == typeof(uint) 
+            || typeof(T) == typeof(ulong))
+                return vperm2x128_u(lhs,rhs,spec);
+            else if(typeof(T) == typeof(sbyte) 
+            || typeof(T) == typeof(short) 
+            || typeof(T) == typeof(int) 
+            || typeof(T) == typeof(long))
+                return vperm2x128_i(lhs,rhs,spec);
+            else 
+                return vperm2x128_f(lhs,rhs,spec);
         }
 
         public static string vperm256_info<T>()
@@ -63,7 +81,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static Vec256<T> vperm2x128u<T>(in Vec256<T> lhs, in Vec256<T> rhs, Perm2x128 spec)
+        static Vec256<T> vperm2x128_u<T>(in Vec256<T> lhs, in Vec256<T> rhs, Perm2x128 spec)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -77,7 +95,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static Vec256<T> vperm2x128i<T>(in Vec256<T> lhs, in Vec256<T> rhs, Perm2x128 spec)
+        static Vec256<T> vperm2x128_i<T>(in Vec256<T> lhs, in Vec256<T> rhs, Perm2x128 spec)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
@@ -91,7 +109,48 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static Vec256<T> vperm2x128f<T>(in Vec256<T> lhs, in Vec256<T> rhs, Perm2x128 spec)
+        static Vec256<T> vperm2x128_f<T>(in Vec256<T> lhs, in Vec256<T> rhs, Perm2x128 spec)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(float))
+                return generic<T>(dinx.vperm2x128(float32(lhs), float32(rhs),spec));
+            else if(typeof(T) == typeof(double))
+                return generic<T>(dinx.vperm2x128(float64(lhs), float64(rhs),spec));
+            else
+                throw unsupported<T>();
+        }
+
+
+        [MethodImpl(Inline)]
+        static Vector256<T> vperm2x128_u<T>(Vector256<T> lhs, Vector256<T> rhs, Perm2x128 spec)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(byte))
+                return generic<T>(dinx.vperm2x128(uint8(lhs), uint8(rhs), spec));
+            else if(typeof(T) == typeof(ushort))
+                return generic<T>(dinx.vperm2x128(uint16(lhs), uint16(rhs), spec));
+            else if(typeof(T) == typeof(uint))
+                return generic<T>(dinx.vperm2x128(uint32(lhs), uint32(rhs), spec));
+            else
+                return generic<T>(dinx.vperm2x128(uint64(lhs), uint64(rhs), spec));
+        }
+
+        [MethodImpl(Inline)]
+        static Vector256<T> vperm2x128_i<T>(Vector256<T> lhs, Vector256<T> rhs, Perm2x128 spec)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(sbyte))
+                return generic<T>(dinx.vperm2x128(int8(lhs), int8(rhs), spec));
+            else if(typeof(T) == typeof(short))
+                return generic<T>(dinx.vperm2x128(int16(lhs), int16(rhs), spec));
+            else if(typeof(T) == typeof(int))
+                return generic<T>(dinx.vperm2x128(int32(lhs), int32(rhs), spec));
+            else
+                return generic<T>(dinx.vperm2x128(int64(lhs), int64(rhs), spec));
+        }
+
+        [MethodImpl(Inline)]
+        static Vector256<T> vperm2x128_f<T>(Vector256<T> lhs, Vector256<T> rhs, Perm2x128 spec)
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))

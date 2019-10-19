@@ -11,15 +11,6 @@ namespace Z0
 
     partial class mathspan
     {
-
-       public static Span<T> nor<T>(Span<T> lhs, in T rhs)
-            where T : unmanaged
-        {
-            for(var i=0; i<lhs.Length; i++)
-                lhs[i] = gmath.nor(lhs[i],rhs);
-            return lhs;
-        }
-
         public static Span<T> nor<T>(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs, Span<T> dst)
             where T : unmanaged
         {

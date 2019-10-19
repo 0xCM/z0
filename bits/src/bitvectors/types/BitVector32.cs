@@ -508,7 +508,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public BitVector32 Select(BitVector32 y, BitVector32 z)
         {
-            data = math.select(data,y.data,z.data);
+            data = gmath.select(data,y.data,z.data);
             return this;
         }
 
@@ -625,8 +625,11 @@ namespace Z0
         /// Reverses the vector's bits
         /// </summary>
         [MethodImpl(Inline)]
-        public void Reverse()
-            => data = Bits.rev(data);
+        public BitVector32 Reverse()
+        {     
+            data = Bits.rev(data);
+            return this;
+        }
 
         /// <summary>
         /// Rearranges the vector in-place as specified by a permutation
@@ -733,7 +736,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public BitVector32 AndNot(BitVector32 y)
         {
-            data = Bits.andnot(data, y.data);            
+            data = math.andnot(data, y.data);            
             return this;
         }        
 

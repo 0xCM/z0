@@ -11,9 +11,9 @@ namespace Z0
     using static zfunc;
 
     /// <summary>    
-    /// Lifts a literal bit value to an expression
+    /// Lifts a literal value to an expression
     /// </summary>
-    public sealed class Literal<T> : ILiteral<T>
+    public class Literal<T> : ILiteral<T>
         where T : unmanaged
     {
         /// <summary>

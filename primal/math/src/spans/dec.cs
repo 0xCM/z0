@@ -20,12 +20,13 @@ namespace Z0
             return dst;
         }        
 
+        /// <summary>
+        /// Decrements each value in the source in-place
+        /// </summary>
+        /// <param name="src">The source values</param>
+        [MethodImpl(Inline)]
         public static Span<T> dec<T>(Span<T> src)
             where T : unmanaged
-        {
-            for(var i = 0; i< src.Length; i++)
-                gmath.dec(ref src[i]);
-            return src;
-        }       
+                => dec(src.ReadOnly(), src);
     }
 }

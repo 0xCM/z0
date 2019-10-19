@@ -12,14 +12,18 @@ namespace Z0
 
     partial class BitMatrix
     {
+        public static BitMatrix<T> not<T>(BitMatrix<T> A, BitMatrix<T> B)
+            where T : unmanaged
+        {            
+            for(var i=0; i<A.RowCount; i++)
+                B[i] = bitvector.not(A[i]); 
+            return B;
+        }
+
+        [MethodImpl(Inline)]
         public static BitMatrix<T> not<T>(BitMatrix<T> A)
             where T : unmanaged
-        {
-            var C = BitMatrix.Alloc<T>(A.RowCount);
-            for(var i=0; i<A.RowCount; i++)
-                C[i] = bitvector.not(A[i]); 
-            return C;
-        }
+                => not(A, A.Replicate(true));
 
         [MethodImpl(Inline)]
         public static BitMatrix8 not(BitMatrix8 src)
@@ -72,12 +76,12 @@ namespace Z0
         /// <typeparam name="N">The col dimension type</typeparam>
         /// <typeparam name="T">The matrix storage type</typeparam>
         [MethodImpl(Inline)]
-        public static ref BitMatrix<N,T> not<N,T>(in BitMatrix<N,T> A, ref BitMatrix<N,T> B)        
+        public static BitMatrix<N,T> not<N,T>(BitMatrix<N,T> A, BitMatrix<N,T> B)        
             where N : ITypeNat, new()
             where T : unmanaged
         {
             mathspan.not(A.Data, B.Data);
-            return ref B;
+            return  B;
         }
 
         /// <summary>
@@ -90,13 +94,13 @@ namespace Z0
         /// <typeparam name="N">The col dimension type</typeparam>
         /// <typeparam name="T">The matrix storage type</typeparam>
         [MethodImpl(Inline)]
-        public static ref BitMatrix<M,N,T> flip<M,N,T>(in BitMatrix<M,N,T> A, ref BitMatrix<M,N,T> B)        
+        public static  BitMatrix<M,N,T> not<M,N,T>(BitMatrix<M,N,T> A, BitMatrix<M,N,T> B)        
             where M : ITypeNat, new()
             where N : ITypeNat, new()
             where T : unmanaged
         {
             mathspan.not(A.Data,B.Data);
-            return ref B;
+            return B;
         }
 
 

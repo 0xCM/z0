@@ -1,4 +1,4 @@
-// 2019-10-18 00:25:27:480
+// 2019-10-18 23:21:12:043
 Sign:int signum_d8i(sbyte x)
 {
     IL_0000: ldarg.0
@@ -3325,13 +3325,12 @@ float fma_g32f(float x, float a, float b)
     IL_0008: ret
 
 }
-double fma_d64f(double x, double a, double b)
+bool gt_g8i(sbyte lhs, sbyte rhs)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: ldarg.2
-    IL_0003: call System.Double Z0.fmath::fma(System.Double,System.Double,System.Double)
-    IL_0008: ret
+    IL_0002: call System.Boolean Z0.gmath::gt<System.SByte>(System.SByte,System.SByte)
+    IL_0007: ret
 
 }
 sbyte add_d8i(sbyte lhs, sbyte rhs)
@@ -4404,112 +4403,112 @@ double and_g64f(double lhs, double rhs)
     IL_0007: ret
 
 }
-sbyte flip_d8i(sbyte x)
+sbyte not_d8i(sbyte x)
 {
     IL_0000: ldarg.0
-    IL_0001: call System.SByte Z0.math::flip(System.SByte)
+    IL_0001: call System.SByte Z0.math::not(System.SByte)
     IL_0006: ret
 
 }
-sbyte flip_g8i(sbyte x)
+sbyte not_g8i(sbyte x)
 {
     IL_0000: ldarg.0
     IL_0001: call System.SByte Z0.gmath::not<System.SByte>(System.SByte)
     IL_0006: ret
 
 }
-byte flip_d8u(byte x)
+byte not_d8u(byte x)
 {
     IL_0000: ldarg.0
     IL_0001: call System.Byte Z0.math::not(System.Byte)
     IL_0006: ret
 
 }
-byte flip_g8u(byte x)
+byte not_g8u(byte x)
 {
     IL_0000: ldarg.0
     IL_0001: call System.Byte Z0.gmath::not<System.Byte>(System.Byte)
     IL_0006: ret
 
 }
-short flip_d16i(short x)
+short not_d16i(short x)
 {
     IL_0000: ldarg.0
-    IL_0001: call System.Int16 Z0.math::flip(System.Int16)
+    IL_0001: call System.Int16 Z0.math::not(System.Int16)
     IL_0006: ret
 
 }
-short flip_g16i(short x)
+short not_g16i(short x)
 {
     IL_0000: ldarg.0
     IL_0001: call System.Int16 Z0.gmath::not<System.Int16>(System.Int16)
     IL_0006: ret
 
 }
-ushort flip_d16u(ushort x)
+ushort not_d16u(ushort x)
 {
     IL_0000: ldarg.0
-    IL_0001: call System.UInt16 Z0.math::flip(System.UInt16)
+    IL_0001: call System.UInt16 Z0.math::not(System.UInt16)
     IL_0006: ret
 
 }
-ushort flip_g16u(ushort x)
+ushort not_g16u(ushort x)
 {
     IL_0000: ldarg.0
     IL_0001: call System.UInt16 Z0.gmath::not<System.UInt16>(System.UInt16)
     IL_0006: ret
 
 }
-int flip_d32i(int x)
+int not_d32i(int x)
 {
     IL_0000: ldarg.0
-    IL_0001: call System.Int32 Z0.math::flip(System.Int32)
+    IL_0001: call System.Int32 Z0.math::not(System.Int32)
     IL_0006: ret
 
 }
-int flip_g32i(int x)
+int not_g32i(int x)
 {
     IL_0000: ldarg.0
     IL_0001: call System.Int32 Z0.gmath::not<System.Int32>(System.Int32)
     IL_0006: ret
 
 }
-uint flip_d32u(uint x)
+uint not_d32u(uint x)
 {
     IL_0000: ldarg.0
-    IL_0001: call System.UInt32 Z0.math::flip(System.UInt32)
+    IL_0001: call System.UInt32 Z0.math::not(System.UInt32)
     IL_0006: ret
 
 }
-uint flip_g32u(uint x)
+uint not_g32u(uint x)
 {
     IL_0000: ldarg.0
     IL_0001: call System.UInt32 Z0.gmath::not<System.UInt32>(System.UInt32)
     IL_0006: ret
 
 }
-long flip_d64i(long x)
+long not_d64i(long x)
 {
     IL_0000: ldarg.0
-    IL_0001: call System.Int64 Z0.math::flip(System.Int64)
+    IL_0001: call System.Int64 Z0.math::not(System.Int64)
     IL_0006: ret
 
 }
-long flip_g64i(long x)
+long not_g64i(long x)
 {
     IL_0000: ldarg.0
     IL_0001: call System.Int64 Z0.gmath::not<System.Int64>(System.Int64)
     IL_0006: ret
 
 }
-ulong flip_d64u(ulong x)
+ulong not_d64u(ulong x)
 {
     IL_0000: ldarg.0
-    IL_0001: call System.UInt64 Z0.math::flip(System.UInt64)
+    IL_0001: call System.UInt64 Z0.math::not(System.UInt64)
     IL_0006: ret
 
 }
-ulong flip_g64u(ulong x)
+ulong not_g64u(ulong x)
 {
     IL_0000: ldarg.0
     IL_0001: call System.UInt64 Z0.gmath::not<System.UInt64>(System.UInt64)

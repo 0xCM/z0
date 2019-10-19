@@ -277,37 +277,39 @@ namespace Z0
             where T : unmanaged
                 => ginx.vxnor(eval(a).Value, eval(b).Value);
 
+
         [MethodImpl(Inline)]
-        static Literal<Vector128<T>> sll<T>(IExpr<Vector128<T>> x, IExpr<int> b)
+        static Literal<Vector128<T>> sll<T>(IExpr<Vector128<T>> x, IExpr<int> offset)
             where T : unmanaged
         {
-            Vector128<T> y = ginx.vsll<T>(eval(x).Value, (byte)ScalarExprEval.eval(b).Value);
+            Vector128<T> y = ginx.vsll<T>(eval(x).Value, (byte)ScalarExprEval.eval(offset).Value);
             return y;
         }
 
         [MethodImpl(Inline)]
-        static Literal<Vector128<T>> srl<T>(IExpr<Vector128<T>> x, IExpr<int> b)
+        static Literal<Vector128<T>> srl<T>(IExpr<Vector128<T>> x, IExpr<int> offset)
             where T : unmanaged
         {
-            Vector128<T> y = ginx.vsrl<T>(eval(x).Value, (byte)ScalarExprEval.eval(b).Value);
+            Vector128<T> y = ginx.vsrl<T>(eval(x).Value, (byte)ScalarExprEval.eval(offset).Value);
             return y;
         }
 
         [MethodImpl(Inline)]
-        static Literal<Vector128<T>> rotl<T>(IExpr<Vector128<T>> a, IExpr<int> b)
+        static Literal<Vector128<T>> rotl<T>(IExpr<Vector128<T>> a, IExpr<int> offset)
             where T : unmanaged
         {
-            Vector128<T> y = ginx.vrotl<T>(eval(a).Value, (byte)ScalarExprEval.eval(b).Value);
+            Vector128<T> y = ginx.vrotl<T>(eval(a).Value, (byte)ScalarExprEval.eval(offset).Value);
             return y;
         }
 
         [MethodImpl(Inline)]
-        static Literal<Vector128<T>> rotr<T>(IExpr<Vector128<T>> a, IExpr<int> b)
+        static Literal<Vector128<T>> rotr<T>(IExpr<Vector128<T>> a, IExpr<int> offset)
             where T : unmanaged
         {
-            Vector128<T> y = ginx.vrotr<T>(eval(a).Value, (byte)ScalarExprEval.eval(b).Value);
+            Vector128<T> y = ginx.vrotr<T>(eval(a).Value, (byte)ScalarExprEval.eval(offset).Value);
             return y;
         }
+
 
         [MethodImpl(Inline)]
         static Literal<Vector128<T>> inc<T>(IExpr<Vector128<T>> a)
@@ -367,40 +369,39 @@ namespace Z0
         static Literal<Vector256<T>> xnor<T>(IExpr<Vector256<T>> a, IExpr<Vector256<T>> b)
             where T : unmanaged
                 => ginx.vxnor(eval(a).Value, eval(b).Value);
-
-
+                
         [MethodImpl(Inline)]
-        static Literal<Vector256<T>> sll<T>(IExpr<Vector256<T>> x, IExpr<int> b)
+        static Literal<Vector256<T>> sll<T>(IExpr<Vector256<T>> x, IExpr<int> offset)
             where T : unmanaged
         {
-            Vector256<T> y = ginx.vsll<T>(eval(x).Value, (byte)ScalarExprEval.eval(b).Value);
+            Vector256<T> y = ginx.vsll<T>(eval(x).Value,  (byte)ScalarExprEval.eval(offset).Value);
             return y;
         }
 
         [MethodImpl(Inline)]
-        static Literal<Vector256<T>> srl<T>(IExpr<Vector256<T>> x, IExpr<int> b)
+        static Literal<Vector256<T>> srl<T>(IExpr<Vector256<T>> x, IExpr<int> offset)
             where T : unmanaged
         {
-            Vector256<T> y = ginx.vsrl<T>(eval(x).Value, (byte)ScalarExprEval.eval(b).Value);
+            Vector256<T> y = ginx.vsrl<T>(eval(x).Value,  (byte)ScalarExprEval.eval(offset).Value);
             return y;
         }
 
         [MethodImpl(Inline)]
-        static Literal<Vector256<T>> rotl<T>(IExpr<Vector256<T>> x, IExpr<int> b)
+        static Literal<Vector256<T>> rotl<T>(IExpr<Vector256<T>> x, IExpr<int> offset)
             where T : unmanaged
         {
-            Vector256<T> y = ginx.vrotl<T>(eval(x).Value, (byte)ScalarExprEval.eval(b).Value);
+            Vector256<T> y = ginx.vrotl<T>(eval(x).Value, (byte)ScalarExprEval.eval(offset).Value);
             return y;
         }
 
         [MethodImpl(Inline)]
-        static Literal<Vector256<T>> rotr<T>(IExpr<Vector256<T>> a, IExpr<int> b)
+        static Literal<Vector256<T>> rotr<T>(IExpr<Vector256<T>> a, IExpr<int> offset)
             where T : unmanaged
         {
-            Vector256<T> y = ginx.vrotr<T>(eval(a).Value, (byte)ScalarExprEval.eval(b).Value);
+            Vector256<T> y = ginx.vrotr<T>(eval(a).Value, (byte)ScalarExprEval.eval(offset).Value);
             return y;
         }
- 
+
         [MethodImpl(Inline)]
         static Literal<Vector256<T>> inc<T>(IExpr<Vector256<T>> a)
             where T : unmanaged

@@ -22,9 +22,9 @@ namespace Z0
     public ref struct BitMatrix<T>
         where T : unmanaged
     {
-        Span<T> data;
+        internal Span<T> data;
 
-        public static readonly BitSize ColumnBitCount = bitsize<T>();
+        public static readonly BitSize Width = bitsize<T>();
 
         [MethodImpl(Inline)]
         public static BitMatrix<T> From(T[] src)        
@@ -41,7 +41,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitMatrix<T> Alloc(int rows)        
             => new BitMatrix<T>(new T[rows]);
-
 
         /// <summary>
         /// Computes the bitwise AND between the operands
@@ -95,7 +94,7 @@ namespace Z0
         public int ColCount
         {
             [MethodImpl(Inline)]
-            get => ColumnBitCount;
+            get => Width;
         }
 
         /// <summary>
@@ -116,13 +115,32 @@ namespace Z0
             get => ref data[0];
         }
 
+        /// <summary>
+        /// Specifies whether the matrix is square; if so, it can be represented
+        /// by one of the primal matrices
+        /// </summary>
+        public bool IsSquare
+        {
+            [MethodImpl(Inline)]
+            get => Width == RowCount;
+        }
+
+        /// <summary>
+        ///  Specifies the size of the matrix in bytes
+        /// </summary>
+        public ByteSize ByteSize
+        {
+            [MethodImpl(Inline)]
+            get => size<T>()*RowCount;
+        }
+
         [MethodImpl(Inline)]
         public BitVector<T> GetRow(int row)
             => data[row];
 
         [MethodImpl(Inline)]
         public void SetRow(int row, BitVector<T> src)
-            => this.data[row] = src.Data[0];
+            => this.data[row] = src.Head;
 
         /// <summary>
         /// Queries/manipulates index-identified row data
@@ -139,6 +157,22 @@ namespace Z0
         [MethodImpl(Inline)]
         public string Format()
             => Bytes.FormatMatrixBits(ColCount);
+    
+        [MethodImpl(Inline)]
+        public BitMatrix<T> Fill(T value)
+        {
+            data.Fill(value);
+            return this;
+        }
+
+        [MethodImpl(Inline)]
+        public BitMatrix<T> Replicate(bool structureOnly = false)
+            => new BitMatrix<T>(data.Replicate(structureOnly));
+        
+        [MethodImpl(Inline)]
+        public BitMatrix<S> As<S>()
+            where S : unmanaged
+                => new BitMatrix<S>(data.As<T,S>());
 
     }
 

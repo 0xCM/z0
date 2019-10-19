@@ -31,6 +31,27 @@ namespace Z0
 
         }
 
+        /// <summary>
+        /// Gets the log folder for a specific area
+        /// </summary>
+        /// <param name="target">The area target</param>
+        public static FolderPath AreaFolder(this LogTarget<LogArea> target)
+            => LogSettings.Get().RootLogDir + FolderName.Define(target.Area.ToString().ToLower());
+
+        /// <summary>
+        /// Creates a writer for a specified area and filename
+        /// </summary>
+        /// <param name="area">The target area</param>
+        /// <param name="file">The name of the log file</param>
+        public static StreamWriter LogWriter(this LogArea area, FileName file)
+        {
+            var target = LogTarget.AreaRoot(area);
+            var folder = target.AreaFolder();
+            var path = folder + file;
+            return new StreamWriter(path.ToString());
+        }
+
+
         public static ILogger Get(ILogTarget dst)
             => dst.Area switch{
                 LogArea.App => AppLog.TheOnly,

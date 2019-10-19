@@ -16,114 +16,201 @@ namespace Z0
         /// Creates a shift expression
         /// </summary>
         /// <param name="op">The operator classifier</param>
-        /// <param name="left">The left operand</param>
-        /// <param name="right">The right operand</param>
+        /// <param name="src">The left operand</param>
+        /// <param name="offset">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static BitShiftOp<T> shift<T>(ShiftOpKind op, IExpr<T> left, int right)
+        public static BitShiftOp<T> shift<T>(ShiftOpKind op, IExpr<T> src, int offset)
             where T : unmanaged
-                => new BitShiftOp<T>(op,left, literal(right));
+                => new BitShiftOp<T>(op,src,literal(offset));
 
         /// <summary>
         /// Creates a shift expression
         /// </summary>
         /// <param name="op">The operator classifier</param>
-        /// <param name="left">The left operand</param>
-        /// <param name="right">The right operand</param>
+        /// <param name="src">The left operand</param>
+        /// <param name="offset">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static BitShiftOp<T> shift<T>(ShiftOpKind op, IExpr<T> left, IExpr<int> right)
+        public static BitShiftOp<T> shiftx<T>(ShiftOpKind op, IExpr<T> src, IExpr<int> offset)
             where T : unmanaged
-                => new BitShiftOp<T>(op,left,right);
+                => new BitShiftOp<T>(op,src, offset);
 
         /// <summary>
         /// Defines a bitwise sll expression
         /// </summary>
-        /// <param name="lhs">The left operand</param>
-        /// <param name="rhs">The right operand</param>
+        /// <param name="src">The left operand</param>
+        /// <param name="offset">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static BitShiftOp<T> sll<T>(IExpr<T> lhs, int rhs)
+        public static BitShiftOp<T> sll<T>(IExpr<T> src, int offset)
             where T : unmanaged
-                => shift(ShiftOpKind.Sll, lhs, rhs);
+                => shift(ShiftOpKind.Sll, src, offset);
 
         /// <summary>
         /// Defines a bitwise sll expression with literal operands
         /// </summary>
-        /// <param name="lhs">The left operand</param>
-        /// <param name="rhs">The right operand</param>
+        /// <param name="src">The left operand</param>
+        /// <param name="offset">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static BitShiftOp<T> sll<T>(T lhs, int rhs)
+        public static BitShiftOp<T> sll<T>(T src, int offset)
             where T : unmanaged
-                => sll(literal(lhs), rhs);
+                => sll(literal(src), offset);
 
         /// <summary>
         /// Defines a bitwise srl expression
         /// </summary>
-        /// <param name="lhs">The left operand</param>
-        /// <param name="rhs">The right operand</param>
+        /// <param name="src">The left operand</param>
+        /// <param name="offset">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static BitShiftOp<T> srl<T>(IExpr<T> lhs, int rhs)
+        public static BitShiftOp<T> srl<T>(IExpr<T> src, int offset)
             where T : unmanaged
-                => shift(ShiftOpKind.Srl, lhs, rhs);
+                => shift(ShiftOpKind.Srl, src, offset);
 
         /// <summary>
         /// Defines a bitwise srl expression with literal operands
         /// </summary>
-        /// <param name="lhs">The left operand</param>
-        /// <param name="rhs">The right operand</param>
+        /// <param name="src">The left operand</param>
+        /// <param name="offset">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static BitShiftOp<T> srl<T>(T lhs, int rhs)
+        public static BitShiftOp<T> srl<T>(T src, int offset)
             where T : unmanaged
-                => srl(literal(lhs), rhs);
+                => srl(literal(src), offset);
 
         /// <summary>
         /// Defines a bitwise rotr expression
         /// </summary>
-        /// <param name="lhs">The left operand</param>
-        /// <param name="rhs">The right operand</param>
+        /// <param name="src">The left operand</param>
+        /// <param name="offset">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static BitShiftOp<T> rotr<T>(IExpr<T> lhs, int rhs)
+        public static BitShiftOp<T> rotr<T>(IExpr<T> src, int offset)
             where T : unmanaged
-                => shift(ShiftOpKind.Rotr, lhs, rhs);
+                => shift(ShiftOpKind.Rotr, src, offset);
 
         /// <summary>
         /// Defines a bitwise rotr expression with literal operands
         /// </summary>
-        /// <param name="lhs">The left operand</param>
-        /// <param name="rhs">The right operand</param>
+        /// <param name="src">The left operand</param>
+        /// <param name="offset">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static BitShiftOp<T> rotr<T>(T lhs, int rhs)
+        public static BitShiftOp<T> rotr<T>(T src, int offset)
             where T : unmanaged
-                => rotr(literal(lhs), rhs);
+                => rotr(literal(src), offset);
         
         /// <summary>
         /// Defines a bitwise rotl expression
         /// </summary>
-        /// <param name="lhs">The left operand</param>
-        /// <param name="rhs">The right operand</param>
+        /// <param name="src">The left operand</param>
+        /// <param name="offset">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static BitShiftOp<T> rotl<T>(IExpr<T> lhs, int rhs)
+        public static BitShiftOp<T> rotl<T>(IExpr<T> src, int offset)
             where T : unmanaged
-                => shift(ShiftOpKind.Rotl, lhs, rhs);
+                => shift(ShiftOpKind.Rotl, src, offset);
 
         /// <summary>
         /// Defines a bitwise rotl expression with literal operands
         /// </summary>
-        /// <param name="lhs">The left operand</param>
-        /// <param name="rhs">The right operand</param>
+        /// <param name="src">The left operand</param>
+        /// <param name="offset">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static BitShiftOp<T> rotl<T>(T lhs, int rhs)
+        public static BitShiftOp<T> rotl<T>(T src, int offset)
             where T : unmanaged
-                => rotl(literal(lhs), rhs);
+                => rotl(literal(src), offset);
 
+        /// <summary>
+        /// Defines a bitwise sll expression
+        /// </summary>
+        /// <param name="src">The left operand</param>
+        /// <param name="offset">The right operand</param>
+        /// <typeparam name="T">The operand type</typeparam>
+        [MethodImpl(Inline)]
+        public static BitShiftOp<T> sll<T>(IExpr<T> src, IExpr<int> offset)
+            where T : unmanaged
+                => shiftx(ShiftOpKind.Sll, src, offset);
+
+        /// <summary>
+        /// Defines a bitwise sll expression with literal operands
+        /// </summary>
+        /// <param name="src">The left operand</param>
+        /// <param name="offset">The right operand</param>
+        /// <typeparam name="T">The operand type</typeparam>
+        [MethodImpl(Inline)]
+        public static BitShiftOp<T> sllx<T>(T src, IExpr<int> offset)
+            where T : unmanaged
+                => sll(literal(src), offset);
+
+        /// <summary>
+        /// Defines a bitwise srl expression
+        /// </summary>
+        /// <param name="src">The left operand</param>
+        /// <param name="offset">The right operand</param>
+        /// <typeparam name="T">The operand type</typeparam>
+        [MethodImpl(Inline)]
+        public static BitShiftOp<T> srl<T>(IExpr<T> src, IExpr<int> offset)
+            where T : unmanaged
+                => shiftx(ShiftOpKind.Srl, src, offset);
+
+        /// <summary>
+        /// Defines a bitwise srl expression with literal operands
+        /// </summary>
+        /// <param name="src">The left operand</param>
+        /// <param name="offset">The right operand</param>
+        /// <typeparam name="T">The operand type</typeparam>
+        [MethodImpl(Inline)]
+        public static BitShiftOp<T> srl<T>(T src, IExpr<int> offset)
+            where T : unmanaged
+                => srl(literal(src), offset);
+
+        /// <summary>
+        /// Defines a bitwise rotr expression
+        /// </summary>
+        /// <param name="src">The left operand</param>
+        /// <param name="offset">The right operand</param>
+        /// <typeparam name="T">The operand type</typeparam>
+        [MethodImpl(Inline)]
+        public static BitShiftOp<T> rotr<T>(IExpr<T> src, IExpr<int> offset)
+            where T : unmanaged
+                => shiftx(ShiftOpKind.Rotr, src, offset);
+
+        /// <summary>
+        /// Defines a bitwise rotr expression with literal operands
+        /// </summary>
+        /// <param name="src">The left operand</param>
+        /// <param name="offset">The right operand</param>
+        /// <typeparam name="T">The operand type</typeparam>
+        [MethodImpl(Inline)]
+        public static BitShiftOp<T> rotr<T>(T src, IExpr<int> offset)
+            where T : unmanaged
+                => rotr(literal(src), offset);
+        
+        /// <summary>
+        /// Defines a bitwise rotl expression
+        /// </summary>
+        /// <param name="src">The left operand</param>
+        /// <param name="offset">The right operand</param>
+        /// <typeparam name="T">The operand type</typeparam>
+        [MethodImpl(Inline)]
+        public static BitShiftOp<T> rotl<T>(IExpr<T> src, IExpr<int> offset)
+            where T : unmanaged
+                => shiftx(ShiftOpKind.Rotl, src, offset);
+
+        /// <summary>
+        /// Defines a bitwise rotl expression with literal operands
+        /// </summary>
+        /// <param name="src">The left operand</param>
+        /// <param name="offset">The right operand</param>
+        /// <typeparam name="T">The operand type</typeparam>
+        [MethodImpl(Inline)]
+        public static BitShiftOp<T> rotl<T>(T src, IExpr<int> offset)
+            where T : unmanaged
+                => rotl(literal(src), offset);
 
 
     }

@@ -47,8 +47,6 @@ namespace Z0
         public static Graph<byte> graph(BitMatrix64 A)
             => BitGraph.FromMatrix<byte,N64,byte>(BitMatrix<N64,N64,byte>.Load(A.Bytes));            
 
-
-
     }
 
 }

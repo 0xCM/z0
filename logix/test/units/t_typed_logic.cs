@@ -15,6 +15,82 @@ namespace Z0
 
     public class t_typed_logic : UnitTest<t_typed_logic>
     {
+        // ~ select
+
+        public void check_select()
+        {
+            check_select<byte>();
+            check_select<ushort>();
+            check_select<uint>();
+            check_select<ulong>();
+            check_select_128<byte>();
+            check_select_128<ushort>();
+            check_select_128<uint>();
+            check_select_128<ulong>();
+            check_select_256<byte>();
+            check_select_256<ushort>();
+            check_select_256<uint>();
+            check_select_256<ulong>();
+        }
+
+        void check_select<T>()
+            where T : unmanaged
+        {
+            for(var i=0; i<SampleSize; i++)
+            {
+                var width = bitsize<T>();
+                var a = Random.BitVector<T>(width);
+                var b = Random.BitVector<T>(width);
+                var c = Random.BitVector<T>(width);
+                BitVector<T> x = ScalarOps.select(a.Head, b.Head, c.Head);
+                for(var j=0; j<x.Length; j++)
+                    Claim.eq(x[j], BitOps.select(a[j],b[j],c[j]));
+            }
+
+        }
+
+        void check_select_128<T>()
+            where T : unmanaged
+        {
+            for(var i=0; i<SampleSize; i++)
+            {
+                var a = Random.CpuVector128<T>();
+                var b = Random.CpuVector128<T>();
+                var c = Random.CpuVector128<T>();
+                var x = Cpu128Ops.select(a,b,c);
+
+                var sa = a.ToSpan();
+                var sb = b.ToSpan();
+                var sc = c.ToSpan();
+                var sx = x.ToSpan();
+
+                for(var j=0; j< sx.Length; j++)
+                    Claim.eq(sx[j], ScalarOps.select(sa[j], sb[j], sc[j]));
+            }
+
+        }
+
+        void check_select_256<T>()
+            where T : unmanaged
+        {
+            for(var i=0; i<SampleSize; i++)
+            {
+                var a = Random.CpuVector256<T>();
+                var b = Random.CpuVector256<T>();
+                var c = Random.CpuVector256<T>();
+                var x = Cpu256Ops.select(a,b,c);
+
+                var sa = a.ToSpan();
+                var sb = b.ToSpan();
+                var sc = c.ToSpan();
+                var sx = x.ToSpan();
+
+                for(var j=0; j< sx.Length; j++)
+                    Claim.eq(sx[j], ScalarOps.select(sa[j], sb[j], sc[j]));
+            }
+
+        }
+
         // ~ and
         public void check_and_8u()
             => check_op<byte>(BinaryLogicOpKind.And);
@@ -324,7 +400,7 @@ namespace Z0
         public void check_rotl_256x64u()
             => check_op_256<ulong>(ShiftOpKind.Rotl);
 
-        // ~ rotl
+        // ~ rotr
 
         public void check_rotr_8u()
             => check_op<byte>(ShiftOpKind.Rotr);
@@ -415,7 +491,7 @@ namespace Z0
                 v1.Set(a);
                 v2.Set(b);
                 T actual = LogicEngine.eval(expr);
-                T expect = ScalarOps.eval(op,a,b);
+                T expect = ScalarOpApi.eval(op,a,b);
                 Claim.eq(actual,expect);                            
             }
         }
@@ -431,7 +507,7 @@ namespace Z0
                 var a = Random.Next<T>();
                 v1.Set(a);   
                 T actual = LogicEngine.eval(expr);
-                T expect = ScalarOps.eval(op,a);
+                T expect = ScalarOpApi.eval(op,a);
                 Claim.eq(actual,expect);                            
             }
         }
@@ -447,7 +523,7 @@ namespace Z0
                 var a = Random.CpuVector128<T>();
                 v1.Set(a);   
                 Vector128<T> actual = LogicEngine.eval(expr);
-                Vector128<T> expect = Cpu128Ops.eval(op,a);
+                Vector128<T> expect = Cpu128OpApi.eval(op,a);
                 Claim.eq(actual,expect);                            
             }
         }
@@ -463,7 +539,7 @@ namespace Z0
                 var a = Random.CpuVector256<T>();
                 v1.Set(a);   
                 Vector256<T> actual = LogicEngine.eval(expr);
-                Vector256<T> expect = Cpu256Ops.eval(op,a);
+                Vector256<T> expect = Cpu256OpApi.eval(op,a);
                 Claim.eq(actual,expect);                            
             }
         }
@@ -483,7 +559,7 @@ namespace Z0
                 v1.Set(a);   
                 v2.Set(b);
                 Vector128<T> actual = LogicEngine.eval(expr);
-                Vector128<T> expect = Cpu128Ops.eval(op,a,b);
+                Vector128<T> expect = Cpu128OpApi.eval(op,a,b);
                 Claim.eq(actual,expect);                            
             }
         }
@@ -503,7 +579,7 @@ namespace Z0
                 v1.Set(a);   
                 v2.Set(b);
                 Vector256<T> actual = LogicEngine.eval(expr);
-                Vector256<T> expect = Cpu256Ops.eval(op,a,b);
+                Vector256<T> expect = Cpu256OpApi.eval(op,a,b);
                 Claim.eq(actual,expect);                            
             }
         }
@@ -512,19 +588,15 @@ namespace Z0
             where T : unmanaged
         {
             var v1 = variable<T>(1);
-            var v2 = variable(2, 0);
-            var expr = shift(op,v1,v2);
-            var minoffset = 2;
-            var maxoffset = bitsize<T>() - 2;
+            var offset = 6;
+            var expr = shift(op,v1,offset);
             
             for(var i=0; i< SampleSize; i++)
             {
                 var a = Random.Next<T>();
-                var b = Random.Next(minoffset, maxoffset);
                 v1.Set(a);   
-                v2.Set(b);
                 T actual = LogicEngine.eval(expr);
-                T expect = ScalarOps.eval(op,a,b);
+                T expect = ScalarOpApi.eval(op,a,offset);
                 Claim.eq(actual,expect);                            
             }
         }
@@ -533,19 +605,15 @@ namespace Z0
             where T : unmanaged
         {
             var v1 = variable(1, default(Vector128<T>));
-            var v2 = variable(2, 0);
-            var expr = shift(op,v1,v2);
-            var minoffset = 2;
-            var maxoffset = bitsize<T>() - 2;
+            var offset = 6;
+            var expr = shift(op,v1,offset);
             
             for(var i=0; i< SampleSize; i++)
             {
                 var a = Random.CpuVector128<T>();
-                var b = Random.Next(minoffset, maxoffset);
                 v1.Set(a);   
-                v2.Set(b);
                 Vector128<T> actual = LogicEngine.eval(expr);
-                Vector128<T> expect = Cpu128Ops.eval(op,a,b);
+                Vector128<T> expect = Cpu128OpApi.eval(op,a,offset);
                 Claim.eq(actual,expect);                            
             }
         }
@@ -554,19 +622,15 @@ namespace Z0
             where T : unmanaged
         {
             var v1 = variable(1, default(Vector256<T>));
-            var v2 = variable(2, 0);
-            var expr = shift(op,v1,v2);
-            var minoffset = 2;
-            var maxoffset = bitsize<T>() - 2;
+            var offset = 6;
+            var expr = shift(op,v1,offset);
             
             for(var i=0; i< SampleSize; i++)
             {
                 var a = Random.CpuVector256<T>();
-                var b = Random.Next(minoffset, maxoffset);
                 v1.Set(a);   
-                v2.Set(b);
                 Vector256<T> actual = LogicEngine.eval(expr);
-                Vector256<T> expect = Cpu256Ops.eval(op,a,b);
+                Vector256<T> expect = Cpu256OpApi.eval(op,a,offset);
                 Claim.eq(actual,expect);                            
             }
         }

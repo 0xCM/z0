@@ -5,159 +5,607 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Runtime.CompilerServices;
-    
-    using static zfunc;
+
+    using static zfunc;    
     using static TernaryLogicOpKind;
-    using static ScalarLogic;
-    using static LogicOps;
+
 
     public static class ScalarOps
     {
-        /// <summary>
-        /// Advertises the supported scalar binary opeators
-        /// </summary>
-        public static IEnumerable<BinaryLogicOpKind> BinaryKinds
-            => items(
-                BinaryLogicOpKind.And, BinaryLogicOpKind.Or, BinaryLogicOpKind.XOr,
-                BinaryLogicOpKind.Nand, BinaryLogicOpKind.Nor, BinaryLogicOpKind.Xnor
-            );
-
-        /// <summary>
-        /// Advertises the supported ternary opeators
-        /// </summary>
-        public static IEnumerable<TernaryLogicOpKind> TernaryKinds
-            => range((byte)1,(byte)X29).Cast<TernaryLogicOpKind>();
-
-        public static T eval<T>(BinaryLogicOpKind op, T a, T b)
+        [MethodImpl(Inline)]
+        public static T zero<T>()
             where T : unmanaged
-        {
-            switch(op)
-            {
-                case BinaryLogicOpKind.And:
-                    return gmath.and(a,b);
-                case BinaryLogicOpKind.Or:
-                    return gmath.or(a,b);
-                case BinaryLogicOpKind.XOr:
-                    return gmath.xor(a,b);
-                case BinaryLogicOpKind.Nand:
-                    return gmath.nand(a,b);
-                case BinaryLogicOpKind.Nor:
-                    return gmath.nor(a,b);
-                case BinaryLogicOpKind.Xnor:
-                    return gmath.xnor(a,b);
-                default: return canteval(op,a,b);
-            }
-        }
+                => default;
 
-        public static T eval<T>(UnaryLogicOpKind op, T a)
+        [MethodImpl(Inline)]
+        public static T identity<T>(T a)
             where T : unmanaged
-        {
-            switch(op)
-            {
-                case UnaryLogicOpKind.Not:
-                    return gmath.not(a);
-                case UnaryLogicOpKind.Negate:
-                    return gmath.negate(a);
-                default: return canteval(op,a);
-            }
-        }
+                => a;
 
-        public static T eval<T>(ShiftOpKind op, T a, int rhs)
+        [MethodImpl(Inline)]
+        public static T one<T>()
             where T : unmanaged
-        {
-            switch(op)
-            {
-                case ShiftOpKind.Sll:
-                    return gmath.sll(a,rhs);
-                case ShiftOpKind.Srl:
-                    return gmath.srl(a,rhs);
-                case ShiftOpKind.Rotl:
-                    return gbits.rotl(a,rhs);
-                case ShiftOpKind.Rotr:
-                    return gbits.rotr(a,rhs);
-                default: return canteval(op,a);
-            }
-        }
-
-
-        public static UnaryOp<T> lookup<T>(UnaryLogicOpKind id)
-            where T : unmanaged            
-        {
-            switch(id)
-            {
-                case UnaryLogicOpKind.Not: return not;
-                case UnaryLogicOpKind.Identity: return ScalarLogic.identity;
-                default: return dne<T>(id);            }
-
-        }
-
-        public static BinaryOp<T> lookup<T>(BinaryLogicOpKind id)
+                => gmath.maxval<T>();
+        
+        [MethodImpl(Inline)]
+        public static T and<T>(T a, T b)
             where T : unmanaged
-        {
-            switch(id)
-            {
-                case BinaryLogicOpKind.And: return and;
-                case BinaryLogicOpKind.Nand: return nand;
-                case BinaryLogicOpKind.Or: return or;
-                case BinaryLogicOpKind.Nor: return nor;
-                case BinaryLogicOpKind.XOr: return xor;
-                case BinaryLogicOpKind.Xnor: return xnor;
-                default: return dne<T>(id);
-            }
-        }
+                => gmath.and(a,b);
 
-        public static TernaryOp<T> lookup<T>(TernaryLogicOpKind id)
+        [MethodImpl(Inline)]
+        public static T nand<T>(T a, T b)
             where T : unmanaged
-        {
-            switch(id)
-            {
-                case X01: return f01;
-                case X02: return f02;
-                case X03: return f03;
-                case X04: return f04;
-                case X05: return f05;
-                case X06: return f06;
-                case X07: return f07;
-                case X08: return f08;
-                case X09: return f09;
-                case X0A: return f0a;
-                case X0B: return f0b;
-                case X0C: return f0c;
-                case X0D: return f0d;
-                case X0E: return f0e;
-                case X0F: return f0f;
-                case X10: return f10;
-                case X11: return f11;
-                case X12: return f12;
-                case X13: return f13;
-                case X14: return f14;
-                case X15: return f15;
-                case X16: return f16;
-                case X17: return f17;
-                case X18: return f18;
-                case X19: return f19;
-                case X1A: return f1a;
-                case X1B: return f1b;
-                case X1C: return f1c;
-                case X1D: return f1d;
-                case X1E: return f1e;
-                case X1F: return f1f;
-                case X20: return f20;
-                case X21: return f21;
-                case X22: return f22;
-                case X23: return f23;
-                case X24: return f24;
-                case X25: return f25;
-                case X26: return f26;
-                case X27: return f27;
-                case X28: return f28;
-                case X29: return f29;
-                default: return dne<T>(id);
-            }
-        }
-    }
+                => gmath.nand(a,b);
+
+        [MethodImpl(Inline)]
+        public static T andnot<T>(T a, T b)
+            where T : unmanaged
+                => gmath.andnot(a,b);
+
+        [MethodImpl(Inline)]
+        public static T or<T>(T a, T b)
+            where T : unmanaged
+                => gmath.or(a,b);
+
+        [MethodImpl(Inline)]
+        public static T nor<T>(T a, T b)
+            where T : unmanaged
+                => gmath.nor(a,b);
+
+        [MethodImpl(Inline)]
+        public static T xor<T>(T a, T b)
+            where T : unmanaged
+                => gmath.xor(a,b);
+
+        [MethodImpl(Inline)]
+        public static T xnor<T>(T a, T b)
+            where T : unmanaged
+                => gmath.xnor(a,b);
+
+        [MethodImpl(Inline)]
+        public static T @false<T>(T a, T b)
+            where T:unmanaged
+                => default;
+
+        [MethodImpl(Inline)]
+        public static T @true<T>(T a, T b)
+            where T:unmanaged
+                => gmath.maxval<T>();
+
+        [MethodImpl(Inline)]
+        public static T not<T>(T a)
+            where T : unmanaged
+                => gmath.not(a);
+
+        [MethodImpl(Inline)]
+        public static T xor1<T>(T a)
+            where T : unmanaged
+                => gmath.xor1(a); 
+
+        [MethodImpl(Inline)]
+        public static T sll<T>(T a, int offset)
+            where T : unmanaged
+                => gmath.sll(a,offset);
+
+        [MethodImpl(Inline)]
+        public static T srl<T>(T a, int offset)
+            where T : unmanaged
+                => gmath.srl(a,offset);
+
+        [MethodImpl(Inline)]
+        public static T rotl<T>(T a, int offset)
+            where T : unmanaged
+                => gbits.rotl(a,offset);
+
+        [MethodImpl(Inline)]
+        public static T rotr<T>(T a, int offset)
+            where T : unmanaged
+                => gbits.rotr(a,offset);
+
+        [MethodImpl(Inline)]
+        public static T negate<T>(T a)
+            where T : unmanaged
+                => gmath.negate(a); 
+        
+        [MethodImpl(Inline)]
+        public static T @false<T>(T a)
+            where T:unmanaged
+                => default;
+
+        [MethodImpl(Inline)]
+        public static T @true<T>(T a)
+            where T:unmanaged
+                => gmath.maxval<T>();         
+
+        [MethodImpl(Inline)]
+        public static T select<T>(T a, T b, T c)
+            where T : unmanaged
+                => gmath.select(a,b,c);
+        
+        // a nor (b or c)
+        [MethodImpl(Inline)]
+        public static T f01<T>(T a, T b, T c)
+            where T : unmanaged
+            => nor(a, or(b,c));
+
+        // c and (b nor a)
+        [MethodImpl(Inline)]
+        public static T f02<T>(T a, T b, T c)
+            where T : unmanaged
+                => and(c, nor(b,a));
+ 
+         // b nor a
+        [MethodImpl(Inline)]
+        public static T f03<T>(T a, T b, T c)
+            where T : unmanaged
+                => nor(b,a);
+
+        // b and (a nor c)
+        [MethodImpl(Inline)]
+        public static T f04<T>(T a, T b, T c)
+            where T : unmanaged
+                => and(b, nor(a,c));
+
+        // c nor a
+        [MethodImpl(Inline)]
+        public static T f05<T>(T a, T b, T c)
+            where T : unmanaged
+                => nor(c,a);
+
+        // not a and (b xor c)
+        [MethodImpl(Inline)]
+        public static T f06<T>(T a, T b, T c)
+            where T : unmanaged
+                => and(not(a), xor(b,c));
+
+        // not a and (b xor c)
+        [MethodImpl(Inline)]
+        public static T f07<T>(T a, T b, T c)
+            where T : unmanaged
+                => nor(a, and(b,c));
+
+        // (not a and b) and c
+        [MethodImpl(Inline)]
+        public static T f08<T>(T a, T b, T c)
+            where T : unmanaged
+                => and(and(not(a),b), c);
+
+        // a nor (b xor c)
+        [MethodImpl(Inline)]
+        public static T f09<T>(T a, T b, T c)
+            where T : unmanaged
+                => nor(a, xor(b,c));
+
+        // c and (not a)
+        [MethodImpl(Inline)]
+        public static T f0a<T>(T a, T b, T c)
+            where T : unmanaged
+                => and(c, not(a));
+
+        // not a and ((b xor 1) or c)
+        [MethodImpl(Inline)]
+        public static T f0b<T>(T a, T b, T c)
+            where T : unmanaged
+                => and(not(a), or(xor1(b),  c));   
+
+        // b and (not a)
+        [MethodImpl(Inline)]
+        public static T f0c<T>(T a, T b, T c)
+            where T : unmanaged
+                => and(b, not(a));
+
+        // not a and (b or (c xor 1))
+        [MethodImpl(Inline)]
+        public static T f0d<T>(T a, T b, T c)
+            where T : unmanaged
+                => and(not(a), or(b, xor1(c)));
+
+        // not a and (b or c)
+        [MethodImpl(Inline)]
+        public static T f0e<T>(T a, T b, T c)
+            where T : unmanaged
+                => and(not(a),or(b,c));
+
+        // not a
+        [MethodImpl(Inline)]
+        public static T f0f<T>(T a, T b, T c)
+            where T : unmanaged
+                => not(a);
+
+        // a and (b nor c)
+        [MethodImpl(Inline)]
+        public static T f10<T>(T a, T b, T c)
+            where T : unmanaged
+                => and(a, nor(b, c));
+        
+        // c nor b
+        [MethodImpl(Inline)]
+        public static T f11<T>(T a, T b, T c)
+            where T : unmanaged
+                => nor(c,b);
+        
+        // not b and (a xor c) 
+        [MethodImpl(Inline)]
+        public static T f12<T>(T a, T b, T c)
+            where T : unmanaged
+                => and(not(b), xor(a,c));
+
+        // b nor (a and c)
+        [MethodImpl(Inline)]
+        public static T f13<T>(T a, T b, T c)
+            where T : unmanaged
+                => nor(b, and(a,c));
+
+        // not c and (a xor b)
+        [MethodImpl(Inline)]
+        public static T f14<T>(T a, T b, T c)
+            where T : unmanaged
+                => and(not(c), xor(a,b));
+
+        // c nor (b and a)
+        [MethodImpl(Inline)]
+        public static T f15<T>(T a, T b, T c)
+            where T : unmanaged
+                => nor(c, and(a,b));
+
+        // a ? (b nor c) : (b xor c)
+        [MethodImpl(Inline)]
+        public static T f16<T>(T a, T b, T c)
+            where T : unmanaged
+                => select(a, nor(b,c), xor(b,c));
+
+        // not(a ? (b or c) : (b and c))
+        [MethodImpl(Inline)]
+        public static T f17<T>(T a, T b, T c)
+            where T : unmanaged
+                => not(select(a, or(b,c), and(b,c)));
+
+        // (a xor b) and (a xor c)
+        [MethodImpl(Inline)]
+        public static T f18<T>(T a, T b, T c)
+            where T : unmanaged
+                => and(xor(a,b), xor(a,c));
+
+        // not((b xor c) xor (a and (b and c)))
+        [MethodImpl(Inline)]
+        public static T f19<T>(T a, T b, T c)
+            where T : unmanaged
+                => not(xor(xor(b,c), and(a, and(b,c))));
+
+        // not ((A and B)) and (A xor C)
+        [MethodImpl(Inline)]
+        public static T f1a<T>(T a, T b, T c)
+            where T : unmanaged
+                => and(not(and(a,b)), xor(a,c));
+
+        // c ? not a : not b
+        [MethodImpl(Inline)]
+        public static T f1b<T>(T a, T b, T c)
+            where T : unmanaged
+                => select(c, not(a), not(b));
+
+        //not ((a and c)) and (a xor b)
+        [MethodImpl(Inline)]
+        public static T f1c<T>(T a, T b, T c)
+            where T : unmanaged
+                => and(not(and(a,c)), xor(a,b));
+
+        //b ? (not a) : (not c)
+        [MethodImpl(Inline)]
+        public static T f1d<T>(T a, T b, T c)
+            where T : unmanaged
+                => select(b, not(a), not(c));
+
+        //a xor (b or c)
+        [MethodImpl(Inline)]
+        public static T f1e<T>(T a, T b, T c)
+            where T : unmanaged
+                => xor(a, or(b,c));
+
+        // a nand (b or c)
+        [MethodImpl(Inline)]
+        public static T f1f<T>(T a, T b, T c)
+            where T : unmanaged
+                => nand(a, or(b,c));
+
+        //((not b) and a) and C
+        [MethodImpl(Inline)]
+        public static T f20<T>(T a, T b, T c)
+            where T : unmanaged
+                => and(and(not(b),a),c);
+
+        // b nor (a xor c)
+        [MethodImpl(Inline)]
+        public static T f21<T>(T a, T b, T c)
+            where T : unmanaged
+                => nor(b, xor(a,c));
+
+        // c and (not b)
+        [MethodImpl(Inline)]
+        public static T f22<T>(T a, T b, T c)
+            where T : unmanaged
+                => andnot(c,b);
+
+        // not (B) and ((A xor 1) or C)
+        [MethodImpl(Inline)]
+        public static T f23<T>(T a, T b, T c)
+            where T : unmanaged
+                => and(not(b),or(xor1(a),c));
+
+        // (a xor b) and (b xor c)
+        [MethodImpl(Inline)]
+        public static T f24<T>(T a, T b, T c)
+            where T : unmanaged
+                => and(xor(a,b), xor(b,c));
+
+        // (not ((A and B)) and (A xor (C xor 1)))
+        [MethodImpl(Inline)]
+        public static T f25<T>(T a, T b, T c)
+            where T : unmanaged
+                => and(not(and(a,b)), xor(a, xor1(c)));
+
+        // not ((A and B)) and (B xor C)
+        [MethodImpl(Inline)]
+        public static T f26<T>(T a, T b, T c)
+            where T : unmanaged
+                => and(not(and(a,b)),xor(b,c));
+
+        //C ? not (B) : not (A)
+        [MethodImpl(Inline)]
+        public static T f27<T>(T a, T b, T c)
+            where T : unmanaged
+                => select(c,not(b),not(a));
+
+        //C and (B xor A)
+        [MethodImpl(Inline)]
+        public static T f28<T>(T a, T b, T c)
+            where T : unmanaged
+                => and(c,xor(b,a));
+
+        // C ? (B xor A) : (B nor A)
+        [MethodImpl(Inline)]
+        public static T f29<T>(T a, T b, T c)
+            where T : unmanaged
+                => select(c, xor(b,a),nor(b,a));
+
+        // C and (B nand A)
+        [MethodImpl(Inline)]
+        public static T f2a<T>(T a, T b, T c)
+            where T : unmanaged
+                => and(c,nand(b,a));
+
+        // C ? (B nand A) : (B nor A)
+        [MethodImpl(Inline)]
+        public static T f2b<T>(T a, T b, T c)
+            where T : unmanaged
+                => select(c,nand(b,a), nor(b,a));
+
+        // (B or C) and (A xor B)
+        [MethodImpl(Inline)]
+        public static T f2c<T>(T a, T b, T c)
+            where T : unmanaged
+                => and(or(b,c), xor(a,b));
+
+        // A xor (B or not (C))
+        [MethodImpl(Inline)]
+        public static T f2d<T>(T a, T b, T c)
+            where T : unmanaged
+                => xor(a, or(b, not(c)));
+
+        // (B or C) xor (A and B)
+        [MethodImpl(Inline)]
+        public static T f2e<T>(T a, T b, T c)
+            where T : unmanaged
+                => xor(or(b,c),and(a,b));
+
+        // not (A) or (not (B) and C)
+        [MethodImpl(Inline)]
+        public static T f2f<T>(T a, T b, T c)
+            where T : unmanaged
+                => or(not(a),(and(not(b),c)));
+
+        // a and not(b)
+        [MethodImpl(Inline),TernaryOp(X30)]
+        public static T f30<T>(T a, T b, T c)
+            where T : unmanaged
+                => andnot(a,b);
+
+        // not (B) and (A or (C xor 1))
+        [MethodImpl(Inline),TernaryOp(X31)]
+        public static T f31<T>(T a, T b, T c)
+            where T : unmanaged
+                => and(not(b), or(a,xor1(c)));
+
+        //not (B) and (A or C)
+        [MethodImpl(Inline),TernaryOp(X32)]
+        public static T f32<T>(T a, T b, T c)
+            where T : unmanaged
+                => and(not(b),or(a,c));
+
+        // not (B)
+        [MethodImpl(Inline),TernaryOp(X33)]
+        public static T f33<T>(T a, T b, T c)
+            where T : unmanaged
+                => not(b);
+
+        // not ((B and C)) and (A xor B)
+        [MethodImpl(Inline),TernaryOp(X34)]
+        public static T f34<T>(T a, T b, T c)
+            where T : unmanaged
+            => and(not(and(b,c)), xor(a,b));
+
+        // A ? not (B) : not (C)
+        [MethodImpl(Inline),TernaryOp(X35)]
+        public static T f35<T>(T a, T b, T c)
+            where T : unmanaged
+            => select(a,not(b),not(c));
+
+        // B xor (A or C)
+        [MethodImpl(Inline),TernaryOp(X36)]
+        public static T f36<T>(T a, T b, T c)
+            where T : unmanaged
+            => xor(b,or(a,c));
+
+        // B nand (A or C)
+        [MethodImpl(Inline),TernaryOp(X37)]
+        public static T f37<T>(T a, T b, T c)
+            where T : unmanaged
+            => nand(b,or(a,c));
+
+        // (A or C) and (A xor B)
+        [MethodImpl(Inline),TernaryOp(X38)]
+        public static T f38<T>(T a, T b, T c)
+            where T : unmanaged
+            => and(or(a,c), xor(a,b));
+
+        // B xor (A or (C xor 1))
+        [MethodImpl(Inline),TernaryOp(X39)]
+        public static T f39<T>(T a, T b, T c)
+            where T : unmanaged
+                => xor(b, or(a,xor1(c)));
+
+        // A ? not (B) : C
+        [MethodImpl(Inline),TernaryOp(X3A)]
+        public static T f3a<T>(T a, T b, T c)
+            where T : unmanaged
+            => select(a, not(b), c);
+
+        // (not (A) and C) or (B xor 1)
+        [MethodImpl(Inline),TernaryOp(X3B)]
+        public static T f3b<T>(T a, T b, T c)
+            where T : unmanaged
+            => or(and(not(a),c),xor1(b));
+
+        // B xor A
+        [MethodImpl(Inline),TernaryOp(X3C)]
+        public static T f3c<T>(T a, T b, T c)
+            where T : unmanaged
+                => xor(b,a);
+
+        // ((A xor B) or (A nor C))
+        [MethodImpl(Inline),TernaryOp(X3D)]
+        public static T f3d<T>(T a, T b, T c)
+            where T : unmanaged
+            => or(xor(b,a),nor(a,c));
+
+        // (not (A) and C) or (A xor B)
+        [MethodImpl(Inline),TernaryOp(X3E)]
+        public static T f3e<T>(T a, T b, T c)
+            where T : unmanaged
+                => or(and(not(a),c),xor(a,b));
+
+        // B nand A
+        [MethodImpl(Inline),TernaryOp(X3F)]
+        public static T f3f<T>(T a, T b, T c)
+            where T : unmanaged
+            => nand(b,a);
+
+        // (not (C) and A) and B
+        [MethodImpl(Inline),TernaryOp(X40)]
+        public static T f40<T>(T a, T b, T c)
+            where T : unmanaged
+                => and(and(not(c),a),b);
+
+        // C nor (B xor A)
+        [MethodImpl(Inline),TernaryOp(X41)]
+        public static T f41<T>(T a, T b, T c)
+            where T : unmanaged
+            => nor(c,xor(b,a));
+
+        // (A xor C) and (B xor C)
+        [MethodImpl(Inline),TernaryOp(X42)]
+        public static T f42<T>(T a, T b, T c)
+            where T : unmanaged
+                => and(xor(a,c),xor(b,c));
+
+        // not ((A and C)) and (A xor (B xor 1))
+        [MethodImpl(Inline),TernaryOp(X43)]
+        public static T f43<T>(T a, T b, T c)
+            where T : unmanaged
+                => and(not(and(a,c)), xor(a,xor1(b)));
+
+        // B and not (C)
+        [MethodImpl(Inline),TernaryOp(X44)]
+        public static T f44<T>(T a, T b, T c)
+            where T : unmanaged
+                => andnot(b,c);
+
+        // not (C) and ((A xor 1) or B)
+        [MethodImpl(Inline),TernaryOp(X45)]
+        public static T f45<T>(T a, T b, T c)
+            where T : unmanaged
+            => and(not(c), or(xor1(a), b));
+
+        // not ((A and C)) and (B xor C)
+        [MethodImpl(Inline),TernaryOp(X46)]
+        public static T f46<T>(T a, T b, T c)
+            where T : unmanaged
+            => and(not(and(a,c)),xor(b,c));
+
+        // B ? not (C) : not (A)
+        [MethodImpl(Inline),TernaryOp(X47)]
+        public static T f47<T>(T a, T b, T c)
+            where T : unmanaged
+            => select(b,not(c),not(a));
+
+        // B and (A xor C)
+        [MethodImpl(Inline),TernaryOp(X48)]
+        public static T f48<T>(T a, T b, T c)
+            where T : unmanaged
+            => and(b,xor(a,c));
+
+        // B ? (A xor C) : (A nor C)
+        [MethodImpl(Inline),TernaryOp(X49)]
+        public static T f49<T>(T a, T b, T c)
+            where T : unmanaged
+            => select(b,xor(a,c),nor(a,c));
+
+        // (B or C) and (A xor C)
+        [MethodImpl(Inline),TernaryOp(X4A)]
+        public static T f4a<T>(T a, T b, T c)
+            where T : unmanaged
+                => and(or(b,c), xor(a,c));
+
+         // A xor (not (B) or C)
+        [MethodImpl(Inline),TernaryOp(X4B)]
+        public static T f4b<T>(T a, T b, T c)
+            where T : unmanaged
+                => xor(a, or(not(b), c));
+
+        // B and (A nand C)
+        [MethodImpl(Inline),TernaryOp(X4C)]
+        public static T f4c<T>(T a, T b, T c)
+            where T : unmanaged
+                => and(b, nand(a,c));
+
+        // B ? (A nand C) : (A nor C)
+        [MethodImpl(Inline),TernaryOp(X4D)]
+        public static T f4d<T>(T a, T b, T c)
+            where T : unmanaged
+                => select(b, nand(a,c),nor(a,c));
+
+        // C ? not (A) : B
+        [MethodImpl(Inline),TernaryOp(X4E)]
+        public static T f4e<T>(T a, T b, T c)
+            where T : unmanaged
+                => select(c, not(a), b);
+
+        // not (A) or (B and not (C))
+        [MethodImpl(Inline),TernaryOp(X4F)]
+        public static T f4f<T>(T a, T b, T c)
+            where T : unmanaged
+                => or(not(a),andnot(b,c));
+
+
+        // a ? (b xnor c) : (b nand c)
+        [MethodImpl(Inline)]
+        public static T f97<T>(T a, T b, T c)
+            where T : unmanaged
+                => select(c, xnor(b,c), nand(b,c));
+  
+    }    
 
 }

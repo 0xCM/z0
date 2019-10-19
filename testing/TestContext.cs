@@ -290,34 +290,34 @@ namespace Z0
         }
 
         protected void TypeCaseStart<C>([CallerMemberName] string caller = null)
-            => Enqueue(AppMsg.Define($"{typeof(T).DisplayName()}/{caller}<{typeof(C).DisplayName()}> executing", SeverityLevel.HiliteCL));
+            => Notify(AppMsg.Define($"{typeof(T).DisplayName()}/{caller}<{typeof(C).DisplayName()}> executing", SeverityLevel.HiliteCL));
 
         protected void TypeCaseEnd<C>([CallerMemberName] string caller = null)
-            => Enqueue(AppMsg.Define($"{typeof(T).DisplayName()}/{caller}<{typeof(C).DisplayName()}> succeeded", SeverityLevel.HiliteCL));
+            => Notify(AppMsg.Define($"{typeof(T).DisplayName()}/{caller}<{typeof(C).DisplayName()}> succeeded", SeverityLevel.HiliteCL));
 
         protected void TypeCaseEnd<C>(AppMsg msg, [CallerMemberName] string caller = null)
-            => Enqueue(AppMsg.Define($"{typeof(T).DisplayName()}/{caller}<{typeof(C).DisplayName()}> succeeded: {msg}", SeverityLevel.HiliteCL));
+            => Notify(AppMsg.Define($"{typeof(T).DisplayName()}/{caller}<{typeof(C).DisplayName()}> succeeded: {msg}", SeverityLevel.HiliteCL));
 
         protected void TypeCaseStart<A,B>([CallerMemberName] string caller = null)
-            => Enqueue(AppMsg.Define($"{typeof(T).DisplayName()}/{caller}<{typeof(A).DisplayName()},{typeof(B).DisplayName()}> executing", SeverityLevel.HiliteCL));
+            => Notify(AppMsg.Define($"{typeof(T).DisplayName()}/{caller}<{typeof(A).DisplayName()},{typeof(B).DisplayName()}> executing", SeverityLevel.HiliteCL));
 
         protected void TypeCaseEnd<A,B>([CallerMemberName] string caller = null)
-            => Enqueue(AppMsg.Define($"{typeof(T).DisplayName()}/{caller}<{typeof(A).DisplayName()},{typeof(B).DisplayName()}> succeeded", SeverityLevel.HiliteCL));
+            => Notify(AppMsg.Define($"{typeof(T).DisplayName()}/{caller}<{typeof(A).DisplayName()},{typeof(B).DisplayName()}> succeeded", SeverityLevel.HiliteCL));
 
         protected void NatCaseStart<N,A>([CallerMemberName] string caller = null)
             where N : ITypeNat, new()
-            => Enqueue(AppMsg.Define($"{typeof(T).DisplayName()}/{caller}<N{nati<N>()},{typeof(A).DisplayName()}> executing", SeverityLevel.HiliteCL));
+            => Notify(AppMsg.Define($"{typeof(T).DisplayName()}/{caller}<N{nati<N>()},{typeof(A).DisplayName()}> executing", SeverityLevel.HiliteCL));
 
         protected void TypeCaseStart<M,N,S>([CallerMemberName] string caller = null)
             where M : ITypeNat, new()
             where N : ITypeNat, new()
             where S : unmanaged
-                => Enqueue(AppMsg.Define($"{typeof(T).DisplayName()}/{caller}<N{nati<M>()}xN{nati<N>()}:{typeof(S).DisplayName()}> executing", SeverityLevel.HiliteCL));
+                => Notify(AppMsg.Define($"{typeof(T).DisplayName()}/{caller}<N{nati<M>()}xN{nati<N>()}:{typeof(S).DisplayName()}> executing", SeverityLevel.HiliteCL));
 
         protected void TypeCaseEnd<M,N,S>([CallerMemberName] string caller = null)
             where M : ITypeNat, new()
             where N : ITypeNat, new()
             where S : unmanaged
-                => Enqueue(AppMsg.Define($"{typeof(T).Name}/{caller}<N{nati<M>()}xN{nati<N>()}:{typeof(S).DisplayName()}> succeeded", SeverityLevel.HiliteCL));
+                => Notify(AppMsg.Define($"{typeof(T).Name}/{caller}<N{nati<M>()}xN{nati<N>()}:{typeof(S).DisplayName()}> succeeded", SeverityLevel.HiliteCL));
     }
 }

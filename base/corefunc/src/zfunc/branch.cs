@@ -152,7 +152,7 @@ partial class zfunc
     /// <param name="true">The action to invoke when condition is true</param>
     /// <param name="false">The action to invoke when condition is false</param>
     [MethodImpl(Inline)]
-    public static Unit on(bool condition, Action @true, Action @false = null)
+    public static Unit ifElse(bool condition, Action @true, Action @false = null)
     {
         if (condition)
             @true();

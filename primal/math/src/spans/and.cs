@@ -37,7 +37,5 @@ namespace Z0
         public static Span<T> and<T>(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs)
             where T : unmanaged
                 => and(lhs,rhs,lhs.Replicate(true));
-
- 
     }
 }

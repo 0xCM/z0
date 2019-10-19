@@ -86,6 +86,8 @@ namespace Z0
         {
             switch(expr.OpKind)
             {
+                case BinaryLogicOpKind.True:
+                    return @true(expr.LeftArg, expr.RightArg);
                 case BinaryLogicOpKind.And:
                     return and(expr.LeftArg, expr.RightArg);
                 case BinaryLogicOpKind.Or:
@@ -98,6 +100,10 @@ namespace Z0
                     return nor(expr.LeftArg, expr.RightArg);
                 case BinaryLogicOpKind.Xnor:
                     return xnor(expr.LeftArg, expr.RightArg);
+                case BinaryLogicOpKind.AndNot:
+                    return andnot(expr.LeftArg, expr.RightArg);
+                case BinaryLogicOpKind.False:
+                    return @false(expr.LeftArg, expr.RightArg);
                 default:
                     return unhandled(expr);
             }
@@ -131,6 +137,26 @@ namespace Z0
         static Literal<T> not<T>(IExpr<T> a)
             where T : unmanaged
                 => gmath.not(eval(a).Value);
+
+        [MethodImpl(Inline)]
+        static Literal<T> @true<T>(IExpr<T> a)
+            where T : unmanaged
+                => gmath.maxval<T>();
+
+        [MethodImpl(Inline)]
+        static Literal<T> @false<T>(IExpr<T> a)
+            where T : unmanaged
+                => default(T);
+
+        [MethodImpl(Inline)]
+        static Literal<T> @true<T>(IExpr<T> a, IExpr<T> b)
+            where T : unmanaged
+                => gmath.maxval<T>();
+
+        [MethodImpl(Inline)]
+        static Literal<T> @false<T>(IExpr<T> a, IExpr<T> b)
+            where T : unmanaged
+                => default(T);
 
         [MethodImpl(Inline)]
         static Literal<T> negate<T>(IExpr<T> a)
@@ -168,24 +194,30 @@ namespace Z0
                 => gmath.xnor(eval(a).Value, eval(b).Value);
 
         [MethodImpl(Inline)]
-        static Literal<T> sll<T>(IExpr<T> a, IExpr<int> b)
+        static Literal<T> andnot<T>(IExpr<T> a, IExpr<T> b)
             where T : unmanaged
-                => gmath.sll(eval(a).Value, eval(b).Value);
+                => gmath.andnot(eval(a).Value, eval(b).Value);
+
+ 
+        [MethodImpl(Inline)]
+        static Literal<T> sll<T>(IExpr<T> a, IExpr<int> offset)
+            where T : unmanaged
+                => gmath.sll(eval(a).Value, eval(offset).Value);
 
         [MethodImpl(Inline)]
-        static Literal<T> srl<T>(IExpr<T> a, IExpr<int> b)
+        static Literal<T> srl<T>(IExpr<T> a, IExpr<int> offset)
             where T : unmanaged
-                => gmath.srl(eval(a).Value, eval(b).Value);
+                => gmath.srl(eval(a).Value, eval(offset).Value);
 
         [MethodImpl(Inline)]
-        static Literal<T> rotl<T>(IExpr<T> a, IExpr<int> b)
+        static Literal<T> rotl<T>(IExpr<T> a, IExpr<int> offset)
             where T : unmanaged
-                => gbits.rotl(eval(a).Value, eval(b).Value);
+                => gbits.rotl(eval(a).Value, eval(offset).Value);
 
         [MethodImpl(Inline)]
-        static Literal<T> rotr<T>(IExpr<T> a, IExpr<int> b)
+        static Literal<T> rotr<T>(IExpr<T> a, IExpr<int> offset)
             where T : unmanaged
-                => gbits.rotr(eval(a).Value, eval(b).Value);
+                => gbits.rotr(eval(a).Value, eval(offset).Value);
 
         [MethodImpl(Inline)]
         static Literal<T> inc<T>(IExpr<T> a)

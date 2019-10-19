@@ -64,7 +64,7 @@ namespace Z0
                 var hostpath = host.DisplayName();
                 if(instance.Enabled)
                     iter(Tests(host), t =>  execTime += Run(instance, hostpath, t));                
-                Enqueue(instance.Benchmarks);
+                Mark(instance.Benchmarks);
                 
                 print(AppMsg.Define($"{host.Name} exectime {execTime.Ms} ms, runtime = {snapshot(runtimer).Ms} ms", SeverityLevel.Info));
 

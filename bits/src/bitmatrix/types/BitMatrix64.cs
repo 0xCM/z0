@@ -20,7 +20,7 @@ namespace Z0
     /// </summary>
     public ref struct BitMatrix64
     {                
-        Span<ulong> data;
+        internal Span<ulong> data;
 
         /// <summary>
         /// The matrix order

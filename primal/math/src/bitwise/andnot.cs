@@ -14,7 +14,7 @@ namespace Z0
  
     using static zfunc;
     
-    public static partial class Bits
+    public static partial class math
     {                
         /// <summary>
         /// Computes a & (~b)

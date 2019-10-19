@@ -13,15 +13,19 @@ namespace Z0
 
     partial class BitMatrix
     {
-        public static BitMatrix<T> xor<T>(BitMatrix<T> A, BitMatrix<T> B)
+        public static BitMatrix<T> xor<T>(BitMatrix<T> A, BitMatrix<T> B, BitMatrix<T> C)
             where T : unmanaged
         {
-            var rc = math.min(A.RowCount, B.RowCount);
-            var C = BitMatrix.Alloc<T>(rc);
+            var rc = rowdim(A,B,C);
             for(var i=0; i<rc; i++)
                 C[i] = bitvector.xor(A[i],B[i]);
             return C;
         }
+
+        [MethodImpl(Inline)]
+        public static BitMatrix<T> xor<T>(BitMatrix<T> A, BitMatrix<T> B)
+            where T : unmanaged
+                => xor(A,B, A.Replicate(true));
 
         /// <summary>
         /// Computes the logical XOR between two primal bitmatrices of order 8

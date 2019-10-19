@@ -58,10 +58,6 @@ namespace Z0
         /// </summary>
         BitString ToBitString();
 
-        /// <summary>
-        /// Reverses the vector's bits in-place
-        /// </summary>
-        void Reverse();
 
         /// <summary>
         /// Enables a bit if it is disabled
@@ -276,6 +272,11 @@ namespace Z0
         /// </summary>
         /// <param name="spec">The permutation</param>
         V Permute(Perm p);
+
+        /// <summary>
+        /// Reverses the vector's bits in-place
+        /// </summary>
+        V Reverse();
 
         /// <summary>
         /// Populates a target vector with specified source bits

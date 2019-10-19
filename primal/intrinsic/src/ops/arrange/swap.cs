@@ -48,12 +48,16 @@ namespace Z0
         public static Vec256<byte> vswaphl(in Vec256<byte> x)
             => dinx.vperm2x128(x,x, Perm2x128.AD);
 
+        [MethodImpl(Inline)]
+        public static Vector256<byte> vswaphl(Vector256<byte> x)
+            => dinx.vperm2x128(x,x, Perm2x128.AD);
+
         /// <summary>
         /// Swaps hi/lo 128-bit lanes
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<sbyte> vswaphl(in Vec256<sbyte> x)
+        public static Vector256<sbyte> vswaphl(Vector256<sbyte> x)
             => dinx.vperm2x128(x,x, Perm2x128.AD);
 
         /// <summary>
@@ -61,7 +65,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<short> vswaphl(in Vec256<short> x)
+        public static Vector256<short> vswaphl(Vector256<short> x)
             => dinx.vperm2x128(x,x, Perm2x128.DA);
 
         /// <summary>
@@ -69,7 +73,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<ushort> vswaphl(in Vec256<ushort> x)
+        public static Vector256<ushort> vswaphl(Vector256<ushort> x)
             => dinx.vperm2x128(x,x, Perm2x128.AD);
 
         /// <summary>
@@ -77,7 +81,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<long> vswaphl(in Vec256<long> x)
+        public static Vector256<long> vswaphl(Vector256<long> x)
             => dinx.vperm2x128(x,x, Perm2x128.AD);
 
         /// <summary>
@@ -85,7 +89,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<ulong> vswaphl(in Vec256<ulong> x)
+        public static Vector256<ulong> vswaphl(Vector256<ulong> x)
             => dinx.vperm2x128(x,x, Perm2x128.AD);
 
         /// <summary>
@@ -93,7 +97,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<double> vswaphl(in Vec256<double> x)
+        public static Vector256<double> vswaphl(Vector256<double> x)
             => dinx.vperm2x128(x,x, Perm2x128.AD);
     }
 

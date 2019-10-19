@@ -381,6 +381,16 @@ namespace Z0
         }        
 
         /// <summary>
+        /// The vector's 4 least significant bits
+        /// </summary>
+        public readonly BitVector4 Lo
+        {
+            [MethodImpl(Inline)]
+            get => lo(data);        
+
+        }        
+
+        /// <summary>
         /// Presents bitvector content as a bytespan
         /// </summary>
         public Span<byte> Bytes
@@ -528,7 +538,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public BitVector8 Select(BitVector8 y, BitVector8 z)
         {
-            data = math.select(data,y.data,z.data);
+            data = gmath.select(data,y.data,z.data);
             return this;
         }
 
@@ -751,7 +761,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public BitVector8 AndNot(BitVector8 y)
         {
-            data = Bits.andnot(data, y.data);            
+            data = math.andnot(data, y.data);            
             return this;
         }        
 
@@ -784,8 +794,11 @@ namespace Z0
         /// Reverses the vector's bits
         /// </summary>
         [MethodImpl(Inline)]
-        public void Reverse()        
-            => data = Bits.rev(data);
+        public BitVector8 Reverse()   
+        {     
+            data = Bits.rev(data);
+            return this;
+        }
 
         /// <summary>
         /// Rearranges the vector in-place as specified by a permutation

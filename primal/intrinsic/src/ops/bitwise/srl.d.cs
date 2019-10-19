@@ -17,6 +17,31 @@ namespace Z0
 
     partial class dinx
     {         
+        public static Vector256<byte> vsrl(Vector256<byte> src, byte offset)
+        {
+            //Fan the hi/lo parts of the u8 source vector across 2 u16 vectors
+            var srcX = vconvert(dinx.vlo(src), out Vector256<ushort> _);
+            var srcY = vconvert(dinx.vhi(src), out Vector256<ushort> _);
+            
+            //Shift each part with a concrete intrinsic anc convert back to bytes
+            var dstA = dinx.vsrl(srcX, offset).AsByte();
+            var dstB = dinx.vsrl(srcY, offset).AsByte();
+
+            // Truncate overflows to sets up the component pattern [X 0 X 0 ... X 0] in each vector
+            var trm = Vec256Pattern.ClearAltVector<byte>();
+            var trA = dinx.vshuffle(dstA, trm);
+            var trB = dinx.vshuffle(dstB, trm);
+                        
+            // Each vector contains 16 values that need to be merged
+            // back into a single vector. The strategey is to condense
+            // each vector via the "lane merge" pattern and construct
+            // the result vector via insertion of these condensed vectors
+            var permSpec = Vec256Pattern.LaneMergeVector<byte>();
+            var permA = dinx.vpermvar32x8(trA, permSpec);
+            var permB = dinx.vpermvar32x8(trB, permSpec);
+            return dinx.insert(dinx.vlo(permA), dinx.vlo(permB), out Vector256<byte> _);            
+        } 
+
         /// <summary>
         /// __m128i _mm_srli_epi16 (__m128i a, int immediate) PSRLW xmm, imm8
         /// Shifts each component of the source vector rightwards by a common number of bits

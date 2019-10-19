@@ -19,10 +19,16 @@ namespace Z0
         public static T inc<T>(T src)
             where T : unmanaged
         {
-            if(unsignedint<T>())
-                return inci(src);
-            else if(signedint<T>())
-                return incu(src);
+            if(typeof(T) == typeof(byte) 
+            || typeof(T) == typeof(ushort) 
+            || typeof(T) == typeof(uint) 
+            || typeof(T) == typeof(ulong))
+                return inc_u(src);
+            else if(typeof(T) == typeof(sbyte) 
+            || typeof(T) == typeof(short) 
+            || typeof(T) == typeof(int) 
+            || typeof(T) == typeof(long))
+                return inc_i(src);
             else return gfp.inc(src);
         }           
 
@@ -30,16 +36,23 @@ namespace Z0
         public static ref T inc<T>(ref T src)
             where T : unmanaged
         {
-            if(unsignedint<T>())
-                inci(ref src);
-            else if(signedint<T>())
-                incu(ref src);
-            else gfp.inc(ref src);
+            if(typeof(T) == typeof(byte) 
+            || typeof(T) == typeof(ushort) 
+            || typeof(T) == typeof(uint) 
+            || typeof(T) == typeof(ulong))
+                    inc_u(ref src);
+            else if(typeof(T) == typeof(sbyte) 
+            || typeof(T) == typeof(short) 
+            || typeof(T) == typeof(int) 
+            || typeof(T) == typeof(long))
+                    inc_i(ref src);
+            else 
+                gfp.inc(ref src);
             return ref src;
         }           
 
         [MethodImpl(Inline)]
-        static T inci<T>(T src)
+        static T inc_i<T>(T src)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
@@ -53,7 +66,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static T incu<T>(T src)
+        static T inc_u<T>(T src)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -67,7 +80,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static ref T inci<T>(ref T src)
+        static ref T inc_i<T>(ref T src)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
@@ -82,7 +95,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static ref T incu<T>(ref T src)
+        static ref T inc_u<T>(ref T src)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))

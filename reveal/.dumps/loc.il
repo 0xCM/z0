@@ -1,10 +1,28 @@
-// 2019-10-18 00:25:27:705
+// 2019-10-18 23:21:12:245
+ulong f12_64u(ulong a, ulong b, ulong c)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: ldarg.2
+    IL_0003: call System.UInt64 Z0.ScalarOps::f12<System.UInt64>(System.UInt64,System.UInt64,System.UInt64)
+    IL_0008: ret
+
+}
+BitVector64 f12_bv64u(BitVector64 a, BitVector64 b, BitVector64 c)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: ldarg.2
+    IL_0003: call Z0.BitVector64 Z0.BitVectorOps::f12<Z0.BitVector64>(Z0.BitVector64,Z0.BitVector64,Z0.BitVector64)
+    IL_0008: ret
+
+}
 Vector128<ulong> f12_128x64u(Vector128<ulong> a, Vector128<ulong> b, Vector128<ulong> c)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Cpu128Logic::f12<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
+    IL_0003: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Cpu128Ops::f12<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
     IL_0008: ret
 
 }
@@ -13,7 +31,7 @@ Vector256<ulong> f12_256x64u(Vector256<ulong> a, Vector256<ulong> b, Vector256<u
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Cpu256Logic::f12<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
+    IL_0003: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Cpu256Ops::f12<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
     IL_0008: ret
 
 }
@@ -22,7 +40,7 @@ bit f13_bit(bit a, bit b, bit c)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call Z0.bit Z0.BitLogic::f13(Z0.bit,Z0.bit,Z0.bit)
+    IL_0003: call Z0.bit Z0.BitOps::f13(Z0.bit,Z0.bit,Z0.bit)
     IL_0008: ret
 
 }
@@ -31,7 +49,7 @@ ulong f13_64u(ulong a, ulong b, ulong c)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.UInt64 Z0.ScalarLogic::f13<System.UInt64>(System.UInt64,System.UInt64,System.UInt64)
+    IL_0003: call System.UInt64 Z0.ScalarOps::f13<System.UInt64>(System.UInt64,System.UInt64,System.UInt64)
     IL_0008: ret
 
 }
@@ -40,7 +58,7 @@ BitVector64 f13_bv64u(BitVector64 a, BitVector64 b, BitVector64 c)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call Z0.BitVector64 Z0.BitVectorLogic::f13<Z0.BitVector64>(Z0.BitVector64,Z0.BitVector64,Z0.BitVector64)
+    IL_0003: call Z0.BitVector64 Z0.BitVectorOps::f13<Z0.BitVector64>(Z0.BitVector64,Z0.BitVector64,Z0.BitVector64)
     IL_0008: ret
 
 }
@@ -49,7 +67,7 @@ Vector128<ulong> f13_128x64u(Vector128<ulong> a, Vector128<ulong> b, Vector128<u
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Cpu128Logic::f13<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
+    IL_0003: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Cpu128Ops::f13<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
     IL_0008: ret
 
 }
@@ -58,7 +76,7 @@ Vector256<ulong> f13_256x64u(Vector256<ulong> a, Vector256<ulong> b, Vector256<u
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Cpu256Logic::f13<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
+    IL_0003: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Cpu256Ops::f13<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
     IL_0008: ret
 
 }
@@ -67,7 +85,7 @@ bit f14_bit(bit a, bit b, bit c)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call Z0.bit Z0.BitLogic::f14(Z0.bit,Z0.bit,Z0.bit)
+    IL_0003: call Z0.bit Z0.BitOps::f14(Z0.bit,Z0.bit,Z0.bit)
     IL_0008: ret
 
 }
@@ -76,7 +94,7 @@ ulong f14_64u(ulong a, ulong b, ulong c)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.UInt64 Z0.ScalarLogic::f14<System.UInt64>(System.UInt64,System.UInt64,System.UInt64)
+    IL_0003: call System.UInt64 Z0.ScalarOps::f14<System.UInt64>(System.UInt64,System.UInt64,System.UInt64)
     IL_0008: ret
 
 }
@@ -85,7 +103,7 @@ BitVector64 f14_bv64u(BitVector64 a, BitVector64 b, BitVector64 c)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call Z0.BitVector64 Z0.BitVectorLogic::f14<Z0.BitVector64>(Z0.BitVector64,Z0.BitVector64,Z0.BitVector64)
+    IL_0003: call Z0.BitVector64 Z0.BitVectorOps::f14<Z0.BitVector64>(Z0.BitVector64,Z0.BitVector64,Z0.BitVector64)
     IL_0008: ret
 
 }
@@ -94,7 +112,7 @@ Vector128<ulong> f14_128x64u(Vector128<ulong> a, Vector128<ulong> b, Vector128<u
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Cpu128Logic::f14<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
+    IL_0003: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Cpu128Ops::f14<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
     IL_0008: ret
 
 }
@@ -103,7 +121,7 @@ Vector256<ulong> f14_256x64u(Vector256<ulong> a, Vector256<ulong> b, Vector256<u
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Cpu256Logic::f14<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
+    IL_0003: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Cpu256Ops::f14<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
     IL_0008: ret
 
 }
@@ -112,7 +130,7 @@ bit f15_bit(bit a, bit b, bit c)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call Z0.bit Z0.BitLogic::f15(Z0.bit,Z0.bit,Z0.bit)
+    IL_0003: call Z0.bit Z0.BitOps::f15(Z0.bit,Z0.bit,Z0.bit)
     IL_0008: ret
 
 }
@@ -121,7 +139,7 @@ ulong f15_64u(ulong a, ulong b, ulong c)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.UInt64 Z0.ScalarLogic::f15<System.UInt64>(System.UInt64,System.UInt64,System.UInt64)
+    IL_0003: call System.UInt64 Z0.ScalarOps::f15<System.UInt64>(System.UInt64,System.UInt64,System.UInt64)
     IL_0008: ret
 
 }
@@ -130,7 +148,7 @@ BitVector64 f15_bv64u(BitVector64 a, BitVector64 b, BitVector64 c)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call Z0.BitVector64 Z0.BitVectorLogic::f15<Z0.BitVector64>(Z0.BitVector64,Z0.BitVector64,Z0.BitVector64)
+    IL_0003: call Z0.BitVector64 Z0.BitVectorOps::f15<Z0.BitVector64>(Z0.BitVector64,Z0.BitVector64,Z0.BitVector64)
     IL_0008: ret
 
 }
@@ -139,7 +157,7 @@ Vector128<ulong> f15_128x64u(Vector128<ulong> a, Vector128<ulong> b, Vector128<u
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Cpu128Logic::f15<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
+    IL_0003: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Cpu128Ops::f15<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
     IL_0008: ret
 
 }
@@ -148,7 +166,7 @@ Vector256<ulong> f15_256x64u(Vector256<ulong> a, Vector256<ulong> b, Vector256<u
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Cpu256Logic::f15<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
+    IL_0003: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Cpu256Ops::f15<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
     IL_0008: ret
 
 }
@@ -157,7 +175,7 @@ bit f16_bit(bit a, bit b, bit c)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call Z0.bit Z0.BitLogic::f16(Z0.bit,Z0.bit,Z0.bit)
+    IL_0003: call Z0.bit Z0.BitOps::f16(Z0.bit,Z0.bit,Z0.bit)
     IL_0008: ret
 
 }
@@ -166,7 +184,7 @@ ulong f16_64u(ulong a, ulong b, ulong c)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.UInt64 Z0.ScalarLogic::f16<System.UInt64>(System.UInt64,System.UInt64,System.UInt64)
+    IL_0003: call System.UInt64 Z0.ScalarOps::f16<System.UInt64>(System.UInt64,System.UInt64,System.UInt64)
     IL_0008: ret
 
 }
@@ -175,7 +193,7 @@ BitVector64 f16_bv64u(BitVector64 a, BitVector64 b, BitVector64 c)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call Z0.BitVector64 Z0.BitVectorLogic::f16<Z0.BitVector64>(Z0.BitVector64,Z0.BitVector64,Z0.BitVector64)
+    IL_0003: call Z0.BitVector64 Z0.BitVectorOps::f16<Z0.BitVector64>(Z0.BitVector64,Z0.BitVector64,Z0.BitVector64)
     IL_0008: ret
 
 }
@@ -184,7 +202,7 @@ Vector128<ulong> f16_128x64u(Vector128<ulong> a, Vector128<ulong> b, Vector128<u
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Cpu128Logic::f16<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
+    IL_0003: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Cpu128Ops::f16<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
     IL_0008: ret
 
 }
@@ -193,7 +211,7 @@ Vector256<ulong> f16_256x64u(Vector256<ulong> a, Vector256<ulong> b, Vector256<u
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Cpu256Logic::f16<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
+    IL_0003: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Cpu256Ops::f16<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
     IL_0008: ret
 
 }
@@ -202,7 +220,7 @@ bit f17_bit(bit a, bit b, bit c)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call Z0.bit Z0.BitLogic::f17(Z0.bit,Z0.bit,Z0.bit)
+    IL_0003: call Z0.bit Z0.BitOps::f17(Z0.bit,Z0.bit,Z0.bit)
     IL_0008: ret
 
 }
@@ -211,7 +229,7 @@ ulong f17_64u(ulong a, ulong b, ulong c)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.UInt64 Z0.ScalarLogic::f17<System.UInt64>(System.UInt64,System.UInt64,System.UInt64)
+    IL_0003: call System.UInt64 Z0.ScalarOps::f17<System.UInt64>(System.UInt64,System.UInt64,System.UInt64)
     IL_0008: ret
 
 }
@@ -220,7 +238,7 @@ BitVector64 f17_bv64u(BitVector64 a, BitVector64 b, BitVector64 c)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call Z0.BitVector64 Z0.BitVectorLogic::f17<Z0.BitVector64>(Z0.BitVector64,Z0.BitVector64,Z0.BitVector64)
+    IL_0003: call Z0.BitVector64 Z0.BitVectorOps::f17<Z0.BitVector64>(Z0.BitVector64,Z0.BitVector64,Z0.BitVector64)
     IL_0008: ret
 
 }
@@ -229,7 +247,7 @@ Vector128<ulong> f17_128x64u(Vector128<ulong> a, Vector128<ulong> b, Vector128<u
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Cpu128Logic::f17<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
+    IL_0003: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Cpu128Ops::f17<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
     IL_0008: ret
 
 }
@@ -238,7 +256,7 @@ Vector256<ulong> f17_256x64u(Vector256<ulong> a, Vector256<ulong> b, Vector256<u
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Cpu256Logic::f17<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
+    IL_0003: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Cpu256Ops::f17<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
     IL_0008: ret
 
 }
@@ -247,7 +265,7 @@ bit f18_bit(bit a, bit b, bit c)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call Z0.bit Z0.BitLogic::f18(Z0.bit,Z0.bit,Z0.bit)
+    IL_0003: call Z0.bit Z0.BitOps::f18(Z0.bit,Z0.bit,Z0.bit)
     IL_0008: ret
 
 }
@@ -256,7 +274,7 @@ ulong f18_64u(ulong a, ulong b, ulong c)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.UInt64 Z0.ScalarLogic::f18<System.UInt64>(System.UInt64,System.UInt64,System.UInt64)
+    IL_0003: call System.UInt64 Z0.ScalarOps::f18<System.UInt64>(System.UInt64,System.UInt64,System.UInt64)
     IL_0008: ret
 
 }
@@ -265,7 +283,7 @@ BitVector64 f18_bv64u(BitVector64 a, BitVector64 b, BitVector64 c)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call Z0.BitVector64 Z0.BitVectorLogic::f18<Z0.BitVector64>(Z0.BitVector64,Z0.BitVector64,Z0.BitVector64)
+    IL_0003: call Z0.BitVector64 Z0.BitVectorOps::f18<Z0.BitVector64>(Z0.BitVector64,Z0.BitVector64,Z0.BitVector64)
     IL_0008: ret
 
 }
@@ -274,7 +292,7 @@ Vector128<ulong> f18_128x64u(Vector128<ulong> a, Vector128<ulong> b, Vector128<u
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Cpu128Logic::f18<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
+    IL_0003: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Cpu128Ops::f18<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
     IL_0008: ret
 
 }
@@ -283,7 +301,7 @@ Vector256<ulong> f18_256x64u(Vector256<ulong> a, Vector256<ulong> b, Vector256<u
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Cpu256Logic::f18<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
+    IL_0003: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Cpu256Ops::f18<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
     IL_0008: ret
 
 }
@@ -292,7 +310,7 @@ bit f19_bit(bit a, bit b, bit c)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call Z0.bit Z0.BitLogic::f19(Z0.bit,Z0.bit,Z0.bit)
+    IL_0003: call Z0.bit Z0.BitOps::f19(Z0.bit,Z0.bit,Z0.bit)
     IL_0008: ret
 
 }
@@ -301,7 +319,7 @@ ulong f19_64u(ulong a, ulong b, ulong c)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.UInt64 Z0.ScalarLogic::f19<System.UInt64>(System.UInt64,System.UInt64,System.UInt64)
+    IL_0003: call System.UInt64 Z0.ScalarOps::f19<System.UInt64>(System.UInt64,System.UInt64,System.UInt64)
     IL_0008: ret
 
 }
@@ -310,7 +328,7 @@ BitVector64 f19_bv64u(BitVector64 a, BitVector64 b, BitVector64 c)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call Z0.BitVector64 Z0.BitVectorLogic::f19<Z0.BitVector64>(Z0.BitVector64,Z0.BitVector64,Z0.BitVector64)
+    IL_0003: call Z0.BitVector64 Z0.BitVectorOps::f19<Z0.BitVector64>(Z0.BitVector64,Z0.BitVector64,Z0.BitVector64)
     IL_0008: ret
 
 }
@@ -319,7 +337,7 @@ Vector128<ulong> f19_128x64u(Vector128<ulong> a, Vector128<ulong> b, Vector128<u
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Cpu128Logic::f19<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
+    IL_0003: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Cpu128Ops::f19<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
     IL_0008: ret
 
 }
@@ -328,7 +346,7 @@ Vector256<ulong> f19_256x64u(Vector256<ulong> a, Vector256<ulong> b, Vector256<u
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Cpu256Logic::f19<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
+    IL_0003: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Cpu256Ops::f19<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
     IL_0008: ret
 
 }
@@ -337,7 +355,7 @@ bit f1a_bit(bit a, bit b, bit c)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call Z0.bit Z0.BitLogic::f1a(Z0.bit,Z0.bit,Z0.bit)
+    IL_0003: call Z0.bit Z0.BitOps::f1a(Z0.bit,Z0.bit,Z0.bit)
     IL_0008: ret
 
 }
@@ -346,7 +364,7 @@ ulong f1a_64u(ulong a, ulong b, ulong c)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.UInt64 Z0.ScalarLogic::f1a<System.UInt64>(System.UInt64,System.UInt64,System.UInt64)
+    IL_0003: call System.UInt64 Z0.ScalarOps::f1a<System.UInt64>(System.UInt64,System.UInt64,System.UInt64)
     IL_0008: ret
 
 }
@@ -355,7 +373,7 @@ BitVector64 f1a_bv64u(BitVector64 a, BitVector64 b, BitVector64 c)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call Z0.BitVector64 Z0.BitVectorLogic::f1a<Z0.BitVector64>(Z0.BitVector64,Z0.BitVector64,Z0.BitVector64)
+    IL_0003: call Z0.BitVector64 Z0.BitVectorOps::f1a<Z0.BitVector64>(Z0.BitVector64,Z0.BitVector64,Z0.BitVector64)
     IL_0008: ret
 
 }
@@ -364,7 +382,7 @@ Vector128<ulong> f1a_128x64u(Vector128<ulong> a, Vector128<ulong> b, Vector128<u
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Cpu128Logic::f1a<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
+    IL_0003: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Cpu128Ops::f1a<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
     IL_0008: ret
 
 }
@@ -373,7 +391,7 @@ Vector256<ulong> f1a_256x64u(Vector256<ulong> a, Vector256<ulong> b, Vector256<u
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Cpu256Logic::f1a<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
+    IL_0003: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Cpu256Ops::f1a<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
     IL_0008: ret
 
 }
@@ -382,7 +400,7 @@ bit f1b_bit(bit a, bit b, bit c)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call Z0.bit Z0.BitLogic::f1b(Z0.bit,Z0.bit,Z0.bit)
+    IL_0003: call Z0.bit Z0.BitOps::f1b(Z0.bit,Z0.bit,Z0.bit)
     IL_0008: ret
 
 }
@@ -391,7 +409,7 @@ ulong f1b_64u(ulong a, ulong b, ulong c)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.UInt64 Z0.ScalarLogic::f1b<System.UInt64>(System.UInt64,System.UInt64,System.UInt64)
+    IL_0003: call System.UInt64 Z0.ScalarOps::f1b<System.UInt64>(System.UInt64,System.UInt64,System.UInt64)
     IL_0008: ret
 
 }
@@ -400,7 +418,7 @@ BitVector64 f1b_bv64u(BitVector64 a, BitVector64 b, BitVector64 c)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call Z0.BitVector64 Z0.BitVectorLogic::f1b<Z0.BitVector64>(Z0.BitVector64,Z0.BitVector64,Z0.BitVector64)
+    IL_0003: call Z0.BitVector64 Z0.BitVectorOps::f1b<Z0.BitVector64>(Z0.BitVector64,Z0.BitVector64,Z0.BitVector64)
     IL_0008: ret
 
 }
@@ -409,7 +427,7 @@ Vector128<ulong> f1b_128x64u(Vector128<ulong> a, Vector128<ulong> b, Vector128<u
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Cpu128Logic::f1b<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
+    IL_0003: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Cpu128Ops::f1b<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
     IL_0008: ret
 
 }
@@ -418,7 +436,7 @@ Vector256<ulong> f1b_256x64u(Vector256<ulong> a, Vector256<ulong> b, Vector256<u
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Cpu256Logic::f1b<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
+    IL_0003: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Cpu256Ops::f1b<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
     IL_0008: ret
 
 }
@@ -427,7 +445,7 @@ ulong f1c_64u(ulong a, ulong b, ulong c)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.UInt64 Z0.ScalarLogic::f1c<System.UInt64>(System.UInt64,System.UInt64,System.UInt64)
+    IL_0003: call System.UInt64 Z0.ScalarOps::f1c<System.UInt64>(System.UInt64,System.UInt64,System.UInt64)
     IL_0008: ret
 
 }
@@ -436,7 +454,7 @@ ulong f1d(ulong a, ulong b, ulong c)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.UInt64 Z0.ScalarLogic::f1d<System.UInt64>(System.UInt64,System.UInt64,System.UInt64)
+    IL_0003: call System.UInt64 Z0.ScalarOps::f1d<System.UInt64>(System.UInt64,System.UInt64,System.UInt64)
     IL_0008: ret
 
 }
@@ -445,7 +463,7 @@ ulong f1e(ulong a, ulong b, ulong c)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.UInt64 Z0.ScalarLogic::f1e<System.UInt64>(System.UInt64,System.UInt64,System.UInt64)
+    IL_0003: call System.UInt64 Z0.ScalarOps::f1e<System.UInt64>(System.UInt64,System.UInt64,System.UInt64)
     IL_0008: ret
 
 }
@@ -454,7 +472,7 @@ ulong f1f(ulong a, ulong b, ulong c)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.UInt64 Z0.ScalarLogic::f1f<System.UInt64>(System.UInt64,System.UInt64,System.UInt64)
+    IL_0003: call System.UInt64 Z0.ScalarOps::f1f<System.UInt64>(System.UInt64,System.UInt64,System.UInt64)
     IL_0008: ret
 
 }
@@ -463,7 +481,7 @@ ulong f20(ulong a, ulong b, ulong c)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.UInt64 Z0.ScalarLogic::f20<System.UInt64>(System.UInt64,System.UInt64,System.UInt64)
+    IL_0003: call System.UInt64 Z0.ScalarOps::f20<System.UInt64>(System.UInt64,System.UInt64,System.UInt64)
     IL_0008: ret
 
 }
@@ -472,7 +490,7 @@ ulong f21(ulong a, ulong b, ulong c)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.UInt64 Z0.ScalarLogic::f21<System.UInt64>(System.UInt64,System.UInt64,System.UInt64)
+    IL_0003: call System.UInt64 Z0.ScalarOps::f21<System.UInt64>(System.UInt64,System.UInt64,System.UInt64)
     IL_0008: ret
 
 }
@@ -481,7 +499,7 @@ ulong f22(ulong a, ulong b, ulong c)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.UInt64 Z0.ScalarLogic::f22<System.UInt64>(System.UInt64,System.UInt64,System.UInt64)
+    IL_0003: call System.UInt64 Z0.ScalarOps::f22<System.UInt64>(System.UInt64,System.UInt64,System.UInt64)
     IL_0008: ret
 
 }
@@ -490,7 +508,7 @@ ulong f23(ulong a, ulong b, ulong c)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.UInt64 Z0.ScalarLogic::f23<System.UInt64>(System.UInt64,System.UInt64,System.UInt64)
+    IL_0003: call System.UInt64 Z0.ScalarOps::f23<System.UInt64>(System.UInt64,System.UInt64,System.UInt64)
     IL_0008: ret
 
 }
@@ -499,7 +517,7 @@ ulong f24(ulong a, ulong b, ulong c)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.UInt64 Z0.ScalarLogic::f24<System.UInt64>(System.UInt64,System.UInt64,System.UInt64)
+    IL_0003: call System.UInt64 Z0.ScalarOps::f24<System.UInt64>(System.UInt64,System.UInt64,System.UInt64)
     IL_0008: ret
 
 }
@@ -508,7 +526,385 @@ ulong f25(ulong a, ulong b, ulong c)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.UInt64 Z0.ScalarLogic::f25<System.UInt64>(System.UInt64,System.UInt64,System.UInt64)
+    IL_0003: call System.UInt64 Z0.ScalarOps::f25<System.UInt64>(System.UInt64,System.UInt64,System.UInt64)
+    IL_0008: ret
+
+}
+ulong f26(ulong a, ulong b, ulong c)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: ldarg.2
+    IL_0003: call System.UInt64 Z0.ScalarOps::f26<System.UInt64>(System.UInt64,System.UInt64,System.UInt64)
+    IL_0008: ret
+
+}
+ulong f27(ulong a, ulong b, ulong c)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: ldarg.2
+    IL_0003: call System.UInt64 Z0.ScalarOps::f27<System.UInt64>(System.UInt64,System.UInt64,System.UInt64)
+    IL_0008: ret
+
+}
+ulong f28(ulong a, ulong b, ulong c)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: ldarg.2
+    IL_0003: call System.UInt64 Z0.ScalarOps::f28<System.UInt64>(System.UInt64,System.UInt64,System.UInt64)
+    IL_0008: ret
+
+}
+ulong f29(ulong a, ulong b, ulong c)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: ldarg.2
+    IL_0003: call System.UInt64 Z0.ScalarOps::f29<System.UInt64>(System.UInt64,System.UInt64,System.UInt64)
+    IL_0008: ret
+
+}
+ulong f2a(ulong a, ulong b, ulong c)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: ldarg.2
+    IL_0003: call System.UInt64 Z0.ScalarOps::f2a<System.UInt64>(System.UInt64,System.UInt64,System.UInt64)
+    IL_0008: ret
+
+}
+ulong f2b(ulong a, ulong b, ulong c)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: ldarg.2
+    IL_0003: call System.UInt64 Z0.ScalarOps::f2b<System.UInt64>(System.UInt64,System.UInt64,System.UInt64)
+    IL_0008: ret
+
+}
+ulong f2c(ulong a, ulong b, ulong c)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: ldarg.2
+    IL_0003: call System.UInt64 Z0.ScalarOps::f2c<System.UInt64>(System.UInt64,System.UInt64,System.UInt64)
+    IL_0008: ret
+
+}
+ulong f2d(ulong a, ulong b, ulong c)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: ldarg.2
+    IL_0003: call System.UInt64 Z0.ScalarOps::f2d<System.UInt64>(System.UInt64,System.UInt64,System.UInt64)
+    IL_0008: ret
+
+}
+ulong f2e(ulong a, ulong b, ulong c)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: ldarg.2
+    IL_0003: call System.UInt64 Z0.ScalarOps::f2e<System.UInt64>(System.UInt64,System.UInt64,System.UInt64)
+    IL_0008: ret
+
+}
+ulong f2f(ulong a, ulong b, ulong c)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: ldarg.2
+    IL_0003: call System.UInt64 Z0.ScalarOps::f2f<System.UInt64>(System.UInt64,System.UInt64,System.UInt64)
+    IL_0008: ret
+
+}
+ulong f30(ulong a, ulong b, ulong c)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: ldarg.2
+    IL_0003: call System.UInt64 Z0.ScalarOps::f30<System.UInt64>(System.UInt64,System.UInt64,System.UInt64)
+    IL_0008: ret
+
+}
+ulong f31(ulong a, ulong b, ulong c)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: ldarg.2
+    IL_0003: call System.UInt64 Z0.ScalarOps::f31<System.UInt64>(System.UInt64,System.UInt64,System.UInt64)
+    IL_0008: ret
+
+}
+ulong f32(ulong a, ulong b, ulong c)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: ldarg.2
+    IL_0003: call System.UInt64 Z0.ScalarOps::f32<System.UInt64>(System.UInt64,System.UInt64,System.UInt64)
+    IL_0008: ret
+
+}
+ulong f33(ulong a, ulong b, ulong c)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: ldarg.2
+    IL_0003: call System.UInt64 Z0.ScalarOps::f33<System.UInt64>(System.UInt64,System.UInt64,System.UInt64)
+    IL_0008: ret
+
+}
+ulong f34(ulong a, ulong b, ulong c)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: ldarg.2
+    IL_0003: call System.UInt64 Z0.ScalarOps::f34<System.UInt64>(System.UInt64,System.UInt64,System.UInt64)
+    IL_0008: ret
+
+}
+ulong f35(ulong a, ulong b, ulong c)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: ldarg.2
+    IL_0003: call System.UInt64 Z0.ScalarOps::f35<System.UInt64>(System.UInt64,System.UInt64,System.UInt64)
+    IL_0008: ret
+
+}
+ulong f36(ulong a, ulong b, ulong c)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: ldarg.2
+    IL_0003: call System.UInt64 Z0.ScalarOps::f36<System.UInt64>(System.UInt64,System.UInt64,System.UInt64)
+    IL_0008: ret
+
+}
+ulong f37(ulong a, ulong b, ulong c)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: ldarg.2
+    IL_0003: call System.UInt64 Z0.ScalarOps::f37<System.UInt64>(System.UInt64,System.UInt64,System.UInt64)
+    IL_0008: ret
+
+}
+ulong f38(ulong a, ulong b, ulong c)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: ldarg.2
+    IL_0003: call System.UInt64 Z0.ScalarOps::f38<System.UInt64>(System.UInt64,System.UInt64,System.UInt64)
+    IL_0008: ret
+
+}
+ulong f39(ulong a, ulong b, ulong c)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: ldarg.2
+    IL_0003: call System.UInt64 Z0.ScalarOps::f39<System.UInt64>(System.UInt64,System.UInt64,System.UInt64)
+    IL_0008: ret
+
+}
+ulong f3a(ulong a, ulong b, ulong c)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: ldarg.2
+    IL_0003: call System.UInt64 Z0.ScalarOps::f3a<System.UInt64>(System.UInt64,System.UInt64,System.UInt64)
+    IL_0008: ret
+
+}
+ulong f3b(ulong a, ulong b, ulong c)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: ldarg.2
+    IL_0003: call System.UInt64 Z0.ScalarOps::f3b<System.UInt64>(System.UInt64,System.UInt64,System.UInt64)
+    IL_0008: ret
+
+}
+ulong f3c(ulong a, ulong b, ulong c)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: ldarg.2
+    IL_0003: call System.UInt64 Z0.ScalarOps::f3c<System.UInt64>(System.UInt64,System.UInt64,System.UInt64)
+    IL_0008: ret
+
+}
+ulong f3d(ulong a, ulong b, ulong c)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: ldarg.2
+    IL_0003: call System.UInt64 Z0.ScalarOps::f3d<System.UInt64>(System.UInt64,System.UInt64,System.UInt64)
+    IL_0008: ret
+
+}
+ulong f3e(ulong a, ulong b, ulong c)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: ldarg.2
+    IL_0003: call System.UInt64 Z0.ScalarOps::f3e<System.UInt64>(System.UInt64,System.UInt64,System.UInt64)
+    IL_0008: ret
+
+}
+ulong f3f(ulong a, ulong b, ulong c)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: ldarg.2
+    IL_0003: call System.UInt64 Z0.ScalarOps::f3f<System.UInt64>(System.UInt64,System.UInt64,System.UInt64)
+    IL_0008: ret
+
+}
+ulong f40(ulong a, ulong b, ulong c)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: ldarg.2
+    IL_0003: call System.UInt64 Z0.ScalarOps::f40<System.UInt64>(System.UInt64,System.UInt64,System.UInt64)
+    IL_0008: ret
+
+}
+ulong f41(ulong a, ulong b, ulong c)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: ldarg.2
+    IL_0003: call System.UInt64 Z0.ScalarOps::f41<System.UInt64>(System.UInt64,System.UInt64,System.UInt64)
+    IL_0008: ret
+
+}
+ulong f42(ulong a, ulong b, ulong c)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: ldarg.2
+    IL_0003: call System.UInt64 Z0.ScalarOps::f42<System.UInt64>(System.UInt64,System.UInt64,System.UInt64)
+    IL_0008: ret
+
+}
+ulong f43(ulong a, ulong b, ulong c)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: ldarg.2
+    IL_0003: call System.UInt64 Z0.ScalarOps::f43<System.UInt64>(System.UInt64,System.UInt64,System.UInt64)
+    IL_0008: ret
+
+}
+ulong f44(ulong a, ulong b, ulong c)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: ldarg.2
+    IL_0003: call System.UInt64 Z0.ScalarOps::f44<System.UInt64>(System.UInt64,System.UInt64,System.UInt64)
+    IL_0008: ret
+
+}
+ulong f45(ulong a, ulong b, ulong c)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: ldarg.2
+    IL_0003: call System.UInt64 Z0.ScalarOps::f45<System.UInt64>(System.UInt64,System.UInt64,System.UInt64)
+    IL_0008: ret
+
+}
+ulong f46(ulong a, ulong b, ulong c)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: ldarg.2
+    IL_0003: call System.UInt64 Z0.ScalarOps::f46<System.UInt64>(System.UInt64,System.UInt64,System.UInt64)
+    IL_0008: ret
+
+}
+ulong f47(ulong a, ulong b, ulong c)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: ldarg.2
+    IL_0003: call System.UInt64 Z0.ScalarOps::f47<System.UInt64>(System.UInt64,System.UInt64,System.UInt64)
+    IL_0008: ret
+
+}
+ulong f48(ulong a, ulong b, ulong c)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: ldarg.2
+    IL_0003: call System.UInt64 Z0.ScalarOps::f48<System.UInt64>(System.UInt64,System.UInt64,System.UInt64)
+    IL_0008: ret
+
+}
+ulong f49(ulong a, ulong b, ulong c)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: ldarg.2
+    IL_0003: call System.UInt64 Z0.ScalarOps::f49<System.UInt64>(System.UInt64,System.UInt64,System.UInt64)
+    IL_0008: ret
+
+}
+ulong f4a(ulong a, ulong b, ulong c)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: ldarg.2
+    IL_0003: call System.UInt64 Z0.ScalarOps::f4a<System.UInt64>(System.UInt64,System.UInt64,System.UInt64)
+    IL_0008: ret
+
+}
+ulong f4b(ulong a, ulong b, ulong c)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: ldarg.2
+    IL_0003: call System.UInt64 Z0.ScalarOps::f4b<System.UInt64>(System.UInt64,System.UInt64,System.UInt64)
+    IL_0008: ret
+
+}
+ulong f4c(ulong a, ulong b, ulong c)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: ldarg.2
+    IL_0003: call System.UInt64 Z0.ScalarOps::f4c<System.UInt64>(System.UInt64,System.UInt64,System.UInt64)
+    IL_0008: ret
+
+}
+ulong f4d(ulong a, ulong b, ulong c)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: ldarg.2
+    IL_0003: call System.UInt64 Z0.ScalarOps::f4d<System.UInt64>(System.UInt64,System.UInt64,System.UInt64)
+    IL_0008: ret
+
+}
+ulong f4e(ulong a, ulong b, ulong c)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: ldarg.2
+    IL_0003: call System.UInt64 Z0.ScalarOps::f4e<System.UInt64>(System.UInt64,System.UInt64,System.UInt64)
+    IL_0008: ret
+
+}
+ulong f4f(ulong a, ulong b, ulong c)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: ldarg.2
+    IL_0003: call System.UInt64 Z0.ScalarOps::f4f<System.UInt64>(System.UInt64,System.UInt64,System.UInt64)
     IL_0008: ret
 
 }
@@ -517,7 +913,7 @@ ulong f97_64u(ulong a, ulong b, ulong c)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.UInt64 Z0.ScalarLogic::f97<System.UInt64>(System.UInt64,System.UInt64,System.UInt64)
+    IL_0003: call System.UInt64 Z0.ScalarOps::f97<System.UInt64>(System.UInt64,System.UInt64,System.UInt64)
     IL_0008: ret
 
 }
@@ -526,7 +922,7 @@ Vector128<ulong> f97_128x64u(Vector128<ulong> a, Vector128<ulong> b, Vector128<u
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Cpu128Logic::f97<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
+    IL_0003: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Cpu128Ops::f97<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
     IL_0008: ret
 
 }
@@ -535,7 +931,7 @@ Vector256<ulong> f97_256x64u(Vector256<ulong> a, Vector256<ulong> b, Vector256<u
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Cpu256Logic::f97<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
+    IL_0003: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Cpu256Ops::f97<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
     IL_0008: ret
 
 }
@@ -554,22 +950,52 @@ Vector256<ulong> zero_v256x64u()
 }
 Vector256<ulong> one_v256x64u()
 {
-    IL_0000: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Cpu256Logic::one<System.UInt64>()
+    IL_0000: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Cpu256Ops::one<System.UInt64>()
     IL_0005: ret
 
 }
 Vec128<ulong> one_v128x64u()
 {
-    IL_0000: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Cpu128Logic::one<System.UInt64>()
+    IL_0000: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Cpu128Ops::one<System.UInt64>()
     IL_0005: call Z0.Vec128`1<System.UInt64> Z0.Vec128`1<System.UInt64>::op_Implicit(System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
     IL_000A: ret
+
+}
+uint composition_54(uint v1, uint v2)
+{
+    IL_0000: ldarg.1
+    IL_0001: ldarg.0
+    IL_0002: ldarg.0
+    IL_0003: ldarg.1
+    IL_0004: ldarg.0
+    IL_0005: call System.UInt32 Z0.ScalarOps::not<System.UInt32>(System.UInt32)
+    IL_000A: call System.UInt32 Z0.ScalarOps::nand<System.UInt32>(System.UInt32,System.UInt32)
+    IL_000F: call System.UInt32 Z0.ScalarOps::and<System.UInt32>(System.UInt32,System.UInt32)
+    IL_0014: call System.UInt32 Z0.ScalarOps::xor<System.UInt32>(System.UInt32,System.UInt32)
+    IL_0019: call System.UInt32 Z0.ScalarOps::or<System.UInt32>(System.UInt32,System.UInt32)
+    IL_001E: ret
+
+}
+byte composition_54(byte v1, byte v2)
+{
+    IL_0000: ldarg.1
+    IL_0001: ldarg.0
+    IL_0002: ldarg.0
+    IL_0003: ldarg.1
+    IL_0004: ldarg.0
+    IL_0005: call System.Byte Z0.ScalarOps::not<System.Byte>(System.Byte)
+    IL_000A: call System.Byte Z0.ScalarOps::nand<System.Byte>(System.Byte,System.Byte)
+    IL_000F: call System.Byte Z0.ScalarOps::and<System.Byte>(System.Byte,System.Byte)
+    IL_0014: call System.Byte Z0.ScalarOps::xor<System.Byte>(System.Byte,System.Byte)
+    IL_0019: call System.Byte Z0.ScalarOps::or<System.Byte>(System.Byte,System.Byte)
+    IL_001E: ret
 
 }
 ulong and_64u(ulong a, ulong b)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: call System.UInt64 Z0.ScalarLogic::and<System.UInt64>(System.UInt64,System.UInt64)
+    IL_0002: call System.UInt64 Z0.ScalarOps::and<System.UInt64>(System.UInt64,System.UInt64)
     IL_0007: ret
 
 }
@@ -577,7 +1003,7 @@ BitVector64 and_bv64u(BitVector64 a, BitVector64 b)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: call Z0.BitVector64 Z0.BitVectorLogic::and<Z0.BitVector64>(Z0.BitVector64,Z0.BitVector64)
+    IL_0002: call Z0.BitVector64 Z0.BitVectorOps::and<Z0.BitVector64>(Z0.BitVector64,Z0.BitVector64)
     IL_0007: ret
 
 }
@@ -585,7 +1011,7 @@ Vector128<ulong> and_v128x64u(Vector128<ulong> a, Vector128<ulong> b)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Cpu128Logic::and<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
+    IL_0002: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Cpu128Ops::and<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
     IL_0007: ret
 
 }
@@ -593,7 +1019,7 @@ Vector256<ulong> and_v256x64u(Vector256<ulong> a, Vector256<ulong> b)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Cpu256Logic::and<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
+    IL_0002: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Cpu256Ops::and<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
     IL_0007: ret
 
 }
@@ -601,7 +1027,7 @@ ulong or_64u(ulong a, ulong b)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: call System.UInt64 Z0.ScalarLogic::or<System.UInt64>(System.UInt64,System.UInt64)
+    IL_0002: call System.UInt64 Z0.ScalarOps::or<System.UInt64>(System.UInt64,System.UInt64)
     IL_0007: ret
 
 }
@@ -609,7 +1035,7 @@ BitVector64 or_bv64u(BitVector64 a, BitVector64 b)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: call Z0.BitVector64 Z0.BitVectorLogic::or<Z0.BitVector64>(Z0.BitVector64,Z0.BitVector64)
+    IL_0002: call Z0.BitVector64 Z0.BitVectorOps::or<Z0.BitVector64>(Z0.BitVector64,Z0.BitVector64)
     IL_0007: ret
 
 }
@@ -617,7 +1043,7 @@ Vector128<ulong> or_v128x64u(Vector128<ulong> a, Vector128<ulong> b)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Cpu128Logic::or<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
+    IL_0002: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Cpu128Ops::or<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
     IL_0007: ret
 
 }
@@ -625,7 +1051,7 @@ Vector256<ulong> or_v256x64u(Vector256<ulong> a, Vector256<ulong> b)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Cpu256Logic::or<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
+    IL_0002: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Cpu256Ops::or<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
     IL_0007: ret
 
 }
@@ -633,7 +1059,7 @@ ulong xor_64u(ulong a, ulong b)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: call System.UInt64 Z0.ScalarLogic::xor<System.UInt64>(System.UInt64,System.UInt64)
+    IL_0002: call System.UInt64 Z0.ScalarOps::xor<System.UInt64>(System.UInt64,System.UInt64)
     IL_0007: ret
 
 }
@@ -641,7 +1067,7 @@ BitVector64 xor_bv64u(BitVector64 a, BitVector64 b)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: call Z0.BitVector64 Z0.BitVectorLogic::xor<Z0.BitVector64>(Z0.BitVector64,Z0.BitVector64)
+    IL_0002: call Z0.BitVector64 Z0.BitVectorOps::xor<Z0.BitVector64>(Z0.BitVector64,Z0.BitVector64)
     IL_0007: ret
 
 }
@@ -649,7 +1075,7 @@ Vector128<ulong> xor_v128x64u(Vector128<ulong> a, Vector128<ulong> b)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Cpu128Logic::xor<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
+    IL_0002: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Cpu128Ops::xor<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
     IL_0007: ret
 
 }
@@ -657,35 +1083,35 @@ Vector256<ulong> xor_v256x64u(Vector256<ulong> a, Vector256<ulong> b)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Cpu256Logic::xor<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
+    IL_0002: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Cpu256Ops::xor<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
     IL_0007: ret
 
 }
 ulong not_64u(ulong a)
 {
     IL_0000: ldarg.0
-    IL_0001: call System.UInt64 Z0.ScalarLogic::not<System.UInt64>(System.UInt64)
+    IL_0001: call System.UInt64 Z0.ScalarOps::not<System.UInt64>(System.UInt64)
     IL_0006: ret
 
 }
 BitVector64 not_bv64u(BitVector64 a)
 {
     IL_0000: ldarg.0
-    IL_0001: call Z0.BitVector64 Z0.BitVectorLogic::not<Z0.BitVector64>(Z0.BitVector64)
+    IL_0001: call Z0.BitVector64 Z0.BitVectorOps::not<Z0.BitVector64>(Z0.BitVector64)
     IL_0006: ret
 
 }
 Vector128<ulong> not_v128x64u(Vector128<ulong> a)
 {
     IL_0000: ldarg.0
-    IL_0001: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Cpu128Logic::not<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
+    IL_0001: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Cpu128Ops::not<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
     IL_0006: ret
 
 }
 Vector256<ulong> not_v256x64u(Vector256<ulong> a)
 {
     IL_0000: ldarg.0
-    IL_0001: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Cpu256Logic::not<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
+    IL_0001: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Cpu256Ops::not<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
     IL_0006: ret
 
 }
@@ -693,7 +1119,7 @@ ulong nand_64u(ulong a, ulong b)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: call System.UInt64 Z0.ScalarLogic::nand<System.UInt64>(System.UInt64,System.UInt64)
+    IL_0002: call System.UInt64 Z0.ScalarOps::nand<System.UInt64>(System.UInt64,System.UInt64)
     IL_0007: ret
 
 }
@@ -701,7 +1127,7 @@ BitVector64 nand_bv64u(BitVector64 a, BitVector64 b)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: call Z0.BitVector64 Z0.BitVectorLogic::nand<Z0.BitVector64>(Z0.BitVector64,Z0.BitVector64)
+    IL_0002: call Z0.BitVector64 Z0.BitVectorOps::nand<Z0.BitVector64>(Z0.BitVector64,Z0.BitVector64)
     IL_0007: ret
 
 }
@@ -709,7 +1135,7 @@ Vector128<ulong> nand_v128x64u(Vector128<ulong> a, Vector128<ulong> b)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Cpu128Logic::nand<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
+    IL_0002: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Cpu128Ops::nand<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
     IL_0007: ret
 
 }
@@ -717,7 +1143,7 @@ Vector256<ulong> nand_v256x64u(Vector256<ulong> a, Vector256<ulong> b)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Cpu256Logic::nand<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
+    IL_0002: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Cpu256Ops::nand<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
     IL_0007: ret
 
 }
@@ -725,7 +1151,7 @@ ulong nor_64u(ulong a, ulong b)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: call System.UInt64 Z0.ScalarLogic::nor<System.UInt64>(System.UInt64,System.UInt64)
+    IL_0002: call System.UInt64 Z0.ScalarOps::nor<System.UInt64>(System.UInt64,System.UInt64)
     IL_0007: ret
 
 }
@@ -733,7 +1159,7 @@ BitVector64 nor_bv64u(BitVector64 a, BitVector64 b)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: call Z0.BitVector64 Z0.BitVectorLogic::nor<Z0.BitVector64>(Z0.BitVector64,Z0.BitVector64)
+    IL_0002: call Z0.BitVector64 Z0.BitVectorOps::nor<Z0.BitVector64>(Z0.BitVector64,Z0.BitVector64)
     IL_0007: ret
 
 }
@@ -741,7 +1167,7 @@ Vector128<ulong> nor_v128x64u(Vector128<ulong> a, Vector128<ulong> b)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Cpu128Logic::nor<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
+    IL_0002: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Cpu128Ops::nor<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
     IL_0007: ret
 
 }
@@ -749,7 +1175,7 @@ Vector256<ulong> nor_v256x64u(Vector256<ulong> a, Vector256<ulong> b)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Cpu256Logic::nor<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
+    IL_0002: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Cpu256Ops::nor<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
     IL_0007: ret
 
 }
@@ -757,7 +1183,7 @@ ulong xnor_64u(ulong a, ulong b)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: call System.UInt64 Z0.ScalarLogic::xnor<System.UInt64>(System.UInt64,System.UInt64)
+    IL_0002: call System.UInt64 Z0.ScalarOps::xnor<System.UInt64>(System.UInt64,System.UInt64)
     IL_0007: ret
 
 }
@@ -765,7 +1191,7 @@ BitVector64 xnor_bv64u(BitVector64 a, BitVector64 b)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: call Z0.BitVector64 Z0.BitVectorLogic::xnor<Z0.BitVector64>(Z0.BitVector64,Z0.BitVector64)
+    IL_0002: call Z0.BitVector64 Z0.BitVectorOps::xnor<Z0.BitVector64>(Z0.BitVector64,Z0.BitVector64)
     IL_0007: ret
 
 }
@@ -773,7 +1199,7 @@ Vector128<ulong> xnor_v128x64u(Vector128<ulong> a, Vector128<ulong> b)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Cpu128Logic::xnor<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
+    IL_0002: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Cpu128Ops::xnor<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
     IL_0007: ret
 
 }
@@ -781,35 +1207,35 @@ Vector256<ulong> xnor_v256x64u(Vector256<ulong> a, Vector256<ulong> b)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Cpu256Logic::xnor<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
+    IL_0002: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Cpu256Ops::xnor<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
     IL_0007: ret
 
 }
 ulong xor1_64u(ulong a)
 {
     IL_0000: ldarg.0
-    IL_0001: call System.UInt64 Z0.ScalarLogic::xor1<System.UInt64>(System.UInt64)
+    IL_0001: call System.UInt64 Z0.ScalarOps::xor1<System.UInt64>(System.UInt64)
     IL_0006: ret
 
 }
 BitVector64 xor1_bv64u(BitVector64 a)
 {
     IL_0000: ldarg.0
-    IL_0001: call Z0.BitVector64 Z0.BitVectorLogic::xor1<Z0.BitVector64>(Z0.BitVector64)
+    IL_0001: call Z0.BitVector64 Z0.BitVectorOps::xor1<Z0.BitVector64>(Z0.BitVector64)
     IL_0006: ret
 
 }
 Vector128<ulong> xor1_v128x64u(Vector128<ulong> a)
 {
     IL_0000: ldarg.0
-    IL_0001: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Cpu128Logic::xor1<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
+    IL_0001: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Cpu128Ops::xor1<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
     IL_0006: ret
 
 }
 Vector256<ulong> xor1_v256x64u(Vector256<ulong> a)
 {
     IL_0000: ldarg.0
-    IL_0001: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Cpu256Logic::xor1<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
+    IL_0001: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Cpu256Ops::xor1<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
     IL_0006: ret
 
 }
@@ -818,7 +1244,7 @@ ulong select_64u(ulong a, ulong b, ulong c)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.UInt64 Z0.ScalarLogic::select<System.UInt64>(System.UInt64,System.UInt64,System.UInt64)
+    IL_0003: call System.UInt64 Z0.ScalarOps::select<System.UInt64>(System.UInt64,System.UInt64,System.UInt64)
     IL_0008: ret
 
 }
@@ -827,7 +1253,7 @@ BitVector64 select_bv64u(BitVector64 a, BitVector64 b, BitVector64 c)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call Z0.BitVector64 Z0.BitVectorLogic::select<Z0.BitVector64>(Z0.BitVector64,Z0.BitVector64,Z0.BitVector64)
+    IL_0003: call Z0.BitVector64 Z0.BitVectorOps::select<Z0.BitVector64>(Z0.BitVector64,Z0.BitVector64,Z0.BitVector64)
     IL_0008: ret
 
 }
@@ -836,7 +1262,7 @@ Vector128<ulong> select_v128x64u(Vector128<ulong> a, Vector128<ulong> b, Vector1
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Cpu128Logic::select<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
+    IL_0003: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Cpu128Ops::select<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
     IL_0008: ret
 
 }
@@ -845,7 +1271,7 @@ Vector256<ulong> select_v256x64u(Vector256<ulong> a, Vector256<ulong> b, Vector2
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Cpu256Logic::select<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
+    IL_0003: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Cpu256Ops::select<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
     IL_0008: ret
 
 }
@@ -854,7 +1280,7 @@ bit f01_bit(bit a, bit b, bit c)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call Z0.bit Z0.BitLogic::f01(Z0.bit,Z0.bit,Z0.bit)
+    IL_0003: call Z0.bit Z0.BitOps::f01(Z0.bit,Z0.bit,Z0.bit)
     IL_0008: ret
 
 }
@@ -863,7 +1289,7 @@ ulong f01_64u(ulong a, ulong b, ulong c)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.UInt64 Z0.ScalarLogic::f01<System.UInt64>(System.UInt64,System.UInt64,System.UInt64)
+    IL_0003: call System.UInt64 Z0.ScalarOps::f01<System.UInt64>(System.UInt64,System.UInt64,System.UInt64)
     IL_0008: ret
 
 }
@@ -872,7 +1298,7 @@ BitVector64 f01_bv64u(BitVector64 a, BitVector64 b, BitVector64 c)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call Z0.BitVector64 Z0.BitVectorLogic::f01<Z0.BitVector64>(Z0.BitVector64,Z0.BitVector64,Z0.BitVector64)
+    IL_0003: call Z0.BitVector64 Z0.BitVectorOps::f01<Z0.BitVector64>(Z0.BitVector64,Z0.BitVector64,Z0.BitVector64)
     IL_0008: ret
 
 }
@@ -881,7 +1307,7 @@ Vector128<ulong> f01_128x64u(Vector128<ulong> a, Vector128<ulong> b, Vector128<u
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Cpu128Logic::f01<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
+    IL_0003: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Cpu128Ops::f01<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
     IL_0008: ret
 
 }
@@ -890,7 +1316,7 @@ Vector256<ulong> f01_256x64u(Vector256<ulong> a, Vector256<ulong> b, Vector256<u
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Cpu256Logic::f01<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
+    IL_0003: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Cpu256Ops::f01<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
     IL_0008: ret
 
 }
@@ -899,7 +1325,7 @@ bit f02_bit(bit a, bit b, bit c)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call Z0.bit Z0.BitLogic::f02(Z0.bit,Z0.bit,Z0.bit)
+    IL_0003: call Z0.bit Z0.BitOps::f02(Z0.bit,Z0.bit,Z0.bit)
     IL_0008: ret
 
 }
@@ -908,7 +1334,7 @@ ulong f02_64u(ulong a, ulong b, ulong c)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.UInt64 Z0.ScalarLogic::f02<System.UInt64>(System.UInt64,System.UInt64,System.UInt64)
+    IL_0003: call System.UInt64 Z0.ScalarOps::f02<System.UInt64>(System.UInt64,System.UInt64,System.UInt64)
     IL_0008: ret
 
 }
@@ -917,7 +1343,7 @@ BitVector64 f02_bv64u(BitVector64 a, BitVector64 b, BitVector64 c)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call Z0.BitVector64 Z0.BitVectorLogic::f02<Z0.BitVector64>(Z0.BitVector64,Z0.BitVector64,Z0.BitVector64)
+    IL_0003: call Z0.BitVector64 Z0.BitVectorOps::f02<Z0.BitVector64>(Z0.BitVector64,Z0.BitVector64,Z0.BitVector64)
     IL_0008: ret
 
 }
@@ -926,7 +1352,7 @@ Vector128<ulong> f02_128x64u(Vector128<ulong> a, Vector128<ulong> b, Vector128<u
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Cpu128Logic::f02<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
+    IL_0003: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Cpu128Ops::f02<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
     IL_0008: ret
 
 }
@@ -935,7 +1361,7 @@ Vector256<ulong> f02_256x64u(Vector256<ulong> a, Vector256<ulong> b, Vector256<u
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Cpu256Logic::f02<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
+    IL_0003: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Cpu256Ops::f02<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
     IL_0008: ret
 
 }
@@ -944,7 +1370,7 @@ bit f03_bit(bit a, bit b, bit c)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call Z0.bit Z0.BitLogic::f03(Z0.bit,Z0.bit,Z0.bit)
+    IL_0003: call Z0.bit Z0.BitOps::f03(Z0.bit,Z0.bit,Z0.bit)
     IL_0008: ret
 
 }
@@ -953,7 +1379,7 @@ ulong f03_64u(ulong a, ulong b, ulong c)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.UInt64 Z0.ScalarLogic::f03<System.UInt64>(System.UInt64,System.UInt64,System.UInt64)
+    IL_0003: call System.UInt64 Z0.ScalarOps::f03<System.UInt64>(System.UInt64,System.UInt64,System.UInt64)
     IL_0008: ret
 
 }
@@ -962,7 +1388,7 @@ BitVector64 f03_bv64u(BitVector64 a, BitVector64 b, BitVector64 c)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call Z0.BitVector64 Z0.BitVectorLogic::f03<Z0.BitVector64>(Z0.BitVector64,Z0.BitVector64,Z0.BitVector64)
+    IL_0003: call Z0.BitVector64 Z0.BitVectorOps::f03<Z0.BitVector64>(Z0.BitVector64,Z0.BitVector64,Z0.BitVector64)
     IL_0008: ret
 
 }
@@ -971,7 +1397,7 @@ Vector128<ulong> f03_128x64u(Vector128<ulong> a, Vector128<ulong> b, Vector128<u
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Cpu128Logic::f03<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
+    IL_0003: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Cpu128Ops::f03<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
     IL_0008: ret
 
 }
@@ -980,7 +1406,7 @@ Vector256<ulong> f03_256x64u(Vector256<ulong> a, Vector256<ulong> b, Vector256<u
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Cpu256Logic::f03<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
+    IL_0003: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Cpu256Ops::f03<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
     IL_0008: ret
 
 }
@@ -989,7 +1415,7 @@ bit f04_bit(bit a, bit b, bit c)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call Z0.bit Z0.BitLogic::f04(Z0.bit,Z0.bit,Z0.bit)
+    IL_0003: call Z0.bit Z0.BitOps::f04(Z0.bit,Z0.bit,Z0.bit)
     IL_0008: ret
 
 }
@@ -998,7 +1424,7 @@ ulong f04_64u(ulong a, ulong b, ulong c)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.UInt64 Z0.ScalarLogic::f04<System.UInt64>(System.UInt64,System.UInt64,System.UInt64)
+    IL_0003: call System.UInt64 Z0.ScalarOps::f04<System.UInt64>(System.UInt64,System.UInt64,System.UInt64)
     IL_0008: ret
 
 }
@@ -1007,7 +1433,7 @@ BitVector64 f04_bv64u(BitVector64 a, BitVector64 b, BitVector64 c)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call Z0.BitVector64 Z0.BitVectorLogic::f04<Z0.BitVector64>(Z0.BitVector64,Z0.BitVector64,Z0.BitVector64)
+    IL_0003: call Z0.BitVector64 Z0.BitVectorOps::f04<Z0.BitVector64>(Z0.BitVector64,Z0.BitVector64,Z0.BitVector64)
     IL_0008: ret
 
 }
@@ -1016,7 +1442,7 @@ Vector128<ulong> f04_128x64u(Vector128<ulong> a, Vector128<ulong> b, Vector128<u
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Cpu128Logic::f04<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
+    IL_0003: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Cpu128Ops::f04<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
     IL_0008: ret
 
 }
@@ -1025,7 +1451,7 @@ Vector256<ulong> f04_256x64u(Vector256<ulong> a, Vector256<ulong> b, Vector256<u
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Cpu256Logic::f04<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
+    IL_0003: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Cpu256Ops::f04<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
     IL_0008: ret
 
 }
@@ -1034,7 +1460,7 @@ bit f05_bit(bit a, bit b, bit c)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call Z0.bit Z0.BitLogic::f05(Z0.bit,Z0.bit,Z0.bit)
+    IL_0003: call Z0.bit Z0.BitOps::f05(Z0.bit,Z0.bit,Z0.bit)
     IL_0008: ret
 
 }
@@ -1043,7 +1469,7 @@ ulong f05_64u(ulong a, ulong b, ulong c)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.UInt64 Z0.ScalarLogic::f05<System.UInt64>(System.UInt64,System.UInt64,System.UInt64)
+    IL_0003: call System.UInt64 Z0.ScalarOps::f05<System.UInt64>(System.UInt64,System.UInt64,System.UInt64)
     IL_0008: ret
 
 }
@@ -1052,7 +1478,7 @@ BitVector64 f05_bv64u(BitVector64 a, BitVector64 b, BitVector64 c)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call Z0.BitVector64 Z0.BitVectorLogic::f05<Z0.BitVector64>(Z0.BitVector64,Z0.BitVector64,Z0.BitVector64)
+    IL_0003: call Z0.BitVector64 Z0.BitVectorOps::f05<Z0.BitVector64>(Z0.BitVector64,Z0.BitVector64,Z0.BitVector64)
     IL_0008: ret
 
 }
@@ -1061,7 +1487,7 @@ Vector128<ulong> f05_128x64u(Vector128<ulong> a, Vector128<ulong> b, Vector128<u
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Cpu128Logic::f05<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
+    IL_0003: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Cpu128Ops::f05<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
     IL_0008: ret
 
 }
@@ -1070,7 +1496,7 @@ Vector256<ulong> f05_256x64u(Vector256<ulong> a, Vector256<ulong> b, Vector256<u
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Cpu256Logic::f05<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
+    IL_0003: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Cpu256Ops::f05<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
     IL_0008: ret
 
 }
@@ -1079,7 +1505,7 @@ bit f06_bit(bit a, bit b, bit c)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call Z0.bit Z0.BitLogic::f06(Z0.bit,Z0.bit,Z0.bit)
+    IL_0003: call Z0.bit Z0.BitOps::f06(Z0.bit,Z0.bit,Z0.bit)
     IL_0008: ret
 
 }
@@ -1088,7 +1514,7 @@ ulong f06_64u(ulong a, ulong b, ulong c)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.UInt64 Z0.ScalarLogic::f06<System.UInt64>(System.UInt64,System.UInt64,System.UInt64)
+    IL_0003: call System.UInt64 Z0.ScalarOps::f06<System.UInt64>(System.UInt64,System.UInt64,System.UInt64)
     IL_0008: ret
 
 }
@@ -1097,7 +1523,7 @@ BitVector64 f06_bv64u(BitVector64 a, BitVector64 b, BitVector64 c)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call Z0.BitVector64 Z0.BitVectorLogic::f06<Z0.BitVector64>(Z0.BitVector64,Z0.BitVector64,Z0.BitVector64)
+    IL_0003: call Z0.BitVector64 Z0.BitVectorOps::f06<Z0.BitVector64>(Z0.BitVector64,Z0.BitVector64,Z0.BitVector64)
     IL_0008: ret
 
 }
@@ -1106,7 +1532,7 @@ Vector128<ulong> f06_128x64u(Vector128<ulong> a, Vector128<ulong> b, Vector128<u
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Cpu128Logic::f06<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
+    IL_0003: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Cpu128Ops::f06<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
     IL_0008: ret
 
 }
@@ -1115,7 +1541,7 @@ Vector256<ulong> f06_256x64u(Vector256<ulong> a, Vector256<ulong> b, Vector256<u
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Cpu256Logic::f06<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
+    IL_0003: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Cpu256Ops::f06<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
     IL_0008: ret
 
 }
@@ -1124,7 +1550,7 @@ bit f07_bit(bit a, bit b, bit c)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call Z0.bit Z0.BitLogic::f07(Z0.bit,Z0.bit,Z0.bit)
+    IL_0003: call Z0.bit Z0.BitOps::f07(Z0.bit,Z0.bit,Z0.bit)
     IL_0008: ret
 
 }
@@ -1133,7 +1559,7 @@ ulong f07_64u(ulong a, ulong b, ulong c)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.UInt64 Z0.ScalarLogic::f07<System.UInt64>(System.UInt64,System.UInt64,System.UInt64)
+    IL_0003: call System.UInt64 Z0.ScalarOps::f07<System.UInt64>(System.UInt64,System.UInt64,System.UInt64)
     IL_0008: ret
 
 }
@@ -1142,7 +1568,7 @@ BitVector64 f07_bv64u(BitVector64 a, BitVector64 b, BitVector64 c)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call Z0.BitVector64 Z0.BitVectorLogic::f07<Z0.BitVector64>(Z0.BitVector64,Z0.BitVector64,Z0.BitVector64)
+    IL_0003: call Z0.BitVector64 Z0.BitVectorOps::f07<Z0.BitVector64>(Z0.BitVector64,Z0.BitVector64,Z0.BitVector64)
     IL_0008: ret
 
 }
@@ -1151,7 +1577,7 @@ Vector128<ulong> f07_128x64u(Vector128<ulong> a, Vector128<ulong> b, Vector128<u
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Cpu128Logic::f07<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
+    IL_0003: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Cpu128Ops::f07<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
     IL_0008: ret
 
 }
@@ -1160,7 +1586,7 @@ Vector256<ulong> f07_256x64u(Vector256<ulong> a, Vector256<ulong> b, Vector256<u
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Cpu256Logic::f07<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
+    IL_0003: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Cpu256Ops::f07<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
     IL_0008: ret
 
 }
@@ -1169,7 +1595,7 @@ bit f08_bit(bit a, bit b, bit c)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call Z0.bit Z0.BitLogic::f08(Z0.bit,Z0.bit,Z0.bit)
+    IL_0003: call Z0.bit Z0.BitOps::f08(Z0.bit,Z0.bit,Z0.bit)
     IL_0008: ret
 
 }
@@ -1178,7 +1604,7 @@ ulong f08_64u(ulong a, ulong b, ulong c)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.UInt64 Z0.ScalarLogic::f08<System.UInt64>(System.UInt64,System.UInt64,System.UInt64)
+    IL_0003: call System.UInt64 Z0.ScalarOps::f08<System.UInt64>(System.UInt64,System.UInt64,System.UInt64)
     IL_0008: ret
 
 }
@@ -1187,7 +1613,7 @@ BitVector64 f08_bv64u(BitVector64 a, BitVector64 b, BitVector64 c)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call Z0.BitVector64 Z0.BitVectorLogic::f08<Z0.BitVector64>(Z0.BitVector64,Z0.BitVector64,Z0.BitVector64)
+    IL_0003: call Z0.BitVector64 Z0.BitVectorOps::f08<Z0.BitVector64>(Z0.BitVector64,Z0.BitVector64,Z0.BitVector64)
     IL_0008: ret
 
 }
@@ -1196,7 +1622,7 @@ Vector128<ulong> f08_128x64u(Vector128<ulong> a, Vector128<ulong> b, Vector128<u
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Cpu128Logic::f08<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
+    IL_0003: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Cpu128Ops::f08<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
     IL_0008: ret
 
 }
@@ -1205,7 +1631,7 @@ Vector256<ulong> f08_256x64u(Vector256<ulong> a, Vector256<ulong> b, Vector256<u
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Cpu256Logic::f08<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
+    IL_0003: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Cpu256Ops::f08<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
     IL_0008: ret
 
 }
@@ -1214,7 +1640,7 @@ bit f09_bit(bit a, bit b, bit c)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call Z0.bit Z0.BitLogic::f09(Z0.bit,Z0.bit,Z0.bit)
+    IL_0003: call Z0.bit Z0.BitOps::f09(Z0.bit,Z0.bit,Z0.bit)
     IL_0008: ret
 
 }
@@ -1223,7 +1649,7 @@ ulong f09_64u(ulong a, ulong b, ulong c)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.UInt64 Z0.ScalarLogic::f09<System.UInt64>(System.UInt64,System.UInt64,System.UInt64)
+    IL_0003: call System.UInt64 Z0.ScalarOps::f09<System.UInt64>(System.UInt64,System.UInt64,System.UInt64)
     IL_0008: ret
 
 }
@@ -1232,7 +1658,7 @@ BitVector64 f09_bv64u(BitVector64 a, BitVector64 b, BitVector64 c)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call Z0.BitVector64 Z0.BitVectorLogic::f09<Z0.BitVector64>(Z0.BitVector64,Z0.BitVector64,Z0.BitVector64)
+    IL_0003: call Z0.BitVector64 Z0.BitVectorOps::f09<Z0.BitVector64>(Z0.BitVector64,Z0.BitVector64,Z0.BitVector64)
     IL_0008: ret
 
 }
@@ -1241,7 +1667,7 @@ Vector128<ulong> f09_128x64u(Vector128<ulong> a, Vector128<ulong> b, Vector128<u
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Cpu128Logic::f09<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
+    IL_0003: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Cpu128Ops::f09<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
     IL_0008: ret
 
 }
@@ -1250,7 +1676,7 @@ Vector256<ulong> f09_256x64u(Vector256<ulong> a, Vector256<ulong> b, Vector256<u
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Cpu256Logic::f09<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
+    IL_0003: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Cpu256Ops::f09<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
     IL_0008: ret
 
 }
@@ -1259,7 +1685,7 @@ bit f0a_bit(bit a, bit b, bit c)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call Z0.bit Z0.BitLogic::f0a(Z0.bit,Z0.bit,Z0.bit)
+    IL_0003: call Z0.bit Z0.BitOps::f0a(Z0.bit,Z0.bit,Z0.bit)
     IL_0008: ret
 
 }
@@ -1268,7 +1694,7 @@ ulong f0a_64u(ulong a, ulong b, ulong c)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.UInt64 Z0.ScalarLogic::f0a<System.UInt64>(System.UInt64,System.UInt64,System.UInt64)
+    IL_0003: call System.UInt64 Z0.ScalarOps::f0a<System.UInt64>(System.UInt64,System.UInt64,System.UInt64)
     IL_0008: ret
 
 }
@@ -1277,7 +1703,7 @@ BitVector64 f0a_bv64u(BitVector64 a, BitVector64 b, BitVector64 c)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call Z0.BitVector64 Z0.BitVectorLogic::f0a<Z0.BitVector64>(Z0.BitVector64,Z0.BitVector64,Z0.BitVector64)
+    IL_0003: call Z0.BitVector64 Z0.BitVectorOps::f0a<Z0.BitVector64>(Z0.BitVector64,Z0.BitVector64,Z0.BitVector64)
     IL_0008: ret
 
 }
@@ -1286,7 +1712,7 @@ Vector128<ulong> f0a_128x64u(Vector128<ulong> a, Vector128<ulong> b, Vector128<u
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Cpu128Logic::f0a<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
+    IL_0003: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Cpu128Ops::f0a<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
     IL_0008: ret
 
 }
@@ -1295,7 +1721,7 @@ Vector256<ulong> f0a_256x64u(Vector256<ulong> a, Vector256<ulong> b, Vector256<u
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Cpu256Logic::f0a<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
+    IL_0003: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Cpu256Ops::f0a<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
     IL_0008: ret
 
 }
@@ -1304,7 +1730,7 @@ bit f0b_bit(bit a, bit b, bit c)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call Z0.bit Z0.BitLogic::f0b(Z0.bit,Z0.bit,Z0.bit)
+    IL_0003: call Z0.bit Z0.BitOps::f0b(Z0.bit,Z0.bit,Z0.bit)
     IL_0008: ret
 
 }
@@ -1313,7 +1739,7 @@ ulong f0b_64u(ulong a, ulong b, ulong c)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.UInt64 Z0.ScalarLogic::f0b<System.UInt64>(System.UInt64,System.UInt64,System.UInt64)
+    IL_0003: call System.UInt64 Z0.ScalarOps::f0b<System.UInt64>(System.UInt64,System.UInt64,System.UInt64)
     IL_0008: ret
 
 }
@@ -1322,7 +1748,7 @@ BitVector64 f0b_bv64u(BitVector64 a, BitVector64 b, BitVector64 c)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call Z0.BitVector64 Z0.BitVectorLogic::f0b<Z0.BitVector64>(Z0.BitVector64,Z0.BitVector64,Z0.BitVector64)
+    IL_0003: call Z0.BitVector64 Z0.BitVectorOps::f0b<Z0.BitVector64>(Z0.BitVector64,Z0.BitVector64,Z0.BitVector64)
     IL_0008: ret
 
 }
@@ -1331,7 +1757,7 @@ Vector128<ulong> f0b_128x64u(Vector128<ulong> a, Vector128<ulong> b, Vector128<u
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Cpu128Logic::f0b<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
+    IL_0003: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Cpu128Ops::f0b<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
     IL_0008: ret
 
 }
@@ -1340,7 +1766,7 @@ Vector256<ulong> f0b_256x64u(Vector256<ulong> a, Vector256<ulong> b, Vector256<u
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Cpu256Logic::f0b<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
+    IL_0003: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Cpu256Ops::f0b<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
     IL_0008: ret
 
 }
@@ -1349,7 +1775,7 @@ bit f0c_bit(bit a, bit b, bit c)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call Z0.bit Z0.BitLogic::f0c(Z0.bit,Z0.bit,Z0.bit)
+    IL_0003: call Z0.bit Z0.BitOps::f0c(Z0.bit,Z0.bit,Z0.bit)
     IL_0008: ret
 
 }
@@ -1358,7 +1784,7 @@ ulong f0c_64u(ulong a, ulong b, ulong c)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.UInt64 Z0.ScalarLogic::f0c<System.UInt64>(System.UInt64,System.UInt64,System.UInt64)
+    IL_0003: call System.UInt64 Z0.ScalarOps::f0c<System.UInt64>(System.UInt64,System.UInt64,System.UInt64)
     IL_0008: ret
 
 }
@@ -1367,7 +1793,7 @@ BitVector64 f0c_bv64u(BitVector64 a, BitVector64 b, BitVector64 c)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call Z0.BitVector64 Z0.BitVectorLogic::f0c<Z0.BitVector64>(Z0.BitVector64,Z0.BitVector64,Z0.BitVector64)
+    IL_0003: call Z0.BitVector64 Z0.BitVectorOps::f0c<Z0.BitVector64>(Z0.BitVector64,Z0.BitVector64,Z0.BitVector64)
     IL_0008: ret
 
 }
@@ -1376,7 +1802,7 @@ Vector128<ulong> f0c_128x64u(Vector128<ulong> a, Vector128<ulong> b, Vector128<u
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Cpu128Logic::f0c<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
+    IL_0003: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Cpu128Ops::f0c<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
     IL_0008: ret
 
 }
@@ -1385,7 +1811,7 @@ Vector256<ulong> f0c_256x64u(Vector256<ulong> a, Vector256<ulong> b, Vector256<u
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Cpu256Logic::f0c<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
+    IL_0003: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Cpu256Ops::f0c<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
     IL_0008: ret
 
 }
@@ -1394,7 +1820,7 @@ bit f0d_bit(bit a, bit b, bit c)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call Z0.bit Z0.BitLogic::f0d(Z0.bit,Z0.bit,Z0.bit)
+    IL_0003: call Z0.bit Z0.BitOps::f0d(Z0.bit,Z0.bit,Z0.bit)
     IL_0008: ret
 
 }
@@ -1403,7 +1829,7 @@ ulong f0d_64u(ulong a, ulong b, ulong c)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.UInt64 Z0.ScalarLogic::f0d<System.UInt64>(System.UInt64,System.UInt64,System.UInt64)
+    IL_0003: call System.UInt64 Z0.ScalarOps::f0d<System.UInt64>(System.UInt64,System.UInt64,System.UInt64)
     IL_0008: ret
 
 }
@@ -1412,7 +1838,7 @@ BitVector64 f0d_bv64u(BitVector64 a, BitVector64 b, BitVector64 c)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call Z0.BitVector64 Z0.BitVectorLogic::f0d<Z0.BitVector64>(Z0.BitVector64,Z0.BitVector64,Z0.BitVector64)
+    IL_0003: call Z0.BitVector64 Z0.BitVectorOps::f0d<Z0.BitVector64>(Z0.BitVector64,Z0.BitVector64,Z0.BitVector64)
     IL_0008: ret
 
 }
@@ -1421,7 +1847,7 @@ Vector128<ulong> f0d_128x64u(Vector128<ulong> a, Vector128<ulong> b, Vector128<u
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Cpu128Logic::f0d<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
+    IL_0003: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Cpu128Ops::f0d<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
     IL_0008: ret
 
 }
@@ -1430,7 +1856,7 @@ Vector256<ulong> f0d_256x64u(Vector256<ulong> a, Vector256<ulong> b, Vector256<u
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Cpu256Logic::f0d<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
+    IL_0003: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Cpu256Ops::f0d<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
     IL_0008: ret
 
 }
@@ -1439,7 +1865,7 @@ bit f0e_bit(bit a, bit b, bit c)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call Z0.bit Z0.BitLogic::f0e(Z0.bit,Z0.bit,Z0.bit)
+    IL_0003: call Z0.bit Z0.BitOps::f0e(Z0.bit,Z0.bit,Z0.bit)
     IL_0008: ret
 
 }
@@ -1448,7 +1874,7 @@ ulong f0e_64u(ulong a, ulong b, ulong c)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.UInt64 Z0.ScalarLogic::f0e<System.UInt64>(System.UInt64,System.UInt64,System.UInt64)
+    IL_0003: call System.UInt64 Z0.ScalarOps::f0e<System.UInt64>(System.UInt64,System.UInt64,System.UInt64)
     IL_0008: ret
 
 }
@@ -1457,7 +1883,7 @@ BitVector64 f0e_bv64u(BitVector64 a, BitVector64 b, BitVector64 c)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call Z0.BitVector64 Z0.BitVectorLogic::f0e<Z0.BitVector64>(Z0.BitVector64,Z0.BitVector64,Z0.BitVector64)
+    IL_0003: call Z0.BitVector64 Z0.BitVectorOps::f0e<Z0.BitVector64>(Z0.BitVector64,Z0.BitVector64,Z0.BitVector64)
     IL_0008: ret
 
 }
@@ -1466,7 +1892,7 @@ Vector128<ulong> f0e_128x64u(Vector128<ulong> a, Vector128<ulong> b, Vector128<u
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Cpu128Logic::f0e<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
+    IL_0003: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Cpu128Ops::f0e<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
     IL_0008: ret
 
 }
@@ -1475,7 +1901,7 @@ Vector256<ulong> f0e_256x64u(Vector256<ulong> a, Vector256<ulong> b, Vector256<u
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Cpu256Logic::f0e<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
+    IL_0003: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Cpu256Ops::f0e<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
     IL_0008: ret
 
 }
@@ -1484,7 +1910,7 @@ bit f0f_bit(bit a, bit b, bit c)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call Z0.bit Z0.BitLogic::f0f(Z0.bit,Z0.bit,Z0.bit)
+    IL_0003: call Z0.bit Z0.BitOps::f0f(Z0.bit,Z0.bit,Z0.bit)
     IL_0008: ret
 
 }
@@ -1493,7 +1919,7 @@ ulong f0f_64u(ulong a, ulong b, ulong c)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.UInt64 Z0.ScalarLogic::f0f<System.UInt64>(System.UInt64,System.UInt64,System.UInt64)
+    IL_0003: call System.UInt64 Z0.ScalarOps::f0f<System.UInt64>(System.UInt64,System.UInt64,System.UInt64)
     IL_0008: ret
 
 }
@@ -1502,7 +1928,7 @@ BitVector64 f0f_bv64u(BitVector64 a, BitVector64 b, BitVector64 c)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call Z0.BitVector64 Z0.BitVectorLogic::f0f<Z0.BitVector64>(Z0.BitVector64,Z0.BitVector64,Z0.BitVector64)
+    IL_0003: call Z0.BitVector64 Z0.BitVectorOps::f0f<Z0.BitVector64>(Z0.BitVector64,Z0.BitVector64,Z0.BitVector64)
     IL_0008: ret
 
 }
@@ -1511,7 +1937,7 @@ Vector128<ulong> f0f_128x64u(Vector128<ulong> a, Vector128<ulong> b, Vector128<u
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Cpu128Logic::f0f<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
+    IL_0003: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Cpu128Ops::f0f<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
     IL_0008: ret
 
 }
@@ -1520,7 +1946,7 @@ Vector256<ulong> f0f_256x64u(Vector256<ulong> a, Vector256<ulong> b, Vector256<u
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Cpu256Logic::f0f<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
+    IL_0003: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Cpu256Ops::f0f<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
     IL_0008: ret
 
 }
@@ -1529,7 +1955,7 @@ bit f10_bit(bit a, bit b, bit c)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call Z0.bit Z0.BitLogic::f10(Z0.bit,Z0.bit,Z0.bit)
+    IL_0003: call Z0.bit Z0.BitOps::f10(Z0.bit,Z0.bit,Z0.bit)
     IL_0008: ret
 
 }
@@ -1538,7 +1964,7 @@ ulong f10_64u(ulong a, ulong b, ulong c)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.UInt64 Z0.ScalarLogic::f10<System.UInt64>(System.UInt64,System.UInt64,System.UInt64)
+    IL_0003: call System.UInt64 Z0.ScalarOps::f10<System.UInt64>(System.UInt64,System.UInt64,System.UInt64)
     IL_0008: ret
 
 }
@@ -1547,7 +1973,7 @@ BitVector64 f10_bv64u(BitVector64 a, BitVector64 b, BitVector64 c)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call Z0.BitVector64 Z0.BitVectorLogic::f10<Z0.BitVector64>(Z0.BitVector64,Z0.BitVector64,Z0.BitVector64)
+    IL_0003: call Z0.BitVector64 Z0.BitVectorOps::f10<Z0.BitVector64>(Z0.BitVector64,Z0.BitVector64,Z0.BitVector64)
     IL_0008: ret
 
 }
@@ -1556,7 +1982,7 @@ Vector128<ulong> f10_128x64u(Vector128<ulong> a, Vector128<ulong> b, Vector128<u
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Cpu128Logic::f10<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
+    IL_0003: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Cpu128Ops::f10<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
     IL_0008: ret
 
 }
@@ -1565,7 +1991,7 @@ Vector256<ulong> f10_256x64u(Vector256<ulong> a, Vector256<ulong> b, Vector256<u
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Cpu256Logic::f10<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
+    IL_0003: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Cpu256Ops::f10<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
     IL_0008: ret
 
 }
@@ -1574,7 +2000,7 @@ bit f11_bit(bit a, bit b, bit c)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call Z0.bit Z0.BitLogic::f11(Z0.bit,Z0.bit,Z0.bit)
+    IL_0003: call Z0.bit Z0.BitOps::f11(Z0.bit,Z0.bit,Z0.bit)
     IL_0008: ret
 
 }
@@ -1583,7 +2009,7 @@ ulong f11_64u(ulong a, ulong b, ulong c)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.UInt64 Z0.ScalarLogic::f11<System.UInt64>(System.UInt64,System.UInt64,System.UInt64)
+    IL_0003: call System.UInt64 Z0.ScalarOps::f11<System.UInt64>(System.UInt64,System.UInt64,System.UInt64)
     IL_0008: ret
 
 }
@@ -1592,7 +2018,7 @@ BitVector64 f11_bv64u(BitVector64 a, BitVector64 b, BitVector64 c)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call Z0.BitVector64 Z0.BitVectorLogic::f11<Z0.BitVector64>(Z0.BitVector64,Z0.BitVector64,Z0.BitVector64)
+    IL_0003: call Z0.BitVector64 Z0.BitVectorOps::f11<Z0.BitVector64>(Z0.BitVector64,Z0.BitVector64,Z0.BitVector64)
     IL_0008: ret
 
 }
@@ -1601,7 +2027,7 @@ Vector128<ulong> f11_128x64u(Vector128<ulong> a, Vector128<ulong> b, Vector128<u
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Cpu128Logic::f11<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
+    IL_0003: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Cpu128Ops::f11<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
     IL_0008: ret
 
 }
@@ -1610,7 +2036,7 @@ Vector256<ulong> f11_256x64u(Vector256<ulong> a, Vector256<ulong> b, Vector256<u
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Cpu256Logic::f11<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
+    IL_0003: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Cpu256Ops::f11<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
     IL_0008: ret
 
 }
@@ -1619,25 +2045,7 @@ bit f12_bit(bit a, bit b, bit c)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call Z0.bit Z0.BitLogic::f12(Z0.bit,Z0.bit,Z0.bit)
-    IL_0008: ret
-
-}
-ulong f12_64u(ulong a, ulong b, ulong c)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: ldarg.2
-    IL_0003: call System.UInt64 Z0.ScalarLogic::f12<System.UInt64>(System.UInt64,System.UInt64,System.UInt64)
-    IL_0008: ret
-
-}
-BitVector64 f12_bv64u(BitVector64 a, BitVector64 b, BitVector64 c)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: ldarg.2
-    IL_0003: call Z0.BitVector64 Z0.BitVectorLogic::f12<Z0.BitVector64>(Z0.BitVector64,Z0.BitVector64,Z0.BitVector64)
+    IL_0003: call Z0.bit Z0.BitOps::f12(Z0.bit,Z0.bit,Z0.bit)
     IL_0008: ret
 
 }

@@ -16,6 +16,7 @@ namespace Z0
     public sealed class BitShiftOp<T> : IShiftOp<T>
         where T : unmanaged
     {
+
         [MethodImpl(Inline)]
         public BitShiftOp(ShiftOpKind op, IExpr<T> subject, IExpr<int> offset)
         {
@@ -23,7 +24,7 @@ namespace Z0
             this.Subject = subject;
             this.Offset = offset;
         }
-        
+
         /// <summary>
         /// The shift operaator
         /// </summary>
@@ -35,9 +36,7 @@ namespace Z0
         /// </summary>
         public IExpr<T> Subject {get;}
 
-        /// <summary>
-        /// The right operand
-        /// </summary>
+
         public IExpr<int> Offset {get;}
 
         public string Format()
