@@ -231,8 +231,8 @@ namespace Z0
         {            
             if(index >=0 && index <= 3)
             {
-                var start = index * 2;
-                var end = start + 1;
+                var start = (byte)(index * 2);
+                var end = (byte)(start + 1);
                 var value = BitMask.between((byte)src, start, end);
                 switch(value)
                 {

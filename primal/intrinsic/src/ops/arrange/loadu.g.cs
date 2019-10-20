@@ -17,65 +17,45 @@ namespace Z0
     partial class ginx
     {        
         [MethodImpl(Inline)]
-        public static Vec128<T> loadu128<T>(in T src)
+        public static Vec128<T> vloadu128<T>(in T src)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte) 
             || typeof(T) == typeof(ushort) 
             || typeof(T) == typeof(uint) 
             || typeof(T) == typeof(ulong))
-                return loadu128u(in src);
+                return loadu128_u(in src);
             else if(typeof(T) == typeof(sbyte) 
             || typeof(T) == typeof(short) 
             || typeof(T) == typeof(int) 
             || typeof(T) == typeof(long))
-                return loadu128i(in src);
+                return loadu128_i(in src);
             else
                 throw unsupported<T>();
         }
 
 
         [MethodImpl(Inline)]
-        public static unsafe Vec256<T> loadu256<T>(in T src)
+        public static unsafe Vec256<T> vloadu256<T>(in T src)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte) 
             || typeof(T) == typeof(ushort) 
             || typeof(T) == typeof(uint) 
             || typeof(T) == typeof(ulong))
-                return loadu256u(in src);
+                return loadu256_u(in src);
             else if(typeof(T) == typeof(sbyte) 
             || typeof(T) == typeof(short) 
             || typeof(T) == typeof(int) 
             || typeof(T) == typeof(long))
-                return loadu256i(in src);
+                return loadu256_i(in src);
             else
                 throw unsupported<T>();
         }
 
 
         [MethodImpl(Inline)]
-        public static Vector128<T> loadu<T>(in T src, out Vector128<T> dst)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(byte) 
-            || typeof(T) == typeof(ushort) 
-            || typeof(T) == typeof(uint) 
-            || typeof(T) == typeof(ulong))
-                loadu_u(in src, out dst);
-            else if(typeof(T) == typeof(sbyte) 
-            || typeof(T) == typeof(short) 
-            || typeof(T) == typeof(int) 
-            || typeof(T) == typeof(long))
-                loadu_i(in src, out dst);
-            else
-                throw unsupported<T>();
-            return dst;
-        }
-
-
-        [MethodImpl(Inline)]
-        public static unsafe Vec256<T> loadu<T>(in T src, out Vector256<T> dst)
+        public static Vector128<T> vloadu<T>(in T src, out Vector128<T> dst)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte) 
@@ -95,7 +75,27 @@ namespace Z0
 
 
         [MethodImpl(Inline)]
-        static unsafe Vec128<T> loadu128u<T>(in T src)
+        public static unsafe Vec256<T> vloadu<T>(in T src, out Vector256<T> dst)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(byte) 
+            || typeof(T) == typeof(ushort) 
+            || typeof(T) == typeof(uint) 
+            || typeof(T) == typeof(ulong))
+                loadu_u(in src, out dst);
+            else if(typeof(T) == typeof(sbyte) 
+            || typeof(T) == typeof(short) 
+            || typeof(T) == typeof(int) 
+            || typeof(T) == typeof(long))
+                loadu_i(in src, out dst);
+            else
+                throw unsupported<T>();
+            return dst;
+        }
+
+
+        [MethodImpl(Inline)]
+        static unsafe Vec128<T> loadu128_u<T>(in T src)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -109,7 +109,7 @@ namespace Z0
         }
         
         [MethodImpl(Inline)]
-        static unsafe Vec128<T> loadu128i<T>(in T src)
+        static unsafe Vec128<T> loadu128_i<T>(in T src)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
@@ -123,7 +123,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static unsafe Vec256<T> loadu256u<T>(in T src)
+        static unsafe Vec256<T> loadu256_u<T>(in T src)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -137,7 +137,7 @@ namespace Z0
         }
         
         [MethodImpl(Inline)]
-        static unsafe Vec256<T> loadu256i<T>(in T src)
+        static unsafe Vec256<T> loadu256_i<T>(in T src)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))

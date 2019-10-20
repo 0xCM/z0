@@ -95,6 +95,9 @@ namespace Z0
                 case BinaryLogicOpKind.XOr: return xor;
                 case BinaryLogicOpKind.Xnor: return xnor;
                 case BinaryLogicOpKind.AndNot: return andnot;
+                case BinaryLogicOpKind.LeftProject: return left;
+                case BinaryLogicOpKind.RightProject: return right;
+                case BinaryLogicOpKind.RightNot: return rightnot;
                 case BinaryLogicOpKind.True: return @true;
                 default: return dne<T>(id);
             }

@@ -15,7 +15,7 @@ namespace Z0
     {
 
         /// <summary>
-        /// Defines a logical NOT expression
+        /// Defines the operator expression not(a) for a logic expression a
         /// </summary>
         /// <param name="a">The operand</param>
         [MethodImpl(Inline)]
@@ -23,7 +23,7 @@ namespace Z0
             => unary(UnaryLogicOpKind.Not, a);
 
         /// <summary>
-        /// Defines a logical NOR expression
+        /// Defines the operator expression nor(a,b) := not(or(a,b)) for logic expressions a and b
         /// </summary>
         /// <param name="a">The first operand</param>
         /// <param name="b">The second operand</param>
@@ -32,7 +32,7 @@ namespace Z0
             => binary(BinaryLogicOpKind.Nor, a, b);
 
         /// <summary>
-        /// Defines a logical NOR expression between literals
+        /// Defines the operator expression nor(a,b) := not(or(a,b)) for literal expressions a and b
         /// </summary>
         /// <param name="a">The first operand</param>
         /// <param name="b">The second operand</param>
@@ -40,9 +40,8 @@ namespace Z0
         public static BinaryLogicOp nor(BitLiteralExpr a, BitLiteralExpr b)
             => binary(BinaryLogicOpKind.Nor, a, b);
 
-
         /// <summary>
-        /// Defines a logical XNOR expression
+        /// Defines the operator expression xnor(a,b) := not(xor(a,b)) for logic expressions a and b
         /// </summary>
         /// <param name="a">The first operand</param>
         /// <param name="b">The second operand</param>
@@ -51,7 +50,16 @@ namespace Z0
             => binary(BinaryLogicOpKind.Xnor, a, b);
 
         /// <summary>
-        /// Defines an equality expression
+        /// Defines the operator expression xnor(a,b) := not(xor(a,b)) for literal expressions a and b
+        /// </summary>
+        /// <param name="a">The first operand</param>
+        /// <param name="b">The second operand</param>
+        [MethodImpl(Inline)]
+        public static BinaryLogicOp xnor(BitLiteralExpr a, BitLiteralExpr b)
+            => binary(BinaryLogicOpKind.Xnor, a, b);
+
+        /// <summary>
+        /// Defines the operator expression nand(a,b) := not(and(a,b)) for logic expressions a and b
         /// </summary>
         /// <param name="a">The first operand</param>
         /// <param name="b">The second operand</param>
@@ -60,7 +68,7 @@ namespace Z0
             => binary(BinaryLogicOpKind.Nand, a, b);
 
         /// <summary>
-        /// Defines a logical NAND expression between literals
+        /// Defines the operator expression nand(a,b) := not(and(a,b)) for literal expressions a and b
         /// </summary>
         /// <param name="a">The first operand</param>
         /// <param name="b">The second operand</param>
@@ -69,13 +77,22 @@ namespace Z0
             => binary(BinaryLogicOpKind.Nand, a, b);
 
         /// <summary>
-        /// Defines a logical XNOR expression between literals
+        /// Defines the operator expression and(a, not(b)) for logic expressions a and b
         /// </summary>
         /// <param name="a">The first operand</param>
         /// <param name="b">The second operand</param>
         [MethodImpl(Inline)]
-        public static BinaryLogicOp xnor(BitLiteralExpr a, BitLiteralExpr b)
-            => binary(BinaryLogicOpKind.Xnor, a, b);
+        public static BinaryLogicOp andnot(ILogicExpr a, ILogicExpr b)
+            => binary(BinaryLogicOpKind.AndNot, a, b);
+        
+        /// <summary>
+        /// Defines the operator expression and(a, not(b)) for literal expressions a and b
+        /// </summary>
+        /// <param name="a">The first operand</param>
+        /// <param name="b">The second operand</param>
+        [MethodImpl(Inline)]
+        public static BinaryLogicOp andnot(BitLiteralExpr a, BitLiteralExpr b)
+            => binary(BinaryLogicOpKind.AndNot, a, b);
 
     }
 }

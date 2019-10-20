@@ -42,7 +42,6 @@ namespace Z0
         {
             Bits.pack(src, dst.AsBytes());
             return dst;
-
         }
         
         public static Span<T> pack<S,T>(ReadOnlySpan<S> src, Span<T> dst)            

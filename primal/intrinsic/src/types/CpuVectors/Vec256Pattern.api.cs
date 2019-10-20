@@ -21,16 +21,16 @@ namespace Z0
         /// Returns an immutable reference to a vector where each component is assigned the numeric value 1
         /// </summary>
         /// <typeparam name="T">The primal type</typeparam>
-        public static ref readonly Vec256<T> Units<T>()
+        public static Vec256<T> Units<T>()
             where T : unmanaged
-                => ref Vec256Pattern<T>.Units;
+                => Vec256Pattern<T>.Units;
 
         /// <summary>
         /// Returns a vector with all bits turned on
         /// </summary>
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
-        public static Vec256<T> ones<T>()
+        public static Vector256<T> ones<T>()
             where T : unmanaged        
                 => ginx.vones256<T>();
 
@@ -105,9 +105,9 @@ namespace Z0
         /// For a vector of length N, returns a reference to the vector [N - 1, N - 2, , ..., 0]
         /// </summary>
         /// <typeparam name="T">The primal component type</typeparam>
-        public static ref readonly Vec256<T> Decreasing<T>()
+        public static Vec256<T> Decreasing<T>()
             where T : unmanaged
-                => ref Vec256Pattern<T>.Decreasing;
+                => Vec256Pattern<T>.Decreasing;
 
         /// <summary>
         /// Describes a shuffle mask that clears ever-other vector component
@@ -146,9 +146,9 @@ namespace Z0
         /// has been intialized to the value -0.0
         /// </summary>
         /// <typeparam name="T">The floating point type</typeparam>
-        public static ref readonly Vec256<T> FpSignMask<T>()
+        public static Vec256<T> FpSignMask<T>()
             where T : unmanaged
-                => ref Vec256Pattern<T>.FpSignMask;
+                => Vec256Pattern<T>.FpSignMask;
 
         /// <summary>
         /// Creates a vector with incrementing components, v[0] = first and v[i+1] = v[i] + 1 for i=1...N-1
@@ -203,7 +203,6 @@ namespace Z0
                 gmath.add(ref current, step);
             }
             return Vec256.Load(ref head(dst));
-
         }
 
         /// <summary>

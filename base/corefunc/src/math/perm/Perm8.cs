@@ -119,7 +119,7 @@ namespace Z0
             uint data = (uint)spec;
             var dst = Perm<N8>.Alloc();
             for(int i=0, offset = 0; i<dst.Length; i++, offset +=3)
-                dst[i] = (int)BitMask.between(in data, offset, offset + 2);
+                dst[i] = (int)BitMask.between(data, (byte)offset, (byte)(offset + 2));
             return dst;
         }
 

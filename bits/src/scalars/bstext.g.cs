@@ -23,27 +23,48 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The source type</typeparam>
         [MethodImpl(Inline)]
-        public static string bstext<T>(in T src)
+        public static string bstext<T>(T src)
+        {
+            if(typeof(T) == typeof(byte) 
+                || typeof(T) == typeof(ushort) 
+                || typeof(T) == typeof(uint) 
+                || typeof(T) == typeof(ulong))
+                    return bstext_u(src);
+            else if(typeof(T) == typeof(sbyte) 
+                || typeof(T) == typeof(short)
+                || typeof(T) == typeof(int) 
+                || typeof(T) == typeof(long))
+                    return bstext_i(src);
+            else
+                throw unsupported<T>();
+        }
+
+        [MethodImpl(Inline)]
+        static string bstext_i<T>(T src)
+        {
+            if(typeof(T) == typeof(sbyte))
+                return bstext(int8(in src));
+            else if(typeof(T) == typeof(short))
+                return bstext(int16(in src));
+            else if(typeof(T) == typeof(int))
+                return bstext(int32(in src));
+            else 
+                return bstext(int64(in src));
+        }
+
+        [MethodImpl(Inline)]
+        static string bstext_u<T>(T src)
         {
             if(typeof(T) == typeof(byte))
                 return bstext(uint8(in src));
-            else if(typeof(T) == typeof(sbyte))
-                return bstext(int8(in src));
             else if(typeof(T) == typeof(ushort))
                 return bstext(uint16(in src));
-            else if(typeof(T) == typeof(short))
-                return bstext(int16(in src));
             else if(typeof(T) == typeof(uint))
                 return bstext(uint32(in src));
-            else if(typeof(T) == typeof(int))
-                return bstext(int32(in src));
-            else if(typeof(T) == typeof(ulong))
+            else 
                 return bstext(uint64(in src));
-            else if(typeof(T) == typeof(long))
-                return bstext(int64(in src));
-            else            
-                throw unsupported<T>();            
         }
+
 
         /// <summary>
         /// Constructs the bitstring for an 8-bit unsigned integer
@@ -68,7 +89,7 @@ namespace Z0
         [MethodImpl(Inline)]
         static string bstext(ushort src)
         {
-            (var lo, var hi) = Bits.split(src);            
+            Bits.split(src, out var lo, out var hi);            
             return bstext(hi) + bstext(lo);
         }
 
@@ -78,15 +99,12 @@ namespace Z0
         /// <param name="value">The source value</param>
         [MethodImpl(Inline)]
         static string bstext(short src)
-        {
-            (var lo, var hi) = Bits.split(src);            
-            return bstext(hi) + bstext(lo);
-        }
+            => bstext((ushort)src);
 
         [MethodImpl(Inline)]
         static string bstext(uint src)
         {
-            (var lo, var hi) = Bits.split(src);            
+            Bits.split(src, out var lo, out var hi);            
             return bstext(hi) + bstext(lo);
         }
 
@@ -96,10 +114,7 @@ namespace Z0
         /// <param name="value">The source value</param>
         [MethodImpl(Inline)]
         static string bstext(int src)
-        {
-            (var lo, var hi) = Bits.split(src);            
-            return bstext(hi) + bstext(lo);
-        }
+            => bstext((uint)src);
 
         /// <summary>
         /// Constructs the bitstring for a 64-bit unsigned integer
@@ -108,8 +123,8 @@ namespace Z0
         [MethodImpl(Inline)]
         static string bstext(ulong src)
         {
-            (var lo, var hi) = Bits.split(src);            
-            return bstext(hi) + bstext(lo);
+             Bits.split(src, out var lo, out var hi);            
+             return bstext(hi) + bstext(lo);
         }
 
         /// <summary>
@@ -118,10 +133,7 @@ namespace Z0
         /// <param name="value">The source value</param>
         [MethodImpl(Inline)]
         static string bstext(long src)
-        {
-            (var lo, var hi) = Bits.split(src);            
-            return bstext(hi) + bstext(lo);
-        }
+            => bstext((ulong)src);
  
 
     }

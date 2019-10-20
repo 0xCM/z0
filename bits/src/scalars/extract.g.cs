@@ -30,18 +30,18 @@ namespace Z0
                 || typeof(T) == typeof(ushort) 
                 || typeof(T) == typeof(uint) 
                 || typeof(T) == typeof(ulong))
-                    return extractu(lhs,start,length);
+                    return extract_u(lhs,start,length);
             else if(typeof(T) == typeof(sbyte) 
                 || typeof(T) == typeof(short)
                 || typeof(T) == typeof(int) 
                 || typeof(T) == typeof(long))
-                    return extracti(lhs,start,length);
+                    return extract_i(lhs,start,length);
             else
                 throw unsupported<T>();
         }           
 
         [MethodImpl(Inline)]
-        static T extracti<T>(T lhs, byte start, byte length)
+        static T extract_i<T>(T lhs, byte start, byte length)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
@@ -55,7 +55,7 @@ namespace Z0
         }           
 
         [MethodImpl(Inline)]
-        static T extractu<T>(T lhs, byte start, byte length)
+        static T extract_u<T>(T lhs, byte start, byte length)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))

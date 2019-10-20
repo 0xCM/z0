@@ -21,9 +21,9 @@ namespace Z0
         /// <param name="pos">The bit position</param>
         /// <typeparam name="T">The primal value type</typeparam>
         [MethodImpl(Inline)]
-        public static bool test<T>(in T src, int pos)
+        public static bool test<T>(T src, int pos)
             where T : unmanaged
-                => BitMaskG.testbit(in src, (byte)pos);
+                => BitMaskG.testbit(src, (byte)pos);
 
         /// <summary>
         /// Determines whether a bit in a specified position is enabled
@@ -31,9 +31,9 @@ namespace Z0
         /// <param name="src">The value to interrogate</param>
         /// <param name="pos">The position to check</param>
         [MethodImpl(Inline)]
-        public static bool test<T>(in T src, byte pos)
+        public static bool test<T>(T src, byte pos)
             where T : unmanaged
-                => BitMaskG.testbit(in src, pos);
+                => BitMaskG.testbit(src, pos);
 
 
     }

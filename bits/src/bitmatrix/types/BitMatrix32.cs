@@ -9,6 +9,7 @@ namespace Z0
     using System.Threading;
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
+    using System.Runtime.Intrinsics;
     using System.Runtime.Intrinsics.X86;
 
     using static As;
@@ -19,39 +20,44 @@ namespace Z0
     /// Defines a 32x32 matrix of bits
     /// </summary>
     
-    public ref struct BitMatrix32
+    public struct BitMatrix32 : IPrimalSquare<BitMatrix32,uint>
     {                
-        Span<uint> data;        
+        uint[] data;        
 
         /// <summary>
         /// The matrix order
         /// </summary>
-        public static readonly N32 N = default;
+        public const uint N = 32;
 
         /// <summary>
-        /// The number of bits per row = 32
+        /// The number of bits per row
         /// </summary>
-        public static readonly BitSize RowBitCount = N.value;        
+        public const uint RowBitCount = N;
 
         /// <summary>
-        /// The number of bits per column = 32
+        /// The number of bits per column
         /// </summary>
-        public static readonly BitSize ColBitCount = N.value;
+        public const uint ColBitCount = N;
 
         /// <summary>
-        /// The number of bits apprehended by the matrix = 1024 bits =  128 bytes
+        /// The number of bits apprehended by the matrix
         /// </summary>
-        public static readonly BitSize TotalBitCount = RowBitCount * ColBitCount;
+        public const uint TotalBitCount = RowBitCount * ColBitCount;
                         
         /// <summary>
-        /// The (aligned) number of bytes needed for a row
+        /// The number of bytes needed for a row
         /// </summary>
-        public static readonly ByteSize RowByteCount = (ByteSize)RowBitCount;                        
+        public const uint RowByteCount = RowBitCount >> 3;
 
         /// <summary>
-        /// The (aligned) number of bytes needed for a column
+        /// The number of bytes needed for a column
         /// </summary>
-        public static readonly ByteSize ColByteCount = (ByteSize)ColBitCount;
+        public const uint ColByteCount = ColBitCount >> 3;
+
+        /// <summary>
+        /// To total number of bytes required to store the matrix data
+        /// </summary>
+        public const uint TotalByteCount = TotalBitCount >> 3;
 
         /// <summary>
         /// Defines the 32x32 identity bitmatrix
@@ -123,7 +129,7 @@ namespace Z0
         BitMatrix32(Span<uint> src)
         {                        
             require(src.Length == Pow2.T05);
-            this.data = src;
+            this.data = src.ToArray();
         }        
 
         [MethodImpl(Inline)]
@@ -136,19 +142,19 @@ namespace Z0
         [MethodImpl(Inline)]
         BitMatrix32(BitMatrix<N32,uint> src)
         {
-            this.data = src.Data;
+            this.data = src.Data.ToArray();
         }
 
         public readonly int RowCount
         {
             [MethodImpl(Inline)]
-            get => N;
+            get => (int)N;
         }
 
         public readonly int ColCount
         {
             [MethodImpl(Inline)]
-            get => N;
+            get => (int)N;
         }
 
         /// <summary>
@@ -158,7 +164,7 @@ namespace Z0
         /// <param name="col">The column index</param>
         [MethodImpl(Inline)]
         public readonly Bit GetBit(int row, int col)
-            => BitMask.test(in data[row], col);
+            => BitMask.test(data[row], col);
 
         /// <summary>
         /// Sets the bit in a specified cell
@@ -210,7 +216,7 @@ namespace Z0
         public Span<byte> Bytes
         {
             [MethodImpl(Inline)]
-            get => data.AsBytes();
+            get => data.AsSpan().AsBytes();
         }
 
         /// <summary>
@@ -221,6 +227,25 @@ namespace Z0
             [MethodImpl(Inline)]
             get => data;
         }
+
+        /// <summary>
+        /// The data enclosed by the matrix
+        /// </summary>
+        public uint[] Rows
+        {
+            [MethodImpl(Inline)] 
+            get => data;
+        }
+
+        /// <summary>
+        /// A reference to the first row of the matrix
+        /// </summary>
+        public ref uint Head
+        {
+            [MethodImpl(Inline)] 
+            get => ref data[0];
+        }
+
 
         /// <summary>
         /// Queries/manipulates row data
@@ -273,16 +298,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public  BitMatrix32 AndNot(BitMatrix32 rhs)
             => BitMatrix.andn(ref this, rhs);
-        // {
-        //     const int rowstep = 8;
-        //     for(var i=0; i< RowCount; i += rowstep)
-        //     {
-        //         this.GetCells(i, out Vec256<uint> vLhs);
-        //         rhs.GetCells(i, out Vec256<uint> vRhs);
-        //         dinx.vandn(vLhs,vRhs).StoreTo(ref data[i]);
-        //     }
-        //     return this;
-        // }
         
         public readonly BitMatrix32 Transpose()
         {
@@ -304,6 +319,10 @@ namespace Z0
             dst = load(ref data[row]);
             return ref dst;
         }
+
+        [MethodImpl(Inline)]
+        public void Load(int row, out Vector256<uint> dst)
+            => dst = dinx.vloadu(in data[row], out dst);
 
         /// <summary>
         /// Counts the number of enabled bits in the matrix

@@ -1,4 +1,4 @@
-// 2019-10-18 23:21:12:380
+// 2019-10-19 23:11:06:301
 BitVector32 and_bv_32u(BitVector32 x, BitVector32 y)
 {
     IL_0000: ldarga.s x
@@ -675,165 +675,213 @@ ulong gather_g64u(ulong src, ulong mask)
     IL_0009: ret
 
 }
-sbyte bitrange_d8i(sbyte src, BitPos i0, BitPos i1)
+ref ulong mask_1x64u_ref(ref ulong dst, int exp0)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call System.UInt64& Z0.Bits::mask(System.UInt64&,System.Int32)
+    IL_0007: ret
+
+}
+ref ulong mask_2x64u_ref(ref ulong dst, int exp0, int exp1)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.SByte Z0.Bits::range(System.SByte,Z0.BitPos,Z0.BitPos)
+    IL_0003: call System.UInt64& Z0.Bits::mask(System.UInt64&,System.Int32,System.Int32)
     IL_0008: ret
 
 }
-sbyte bitrange_g8i(sbyte src, BitPos i0, BitPos i1)
-{
-    IL_0000: ldarga.s src
-    IL_0002: ldarg.1
-    IL_0003: ldarg.2
-    IL_0004: call System.SByte Z0.gbits::range<System.SByte>(System.SByte&,Z0.BitPos,Z0.BitPos)
-    IL_0009: ret
-
-}
-byte bitrange_d8u(byte src, BitPos i0, BitPos i1)
+ref ulong mask_3x64u_ref(ref ulong dst, int exp0, int exp1, int exp2)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.Byte Z0.Bits::range(System.Byte,Z0.BitPos,Z0.BitPos)
-    IL_0008: ret
-
-}
-byte bitrange_g8u(byte src, BitPos i0, BitPos i1)
-{
-    IL_0000: ldarga.s src
-    IL_0002: ldarg.1
-    IL_0003: ldarg.2
-    IL_0004: call System.Byte Z0.gbits::range<System.Byte>(System.Byte&,Z0.BitPos,Z0.BitPos)
+    IL_0003: ldarg.3
+    IL_0004: call System.UInt64& Z0.Bits::mask(System.UInt64&,System.Int32,System.Int32,System.Int32)
     IL_0009: ret
 
 }
-short bitrange_d16i(short src, BitPos i0, BitPos i1)
+ulong mask_3x64u(ulong src, int exp0, int exp1, int exp2)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.Int16 Z0.Bits::range(System.Int16,Z0.BitPos,Z0.BitPos)
-    IL_0008: ret
-
-}
-short bitrange_g16i(short src, BitPos i0, BitPos i1)
-{
-    IL_0000: ldarga.s src
-    IL_0002: ldarg.1
-    IL_0003: ldarg.2
-    IL_0004: call System.Int16 Z0.gbits::range<System.Int16>(System.Int16&,Z0.BitPos,Z0.BitPos)
+    IL_0003: ldarg.3
+    IL_0004: call System.UInt64 Z0.Bits::mask(System.UInt64,System.Int32,System.Int32,System.Int32)
     IL_0009: ret
 
 }
-ushort bitrange_d16u(ushort src, BitPos i0, BitPos i1)
+ref ulong mask_4x64u_ref(ref ulong dst, int exp0, int exp1, int exp2, int exp3)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.UInt16 Z0.Bits::range(System.UInt16,Z0.BitPos,Z0.BitPos)
-    IL_0008: ret
+    IL_0003: ldarg.3
+    IL_0004: ldarg.s exp3
+    IL_0006: call System.UInt64& Z0.Bits::mask(System.UInt64&,System.Int32,System.Int32,System.Int32,System.Int32)
+    IL_000B: ret
 
 }
-ushort bitrange_g16u(ushort src, BitPos i0, BitPos i1)
-{
-    IL_0000: ldarga.s src
-    IL_0002: ldarg.1
-    IL_0003: ldarg.2
-    IL_0004: call System.UInt16 Z0.gbits::range<System.UInt16>(System.UInt16&,Z0.BitPos,Z0.BitPos)
-    IL_0009: ret
-
-}
-int bitrange_d32i(int src, BitPos i0, BitPos i1)
+sbyte segment_d8i(sbyte src, int i0, int i1)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.Int32 Z0.Bits::range(System.Int32,Z0.BitPos,Z0.BitPos)
+    IL_0003: call System.SByte Z0.Bits::segment(System.SByte,System.Int32,System.Int32)
     IL_0008: ret
 
 }
-int bitrange_g32i(int src, BitPos i0, BitPos i1)
-{
-    IL_0000: ldarga.s src
-    IL_0002: ldarg.1
-    IL_0003: ldarg.2
-    IL_0004: call System.Int32 Z0.gbits::range<System.Int32>(System.Int32&,Z0.BitPos,Z0.BitPos)
-    IL_0009: ret
-
-}
-uint bitrange_d32u(uint src, BitPos i0, BitPos i1)
+sbyte segment_g8i(sbyte src, int i0, int i1)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.UInt32 Z0.Bits::range(System.UInt32,Z0.BitPos,Z0.BitPos)
+    IL_0003: call System.SByte Z0.gbits::segment<System.SByte>(System.SByte,System.Int32,System.Int32)
     IL_0008: ret
 
 }
-uint bitrange_g32u(uint src, BitPos i0, BitPos i1)
-{
-    IL_0000: ldarga.s src
-    IL_0002: ldarg.1
-    IL_0003: ldarg.2
-    IL_0004: call System.UInt32 Z0.gbits::range<System.UInt32>(System.UInt32&,Z0.BitPos,Z0.BitPos)
-    IL_0009: ret
-
-}
-long bitrange_d64i(long src, BitPos i0, BitPos i1)
+byte segment_d8u(byte src, int i0, int i1)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.Int64 Z0.Bits::range(System.Int64,Z0.BitPos,Z0.BitPos)
+    IL_0003: call System.Byte Z0.Bits::segment(System.Byte,System.Int32,System.Int32)
     IL_0008: ret
 
 }
-long bitrange_g64i(long src, BitPos i0, BitPos i1)
-{
-    IL_0000: ldarga.s src
-    IL_0002: ldarg.1
-    IL_0003: ldarg.2
-    IL_0004: call System.Int64 Z0.gbits::range<System.Int64>(System.Int64&,Z0.BitPos,Z0.BitPos)
-    IL_0009: ret
-
-}
-ulong bitrange_d64u(ulong src, BitPos i0, BitPos i1)
+byte segment_g8u(byte src, int i0, int i1)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.UInt64 Z0.Bits::range(System.UInt64,Z0.BitPos,Z0.BitPos)
+    IL_0003: call System.Byte Z0.gbits::segment<System.Byte>(System.Byte,System.Int32,System.Int32)
     IL_0008: ret
 
 }
-ulong bitrange_g64u(ulong src, BitPos i0, BitPos i1)
+short segment_d16i(short src, int i0, int i1)
 {
-    IL_0000: ldarga.s src
-    IL_0002: ldarg.1
-    IL_0003: ldarg.2
-    IL_0004: call System.UInt64 Z0.gbits::range<System.UInt64>(System.UInt64&,Z0.BitPos,Z0.BitPos)
-    IL_0009: ret
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: ldarg.2
+    IL_0003: call System.Int16 Z0.Bits::segment(System.Int16,System.Int32,System.Int32)
+    IL_0008: ret
 
 }
-float bitrange_g32f(float src, BitPos i0, BitPos i1)
+short segment_g16i(short src, int i0, int i1)
 {
-    IL_0000: ldarga.s src
-    IL_0002: ldarg.1
-    IL_0003: ldarg.2
-    IL_0004: call System.Single Z0.gbits::range<System.Single>(System.Single&,Z0.BitPos,Z0.BitPos)
-    IL_0009: ret
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: ldarg.2
+    IL_0003: call System.Int16 Z0.gbits::segment<System.Int16>(System.Int16,System.Int32,System.Int32)
+    IL_0008: ret
 
 }
-double bitrange_g64f(double src, BitPos i0, BitPos i1)
+ushort segment_d16u(ushort src, int i0, int i1)
 {
-    IL_0000: ldarga.s src
-    IL_0002: ldarg.1
-    IL_0003: ldarg.2
-    IL_0004: call System.Double Z0.gbits::range<System.Double>(System.Double&,Z0.BitPos,Z0.BitPos)
-    IL_0009: ret
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: ldarg.2
+    IL_0003: call System.UInt16 Z0.Bits::segment(System.UInt16,System.Int32,System.Int32)
+    IL_0008: ret
+
+}
+ushort segment_g16u(ushort src, int i0, int i1)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: ldarg.2
+    IL_0003: call System.UInt16 Z0.gbits::segment<System.UInt16>(System.UInt16,System.Int32,System.Int32)
+    IL_0008: ret
+
+}
+int segment_d32i(int src, int i0, int i1)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: ldarg.2
+    IL_0003: call System.Int32 Z0.Bits::segment(System.Int32,System.Int32,System.Int32)
+    IL_0008: ret
+
+}
+int segment_g32i(int src, int i0, int i1)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: ldarg.2
+    IL_0003: call System.Int32 Z0.gbits::segment<System.Int32>(System.Int32,System.Int32,System.Int32)
+    IL_0008: ret
+
+}
+uint segment_d32u(uint src, int i0, int i1)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: ldarg.2
+    IL_0003: call System.UInt32 Z0.Bits::segment(System.UInt32,System.Int32,System.Int32)
+    IL_0008: ret
+
+}
+uint segment_g32u(uint src, int i0, int i1)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: ldarg.2
+    IL_0003: call System.UInt32 Z0.gbits::segment<System.UInt32>(System.UInt32,System.Int32,System.Int32)
+    IL_0008: ret
+
+}
+long segment_d64i(long src, int i0, int i1)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: ldarg.2
+    IL_0003: call System.Int64 Z0.Bits::segment(System.Int64,System.Int32,System.Int32)
+    IL_0008: ret
+
+}
+long segment_g64i(long src, int i0, int i1)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: ldarg.2
+    IL_0003: call System.Int64 Z0.gbits::segment<System.Int64>(System.Int64,System.Int32,System.Int32)
+    IL_0008: ret
+
+}
+ulong segment_d64u(ulong src, int i0, int i1)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: ldarg.2
+    IL_0003: call System.UInt64 Z0.Bits::segment(System.UInt64,System.Int32,System.Int32)
+    IL_0008: ret
+
+}
+ulong segment_g64u(ulong src, int i0, int i1)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: ldarg.2
+    IL_0003: call System.UInt64 Z0.gbits::segment<System.UInt64>(System.UInt64,System.Int32,System.Int32)
+    IL_0008: ret
+
+}
+float segment_g32f(float src, int i0, int i1)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: ldarg.2
+    IL_0003: call System.Single Z0.gbits::segment<System.Single>(System.Single,System.Int32,System.Int32)
+    IL_0008: ret
+
+}
+double segment_g64f(double src, int i0, int i1)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: ldarg.2
+    IL_0003: call System.Double Z0.gbits::segment<System.Double>(System.Double,System.Int32,System.Int32)
+    IL_0008: ret
 
 }

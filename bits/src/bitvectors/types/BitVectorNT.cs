@@ -179,7 +179,7 @@ namespace Z0
         public Bit Get(BitPos pos)
         {
             ref readonly var cell = ref BitMap[CheckIndex(pos)];
-            return gbits.test(in Data[cell.Segment], cell.Offset);
+            return gbits.test(Data[cell.Segment], cell.Offset);
         }
             
         /// <summary>

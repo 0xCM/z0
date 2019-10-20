@@ -64,7 +64,6 @@ namespace Z0
         public static BitVector<T> FromCell(T src)
             => new BitVector<T>(src,bitsize<T>());
 
-
         /// <summary>
         /// Creates a bitvector defined by a single cell or portion thereof
         /// </summary>
@@ -310,7 +309,7 @@ namespace Z0
         public readonly Bit Get(BitPos pos)
         {
             ref readonly var loc = ref Location(pos);
-            return gbits.test(in data[loc.Segment], loc.Offset);
+            return gbits.test(data[loc.Segment], loc.Offset);
         }
 
         /// <summary>
@@ -424,7 +423,7 @@ namespace Z0
             var rank = 0u;
             var segments = Segments(pos);
             for(var i=0; i < segments.Length; i++)
-                rank += (uint)gbits.pop(in segments[i]);            
+                rank += (uint)gbits.pop(segments[i]);            
             return rank;
         }
 

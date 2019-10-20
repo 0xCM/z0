@@ -31,7 +31,7 @@ namespace Z0
 
         }
 
-        public void byte_kind()
+        void byte_kind()
         {
             var def = sbuild();
             var indent = new string(AsciSym.Space,4);

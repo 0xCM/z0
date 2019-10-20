@@ -386,13 +386,13 @@ namespace Z0
         public BitVector16 Lo
         {
             [MethodImpl(Inline)]
-            get => Bits.split(data).x0;            
+            get => Bits.lo(data);
         }
 
         public BitVector16 Hi
         {
             [MethodImpl(Inline)]
-            get => Bits.split(data).x1;
+            get => Bits.hi(data);
 
         }
         
@@ -602,7 +602,7 @@ namespace Z0
         /// <param name="pos">The bit position</param>
         [MethodImpl(Inline)]
         public readonly bool Test(BitPos pos)
-            => BitMask.test(in data, pos);
+            => BitMask.test(data, pos);
 
         /// <summary>
         /// Reads a bit value
@@ -619,7 +619,7 @@ namespace Z0
         /// <param name="last">The last bit position</param>
         [MethodImpl(Inline)]
         public readonly BitVector32 Between(BitPos first, BitPos last)
-            => Bits.between(in data, first,last);
+            => Bits.between(data, first,last);
 
         /// <summary>
         /// Reverses the vector's bits

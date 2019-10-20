@@ -23,7 +23,7 @@ namespace Z0
         /// <param name="src">The value to interrogate</param>
         /// <param name="pos">The position to check</param>
         [MethodImpl(Inline)]
-        public static bool testbit<T>(in T src, int pos)
+        public static bool testbit<T>(T src, int pos)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte) 
@@ -41,41 +41,41 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static bool testi<T>(in T src, int pos)
+        static bool testi<T>(T src, int pos)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                 return BitMask.test(in int8(in src), pos);
+                 return BitMask.test(int8(src), pos);
             else if(typeof(T) == typeof(short))
-                 return BitMask.test(in int16(in src), pos);
+                 return BitMask.test(int16(src), pos);
             else if(typeof(T) == typeof(int))
-                 return BitMask.test(in int32(in src), pos);
+                 return BitMask.test(int32(src), pos);
             else 
-                 return BitMask.test(in int64(in src), pos);
+                 return BitMask.test(int64(src), pos);
         }
 
         [MethodImpl(Inline)]
-        static bool testu<T>(in T src, int pos)
+        static bool testu<T>(T src, int pos)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                 return BitMask.test(in uint8(in src), pos);
+                 return BitMask.test(uint8(src), pos);
             else if(typeof(T) == typeof(ushort))
-                 return BitMask.test(in uint16(in src), pos);
+                 return BitMask.test(uint16(src), pos);
             else if(typeof(T) == typeof(uint))
-                 return BitMask.test(in uint32(in src), pos);
+                 return BitMask.test(uint32(src), pos);
             else 
-                 return BitMask.test(in uint64(in src), pos);
+                 return BitMask.test(uint64(src), pos);
         }
 
         [MethodImpl(Inline)]
-        static bool testf<T>(in T src, int pos)
+        static bool testf<T>(T src, int pos)
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                 return BitMask.test(in float32(in src), pos);
+                 return BitMask.test(float32(src), pos);
             else if(typeof(T) == typeof(double))
-                 return BitMask.test(in float64(in src), pos);
+                 return BitMask.test(float64(src), pos);
             else
                 throw unsupported<T>();
         }

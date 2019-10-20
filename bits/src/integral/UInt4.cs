@@ -318,7 +318,7 @@ namespace Z0
         /// <param name="pos">The 0-based absolute bit position</param>
         [MethodImpl(Inline)]
         public bool TestBit(byte pos)
-            => pos < BitCount ? BitMask.test(in data, pos) : false;
+            => pos < BitCount ? BitMask.test(data, pos) : false;
 
         /// <summary>
         /// Multiplies the operands
@@ -395,7 +395,7 @@ namespace Z0
         public UInt4 Lo
         {
             [MethodImpl]
-            get => FromByte(Bits.between(in data,0, 1));
+            get => FromByte(Bits.between(data,0, 1));
             
             [MethodImpl(Inline)]
             set 
@@ -412,7 +412,7 @@ namespace Z0
         public UInt4 Hi
         {
             [MethodImpl]
-            get => FromByte(Bits.between(in data,2, 3));
+            get => FromByte(Bits.between(data,2, 3));
 
             [MethodImpl]
             set

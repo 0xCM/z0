@@ -70,7 +70,7 @@ namespace Z0
         Bit GetBit(int row, int col)
         {
             var cell = GridLayout.Row(row)[col];
-            return BitMaskG.testbit(in bits[cell.Segment], cell.Offset);                    
+            return BitMaskG.testbit(bits[cell.Segment], cell.Offset);                    
         }
 
         [MethodImpl(Inline)]

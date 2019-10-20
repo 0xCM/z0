@@ -36,18 +36,29 @@ namespace Z0
             || typeof(T) == typeof(ushort) 
             || typeof(T) == typeof(uint) 
             || typeof(T) == typeof(ulong))
-                return bitsequ(in src);
+                return bitseq_u(in src);
             else if(typeof(T) == typeof(sbyte) 
             || typeof(T) == typeof(short) 
             || typeof(T) == typeof(int) 
             || typeof(T) == typeof(long))
-                return bitseqi(in src);
+                return bitseq_i(in src);
             else 
-                return bitseqf(in src);
+                return bitseq_f(in src);
         }        
 
+        /// <summary>
+        /// Describes an identified byte
+        /// </summary>
+        /// <param name="value">The value of the byte to describe</param>
         [MethodImpl(Inline)]
-        static ReadOnlySpan<byte> bitseqf<T>(in T src)
+        public static ByteInfo info(byte value)
+        {
+            ref readonly var b = ref U8Index[value];
+            return new ByteInfo(b.index, b.bitseq, b.bitchars, b.text);
+        }
+
+        [MethodImpl(Inline)]
+        static ReadOnlySpan<byte> bitseq_f<T>(in T src)
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
@@ -59,7 +70,7 @@ namespace Z0
         }        
 
         [MethodImpl(Inline)]
-        static ReadOnlySpan<byte> bitseqi<T>(in T src)
+        static ReadOnlySpan<byte> bitseq_i<T>(in T src)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
@@ -73,7 +84,7 @@ namespace Z0
         }        
 
         [MethodImpl(Inline)]
-        static ReadOnlySpan<byte> bitsequ<T>(in T src)
+        static ReadOnlySpan<byte> bitseq_u<T>(in T src)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -85,16 +96,6 @@ namespace Z0
             else 
                 return ReadSeq(uint64(src));
         }   
-
-        /// <summary>
-        /// Describes an identified byte
-        /// </summary>
-        /// <param name="value">The value of the byte to describe</param>
-        public static ByteInfo info(byte value)
-        {
-            ref readonly var b = ref U8Index[value];
-            return new ByteInfo(b.index, b.bitseq, b.bitchars, b.text);
-        }
             
         /// <summary>
         /// Constructs a sequence of 8 characters {ci} := [c7,...c0] over the domain {'0','1'} according to whether the
@@ -127,7 +128,8 @@ namespace Z0
         /// bit in the i'th position of the source is respecively disabled/enabled
         /// </summary>
         /// <param name="value">The source value</param>
-        static ReadOnlySpan<byte> ReadSeq(byte value)
+        [MethodImpl(Inline)]
+        static ReadOnlySpan<byte> ReadSeq(byte value)        
             => U8Index[value].bitseq;
         
         /// <summary>
@@ -135,6 +137,7 @@ namespace Z0
         /// bit in the i'th position of the source is respecively disabled/enabled. The uppermost bit b7 determines
         /// the sign
         /// </summary>
+        [MethodImpl(Inline)]
         static ReadOnlySpan<byte> ReadSeq(sbyte src)
             => ReadSeq((byte)src);
 
@@ -237,13 +240,15 @@ namespace Z0
         /// </summary>
         /// <param name="offset">The bit offset index</param>
         /// <param name="length">The number of bits to select</param>
-        /// <returns></returns>    
         [MethodImpl(Inline)]
         public static ReadOnlySpan<byte> select(BitSize offset, BitSize length)
             => BitSeqData.Slice(offset,length);
 
         static ref readonly byte BitSeqHead 
-            => ref BitSeqData[0];
+        {
+            [MethodImpl(Inline)]
+            get => ref BitSeqData[0];
+        }
 
         static ReadOnlySpan<byte> BitSeqData 
             => new byte[]

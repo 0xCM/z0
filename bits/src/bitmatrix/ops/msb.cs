@@ -14,6 +14,15 @@ namespace Z0
     partial class BitMatrix
     {
 
+        public static BitMatrix64 nlz(BitMatrix64 A)
+        {
+            var rows = A.RowCount;
+            var dst = BitMatrix64.Alloc();
+            for(int i=0, j=rows - 1; i < rows; i++, j--)            
+                dst[i] = gbits.nlz(A[i++]);
+            return dst;            
+        }
+
         /// <summary>
         /// Computes the position of the MSB for each row. 
         /// </summary>
@@ -23,7 +32,7 @@ namespace Z0
         {
             var x = Vector.alloc<N64,byte>();            
             for(var i = 0; i<A.RowCount; i++)
-                x[i] = Bits.nlz(A[i]);
+                x[i] = (byte)Bits.nlz(A[i]);
             return x;
         }
 
@@ -31,7 +40,7 @@ namespace Z0
         {
             var x = Vector.alloc<N64,byte>();            
             for(var i = 0; i<A.RowCount; i++)
-                x[i] = Bits.ntz(A[i]);
+                x[i] = (byte)Bits.ntz(A[i]);
             return x;
         }
 

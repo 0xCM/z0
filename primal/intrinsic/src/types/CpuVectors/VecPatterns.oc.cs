@@ -19,19 +19,19 @@ namespace Z0
 
     partial class inxvoc
     {
-        public static Vec128<byte> ones_128x8u()
+        public static Vector128<byte> ones_128x8u()
             => Vec128Pattern.ones<byte>();
 
-        public static Vec128<ulong> ones_128x64u()
+        public static Vector128<ulong> ones_128x64u()
             => Vec128Pattern.ones<ulong>();
 
-        public static Vec256<byte> ones_256x8u()
+        public static Vector256<byte> ones_256x8u()
             => Vec256Pattern.ones<byte>();
 
-        public static Vec256<ulong> ones_256x64u()
+        public static Vector256<ulong> ones_256x64u()
             => Vec256Pattern.ones<ulong>();
 
-        public static Vec256<double> ones_256x64f()
+        public static Vector256<double> ones_256x64f()
             => Vec256Pattern.ones<double>();
 
     }

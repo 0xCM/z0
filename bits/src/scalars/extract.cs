@@ -32,7 +32,7 @@ namespace Z0
         /// <param name="length">The number of bits that should be extracted</param>
         [MethodImpl(Inline)]
         public static byte extract(byte src, byte start, byte length)        
-            => (byte)BitFieldExtract(src, start, length);
+            => (byte)BitFieldExtract((uint)src, start, length);
 
         /// <summary>
         /// Extracts a contiguous range of bits from the source
@@ -52,7 +52,7 @@ namespace Z0
         /// <param name="length">The number of bits that should be extracted</param>
         [MethodImpl(Inline)]
         public static ushort extract(ushort src, byte start, byte length)        
-            => (ushort)BitFieldExtract(src, start, length);
+            => (ushort)BitFieldExtract((uint)src, start, length);
 
         /// <summary>
         /// Extracts a contiguous range of bits from the source

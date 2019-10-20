@@ -19,7 +19,7 @@ namespace Z0
         /// <param name="random">The random source</param>
         [MethodImpl(Inline)]
         public static BitMatrix4 BitMatrix4(this IPolyrand random)
-            => Z0.BitMatrix4.Define(random.Next<ushort>());
+            => Z0.BitMatrix4.From(random.Next<ushort>());
 
         /// <summary>
         /// Produces a 4x4 bitmatrix from a random source
@@ -27,7 +27,7 @@ namespace Z0
         /// <param name="random">The random source</param>
         [MethodImpl(Inline)]
         public static BitMatrix4 BitMatrix(this IPolyrand random, N4 n4)
-            => Z0.BitMatrix4.Define(random.Next<ushort>());
+            => Z0.BitMatrix4.From(random.Next<ushort>());
 
         /// <summary>
         /// Produces a 8x8 bitmatrix from a random source

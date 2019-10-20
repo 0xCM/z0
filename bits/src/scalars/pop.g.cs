@@ -22,29 +22,50 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The source value type</typeparam>
         [MethodImpl(Inline)]
-        public static uint pop<T>(in T src)
+        public static uint pop<T>(T src)
             where T : unmanaged
         {        
-            if(typeof(T) == typeof(sbyte))
-                 return Bits.pop(int8(in src));
-            else if(typeof(T) == typeof(byte))
-                 return Bits.pop(uint8(in src));
-            else if(typeof(T) == typeof(short))
-                 return Bits.pop(int16(in src));
-            else if(typeof(T) == typeof(ushort))
-                 return Bits.pop(uint16(in src));
-            else if(typeof(T) == typeof(int))
-                 return Bits.pop(int32(in src));
-            else if(typeof(T) == typeof(uint))
-                 return Bits.pop(uint32(in src));
-            else if(typeof(T) == typeof(long))
-                 return Bits.pop(int64(in src));
-            else if(typeof(T) == typeof(ulong))
-                 return Bits.pop(uint64(in src));
-            else 
+            if(typeof(T) == typeof(byte) 
+                || typeof(T) == typeof(ushort) 
+                || typeof(T) == typeof(uint) 
+                || typeof(T) == typeof(ulong))
+                    return pop_u(src);
+            else if(typeof(T) == typeof(sbyte) 
+                || typeof(T) == typeof(short)
+                || typeof(T) == typeof(int) 
+                || typeof(T) == typeof(long))
+                    return pop_i(src);
+            else
                 throw unsupported<T>();
         }
 
+        [MethodImpl(Inline)]
+        static uint pop_i<T>(T src)
+            where T : unmanaged
+        {        
+            if(typeof(T) == typeof(sbyte))
+                 return Bits.pop(int8(src));
+            else if(typeof(T) == typeof(short))
+                 return Bits.pop(int16(src));
+            else if(typeof(T) == typeof(int))
+                 return Bits.pop(int32(src));
+            else 
+                 return Bits.pop(int64(src));
+        }
+
+        [MethodImpl(Inline)]
+        static uint pop_u<T>(T src)
+            where T : unmanaged
+        {        
+            if(typeof(T) == typeof(byte))
+                 return Bits.pop(uint8(src));
+            else if(typeof(T) == typeof(ushort))
+                 return Bits.pop(uint16(src));
+            else if(typeof(T) == typeof(uint))
+                 return Bits.pop(uint32(src));
+            else 
+                 return Bits.pop(uint64(src));
+        }
  
     }
 }

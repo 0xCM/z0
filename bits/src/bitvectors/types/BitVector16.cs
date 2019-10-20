@@ -592,7 +592,7 @@ namespace Z0
         /// <param name="last">The last bit position</param>
         [MethodImpl(Inline)]
         public BitVector16 Between(BitPos first, BitPos last)
-            => Bits.between(in data, first, last);
+            => Bits.between(data, first, last);
         
         /// <summary>
         /// Populates a target vector with specified source bits
@@ -651,7 +651,7 @@ namespace Z0
         /// <param name="pos">The bit position</param>
         [MethodImpl(Inline)]
         public readonly bool Test(BitPos pos)
-            => BitMask.test(in data, pos);
+            => BitMask.test(data, pos);
 
         /// <summary>
         /// Reads a bit value

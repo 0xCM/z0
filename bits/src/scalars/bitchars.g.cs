@@ -88,7 +88,7 @@ namespace Z0
         {
             const int len = 16;
             const int midpoint = 8;
-            (var lo, var hi) = Bits.split(src);
+            Bits.split(src, out var lo, out var hi);
             Span<char> dst = new char[len];
             BitStore.bitchars(lo).CopyTo(dst,0);
             BitStore.bitchars(hi).CopyTo(dst,midpoint);
@@ -117,7 +117,7 @@ namespace Z0
         {
             const int len = 32;
             const int midpoint = 16;
-            (var lo, var hi) = Bits.split(src);
+            Bits.split(src,out var lo, out var hi);
             Span<char> dst = new char[len];
             bitchars(lo).CopyTo(dst,0);
             bitchars(hi).CopyTo(dst,midpoint);
@@ -141,7 +141,7 @@ namespace Z0
         {
             const int len = 64;
             const int midpoint = 32;
-            (var lo, var hi) = Bits.split(src);
+            Bits.split(src, out var lo, out var hi);
             Span<char> dst = new char[len];
             bitchars(lo).CopyTo(dst,0);
             bitchars(hi).CopyTo(dst,midpoint);
@@ -153,7 +153,7 @@ namespace Z0
         {
             const int len = 64;
             const int midpoint = 32;
-            (var lo, var hi) = Bits.split(src);
+            Bits.split(src,out var lo, out var hi);
             Span<char> dst = new char[len];
             bitchars(lo).CopyTo(dst,0);
             bitchars(hi).CopyTo(dst,midpoint);

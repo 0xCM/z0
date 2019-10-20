@@ -128,6 +128,42 @@ namespace Z0
             }
         }
 
+        public void t_seqential_op_check()
+        {
+            var a = variable(0);
+            var b = variable(1);
+
+            var expr1 = and(a, b);
+            var expr2 = or(a, b);
+            var expr3 = xor(expr1, expr2);
+            var expr4 = nand(expr2, expr3);
+            var expr5 = nor(expr3, expr4);
+            var expr6 = xnor(expr4, expr5);
+            foreach(var seq in bitcombo(n2))
+            {
+                var s0 = seq[0];
+                var s1 = seq[1];
+
+                var e1 = BitOps.and(s0,s1);
+                var e2 = BitOps.or(s0,s1);
+                var e3 = BitOps.xor(e1,e2);
+                var e4 = BitOps.nand(e2,e3);
+                var e5 = BitOps.nor(e3,e4);
+                var e6 = BitOps.xnor(e4,e5);
+                var expect = e6;
+
+                a.Set(s0);
+                b.Set(s1);
+                var actual = eval(expr6);
+                Claim.eq(expect,actual);
+            
+
+            }
+            
+
+
+
+        }
         public void t_sop_expr()
         {
             var v1 = variable(1);

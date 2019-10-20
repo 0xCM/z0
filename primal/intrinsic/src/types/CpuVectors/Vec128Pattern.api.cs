@@ -31,7 +31,7 @@ namespace Z0
         /// </summary>
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
-        public static Vec128<T> ones<T>()
+        public static Vector128<T> ones<T>()
             where T : unmanaged                    
                  => ginx.vones128<T>();
 
@@ -74,8 +74,5 @@ namespace Z0
         public static Vec128<T> Swap<T>(params Swap[] swaps)
             where T : unmanaged  
                 => Vec128Pattern<T>.Increments(default(T), swaps);
-
     }
-
-
 }

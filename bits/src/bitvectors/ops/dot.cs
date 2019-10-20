@@ -20,17 +20,23 @@ namespace Z0
         public static Bit dot<T>(BitVector<T> x, BitVector<T> y)
             where T : unmanaged
         {
-            if(x.SingleCell && y.SingleCell)
-                return gmath.odd(gbits.pop(gmath.and(x.Head,y.Head)));
-            else 
-                return dot_multicell(x,y);
+            var result = Bit.Off;
+            for(var i=0; i<x.Length; i++)
+                result ^= x[i] & y[i];
+            return result;
+
+            // if(x.SingleCell && y.SingleCell)
+            //     return gmath.odd(gbits.pop(gmath.and(x.Head, y.Head)));
+            // else 
+            //     return dot_multicell(x,y);
+            //return odd(gbits.pop(gmath.and(x.Head, y.Head)));              
         }
 
         /// <summary>
         /// Computes the scalar product of the source vector and another
         /// </summary>
         /// <param name="y">The right operand</param>
-        public static Bit dot(BitVector4 x, BitVector4 y)
+        public static bit dot(BitVector4 x, BitVector4 y)
             => odd((uint)Bits.pop(x.data & y.data));              
 
         /// <summary>
@@ -38,7 +44,7 @@ namespace Z0
         /// </summary>
         /// <param name="y">The right operand</param>
         [MethodImpl(Inline)]
-        public static Bit dot(BitVector8 x, BitVector8 y)
+        public static bit dot(BitVector8 x, BitVector8 y)
             => odd(Bits.pop(x.data & y.data));              
 
         /// <summary>
@@ -46,7 +52,7 @@ namespace Z0
         /// </summary>
         /// <param name="y">The right operand</param>
         [MethodImpl(Inline)]
-        public static Bit dot(BitVector16 x, BitVector16 y)
+        public static bit dot(BitVector16 x, BitVector16 y)
             => odd(Bits.pop(x.data & y.data));              
 
         /// <summary>
@@ -54,7 +60,7 @@ namespace Z0
         /// </summary>
         /// <param name="y">The right operand</param>
         [MethodImpl(Inline)]
-        public static Bit dot(BitVector32 x, BitVector32 y)
+        public static bit dot(BitVector32 x, BitVector32 y)
             => odd(Bits.pop(x.data & y.data));              
 
         /// <summary>
@@ -62,7 +68,7 @@ namespace Z0
         /// </summary>
         /// <param name="y">The right operand</param>
         [MethodImpl(Inline)]
-        public static Bit dot(BitVector64 x, BitVector64 y)
+        public static bit dot(BitVector64 x, BitVector64 y)
             => odd(Bits.pop(x.data & y.data));
 
         /// <summary>

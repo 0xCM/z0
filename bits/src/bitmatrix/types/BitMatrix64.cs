@@ -18,14 +18,14 @@ namespace Z0
     /// <summary>
     /// Defines a 64x64 matrix of bits
     /// </summary>
-    public ref struct BitMatrix64
+    public struct BitMatrix64 : IPrimalSquare<BitMatrix64,ulong>
     {                
-        internal Span<ulong> data;
+        ulong[] data;
 
         /// <summary>
         /// The matrix order
         /// </summary>
-        public const int N = 64;
+        public const uint N = 64;
 
         /// <summary>
         /// The number of bits per row
@@ -40,17 +40,23 @@ namespace Z0
         /// <summary>
         /// The number of bits apprehended by the matrix
         /// </summary>
-        public const uint TotalBitCount = N * N;
+        public const uint TotalBitCount = RowBitCount * ColBitCount;
                         
         /// <summary>
-        /// The (aligned) number of bytes needed for a row
+        /// The number of bytes needed for a row
         /// </summary>
-        public const uint RowByteCount = RowBitCount/8;
+        public const uint RowByteCount = RowBitCount >> 3;
 
         /// <summary>
-        /// The (aligned) number of bytes needed for a column
+        /// The number of bytes needed for a column
         /// </summary>
-        public const uint ColByteCount = ColBitCount/8;
+        public const uint ColByteCount = ColBitCount >> 3;
+
+        /// <summary>
+        /// To total number of bytes required to store the matrix data
+        /// </summary>
+        public const uint TotalByteCount = TotalBitCount >> 3;
+
 
         /// <summary>
         /// Defines the 64x64 identity bitmatrix
@@ -76,15 +82,15 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static BitMatrix64 From(Span<ulong> src)        
-            => new BitMatrix64(src);
+            => new BitMatrix64(src.ToArray());
 
         [MethodImpl(Inline)]
         public static BitMatrix64 From(in Span<N64,ulong> src)        
-            => new BitMatrix64(src);
+            => new BitMatrix64(src.ToArray());
 
         [MethodImpl(Inline)]
         public static BitMatrix64 From(Span<byte> src)        
-            => new BitMatrix64(src.AsUInt64());
+            => new BitMatrix64(src.AsUInt64().ToArray());
 
         [MethodImpl(Inline)]
         public static BitMatrix64 operator & (BitMatrix64 A, BitMatrix64 B)
@@ -129,18 +135,18 @@ namespace Z0
             this.data = src;
         }
 
-        [MethodImpl(Inline)]
-        BitMatrix64(Span<ulong> src)
-        {                        
-            require(src.Length == Pow2.T06);
-            this.data = src;
-        }
+        // [MethodImpl(Inline)]
+        // BitMatrix64(Span<ulong> src)
+        // {                        
+        //     require(src.Length == Pow2.T06);
+        //     this.data = src;
+        // }
 
-        [MethodImpl(Inline)]
-        BitMatrix64(Span<N64,ulong> src)
-        {                        
-            this.data = src;
-        }
+        // [MethodImpl(Inline)]
+        // BitMatrix64(Span<N64,ulong> src)
+        // {                        
+        //     this.data = src;
+        // }
 
         /// <summary>
         /// Specifies the number of rows in the matrix
@@ -148,7 +154,7 @@ namespace Z0
         public readonly int RowCount
         {
             [MethodImpl(Inline)]
-            get => N;
+            get => (int)N;
         }
 
         /// <summary>
@@ -157,7 +163,7 @@ namespace Z0
         public readonly int ColCount
         {
             [MethodImpl(Inline)]
-            get => N;
+            get => (int)N;
         }
 
         /// <summary>
@@ -166,7 +172,7 @@ namespace Z0
         public Span<byte> Bytes
         {
             [MethodImpl(Inline)]
-            get => data.AsBytes();
+            get => data.AsSpan().AsBytes();
         }
 
         /// <summary>
@@ -185,7 +191,7 @@ namespace Z0
         /// <param name="col">The column index</param>
         [MethodImpl(Inline)]
         public readonly Bit GetBit(int row, int col)
-            => BitMask.test(in data[row], col);
+            => BitMask.test(data[row], col);
 
         /// <summary>
         /// Sets the bit in a specified cell
@@ -321,12 +327,34 @@ namespace Z0
             return ref dst;
         }
 
+        [MethodImpl(Inline)]
+        public void Load(int row, out Vector256<ulong> dst)
+            => dst = dinx.vloadu(in data[row], out dst);
+
         /// <summary>
         /// Counts the number of enabled bits in the matrix
         /// </summary>
         [MethodImpl(Inline)] 
         public readonly BitSize Pop()
             => bitspan.pop(data);
+
+        /// <summary>
+        /// The data enclosed by the matrix
+        /// </summary>
+        public ulong[] Rows
+        {
+            [MethodImpl(Inline)] 
+            get => data;
+        }
+
+        /// <summary>
+        /// A reference to the first row of the matrix
+        /// </summary>
+        public ref ulong Head
+        {
+            [MethodImpl(Inline)] 
+            get => ref data[0];
+        }
 
         /// <summary>
         /// Computes the product the source matrix and the operand in-place

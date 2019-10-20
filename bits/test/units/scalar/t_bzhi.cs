@@ -19,7 +19,7 @@ namespace Z0
 
             var dst = 0ul;
             Bits.puthi(7,ref dst);
-            (var lo, var hi) = Bits.split(dst);
+            Bits.split(dst,out var lo, out var hi);
 
             Claim.eq(7,hi);
             Claim.eq(0,lo);

@@ -1,4 +1,4 @@
-// 2019-10-18 23:21:13:966
+// 2019-10-19 23:11:07:720
 void cir_fa_8b(Bit x1, Bit x2, Bit x3, out Bit x7, out Bit x8)
 {
     IL_0000: ldarg.0

@@ -1,4 +1,44 @@
-// 2019-10-18 23:21:11:677
+// 2019-10-19 23:11:05:324
+BitVector8 rotl(BitVector8 x, int offset)
+{
+    IL_0000: ldarga.s x
+    IL_0002: call System.Byte Z0.BitVector8::get_Scalar()
+    IL_0007: ldarg.1
+    IL_0008: call System.Byte Z0.Bits::rotl(System.Byte,System.Int32)
+    IL_000D: call Z0.BitVector8 Z0.BitVector8::op_Implicit(System.Byte)
+    IL_0012: ret
+
+}
+BitVector16 rotl(BitVector16 x, int offset)
+{
+    IL_0000: ldarga.s x
+    IL_0002: call System.UInt16 Z0.BitVector16::get_Scalar()
+    IL_0007: ldarg.1
+    IL_0008: call System.UInt16 Z0.Bits::rotl(System.UInt16,System.Int32)
+    IL_000D: call Z0.BitVector16 Z0.BitVector16::op_Implicit(System.UInt16)
+    IL_0012: ret
+
+}
+BitVector32 rotl(BitVector32 x, int offset)
+{
+    IL_0000: ldarga.s x
+    IL_0002: call System.UInt32 Z0.BitVector32::get_Scalar()
+    IL_0007: ldarg.1
+    IL_0008: call System.UInt32 Z0.Bits::rotl(System.UInt32,System.Int32)
+    IL_000D: call Z0.BitVector32 Z0.BitVector32::op_Implicit(System.UInt32)
+    IL_0012: ret
+
+}
+BitVector64 rotl(BitVector64 x, int offset)
+{
+    IL_0000: ldarga.s x
+    IL_0002: call System.UInt64 Z0.BitVector64::get_Scalar()
+    IL_0007: ldarg.1
+    IL_0008: call System.UInt64 Z0.Bits::rotl(System.UInt64,System.Int32)
+    IL_000D: call Z0.BitVector64 Z0.BitVector64::op_Implicit(System.UInt64)
+    IL_0012: ret
+
+}
 BitVector4 rotr(BitVector4 x, int offset)
 {
     IL_0000: ldarga.s x
@@ -1595,45 +1635,5 @@ BitVector4 rotl(BitVector4 x, int offset)
     IL_000E: ldloca.s V_0
     IL_0010: call Z0.BitVector4 Z0.BitVector4::op_Implicit(System.Byte&)
     IL_0015: ret
-
-}
-BitVector8 rotl(BitVector8 x, int offset)
-{
-    IL_0000: ldarga.s x
-    IL_0002: call System.Byte Z0.BitVector8::get_Scalar()
-    IL_0007: ldarg.1
-    IL_0008: call System.Byte Z0.Bits::rotl(System.Byte,System.Int32)
-    IL_000D: call Z0.BitVector8 Z0.BitVector8::op_Implicit(System.Byte)
-    IL_0012: ret
-
-}
-BitVector16 rotl(BitVector16 x, int offset)
-{
-    IL_0000: ldarga.s x
-    IL_0002: call System.UInt16 Z0.BitVector16::get_Scalar()
-    IL_0007: ldarg.1
-    IL_0008: call System.UInt16 Z0.Bits::rotl(System.UInt16,System.Int32)
-    IL_000D: call Z0.BitVector16 Z0.BitVector16::op_Implicit(System.UInt16)
-    IL_0012: ret
-
-}
-BitVector32 rotl(BitVector32 x, int offset)
-{
-    IL_0000: ldarga.s x
-    IL_0002: call System.UInt32 Z0.BitVector32::get_Scalar()
-    IL_0007: ldarg.1
-    IL_0008: call System.UInt32 Z0.Bits::rotl(System.UInt32,System.Int32)
-    IL_000D: call Z0.BitVector32 Z0.BitVector32::op_Implicit(System.UInt32)
-    IL_0012: ret
-
-}
-BitVector64 rotl(BitVector64 x, int offset)
-{
-    IL_0000: ldarga.s x
-    IL_0002: call System.UInt64 Z0.BitVector64::get_Scalar()
-    IL_0007: ldarg.1
-    IL_0008: call System.UInt64 Z0.Bits::rotl(System.UInt64,System.Int32)
-    IL_000D: call Z0.BitVector64 Z0.BitVector64::op_Implicit(System.UInt64)
-    IL_0012: ret
 
 }

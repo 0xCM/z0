@@ -123,9 +123,9 @@ namespace Z0
                 var x = src[i];
                 for(byte j =0; j< tLen; j++)
                 {
-                    var before = gbits.test(in x, j);
+                    var before = gbits.test(x, j);
                     BitMaskG.toggle(ref x, j);
-                    var after = gbits.test(in x, j);
+                    var after = gbits.test(x, j);
                     Claim.neq(before, after);
                     BitMaskG.toggle(ref x, j);
                     Claim.eq(x, src[i]);

@@ -57,7 +57,7 @@ namespace Z0
         public GfPoly16(ushort data)
         {
             this.data = data;
-            this.degree = math.sub((byte)15,Bits.nlz(data));
+            this.degree = (byte)(15 - Bits.nlz(data));
         }
 
         /// <summary>

@@ -111,7 +111,7 @@ namespace Z0
         readonly Bit GetBit(int row, int col)
         {
             var cell = GridLayout.Row(row)[col];
-            return gbits.test(in Data[cell.Segment], cell.Offset);                    
+            return gbits.test(Data[cell.Segment], cell.Offset);                    
         }
 
         [MethodImpl(Inline)]

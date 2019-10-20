@@ -18,16 +18,16 @@ namespace Z0
         /// </summary>
         /// <param name="src">The bit source</param>
         [MethodImpl(Inline)]
-        public static byte posl(byte src)
-            => Pow2.inv(blsi(src));
+        public static uint posl(byte src)
+            => log2(blsi(src));
 
         /// <summary>
         /// Determines the position of the least on bit
         /// </summary>
         /// <param name="src">The bit source</param>
         [MethodImpl(Inline)]
-        public static ushort posl(ushort src)
-            => Pow2.inv(blsi(src));
+        public static uint posl(ushort src)
+            => log2(blsi(src));
 
         /// <summary>
         /// Determines the position of the least on bit
@@ -35,14 +35,14 @@ namespace Z0
         /// <param name="src">The bit source</param>
         [MethodImpl(Inline)]
         public static uint posl(uint src)
-            => Pow2.inv(blsi(src));
+            => log2(blsi(src));
 
         /// <summary>
         /// Determines the position of the least on bit
         /// </summary>
         /// <param name="src">The bit source</param>
         [MethodImpl(Inline)]
-        public static ulong posl(ulong src)
-            => Pow2.inv(blsi(src));    
+        public static uint posl(ulong src)
+            => log2(blsi(src));    
     }
 }

@@ -15,21 +15,21 @@ namespace Z0
     partial class gbits
     {        
         /// <summary>
-        /// Counts the number of leading zero bits in the source
+        /// Counts the number of leading zero bits the source
         /// </summary>
         /// <param name="src">The bit source</param>
         [MethodImpl(Inline)]
-        public static byte nlz<T>(in T src)
+        public static uint nlz<T>(T src)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                 return Bits.nlz(AsIn.uint8(in asRef(in src)));
+                 return Bits.nlz(AsIn.uint8(src));
             else if(typeof(T) == typeof(ushort))
-                 return Bits.nlz(AsIn.uint16(in asRef(in src)));
+                 return Bits.nlz(AsIn.uint16(src));
             else if(typeof(T) == typeof(uint))
-                 return Bits.nlz(AsIn.uint32(in asRef(in src)));
+                 return Bits.nlz(AsIn.uint32(src));
             else if(typeof(T) == typeof(ulong))
-                 return Bits.nlz(AsIn.uint64(in asRef(in src)));
+                 return Bits.nlz(AsIn.uint64(src));
             else 
                 throw unsupported<T>();
         }

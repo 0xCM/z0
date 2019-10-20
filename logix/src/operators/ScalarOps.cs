@@ -66,6 +66,21 @@ namespace Z0
                 => gmath.xnor(a,b);
 
         [MethodImpl(Inline)]
+        public static T left<T>(T a, T b)
+            where T : unmanaged
+            => a;
+
+        [MethodImpl(Inline)]
+        public static T right<T>(T a, T b)
+            where T : unmanaged
+            => b;
+
+        [MethodImpl(Inline)]
+        public static T rightnot<T>(T a, T b)
+            where T : unmanaged
+                => not(b);
+
+        [MethodImpl(Inline)]
         public static T @false<T>(T a, T b)
             where T:unmanaged
                 => default;

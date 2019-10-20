@@ -157,7 +157,7 @@ namespace Z0
         public Bit GetBit(int row, int col)
         {
             var cell = Layout.Row(row)[col];
-            return gbits.test(in Data[cell.Segment], cell.Offset);                    
+            return gbits.test(Data[cell.Segment], cell.Offset);                    
         }
 
         /// <summary>

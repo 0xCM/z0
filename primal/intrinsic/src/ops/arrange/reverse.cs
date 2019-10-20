@@ -14,11 +14,14 @@ namespace Z0
     {
         
 
-        static readonly Vec256<int> MRev256i32 = Vec256.FromParts(7, 5, 6, 4, 3, 2, 1, 0);
+        static Vec256<int> MRev256i32 
+            => Vec256.FromParts(7, 5, 6, 4, 3, 2, 1, 0);
         
-        static readonly Vec256<uint> MRev256u32 = Vec256.FromParts(7u, 6u, 5u, 4u, 3u, 2u, 1u, 0u);
+        static Vec256<uint> MRev256u32 
+            => Vec256.FromParts(7u, 6u, 5u, 4u, 3u, 2u, 1u, 0u);
         
-        static readonly Vec256<int> MRev256f32 = Vec256.FromParts(7, 6, 5, 4, 3, 2, 1, 0);    
+        static Vec256<int> MRev256f32 
+            => Vec256.FromParts(7, 6, 5, 4, 3, 2, 1, 0);    
 
         [MethodImpl(Inline)]
         public static Vec128<byte> swap(in Vec128<byte> src, params Swap[] swaps)

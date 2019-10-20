@@ -36,8 +36,6 @@ namespace Z0
         public static ulong and_64u(ulong a, ulong b)
             => ScalarOps.and(a,b);
 
-        public static BitVector64 and_bv64u(BitVector64 a, BitVector64 b)
-            => BitVectorOps.and(a,b);
 
         public static Vector128<ulong> and_v128x64u(Vector128<ulong> a, Vector128<ulong> b)
             => Cpu128Ops.and(a,b);
@@ -51,9 +49,6 @@ namespace Z0
         public static ulong or_64u(ulong a, ulong b)
             => ScalarOps.or(a,b);
 
-        public static BitVector64 or_bv64u(BitVector64 a, BitVector64 b)
-            => BitVectorOps.or(a,b);
-
         public static Vector128<ulong> or_v128x64u(Vector128<ulong> a, Vector128<ulong> b)
             => Cpu128Ops.or(a,b);
 
@@ -65,9 +60,6 @@ namespace Z0
         public static ulong xor_64u(ulong a, ulong b)
             => ScalarOps.xor(a,b);
 
-        public static BitVector64 xor_bv64u(BitVector64 a, BitVector64 b)
-            => BitVectorOps.xor(a,b);
-
         public static Vector128<ulong> xor_v128x64u(Vector128<ulong> a, Vector128<ulong> b)
             => Cpu128Ops.xor(a,b);
 
@@ -78,9 +70,6 @@ namespace Z0
 
         public static ulong not_64u(ulong a)
             => ScalarOps.not(a);
-
-        public static BitVector64 not_bv64u(BitVector64 a)
-            => BitVectorOps.not(a);
 
         public static Vector128<ulong> not_v128x64u(Vector128<ulong> a)
             => Cpu128Ops.not(a);
@@ -94,9 +83,6 @@ namespace Z0
         public static ulong nand_64u(ulong a, ulong b)
             => ScalarOps.nand(a,b);
 
-        public static BitVector64 nand_bv64u(BitVector64 a, BitVector64 b)
-            => BitVectorOps.nand(a,b);
-
         public static Vector128<ulong> nand_v128x64u(Vector128<ulong> a, Vector128<ulong> b)
             => Cpu128Ops.nand(a,b);
 
@@ -106,9 +92,6 @@ namespace Z0
         // ~
         public static ulong nor_64u(ulong a, ulong b)
             => ScalarOps.nor(a,b);
-
-        public static BitVector64 nor_bv64u(BitVector64 a, BitVector64 b)
-            => BitVectorOps.nor(a,b);
 
         public static Vector128<ulong> nor_v128x64u(Vector128<ulong> a, Vector128<ulong> b)
             => Cpu128Ops.nor(a,b);
@@ -121,9 +104,6 @@ namespace Z0
         public static ulong xnor_64u(ulong a, ulong b)
             => ScalarOps.xnor(a,b);
 
-        public static BitVector64 xnor_bv64u(BitVector64 a, BitVector64 b)
-            => BitVectorOps.xnor(a,b);
-
         public static Vector128<ulong> xnor_v128x64u(Vector128<ulong> a, Vector128<ulong> b)
             => Cpu128Ops.xnor(a,b);
 
@@ -135,9 +115,6 @@ namespace Z0
         public static ulong xor1_64u(ulong a)
             => ScalarOps.xor1(a);
 
-        public static BitVector64 xor1_bv64u(BitVector64 a)
-            => BitVectorOps.xor1(a);
-
         public static Vector128<ulong> xor1_v128x64u(Vector128<ulong> a)
             => Cpu128Ops.xor1(a);
 
@@ -146,107 +123,69 @@ namespace Z0
 
         // ~
 
-        // a ? b : c
         public static ulong select_64u(ulong a, ulong b, ulong c)
             => ScalarOps.select(a,b,c);
 
-        // a ? b : c
-        public static BitVector64 select_bv64u(BitVector64 a, BitVector64 b, BitVector64 c)
-            => BitVectorOps.select(a,b,c);
-        
-        // a ? b : c
         public static Vector128<ulong> select_v128x64u(Vector128<ulong> a, Vector128<ulong> b, Vector128<ulong> c)
             => Cpu128Ops.select(a,b,c);
 
-        // a ? b : c
         public static Vector256<ulong> select_v256x64u(Vector256<ulong> a, Vector256<ulong> b, Vector256<ulong> c)
             => Cpu256Ops.select(a,b,c);
 
         // ~ 
 
-        // a nor (b or c)
         public static bit f01_bit(bit a, bit b, bit c)
             => BitOps.f01(a,b,c);
 
-        // a nor (b or c)
         public static ulong f01_64u(ulong a, ulong b, ulong c)
             => ScalarOps.f01(a,b,c);
 
-        // a nor (b or c)
-        public static BitVector64 f01_bv64u(BitVector64 a, BitVector64 b, BitVector64 c)
-            => BitVectorOps.f01(a,b,c);
  
-        // a nor (b or c)
         public static Vector128<ulong> f01_128x64u(Vector128<ulong> a, Vector128<ulong> b, Vector128<ulong> c)
             => Cpu128Ops.f01(a,b,c);
 
-        // a nor (b or c)
         public static Vector256<ulong> f01_256x64u(Vector256<ulong> a, Vector256<ulong> b, Vector256<ulong> c)
             => Cpu256Ops.f01(a,b,c);
 
         // ~ 
 
-        // c and (b nor a)
         public static bit f02_bit(bit a, bit b, bit c)
             => BitOps.f02(a,b,c);
 
-        // c and (b nor a)
         public static ulong f02_64u(ulong a, ulong b, ulong c)
             => ScalarOps.f02(a,b,c);
 
-        // c and (b nor a)
-        public static BitVector64 f02_bv64u(BitVector64 a, BitVector64 b, BitVector64 c)
-            => BitVectorOps.f02(a,b,c);
-
-        // c and (b nor a)
         public static Vector128<ulong> f02_128x64u(Vector128<ulong> a, Vector128<ulong> b, Vector128<ulong> c)
             => Cpu128Ops.f02(a,b,c);
  
-        // c and (b nor a)
         public static Vector256<ulong> f02_256x64u(Vector256<ulong> a, Vector256<ulong> b, Vector256<ulong> c)
             => Cpu256Ops.f02(a,b,c);
 
         // ~ 
 
-         // b nor a
         public static bit f03_bit(bit a, bit b, bit c)
             => BitOps.f03(a,b,c);
 
-         // b nor a
         public static ulong f03_64u(ulong a, ulong b, ulong c)
             => ScalarOps.f03(a,b,c);
 
-         // b nor a
-        public static BitVector64 f03_bv64u(BitVector64 a, BitVector64 b, BitVector64 c)
-            => BitVectorOps.f03(a,b,c);
-
-         // b nor a
         public static Vector128<ulong> f03_128x64u(Vector128<ulong> a, Vector128<ulong> b, Vector128<ulong> c)
             => Cpu128Ops.f03(a,b,c);
 
-         // b nor a
         public static Vector256<ulong> f03_256x64u(Vector256<ulong> a, Vector256<ulong> b, Vector256<ulong> c)
             => Cpu256Ops.f03(a,b,c);
 
         // ~ 
 
-        // b and (a nor c)
         public static bit f04_bit(bit a, bit b, bit c)
             => BitOps.f04(a,b,c);
 
-        // b and (a nor c)
         public static ulong f04_64u(ulong a, ulong b, ulong c)
             => ScalarOps.f04(a,b,c);
 
-        // b and (a nor c)
-        public static BitVector64 f04_bv64u(BitVector64 a, BitVector64 b, BitVector64 c)
-            => BitVectorOps.f04(a,b,c);
-
-        // b and (a nor c)
         public static Vector128<ulong> f04_128x64u(Vector128<ulong> a, Vector128<ulong> b, Vector128<ulong> c)
             => Cpu128Ops.f04(a,b,c);
 
-        // b and (a nor c)
         public static Vector256<ulong> f04_256x64u(Vector256<ulong> a, Vector256<ulong> b, Vector256<ulong> c)
             => Cpu256Ops.f04(a,b,c);
 
@@ -260,11 +199,6 @@ namespace Z0
         public static ulong f05_64u(ulong a, ulong b, ulong c)
             => ScalarOps.f05(a,b,c);
 
-       // c nor a
-        public static BitVector64 f05_bv64u(BitVector64 a, BitVector64 b, BitVector64 c)
-            => BitVectorOps.f05(a,b,c);
-
-        // c nor a
         public static Vector128<ulong> f05_128x64u(Vector128<ulong> a, Vector128<ulong> b, Vector128<ulong> c)
             => Cpu128Ops.f05(a,b,c);
 
@@ -282,43 +216,28 @@ namespace Z0
         public static ulong f06_64u(ulong a, ulong b, ulong c)
             => ScalarOps.f06(a,b,c);
 
-        // not a and (b xor c)
-        public static BitVector64 f06_bv64u(BitVector64 a, BitVector64 b, BitVector64 c)
-            => BitVectorOps.f06(a,b,c);
- 
-        // not a and (b xor c)
         public static Vector128<ulong> f06_128x64u(Vector128<ulong> a, Vector128<ulong> b, Vector128<ulong> c)
             => Cpu128Ops.f06(a,b,c);
 
-        // not a and (b xor c)
         public static Vector256<ulong> f06_256x64u(Vector256<ulong> a, Vector256<ulong> b, Vector256<ulong> c)
             => Cpu256Ops.f06(a,b,c);
 
-        // ~ 
+        // ~ not a and (b xor c)
 
-        // not a and (b xor c)
         public static bit f07_bit(bit a, bit b, bit c)
             => BitOps.f07(a,b,c);
 
-        // not a and (b xor c)
         public static ulong f07_64u(ulong a, ulong b, ulong c)
             => ScalarOps.f07(a,b,c);
 
-        // not a and (b xor c)
-        public static BitVector64 f07_bv64u(BitVector64 a, BitVector64 b, BitVector64 c)
-            => BitVectorOps.f07(a,b,c);
-
-        // not a and (b xor c)
         public static Vector128<ulong> f07_128x64u(Vector128<ulong> a, Vector128<ulong> b, Vector128<ulong> c)
             => Cpu128Ops.f07(a,b,c);
 
-        // not a and (b xor c)
         public static Vector256<ulong> f07_256x64u(Vector256<ulong> a, Vector256<ulong> b, Vector256<ulong> c)
             => Cpu256Ops.f07(a,b,c);
 
-        // ~ 
+        // ~ (not a and b) and c
 
-       // (not a and b) and c
         public static bit f08_bit(bit a, bit b, bit c)
             => BitOps.f08(a,b,c);
 
@@ -326,156 +245,100 @@ namespace Z0
         public static ulong f08_64u(ulong a, ulong b, ulong c)
             => ScalarOps.f08(a,b,c);
 
-       // (not a and b) and c
-        public static BitVector64 f08_bv64u(BitVector64 a, BitVector64 b, BitVector64 c)
-            => BitVectorOps.f08(a,b,c);
-
-        // (not a and b) and c
         public static Vector128<ulong> f08_128x64u(Vector128<ulong> a, Vector128<ulong> b, Vector128<ulong> c)
             => Cpu128Ops.f08(a,b,c);
 
-        // (not a and b) and c
         public static Vector256<ulong> f08_256x64u(Vector256<ulong> a, Vector256<ulong> b, Vector256<ulong> c)
             => Cpu256Ops.f08(a,b,c);
 
-        // ~ 
-        // a nor (b xor c)
+        // ~ a nor (b xor c)
         public static bit f09_bit(bit a, bit b, bit c)
             => BitOps.f09(a,b,c);
 
-        // a nor (b xor c)
         public static ulong f09_64u(ulong a, ulong b, ulong c)
             => ScalarOps.f09(a,b,c);
 
-        // a nor (b xor c)
-        public static BitVector64 f09_bv64u(BitVector64 a, BitVector64 b, BitVector64 c)
-            => BitVectorOps.f09(a,b,c);
-
-        // a nor (b xor c)
         public static Vector128<ulong> f09_128x64u(Vector128<ulong> a, Vector128<ulong> b, Vector128<ulong> c)
             => Cpu128Ops.f09(a,b,c);
 
-        // a nor (b xor c)
         public static Vector256<ulong> f09_256x64u(Vector256<ulong> a, Vector256<ulong> b, Vector256<ulong> c)
             => Cpu256Ops.f09(a,b,c);
 
-        // ~ 
+        // ~ c and (not a)
 
-        // c and (not a)
         public static bit f0a_bit(bit a, bit b, bit c)
             => BitOps.f0a(a,b,c);
 
-       // c and (not a)
         public static ulong f0a_64u(ulong a, ulong b, ulong c)
             => ScalarOps.f0a(a,b,c);
 
-       // c and (not a)
-        public static BitVector64 f0a_bv64u(BitVector64 a, BitVector64 b, BitVector64 c)
-            => BitVectorOps.f0a(a,b,c);
 
-        // c and (not a)
         public static Vector128<ulong> f0a_128x64u(Vector128<ulong> a, Vector128<ulong> b, Vector128<ulong> c)
             => Cpu128Ops.f0a(a,b,c);
 
-        // c and (not a)
         public static Vector256<ulong> f0a_256x64u(Vector256<ulong> a, Vector256<ulong> b, Vector256<ulong> c)
             => Cpu256Ops.f0a(a,b,c);
 
-        // ~ 
+        // ~ not a and ((b xor 1) or c)
 
-        // not a and ((b xor 1) or c)
         public static bit f0b_bit(bit a, bit b, bit c)
             => BitOps.f0b(a,b,c);
 
-        // not a and ((b xor 1) or c)
         public static ulong f0b_64u(ulong a, ulong b, ulong c)
             => ScalarOps.f0b(a,b,c);
 
-       // not a and ((b xor 1) or c)
-        public static BitVector64 f0b_bv64u(BitVector64 a, BitVector64 b, BitVector64 c)
-            => BitVectorOps.f0b(a,b,c);
-
-        // not a and ((b xor 1) or c)
         public static Vector128<ulong> f0b_128x64u(Vector128<ulong> a, Vector128<ulong> b, Vector128<ulong> c)
             => Cpu128Ops.f0b(a,b,c);
 
 
-        // not a and ((b xor 1) or c)
         public static Vector256<ulong> f0b_256x64u(Vector256<ulong> a, Vector256<ulong> b, Vector256<ulong> c)
             => Cpu256Ops.f0b(a,b,c);
 
-        // ~ 
+        // ~ b and (not a)
 
-        // b and (not a)
         public static bit f0c_bit(bit a, bit b, bit c)
             => BitOps.f0c(a,b,c);
 
-        // b and (not a)
         public static ulong f0c_64u(ulong a, ulong b, ulong c)
             => ScalarOps.f0c(a,b,c);
 
-       // b and (not a)
-        public static BitVector64 f0c_bv64u(BitVector64 a, BitVector64 b, BitVector64 c)
-            => BitVectorOps.f0c(a,b,c);
-
-        // b and (not a)
         public static Vector128<ulong> f0c_128x64u(Vector128<ulong> a, Vector128<ulong> b, Vector128<ulong> c)
             => Cpu128Ops.f0c(a,b,c);
 
-
-        // b and (not a)
         public static Vector256<ulong> f0c_256x64u(Vector256<ulong> a, Vector256<ulong> b, Vector256<ulong> c)
             => Cpu256Ops.f0c(a,b,c);
 
-        // ~ 
+        // ~ not (A) and (B or (C xor 1))
 
-        // not (A) and (B or (C xor 1))
         public static bit f0d_bit(bit a, bit b, bit c)
             => BitOps.f0d(a,b,c);
 
-        // not (A) and (B or (C xor 1))
         public static ulong f0d_64u(ulong a, ulong b, ulong c)
             => ScalarOps.f0d(a,b,c);
 
-        // not (A) and (B or (C xor 1))
-        public static BitVector64 f0d_bv64u(BitVector64 a, BitVector64 b, BitVector64 c)
-            => BitVectorOps.f0d(a,b,c);
-
-        // not (A) and (B or (C xor 1))
         public static Vector128<ulong> f0d_128x64u(Vector128<ulong> a, Vector128<ulong> b, Vector128<ulong> c)
             => Cpu128Ops.f0d(a,b,c);
 
-        // not (A) and (B or (C xor 1))
         public static Vector256<ulong> f0d_256x64u(Vector256<ulong> a, Vector256<ulong> b, Vector256<ulong> c)
             => Cpu256Ops.f0d(a,b,c);
 
-        // ~ 
+        // ~ not a and (b or c)
 
-        // not a and (b or c)
         public static bit f0e_bit(bit a, bit b, bit c)
             => BitOps.f0e(a,b,c);
 
-        // not a and (b or c)
         public static ulong f0e_64u(ulong a, ulong b, ulong c)
             => ScalarOps.f0e(a,b,c);
 
-        // not a and (b or c)
-        public static BitVector64 f0e_bv64u(BitVector64 a, BitVector64 b, BitVector64 c)
-            => BitVectorOps.f0e(a,b,c);
-
-        // not a and (b or c)
         public static Vector128<ulong> f0e_128x64u(Vector128<ulong> a, Vector128<ulong> b, Vector128<ulong> c)
             => Cpu128Ops.f0e(a,b,c);
 
-
-        // not a and (b or c)
         public static Vector256<ulong> f0e_256x64u(Vector256<ulong> a, Vector256<ulong> b, Vector256<ulong> c)
             => Cpu256Ops.f0e(a,b,c);
 
 
-        // ~ 
+        // ~ not a
 
-        // not a
         public static bit f0f_bit(bit a, bit b, bit c)
             => BitOps.f0f(a,b,c);
 
@@ -483,9 +346,6 @@ namespace Z0
         public static ulong f0f_64u(ulong a, ulong b, ulong c)
             => ScalarOps.f0f(a,b,c);
 
-        // not a
-        public static BitVector64 f0f_bv64u(BitVector64 a, BitVector64 b, BitVector64 c)
-            => BitVectorOps.f0f(a,b,c);
 
         // not a
         public static Vector128<ulong> f0f_128x64u(Vector128<ulong> a, Vector128<ulong> b, Vector128<ulong> c)
@@ -495,28 +355,19 @@ namespace Z0
         public static Vector256<ulong> f0f_256x64u(Vector256<ulong> a, Vector256<ulong> b, Vector256<ulong> c)
             => Cpu256Ops.f0f(a,b,c);
 
-        // ~ 
+        // ~ a and (b nor c)
 
-        // a and (b nor c)
         public static bit f10_bit(bit a, bit b, bit c)
             => BitOps.f10(a,b,c);
         
-        // a and (b nor c)
         public static ulong f10_64u(ulong a, ulong b, ulong c)
             => ScalarOps.f10(a,b,c);
         
-        // a and (b nor c)
-        public static BitVector64 f10_bv64u(BitVector64 a, BitVector64 b, BitVector64 c)
-            => BitVectorOps.f10(a,b,c);
-
-        // a and (b nor c)
         public static Vector128<ulong> f10_128x64u(Vector128<ulong> a, Vector128<ulong> b, Vector128<ulong> c)
             => Cpu128Ops.f10(a,b,c);
         
-        // a and (b nor c)
         public static Vector256<ulong> f10_256x64u(Vector256<ulong> a, Vector256<ulong> b, Vector256<ulong> c)
-            => Cpu256Ops.f10(a,b,c);
-        
+            => Cpu256Ops.f10(a,b,c);        
 
         // ~ 
 
@@ -528,9 +379,6 @@ namespace Z0
         public static ulong f11_64u(ulong a, ulong b, ulong c)
             => ScalarOps.f11(a,b,c);
 
-        // a and (b nor c)
-        public static BitVector64 f11_bv64u(BitVector64 a, BitVector64 b, BitVector64 c)
-            => BitVectorOps.f11(a,b,c);
 
         // a and (b nor c)
         public static Vector128<ulong> f11_128x64u(Vector128<ulong> a, Vector128<ulong> b, Vector128<ulong> c)
@@ -542,9 +390,8 @@ namespace Z0
             => Cpu256Ops.f11(a,b,c);
         
 
-        // ~ 
+        // ~ not b and (a xor c) 
 
-        // not b and (a xor c) 
         public static bit f12_bit(bit a, bit b, bit c)
             => BitOps.f12(a,b,c);
 
@@ -552,11 +399,6 @@ namespace Z0
         public static ulong f12_64u(ulong a, ulong b, ulong c)
             => ScalarOps.f12(a,b,c);
 
-        // not b and (a xor c) 
-        public static BitVector64 f12_bv64u(BitVector64 a, BitVector64 b, BitVector64 c)
-            => BitVectorOps.f12(a,b,c);
-
-        // not b and (a xor c) 
         public static Vector128<ulong> f12_128x64u(Vector128<ulong> a, Vector128<ulong> b, Vector128<ulong> c)
             => Cpu128Ops.f12(a,b,c);
 
@@ -572,8 +414,6 @@ namespace Z0
         public static ulong f13_64u(ulong a, ulong b, ulong c)
             => ScalarOps.f13(a,b,c);
 
-        public static BitVector64 f13_bv64u(BitVector64 a, BitVector64 b, BitVector64 c)
-            => BitVectorOps.f13(a,b,c);
 
         public static Vector128<ulong> f13_128x64u(Vector128<ulong> a, Vector128<ulong> b, Vector128<ulong> c)
             => Cpu128Ops.f13(a,b,c);
@@ -590,9 +430,6 @@ namespace Z0
         public static ulong f14_64u(ulong a, ulong b, ulong c)
             => ScalarOps.f14(a,b,c);
 
-        public static BitVector64 f14_bv64u(BitVector64 a, BitVector64 b, BitVector64 c)
-            => BitVectorOps.f14(a,b,c);
-
         public static Vector128<ulong> f14_128x64u(Vector128<ulong> a, Vector128<ulong> b, Vector128<ulong> c)
             => Cpu128Ops.f14(a,b,c);
 
@@ -606,9 +443,6 @@ namespace Z0
 
         public static ulong f15_64u(ulong a, ulong b, ulong c)
             => ScalarOps.f15(a,b,c);
-
-        public static BitVector64 f15_bv64u(BitVector64 a, BitVector64 b, BitVector64 c)
-            => BitVectorOps.f15(a,b,c);
 
         public static Vector128<ulong> f15_128x64u(Vector128<ulong> a, Vector128<ulong> b, Vector128<ulong> c)
             => Cpu128Ops.f15(a,b,c);
@@ -627,10 +461,6 @@ namespace Z0
             => ScalarOps.f16(a,b,c);
 
         // a ? (b nor c) : (b xor c)
-        public static BitVector64 f16_bv64u(BitVector64 a, BitVector64 b, BitVector64 c)
-            => BitVectorOps.f16(a,b,c);
-
-        // a ? (b nor c) : (b xor c)
         public static Vector128<ulong> f16_128x64u(Vector128<ulong> a, Vector128<ulong> b, Vector128<ulong> c)
             => Cpu128Ops.f16(a,b,c);
 
@@ -646,10 +476,7 @@ namespace Z0
         public static ulong f17_64u(ulong a, ulong b, ulong c)
             => ScalarOps.f17(a,b,c);
 
-        public static BitVector64 f17_bv64u(BitVector64 a, BitVector64 b, BitVector64 c)
-            => BitVectorOps.f17(a,b,c);
-
-         public static Vector128<ulong> f17_128x64u(Vector128<ulong> a, Vector128<ulong> b, Vector128<ulong> c)
+        public static Vector128<ulong> f17_128x64u(Vector128<ulong> a, Vector128<ulong> b, Vector128<ulong> c)
             => Cpu128Ops.f17(a,b,c);
 
         public static Vector256<ulong> f17_256x64u(Vector256<ulong> a, Vector256<ulong> b, Vector256<ulong> c)
@@ -665,9 +492,7 @@ namespace Z0
         public static ulong f18_64u(ulong a, ulong b, ulong c)
             => ScalarOps.f18(a,b,c);
 
-        public static BitVector64 f18_bv64u(BitVector64 a, BitVector64 b, BitVector64 c)
-            => BitVectorOps.f18(a,b,c);
-
+ 
         public static Vector128<ulong> f18_128x64u(Vector128<ulong> a, Vector128<ulong> b, Vector128<ulong> c)
             => Cpu128Ops.f18(a,b,c);
 
@@ -681,9 +506,7 @@ namespace Z0
         public static ulong f19_64u(ulong a, ulong b, ulong c)
             => ScalarOps.f19(a,b,c);
 
-        public static BitVector64 f19_bv64u(BitVector64 a, BitVector64 b, BitVector64 c)
-            => BitVectorOps.f19(a,b,c);
-
+ 
         public static Vector128<ulong> f19_128x64u(Vector128<ulong> a, Vector128<ulong> b, Vector128<ulong> c)
             => Cpu128Ops.f19(a,b,c);
 
@@ -698,26 +521,20 @@ namespace Z0
         public static ulong f1a_64u(ulong a, ulong b, ulong c)
             => ScalarOps.f1a(a,b,c);
 
-        public static BitVector64 f1a_bv64u(BitVector64 a, BitVector64 b, BitVector64 c)
-            => BitVectorOps.f1a(a,b,c);
-
+ 
         public static Vector128<ulong> f1a_128x64u(Vector128<ulong> a, Vector128<ulong> b, Vector128<ulong> c)
             => Cpu128Ops.f1a(a,b,c);
 
         public static Vector256<ulong> f1a_256x64u(Vector256<ulong> a, Vector256<ulong> b, Vector256<ulong> c)
             => Cpu256Ops.f1a(a,b,c);
 
-        // ~ 
+        // ~ c ? not a : not b
 
         public static bit f1b_bit(bit a, bit b, bit c)
             => BitOps.f1b(a,b,c);
 
-        // c ? not a : not b
         public static ulong f1b_64u(ulong a, ulong b, ulong c)
             => ScalarOps.f1b(a,b,c);
-
-        public static BitVector64 f1b_bv64u(BitVector64 a, BitVector64 b, BitVector64 c)
-            => BitVectorOps.f1b(a,b,c);
 
         public static Vector128<ulong> f1b_128x64u(Vector128<ulong> a, Vector128<ulong> b, Vector128<ulong> c)
             => Cpu128Ops.f1b(a,b,c);
@@ -725,18 +542,13 @@ namespace Z0
         public static Vector256<ulong> f1b_256x64u(Vector256<ulong> a, Vector256<ulong> b, Vector256<ulong> c)
             => Cpu256Ops.f1b(a,b,c);
 
-        // ~
 
-        //not ((a and c)) and (a xor b)
         public static ulong f1c_64u(ulong a, ulong b, ulong c)
             => ScalarOps.f1c(a,b,c);
 
-
-        //b ? (not a) : (not c)
         public static ulong f1d(ulong a, ulong b, ulong c)
             => ScalarOps.f1d(a,b,c);
 
-        //a xor (b or c)
         public static ulong f1e(ulong a, ulong b, ulong c)
             => ScalarOps.f1e(a,b,c);
 

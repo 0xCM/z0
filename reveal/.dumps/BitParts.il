@@ -1,4 +1,4 @@
-// 2019-10-18 23:21:14:154
+// 2019-10-19 23:11:07:909
 void part30x3(uint src, Span<byte> dst)
 {
     IL_0000: ldarga.s dst
@@ -1210,25 +1210,19 @@ void unpack8x1(byte src, Span<byte> dst)
 Span<byte> unpack16x1(ushort src, Span<byte> dst)
 {
     IL_0000: ldarg.0
-    IL_0001: ldloca.s V_2
-    IL_0003: initobj Z0.N2
-    IL_0009: ldloc.2
-    IL_000A: call System.ValueTuple`2<System.Byte,System.Byte> Z0.Bits::split(System.UInt16,Z0.N2)
-    IL_000F: dup
-    IL_0010: ldfld System.Byte System.ValueTuple`2<System.Byte,System.Byte>::Item1
-    IL_0015: stloc.0
-    IL_0016: ldfld System.Byte System.ValueTuple`2<System.Byte,System.Byte>::Item2
-    IL_001B: stloc.1
-    IL_001C: ldloc.0
-    IL_001D: ldarg.1
-    IL_001E: call System.Void Z0.BitParts::unpack8x1(System.Byte,System.Span`1<System.Byte>)
-    IL_0023: ldloc.1
-    IL_0024: ldarga.s dst
-    IL_0026: ldc.i4.8
-    IL_0027: call System.Span`1<System.Byte> System.Span`1<System.Byte>::Slice(System.Int32)
-    IL_002C: call System.Void Z0.BitParts::unpack8x1(System.Byte,System.Span`1<System.Byte>)
-    IL_0031: ldarg.1
-    IL_0032: ret
+    IL_0001: ldloca.s V_0
+    IL_0003: ldloca.s V_1
+    IL_0005: call System.Void Z0.Bits::split(System.UInt16,System.Byte&,System.Byte&)
+    IL_000A: ldloc.0
+    IL_000B: ldarg.1
+    IL_000C: call System.Void Z0.BitParts::unpack8x1(System.Byte,System.Span`1<System.Byte>)
+    IL_0011: ldloc.1
+    IL_0012: ldarga.s dst
+    IL_0014: ldc.i4.8
+    IL_0015: call System.Span`1<System.Byte> System.Span`1<System.Byte>::Slice(System.Int32)
+    IL_001A: call System.Void Z0.BitParts::unpack8x1(System.Byte,System.Span`1<System.Byte>)
+    IL_001F: ldarg.1
+    IL_0020: ret
 
 }
 Span<byte> unpack16x1(ushort src)
@@ -1280,53 +1274,41 @@ void unpack32x1(uint src, Span<byte> dst)
 Span<byte> unpack32x1_bmi(uint src, Span<byte> dst)
 {
     IL_0000: ldarg.0
-    IL_0001: ldloca.s V_2
-    IL_0003: initobj Z0.N2
-    IL_0009: ldloc.2
-    IL_000A: call System.ValueTuple`2<System.UInt16,System.UInt16> Z0.Bits::split(System.UInt32,Z0.N2)
-    IL_000F: dup
-    IL_0010: ldfld System.UInt16 System.ValueTuple`2<System.UInt16,System.UInt16>::Item1
-    IL_0015: stloc.0
-    IL_0016: ldfld System.UInt16 System.ValueTuple`2<System.UInt16,System.UInt16>::Item2
-    IL_001B: stloc.1
-    IL_001C: ldloc.0
-    IL_001D: ldarg.1
-    IL_001E: call System.Span`1<System.Byte> Z0.BitParts::unpack16x1(System.UInt16,System.Span`1<System.Byte>)
-    IL_0023: pop
-    IL_0024: ldloc.1
-    IL_0025: ldarga.s dst
-    IL_0027: ldc.i4.s 16
-    IL_0029: call System.Span`1<System.Byte> System.Span`1<System.Byte>::Slice(System.Int32)
-    IL_002E: call System.Span`1<System.Byte> Z0.BitParts::unpack16x1(System.UInt16,System.Span`1<System.Byte>)
-    IL_0033: pop
-    IL_0034: ldarg.1
-    IL_0035: ret
+    IL_0001: ldloca.s V_0
+    IL_0003: ldloca.s V_1
+    IL_0005: call System.Void Z0.Bits::split(System.UInt32,System.UInt16&,System.UInt16&)
+    IL_000A: ldloc.0
+    IL_000B: ldarg.1
+    IL_000C: call System.Span`1<System.Byte> Z0.BitParts::unpack16x1(System.UInt16,System.Span`1<System.Byte>)
+    IL_0011: pop
+    IL_0012: ldloc.1
+    IL_0013: ldarga.s dst
+    IL_0015: ldc.i4.s 16
+    IL_0017: call System.Span`1<System.Byte> System.Span`1<System.Byte>::Slice(System.Int32)
+    IL_001C: call System.Span`1<System.Byte> Z0.BitParts::unpack16x1(System.UInt16,System.Span`1<System.Byte>)
+    IL_0021: pop
+    IL_0022: ldarg.1
+    IL_0023: ret
 
 }
 Span<byte> unpack64x1(ulong src, Span<byte> dst)
 {
     IL_0000: ldarg.0
-    IL_0001: ldloca.s V_2
-    IL_0003: initobj Z0.N2
-    IL_0009: ldloc.2
-    IL_000A: call System.ValueTuple`2<System.UInt32,System.UInt32> Z0.Bits::split(System.UInt64,Z0.N2)
-    IL_000F: dup
-    IL_0010: ldfld System.UInt32 System.ValueTuple`2<System.UInt32,System.UInt32>::Item1
-    IL_0015: stloc.0
-    IL_0016: ldfld System.UInt32 System.ValueTuple`2<System.UInt32,System.UInt32>::Item2
-    IL_001B: stloc.1
-    IL_001C: ldloc.0
-    IL_001D: ldarg.1
-    IL_001E: call System.Span`1<System.Byte> Z0.BitParts::unpack32x1_bmi(System.UInt32,System.Span`1<System.Byte>)
-    IL_0023: pop
-    IL_0024: ldloc.1
-    IL_0025: ldarga.s dst
-    IL_0027: ldc.i4.s 32
-    IL_0029: call System.Span`1<System.Byte> System.Span`1<System.Byte>::Slice(System.Int32)
-    IL_002E: call System.Span`1<System.Byte> Z0.BitParts::unpack32x1_bmi(System.UInt32,System.Span`1<System.Byte>)
-    IL_0033: pop
-    IL_0034: ldarg.1
-    IL_0035: ret
+    IL_0001: ldloca.s V_0
+    IL_0003: ldloca.s V_1
+    IL_0005: call System.Void Z0.Bits::split(System.UInt64,System.UInt32&,System.UInt32&)
+    IL_000A: ldloc.0
+    IL_000B: ldarg.1
+    IL_000C: call System.Span`1<System.Byte> Z0.BitParts::unpack32x1_bmi(System.UInt32,System.Span`1<System.Byte>)
+    IL_0011: pop
+    IL_0012: ldloc.1
+    IL_0013: ldarga.s dst
+    IL_0015: ldc.i4.s 32
+    IL_0017: call System.Span`1<System.Byte> System.Span`1<System.Byte>::Slice(System.Int32)
+    IL_001C: call System.Span`1<System.Byte> Z0.BitParts::unpack32x1_bmi(System.UInt32,System.Span`1<System.Byte>)
+    IL_0021: pop
+    IL_0022: ldarg.1
+    IL_0023: ret
 
 }
 Span<byte> unpack8x1(ReadOnlySpan<byte> src, Span<byte> dst)

@@ -49,7 +49,7 @@ namespace Z0.Test
             for(var i=0; i< SampleSize; i++)
             {
                 var x = Random.Next<uint>();
-                (var x0, var x1) = Bits.split(x);
+                Bits.split(x,out var x0, out var x1);
 
                 var y0 = gbits.range(x, 0, 15);
                 var y1 = gbits.range(x, 16, 31);
@@ -64,7 +64,7 @@ namespace Z0.Test
             for(var i=0; i< SampleSize; i++)
             {
                 var x = Random.Next<ulong>();
-                (var x0, var x1) = Bits.split(x);
+                Bits.split(x, out var x0, out var x1);
                 var y0 = gbits.range(x, 0, 31);
                 var y1 = gbits.range(x, 32, 63);
 

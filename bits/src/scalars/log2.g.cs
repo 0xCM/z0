@@ -20,17 +20,17 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
-        public static T log2<T>(in T src)
+        public static uint log2<T>(in T src)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                 return generic<T>(Bits.log2(uint8(in asRef(in src))));
+                 return Bits.log2(uint8(src));
             else if(typeof(T) == typeof(ushort))
-                 return generic<T>(Bits.log2(uint16(in asRef(in src))));
+                 return Bits.log2(uint16(src));
             else if(typeof(T) == typeof(uint))
-                 return generic<T>(Bits.log2(uint32(in asRef(in src))));
+                 return Bits.log2(uint32(src));
             else if(typeof(T) == typeof(ulong))
-                 return generic<T>(Bits.log2(uint64(in asRef(in src))));
+                 return Bits.log2(uint64(src));
             else 
                 throw unsupported<T>();
         }

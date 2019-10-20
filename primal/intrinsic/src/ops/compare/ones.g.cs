@@ -15,7 +15,7 @@ namespace Z0
     partial class ginx
     {
         [MethodImpl(Inline)]
-        public static Vec128<T> vones128<T>()
+        public static Vector128<T> vones128<T>()
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte) 
@@ -30,11 +30,10 @@ namespace Z0
                 return vones_128i<T>();
             else 
                 return vones_128f<T>();
-
         }
 
         [MethodImpl(Inline)]
-        public static Vec256<T> vones256<T>()
+        public static Vector256<T> vones256<T>()
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte) 
@@ -49,11 +48,10 @@ namespace Z0
                 return vones_256i<T>();
             else 
                 return vones_256f<T>();
-
         }
 
         [MethodImpl(Inline)]
-        static Vec128<T> vones_128i<T>()
+        static Vector128<T> vones_128i<T>()
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
@@ -67,11 +65,11 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static Vec128<T> vones_128u<T>()
+        static Vector128<T> vones_128u<T>()
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(dinx.vvones_128x8u());
+                return generic<T>(dinx.vones_128x8u());
             else if(typeof(T) == typeof(ushort))
                 return generic<T>(dinx.vones_128x16u());
             else if(typeof(T) == typeof(uint))
@@ -82,7 +80,7 @@ namespace Z0
 
 
         [MethodImpl(Inline)]
-        static Vec128<T> vones_128f<T>()
+        static Vector128<T> vones_128f<T>()
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
@@ -93,10 +91,8 @@ namespace Z0
                 throw unsupported<T>();
         }
 
-
-
         [MethodImpl(Inline)]
-        static Vec256<T> vones_256i<T>()
+        static Vector256<T> vones_256i<T>()
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
@@ -110,7 +106,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static Vec256<T> vones_256u<T>()
+        static Vector256<T> vones_256u<T>()
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -125,7 +121,7 @@ namespace Z0
 
 
         [MethodImpl(Inline)]
-        static Vec256<T> vones_256f<T>()
+        static Vector256<T> vones_256f<T>()
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
@@ -135,8 +131,6 @@ namespace Z0
             else 
                 throw unsupported<T>();
         }
-
-
     }
 
 }

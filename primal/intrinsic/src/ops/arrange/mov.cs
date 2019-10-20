@@ -24,7 +24,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">A readonly memory reference</param>
         [MethodImpl(Inline)]
-        public static unsafe Vec128<byte> vmov128(in byte src)
+        public static unsafe Vector128<byte> vmov128(in byte src)
             => LoadVector128(constptr(in src));
 
         /// <summary>
@@ -33,7 +33,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">A readonly memory reference</param>
         [MethodImpl(Inline)]
-        public static unsafe Vec128<sbyte> vmov128(in sbyte src)
+        public static unsafe Vector128<sbyte> vmov128(in sbyte src)
             => LoadVector128(constptr(in src));
 
         /// <summary>
@@ -42,7 +42,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">A readonly memory reference</param>
         [MethodImpl(Inline)]
-        public static unsafe Vec128<short> vmov128(in short src)
+        public static unsafe Vector128<short> vmov128(in short src)
             => LoadVector128(constptr(in src));
 
         /// <summary>
@@ -51,7 +51,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">A readonly memory reference</param>
         [MethodImpl(Inline)]
-        public static unsafe Vec128<ushort> vmov128(in ushort src)
+        public static unsafe Vector128<ushort> vmov128(in ushort src)
             => LoadVector128(constptr(in src));
 
         /// <summary>
@@ -60,7 +60,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">A readonly memory reference</param>
         [MethodImpl(Inline)]
-        public static unsafe Vec128<int> vmov128(in int src)
+        public static unsafe Vector128<int> vmov128(in int src)
             => LoadVector128(constptr(in src));
 
         /// <summary>
@@ -69,7 +69,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">A readonly memory reference</param>
         [MethodImpl(Inline)]
-        public static unsafe Vec128<uint> vmov128(in uint src)
+        public static unsafe Vector128<uint> vmov128(in uint src)
             => LoadVector128(constptr(in src));
 
         /// <summary>
@@ -78,7 +78,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">A readonly memory reference</param>
         [MethodImpl(Inline)]
-        public static unsafe Vec128<long> vmov128(in long src)
+        public static unsafe Vector128<long> vmov128(in long src)
             => LoadVector128(constptr(in src));
 
         /// <summary>
@@ -87,7 +87,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">A readonly memory reference</param>
         [MethodImpl(Inline)]
-        public static unsafe Vec128<ulong> vmov128(in ulong src)
+        public static unsafe Vector128<ulong> vmov128(in ulong src)
             => LoadVector128(constptr(in src));
 
         /// <summary>
@@ -96,7 +96,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">A readonly memory reference</param>
         [MethodImpl(Inline)]
-        public static unsafe Vec256<sbyte> vmov256(in sbyte src)
+        public static unsafe Vector256<sbyte> vmov256(in sbyte src)
             => LoadVector256(constptr(in src));
 
         /// <summary>
@@ -105,7 +105,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">A readonly memory reference</param>
         [MethodImpl(Inline)]
-        public static unsafe Vec256<byte> vmov256(in byte src)
+        public static unsafe Vector256<byte> vmov256(in byte src)
             => LoadVector256(constptr(in src));
 
         /// <summary>
@@ -114,7 +114,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">A readonly memory reference</param>
         [MethodImpl(Inline)]
-        public static unsafe Vec256<short> vmov256(in short src)
+        public static unsafe Vector256<short> vmov256(in short src)
             => LoadVector256(constptr(in src));
 
         /// <summary>
@@ -123,7 +123,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">A readonly memory reference</param>
         [MethodImpl(Inline)]
-        public static unsafe Vec256<ushort> vmov256(in ushort src)
+        public static unsafe Vector256<ushort> vmov256(in ushort src)
             => LoadVector256(constptr(in src));
 
         /// <summary>
@@ -132,7 +132,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">A readonly memory reference</param>
         [MethodImpl(Inline)]
-        public static unsafe Vec256<int> vmov256(in int src)
+        public static unsafe Vector256<int> vmov256(in int src)
             => LoadVector256(constptr(in src));
 
         /// <summary>
@@ -141,7 +141,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">A readonly memory reference</param>
         [MethodImpl(Inline)]
-        public static unsafe Vec256<uint> vmov256(in uint src)
+        public static unsafe Vector256<uint> vmov256(in uint src)
             => LoadVector256(constptr(in src));
 
         /// <summary>
@@ -150,7 +150,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">A readonly memory reference</param>
         [MethodImpl(Inline)]
-        public static unsafe Vec256<long> vmov256(in long src)
+        public static unsafe Vector256<long> vmov256(in long src)
             => LoadVector256(constptr(in src));
 
         /// <summary>
@@ -159,7 +159,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">A readonly memory reference</param>
         [MethodImpl(Inline)]
-        public static unsafe Vec256<ulong> vmov256(in ulong src)
+        public static unsafe Vector256<ulong> vmov256(in ulong src)
             => LoadVector256(constptr(in src));
     }
 

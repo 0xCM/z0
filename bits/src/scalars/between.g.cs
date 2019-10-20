@@ -23,33 +23,63 @@ namespace Z0
         /// <param name="dst">The right bit position</param>
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
-        public static T between<T>(in T src, BitPos p0, BitPos p1)
+        public static T between<T>(T src, byte p0, byte p1)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(byte) 
+                || typeof(T) == typeof(ushort) 
+                || typeof(T) == typeof(uint) 
+                || typeof(T) == typeof(ulong))
+                    return between_u(src,p0,p1);
+            else if(typeof(T) == typeof(sbyte) 
+                || typeof(T) == typeof(short)
+                || typeof(T) == typeof(int) 
+                || typeof(T) == typeof(long))
+                    return between_i(src,p0,p1);
+            else
+                    return between_f(src,p0,p1);
+        }
+
+        [MethodImpl(Inline)]
+        static T between_i<T>(T src, byte p0, byte p1)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                 return generic<T>(Bits.between(in int8(in src), p0, p1));
-            else if(typeof(T) == typeof(byte))
-                 return generic<T>(Bits.between(in uint8(in src), p0, p1));
+                 return generic<T>(Bits.between(int8(src), p0, p1));
             else if(typeof(T) == typeof(short))
-                 return generic<T>(Bits.between(in int16(in src), p0, p1));
-            else if(typeof(T) == typeof(ushort))
-                 return generic<T>(Bits.between(in uint16(in src), p0, p1));
+                 return generic<T>(Bits.between(int16(src), p0, p1));
             else if(typeof(T) == typeof(int))
-                 return generic<T>(Bits.between(in int32(in src), p0, p1));
+                 return generic<T>(Bits.between(int32(src), p0, p1));
+            else 
+                 return generic<T>(Bits.between(int64(src), p0, p1));
+        }
+
+        [MethodImpl(Inline)]
+        static T between_u<T>(T src, byte p0, byte p1)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(byte))
+                 return generic<T>(Bits.between(uint8(src), p0, p1));
+            else if(typeof(T) == typeof(ushort))
+                 return generic<T>(Bits.between(uint16(src), p0, p1));
             else if(typeof(T) == typeof(uint))
-                 return generic<T>(Bits.between(in uint32(in src), p0, p1));
-            else if(typeof(T) == typeof(long))
-                 return generic<T>(Bits.between(in int64(in src), p0, p1));
-            else if(typeof(T) == typeof(ulong))
-                 return generic<T>(Bits.between(in uint64(in src), p0, p1));
-            else if(typeof(T) == typeof(float))
-                 return generic<T>(Bits.between(in float32(in src), p0, p1));
+                 return generic<T>(Bits.between(uint32(src), p0, p1));
+            else 
+                 return generic<T>(Bits.between(uint64(src), p0, p1));
+        }
+
+        [MethodImpl(Inline)]
+        static T between_f<T>(T src, byte p0, byte p1)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(float))
+                 return generic<T>(Bits.between(float32(src), p0, p1));
             else if(typeof(T) == typeof(double))
-                 return generic<T>(Bits.between(in float64(in src), p0, p1));
+                 return generic<T>(Bits.between(float64(src), p0, p1));
             else            
                 throw unsupported<T>();
         }
-    
+
     }
 
 }

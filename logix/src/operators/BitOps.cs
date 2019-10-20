@@ -75,6 +75,18 @@ namespace Z0
             => bit.xnor(a,b);
 
         [MethodImpl(Inline)]
+        public static bit left(bit a, bit b)
+            => a;
+
+        [MethodImpl(Inline)]
+        public static bit right(bit a, bit b)
+            => b;
+
+        [MethodImpl(Inline)]
+        public static bit rightnot(bit a, bit b)
+            => not(b);
+
+        [MethodImpl(Inline)]
         public static bit @true(bit a, bit b)
             => On;
         

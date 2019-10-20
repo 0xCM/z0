@@ -20,8 +20,8 @@ namespace Z0
         /// <param name="i0">The bit position within the source where extraction should begin</param>
         /// <param name="i1">The bit position within the source where extraction should end</param>
         [MethodImpl(Inline)]
-        public static sbyte between(in sbyte src, BitPos i0, BitPos i1)        
-            => BitMask.between(in src, i0, i1);
+        public static sbyte between(sbyte src, byte i0, byte i1)        
+            => BitMask.between(src, i0, i1);
 
         /// <summary>
         /// Extracts a contiguous range of bits from the source inclusively between two index positions
@@ -30,8 +30,8 @@ namespace Z0
         /// <param name="i0">The bit position within the source where extraction should begin</param>
         /// <param name="i1">The bit position within the source where extraction should end</param>
         [MethodImpl(Inline)]
-        public static byte between(in byte src, BitPos i0, BitPos i1)        
-            => BitMask.between(in src, i0, i1);
+        public static byte between(byte src, byte i0, byte i1)        
+            => BitMask.between(src, i0, i1);
 
         /// <summary>
         /// Extracts a contiguous range of bits from the source inclusively between two index positions
@@ -40,8 +40,8 @@ namespace Z0
         /// <param name="i0">The bit position within the source where extraction should begin</param>
         /// <param name="i1">The bit position within the source where extraction should end</param>
         [MethodImpl(Inline)]
-        public static short between(in short src, BitPos i0, BitPos i1)        
-            => BitMask.between(in src, i0, i1);
+        public static short between(short src, byte i0, byte i1)        
+            => BitMask.between(src, i0, i1);
 
         /// <summary>
         /// Extracts a contiguous range of bits from the source inclusively between two index positions
@@ -50,8 +50,8 @@ namespace Z0
         /// <param name="i0">The bit position within the source where extraction should begin</param>
         /// <param name="i1">The bit position within the source where extraction should end</param>
         [MethodImpl(Inline)]
-        public static ushort between(in ushort src, BitPos i0, BitPos i1)        
-            => BitMask.between(in src, i0, i1);
+        public static ushort between(ushort src, byte i0, byte i1)        
+            => BitMask.between(src, i0, i1);
 
         /// <summary>
         /// Extracts a contiguous range of bits from the source inclusively between two index positions
@@ -60,8 +60,8 @@ namespace Z0
         /// <param name="i0">The bit position within the source where extraction should begin</param>
         /// <param name="i1">The bit position within the source where extraction should end</param>
         [MethodImpl(Inline)]
-        public static uint between(in uint src, BitPos i0, BitPos i1)        
-            => BitMask.between(in src, i0, i1);
+        public static uint between(uint src, byte i0, byte i1)        
+            => BitMask.between(src, i0, i1);
 
         /// <summary>
         /// Extracts a contiguous range of bits from the source inclusively between two index positions
@@ -70,8 +70,8 @@ namespace Z0
         /// <param name="i0">The bit position within the source where extraction should begin</param>
         /// <param name="i1">The bit position within the source where extraction should end</param>
         [MethodImpl(Inline)]
-        public static int between(in int src, BitPos i0, BitPos i1)        
-            => BitMask.between(in src, i0, i1);
+        public static int between(int src, byte i0, byte i1)        
+            => BitMask.between(src, i0, i1);
 
         /// <summary>
         /// Extracts a contiguous range of bits from the source inclusively between two index positions
@@ -80,8 +80,8 @@ namespace Z0
         /// <param name="i0">The bit position within the source where extraction should begin</param>
         /// <param name="i1">The bit position within the source where extraction should end</param>
         [MethodImpl(Inline)]
-        public static ulong between(in ulong src, BitPos i0, BitPos i1)
-            => BitMask.between(in src, i0, i1);
+        public static ulong between(ulong src, byte i0, byte i1)
+            => BitMask.between(src, i0, i1);
 
         /// <summary>
         /// Extracts a contiguous range of bits from the source inclusively between two index positions
@@ -90,8 +90,8 @@ namespace Z0
         /// <param name="i0">The bit position within the source where extraction should begin</param>
         /// <param name="i1">The bit position within the source where extraction should end</param>
         [MethodImpl(Inline)]
-        public static long between(in long src, BitPos i0, BitPos i1)
-            => BitMask.between(in src, i0, i1);
+        public static long between(long src, byte i0, byte i1)
+            => BitMask.between(src, i0, i1);
 
         /// <summary>
         /// Extracts a contiguous range of bits from the source inclusively between two index positions
@@ -100,8 +100,8 @@ namespace Z0
         /// <param name="i0">The bit position within the source where extraction should begin</param>
         /// <param name="i1">The bit position within the source where extraction should end</param>
         [MethodImpl(Inline)]
-        public static float between(in float src, BitPos i0, BitPos i1)
-            => BitMask.between(in src, i0, i1);
+        public static float between(float src, byte i0, byte i1)
+            => BitMask.between(src, i0, i1);
 
         /// <summary>
         /// Extracts a contiguous range of bits from the source inclusively between two index positions
@@ -110,8 +110,8 @@ namespace Z0
         /// <param name="i0">The bit position within the source where extraction should begin</param>
         /// <param name="i1">The bit position within the source where extraction should end</param>
         [MethodImpl(Inline)]
-        public static double between(in double src, BitPos i0, BitPos i1)
-            => BitMask.between(in src, i0, i1);
+        public static double between(double src, byte i0, byte i1)
+            => BitMask.between(src, i0, i1);
 
     }
 

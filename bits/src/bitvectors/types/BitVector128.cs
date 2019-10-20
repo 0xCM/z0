@@ -8,7 +8,7 @@ namespace Z0
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
-    using System.Numerics;
+    using System.Runtime.Intrinsics;
 
     using static zfunc;    
 
@@ -278,8 +278,8 @@ namespace Z0
         /// <param name="lhs">The left operand</param>
         /// <param name="rhs">The right operand</param>
         [MethodImpl(Inline)]
-        public static Bit operator %(BitVector128 lhs,BitVector128 rhs)
-            => (Bit)Mod<N2>.mod((lhs & rhs).Pop());              
+        public static bit operator %(BitVector128 lhs,BitVector128 rhs)
+            => odd((lhs & rhs).Pop());              
 
         /// <summary>
         /// Returns true if the source vector is nonzero, false otherwise
@@ -414,8 +414,8 @@ namespace Z0
         [MethodImpl(Inline)]
         public BitVector128 And(BitVector128 rhs)
         {
-            var x = dinx.vloadu128(in x0);
-            var y = dinx.vloadu128(in rhs.x0);
+            dinx.vloadu(in x0, out Vector128<ulong> x);
+            dinx.vloadu(in rhs.x0, out Vector128<ulong> y);
             vstore(dinx.vand(x,y), ref x0);
             return this;
         }
@@ -427,8 +427,8 @@ namespace Z0
         [MethodImpl(Inline)]
         public BitVector128 Or(BitVector128 rhs)
         {
-            var x = dinx.vloadu128(in x0);
-            var y = dinx.vloadu128(in rhs.x0);
+            dinx.vloadu(in x0, out Vector128<ulong> x);
+            dinx.vloadu(in rhs.x0, out Vector128<ulong> y);
             vstore(dinx.vor(x,y), ref x0);
             return this;
         }
@@ -440,8 +440,8 @@ namespace Z0
         [MethodImpl(Inline)]
         public BitVector128 XOr(BitVector128 rhs)
         {
-            var x = dinx.vloadu128(in x0);
-            var y = dinx.vloadu128(in rhs.x0);
+            dinx.vloadu(in x0, out Vector128<ulong> x);
+            dinx.vloadu(in rhs.x0, out Vector128<ulong> y);
             vstore(dinx.vxor(x,y), ref x0);
             return this;
         }
@@ -452,7 +452,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public BitVector128 Negate()
         {
-            var x = dinx.vloadu128(in x0);
+            dinx.vloadu(in x0, out Vector128<ulong> x);
             vstore(dinx.vnegate(x), ref x0);
             return this;
         }
@@ -463,7 +463,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public BitVector128 Not()
         {
-            var x = dinx.vloadu128(in x0);
+            dinx.vloadu(in x0, out Vector128<ulong> x);
             vstore(dinx.vnot(x), ref x0);
             return this;
         }
@@ -518,10 +518,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public readonly Vec128<ulong> ToCpuVec()
             => Vec128.FromParts(x0,x1);
-
-        [MethodImpl(Inline)]
-        public readonly UInt128 ToUInt128()
-            => UInt128.From(x0,x1);
 
         /// <summary>
         /// Returns a copy of the vector

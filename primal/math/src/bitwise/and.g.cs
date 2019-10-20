@@ -34,7 +34,8 @@ namespace Z0
             || typeof(T) == typeof(int) 
             || typeof(T) == typeof(long))
                 return and_i(lhs,rhs);
-            else return gfp.and(lhs,rhs);
+            else 
+                return gfp.and(lhs,rhs);
         }
 
         [MethodImpl(Inline)]

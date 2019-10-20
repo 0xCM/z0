@@ -12,9 +12,9 @@ namespace Z0
 
     using static zfunc;
 
-    public ref struct BitMatrix4
+    public struct BitMatrix4
     {        
-        internal Span<byte> data;
+        byte[] data;
 
         public static readonly N4 N = default;
 
@@ -50,27 +50,25 @@ namespace Z0
         public static BitMatrix4 Zero 
         {            
             [MethodImpl(Inline)]
-            get => Define(0,0,0,0);
+            get => From(0,0,0,0);
         }
 
         public static BitMatrix4 Ones 
         {            
             [MethodImpl(Inline)]
-            get => Define(0xF,0xF,0xF,0xF);
+            get => From(0xF,0xF,0xF,0xF);
         }
 
 
         [MethodImpl(Inline)]
-        public static BitMatrix4 Define(byte r0, byte r1, byte r2, byte r3)        
+        public static BitMatrix4 From(byte r0, byte r1, byte r2, byte r3)        
             => new BitMatrix4(r0,r1,r2,r3);
 
         [MethodImpl(Inline)]
-        public static BitMatrix4 Define(ushort src)        
+        public static BitMatrix4 From(ushort src)        
         {
-            (var x0, var x1) = Bits.split(src);
-            (var r0, var r1) = Bits.split(x0);
-            (var r2, var r3) = Bits.split(x1);
-            return Define(r0,r1,r2,r3);
+            Bits.split(src, out var r0, out var r1, out var r2, out var r3);
+            return From(r0,r1,r2,r3);
         }
 
         [MethodImpl(Inline)]
@@ -130,7 +128,7 @@ namespace Z0
         BitMatrix4(Span<byte> src)
         {                    
             require(src.Length == 4);
-            this.data = src;
+            this.data = src.ToArray();
         }
 
         /// <summary>
@@ -171,7 +169,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         readonly Bit GetBit(int row, int col)
-            => BitMask.test(in data[row], col);
+            => BitMask.test(data[row], col);
 
         [MethodImpl(Inline)]
         void SetBit(int row, int col, Bit b)
@@ -206,8 +204,8 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public readonly bool IsZero()
-            => data.TakeUInt32() == 0;
+        public bool IsZero()
+            => Data.TakeUInt32() == 0;
 
         /// <summary>
         /// The underlying matrix data
@@ -266,7 +264,7 @@ namespace Z0
         {
             byte col = 0;
             for(var r = 0; r < N; r++)
-                if(BitMask.test(in data[r], index))
+                if(BitMask.test(data[r], index))
                     BitMask.enable(ref col, r);
             return col;
         }

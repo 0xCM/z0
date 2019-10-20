@@ -84,7 +84,7 @@ namespace Z0
         /// <param name="i1">The end bit position</param>
         /// <typeparam name="T">The primal bit source type</typeparam>
         [MethodImpl(Inline)]
-        public static void range<T>(in T src, BitPos i0, BitPos i1, Span<byte> dst, int offset)
+        public static void range<T>(T src, BitPos i0, BitPos i1, Span<byte> dst, int offset)
             where T : unmanaged
                 => bytes(gbits.range(src,i0,i1)).Slice(0, ByteCount(i0,i1)).CopyTo(dst,offset);                 
 
@@ -93,7 +93,7 @@ namespace Z0
             => ByteCount(i1 - i0);
 
         [MethodImpl(Inline)]
-        static ByteSize ByteCount(uint bitcount)
+        static uint ByteCount(uint bitcount)
             => (uint)(Mod8.div(bitcount) + (Mod8.mod(bitcount) == 0 ? 0 : 1));
 
     }

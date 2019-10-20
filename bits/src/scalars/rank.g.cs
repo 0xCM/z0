@@ -21,23 +21,15 @@ namespace Z0
         /// <param name="src">The bit source</param>
         /// <param name="pos">The position of the bit for which rank will be calculated</param>
         [MethodImpl(Inline)]
-        public static uint rank<T>(in T src, BitPos pos)
+        public static uint rank<T>(T src, int pos)
             where T : unmanaged
         {
-            if(typeof(T) == typeof(sbyte))
-                return Bits.rank(int8(src), pos);
-            else if(typeof(T) == typeof(byte))
+            if(typeof(T) == typeof(byte))
                 return Bits.rank(uint8(src), pos);
-            else if(typeof(T) == typeof(short))
-                return Bits.rank(int16(src), pos);
             else if(typeof(T) == typeof(ushort))
                 return Bits.rank(uint16(src), pos);
-            else if(typeof(T) == typeof(int))
-                return Bits.rank(int32(src), pos);
             else if(typeof(T) == typeof(uint))
                 return Bits.rank(uint32(src), pos);
-            else if(typeof(T) == typeof(long))
-                return Bits.rank(int64(src), pos);
             else if(typeof(T) == typeof(ulong))
                 return Bits.rank(uint64(src), pos);
             else            

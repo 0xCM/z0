@@ -53,15 +53,15 @@ namespace Z0.Test
 
         public void dotg()
         {
-            dotg_check(10,0u);
-            dotg_check(20,0u);
-            dotg_check(63,0ul);
-            dotg_check(64,0ul);
-            dotg_check(87,(byte)0);
-            dotg_check(128,(ushort)0);
-            dotg_check(25,(ushort)0);
-            dotg_check(256,0ul);
-            dotg_check(2048,0u);
+            dotg_check<uint>(10);
+            dotg_check<uint>(20);
+            dotg_check<ulong>(63);
+            dotg_check<ulong>(64);
+            dotg_check<byte>(87);
+            dotg_check<ushort>(128);
+            dotg_check<ushort>(25);
+            dotg_check<ulong>(256);
+            dotg_check<uint>(2048);
         }
 
         public void dotng()
@@ -180,12 +180,12 @@ namespace Z0.Test
             }
         }
 
-        void dotg_check<T>(BitSize bitcount, T rep = default, int cycles = DefaltCycleCount)
+        void dotg_check<T>(int bitcount, T rep = default)
             where T : unmanaged
         {
             TypeCaseStart<T>();
 
-            for(var i=0; i<cycles; i++)
+            for(var i=0; i<CycleCount; i++)
             {
                 var x = Random.BitVector<T>(bitcount);
                 var y = Random.BitVector<T>(bitcount);
@@ -198,12 +198,12 @@ namespace Z0.Test
             TypeCaseEnd<T>();
         }
 
-        void dotng_check<N,T>(N bitcount = default, T rep = default,  int cycles = DefaltCycleCount)
+        void dotng_check<N,T>(N bitcount = default, T rep = default)
             where T : unmanaged
             where N : ITypeNat, new()
         {
             NatCaseStart<N,T>();
-            for(var i=0; i<cycles; i++)
+            for(var i=0; i<CycleCount; i++)
             {
                 var x = Random.BitVector<N,T>();
                 var y = Random.BitVector<N,T>();

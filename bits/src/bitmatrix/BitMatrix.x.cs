@@ -111,18 +111,33 @@ namespace Z0
         }       
 
         [MethodImpl(Inline)]
+        internal static string FormatMatrixBits(this byte[] src, int rowlen)            
+            => src.AsSpan().FormatMatrixBits(rowlen);
+
+        [MethodImpl(Inline)]
         internal static string FormatMatrixBits(this Span<ushort> src, int rowlen)            
             => src.AsBytes().FormatMatrixBits(rowlen);
+
+        [MethodImpl(Inline)]
+        internal static string FormatMatrixBits(this ushort[] src, int rowlen)            
+            => src.AsSpan().AsBytes().FormatMatrixBits(rowlen);
 
         [MethodImpl(Inline)]
         internal static string FormatMatrixBits(this Span<uint> src, int rowlen)            
             => src.AsBytes().FormatMatrixBits(rowlen);
 
+        [MethodImpl(Inline)]
+        internal static string FormatMatrixBits(this uint[] src, int rowlen)            
+            => src.AsSpan().AsBytes().FormatMatrixBits(rowlen);
 
         [MethodImpl(Inline)]
         internal static string FormatMatrixBits(this Span<ulong> src, int rowlen)            
             => src.AsBytes().FormatMatrixBits(rowlen);
-                
+
+        [MethodImpl(Inline)]
+        internal static string FormatMatrixBits(this ulong[] src, int rowlen)            
+            => src.AsSpan().AsBytes().FormatMatrixBits(rowlen);
+
         /// <summary>
         /// Part of a pattern to do cross-lane 256-bit shuffles
         /// </summary>

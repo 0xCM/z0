@@ -19,6 +19,66 @@ namespace Z0
 
     partial class dinx
     {
+        [MethodImpl(Inline)]
+        public static Vector128<short> vshufflehi(Vector128<short> src, Arrange4 spec)
+            => ShuffleHigh(src, (byte)spec);
+
+        [MethodImpl(Inline)]
+        public static Vector128<ushort> vshufflehi(Vector128<ushort> src, Arrange4 spec)
+            => ShuffleHigh(src, (byte)spec);
+
+        [MethodImpl(Inline)]
+        public static Vector128<short> vshufflelo(Vector128<short> src, Arrange4 spec)
+            => ShuffleLow(src, (byte)spec);
+
+        [MethodImpl(Inline)]
+        public static Vector128<ushort> vshufflelo(Vector128<ushort> src, Arrange4 spec)
+            => ShuffleLow(src, (byte)spec);
+
+        /// <summary>
+        /// Shuffles the first four elements of the source vector with the lo mask and the last four elements with the hi mask
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="lo">The lo mask</param>
+        /// <param name="hi">The hi mask</param>
+        [MethodImpl(Inline)]
+        public static Vector128<short> vshuffle(Vector128<short> src, Arrange4 lo, Arrange4 hi)        
+            => vshufflehi(vshufflelo(src,lo),hi);                   
+
+        /// <summary>
+        /// Shuffles the first four elements of the source vector with the lo mask and the last four elements with the hi mask
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="lo">The lo mask</param>
+        /// <param name="hi">The hi mask</param>
+        [MethodImpl(Inline)]
+        public static Vector128<ushort> vshuffle(Vector128<ushort> src, Arrange4 lo, Arrange4 hi)        
+            => vshufflehi(vshufflelo(src,lo),hi);                   
+
+        [MethodImpl(Inline)]
+        public static Vector128<uint> vshuffle(Vector128<uint> src, Arrange4 spec)
+            => Shuffle(src, (byte)spec);
+
+        ///<summary>
+        /// __m256i _mm256_shuffle_epi32 (__m256i a, const int imm8) VPSHUFD ymm, ymm/m256, imm8
+        /// shuffles 32-bit integers in the source vector within 128-bit lanes
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="control">The shuffle spec</param>
+        [MethodImpl(Inline)]
+        public static Vector256<int> vshuffle(Vector256<int> src, Arrange4 control)
+            => Shuffle(src, (byte)control);
+
+        ///<summary>
+        /// __m256i _mm256_shuffle_epi32 (__m256i a, const int imm8) VPSHUFD ymm, ymm/m256, imm8
+        /// shuffles 32-bit integers in the source vector within 128-bit lanes
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="control">The shuffle spec</param>
+        [MethodImpl(Inline)]
+        public static Vector256<uint> vshuffle(Vector256<uint> src, Arrange4 control)
+            => Shuffle(src, (byte)control);
+
         ///<summary>
         /// __m128i _mm_shufflehi_epi16 (__m128i a, int immediate) PSHUFHW xmm, xmm/m128, imm8
         ///</summary>

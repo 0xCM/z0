@@ -13,7 +13,7 @@ namespace Z0
     /// <summary>
     /// Defines non-parametric bitmasking and selection functions
     /// </summary>
-    public static class BitMask
+    public static partial class BitMask
     {
         /// <summary>
         /// Enables a specified source bit
@@ -289,7 +289,7 @@ namespace Z0
         /// <param name="src">The source value to manipulate</param>
         /// <param name="pos">The position of the bit to disable</param>
         [MethodImpl(Inline)]
-        public static ref byte disable(ref byte src, in int pos)
+        public static ref byte disable(ref byte src, int pos)
         {
             src &= (byte)~((byte)(1 << pos));
             return ref src;
@@ -301,7 +301,7 @@ namespace Z0
         /// <param name="src">The source value to manipulate</param>
         /// <param name="pos">The position of the bit to disable</param>
         [MethodImpl(Inline)]
-        public static ref sbyte disable(ref sbyte src, in int pos)
+        public static ref sbyte disable(ref sbyte src, int pos)
         {
             var m = (sbyte)(1 << pos);
             src &= (sbyte)~m;
@@ -314,7 +314,7 @@ namespace Z0
         /// <param name="src">The source value to manipulate</param>
         /// <param name="pos">The position of the bit to disable</param>
         [MethodImpl(Inline)]
-        public static ref short disable(ref short src, in int pos)
+        public static ref short disable(ref short src, int pos)
         {
             var m = (short)(1 << pos);
             src &= (short)~m;
@@ -327,7 +327,7 @@ namespace Z0
         /// <param name="src">The source value to manipulate</param>
         /// <param name="pos">The position of the bit to disable</param>
         [MethodImpl(Inline)]
-        public static ref ushort disable(ref ushort src, in int pos)
+        public static ref ushort disable(ref ushort src, int pos)
         {
             var m = (ushort)(1 << pos);
             src &= (ushort)~m;
@@ -340,7 +340,7 @@ namespace Z0
         /// <param name="src">The source value to manipulate</param>
         /// <param name="pos">The position of the bit to disable</param>
         [MethodImpl(Inline)]
-        public static ref int disable(ref int src, in int pos)
+        public static ref int disable(ref int src, int pos)
         {
             var m = 1 << pos;
             src &= ~m;
@@ -353,7 +353,7 @@ namespace Z0
         /// <param name="src">The source value to manipulate</param>
         /// <param name="pos">The position of the bit to disable</param>
         [MethodImpl(Inline)]
-        public static ref uint disable(ref uint src, in int pos)
+        public static ref uint disable(ref uint src, int pos)
         {
             src &= ~(1u << pos);
             return ref src;
@@ -365,7 +365,7 @@ namespace Z0
         /// <param name="src">The source value to manipulate</param>
         /// <param name="pos">The position of the bit to disable</param>
         [MethodImpl(Inline)]
-        public static ref long disable(ref long src, in int pos)
+        public static ref long disable(ref long src, int pos)
         {
             var m = 1L << pos;
             src &= ~m;
@@ -378,7 +378,7 @@ namespace Z0
         /// <param name="src">The source value to manipulate</param>
         /// <param name="pos">The position of the bit to disable</param>
         [MethodImpl(Inline)]
-        public static ref ulong disable(ref ulong src, in int pos)
+        public static ref ulong disable(ref ulong src, int pos)
         {
             var m = 1ul << pos;
             src &= ~m;
@@ -391,7 +391,7 @@ namespace Z0
         /// <param name="src">The source value to manipulate</param>
         /// <param name="pos">The position of the bit to disable</param>
         [MethodImpl(Inline)]
-        public static ref float disable(ref float src, in int pos)
+        public static ref float disable(ref float src, int pos)
         {
             ref var bits = ref Unsafe.As<float,int>(ref src);
             var m = 1 << pos;
@@ -405,7 +405,7 @@ namespace Z0
         /// <param name="src">The source value to manipulate</param>
         /// <param name="pos">The position of the bit to disable</param>
         [MethodImpl(Inline)]
-        public static ref double disable(ref double src, in int pos)
+        public static ref double disable(ref double src, int pos)
         {
             ref var bits = ref Unsafe.As<double,long>(ref src);
             var m = 1L << pos;
@@ -419,7 +419,7 @@ namespace Z0
         /// <param name="src">The value to interrogate</param>
         /// <param name="pos">The position to check</param>
         [MethodImpl(Inline)]
-        public static bool test(in sbyte src, in int pos)
+        public static bool test(sbyte src, int pos)
             => (src & (1 << pos)) != 0;
             
         /// <summary>
@@ -428,7 +428,7 @@ namespace Z0
         /// <param name="src">The value to interrogate</param>
         /// <param name="pos">The position to check</param>
         [MethodImpl(Inline)]
-        public static bool test(in byte src, in int pos)
+        public static bool test(byte src, int pos)
             => (src & (1 << pos)) != 0;
 
         /// <summary>
@@ -437,7 +437,7 @@ namespace Z0
         /// <param name="src">The value to interrogate</param>
         /// <param name="pos">The position to check</param>
         [MethodImpl(Inline)]
-        public static bool test(in short src, in int pos)
+        public static bool test(short src, int pos)
             => (src & (1 << pos)) != 0;
 
         /// <summary>
@@ -446,7 +446,7 @@ namespace Z0
         /// <param name="src">The value to interrogate</param>
         /// <param name="pos">The position to check</param>
         [MethodImpl(Inline)]
-        public static bool test(in ushort src, in int pos)
+        public static bool test(ushort src, int pos)
             => (src & (1 << pos)) != 0;
 
         /// <summary>
@@ -455,7 +455,7 @@ namespace Z0
         /// <param name="src">The value to interrogate</param>
         /// <param name="pos">The position to check</param>
         [MethodImpl(Inline)]
-        public static bool test(in int src, in int pos)
+        public static bool test(int src, int pos)
             => (src & (1 << pos)) != 0;
 
         /// <summary>
@@ -464,7 +464,7 @@ namespace Z0
         /// <param name="src">The value to interrogate</param>
         /// <param name="pos">The position to check</param>
         [MethodImpl(Inline)]
-        public static bool test(in uint src, in int pos)
+        public static bool test(uint src, int pos)
             => (src & (1u << pos)) != 0u;
 
         /// <summary>
@@ -473,7 +473,7 @@ namespace Z0
         /// <param name="src">The value to interrogate</param>
         /// <param name="pos">The position to check</param>
         [MethodImpl(Inline)]
-        public static bool test(in long src, in int pos)
+        public static bool test(long src, int pos)
             => (src & (1L << pos)) != 0L;
 
         /// <summary>
@@ -482,7 +482,7 @@ namespace Z0
         /// <param name="src">The value to interrogate</param>
         /// <param name="pos">The position to check</param>
         [MethodImpl(Inline)]
-        public static bool test(in ulong src, in int pos)
+        public static bool test(ulong src, int pos)
             => (src & (1ul << pos)) != 0ul;
 
         /// <summary>
@@ -491,7 +491,7 @@ namespace Z0
         /// <param name="src">The value to interrogate</param>
         /// <param name="pos">The position to check</param>
         [MethodImpl(Inline)]
-        public static bool test(in float src, in int pos)
+        public static bool test(float src, int pos)
             => test(BitConverter.SingleToInt32Bits(src),pos); 
 
         /// <summary>
@@ -500,7 +500,7 @@ namespace Z0
         /// <param name="src">The value to interrogate</param>
         /// <param name="pos">The position to check</param>
         [MethodImpl(Inline)]
-        public static bool test(in double src, in int pos)
+        public static bool test(double src, int pos)
             => test(BitConverter.DoubleToInt64Bits(src),pos);
 
         /// <summary>
@@ -509,7 +509,7 @@ namespace Z0
         /// <param name="src">The value to interrogate</param>
         /// <param name="pos">The position to check</param>
         [MethodImpl(Inline)]
-        public static bool test(in sbyte src, byte pos)
+        public static bool test(sbyte src, byte pos)
             => (src & (1 << pos)) != 0;
             
         /// <summary>
@@ -518,7 +518,7 @@ namespace Z0
         /// <param name="src">The value to interrogate</param>
         /// <param name="pos">The position to check</param>
         [MethodImpl(Inline)]
-        public static bool test(in byte src, byte pos)
+        public static bool test(byte src, byte pos)
             => (src & (1 << pos)) != 0;
 
         /// <summary>
@@ -527,7 +527,7 @@ namespace Z0
         /// <param name="src">The value to interrogate</param>
         /// <param name="pos">The position to check</param>
         [MethodImpl(Inline)]
-        public static bool test(in short src, byte pos)
+        public static bool test(short src, byte pos)
             => (src & (1 << pos)) != 0;
 
         /// <summary>
@@ -536,7 +536,7 @@ namespace Z0
         /// <param name="src">The value to interrogate</param>
         /// <param name="pos">The position to check</param>
         [MethodImpl(Inline)]
-        public static bool test(in ushort src, byte pos)
+        public static bool test(ushort src, byte pos)
             => (src & (1 << pos)) != 0;
 
         /// <summary>
@@ -545,7 +545,7 @@ namespace Z0
         /// <param name="src">The value to interrogate</param>
         /// <param name="pos">The position to check</param>
         [MethodImpl(Inline)]
-        public static bool test(in int src, byte pos)
+        public static bool test(int src, byte pos)
             => (src & (1 << pos)) != 0;
 
         /// <summary>
@@ -554,7 +554,7 @@ namespace Z0
         /// <param name="src">The value to interrogate</param>
         /// <param name="pos">The position to check</param>
         [MethodImpl(Inline)]
-        public static bool test(in uint src, byte pos)
+        public static bool test(uint src, byte pos)
             => (src & (1u << pos)) != 0u;
 
         /// <summary>
@@ -563,7 +563,7 @@ namespace Z0
         /// <param name="src">The value to interrogate</param>
         /// <param name="pos">The position to check</param>
         [MethodImpl(Inline)]
-        public static bool test(in long src, byte pos)
+        public static bool test(long src, byte pos)
             => (src & (1L << pos)) != 0L;
 
         /// <summary>
@@ -572,7 +572,7 @@ namespace Z0
         /// <param name="src">The value to interrogate</param>
         /// <param name="pos">The position to check</param>
         [MethodImpl(Inline)]
-        public static bool test(in ulong src, byte pos)
+        public static bool test(ulong src, byte pos)
             => (src & (1ul << pos)) != 0ul;
 
         /// <summary>
@@ -581,7 +581,7 @@ namespace Z0
         /// <param name="src">The value to interrogate</param>
         /// <param name="pos">The position to check</param>
         [MethodImpl(Inline)]
-        public static bool test(in float src, byte pos)
+        public static bool test(float src, byte pos)
             => test(BitConverter.SingleToInt32Bits(src),pos); 
 
         /// <summary>
@@ -590,7 +590,7 @@ namespace Z0
         /// <param name="src">The value to interrogate</param>
         /// <param name="pos">The position to check</param>
         [MethodImpl(Inline)]
-        public static bool test(in double src, byte pos)
+        public static bool test(double src, byte pos)
             => test(BitConverter.DoubleToInt64Bits(src),pos);
 
         /// <summary>
@@ -600,7 +600,7 @@ namespace Z0
         /// <param name="index">The source bit index</param>
         /// <param name="value">The state with which to align a source bit</param>
         [MethodImpl(Inline)]
-        public static ref byte set(ref byte src, byte index, in Bit value)            
+        public static ref byte set(ref byte src, byte index, bit value)            
         {
             if(value) 
                 enable(ref src, index);
@@ -616,7 +616,7 @@ namespace Z0
         /// <param name="index">The source bit index</param>
         /// <param name="value">The state with which to align a source bit</param>
         [MethodImpl(Inline)]
-        public static ref sbyte set(ref sbyte src, byte index, in Bit value)            
+        public static ref sbyte set(ref sbyte src, byte index, bit value)            
         {
             if(value) enable(ref src, index);
             else disable(ref src, index);
@@ -630,7 +630,7 @@ namespace Z0
         /// <param name="index">The source bit index</param>
         /// <param name="value">The state with which to align a source bit</param>
         [MethodImpl(Inline)]
-        public static ref short set(ref short src, byte index, in Bit value)            
+        public static ref short set(ref short src, byte index, bit value)            
         {
             if(value) enable(ref src, index);
             else disable(ref src, index);
@@ -644,7 +644,7 @@ namespace Z0
         /// <param name="index">The source bit index</param>
         /// <param name="value">The state with which to align a source bit</param>
         [MethodImpl(Inline)]
-        public static ref ushort set(ref ushort src, byte index, in Bit value)            
+        public static ref ushort set(ref ushort src, byte index, bit value)            
         {
             if(value) enable(ref src, index);
             else disable(ref src, index);
@@ -658,7 +658,7 @@ namespace Z0
         /// <param name="index">The source bit index</param>
         /// <param name="value">The state with which to align a source bit</param>
         [MethodImpl(Inline)]
-        public static ref int set(ref int src, byte index, in Bit value)            
+        public static ref int set(ref int src, byte index, bit value)            
         {
             if(value) enable(ref src, index);
             else disable(ref src, index);
@@ -672,7 +672,7 @@ namespace Z0
         /// <param name="index">The source bit index</param>
         /// <param name="value">The state with which to align a source bit</param>
         [MethodImpl(Inline)]
-        public static ref uint set(ref uint src, byte index, in Bit value)            
+        public static ref uint set(ref uint src, byte index, bit value)            
         {
             if(value) enable(ref src, index);
             else disable(ref src, index);
@@ -686,7 +686,7 @@ namespace Z0
         /// <param name="index">The source bit index</param>
         /// <param name="value">The state with which to align a source bit</param>
         [MethodImpl(Inline)]
-        public static ref long set(ref long src, byte index, in Bit value)            
+        public static ref long set(ref long src, byte index, bit value)            
         {
             if(value) enable(ref src, index);
             else disable(ref src, index);
@@ -700,7 +700,7 @@ namespace Z0
         /// <param name="index">The source bit index</param>
         /// <param name="value">The state with which to align a source bit</param>
         [MethodImpl(Inline)]
-        public static ref ulong set(ref ulong src, byte index, in Bit value)            
+        public static ref ulong set(ref ulong src, byte index, bit value)            
         {
             if(value) enable(ref src, index);
             else disable(ref src, index);
@@ -714,7 +714,7 @@ namespace Z0
         /// <param name="index">The source bit index</param>
         /// <param name="value">The state with which to align a source bit</param>
         [MethodImpl(Inline)]
-        public static ref float set(ref float src, byte index, in Bit value)            
+        public static ref float set(ref float src, byte index, bit value)            
         {
             if(value) enable(ref src, index);
             else disable(ref src, index);
@@ -728,7 +728,7 @@ namespace Z0
         /// <param name="index">The source bit index</param>
         /// <param name="value">The state with which to align a source bit</param>
         [MethodImpl(Inline)]
-        public static ref double set(ref double src, byte index, in Bit value)            
+        public static ref double set(ref double src, byte index, bit value)            
         {
             if(value) enable(ref src, index);
             else disable(ref src, index);
@@ -1106,105 +1106,6 @@ namespace Z0
             return ref src;
         } 
 
-        /// <summary>
-        /// Extracts a contiguous range of bits from the source inclusively between two index positions
-        /// </summary>
-        /// <param name="src">The source value</param>
-        /// <param name="i0">The bit position within the source where extraction should begin</param>
-        /// <param name="i1">The bit position within the source where extraction should end</param>
-        [MethodImpl(Inline)]
-        public static byte between(in byte src, BitPos i0, BitPos i1)        
-            => (byte)Bmi1.BitFieldExtract(src, i0, (byte)(i1 - i0));
-
-        /// <summary>
-        /// Extracts a contiguous range of bits from the source inclusively between two index positions
-        /// </summary>
-        /// <param name="src">The source value</param>
-        /// <param name="i0">The bit position within the source where extraction should begin</param>
-        /// <param name="i1">The bit position within the source where extraction should end</param>
-        [MethodImpl(Inline)]
-        public static sbyte between(in sbyte src, BitPos i0, BitPos i1)        
-            => (sbyte)between((byte)src, i0, i1);
-
-        /// <summary>
-        /// Extracts a contiguous range of bits from the source inclusively between two index positions
-        /// </summary>
-        /// <param name="src">The source value</param>
-        /// <param name="i0">The bit position within the source where extraction should begin</param>
-        /// <param name="i1">The bit position within the source where extraction should end</param>
-        [MethodImpl(Inline)]
-        public static ushort between(in ushort src, BitPos i0, BitPos i1)        
-            => (ushort)Bmi1.BitFieldExtract(src, i0, (byte)(i1 - i0));
-
-        /// <summary>
-        /// Extracts a contiguous range of bits from the source inclusively between two index positions
-        /// </summary>
-        /// <param name="src">The source value</param>
-        /// <param name="i0">The bit position within the source where extraction should begin</param>
-        /// <param name="i1">The bit position within the source where extraction should end</param>
-        [MethodImpl(Inline)]
-        public static short between(in short src, BitPos i0, BitPos i1)        
-            => (short)between((ushort)src, i0, i1);
-
-        /// <summary>
-        /// Extracts a contiguous range of bits from the source inclusively between two index positions
-        /// </summary>
-        /// <param name="src">The source value</param>
-        /// <param name="i0">The bit position within the source where extraction should begin</param>
-        /// <param name="i1">The bit position within the source where extraction should end</param>
-        [MethodImpl(Inline)]
-        public static uint between(in uint src, BitPos i0, BitPos i1)        
-            => Bmi1.BitFieldExtract(src, i0, (byte)(i1 - i0));
-
-        /// <summary>
-        /// Extracts a contiguous range of bits from the source inclusively between two index positions
-        /// </summary>
-        /// <param name="src">The source value</param>
-        /// <param name="i0">The bit position within the source where extraction should begin</param>
-        /// <param name="i1">The bit position within the source where extraction should end</param>
-        [MethodImpl(Inline)]
-        public static int between(in int src, BitPos i0, BitPos i1)        
-            => (int)between((uint)src, i0, i1);
-
-        /// <summary>
-        /// Extracts a contiguous range of bits from the source inclusively between two index positions
-        /// </summary>
-        /// <param name="src">The source value</param>
-        /// <param name="i0">The bit position within the source where extraction should begin</param>
-        /// <param name="i1">The bit position within the source where extraction should end</param>
-        [MethodImpl(Inline)]
-        public static ulong between(in ulong src, BitPos i0, BitPos i1)
-            => Bmi1.X64.BitFieldExtract(src, i0, (byte)(i1 - i0));            
-
-        /// <summary>
-        /// Extracts a contiguous range of bits from the source inclusively between two index positions
-        /// </summary>
-        /// <param name="src">The source value</param>
-        /// <param name="i0">The bit position within the source where extraction should begin</param>
-        /// <param name="i1">The bit position within the source where extraction should end</param>
-        [MethodImpl(Inline)]
-        public static long between(in long src, BitPos i0, BitPos i1)        
-            => (long)between((long)src, i0, i1);
-
-        /// <summary>
-        /// Extracts a contiguous range of bits from the source inclusively between two index positions
-        /// </summary>
-        /// <param name="src">The source value</param>
-        /// <param name="i0">The bit position within the source where extraction should begin</param>
-        /// <param name="i1">The bit position within the source where extraction should end</param>
-        [MethodImpl(Inline)]
-        public static float between(in float src, BitPos i0, BitPos i1)        
-            => BitConverter.Int32BitsToSingle(between(BitConverter.SingleToInt32Bits(src), i0, i1));
-
-        /// <summary>
-        /// Extracts a contiguous range of bits from the source inclusively between two index positions
-        /// </summary>
-        /// <param name="src">The source value</param>
-        /// <param name="i0">The bit position within the source where extraction should begin</param>
-        /// <param name="i1">The bit position within the source where extraction should end</param>
-        [MethodImpl(Inline)]
-        public static double between(in double src, BitPos i0, BitPos i1)        
-            => BitConverter.Int64BitsToDouble(between(BitConverter.DoubleToInt64Bits(src), i0, i1));
 
     }   
 }

@@ -158,7 +158,6 @@ namespace Z0
         {
             var BL = BitOpApi.lookup(id);
             var SC = ScalarOpApi.lookup<T>(id);
-            var BV = BitVectorOpApi.lookup<V>(id);
             
             for(var sample = 0; sample< SampleSize; sample++)
             {
@@ -168,11 +167,8 @@ namespace Z0
                 for(var i=0; i< z0.Length; i++)
                     z0[i] = BL(a[i]);
 
-                var z2 = BV(a);
-                var z3 = SC(a.ToScalar<T>());
-                                
+                var z3 = SC(a.ToScalar<T>());                                
                 Claim.eq(z3, z0.ToScalar<T>());                                
-                Claim.eq(z0, z2);
             }
         }
 
@@ -182,7 +178,6 @@ namespace Z0
         {
             var BL = BitOpApi.lookup(id);
             var SC = ScalarOpApi.lookup<T>(id);
-            var BV = BitVectorOpApi.lookup<V>(id);
             
             for(var sample = 0; sample< SampleSize; sample++)
             {
@@ -193,11 +188,9 @@ namespace Z0
                 for(var i=0; i< z0.Length; i++)
                     z0[i] = BL(a[i],b[i]);
 
-                var z2 = BV(a,b);
                 var z3 = SC(a.ToScalar<T>(), b.ToScalar<T>());
                                 
                 Claim.eq(z3, z0.ToScalar<T>());                                
-                Claim.eq(z0, z2);
             }
         }
 
@@ -207,7 +200,6 @@ namespace Z0
         {
             var BL = BitOpApi.lookup(id);
             var SC = ScalarOpApi.lookup<T>(id);
-            var BV = BitVectorOpApi.lookup<V>(id);
             var V128 = Cpu128OpApi.lookup<T>(id);
             var V256 = Cpu256OpApi.lookup<T>(id);
             check_op_identity<T>(id);
@@ -226,11 +218,9 @@ namespace Z0
                     z0[i] = BL(a[i],b[i],c[i]);
 
 
-                var z2 = BV(a,b,c);
                 var z3 = SC(sa, sb, sc);
                                 
                 Claim.eq(z3, z0.ToScalar<T>());                                
-                Claim.eq(z0, z2);
 
                 var v1 = ginx.vbroadcast256(sa);
                 var v2 = ginx.vbroadcast256(sb);
@@ -261,10 +251,8 @@ namespace Z0
                 for(var i=0; i< z0.Length; i++)
                     z0[i] = bit.select(a[i],b[i],c[i]);
                 
-                var z2 = BitVectorOps.select(a,b,c);
                 var z3 = ScalarOps.select(a.ToScalar<T>(), b.ToScalar<T>(), c.ToScalar<T>());
                 Claim.eq(z3, z0.ToScalar<T>());                                
-                Claim.eq(z0, z2);
             }
         }
 

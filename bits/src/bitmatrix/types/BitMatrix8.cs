@@ -18,39 +18,41 @@ namespace Z0
     /// <summary>
     /// Defines an 8x8 matrix of bits
     /// </summary>
-    public ref struct BitMatrix8 
+    public struct BitMatrix8 //: IPrimalSquare<BitMatrix8,byte>
     {        
-        Span<byte> data;
+        byte[] data;
                     
         /// <summary>
         /// The matrix order
         /// </summary>
-        public static readonly N8 N = default;
+        public const uint N = 8;
 
         /// <summary>
         /// The number of bits per row
         /// </summary>
-        public static readonly BitSize RowBitCount = N.value;        
+        public const uint RowBitCount = N;
 
         /// <summary>
         /// The number of bits per column
         /// </summary>
-        public static readonly BitSize ColBitCount = N.value;
+        public const uint ColBitCount = N;
 
         /// <summary>
         /// The number of bits apprehended by the matrix = 64
         /// </summary>
-        public static readonly BitSize TotalBitCount = RowBitCount * ColBitCount;
+        public const uint TotalBitCount = RowBitCount * ColBitCount;
                         
         /// <summary>
         /// The (aligned) number of bytes needed for a row
         /// </summary>
-        public static readonly ByteSize RowByteCount = (ByteSize)RowBitCount;                        
+        public const uint RowByteCount = RowBitCount >> 3;
 
         /// <summary>
         /// The (aligned) number of bytes needed for a column
         /// </summary>
-        public static readonly ByteSize ColByteCount = (ByteSize)ColBitCount;
+        public const uint ColByteCount = ColBitCount >> 3;
+
+        public const uint TotalByteCount = TotalBitCount >> 3;
 
         /// <summary>
         /// Defines the 8x8 identity bitmatrix
@@ -87,6 +89,14 @@ namespace Z0
             => new BitMatrix8(src);
 
         /// <summary>
+        /// Creates an 8x8 bitmatrix from a memory segment of length 8
+        /// </summary>
+        /// <param name="src">The source array</param>
+        [MethodImpl(Inline)]
+        public static BitMatrix8 From(byte[] src)        
+            => new BitMatrix8(src);
+
+        /// <summary>
         /// Defines a matrix by the explicit specification of 8 bytes
         /// </summary>
         /// <param name="row0">Specifies the bits in row0</param>
@@ -111,13 +121,6 @@ namespace Z0
         public static BitMatrix8 From(uint lo, uint hi)
             => From(Z0.Bits.pack(lo, hi));
 
-        /// <summary>
-        /// Creates an 8x8 bitmatrix from a memory segment of length 8
-        /// </summary>
-        /// <param name="src">The source array</param>
-        [MethodImpl(Inline)]
-        public static BitMatrix8 From(byte[] src)        
-            => new BitMatrix8(src);
 
         [MethodImpl(Inline)]
         public static BitMatrix8 operator & (BitMatrix8 lhs, BitMatrix8 rhs)
@@ -167,7 +170,7 @@ namespace Z0
         BitMatrix8(Span<byte> src)
         {
             require(src.Length == Pow2.T03);
-            this.data = src;
+            this.data = src.ToArray();
         }
 
         [MethodImpl(Inline)]
@@ -189,7 +192,7 @@ namespace Z0
         public readonly int RowCount
         {
             [MethodImpl(Inline)]
-            get => N;
+            get => (int)N;
         }
 
         /// <summary>
@@ -198,7 +201,7 @@ namespace Z0
         public readonly int ColCount
         {
             [MethodImpl(Inline)]
-            get => N;
+            get => (int)N;
         }
 
         public Span<byte> Bytes
@@ -217,6 +220,25 @@ namespace Z0
         }
 
         /// <summary>
+        /// The data enclosed by the matrix
+        /// </summary>
+        public byte[] Rows
+        {
+            [MethodImpl(Inline)] 
+            get => data;
+        }
+
+        /// <summary>
+        /// A reference to the first row of the matrix
+        /// </summary>
+        public ref byte Head
+        {
+            [MethodImpl(Inline)] 
+            get => ref data[0];
+        }
+
+
+        /// <summary>
         /// Constructs an 8-node graph via the adjacency matrix interpretation
         /// </summary>
         public Graph<byte> ToGraph()
@@ -229,7 +251,7 @@ namespace Z0
         /// <param name="col">The column index</param>
         [MethodImpl(Inline)]
         public readonly Bit GetBit(int row, int col)
-            => BitMask.test(in data[row], col);
+            => BitMask.test(data[row], col);
 
         /// <summary>
         /// Sets the bit in a specified cell
@@ -330,7 +352,7 @@ namespace Z0
         {
             byte col = 0;
             for(var r = 0; r < N; r++)
-                if(BitMask.test(in data[r], index))
+                if(BitMask.test(data[r], index))
                     BitMask.enable(ref col, r);
             return col;
         }

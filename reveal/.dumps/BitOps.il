@@ -1,4 +1,4 @@
-// 2019-10-18 23:21:14:262
+// 2019-10-19 23:11:07:997
 bit get_Off()
 {
     IL_0000: call Z0.bit Z0.bit::get_Off()
@@ -89,6 +89,25 @@ bit xnor(bit a, bit b)
     IL_0001: ldarg.1
     IL_0002: call Z0.bit Z0.bit::xnor(Z0.bit,Z0.bit)
     IL_0007: ret
+
+}
+bit left(bit a, bit b)
+{
+    IL_0000: ldarg.0
+    IL_0001: ret
+
+}
+bit right(bit a, bit b)
+{
+    IL_0000: ldarg.1
+    IL_0001: ret
+
+}
+bit rightnot(bit a, bit b)
+{
+    IL_0000: ldarg.1
+    IL_0001: call Z0.bit Z0.BitOps::not(Z0.bit)
+    IL_0006: ret
 
 }
 bit true(bit a, bit b)

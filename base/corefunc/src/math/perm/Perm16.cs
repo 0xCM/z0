@@ -125,7 +125,7 @@ namespace Z0
             ulong data = (ulong)spec;
             var dst = Perm<N16>.Alloc();
             for(int i=0, offset = 0; i<dst.Length; i++, offset +=4)
-                dst[i] = (int)BitMask.between(in data, offset, offset + 3);
+                dst[i] = (int)BitMask.between(data, (byte)offset, (byte)(offset + 3));
             return dst;
         }
 

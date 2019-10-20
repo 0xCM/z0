@@ -21,25 +21,26 @@ namespace Z0
     {
         static readonly int Length = Vec256<T>.Length;
 
-        static readonly Vec256<T> Zero = Vec256<T>.Zero;
-
         /// <summary>
         /// A vector where each component is assigned the numeric value 1
         /// </summary>
-        public static readonly Vec256<T> Units = CalcUnits();
+        public static Vec256<T> Units 
+            => CalcUnits();
 
         public static Vec256<T> Increasing 
         {
             [MethodImpl(Inline)]
-            get => Increments(zero<T>());
+            get => Increments();
         }
 
-        public static readonly Vec256<T> Decreasing = Decrements(convert<T>(Length - 1));
+        public static Vec256<T> Decreasing 
+            => Decrements(convert<T>(Length - 1));
         
+        public static Vec256<T> ClearAlt 
+            => ClearAlternating();
 
-        public static readonly Vec256<T> ClearAlt = ClearAlternating();
-
-        public static readonly Vec256<T> FpSignMask = CalcFpSignMask();
+        public static Vec256<T> FpSignMask 
+            => CalcFpSignMask();
 
         /// <summary>
         /// Creates a vector with incrementing components
@@ -85,7 +86,6 @@ namespace Z0
             return Vec256.Load(dst);
         }
 
-
         static Vec256<T> CalcFpSignMask()
         {
             if(typeof(T) == typeof(float))
@@ -93,7 +93,7 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                 return CalcFpSignMask64().As<T>();
             else 
-                return Zero;
+                return default;
         }
 
         static Vec256<T> ClearAlternating()

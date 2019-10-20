@@ -20,44 +20,44 @@ namespace Z0
     /// <summary>
     /// Defines a 16x16 matrix of bits
     /// </summary>
-    public ref struct BitMatrix16
+    public struct BitMatrix16 //: IPrimalSquare<BitMatrix16,ushort>
     {   
-        Span<ushort> data;
+        ushort[] data;
 
         /// <summary>
         /// The matrix order
         /// </summary>
-        public static readonly N16 N = default;
+        public const uint N = 16;
 
         /// <summary>
-        /// The number of bits per row = 16
+        /// The number of bits per row
         /// </summary>
-        public static readonly BitSize RowBitCount = N.value;        
+        public const uint RowBitCount = N;
 
         /// <summary>
-        /// The number of bits per column = 16
+        /// The number of bits per column
         /// </summary>
-        public static readonly BitSize ColBitCount = N.value;
+        public const uint ColBitCount = N;
 
         /// <summary>
-        /// The (aligned) number of bytes needed for a row = 2
+        /// The number of bits apprehended by the matrix
         /// </summary>
-        public static readonly ByteSize RowByteCount = (ByteSize)RowBitCount;                        
+        public const uint TotalBitCount = RowBitCount * ColBitCount;
+                        
+        /// <summary>
+        /// The number of bytes needed for a row
+        /// </summary>
+        public const uint RowByteCount = RowBitCount >> 3;
 
         /// <summary>
-        /// The (aligned) number of bytes needed for a column = 2
+        /// The number of bytes needed for a column
         /// </summary>
-        public static readonly ByteSize ColByteCount = (ByteSize)ColBitCount;
+        public const uint ColByteCount = ColBitCount >> 3;
 
         /// <summary>
-        /// The number of bits apprehended by the matrix = 256 bits
+        /// To total number of bytes required to store the matrix data
         /// </summary>
-        public static readonly BitSize TotalBitCount = RowBitCount * ColBitCount;
-
-        /// <summary>
-        /// The number of bytes required to store the matrix bits = 32
-        /// </summary>
-        public static readonly ByteSize StorageBytes = (ByteSize)TotalBitCount;
+        public const uint TotalByteCount = TotalBitCount >> 3;
                                 
         /// <summary>
         /// Defines the 16x16 identity bitmatrix
@@ -100,6 +100,19 @@ namespace Z0
             vstore(src, ref dst[0]);
             return new BitMatrix16(dst);
         }
+
+        /// <summary>
+        /// Loads a bitmatrix from the bits in cpu vector
+        /// </summary>
+        /// <param name="src">The matrix bits</param>
+        [MethodImpl(Inline)]
+        public static BitMatrix16 From(Vector256<ushort> src)
+        {
+            Span<ushort> dst = new ushort[Vec256<short>.Length];
+            vstore(src, ref dst[0]);
+            return new BitMatrix16(dst);
+        }
+
 
         /// <summary>
         /// Computes the bitwise and of the operands
@@ -151,7 +164,7 @@ namespace Z0
         BitMatrix16(Span<ushort> src)
         {                        
             require(src.Length == Pow2.T04);
-            this.data = src;
+            this.data = src.ToArray();
         }
 
         /// <summary>
@@ -160,7 +173,7 @@ namespace Z0
         public Span<byte> Bytes
         {
             [MethodImpl(Inline)]
-            get => data.AsBytes();
+            get => data.AsSpan().AsBytes();
         }
 
         /// <summary>
@@ -173,13 +186,31 @@ namespace Z0
         }
 
         /// <summary>
+        /// The data enclosed by the matrix
+        /// </summary>
+        public ushort[] Rows
+        {
+            [MethodImpl(Inline)] 
+            get => data;
+        }
+
+        /// <summary>
+        /// A reference to the first row of the matrix
+        /// </summary>
+        public ref ushort Head
+        {
+            [MethodImpl(Inline)] 
+            get => ref data[0];
+        }
+
+        /// <summary>
         /// Reads the bit in a specified cell
         /// </summary>
         /// <param name="row">The row index</param>
         /// <param name="col">The column index</param>
         [MethodImpl(Inline)]
         public readonly Bit GetBit(int row, int col)
-            => BitMask.test(in data[row], col);
+            => BitMask.test(data[row], col);
 
         /// <summary>
         /// Sets the bit in a specified cell
@@ -209,13 +240,13 @@ namespace Z0
         public readonly int RowCount
         {
             [MethodImpl(Inline)]
-            get => N;
+            get => (int)N;
         }
 
         public readonly int ColCount
         {
             [MethodImpl(Inline)]
-            get => N;
+            get => (int)N;
         }
 
         public readonly ushort ColData(int index)
@@ -335,6 +366,15 @@ namespace Z0
             dst = Avx.LoadVector256(refptr(ref data[0]));
             return ref dst;
         }
+
+        /// <summary>
+        /// Loads a cpu vector with the full content of the matrix
+        /// </summary>
+        /// <param name="dst">The target vector</param>
+        [MethodImpl(Inline)]
+        public unsafe void Load(out Vector256<ushort> dst)
+            => dinx.vloadu(in data[0], out dst);
+
 
         static ReadOnlySpan<byte> Identity16x16 => new byte[]
         {

@@ -79,7 +79,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Span<byte> unpack16x1(ushort src, Span<byte> dst)
         {
-            (var lo, var hi) = Bits.split(src);
+            Bits.split(src,out var lo, out var hi);
             unpack8x1(lo, dst);
             unpack8x1(hi, dst.Slice(8));
             return dst;
@@ -101,7 +101,7 @@ namespace Z0
 
         public static Span<byte> unpack32x1_bmi(uint src, Span<byte> dst)
         {
-            (var lo, var hi) = Bits.split(src);
+            Bits.split(src,out var lo, out var hi);
             unpack16x1(lo, dst);
             unpack16x1(hi, dst.Slice(16));
             return dst;
@@ -109,7 +109,7 @@ namespace Z0
 
         public static Span<byte> unpack64x1(ulong src, Span<byte> dst)
         {
-            (var lo, var hi) = Bits.split(src);
+            Bits.split(src, out var lo, out var hi);
             unpack32x1_bmi(lo, dst);
             unpack32x1_bmi(hi, dst.Slice(32));
             return dst;

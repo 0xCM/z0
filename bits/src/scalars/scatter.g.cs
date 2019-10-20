@@ -28,18 +28,18 @@ namespace Z0
             || typeof(T) == typeof(ushort) 
             || typeof(T) == typeof(uint) 
             || typeof(T) == typeof(ulong))
-                return scatteru(src,mask);
+                return scatter_u(src,mask);
             else if(typeof(T) == typeof(sbyte) 
             || typeof(T) == typeof(short) 
             || typeof(T) == typeof(int) 
             || typeof(T) == typeof(long))
-                return scatteri(src,mask);
+                return scatter_i(src,mask);
             else 
                 throw unsupported<T>();
         }           
 
         [MethodImpl(Inline)]
-        static T scatteri<T>(T src, T mask)
+        static T scatter_i<T>(T src, T mask)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
@@ -53,7 +53,7 @@ namespace Z0
         }           
 
         [MethodImpl(Inline)]
-        static T scatteru<T>(T src, T mask)
+        static T scatter_u<T>(T src, T mask)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))

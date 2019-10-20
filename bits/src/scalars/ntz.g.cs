@@ -20,7 +20,7 @@ namespace Z0
         /// <param name="src">The bit source</param>
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
-        public static byte ntz<T>(in T src)
+        public static uint ntz<T>(T src)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
