@@ -106,11 +106,11 @@ namespace Z0.Test
 
         void sub128_check<T>(int blocks = 0)
             where T : unmanaged
-            => CpuOpVerify.VerifyBinOp(Random, SampleSize, new Vec128BinOp<T>(ginx.vsub), gmath.sub<T>);
+            => CpuOpVerify.VerifyBinOp(Random, SampleSize, new Vector128BinOp<T>(ginx.vsub), gmath.sub<T>);
 
         void sub256_check<T>(int blocks = 0)
             where T : unmanaged
-                => CpuOpVerify.VerifyBinOp(Random, SampleSize, new Vec256BinOp<T>(ginx.vsub), gmath.sub<T>);
+                => CpuOpVerify.VerifyBinOp(Random, SampleSize, new Vector256BinOp<T>(ginx.vsub), gmath.sub<T>);
 
         void sub256_batch_check<T>()
             where T : unmanaged

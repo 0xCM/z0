@@ -101,17 +101,6 @@ namespace Z0
             => Bmi1.X64.BitFieldExtract(src, (byte)i0, (byte)(i1 - i0));
 
         /// <summary>
-        /// Intrinsic: unsigned __int64 _bextr_u64(unsigned __int64 a, unsigned int start, unsigned int len) BEXTR r64a, reg/m64, r64b
-        /// Extracts an index-identified contiguous range of bits from the source
-        /// </summary>
-        /// <param name="src">The bit source</param>
-        /// <param name="i0">The position of the first bit</param>
-        /// <param name="i1">The position of the last bit</param>
-        [MethodImpl(Inline)]
-        public static ulong range2(ulong src, int i0, int i1)
-            => Bmi1.X64.BitFieldExtract(src, (byte)i0, (byte)(i1 - i0));
-
-        /// <summary>
         /// Extracts a contiguous range of bits from the source
         /// </summary>
         /// <param name="src">The bit source</param>

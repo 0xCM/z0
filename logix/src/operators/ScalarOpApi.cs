@@ -98,6 +98,7 @@ namespace Z0
                 case BinaryLogicOpKind.LeftProject: return left;
                 case BinaryLogicOpKind.RightProject: return right;
                 case BinaryLogicOpKind.RightNot: return rightnot;
+                case BinaryLogicOpKind.LeftNot: return leftnot;
                 case BinaryLogicOpKind.True: return @true;
                 default: return dne<T>(id);
             }

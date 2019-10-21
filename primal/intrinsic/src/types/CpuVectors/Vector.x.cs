@@ -45,14 +45,14 @@ namespace Z0
             return dst;
         }
 
-        [MethodImpl(Inline)]
-        public static Span<T> ToSpan<T>(this Vector128<T> src)
-            where T : unmanaged            
-        {
-            Span<T> dst = new T[Vec128<T>.Length];
-            vstore(src, ref head(dst));
-            return dst;
-        }
+        // [MethodImpl(Inline)]
+        // public static Span<T> ToSpan<T>(this Vector128<T> src)
+        //     where T : unmanaged            
+        // {
+        //     Span<T> dst = new T[Vec128<T>.Length];
+        //     vstore(src, ref head(dst));
+        //     return dst;
+        // }
 
         /// <summary>
         /// Specifies the length, i.e. the number of components, of an
@@ -85,14 +85,14 @@ namespace Z0
             return dst;
         }
 
-        [MethodImpl(Inline)]
-        public static Span<T> ToSpan<T>(this Vector256<T> src)
-            where T : unmanaged            
-        {
-            Span<T> dst = new T[Vec256<T>.Length];
-            vstore(src, ref head(dst));
-            return dst;
-        }
+        // [MethodImpl(Inline)]
+        // public static Span<T> ToSpan<T>(this Vector256<T> src)
+        //     where T : unmanaged            
+        // {
+        //     Span<T> dst = new T[Vec256<T>.Length];
+        //     vstore(src, ref head(dst));
+        //     return dst;
+        // }
 
         /// <summary>
         /// Loads a 256-bit cpu vector from a blocked span

@@ -1,4 +1,4 @@
-// 2019-10-19 23:11:07:997
+// 2019-10-20 22:42:15:282
 bit get_Off()
 {
     IL_0000: call Z0.bit Z0.bit::get_Off()
@@ -101,6 +101,13 @@ bit right(bit a, bit b)
 {
     IL_0000: ldarg.1
     IL_0001: ret
+
+}
+bit leftnot(bit a, bit b)
+{
+    IL_0000: ldarg.0
+    IL_0001: call Z0.bit Z0.BitOps::not(Z0.bit)
+    IL_0006: ret
 
 }
 bit rightnot(bit a, bit b)
@@ -1012,90 +1019,115 @@ bit f4f(bit a, bit b, bit c)
 }
 bit f50(bit a, bit b, bit c)
 {
-    IL_0000: ldloca.s V_0
-    IL_0002: initobj Z0.bit
-    IL_0008: ldloc.0
-    IL_0009: ret
+    IL_0000: ldarg.0
+    IL_0001: ldarg.2
+    IL_0002: call Z0.bit Z0.BitOps::andnot(Z0.bit,Z0.bit)
+    IL_0007: ret
 
 }
 bit f51(bit a, bit b, bit c)
 {
-    IL_0000: ldloca.s V_0
-    IL_0002: initobj Z0.bit
-    IL_0008: ldloc.0
-    IL_0009: ret
+    IL_0000: ldarg.2
+    IL_0001: call Z0.bit Z0.BitOps::not(Z0.bit)
+    IL_0006: ldarg.0
+    IL_0007: ldarg.1
+    IL_0008: call Z0.bit Z0.BitOps::xor1(Z0.bit)
+    IL_000D: call Z0.bit Z0.BitOps::or(Z0.bit,Z0.bit)
+    IL_0012: call Z0.bit Z0.BitOps::and(Z0.bit,Z0.bit)
+    IL_0017: ret
 
 }
 bit f52(bit a, bit b, bit c)
 {
-    IL_0000: ldloca.s V_0
-    IL_0002: initobj Z0.bit
-    IL_0008: ldloc.0
-    IL_0009: ret
+    IL_0000: ldarg.1
+    IL_0001: ldarg.2
+    IL_0002: call Z0.bit Z0.BitOps::and(Z0.bit,Z0.bit)
+    IL_0007: call Z0.bit Z0.BitOps::not(Z0.bit)
+    IL_000C: ldarg.0
+    IL_000D: ldarg.2
+    IL_000E: call Z0.bit Z0.BitOps::xor(Z0.bit,Z0.bit)
+    IL_0013: call Z0.bit Z0.BitOps::and(Z0.bit,Z0.bit)
+    IL_0018: ret
 
 }
 bit f53(bit a, bit b, bit c)
 {
-    IL_0000: ldloca.s V_0
-    IL_0002: initobj Z0.bit
-    IL_0008: ldloc.0
-    IL_0009: ret
+    IL_0000: ldarg.0
+    IL_0001: ldarg.2
+    IL_0002: call Z0.bit Z0.BitOps::not(Z0.bit)
+    IL_0007: ldarg.1
+    IL_0008: call Z0.bit Z0.BitOps::not(Z0.bit)
+    IL_000D: call Z0.bit Z0.BitOps::select(Z0.bit,Z0.bit,Z0.bit)
+    IL_0012: ret
 
 }
 bit f54(bit a, bit b, bit c)
 {
-    IL_0000: ldloca.s V_0
-    IL_0002: initobj Z0.bit
-    IL_0008: ldloc.0
-    IL_0009: ret
+    IL_0000: ldarg.2
+    IL_0001: call Z0.bit Z0.BitOps::not(Z0.bit)
+    IL_0006: ldarg.0
+    IL_0007: ldarg.1
+    IL_0008: call Z0.bit Z0.BitOps::or(Z0.bit,Z0.bit)
+    IL_000D: call Z0.bit Z0.BitOps::and(Z0.bit,Z0.bit)
+    IL_0012: ret
 
 }
 bit f55(bit a, bit b, bit c)
 {
-    IL_0000: ldloca.s V_0
-    IL_0002: initobj Z0.bit
-    IL_0008: ldloc.0
-    IL_0009: ret
+    IL_0000: ldarg.2
+    IL_0001: call Z0.bit Z0.BitOps::not(Z0.bit)
+    IL_0006: ret
 
 }
 bit f56(bit a, bit b, bit c)
 {
-    IL_0000: ldloca.s V_0
-    IL_0002: initobj Z0.bit
-    IL_0008: ldloc.0
-    IL_0009: ret
+    IL_0000: ldarg.2
+    IL_0001: ldarg.1
+    IL_0002: ldarg.0
+    IL_0003: call Z0.bit Z0.BitOps::or(Z0.bit,Z0.bit)
+    IL_0008: call Z0.bit Z0.BitOps::xor(Z0.bit,Z0.bit)
+    IL_000D: ret
 
 }
 bit f57(bit a, bit b, bit c)
 {
-    IL_0000: ldloca.s V_0
-    IL_0002: initobj Z0.bit
-    IL_0008: ldloc.0
-    IL_0009: ret
+    IL_0000: ldarg.2
+    IL_0001: ldarg.1
+    IL_0002: ldarg.0
+    IL_0003: call Z0.bit Z0.BitOps::or(Z0.bit,Z0.bit)
+    IL_0008: call Z0.bit Z0.BitOps::nand(Z0.bit,Z0.bit)
+    IL_000D: ret
 
 }
 bit f58(bit a, bit b, bit c)
 {
-    IL_0000: ldloca.s V_0
-    IL_0002: initobj Z0.bit
-    IL_0008: ldloc.0
-    IL_0009: ret
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call Z0.bit Z0.BitOps::or(Z0.bit,Z0.bit)
+    IL_0007: ldarg.0
+    IL_0008: ldarg.2
+    IL_0009: call Z0.bit Z0.BitOps::xor(Z0.bit,Z0.bit)
+    IL_000E: call Z0.bit Z0.BitOps::and(Z0.bit,Z0.bit)
+    IL_0013: ret
 
 }
 bit f59(bit a, bit b, bit c)
 {
-    IL_0000: ldloca.s V_0
-    IL_0002: initobj Z0.bit
-    IL_0008: ldloc.0
-    IL_0009: ret
+    IL_0000: ldarg.2
+    IL_0001: ldarg.0
+    IL_0002: ldarg.1
+    IL_0003: call Z0.bit Z0.BitOps::xor1(Z0.bit)
+    IL_0008: call Z0.bit Z0.BitOps::or(Z0.bit,Z0.bit)
+    IL_000D: call Z0.bit Z0.BitOps::xor(Z0.bit,Z0.bit)
+    IL_0012: ret
 
 }
 bit f5a(bit a, bit b, bit c)
 {
-    IL_0000: ldloca.s V_0
-    IL_0002: initobj Z0.bit
-    IL_0008: ldloc.0
-    IL_0009: ret
+    IL_0000: ldarg.2
+    IL_0001: ldarg.0
+    IL_0002: call Z0.bit Z0.BitOps::xor(Z0.bit,Z0.bit)
+    IL_0007: ret
 
 }
 bit f5b(bit a, bit b, bit c)

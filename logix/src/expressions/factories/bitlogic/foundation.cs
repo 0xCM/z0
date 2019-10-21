@@ -76,14 +76,6 @@ namespace Z0
         public static TernaryLogicOp ternary(TernaryLogicOpKind op, ILogicExpr first, ILogicExpr second, ILogicExpr third)
             => new TernaryLogicOp(op,first,second,third);
 
-        /// <summary>
-        /// Defines a material conditional, otherwise known as an implication operator
-        /// </summary>
-        /// <param name="antecedent">The first operand</param>
-        /// <param name="consequent">The second operand</param>
-        [MethodImpl(Inline)]
-        public static BinaryLogicOp implies(ILogicExpr antecedent, ILogicExpr consequent)
-            => binary(BinaryLogicOpKind.Implies, antecedent, consequent);
 
  
     }

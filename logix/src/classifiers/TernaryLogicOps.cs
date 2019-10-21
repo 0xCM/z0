@@ -219,7 +219,7 @@ namespace Z0
         X28 = 0x28,
 
         /// <summary>
-        /// 00101001
+        /// select(c, xor(b,a), nor(b,a)): 00101001
         /// </summary>
         X29 = 0x29,
 
@@ -254,8 +254,7 @@ namespace Z0
         X2F = 0x2f,
 
         /// <summary>
-        /// 00110000
-        ///  andnot(a,b)
+        /// andnot(a,b): 00110000
         /// </summary>
         X30 = 0x30,
 
@@ -270,8 +269,7 @@ namespace Z0
         X32 = 0x32,
 
         /// <summary>
-        /// 00110011
-        ///  not(b)
+        /// not(b): 00110011
         /// </summary>
         X33 = 0x33,
 
@@ -396,28 +394,27 @@ namespace Z0
         X4B = 0x4b,
 
         /// <summary>
-        /// 
+        /// and(b, nand(a,c))
         /// </summary>
         X4C = 0x4c,
 
         /// <summary>
-        /// 
+        /// select(b, nand(a,c),nor(a,c))
         /// </summary>
         X4D = 0x4d,
 
         /// <summary>
-        /// 
+        /// select(c, not(a), b)
         /// </summary>
         X4E = 0x4e,
 
         /// <summary>
-        /// 
+        /// or(not(a), andnot(b,c))
         /// </summary>
-
         X4F = 0x4f,
 
         /// <summary>
-        /// 
+        /// andnot(a,c)
         /// </summary>
         X50 = 0x50,
 
@@ -427,12 +424,12 @@ namespace Z0
         X51 = 0x51,
 
         /// <summary>
-        /// 
+        /// and(not(and(b,c)),xor(a,c))
         /// </summary>
         X52 = 0x52,
 
         /// <summary>
-        /// 
+        /// select(a, not(c), not(b))
         /// </summary>
         X53 = 0x53,
 
@@ -442,7 +439,7 @@ namespace Z0
         X54 = 0x54,
         
         /// <summary>
-        /// 01010101 
+        /// not(c): 01010101 
         /// </summary>
         X55 = 0x55,
         

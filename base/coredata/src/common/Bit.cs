@@ -260,7 +260,8 @@ namespace Z0
         /// <remarks>See https://en.wikipedia.org/wiki/Material_conditional</remarks>
         [MethodImpl(Inline)]
         public static bit implies(bit antecedent, bit consequent)
-            => !(antecedent == On && consequent == Off);
+            => !(antecedent.state == 1 && consequent.state == 0);
+
 
         /// <summary>
         /// Evaluates the ternary select where the second operand is returned if the first 
@@ -270,7 +271,9 @@ namespace Z0
         /// <param name="b">The second operand</param>
         [MethodImpl(Inline)]
         public static bit select(bit a, bit b, bit c)
-            => a ? b : c;
+            => SafeWrap((a.state & b.state) | (~a.state & c.state));
+            //or(and(a, b), and(not(a), c));
+            //=> a ? b : c;
 
         [MethodImpl(Inline)]
         public static bit xor1(bit a)

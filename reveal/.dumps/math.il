@@ -1,4 +1,4 @@
-// 2019-10-19 23:11:04:284
+// 2019-10-20 22:42:11:497
 uint pow(uint b, uint exp)
 {
     IL_0000: ldarg.1
@@ -2803,7 +2803,7 @@ ulong fma(ulong x, ulong y, ulong z)
     IL_0005: ret
 
 }
-sbyte gcd(sbyte lhs, sbyte rhs)
+sbyte gcd(sbyte a, sbyte b)
 {
     IL_0000: ldarg.0
     IL_0001: call System.SByte Z0.math::abs(System.SByte)
@@ -2811,23 +2811,22 @@ sbyte gcd(sbyte lhs, sbyte rhs)
     IL_0007: ldarg.1
     IL_0008: call System.SByte Z0.math::abs(System.SByte)
     IL_000D: stloc.1
-    IL_000E: br.s IL_0019
+    IL_000E: br.s IL_001C
     IL_0010: ldloc.0
     IL_0011: ldloc.1
-    IL_0012: rem
-    IL_0013: conv.i1
-    IL_0014: stloc.2
-    IL_0015: ldloc.1
-    IL_0016: stloc.0
-    IL_0017: ldloc.2
-    IL_0018: stloc.1
-    IL_0019: ldloc.1
-    IL_001A: brtrue.s IL_0010
-    IL_001C: ldloc.0
-    IL_001D: ret
+    IL_0012: call System.SByte Z0.math::mod(System.SByte,System.SByte)
+    IL_0017: stloc.2
+    IL_0018: ldloc.1
+    IL_0019: stloc.0
+    IL_001A: ldloc.2
+    IL_001B: stloc.1
+    IL_001C: ldloc.1
+    IL_001D: brtrue.s IL_0010
+    IL_001F: ldloc.0
+    IL_0020: ret
 
 }
-byte gcd(byte lhs, byte rhs)
+byte gcd(byte a, byte b)
 {
     IL_0000: br.s IL_0010
     IL_0002: ldarg.0
@@ -2835,16 +2834,16 @@ byte gcd(byte lhs, byte rhs)
     IL_0004: call System.Byte Z0.math::mod(System.Byte,System.Byte)
     IL_0009: stloc.0
     IL_000A: ldarg.1
-    IL_000B: starg.s lhs
+    IL_000B: starg.s a
     IL_000D: ldloc.0
-    IL_000E: starg.s rhs
+    IL_000E: starg.s b
     IL_0010: ldarg.1
     IL_0011: brtrue.s IL_0002
     IL_0013: ldarg.0
     IL_0014: ret
 
 }
-short gcd(short lhs, short rhs)
+short gcd(short a, short b)
 {
     IL_0000: ldarg.0
     IL_0001: call System.Int16 Z0.math::abs(System.Int16)
@@ -2852,23 +2851,22 @@ short gcd(short lhs, short rhs)
     IL_0007: ldarg.1
     IL_0008: call System.Int16 Z0.math::abs(System.Int16)
     IL_000D: stloc.1
-    IL_000E: br.s IL_0019
+    IL_000E: br.s IL_001C
     IL_0010: ldloc.0
     IL_0011: ldloc.1
-    IL_0012: rem
-    IL_0013: conv.i2
-    IL_0014: stloc.2
-    IL_0015: ldloc.1
-    IL_0016: stloc.0
-    IL_0017: ldloc.2
-    IL_0018: stloc.1
-    IL_0019: ldloc.1
-    IL_001A: brtrue.s IL_0010
-    IL_001C: ldloc.0
-    IL_001D: ret
+    IL_0012: call System.Int16 Z0.math::mod(System.Int16,System.Int16)
+    IL_0017: stloc.2
+    IL_0018: ldloc.1
+    IL_0019: stloc.0
+    IL_001A: ldloc.2
+    IL_001B: stloc.1
+    IL_001C: ldloc.1
+    IL_001D: brtrue.s IL_0010
+    IL_001F: ldloc.0
+    IL_0020: ret
 
 }
-ushort gcd(ushort lhs, ushort rhs)
+ushort gcd(ushort a, ushort b)
 {
     IL_0000: br.s IL_0010
     IL_0002: ldarg.0
@@ -2876,16 +2874,16 @@ ushort gcd(ushort lhs, ushort rhs)
     IL_0004: call System.UInt16 Z0.math::mod(System.UInt16,System.UInt16)
     IL_0009: stloc.0
     IL_000A: ldarg.1
-    IL_000B: starg.s lhs
+    IL_000B: starg.s a
     IL_000D: ldloc.0
-    IL_000E: starg.s rhs
+    IL_000E: starg.s b
     IL_0010: ldarg.1
     IL_0011: brtrue.s IL_0002
     IL_0013: ldarg.0
     IL_0014: ret
 
 }
-int gcd(int lhs, int rhs)
+int gcd(int a, int b)
 {
     IL_0000: ldarg.0
     IL_0001: call System.Int32 Z0.math::abs(System.Int32)
@@ -2893,39 +2891,39 @@ int gcd(int lhs, int rhs)
     IL_0007: ldarg.1
     IL_0008: call System.Int32 Z0.math::abs(System.Int32)
     IL_000D: stloc.1
-    IL_000E: br.s IL_0018
+    IL_000E: br.s IL_001C
     IL_0010: ldloc.0
     IL_0011: ldloc.1
-    IL_0012: rem
-    IL_0013: stloc.2
-    IL_0014: ldloc.1
-    IL_0015: stloc.0
-    IL_0016: ldloc.2
-    IL_0017: stloc.1
+    IL_0012: call System.Int32 Z0.math::mod(System.Int32,System.Int32)
+    IL_0017: stloc.2
     IL_0018: ldloc.1
-    IL_0019: brtrue.s IL_0010
-    IL_001B: ldloc.0
-    IL_001C: ret
+    IL_0019: stloc.0
+    IL_001A: ldloc.2
+    IL_001B: stloc.1
+    IL_001C: ldloc.1
+    IL_001D: brtrue.s IL_0010
+    IL_001F: ldloc.0
+    IL_0020: ret
 
 }
-uint gcd(uint lhs, uint rhs)
+uint gcd(uint a, uint b)
 {
-    IL_0000: br.s IL_000C
+    IL_0000: br.s IL_0010
     IL_0002: ldarg.0
     IL_0003: ldarg.1
-    IL_0004: rem.un
-    IL_0005: stloc.0
-    IL_0006: ldarg.1
-    IL_0007: starg.s lhs
-    IL_0009: ldloc.0
-    IL_000A: starg.s rhs
-    IL_000C: ldarg.1
-    IL_000D: brtrue.s IL_0002
-    IL_000F: ldarg.0
-    IL_0010: ret
+    IL_0004: call System.UInt32 Z0.math::mod(System.UInt32,System.UInt32)
+    IL_0009: stloc.0
+    IL_000A: ldarg.1
+    IL_000B: starg.s a
+    IL_000D: ldloc.0
+    IL_000E: starg.s b
+    IL_0010: ldarg.1
+    IL_0011: brtrue.s IL_0002
+    IL_0013: ldarg.0
+    IL_0014: ret
 
 }
-long gcd(long lhs, long rhs)
+long gcd(long a, long b)
 {
     IL_0000: ldarg.0
     IL_0001: call System.Int64 Z0.math::abs(System.Int64)
@@ -2933,36 +2931,36 @@ long gcd(long lhs, long rhs)
     IL_0007: ldarg.1
     IL_0008: call System.Int64 Z0.math::abs(System.Int64)
     IL_000D: stloc.1
-    IL_000E: br.s IL_0018
+    IL_000E: br.s IL_001C
     IL_0010: ldloc.0
     IL_0011: ldloc.1
-    IL_0012: rem
-    IL_0013: stloc.2
-    IL_0014: ldloc.1
-    IL_0015: stloc.0
-    IL_0016: ldloc.2
-    IL_0017: stloc.1
+    IL_0012: call System.Int64 Z0.math::mod(System.Int64,System.Int64)
+    IL_0017: stloc.2
     IL_0018: ldloc.1
-    IL_0019: brtrue.s IL_0010
-    IL_001B: ldloc.0
-    IL_001C: ret
+    IL_0019: stloc.0
+    IL_001A: ldloc.2
+    IL_001B: stloc.1
+    IL_001C: ldloc.1
+    IL_001D: brtrue.s IL_0010
+    IL_001F: ldloc.0
+    IL_0020: ret
 
 }
-ulong gcd(ulong lhs, ulong rhs)
+ulong gcd(ulong a, ulong b)
 {
-    IL_0000: br.s IL_000C
+    IL_0000: br.s IL_0010
     IL_0002: ldarg.0
     IL_0003: ldarg.1
-    IL_0004: rem.un
-    IL_0005: stloc.0
-    IL_0006: ldarg.1
-    IL_0007: starg.s lhs
-    IL_0009: ldloc.0
-    IL_000A: starg.s rhs
-    IL_000C: ldarg.1
-    IL_000D: brtrue.s IL_0002
-    IL_000F: ldarg.0
-    IL_0010: ret
+    IL_0004: call System.UInt64 Z0.math::mod(System.UInt64,System.UInt64)
+    IL_0009: stloc.0
+    IL_000A: ldarg.1
+    IL_000B: starg.s a
+    IL_000D: ldloc.0
+    IL_000E: starg.s b
+    IL_0010: ldarg.1
+    IL_0011: brtrue.s IL_0002
+    IL_0013: ldarg.0
+    IL_0014: ret
 
 }
 uint gcdbin(uint u, uint v)

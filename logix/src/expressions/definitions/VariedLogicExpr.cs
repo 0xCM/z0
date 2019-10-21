@@ -49,7 +49,8 @@ namespace Z0
         }
 
         public string Format()
-            => string.Empty;
+            => BaseExpr.Format();
+
 
 
     }

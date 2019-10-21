@@ -10,12 +10,26 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
     using System.IO;
+    using static BitLogicSpec;
     
     using static zfunc;
 
 
     public class t_tables : UnitTest<t_tables>
     {
+
+        public void render_check()
+        {
+            var v1 = variable("a");
+            var v2 = variable("b");
+            var expr1 = and(v1,v2);
+            var expr4 = xnor(v1,v2);
+            var expr2 = and(expr1,expr4);
+            var expr3 = not(expr2);
+            Trace(expr1.Format());
+            Trace(expr2.Format());
+            Trace(expr3.Format());
+        }
 
         public void binary_logic_check()
         {

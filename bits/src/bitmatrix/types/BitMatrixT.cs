@@ -143,6 +143,24 @@ namespace Z0
             => this.data[row] = src.Head;
 
         /// <summary>
+        /// Gets the the value of bit identified by row/col indices
+        /// </summary>
+        /// <param name="row">The zero-based row index</param>
+        /// <param name="col">The zero-based col index</param>
+        [MethodImpl(Inline)]
+        public Bit GetBit(int row, int col)            
+            => gbits.test(data[row], col);                    
+
+        /// <summary>
+        /// Sets the the value of bit identified by row/col indices
+        /// </summary>
+        /// <param name="row">The zero-based row index</param>
+        /// <param name="col">The zero-based col index</param>
+        [MethodImpl(Inline)]
+        public void SetBit(int row, int col, bit value)           
+            => gbits.set(ref data[row], (byte)col, value);
+
+        /// <summary>
         /// Queries/manipulates index-identified row data
         /// </summary>
         public BitVector<T> this[int row]
@@ -152,6 +170,15 @@ namespace Z0
 
             [MethodImpl(Inline)]
             set => SetRow(row, value);
+        }
+
+        public bit this[int row, int col]
+        {
+            [MethodImpl(Inline)]
+            get => GetBit(row,col);
+
+            [MethodImpl(Inline)]
+            set => SetBit(row,col,value);
         }
 
         [MethodImpl(Inline)]

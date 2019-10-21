@@ -29,7 +29,52 @@ namespace Z0
         public static T one<T>()
             where T : unmanaged
                 => gmath.maxval<T>();
-        
+
+        [MethodImpl(Inline)]
+        public static T add<T>(T a, T b)
+            where T : unmanaged
+                => gmath.add(a,b);
+
+        [MethodImpl(Inline)]
+        public static T sub<T>(T a, T b)
+            where T : unmanaged
+                => gmath.sub(a,b);
+
+        [MethodImpl(Inline)]
+        public static T div<T>(T a, T b)
+            where T : unmanaged
+                => gmath.div(a,b);
+
+        [MethodImpl(Inline)]
+        public static T mod<T>(T a, T b)
+            where T : unmanaged
+                => gmath.mod(a,b);
+
+        [MethodImpl(Inline)]
+        public static bit eq<T>(T a, T b)
+            where T : unmanaged
+                => gmath.eq(a,b);
+
+        [MethodImpl(Inline)]
+        public static bit lt<T>(T a, T b)
+            where T : unmanaged
+                => gmath.lt(a,b);
+
+        [MethodImpl(Inline)]
+        public static bit lteq<T>(T a, T b)
+            where T : unmanaged
+                => gmath.lteq(a,b);
+
+        [MethodImpl(Inline)]
+        public static bit gt<T>(T a, T b)
+            where T : unmanaged
+                => gmath.gt(a,b);
+
+        [MethodImpl(Inline)]
+        public static bit gteq<T>(T a, T b)
+            where T : unmanaged
+                => gmath.gteq(a,b);
+
         [MethodImpl(Inline)]
         public static T and<T>(T a, T b)
             where T : unmanaged
@@ -79,6 +124,11 @@ namespace Z0
         public static T rightnot<T>(T a, T b)
             where T : unmanaged
                 => not(b);
+
+        [MethodImpl(Inline)]
+        public static T leftnot<T>(T a, T b)
+            where T : unmanaged
+                => not(a);
 
         [MethodImpl(Inline)]
         public static T @false<T>(T a, T b)

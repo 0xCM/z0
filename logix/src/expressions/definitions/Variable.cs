@@ -58,10 +58,10 @@ namespace Z0
             => Value = (ILogicExpr)value;
 
         public string Format()
-            => Format(true);
+            => Format(false);
 
-        public string Format(bool withValue)
-            => $"v_{Name}" + (withValue ? $" := {Value}" : string.Empty);
+        public string Format(bool expand)
+            => $"{Name}" + (expand ? $" := {Value}" : string.Empty);
         
         public override string ToString()
             => Format();

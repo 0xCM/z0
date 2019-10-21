@@ -9,10 +9,19 @@ namespace Z0
     using System.Runtime.CompilerServices;
     
     using static zfunc;
-    using static TypedLogicSpec;
+    //using static TypedLogicSpec;
 
     public static class ArithmeticSpec
     {
+        /// <summary>
+        /// Creates a literal expression
+        /// </summary>
+        /// <param name="value">The literal value</param>
+        /// <typeparam name="T">The literal type</typeparam>
+        [MethodImpl(Inline)]
+        public static Literal<T> literal<T>(T value)
+            where T : unmanaged
+                => new Literal<T>(value);
 
         /// <summary>
         /// Creates an arithmetic unary expression

@@ -33,18 +33,32 @@ namespace Z0
 
     }
 
-    public interface IArithmeticOp<T,E> : IArithmeticOp<T>, IOpExpr<T,E>
+    public interface IArithmeticOp<T,K> : IArithmeticOp<T>, IOpExpr<T,K>
         where T : unmanaged
-        where E : Enum
+        where K : Enum
     {
 
 
     }
-
+ 
     public interface IUnaryArithmeticOp :  IArithmeticOp
     {
 
     }
+
+    public interface IComparisonOp : IArithmeticOp
+    {
+
+    }
+
+    public interface IComparisonOp<T> : IArithmeticOp, IArithmeticOp<T,ComparisonOpKind>
+        where T : unmanaged
+    {
+        IArithmeticExpr<T> LeftArg {get;}
+
+        IArithmeticExpr<T> RightArg {get;}
+    }
+
 
     public interface IUnaryArithmeticOp<T> :  IUnaryArithmeticOp,  IUnaryOp<T>, IArithmeticOp<T,UnaryArithmeticOpKind>
         where T : unmanaged

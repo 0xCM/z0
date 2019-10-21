@@ -29,7 +29,8 @@ namespace Z0
             || typeof(T) == typeof(int) 
             || typeof(T) == typeof(long))
                 return eqi(lhs,rhs);
-            else return gfp.eq(lhs,rhs);
+            else 
+                return gfp.eq(lhs,rhs);
         }
 
         [MethodImpl(Inline)]

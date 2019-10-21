@@ -40,7 +40,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bit one()
             => bit.On;
-
         
         [MethodImpl(Inline)]
         public static bit @false(bit a, bit b)
@@ -81,6 +80,10 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bit right(bit a, bit b)
             => b;
+
+        [MethodImpl(Inline)]
+        public static bit leftnot(bit a, bit b)
+            => not(a);
 
         [MethodImpl(Inline)]
         public static bit rightnot(bit a, bit b)
@@ -501,49 +504,60 @@ namespace Z0
         public static bit f4f(bit a, bit b, bit c)
             => or(not(a),andnot(b,c));
 
+        // A and not (C)
         [MethodImpl(Inline),TernaryOp(X50)]
         public static bit f50(bit a, bit b, bit c)
-            => default;
+            => andnot(a,c);
 
+        // not (C) and (A or (B xor 1))
         [MethodImpl(Inline),TernaryOp(X51)]
         public static bit f51(bit a, bit b, bit c)
-            => default;
+            => and(not(c),or(a,xor1(b)));
 
+        // not ((B and C)) and (A xor C)
         [MethodImpl(Inline),TernaryOp(X52)]
         public static bit f52(bit a, bit b, bit c)
-            => default;
+            => and(not(and(b,c)),xor(a,c));
 
+        // A ? not (C) : not (B)
         [MethodImpl(Inline),TernaryOp(X53)]
         public static bit f53(bit a, bit b, bit c)
-            => default;
+            => select(a, not(c), not(b));
 
+        // not (C) and (A or B)
         [MethodImpl(Inline),TernaryOp(X54)]
         public static bit f54(bit a, bit b, bit c)
-            => default;
+            => and(not(c), or(a,b));
 
+        // not (C)
         [MethodImpl(Inline),TernaryOp(X55)]
         public static bit f55(bit a, bit b, bit c)
-            => default;
+            => not(c);
 
+        // C xor (B or A)
         [MethodImpl(Inline),TernaryOp(X56)]
         public static bit f56(bit a, bit b, bit c)
-            => default;
+            => xor(c,or(b,a));
 
+        // C nand (B or A)
         [MethodImpl(Inline),TernaryOp(X57)]
         public static bit f57(bit a, bit b, bit c)
-            => default;
+            => nand(c,or(b,a));
 
+        // (A or B) and (A xor C)
         [MethodImpl(Inline),TernaryOp(X58)]
         public static bit f58(bit a, bit b, bit c)
-            => default;
+            => and(or(a,b),xor(a,c));
 
+        // C xor (A or (B xor 1))
         [MethodImpl(Inline),TernaryOp(X59)]
         public static bit f59(bit a, bit b, bit c)
-            => default;
+            => xor(c, or(a,xor1(b)));
 
+        // C xor A
         [MethodImpl(Inline),TernaryOp(X5A)]
         public static bit f5a(bit a, bit b, bit c)
-            => default;
+            => xor(c,a);
 
         [MethodImpl(Inline),TernaryOp(X5B)]
         public static bit f5b(bit a, bit b, bit c)

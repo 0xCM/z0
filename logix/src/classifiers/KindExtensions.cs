@@ -41,7 +41,15 @@ namespace Z0
             => kind.ToString().ToLower();
 
         [MethodImpl(Inline)]
+        public static string Format(this ComparisonOpKind kind)
+            => kind.ToString().ToLower();
+
+        [MethodImpl(Inline)]
         public static string Format<T>(this BinaryLogicOpKind kind, T arg1, T arg2)
+            => $"{kind.Format()}({arg1}, {arg2})";
+
+        [MethodImpl(Inline)]
+        public static string Format<T>(this ComparisonOpKind kind, T arg1, T arg2)
             => $"{kind.Format()}({arg1}, {arg2})";
 
         [MethodImpl(Inline)]

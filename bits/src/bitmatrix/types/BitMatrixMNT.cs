@@ -154,7 +154,7 @@ namespace Z0
         /// <param name="row">The zero-based row index</param>
         /// <param name="col">The zero-based col index</param>
         [MethodImpl(Inline)]
-        public Bit GetBit(int row, int col)
+        public bit GetBit(int row, int col)
         {
             var cell = Layout.Row(row)[col];
             return gbits.test(Data[cell.Segment], cell.Offset);                    
@@ -166,7 +166,7 @@ namespace Z0
         /// <param name="row">The zero-based row index</param>
         /// <param name="col">The zero-based col index</param>
         [MethodImpl(Inline)]
-        public void SetBit(int row, int col, Bit value)
+        public void SetBit(int row, int col, bit value)
         {
             var cell = Layout.Row(row)[col];
             gbits.set(ref data[cell.Segment], cell.Offset, value);
@@ -175,7 +175,7 @@ namespace Z0
         /// <summary>
         /// Queries/manipulates a bit at a specified row/col
         /// </summary>
-        public Bit this[int row, int col]
+        public bit this[int row, int col]
         {
             [MethodImpl(Inline)]
             get => GetBit(row, col);

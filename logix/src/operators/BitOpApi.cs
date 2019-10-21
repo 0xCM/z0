@@ -105,6 +105,7 @@ namespace Z0
                 case BinaryLogicOpKind.Xnor: return xnor;
                 case BinaryLogicOpKind.AndNot: return andnot;
                 case BinaryLogicOpKind.LeftProject: return left;
+                case BinaryLogicOpKind.LeftNot: return leftnot;
                 case BinaryLogicOpKind.RightProject: return right;
                 case BinaryLogicOpKind.RightNot: return rightnot;
                 case BinaryLogicOpKind.True: return @true;

@@ -13,87 +13,61 @@ namespace Z0
 
     partial class math
     {
-        public static sbyte gcd(sbyte lhs, sbyte rhs)
+        public static sbyte gcd(sbyte a, sbyte b)
         {
-            var x = math.abs(lhs);
-            var y = math.abs(rhs);
+            var x = math.abs(a);
+            var y = math.abs(b);
             while (y != 0)
             {
-                var rem = (sbyte)(x % y);
+                var rem = math.mod(x,y);
                 x = y;
                 y = rem;
             }
             return x;
         }
 
-        public static byte gcd(byte lhs, byte rhs)
+        public static byte gcd(byte a, byte b)
         {
-            while (rhs != 0)
+            while (b != 0)
             {
-                var rem = math.mod(lhs,rhs);
-                lhs = rhs;
-                rhs = rem;
+                var rem = math.mod(a,b);
+                a = b;
+                b = rem;
             }
-            return lhs;
+            return a;
         }
 
-        public static short gcd(short lhs, short rhs)
+        public static short gcd(short a, short b)
         {
-            var x = math.abs(lhs);
-            var y = math.abs(rhs);
+            var x = math.abs(a);
+            var y = math.abs(b);
             while (y != 0)
             {
-                var rem = (short)(x % y);
+                var rem = math.mod(x,y);
                 x = y;
                 y = rem;
             }
             return x;
         }
 
-        public static ushort gcd(ushort lhs, ushort rhs)
+        public static ushort gcd(ushort a, ushort b)
         {
-            while (rhs != 0)
+            while (b != 0)
             {
-                var rem = math.mod(lhs,rhs);
-                lhs = rhs;
-                rhs = rem;
+                var rem = math.mod(a,b);
+                a = b;
+                b = rem;
             }
-            return lhs;
+            return a;
         }
 
-        public static int gcd(int lhs, int rhs)
+        public static int gcd(int a, int b)
         {
-            var x = math.abs(lhs);
-            var y = math.abs(rhs);
+            var x = math.abs(a);
+            var y = math.abs(b);
             while (y != 0)
             {
-                var rem = (x % y);
-                x = y;
-                y = rem;
-            }
-
-            return x;
-        }
-
-        public static uint gcd(uint lhs, uint rhs)
-        {
-            while (rhs != 0)
-            {
-                var rem = lhs % rhs;
-                lhs = rhs;
-                rhs = rem;
-            }
-
-            return lhs;
-        }
-
-        public static long gcd(long lhs, long rhs)
-        {
-            var x = math.abs(lhs);
-            var y = math.abs(rhs);
-            while (y != 0)
-            {
-                var rem = (x % y);
+                var rem = math.mod(x,y);
                 x = y;
                 y = rem;
             }
@@ -101,16 +75,42 @@ namespace Z0
             return x;
         }
 
-        public static ulong gcd(ulong lhs, ulong rhs)
+        public static uint gcd(uint a, uint b)
         {
-            while (rhs != 0)
+            while (b != 0)
             {
-                var rem = lhs % rhs;
-                lhs = rhs;
-                rhs = rem;
+                var rem = math.mod(a,b);
+                a = b;
+                b = rem;
             }
 
-            return lhs;
+            return a;
+        }
+
+        public static long gcd(long a, long b)
+        {
+            var x = math.abs(a);
+            var y = math.abs(b);
+            while (y != 0)
+            {
+                var rem = math.mod(x,y);
+                x = y;
+                y = rem;
+            }
+
+            return x;
+        }
+
+        public static ulong gcd(ulong a, ulong b)
+        {
+            while (b != 0)
+            {
+                var rem = math.mod(a,b);
+                a = b;
+                b = rem;
+            }
+
+            return a;
         }
 
 

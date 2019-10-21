@@ -1,4 +1,4 @@
-// 2019-10-19 23:11:05:324
+// 2019-10-20 22:42:12:651
 BitVector8 rotl(BitVector8 x, int offset)
 {
     IL_0000: ldarga.s x
@@ -746,7 +746,7 @@ uint dist(BitVector64 x, BitVector64 y)
     IL_0016: ret
 
 }
-Bit dot(BitVector4 x, BitVector4 y)
+bit dot(BitVector4 x, BitVector4 y)
 {
     IL_0000: ldarg.0
     IL_0001: ldfld System.Byte Z0.BitVector4::data
@@ -755,11 +755,11 @@ Bit dot(BitVector4 x, BitVector4 y)
     IL_000C: and
     IL_000D: call System.UInt32 Z0.Bits::pop(System.Int32)
     IL_0012: call System.Boolean zfunc::odd(System.UInt32)
-    IL_0017: call Z0.Bit Z0.Bit::op_Implicit(System.Boolean)
+    IL_0017: call Z0.bit Z0.bit::op_Implicit(System.Boolean)
     IL_001C: ret
 
 }
-Bit dot(BitVector8 x, BitVector8 y)
+bit dot(BitVector8 x, BitVector8 y)
 {
     IL_0000: ldarg.0
     IL_0001: ldfld System.Byte Z0.BitVector8::data
@@ -768,11 +768,11 @@ Bit dot(BitVector8 x, BitVector8 y)
     IL_000C: and
     IL_000D: call System.UInt32 Z0.Bits::pop(System.Int32)
     IL_0012: call System.Boolean zfunc::odd(System.UInt32)
-    IL_0017: call Z0.Bit Z0.Bit::op_Implicit(System.Boolean)
+    IL_0017: call Z0.bit Z0.bit::op_Implicit(System.Boolean)
     IL_001C: ret
 
 }
-Bit dot(BitVector16 x, BitVector16 y)
+bit dot(BitVector16 x, BitVector16 y)
 {
     IL_0000: ldarg.0
     IL_0001: ldfld System.UInt16 Z0.BitVector16::data
@@ -781,11 +781,11 @@ Bit dot(BitVector16 x, BitVector16 y)
     IL_000C: and
     IL_000D: call System.UInt32 Z0.Bits::pop(System.Int32)
     IL_0012: call System.Boolean zfunc::odd(System.UInt32)
-    IL_0017: call Z0.Bit Z0.Bit::op_Implicit(System.Boolean)
+    IL_0017: call Z0.bit Z0.bit::op_Implicit(System.Boolean)
     IL_001C: ret
 
 }
-Bit dot(BitVector32 x, BitVector32 y)
+bit dot(BitVector32 x, BitVector32 y)
 {
     IL_0000: ldarg.0
     IL_0001: ldfld System.UInt32 Z0.BitVector32::data
@@ -794,11 +794,11 @@ Bit dot(BitVector32 x, BitVector32 y)
     IL_000C: and
     IL_000D: call System.UInt32 Z0.Bits::pop(System.UInt32)
     IL_0012: call System.Boolean zfunc::odd(System.UInt32)
-    IL_0017: call Z0.Bit Z0.Bit::op_Implicit(System.Boolean)
+    IL_0017: call Z0.bit Z0.bit::op_Implicit(System.Boolean)
     IL_001C: ret
 
 }
-Bit dot(BitVector64 x, BitVector64 y)
+bit dot(BitVector64 x, BitVector64 y)
 {
     IL_0000: ldarg.0
     IL_0001: ldfld System.UInt64 Z0.BitVector64::data
@@ -807,7 +807,7 @@ Bit dot(BitVector64 x, BitVector64 y)
     IL_000C: and
     IL_000D: call System.UInt32 Z0.Bits::pop(System.UInt64)
     IL_0012: call System.Boolean zfunc::odd(System.UInt32)
-    IL_0017: call Z0.Bit Z0.Bit::op_Implicit(System.Boolean)
+    IL_0017: call Z0.bit Z0.bit::op_Implicit(System.Boolean)
     IL_001C: ret
 
 }

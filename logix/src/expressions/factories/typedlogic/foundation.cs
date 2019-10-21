@@ -18,7 +18,7 @@ namespace Z0
     public static partial class TypedLogicSpec
     {
         /// <summary>
-        /// Creates a bit literal expression
+        /// Creates a literal expression
         /// </summary>
         /// <param name="value">The literal value</param>
         /// <typeparam name="T">The literal type</typeparam>

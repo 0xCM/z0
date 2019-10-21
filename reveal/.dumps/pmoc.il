@@ -1,4 +1,4 @@
-// 2019-10-19 23:11:05:985
+// 2019-10-20 22:42:13:343
 Sign:int signum_d8i(sbyte x)
 {
     IL_0000: ldarg.0
@@ -3298,31 +3298,30 @@ ulong fma_d64u(ulong x, ulong a, ulong b)
     IL_0008: ret
 
 }
-ulong fma_g64u(ulong x, ulong a, ulong b)
+double fma_d64f(double x, double a, double b)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.UInt64 Z0.gmath::fma<System.UInt64>(System.UInt64,System.UInt64,System.UInt64)
+    IL_0003: call System.Double Z0.fmath::fma(System.Double,System.Double,System.Double)
     IL_0008: ret
 
 }
-float fma_d32f(float x, float a, float b)
+double fma_g64f(double x, double a, double b)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.Single Z0.fmath::fma(System.Single,System.Single,System.Single)
+    IL_0003: call System.Double Z0.gmath::fma<System.Double>(System.Double,System.Double,System.Double)
     IL_0008: ret
 
 }
-float fma_g32f(float x, float a, float b)
+bool gt_d8i(sbyte lhs, sbyte rhs)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: ldarg.2
-    IL_0003: call System.Single Z0.gmath::fma<System.Single>(System.Single,System.Single,System.Single)
-    IL_0008: ret
+    IL_0002: call System.Boolean Z0.math::gt(System.SByte,System.SByte)
+    IL_0007: ret
 
 }
 bool gt_g8i(sbyte lhs, sbyte rhs)

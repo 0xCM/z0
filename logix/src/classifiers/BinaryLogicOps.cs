@@ -49,6 +49,23 @@ namespace Z0
         /// </remarks>
         RightNot = 0b0011,
 
+        /// 0 0 1
+        /// 1 0 0
+        /// 0 1 1
+        /// 1 1 0
+        LeftNot = 0b0101,                    
+
+        /// <summary>
+        /// Identifies an XOR operator
+        /// </summary>
+        XOr = 0b0110,
+
+        /// <summary>
+        /// Identifies an operator that computes the complement of AND and 
+        /// evaluates to true iff one or both operands are false
+        /// </summary>
+        Nand = 0b0111,
+
         /// <summary>
         /// Identifies an AND operator
         /// </summary>
@@ -60,21 +77,10 @@ namespace Z0
         Or = 0b1110,
 
         /// <summary>
-        /// Identifies an XOR operator
-        /// </summary>
-        XOr = 0b0110,
-                    
-        /// <summary>
         /// Identifies an operator that computes the complement of XOR and can
         /// thus be interpreted as a value-based equality operator
         /// </summary>
         Xnor = 0b1001,
-
-        /// <summary>
-        /// Identifies an operator that computes the complement of AND and 
-        /// evaluates to true iff one or both operands are false
-        /// </summary>
-        Nand = 0b0111,
         
         /// <summary>
         /// Identifies an operator that selects the value of the left operand

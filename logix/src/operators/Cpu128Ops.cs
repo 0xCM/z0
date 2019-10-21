@@ -37,6 +37,16 @@ namespace Z0
                 => ginx.vnot(a);
 
         [MethodImpl(Inline)]
+        public static Vector128<T> add<T>(Vector128<T> a, Vector128<T> b)
+            where T : unmanaged
+                => ginx.vadd(a,b);
+
+        [MethodImpl(Inline)]
+        public static Vector128<T> sub<T>(Vector128<T> a, Vector128<T> b)
+            where T : unmanaged
+                => ginx.vsub(a,b);
+
+        [MethodImpl(Inline)]
         public static Vector128<T> and<T>(Vector128<T> a, Vector128<T> b)
             where T : unmanaged
                 => ginx.vand(a,b);

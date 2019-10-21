@@ -44,7 +44,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vec128<T> vprior<T>(in Vec128<T> src)
             where T : unmanaged
-                => vsub(src, Vec128Pattern.units<T>());
+                => vsub<T>(src, Vec128Pattern.units<T>());
 
         /// <summary>
         /// Decrements each source vector component by a unit
@@ -54,7 +54,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vec256<T> vprior<T>(in Vec256<T> src)
             where T : unmanaged
-                => vsub(src, Vec256Pattern.Units<T>());
+                => vsub<T>(src, Vec256Pattern.Units<T>());
     }
 
 }

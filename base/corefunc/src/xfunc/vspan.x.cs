@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;    
+    using System.Runtime.Intrinsics;    
     
     using static zfunc;    
 
@@ -62,9 +63,14 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <typeparam name="T">The primitive type</typeparam>
         [MethodImpl(Inline)]
-        public static Span128<T> ToReadOnlySpan128<T>(this Vec128<T> src)
+        public static Span128<T> ToSpan128<T>(this Vector128<T> src)
             where T : unmanaged     
-                => src.ToSpan128();
+        {
+            var dst = Span128.AllocBlocks<T>(1);
+            vstore(src, ref dst[0]);
+            return dst;
+        }                       
+
         
         /// <summary>
         /// Allocates a blocked span into which vector content is stored
@@ -73,6 +79,20 @@ namespace Z0
         /// <typeparam name="T">The primitive type</typeparam>
         [MethodImpl(Inline)]
         public static Span256<T> ToSpan256<T>(this Vec256<T> src)
+            where T : unmanaged            
+        {
+            var dst = Span256.AllocBlocks<T>(1);
+            vstore(src, ref dst[0]);
+            return dst;
+        }                       
+
+        /// <summary>
+        /// Allocates a blocked span into which vector content is stored
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <typeparam name="T">The primitive type</typeparam>
+        [MethodImpl(Inline)]
+        public static Span256<T> ToSpan256<T>(this Vector256<T> src)
             where T : unmanaged            
         {
             var dst = Span256.AllocBlocks<T>(1);
@@ -97,6 +117,16 @@ namespace Z0
         /// <typeparam name="T">The component type</typeparam>
         [MethodImpl(Inline)]
         public static Span<T> ToSpan<T>(this Vec128<T> src)
+            where T : unmanaged            
+                => src.ToSpan128();
+
+        /// <summary>
+        /// Allocates a span into which vector content is stored
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <typeparam name="T">The component type</typeparam>
+        [MethodImpl(Inline)]
+        public static Span<T> ToSpan<T>(this Vector128<T> src)
             where T : unmanaged            
                 => src.ToSpan128();
 
@@ -143,6 +173,17 @@ namespace Z0
         public static Span<T> ToSpan<T>(this Vec256<T> src)
             where T : unmanaged            
                 => src.ToSpan256();
+
+        /// <summary>
+        /// Allocates a blocked span into which vector content is stored
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <typeparam name="T">The component type</typeparam>
+        [MethodImpl(Inline)]
+        public static Span<T> ToSpan<T>(this Vector256<T> src)
+            where T : unmanaged            
+                => src.ToSpan256();
+
 
         /// <summary>
         /// Allocates an array into which vector content is stored

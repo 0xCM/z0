@@ -115,7 +115,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        void SetBit(int row, int col, Bit value)
+        void SetBit(int row, int col, bit value)
         {
             var cell = GridLayout.Row(row)[col];
             gbits.set(ref Data[cell.Segment], cell.Offset, value);

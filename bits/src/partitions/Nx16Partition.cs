@@ -19,10 +19,22 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <param name="dst">A target span of sufficient length</param>
+        [MethodImpl(Inline)]
         public static void part32x16(uint src, Span<ushort> dst)
         {
-            dst[0] = project<ushort>(select(src, Part32x16.Part0), Part32x16.First);
-            dst[1] = project<ushort>(select(src, Part32x16.Part1), Part32x16.First);
+            dst[0] = (ushort)src;
+            dst[1] = (ushort)(src >> 16);
+        }
+        /// <summary>
+        /// Partitions a 32-bit source value into 2 segments of bit width 16
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <param name="dst">A target span of sufficient length</param>
+        [MethodImpl(Inline)]
+        public static void part32x16(uint src, out ushort x0, out ushort x1)
+        {
+            x0 = (ushort)src;
+            x1 = (ushort)(src >> 16);
         }
 
     }

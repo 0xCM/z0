@@ -21,14 +21,6 @@ namespace Z0
         {
             var op = BitOpApi.lookup(id);
             var x = BitVector8.Zero;
-            // x[0] = op(off,off,off); //000 -> (0,0,0)
-            // x[1] = op(on,off,off);  //001 -> (1,0,0)
-            // x[2] = op(off,on,off);  //010 -> (0,1,0)
-            // x[3] = op(on,on,off);   //011 -> (1,1,0)
-            // x[4] = op(off,off,on);  //100 -> (0,0,1)
-            // x[5] = op(on,off,on);   //101 -> (1,0,1)
-            // x[6] = op(off,on,on);   //110 -> (0,1,1)
-            // x[7] = op(on,on,on);    //111 -> (1,1,1)
             x[0] = op(off,off,off);
             x[1] = op(off,off,on);
             x[2] = op(off,on,off);

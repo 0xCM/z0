@@ -14,12 +14,12 @@ namespace Z0
     partial class BitMatrix
     {
 
-        public static BitMatrix64 nlz(BitMatrix64 A)
+        public static Vector<N64,byte> nlz(BitMatrix64 A)
         {
             var rows = A.RowCount;
-            var dst = BitMatrix64.Alloc();
+            var dst = Vector.alloc<N64,byte>();            
             for(int i=0, j=rows - 1; i < rows; i++, j--)            
-                dst[i] = gbits.nlz(A[i++]);
+                dst[i] = (byte)gbits.nlz(A[i++]);
             return dst;            
         }
 
@@ -30,10 +30,10 @@ namespace Z0
         /// <returns></returns>
         public static Vector<N64,byte> msb(BitMatrix64 A)
         {
-            var x = Vector.alloc<N64,byte>();            
+            var dst = Vector.alloc<N64,byte>();            
             for(var i = 0; i<A.RowCount; i++)
-                x[i] = (byte)Bits.nlz(A[i]);
-            return x;
+                dst[i] = (byte)Bits.nlz(A[i]);
+            return dst;
         }
 
         public static Vector<N64,byte> lsb(BitMatrix64 A)
