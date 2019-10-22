@@ -24,12 +24,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitVector<T> xor<T>(BitVector<T> x, BitVector<T> y)
             where T : unmanaged
-        {
-            if(x.SingleCell && y.SingleCell)
-                return gmath.xor(x.Data[0], y.Data[0]);
-            else
-                return xor_multicell(x,y);
-        }
+                => gmath.xor(x.Data,y.Data);
 
         /// <summary>
         /// Computes a new bitvector z = x & y from bitvectors x xor y
@@ -75,10 +70,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitVector64 xor(BitVector64 x, BitVector64 y)
             => math.xor(x.data, y.data);
- 
-        [MethodImpl(Inline)]
-        static BitVector<T> xor_multicell<T>(BitVector<T> x, BitVector<T> y)
-            where T : unmanaged
-                => mathspan.xor(x.Data.ReadOnly(),y.Data.ReadOnly());
     }
 }

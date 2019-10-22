@@ -13,14 +13,14 @@ namespace Z0.Logix
     /// <summary>    
     /// Defines an untyped literal expression
     /// </summary>
-    public sealed class LiteralExpr : IBitLiteralExpr
+    public sealed class LiteralLogicExpr : ILogicLiteral
     {
         /// <summary>
         /// Implicitly converts a literal expression to the underlying value 
         /// </summary>
         /// <param name="src">The source epxression</param>
         [MethodImpl(Inline)]
-        public static implicit operator bit(LiteralExpr src)
+        public static implicit operator bit(LiteralLogicExpr src)
             => src.Value;
 
         /// <summary>
@@ -28,14 +28,20 @@ namespace Z0.Logix
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
-        public static implicit operator LiteralExpr(bit src)
-            => new LiteralExpr(src);
+        public static implicit operator LiteralLogicExpr(bit src)
+            => new LiteralLogicExpr(src);
 
         [MethodImpl(Inline)]
-        public LiteralExpr(bit value)
+        public LiteralLogicExpr(bit value)
         {                
             this.Value= value;
         }            
+
+        /// <summary>
+        /// The expression classifier
+        /// </summary>
+        public LogicExprKind ExprKind
+            => LogicExprKind.Literal;
 
         /// <summary>
         /// The literal value

@@ -13,23 +13,23 @@ namespace Z0.Logix
    /// <summary>
    /// Defines a natural-length sequence of literal bit values
    /// </summary>
-   public struct BitLiteralSeq<N> : IBitLiteralSeq
+   public struct LiteralLogicSeq<N> : ILiteralLogicSeq
         where N : ITypeNat, new()
     {
-        internal static BitLiteralSeq<N> FromBitString(BitString src)
+        internal static LiteralLogicSeq<N> FromBitString(BitString src)
         {
             Nat.require<N>(src.Length);
-            return new BitLiteralSeq<N>(BitLiteralSeq.FromBitString(src).Terms);
+            return new LiteralLogicSeq<N>(LiteralLogicSeq.FromBitString(src).Terms);
         }
 
-        internal static BitLiteralSeq<N> FromBits(params bit[] src)
+        internal static LiteralLogicSeq<N> FromBits(params bit[] src)
         {
             Nat.require<N>(src.Length);
-            return new BitLiteralSeq<N>(src);
+            return new LiteralLogicSeq<N>(src);
         }
 
         [MethodImpl(Inline)]
-        BitLiteralSeq(bit[] terms)
+        LiteralLogicSeq(bit[] terms)
         {
             this.Terms = terms;
         }
@@ -45,8 +45,17 @@ namespace Z0.Logix
         public int Length
             => Terms.Length;
 
+        public LogicExprKind ExprKind 
+            => LogicExprKind.Literal;
+
         public BitString ToBitString()
-            => BitString.FromBits(Terms);        
+            => BitString.FromBits(Terms);    
+
+        public string Format()
+            => ToBitString().Format();
+
+        public override string ToString()
+            => Format();    
     }
 
 }

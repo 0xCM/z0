@@ -11,41 +11,45 @@ namespace Z0.Logix
     using static zfunc;
 
     /// <summary>
-    /// Joins an operator with left and right operands
+    /// Defines a bitwise shift, including circular shifts, over subject and offset operands
     /// </summary>
-    public sealed class BinaryLogicOp<T> : IBinaryOp<T>
+    public sealed class ShiftOpSpec<T> : IShiftOp<T>
         where T : unmanaged
     {
+
         [MethodImpl(Inline)]
-        public BinaryLogicOp(BinaryLogicOpKind op, IExpr<T> left, IExpr<T> right)
+        public ShiftOpSpec(ShiftOpKind op, IExpr<T> subject, IExpr<int> offset)
         {
             this.OpKind = op;
-            this.LeftArg = left;
-            this.RightArg = right;
+            this.Subject = subject;
+            this.Offset = offset;
         }
-        
-        /// <summary>
-        /// The operator
-        /// </summary>
-        public BinaryLogicOpKind OpKind {get;}
 
         /// <summary>
-        /// The left operand
+        /// The expression classifier
         /// </summary>
-        public IExpr<T> LeftArg {get;}
+        public TypedExprKind ExprKind 
+            => TypedExprKind.ShiftExpr;
 
         /// <summary>
-        /// The right operand
+        /// The shift operaator
         /// </summary>
-        public IExpr<T> RightArg {get;}
+        public ShiftOpKind OpKind {get;}
+
+
+        /// <summary>
+        /// The shiftee
+        /// </summary>
+        public IExpr<T> Subject {get;}
+
+
+        public IExpr<int> Offset {get;}
 
         public string Format()
-            => OpKind.Format(LeftArg,RightArg);
+            => OpKind.Format(Subject,Offset);
         
         public override string ToString()
             => Format();
 
-    }
-
-
+    } 
 }

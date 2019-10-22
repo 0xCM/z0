@@ -64,11 +64,10 @@ namespace Z0
         /// <param name="init">The initial value</param>
         /// <typeparam name="T">The component type</typeparam>
         [MethodImpl(Inline)]
-        public static BitVector<T> Alloc<T>(T? init = null)
+        public static BitCells<T> Alloc<T>(T? init = null)
             where T : unmanaged
-                => BitVector<T>.FromCell(init ?? default);
+                => BitCells<T>.FromCell(init ?? default);
             
-
         /// <summary>
         /// Allocates a generic bitvector
         /// </summary>
@@ -77,9 +76,9 @@ namespace Z0
         /// <typeparam name="N">The length type</typeparam>
         /// <typeparam name="T">The component type</typeparam>
         [MethodImpl(Inline)]
-        public static BitVector<T> Alloc<T>(BitSize len, T? fill = null)
+        public static BitCells<T> Alloc<T>(BitSize len, T? fill = null)
             where T : unmanaged
-                => BitVector<T>.Alloc(len, fill);
+                => BitCells<T>.Alloc(len, fill);
             
         /// <summary>
         /// Loads a bitvector of natural length from a span
@@ -134,9 +133,9 @@ namespace Z0
         /// <param name="n">The vector length</param>
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
-        public static BitVector<T> Load<T>(Span<T> src, BitSize n)
+        public static BitCells<T> Load<T>(Span<T> src, BitSize n)
             where T : unmanaged
-                => BitVector<T>.FromCells(src, n);
+                => BitCells<T>.FromCells(src, n);
 
         /// <summary>
         /// Defines a generic bitvector with a specified number of components and bitlength
@@ -145,18 +144,18 @@ namespace Z0
         /// <param name="src">The source from which the bits will be extracted</param>
         /// <typeparam name="T">The source type</typeparam>
         [MethodImpl(Inline)]
-        public static BitVector<T> Load<T>(T[] src, BitSize n)
+        public static BitCells<T> Load<T>(T[] src, BitSize n)
             where T : unmanaged
-                => BitVector<T>.From(src,n);
+                => BitCells<T>.From(src,n);
 
         /// <summary>
         /// Creates a generic bitvector defined by an arbitrary number of segments
         /// </summary>
         /// <param name="src">The source segment</param>
         [MethodImpl(Inline)]
-        public static BitVector<T> Load<T>(params T[] src)
+        public static BitCells<T> Load<T>(params T[] src)
             where T : unmanaged
-                => BitVector<T>.From(src, bitsize<T>()*src.Length);
+                => BitCells<T>.From(src, bitsize<T>()*src.Length);
  
         /// <summary>
         /// Computes the number of cells required to hold a specified number of bits
@@ -166,7 +165,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static int CellCount<T>(BitSize len)
             where T : unmanaged
-            => BitVector<T>.CellCount(len);
+            => BitCells<T>.CellCount(len);
 
         /// <summary>
         /// Computes the number of cells required to hold a specified number of bits

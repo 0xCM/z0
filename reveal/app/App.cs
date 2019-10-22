@@ -6,12 +6,7 @@ namespace Z0
 {        
     using System;
     using System.Linq;
-    using System.Reflection;
-    using System.IO;
-    using System.Runtime.Intrinsics;
-    using System.Runtime.Intrinsics.X86;
-    using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
+    using Z0.Logix;
 
     using static zfunc;
 
@@ -97,7 +92,8 @@ namespace Z0
             Disassemble(typeof(fpoc));    
             Disassemble(typeof(circop));    
             Disassemble(typeof(BitParts));                
-            Disassemble(typeof(BitOps));                
+            Disassemble(typeof(BitOps));   
+            Disassemble(typeof(BitLogicEval));             
         }
 
         public unsafe void ListMethods(Type t)
@@ -116,8 +112,6 @@ namespace Z0
                 last = m.loc;
                 print($"{m.loc.FormatHex(false)} {m.m.Name.PadRight(15)} {length}");
             }
-
-
         }
 
         void Run()
@@ -125,7 +119,6 @@ namespace Z0
 
             try
             {
-                //ListMethods(typeof(PrimalScenarios));
                 Disassemble(true,true);
             }
             catch(Exception e)
@@ -136,7 +129,5 @@ namespace Z0
 
         public static void Main(params string[] args)
             => new App().Run();
-
     }
-
 }

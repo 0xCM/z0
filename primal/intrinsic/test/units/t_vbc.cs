@@ -118,18 +118,21 @@ namespace Z0
             where T : unmanaged
         {
             var x = Random.Next<T>();
-            var vX = ginx.vbroadcast128(x);
-            var vY = Vec128.Fill(x);
-            Claim.eq(vX,vY);
+            var vX = ginx.vbroadcast(n128,x);
+            var data = vX.ToSpan();
+            for(var i=0; i<data.Length; i++)
+                Claim.eq(x,data[i]);
+            
         }
 
         void vbc_g256_check<T>()
             where T : unmanaged
         {
             var x = Random.Next<T>();
-            var vX = ginx.vbroadcast256(x);
-            var vY = Vec256.Fill(x);
-            Claim.eq(vX,vY);
+            var vX = ginx.vbroadcast(n256,x);
+            var data = vX.ToSpan();
+            for(var i=0; i<data.Length; i++)
+                Claim.eq(x,data[i]);
         }
 
     }

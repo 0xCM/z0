@@ -12,15 +12,21 @@ namespace Z0.Logix
 
     public sealed class EqualityExpr : IEqualityExpr
     {
-        public static EqualityExpr Define(ILogicExpr lhs, ILogicExpr rhs, params VariableExpr[] vars)
+        public static EqualityExpr Define(ILogicExpr lhs, ILogicExpr rhs, params LogicVariable[] vars)
             => new EqualityExpr(lhs,rhs,vars);
             
-        public EqualityExpr(ILogicExpr lhs, ILogicExpr rhs, params VariableExpr[] vars)
+        public EqualityExpr(ILogicExpr lhs, ILogicExpr rhs, params LogicVariable[] vars)
         {
             this.Lhs = lhs;
             this.Rhs = rhs;
             this.Vars = vars;
         }
+
+        /// <summary>
+        /// The expression classifier
+        /// </summary>
+        public LogicExprKind ExprKind
+            => LogicExprKind.Equality;
 
         /// <summary>
         /// The left expression
@@ -32,7 +38,7 @@ namespace Z0.Logix
         /// </summary>
         public ILogicExpr Rhs {get;}
 
-        public VariableExpr[] Vars {get;}
+        public LogicVariable[] Vars {get;}
 
         public void SetVars(params ILogicExpr[] values)
         {
@@ -41,7 +47,7 @@ namespace Z0.Logix
                 Vars[i].Set(values[i]);
         }
 
-        public void SetVars(IBitLiteralSeq values)
+        public void SetVars(ILiteralLogicSeq values)
         {
             var count = Math.Min(Vars.Length, values.Length);
             for(var i=0; i<count; i++)

@@ -22,10 +22,9 @@ namespace Z0
         /// Returns an immutable reference to a vector where each component is assigned the numeric value 1
         /// </summary>
         /// <typeparam name="T">The primal type</typeparam>
-        public static ref readonly Vec128<T> units<T>()
+        public static Vec128<T> units<T>()
             where T : unmanaged
-                => ref Vec128Pattern<T>.Units;
-
+                => Vec128Pattern<T>.Units();
 
         /// <summary>
         /// Returns a vector with all bits turned off

@@ -149,5 +149,27 @@ namespace Z0
                     gmath.sub(lhs.Right, rhs.Right)
                     );
 
+        
+        public static T[] Increments<T>(this Interval<T> domain)
+            where T : unmanaged
+        {
+            var min = domain.Left;
+            var max = domain.Right;
+            var current = min;
+            var increments = new List<T>(convert<T,int>(domain.Width()) + 1);
+            while(gmath.lteq(current,max))
+            {
+                increments.Add(current);
+                
+                if(gmath.lt(current, max))
+                    gmath.inc(ref current);
+                else
+                    break;
+
+            }
+            return increments.ToArray();
+
+        }
+
     }
 }

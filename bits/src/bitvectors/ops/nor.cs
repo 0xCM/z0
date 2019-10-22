@@ -18,12 +18,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitVector<T> nor<T>(BitVector<T> x, BitVector<T> y)
             where T : unmanaged
-        {
-            if(x.SingleCell && y.SingleCell)
-                return gmath.nor(x.Head, y.Head);
-            else
-                return nor_multicell(x,y);
-        }
+                => gmath.nor(x.Data, y.Data);
 
         /// <summary>
         /// Computes a new bitvector z = x & y from bitvectors x or y
@@ -70,10 +65,5 @@ namespace Z0
         public static BitVector64 nor(BitVector64 x, BitVector64 y)
             => math.nor(x.data, y.data);
  
-        [MethodImpl(NotInline)]
-        static BitVector<T> nor_multicell<T>(BitVector<T> x, BitVector<T> y)
-            where T : unmanaged
-                => mathspan.nor(x.Data.ReadOnly(), y.Data.ReadOnly());
-
     }
 }

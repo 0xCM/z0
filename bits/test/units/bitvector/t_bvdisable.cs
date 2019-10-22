@@ -74,7 +74,7 @@ namespace Z0.Test
         {
             for(var k=0; k<SampleSize; k++)
             {
-                var bv = Random.BitVector<T>(n);
+                var bv = Random.BitCells<T>(n);
                 var bs = bv.ToBitString();
                 Claim.eq(bv.Length, n);
                 Claim.eq(bv.Length, bs.Length);

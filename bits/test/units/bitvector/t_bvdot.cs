@@ -168,13 +168,13 @@ namespace Z0.Test
             {
                 var x = Random.BitVector(n64);
                 var y = Random.BitVector(n64);
-                var a = x % y;
+                bit a = x % y;
                 var b = ModProd(x,y);
                 Claim.yea(a == b);
 
                 var zx = x.ToGeneric();
                 var zy = y.ToGeneric();
-                var c = zx % zy;
+                bit c = zx % zy;
                 Claim.yea(a == c);
             
             }
@@ -187,8 +187,8 @@ namespace Z0.Test
 
             for(var i=0; i<CycleCount; i++)
             {
-                var x = Random.BitVector<T>(bitcount);
-                var y = Random.BitVector<T>(bitcount);
+                var x = Random.BitCells<T>(bitcount);
+                var y = Random.BitCells<T>(bitcount);
                 var a = x % y;
                 var b = ModProd(x,y);
                 Claim.yea(a == b);
@@ -207,7 +207,7 @@ namespace Z0.Test
             {
                 var x = Random.BitVector<N,T>();
                 var y = Random.BitVector<N,T>();
-                var a = x % y;
+                bit a = x % y;
                 var b = ModProd(x,y);
                 Claim.yea(a == b);            
             }

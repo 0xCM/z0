@@ -13,35 +13,6 @@ namespace Z0
     public static class VSpanX
     {
 
-        /// <summary>
-        /// Stores source vector conent in a caller-supplied target span
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <param name="dst">The target span</param>
-        /// <param name="offset">The target span offset</param>
-        /// <typeparam name="T">The component type</typeparam>
-        [MethodImpl(Inline)]
-        public static Span<T> ToSpan<T>(this Vec256<T> src, Span<T> dst, int offset = 0)
-            where T : unmanaged
-        {            
-            vstore(src, ref dst[offset]);
-            return  dst;
-        }
-
-        /// <summary>
-        /// Stores source vector conent in a caller-supplied target span
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <param name="dst">The target span</param>
-        /// <param name="offset">The target span offset</param>
-        /// <typeparam name="T">The component type</typeparam>
-        [MethodImpl(Inline)]
-        public static Span<T> ToSpan<T>(this Vec128<T> src, Span<T> dst, int offset = 0)
-            where T : unmanaged
-        {            
-            vstore(src, ref dst[offset]);
-            return  dst;
-        }
 
         /// <summary>
         /// Allocates a blocked span into which vector content is stored

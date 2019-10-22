@@ -10,6 +10,7 @@ namespace Z0.Logix
     
     using static zfunc;
 
+
     /// <summary>
     /// Characterizes an expression
     /// </summary>
@@ -25,27 +26,30 @@ namespace Z0.Logix
     public interface IExpr<T> : IExpr
         where T : unmanaged
     {
-
+        TypedExprKind ExprKind {get;}
     }
-
+    
     /// <summary>
-    /// Characterizes a typed logic expression 
+    /// Characterizes a finite sequence of terms
     /// </summary>
-    /// <typeparam name="T">The type over which the expression is defined</typeparam>
-    public interface ILogicExpr<T> : IExpr<T>
+    /// <typeparam name="T">The term type</typeparam>
+    public interface ISeqExpr<T> : IExpr
         where T : unmanaged
     {
+        /// <summary>
+        /// The terms in the sequence
+        /// </summary>
+        T[] Terms {get;}
 
-    }
+        /// <summary>
+        /// Sequence value accessor/manipulator
+        /// </summary>
+        T this[int index] {get;set;}
 
-
-
-    /// <summary>
-    /// Characterizes a logic expression over a bit
-    /// </summary>
-    public interface ILogicExpr : ILogicExpr<bit>
-    {
-        
+        /// <summary>
+        /// The number of terms in the sequence
+        /// </summary>
+        int Length {get;}
     }
 
     /// <summary>
@@ -66,6 +70,7 @@ namespace Z0.Logix
 
     }
 
+
     /// <summary>
     /// Characterizes a typed expression defined via an operator of specified kind
     /// </summary>
@@ -78,6 +83,14 @@ namespace Z0.Logix
         K OpKind {get;}
     }
 
+
+    /// <summary>
+    /// Characterizes a logicical expression over a bit
+    /// </summary>
+    public interface ILogicExpr : IExpr
+    {
+        LogicExprKind ExprKind {get;}
+    }
 
     public interface ILogicOpExpr : ILogicExpr, IOpExpr
     {

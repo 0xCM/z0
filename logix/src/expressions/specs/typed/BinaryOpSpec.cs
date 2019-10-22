@@ -13,39 +13,43 @@ namespace Z0.Logix
     /// <summary>
     /// Joins an operator with left and right operands
     /// </summary>
-    public sealed class ComparisonOp<T> : IComparisonOp<T>
+    public sealed class BinaryOpSpec<T> : IBinaryOp<T>
         where T : unmanaged
     {
         [MethodImpl(Inline)]
-        public ComparisonOp(ComparisonOpKind op, IArithmeticExpr<T> left, IArithmeticExpr<T> right)
+        public BinaryOpSpec(BinaryLogicOpKind op, IExpr<T> left, IExpr<T> right)
         {
             this.OpKind = op;
             this.LeftArg = left;
             this.RightArg = right;
         }
-        
+
+        /// <summary>
+        /// The expression classifier
+        /// </summary>
+        public TypedExprKind ExprKind 
+            => TypedExprKind.Operator;
+
         /// <summary>
         /// The operator
         /// </summary>
-        public ComparisonOpKind OpKind {get;}
+        public BinaryLogicOpKind OpKind {get;}
 
         /// <summary>
         /// The left operand
         /// </summary>
-        public IArithmeticExpr<T> LeftArg {get;}
+        public IExpr<T> LeftArg {get;}
 
         /// <summary>
         /// The right operand
         /// </summary>
-        public IArithmeticExpr<T> RightArg {get;}
+        public IExpr<T> RightArg {get;}
+
 
         public string Format()
             => OpKind.Format(LeftArg,RightArg);
         
         public override string ToString()
             => Format();
-
     }
-
-
 }

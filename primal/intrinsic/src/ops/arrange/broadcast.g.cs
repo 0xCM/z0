@@ -15,7 +15,7 @@ namespace Z0
     partial class ginx
     {
         [MethodImpl(Inline)]
-        public static Vec128<T> vbroadcast128<T>(T src)
+        public static Vector128<T> vbroadcast<T>(N128 n, T src)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte) 
@@ -34,7 +34,7 @@ namespace Z0
 
 
         [MethodImpl(Inline)]
-        public static Vec256<T> vbroadcast256<T>(T src)
+        public static Vector256<T> vbroadcast<T>(N256 n, T src)
             where T : unmanaged
         {
              if(typeof(T) == typeof(byte) 
@@ -52,81 +52,81 @@ namespace Z0
        }
 
         [MethodImpl(Inline)]
-        static Vec128<T> broadcast128i<T>(T src)
+        static Vector128<T> broadcast128i<T>(T src)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return generic<T>(dinx.vbroadcast128(int8(src)));
+                return generic<T>(dinx.vbroadcast(n128, int8(src)));
             else if(typeof(T) == typeof(short))
-                return generic<T>(dinx.vbroadcast128(int16(src)));
+                return generic<T>(dinx.vbroadcast(n128, int16(src)));
             else if(typeof(T) == typeof(int))
-                return generic<T>(dinx.vbroadcast128(int32(src)));
+                return generic<T>(dinx.vbroadcast(n128, int32(src)));
             else 
-                return generic<T>(dinx.vbroadcast128(int64(src)));
+                return generic<T>(dinx.vbroadcast(n128, int64(src)));
         }
 
         [MethodImpl(Inline)]
-        static Vec128<T> broadcast128u<T>(T src)
+        static Vector128<T> broadcast128u<T>(T src)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(dinx.vbroadcast128(uint8(src)));
+                return generic<T>(dinx.vbroadcast(n128, uint8(src)));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(dinx.vbroadcast128(uint16(src)));
+                return generic<T>(dinx.vbroadcast(n128, uint16(src)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(dinx.vbroadcast128(uint32(src)));
+                return generic<T>(dinx.vbroadcast(n128, uint32(src)));
             else 
-                return generic<T>(dinx.vbroadcast128(uint64(src)));
+                return generic<T>(dinx.vbroadcast(n128, uint64(src)));
         }
 
         [MethodImpl(Inline)]
-        static Vec128<T> broadcast128f<T>(T src)
+        static Vector128<T> broadcast128f<T>(T src)
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return  generic<T>(dfp.vbroadcast128(float32(src)));
+                return  generic<T>(dfp.vbroadcast(n128, float32(src)));
             else if(typeof(T) == typeof(double))
-                return generic<T>(dfp.vbroadcast128(float64(src)));
+                return generic<T>(dfp.vbroadcast(n128, float64(src)));
             else 
                 throw unsupported<T>();
         }
  
         [MethodImpl(Inline)]
-        static Vec256<T> broadcast256i<T>(T src)
+        static Vector256<T> broadcast256i<T>(T src)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return generic<T>(dinx.vbroadcast256(int8(src)));
+                return generic<T>(dinx.vbroadcast(n256, int8(src)));
             else if(typeof(T) == typeof(short))
-                return generic<T>(dinx.vbroadcast256(int16(src)));
+                return generic<T>(dinx.vbroadcast(n256, int16(src)));
             else if(typeof(T) == typeof(int))
-                return generic<T>(dinx.vbroadcast256(int32(src)));
+                return generic<T>(dinx.vbroadcast(n256, int32(src)));
             else 
-                return  generic<T>(dinx.vbroadcast256(int64(src)));
+                return  generic<T>(dinx.vbroadcast(n256, int64(src)));
         }
 
         [MethodImpl(Inline)]
-        static Vec256<T> broadcast256u<T>(T src)
+        static Vector256<T> broadcast256u<T>(T src)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(dinx.vbroadcast256(uint8(src)));
+                return generic<T>(dinx.vbroadcast(n256, uint8(src)));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(dinx.vbroadcast256(uint16(src)));
+                return generic<T>(dinx.vbroadcast(n256, uint16(src)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(dinx.vbroadcast256(uint32(src)));
+                return generic<T>(dinx.vbroadcast(n256, uint32(src)));
             else 
-                return generic<T>(dinx.vbroadcast256(uint64(src)));
+                return generic<T>(dinx.vbroadcast(n256, uint64(src)));
         }
 
         [MethodImpl(Inline)]
-        static Vec256<T> broadcast256f<T>(T src)
+        static Vector256<T> broadcast256f<T>(T src)
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return generic<T>(dfp.vbroadcast256(float32(src)));
+                return generic<T>(dfp.vbroadcast(n256, float32(src)));
             else if(typeof(T) == typeof(double))
-                return generic<T>(dfp.vbroadcast256(float64(src)));
+                return generic<T>(dfp.vbroadcast(n256, float64(src)));
             else 
                 throw unsupported<T>();
         }

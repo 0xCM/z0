@@ -10,63 +10,63 @@ namespace Z0.Logix
     
     using static zfunc;
 
-    public sealed class VariableExpr : ILogicVariable
+    public sealed class VariableExpr<T> : IVariable<T>
+        where T : unmanaged
     {
-
         [MethodImpl(Inline)]
-        public VariableExpr(string name, ILogicExpr init)
+        public VariableExpr(string name, IExpr<T> value)
         {
+            this.Value = value;
             this.Name = name;
-            this.Value = init;
-        }
-
-        [MethodImpl(Inline)]
-        public VariableExpr(string name, bit init)
-        {
-            this.Name = name;
-            this.Value = new LiteralExpr(init);
         }
 
         /// <summary>
-        /// The variable name
+        /// The expression classifier
         /// </summary>
-        public string Name {get;}
+        public TypedExprKind ExprKind 
+            => TypedExprKind.Variable;
+
 
         /// <summary>
-        /// The varible value
+        /// The name of the variable
         /// </summary>
-        public ILogicExpr Value {get; private set;}
+        public string Name {get;}            
 
+        /// <summary>
+        /// The value of the variable
+        /// </summary>
+        public IExpr<T> Value {get; private set;}
+        
         IExpr IVariable.Value 
             => Value;
 
+        /// <summary>
+        /// Updates the variable's value
+        /// </summary>
+        /// <param name="value">The new value</param>
         [MethodImpl(Inline)]
-        public void Set(ILogicExpr value)
+        public void Set(IExpr<T> value)
         {
-            this.Value = value;
+            Value = value;
         }
 
         [MethodImpl(Inline)]
-        public void Set(bit value)
+        public void Set(T value)
         {
-            this.Value = new LiteralExpr(value);
+            Value = new LiteralExpr<T>(value);
         }
-
 
         [MethodImpl(Inline)]
         public void Set(IExpr value)
-            => Value = (ILogicExpr)value;
+            => Value = (IExpr<T>)value;
 
         public string Format()
             => Format(false);
 
         public string Format(bool expand)
-            => $"{Name}" + (expand ? $" := {Value}" : string.Empty);
+            => $"{Name}:{typename<T>()}" + (expand ? $" := {Value}" : string.Empty);
         
         public override string ToString()
             => Format();
-
     }
-
-
 }

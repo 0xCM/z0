@@ -23,39 +23,49 @@ namespace Z0
     partial class dinx
     {
         /// <summary>
-        ///  __m256i _mm256_mulhrs_epi16 (__m256i a, __m256i b)VPMULHRSW ymm, ymm, ymm/m256
-        /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        public static Vec256<short> vmulhrs(in Vec256<short> x, in Vec256<short> y)
-            => MultiplyHighRoundScale(x.ymm,y.ymm);
-
-        /// <summary>
         /// __m128i _mm_mulhrs_epi16 (__m128i a, __m128i b)PMULHRSW xmm, xmm/m128
         /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
+        /// <param name="x">The left operand</param>
+        /// <param name="y">The right operand</param>
         [MethodImpl(Inline)]
-        public static Vec128<short> vmulhrs(in Vec128<short> x, in Vec128<short> y)
-            => MultiplyHighRoundScale(x.xmm,y.xmm);
+        public static Vector128<short> vmulhrs(Vector128<short> x, Vector128<short> y)
+            => MultiplyHighRoundScale(x,y);
+
 
         /// <summary>
-        /// _mm_mul_epi32
+        ///  __m256i _mm256_mulhrs_epi16 (__m256i a, __m256i b)VPMULHRSW ymm, ymm, ymm/m256
+        /// </summary>
+        /// <param name="x">The left operand</param>
+        /// <param name="y">The right operand</param>
+        public static Vector256<short> vmulhrs(Vector256<short> x, Vector256<short> y)
+            => MultiplyHighRoundScale(x,y);
+
+        /// <summary>
+        ///  __m128i _mm_mul_epi32 (__m128i a, __m128i b)PMULDQ xmm, xmm/m128
         /// </summary>
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
         [MethodImpl(Inline)]
         public static Vec128<long> vmul(in Vec128<int> x, in Vec128<int> y)
             => Multiply(x.xmm, y.xmm);
-            
+
         /// <summary>
-        /// _mm_mul_epu32
+        ///  __m128i _mm_mul_epi32 (__m128i a, __m128i b)PMULDQ xmm, xmm/m128
         /// </summary>
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
         [MethodImpl(Inline)]
-        static Vec128<ulong> vmul(in Vec128<uint> x, in Vec128<uint> y)
-            => Multiply(x.xmm, y.xmm);
+        public static Vector128<long> vmul(Vector128<int> x, Vector128<int> y)
+            => Multiply(x, y);
+
+        /// <summary>
+        /// __m128i _mm_mul_epu32 (__m128i a, __m128i b)PMULUDQ xmm, xmm/m128
+        /// </summary>
+        /// <param name="x">The left operand</param>
+        /// <param name="y">The right operand</param>
+        [MethodImpl(Inline)]
+        public static Vector128<ulong> vmul(Vector128<uint> x, Vector128<uint> y)
+            => Multiply(x, y);
 
         /// <summary>
         /// __m256i _mm256_mul_epi32 (__m256i a, __m256i b) VPMULDQ ymm, ymm, ymm/m256
@@ -63,8 +73,8 @@ namespace Z0
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
         [MethodImpl(Inline)]
-        public static Vec256<long> vmul(in Vec256<int> x,in Vec256<int> y)
-            => Multiply(x.ymm, y.ymm);
+        public static Vector256<long> vmul(Vector256<int> x,Vector256<int> y)
+            => Multiply(x, y);
 
         /// <summary>
         ///  __m256i _mm256_mul_epu32 (__m256i a, __m256i b)VPMULUDQ ymm, ymm, ymm/m256
@@ -72,24 +82,25 @@ namespace Z0
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
         [MethodImpl(Inline)]
-        static Vec256<ulong> vmul(in Vec256<uint> x,in Vec256<uint> y)
-            => Multiply(x.ymm, y.ymm);
+        public static Vector256<ulong> vmul(Vector256<uint> x,Vector256<uint> y)
+            => Multiply(x, y);
                         
         /// <summary>
         /// Multiplies two two 256-bit/u64 vectors to yield a 256-bit/u64 vector
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        public static Vec256<ulong> vmul(in Vec256<ulong> x, in Vec256<ulong> y)    
+        public static Vec256<ulong> vmul(Vector256<ulong> x, Vector256<ulong> y)    
         {
-            var loMask = Vec256.Fill(0x00000000fffffffful);    
-            var xl = dinx.vand(x, loMask).As<uint>();
-            var xh = dinx.vsrl(x, 32).As<uint>();
-            var yl = dinx.vand(y, loMask).As<uint>();
-            var yh = dinx.vsrl(y, 32).As<uint>();
+            var loMask = ginx.vbroadcast(n256, 0x00000000fffffffful);  
+              
+            var xl = dinx.vand(x, loMask).AsUInt32();
+            var xh = dinx.vsrl(x, 32).AsUInt32();
+            var yl = dinx.vand(y, loMask).AsUInt32();
+            var yh = dinx.vsrl(y, 32).AsUInt32();
 
             var xh_yl = dinx.vmul(xh, yl);
-            var hl = dinx.vsll(in xh_yl, 32);
+            var hl = dinx.vsll(xh_yl, 32);
 
             var xh_mh = dinx.vmul(xh, yh);
             var lh = dinx.vsll(xh_mh, 32);

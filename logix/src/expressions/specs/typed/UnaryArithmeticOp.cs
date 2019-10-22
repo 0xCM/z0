@@ -11,33 +11,39 @@ namespace Z0.Logix
     using static zfunc;
 
     /// <summary>
-    /// Represents a logical operator over one operand
+    /// Joins an operator with left and right operands
     /// </summary>
-    public sealed class UnaryLogicOp : IUnaryLogicOp
+    public sealed class UnaryAritheticOp<T> : IUnaryArithmeticOp<T>
+        where T : unmanaged
     {
-        [MethodImpl(Inline)]
-        public UnaryLogicOp(UnaryLogicOpKind op, ILogicExpr operand)
+        public UnaryAritheticOp(UnaryArithmeticOpKind op, IExpr<T> operand)
         {
             this.OpKind = op;
             this.Operand = operand;
         }
         
         /// <summary>
+        /// The expression classifier
+        /// </summary>
+        public TypedExprKind ExprKind 
+            => TypedExprKind.Operator;
+
+        /// <summary>
         /// The operator
         /// </summary>
-        public UnaryLogicOpKind OpKind {get;}
+        public UnaryArithmeticOpKind OpKind {get;}
 
 
         /// <summary>
-        /// The left operand
+        /// The operand
         /// </summary>
-        public ILogicExpr Operand {get;}
+        public IExpr<T> Operand {get;}
+
 
         public string Format()
             => OpKind.Format(Operand);
 
-        public override string ToString()
-            => Format();
     }
+
 
 }

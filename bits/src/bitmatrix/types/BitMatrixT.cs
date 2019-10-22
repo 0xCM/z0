@@ -140,7 +140,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public void SetRow(int row, BitVector<T> src)
-            => this.data[row] = src.Head;
+            => this.data[row] = src.Data;
 
         /// <summary>
         /// Gets the the value of bit identified by row/col indices

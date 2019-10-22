@@ -21,6 +21,16 @@ namespace Z0
         /// <param name="x">The source bitvector</param>
         /// <param name="y">The shift offset</param>
         [MethodImpl(Inline)]
+        public static BitVector<T> srl<T>(BitVector<T> x, int offset)
+            where T : unmanaged
+                => gmath.srl(x.Data,offset);
+
+        /// <summary>
+        /// Applies a logical right shift to the source vector
+        /// </summary>
+        /// <param name="x">The source bitvector</param>
+        /// <param name="y">The shift offset</param>
+        [MethodImpl(Inline)]
         public static BitVector4 srl(BitVector4 x, int offset)
             => math.srl(x.data,offset);
 

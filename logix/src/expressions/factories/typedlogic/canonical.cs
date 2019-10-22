@@ -62,7 +62,7 @@ namespace Z0.Logix
         /// <param name="rhs">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static BinaryLogicOp<T> and<T>(IExpr<T> lhs, IExpr<T> rhs)
+        public static BinaryOpSpec<T> and<T>(IExpr<T> lhs, IExpr<T> rhs)
             where T : unmanaged
                 => binary(BinaryLogicOpKind.And, lhs,rhs);
 
@@ -73,7 +73,7 @@ namespace Z0.Logix
         /// <param name="rhs">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static BinaryLogicOp<T> and<T>(T lhs, T rhs)
+        public static BinaryOpSpec<T> and<T>(T lhs, T rhs)
             where T : unmanaged
                 => and(literal(lhs), literal(rhs));
 
@@ -84,7 +84,7 @@ namespace Z0.Logix
         /// <param name="rhs">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static BinaryLogicOp<T> or<T>(IExpr<T> lhs, IExpr<T> rhs)
+        public static BinaryOpSpec<T> or<T>(IExpr<T> lhs, IExpr<T> rhs)
             where T : unmanaged
                 => binary(BinaryLogicOpKind.Or, lhs,rhs);
 
@@ -95,7 +95,7 @@ namespace Z0.Logix
         /// <param name="rhs">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static BinaryLogicOp<T> or<T>(T lhs, T rhs)
+        public static BinaryOpSpec<T> or<T>(T lhs, T rhs)
             where T : unmanaged
                 => or(literal(lhs), literal(rhs));
 
@@ -106,7 +106,7 @@ namespace Z0.Logix
         /// <param name="rhs">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static BinaryLogicOp<T> xor<T>(IExpr<T> lhs, IExpr<T> rhs)
+        public static BinaryOpSpec<T> xor<T>(IExpr<T> lhs, IExpr<T> rhs)
             where T : unmanaged
                 => binary(BinaryLogicOpKind.XOr, lhs,rhs);
 
@@ -117,7 +117,7 @@ namespace Z0.Logix
         /// <param name="rhs">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static BinaryLogicOp<T> xor<T>(T lhs, T rhs)
+        public static BinaryOpSpec<T> xor<T>(T lhs, T rhs)
             where T : unmanaged
                 => xor(literal(lhs), literal(rhs));
 
@@ -127,7 +127,7 @@ namespace Z0.Logix
         /// <param name="operand">The expression operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static UnaryLogicOp<T> not<T>(IExpr<T> operand)
+        public static UnaryOpSpec<T> not<T>(IExpr<T> operand)
             where T : unmanaged
                 => unary(UnaryLogicOpKind.Not, operand);
 
@@ -137,7 +137,7 @@ namespace Z0.Logix
         /// <param name="operand">The expression operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static UnaryLogicOp<T> not<T>(T operand)
+        public static UnaryOpSpec<T> not<T>(T operand)
             where T : unmanaged
                 => not(literal(operand));
 
@@ -147,7 +147,7 @@ namespace Z0.Logix
         /// <param name="operand">The expression operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static UnaryLogicOp<T> negate<T>(IExpr<T> operand)
+        public static UnaryOpSpec<T> negate<T>(IExpr<T> operand)
             where T : unmanaged
                 => unary(UnaryLogicOpKind.Negate, operand);
 
@@ -157,7 +157,7 @@ namespace Z0.Logix
         /// <param name="operand">The expression operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static UnaryLogicOp<T> negate<T>(T operand)
+        public static UnaryOpSpec<T> negate<T>(T operand)
             where T : unmanaged
                 => negate(literal(operand));
 
@@ -168,7 +168,7 @@ namespace Z0.Logix
         /// <param name="rhs">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static BinaryLogicOp<T> nand<T>(IExpr<T> lhs, IExpr<T> rhs)
+        public static BinaryOpSpec<T> nand<T>(IExpr<T> lhs, IExpr<T> rhs)
             where T : unmanaged
                 => binary(BinaryLogicOpKind.Nand, lhs,rhs);
 
@@ -179,7 +179,7 @@ namespace Z0.Logix
         /// <param name="rhs">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static BinaryLogicOp<T> nand<T>(T lhs, T rhs)
+        public static BinaryOpSpec<T> nand<T>(T lhs, T rhs)
             where T : unmanaged
                 => nand(literal(lhs), literal(rhs));
 
@@ -190,7 +190,7 @@ namespace Z0.Logix
         /// <param name="rhs">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static BinaryLogicOp<T> nor<T>(IExpr<T> lhs, IExpr<T> rhs)
+        public static BinaryOpSpec<T> nor<T>(IExpr<T> lhs, IExpr<T> rhs)
             where T : unmanaged
                 => binary(BinaryLogicOpKind.Nor, lhs,rhs);
 
@@ -201,7 +201,7 @@ namespace Z0.Logix
         /// <param name="rhs">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static BinaryLogicOp<T> nor<T>(T lhs, T rhs)
+        public static BinaryOpSpec<T> nor<T>(T lhs, T rhs)
             where T : unmanaged
                 => nor(literal(lhs), literal(rhs));
 
@@ -212,7 +212,7 @@ namespace Z0.Logix
         /// <param name="rhs">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static BinaryLogicOp<T> xnor<T>(IExpr<T> lhs, IExpr<T> rhs)
+        public static BinaryOpSpec<T> xnor<T>(IExpr<T> lhs, IExpr<T> rhs)
             where T : unmanaged
                 => binary(BinaryLogicOpKind.Xnor, lhs,rhs);
 
@@ -223,7 +223,7 @@ namespace Z0.Logix
         /// <param name="rhs">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static BinaryLogicOp<T> xnor<T>(T lhs, T rhs)
+        public static BinaryOpSpec<T> xnor<T>(T lhs, T rhs)
             where T : unmanaged
                 => xnor(literal(lhs), literal(rhs));
  

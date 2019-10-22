@@ -30,7 +30,6 @@ namespace Z0
             return (byte)prod;
         }
 
-    
         /// <summary>
         /// Computes the carryless product of the operands reduced by a specified polynomial
         /// </summary>
@@ -96,6 +95,16 @@ namespace Z0
         public static Vec128<ulong> clmul(in Vec128<ulong> lhs, in Vec128<ulong> rhs, ClMulMask mask)
             =>  CarrylessMultiply(lhs, rhs, (byte)mask);
 
+        /// __m128i _mm_clmulepi64_si128 (__m128i a, __m128i b, const int imm8) PCLMULQDQ xmm, xmm/m128, imm8
+        /// Computes the caryless 128-bit product of two 64-bit operands
+        /// </summary>
+        /// <param name="lhs">The left operand</param>
+        /// <param name="rhs">The right operand</param>
+        /// <param name="mask">Specifies the components of the source vectors to multiply</param>
+        [MethodImpl(Inline)]
+        public static Vector128<ulong> clmul(Vector128<ulong> lhs, Vector128<ulong> rhs, ClMulMask mask)
+            =>  CarrylessMultiply(lhs, rhs, (byte)mask);
+
         /// <summary>
         /// Computes the caryless 16-bit product of two 8-bit operands
         /// </summary>
@@ -138,23 +147,6 @@ namespace Z0
             return prod;
         }
 
-        /// <summary>
-        /// Computes carry-less product variations for two source vectors
-        /// </summary>
-        /// <param name="lhs">The left operand</param>
-        /// <param name="rhs">The right operand</param>
-        /// <param name="dst">Receives the results</param>
-        [MethodImpl(Inline)]
-        public static ref Vec512<ulong> clmul(in Vec128<ulong> lhs, in Vec128<ulong> rhs, out Vec512<ulong> dst)
-        {
-            dst = Vec512.FromParts(
-                clmul(lhs, rhs, ClMulMask.X00), 
-                clmul(lhs, rhs, ClMulMask.X01), 
-                clmul(lhs, rhs, ClMulMask.X10), 
-                clmul(lhs, rhs, ClMulMask.X11)
-                );
-            return ref dst;
-        }
     }
 
     /// <summary>

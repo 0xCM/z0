@@ -219,17 +219,17 @@ namespace Z0
         /// <param name="f">The mapping function</param>
         /// <typeparam name="S">The source primal type</typeparam>
         /// <typeparam name="T">The target primal type</typeparam>
-        public static Vec256<T> Map256<S,T>(this Vec256<S> src, Func<S,T> f)
+        public static Vector256<T> Map256<S,T>(this Vector256<S> src, Func<S,T> f)
             where T : unmanaged
             where S : unmanaged
         {
-            var xLen = Math.Min(Vec256<S>.Length, Vec256<T>.Length);
-            var dstLen = Vec256<T>.Length;
+            var xLen = Math.Min(Vector256<S>.Count, Vector256<T>.Count);
+            var dstLen = Vector256<T>.Count;
             var data = src.ToSpan();            
             Span<T> dst = new T[dstLen];
             for(var i=0; i< xLen; i++)
-                dst[i] = f(src[i]);            
-            return Vec256.Load(ref head(dst));        
+                dst[i] = f(data[i]);            
+            return ginx.vloadu256(in head(dst));        
         } 
 
         /// <summary>

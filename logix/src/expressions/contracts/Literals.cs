@@ -24,26 +24,22 @@ namespace Z0.Logix
         T Value {get;}                
     }
 
-    public interface IBitLiteralExpr : ILogicExpr, ILiteralExpr<bit>
+    public interface ILogicLiteral : ILogicExpr, ILiteralExpr
     {
+        bit Value {get;}
+    }
+
+
+    public interface ILiteralSeq<T> : ILiteralExpr, ISeqExpr<T>
+        where T : unmanaged
+    {
+
 
     }
 
-    public interface IBitLiteralSeq
+
+    public interface ILiteralLogicSeq : ILiteralSeq<bit>, ILogicExpr
     {
-        /// <summary>
-        /// The sequence terms
-        /// </summary>
-        bit[] Terms {get;}
 
-        /// <summary>
-        /// Sequence term accessor/manipulator
-        /// </summary>
-        bit this[int index] {get;set;}
-
-        /// <summary>
-        /// The number of terms in the sequence
-        /// </summary>
-        int Length {get;}
     }
 }

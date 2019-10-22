@@ -70,5 +70,6 @@ namespace Z0
             where T : unmanaged
                 => new Interval<T>(left, false, right, false);
     
+
     }
 }

@@ -23,6 +23,12 @@ namespace Z0.Logix
         }
 
         /// <summary>
+        /// The expression classifier
+        /// </summary>
+        public TypedExprKind ExprKind 
+            => TypedExprKind.Equality;
+
+        /// <summary>
         /// The left expression
         /// </summary>
         public IExpr<T> Lhs {get;}
@@ -35,7 +41,7 @@ namespace Z0.Logix
         public VariableExpr<T>[] Vars {get;}
 
 
-        public void SetVars(params ILogicExpr<T>[] values)
+        public void SetVars(params IExpr<T>[] values)
         {
             var count = Math.Min(Vars.Length, values.Length);
             for(var i=0; i<count; i++)
@@ -49,7 +55,14 @@ namespace Z0.Logix
                 Vars[i].Set(values[i]);
         }
 
+        [MethodImpl(Inline)]
+        public void SetVar(int index, T value)
+            => Vars[index].Set(value);
+         
         public string Format()
             => Lhs.Format() + " == " + Rhs.Format();
+        
+        public override string ToString()
+            => Format();
     }
 }

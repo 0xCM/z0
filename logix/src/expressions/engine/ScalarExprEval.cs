@@ -19,6 +19,8 @@ namespace Z0.Logix
             {
                 case ILiteralExpr<T> x:
                     return eval(x);
+                case IVariedExpr<T> x:
+                    return eval(x);
                 case IVariable<T> x:
                     return eval(x);
                 case IOpExpr<T> x:
@@ -35,6 +37,11 @@ namespace Z0.Logix
         static LiteralExpr<T> eval<T>(ILiteralExpr<T> expr)
             where T : unmanaged
                 => expr.Value;
+
+        [MethodImpl(Inline)]
+        static LiteralExpr<T> eval<T>(IVariedExpr<T> expr)
+            where T : unmanaged
+                => eval(expr.BaseExpr);
 
         [MethodImpl(Inline)]
         static LiteralExpr<T> eval<T>(IVariable<T> expr)

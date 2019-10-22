@@ -1,4 +1,4 @@
-// 2019-10-21 17:21:46:141
+// 2019-10-22 02:15:30:482
 void part27x3(uint src, Span<byte> dst)
 {
     IL_0000: ldarga.s dst

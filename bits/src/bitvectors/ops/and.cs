@@ -25,12 +25,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitVector<T> and<T>(BitVector<T> x, BitVector<T> y)
             where T : unmanaged
-        {
-            if(x.SingleCell && y.SingleCell)
-                return gmath.and(x.Head, y.Head);
-            else
-                return and_multicell(x,y);
-        }
+                => gmath.and(x.Data, y.Data);
 
         /// <summary>
         /// Computes a new bitvector z = x & y from bitvectors x and y
@@ -76,11 +71,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitVector64 and(BitVector64 x, BitVector64 y)
             => math.and(x.data, y.data);
- 
-       [MethodImpl(Inline)]
-        static BitVector<T> and_multicell<T>(BitVector<T> x, BitVector<T> y)
-            where T : unmanaged
-                => mathspan.and(x.Data.ReadOnly(),y.Data.ReadOnly());
  
     }
 }

@@ -13,11 +13,10 @@ namespace Z0.Logix
     /// <summary>
     /// Represents a bitwise operator over three operands
     /// </summary>
-    public sealed class TernaryLogicOp<T> : ITernaryOp<T>
-        where T : unmanaged
+    public sealed class TernaryLogicOp : ITernaryLogicOp
     {
         [MethodImpl(Inline)]
-        public TernaryLogicOp(TernaryLogicOpKind op, ILogicExpr<T> first, ILogicExpr<T> second, ILogicExpr<T> third)
+        public TernaryLogicOp(TernaryLogicOpKind op, ILogicExpr first, ILogicExpr second, ILogicExpr third)
         {
             this.OpKind = op;
             this.FirstArg = first;
@@ -26,6 +25,12 @@ namespace Z0.Logix
         }
         
         /// <summary>
+        /// The expression classifier
+        /// </summary>
+        public LogicExprKind ExprKind
+            => LogicExprKind.Operator;
+
+        /// <summary>
         /// The operator
         /// </summary>
         public TernaryLogicOpKind OpKind {get;}
@@ -33,23 +38,24 @@ namespace Z0.Logix
         /// <summary>
         /// The first operand
         /// </summary>
-        public ILogicExpr<T> FirstArg {get;}
+        public ILogicExpr FirstArg {get;}
 
         /// <summary>
         /// The second operand
         /// </summary>
-        public ILogicExpr<T> SecondArg {get;}
+        public ILogicExpr SecondArg {get;}
 
         /// <summary>
         /// The third operand
         /// </summary>
-        public ILogicExpr<T> ThirdArg {get;}
+        public ILogicExpr ThirdArg {get;}
 
         public string Format()
             => OpKind.Format(FirstArg,SecondArg,ThirdArg);
         
         public override string ToString()
             => Format();
+
 
     }
 

@@ -14,6 +14,15 @@ namespace Z0
 
     public static partial class bitvector
     {
+        [MethodImpl(Inline)]
+        public static BitVector<T> generic<T>()
+            where T : unmanaged
+                => default;
+
+        [MethodImpl(Inline)]
+        public static BitVector<T> generic<T>(T init)
+            where T : unmanaged
+                => BitVector<T>.From(init);
 
     }
 

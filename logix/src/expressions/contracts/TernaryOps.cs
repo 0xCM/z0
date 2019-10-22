@@ -48,17 +48,17 @@ namespace Z0.Logix
         /// <summary>
         /// The first operand
         /// </summary>
-        ILogicExpr<T> FirstArg {get;}
+        IExpr<T> FirstArg {get;}
 
         /// <summary>
         /// The second operand
         /// </summary>
-        ILogicExpr<T> SecondArg {get;}
+        IExpr<T> SecondArg {get;}
 
         /// <summary>
         /// The third operand
         /// </summary>
-        ILogicExpr<T> ThirdArg {get;}
+        IExpr<T> ThirdArg {get;}
 
     }
 

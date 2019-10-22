@@ -20,9 +20,9 @@ namespace Z0.Logix
         /// <param name="offset">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static BitShiftOp<T> shift<T>(ShiftOpKind op, IExpr<T> src, int offset)
+        public static ShiftOpSpec<T> shift<T>(ShiftOpKind op, IExpr<T> src, int offset)
             where T : unmanaged
-                => new BitShiftOp<T>(op,src,literal(offset));
+                => new ShiftOpSpec<T>(op,src,literal(offset));
 
         /// <summary>
         /// Creates a shift expression
@@ -32,9 +32,9 @@ namespace Z0.Logix
         /// <param name="offset">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static BitShiftOp<T> shiftx<T>(ShiftOpKind op, IExpr<T> src, IExpr<int> offset)
+        public static ShiftOpSpec<T> shiftx<T>(ShiftOpKind op, IExpr<T> src, IExpr<int> offset)
             where T : unmanaged
-                => new BitShiftOp<T>(op,src, offset);
+                => new ShiftOpSpec<T>(op,src, offset);
 
         /// <summary>
         /// Defines a bitwise sll expression
@@ -43,7 +43,7 @@ namespace Z0.Logix
         /// <param name="offset">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static BitShiftOp<T> sll<T>(IExpr<T> src, int offset)
+        public static ShiftOpSpec<T> sll<T>(IExpr<T> src, int offset)
             where T : unmanaged
                 => shift(ShiftOpKind.Sll, src, offset);
 
@@ -54,7 +54,7 @@ namespace Z0.Logix
         /// <param name="offset">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static BitShiftOp<T> sll<T>(T src, int offset)
+        public static ShiftOpSpec<T> sll<T>(T src, int offset)
             where T : unmanaged
                 => sll(literal(src), offset);
 
@@ -65,7 +65,7 @@ namespace Z0.Logix
         /// <param name="offset">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static BitShiftOp<T> srl<T>(IExpr<T> src, int offset)
+        public static ShiftOpSpec<T> srl<T>(IExpr<T> src, int offset)
             where T : unmanaged
                 => shift(ShiftOpKind.Srl, src, offset);
 
@@ -76,7 +76,7 @@ namespace Z0.Logix
         /// <param name="offset">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static BitShiftOp<T> srl<T>(T src, int offset)
+        public static ShiftOpSpec<T> srl<T>(T src, int offset)
             where T : unmanaged
                 => srl(literal(src), offset);
 
@@ -87,7 +87,7 @@ namespace Z0.Logix
         /// <param name="offset">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static BitShiftOp<T> rotr<T>(IExpr<T> src, int offset)
+        public static ShiftOpSpec<T> rotr<T>(IExpr<T> src, int offset)
             where T : unmanaged
                 => shift(ShiftOpKind.Rotr, src, offset);
 
@@ -98,7 +98,7 @@ namespace Z0.Logix
         /// <param name="offset">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static BitShiftOp<T> rotr<T>(T src, int offset)
+        public static ShiftOpSpec<T> rotr<T>(T src, int offset)
             where T : unmanaged
                 => rotr(literal(src), offset);
         
@@ -109,7 +109,7 @@ namespace Z0.Logix
         /// <param name="offset">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static BitShiftOp<T> rotl<T>(IExpr<T> src, int offset)
+        public static ShiftOpSpec<T> rotl<T>(IExpr<T> src, int offset)
             where T : unmanaged
                 => shift(ShiftOpKind.Rotl, src, offset);
 
@@ -120,7 +120,7 @@ namespace Z0.Logix
         /// <param name="offset">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static BitShiftOp<T> rotl<T>(T src, int offset)
+        public static ShiftOpSpec<T> rotl<T>(T src, int offset)
             where T : unmanaged
                 => rotl(literal(src), offset);
 
@@ -131,7 +131,7 @@ namespace Z0.Logix
         /// <param name="offset">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static BitShiftOp<T> sll<T>(IExpr<T> src, IExpr<int> offset)
+        public static ShiftOpSpec<T> sll<T>(IExpr<T> src, IExpr<int> offset)
             where T : unmanaged
                 => shiftx(ShiftOpKind.Sll, src, offset);
 
@@ -142,7 +142,7 @@ namespace Z0.Logix
         /// <param name="offset">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static BitShiftOp<T> sllx<T>(T src, IExpr<int> offset)
+        public static ShiftOpSpec<T> sllx<T>(T src, IExpr<int> offset)
             where T : unmanaged
                 => sll(literal(src), offset);
 
@@ -153,7 +153,7 @@ namespace Z0.Logix
         /// <param name="offset">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static BitShiftOp<T> srl<T>(IExpr<T> src, IExpr<int> offset)
+        public static ShiftOpSpec<T> srl<T>(IExpr<T> src, IExpr<int> offset)
             where T : unmanaged
                 => shiftx(ShiftOpKind.Srl, src, offset);
 
@@ -164,7 +164,7 @@ namespace Z0.Logix
         /// <param name="offset">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static BitShiftOp<T> srl<T>(T src, IExpr<int> offset)
+        public static ShiftOpSpec<T> srl<T>(T src, IExpr<int> offset)
             where T : unmanaged
                 => srl(literal(src), offset);
 
@@ -175,7 +175,7 @@ namespace Z0.Logix
         /// <param name="offset">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static BitShiftOp<T> rotr<T>(IExpr<T> src, IExpr<int> offset)
+        public static ShiftOpSpec<T> rotr<T>(IExpr<T> src, IExpr<int> offset)
             where T : unmanaged
                 => shiftx(ShiftOpKind.Rotr, src, offset);
 
@@ -186,7 +186,7 @@ namespace Z0.Logix
         /// <param name="offset">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static BitShiftOp<T> rotr<T>(T src, IExpr<int> offset)
+        public static ShiftOpSpec<T> rotr<T>(T src, IExpr<int> offset)
             where T : unmanaged
                 => rotr(literal(src), offset);
         
@@ -197,7 +197,7 @@ namespace Z0.Logix
         /// <param name="offset">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static BitShiftOp<T> rotl<T>(IExpr<T> src, IExpr<int> offset)
+        public static ShiftOpSpec<T> rotl<T>(IExpr<T> src, IExpr<int> offset)
             where T : unmanaged
                 => shiftx(ShiftOpKind.Rotl, src, offset);
 
@@ -208,7 +208,7 @@ namespace Z0.Logix
         /// <param name="offset">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static BitShiftOp<T> rotl<T>(T src, IExpr<int> offset)
+        public static ShiftOpSpec<T> rotl<T>(T src, IExpr<int> offset)
             where T : unmanaged
                 => rotl(literal(src), offset);
 

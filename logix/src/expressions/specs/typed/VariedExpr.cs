@@ -20,6 +20,12 @@ namespace Z0.Logix
             this.Vars = variables;
         }
 
+        /// <summary>
+        /// The expression classifier
+        /// </summary>
+        public TypedExprKind ExprKind 
+            => TypedExprKind.Varied;
+
         public IExpr<T> BaseExpr {get;}
 
         public VariableExpr<T>[] Vars {get;}
@@ -46,6 +52,12 @@ namespace Z0.Logix
             this.BaseExpr = baseExpr;
             this.Vars = variables;
         }
+
+        /// <summary>
+        /// The expression classifier
+        /// </summary>
+        public TypedExprKind ExprKind 
+            => TypedExprKind.Varied;
 
         public IExpr<T> BaseExpr {get;}
 

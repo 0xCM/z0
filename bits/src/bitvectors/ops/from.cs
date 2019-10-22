@@ -32,9 +32,9 @@ namespace Z0
         /// <param name="src">The source segment</param>
         /// <param name="n">The bitvector length</param>
         [MethodImpl(Inline)]
-        public static BitVector<T> from<T>(T src, BitSize n)
+        public static BitVector<T> from<T>(T src)
             where T : unmanaged
-                => BitVector<T>.FromCell(src,n);
+                => BitVector<T>.From(src);
 
     }
 

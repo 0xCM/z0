@@ -13,20 +13,26 @@ namespace Z0.Logix
     /// <summary>
     /// Defines a logic expression that is parametrized by one or more variables
     /// </summary>
-    public sealed class VariedExpr : IVariedLogicExpr
+    public sealed class VariedLogicExpr : IVariedLogicExpr
     {        
 
         [MethodImpl(Inline)]
-        public static VariedExpr Define(ILogicExpr baseExpr, params ILogicVariable[] variables)
-            => new VariedExpr(baseExpr, variables);
+        public static VariedLogicExpr Define(ILogicExpr baseExpr, params ILogicVariable[] variables)
+            => new VariedLogicExpr(baseExpr, variables);
 
 
         [MethodImpl(Inline)]
-        public VariedExpr(ILogicExpr baseExpr, params ILogicVariable[] variables)
+        public VariedLogicExpr(ILogicExpr baseExpr, params ILogicVariable[] variables)
         {
             this.BaseExpr = baseExpr;
             this.Vars = variables;
         }
+
+        /// <summary>
+        /// The expression classifier
+        /// </summary>
+        public LogicExprKind ExprKind
+            => LogicExprKind.Varied;
 
         public ILogicExpr BaseExpr {get;}
 
@@ -42,7 +48,14 @@ namespace Z0.Logix
                 Vars[i].Set(values[i]);
         }
 
-        public void SetVars(BitLiteralSeq values)
+        public void SetVars(params bit[] values)
+        {
+            var n = Math.Min(Vars.Length, values.Length);
+            for(var i=0; i<n; i++)
+                Vars[i].Set(values[i]);
+        }
+
+        public void SetVars(LiteralLogicSeq values)
         {
             var n = Math.Min(Vars.Length, values.Length);
             for(var i=0; i<n; i++)

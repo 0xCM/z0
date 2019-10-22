@@ -21,7 +21,7 @@ namespace Z0.Logix
                     return eval(x);
                 case IVariedLogicExpr x:
                     return eval(x);
-                case IBitLiteralExpr x:
+                case ILogicLiteral x:
                     return eval(x);
                 case ILogicOpExpr x:
                     return eval(x);
@@ -31,6 +31,7 @@ namespace Z0.Logix
                     return unhandled(expr);
             }
         }
+
 
         /// <summary>
         /// Evaluates a logical variable expression
@@ -53,7 +54,7 @@ namespace Z0.Logix
         /// </summary>
         /// <param name="expr">The expression to evaluate</param>
         [MethodImpl(Inline)]
-        static bit eval(IBitLiteralExpr expr)
+        static bit eval(ILogicLiteral expr)
             => expr.Value;
 
         /// <summary>
@@ -83,6 +84,7 @@ namespace Z0.Logix
         /// Evaluates a unary logic expression
         /// </summary>
         /// <param name="expr">The expression to evaluate</param>
+        [MethodImpl(Inline)]
         static bit eval(IUnaryLogicOp expr)
         {
         
@@ -131,8 +133,6 @@ namespace Z0.Logix
         [MethodImpl(Inline)]
         static bit eval(ITernaryLogicOp expr)
             => eval(expr.FirstArg) ? eval(expr.SecondArg) : eval(expr.ThirdArg);
-
-
 
         static bit unhandled(ILogicExpr expr)
             => throw new Exception($"{expr} unhandled");

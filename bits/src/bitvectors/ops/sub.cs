@@ -21,6 +21,16 @@ namespace Z0
         /// <param name="x">The left bitvector</param>
         /// <param name="y">The right bitvector</param>
         [MethodImpl(Inline)]
+        public static BitVector<T> sub<T>(BitVector<T> x, BitVector<T> y)
+            where T : unmanaged
+                => gmath.sub(x.Data, y.Data);
+
+        /// <summary>
+        /// Computes a new vector z := x - y that forms the arithmetic difference between the operands
+        /// </summary>
+        /// <param name="x">The left bitvector</param>
+        /// <param name="y">The right bitvector</param>
+        [MethodImpl(Inline)]
         public static BitVector4 sub(BitVector4 x, BitVector4 y)
             => (byte)Mod16.mod(math.sub((uint)x.data, (uint)y.data));
 

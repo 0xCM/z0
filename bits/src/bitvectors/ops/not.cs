@@ -23,12 +23,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitVector<T> not<T>(BitVector<T> x)
             where T : unmanaged
-        {
-            if(x.SingleCell)
-                return gmath.not(x.Data[0]);
-            else
-                return not_multicell(x);
-        }
+                => gmath.not(x.Data);
 
         /// <summary>
         /// Computes the complememt bitvector ~x from the source bitvector x
@@ -74,9 +69,5 @@ namespace Z0
         static byte TakeHi(byte src)        
             => (byte)((src >> 4) & 0xF);
 
-       [MethodImpl(Inline)]
-        static BitVector<T> not_multicell<T>(BitVector<T> x)
-            where T : unmanaged
-                => mathspan.not(x.Data.ReadOnly()); 
     }
 }

@@ -18,8 +18,8 @@ namespace Z0.Logix
         /// </summary>
         /// <param name="terms">The sequence terms</param>
         [MethodImpl(Inline)]
-        public static BitLiteralSeq bitseq(params bit[] terms)
-            => BitLiteralSeq.FromBits(terms);
+        public static LiteralLogicSeq bitseq(params bit[] terms)
+            => LiteralLogicSeq.FromBits(terms);
 
         /// <summary>
         /// Defines a bit sequence expression of natural length
@@ -27,8 +27,8 @@ namespace Z0.Logix
         /// <param name="length">The natural length of the sequence</param>
         /// <param name="terms">The sequence terms</param>
         [MethodImpl(Inline)]
-        public static BitLiteralSeq<N> bitseq<N>(N length, params bit[] terms)
+        public static LiteralLogicSeq<N> bitseq<N>(N length, params bit[] terms)
             where N : ITypeNat, new()
-                => BitLiteralSeq.FromBits(length,terms);
+                => LiteralLogicSeq.FromBits(length,terms);
     }
 }

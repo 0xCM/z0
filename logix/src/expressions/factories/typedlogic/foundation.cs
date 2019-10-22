@@ -30,9 +30,9 @@ namespace Z0.Logix
         /// <param name="operand">The operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static UnaryLogicOp<T> unary<T>(UnaryLogicOpKind op, IExpr<T> operand)
+        public static UnaryOpSpec<T> unary<T>(UnaryLogicOpKind op, IExpr<T> operand)
             where T : unmanaged
-                => new UnaryLogicOp<T>(op,operand);
+                => new UnaryOpSpec<T>(op,operand);
 
         /// <summary>
         /// Creates a bitwise binary expression
@@ -42,9 +42,9 @@ namespace Z0.Logix
         /// <param name="right">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static BinaryLogicOp<T> binary<T>(BinaryLogicOpKind op, IExpr<T> left, IExpr<T> right)
+        public static BinaryOpSpec<T> binary<T>(BinaryLogicOpKind op, IExpr<T> left, IExpr<T> right)
             where T : unmanaged
-                => new BinaryLogicOp<T>(op,left,right);
+                => new BinaryOpSpec<T>(op,left,right);
 
         /// <summary>
         /// Creates a bitwise ternary expression
@@ -54,9 +54,9 @@ namespace Z0.Logix
         /// <param name="b">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static TernaryLogicOp<T> ternary<T>(TernaryLogicOpKind op, ILogicExpr<T> a, ILogicExpr<T> b, ILogicExpr<T> c)
+        public static TernaryOpSpec<T> ternary<T>(TernaryLogicOpKind op, IExpr<T> a, IExpr<T> b, IExpr<T> c)
             where T : unmanaged
-                => new TernaryLogicOp<T>(op,a,b,c);
+                => new TernaryOpSpec<T>(op,a,b,c);
 
         /// <summary>
         /// Defines a scalar range expression

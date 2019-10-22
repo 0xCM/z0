@@ -43,11 +43,12 @@ namespace Z0.Test
         {
 
             var len = Vec128<T>.Length;
-            var src = Random.CpuVec128<T>();
+            var src = Random.CpuVector128<T>();
+            var actual = src.ToSpan();
             var expect = span<T>(len);
-            src.ToSpan(expect);
+            src.StoreTo(expect);
             for(byte i = 0; i< len; i++)
-                Claim.eq(expect[i], src[i]);
+                Claim.eq(expect[i], actual[i]);
 
         }
             
@@ -57,16 +58,16 @@ namespace Z0.Test
 
             var len = Vec256<T>.Length;
             var half = len >> 1;
-            var src = Random.CpuVec256<T>();
-            var srcData = src.ToSpan(span<T>(len));
+            var src = Random.CpuVector256<T>();
+            var srcData = src.StoreTo(span<T>(len));
             
-            var x0 = ginx.vlo(in src);
-            var y0 = x0.ToSpan(span<T>(half));
+            var x0 = ginx.vlo(src);
+            var y0 = x0.StoreTo(span<T>(half));
             var z0 = srcData.Slice(0, half);
             Claim.eq(y0,z0);
 
-            var x1 = ginx.vhi(in src);
-            var y1 = x1.ToSpan(span<T>(half));
+            var x1 = ginx.vhi(src);
+            var y1 = x1.StoreTo(span<T>(half));
             var z1 = srcData.Slice(half);
             Claim.eq(y1,z1);
 

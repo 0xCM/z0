@@ -173,7 +173,7 @@ namespace Z0.Test
         {
             ulong z = 0b01011_00010_01110_11010_00111_00101_01110_10110;     
             var n = 40;      
-            var bvz = bitvector.from(z,n);
+            var bvz = BitCells<ulong>.FromCell(z,n);
             Span<byte> xSrc =  BitConverter.GetBytes(z);
             var bvx = BitVector.Load(xSrc.Slice(0,5).ToArray());
             Claim.eq(gbits.pop(z), bvz.Pop());

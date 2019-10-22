@@ -46,12 +46,12 @@ namespace Z0.Logix
 
     }
 
-    public interface IComparisonOp : IArithmeticOp
+    public interface IComparisonExpr : IArithmeticOp
     {
 
     }
 
-    public interface IComparisonOp<T> : IArithmeticOp, IArithmeticOp<T,ComparisonOpKind>
+    public interface IComparisonExpr<T> : IComparisonExpr, IArithmeticOp<T,ComparisonOpKind>
         where T : unmanaged
     {
         IArithmeticExpr<T> LeftArg {get;}

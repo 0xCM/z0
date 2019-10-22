@@ -26,6 +26,19 @@ namespace Z0.Logix
     }
 
     /// <summary>
+    /// Characterizes a logical variable
+    /// </summary>
+    public interface ILogicVariable : IVariable, ILogicExpr
+    {
+        void Set(ILogicExpr value);
+
+        void Set(bit value);
+
+        new ILogicExpr Value {get;}
+
+    }
+
+    /// <summary>
     /// Characterizes a typed variable
     /// </summary>
     public interface IVariable<T> : IVariable, IExpr<T>
@@ -40,20 +53,10 @@ namespace Z0.Logix
         /// Sets the variable value
         /// </summary>
         void Set(IExpr<T> value);
+
+        void Set(T value);
     }
 
-    /// <summary>
-    /// Characterizes a logical variable
-    /// </summary>
-    public interface ILogicVariable : IVariable, ILogicExpr
-    {
-        void Set(ILogicExpr value);
-
-        void Set(bit value);
-
-        new ILogicExpr Value {get;}
-
-    }
 
 
 }

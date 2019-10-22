@@ -15,26 +15,33 @@ namespace Z0.Logix
 
     public static class TypedIdentities
     {
+        public static IEnumerable<EqualityExpr<T>> ScalarIdentities<T>()
+            where T : unmanaged
+                => items(AndOverOr<T>(), AndOverXOr<T>(), OrOverAnd<T>(), NotOverAnd<T>(), NotOverXOr<T>());
+
+        public static IEnumerable<EqualityExpr<Vector128<T>>> Vec128Identities<T>()
+            where T : unmanaged
+                => items(AndOverOr128<T>(), AndOverXOr128<T>(), OrOverAnd128<T>(), NotOverAnd128<T>(), NotOverXOr128<T>());
+
+        public static IEnumerable<EqualityExpr<Vector256<T>>> Vec256Identities<T>()
+            where T : unmanaged
+                => items(AndOverOr256<T>(), AndOverXOr256<T>(), OrOverAnd256<T>(), NotOverAnd256<T>(), NotOverXOr256<T>());
+
         public static EqualityExpr<T> AndOverOr<T>()
             where T : unmanaged
                 => TypedIdentities<T>.AndOverOr;
-
 
         public static EqualityExpr<T> AndOverXOr<T>()
             where T : unmanaged
                 => TypedIdentities<T>.AndOverXOr;
 
-
         public static EqualityExpr<T> OrOverAnd<T>()
             where T : unmanaged
                 => TypedIdentities<T>.OrOverAnd;
-
-
         public static EqualityExpr<T> NotOverAnd<T>()
             where T : unmanaged
                 => TypedIdentities<T>.NotOverAnd;
-
-
+        
         public static EqualityExpr<T> NotOverXOr<T>()
             where T : unmanaged
                 => TypedIdentities<T>.NotOverXOr;

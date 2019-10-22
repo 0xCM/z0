@@ -47,6 +47,12 @@ namespace Z0.Logix
         }            
 
         /// <summary>
+        /// The expression classifier
+        /// </summary>
+        public TypedExprKind ExprKind 
+            => TypedExprKind.Literal;
+
+        /// <summary>
         /// The literal value
         /// </summary>
         public T Value {get;}

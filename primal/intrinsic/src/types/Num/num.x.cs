@@ -13,10 +13,11 @@ namespace Z0
 
     partial class ginxx
     {
+
         [MethodImpl(Inline)]
-        public static Scalar128<T> ToScalar128<T>(this Vec128<T> src, int index)
+        public static Scalar128<T> ToScalar128<T>(this Vector128<T> src, int index)
             where T : unmanaged            
-                => Num128.define(src[index]);
+                => Num128.define(ginx.vextract(src,(byte)index));
 
         /// <summary>
         /// Loads a scalar vector from a blocked span

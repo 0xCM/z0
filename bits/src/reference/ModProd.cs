@@ -88,8 +88,7 @@ namespace Z0
         /// </summary>
         /// <param name="lhs">The first vector</param>
         /// <param name="rhs">The second vector</param>
-        /// <returns></returns>
-        public static int ModProd(BitVector64 lhs, BitVector64 rhs)
+        public static bit ModProd(BitVector64 lhs, BitVector64 rhs)
         {
             var result = 0;
             for(var i=0; i<lhs.Length; i++)
@@ -98,7 +97,7 @@ namespace Z0
                 var y = rhs[i] ? 1 : 0;
                 result += x*y;
             }
-            return result % 2;
+            return odd(result);
         }
 
         /// <summary>
@@ -106,8 +105,7 @@ namespace Z0
         /// </summary>
         /// <param name="lhs">The first vector</param>
         /// <param name="rhs">The second vector</param>
-        /// <returns></returns>
-        public static int ModProd<T>(BitVector<T> lhs, BitVector<T> rhs)
+        public static bit ModProd<T>(BitCells<T> lhs, BitCells<T> rhs)
             where T : unmanaged
         {
             var result = 0;
@@ -117,7 +115,7 @@ namespace Z0
                 var y = rhs[i] ? 1 : 0;
                 result += x*y;
             }
-            return result % 2;
+            return odd(result);
         }
 
         /// <summary>
@@ -126,7 +124,7 @@ namespace Z0
         /// <param name="lhs">The first vector</param>
         /// <param name="rhs">The second vector</param>
         /// <returns></returns>
-        public static int ModProd<N,T>(BitVector<N,T> lhs, BitVector<N,T> rhs)
+        public static bit ModProd<N,T>(BitVector<N,T> lhs, BitVector<N,T> rhs)
             where T : unmanaged
             where N : ITypeNat, new()
         {
@@ -137,7 +135,7 @@ namespace Z0
                 var y = rhs[i] ? 1 : 0;
                 result += x*y;
             }
-            return result % 2;
+            return odd(result);
         }
 
 

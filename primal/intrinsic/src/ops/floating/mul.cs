@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;    
+    using System.Runtime.Intrinsics;
     using static System.Runtime.Intrinsics.X86.Avx;
     using static System.Runtime.Intrinsics.X86.Sse;
     using static System.Runtime.Intrinsics.X86.Sse2;
@@ -22,8 +23,8 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vec128<float> vmul(in Vec128<float> x,in Vec128<float> y)
-            => Multiply(x.xmm, y.xmm);
+        public static Vector128<float> vmul(Vector128<float> x,Vector128<float> y)
+            => Multiply(x, y);
 
         /// <summary>
         /// __m128d _mm_mul_pd (__m128d a, __m128d b) MULPD xmm, xmm/m128
@@ -31,8 +32,8 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vec128<double> vmul(in Vec128<double> x,in Vec128<double> y)
-            => Multiply(x.xmm, y.xmm);
+        public static Vector128<double> vmul(Vector128<double> x,Vector128<double> y)
+            => Multiply(x, y);
         
         /// <summary>
         /// __m256 _mm256_mul_ps (__m256 a, __m256 b) VMULPS ymm, ymm, ymm/m256
@@ -41,8 +42,8 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<float> vmul(in Vec256<float> x,in Vec256<float> y)
-            => Multiply(x.ymm, y.ymm);
+        public static Vector256<float> vmul(Vector256<float> x,Vector256<float> y)
+            => Multiply(x, y);
 
         /// <summary>
         /// __m256d _mm256_mul_pd (__m256d a, __m256d b) VMULPD ymm, ymm, ymm/m256
@@ -51,7 +52,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<double> vmul(in Vec256<double> x, in Vec256<double> y)
-            => Multiply(x.ymm, y.ymm);
+        public static Vector256<double> vmul(Vector256<double> x, Vector256<double> y)
+            => Multiply(x, y);
     }
 }

@@ -27,7 +27,7 @@ namespace Z0.Logix
         /// </summary>
         ILogicExpr Rhs {get;}
 
-        VariableExpr[] Vars {get;}
+        LogicVariable[] Vars {get;}
         
     }
 
@@ -35,7 +35,7 @@ namespace Z0.Logix
     /// Characterizes a multi-varied expression that represents a question or claim
     /// regarding the equality of two typed logic expressions
     /// </summary>
-    public interface IEqualityExpr<T> : ILogicExpr<T>
+    public interface IEqualityExpr<T> : IExpr<T>
         where T : unmanaged
     {
         /// <summary>

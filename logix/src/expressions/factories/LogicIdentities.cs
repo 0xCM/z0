@@ -14,6 +14,9 @@ namespace Z0.Logix
 
     public static class LogicIdentities
     {
+        public static IEnumerable<EqualityExpr> All
+            => items(AndOverOr, AndOverXOr, OrOverAnd, NotOverAnd, NotOverXOr);
+
         /// <summary>
         /// Specifies the identity and(a,or(b,c)) == or(and(a,b), and(a,c))
         /// </summary>
@@ -90,13 +93,13 @@ namespace Z0.Logix
         }
 
 
-        static (VariableExpr a, VariableExpr b) vars2
+        static (LogicVariable a, LogicVariable b) vars2
         {
             [MethodImpl(Inline)]
             get => (variable('a'), variable('b'));
         }
 
-        static (VariableExpr a, VariableExpr b, VariableExpr c) vars3
+        static (LogicVariable a, LogicVariable b, LogicVariable c) vars3
         {
             [MethodImpl(Inline)]
             get => (variable('a'), variable('b'), variable('c'));

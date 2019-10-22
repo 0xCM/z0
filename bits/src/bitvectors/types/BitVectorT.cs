@@ -11,101 +11,27 @@ namespace Z0
 
     using static zfunc;    
 
-    public ref struct BitVector<T>
+    public struct BitVector<T>
         where T : unmanaged
     {
-        /// <summary>
-        /// The bitvector content, indexed via a bitmap
-        /// </summary>
-        Span<T> data;
-    
-        /// <summary>
-        /// Correlates linear bit positions and storage segments
-        /// </summary>
-        readonly CellIndex<T>[] BitMap;
-
-        /// <summary>
-        /// The maximum number of bits that can be represented by the vector
-        /// </summary>
-        readonly BitSize MaxBitCount;
-
-        /// <summary>
-        /// The actual number of bits that are represented by the vector
-        /// </summary>
-        readonly BitSize BitCount;
-
-        /// <summary>
-        /// The number of bits represented by a segment, save the last
-        /// </summary>
-        readonly BitSize SegLength;
-        
-        /// <summary>
-        /// The maximum number of bits that can be placed a single segment segment
-        /// </summary>
-        public static readonly BitSize CellCapacity = bitsize<T>();
-
-        /// <summary>
-        /// Computes the number of cells required to hold a specified number of bits
-        /// </summary>
-        /// <param name="len">The number of bits to store</param>
-        /// <typeparam name="T">The primal storage type</typeparam>
-        [MethodImpl(Inline)]
-        public static int CellCount(BitSize len)
-        {
-            var q = Math.DivRem(len, CellCapacity, out int r);            
-            return r == 0 ? q : q + 1;
-        }
-
-        /// <summary>
-        /// Creates a single-cell bitvector where the bit width is determined by the cell type
-        /// </summary>
-        /// <param name="src">The source cell</param>
-        [MethodImpl(Inline)]
-        public static BitVector<T> FromCell(T src)
-            => new BitVector<T>(src,bitsize<T>());
+        T data;
 
         /// <summary>
         /// Creates a bitvector defined by a single cell or portion thereof
         /// </summary>
         /// <param name="src">The source cell</param>
         [MethodImpl(Inline)]
-        public static BitVector<T> FromCell(T src, BitSize n)
-            => new BitVector<T>(src,n);
-
-        /// <summary>
-        /// Creates a bitvector from a cell span
-        /// </summary>
-        /// <param name="src">The source bits</param>
-        /// <param name="n">The bitvector length</param>
-        [MethodImpl(Inline)]
-        public static BitVector<T> FromCells(Span<T> src, BitSize n)
-            => new BitVector<T>(src,n);
-        
-        /// <summary>
-        /// Creates a bitvector from a cell array, subject to a specified bitsize
-        /// </summary>
-        /// <param name="n">The length of the bitvector</param>
-        /// <param name="src">The source bits</param>
-        [MethodImpl(Inline)]
-        public static BitVector<T> From(T[] src, BitSize n)
-            => new BitVector<T>(src, n);
+        public static BitVector<T> From(T src)
+            => new BitVector<T>(src);
 
         /// <summary>
         /// Creates a bitvector from a span of bytes
         /// </summary>
         /// <param name="src">The source bits</param>
         /// <param name="n">The bitvector length</param>
-        public static BitVector<T> FromBytes(Span<byte> src, BitSize n)
-        {
-            var q = Math.DivRem(src.Length, size<T>(), out int r);
-            var cellcount = r == 0 ? q : q + 1;
-            var capacity = (ByteSize)CellCapacity;
-            
-            var cells = new T[cellcount];
-            for(int i=0, offset = 0; i< cellcount; i++, offset += capacity)
-                cells[i] = src.Slice(offset).TakeScalar<T>();
-            return From(cells,n);
-        }
+        [MethodImpl(Inline)]
+        public static BitVector<T> From(Span<byte> src)
+            => From(src.TakeScalar<T>());
 
         /// <summary>
         /// Loads an bitvector of minimal size from a source bitstring
@@ -113,31 +39,11 @@ namespace Z0
         /// <param name="src">The bitstring source</param>
         [MethodImpl(Inline)]
         public static BitVector<T> From(BitString src)
-            => FromBytes(src.ToPackedBytes(), src.Length);
-
-        /// <summary>
-        /// Allocates a generic bitvector
-        /// </summary>
-        /// <param name="len">The length</param>
-        /// <param name="fill">The fill value</param>
-        /// <typeparam name="N">The length type</typeparam>
-        /// <typeparam name="T">The component type</typeparam>
-        [MethodImpl(Inline)]
-        public static BitVector<T> Alloc(BitSize len, T? fill = null)
-        {
-            Span<T> cells = new T[CellCount(len)];            
-            if(fill.HasValue)
-                cells.Fill(fill.Value);
-            return FromCells(cells,len);
-        }        
-
-        [MethodImpl(Inline)]
-        public static implicit operator BitVector<T>(Span<T> src)
-            => new BitVector<T>(src, bitsize<T>());
+            => From(src.ToPackedBytes());
 
         [MethodImpl(Inline)]
         public static implicit operator BitVector<T>(T src)
-            => new BitVector<T>(src, bitsize<T>());
+            => new BitVector<T>(src);
 
         /// <summary>
         /// Computes the bitwias AND between the operands
@@ -172,7 +78,7 @@ namespace Z0
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
         [MethodImpl(Inline)]
-        public static Bit operator %(BitVector<T> x, BitVector<T> y)
+        public static bit operator %(BitVector<T> x, BitVector<T> y)
             => bitvector.dot(x,y);
 
         /// <summary>
@@ -208,40 +114,16 @@ namespace Z0
             => !x.Equals(y);
 
         [MethodImpl(Inline)]
-        BitVector(T src, BitSize n)
-        {            
-            this.data = new T[]{src};
-            this.MaxBitCount = CellCapacity;
-            this.SegLength = MaxBitCount;
-            this.BitCount = n;
-            this.BitMap = BitSize.BitMap<T>(MaxBitCount);
-        }
-
-        [MethodImpl(Inline)]
-        BitVector(Span<T> src, BitSize n)
-        {            
-            this.data = src;
-            this.MaxBitCount = src.Length * (int)CellCapacity;
-            this.BitCount = n;
-            this.SegLength = BitSize.Segments<T>(MaxBitCount);            
-            this.BitMap = BitSize.BitMap<T>(MaxBitCount);
-        }
-
-        [MethodImpl(Inline)]
-        BitVector(T[] src, BitSize n)
-            : this(src.AsSpan(), n)
-        {            
-
-        }
-
+        BitVector(T src)
+            => this.data = src;
 
         /// <summary>
         /// The number of bits represented by the vector
         /// </summary>
-        public readonly BitSize Length 
+        public readonly uint Length 
         {
             [MethodImpl(Inline)]
-            get => BitCount;
+            get => bitsize<T>();
         }
 
         /// <summary>
@@ -250,13 +132,13 @@ namespace Z0
         public readonly Span<byte> Bytes
         {
             [MethodImpl(Inline)]
-            get => data.AsBytes();
+            get => bytes(data);
         }
 
         /// <summary>
         /// A bit-level accessor/manipulator
         /// </summary>
-        public Bit this[BitPos index]
+        public bit this[int index]
         {
             [MethodImpl(Inline)]
             get => Get(index);
@@ -284,42 +166,12 @@ namespace Z0
         }
 
         /// <summary>
-        /// Is true if the bitvector is define of a single cell value
-        /// </summary>
-        public bool SingleCell
-        {
-            [MethodImpl(Inline)]
-            get => data.Length == 1;
-        }
-
-        /// <summary>
-        /// The maximum number of bits that can be represented by the vector
-        /// </summary>
-        public readonly BitSize Capacity
-        {
-            [MethodImpl(Inline)]
-            get => data.Length * CellCapacity;
-        }
-
-        /// <summary>
         /// Reads a bit value
         /// </summary>
         /// <param name="pos">The bit position</param>
         [MethodImpl(Inline)]
-        public readonly Bit Get(BitPos pos)
-        {
-            ref readonly var loc = ref Location(pos);
-            return gbits.test(data[loc.Segment], loc.Offset);
-        }
-
-        /// <summary>
-        /// The underlying cell data
-        /// </summary>
-        public Span<T> Data
-        {
-            [MethodImpl(Inline)]
-            get => data;
-        }
+        public readonly bit Get(int pos)
+            => gbits.test(data, pos);
 
         /// <summary>
         /// Sets a bit value
@@ -327,48 +179,42 @@ namespace Z0
         /// <param name="pos">The absolute bit position</param>
         /// <param name="value">The value the bit will receive</param>
         [MethodImpl(Inline)]
-        public void Set(BitPos pos, bit value)
-        {
-            ref readonly var loc = ref Location(pos);
-            gbits.set(ref data[loc.Segment], loc.Offset, value);
-        }
+        public void Set(int pos, bit value)
+            => data = gbits.set(ref data, (byte)pos, value);
 
         /// <summary>
         /// Tests the status of an identified bit
         /// </summary>
         /// <param name="pos">The position of the bit to test</param>
         [MethodImpl(Inline)]
-        public bool Test(BitPos pos)
-            => Get(pos);
+        public bool Test(int pos)
+            => gbits.test(data, pos);
 
         /// <summary>
         /// Enables an identified bit
         /// </summary>
         /// <param name="pos">The position of the bit to enable</param>
         [MethodImpl(Inline)]
-        public void Enable(BitPos pos)
-            => Set(pos, bit.On);
+        public void Enable(int pos)
+            => data = gbits.set(ref data, (byte)pos, bit.On);
 
         /// <summary>
         /// Disables an identified bit
         /// </summary>
         /// <param name="pos">The position of the bit to disable</param>
         [MethodImpl(Inline)]
-        public void Disable(BitPos pos)
-        {
-            ref readonly var cell = ref BitMap[pos];
-            gbits.disable(ref data[cell.Segment], cell.Offset);
-        }
+        public void Disable(int pos)
+            => data = gbits.disable(ref data, (byte)pos);
 
         /// <summary>
         /// Computes the scalar product between this vector and another of identical length
         /// </summary>
         /// <param name="y">The right vector</param>
-        public Bit Dot(BitVector<T> y)
+        public bit Dot(BitVector<T> y)
         {
             require(this.Length == y.Length);
 
-            var result = Bit.Off;
+            var result = bit.Off;
             for(var i=0; i<Length; i++)
                 result ^= this[i] & y[i];
             return result;
@@ -377,55 +223,25 @@ namespace Z0
         /// <summary>
         /// Specifies a reference to the leading cell
         /// </summary>
-        public ref T Head
+        public T Data
         {
             [MethodImpl(Inline)]
-            get => ref Data[0];
+            get => data;
         }
-
-        [MethodImpl(Inline)]
-        public void Toggle(BitPos pos)
-        {         
-            ref readonly var loc = ref Location(pos);
-            BitMaskG.toggle(ref data[loc.Segment],  loc.Offset);
-        }
-
-        [MethodImpl(Inline)]
-        public T SliceCell(BitPos first, BitPos last)
-            => Extract(in Location(first), in Location(last));
 
         /// <summary>
         /// Extracts the represented data as a bitstring
         /// </summary>
         [MethodImpl(Inline)]
         public readonly BitString ToBitString()
-            => BitString.FromScalars<T>(data, Length); 
+            => BitString.FromScalar<T>(data); 
 
         /// <summary>
         /// Counts the vector's enabled bits
         /// </summary>
         [MethodImpl(Inline)]
         public readonly uint Pop()
-        {
-            var count = 0u;
-            for(var i=0; i< data.Length; i++)
-                count += gbits.pop(data[i]);
-            return count;
-        }
-
-        /// <summary>
-        /// Counts the number of bits set up to and including the specified position
-        /// </summary>
-        /// <param name="src">The bit source</param>
-        /// <param name="pos">The position of the bit for which rank will be calculated</param>
-        public uint Pop(BitPos pos)
-        {
-            var rank = 0u;
-            var segments = Segments(pos);
-            for(var i=0; i < segments.Length; i++)
-                rank += (uint)gbits.pop(segments[i]);            
-            return rank;
-        }
+            => gbits.pop(data);
 
         /// <summary>
         /// Sets all the bits to align with the source value
@@ -436,82 +252,9 @@ namespace Z0
         {
             var primal = PrimalInfo.Get<T>();
             if(value)
-                data.Fill(primal.MaxVal);
+                data = gmath.maxval<T>();
             else
-                data.Fill(primal.Zero);
-        }
-
-        /// <summary>
-        /// Counts the number of bits set up to and including the specified position
-        /// </summary>
-        /// <param name="src">The bit source</param>
-        /// <param name="pos">The position of the bit for which rank will be calculated</param>
-        [MethodImpl(Inline)]
-        public uint Rank(BitPos pos)
-            => Pop(pos);
-            
-        /// <summary>
-        /// Gets the mapped bit location
-        /// </summary>
-        /// <param name="pos">The bit position</param>
-        [MethodImpl(Inline)]
-        readonly ref readonly CellIndex<T> Location(BitPos pos)
-            => ref BitMap[pos];
-
-        /// <summary>
-        /// Returns a reference to the segment in which a specified bit is defined
-        /// </summary>
-        /// <param name="pos">The segmented bit position</param>
-        [MethodImpl(Inline)]
-        public ref T Segment(in CellIndex<T> pos)
-            => ref data[pos.Segment];
-
-        /// <summary>
-        /// Returns a reference to the segment in which a specified bit is defined
-        /// </summary>
-        /// <param name="pos">The segmented bit position</param>
-        [MethodImpl(Inline)]
-        public ref T Segment(BitPos pos)
-            => ref Segment(in Location(pos));
-
-        /// <summary>
-        /// Retrieves the segments up to and including an identified bit
-        /// </summary>
-        /// <param name="pos">The bit position</param>
-        [MethodImpl(Inline)]
-        readonly Span<T> Segments(BitPos pos)
-            => data.Slice(0, Location(pos).Segment - 1);
-
-        T Extract(in CellIndex<T> first, in CellIndex<T> last, bool describe = false)
-        {
-
-            var sameSeg = first.Segment == last.Segment;
-            var wantedCount = last - first;
-            var firstCount = sameSeg ? wantedCount : (int)CellCapacity - first.Offset;
-            var lastCount = wantedCount - firstCount;
-            
-            if(wantedCount > CellCapacity)
-                throw new ArgumentException($"The total count {wantedCount} exceeds segment capacity of {CellCapacity}");
-
-            ref var seg1 = ref Segment(in first);
-            var part1 = gbits.extract(seg1, first.Offset, (byte)firstCount);
-            
-            if(sameSeg)
-                return part1;
-
-            ref var seg2 = ref Segment(in last);
-            var part2 = gbits.extract(seg2, 0, (byte)lastCount);            
-
-            if(describe)
-            {
-                print($"first = {first}");
-                print($"last = {last}");
-                print($"totalCount = {wantedCount}");
-                print($"firstCount = {firstCount}");
-                print($"LastCount = {lastCount}");
-            }
-            gmath.sal(ref part2, firstCount);
-            return gmath.or(ref part1, part2);              
+                data = default(T);
         }
 
         [MethodImpl(Inline)]

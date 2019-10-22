@@ -28,7 +28,7 @@ namespace Z0.Logix
         /// <param name="a">The first operand</param>
         /// <param name="b">The second operand</param>
         [MethodImpl(Inline)]
-        public static BinaryLogicOp and(LiteralExpr a, LiteralExpr b)
+        public static BinaryLogicOp and(LiteralLogicExpr a, LiteralLogicExpr b)
             => binary(BinaryLogicOpKind.Or, a, b);
 
         /// <summary>
@@ -46,7 +46,7 @@ namespace Z0.Logix
         /// <param name="a">The first operand</param>
         /// <param name="b">The second operand</param>
         [MethodImpl(Inline)]
-        public static BinaryLogicOp or(LiteralExpr a, LiteralExpr b)
+        public static BinaryLogicOp or(LiteralLogicExpr a, LiteralLogicExpr b)
             => binary(BinaryLogicOpKind.Or, a, b);
 
         /// <summary>
@@ -64,7 +64,7 @@ namespace Z0.Logix
         /// <param name="a">The first operand</param>
         /// <param name="b">The second operand</param>
         [MethodImpl(Inline)]
-        public static BinaryLogicOp xor(LiteralExpr a, LiteralExpr b)
+        public static BinaryLogicOp xor(LiteralLogicExpr a, LiteralLogicExpr b)
             => binary(BinaryLogicOpKind.XOr, a, b);
 
         /// <summary>
@@ -90,7 +90,7 @@ namespace Z0.Logix
         /// <param name="a">The first operand</param>
         /// <param name="b">The second operand</param>
         [MethodImpl(Inline)]
-        public static BinaryLogicOp nor(LiteralExpr a, LiteralExpr b)
+        public static BinaryLogicOp nor(LiteralLogicExpr a, LiteralLogicExpr b)
             => binary(BinaryLogicOpKind.Nor, a, b);
 
         /// <summary>
@@ -108,7 +108,7 @@ namespace Z0.Logix
         /// <param name="a">The first operand</param>
         /// <param name="b">The second operand</param>
         [MethodImpl(Inline)]
-        public static BinaryLogicOp xnor(LiteralExpr a, LiteralExpr b)
+        public static BinaryLogicOp xnor(LiteralLogicExpr a, LiteralLogicExpr b)
             => binary(BinaryLogicOpKind.Xnor, a, b);
 
         /// <summary>
@@ -126,7 +126,7 @@ namespace Z0.Logix
         /// <param name="a">The first operand</param>
         /// <param name="b">The second operand</param>
         [MethodImpl(Inline)]
-        public static BinaryLogicOp nand(LiteralExpr a, LiteralExpr b)
+        public static BinaryLogicOp nand(LiteralLogicExpr a, LiteralLogicExpr b)
             => binary(BinaryLogicOpKind.Nand, a, b);
 
         /// <summary>
@@ -144,7 +144,7 @@ namespace Z0.Logix
         /// <param name="a">The first operand</param>
         /// <param name="b">The second operand</param>
         [MethodImpl(Inline)]
-        public static BinaryLogicOp andnot(LiteralExpr a, LiteralExpr b)
+        public static BinaryLogicOp andnot(LiteralLogicExpr a, LiteralLogicExpr b)
             => binary(BinaryLogicOpKind.AndNot, a, b);
 
         /// <summary>
@@ -162,7 +162,7 @@ namespace Z0.Logix
         /// <param name="a">The first operand</param>
         /// <param name="b">The second operand</param>
         [MethodImpl(Inline)]
-        public static BinaryLogicOp left(LiteralExpr a, LiteralExpr b)
+        public static BinaryLogicOp left(LiteralLogicExpr a, LiteralLogicExpr b)
             => binary(BinaryLogicOpKind.LeftProject, a, b);
 
         /// <summary>
@@ -180,7 +180,7 @@ namespace Z0.Logix
         /// <param name="a">The first operand</param>
         /// <param name="b">The second operand</param>
         [MethodImpl(Inline)]
-        public static BinaryLogicOp right(LiteralExpr a, LiteralExpr b)
+        public static BinaryLogicOp right(LiteralLogicExpr a, LiteralLogicExpr b)
             => binary(BinaryLogicOpKind.RightProject, a, b);
 
         /// <summary>

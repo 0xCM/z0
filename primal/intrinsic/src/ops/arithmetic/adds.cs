@@ -15,76 +15,75 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Avx;
 
     using static zfunc;
-    using static Span256;
-    using static Span128;
-    using static As;
 
     partial class dinx
     {
         /// <summary>
         /// __m128i _mm_adds_epu8 (__m128i a, __m128i b) PADDUSB xmm, xmm/m128
         /// </summary>
-        /// <param name="lhs"></param>
-        /// <param name="rhs"></param>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vec128<byte> vadds(in Vec128<byte> lhs, in Vec128<byte> rhs)        
-            => AddSaturate(lhs,rhs);
+        public static Vector128<byte> vadds(Vector128<byte> x, Vector128<byte> y)        
+            => AddSaturate(x,y);
 
         /// <summary>
         /// __m128i _mm_adds_epi8 (__m128i a, __m128i b) PADDSB xmm, xmm/m128
         /// </summary>
-        /// <param name="lhs"></param>
-        /// <param name="rhs"></param>
-        /// <returns></returns>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vec128<sbyte> vadds(in Vec128<sbyte> lhs, in Vec128<sbyte> rhs)        
-            => AddSaturate(lhs,rhs);
+        public static Vector128<sbyte> vadds(Vector128<sbyte> x, Vector128<sbyte> y)        
+            => AddSaturate(x,y);
 
         /// <summary>
         /// __m128i _mm_adds_epi16 (__m128i a, __m128i b) PADDSW xmm, xmm/m128
         /// </summary>
-        /// <param name="lhs"></param>
-        /// <param name="rhs"></param>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vec128<short> vadds(in Vec128<short> lhs, in Vec128<short> rhs)        
-            => AddSaturate(lhs,rhs);
+        public static Vector128<short> vadds(Vector128<short> x, Vector128<short> y)        
+            => AddSaturate(x,y);
 
         [MethodImpl(Inline)]
-        public static Vec128<ushort> vadds(in Vec128<ushort> lhs, in Vec128<ushort> rhs)        
-            => AddSaturate(lhs,rhs);
+        public static Vector128<ushort> vadds(Vector128<ushort> x, Vector128<ushort> y)        
+            => AddSaturate(x,y);
 
         /// <summary>
         /// __m256i _mm256_adds_epu8 (__m256i a, __m256i b) VPADDUSB ymm, ymm, ymm/m256
         /// </summary>
-        /// <param name="lhs"></param>
-        /// <param name="rhs"></param>
-        /// <returns></returns>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<byte> vadds(in Vec256<byte> lhs, in Vec256<byte> rhs)        
-            => AddSaturate(lhs,rhs);
+        public static Vector256<byte> vadds(Vector256<byte> x, Vector256<byte> y)        
+            => AddSaturate(x,y);
         
+        /// <summary>
+        ///  __m256i _mm256_adds_epi8 (__m256i a, __m256i b)VPADDSB ymm, ymm, ymm/m256
+        /// </summary>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<sbyte> vadds(in Vec256<sbyte> lhs, in Vec256<sbyte> rhs)        
-            => AddSaturate(lhs,rhs);
+        public static Vector256<sbyte> vadds(Vector256<sbyte> x, Vector256<sbyte> y)        
+            => AddSaturate(x,y);
 
         /// <summary>
         /// __m256i _mm256_adds_epi16 (__m256i a, __m256i b) VPADDSW ymm, ymm, ymm/m256
         /// </summary>
-        /// <param name="lhs"></param>
-        /// <param name="rhs"></param>
-        /// <returns></returns>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<short> vadds(in Vec256<short> lhs, in Vec256<short> rhs)        
-            => AddSaturate(lhs,rhs);
+        public static Vector256<short> vadds(Vector256<short> x, Vector256<short> y)        
+            => AddSaturate(x,y);
 
         /// <summary>
         ///  __m256i _mm256_adds_epu16 (__m256i a, __m256i b) VPADDUSW ymm, ymm, ymm/m256
         /// </summary>
-        /// <param name="lhs"></param>
-        /// <param name="rhs"></param>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<ushort> vadds(in Vec256<ushort> lhs, in Vec256<ushort> rhs)        
-            =>  AddSaturate(lhs,rhs);
+        public static Vector256<ushort> vadds(Vector256<ushort> x, Vector256<ushort> y)        
+            =>  AddSaturate(x,y);
     }
 
 }

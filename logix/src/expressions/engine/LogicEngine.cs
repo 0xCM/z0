@@ -7,6 +7,7 @@ namespace Z0.Logix
     using System;
     using System.Linq;
     using System.Runtime.CompilerServices;
+    using System.Collections.Generic;
     using System.Runtime.Intrinsics;
     
     using static zfunc;
@@ -114,7 +115,7 @@ namespace Z0.Logix
         /// </summary>
         /// <param name="a">The left operandd</param>
         /// <param name="b">The right operand</param>
-        public static bit equal(VariedExpr a, VariedExpr b)
+        public static bit equal(VariedLogicExpr a, VariedLogicExpr b)
         {                
             var count = length(a.Vars, b.Vars);
             foreach(var vars in BitLogicSpec.bitcombo(count))
@@ -128,6 +129,43 @@ namespace Z0.Logix
             return bit.On;
         }
 
+        public static IReadOnlyList<T> solve<T>(EqualityExpr<T> expr,  Interval<T> domain, int varyix)
+            where T : unmanaged
+        {
+            var sln = new List<T>();
+            var level0 = domain.Increments();
+            var ones = gmath.maxval<T>();
+            for(var i=0; i<level0.Length; i++)
+            {
+                expr.SetVar(varyix, level0[i]);
+                var result = LogicEngine.eval(expr);
+                if(gmath.eq(result.Value, ones))
+                    sln.Add(result);
+            }
+            return sln;
+        }
 
-  }
+        public static IReadOnlyList<T> solve<T>(EqualityExpr<T> expr, Interval<T> domain)
+            where T : unmanaged
+        {
+
+            var sln = new List<T>();
+            var level0 = domain.Increments();
+            var level1 = domain.Increments();
+            var ones = gmath.maxval<T>();
+            for(var i=0; i<level0.Length; i++)
+            {
+                expr.SetVar(0,level0[i]);
+                for(var j=0; j<level1.Length; j++)
+                {
+                    expr.SetVar(1,level1[j]);
+
+                    var result = LogicEngine.eval(expr);
+                    if(gmath.eq(result.Value, ones))
+                        sln.Add(result);
+                }
+            }
+            return sln;
+        }
+    }
 }

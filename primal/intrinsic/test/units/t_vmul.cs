@@ -8,6 +8,7 @@ namespace Z0
     using System.Linq;
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
+    using System.Runtime.Intrinsics;
     using System.IO;
     
     using static zfunc;
@@ -47,33 +48,7 @@ namespace Z0
         
         }
 
-        public void mulnew()
-        {
-            var v1 = Random.CpuVec128<int>();
-            var v2 = Random.CpuVec128<int>();
-            // var v3 = dinx.insert(v1, Vec256<int>.Zero,0);
-            // var v4 = dinx.insert(v2, Vec256<int>.Zero,0);
-            var v3 = Vec256.FromParts(1,0,2,0,3,0,4,0);
-            var v4 = Vec256.FromParts(5,0,6,0,7,0,8,0);
-            var v5 = dinx.vmul(v3,v4);
-            Trace(() => v3);
-            Trace(() => v4);
-            Trace(() => v5);
 
-            // var lhs = v1.ToSpan();
-            // var rhs = v2.ToSpan();
-            // var dst = new long[4];
-            // for(var i=0; i<dst.Length; i++)
-            //     dst[i] = ((long)lhs[i]) * ((long)rhs[i]);
-            
-            // var v4 = Vec256.Load(dst);
-            // Claim.eq(v3,v4);
-        }
-
-        public void mul256_f64()
-        {
-            mul256f64_check();
-        }
         
         public void mul256_u64()
         {
@@ -144,8 +119,8 @@ namespace Z0
 
             for(var i=0; i< SampleSize; i++)
             {
-                var x = Random.CpuVec256(domain);
-                var y = Random.CpuVec256(domain);
+                var x = Random.CpuVector256(domain);
+                var y = Random.CpuVector256(domain);
                 sw.Start();
                 var z = dinx.vmul(x,y);
                 sw.Stop();
@@ -174,22 +149,5 @@ namespace Z0
             return (counter, snapshot(sw),"mul256u64:baseline");        
         }
 
-        void mul256f64_check(int cycles = DefaltCycleCount)
-        {
-            for(var cycle = 0; cycle < cycles; cycle++)
-            {
-                var domain = closed((long)Int32.MinValue, (long)Int32.MaxValue);
-                var src = Random.Stream(domain).Select(x => (double)x);
-                var u = Vec256.Load(src.ToSpan(4));
-                var v = Vec256.Load(src.ToSpan(4));
-                var x = dfp.vmul(u,v);
-                var y = Vec256.Load(mathspan.mul(u.ToSpan(), v.ToSpan(), v.ToSpan().Replicate(true)));
-                Claim.eq(x,y);
-
-                var xi = x.ToSpan().Convert<long>();
-                var yi = y.ToSpan().Convert<long>();
-                Claim.eq(xi,yi);
-            }
-        } 
     }
 }

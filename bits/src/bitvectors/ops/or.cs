@@ -24,12 +24,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitVector<T> or<T>(BitVector<T> x, BitVector<T> y)
             where T : unmanaged
-        {
-            if(x.SingleCell && y.SingleCell)
-                return gmath.or(x.Data[0], y.Data[0]);
-            else
-                return or_multicell(x,y);
-        }
+                => gmath.or(x.Data,y.Data);
 
         /// <summary>
         /// Computes a new bitvector z = x & y from bitvectors x or y
@@ -75,11 +70,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitVector64 or(BitVector64 x, BitVector64 y)
             => math.or(x.data, y.data);
- 
-        [MethodImpl(Inline)]
-        static BitVector<T> or_multicell<T>(BitVector<T> x, BitVector<T> y)
-            where T : unmanaged
-                => mathspan.or(x.Data.ReadOnly(), y.Data.ReadOnly());
-
     }
 }

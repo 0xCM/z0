@@ -13,43 +13,23 @@ namespace Z0.Logix
     
     using static zfunc;
 
-    using static LogicEngine;
     using static BitLogicSpec;
-    using static TypedLogicSpec;
-    using static LogicIdentities;
-    
 
-
-    public class t_identity_bitlogic : UnitTest<t_identity_bitlogic>
+    public class t_logic_identities : UnitTest<t_logic_identities>
     {
-        public void check_not_over_and()
-            => check_exhaustive(NotOverAnd);
-
-        public void check_not_over_xor()
-            => check_exhaustive(NotOverXOr);
-
-        public void check_and_over_or()
-            => check_exhaustive(AndOverOr);
-
-        public void check_and_over_xor()
-            => check_exhaustive(AndOverXOr);
-
-        public void check_or_over_and()
-            => check_exhaustive(OrOverAnd);
-
+        public void check_identities()
+        {
+            iter(LogicIdentities.All, check_exhaustive);
+        }
+        
         void check_exhaustive(EqualityExpr t)
         {
-            //Trace(t.Format());
             foreach(var c in bitcombo(t.Vars.Length))
             {
                 t.SetVars(c);
                 Claim.eq(bit.On,LogicEngine.eval(t));
-                LogicEngine.satisfied(t, c[0], c[1]);                
+                Claim.yea(LogicEngine.satisfied(t, c[0], c[1]));
             }
         }
-
-
-
     }
-
 }

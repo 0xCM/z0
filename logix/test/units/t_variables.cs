@@ -42,6 +42,7 @@ namespace Z0.Logix
                                                 
         }
 
+
         public void minimize()
         {
             var v1 = variable<uint>(0);
@@ -53,62 +54,42 @@ namespace Z0.Logix
 
         }
 
+
         IReadOnlyList<T> solve<T>(VariedExpr<N1,T> expr, LiteralExpr<T> match, Interval<T> domain)
             where T : unmanaged
         {
-            var min = domain.Left;
-            var max = domain.Right;
-            var current = min;
-            var solutions = new List<T>();
-            while(gmath.lteq(current,max))
+            var sln = new List<T>();
+            var level0 = domain.Increments();
+            for(var i=0; i<level0.Length; i++)
             {
-                expr.Var0(current);
+                expr.Var0(level0[i]);
                 var result = LogicEngine.eval(expr.BaseExpr);
                 if(gmath.eq(result.Value, match.Value))
-                    solutions.Add(result);
-
-                if(gmath.lt(current, max))
-                    gmath.inc(ref current);
-                else
-                    break;
-
+                    sln.Add(result);
             }
-            return solutions;
-
+            return sln;
         }
 
         IReadOnlyList<T> solve<T>(VariedExpr<N2,T> expr, LiteralExpr<T> match, Interval<T> domain)
             where T : unmanaged
         {
-            var min = domain.Left;
-            var max = domain.Right;
-            var v0 = min;
-            var v1 = min;
-            var solutions = new List<T>();
-            while(gmath.lteq(v0,max))
-            {
-                expr.Var0(v0);
 
-                while(gmath.lteq(v1,max))
+            var sln = new List<T>();
+            var level0 = domain.Increments();
+            var level1 = domain.Increments();
+            for(var i=0; i<level0.Length; i++)
+            {
+                expr.Var0(level0[i]);
+                for(var j=0; j<level1.Length; j++)
                 {
-                    expr.Var1(v1);
+                    expr.Var1(level1[j]);
+
                     var result = LogicEngine.eval(expr.BaseExpr);
                     if(gmath.eq(result.Value, match.Value))
-                        solutions.Add(result);
-
-                    if(gmath.lt(v1, max))
-                        gmath.inc(ref v1);
-                    else
-                        break;
+                        sln.Add(result);
                 }
-
-                if(gmath.lt(v0, max))
-                    gmath.inc(ref v0);
-                else
-                    break;
-
             }
-            return solutions;
+            return sln;
 
         }
 
@@ -136,8 +117,7 @@ namespace Z0.Logix
             var v2_name = v2.Format(false);
             var v3_name = v3.Format(false);
             var method = MethodInfo.GetCurrentMethod().SpecializeName<T>();
-            var exprfmt = $"{op1_name}({op0_name}({v0_name},{v1_name}), {op0_name}({v2_name},{v3_name}";
-            var msg = appMsg($"{method} := {exprfmt}))");
+            var msg = appMsg($"{method}");
             Notify(msg);
                         
 

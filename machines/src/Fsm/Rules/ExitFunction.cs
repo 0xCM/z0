@@ -8,6 +8,8 @@ namespace Z0.Machines
     using System.Linq;
     using System.Collections.Generic;
 
+    using Z0.Logix;
+    
     using static zfunc;
 
     /// <summary>

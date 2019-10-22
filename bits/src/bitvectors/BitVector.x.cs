@@ -78,7 +78,7 @@ namespace Z0
         /// <param name="len">The bitvector length, if specified</param>
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
-        public static BitVector<T> ToBitVector<T>(this T[] src, BitSize len)
+        public static BitCells<T> ToBitVector<T>(this T[] src, BitSize len)
             where T : unmanaged
                 => BitVector.Load(src,len);
 
@@ -89,7 +89,7 @@ namespace Z0
         /// <param name="len">The bitvector length, if specified</param>
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
-        public static BitVector<T> ToBitVector<T>(this Span<T> src, BitSize len)
+        public static BitCells<T> ToBitVector<T>(this Span<T> src, BitSize len)
             where T : unmanaged
                 => BitVector.Load(src,len);
 
@@ -99,7 +99,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <typeparam name="T">The primal source type</typeparam>        
         [MethodImpl(Inline)]
-        public static BitVector8 ToPrimal8<T>(this BitVector<T> src)        
+        public static BitVector8 ToPrimal8<T>(this BitCells<T> src)        
             where T : unmanaged
                 => src.Nonempty ? src.Bytes.First() : (byte)0;
 
@@ -109,7 +109,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <typeparam name="T">The primal source type</typeparam>        
         [MethodImpl(Inline)]
-        public static BitVector16 ToPrimal16<T>(this BitVector<T> src)        
+        public static BitVector16 ToPrimal16<T>(this BitCells<T> src)        
             where T : unmanaged
                 => src.Data.TakeUInt16();
 
@@ -130,7 +130,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <typeparam name="T">The primal source type</typeparam>        
         [MethodImpl(Inline)]
-        public static BitVector32 ToPrimal32<T>(this BitVector<T> src)        
+        public static BitVector32 ToPrimal32<T>(this BitCells<T> src)        
             where T : unmanaged
                 => src.Data.TakeUInt32();
 
@@ -173,7 +173,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <typeparam name="T">The primal source type</typeparam>        
         [MethodImpl(Inline)]
-        public static BitVector64 ToPrimal<T>(this BitVector<T> src, N64 n)
+        public static BitVector64 ToPrimal<T>(this BitCells<T> src, N64 n)
             where T : unmanaged
                 => src.Data.TakeUInt64();
 

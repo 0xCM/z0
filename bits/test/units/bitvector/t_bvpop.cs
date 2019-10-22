@@ -20,7 +20,7 @@ namespace Z0.Test
             Claim.eq((int)bytelen, (int)bitlen/8);
             for(var i=0; i<CycleCount; i++)
             {
-                var bv = Random.BitVector<ulong>(bitlen);
+                var bv = Random.BitCells<ulong>(bitlen);
                 var actual = bv.Pop();
                 var expect = 0ul;
                 var bytes = bv.Bytes;

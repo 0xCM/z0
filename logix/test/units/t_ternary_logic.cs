@@ -19,16 +19,12 @@ namespace Z0.Logix
         protected override int SampleSize => Pow2.T08;
         
         public void check_op_identities()
-        {
-            
-             
+        {                         
              ScalarOpApi.TernaryKinds.Iterate(op => check_op_identity<byte>(op));
              ScalarOpApi.TernaryKinds.Iterate(op => check_op_identity<ushort>(op));
              ScalarOpApi.TernaryKinds.Iterate(op => check_op_identity<uint>(op));
              ScalarOpApi.TernaryKinds.Iterate(op => check_op_identity<ulong>(op));
         }
-
-
 
         public void check_and() 
             => check_binary_ops(BinaryLogicOpKind.And);
@@ -48,22 +44,21 @@ namespace Z0.Logix
         public void check_xnor()        
             => check_binary_ops(BinaryLogicOpKind.Xnor);
 
-
-        public void check_not()  
-        {      
-            check_unary_ops<BitVector8,byte>(UnaryLogicOpKind.Not);
-            check_unary_ops<BitVector16,ushort>(UnaryLogicOpKind.Not);
-            check_unary_ops<BitVector32,uint>(UnaryLogicOpKind.Not);
-            check_unary_ops<BitVector64,ulong>(UnaryLogicOpKind.Not);
-        }
-
-
         public void check_select()
         {
-            check_select<BitVector8,byte>();
-            check_select<BitVector16,ushort>();        
-            check_select<BitVector32,uint>();
-            check_select<BitVector64,ulong>();
+            check_select<byte>();
+            check_select<ushort>();
+            check_select<uint>();
+            check_select<ulong>();
+            check_select_128<byte>();
+            check_select_128<ushort>();
+            check_select_128<uint>();
+            check_select_128<ulong>();
+            check_select_256<byte>();
+            check_select_256<ushort>();
+            check_select_256<uint>();
+            check_select_256<ulong>();
+
         }
 
         public void check_f01()
@@ -123,20 +118,79 @@ namespace Z0.Logix
         public void check_f13()
             => check_ternary_ops(TernaryLogicOpKind.X13);
 
+        void check_select<T>()
+            where T : unmanaged
+        {
+            for(var i=0; i<SampleSize; i++)
+            {
+                var width = bitsize<T>();
+                var a = Random.BitVector<T>();
+                var b = Random.BitVector<T>();
+                var c = Random.BitVector<T>();
+                BitVector<T> x = ScalarOps.select(a.Data, b.Data, c.Data);
+                for(var j=0; j<x.Length; j++)
+                    Claim.eq(x[j], BitOps.select(a[j],b[j],c[j]));
+            }
+
+        }
+
+        void check_select_128<T>()
+            where T : unmanaged
+        {
+            for(var i=0; i<SampleSize; i++)
+            {
+                var a = Random.CpuVector128<T>();
+                var b = Random.CpuVector128<T>();
+                var c = Random.CpuVector128<T>();
+                var x = Cpu128Ops.select(a,b,c);
+
+                var sa = a.ToSpan();
+                var sb = b.ToSpan();
+                var sc = c.ToSpan();
+                var sx = x.ToSpan();
+
+                for(var j=0; j< sx.Length; j++)
+                    Claim.eq(sx[j], ScalarOps.select(sa[j], sb[j], sc[j]));
+            }
+
+        }
+
+        void check_select_256<T>()
+            where T : unmanaged
+        {
+            for(var i=0; i<SampleSize; i++)
+            {
+                var a = Random.CpuVector256<T>();
+                var b = Random.CpuVector256<T>();
+                var c = Random.CpuVector256<T>();
+                var x = Cpu256Ops.select(a,b,c);
+
+                var sa = a.ToSpan();
+                var sb = b.ToSpan();
+                var sc = c.ToSpan();
+                var sx = x.ToSpan();
+
+                for(var j=0; j< sx.Length; j++)
+                    Claim.eq(sx[j], ScalarOps.select(sa[j], sb[j], sc[j]));
+            }
+
+        }
+
         void check_ternary_ops(TernaryLogicOpKind op)
         {
-            check_ternary_ops<BitVector8,byte>(op);
-            check_ternary_ops<BitVector16,ushort>(op);
-            check_ternary_ops<BitVector32,uint>(op);
-            check_ternary_ops<BitVector64,ulong>(op);
+            check_ternary_ops<byte>(op);
+            check_ternary_ops<ushort>(op);
+            check_ternary_ops<uint>(op);
+            check_ternary_ops<ulong>(op);
+
         }
 
         void check_binary_ops(BinaryLogicOpKind op)
         {
-            check_binary_ops<BitVector8,byte>(op);
-            check_binary_ops<BitVector16,ushort>(op);
-            check_binary_ops<BitVector32,uint>(op);
-            check_binary_ops<BitVector64,ulong>(op);
+            check_binary_ops<byte>(op);
+            check_binary_ops<ushort>(op);
+            check_binary_ops<uint>(op);
+            check_binary_ops<ulong>(op);
         }
 
         void check_op_identity<T>(TernaryLogicOpKind id)
@@ -152,8 +206,7 @@ namespace Z0.Logix
             Claim.eq(expect.FormatHex(), actual.FormatHex());
         }
 
-        void check_unary_ops<V,T>(UnaryLogicOpKind id)
-            where V : unmanaged, IBitVector<V>
+        void check_binary_ops<T>(BinaryLogicOpKind id)
             where T : unmanaged
         {
             var BL = BitOpApi.lookup(id);
@@ -161,41 +214,23 @@ namespace Z0.Logix
             
             for(var sample = 0; sample< SampleSize; sample++)
             {
-                var a = Random.BitVector<V>();
+                var sa = Random.Next<T>();
+                var sb = Random.Next<T>();
 
-                var z0 = gbv.alloc<V>();
+                var z0 = bitvector.generic<T>();
+                var va = bitvector.generic(sa);
+                var vb = bitvector.generic(sb);
+
                 for(var i=0; i< z0.Length; i++)
-                    z0[i] = BL(a[i]);
+                    z0[i] = BL(va[i],vb[i]);
 
-                var z3 = SC(a.ToScalar<T>());                                
-                Claim.eq(z3, z0.ToScalar<T>());                                
-            }
-        }
-
-        void check_binary_ops<V,T>(BinaryLogicOpKind id)
-            where V : unmanaged, IBitVector<V>
-            where T : unmanaged
-        {
-            var BL = BitOpApi.lookup(id);
-            var SC = ScalarOpApi.lookup<T>(id);
-            
-            for(var sample = 0; sample< SampleSize; sample++)
-            {
-                var a = Random.BitVector<V>();
-                var b = Random.BitVector<V>();
-
-                var z0 = gbv.alloc<V>();
-                for(var i=0; i< z0.Length; i++)
-                    z0[i] = BL(a[i],b[i]);
-
-                var z3 = SC(a.ToScalar<T>(), b.ToScalar<T>());
+                var z3 = SC(sa,sb);
                                 
-                Claim.eq(z3, z0.ToScalar<T>());                                
+                Claim.eq(z3, z0.Data);
             }
         }
 
-        void check_ternary_ops<V,T>(TernaryLogicOpKind id)
-            where V : unmanaged, IBitVector<V>
+        void check_ternary_ops<T>(TernaryLogicOpKind id)
             where T : unmanaged
         {
             var BL = BitOpApi.lookup(id);
@@ -206,25 +241,24 @@ namespace Z0.Logix
 
             for(var sample = 0; sample< SampleSize; sample++)
             {
-                var a = Random.BitVector<V>();
-                var sa = a.ToScalar<T>();
-                var b = Random.BitVector<V>();
-                var sb = b.ToScalar<T>();
-                var c = Random.BitVector<V>();
-                var sc = c.ToScalar<T>();
+                var sa = Random.Next<T>();
+                var sb = Random.Next<T>();
+                var sc = Random.Next<T>();
 
-                var z0 = gbv.alloc<V>();
+                var z0 = bitvector.generic<T>();
+                var va = bitvector.generic(sa);
+                var vb = bitvector.generic(sb);
+                var vc = bitvector.generic(sc);
                 for(var i=0; i< z0.Length; i++)
-                    z0[i] = BL(a[i],b[i],c[i]);
-
+                    z0[i] = BL(va[i],vb[i],vc[i]);
 
                 var z3 = SC(sa, sb, sc);
                                 
-                Claim.eq(z3, z0.ToScalar<T>());                                
+                Claim.eq(z3, z0.Data);                                
 
-                var v1 = ginx.vbroadcast256(sa);
-                var v2 = ginx.vbroadcast256(sb);
-                var v3 = ginx.vbroadcast256(sc);
+                var v1 = ginx.vbroadcast(n256,sa);
+                var v2 = ginx.vbroadcast(n256,sb);
+                var v3 = ginx.vbroadcast(n256,sc);
                 var v4 = Vector256.GetElement(V256(v1,v2,v3), 0);
                 Claim.eq(v4,z3);
 
@@ -235,17 +269,19 @@ namespace Z0.Logix
                 var u4 = Vector128.GetElement(V128(u1,u2,u3),0);
                 Claim.eq(u4, z3);
             }
+
         }
 
+        
         void check_select<V,T>()
             where V : unmanaged, IBitVector<V>
             where T : unmanaged
         {
             for(var sample = 0; sample< SampleSize; sample++)
             {
-                var a = Random.BitVector<V>();
-                var b = Random.BitVector<V>();
-                var c = Random.BitVector<V>();
+                var a = Random.PrimalBitVector<V>();
+                var b = Random.PrimalBitVector<V>();
+                var c = Random.PrimalBitVector<V>();
                 
                 var z0 = gbv.alloc<V>();
                 for(var i=0; i< z0.Length; i++)

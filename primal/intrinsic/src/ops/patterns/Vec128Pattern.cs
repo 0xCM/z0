@@ -21,10 +21,6 @@ namespace Z0
     {
         static readonly int Length = Vec128<T>.Length;
 
-        /// <summary>
-        /// A vector where each component is assigned the numeric value 1
-        /// </summary>
-        public static readonly Vec128<T> Units = CalcUnits();
 
         /// <summary>
         /// Creates a vector with incrementing components
@@ -60,14 +56,14 @@ namespace Z0
             return Vec128.Load(dst.Swap(swaps));
         }
 
-        static Vec128<T> CalcUnits()
+        public static Vector128<T> Units()
         {
             var n = Length;
             var dst = Span128.Alloc<T>(n);
             var one = gmath.one<T>();
             for(var i=0; i<n; i++)
                 dst[i] = one;
-            return Vec128.Load(dst);
+            return ginx.vloadu(in dst[0], out Vector128<T> u);
         }
 
         static Vec128<T> CalcFpSignMask()

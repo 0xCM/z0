@@ -25,9 +25,11 @@ namespace Z0.Logix
 
         void SetVars(params IExpr[] values);        
 
+        void SetVars(params bit[] values);        
+
     }
 
-    public interface IVariedExpr<T> : IVariedExpr
+    public interface IVariedExpr<T> : IVariedExpr, IExpr<T>
         where T : unmanaged
     {
         IExpr<T> BaseExpr {get;}

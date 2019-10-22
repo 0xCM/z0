@@ -17,79 +17,15 @@ namespace Z0.Logix
     {
         // ~ select
 
-        public void check_select()
-        {
-            check_select<byte>();
-            check_select<ushort>();
-            check_select<uint>();
-            check_select<ulong>();
-            check_select_128<byte>();
-            check_select_128<ushort>();
-            check_select_128<uint>();
-            check_select_128<ulong>();
-            check_select_256<byte>();
-            check_select_256<ushort>();
-            check_select_256<uint>();
-            check_select_256<ulong>();
+
+        public void check_not()  
+        {      
+            check_unary_ops<BitVector8,byte>(UnaryLogicOpKind.Not);
+            check_unary_ops<BitVector16,ushort>(UnaryLogicOpKind.Not);
+            check_unary_ops<BitVector32,uint>(UnaryLogicOpKind.Not);
+            check_unary_ops<BitVector64,ulong>(UnaryLogicOpKind.Not);
         }
 
-        void check_select<T>()
-            where T : unmanaged
-        {
-            for(var i=0; i<SampleSize; i++)
-            {
-                var width = bitsize<T>();
-                var a = Random.BitVector<T>(width);
-                var b = Random.BitVector<T>(width);
-                var c = Random.BitVector<T>(width);
-                BitVector<T> x = ScalarOps.select(a.Head, b.Head, c.Head);
-                for(var j=0; j<x.Length; j++)
-                    Claim.eq(x[j], BitOps.select(a[j],b[j],c[j]));
-            }
-
-        }
-
-        void check_select_128<T>()
-            where T : unmanaged
-        {
-            for(var i=0; i<SampleSize; i++)
-            {
-                var a = Random.CpuVector128<T>();
-                var b = Random.CpuVector128<T>();
-                var c = Random.CpuVector128<T>();
-                var x = Cpu128Ops.select(a,b,c);
-
-                var sa = a.ToSpan();
-                var sb = b.ToSpan();
-                var sc = c.ToSpan();
-                var sx = x.ToSpan();
-
-                for(var j=0; j< sx.Length; j++)
-                    Claim.eq(sx[j], ScalarOps.select(sa[j], sb[j], sc[j]));
-            }
-
-        }
-
-        void check_select_256<T>()
-            where T : unmanaged
-        {
-            for(var i=0; i<SampleSize; i++)
-            {
-                var a = Random.CpuVector256<T>();
-                var b = Random.CpuVector256<T>();
-                var c = Random.CpuVector256<T>();
-                var x = Cpu256Ops.select(a,b,c);
-
-                var sa = a.ToSpan();
-                var sb = b.ToSpan();
-                var sc = c.ToSpan();
-                var sx = x.ToSpan();
-
-                for(var j=0; j< sx.Length; j++)
-                    Claim.eq(sx[j], ScalarOps.select(sa[j], sb[j], sc[j]));
-            }
-
-        }
 
         // ~ and
         public void check_and_8u()
@@ -476,6 +412,26 @@ namespace Z0.Logix
         public void eval_not_256x64u()
             => check_op_256<ulong>(UnaryLogicOpKind.Not);
 
+
+        void check_unary_ops<V,T>(UnaryLogicOpKind id)
+            where V : unmanaged, IBitVector<V>
+            where T : unmanaged
+        {
+            var BL = BitOpApi.lookup(id);
+            var SC = ScalarOpApi.lookup<T>(id);
+            
+            for(var sample = 0; sample< SampleSize; sample++)
+            {
+                var a = Random.PrimalBitVector<V>();
+
+                var z0 = gbv.alloc<V>();
+                for(var i=0; i< z0.Length; i++)
+                    z0[i] = BL(a[i]);
+
+                var z3 = SC(a.ToScalar<T>());                                
+                Claim.eq(z3, z0.ToScalar<T>());                                
+            }
+        }
 
         void check_op<T>(BinaryLogicOpKind op)
             where T : unmanaged

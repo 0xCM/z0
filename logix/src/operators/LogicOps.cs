@@ -13,15 +13,15 @@ namespace Z0.Logix
 
     internal static class LogicOps
     {
-       internal static UnaryLogicOp<T> nologic<T>(UnaryLogicOpKind id, T x = default)        
+       internal static UnaryOpSpec<T> nologic<T>(UnaryLogicOpKind id, T x = default)        
             where T : unmanaged
                 => throw new NotSupportedException($"{id}");
 
-       internal static BinaryLogicOp<T> nologic<T>(BinaryLogicOpKind id, T x = default)        
+       internal static BinaryOpSpec<T> nologic<T>(BinaryLogicOpKind id, T x = default)        
             where T : unmanaged
                 => throw new NotSupportedException($"{id}");
 
-       internal static TernaryLogicOp<T> nologic<T>(TernaryLogicOpKind id, T x = default)        
+       internal static TernaryOpSpec<T> nologic<T>(TernaryLogicOpKind id, T x = default)        
             where T : unmanaged
                 => throw new NotSupportedException($"{id}");
 

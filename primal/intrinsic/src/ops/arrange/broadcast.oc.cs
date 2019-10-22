@@ -18,23 +18,6 @@ namespace Z0
 
     partial class inxvoc
     {
-        public static Vec128<byte> vbroadcast_d128x8u(byte src)        
-            => dinx.vbroadcast128(src);
-
-        public static Vec128<byte> vbroadcast_g128x8u(byte src)        
-            => ginx.vbroadcast128(src);
-
-        public static Vec256<byte> vbroadcast_d256x8u(byte src)        
-            => dinx.vbroadcast256(src);
-
-        public static Vec256<byte> vbroadcast_g256x8u(byte src)        
-            => ginx.vbroadcast256(src);
-
-        public static Vec256<ulong> vbroadcast_d256x64u(ulong src)        
-            => dinx.vbroadcast256(src);
-
-        public static Vec256<ulong> vbroadcast_g256x64u(ulong src)        
-            => ginx.vbroadcast256(src);
 
     }
 

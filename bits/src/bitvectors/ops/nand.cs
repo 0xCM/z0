@@ -18,12 +18,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitVector<T> nand<T>(BitVector<T> x, BitVector<T> y)
             where T : unmanaged
-        {
-            if(x.SingleCell && y.SingleCell)
-                return gmath.nand(x.Head, y.Head);
-            else
-                return nand_multicell(x,y);
-        }
+                => gmath.nand(x.Data, y.Data);
 
         /// <summary>
         /// Computes a new bitvector z = x & y from bitvectors x or y
@@ -70,10 +65,5 @@ namespace Z0
         public static BitVector64 nand(BitVector64 x, BitVector64 y)
             => math.nand(x.data, y.data);
  
-        [MethodImpl(NotInline)]
-        static BitVector<T> nand_multicell<T>(BitVector<T> x, BitVector<T> y)
-            where T : unmanaged
-                => mathspan.nand(x.Data.ReadOnly(),y.Data.ReadOnly());
-
     }
 }

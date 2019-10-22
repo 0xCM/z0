@@ -17,19 +17,13 @@ namespace Z0
     {
                 
         [MethodImpl(Inline)]
-        public static Bit dot<T>(BitVector<T> x, BitVector<T> y)
+        public static bit dot<T>(BitVector<T> x, BitVector<T> y)
             where T : unmanaged
         {
-            var result = Bit.Off;
+            var result = bit.Off;
             for(var i=0; i<x.Length; i++)
                 result ^= x[i] & y[i];
             return result;
-
-            // if(x.SingleCell && y.SingleCell)
-            //     return gmath.odd(gbits.pop(gmath.and(x.Head, y.Head)));
-            // else 
-            //     return dot_multicell(x,y);
-            //return odd(gbits.pop(gmath.and(x.Head, y.Head)));              
         }
 
         /// <summary>
@@ -71,22 +65,6 @@ namespace Z0
         public static bit dot(BitVector64 x, BitVector64 y)
             => odd(Bits.pop(x.data & y.data));
 
-        /// <summary>
-        /// Computes the scalar product between this vector and another of identical length
-        /// </summary>
-        /// <param name="x">The left vector</param>
-        /// <param name="y">The right vector</param>
-        [MethodImpl(NotInline)]
-        static Bit dot_multicell<T>(BitVector<T> x, BitVector<T> y)
-            where T : unmanaged
-        {
-            require(x.Length == y.Length);
-
-            var result = Bit.Off;
-            for(var i=0; i<x.Length; i++)
-                result ^= x[i] & y[i];
-            return result;
-        }
 
     }
 

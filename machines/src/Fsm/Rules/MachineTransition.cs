@@ -8,7 +8,9 @@ namespace Z0.Machines
     using System.Linq;
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
-
+    
+    using Z0.Logix;
+    
     using static zfunc;
 
     /// <summary>

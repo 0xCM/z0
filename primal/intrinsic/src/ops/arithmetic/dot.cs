@@ -15,7 +15,7 @@ namespace Z0
     partial class dinx
     {        
         [MethodImpl(Inline)]
-        public static long vdot(Vec256<int> lhs, Vec256<int> rhs)
+        public static long vdot(Vector256<int> lhs, Vector256<int> rhs)
         {
             var product = vmul(lhs,rhs);
             var sum = vadd(vlo(product),vhi(product));
@@ -24,7 +24,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static ulong vdot(Vec256<uint> lhs, Vec256<uint> rhs)
+        public static ulong vdot(Vector256<uint> lhs, Vector256<uint> rhs)
         {
             var product = vmul(lhs,rhs);
             var sum = vadd(vlo(product),vhi(product));

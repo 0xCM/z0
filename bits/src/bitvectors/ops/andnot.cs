@@ -24,12 +24,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitVector<T> andnot<T>(BitVector<T> x, BitVector<T> y)
             where T : unmanaged
-        {
-            if(x.SingleCell && y.SingleCell)
-                return gmath.andnot(x.Head, y.Head);
-            else
-                return and_multicell(x,y);
-        }
+                => gmath.andnot(x.Data, y.Data);
 
         /// <summary>
         /// Computes the vector z = x & ~y from bitvectors x and y
@@ -76,10 +71,6 @@ namespace Z0
         public static BitVector64 andnot(BitVector64 x, BitVector64 y)
             => math.andnot(x.data, y.data);
  
-        [MethodImpl(Inline)]
-        static BitVector<T> andnot_multicell<T>(BitVector<T> x, BitVector<T> y)
-            where T : unmanaged
-                => mathspan.andnot(x.Data.ReadOnly(),y.Data.ReadOnly());
-
+ 
     }
 }

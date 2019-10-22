@@ -34,6 +34,16 @@ namespace Z0
         }
 
         /// <summary>
+        /// Produces a random generic bitvector
+        /// </summary>
+        /// <param name="random">The random source</param>
+        /// <typeparam name="T">The underlying primal type</typeparam>
+        [MethodImpl(Inline)]
+        public static BitVector<T> BitVector<T>(this IPolyrand random)        
+            where T : unmanaged
+                => random.Next<T>();
+
+        /// <summary>
         /// Produces a random 4-bit bitvector
         /// </summary>
         /// <param name="random">The random source</param>
@@ -94,7 +104,7 @@ namespace Z0
         /// <param name="random">The random source</param>
         /// <typeparam name="V">The primal bitvector type</typeparam>
         [MethodImpl(Inline)]
-        public static V BitVector<V>(this IPolyrand random)
+        public static V PrimalBitVector<V>(this IPolyrand random)
             where V : unmanaged, IBitVector<V>
         {
             if(typeof(V) == typeof(BitVector8))
@@ -128,7 +138,7 @@ namespace Z0
         /// <param name="len">The bitvector length</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline)]
-        public static BitVector<T> BitVector<T>(this IPolyrand random, BitSize len)
+        public static BitCells<T> BitCells<T>(this IPolyrand random, BitSize len)
             where T : unmanaged
                 => BV.Load<T>(random.Stream<T>().ToSpan(BV.CellCount<T>(len)), len);
 
@@ -140,7 +150,7 @@ namespace Z0
         /// <param name="maxlen">The inclusive maximum bitvector length</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline)]
-        public static BitVector<T> BitVector<T>(this IPolyrand random, BitSize minlen, BitSize maxlen)
+        public static BitCells<T> BitCells<T>(this IPolyrand random, BitSize minlen, BitSize maxlen)
             where T : unmanaged
         {
             var len = random.Next<int>(minlen,++maxlen);
@@ -154,9 +164,9 @@ namespace Z0
         /// <param name="range">The range of potential bitvector lengths</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline)]
-        public static BitVector<T> BitVector<T>(this IPolyrand random, Interval<int> range)
+        public static BitCells<T> BitCells<T>(this IPolyrand random, Interval<int> range)
             where T : unmanaged
-                => random.BitVector<T>(range.Left, range.Right);
+                => random.BitCells<T>(range.Left, range.Right);
                         
 
     }

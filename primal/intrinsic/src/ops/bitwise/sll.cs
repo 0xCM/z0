@@ -42,7 +42,7 @@ namespace Z0
         static Vec256<ushort> VByteMask
         {
             [MethodImpl(Inline)]
-            get => vbroadcast256(ByteMask);
+            get => vbroadcast(n256, ByteMask);
         }
 
         [MethodImpl(Inline)]

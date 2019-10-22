@@ -6,6 +6,7 @@ namespace Z0.Machines
 {
     using System;
     using System.Collections.Generic;
+    using Z0.Logix;
 
     using static zfunc;
 

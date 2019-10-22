@@ -19,12 +19,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitVector<T> xnor<T>(BitVector<T> x, BitVector<T> y)
             where T : unmanaged
-        {
-            if(x.SingleCell && y.SingleCell)
-                return gmath.xnor(x.Head, y.Head);
-            else
-                return xnor_multicell(x,y);
-        }
+                => gmath.xnor(x.Data, y.Data);
 
         /// <summary>
         /// Computes a new bitvector z = x & y from bitvectors x xnor y
@@ -70,11 +65,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitVector64 xnor(BitVector64 x, BitVector64 y) 
             => math.xnor(x.data, y.data);
-
-        [MethodImpl(NotInline)]
-        static BitVector<T> xnor_multicell<T>(BitVector<T> x, BitVector<T> y)
-            where T : unmanaged
-                => mathspan.xnor(x.Data.ReadOnly(),y.Data.ReadOnly());
-
     }
 }
