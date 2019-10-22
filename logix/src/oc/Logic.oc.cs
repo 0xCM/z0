@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2019
 // License     :  MIbit
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Logix
 {
     using System;
     using System.Linq;

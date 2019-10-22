@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2019
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Logix
 {
     using System;
     using System.Linq;
@@ -30,7 +30,5 @@ namespace Z0
         public static BitLiteralSeq<N> bitseq<N>(N length, params bit[] terms)
             where N : ITypeNat, new()
                 => BitLiteralSeq.FromBits(length,terms);
- 
     }
-
 }

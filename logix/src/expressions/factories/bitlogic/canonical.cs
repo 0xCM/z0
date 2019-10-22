@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2019
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Logix
 {
     using System;
     using System.Linq;
@@ -13,7 +13,6 @@ namespace Z0
     
     public static partial class BitLogicSpec
     {
-
         /// <summary>
         /// Defines a logical AND expression
         /// </summary>

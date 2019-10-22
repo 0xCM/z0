@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2019
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Logix
 {
     using System;
     using System.Linq;
@@ -75,9 +75,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static TernaryLogicOp ternary(TernaryLogicOpKind op, ILogicExpr first, ILogicExpr second, ILogicExpr third)
             => new TernaryLogicOp(op,first,second,third);
-
-
- 
     }
-
 }
