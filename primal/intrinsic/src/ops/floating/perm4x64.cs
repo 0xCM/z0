@@ -23,7 +23,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="control">The control byte</param>
         [MethodImpl(Inline)]
-        public static Vec256<double> vperm4x64(in Vec256<double> x, byte control)
+        public static Vector256<double> vperm4x64(Vector256<double> x, byte control)
             => Permute4x64(x,control); 
 
 

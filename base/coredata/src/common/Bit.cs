@@ -297,6 +297,11 @@ namespace Z0
         public override int GetHashCode()
             => state.GetHashCode();
   
+        public string Format()
+            => state.ToString();
+
+        public override string ToString()
+            => Format();
     }
 
 

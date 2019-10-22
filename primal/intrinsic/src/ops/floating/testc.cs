@@ -22,8 +22,8 @@ namespace Z0
         /// <param name="src">The source bits</param>
         /// <param name="mask">Specifies the bits in the source to test</param>
         [MethodImpl(Inline)]
-        public static bool testc(in Vec128<float> src, in Vec128<float> mask)
-            => TestC(src.xmm, mask.xmm);                     
+        public static bool testc(Vector128<float> src, Vector128<float> mask)
+            => TestC(src, mask);                     
 
         /// <summary>
         /// int _mm_testc_pd (__m128d a, __m128d b) VTESTPD xmm, xmm/m128
@@ -32,8 +32,8 @@ namespace Z0
         /// <param name="src">The source bits</param>
         /// <param name="mask">Specifies the bits in the source to test</param>
         [MethodImpl(Inline)]
-        public static bool testc(in Vec128<double> src, in Vec128<double> mask)
-            => TestC(src.xmm, mask.xmm);                     
+        public static bool testc(Vector128<double> src, Vector128<double> mask)
+            => TestC(src, mask);                     
 
         /// <summary>
         /// int _mm256_testc_ps (__m256 a, __m256 b) VTESTPS ymm, ymm/m256
@@ -42,8 +42,8 @@ namespace Z0
         /// <param name="src">The source bits</param>
         /// <param name="mask">Specifies the bits in the source to test</param>
         [MethodImpl(Inline)]
-        public static bool testc(in Vec256<float> src, in Vec256<float> mask)
-            => TestC(src.ymm, mask.ymm);                             
+        public static bool testc(Vector256<float> src, Vector256<float> mask)
+            => TestC(src, mask);                             
 
         /// <summary>
         /// int _mm256_testc_pd (__m256d a, __m256d b) VTESTPS ymm, ymm/m256
@@ -52,8 +52,8 @@ namespace Z0
         /// <param name="src">The source bits</param>
         /// <param name="mask">Specifies the bits in the source to test</param>
         [MethodImpl(Inline)]
-        public static bool testc(in Vec256<double> src, in Vec256<double> mask)
-            => TestC(src.ymm, mask.ymm);                             
+        public static bool testc(Vector256<double> src, Vector256<double> mask)
+            => TestC(src, mask);                             
 
 
     }

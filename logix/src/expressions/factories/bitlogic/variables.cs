@@ -19,8 +19,17 @@ namespace Z0
         /// <param name="name">The variable's name</param>
         /// <param name="init">The variable's initial value</param>
         [MethodImpl(Inline)]
-        public static LogicVariable variable(string name, bit init = default)
-            => new LogicVariable(name, init);
+        public static VariableExpr variable(string name, bit init = default)
+            => new VariableExpr(name, init);
+
+        /// <summary>
+        /// Defines a bit variable expression initialized to a literal value
+        /// </summary>
+        /// <param name="name">The variable's single-character name</param>
+        /// <param name="init">The variable's initial value</param>
+        [MethodImpl(Inline)]
+        public static VariableExpr variable(char name, bit init = default)
+            => new VariableExpr(name.ToString(), init);
 
         /// <summary>
         /// Defines a bit variable expression initialized to a literal value
@@ -29,29 +38,41 @@ namespace Z0
         /// <param name="name">The variable's name</param>
         /// <param name="init">The variable's initial value</param>
         [MethodImpl(Inline)]
-        public static LogicVariable variable(uint name, bit init = default)
+        public static VariableExpr variable(uint name, bit init = default)
             => variable(name.ToString(),init);
 
+        /// <summary>
+        /// Defines a specified number n of logic variable expressions where
+        /// each variable is respectively named 0,..., n - 1
+        /// </summary>
+        /// <param name="n">The number of variables to define</param>
+        public static VariableExpr[] variables(int n)
+        {
+            var vars = new VariableExpr[n];
+            for(var i =0; i<n; i++)
+                vars[i] = variable(i.ToString());
+            return vars;
+        }
+            
         /// <summary>
         /// Creates a varied expression predicated on a specified variable sequence
         /// </summary>
         /// <param name="subject">The variable-dependent expression</param>
         /// <param name="variables">The variable sequence</param>
         [MethodImpl(Inline)]
-        public static VariedLogicExpr varied(ILogicExpr subject, params IlogicVariable[] variables)
-            => VariedLogicExpr.Define(subject, variables);
+        public static VariedExpr varied(ILogicExpr subject, params ILogicVariable[] variables)
+            => VariedExpr.Define(subject, variables);
 
         /// <summary>
-        /// Creates a varied expression predicated on a specified variable sequence of natural length
+        /// Defines an untyped test expression
         /// </summary>
-        /// <param name="n">The natural length of the variable sequence</param>
-        /// <param name="subject">The variable-dependent expression</param>
-        /// <param name="variables">The variable sequence</param>
+        /// <param name="test">The logical operator to use for the test</param>
+        /// <param name="lhs">The control expression</param>
+        /// <param name="rhs">The test subject</param>
+        /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static VariedLogicExpr<N> varied<N>(N n, ILogicExpr subject, params IlogicVariable[] variables)
-            where N : unmanaged, ITypeNat
-                => VariedLogicExpr.Define(n,subject, variables);
-
+        public static EqualityExpr equals(ILogicExpr lhs, ILogicExpr rhs, params VariableExpr[] variables)
+            => EqualityExpr.Define(lhs,rhs,variables);
 
     }   
 

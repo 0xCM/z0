@@ -18,9 +18,20 @@ namespace Z0
         /// <param name="value">The initial value of the variable</param>
         /// <typeparam name="T">The variable type</typeparam>
         [MethodImpl(Inline)]
-        public static Variable<T> variable<T>(string name, IExpr<T> value)
+        public static VariableExpr<T> variable<T>(string name, IExpr<T> value)
             where T : unmanaged
-                => new Variable<T>(name, value);
+                => new VariableExpr<T>(name, value);
+
+        /// <summary>
+        /// Defines a variable expression
+        /// </summary>
+        /// <param name="value">The initial value of the variable</param>
+        /// <typeparam name="T">The variable type</typeparam>
+        [MethodImpl(Inline)]
+        public static VariableExpr<T> variable<T>(char name, IExpr<T> value)
+            where T : unmanaged
+                => new VariableExpr<T>(name.ToString(), value);
+
 
         /// <summary>
         /// Defines a bit variable expression where the variable name is defined by an integer
@@ -28,9 +39,9 @@ namespace Z0
         /// <param name="name">The variable's name</param>
         /// <param name="init">The variable's initial value</param>
         [MethodImpl(Inline)]
-        public static Variable<T> variable<T>(uint name, IExpr<T> init)
+        public static VariableExpr<T> variable<T>(uint name, IExpr<T> init)
             where T : unmanaged
-            => new Variable<T>(name.ToString(), init);
+            => new VariableExpr<T>(name.ToString(), init);
 
         /// <summary>
         /// Defines a variable expression with an initial value specified by a literal
@@ -38,9 +49,19 @@ namespace Z0
         /// <param name="value">The initial value of the variable</param>
         /// <typeparam name="T">The variable type</typeparam>
         [MethodImpl(Inline)]
-        public static Variable<T> variable<T>(string name, T value = default)
+        public static VariableExpr<T> variable<T>(string name, T value = default)
             where T : unmanaged
-                => new Variable<T>(name, literal(value));
+                => new VariableExpr<T>(name, literal(value));
+
+        /// <summary>
+        /// Defines a variable expression with an initial value specified by a literal
+        /// </summary>
+        /// <param name="value">The initial value of the variable</param>
+        /// <typeparam name="T">The variable type</typeparam>
+        [MethodImpl(Inline)]
+        public static VariableExpr<T> variable<T>(char name, T value = default)
+            where T : unmanaged
+                => new VariableExpr<T>(name.ToString(), literal(value));
 
         /// <summary>
         /// Defines a variable expression where the variable name is defined by an integer and 
@@ -49,9 +70,9 @@ namespace Z0
         /// <param name="value">The initial value of the variable</param>
         /// <typeparam name="T">The variable type</typeparam>
         [MethodImpl(Inline)]
-        public static Variable<T> variable<T>(uint name, T value = default)
+        public static VariableExpr<T> variable<T>(uint name, T value = default)
             where T : unmanaged
-                => new Variable<T>(name.ToString(), literal(value));        
+                => new VariableExpr<T>(name.ToString(), literal(value));        
 
         /// <summary>
         /// Creates a varied expression predicated on a typed variable sequence
@@ -59,9 +80,19 @@ namespace Z0
         /// <param name="subject">The variable-dependent expression</param>
         /// <param name="variables">The variable sequence</param>
         [MethodImpl(Inline)]
-        public static VariedExpr<T> varied<T>(IExpr<T> baseExpr, params Variable<T>[] variables)
+        public static VariedExpr<T> varied<T>(IExpr<T> baseExpr, params VariableExpr<T>[] variables)
             where T : unmanaged             
-                => VariedExpr.Define(baseExpr, variables);
+                => new VariedExpr<T>(baseExpr, variables);
+
+        // [MethodImpl(Inline)]
+        // static VariedExpr<N,T> Define<N,T>(N n, IExpr<T> baseExpr, params VariableExpr<T>[] variables)
+        //     where N : unmanaged, ITypeNat
+        //     where T : unmanaged
+        // {
+        //     Nat.require<N>(variables.Length);
+        //     return new VariedExpr<N,T>(baseExpr, variables);
+        // }
+
 
         /// <summary>
         /// Creates a varied expression predicated on a typed variable sequence of natural length
@@ -69,10 +100,13 @@ namespace Z0
         /// <param name="subject">The variable-dependent expression</param>
         /// <param name="variables">The variable sequence</param>
         [MethodImpl(Inline)]
-        public static VariedExpr<N,T> varied<N,T>(N n, IExpr<T> baseExpr, params Variable<T>[] variables)
+        public static VariedExpr<N,T> varied<N,T>(N n, IExpr<T> baseExpr, params VariableExpr<T>[] variables)
             where T : unmanaged             
             where N : unmanaged, ITypeNat
-                => VariedExpr.Define(n, baseExpr, variables);
+        {
+            Nat.require<N>(variables.Length);
+            return new VariedExpr<N,T>(baseExpr, variables);
+        }
 
         /// <summary>
         /// Defines a varied expression of 1 variable
@@ -82,9 +116,9 @@ namespace Z0
         /// <param name="v0">The variable</param>
         /// <typeparam name="T">The type over which the expression is defined</typeparam>
         [MethodImpl(Inline)]
-        public static VariedExpr<N1,T> varied<T>(N1 n, IExpr<T> baseExpr, Variable<T> v0)
+        public static VariedExpr<N1,T> varied<T>(N1 n, IExpr<T> baseExpr, VariableExpr<T> v0)
             where T : unmanaged             
-                => VariedExpr.Define(n, baseExpr, v0);
+                => varied<N1,T>(n, baseExpr, v0);
 
         /// <summary>
         /// Defines a varied expression of 2 variables
@@ -95,9 +129,9 @@ namespace Z0
         /// <param name="v1">The second variable</param>
         /// <typeparam name="T">The type over which the expression is defined</typeparam>
         [MethodImpl(Inline)]
-        public static VariedExpr<N2,T> varied<T>(N2 n, IExpr<T> baseExpr, Variable<T> v0, Variable<T> v1)
+        public static VariedExpr<N2,T> varied<T>(N2 n, IExpr<T> baseExpr, VariableExpr<T> v0, VariableExpr<T> v1)
             where T : unmanaged             
-                => VariedExpr.Define(n, baseExpr, v0, v1);
+                => varied<N2,T>(n, baseExpr, v0, v1);
 
         /// <summary>
         /// Defines a varied expression of 3 variables
@@ -109,9 +143,21 @@ namespace Z0
         /// <param name="v2">The third variable</param>
         /// <typeparam name="T">The type over which the expression is defined</typeparam>
         [MethodImpl(Inline)]
-        public static VariedExpr<N3,T> varied<T>(N3 n, IExpr<T> baseExpr, Variable<T> v0, Variable<T> v1, Variable<T> v2)
+        public static VariedExpr<N3,T> varied<T>(N3 n, IExpr<T> baseExpr, VariableExpr<T> v0, VariableExpr<T> v1, VariableExpr<T> v2)
             where T : unmanaged             
-                => VariedExpr.Define(n, baseExpr, v0, v1, v2);
+                => varied<N3,T>(n, baseExpr, v0, v1, v2);
+
+        /// <summary>
+        /// Defines a typed test expression
+        /// </summary>
+        /// <param name="test">The logical operator to use for the test</param>
+        /// <param name="lhs">The control expression</param>
+        /// <param name="rhs">The test subject</param>
+        /// <typeparam name="T">The operand type</typeparam>
+        [MethodImpl(Inline)]
+        public static EqualityExpr<T> equals<T>(IExpr<T> lhs, IExpr<T> rhs, params VariableExpr<T>[] variables)
+            where T : unmanaged
+                => new EqualityExpr<T>(lhs,rhs,variables);
 
     }
 

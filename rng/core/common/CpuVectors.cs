@@ -85,30 +85,6 @@ namespace Z0
             where T : unmanaged
                 => random.Span256<T>(1, domain, filter).LoadVec256();
 
-        /// <summary>
-        /// Produces a random 256-bit cpu vector
-        /// </summary>
-        /// <param name="random">The random source</param>
-        /// <param name="domain">The domain from which the vector components will be chosen</param>
-        /// <param name="filter">If specified, component values for which the predicate returns false are excluded</param>
-        /// <typeparam name="T">The vector component type</typeparam>
-        [MethodImpl(Inline)]
-        public static Vec256<T> CpuVec256<T>(this IPolyrand random, Interval<T> domain, Func<T,bool> filter = null)        
-            where T : unmanaged
-                => random.Span256<T>(1, domain, filter).LoadVec256();
-
-        /// <summary>
-        /// Produces a random 256-bit cpu vector
-        /// </summary>
-        /// <param name="random">The random source</param>
-        /// <param name="min">The minimum component value</param>
-        /// <param name="max">The maximum component value</param>
-        /// <param name="filter">If specified, component values for which the predicate returns false are excluded</param>
-        /// <typeparam name="T">The vector component type</typeparam>
-        [MethodImpl(Inline)]
-        public static Vec256<T> CpuVec256<T>(this IPolyrand random, T min, T max, Func<T,bool> filter = null)        
-            where T : unmanaged
-                => random.Span256<T>(1, closed(min,max), filter).LoadVec256();
 
         /// <summary>
         /// Produces a stream of random 256-bit cpu vectors
@@ -129,21 +105,6 @@ namespace Z0
             return stream(produce(), random.RngKind);
         }
 
-        /// <summary>
-        /// Produces a random 512-bit pseudo-cpu vector
-        /// </summary>
-        /// <param name="random">The random source</param>
-        /// <param name="domain">The domain from which the vector components will be chosen</param>
-        /// <param name="filter">If specified, component values for which the predicate returns false are excluded</param>
-        /// <typeparam name="T">The vector component type</typeparam>
-        [MethodImpl(Inline)]
-        public static Vec512<T> CpuVec512<T>(this IPolyrand random, Interval<T>? domain = null, Func<T,bool> filter = null)        
-            where T : unmanaged
-        {
-            var v1 = random.CpuVec256(domain,filter);
-            var v2 = random.CpuVec256(domain,filter);
-            return Vec512.FromParts(v1,v2);
-        }
 
         /// <summary>
         /// Produces a random 128-bit cpu vector
@@ -156,6 +117,100 @@ namespace Z0
         public static Vector128<T> CpuVector128<T>(this IPolyrand random, Interval<T>? domain = null, Func<T,bool> filter = null)        
             where T : unmanaged
                 => random.Span128<T>(1, domain, filter).LoadVector128();
+
+
+        /// <summary>
+        /// Produces a stream of 128-bit intrinsic vectors
+        /// </summary>
+        /// <param name="random">The random source</param>
+        /// <param name="domain">The domain from which the vector components will be chosen</param>
+        /// <param name="filter">If specified, component values for which the predicate returns false are excluded</param>
+        /// <typeparam name="T">The vector component type</typeparam>
+        public static IRandomStream<Vector128<T>> CpuVectors128<T>(this IPolyrand random, Interval<T> domain, Func<T,bool> filter = null)        
+            where T : unmanaged
+        {
+                
+            IEnumerable<Vector128<T>> produce()
+            {
+                while(true)            
+                    yield return random.CpuVector128(domain,filter);
+            }
+
+            return stream(produce(), random.RngKind);
+
+        }
+
+        /// <summary>
+        /// Produces a stream of 128-bit intrinsic vectors
+        /// </summary>
+        /// <param name="random">The random source</param>
+        /// <param name="domain">The domain, if specified, from which the vector components will be chosen</param>
+        /// <param name="filter">If specified, component values for which the predicate returns false are excluded</param>
+        /// <typeparam name="T">The vector component type</typeparam>
+        [MethodImpl(Inline)]
+        public static IRandomStream<Vector128<T>> CpuVectors128<T>(this IPolyrand random, Interval<T>? domain = null, Func<T,bool> filter = null)        
+            where T : unmanaged
+                => random.CpuVectors128(Configure(domain),filter);
+
+        /// <summary>
+        /// Produces a stream of 128-bit intrinsic vectors
+        /// </summary>
+        /// <param name="random">The random source</param>
+        /// <param name="min">The minimum component value</param>
+        /// <param name="max">The maximum component value</param>
+        /// <param name="filter">If specified, component values for which the predicate returns false are excluded</param>
+        /// <typeparam name="T">The vector component type</typeparam>
+        [MethodImpl(Inline)]
+        public static IRandomStream<Vector128<T>> CpuVectors128<T>(this IPolyrand random, T min, T max, Func<T,bool> filter = null)        
+            where T : unmanaged
+                => random.CpuVectors128((min,max),filter);
+
+        /// <summary>
+        /// Produces a stream of 256-bit intrinsic vectors
+        /// </summary>
+        /// <param name="random">The random source</param>
+        /// <param name="domain">The domain from which the vector components will be chosen</param>
+        /// <param name="filter">If specified, component values for which the predicate returns false are excluded</param>
+        /// <typeparam name="T">The vector component type</typeparam>
+        public static IRandomStream<Vector256<T>> CpuVectors256<T>(this IPolyrand random, Interval<T> domain, Func<T,bool> filter = null)        
+            where T : unmanaged
+        {
+                
+            IEnumerable<Vector256<T>> produce()
+            {
+                while(true)            
+                    yield return random.CpuVector256(domain,filter);
+            }
+
+            return stream(produce(), random.RngKind);
+
+        }
+
+
+        /// <summary>
+        /// Produces a stream of 256-bit intrinsic vectors
+        /// </summary>
+        /// <param name="random">The random source</param>
+        /// <param name="domain">The domain, if specified, from which the vector components will be chosen</param>
+        /// <param name="filter">If specified, component values for which the predicate returns false are excluded</param>
+        /// <typeparam name="T">The vector component type</typeparam>
+        [MethodImpl(Inline)]
+        public static IRandomStream<Vector256<T>> CpuVectors256<T>(this IPolyrand random, Interval<T>? domain = null, Func<T,bool> filter = null)        
+            where T : unmanaged
+                => random.CpuVectors256(Configure(domain),filter);
+
+        /// <summary>
+        /// Produces a stream of 256-bit intrinsic vectors
+        /// </summary>
+        /// <param name="random">The random source</param>
+        /// <param name="min">The minimum component value</param>
+        /// <param name="max">The maximum component value</param>
+        /// <param name="filter">If specified, component values for which the predicate returns false are excluded</param>
+        /// <typeparam name="T">The vector component type</typeparam>
+        [MethodImpl(Inline)]
+        public static IRandomStream<Vector256<T>> CpuVectors256<T>(this IPolyrand random, T min, T max, Func<T,bool> filter = null)        
+            where T : unmanaged
+                => random.CpuVectors256((min,max),filter);
 
         /// <summary>
         /// Produces a random 128-bit cpu vector

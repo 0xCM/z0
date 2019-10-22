@@ -10,8 +10,16 @@ namespace Z0
     
     using static zfunc;
 
+    /// <summary>
+    /// Characterizes a unary operator
+    /// </summary>
+    public interface IUnaryOp : IOpExpr
+    {
+        
+    }
 
-    public interface IUnaryLogicOp : IUnaryOp, ILogicOp<UnaryLogicOpKind>
+
+    public interface IUnaryLogicOp : IUnaryOp, ILogicOpExpr<UnaryLogicOpKind>
     {
         /// <summary>
         /// The one and only operand
@@ -19,7 +27,12 @@ namespace Z0
         ILogicExpr Operand {get;}
     }
 
-    public interface IUnaryLogicOp<T> : IUnaryOp<T>, IOpExpr<T,UnaryLogicOpKind>
+    /// <summary>
+    /// Characterizes a typed unary operator
+    /// </summary>
+    /// <typeparam name="T">The type over which the operator is defined</typeparam>
+    /// <typeparam name="K">The operator classifier</typeparam>
+    public interface IUnaryOp<T> : IUnaryOp, IOpExpr<T,UnaryLogicOpKind> 
         where T : unmanaged
     {
         /// <summary>

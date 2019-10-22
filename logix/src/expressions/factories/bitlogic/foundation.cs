@@ -20,14 +20,14 @@ namespace Z0
         /// Creates a logical TRUE expression, i.e. an expression that is always true
         /// </summary>
         [MethodImpl(Inline)]
-        public static BitLiteralExpr on()
+        public static LiteralExpr on()
             => literal(bit.On);
 
         /// <summary>
         /// Creates a logical FALSE expression, i.e. an expression that is always false
         /// </summary>
         [MethodImpl(Inline)]
-        public static BitLiteralExpr off()
+        public static LiteralExpr off()
             => literal(bit.Off);
 
         /// <summary>
@@ -35,8 +35,8 @@ namespace Z0
         /// </summary>
         /// <param name="value">The literal value</param>
         [MethodImpl(Inline)]
-        public static BitLiteralExpr literal(bit value)
-            => new BitLiteralExpr(value);
+        public static LiteralExpr literal(bit value)
+            => new LiteralExpr(value);
 
         /// <summary>
         /// Defines a logical identity expression

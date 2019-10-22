@@ -1,14 +1,4 @@
-// 2019-10-20 22:42:12:906
-ValueTuple<short,short> split(int src, N2 parts)
-{
-    IL_0000: ldarg.0
-    IL_0001: call System.Int16 Z0.Bits::lo(System.Int32)
-    IL_0006: ldarg.0
-    IL_0007: call System.Int16 Z0.Bits::hi(System.Int32)
-    IL_000C: newobj System.Void System.ValueTuple`2<System.Int16,System.Int16>::.ctor(System.Int16,System.Int16)
-    IL_0011: ret
-
-}
+// 2019-10-21 17:21:43:695
 void split(uint src, out ushort x0, out ushort x1)
 {
     IL_0000: ldarg.1
@@ -2460,19 +2450,6 @@ ulong range(ulong src, BitPos i0, BitPos i1)
     IL_001A: ret
 
 }
-ulong range2(ulong src, int i0, int i1)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: conv.u1
-    IL_0003: ldarg.2
-    IL_0004: ldarg.1
-    IL_0005: sub
-    IL_0006: conv.u1
-    IL_0007: call System.UInt64 System.Runtime.Intrinsics.X86.Bmi1/X64::BitFieldExtract(System.UInt64,System.Byte,System.Byte)
-    IL_000C: ret
-
-}
 float range(float src, BitPos i0, BitPos i1)
 {
     IL_0000: ldarg.0
@@ -3250,6 +3227,16 @@ void split(ushort src, out byte x0, out byte x1)
     IL_0008: conv.u1
     IL_0009: stind.i1
     IL_000A: ret
+
+}
+ValueTuple<short,short> split(int src, N2 parts)
+{
+    IL_0000: ldarg.0
+    IL_0001: call System.Int16 Z0.Bits::lo(System.Int32)
+    IL_0006: ldarg.0
+    IL_0007: call System.Int16 Z0.Bits::hi(System.Int32)
+    IL_000C: newobj System.Void System.ValueTuple`2<System.Int16,System.Int16>::.ctor(System.Int16,System.Int16)
+    IL_0011: ret
 
 }
 BitVector128 clmul_ref(BitVector64 x, BitVector64 y)

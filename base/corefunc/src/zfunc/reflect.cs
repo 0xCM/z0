@@ -51,13 +51,13 @@ partial class zfunc
         => t.GetGenericTypeDefinition();
 
     /// <summary>
-    /// Returns the name of the supplied type
+    /// Returns the display name of the supplied type
     /// </summary>
     /// <param name="full">Whether the full name should be returned</param>
     /// <typeparam name="T">The type to examine</typeparam>
     [MethodImpl(Inline)]   
-    public static string typename<T>(bool full = false)
-        => full ? typeof(T).FullName : typeof(T).Name;
+    public static string typename<T>()
+        => typeof(T).DisplayName();
 
     /// <summary>
     /// Returns the display name of the source type

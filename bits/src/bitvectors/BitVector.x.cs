@@ -7,6 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
+    using System.Runtime.Intrinsics;
 
     using static zfunc;
 
@@ -501,19 +502,19 @@ namespace Z0
         /// <param name="src">The source bits</param>
         /// <typeparam name="T">The primal component type of the target vector</typeparam>
         [MethodImpl(Inline)]
-        public static Vec128<T> ToCpuVec<T>(this BitString src, N128 n)
+        public static Vector128<T> ToCpuVector<T>(this BitString src, N128 n)
             where T : unmanaged        
-                => src.Pack().As<byte,T>().ToSpan128().ToCpuVec128();
+                => src.Pack().As<byte,T>().ToSpan128().ToCpuVector128();
 
         /// <summary>
-        /// Extracts a 256-bit cpu vector from a bitsring of length 128 or greater
+        /// Extracts a 128-bit cpu vector from a bitsring of length 128 or greater
         /// </summary>
         /// <param name="src">The source bits</param>
         /// <typeparam name="T">The primal component type of the target vector</typeparam>
         [MethodImpl(Inline)]
-        public static Vec256<T> ToCpuVec<T>(this BitString src, N256 n)
+        public static Vector256<T> ToCpuVector<T>(this BitString src, N256 n)
             where T : unmanaged        
-                => src.Pack().As<byte,T>().ToSpan256().ToCpuVec256();                
+                => src.Pack().As<byte,T>().ToSpan256().ToCpuVector256();
 
         /// <summary>
         /// Converts an 8-bit bitmask to an 8-bit bitvector

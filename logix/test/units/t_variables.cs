@@ -15,11 +15,6 @@ namespace Z0
 
     public class t_variables : UnitTest<t_variables>
     {
-        public void check_binop_vars()
-        {
-            ScalarOpApi.BinaryKinds.Iterate(check_binop_vars);
-        }
-
         public void check_compositions()
         {
             var ops = ScalarOpApi.BinaryKinds;
@@ -28,6 +23,11 @@ namespace Z0
                         select (op1, op2);            
             pairs.Iterate(o => check_4x2(o.op1,o.op2));
                      
+        }
+
+        public void check_binop_vars()
+        {
+            ScalarOpApi.BinaryKinds.Iterate(check_binop_vars);
         }
 
         public void check_solution()
@@ -53,7 +53,7 @@ namespace Z0
 
         }
 
-        IReadOnlyList<T> solve<T>(VariedExpr<N1,T> expr, Literal<T> match, Interval<T> domain)
+        IReadOnlyList<T> solve<T>(VariedExpr<N1,T> expr, LiteralExpr<T> match, Interval<T> domain)
             where T : unmanaged
         {
             var min = domain.Left;
@@ -77,7 +77,7 @@ namespace Z0
 
         }
 
-        IReadOnlyList<T> solve<T>(VariedExpr<N2,T> expr, Literal<T> match, Interval<T> domain)
+        IReadOnlyList<T> solve<T>(VariedExpr<N2,T> expr, LiteralExpr<T> match, Interval<T> domain)
             where T : unmanaged
         {
             var min = domain.Left;

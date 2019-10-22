@@ -45,6 +45,16 @@ namespace Z0
             where T : unmanaged
             where E : Enum
                 => throw new NotSupportedException($"{id}");
+
+
+        internal static void Set<T>(IVariedExpr<T> expr, params IExpr<T>[] values)
+            where T : unmanaged
+        {
+            var n = Math.Min(expr.Vars.Length, values.Length);
+            for(var i=0; i<n; i++)
+                expr.Vars[i].Set(values[i]);
+        }
+
     }
 
 }

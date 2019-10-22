@@ -25,10 +25,6 @@ namespace Z0
             where T : unmanaged
                 => default;
 
-        [MethodImpl(Inline)]
-        public static Vector256<T> one<T>()
-            where T : unmanaged
-                => Vec256Pattern.ones<T>();
 
         [MethodImpl(Inline)]
         public static Vector256<T> not<T>(Vector256<T> a)

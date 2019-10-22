@@ -7,6 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
+    using System.Runtime.Intrinsics;
     using System.Runtime.Intrinsics.X86;
 
     using static zfunc;
@@ -30,7 +31,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bool testz(BitMatrix16 A)
         {
-            A.GetCells(out Vec256<ushort> v);
+            A.Load(out Vector256<ushort> v);
             return dinx.testz(v,v);
         }
 
@@ -43,7 +44,7 @@ namespace Z0
             const int rowstep = 4;
             for(var i=0; i< A.RowCount; i += rowstep)
             {
-                A.GetCells(i, out Vec256<ulong> v);
+                A.Load(i, out Vector256<ulong> v);
                 if(!dinx.testz(v, v))
                     return false;
             }
@@ -59,7 +60,7 @@ namespace Z0
             const int rowstep = 8;
             for(var i=0; i< A.RowCount; i += rowstep)
             {
-                A.GetCells(i, out Vec256<uint> vSrc);
+                A.Load(i, out Vector256<uint> vSrc);
                 if(!ginx.testz<uint>(vSrc,vSrc))
                     return false;
             }

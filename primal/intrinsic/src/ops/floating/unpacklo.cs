@@ -27,8 +27,8 @@ namespace Z0
         /// <param name="x">The left source vector</param>
         /// <param name="y">The right source vector</param>
         [MethodImpl(Inline)]
-        public static Vec128<float> vunpacklo(in Vec128<float> x, in Vec128<float> y)
-            => UnpackLow(x.xmm,y.xmm);
+        public static Vector128<float> vunpacklo(Vector128<float> x, Vector128<float> y)
+            => UnpackLow(x,y);
 
         /// <summary>
         /// __m128d _mm_unpacklo_pd (__m128d a, __m128d b) UNPCKLPD xmm, xmm/m128
@@ -39,8 +39,8 @@ namespace Z0
         /// <param name="x">The left source vector</param>
         /// <param name="y">The right source vector</param>
         [MethodImpl(Inline)]
-        public static Vec128<double> vunpacklo(in Vec128<double> x, in Vec128<double> y)
-            => UnpackLow(x.xmm,y.xmm);
+        public static Vector128<double> vunpacklo(Vector128<double> x, Vector128<double> y)
+            => UnpackLow(x,y);
 
         /// <summary>
         /// __m256 _mm256_unpacklo_ps (__m256 a, __m256 b) VUNPCKLPS ymm, ymm, ymm/m256
@@ -51,8 +51,8 @@ namespace Z0
         /// <param name="x">The left source vector</param>
         /// <param name="y">The right source vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<float> vunpacklo(in Vec256<float> x, in Vec256<float> y)
-            => UnpackLow(x.ymm,y.ymm);
+        public static Vector256<float> vunpacklo(Vector256<float> x, Vector256<float> y)
+            => UnpackLow(x,y);
 
         /// <summary>
         /// __m256d _mm256_unpacklo_pd (__m256d a, __m256d b) VUNPCKLPD ymm, ymm, ymm/m256
@@ -63,8 +63,8 @@ namespace Z0
         /// <param name="x">The left source vector</param>
         /// <param name="y">The right source vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<double> vunpacklo(in Vec256<double> x, in Vec256<double> y)
-            => UnpackLow(x.ymm,y.ymm);
+        public static Vector256<double> vunpacklo(Vector256<double> x, Vector256<double> y)
+            => UnpackLow(x,y);
     }
 
 }

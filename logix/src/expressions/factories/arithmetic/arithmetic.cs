@@ -19,9 +19,9 @@ namespace Z0
         /// <param name="value">The literal value</param>
         /// <typeparam name="T">The literal type</typeparam>
         [MethodImpl(Inline)]
-        public static Literal<T> literal<T>(T value)
+        public static LiteralExpr<T> literal<T>(T value)
             where T : unmanaged
-                => new Literal<T>(value);
+                => new LiteralExpr<T>(value);
 
         /// <summary>
         /// Creates an arithmetic unary expression

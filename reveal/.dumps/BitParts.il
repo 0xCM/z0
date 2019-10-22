@@ -1,4 +1,4 @@
-// 2019-10-20 22:42:15:188
+// 2019-10-21 17:21:46:141
 void part27x3(uint src, Span<byte> dst)
 {
     IL_0000: ldarga.s dst
@@ -617,16 +617,7 @@ uint project(uint src, Part30x5:uint part)
     IL_0007: ret
 
 }
-byte select(uint src, Part10x5:uint part)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: call System.UInt32 Z0.Bits::gather(System.UInt32,System.UInt32)
-    IL_0007: conv.u1
-    IL_0008: ret
-
-}
-byte select(uint src, Part15x5:uint part)
+byte select(uint src, Part30x5:uint part)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1

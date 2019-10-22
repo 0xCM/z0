@@ -12,17 +12,19 @@ namespace Z0
 
     static class ScalarExprEval
     {
-        public static Literal<T> eval<T>(IExpr<T> expr)
+        public static LiteralExpr<T> eval<T>(IExpr<T> expr)
             where T : unmanaged
         {
             switch(expr)
             {
-                case ILiteral<T> x:
+                case ILiteralExpr<T> x:
                     return eval(x);
                 case IVariable<T> x:
                     return eval(x);
                 case IOpExpr<T> x:
                     return eval(x);
+                case IEqualityExpr<T> x:
+                    return eval(x);
                 default:
                     return unhandled(expr);
             }
@@ -30,32 +32,37 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static Literal<T> eval<T>(ILiteral<T> expr)
+        static LiteralExpr<T> eval<T>(ILiteralExpr<T> expr)
             where T : unmanaged
                 => expr.Value;
 
         [MethodImpl(Inline)]
-        static Literal<T> eval<T>(IVariable<T> expr)
+        static LiteralExpr<T> eval<T>(IVariable<T> expr)
             where T : unmanaged
         {
-            if(expr.Value is Literal<T> l)
+            if(expr.Value is LiteralExpr<T> l)
                 return l.Value;
             else
                 return eval(expr.Value);
         }
 
-        static Literal<T> eval<T>(IOpExpr<T> expr)
+        [MethodImpl(Inline)]
+        static LiteralExpr<T> eval<T>(IEqualityExpr<T> expr)
+            where T : unmanaged
+                => xnor(eval(expr.Lhs), eval(expr.Rhs));
+
+        static LiteralExpr<T> eval<T>(IOpExpr<T> expr)
             where T : unmanaged
         {
             switch(expr)               
             {
-                case IUnaryLogicOp<T> x:
+                case IUnaryOp<T> x:
                     return eval(x);
-                case IBinaryLogicOp<T> x:
+                case IBinaryOp<T> x:
                     return eval(x);
                 case IShiftOp<T> x:
                     return eval(x);
-                case ITernaryLogicOp<T> x:
+                case ITernaryOp<T> x:
                     return eval(x);
                 default:
                     return unhandled(expr);
@@ -63,7 +70,7 @@ namespace Z0
 
         }
 
-        static Literal<T> eval<T>(IUnaryLogicOp<T> expr)
+        static LiteralExpr<T> eval<T>(IUnaryOp<T> expr)
             where T : unmanaged
         {
             switch(expr.OpKind)
@@ -81,7 +88,7 @@ namespace Z0
             }
         }
 
-        static Literal<T> eval<T>(IBinaryLogicOp<T> expr)
+        static LiteralExpr<T> eval<T>(IBinaryOp<T> expr)
             where T : unmanaged
         {
             switch(expr.OpKind)
@@ -109,7 +116,7 @@ namespace Z0
             }
         }
 
-        static Literal<T> eval<T>(IShiftOp<T> expr)
+        static LiteralExpr<T> eval<T>(IShiftOp<T> expr)
             where T : unmanaged
         {
             switch(expr.OpKind)
@@ -129,107 +136,107 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static Literal<T> eval<T>(ITernaryLogicOp<T> expr)
+        static LiteralExpr<T> eval<T>(ITernaryOp<T> expr)
             where T : unmanaged
                 => default;
 
         [MethodImpl(Inline)]
-        static Literal<T> not<T>(IExpr<T> a)
+        static LiteralExpr<T> not<T>(IExpr<T> a)
             where T : unmanaged
                 => gmath.not(eval(a).Value);
 
         [MethodImpl(Inline)]
-        static Literal<T> @true<T>(IExpr<T> a)
+        static LiteralExpr<T> @true<T>(IExpr<T> a)
             where T : unmanaged
                 => gmath.maxval<T>();
 
         [MethodImpl(Inline)]
-        static Literal<T> @false<T>(IExpr<T> a)
+        static LiteralExpr<T> @false<T>(IExpr<T> a)
             where T : unmanaged
                 => default(T);
 
         [MethodImpl(Inline)]
-        static Literal<T> @true<T>(IExpr<T> a, IExpr<T> b)
+        static LiteralExpr<T> @true<T>(IExpr<T> a, IExpr<T> b)
             where T : unmanaged
                 => gmath.maxval<T>();
 
         [MethodImpl(Inline)]
-        static Literal<T> @false<T>(IExpr<T> a, IExpr<T> b)
+        static LiteralExpr<T> @false<T>(IExpr<T> a, IExpr<T> b)
             where T : unmanaged
                 => default(T);
 
         [MethodImpl(Inline)]
-        static Literal<T> negate<T>(IExpr<T> a)
+        static LiteralExpr<T> negate<T>(IExpr<T> a)
             where T : unmanaged
                 => gmath.negate(eval(a).Value);
 
         [MethodImpl(Inline)]
-        static Literal<T> and<T>(IExpr<T> a, IExpr<T> b)
+        static LiteralExpr<T> and<T>(IExpr<T> a, IExpr<T> b)
             where T : unmanaged
                 => gmath.and(eval(a).Value, eval(b).Value);
 
         [MethodImpl(Inline)]
-        static Literal<T> nand<T>(IExpr<T> a, IExpr<T> b)
+        static LiteralExpr<T> nand<T>(IExpr<T> a, IExpr<T> b)
             where T : unmanaged
                 => gmath.nand(eval(a).Value, eval(b).Value);
 
         [MethodImpl(Inline)]
-        static Literal<T> or<T>(IExpr<T> a, IExpr<T> b)
+        static LiteralExpr<T> or<T>(IExpr<T> a, IExpr<T> b)
             where T : unmanaged
                 => gmath.or(eval(a).Value, eval(b).Value);
 
         [MethodImpl(Inline)]
-        static Literal<T> nor<T>(IExpr<T> a, IExpr<T> b)
+        static LiteralExpr<T> nor<T>(IExpr<T> a, IExpr<T> b)
             where T : unmanaged
                 => gmath.nor(eval(a).Value, eval(b).Value);
 
         [MethodImpl(Inline)]
-        static Literal<T> xor<T>(IExpr<T> a, IExpr<T> b)
+        static LiteralExpr<T> xor<T>(IExpr<T> a, IExpr<T> b)
             where T : unmanaged
                 => gmath.xor(eval(a).Value, eval(b).Value);
 
         [MethodImpl(Inline)]
-        static Literal<T> xnor<T>(IExpr<T> a, IExpr<T> b)
+        static LiteralExpr<T> xnor<T>(IExpr<T> a, IExpr<T> b)
             where T : unmanaged
                 => gmath.xnor(eval(a).Value, eval(b).Value);
 
         [MethodImpl(Inline)]
-        static Literal<T> andnot<T>(IExpr<T> a, IExpr<T> b)
+        static LiteralExpr<T> andnot<T>(IExpr<T> a, IExpr<T> b)
             where T : unmanaged
                 => gmath.andnot(eval(a).Value, eval(b).Value);
 
  
         [MethodImpl(Inline)]
-        static Literal<T> sll<T>(IExpr<T> a, IExpr<int> offset)
+        static LiteralExpr<T> sll<T>(IExpr<T> a, IExpr<int> offset)
             where T : unmanaged
                 => gmath.sll(eval(a).Value, eval(offset).Value);
 
         [MethodImpl(Inline)]
-        static Literal<T> srl<T>(IExpr<T> a, IExpr<int> offset)
+        static LiteralExpr<T> srl<T>(IExpr<T> a, IExpr<int> offset)
             where T : unmanaged
                 => gmath.srl(eval(a).Value, eval(offset).Value);
 
         [MethodImpl(Inline)]
-        static Literal<T> rotl<T>(IExpr<T> a, IExpr<int> offset)
+        static LiteralExpr<T> rotl<T>(IExpr<T> a, IExpr<int> offset)
             where T : unmanaged
                 => gbits.rotl(eval(a).Value, eval(offset).Value);
 
         [MethodImpl(Inline)]
-        static Literal<T> rotr<T>(IExpr<T> a, IExpr<int> offset)
+        static LiteralExpr<T> rotr<T>(IExpr<T> a, IExpr<int> offset)
             where T : unmanaged
                 => gbits.rotr(eval(a).Value, eval(offset).Value);
 
         [MethodImpl(Inline)]
-        static Literal<T> inc<T>(IExpr<T> a)
+        static LiteralExpr<T> inc<T>(IExpr<T> a)
             where T : unmanaged
                 => gmath.inc(eval(a).Value);
 
         [MethodImpl(Inline)]
-        static Literal<T> dec<T>(IExpr<T> a)
+        static LiteralExpr<T> dec<T>(IExpr<T> a)
             where T : unmanaged
                 => gmath.dec(eval(a).Value);
 
-        static Literal<T> unhandled<T>(IExpr<T> a)
+        static LiteralExpr<T> unhandled<T>(IExpr<T> a)
             where T : unmanaged
                 => throw new Exception($"{a} unhandled");
 

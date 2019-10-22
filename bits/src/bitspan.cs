@@ -116,7 +116,6 @@ namespace Z0
         public static Span<ulong> rotr(ReadOnlySpan<ulong> src, ulong offset)
             => rotr(src,offset,src.Replicate(true));
 
-
         public static Span<byte> rotl(ReadOnlySpan<byte> src, byte offset, Span<byte> dst)
         {
             for(var i=0; i<src.Length; i++)

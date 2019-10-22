@@ -1,4 +1,4 @@
-// 2019-10-20 22:42:13:742
+// 2019-10-21 17:21:44:548
 void bm_and_16x16u(BitMatrix16 A, BitMatrix16 B, BitMatrix16 C)
 {
     IL_0000: ldarg.0

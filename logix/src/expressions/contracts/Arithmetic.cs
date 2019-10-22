@@ -60,7 +60,7 @@ namespace Z0
     }
 
 
-    public interface IUnaryArithmeticOp<T> :  IUnaryArithmeticOp,  IUnaryOp<T>, IArithmeticOp<T,UnaryArithmeticOpKind>
+    public interface IUnaryArithmeticOp<T> :  IUnaryArithmeticOp,  IArithmeticOp<T,UnaryArithmeticOpKind>
         where T : unmanaged
     {
         /// <summary>

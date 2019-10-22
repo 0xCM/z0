@@ -26,10 +26,6 @@ namespace Z0
             where T : unmanaged
                 => default;
 
-        [MethodImpl(Inline)]
-        public static Vector128<T> one<T>()
-            where T : unmanaged
-                => Vec128Pattern.ones<T>();
 
         [MethodImpl(Inline)]
         public static Vector128<T> not<T>(Vector128<T> a)

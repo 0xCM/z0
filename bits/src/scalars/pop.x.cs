@@ -14,18 +14,6 @@ namespace Z0
 
     partial class BitsX
     {
-        public static ulong PopCount(this ReadOnlySpan<Bit> src)
-        {
-            var count = 0ul;
-            for(var i=0; i<src.Length; i++)
-                if(src[i]) 
-                    count++;
-            return count;
-        }
-
-        [MethodImpl(Inline)]        
-        public static ulong PopCount(this Span<Bit> src)
-            => src.ReadOnly().PopCount();
 
                
         [MethodImpl(Inline)]   

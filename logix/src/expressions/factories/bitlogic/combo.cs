@@ -14,6 +14,97 @@ namespace Z0
     partial class BitLogicSpec
     {
        /// <summary>
+       /// Computes all bit sequence expressions of length n <= 8
+       /// </summary>
+       public static IEnumerable<BitLiteralSeq> bitcombo(int n)
+       {
+           switch(n)
+           {
+                case 1:
+                {
+                    return 
+                        from a in bit.B01
+                        select bitseq(a);
+                }
+                case 2:
+                {
+                    return 
+                        from a in bit.B01
+                        from b in bit.B01
+                        select bitseq(a,b);
+                }
+                case 3:
+                {
+                    return 
+                        from a in bit.B01
+                        from b in bit.B01
+                        from c in bit.B01
+                        select bitseq(a,b,c);
+                }
+                case 4:
+                {
+                    return 
+                        from a in bit.B01
+                        from b in bit.B01
+                        from c in bit.B01
+                        from d in bit.B01
+                        select bitseq(a,b,c,d);
+                }
+                case 5:
+                {
+                    return 
+                        from a in bit.B01
+                        from b in bit.B01
+                        from c in bit.B01
+                        from d in bit.B01
+                        from e in bit.B01
+                        select bitseq(a,b,c,d,e);
+                }
+                case 6:
+                {
+                    return 
+                        from a in bit.B01
+                        from b in bit.B01
+                        from c in bit.B01
+                        from d in bit.B01
+                        from e in bit.B01
+                        from f in bit.B01
+                        select bitseq(a,b,c,d,e,f);
+                }
+                case 7:
+                {
+                    return 
+                        from a in bit.B01
+                        from b in bit.B01
+                        from c in bit.B01
+                        from d in bit.B01
+                        from e in bit.B01
+                        from f in bit.B01
+                        from g in bit.B01
+                        select bitseq(a,b,c,d,e,f,g);
+                }
+                case 8:
+                {
+                    return 
+                        from a in bit.B01
+                        from b in bit.B01
+                        from c in bit.B01
+                        from d in bit.B01
+                        from e in bit.B01
+                        from f in bit.B01
+                        from g in bit.B01
+                        from h in bit.B01
+                        select bitseq(a,b,c,d,e,f,g,h);
+                }
+                default:
+                    return new BitLiteralSeq[0]{};
+
+           }
+           
+
+       }
+       
+        /// <summary>
         /// Computes all bit sequence expressions of length 1
         /// </summary>
         /// <param name="n">The natural selector</param>

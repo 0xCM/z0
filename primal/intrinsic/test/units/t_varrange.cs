@@ -15,7 +15,7 @@ namespace Z0.Test
     {     
         public void shift128()
         {
-            var x = Vec128Pattern.ones<ulong>();
+            var x = ginx.vones<ulong>(n128);
             var y = dinx.vsllx(x,19);
             var z = dinx.vslrx(x,19);
             Trace(x.ToBitString());

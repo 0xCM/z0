@@ -24,7 +24,7 @@ namespace Z0
         /// <param name="src">The memory source</param>
         /// <param name="mask">Hi bit on selects the memory, otherwise set to zero</param>
         [MethodImpl(Inline)]
-        public static unsafe Vec128<float> vmaskload(ref float src, Vec128<float> mask)
+        public static unsafe Vector128<float> vmaskload(ref float src, Vector128<float> mask)
             => MaskLoad(refptr(ref src), mask);
 
         /// <summary>
@@ -33,7 +33,7 @@ namespace Z0
         /// <param name="src">The memory source</param>
         /// <param name="mask">Hi bit on selects the memory, otherwise set to zero</param>
         [MethodImpl(Inline)]
-        public static unsafe Vec128<double> vmaskload(ref double src, Vec128<double> mask)
+        public static unsafe Vector128<double> vmaskload(ref double src, Vector128<double> mask)
             => MaskLoad(refptr(ref src), mask);
 
         /// <summary>

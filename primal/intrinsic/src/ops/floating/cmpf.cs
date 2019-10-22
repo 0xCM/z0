@@ -50,7 +50,6 @@ namespace Z0
         public static bool nonz(in Vec256<double> src) 
             => ! TestZ(src,src);          
 
-
         /// <summary>
         /// __m128 _mm_cmple_ps (__m128 a, __m128 b) CMPPS xmm, xmm/m128, imm8(2)
         /// </summary>

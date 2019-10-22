@@ -10,10 +10,6 @@ namespace Z0
     
     using static zfunc;
 
-    public static class TypedExprSpec
-    {
-        
-    }
 
     public static partial class TypedLogicSpec
     {
@@ -23,9 +19,9 @@ namespace Z0
         /// <param name="value">The literal value</param>
         /// <typeparam name="T">The literal type</typeparam>
         [MethodImpl(Inline)]
-        public static Literal<T> literal<T>(T value)
+        public static LiteralExpr<T> literal<T>(T value)
             where T : unmanaged
-                => new Literal<T>(value);
+                => new LiteralExpr<T>(value);
 
         /// <summary>
         /// Creates a bitwise unary expression
@@ -72,6 +68,8 @@ namespace Z0
         public static RangeExpr<T> rangexpr<T>(T min, T max)
             where T : unmanaged
                 => new RangeExpr<T>(min,max);
+
+        
 
     }       
 }

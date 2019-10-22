@@ -13,17 +13,7 @@ namespace Z0
 
     public static partial class loc
     {
-        public static Vec128<ulong> zero_v128x64u()
-            => Vec128Pattern.zeroes<ulong>();
 
-        public static Vector256<ulong> zero_v256x64u()
-            => Vec256Pattern.zeroes<ulong>();
-
-        public static Vector256<ulong> one_v256x64u()
-            => Cpu256Ops.one<ulong>();
-
-        public static Vec128<ulong> one_v128x64u()
-            => Cpu128Ops.one<ulong>();
 
         public static uint composition_54(uint v1, uint v2)
             => ScalarOps.or(v2, ScalarOps.xor(v1,ScalarOps.and(v1, ScalarOps.nand(v2, ScalarOps.not(v1)))));

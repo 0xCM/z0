@@ -137,7 +137,7 @@ namespace Z0.Test
                     if(!xbs[j])
                         ybs[j] = Bit.On;
 
-                var y = ybs.ToCpuVec<T>(n128);
+                var y = ybs.ToCpuVector<T>(n128);
 
                 var z = ginx.testz(x,y);
                 Claim.yea(z);
@@ -160,7 +160,7 @@ namespace Z0.Test
                     if(!xbs[j])
                         ybs[j] = Bit.On;
 
-                var y = ybs.ToCpuVec<T>(n256);
+                var y = ybs.ToCpuVector<T>(n256);
 
                 var z = ginx.testz(x,y);
                 Claim.yea(z);

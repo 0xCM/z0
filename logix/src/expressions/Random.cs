@@ -22,7 +22,7 @@ namespace Z0
         /// <param name="current"></param>
         /// <typeparam name="T">The primal value over which the variable is defined</typeparam>
         [MethodImpl(Inline)]
-        public static T Set<T>(this IPolyrand random, Variable<T> current)
+        public static T Set<T>(this IPolyrand random, VariableExpr<T> current)
             where T : unmanaged
         {
             var a = random.Next<T>();

@@ -45,15 +45,6 @@ namespace Z0
             return dst;
         }
 
-        // [MethodImpl(Inline)]
-        // public static Span<T> ToSpan<T>(this Vector128<T> src)
-        //     where T : unmanaged            
-        // {
-        //     Span<T> dst = new T[Vec128<T>.Length];
-        //     vstore(src, ref head(dst));
-        //     return dst;
-        // }
-
         /// <summary>
         /// Specifies the length, i.e. the number of components, of an
         /// intrnsic vector
@@ -85,15 +76,6 @@ namespace Z0
             return dst;
         }
 
-        // [MethodImpl(Inline)]
-        // public static Span<T> ToSpan<T>(this Vector256<T> src)
-        //     where T : unmanaged            
-        // {
-        //     Span<T> dst = new T[Vec256<T>.Length];
-        //     vstore(src, ref head(dst));
-        //     return dst;
-        // }
-
         /// <summary>
         /// Loads a 256-bit cpu vector from a blocked span
         /// </summary>
@@ -105,6 +87,7 @@ namespace Z0
             where T : unmanaged
                 => Vec256.Load(ref src.Block(block));
 
+
         /// <summary>
         /// Loads a 128-bit cpu vector from a blocked span
         /// </summary>
@@ -115,6 +98,29 @@ namespace Z0
         public static Vec128<T> ToCpuVec128<T>(this Span128<T> src, int block = 0)
             where T : unmanaged
                 => Vec128.Load(ref src.Block(block));
+
+        /// <summary>
+        /// Loads a 128-bit cpu vector from a blocked span
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <param name="block">The block index</param>
+        /// <typeparam name="T">The primal type</typeparam>
+        [MethodImpl(Inline)]
+        public static Vector128<T> ToCpuVector128<T>(this Span128<T> src, int block = 0)
+            where T : unmanaged
+                => ginx.vloadu128(in src.Block(block));
+
+        /// <summary>
+        /// Loads a 256-bit cpu vector from a blocked span
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <param name="block">The block index</param>
+        /// <typeparam name="T">The primal type</typeparam>
+        [MethodImpl(Inline)]
+        public static Vector256<T> ToCpuVector256<T>(this Span256<T> src, int block = 0)
+            where T : unmanaged
+                => ginx.vloadu256(in src.Block(block));
+
 
         /// <summary>
         /// Projects a 128-bit source vector into a 128-bit target vector via a mapping function
@@ -144,17 +150,38 @@ namespace Z0
         /// <param name="f">The mapping function</param>
         /// <typeparam name="S">The source primal type</typeparam>
         /// <typeparam name="T">The target primal type</typeparam>
-        public static Vec128<T> Map128<S,T>(this Vec128<S> lhs, Vec128<S> rhs, Func<S,S,T> f)
+        public static Vector128<T> Map128<S,T>(this Vector128<S> lhs, Vector128<S> rhs, Func<S,S,T> f)
             where T : unmanaged
             where S : unmanaged
         {
             var xLen = Math.Min(Vec128<S>.Length, Vec128<T>.Length);
             var dstLen = Vec128<T>.Length;
-            var data = lhs.ToSpan();
+            var lhsData = lhs.ToSpan();
+            var rhsData = rhs.ToSpan();
             Span<T> dst = new T[dstLen];
             for(var i=0; i< xLen; i++)
-                dst[i] = f(lhs[i],rhs[i]);
-            return Vec128.Load(ref head(dst));        
+                dst[i] = f(lhsData[i],rhsData[i]);
+            return ginx.vloadu128(in head(dst));        
+        } 
+
+        /// <summary>
+        /// Projects a 128-bit source vector into a 128-bit target vector via a mapping function
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="f">The mapping function</param>
+        /// <typeparam name="S">The source primal type</typeparam>
+        /// <typeparam name="T">The target primal type</typeparam>
+        public static Vector128<T> Map128<S,T>(this Vector128<S> src, Func<S,T> f)
+            where T : unmanaged
+            where S : unmanaged
+        {
+            var xLen = Math.Min(Vector128<S>.Count, Vector128<T>.Count);
+            var dstLen = Vec128<T>.Length;
+            var data = src.ToSpan();            
+            Span<T> dst = new T[dstLen];
+            for(var i=0; i< xLen; i++)
+                dst[i] = f(data[i]);
+            return ginx.vloadu128(in head(dst));        
         } 
 
         /// <summary>
@@ -167,18 +194,19 @@ namespace Z0
         /// <param name="f">The mapping function</param>
         /// <typeparam name="S">The source primal type</typeparam>
         /// <typeparam name="T">The target primal type</typeparam>
-        public static Vec256<T> Map256<T>(this Vec128<T> lhs, Vec128<T> rhs, Func<T,T> f)
+        public static Vec256<T> Map256<T>(this Vector128<T> lhs, Vector128<T> rhs, Func<T,T> f)
             where T : unmanaged
         {
             var srcLen = Vec128<T>.Length;
             var dstLen = 2*srcLen;
-            var data = lhs.ToSpan();
+            var lhsData = lhs.ToSpan();
+            var rhsData = rhs.ToSpan();
             Span<T> dst = new T[dstLen];
             var j=0;
             for(var i=0; i< srcLen; i++)
             {
-                dst[j++] = f(lhs[i]);
-                dst[j++] = f(rhs[i]);
+                dst[j++] = f(lhsData[i]);
+                dst[j++] = f(rhsData[i]);
             }
             
             return Vec256.Load(ref head(dst));        
@@ -212,17 +240,18 @@ namespace Z0
         /// <param name="f">The mapping function</param>
         /// <typeparam name="S">The source primal type</typeparam>
         /// <typeparam name="T">The target primal type</typeparam>
-        public static Vec256<T> Map256<S,T>(this Vec256<S> lhs, Vec256<S> rhs, Func<S,S,T> f)
+        public static Vector256<T> Map256<S,T>(this Vector256<S> lhs, Vector256<S> rhs, Func<S,S,T> f)
             where T : unmanaged
             where S : unmanaged
         {
-            var xLen = Math.Min(Vec256<S>.Length, Vec256<T>.Length);
-            var dstLen = Vec256<T>.Length;
-            var data = lhs.ToSpan();
+            var xLen = Math.Min(Vector256<S>.Count, Vector256<T>.Count);
+            var dstLen = Vector256<T>.Count;
+            var lhsData = lhs.ToSpan();
+            var rhsData = rhs.ToSpan();
             Span<T> dst = new T[dstLen];
             for(var i=0; i< xLen; i++)
-                dst[i] = f(lhs[i],rhs[i]);
-            return Vec256.Load(ref head(dst));        
+                dst[i] = f(lhsData[i],rhsData[i]);
+            return ginx.vloadu256(in head(dst));        
         } 
     }
 }
