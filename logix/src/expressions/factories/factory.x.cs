@@ -13,7 +13,7 @@ namespace Z0.Logix
     public static class ExprX
     {
         [MethodImpl(Inline)]
-        static VariableExpr<T> Assign<T>(this VariableExpr<T> v, IExpr<T> value)
+        static VariableExpr<T> Assign<T>(this VariableExpr<T> v, ITypedExpr<T> value)
             where T : unmanaged
         {
             if(value != null)
@@ -47,7 +47,7 @@ namespace Z0.Logix
         /// <param name="value">The value, if any, to assign the variable</param>
         /// <typeparam name="T">The type over which the expression is defined</typeparam>
         [MethodImpl(Inline)]
-        public static VariableExpr<T> Var0<T>(this VariedExpr<N1,T> src, IExpr<T> value)
+        public static VariableExpr<T> Var0<T>(this VariedExpr<N1,T> src, ITypedExpr<T> value)
             where T : unmanaged
                 => src.Var0().Assign(value);
 
@@ -80,7 +80,7 @@ namespace Z0.Logix
         /// <param name="value">The value, if any, to assign the variable</param>
         /// <typeparam name="T">The type over which the expression is defined</typeparam>
         [MethodImpl(Inline)]
-        public static VariableExpr<T> Var0<T>(this VariedExpr<N2,T> src, IExpr<T> value)
+        public static VariableExpr<T> Var0<T>(this VariedExpr<N2,T> src, ITypedExpr<T> value)
             where T : unmanaged
                 => src.Var0().Assign(value);
 
@@ -113,7 +113,7 @@ namespace Z0.Logix
         /// <param name="value">The value, if any, to assign the variable</param>
         /// <typeparam name="T">The type over which the expression is defined</typeparam>
         [MethodImpl(Inline)]
-        public static VariableExpr<T> Var1<T>(this VariedExpr<N2,T> src, IExpr<T> value)
+        public static VariableExpr<T> Var1<T>(this VariedExpr<N2,T> src, ITypedExpr<T> value)
             where T : unmanaged
                 => src.Var1().Assign(value);
 
@@ -146,7 +146,7 @@ namespace Z0.Logix
         /// <param name="value">The value, if any, to assign the variable</param>
         /// <typeparam name="T">The type over which the expression is defined</typeparam>
         [MethodImpl(Inline)]
-        public static VariableExpr<T> Var0<T>(this VariedExpr<N3,T> src, IExpr<T> value)
+        public static VariableExpr<T> Var0<T>(this VariedExpr<N3,T> src, ITypedExpr<T> value)
             where T : unmanaged
                 => src.Var0().Assign(value);
 
@@ -179,7 +179,7 @@ namespace Z0.Logix
         /// <param name="value">The value, if any, to assign the variable</param>
         /// <typeparam name="T">The type over which the expression is defined</typeparam>
         [MethodImpl(Inline)]
-        public static VariableExpr<T> Var1<T>(this VariedExpr<N3,T> src, IExpr<T> value)
+        public static VariableExpr<T> Var1<T>(this VariedExpr<N3,T> src, ITypedExpr<T> value)
             where T : unmanaged
                 => src.Var1().Assign(value);
 
@@ -212,7 +212,7 @@ namespace Z0.Logix
         /// <param name="value">The value, if any, to assign the variable</param>
         /// <typeparam name="T">The type over which the expression is defined</typeparam>
         [MethodImpl(Inline)]
-        public static VariableExpr<T> Var2<T>(this VariedExpr<N3,T> src, IExpr<T> value)
+        public static VariableExpr<T> Var2<T>(this VariedExpr<N3,T> src, ITypedExpr<T> value)
             where T : unmanaged
                 => src.Var2().Assign(value);
 

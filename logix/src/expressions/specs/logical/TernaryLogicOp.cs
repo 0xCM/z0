@@ -16,7 +16,7 @@ namespace Z0.Logix
     public sealed class TernaryLogicOp : ITernaryLogicOp
     {
         [MethodImpl(Inline)]
-        public TernaryLogicOp(TernaryLogicOpKind op, ILogicExpr first, ILogicExpr second, ILogicExpr third)
+        public TernaryLogicOp(Ternary512OpKind op, ILogicExpr first, ILogicExpr second, ILogicExpr third)
         {
             this.OpKind = op;
             this.FirstArg = first;
@@ -33,7 +33,7 @@ namespace Z0.Logix
         /// <summary>
         /// The operator
         /// </summary>
-        public TernaryLogicOpKind OpKind {get;}
+        public Ternary512OpKind OpKind {get;}
 
         /// <summary>
         /// The first operand

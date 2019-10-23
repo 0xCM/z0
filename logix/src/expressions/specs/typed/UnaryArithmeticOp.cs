@@ -16,7 +16,7 @@ namespace Z0.Logix
     public sealed class UnaryAritheticOp<T> : IUnaryArithmeticOp<T>
         where T : unmanaged
     {
-        public UnaryAritheticOp(UnaryArithmeticOpKind op, IExpr<T> operand)
+        public UnaryAritheticOp(UnaryArithmeticOpKind op, ITypedExpr<T> operand)
         {
             this.OpKind = op;
             this.Operand = operand;
@@ -37,7 +37,7 @@ namespace Z0.Logix
         /// <summary>
         /// The operand
         /// </summary>
-        public IExpr<T> Operand {get;}
+        public ITypedExpr<T> Operand {get;}
 
 
         public string Format()

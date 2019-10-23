@@ -19,7 +19,7 @@ namespace Z0.Logix
         {
             switch(expr)
             {
-                case ILiteralExpr<T> x:
+                case ITypedLiteral<T> x:
                     return eval(x);
                 case IVarExpr<T> x:
                     return eval(x);
@@ -32,7 +32,7 @@ namespace Z0.Logix
         }
 
         [MethodImpl(Inline)]
-        static LiteralExpr<T> eval<T>(ILiteralExpr<T> expr)
+        static LiteralExpr<T> eval<T>(ITypedLiteral<T> expr)
             where T : unmanaged
                 => expr.Value;
 
@@ -73,7 +73,7 @@ namespace Z0.Logix
             }
         }
 
-        static LiteralExpr<T> unhandled<T>(IExpr<T> a)
+        static LiteralExpr<T> unhandled<T>(ITypedExpr<T> a)
             where T : unmanaged
                 => throw new Exception($"{a} unhandled");
 

@@ -17,11 +17,11 @@ namespace Z0.Logix
             where T : unmanaged
                 => throw new NotSupportedException($"{id}");
 
-       internal static BinaryOpSpec<T> nologic<T>(BinaryLogicOpKind id, T x = default)        
+       internal static BinaryBitwiseOp<T> nologic<T>(BinaryLogicOpKind id, T x = default)        
             where T : unmanaged
                 => throw new NotSupportedException($"{id}");
 
-       internal static TernaryOpSpec<T> nologic<T>(TernaryLogicOpKind id, T x = default)        
+       internal static TernaryOpSpec<T> nologic<T>(Ternary512OpKind id, T x = default)        
             where T : unmanaged
                 => throw new NotSupportedException($"{id}");
 
@@ -33,7 +33,15 @@ namespace Z0.Logix
             where T : unmanaged
                 => throw new NotSupportedException($"{id}");
 
+       internal static UnaryOp<T> dne<T>(UnaryBitwiseOpKind id, T x = default)        
+            where T : unmanaged
+                => throw new NotSupportedException($"{id}");
+
        internal static BinaryOp<T> dne<T>(BinaryLogicOpKind id, T x = default)        
+            where T : unmanaged
+                => throw new NotSupportedException($"{id}");
+
+       internal static BinaryOp<T> dne<T>(BinaryBitwiseOpKind id, T x = default)        
             where T : unmanaged
                 => throw new NotSupportedException($"{id}");
 
@@ -45,7 +53,7 @@ namespace Z0.Logix
             where T : unmanaged
                 => throw new NotSupportedException($"{id}");
 
-       internal static TernaryOp<T> dne<T>(TernaryLogicOpKind id, T x = default)        
+       internal static TernaryOp<T> dne<T>(Ternary512OpKind id, T x = default)        
             where T : unmanaged
                 => throw new NotSupportedException($"{id}");
 
@@ -54,7 +62,7 @@ namespace Z0.Logix
             where E : Enum
                 => throw new NotSupportedException($"{id}");
 
-        internal static void Set<T>(IVariedExpr<T> expr, params IExpr<T>[] values)
+        internal static void Set<T>(IVariedExpr<T> expr, params ITypedExpr<T>[] values)
             where T : unmanaged
         {
             var n = Math.Min(expr.Vars.Length, values.Length);

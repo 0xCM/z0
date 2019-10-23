@@ -8,14 +8,15 @@ namespace Z0.Logix
     
     using static zfunc;
 
+
     /// <summary>
-    /// Defines classifiers for binary (2-argument) operators
+    /// Defines classifiers for logical binary operators
     /// </summary>
     [Flags]
     public enum BinaryLogicOpKind : uint
     {        
         /// <summary>
-        /// Identifies an operator that always returns FALSE, irrespective of the supplied operands
+        /// Identifies a binary operator that always returns FALSE
         /// </summary>
         False = 0b0000,
 

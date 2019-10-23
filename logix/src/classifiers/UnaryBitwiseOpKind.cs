@@ -5,26 +5,27 @@
 namespace Z0.Logix
 {
     using System;
-    using System.Linq;
-    using System.Runtime.CompilerServices;
     
     using static zfunc;
 
-    public interface IShiftOp : IOpExpr
-    {
-        
-    }
 
-    public interface IShiftOp<T> : IShiftOp, IOpExpr<T, ShiftOpKind>
-        where T : unmanaged
+    public enum UnaryBitwiseOpKind : uint
     {
         /// <summary>
-        /// The thing to shift
+        /// Logial NOT
         /// </summary>
-        ITypedExpr<T> Subject {get;}
+        Not = UnaryLogicOpKind.Not,
 
+        /// <summary>
+        /// The identity operator
+        /// </summary>
+        Identity = UnaryLogicOpKind.Identity,
 
-        ITypedExpr<int> Offset {get;}
+        /// <summary>
+        /// Two's complement negation
+        /// </summary>
+        Negate = Pow2.T08,
+
     }
 
 }

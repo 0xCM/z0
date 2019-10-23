@@ -94,7 +94,7 @@ namespace Z0.Logix
         }
 
 
-        void check_4x2(BinaryLogicOpKind k0, BinaryLogicOpKind k1)
+        void check_4x2(BinaryBitwiseOpKind k0, BinaryBitwiseOpKind k1)
         {
             check_4x2<byte>(k0,k1);
             check_4x2<ushort>(k0,k1);
@@ -102,7 +102,7 @@ namespace Z0.Logix
             check_4x2<ulong>(k0,k1);
         }
 
-        void check_4x2<T>(BinaryLogicOpKind k0, BinaryLogicOpKind k1)
+        void check_4x2<T>(BinaryBitwiseOpKind k0, BinaryBitwiseOpKind k1)
             where T : unmanaged
         {
             var v0 = variable<T>(0);
@@ -138,7 +138,7 @@ namespace Z0.Logix
             }
         }
 
-        void check_binop_vars(BinaryLogicOpKind kind)
+        void check_binop_vars(BinaryBitwiseOpKind kind)
         {
             check_binop_vars<byte>(kind);
             check_binop_vars<ushort>(kind);
@@ -146,7 +146,7 @@ namespace Z0.Logix
             check_binop_vars<ulong>(kind);
         }
 
-        void check_binop_vars<T>(BinaryLogicOpKind kind)
+        void check_binop_vars<T>(BinaryBitwiseOpKind kind)
             where T : unmanaged
         {
             var v0 = variable<T>(0);

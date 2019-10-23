@@ -27,22 +27,22 @@ namespace Z0.Logix
         }
 
         public void check_and() 
-            => check_binary_ops(BinaryLogicOpKind.And);
+            => check_binary_ops(BinaryBitwiseOpKind.And);
 
         public void check_nand()        
-            => check_binary_ops(BinaryLogicOpKind.Nand);
+            => check_binary_ops(BinaryBitwiseOpKind.Nand);
 
         public void check_or()        
-            => check_binary_ops(BinaryLogicOpKind.Or);
+            => check_binary_ops(BinaryBitwiseOpKind.Or);
 
         public void check_nor()        
-            => check_binary_ops(BinaryLogicOpKind.Nor);
+            => check_binary_ops(BinaryBitwiseOpKind.Nor);
 
         public void check_xor()        
-            => check_binary_ops(BinaryLogicOpKind.XOr);
+            => check_binary_ops(BinaryBitwiseOpKind.XOr);
 
         public void check_xnor()        
-            => check_binary_ops(BinaryLogicOpKind.Xnor);
+            => check_binary_ops(BinaryBitwiseOpKind.Xnor);
 
         public void check_select()
         {
@@ -99,6 +99,7 @@ namespace Z0.Logix
 
         }
 
+
         void check_select_256<T>()
             where T : unmanaged
         {
@@ -121,7 +122,7 @@ namespace Z0.Logix
         }
 
 
-        void check_binary_ops(BinaryLogicOpKind op)
+        void check_binary_ops(BinaryBitwiseOpKind op)
         {
             check_binary_op<byte>(op);
             check_binary_op<ushort>(op);
@@ -129,7 +130,7 @@ namespace Z0.Logix
             check_binary_op<ulong>(op);
         }
 
-        void check_op_identity<T>(TernaryLogicOpKind id)
+        void check_op_identity<T>(Ternary512OpKind id)
             where T: unmanaged
         {
             var a = convert<T>(0b1111_0000);
@@ -142,10 +143,10 @@ namespace Z0.Logix
             Claim.eq(expect.FormatHex(), actual.FormatHex());
         }
 
-        void check_binary_op<T>(BinaryLogicOpKind id)
+        void check_binary_op<T>(BinaryBitwiseOpKind id)
             where T : unmanaged
         {
-            var BL = LogicOpApi.lookup(id);
+            var BL = LogicOpApi.lookup((BinaryLogicOpKind)id);
             var SC = ScalarOpApi.lookup<T>(id);
             
             for(var sample = 0; sample< SampleSize; sample++)
@@ -166,28 +167,6 @@ namespace Z0.Logix
             }
         }
 
-        void check_select<V,T>()
-            where V : unmanaged, IBitVector<V>
-            where T : unmanaged
-        {
-            for(var sample = 0; sample< SampleSize; sample++)
-            {
-                var a = Random.Next<T>();
-                var b = Random.Next<T>();
-                var c = Random.Next<T>();
-                
-                var z0 = BitVector.Generic<T>();
-                var va = BitVector.Generic(a);
-                var vb = BitVector.Generic(b);
-                var vc = BitVector.Generic(b);
-
-                for(var i=0; i< z0.Length; i++)
-                    z0[i] = bit.select(va[i],vb[i],vc[i]);
-                
-                var z3 = ScalarOps.select(a, b, c);
-                Claim.eq(z3, z0.Data);                                
-            }
-        }
 
     }
 }

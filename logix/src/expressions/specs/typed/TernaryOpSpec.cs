@@ -17,7 +17,7 @@ namespace Z0.Logix
         where T : unmanaged
     {
         [MethodImpl(Inline)]
-        public TernaryOpSpec(TernaryLogicOpKind op, IExpr<T> first, IExpr<T> second, IExpr<T> third)
+        public TernaryOpSpec(Ternary512OpKind op, ITypedExpr<T> first, ITypedExpr<T> second, ITypedExpr<T> third)
         {
             this.OpKind = op;
             this.FirstArg = first;
@@ -34,23 +34,23 @@ namespace Z0.Logix
         /// <summary>
         /// The operator
         /// </summary>
-        public TernaryLogicOpKind OpKind {get;}
+        public Ternary512OpKind OpKind {get;}
 
 
         /// <summary>
         /// The first operand
         /// </summary>
-        public IExpr<T> FirstArg {get;}
+        public ITypedExpr<T> FirstArg {get;}
 
         /// <summary>
         /// The second operand
         /// </summary>
-        public IExpr<T> SecondArg {get;}
+        public ITypedExpr<T> SecondArg {get;}
 
         /// <summary>
         /// The third operand
         /// </summary>
-        public IExpr<T> ThirdArg {get;}
+        public ITypedExpr<T> ThirdArg {get;}
 
         public string Format()
             => OpKind.Format(FirstArg,SecondArg,ThirdArg);

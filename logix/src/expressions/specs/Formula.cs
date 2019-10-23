@@ -35,12 +35,12 @@ namespace Z0.Logix
     public sealed class Formula<T> : Formula, IFormula<T>
         where T : unmanaged
     {
-        public Formula(string name, IExpr<T> encoding)
+        public Formula(string name, ITypedExpr<T> encoding)
             : base(name,encoding)
         {
             this.Encoding = encoding;
         }
-        public new IExpr<T> Encoding {get;}
+        public new ITypedExpr<T> Encoding {get;}
     }
 
 }

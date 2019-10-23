@@ -18,7 +18,7 @@ namespace Z0.Logix
         
     }
 
-    public interface ITernaryLogicOp : ITernaryOp, ILogicOpExpr<TernaryLogicOpKind>
+    public interface ITernaryLogicOp : ITernaryOp, ILogicOpExpr<Ternary512OpKind>
     {
 
         /// <summary>
@@ -42,23 +42,23 @@ namespace Z0.Logix
     /// </summary>
     /// <typeparam name="T">The type over which the operator is defined</typeparam>
     /// <typeparam name="K">The operator classifier</typeparam>
-    public interface ITernaryOp<T> : ITernaryOp, IOpExpr<T,TernaryLogicOpKind> 
+    public interface ITernaryOp<T> : ITernaryOp, IOpExpr<T,Ternary512OpKind> 
         where T : unmanaged
     {
         /// <summary>
         /// The first operand
         /// </summary>
-        IExpr<T> FirstArg {get;}
+        ITypedExpr<T> FirstArg {get;}
 
         /// <summary>
         /// The second operand
         /// </summary>
-        IExpr<T> SecondArg {get;}
+        ITypedExpr<T> SecondArg {get;}
 
         /// <summary>
         /// The third operand
         /// </summary>
-        IExpr<T> ThirdArg {get;}
+        ITypedExpr<T> ThirdArg {get;}
 
     }
 

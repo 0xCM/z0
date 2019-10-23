@@ -33,7 +33,7 @@ namespace Z0.Logix
         /// </summary>
         /// <param name="expr">The expression to evaluate</param>
         [MethodImpl(Inline)]
-        public static LiteralExpr<T> eval<T>(IExpr<T> expr)
+        public static LiteralExpr<T> eval<T>(ITypedExpr<T> expr)
             where T : unmanaged
                 => ScalarExprEval.eval(expr);
         
@@ -42,7 +42,7 @@ namespace Z0.Logix
         /// </summary>
         /// <param name="expr">The expression to evaluate</param>
         [MethodImpl(Inline)]
-        public static LiteralExpr<Vector128<T>> eval<T>(IExpr<Vector128<T>> expr)
+        public static LiteralExpr<Vector128<T>> eval<T>(ITypedExpr<Vector128<T>> expr)
             where T : unmanaged
                 => VectorExprEval.eval(expr);
 
@@ -51,7 +51,7 @@ namespace Z0.Logix
         /// </summary>
         /// <param name="expr">The expression to evaluate</param>
         [MethodImpl(Inline)]
-        public static LiteralExpr<Vector256<T>> eval<T>(IExpr<Vector256<T>> expr)
+        public static LiteralExpr<Vector256<T>> eval<T>(ITypedExpr<Vector256<T>> expr)
             where T : unmanaged
                 => VectorExprEval.eval(expr);
   

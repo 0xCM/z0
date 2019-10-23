@@ -20,234 +20,234 @@ namespace Z0.Logix
 
         public void check_not()  
         {      
-            check_op<byte>(UnaryLogicOpKind.Not);
-            check_op<ushort>(UnaryLogicOpKind.Not);
-            check_op<uint>(UnaryLogicOpKind.Not);
-            check_op<ulong>(UnaryLogicOpKind.Not);
+            check_op<byte>(UnaryBitwiseOpKind.Not);
+            check_op<ushort>(UnaryBitwiseOpKind.Not);
+            check_op<uint>(UnaryBitwiseOpKind.Not);
+            check_op<ulong>(UnaryBitwiseOpKind.Not);
         }
 
 
         // ~ and
         public void check_and_8u()
-            => check_op<byte>(BinaryLogicOpKind.And);
+            => check_op<byte>(BinaryBitwiseOpKind.And);
 
         public void check_and_16u()
-            => check_op<ushort>(BinaryLogicOpKind.And);
+            => check_op<ushort>(BinaryBitwiseOpKind.And);
         public void check_and_32u()
-            => check_op<uint>(BinaryLogicOpKind.And);
+            => check_op<uint>(BinaryBitwiseOpKind.And);
         public void check_and_64u()
-            => check_op<ulong>(BinaryLogicOpKind.And);
+            => check_op<ulong>(BinaryBitwiseOpKind.And);
 
         public void check_and_128x8u()
-            => check_op_128<byte>(BinaryLogicOpKind.And);
+            => check_op_128<byte>(BinaryBitwiseOpKind.And);
 
         public void check_and_128x16u()
-            => check_op_128<ushort>(BinaryLogicOpKind.And);
+            => check_op_128<ushort>(BinaryBitwiseOpKind.And);
 
         public void check_and_128x32u()
-            => check_op_128<uint>(BinaryLogicOpKind.And);
+            => check_op_128<uint>(BinaryBitwiseOpKind.And);
 
         public void check_and_128x64u()
-            => check_op_128<ulong>(BinaryLogicOpKind.And);
+            => check_op_128<ulong>(BinaryBitwiseOpKind.And);
 
         public void check_and_256x8u()
-            => check_op_256<byte>(BinaryLogicOpKind.And);
+            => check_op_256<byte>(BinaryBitwiseOpKind.And);
 
         public void check_and_256x16u()
-            => check_op_256<ushort>(BinaryLogicOpKind.And);
+            => check_op_256<ushort>(BinaryBitwiseOpKind.And);
 
         public void check_and_256x32u()
-            => check_op_256<uint>(BinaryLogicOpKind.And);
+            => check_op_256<uint>(BinaryBitwiseOpKind.And);
 
         public void check_and_256x64u()
-            => check_op_256<ulong>(BinaryLogicOpKind.And);
+            => check_op_256<ulong>(BinaryBitwiseOpKind.And);
 
         // ~ nand
         public void check_nand_8u()
-            => check_op<byte>(BinaryLogicOpKind.Nand);
+            => check_op<byte>(BinaryBitwiseOpKind.Nand);
 
         public void check_nand_16u()
-            => check_op<ushort>(BinaryLogicOpKind.Nand);
+            => check_op<ushort>(BinaryBitwiseOpKind.Nand);
         
         public void check_nand_32u()
-            => check_op<uint>(BinaryLogicOpKind.Nand);
+            => check_op<uint>(BinaryBitwiseOpKind.Nand);
         
         public void check_nand_64u()
-            => check_op<ulong>(BinaryLogicOpKind.Nand);
+            => check_op<ulong>(BinaryBitwiseOpKind.Nand);
 
         public void check_nand_128x8u()
-            => check_op_128<byte>(BinaryLogicOpKind.Nand);
+            => check_op_128<byte>(BinaryBitwiseOpKind.Nand);
 
         public void check_nand_128x16u()
-            => check_op_128<ushort>(BinaryLogicOpKind.Nand);
+            => check_op_128<ushort>(BinaryBitwiseOpKind.Nand);
 
         public void check_nand_128x32u()
-            => check_op_128<uint>(BinaryLogicOpKind.Nand);
+            => check_op_128<uint>(BinaryBitwiseOpKind.Nand);
 
         public void check_nand_128x64u()
-            => check_op_128<ulong>(BinaryLogicOpKind.Nand);
+            => check_op_128<ulong>(BinaryBitwiseOpKind.Nand);
 
         public void check_nand_256x8u()
-            => check_op_256<byte>(BinaryLogicOpKind.Nand);
+            => check_op_256<byte>(BinaryBitwiseOpKind.Nand);
 
         public void check_nand_256x16u()
-            => check_op_256<ushort>(BinaryLogicOpKind.Nand);
+            => check_op_256<ushort>(BinaryBitwiseOpKind.Nand);
 
         public void check_nand_256x32u()
-            => check_op_256<uint>(BinaryLogicOpKind.Nand);
+            => check_op_256<uint>(BinaryBitwiseOpKind.Nand);
 
         public void check_nand_256x64u()
-            => check_op_256<ulong>(BinaryLogicOpKind.Nand);
+            => check_op_256<ulong>(BinaryBitwiseOpKind.Nand);
         
         // ~ or
         public void check_or_8u()
-            => check_op<byte>(BinaryLogicOpKind.Or);
+            => check_op<byte>(BinaryBitwiseOpKind.Or);
 
         public void check_or_128x8u()
-            => check_op_128<byte>(BinaryLogicOpKind.Or);
+            => check_op_128<byte>(BinaryBitwiseOpKind.Or);
 
         public void check_or_256x8u()
-            => check_op_256<byte>(BinaryLogicOpKind.Or);
+            => check_op_256<byte>(BinaryBitwiseOpKind.Or);
 
         public void check_or_16u()
-            => check_op<ushort>(BinaryLogicOpKind.Or);
+            => check_op<ushort>(BinaryBitwiseOpKind.Or);
 
         public void check_or_128x16u()
-            => check_op_128<ushort>(BinaryLogicOpKind.Or);
+            => check_op_128<ushort>(BinaryBitwiseOpKind.Or);
 
         public void check_or_256x16u()
-            => check_op_256<ushort>(BinaryLogicOpKind.Or);
+            => check_op_256<ushort>(BinaryBitwiseOpKind.Or);
 
         public void check_or_32u()
-            => check_op<uint>(BinaryLogicOpKind.Or);
+            => check_op<uint>(BinaryBitwiseOpKind.Or);
 
         public void check_or_128x32u()
-            => check_op_128<uint>(BinaryLogicOpKind.Or);
+            => check_op_128<uint>(BinaryBitwiseOpKind.Or);
 
         public void check_or_256x32u()
-            => check_op_256<uint>(BinaryLogicOpKind.Or);
+            => check_op_256<uint>(BinaryBitwiseOpKind.Or);
 
         public void check_or_64u()
-            => check_op<ulong>(BinaryLogicOpKind.Or);
+            => check_op<ulong>(BinaryBitwiseOpKind.Or);
 
         public void check_or_128x64u()
-            => check_op_128<ulong>(BinaryLogicOpKind.Or);
+            => check_op_128<ulong>(BinaryBitwiseOpKind.Or);
 
         public void check_or_256x64u()
-            => check_op_256<ulong>(BinaryLogicOpKind.Or);
+            => check_op_256<ulong>(BinaryBitwiseOpKind.Or);
 
         // ~ nor
         public void check_nor_8u()
-            => check_op<byte>(BinaryLogicOpKind.Nor);
+            => check_op<byte>(BinaryBitwiseOpKind.Nor);
 
         public void check_nor_128x8u()
-            => check_op_128<byte>(BinaryLogicOpKind.Nor);
+            => check_op_128<byte>(BinaryBitwiseOpKind.Nor);
 
         public void check_nor_256x8u()
-            => check_op_256<byte>(BinaryLogicOpKind.Nor);
+            => check_op_256<byte>(BinaryBitwiseOpKind.Nor);
 
         public void check_nor_16u()
-            => check_op<ushort>(BinaryLogicOpKind.Nor);
+            => check_op<ushort>(BinaryBitwiseOpKind.Nor);
 
         public void check_nor_128x16u()
-            => check_op_128<ushort>(BinaryLogicOpKind.Nor);
+            => check_op_128<ushort>(BinaryBitwiseOpKind.Nor);
 
         public void check_nor_256x16u()
-            => check_op_256<ushort>(BinaryLogicOpKind.Nor);
+            => check_op_256<ushort>(BinaryBitwiseOpKind.Nor);
 
         public void check_nor_32u()
-            => check_op<uint>(BinaryLogicOpKind.Nor);
+            => check_op<uint>(BinaryBitwiseOpKind.Nor);
 
         public void check_nor_128x32u()
-            => check_op_128<uint>(BinaryLogicOpKind.Nor);
+            => check_op_128<uint>(BinaryBitwiseOpKind.Nor);
 
         public void check_nor_256x32u()
-            => check_op_256<uint>(BinaryLogicOpKind.Nor);
+            => check_op_256<uint>(BinaryBitwiseOpKind.Nor);
 
         public void check_nor_64u()
-            => check_op<ulong>(BinaryLogicOpKind.Nor);
+            => check_op<ulong>(BinaryBitwiseOpKind.Nor);
 
         public void check_nor_128x64u()
-            => check_op_128<ulong>(BinaryLogicOpKind.Nor);
+            => check_op_128<ulong>(BinaryBitwiseOpKind.Nor);
 
         public void check_nor_256x64u()
-            => check_op_256<ulong>(BinaryLogicOpKind.Nor);
+            => check_op_256<ulong>(BinaryBitwiseOpKind.Nor);
 
         // ~ xor
 
         public void check_xor_8u()
-            => check_op<byte>(BinaryLogicOpKind.XOr);
+            => check_op<byte>(BinaryBitwiseOpKind.XOr);
 
         public void check_xor_128x8u()
-            => check_op_128<byte>(BinaryLogicOpKind.XOr);
+            => check_op_128<byte>(BinaryBitwiseOpKind.XOr);
 
         public void check_xor_256x8u()
-            => check_op_256<byte>(BinaryLogicOpKind.XOr);
+            => check_op_256<byte>(BinaryBitwiseOpKind.XOr);
 
         public void check_xor_16u()
-            => check_op<ushort>(BinaryLogicOpKind.XOr);
+            => check_op<ushort>(BinaryBitwiseOpKind.XOr);
 
         public void check_xor_128x16u()
-            => check_op_128<ushort>(BinaryLogicOpKind.XOr);
+            => check_op_128<ushort>(BinaryBitwiseOpKind.XOr);
 
         public void check_xor_256x16u()
-            => check_op_256<ushort>(BinaryLogicOpKind.XOr);
+            => check_op_256<ushort>(BinaryBitwiseOpKind.XOr);
 
         public void check_xor_32u()
-            => check_op<uint>(BinaryLogicOpKind.XOr);
+            => check_op<uint>(BinaryBitwiseOpKind.XOr);
 
         public void check_xor_128x32u()
-            => check_op_128<uint>(BinaryLogicOpKind.XOr);
+            => check_op_128<uint>(BinaryBitwiseOpKind.XOr);
 
         public void check_xor_256x32u()
-            => check_op_256<uint>(BinaryLogicOpKind.XOr);
+            => check_op_256<uint>(BinaryBitwiseOpKind.XOr);
 
         public void check_xor_64u()
-            => check_op<ulong>(BinaryLogicOpKind.XOr);
+            => check_op<ulong>(BinaryBitwiseOpKind.XOr);
 
         public void check_xor_128x64u()
-            => check_op_128<ulong>(BinaryLogicOpKind.XOr);
+            => check_op_128<ulong>(BinaryBitwiseOpKind.XOr);
 
         public void check_xor_256x64u()
-            => check_op_256<ulong>(BinaryLogicOpKind.XOr);
+            => check_op_256<ulong>(BinaryBitwiseOpKind.XOr);
 
         // ~ xnor
 
         public void check_xnor_8u()
-            => check_op<byte>(BinaryLogicOpKind.Xnor);
+            => check_op<byte>(BinaryBitwiseOpKind.Xnor);
 
         public void check_xnor_128x8u()
-            => check_op_128<byte>(BinaryLogicOpKind.Xnor);
+            => check_op_128<byte>(BinaryBitwiseOpKind.Xnor);
 
         public void check_xnor_256x8u()
-            => check_op_256<byte>(BinaryLogicOpKind.Xnor);
+            => check_op_256<byte>(BinaryBitwiseOpKind.Xnor);
 
         public void check_xnor_16u()
-            => check_op<ushort>(BinaryLogicOpKind.Xnor);
+            => check_op<ushort>(BinaryBitwiseOpKind.Xnor);
 
         public void check_xnor_128x16u()
-            => check_op_128<ushort>(BinaryLogicOpKind.Xnor);
+            => check_op_128<ushort>(BinaryBitwiseOpKind.Xnor);
 
         public void check_xnor_256x16u()
-            => check_op_256<ushort>(BinaryLogicOpKind.Xnor);
+            => check_op_256<ushort>(BinaryBitwiseOpKind.Xnor);
 
         public void check_xnor_32u()
-            => check_op<uint>(BinaryLogicOpKind.Xnor);
+            => check_op<uint>(BinaryBitwiseOpKind.Xnor);
 
         public void check_xnor_128x32u()
-            => check_op_128<uint>(BinaryLogicOpKind.Xnor);
+            => check_op_128<uint>(BinaryBitwiseOpKind.Xnor);
 
         public void check_xnor_256x32u()
-            => check_op_256<uint>(BinaryLogicOpKind.Xnor);
+            => check_op_256<uint>(BinaryBitwiseOpKind.Xnor);
 
         public void check_xnor_64u()
-            => check_op<ulong>(BinaryLogicOpKind.Xnor);
+            => check_op<ulong>(BinaryBitwiseOpKind.Xnor);
 
         public void check_xnor_128x64u()
-            => check_op_128<ulong>(BinaryLogicOpKind.Xnor);
+            => check_op_128<ulong>(BinaryBitwiseOpKind.Xnor);
 
         public void check_xnor_256x64u()
-            => check_op_256<ulong>(BinaryLogicOpKind.Xnor);
+            => check_op_256<ulong>(BinaryBitwiseOpKind.Xnor);
 
         // ~ sll
 
@@ -377,102 +377,102 @@ namespace Z0.Logix
         // ~ not
 
         public void eval_not_8u()
-            => check_op<byte>(UnaryLogicOpKind.Not);
+            => check_op<byte>(UnaryBitwiseOpKind.Not);
 
         public void eval_not_128x8u()
-            => check_op_128<byte>(UnaryLogicOpKind.Not);
+            => check_op_128<byte>(UnaryBitwiseOpKind.Not);
 
         public void eval_not_256x8u()
-            => check_op_256<byte>(UnaryLogicOpKind.Not);
+            => check_op_256<byte>(UnaryBitwiseOpKind.Not);
 
         public void eval_not_16u()
-            => check_op<ushort>(UnaryLogicOpKind.Not);
+            => check_op<ushort>(UnaryBitwiseOpKind.Not);
 
         public void eval_not_128x16u()
-            => check_op_128<ushort>(UnaryLogicOpKind.Not);
+            => check_op_128<ushort>(UnaryBitwiseOpKind.Not);
 
         public void eval_not_256x16u()
-            => check_op_256<ushort>(UnaryLogicOpKind.Not);
+            => check_op_256<ushort>(UnaryBitwiseOpKind.Not);
 
         public void eval_not_32u()
-            => check_op<uint>(UnaryLogicOpKind.Not);
+            => check_op<uint>(UnaryBitwiseOpKind.Not);
 
         public void eval_not_128x32u()
-            => check_op_128<uint>(UnaryLogicOpKind.Not);
+            => check_op_128<uint>(UnaryBitwiseOpKind.Not);
 
         public void eval_not_256x32u()
-            => check_op_256<uint>(UnaryLogicOpKind.Not);
+            => check_op_256<uint>(UnaryBitwiseOpKind.Not);
 
         public void eval_not_64u()
-            => check_op<ulong>(UnaryLogicOpKind.Not);
+            => check_op<ulong>(UnaryBitwiseOpKind.Not);
 
         public void eval_not_128x64u()
-            => check_op_128<ulong>(UnaryLogicOpKind.Not);
+            => check_op_128<ulong>(UnaryBitwiseOpKind.Not);
 
         public void eval_not_256x64u()
-            => check_op_256<ulong>(UnaryLogicOpKind.Not);
+            => check_op_256<ulong>(UnaryBitwiseOpKind.Not);
 
         // ~ ternary
 
         public void check_ternary_f01()
-            => check_ops(TernaryLogicOpKind.X01);
+            => check_ops(Ternary512OpKind.X01);
 
         public void check_ternary_f02()
-            => check_ops(TernaryLogicOpKind.X02);
+            => check_ops(Ternary512OpKind.X02);
 
         public void check_ternary_f03()
-            => check_ops(TernaryLogicOpKind.X03);
+            => check_ops(Ternary512OpKind.X03);
 
         public void check_ternary_f04()
-            => check_ops(TernaryLogicOpKind.X04);
+            => check_ops(Ternary512OpKind.X04);
 
         public void check_ternary_f05()
-            => check_ops(TernaryLogicOpKind.X05);
+            => check_ops(Ternary512OpKind.X05);
 
         public void check_ternary_f06()
-            => check_ops(TernaryLogicOpKind.X06);
+            => check_ops(Ternary512OpKind.X06);
 
         public void check_ternary_f07()
-            => check_ops(TernaryLogicOpKind.X07);
+            => check_ops(Ternary512OpKind.X07);
 
         public void check_ternary_f08()
-            => check_ops(TernaryLogicOpKind.X08);
+            => check_ops(Ternary512OpKind.X08);
 
         public void check_ternary_f09()
-            => check_ops(TernaryLogicOpKind.X09);
+            => check_ops(Ternary512OpKind.X09);
 
         public void check_ternary_f0a()
-            => check_ops(TernaryLogicOpKind.X0A);
+            => check_ops(Ternary512OpKind.X0A);
 
         public void check_ternary_f0b()
-            => check_ops(TernaryLogicOpKind.X0B);
+            => check_ops(Ternary512OpKind.X0B);
 
         public void check_ternary_f0c()
-            => check_ops(TernaryLogicOpKind.X0C);
+            => check_ops(Ternary512OpKind.X0C);
 
         public void check_ternary_f0d()
-            => check_ops(TernaryLogicOpKind.X0D);
+            => check_ops(Ternary512OpKind.X0D);
 
         public void check_ternary_f0e()
-            => check_ops(TernaryLogicOpKind.X0E);
+            => check_ops(Ternary512OpKind.X0E);
 
         public void check_ternary_f0f()
-            => check_ops(TernaryLogicOpKind.X0F);
+            => check_ops(Ternary512OpKind.X0F);
 
         public void check_ternary_f10()
-            => check_ops(TernaryLogicOpKind.X10);
+            => check_ops(Ternary512OpKind.X10);
 
         public void check_ternary_f11()
-            => check_ops(TernaryLogicOpKind.X11);
+            => check_ops(Ternary512OpKind.X11);
            
         public void check_ternary_f12()
-            => check_ops(TernaryLogicOpKind.X12);
+            => check_ops(Ternary512OpKind.X12);
 
         public void check_ternary_f13()
-            => check_ops(TernaryLogicOpKind.X13);
+            => check_ops(Ternary512OpKind.X13);
 
 
-        void check_ops(TernaryLogicOpKind op)
+        void check_ops(Ternary512OpKind op)
         {
             check_op<byte>(op);
             check_op<ushort>(op);
@@ -481,7 +481,7 @@ namespace Z0.Logix
 
         }
 
-        void check_op<T>(UnaryLogicOpKind kind)
+        void check_op<T>(UnaryBitwiseOpKind kind)
             where T : unmanaged
         {
             var v1 = variable<T>(1);
@@ -497,7 +497,7 @@ namespace Z0.Logix
             }
         }
 
-        void check_op<T>(BinaryLogicOpKind op)
+        void check_op<T>(BinaryBitwiseOpKind op)
             where T : unmanaged
         {
             var v1 = variable<T>(1);
@@ -516,7 +516,7 @@ namespace Z0.Logix
             }
         }
 
-        void check_op_128<T>(UnaryLogicOpKind op)
+        void check_op_128<T>(UnaryBitwiseOpKind op)
             where T : unmanaged
         {
             var v1 = variable(1, default(Vector128<T>));
@@ -532,7 +532,7 @@ namespace Z0.Logix
             }
         }
 
-        void check_op_256<T>(UnaryLogicOpKind op)
+        void check_op_256<T>(UnaryBitwiseOpKind op)
             where T : unmanaged
         {
             var v1 = variable(1, default(Vector256<T>));
@@ -548,7 +548,7 @@ namespace Z0.Logix
             }
         }
 
-        void check_op_128<T>(BinaryLogicOpKind op)
+        void check_op_128<T>(BinaryBitwiseOpKind op)
             where T : unmanaged
         {
             var v1 = variable(1, default(Vector128<T>));
@@ -567,7 +567,7 @@ namespace Z0.Logix
             }
         }
 
-        void check_op_256<T>(BinaryLogicOpKind op)
+        void check_op_256<T>(BinaryBitwiseOpKind op)
             where T : unmanaged
         {
             
@@ -638,7 +638,7 @@ namespace Z0.Logix
             }
         }
 
-        void check_op_identity<T>(TernaryLogicOpKind id)
+        void check_op_identity<T>(Ternary512OpKind id)
             where T: unmanaged
         {
             var a = convert<T>(0b1111_0000);
@@ -651,7 +651,7 @@ namespace Z0.Logix
             Claim.eq(expect.FormatHex(), actual.FormatHex());
         }
 
-        void check_op<T>(TernaryLogicOpKind id)
+        void check_op<T>(Ternary512OpKind id)
             where T : unmanaged
         {
             var BL = LogicOpApi.lookup(id);

@@ -35,24 +35,24 @@ namespace Z0.Logix
     /// Characterizes a multi-varied expression that represents a question or claim
     /// regarding the equality of two typed logic expressions
     /// </summary>
-    public interface IEqualityExpr<T> : IExpr<T>
+    public interface IEqualityExpr<T> : ITypedExpr<T>
         where T : unmanaged
     {
         /// <summary>
         /// The left expression
         /// </summary>
-        IExpr<T> Lhs {get;}
+        ITypedExpr<T> Lhs {get;}
         
         /// <summary>
         /// The right expression
         /// </summary>
-        IExpr<T> Rhs {get;}
+        ITypedExpr<T> Rhs {get;}
 
         VariableExpr<T>[] Vars {get;}
 
     }
 
-    public interface ILieralEqualityExpr<T> : IExpr<T>
+    public interface ILieralEqualityExpr<T> : ITypedExpr<T>
         where T : unmanaged
     {
 

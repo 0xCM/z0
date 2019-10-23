@@ -10,7 +10,7 @@ namespace Z0.Logix
     using System.Runtime.CompilerServices;
     
     using static zfunc;
-    using static TernaryLogicOpKind;
+    using static Ternary512OpKind;
     using static ScalarOps;
     using static OpHelpers;
 
@@ -19,64 +19,64 @@ namespace Z0.Logix
     /// </summary>
     public static class ScalarOpApi
     {
-        public static IEnumerable<UnaryLogicOpKind> UnaryKinds
-            => items(UnaryLogicOpKind.Not, UnaryLogicOpKind.Identity, UnaryLogicOpKind.Negate);
+        public static IEnumerable<UnaryBitwiseOpKind> UnaryKinds
+            => items(UnaryBitwiseOpKind.Not, UnaryBitwiseOpKind.Identity, UnaryBitwiseOpKind.Negate);
 
 
         /// <summary>
         /// Advertises the supported binary operators
         /// </summary>
-        public static IEnumerable<BinaryLogicOpKind> BinaryKinds
+        public static IEnumerable<BinaryBitwiseOpKind> BinaryKinds
             => items(
-                BinaryLogicOpKind.And, BinaryLogicOpKind.Or, BinaryLogicOpKind.XOr,
-                BinaryLogicOpKind.Nand, BinaryLogicOpKind.Nor, BinaryLogicOpKind.Xnor,
-                BinaryLogicOpKind.AndNot, BinaryLogicOpKind.True, BinaryLogicOpKind.False
+                BinaryBitwiseOpKind.And, BinaryBitwiseOpKind.Or, BinaryBitwiseOpKind.XOr,
+                BinaryBitwiseOpKind.Nand, BinaryBitwiseOpKind.Nor, BinaryBitwiseOpKind.Xnor,
+                BinaryBitwiseOpKind.AndNot, BinaryBitwiseOpKind.True, BinaryBitwiseOpKind.False
             );
 
         /// <summary>
         /// Advertises the supported ternary opeators
         /// </summary>
-        public static IEnumerable<TernaryLogicOpKind> TernaryKinds
-            => range((byte)1,(byte)X4F).Cast<TernaryLogicOpKind>();
+        public static IEnumerable<Ternary512OpKind> TernaryKinds
+            => range((byte)1,(byte)X4F).Cast<Ternary512OpKind>();
 
-        public static T eval<T>(BinaryLogicOpKind kind, T a, T b)
+        public static T eval<T>(BinaryBitwiseOpKind kind, T a, T b)
             where T : unmanaged
         {
             switch(kind)
             {
-                case BinaryLogicOpKind.True:
+                case BinaryBitwiseOpKind.True:
                     return @true(a,b);
-                case BinaryLogicOpKind.And:
+                case BinaryBitwiseOpKind.And:
                     return and(a,b);
-                case BinaryLogicOpKind.Or:
+                case BinaryBitwiseOpKind.Or:
                     return or(a,b);
-                case BinaryLogicOpKind.XOr:
+                case BinaryBitwiseOpKind.XOr:
                     return xor(a,b);
-                case BinaryLogicOpKind.Nand:
+                case BinaryBitwiseOpKind.Nand:
                     return nand(a,b);
-                case BinaryLogicOpKind.Nor:
+                case BinaryBitwiseOpKind.Nor:
                     return nor(a,b);
-                case BinaryLogicOpKind.Xnor:
+                case BinaryBitwiseOpKind.Xnor:
                     return xnor(a,b);
-                case BinaryLogicOpKind.AndNot:
+                case BinaryBitwiseOpKind.AndNot:
                     return andnot(a,b);
-                case BinaryLogicOpKind.False:
+                case BinaryBitwiseOpKind.False:
                     return @false(a,b);
                 default:
-                    return dne<BinaryLogicOpKind,T>(kind);
+                    return dne<BinaryBitwiseOpKind,T>(kind);
             }
         }
 
         [MethodImpl(Inline)]
-        public static T eval<T>(UnaryLogicOpKind kind, T a)
+        public static T eval<T>(UnaryBitwiseOpKind kind, T a)
             where T : unmanaged
         {
             switch(kind)
             {
-                case UnaryLogicOpKind.Not: return not(a);
-                case UnaryLogicOpKind.Identity: return ScalarOps.identity(a);
-                case UnaryLogicOpKind.Negate: return negate(a);
-                default: return dne<UnaryLogicOpKind,T>(kind);            
+                case UnaryBitwiseOpKind.Not: return not(a);
+                case UnaryBitwiseOpKind.Identity: return ScalarOps.identity(a);
+                case UnaryBitwiseOpKind.Negate: return negate(a);
+                default: return dne<UnaryBitwiseOpKind,T>(kind);            
             }
         }
 
@@ -87,7 +87,7 @@ namespace Z0.Logix
         /// <param name="a">The first operand</param>
         /// <param name="b">The second operand</param>
         /// <param name="c">The third operand</param>
-        public static T eval<T>(TernaryLogicOpKind kind, T a, T b, T c)
+        public static T eval<T>(Ternary512OpKind kind, T a, T b, T c)
             where T : unmanaged
         {
             switch(kind)
@@ -182,7 +182,7 @@ namespace Z0.Logix
                 case X58: return f58(a, b, c);
                 case X59: return f59(a, b, c);
                 case X5A: return f5a(a, b, c);
-                default: return canteval<T,TernaryLogicOpKind>(kind);
+                default: return canteval<T,Ternary512OpKind>(kind);
             }
         }
 
@@ -213,44 +213,43 @@ namespace Z0.Logix
             }
         }
 
-        public static UnaryOp<T> lookup<T>(UnaryLogicOpKind id)
+        public static UnaryOp<T> lookup<T>(UnaryBitwiseOpKind kind)
             where T : unmanaged            
         {
-            switch(id)
+            switch(kind)
             {
-                case UnaryLogicOpKind.Not: return not;
-                case UnaryLogicOpKind.Identity: return ScalarOps.identity;
-                case UnaryLogicOpKind.Negate: return negate;
-                default: return dne<T>(id);            
+                case UnaryBitwiseOpKind.Not: return not;
+                case UnaryBitwiseOpKind.Identity: return ScalarOps.identity;
+                case UnaryBitwiseOpKind.Negate: return negate;
+                default: return dne<T>(kind);            
             }
-
         }
 
-        public static BinaryOp<T> lookup<T>(BinaryLogicOpKind id)
+        public static BinaryOp<T> lookup<T>(BinaryBitwiseOpKind kind)
             where T : unmanaged
         {
-            switch(id)
+            switch(kind)
             {
-                case BinaryLogicOpKind.False: return @false;
-                case BinaryLogicOpKind.And: return and;
-                case BinaryLogicOpKind.Nand: return nand;
-                case BinaryLogicOpKind.Or: return or;
-                case BinaryLogicOpKind.Nor: return nor;
-                case BinaryLogicOpKind.XOr: return xor;
-                case BinaryLogicOpKind.Xnor: return xnor;
-                case BinaryLogicOpKind.AndNot: return andnot;
-                case BinaryLogicOpKind.LeftProject: return left;
-                case BinaryLogicOpKind.RightProject: return right;
-                case BinaryLogicOpKind.RightNot: return rightnot;
-                case BinaryLogicOpKind.LeftNot: return leftnot;
-                case BinaryLogicOpKind.True: return @true;
-                default: return dne<T>(id);
+                case BinaryBitwiseOpKind.False: return @false;
+                case BinaryBitwiseOpKind.And: return and;
+                case BinaryBitwiseOpKind.Nand: return nand;
+                case BinaryBitwiseOpKind.Or: return or;
+                case BinaryBitwiseOpKind.Nor: return nor;
+                case BinaryBitwiseOpKind.XOr: return xor;
+                case BinaryBitwiseOpKind.Xnor: return xnor;
+                case BinaryBitwiseOpKind.AndNot: return andnot;
+                case BinaryBitwiseOpKind.LeftProject: return left;
+                case BinaryBitwiseOpKind.RightProject: return right;
+                case BinaryBitwiseOpKind.RightNot: return rightnot;
+                case BinaryBitwiseOpKind.LeftNot: return leftnot;
+                case BinaryBitwiseOpKind.True: return @true;
+                default: return dne<T>(kind);
             }
         }
 
 
 
-        public static TernaryOp<T> lookup<T>(TernaryLogicOpKind id)
+        public static TernaryOp<T> lookup<T>(Ternary512OpKind id)
             where T : unmanaged
         {
             switch(id)

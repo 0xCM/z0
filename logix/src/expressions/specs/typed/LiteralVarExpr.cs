@@ -55,7 +55,7 @@ namespace Z0.Logix
 
         [MethodImpl(Inline)]
         public void Set(IExpr value)
-            => Value = ((ILiteralExpr<T>)value).Value;
+            => Value = ((ITypedLiteral<T>)value).Value;
 
         public string Format()
             => Format(false);

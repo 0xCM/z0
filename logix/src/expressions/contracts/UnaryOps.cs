@@ -32,13 +32,13 @@ namespace Z0.Logix
     /// </summary>
     /// <typeparam name="T">The type over which the operator is defined</typeparam>
     /// <typeparam name="K">The operator classifier</typeparam>
-    public interface IUnaryOp<T> : IUnaryOp, IOpExpr<T,UnaryLogicOpKind> 
+    public interface IUnaryOp<T> : IUnaryOp, IOpExpr<T,UnaryBitwiseOpKind> 
         where T : unmanaged
     {
         /// <summary>
         /// The one and only operand
         /// </summary>
-        IExpr<T> Operand {get;}
+        ITypedExpr<T> Arg {get;}
 
 
     }

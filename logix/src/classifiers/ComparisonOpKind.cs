@@ -11,14 +11,29 @@ namespace Z0.Logix
     /// </summary>
     public enum ComparisonOpKind : byte
     {        
+        /// <summary>
+        /// Identifies an equality operator
+        /// </summary>
         Eq,
 
+        /// <summary>
+        /// Identifies a less than operator
+        /// </summary>
         Lt,
 
+        /// <summary>
+        /// Identifies a less than or equal operator
+        /// </summary>
         LtEq,
 
+        /// <summary>
+        /// Identifies a greater than operator
+        /// </summary>
         Gt,
 
+        /// <summary>
+        /// Identifies a greater than or equal operator
+        /// </summary>
         GtEq
     }
 }

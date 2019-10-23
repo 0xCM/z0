@@ -45,18 +45,18 @@ namespace Z0.Logix
 
     }
 
-    public interface IBinaryOp<T> : IBinaryOp<T,BinaryLogicOpKind>
+    public interface IBinaryBitwiseOp<T> : IBinaryOp<T,BinaryBitwiseOpKind>
         where T : unmanaged
     {
         /// <summary>
         /// The left operand
         /// </summary>
-        IExpr<T> LeftArg {get;}
+        ITypedExpr<T> LeftArg {get;}
 
         /// <summary>
         /// The right operand
         /// </summary>
-        IExpr<T> RightArg {get;}
+        ITypedExpr<T> RightArg {get;}
 
         
     }

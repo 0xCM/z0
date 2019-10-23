@@ -11,6 +11,7 @@ namespace Z0.Logix
     using System.Collections.Generic;
 
     using static zfunc;    
+    using static Ternary512OpKind;
 
     public static class Cpu256Ops
     {
@@ -44,13 +45,10 @@ namespace Z0.Logix
             where T:unmanaged
                 => ginx.vones<T>(n256);
 
-
         [MethodImpl(Inline)]
         public static Vector256<T> identity<T>(Vector256<T> a)
             where T : unmanaged
                 => a;
-
-
 
         [MethodImpl(Inline)]
         public static Vector256<T> not<T>(Vector256<T> a)
@@ -127,62 +125,55 @@ namespace Z0.Logix
             where T : unmanaged
                 => ginx.vselect(a,b,c);
 
-        // a nor (b or c)
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline),TernaryOp(X01)]
         public static Vector256<T> f01<T>(Vector256<T> a, Vector256<T> b, Vector256<T> c)
             where T : unmanaged
             => nor(a, or(b,c));
 
-        // c and (b nor a)
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline),TernaryOp(X02)]
         public static Vector256<T> f02<T>(Vector256<T> a, Vector256<T> b, Vector256<T> c)
             where T : unmanaged
                 => and(c, nor(b,a));
  
          // b nor a
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline),TernaryOp(X03)]
         public static Vector256<T> f03<T>(Vector256<T> a, Vector256<T> b, Vector256<T> c)
             where T : unmanaged
                 => nor(b,a);
 
        // b and (a nor c)
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline),TernaryOp(X04)]
         public static Vector256<T> f04<T>(Vector256<T> a, Vector256<T> b, Vector256<T> c)
             where T : unmanaged
                 => and(b, nor(a,c));
 
         // c nor a
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline),TernaryOp(X05)]
         public static Vector256<T> f05<T>(Vector256<T> a, Vector256<T> b, Vector256<T> c)
             where T : unmanaged
                 => nor(c,a);
 
-        // not a and (b xor c)
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline),TernaryOp(X06)]
         public static Vector256<T> f06<T>(Vector256<T> a, Vector256<T> b, Vector256<T> c)
             where T : unmanaged
                 => and(not(a), xor(b,c));
 
-        // not a and (b xor c)
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline),TernaryOp(X07)]
         public static Vector256<T> f07<T>(Vector256<T> a, Vector256<T> b, Vector256<T> c)
             where T : unmanaged
                 => nor(a, and(b,c));
-
-        // (not a and b) and c
-        [MethodImpl(Inline)]
+        
+        [MethodImpl(Inline),TernaryOp(X08)]
         public static Vector256<T> f08<T>(Vector256<T> a, Vector256<T> b, Vector256<T> c)
             where T : unmanaged
                 => and(and(not(a),b), c);
 
-        // a nor (b xor c)
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline),TernaryOp(X09)]
         public static Vector256<T> f09<T>(Vector256<T> a, Vector256<T> b, Vector256<T> c)
             where T : unmanaged
                 => nor(a, xor(b,c));
 
-        // c and (not a)
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline),TernaryOp(X0A)]
         public static Vector256<T> f0a<T>(Vector256<T> a, Vector256<T> b, Vector256<T> c)
             where T : unmanaged
                 => and(c, not(a));

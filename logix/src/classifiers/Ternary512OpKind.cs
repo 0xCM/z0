@@ -13,203 +13,202 @@ namespace Z0.Logix
     /// Specifies ternary logic operator identifiers consistent with AVX-512 encoding
     /// </summary>
     [Flags]
-    public enum TernaryLogicOpKind : byte
+    public enum Ternary512OpKind : byte
     {
         X00 = 0x00,
         
         /// <summary>
-        /// 00000001
+        /// nor(a, or(b,c))
         /// </summary>
         X01 = 0x01,
         
         /// <summary>
-        /// 00000010
+        /// and(c, nor(b,a))
         /// </summary>
         X02 = 0x02,
         
         /// <summary>
-        /// 00000011
+        /// 
         /// </summary>
         X03 = 0x03,
         
         /// <summary>
-        /// 00000100
+        /// 
         /// </summary>
         X04 = 0x04,
         
         /// <summary>
-        /// 00000101
+        /// nor(c,a)
         /// </summary>
         X05 = 0x05,
         
         /// <summary>
-        /// 00000110
+        /// and(not(a), xor(b,c))
         /// </summary>
         X06 = 0x06,
         
         /// <summary>
-        /// 00000111
+        /// nor(a, and(b,c))
         /// </summary>
         X07 = 0x07,
 
         /// <summary>
-        /// 00001000
+        /// and(and(not(a),b), c)
         /// </summary>
         X08 = 0x08,
 
         /// <summary>
-        /// 00001001
         ///  nor(a, xor(b,c))
         /// </summary>
         X09 = 0x09,
 
         /// <summary>
-        /// 00001010
+        /// and(c, not(a))
         /// </summary>
         X0A = 0x0a,
 
         /// <summary>
-        /// 00001011
+        /// 
         /// </summary>
         X0B = 0x0b,
 
         /// <summary>
-        /// 00001100
+        /// 
         /// </summary>
         X0C = 0x0c,
 
         /// <summary>
-        /// 00001101
+        /// 
         /// </summary>
         X0D = 0x0d,
 
         /// <summary>
-        /// 00001110
+        /// 
         /// </summary>
         X0E = 0x0e,
 
         /// <summary>
-        /// 00001111
+        /// 
         /// </summary>
         X0F = 0x0f,
 
         /// <summary>
-        /// 00010000
+        /// 
         /// </summary>
         X10 = 0x10,
 
         /// <summary>
-        /// 00010001
+        /// 
         /// </summary>
         X11 = 0x11,
 
         /// <summary>
-        /// 00010010
+        /// 
         /// </summary>
         X12 = 0x12,
 
         /// <summary>
-        /// 00010011
+        /// 
         /// </summary>
         X13 = 0x13,
 
         /// <summary>
-        /// 00010100
+        /// 
         /// </summary>
         X14 = 0x14,
 
         /// <summary>
-        /// 00010101
+        /// 
         /// </summary>
         X15 = 0x15,
 
         /// <summary>
-        /// 00010110
+        /// 
         /// </summary>
         X16 = 0x16,
 
         /// <summary>
-        /// 00010111
+        /// 
         /// </summary>
         X17 = 0x17,
 
         /// <summary>
-        /// 00011000
+        /// 
         /// </summary>
         X18 = 0x18,
 
         /// <summary>
-        /// 00011001
+        /// 
         /// </summary>
         X19 = 0x19,
 
         /// <summary>
-        /// 00011010
+        /// 
         /// </summary>
         X1A = 0x1a,
 
         /// <summary>
-        /// 00011011
+        /// 
         /// </summary>
         X1B = 0x1b,
 
         /// <summary>
-        /// 00011100
+        /// 
         /// </summary>
         X1C = 0x1c,
 
         /// <summary>
-        /// 00011101
+        /// 
         /// </summary>
         X1D = 0x1d,
 
         /// <summary>
-        /// 00011110
+        /// 
         /// </summary>
         X1E = 0x1e,
 
         /// <summary>
-        /// 00011111
+        /// 
         /// </summary>
         X1F = 0x1f,
 
         /// <summary>
-        /// 00100000
+        /// 
         /// </summary>
         X20 = 0x20,
 
         /// <summary>
-        /// 00100001
+        /// 
         /// </summary>
         X21 = 0x21,
 
         /// <summary>
-        /// 00100010
+        /// 
         /// </summary>
         X22 = 0x22,
 
         /// <summary>
-        /// 00100011
+        /// 
         /// </summary>
         X23 = 0x23,
 
         /// <summary>
-        /// 00100100
+        /// 
         /// </summary>
         X24 = 0x24,
 
         /// <summary>
-        /// 00100101
+        /// 
         /// </summary>
         X25 = 0x25,
 
         /// <summary>
-        /// 00100110
+        /// 
         /// </summary>
         X26 = 0x26,
 
         /// <summary>
-        /// 00100111
+        /// 
         /// </summary>
         X27 = 0x27,
 
@@ -219,42 +218,42 @@ namespace Z0.Logix
         X28 = 0x28,
 
         /// <summary>
-        /// select(c, xor(b,a), nor(b,a)): 00101001
+        /// select(c, xor(b,a), nor(b,a))
         /// </summary>
         X29 = 0x29,
 
         /// <summary>
-        /// 00101010
+        /// 
         /// </summary>
         X2A = 0x2a,
 
         /// <summary>
-        /// 00101011
+        /// 
         /// </summary>
         X2B = 0x2b,
 
         /// <summary>
-        /// 00101100
+        /// 
         /// </summary>
         X2C = 0x2c,
 
         /// <summary>
-        ///  00101101
+        ///  
         /// </summary>
         X2D = 0x2d,
 
         /// <summary>
-        /// 00101110
+        /// 
         /// </summary>
         X2E = 0x2e,
 
         /// <summary>
-        /// 00101111
+        /// 
         /// </summary>
         X2F = 0x2f,
 
         /// <summary>
-        /// andnot(a,b): 00110000
+        /// andnot(a,b)
         /// </summary>
         X30 = 0x30,
 
@@ -907,69 +906,325 @@ namespace Z0.Logix
         /// 
         /// </summary>
         XB1 = 0xb1,
+
+        /// <summary>
+        /// 
+        /// </summary>
         XB2 = 0xb2,
+
+        /// <summary>
+        /// 
+        /// </summary>
         XB3 = 0xb3,
+
+        /// <summary>
+        /// 
+        /// </summary>
         XB4 = 0xb4,
+
+        /// <summary>
+        /// 
+        /// </summary>
         XB5 = 0xb5,
+
+        /// <summary>
+        /// 
+        /// </summary>
         XB6 = 0xb6,
+
+        /// <summary>
+        /// 
+        /// </summary>
         XB7 = 0xb7,
+
+        /// <summary>
+        /// 
+        /// </summary>
         XB8 = 0xb8,
+
+        /// <summary>
+        /// 
+        /// </summary>
         XB9 = 0xb9,
+
+        /// <summary>
+        /// 
+        /// </summary>
         XBA = 0xba,
+
+        /// <summary>
+        /// 
+        /// </summary>
         XBB = 0xbb,
+
+        /// <summary>
+        /// 
+        /// </summary>
         XBC = 0xbc,
+
+        /// <summary>
+        /// 
+        /// </summary>
         XBD = 0xbd,
+
+        /// <summary>
+        /// 
+        /// </summary>
         XBE = 0xbe,
+
+        /// <summary>
+        /// 
+        /// </summary>
         XBF = 0xbf,
+
+        /// <summary>
+        /// 
+        /// </summary>
         XC0 = 0xc0,
+
+        /// <summary>
+        /// 
+        /// </summary>
         XC1 = 0xc1,
+
+        /// <summary>
+        /// 
+        /// </summary>
         XC2 = 0xc2,
+
+        /// <summary>
+        /// 
+        /// </summary>
         XC3 = 0xc3,
+
+        /// <summary>
+        /// 
+        /// </summary>
         XC4 = 0xc4,
+
+        /// <summary>
+        /// 
+        /// </summary>
         XC5 = 0xc5,
+        
+        /// <summary>
+        /// 
+        /// </summary>
         XC6 = 0xc6,
+
+        /// <summary>
+        /// 
+        /// </summary>
         XC7 = 0xc7,
+
+        /// <summary>
+        /// 
+        /// </summary>
         XC8 = 0xc8,
+
+        /// <summary>
+        /// 
+        /// </summary>
         XC9 = 0xc9,
+
+        /// <summary>
+        /// 
+        /// </summary>
         XCA = 0xca,
+
+        /// <summary>
+        /// 
+        /// </summary>
         XCB = 0xcb,
+
+        /// <summary>
+        /// 
+        /// </summary>
         XCC = 0xcc,
+
+        /// <summary>
+        /// 
+        /// </summary>
         XCD = 0xcd,
+
+        /// <summary>
+        /// 
+        /// </summary>
         XCE = 0xce,
+
+        /// <summary>
+        /// 
+        /// </summary>
         XCF = 0xcf,
+
+        /// <summary>
+        /// 
+        /// </summary>
         XD0 = 0xd0,
+
+        /// <summary>
+        /// 
+        /// </summary>
         XD1 = 0xd1,
+
+        /// <summary>
+        /// 
+        /// </summary>
         XD2 = 0xd2,
+
+        /// <summary>
+        /// 
+        /// </summary>
         XD3 = 0xd3,
+
+        /// <summary>
+        /// 
+        /// </summary>
         XD4 = 0xd4,
+
+        /// <summary>
+        /// 
+        /// </summary>
         XD5 = 0xd5,
+
+        /// <summary>
+        /// 
+        /// </summary>
         XD6 = 0xd6,
+
+        /// <summary>
+        /// 
+        /// </summary>
         XD7 = 0xd7,
+
+        /// <summary>
+        /// 
+        /// </summary>
         XD8 = 0xd8,
+
+        /// <summary>
+        /// 
+        /// </summary>
         XD9 = 0xd9,
+
+        /// <summary>
+        /// 
+        /// </summary>
         XDA = 0xda,
+
+        /// <summary>
+        /// 
+        /// </summary>
         XDB = 0xdb,
+
+        /// <summary>
+        /// 
+        /// </summary>
         XDC = 0xdc,
+
+        /// <summary>
+        /// 
+        /// </summary>
         XDD = 0xdd,
+
+        /// <summary>
+        /// 
+        /// </summary>
         XDE = 0xde,
+
+        /// <summary>
+        /// 
+        /// </summary>
         XDF = 0xdf,
+
+        /// <summary>
+        /// 
+        /// </summary>
         XE0 = 0xe0,
+
+        /// <summary>
+        /// 
+        /// </summary>
         XE1 = 0xe1,
+
+        /// <summary>
+        /// 
+        /// </summary>
         XE2 = 0xe2,
+
+        /// <summary>
+        /// 
+        /// </summary>
         XE3 = 0xe3,
+
+        /// <summary>
+        /// 
+        /// </summary>
         XE4 = 0xe4,
+
+        /// <summary>
+        /// 
+        /// </summary>
         XE5 = 0xe5,
+
+        /// <summary>
+        /// 
+        /// </summary>
         XE6 = 0xe6,
+
+        /// <summary>
+        /// 
+        /// </summary>
         XE7 = 0xe7,
+
+        /// <summary>
+        /// 
+        /// </summary>
         XE8 = 0xe8,
+
+        /// <summary>
+        /// 
+        /// </summary>
         XE9 = 0xe9,
+
+        /// <summary>
+        /// 
+        /// </summary>
         XEA = 0xea,
+
+        /// <summary>
+        /// 
+        /// </summary>
         XEB = 0xeb,
+
+        /// <summary>
+        /// 
+        /// </summary>
         XEC = 0xec,
+
+        /// <summary>
+        /// 
+        /// </summary>
         XED = 0xed,
+
+        /// <summary>
+        /// 
+        /// </summary>
         XEE = 0xee,
+
+        /// <summary>
+        /// 
+        /// </summary>
         XEF = 0xef,
+
+        /// <summary>
+        /// 
+        /// </summary>
         XF0 = 0xf0,
+
+        /// <summary>
+        /// 
+        /// </summary>
         XF1 = 0xf1,
 
         /// <summary>
@@ -1042,7 +1297,4 @@ namespace Z0.Logix
         /// </summary>
         XFF = 0xff,
     }
-
-
-
 }

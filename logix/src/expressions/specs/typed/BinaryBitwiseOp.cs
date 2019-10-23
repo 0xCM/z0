@@ -13,11 +13,11 @@ namespace Z0.Logix
     /// <summary>
     /// Joins an operator with left and right operands
     /// </summary>
-    public sealed class BinaryOpSpec<T> : IBinaryOp<T>
+    public sealed class BinaryBitwiseOp<T> : IBinaryBitwiseOp<T>
         where T : unmanaged
     {
         [MethodImpl(Inline)]
-        public BinaryOpSpec(BinaryLogicOpKind op, IExpr<T> left, IExpr<T> right)
+        public BinaryBitwiseOp(BinaryBitwiseOpKind op, ITypedExpr<T> left, ITypedExpr<T> right)
         {
             this.OpKind = op;
             this.LeftArg = left;
@@ -33,18 +33,17 @@ namespace Z0.Logix
         /// <summary>
         /// The operator
         /// </summary>
-        public BinaryLogicOpKind OpKind {get;}
+        public BinaryBitwiseOpKind OpKind {get;}
 
         /// <summary>
         /// The left operand
         /// </summary>
-        public IExpr<T> LeftArg {get;}
+        public ITypedExpr<T> LeftArg {get;}
 
         /// <summary>
         /// The right operand
         /// </summary>
-        public IExpr<T> RightArg {get;}
-
+        public ITypedExpr<T> RightArg {get;}
 
         public string Format()
             => OpKind.Format(LeftArg,RightArg);

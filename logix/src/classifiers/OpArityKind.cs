@@ -12,14 +12,30 @@ namespace Z0.Logix
 
     public enum OpArityKind
     {
+        
+        /// <summary>
+        /// Identifies an operator with no arguments
+        /// </summary>
         Nullary = 0,
 
+        /// <summary>
+        /// Identifies an operator with one argument
+        /// </summary>
         Unary = 1,
 
+        /// <summary>
+        /// Identifies an operator with two arguments
+        /// </summary>
         Binary = 2,
 
+        /// <summary>
+        /// Identifies an operator with three arguments
+        /// </summary>
         Ternary = 3,
 
+        /// <summary>
+        /// Identifies an n-ary operator where n > 3
+        /// </summary>
         Sequence = 4
     }
 

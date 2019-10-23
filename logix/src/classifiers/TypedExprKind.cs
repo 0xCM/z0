@@ -16,37 +16,37 @@ namespace Z0.Logix
         /// <summary>
         /// Specifies a variable classification
         /// </summary>
-        Variable = Pow2.T01,
+        Variable = LogicExprKind.Variable,
 
         /// <summary>
         /// Identifies expression that depends on one or more variables
         /// </summary>
-        Varied = Pow2.T02,
+        Varied = LogicExprKind.Varied,
 
         /// <summary>
         /// Identifies a literal expression
         /// </summary>
-        Literal = Pow2.T03,
+        Literal = LogicExprKind.Literal,
 
         /// <summary>
         /// Classifies an identity
         /// </summary>
-        Equality = Pow2.T07,
+        Equality = LogicExprKind.Equality,
 
         /// <summary>
         /// Identifies the unary operator classification
         /// </summary>
-        UnaryOperator = Pow2.T10,
+        UnaryOperator = LogicExprKind.UnaryOperator,
 
         /// <summary>
         /// Identifies the binary operator classification
         /// </summary>
-        BinaryOperator = Pow2.T11,
+        BinaryOperator = LogicExprKind.BinaryOperator,
 
         /// <summary>
         /// Identifies the ternary operator classification
         /// </summary>
-        TernaryOperator = Pow2.T12,
+        TernaryOperator = LogicExprKind.TernaryOperator,
 
         /// <summary>
         /// Classifies a comparision

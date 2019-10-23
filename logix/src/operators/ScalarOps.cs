@@ -10,7 +10,7 @@ namespace Z0.Logix
     using System.Runtime.CompilerServices;
 
     using static zfunc;    
-    using static TernaryLogicOpKind;
+    using static Ternary512OpKind;
 
 
     public static class ScalarOps

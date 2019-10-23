@@ -12,7 +12,7 @@ namespace Z0.Logix
 
     using static OpHelpers;
     using static Cpu256Ops;    
-    using static TernaryLogicOpKind;
+    using static Ternary512OpKind;
     using static zfunc;
 
     /// <summary>
@@ -21,26 +21,26 @@ namespace Z0.Logix
     public static class Cpu256OpApi
     {
         /// <summary>
-        /// Advertises the supported unary operators
+        /// Advertises the supported unary bitwise operators
         /// </summary>
-        public static IEnumerable<UnaryLogicOpKind> UnaryKinds
-            => items(UnaryLogicOpKind.Not, UnaryLogicOpKind.Identity, UnaryLogicOpKind.Negate);
+        public static IEnumerable<UnaryBitwiseOpKind> UnaryBitwiseKinds
+            => items(UnaryBitwiseOpKind.Not, UnaryBitwiseOpKind.Identity, UnaryBitwiseOpKind.Negate);
 
         /// <summary>
-        /// Advertises the supported binary operators
+        /// Advertises the supported binary bitwise operators
         /// </summary>
-        public static IEnumerable<BinaryLogicOpKind> BinaryKinds
+        public static IEnumerable<BinaryBitwiseOpKind> BinaryBitwiseKinds
             => items(
-                BinaryLogicOpKind.And, BinaryLogicOpKind.Or, BinaryLogicOpKind.XOr,
-                BinaryLogicOpKind.Nand, BinaryLogicOpKind.Nor, BinaryLogicOpKind.Xnor,
-                BinaryLogicOpKind.AndNot, BinaryLogicOpKind.True, BinaryLogicOpKind.False
+                BinaryBitwiseOpKind.And, BinaryBitwiseOpKind.Or, BinaryBitwiseOpKind.XOr,
+                BinaryBitwiseOpKind.Nand, BinaryBitwiseOpKind.Nor, BinaryBitwiseOpKind.Xnor,
+                BinaryBitwiseOpKind.AndNot, BinaryBitwiseOpKind.True, BinaryBitwiseOpKind.False
             );
 
         /// <summary>
         /// Advertises the supported ternary opeators
         /// </summary>
-        public static IEnumerable<TernaryLogicOpKind> TernaryKinds
-            => range((byte)1,(byte)X1B).Cast<TernaryLogicOpKind>();
+        public static IEnumerable<Ternary512OpKind> Ternary512Kinds
+            => range((byte)1,(byte)X1B).Cast<Ternary512OpKind>();
 
         /// <summary>
         /// Evaluates an identified unary operator over a supplied operand
@@ -48,15 +48,15 @@ namespace Z0.Logix
         /// <param name="kind">The operator kind</param>
         /// <param name="a">The operand</param>
         /// <typeparam name="T">The primal vector component type</typeparam>
-        public static Vector256<T> eval<T>(UnaryLogicOpKind kind, Vector256<T> a)
+        public static Vector256<T> eval<T>(UnaryBitwiseOpKind kind, Vector256<T> a)
             where T : unmanaged
         {
             switch(kind)
             {
-                case UnaryLogicOpKind.Not: return not(a);
-                case UnaryLogicOpKind.Identity: return ScalarOps.identity(a);
-                case UnaryLogicOpKind.Negate: return negate(a);
-                default: return dne<UnaryLogicOpKind,Vector256<T>>(kind);            
+                case UnaryBitwiseOpKind.Not: return not(a);
+                case UnaryBitwiseOpKind.Identity: return ScalarOps.identity(a);
+                case UnaryBitwiseOpKind.Negate: return negate(a);
+                default: return dne<UnaryBitwiseOpKind,Vector256<T>>(kind);            
             }
         }
 
@@ -67,31 +67,31 @@ namespace Z0.Logix
         /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
         /// <typeparam name="T">The primal vector component type</typeparam>
-        public static Vector256<T> eval<T>(BinaryLogicOpKind kind, Vector256<T> a, Vector256<T> b)
+        public static Vector256<T> eval<T>(BinaryBitwiseOpKind kind, Vector256<T> a, Vector256<T> b)
             where T : unmanaged
         {
             switch(kind)
             {
-                case BinaryLogicOpKind.True:
+                case BinaryBitwiseOpKind.True:
                     return @true(a,b);
-                case BinaryLogicOpKind.And:
+                case BinaryBitwiseOpKind.And:
                     return and(a,b);
-                case BinaryLogicOpKind.Or:
+                case BinaryBitwiseOpKind.Or:
                     return or(a,b);
-                case BinaryLogicOpKind.XOr:
+                case BinaryBitwiseOpKind.XOr:
                     return xor(a,b);
-                case BinaryLogicOpKind.Nand:
+                case BinaryBitwiseOpKind.Nand:
                     return nand(a,b);
-                case BinaryLogicOpKind.Nor:
+                case BinaryBitwiseOpKind.Nor:
                     return nor(a,b);
-                case BinaryLogicOpKind.Xnor:
+                case BinaryBitwiseOpKind.Xnor:
                     return xnor(a,b);
-                case BinaryLogicOpKind.AndNot:
+                case BinaryBitwiseOpKind.AndNot:
                     return andnot(a,b);
-                case BinaryLogicOpKind.False:
+                case BinaryBitwiseOpKind.False:
                     return @false(a,b);
                 default:
-                    return dne<BinaryLogicOpKind,Vector256<T>>(kind);
+                    return dne<BinaryBitwiseOpKind,Vector256<T>>(kind);
             }
         }
 
@@ -125,58 +125,78 @@ namespace Z0.Logix
         /// <param name="z">The third operand</param>
         /// <typeparam name="T">The primal vector component type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector256<T> eval<T>(TernaryLogicOpKind kind, Vector256<T> x, Vector256<T> y, Vector256<T> z)
+        public static Vector256<T> eval<T>(Ternary512OpKind kind, Vector256<T> x, Vector256<T> y, Vector256<T> z)
             where T : unmanaged
                 => lookup<T>(kind)(x,y,z);
 
-        public static UnaryOp<Vector256<T>> lookup<T>(UnaryLogicOpKind id)
+        /// <summary>
+        /// Returns a kind-identified delegate if possible; otherwise, raises an exception
+        /// </summary>
+        /// <param name="kind">The operator kind</param>
+        /// <typeparam name="T">The primal vector component type</typeparam>
+        public static UnaryOp<Vector256<T>> lookup<T>(UnaryBitwiseOpKind kind)
             where T : unmanaged            
         {
-            switch(id)
+            switch(kind)
             {
-                case UnaryLogicOpKind.Not: return not;
-                case UnaryLogicOpKind.Identity: return identity;
-                case UnaryLogicOpKind.Negate: return negate;
-                default: return dne<Vector256<T>>(id);            
+                case UnaryBitwiseOpKind.Not: return not;
+                case UnaryBitwiseOpKind.Identity: return identity;
+                case UnaryBitwiseOpKind.Negate: return negate;
+                default: return dne<Vector256<T>>(kind);            
             }
 
         }
 
-       public static BinaryOp<Vector256<T>> lookup<T>(BinaryLogicOpKind id)
+        /// <summary>
+        /// Returns a kind-identified delegate if possible; otherwise, raises an exception
+        /// </summary>
+        /// <param name="kind">The operator kind</param>
+        /// <typeparam name="T">The primal vector component type</typeparam>
+        public static BinaryOp<Vector256<T>> lookup<T>(BinaryBitwiseOpKind kind)
             where T : unmanaged
         {
-            switch(id)
+            switch(kind)
             {
-                case BinaryLogicOpKind.And: return and;
-                case BinaryLogicOpKind.Nand: return nand;
-                case BinaryLogicOpKind.Or: return or;
-                case BinaryLogicOpKind.Nor: return nor;
-                case BinaryLogicOpKind.XOr: return xor;
-                case BinaryLogicOpKind.Xnor: return xnor;
-                case BinaryLogicOpKind.AndNot: return andnot;
-                case BinaryLogicOpKind.False: return @false;
-                case BinaryLogicOpKind.True: return @true;
-                default: return dne<Vector256<T>>(id);            
+                case BinaryBitwiseOpKind.And: return and;
+                case BinaryBitwiseOpKind.Nand: return nand;
+                case BinaryBitwiseOpKind.Or: return or;
+                case BinaryBitwiseOpKind.Nor: return nor;
+                case BinaryBitwiseOpKind.XOr: return xor;
+                case BinaryBitwiseOpKind.Xnor: return xnor;
+                case BinaryBitwiseOpKind.AndNot: return andnot;
+                case BinaryBitwiseOpKind.False: return @false;
+                case BinaryBitwiseOpKind.True: return @true;
+                default: return dne<Vector256<T>>(kind);            
             }
         }
 
-       public static Shifter<Vector256<T>> lookup<T>(ShiftOpKind id)
+        /// <summary>
+        /// Returns a kind-identified delegate if possible; otherwise, raises an exception
+        /// </summary>
+        /// <param name="kind">The operator kind</param>
+        /// <typeparam name="T">The primal vector component type</typeparam>
+        public static Shifter<Vector256<T>> lookup<T>(ShiftOpKind kind)
             where T : unmanaged
         {
-            switch(id)
+            switch(kind)
             {
                 case ShiftOpKind.Sll: return sll;
                 case ShiftOpKind.Srl: return srl;
                 case ShiftOpKind.Rotl: return rotl;
                 case ShiftOpKind.Rotr: return rotr;
-                default: return dne<Vector256<T>>(id);            
+                default: return dne<Vector256<T>>(kind);            
             }
         }
 
-        public static TernaryOp<Vector256<T>> lookup<T>(TernaryLogicOpKind id)
+        /// <summary>
+        /// Returns a kind-identified delegate if possible; otherwise, raises an exception
+        /// </summary>
+        /// <param name="kind">The operator kind</param>
+        /// <typeparam name="T">The primal vector component type</typeparam>
+        public static TernaryOp<Vector256<T>> lookup<T>(Ternary512OpKind kind)
             where T : unmanaged
         {
-            switch(id)
+            switch(kind)
             {
                 case X01: return f01;
                 case X02: return f02;
@@ -205,7 +225,7 @@ namespace Z0.Logix
                 case X19: return f19;
                 case X1A: return f1a;
                 case X1B: return f1b;
-                default: return dne<Vector256<T>>(id);            
+                default: return dne<Vector256<T>>(kind);            
 
             }
         }

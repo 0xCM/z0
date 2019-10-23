@@ -30,7 +30,7 @@ namespace Z0.Logix
         /// <param name="operand">The operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static UnaryAritheticOp<T> unary<T>(UnaryArithmeticOpKind op, IExpr<T> operand)
+        public static UnaryAritheticOp<T> unary<T>(UnaryArithmeticOpKind op, ITypedExpr<T> operand)
             where T : unmanaged
                 => new UnaryAritheticOp<T>(op,operand);
 
@@ -40,7 +40,7 @@ namespace Z0.Logix
         /// <param name="operand">The expression operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static UnaryAritheticOp<T> inc<T>(IExpr<T> operand)
+        public static UnaryAritheticOp<T> inc<T>(ITypedExpr<T> operand)
             where T : unmanaged
                 => unary(UnaryArithmeticOpKind.Inc, operand);
 
@@ -60,7 +60,7 @@ namespace Z0.Logix
         /// <param name="operand">The expression operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static UnaryAritheticOp<T> dec<T>(IExpr<T> operand)
+        public static UnaryAritheticOp<T> dec<T>(ITypedExpr<T> operand)
             where T : unmanaged
                 => unary(UnaryArithmeticOpKind.Dec, operand);
 
@@ -80,7 +80,7 @@ namespace Z0.Logix
         /// <param name="operand">The expression operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static UnaryAritheticOp<T> negate<T>(IExpr<T> operand)
+        public static UnaryAritheticOp<T> negate<T>(ITypedExpr<T> operand)
             where T : unmanaged
                 => unary(UnaryArithmeticOpKind.Negate, operand);
 

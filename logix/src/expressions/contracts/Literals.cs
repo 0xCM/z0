@@ -15,7 +15,7 @@ namespace Z0.Logix
         
     }
 
-    public interface ILiteralExpr<T> : ILiteralExpr, IExpr<T>
+    public interface ITypedLiteral<T> : ILiteralExpr, ITypedExpr<T>
         where T : unmanaged
     {
         /// <summary>

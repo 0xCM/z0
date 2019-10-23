@@ -30,7 +30,7 @@ namespace Z0.Logix
         /// <param name="operand">The operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static UnaryOpSpec<T> unary<T>(UnaryLogicOpKind op, IExpr<T> operand)
+        public static UnaryOpSpec<T> unary<T>(UnaryBitwiseOpKind op, ITypedExpr<T> operand)
             where T : unmanaged
                 => new UnaryOpSpec<T>(op,operand);
 
@@ -42,9 +42,9 @@ namespace Z0.Logix
         /// <param name="right">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static BinaryOpSpec<T> binary<T>(BinaryLogicOpKind op, IExpr<T> left, IExpr<T> right)
+        public static BinaryBitwiseOp<T> binary<T>(BinaryBitwiseOpKind op, ITypedExpr<T> left, ITypedExpr<T> right)
             where T : unmanaged
-                => new BinaryOpSpec<T>(op,left,right);
+                => new BinaryBitwiseOp<T>(op,left,right);
 
         /// <summary>
         /// Creates a bitwise ternary expression
@@ -54,7 +54,7 @@ namespace Z0.Logix
         /// <param name="b">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static TernaryOpSpec<T> ternary<T>(TernaryLogicOpKind op, IExpr<T> a, IExpr<T> b, IExpr<T> c)
+        public static TernaryOpSpec<T> ternary<T>(Ternary512OpKind op, ITypedExpr<T> a, ITypedExpr<T> b, ITypedExpr<T> c)
             where T : unmanaged
                 => new TernaryOpSpec<T>(op,a,b,c);
 
@@ -65,9 +65,9 @@ namespace Z0.Logix
         /// <param name="max">The maximum scalar in the range</param>
         /// <typeparam name="T">The scalar type</typeparam>
         [MethodImpl(Inline)]
-        public static RangeExpr<T> rangexpr<T>(T min, T max)
+        public static RangeExpr<T> rangexpr<T>(T min, T max, T? step = null)
             where T : unmanaged
-                => new RangeExpr<T>(min,max);
+                => new RangeExpr<T>(min,max,step);
 
         
 

@@ -41,23 +41,23 @@ namespace Z0.Logix
     /// <summary>
     /// Characterizes a typed variable
     /// </summary>
-    public interface IVarExpr<T> : IVarExpr, IExpr<T>
+    public interface IVarExpr<T> : IVarExpr, ITypedExpr<T>
         where T : unmanaged
     {
         /// <summary>
         /// Gets the current value of the variable
         /// </summary>
-        new IExpr<T> Value {get;}
+        new ITypedExpr<T> Value {get;}
 
         /// <summary>
         /// Sets the variable value
         /// </summary>
-        void Set(IExpr<T> value);
+        void Set(ITypedExpr<T> value);
 
         void Set(T value);
     }
 
-    public interface ILiteralVarExpr<T> : IVarExpr, IExpr<T>
+    public interface ILiteralVarExpr<T> : IVarExpr, ITypedExpr<T>
         where T : unmanaged
     {
         void Set(T value);

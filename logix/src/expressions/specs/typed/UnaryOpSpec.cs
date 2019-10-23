@@ -16,10 +16,10 @@ namespace Z0.Logix
     public sealed class UnaryOpSpec<T> : IUnaryOp<T>
         where T : unmanaged
     {
-        public UnaryOpSpec(UnaryLogicOpKind op, IExpr<T> operand)
+        public UnaryOpSpec(UnaryBitwiseOpKind op, ITypedExpr<T> operand)
         {
             this.OpKind = op;
-            this.Operand = operand;
+            this.Arg = operand;
         }
         
         /// <summary>
@@ -28,20 +28,18 @@ namespace Z0.Logix
         public TypedExprKind ExprKind 
             => TypedExprKind.UnaryOperator;
 
-
         /// <summary>
         /// The operator
         /// </summary>
-        public UnaryLogicOpKind OpKind {get;}
-
+        public UnaryBitwiseOpKind OpKind {get;}
 
         /// <summary>
         /// The operand
         /// </summary>
-        public IExpr<T> Operand {get;}
+        public ITypedExpr<T> Arg {get;}
 
         public string Format()
-            => OpKind.Format(Operand);
+            => OpKind.Format(Arg);
 
         public override string ToString()
             => Format();

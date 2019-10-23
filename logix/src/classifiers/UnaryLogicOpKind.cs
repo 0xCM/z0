@@ -23,9 +23,6 @@ namespace Z0.Logix
 
         Negate = 128,
 
-        Inc = 16,
-
-        Dec = 32
     }
 
 }

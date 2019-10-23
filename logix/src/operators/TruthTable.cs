@@ -17,7 +17,7 @@ namespace Z0.Logix
         static bit off => bit.Off;
         static bit on = bit.On;
         
-        public static BitVector8 Signature(TernaryLogicOpKind id)
+        public static BitVector8 Signature(Ternary512OpKind id)
         {
             var op = LogicOpApi.lookup(id);
             var x = BitVector8.Zero;
@@ -46,7 +46,7 @@ namespace Z0.Logix
         public static BitMatrix<N4,N3,byte> Build(BinaryLogicOpKind kind)
             => LogicOpApi.table(kind);
 
-        public static BitMatrix<N8,N4,byte> Build(TernaryLogicOpKind kind)
+        public static BitMatrix<N8,N4,byte> Build(Ternary512OpKind kind)
             => LogicOpApi.table(kind);
 
         public static BitMatrix<N4,N3,byte> Emit(BinaryLogicOpKind kind, TextWriter dst)
@@ -56,7 +56,7 @@ namespace Z0.Logix
             return table;
         }
 
-        public static BitMatrix<N8,N4,byte> Emit(TernaryLogicOpKind kind, TextWriter dst)
+        public static BitMatrix<N8,N4,byte> Emit(Ternary512OpKind kind, TextWriter dst)
         {
             var table = Build(kind);
             table.Emit(kind,dst);
@@ -66,7 +66,7 @@ namespace Z0.Logix
         public static void Emit(TextWriter dst, params BinaryLogicOpKind[] kinds)
             => kinds.Iterate(k => Emit(k,dst));
 
-        public static void Emit(TextWriter dst, params TernaryLogicOpKind[] kinds)
+        public static void Emit(TextWriter dst, params Ternary512OpKind[] kinds)
             => kinds.Iterate(k => Emit(k,dst));
 
         public static void Emit(TextWriter dst, OpArityKind arity)
@@ -141,7 +141,7 @@ namespace Z0.Logix
             where T: unmanaged
                 => src.Header(kind.HasValue ? kind.Value.ToString() : "Table");
 
-        static string TernaryHeader<M,N,T>(this BitMatrix<M,N, T> src, TernaryLogicOpKind? kind = null)
+        static string TernaryHeader<M,N,T>(this BitMatrix<M,N, T> src, Ternary512OpKind? kind = null)
             where M: unmanaged, ITypeNat
             where N: unmanaged, ITypeNat
             where T: unmanaged
@@ -166,7 +166,7 @@ namespace Z0.Logix
             dst.WriteLine(src.Format());
         }
 
-        static void Emit(this BitMatrix<N8,N4, byte> src, TernaryLogicOpKind op, TextWriter dst)
+        static void Emit(this BitMatrix<N8,N4, byte> src, Ternary512OpKind op, TextWriter dst)
         {
             dst.Write(src.TernaryHeader(op));
             dst.WriteLine(src.Format());

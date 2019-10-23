@@ -6,6 +6,7 @@ namespace Z0.Logix
 {
     using System;
     using System.Linq;
+
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     
@@ -20,6 +21,28 @@ namespace Z0.Logix
         string Format();   
     }
 
+
+    /// <summary>
+    /// Characterizes a logicical expression over a bit
+    /// </summary>
+    public interface ILogicExpr : IExpr
+    {
+        LogicExprKind ExprKind {get;}
+    }
+
+    /// <summary>
+    /// Characterizes an expression over an unmanaged type
+    /// </summary>
+    /// <typeparam name="T">The type over which the expression is defined</typeparam>
+    public interface ITypedExpr<T> : IExpr
+        where T : unmanaged
+    {
+        TypedExprKind ExprKind {get;}
+    }
+    
+    /// <summary>
+    /// Characterizes a formula which, by definition, is a named expression
+    /// </summary>
     public interface IFormula : IExpr
     {
         string Name {get;}
@@ -28,25 +51,32 @@ namespace Z0.Logix
     }
 
     /// <summary>
-    /// Characterizes an expression over an unmanaged type
+    /// Characterizes a typed formula, a named typed expression
     /// </summary>
-    /// <typeparam name="T">The type over which the expression is defined</typeparam>
-    public interface IExpr<T> : IExpr
-        where T : unmanaged
-    {
-        TypedExprKind ExprKind {get;}
-    }
-    
     public interface IFormula<T> : IFormula
         where T : unmanaged
     {
-        new IExpr<T> Encoding {get;}
+        new ITypedExpr<T> Encoding {get;}
     }
+
+    public interface ISeqExpr : IExpr
+    {
+
+    }
+    
+    public interface ILazySeqExpr<T> : ISeqExpr
+        where T : unmanaged
+    {
+        IEnumerable<T> Terms {get;}   
+
+        int? Length{get;}
+    }
+
     /// <summary>
     /// Characterizes a finite sequence of terms
     /// </summary>
     /// <typeparam name="T">The term type</typeparam>
-    public interface ISeqExpr<T> : IExpr
+    public interface ISeqExpr<T> : ISeqExpr
         where T : unmanaged
     {
         /// <summary>
@@ -77,12 +107,11 @@ namespace Z0.Logix
     /// Characterizes a typed expression defined via an operator
     /// </summary>
     /// <typeparam name="T">The type over which the expression is defined</typeparam>
-    public interface IOpExpr<T> : IExpr<T>, IOpExpr
+    public interface IOpExpr<T> : ITypedExpr<T>, IOpExpr
         where T : unmanaged
     {
 
     }
-
 
     /// <summary>
     /// Characterizes a typed expression defined via an operator of specified kind
@@ -96,14 +125,6 @@ namespace Z0.Logix
         K OpKind {get;}
     }
 
-
-    /// <summary>
-    /// Characterizes a logicical expression over a bit
-    /// </summary>
-    public interface ILogicExpr : IExpr
-    {
-        LogicExprKind ExprKind {get;}
-    }
 
     public interface ILogicOpExpr : ILogicExpr, IOpExpr
     {
@@ -134,40 +155,5 @@ namespace Z0.Logix
         bit Satisfied(EqualityExpr expr, bit a, bit b);
     }
 
-    public interface IOpSvc<T,K>
-        where T : unmanaged
-        where K : Enum
-    {
-        IEnumerable<K> Available {get;}
-    }
-
-    public interface IUnaryOpSvc<T,K> : IOpSvc<T,K>
-        where T : unmanaged
-        where K : Enum
-    {
-        UnaryOp<T> Lookup(K kind);
-
-        T Eval(K kind, T a);
-    }
-
-    public interface IBinOpSvc<T,K> : IOpSvc<T,K>
-        where T : unmanaged
-        where K : Enum
-    {
-        BinaryOp<T> Lookup(K kind);
-
-        T Eval(K kind, T a, T b);
-
-    }
-
-    public interface ITernaryOpSvc<T,K> : IOpSvc<T,K>
-        where T : unmanaged
-        where K : Enum
-    {
-        TernaryOp<T> Lookup(K kind);
-
-        T Eval(K kind, T a, T b, T c);
-
-    }
 
 }

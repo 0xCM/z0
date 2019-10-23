@@ -15,7 +15,7 @@ namespace Z0.Logix
         where T : unmanaged
     {
 
-        public EqualityExpr(IExpr<T> lhs, IExpr<T> rhs, params VariableExpr<T>[] vars)
+        public EqualityExpr(ITypedExpr<T> lhs, ITypedExpr<T> rhs, params VariableExpr<T>[] vars)
         {
             this.Lhs = lhs;
             this.Rhs = rhs;
@@ -31,17 +31,17 @@ namespace Z0.Logix
         /// <summary>
         /// The left expression
         /// </summary>
-        public IExpr<T> Lhs {get;}
+        public ITypedExpr<T> Lhs {get;}
         
         /// <summary>
         /// The right expression
         /// </summary>
-        public IExpr<T> Rhs {get;}
+        public ITypedExpr<T> Rhs {get;}
 
         public VariableExpr<T>[] Vars {get;}
 
 
-        public void SetVars(params IExpr<T>[] values)
+        public void SetVars(params ITypedExpr<T>[] values)
         {
             var count = Math.Min(Vars.Length, values.Length);
             for(var i=0; i<count; i++)

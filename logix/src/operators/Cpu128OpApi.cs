@@ -12,7 +12,7 @@ namespace Z0.Logix
     using System.Runtime.Intrinsics;
 
     using static zfunc;    
-    using static TernaryLogicOpKind;
+    using static Ternary512OpKind;
     using static As;
     using static OpHelpers;
     using static Cpu128Ops;
@@ -31,18 +31,18 @@ namespace Z0.Logix
         /// <summary>
         /// Advertises the supported binary operators
         /// </summary>
-        public static IEnumerable<BinaryLogicOpKind> BinaryKinds
+        public static IEnumerable<BinaryBitwiseOpKind> BinaryKinds
             => items(
-                BinaryLogicOpKind.And, BinaryLogicOpKind.Or, BinaryLogicOpKind.XOr,
-                BinaryLogicOpKind.Nand, BinaryLogicOpKind.Nor, BinaryLogicOpKind.Xnor,
-                BinaryLogicOpKind.AndNot, BinaryLogicOpKind.False, BinaryLogicOpKind.True
+                BinaryBitwiseOpKind.And, BinaryBitwiseOpKind.Or, BinaryBitwiseOpKind.XOr,
+                BinaryBitwiseOpKind.Nand, BinaryBitwiseOpKind.Nor, BinaryBitwiseOpKind.Xnor,
+                BinaryBitwiseOpKind.AndNot, BinaryBitwiseOpKind.False, BinaryBitwiseOpKind.True
             );
 
         /// <summary>
         /// Advertises the supported ternary opeators
         /// </summary>
-        public static IEnumerable<TernaryLogicOpKind> TernaryKinds
-            => range((byte)1,(byte)X1B).Cast<TernaryLogicOpKind>();
+        public static IEnumerable<Ternary512OpKind> TernaryKinds
+            => range((byte)1,(byte)X1B).Cast<Ternary512OpKind>();
 
         /// <summary>
         /// Evaluates an identified unary operator over a supplied operand
@@ -51,15 +51,15 @@ namespace Z0.Logix
         /// <param name="a">The operand</param>
         /// <typeparam name="T">The primal vector component type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector128<T> eval<T>(UnaryLogicOpKind kind, Vector128<T> a)
+        public static Vector128<T> eval<T>(UnaryBitwiseOpKind kind, Vector128<T> a)
             where T : unmanaged
         {
             switch(kind)
             {
-                case UnaryLogicOpKind.Not: return not(a);
-                case UnaryLogicOpKind.Identity: return ScalarOps.identity(a);
-                case UnaryLogicOpKind.Negate: return negate(a);
-                default: return dne<UnaryLogicOpKind,Vector128<T>>(kind);            
+                case UnaryBitwiseOpKind.Not: return not(a);
+                case UnaryBitwiseOpKind.Identity: return ScalarOps.identity(a);
+                case UnaryBitwiseOpKind.Negate: return negate(a);
+                default: return dne<UnaryBitwiseOpKind,Vector128<T>>(kind);            
             }
         }
 
@@ -70,31 +70,31 @@ namespace Z0.Logix
         /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
         /// <typeparam name="T">The primal vector component type</typeparam>
-        public static Vector128<T> eval<T>(BinaryLogicOpKind kind, Vector128<T> a, Vector128<T> b)
+        public static Vector128<T> eval<T>(BinaryBitwiseOpKind kind, Vector128<T> a, Vector128<T> b)
             where T : unmanaged
         {
             switch(kind)
             {
-                case BinaryLogicOpKind.And:
+                case BinaryBitwiseOpKind.And:
                     return and(a,b);
-                case BinaryLogicOpKind.Or:
+                case BinaryBitwiseOpKind.Or:
                     return or(a,b);
-                case BinaryLogicOpKind.XOr:
+                case BinaryBitwiseOpKind.XOr:
                     return xor(a,b);
-                case BinaryLogicOpKind.Nand:
+                case BinaryBitwiseOpKind.Nand:
                     return nand(a,b);
-                case BinaryLogicOpKind.Nor:
+                case BinaryBitwiseOpKind.Nor:
                     return nor(a,b);
-                case BinaryLogicOpKind.Xnor:
+                case BinaryBitwiseOpKind.Xnor:
                     return xnor(a,b);
-                case BinaryLogicOpKind.AndNot:
+                case BinaryBitwiseOpKind.AndNot:
                     return andnot(a,b);
-                case BinaryLogicOpKind.False:
+                case BinaryBitwiseOpKind.False:
                     return @false(a,b);
-                case BinaryLogicOpKind.True:
+                case BinaryBitwiseOpKind.True:
                     return @true(a,b);
                 default:
-                    return dne<BinaryLogicOpKind,Vector128<T>>(kind);
+                    return dne<BinaryBitwiseOpKind,Vector128<T>>(kind);
             }
         }
 
@@ -107,7 +107,7 @@ namespace Z0.Logix
         /// <param name="z">The third operand</param>
         /// <typeparam name="T">The primal vector component type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector128<T> eval<T>(TernaryLogicOpKind kind, Vector128<T> x, Vector128<T> y, Vector128<T> z)
+        public static Vector128<T> eval<T>(Ternary512OpKind kind, Vector128<T> x, Vector128<T> y, Vector128<T> z)
             where T : unmanaged
                 => lookup<T>(kind)(x,y,z);
 
@@ -132,6 +132,11 @@ namespace Z0.Logix
             }
         }
 
+        /// <summary>
+        /// Returns a kind-identified delegate if possible; otherwise, raises an exception
+        /// </summary>
+        /// <param name="kind">The operator kind</param>
+        /// <typeparam name="T">The primal vector component type</typeparam>
         public static UnaryOp<Vector128<T>> lookup<T>(UnaryLogicOpKind id)
             where T : unmanaged            
         {
@@ -144,6 +149,11 @@ namespace Z0.Logix
             }
         }
 
+        /// <summary>
+        /// Returns a kind-identified delegate if possible; otherwise, raises an exception
+        /// </summary>
+        /// <param name="kind">The operator kind</param>
+        /// <typeparam name="T">The primal vector component type</typeparam>
        public static Shifter<Vector128<T>> lookup<T>(ShiftOpKind id)
             where T : unmanaged
         {
@@ -157,25 +167,35 @@ namespace Z0.Logix
             }
         }
 
-       public static BinaryOp<Vector128<T>> lookup<T>(BinaryLogicOpKind id)
+        /// <summary>
+        /// Returns a kind-identified delegate if possible; otherwise, raises an exception
+        /// </summary>
+        /// <param name="kind">The operator kind</param>
+        /// <typeparam name="T">The primal vector component type</typeparam>
+       public static BinaryOp<Vector128<T>> lookup<T>(BinaryBitwiseOpKind id)
             where T : unmanaged
         {
             switch(id)
             {
-                case BinaryLogicOpKind.And: return and;
-                case BinaryLogicOpKind.Nand: return nand;
-                case BinaryLogicOpKind.Or: return or;
-                case BinaryLogicOpKind.Nor: return nor;
-                case BinaryLogicOpKind.XOr: return xor;
-                case BinaryLogicOpKind.Xnor: return xnor;
-                case BinaryLogicOpKind.AndNot: return andnot;
-                case BinaryLogicOpKind.False: return @false;
-                case BinaryLogicOpKind.True: return @true;
+                case BinaryBitwiseOpKind.And: return and;
+                case BinaryBitwiseOpKind.Nand: return nand;
+                case BinaryBitwiseOpKind.Or: return or;
+                case BinaryBitwiseOpKind.Nor: return nor;
+                case BinaryBitwiseOpKind.XOr: return xor;
+                case BinaryBitwiseOpKind.Xnor: return xnor;
+                case BinaryBitwiseOpKind.AndNot: return andnot;
+                case BinaryBitwiseOpKind.False: return @false;
+                case BinaryBitwiseOpKind.True: return @true;
                 default: return dne<Vector128<T>>(id);
             }
         }
 
-        public static TernaryOp<Vector128<T>> lookup<T>(TernaryLogicOpKind id)
+        /// <summary>
+        /// Returns a kind-identified delegate if possible; otherwise, raises an exception
+        /// </summary>
+        /// <param name="kind">The operator kind</param>
+        /// <typeparam name="T">The primal vector component type</typeparam>
+        public static TernaryOp<Vector128<T>> lookup<T>(Ternary512OpKind id)
             where T : unmanaged
         {
             switch(id)

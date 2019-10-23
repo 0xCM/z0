@@ -15,7 +15,7 @@ namespace Z0.Logix
 
     }
     
-    public interface IArithmeticExpr<T> : IArithmeticExpr, IExpr<T>
+    public interface IArithmeticExpr<T> : IArithmeticExpr, ITypedExpr<T>
         where  T : unmanaged
     {
         
@@ -66,7 +66,7 @@ namespace Z0.Logix
         /// <summary>
         /// The one and only operand
         /// </summary>
-        IExpr<T> Operand {get;}
+        ITypedExpr<T> Operand {get;}
 
     }
 

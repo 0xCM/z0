@@ -18,7 +18,7 @@ namespace Z0.Logix
     {
 
         [MethodImpl(Inline)]
-        public ShiftOpSpec(ShiftOpKind op, IExpr<T> subject, IExpr<int> offset)
+        public ShiftOpSpec(ShiftOpKind op, ITypedExpr<T> subject, ITypedExpr<int> offset)
         {
             this.OpKind = op;
             this.Subject = subject;
@@ -40,10 +40,10 @@ namespace Z0.Logix
         /// <summary>
         /// The shiftee
         /// </summary>
-        public IExpr<T> Subject {get;}
+        public ITypedExpr<T> Subject {get;}
 
 
-        public IExpr<int> Offset {get;}
+        public ITypedExpr<int> Offset {get;}
 
         public string Format()
             => OpKind.Format(Subject,Offset);

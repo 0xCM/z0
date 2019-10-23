@@ -15,11 +15,19 @@ namespace Z0.Logix
     public static class KindExtensions
     {
         [MethodImpl(Inline)]
+        public static string Format<T>(this UnaryLogicOpKind kind, T arg)
+            => $"{kind.Format()}({arg})";
+
+        [MethodImpl(Inline)]
         public static string Format(this UnaryLogicOpKind kind)
             => kind.ToString().ToLower();
 
         [MethodImpl(Inline)]
-        public static string Format<T>(this UnaryLogicOpKind kind, T arg)
+        public static string Format(this UnaryBitwiseOpKind kind)
+            => kind.ToString().ToLower();
+
+        [MethodImpl(Inline)]
+        public static string Format<T>(this UnaryBitwiseOpKind kind, T arg)
             => $"{kind.Format()}({arg})";
 
         [MethodImpl(Inline)]
@@ -41,6 +49,10 @@ namespace Z0.Logix
             => kind.ToString().ToLower();
 
         [MethodImpl(Inline)]
+        public static string Format(this BinaryBitwiseOpKind kind)
+            => kind.ToString().ToLower();
+
+        [MethodImpl(Inline)]
         public static string Format(this ComparisonOpKind kind)
             => kind.ToString().ToLower();
 
@@ -49,22 +61,26 @@ namespace Z0.Logix
             => $"{kind.Format()}({arg1}, {arg2})";
 
         [MethodImpl(Inline)]
+        public static string Format<T>(this BinaryBitwiseOpKind kind, T arg1, T arg2)
+            => $"{kind.Format()}({arg1}, {arg2})";
+
+        [MethodImpl(Inline)]
         public static string Format<T>(this ComparisonOpKind kind, T arg1, T arg2)
             => $"{kind.Format()}({arg1}, {arg2})";
 
         [MethodImpl(Inline)]
-        public static string Format(this TernaryLogicOpKind kind)
+        public static string Format(this Ternary512OpKind kind)
             => kind.ToString();
 
         [MethodImpl(Inline)]
-        public static string Format<T>(this TernaryLogicOpKind kind, T arg1, T arg2, T arg3)
+        public static string Format<T>(this Ternary512OpKind kind, T arg1, T arg2, T arg3)
             => $"{kind.Format()}({arg1}, {arg2}, {arg3})";
 
         [MethodImpl(Inline)]
-        public static TernaryLogicOpKind Next(this TernaryLogicOpKind src)
-            => src != TernaryLogicOpKind.XFF 
-                ? (TernaryLogicOpKind)((uint)(src) + 1u)
-                : TernaryLogicOpKind.X00;
+        public static Ternary512OpKind Next(this Ternary512OpKind src)
+            => src != Ternary512OpKind.XFF 
+                ? (Ternary512OpKind)((uint)(src) + 1u)
+                : Ternary512OpKind.X00;
 
         public static string Format(this ShiftOpKind kind)        
             => kind switch {
@@ -93,12 +109,12 @@ namespace Z0.Logix
 
     public class TernaryOpAttribute : Attribute
     {
-        public TernaryOpAttribute(TernaryLogicOpKind kind)
+        public TernaryOpAttribute(Ternary512OpKind kind)
         {
             this.Kind = kind;
         }
 
-        public TernaryLogicOpKind Kind {get;}
+        public Ternary512OpKind Kind {get;}
     }
 
 }

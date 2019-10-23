@@ -12,7 +12,7 @@ namespace Z0.Logix
     using static zfunc;
     using static LogicOps;
     using static OpHelpers;
-    using static TernaryLogicOpKind;
+    using static Ternary512OpKind;
 
     public static class LogicOpApi
     {
@@ -31,8 +31,8 @@ namespace Z0.Logix
         /// <summary>
         /// Advertises the supported ternary opeators
         /// </summary>
-        public static IEnumerable<TernaryLogicOpKind> TernaryKinds
-            => range((byte)1,(byte)X4F).Cast<TernaryLogicOpKind>();
+        public static IEnumerable<Ternary512OpKind> TernaryKinds
+            => range((byte)1,(byte)X4F).Cast<Ternary512OpKind>();
 
         /// <summary>
         /// Advertises the supported binary opeators
@@ -137,7 +137,7 @@ namespace Z0.Logix
         /// <param name="a">The first operand</param>
         /// <param name="b">The second operand</param>
         /// <param name="c">The third operand</param>
-        public static bit eval(TernaryLogicOpKind kind, bit a, bit b, bit c)
+        public static bit eval(Ternary512OpKind kind, bit a, bit b, bit c)
         {
             switch(kind)
             {
@@ -240,7 +240,7 @@ namespace Z0.Logix
         /// Returns a kind-indentified ternary operator
         /// </summary>
         /// <param name="kind">The operator kind</param>
-        public static TernaryOp<bit> lookup(TernaryLogicOpKind kind)
+        public static TernaryOp<bit> lookup(Ternary512OpKind kind)
         {
             switch(kind)
             {
@@ -358,7 +358,7 @@ namespace Z0.Logix
         /// Returns the truth table for a kind-identified operator
         /// </summary>
         /// <param name="kind">The operator kind</param>
-        public static BitMatrix<N8,N4, byte> table(TernaryLogicOpKind kind)
+        public static BitMatrix<N8,N4, byte> table(Ternary512OpKind kind)
         {
             var tt = BitMatrix.Alloc<N8,N4,byte>();
             var f = lookup(kind);

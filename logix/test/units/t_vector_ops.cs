@@ -82,7 +82,7 @@ namespace Z0.Logix
             var x = Random.CpuVector256<T>();
             var y = Random.CpuVector256<T>();
             var result = default(Vector256<T>);
-            var kinds = Cpu256OpApi.BinaryKinds.ToArray();
+            var kinds = Cpu256OpApi.BinaryBitwiseKinds.ToArray();
             var opcount = 0;
 
             clock.Start();

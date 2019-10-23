@@ -14,7 +14,7 @@ namespace Z0.Logix
         where T : unmanaged
     {
         [MethodImpl(Inline)]
-        internal VariedExpr(IExpr<T> baseExpr, params VariableExpr<T>[] variables)
+        internal VariedExpr(ITypedExpr<T> baseExpr, params VariableExpr<T>[] variables)
         {
             this.BaseExpr = baseExpr;
             this.Vars = variables;
@@ -26,7 +26,7 @@ namespace Z0.Logix
         public TypedExprKind ExprKind 
             => TypedExprKind.Varied;
 
-        public IExpr<T> BaseExpr {get;}
+        public ITypedExpr<T> BaseExpr {get;}
 
         public VariableExpr<T>[] Vars {get;}
 
@@ -35,7 +35,7 @@ namespace Z0.Logix
             => OpHelpers.Set(this,values.Map(v => new LiteralExpr<T>(v)));
 
         [MethodImpl(Inline)]
-        public void SetVars(params IExpr<T>[] values)
+        public void SetVars(params ITypedExpr<T>[] values)
             => OpHelpers.Set(this,values);
         
         public string Format()
@@ -47,7 +47,7 @@ namespace Z0.Logix
         where N : unmanaged, ITypeNat
     {        
         [MethodImpl(Inline)]
-        internal VariedExpr(IExpr<T> baseExpr, params VariableExpr<T>[] variables)
+        internal VariedExpr(ITypedExpr<T> baseExpr, params VariableExpr<T>[] variables)
         {
             this.BaseExpr = baseExpr;
             this.Vars = variables;
@@ -59,7 +59,7 @@ namespace Z0.Logix
         public TypedExprKind ExprKind 
             => TypedExprKind.Varied;
 
-        public IExpr<T> BaseExpr {get;}
+        public ITypedExpr<T> BaseExpr {get;}
 
         public VariableExpr<T>[] Vars {get;}
 
@@ -68,7 +68,7 @@ namespace Z0.Logix
             => OpHelpers.Set(this,values.Map(v => new LiteralExpr<T>(v)));
 
         [MethodImpl(Inline)]
-        public void SetVars(params IExpr<T>[] values)
+        public void SetVars(params ITypedExpr<T>[] values)
             => OpHelpers.Set(this,values);
 
         public string Format()

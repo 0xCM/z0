@@ -10,7 +10,7 @@ namespace Z0.Logix
     using System.Runtime.CompilerServices;
 
     using static zfunc;
-    using static TernaryLogicOpKind;
+    using static Ternary512OpKind;
 
     /// <summary>
     /// Defines logical operations over 1, 2 or 3 bits
@@ -110,7 +110,7 @@ namespace Z0.Logix
             => bit.select(a,b,c);
 
         // a nor (b or c)
-        [MethodImpl(Inline),TernaryOp(X00)]
+        [MethodImpl(Inline),TernaryOp(X01)]
         public static bit f01(bit a, bit b, bit c)
             => nor(a, or(b,c));
 
