@@ -35,9 +35,9 @@ namespace Z0
         /// </summary>
         public static readonly BitVector128 Ones = (UInt64.MaxValue, UInt64.MaxValue);
 
-        public const int BitSize = 128;
+        public const int Width = 128;
 
-        public const int LastPos = BitSize - 1;
+        public const int LastPos = Width - 1;
 
         /// <summary>
         /// Allocates a new empty vector
@@ -362,16 +362,16 @@ namespace Z0
         /// <summary>
         /// The actual number of bits represented by the vector
         /// </summary>
-        public readonly BitSize Length
+        public readonly uint Length
         {
             [MethodImpl(Inline)]
-            get => BitSize;
+            get => Width;
         }
 
         /// <summary>
         /// The maximum number of bits that can be represented
         /// </summary>
-        public readonly BitSize Capacity
+        public readonly uint Capacity
         {
             [MethodImpl(Inline)]
             get => Length;
@@ -474,14 +474,14 @@ namespace Z0
         /// Counts the number of enabled bits in the source
         /// </summary>
         [MethodImpl(Inline)]
-        public readonly BitSize Pop()
+        public readonly uint Pop()
             => Bits.pop(x0) + Bits.pop(x1);
 
         /// <summary>
         /// Counts the number of leading zeros
         /// </summary>
         [MethodImpl(Inline)]
-        public readonly BitSize Nlz()
+        public readonly uint Nlz()
         {
             if(x1 == 0)
                 return 64 + Bits.nlz(x0);
@@ -493,7 +493,7 @@ namespace Z0
         /// Counts the number of trailing zeros
         /// </summary>
         [MethodImpl(Inline)]
-        public readonly BitSize Ntz()
+        public readonly uint Ntz()
         {
             if(x0 == 0)
                 return Bits.ntz(x1) + 64;

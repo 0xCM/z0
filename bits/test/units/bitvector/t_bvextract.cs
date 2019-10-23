@@ -25,7 +25,7 @@ namespace Z0.Test
                 Claim.eq(v1.ToPrimalBits(n64), v2);
 
                 var r1 = v1.SliceCell(lower[i], upper[i]);
-                var r2 = v2.Between(lower[i], upper[i]);
+                var r2 = v2[lower[i], upper[i]];
 
                 if(r1 != r2)
                 {
@@ -69,7 +69,7 @@ namespace Z0.Test
                 Claim.eq(v1.ToPrimalBits(n16),v2);
 
                 var r1 = v1.SliceCell(lower[i], upper[i]);
-                var r2 = v2.Between(lower[i], upper[i]);
+                var r2 = v2[lower[i], upper[i]];
                 Claim.eq(r1,r2);                
             }
         }

@@ -253,7 +253,7 @@ namespace Z0
             => SafeWrap(a.state & ~b.state);
 
         /// <summary>
-        /// Evaluates the implication a -> b that means if p is true then b is true
+        /// Evaluates the implication a -> b
         /// </summary>
         /// <param name="antecedent">The first operand</param>
         /// <param name="consequent">The second operand</param>
@@ -261,7 +261,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bit implies(bit antecedent, bit consequent)
             => !(antecedent.state == 1 && consequent.state == 0);
-
 
         /// <summary>
         /// Evaluates the ternary select where the second operand is returned if the first 
@@ -272,8 +271,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bit select(bit a, bit b, bit c)
             => SafeWrap((a.state & b.state) | (~a.state & c.state));
-            //or(and(a, b), and(not(a), c));
-            //=> a ? b : c;
 
         [MethodImpl(Inline)]
         public static bit xor1(bit a)

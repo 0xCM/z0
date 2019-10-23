@@ -16,7 +16,7 @@ namespace Z0
     /// <summary>
     /// Defines a 4-bit bitvector
     /// </summary>
-    public struct BitVector4 : IPrimalBitVector<BitVector4,byte>
+    public struct BitVector4
     {
         internal byte data;
 
@@ -26,11 +26,11 @@ namespace Z0
 
         public static BitVector4 Ones => 0xFF;
 
-        public const int BitSize = 4;
+        public const int Width = 4;
 
         public const int FirstPos = 0;
 
-        public const int LastPos = BitSize - 1;
+        public const int LastPos = Width - 1;
 
         /// <summary>
         /// Allocates a zero-filled vector
@@ -95,7 +95,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
         public static BitVector4 FromLo(byte src)        
-            => new BitVector4((byte)(src & 0xF));
+            => new BitVector4(src);
 
         /// <summary>
         /// Constructs a bitvector from the 4 most significant bits of the source value
@@ -103,7 +103,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
         public static BitVector4 FromHi(byte src)        
-            => new BitVector4((byte)((src >> 4) & 0xF));
+            => new BitVector4((byte)((src >> 4)));
 
         /// <summary>
         /// Creates a vector from the lower 4 bits of a byte
@@ -230,8 +230,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public BitVector4(byte data)
         {
-            //require(data < 16);
-            this.data = data;
+            this.data = (byte)(data & 0xF);
         }
 
         public bit this[int pos]
@@ -256,30 +255,12 @@ namespace Z0
         }
 
         /// <summary>
-        /// Presents vector content as a parametric primal scalar
-        /// </summary>
-        /// <typeparam name="S">The primal scalar type</typeparam>
-        [MethodImpl(Inline)]
-        public S AsScalar<S>()
-            where S : unmanaged
-                => As.generic<S>(data);
-
-        /// <summary>
         /// The number of bits represented by the vector
         /// </summary>
-        public readonly BitSize Length
+        public readonly int Length
         {
             [MethodImpl(Inline)]
             get => 4;
-        }
-
-        /// <summary>
-        /// The maximum number of bits that can be represented by the vector
-        /// </summary>
-        public readonly BitSize Capacity
-        {
-            [MethodImpl]
-            get => Length;
         }
 
         /// <summary>
@@ -306,60 +287,6 @@ namespace Z0
         /// <param name="rhs">The right operand</param>
         public readonly bit Dot(BitVector4 rhs)
             => bitvector.dot(this,rhs);
-
-        /// <summary>
-        /// Computes in-place the bitwise AND of the source vector and another,
-        /// returning the result to the caller
-        /// </summary>
-        /// <param name="y">The other vector</param>
-        [MethodImpl(Inline)]
-        public BitVector4 And(BitVector4 y)
-        {
-            data &= y.data;
-            return this;
-        }
-
-        /// <summary>
-        /// Computes in-place the bitwise OR of the source vector and another,
-        /// returning the result to the caller
-        /// </summary>
-        /// <param name="y">The other vector</param>
-        [MethodImpl(Inline)]
-        public BitVector4 Or(BitVector4 y)
-        {
-            data |= y.data;
-            return this;
-        }
-
-        /// <summary>
-        /// Computes in-place the bitwise XOR of the source vector and another,
-        /// returning the result to the caller
-        /// </summary>
-        /// <param name="y">The other vector</param>
-        [MethodImpl(Inline)]
-        public BitVector4 XOr(BitVector4 y)
-        {
-            data ^= y.data;
-            return this;
-        }
-
-        [MethodImpl(Inline)]
-        public BitVector4 Select(BitVector4 y, BitVector4 z)
-        {
-            data = gmath.select(data,y.data,z.data);
-            return this;
-        }
-
-        /// <summary>
-        /// Computes in-place the bitwise complement of the source vector,
-        /// returning the result to the caller
-        /// </summary>
-        [MethodImpl(Inline)]
-        public BitVector4 Not()
-        {
-            data = TakeHi((byte)((byte)(~data) << 4));
-            return this;
-        }
 
         [MethodImpl(Inline)]
         static byte TakeHi(byte src)        
@@ -425,21 +352,21 @@ namespace Z0
         /// Counts the number of enabled bits in the vector
         /// </summary>
         [MethodImpl(Inline)]
-        public BitSize Pop()
+        public uint Pop()
             => Bits.pop(data);
 
         /// <summary>
         /// Counts the number of leading zero bits
         /// </summary>
         [MethodImpl(Inline)]
-        public BitSize Nlz()
+        public uint Nlz()
             => Bits.nlz((byte)(data << 4));
 
         /// <summary>
         /// Counts the number of trailing zero bits
         /// </summary>
         [MethodImpl(Inline)]
-        public BitSize Ntz()
+        public uint Ntz()
             => Bits.ntz(data);
 
         /// <summary>
@@ -472,15 +399,6 @@ namespace Z0
             return this;
         }
 
-        /// <summary>
-        /// Reverses the vector's bits
-        /// </summary>
-        [MethodImpl(Inline)]
-        public BitVector4 Reverse()
-        {
-            data = Bits.rev(data);
-            return this;
-        }
 
         /// <summary>
         /// Extracts a contiguous sequence of bits defined by an inclusive range
@@ -489,23 +407,8 @@ namespace Z0
         /// <param name="last">The last bit position</param>
         [MethodImpl(Inline)]
         public BitVector4 Between(int first, int last)
-            => Bits.between(data, (byte)first, (byte)last);
+            => bitvector.between(this,first,last);
 
-        /// <summary>
-        /// Constructs a bitvector formed from the n lest significant bits of the current vector
-        /// </summary>
-        /// <param name="n">The count of least significant bits</param>
-        [MethodImpl(Inline)]
-        public BitVector4 Lsb(int n)                
-            => Between(0, n - 1);                
-
-        /// <summary>
-        /// Constructs a bitvector formed from the n most significant bits of the current vector
-        /// </summary>
-        /// <param name="n">The count of most significant bits</param>
-        [MethodImpl(Inline)]
-        public BitVector4 Msb(int n)                
-            => Between(LastPos - n, LastPos);                
 
         /// <summary>
         /// Extracts the scalar represented by the vector
@@ -516,10 +419,6 @@ namespace Z0
             get => data;
         }
 
-        [MethodImpl(Inline)]
-        public T ToScalar<T>()
-            where T : unmanaged
-                => Unsafe.As<byte,T>(ref data);
 
         /// <summary>
         /// Returns a copy of the vector

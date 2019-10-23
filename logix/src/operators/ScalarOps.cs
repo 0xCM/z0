@@ -131,6 +131,11 @@ namespace Z0.Logix
                 => not(a);
 
         [MethodImpl(Inline)]
+        public static T implies<T>(T antecedent, T consequent)
+            where T : unmanaged
+                => not(andnot(antecedent, consequent));
+
+        [MethodImpl(Inline)]
         public static T @false<T>(T a, T b)
             where T:unmanaged
                 => default;

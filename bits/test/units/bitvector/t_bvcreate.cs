@@ -96,40 +96,6 @@ namespace Z0.Test
         }
 
 
-        public void bvcreate_p8g()
-        {
-            bv_create_gPrimal<BitVector8,byte>();
-        }
-
-        public void bvcreate_p16g()
-        {
-            bv_create_gPrimal<BitVector16,ushort>();
-        }
-
-        public void bvcreate_p32g()
-        {
-            bv_create_gPrimal<BitVector32,uint>();
-        }
-
-        public void bvcreate_p64g()
-        {
-            bv_create_gPrimal<BitVector64,ulong>();
-        }
-
-        void bv_create_gPrimal<V,S>()
-            where V : unmanaged, IPrimalBitVector<V,S>
-            where S : unmanaged
-        {
-            for(var i=0; i<SampleSize; i++)
-            {
-                var src = Random.Next<S>();
-                var bv = PrimalBits.define<V,S>(src).Subject;
-                var bs = BitString.FromScalar(src);
-                for(var j=0; j< bv.Length; j++)
-                    Claim.eq(bv[j], bs[j]);            
-            }
-        }
-
         public void bvcreate_g8u()
         {
             create_generic_check<byte>(128u);
@@ -198,7 +164,7 @@ namespace Z0.Test
             {
                 var bv = Random.BitVector(n64);
                 var n = Random.Next(1, bv.Length);
-                var result = bv.Lsb(n).ToBitString();
+                var result = bitvector.lsb(bv,n).ToBitString();
                 var expect = bv.ToBitString()[0, n - 1];
                 Claim.eq(expect, result);
             }
@@ -210,7 +176,7 @@ namespace Z0.Test
             {
                 var bv = Random.BitVector(n64);
                 var n = Random.Next(1, bv.Length);
-                var result = bv.Msb(n).ToBitString();
+                var result = bitvector.msb(bv,n).ToBitString();
                 var expect = bv.ToBitString().Reverse()[0, n - 1].Reverse();
                 Claim.eq(expect, result);
             }
@@ -223,7 +189,7 @@ namespace Z0.Test
             while(++x)
             {
                 var y = x.Replicate();
-                Trace($"rotl({y}:{offset}) = {y.Rotl((byte)offset)}"); 
+                Trace($"rotl({y}:{offset}) = {bitvector.rotl(y,offset)}"); 
             }
         }
 

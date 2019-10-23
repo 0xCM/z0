@@ -13,7 +13,7 @@ namespace Z0
     using static zfunc;    
     using static Bits;
 
-    public struct BitVector8 : IPrimalBitVector<BitVector8, byte>
+    public struct BitVector8
     {
         internal byte data;
 
@@ -366,14 +366,6 @@ namespace Z0
             set => SetBit(pos,value);
         }
 
-        /// <summary>
-        /// Presents vector content as a parametric primal scalar
-        /// </summary>
-        /// <typeparam name="S">The primal scalar type</typeparam>
-        [MethodImpl(Inline)]
-        public S AsScalar<S>()
-            where S : unmanaged
-                => As.generic<S>(data);
 
         /// <summary>
         /// The vector's 4 most significant bits
@@ -415,7 +407,7 @@ namespace Z0
         public BitVector8 this[Range range]
         {
             [MethodImpl(Inline)]
-            get => Between(range.Start.Value, range.End.Value);
+            get => bitvector.between(this, range.Start.Value, range.End.Value);
         }
 
         /// <summary>
@@ -426,155 +418,17 @@ namespace Z0
         public BitVector8 this[int first, int last]
         {
             [MethodImpl(Inline)]
-            get => Between(first, last);
+            get => bitvector.between(this,first,last);
         }
-
-
-        /// <summary>
-        /// Extracts a contiguous sequence of bits defined by an inclusive range
-        /// </summary>
-        /// <param name="first">The first bit position</param>
-        /// <param name="last">The last bit position</param>
-        [MethodImpl(Inline)]
-        public BitVector8 Between(int first, int last)
-            => Bits.between(data, (byte)first,(byte)last);
-
-        /// <summary>
-        /// Populates a target vector with mask-identified source bits
-        /// </summary>
-        /// <param name="spec">Identifies the source bits of interest</param>
-        /// <param name="dst">Receives the identified bits</param>
-        [MethodImpl(Inline)]
-        public BitVector8 Gather(BitVector8 spec)
-            => Bits.gather(data, spec);
-
-        /// <summary>
-        /// Computes the scalar product of the source vector and another
-        /// </summary>
-        /// <param name="y">The right operand</param>
-        [MethodImpl(Inline)]
-        public readonly bit Dot(BitVector8 y)
-            => bitvector.dot(this,y);
 
         /// <summary>
         /// The number of bits represented by the vector
         /// </summary>
-        public readonly BitSize Length
+        public readonly int Length
         {
             [MethodImpl(Inline)]
-            get => 8;
+            get => Width;
         }        
-
-        /// <summary>
-        /// The maximum number of bits that can be represented
-        /// </summary>
-        public readonly BitSize Capacity
-        {
-            [MethodImpl]
-            get => Length;
-        }
-
-        /// <summary>
-        /// Computes the least number of bits required to represent vector content
-        /// </summary>
-        public int MinWidth
-        {
-            [MethodImpl(Inline)]
-            get => Bits.width(data);
-        }
-
-        /// <summary>
-        /// Computes in-place the bitwise AND of the source vector and another,
-        /// returning the result to the caller
-        /// </summary>
-        /// <param name="y">The other vector</param>
-        [MethodImpl(Inline)]
-        public BitVector8 And(BitVector8 y)
-        {
-            data &= y.data;
-            return this;
-        }
-
-        [MethodImpl(Inline)]
-        public BitVector8 Nand(BitVector8 y)
-        {
-            data = math.nand(data,y.data);
-            return this;
-        }
-
-        /// <summary>
-        /// Computes in-place the bitwise OR of the source vector and another,
-        /// returning the result to the caller
-        /// </summary>
-        /// <param name="y">The other vector</param>
-        [MethodImpl(Inline)]
-        public BitVector8 Or(BitVector8 y)
-        {
-            data |= y.data;
-            return this;
-        }
-
-        [MethodImpl(Inline)]
-        public BitVector8 Nor(BitVector8 y)
-        {
-            data = math.nor(data,y.data);
-            return this;
-        }
-
-        /// <summary>
-        /// Computes in-place the bitwise XOR of the source vector and another,
-        /// returning the result to the caller
-        /// </summary>
-        /// <param name="y">The other vector</param>
-        [MethodImpl(Inline)]
-        public BitVector8 XOr(BitVector8 y)
-        {
-            data ^= y.data;
-            return this;
-        }
-
-        [MethodImpl(Inline)]
-        public BitVector8 XNor(BitVector8 y)
-        {
-            data = math.xnor(data,y.data);
-            return this;
-        }
-
-        [MethodImpl(Inline)]
-        public BitVector8 Select(BitVector8 y, BitVector8 z)
-        {
-            data = gmath.select(data,y.data,z.data);
-            return this;
-        }
-
-        /// <summary>
-        /// Computes in-place the bitwise complement of the source vector,
-        /// returning the result to the caller
-        /// </summary>
-        [MethodImpl(Inline)]
-        public BitVector8 Not()
-        {
-            data = math.not(data);
-            return this;
-        }
-
-        /// <summary>
-        /// Computes the in-place arithmetic difference between the source vector and another
-        /// </summary>
-        /// <param name="y">The vector to subtract from the source</param>
-        [MethodImpl(Inline)]
-        public BitVector8 Sub(BitVector8 y)
-        {
-            data -= y.data;
-            return this;
-        }
-
-        [MethodImpl(Inline)]
-        public BitVector8 Negate()
-        {
-            data = math.negate(data);
-            return this;
-        }
 
         /// <summary>
         /// Enables a bit if it is disabled
@@ -634,91 +488,11 @@ namespace Z0
             => Test(pos);
 
         /// <summary>
-        /// Shifts the bits in the vector leftwards
-        /// </summary>
-        /// <param name="offset">The number of bits to shift</param>
-        [MethodImpl(Inline)]
-        public BitVector8 Sll(int offset)
-        {
-            data <<= offset;
-            return this;
-        }
-
-        /// <summary>
-        /// Shifts the bits in the vector rightwards
-        /// </summary>
-        /// <param name="offset">The number of bits to shift</param>
-        [MethodImpl(Inline)]
-        public BitVector8 Srl(int offset)
-        {
-            data >>= offset;
-            return this;
-        }
-
-        /// <summary>
-        /// Increments the vector arithmetically
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        [MethodImpl(Inline)]
-        public BitVector8 Inc()
-        {
-            data++;
-            return this;
-        }
-
-        /// <summary>
-        /// Decrements the vector arithmetically
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        [MethodImpl(Inline)]
-        public BitVector8 Dec()
-        {
-            data--;
-            return this;
-        }
-
-        /// <summary>
-        /// Rotates bits in the source rightwards by a specified offset
-        /// </summary>
-        /// <param name="offset">The magnitude of the rotation</param>
-        [MethodImpl(Inline)]
-        public BitVector8 Rotr(int offset)
-        {
-            data = Bits.rotr(data, offset);
-            return this;
-        }
-
-        /// <summary>
-        /// Rotates bits in the source leftwards by a specified offset
-        /// </summary>
-        /// <param name="offset">The magnitude of the rotation</param>
-        [MethodImpl(Inline)]
-        public BitVector8 Rotl(int offset)
-        {
-            data = Bits.rotl(data, offset);
-            return this;
-        }
-
-        /// <summary>
         /// Counts the number of enabled bits in the vector
         /// </summary>
         [MethodImpl(Inline)]
-        public readonly BitSize Pop()
+        public readonly uint Pop()
             => Bits.pop(data);
-
-        /// <summary>
-        /// Counts the number of leading zero bits
-        /// </summary>
-        [MethodImpl(Inline)]
-        public readonly BitSize Nlz()
-            => Bits.nlz(data);
-
-        /// <summary>
-        /// Counts the number of trailing zero bits
-        /// </summary>
-        [MethodImpl(Inline)]
-        public readonly BitSize Ntz()
-            => Bits.ntz(data);
 
         /// <summary>
         /// Counts the number of bits set up to and including the specified position
@@ -769,21 +543,6 @@ namespace Z0
         public readonly BitString ToBitString(int? maxlen = null)
             => maxlen == null ? data.ToBitString() : data.ToBitString().Truncate(maxlen.Value);
 
-        /// <summary>
-        /// Constructs a bitvector formed from the n lest significant bits of the current vector
-        /// </summary>
-        /// <param name="n">The count of least significant bits</param>
-        [MethodImpl(Inline)]
-        public BitVector8 Lsb(int n)                
-            => Between(0, n - 1);                
-
-        /// <summary>
-        /// Constructs a bitvector formed from the n most significant bits of the current vector
-        /// </summary>
-        /// <param name="n">The count of most significant bits</param>
-        [MethodImpl(Inline)]
-        public BitVector8 Msb(int n)                
-            => Between(LastPos - n, LastPos);                
 
         /// <summary>
         /// Reverses the vector's bits

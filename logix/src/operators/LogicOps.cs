@@ -98,6 +98,14 @@ namespace Z0.Logix
             => bit.implies(antecedent,consequent);
 
         [MethodImpl(Inline)]
+        public static bit notimplies(bit antecedent, bit consequent)
+            => not(bit.implies(antecedent,consequent));
+
+        [MethodImpl(Inline)]
+        public static bit conimplies(bit consequent, bit antecedent)
+            => bit.implies(antecedent,consequent);
+
+        [MethodImpl(Inline)]
         public static bit not(bit a)
             => !a;
 

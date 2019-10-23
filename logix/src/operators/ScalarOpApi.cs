@@ -30,7 +30,8 @@ namespace Z0.Logix
             => items(
                 BinaryBitwiseOpKind.And, BinaryBitwiseOpKind.Or, BinaryBitwiseOpKind.XOr,
                 BinaryBitwiseOpKind.Nand, BinaryBitwiseOpKind.Nor, BinaryBitwiseOpKind.Xnor,
-                BinaryBitwiseOpKind.AndNot, BinaryBitwiseOpKind.True, BinaryBitwiseOpKind.False
+                BinaryBitwiseOpKind.AndNot, BinaryBitwiseOpKind.True, BinaryBitwiseOpKind.False,
+                BinaryBitwiseOpKind.Implies
             );
 
         /// <summary>
@@ -44,26 +45,17 @@ namespace Z0.Logix
         {
             switch(kind)
             {
-                case BinaryBitwiseOpKind.True:
-                    return @true(a,b);
-                case BinaryBitwiseOpKind.And:
-                    return and(a,b);
-                case BinaryBitwiseOpKind.Or:
-                    return or(a,b);
-                case BinaryBitwiseOpKind.XOr:
-                    return xor(a,b);
-                case BinaryBitwiseOpKind.Nand:
-                    return nand(a,b);
-                case BinaryBitwiseOpKind.Nor:
-                    return nor(a,b);
-                case BinaryBitwiseOpKind.Xnor:
-                    return xnor(a,b);
-                case BinaryBitwiseOpKind.AndNot:
-                    return andnot(a,b);
-                case BinaryBitwiseOpKind.False:
-                    return @false(a,b);
-                default:
-                    return dne<BinaryBitwiseOpKind,T>(kind);
+                case BinaryBitwiseOpKind.True: return @true(a,b);
+                case BinaryBitwiseOpKind.And: return and(a,b);
+                case BinaryBitwiseOpKind.Or: return or(a,b);
+                case BinaryBitwiseOpKind.XOr: return xor(a,b);
+                case BinaryBitwiseOpKind.Nand: return nand(a,b);
+                case BinaryBitwiseOpKind.Nor: return nor(a,b);
+                case BinaryBitwiseOpKind.Xnor: return xnor(a,b);
+                case BinaryBitwiseOpKind.AndNot: return andnot(a,b);
+                case BinaryBitwiseOpKind.Implies: return implies(a,b);                    
+                case BinaryBitwiseOpKind.False: return @false(a,b);
+                default: return dne<BinaryBitwiseOpKind,T>(kind);
             }
         }
 
@@ -243,6 +235,7 @@ namespace Z0.Logix
                 case BinaryBitwiseOpKind.RightNot: return rightnot;
                 case BinaryBitwiseOpKind.LeftNot: return leftnot;
                 case BinaryBitwiseOpKind.True: return @true;
+                case BinaryBitwiseOpKind.Implies: return implies;
                 default: return dne<T>(kind);
             }
         }

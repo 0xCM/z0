@@ -23,10 +23,10 @@ namespace Z0.Logix
     public static class Cpu128OpApi
     {
         /// <summary>
-        /// Advertises the supported unary operators
+        /// Advertises the supported unary bitwise operators
         /// </summary>
-        public static IEnumerable<UnaryLogicOpKind> UnaryKinds
-            => items(UnaryLogicOpKind.Not, UnaryLogicOpKind.Identity, UnaryLogicOpKind.Negate);
+        public static IEnumerable<UnaryBitwiseOpKind> UnaryBitwiseKinds
+            => items(UnaryBitwiseOpKind.Not, UnaryBitwiseOpKind.Identity, UnaryBitwiseOpKind.Negate);
 
         /// <summary>
         /// Advertises the supported binary operators
@@ -137,14 +137,14 @@ namespace Z0.Logix
         /// </summary>
         /// <param name="kind">The operator kind</param>
         /// <typeparam name="T">The primal vector component type</typeparam>
-        public static UnaryOp<Vector128<T>> lookup<T>(UnaryLogicOpKind id)
+        public static UnaryOp<Vector128<T>> lookup<T>(UnaryBitwiseOpKind id)
             where T : unmanaged            
         {
             switch(id)
             {
-                case UnaryLogicOpKind.Not: return not;
-                case UnaryLogicOpKind.Identity: return identity;
-                case UnaryLogicOpKind.Negate: return negate;
+                case UnaryBitwiseOpKind.Not: return not;
+                case UnaryBitwiseOpKind.Identity: return identity;
+                case UnaryBitwiseOpKind.Negate: return negate;
                 default: return dne<Vector128<T>>(id);
             }
         }

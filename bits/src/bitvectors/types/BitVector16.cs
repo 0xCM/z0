@@ -15,7 +15,7 @@ namespace Z0
     /// Defines a 16-bit bitvector
     /// </summary>
     [StructLayout(LayoutKind.Sequential, Size = 2)]
-    public struct BitVector16 : IPrimalBitVector<BitVector16, ushort>
+    public struct BitVector16
     {
         internal ushort data;
 
@@ -301,14 +301,6 @@ namespace Z0
             => this.data = src;
 
         /// <summary>
-        /// Assigns the bitvector a specified value
-        /// </summary>
-        /// <param name="src">The source value</param>
-        [MethodImpl(Inline)]
-        public void assign(ushort src)
-            => this.data = src;
-
-        /// <summary>
         /// Gets/Sets an identified bit
         /// </summary>
         public bit this[int pos]
@@ -326,7 +318,7 @@ namespace Z0
         public BitVector16 this[Range range]
         {
             [MethodImpl(Inline)]
-            get => Between(range.Start.Value, range.End.Value);
+            get => bitvector.between(this, range.Start.Value, range.End.Value);
         }
 
         /// <summary>
@@ -337,25 +329,16 @@ namespace Z0
         public BitVector16 this[int first, int last]
         {
             [MethodImpl(Inline)]
-            get => Between(first, last);
+            get => bitvector.between(this, first, last);
         }
 
         /// <summary>
         /// The number of bits represented by the vector
         /// </summary>
-        public readonly BitSize Length
+        public readonly int Length
         {
             [MethodImpl(Inline)]
             get => 16;
-        }
-
-        /// <summary>
-        /// The maximum number of bits that can be represented
-        /// </summary>
-        public readonly BitSize Capacity
-        {
-            [MethodImpl(Inline)]
-            get => Length;
         }
 
         /// <summary>
@@ -400,15 +383,6 @@ namespace Z0
             => bytespan(ref data);
 
         /// <summary>
-        /// Presents vector content as a parametric primal scalar
-        /// </summary>
-        /// <typeparam name="S">The primal scalar type</typeparam>
-        [MethodImpl(Inline)]
-        public S AsScalar<S>()
-            where S : unmanaged
-                => As.generic<S>(data);
-
-        /// <summary>
         /// Selects an index-identified byte where index = 0 | 1
         /// </summary>
         /// <param name="index">The 0-based byte-relative position</param>
@@ -416,206 +390,6 @@ namespace Z0
         public ref byte Byte(int index)        
             => ref Bytes[index];
 
-        /// <summary>
-        /// Computes in-place the bitwise AND of the source vector and another,
-        /// returning the result to the caller
-        /// </summary>
-        /// <param name="y">The other vector</param>
-        [MethodImpl(Inline)]
-        public BitVector16 And(BitVector16 y)
-        {
-            data &= y.data;
-            return this;
-        }
-
-        [MethodImpl(Inline)]
-        public BitVector16 Nand(BitVector16 y)
-        {
-            data = math.nand(data,y.data);
-            return this;
-        }
-
-        /// <summary>
-        /// Computes in-place the bitwise OR of the source vector and another,
-        /// returning the result to the caller
-        /// </summary>
-        /// <param name="y">The other vector</param>
-        [MethodImpl(Inline)]
-        public BitVector16 Or(BitVector16 y)
-        {
-            data |= y.data;
-            return this;
-        }
-
-        [MethodImpl(Inline)]
-        public BitVector16 Nor(BitVector16 y)
-        {
-            data = math.nor(data,y.data);
-            return this;
-        }
-
-        /// <summary>
-        /// Computes in-place the bitwise XOR of the source vector and another,
-        /// returning the result to the caller
-        /// </summary>
-        /// <param name="y">The other vector</param>
-        [MethodImpl(Inline)]
-        public BitVector16 XOr(BitVector16 y)
-        {
-            data ^= y.data;
-            return this;
-        }
-
-        [MethodImpl(Inline)]
-        public BitVector16 XNor(BitVector16 y)
-        {
-            data = math.xnor(data,y.data);
-            return this;
-        }
-
-        [MethodImpl(Inline)]
-        public BitVector16 Select(BitVector16 y, BitVector16 z)
-        {
-            data = gmath.select(data,y.data,z.data);
-            return this;
-        }
-
-        /// <summary>
-        /// Computes in-place the bitwise complement of the source vector,
-        /// returning the result to the caller
-        /// </summary>
-        [MethodImpl(Inline)]
-        public BitVector16 Not()
-        {
-            data = math.not(data);
-            return this;
-        }
-
-        [MethodImpl(Inline)]
-        public BitVector16 Negate()
-        {
-            data = math.negate(data);
-            return this;
-        }
-
-        /// <summary>
-        /// Computes the in-place arithmetic difference between the source vector and another
-        /// </summary>
-        /// <param name="y">The vector to subtract from the source</param>
-        [MethodImpl(Inline)]
-        public BitVector16 Sub(BitVector16 y)
-        {
-            data -= y.data;
-            return this;
-        }
-
-        /// <summary>
-        /// Increments the vector arithmetically
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        [MethodImpl(Inline)]
-        public BitVector16 Inc()
-        {
-            data++;
-            return this;
-        }
-
-        /// <summary>
-        /// Decrements the vector arithmetically
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        [MethodImpl(Inline)]
-        public BitVector16 Dec()
-        {
-            data--;
-            return this;
-        }
-
-        /// <summary>
-        /// Shifts the bits in the vector leftwards
-        /// </summary>
-        /// <param name="offset">The number of bits to shift</param>
-        [MethodImpl(Inline)]
-        public BitVector16 Sll(int offset)
-        {
-            data <<= offset;
-            return this;
-        }
-
-        /// <summary>
-        /// Shifts the bits in the vector rightwards
-        /// </summary>
-        /// <param name="offset">The number of bits to shift</param>
-        [MethodImpl(Inline)]
-        public BitVector16 Srl(int offset)
-        {
-            data >>= offset;
-            return this;
-        }
-
-        /// <summary>
-        /// Rotates vector bits rightwards by a specified offset
-        /// </summary>
-        /// <param name="offset">The magnitude of the rotation</param>
-        [MethodImpl(Inline)]
-        public BitVector16 Rotr(int offset)
-        {
-            data = Bits.rotr(data, offset);
-            return this;
-        }
-
-        /// <summary>
-        /// Rotates vector bits leftwards by a specified offset
-        /// </summary>
-        /// <param name="offset">The magnitude of the rotation</param>
-        [MethodImpl(Inline)]
-        public BitVector16 Rotl(int offset)
-        {
-            data = Bits.rotl(data, offset);
-            return this;
-        }
-
-        [MethodImpl(Inline)]
-        public BitVector16 AndNot(BitVector16 y)
-        {
-            data = math.andnot(data, y.data);            
-            return this;
-        }        
-
-        /// <summary>
-        /// Computes the scalar product of the source vector and another
-        /// </summary>
-        /// <param name="y">The right operand</param>
-        [MethodImpl(Inline)]
-        public bit Dot(BitVector16 y)
-            => bitvector.dot(this,y);
-
-        /// <summary>
-        /// Extracts a contiguous sequence of bits defined by an inclusive range
-        /// </summary>
-        /// <param name="first">The first bit position</param>
-        /// <param name="last">The last bit position</param>
-        [MethodImpl(Inline)]
-        public BitVector16 Between(int first, int last)
-            => Bits.between(data, (byte)first,(byte)last);
-        
-        /// <summary>
-        /// Populates a target vector with specified source bits
-        /// </summary>
-        /// <param name="spec">Identifies the source bits of interest</param>
-        /// <param name="dst">Receives the identified bits</param>
-        [MethodImpl(Inline)]
-        public BitVector16 Gather(BitVector16 spec)
-            => Bits.gather(data, spec);
-
-        /// <summary>
-        /// Populates a target vector with specified source bits
-        /// </summary>
-        /// <param name="spec">Identifies the source bits of interest</param>
-        /// <param name="dst">Receives the identified bits</param>
-        [MethodImpl(Inline)]
-        public BitVector8 Gather(BitVector8 spec)
-            => (byte)Bits.gather(data, (byte)spec);
 
         /// <summary>
         /// Enables a bit if it is disabled
@@ -666,12 +440,11 @@ namespace Z0
         public void SetBit(int pos, bit value)
             => data = BitMask.set(ref data, (byte)pos, value);
 
-
         /// <summary>
         /// Counts vector's enabled bits
         /// </summary>
         [MethodImpl(Inline)]
-        public BitSize Pop()
+        public uint Pop()
             => Bits.pop(data);
 
         /// <summary>
@@ -679,7 +452,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The bit source</param>
         [MethodImpl(Inline)]
-        public BitSize Nlz()
+        public uint Nlz()
             => Bits.nlz(data);
 
         /// <summary>
@@ -687,24 +460,9 @@ namespace Z0
         /// </summary>
         /// <param name="src">The bit source</param>
         [MethodImpl(Inline)]
-        public BitSize Ntz()
+        public uint Ntz()
             => Bits.ntz(data);
 
-        /// <summary>
-        /// Constructs a bitvector formed from the n lest significant bits of the current vector
-        /// </summary>
-        /// <param name="n">The count of least significant bits</param>
-        [MethodImpl(Inline)]
-        public BitVector16 Lsb(int n)                
-            => Between(0, n - 1);                
-
-        /// <summary>
-        /// Constructs a bitvector formed from the n most significant bits of the current vector
-        /// </summary>
-        /// <param name="n">The count of most significant bits</param>
-        [MethodImpl(Inline)]
-        public BitVector16 Msb(int n)                
-            => Between(LastPos - n, LastPos);                
 
         /// <summary>
         /// Counts the number of bits set up to and including the specified position
@@ -714,16 +472,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public uint Rank(int pos)
             => Bits.rank(data,pos);
-
-        /// <summary>
-        /// Reverses the vector's bits
-        /// </summary>
-        [MethodImpl(Inline)]
-        public BitVector16 Reverse()
-        {     
-            data = Bits.rev(data);
-            return this;
-        }
 
         /// <summary>
         /// Rearranges the vector in-place as specified by a permutation
@@ -754,17 +502,6 @@ namespace Z0
             [MethodImpl(Inline)]
             get => data != 0;
         }
-
-        /// <summary>
-        /// Computes the least number of bits required to represent vector content
-        /// </summary>
-        public int MinWidth
-        {
-            [MethodImpl(Inline)]
-            get => Bits.width(in data);
-        }
-
-
 
         /// <summary>
         /// Returns a copy of the vector
@@ -804,12 +541,6 @@ namespace Z0
             [MethodImpl(Inline)]
             get => data;
         }
-
-        [MethodImpl(Inline)]
-        public T ToScalar<T>()
-            where T : unmanaged
-                => Unsafe.As<ushort,T>(ref data);
-
 
         /// <summary>
         /// Applies a truncating reduction Bv16 -> Bv8

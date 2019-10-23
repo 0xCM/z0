@@ -27,49 +27,12 @@ namespace Z0
             Claim.eq(z0.ToPrimal(n16),z1);
         }
 
-        public void bvxor_g8_fixed()
-        {
-            bv_xor_check<BitVector8,byte>();
-        }
-
-        public void bvxor_g16_fixed()
-        {
-            bv_xor_check<BitVector16,ushort>();
-        }
-
-        public void bvxor_g32_fixed()
-        {
-            bv_xor_check<BitVector32,uint>();
-        }
-
-
-        public void bvxor_g64_fixed()
-        {
-            bv_xor_check<BitVector64,ulong>();
-        }
 
         public void bv_xor128()
         {
             bv_xor128_check();
         }
 
-        void bv_xor_check<V,S>()
-            where V : unmanaged, IPrimalBitVector<V,S>
-            where S : unmanaged
-        {
-            for(var i = 0; i< SampleSize; i++)
-            {
-                var x = Random.Next<S>();
-                var y = Random.Next<S>();
-                var z = gmath.xor(x, y);
-
-                var v1 = PrimalBits.define<V,S>(x);
-                var v2 = PrimalBits.define<V,S>(y);
-                var v3 = v1 ^ v2;
-                Claim.eq(v3.Scalar, z);
-            }
-
-        }
 
         void bv_xor128_check()
         {

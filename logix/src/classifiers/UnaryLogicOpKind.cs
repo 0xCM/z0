@@ -20,9 +20,7 @@ namespace Z0.Logix
         /// The identity operator
         /// </summary>
         Identity =0b10,
-
-        Negate = 128,
-
+        
     }
 
 }

@@ -14,8 +14,12 @@ namespace Z0
     public struct BitVector<T>
         where T : unmanaged
     {
-        T data;
+        internal T data;
 
+        public static readonly int Width = bitsize<T>();
+
+        public static readonly int LastPos = Width - 1;
+        
         /// <summary>
         /// Creates a bitvector defined by a single cell or portion thereof
         /// </summary>
@@ -131,7 +135,6 @@ namespace Z0
         public static BitVector<T> operator >>(BitVector<T> x, int offset)
             => bitvector.srl(x,offset);
 
-
         /// <summary>
         /// Increments the vector arithmetically
         /// </summary>
@@ -147,7 +150,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitVector<T> operator --(BitVector<T> src)
             => bitvector.dec(src);
-
 
         /// <summary>
         /// Returns true if the source vector is nonzero, false otherwise
@@ -329,20 +331,20 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public bool Equals(BitVector<T> y)
-            => ToBitString().Equals(y.ToBitString());
+            => gmath.eq(data, y.data);
 
         [MethodImpl(Inline)]
         public string Format(bool tlz = false, bool specifier = false, int? blockWidth = null)
             => ToBitString().Format(tlz, specifier, blockWidth);
 
         public override bool Equals(object obj)
-            => throw new NotImplementedException();
+            => obj is BitVector<T> x && Equals(x);
         
         public override int GetHashCode()
-            => throw new NotImplementedException();
+            => data.GetHashCode();
     
         public override string ToString()
-            => throw new NotImplementedException();
+            => Format();
 
     }
 

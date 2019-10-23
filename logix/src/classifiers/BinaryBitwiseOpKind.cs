@@ -75,9 +75,14 @@ namespace Z0.Logix
         RightProject = BinaryLogicOpKind.RightProject,
 
         /// <summary>
-        /// Identifies a binary bitwise operator that always a value will all bits on
+        /// Identifies an operator for which the result always has all bits on
         /// </summary>
         True = BinaryLogicOpKind.True,
+
+        /// <summary>
+        /// Identifies an operator that computes the bitwise equivalent of the material conditional
+        /// </summary>
+        Implies = BinaryLogicOpKind.Implies,
 
     }
      

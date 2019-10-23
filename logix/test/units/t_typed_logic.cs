@@ -15,8 +15,17 @@ namespace Z0.Logix
 
     public class t_typed_logic : UnitTest<t_typed_logic>
     {
-        // ~ select
-
+        
+        public void check_implies()
+        {
+            var dst = BitVector4.Alloc();
+            dst[0] = (byte)(ScalarOps.implies((byte)0,(byte)0) & 1) == 1;
+            dst[1] = (byte)(ScalarOps.implies((byte)1,(byte)0) & 1) == 1;
+            dst[2] = (byte)(ScalarOps.implies((byte)0,(byte)1) & 1) == 1;
+            dst[3] = (byte)(ScalarOps.implies((byte)1,(byte)1) & 1) == 1;
+            var sig = TruthTable.Signature(BinaryLogicOpKind.Implies);
+            Claim.eq(sig,dst);
+        }
 
         public void check_not()  
         {      
@@ -491,9 +500,10 @@ namespace Z0.Logix
             {
                 var a = Random.Next<T>();
                 v1.Set(a);
-                T actual = LogicEngine.eval(expr);
-                T expect = ScalarOpApi.eval(kind,a);
-                Claim.eq(actual,expect);                            
+                BitVector<T> actual = LogicEngine.eval(expr).Value;
+                BitVector<T> expect = ScalarOpApi.eval(kind,a);
+                Claim.eq(actual,expect);  
+                                          
             }
         }
 

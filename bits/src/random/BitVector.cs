@@ -100,26 +100,6 @@ namespace Z0
 
 
         /// <summary>
-        /// Produces a random primal generic bitvector
-        /// </summary>
-        /// <param name="random">The random source</param>
-        /// <typeparam name="V">The primal bitvector type</typeparam>
-        [MethodImpl(Inline)]
-        public static V PrimalBitVector<V>(this IPolyrand random)
-            where V : unmanaged, IBitVector<V>
-        {
-            if(typeof(V) == typeof(BitVector8))
-                return gbv.generic<V>(random.BitVector(n8));
-            else if(typeof(V) == typeof(BitVector16))
-                return gbv.generic<V>(random.BitVector(n16));
-            else if(typeof(V) == typeof(BitVector32))
-                return gbv.generic<V>(random.BitVector(n32));
-            else if(typeof(V) == typeof(BitVector64))
-                return gbv.generic<V>(random.BitVector(n64));
-            else
-                throw unsupported<V>();
-        }
-        /// <summary>
         /// Produces a generic bitvector of natural length
         /// </summary>
         /// <param name="random">The random source</param>

@@ -539,7 +539,33 @@ namespace Z0
             => ((ulong)src).ToBitVector();
 
 
+        /// <summary>
+        /// Applies a truncating reduction Bv64 -> Bv8
+        /// </summary>
+        [MethodImpl(Inline)]
+        public static BitVector8 Narrow(this BitVector64 src, N8 width)
+            => BitVector8.FromScalar(src.data);
 
+        /// <summary>
+        /// Applies a truncating reduction Bv64 -> Bv16
+        /// </summary>
+        [MethodImpl(Inline)]
+        public static BitVector16 Narrow(this BitVector64 src, N16 width)
+            => BitVector16.FromScalar(src.data);
+
+        /// <summary>
+        /// Applies a truncating reduction Bv64 -> Bv32
+        /// </summary>
+        [MethodImpl(Inline)]
+        public static BitVector32 Narrow(this BitVector64 src, N32 width)
+            => BitVector32.FromScalar(src.data);
+
+        /// <summary>
+        /// Applies a widening conversion Bv64 -> Bv128
+        /// </summary>
+        [MethodImpl(Inline)]
+        public static BitVector128 Expand(this BitVector64 src, N128 width)
+            => BitVector128.FromScalar(src.data);
 
     }
 }

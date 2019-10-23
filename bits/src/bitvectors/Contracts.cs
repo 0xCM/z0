@@ -19,12 +19,12 @@ namespace Z0
         /// <summary>
         /// The maximum number of bits that can be represented by the vector
         /// </summary>
-        BitSize Capacity {get;}
+        uint Capacity {get;}
 
         /// <summary>
         /// The actual number of bits represented by the vector
         /// </summary>
-        BitSize Length {get;}
+        uint Length {get;}
 
         /// <summary>
         /// Returns true if all bits are disabled, false otherwise
@@ -39,25 +39,24 @@ namespace Z0
         /// <summary>
         /// Counts vector's enabled bits
         /// </summary>
-        BitSize Pop();
+        uint Pop();
 
         /// <summary>
         /// Counts the vector's leading zero bits
         /// </summary>
         /// <param name="src">The bit source</param>
-        BitSize Nlz();
+        uint Nlz();
 
         /// <summary>
         /// Counts the vector's trailing zero bits
         /// </summary>
         /// <param name="src">The bit source</param>
-        BitSize Ntz();
+        uint Ntz();
 
         /// <summary>
         /// Converts the vector to a bitstring
         /// </summary>
         BitString ToBitString();
-
 
         /// <summary>
         /// Enables a bit if it is disabled
@@ -83,7 +82,6 @@ namespace Z0
         /// <param name="pos">The position of the bit to set</param>
         /// <param name="value">The bit value</param>
         void SetBit(int pos, bit value);
-
 
         /// <summary>
         /// Determines whether a bit is enabled
@@ -286,35 +284,8 @@ namespace Z0
         /// </summary>
         /// <param name="rhs">The right operand</param>
         bit Dot(V rhs);
-
-        T ToScalar<T>()
-            where T : unmanaged;
-
     }
 
-    public interface IPrimalBitVector<V> : IBitVector<V>, IEquatable<V>
-        where V : unmanaged, IBitVector
-
-    {
-
-
-    }
-
-    /// <summary>
-    /// Characterizes a bitvector defined over a primal scalar, i.e. one of {BitVector8, BitVector16, BitVector32, BitVector64}
-    /// </summary>
-    /// <typeparam name="V">The primal vector type</typeparam>
-    /// <typeparam name="T">The primal scalar type</typeparam>
-    public interface IPrimalBitVector<V,T> : IPrimalBitVector<V>
-        where V : unmanaged, IPrimalBitVector<V,T>
-        where T : unmanaged        
-    {
-        /// <summary>
-        /// The scalar value that defines the vector
-        /// </summary>
-        T Scalar {get;}
-
-    }
 
 
 }

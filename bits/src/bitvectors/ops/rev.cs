@@ -30,6 +30,14 @@ namespace Z0
         /// </summary>
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
+        public static BitVector4 rev(BitVector4 x)        
+            => Bits.rev(x.data);
+
+        /// <summary>
+        /// Reverses the bits in the source vector
+        /// </summary>
+        /// <param name="x">The source vector</param>
+        [MethodImpl(Inline)]
         public static BitVector8 rev(BitVector8 x)        
             => Bits.rev(x.data);
         

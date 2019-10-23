@@ -16,7 +16,7 @@ namespace Z0.Logix
     public enum BinaryLogicOpKind : uint
     {        
         /// <summary>
-        /// Identifies a binary operator that always returns FALSE
+        /// Identifies an operator that always returns FALSE
         /// </summary>
         False = 0b0000,
 
@@ -26,8 +26,8 @@ namespace Z0.Logix
         Nor = 0b0001,
 
         /// <summary>
-        /// Identifies an AND NOT operator that computes the AND of the first operand with the complement of the second
-        /// Also known as the "converse nonimplication"
+        /// Identifies an operator that computes the converse nonimplication (AND NOT ) operator  that 
+        /// computes the conjunction of the first operand with the negation of the second
         /// </summary>
         /// <remarks>
         /// Truth table:
@@ -49,6 +49,18 @@ namespace Z0.Logix
         /// 1 1 0
         /// </remarks>
         RightNot = 0b0011,
+
+        /// <summary>
+        /// Identifies an operator that computes the negation of the material conditional
+        /// </summary>
+        /// <remarks>
+        /// Truth table:
+        /// 0 0 0
+        /// 1 0 0
+        /// 0 1 1
+        /// 1 1 0
+        /// </remarks>
+        MaterialNonimplication = 0b0100,
 
         /// <summary>
         /// Identifies an operator that computes the negation of the left operand
@@ -73,20 +85,19 @@ namespace Z0.Logix
         Nand = 0b0111,
 
         /// <summary>
-        /// Identifies an AND operator
+        /// Identifies an operator that computes the conjunction of its operands
         /// </summary>
         And = 0b1000,
-        
-        /// <summary>
-        /// Identifies an OR operator
-        /// </summary>
-        Or = 0b1110,
 
         /// <summary>
-        /// Identifies an operator that computes the complement of XOR and can
-        /// thus be interpreted as a value-based equality operator
+        /// Identifies an operator that computes the negation of XOR and can be interpreted as an equality operator
         /// </summary>
         Xnor = 0b1001,
+
+        /// <summary>
+        /// Identifies an operator that computes the disjunction of its operands
+        /// </summary>
+        Or = 0b1110,
         
         /// <summary>
         /// Identifies an operator that selects the value of the left operand
@@ -96,6 +107,18 @@ namespace Z0.Logix
         /// 0 1 0
         /// 1 1 1
         LeftProject = 0b1010,
+
+        /// <summary>
+        /// Identifies an operator that evaluates the material conditional (implication) a → b
+        /// </summary>
+        /// <remarks>
+        /// Truth table:
+        /// 0 0 1
+        /// 1 0 0
+        /// 0 1 1
+        /// 1 1 1
+        /// </remarks>
+        Implies = 0b1011,
 
         /// <summary>
         /// Identifies an operator that selects the value of the right operand
@@ -108,24 +131,23 @@ namespace Z0.Logix
         /// 1 1 1
         /// </remarks>
         RightProject = 0b1100,
-
+        
         /// <summary>
-        /// Identifies an operator that evaluates the implication a -> b that means if p is true then b is true
+        /// Identifies an operator that computes the converse implication a ← b
         /// </summary>
         /// <remarks>
         /// Truth table:
         /// 0 0 1
-        /// 1 0 0
-        /// 0 1 1
+        /// 1 0 1
+        /// 0 1 0
         /// 1 1 1
         /// </remarks>
-        Implies = 0b1011,
+        ConvImplies = 0b1101,
 
        /// <summary>
        /// Identifies an operator that always returns True, irrespective of the supplied operands
        /// </summary>
         True = 0b1111,
-
     
     } 
 }

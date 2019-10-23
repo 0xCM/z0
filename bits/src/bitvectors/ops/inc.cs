@@ -16,15 +16,27 @@ namespace Z0
     partial class bitvector
     {
         /// <summary>
-        /// Computes the bitwise AND between two generic bitvectors
+        /// Arithmetically increments the source vector
         /// </summary>
-        /// <param name="x">The left vector</param>
-        /// <param name="y">The right vector</param>
+        /// <param name="x">The source vector</param>
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
         public static BitVector<T> inc<T>(BitVector<T> x)
             where T : unmanaged
                 => gmath.inc(x.Data);
+
+        /// <summary>
+        /// Arithmetically increments the source vector
+        /// </summary>
+        /// <param name="x">The source vector</param>
+        /// <typeparam name="T">The primal type</typeparam>
+        [MethodImpl(Inline)]
+        public static ref BitVector<T> inc<T>(ref BitVector<T> x)
+            where T : unmanaged
+        {
+            gmath.inc(ref x.data);
+            return ref x;
+        }
 
 
         [MethodImpl(Inline)]

@@ -85,6 +85,9 @@ namespace Z0.Logix
                 case BinaryLogicOpKind.RightNot: return rightnot(a,b);
                 case BinaryLogicOpKind.True: return @true(a,b);
                 case BinaryLogicOpKind.Implies: return implies(a,b);
+                case BinaryLogicOpKind.ConvImplies: return conimplies(a,b);
+                case BinaryLogicOpKind.MaterialNonimplication: return notimplies(a,b);
+
                 default: return dne(kind);
             }
         }
@@ -126,6 +129,8 @@ namespace Z0.Logix
                 case BinaryLogicOpKind.RightNot: return rightnot;
                 case BinaryLogicOpKind.True: return @true;
                 case BinaryLogicOpKind.Implies: return implies;
+                case BinaryLogicOpKind.ConvImplies: return conimplies;
+                case BinaryLogicOpKind.MaterialNonimplication: return notimplies;
                 default: return dne<bit>(kind);
             }
         }
