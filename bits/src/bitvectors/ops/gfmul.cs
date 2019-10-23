@@ -21,7 +21,7 @@ namespace Z0
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
         [MethodImpl(Inline)]
-        public static BitVector8 mul(BitVector8 x, BitVector8 y)
+        public static BitVector8 gfmul(BitVector8 x, BitVector8 y)
             => Gf256.clmul(x,y);
 
         /// <summary>
@@ -30,9 +30,9 @@ namespace Z0
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
         [MethodImpl(Inline)]
-        public static ref BitVector8 mul(ref BitVector8 x, BitVector8 y)
+        public static ref BitVector8 gfmul(ref BitVector8 x, BitVector8 y)
         {
-            x = mul(x,y);
+            x = gfmul(x,y);
             return ref x;
         }
     }

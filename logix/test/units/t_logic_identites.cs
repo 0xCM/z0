@@ -17,6 +17,9 @@ namespace Z0.Logix
 
     public class t_logic_identities : UnitTest<t_logic_identities>
     {
+        protected override int CycleCount 
+            => Pow2.T14;
+
         public void check_identities()
         {
             iter(LogicIdentities.All, check_exhaustive);
@@ -24,12 +27,58 @@ namespace Z0.Logix
         
         void check_exhaustive(EqualityExpr t)
         {
+            var disp = LogicEngine.dispatcher();
             foreach(var c in bitcombo(t.Vars.Length))
             {
                 t.SetVars(c);
-                Claim.eq(bit.On,LogicEngine.eval(t));
+                Claim.eq(bit.On,LogicEngine.eval(t));            
                 Claim.yea(LogicEngine.satisfied(t, c[0], c[1]));
+                Claim.yea(disp.Satisfied(t, c[0], c[1]));
             }
         }
+
+        public void identity_bench()
+        {
+            if(odd(now().Ticks))
+            {
+                evaluator_bench();
+                dispatcher_bench();
+            }
+            else
+            {
+                dispatcher_bench();
+                evaluator_bench();
+
+            }
+        }
+
+        void identity_bench(string opname, Func<EqualityExpr,bit,bit,bit> checker, SystemCounter clock = default)
+        {
+            var opcount = 0;
+            var sat = bit.On;
+
+            clock.Start();
+            for(var i=0; i<CycleCount; i++)
+            {
+                foreach(var expr in LogicIdentities.All)
+                {
+                    foreach(var c in bitcombo(2))
+                    {
+                        sat &= checker(expr, c[0], c[1]);
+                        opcount++;
+                    }
+                }
+            }
+            clock.Stop();
+            Benchmark(opname, clock, opcount);
+            Claim.yea(sat);
+        }
+        
+
+        void dispatcher_bench()
+            => identity_bench("identity/dispatcher", LogicEngine.dispatcher().Satisfied);
+
+        void evaluator_bench()
+            => identity_bench("identity/evaluator", LogicEngine.satisfied);
     }
 }

@@ -419,7 +419,7 @@ namespace Z0
         /// <param name="src">The value to interrogate</param>
         /// <param name="pos">The position to check</param>
         [MethodImpl(Inline)]
-        public static bool test(sbyte src, int pos)
+        public static bit test(sbyte src, int pos)
             => (src & (1 << pos)) != 0;
             
         /// <summary>
@@ -428,7 +428,7 @@ namespace Z0
         /// <param name="src">The value to interrogate</param>
         /// <param name="pos">The position to check</param>
         [MethodImpl(Inline)]
-        public static bool test(byte src, int pos)
+        public static bit test(byte src, int pos)
             => (src & (1 << pos)) != 0;
 
         /// <summary>
@@ -437,7 +437,7 @@ namespace Z0
         /// <param name="src">The value to interrogate</param>
         /// <param name="pos">The position to check</param>
         [MethodImpl(Inline)]
-        public static bool test(short src, int pos)
+        public static bit test(short src, int pos)
             => (src & (1 << pos)) != 0;
 
         /// <summary>
@@ -446,7 +446,7 @@ namespace Z0
         /// <param name="src">The value to interrogate</param>
         /// <param name="pos">The position to check</param>
         [MethodImpl(Inline)]
-        public static bool test(ushort src, int pos)
+        public static bit test(ushort src, int pos)
             => (src & (1 << pos)) != 0;
 
         /// <summary>
@@ -455,7 +455,7 @@ namespace Z0
         /// <param name="src">The value to interrogate</param>
         /// <param name="pos">The position to check</param>
         [MethodImpl(Inline)]
-        public static bool test(int src, int pos)
+        public static bit test(int src, int pos)
             => (src & (1 << pos)) != 0;
 
         /// <summary>
@@ -464,7 +464,7 @@ namespace Z0
         /// <param name="src">The value to interrogate</param>
         /// <param name="pos">The position to check</param>
         [MethodImpl(Inline)]
-        public static bool test(uint src, int pos)
+        public static bit test(uint src, int pos)
             => (src & (1u << pos)) != 0u;
 
         /// <summary>
@@ -482,7 +482,7 @@ namespace Z0
         /// <param name="src">The value to interrogate</param>
         /// <param name="pos">The position to check</param>
         [MethodImpl(Inline)]
-        public static bool test(ulong src, int pos)
+        public static bit test(ulong src, int pos)
             => (src & (1ul << pos)) != 0ul;
 
         /// <summary>
@@ -491,7 +491,7 @@ namespace Z0
         /// <param name="src">The value to interrogate</param>
         /// <param name="pos">The position to check</param>
         [MethodImpl(Inline)]
-        public static bool test(float src, int pos)
+        public static bit test(float src, int pos)
             => test(BitConverter.SingleToInt32Bits(src),pos); 
 
         /// <summary>
@@ -500,7 +500,7 @@ namespace Z0
         /// <param name="src">The value to interrogate</param>
         /// <param name="pos">The position to check</param>
         [MethodImpl(Inline)]
-        public static bool test(double src, int pos)
+        public static bit test(double src, int pos)
             => test(BitConverter.DoubleToInt64Bits(src),pos);
 
         /// <summary>
@@ -509,7 +509,7 @@ namespace Z0
         /// <param name="src">The value to interrogate</param>
         /// <param name="pos">The position to check</param>
         [MethodImpl(Inline)]
-        public static bool test(sbyte src, byte pos)
+        public static bit test(sbyte src, byte pos)
             => (src & (1 << pos)) != 0;
             
         /// <summary>
@@ -518,7 +518,7 @@ namespace Z0
         /// <param name="src">The value to interrogate</param>
         /// <param name="pos">The position to check</param>
         [MethodImpl(Inline)]
-        public static bool test(byte src, byte pos)
+        public static bit test(byte src, byte pos)
             => (src & (1 << pos)) != 0;
 
         /// <summary>
@@ -527,7 +527,7 @@ namespace Z0
         /// <param name="src">The value to interrogate</param>
         /// <param name="pos">The position to check</param>
         [MethodImpl(Inline)]
-        public static bool test(short src, byte pos)
+        public static bit test(short src, byte pos)
             => (src & (1 << pos)) != 0;
 
         /// <summary>
@@ -536,7 +536,7 @@ namespace Z0
         /// <param name="src">The value to interrogate</param>
         /// <param name="pos">The position to check</param>
         [MethodImpl(Inline)]
-        public static bool test(ushort src, byte pos)
+        public static bit test(ushort src, byte pos)
             => (src & (1 << pos)) != 0;
 
         /// <summary>
@@ -545,7 +545,7 @@ namespace Z0
         /// <param name="src">The value to interrogate</param>
         /// <param name="pos">The position to check</param>
         [MethodImpl(Inline)]
-        public static bool test(int src, byte pos)
+        public static bit test(int src, byte pos)
             => (src & (1 << pos)) != 0;
 
         /// <summary>
@@ -554,7 +554,7 @@ namespace Z0
         /// <param name="src">The value to interrogate</param>
         /// <param name="pos">The position to check</param>
         [MethodImpl(Inline)]
-        public static bool test(uint src, byte pos)
+        public static bit test(uint src, byte pos)
             => (src & (1u << pos)) != 0u;
 
         /// <summary>
@@ -563,7 +563,7 @@ namespace Z0
         /// <param name="src">The value to interrogate</param>
         /// <param name="pos">The position to check</param>
         [MethodImpl(Inline)]
-        public static bool test(long src, byte pos)
+        public static bit test(long src, byte pos)
             => (src & (1L << pos)) != 0L;
 
         /// <summary>
@@ -572,7 +572,7 @@ namespace Z0
         /// <param name="src">The value to interrogate</param>
         /// <param name="pos">The position to check</param>
         [MethodImpl(Inline)]
-        public static bool test(ulong src, byte pos)
+        public static bit test(ulong src, byte pos)
             => (src & (1ul << pos)) != 0ul;
 
         /// <summary>
@@ -581,7 +581,7 @@ namespace Z0
         /// <param name="src">The value to interrogate</param>
         /// <param name="pos">The position to check</param>
         [MethodImpl(Inline)]
-        public static bool test(float src, byte pos)
+        public static bit test(float src, byte pos)
             => test(BitConverter.SingleToInt32Bits(src),pos); 
 
         /// <summary>
@@ -590,7 +590,7 @@ namespace Z0
         /// <param name="src">The value to interrogate</param>
         /// <param name="pos">The position to check</param>
         [MethodImpl(Inline)]
-        public static bool test(double src, byte pos)
+        public static bit test(double src, byte pos)
             => test(BitConverter.DoubleToInt64Bits(src),pos);
 
         /// <summary>

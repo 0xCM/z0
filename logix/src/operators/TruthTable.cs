@@ -19,7 +19,7 @@ namespace Z0.Logix
         
         public static BitVector8 Signature(TernaryLogicOpKind id)
         {
-            var op = BitOpApi.lookup(id);
+            var op = LogicOpApi.lookup(id);
             var x = BitVector8.Zero;
             x[0] = op(off,off,off);
             x[1] = op(off,off,on);
@@ -34,7 +34,7 @@ namespace Z0.Logix
 
         public static BitVector4 Signature(BinaryLogicOpKind id)
         {
-            var op = BitOpApi.lookup(id);
+            var op = LogicOpApi.lookup(id);
             var x = BitVector4.Zero;
             x[0] = op(off,off); // 00 -> (0,0)
             x[1] = op(on,off);  // 01 -> (1,0)
@@ -44,10 +44,10 @@ namespace Z0.Logix
         }
 
         public static BitMatrix<N4,N3,byte> Build(BinaryLogicOpKind kind)
-            => BitOpApi.table(kind);
+            => LogicOpApi.table(kind);
 
         public static BitMatrix<N8,N4,byte> Build(TernaryLogicOpKind kind)
-            => BitOpApi.table(kind);
+            => LogicOpApi.table(kind);
 
         public static BitMatrix<N4,N3,byte> Emit(BinaryLogicOpKind kind, TextWriter dst)
         {

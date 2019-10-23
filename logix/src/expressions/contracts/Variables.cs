@@ -13,7 +13,7 @@ namespace Z0.Logix
     /// <summary>
     /// Characterizes a variable
     /// </summary>
-    public interface IVariable : IExpr
+    public interface IVarExpr : IExpr
     {
         /// <summary>
         /// The name of the variable
@@ -28,7 +28,7 @@ namespace Z0.Logix
     /// <summary>
     /// Characterizes a logical variable
     /// </summary>
-    public interface ILogicVariable : IVariable, ILogicExpr
+    public interface ILogicVarExpr : IVarExpr, ILogicExpr
     {
         void Set(ILogicExpr value);
 
@@ -41,7 +41,7 @@ namespace Z0.Logix
     /// <summary>
     /// Characterizes a typed variable
     /// </summary>
-    public interface IVariable<T> : IVariable, IExpr<T>
+    public interface IVarExpr<T> : IVarExpr, IExpr<T>
         where T : unmanaged
     {
         /// <summary>
@@ -57,6 +57,12 @@ namespace Z0.Logix
         void Set(T value);
     }
 
+    public interface ILiteralVarExpr<T> : IVarExpr, IExpr<T>
+        where T : unmanaged
+    {
+        void Set(T value);
 
+        new T Value {get;}
+    }
 
 }

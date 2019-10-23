@@ -317,8 +317,8 @@ namespace Z0
         /// </summary>
         /// <param name="pos">The 0-based absolute bit position</param>
         [MethodImpl(Inline)]
-        public bool TestBit(byte pos)
-            => pos < BitCount ? BitMask.test(data, pos) : false;
+        public bit TestBit(byte pos)
+            => pos < BitCount ? BitMask.test(data, pos) : bit.Off;
 
         /// <summary>
         /// Multiplies the operands

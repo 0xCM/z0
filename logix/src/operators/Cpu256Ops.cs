@@ -14,16 +14,42 @@ namespace Z0.Logix
 
     public static class Cpu256Ops
     {
+        [MethodImpl(Inline)]
+        public static Vector256<T> @false<T>()
+            where T : unmanaged
+                => default;
+
+        [MethodImpl(Inline)]
+        public static Vector256<T> @true<T>()
+            where T:unmanaged
+                => ginx.vones<T>(n256);
+
+        [MethodImpl(Inline)]
+        public static Vector256<T> @false<T>(Vector256<T> x)
+            where T : unmanaged
+                => default;
+
+        [MethodImpl(Inline)]
+        public static Vector256<T> @true<T>(Vector256<T> x)
+            where T:unmanaged
+                => ginx.vones<T>(n256);
+
+        [MethodImpl(Inline)]
+        public static Vector256<T> @false<T>(Vector256<T> x, Vector256<T> y)
+            where T : unmanaged
+                => default;
+
+        [MethodImpl(Inline)]
+        public static Vector256<T> @true<T>(Vector256<T> x, Vector256<T> y)
+            where T:unmanaged
+                => ginx.vones<T>(n256);
+
 
         [MethodImpl(Inline)]
         public static Vector256<T> identity<T>(Vector256<T> a)
             where T : unmanaged
                 => a;
 
-        [MethodImpl(Inline)]
-        public static Vector256<T> zero<T>()
-            where T : unmanaged
-                => default;
 
 
         [MethodImpl(Inline)]

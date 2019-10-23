@@ -10,7 +10,7 @@ namespace Z0.Logix
     
     using static zfunc;
 
-    public sealed class LogicVariable : ILogicVariable
+    public sealed class LogicVariable : ILogicVarExpr
     {
 
         [MethodImpl(Inline)]
@@ -43,7 +43,7 @@ namespace Z0.Logix
         /// </summary>
         public ILogicExpr Value {get; private set;}
 
-        IExpr IVariable.Value 
+        IExpr IVarExpr.Value 
             => Value;
 
         [MethodImpl(Inline)]

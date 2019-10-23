@@ -16,38 +16,47 @@ namespace Z0.Logix
         /// <summary>
         /// Specifies a variable classification
         /// </summary>
-        Variable,
+        Variable = Pow2.T01,
 
         /// <summary>
         /// Identifies expression that depends on one or more variables
         /// </summary>
-        Varied,
+        Varied = Pow2.T02,
 
         /// <summary>
         /// Identifies a literal expression
         /// </summary>
-        Literal,
-
-        /// <summary>
-        /// Classifies an operator 
-        /// </summary>
-        Operator,
+        Literal = Pow2.T03,
 
         /// <summary>
         /// Classifies an identity
         /// </summary>
-        Equality,
+        Equality = Pow2.T07,
 
+        /// <summary>
+        /// Identifies the unary operator classification
+        /// </summary>
+        UnaryOperator = Pow2.T10,
+
+        /// <summary>
+        /// Identifies the binary operator classification
+        /// </summary>
+        BinaryOperator = Pow2.T11,
+
+        /// <summary>
+        /// Identifies the ternary operator classification
+        /// </summary>
+        TernaryOperator = Pow2.T12,
 
         /// <summary>
         /// Classifies a comparision
         /// </summary>
-        Comparison,
+        Comparison = Pow2.T13,
 
         /// <summary>
         /// Classifies a shift expression
         /// </summary>
-        ShiftExpr,
+        ShiftExpr = Pow2.T14,
     }
 
 

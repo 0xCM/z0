@@ -118,8 +118,8 @@ namespace Z0.Test
                 var b = ModProd(x,y);
                 Claim.yea(a == b);            
 
-                var zx = x.ToGeneric();
-                var zy = y.ToGeneric();
+                var zx = x.ToNatBits();
+                var zy = y.ToNatBits();
                 var c = zx % zy;
                 Claim.yea(a == c);
 
@@ -136,8 +136,8 @@ namespace Z0.Test
                 var b = ModProd(x,y);
                 Claim.yea(a == b);   
 
-                var zx = x.ToGeneric();
-                var zy = y.ToGeneric();
+                var zx = x.ToNatBits();
+                var zy = y.ToNatBits();
                 var c = zx % zy;
                 Claim.yea(a == c);
 
@@ -154,8 +154,8 @@ namespace Z0.Test
                 var b = ModProd(x,y);
                 Claim.yea(a == b);
             
-                var zx = x.ToGeneric();
-                var zy = y.ToGeneric();
+                var zx = x.ToNatBits();
+                var zy = y.ToNatBits();
                 var c = zx % zy;
                 Claim.yea(a == c);
 
@@ -172,8 +172,8 @@ namespace Z0.Test
                 var b = ModProd(x,y);
                 Claim.yea(a == b);
 
-                var zx = x.ToGeneric();
-                var zy = y.ToGeneric();
+                var zx = x.ToNatBits();
+                var zy = y.ToNatBits();
                 bit c = zx % zy;
                 Claim.yea(a == c);
             

@@ -233,7 +233,7 @@ namespace Z0
         /// <param name="src">The source values</param>
         /// <remarks>Adapted from https://stackoverflow.com/questions/713057/convert-bool-to-byte</remarks>
         [MethodImpl(Inline)]
-        public static Span<byte> pack(ReadOnlySpan<Bit> src)
+        public static Span<byte> pack(ReadOnlySpan<bit> src)
         {
             int srcLen = src.Length;
             int dstLen = srcLen >> 3;
@@ -249,7 +249,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source values</param>
         /// <remarks>Adapted from https://stackoverflow.com/questions/713057/convert-bool-to-byte</remarks>
-        public static Span<byte> pack(ReadOnlySpan<Bit> src, Span<byte> dst)
+        public static Span<byte> pack(ReadOnlySpan<bit> src, Span<byte> dst)
         {
             int srcLen = src.Length;
             for (int i = 0; i < srcLen; i++)

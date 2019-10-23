@@ -60,7 +60,7 @@ namespace Z0.Logix
         /// <param name="subject">The variable-dependent expression</param>
         /// <param name="variables">The variable sequence</param>
         [MethodImpl(Inline)]
-        public static VariedLogicExpr varied(ILogicExpr subject, params ILogicVariable[] variables)
+        public static VariedLogicExpr varied(ILogicExpr subject, params ILogicVarExpr[] variables)
             => VariedLogicExpr.Define(subject, variables);
 
         /// <summary>

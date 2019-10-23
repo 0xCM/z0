@@ -125,7 +125,7 @@ namespace Z0.Logix
         // ~ 
 
         public static bit f01_bit(bit a, bit b, bit c)
-            => BitOps.f01(a,b,c);
+            => LogicOps.f01(a,b,c);
 
         public static ulong f01_64u(ulong a, ulong b, ulong c)
             => ScalarOps.f01(a,b,c);
@@ -140,7 +140,7 @@ namespace Z0.Logix
         // ~ 
 
         public static bit f02_bit(bit a, bit b, bit c)
-            => BitOps.f02(a,b,c);
+            => LogicOps.f02(a,b,c);
 
         public static ulong f02_64u(ulong a, ulong b, ulong c)
             => ScalarOps.f02(a,b,c);
@@ -154,7 +154,7 @@ namespace Z0.Logix
         // ~ 
 
         public static bit f03_bit(bit a, bit b, bit c)
-            => BitOps.f03(a,b,c);
+            => LogicOps.f03(a,b,c);
 
         public static ulong f03_64u(ulong a, ulong b, ulong c)
             => ScalarOps.f03(a,b,c);
@@ -168,7 +168,7 @@ namespace Z0.Logix
         // ~ 
 
         public static bit f04_bit(bit a, bit b, bit c)
-            => BitOps.f04(a,b,c);
+            => LogicOps.f04(a,b,c);
 
         public static ulong f04_64u(ulong a, ulong b, ulong c)
             => ScalarOps.f04(a,b,c);
@@ -183,7 +183,7 @@ namespace Z0.Logix
 
         // c nor a
         public static bit f05_bit(bit a, bit b, bit c)
-            => BitOps.f05(a,b,c);
+            => LogicOps.f05(a,b,c);
 
         // c nor a
         public static ulong f05_64u(ulong a, ulong b, ulong c)
@@ -200,7 +200,7 @@ namespace Z0.Logix
  
         // not a and (b xor c)
         public static bit f06_bit(bit a, bit b, bit c)
-            => BitOps.f06(a,b,c);
+            => LogicOps.f06(a,b,c);
 
         // not a and (b xor c)
         public static ulong f06_64u(ulong a, ulong b, ulong c)
@@ -215,7 +215,7 @@ namespace Z0.Logix
         // ~ not a and (b xor c)
 
         public static bit f07_bit(bit a, bit b, bit c)
-            => BitOps.f07(a,b,c);
+            => LogicOps.f07(a,b,c);
 
         public static ulong f07_64u(ulong a, ulong b, ulong c)
             => ScalarOps.f07(a,b,c);
@@ -229,7 +229,7 @@ namespace Z0.Logix
         // ~ (not a and b) and c
 
         public static bit f08_bit(bit a, bit b, bit c)
-            => BitOps.f08(a,b,c);
+            => LogicOps.f08(a,b,c);
 
         // (not a and b) and c
         public static ulong f08_64u(ulong a, ulong b, ulong c)
@@ -243,7 +243,7 @@ namespace Z0.Logix
 
         // ~ a nor (b xor c)
         public static bit f09_bit(bit a, bit b, bit c)
-            => BitOps.f09(a,b,c);
+            => LogicOps.f09(a,b,c);
 
         public static ulong f09_64u(ulong a, ulong b, ulong c)
             => ScalarOps.f09(a,b,c);
@@ -257,7 +257,7 @@ namespace Z0.Logix
         // ~ c and (not a)
 
         public static bit f0a_bit(bit a, bit b, bit c)
-            => BitOps.f0a(a,b,c);
+            => LogicOps.f0a(a,b,c);
 
         public static ulong f0a_64u(ulong a, ulong b, ulong c)
             => ScalarOps.f0a(a,b,c);
@@ -272,7 +272,7 @@ namespace Z0.Logix
         // ~ not a and ((b xor 1) or c)
 
         public static bit f0b_bit(bit a, bit b, bit c)
-            => BitOps.f0b(a,b,c);
+            => LogicOps.f0b(a,b,c);
 
         public static ulong f0b_64u(ulong a, ulong b, ulong c)
             => ScalarOps.f0b(a,b,c);
@@ -287,7 +287,7 @@ namespace Z0.Logix
         // ~ b and (not a)
 
         public static bit f0c_bit(bit a, bit b, bit c)
-            => BitOps.f0c(a,b,c);
+            => LogicOps.f0c(a,b,c);
 
         public static ulong f0c_64u(ulong a, ulong b, ulong c)
             => ScalarOps.f0c(a,b,c);
@@ -301,7 +301,7 @@ namespace Z0.Logix
         // ~ not (A) and (B or (C xor 1))
 
         public static bit f0d_bit(bit a, bit b, bit c)
-            => BitOps.f0d(a,b,c);
+            => LogicOps.f0d(a,b,c);
 
         public static ulong f0d_64u(ulong a, ulong b, ulong c)
             => ScalarOps.f0d(a,b,c);
@@ -315,7 +315,7 @@ namespace Z0.Logix
         // ~ not a and (b or c)
 
         public static bit f0e_bit(bit a, bit b, bit c)
-            => BitOps.f0e(a,b,c);
+            => LogicOps.f0e(a,b,c);
 
         public static ulong f0e_64u(ulong a, ulong b, ulong c)
             => ScalarOps.f0e(a,b,c);
@@ -330,7 +330,7 @@ namespace Z0.Logix
         // ~ not a
 
         public static bit f0f_bit(bit a, bit b, bit c)
-            => BitOps.f0f(a,b,c);
+            => LogicOps.f0f(a,b,c);
 
         // not a
         public static ulong f0f_64u(ulong a, ulong b, ulong c)
@@ -348,7 +348,7 @@ namespace Z0.Logix
         // ~ a and (b nor c)
 
         public static bit f10_bit(bit a, bit b, bit c)
-            => BitOps.f10(a,b,c);
+            => LogicOps.f10(a,b,c);
         
         public static ulong f10_64u(ulong a, ulong b, ulong c)
             => ScalarOps.f10(a,b,c);
@@ -363,7 +363,7 @@ namespace Z0.Logix
 
         // a and (b nor c)
         public static bit f11_bit(bit a, bit b, bit c)
-            => BitOps.f11(a,b,c);
+            => LogicOps.f11(a,b,c);
         
         // a and (b nor c)
         public static ulong f11_64u(ulong a, ulong b, ulong c)
@@ -383,7 +383,7 @@ namespace Z0.Logix
         // ~ not b and (a xor c) 
 
         public static bit f12_bit(bit a, bit b, bit c)
-            => BitOps.f12(a,b,c);
+            => LogicOps.f12(a,b,c);
 
         // not b and (a xor c) 
         public static ulong f12_64u(ulong a, ulong b, ulong c)
@@ -399,7 +399,7 @@ namespace Z0.Logix
         // ~ b nor (a and c)
 
         public static bit f13_bit(bit a, bit b, bit c)
-            => BitOps.f13(a,b,c);
+            => LogicOps.f13(a,b,c);
 
         public static ulong f13_64u(ulong a, ulong b, ulong c)
             => ScalarOps.f13(a,b,c);
@@ -415,7 +415,7 @@ namespace Z0.Logix
         // ~ 
 
         public static bit f14_bit(bit a, bit b, bit c)
-            => BitOps.f14(a,b,c);
+            => LogicOps.f14(a,b,c);
 
         public static ulong f14_64u(ulong a, ulong b, ulong c)
             => ScalarOps.f14(a,b,c);
@@ -429,7 +429,7 @@ namespace Z0.Logix
         // ~ 
 
         public static bit f15_bit(bit a, bit b, bit c)
-            => BitOps.f15(a,b,c);
+            => LogicOps.f15(a,b,c);
 
         public static ulong f15_64u(ulong a, ulong b, ulong c)
             => ScalarOps.f15(a,b,c);
@@ -444,7 +444,7 @@ namespace Z0.Logix
 
         // a ? (b nor c) : (b xor c)
         public static bit f16_bit(bit a, bit b, bit c)
-            => BitOps.f16(a,b,c);
+            => LogicOps.f16(a,b,c);
  
          // a ? (b nor c) : (b xor c)
         public static ulong f16_64u(ulong a, ulong b, ulong c)
@@ -461,7 +461,7 @@ namespace Z0.Logix
         // ~ 
 
         public static bit f17_bit(bit a, bit b, bit c)
-            => BitOps.f17(a,b,c);
+            => LogicOps.f17(a,b,c);
 
         public static ulong f17_64u(ulong a, ulong b, ulong c)
             => ScalarOps.f17(a,b,c);
@@ -476,7 +476,7 @@ namespace Z0.Logix
         // ~ 
 
         public static bit f18_bit(bit a, bit b, bit c)
-            => BitOps.f18(a,b,c);
+            => LogicOps.f18(a,b,c);
 
 
         public static ulong f18_64u(ulong a, ulong b, ulong c)
@@ -491,7 +491,7 @@ namespace Z0.Logix
 
         // ~ 
         public static bit f19_bit(bit a, bit b, bit c)
-            => BitOps.f19(a,b,c);
+            => LogicOps.f19(a,b,c);
 
         public static ulong f19_64u(ulong a, ulong b, ulong c)
             => ScalarOps.f19(a,b,c);
@@ -506,7 +506,7 @@ namespace Z0.Logix
         // ~ 
 
         public static bit f1a_bit(bit a, bit b, bit c)
-            => BitOps.f1a(a,b,c);
+            => LogicOps.f1a(a,b,c);
 
         public static ulong f1a_64u(ulong a, ulong b, ulong c)
             => ScalarOps.f1a(a,b,c);
@@ -521,7 +521,7 @@ namespace Z0.Logix
         // ~ c ? not a : not b
 
         public static bit f1b_bit(bit a, bit b, bit c)
-            => BitOps.f1b(a,b,c);
+            => LogicOps.f1b(a,b,c);
 
         public static ulong f1b_64u(ulong a, ulong b, ulong c)
             => ScalarOps.f1b(a,b,c);

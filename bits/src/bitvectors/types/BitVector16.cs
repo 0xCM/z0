@@ -25,11 +25,12 @@ namespace Z0
 
         public static readonly BitVector16 Ones = ushort.MaxValue;
 
-        public static readonly BitSize Width = 16;
+        public const int Width = 16;
 
-        public static readonly BitPos FirstPos = 0;
+        public const int FirstPos = 0;
 
-        public static readonly BitPos LastPos = Width - 1;
+        public const int LastPos = Width - 1;
+
 
         /// <summary>
         /// Allocates a zero-filled vector
@@ -109,6 +110,10 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator BitVector<N16,ushort>(BitVector16 src)
             => BitVector<N16,ushort>.FromCells(src.data);
+
+        [MethodImpl(Inline)]
+        public static implicit operator BitVector<ushort>(BitVector16 src)
+            => src.data;
 
         [MethodImpl(Inline)]
         public static implicit operator BitVector16(ushort src)
@@ -306,13 +311,13 @@ namespace Z0
         /// <summary>
         /// Gets/Sets an identified bit
         /// </summary>
-        public Bit this[BitPos pos]
+        public bit this[int pos]
         {
             [MethodImpl(Inline)]
-            get => Get(pos);
+            get => GetBit(pos);
             
             [MethodImpl(Inline)]
-            set => Set(pos,value);
+            set => SetBit(pos,value);
         }
         
         /// <summary>
@@ -329,7 +334,7 @@ namespace Z0
         /// </summary>
         /// <param name="first">The position of the first bit</param>
         /// <param name="last">The position of the last bit</param>
-        public BitVector16 this[BitPos first, BitPos last]
+        public BitVector16 this[int first, int last]
         {
             [MethodImpl(Inline)]
             get => Between(first, last);
@@ -582,7 +587,7 @@ namespace Z0
         /// </summary>
         /// <param name="y">The right operand</param>
         [MethodImpl(Inline)]
-        public Bit Dot(BitVector16 y)
+        public bit Dot(BitVector16 y)
             => bitvector.dot(this,y);
 
         /// <summary>
@@ -591,8 +596,8 @@ namespace Z0
         /// <param name="first">The first bit position</param>
         /// <param name="last">The last bit position</param>
         [MethodImpl(Inline)]
-        public BitVector16 Between(BitPos first, BitPos last)
-            => Bits.between(data, first, last);
+        public BitVector16 Between(int first, int last)
+            => Bits.between(data, (byte)first,(byte)last);
         
         /// <summary>
         /// Populates a target vector with specified source bits
@@ -617,7 +622,7 @@ namespace Z0
         /// </summary>
         /// <param name="pos">The position of the bit to enable</param>
         [MethodImpl(Inline)]
-        public void Enable(BitPos pos)
+        public void Enable(int pos)
             => BitMask.enable(ref data, pos);
 
         /// <summary>
@@ -625,7 +630,7 @@ namespace Z0
         /// </summary>
         /// <param name="pos">The bit position</param>
         [MethodImpl(Inline)]
-        public void Disable(BitPos pos)
+        public void Disable(int pos)
             => BitMask.disable(ref data, pos);
 
         /// <summary>
@@ -633,41 +638,24 @@ namespace Z0
         /// </summary>
         /// <param name="pos">The bit position</param>
         [MethodImpl(Inline)]
-        public void DisableAfter(BitPos pos)
-            => Bits.bzhi(ref data, ++pos);
+        public void DisableAfter(int pos)
+            => data = Bits.bzhi(ref data, (byte)++pos);
             
-        /// <summary>
-        /// Sets a bit value
-        /// </summary>
-        /// <param name="pos">The position of the bit to set</param>
-        /// <param name="value">The bit value</param>
-        [MethodImpl(Inline)]
-        public void Set(BitPos pos, Bit value)
-            => BitMask.set(ref data, pos, value);
-
         /// <summary>
         /// Determines whether a bit is enabled
         /// </summary>
         /// <param name="pos">The bit position</param>
         [MethodImpl(Inline)]
-        public readonly bool Test(BitPos pos)
+        public readonly bool Test(int pos)
             => BitMask.test(data, pos);
-
-        /// <summary>
-        /// Reads a bit value
-        /// </summary>
-        /// <param name="pos">The bit position</param>
-        [MethodImpl(Inline)]
-        public readonly Bit Get(BitPos pos)
-            => Test(pos);
 
         /// <summary>
         /// Gets the value of an index-identified bit
         /// </summary>
         /// <param name="pos">The bit index</param>
         [MethodImpl(Inline)]
-        public bit GetBit(BitPos pos)
-            => this[pos] == true;
+        public bit GetBit(int pos)
+            => BitMask.test(data, pos);
 
         /// <summary>
         /// Sets the state of an index-identified bit
@@ -675,8 +663,8 @@ namespace Z0
         /// <param name="pos">The bit index</param>
         /// <param name="value">The bit value</param>
         [MethodImpl(Inline)]
-        public void SetBit(BitPos pos, bit value)
-            => this[pos] = value == true;
+        public void SetBit(int pos, bit value)
+            => data = BitMask.set(ref data, (byte)pos, value);
 
 
         /// <summary>
@@ -724,7 +712,7 @@ namespace Z0
         /// <param name="src">The bit source</param>
         /// <param name="pos">The position of the bit for which rank will be calculated</param>
         [MethodImpl(Inline)]
-        public uint Rank(BitPos pos)
+        public uint Rank(int pos)
             => Bits.rank(data,pos);
 
         /// <summary>
@@ -736,7 +724,6 @@ namespace Z0
             data = Bits.rev(data);
             return this;
         }
-
 
         /// <summary>
         /// Rearranges the vector in-place as specified by a permutation

@@ -15,6 +15,36 @@ namespace Z0.Logix
 
     public static class Cpu128Ops
     {
+        [MethodImpl(Inline)]
+        public static Vector128<T> @false<T>()
+            where T : unmanaged
+                => default;
+
+        [MethodImpl(Inline)]
+        public static Vector128<T> @true<T>()
+            where T:unmanaged
+                => ginx.vones<T>(n128);
+
+        [MethodImpl(Inline)]
+        public static Vector128<T> @false<T>(Vector128<T> x)
+            where T : unmanaged
+                => default;
+
+        [MethodImpl(Inline)]
+        public static Vector128<T> @true<T>(Vector128<T> x)
+            where T:unmanaged
+                => ginx.vones<T>(n128);
+
+        [MethodImpl(Inline)]
+        public static Vector128<T> @false<T>(Vector128<T> x, Vector128<T> y)
+            where T : unmanaged
+                => default;
+
+        [MethodImpl(Inline)]
+        public static Vector128<T> @true<T>(Vector128<T> x, Vector128<T> y)
+            where T:unmanaged
+                => ginx.vones<T>(n128);
+
 
         [MethodImpl(Inline)]
         public static Vector128<T> identity<T>(Vector128<T> a)
@@ -22,25 +52,20 @@ namespace Z0.Logix
                 => a;
 
         [MethodImpl(Inline)]
-        public static Vector128<T> zero<T>()
-            where T : unmanaged
-                => default;
-
-
-        [MethodImpl(Inline)]
         public static Vector128<T> not<T>(Vector128<T> a)
             where T : unmanaged
                 => ginx.vnot(a);
 
         [MethodImpl(Inline)]
-        public static Vector128<T> add<T>(Vector128<T> a, Vector128<T> b)
+        public static Vector128<T> negate<T>(Vector128<T> a)
             where T : unmanaged
-                => ginx.vadd(a,b);
+                => ginx.vnegate<T>(a);
+
 
         [MethodImpl(Inline)]
-        public static Vector128<T> sub<T>(Vector128<T> a, Vector128<T> b)
+        public static Vector128<T> xor1<T>(Vector128<T> a)
             where T : unmanaged
-                => ginx.vsub(a,b);
+                => ginx.vxor1(a);
 
         [MethodImpl(Inline)]
         public static Vector128<T> and<T>(Vector128<T> a, Vector128<T> b)
@@ -48,14 +73,37 @@ namespace Z0.Logix
                 => ginx.vand(a,b);
 
         [MethodImpl(Inline)]
-        public static Vector128<T> andnot<T>(Vector128<T> a, Vector128<T> b)
+        public static Vector128<T> or<T>(Vector128<T> a, Vector128<T> b)
             where T : unmanaged
-                => ginx.vandnot(a,b);
+                => ginx.vor(a,b);
+
+        [MethodImpl(Inline)]
+        public static Vector128<T> xor<T>(Vector128<T> a, Vector128<T> b)
+            where T : unmanaged
+                => ginx.vxor(a,b);
+
 
         [MethodImpl(Inline)]
         public static Vector128<T> nand<T>(Vector128<T> a, Vector128<T> b)
             where T : unmanaged
                 => not(and(a,b));
+
+        [MethodImpl(Inline)]
+        public static Vector128<T> nor<T>(Vector128<T> a, Vector128<T> b)
+            where T : unmanaged
+                => ginx.vnor(a,b);
+
+
+        [MethodImpl(Inline)]
+        public static Vector128<T> xnor<T>(Vector128<T> a, Vector128<T> b)
+            where T : unmanaged
+                => ginx.vxnor(a,b);
+
+        [MethodImpl(Inline)]
+        public static Vector128<T> andnot<T>(Vector128<T> a, Vector128<T> b)
+            where T : unmanaged
+                => ginx.vandnot(a,b);
+
 
         [MethodImpl(Inline)]
         public static Vector128<T> sll<T>(Vector128<T> a, int offset)
@@ -77,41 +125,21 @@ namespace Z0.Logix
             where T : unmanaged
                 => ginx.vrotr<T>(a,(byte)offset);
 
-        [MethodImpl(Inline)]
-        public static Vector128<T> negate<T>(Vector128<T> a)
-            where T : unmanaged
-                => ginx.vnegate<T>(a);
-
 
         [MethodImpl(Inline)]
-        public static Vector128<T> or<T>(Vector128<T> a, Vector128<T> b)
+        public static Vector128<T> add<T>(Vector128<T> a, Vector128<T> b)
             where T : unmanaged
-                => ginx.vor(a,b);
+                => ginx.vadd(a,b);
 
         [MethodImpl(Inline)]
-        public static Vector128<T> nor<T>(Vector128<T> a, Vector128<T> b)
+        public static Vector128<T> sub<T>(Vector128<T> a, Vector128<T> b)
             where T : unmanaged
-                => ginx.vnor(a,b);
-
-        [MethodImpl(Inline)]
-        public static Vector128<T> xor<T>(Vector128<T> a, Vector128<T> b)
-            where T : unmanaged
-                => ginx.vxor(a,b);
-
-        [MethodImpl(Inline)]
-        public static Vector128<T> xnor<T>(Vector128<T> a, Vector128<T> b)
-            where T : unmanaged
-                => ginx.vxnor(a,b);
-
-        [MethodImpl(Inline)]
-        public static Vector128<T> xor1<T>(Vector128<T> a)
-            where T : unmanaged
-                => ginx.vxor1(a);
+                => ginx.vsub(a,b);
 
         [MethodImpl(Inline)]
         public static Vector128<T> select<T>(Vector128<T> a, Vector128<T> b, Vector128<T> c)
             where T : unmanaged
-                => ginx.vselect(a,b,c);  //or(and(a, b), and(not(a), c));
+                => ginx.vselect(a,b,c);  
 
         // a nor (b or c)
         [MethodImpl(Inline)]

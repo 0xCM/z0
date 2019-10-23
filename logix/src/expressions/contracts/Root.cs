@@ -6,6 +6,7 @@ namespace Z0.Logix
 {
     using System;
     using System.Linq;
+    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     
     using static zfunc;
@@ -19,6 +20,13 @@ namespace Z0.Logix
         string Format();   
     }
 
+    public interface IFormula : IExpr
+    {
+        string Name {get;}
+
+        IExpr Encoding {get;}
+    }
+
     /// <summary>
     /// Characterizes an expression over an unmanaged type
     /// </summary>
@@ -29,6 +37,11 @@ namespace Z0.Logix
         TypedExprKind ExprKind {get;}
     }
     
+    public interface IFormula<T> : IFormula
+        where T : unmanaged
+    {
+        new IExpr<T> Encoding {get;}
+    }
     /// <summary>
     /// Characterizes a finite sequence of terms
     /// </summary>
@@ -101,6 +114,60 @@ namespace Z0.Logix
         where K : Enum
     {
         K OpKind {get;}
+    }
+
+    public interface ILogicDispatcher
+    {
+        /// <summary>
+        /// Routes an expression to an evaulator
+        /// </summary>
+        /// <param name="expr">The expression to route</param>
+        bit Eval(ILogicExpr expr);
+
+        /// <summary>
+        /// Returns an enabled bit if the equality expression is satisfied with 
+        /// specified variable values and a disabled bit otherwise
+        /// </summary>
+        /// <param name="expr">The expression to test</param>
+        /// <param name="a">The first variable value</param>
+        /// <param name="b">The second variable value</param>
+        bit Satisfied(EqualityExpr expr, bit a, bit b);
+    }
+
+    public interface IOpSvc<T,K>
+        where T : unmanaged
+        where K : Enum
+    {
+        IEnumerable<K> Available {get;}
+    }
+
+    public interface IUnaryOpSvc<T,K> : IOpSvc<T,K>
+        where T : unmanaged
+        where K : Enum
+    {
+        UnaryOp<T> Lookup(K kind);
+
+        T Eval(K kind, T a);
+    }
+
+    public interface IBinOpSvc<T,K> : IOpSvc<T,K>
+        where T : unmanaged
+        where K : Enum
+    {
+        BinaryOp<T> Lookup(K kind);
+
+        T Eval(K kind, T a, T b);
+
+    }
+
+    public interface ITernaryOpSvc<T,K> : IOpSvc<T,K>
+        where T : unmanaged
+        where K : Enum
+    {
+        TernaryOp<T> Lookup(K kind);
+
+        T Eval(K kind, T a, T b, T c);
+
     }
 
 }

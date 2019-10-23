@@ -15,8 +15,15 @@ namespace Z0
     partial class bitvector
     {
         /// <summary>
-        /// Computes the parity of the source vector, which is 1 if an odd number of its components
-        /// are enabled and 0 otherwise
+        /// Computes the parity of a generic bitvector, which is 1 if an odd number of its components are enabled and 0 otherwise
+        /// </summary>
+        [MethodImpl(Inline)]
+        public static Bit parity<T>(BitVector<T> src)
+            where T : unmanaged
+                => odd(gbits.pop(src.Data));
+
+        /// <summary>
+        /// Computes the parity of the source vector, which is 1 if an odd number of its components are enabled and 0 otherwise
         /// </summary>
         /// <remarks>
         /// The parity function p:{0,1}x...x{0,1} -> {0,1} is a boolean function that attains the 
@@ -27,8 +34,7 @@ namespace Z0
             => odd(pop(src));
 
         /// <summary>
-        /// Computes the parity of the source vector, which is 1 if an odd number of its components
-        /// are enabled and 0 otherwise
+        /// Computes the parity of the source vector, which is 1 if an odd number of its components are enabled and 0 otherwise
         /// </summary>
         /// <remarks>
         /// The parity function p:{0,1}x...x{0,1} -> {0,1} is a boolean function that attains the 
@@ -39,8 +45,7 @@ namespace Z0
             => odd(pop(src));
 
         /// <summary>
-        /// Computes the parity of the source vector, which is 1 if an odd number of its components
-        /// are enabled and 0 otherwise
+        /// Computes the parity of the source vector, which is 1 if an odd number of its components are enabled and 0 otherwise
         /// </summary>
         /// <remarks>
         /// The parity function p:{0,1}x...x{0,1} -> {0,1} is a boolean function that attains the 
@@ -51,8 +56,7 @@ namespace Z0
             => odd(pop(src));
 
         /// <summary>
-        /// Computes the parity of the source vector, which is 1 if an odd number of its components
-        /// are enabled and 0 otherwise
+        /// Computes the parity of the source vector, which is 1 if an odd number of its components are enabled and 0 otherwise
         /// </summary>
         /// <remarks>
         /// The parity function p:{0,1}x...x{0,1} -> {0,1} is a boolean function that attains the 
@@ -63,8 +67,7 @@ namespace Z0
             => odd(pop(src));
 
         /// <summary>
-        /// Computes the parity of the source vector, which is 1 if an odd number of its components
-        /// are enabled and 0 otherwise
+        /// Computes the parity of the source vector, which is 1 if an odd number of its components are enabled and 0 otherwise
         /// </summary>
         /// <remarks>
         /// The parity function p:{0,1}x...x{0,1} -> {0,1} is a boolean function that attains the 

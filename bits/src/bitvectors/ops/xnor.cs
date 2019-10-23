@@ -16,13 +16,19 @@ namespace Z0
     partial class bitvector
     {
         
+        /// <summary>
+        /// Computes the bitwise XNOR between two generic bitvectors
+        /// </summary>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
+        /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
         public static BitVector<T> xnor<T>(BitVector<T> x, BitVector<T> y)
             where T : unmanaged
                 => gmath.xnor(x.Data, y.Data);
 
         /// <summary>
-        /// Computes a new bitvector z = x & y from bitvectors x xnor y
+        /// Computes the bitwise XNOR between two source bitvectors
         /// </summary>
         /// <param name="x">The left bitvector</param>
         /// <param name="y">The right bitvector</param>
@@ -31,7 +37,7 @@ namespace Z0
             => math.xnor(x.data,y.data);
 
         /// <summary>
-        /// Computes a new bitvector z = x & y from bitvectors x xnor y
+        /// Computes the bitwise XNOR between two source bitvectors
         /// </summary>
         /// <param name="x">The left bitvector</param>
         /// <param name="y">The right bitvector</param>
@@ -40,7 +46,7 @@ namespace Z0
             => math.xnor(x.data,y.data);
 
         /// <summary>
-        /// Computes a new bitvector z = x & y from bitvectors x xnor y
+        /// Computes the bitwise XNOR between two source bitvectors
         /// </summary>
         /// <param name="x">The left bitvector</param>
         /// <param name="y">The right bitvector</param>
@@ -49,7 +55,7 @@ namespace Z0
             => math.xnor(x.data, y.data);
 
         /// <summary>
-        /// Computes a new bitvector z = x & y from bitvectors x xnor y
+        /// Computes the bitwise XNOR between two source bitvectors
         /// </summary>
         /// <param name="x">The left bitvector</param>
         /// <param name="y">The right bitvector</param>
@@ -58,7 +64,7 @@ namespace Z0
             => math.xnor(x.data, y.data);
 
         /// <summary>
-        /// Computes a new bitvector z = x & y from bitvectors x xnor y
+        /// Computes the bitwise XNOR between two source bitvectors
         /// </summary>
         /// <param name="x">The left bitvector</param>
         /// <param name="y">The right bitvector</param>

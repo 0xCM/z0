@@ -28,7 +28,7 @@ namespace Z0.Logix
         /// The expression classifier
         /// </summary>
         public LogicExprKind ExprKind
-            => LogicExprKind.Operator;
+            => LogicExprKind.TernaryOperator;
 
         /// <summary>
         /// The operator

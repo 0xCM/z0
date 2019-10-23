@@ -34,7 +34,7 @@ namespace Z0.Logix
         public void binary_logic_check()
         {
             using var dst = LogArea.Test.LogWriter(FileName.Define("BinaryTruth.txt"));
-            var ops = BitOpApi.BinaryKinds.ToArray();
+            var ops = LogicOpApi.BinaryKinds.ToArray();
             TruthTable.Emit(dst,ops);
             TruthTable.Emit(dst,OpArityKind.Binary);
         }
@@ -42,7 +42,7 @@ namespace Z0.Logix
         public void ternary_logic_check()
         {
             using var dst = LogArea.Test.LogWriter(FileName.Define("TernaryTruth.txt"));
-            var ops = BitOpApi.TernaryKinds.ToArray();
+            var ops = LogicOpApi.TernaryKinds.ToArray();
             TruthTable.Emit(dst,ops);
             TruthTable.Emit(dst,OpArityKind.Ternary);
 
@@ -50,7 +50,7 @@ namespace Z0.Logix
 
         public void signature_check()
         {
-            foreach(var op in BitOpApi.BinaryKinds)
+            foreach(var op in LogicOpApi.BinaryKinds)
             {
                 var table = TruthTable.Build(op);
                 var result = table.GetCol(table.ColCount - 1).ToPrimal(n8).Lo;
@@ -58,7 +58,7 @@ namespace Z0.Logix
                 Claim.eq(result,sig);
             }
 
-            foreach(var op in BitOpApi.TernaryKinds)
+            foreach(var op in LogicOpApi.TernaryKinds)
             {
                 var table = TruthTable.Build(op);
                 var result = table.GetCol(table.ColCount - 1).ToPrimal(n8);

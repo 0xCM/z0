@@ -61,6 +61,27 @@ namespace Z0.Logix
                 Vars[i].Set(values[i]);
         }
 
+        [MethodImpl(Inline)]
+        public void SetVar(bit a)
+        {
+            Vars[0].Set(a);
+        }
+
+        [MethodImpl(Inline)]
+        public void SetVars(bit a, bit b)
+        {
+            Vars[0].Set(a);
+            Vars[1].Set(b);
+        }
+
+        [MethodImpl(Inline)]
+        public void SetVars(bit a, bit b, bit c)
+        {
+            Vars[0].Set(a);
+            Vars[1].Set(b);
+            Vars[2].Set(c);
+        }
+
 
         public string Format()
             => Lhs.Format() + " == " + Rhs.Format();

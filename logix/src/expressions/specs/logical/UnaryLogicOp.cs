@@ -19,14 +19,14 @@ namespace Z0.Logix
         public UnaryLogicOp(UnaryLogicOpKind op, ILogicExpr operand)
         {
             this.OpKind = op;
-            this.Operand = operand;
+            this.Arg = operand;
         }
         
         /// <summary>
         /// The expression classifier
         /// </summary>
         public LogicExprKind ExprKind
-            => LogicExprKind.Operator;
+            => LogicExprKind.UnaryOperator;
 
         /// <summary>
         /// The operator
@@ -37,10 +37,10 @@ namespace Z0.Logix
         /// <summary>
         /// The left operand
         /// </summary>
-        public ILogicExpr Operand {get;}
+        public ILogicExpr Arg {get;}
 
         public string Format()
-            => OpKind.Format(Operand);
+            => OpKind.Format(Arg);
 
         public override string ToString()
             => Format();

@@ -16,6 +16,16 @@ namespace Z0
     partial class bitvector
     {
         /// <summary>
+        /// Computes the two's complement of the source vector
+        /// </summary>
+        /// <param name="x">The source vector</param>
+        /// <typeparam name="T">The primal type</typeparam>
+        [MethodImpl(Inline)]
+        public static BitVector<T> negate<T>(BitVector<T> x)
+            where T : unmanaged
+                => gmath.negate(x.Data);
+
+        /// <summary>
         /// Computes the two's complement bitvector -x from the source bitvector x
         /// </summary>
         /// <param name="x">The left bitvector</param>
@@ -26,7 +36,7 @@ namespace Z0
         /// <summary>
         /// Computes the two's complement bitvector -x from the source bitvector x
         /// </summary>
-        /// <param name="x">The left bitvector</param>
+        /// <param name="x">The source bitvector</param>
         [MethodImpl(Inline)]
         public static BitVector8 negate(BitVector8 x)
             => math.negate(x.data);

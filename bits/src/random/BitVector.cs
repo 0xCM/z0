@@ -13,6 +13,7 @@ namespace Z0
     using static nfunc;
 
     using BV = Z0.BitVector;
+    using BC = Z0.BitCells;
 
     public static partial class BitRng
     {
@@ -140,7 +141,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitCells<T> BitCells<T>(this IPolyrand random, BitSize len)
             where T : unmanaged
-                => BV.Load<T>(random.Stream<T>().ToSpan(BV.CellCount<T>(len)), len);
+                => BC.Load<T>(random.Stream<T>().ToSpan(BC.CellCount<T>(len)), len);
 
         /// <summary>
         /// Produces a random generic bitvector of randomized length
@@ -154,7 +155,7 @@ namespace Z0
             where T : unmanaged
         {
             var len = random.Next<int>(minlen,++maxlen);
-            return BV.Load<T>(random.Stream<T>().TakeArray(BV.CellCount<T>(len),len));
+            return BC.Load<T>(random.Stream<T>().TakeArray(BC.CellCount<T>(len),len));
         }
 
         /// <summary>

@@ -38,7 +38,7 @@ namespace Z0.Logix
         AndNot = 0b0010,
 
         /// <summary>
-        /// Identifies and operator that logically negates the right operand
+        /// Identifies an operator that computes the negation of the right operand
         /// </summary>
         /// <remarks>
         /// Truth table:
@@ -49,10 +49,15 @@ namespace Z0.Logix
         /// </remarks>
         RightNot = 0b0011,
 
+        /// <summary>
+        /// Identifies an operator that computes the negation of the left operand
+        /// </summary>
+        /// <remarks>
         /// 0 0 1
         /// 1 0 0
         /// 0 1 1
         /// 1 1 0
+        /// </remarks>
         LeftNot = 0b0101,                    
 
         /// <summary>

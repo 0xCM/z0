@@ -13,7 +13,7 @@ namespace Z0.Logix
     /// <summary>
     /// Defines a sequence of literal bit values
     /// </summary>
-    public struct LiteralLogicSeq : ILiteralLogicSeq
+    public sealed class LiteralLogicSeq : ILiteralLogicSeq
     {
         public static LiteralLogicSeq FromBitString(BitString bs)
         {

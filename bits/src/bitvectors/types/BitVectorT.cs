@@ -90,6 +90,66 @@ namespace Z0
             => bitvector.not(src);
 
         /// <summary>
+        /// Computes the two's complement negation of the operand
+        /// </summary>
+        /// <param name="x">The source operand</param>
+        [MethodImpl(Inline)]
+        public static BitVector<T> operator -(BitVector<T> src)
+            => bitvector.negate(src);
+
+        /// <summary>
+        /// Computes the arithmetic sum of the source operands. 
+        /// </summary>
+        /// <param name="x">The left operand</param>
+        /// <param name="y">The right operand</param>
+        [MethodImpl(Inline)]
+        public static BitVector<T> operator +(BitVector<T> x, BitVector<T> y)
+            => bitvector.add(x,y);
+
+        /// <summary>
+        /// Arithmetically subtracts the second operand from the first. 
+        /// </summary>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
+        [MethodImpl(Inline)]
+        public static BitVector<T> operator - (BitVector<T> x, BitVector<T> y)
+            => bitvector.sub(x,y);
+
+        /// <summary>
+        /// Shifts the source bits leftwards
+        /// </summary>
+        /// <param name="x">The source operand</param>
+        [MethodImpl(Inline)]
+        public static BitVector<T> operator <<(BitVector<T> x, int offset)
+            => bitvector.sll(x,offset);
+
+        /// <summary>
+        /// Shifts the source bits rightwards
+        /// </summary>
+        /// <param name="x">The source operand</param>
+        [MethodImpl(Inline)]
+        public static BitVector<T> operator >>(BitVector<T> x, int offset)
+            => bitvector.srl(x,offset);
+
+
+        /// <summary>
+        /// Increments the vector arithmetically
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        [MethodImpl(Inline)]
+        public static BitVector<T> operator ++(BitVector<T> src)
+            => bitvector.inc(src);
+
+        /// <summary>
+        /// Decrements the vector arithmetically
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        [MethodImpl(Inline)]
+        public static BitVector<T> operator --(BitVector<T> src)
+            => bitvector.dec(src);
+
+
+        /// <summary>
         /// Returns true if the source vector is nonzero, false otherwise
         /// </summary>
         /// <param name="src">The source vector</param>
@@ -106,11 +166,11 @@ namespace Z0
             => !src.Nonempty;
 
         [MethodImpl(Inline)]
-        public static bool operator ==(in BitVector<T> x, in BitVector<T> y)
+        public static bool operator ==(BitVector<T> x, BitVector<T> y)
             => x.Equals(y);
 
         [MethodImpl(Inline)]
-        public static bool operator !=(in BitVector<T> x, in BitVector<T> y)
+        public static bool operator !=(BitVector<T> x, BitVector<T> y)
             => !x.Equals(y);
 
         [MethodImpl(Inline)]
@@ -141,10 +201,10 @@ namespace Z0
         public bit this[int index]
         {
             [MethodImpl(Inline)]
-            get => Get(index);
+            get => GetBit(index);
             
             [MethodImpl(Inline)]
-            set => Set(index, value);
+            set => SetBit(index, value);
         }
 
         /// <summary>
@@ -170,7 +230,7 @@ namespace Z0
         /// </summary>
         /// <param name="pos">The bit position</param>
         [MethodImpl(Inline)]
-        public readonly bit Get(int pos)
+        public readonly bit GetBit(int pos)
             => gbits.test(data, pos);
 
         /// <summary>
@@ -179,7 +239,7 @@ namespace Z0
         /// <param name="pos">The absolute bit position</param>
         /// <param name="value">The value the bit will receive</param>
         [MethodImpl(Inline)]
-        public void Set(int pos, bit value)
+        public void SetBit(int pos, bit value)
             => data = gbits.set(ref data, (byte)pos, value);
 
         /// <summary>
@@ -210,15 +270,9 @@ namespace Z0
         /// Computes the scalar product between this vector and another of identical length
         /// </summary>
         /// <param name="y">The right vector</param>
+        [MethodImpl(Inline)]
         public bit Dot(BitVector<T> y)
-        {
-            require(this.Length == y.Length);
-
-            var result = bit.Off;
-            for(var i=0; i<Length; i++)
-                result ^= this[i] & y[i];
-            return result;
-        }
+            => bitvector.dot(this,y);
 
         /// <summary>
         /// Specifies a reference to the leading cell
@@ -228,6 +282,15 @@ namespace Z0
             [MethodImpl(Inline)]
             get => data;
         }
+
+        /// <summary>
+        /// Extracts a contiguous sequence of bits defined by an inclusive range
+        /// </summary>
+        /// <param name="first">The first bit position</param>
+        /// <param name="last">The last bit position</param>
+        [MethodImpl(Inline)]
+        public BitVector<T> Between(int first, int last)
+            => gbits.between(data, (byte)first,(byte)last);
 
         /// <summary>
         /// Extracts the represented data as a bitstring
@@ -241,7 +304,7 @@ namespace Z0
         /// </summary>
         [MethodImpl(Inline)]
         public readonly uint Pop()
-            => gbits.pop(data);
+            => bitvector.pop(this);
 
         /// <summary>
         /// Sets all the bits to align with the source value
@@ -257,8 +320,15 @@ namespace Z0
                 data = default(T);
         }
 
+        /// <summary>
+        /// Returns a copy of the vector
+        /// </summary>
         [MethodImpl(Inline)]
-        public bool Equals(in BitVector<T> y)
+        public readonly BitVector<T> Replicate()
+            => new BitVector<T>(data);
+
+        [MethodImpl(Inline)]
+        public bool Equals(BitVector<T> y)
             => ToBitString().Equals(y.ToBitString());
 
         [MethodImpl(Inline)]

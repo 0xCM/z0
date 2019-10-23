@@ -15,12 +15,18 @@ namespace Z0.Logix
     public static partial class LogicEngine
     {
         /// <summary>
+        /// Returns a reference to the logic evaulator
+        /// </summary>
+        public static ILogicDispatcher dispatcher()        
+            => LogicDispatcher.Instance;
+
+        /// <summary>
         /// Evalutates an untyped expression
         /// </summary>
         /// <param name="expr">The expression to evaluate</param>
         [MethodImpl(Inline)]
         public static bit eval(ILogicExpr expr)
-            => BitLogicEval.eval(expr);
+            => LogicExprEval.eval(expr);
         
         /// <summary>
         /// Evalutates a typed scalar expression

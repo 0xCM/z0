@@ -24,7 +24,7 @@ namespace Z0.Logix
         /// <summary>
         /// The one and only operand
         /// </summary>
-        ILogicExpr Operand {get;}
+        ILogicExpr Arg {get;}
     }
 
     /// <summary>

@@ -19,6 +19,40 @@ namespace Z0
         /// </summary>
         /// <param name="x">The source vector</param>
         /// <param name="spec">The permutation</param>
+        public static ref BitVector<T> perm<T>(ref BitVector<T> x, Perm spec)
+            where T : unmanaged
+        {
+            var src = x.Replicate();
+            ref var dst = ref x;
+            var len = x.Length;
+            for(var i=0; i<len; i++)
+            {
+                ref readonly var j = ref spec[i];
+                if(j != i)
+                    dst[i] = src[j];
+            }
+            return ref x;
+
+        }
+
+        /// <summary>
+        /// Creates a new vector by permuting a replica of the source vector as specified by a permuation
+        /// </summary>
+        /// <param name="x">The source vector</param>
+        /// <param name="spec">The permutation</param>
+        [MethodImpl(Inline)]
+        public static BitVector<T> perm<T>(BitVector<T> x, Perm spec)
+            where T : unmanaged        
+        {
+            var dst = x.Replicate();
+            return perm(ref dst, spec);
+        }
+
+        /// <summary>
+        /// Rearranges the vector in-place as specified by a permutation
+        /// </summary>
+        /// <param name="x">The source vector</param>
+        /// <param name="spec">The permutation</param>
         [MethodImpl(Inline)]
         public static ref BitVector16 perm(ref BitVector16 x, in Perm spec)
         {
@@ -101,8 +135,7 @@ namespace Z0
         }        
 
         /// <summary>
-        /// Creates a new vector by permuting a replica of the source vector as
-        /// specified by a permuation
+        /// Creates a new vector by permuting a replica of the source vector as specified by a permuation
         /// </summary>
         /// <param name="x">The source vector</param>
         /// <param name="spec">The permutation</param>
@@ -112,8 +145,5 @@ namespace Z0
             var dst = x.Replicate();
             return perm(ref dst, spec);
         }
-
-
     }
-
 }

@@ -26,15 +26,6 @@ namespace Z0
             where T : unmanaged
                 => BitVector<N,T>.FromCell(src);
 
-        /// <summary>
-        /// Creates a generic bitvector from a single cell subject to an optionally-specified length
-        /// </summary>
-        /// <param name="src">The source segment</param>
-        /// <param name="n">The bitvector length</param>
-        [MethodImpl(Inline)]
-        public static BitVector<T> from<T>(T src)
-            where T : unmanaged
-                => BitVector<T>.From(src);
 
     }
 

@@ -16,6 +16,16 @@ namespace Z0
     partial class bitvector
     {
         /// <summary>
+        /// Rotates the source bits leftwards
+        /// </summary>
+        /// <param name="x">The source vector</param>
+        /// <typeparam name="T">The primal type</typeparam>
+        [MethodImpl(Inline)]
+        public static BitVector<T> rotl<T>(BitVector<T> x, int offset)
+            where T : unmanaged
+                => gbits.rotl(x.Data,offset);
+
+        /// <summary>
         /// Computes a leftward bit rotation
         /// </summary>
         /// <param name="x">The source bitvector</param>

@@ -81,6 +81,14 @@ namespace Z0.Logix
         public static string FormatTuple(IEnumerable<IOpExpr> terms)            
             => parenthetical(string.Join(',',terms.Select(t => t.Format())));
 
+        [MethodImpl(Inline)]
+        public static bool IsOperator(this LogicExprKind kind)
+            => (uint)kind >= (uint)LogicExprKind.UnaryOperator;
+
+        [MethodImpl(Inline)]
+        public static bool IsOperator(this TypedExprKind kind)
+            => (uint)kind >= (uint)TypedExprKind.UnaryOperator;
+
     }
 
     public class TernaryOpAttribute : Attribute

@@ -10,7 +10,7 @@ namespace Z0.Logix
     
     using static zfunc;
 
-    public sealed class VariableExpr<T> : IVariable<T>
+    public sealed class VariableExpr<T> : IVarExpr<T>
         where T : unmanaged
     {
         [MethodImpl(Inline)]
@@ -37,7 +37,7 @@ namespace Z0.Logix
         /// </summary>
         public IExpr<T> Value {get; private set;}
         
-        IExpr IVariable.Value 
+        IExpr IVarExpr.Value 
             => Value;
 
         /// <summary>

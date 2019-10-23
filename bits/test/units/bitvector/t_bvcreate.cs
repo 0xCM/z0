@@ -34,7 +34,7 @@ namespace Z0.Test
             for(var i=0; i< SampleSize; i++)            
             {
                 var bs = Random.BitString(5,233);
-                var bv = BitVector<T>.From(bs);
+                var bv = BitCells<T>.From(bs);
                 Claim.eq(bs.Length, bv.Length);
                 for(var j=0; j<bs.Length; j++)
                 {                
@@ -59,7 +59,7 @@ namespace Z0.Test
                 var bv = bvSrc.ToBitVector(dim);
                 var x = Bits.pack(bvSrc[0], bvSrc[1]);
                 for(var j = 0; j < dim; j++)
-                    Claim.eq(BitMask.test(x,j).ToBit(), bv[j]);                
+                    Claim.eq(BitMask.test(x,j), bv[j]);                
             }
         }
 
@@ -175,7 +175,7 @@ namespace Z0.Test
             var n = 40;      
             var bvz = BitCells<ulong>.FromCell(z,n);
             Span<byte> xSrc =  BitConverter.GetBytes(z);
-            var bvx = BitVector.Load(xSrc.Slice(0,5).ToArray());
+            var bvx = BitCells.Load(xSrc.Slice(0,5).ToArray());
             Claim.eq(gbits.pop(z), bvz.Pop());
             Claim.eq(gbits.pop(z), bvx.Pop());
 
@@ -263,7 +263,7 @@ namespace Z0.Test
             for(var i=0; i<SampleSize; i += segcount)
             {
                 var data = src.Slice(i, segcount);
-                var bv = data.ToBitVector(dim);
+                var bv = data.ToBitCells(dim);
                 var bs = data.ToBitString(dim);
                 Claim.eq(bv.Length, dim);
                 Claim.eq(bs.Length, dim);

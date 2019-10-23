@@ -16,7 +16,7 @@ namespace Z0
     partial class bitvector
     {
         /// <summary>
-        /// Computes the XOR between two generic bitvectors
+        /// Computes the bitwise XOR between two generic source vectors
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
@@ -27,37 +27,37 @@ namespace Z0
                 => gmath.xor(x.Data,y.Data);
 
         /// <summary>
-        /// Computes a new bitvector z = x & y from bitvectors x xor y
+        /// Computes the bitwise XOR between two source vectors
         /// </summary>
-        /// <param name="x">The left bitvector</param>
-        /// <param name="y">The right bitvector</param>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
         public static BitVector4 xor(BitVector4 x, BitVector4 y)
             => math.xor(x.data,y.data);
 
         /// <summary>
-        /// Computes a new bitvector z = x & y from bitvectors x xor y
+        /// Computes the bitwise XOR between two source vectors
         /// </summary>
-        /// <param name="x">The left bitvector</param>
-        /// <param name="y">The right bitvector</param>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
         public static BitVector8 xor(BitVector8 x, BitVector8 y)
             => math.xor(x.data,y.data);
 
         /// <summary>
-        /// Computes a new bitvector z = x & y from bitvectors x xor y
+        /// Computes the bitwise XOR between two source vectors
         /// </summary>
-        /// <param name="x">The left bitvector</param>
-        /// <param name="y">The right bitvector</param>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
         public static BitVector16 xor(BitVector16 x, BitVector16 y)
             => math.xor(x.data, y.data);
 
         /// <summary>
-        /// Computes a new bitvector z = x & y from bitvectors x xor y
+        /// Computes the bitwise XOR between two source vectors
         /// </summary>
-        /// <param name="x">The left bitvector</param>
-        /// <param name="y">The right bitvector</param>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
         public static BitVector32 xor(BitVector32 x, BitVector32 y)
             => math.xor(x.data, y.data);

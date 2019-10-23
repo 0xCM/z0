@@ -15,14 +15,20 @@ namespace Z0
 
     partial class bitvector
     {
-        public static BitVector4 inc(BitVector4 x)
-        {
-            if(x.data < 0xF)
-                return x.data++;
-            else
-                return BitVector4.Zero;
-        }
+        /// <summary>
+        /// Arithmetically decrements the source vector
+        /// </summary>
+        /// <param name="x">The source vector</param>
+        /// <typeparam name="T">The primal type</typeparam>
+        [MethodImpl(Inline)]
+        public static BitVector<T> dec<T>(BitVector<T> x)
+            where T : unmanaged
+                => gmath.dec(x.Data);
 
+        /// <summary>
+        /// Arithmetically decrements the source vector
+        /// </summary>
+        /// <param name="x">The source vector</param>
         public static BitVector4 dec(BitVector4 x)
         {
             if(x.data > 0)
@@ -31,9 +37,8 @@ namespace Z0
                 return  0xF;
         }
 
-
         /// <summary>
-        /// Decrements the source vector
+        /// Arithmetically decrements the source vector
         /// </summary>
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
@@ -41,7 +46,7 @@ namespace Z0
             => math.dec(x.data);
         
         /// <summary>
-        /// Decrements the source vector
+        /// Arithmetically decrements the source vector
         /// </summary>
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
@@ -49,7 +54,7 @@ namespace Z0
             => math.dec(x.data);
 
         /// <summary>
-        /// Decrements the source vector
+        /// Arithmetically decrements the source vector
         /// </summary>
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
@@ -57,7 +62,7 @@ namespace Z0
             => math.dec(x.data);
 
         /// <summary>
-        /// Decrements the source vector
+        /// Arithmetically decrements the source vector
         /// </summary>
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]

@@ -16,6 +16,17 @@ namespace Z0
     partial class bitvector
     {
         /// <summary>
+        /// Computes the arithmetic sum of two generic bitvectors
+        /// </summary>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
+        /// <typeparam name="T">The primal type</typeparam>
+        [MethodImpl(Inline)]
+        public static BitVector<T> add<T>(BitVector<T> x, BitVector<T> y)
+            where T : unmanaged
+                => gmath.add(x.Data, y.Data);
+
+        /// <summary>
         /// Computes the arithmetic sum of two bitvectors
         /// </summary>
         /// <param name="x">The left bitvector</param>

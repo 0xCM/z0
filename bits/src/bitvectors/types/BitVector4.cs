@@ -26,11 +26,11 @@ namespace Z0
 
         public static BitVector4 Ones => 0xFF;
 
-        public const uint BitSize = 4;
+        public const int BitSize = 4;
 
-        public const uint FirstPos = 0;
+        public const int FirstPos = 0;
 
-        public const uint LastPos = BitSize - 1;
+        public const int LastPos = BitSize - 1;
 
         /// <summary>
         /// Allocates a zero-filled vector
@@ -234,13 +234,13 @@ namespace Z0
             this.data = data;
         }
 
-        public Bit this[BitPos pos]
+        public bit this[int pos]
         {
             [MethodImpl(Inline)]
-            get => Get(pos);
+            get => GetBit(pos);
             
             [MethodImpl(Inline)]
-            set => Set(pos,value);
+            set => SetBit(pos,value);
         }
 
         public BitVector4 this[Range range]
@@ -249,10 +249,10 @@ namespace Z0
             get => Between(range.Start.Value, range.End.Value);
         }
 
-        public BitVector4 this[BitPos lpos, BitPos rpos]
+        public BitVector4 this[int first, int last]
         {
             [MethodImpl(Inline)]
-            get => Between(lpos, rpos);
+            get => Between(first, last);
         }
 
         /// <summary>
@@ -304,7 +304,7 @@ namespace Z0
         /// Computes the scalar product of the source vector and another
         /// </summary>
         /// <param name="rhs">The right operand</param>
-        public readonly Bit Dot(BitVector4 rhs)
+        public readonly bit Dot(BitVector4 rhs)
             => bitvector.dot(this,rhs);
 
         /// <summary>
@@ -374,7 +374,7 @@ namespace Z0
         /// </summary>
         /// <param name="pos">The position of the bit to enable</param>
         [MethodImpl(Inline)]
-        public void Enable(BitPos pos)
+        public void Enable(int pos)
             => data |= (byte)(1 << pos);
 
         /// <summary>
@@ -382,38 +382,16 @@ namespace Z0
         /// </summary>
         /// <param name="pos">The bit position</param>
         [MethodImpl(Inline)]
-        public void Disable(BitPos pos)
+        public void Disable(int pos)
             => data &= (byte)~((byte)(1 << pos));
-
-        /// <summary>
-        /// Sets a bit value
-        /// </summary>
-        /// <param name="pos">The position of the bit to set</param>
-        /// <param name="value">The bit value</param>
-        [MethodImpl(Inline)]
-        public void Set(BitPos pos, Bit value)
-        {
-            if(value) 
-                data |= (byte)(1 << pos);
-            else
-                data &= (byte)~((byte)(1 << pos));
-        }
 
         /// <summary>
         /// Determines whether a bit is enabled
         /// </summary>
         /// <param name="pos">The bit position</param>
         [MethodImpl(Inline)]
-        public readonly bool Test(BitPos pos)
+        public readonly bool Test(int pos)
             => (data & (1 << pos)) != 0;
-
-        /// <summary>
-        /// Reads a bit value
-        /// </summary>
-        /// <param name="pos">The bit position</param>
-        [MethodImpl(Inline)]
-        public readonly Bit Get(BitPos pos)
-            => Test(pos);
 
         public Span<byte> Bytes
         {
@@ -470,7 +448,7 @@ namespace Z0
         /// <param name="src">The bit source</param>
         /// <param name="pos">The position of the bit for which rank will be calculated</param>
         [MethodImpl(Inline)]
-        public uint Rank(BitPos pos)
+        public uint Rank(int pos)
             => Bits.rank(data,pos);
 
         [MethodImpl(Inline)]
@@ -510,8 +488,8 @@ namespace Z0
         /// <param name="first">The first bit position</param>
         /// <param name="last">The last bit position</param>
         [MethodImpl(Inline)]
-        public BitVector4 Between(BitPos first, BitPos last)
-            => Bits.between(data, first, last);
+        public BitVector4 Between(int first, int last)
+            => Bits.between(data, (byte)first, (byte)last);
 
         /// <summary>
         /// Constructs a bitvector formed from the n lest significant bits of the current vector
@@ -519,7 +497,7 @@ namespace Z0
         /// <param name="n">The count of least significant bits</param>
         [MethodImpl(Inline)]
         public BitVector4 Lsb(int n)                
-            => Between(0, (uint)n - 1u);                
+            => Between(0, n - 1);                
 
         /// <summary>
         /// Constructs a bitvector formed from the n most significant bits of the current vector
@@ -527,7 +505,7 @@ namespace Z0
         /// <param name="n">The count of most significant bits</param>
         [MethodImpl(Inline)]
         public BitVector4 Msb(int n)                
-            => Between(LastPos - (uint)n, LastPos);                
+            => Between(LastPos - n, LastPos);                
 
         /// <summary>
         /// Extracts the scalar represented by the vector
@@ -653,12 +631,12 @@ namespace Z0
             => math.and(data, math.and(math.not(y) , (byte)0xF));
 
         [MethodImpl(Inline)]
-        public bit GetBit(BitPos pos)
+        public bit GetBit(int pos)
             => Test(pos);
 
         [MethodImpl(Inline)]
-        public void SetBit(BitPos pos, bit value)
-            => Set(pos,value);
+        public void SetBit(int pos, bit value)
+            => data = BitMask.set(ref data, (byte)pos, value);
 
         /// <summary>
         /// Gets the state of the first bit

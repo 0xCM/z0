@@ -20,10 +20,10 @@ namespace Z0.Logix
 
         public void check_not()  
         {      
-            check_unary_ops<BitVector8,byte>(UnaryLogicOpKind.Not);
-            check_unary_ops<BitVector16,ushort>(UnaryLogicOpKind.Not);
-            check_unary_ops<BitVector32,uint>(UnaryLogicOpKind.Not);
-            check_unary_ops<BitVector64,ulong>(UnaryLogicOpKind.Not);
+            check_op<byte>(UnaryLogicOpKind.Not);
+            check_op<ushort>(UnaryLogicOpKind.Not);
+            check_op<uint>(UnaryLogicOpKind.Not);
+            check_op<ulong>(UnaryLogicOpKind.Not);
         }
 
 
@@ -412,24 +412,88 @@ namespace Z0.Logix
         public void eval_not_256x64u()
             => check_op_256<ulong>(UnaryLogicOpKind.Not);
 
+        // ~ ternary
 
-        void check_unary_ops<V,T>(UnaryLogicOpKind id)
-            where V : unmanaged, IBitVector<V>
+        public void check_ternary_f01()
+            => check_ops(TernaryLogicOpKind.X01);
+
+        public void check_ternary_f02()
+            => check_ops(TernaryLogicOpKind.X02);
+
+        public void check_ternary_f03()
+            => check_ops(TernaryLogicOpKind.X03);
+
+        public void check_ternary_f04()
+            => check_ops(TernaryLogicOpKind.X04);
+
+        public void check_ternary_f05()
+            => check_ops(TernaryLogicOpKind.X05);
+
+        public void check_ternary_f06()
+            => check_ops(TernaryLogicOpKind.X06);
+
+        public void check_ternary_f07()
+            => check_ops(TernaryLogicOpKind.X07);
+
+        public void check_ternary_f08()
+            => check_ops(TernaryLogicOpKind.X08);
+
+        public void check_ternary_f09()
+            => check_ops(TernaryLogicOpKind.X09);
+
+        public void check_ternary_f0a()
+            => check_ops(TernaryLogicOpKind.X0A);
+
+        public void check_ternary_f0b()
+            => check_ops(TernaryLogicOpKind.X0B);
+
+        public void check_ternary_f0c()
+            => check_ops(TernaryLogicOpKind.X0C);
+
+        public void check_ternary_f0d()
+            => check_ops(TernaryLogicOpKind.X0D);
+
+        public void check_ternary_f0e()
+            => check_ops(TernaryLogicOpKind.X0E);
+
+        public void check_ternary_f0f()
+            => check_ops(TernaryLogicOpKind.X0F);
+
+        public void check_ternary_f10()
+            => check_ops(TernaryLogicOpKind.X10);
+
+        public void check_ternary_f11()
+            => check_ops(TernaryLogicOpKind.X11);
+           
+        public void check_ternary_f12()
+            => check_ops(TernaryLogicOpKind.X12);
+
+        public void check_ternary_f13()
+            => check_ops(TernaryLogicOpKind.X13);
+
+
+        void check_ops(TernaryLogicOpKind op)
+        {
+            check_op<byte>(op);
+            check_op<ushort>(op);
+            check_op<uint>(op);
+            check_op<ulong>(op);
+
+        }
+
+        void check_op<T>(UnaryLogicOpKind kind)
             where T : unmanaged
         {
-            var BL = BitOpApi.lookup(id);
-            var SC = ScalarOpApi.lookup<T>(id);
+            var v1 = variable<T>(1);
+            var expr = unary(kind,v1);
             
-            for(var sample = 0; sample< SampleSize; sample++)
+            for(var i=0; i< SampleSize; i++)
             {
-                var a = Random.PrimalBitVector<V>();
-
-                var z0 = gbv.alloc<V>();
-                for(var i=0; i< z0.Length; i++)
-                    z0[i] = BL(a[i]);
-
-                var z3 = SC(a.ToScalar<T>());                                
-                Claim.eq(z3, z0.ToScalar<T>());                                
+                var a = Random.Next<T>();
+                v1.Set(a);
+                T actual = LogicEngine.eval(expr);
+                T expect = ScalarOpApi.eval(kind,a);
+                Claim.eq(actual,expect);                            
             }
         }
 
@@ -448,22 +512,6 @@ namespace Z0.Logix
                 v2.Set(b);
                 T actual = LogicEngine.eval(expr);
                 T expect = ScalarOpApi.eval(op,a,b);
-                Claim.eq(actual,expect);                            
-            }
-        }
-
-        void check_op<T>(UnaryLogicOpKind op)
-            where T : unmanaged
-        {
-            var v1 = variable<T>(1);
-            var expr = unary<T>(op,v1);
-            
-            for(var i=0; i< SampleSize; i++)
-            {
-                var a = Random.Next<T>();
-                v1.Set(a);   
-                T actual = LogicEngine.eval(expr);
-                T expect = ScalarOpApi.eval(op,a);
                 Claim.eq(actual,expect);                            
             }
         }
@@ -499,7 +547,6 @@ namespace Z0.Logix
                 Claim.eq(actual,expect);                            
             }
         }
-
 
         void check_op_128<T>(BinaryLogicOpKind op)
             where T : unmanaged
@@ -590,6 +637,61 @@ namespace Z0.Logix
                 Claim.eq(actual,expect);                            
             }
         }
+
+        void check_op_identity<T>(TernaryLogicOpKind id)
+            where T: unmanaged
+        {
+            var a = convert<T>(0b1111_0000);
+            var b = convert<T>(0b1100_1100);
+            var c = convert<T>(0b1010_1010);
+            var mask = convert<T>(0xFF);
+            var f = ScalarOpApi.lookup<T>(id);
+            var actual = convert<T,byte>(gmath.and(f(a,b,c), mask));
+            var expect = (byte)id;
+            Claim.eq(expect.FormatHex(), actual.FormatHex());
+        }
+
+        void check_op<T>(TernaryLogicOpKind id)
+            where T : unmanaged
+        {
+            var BL = LogicOpApi.lookup(id);
+            var SC = ScalarOpApi.lookup<T>(id);
+            var V128 = Cpu128OpApi.lookup<T>(id);
+            var V256 = Cpu256OpApi.lookup<T>(id);
+            check_op_identity<T>(id);
+
+            for(var sample = 0; sample< SampleSize; sample++)
+            {
+                var sa = Random.Next<T>();
+                var sb = Random.Next<T>();
+                var sc = Random.Next<T>();
+
+                var z0 = BitVector.Generic<T>();
+                var va = BitVector.Generic(sa);
+                var vb = BitVector.Generic(sb);
+                var vc = BitVector.Generic(sc);
+                for(var i=0; i< z0.Length; i++)
+                    z0[i] = BL(va[i],vb[i],vc[i]);
+
+                var z3 = SC(sa, sb, sc);
+                                
+                Claim.eq(z3, z0.Data);                                
+
+                var v1 = ginx.vbroadcast(n256,sa);
+                var v2 = ginx.vbroadcast(n256,sb);
+                var v3 = ginx.vbroadcast(n256,sc);
+                var v4 = Vector256.GetElement(V256(v1,v2,v3), 0);
+                Claim.eq(v4,z3);
+
+
+                var u1 = ginx.vlo(v1);
+                var u2 = ginx.vlo(v2);
+                var u3 = ginx.vlo(v3);
+                var u4 = Vector128.GetElement(V128(u1,u2,u3),0);
+                Claim.eq(u4, z3);
+            }
+        }
+
     }
 
 }

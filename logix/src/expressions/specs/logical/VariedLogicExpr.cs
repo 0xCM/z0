@@ -17,12 +17,11 @@ namespace Z0.Logix
     {        
 
         [MethodImpl(Inline)]
-        public static VariedLogicExpr Define(ILogicExpr baseExpr, params ILogicVariable[] variables)
+        public static VariedLogicExpr Define(ILogicExpr baseExpr, params ILogicVarExpr[] variables)
             => new VariedLogicExpr(baseExpr, variables);
 
-
         [MethodImpl(Inline)]
-        public VariedLogicExpr(ILogicExpr baseExpr, params ILogicVariable[] variables)
+        public VariedLogicExpr(ILogicExpr baseExpr, params ILogicVarExpr[] variables)
         {
             this.BaseExpr = baseExpr;
             this.Vars = variables;
@@ -36,12 +35,9 @@ namespace Z0.Logix
 
         public ILogicExpr BaseExpr {get;}
 
-        public ILogicVariable[] Vars {get;}
+        public ILogicVarExpr[] Vars {get;}
 
-        IExpr IVariedLogicExpr.BaseExpr 
-            => BaseExpr;
-
-        public void SetVars(params IExpr[] values)
+        public void SetVars(params ILogicExpr[] values)
         {
             var n = Math.Min(Vars.Length, values.Length);
             for(var i=0; i<n; i++)

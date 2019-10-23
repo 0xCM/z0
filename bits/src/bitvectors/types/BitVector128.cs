@@ -35,9 +35,9 @@ namespace Z0
         /// </summary>
         public static readonly BitVector128 Ones = (UInt64.MaxValue, UInt64.MaxValue);
 
-        public static readonly BitSize BitSize = 128;
+        public const int BitSize = 128;
 
-        public static readonly BitPos LastPos = BitSize - 1;
+        public const int LastPos = BitSize - 1;
 
         /// <summary>
         /// Allocates a new empty vector
@@ -398,10 +398,10 @@ namespace Z0
         /// <summary>
         /// Reads/Manipulates a source bit at a specified position
         /// </summary>
-        public Bit this[BitPos pos]
+        public bit this[int pos]
         {
             [MethodImpl(Inline)]
-            get => false;
+            get => bit.Off;
             
             [MethodImpl(Inline)]
             set => Set(pos,value);
@@ -507,12 +507,12 @@ namespace Z0
         /// <param name="pos">The position of the bit to set</param>
         /// <param name="value">The bit value</param>
         [MethodImpl(Inline)]
-        public void Set(BitPos pos, Bit value)
+        public void Set(int pos, bit value)
         {
             if(pos < 64) 
-                BitMask.set(ref x0, pos, value);
+                x0 = BitMask.set(ref x0, (byte)pos, value);
             else
-                BitMask.set(ref x1, pos, value);
+                x1 = BitMask.set(ref x1, (byte)pos, value);
         }
 
         [MethodImpl(Inline)]

@@ -124,6 +124,11 @@ namespace Z0
             Collect((OpCount, time, opname));
         }
 
+        protected void Benchmark(string opname, TimeSpan time, int opcount)
+        {
+            Collect((opcount, time, opname));
+        }
+
         protected void RunBench<K>(Func<K,K,long,SystemCounter,OpTime> benchmark, K? s0 = null, K? s1 = null)
             where K : unmanaged
         {

@@ -63,48 +63,45 @@ namespace Z0
         /// Enables a bit if it is disabled
         /// </summary>
         /// <param name="pos">The position of the bit to enable</param>
-        void Enable(BitPos pos);     
+        void Enable(int pos);     
         
         /// <summary>
         /// Disables a bit if it is enabled
         /// </summary>
         /// <param name="pos">The bit position</param>
-        void Disable(BitPos pos);
+        void Disable(int pos);
 
         /// <summary>
         /// Reads a bit value
         /// </summary>
         /// <param name="pos">The bit position</param>
-        Bit Get(BitPos pos);
-
-        bit GetBit(BitPos pos);
-
-        void SetBit(BitPos pos, bit value);
+        bit GetBit(int pos);
 
         /// <summary>
         /// Sets a bit value
         /// </summary>
         /// <param name="pos">The position of the bit to set</param>
         /// <param name="value">The bit value</param>
-        void Set(BitPos pos, Bit value);
+        void SetBit(int pos, bit value);
+
 
         /// <summary>
         /// Determines whether a bit is enabled
         /// </summary>
         /// <param name="pos">The bit position</param>
-        bool Test(BitPos pos);        
+        bool Test(int pos);        
 
         /// <summary>
         /// Counts the number of bits set up to and including the specified position
         /// </summary>
         /// <param name="src">The bit source</param>
         /// <param name="pos">The position of the bit for which rank will be calculated</param>
-        uint Rank(BitPos pos);
+        uint Rank(int pos);
 
         /// <summary>
         /// Queries/Manipulates individual vector bits
         /// </summary>
-        Bit this[BitPos pos] {get; set;}            
+        bit this[int pos] {get; set;}            
 
         /// <summary>
         /// Vector content represented as a bytespan
@@ -124,7 +121,6 @@ namespace Z0
         /// </summary>
         /// <param name="index">The segment index</param>
         ref byte Byte(int index);
-
     }
 
 
@@ -136,7 +132,7 @@ namespace Z0
         /// </summary>
         /// <param name="first">The first bit position</param>
         /// <param name="last">The last bit position</param>
-        V Between(BitPos first, BitPos last);
+        V Between(int first, int last);
 
         /// <summary>
         /// Selects a contiguous range of bits
@@ -148,7 +144,7 @@ namespace Z0
         /// </summary>
         /// <param name="first">The position of the first bit</param>
         /// <param name="last">The position of the last bit</param>
-        V this[BitPos first, BitPos last] {get;}
+        V this[int first, int last] {get;}
 
         /// <summary>
         /// Constructs a bitvector formed from the n lest significant bits of the current vector
@@ -289,7 +285,7 @@ namespace Z0
         /// Computes the scalar product of the source vector and another
         /// </summary>
         /// <param name="rhs">The right operand</param>
-        Bit Dot(V rhs);
+        bit Dot(V rhs);
 
         T ToScalar<T>()
             where T : unmanaged;

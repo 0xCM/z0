@@ -16,6 +16,16 @@ namespace Z0
     partial class bitvector
     {
         /// <summary>
+        /// Computes the Hamming distance between two generic bitvectors
+        /// </summary>
+        /// <param name="x">The left bitvector</param>
+        /// <param name="y">The right bitvector</param>
+        [MethodImpl(Inline)]
+        public static uint dist<T>(BitVector<T> x, BitVector<T> y)
+            where T : unmanaged
+            => gbits.pop(gmath.xor(x.Data,y.Data));
+
+        /// <summary>
         /// Computes the Hamming distance between two bitvectors
         /// </summary>
         /// <param name="x">The left bitvector</param>

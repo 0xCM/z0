@@ -13,11 +13,11 @@ namespace Z0.Logix
     public static class Mux
     {
         [MethodImpl(Inline)]
-        public static Bit mux(bit c0, bit i0, bit i1)
+        public static bit mux(bit c0, bit i0, bit i1)
             => !c0 ? i0 : i1;
 
         [MethodImpl(Inline)]
-        public static Bit mux(bit c0, bit c1, bit i0, bit i1, bit i2, bit i3)
+        public static bit mux(bit c0, bit c1, bit i0, bit i1, bit i2, bit i3)
         {
             if(!c0 && !c1)
                 return i0;

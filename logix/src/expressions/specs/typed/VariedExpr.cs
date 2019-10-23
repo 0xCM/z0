@@ -32,11 +32,11 @@ namespace Z0.Logix
 
         [MethodImpl(Inline)]
         public void SetVars(params T[] values)
-            => LogicOps.Set(this,values.Map(v => new LiteralExpr<T>(v)));
+            => OpHelpers.Set(this,values.Map(v => new LiteralExpr<T>(v)));
 
         [MethodImpl(Inline)]
         public void SetVars(params IExpr<T>[] values)
-            => LogicOps.Set(this,values);
+            => OpHelpers.Set(this,values);
         
         public string Format()
             => string.Empty;
@@ -65,11 +65,11 @@ namespace Z0.Logix
 
         [MethodImpl(Inline)]
         public void SetVars(params T[] values)
-            => LogicOps.Set(this,values.Map(v => new LiteralExpr<T>(v)));
+            => OpHelpers.Set(this,values.Map(v => new LiteralExpr<T>(v)));
 
         [MethodImpl(Inline)]
         public void SetVars(params IExpr<T>[] values)
-            => LogicOps.Set(this,values);
+            => OpHelpers.Set(this,values);
 
         public string Format()
             => string.Empty;

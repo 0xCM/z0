@@ -19,11 +19,11 @@ namespace Z0.Logix
 
     public interface IVariedLogicExpr : IVariedExpr, ILogicExpr
     {
-        IExpr BaseExpr {get;}        
+        ILogicExpr BaseExpr {get;}        
 
-        ILogicVariable[] Vars {get;}        
+        ILogicVarExpr[] Vars {get;}        
 
-        void SetVars(params IExpr[] values);        
+        void SetVars(params ILogicExpr[] values);        
 
         void SetVars(params bit[] values);        
 

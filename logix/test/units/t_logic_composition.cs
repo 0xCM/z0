@@ -31,12 +31,12 @@ namespace Z0.Logix
                 var s0 = seq[0];
                 var s1 = seq[1];
 
-                var e1 = BitOps.and(s0,s1);
-                var e2 = BitOps.or(s0,s1);
-                var e3 = BitOps.xor(e1,e2);
-                var e4 = BitOps.nand(e2,e3);
-                var e5 = BitOps.nor(e3,e4);
-                var e6 = BitOps.xnor(e4,e5);
+                var e1 = LogicOps.and(s0,s1);
+                var e2 = LogicOps.or(s0,s1);
+                var e3 = LogicOps.xor(e1,e2);
+                var e4 = LogicOps.nand(e2,e3);
+                var e5 = LogicOps.nor(e3,e4);
+                var e6 = LogicOps.xnor(e4,e5);
                 var expect = e6;
 
                 a.Set(s0);

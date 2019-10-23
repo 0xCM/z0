@@ -49,7 +49,7 @@ namespace Z0.Logix
         public bit Value {get;}
 
         public string Format()
-            =>Format(false);
+            => Format(false);
          
         public string Format(bool digit)
             => digit ? Value.ToString() 

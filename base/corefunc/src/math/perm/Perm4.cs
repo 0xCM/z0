@@ -301,15 +301,26 @@ namespace Z0
         /// <param name="src">The permutation spec</param>
         public static string FormatMap(this Perm4 src)
         {
-            static char letter(byte x, byte y)
-                => (x,y) switch 
-                {
-                    (0,0) => 'A',
-                    (1,0) => 'B',
-                    (0,1) => 'C',  
-                    (1,1) => 'D',
-                    _ => '0'
-                };
+            static char letter(bit x, bit y)
+            {
+                if(x && y)
+                    return 'D';
+                else if(!x && !y)
+                    return 'A';
+                else if(x && !y)
+                    return 'B';
+                else
+                    return 'C';
+
+            }
+                // => (x,y) switch 
+                // {
+                //     (false,false) => 'A',
+                //     (bit.On,bit.Off) => 'B',
+                //     (bit.Off,bit.On) => 'C',  
+                //     (bit.On,bit.On) => 'D',
+                //     _ => '0'
+                // };
 
             static string letters(BitString bs)
             {

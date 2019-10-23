@@ -10,36 +10,44 @@ namespace Z0.Logix
     
     using static zfunc;
 
-
     public enum LogicExprKind : uint
-    {
-        
+    {        
         /// <summary>
-        /// Classifies a boolean variable
+        /// Identifies the boolean variable classification
         /// </summary>
-        Variable,
+        Variable = Pow2.T01,
 
         /// <summary>
-        /// Classifies a boolean expression that depends on one or more variables
+        /// Identifies a boolean expression that depends on one or more variables
         /// </summary>
-        Varied,
+        Varied = Pow2.T02,
 
         /// <summary>
-        /// Classifies a boolean literal
+        /// Identifies the boolean literal classification
         /// </summary>
-        Literal,
+        Literal = Pow2.T03,
 
         /// <summary>
-        /// Classifies a logical operator
+        /// Identifies the equality operator classification
         /// </summary>
-        Operator,
+        Equality = Pow2.T07,
 
         /// <summary>
-        /// Classifies a logical identity
+        /// Identifies the unary operator classification
         /// </summary>
-        Equality
+        UnaryOperator = Pow2.T10,
+
+        /// <summary>
+        /// Identifies the binary operator classification
+        /// </summary>
+        BinaryOperator = Pow2.T11,
+
+        /// <summary>
+        /// Identifies the ternary operator classification
+        /// </summary>
+        TernaryOperator = Pow2.T12,
+
     }
-
 
 
 

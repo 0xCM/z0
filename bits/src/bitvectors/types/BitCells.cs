@@ -235,11 +235,11 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(NotInline)]
-        static Bit dot(BitCells<T> x, BitCells<T> y)
+        static bit dot(BitCells<T> x, BitCells<T> y)
         {
             require(x.Length == y.Length);
 
-            var result = Bit.Off;
+            var result = bit.Off;
             for(var i=0; i<x.Length; i++)
                 result ^= x[i] & y[i];
             return result;
@@ -266,7 +266,7 @@ namespace Z0
         /// <summary>
         /// A bit-level accessor/manipulator
         /// </summary>
-        public Bit this[BitPos index]
+        public bit this[int index]
         {
             [MethodImpl(Inline)]
             get => Get(index);
@@ -374,11 +374,11 @@ namespace Z0
         /// Computes the scalar product between this vector and another of identical length
         /// </summary>
         /// <param name="y">The right vector</param>
-        public Bit Dot(BitCells<T> y)
+        public bit Dot(BitCells<T> y)
         {
             require(this.Length == y.Length);
 
-            var result = Bit.Off;
+            var result = bit.Off;
             for(var i=0; i<Length; i++)
                 result ^= this[i] & y[i];
             return result;
@@ -394,14 +394,14 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public void Toggle(BitPos pos)
+        public void Toggle(int pos)
         {         
             ref readonly var loc = ref Location(pos);
             BitMaskG.toggle(ref data[loc.Segment],  loc.Offset);
         }
 
         [MethodImpl(Inline)]
-        public T SliceCell(BitPos first, BitPos last)
+        public T SliceCell(int first, int last)
             => Extract(in Location(first), in Location(last));
 
         /// <summary>
@@ -428,7 +428,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The bit source</param>
         /// <param name="pos">The position of the bit for which rank will be calculated</param>
-        public uint Pop(BitPos pos)
+        public uint Pop(int pos)
         {
             var rank = 0u;
             var segments = Segments(pos);
@@ -457,7 +457,7 @@ namespace Z0
         /// <param name="src">The bit source</param>
         /// <param name="pos">The position of the bit for which rank will be calculated</param>
         [MethodImpl(Inline)]
-        public uint Rank(BitPos pos)
+        public uint Rank(int pos)
             => Pop(pos);
             
         /// <summary>
@@ -465,7 +465,7 @@ namespace Z0
         /// </summary>
         /// <param name="pos">The bit position</param>
         [MethodImpl(Inline)]
-        readonly ref readonly CellIndex<T> Location(BitPos pos)
+        readonly ref readonly CellIndex<T> Location(int pos)
             => ref BitMap[pos];
 
         /// <summary>
@@ -481,7 +481,7 @@ namespace Z0
         /// </summary>
         /// <param name="pos">The segmented bit position</param>
         [MethodImpl(Inline)]
-        public ref T Segment(BitPos pos)
+        public ref T Segment(int pos)
             => ref Segment(in Location(pos));
 
         /// <summary>
@@ -489,7 +489,7 @@ namespace Z0
         /// </summary>
         /// <param name="pos">The bit position</param>
         [MethodImpl(Inline)]
-        readonly Span<T> Segments(BitPos pos)
+        readonly Span<T> Segments(int pos)
             => data.Slice(0, Location(pos).Segment - 1);
 
         T Extract(in CellIndex<T> first, in CellIndex<T> last, bool describe = false)

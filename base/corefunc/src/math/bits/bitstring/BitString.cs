@@ -140,10 +140,10 @@ namespace Z0
         /// <summary>
         /// Queries/manipulates bit at specified index
         /// </summary>
-        public Bit this[int index]
+        public bit this[int index]
         {
             [MethodImpl(Inline)]
-            get => bitseq[index];
+            get => bitseq[index] == 1;
 
             [MethodImpl(Inline)]
             set => bitseq[index] = (byte)value;
@@ -346,9 +346,9 @@ namespace Z0
         /// <summary>
         /// Renders the content as a span of bits
         /// </summary>
-        public Span<Bit> ToBits()
+        public Span<bit> ToBits()
         {
-            Span<Bit> dst = new Bit[bitseq.Length];
+            Span<bit> dst = new bit[bitseq.Length];
             for(var i=0; i< bitseq.Length; i++)
                 dst[i] = bitseq[i] == 1;
             return dst;

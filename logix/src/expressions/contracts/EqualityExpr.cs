@@ -52,4 +52,10 @@ namespace Z0.Logix
 
     }
 
+    public interface ILieralEqualityExpr<T> : IExpr<T>
+        where T : unmanaged
+    {
+
+    }
+
 }

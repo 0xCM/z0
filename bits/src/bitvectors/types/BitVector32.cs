@@ -25,11 +25,11 @@ namespace Z0
 
         public static readonly BitVector32 Ones = uint.MaxValue;
 
-        public static readonly BitSize Width = 32;
+        public const int Width = 32;
 
-        public static readonly BitPos FirstPos = 0;
+        public const int FirstPos = 0;
 
-        public static readonly BitPos LastPos = Width - 1;
+        public const int LastPos = Width - 1;
 
         /// <summary>
         /// Allocates a zero-filled vector
@@ -118,6 +118,10 @@ namespace Z0
         public static implicit operator BitVector<N32,uint>(BitVector32 src)
             => BitVector<N32,uint>.FromCells(src.data);
 
+
+        [MethodImpl(Inline)]
+        public static implicit operator BitVector<uint>(BitVector32 src)
+            => src.data;
 
         [MethodImpl(Inline)]
         public static implicit operator BitVector64(BitVector32 src)
@@ -340,13 +344,13 @@ namespace Z0
         /// <summary>
         /// Queries/Manipulates index-identified bits
         /// </summary>
-        public Bit this[BitPos pos]
+        public bit this[int pos]
         {
             [MethodImpl(Inline)]
-            get => Get(pos);
+            get => GetBit(pos);
             
             [MethodImpl(Inline)]
-            set => Set(pos, value);
+            set => SetBit(pos, value);
        }
 
         public BitVector32 this[Range range]
@@ -360,8 +364,8 @@ namespace Z0
         /// </summary>
         /// <param name="pos">The bit index</param>
         [MethodImpl(Inline)]
-        public bit GetBit(BitPos pos)
-            => this[pos] == true;
+        public bit GetBit(int pos)
+            => BitMask.test(data, pos);
 
         /// <summary>
         /// Sets the state of an index-identified bit
@@ -369,15 +373,15 @@ namespace Z0
         /// <param name="pos">The bit index</param>
         /// <param name="value">The bit value</param>
         [MethodImpl(Inline)]
-        public void SetBit(BitPos pos, bit value)
-            => this[pos] = value == true;
+        public void SetBit(int pos, bit value)
+            => data = BitMask.set(ref data, (byte)pos, value);
 
         /// <summary>
         /// Selects a contiguous range of bits
         /// </summary>
         /// <param name="first">The position of the first bit</param>
         /// <param name="last">The position of the last bit</param>
-        public BitVector32 this[BitPos first, BitPos last]
+        public BitVector32 this[int first, int last]
         {
             [MethodImpl(Inline)]
             get => Between(first, last);
@@ -568,49 +572,33 @@ namespace Z0
         /// </summary>
         /// <param name="pos">The position of the bit to enable</param>
         [MethodImpl(Inline)]
-        public void Enable(BitPos pos)
-            => BitMask.enable(ref data, pos);
+        public void Enable(int pos)
+            => data = BitMask.enable(ref data, pos);
 
         /// <summary>
         /// Disables a bit if it is enabled
         /// </summary>
         /// <param name="pos">The bit position</param>
         [MethodImpl(Inline)]
-        public void Disable(BitPos pos)
-            => BitMask.disable(ref data, pos);
+        public void Disable(int pos)
+            => data = BitMask.disable(ref data, pos);
 
         /// <summary>
         /// Disables the high bits that follow a specified bit
         /// </summary>
         /// <param name="pos">The bit position</param>
         [MethodImpl(Inline)]
-        public void DisableAfter(BitPos pos)
-            => Bits.bzhi(ref data, ++pos);
-
-        /// <summary>
-        /// Sets a bit value
-        /// </summary>
-        /// <param name="pos">The position of the bit to set</param>
-        /// <param name="value">The bit value</param>
-        [MethodImpl(Inline)]
-        public void Set(BitPos pos, Bit value)
-            => BitMask.set(ref data, pos, value);
+        public void DisableAfter(int pos)
+            => data = Bits.bzhi(ref data, (byte)(++pos));
 
         /// <summary>
         /// Determines whether a bit is enabled
         /// </summary>
         /// <param name="pos">The bit position</param>
         [MethodImpl(Inline)]
-        public readonly bool Test(BitPos pos)
+        public readonly bool Test(int pos)
             => BitMask.test(data, pos);
 
-        /// <summary>
-        /// Reads a bit value
-        /// </summary>
-        /// <param name="pos">The bit position</param>
-        [MethodImpl(Inline)]
-        public readonly Bit Get(BitPos pos)
-            => Test(pos);
 
         /// <summary>
         /// Extracts a contiguous sequence of bits defined by an inclusive range
@@ -618,8 +606,8 @@ namespace Z0
         /// <param name="first">The first bit position</param>
         /// <param name="last">The last bit position</param>
         [MethodImpl(Inline)]
-        public readonly BitVector32 Between(BitPos first, BitPos last)
-            => Bits.between(data, first,last);
+        public readonly BitVector32 Between(int first, int last)
+            => Bits.between(data, (byte)first,(byte)last);
 
         /// <summary>
         /// Reverses the vector's bits
@@ -726,7 +714,7 @@ namespace Z0
         /// <param name="src">The bit source</param>
         /// <param name="pos">The position of the bit for which rank will be calculated</param>
         [MethodImpl(Inline)]
-        public readonly uint Rank(BitPos pos)
+        public readonly uint Rank(int pos)
             => Bits.rank(data,pos);
 
         /// <summary>
@@ -794,7 +782,7 @@ namespace Z0
         /// </summary>
         /// <param name="y">The right operand</param>
         [MethodImpl(Inline)]
-        public readonly Bit Dot(BitVector32 y)
+        public readonly bit Dot(BitVector32 y)
             => bitvector.dot(this,y);
 
 
@@ -894,14 +882,6 @@ namespace Z0
         static BitVector32 FromParts(in byte x0, in byte x1, in byte x2, in byte x3)
             => BitConverter.ToUInt32(array(x0, x1, x2, x3), 0);
 
-        [MethodImpl(Inline)]
-        Bit DotRef(BitVector32 y)
-        {
-            var result = Bit.Off;
-            for(var i=0; i<Length; i++)
-                result ^= this[i] & y[i];
-            return result;
-        }
 
     }
 }

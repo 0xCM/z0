@@ -20,7 +20,7 @@ namespace Z0.Logix
             {
                 case ILiteralExpr<Vector128<T>> x:
                     return eval(x);
-                case IVariable<Vector128<T>> x:
+                case IVarExpr<Vector128<T>> x:
                     return eval(x);
                 case IOpExpr<Vector128<T>> x:
                     return eval(x);
@@ -39,7 +39,7 @@ namespace Z0.Logix
             {
                 case ILiteralExpr<Vector256<T>> x:
                     return eval(x);
-                case IVariable<Vector256<T>> x:
+                case IVarExpr<Vector256<T>> x:
                     return eval(x);
                 case IOpExpr<Vector256<T>> x:
                     return eval(x);
@@ -58,7 +58,7 @@ namespace Z0.Logix
 
 
         [MethodImpl(Inline)]
-        static LiteralExpr<Vector128<T>> eval<T>(IVariable<Vector128<T>> expr)
+        static LiteralExpr<Vector128<T>> eval<T>(IVarExpr<Vector128<T>> expr)
             where T : unmanaged
         {
             if(expr.Value is LiteralExpr<Vector128<T>> x)
@@ -155,7 +155,7 @@ namespace Z0.Logix
         
 
         [MethodImpl(Inline)]
-        static LiteralExpr<Vector256<T>> eval<T>(IVariable<Vector256<T>> expr)
+        static LiteralExpr<Vector256<T>> eval<T>(IVarExpr<Vector256<T>> expr)
             where T : unmanaged
         {
             if(expr.Value is LiteralExpr<Vector256<T>> x)

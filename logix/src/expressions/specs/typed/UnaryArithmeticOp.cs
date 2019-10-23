@@ -26,7 +26,7 @@ namespace Z0.Logix
         /// The expression classifier
         /// </summary>
         public TypedExprKind ExprKind 
-            => TypedExprKind.Operator;
+            => TypedExprKind.UnaryOperator;
 
         /// <summary>
         /// The operator

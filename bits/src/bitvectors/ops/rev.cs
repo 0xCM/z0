@@ -16,7 +16,17 @@ namespace Z0
     partial class bitvector
     {
         /// <summary>
-        /// Decrements the source vector
+        /// Reverses the bits in the source vector
+        /// </summary>
+        /// <param name="x">The source vector</param>
+        /// <typeparam name="T">The primal type</typeparam>
+        [MethodImpl(Inline)]
+        public static BitVector<T> rev<T>(BitVector<T> x)
+            where T : unmanaged
+                => gbits.rev(x.Data);
+
+        /// <summary>
+        /// Reverses the bits in the source vector
         /// </summary>
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
@@ -24,7 +34,7 @@ namespace Z0
             => Bits.rev(x.data);
         
         /// <summary>
-        /// Decrements the source vector
+        /// Reverses the bits in the source vector
         /// </summary>
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
@@ -32,7 +42,7 @@ namespace Z0
             => Bits.rev(x.data);
 
         /// <summary>
-        /// Decrements the source vector
+        /// Reverses the bits in the source vector
         /// </summary>
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
@@ -40,7 +50,7 @@ namespace Z0
             => Bits.rev(x.data);
 
         /// <summary>
-        /// Decrements the source vector
+        /// Reverses the bits in the source vector
         /// </summary>
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]

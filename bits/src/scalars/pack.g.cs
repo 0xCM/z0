@@ -13,7 +13,7 @@ namespace Z0
 
     partial class gbits
     {    
-        public static ref T pack<T>(ReadOnlySpan<Bit> src, ref T dst)         
+        public static ref T pack<T>(ReadOnlySpan<bit> src, ref T dst)         
             where T : unmanaged
         {
             var maxbytes = Unsafe.SizeOf<T>();
@@ -37,7 +37,7 @@ namespace Z0
             return ref dst;
         }
 
-        public static Span<T> pack<T>(ReadOnlySpan<Bit> src, Span<T> dst)         
+        public static Span<T> pack<T>(ReadOnlySpan<bit> src, Span<T> dst)         
             where T : unmanaged
         {
             Bits.pack(src, dst.AsBytes());

@@ -15,6 +15,17 @@ namespace Z0
 
     partial class bitvector
     {
+
+        /// <summary>
+        /// Counts the number of enabled bits in the source vector
+        /// </summary>
+        /// <param name="x">The source vector</param>
+        /// <typeparam name="T">The primal type</typeparam>
+        [MethodImpl(Inline)]
+        public static uint pop<T>(BitVector<T> x)
+            where T : unmanaged
+                => gbits.pop(x.Data);
+
         /// <summary>
         /// Counts the number of enabled bits in the source vector
         /// </summary>
