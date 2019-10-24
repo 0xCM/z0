@@ -12,12 +12,15 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The operand type</typeparam>
     public interface IGroupOps<T> : IInvertiveOps<T>, IMonoidOps<T>
+        where T : unmanaged
+
     {
         
     }
 
 
     public interface IGroupMOps<T> : IGroupOps<T>, IMonoidMOps<T>, InvertiveMOps<T>
+        where T : unmanaged
     {
 
     }
@@ -26,6 +29,7 @@ namespace Z0
     /// Characterizes additive/abelian group operations
     /// </summary>
     public interface IGroupAOps<T> : IGroupOps<T>, IMonoidAOps<T>, INegatableOps<T> 
+        where T : unmanaged
     {
 
     }

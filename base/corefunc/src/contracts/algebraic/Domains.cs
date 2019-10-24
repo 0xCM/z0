@@ -22,6 +22,7 @@ namespace Z0
     /// <typeparam name="T">The individual type</typeparam>
     /// <remarks>See https://en.wikipedia.org/wiki/Integral_domain</remarks>
     public interface IIntegralDomainOps<T> : ICommutativeRingOps<T>
+        where T : unmanaged
     {
         
     }
@@ -33,7 +34,7 @@ namespace Z0
     /// <typeparam name="T">The individual type</typeparam>
     /// <remarks>See https://en.wikipedia.org/wiki/GCD_domain</remarks>
     public interface IGcdDomainOps<T> : IIntegralDomainOps<T>
-        where T : IGcdDomainOps<T>, new()
+        where T : unmanaged, IGcdDomainOps<T>
     {
 
 
@@ -60,7 +61,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The individual type</typeparam>
     public interface IUniqueFactorDomainOps<T> : IGcdDomainOps<T>
-        where T : IUniqueFactorDomainOps<T>, new()
+        where T : unmanaged, IUniqueFactorDomainOps<T>
     {
 
         
@@ -71,7 +72,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The individual type</typeparam>
     public interface IPrincipalIdealDomainOps<T> : IUniqueFactorDomainOps<T>
-        where T : IPrincipalIdealDomainOps<T>, new()
+        where T : unmanaged, IPrincipalIdealDomainOps<T>
     {
 
         
@@ -82,7 +83,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The individual type</typeparam>
     public interface IEuclideanDomainOps<T> : IPrincipalIdealDomainOps<T>
-        where T : IEuclideanDomainOps<T>, new()
+        where T : unmanaged, IEuclideanDomainOps<T>
     {
 
     }

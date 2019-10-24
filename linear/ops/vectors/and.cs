@@ -15,7 +15,6 @@ namespace Z0
 
     partial class Linear
     {
-
         /// <summary>
         /// Computes lhs[i] := lhs[i] & rhs[i] for i = 0...N-1
         /// </summary>
@@ -29,16 +28,25 @@ namespace Z0
             where T : unmanaged    
         {
             var dst = BlockVector.Alloc<N,T>();
-            bitspan.and<T>(lhs.Data, rhs.Data, dst);
+            and<T>(lhs.Data, rhs.Data, dst);
             return dst;
         }
+
+        public static Span256<T> and<T>(ReadOnlySpan256<T> lhs, ReadOnlySpan256<T> rhs, Span256<T> dst)
+            where T : unmanaged
+        {
+            for(var i=0; i< blocks(lhs,rhs); i++)
+                vstore(ginx.vand<T>(lhs.LoadVector256(i), rhs.LoadVector256(i)), ref dst.Block(i));                             
+            return dst;        
+        } 
+
 
         [MethodImpl(Inline)]
         public static ref BlockVector<N,T> and<N,T>(BlockVector<N,T> lhs, BlockVector<N,T> rhs, ref BlockVector<N,T> dst)
             where N : ITypeNat, new()
             where T : unmanaged    
         {
-            bitspan.and<T>(lhs.Data, rhs.Data, dst);
+            and<T>(lhs.Data, rhs.Data, dst);
             return ref dst;
         }
 

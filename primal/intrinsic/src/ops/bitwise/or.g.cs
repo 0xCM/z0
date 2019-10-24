@@ -14,6 +14,7 @@ namespace Z0
 
     partial class ginx
     {
+
         [MethodImpl(Inline)]
         public static Vec128<T> vor<T>(in Vec128<T> x, in Vec128<T> y)
             where T : unmanaged

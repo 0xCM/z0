@@ -11,29 +11,15 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
     using System.Runtime.Intrinsics;
+    using System.Runtime.Intrinsics.X86;
 
     using static zfunc;
     using static As;
 
     partial class BitMatrix
     {
-        public static BitMatrix<T> and<T>(BitMatrix<T> A, BitMatrix<T> B,  BitMatrix<T> C)
-            where T : unmanaged
-        {
-            var rc = rowdim(A,B,C);
-            for(var i=0; i<rc; i++)
-                C[i] = bitvector.and(A[i],B[i]);
-            return C;
-
-        }
-
         [MethodImpl(Inline)]
-        public static BitMatrix<T> and<T>(BitMatrix<T> A, BitMatrix<T> B)
-            where T : unmanaged
-                => and(A,B, A.Replicate(true));
-
-        [MethodImpl(Inline)]
-        public static BitMatrix4 and(BitMatrix4 A, BitMatrix4 B)
+        public static BitMatrix4 and(in BitMatrix4 A, in BitMatrix4 B)
         {
             var a = (ushort)A;
             var b = (ushort)B;
@@ -41,120 +27,48 @@ namespace Z0
             return BitMatrix4.From(c);
         }
 
-        /// <summary>
-        /// Computes the logical AND between two primal bitmatrices of order 8
-        /// </summary>
-        /// <param name="A">The left matrix</param>
-        /// <param name="B">The right matrix</param>
         [MethodImpl(Inline)]
-        public static BitMatrix8 and(BitMatrix8 A, BitMatrix8 B)
-             => BitMatrix8.From((ulong)A & (ulong)B);             
-
-
-        [MethodImpl(Inline)]
-        public static BitMatrix16 and(BitMatrix16 A, BitMatrix16 B,  BitMatrix16 C)
+        public static BitMatrix8 and(in BitMatrix8 A, in BitMatrix8 B)
         {
-            A.Load(out Vector256<ushort> a);
-            B.Load(out Vector256<ushort> b);
-            dinx.vand(a,b).StoreTo(ref C[0]);
-            return C;
-        }
-
-        /// <summary>
-        /// Computes the logical AND between two primal bitmatrices of order 16
-        /// </summary>
-        /// <param name="A">The left matrix</param>
-        /// <param name="B">The right matrix</param>
-        [MethodImpl(Inline)]
-        public static BitMatrix16 and(BitMatrix16 A, BitMatrix16 B)
-            => and(A,B, BitMatrix16.Alloc());
-
-        public static ref BitMatrix32 and(ref BitMatrix32 A, BitMatrix32 B)
-        {
-            const int rowstep = 8;
-            for(var i=0; i< A.RowCount; i += rowstep)
-            {
-                A.GetCells(i, out Vec256<uint> x);
-                B.GetCells(i, out Vec256<uint> y);
-                dinx.vand(x,y).StoreTo(ref A[i]);
-            }
-            return ref A;
+            var x = A.Bytes.TakeUInt64();
+            var y = B.Bytes.TakeUInt64();
+            return BitMatrix8.From(x & y);
         }
 
         [MethodImpl(Inline)]
-        static void and(int step, BitMatrix32 A, BitMatrix32 B, BitMatrix32 C)
+        public static unsafe ref BitMatrix16 and(in BitMatrix16 A, in BitMatrix16 B, ref BitMatrix16 C)
         {
-            A.Load(step, out Vector256<uint> x);
-            B.Load(step, out Vector256<uint> y);
-            dinx.vand(x,y).StoreTo(ref C[step]);
+            BitPoints256.and(refptr(ref A.Head), refptr(ref B.Head), refptr(ref C.Head));
+            return ref C;
         }
 
         [MethodImpl(Inline)]
-        public static BitMatrix32 and(BitMatrix32 A, BitMatrix32 B, BitMatrix32 C)
+        public static BitMatrix16 and(in BitMatrix16 A, in BitMatrix16 B)
         {
-            and(0,A,B,C);
-            and(8,A,B,C);
-            and(16,A,B,C);
-            and(24,A,B,C);
-            return C;
+            var C = BitMatrix16.Alloc();
+            return and(A,B, ref C);
+        }
+        
+        [MethodImpl(Inline)]
+        public static unsafe ref BitMatrix32 and(in BitMatrix32 A, in BitMatrix32 B, ref BitMatrix32 C)
+        {
+            BitPoints256.and(refptr(ref A.Head), refptr(ref B.Head), refptr(ref C.Head));
+            return ref C;
         }
 
         [MethodImpl(Inline)]
-        public static BitMatrix32 and(BitMatrix32 A, BitMatrix32 B)
-            => and(A,B, BitMatrix32.Alloc());
-
-        [MethodImpl(Inline)]
-        static void and(int step, BitMatrix64 A, BitMatrix64 B, BitMatrix64 C)
+        public static BitMatrix32 and(in BitMatrix32 A, in BitMatrix32 B)
         {
-            A.Load(step, out Vector256<ulong> x);
-            B.Load(step, out Vector256<ulong> y);
-            dinx.vand(x,y).StoreTo(ref C[step]);
+            var C = BitMatrix32.Alloc();
+            return and(A,B, ref C);
         }
 
         [MethodImpl(Inline)]
-        public static BitMatrix64 and(BitMatrix64 A, BitMatrix64 B, BitMatrix64 C)
+        public static unsafe ref BitMatrix64 and(in BitMatrix64 A, in BitMatrix64 B, ref BitMatrix64 C)
         {
-            and(0,A,B,C);
-            and(4,A,B,C);
-            and(8,A,B,C);
-            and(12,A,B,C);
-            and(16,A,B,C);
-            and(20,A,B,C);
-            and(24,A,B,C);
-            and(28,A,B,C);
-            and(32,A,B,C);
-            and(36,A,B,C);
-            and(40,A,B,C);
-            and(44,A,B,C);
-            and(48,A,B,C);
-            and(52,A,B,C);
-            and(56,A,B,C);
-            and(60,A,B,C);
-            return C;
+            BitPoints256.and(refptr(ref A.Head), refptr(ref B.Head), refptr(ref C.Head));
+            return ref C;
         }
-
-        [MethodImpl(Inline)]
-        public static BitMatrix64 and(BitMatrix64 A, BitMatrix64 B)
-            => and(A,B, BitMatrix64.Alloc());
-
-        public static ref BitMatrix64 and(ref BitMatrix64 A, BitMatrix64 B)
-        {
-            const int rowstep = 4;
-            for(var i=0; i< A.RowCount; i += rowstep)
-            {
-                A.GetCells(i, out Vec256<ulong> vLhs);
-                B.GetCells(i, out Vec256<ulong> vRhs);
-                dinx.vand(vLhs,vRhs).StoreTo(ref A[i]);
-            }
-            return ref A;
-        }
-
-        // [MethodImpl(Inline)]
-        // public static BitMatrix64 and(BitMatrix64 A, BitMatrix64 B)
-        // {
-        //     var C = A.Replicate();
-        //     return and(ref C, B);
-        // }
 
         /// <summary>
         /// Computes the bitwise AND between two square bitmatrices of common natural order and stores the
@@ -182,7 +96,7 @@ namespace Z0
             where N : ITypeNat, new()
             where T : unmanaged
         {
-            var C = Alloc<N,T>();
+            var C = alloc<N,T>();
             return and(in A, in B, ref C);
         }
 
@@ -204,5 +118,6 @@ namespace Z0
             mathspan.and(A.Data, B.Data, C.Data);
             return ref C;
         } 
+ 
     }
 }

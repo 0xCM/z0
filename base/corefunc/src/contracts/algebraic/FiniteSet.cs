@@ -35,7 +35,6 @@ namespace Z0
         /// </summary>
         /// <param name="rhs">The candidate subset</param>
         /// <param name="proper">Specifies whether only proper subsets are considered "subsets"</param>
-        /// <returns></returns>
         bool IsSuperset(S rhs, bool proper = true);
 
         /// <summary>

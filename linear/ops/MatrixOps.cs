@@ -70,7 +70,7 @@ namespace Z0
             where N : ITypeNat, new()
             where T : unmanaged    
         {
-            bitspan.and(A.Unsized,B.Unsized, C.Unsized);
+            and(A.Unsized,B.Unsized, C.Unsized);
             return ref C;
         }
 

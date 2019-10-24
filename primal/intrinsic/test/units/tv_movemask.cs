@@ -47,15 +47,14 @@ namespace Z0.Test
             var src = Random.Span128<byte>(blocks:n);
             for(var i=0; i<n; i++)
             {
-                var srcVector = src.ToCpuVec128(i);
-
-                var mmExpect = BitVector32.Alloc();
-                for(byte r=0; r<srcVector.Length(); r++)
-                    if(BitMask.test(srcVector[r], 7))
-                        mmExpect.Enable(r);
+                var x = src.LoadVector(i);
+                var expect = BitVector32.Alloc();
+                for(byte r=0; r < x.Length(); r++)
+                    if(BitMask.test(src[r], 7))
+                        expect.Enable(r);
                 
-                var mmActual = dinx.vmovemask(srcVector).ToBitVector(n32);
-                Claim.yea(mmExpect == mmActual);
+                var actual = dinx.vmovemask(x).ToBitVector(n32);
+                Claim.yea(expect == actual);
             }
         }
 

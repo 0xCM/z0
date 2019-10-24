@@ -494,7 +494,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<T> ToCpuVector<T>(this BitString src, N128 n)
             where T : unmanaged        
-                => src.Pack().As<byte,T>().ToSpan128().ToCpuVector128();
+                => src.Pack().As<byte,T>().ToSpan128().LoadVector();
 
         /// <summary>
         /// Extracts a 128-bit cpu vector from a bitsring of length 128 or greater
@@ -504,7 +504,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<T> ToCpuVector<T>(this BitString src, N256 n)
             where T : unmanaged        
-                => src.Pack().As<byte,T>().ToSpan256().ToCpuVector256();
+                => src.Pack().As<byte,T>().ToSpan256().LoadVector();
 
         /// <summary>
         /// Converts an 8-bit bitmask to an 8-bit bitvector

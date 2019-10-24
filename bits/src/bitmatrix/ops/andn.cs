@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Runtime.Intrinsics;
 
     using static zfunc;
     using static As;
@@ -29,8 +30,8 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ref BitMatrix16 andn(ref BitMatrix16 A, in BitMatrix16 B)
         {
-            A.GetCells(out Vec256<ushort> x);
-            B.GetCells(out Vec256<ushort> y);
+            A.Load(out Vector256<ushort> x);
+            B.Load(out Vector256<ushort> y);
             dinx.vandn(x,y).StoreTo(ref A[0]);
             return ref A;
         }
@@ -47,8 +48,8 @@ namespace Z0
             const int rowstep = 8;
             for(var i=0; i< A.RowCount; i += rowstep)
             {
-                A.GetCells(i, out Vec256<uint> x);
-                B.GetCells(i, out Vec256<uint> y);
+                A.Load(i, out Vector256<uint> x);
+                B.Load(i, out Vector256<uint> y);
                 dinx.vandn(x,y).StoreTo(ref A[i]);
             }
             return ref A;

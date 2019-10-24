@@ -129,7 +129,7 @@ namespace Z0.Test
             where T : unmanaged
        {
             TypeCaseStart<N>();
-            var identity = BitMatrix.Identity<N,T>();
+            var identity = BitMatrix.identity<N,T>();
             for(var i=0; i< identity.RowCount; i++)
             for(var j=0; j< identity.ColCount; j++)
                 Claim.eq(identity[i,j], i==j ? Bit.On : Bit.Off);            

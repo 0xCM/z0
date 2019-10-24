@@ -63,7 +63,7 @@ namespace Z0
 
     }
 
-    public interface IInteger<S> :  IRealNumber<S>, IStepwise<S>, IBitwise<S> 
+    public interface IInteger<S> :  IRealNumber<S>, IStepwise<S>, IShiftable<S> 
         where S : IInteger<S>, new()
     { }
 

@@ -8,11 +8,13 @@ namespace Z0
     using System.Numerics;
 
     public interface IDecrementableOps<T> 
+        where T : unmanaged
     {
         T Dec(T x);        
     }
 
     public interface IIncrementableOps<T>
+        where T : unmanaged
     {
         T Inc(T x);        
     }
@@ -22,6 +24,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The target type</typeparam>
     public interface IStepwiseOps<T> : IIncrementableOps<T>, IDecrementableOps<T>
+        where T : unmanaged
     {
         
     }

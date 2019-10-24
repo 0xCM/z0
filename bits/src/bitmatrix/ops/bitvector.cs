@@ -13,5 +13,20 @@ namespace Z0
 
     partial class BitMatrix
     {
+
+        public static int rowstep<T>()
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(ushort))
+                return 16;
+            else if(typeof(T) == typeof(uint))
+                return 8;
+            else if(typeof(T) == typeof(ulong))
+                return 4;
+            else
+                throw unsupported<T>();
+
+        }
+
     }
 }

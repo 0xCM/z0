@@ -17,39 +17,40 @@ namespace Z0
     partial class ginx
     {
         [MethodImpl(Inline)]
-        public static Vec128<T> cmpgt<T>(in Vec128<T> lhs, in Vec128<T> rhs)
+        public static Vector128<T> cmpgt<T>(Vector128<T> lhs, Vector128<T> rhs)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return dinx.cmpgt(in int8(in lhs), in int8(in rhs)).As<T>();
+                return generic<T>(dinx.cmpgt(int8(lhs), int8(rhs)));
             else if(typeof(T) == typeof(short))
-                return dinx.cmpgt(in int16(in lhs), in int16(in rhs)).As<T>();
+                return generic<T>(dinx.cmpgt(int16(lhs), int16(rhs)));
             else if(typeof(T) == typeof(int))
-                return dinx.cmpgt(in int32(in lhs), in int32(in rhs)).As<T>();
+                return generic<T>(dinx.cmpgt(int32(lhs), int32(rhs)));
             else if(typeof(T) == typeof(float))
-                return dfp.cmpgt(in float32(in lhs), in float32(in rhs)).As<T>();
+                return generic<T>(dfp.cmpgt(float32(lhs), float32(rhs)));
             else if(typeof(T) == typeof(double))
-                return dfp.cmpgt(in float64(in lhs), in float64(in rhs)).As<T>();
+                return generic<T>(dfp.cmpgt(float64(lhs), float64(rhs)));
             else 
                 throw unsupported<T>();
         }
 
+
         [MethodImpl(Inline)]
-        public static Vec256<T> cmpgt<T>(in Vec256<T> lhs, in Vec256<T> rhs)
+        public static Vector256<T> cmpgt<T>(Vector256<T> lhs, Vector256<T> rhs)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return dinx.cmpgt(in int8(in lhs), in int8(in rhs)).As<T>();
+                return generic<T>(dinx.cmpgt(int8(lhs), int8(rhs)));
             else if(typeof(T) == typeof(short))
-                return dinx.cmpgt(in int16(in lhs), in int16(in rhs)).As<T>();
+                return generic<T>(dinx.cmpgt(int16(lhs), int16(rhs)));
             else if(typeof(T) == typeof(int))
-                return dinx.cmpgt(in int32(in lhs), in int32(in rhs)).As<T>();
+                return generic<T>(dinx.cmpgt(int32(lhs), int32(rhs)));
             else if(typeof(T) == typeof(long))
-                return dinx.cmpgt(in int64(in lhs), in int64(in rhs)).As<T>();
+                return generic<T>(dinx.cmpgt(int64(lhs), int64(rhs)));
             else if(typeof(T) == typeof(float))
-                return dfp.cmpgt(in float32(in lhs), in float32(in rhs)).As<T>();
+                return generic<T>(dfp.cmpgt(float32(lhs), float32(rhs)));
             else if(typeof(T) == typeof(double))
-                return dfp.cmpgt(in float64(in lhs), in float64(in rhs)).As<T>();
+                return generic<T>(dfp.cmpgt(float64(lhs), float64(rhs)));
             else 
                 throw unsupported<T>();
         }

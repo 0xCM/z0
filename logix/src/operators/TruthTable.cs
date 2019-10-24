@@ -85,7 +85,7 @@ namespace Z0.Logix
             for(var i=0; i< 16; i++)
             {
                 BitVector4 result = (byte)i;
-                var table = BitMatrix.Alloc<N4,N3,byte>();
+                var table = BitMatrix.alloc<N4,N3,byte>();
                 table[0] = BitVector.Define<N3,byte>(Bits.pack3(result[0], off, off));
                 table[1] = BitVector.Define<N3,byte>(Bits.pack3(result[1], off, on));
                 table[2] = BitVector.Define<N3,byte>(Bits.pack3(result[2], on, off));
@@ -103,7 +103,7 @@ namespace Z0.Logix
             for(var i=0; i< 256; i++)
             {
                 BitVector8 result = (byte)i;
-                var table = BitMatrix.Alloc<N8,N4,byte>();
+                var table = BitMatrix.alloc<N8,N4,byte>();
                 table[0] = BitVector.Define<N4,byte>(Bits.pack4(result[0], off, off, off));
                 table[1] = BitVector.Define<N4,byte>(Bits.pack4(result[1], off, off, on));
                 table[2] = BitVector.Define<N4,byte>(Bits.pack4(result[2], off, on, off));

@@ -62,8 +62,9 @@ namespace Z0
             var dst = Span128.Alloc<T>(n);
             var one = gmath.one<T>();
             for(var i=0; i<n; i++)
-                dst[i] = one;
-            return ginx.vloadu(in dst[0], out Vector128<T> u);
+                dst[i] = one;                
+            ginx.vloadu(in dst[0], out Vector128<T> u);
+            return u;
         }
 
         static Vec128<T> CalcFpSignMask()

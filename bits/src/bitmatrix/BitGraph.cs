@@ -40,7 +40,7 @@ namespace Z0
             return Graph.Define(nodes, edges);
         }
 
-        internal static Graph<V> FromMatrix<V,T>(BitMatrix<T> src)
+        internal static Graph<V> FromMatrix<V,T>(RowBits<T> src)
             where V : unmanaged
             where T : unmanaged
         {

@@ -13,12 +13,12 @@ namespace Z0
     partial class BitMatrix
     {
         [MethodImpl(Inline)]
-        public static int rowdim<T>(BitMatrix<T> A)
+        public static int rowdim<T>(RowBits<T> A)
             where T : unmanaged
                 => A.RowCount;
 
         [MethodImpl(Inline)]
-        public static int rowdim<T>(BitMatrix<T> A, BitMatrix<T> B)
+        public static int rowdim<T>(RowBits<T> A, RowBits<T> B)
             where T : unmanaged
         {
             if(A.RowCount != B.RowCount)
@@ -27,7 +27,7 @@ namespace Z0
         }
                 
         [MethodImpl(Inline)]
-        public static int rowdim<T>(BitMatrix<T> A, BitMatrix<T> B, BitMatrix<T> C)
+        public static int rowdim<T>(RowBits<T> A, RowBits<T> B, RowBits<T> C)
             where T : unmanaged
         {
             if(A.RowCount != B.RowCount || A.RowCount != C.RowCount)
@@ -37,7 +37,7 @@ namespace Z0
 
 
         [MethodImpl(Inline)]
-        public static Dim2 dim<T>(BitMatrix<T> A)
+        public static Dim2 dim<T>(RowBits<T> A)
             where T : unmanaged
                 => (A.RowCount, A.ColCount);
     }

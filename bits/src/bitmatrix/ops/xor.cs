@@ -13,7 +13,7 @@ namespace Z0
 
     partial class BitMatrix
     {
-        public static BitMatrix<T> xor<T>(BitMatrix<T> A, BitMatrix<T> B, BitMatrix<T> C)
+        public static RowBits<T> xor<T>(RowBits<T> A, RowBits<T> B, RowBits<T> C)
             where T : unmanaged
         {
             var rc = rowdim(A,B,C);
@@ -23,7 +23,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static BitMatrix<T> xor<T>(BitMatrix<T> A, BitMatrix<T> B)
+        public static RowBits<T> xor<T>(RowBits<T> A, RowBits<T> B)
             where T : unmanaged
                 => xor(A,B, A.Replicate(true));
 
@@ -42,23 +42,19 @@ namespace Z0
         /// <param name="A">The left matrix</param>
         /// <param name="B">The right matrix</param>
         [MethodImpl(Inline)]
-        public static ref BitMatrix16 xor(in BitMatrix16 A, in BitMatrix16 B, ref BitMatrix16 C)
+        public static BitMatrix16 xor(BitMatrix16 A, BitMatrix16 B, BitMatrix16 C)
         {
-            dinx.vxor(Vec256.Load(ref A[0]), Vec256.Load(ref B[0])).StoreTo(ref C[0]);
-            return ref C;
+            A.Load(out Vector256<ushort> vA);
+            B.Load(out Vector256<ushort> vB);
+            dinx.vxor(vA,vB).StoreTo(ref C.Head);
+            return C;
         }
 
         [MethodImpl(Inline)]
-        public static BitMatrix16 xor(BitMatrix16 lhs, BitMatrix16 rhs)
-        {
-            var dst = BitMatrix16.Alloc();
-            lhs.GetCells(out Vec256<ushort> vLhs);
-            rhs.GetCells(out Vec256<ushort> vRhs);
-            dinx.vxor(vLhs,vRhs).StoreTo(ref dst.Data[0]);
-            return dst;
-        }
+        public static BitMatrix16 xor(BitMatrix16 A, BitMatrix16 B)
+            => xor(A,B, BitMatrix16.Alloc());
 
-        public static BitMatrix32 xor(in BitMatrix32 A, in BitMatrix32 B)
+        public static BitMatrix32 xor(BitMatrix32 A, BitMatrix32 B)
         {
             const int rowstep = 8;
             var dst = BitMatrix32.Alloc();

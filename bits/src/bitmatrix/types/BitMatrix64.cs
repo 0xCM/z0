@@ -18,7 +18,7 @@ namespace Z0
     /// <summary>
     /// Defines a 64x64 matrix of bits
     /// </summary>
-    public struct BitMatrix64 : IPrimalSquare<BitMatrix64,ulong>
+    public struct BitMatrix64 : IBitSquare<BitMatrix64,ulong>
     {                
         ulong[] data;
 
@@ -94,7 +94,11 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static BitMatrix64 operator & (BitMatrix64 A, BitMatrix64 B)
-            => BitMatrix.and(A,B);
+        {
+            var C = BitMatrix64.Alloc();
+            BitMatrix.and(A,B, ref C);
+            return C;
+        }
 
         [MethodImpl(Inline)]
         public static BitMatrix64 operator | (BitMatrix64 A, BitMatrix64 B)
@@ -336,7 +340,12 @@ namespace Z0
         /// </summary>
         [MethodImpl(Inline)] 
         public readonly BitSize Pop()
-            => bitspan.pop(data);
+        {
+            var count = 0u;
+            for(var i=0; i<data.Length; i++)
+                count += Bits.pop(data[i]);
+            return count;
+        }
 
         /// <summary>
         /// The data enclosed by the matrix
@@ -373,7 +382,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public void And(BitMatrix64 rhs)
         {
-            BitMatrix.and(ref this, rhs);
+            BitMatrix.and(this, rhs, ref this);
         }
 
         /// <summary>

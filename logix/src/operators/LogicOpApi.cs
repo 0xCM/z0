@@ -350,7 +350,7 @@ namespace Z0.Logix
         /// <param name="kind">The operator kind</param>
         public static BitMatrix<N4,N3,byte> table(BinaryLogicOpKind kind)
         {
-            var tt = BitMatrix.Alloc<N4,N3,byte>();
+            var tt = BitMatrix.alloc<N4,N3,byte>();
             var f = lookup(kind);
             tt[0] = BitVector.Define<N3,byte>(Bits.pack3(f(Off, Off), Off, Off));
             tt[1] = BitVector.Define<N3,byte>(Bits.pack3(f(On, Off), Off, On));
@@ -365,7 +365,7 @@ namespace Z0.Logix
         /// <param name="kind">The operator kind</param>
         public static BitMatrix<N8,N4, byte> table(Ternary512OpKind kind)
         {
-            var tt = BitMatrix.Alloc<N8,N4,byte>();
+            var tt = BitMatrix.alloc<N8,N4,byte>();
             var f = lookup(kind);
             tt[0] = BitVector.Define<N4,byte>(Bits.pack4(f(Off, Off, Off), Off, Off, Off));
             tt[1] = BitVector.Define<N4,byte>(Bits.pack4(f(Off, Off, On), Off, Off, On));

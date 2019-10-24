@@ -17,9 +17,9 @@ namespace Z0
 
 
     /// <summary>
-    /// Defines a bitmatrix with rows of primal type
+    /// Defines a rectangular bitmatrix with an aribitrary number of primal rows
     /// </summary>
-    public ref struct BitMatrix<T>
+    public ref struct RowBits<T>
         where T : unmanaged
     {
         internal Span<T> data;
@@ -27,20 +27,20 @@ namespace Z0
         public static readonly BitSize Width = bitsize<T>();
 
         [MethodImpl(Inline)]
-        public static BitMatrix<T> From(T[] src)        
-            => new BitMatrix<T>(src);
+        public static RowBits<T> From(T[] src)        
+            => new RowBits<T>(src);
 
         [MethodImpl(Inline)]
-        public static BitMatrix<T> From(Span<T> src)        
-            => new BitMatrix<T>(src);
+        public static RowBits<T> From(Span<T> src)        
+            => new RowBits<T>(src);
 
         [MethodImpl(Inline)]
-        public static BitMatrix<T> From(Span<byte> src)        
-            => new BitMatrix<T>(ByteSpan.Cast<T>(src));
+        public static RowBits<T> From(Span<byte> src)        
+            => new RowBits<T>(ByteSpan.Cast<T>(src));
 
         [MethodImpl(Inline)]
-        public static BitMatrix<T> Alloc(int rows)        
-            => new BitMatrix<T>(new T[rows]);
+        public static RowBits<T> Alloc(int rows)        
+            => new RowBits<T>(new T[rows]);
 
         /// <summary>
         /// Computes the bitwise AND between the operands
@@ -48,8 +48,8 @@ namespace Z0
         /// <param name="A">The left matrix</param>
         /// <param name="B">The right matrix</param>
         [MethodImpl(Inline)]
-        public static BitMatrix<T> operator &(BitMatrix<T> A, BitMatrix<T> B)
-            => BitMatrix.and(A, B);
+        public static RowBits<T> operator &(RowBits<T> A, RowBits<T> B)
+            => RowBits.and(A, B);
 
         /// <summary>
         /// Computes the bitwise OR between the operands
@@ -57,7 +57,7 @@ namespace Z0
         /// <param name="A">The left matrix</param>
         /// <param name="B">The right matrix</param>
         [MethodImpl(Inline)]
-        public static BitMatrix<T> operator |(BitMatrix<T> A, BitMatrix<T> B)
+        public static RowBits<T> operator |(RowBits<T> A, RowBits<T> B)
             => BitMatrix.or(A, B);
 
         /// <summary>
@@ -66,7 +66,7 @@ namespace Z0
         /// <param name="A">The left matrix</param>
         /// <param name="B">The right matrix</param>
         [MethodImpl(Inline)]
-        public static BitMatrix<T> operator ^(BitMatrix<T> A, BitMatrix<T> B)
+        public static RowBits<T> operator ^(RowBits<T> A, RowBits<T> B)
             => BitMatrix.xor(A, B);
 
         /// <summary>
@@ -74,15 +74,15 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source matrix</param>
         [MethodImpl(Inline)]
-        public static BitMatrix<T> operator ~(BitMatrix<T> src)
+        public static RowBits<T> operator ~(RowBits<T> src)
             => BitMatrix.not(src);
 
         [MethodImpl(Inline)]
-        BitMatrix(Span<T> rows)
+        RowBits(Span<T> rows)
             => data = rows;
 
         [MethodImpl(Inline)]
-        BitMatrix(T[] rows)
+        RowBits(T[] rows)
             => data = rows;
 
         public int RowCount
@@ -116,8 +116,7 @@ namespace Z0
         }
 
         /// <summary>
-        /// Specifies whether the matrix is square; if so, it can be represented
-        /// by one of the primal matrices
+        /// Specifies whether the matrix is square; if so, it can be represented by one of the primal matrices
         /// </summary>
         public bool IsSquare
         {
@@ -186,20 +185,20 @@ namespace Z0
             => Bytes.FormatMatrixBits(ColCount);
     
         [MethodImpl(Inline)]
-        public BitMatrix<T> Fill(T value)
+        public RowBits<T> Fill(T value)
         {
             data.Fill(value);
             return this;
         }
 
         [MethodImpl(Inline)]
-        public BitMatrix<T> Replicate(bool structureOnly = false)
-            => new BitMatrix<T>(data.Replicate(structureOnly));
+        public RowBits<T> Replicate(bool structureOnly = false)
+            => new RowBits<T>(data.Replicate(structureOnly));
         
         [MethodImpl(Inline)]
-        public BitMatrix<S> As<S>()
+        public RowBits<S> As<S>()
             where S : unmanaged
-                => new BitMatrix<S>(data.As<T,S>());
+                => new RowBits<S>(data.As<T,S>());
 
     }
 

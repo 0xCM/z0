@@ -10,6 +10,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The operand type</typeparam>
     public interface IResignableOps<T> : ISignableOps<T>, INegatableOps<T>
+        where T : unmanaged
     {
         /// <summary>
         /// Aligns the value with a specified sign

@@ -9,6 +9,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     
     public interface INegatableOps<T>
+        where T : unmanaged
     {
         /// <summary>
         /// Unary negation of input

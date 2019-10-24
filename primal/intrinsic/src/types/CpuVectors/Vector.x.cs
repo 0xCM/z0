@@ -37,11 +37,20 @@ namespace Z0
             where T : unmanaged            
                 => Vec128<T>.Length;
 
+
+        [MethodImpl(Inline)]
+        public static ref T StoreTo<T>(this Vector128<T> src, ref T dst)
+            where T : unmanaged            
+        {
+            vstore(src, ref dst);
+            return ref dst;
+        }
+
         [MethodImpl(Inline)]
         public static Span<T> StoreTo<T>(this Vector128<T> src, Span<T> dst)
             where T : unmanaged            
         {
-            vstore(src, ref head(dst));
+            src.StoreTo(ref head(dst));
             return dst;
         }
 
@@ -67,12 +76,20 @@ namespace Z0
             where T : unmanaged            
                 => Vec256<T>.Length;    
 
+        [MethodImpl(Inline)]
+        public static ref T StoreTo<T>(this Vector256<T> src, ref T dst)
+            where T : unmanaged            
+        {
+            vstore(src, ref dst);
+            return ref dst;
+        }
+
 
         [MethodImpl(Inline)]
         public static Span<T> StoreTo<T>(this Vector256<T> src, Span<T> dst)
             where T : unmanaged            
         {
-            vstore(src, ref head(dst));
+            src.StoreTo(ref head(dst));
             return dst;
         }
 
@@ -95,20 +112,12 @@ namespace Z0
         /// <param name="block">The block index</param>
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
-        public static Vec128<T> ToCpuVec128<T>(this Span128<T> src, int block = 0)
+        public static Vector128<T> LoadVector<T>(this Span128<T> src, int block = 0)
             where T : unmanaged
-                => Vec128.Load(ref src.Block(block));
-
-        /// <summary>
-        /// Loads a 128-bit cpu vector from a blocked span
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <param name="block">The block index</param>
-        /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline)]
-        public static Vector128<T> ToCpuVector128<T>(this Span128<T> src, int block = 0)
-            where T : unmanaged
-                => ginx.vloadu128(in src.Block(block));
+        {
+            ginx.vloadu(in src.Block(block), out Vector128<T> x);
+            return x;
+        }
 
         /// <summary>
         /// Loads a 256-bit cpu vector from a blocked span
@@ -117,10 +126,12 @@ namespace Z0
         /// <param name="block">The block index</param>
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector256<T> ToCpuVector256<T>(this Span256<T> src, int block = 0)
+        public static Vector256<T> LoadVector<T>(this Span256<T> src, int block = 0)
             where T : unmanaged
-                => ginx.vloadu256(in src.Block(block));
-
+        {
+            ginx.vloadu(in src.Block(block), out Vector256<T> x);
+            return x;
+        }
 
         /// <summary>
         /// Projects a 128-bit source vector into a 128-bit target vector via a mapping function

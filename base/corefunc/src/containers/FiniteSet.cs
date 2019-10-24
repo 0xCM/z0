@@ -18,6 +18,7 @@ namespace Z0
         /// </summary>
         /// <param name="members">The defining members</param>
         /// <typeparam name="T">The member type</typeparam>
+        [MethodImpl(Inline)]
         public static FiniteSet<T> define<T>(params T[] members)
             where T : ISemigroup<T>, new()
                 => new FiniteSet<T>(members);
@@ -27,7 +28,7 @@ namespace Z0
         /// </summary>
         /// <param name="members">The defining members</param>
         /// <typeparam name="T">The member type</typeparam>
-        /// <returns></returns>
+        [MethodImpl(Inline)]
         public static FiniteSet<T> define<T>(IEnumerable<T> members)
             where T : ISemigroup<T>, new()
                 => new FiniteSet<T>(members);
@@ -37,19 +38,57 @@ namespace Z0
     /// <summary>
     /// Contains a finite set of values
     /// </summary>
-    public readonly struct FiniteSet<T> : IFiniteSet<FiniteSet<T>,T>
+    public readonly struct FiniteSet<T> : IFiniteSet<FiniteSet<T>,T>, IEquatable<FiniteSet<T>>
         where T : ISemigroup<T>, new()
     {
-        static readonly IEqualityComparer<HashSet<T>> setcomparer = HashSet<T>.CreateSetComparer();        
-
-        static HashSet<T> hashset(IEnumerable<T> members)
-            => new HashSet<T>(members);
-
+        readonly HashSet<T> data;
+            
+        [MethodImpl(Inline)]
         public static implicit operator FiniteSet<T>(HashSet<T> src)
             => new FiniteSet<T>(src);
 
-        readonly HashSet<T> data;
+        [MethodImpl(Inline)]
+        public static FiniteSet<T> operator +(FiniteSet<T> a, FiniteSet<T> b)
+            => a.Union(b);
 
+        [MethodImpl(Inline)]
+        public static FiniteSet<T> operator -(FiniteSet<T> a, FiniteSet<T> b)
+            => a.Difference(b);
+
+        [MethodImpl(Inline)]
+        public static FiniteSet<T> operator *(FiniteSet<T> a, FiniteSet<T> b)
+            => a.Intersect(b);
+
+        [MethodImpl(Inline)]
+        public static bool operator <(FiniteSet<T> a, FiniteSet<T> b)
+            => b.IsSuperset(a, true);
+
+        [MethodImpl(Inline)]
+        public static bool operator >(FiniteSet<T> a, FiniteSet<T> b)
+            => a.IsSuperset(b, true);
+
+        [MethodImpl(Inline)]
+        public static bool operator <=(FiniteSet<T> a, FiniteSet<T> b)
+            => b.IsSuperset(a, false);
+
+        [MethodImpl(Inline)]
+        public static bool operator >=(FiniteSet<T> a, FiniteSet<T> b)
+            => a.IsSuperset(b, false);
+
+        public static bool operator <(T a, FiniteSet<T> b)
+            => b.Contains(a);
+
+        [MethodImpl(Inline)]
+        public static bool operator >(T a, FiniteSet<T> b)
+            => b.Contains(a) && b.Count == 1;
+
+        [MethodImpl(Inline)]
+        public static bool operator ==(FiniteSet<T> a, FiniteSet<T> b)
+            => a.Equals(b);
+
+        [MethodImpl(Inline)]
+        public static bool operator !=(FiniteSet<T> a, FiniteSet<T> b)
+            => !a.Equals(b);
 
         [MethodImpl(Inline)]   
         public FiniteSet(IEnumerable<T> members)
@@ -60,29 +99,36 @@ namespace Z0
             => this.data = members;
 
         public int Count 
-            => data.Count;
+        {
+            [MethodImpl(Inline)]
+            get => data.Count;
+        }
 
         public bool IsEmpty 
-            => Count == 0;
+        {
+            [MethodImpl(Inline)]
+            get => Count == 0;
+        }
 
         public bool IsFinite
-            => true;
+        {
+            [MethodImpl(Inline)]
+            get => true;
+        }
 
         public bool IsDiscrete
-            => true;
+        {
+            [MethodImpl(Inline)]
+            get => true;
+        }
         
-
         [MethodImpl(Inline)]   
-        public bool Equals(FiniteSet<T> other)
-            => setcomparer.Equals(data, other.data);
-
-        [MethodImpl(Inline)]   
-        public bool IsMember(T candidate)
+        public bool Contains(T candidate)
             => data.Contains(candidate);
 
         [MethodImpl(Inline)]   
         public bool IsMember(object candidate)
-            => candidate is T ? IsMember((T)candidate) :false;
+            => candidate is T ? Contains((T)candidate) :false;
         
         public IEnumerable<T> Content
             => data;
@@ -106,8 +152,7 @@ namespace Z0
             => proper ? data.IsProperSupersetOf(rhs.data) : data.IsSubsetOf(rhs.data);
 
         /// <summary>
-        /// Calculates the union between the current set and a specified set and
-        /// returns a new set that embodies this result
+        /// Calculates the union between the current set and a specified set and returns a new set that embodies this result
         /// </summary>
         /// <param name="rhs">The set with which to union/param>
         [MethodImpl(Inline)]   
@@ -132,8 +177,8 @@ namespace Z0
         }
 
         /// <summary>
-        /// Calculates the set difference, or symmetric difference, between the current 
-        /// set and a specified set and returns a new set that embodies this result
+        /// Calculates the set difference, or symmetric difference, between the current set and a specified set 
+        /// and returns a new set that embodies this result
         /// </summary>
         /// <param name="rhs">The set that should be differenced</param>
         /// <remarks>See https://en.wikipedia.org/wiki/Symmetric_difference</remarks>
@@ -156,10 +201,21 @@ namespace Z0
         public bool Intersects(FiniteSet<T> rhs)
             => data.Overlaps(rhs.data);
 
-        /// <summary>
-        /// Adjudicates equality between the current set and a specified set
-        /// </summary>
-        public bool eq(FiniteSet<T> rhs)
-            => data.SetEquals(rhs.data);
+        static readonly IEqualityComparer<HashSet<T>> setcomparer = HashSet<T>.CreateSetComparer(); 
+
+        [MethodImpl(Inline)]   
+        public bool Equals(FiniteSet<T> other)
+            => setcomparer.Equals(data, other.data);
+
+        public override bool Equals(object obj)
+            => obj is FiniteSeq<T> x && Equals(x);
+
+        public override int GetHashCode()
+            => data.GetHashCode();
+        
+        [MethodImpl(Inline)]   
+        static HashSet<T> hashset(IEnumerable<T> members)
+            => new HashSet<T>(members);
+
     }
 }

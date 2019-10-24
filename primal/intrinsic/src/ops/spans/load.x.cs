@@ -61,6 +61,28 @@ namespace Z0
                 => Vec256.Load(src,block);
 
         /// <summary>
+        /// Loads a 256-bit vector from a blocked readonly span
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <param name="block">The block index</param>
+        /// <typeparam name="T">The primitive type</typeparam>
+        [MethodImpl(Inline)]
+        public static Vector256<T> LoadVector256<T>(this ReadOnlySpan256<T> src, int block = 0)            
+            where T : unmanaged      
+        {      
+            ginx.vloadu(in src.Block(block), out Vector256<T> x);
+            return x;
+        }
+
+        [MethodImpl(Inline)]
+        public static Vector128<T> LoadVector128<T>(this ReadOnlySpan128<T> src, int block = 0)            
+            where T : unmanaged      
+        {      
+            ginx.vloadu(in src.Block(block), out Vector128<T> x);
+            return x;
+        }
+
+        /// <summary>
         /// Loads a 128-bit vector from a span beginning at a specified offset
         /// </summary>
         /// <param name="src">The source span</param>

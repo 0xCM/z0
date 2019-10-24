@@ -11,7 +11,7 @@ namespace Z0
     
     using static zfunc;
 
-    public readonly struct XnorGate<T> : IBinaryGate<T>, IBinaryGate<Vec128<T>>, IBinaryGate<Vec256<T>>
+    public readonly struct XnorGate<T> : IBinaryGate<T>, IBinaryGate<Vector128<T>>, IBinaryGate<Vector256<T>>
         where T : unmanaged
     {
         internal static readonly XnorGate<T> Gate = default;
@@ -21,15 +21,15 @@ namespace Z0
             => !(x ^ y);
 
         [MethodImpl(Inline)]
-        public T Send(in T x, in T y)
+        public T Send(T x, T y)
             => gmath.not(gmath.xor(x, y));
 
         [MethodImpl(Inline)]
-        public Vec128<T> Send(in Vec128<T> x, in Vec128<T> y)
-            => ginx.vnot(ginx.vxor(in x,in y));
+        public Vector128<T> Send(Vector128<T> x, Vector128<T> y)
+            => ginx.vnot(ginx.vxor(x,y));
 
         [MethodImpl(Inline)]
-        public Vec256<T> Send(in Vec256<T> x, in Vec256<T> y)
+        public Vector256<T> Send(Vector256<T> x, Vector256<T> y)
             => ginx.vnot(ginx.vxor(x,y));
 
     }

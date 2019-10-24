@@ -59,11 +59,11 @@ namespace Z0.Logix
             return data;
         }
 
-        public static BitMatrix<T> CreateMatrix<T>(Survey<T> src)
+        public static RowBits<T> CreateMatrix<T>(Survey<T> src)
             where T : unmanaged
         {
             var rowcount = src.Questions.Count;
-            var dst = BitMatrix.Alloc<T>(rowcount);
+            var dst = RowBits.alloc<T>(rowcount);
             for(var i=0; i< rowcount; i++)
                 dst[i] = CreateVector(src.Questions[i]);
             return dst;

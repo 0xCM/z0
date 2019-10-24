@@ -14,6 +14,7 @@ namespace Z0
     /// <typeparam name="T">The relation domain</typeparam>
     /// <remarks>See https://en.wikipedia.org/wiki/Partially_ordered_set</remarks>
     public interface IPartialOrderOps<T> : IReflexiveOps<T>, IAntisymmetricOps<T>, ITransitiveOps<T>
+        where T : unmanaged
     {
 
     }
@@ -25,6 +26,7 @@ namespace Z0
     /// <typeparam name="T"></typeparam>
     /// <remarks>See https://en.wikipedia.org/wiki/Partially_ordered_set </remarks>
     public interface IPosetOps<T> : IPartialOrderOps<T>
+        where T : unmanaged
 
     {
         /// <summary>

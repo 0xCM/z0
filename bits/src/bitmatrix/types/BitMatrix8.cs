@@ -14,11 +14,12 @@ namespace Z0
     using static As;
 
     using static zfunc;
+    using System.Runtime.Intrinsics;
 
     /// <summary>
     /// Defines an 8x8 matrix of bits
     /// </summary>
-    public struct BitMatrix8 //: IPrimalSquare<BitMatrix8,byte>
+    public struct BitMatrix8 : IBitSquare<BitMatrix8, byte>
     {        
         byte[] data;
                     
@@ -245,6 +246,14 @@ namespace Z0
             => BitGraph.FromMatrix<byte,N8,byte>(BitMatrix<N8,N8,byte>.Load(data));            
 
         /// <summary>
+        /// Packs the matrix into an unsigned 64-bit integer
+        /// </summary>
+        /// <returns></returns>
+        [MethodImpl(Inline)]
+        public ulong Pack()
+            => BitConverter.ToUInt64(data);
+
+        /// <summary>
         /// Reads the bit in a specified cell
         /// </summary>
         /// <param name="row">The row index</param>
@@ -344,6 +353,10 @@ namespace Z0
         public readonly BitMatrix8 Transpose()
             => BitMatrix.transpose(this);
 
+        [MethodImpl(Inline)]
+        public void Load(int row, out Vector256<byte> dst)
+            => dst = Vector256.CreateScalar(Pack()).AsByte();
+
         /// <summary>
         /// Queries the matrix for the data in an index-identified column 
         /// </summary>
@@ -414,7 +427,8 @@ namespace Z0
         
         public override int GetHashCode() 
             => throw new NotSupportedException();
- 
+
+
         static ReadOnlySpan<byte> Identity8x8 => new byte[]
         {
             1 << 0, 1 << 1, 1 << 2, 1 << 3, 1 << 4, 1 << 5, 1 << 6, 1 << 7

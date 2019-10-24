@@ -13,65 +13,8 @@ namespace Z0
     using static As;
     using static AsIn;
 
-    public static class bitspan
+    public static class BitRot
     {
-        public static Span256<T> and<T>(ReadOnlySpan256<T> lhs, ReadOnlySpan256<T> rhs, Span256<T> dst)
-            where T : unmanaged
-        {
-            for(var i=0; i< blocks(lhs,rhs); i++)
-                vstore(ginx.vand<T>(lhs.LoadVec256(i), rhs.LoadVec256(i)), ref dst.Block(i));                             
-            return dst;        
-        } 
-
-        /// <summary>
-        /// Counts the total population of enabled bits in the source
-        /// </summary>
-        /// <param name="src">The bit source</param>
-        public static ulong pop(Span<byte> src)
-        {
-            var count = 0ul;            
-            for(var i = 0; i < src.Length; i++)
-                count += Bits.pop(src[i]);
-            return count;
-        }
-
-        /// <summary>
-        /// Counts the total population of enabled bits in the source
-        /// </summary>
-        /// <param name="src">The bit source</param>
-        public static ulong pop(Span<ulong> src)
-        {
-            var count = 0u;
-            for(var i=0; i<src.Length; i++)
-                count += Bits.pop(src[i]);
-            return count;
-        }
-
-        /// <summary>
-        /// Counts the total population of enabled bits in the source
-        /// </summary>
-        /// <param name="src">The bit source</param>
-        public static ulong pop(Span<uint> src)
-        {
-            var count = 0u;
-            for(var i=0; i<src.Length; i++)
-                count += Popcnt.PopCount(src[i]);
-            return count;
-        }
-
-        /// <summary>
-        /// Counts the total population of enabled bits in the source
-        /// </summary>
-        /// <param name="src">The bit source</param>
-        public static ulong pop(Span<ushort> src)
-        {
-            var count = 0u;
-            for(var i=0; i<src.Length; i++)
-                count += Popcnt.PopCount(src[i]);
-            return count;
-        }
-
-
         public static Span<byte> rotr(ReadOnlySpan<byte> src, byte offset, Span<byte> dst)
         {
             for(var i=0; i<src.Length; i++)
@@ -161,6 +104,7 @@ namespace Z0
             => rotl(src,offset,src.Replicate(true));
  
     }
+
 
 
 }

@@ -12,6 +12,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The individual type</typeparam>
     public interface ISemiringOps<T> : IMonoidAOps<T>, IMonoidMOps<T>, IDistributiveOps<T>
+        where T : unmanaged
     {        
         T MulAdd(T x, T y, T z);            
     }

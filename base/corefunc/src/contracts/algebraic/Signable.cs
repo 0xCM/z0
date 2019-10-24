@@ -47,7 +47,7 @@ namespace Z0
     }
 
     /// <summary>
-    /// Characterizes a structure for which a sign can be adjudicated
+    /// Characterizes a structure for which a sign can be computed
     /// </summary>
     /// <typeparam name="S">The signed structure</typeparam>
     public interface ISignable<S>

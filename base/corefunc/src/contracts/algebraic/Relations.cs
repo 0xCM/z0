@@ -8,23 +8,14 @@ namespace Z0
     using System.Collections.Generic;
 
 
-    /// <summary>
-    /// Specifies a relation between two sets (which may or may not be identical)
-    /// </summary>
-    /// <typeparam name="S">The departure set type</typeparam>
-    /// <typeparam name="T">The destination set type</typeparam>
-    public interface IBinaryRelationOps<S,T>
-    {
-        bool Related(S x, T y);
-    }
 
     /// <summary>
-    /// Specifies an homogenous relation on a given set
+    /// Characterizes a relation over a set
     /// </summary>
     /// <typeparam name="T">The element type</typeparam>
-    public interface IBinaryRelationOps<T> : IBinaryRelationOps<T,T>
+    public interface IBinaryRelationOps<T> 
     {
-        
+        bool Related(T x, T y);
     }
 
     /// <summary>
@@ -36,61 +27,46 @@ namespace Z0
 
     }
 
-    /// <summary>
-    /// Spcifies if a,b:T & a!=b then a ~ b & b ~ a => a = b
-    /// </summary>
-    /// <typeparam name="S">The departure set type</typeparam>
-    /// <typeparam name="T">The destination set type</typeparam>
-    public interface IAntisymmetricOps<S,T> : IBinaryRelationOps<S,T>
-    {
-
-    }
 
     /// <summary>
     /// Spcifies if a,b:T & a!=b then a ~ b & b ~ a => a = b
     /// </summary>
     /// <typeparam name="T">The element type</typeparam>
-    public interface IAntisymmetricOps<T> : IAntisymmetricOps<T,T>
+    public interface IAntisymmetricOps<T> : IBinaryRelationOps<T>
     {
 
     }
 
-    /// <summary>
-    /// Spcifies that a ~ b iff b ~ a for every a:S,b:T
-    /// </summary>
-    /// <typeparam name="S">The departure set type</typeparam>
-    /// <typeparam name="T">The destination set type</typeparam>
-    public interface ISymmetricOps<S,T> : IBinaryRelationOps<S,T>
-    {
-        
-    }
 
     /// <summary>
     /// Spcifies that a ~ b iff b ~ a for every a,b:T
     /// </summary>
     /// <typeparam name="T">The element type</typeparam>
-    public interface ISymmetricOps<T> : ISymmetricOps<T,T>
+    public interface ISymmetricOps<T> : IBinaryRelationOps<T>
     {
         
     }
 
-    /// <summary>
-    /// Spcifies a ~ b & b ~ c => a ~ c for every a,b,c:T
-    /// </summary>
-    /// <typeparam name="S">The departure set type</typeparam>
-    /// <typeparam name="T">The destination set type</typeparam>
-    public interface ITransitiveOps<S,T> : IBinaryRelationOps<S,T>
-    {
-
-    }
 
     /// <summary>
     /// Spcifies a ~ b & b ~ c => a ~ c for every a,b,c:T
     /// </summary>
     /// <typeparam name="T">The element type</typeparam>
-    public interface ITransitiveOps<T> : ITransitiveOps<T,T>
+    public interface ITransitiveOps<T> : IBinaryRelationOps<T>
     {
         
     }        
+
+    /// <summary>
+    ///  Characterizes a reflexive, symmetric and transitive binary relation over a set 
+    /// \that, consequently, effects a partition over the set
+    /// </summary>
+    /// <typeparam name="T">The element type</typeparam>
+    /// <remarks>See https://en.wikipedia.org/wiki/Equivalence_relation</remarks>
+    public interface IEquivalenceOps<T> : IReflexiveOps<T>, ISymmetricOps<T>, ITransitiveOps<T> 
+    { 
+        
+    }
+
  
 }

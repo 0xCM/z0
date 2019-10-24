@@ -9,6 +9,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     public interface IAbsolutiveOps<T> 
+        where T : unmanaged
     {
         T Abs(T x);
     }

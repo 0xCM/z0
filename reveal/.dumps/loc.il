@@ -1,4 +1,4 @@
-// 2019-10-22 17:23:22:617
+// 2019-10-24 05:24:41:722
 Vector256<ulong> f19_256x64u(Vector256<ulong> a, Vector256<ulong> b, Vector256<ulong> c)
 {
     IL_0000: ldarg.0
@@ -13,7 +13,7 @@ bit f1a_bit(bit a, bit b, bit c)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call Z0.bit Z0.Logix.BitOps::f1a(Z0.bit,Z0.bit,Z0.bit)
+    IL_0003: call Z0.bit Z0.Logix.LogicOps::f1a(Z0.bit,Z0.bit,Z0.bit)
     IL_0008: ret
 
 }
@@ -49,7 +49,7 @@ bit f1b_bit(bit a, bit b, bit c)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call Z0.bit Z0.Logix.BitOps::f1b(Z0.bit,Z0.bit,Z0.bit)
+    IL_0003: call Z0.bit Z0.Logix.LogicOps::f1b(Z0.bit,Z0.bit,Z0.bit)
     IL_0008: ret
 
 }
@@ -823,7 +823,7 @@ bit f01_bit(bit a, bit b, bit c)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call Z0.bit Z0.Logix.BitOps::f01(Z0.bit,Z0.bit,Z0.bit)
+    IL_0003: call Z0.bit Z0.Logix.LogicOps::f01(Z0.bit,Z0.bit,Z0.bit)
     IL_0008: ret
 
 }
@@ -859,7 +859,7 @@ bit f02_bit(bit a, bit b, bit c)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call Z0.bit Z0.Logix.BitOps::f02(Z0.bit,Z0.bit,Z0.bit)
+    IL_0003: call Z0.bit Z0.Logix.LogicOps::f02(Z0.bit,Z0.bit,Z0.bit)
     IL_0008: ret
 
 }
@@ -895,7 +895,7 @@ bit f03_bit(bit a, bit b, bit c)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call Z0.bit Z0.Logix.BitOps::f03(Z0.bit,Z0.bit,Z0.bit)
+    IL_0003: call Z0.bit Z0.Logix.LogicOps::f03(Z0.bit,Z0.bit,Z0.bit)
     IL_0008: ret
 
 }
@@ -931,7 +931,7 @@ bit f04_bit(bit a, bit b, bit c)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call Z0.bit Z0.Logix.BitOps::f04(Z0.bit,Z0.bit,Z0.bit)
+    IL_0003: call Z0.bit Z0.Logix.LogicOps::f04(Z0.bit,Z0.bit,Z0.bit)
     IL_0008: ret
 
 }
@@ -967,7 +967,7 @@ bit f05_bit(bit a, bit b, bit c)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call Z0.bit Z0.Logix.BitOps::f05(Z0.bit,Z0.bit,Z0.bit)
+    IL_0003: call Z0.bit Z0.Logix.LogicOps::f05(Z0.bit,Z0.bit,Z0.bit)
     IL_0008: ret
 
 }
@@ -1003,7 +1003,7 @@ bit f06_bit(bit a, bit b, bit c)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call Z0.bit Z0.Logix.BitOps::f06(Z0.bit,Z0.bit,Z0.bit)
+    IL_0003: call Z0.bit Z0.Logix.LogicOps::f06(Z0.bit,Z0.bit,Z0.bit)
     IL_0008: ret
 
 }
@@ -1039,7 +1039,7 @@ bit f07_bit(bit a, bit b, bit c)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call Z0.bit Z0.Logix.BitOps::f07(Z0.bit,Z0.bit,Z0.bit)
+    IL_0003: call Z0.bit Z0.Logix.LogicOps::f07(Z0.bit,Z0.bit,Z0.bit)
     IL_0008: ret
 
 }
@@ -1075,7 +1075,7 @@ bit f08_bit(bit a, bit b, bit c)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call Z0.bit Z0.Logix.BitOps::f08(Z0.bit,Z0.bit,Z0.bit)
+    IL_0003: call Z0.bit Z0.Logix.LogicOps::f08(Z0.bit,Z0.bit,Z0.bit)
     IL_0008: ret
 
 }
@@ -1111,7 +1111,7 @@ bit f09_bit(bit a, bit b, bit c)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call Z0.bit Z0.Logix.BitOps::f09(Z0.bit,Z0.bit,Z0.bit)
+    IL_0003: call Z0.bit Z0.Logix.LogicOps::f09(Z0.bit,Z0.bit,Z0.bit)
     IL_0008: ret
 
 }
@@ -1147,7 +1147,7 @@ bit f0a_bit(bit a, bit b, bit c)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call Z0.bit Z0.Logix.BitOps::f0a(Z0.bit,Z0.bit,Z0.bit)
+    IL_0003: call Z0.bit Z0.Logix.LogicOps::f0a(Z0.bit,Z0.bit,Z0.bit)
     IL_0008: ret
 
 }
@@ -1183,7 +1183,7 @@ bit f0b_bit(bit a, bit b, bit c)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call Z0.bit Z0.Logix.BitOps::f0b(Z0.bit,Z0.bit,Z0.bit)
+    IL_0003: call Z0.bit Z0.Logix.LogicOps::f0b(Z0.bit,Z0.bit,Z0.bit)
     IL_0008: ret
 
 }
@@ -1219,7 +1219,7 @@ bit f0c_bit(bit a, bit b, bit c)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call Z0.bit Z0.Logix.BitOps::f0c(Z0.bit,Z0.bit,Z0.bit)
+    IL_0003: call Z0.bit Z0.Logix.LogicOps::f0c(Z0.bit,Z0.bit,Z0.bit)
     IL_0008: ret
 
 }
@@ -1255,7 +1255,7 @@ bit f0d_bit(bit a, bit b, bit c)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call Z0.bit Z0.Logix.BitOps::f0d(Z0.bit,Z0.bit,Z0.bit)
+    IL_0003: call Z0.bit Z0.Logix.LogicOps::f0d(Z0.bit,Z0.bit,Z0.bit)
     IL_0008: ret
 
 }
@@ -1291,7 +1291,7 @@ bit f0e_bit(bit a, bit b, bit c)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call Z0.bit Z0.Logix.BitOps::f0e(Z0.bit,Z0.bit,Z0.bit)
+    IL_0003: call Z0.bit Z0.Logix.LogicOps::f0e(Z0.bit,Z0.bit,Z0.bit)
     IL_0008: ret
 
 }
@@ -1327,7 +1327,7 @@ bit f0f_bit(bit a, bit b, bit c)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call Z0.bit Z0.Logix.BitOps::f0f(Z0.bit,Z0.bit,Z0.bit)
+    IL_0003: call Z0.bit Z0.Logix.LogicOps::f0f(Z0.bit,Z0.bit,Z0.bit)
     IL_0008: ret
 
 }
@@ -1363,7 +1363,7 @@ bit f10_bit(bit a, bit b, bit c)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call Z0.bit Z0.Logix.BitOps::f10(Z0.bit,Z0.bit,Z0.bit)
+    IL_0003: call Z0.bit Z0.Logix.LogicOps::f10(Z0.bit,Z0.bit,Z0.bit)
     IL_0008: ret
 
 }
@@ -1399,7 +1399,7 @@ bit f11_bit(bit a, bit b, bit c)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call Z0.bit Z0.Logix.BitOps::f11(Z0.bit,Z0.bit,Z0.bit)
+    IL_0003: call Z0.bit Z0.Logix.LogicOps::f11(Z0.bit,Z0.bit,Z0.bit)
     IL_0008: ret
 
 }
@@ -1435,7 +1435,7 @@ bit f12_bit(bit a, bit b, bit c)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call Z0.bit Z0.Logix.BitOps::f12(Z0.bit,Z0.bit,Z0.bit)
+    IL_0003: call Z0.bit Z0.Logix.LogicOps::f12(Z0.bit,Z0.bit,Z0.bit)
     IL_0008: ret
 
 }
@@ -1471,7 +1471,7 @@ bit f13_bit(bit a, bit b, bit c)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call Z0.bit Z0.Logix.BitOps::f13(Z0.bit,Z0.bit,Z0.bit)
+    IL_0003: call Z0.bit Z0.Logix.LogicOps::f13(Z0.bit,Z0.bit,Z0.bit)
     IL_0008: ret
 
 }
@@ -1507,7 +1507,7 @@ bit f14_bit(bit a, bit b, bit c)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call Z0.bit Z0.Logix.BitOps::f14(Z0.bit,Z0.bit,Z0.bit)
+    IL_0003: call Z0.bit Z0.Logix.LogicOps::f14(Z0.bit,Z0.bit,Z0.bit)
     IL_0008: ret
 
 }
@@ -1543,7 +1543,7 @@ bit f15_bit(bit a, bit b, bit c)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call Z0.bit Z0.Logix.BitOps::f15(Z0.bit,Z0.bit,Z0.bit)
+    IL_0003: call Z0.bit Z0.Logix.LogicOps::f15(Z0.bit,Z0.bit,Z0.bit)
     IL_0008: ret
 
 }
@@ -1579,7 +1579,7 @@ bit f16_bit(bit a, bit b, bit c)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call Z0.bit Z0.Logix.BitOps::f16(Z0.bit,Z0.bit,Z0.bit)
+    IL_0003: call Z0.bit Z0.Logix.LogicOps::f16(Z0.bit,Z0.bit,Z0.bit)
     IL_0008: ret
 
 }
@@ -1615,7 +1615,7 @@ bit f17_bit(bit a, bit b, bit c)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call Z0.bit Z0.Logix.BitOps::f17(Z0.bit,Z0.bit,Z0.bit)
+    IL_0003: call Z0.bit Z0.Logix.LogicOps::f17(Z0.bit,Z0.bit,Z0.bit)
     IL_0008: ret
 
 }
@@ -1651,7 +1651,7 @@ bit f18_bit(bit a, bit b, bit c)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call Z0.bit Z0.Logix.BitOps::f18(Z0.bit,Z0.bit,Z0.bit)
+    IL_0003: call Z0.bit Z0.Logix.LogicOps::f18(Z0.bit,Z0.bit,Z0.bit)
     IL_0008: ret
 
 }
@@ -1687,7 +1687,7 @@ bit f19_bit(bit a, bit b, bit c)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call Z0.bit Z0.Logix.BitOps::f19(Z0.bit,Z0.bit,Z0.bit)
+    IL_0003: call Z0.bit Z0.Logix.LogicOps::f19(Z0.bit,Z0.bit,Z0.bit)
     IL_0008: ret
 
 }

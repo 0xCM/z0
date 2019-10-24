@@ -10,6 +10,7 @@ namespace Z0
     /// Characterizes a (unital) ring
     /// </summary>
     public interface IRingOps<T> : IGroupAOps<T>, IMonoidMOps<T>, IDistributiveOps<T> 
+        where T : unmanaged
     {
         
     }
@@ -18,6 +19,7 @@ namespace Z0
     /// Characterizes a commutative, unital ring
     /// </summary>
     public interface ICommutativeRingOps<T> : IRingOps<T>
+        where T : unmanaged
     {
         
     }

@@ -1,4 +1,4 @@
-// 2019-10-22 17:23:23:810
+// 2019-10-24 05:24:43:205
 float convert_32f_to_g32f(float src)
 {
     IL_0000: ldarg.0
@@ -1922,8 +1922,9 @@ bool testbit_d8i(sbyte src, int pos)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: call System.Boolean Z0.BitMask::test(System.SByte,System.Int32)
-    IL_0007: ret
+    IL_0002: call Z0.bit Z0.BitMask::test(System.SByte,System.Int32)
+    IL_0007: call System.Boolean Z0.bit::op_Implicit(Z0.bit)
+    IL_000C: ret
 
 }
 bool testbit_g8i(sbyte src, int pos)
@@ -1938,8 +1939,9 @@ bool testbit_d8u(byte src, int pos)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: call System.Boolean Z0.BitMask::test(System.Byte,System.Int32)
-    IL_0007: ret
+    IL_0002: call Z0.bit Z0.BitMask::test(System.Byte,System.Int32)
+    IL_0007: call System.Boolean Z0.bit::op_Implicit(Z0.bit)
+    IL_000C: ret
 
 }
 bool testbit_g8u(byte src, int pos)
@@ -1954,8 +1956,9 @@ bool testbit_d16i(short src, int pos)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: call System.Boolean Z0.BitMask::test(System.Int16,System.Int32)
-    IL_0007: ret
+    IL_0002: call Z0.bit Z0.BitMask::test(System.Int16,System.Int32)
+    IL_0007: call System.Boolean Z0.bit::op_Implicit(Z0.bit)
+    IL_000C: ret
 
 }
 bool testbit_g16i(short src, int pos)
@@ -1970,8 +1973,9 @@ bool testbit_d16u(ushort src, int pos)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: call System.Boolean Z0.BitMask::test(System.UInt16,System.Int32)
-    IL_0007: ret
+    IL_0002: call Z0.bit Z0.BitMask::test(System.UInt16,System.Int32)
+    IL_0007: call System.Boolean Z0.bit::op_Implicit(Z0.bit)
+    IL_000C: ret
 
 }
 bool testbit_g16u(ushort src, int pos)
@@ -1986,8 +1990,9 @@ bool testbit_d32i(int src, int pos)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: call System.Boolean Z0.BitMask::test(System.Int32,System.Int32)
-    IL_0007: ret
+    IL_0002: call Z0.bit Z0.BitMask::test(System.Int32,System.Int32)
+    IL_0007: call System.Boolean Z0.bit::op_Implicit(Z0.bit)
+    IL_000C: ret
 
 }
 bool testbit_g32i(int src, int pos)
@@ -2002,8 +2007,9 @@ bool testbit_d32u(uint src, int pos)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: call System.Boolean Z0.BitMask::test(System.UInt32,System.Int32)
-    IL_0007: ret
+    IL_0002: call Z0.bit Z0.BitMask::test(System.UInt32,System.Int32)
+    IL_0007: call System.Boolean Z0.bit::op_Implicit(Z0.bit)
+    IL_000C: ret
 
 }
 bool testbit_g32u(uint src, int pos)
@@ -2034,8 +2040,9 @@ bool testbit_d64u(ulong src, int pos)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: call System.Boolean Z0.BitMask::test(System.UInt64,System.Int32)
-    IL_0007: ret
+    IL_0002: call Z0.bit Z0.BitMask::test(System.UInt64,System.Int32)
+    IL_0007: call System.Boolean Z0.bit::op_Implicit(Z0.bit)
+    IL_000C: ret
 
 }
 bool testbit_g64u(ulong src, int pos)
@@ -2050,8 +2057,9 @@ bool testbit_d32f(float src, int pos)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: call System.Boolean Z0.BitMask::test(System.Single,System.Int32)
-    IL_0007: ret
+    IL_0002: call Z0.bit Z0.BitMask::test(System.Single,System.Int32)
+    IL_0007: call System.Boolean Z0.bit::op_Implicit(Z0.bit)
+    IL_000C: ret
 
 }
 bool testbit_g32f(float src, int pos)
@@ -2066,8 +2074,9 @@ bool testbit_d64f(double src, int pos)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: call System.Boolean Z0.BitMask::test(System.Double,System.Int32)
-    IL_0007: ret
+    IL_0002: call Z0.bit Z0.BitMask::test(System.Double,System.Int32)
+    IL_0007: call System.Boolean Z0.bit::op_Implicit(Z0.bit)
+    IL_000C: ret
 
 }
 bool testbit_g64f(double src, int pos)

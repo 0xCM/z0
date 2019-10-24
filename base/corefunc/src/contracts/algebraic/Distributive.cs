@@ -5,6 +5,7 @@
 namespace Z0
 {
     public interface ILeftDistributiveOps<T>  : IMultiplicativeOps<T>, IAdditiveOps<T>
+        where T : unmanaged
     {
         /// <summary>
         /// Characterizes a type that defines an operator that left-distributes
@@ -21,6 +22,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The operand type</typeparam>
     public interface IRightDistributiveOps<T> : IMultiplicativeOps<T>, IAdditiveOps<T>
+        where T : unmanaged
     {
         T Distribute((T x, T y) lhs, T rhs);
     }
@@ -30,6 +32,7 @@ namespace Z0
     /// over addition
     /// </summary>
     public interface IDistributiveOps<T> : ILeftDistributiveOps<T>, IRightDistributiveOps<T>
+        where T : unmanaged
     {
 
     }

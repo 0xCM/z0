@@ -7,10 +7,11 @@ namespace Z0
     using System;
     using System.Linq;
     using System.Runtime.CompilerServices;
+    using System.Runtime.Intrinsics;
     
     using static zfunc;
 
-    public readonly struct NotGate<T> : IUnaryGate<T>, IUnaryGate<Vec128<T>>, IUnaryGate<Vec256<T>>        
+    public readonly struct NotGate<T> : IUnaryGate<T>, IUnaryGate<Vector128<T>>, IUnaryGate<Vector256<T>>        
         where T : unmanaged
     {
         internal static readonly NotGate<T> Gate = default;
@@ -20,15 +21,15 @@ namespace Z0
             => !input;    
 
         [MethodImpl(Inline)]
-        public T Send(in T x)
+        public T Send(T x)
             => gmath.not(x);
 
         [MethodImpl(Inline)]
-        public Vec128<T> Send(in Vec128<T> x)
-            => ginx.vnot(in x);
+        public Vector128<T> Send(Vector128<T> x)
+            => ginx.vnot(x);
 
         [MethodImpl(Inline)]
-        public Vec256<T> Send(in Vec256<T> x)
+        public Vector256<T> Send(Vector256<T> x)
             => ginx.vnot(x);
  
 

@@ -16,9 +16,54 @@ namespace Z0
     public static partial class As
     {
 
+        /// <summary>
+        /// Converts a generic reference into a void pointer
+        /// </summary>
+        /// <param name="src">The memory reference</param>
+        /// <typeparam name="T">The type of the referenced data</typeparam>
         [MethodImpl(Inline)]
         public static unsafe void* pvoid<T>(ref T src)
             => Unsafe.AsPointer(ref src);
+        
+        /// <summary>
+        /// Converts a generic reference into a generic pointer
+        /// </summary>
+        /// <param name="src">The memory reference</param>
+        /// <typeparam name="T">The type of the referenced data</typeparam>
+        [MethodImpl(Inline)]
+        public static unsafe T* refptr<T>(ref T src)
+            where T : unmanaged
+                => (T*)Unsafe.AsPointer(ref src);
+
+        /// <summary>
+        /// Increments a generic pointer by a specified amount
+        /// </summary>
+        /// <param name="pSrc">A reference to the pointer to increment</param>
+        /// <param name="offset">The amount by which the pointer should be incremented</param>
+        /// <typeparam name="T">The type of the referenced data</typeparam>
+        [MethodImpl(Inline)]
+        public static unsafe ref T* inc<T>(ref T* pSrc, int offset)
+            where T : unmanaged
+        {
+            pSrc += offset;
+            return ref pSrc;
+        }
+
+        [MethodImpl(Inline)]
+        public static unsafe ref T* inc2<T>(ref T* pSrc, int offset)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(ulong))
+                pSrc = (T*)((ulong*)pSrc + offset);
+            else if(typeof(T) == typeof(ushort))
+                pSrc = (T*)((ushort*)pSrc + offset);
+            else if(typeof(T) == typeof(uint))
+                pSrc = (T*)((uint*)pSrc + offset);
+            else
+                pSrc = (T*)((byte*)pSrc + offset);                
+            return ref pSrc;
+        }
+
 
         [MethodImpl(Inline)]
         public static unsafe sbyte* pint8<T>(ref T src)

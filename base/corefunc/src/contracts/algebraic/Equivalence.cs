@@ -8,13 +8,6 @@ namespace Z0
     using System.Linq;
     using System.Collections.Generic;
 
-    /// <summary>
-    ///  Characterizes a reflexive, symmetric and transitive binary relation over a set
-    ///  that, consequently, effects a partition on said set
-    /// </summary>
-    /// <typeparam name="T">The element type</typeparam>
-    /// <remarks>See https://en.wikipedia.org/wiki/Equivalence_relation</remarks>
-    public interface IEquivalenceOps<T> : IReflexiveOps<T>, ISymmetricOps<T>, ITransitiveOps<T> { }
 
     public interface IEquivalenceClass<T>
     {

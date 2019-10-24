@@ -22,17 +22,17 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="offset">The magnitude of the rotation</param>
         [MethodImpl(Inline)]
-        public static Vec128<T> vrotr<T>(in Vec128<T> src, byte offset)
+        public static Vector128<T> vrotr<T>(Vector128<T> src, byte offset)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(dinx.vrotr(in uint8(in src), offset));
+                return generic<T>(dinx.vrotr(uint8(src), offset));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(dinx.vrotr(in uint16(in src), offset));
+                return generic<T>(dinx.vrotr(uint16(src), offset));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(dinx.vrotr(in uint32(in src), offset));
+                return generic<T>(dinx.vrotr(uint32(src), offset));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(dinx.vrotr(in uint64(in src), offset));
+                return generic<T>(dinx.vrotr(uint64(src), offset));
             else
                 throw unsupported<T>();
         }
@@ -43,17 +43,17 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="offset">The magnitude of the rotation</param>
         [MethodImpl(Inline)]
-        public static Vec256<T> vrotr<T>(in Vec256<T> src, byte offset)
+        public static Vector256<T> vrotr<T>(Vector256<T> src, byte offset)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(dinx.vrotr(in uint8(in src), offset));
+                return generic<T>(dinx.vrotr(uint8(src), offset));
             if(typeof(T) == typeof(ushort))
-                return generic<T>(dinx.vrotr(in uint16(in src), offset));
+                return generic<T>(dinx.vrotr(uint16(src), offset));
             if(typeof(T) == typeof(uint))
-                return generic<T>(dinx.vrotr(in uint32(in src), offset));
+                return generic<T>(dinx.vrotr(uint32(src), offset));
             if(typeof(T) == typeof(ulong))
-                return generic<T>(dinx.vrotr(in uint64(in src), offset));
+                return generic<T>(dinx.vrotr(uint64(src), offset));
             else
                 throw unsupported<T>();
         }

@@ -20,7 +20,7 @@ namespace Z0
     /// <summary>
     /// Defines a 16x16 matrix of bits
     /// </summary>
-    public struct BitMatrix16 //: IPrimalSquare<BitMatrix16,ushort>
+    public struct BitMatrix16  : IBitSquare<BitMatrix16,ushort>
     {   
         ushort[] data;
 
@@ -62,12 +62,14 @@ namespace Z0
         /// <summary>
         /// Defines the 16x16 identity bitmatrix
         /// </summary>
-        public static BitMatrix16 Identity => From(Identity16x16.ToSpan());
+        public static BitMatrix16 Identity 
+            => From(Identity16x16.ToSpan());
 
         /// <summary>
         /// Defines the 16x16 zero bitmatrix
         /// </summary>
-        public static BitMatrix16 Zero => Alloc();
+        public static BitMatrix16 Zero 
+            => Alloc();
 
         [MethodImpl(Inline)]
         public static BitMatrix16 Alloc()        
@@ -112,7 +114,6 @@ namespace Z0
             vstore(src, ref dst[0]);
             return new BitMatrix16(dst);
         }
-
 
         /// <summary>
         /// Computes the bitwise and of the operands
@@ -317,7 +318,6 @@ namespace Z0
             return dst;
         }
 
-
         [MethodImpl(Inline)] 
         public readonly BitMatrix16 Replicate()
             => From(data.ToArray());
@@ -327,7 +327,12 @@ namespace Z0
         /// </summary>
         [MethodImpl(Inline)] 
         public readonly BitSize Pop()
-            => bitspan.pop(data);
+        {
+            var count = 0u;
+            for(var i=0; i<data.Length; i++)
+                count += Popcnt.PopCount(data[i]);
+            return count;
+        }
 
         /// <summary>
         /// Extracts the bits that comprise the matrix in row-major order
@@ -355,26 +360,21 @@ namespace Z0
         public override int GetHashCode()
             => throw new NotSupportedException();
 
-
         /// <summary>
         /// Loads a cpu vector with the full content of the matrix
         /// </summary>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline)]
-        public unsafe readonly ref Vec256<ushort> GetCells(out Vec256<ushort> dst)
-        {
-            dst = Avx.LoadVector256(refptr(ref data[0]));
-            return ref dst;
-        }
+        public void Load(out Vector256<ushort> dst)
+            => dinx.vloadu(in Head, out dst);
 
         /// <summary>
-        /// Loads a cpu vector with the full content of the matrix
+        /// Loads a cpu vector with the full content of the matrix; the row parameter is ignored
         /// </summary>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline)]
-        public unsafe void Load(out Vector256<ushort> dst)
-            => dinx.vloadu(in data[0], out dst);
-
+        public void Load(int row, out Vector256<ushort> dst)
+            => dinx.vloadu(in Head, out dst);
 
         static ReadOnlySpan<byte> Identity16x16 => new byte[]
         {

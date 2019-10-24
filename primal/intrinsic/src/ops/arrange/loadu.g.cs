@@ -8,7 +8,12 @@ namespace Z0
     using System.Runtime.CompilerServices;    
     using System.Runtime.Intrinsics;
     using System.Runtime.Intrinsics.X86;
-        
+
+    using static System.Runtime.Intrinsics.X86.Sse;
+    using static System.Runtime.Intrinsics.X86.Sse3;
+    using static System.Runtime.Intrinsics.X86.Sse2;
+    using static System.Runtime.Intrinsics.X86.Avx;
+
     using static As;
     using static AsIn;
 
@@ -55,14 +60,32 @@ namespace Z0
 
 
         [MethodImpl(Inline)]
-        public static Vector128<T> vloadu<T>(in T src, out Vector128<T> dst)
+        public static void vloadu<T>(in T src, out Vector128<T> dst)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte) 
             || typeof(T) == typeof(ushort) 
             || typeof(T) == typeof(uint) 
             || typeof(T) == typeof(ulong))
-                loadu_u(in src, out dst);
+                vloadu_u(in src, out dst);
+            else if(typeof(T) == typeof(sbyte) 
+            || typeof(T) == typeof(short) 
+            || typeof(T) == typeof(int) 
+            || typeof(T) == typeof(long))
+                vloadu_i(in src, out dst);
+            else
+                throw unsupported<T>();            
+        }
+
+        [MethodImpl(Inline)]
+        public static unsafe void vloadu<T>(in T src, out Vector256<T> dst)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(byte) 
+            || typeof(T) == typeof(ushort) 
+            || typeof(T) == typeof(uint) 
+            || typeof(T) == typeof(ulong))
+                vloadu_u(in src, out dst);
             else if(typeof(T) == typeof(sbyte) 
             || typeof(T) == typeof(short) 
             || typeof(T) == typeof(int) 
@@ -70,27 +93,128 @@ namespace Z0
                 loadu_i(in src, out dst);
             else
                 throw unsupported<T>();
-            return dst;
+        }
+
+        [MethodImpl(Inline)]
+        public static unsafe void vloadu<T>(T* pSrc, out Vector128<T> dst)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(byte) 
+            || typeof(T) == typeof(ushort) 
+            || typeof(T) == typeof(uint) 
+            || typeof(T) == typeof(ulong))
+                vloadu_u(pSrc, out dst);
+            else if(typeof(T) == typeof(sbyte) 
+            || typeof(T) == typeof(short) 
+            || typeof(T) == typeof(int) 
+            || typeof(T) == typeof(long))
+                vloadu_i(pSrc, out dst);
+            else
+                vloadu_f(pSrc, out dst);
+        }
+
+        [MethodImpl(Inline)]
+        public static unsafe void vloadu<T>(T* pSrc, out Vector256<T> dst)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(byte) 
+            || typeof(T) == typeof(ushort) 
+            || typeof(T) == typeof(uint) 
+            || typeof(T) == typeof(ulong))
+                vloadu_u(pSrc, out dst);
+            else if(typeof(T) == typeof(sbyte) 
+            || typeof(T) == typeof(short) 
+            || typeof(T) == typeof(int) 
+            || typeof(T) == typeof(long))
+                vloadu_i(pSrc, out dst);
+            else
+                vloadu_f(pSrc, out dst);
         }
 
 
         [MethodImpl(Inline)]
-        public static unsafe Vec256<T> vloadu<T>(in T src, out Vector256<T> dst)
+        static unsafe void vloadu_u<T>(T* pSrc, out Vector256<T> dst)
             where T : unmanaged
         {
-            if(typeof(T) == typeof(byte) 
-            || typeof(T) == typeof(ushort) 
-            || typeof(T) == typeof(uint) 
-            || typeof(T) == typeof(ulong))
-                loadu_u(in src, out dst);
-            else if(typeof(T) == typeof(sbyte) 
-            || typeof(T) == typeof(short) 
-            || typeof(T) == typeof(int) 
-            || typeof(T) == typeof(long))
-                loadu_i(in src, out dst);
-            else
+            if(typeof(T) == typeof(byte))
+                dst = generic<T>(LoadDquVector256((byte*)pSrc));
+            else if(typeof(T) == typeof(ushort))
+                dst = generic<T>(LoadDquVector256((ushort*)pSrc));
+            else if(typeof(T) == typeof(uint))
+                dst = generic<T>(LoadDquVector256((uint*)pSrc));
+            else 
+                dst = generic<T>(LoadDquVector256((ulong*)pSrc));
+
+        }
+
+        [MethodImpl(Inline)]
+        static unsafe void vloadu_i<T>(T* pSrc, out Vector256<T> dst)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(sbyte))
+                dst = generic<T>(LoadDquVector256((sbyte*)pSrc));
+            else if(typeof(T) == typeof(short))
+                dst = generic<T>(LoadDquVector256((short*)pSrc));
+            else if(typeof(T) == typeof(int))
+                dst = generic<T>(LoadDquVector256((int*)pSrc));
+            else 
+                dst = generic<T>(LoadDquVector256((long*)pSrc));
+
+        }
+
+        [MethodImpl(Inline)]
+        static unsafe void vloadu_f<T>(T* pSrc, out Vector256<T> dst)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(sbyte))
+                dst = generic<T>(LoadVector256((float*)pSrc));
+            else if(typeof(T) == typeof(short))
+                dst = generic<T>(LoadVector256((double*)pSrc));
+            else 
                 throw unsupported<T>();
-            return dst;
+        }
+
+
+        [MethodImpl(Inline)]
+        static unsafe void vloadu_u<T>(T* pSrc, out Vector128<T> dst)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(byte))
+                dst = generic<T>(LoadDquVector128((byte*)pSrc));
+            else if(typeof(T) == typeof(ushort))
+                dst = generic<T>(LoadDquVector128((ushort*)pSrc));
+            else if(typeof(T) == typeof(uint))
+                dst = generic<T>(LoadDquVector128((uint*)pSrc));
+            else 
+                dst = generic<T>(LoadDquVector128((ulong*)pSrc));
+
+        }
+
+        [MethodImpl(Inline)]
+        static unsafe void vloadu_i<T>(T* pSrc, out Vector128<T> dst)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(sbyte))
+                dst = generic<T>(LoadDquVector128((sbyte*)pSrc));
+            else if(typeof(T) == typeof(short))
+                dst = generic<T>(LoadDquVector128((short*)pSrc));
+            else if(typeof(T) == typeof(int))
+                dst = generic<T>(LoadDquVector128((int*)pSrc));
+            else 
+                dst = generic<T>(LoadDquVector128((long*)pSrc));
+
+        }
+
+        [MethodImpl(Inline)]
+        static unsafe void vloadu_f<T>(T* pSrc, out Vector128<T> dst)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(sbyte))
+                dst = generic<T>(LoadVector128((float*)pSrc));
+            else if(typeof(T) == typeof(short))
+                dst = generic<T>(LoadVector128((double*)pSrc));
+            else 
+                throw unsupported<T>();
         }
 
 
@@ -152,7 +276,7 @@ namespace Z0
 
 
         [MethodImpl(Inline)]
-        static unsafe Vector128<T> loadu_u<T>(in T src, out Vector128<T> dst)
+        static unsafe void vloadu_u<T>(in T src, out Vector128<T> dst)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -163,11 +287,10 @@ namespace Z0
                 dst = generic<T>(dinx.vloadu(uint32(src), out Vector128<uint> _));
             else
                 dst = generic<T>(dinx.vloadu(uint64(src), out Vector128<ulong> _));
-            return dst;
         }
         
         [MethodImpl(Inline)]
-        static unsafe Vector128<T> loadu_i<T>(in T src, out Vector128<T> dst)
+        static unsafe void vloadu_i<T>(in T src, out Vector128<T> dst)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
@@ -178,11 +301,10 @@ namespace Z0
                 dst = generic<T>(dinx.vloadu(int32(src), out Vector128<int> _));
             else
                 dst = generic<T>(dinx.vloadu(int64(src), out Vector128<long> _));
-            return dst;
         }
 
         [MethodImpl(Inline)]
-        static unsafe Vector256<T> loadu_u<T>(in T src, out Vector256<T> dst)
+        static unsafe void vloadu_u<T>(in T src, out Vector256<T> dst)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -193,11 +315,10 @@ namespace Z0
                 dst = generic<T>(dinx.vloadu(uint32(src), out Vector256<uint> _));
             else
                 dst = generic<T>(dinx.vloadu(uint64(src), out Vector256<ulong> _));
-            return dst;
         }
         
         [MethodImpl(Inline)]
-        static unsafe Vector256<T> loadu_i<T>(in T src, out Vector256<T> dst)
+        static unsafe void loadu_i<T>(in T src, out Vector256<T> dst)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
@@ -208,7 +329,6 @@ namespace Z0
                 dst = generic<T>(dinx.vloadu(int32(src), out Vector256<int> _));
             else
                 dst = generic<T>(dinx.vloadu(int64(src), out Vector256<long> _));
-            return dst;
         }
 
     }

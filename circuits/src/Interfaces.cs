@@ -54,7 +54,7 @@ namespace Z0
     public interface IUnaryGate<T> : IUnaryBitGate
         where T : unmanaged
     {
-        T Send(in T a);
+        T Send(T a);
     }
 
     /// <summary>
@@ -64,7 +64,7 @@ namespace Z0
     public interface IBinaryGate<T> : IBinaryBitGate
         where T : unmanaged
     {
-        T Send(in T a, in T b);
+        T Send(T a, T b);
     }
 
     /// <summary>
@@ -81,12 +81,12 @@ namespace Z0
 
     public interface ICircuit<A, out B>
     {
-        B Send(in A a);
+        B Send(A a);
     }
     
     public interface ICircuit<A, B, out C>
     {
-        C Send(in A a, in B b);
+        C Send(A a, B b);
     }
 
 

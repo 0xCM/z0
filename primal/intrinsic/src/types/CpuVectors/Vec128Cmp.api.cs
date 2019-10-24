@@ -24,7 +24,7 @@ namespace Z0
         {
             var count = Vec128<T>.Length;
             Span<T> cells = stackalloc T[count];
-            ginx.store(result, ref head(cells));
+            ginx.vstore(result, ref head(cells));
             
             var dst = new Bit[count];
             for(var i = 0; i< count; i++)

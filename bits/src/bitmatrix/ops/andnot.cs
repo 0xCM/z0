@@ -12,7 +12,7 @@ namespace Z0
 
     partial class BitMatrix
     {
-        public static BitMatrix<T> andnot<T>(BitMatrix<T> A, BitMatrix<T> B,  BitMatrix<T> C)
+        public static RowBits<T> andnot<T>(RowBits<T> A, RowBits<T> B,  RowBits<T> C)
             where T : unmanaged
         {
             var rc = rowdim(A,B,C);
@@ -23,7 +23,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static BitMatrix<T> andnot<T>(BitMatrix<T> A, BitMatrix<T> B)
+        public static RowBits<T> andnot<T>(RowBits<T> A, RowBits<T> B)
             where T : unmanaged
                 => andnot(A,B, A.Replicate(true));
     }

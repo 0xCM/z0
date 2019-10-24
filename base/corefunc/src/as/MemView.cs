@@ -19,7 +19,7 @@ namespace Z0
         {
             require(src.Length >= sizeof(short));
                 
-            return Unsafe.ReadUnaligned<short>(ref head(src));
+            return Unsafe.ReadUnaligned<short>(ref MemoryMarshal.GetReference(src));
         }
 
         [MethodImpl(Inline)]

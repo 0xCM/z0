@@ -20,7 +20,7 @@ namespace Z0
     /// Defines a 32x32 matrix of bits
     /// </summary>
     
-    public struct BitMatrix32 : IPrimalSquare<BitMatrix32,uint>
+    public struct BitMatrix32 : IBitSquare<BitMatrix32,uint>
     {                
         uint[] data;        
 
@@ -307,19 +307,6 @@ namespace Z0
             return dst;
         }
 
-
-        /// <summary>
-        /// Loads a CPU vector from matrix content
-        /// </summary>
-        /// <param name="dst">The target vector</param>
-        /// <param name="row">The row index of where the load should begin</param>
-        [MethodImpl(Inline)]
-        public readonly ref Vec256<uint> GetCells(int row, out Vec256<uint> dst)
-        {
-            dst = load(ref data[row]);
-            return ref dst;
-        }
-
         [MethodImpl(Inline)]
         public void Load(int row, out Vector256<uint> dst)
             => dst = dinx.vloadu(in data[row], out dst);
@@ -329,7 +316,12 @@ namespace Z0
         /// </summary>
         [MethodImpl(Inline)] 
         public readonly BitSize Pop()
-            => bitspan.pop(data);
+        {
+            var count = 0u;
+            for(var i=0; i<data.Length; i++)
+                count += Popcnt.PopCount(data[i]);
+            return count;
+        }
 
 
         [MethodImpl(Inline)]
@@ -344,11 +336,6 @@ namespace Z0
         
         public override string ToString()
             => Format();
-
-
-        [MethodImpl(Inline)]
-        static unsafe Vec256<uint> load(ref uint head)
-            => Avx.LoadVector256(refptr(ref head));
 
         static ReadOnlySpan<byte> Identity32x32 => new byte[]
         {

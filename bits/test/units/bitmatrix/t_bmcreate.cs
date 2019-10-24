@@ -69,7 +69,7 @@ namespace Z0
             {
                 var m1 = BitMatrix8.From(src.Current);
                 var n = new N8();
-                var m2 = BitMatrix.Load(n,n, src.Current.ToBytes());
+                var m2 = BitMatrix.load(n,n, src.Current.ToBytes());
                 for(var i=0; i<8; i++)
                 for(var j=0; j<8; j++)
                     Claim.eq(m1[i,j], m2[i,j]);
@@ -154,7 +154,7 @@ namespace Z0
             Claim.eq(4, row8.Length);
             Claim.eq(8, (int)row8[3].Segment);
 
-            var m = BitMatrix.Ones<N9,N4,byte>();
+            var m = BitMatrix.ones<N9,N4,byte>();
             Claim.eq(9,m.RowCount);
             Claim.eq(4,m.ColCount);
             for(var i=0; i< m.RowCount; i++)
@@ -167,7 +167,7 @@ namespace Z0
 
         public void create7x9()
         {
-            var m1 = BitMatrix.Alloc<N7,N9,byte>();
+            var m1 = BitMatrix.alloc<N7,N9,byte>();
             m1.Fill(Bit.On);
             var fmt = m1.Format().RemoveWhitespace();
             Claim.eq(BitMatrix<N7,N9,byte>.TotalBitCount, fmt.Length);    
@@ -175,7 +175,7 @@ namespace Z0
         }
         public void create7x7()
         {
-            var m1 = BitMatrix.Alloc<N7,byte>();
+            var m1 = BitMatrix.alloc<N7,byte>();
             m1.Fill(Bit.On);
             var fmt = m1.Format().RemoveWhitespace();
             Claim.eq(7*7, fmt.Length);
@@ -225,7 +225,7 @@ namespace Z0
             Claim.eq(3, row0[3].Col);
             Claim.eq(1, (int)row0[9].Segment);
 
-            var m = BitMatrix.Ones<N16,byte>();
+            var m = BitMatrix.ones<N16,byte>();
             Claim.eq(16,m.RowCount);
             Claim.eq(16,m.ColCount);
             Claim.eq(2, m.RowSegCount);

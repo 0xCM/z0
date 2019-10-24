@@ -35,15 +35,15 @@ namespace Z0
 
 
         [MethodImpl(Inline)]
-        public (T s, T c) Send(in T a, in T b)
-            => (xorg.Send(in a,in b), andg.Send(in a,in b));
-
-        [MethodImpl(Inline)]
-        public (Vec128<T> s, Vec128<T> c) Send(in Vec128<T> a, in Vec128<T> b)
+        public (T s, T c) Send(T a, T b)
             => (xorg.Send(a,b), andg.Send(a,b));
 
         [MethodImpl(Inline)]
-        public (Vec256<T> s, Vec256<T> c) Send(in Vec256<T> a, in Vec256<T> b)
+        public (Vec128<T> s, Vec128<T> c) Send(Vec128<T> a, Vec128<T> b)
+            => (xorg.Send(a,b), andg.Send(a,b));
+
+        [MethodImpl(Inline)]
+        public (Vec256<T> s, Vec256<T> c) Send(Vec256<T> a, Vec256<T> b)
             => (xorg.Send(a,b), andg.Send(a,b));
         
     }

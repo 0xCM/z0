@@ -1,4 +1,4 @@
-// 2019-10-22 17:23:22:748
+// 2019-10-24 05:24:41:835
 BitVector32 and_bv_32u(BitVector32 x, BitVector32 y)
 {
     IL_0000: ldarga.s x
@@ -13,14 +13,6 @@ BitVector32 and_bv_o32u(BitVector32 x, BitVector32 y)
     IL_0002: ldarga.s y
     IL_0004: call Z0.BitVector32 Z0.BitVector32::op_BitwiseAnd(Z0.BitVector32&,Z0.BitVector32&)
     IL_0009: ret
-
-}
-BitVector32 and_bv_g32u(BitVector32 x, BitVector32 y)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: call Z0.BitVector32 Z0.gbv::and<Z0.BitVector32>(Z0.BitVector32,Z0.BitVector32)
-    IL_0007: ret
 
 }
 BitVector32 or_bv_32u(BitVector32 x, BitVector32 y)
@@ -39,14 +31,6 @@ BitVector32 or_bv_o32u(BitVector32 x, BitVector32 y)
     IL_0009: ret
 
 }
-BitVector32 or_bv_g32u(BitVector32 x, BitVector32 y)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: call Z0.BitVector32 Z0.gbv::or<Z0.BitVector32>(Z0.BitVector32,Z0.BitVector32)
-    IL_0007: ret
-
-}
 BitVector32 xor_bv_32u(BitVector32 x, BitVector32 y)
 {
     IL_0000: ldarg.0
@@ -63,14 +47,6 @@ BitVector32 xor_bv_o32u(BitVector32 x, BitVector32 y)
     IL_0009: ret
 
 }
-BitVector32 xor_bv_g32u(BitVector32 x, BitVector32 y)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: call Z0.BitVector32 Z0.gbv::xor<Z0.BitVector32>(Z0.BitVector32,Z0.BitVector32)
-    IL_0007: ret
-
-}
 BitVector32 sll_bv_32u(BitVector32 x, int offset)
 {
     IL_0000: ldarg.0
@@ -84,14 +60,6 @@ BitVector32 sll_bv_o32u(BitVector32 x, int offset)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: call Z0.BitVector32 Z0.BitVector32::op_LeftShift(Z0.BitVector32,System.Int32)
-    IL_0007: ret
-
-}
-BitVector32 sll_bv_g32u(BitVector32 x, int offset)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: call Z0.BitVector32 Z0.gbv::sll<Z0.BitVector32>(Z0.BitVector32,System.Int32)
     IL_0007: ret
 
 }
@@ -111,14 +79,6 @@ BitVector32 srl_bv_o32u(BitVector32 x, int offset)
     IL_0007: ret
 
 }
-BitVector32 srl_bv_g32u(BitVector32 x, int offset)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: call Z0.BitVector32 Z0.gbv::srl<Z0.BitVector32>(Z0.BitVector32,System.Int32)
-    IL_0007: ret
-
-}
 BitVector32 flip_bv_32u(BitVector32 x)
 {
     IL_0000: ldarg.0
@@ -133,13 +93,6 @@ BitVector32 flip_bv_o32u(BitVector32 x)
     IL_0006: ret
 
 }
-BitVector32 flip_bv_g32u(BitVector32 x)
-{
-    IL_0000: ldarg.0
-    IL_0001: call Z0.BitVector32 Z0.gbv::not<Z0.BitVector32>(Z0.BitVector32)
-    IL_0006: ret
-
-}
 BitVector32 negate_bv_32u(BitVector32 x)
 {
     IL_0000: ldarg.0
@@ -151,13 +104,6 @@ BitVector32 negate_bv_o32u(BitVector32 x)
 {
     IL_0000: ldarg.0
     IL_0001: call Z0.BitVector32 Z0.BitVector32::op_UnaryNegation(Z0.BitVector32)
-    IL_0006: ret
-
-}
-BitVector32 negate_bv_g32u(BitVector32 x)
-{
-    IL_0000: ldarg.0
-    IL_0001: call Z0.BitVector32 Z0.gbv::negate<Z0.BitVector32>(Z0.BitVector32)
     IL_0006: ret
 
 }
@@ -177,13 +123,6 @@ BitVector32 inc_bv_o32u(BitVector32 x)
     IL_0009: ret
 
 }
-BitVector32 inc_bv_g32u(BitVector32 x)
-{
-    IL_0000: ldarg.0
-    IL_0001: call Z0.BitVector32 Z0.gbv::inc<Z0.BitVector32>(Z0.BitVector32)
-    IL_0006: ret
-
-}
 BitVector32 dec_bv_32u(BitVector32 x)
 {
     IL_0000: ldarg.0
@@ -200,42 +139,19 @@ BitVector32 dec_bv_o32u(BitVector32 x)
     IL_0009: ret
 
 }
-BitVector32 dec_bv_g32u(BitVector32 x)
-{
-    IL_0000: ldarg.0
-    IL_0001: call Z0.BitVector32 Z0.gbv::dec<Z0.BitVector32>(Z0.BitVector32)
-    IL_0006: ret
-
-}
 BitVector32 rotl_bv_32u(BitVector32 x, int offset)
-{
-    IL_0000: ldarga.s x
-    IL_0002: ldarg.1
-    IL_0003: call Z0.BitVector32 Z0.BitVector32::Rotl(System.Int32)
-    IL_0008: ret
-
-}
-BitVector32 rotl_bv_g32u(BitVector32 x, int offset)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: call Z0.BitVector32 Z0.gbv::rotl<Z0.BitVector32>(Z0.BitVector32,System.Int32)
+    IL_0002: call Z0.BitVector32 Z0.bitvector::rotl(Z0.BitVector32,System.Int32)
     IL_0007: ret
 
 }
 BitVector32 rotr_bv_32u(BitVector32 x, int offset)
 {
-    IL_0000: ldarga.s x
-    IL_0002: ldarg.1
-    IL_0003: call Z0.BitVector32 Z0.BitVector32::Rotr(System.Int32)
-    IL_0008: ret
-
-}
-BitVector32 rotr_bv_g32u(BitVector32 x, int offset)
-{
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: call Z0.BitVector32 Z0.gbv::rotr<Z0.BitVector32>(Z0.BitVector32,System.Int32)
+    IL_0002: call Z0.BitVector32 Z0.bitvector::rotr(Z0.BitVector32,System.Int32)
     IL_0007: ret
 
 }

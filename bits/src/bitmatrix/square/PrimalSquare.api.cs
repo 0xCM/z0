@@ -18,7 +18,7 @@ namespace Z0
     {
         [MethodImpl(Inline)]
         public static T and<T>(T A, T B,  T C)
-            where T : unmanaged, IPrimalSquare<T>
+            where T : unmanaged, IBitSquare<T>
         {
             // A.Load(out Vector256<ushort> a);
             // B.Load(out Vector256<ushort> b);

@@ -52,7 +52,7 @@ namespace Z0
         {
             var blocks = dst.BlockCount;
             for(var block = 0; block < blocks; block++)
-                ginx.store(ginx.vsub<T>(ginx.vloadu128(in lhs.Block(block)), ginx.vloadu128(in rhs.Block(block))), ref dst.Block(block));
+                ginx.vstore(ginx.vsub<T>(ginx.vloadu128(in lhs.Block(block)), ginx.vloadu128(in rhs.Block(block))), ref dst.Block(block));
             return dst;
         }
 
@@ -61,7 +61,7 @@ namespace Z0
         {            
             var blocks = dst.BlockCount;
             for(var block = 0; block < blocks; block++)
-                ginx.store(ginx.vsub<T>(ginx.vloadu256(in lhs.Block(block)), ginx.vloadu256(in rhs.Block(block))), ref dst.Block(block));
+                ginx.vstore(ginx.vsub<T>(ginx.vloadu256(in lhs.Block(block)), ginx.vloadu256(in rhs.Block(block))), ref dst.Block(block));
             return dst;
         }
 

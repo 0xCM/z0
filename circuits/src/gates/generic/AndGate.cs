@@ -11,7 +11,7 @@ namespace Z0
     
     using static zfunc;
 
-    public readonly struct AndGate<T> : IBinaryGate<T>,  IBinaryGate<Vec128<T>>, IBinaryGate<Vec256<T>>
+    public readonly struct AndGate<T> : IBinaryGate<T>,  IBinaryGate<Vector128<T>>, IBinaryGate<Vector256<T>>
         where T : unmanaged
     {
         internal static readonly AndGate<T> Gate = default;
@@ -31,7 +31,7 @@ namespace Z0
         /// <param name="x">The left operands</param>
         /// <param name="y">The right operands</param>
         [MethodImpl(Inline)]
-        public T Send(in T x, in T y)
+        public T Send(T x, T y)
             => gmath.and(x,y);
 
         /// <summary>
@@ -40,7 +40,7 @@ namespace Z0
         /// <param name="x">The left operands</param>
         /// <param name="y">The right operands</param>
         [MethodImpl(Inline)]
-        public Vec128<T> Send(in Vec128<T> x, in Vec128<T> y)
+        public Vector128<T> Send(Vector128<T> x, Vector128<T> y)
             => ginx.vand(x,y);
 
         /// <summary>
@@ -49,7 +49,7 @@ namespace Z0
         /// <param name="x">The left operands</param>
         /// <param name="y">The right operands</param>
         [MethodImpl(Inline)]
-        public Vec256<T> Send(in Vec256<T> a, in Vec256<T> b)
+        public Vector256<T> Send(Vector256<T> a, Vector256<T> b)
             => ginx.vand<T>(a,b);
 
     }

@@ -13,15 +13,6 @@ namespace Z0
 
     partial class BitMatrix
     {
-        [MethodImpl(Inline)]
-        public static BitMatrix<T> Block<T>(BitMatrix<T> A, int firstRow)
-            where T : unmanaged
-                => Load(A.data.Slice(firstRow));
-
-        [MethodImpl(Inline)]
-        public static BitMatrix<T> Block<T>(BitMatrix<T> A, int firstRow, int lastRow)
-            where T : unmanaged
-                => Load(A.data.Slice(firstRow, lastRow - firstRow));
         
         public static BitMatrix8 Block(BitMatrix16 A, N0 r0, N0 c0)
         {

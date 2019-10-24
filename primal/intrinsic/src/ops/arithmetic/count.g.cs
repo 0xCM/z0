@@ -37,6 +37,26 @@ namespace Z0
                 => vadd<T>(src, Vec256Pattern.Units<T>());
 
         /// <summary>
+        /// Increments each source vector component by a unit
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <typeparam name="T">The primal component type</typeparam>
+        [MethodImpl(Inline)]
+        public static Vector128<T> vnext<T>(Vector128<T> src)
+            where T : unmanaged
+                => vadd<T>(src, Vec128Pattern.units<T>());
+
+        /// <summary>
+        /// Increments each source vector component by a unit
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <typeparam name="T">The primal component type</typeparam>
+        [MethodImpl(Inline)]
+        public static Vector256<T> vnext<T>(Vector256<T> src)
+            where T : unmanaged
+                => vadd<T>(src, Vec256Pattern.Units<T>());
+
+        /// <summary>
         /// Decrements each source vector component by a unit
         /// </summary>
         /// <param name="src">The source vector</param>
@@ -55,6 +75,27 @@ namespace Z0
         public static Vec256<T> vprior<T>(in Vec256<T> src)
             where T : unmanaged
                 => vsub<T>(src, Vec256Pattern.Units<T>());
+
+        /// <summary>
+        /// Decrements each source vector component by a unit
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <typeparam name="T">The primal component type</typeparam>
+        [MethodImpl(Inline)]
+        public static Vector128<T> vprior<T>(Vector128<T> src)
+            where T : unmanaged
+                => vsub<T>(src, Vec128Pattern.units<T>());
+
+        /// <summary>
+        /// Decrements each source vector component by a unit
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <typeparam name="T">The primal component type</typeparam>
+        [MethodImpl(Inline)]
+        public static Vector256<T> vprior<T>(Vector256<T> src)
+            where T : unmanaged
+                => vsub<T>(src, Vec256Pattern.Units<T>());
+
     }
 
 }

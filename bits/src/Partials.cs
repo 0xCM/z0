@@ -8,6 +8,11 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using static zfunc;
 
+    public static partial class BitPoints256
+    {
+
+    }
+
     public static partial class Bits
     {
         
@@ -47,7 +52,5 @@ namespace Z0
     {
 
     }
-
-    
 
 }

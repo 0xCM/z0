@@ -11,95 +11,63 @@ namespace Z0
     /// <summary>
     /// Characterizes bitwise operations over an operand
     /// </summary>
-    public interface IBitwiseOps<T>
+    public interface IBitwiseOps<T>  
+        where T : unmanaged      
     { 
         /// <summary>
-        /// Computes the bitwise and from the supplied values
+        /// Computes the bitwise AND
         /// </summary>
-        /// <param name="lhs">The left value</param>
-        /// <param name="rhs">The right value</param>
-        /// <returns></returns>
-        T and(T lhs, T rhs);
+        /// <param name="a">The left value</param>
+        /// <param name="b">The right value</param>
+        T And(T a, T b);
 
         /// <summary>
-        /// Computes the bitwise or from the supplied values
+        /// Computes the bitwise OR
         /// </summary>
-        /// <param name="lhs">The left value</param>
-        /// <param name="rhs">The right value</param>
-        T or(T lhs, T rhs);
+        /// <param name="a">The left value</param>
+        /// <param name="b">The right value</param>
+        T Or(T a, T b);
  
         /// <summary>
-        /// Computes the bitwise exlusive or from the supplied values
+        /// Computes the bitwise XOR
         /// </summary>
-        /// <param name="lhs">The left value</param>
-        /// <param name="rhs">The right value</param>
-        T xor(T lhs, T rhs);
-
-        T ShiftL(T lhs, int rhs);
-
-        T ShiftR(T lhs, int rhs);
-
+        /// <param name="a">The left value</param>
+        /// <param name="b">The right value</param>
+        T XOr(T a, T b);
 
         /// <summary>
-        /// Calculates the bitwise two's-complement of the input
+        /// Computes the bitwise complement
         /// </summary>
-        /// <param name="x">The source value</param>
-        T flip(T x); 
+        /// <param name="a">The operand</param>
+        T Not(T a);
 
-        /// <summary>
-        /// Computes the bitwise and
-        /// </summary>
-        /// <param name="rhs">The right value</param>
-        T And(T rhs);
-        
-        /// <summary>
-        /// Computes the bitwise or
-        /// </summary>
-        /// <param name="rhs">The right  value</param>
-        T Or(T rhs);
+    }
 
-        /// <summary>
-        /// Computes the bitwise exlusive or
-        /// </summary>
-        /// <param name="rhs">The right  value</param>
-        T XOr(T rhs);
+    public interface IShiftOps<T>
+    {
+        T Sll(T a, int offset);
 
-        /// <summary>
-        /// Calculates the bitwise two's-complement
-        /// </summary>
-        T Flip();
+        T Srl(T a, int offset);
 
         /// <summary>
         /// Rotates bits rightwards, from MSB -> LSB
         /// </summary>
         /// <param name="lhs">The value to rotate</param>
-        /// <param name="rhs">The magnitude of the rotation</param>
-        T RotL(T lhs, int rhs);
+        /// <param name="offset">The magnitude of the rotation</param>
+        T RotL(T lhs, int offset);
         
         /// <summary>
         /// Rotates bits leftwards, from LSB -> MSB
         /// </summary>
         /// <param name="lhs">The value to rotate</param>
-        /// <param name="rhs">The magnitude of the rotation</param>
-        T RotR(T lhs, int rhs);
-
+        /// <param name="rotl">The magnitude of the rotation</param>
+        T RotR(T lhs, int rotl);
 
     }
 
-    public interface IBitwise<S>
-        where S : IBitwise<S>, new()
+    public interface IShiftable<S>
+        where S : IShiftable<S>, new()
     {
-        /// <summary>
-        /// Determines whether a bit at a specified position is on
-        /// </summary>
-        bool TestBit(int pos);
-
-        /// <summary>
-        /// Interprets the source as an array of bytes
-        /// </summary>
-        /// <param name="src">The source value</param>
-        byte[] Bytes {get;}
-
         S ShiftL(int rhs);
 
         S ShiftR(int rhs);

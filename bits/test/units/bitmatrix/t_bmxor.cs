@@ -95,13 +95,13 @@ namespace Z0
         void bm_xor_16x16_bench_noalloc(SystemCounter sw = default)
         {
             var opname = "bm_xor_16x16";
-            var last = BitMatrix16.Alloc();
+            var C = BitMatrix16.Alloc();
             for(var i=0; i<OpCount; i++)
             {
                 var A = Random.BitMatrix(n16);
                 var B = Random.BitMatrix(n16);
                 sw.Start();
-                BitMatrix.xor(in A,in B, ref last);
+                BitMatrix.xor(A, B, C);
                 sw.Stop();
             }
             

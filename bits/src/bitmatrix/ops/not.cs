@@ -6,13 +6,14 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Runtime.Intrinsics;
 
     using static zfunc;
     using static As;
 
     partial class BitMatrix
     {
-        public static BitMatrix<T> not<T>(BitMatrix<T> A, BitMatrix<T> B)
+        public static RowBits<T> not<T>(RowBits<T> A, RowBits<T> B)
             where T : unmanaged
         {            
             for(var i=0; i<A.RowCount; i++)
@@ -21,7 +22,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static BitMatrix<T> not<T>(BitMatrix<T> A)
+        public static RowBits<T> not<T>(RowBits<T> A)
             where T : unmanaged
                 => not(A, A.Replicate(true));
 
@@ -32,7 +33,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitMatrix16 not(BitMatrix16 src)
         {
-            src.GetCells(out Vec256<ushort> vSrc);
+            src.Load(out Vector256<ushort> vSrc);
             dinx.vnot(vSrc).StoreTo(ref src.Data[0]);
             return src;
         }

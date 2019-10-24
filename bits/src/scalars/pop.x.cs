@@ -18,7 +18,12 @@ namespace Z0
                
         [MethodImpl(Inline)]   
         public static ulong PopCount(this Span<byte> src)
-            => bitspan.pop(src);
+        {
+            var count = 0ul;            
+            for(var i = 0; i < src.Length; i++)
+                count += Bits.pop(src[i]);
+            return count;
+        }
     }
 
 }

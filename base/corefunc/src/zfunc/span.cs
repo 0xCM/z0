@@ -163,16 +163,48 @@ partial class zfunc
         => MemoryMarshal.CreateSpan(ref src, length);
 
     /// <summary>
-    /// Creates a span of one type over a single element of another type
+    /// Allocates a generically-presented span with cells of unsigned integral type with bit width n = 8
     /// </summary>
-    /// <param name="src">The source element</param>
-    /// <typeparam name="S">The source element type</typeparam>
-    /// <typeparam name="T">The target element type</typeparam>
-    [MethodImpl(Inline)]   
-    public static Span<T> span<S,T>(ref S src)
+    /// <param name="n">The bit width selector</param>
+    /// <param name="len">The number of cells to allocate</param>
+    /// <typeparam name="T">The generic presentation type</typeparam>
+    [MethodImpl(Inline)]
+    public static Span<T> span<T>(N8 n, int len)
         where T : unmanaged
-        where S : unmanaged
-            => cast(span(ref src, 1), out Span<T> _);
+            => MemoryMarshal.Cast<byte,T>(new Span<byte>(new byte[len]));
+
+    /// <summary>
+    /// Allocates a generically-presented span with cells of unsigned integral type with bit width n = 16
+    /// </summary>
+    /// <param name="n">The bit width selector</param>
+    /// <param name="len">The number of cells to allocate</param>
+    /// <typeparam name="T">The generic presentation type</typeparam>
+    [MethodImpl(Inline)]
+    public static Span<T> span<T>(N16 n, int len)
+        where T : unmanaged
+            => MemoryMarshal.Cast<ushort,T>(new Span<ushort>(new ushort[len]));
+
+    /// <summary>
+    /// Allocates a generically-presented span with cells of unsigned integral type with bit width n = 32
+    /// </summary>
+    /// <param name="n">The bit width selector</param>
+    /// <param name="len">The number of cells to allocate</param>
+    /// <typeparam name="T">The generic presentation type</typeparam>
+    [MethodImpl(Inline)]
+    public static Span<T> span<T>(N32 n, int len)
+        where T : unmanaged
+            => MemoryMarshal.Cast<uint,T>(new Span<uint>(new uint[len]));
+
+    /// <summary>
+    /// Allocates a generically-presented span with cells of unsigned integral type with bit width n = 64
+    /// </summary>
+    /// <param name="n">The bit width selector</param>
+    /// <param name="len">The number of cells to allocate</param>
+    /// <typeparam name="T">The generic presentation type</typeparam>
+    [MethodImpl(Inline)]
+    public static Span<T> span<T>(N64 n, int len)
+        where T : unmanaged
+            => MemoryMarshal.Cast<ulong,T>(new Span<ulong>(new ulong[len]));
 
     /// <summary>
     /// Presents a source reference as a span of bytes
@@ -210,16 +242,6 @@ partial class zfunc
     /// <param name="src">The source value</param>
     /// <typeparam name="T">The value type</typeparam>
     [MethodImpl(Inline)]
-    public static ReadOnlySpan<byte> bytes<T>(in T src)
-        where T : unmanaged
-            => bytespan(MemoryMarshal.CreateReadOnlySpan(ref As.asRef(in src), 1));         
-
-    /// <summary>
-    /// Converts a source value of any value type to its bytespan representation
-    /// </summary>
-    /// <param name="src">The source value</param>
-    /// <typeparam name="T">The value type</typeparam>
-    [MethodImpl(Inline)]
     public static void bytes<T>(in T src, Span<byte> dst)
         where T : unmanaged
             => As.generic<T>(ref dst[0]) = src;
@@ -230,9 +252,9 @@ partial class zfunc
     /// <param name="src">The source value</param>
     /// <typeparam name="T">The source value type</typeparam>
     [MethodImpl(Inline)]
-    public static Span<byte> bytes<T>(T src)
+    public static Span<byte> bytes<T>(in T src)
         where T : unmanaged
-            =>  MemoryMarshal.AsBytes(span(src));
+            => MemoryMarshal.AsBytes(span(src));
 
     /// <summary>
     /// Constructs a span from a sequence selection
@@ -255,6 +277,30 @@ partial class zfunc
         =>  ref MemoryMarshal.GetReference<T>(src);
 
     /// <summary>
+    /// Returns a reference to the head of a readonly span
+    /// </summary>
+    /// <param name="src">The source span</param>
+    /// <typeparam name="T">The cell type</typeparam>
+    [MethodImpl(Inline)]
+    public static ref readonly T head<T>(ReadOnlySpan<T> src)
+        where T : unmanaged
+            =>  ref MemoryMarshal.GetReference<T>(src);
+
+    /// <summary>
+    /// Returns a reference to the location of a non-leading span element
+    /// </summary>
+    /// <param name="src">The source span</param>
+    /// <typeparam name="T">The element type</typeparam>
+    [MethodImpl(Inline)]
+    public static ref T tail<T>(Span<T> src, int offset)
+        => ref Unsafe.Add(ref head(src), offset);        
+
+    [MethodImpl(Inline)]
+    public static ref readonly T tail<T>(ReadOnlySpan<T> src, int offset)
+        where T : unmanaged
+            =>  ref head(src.Slice(offset));
+
+    /// <summary>
     /// Returns a reference to the location of the first element
     /// </summary>
     /// <param name="src">The source span</param>
@@ -274,15 +320,6 @@ partial class zfunc
         where T : unmanaged
             =>  ref Unsafe.Add(ref MemoryMarshal.GetReference<T>(src), offset);
 
-    /// <summary>
-    /// Returns a reference to the head of a readonly span
-    /// </summary>
-    /// <param name="src">The source span</param>
-    /// <typeparam name="T">The cell type</typeparam>
-    [MethodImpl(Inline)]
-    public static ref T head<T>(ReadOnlySpan<T> src)
-        where T : unmanaged
-            =>  ref MemoryMarshal.GetReference<T>(src);
 
     /// <summary>
     /// Returns a reference to a readonly span at a specified offset

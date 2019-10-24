@@ -61,14 +61,14 @@ partial class zfunc
         || typeof(T) == typeof(ushort) 
         || typeof(T) == typeof(uint) 
         || typeof(T) == typeof(ulong))
-            vstore128u(src, ref dst);
+            vstore128_u(src, ref dst);
         else if(typeof(T) == typeof(sbyte) 
         || typeof(T) == typeof(short) 
         || typeof(T) == typeof(int) 
         || typeof(T) == typeof(long))
-            vstore128i(src, ref dst);
+            vstore128_i(src, ref dst);
         else 
-            vstore128f(src, ref dst);
+            vstore128_f(src, ref dst);
     }
 
     [MethodImpl(Inline)]
@@ -79,14 +79,14 @@ partial class zfunc
         || typeof(T) == typeof(ushort) 
         || typeof(T) == typeof(uint) 
         || typeof(T) == typeof(ulong))
-            vstore256u(src, ref dst);
+            vstore256_u(src, ref dst);
         else if(typeof(T) == typeof(sbyte) 
         || typeof(T) == typeof(short) 
         || typeof(T) == typeof(int) 
         || typeof(T) == typeof(long))
-            vstore256i(src, ref dst);
+            vstore256_i(src, ref dst);
         else 
-            vstore256f(src, ref dst);
+            vstore256_f(src, ref dst);
     }
 
 
@@ -172,7 +172,7 @@ partial class zfunc
 
 
     [MethodImpl(Inline)]
-    static void vstore128u<T>(Vector128<T> src, ref T dst)
+    static void vstore128_u<T>(Vector128<T> src, ref T dst)
         where T : unmanaged
     {
         if(typeof(T) == typeof(byte))
@@ -186,7 +186,7 @@ partial class zfunc
     }
 
     [MethodImpl(Inline)]
-    static void vstore128i<T>(Vector128<T> src, ref T dst)
+    static void vstore128_i<T>(Vector128<T> src, ref T dst)
         where T : unmanaged
     {
         if(typeof(T) == typeof(sbyte))
@@ -200,7 +200,7 @@ partial class zfunc
     }
 
     [MethodImpl(Inline)]
-    static void vstore128f<T>(Vector128<T> src, ref T dst)
+    static void vstore128_f<T>(Vector128<T> src, ref T dst)
         where T : unmanaged
     {
         if(typeof(T) == typeof(float))
@@ -212,7 +212,7 @@ partial class zfunc
     }
 
     [MethodImpl(Inline)]
-    static void vstore256u<T>(Vector256<T> src, ref T dst)
+    static void vstore256_u<T>(Vector256<T> src, ref T dst)
         where T : unmanaged
     {
         if(typeof(T) == typeof(byte))
@@ -226,7 +226,7 @@ partial class zfunc
     }
 
     [MethodImpl(Inline)]
-    static void vstore256i<T>(Vector256<T> src, ref T dst)
+    static void vstore256_i<T>(Vector256<T> src, ref T dst)
         where T : unmanaged
     {
         if(typeof(T) == typeof(sbyte))
@@ -240,7 +240,7 @@ partial class zfunc
     }
 
     [MethodImpl(Inline)]
-    static void vstore256f<T>(Vector256<T> src, ref T dst)
+    static void vstore256_f<T>(Vector256<T> src, ref T dst)
         where T : unmanaged
     {
         if(typeof(T) == typeof(float))

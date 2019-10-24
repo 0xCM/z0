@@ -30,6 +30,13 @@ namespace Z0
             => src.value;
 
         [MethodImpl(Inline)]
+        public unsafe static implicit operator Scalar128<T>(ulong src)
+        {
+            var v = Avx2.LoadScalarVector128((ulong*)Unsafe.AsPointer(ref src));
+            return new Scalar128<T>(Unsafe.As<Vector128<ulong>, Vector128<T>>(ref v));
+        }
+
+        [MethodImpl(Inline)]
         public static implicit operator Vector128<T>(Scalar128<T> src)
             => src.As<T>();
 

@@ -13,101 +13,9 @@ namespace Z0
 
     using static zfunc;
 
+
     public static partial class BitMatrix
-    {
-        /// <summary>
-        /// Allocates a generic bitmatrix with a specified number of rows
-        /// </summary>
-        /// <param name="rows">The row count</param>
-        /// <typeparam name="T">The primal type that implicitly defines the number of matrix coluns</typeparam>
-        public static BitMatrix<T> Alloc<T>(int rows)
-            where T : unmanaged
-                => BitMatrix<T>.Alloc(rows);
-        
-        /// <summary>
-        /// Loads a generic bitmatrix from a byte span
-        /// </summary>
-        /// <param name="src">The data source</param>
-        /// <typeparam name="T">The primal type that implicitly defines the number of matrix coluns</typeparam>
-        public static BitMatrix<T> Load<T>(Span<byte> src)
-            where T : unmanaged
-                => BitMatrix<T>.From(src);
-
-        /// <summary>
-        /// Loads a generic bitmatrix from generic span
-        /// </summary>
-        /// <param name="src">The data source</param>
-        /// <typeparam name="T">The primal type that implicitly defines the number of matrix coluns</typeparam>
-        public static BitMatrix<T> Load<T>(Span<T> src)
-            where T : unmanaged
-                => BitMatrix<T>.From(src);
-
-        /// <summary>
-        /// Loads a generic bitmatrix from an array
-        /// </summary>
-        /// <param name="src">The data source</param>
-        /// <typeparam name="T">The primal type that implicitly defines the number of matrix coluns</typeparam>
-        public static BitMatrix<T> Load<T>(T[] src)
-            where T : unmanaged
-                => BitMatrix<T>.From(src);
-
-        /// <summary>
-        /// Allocates a zero-filled n-square matrix
-        /// </summary>
-        /// <typeparam name="N">The square dimension</typeparam>
-        /// <typeparam name="T">The element type</typeparam>
-        [MethodImpl(Inline)]
-        public static BitMatrix<N,T> Alloc<N,T>(N n = default, T rep = default)
-            where N : ITypeNat, new()
-            where T : unmanaged
-                => BitMatrix<N,T>.Alloc();
-        
-        /// <summary>
-        /// Allocates a zero-filled mxn bitmatrix
-        /// </summary>
-        /// <typeparam name="M">The row dimension</typeparam>
-        /// <typeparam name="N">The column dimension</typeparam>
-        /// <typeparam name="T">The element type</typeparam>
-        [MethodImpl(Inline)]
-        public static BitMatrix<M,N,T> Alloc<M,N,T>(M m = default, N n = default)
-            where M : ITypeNat, new()
-            where N : ITypeNat, new()
-            where T : unmanaged
-                => BitMatrix<M,N,T>.Alloc();
-
-        /// <summary>
-        /// Loads an n-square bitmatrix from a memory segment
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <param name="n">The matrix order</param>
-        /// <typeparam name="N">The matrix order type</typeparam>
-        /// <typeparam name="T">The matrix cell type</typeparam>
-        [MethodImpl(Inline)]
-        public static BitMatrix<N,T> Load<N,T>(T[] src, N n = default)        
-            where N : ITypeNat, new()
-            where T : unmanaged
-                => BitMatrix<N,T>.Load(src); 
-
-        /// <summary>
-        /// Loads an MxN bitmatrix from a memory segment
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <param name="n">The matrix order</param>
-        /// <typeparam name="N">The matrix order type</typeparam>
-        /// <typeparam name="T">The matrix cell type</typeparam>
-        [MethodImpl(NotInline)]
-        public static BitMatrix<M,N,T> Load<M,N,T>(T[] src, M m = default, N n = default)        
-            where M : ITypeNat, new()
-            where N : ITypeNat, new()
-            where T : unmanaged
-                => BitMatrix<M,N,T>.Load(src); 
-
-        [MethodImpl(Inline)]
-        public static BitMatrix<M,N,T> Load<M,N,T>(M m = default, N n = default, params T[] src)        
-            where M : ITypeNat, new()
-            where N : ITypeNat, new()
-            where T : unmanaged
-                => BitMatrix<M,N,T>.Load(src); 
+    {        
 
         /// <summary>
         /// Allocates a one-filled mxn matrix
@@ -116,7 +24,7 @@ namespace Z0
         /// <typeparam name="N">The column dimension</typeparam>
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
-        public static BitMatrix<M,N,T> Ones<M,N,T>(M m = default, N n = default)
+        public static BitMatrix<M,N,T> ones<M,N,T>(M m = default, N n = default)
             where M : ITypeNat, new()
             where N : ITypeNat, new()
             where T : unmanaged
@@ -129,7 +37,7 @@ namespace Z0
         /// <typeparam name="N">The column dimension</typeparam>
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
-        public static BitMatrix<N,T> Ones<N,T>(N n = default)
+        public static BitMatrix<N,T> ones<N,T>(N n = default)
             where N : ITypeNat, new()
             where T : unmanaged
                 => BitMatrix<N,T>.Ones;
@@ -139,7 +47,7 @@ namespace Z0
         /// </summary>
         /// <typeparam name="N">The column/row dimension</typeparam>
         /// <typeparam name="T">The element type</typeparam>
-        public static BitMatrix<N,T> Identity<N,T>(N n = default, T rep = default)
+        public static BitMatrix<N,T> identity<N,T>(N n = default, T rep = default)
             where N : ITypeNat, new()
             where T : unmanaged
                 => BitMatrix<N,T>.Identity;

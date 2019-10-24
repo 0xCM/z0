@@ -40,7 +40,7 @@ namespace Z0
     public interface IRightModule<S,G,R> : IRightModule<G,R>
         where S : IRightModule<S,G,R>, new()
         where R : ICommutativeRing<R>, new()
-        where G : IGroupA<G>, new()
+        where G : unmanaged, IGroupA<G>
     {
 
     }
@@ -56,7 +56,7 @@ namespace Z0
     /// Also, see https://en.wikipedia.org/wiki/Group_with_operators
     /// </remarks>
     public interface IGroupAction<G,R>
-        where G : IGroupOps<G>, new()
+        where G : unmanaged, IGroupOps<G>
 
     {
         /// <summary>
@@ -73,7 +73,8 @@ namespace Z0
     /// <typeparam name="G">The group individual type</typeparam>
     /// <typeparam name="R">The ring individual type</typeparam>
     public interface ILeftModuleOps<R,G> : IGroupAOps<G>
-        where R : ICommutativeRingOps<R>, new()
+        where R : unmanaged, ICommutativeRingOps<R>
+        where G : unmanaged
         
     {
         /// <summary>
@@ -90,7 +91,8 @@ namespace Z0
     /// <typeparam name="G">The group individual type</typeparam>
     /// <typeparam name="R">The ring individual type</typeparam>
     public interface IRightModuleOps<G,R> : IGroupAOps<G>
-        where R : ICommutativeRingOps<R>, new()
+        where R : unmanaged, ICommutativeRingOps<R>
+        where G : unmanaged
     {
         /// <summary>
         /// Effects right scalar multiplication

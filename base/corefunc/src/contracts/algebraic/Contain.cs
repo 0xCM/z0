@@ -63,12 +63,11 @@ namespace  Z0
     /// <summary>
     /// Characterizes a set that, if nonempty, contains elements of unknown type
     /// </summary>
-    public interface IMathSet
+    public interface IFormalSet
     {
         /// <summary>
         /// Specifies whether the set is void of elements
         /// </summary>
-        /// <value></value>
         bool IsEmpty {get;}
 
         /// <summary>
@@ -81,19 +80,20 @@ namespace  Z0
         /// </summary>
         bool IsDiscrete {get;}
 
-        /// <summary>
-        /// Determines whether a value is a member
-        /// </summary>
-        /// <param name="candidate">The potential member to check</param>
-        bool IsMember(object candidate);
     }
 
     /// <summary>
     /// Characterizes a set that, if nonempty, contains elements of specific type
     /// </summary>
     /// <typeparam name="T">The individual type</typeparam>
-    public interface IMathSet<T> : IMathSet
+    public interface IFormalSet<T> : IFormalSet
     {
+        /// <summary>
+        /// Determines whether a value is a member
+        /// </summary>
+        /// <param name="candidate">The potential member to check</param>
+        bool Contains(T candidate);
+
     }
 
 
@@ -102,14 +102,9 @@ namespace  Z0
     /// </summary>
     /// <typeparam name="S">The container type</typeparam>
     /// <typeparam name="T">The contained type</typeparam>
-    public interface IMathSet<S,T> : IMathSet<T>, IContainer<S,T>
-        where S : IMathSet<S,T>, new()
+    public interface IFormalSet<S,T> : IFormalSet<T>, IContainer<S,T>
+        where S : IFormalSet<S,T>, new()
     {
-        /// <summary>
-        /// Determines whether a supplied value is a member of the reified set
-        /// </summary>
-        /// <param name="candidate">The potential member to check</param>
-        bool IsMember(T candidate);
     
     }
 
@@ -184,7 +179,7 @@ namespace  Z0
     /// </summary>
     /// <typeparam name="S">The reification type</typeparam>
     /// <typeparam name="T">The member type</typeparam>
-    public interface IDiscreteSet<S,T> : IMathSet<S,T>, IDiscreteContainer<S,T>
+    public interface IDiscreteSet<S,T> : IFormalSet<S,T>, IDiscreteContainer<S,T>
         where S: IDiscreteSet<S,T>, new()
     {
 
@@ -204,7 +199,7 @@ namespace  Z0
     /// Characterizes a type that represents an infinite number of values
     /// </summary>
     /// <typeparam name="T">The member type</typeparam>
-    public interface IInfiniteSet<S,T> : IInfiniteSet<S>, IMathSet<S,T>
+    public interface IInfiniteSet<S,T> : IInfiniteSet<S>, IFormalSet<S,T>
         where S : IInfiniteSet<S,T>, new()
     {
 
