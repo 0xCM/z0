@@ -567,7 +567,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public readonly bool Equals(BitVector128 rhs)
-            => dinx.eq(ToCpuVec(),rhs.ToCpuVec());
+            => x0 == rhs.x0 && x1 == rhs.x1;
 
         public override bool Equals(object obj)
             => obj is BitVector128 x && Equals(x);

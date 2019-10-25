@@ -1,4 +1,4 @@
-// 2019-10-24 05:24:43:930
+// 2019-10-25 06:35:15:009
 ILogicDispatcher get_Instance()
 {
     IL_0000: ldloca.s V_0
@@ -63,7 +63,7 @@ bit Dispatch(IUnaryLogicOp expr)
     IL_0001: callvirt Z0.Logix.UnaryLogicOpKind Z0.Logix.ILogicOpExpr`1<Z0.Logix.UnaryLogicOpKind>::get_OpKind()
     IL_0006: ldarg.0
     IL_0007: ldarg.1
-    IL_0008: callvirt Z0.Logix.ILogicExpr Z0.Logix.IUnaryLogicOp::get_Arg()
+    IL_0008: callvirt Z0.Logix.ILogicExpr Z0.Logix.IUnaryOp`1<Z0.Logix.ILogicExpr>::get_Arg()
     IL_000D: call Z0.bit Z0.Logix.LogicDispatcher::Eval(Z0.Logix.ILogicExpr)
     IL_0012: call Z0.bit Z0.Logix.LogicOpApi::eval(Z0.Logix.UnaryLogicOpKind,Z0.bit)
     IL_0017: ret
@@ -88,7 +88,7 @@ bit Dispatch(IBinaryLogicOp expr)
 bit Dispatch(ITernaryLogicOp expr)
 {
     IL_0000: ldarg.1
-    IL_0001: callvirt Z0.Logix.Ternary512OpKind Z0.Logix.ILogicOpExpr`1<Z0.Logix.Ternary512OpKind>::get_OpKind()
+    IL_0001: callvirt Z0.Logix.TernaryBitOpKind Z0.Logix.ILogicOpExpr`1<Z0.Logix.TernaryBitOpKind>::get_OpKind()
     IL_0006: ldarg.0
     IL_0007: ldarg.1
     IL_0008: callvirt Z0.Logix.ILogicExpr Z0.Logix.ITernaryLogicOp::get_FirstArg()
@@ -101,7 +101,7 @@ bit Dispatch(ITernaryLogicOp expr)
     IL_001F: ldarg.1
     IL_0020: callvirt Z0.Logix.ILogicExpr Z0.Logix.ITernaryLogicOp::get_ThirdArg()
     IL_0025: call Z0.bit Z0.Logix.LogicDispatcher::Eval(Z0.Logix.ILogicExpr)
-    IL_002A: call Z0.bit Z0.Logix.LogicOpApi::eval(Z0.Logix.Ternary512OpKind,Z0.bit,Z0.bit,Z0.bit)
+    IL_002A: call Z0.bit Z0.Logix.LogicOpApi::eval(Z0.Logix.TernaryBitOpKind,Z0.bit,Z0.bit,Z0.bit)
     IL_002F: ret
 
 }

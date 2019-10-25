@@ -13,7 +13,7 @@ namespace Z0.Logix
 
     static class VectorExprEval
     {
-         public static LiteralExpr<Vector128<T>> eval<T>(ITypedExpr<Vector128<T>> expr)
+         public static TypedLiteralExpr<Vector128<T>> eval<T>(ITypedExpr<Vector128<T>> expr)
             where T : unmanaged
         {
             switch(expr)
@@ -24,9 +24,9 @@ namespace Z0.Logix
                     return eval(x.Value);
                 case IVariedExpr<Vector128<T>> x:
                     return eval(x.BaseExpr);
-                case IOpExpr<Vector128<T>> x:
+                case ITypedOpExpr<Vector128<T>> x:
                     return eval(x);
-                case IEqualityExpr<Vector128<T>> x:
+                case ITypedEqualityExpr<Vector128<T>> x:
                     return ginx.vxnor(eval(x.Lhs).Value, eval(x.Rhs).Value);
                 default:
                     return unhandled(expr);
@@ -34,7 +34,7 @@ namespace Z0.Logix
 
         }
 
-        public static LiteralExpr<Vector256<T>> eval<T>(ITypedExpr<Vector256<T>> expr)
+        public static TypedLiteralExpr<Vector256<T>> eval<T>(ITypedExpr<Vector256<T>> expr)
             where T : unmanaged
         {
             switch(expr)
@@ -45,56 +45,56 @@ namespace Z0.Logix
                     return eval(x.Value);
                 case IVariedExpr<Vector256<T>> x:
                     return eval(x.BaseExpr);
-                case IOpExpr<Vector256<T>> x:
+                case ITypedOpExpr<Vector256<T>> x:
                     return eval(x);
-                case IEqualityExpr<Vector256<T>> x:
+                case ITypedEqualityExpr<Vector256<T>> x:
                     return ginx.vxnor(eval(x.Lhs).Value, eval(x.Rhs).Value);
                 default:
                     return unhandled(expr);
             }
         }
 
-        static LiteralExpr<Vector128<T>> eval<T>(IOpExpr<Vector128<T>> expr)
+        static TypedLiteralExpr<Vector128<T>> eval<T>(ITypedOpExpr<Vector128<T>> expr)
             where T : unmanaged
         {
             switch(expr)               
             {
-                case IUnaryOp<Vector128<T>> x:
+                case IUnaryBitwiseOp<Vector128<T>> x:
                     return Cpu128OpApi.eval(x.OpKind, eval(x.Arg).Value);
                 case IBinaryBitwiseOp<Vector128<T>> x:
                     return Cpu128OpApi.eval(x.OpKind, eval(x.LeftArg).Value, eval(x.RightArg).Value);
                 case IShiftOp<Vector128<T>> x:
                     return Cpu128OpApi.eval(x.OpKind, eval(x.Subject).Value, (byte)ScalarExprEval.eval(x.Offset).Value);
-                case ITernaryOp<Vector128<T>> x:
+                case ITernaryBitwiseOp<Vector128<T>> x:
                     return Cpu128OpApi.eval(x.OpKind, eval(x.FirstArg).Value, eval(x.SecondArg).Value, eval(x.ThirdArg));
                 default:
                     return unhandled(expr);
             }
         }
 
-        static LiteralExpr<Vector256<T>> eval<T>(IOpExpr<Vector256<T>> expr)
+        static TypedLiteralExpr<Vector256<T>> eval<T>(ITypedOpExpr<Vector256<T>> expr)
             where T : unmanaged
         {
             switch(expr)               
             {
-                case IUnaryOp<Vector256<T>> x:
+                case IUnaryBitwiseOp<Vector256<T>> x:
                     return Cpu256OpApi.eval(x.OpKind, eval(x.Arg).Value);
                 case IBinaryBitwiseOp<Vector256<T>> x:
                     return Cpu256OpApi.eval(x.OpKind, eval(x.LeftArg).Value, eval(x.RightArg).Value);
                 case IShiftOp<Vector256<T>> x:
                     return Cpu256OpApi.eval(x.OpKind, eval(x.Subject).Value, (byte)ScalarExprEval.eval(x.Offset).Value);
-                case ITernaryOp<Vector256<T>> x:
+                case ITernaryBitwiseOp<Vector256<T>> x:
                     return Cpu256OpApi.eval(x.OpKind, eval(x.FirstArg).Value, eval(x.SecondArg).Value, eval(x.ThirdArg));
                 default:
                     return unhandled(expr);
             }
         }
  
-        static LiteralExpr<Vector128<T>> unhandled<T>(ITypedExpr<Vector128<T>> expr)       
+        static TypedLiteralExpr<Vector128<T>> unhandled<T>(ITypedExpr<Vector128<T>> expr)       
             where T : unmanaged
                 => throw new Exception($"{expr} unhandled");
 
-        static LiteralExpr<Vector256<T>> unhandled<T>(ITypedExpr<Vector256<T>> expr)       
+        static TypedLiteralExpr<Vector256<T>> unhandled<T>(ITypedExpr<Vector256<T>> expr)       
             where T : unmanaged
                 => throw new Exception($"{expr} unhandled");
     }

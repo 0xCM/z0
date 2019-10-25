@@ -14,16 +14,12 @@ namespace Z0.Test
 
     public class t_vnegate : IntrinsicTest<t_vnegate>
     {
+
         public void vnegate_g128x8i_check()
         {
             vnegate_g128_check<sbyte>();
         }
 
-        public void vnegate_g128x8u_check()
-        {
-            
-            vnegate_g128_check<byte>();
-        }
 
         public void vnegate_g128x16i_check()
         {
@@ -116,26 +112,26 @@ namespace Z0.Test
         }
 
 
-        void vnegate_g128_check<T>()
+        void vnegate_g128_check<T>(N128 n = default)
             where T : unmanaged
         {
             for(var i=0; i<SampleSize; i++)
             {
-                var x = Random.CpuVec128<T>();
+                var x = Random.CpuVector<T>(n);
                 var y = ginx.vnegate(x);
-                var z = Vec128.Load(x.ToSpan().Map(gmath.negate));
+                var z = x.ToSpan().Map(gmath.negate).LoadVector(n);
                 Claim.eq(y,z);
             }
         }
 
-        void vnegate_g256_check<T>()
+        void vnegate_g256_check<T>(N256 n = default)
             where T : unmanaged
         {
             for(var i=0; i<SampleSize; i++)
             {
-                var x = Random.CpuVec256<T>();
+                var x = Random.CpuVector<T>(n);
                 var y = ginx.vnegate(x);
-                var z = Vec256.Load(x.ToSpan().Map(gmath.negate));
+                var z = x.ToSpan().Map(gmath.negate).LoadVector(n);
                 Claim.eq(y,z);
             }
 

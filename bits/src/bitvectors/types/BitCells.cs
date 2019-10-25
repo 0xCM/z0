@@ -27,22 +27,22 @@ namespace Z0
         /// <summary>
         /// The maximum number of bits that can be represented by the vector
         /// </summary>
-        readonly BitSize MaxBitCount;
+        readonly int MaxBitCount;
 
         /// <summary>
         /// The actual number of bits that are represented by the vector
         /// </summary>
-        readonly BitSize BitCount;
+        readonly int BitCount;
 
         /// <summary>
         /// The number of bits represented by a segment, save the last
         /// </summary>
-        readonly BitSize SegLength;
+        readonly int SegLength;
         
         /// <summary>
         /// The maximum number of bits that can be placed a single segment segment
         /// </summary>
-        public static readonly BitSize CellCapacity = bitsize<T>();
+        public static readonly int CellCapacity = bitsize<T>();
 
         /// <summary>
         /// Computes the number of cells required to hold a specified number of bits
@@ -50,7 +50,7 @@ namespace Z0
         /// <param name="len">The number of bits to store</param>
         /// <typeparam name="T">The primal storage type</typeparam>
         [MethodImpl(Inline)]
-        public static int CellCount(BitSize len)
+        public static int CellCount(int len)
         {
             var q = Math.DivRem(len, CellCapacity, out int r);            
             return r == 0 ? q : q + 1;
@@ -69,7 +69,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source cell</param>
         [MethodImpl(Inline)]
-        public static BitCells<T> FromCell(T src, BitSize n)
+        public static BitCells<T> FromCell(T src, int n)
             => new BitCells<T>(src,n);
 
         /// <summary>
@@ -78,7 +78,7 @@ namespace Z0
         /// <param name="src">The source bits</param>
         /// <param name="n">The bitvector length</param>
         [MethodImpl(Inline)]
-        public static BitCells<T> FromCells(Span<T> src, BitSize n)
+        public static BitCells<T> FromCells(Span<T> src, int n)
             => new BitCells<T>(src,n);
         
         /// <summary>
@@ -87,7 +87,7 @@ namespace Z0
         /// <param name="n">The length of the bitvector</param>
         /// <param name="src">The source bits</param>
         [MethodImpl(Inline)]
-        public static BitCells<T> From(T[] src, BitSize n)
+        public static BitCells<T> From(T[] src, int n)
             => new BitCells<T>(src, n);
 
         /// <summary>
@@ -95,11 +95,11 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source bits</param>
         /// <param name="n">The bitvector length</param>
-        public static BitCells<T> FromBytes(Span<byte> src, BitSize n)
+        public static BitCells<T> FromBytes(Span<byte> src, int n)
         {
             var q = Math.DivRem(src.Length, size<T>(), out int r);
             var cellcount = r == 0 ? q : q + 1;
-            var capacity = (ByteSize)CellCapacity;
+            var capacity = CellCapacity/8;
             
             var cells = new T[cellcount];
             for(int i=0, offset = 0; i< cellcount; i++, offset += capacity)
@@ -203,7 +203,7 @@ namespace Z0
             => !x.Equals(y);
 
         [MethodImpl(Inline)]
-        BitCells(T src, BitSize n)
+        BitCells(T src, int n)
         {            
             this.data = new T[]{src};
             this.MaxBitCount = CellCapacity;
@@ -213,17 +213,17 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        BitCells(Span<T> src, BitSize n)
+        BitCells(Span<T> src, int n)
         {            
             this.data = src;
-            this.MaxBitCount = src.Length * (int)CellCapacity;
+            this.MaxBitCount = src.Length * CellCapacity;
             this.BitCount = n;
             this.SegLength = BitSize.Segments<T>(MaxBitCount);            
             this.BitMap = BitSize.BitMap<T>(MaxBitCount);
         }
 
         [MethodImpl(Inline)]
-        BitCells(T[] src, BitSize n)
+        BitCells(T[] src, int n)
             : this(src.AsSpan(), n)
         {            
 
@@ -305,7 +305,7 @@ namespace Z0
         /// <summary>
         /// The maximum number of bits that can be represented by the vector
         /// </summary>
-        public readonly BitSize Capacity
+        public readonly int Capacity
         {
             [MethodImpl(Inline)]
             get => data.Length * CellCapacity;
@@ -497,7 +497,7 @@ namespace Z0
 
             var sameSeg = first.Segment == last.Segment;
             var wantedCount = last - first;
-            var firstCount = sameSeg ? wantedCount : (int)CellCapacity - first.Offset;
+            var firstCount = sameSeg ? wantedCount : CellCapacity - first.Offset;
             var lastCount = wantedCount - firstCount;
             
             if(wantedCount > CellCapacity)

@@ -8,9 +8,17 @@ namespace Z0.Logix
     
     using static zfunc;
 
-
+    /// <summary>
+    /// Classifies unary bitwise operators
+    /// </summary>
+    [Flags]
     public enum UnaryBitwiseOpKind : uint
     {
+        /// <summary>
+        /// The unary operator that always returns false
+        /// </summary>
+        False = UnaryLogicOpKind.False,
+
         /// <summary>
         /// Logial NOT
         /// </summary>
@@ -20,6 +28,11 @@ namespace Z0.Logix
         /// The identity operator
         /// </summary>
         Identity = UnaryLogicOpKind.Identity,
+
+        /// <summary>
+        /// The unary operator that always returns true
+        /// </summary>
+        True = UnaryLogicOpKind.True,
 
         /// <summary>
         /// Two's complement negation

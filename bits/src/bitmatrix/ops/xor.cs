@@ -60,9 +60,9 @@ namespace Z0
             var dst = BitMatrix32.Alloc();
             for(var i=0; i< A.RowCount; i += rowstep)
             {
-                var x1 = vload256(ref A[i]);
-                var x2 = vload256(ref B[i]);
-                dinx.vxor(in x1,in x2).StoreTo(ref dst[i]);
+                var x1 = dinx.vloadu(in A[i], out Vector256<uint> _);
+                var x2 = dinx.vloadu(in B[i], out Vector256<uint> _);
+                dinx.vxor(x1,x2).StoreTo(ref dst[i]);
             }
             return dst;
         }
@@ -77,7 +77,7 @@ namespace Z0
         {
             const int rowstep = 8;
             for(var i=0; i< A.RowCount; i += rowstep)
-                dinx.vxor(Vec256.Load(ref A[i]), Vec256.Load(ref B[i])).StoreTo(ref C[i]);
+                dinx.vxor(dinx.vloadu(in A[i], out Vector256<uint> _), dinx.vloadu(in B[i], out Vector256<uint> _)).StoreTo(ref C[i]);
             return ref C;
         }
 
@@ -86,8 +86,8 @@ namespace Z0
             const int rowstep = 4;
             for(var i=0; i< A.RowCount; i += rowstep)
             {
-                A.GetCells(i, out Vec256<ulong> vLhs);
-                B.GetCells(i, out Vec256<ulong> vRhs);
+                A.Load(i, out Vector256<ulong> vLhs);
+                B.Load(i, out Vector256<ulong> vRhs);
                 dinx.vxor(vLhs,vRhs).StoreTo(ref A[i]);
             }
             return ref A;

@@ -18,128 +18,128 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
-        public static Vec128<sbyte> vnegate(in Vec128<sbyte> src)
-            =>  vsub(Vec128<sbyte>.Zero, src);
+        public static Vector128<sbyte> vnegate(Vector128<sbyte> src)
+            =>  vsub(default, src);
 
         /// <summary>
         /// Negates the source vector (Two's complement)
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
-        public static Vec128<byte> vnegate(in Vec128<byte> src)
-            =>  vadd(BitUtil.flip(src), Vec128.Ones<byte>());
+        public static Vector128<byte> vnegate(Vector128<byte> src)
+            =>  vsub(vnot(src), ginx.vones<byte>(n128));
 
         /// <summary>
         /// Negates the source vector
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
-        public static Vec128<short> vnegate(in Vec128<short> src)
-            =>  vsub(Vec128<short>.Zero, src);
+        public static Vector128<short> vnegate(Vector128<short> src)
+            =>  vsub(default, src);
 
         /// <summary>
         /// Negates the source vector (Two's complement)
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
-        public static Vec128<ushort> vnegate(in Vec128<ushort> src)
-            =>  vadd(BitUtil.flip(src), Vec128.Ones<ushort>());
+        public static Vector128<ushort> vnegate(Vector128<ushort> src)
+            =>  vsub(vnot(src), ginx.vones<ushort>(n128));
 
         /// <summary>
         /// Negates the source vector
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
-        public static Vec128<int> vnegate(in Vec128<int> src)
-            =>  vsub(Vec128<int>.Zero, src);
+        public static Vector128<int> vnegate(Vector128<int> src)
+            =>  vsub(default, src);
 
         /// <summary>
         /// Negates the source vector (Two's complement)
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
-        public static Vec128<uint> vnegate(in Vec128<uint> src)
-            =>  vadd(BitUtil.flip(src), Vec128.Ones<uint>());
+        public static Vector128<uint> vnegate(Vector128<uint> src)
+            =>  vsub(vnot(src), ginx.vones<uint>(n128));
 
         /// <summary>
         /// Negates the source vector
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
-        public static Vec128<long> vnegate(in Vec128<long> src)
-            =>  vsub(Vec128<long>.Zero, src);
+        public static Vector128<long> vnegate(Vector128<long> src)
+            =>  vsub(default, src);
 
         /// <summary>
         /// Negates the source vector (Two's complement)
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
-        public static Vec128<ulong> vnegate(in Vec128<ulong> src)
-            =>  vadd(BitUtil.flip(src), Vec128.Ones<ulong>());
+        public static Vector128<ulong> vnegate(Vector128<ulong> src)
+            =>  vsub(vnot(src), ginx.vones<ulong>(n128));
 
         /// <summary>
         /// Negates the source vector
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<sbyte> vnegate(in Vec256<sbyte> src)
-            =>  vsub(Vec256<sbyte>.Zero, src);
+        public static Vector256<sbyte> vnegate(Vector256<sbyte> src)
+            =>  vsub(default, src);
 
         /// <summary>
         /// Negates the source vector (Two's complement)
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<byte> vnegate(in Vec256<byte> src)
-            =>  vadd(BitUtil.flip(src), Vec256.Ones<byte>());
+        public static Vector256<byte> vnegate(Vector256<byte> src)
+            =>  vsub(vnot(src), ginx.vones<byte>(n256));
 
         /// <summary>
         /// Negates the source vector
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<short> vnegate(in Vec256<short> src)
-            =>  vsub(Vec256<short>.Zero, src);
+        public static Vector256<short> vnegate(Vector256<short> src)
+            =>  vsub(default, src);
 
         /// <summary>
         /// Negates the source vector (Two's complement)
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<ushort> vnegate(in Vec256<ushort> src)
-            =>  vadd(BitUtil.flip(src), Vec256.Ones<ushort>());
+        public static Vector256<ushort> vnegate(Vector256<ushort> src)
+            =>  vsub(vnot(src), ginx.vones<ushort>(n256));
 
         /// <summary>
         /// Negates the source vector
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<int> vnegate(in Vec256<int> src)
-            =>  vsub(Vec256<int>.Zero, src);
+        public static Vector256<int> vnegate(Vector256<int> src)
+            =>  vsub(default, src);
 
         /// <summary>
         /// Negates the source vector (Two's complement)
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<uint> vnegate(in Vec256<uint> src)
-            =>  vadd(BitUtil.flip(src), Vec256.Ones<uint>());
+        public static Vector256<uint> vnegate(Vector256<uint> src)
+            =>  vsub(vnot(src), ginx.vones<uint>(n256));
 
         /// <summary>
         /// Negates the source vector
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<long> vnegate(in Vec256<long> src)
-            =>  vsub(Vec256<long>.Zero, src);
+        public static Vector256<long> vnegate(Vector256<long> src)
+            =>  vsub(default, src);
 
         /// <summary>
         /// Negates the source vector (Two's complement)
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<ulong> vnegate(in Vec256<ulong> src)
-            =>  vadd(BitUtil.flip(src), Vec256.Ones<ulong>());
+        public static Vector256<ulong> vnegate(Vector256<ulong> src)
+            =>  vsub(vnot(src), ginx.vones<ulong>(n256));
 
 
     }

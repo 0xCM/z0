@@ -15,39 +15,7 @@ namespace Z0
 
     partial class ginx
     {
-        [MethodImpl(Inline)]
-        public static Vec128<T> vadd<T>(in Vec128<T> x, in Vec128<T> y)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(byte) 
-            || typeof(T) == typeof(ushort) 
-            || typeof(T) == typeof(uint) 
-            || typeof(T) == typeof(ulong))
-                return vadd_u(in x,in y);
-            else if(typeof(T) == typeof(sbyte) 
-            || typeof(T) == typeof(short) 
-            || typeof(T) == typeof(int) 
-            || typeof(T) == typeof(long))
-                return vadd_i(x,y);
-            else return gfpv.vadd(in x,in y);
-        }
 
-        [MethodImpl(Inline)]
-        public static Vec256<T> vadd<T>(in Vec256<T> x, in Vec256<T> y)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(byte) 
-            || typeof(T) == typeof(ushort) 
-            || typeof(T) == typeof(uint) 
-            || typeof(T) == typeof(ulong))
-                return vadd_u(in x,in y);
-            else if(typeof(T) == typeof(sbyte) 
-            || typeof(T) == typeof(short) 
-            || typeof(T) == typeof(int) 
-            || typeof(T) == typeof(long))
-                return vadd_i(x,y);
-            else return gfpv.vadd(in x,in y);
-        }
 
         [MethodImpl(Inline)]
         public static Vector128<T> vadd<T>(Vector128<T> x, Vector128<T> y)
@@ -80,67 +48,10 @@ namespace Z0
             || typeof(T) == typeof(int) 
             || typeof(T) == typeof(long))
                 return vadd_i(x,y);
-            else return gfpv.vadd(x,y);
-        }
-
-
-        [MethodImpl(Inline)]
-        static Vec128<T> vadd_i<T>(in Vec128<T> x, in Vec128<T> y)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(sbyte))
-                 return generic<T>(dinx.vadd(in int8(in x), in int8(in y)));
-            else if(typeof(T) == typeof(short))
-                 return generic<T>(dinx.vadd(in int16(in x), in int16(in y)));
-            else if(typeof(T) == typeof(int))
-                 return generic<T>(dinx.vadd(in int32(in x), in int32(in y)));
-            else
-                 return generic<T>(dinx.vadd(in int64(in x), in int64(in y)));
-        }
-
-        [MethodImpl(Inline)]
-        static Vec128<T> vadd_u<T>(in Vec128<T> x, in Vec128<T> y)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(byte))
-                return generic<T>(dinx.vadd(in uint8(in x), in uint8(in y)));
-            else if(typeof(T) == typeof(ushort))
-                return generic<T>(dinx.vadd(in uint16(in x), in uint16(in y)));
-            else if(typeof(T) == typeof(uint))
-                return generic<T>(dinx.vadd(in uint32(x), in uint32(in y)));
             else 
-                return generic<T>(dinx.vadd(in uint64(in x), in uint64(in y)));
+                return gfpv.vadd(x,y);
         }
 
-
-        [MethodImpl(Inline)]
-        static Vec256<T> vadd_i<T>(in Vec256<T> x, in Vec256<T> y)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(sbyte))
-                 return generic<T>(dinx.vadd(in int8(in x), in int8(in y)));
-            else if(typeof(T) == typeof(short))
-                 return generic<T>(dinx.vadd(in int16(in x), in int16(in y)));
-            else if(typeof(T) == typeof(int))
-                 return generic<T>(dinx.vadd(in int32(in x), in int32(in y)));
-            else
-                 return generic<T>(dinx.vadd(in int64(in x), in int64(in y)));
-        }    
-
-
-        [MethodImpl(Inline)]
-        static Vec256<T> vadd_u<T>(in Vec256<T> x, in Vec256<T> y)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(byte))
-                return generic<T>(dinx.vadd(in uint8(in x), in uint8(in y)));
-            else if(typeof(T) == typeof(ushort))
-                return generic<T>(dinx.vadd(in uint16(in x), in uint16(in y)));
-            else if(typeof(T) == typeof(uint))
-                return generic<T>(dinx.vadd(in uint32(x), in uint32(in y)));
-            else 
-                return generic<T>(dinx.vadd(in uint64(in x), in uint64(in y)));
-        }    
 
         [MethodImpl(Inline)]
         static Vector128<T> vadd_i<T>(Vector128<T> x, Vector128<T> y)
@@ -199,7 +110,6 @@ namespace Z0
             else 
                 return generic<T>(dinx.vadd(uint64(x), uint64(y)));
         }    
-
 
     }
 }

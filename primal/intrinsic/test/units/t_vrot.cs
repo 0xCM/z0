@@ -178,10 +178,11 @@ namespace Z0
 
         public void vrotv_128x64_check()
         {
+            var n = n128;
             for(var sample=0; sample < SampleSize; sample++)
             {
-                var src = Random.CpuVec128<ulong>();
-                var offsets = Random.CpuVec128(closed(2ul, 30ul));
+                var src = Random.CpuVector<ulong>(n);
+                var offsets = Random.CpuVector(n,closed(2ul, 30ul));
                 
                 var vL = dinx.vrotl(src,offsets);
                 var vRL = dinx.rotr(vL,offsets);
@@ -192,23 +193,31 @@ namespace Z0
                 Claim.eq(src,vLR);
 
 
+                var srcSpan = src.ToSpan();
+                var offSpan = offsets.ToSpan();
+                var vRSpan = vR.ToSpan();
+                var vLSpan = vL.ToSpan();
+                var vRLSpan = vRL.ToSpan();
+                var vLRSpan = vLR.ToSpan();
+
                 for(var i=0; i<src.Length(); i++)
                 {
-                    Claim.eq(Bits.rotl(src[i], offsets[i]), vL[i]);
-                    Claim.eq(Bits.rotr(vL[i], offsets[i]), vRL[i]);
+                    Claim.eq(Bits.rotl(srcSpan[i], offSpan[i]), vLSpan[i]);
+                    Claim.eq(Bits.rotr(vLSpan[i], offSpan[i]), vRLSpan[i]);
                     
-                    Claim.eq(Bits.rotr(src[i], offsets[i]), vR[i]);
-                    Claim.eq(Bits.rotl(vR[i], offsets[i]), vLR[i]);
+                    Claim.eq(Bits.rotr(srcSpan[i], offSpan[i]), vRSpan[i]);
+                    Claim.eq(Bits.rotl(vRSpan[i], offSpan[i]), vLRSpan[i]);
                 }        
             }
         }
 
         public void vrotv_256x64_check()
         {
+            var n = n256;
             for(var sample=0; sample < SampleSize; sample++)
             {
-                var src = Random.CpuVec256<ulong>();
-                var offsets = Random.CpuVec256(closed(2ul, 30ul));
+                var src = Random.CpuVector<ulong>(n);
+                var offsets = Random.CpuVector(n,closed(2ul, 30ul));
                 
                 var vL = dinx.vrotl(src,offsets);
                 var vRL = dinx.rotr(vL,offsets);
@@ -218,28 +227,36 @@ namespace Z0
                 var vLR = dinx.vrotl(vR,offsets);
                 Claim.eq(src,vLR);
 
+
+                var srcSpan = src.ToSpan();
+                var offSpan = offsets.ToSpan();
+                var vRSpan = vR.ToSpan();
+                var vLSpan = vL.ToSpan();
+                var vRLSpan = vRL.ToSpan();
+                var vLRSpan = vLR.ToSpan();
+
                 for(var i=0; i<src.Length(); i++)
                 {
-                    Claim.eq(Bits.rotl(src[i], offsets[i]), vL[i]);
-                    Claim.eq(Bits.rotr(vL[i], offsets[i]), vRL[i]);
+                    Claim.eq(Bits.rotl(srcSpan[i], offSpan[i]), vLSpan[i]);
+                    Claim.eq(Bits.rotr(vLSpan[i], offSpan[i]), vRLSpan[i]);
                     
-                    Claim.eq(Bits.rotr(src[i], offsets[i]), vR[i]);
-                    Claim.eq(Bits.rotl(vR[i], offsets[i]), vLR[i]);
+                    Claim.eq(Bits.rotr(srcSpan[i], offSpan[i]), vRSpan[i]);
+                    Claim.eq(Bits.rotl(vRSpan[i], offSpan[i]), vLRSpan[i]);
                 }        
             }
         }
 
         void rot_256x8_check()
         {
-            static void rotl_check(Vec256<byte> src, byte offset, Vec256<byte> computed)        
+            static void rotl_check(Vector256<byte> src, byte offset, Vector256<byte> computed)        
                 => Claim.eq(BitRot.rotl(src.ToSpan(), offset), computed.ToSpan());
 
-            static void rotr_check(Vec256<byte> src, byte offset, Vec256<byte> computed)        
+            static void rotr_check(Vector256<byte> src, byte offset, Vector256<byte> computed)        
                 => Claim.eq(BitRot.rotr(src.ToSpan(), offset), computed.ToSpan());
 
             for(var i=0; i< SampleSize; i++)
             {
-                var src = Random.CpuVec256<byte>();
+                var src = Random.CpuVector256<byte>();
                 var offset = Random.Next(closed<byte>(2, 6));
                 
                 var vL = dinx.vrotl(src,offset);                
@@ -262,15 +279,15 @@ namespace Z0
 
         void rot_256x16u()
         {
-            static void rotl_check(Vec256<ushort> src, ushort offset, Vec256<ushort> computed)        
+            static void rotl_check(Vector256<ushort> src, ushort offset, Vector256<ushort> computed)        
                 => Claim.eq(BitRot.rotl(src.ToSpan(), offset), computed.ToSpan());
 
-            static void rotr_check(Vec256<ushort> src, ushort offset, Vec256<ushort> computed)        
+            static void rotr_check(Vector256<ushort> src, ushort offset, Vector256<ushort> computed)        
                 => Claim.eq(BitRot.rotr(src.ToSpan(), offset), computed.ToSpan());
 
             for(var i=0; i< SampleSize; i++)
             {
-                var src = Random.CpuVec256<ushort>();
+                var src = Random.CpuVector256<ushort>();
                 var offset = Random.Next(closed<byte>(2, 14));
                 
                 var vL = dinx.vrotl(src,offset);
@@ -290,15 +307,15 @@ namespace Z0
 
         void rot_256x32u()
         {
-            static void rotl_check(Vec256<uint> src, uint offset, Vec256<uint> computed)        
+            static void rotl_check(Vector256<uint> src, uint offset, Vector256<uint> computed)        
                 => Claim.eq(BitRot.rotl(src.ToSpan(), offset), computed.ToSpan());
 
-            static void rotr_check(Vec256<uint> src, uint offset, Vec256<uint> computed)        
+            static void rotr_check(Vector256<uint> src, uint offset, Vector256<uint> computed)        
                 => Claim.eq(BitRot.rotr(src.ToSpan(), offset), computed.ToSpan());
 
             for(var i=0; i< SampleSize; i++)
             {
-                var src = Random.CpuVec256<uint>();
+                var src = Random.CpuVector256<uint>();
                 var offset = Random.Next(closed<byte>(2, 14));
                 
                 var vL = dinx.vrotl(src,offset);
@@ -318,15 +335,15 @@ namespace Z0
 
         void rot_256x64u()
         {
-            static void rotl_check(Vec256<ulong> src, ulong offset, Vec256<ulong> computed)        
+            static void rotl_check(Vec256<ulong> src, ulong offset, Vector256<ulong> computed)        
                 => Claim.eq(BitRot.rotl(src.ToSpan(), offset), computed.ToSpan());
 
-            static void rotr_check(Vec256<ulong> src, ulong offset, Vec256<ulong> computed)        
+            static void rotr_check(Vec256<ulong> src, ulong offset, Vector256<ulong> computed)        
                 => Claim.eq(BitRot.rotr(src.ToSpan(), offset), computed.ToSpan());
 
             for(var i=0; i< SampleSize; i++)
             {
-                var src = Random.CpuVec256<ulong>();
+                var src = Random.CpuVector256<ulong>();
                 var offset = Random.Next(closed<byte>(2, 14));
                 
                 var vL = dinx.vrotl(src,offset);
@@ -349,38 +366,39 @@ namespace Z0
         {
             for(var sample=0; sample < SampleSize; sample++)
             {
-                var src = Random.CpuVec256<uint>();
-                var offsets = Random.CpuVec256(closed(2u, 30u));
-                
-                var vL = dinx.vrotl(src,offsets);
-                var vRL = dinx.rotr(vL,offsets);
-                Claim.eq(src,vRL);
-                
-                var vR = dinx.rotr(src,offsets);
-                var vLR = dinx.vrotl(vR,offsets);
-                Claim.eq(src,vLR);
+                var vSrc = Random.CpuVector256<uint>();
+                var src = vSrc.ToSpan();
 
-                for(var i=0; i<src.Length(); i++)
+                var vOffsets = Random.CpuVector256(closed(2u, 30u));
+                var offsets = vOffsets.ToSpan();
+                
+                var vL = dinx.vrotl(vSrc,vOffsets);
+                var left = vL.ToSpan();
+                
+                var vRL = dinx.rotr(vL,vOffsets);
+                var lrl = vRL.ToSpan();
+                
+                Claim.eq(vSrc,vRL);
+                
+                var vR = dinx.rotr(vSrc,vOffsets);
+                var right = vR.ToSpan();
+
+                var vLR = dinx.vrotl(vR,vOffsets);
+                var rlr = vLR.ToSpan();
+                Claim.eq(vSrc,vLR);
+                
+
+                for(var i=0; i<vSrc.Length(); i++)
                 {
-                    Claim.eq(Bits.rotl(src[i], offsets[i]), vL[i]);
-                    Claim.eq(Bits.rotr(vL[i], offsets[i]), vRL[i]);
+                    Claim.eq(Bits.rotl(src[i], offsets[i]), left[i]);
+                    Claim.eq(Bits.rotr(left[i], offsets[i]), lrl[i]);
                     
-                    Claim.eq(Bits.rotr(src[i], offsets[i]), vR[i]);
-                    Claim.eq(Bits.rotl(vR[i], offsets[i]), vLR[i]);
+                    Claim.eq(Bits.rotr(src[i], offsets[i]), right[i]);
+                    Claim.eq(Bits.rotl(right[i], offsets[i]), rlr[i]);
                 }        
             }
         }
 
-        void TraceRot(Vec256<uint> src, Vec256<uint> offsets)
-        {
-            var vL = dinx.vrotl(src, offsets);
-            var vX = dinx.rotr(vL, offsets);
-
-            Trace("src", src.FormatHex(), 20);
-            Trace("offsets", offsets.FormatHex(), 20);                
-            Trace("rotl(src)", vL.FormatHex(), 20);
-            Trace("rotr(rotl(src))", vX.FormatHex(), 20);
-        }
 
 
         void vrotl_128_check<T>()

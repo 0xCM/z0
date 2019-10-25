@@ -8,6 +8,7 @@ namespace Z0
     using System.Linq;
     using System.Reflection;
     using System.Runtime.CompilerServices;
+    using System.Runtime.Intrinsics;
 
     using static zfunc;
 
@@ -190,11 +191,15 @@ namespace Z0
 
             for(var i=0; i< SampleSize; i++)
             {
-                var src = Random.CpuVec128<T>();
+                var src = Random.CpuVector128<T>();
                 var offset = Random.Next<byte>(2,7);
                 var dst = ginx.vsll(src,offset);
                 for(var j=0; j<dst.Length(); j++)
-                    Claim.eq(dst[j], gmath.sll(src[j], offset));
+                {
+                    var x = ginx.vextract(dst, (byte)j);
+                    var y = ginx.vextract(src, (byte)j);
+                    Claim.eq(x, gmath.sll(y,offset));
+                }
             }
 
         }
@@ -205,11 +210,20 @@ namespace Z0
 
             for(var i=0; i< SampleSize; i++)
             {
-                var src = Random.CpuVec256<T>();
+                var src = Random.CpuVector256<T>();
                 var offset = Random.Next<byte>(2,7);
                 var dst = ginx.vsll(src,offset);
                 for(var j=0; j<dst.Length(); j++)
-                    Claim.eq(dst[j], gmath.sll(src[j], offset));
+                {
+                    var x = ginx.vextract(ginx.vlo(dst), (byte)j);
+                    var y = ginx.vextract(ginx.vlo(src), (byte)j);
+                    Claim.eq(x, gmath.sll(y,offset));
+
+                    x = ginx.vextract(ginx.vhi(dst), (byte)j);
+                    y = ginx.vextract(ginx.vhi(src), (byte)j);
+                    Claim.eq(x, gmath.sll(y,offset));
+
+                }
             }
         }
 
@@ -219,11 +233,15 @@ namespace Z0
 
             for(var i=0; i< SampleSize; i++)
             {
-                var src = Random.CpuVec128<T>();
+                var src = Random.CpuVector128<T>();
                 var offset = Random.Next<byte>(2,7);
                 var dst = ginx.vsrl(src,offset);
                 for(var j=0; j<dst.Length(); j++)
-                    Claim.eq(dst[j], gbits.srl(src[j], offset));
+                {
+                    var x = ginx.vextract(dst, (byte)j);
+                    var y = ginx.vextract(src, (byte)j);
+                    Claim.eq(x, gbits.srl(y,offset));
+                }
             }
         }
 
@@ -233,11 +251,20 @@ namespace Z0
 
             for(var i=0; i< SampleSize; i++)
             {
-                var src = Random.CpuVec256<T>();
+                var src = Random.CpuVector256<T>();
                 var offset = Random.Next<byte>(2,7);
                 var dst = ginx.vsrl(src,offset);
                 for(var j=0; j<dst.Length(); j++)
-                    Claim.eq(dst[j], gbits.srl(src[j], offset));
+                {
+                    var x = ginx.vextract(ginx.vlo(dst), (byte)j);
+                    var y = ginx.vextract(ginx.vlo(src), (byte)j);
+                    Claim.eq(x, gbits.srl(y,offset));
+
+                    x = ginx.vextract(ginx.vhi(dst), (byte)j);
+                    y = ginx.vextract(ginx.vhi(src), (byte)j);
+                    Claim.eq(x, gbits.srl(y,offset));
+
+                }
             }
 
         }
@@ -246,7 +273,7 @@ namespace Z0
             where T : unmanaged
         {
             var opcount = RoundCount * CycleCount;
-            var last = Vec128<T>.Zero;
+            var last = default(Vector128<T>);
             var sw = stopwatch(false);
             var bitlen = bitsize<T>();
             var opname = $"sll_128x{bitlen}u";
@@ -254,7 +281,7 @@ namespace Z0
             for(var i=0; i<opcount; i++)
             {
                 var offset = Random.Next<byte>(2, (byte)(bitlen - 1));
-                var x = Random.CpuVec128<T>();
+                var x = Random.CpuVector128<T>();
                 sw.Start();
                 last = ginx.vsll(x,offset);
                 sw.Stop();
@@ -276,7 +303,7 @@ namespace Z0
             for(var i=0; i<opcount; i++)
             {
                 var offset = Random.Next<byte>(2, (byte)(bitlen - 1));
-                var x = Random.CpuVec256<T>();
+                var x = Random.CpuVector256<T>();
                 sw.Start();
                 last = ginx.vsll(x,offset);
                 sw.Stop();
@@ -297,7 +324,7 @@ namespace Z0
             for(var i=0; i<opcount; i++)
             {
                 var offset = Random.Next<byte>(2, (byte)(bitlen - 1));
-                var x = Random.CpuVec128<T>();
+                var x = Random.CpuVector128<T>();
                 sw.Start();
                 last = ginx.vsrl(x,offset);
                 sw.Stop();
@@ -320,7 +347,7 @@ namespace Z0
             for(var i=0; i<opcount; i++)
             {
                 var offset = Random.Next<byte>(2, (byte)(bitlen - 1));
-                var x = Random.CpuVec256<T>();
+                var x = Random.CpuVector256<T>();
                 sw.Start();
                 last = ginx.vsrl(x,offset);
                 sw.Stop();
@@ -556,7 +583,7 @@ namespace Z0
 
 
         //Intel code sample from Carryless multiplication document
-        public static Vec128<ulong> gfmul(Vec128<ulong> a, Vec128<ulong> b)
+        public static Vector128<ulong> gfmul(Vector128<ulong> a, Vector128<ulong> b)
         {
 
             var tmp3 = dinx.clmul(a, b, ClMulMask.X00);            

@@ -11,6 +11,9 @@ namespace Z0
 
     using static zfunc;    
 
+    public delegate bool PrimalPredicate<T>(T a, T b)
+        where T : unmanaged;
+
     public static class PrimalDelegates
     {        
         [MethodImpl(Inline)]
@@ -55,27 +58,27 @@ namespace Z0
                 => Dec<T>.Op;
 
         [MethodImpl(Inline)]
-        public static BinaryPred<T> eq<T>()
+        public static PrimalPredicate<T> eq<T>()
             where T : unmanaged
                 => Eq<T>.Op;
 
         [MethodImpl(Inline)]
-        public static BinaryPred<T> gt<T>()
+        public static PrimalPredicate<T> gt<T>()
             where T : unmanaged
                 => Gt<T>.Op;
 
         [MethodImpl(Inline)]
-        public static BinaryPred<T> gteq<T>()
+        public static PrimalPredicate<T> gteq<T>()
             where T : unmanaged
                 => GtEq<T>.Op;
 
         [MethodImpl(Inline)]
-        public static BinaryPred<T> lt<T>()
+        public static PrimalPredicate<T> lt<T>()
             where T : unmanaged
                 => Lt<T>.Op;
 
         [MethodImpl(Inline)]
-        public static BinaryPred<T> lteq<T>()
+        public static PrimalPredicate<T> lteq<T>()
             where T : unmanaged
                 => LtEq<T>.Op;
                         
@@ -203,31 +206,31 @@ namespace Z0
         readonly struct Eq<T>
             where T : unmanaged
         {
-            public static readonly BinaryPred<T> Op = gmath.eq<T>;
+            public static readonly PrimalPredicate<T> Op = gmath.eq<T>;
         }
 
        readonly struct Gt<T>
             where T : unmanaged
         {
-            public static readonly BinaryPred<T> Op = gmath.gt<T>;
+            public static readonly PrimalPredicate<T> Op = gmath.gt<T>;
         }
 
        readonly struct Lt<T>
             where T : unmanaged
         {
-            public static readonly BinaryPred<T> Op = gmath.lt<T>;
+            public static readonly PrimalPredicate<T> Op = gmath.lt<T>;
         }    
 
        readonly struct GtEq<T>
             where T : unmanaged
         {
-            public static readonly BinaryPred<T> Op = gmath.gteq<T>;
+            public static readonly PrimalPredicate<T> Op = gmath.gteq<T>;
         }
 
        readonly struct LtEq<T>
             where T : unmanaged
         {
-            public static readonly BinaryPred<T> Op = gmath.lteq<T>;
+            public static readonly PrimalPredicate<T> Op = gmath.lteq<T>;
         }    
    }
 

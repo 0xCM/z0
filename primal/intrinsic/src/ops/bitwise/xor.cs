@@ -25,8 +25,8 @@ namespace Z0
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
         [MethodImpl(Inline)]
-        public static Vec128<sbyte> vxor(in Vec128<sbyte> x, in Vec128<sbyte> y)
-            => Xor(x.xmm, y.xmm);
+        public static Vector128<sbyte> vxor(Vector128<sbyte> x, Vector128<sbyte> y)
+            => Xor(x, y);
 
         /// <summary>
         /// Computes the bitwise XOR between operands
@@ -34,8 +34,8 @@ namespace Z0
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
         [MethodImpl(Inline)]
-        public static Vec128<byte> vxor(in Vec128<byte> x, in Vec128<byte> y)
-            => Xor(x.xmm, y.xmm);
+        public static Vector128<byte> vxor(Vector128<byte> x, Vector128<byte> y)
+            => Xor(x, y);
 
         /// <summary>
         /// Computes the bitwise XOR between operands
@@ -43,8 +43,8 @@ namespace Z0
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
         [MethodImpl(Inline)]
-        public static Vec128<short> vxor(in Vec128<short> x, in Vec128<short> y)
-            => Xor(x.xmm, y.xmm);
+        public static Vector128<short> vxor(Vector128<short> x, Vector128<short> y)
+            => Xor(x, y);
 
 
         /// <summary>
@@ -53,8 +53,8 @@ namespace Z0
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
         [MethodImpl(Inline)]
-        public static Vec128<ushort> vxor(in Vec128<ushort> x, in Vec128<ushort> y)
-            => Xor(x.xmm, y.xmm);
+        public static Vector128<ushort> vxor(Vector128<ushort> x, Vector128<ushort> y)
+            => Xor(x, y);
 
         /// <summary>
         /// Computes the bitwise XOR between operands
@@ -62,8 +62,8 @@ namespace Z0
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
         [MethodImpl(Inline)]
-        public static Vec128<int> vxor(in Vec128<int> x, in Vec128<int> y)
-            => Xor(x.xmm, y.xmm);
+        public static Vector128<int> vxor(Vector128<int> x, Vector128<int> y)
+            => Xor(x, y);
 
         /// <summary>
         /// Computes the bitwise XOR between operands
@@ -71,8 +71,8 @@ namespace Z0
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
         [MethodImpl(Inline)]
-        public static Vec128<uint> vxor(in Vec128<uint> x, in Vec128<uint> y)
-            => Xor(x.xmm, y.xmm);
+        public static Vector128<uint> vxor(Vector128<uint> x, Vector128<uint> y)
+            => Xor(x, y);
 
         /// <summary>
         /// Computes the bitwise XOR between operands
@@ -80,8 +80,8 @@ namespace Z0
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
         [MethodImpl(Inline)]
-        public static Vec128<long> vxor(in Vec128<long> x, in Vec128<long> y)
-            => Xor(x.xmm, y.xmm);
+        public static Vector128<long> vxor(Vector128<long> x, Vector128<long> y)
+            => Xor(x, y);
 
         /// <summary>
         /// Computes the bitwise XOR between operands
@@ -89,8 +89,9 @@ namespace Z0
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
         [MethodImpl(Inline)]
-        public static Vec128<ulong> vxor(in Vec128<ulong> x, in Vec128<ulong> y)
-            => Xor(x.xmm, y.xmm);
+        public static Vector128<ulong> vxor(Vector128<ulong> x, Vector128<ulong> y)
+            => Xor(x, y);
+
 
         /// <summary>
         /// Computes the bitwise XOR between operands
@@ -98,8 +99,8 @@ namespace Z0
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
         [MethodImpl(Inline)]
-        public static Vec256<byte> vxor(in Vec256<byte> x, in Vec256<byte> y)
-            => Xor(x.ymm, y.ymm);
+        public static Vector256<byte> vxor(Vector256<byte> x, Vector256<byte> y)
+            => Xor(x, y);
 
         /// <summary>
         /// Computes the bitwise XOR between operands
@@ -107,8 +108,8 @@ namespace Z0
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
         [MethodImpl(Inline)]
-        public static Vec256<short> vxor(in Vec256<short> x, in Vec256<short> y)
-            => Xor(x.ymm, y.ymm);
+        public static Vector256<short> vxor(Vector256<short> x, Vector256<short> y)
+            => Xor(x, y);
 
         /// <summary>
         /// Computes the bitwise XOR between operands
@@ -116,8 +117,8 @@ namespace Z0
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
         [MethodImpl(Inline)]
-        public static Vec256<sbyte> vxor(in Vec256<sbyte> x, in Vec256<sbyte> y)
-            => Xor(x.ymm, y.ymm);
+        public static Vector256<sbyte> vxor(Vector256<sbyte> x, Vector256<sbyte> y)
+            => Xor(x, y);
 
         /// <summary>
         /// Computes the bitwise XOR between operands
@@ -125,8 +126,8 @@ namespace Z0
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
         [MethodImpl(Inline)]
-        public static Vec256<ushort> vxor(in Vec256<ushort> x, in Vec256<ushort> y)
-            => Xor(x.ymm, y.ymm);
+        public static Vector256<ushort> vxor(Vector256<ushort> x, Vector256<ushort> y)
+            => Xor(x, y);
 
         /// <summary>
         /// Computes the bitwise XOR between operands
@@ -134,8 +135,8 @@ namespace Z0
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
         [MethodImpl(Inline)]
-        public static Vec256<int> vxor(in Vec256<int> x, in Vec256<int> y)
-            => Xor(x.ymm, y.ymm);
+        public static Vector256<int> vxor(Vector256<int> x, Vector256<int> y)
+            => Xor(x, y);
 
         /// <summary>
         /// Computes the bitwise XOR between operands
@@ -143,8 +144,8 @@ namespace Z0
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
         [MethodImpl(Inline)]
-        public static Vec256<uint> vxor(in Vec256<uint> x, in Vec256<uint> y)
-            => Xor(x.ymm, y.ymm);
+        public static Vector256<uint> vxor(Vector256<uint> x, Vector256<uint> y)
+            => Xor(x, y);
 
         /// <summary>
         /// Computes the bitwise XOR between operands
@@ -152,8 +153,8 @@ namespace Z0
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
         [MethodImpl(Inline)]
-        public static Vec256<long> vxor(in Vec256<long> x, in Vec256<long> y)
-            => Xor(x.ymm, y.ymm);
+        public static Vector256<long> vxor(Vector256<long> x, Vector256<long> y)
+            => Xor(x, y);
 
         /// <summary>
         /// Computes the bitwise XOR between operands
@@ -161,8 +162,8 @@ namespace Z0
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
         [MethodImpl(Inline)]
-        public static Vec256<ulong> vxor(in Vec256<ulong> x, in Vec256<ulong> y)
-            => Xor(x.ymm, y.ymm);
+        public static Vector256<ulong> vxor(Vector256<ulong> x, Vector256<ulong> y)
+            => Xor(x, y);
 
 
    }

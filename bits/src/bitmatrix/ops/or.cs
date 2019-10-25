@@ -16,20 +16,6 @@ namespace Z0
 
     partial class BitMatrix
     {
-        public static RowBits<T> or<T>(RowBits<T> A, RowBits<T> B, RowBits<T> C)
-            where T : unmanaged
-        {
-            var rc = rowdim(A,B,C);
-            for(var i=0; i<rc; i++)
-                C[i] = bitvector.or(A[i],B[i]);
-            return C;
-        }
-
-        [MethodImpl(Inline)]
-        public static RowBits<T> or<T>(RowBits<T> A, RowBits<T> B)
-            where T : unmanaged
-                => or(A,B, A.Replicate(true));
-
         /// <summary>
         /// Computes the logical OR between two primal bitmatrices of order 8
         /// </summary>

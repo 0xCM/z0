@@ -10,21 +10,24 @@ namespace Z0.Logix
     
     using static zfunc;
 
+    /// <summary>
+    /// Classifies typed expressions
+    /// </summary>
     public enum TypedExprKind : uint
     {
         
         /// <summary>
-        /// Specifies a variable classification
+        /// Classifies a variable
         /// </summary>
         Variable = LogicExprKind.Variable,
 
         /// <summary>
-        /// Identifies expression that depends on one or more variables
+        /// Classifies an expression that depends on one or more variables
         /// </summary>
         Varied = LogicExprKind.Varied,
 
         /// <summary>
-        /// Identifies a literal expression
+        /// Classifies a literal expression
         /// </summary>
         Literal = LogicExprKind.Literal,
 
@@ -34,22 +37,22 @@ namespace Z0.Logix
         Equality = LogicExprKind.Equality,
 
         /// <summary>
-        /// Identifies the unary operator classification
+        /// Classifies a unary operator
         /// </summary>
         UnaryOperator = LogicExprKind.UnaryOperator,
 
         /// <summary>
-        /// Identifies the binary operator classification
+        /// Classifies a binary operator
         /// </summary>
         BinaryOperator = LogicExprKind.BinaryOperator,
 
         /// <summary>
-        /// Identifies the ternary operator classification
+        /// Classifies a ternary operator
         /// </summary>
         TernaryOperator = LogicExprKind.TernaryOperator,
 
         /// <summary>
-        /// Classifies a comparision
+        /// Classifies a comparision (operator?)
         /// </summary>
         Comparison = Pow2.T13,
 

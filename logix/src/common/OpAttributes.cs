@@ -1,0 +1,96 @@
+//-----------------------------------------------------------------------------
+// Copyright   :  (c) Chris Moore, 2019
+// License     :  MIT
+//-----------------------------------------------------------------------------
+namespace Z0.Logix
+{
+    using System;
+    using System.Runtime.CompilerServices;
+    using System.Linq;
+    using System.Collections.Generic;
+
+    using static zfunc;
+
+    public abstract class OpAttribute : Attribute
+    {
+        protected OpAttribute(uint opId, string opName)        
+        {
+            this.OpId = opId;
+            this.OpName = opName;
+        }
+
+        public abstract string KindName {get;}
+        
+        public uint OpId {get;}
+
+        public string OpName {get;}
+
+    }
+
+    public class UnaryBitwiseOpAttribute : OpAttribute
+    {
+        static readonly string kindName = typeof(UnaryBitwiseOpKind).DisplayName();
+
+        public UnaryBitwiseOpAttribute(UnaryBitwiseOpKind kind)
+            : base((uint)kind,kind.Format())
+        {
+            this.Kind = kind;
+        }
+
+        public UnaryBitwiseOpKind Kind {get;}
+
+        public override string KindName => kindName;
+
+
+    }
+
+    public class BinaryBitwiseOpAttribute : OpAttribute
+    {
+        static readonly string kindName = typeof(BinaryBitwiseOpAttribute).DisplayName();
+
+        public BinaryBitwiseOpAttribute(BinaryBitwiseOpKind kind)
+            : base((uint)kind,kind.Format())
+        {
+            this.Kind = kind;
+        }
+
+        public BinaryBitwiseOpKind Kind {get;}
+
+        public override string KindName => kindName;
+
+
+    }
+
+    public class TernaryOpAttribute : OpAttribute
+    {
+        static readonly string kindName = typeof(TernaryBitOpKind).DisplayName();
+        
+        public TernaryOpAttribute(TernaryBitOpKind kind)
+            : base( (uint)kind,kind.Format())
+        {
+            this.Kind = kind;
+        }
+
+        public TernaryBitOpKind Kind {get;}
+
+        public override string KindName => kindName;        
+    }
+
+
+    public class BinaryLogicOpAttribute : OpAttribute
+    {
+        static readonly string kindName = typeof(BinaryLogicOpKind).DisplayName();
+
+        public BinaryLogicOpAttribute(BinaryLogicOpKind kind)
+            : base((uint)kind,kind.Format())
+        {
+            this.Kind = kind;
+        }
+
+        public BinaryLogicOpKind Kind {get;}
+
+        public override string KindName => kindName;
+
+
+    }
+}

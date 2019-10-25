@@ -20,10 +20,10 @@ namespace Z0.Logix
         
         public void check_op_identities()
         {                         
-             ScalarOpApi.TernaryKinds.Iterate(op => check_op_identity<byte>(op));
-             ScalarOpApi.TernaryKinds.Iterate(op => check_op_identity<ushort>(op));
-             ScalarOpApi.TernaryKinds.Iterate(op => check_op_identity<uint>(op));
-             ScalarOpApi.TernaryKinds.Iterate(op => check_op_identity<ulong>(op));
+             ScalarOpApi.TernaryBitwiseKinds.Iterate(op => check_op_identity<byte>(op));
+             ScalarOpApi.TernaryBitwiseKinds.Iterate(op => check_op_identity<ushort>(op));
+             ScalarOpApi.TernaryBitwiseKinds.Iterate(op => check_op_identity<uint>(op));
+             ScalarOpApi.TernaryBitwiseKinds.Iterate(op => check_op_identity<ulong>(op));
         }
 
         public void check_and() 
@@ -130,7 +130,7 @@ namespace Z0.Logix
             check_binary_op<ulong>(op);
         }
 
-        void check_op_identity<T>(Ternary512OpKind id)
+        void check_op_identity<T>(TernaryBitOpKind id)
             where T: unmanaged
         {
             var a = convert<T>(0b1111_0000);

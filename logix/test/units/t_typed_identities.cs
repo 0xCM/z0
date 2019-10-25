@@ -41,7 +41,7 @@ namespace Z0.Logix
             iter(TypedIdentities.Vec256Identities<ulong>(), check_samples);
         }
 
-        void check_samples<T>(EqualityExpr<T> equality)
+        void check_samples<T>(TypedEqualityExpr<T> equality)
             where T :unmanaged
         {
             for(var i=0; i<SampleSize; i++)
@@ -55,7 +55,7 @@ namespace Z0.Logix
             }
         }
 
-        void check_samples<T>(EqualityExpr<Vector128<T>> equality)
+        void check_samples<T>(TypedEqualityExpr<Vector128<T>> equality)
             where T :unmanaged
         {
             var @true = literal(ginx.vones<T>(n128));
@@ -70,7 +70,7 @@ namespace Z0.Logix
             }
         }
 
-        void check_samples<T>(EqualityExpr<Vector256<T>> equality)
+        void check_samples<T>(TypedEqualityExpr<Vector256<T>> equality)
             where T :unmanaged
         {
             var @true = literal(ginx.vones<T>(n256));

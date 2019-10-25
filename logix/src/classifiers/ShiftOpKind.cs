@@ -17,22 +17,22 @@ namespace Z0.Logix
     public enum ShiftOpKind : uint
     {
         /// <summary>
-        /// Logical left-shift
+        /// Classifies a logical left-shift
         /// </summary>
         Sll = 1,
 
         /// <summary>
-        /// Logical right-shift
+        /// Classifies a logical right-shift
         /// </summary>
         Srl = 2,
 
         /// <summary>
-        /// Left circular shift
+        /// Classifies a left circular shift
         /// </summary>
         Rotl = 4,
 
         /// <summary>
-        /// Right circular shift
+        /// Classifies a right circular shift
         /// </summary>
         Rotr  = 8,
     }

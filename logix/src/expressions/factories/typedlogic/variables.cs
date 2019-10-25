@@ -155,9 +155,9 @@ namespace Z0.Logix
         /// <param name="rhs">The test subject</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static EqualityExpr<T> equals<T>(ITypedExpr<T> lhs, ITypedExpr<T> rhs, params VariableExpr<T>[] variables)
+        public static TypedEqualityExpr<T> equals<T>(ITypedExpr<T> lhs, ITypedExpr<T> rhs, params VariableExpr<T>[] variables)
             where T : unmanaged
-                => new EqualityExpr<T>(lhs,rhs,variables);
+                => new TypedEqualityExpr<T>(lhs,rhs,variables);
 
     }
 

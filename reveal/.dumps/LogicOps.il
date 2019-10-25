@@ -1,19 +1,7 @@
-// 2019-10-24 05:24:43:770
-bit get_Off()
-{
-    IL_0000: call Z0.bit Z0.bit::get_Off()
-    IL_0005: ret
-
-}
-bit get_On()
-{
-    IL_0000: call Z0.bit Z0.bit::get_On()
-    IL_0005: ret
-
-}
+// 2019-10-25 06:35:14:855
 bit zero()
 {
-    IL_0000: call Z0.bit Z0.bit::get_Off()
+    IL_0000: call Z0.bit zfunc::get_off()
     IL_0005: ret
 
 }
@@ -31,7 +19,19 @@ bit one()
 }
 bit false(bit a, bit b)
 {
-    IL_0000: call Z0.bit Z0.Logix.LogicOps::get_Off()
+    IL_0000: call Z0.bit zfunc::get_off()
+    IL_0005: ret
+
+}
+bit false(bit a, bit b, bit c)
+{
+    IL_0000: call Z0.bit zfunc::get_off()
+    IL_0005: ret
+
+}
+bit false(bit a)
+{
+    IL_0000: call Z0.bit zfunc::get_off()
     IL_0005: ret
 
 }
@@ -117,9 +117,21 @@ bit rightnot(bit a, bit b)
     IL_0006: ret
 
 }
+bit true(bit a)
+{
+    IL_0000: call Z0.bit zfunc::get_on()
+    IL_0005: ret
+
+}
 bit true(bit a, bit b)
 {
-    IL_0000: call Z0.bit Z0.Logix.LogicOps::get_On()
+    IL_0000: call Z0.bit zfunc::get_on()
+    IL_0005: ret
+
+}
+bit true(bit a, bit b, bit c)
+{
+    IL_0000: call Z0.bit zfunc::get_on()
     IL_0005: ret
 
 }
@@ -169,6 +181,12 @@ bit select(bit a, bit b, bit c)
     IL_0002: ldarg.2
     IL_0003: call Z0.bit Z0.bit::select(Z0.bit,Z0.bit,Z0.bit)
     IL_0008: ret
+
+}
+bit f00(bit a, bit b, bit c)
+{
+    IL_0000: call Z0.bit zfunc::get_off()
+    IL_0005: ret
 
 }
 bit f01(bit a, bit b, bit c)
@@ -1191,5 +1209,11 @@ bit faa(bit a, bit b, bit c)
 {
     IL_0000: ldarg.2
     IL_0001: ret
+
+}
+bit fff(bit a, bit b, bit c)
+{
+    IL_0000: call Z0.bit zfunc::get_on()
+    IL_0005: ret
 
 }

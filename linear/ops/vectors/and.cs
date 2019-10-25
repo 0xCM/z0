@@ -36,7 +36,7 @@ namespace Z0
             where T : unmanaged
         {
             for(var i=0; i< blocks(lhs,rhs); i++)
-                vstore(ginx.vand<T>(lhs.LoadVector256(i), rhs.LoadVector256(i)), ref dst.Block(i));                             
+                vstore(ginx.vand<T>(lhs.LoadVector(i), rhs.LoadVector(i)), ref dst.Block(i));                             
             return dst;        
         } 
 

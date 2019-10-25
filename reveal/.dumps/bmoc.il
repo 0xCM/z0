@@ -1,4 +1,4 @@
-// 2019-10-24 05:24:41:960
+// 2019-10-25 06:35:13:391
 BitMatrix<byte> alloc_8x8u()
 {
     IL_0000: call Z0.BitMatrix`1<System.Byte> Z0.BitMatrix::alloc<System.Byte>()
@@ -28,7 +28,7 @@ ref BitMatrix<byte> and_bm8x8u(in BitMatrix<byte> A, in BitMatrix<byte> B, ref B
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call Z0.BitMatrix`1<System.Byte>& Z0.BitMatrix::and(Z0.BitMatrix`1<System.Byte>&,Z0.BitMatrix`1<System.Byte>&,Z0.BitMatrix`1<System.Byte>&)
+    IL_0003: call Z0.BitMatrix`1<System.Byte>& Z0.BitMatrix::and<System.Byte>(Z0.BitMatrix`1<System.Byte>&,Z0.BitMatrix`1<System.Byte>&,Z0.BitMatrix`1<System.Byte>&)
     IL_0008: ret
 
 }
@@ -37,7 +37,7 @@ ref BitMatrix<byte> andg_bm8x8u(in BitMatrix<byte> A, in BitMatrix<byte> B, ref 
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call Z0.BitMatrix`1<System.Byte>& Z0.BitMatrix::andg<System.Byte>(Z0.BitMatrix`1<System.Byte>&,Z0.BitMatrix`1<System.Byte>&,Z0.BitMatrix`1<System.Byte>&)
+    IL_0003: call Z0.BitMatrix`1<System.Byte>& Z0.BitMatrix::and<System.Byte>(Z0.BitMatrix`1<System.Byte>&,Z0.BitMatrix`1<System.Byte>&,Z0.BitMatrix`1<System.Byte>&)
     IL_0008: ret
 
 }
@@ -46,7 +46,7 @@ ref BitMatrix<ushort> and_bm16x16u(in BitMatrix<ushort> A, in BitMatrix<ushort> 
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call Z0.BitMatrix`1<System.UInt16>& Z0.BitMatrix::and(Z0.BitMatrix`1<System.UInt16>&,Z0.BitMatrix`1<System.UInt16>&,Z0.BitMatrix`1<System.UInt16>&)
+    IL_0003: call Z0.BitMatrix`1<System.UInt16>& Z0.BitMatrix::and<System.UInt16>(Z0.BitMatrix`1<System.UInt16>&,Z0.BitMatrix`1<System.UInt16>&,Z0.BitMatrix`1<System.UInt16>&)
     IL_0008: ret
 
 }
@@ -55,7 +55,7 @@ ref BitMatrix<ushort> andg_bm16x16u(in BitMatrix<ushort> A, in BitMatrix<ushort>
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call Z0.BitMatrix`1<System.UInt16>& Z0.BitMatrix::andg<System.UInt16>(Z0.BitMatrix`1<System.UInt16>&,Z0.BitMatrix`1<System.UInt16>&,Z0.BitMatrix`1<System.UInt16>&)
+    IL_0003: call Z0.BitMatrix`1<System.UInt16>& Z0.BitMatrix::and<System.UInt16>(Z0.BitMatrix`1<System.UInt16>&,Z0.BitMatrix`1<System.UInt16>&,Z0.BitMatrix`1<System.UInt16>&)
     IL_0008: ret
 
 }
@@ -64,7 +64,7 @@ ref BitMatrix<uint> and_bm32x32u(in BitMatrix<uint> A, in BitMatrix<uint> B, ref
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call Z0.BitMatrix`1<System.UInt32>& Z0.BitMatrix::and(Z0.BitMatrix`1<System.UInt32>&,Z0.BitMatrix`1<System.UInt32>&,Z0.BitMatrix`1<System.UInt32>&)
+    IL_0003: call Z0.BitMatrix`1<System.UInt32>& Z0.BitMatrix::and<System.UInt32>(Z0.BitMatrix`1<System.UInt32>&,Z0.BitMatrix`1<System.UInt32>&,Z0.BitMatrix`1<System.UInt32>&)
     IL_0008: ret
 
 }
@@ -73,7 +73,7 @@ ref BitMatrix<uint> andg_bm32x32u(in BitMatrix<uint> A, in BitMatrix<uint> B, re
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call Z0.BitMatrix`1<System.UInt32>& Z0.BitMatrix::andg<System.UInt32>(Z0.BitMatrix`1<System.UInt32>&,Z0.BitMatrix`1<System.UInt32>&,Z0.BitMatrix`1<System.UInt32>&)
+    IL_0003: call Z0.BitMatrix`1<System.UInt32>& Z0.BitMatrix::and<System.UInt32>(Z0.BitMatrix`1<System.UInt32>&,Z0.BitMatrix`1<System.UInt32>&,Z0.BitMatrix`1<System.UInt32>&)
     IL_0008: ret
 
 }
@@ -82,7 +82,7 @@ ref BitMatrix<ulong> and_bm64x64u(in BitMatrix<ulong> A, in BitMatrix<ulong> B, 
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call Z0.BitMatrix`1<System.UInt64>& Z0.BitMatrix::and(Z0.BitMatrix`1<System.UInt64>&,Z0.BitMatrix`1<System.UInt64>&,Z0.BitMatrix`1<System.UInt64>&)
+    IL_0003: call Z0.BitMatrix`1<System.UInt64>& Z0.BitMatrix::and<System.UInt64>(Z0.BitMatrix`1<System.UInt64>&,Z0.BitMatrix`1<System.UInt64>&,Z0.BitMatrix`1<System.UInt64>&)
     IL_0008: ret
 
 }
@@ -91,7 +91,7 @@ ref BitMatrix<ulong> andg_bm64x64u(in BitMatrix<ulong> A, in BitMatrix<ulong> B,
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call Z0.BitMatrix`1<System.UInt64>& Z0.BitMatrix::andg<System.UInt64>(Z0.BitMatrix`1<System.UInt64>&,Z0.BitMatrix`1<System.UInt64>&,Z0.BitMatrix`1<System.UInt64>&)
+    IL_0003: call Z0.BitMatrix`1<System.UInt64>& Z0.BitMatrix::and<System.UInt64>(Z0.BitMatrix`1<System.UInt64>&,Z0.BitMatrix`1<System.UInt64>&,Z0.BitMatrix`1<System.UInt64>&)
     IL_0008: ret
 
 }

@@ -13,7 +13,7 @@ namespace Z0
 
     using static zfunc;    
     
-    partial class dinxx
+    partial class ginxx
     {
         /// <summary>
         /// Specifies the length, i.e. the number of components, of an
@@ -36,7 +36,6 @@ namespace Z0
         public static int Length<T>(this Vector128<T> src)
             where T : unmanaged            
                 => Vec128<T>.Length;
-
 
         [MethodImpl(Inline)]
         public static ref T StoreTo<T>(this Vector128<T> src, ref T dst)
@@ -84,7 +83,6 @@ namespace Z0
             return ref dst;
         }
 
-
         [MethodImpl(Inline)]
         public static Span<T> StoreTo<T>(this Vector256<T> src, Span<T> dst)
             where T : unmanaged            
@@ -105,33 +103,19 @@ namespace Z0
                 => Vec256.Load(ref src.Block(block));
 
 
-        /// <summary>
-        /// Loads a 128-bit cpu vector from a blocked span
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <param name="block">The block index</param>
-        /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline)]
-        public static Vector128<T> LoadVector<T>(this Span128<T> src, int block = 0)
-            where T : unmanaged
-        {
-            ginx.vloadu(in src.Block(block), out Vector128<T> x);
-            return x;
-        }
-
-        /// <summary>
-        /// Loads a 256-bit cpu vector from a blocked span
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <param name="block">The block index</param>
-        /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline)]
-        public static Vector256<T> LoadVector<T>(this Span256<T> src, int block = 0)
-            where T : unmanaged
-        {
-            ginx.vloadu(in src.Block(block), out Vector256<T> x);
-            return x;
-        }
+        // /// <summary>
+        // /// Loads a 256-bit cpu vector from a blocked span
+        // /// </summary>
+        // /// <param name="src">The source span</param>
+        // /// <param name="block">The block index</param>
+        // /// <typeparam name="T">The primal type</typeparam>
+        // [MethodImpl(Inline)]
+        // public static Vector256<T> LoadVector<T>(this Span256<T> src, int block = 0)
+        //     where T : unmanaged
+        // {
+        //     ginx.vloadu(in src.Block(block), out Vector256<T> x);
+        //     return x;
+        // }
 
         /// <summary>
         /// Projects a 128-bit source vector into a 128-bit target vector via a mapping function

@@ -8,17 +8,15 @@ namespace Z0.Logix
     
     using static zfunc;
 
+    /// <summary>
+    /// Classsifies (supported) arithmetic operators
+    /// </summary>
     public enum BinaryArithmeticOpKind : uint
     {
-        Add,
+        Add = Pow2.T00,
 
-        Sub,
+        Sub = Pow2.T01,
 
-        Mul,
-
-        Div,
-
-        Mod
 
     }
 

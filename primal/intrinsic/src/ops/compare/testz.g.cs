@@ -138,7 +138,8 @@ namespace Z0
                 return dfp.testz(float32(src), float32(mask));
             else if(typeof(T) == typeof(double))
                 return dfp.testz(float64(src), float64(mask));
-            else throw unsupported<T>();
+            else 
+                throw unsupported<T>();
         }
 
     }

@@ -21,8 +21,6 @@ namespace Z0
             BitPoints256.and(A.HeadPtr,B.HeadPtr,C.HeadPtr);
             return ref C;
         }
-
-
     }
 
 }

@@ -32,10 +32,9 @@ namespace Z0.Logix
     }
 
     /// <summary>
-    /// Characterizes a multi-varied expression that represents a question or claim
-    /// regarding the equality of two typed logic expressions
+    /// Characterizes a claim that two variable-dependent typed expressions are equivalent
     /// </summary>
-    public interface IEqualityExpr<T> : ITypedExpr<T>
+    public interface ITypedEqualityExpr<T> : ITypedExpr<T>
         where T : unmanaged
     {
         /// <summary>

@@ -22,7 +22,7 @@ namespace Z0
         /// <param name="pY">A pointer to at at least 16 bytes of memory to which the result of the computation is stored</param>
         /// <typeparam name="T">The primal component type</typeparam>
         [MethodImpl(Inline)]
-        public static unsafe Vector128<T> not<T>(N128 n, T* pX)
+        public static unsafe Vector128<T> vnot<T>(N128 n, T* pX)
             where T : unmanaged
         {                    
             vloadu(pX, out Vector128<T> vA);
@@ -37,7 +37,7 @@ namespace Z0
         /// <param name="pY">A pointer to at at least 16 bytes of memory to which the result of the computation is stored</param>
         /// <typeparam name="T">The primal component type</typeparam>
         [MethodImpl(Inline)]
-        public static unsafe void not<T>(N128 n, T* pX, T* pY)
+        public static unsafe void vnot<T>(N128 n, T* pX, T* pY)
             where T : unmanaged
         {                    
             vloadu(pX, out Vector128<T> vA);
@@ -51,7 +51,7 @@ namespace Z0
         /// <param name="pX">A pointer to at at least 32 bytes of memory from which to load the first vector</param>
         /// <typeparam name="T">The primal component type</typeparam>
         [MethodImpl(Inline)]
-        public static unsafe Vector256<T> not<T>(N256 n, T* pA)
+        public static unsafe Vector256<T> vnot<T>(N256 n, T* pA)
             where T : unmanaged
         {                    
             vloadu(pA, out Vector256<T> vA);
@@ -66,14 +66,12 @@ namespace Z0
         /// <param name="pY">A pointer to at at least 32 bytes of memory from which to load the second vector</param>
         /// <typeparam name="T">The primal component type</typeparam>
         [MethodImpl(Inline)]
-        public static unsafe void not<T>(N256 n, T* pA, T* pB)
+        public static unsafe void vnot<T>(N256 n, T* pA, T* pB)
             where T : unmanaged
         {                    
             vloadu(pA, out Vector256<T> vA);
             vstore(vnot(vA), pB);
         }
-
-
     }
 
 }

@@ -277,6 +277,46 @@ partial class zfunc
         =>  ref MemoryMarshal.GetReference<T>(src);
 
     /// <summary>
+    /// Returns a reference to the location of the first span element
+    /// </summary>
+    /// <param name="src">The source span</param>
+    /// <typeparam name="T">The element type</typeparam>
+    [MethodImpl(Inline)]
+    public static ref T head<T>(Span128<T> src)
+        where T : unmanaged
+            =>  ref MemoryMarshal.GetReference<T>(src.Unblocked);
+
+    /// <summary>
+    /// Returns a reference to the location of the first span element
+    /// </summary>
+    /// <param name="src">The source span</param>
+    /// <typeparam name="T">The element type</typeparam>
+    [MethodImpl(Inline)]
+    public static ref T head<T>(Span256<T> src)
+        where T : unmanaged
+            =>  ref MemoryMarshal.GetReference<T>(src.Unblocked);
+
+    /// <summary>
+    /// Returns a readonly reference to the location of the first span element
+    /// </summary>
+    /// <param name="src">The source span</param>
+    /// <typeparam name="T">The element type</typeparam>
+    [MethodImpl(Inline)]
+    public static ref T head<T>(ReadOnlySpan128<T> src)
+        where T : unmanaged
+            =>  ref MemoryMarshal.GetReference<T>(src.Unblocked);
+
+    /// <summary>
+    /// Returns a readonly reference to the location of the first span element
+    /// </summary>
+    /// <param name="src">The source span</param>
+    /// <typeparam name="T">The element type</typeparam>
+    [MethodImpl(Inline)]
+    public static ref T head<T>(ReadOnlySpan256<T> src)
+        where T : unmanaged
+            =>  ref MemoryMarshal.GetReference<T>(src.Unblocked);
+
+    /// <summary>
     /// Returns a reference to the head of a readonly span
     /// </summary>
     /// <param name="src">The source span</param>
@@ -332,15 +372,6 @@ partial class zfunc
         where T : unmanaged
             =>  ref Unsafe.Add(ref MemoryMarshal.GetReference<T>(src), offset);
 
-    /// <summary>
-    /// Returns a readonly reference to the location of the first span element
-    /// </summary>
-    /// <param name="src">The source span</param>
-    /// <typeparam name="T">The element type</typeparam>
-    [MethodImpl(Inline)]
-    public static ref T head<T>(Span256<T> src)
-        where T : unmanaged
-            =>  ref MemoryMarshal.GetReference<T>(src);
 
     /// <summary>
     /// Returns the common length of the operands if they are the same; otherwise, raises an error

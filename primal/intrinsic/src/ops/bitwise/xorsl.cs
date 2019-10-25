@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;    
+    using System.Runtime.Intrinsics;    
 
     using static zfunc;    
 
@@ -19,8 +20,8 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="offset">Specifies the shift offset for each corresponding component</param>
         [MethodImpl(Inline)]
-        public static Vec128<ushort> vxorsl(in Vec128<ushort> src, byte offset)
-            => dinx.vxor(in src, vsll(in src,offset));
+        public static Vector128<ushort> vxorsl(Vector128<ushort> src, byte offset)
+            => dinx.vxor(src, vsll(src,offset));
 
         /// <summary>
         /// A composite operation that shifts the source vector components leftward
@@ -30,8 +31,8 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="offset">Specifies the shift offset for each corresponding component</param>
         [MethodImpl(Inline)]
-        public static Vec128<uint> vxorsl(in Vec128<uint> src, byte offset)
-            => dinx.vxor(in src, vsll(in src,offset));
+        public static Vector128<uint> vxorsl(Vector128<uint> src, byte offset)
+            => dinx.vxor(src, vsll(src,offset));
 
         /// <summary>
         /// A composite operation that shifts the source vector components leftward
@@ -41,8 +42,8 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="offset">Specifies the shift offset for each corresponding component</param>
         [MethodImpl(Inline)]
-        public static Vec128<ulong> vxorsl(in Vec128<ulong> src, byte offset)
-            => dinx.vxor(in src, vsll(in src,offset));
+        public static Vector128<ulong> vxorsl(Vector128<ulong> src, byte offset)
+            => dinx.vxor(src, vsll(src,offset));
 
         /// <summary>
         /// A composite operation that shifts the source vector components leftward
@@ -52,8 +53,8 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="offset">Specifies the shift offset for each corresponding component</param>
         [MethodImpl(Inline)]
-        public static Vec256<ushort> vxorsl(in Vec256<ushort> src, byte offset)
-            => dinx.vxor(in src, vsll(in src,offset));
+        public static Vector256<ushort> vxorsl(Vector256<ushort> src, byte offset)
+            => dinx.vxor(src, vsll(src,offset));
 
         /// <summary>
         /// A composite operation that shifts the source vector components leftward
@@ -63,8 +64,8 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="offset">Specifies the shift offset for each corresponding component</param>
         [MethodImpl(Inline)]
-        public static Vec256<uint> vxorsl(in Vec256<uint> src, byte offset)
-            => dinx.vxor(in src, vsll(in src,offset));
+        public static Vector256<uint> vxorsl(Vector256<uint> src, byte offset)
+            => dinx.vxor(src, vsll(src,offset));
 
         /// <summary>
         /// A composite operation that shifts the source vector components leftward
@@ -74,8 +75,8 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="offset">Specifies the shift offset for each corresponding component</param>
         [MethodImpl(Inline)]
-        public static Vec256<ulong> vxorsl(in Vec256<ulong> src, byte offset)
-            => dinx.vxor(in src, vsll(in src,offset));
+        public static Vector256<ulong> vxorsl(Vector256<ulong> src, byte offset)
+            => dinx.vxor(src, vsll(src,offset));
 
         /// <summary>
         /// A composite operation that shifts the source vector components leftward
@@ -85,8 +86,8 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="offset">Specifies the shift offset for each corresponding component</param>
         [MethodImpl(Inline)]
-        public static Vec128<uint> vxorslv(in Vec128<uint> src, in Vec128<uint> offsets)
-            => dinx.vxor(in src, dinx.vsllv(in src,in offsets));
+        public static Vector128<uint> vxorslv(Vector128<uint> src, Vector128<uint> offsets)
+            => dinx.vxor(src, dinx.vsllv(src,offsets));
 
         /// <summary>
         /// A composite operation that shifts the source vector components leftward
@@ -96,8 +97,8 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="offset">Specifies the shift offset for each corresponding component</param>
         [MethodImpl(Inline)]
-        public static Vec128<ulong> vxorslv(in Vec128<ulong> src, in Vec128<ulong> offsets)
-            => dinx.vxor(in src,dinx.vsllv(in src,in offsets));
+        public static Vector128<ulong> vxorslv(Vector128<ulong> src, Vector128<ulong> offsets)
+            => dinx.vxor(src,dinx.vsllv(src,offsets));
 
         /// <summary>
         /// A composite operation that shifts the source vector components leftward
@@ -107,8 +108,8 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="offset">Specifies the shift offset for each corresponding component</param>
         [MethodImpl(Inline)]
-        public static Vec256<uint> vxorslv(in Vec256<uint> src, in Vec256<uint> offsets)
-            => dinx.vxor(in src, dinx.vsllv(in src,in offsets));
+        public static Vector256<uint> vxorslv(Vector256<uint> src, Vector256<uint> offsets)
+            => dinx.vxor(src, dinx.vsllv(src,offsets));
 
         /// <summary>
         /// A composite operation that shifts the source vector components leftward
@@ -118,9 +119,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="offset">Specifies the shift offset for each corresponding component</param>
         [MethodImpl(Inline)]
-        public static Vec256<ulong> vxorslv(in Vec256<ulong> src, in Vec256<ulong> offsets)
-            => dinx.vxor(in src, dinx.vsllv(in src,in offsets));
-
+        public static Vector256<ulong> vxorslv(Vector256<ulong> src, Vector256<ulong> offsets)
+            => dinx.vxor(src, dinx.vsllv(src,offsets));
     }
-
 }

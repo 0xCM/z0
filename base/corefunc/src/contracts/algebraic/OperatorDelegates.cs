@@ -19,10 +19,31 @@ namespace Z0
     public delegate T Shifter<T>(T a, int offset)
         where T : unmanaged;
 
-    public delegate bool UnaryPred<T>(T a)
+    /// <summary>
+    /// Represents a unary function over a parametric domain and boolean codomain
+    /// </summary>
+    /// <param name="a">The operand</param>
+    /// <typeparam name="T">The domain over which the predicate is evaluated</typeparam>
+    public delegate bit UnaryPred<T>(T a)
         where T : unmanaged;
 
-    public delegate bool BinaryPred<T>(T a, T b)
+    /// <summary>
+    /// Represents a binary function over a parametric domain and boolean codomain
+    /// </summary>
+    /// <param name="a">The first operand</param>
+    /// <param name="b">The second operand</param>
+    /// <typeparam name="T">The domain over which the predicate is evaluated</typeparam>
+    public delegate bit BinaryPred<T>(T a, T b)
+        where T : unmanaged;
+
+    /// <summary>
+    /// Represents a ternary function over a parametric domain and boolean codomain
+    /// </summary>
+    /// <param name="a">The first operand</param>
+    /// <param name="b">The second operand</param>
+    /// <param name="c">The third operand</param>
+    /// <typeparam name="T">The domain over which the predicate is evaluated</typeparam>
+    public delegate bit TernaryPred<T>(T a, T b, T c)
         where T : unmanaged;
 
 }

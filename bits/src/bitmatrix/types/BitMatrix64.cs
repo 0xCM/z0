@@ -309,7 +309,7 @@ namespace Z0
 
         [MethodImpl(Inline)] 
         public BitMatrix64 AndNot(in BitMatrix64 rhs)
-            => BitMatrix.andn(this, rhs, ref this);
+            => BitMatrix.andnot(this, rhs, ref this);
 
         public readonly BitMatrix64 Transpose()
         {

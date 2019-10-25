@@ -17,7 +17,7 @@ namespace Z0.Logix
     {
         public void check_compositions()
         {
-            var ops = ScalarOpApi.BinaryKinds;
+            var ops = ScalarOpApi.BinaryBitwiseKinds;
             var pairs = from op1 in ops
                         from op2 in ops
                         select (op1, op2);            
@@ -27,7 +27,7 @@ namespace Z0.Logix
 
         public void check_binop_vars()
         {
-            ScalarOpApi.BinaryKinds.Iterate(check_binop_vars);
+            ScalarOpApi.BinaryBitwiseKinds.Iterate(check_binop_vars);
         }
 
         public void check_solution()
@@ -55,7 +55,7 @@ namespace Z0.Logix
         }
 
 
-        IReadOnlyList<T> solve<T>(VariedExpr<N1,T> expr, LiteralExpr<T> match, Interval<T> domain)
+        IReadOnlyList<T> solve<T>(VariedExpr<N1,T> expr, TypedLiteralExpr<T> match, Interval<T> domain)
             where T : unmanaged
         {
             var sln = new List<T>();
@@ -70,7 +70,7 @@ namespace Z0.Logix
             return sln;
         }
 
-        IReadOnlyList<T> solve<T>(VariedExpr<N2,T> expr, LiteralExpr<T> match, Interval<T> domain)
+        IReadOnlyList<T> solve<T>(VariedExpr<N2,T> expr, TypedLiteralExpr<T> match, Interval<T> domain)
             where T : unmanaged
         {
 

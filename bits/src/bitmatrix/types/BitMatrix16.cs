@@ -304,7 +304,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public BitMatrix16 AndNot(in BitMatrix16 rhs)
-            => BitMatrix.andn(ref this, rhs);
+            => BitMatrix.andnot(ref this, rhs);
 
         [MethodImpl(Inline)]
         public readonly BitVector16 Diagonal()

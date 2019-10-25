@@ -31,7 +31,6 @@ namespace Z0
         public static Vector128<short> vmulhrs(Vector128<short> x, Vector128<short> y)
             => MultiplyHighRoundScale(x,y);
 
-
         /// <summary>
         ///  __m256i _mm256_mulhrs_epi16 (__m256i a, __m256i b)VPMULHRSW ymm, ymm, ymm/m256
         /// </summary>
@@ -90,7 +89,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
-        public static Vec256<ulong> vmul(Vector256<ulong> x, Vector256<ulong> y)    
+        public static Vector256<ulong> vmul(Vector256<ulong> x, Vector256<ulong> y)    
         {
             var loMask = ginx.vbroadcast(n256, 0x00000000fffffffful);  
               

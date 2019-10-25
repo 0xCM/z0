@@ -12,29 +12,29 @@ namespace Z0.Logix
     public enum ComparisonOpKind : byte
     {        
         /// <summary>
-        /// Identifies an equality operator
+        /// Classifies a binary operator that returns true iff its operands are equal
         /// </summary>
-        Eq,
+        Eq = Pow2.T00,
 
         /// <summary>
-        /// Identifies a less than operator
+        /// Classifies a binary operator that returns true if the left operand is strictly smaller than the left operand
         /// </summary>
-        Lt,
+        Lt = Pow2.T01,
 
         /// <summary>
-        /// Identifies a less than or equal operator
+        /// Classifies a binary operator that returns true if the left operand is smaller than or equal to the left operand
         /// </summary>
-        LtEq,
+        LtEq = Pow2.T02,
 
         /// <summary>
-        /// Identifies a greater than operator
+        /// Classifies a binary operator that returns true if the left operand is strictly greater than the left operand
         /// </summary>
-        Gt,
+        Gt = Pow2.T03,
 
         /// <summary>
-        /// Identifies a greater than or equal operator
+        /// Classifies a binary operator that returns true if the left operand is greater than or equal to the left operand
         /// </summary>
-        GtEq
+        GtEq = Pow2.T04
     }
 }
 

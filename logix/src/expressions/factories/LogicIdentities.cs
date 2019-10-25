@@ -28,7 +28,6 @@ namespace Z0.Logix
                 var lhs = and(a, or(b,c));
                 var rhs = or(and(a,b), and(a,c));
                 return equals(lhs,rhs, a,b,c);
-
             }
         }
 

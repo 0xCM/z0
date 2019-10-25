@@ -73,7 +73,7 @@ namespace Z0.Logix
         /// <param name="left">The first operand</param>
         /// <param name="right">The second operand</param>
         [MethodImpl(Inline)]
-        public static TernaryLogicOp ternary(Ternary512OpKind op, ILogicExpr first, ILogicExpr second, ILogicExpr third)
+        public static TernaryLogicOp ternary(TernaryBitOpKind op, ILogicExpr first, ILogicExpr second, ILogicExpr third)
             => new TernaryLogicOp(op,first,second,third);
     }
 }

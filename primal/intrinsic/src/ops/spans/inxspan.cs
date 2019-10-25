@@ -19,7 +19,7 @@ namespace Z0
             where T : unmanaged
         {
             for(var i=0; i< lhs.BlockCount; i++)
-                vstore(ginx.vsll(lhs.LoadVec256(i), offset), ref dst.Block(i));                             
+                vstore(ginx.vsll(lhs.LoadVector(i), offset), ref dst.Block(i));                             
             return dst;        
         } 
 
@@ -27,7 +27,7 @@ namespace Z0
             where T : unmanaged
         {
             for(var i=0; i< lhs.BlockCount; i++)
-                vstore(ginx.vsrl(lhs.LoadVec256(i), offset), ref dst.Block(i));                             
+                vstore(ginx.vsrl(lhs.LoadVector(i), offset), ref dst.Block(i));                             
             return dst;        
         } 
 
@@ -35,7 +35,7 @@ namespace Z0
             where T : unmanaged
         {
             for(var i=0; i< blocks(lhs,rhs); i++)
-                vstore(ginx.vor(lhs.LoadVec256(i), rhs.LoadVec256(i)), ref dst.Block(i));                             
+                vstore(ginx.vor(lhs.LoadVector(i), rhs.LoadVector(i)), ref dst.Block(i));                             
             return dst;        
         } 
 
@@ -43,7 +43,7 @@ namespace Z0
             where T : unmanaged
         {
             for(var i=0; i< blocks(lhs,rhs); i++)
-                vstore(ginx.vxor<T>(lhs.LoadVec256(i), rhs.LoadVec256(i)), ref dst.Block(i));                             
+                vstore(ginx.vxor<T>(lhs.LoadVector(i), rhs.LoadVector(i)), ref dst.Block(i));                             
             return dst;        
         } 
 
@@ -52,7 +52,7 @@ namespace Z0
         {
             var blocks = dst.BlockCount;
             for(var block = 0; block < blocks; block++)
-                ginx.vstore(ginx.vsub<T>(ginx.vloadu128(in lhs.Block(block)), ginx.vloadu128(in rhs.Block(block))), ref dst.Block(block));
+                ginx.vstore(ginx.vsub<T>(ginx.vloadu(n128,in lhs.Block(block)), ginx.vloadu(n128,in rhs.Block(block))), ref dst.Block(block));
             return dst;
         }
 
@@ -61,7 +61,7 @@ namespace Z0
         {            
             var blocks = dst.BlockCount;
             for(var block = 0; block < blocks; block++)
-                ginx.vstore(ginx.vsub<T>(ginx.vloadu256(in lhs.Block(block)), ginx.vloadu256(in rhs.Block(block))), ref dst.Block(block));
+                ginx.vstore(ginx.vsub<T>(ginx.vloadu(n256,in lhs.Block(block)), ginx.vloadu(n256,in rhs.Block(block))), ref dst.Block(block));
             return dst;
         }
 
@@ -70,7 +70,7 @@ namespace Z0
         {
             var blocks = dst.BlockCount;
             for(var block = 0; block < blocks; block++)
-                ginx.store(ginx.vadd(ginx.vloadu128(in lhs.Block(block)), ginx.vloadu128(in rhs.Block(block))), ref dst.Block(block));
+                ginx.store(ginx.vadd(ginx.vloadu(n128,in lhs.Block(block)), ginx.vloadu(n128,in rhs.Block(block))), ref dst.Block(block));
             return dst;
         }
 
@@ -79,35 +79,16 @@ namespace Z0
         {
             var blocks = dst.BlockCount;
             for(var block = 0; block < blocks; block++)
-                ginx.store(ginx.vadd(ginx.vloadu256(in lhs.Block(block)), ginx.vloadu256(in rhs.Block(block))), ref dst.Block(block));
+                ginx.store(ginx.vadd(ginx.vloadu(n256,in lhs.Block(block)), ginx.vloadu(n256,in rhs.Block(block))), ref dst.Block(block));
             return dst;
         } 
 
-        public static Span256<double> sqrt(Span256<double> src, Span256<double> dst)
-        {
-            for(var block = 0; block <src.BlockCount; block ++)                
-            {
-                var x =  Vec256.Load(ref src.Block(block));
-                vstore(dfp.sqrt(x), ref dst[block]);                
-            }
-            return dst;
-        }
-
-        public static Span256<float> sqrt(Span256<float> src, Span256<float> dst)
-        {
-            for(var block = 0; block <src.BlockCount; block ++)                
-            {
-                var x =  Vec256.Load(ref src.Block(block));
-                vstore(dfp.sqrt(x), ref dst[block]);                
-            }
-            return dst;
-        }
 
         public static Span128<float> div(ReadOnlySpan128<float> lhs, ReadOnlySpan128<float> rhs, Span128<float> dst)
         {
             var blocks = dst.BlockCount;
             for(var block = 0; block < blocks; block++)
-                vstore(dfp.vdiv(lhs.LoadVec128(block), rhs.LoadVec128(block)), ref dst[block]);            
+                vstore(dfp.vdiv(lhs.LoadVector(block), rhs.LoadVector(block)), ref dst[block]);            
             return dst;            
         }
 
@@ -115,7 +96,7 @@ namespace Z0
         {
             var blocks = dst.BlockCount;
             for(var block = 0; block < blocks; block++)
-                vstore(dfp.vdiv(lhs.LoadVec128(block), rhs.LoadVec128(block)), ref dst[block]);            
+                vstore(dfp.vdiv(lhs.LoadVector(block), rhs.LoadVector(block)), ref dst[block]);            
             return dst;            
         }
 
@@ -123,7 +104,7 @@ namespace Z0
         {
             var blocks = dst.BlockCount;
             for(var block = 0; block < blocks; block++)
-                vstore(dfp.vdiv(lhs.LoadVec256(block), rhs.LoadVec256(block)), ref dst[block]);            
+                vstore(dfp.vdiv(lhs.LoadVector(block), rhs.LoadVector(block)), ref dst[block]);            
             return dst;            
         }
 
@@ -131,7 +112,7 @@ namespace Z0
         {
             var blocks = dst.BlockCount;
             for(var block = 0; block < blocks; block++)
-                vstore(dfp.vdiv(lhs.LoadVec256(block), rhs.LoadVec256(block)), ref dst[block]);            
+                vstore(dfp.vdiv(lhs.LoadVector(block), rhs.LoadVector(block)), ref dst[block]);            
             return dst;            
         }     
 

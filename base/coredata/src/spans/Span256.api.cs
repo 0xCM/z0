@@ -136,21 +136,6 @@ namespace Z0
             where T : unmanaged
             => Load(src.AsSpan());
 
-        // public static Span256<T> Load<T>(Span<T> src)
-        //     where T : unmanaged
-        // {
-        //     var blocklen = Span256.BlockLength<T>();      
-        //     var q = Math.DivRem(src.Length, blocklen, out int r);                        
-        //     if(r == 0)
-        //         return Span256<T>.LoadAligned(src);
-        //     else
-        //     {
-        //         var blocks = q + 1;
-        //         var dst = Span256.AllocBlocks<T>(blocks);
-        //         src.CopyTo(dst);
-        //         return dst;
-        //     }                                            
-        // }
                 
         /// <summary>
         /// Loads an unsized 256-bit blocked span from a sized unblocked span
@@ -314,7 +299,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ByteSize CellBytes<T>(int count)
             where T : unmanaged        
-            => count * CellSize<T>();
+                => count * CellSize<T>();
 
    }
 }

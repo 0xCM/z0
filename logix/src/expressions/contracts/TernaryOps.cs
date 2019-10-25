@@ -18,9 +18,8 @@ namespace Z0.Logix
         
     }
 
-    public interface ITernaryLogicOp : ITernaryOp, ILogicOpExpr<Ternary512OpKind>
+    public interface ITernaryLogicOp : ITernaryOp, ILogicOpExpr<TernaryBitOpKind>
     {
-
         /// <summary>
         /// The first operand
         /// </summary>
@@ -38,11 +37,10 @@ namespace Z0.Logix
     }
 
     /// <summary>
-    /// Characterizes a typed ternary operator of specified kind
+    /// Characterizes a typed ternary bitwise operator
     /// </summary>
     /// <typeparam name="T">The type over which the operator is defined</typeparam>
-    /// <typeparam name="K">The operator classifier</typeparam>
-    public interface ITernaryOp<T> : ITernaryOp, IOpExpr<T,Ternary512OpKind> 
+    public interface ITernaryBitwiseOp<T> : ITernaryOp, ITypedOpExpr<T,TernaryBitOpKind> 
         where T : unmanaged
     {
         /// <summary>

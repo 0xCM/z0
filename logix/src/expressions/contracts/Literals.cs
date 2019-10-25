@@ -24,12 +24,6 @@ namespace Z0.Logix
         T Value {get;}                
     }
 
-    public interface ILogicLiteral : ILogicExpr, ILiteralExpr
-    {
-        bit Value {get;}
-    }
-
-
     public interface ILiteralSeq<T> : ILiteralExpr, ISeqExpr<T>
         where T : unmanaged
     {
@@ -37,9 +31,18 @@ namespace Z0.Logix
 
     }
 
-
     public interface ILiteralLogicSeq : ILiteralSeq<bit>, ILogicExpr
     {
 
     }
+    
+    public interface ILogicLiteral : ILogicExpr, ILiteralExpr
+    {
+        bit Value {get;}
+    }
+
+
+
+
+
 }

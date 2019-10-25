@@ -1,4 +1,4 @@
-// 2019-10-24 05:24:40:884
+// 2019-10-25 06:35:12:176
 BitVector4 or(BitVector4 x, BitVector4 y)
 {
     IL_0000: ldarg.0
@@ -1481,17 +1481,6 @@ BitVector4 lsb(BitVector4 x, int n)
     IL_000A: ret
 
 }
-BitVector4 msb(BitVector4 x, int n)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldc.i4.3
-    IL_0002: ldarg.1
-    IL_0003: sub
-    IL_0004: ldc.i4.3
-    IL_0005: call Z0.BitVector4 Z0.bitvector::between(Z0.BitVector4,System.Int32,System.Int32)
-    IL_000A: ret
-
-}
 BitVector8 lsb(BitVector8 x, int n)
 {
     IL_0000: ldarg.0
@@ -1499,17 +1488,6 @@ BitVector8 lsb(BitVector8 x, int n)
     IL_0002: ldarg.1
     IL_0003: ldc.i4.1
     IL_0004: sub
-    IL_0005: call Z0.BitVector8 Z0.bitvector::between(Z0.BitVector8,System.Int32,System.Int32)
-    IL_000A: ret
-
-}
-BitVector8 msb(BitVector8 x, int n)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldc.i4.7
-    IL_0002: ldarg.1
-    IL_0003: sub
-    IL_0004: ldc.i4.7
     IL_0005: call Z0.BitVector8 Z0.bitvector::between(Z0.BitVector8,System.Int32,System.Int32)
     IL_000A: ret
 
@@ -1527,19 +1505,6 @@ BitVector16 lsb(BitVector16 x, int n)
     IL_0014: ret
 
 }
-BitVector16 msb(BitVector16 x, int n)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldfld System.UInt16 Z0.BitVector16::data
-    IL_0006: call Z0.BitVector16 Z0.BitVector16::op_Implicit(System.UInt16)
-    IL_000B: ldc.i4.s 15
-    IL_000D: ldarg.1
-    IL_000E: sub
-    IL_000F: ldc.i4.s 15
-    IL_0011: call Z0.BitVector16 Z0.bitvector::between(Z0.BitVector16,System.Int32,System.Int32)
-    IL_0016: ret
-
-}
 BitVector32 lsb(BitVector32 x, int n)
 {
     IL_0000: ldarg.0
@@ -1551,19 +1516,6 @@ BitVector32 lsb(BitVector32 x, int n)
     IL_000E: sub
     IL_000F: call Z0.BitVector32 Z0.bitvector::between(Z0.BitVector32,System.Int32,System.Int32)
     IL_0014: ret
-
-}
-BitVector32 msb(BitVector32 x, int n)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldfld System.UInt32 Z0.BitVector32::data
-    IL_0006: call Z0.BitVector32 Z0.BitVector32::op_Implicit(System.UInt32)
-    IL_000B: ldc.i4.s 31
-    IL_000D: ldarg.1
-    IL_000E: sub
-    IL_000F: ldc.i4.s 31
-    IL_0011: call Z0.BitVector32 Z0.bitvector::between(Z0.BitVector32,System.Int32,System.Int32)
-    IL_0016: ret
 
 }
 BitVector64 lsb(BitVector64 x, int n)
@@ -1579,12 +1531,60 @@ BitVector64 lsb(BitVector64 x, int n)
     IL_0014: ret
 
 }
+BitVector4 msb(BitVector4 x, int n)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldc.i4.4
+    IL_0002: ldarg.1
+    IL_0003: sub
+    IL_0004: ldc.i4.3
+    IL_0005: call Z0.BitVector4 Z0.bitvector::between(Z0.BitVector4,System.Int32,System.Int32)
+    IL_000A: ret
+
+}
+BitVector8 msb(BitVector8 x, int n)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldc.i4.8
+    IL_0002: ldarg.1
+    IL_0003: sub
+    IL_0004: ldc.i4.7
+    IL_0005: call Z0.BitVector8 Z0.bitvector::between(Z0.BitVector8,System.Int32,System.Int32)
+    IL_000A: ret
+
+}
+BitVector16 msb(BitVector16 x, int n)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldfld System.UInt16 Z0.BitVector16::data
+    IL_0006: call Z0.BitVector16 Z0.BitVector16::op_Implicit(System.UInt16)
+    IL_000B: ldc.i4.s 16
+    IL_000D: ldarg.1
+    IL_000E: sub
+    IL_000F: ldc.i4.s 15
+    IL_0011: call Z0.BitVector16 Z0.bitvector::between(Z0.BitVector16,System.Int32,System.Int32)
+    IL_0016: ret
+
+}
+BitVector32 msb(BitVector32 x, int n)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldfld System.UInt32 Z0.BitVector32::data
+    IL_0006: call Z0.BitVector32 Z0.BitVector32::op_Implicit(System.UInt32)
+    IL_000B: ldc.i4.s 32
+    IL_000D: ldarg.1
+    IL_000E: sub
+    IL_000F: ldc.i4.s 31
+    IL_0011: call Z0.BitVector32 Z0.bitvector::between(Z0.BitVector32,System.Int32,System.Int32)
+    IL_0016: ret
+
+}
 BitVector64 msb(BitVector64 x, int n)
 {
     IL_0000: ldarg.0
     IL_0001: ldfld System.UInt64 Z0.BitVector64::data
     IL_0006: call Z0.BitVector64 Z0.BitVector64::op_Implicit(System.UInt64)
-    IL_000B: ldc.i4.s 63
+    IL_000B: ldc.i4.s 64
     IL_000D: ldarg.1
     IL_000E: sub
     IL_000F: ldc.i4.s 63

@@ -9,7 +9,7 @@ namespace Z0.Logix
     using static zfunc;
 
     /// <summary>
-    /// Defines classifiers for bitwise binary operators
+    /// Classifies binary bitwise operators
     /// </summary>
     [Flags]
     public enum BinaryBitwiseOpKind : uint

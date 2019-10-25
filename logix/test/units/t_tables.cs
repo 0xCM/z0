@@ -31,38 +31,54 @@ namespace Z0.Logix
             Trace(expr3.Format());
         }
 
+        public void unary_logic_check()
+        {
+            using var dst = LogArea.Test.LogWriter(FileName.Define("UnaryTruth.txt"));
+            var ops = LogicOpApi.UnaryOpKinds.ToArray();
+            TruthTables.Emit(dst,ops);
+            TruthTables.Emit(dst,OpArityKind.Unary);
+        }
+
         public void binary_logic_check()
         {
             using var dst = LogArea.Test.LogWriter(FileName.Define("BinaryTruth.txt"));
-            var ops = LogicOpApi.BinaryKinds.ToArray();
-            TruthTable.Emit(dst,ops);
-            TruthTable.Emit(dst,OpArityKind.Binary);
+            var ops = LogicOpApi.BinaryOpKinds.ToArray();
+            TruthTables.Emit(dst,ops);
+            TruthTables.Emit(dst,OpArityKind.Binary);
         }
 
         public void ternary_logic_check()
         {
             using var dst = LogArea.Test.LogWriter(FileName.Define("TernaryTruth.txt"));
-            var ops = LogicOpApi.TernaryKinds.ToArray();
-            TruthTable.Emit(dst,ops);
-            TruthTable.Emit(dst,OpArityKind.Ternary);
+            var ops = LogicOpApi.TernaryOpKinds.ToArray();
+            TruthTables.Emit(dst,ops);
+            TruthTables.Emit(dst,OpArityKind.Ternary);
 
         }
 
         public void signature_check()
         {
-            foreach(var op in LogicOpApi.BinaryKinds)
+            foreach(var op in LogicOpApi.UnaryOpKinds)
             {
-                var table = TruthTable.Build(op);
+                var table = TruthTables.Build(op);
                 var result = table.GetCol(table.ColCount - 1).ToPrimal(n8).Lo;
-                var sig = TruthTable.Signature(op);
+                var sig = TruthTables.Signature(op);
                 Claim.eq(result,sig);
             }
 
-            foreach(var op in LogicOpApi.TernaryKinds)
+            foreach(var op in LogicOpApi.BinaryOpKinds)
             {
-                var table = TruthTable.Build(op);
+                var table = TruthTables.Build(op);
+                var result = table.GetCol(table.ColCount - 1).ToPrimal(n8).Lo;
+                var sig = TruthTables.Signature(op);
+                Claim.eq(result,sig);
+            }
+
+            foreach(var op in LogicOpApi.TernaryOpKinds)
+            {
+                var table = TruthTables.Build(op);
                 var result = table.GetCol(table.ColCount - 1).ToPrimal(n8);
-                var sig = TruthTable.Signature(op);
+                var sig = TruthTables.Signature(op);
                 Claim.eq(result,sig);
             }
 

@@ -32,7 +32,7 @@ namespace Z0
         /// dst[127:0] := a[127:0] XOR RoundKey[127:0]        
         /// </algorithm>        
         [MethodImpl(Inline)]
-        public static Vec128<byte> enc(Vec128<byte> src, Vec128<byte> key)
+        public static Vector128<byte> enc(Vector128<byte> src, Vector128<byte> key)
             => AES.Encrypt(src,key);
 
         /// <summary>
@@ -42,7 +42,7 @@ namespace Z0
         /// <param name="src">The last block of data to be encrypted</param>
         /// <param name="key">The round key</param>
         [MethodImpl(Inline)]
-        public static Vec128<byte> encl(Vec128<byte> src, Vec128<byte> key)
+        public static Vector128<byte> encl(Vector128<byte> src, Vector128<byte> key)
             => AES.EncryptLast(src,key);
 
         /// <summary>
@@ -59,7 +59,7 @@ namespace Z0
         /// dst[127:0] := a[127:0] XOR RoundKey[127:0]
         /// </algorithm>
         [MethodImpl(Inline)]
-        public static Vec128<byte> dec(Vec128<byte> src, Vec128<byte> key)
+        public static Vector128<byte> dec(Vector128<byte> src, Vector128<byte> key)
             => AES.Decrypt(src,key);
 
         /// <summary>
@@ -69,7 +69,7 @@ namespace Z0
         /// <param name="src">The data to be decrypted</param>
         /// <param name="key">The round key</param>
         [MethodImpl(Inline)]
-        public static Vec128<byte> decl(Vec128<byte> src, Vec128<byte> key)
+        public static Vector128<byte> decl(Vector128<byte> src, Vector128<byte> key)
             => AES.DecryptLast(src,key);
 
         /// <summary>
@@ -78,7 +78,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
-        public static Vec128<byte> invmix(Vec128<byte> src)
+        public static Vector128<byte> invmix(Vector128<byte> src)
             => AES.InverseMixColumns(src);
 
         /// <summary>
@@ -100,13 +100,13 @@ namespace Z0
         /// dst[127:96] := RotWord(SubWord(X3)) XOR RCON
         /// </algorithm>
         [MethodImpl(Inline)]
-        public static Vec128<byte> kgassist(Vec128<byte> src,byte imm8)
+        public static Vector128<byte> kgassist(Vector128<byte> src,byte imm8)
             => AES.KeygenAssist(src,imm8);
 
-        public static void enc(Span128<byte> src, Vec128<byte> key, Span128<byte> dst)            
+        public static void enc(Span128<byte> src, Vector128<byte> key, Span128<byte> dst)            
         {
             for(var block = 0; block < src.BlockCount; block++)
-                 vstore(enc(src.LoadVec128(block),key), ref dst.Block(block));
+                 vstore(enc(src.LoadVector(block),key), ref dst.Block(block));
         }
 
         public static void dec(Span128<byte> src, Vec128<byte> key, Span128<byte> dst)            

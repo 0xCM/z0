@@ -22,7 +22,7 @@ namespace Z0
         /// <param name="src">The source bits</param>
         /// <param name="mask">Specifies the bits in the source to test</param>
         [MethodImpl(Inline)]
-        public static bool testc(Vector128<float> src, Vector128<float> mask)
+        public static bool vtestc(Vector128<float> src, Vector128<float> mask)
             => TestC(src, mask);                     
 
         /// <summary>
@@ -32,7 +32,7 @@ namespace Z0
         /// <param name="src">The source bits</param>
         /// <param name="mask">Specifies the bits in the source to test</param>
         [MethodImpl(Inline)]
-        public static bool testc(Vector128<double> src, Vector128<double> mask)
+        public static bool vtestc(Vector128<double> src, Vector128<double> mask)
             => TestC(src, mask);                     
 
         /// <summary>
@@ -42,7 +42,7 @@ namespace Z0
         /// <param name="src">The source bits</param>
         /// <param name="mask">Specifies the bits in the source to test</param>
         [MethodImpl(Inline)]
-        public static bool testc(Vector256<float> src, Vector256<float> mask)
+        public static bool vtestc(Vector256<float> src, Vector256<float> mask)
             => TestC(src, mask);                             
 
         /// <summary>
@@ -52,7 +52,7 @@ namespace Z0
         /// <param name="src">The source bits</param>
         /// <param name="mask">Specifies the bits in the source to test</param>
         [MethodImpl(Inline)]
-        public static bool testc(Vector256<double> src, Vector256<double> mask)
+        public static bool vtestc(Vector256<double> src, Vector256<double> mask)
             => TestC(src, mask);                             
 
 

@@ -7,6 +7,7 @@ namespace Z0
     using System;
     using System.Linq;
     using System.Runtime.CompilerServices;
+    using System.Runtime.Intrinsics;
     
     using static zfunc;
 
@@ -36,7 +37,7 @@ namespace Z0
 
 
         [MethodImpl(Inline)]
-        public static void Compute<T>(in T x, in T y, in T cin, out T sum, out T cout)
+        public static void Compute<T>(T x, T y, T cin, out T sum, out T cout)
             where T : unmanaged
         {
             var a = gmath.xor(x, y);
@@ -66,7 +67,7 @@ namespace Z0
 
 
         [MethodImpl(Inline)]
-        public static void Compute<T>(in Vec256<T> x, in Vec256<T> y, in Vec256<T> cin, out Vec256<T> sum, out Vec256<T> cout)
+        public static void Compute<T>(Vector256<T> x, Vector256<T> y, Vector256<T> cin, out Vector256<T> sum, out Vector256<T> cout)
             where T : unmanaged
         {
             var a = ginx.vxor(x,y);
@@ -77,15 +78,15 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static OutPair<Vec256<T>> Compute<T>(in Vec256<T> x, in Vec256<T> y, in Vec256<T> cin)
+        public static OutPair<Vector256<T>> Compute<T>(Vector256<T> x, Vector256<T> y, Vector256<T> cin)
             where T : unmanaged
         {
-            Compute(x,y,cin, out Vec256<T> sum, out Vec256<T> cout);
+            Compute(x,y,cin, out Vector256<T> sum, out Vector256<T> cout);
             return(sum,cout);
         }
 
         [MethodImpl(Inline)]
-        public static void Compute<T>(in Vec128<T> x, in Vec128<T> y, in Vec128<T> cin, out Vec128<T> sum, out Vec128<T> cout)
+        public static void Compute<T>(Vector128<T> x, Vector128<T> y, Vector128<T> cin, out Vector128<T> sum, out Vector128<T> cout)
             where T : unmanaged
         {
             var a = ginx.vxor(x,y);
@@ -96,10 +97,10 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static OutPair<Vec128<T>> Compute<T>(in Vec128<T> x, in Vec128<T> y, in Vec128<T> cin)
+        public static OutPair<Vector128<T>> Compute<T>(Vector128<T> x, Vector128<T> y, Vector128<T> cin)
             where T : unmanaged
         {
-            Compute(x,y,cin, out Vec128<T> sum, out Vec128<T> cout);
+            Compute(x,y,cin, out Vector128<T> sum, out Vector128<T> cout);
             return(sum,cout);
         }
 

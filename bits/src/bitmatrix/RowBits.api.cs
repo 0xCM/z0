@@ -82,5 +82,36 @@ namespace Z0
             return and(A,B, ref C);
         }
 
+        public static RowBits<T> andnot<T>(RowBits<T> A, RowBits<T> B,  RowBits<T> C)
+            where T : unmanaged
+        {
+            var rc = BitMatrix.rowdim(A,B,C);
+            for(var i=0; i<rc; i++)
+                C[i] = bitvector.andnot(A[i],B[i]);
+            return C;
+
+        }
+
+        [MethodImpl(Inline)]
+        public static RowBits<T> andnot<T>(RowBits<T> A, RowBits<T> B)
+            where T : unmanaged
+                => andnot(A,B, A.Replicate(true));
+
+
+        public static RowBits<T> or<T>(RowBits<T> A, RowBits<T> B, RowBits<T> C)
+            where T : unmanaged
+        {
+            var rc = BitMatrix.rowdim(A,B,C);
+            for(var i=0; i<rc; i++)
+                C[i] = bitvector.or(A[i],B[i]);
+            return C;
+        }
+
+        [MethodImpl(Inline)]
+        public static RowBits<T> or<T>(RowBits<T> A, RowBits<T> B)
+            where T : unmanaged
+                => or(A,B, A.Replicate(true));
+
+
     }
 }

@@ -8,6 +8,7 @@ namespace Z0
     using System.Linq;
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
+    using System.Runtime.Intrinsics;
     using System.IO;
     
     using static zfunc;
@@ -63,17 +64,46 @@ namespace Z0
             => vand_g256_check<ulong>();            
 
      
-        void vand_g128_check<T>(int blocks = DefaultSampleSize)
+        void vand_g128_check<T>()
             where T : unmanaged
         {
-            CpuOpVerify.VerifyBinOp(Random, blocks, new Vector128BinOp<T>(ginx.vand), gmath.and<T>);
+            var N = n128;
+            for(var block = 0; block < SampleSize; block++)
+            {
+                var srcX = Random.BlockedSpan<T>(N);
+                var srcY = Random.BlockedSpan<T>(N);
+                var vX = ginx.vloadu(N, in head(srcX));
+                var vY = ginx.vloadu(N, in head(srcY));
+                var dstExpect = BlockedSpan.AllocBlock<T>(N);
+                for(var i=0; i< dstExpect.Length; i++)
+                    dstExpect[i] = gmath.and(srcX[i], srcY[i]);
+                var expect = ginx.vloadu(N, in head(dstExpect));
+                var actual = ginx.vand(vX,vY);
+                Claim.eq(expect,actual);
+                
+            }
         }
 
-        void vand_g256_check<T>(int blocks = DefaultSampleSize)
+        void vand_g256_check<T>()
             where T : unmanaged
         {
-            CpuOpVerify.VerifyBinOp(Random, blocks, new Vector256BinOp<T>(ginx.vand<T>), gmath.and<T>);
+            var N = n256;
+            for(var block = 0; block < SampleSize; block++)
+            {
+                var srcX = Random.BlockedSpan<T>(N);
+                var srcY = Random.BlockedSpan<T>(N);
+                var vX = ginx.vloadu(N, in head(srcX));
+                var vY = ginx.vloadu(N, in head(srcY));
+                var dstExpect = BlockedSpan.AllocBlock<T>(N);
+                for(var i=0; i< dstExpect.Length; i++)
+                    dstExpect[i] = gmath.and(srcX[i], srcY[i]);
+                var expect = ginx.vloadu(N, in head(dstExpect));
+                var actual = ginx.vand(vX,vY);
+                Claim.eq(expect,actual);
+                
+            }
         }
+
     }
 
 }

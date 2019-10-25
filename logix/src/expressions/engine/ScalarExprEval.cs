@@ -12,7 +12,7 @@ namespace Z0.Logix
 
     static class ScalarExprEval
     {
-        public static LiteralExpr<T> eval<T>(ITypedExpr<T> expr)
+        public static TypedLiteralExpr<T> eval<T>(ITypedExpr<T> expr)
             where T : unmanaged
         {
             switch(expr)
@@ -23,21 +23,21 @@ namespace Z0.Logix
                     return eval(x.BaseExpr);
                 case IVarExpr<T> x:
                     return eval(x.Value);
-                case IOpExpr<T> x:
+                case ITypedOpExpr<T> x:
                     return eval(x);
-                case IEqualityExpr<T> x:
+                case ITypedEqualityExpr<T> x:
                     return gmath.xnor(eval(x.Lhs).Value, eval(x.Rhs).Value);
                 default:
                     return unhandled(expr);
             }
         }
 
-        static LiteralExpr<T> eval<T>(IOpExpr<T> expr)
+        static TypedLiteralExpr<T> eval<T>(ITypedOpExpr<T> expr)
             where T : unmanaged
         {
             switch(expr)               
             {
-                case IUnaryOp<T> x:
+                case IUnaryBitwiseOp<T> x:
                     return ScalarOpApi.eval(x.OpKind, eval(x.Arg).Value);
 
                 case IBinaryBitwiseOp<T> x:
@@ -48,7 +48,7 @@ namespace Z0.Logix
                     return ScalarOpApi.eval(x.OpKind, 
                         eval(x.Subject).Value, eval(x.Offset).Value);
 
-                case ITernaryOp<T> x:
+                case ITernaryBitwiseOp<T> x:
                     return ScalarOpApi.eval(x.OpKind, 
                         eval(x.FirstArg).Value, eval(x.SecondArg).Value, eval(x.SecondArg).Value);
                         
@@ -57,7 +57,7 @@ namespace Z0.Logix
             }
         }
 
-        static LiteralExpr<T> unhandled<T>(ITypedExpr<T> a)
+        static TypedLiteralExpr<T> unhandled<T>(ITypedExpr<T> a)
             where T : unmanaged
                 => throw new Exception($"{a} unhandled");
     }

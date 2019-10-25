@@ -140,6 +140,13 @@ namespace Z0
             => ref this[blockIndex*BlockLength];
 
         [MethodImpl(Inline)]
+        public Span128<T> Blocked(int blockIndex)
+        {
+            var slice = data.Slice(blockIndex * BlockLength, BlockLength); 
+            return new Span128<T>(slice);
+        }
+
+        [MethodImpl(Inline)]
         public Span<T> Slice(int offset)
             => data.Slice(offset);
             

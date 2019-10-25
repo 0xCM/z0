@@ -26,14 +26,14 @@ namespace Z0.Logix
 
     }
 
-    public interface IArithmeticOp<T> : IArithmeticOp, IArithmeticExpr<T>, IOpExpr<T>
+    public interface IArithmeticOp<T> : IArithmeticOp, IArithmeticExpr<T>, ITypedOpExpr<T>
         where T : unmanaged
     {
 
 
     }
 
-    public interface IArithmeticOp<T,K> : IArithmeticOp<T>, IOpExpr<T,K>
+    public interface IArithmeticOp<T,K> : IArithmeticOp<T>, ITypedOpExpr<T,K>
         where T : unmanaged
         where K : Enum
     {
@@ -46,28 +46,44 @@ namespace Z0.Logix
 
     }
 
+
+    public interface IUnaryArithmeticOp<T> :  IUnaryArithmeticOp, IArithmeticOp<T>, ITypedUnaryOp<T, UnaryArithmeticOpKind> 
+        where T : unmanaged
+    {
+
+    }
+
+    public interface IBinaryArithmeticOp :  IArithmeticOp
+    {
+
+    }
+
+    public interface IBinaryArithmeticOp<T> :  IBinaryArithmeticOp,  IArithmeticOp<T,BinaryArithmeticOpKind>
+        where T : unmanaged
+    {
+        ITypedExpr<T> LeftArg {get;}
+
+        ITypedExpr<T> RightArg {get;}
+
+
+    }
+
     public interface IComparisonExpr : IArithmeticOp
     {
 
     }
 
+    /// <summary>
+    /// Characterizes a comparson expression over a parametric type
+    /// </summary>
+    /// <typeparam name="T">The type over which the comparison is defined</typeparam>
     public interface IComparisonExpr<T> : IComparisonExpr, IArithmeticOp<T,ComparisonOpKind>
         where T : unmanaged
     {
-        IArithmeticExpr<T> LeftArg {get;}
 
-        IArithmeticExpr<T> RightArg {get;}
-    }
+        ITypedExpr<T> LeftArg {get;}
 
-
-    public interface IUnaryArithmeticOp<T> :  IUnaryArithmeticOp,  IArithmeticOp<T,UnaryArithmeticOpKind>
-        where T : unmanaged
-    {
-        /// <summary>
-        /// The one and only operand
-        /// </summary>
-        ITypedExpr<T> Operand {get;}
-
+        ITypedExpr<T> RightArg {get;}
     }
 
 }

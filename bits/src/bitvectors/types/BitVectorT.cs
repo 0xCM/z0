@@ -11,14 +11,20 @@ namespace Z0
 
     using static zfunc;    
 
+    /// <summary>
+    /// Defines a generic bitvector over a primal type
+    /// </summary>
+    /// <typeparam name="T">The type over which the vector is defined</typeparam>
     public struct BitVector<T>
         where T : unmanaged
     {
         internal T data;
 
+        /// <summary>
+        /// The number of bits represented by the vector
+        /// </summary>
+        /// <typeparam name="T">The type over which the vector is defined</typeparam>
         public static readonly int Width = bitsize<T>();
-
-        public static readonly int LastPos = Width - 1;
         
         /// <summary>
         /// Creates a bitvector defined by a single cell or portion thereof
@@ -189,7 +195,7 @@ namespace Z0
         }
 
         /// <summary>
-        /// Presents the represented data as a span of bytes
+        /// Converts the encapsulated data to a bytespan
         /// </summary>
         public readonly Span<byte> Bytes
         {
@@ -210,7 +216,7 @@ namespace Z0
         }
 
         /// <summary>
-        /// Is true if no bits are enabled, false otherwise
+        /// Specifies whether all bits are disabled
         /// </summary>
         public bool Empty
         {
@@ -219,12 +225,21 @@ namespace Z0
         }
 
         /// <summary>
-        /// Is true if the vector has at least one enabled bit; false otherwise
+        /// Specifies whether at least one bit is enabled
         /// </summary>
         public readonly bool Nonempty
         {
             [MethodImpl(Inline)]
             get => Pop() != 0;
+        }
+
+        /// <summary>
+        /// Specifies whether all bits are enabled
+        /// </summary>
+        public readonly bool LitUp
+        {
+            [MethodImpl(Inline)]
+            get => Pop() == Width;
         }
 
         /// <summary>
@@ -269,17 +284,23 @@ namespace Z0
             => data = gbits.disable(ref data, (byte)pos);
 
         /// <summary>
-        /// Computes the scalar product between this vector and another of identical length
+        /// Sets all the bits to align with the source value
         /// </summary>
-        /// <param name="y">The right vector</param>
+        /// <param name="value">The source value</param>
         [MethodImpl(Inline)]
-        public bit Dot(BitVector<T> y)
-            => bitvector.dot(this,y);
+        public void Fill(bit value)
+        {
+            var primal = PrimalInfo.Get<T>();
+            if(value)
+                data = gmath.maxval<T>();
+            else
+                data = default(T);
+        }
 
         /// <summary>
-        /// Specifies a reference to the leading cell
+        /// Specifies the data over which the vector is defined
         /// </summary>
-        public T Data
+        public readonly T Data
         {
             [MethodImpl(Inline)]
             get => data;
@@ -291,7 +312,7 @@ namespace Z0
         /// <param name="first">The first bit position</param>
         /// <param name="last">The last bit position</param>
         [MethodImpl(Inline)]
-        public BitVector<T> Between(int first, int last)
+        public readonly BitVector<T> Between(int first, int last)
             => gbits.between(data, (byte)first,(byte)last);
 
         /// <summary>
@@ -309,38 +330,24 @@ namespace Z0
             => bitvector.pop(this);
 
         /// <summary>
-        /// Sets all the bits to align with the source value
-        /// </summary>
-        /// <param name="value">The source value</param>
-        [MethodImpl(Inline)]
-        public void Fill(bit value)
-        {
-            var primal = PrimalInfo.Get<T>();
-            if(value)
-                data = gmath.maxval<T>();
-            else
-                data = default(T);
-        }
-
-        /// <summary>
-        /// Returns a copy of the vector
+        /// Clones the vector
         /// </summary>
         [MethodImpl(Inline)]
         public readonly BitVector<T> Replicate()
             => new BitVector<T>(data);
 
         [MethodImpl(Inline)]
-        public bool Equals(BitVector<T> y)
+        public readonly bool Equals(BitVector<T> y)
             => gmath.eq(data, y.data);
 
         [MethodImpl(Inline)]
-        public string Format(bool tlz = false, bool specifier = false, int? blockWidth = null)
+        public readonly string Format(bool tlz = false, bool specifier = false, int? blockWidth = null)
             => ToBitString().Format(tlz, specifier, blockWidth);
 
-        public override bool Equals(object obj)
+        public readonly override bool Equals(object obj)
             => obj is BitVector<T> x && Equals(x);
         
-        public override int GetHashCode()
+        public readonly override int GetHashCode()
             => data.GetHashCode();
     
         public override string ToString()

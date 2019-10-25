@@ -15,74 +15,76 @@ namespace Z0.Logix
 
     public static class TypedIdentities
     {
-        public static IEnumerable<EqualityExpr<T>> ScalarIdentities<T>()
+        //Verifies the identity ~(x + 1) = ~ x - 1 holds for 64-bit bitvectors 
+        
+        public static IEnumerable<TypedEqualityExpr<T>> ScalarIdentities<T>()
             where T : unmanaged
                 => items(AndOverOr<T>(), AndOverXOr<T>(), OrOverAnd<T>(), NotOverAnd<T>(), NotOverXOr<T>());
 
-        public static IEnumerable<EqualityExpr<Vector128<T>>> Vec128Identities<T>()
+        public static IEnumerable<TypedEqualityExpr<Vector128<T>>> Vec128Identities<T>()
             where T : unmanaged
                 => items(AndOverOr128<T>(), AndOverXOr128<T>(), OrOverAnd128<T>(), NotOverAnd128<T>(), NotOverXOr128<T>());
 
-        public static IEnumerable<EqualityExpr<Vector256<T>>> Vec256Identities<T>()
+        public static IEnumerable<TypedEqualityExpr<Vector256<T>>> Vec256Identities<T>()
             where T : unmanaged
                 => items(AndOverOr256<T>(), AndOverXOr256<T>(), OrOverAnd256<T>(), NotOverAnd256<T>(), NotOverXOr256<T>());
 
-        public static EqualityExpr<T> AndOverOr<T>()
+        public static TypedEqualityExpr<T> AndOverOr<T>()
             where T : unmanaged
                 => TypedIdentities<T>.AndOverOr;
 
-        public static EqualityExpr<T> AndOverXOr<T>()
+        public static TypedEqualityExpr<T> AndOverXOr<T>()
             where T : unmanaged
                 => TypedIdentities<T>.AndOverXOr;
 
-        public static EqualityExpr<T> OrOverAnd<T>()
+        public static TypedEqualityExpr<T> OrOverAnd<T>()
             where T : unmanaged
                 => TypedIdentities<T>.OrOverAnd;
-        public static EqualityExpr<T> NotOverAnd<T>()
+        public static TypedEqualityExpr<T> NotOverAnd<T>()
             where T : unmanaged
                 => TypedIdentities<T>.NotOverAnd;
         
-        public static EqualityExpr<T> NotOverXOr<T>()
+        public static TypedEqualityExpr<T> NotOverXOr<T>()
             where T : unmanaged
                 => TypedIdentities<T>.NotOverXOr;
 
-        public static EqualityExpr<Vector128<T>> AndOverOr128<T>()
+        public static TypedEqualityExpr<Vector128<T>> AndOverOr128<T>()
             where T : unmanaged
                 => AndOverOr<Vector128<T>>();
 
-        public static EqualityExpr<Vector128<T>> AndOverXOr128<T>()
+        public static TypedEqualityExpr<Vector128<T>> AndOverXOr128<T>()
             where T : unmanaged
                 => AndOverXOr<Vector128<T>>();
 
-        public static EqualityExpr<Vector128<T>> OrOverAnd128<T>()
+        public static TypedEqualityExpr<Vector128<T>> OrOverAnd128<T>()
             where T : unmanaged
                 => OrOverAnd<Vector128<T>>();
 
-        public static EqualityExpr<Vector128<T>> NotOverAnd128<T>()
+        public static TypedEqualityExpr<Vector128<T>> NotOverAnd128<T>()
             where T : unmanaged
                 => NotOverAnd<Vector128<T>>();
                 
-        public static EqualityExpr<Vector128<T>> NotOverXOr128<T>()
+        public static TypedEqualityExpr<Vector128<T>> NotOverXOr128<T>()
             where T : unmanaged
                 => NotOverXOr<Vector128<T>>();
 
-        public static EqualityExpr<Vector256<T>> AndOverOr256<T>()
+        public static TypedEqualityExpr<Vector256<T>> AndOverOr256<T>()
             where T : unmanaged
                 => AndOverOr<Vector256<T>>();
 
-        public static EqualityExpr<Vector256<T>> AndOverXOr256<T>()
+        public static TypedEqualityExpr<Vector256<T>> AndOverXOr256<T>()
             where T : unmanaged
                 => AndOverXOr<Vector256<T>>();
 
-        public static EqualityExpr<Vector256<T>> OrOverAnd256<T>()
+        public static TypedEqualityExpr<Vector256<T>> OrOverAnd256<T>()
             where T : unmanaged
                 => OrOverAnd<Vector256<T>>();
 
-        public static EqualityExpr<Vector256<T>> NotOverAnd256<T>()
+        public static TypedEqualityExpr<Vector256<T>> NotOverAnd256<T>()
             where T : unmanaged
                 => NotOverAnd<Vector256<T>>();
                 
-        public static EqualityExpr<Vector256<T>> NotOverXOr256<T>()
+        public static TypedEqualityExpr<Vector256<T>> NotOverXOr256<T>()
             where T : unmanaged
                 => NotOverXOr<Vector256<T>>();
 
@@ -95,7 +97,7 @@ namespace Z0.Logix
         /// <summary>
         /// Specifies the identity and(a,or(b,c)) == or(and(a,b), and(a,c))
         /// </summary>
-        public static EqualityExpr<T> AndOverOr
+        public static TypedEqualityExpr<T> AndOverOr
         {
             get
             {
@@ -110,7 +112,7 @@ namespace Z0.Logix
         /// <summary>
         /// Specifies the identity and(a,xor(b,c)) == xor(and(a,b), and(a,c))
         /// </summary>
-        public static EqualityExpr<T> AndOverXOr
+        public static TypedEqualityExpr<T> AndOverXOr
         {
             get
             {
@@ -125,7 +127,7 @@ namespace Z0.Logix
         /// <summary>
         /// Specifies the identity or(a,and(b,c)) == and(or(a,b), or(a,c))
         /// </summary>
-        public static EqualityExpr<T> OrOverAnd
+        public static TypedEqualityExpr<T> OrOverAnd
         {
             get
             {
@@ -140,7 +142,7 @@ namespace Z0.Logix
         /// <summary>
         /// Specifies the identity not(and(a,b)) == or(not(x),not(y))
         /// </summary>
-        public static EqualityExpr<T> NotOverAnd
+        public static TypedEqualityExpr<T> NotOverAnd
         {
             get
             {
@@ -155,7 +157,7 @@ namespace Z0.Logix
         /// <summary>
         /// Specifies the identity not(xor(a,b)) == xor(not(x),y)
         /// </summary>
-        public static EqualityExpr<T> NotOverXOr
+        public static TypedEqualityExpr<T> NotOverXOr
         {
             get
             {                

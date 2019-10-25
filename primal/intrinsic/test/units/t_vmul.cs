@@ -47,8 +47,6 @@ namespace Z0
             }
         
         }
-
-
         
         public void mul256_u64()
         {
@@ -59,13 +57,13 @@ namespace Z0
                 var rhs = Random.Span256<ulong>(blocks, domain);
                 for(var block=0; block<blocks; block++)
                 {
-                    var x = lhs.LoadVec256(block);
-                    var y = rhs.LoadVec256(block);
+                    var x = ginxx.LoadVector(lhs, block);
+                    var y = ginxx.LoadVector(rhs, block);
                     var z = dinx.vmul(x,y); 
 
                     var a = x.ToSpan().Replicate();
                     var b = y.ToSpan();
-                    var c = mathspan.mul(a,b).LoadVec256(0);
+                    var c = mathspan.mul(a,b).LoadVector(n256);
                     Claim.eq(z,c);                                           
                 }
             }

@@ -269,12 +269,28 @@ namespace Z0
             => src;
 
         /// <summary>
+        /// Defines a 16-bit bitvector with content determined by its corresponding integral type 
+        /// </summary>
+        /// <param name="src">The source value</param>
+        [MethodImpl(Inline)]
+        public static BitVector16 ToBitVector(this uint src, N16 n)        
+            => (ushort)src;
+
+        /// <summary>
         /// Defines a 32-bit bitvector with content determined by a 32-bit usigned integer
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
         public static BitVector32 ToBitVector(this int src, N32 n)        
             => (uint)src;
+
+        /// <summary>
+        /// Defines a 16-bit bitvector with content determined by its corresponding integral type 
+        /// </summary>
+        /// <param name="src">The source value</param>
+        [MethodImpl(Inline)]
+        public static BitVector16 ToBitVector(this int src, N16 n)        
+            => (ushort)src;
 
         /// <summary>
         /// Defines a 64-bit bitvector where the lower 16 bits are determined by 
@@ -493,8 +509,8 @@ namespace Z0
         /// <typeparam name="T">The primal component type of the target vector</typeparam>
         [MethodImpl(Inline)]
         public static Vector128<T> ToCpuVector<T>(this BitString src, N128 n)
-            where T : unmanaged        
-                => src.Pack().As<byte,T>().ToSpan128().LoadVector();
+            where T : unmanaged   
+                => src.Pack().As<byte, T>().ToSpan128().LoadVector();
 
         /// <summary>
         /// Extracts a 128-bit cpu vector from a bitsring of length 128 or greater
@@ -503,8 +519,8 @@ namespace Z0
         /// <typeparam name="T">The primal component type of the target vector</typeparam>
         [MethodImpl(Inline)]
         public static Vector256<T> ToCpuVector<T>(this BitString src, N256 n)
-            where T : unmanaged        
-                => src.Pack().As<byte,T>().ToSpan256().LoadVector();
+            where T : unmanaged
+                => src.Pack().As<byte, T>().ToSpan256().LoadVector();
 
         /// <summary>
         /// Converts an 8-bit bitmask to an 8-bit bitvector
@@ -537,7 +553,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitVector64 ToBitVector(this BitMask64 src)
             => ((ulong)src).ToBitVector();
-
 
         /// <summary>
         /// Applies a truncating reduction Bv64 -> Bv8

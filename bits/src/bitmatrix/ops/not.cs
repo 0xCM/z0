@@ -45,7 +45,7 @@ namespace Z0
             for(var i=0; i< A.RowCount; i += rowstep)
             {
                 var x1 = vload256(ref A[i]);
-                dinx.vnot(in x1).StoreTo(ref dst[i]);
+                dinx.vnot(x1).StoreTo(ref dst[i]);
             }
             return dst;
         }

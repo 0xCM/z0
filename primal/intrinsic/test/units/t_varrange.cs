@@ -15,10 +15,14 @@ namespace Z0.Test
     {     
         public void shift128()
         {
-            var x = ginx.vones<ulong>(n128);
-            var y = dinx.vsllx(x,19);
-            var z = dinx.vslrx(x,19);
-            Trace(x.ToBitString());
+            var src = ginx.vones<ulong>(n128);
+            const byte offset = 19;
+            var y = ginx.vsllx(src,offset);
+            var z = ginx.vsrlx(src,offset);
+            
+
+            Trace(src.ToBitString());
+            Trace(src.ToBitString().Sll(offset).Format());
             Trace(y.ToBitString());
             Trace(z.ToBitString());
         }

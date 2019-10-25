@@ -23,7 +23,7 @@ namespace Z0.Logix
             dst[1] = (byte)(ScalarOps.implies((byte)1,(byte)0) & 1) == 1;
             dst[2] = (byte)(ScalarOps.implies((byte)0,(byte)1) & 1) == 1;
             dst[3] = (byte)(ScalarOps.implies((byte)1,(byte)1) & 1) == 1;
-            var sig = TruthTable.Signature(BinaryLogicOpKind.Implies);
+            var sig = TruthTables.Signature(BinaryLogicOpKind.Implies);
             Claim.eq(sig,dst);
         }
 
@@ -424,64 +424,64 @@ namespace Z0.Logix
         // ~ ternary
 
         public void check_ternary_f01()
-            => check_ops(Ternary512OpKind.X01);
+            => check_ops(TernaryBitOpKind.X01);
 
         public void check_ternary_f02()
-            => check_ops(Ternary512OpKind.X02);
+            => check_ops(TernaryBitOpKind.X02);
 
         public void check_ternary_f03()
-            => check_ops(Ternary512OpKind.X03);
+            => check_ops(TernaryBitOpKind.X03);
 
         public void check_ternary_f04()
-            => check_ops(Ternary512OpKind.X04);
+            => check_ops(TernaryBitOpKind.X04);
 
         public void check_ternary_f05()
-            => check_ops(Ternary512OpKind.X05);
+            => check_ops(TernaryBitOpKind.X05);
 
         public void check_ternary_f06()
-            => check_ops(Ternary512OpKind.X06);
+            => check_ops(TernaryBitOpKind.X06);
 
         public void check_ternary_f07()
-            => check_ops(Ternary512OpKind.X07);
+            => check_ops(TernaryBitOpKind.X07);
 
         public void check_ternary_f08()
-            => check_ops(Ternary512OpKind.X08);
+            => check_ops(TernaryBitOpKind.X08);
 
         public void check_ternary_f09()
-            => check_ops(Ternary512OpKind.X09);
+            => check_ops(TernaryBitOpKind.X09);
 
         public void check_ternary_f0a()
-            => check_ops(Ternary512OpKind.X0A);
+            => check_ops(TernaryBitOpKind.X0A);
 
         public void check_ternary_f0b()
-            => check_ops(Ternary512OpKind.X0B);
+            => check_ops(TernaryBitOpKind.X0B);
 
         public void check_ternary_f0c()
-            => check_ops(Ternary512OpKind.X0C);
+            => check_ops(TernaryBitOpKind.X0C);
 
         public void check_ternary_f0d()
-            => check_ops(Ternary512OpKind.X0D);
+            => check_ops(TernaryBitOpKind.X0D);
 
         public void check_ternary_f0e()
-            => check_ops(Ternary512OpKind.X0E);
+            => check_ops(TernaryBitOpKind.X0E);
 
         public void check_ternary_f0f()
-            => check_ops(Ternary512OpKind.X0F);
+            => check_ops(TernaryBitOpKind.X0F);
 
         public void check_ternary_f10()
-            => check_ops(Ternary512OpKind.X10);
+            => check_ops(TernaryBitOpKind.X10);
 
         public void check_ternary_f11()
-            => check_ops(Ternary512OpKind.X11);
+            => check_ops(TernaryBitOpKind.X11);
            
         public void check_ternary_f12()
-            => check_ops(Ternary512OpKind.X12);
+            => check_ops(TernaryBitOpKind.X12);
 
         public void check_ternary_f13()
-            => check_ops(Ternary512OpKind.X13);
+            => check_ops(TernaryBitOpKind.X13);
 
 
-        void check_ops(Ternary512OpKind op)
+        void check_ops(TernaryBitOpKind op)
         {
             check_op<byte>(op);
             check_op<ushort>(op);
@@ -648,7 +648,7 @@ namespace Z0.Logix
             }
         }
 
-        void check_op_identity<T>(Ternary512OpKind id)
+        void check_op_identity<T>(TernaryBitOpKind id)
             where T: unmanaged
         {
             var a = convert<T>(0b1111_0000);
@@ -661,7 +661,7 @@ namespace Z0.Logix
             Claim.eq(expect.FormatHex(), actual.FormatHex());
         }
 
-        void check_op<T>(Ternary512OpKind id)
+        void check_op<T>(TernaryBitOpKind id)
             where T : unmanaged
         {
             var BL = LogicOpApi.lookup(id);

@@ -8,6 +8,9 @@ namespace Z0.Logix
     
     using static zfunc;
 
+    /// <summary>
+    /// Classifies unary arithmetic operators
+    /// </summary>
     [Flags]
     public enum UnaryArithmeticOpKind : uint
     {

@@ -30,13 +30,14 @@ namespace Z0
             || typeof(T) == typeof(ushort) 
             || typeof(T) == typeof(uint) 
             || typeof(T) == typeof(ulong))
-                return negateu(src);
+                return negate_u(src);
             else if(typeof(T) == typeof(sbyte) 
             || typeof(T) == typeof(short) 
             || typeof(T) == typeof(int) 
             || typeof(T) == typeof(long))
-                return negatei(src);
-            else return gfp.negate(src);
+                return negate_i(src);
+            else 
+                return gfp.negate(src);
         }           
 
         /// <summary>
@@ -54,18 +55,19 @@ namespace Z0
             || typeof(T) == typeof(ushort) 
             || typeof(T) == typeof(uint) 
             || typeof(T) == typeof(ulong))
-                negateu(ref src);
+                negate_u(ref src);
             else if(typeof(T) == typeof(sbyte) 
             || typeof(T) == typeof(short) 
             || typeof(T) == typeof(int) 
             || typeof(T) == typeof(long))
-                negatei(ref src);
-            else gfp.negate(ref src);
+                negate_i(ref src);
+            else 
+                gfp.negate(ref src);
             return ref src;
         }           
 
         [MethodImpl(Inline)]
-        static T negatei<T>(T src)
+        static T negate_i<T>(T src)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
@@ -79,7 +81,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static T negateu<T>(T src)
+        static T negate_u<T>(T src)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -93,7 +95,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static ref T negatei<T>(ref T src)
+        static ref T negate_i<T>(ref T src)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
@@ -108,7 +110,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static ref T negateu<T>(ref T src)
+        static ref T negate_u<T>(ref T src)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))

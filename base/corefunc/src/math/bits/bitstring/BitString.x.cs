@@ -106,6 +106,22 @@ namespace Z0
             => BitString.FromScalar(src);
 
         /// <summary>
+        /// Converts a bitspan to a to a bitstring
+        /// </summary>
+        /// <param name="src">The source bits</param>
+        [MethodImpl(Inline)]        
+        public static BitString ToBitString(this Span<bit> src)
+            => BitString.FromBits(src); 
+
+        /// <summary>
+        /// Converts a readonly bitspan to a bitstring
+        /// </summary>
+        /// <param name="src">The source bits</param>
+        [MethodImpl(Inline)]        
+        public static BitString ToBitString(this ReadOnlySpan<bit> src)
+            => BitString.FromBits(src);
+
+        /// <summary>
         /// Converts span content to a to a bitstring
         /// </summary>
         /// <param name="src">The source bits</param>
@@ -123,22 +139,6 @@ namespace Z0
             where T : unmanaged
                 => BitString.FromScalars(src); 
 
-
-        /// <summary>
-        /// Converts a bitspan to a bitstring
-        /// </summary>
-        /// <param name="src">The source bits</param>
-        [MethodImpl(Inline)]        
-        public static BitString ToBitString(this Span<Bit> src)
-            => BitString.FromBits(src);
-
-        /// <summary>
-        /// Converts a readonly bitspan to a bitstring
-        /// </summary>
-        /// <param name="src">The source bits</param>
-        [MethodImpl(Inline)]        
-        public static BitString ToBitString(this ReadOnlySpan<bit> src)
-            => BitString.FromBits(src);
 
         /// <summary>
         /// Converts a bitview to a bitstring

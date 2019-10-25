@@ -9,6 +9,7 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
     using System.Runtime.CompilerServices;
+    using System.Runtime.Intrinsics;
     using System.Text.RegularExpressions;
     using System.Text;
 
@@ -60,9 +61,9 @@ namespace Z0
         /// <param name="offset">The position at which formatting should begin</param>
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]        
-        public static string FormatList<T>(this ReadOnlySpan128<T> src, char delimiter = ',', int offset = 0)
+        public static string FormatList<T>(this ReadOnlySpan128<T> src, char delimiter = ',', int offset = 0, int pad = 0)
             where T : unmanaged
-                => src.Unblocked.FormatList(delimiter, offset);
+                => src.Unblocked.FormatList(delimiter, offset, pad);
 
         /// <summary>
         /// Formats a blocked span as a delimited list
@@ -72,9 +73,9 @@ namespace Z0
         /// <param name="offset">The position at which formatting should begin</param>
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]        
-        public static string FormatList<T>(this Span128<T> src, char delimiter = ',', int offset = 0)
+        public static string FormatList<T>(this Span128<T> src, char delimiter = ',', int offset = 0, int pad = 0)
             where T : unmanaged
-                => src.Unblocked.FormatList(delimiter, offset);
+                => src.Unblocked.FormatList(delimiter, offset, pad);
 
         /// <summary>
         /// Formats a blocked span as a delimited list
@@ -84,9 +85,9 @@ namespace Z0
         /// <param name="offset">The position at which formatting should begin</param>
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]        
-        public static string FormatList<T>(this ReadOnlySpan256<T> src, char delimiter = ',', int offset = 0)
+        public static string FormatList<T>(this ReadOnlySpan256<T> src, char delimiter = ',', int offset = 0, int pad = 0)
             where T : unmanaged
-            => src.Unblocked.FormatList(delimiter, offset);
+            => src.Unblocked.FormatList(delimiter, offset, pad);
 
         /// <summary>
         /// Formats a span of natural length as a delimited list
@@ -97,10 +98,10 @@ namespace Z0
         /// <typeparam name="T">The element type</typeparam>
         /// <typeparam name="N">The length type</typeparam>
         [MethodImpl(Inline)]        
-        public static string FormatList<N,T>(this Span<N,T> src, char delimiter = ',', int offset = 0)
+        public static string FormatList<N,T>(this Span<N,T> src, char delimiter = ',', int offset = 0, int pad = 0)
             where N : ITypeNat, new()
             where T : unmanaged 
-                => src.Unsize().FormatList(delimiter,offset);
+                => src.Unsize().FormatList(delimiter,offset,pad);
 
         /// <summary>
         /// Formats a span as a table
@@ -245,10 +246,10 @@ namespace Z0
         /// Formats a span as a delimited list
         /// </summary>
         /// <param name="src">The source span</param>
-        /// <param name="delimiter">The delimiter</param>
+        /// <param name="sep">The delimiter</param>
         /// <param name="offset">The position at which formatting should begin</param>
         /// <typeparam name="T">The element type</typeparam>
-        public static string FormatList<T>(this ReadOnlySpan<T> src, char delimiter = ',', int offset = 0)
+        public static string FormatList<T>(this ReadOnlySpan<T> src, char sep = ',', int offset = 0, int pad = 0)
         {
             if(src.Length == 0)
                 return string.Empty;
@@ -257,10 +258,11 @@ namespace Z0
             sb.Append(AsciSym.LBracket);
             for(var i = offset; i< src.Length; i++)
             {
-                sb.Append($"{src[i]}");
+                var item =$"{src[i]}";
+                sb.Append(pad != 0 ? item.PadLeft(pad) : item);                
                 if(i != src.Length - 1)
                 {
-                    sb.Append(delimiter);
+                    sb.Append(sep);
                     sb.Append(AsciSym.Space);
                 }
             }
@@ -276,8 +278,8 @@ namespace Z0
         /// <param name="offset">The position at which formatting should begin</param>
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]        
-        public static string FormatList<T>(this Span<T> src, char delimiter = ',', int offset = 0)
-            => src.ReadOnly().FormatList(delimiter, offset);
+        public static string FormatList<T>(this Span<T> src, char delimiter = ',', int offset = 0, int pad = 0)
+            => src.ReadOnly().FormatList(delimiter, offset, pad);
 
         /// <summary>
         /// Formats a blocked span as a delimited list
@@ -287,9 +289,9 @@ namespace Z0
         /// <param name="offset">The position at which formatting should begin</param>
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]        
-        public static string FormatList<T>(this Span256<T> src, char delimiter = ',', int offset = 0)
+        public static string FormatList<T>(this Span256<T> src, char delimiter = ',', int offset = 0, int pad = 0)
             where T : unmanaged
-                => src.Unblocked.FormatList(delimiter, offset); 
+                => src.Unblocked.FormatList(delimiter, offset, pad); 
 
         /// <summary>
         /// Formats a property declaration that specifies the span content
@@ -317,32 +319,56 @@ namespace Z0
             where T : unmanaged
                 => src.ReadOnly().FormatProperty<T>(name);
         
-        public static string Format<T>(this Vec128<T> src, SeqFmtKind sfmt = SeqFmtKind.List)
+
+        public static string Format<T>(this Vector128<T> src, SeqFmtKind sfmt = SeqFmtKind.List, char sep = ',', int pad = 0)
             where T : unmanaged
         {
             var elements = src.ToSpan();
             switch(sfmt)
             {
                 case SeqFmtKind.Vector:
-                    return elements.FormatVector();
+                    return elements.FormatVector(sep.ToString());
                 default:
-                    return elements.FormatList();                    
+                    return elements.FormatList(sep,0,pad);                    
             }
         }
 
-        public static string Format<T>(this Vec256<T> src, SeqFmtKind sfmt = SeqFmtKind.List)
+        public static string FormatList<T>(this Vector128<T> src, char sep = ',', int pad = 0)
+            where T : unmanaged
+                => src.Format(SeqFmtKind.List, sep, pad);
+
+        public static string Format<T>(this Vec256<T> src, SeqFmtKind sfmt = SeqFmtKind.List, char sep = ',', int pad = 0)
             where T : unmanaged
         {
             var elements = src.ToSpan();
             switch(sfmt)
             {
                 case SeqFmtKind.Vector:
-                    return elements.FormatVector();
+                    return elements.FormatVector(sep.ToString());
                 default:
-                    return elements.FormatList();
+                    return elements.FormatList(sep,0,pad);
                     
             }
         }
+
+        public static string Format<T>(this Vector256<T> src, SeqFmtKind sfmt = SeqFmtKind.List, char sep = ',', int pad = 0)
+            where T : unmanaged
+        {
+            var elements = src.ToSpan();
+            switch(sfmt)
+            {
+                case SeqFmtKind.Vector:
+                    return elements.FormatVector(sep.ToString());
+                default:
+                    return elements.FormatList(sep,0,pad);
+                    
+            }
+        }
+
+        public static string FormatList<T>(this Vector256<T> src, char sep = ',', int pad = 0)
+            where T : unmanaged
+                => src.Format(SeqFmtKind.List,sep,pad);
+
 
     }
 

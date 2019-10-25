@@ -16,43 +16,6 @@ namespace Z0
     {
 
         [MethodImpl(Inline)]
-        public static Vec128<T> vand<T>(in Vec128<T> x, in Vec128<T> y)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(byte) 
-            || typeof(T) == typeof(ushort) 
-            || typeof(T) == typeof(uint) 
-            || typeof(T) == typeof(ulong))
-                return vand_128u(x,y);
-            else if(typeof(T) == typeof(sbyte) 
-            || typeof(T) == typeof(short) 
-            || typeof(T) == typeof(int) 
-            || typeof(T) == typeof(long))
-                return vand_128i(x,y);
-            else 
-                throw unsupported<T>();
-        }
-
-
-        [MethodImpl(Inline)]
-        public static Vec256<T> vand<T>(in Vec256<T> x, in Vec256<T> y)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(byte) 
-            || typeof(T) == typeof(ushort) 
-            || typeof(T) == typeof(uint) 
-            || typeof(T) == typeof(ulong))
-                return vand_256u(x,y);
-            else if(typeof(T) == typeof(sbyte) 
-            || typeof(T) == typeof(short) 
-            || typeof(T) == typeof(int) 
-            || typeof(T) == typeof(long))
-                return vand_256i(x,y);
-            else 
-                throw unsupported<T>();
-        }
-
-        [MethodImpl(Inline)]
         public static Vector128<T> vand<T>(Vector128<T> x, Vector128<T> y)
             where T : unmanaged
         {
@@ -116,63 +79,6 @@ namespace Z0
                 return generic<T>(dinx.vand(int64(x), int64(y)));
         }
 
-
-        [MethodImpl(Inline)]
-        static Vec128<T> vand_128u<T>(in Vec128<T> x, in Vec128<T> y)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(byte))
-                return generic<T>(dinx.vand(uint8(x), uint8(y)));
-            else if(typeof(T) == typeof(ushort))
-                return generic<T>(dinx.vand(uint16(x), uint16(y)));
-            else if(typeof(T) == typeof(uint))
-                return generic<T>(dinx.vand(uint32(x), uint32(y)));
-            else
-                return generic<T>(dinx.vand(uint64(x), uint64(y)));
-        }
-
-        [MethodImpl(Inline)]
-        static Vec128<T> vand_128i<T>(in Vec128<T> x, in Vec128<T> y)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(sbyte))
-                return generic<T>(dinx.vand(int8(x), int8(y)));
-            else if(typeof(T) == typeof(short))
-                return generic<T>(dinx.vand(int16(x), int16(y)));
-            else if(typeof(T) == typeof(int))
-                return generic<T>(dinx.vand(int32(x), int32(y)));
-            else
-                return generic<T>(dinx.vand(int64(x), int64(y)));
-        }
-
-
-        [MethodImpl(Inline)]
-        static Vec256<T> vand_256u<T>(in Vec256<T> x, in Vec256<T> y)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(byte))
-                return generic<T>(dinx.vand(uint8(x), uint8(y)));
-            else if(typeof(T) == typeof(ushort))
-                return generic<T>(dinx.vand(uint16(x), uint16(y)));
-            else if(typeof(T) == typeof(uint))
-                return generic<T>(dinx.vand(uint32(x), uint32(y)));
-            else
-                return generic<T>(dinx.vand(uint64(x), uint64(y)));
-        }
-
-        [MethodImpl(Inline)]
-        static Vec256<T> vand_256i<T>(in Vec256<T> x, in Vec256<T> y)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(sbyte))
-                return generic<T>(dinx.vand(int8(x), int8(y)));
-            else if(typeof(T) == typeof(short))
-                return generic<T>(dinx.vand(int16(x), int16(y)));
-            else if(typeof(T) == typeof(int))
-                return generic<T>(dinx.vand(int32(x), int32(y)));
-            else
-                return generic<T>(dinx.vand(int64(x), int64(y)));
-        }
 
         [MethodImpl(Inline)]
         static Vector256<T> vand_256u<T>(Vector256<T> x, Vector256<T> y)

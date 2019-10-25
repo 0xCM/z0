@@ -303,7 +303,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public BitMatrix8 AndNot(in BitMatrix8 rhs)
-            => BitMatrix.andn(ref this, rhs);
+            => BitMatrix.andnot(ref this, rhs);
 
         /// <summary>
         /// Retrives the bitvector determined by the matrix diagonal

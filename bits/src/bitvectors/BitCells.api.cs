@@ -31,7 +31,7 @@ namespace Z0
         /// <typeparam name="N">The length type</typeparam>
         /// <typeparam name="T">The component type</typeparam>
         [MethodImpl(Inline)]
-        public static BitCells<T> Alloc<T>(BitSize len, T? fill = null)
+        public static BitCells<T> Alloc<T>(int len, T? fill = null)
             where T : unmanaged
                 => BitCells<T>.Alloc(len, fill);
 
@@ -42,7 +42,7 @@ namespace Z0
         /// <param name="n">The vector length</param>
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
-        public static BitCells<T> Load<T>(Span<T> src, BitSize n)
+        public static BitCells<T> Load<T>(Span<T> src, int n)
             where T : unmanaged
                 => BitCells<T>.FromCells(src, n);
 
@@ -53,7 +53,7 @@ namespace Z0
         /// <param name="src">The source from which the bits will be extracted</param>
         /// <typeparam name="T">The source type</typeparam>
         [MethodImpl(Inline)]
-        public static BitCells<T> Load<T>(T[] src, BitSize n)
+        public static BitCells<T> Load<T>(T[] src, int n)
             where T : unmanaged
                 => BitCells<T>.From(src,n);
 
@@ -72,7 +72,7 @@ namespace Z0
         /// <param name="len">The number of bits to store</param>
         /// <typeparam name="T">The primal storage type</typeparam>
         [MethodImpl(Inline)]
-        public static int CellCount<T>(BitSize len)
+        public static int CellCount<T>(int len)
             where T : unmanaged
             => BitCells<T>.CellCount(len);
 
@@ -84,7 +84,7 @@ namespace Z0
         /// <param name="len">The bitvector length, if specified</param>
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
-        public static BitCells<T> ToBitCells<T>(this T[] src, BitSize len)
+        public static BitCells<T> ToBitCells<T>(this T[] src, int len)
             where T : unmanaged
                 => BitCells.Load(src,len);
 
@@ -95,7 +95,7 @@ namespace Z0
         /// <param name="len">The bitvector length, if specified</param>
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
-        public static BitCells<T> ToBitCells<T>(this Span<T> src, BitSize len)
+        public static BitCells<T> ToBitCells<T>(this Span<T> src, int len)
             where T : unmanaged
                 => BitCells.Load(src,len);
 
@@ -139,7 +139,4 @@ namespace Z0
             where T : unmanaged
                 => src.Data.TakeUInt64();
    }
-
-
-
 }

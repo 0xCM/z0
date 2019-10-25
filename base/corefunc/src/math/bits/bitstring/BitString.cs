@@ -152,10 +152,10 @@ namespace Z0
         /// <summary>
         /// Extracts a substring determined by start/end indices
         /// </summary>
-        public BitString this[BitPos i0, BitPos i1]
+        public BitString this[int i0, int i1]
         {
             [MethodImpl(Inline)]
-            get => new BitString(BitSeq.Slice(i0, i1 - i0));
+            get => new BitString(BitSeq.Slice(i0, i1 - i0 + 1));
         }
 
         /// <summary>
@@ -254,6 +254,18 @@ namespace Z0
                     count++;                
             }
             return count;
+        }
+
+        /// <summary>
+        /// Shifts the bits leftwards by a specifed offset in a manner that mimics the canonical scalar left-shift
+        /// </summary>
+        /// <param name="offset">The number of bits to shift</param>
+        public BitString Sll(int offset)
+        {
+            Array.Copy(bitseq, 0, bitseq, offset, offset);
+            for(var i=0; i<offset; i++)
+                bitseq[i] = 0;
+            return this;
         }
                   
         /// <summary>

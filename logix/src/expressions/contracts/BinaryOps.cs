@@ -18,13 +18,33 @@ namespace Z0.Logix
         
     }
 
+    /// <summary>
+    /// Characterizes a binary operator parametrized by expression type
+    /// </summary>
+    public interface IBinaryOp<X> : IBinaryOp
+        where X : IExpr
+    {
+        X LeftArg {get;}
+
+        X RightArg {get;}
+    }
+
+    /// <summary>
+    /// Characterizes a binary operator parametrized by expression type and operator kind
+    /// </summary>
+    public interface IBinaryOp<X,K> : IBinaryOp<X>
+        where X : IExpr
+        where K : Enum
+    {
+        K OpKind {get;}
+    }
 
     /// <summary>
     /// Characterizes a typed binary operator of specified kind
     /// </summary>
     /// <typeparam name="T">The type over which the operator is defined</typeparam>
     /// <typeparam name="K">The operator classifier</typeparam>
-    public interface IBinaryOp<T,K> : IBinaryOp, IOpExpr<T,K> 
+    public interface ITypedBinaryOp<T,K> : IBinaryOp, ITypedOpExpr<T,K> 
         where T : unmanaged
         where K : Enum
     {
@@ -45,7 +65,7 @@ namespace Z0.Logix
 
     }
 
-    public interface IBinaryBitwiseOp<T> : IBinaryOp<T,BinaryBitwiseOpKind>
+    public interface IBinaryBitwiseOp<T> : ITypedBinaryOp<T,BinaryBitwiseOpKind>
         where T : unmanaged
     {
         /// <summary>

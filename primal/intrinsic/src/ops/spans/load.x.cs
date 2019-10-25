@@ -60,14 +60,8 @@ namespace Z0
             where T : unmanaged            
                 => Vec256.Load(src,block);
 
-        /// <summary>
-        /// Loads a 256-bit vector from a blocked readonly span
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <param name="block">The block index</param>
-        /// <typeparam name="T">The primitive type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector256<T> LoadVector256<T>(this ReadOnlySpan256<T> src, int block = 0)            
+        public static Vector256<T> LoadVector<T>(this ReadOnlySpan256<T> src, int block = 0)            
             where T : unmanaged      
         {      
             ginx.vloadu(in src.Block(block), out Vector256<T> x);
@@ -75,7 +69,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static Vector128<T> LoadVector128<T>(this ReadOnlySpan128<T> src, int block = 0)            
+        public static Vector128<T> LoadVector<T>(this ReadOnlySpan128<T> src, int block = 0)            
             where T : unmanaged      
         {      
             ginx.vloadu(in src.Block(block), out Vector128<T> x);
@@ -88,18 +82,29 @@ namespace Z0
         /// <param name="src">The source span</param>
         /// <param name="offset">The position of the fist source element </param>
         [MethodImpl(Inline)]
-        public static Vec128<T> LoadVec128<T>(this Span<T> src, int offset = 0)
+        public static Vector128<T> LoadVector<T>(this Span<T> src, N128 n, int offset = 0)
             where T : unmanaged            
-                => Vec128.Load(ref src[offset]);
+                => ginx.vloadu(n,in src[offset]);
 
+        /// <summary>
+        /// Loads a 256-bit vector from a span beginning at a specified offset
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <param name="offset">The position of the fist source element </param>
+        [MethodImpl(Inline)]
+        public static Vector256<T> LoadVector<T>(this Span<T> src, N256 n, int offset = 0)
+            where T : unmanaged            
+                => ginx.vloadu(n,in src[offset]);
+
+        /// <summary>
         /// Loads a 128-bit vector from a span beginning at a specified offset
         /// </summary>
         /// <param name="src">The source span</param>
         /// <param name="offset">The position of the fist source element </param>
         [MethodImpl(Inline)]
-        public static Vec128<T> LoadVec128<T>(this ReadOnlySpan<T> src, int offset = 0)
+        public static Vector128<T> LoadVector<T>(this ReadOnlySpan<T> src, N128 n, int offset = 0)
             where T : unmanaged            
-                => Vec128.Load(ref asRef(in src[offset]));
+                => ginx.vloadu(n,in src[offset]);
 
         /// <summary>
         /// Loads a 256-bit vector from a span beginning at a specified offset
@@ -107,19 +112,9 @@ namespace Z0
         /// <param name="src">The source span</param>
         /// <param name="offset">The position of the fist source element </param>
         [MethodImpl(Inline)]
-        public static Vec256<T> LoadVec256<T>(this Span<T> src, int offset = 0)
+        public static Vector256<T> LoadVector<T>(this ReadOnlySpan<T> src, N256 n, int offset = 0)
             where T : unmanaged            
-                => Vec256.Load(ref src[offset]);
-
-        /// <summary>
-        /// Loads a 256-bit vector from a span beginning at a specified offset
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <param name="offset">The position of the fist source element </param>
-        [MethodImpl(Inline)]
-        public static Vec256<T> LoadVec256<T>(this ReadOnlySpan<T> src, int offset = 0)
-            where T : unmanaged            
-                => Vec256.Load(ref asRef(in src[offset]));
+                => ginx.vloadu(n,in src[offset]);
 
         /// <summary>
         /// Loads a 128-bit vector from a blocked span
@@ -128,9 +123,9 @@ namespace Z0
         /// <param name="block">The block index</param>
         /// <typeparam name="T">The primitive type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector128<T> LoadVector128<T>(this Span128<T> src, int block = 0)            
+        public static Vector128<T> LoadVector<T>(this Span128<T> src, int block = 0)            
             where T : unmanaged            
-                => ginx.vloadu128(in src.Block(block));
+                => ginx.vloadu(n128, in src.Block(block));
 
         /// <summary>
         /// Loads a 256-bit vector from a blocked span
@@ -139,9 +134,9 @@ namespace Z0
         /// <param name="block">The block index</param>
         /// <typeparam name="T">The primitive type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector256<T> LoadVector256<T>(this Span256<T> src, int block = 0)            
+        public static Vector256<T> LoadVector<T>(this Span256<T> src, int block = 0)            
             where T : unmanaged            
-                => ginx.vloadu256(in src.Block(block));
+                => ginx.vloadu(n256, in src.Block(block));
 
     }
 

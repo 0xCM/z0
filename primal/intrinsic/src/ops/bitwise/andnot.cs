@@ -25,8 +25,8 @@ namespace Z0
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
         [MethodImpl(Inline)]
-        public static Vec128<sbyte> vandnot(in Vec128<sbyte> x, in Vec128<sbyte> y)
-            => AndNot(y.xmm, x.xmm);
+        public static Vector128<sbyte> vandnot(Vector128<sbyte> x, Vector128<sbyte> y)
+            => AndNot(y, x);
 
         /// <summary>
         /// __m128i _mm_andnot_si128 (__m128i a, __m128i b) PANDN xmm, xmm/m128
@@ -35,8 +35,8 @@ namespace Z0
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
         [MethodImpl(Inline)]
-        public static Vec128<byte> vandnot(in Vec128<byte> x, in Vec128<byte> y)
-            => AndNot(y.xmm, x.xmm);
+        public static Vector128<byte> vandnot(Vector128<byte> x, Vector128<byte> y)
+            => AndNot(y, x);
 
         /// <summary>
         ///  __m128i _mm_andnot_si128 (__m128i a, __m128i b) PANDN xmm, xmm/m128
@@ -45,8 +45,8 @@ namespace Z0
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
         [MethodImpl(Inline)]
-        public static Vec128<short> vandnot(in Vec128<short> x, in Vec128<short> y)
-            => AndNot(y.xmm, x.xmm);
+        public static Vector128<short> vandnot(Vector128<short> x, Vector128<short> y)
+            => AndNot(y, x);
 
         /// <summary>
         ///  __m128i _mm_andnot_si128 (__m128i a, __m128i b) PANDN xmm, xmm/m128
@@ -55,8 +55,8 @@ namespace Z0
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
         [MethodImpl(Inline)]
-        public static Vec128<ushort> vandnot(in Vec128<ushort> x, in Vec128<ushort> y)
-            => AndNot(y.xmm, x.xmm);
+        public static Vector128<ushort> vandnot(Vector128<ushort> x, Vector128<ushort> y)
+            => AndNot(y, x);
 
         /// <summary>
         ///  __m128i _mm_andnot_si128 (__m128i a, __m128i b) PANDN xmm, xmm/m128
@@ -65,8 +65,8 @@ namespace Z0
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
         [MethodImpl(Inline)]
-        public static Vec128<int> vandnot(in Vec128<int> x, in Vec128<int> y)
-            => AndNot(y.xmm, x.xmm);
+        public static Vector128<int> vandnot(Vector128<int> x, Vector128<int> y)
+            => AndNot(y, x);
 
         /// <summary>
         ///  __m128i _mm_andnot_si128 (__m128i a, __m128i b) PANDN xmm, xmm/m128
@@ -75,8 +75,8 @@ namespace Z0
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
         [MethodImpl(Inline)]
-        public static Vec128<uint> vandnot(in Vec128<uint> x, in Vec128<uint> y)
-            => AndNot(y.xmm, x.xmm);
+        public static Vector128<uint> vandnot(Vector128<uint> x, Vector128<uint> y)
+            => AndNot(y, x);
 
         /// <summary>
         ///  __m128i _mm_andnot_si128 (__m128i a, __m128i b) PANDN xmm, xmm/m128
@@ -85,8 +85,8 @@ namespace Z0
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
         [MethodImpl(Inline)]
-        public static Vec128<long> vandnot(in Vec128<long> x, in Vec128<long> y)
-            => AndNot(y.xmm, x.xmm);
+        public static Vector128<long> vandnot(Vector128<long> x, Vector128<long> y)
+            => AndNot(y, x);
  
         /// <summary>
         ///  __m128i _mm_andnot_si128 (__m128i a, __m128i b) PANDN xmm, xmm/m128
@@ -95,8 +95,8 @@ namespace Z0
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
         [MethodImpl(Inline)]
-        public static Vec128<ulong> vandnot(in Vec128<ulong> x, in Vec128<ulong> y)
-            => AndNot(y.xmm, x.xmm);
+        public static Vector128<ulong> vandnot(Vector128<ulong> x, Vector128<ulong> y)
+            => AndNot(y, x);
  
     
         /// <summary>
@@ -106,8 +106,8 @@ namespace Z0
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
         [MethodImpl(Inline)]
-        public static Vec256<sbyte> vandnot(in Vec256<sbyte> x, in Vec256<sbyte> y)
-            => AndNot(y.ymm, x.ymm);
+        public static Vector256<sbyte> vandnot(Vector256<sbyte> x, Vector256<sbyte> y)
+            => AndNot(y, x);
 
         /// <summary>
         /// __m256i _mm256_andnot_si256 (__m256i a, __m256i b) VPANDN ymm, ymm, ymm/m256
@@ -116,8 +116,8 @@ namespace Z0
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
         [MethodImpl(Inline)]
-        public static Vec256<byte> vandnot(in Vec256<byte> x, in Vec256<byte> y)
-            => AndNot(y.ymm, x.ymm);
+        public static Vector256<byte> vandnot(Vector256<byte> x, Vector256<byte> y)
+            => AndNot(y, x);
 
         /// <summary>
         /// __m256i _mm256_andnot_si256 (__m256i a, __m256i b) VPANDN ymm, ymm, ymm/m256
@@ -126,8 +126,8 @@ namespace Z0
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
         [MethodImpl(Inline)]
-        public static Vec256<short> vandnot(in Vec256<short> x, in Vec256<short> y)
-            => AndNot(y.ymm, x.ymm);
+        public static Vector256<short> vandnot(Vector256<short> x, Vector256<short> y)
+            => AndNot(y, x);
 
         /// <summary>
         /// __m256i _mm256_andnot_si256 (__m256i a, __m256i b) VPANDN ymm, ymm, ymm/m256
@@ -136,8 +136,8 @@ namespace Z0
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
         [MethodImpl(Inline)]
-        public static Vec256<ushort> vandnot(in Vec256<ushort> x, in Vec256<ushort> y)
-            => AndNot(y.ymm, x.ymm);
+        public static Vector256<ushort> vandnot(Vector256<ushort> x, Vector256<ushort> y)
+            => AndNot(y, x);
 
         /// <summary>
         /// __m256i _mm256_andnot_si256 (__m256i a, __m256i b) VPANDN ymm, ymm, ymm/m256
@@ -146,8 +146,8 @@ namespace Z0
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
         [MethodImpl(Inline)]
-        public static Vec256<int> vandnot(in Vec256<int> x, in Vec256<int> y)
-            => AndNot(y.ymm, x.ymm);
+        public static Vector256<int> vandnot(Vector256<int> x, Vector256<int> y)
+            => AndNot(y, x);
 
         /// <summary>
         /// __m256i _mm256_andnot_si256 (__m256i a, __m256i b) VPANDN ymm, ymm, ymm/m256
@@ -156,8 +156,8 @@ namespace Z0
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
         [MethodImpl(Inline)]
-        public static Vec256<uint> vandnot(in Vec256<uint> x, in Vec256<uint> y)
-            => AndNot(y.ymm, x.ymm);
+        public static Vector256<uint> vandnot(Vector256<uint> x, Vector256<uint> y)
+            => AndNot(y, x);
 
         /// <summary>
         /// __m256i _mm256_andnot_si256 (__m256i a, __m256i b) VPANDN ymm, ymm, ymm/m256
@@ -166,8 +166,8 @@ namespace Z0
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
         [MethodImpl(Inline)]
-        public static Vec256<long> vandnot(in Vec256<long> x, in Vec256<long> y)
-            => AndNot(y.ymm, x.ymm);
+        public static Vector256<long> vandnot(Vector256<long> x, Vector256<long> y)
+            => AndNot(y, x);
 
         /// <summary>
         /// __m256i _mm256_andnot_si256 (__m256i a, __m256i b) VPANDN ymm, ymm, ymm/m256
@@ -176,8 +176,8 @@ namespace Z0
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
         [MethodImpl(Inline)]
-        public static Vec256<ulong> vandnot(in Vec256<ulong> x, in Vec256<ulong> y)
-            => AndNot(y.ymm, x.ymm);
+        public static Vector256<ulong> vandnot(Vector256<ulong> x, Vector256<ulong> y)
+            => AndNot(y, x);
 
     }
 }

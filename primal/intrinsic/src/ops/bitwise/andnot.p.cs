@@ -81,7 +81,6 @@ namespace Z0
             vstore(vandnot(vA,vB), pZ);
         }
 
-
     }
 
 }

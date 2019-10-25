@@ -16,6 +16,25 @@ namespace Z0
     
     partial class dinx
     {   
+        /// <summary>
+        /// Shifts the entire 128-bit vector leftwards at bit-level resolution
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="offset">The number of bits the shift leftward</param>
+        /// <remarks>Taken from http://programming.sirrida.de</remarks>
+        [MethodImpl(Inline)]
+        public static Vector128<ulong> vsllx(Vector128<ulong> src, byte offset)        
+        {
+            var x = dinx.vbsll(src, 8);
+            var y = dinx.vsll(src, offset);
+            return dinx.vor(y, dinx.vsrl(x, (byte)(64 - offset)));
+        }
+
+        [MethodImpl(Inline)]
+        public static Vector256<sbyte> vsll(Vector256<sbyte> src, byte offset)
+            => vsll(src.AsByte(), offset).AsSByte();
+
+        [MethodImpl(Inline)]
         public static Vector256<byte> vsll(Vector256<byte> src, byte offset)
         {
             //Fan the hi/lo parts of the u8 source vector across 2 u16 vectors
@@ -38,9 +57,36 @@ namespace Z0
             var permSpec = Vec256Pattern.LaneMergeVector<byte>();
             var permA = dinx.vpermvar32x8(trA, permSpec);
             var permB = dinx.vpermvar32x8(trB, permSpec);
-
+            
             return dinx.insert(dinx.vlo(permA), dinx.vlo(permB), out Vector256<byte> _);            
+        }
 
+        public static Vector128<sbyte> vsll(Vector128<sbyte> src, byte offset)
+        {
+            dinx.vconvert(src, out Vector256<short> dst);
+            Span<short> data = stackalloc short[Vector256<short>.Count];
+            vstore(dinx.vsll(dst, offset), ref head(data));
+            var i = 0;
+            return Vector128.Create(
+                (sbyte)data[i++], (sbyte)data[i++], (sbyte)data[i++], (sbyte)data[i++], 
+                (sbyte)data[i++], (sbyte)data[i++], (sbyte)data[i++], (sbyte)data[i++],
+                (sbyte)data[i++], (sbyte)data[i++], (sbyte)data[i++], (sbyte)data[i++],
+                (sbyte)data[i++], (sbyte)data[i++], (sbyte)data[i++], (sbyte)data[i++]
+            );
+        }
+
+        public static Vector128<byte> vsll(Vector128<byte> src, byte offset)
+        {
+            Span<ushort> data = stackalloc ushort[Vector256<ushort>.Count];
+            vconvert(src, out Vector256<ushort> dst);
+            vstore(dinx.vsll(dst, offset), ref head(data));
+            var i = 0;
+            return Vector128.Create(
+                (byte)data[i++], (byte)data[i++], (byte)data[i++], (byte)data[i++], 
+                (byte)data[i++], (byte)data[i++], (byte)data[i++], (byte)data[i++],
+                (byte)data[i++], (byte)data[i++], (byte)data[i++], (byte)data[i++],
+                (byte)data[i++], (byte)data[i++], (byte)data[i++], (byte)data[i++]
+            );
         }
 
         /// <summary>

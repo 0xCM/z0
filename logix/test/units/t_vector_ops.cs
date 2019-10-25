@@ -38,7 +38,7 @@ namespace Z0.Logix
             var x = Random.CpuVector128<T>();
             var y = Random.CpuVector128<T>();
             var result = default(Vector128<T>);
-            var kinds = Cpu128OpApi.BinaryKinds.ToArray();
+            var kinds = Cpu128OpApi.BinaryBitwiseKinds.ToArray();
             var opcount = 0;
 
             clock.Start();

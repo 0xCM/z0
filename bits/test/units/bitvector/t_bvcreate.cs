@@ -170,6 +170,7 @@ namespace Z0.Test
             }
         }
 
+
         public void bvmsb_64u_check()
         {
             for(var i=0; i< SampleSize; i++)            

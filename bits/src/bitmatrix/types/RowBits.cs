@@ -58,7 +58,7 @@ namespace Z0
         /// <param name="B">The right matrix</param>
         [MethodImpl(Inline)]
         public static RowBits<T> operator |(RowBits<T> A, RowBits<T> B)
-            => BitMatrix.or(A, B);
+            => RowBits.or(A, B);
 
         /// <summary>
         /// Computes the bitwise XOR between the operands

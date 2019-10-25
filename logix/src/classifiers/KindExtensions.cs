@@ -14,89 +14,12 @@ namespace Z0.Logix
 
     public static class KindExtensions
     {
-        [MethodImpl(Inline)]
-        public static string Format<T>(this UnaryLogicOpKind kind, T arg)
-            => $"{kind.Format()}({arg})";
-
-        [MethodImpl(Inline)]
-        public static string Format(this UnaryLogicOpKind kind)
-            => kind.ToString().ToLower();
-
-        [MethodImpl(Inline)]
-        public static string Format(this UnaryBitwiseOpKind kind)
-            => kind.ToString().ToLower();
-
-        [MethodImpl(Inline)]
-        public static string Format<T>(this UnaryBitwiseOpKind kind, T arg)
-            => $"{kind.Format()}({arg})";
-
-        [MethodImpl(Inline)]
-        public static string Format(this UnaryArithmeticOpKind kind)
-            => kind switch {
-                UnaryArithmeticOpKind.Inc => "++",
-                UnaryArithmeticOpKind.Dec => "--",
-                UnaryArithmeticOpKind.Negate => "-",
-                _ => kind.ToString()
-            };
-
-        [MethodImpl(Inline)]
-        public static string Format<T>(this UnaryArithmeticOpKind kind, T arg)
-            => $"{kind.Format()}({arg})";
-
-
-        [MethodImpl(Inline)]
-        public static string Format(this BinaryLogicOpKind kind)
-            => kind.ToString().ToLower();
-
-        [MethodImpl(Inline)]
-        public static string Format(this BinaryBitwiseOpKind kind)
-            => kind.ToString().ToLower();
-
-        [MethodImpl(Inline)]
-        public static string Format(this ComparisonOpKind kind)
-            => kind.ToString().ToLower();
-
-        [MethodImpl(Inline)]
-        public static string Format<T>(this BinaryLogicOpKind kind, T arg1, T arg2)
-            => $"{kind.Format()}({arg1}, {arg2})";
-
-        [MethodImpl(Inline)]
-        public static string Format<T>(this BinaryBitwiseOpKind kind, T arg1, T arg2)
-            => $"{kind.Format()}({arg1}, {arg2})";
-
-        [MethodImpl(Inline)]
-        public static string Format<T>(this ComparisonOpKind kind, T arg1, T arg2)
-            => $"{kind.Format()}({arg1}, {arg2})";
-
-        [MethodImpl(Inline)]
-        public static string Format(this Ternary512OpKind kind)
-            => kind.ToString();
-
-        [MethodImpl(Inline)]
-        public static string Format<T>(this Ternary512OpKind kind, T arg1, T arg2, T arg3)
-            => $"{kind.Format()}({arg1}, {arg2}, {arg3})";
-
-        [MethodImpl(Inline)]
-        public static Ternary512OpKind Next(this Ternary512OpKind src)
-            => src != Ternary512OpKind.XFF 
-                ? (Ternary512OpKind)((uint)(src) + 1u)
-                : Ternary512OpKind.X00;
-
-        public static string Format(this ShiftOpKind kind)        
-            => kind switch {
-                ShiftOpKind.Sll => "<<",
-                ShiftOpKind.Srl => ">>",
-                ShiftOpKind.Rotl => "<<>",
-                ShiftOpKind.Rotr => ">><",
-                _ => kind.ToString()
-            };
-
-        public static string Format<S,T>(this ShiftOpKind kind, S arg1, T arg2)
-            => $"{arg1} {kind.Format()} {arg2}";
- 
-        public static string FormatTuple(IEnumerable<IOpExpr> terms)            
-            => parenthetical(string.Join(',',terms.Select(t => t.Format())));
-
+       [MethodImpl(Inline)]
+        public static TernaryBitOpKind Next(this TernaryBitOpKind src)
+            => src != TernaryBitOpKind.XFF 
+                ? (TernaryBitOpKind)((uint)(src) + 1u)
+                : TernaryBitOpKind.X00;
+        
         [MethodImpl(Inline)]
         public static bool IsOperator(this LogicExprKind kind)
             => (uint)kind >= (uint)LogicExprKind.UnaryOperator;
@@ -105,16 +28,6 @@ namespace Z0.Logix
         public static bool IsOperator(this TypedExprKind kind)
             => (uint)kind >= (uint)TypedExprKind.UnaryOperator;
 
-    }
-
-    public class TernaryOpAttribute : Attribute
-    {
-        public TernaryOpAttribute(Ternary512OpKind kind)
-        {
-            this.Kind = kind;
-        }
-
-        public Ternary512OpKind Kind {get;}
     }
 
 }

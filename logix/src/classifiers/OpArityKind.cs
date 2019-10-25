@@ -10,33 +10,36 @@ namespace Z0.Logix
     
     using static zfunc;
 
-    public enum OpArityKind
+    /// <summary>
+    /// Classifies operator arities
+    /// </summary>
+    public enum OpArityKind : uint
     {
-        
+       
         /// <summary>
-        /// Identifies an operator with no arguments
+        /// Classifies an operator with no arguments
         /// </summary>
         Nullary = 0,
 
         /// <summary>
-        /// Identifies an operator with one argument
+        /// Classifies an operator with one argument
         /// </summary>
         Unary = 1,
 
         /// <summary>
-        /// Identifies an operator with two arguments
+        /// Classifies an operator with two arguments
         /// </summary>
         Binary = 2,
 
         /// <summary>
-        /// Identifies an operator with three arguments
+        /// Classifies an operator with three arguments
         /// </summary>
-        Ternary = 3,
+        Ternary = 4,
 
         /// <summary>
-        /// Identifies an n-ary operator where n > 3
+        /// Classifies an n-ary operator
         /// </summary>
-        Sequence = 4
+        Sequence = 8
     }
 
 

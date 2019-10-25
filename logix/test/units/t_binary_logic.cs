@@ -129,7 +129,7 @@ namespace Z0.Logix
             var lhsSamples = Random.Bits().Take(SampleSize).ToArray();
             var rhsSamples = Random.Bits().Take(SampleSize).ToArray();
             var result = bit.Off;
-            var kinds = LogicOpApi.BinaryKinds.ToArray();
+            var kinds = LogicOpApi.BinaryOpKinds.ToArray();
             var opcount = 0;
 
             clock.Start();

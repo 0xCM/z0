@@ -14,19 +14,19 @@ namespace Z0
     {
         [MethodImpl(Inline)]
         public static bool eq(BitMatrix8 A, BitMatrix8 B)
-            => testz(andn(A,B));
+            => testz(andnot(A,B));
 
         [MethodImpl(Inline)]
         public static bool eq(BitMatrix16 A, BitMatrix16 B)
-            => testz(andn(A,B));
+            => testz(andnot(A,B));
 
         [MethodImpl(Inline)]
         public static bool eq(BitMatrix32 A, BitMatrix32 B)
-            => testz(andn(A,B));
+            => testz(andnot(A,B));
 
         [MethodImpl(Inline)]
         public static bool eq(BitMatrix64 A, BitMatrix64 B)
-            => testz(andn(A,B));
+            => testz(andnot(A,B));
 
 
     }

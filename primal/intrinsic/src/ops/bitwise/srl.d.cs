@@ -17,6 +17,20 @@ namespace Z0
 
     partial class dinx
     {         
+        /// <summary>
+        /// Shifts the entire 128-bit vector rightwards at bit-level resolution
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="offset">The number of bits the shift rightward</param>
+        /// <remarks>Taken from http://programming.sirrida.de</remarks>
+        [MethodImpl(Inline)]
+        public static Vector128<ulong> vsrlx(Vector128<ulong> src, byte offset)        
+        {
+            var x = dinx.vbsrl(src, 8);
+            var y = dinx.vsrl(src, offset);
+            return dinx.vor(y,dinx.vsll(x, (byte)(64 - offset)));
+        }
+
         public static Vector256<byte> vsrl(Vector256<byte> src, byte offset)
         {
             //Fan the hi/lo parts of the u8 source vector across 2 u16 vectors
@@ -41,6 +55,48 @@ namespace Z0
             var permB = dinx.vpermvar32x8(trB, permSpec);
             return dinx.insert(dinx.vlo(permA), dinx.vlo(permB), out Vector256<byte> _);            
         } 
+
+        /// <summary>
+        /// Shifts each component of the source vector leftwards by a common number of bits
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="offset">The offset amount</param>
+        /// <remarks>See https://stackoverflow.com/questions/35002937/sse-simd-shift-with-one-byte-element-size-granularity
+        /// for a potentially better approach</remarks>
+        public static Vector128<sbyte> vsrl(Vector128<sbyte> src, byte offset)
+        {
+            dinx.vconvert(src, out Vector256<short> dst);
+            Span<short> data = stackalloc short[Vector256<short>.Count];
+            vstore(dinx.vsrl(dst, offset), ref data[0]);
+            var i = 0;
+            return Vector128.Create(
+                (sbyte)data[i++], (sbyte)data[i++], (sbyte)data[i++], (sbyte)data[i++], 
+                (sbyte)data[i++], (sbyte)data[i++], (sbyte)data[i++], (sbyte)data[i++],
+                (sbyte)data[i++], (sbyte)data[i++], (sbyte)data[i++], (sbyte)data[i++],
+                (sbyte)data[i++], (sbyte)data[i++], (sbyte)data[i++], (sbyte)data[i++]
+            );
+        }
+
+        /// <summary>
+        /// Shifts each component of the source vector leftwards by a common number of bits
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="offset">The offset amount</param>
+        /// <remarks>See https://stackoverflow.com/questions/35002937/sse-simd-shift-with-one-byte-element-size-granularity
+        /// for a potentially better approach</remarks>
+        public static Vector128<byte> vsrl(Vector128<byte> src, byte offset)
+        {
+            vconvert(src, out Vector256<ushort> dst);
+            Span<ushort> data = stackalloc ushort[Vector256<ushort>.Count];
+            vstore(dinx.vsrl(dst, offset), ref head(data));
+            var i = 0;
+            return Vector128.Create(
+                (byte)data[i++], (byte)data[i++], (byte)data[i++], (byte)data[i++], 
+                (byte)data[i++], (byte)data[i++], (byte)data[i++], (byte)data[i++],
+                (byte)data[i++], (byte)data[i++], (byte)data[i++], (byte)data[i++],
+                (byte)data[i++], (byte)data[i++], (byte)data[i++], (byte)data[i++]
+            );
+        }
 
         /// <summary>
         /// __m128i _mm_srli_epi16 (__m128i a, int immediate) PSRLW xmm, imm8
