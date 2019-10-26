@@ -24,7 +24,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<T> vsrlx<T>(Vector128<T> src, byte offset)        
             where T : unmanaged
-                => generic<T>(dinx.vsrlx(src.AsUInt64(), offset));
+                => generic<T>(dinxc.vsrlx(src.AsUInt64(), offset));
 
  
         [MethodImpl(Inline)]

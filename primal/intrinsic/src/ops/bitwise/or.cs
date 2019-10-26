@@ -20,70 +20,71 @@ namespace Z0
     {
         
         [MethodImpl(Inline)]
-        public static Vec128<byte> vor(in Vec128<byte> x, in Vec128<byte> y)
-            => Or(x.xmm, y.xmm);
+        public static Vector128<byte> vor(Vector128<byte> x, Vector128<byte> y)
+            => Or(x, y);
 
         [MethodImpl(Inline)]
-        public static Vec128<short> vor(in Vec128<short> x, in Vec128<short> y)
-            => Or(x.xmm, y.xmm);
+        public static Vector128<short> vor(Vector128<short> x, Vector128<short> y)
+            => Or(x, y);
 
         [MethodImpl(Inline)]
-        public static Vec128<sbyte> vor(in Vec128<sbyte> x, in Vec128<sbyte> y)
-            => Or(x.xmm, y.xmm);
+        public static Vector128<sbyte> vor(Vector128<sbyte> x, Vector128<sbyte> y)
+            => Or(x, y);
 
         [MethodImpl(Inline)]
-        public static Vec128<ushort> vor(in Vec128<ushort> x, in Vec128<ushort> y)
-            => Or(x.xmm, y.xmm);
+        public static Vector128<ushort> vor(Vector128<ushort> x, Vector128<ushort> y)
+            => Or(x, y);
 
         [MethodImpl(Inline)]
-        public static Vec128<int> vor(in Vec128<int> x, in Vec128<int> y)
-            => Or(x.xmm, y.xmm);
+        public static Vector128<int> vor(Vector128<int> x, Vector128<int> y)
+            => Or(x, y);
 
         [MethodImpl(Inline)]
-        public static Vec128<uint> vor(in Vec128<uint> x, in Vec128<uint> y)
-            => Or(x.xmm, y.xmm);
+        public static Vector128<uint> vor(Vector128<uint> x, Vector128<uint> y)
+            => Or(x, y);
 
         [MethodImpl(Inline)]
-        public static Vec128<long> vor(in Vec128<long> x, in Vec128<long> y)
-            => Or(x.xmm, y.xmm);
-
-
-        [MethodImpl(Inline)]
-        public static Vec128<ulong> vor(in Vec128<ulong> x, in Vec128<ulong> y)
-            => Or(x.xmm, y.xmm);
+        public static Vector128<long> vor(Vector128<long> x, Vector128<long> y)
+            => Or(x, y);
 
 
         [MethodImpl(Inline)]
-        public static Vec256<byte> vor(in Vec256<byte> x, in Vec256<byte> y)
-            => Or(x.ymm, y.ymm);
+        public static Vector128<ulong> vor(Vector128<ulong> x, Vector128<ulong> y)
+            => Or(x, y);
+
 
         [MethodImpl(Inline)]
-        public static Vec256<short> vor(in Vec256<short> x, in Vec256<short> y)
-            => Or(x.ymm, y.ymm);
+        public static Vector256<byte> vor(Vector256<byte> x, Vector256<byte> y)
+            => Or(x, y);
 
         [MethodImpl(Inline)]
-        public static Vec256<sbyte> vor(in Vec256<sbyte> x, in Vec256<sbyte> y)
-            => Or(x.ymm, y.ymm);
+        public static Vector256<short> vor(Vector256<short> x, Vector256<short> y)
+            => Or(x, y);
 
         [MethodImpl(Inline)]
-        public static Vec256<ushort> vor(in Vec256<ushort> x, in Vec256<ushort> y)
-            => Or(x.ymm, y.ymm);
+        public static Vector256<sbyte> vor(Vector256<sbyte> x, Vector256<sbyte> y)
+            => Or(x, y);
 
         [MethodImpl(Inline)]
-        public static Vec256<int> vor(in Vec256<int> x, in Vec256<int> y)
-            => Or(x.ymm, y.ymm);
+        public static Vector256<ushort> vor(Vector256<ushort> x, Vector256<ushort> y)
+            => Or(x, y);
 
         [MethodImpl(Inline)]
-        public static Vec256<uint> vor(in Vec256<uint> x, in Vec256<uint> y)
-            => Or(x.ymm, y.ymm);
+        public static Vector256<int> vor(Vector256<int> x, Vector256<int> y)
+            => Or(x, y);
 
         [MethodImpl(Inline)]
-        public static Vec256<long> vor(in Vec256<long> x, in Vec256<long> y)
-            => Or(x.ymm, y.ymm);
+        public static Vector256<uint> vor(Vector256<uint> x, Vector256<uint> y)
+            => Or(x, y);
 
         [MethodImpl(Inline)]
-        public static Vec256<ulong> vor(in Vec256<ulong> x, in Vec256<ulong> y)
-            => Or(x.ymm, y.ymm);
+        public static Vector256<long> vor(Vector256<long> x, Vector256<long> y)
+            => Or(x, y);
+
+        [MethodImpl(Inline)]
+        public static Vector256<ulong> vor(Vector256<ulong> x, Vector256<ulong> y)
+            => Or(x, y);
+
 
     }
 

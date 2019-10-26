@@ -19,30 +19,6 @@ namespace Z0
 
     partial class dinx
     {                
-        /// <summary>
-        /// __m256i _mm256_cvtepi8_epi16 (__m128i a) VPMOVSXBW ymm, xmm/m128
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
-        public static ref Vec256<short> vconvert(in Vec128<sbyte> src, out Vec256<short> dst)
-        {
-            dst = ConvertToVector256Int16(src);
-            return ref dst;
-        }
-
-        /// <summary>
-        ///  __m256i _mm256_cvtepu8_epi16 (__m128i a) VPMOVZXBW ymm, xmm
-        /// Zero extends 16 packed 8-bit integers in xmm2/m128 to 16 packed 16-bit integers in ymm1
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
-        public static ref Vec256<ushort> vconvert(in Vec128<byte> src, out Vec256<ushort> dst)
-        {
-            dst = ConvertToVector256Int16(src.xmm).AsUInt16();
-            return ref dst;
-        }
 
         /// <summary>
         /// __m128i _mm_cvtepi8_epi16 (__m128i a) PMOVSXBW xmm, xmm/m64

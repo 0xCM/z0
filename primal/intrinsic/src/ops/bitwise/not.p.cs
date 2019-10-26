@@ -15,11 +15,10 @@ namespace Z0
     partial class ginx
     {
         /// <summary>
-        /// Loads a 128-bit vector from a pointer and returns its bitwise complement
+        /// Loads a vector from a pointer and computes the bitwise complement, returning the result to the caller
         /// </summary>
         /// <param name="n">The bitness selector</param>
-        /// <param name="pX">A pointer to at at least 16 bytes of memory from which to load the first vector</param>
-        /// <param name="pY">A pointer to at at least 16 bytes of memory to which the result of the computation is stored</param>
+        /// <param name="pX">A pointer from which the source vector will be read</param>
         /// <typeparam name="T">The primal component type</typeparam>
         [MethodImpl(Inline)]
         public static unsafe Vector128<T> vnot<T>(N128 n, T* pX)
@@ -30,47 +29,47 @@ namespace Z0
         }
 
         /// <summary>
-        /// Loads a 128-bit vector the first pointer and stores its bitwise complement to the second pointer
+        /// Loads a vector from a pointer and computes the bitwise complement, storing the result to a pointer
         /// </summary>
         /// <param name="n">The bitness selector</param>
-        /// <param name="pX">A pointer to at at least 16 bytes of memory from which to load the first vector</param>
-        /// <param name="pY">A pointer to at at least 16 bytes of memory to which the result of the computation is stored</param>
+        /// <param name="pX">A pointer from which the source vector will be read</param>
+        /// <param name="pDst">A pointer to which the result of the computation will be written</param>
         /// <typeparam name="T">The primal component type</typeparam>
         [MethodImpl(Inline)]
-        public static unsafe void vnot<T>(N128 n, T* pX, T* pY)
+        public static unsafe void vnot<T>(N128 n, T* pX, T* pDst)
             where T : unmanaged
         {                    
             vloadu(pX, out Vector128<T> vA);
-            vstore(vnot(vA), pY);
+            vstore(vnot(vA), pDst);
         }
 
         /// <summary>
-        /// Loads a 256-bit vector from a pointer and returns its bitwise complement
+        /// Loads a vector from a pointer and computes the bitwise complement, returning the result to the caller
         /// </summary>
         /// <param name="n">The bitness selector</param>
-        /// <param name="pX">A pointer to at at least 32 bytes of memory from which to load the first vector</param>
+        /// <param name="pX">A pointer from which the source vector will be read</param>
         /// <typeparam name="T">The primal component type</typeparam>
         [MethodImpl(Inline)]
-        public static unsafe Vector256<T> vnot<T>(N256 n, T* pA)
+        public static unsafe Vector256<T> vnot<T>(N256 n, T* pX)
             where T : unmanaged
         {                    
-            vloadu(pA, out Vector256<T> vA);
+            vloadu(pX, out Vector256<T> vA);
             return vnot(vA);
         }
 
         /// <summary>
-        /// Loads a 256-bit vector the first pointer and stores its bitwise complement to the second pointer
+        /// Loads a vector from a pointer and computes the bitwise complement, storing the result to a pointer
         /// </summary>
         /// <param name="n">The bitness selector</param>
-        /// <param name="pX">A pointer to at at least 32 bytes of memory from which to load the first vector</param>
-        /// <param name="pY">A pointer to at at least 32 bytes of memory from which to load the second vector</param>
+        /// <param name="pX">A pointer from which the source vector will be read</param>
+        /// <param name="pDst">A pointer to which the result of the computation will be written</param>
         /// <typeparam name="T">The primal component type</typeparam>
         [MethodImpl(Inline)]
-        public static unsafe void vnot<T>(N256 n, T* pA, T* pB)
+        public static unsafe void vnot<T>(N256 n, T* pX, T* pDst)
             where T : unmanaged
         {                    
-            vloadu(pA, out Vector256<T> vA);
-            vstore(vnot(vA), pB);
+            vloadu(pX, out Vector256<T> vA);
+            vstore(vnot(vA), pDst);
         }
     }
 

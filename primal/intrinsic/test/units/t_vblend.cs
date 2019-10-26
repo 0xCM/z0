@@ -7,6 +7,7 @@ namespace Z0
     using System;
     using System.Linq;
     using System.IO;
+    using System.Runtime.Intrinsics;
     
     using static zfunc;
 
@@ -18,7 +19,7 @@ namespace Z0
             var x = v128(0,2,4,6,8,10,12,14); 
             var y = v128(1,3,5,7,9,11,13,15); 
             
-            var z = dinx.vblend(x,y, Blend16x8.LLLLLLLL);
+            Vector128<ushort> z = dinx.vblend(x,y, Blend16x8.LLLLLLLL);
             Claim.eq(x,z);          
 
             z = dinx.vblend(x,y, Blend16x8.RRRRRRRR);
@@ -38,7 +39,7 @@ namespace Z0
             var y = v128(2u,4,6,8);
 
             var spec = Blend32x4.LLLL;
-            var z = dinx.vblend(x,y, spec);
+            Vector128<uint> z = dinx.vblend(x,y, spec);
             Claim.eq(z,x);
 
             spec = Blend32x4.LLLR;

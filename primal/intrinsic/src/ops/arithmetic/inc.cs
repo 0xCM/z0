@@ -17,129 +17,128 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
-        public static Vec128<sbyte> vinc(in Vec128<sbyte> src)
-            =>  vadd(src, Vec128Pattern.units<sbyte>());
+        public static Vector128<sbyte> vinc(Vector128<sbyte> src)
+            =>  vadd(src, ginx.vpUnits<sbyte>(n128));
 
         /// <summary>
         /// Inrements each component by 1
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
-        public static Vec128<byte> vinc(in Vec128<byte> src)
-            =>  vadd(src, Vec128Pattern.units<byte>());
+        public static Vector128<byte> vinc(Vector128<byte> src)
+            =>  vadd(src, ginx.vpUnits<byte>(n128));
 
         /// <summary>
         /// Inrements each component by 1
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
-        public static Vec128<short> vinc(in Vec128<short> src)
-            =>  vadd(src, Vec128Pattern.units<short>());
+        public static Vector128<short> vinc(Vector128<short> src)
+            =>  vadd(src, ginx.vpUnits<short>(n128));
 
         /// <summary>
         /// Inrements each component by 1
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
-        public static Vec128<ushort> vinc(in Vec128<ushort> src)
-            =>  vadd(src, Vec128Pattern.units<ushort>());
+        public static Vector128<ushort> vinc(Vector128<ushort> src)
+            =>  vadd(src, ginx.vpUnits<ushort>(n128));
 
         /// <summary>
         /// Inrements each component by 1
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
-        public static Vec128<int> vinc(in Vec128<int> src)
-            =>  vadd(src, Vec128Pattern.units<int>());
+        public static Vector128<int> vinc(Vector128<int> src)
+            =>  vadd(src, ginx.vpUnits<int>(n128));
 
         /// <summary>
         /// Inrements each component by 1
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
-        public static Vec128<uint> vinc(in Vec128<uint> src)
-            =>  vadd(src, Vec128Pattern.units<uint>());
+        public static Vector128<uint> vinc(Vector128<uint> src)
+            =>  vadd(src, ginx.vpUnits<uint>(n128));
 
         /// <summary>
         /// Inrements each component by 1
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
-        public static Vec128<long> vinc(in Vec128<long> src)
-            =>  vadd(src, Vec128Pattern.units<long>());
+        public static Vector128<long> vinc(Vector128<long> src)
+            =>  vadd(src, ginx.vpUnits<long>(n128));
 
         /// <summary>
         /// Inrements each component by 1
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
-        public static Vec128<ulong> vinc(in Vec128<ulong> src)
-            =>  vadd(src, Vec128Pattern.units<ulong>());
+        public static Vector128<ulong> vinc(Vector128<ulong> src)
+            =>  vadd(src, ginx.vpUnits<ulong>(n128));
 
         /// <summary>
         /// Inrements each component by 1
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<sbyte> vinc(in Vec256<sbyte> src)
-            =>  vadd(src, Vec256Pattern.Units<sbyte>());
+        public static Vector256<sbyte> vinc(Vector256<sbyte> src)
+            =>  vadd(src, ginx.vpUnits<sbyte>(n256));
 
         /// <summary>
         /// Inrements each component by 1
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<byte> vinc(in Vec256<byte> src)
-            =>  vadd(src, Vec256Pattern.Units<byte>());
+        public static Vector256<byte> vinc(Vector256<byte> src)
+            =>  vadd(src, ginx.vpUnits<byte>(n256));
 
         /// <summary>
         /// Inrements each component by 1
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<short> vinc(in Vec256<short> src)
-            =>  vadd(src, Vec256Pattern.Units<short>());
+        public static Vector256<short> vinc(Vector256<short> src)
+            =>  vadd(src, ginx.vpUnits<short>(n256));
 
         /// <summary>
         /// Inrements each component by 1
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<ushort> vinc(in Vec256<ushort> src)
-            =>  vadd(src, Vec256Pattern.Units<ushort>());
+        public static Vector256<ushort> vinc(Vector256<ushort> src)
+            =>  vadd(src, ginx.vpUnits<ushort>(n256));
 
         /// <summary>
         /// Inrements each component by 1
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<int> vinc(in Vec256<int> src)
-            =>  vadd(src, Vec256Pattern.Units<int>());
+        public static Vector256<int> vinc(Vector256<int> src)
+            =>  vadd(src, ginx.vpUnits<int>(n256));
 
         /// <summary>
         /// Inrements each component by 1
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<uint> vinc(in Vec256<uint> src)
-            =>  vadd(src, Vec256Pattern.Units<uint>());
+        public static Vector256<uint> vinc(Vector256<uint> src)
+            =>  vadd(src, ginx.vpUnits<uint>(n256));
 
         /// <summary>
         /// Inrements each component by 1
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<long> vinc(in Vec256<long> src)
-            =>  vadd(src, Vec256Pattern.Units<long>());
+        public static Vector256<long> vinc(Vector256<long> src)
+            =>  vadd(src, ginx.vpUnits<long>(n256));
 
         /// <summary>
         /// Inrements each component by 1
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<ulong> vinc(in Vec256<ulong> src)
-            =>  vadd(src, Vec256Pattern.Units<ulong>());
-
+        public static Vector256<ulong> vinc(Vector256<ulong> src)
+            =>  vadd(src, ginx.vpUnits<ulong>(n256));
 
     }
 }

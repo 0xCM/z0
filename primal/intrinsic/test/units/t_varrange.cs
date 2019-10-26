@@ -15,7 +15,7 @@ namespace Z0.Test
     {     
         public void shift128()
         {
-            var src = ginx.vones<ulong>(n128);
+            var src = ginx.vpOnes<ulong>(n128);
             const byte offset = 19;
             var y = ginx.vsllx(src,offset);
             var z = ginx.vsrlx(src,offset);
@@ -27,29 +27,21 @@ namespace Z0.Test
             Trace(z.ToBitString());
         }
 
-        public void increments_128x16u()
-        {
-            var v1 = Vec128Pattern.increments((ushort)0);
-            var v2 = Vec128Pattern.decrements((ushort)7);
-            var v3 = reverse_check(v1);
-            Claim.eq(v2,v3);
-        }
-
         public void reverse_128x8u()
         {
-            var v1 = Vec128Pattern.increments<byte>(0);
-            var v2 = Vec128Pattern.decrements<byte>(15);
-            var v4 = dinx.reverse(v1);
-            Claim.eq(v2,v4);
+            var v1 = Vec128Pattern.Increments<byte>(0);
+            var v2 = Vec128Pattern.Decrements<byte>(15);
+            var v3 = dinx.reverse(v1);
+            Claim.eq(v2,v3);
         }
 
         public void shuffle_128x32i()
         {
-            var u = Vec128Pattern.increments<int>();
-            Claim.eq(Vec128.FromParts(0,1,2,3), u);
+            var u = ginx.vpIncrements<int>(n128);
+            Claim.eq(Vector128.Create(0,1,2,3), u);
 
-            var v = Vec128Pattern.decrements<int>(3);
-            Claim.eq(Vec128.FromParts(3,2,1,0),v);
+            var v = Vec128Pattern.Decrements<int>(3);
+            Claim.eq(Vector128.Create(3,2,1,0),v);
 
             Claim.eq(v, dinx.vshuffle(u, Perm4.DCBA));
             Claim.eq(u, dinx.vshuffle(v, Perm4.DCBA));
@@ -58,14 +50,7 @@ namespace Z0.Test
         public void reverse_256x8u()
         {
             var inc = Vec256Pattern.Increments((byte)0);
-            for(var i=0; i<inc.Length(); i++)
-                Claim.eq((int)inc[i],i);
-
-            var dec = Vec256Pattern.Decrements((byte)31);
-
-            for(var i=31; i>=0; i--)
-                Claim.eq((int)dec[31 - i], i);
-            
+            var dec = Vec256Pattern.Decrements((byte)31);            
             var v2 = dinx.reverse(inc);
             Claim.eq(dec,v2);
 
@@ -76,14 +61,8 @@ namespace Z0.Test
             var src = Random.CpuVec256Stream<uint>().Take(Pow2.T14);
             foreach(var v in src)
             {
-                var expect = Vec256.FromParts(v[7],v[6],v[5],v[4],v[3],v[2],v[1],v[0]);
-                var actual = dinx.reverse(v);
-                
-                if(actual != expect)
-                {
-                    Trace(actual.FormatHex());
-                    Trace(expect.FormatHex());
-                }
+                var expect = Vector256.Create(v[7],v[6],v[5],v[4],v[3],v[2],v[1],v[0]);
+                var actual = dinx.reverse(v);                
                 Claim.eq(expect, actual);
             }
         }
@@ -93,14 +72,8 @@ namespace Z0.Test
             var src = Random.CpuVec256Stream<float>().Take(Pow2.T14);
             foreach(var v in src)
             {
-                var expect = Vec256.FromParts(v[7],v[6],v[5],v[4],v[3],v[2],v[1],v[0]);
+                var expect = Vector256.Create(v[7],v[6],v[5],v[4],v[3],v[2],v[1],v[0]);
                 var actual = dinx.reverse(v);
-                
-                if(actual != expect)
-                {
-                    Trace(actual.FormatHex());
-                    Trace(expect.FormatHex());
-                }
                 Claim.eq(expect, actual);
             }
         }
@@ -198,13 +171,8 @@ namespace Z0.Test
             return fmt.ToString();
         }
 
-        //Not an efficient approach, used for comparison
-        static Vec128<ushort> reverse_check(in Vec128<ushort> src)
-        {
-            //var v = dinx.shufflelo(dinx.shufflehi(src, Perm4.ABCD), Perm4.ABCD).As<ulong>();
-            var v = dinx.vshufflelo(dinx.vshufflehi(src, 0b00_01_10_11), 0b00_01_10_11).As<ulong>();        
-            return Vec128.FromParts(v[1], v[0]).As<ushort>();
-        }
+        static Vector128<ushort> reverse_check(Vector128<ushort> src)
+            => dinx.vshufflelo(dinx.vshufflehi(src, 0b00_01_10_11), 0b00_01_10_11);
     }
 
 }

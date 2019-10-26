@@ -20,7 +20,7 @@ namespace Z0
         where T : unmanaged;
 
     [SuppressUnmanagedCodeSecurity]
-    public delegate Vec128<T> Asm128BinOp<T>(in Vec128<T> x, in Vec128<T> y)
+    public delegate Vector128<T> Asm128BinOp<T>(Vector128<T> x, Vector128<T> y)
         where T : unmanaged;
 
     [SuppressUnmanagedCodeSecurity]
@@ -96,10 +96,8 @@ namespace Z0
             g.Emit(OpCodes.Ldc_I8, (long)code.Pointer);
             g.EmitCalli(OpCodes.Calli, CallingConvention.StdCall, returnType, argTypes);
             g.Emit(OpCodes.Ret);
-            return (AsmBinOp<T>)method.CreateDelegate(typeof(AsmBinOp<T>));
-                
+            return (AsmBinOp<T>)method.CreateDelegate(typeof(AsmBinOp<T>));                
         }
-
 
         public static AsmBinOp<T> CreateBinOp<T>(long pCode, string name = null)
             where T : unmanaged

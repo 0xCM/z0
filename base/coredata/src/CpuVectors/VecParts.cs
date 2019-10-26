@@ -83,37 +83,37 @@ namespace Z0
 
         public const byte LP = LO + 1;        
 
-        public const byte BA = LP + 1;
+        public const byte HA = LP + 1;
 
-        public const byte BB = LB + BA;
+        public const byte HB = LB + HA;
 
-        public const byte BC = LC + BA;
+        public const byte HC = LC + HA;
 
-        public const byte BD = LD + BA;
+        public const byte HD = LD + HA;
 
-        public const byte BE = LE + BA;
+        public const byte HE = LE + HA;
 
-        public const byte BF = LF + BA;
+        public const byte HF = LF + HA;
 
-        public const byte BG = LG + BA;
+        public const byte HG = LG + HA;
 
-        public const byte BH = LH + BA;
+        public const byte HH = LH + HA;
 
-        public const byte BI = LI + BA;
+        public const byte HI = LI + HA;
 
-        public const byte BJ = LJ + BA;
+        public const byte HJ = LJ + HA;
 
-        public const byte BK = LK + BA;
+        public const byte HK = LK + HA;
 
-        public const byte BL = LL + BA;
+        public const byte HL = LL + HA;
 
-        public const byte BM = LM + BA;
+        public const byte HM = LM + HA;
 
-        public const byte BN = LN + BA;
+        public const byte HN = LN + HA;
 
-        public const byte BO = LO + BA;
+        public const byte HO = LO + HA;
 
-        public const byte BP = LP + BA;
+        public const byte HP = LP + HA;
 
     }
 

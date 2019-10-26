@@ -196,7 +196,7 @@ namespace Z0
         /// <param name="src">The vector containing the content to rearrange</param>
         /// <param name="control">The rearrangment specification</param>
         [MethodImpl(Inline)]
-        public static Vector128<byte> vshuffle(Vector128<byte> src, in Vector128<byte> spec)
+        public static Vector128<byte> vshuffle(Vector128<byte> src, Vector128<byte> spec)
             => Shuffle(src, spec);
 
         /// <summary>
@@ -205,7 +205,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="spec">The permutation spec</param>
         [MethodImpl(Inline)]
-        public static Vector128<sbyte> vshuffle(Vector128<sbyte> src, in Vector128<sbyte> spec)
+        public static Vector128<sbyte> vshuffle(Vector128<sbyte> src, Vector128<sbyte> spec)
             => Shuffle(src, spec);
 
         ///<summary>
@@ -216,7 +216,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="spec">The permutation spec</param>
         [MethodImpl(Inline)]
-        public static Vector256<byte> vshuffle(Vector256<byte> src, in Vector256<byte> spec)
+        public static Vector256<byte> vshuffle(Vector256<byte> src, Vector256<byte> spec)
             => Shuffle(src, spec);
 
         /// <summary>
@@ -227,7 +227,7 @@ namespace Z0
         /// <param name="src">The vector containing the content to rearrange</param>
         /// <param name="spec">The rearrangment specification</param>
         [MethodImpl(Inline)]
-        public static Vector256<sbyte> vshuffle(Vector256<sbyte> src, in Vector256<sbyte> spec)
+        public static Vector256<sbyte> vshuffle(Vector256<sbyte> src, Vector256<sbyte> spec)
             => Shuffle(src, spec);
     }
 }

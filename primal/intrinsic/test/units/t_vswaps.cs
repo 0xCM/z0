@@ -13,23 +13,22 @@ namespace Z0
     using static zfunc;
     using static nfunc;
 
-    public class t_swaps : IntrinsicTest<t_swaps>
+    public class t_vswaps : IntrinsicTest<t_vswaps>
     {
         
         public void perm_swaps()
         {            
             
-            var src = Vec128Pattern.increments((byte)0);
+            var src = Vec128Pattern.Increments((byte)0);
 
             Swap s = (0,1);
-            var x1 = dinx.swap(src, s);
-            var x2 = dinx.swap(x1, s);
+            var x1 = dinx.vswap(src, s);
+            var x2 = dinx.vswap(x1, s);
             Claim.eq(x2, src);
 
             //Shuffle the first element all the way through to the last element
             var chain = Swap.Chain((0,1), 15);
-            var x3 = dinx.swap(src, chain);
-            //Trace($"{chain.Format()} |> {src.FormatHex()} = {x3.FormatHex()}");
+            var x3 = dinx.vswap(src, chain).ToSpan();
             Claim.eq(x3[15],(byte)0);            
         }
 

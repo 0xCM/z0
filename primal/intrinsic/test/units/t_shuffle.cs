@@ -8,6 +8,7 @@ namespace Z0
     using System.Linq;
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
+    using System.Runtime.Intrinsics;
     using System.IO;
     
     using static zfunc;
@@ -41,45 +42,47 @@ namespace Z0
 
         public void shuffle_hi_128x16u_check()
         {
-            var x = Vec128Pattern.increments<ushort>();
-            Claim.eq(v128(x[A], x[B], x[C], x[D], x[A+4], x[B+ 4], x[C + 4], x[D + 4]), x);
+            var x = ginx.vpIncrements<ushort>(n128);
+            var xs = x.ToSpan();
+            Claim.eq(Vector128.Create(xs[A], xs[B], xs[C], xs[D], xs[A+4], xs[B+ 4], xs[C + 4], xs[D + 4]), x);
 
             var xABCD = dinx.vshufflehi(x, Perm4.ABCD);
-            Claim.eq(xABCD, v128(x[A], x[B], x[C], x[D], x[A + 4], x[B + 4], x[C + 4], x[D + 4]));
+            Claim.eq(xABCD, Vector128.Create(xs[A], xs[B], xs[C], xs[D], xs[A + 4], xs[B + 4], xs[C + 4], xs[D + 4]));
 
             var xDCBA = dinx.vshufflehi(x, Perm4.DCBA);
-            Claim.eq(xDCBA, v128(x[A], x[B], x[C], x[D], x[D + 4], x[C + 4], x[B + 4], x[A + 4]));
+            Claim.eq(xDCBA, Vector128.Create(xs[A], xs[B], xs[C], xs[D], xs[D + 4], xs[C + 4], xs[B + 4], xs[A + 4]));
 
             var xACBD = dinx.vshufflehi(x, Perm4.ACBD);
-            Claim.eq(xACBD, v128(x[A], x[B], x[C], x[D], x[A + 4], x[C + 4], x[B + 4], x[D + 4]));            
+            Claim.eq(xACBD, Vector128.Create(xs[A], xs[B], xs[C], xs[D], xs[A + 4], xs[C + 4], xs[B + 4], xs[D + 4]));            
         }
 
         public void shuffle_lo_128x16u_check()
         {
-            var x = Vec128Pattern.increments<ushort>();
-            Claim.eq(v128(x[A], x[B], x[C], x[D], x[A + 4], x[B + 4], x[C + 4], x[D + 4]), x);
+            var x = ginx.vpIncrements<ushort>(n128);
+            var xs = x.ToSpan();
+            Claim.eq(Vector128.Create(xs[A], xs[B], xs[C], xs[D], xs[A + 4], xs[B + 4], xs[C + 4], xs[D + 4]), x);
 
             var xABCD = dinx.vshufflelo(x, Perm4.ABCD);
-            Claim.eq(xABCD, v128(x[A], x[B], x[C], x[D], x[A + 4], x[B + 4], x[C + 4], x[D + 4]));
+            Claim.eq(xABCD, Vector128.Create(xs[A], xs[B], xs[C], xs[D], xs[A + 4], xs[B + 4], xs[C + 4], xs[D + 4]));
 
             var xDCBA = dinx.vshufflelo(x, Perm4.DCBA);
-            Claim.eq(xDCBA, v128(x[D], x[C], x[B], x[A], x[A + 4], x[B + 4], x[C + 4], x[D + 4]));
+            Claim.eq(xDCBA, Vector128.Create(xs[D], xs[C], xs[B], xs[A], xs[A + 4], xs[B + 4], xs[C + 4], xs[D + 4]));
 
             var xACBD = dinx.vshufflelo(x, Perm4.ACBD);
-            Claim.eq(xACBD, v128(x[A], x[C], x[B], x[D], x[A + 4], x[B + 4], x[C + 4], x[D + 4]));
+            Claim.eq(xACBD, Vector128.Create(xs[A], xs[C], xs[B], xs[D], xs[A + 4], xs[B + 4], xs[C + 4], xs[D + 4]));
             
         }
 
         public void shuffle_128x8u_check()
         {
-            var src = Vec128Pattern.increments<byte>();
+            var src = ginx.vpIncrements<byte>(n128);
             var perm = Perm16Spec.Reverse.ToPerm();
             for(int i=0,j=15; i<perm.Length; i++, j--)
                 Claim.eq(perm[i],j);
 
             var shufspec = perm.ToShuffleSpec();
             var dst = dinx.vshuffle(src,shufspec);
-            var expect = Vec128Pattern.decrements<byte>(15);
+            var expect = Vec128Pattern.Decrements<byte>(15);
             Claim.eq(expect, dst);
 
             var dstPerm = dst.ToPerm();

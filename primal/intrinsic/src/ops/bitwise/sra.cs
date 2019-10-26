@@ -23,7 +23,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="offset">The number of bits to shift rightwards</param>
         [MethodImpl(Inline)]
-        public static Vec256<short> vsra(in Vec256<short> src, byte offset)
+        public static Vector256<short> vsra(Vector256<short> src, byte offset)
             => ShiftRightArithmetic(src, offset);
 
         /// <summary>
@@ -33,29 +33,29 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="offset">The number of bits to shift rightwards</param>
         [MethodImpl(Inline)]
-        public static Vec256<int> vsra(in Vec256<int> src, byte offset)
+        public static Vector256<int> vsra(Vector256<int> src, byte offset)
             => ShiftRightArithmetic(src, offset);
 
         /// <summary>
         /// _mm_srav_epi32, avx2, shift-right variable arithmetic:
-        /// Applies a rightward arithmetic shift in each source vector component as 
-        /// specified by the amount in the corresponding control vector component
+        /// Applies a rightward arithmetic shift each source vector component as 
+        /// specified by the amount the corresponding control vector component
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="control">The control vector</param>
         [MethodImpl(Inline)]
-        public static Vec128<int> vsrav(in Vec128<int> src, in Vec128<uint> control)
+        public static Vector128<int> vsrav(Vector128<int> src, Vector128<uint> control)
             => ShiftRightArithmeticVariable(src, control);
 
         /// <summary>
         /// _mm256_srav_epi32, avx2, shift-right variable arithmetic:
-        /// Applies a rightward arithmetic shift in each source vector component as 
-        /// specified by the amount in the corresponding control vector component
+        /// Applies a rightward arithmetic shift each source vector component as 
+        /// specified by the amount the corresponding control vector component
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="control">The control vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<int> vsrav(in Vec256<int> src, in Vec256<uint> control)
+        public static Vector256<int> vsrav(Vector256<int> src, Vector256<uint> control)
             => ShiftRightArithmeticVariable(src, control);
     }
 }

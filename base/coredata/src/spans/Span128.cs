@@ -83,6 +83,11 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
+        public static Span128<T> Transfer(Span<T> src)
+            => new Span128<T>(src);
+         
+
+        [MethodImpl(Inline)]
         public static Span128<T> Load(ReadOnlySpan<T> src, int offset = 0)
         {
             require(Aligned(src.Length - offset));
@@ -133,6 +138,12 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => ref data[ix];
+        }
+
+        public ref T Head
+        {
+            [MethodImpl(Inline)]
+            get => ref MemoryMarshal.GetReference(data);
         }
 
         [MethodImpl(Inline)]

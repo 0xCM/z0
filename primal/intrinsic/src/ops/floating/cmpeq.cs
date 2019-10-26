@@ -18,33 +18,7 @@ namespace Z0
 
     partial class dfp
     {
-        /// <summary>
-        /// Returns a 128x32f vector where all bits are enabled
-        /// </summary>
-        [MethodImpl(Inline)]
-        public static Vec128<float> vones_128x32f()
-            => CompareEqual(default(Vector128<float>), default(Vector128<float>));
 
-        /// <summary>
-        /// Returns a 128x64f vector where all bits are enabled
-        /// </summary>
-        [MethodImpl(Inline)]
-        public static Vec128<double> vones_128x64f()
-            => CompareEqual(default(Vector128<double>), default(Vector128<double>));
-
-        /// <summary>
-        /// Returns a 256x32f vector where all bits are enabled
-        /// </summary>
-        [MethodImpl(Inline)]
-        public static Vec256<float> ones_256x32f()
-            => Compare(default(Vector256<float>), default(Vector256<float>), FloatComparisonMode.UnorderedEqualNonSignaling);
-
-        /// <summary>
-        /// Returns a 256x64f vector where all bits are enabled
-        /// </summary>
-        [MethodImpl(Inline)]
-        public static Vec256<double> ones_256x64f()
-            => Compare(default(Vector256<double>), default(Vector256<double>), FloatComparisonMode.UnorderedEqualNonSignaling);
 
         /// <summary>
         ///  __m128 _mm_cmpeq_ps (__m128 a, __m128 b) CMPPS xmm, xmm/m128, imm8(0)

@@ -28,6 +28,14 @@ namespace Z0
     }
 
     /// <summary>
+    /// Namescope for custom intrinsic operators
+    /// </summary>
+    public static partial class dinxc
+    {
+
+    }
+
+    /// <summary>
     /// Defines direct floating-point operations
     /// </summary>
     public static partial class dfp

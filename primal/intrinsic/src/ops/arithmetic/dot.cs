@@ -19,7 +19,7 @@ namespace Z0
         {
             var product = vmul(lhs,rhs);
             var sum = vadd(vlo(product),vhi(product));
-            var span = sum.ToSpan128();
+            var span = sum.ToBlockedSpan();
             return span[0] + span[1];            
         }
 
@@ -28,7 +28,7 @@ namespace Z0
         {
             var product = vmul(lhs,rhs);
             var sum = vadd(vlo(product),vhi(product));
-            var span = sum.ToSpan128();
+            var span = sum.ToBlockedSpan();
             return span[0] + span[1];            
         }
     }

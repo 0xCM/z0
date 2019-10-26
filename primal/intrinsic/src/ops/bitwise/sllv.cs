@@ -17,90 +17,90 @@ namespace Z0
         /// <summary>
         /// __m128i _mm_sllv_epi32 (__m128i a, __m128i count) VPSLLVD xmm, ymm, xmm/m128
         /// Applies a leftward logical shift to each source vector component as 
-        /// specified by the amount in the corresponding control vector component
+        /// specified by the amount the corresponding control vector component
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="offset">The offset vector</param>
         [MethodImpl(Inline)]
-        public static Vec128<int> vsllv(in Vec128<int> src, in Vec128<uint> offset)
-            => ShiftLeftLogicalVariable(src.xmm, offset.xmm);
+        public static Vector128<int> vsllv(Vector128<int> src, Vector128<uint> offset)
+            => ShiftLeftLogicalVariable(src, offset);
 
         /// <summary>
         /// __m128i _mm_sllv_epi32 (__m128i a, __m128i count) VPSLLVD xmm, ymm, xmm/m128
         /// Applies a leftward logical shift to each source vector component as 
-        /// specified by the amount in the corresponding control vector component
+        /// specified by the amount the corresponding control vector component
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="offset">The offset vector</param>
         [MethodImpl(Inline)]
-        public static Vec128<uint> vsllv(in Vec128<uint> src, in Vec128<uint> offset)
-            => ShiftLeftLogicalVariable(src.xmm, offset.xmm);
+        public static Vector128<uint> vsllv(Vector128<uint> src, Vector128<uint> offset)
+            => ShiftLeftLogicalVariable(src, offset);
 
         /// <summary>
         ///  __m128i _mm_sllv_epi64 (__m128i a, __m128i count) VPSLLVQ xmm, ymm, xmm/m128
         /// Applies a leftward logical shift to each source vector component as 
-        /// specified by the amount in the corresponding control vector component
+        /// specified by the amount the corresponding control vector component
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="offset">The offset vector</param>
         [MethodImpl(Inline)]
-        public static Vec128<long> vsllv(in Vec128<long> src, in Vec128<ulong> offset)
-            => ShiftLeftLogicalVariable(src.xmm, offset.xmm);
+        public static Vector128<long> vsllv(Vector128<long> src, Vector128<ulong> offset)
+            => ShiftLeftLogicalVariable(src, offset);
 
         /// <summary>
         /// __m128i _mm_sllv_epi64 (__m128i a, __m128i count) VPSLLVQ xmm, ymm, xmm/m128
         /// Applies a leftward logical shift to each source vector component as 
-        /// specified by the amount in the corresponding control vector component
+        /// specified by the amount the corresponding control vector component
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="offset">The offset vector</param>
         [MethodImpl(Inline)]
-        public static Vec128<ulong> vsllv(in Vec128<ulong> src, in Vec128<ulong> offset)
-            => ShiftLeftLogicalVariable(src.xmm, offset.xmm);           
+        public static Vector128<ulong> vsllv(Vector128<ulong> src, Vector128<ulong> offset)
+            => ShiftLeftLogicalVariable(src, offset);           
 
         /// <summary>
         /// __m256i _mm256_sllv_epi32 (__m256i a, __m256i count) VPSLLVD ymm, ymm, ymm/m256
         /// Applies a leftward logical shift to each source vector component as 
-        /// specified by the amount in the corresponding control vector component
+        /// specified by the amount the corresponding control vector component
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="offset">The offset vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<int> vsllv(in Vec256<int> src, in Vec256<uint> offset)
-            => ShiftLeftLogicalVariable(src.ymm, offset.ymm);
+        public static Vector256<int> vsllv(Vector256<int> src, Vector256<uint> offset)
+            => ShiftLeftLogicalVariable(src, offset);
 
         /// <summary>
         ///  __m256i _mm256_sllv_epi32 (__m256i a, __m256i count) VPSLLVD ymm, ymm, ymm/m256
         /// Applies a leftward logical shift to each source vector component as 
-        /// specified by the amount in the corresponding control vector component
+        /// specified by the amount the corresponding control vector component
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="offset">The offset vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<uint> vsllv(in Vec256<uint> src, in Vec256<uint> offset)
-            => ShiftLeftLogicalVariable(src.ymm, offset.ymm);
+        public static Vector256<uint> vsllv(Vector256<uint> src, Vector256<uint> offset)
+            => ShiftLeftLogicalVariable(src, offset);
 
         /// <summary>
         ///  __m256i _mm256_sllv_epi64 (__m256i a, __m256i count) VPSLLVQ ymm, ymm, ymm/m256
         /// Applies a leftward logical shift to each source vector component as 
-        /// specified by the amount in the corresponding control vector component
+        /// specified by the amount the corresponding control vector component
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="offset">The offset vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<long> vsllv(in Vec256<long> src, in Vec256<ulong> offset)
-            => ShiftLeftLogicalVariable(src.ymm, offset.ymm);
+        public static Vector256<long> vsllv(Vector256<long> src, Vector256<ulong> offset)
+            => ShiftLeftLogicalVariable(src, offset);
 
         /// <summary>
         /// __m256i _mm256_sllv_epi64 (__m256i a, __m256i count) VPSLLVQ ymm, ymm, ymm/m256
         /// Applies a leftward logical shift to each source vector component as 
-        /// specified by the amount in the corresponding offset vector component
+        /// specified by the amount the corresponding offset vector component
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="offset">The offset vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<ulong> vsllv(in Vec256<ulong> src, in Vec256<ulong> offset)
-            => ShiftLeftLogicalVariable(src.ymm, offset.ymm);  
+        public static Vector256<ulong> vsllv(Vector256<ulong> src, Vector256<ulong> offset)
+            => ShiftLeftLogicalVariable(src, offset);  
 
     }
 }

@@ -18,6 +18,8 @@ class zfunc
     }
 
     public const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;
+
+    public const MethodImplOptions NotInline = MethodImplOptions.NoInlining;
     
     public static bool require(bool condition, [CallerMemberName] string caller = null, [CallerFilePath] string file = null, [CallerLineNumber] int? line = null)
         => condition ? condition : throw new Exception($"Condition unsatisfied: line {line}, member {caller} in file {file}");

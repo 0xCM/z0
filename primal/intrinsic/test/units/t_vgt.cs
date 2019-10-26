@@ -67,7 +67,7 @@ namespace Z0
         void cmp_gt_check<T>(N128 n = default)
             where T : unmanaged
         {
-            var ones = ginx.vones<T>(n);
+            var ones = ginx.vpOnes<T>(n);
             var one = ginx.vextract(ones,0);
             
             for(var i=0; i< SampleSize; i++)
@@ -92,7 +92,7 @@ namespace Z0
         void cmp_gt_check<T>(N256 n = default)
             where T : unmanaged
         {
-            var ones = ginx.vones<T>(n);
+            var ones = ginx.vpOnes<T>(n);
             var one = ginx.vextract(ginx.vlo(ones),0);
             
             for(var i=0; i< SampleSize; i++)

@@ -15,14 +15,11 @@ namespace Z0
     public class t_vcount : UnitTest<t_vcount>
     {   
         public void next8i()
-        {
-            next_check<byte>();
-        }
+            => next_check<byte>();
 
-        public void next8u()
-        {
-            next_check<byte>();
-        }
+        public void next8u()        
+            => next_check<byte>();
+        
 
         public void next32i()
         {
@@ -45,42 +42,62 @@ namespace Z0
         }
 
 
-        void next_check<T>()
+        void next_check<T>(N128 n)
             where T : unmanaged
         {
             for(var i=0; i<SampleSize; i++)
             {
-                var x = Random.CpuVec128<T>();
+                var x = Random.CpuVector<T>(n);
+                var xs = x.ToSpan();
                 var xn = x.Next();
+                var xns = xn.ToSpan();
                 var xp = x.Prior();
+                var xps = xp.ToSpan();
 
-                var units128 = Vec128Pattern.units<T>();
+                var uints = ginx.vpUnits<T>(n);
                 
-                Claim.yea(ginx.vadd<T>(xp,units128).Equals(x));
-                Claim.yea(ginx.vsub<T>(xn,units128).Equals(x));
+                Claim.yea(ginx.vadd<T>(xp, uints).Equals(x));
+                Claim.yea(ginx.vsub<T>(xn, uints).Equals(x));
 
                 for(var j=0; j< x.Length(); j++)
                 {
-                    Claim.eq(xn[j], gmath.inc(x[j]));
-                    Claim.eq(xp[j], gmath.dec(x[j]));
+                    Claim.eq(xns[j], gmath.inc(xs[j]));
+                    Claim.eq(xps[j], gmath.dec(xs[j]));
                 }
-
-            
-                var y = Random.CpuVec256<T>();
-                var yn = y.Next();
-                var yp = y.Prior();
-
-                var units256 = Vec256Pattern.Units<T>();
-                
-                Claim.yea(ginx.vadd<T>(yp,units256).Equals(y));
-                Claim.yea(ginx.vsub<T>(yn,units256).Equals(y));
-                for(var j=0; j< x.Length(); j++)
-                {
-                    Claim.eq(yn[j], gmath.inc(y[j]));
-                    Claim.eq(yp[j], gmath.dec(y[j]));
-                }
-
             }
+
+        }
+
+        void next_check<T>(N256 n)
+            where T : unmanaged
+        {
+            for(var i=0; i<SampleSize; i++)
+            {
+                var x = Random.CpuVector<T>(n);
+                var xs = x.ToSpan();
+                var xn = x.Next();
+                var xns = xn.ToSpan();
+                var xp = x.Prior();
+                var xps = xp.ToSpan();
+
+                var uints = ginx.vpUnits<T>(n);
+                
+                Claim.yea(ginx.vadd<T>(xp, uints).Equals(x));
+                Claim.yea(ginx.vsub<T>(xn, uints).Equals(x));
+
+                for(var j=0; j< x.Length(); j++)
+                {
+                    Claim.eq(xns[j], gmath.inc(xs[j]));
+                    Claim.eq(xps[j], gmath.dec(xs[j]));
+                }
+            }
+        }
+
+        void next_check<T>()
+            where T : unmanaged
+        {
+            next_check<T>(n128);
+            next_check<T>(n256);
         }
     }
 }

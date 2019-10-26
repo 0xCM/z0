@@ -131,6 +131,12 @@ namespace Z0
             get => ref data[ix];
         }
 
+        public ref T Head
+        {
+            [MethodImpl(Inline)]
+            get => ref MemoryMarshal.GetReference(data);
+        }
+
         /// <summary>
         /// Slices a block from the encapsulated source
         /// </summary>

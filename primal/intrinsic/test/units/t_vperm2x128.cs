@@ -46,9 +46,11 @@ namespace Z0
 
             var x = Vec256Pattern.Increasing<byte>();
             var y = Vec256Pattern.Decreasing<byte>();
-            var z = dinx.vpermvar32x8(x,y);
-            for(var i=0; i<31; i++)
-                Claim.eq(x[31 - i], z[i]);
+            var z = dinx.reverse(dinx.vpermvar32x8(x,y));
+            Claim.eq(x,z);
+
+            // for(var i=0; i<31; i++)
+            //     Claim.eq(x[31 - i], z[i]);
         
         }
 
@@ -67,8 +69,8 @@ namespace Z0
             var pformat_actual = p.FormatMap();
             Claim.eq(pformat_epect, pformat_actual);
 
-            var vIn = Vec128.FromParts(0,1,2,3);
-            var vExpect = Vec128.FromParts(3,2,1,0);
+            var vIn = v128(0,1,2,3);
+            var vExpect = v128(3,2,1,0);
             var vActual = dinx.vshuffle(vIn,p);
             Claim.eq(vExpect, vActual);                                
         }        

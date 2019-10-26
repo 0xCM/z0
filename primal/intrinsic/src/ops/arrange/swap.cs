@@ -9,6 +9,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
     using System.Runtime.Intrinsics.X86;
     using System.Collections.Generic;
+    using System.Linq;
     using static System.Runtime.Intrinsics.X86.Avx;
     using static System.Runtime.Intrinsics.X86.Avx2;
         
@@ -16,6 +17,21 @@ namespace Z0
 
     partial class dinx
     {        
+        [MethodImpl(NotInline)]
+        static Vector128<T> swapspec<T>(N128 n, params Swap[] swaps)
+            where T : unmanaged  
+        {
+            var len = Vector128<T>.Count;
+            var src = BlockedSpan.Load(n, range(default, gmath.add(default, convert<T>(len - 1))).ToArray().AsSpan());
+            var dst = src.Swap(swaps);
+            return ginx.vloadu(n, in dst.Head);
+        }
+
+
+        [MethodImpl(Inline)]
+        public static Vector128<byte> vswap(Vector128<byte> src, params Swap[] swaps)
+            => vshuffle(src,swapspec<byte>(n128,swaps));
+
         public static Vec256<int> vswap(Vec256<int> src, byte i, byte j)
         {
             Span<int> control = stackalloc int[Vec256<int>.Length];

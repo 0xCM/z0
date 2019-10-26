@@ -378,7 +378,6 @@ namespace Z0
             where T : unmanaged        
                 => ref Unsafe.As<Vector256<byte>,Vector256<T>>(ref asRef(in src));
 
-
         [MethodImpl(Inline)]
         public static ref Vector256<T> generic<T>(in Vector256<short> src)
             where T : unmanaged        

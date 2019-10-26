@@ -1,4 +1,4 @@
-// 2019-10-25 06:35:10:745
+// 2019-10-25 21:50:48:099
 Vec256<ulong> perm4x64_256x64(Vec256<ulong> src)
 {
     IL_0000: ldarga.s src
@@ -35,34 +35,37 @@ Vec256<ulong> perm4x64_256x64(ulong a, ulong b, ulong c, ulong d)
     IL_0001: ldarg.2
     IL_0002: ldarg.3
     IL_0003: ldarg.s d
-    IL_0005: call Z0.Vec256`1<System.UInt64> zfunc::v256(System.UInt64,System.UInt64,System.UInt64,System.UInt64)
+    IL_0005: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> zfunc::v256(System.UInt64,System.UInt64,System.UInt64,System.UInt64)
     IL_000A: stloc.0
-    IL_000B: ldloca.s V_0
-    IL_000D: ldc.i4 228
-    IL_0012: call Z0.Vec256`1<System.UInt64> Z0.dinx::vperm4x64(Z0.Vec256`1<System.UInt64>&,Z0.Perm4)
-    IL_0017: stloc.1
-    IL_0018: ldloca.s V_1
-    IL_001A: ldc.i4 180
-    IL_001F: call Z0.Vec256`1<System.UInt64> Z0.dinx::vperm4x64(Z0.Vec256`1<System.UInt64>&,Z0.Perm4)
-    IL_0024: stloc.1
-    IL_0025: ldloca.s V_1
-    IL_0027: ldc.i4 216
-    IL_002C: call Z0.Vec256`1<System.UInt64> Z0.dinx::vperm4x64(Z0.Vec256`1<System.UInt64>&,Z0.Perm4)
-    IL_0031: stloc.1
-    IL_0032: ldloca.s V_1
-    IL_0034: ldc.i4.s 120
-    IL_0036: call Z0.Vec256`1<System.UInt64> Z0.dinx::vperm4x64(Z0.Vec256`1<System.UInt64>&,Z0.Perm4)
-    IL_003B: stloc.1
-    IL_003C: ldloca.s V_1
-    IL_003E: ldc.i4 156
-    IL_0043: call Z0.Vec256`1<System.UInt64> Z0.dinx::vperm4x64(Z0.Vec256`1<System.UInt64>&,Z0.Perm4)
-    IL_0048: stloc.1
-    IL_0049: ldloca.s V_1
-    IL_004B: ldc.i4.s 108
-    IL_004D: call Z0.Vec256`1<System.UInt64> Z0.dinx::vperm4x64(Z0.Vec256`1<System.UInt64>&,Z0.Perm4)
-    IL_0052: stloc.1
-    IL_0053: ldloc.1
-    IL_0054: ret
+    IL_000B: ldloc.0
+    IL_000C: call Z0.Vec256`1<System.UInt64> Z0.Vec256`1<System.UInt64>::op_Implicit(System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
+    IL_0011: stloc.2
+    IL_0012: ldloca.s V_2
+    IL_0014: ldc.i4 228
+    IL_0019: call Z0.Vec256`1<System.UInt64> Z0.dinx::vperm4x64(Z0.Vec256`1<System.UInt64>&,Z0.Perm4)
+    IL_001E: stloc.1
+    IL_001F: ldloca.s V_1
+    IL_0021: ldc.i4 180
+    IL_0026: call Z0.Vec256`1<System.UInt64> Z0.dinx::vperm4x64(Z0.Vec256`1<System.UInt64>&,Z0.Perm4)
+    IL_002B: stloc.1
+    IL_002C: ldloca.s V_1
+    IL_002E: ldc.i4 216
+    IL_0033: call Z0.Vec256`1<System.UInt64> Z0.dinx::vperm4x64(Z0.Vec256`1<System.UInt64>&,Z0.Perm4)
+    IL_0038: stloc.1
+    IL_0039: ldloca.s V_1
+    IL_003B: ldc.i4.s 120
+    IL_003D: call Z0.Vec256`1<System.UInt64> Z0.dinx::vperm4x64(Z0.Vec256`1<System.UInt64>&,Z0.Perm4)
+    IL_0042: stloc.1
+    IL_0043: ldloca.s V_1
+    IL_0045: ldc.i4 156
+    IL_004A: call Z0.Vec256`1<System.UInt64> Z0.dinx::vperm4x64(Z0.Vec256`1<System.UInt64>&,Z0.Perm4)
+    IL_004F: stloc.1
+    IL_0050: ldloca.s V_1
+    IL_0052: ldc.i4.s 108
+    IL_0054: call Z0.Vec256`1<System.UInt64> Z0.dinx::vperm4x64(Z0.Vec256`1<System.UInt64>&,Z0.Perm4)
+    IL_0059: stloc.1
+    IL_005A: ldloc.1
+    IL_005B: ret
 
 }
 Vec256<uint> blend(Vec256<uint> x, Vec256<uint> y)

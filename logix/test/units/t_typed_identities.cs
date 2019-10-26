@@ -58,7 +58,7 @@ namespace Z0.Logix
         void check_samples<T>(TypedEqualityExpr<Vector128<T>> equality)
             where T :unmanaged
         {
-            var @true = literal(ginx.vones<T>(n128));
+            var @true = literal(ginx.vpOnes<T>(n128));
             for(var i=0; i<SampleSize; i++)
             {
                 var x = Random.CpuVector128<T>();
@@ -73,7 +73,7 @@ namespace Z0.Logix
         void check_samples<T>(TypedEqualityExpr<Vector256<T>> equality)
             where T :unmanaged
         {
-            var @true = literal(ginx.vones<T>(n256));
+            var @true = literal(ginx.vpOnes<T>(n256));
             for(var i=0; i<SampleSize; i++)
             {
                 var x = Random.CpuVector256<T>();

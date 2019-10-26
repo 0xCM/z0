@@ -32,8 +32,8 @@ namespace Z0
                 last = del(a,b);
                 subject.Stop();
 
-                var c = Random.CpuVec128<T>();
-                var d = Random.CpuVec128<T>();
+                var c = Random.CpuVector128<T>();
+                var d = Random.CpuVector128<T>();
                 compare.Start();
                 last = ginx.vadd(c,d);
                 compare.Stop();

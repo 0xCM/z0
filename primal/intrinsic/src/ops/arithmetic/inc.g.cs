@@ -15,14 +15,14 @@ namespace Z0
     partial class ginx
     {
         [MethodImpl(Inline)]
-        public static Vec128<T> vinc<T>(in Vec128<T> src)
+        public static Vector128<T> vinc<T>(Vector128<T> src)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte) 
             || typeof(T) == typeof(ushort) 
             || typeof(T) == typeof(uint) 
             || typeof(T) == typeof(ulong))
-                return vincu(in src);
+                return vincu(src);
             else if(typeof(T) == typeof(sbyte) 
             || typeof(T) == typeof(short) 
             || typeof(T) == typeof(int) 
@@ -32,14 +32,14 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static Vec256<T> vinc<T>(in Vec256<T> src)
+        public static Vector256<T> vinc<T>(Vector256<T> src)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte) 
             || typeof(T) == typeof(ushort) 
             || typeof(T) == typeof(uint) 
             || typeof(T) == typeof(ulong))
-                return vincu(in src);
+                return vincu(src);
             else if(typeof(T) == typeof(sbyte) 
             || typeof(T) == typeof(short) 
             || typeof(T) == typeof(int) 
@@ -49,59 +49,59 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static Vec128<T> vinci<T>(in Vec128<T> lhs)
+        static Vector128<T> vinci<T>(Vector128<T> lhs)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                 return generic<T>(dinx.vinc(in int8(in lhs)));
+                 return generic<T>(dinx.vinc(int8(lhs)));
             else if(typeof(T) == typeof(short))
-                 return generic<T>(dinx.vinc(in int16(in lhs)));
+                 return generic<T>(dinx.vinc(int16(lhs)));
             else if(typeof(T) == typeof(int))
-                 return generic<T>(dinx.vinc(in int32(in lhs)));
+                 return generic<T>(dinx.vinc(int32(lhs)));
             else
-                 return generic<T>(dinx.vinc(in int64(in lhs)));
+                 return generic<T>(dinx.vinc(int64(lhs)));
         }
 
         [MethodImpl(Inline)]
-        static Vec128<T> vincu<T>(in Vec128<T> lhs)
+        static Vector128<T> vincu<T>(Vector128<T> lhs)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(dinx.vinc(in uint8(in lhs)));
+                return generic<T>(dinx.vinc(uint8(lhs)));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(dinx.vinc(in uint16(in lhs)));
+                return generic<T>(dinx.vinc(uint16(lhs)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(dinx.vinc(in uint32(lhs)));
+                return generic<T>(dinx.vinc(uint32(lhs)));
             else 
-                return generic<T>(dinx.vinc(in uint64(in lhs)));
+                return generic<T>(dinx.vinc(uint64(lhs)));
         }
 
         [MethodImpl(Inline)]
-        static Vec256<T> vinci<T>(in Vec256<T> lhs)
+        static Vector256<T> vinci<T>(Vector256<T> lhs)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                 return generic<T>(dinx.vinc(in int8(in lhs)));
+                 return generic<T>(dinx.vinc(int8(lhs)));
             else if(typeof(T) == typeof(short))
-                 return generic<T>(dinx.vinc(in int16(in lhs)));
+                 return generic<T>(dinx.vinc(int16(lhs)));
             else if(typeof(T) == typeof(int))
-                 return generic<T>(dinx.vinc(in int32(in lhs)));
+                 return generic<T>(dinx.vinc(int32(lhs)));
             else
-                 return generic<T>(dinx.vinc(in int64(in lhs)));
+                 return generic<T>(dinx.vinc(int64(lhs)));
         }
 
         [MethodImpl(Inline)]
-        static Vec256<T> vincu<T>(in Vec256<T> lhs)
+        static Vector256<T> vincu<T>(Vector256<T> lhs)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(dinx.vinc(in uint8(in lhs)));
+                return generic<T>(dinx.vinc(uint8(lhs)));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(dinx.vinc(in uint16(in lhs)));
+                return generic<T>(dinx.vinc(uint16(lhs)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(dinx.vinc(in uint32(lhs)));
+                return generic<T>(dinx.vinc(uint32(lhs)));
             else 
-                return generic<T>(dinx.vinc(in uint64(in lhs)));
+                return generic<T>(dinx.vinc(uint64(lhs)));
         }
 
     }

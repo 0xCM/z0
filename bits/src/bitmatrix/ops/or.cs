@@ -80,12 +80,12 @@ namespace Z0
 
         public static ref BitMatrix64 or(ref BitMatrix64 A, in BitMatrix64 B)
         {
-            const int rowstep = 4;
-            for(var i=0; i< A.RowCount; i += rowstep)
+            const int step = 4;
+            for(var i=0; i< A.RowCount; i += step)
             {
-                A.GetCells(i, out Vec256<ulong> vLhs);
-                B.GetCells(i, out Vec256<ulong> vRhs);
-                dinx.vor(vLhs,vRhs).StoreTo(ref A[i]);
+                A.Load(step, out Vector256<ulong> x);
+                B.Load(step, out Vector256<ulong> y);
+                dinx.vor(x,y).StoreTo(ref A[i]);
             }
             return ref A;
         }

@@ -1,4 +1,4 @@
-// 2019-10-25 06:35:14:327
+// 2019-10-25 21:50:51:218
 float convert_32f_to_g32f(float src)
 {
     IL_0000: ldarg.0
@@ -272,504 +272,179 @@ Char convert_ch16_to_gch16(Char src)
     IL_0006: ret
 
 }
-void vstore_n128x8u(Vector128<byte> src, ref byte dst)
+Span<byte> tospan_128x8i(Vector128<byte> src)
 {
-    IL_0000: ldarg.1
-    IL_0001: call System.Byte* Z0.As::refptr(System.Byte&)
-    IL_0006: ldarg.0
-    IL_0007: call System.Void System.Runtime.Intrinsics.X86.Sse2::Store(System.Byte*,System.Runtime.Intrinsics.Vector128`1<System.Byte>)
-    IL_000C: ret
+    IL_0000: ldarg.0
+    IL_0001: call System.Span`1<System.Byte> Z0.VSpanX::ToSpan<System.Byte>(System.Runtime.Intrinsics.Vector128`1<System.Byte>)
+    IL_0006: ret
 
 }
-void vstore_d128x8u(Vec128<byte> src, ref byte dst)
+void vstore_g128x8u(Vector128<byte> src, ref byte dst)
 {
-    IL_0000: ldarga.s src
-    IL_0002: ldarg.1
-    IL_0003: call System.Void Z0.cpuvec::vstore(Z0.Vec128`1<System.Byte>&,System.Byte&)
-    IL_0008: ret
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call System.Void zfunc::vstore<System.Byte>(System.Runtime.Intrinsics.Vector128`1<System.Byte>,System.Byte&)
+    IL_0007: ret
 
 }
-void vstore_g128x8u(Vec128<byte> src, ref byte dst)
+void vstore_g128x8i(Vector128<sbyte> src, ref sbyte dst)
 {
-    IL_0000: ldarga.s src
-    IL_0002: ldarg.1
-    IL_0003: call System.Void zfunc::vstore<System.Byte>(Z0.Vec128`1<System.Byte>&,System.Byte&)
-    IL_0008: ret
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call System.Void zfunc::vstore<System.SByte>(System.Runtime.Intrinsics.Vector128`1<System.SByte>,System.SByte&)
+    IL_0007: ret
 
 }
-void vstore_n128x8i(Vector128<sbyte> src, ref sbyte dst)
+void vstore_g128x16i(Vector128<short> src, ref short dst)
 {
-    IL_0000: ldarg.1
-    IL_0001: call System.SByte* Z0.As::refptr(System.SByte&)
-    IL_0006: ldarg.0
-    IL_0007: call System.Void System.Runtime.Intrinsics.X86.Sse2::Store(System.SByte*,System.Runtime.Intrinsics.Vector128`1<System.SByte>)
-    IL_000C: ret
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call System.Void zfunc::vstore<System.Int16>(System.Runtime.Intrinsics.Vector128`1<System.Int16>,System.Int16&)
+    IL_0007: ret
 
 }
-void vstore_d128x8i(Vec128<sbyte> src, ref sbyte dst)
+void vstore_g128x16u(Vector128<ushort> src, ref ushort dst)
 {
-    IL_0000: ldarga.s src
-    IL_0002: ldarg.1
-    IL_0003: call System.Void Z0.cpuvec::vstore(Z0.Vec128`1<System.SByte>&,System.SByte&)
-    IL_0008: ret
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call System.Void zfunc::vstore<System.UInt16>(System.Runtime.Intrinsics.Vector128`1<System.UInt16>,System.UInt16&)
+    IL_0007: ret
 
 }
-void vstore_g128x8i(Vec128<sbyte> src, ref sbyte dst)
+void vstore_d128x16u(Vector128<ushort> src, ref ushort dst)
 {
-    IL_0000: ldarga.s src
-    IL_0002: ldarg.1
-    IL_0003: call System.Void zfunc::vstore<System.SByte>(Z0.Vec128`1<System.SByte>&,System.SByte&)
-    IL_0008: ret
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call System.Void Z0.cpuvec::vstore(System.Runtime.Intrinsics.Vector128`1<System.UInt16>,System.UInt16&)
+    IL_0007: ret
 
 }
-void vstore_n128x16i(Vector128<short> src, ref short dst)
+void vstore_g128x32i(Vector128<int> src, ref int dst)
 {
-    IL_0000: ldarg.1
-    IL_0001: call System.Int16* Z0.As::refptr(System.Int16&)
-    IL_0006: ldarg.0
-    IL_0007: call System.Void System.Runtime.Intrinsics.X86.Sse2::Store(System.Int16*,System.Runtime.Intrinsics.Vector128`1<System.Int16>)
-    IL_000C: ret
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call System.Void zfunc::vstore<System.Int32>(System.Runtime.Intrinsics.Vector128`1<System.Int32>,System.Int32&)
+    IL_0007: ret
 
 }
-void vstore_d128x16i(Vec128<short> src, ref short dst)
+void vstore_g128x32u(Vector128<uint> src, ref uint dst)
 {
-    IL_0000: ldarga.s src
-    IL_0002: ldarg.1
-    IL_0003: call System.Void Z0.cpuvec::vstore(Z0.Vec128`1<System.Int16>&,System.Int16&)
-    IL_0008: ret
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call System.Void zfunc::vstore<System.UInt32>(System.Runtime.Intrinsics.Vector128`1<System.UInt32>,System.UInt32&)
+    IL_0007: ret
 
 }
-void vstore_g128x16i(Vec128<short> src, ref short dst)
+void vstore_g128x64i(Vector128<long> src, ref long dst)
 {
-    IL_0000: ldarga.s src
-    IL_0002: ldarg.1
-    IL_0003: call System.Void zfunc::vstore<System.Int16>(Z0.Vec128`1<System.Int16>&,System.Int16&)
-    IL_0008: ret
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call System.Void zfunc::vstore<System.Int64>(System.Runtime.Intrinsics.Vector128`1<System.Int64>,System.Int64&)
+    IL_0007: ret
 
 }
-void vstore_n128x16u(Vector128<ushort> src, ref ushort dst)
+void vstore_g128x64u(Vector128<ulong> src, ref ulong dst)
 {
-    IL_0000: ldarg.1
-    IL_0001: call System.UInt16* Z0.As::refptr(System.UInt16&)
-    IL_0006: ldarg.0
-    IL_0007: call System.Void System.Runtime.Intrinsics.X86.Sse2::Store(System.UInt16*,System.Runtime.Intrinsics.Vector128`1<System.UInt16>)
-    IL_000C: ret
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call System.Void zfunc::vstore<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.UInt64&)
+    IL_0007: ret
 
 }
-void vstore_d128x16u(Vec128<ushort> src, ref ushort dst)
+void vstore_g128x32f(Vector128<float> src, ref float dst)
 {
-    IL_0000: ldarga.s src
-    IL_0002: ldarg.1
-    IL_0003: call System.Void Z0.cpuvec::vstore(Z0.Vec128`1<System.UInt16>&,System.UInt16&)
-    IL_0008: ret
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call System.Void zfunc::vstore<System.Single>(System.Runtime.Intrinsics.Vector128`1<System.Single>,System.Single&)
+    IL_0007: ret
 
 }
-void vstore_g128x16u(Vec128<ushort> src, ref ushort dst)
+void vstore_g128x64f(Vector128<double> src, ref double dst)
 {
-    IL_0000: ldarga.s src
-    IL_0002: ldarg.1
-    IL_0003: call System.Void zfunc::vstore<System.UInt16>(Z0.Vec128`1<System.UInt16>&,System.UInt16&)
-    IL_0008: ret
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call System.Void zfunc::vstore<System.Double>(System.Runtime.Intrinsics.Vector128`1<System.Double>,System.Double&)
+    IL_0007: ret
 
 }
-void vstore_n128x32i(Vector128<int> src, ref int dst)
+void vstore_g256x8u(Vector256<byte> src, ref byte dst)
 {
-    IL_0000: ldarg.1
-    IL_0001: call System.Int32* Z0.As::refptr(System.Int32&)
-    IL_0006: ldarg.0
-    IL_0007: call System.Void System.Runtime.Intrinsics.X86.Sse2::Store(System.Int32*,System.Runtime.Intrinsics.Vector128`1<System.Int32>)
-    IL_000C: ret
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call System.Void zfunc::vstore<System.Byte>(System.Runtime.Intrinsics.Vector256`1<System.Byte>,System.Byte&)
+    IL_0007: ret
 
 }
-void vstore_d128x32i(Vec128<int> src, ref int dst)
+void vstore_g256x8i(Vector256<sbyte> src, ref sbyte dst)
 {
-    IL_0000: ldarga.s src
-    IL_0002: ldarg.1
-    IL_0003: call System.Void Z0.cpuvec::vstore(Z0.Vec128`1<System.Int32>&,System.Int32&)
-    IL_0008: ret
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call System.Void zfunc::vstore<System.SByte>(System.Runtime.Intrinsics.Vector256`1<System.SByte>,System.SByte&)
+    IL_0007: ret
 
 }
-void vstore_g128x32i(Vec128<int> src, ref int dst)
+void vstore_g256x16i(Vector256<short> src, ref short dst)
 {
-    IL_0000: ldarga.s src
-    IL_0002: ldarg.1
-    IL_0003: call System.Void zfunc::vstore<System.Int32>(Z0.Vec128`1<System.Int32>&,System.Int32&)
-    IL_0008: ret
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call System.Void zfunc::vstore<System.Int16>(System.Runtime.Intrinsics.Vector256`1<System.Int16>,System.Int16&)
+    IL_0007: ret
 
 }
-void vstore_n128x32u(Vector128<uint> src, ref uint dst)
+void vstore_g256x16u(Vector256<ushort> src, ref ushort dst)
 {
-    IL_0000: ldarg.1
-    IL_0001: call System.UInt32* Z0.As::refptr(System.UInt32&)
-    IL_0006: ldarg.0
-    IL_0007: call System.Void System.Runtime.Intrinsics.X86.Sse2::Store(System.UInt32*,System.Runtime.Intrinsics.Vector128`1<System.UInt32>)
-    IL_000C: ret
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call System.Void zfunc::vstore<System.UInt16>(System.Runtime.Intrinsics.Vector256`1<System.UInt16>,System.UInt16&)
+    IL_0007: ret
 
 }
-void vstore_d128x32u(Vec128<uint> src, ref uint dst)
+void vstore_g256x32i(Vector256<int> src, ref int dst)
 {
-    IL_0000: ldarga.s src
-    IL_0002: ldarg.1
-    IL_0003: call System.Void Z0.cpuvec::vstore(Z0.Vec128`1<System.UInt32>&,System.UInt32&)
-    IL_0008: ret
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call System.Void zfunc::vstore<System.Int32>(System.Runtime.Intrinsics.Vector256`1<System.Int32>,System.Int32&)
+    IL_0007: ret
 
 }
-void vstore_g128x32u(Vec128<uint> src, ref uint dst)
+void vstore_g256x32u(Vector256<uint> src, ref uint dst)
 {
-    IL_0000: ldarga.s src
-    IL_0002: ldarg.1
-    IL_0003: call System.Void zfunc::vstore<System.UInt32>(Z0.Vec128`1<System.UInt32>&,System.UInt32&)
-    IL_0008: ret
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call System.Void zfunc::vstore<System.UInt32>(System.Runtime.Intrinsics.Vector256`1<System.UInt32>,System.UInt32&)
+    IL_0007: ret
 
 }
-void vstore_n128x64i(Vector128<long> src, ref long dst)
+void vstore_g256x64i(Vector256<long> src, ref long dst)
 {
-    IL_0000: ldarg.1
-    IL_0001: call System.Int64* Z0.As::refptr(System.Int64&)
-    IL_0006: ldarg.0
-    IL_0007: call System.Void System.Runtime.Intrinsics.X86.Sse2::Store(System.Int64*,System.Runtime.Intrinsics.Vector128`1<System.Int64>)
-    IL_000C: ret
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call System.Void zfunc::vstore<System.Int64>(System.Runtime.Intrinsics.Vector256`1<System.Int64>,System.Int64&)
+    IL_0007: ret
 
 }
-void vstore_d128x64i(Vec128<long> src, ref long dst)
+void vstore_g256x64u(Vector256<ulong> src, ref ulong dst)
 {
-    IL_0000: ldarga.s src
-    IL_0002: ldarg.1
-    IL_0003: call System.Void Z0.cpuvec::vstore(Z0.Vec128`1<System.Int64>&,System.Int64&)
-    IL_0008: ret
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call System.Void zfunc::vstore<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.UInt64&)
+    IL_0007: ret
 
 }
-void vstore_g128x64i(Vec128<long> src, ref long dst)
+void vstore_g256x32f(Vector256<float> src, ref float dst)
 {
-    IL_0000: ldarga.s src
-    IL_0002: ldarg.1
-    IL_0003: call System.Void zfunc::vstore<System.Int64>(Z0.Vec128`1<System.Int64>&,System.Int64&)
-    IL_0008: ret
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call System.Void zfunc::vstore<System.Single>(System.Runtime.Intrinsics.Vector256`1<System.Single>,System.Single&)
+    IL_0007: ret
 
 }
-void vstore_n128x64u(Vector128<ulong> src, ref ulong dst)
+void vstore_g256x64f(Vector256<double> src, ref double dst)
 {
-    IL_0000: ldarg.1
-    IL_0001: call System.UInt64* Z0.As::refptr(System.UInt64&)
-    IL_0006: ldarg.0
-    IL_0007: call System.Void System.Runtime.Intrinsics.X86.Sse2::Store(System.UInt64*,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
-    IL_000C: ret
-
-}
-void vstore_d128x64u(Vec128<ulong> src, ref ulong dst)
-{
-    IL_0000: ldarga.s src
-    IL_0002: ldarg.1
-    IL_0003: call System.Void Z0.cpuvec::vstore(Z0.Vec128`1<System.UInt64>&,System.UInt64&)
-    IL_0008: ret
-
-}
-void vstore_g128x64u(Vec128<ulong> src, ref ulong dst)
-{
-    IL_0000: ldarga.s src
-    IL_0002: ldarg.1
-    IL_0003: call System.Void zfunc::vstore<System.UInt64>(Z0.Vec128`1<System.UInt64>&,System.UInt64&)
-    IL_0008: ret
-
-}
-void vstore_n128x32f(Vector128<float> src, ref float dst)
-{
-    IL_0000: ldarg.1
-    IL_0001: call System.Single* Z0.As::refptr(System.Single&)
-    IL_0006: ldarg.0
-    IL_0007: call System.Void System.Runtime.Intrinsics.X86.Sse::Store(System.Single*,System.Runtime.Intrinsics.Vector128`1<System.Single>)
-    IL_000C: ret
-
-}
-void vstore_d128x32f(Vec128<float> src, ref float dst)
-{
-    IL_0000: ldarga.s src
-    IL_0002: ldarg.1
-    IL_0003: call System.Void Z0.cpuvec::vstore(Z0.Vec128`1<System.Single>&,System.Single&)
-    IL_0008: ret
-
-}
-void vstore_g128x32f(Vec128<float> src, ref float dst)
-{
-    IL_0000: ldarga.s src
-    IL_0002: ldarg.1
-    IL_0003: call System.Void zfunc::vstore<System.Single>(Z0.Vec128`1<System.Single>&,System.Single&)
-    IL_0008: ret
-
-}
-void vstore_n128x64f(Vector128<double> src, ref double dst)
-{
-    IL_0000: ldarg.1
-    IL_0001: call System.Double* Z0.As::refptr(System.Double&)
-    IL_0006: ldarg.0
-    IL_0007: call System.Void System.Runtime.Intrinsics.X86.Sse2::Store(System.Double*,System.Runtime.Intrinsics.Vector128`1<System.Double>)
-    IL_000C: ret
-
-}
-void vstore_d128x64f(Vec128<double> src, ref double dst)
-{
-    IL_0000: ldarga.s src
-    IL_0002: ldarg.1
-    IL_0003: call System.Void Z0.cpuvec::vstore(Z0.Vec128`1<System.Double>&,System.Double&)
-    IL_0008: ret
-
-}
-void vstore_g128x64f(Vec128<double> src, ref double dst)
-{
-    IL_0000: ldarga.s src
-    IL_0002: ldarg.1
-    IL_0003: call System.Void zfunc::vstore<System.Double>(Z0.Vec128`1<System.Double>&,System.Double&)
-    IL_0008: ret
-
-}
-void vstore_n256x8u(Vector256<byte> src, ref byte dst)
-{
-    IL_0000: ldarg.1
-    IL_0001: call System.Byte* Z0.As::refptr(System.Byte&)
-    IL_0006: ldarg.0
-    IL_0007: call System.Void System.Runtime.Intrinsics.X86.Avx::Store(System.Byte*,System.Runtime.Intrinsics.Vector256`1<System.Byte>)
-    IL_000C: ret
-
-}
-void vstore_d256x8u(Vec256<byte> src, ref byte dst)
-{
-    IL_0000: ldarga.s src
-    IL_0002: ldarg.1
-    IL_0003: call System.Void Z0.cpuvec::vstore(Z0.Vec256`1<System.Byte>&,System.Byte&)
-    IL_0008: ret
-
-}
-void vstore_g256x8u(Vec256<byte> src, ref byte dst)
-{
-    IL_0000: ldarga.s src
-    IL_0002: ldarg.1
-    IL_0003: call System.Void zfunc::vstore<System.Byte>(Z0.Vec256`1<System.Byte>&,System.Byte&)
-    IL_0008: ret
-
-}
-void vstore_n256x8i(Vector256<sbyte> src, ref sbyte dst)
-{
-    IL_0000: ldarg.1
-    IL_0001: call System.SByte* Z0.As::refptr(System.SByte&)
-    IL_0006: ldarg.0
-    IL_0007: call System.Void System.Runtime.Intrinsics.X86.Avx::Store(System.SByte*,System.Runtime.Intrinsics.Vector256`1<System.SByte>)
-    IL_000C: ret
-
-}
-void vstore_d256x8i(Vec256<sbyte> src, ref sbyte dst)
-{
-    IL_0000: ldarga.s src
-    IL_0002: ldarg.1
-    IL_0003: call System.Void Z0.cpuvec::vstore(Z0.Vec256`1<System.SByte>&,System.SByte&)
-    IL_0008: ret
-
-}
-void vstore_g256x8i(Vec256<sbyte> src, ref sbyte dst)
-{
-    IL_0000: ldarga.s src
-    IL_0002: ldarg.1
-    IL_0003: call System.Void zfunc::vstore<System.SByte>(Z0.Vec256`1<System.SByte>&,System.SByte&)
-    IL_0008: ret
-
-}
-void vstore_n256x16i(Vector256<short> src, ref short dst)
-{
-    IL_0000: ldarg.1
-    IL_0001: call System.Int16* Z0.As::refptr(System.Int16&)
-    IL_0006: ldarg.0
-    IL_0007: call System.Void System.Runtime.Intrinsics.X86.Avx::Store(System.Int16*,System.Runtime.Intrinsics.Vector256`1<System.Int16>)
-    IL_000C: ret
-
-}
-void vstore_d256x16i(Vec256<short> src, ref short dst)
-{
-    IL_0000: ldarga.s src
-    IL_0002: ldarg.1
-    IL_0003: call System.Void Z0.cpuvec::vstore(Z0.Vec256`1<System.Int16>&,System.Int16&)
-    IL_0008: ret
-
-}
-void vstore_g256x16i(Vec256<short> src, ref short dst)
-{
-    IL_0000: ldarga.s src
-    IL_0002: ldarg.1
-    IL_0003: call System.Void zfunc::vstore<System.Int16>(Z0.Vec256`1<System.Int16>&,System.Int16&)
-    IL_0008: ret
-
-}
-void vstore_n256x16u(Vector256<ushort> src, ref ushort dst)
-{
-    IL_0000: ldarg.1
-    IL_0001: call System.UInt16* Z0.As::refptr(System.UInt16&)
-    IL_0006: ldarg.0
-    IL_0007: call System.Void System.Runtime.Intrinsics.X86.Avx::Store(System.UInt16*,System.Runtime.Intrinsics.Vector256`1<System.UInt16>)
-    IL_000C: ret
-
-}
-void vstore_d256x16u(Vec256<ushort> src, ref ushort dst)
-{
-    IL_0000: ldarga.s src
-    IL_0002: ldarg.1
-    IL_0003: call System.Void Z0.cpuvec::vstore(Z0.Vec256`1<System.UInt16>&,System.UInt16&)
-    IL_0008: ret
-
-}
-void vstore_g256x16u(Vec256<ushort> src, ref ushort dst)
-{
-    IL_0000: ldarga.s src
-    IL_0002: ldarg.1
-    IL_0003: call System.Void zfunc::vstore<System.UInt16>(Z0.Vec256`1<System.UInt16>&,System.UInt16&)
-    IL_0008: ret
-
-}
-void vstore_n256x32i(Vector256<int> src, ref int dst)
-{
-    IL_0000: ldarg.1
-    IL_0001: call System.Int32* Z0.As::refptr(System.Int32&)
-    IL_0006: ldarg.0
-    IL_0007: call System.Void System.Runtime.Intrinsics.X86.Avx::Store(System.Int32*,System.Runtime.Intrinsics.Vector256`1<System.Int32>)
-    IL_000C: ret
-
-}
-void vstore_d256x32i(Vec256<int> src, ref int dst)
-{
-    IL_0000: ldarga.s src
-    IL_0002: ldarg.1
-    IL_0003: call System.Void Z0.cpuvec::vstore(Z0.Vec256`1<System.Int32>&,System.Int32&)
-    IL_0008: ret
-
-}
-void vstore_g256x32i(Vec256<int> src, ref int dst)
-{
-    IL_0000: ldarga.s src
-    IL_0002: ldarg.1
-    IL_0003: call System.Void zfunc::vstore<System.Int32>(Z0.Vec256`1<System.Int32>&,System.Int32&)
-    IL_0008: ret
-
-}
-void vstore_n256x32u(Vector256<uint> src, ref uint dst)
-{
-    IL_0000: ldarg.1
-    IL_0001: call System.UInt32* Z0.As::refptr(System.UInt32&)
-    IL_0006: ldarg.0
-    IL_0007: call System.Void System.Runtime.Intrinsics.X86.Avx::Store(System.UInt32*,System.Runtime.Intrinsics.Vector256`1<System.UInt32>)
-    IL_000C: ret
-
-}
-void vstore_d256x32u(Vec256<uint> src, ref uint dst)
-{
-    IL_0000: ldarga.s src
-    IL_0002: ldarg.1
-    IL_0003: call System.Void Z0.cpuvec::vstore(Z0.Vec256`1<System.UInt32>&,System.UInt32&)
-    IL_0008: ret
-
-}
-void vstore_g256x32u(Vec256<uint> src, ref uint dst)
-{
-    IL_0000: ldarga.s src
-    IL_0002: ldarg.1
-    IL_0003: call System.Void zfunc::vstore<System.UInt32>(Z0.Vec256`1<System.UInt32>&,System.UInt32&)
-    IL_0008: ret
-
-}
-void vstore_n256x64i(Vector256<long> src, ref long dst)
-{
-    IL_0000: ldarg.1
-    IL_0001: call System.Int64* Z0.As::refptr(System.Int64&)
-    IL_0006: ldarg.0
-    IL_0007: call System.Void System.Runtime.Intrinsics.X86.Avx::Store(System.Int64*,System.Runtime.Intrinsics.Vector256`1<System.Int64>)
-    IL_000C: ret
-
-}
-void vstore_d256x64i(Vec256<long> src, ref long dst)
-{
-    IL_0000: ldarga.s src
-    IL_0002: ldarg.1
-    IL_0003: call System.Void Z0.cpuvec::vstore(Z0.Vec256`1<System.Int64>&,System.Int64&)
-    IL_0008: ret
-
-}
-void vstore_g256x64i(Vec256<long> src, ref long dst)
-{
-    IL_0000: ldarga.s src
-    IL_0002: ldarg.1
-    IL_0003: call System.Void zfunc::vstore<System.Int64>(Z0.Vec256`1<System.Int64>&,System.Int64&)
-    IL_0008: ret
-
-}
-void vstore_n256x64u(Vector256<ulong> src, ref ulong dst)
-{
-    IL_0000: ldarg.1
-    IL_0001: call System.UInt64* Z0.As::refptr(System.UInt64&)
-    IL_0006: ldarg.0
-    IL_0007: call System.Void System.Runtime.Intrinsics.X86.Avx::Store(System.UInt64*,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
-    IL_000C: ret
-
-}
-void vstore_d256x64u(Vec256<ulong> src, ref ulong dst)
-{
-    IL_0000: ldarga.s src
-    IL_0002: ldarg.1
-    IL_0003: call System.Void Z0.cpuvec::vstore(Z0.Vec256`1<System.UInt64>&,System.UInt64&)
-    IL_0008: ret
-
-}
-void vstore_g256x64u(Vec256<ulong> src, ref ulong dst)
-{
-    IL_0000: ldarga.s src
-    IL_0002: ldarg.1
-    IL_0003: call System.Void zfunc::vstore<System.UInt64>(Z0.Vec256`1<System.UInt64>&,System.UInt64&)
-    IL_0008: ret
-
-}
-void vstore_n256x32f(Vector256<float> src, ref float dst)
-{
-    IL_0000: ldarg.1
-    IL_0001: call System.Single* Z0.As::refptr(System.Single&)
-    IL_0006: ldarg.0
-    IL_0007: call System.Void System.Runtime.Intrinsics.X86.Avx::Store(System.Single*,System.Runtime.Intrinsics.Vector256`1<System.Single>)
-    IL_000C: ret
-
-}
-void vstore_d256x32f(Vec256<float> src, ref float dst)
-{
-    IL_0000: ldarga.s src
-    IL_0002: ldarg.1
-    IL_0003: call System.Void Z0.cpuvec::vstore(Z0.Vec256`1<System.Single>&,System.Single&)
-    IL_0008: ret
-
-}
-void vstore_g256x32f(Vec256<float> src, ref float dst)
-{
-    IL_0000: ldarga.s src
-    IL_0002: ldarg.1
-    IL_0003: call System.Void zfunc::vstore<System.Single>(Z0.Vec256`1<System.Single>&,System.Single&)
-    IL_0008: ret
-
-}
-void vstore_n256x64f(Vector256<double> src, ref double dst)
-{
-    IL_0000: ldarg.1
-    IL_0001: call System.Double* Z0.As::refptr(System.Double&)
-    IL_0006: ldarg.0
-    IL_0007: call System.Void System.Runtime.Intrinsics.X86.Avx::Store(System.Double*,System.Runtime.Intrinsics.Vector256`1<System.Double>)
-    IL_000C: ret
-
-}
-void vstore_d256x64f(Vec256<double> src, ref double dst)
-{
-    IL_0000: ldarga.s src
-    IL_0002: ldarg.1
-    IL_0003: call System.Void Z0.cpuvec::vstore(Z0.Vec256`1<System.Double>&,System.Double&)
-    IL_0008: ret
-
-}
-void vstore_g256x64f(Vec256<double> src, ref double dst)
-{
-    IL_0000: ldarga.s src
-    IL_0002: ldarg.1
-    IL_0003: call System.Void zfunc::vstore<System.Double>(Z0.Vec256`1<System.Double>&,System.Double&)
-    IL_0008: ret
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call System.Void zfunc::vstore<System.Double>(System.Runtime.Intrinsics.Vector256`1<System.Double>,System.Double&)
+    IL_0007: ret
 
 }
 byte convert_16i_to_g8u(short src)

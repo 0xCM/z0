@@ -21,25 +21,44 @@ namespace Z0
     {
         static readonly int Length = Vec256<T>.Length;
 
-        /// <summary>
-        /// A vector where each component is assigned the numeric value 1
-        /// </summary>
-        public static Vec256<T> Units 
-            => CalcUnits();
 
-        public static Vec256<T> Increasing 
+        public static Vector256<T> Increasing 
         {
             [MethodImpl(Inline)]
             get => Increments();
         }
 
-        public static Vec256<T> Decreasing 
+        public static Vector256<T> Decreasing 
             => Decrements(convert<T>(Length - 1));
         
-        public static Vec256<T> ClearAlt 
-            => ClearAlternating();
+        public static Vector256<T> ClearAlt() 
+        {
+            var mask = Span256.Alloc<T>(1);
+            var chop = PrimalInfo.Get<T>().MaxVal;
+            
+            //For the first 128-bit lane
+            var half = mask.Length/2;
+            for(byte i=0; i< half; i++)
+            {
+                if(i % 2 != 0)
+                    mask[i] = chop;
+                else
+                    mask[i] = convert<byte,T>(i);
+            }
 
-        public static Vec256<T> FpSignMask 
+            //For the second 128-bit lane
+            for(byte i=0; i< half; i++)
+            {
+                if(i % 2 != 0)
+                    mask[i + half] = chop;
+                else
+                    mask[i + half] = convert<byte,T>(i);
+            }
+
+            return Vec256.Load(mask);
+        }
+
+        public static Vector256<T> FpSignMask 
             => CalcFpSignMask();
 
         /// <summary>
@@ -49,7 +68,7 @@ namespace Z0
         /// <param name="first">The value of the first component</param>
         /// <typeparam name="T">The primal component type</typeparam>
         [MethodImpl(Inline)]
-        public static Vec256<T> Increments(T first = default, params Swap[] swaps)
+        public static Vector256<T> Increments(T first = default, params Swap[] swaps)
         {
             var src = Span256.Load(range(first, gmath.add(first, convert<T>(Length - 1))).ToArray().AsSpan());
             return Vec256.Load(src.Swap(swaps));
@@ -62,7 +81,7 @@ namespace Z0
         /// <param name="last">The value of the first component</param>
         /// <param name="swaps">Transpositions applied to decrements prior to vector creation</param>
         /// <typeparam name="T">The primal component type</typeparam>        
-        public static Vec256<T> Decrements(T last = default, params Swap[] swaps)
+        public static Vector256<T> Decrements(T last = default, params Swap[] swaps)
         {
             var n = Length;
             var dst = Span256.Alloc<T>(n);
@@ -76,17 +95,7 @@ namespace Z0
             return Vec256.Load(dst.Swap(swaps));
         }
 
-        static Vec256<T> CalcUnits()
-        {
-            var n = Length;
-            var dst = Span256.Alloc<T>(n);
-            var one = gmath.one<T>();
-            for(var i=0; i<n; i++)
-                dst[i] = one;
-            return Vec256.Load(dst);
-        }
-
-        static Vec256<T> CalcFpSignMask()
+        static Vector256<T> CalcFpSignMask()
         {
             if(typeof(T) == typeof(float))
                 return CalcFpSignMask32().As<T>();
@@ -96,7 +105,7 @@ namespace Z0
                 return default;
         }
 
-        static Vec256<T> ClearAlternating()
+        static Vector256<T> ClearAlternating()
         {
             var mask = Span256.Alloc<T>(1);
             var chop = PrimalInfo.Get<T>().MaxVal;

@@ -44,7 +44,7 @@ partial class zfunc
 
     [MethodImpl(Inline)]
     public static unsafe void memcpy<S,T>(ref S src, ref T dst, ByteSize srclen)
-        =>  Unsafe.CopyBlock(Unsafe.AsPointer(ref dst), Unsafe.AsPointer(ref src), srclen);
+        => Unsafe.CopyBlock(Unsafe.AsPointer(ref dst), Unsafe.AsPointer(ref src), srclen);
 
     [MethodImpl(Inline)]
     public static unsafe bool memcpy<S,T>(S[] src, T[] dst)
@@ -268,6 +268,15 @@ partial class zfunc
         => span(length == null ? src.Skip(offset ?? 0) : src.Skip(offset ?? 0).Take(length.Value));
 
     /// <summary>
+    /// Returns a reference to the location of the first element
+    /// </summary>
+    /// <param name="src">The source span</param>
+    /// <typeparam name="T">The element type</typeparam>
+    [MethodImpl(Inline)]
+    public static ref T head<T>(T[] src)
+        =>  ref src[0];
+
+    /// <summary>
     /// Returns a reference to the location of the first span element
     /// </summary>
     /// <param name="src">The source span</param>
@@ -335,31 +344,30 @@ partial class zfunc
     public static ref T tail<T>(Span<T> src, int offset)
         => ref Unsafe.Add(ref head(src), offset);        
 
-    [MethodImpl(Inline)]
-    public static ref readonly T tail<T>(ReadOnlySpan<T> src, int offset)
-        where T : unmanaged
-            =>  ref head(src.Slice(offset));
-
     /// <summary>
-    /// Returns a reference to the location of the first element
+    /// Returns a reference to the location of a non-leading span element
     /// </summary>
     /// <param name="src">The source span</param>
     /// <typeparam name="T">The element type</typeparam>
     [MethodImpl(Inline)]
-    public static ref T head<T>(T[] src)
-        =>  ref src[0];
+    public static ref T tail<T>(Span128<T> src, int offset)
+        where T : unmanaged
+            => ref Unsafe.Add(ref src.Head, offset);        
 
     /// <summary>
-    /// Returns a reference to a span at a specified offset
+    /// Returns a reference to the location of a non-leading span element
     /// </summary>
     /// <param name="src">The source span</param>
-    /// <param name="offset">The T-relative offset</param>
-    /// <typeparam name="T">The cell type</typeparam>
+    /// <typeparam name="T">The element type</typeparam>
     [MethodImpl(Inline)]
-    public static ref T cellref<T>(Span<T> src, int offset)
+    public static ref T tail<T>(Span256<T> src, int offset)
         where T : unmanaged
-            =>  ref Unsafe.Add(ref MemoryMarshal.GetReference<T>(src), offset);
+            => ref Unsafe.Add(ref src.Head, offset);        
 
+    [MethodImpl(Inline)]
+    public static ref readonly T tail<T>(ReadOnlySpan<T> src, int offset)
+        where T : unmanaged
+            =>  ref head(src.Slice(offset));
 
     /// <summary>
     /// Returns a reference to a readonly span at a specified offset
@@ -371,7 +379,6 @@ partial class zfunc
     public static ref T cellref<T>(ReadOnlySpan<T> src, int offset)
         where T : unmanaged
             =>  ref Unsafe.Add(ref MemoryMarshal.GetReference<T>(src), offset);
-
 
     /// <summary>
     /// Returns the common length of the operands if they are the same; otherwise, raises an error

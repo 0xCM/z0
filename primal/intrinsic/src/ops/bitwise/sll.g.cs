@@ -23,7 +23,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<T> vsllx<T>(Vector128<T> src, byte offset)        
             where T : unmanaged
-                => generic<T>(dinx.vsllx(src.AsUInt64(), offset));
+                => generic<T>(dinxc.vsllx(src.AsUInt64(), offset));
 
 
         [MethodImpl(Inline)]

@@ -68,9 +68,9 @@ namespace Z0
 
         public void fa_256x64u_check()
         {
-            var x = Random.CpuVec256<ulong>();
-            var y = Random.CpuVec256<ulong>();
-            var cin = Random.CpuVec256<ulong>();
+            var x = Random.CpuVector256<ulong>();
+            var y = Random.CpuVector256<ulong>();
+            var cin = Random.CpuVector256<ulong>();
             (var sum, var cout) = FullAdder.Compute(x,y, cin);
             
             var sumbs = sum.ToBitString();

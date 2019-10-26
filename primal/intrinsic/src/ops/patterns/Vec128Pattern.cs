@@ -19,8 +19,7 @@ namespace Z0
     public readonly struct Vec128Pattern<T> 
         where T : unmanaged
     {
-        static readonly int Length = Vec128<T>.Length;
-
+        static int Length => Vector128<T>.Count;
 
         /// <summary>
         /// Creates a vector with incrementing components
@@ -35,53 +34,6 @@ namespace Z0
             return Vec128.Load(src.Swap(swaps));
         }
 
-        /// <summary>
-        /// Creates a vector with decrementing components
-        /// v[0] = last and v[i-1] = v[i] - 1 for i=1...N-1
-        /// </summary>
-        /// <param name="first">The value of the first component</param>
-        /// <param name="swaps">Transpositions applied to decrements prior to vector creation</param>
-        /// <typeparam name="T">The primal component type</typeparam>        
-        public static Vec128<T> Decrements(T first = default, params Swap[] swaps)
-        {
-            var n = Length;
-            var dst = Span128.AllocBlock<T>();
-            var val = first;
-            for(var i=0; i<n; i++)
-            {
-                dst[i] = val;
-                gmath.dec(ref val);
-            }
-
-            return Vec128.Load(dst.Swap(swaps));
-        }
-
-        public static Vector128<T> Units()
-        {
-            var n = Length;
-            var dst = Span128.Alloc<T>(n);
-            var one = gmath.one<T>();
-            for(var i=0; i<n; i++)
-                dst[i] = one;                
-            ginx.vloadu(in dst[0], out Vector128<T> u);
-            return u;
-        }
-
-        static Vec128<T> CalcFpSignMask()
-        {
-            if(typeof(T) == typeof(float))
-                return CalcFpSignMask32().As<T>();
-            else if(typeof(T) == typeof(double))
-                return CalcFpSignMask64().As<T>();
-            else 
-                return Vec128<T>.Zero;
-        }
-
-        static Vec128<double> CalcFpSignMask64()
-            => Vec128.Fill(-0.0);
-
-        static Vec128<float> CalcFpSignMask32()
-            => Vec128.Fill(-0.0f);
     }
 }
 
