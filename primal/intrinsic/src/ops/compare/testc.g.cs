@@ -28,14 +28,14 @@ namespace Z0
             || typeof(T) == typeof(ushort) 
             || typeof(T) == typeof(uint) 
             || typeof(T) == typeof(ulong))
-                return testc_u(src,mask);
+                return vtestc_u(src,mask);
             else if(typeof(T) == typeof(sbyte) 
             || typeof(T) == typeof(short) 
             || typeof(T) == typeof(int) 
             || typeof(T) == typeof(long))
-                return testc_i(src,mask);
+                return vtestc_i(src,mask);
             else 
-                return testc_f(src,mask);
+                return vtestc_f(src,mask);
         }
 
         /// <summary>
@@ -52,14 +52,14 @@ namespace Z0
             || typeof(T) == typeof(ushort) 
             || typeof(T) == typeof(uint) 
             || typeof(T) == typeof(ulong))
-                return testc_u(src,mask);
+                return vtestc_u(src,mask);
             else if(typeof(T) == typeof(sbyte) 
             || typeof(T) == typeof(short) 
             || typeof(T) == typeof(int) 
             || typeof(T) == typeof(long))
-                return testc_i(src,mask);
+                return vtestc_i(src,mask);
             else 
-                return testc_f(src,mask);
+                return vtestc_f(src,mask);
         }
 
         /// <summary>
@@ -69,7 +69,7 @@ namespace Z0
         /// <param name="mask">Specifies the bits in the source to test</param>
         /// <typeparam name="T">The primal component type</typeparam>
         [MethodImpl(Inline)]
-        static bool testc_i<T>(Vector128<T> src, Vector128<T> mask)
+        static bool vtestc_i<T>(Vector128<T> src, Vector128<T> mask)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
@@ -89,7 +89,7 @@ namespace Z0
         /// <param name="mask">Specifies the bits in the source to test</param>
         /// <typeparam name="T">The primal component type</typeparam>
         [MethodImpl(Inline)]
-        static bool testc_u<T>(Vector128<T> src, Vector128<T> mask)
+        static bool vtestc_u<T>(Vector128<T> src, Vector128<T> mask)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -109,7 +109,7 @@ namespace Z0
         /// <param name="mask">Specifies the bits in the source to test</param>
         /// <typeparam name="T">The primal component type</typeparam>
         [MethodImpl(Inline)]
-        static bool testc_f<T>(Vector128<T> src, Vector128<T> mask)
+        static bool vtestc_f<T>(Vector128<T> src, Vector128<T> mask)
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
@@ -121,7 +121,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static bool testc_i<T>(Vector256<T> src, Vector256<T> mask)
+        static bool vtestc_i<T>(Vector256<T> src, Vector256<T> mask)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
@@ -135,7 +135,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static bool testc_u<T>(Vector256<T> src, Vector256<T> mask)
+        static bool vtestc_u<T>(Vector256<T> src, Vector256<T> mask)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -149,7 +149,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static bool testc_f<T>(Vector256<T> src, Vector256<T> mask)
+        static bool vtestc_f<T>(Vector256<T> src, Vector256<T> mask)
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))

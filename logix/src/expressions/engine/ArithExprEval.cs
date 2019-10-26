@@ -10,7 +10,6 @@ namespace Z0.Logix
     using System.Runtime.CompilerServices;
     
     using static zfunc;
-    using UAK =  UnaryArithmeticOpKind;
 
     public static class ArithExprEval
     {
@@ -20,7 +19,7 @@ namespace Z0.Logix
             switch(expr)
             {
                 case ITypedLiteral<T> x:
-                    return eval(x);
+                    return x.Value;
                 case IVarExpr<T> x:
                     return eval(x);
                 case IArithmeticOp<T> x:
@@ -28,25 +27,29 @@ namespace Z0.Logix
                 default:
                     return unhandled(expr);
             }
-
         }
 
         [MethodImpl(Inline)]
-        static TypedLiteralExpr<T> eval<T>(ITypedLiteral<T> expr)
+        static TypedLiteralExpr<T> eval<T>(ITypedExpr<T> a)
             where T : unmanaged
-                => expr.Value;
+                => ScalarExprEval.eval(a);
 
-        [MethodImpl(Inline)]
         static TypedLiteralExpr<T> eval<T>(IVarExpr<T> expr)
             where T : unmanaged
         {
-            if(expr.Value is TypedLiteralExpr<T> l)
-                return l.Value;
-            else
-                return eval(expr.Value as IArithmeticExpr<T>);
+            switch(expr.Value)
+            {
+                case ITypedLiteral<T> x:
+                    return x.Value;
+                case IArithmeticExpr<T> x:
+                    return eval(x);
+                default:
+                    return eval(expr.Value);
+                
+            }
         }
 
-        [MethodImpl(Inline)]
+
         static TypedLiteralExpr<T> eval<T>(IArithmeticOp<T> expr)
             where T : unmanaged
         {
@@ -54,45 +57,96 @@ namespace Z0.Logix
             {
                 case IUnaryArithmeticOp<T> x:
                     return eval(x);
+                case IBinaryArithmeticOp<T> x:
+                    return eval(x);
+                case IComparisonExpr<T> x:
+                    return eval(x);
                 default:
                     return unhandled(expr);
             }
 
         }
 
-        [MethodImpl(Inline)]
         static TypedLiteralExpr<T> eval<T>(IUnaryArithmeticOp<T> expr)
             where T : unmanaged
         {
             switch(expr.OpKind)               
             {
-                case UAK.Inc: return inc(expr);
-                case UAK.Dec: return dec(expr);
-                case UAK.Negate: return negate(expr);
+                case UnaryArithmeticOpKind.Inc: return inc(expr);
+                case UnaryArithmeticOpKind.Dec: return dec(expr);
+                case UnaryArithmeticOpKind.Negate: return negate(expr);
                 default: return unhandled(expr);
             }
         }
 
+        static TypedLiteralExpr<T> eval<T>(IBinaryArithmeticOp<T> expr)
+            where T : unmanaged
+        {
+            switch(expr.OpKind)
+            {
+                case BinaryArithmeticOpKind.Add: return add(expr);
+                case BinaryArithmeticOpKind.Sub: return sub(expr);
+                default: return unhandled(expr);
+            }
+        }
+
+        static TypedLiteralExpr<T> eval<T>(IComparisonExpr<T> expr)
+            where T : unmanaged
+        {
+            switch(expr.OpKind)               
+            {
+                case ComparisonOpKind.Eq: return cmpeq(expr);
+                case ComparisonOpKind.Lt: return lt(expr);
+                case ComparisonOpKind.LtEq: return lteq(expr);
+                case ComparisonOpKind.Gt: return gt(expr);
+                case ComparisonOpKind.GtEq: return gteq(expr);
+                default: return unhandled(expr);
+            }
+        }
+
+        static TypedLiteralExpr<T> inc<T>(IUnaryArithmeticOp<T> a)
+            where T : unmanaged
+                => ScalarOps.inc(eval(a).Value);
+
+        static TypedLiteralExpr<T> dec<T>(IUnaryArithmeticOp<T> a)
+            where T : unmanaged
+                => ScalarOps.dec(eval(a).Value);
+
+        static TypedLiteralExpr<T> negate<T>(IUnaryArithmeticOp<T> a)
+            where T : unmanaged
+                => ScalarOps.negate(eval(a).Value);
+    
+        static TypedLiteralExpr<T> add<T>(IBinaryArithmeticOp<T> expr)
+            where T : unmanaged
+                => ScalarOps.add(eval(expr.LeftArg).Value, eval(expr.RightArg).Value);
+
+        static TypedLiteralExpr<T> sub<T>(IBinaryArithmeticOp<T> expr)
+            where T : unmanaged
+                => ScalarOps.sub(eval(expr.LeftArg).Value, eval(expr.RightArg).Value);
+
+        static TypedLiteralExpr<T> cmpeq<T>(IComparisonExpr<T> expr)
+            where T : unmanaged
+                => ScalarOps.eq(eval(expr.LeftArg).Value, eval(expr.RightArg).Value).As<T>();
+
+        static TypedLiteralExpr<T> lt<T>(IComparisonExpr<T> expr)
+            where T : unmanaged
+                => ScalarOps.lt(eval(expr.LeftArg).Value, eval(expr.RightArg).Value).As<T>();
+
+        static TypedLiteralExpr<T> lteq<T>(IComparisonExpr<T> expr)
+            where T : unmanaged
+                => ScalarOps.lteq(eval(expr.LeftArg).Value, eval(expr.RightArg).Value).As<T>();
+
+        static TypedLiteralExpr<T> gt<T>(IComparisonExpr<T> expr)
+            where T : unmanaged
+                => ScalarOps.gt(eval(expr.LeftArg).Value, eval(expr.RightArg).Value).As<T>();
+
+        static TypedLiteralExpr<T> gteq<T>(IComparisonExpr<T> expr)
+            where T : unmanaged
+                => ScalarOps.gteq(ScalarExprEval.eval(expr.LeftArg).Value, ScalarExprEval.eval(expr.RightArg).Value).As<T>();
+
         static TypedLiteralExpr<T> unhandled<T>(ITypedExpr<T> a)
             where T : unmanaged
                 => throw new Exception($"{a} unhandled");
-
-
-       [MethodImpl(Inline)]
-        static TypedLiteralExpr<T> inc<T>(IUnaryArithmeticOp<T> a)
-            where T : unmanaged
-                => gmath.inc(eval(a).Value);
-
-        [MethodImpl(Inline)]
-        static TypedLiteralExpr<T> dec<T>(IUnaryArithmeticOp<T> a)
-            where T : unmanaged
-                => gmath.dec(eval(a).Value);
-
-        [MethodImpl(Inline)]
-        static TypedLiteralExpr<T> negate<T>(IUnaryArithmeticOp<T> a)
-            where T : unmanaged
-                => gmath.negate(eval(a).Value);
-
     }
 
 }

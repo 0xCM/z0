@@ -147,6 +147,12 @@ namespace Z0.Logix
                 => ginx.vsub(a,b);
 
         [MethodImpl(Inline)]
+        public static Vector128<T> lt<T>(Vector128<T> a, Vector128<T> b)
+            where T : unmanaged
+                => ginx.vlt(a,b);
+
+
+        [MethodImpl(Inline)]
         public static Vector128<T> select<T>(Vector128<T> a, Vector128<T> b, Vector128<T> c)
             where T : unmanaged
                 => ginx.vselect(a,b,c);  

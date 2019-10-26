@@ -21,11 +21,11 @@ namespace Z0
     {
 
         [MethodImpl(Inline)]
-        public static Vector128<sbyte> vcmplt(Vector128<sbyte> x, Vector128<sbyte> y)
+        public static Vector128<sbyte> vlt(Vector128<sbyte> x, Vector128<sbyte> y)
             => CompareLessThan(x,y);
 
         [MethodImpl(Inline)]
-        public static Vector128<byte> vcmplt(Vector128<byte> x, Vector128<byte> y)
+        public static Vector128<byte> vlt(Vector128<byte> x, Vector128<byte> y)
         {
             var mask = vbroadcast(n128,CmpMask8u);
             var mx = vxor(x,mask).AsSByte();
@@ -34,11 +34,11 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static Vector128<short> vcmplt(Vector128<short> x, Vector128<short> y)
+        public static Vector128<short> vlt(Vector128<short> x, Vector128<short> y)
             => CompareLessThan(x,y);
 
         [MethodImpl(Inline)]
-        public static Vector128<ushort> vcmplt(Vector128<ushort> x, Vector128<ushort> y)
+        public static Vector128<ushort> vlt(Vector128<ushort> x, Vector128<ushort> y)
         {
             var mask = vbroadcast(n128,CmpMask16u);
             var mx = vxor(x,mask).AsInt16();
@@ -52,7 +52,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vector128<int> vcmplt(Vector128<int> x, Vector128<int> y)
+        public static Vector128<int> vlt(Vector128<int> x, Vector128<int> y)
             => CompareLessThan(x,y);
 
         /// <summary>
@@ -61,7 +61,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vector128<uint> vcmplt(Vector128<uint> x, Vector128<uint> y)
+        public static Vector128<uint> vlt(Vector128<uint> x, Vector128<uint> y)
         {
             var mask = vbroadcast(n128,CmpMask32u);
             var mx = vxor(x,mask).AsInt32();
@@ -70,27 +70,27 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static Vector128<long> vcmplt(Vector128<long> x, Vector128<long> y)
+        public static Vector128<long> vlt(Vector128<long> x, Vector128<long> y)
         {
             var a = ginx.vinsert(x,default,0);
             var b = ginx.vinsert(y,default,0);
-            return ginx.vlo(vcmplt(a,b));
+            return ginx.vlo(vlt(a,b));
         }
 
         [MethodImpl(Inline)]
-        public static Vector128<ulong> vcmplt(Vector128<ulong> x, Vector128<ulong> y)
+        public static Vector128<ulong> vlt(Vector128<ulong> x, Vector128<ulong> y)
         {
             var a = ginx.vinsert(x,default,0);
             var b = ginx.vinsert(y,default,0);
-            return ginx.vlo(vcmplt(a,b));
+            return ginx.vlo(vlt(a,b));
         }
         
         [MethodImpl(Inline)]
-        public static Vector256<sbyte> vcmplt(Vector256<sbyte> x, Vector256<sbyte> y)
+        public static Vector256<sbyte> vlt(Vector256<sbyte> x, Vector256<sbyte> y)
             => CompareLessThan(x,y);
 
         [MethodImpl(Inline)]
-        public static Vector256<byte> vcmplt(Vector256<byte> x, Vector256<byte> y)
+        public static Vector256<byte> vlt(Vector256<byte> x, Vector256<byte> y)
         {
             var mask = vbroadcast(n256,CmpMask8u);
             var mx = vxor(x,mask).AsSByte();
@@ -99,11 +99,11 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static Vector256<short> vcmplt(Vector256<short> x, Vector256<short> y)
+        public static Vector256<short> vlt(Vector256<short> x, Vector256<short> y)
             => CompareLessThan(x,y);
 
         [MethodImpl(Inline)]
-        public static Vector256<ushort> vcmplt(Vector256<ushort> x, Vector256<ushort> y)
+        public static Vector256<ushort> vlt(Vector256<ushort> x, Vector256<ushort> y)
         {
             var mask = vbroadcast(n256,CmpMask16u);
             var mx = vxor(x,mask).AsInt16();
@@ -112,11 +112,11 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static Vector256<int> vcmplt(Vector256<int> x, Vector256<int> y)
+        public static Vector256<int> vlt(Vector256<int> x, Vector256<int> y)
             => CompareLessThan(x,y);
 
         [MethodImpl(Inline)]
-        public static Vector256<uint> vcmplt(Vector256<uint> x, Vector256<uint> y)
+        public static Vector256<uint> vlt(Vector256<uint> x, Vector256<uint> y)
         {
             var mask = vbroadcast(n256,CmpMask32u);
             var mx = vxor(x,mask).AsInt32();
@@ -125,12 +125,12 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static Vector256<long> vcmplt(Vector256<long> x, Vector256<long> y)
+        public static Vector256<long> vlt(Vector256<long> x, Vector256<long> y)
             => CompareLessThan(x,y);
 
     
         [MethodImpl(Inline)]
-        public static Vector256<ulong> vcmplt(Vector256<ulong> x, Vector256<ulong> y)
+        public static Vector256<ulong> vlt(Vector256<ulong> x, Vector256<ulong> y)
         {
             var mask = vbroadcast(n256,CmpMask64u);
             var mx = vxor(x,mask).AsInt64();

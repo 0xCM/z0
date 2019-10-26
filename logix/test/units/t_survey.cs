@@ -14,34 +14,36 @@ namespace Z0.Logix
     public class SurveyTest : UnitTest<SurveyTest>
     {
 
-        void survey_max8()
+        public void survey_8u()
         {
-            var s1 = Survey.Template(1, "Survey 1", 20, (byte)8);
-            Trace(s1.Format());
-
-            var m = Survey.CreateMatrix(s1);
-            Trace(m.Format());
+            var survey = Survey.Template<byte>(1, "Survey 8u");
+            var matrix = Survey.Matrix(survey);
+            
 
         }
 
-        void survey_max16()
+        public void survey_16u()
         {
-            var s1 = Survey.Template(1, "Survey 1", 20, (ushort)16);
-            Trace(s1.Format());
+            var survey = Survey.Template<ushort>(1, "Survey 16u", 11, 5);
+            var matrix = Survey.Matrix(survey);
+            var response = Survey.Respond(survey, Random);
+            //Trace(response.Format());
+            
 
         }
 
-        void survey_max32()
+        public void survey_max32()
         {
-            var s1 = Survey.Template(1, "Survey 1", 20, (uint)32);
-            Trace(s1.Format());
-
+            var survey = Survey.Template<uint>(1, "Survey 32u", 20);
+            var matrix = Survey.Matrix(survey);
+            
         }
 
-        void survey_max64()
+        public void survey_max64()
         {
-            var s1 = Survey.Template(1, "Survey 1", 20, (ulong)64);
-            Trace(s1.Format());
+            var survey = Survey.Template<ulong>(1, "Survey 64u", 33, 17);
+            var matrix = Survey.Matrix(survey);
+            
 
         }
 

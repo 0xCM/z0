@@ -19,7 +19,7 @@ namespace Z0
             where T : unmanaged
         {
             for(var i=0; i< lhs.BlockCount; i++)
-                vstore(ginx.vsll(lhs.LoadVector(i), offset), ref dst.Block(i));                             
+                ginx.vstore(ginx.vsll(lhs.LoadVector(i), offset), ref dst.Block(i));                             
             return dst;        
         } 
 
@@ -27,7 +27,7 @@ namespace Z0
             where T : unmanaged
         {
             for(var i=0; i< lhs.BlockCount; i++)
-                vstore(ginx.vsrl(lhs.LoadVector(i), offset), ref dst.Block(i));                             
+                ginx.vstore(ginx.vsrl(lhs.LoadVector(i), offset), ref dst.Block(i));                             
             return dst;        
         } 
 
@@ -35,7 +35,7 @@ namespace Z0
             where T : unmanaged
         {
             for(var i=0; i< blocks(lhs,rhs); i++)
-                vstore(ginx.vor(lhs.LoadVector(i), rhs.LoadVector(i)), ref dst.Block(i));                             
+                ginx.vstore(ginx.vor(lhs.LoadVector(i), rhs.LoadVector(i)), ref dst.Block(i));                             
             return dst;        
         } 
 
@@ -43,7 +43,7 @@ namespace Z0
             where T : unmanaged
         {
             for(var i=0; i< blocks(lhs,rhs); i++)
-                vstore(ginx.vxor<T>(lhs.LoadVector(i), rhs.LoadVector(i)), ref dst.Block(i));                             
+                ginx.vstore(ginx.vxor<T>(lhs.LoadVector(i), rhs.LoadVector(i)), ref dst.Block(i));                             
             return dst;        
         } 
 
@@ -70,7 +70,7 @@ namespace Z0
         {
             var blocks = dst.BlockCount;
             for(var block = 0; block < blocks; block++)
-                ginx.store(ginx.vadd(ginx.vloadu(n128,in lhs.Block(block)), ginx.vloadu(n128,in rhs.Block(block))), ref dst.Block(block));
+                ginx.vstore(ginx.vadd(ginx.vloadu(n128,in lhs.Block(block)), ginx.vloadu(n128,in rhs.Block(block))), ref dst.Block(block));
             return dst;
         }
 
@@ -79,7 +79,7 @@ namespace Z0
         {
             var blocks = dst.BlockCount;
             for(var block = 0; block < blocks; block++)
-                ginx.store(ginx.vadd(ginx.vloadu(n256,in lhs.Block(block)), ginx.vloadu(n256,in rhs.Block(block))), ref dst.Block(block));
+                ginx.vstore(ginx.vadd(ginx.vloadu(n256,in lhs.Block(block)), ginx.vloadu(n256,in rhs.Block(block))), ref dst.Block(block));
             return dst;
         } 
 
@@ -88,7 +88,7 @@ namespace Z0
         {
             var blocks = dst.BlockCount;
             for(var block = 0; block < blocks; block++)
-                vstore(dfp.vdiv(lhs.LoadVector(block), rhs.LoadVector(block)), ref dst[block]);            
+                ginx.vstore(dfp.vdiv(lhs.LoadVector(block), rhs.LoadVector(block)), ref dst[block]);            
             return dst;            
         }
 
@@ -96,7 +96,7 @@ namespace Z0
         {
             var blocks = dst.BlockCount;
             for(var block = 0; block < blocks; block++)
-                vstore(dfp.vdiv(lhs.LoadVector(block), rhs.LoadVector(block)), ref dst[block]);            
+                ginx.vstore(dfp.vdiv(lhs.LoadVector(block), rhs.LoadVector(block)), ref dst[block]);            
             return dst;            
         }
 
@@ -104,7 +104,7 @@ namespace Z0
         {
             var blocks = dst.BlockCount;
             for(var block = 0; block < blocks; block++)
-                vstore(dfp.vdiv(lhs.LoadVector(block), rhs.LoadVector(block)), ref dst[block]);            
+                ginx.vstore(dfp.vdiv(lhs.LoadVector(block), rhs.LoadVector(block)), ref dst[block]);            
             return dst;            
         }
 
@@ -112,7 +112,7 @@ namespace Z0
         {
             var blocks = dst.BlockCount;
             for(var block = 0; block < blocks; block++)
-                vstore(dfp.vdiv(lhs.LoadVector(block), rhs.LoadVector(block)), ref dst[block]);            
+                ginx.vstore(dfp.vdiv(lhs.LoadVector(block), rhs.LoadVector(block)), ref dst[block]);            
             return dst;            
         }     
 

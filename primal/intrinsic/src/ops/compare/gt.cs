@@ -37,7 +37,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vector128<sbyte> vcmpgt(Vector128<sbyte> x, Vector128<sbyte> y)
+        public static Vector128<sbyte> vgt(Vector128<sbyte> x, Vector128<sbyte> y)
             => CompareGreaterThan(x,y);
 
         /// <summary>
@@ -50,7 +50,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vector128<byte> vcmpgt(Vector128<byte> x, Vector128<byte> y)
+        public static Vector128<byte> vgt(Vector128<byte> x, Vector128<byte> y)
         {
             var mask = vbroadcast(n128,CmpMask8u);
             var mx = vxor(x,mask).AsSByte();
@@ -67,7 +67,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vector128<short> vcmpgt(Vector128<short> x, Vector128<short> y)
+        public static Vector128<short> vgt(Vector128<short> x, Vector128<short> y)
             => CompareGreaterThan(x,y);
 
         /// <summary>
@@ -79,7 +79,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vector128<ushort> vcmpgt(Vector128<ushort> x, Vector128<ushort> y)
+        public static Vector128<ushort> vgt(Vector128<ushort> x, Vector128<ushort> y)
         {
             var mask = vbroadcast(n128,CmpMask16u);
             var mx = vxor(x,mask).AsInt16();
@@ -96,7 +96,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vector128<int> vcmpgt(Vector128<int> x, Vector128<int> y)
+        public static Vector128<int> vgt(Vector128<int> x, Vector128<int> y)
             => CompareGreaterThan(x,y);
 
 
@@ -109,7 +109,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vector128<uint> vcmpgt(Vector128<uint> x, Vector128<uint> y)
+        public static Vector128<uint> vgt(Vector128<uint> x, Vector128<uint> y)
         {
             var mask = vbroadcast(n128,CmpMask32u);
             var mx = vxor(x,mask).AsInt32();
@@ -126,11 +126,11 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vector128<long> vcmpgt(Vector128<long> x, Vector128<long> y)
+        public static Vector128<long> vgt(Vector128<long> x, Vector128<long> y)
         {
             var a = ginx.vinsert(x,default,0);
             var b = ginx.vinsert(y,default,0);
-            return ginx.vlo(vcmpgt(a,b));
+            return ginx.vlo(vgt(a,b));
         }
 
         /// <summary>
@@ -142,11 +142,11 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vector128<ulong> vcmpgt(Vector128<ulong> x, Vector128<ulong> y)
+        public static Vector128<ulong> vgt(Vector128<ulong> x, Vector128<ulong> y)
         {
             var a = ginx.vinsert(x,default,0);
             var b = ginx.vinsert(y,default,0);
-            return ginx.vlo(vcmpgt(a,b));
+            return ginx.vlo(vgt(a,b));
         }
 
         /// <summary>
@@ -159,7 +159,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vector256<sbyte> vcmpgt(Vector256<sbyte> x, Vector256<sbyte> y)
+        public static Vector256<sbyte> vgt(Vector256<sbyte> x, Vector256<sbyte> y)
             => CompareGreaterThan(x,y);
 
         /// <summary>
@@ -172,7 +172,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vector256<byte> vcmpgt(Vector256<byte> x, Vector256<byte> y)
+        public static Vector256<byte> vgt(Vector256<byte> x, Vector256<byte> y)
         {
             var mask = vbroadcast(n256,CmpMask8u);
             var mx = vxor(x,mask).AsSByte();
@@ -189,7 +189,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vector256<short> vcmpgt(Vector256<short> x, Vector256<short> y)
+        public static Vector256<short> vgt(Vector256<short> x, Vector256<short> y)
             => CompareGreaterThan(x,y);
 
         /// <summary>
@@ -201,7 +201,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vector256<ushort> vcmpgt(Vector256<ushort> x, Vector256<ushort> y)
+        public static Vector256<ushort> vgt(Vector256<ushort> x, Vector256<ushort> y)
         {
             var mask = vbroadcast(n256,CmpMask16u);
             var mx = vxor(x,mask).AsInt16();
@@ -219,7 +219,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vector256<int> vcmpgt(Vector256<int> x, Vector256<int> y)
+        public static Vector256<int> vgt(Vector256<int> x, Vector256<int> y)
             => CompareGreaterThan(x,y);
 
         /// <summary>
@@ -232,7 +232,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vector256<uint> vcmpgt(Vector256<uint> x, Vector256<uint> y)
+        public static Vector256<uint> vgt(Vector256<uint> x, Vector256<uint> y)
         {
             var mask = vbroadcast(n256,CmpMask32u);
             var mx = vxor(x,mask).AsInt32();
@@ -250,7 +250,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vector256<long> vcmpgt(Vector256<long> x, Vector256<long> y)
+        public static Vector256<long> vgt(Vector256<long> x, Vector256<long> y)
             => CompareGreaterThan(x,y);
 
         /// <summary>
@@ -263,7 +263,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vector256<ulong> vcmpgt(Vector256<ulong> x, Vector256<ulong> y)
+        public static Vector256<ulong> vgt(Vector256<ulong> x, Vector256<ulong> y)
         {
             var mask = vbroadcast(n256,CmpMask64u);
             var mx = vxor(x,mask).AsInt64();

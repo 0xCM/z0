@@ -111,28 +111,38 @@ namespace Z0
         }       
 
         [MethodImpl(Inline)]
+        internal static string FormatMatrixBits<T>(this Span<T> src)
+            where T : unmanaged
+                => src.AsBytes().FormatMatrixBits(bitsize<T>());
+
+        [MethodImpl(Inline)]
+        internal static string FormatMatrixBits<T>(this Span<T> src, int rowlen)
+            where T : unmanaged
+                => src.AsBytes().FormatMatrixBits(rowlen);
+
+        [MethodImpl(Inline)]
         internal static string FormatMatrixBits(this byte[] src, int rowlen)            
             => src.AsSpan().FormatMatrixBits(rowlen);
 
-        [MethodImpl(Inline)]
-        internal static string FormatMatrixBits(this Span<ushort> src, int rowlen)            
-            => src.AsBytes().FormatMatrixBits(rowlen);
+        // [MethodImpl(Inline)]
+        // internal static string FormatMatrixBits(this Span<ushort> src, int rowlen)            
+        //     => src.AsBytes().FormatMatrixBits(rowlen);
 
-        [MethodImpl(Inline)]
-        internal static string FormatMatrixBits(this ushort[] src, int rowlen)            
-            => src.AsSpan().AsBytes().FormatMatrixBits(rowlen);
+        // [MethodImpl(Inline)]
+        // internal static string FormatMatrixBits(this ushort[] src, int rowlen)            
+        //     => src.AsSpan().AsBytes().FormatMatrixBits(rowlen);
 
-        [MethodImpl(Inline)]
-        internal static string FormatMatrixBits(this Span<uint> src, int rowlen)            
-            => src.AsBytes().FormatMatrixBits(rowlen);
+        // [MethodImpl(Inline)]
+        // internal static string FormatMatrixBits(this Span<uint> src, int rowlen)            
+        //     => src.AsBytes().FormatMatrixBits(rowlen);
 
         [MethodImpl(Inline)]
         internal static string FormatMatrixBits(this uint[] src, int rowlen)            
             => src.AsSpan().AsBytes().FormatMatrixBits(rowlen);
 
-        [MethodImpl(Inline)]
-        internal static string FormatMatrixBits(this Span<ulong> src, int rowlen)            
-            => src.AsBytes().FormatMatrixBits(rowlen);
+        // [MethodImpl(Inline)]
+        // internal static string FormatMatrixBits(this Span<ulong> src, int rowlen)            
+        //     => src.AsBytes().FormatMatrixBits(rowlen);
 
         [MethodImpl(Inline)]
         internal static string FormatMatrixBits(this ulong[] src, int rowlen)            

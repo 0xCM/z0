@@ -28,13 +28,11 @@ namespace Z0
         public static Vector128<T> vpIncrements<T>(N128 n)
             where T : unmanaged
                 => Vec128Pattern.Increments<T>();
-
         
         [MethodImpl(Inline)]
         public static Vector256<T> vpOnes<T>(N256 n)
             where T : unmanaged
                 => Vec256Pattern.Ones<T>();
-
 
         [MethodImpl(Inline)]
         public static Vector256<T> vpUnits<T>(N256 n)

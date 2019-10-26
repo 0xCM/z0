@@ -162,14 +162,22 @@ namespace Z0
         /// <summary>
         /// Queries/manipulates index-identified row data
         /// </summary>
-        public BitVector<T> this[int row]
+        public ref BitVector<T> this[int row]
         {
             [MethodImpl(Inline)]
-            get => GetRow(row);
+            get => ref RowVector(row);
 
-            [MethodImpl(Inline)]
-            set => SetRow(row, value);
+            // [MethodImpl(Inline)]
+            // set => SetRow(row, value);
         }
+
+        [MethodImpl(Inline)]
+        public ref BitVector<T> RowVector(int offset)
+            => ref AsBitVector(ref tail(data, offset));
+
+        [MethodImpl(Inline)]
+        static ref BitVector<T> AsBitVector(ref T src)
+            => ref Unsafe.As<T,BitVector<T>>(ref src);
 
         public bit this[int row, int col]
         {

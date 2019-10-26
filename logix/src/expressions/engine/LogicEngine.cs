@@ -36,7 +36,16 @@ namespace Z0.Logix
         public static TypedLiteralExpr<T> eval<T>(ITypedExpr<T> expr)
             where T : unmanaged
                 => ScalarExprEval.eval(expr);
-        
+
+        /// <summary>
+        /// Evalutates a typed scalar expression
+        /// </summary>
+        /// <param name="expr">The expression to evaluate</param>
+        [MethodImpl(Inline)]
+        public static TypedLiteralExpr<T> eval<T>(IArithmeticExpr<T> expr)
+            where T : unmanaged
+                => ArithExprEval.eval(expr);
+
         /// <summary>
         /// Evalutates a typed 128-bit intrinsic expression
         /// </summary>

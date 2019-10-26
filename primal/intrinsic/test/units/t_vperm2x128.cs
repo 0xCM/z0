@@ -33,7 +33,7 @@ namespace Z0
         {
             for(var i=0; i < SampleSize; i++)
             {
-                var x = Random.CpuVec256<byte>();
+                var x = Random.CpuVector<byte>(n256);
                 var y = dinx.vswaphl_ref(x);
                 var z = dinx.vswaphl(x);
                 Claim.eq(y,z);
@@ -49,9 +49,6 @@ namespace Z0
             var z = dinx.reverse(dinx.vpermvar32x8(x,y));
             Claim.eq(x,z);
 
-            // for(var i=0; i<31; i++)
-            //     Claim.eq(x[31 - i], z[i]);
-        
         }
 
         public void perm4_reverse_check()

@@ -170,7 +170,17 @@ namespace Z0.Logix
         public static T negate<T>(T a)
             where T : unmanaged
                 => gmath.negate(a); 
-        
+
+        [MethodImpl(Inline)]
+        public static T inc<T>(T a)
+            where T : unmanaged
+                => gmath.inc(a); 
+
+        [MethodImpl(Inline)]
+        public static T dec<T>(T a)
+            where T : unmanaged
+                => gmath.dec(a); 
+
         [MethodImpl(Inline)]
         public static T @false<T>(T a)
             where T:unmanaged

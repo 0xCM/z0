@@ -32,9 +32,9 @@ namespace Z0
         public static Vector128<byte> vswap(Vector128<byte> src, params Swap[] swaps)
             => vshuffle(src,swapspec<byte>(n128,swaps));
 
-        public static Vec256<int> vswap(Vec256<int> src, byte i, byte j)
+        public static Vec256<int> vswap_ref(Vector256<int> src, byte i, byte j)
         {
-            Span<int> control = stackalloc int[Vec256<int>.Length];
+            Span<int> control = stackalloc int[Vector256<int>.Count];
             for(byte k=0; k<control.Length; k++)
             {
                 if(k == i)        
@@ -44,7 +44,7 @@ namespace Z0
                 else
                     control[k] = k;
             }
-            return vpermvar8x32(src, Vec256.Load(control));
+            return vpermvar8x32(src,ginx.vloadu(n256, head(control)));
         }
 
         /// <summary>
@@ -52,17 +52,14 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<byte> vswaphl_ref(in Vec256<byte> x)
+        public static Vector256<byte> vswaphl_ref(Vector256<byte> x)
         {
-            Vec256<byte> y = default;
+            Vector256<byte> y = default;
             y = dinx.vinsert(dinx.vhi(x), y, 0);
             y = dinx.vinsert(dinx.vlo(x), y, 1);
             return y;
         }
 
-        [MethodImpl(Inline)]
-        public static Vec256<byte> vswaphl(in Vec256<byte> x)
-            => dinx.vperm2x128(x,x, Perm2x128.AD);
 
         [MethodImpl(Inline)]
         public static Vector256<byte> vswaphl(Vector256<byte> x)

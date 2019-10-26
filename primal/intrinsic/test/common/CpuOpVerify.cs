@@ -44,8 +44,8 @@ namespace Z0
 
                 Claim.eq(vExpect, vActual);
             
-                ginx.store(vExpect, ref expect.Block(block));
-                ginx.store(vActual, ref actual.Block(block));
+                ginx.vstore(vExpect, ref expect.Block(block));
+                ginx.vstore(vActual, ref actual.Block(block));
             }
             Claim.eq(expect, actual);
         }
@@ -79,8 +79,8 @@ namespace Z0
 
                 Claim.eq(vExpect, vActual);
             
-                ginx.store(vExpect, ref expect.Block(block));
-                ginx.store(vActual, ref actual.Block(block));
+                ginx.vstore(vExpect, ref expect.Block(block));
+                ginx.vstore(vActual, ref actual.Block(block));
             }
             Claim.eq(expect, actual);
         }

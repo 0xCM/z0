@@ -19,7 +19,7 @@ namespace Z0
             var id = ShuffleIdentityMask();
             for(var i=0; i<DefaltCycleCount; i++)
             {
-                var x = Random.CpuVec256<byte>();
+                var x = Random.CpuVector<byte>(n256);
                 var y = dinx.vshuffle(x, id);
                 Claim.eq(x,y);
             }

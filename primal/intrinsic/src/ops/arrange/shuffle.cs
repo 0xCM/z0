@@ -30,6 +30,7 @@ namespace Z0
             => Shuffle(src.xmm, spec);
 
 
+
         ///<summary>
         /// __m256i _mm256_shuffle_epi8 (__m256i a, __m256i b) VPSHUFB ymm, ymm, ymm/m256
         /// Shuffles unsigned 8-bit integers in the source vector within 128-bit lanes 

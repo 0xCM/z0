@@ -272,6 +272,7 @@ namespace Z0
         public static bit select(bit a, bit b, bit c)
             => SafeWrap((a.state & b.state) | (~a.state & c.state));
 
+
         [MethodImpl(Inline)]
         public static bit xor1(bit a)
             => !(a ^ On);
@@ -299,6 +300,7 @@ namespace Z0
 
         public override string ToString()
             => Format();
+
     }
 
 

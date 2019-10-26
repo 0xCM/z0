@@ -103,19 +103,18 @@ namespace Z0
                 => Vec256.Load(ref src.Block(block));
 
 
-        // /// <summary>
-        // /// Loads a 256-bit cpu vector from a blocked span
-        // /// </summary>
-        // /// <param name="src">The source span</param>
-        // /// <param name="block">The block index</param>
-        // /// <typeparam name="T">The primal type</typeparam>
-        // [MethodImpl(Inline)]
-        // public static Vector256<T> LoadVector<T>(this Span256<T> src, int block = 0)
-        //     where T : unmanaged
-        // {
-        //     ginx.vloadu(in src.Block(block), out Vector256<T> x);
-        //     return x;
-        // }
+        /// <summary>
+        /// Loads a 256-bit cpu vector from a blocked span
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <param name="block">The block index</param>
+        /// <typeparam name="T">The primal type</typeparam>
+        [MethodImpl(Inline)]
+        public static Vector256<T> ToCpuVector<T>(this Span256<T> src, int block = 0)
+            where T : unmanaged
+                => ginx.vloadu(n256, in src.Block(block));
+
+
 
         /// <summary>
         /// Projects a 128-bit source vector into a 128-bit target vector via a mapping function

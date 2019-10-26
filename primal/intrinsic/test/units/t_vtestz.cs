@@ -139,7 +139,7 @@ namespace Z0.Test
 
                 var y = ybs.ToCpuVector<T>(n128);
 
-                var z = ginx.testz(x,y);
+                var z = ginx.vtestz(x,y);
                 Claim.yea(z);
             }
         }
@@ -162,7 +162,7 @@ namespace Z0.Test
 
                 var y = ybs.ToCpuVector<T>(n256);
 
-                var z = ginx.testz(x,y);
+                var z = ginx.vtestz(x,y);
                 Claim.yea(z);
             }
         }

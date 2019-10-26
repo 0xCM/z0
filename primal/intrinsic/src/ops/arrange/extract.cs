@@ -99,5 +99,9 @@ namespace Z0
         public static ulong vextract(Vector128<ulong> src, byte pos)
             => Extract(src, pos);
 
+        [MethodImpl(Inline)]
+        public static float vextract(Vector128<float> src, byte pos)
+            => Extract(src, pos);
+
     }
 }

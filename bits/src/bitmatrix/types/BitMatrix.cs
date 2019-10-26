@@ -50,11 +50,6 @@ namespace Z0
             get => ref head(data);
         }
 
-        readonly public ReadOnlySpan<T> ConstRows
-        {
-            [MethodImpl(Inline)]
-            get => data;
-        }
 
         public ref T this[int row]
         {
@@ -65,7 +60,15 @@ namespace Z0
         [MethodImpl(Inline)]
         public ref T Row(int offset)
             => ref tail(data, offset);
-        
+
+        [MethodImpl(Inline)]
+        public ref BitVector<T> RowVector(int offset)
+            => ref AsBitVector(ref tail(data, offset));
+
+        [MethodImpl(Inline)]
+        static ref BitVector<T> AsBitVector(ref T src)
+            => ref Unsafe.As<T,BitVector<T>>(ref src);
+
         [MethodImpl(Inline)]
         public void Update(Span<T> src)
             => src.CopyTo(data);
@@ -91,12 +94,14 @@ namespace Z0
             where S : unmanaged
                 => ref Unsafe.As<T,S>(ref head(data));
 
+        [MethodImpl(Inline)]
+        public string Format()
+            => data.FormatMatrixBits();
+
         public unsafe T* HeadPtr
         {
             [MethodImpl(Inline)]
             get => refptr(ref head(data));
         }
-
     }
-
 }

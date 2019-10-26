@@ -27,8 +27,8 @@ namespace Z0
         /// <param name="x">The left source vector</param>
         /// <param name="y">The right source vector</param>
         [MethodImpl(Inline)]
-        public static Vec128<sbyte> vunpacklo(in Vec128<sbyte> x, in Vec128<sbyte> y)
-            => UnpackLow(x.xmm, y.xmm);
+        public static Vector128<sbyte> vunpacklo(Vector128<sbyte> x, Vector128<sbyte> y)
+            => UnpackLow(x, y);
 
         /// <summary>
         /// __m128i _mm_unpacklo_epi8 (__m128i a, __m128i b) PUNPCKLBW xmm, xmm/m128
@@ -39,8 +39,8 @@ namespace Z0
         /// <param name="x">The left source vector</param>
         /// <param name="y">The right source vector</param>
         [MethodImpl(Inline)]
-        public static Vec128<byte> vunpacklo(in Vec128<byte> x, in Vec128<byte> y)
-            => UnpackLow(x.xmm, y.xmm);
+        public static Vector128<byte> vunpacklo(Vector128<byte> x, Vector128<byte> y)
+            => UnpackLow(x, y);
 
         /// <summary>
         /// __m128i _mm_unpacklo_epi16 (__m128i a, __m128i b) PUNPCKLWD xmm, xmm/m128
@@ -51,8 +51,8 @@ namespace Z0
         /// <param name="x">The left source vector</param>
         /// <param name="y">The right source vector</param>
         [MethodImpl(Inline)]
-        public static Vec128<short> vunpacklo(in Vec128<short> x, in Vec128<short> y)
-            => UnpackLow(x.xmm, y.xmm);
+        public static Vector128<short> vunpacklo(Vector128<short> x, Vector128<short> y)
+            => UnpackLow(x, y);
 
         /// <summary>
         /// __m128i _mm_unpacklo_epi16 (__m128i a, __m128i b) PUNPCKLWD xmm, xmm/m128
@@ -63,8 +63,8 @@ namespace Z0
         /// <param name="x">The left source vector</param>
         /// <param name="y">The right source vector</param>
         [MethodImpl(Inline)]
-        public static Vec128<ushort> vunpacklo(in Vec128<ushort> x, in Vec128<ushort> y)
-            => UnpackLow(x.xmm, y.xmm);
+        public static Vector128<ushort> vunpacklo(Vector128<ushort> x, Vector128<ushort> y)
+            => UnpackLow(x, y);
 
         /// <summary>
         /// __m128i _mm_unpacklo_epi32 (__m128i a, __m128i b) PUNPCKLDQ xmm, xmm/m128
@@ -75,8 +75,8 @@ namespace Z0
         /// <param name="x">The left source vector</param>
         /// <param name="y">The right source vector</param>
         [MethodImpl(Inline)]
-        public static Vec128<int> vunpacklo(in Vec128<int> x, in Vec128<int> y)
-            => UnpackLow(x.xmm, y.xmm);
+        public static Vector128<int> vunpacklo(Vector128<int> x, Vector128<int> y)
+            => UnpackLow(x, y);
 
         /// <summary>
         /// __m128i _mm_unpacklo_epi32 (__m128i a, __m128i b) PUNPCKLDQ xmm, xmm/m128
@@ -87,8 +87,8 @@ namespace Z0
         /// <param name="x">The left source vector</param>
         /// <param name="y">The right source vector</param>
         [MethodImpl(Inline)]
-        public static Vec128<uint> vunpacklo(in Vec128<uint> x, in Vec128<uint> y)
-            => UnpackLow(x.xmm, y.xmm);
+        public static Vector128<uint> vunpacklo(Vector128<uint> x, Vector128<uint> y)
+            => UnpackLow(x, y);
 
         /// <summary>
         ///  __m128i _mm_unpacklo_epi64 (__m128i a, __m128i b) PUNPCKLQDQ xmm, xmm/m128
@@ -99,8 +99,8 @@ namespace Z0
         /// <param name="x">The left source vector</param>
         /// <param name="y">The right source vector</param>
         [MethodImpl(Inline)]
-        public static Vec128<long> vunpacklo(in Vec128<long> x, in Vec128<long> y)
-            => UnpackLow(x.xmm, y.xmm);
+        public static Vector128<long> vunpacklo(Vector128<long> x, Vector128<long> y)
+            => UnpackLow(x, y);
 
         /// <summary>
         ///  __m128i _mm_unpacklo_epi64 (__m128i a, __m128i b) PUNPCKLQDQ xmm, xmm/m128
@@ -111,8 +111,8 @@ namespace Z0
         /// <param name="x">The left source vector</param>
         /// <param name="y">The right source vector</param>
         [MethodImpl(Inline)]
-        public static Vec128<ulong> vunpacklo(in Vec128<ulong> x, in Vec128<ulong> y)
-            => UnpackLow(x.xmm, y.xmm);
+        public static Vector128<ulong> vunpacklo(Vector128<ulong> x, Vector128<ulong> y)
+            => UnpackLow(x, y);
 
         /// <summary>
         /// __m256i _mm256_unpacklo_epi8 (__m256i a, __m256i b) VPUNPCKLBW ymm, ymm, ymm/m256
@@ -123,8 +123,8 @@ namespace Z0
         /// <param name="x">The left source vector</param>
         /// <param name="y">The right source vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<byte> vunpacklo(in Vec256<byte> x, in Vec256<byte> y)
-            => UnpackLow(x.ymm, y.ymm);
+        public static Vector256<byte> vunpacklo(Vector256<byte> x, Vector256<byte> y)
+            => UnpackLow(x, y);
 
         /// <summary>
         /// __m256i _mm256_unpacklo_epi8 (__m256i a, __m256i b) VPUNPCKLBW ymm, ymm, ymm/m256
@@ -135,8 +135,8 @@ namespace Z0
         /// <param name="x">The left source vector</param>
         /// <param name="y">The right source vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<sbyte> vunpacklo(in Vec256<sbyte> x, in Vec256<sbyte> y)
-            => UnpackLow(x.ymm, y.ymm);
+        public static Vector256<sbyte> vunpacklo(Vector256<sbyte> x, Vector256<sbyte> y)
+            => UnpackLow(x, y);
 
         /// <summary>
         /// __m256i _mm256_unpacklo_epi16 (__m256i a, __m256i b) VPUNPCKLWD ymm, ymm, ymm/m256
@@ -147,8 +147,8 @@ namespace Z0
         /// <param name="x">The left source vector</param>
         /// <param name="y">The right source vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<short> vunpacklo(in Vec256<short> x, in Vec256<short> y)
-            => UnpackLow(x.ymm, y.ymm);
+        public static Vector256<short> vunpacklo(Vector256<short> x, Vector256<short> y)
+            => UnpackLow(x, y);
 
         /// <summary>
         /// __m256i _mm256_unpacklo_epi16 (__m256i a, __m256i b) VPUNPCKLWD ymm, ymm, ymm/m256
@@ -159,8 +159,8 @@ namespace Z0
         /// <param name="x">The left source vector</param>
         /// <param name="y">The right source vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<ushort> vunpacklo(in Vec256<ushort> x, in Vec256<ushort> y)
-            => UnpackLow(x.ymm, y.ymm);
+        public static Vector256<ushort> vunpacklo(Vector256<ushort> x, Vector256<ushort> y)
+            => UnpackLow(x, y);
 
         /// <summary>
         /// __m256i _mm256_unpacklo_epi32 (__m256i a, __m256i b) VPUNPCKLDQ ymm, ymm, ymm/m256
@@ -171,8 +171,8 @@ namespace Z0
         /// <param name="x">The left source vector</param>
         /// <param name="y">The right source vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<int> vunpacklo(in Vec256<int> x, in Vec256<int> y)
-            => UnpackLow(x.ymm, y.ymm);
+        public static Vector256<int> vunpacklo(Vector256<int> x, Vector256<int> y)
+            => UnpackLow(x, y);
 
         /// <summary>
         /// __m256i _mm256_unpacklo_epi32 (__m256i a, __m256i b) VPUNPCKLDQ ymm, ymm, ymm/m256
@@ -183,8 +183,8 @@ namespace Z0
         /// <param name="x">The left source vector</param>
         /// <param name="y">The right source vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<uint> vunpacklo(in Vec256<uint> x, in Vec256<uint> y)
-            => UnpackLow(x.ymm, y.ymm);
+        public static Vector256<uint> vunpacklo(Vector256<uint> x, Vector256<uint> y)
+            => UnpackLow(x, y);
 
         /// <summary>
         /// __m256i _mm256_unpacklo_epi64 (__m256i a, __m256i b) VPUNPCKLQDQ ymm, ymm, ymm/m256
@@ -195,8 +195,8 @@ namespace Z0
         /// <param name="x">The left source vector</param>
         /// <param name="y">The right source vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<long> vunpacklo(in Vec256<long> x, in Vec256<long> y)
-            => UnpackLow(x.ymm, y.ymm);
+        public static Vector256<long> vunpacklo(Vector256<long> x, Vector256<long> y)
+            => UnpackLow(x, y);
 
         /// <summary>
         /// __m256i _mm256_unpacklo_epi64 (__m256i a, __m256i b) VPUNPCKLQDQ ymm, ymm, ymm/m256
@@ -208,8 +208,8 @@ namespace Z0
         /// <param name="x">The left source vector</param>
         /// <param name="y">The right source vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<ulong> vunpacklo(in Vec256<ulong> x, in Vec256<ulong> y)
-            => UnpackLow(x.ymm, y.ymm);
+        public static Vector256<ulong> vunpacklo(Vector256<ulong> x, Vector256<ulong> y)
+            => UnpackLow(x, y);
    }
 
 }

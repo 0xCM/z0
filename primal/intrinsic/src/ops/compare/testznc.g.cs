@@ -22,14 +22,14 @@ namespace Z0
             || typeof(T) == typeof(ushort) 
             || typeof(T) == typeof(uint) 
             || typeof(T) == typeof(ulong))
-                return testznc_u(src,mask);
+                return vtestznc_u(src,mask);
             else if(typeof(T) == typeof(sbyte) 
             || typeof(T) == typeof(short) 
             || typeof(T) == typeof(int) 
             || typeof(T) == typeof(long))
-                return testznc_i(src,mask);
+                return vtestznc_i(src,mask);
             else 
-                return testznc_f(src,mask);
+                return vtestznc_f(src,mask);
         }
 
         [MethodImpl(Inline)]
@@ -40,18 +40,18 @@ namespace Z0
             || typeof(T) == typeof(ushort) 
             || typeof(T) == typeof(uint) 
             || typeof(T) == typeof(ulong))
-                return testznc_u(src,mask);
+                return vtestznc_u(src,mask);
             else if(typeof(T) == typeof(sbyte) 
             || typeof(T) == typeof(short) 
             || typeof(T) == typeof(int) 
             || typeof(T) == typeof(long))
-                return testznc_i(src,mask);
+                return vtestznc_i(src,mask);
             else 
-                return testznc_f(src,mask);
+                return vtestznc_f(src,mask);
         }
 
         [MethodImpl(Inline)]
-        static bool testznc_i<T>(Vector128<T> src, Vector128<T> mask)
+        static bool vtestznc_i<T>(Vector128<T> src, Vector128<T> mask)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
@@ -65,7 +65,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static bool testznc_u<T>(Vector128<T> src, Vector128<T> mask)
+        static bool vtestznc_u<T>(Vector128<T> src, Vector128<T> mask)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -79,7 +79,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static bool testznc_f<T>(Vector128<T> src, Vector128<T> mask)
+        static bool vtestznc_f<T>(Vector128<T> src, Vector128<T> mask)
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
@@ -91,7 +91,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static bool testznc_i<T>(Vector256<T> src, Vector256<T> mask)
+        static bool vtestznc_i<T>(Vector256<T> src, Vector256<T> mask)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
@@ -105,7 +105,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static bool testznc_u<T>(Vector256<T> src, Vector256<T> mask)
+        static bool vtestznc_u<T>(Vector256<T> src, Vector256<T> mask)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -119,7 +119,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static bool testznc_f<T>(Vector256<T> src, Vector256<T> mask)
+        static bool vtestznc_f<T>(Vector256<T> src, Vector256<T> mask)
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))

@@ -18,16 +18,16 @@ namespace Z0
             var tr = Vec256Pattern.ClearAlt<byte>();
             for(var i=0; i<SampleSize; i++)
             {
-                var x = Random.CpuVec256<byte>();
+                var x = Random.CpuVector<byte>(n256);
                 var y = dinx.vshuffle(x, tr);
-                var xs = x.ToSpan256();
+                var xs = x.ToBlockedSpan();
                 for(var j =0; j< xs.Length; j++)
                 {
                     if(j % 2 != 0)
                         xs[j] = 0;
                 }
 
-                var xt = xs.ToCpuVec256();                
+                var xt = xs.ToCpuVector();
 
                 Claim.eq(xt,y);
             }

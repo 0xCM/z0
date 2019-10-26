@@ -93,17 +93,6 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static unsafe void store<T>(in Vec128<T> src, ref T dst)
-            where T : unmanaged
-                => vstore(src.xmm, ref dst);
-
-        [MethodImpl(Inline)]
-        public static unsafe void store<T>(in Vec256<T> src, ref T dst)
-            where T : unmanaged
-                => vstore(src.ymm, ref dst);
- 
-
-        [MethodImpl(Inline)]
         static unsafe void vstore_i<T>(Vector256<T> x, T* pDst)
             where T : unmanaged
         {

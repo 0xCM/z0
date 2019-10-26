@@ -32,7 +32,7 @@ namespace Z0
         public static bool testz(BitMatrix16 A)
         {
             A.Load(out Vector256<ushort> v);
-            return dinx.testz(v,v);
+            return dinx.vtestz(v,v);
         }
 
         /// <summary>
@@ -45,7 +45,7 @@ namespace Z0
             for(var i=0; i< A.RowCount; i += rowstep)
             {
                 A.Load(i, out Vector256<ulong> v);
-                if(!dinx.testz(v, v))
+                if(!dinx.vtestz(v, v))
                     return false;
             }
             return true;
@@ -61,7 +61,7 @@ namespace Z0
             for(var i=0; i< A.RowCount; i += rowstep)
             {
                 A.Load(i, out Vector256<uint> vSrc);
-                if(!ginx.testz<uint>(vSrc,vSrc))
+                if(!ginx.vtestz<uint>(vSrc,vSrc))
                     return false;
             }
             return true;

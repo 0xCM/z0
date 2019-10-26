@@ -80,9 +80,9 @@ namespace Z0.Test
 
         public void hi_256_u64()
         {            
-            var x = Vec256.FromParts(1ul,2ul,3ul,4ul);
-            var y = Vec256.FromParts(5ul,6ul,7ul,8ul);
-            var expect = Vec256.FromParts(2ul,6ul,4ul,8ul);
+            var x = v256(1ul,2ul,3ul,4ul);
+            var y = v256(5ul,6ul,7ul,8ul);
+            var expect = v256(2ul,6ul,4ul,8ul);
 
             var actual = dinx.vunpackhi(x,y);
             Claim.eq(expect, actual);
@@ -101,13 +101,14 @@ namespace Z0.Test
         public void swap_256_i32()
         {
             var subject = Vec256.FromParts(2, 4, 6, 8, 10, 12, 14, 16);
-            var swapped = dinx.vswap(subject, 2, 3);
+            var swapped = dinx.vswap_ref(subject, 2, 3);
             var expect = Vec256.FromParts(2, 4, 8, 6, 10, 12, 14, 16);
             Claim.eq(expect, swapped);
         }
 
         public void blend_256_u8()
         {
+            var n = n256;
             void Test1()
             {
                 var v0 = Random.CpuVec256<byte>();
