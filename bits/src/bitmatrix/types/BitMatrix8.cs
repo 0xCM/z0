@@ -66,12 +66,10 @@ namespace Z0
         public static BitMatrix8 Zero => Alloc();
 
         /// <summary>
-        /// Allocates a matrix, optionally assigning each element to the
-        /// specified bit value
+        /// Allocates a matrix with an optional fill value
         /// </summary>
-        [MethodImpl(Inline)]
-        public static BitMatrix8 Alloc(Bit? fill = null)                
-            => fill == Bit.On ? new BitMatrix8(UInt64.MaxValue) : new BitMatrix8(0ul);
+        public static BitMatrix8 Alloc(bit fill = default)                
+            => fill ? new BitMatrix8(UInt64.MaxValue) : new BitMatrix8(0ul);
 
         /// <summary>
         /// Loads a matrix from the source value
@@ -141,7 +139,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static BitMatrix8 operator - (BitMatrix8 A, BitMatrix8 B)
-            => BitMatrix.sub(A,B);
+            => BitMatrix.xornot(A,B);
 
         [MethodImpl(Inline)]
         public static BitMatrix8 operator * (BitMatrix8 lhs, BitMatrix8 rhs)
@@ -235,7 +233,7 @@ namespace Z0
         public ref byte Head
         {
             [MethodImpl(Inline)] 
-            get => ref data[0];
+            get => ref head(data);
         }
 
 
@@ -303,7 +301,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public BitMatrix8 AndNot(in BitMatrix8 rhs)
-            => BitMatrix.andnot(ref this, rhs);
+            => BitMatrix.andnot(this, rhs, ref this);
 
         /// <summary>
         /// Retrives the bitvector determined by the matrix diagonal
@@ -416,6 +414,13 @@ namespace Z0
         public readonly BitVector64 ToBitVector()
             => BitVector64.FromScalar((ulong)this);
 
+        /// <summary>
+        /// Creates a generic matrix from the primal source data
+        /// </summary>
+        [MethodImpl(Inline)]
+        public BitMatrix<byte> ToGeneric()
+            => new BitMatrix<byte>(data);
+
         [MethodImpl(Inline)]
         public readonly bool Equals(BitMatrix8 rhs)
             => BitMatrix.eq(this,rhs);
@@ -434,5 +439,10 @@ namespace Z0
             1 << 0, 1 << 1, 1 << 2, 1 << 3, 1 << 4, 1 << 5, 1 << 6, 1 << 7
         };
 
+        public unsafe byte* HeadPtr
+        {
+            [MethodImpl(Inline)]
+            get => refptr(ref Head);
+        }
     }
 }

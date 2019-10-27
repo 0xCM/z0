@@ -101,7 +101,7 @@ namespace Z0
                 var A = Random.BitMatrix(n16);
                 var B = Random.BitMatrix(n16);
                 sw.Start();
-                BitMatrix.xor(A, B, C);
+                BitMatrix.xor(A, B, ref C);
                 sw.Stop();
             }
             
@@ -137,13 +137,13 @@ namespace Z0
         void bm_xor_64x64_bench_noalloc(SystemCounter sw = default)
         {
             var opname = "bm_xor_64x64";
-            var last = BitMatrix64.Alloc();
+            var C = BitMatrix64.Alloc();
             for(var i=0; i<OpCount; i++)
             {
                 var A = Random.BitMatrix(n64);
                 var B = Random.BitMatrix(n64);
                 sw.Start();
-                last = BitMatrix.xor(ref A, B);
+                BitMatrix.xor(A, B, ref C);
                 sw.Stop();
             }
             

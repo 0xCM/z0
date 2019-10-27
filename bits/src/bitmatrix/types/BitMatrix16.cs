@@ -75,6 +75,13 @@ namespace Z0
         public static BitMatrix16 Alloc()        
             => From(new ushort[N]);
 
+        /// <summary>
+        /// Allocates a matrix with a fill value
+        /// </summary>
+        [MethodImpl(Inline)]
+        public static BitMatrix16 Alloc(bit fill)                
+            => new BitMatrix16(fill);
+
         [MethodImpl(Inline)]
         public static BitMatrix16 From(params ushort[] src)        
             => src.Length == 0 ? Alloc() : new BitMatrix16(src);
@@ -136,7 +143,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static BitMatrix16 operator - (BitMatrix16 A, BitMatrix16 B)
-            => BitMatrix.sub(A,B);
+            => BitMatrix.xornot(A,B);
 
         [MethodImpl(Inline)]
         public static BitMatrix16 operator * (BitMatrix16 A, BitMatrix16 B)
@@ -166,6 +173,13 @@ namespace Z0
         {                        
             require(src.Length == Pow2.T04);
             this.data = src.ToArray();
+        }
+
+        BitMatrix16(bit fill)
+        {
+            this.data = new ushort[N];
+            if(fill)
+                Array.Fill(data, ushort.MaxValue);
         }
 
         /// <summary>
@@ -304,7 +318,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public BitMatrix16 AndNot(in BitMatrix16 rhs)
-            => BitMatrix.andnot(ref this, rhs);
+            => BitMatrix.andnot(this, rhs, ref this);
 
         [MethodImpl(Inline)]
         public readonly BitVector16 Diagonal()
@@ -369,6 +383,13 @@ namespace Z0
             => dinx.vloadu(in Head, out dst);
 
         /// <summary>
+        /// Creates a generic matrix from the primal source data
+        /// </summary>
+        [MethodImpl(Inline)]
+        public BitMatrix<ushort> ToGeneric()
+            => new BitMatrix<ushort>(data);
+
+        /// <summary>
         /// Loads a cpu vector with the full content of the matrix; the row parameter is ignored
         /// </summary>
         /// <param name="dst">The target vector</param>
@@ -396,6 +417,11 @@ namespace Z0
             0, Pow2.T07,
         };
 
+        public unsafe ushort* HeadPtr
+        {
+            [MethodImpl(Inline)]
+            get => refptr(ref Head);
+        }
 
    }
 }

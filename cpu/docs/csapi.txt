@@ -1801,8 +1801,7 @@ docs: imm8
 clr-sig: Vector128<double> Blend(Vector128<double> left, Vector128<double> right, byte control);
 
 
-docs: __m128i _mm_blend_epi16 (__m128i a, __m128i b, const int imm8) PBLENDW xmm, xmm/m128
-docs: imm8
+docs: __m128i _mm_blend_epi16 (__m128i a, __m128i b, const int imm8) PBLENDW xmm, xmm/m128, imm8
 clr-sig: Vector128<short> Blend(Vector128<short> left, Vector128<short> right, byte control);
 
 
@@ -1811,8 +1810,7 @@ docs: imm8
 clr-sig: Vector128<float> Blend(Vector128<float> left, Vector128<float> right, byte control);
 
 
-docs: __m128d _mm_blendv_pd (__m128d a, __m128d b, __m128d mask) BLENDVPD xmm, xmm/m128,
-docs: xmm0
+docs: __m128d _mm_blendv_pd (__m128d a, __m128d b, __m128d mask) BLENDVPD xmm, xmm/m128, xmm0
 clr-sig: Vector128<double> BlendVariable(Vector128<double> left, Vector128<double> right, Vector128<double> mask);
 
 
@@ -2422,8 +2420,8 @@ docs: ymm/m256, imm8
 clr-sig: Vector256<float> Blend(Vector256<float> left, Vector256<float> right, byte control);
 
 
-docs: __m256d _mm256_blendv_pd (__m256d a, __m256d b, __m256d mask) VBLENDVPD ymm,
-docs: ymm, ymm/m256, ymm
+docs: __m256d _mm256_blendv_pd (__m256d a, __m256d b, __m256d mask) VBLENDVPD ymm, ymm, ymm/m256, ymm
+docs: 
 clr-sig: Vector256<double> BlendVariable(Vector256<double> left, Vector256<double> right, Vector256<double> mask);
 
 

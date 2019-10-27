@@ -19,7 +19,7 @@ namespace Z0
     using static zfunc;
     using static As;
 
-    static partial class cpuvec
+    static partial class cpufunc
     {
 
         /// <summary>

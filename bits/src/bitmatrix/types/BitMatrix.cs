@@ -50,6 +50,11 @@ namespace Z0
             get => ref head(data);
         }
 
+        public Span<byte> Bytes
+        {
+            [MethodImpl(Inline)]
+            get => data.AsBytes();
+        }
 
         public ref T this[int row]
         {
@@ -98,10 +103,14 @@ namespace Z0
         public string Format()
             => data.FormatMatrixBits();
 
+        public RowBits<T> ToRowBits()
+            => RowBits.load(data);
+
         public unsafe T* HeadPtr
         {
             [MethodImpl(Inline)]
             get => refptr(ref head(data));
         }
+
     }
 }

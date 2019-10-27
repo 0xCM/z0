@@ -15,7 +15,6 @@ namespace System
         /// <summary>
         /// Identifies the rng that drives the source
         /// </summary>
-        /// <value></value>
         RngKind RngKind {get;}
     }
 
@@ -61,7 +60,6 @@ namespace System
         /// </summary>
         DistKind DistKind{get;}
     }
-
     
     /// <summary>
     /// Characterizes a random source that can produce points bounded by a range
@@ -108,12 +106,11 @@ namespace System
     /// Characterizes a random source that can be navigated
     /// </summary>
     /// <typeparam name="T">The primal element type</typeparam>
-    public interface IStepwiseSource<T> : IBoundPointSource<T>, IRandomNav
+    public interface INavigableSource<T> : IBoundPointSource<T>, IRandomNav
         where T : struct
     {
 
     }
-
 
     /// <summary>
     /// Characterizes source capable of producing an interminable sequence of bounded points 
@@ -167,6 +164,6 @@ namespace System
         /// <summary>
         /// Retrieves the random  stream navigator, if supported
         /// </summary>
-        Option<IRandomNav> Nav {get;}    
+        Option<IRandomNav> Navigator {get;}    
     }
 }

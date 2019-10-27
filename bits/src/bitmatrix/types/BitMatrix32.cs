@@ -73,6 +73,13 @@ namespace Z0
         public static BitMatrix32 Alloc()        
             => new BitMatrix32(new uint[N]);
 
+        /// <summary>
+        /// Allocates a matrix with a fill value
+        /// </summary>
+        [MethodImpl(Inline)]
+        public static BitMatrix32 Alloc(bit fill)                
+            => new BitMatrix32(fill);
+
         [MethodImpl(Inline)]
         public static BitMatrix32 From(params uint[] src)        
             => src.Length == 0 ? Alloc() : new BitMatrix32(src);
@@ -107,7 +114,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static BitMatrix32 operator - (BitMatrix32 A, BitMatrix32 B)
-            => BitMatrix.sub(A,B);
+            => BitMatrix.xornot(A,B);
 
         [MethodImpl(Inline)]
         public static BitMatrix32 operator * (BitMatrix32 lhs, BitMatrix32 rhs)
@@ -144,6 +151,14 @@ namespace Z0
         {
             this.data = src.Data.ToArray();
         }
+
+        BitMatrix32(bit fill)
+        {
+            this.data = new uint[N];
+            if(fill)
+                Array.Fill(data,uint.MaxValue);
+        }
+
 
         public readonly int RowCount
         {
@@ -246,7 +261,6 @@ namespace Z0
             get => ref data[0];
         }
 
-
         /// <summary>
         /// Queries/manipulates row data
         /// </summary>
@@ -297,7 +311,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public  BitMatrix32 AndNot(BitMatrix32 rhs)
-            => BitMatrix.andnot(ref this, rhs);
+            => BitMatrix.andnot(this, rhs, ref this);
         
         public readonly BitMatrix32 Transpose()
         {
@@ -323,6 +337,12 @@ namespace Z0
             return count;
         }
 
+        /// <summary>
+        /// Creates a generic matrix from the primal source data
+        /// </summary>
+        [MethodImpl(Inline)]
+        public BitMatrix<uint> ToGeneric()
+            => new BitMatrix<uint>(data);
 
         [MethodImpl(Inline)]
         public string Format()
@@ -373,6 +393,12 @@ namespace Z0
             0, 0, 0, Pow2.T07,
 
         };
+
+        public unsafe uint* HeadPtr
+        {
+            [MethodImpl(Inline)]
+            get => refptr(ref Head);
+        }
 
     }
 }

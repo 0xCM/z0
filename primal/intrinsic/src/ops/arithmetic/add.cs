@@ -19,68 +19,68 @@ namespace Z0
     public static partial class dinx
     {
         [MethodImpl(Inline)]
-        public static Vec128<byte> vadd(in Vec128<byte> lhs, in Vec128<byte> rhs)
-            => Add(lhs.xmm, rhs.xmm);
+        public static Vector128<byte> vadd(Vector128<byte> x, Vector128<byte> y)
+            => Add(x, y);
 
         [MethodImpl(Inline)]
-        public static Vec128<sbyte> vadd(in Vec128<sbyte> lhs, in Vec128<sbyte> rhs) 
-            => Add(lhs.xmm, rhs.xmm);
+        public static Vector128<sbyte> vadd(Vector128<sbyte> x, Vector128<sbyte> y) 
+            => Add(x, y);
 
         [MethodImpl(Inline)]
-        public static Vec128<short> vadd(in Vec128<short> lhs, in Vec128<short> rhs)
-            => Add(lhs.xmm, rhs.xmm);
+        public static Vector128<short> vadd(Vector128<short> x, Vector128<short> y)
+            => Add(x, y);
 
         [MethodImpl(Inline)]
-        public static Vec128<ushort> vadd(in Vec128<ushort> lhs, in Vec128<ushort> rhs)
-            => Add(lhs.xmm, rhs.xmm);
+        public static Vector128<ushort> vadd(Vector128<ushort> x, Vector128<ushort> y)
+            => Add(x, y);
 
         [MethodImpl(Inline)]
-        public static Vec128<int> vadd(in Vec128<int> lhs, in Vec128<int> rhs)
-            => Add(lhs.xmm, rhs.xmm);
+        public static Vector128<int> vadd(Vector128<int> x, Vector128<int> y)
+            => Add(x, y);
 
         [MethodImpl(Inline)]
-        public static Vec128<uint> vadd(in Vec128<uint> lhs, in Vec128<uint> rhs)
-            => Add(lhs.xmm, rhs.xmm);
+        public static Vector128<uint> vadd(Vector128<uint> x, Vector128<uint> y)
+            => Add(x, y);
 
         [MethodImpl(Inline)]
-        public static Vec128<long> vadd(in Vec128<long> lhs, in Vec128<long> rhs)
-            => Add(lhs.xmm, rhs.xmm);
+        public static Vector128<long> vadd(Vector128<long> x, Vector128<long> y)
+            => Add(x, y);
 
         [MethodImpl(Inline)]
-        public static Vec128<ulong> vadd(in Vec128<ulong> lhs, in Vec128<ulong> rhs)
-            => Add(lhs.xmm, rhs.xmm);
+        public static Vector128<ulong> vadd(Vector128<ulong> x, Vector128<ulong> y)
+            => Add(x, y);
 
         [MethodImpl(Inline)]
-        public static Vec256<byte> vadd(in Vec256<byte> lhs, in Vec256<byte> rhs)
-            => Add(lhs.ymm, rhs.ymm);
+        public static Vector256<byte> vadd(Vector256<byte> x, Vector256<byte> y)
+            => Add(x, y);
 
         [MethodImpl(Inline)]
-        public static Vec256<sbyte> vadd(in Vec256<sbyte> lhs, in Vec256<sbyte> rhs)
-            => Add(lhs.ymm, rhs.ymm);
+        public static Vector256<sbyte> vadd(Vector256<sbyte> x, Vector256<sbyte> y)
+            => Add(x, y);
 
         [MethodImpl(Inline)]
-        public static Vec256<short> vadd(in Vec256<short> lhs, in Vec256<short> rhs)
-            => Add(lhs.ymm, rhs.ymm);
+        public static Vector256<short> vadd(Vector256<short> x, Vector256<short> y)
+            => Add(x, y);
 
         [MethodImpl(Inline)]
-        public static Vec256<ushort> vadd(in Vec256<ushort> lhs, in Vec256<ushort> rhs)
-            => Add(lhs.ymm, rhs.ymm);
+        public static Vector256<ushort> vadd(Vector256<ushort> x, Vector256<ushort> y)
+            => Add(x, y);
 
         [MethodImpl(Inline)]
-        public static Vec256<int> vadd(in Vec256<int> lhs, in Vec256<int> rhs)
-            => Add(lhs.ymm, rhs.ymm);
+        public static Vector256<int> vadd(Vector256<int> x, Vector256<int> y)
+            => Add(x, y);
 
         [MethodImpl(Inline)]
-        public static Vec256<uint> vadd(in Vec256<uint> lhs, in Vec256<uint> rhs)
-            => Add(lhs.ymm, rhs.ymm);
+        public static Vector256<uint> vadd(Vector256<uint> x, Vector256<uint> y)
+            => Add(x, y);
 
         [MethodImpl(Inline)]
-        public static Vec256<long> vadd(in Vec256<long> lhs, in Vec256<long> rhs)
-            => Add(lhs.ymm, rhs.ymm);
+        public static Vector256<long> vadd(Vector256<long> x, Vector256<long> y)
+            => Add(x, y);
 
         [MethodImpl(Inline)]
-        public static Vec256<ulong> vadd(in Vec256<ulong> lhs, in Vec256<ulong> rhs)
-            => Add(lhs.ymm, rhs.ymm);
+        public static Vector256<ulong> vadd(Vector256<ulong> x, Vector256<ulong> y)
+            => Add(x, y);
 
    }
 }

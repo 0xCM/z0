@@ -11,62 +11,62 @@ namespace Z0
     /// <summary>
     /// Identifies a supported distribution
     /// </summary>
-    public enum DistKind
+    public enum DistKind : uint
     {        
         /// <summary>
         /// Identifies a uniform distribution
         /// </summary>
-        Uniform,
+        Uniform = Pow2.T01,
 
         /// <summary>
         /// Identifies a uniform distribution bound to a particular range
         /// </summary>
-        UniformRange,
+        UniformRange = Pow2.T02,
 
         /// <summary>
         /// Identifies a bitwise uniform distribution
         /// </summary>
-        UniformBits,
+        UniformBits = Pow2.T03,
 
         /// <summary>
         /// Identifies a Bernoulli distribution
         /// </summary>
-        Bernoulli,
+        Bernoulli  = Pow2.T04,
 
         /// <summary>
         /// Identifies a Beta distribution
         /// </summary>
-        Beta,
+        Beta = Pow2.T05,
 
         /// <summary>
         /// Identifies a Binomial distribution
         /// </summary>
-        Binomial,
+        Binomial = Pow2.T06,
 
         /// <summary>
         /// Identifies a Cauchy distribution
         /// </summary>
-        Cauchy,
+        Cauchy  = Pow2.T07,
 
-        Chi2,
+        Chi2  = Pow2.T08,
 
-        Exponential,
+        Exponential  = Pow2.T09,
 
-        Gamma,
+        Gamma  = Pow2.T10,
 
-        Gaussian,
+        Gaussian = Pow2.T11,
 
-        Geometric,
+        Geometric = Pow2.T12,
 
-        Laplace,
+        Laplace = Pow2.T13,
 
-        Poisson,
+        Poisson = Pow2.T14,
 
-        Rayleigh,
+        Rayleigh = Pow2.T15,
 
-        Weibull,
+        Weibull = Pow2.T16,
 
-        Lognormal
+        Lognormal = Pow2.T17,
 
     }
 

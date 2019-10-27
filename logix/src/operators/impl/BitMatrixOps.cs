@@ -23,7 +23,7 @@ namespace Z0.Logix
         [MethodImpl(Inline)]
         public static RowBits<T> not<T>(RowBits<T> A)
             where T : unmanaged
-                => BitMatrix.not(A);
+                => RowBits.not(A);
 
         [MethodImpl(Inline)]
         public static RowBits<T> @false<T>(RowBits<T> A, RowBits<T> B)
@@ -48,22 +48,22 @@ namespace Z0.Logix
         [MethodImpl(Inline)]
         public static RowBits<T> xor<T>(RowBits<T> A, RowBits<T> B)
             where T : unmanaged
-                => BitMatrix.xor(A,B);
+                => RowBits.xor(A,B);
 
         [MethodImpl(Inline)]
         public static RowBits<T> nand<T>(RowBits<T> A, RowBits<T> B)
             where T : unmanaged
-                => BitMatrix.nand(A,B);
+                => RowBits.nand(A,B);
 
         [MethodImpl(Inline)]
         public static RowBits<T> nor<T>(RowBits<T> A, RowBits<T> B)
             where T : unmanaged
-                => BitMatrix.nor(A,B);
+                => RowBits.nor(A,B);
 
         [MethodImpl(Inline)]
         public static RowBits<T> xnor<T>(RowBits<T> A, RowBits<T> B)
             where T : unmanaged
-                => BitMatrix.xnor(A,B);
+                => RowBits.xnor(A,B);
 
         [MethodImpl(Inline)]
         public static RowBits<T> andnot<T>(RowBits<T> A, RowBits<T> B)

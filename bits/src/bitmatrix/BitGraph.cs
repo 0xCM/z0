@@ -40,6 +40,20 @@ namespace Z0
             return Graph.Define(nodes, edges);
         }
 
+        internal static Graph<T> FromMatrix<N,T>(BitMatrix<N,T> src, N dim = default)
+            where N : ITypeNat, new()
+            where T : unmanaged
+        {
+            var n = (int)dim.value;
+            var nodes = Graph.Vertices<T>(n);
+            var edges = new List<Edge<T>>();
+            for(var row = 0; row < n; row++)
+            for(var col = 0; col < n; col++)
+                if(src[row,col])
+                    edges.Add(Graph.Connect(nodes[row], nodes[col]));
+            return Graph.Define(nodes, edges);
+        }
+
         internal static Graph<V> FromMatrix<V,T>(RowBits<T> src)
             where V : unmanaged
             where T : unmanaged

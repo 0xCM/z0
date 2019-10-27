@@ -13,8 +13,21 @@ namespace Z0
     partial class BitMatrix
     {
         [MethodImpl(Inline)]
-        public static bool eq(BitMatrix8 A, BitMatrix8 B)
-            => testz(andnot(A,B));
+        public static unsafe bool eq<T>(in BitMatrix<T> A, in BitMatrix<T> B)
+            where T : unmanaged
+        {
+            var C = BitMatrix.alloc<T>();
+            BitPoints.xnor(A.HeadPtr,B.HeadPtr,C.HeadPtr);
+            return BitPoints.testc(C.HeadPtr);
+        }
+
+        [MethodImpl(Inline)]
+        public static unsafe bool eq(BitMatrix8 A, BitMatrix8 B)
+        {
+            var C = BitMatrix.alloc(n8);
+            BitPoints.andnot(A.HeadPtr,B.HeadPtr,C.HeadPtr);
+            return BitPoints.testz(C.HeadPtr);
+        }
 
         [MethodImpl(Inline)]
         public static bool eq(BitMatrix16 A, BitMatrix16 B)

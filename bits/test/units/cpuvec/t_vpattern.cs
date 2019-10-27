@@ -15,7 +15,7 @@ namespace Z0
     {
         public void pattern_clearalt_256x8()
         {
-            var tr = Vec256Pattern.ClearAlt<byte>();
+            var tr = Vec256Pattern.ClearAltVector<byte>();
             for(var i=0; i<SampleSize; i++)
             {
                 var x = Random.CpuVector<byte>(n256);

@@ -60,14 +60,14 @@ namespace Z0
         public static Vector256<float> reverse(Vector256<float> src)
             => vpermvar8x32(src,MRev256f32);    
  
-         static Vector256<int> MRev256i32 
-            => Vector256.Create(7, 5, 6, 4, 3, 2, 1, 0);
+        static Vector256<int> MRev256i32 
+            => cpuvec(7, 5, 6, 4, 3, 2, 1, 0);
         
         static Vector256<uint> MRev256u32 
-            => Vector256.Create(7u, 6u, 5u, 4u, 3u, 2u, 1u, 0u);
+            => cpuvec(7u, 6u, 5u, 4u, 3u, 2u, 1u, 0u);
         
         static Vector256<int> MRev256f32 
-            => Vector256.Create(7, 6, 5, 4, 3, 2, 1, 0);    
+            => cpuvec(7, 6, 5, 4, 3, 2, 1, 0);    
 
     }
 }

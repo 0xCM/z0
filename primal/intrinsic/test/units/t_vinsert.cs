@@ -2,11 +2,12 @@
 // Copyright   :  (c) Chris Moore, 2019
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Test
+namespace Z0
 {
     using System;
     using System.Linq;
     using System.Runtime.CompilerServices;
+    using System.Runtime.Intrinsics;
     using System.IO;
     
     using static zfunc;
@@ -33,10 +34,10 @@ namespace Z0.Test
         {
             for(var i=0; i < SampleSize; i++)
             {
-                var v128Src = Random.CpuVec128<T>();
+                var v128Src = Random.CpuVector<T>(n128);
                 var srcSpan = v128Src.ToSpan();
 
-                var dst = Vec256.Zero<T>();
+                var dst = default(Vector256<T>);
                 
                 var vLo = ginx.vinsert(v128Src, dst,0);
                 var vLoSpan = vLo.ToSpan().Slice(0, vLo.Length()/2);

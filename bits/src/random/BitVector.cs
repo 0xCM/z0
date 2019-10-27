@@ -20,7 +20,7 @@ namespace Z0
         [MethodImpl(Inline)]
         static IRandomStream<T> stream<T>(IEnumerable<T> src, RngKind rng)
             where T : unmanaged
-                =>  new RandomStream<T>(rng,src);
+                =>  RandomStream.From(src,rng);
 
         /// <summary>
         /// Produces a 16-bit bitvector with a specified effective width <= 16
@@ -98,7 +98,6 @@ namespace Z0
         public static BitVector128 BitVector(this IPolyrand random, N128 n)
             => (random.Next<ulong>(), random.Next<ulong>());
 
-
         /// <summary>
         /// Produces a generic bitvector of natural length
         /// </summary>
@@ -147,9 +146,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitCells<T> BitCells<T>(this IPolyrand random, Interval<int> range)
             where T : unmanaged
-                => random.BitCells<T>(range.Left, range.Right);
-                        
-
+                => random.BitCells<T>(range.Left, range.Right);                    
     }
-
 }

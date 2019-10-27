@@ -17,17 +17,19 @@ namespace Z0
     {
         [MethodImpl(Inline)]
         public static IRandomStream<T> From<T>(IEnumerable<T> src, RngKind rng)
-            where T : unmanaged
+            where T : struct
                 =>  new RandomStream<T>(rng,src);
-
     }
 
+    /// <summary>
+    /// Captures a random stream along with the generator classification
+    /// </summary>
     public struct RandomStream<T> : IRandomStream<T>
         where T : struct
     {
 
         [MethodImpl(Inline)]
-        public RandomStream(RngKind rng, IEnumerable<T> src)
+        internal RandomStream(RngKind rng, IEnumerable<T> src)
         {
             this.src = src;
             this.RngKind = rng;
@@ -41,7 +43,6 @@ namespace Z0
         public IEnumerator<T> GetEnumerator()
             => src.GetEnumerator();
 
-        [MethodImpl(Inline)]
         public IEnumerable<T> Next(int count)
             => src.Take(count);
 

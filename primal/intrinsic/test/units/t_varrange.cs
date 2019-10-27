@@ -80,9 +80,9 @@ namespace Z0.Test
 
         public void hi_256_u64()
         {            
-            var x = v256(1ul,2ul,3ul,4ul);
-            var y = v256(5ul,6ul,7ul,8ul);
-            var expect = v256(2ul,6ul,4ul,8ul);
+            var x = cpuvec(1ul,2ul,3ul,4ul);
+            var y = cpuvec(5ul,6ul,7ul,8ul);
+            var expect = cpuvec(2ul,6ul,4ul,8ul);
 
             var actual = dinx.vunpackhi(x,y);
             Claim.eq(expect, actual);
@@ -90,11 +90,11 @@ namespace Z0.Test
 
         public void hi_256_u32()
         {
-            var x = Vec256.FromParts(1u, 2u,  3u,4u,   5u,6u,   7u,8u);
-            var y = Vec256.FromParts(10u,12u, 13u,14u, 15u,16u, 17u,18u);
+            var x = cpuvec(1u, 2u,  3u,4u,   5u,6u,   7u,8u);
+            var y = cpuvec(10u,12u, 13u,14u, 15u,16u, 17u,18u);
 
             var actual = dinx.vunpackhi(x,y);
-            var expect = Vec256.FromParts(3u,13u,4u,14u,7u,17u,8u,18u);
+            var expect = cpuvec(3u,13u,4u,14u,7u,17u,8u,18u);
             Claim.eq(expect, actual);
         }
 
@@ -111,16 +111,18 @@ namespace Z0.Test
             var n = n256;
             void Test1()
             {
-                var v0 = Random.CpuVec256<byte>();
-                var v1 = Random.CpuVec256<byte>();
+                var v0 = Random.CpuVector<byte>(n);
+                var v1 = Random.CpuVector<byte>(n);
+                var v1s = v1.ToSpan();
+                var v0s = v0.ToSpan();
                 var bits = Random.BitString<N32>();
                 var mask = Vec256.Load(bits.Map(x => x ? (byte)0xFF : (byte)0));
-                var v3 = dinx.vblendvar(v0,v1, mask);
+                var v3 = dinx.vblendv(v0,v1, mask);
                 
                 var selection = Span256.AllocBlocks<byte>(1);
                 for(var i=0; i< selection.Length; i++)
-                    selection[i] = bits[i] ? v1[i] : v0[i];
-                var v4 =  selection.ToCpuVec256();            
+                    selection[i] = bits[i] ? v1s[i] : v0s[i];
+                var v4 =  selection.ToCpuVector();            
                 
                 Claim.eq(v3, v4);
             }
@@ -130,11 +132,11 @@ namespace Z0.Test
             var v1 = Vec256.Fill<byte>(3);
             var v2 = Vec256.Fill<byte>(4);
             var control = Vec256Pattern.Alternate<byte>(0, 0xFF);
-            var v3 = dinx.vblendvar(v1,v2, control);
+            var v3 = dinx.vblendv(v1,v2, control);
             var block = Span256.AllocBlocks<byte>(1);
             for(var i=0; i<32; i++)
                 block[i] = (byte) (even(i) ? 3 : 4);
-            var v4 = block.ToCpuVec256();
+            var v4 = block.ToCpuVector();
             Claim.eq(v3, v4);
 
         }

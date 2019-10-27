@@ -15,69 +15,130 @@ namespace Z0.Test
 
     public class t_vmax : UnitTest<t_vmax>
     {
-        
-        public void vmax_128x32i_check()
+        void vmax_256x64u_check_example()
         {
-            var blocklen = Span128<int>.BlockLength;                     
-            var lhs = Random.ReadOnlySpan128<int>(SampleSize);
-            var rhs = Random.ReadOnlySpan128<int>(SampleSize);
-            var expect = Span128.AllocBlocks<int>(SampleSize);
-            var actual = Span128.AllocBlocks<int>(SampleSize);
+            var n = n256;
             
-            for(var block = 0; block<SampleSize; block++)
+            for(var sample=0; sample<SampleSize; sample++)
             {
-                var offset = block*blocklen;
+                var x = Random.CpuVector<ulong>(n);
+                var y = Random.CpuVector<ulong>(n);
 
-                Span<int> tmp = stackalloc int[blocklen];
-                for(var i =0; i<blocklen; i++)
-                    tmp[i] = gmath.max(lhs[offset + i], rhs[offset + i]);
-                var vExpect = Vec128.Load(ref tmp[0]);
-             
-                var vX = lhs.LoadVec128(block);
-                var vY = rhs.LoadVec128(block);
-                var vActual = ginx.vmax<int>(vX,vY);
+                var xs = x.ToSpan();
+                var ys = y.ToSpan();
+                var zs = BlockedSpan.AllocBlock<ulong>(n);
+                for(var i=0; i<zs.Length; i++)
+                    zs[i] = gmath.max(xs[i],ys[i]);
+                
+                var expect = zs.ToCpuVector();                
+                var actual = dinx.vmax(x,y);
+                Claim.eq(expect,actual);
 
-                Claim.eq(vExpect, vActual);
-
-                vstore(vExpect, ref expect.Block(block));
-                vstore(vActual, ref actual.Block(block));
-
+                
             }
-            Claim.eq(expect, actual);
         }
 
-        public void max256_i32()
+        public void max_128x8i_check()
+            => max_check<sbyte>(n128);
+
+        public void max_128x8u_check()
+            => max_check<byte>(n128);
+
+        public void max_128x16i_check()
+            => max_check<short>(n128);
+
+        public void max_128x16u_check()
+            => max_check<ushort>(n128);
+
+        public void max_128x32i_check()
+            => max_check<int>(n128);
+
+        public void max_128x32u_check()
+            => max_check<uint>(n128);
+
+        public void max_128x64i_check()
+            => max_check<long>(n128);
+
+        public void max_128x64u_check()
+            => max_check<ulong>(n128);
+
+        public void max_128x32f_check()
+            => max_check<float>(n128);
+
+        public void max_128x64f_check()
+            => max_check<double>(n128);
+
+        public void max_256x8i_check()
+            => max_check<sbyte>(n256);
+
+        public void max_256x8u_check()
+            => max_check<byte>(n256);
+
+        public void max_256x16i_check()
+            => max_check<short>(n256);
+
+        public void max_256x16u_check()
+            => max_check<ushort>(n256);
+
+        public void max_256x32i_check()
+            => max_check<int>(n256);
+
+        public void max_256x32u_check()
+            => max_check<uint>(n256);
+
+        public void max_256x64i_check()
+            => max_check<long>(n256);
+
+        public void max_256x64u_check()
+            => max_check<ulong>(n256);
+
+        public void max_256x32f_check()
+            => max_check<float>(n256);
+
+        public void max_256x64f_check()
+            => max_check<double>(n256);
+
+        void max_check<T>(N256 n)
+            where T : unmanaged
         {
-            var blocklen = Span256<int>.BlockLength;                     
-            var lhs = Random.ReadOnlySpan256<int>(SampleSize);
-            var rhs = Random.ReadOnlySpan256<int>(SampleSize);
-            var expect = Span256.AllocBlocks<int>(SampleSize);
-            var actual = Span256.AllocBlocks<int>(SampleSize);
-            
-            for(var block = 0; block<SampleSize; block++)
+
+            for(var sample=0; sample<SampleSize; sample++)
             {
-                var offset = block*blocklen;
+                var x = Random.CpuVector<T>(n);
+                var y = Random.CpuVector<T>(n);
 
-                Span<int> tmp = stackalloc int[blocklen];
-                for(var i =0; i<blocklen; i++)
-                    tmp[i] = gmath.max(lhs[offset + i], rhs[offset + i]);
-                var vExpect = Vec256.Load(ref tmp[0]);
-             
-                var vX = lhs.LoadVec256(block);
-                var vY = rhs.LoadVec256(block);
-                var vActual = ginx.vmax<int>(vX,vY);
-
-                Claim.eq(vExpect, vActual);
-
-                vstore(vExpect, ref expect.Block(block));
-                vstore(vActual, ref actual.Block(block));
-
+                var xs = x.ToSpan();
+                var ys = y.ToSpan();
+                var zs = BlockedSpan.AllocBlock<T>(n);
+                for(var i=0; i<zs.Length; i++)
+                    zs[i] = gmath.max(xs[i],ys[i]);
+                
+                var expect = zs.ToCpuVector();                
+                var actual = ginx.vmax(x,y);
+                Claim.eq(expect,actual);                
             }
-            Claim.eq(expect, actual);
-
-
         }
 
+        void max_check<T>(N128 n)
+            where T : unmanaged
+        {
+
+            for(var sample=0; sample<SampleSize; sample++)
+            {
+                var x = Random.CpuVector<T>(n);
+                var y = Random.CpuVector<T>(n);
+
+                var xs = x.ToSpan();
+                var ys = y.ToSpan();
+                var zs = BlockedSpan.AllocBlock<T>(n);
+                for(var i=0; i<zs.Length; i++)
+                    zs[i] = gmath.max(xs[i],ys[i]);
+                
+                var expect = zs.ToCpuVector();                
+                var actual = ginx.vmax(x,y);
+                Claim.eq(expect,actual);                
+            }
+        }
 
     }
 

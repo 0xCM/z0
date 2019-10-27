@@ -34,7 +34,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The random source</param>
         [MethodImpl(Inline)]
-        public static IPolyrand ToPolyrand(this IStepwiseSource<ulong> src)
+        public static IPolyrand ToPolyrand(this INavigableSource<ulong> src)
             => new Polyrand(src);
 
         /// <summary>

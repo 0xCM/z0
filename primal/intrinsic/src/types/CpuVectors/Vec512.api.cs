@@ -24,24 +24,14 @@ namespace Z0
         /// <param name="v11">The most signficant vector</param>
         /// <typeparam name="T">The primal component type</typeparam>
         [MethodImpl(Inline)]
-        public static Vec512<T> FromParts<T>(Vec128<T> v00, Vec128<T> v01, Vec128<T> v10, Vec128<T> v11)        
+        public static Vec512<T> FromParts<T>(Vector128<T> v00, Vector128<T> v01, Vector128<T> v10, Vector128<T> v11)        
             where T : unmanaged
         {
-            Vec256<T> lo = ginx.vset(v00,v01);            
-            Vec256<T> hi = ginx.vset(v10,v11);
-            return new Vec512<T>(in lo, in hi);
+            var lo = ginx.vset(v00,v01);            
+            var hi = ginx.vset(v10,v11);
+            return new Vec512<T>(lo, hi);
         }
 
-        /// <summary>
-        /// Constructs a 512-bit vector from two 256-bit vectors
-        /// </summary>
-        /// <param name="lo">The least signficant vector</param>
-        /// <param name="hi">The second vector</param>
-        /// <typeparam name="T">The primal component type</typeparam>
-        [MethodImpl(Inline)]
-        public static Vec512<T> FromParts<T>(in Vec256<T> lo, in Vec256<T> hi)        
-            where T : unmanaged
-                => new Vec512<T>(lo, hi);
 
         /// <summary>
         /// Constructs a 512-bit vector from two 256-bit vectors
@@ -50,7 +40,7 @@ namespace Z0
         /// <param name="hi">The second vector</param>
         /// <typeparam name="T">The primal component type</typeparam>
         [MethodImpl(Inline)]
-        public static Vec512<T> FromParts<T>(in Vector256<T> lo, in Vector256<T> hi)        
+        public static Vec512<T> FromParts<T>(Vector256<T> lo, Vector256<T> hi)        
             where T : unmanaged
                 => new Vec512<T>(lo, hi);
 

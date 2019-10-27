@@ -68,7 +68,7 @@ namespace Z0
             else if(typeof(T) == typeof(char))
                 return  generic<T>((char)src);
             else            
-                throw unsupported<T>();
+                return unhandled<sbyte,T>(src);
         }
     }
 }

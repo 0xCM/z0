@@ -293,14 +293,6 @@ namespace Z0
             get => Pop() != 0;
         }
 
-        /// <summary>
-        /// Is true if the bitvector is define of a single cell value
-        /// </summary>
-        public bool SingleCell
-        {
-            [MethodImpl(Inline)]
-            get => data.Length == 1;
-        }
 
         /// <summary>
         /// The maximum number of bits that can be represented by the vector

@@ -37,17 +37,13 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static Vector256<T> LoadVector<T>(ReadOnlySpan<byte> src)
+        static Vector256<T> Load<T>(ReadOnlySpan<byte> src)
             where T : unmanaged
         {
             dinx.vloadu(in head(src), out Vector256<byte> dst);
             return As.generic<T>(dst);
         }
 
-        [MethodImpl(Inline)]
-        static Vec256<T> LoadPattern<T>(ReadOnlySpan<byte> src)
-            where T : unmanaged
-                => dinx.vloadu256(in head(src)).As<T>();
 
         /// <summary>
         /// Returns a vector that decribes a lo/hi lane merge permutation
@@ -60,9 +56,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return LoadVector<T>(Vec256PatternData.LaneMerge256x8u);
+                return Load<T>(Vec256PatternData.LaneMerge256x8u);
             else if(typeof(T) == typeof(ushort))
-                return LoadVector<T>(Vec256PatternData.LaneMerge256x16u);
+                return Load<T>(Vec256PatternData.LaneMerge256x16u);
             else 
                 return default;
         }
@@ -90,29 +86,13 @@ namespace Z0
         /// </summary>
         /// <typeparam name="T">The primal component type</typeparam>
         [MethodImpl(Inline)]
-        public static Vec256<T> ClearAlt<T>()
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(byte))
-                return LoadPattern<T>(Vec256PatternData.ClearAlt256x8u);
-            else if(typeof(T) == typeof(ushort))
-                return LoadPattern<T>(Vec256PatternData.ClearAlt256x16u);
-            else 
-                return Vec256<T>.Zero;            
-        }
-
-        /// <summary>
-        /// Describes a shuffle mask that clears ever-other vector component
-        /// </summary>
-        /// <typeparam name="T">The primal component type</typeparam>
-        [MethodImpl(Inline)]
         public static Vector256<T> ClearAltVector<T>()
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return LoadVector<T>(Vec256PatternData.ClearAlt256x8u);
+                return Load<T>(Vec256PatternData.ClearAlt256x8u);
             else if(typeof(T) == typeof(ushort))
-                return LoadVector<T>(Vec256PatternData.ClearAlt256x16u);
+                return Load<T>(Vec256PatternData.ClearAlt256x16u);
             else 
                 return default;
         }

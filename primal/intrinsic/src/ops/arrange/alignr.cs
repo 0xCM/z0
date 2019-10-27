@@ -28,7 +28,7 @@ namespace Z0
         /// <param name="y">The right vector</param>
         /// <param name="n">The shift amount selector</param>
         [MethodImpl(Inline)]
-        public static Vec128<byte> valignr(in Vec128<byte> x, in Vec128<byte> y, N1 n)
+        public static Vector128<byte> valignr(Vector128<byte> x, Vector128<byte> y, N1 n)
             => AlignRight(x, y, 1);
 
         /// <summary>
@@ -39,7 +39,7 @@ namespace Z0
         /// <param name="y">The right vector</param>
         /// <param name="n">The shift amount selector</param>
         [MethodImpl(Inline)]
-        public static Vec128<byte> valignr(in Vec128<byte> x, in Vec128<byte> y, N2 n)
+        public static Vector128<byte> valignr(Vector128<byte> x, Vector128<byte> y, N2 n)
             => AlignRight(x, y, 2);
 
         /// <summary>
@@ -50,7 +50,7 @@ namespace Z0
         /// <param name="y">The right vector</param>
         /// <param name="n">The shift amount selector</param>
         [MethodImpl(Inline)]
-        public static Vec128<byte> valignr(in Vec128<byte> x, in Vec128<byte> y, N3 n)
+        public static Vector128<byte> valignr(Vector128<byte> x, Vector128<byte> y, N3 n)
             => AlignRight(x, y, 3);
 
         /// <summary>
@@ -61,7 +61,7 @@ namespace Z0
         /// <param name="y">The right vector</param>
         /// <param name="n">The shift amount selector</param>
         [MethodImpl(Inline)]
-        public static Vec128<byte> valignr(in Vec128<byte> x, in Vec128<byte> y, N4 n)
+        public static Vector128<byte> valignr(Vector128<byte> x, Vector128<byte> y, N4 n)
             => AlignRight(x, y, 4);
 
         /// <summary>
@@ -72,7 +72,7 @@ namespace Z0
         /// <param name="y">The right vector</param>
         /// <param name="n">The shift amount selector</param>
         [MethodImpl(Inline)]
-        public static Vec128<byte> valignr(in Vec128<byte> x, in Vec128<byte> y, N5 n)
+        public static Vector128<byte> valignr(Vector128<byte> x, Vector128<byte> y, N5 n)
             => AlignRight(x, y, 5);
 
         /// <summary>
@@ -83,7 +83,7 @@ namespace Z0
         /// <param name="y">The right vector</param>
         /// <param name="n">The shift amount selector</param>
         [MethodImpl(Inline)]
-        public static Vec128<byte> valignr(in Vec128<byte> x, in Vec128<byte> y, N6 n)
+        public static Vector128<byte> valignr(Vector128<byte> x, Vector128<byte> y, N6 n)
             => AlignRight(x, y, 6);
 
         /// <summary>
@@ -94,19 +94,19 @@ namespace Z0
         /// <param name="y">The right vector</param>
         /// <param name="n">The shift amount selector</param>
         [MethodImpl(Inline)]
-        public static Vec128<byte> valignr(in Vec128<byte> x, in Vec128<byte> y, N7 n)
+        public static Vector128<byte> valignr(Vector128<byte> x, Vector128<byte> y, N7 n)
             => AlignRight(x, y, 7);
 
         [MethodImpl(Inline)]
-        public static Vec128<byte> valignr(in Vec128<byte> x, in Vec128<byte> y, N8 n)
+        public static Vector128<byte> valignr(Vector128<byte> x, Vector128<byte> y, N8 n)
             => AlignRight(x, y, 8);
 
         [MethodImpl(Inline)]
-        public static Vec128<byte> valignr(in Vec128<byte> x, in Vec128<byte> y, N9 n)
+        public static Vector128<byte> valignr(Vector128<byte> x, Vector128<byte> y, N9 n)
             => AlignRight(x, y, 9);
 
         [MethodImpl(Inline)]
-        public static Vec128<byte> valignr(in Vec128<byte> x, in Vec128<byte> y, N10 n)
+        public static Vector128<byte> valignr(Vector128<byte> x, Vector128<byte> y, N10 n)
             => AlignRight(x, y, 10);
 
         /// <summary>
@@ -128,7 +128,7 @@ namespace Z0
         /// dst[255:127] := tmp2[127:0]
         /// </remarks>
         [MethodImpl(Inline)]
-        public static Vec256<byte> valignr(in Vec256<byte> x, in Vec256<byte> y, N0 n)
+        public static Vector256<byte> valignr(Vector256<byte> x, Vector256<byte> y, N0 n)
             => AlignRight(x, y, 0);
 
         /// <summary>
@@ -139,7 +139,7 @@ namespace Z0
         /// <param name="y">The right vector</param>
         /// <param name="n">The shift amount selector</param>
         [MethodImpl(Inline)]
-        public static Vec256<byte> valignr(in Vec256<byte> x, in Vec256<byte> y, N1 n)
+        public static Vector256<byte> valignr(Vector256<byte> x, Vector256<byte> y, N1 n)
             => AlignRight(x, y, 1);
 
         /// <summary>
@@ -150,7 +150,7 @@ namespace Z0
         /// <param name="y">The right vector</param>
         /// <param name="n">The shift amount selector</param>
         [MethodImpl(Inline)]
-        public static Vec256<byte> valignr(in Vec256<byte> x, in Vec256<byte> y, N2 n)
+        public static Vector256<byte> valignr(Vector256<byte> x, Vector256<byte> y, N2 n)
             => AlignRight(x, y, 2);
 
         /// <summary>
@@ -161,7 +161,7 @@ namespace Z0
         /// <param name="y">The right vector</param>
         /// <param name="n">The shift amount selector</param>
         [MethodImpl(Inline)]
-        public static Vec256<byte> valignr(in Vec256<byte> x, in Vec256<byte> y, N3 n)
+        public static Vector256<byte> valignr(Vector256<byte> x, Vector256<byte> y, N3 n)
             => AlignRight(x, y, 3);
 
         /// <summary>
@@ -172,7 +172,7 @@ namespace Z0
         /// <param name="y">The right vector</param>
         /// <param name="n">The shift amount selector</param>
         [MethodImpl(Inline)]
-        public static Vec256<byte> valignr(in Vec256<byte> x, in Vec256<byte> y, N4 n)
+        public static Vector256<byte> valignr(Vector256<byte> x, Vector256<byte> y, N4 n)
             => AlignRight(x, y, 4);
 
         /// <summary>
@@ -183,7 +183,7 @@ namespace Z0
         /// <param name="y">The right vector</param>
         /// <param name="n">The shift amount selector</param>
         [MethodImpl(Inline)]
-        public static Vec256<byte> valignr(in Vec256<byte> x, in Vec256<byte> y, N5 n)
+        public static Vector256<byte> valignr(Vector256<byte> x, Vector256<byte> y, N5 n)
             => AlignRight(x, y, 5);
 
         /// <summary>
@@ -194,7 +194,7 @@ namespace Z0
         /// <param name="y">The right vector</param>
         /// <param name="n">The shift amount selector</param>
         [MethodImpl(Inline)]
-        public static Vec256<byte> valignr(in Vec256<byte> x, in Vec256<byte> y, N6 n)
+        public static Vector256<byte> valignr(Vector256<byte> x, Vector256<byte> y, N6 n)
             => AlignRight(x, y, 6);
 
         /// <summary>
@@ -205,7 +205,7 @@ namespace Z0
         /// <param name="y">The right vector</param>
         /// <param name="n">The shift amount selector</param>
         [MethodImpl(Inline)]
-        public static Vec256<byte> valignr(in Vec256<byte> x, in Vec256<byte> y, N7 n)
+        public static Vector256<byte> valignr(Vector256<byte> x, Vector256<byte> y, N7 n)
             => AlignRight(x, y, 7);
 
         /// <summary>
@@ -216,7 +216,7 @@ namespace Z0
         /// <param name="y">The right vector</param>
         /// <param name="n">The shift amount selector</param>
         [MethodImpl(Inline)]
-        public static Vec256<byte> valignr(in Vec256<byte> x, in Vec256<byte> y, N8 n)
+        public static Vector256<byte> valignr(Vector256<byte> x, Vector256<byte> y, N8 n)
             => AlignRight(x, y, 8);
 
         /// <summary>
@@ -227,7 +227,7 @@ namespace Z0
         /// <param name="y">The right vector</param>
         /// <param name="n">The shift amount selector</param>
         [MethodImpl(Inline)]
-        public static Vec256<byte> valignr(in Vec256<byte> x, in Vec256<byte> y, N9 n)
+        public static Vector256<byte> valignr(Vector256<byte> x, Vector256<byte> y, N9 n)
             => AlignRight(x, y, 9);
 
         /// <summary>
@@ -238,7 +238,7 @@ namespace Z0
         /// <param name="y">The right vector</param>
         /// <param name="n">The shift amount selector</param>
         [MethodImpl(Inline)]
-        public static Vec256<byte> valignr(in Vec256<byte> x, in Vec256<byte> y, N10 n)
+        public static Vector256<byte> valignr(Vector256<byte> x, Vector256<byte> y, N10 n)
             => AlignRight(x, y, 10);
  
         /// <summary>
@@ -249,7 +249,7 @@ namespace Z0
         /// <param name="y">The right vector</param>
         /// <param name="n">The shift amount selector</param>
         [MethodImpl(Inline)]
-        public static Vec256<byte> valignr(in Vec256<byte> x, in Vec256<byte> y, N11 n)
+        public static Vector256<byte> valignr(Vector256<byte> x, Vector256<byte> y, N11 n)
             => AlignRight(x, y, 11);
  
     }

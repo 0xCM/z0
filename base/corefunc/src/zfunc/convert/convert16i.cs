@@ -21,18 +21,18 @@ namespace Z0
             || typeof(T) == typeof(short) 
             || typeof(T) == typeof(int) 
             || typeof(T) == typeof(long))
-                return converti<T>(src);
+                return convert_i<T>(src);
             else if(typeof(T) == typeof(byte) 
             || typeof(T) == typeof(ushort) 
             || typeof(T) == typeof(uint) 
             || typeof(T) == typeof(ulong))
-                return convertu<T>(src);
+                return convert_u<T>(src);
             else
-                return convertx<T>(src);
+                return convert_x<T>(src);
         }
 
         [MethodImpl(Inline)]
-        static T converti<T>(short src)
+        static T convert_i<T>(short src)
         {
             if(typeof(T) == typeof(sbyte))
                 return generic<T>((sbyte)src);
@@ -45,7 +45,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static T convertu<T>(short src)
+        static T convert_u<T>(short src)
         {
             if(typeof(T) == typeof(byte))
                 return generic<T>((byte)src);
@@ -58,17 +58,18 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static T convertx<T>(short src)
+        static T convert_x<T>(short src)
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
                 return generic<T>((float)src);
             else if(typeof(T) == typeof(double))
-                return generic<T>(Float64Convert.to64f(src));
+                return generic<T>(FloatConvert.to64f(src));
             else if(typeof(T) == typeof(char))
                 return  generic<T>((char)src);
             else            
-                throw unsupported<T>();
+                return unhandled<short,T>(src);
+
         }
     }
 }

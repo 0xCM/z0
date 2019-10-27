@@ -31,7 +31,8 @@ namespace Z0
             || typeof(T) == typeof(int) 
             || typeof(T) == typeof(long))
                 return vadd_i(x,y);
-            else return gfpv.vadd(x,y);
+            else 
+                return gfpv.vadd(x,y);
         }
 
         [MethodImpl(Inline)]

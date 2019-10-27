@@ -78,7 +78,6 @@ namespace Z0
         /// </summary>
         XOrShift1024 = 12,
 
-
         /// <summary>
         /// L’Ecuyer's combined multiple recursive generator (CMRG) with 32-bit unsigned integers
         /// </summary>
@@ -89,11 +88,11 @@ namespace Z0
         /// </summary>
         MRG32K3Ad = 14,
 
-        User1 = 100,
+        User1 = 101,
 
-        User2 = 100,
+        User2 = 102,
 
-        User3 = 100,
+        User3 = 103,
         
         
         /// <summary>

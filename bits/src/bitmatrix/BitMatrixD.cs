@@ -28,21 +28,21 @@ namespace Z0
         [MethodImpl(Inline)]
         public static unsafe ref BitMatrix<ushort> and(in BitMatrix<ushort> A,in BitMatrix<ushort> B, ref BitMatrix<ushort> C)
         {
-            BitPoints256.and(A.HeadPtr, B.HeadPtr, C.HeadPtr);
+            BitPoints.and(A.HeadPtr, B.HeadPtr, C.HeadPtr);
             return ref C;
         }
 
         [MethodImpl(Inline)]
         public static unsafe ref BitMatrix<uint> and(in BitMatrix<uint> A, in BitMatrix<uint> B, ref BitMatrix<uint> C)
         {
-            BitPoints256.and(A.HeadPtr, B.HeadPtr, C.HeadPtr);
+            BitPoints.and(A.HeadPtr, B.HeadPtr, C.HeadPtr);
             return ref C;
         }
 
         [MethodImpl(Inline)]
         public static unsafe ref BitMatrix<ulong> and(in BitMatrix<ulong> A, in BitMatrix<ulong> B, ref BitMatrix<ulong> C)
         {
-            BitPoints256.and(A.HeadPtr, B.HeadPtr, C.HeadPtr);
+            BitPoints.and(A.HeadPtr, B.HeadPtr, C.HeadPtr);
             return ref C;
         }
 
@@ -50,7 +50,7 @@ namespace Z0
         public static unsafe BitMatrix<ulong> and(in BitMatrix<ulong> A, in BitMatrix<ulong> B)
         {
             var C = BitMatrix.alloc<ulong>();
-            BitPoints256.and(A.HeadPtr, B.HeadPtr, C.HeadPtr);
+            BitPoints.and(A.HeadPtr, B.HeadPtr, C.HeadPtr);
             return C;
         }
 

@@ -40,34 +40,31 @@ namespace Z0.Test
 
         }
 
-        void nonzero128_check<T>()
+        void nonzero128_check<T>(N128 n = default)
             where T : unmanaged
         {
-            TypeCaseStart<T>();
-            var  src = Random.Span128<T>(blocks: SampleSize);
+            
+            var  src = Random.BlockedSpan<T>(n, blocks: SampleSize);
             for(var i = 0; i< src.BlockCount; i++)
             {
-                var v = Vec128.Load(ref src.Block(i));
+                var v = ginx.vloadu(n, in src.Block(i));
                 Claim.yea(ginx.vnonz(v));
             }
             
-            Claim.nea(ginx.vnonz(Vec128.Zero<T>()));
-            TypeCaseEnd<T>();
+            Claim.nea(ginx.vnonz(ginx.vzero<T>(n)));
         }
 
-        void nonzero256_check<T>()
+        void nonzero256_check<T>(N256 n = default)
             where T : unmanaged
         {
-            TypeCaseStart<T>();
-            var  src = Random.Span256<T>(blocks: SampleSize);
+            var  src = Random.BlockedSpan<T>(n, blocks: SampleSize);
             for(var i = 0; i< src.BlockCount; i++)
             {
-                var v = Vec256.Load(ref src.Block(i));
-                Claim.yea(ginx.nonz(v));
+                var v = ginx.vloadu(n, in src.Block(i));
+                Claim.yea(ginx.vnonz(v));
             }
             
-            Claim.nea(ginx.nonz(Vec256.Zero<T>()));
-            TypeCaseEnd<T>();
+            Claim.nea(ginx.vnonz(ginx.vzero<T>(n)));
         }
 
     }

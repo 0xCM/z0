@@ -16,6 +16,23 @@ namespace Z0
 
     partial class BitMatrix
     {
+        [MethodImpl(Inline)]
+        public static unsafe BitMatrix<T> or<T>(in BitMatrix<T> A, in BitMatrix<T> B)
+            where T : unmanaged
+        {
+            var C = BitMatrix.alloc<T>();
+            BitPoints.or(A.HeadPtr,B.HeadPtr,C.HeadPtr);
+            return C;
+        }
+
+        [MethodImpl(Inline)]
+        public static unsafe ref BitMatrix<T> or<T>(in BitMatrix<T> A, in BitMatrix<T> B, ref BitMatrix<T> C)
+            where T : unmanaged
+        {
+            BitPoints.or(A.HeadPtr,B.HeadPtr,C.HeadPtr);
+            return ref C;
+        }
+
         /// <summary>
         /// Computes the logical OR between two primal bitmatrices of order 8
         /// </summary>

@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;    
+    using System.Runtime.Intrinsics;
     using static System.Runtime.Intrinsics.X86.Avx;
     using static System.Runtime.Intrinsics.X86.Sse;
     using static System.Runtime.Intrinsics.X86.Sse2;
@@ -20,8 +21,8 @@ namespace Z0
         /// <param name="x"></param>
         /// <param name="y"></param>
         [MethodImpl(Inline)]
-        public static Vec128<float> vmax(in Vec128<float> x, in Vec128<float> y)
-            => Max(x.xmm, y.xmm);
+        public static Vector128<float> vmax(Vector128<float> x, Vector128<float> y)
+            => Max(x, y);
  
         /// <summary>
         ///  __m128d _mm_max_pd (__m128d a, __m128d b)MAXPD xmm, xmm/m128
@@ -29,8 +30,8 @@ namespace Z0
         /// <param name="x"></param>
         /// <param name="y"></param>
         [MethodImpl(Inline)]
-        public static Vec128<double> vmax(in Vec128<double> x, in Vec128<double> y)
-            => Max(x.xmm, y.xmm);
+        public static Vector128<double> vmax(Vector128<double> x, Vector128<double> y)
+            => Max(x, y);
 
         /// <summary>
         /// __m256 _mm256_max_ps (__m256 a, __m256 b) VMAXPS ymm, ymm, ymm/m256
@@ -38,8 +39,8 @@ namespace Z0
         /// <param name="x"></param>
         /// <param name="y"></param>
         [MethodImpl(Inline)]
-        public static Vec256<float> vmax(in Vec256<float> x, in Vec256<float> y)
-            => Max(x.ymm, y.ymm);
+        public static Vector256<float> vmax(Vector256<float> x, Vector256<float> y)
+            => Max(x, y);
 
         /// <summary>
         /// __m256d _mm256_max_pd (__m256d a, __m256d b)VMAXPD ymm, ymm, ymm/m256
@@ -47,8 +48,8 @@ namespace Z0
         /// <param name="x"></param>
         /// <param name="y"></param>
         [MethodImpl(Inline)]
-        public static Vec256<double> vmax(in Vec256<double> x, in Vec256<double> y)
-            => Max(x.ymm, y.ymm);
+        public static Vector256<double> vmax(Vector256<double> x, Vector256<double> y)
+            => Max(x, y);
 
     }
 }

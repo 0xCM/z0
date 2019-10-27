@@ -15,7 +15,7 @@ namespace Z0
     /// <summary>
     /// Implemements a 64-bit PCG generator
     /// </summary>
-    class Pcg64 : IStepwiseSource<ulong>
+    class Pcg64 : INavigableSource<ulong>
     {    
         /// <summary>
         /// Creates a pcg 64-bit rng

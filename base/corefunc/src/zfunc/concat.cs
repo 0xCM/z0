@@ -135,14 +135,44 @@ partial class zfunc
         => c + concat(items);
 
     /// <summary>
+    /// Concatenates a character with an array of strings
+    /// </summary>
+    /// <param name="c">The leading character</param>
+    /// <param name="items">The trailing content</param>
+    [MethodImpl(Inline)]
+    public static string concat(char c1, string s, char c2)
+        => c1 + concat(s,c2);
+
+    /// <summary>
+    /// Concatenates a character with an array of strings
+    /// </summary>
+    /// <param name="c">The leading character</param>
+    /// <param name="items">The trailing content</param>
+    [MethodImpl(Inline)]
+    public static string concat(string s1, string c, char s2)
+        => concat(s1,c) + s2;
+
+    [MethodImpl(Inline)]
+    public static string concat(char c1, string s1, char c2, string s2, char c3)
+        => concat(concat(c1,s1), concat(c2,s2), c3);
+
+    [MethodImpl(Inline)]
+    public static string concat(char c1, string s1, char c2, string s2, char c3, string s3)
+        => concat(concat(c1,s1), concat(c2,s2), concat(c3,s3));
+
+    [MethodImpl(Inline)]
+    public static string concat(string s1, char c1, string s2, char c2, string s3, char c3)
+        => concat(concat(s1,c1), concat(s2,c2), concat(s3,c3));
+
+    /// <summary>
     /// Concatenates two characters with an array of strings
     /// </summary>
     /// <param name="c1">The first character</param>
     /// <param name="c2">The second character</param>
     /// <param name="items">The trailing content</param>
     [MethodImpl(Inline)]
-    public static string concat(char c1, char c2, params string[] items)
-        => $"{c1}{c2}" + concat(items);
+    public static string concat(char c1, char c2)
+        => $"{c1}{c2}";
     
     /// <summary>
     /// Concatenates three characters with an array of strings

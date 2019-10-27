@@ -13,91 +13,91 @@ namespace Z0
     partial class math
     {
         [MethodImpl(Inline)]
-        public static sbyte min(sbyte lhs, sbyte rhs)
-            => lhs < rhs ? lhs : rhs;
+        public static sbyte min(sbyte a, sbyte b)
+            => a < b ? a : b;
 
         [MethodImpl(Inline)]
-        public static byte min(byte lhs, byte rhs)
-            => lhs < rhs ? lhs : rhs;
+        public static byte min(byte a, byte b)
+            => a < b ? a : b;
 
         [MethodImpl(Inline)]
-        public static short min(short lhs, short rhs)
-            => lhs < rhs ? lhs : rhs;
+        public static short min(short a, short b)
+            => a < b ? a : b;
 
         [MethodImpl(Inline)]
-        public static ushort min(ushort lhs, ushort rhs)
-            => lhs < rhs ? lhs : rhs;
+        public static ushort min(ushort a, ushort b)
+            => a < b ? a : b;
 
         [MethodImpl(Inline)]
-        public static int min(int lhs, int rhs)
-            => lhs < rhs ? lhs : rhs;
+        public static int min(int a, int b)
+            => a < b ? a : b;
 
         [MethodImpl(Inline)]
-        public static uint min(uint lhs, uint rhs)
-            => lhs < rhs ? lhs : rhs;
+        public static uint min(uint a, uint b)
+            => a < b ? a : b;
 
         [MethodImpl(Inline)]
-        public static long min(long lhs, long rhs)
-            => lhs < rhs ? lhs : rhs;
+        public static long min(long a, long b)
+            => a < b ? a : b;
 
         [MethodImpl(Inline)]
-        public static ulong min(ulong lhs, ulong rhs)
-            => lhs < rhs ? lhs : rhs;
+        public static ulong min(ulong a, ulong b)
+            => a < b ? a : b;
 
         [MethodImpl(Inline)]
-        public static ref sbyte min(ref sbyte lhs, sbyte rhs)
+        public static ref sbyte min(ref sbyte a, sbyte b)
         {
-            lhs = lhs < rhs ? lhs : rhs;
-            return ref lhs;
+            a = a < b ? a : b;
+            return ref a;
         }
 
         [MethodImpl(Inline)]
-        public static ref byte min(ref byte lhs, byte rhs)
+        public static ref byte min(ref byte a, byte b)
         {
-            lhs = lhs < rhs ? lhs : rhs;
-            return ref lhs;
+            a = a < b ? a : b;
+            return ref a;
         }
 
         [MethodImpl(Inline)]
-        public static ref short min(ref short lhs, short rhs)
+        public static ref short min(ref short a, short b)
         {
-            lhs = lhs < rhs ? lhs : rhs;
-            return ref lhs;
+            a = a < b ? a : b;
+            return ref a;
         }
 
         [MethodImpl(Inline)]
-        public static ref ushort min(ref ushort lhs, ushort rhs)
+        public static ref ushort min(ref ushort a, ushort b)
         {
-            lhs = lhs < rhs ? lhs : rhs;
-            return ref lhs;
+            a = a < b ? a : b;
+            return ref a;
         }
 
         [MethodImpl(Inline)]
-        public static ref int min(ref int lhs, int rhs)
+        public static ref int min(ref int a, int b)
         {
-            lhs = lhs < rhs ? lhs : rhs;
-            return ref lhs;
+            a = a < b ? a : b;
+            return ref a;
         }
 
         [MethodImpl(Inline)]
-        public static ref uint min(ref uint lhs, uint rhs)
+        public static ref uint min(ref uint a, uint b)
         {
-            lhs = lhs < rhs ? lhs : rhs;
-            return ref lhs;
+            a = a < b ? a : b;
+            return ref a;
         }
 
         [MethodImpl(Inline)]
-        public static ref long min(ref long lhs, long rhs)
+        public static ref long min(ref long a, long b)
         {
-            lhs = lhs < rhs ? lhs : rhs;
-            return ref lhs;
+            a = a < b ? a : b;
+            return ref a;
         }
 
         [MethodImpl(Inline)]
-        public static ref ulong min(ref ulong lhs, ulong rhs)
+        public static ref ulong min(ref ulong a, ulong b)
         {
-            lhs = lhs < rhs ? lhs : rhs;
-            return ref lhs;
+            a = a < b ? a : b;
+            return ref a;
         }
     }
 }

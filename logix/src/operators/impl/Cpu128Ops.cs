@@ -151,6 +151,30 @@ namespace Z0.Logix
             where T : unmanaged
                 => ginx.vlt(a,b);
 
+        [MethodImpl(Inline)]
+        public static Vector128<T> gt<T>(Vector128<T> a, Vector128<T> b)
+            where T : unmanaged
+                => ginx.vgt(a,b);
+
+        [MethodImpl(Inline)]
+        public static Vector128<T> eq<T>(Vector128<T> a, Vector128<T> b)
+            where T : unmanaged
+                => ginx.vcmpeq(a,b);
+
+        [MethodImpl(Inline)]
+        public static Vector128<T> max<T>(Vector128<T> a, Vector128<T> b)
+            where T : unmanaged
+                => ginx.vmax(a,b);
+
+        [MethodImpl(Inline)]
+        public static Vector128<T> inc<T>(Vector128<T> a)
+            where T : unmanaged
+                => ginx.vinc(a);
+
+        [MethodImpl(Inline)]
+        public static Vector128<T> dec<T>(Vector128<T> a)
+            where T : unmanaged
+                => ginx.vdec(a);
 
         [MethodImpl(Inline)]
         public static Vector128<T> select<T>(Vector128<T> a, Vector128<T> b, Vector128<T> c)

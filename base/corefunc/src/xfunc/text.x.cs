@@ -579,20 +579,27 @@ namespace Z0
         public static string Concat(this IEnumerable<string> src, string sep = null)
             => string.Join(sep ?? string.Empty, src);
 
-        public static string Concat(this Span<string> src, string sep = null)
+        public static string Concat(this Span<string> src, string sep)
         {
             var sb = new StringBuilder();
-            var delim = sep ?? string.Empty;
             for(var i=0; i<src.Length; i++)   
             {
                 ref var cell = ref src[i];
                 if(i != src.Length - 1)
-                    sb.Append($"{cell}{delim}");
+                    sb.Append($"{cell}{sep}");
                 else
                     sb.Append(cell);
             }
             return sb.ToString();
         }
+
+        [MethodImpl(Inline)]
+        public static string Concat(this Span<string> src)
+            => src.Concat(string.Empty);
+
+        [MethodImpl(Inline)]
+        public static string Concat(this Span<string> src, char sep)
+            => src.Concat(sep.ToString());
 
         /// <summary>
         /// Block-formats a string using specified block length and separator

@@ -64,16 +64,29 @@ namespace Z0
         }
 
        [MethodImpl(Inline)]
-       public static Vec128<T> vmax<T>(in Vec128<T> lhs, in Vec128<T> rhs)
+       public static Vector128<T> vmax<T>(Vector128<T> lhs, Vector128<T> rhs)
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return generic<T>(dfp.vmax(in float32(in lhs), in float32(in rhs)));
+                return generic<T>(dfp.vmax(float32(lhs), float32(rhs)));
             else if(typeof(T) == typeof(double))
-                return generic<T>(dfp.vmax(in float64(in lhs), in float64(in rhs)));
+                return generic<T>(dfp.vmax(float64(lhs), float64(rhs)));
             else 
                 throw unsupported<T>();
         }        
+
+       [MethodImpl(Inline)]
+       public static Vector256<T> vmax<T>(Vector256<T> lhs, Vector256<T> rhs)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(float))
+                return generic<T>(dfp.vmax(float32(lhs), float32(rhs)));
+            else if(typeof(T) == typeof(double))
+                return generic<T>(dfp.vmax(float64(lhs), float64(rhs)));
+            else 
+                throw unsupported<T>();
+        }        
+
 
         [MethodImpl(Inline)]
         public static Vector128<T> vand<T>(Vector128<T> lhs, Vector128<T> rhs)
@@ -150,18 +163,6 @@ namespace Z0
                 throw unsupported<T>();
                     
         }
-
-       [MethodImpl(Inline)]
-       public static Vector256<T> vmax<T>(Vector256<T> lhs, Vector256<T> rhs)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(float))
-                return generic<T>(dfp.vmax(float32(lhs), float32(rhs)));
-            else if(typeof(T) == typeof(double))
-                return generic<T>(dfp.vmax(float64(lhs), float64(rhs)));
-            else 
-                throw unsupported<T>();
-        }        
 
         [MethodImpl(Inline)]
         public static Vec128<T> vmin<T>(in Vec128<T> lhs, in Vec128<T> rhs)

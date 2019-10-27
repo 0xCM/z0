@@ -15,56 +15,47 @@ namespace Z0
 
     partial class BitMatrix
     {
-
-        /// <summary>
-        /// Returns true if the source matrix has 0 in each entry and false otherwise
-        /// </summary>
-        /// <param name="A">The matrix to test</param>
+        
         [MethodImpl(Inline)]
-        public static bool testz(BitMatrix8 A)
-            => BitConverter.ToUInt64(A.Data) == 0;
+        public static unsafe bool testz<T>(in BitMatrix<T> A)
+            where T : unmanaged
+                => BitPoints.testz(A.HeadPtr);
 
-        /// <summary>
-        /// Returns true if the source matrix has 0 in each entry and false otherwise
-        /// </summary>
-        /// <param name="A">The matrix to test</param>
         [MethodImpl(Inline)]
-        public static bool testz(BitMatrix16 A)
-        {
-            A.Load(out Vector256<ushort> v);
-            return dinx.vtestz(v,v);
-        }
+        public static unsafe bool testz<T>(in BitMatrix<T> A, in BitMatrix<T> B)
+            where T : unmanaged
+                => BitPoints.testz(A.HeadPtr, B.HeadPtr);
 
-        /// <summary>
-        /// Returns true if the source matrix has 0 in each entry and false otherwise
-        /// </summary>
-        /// <param name="A">The matrix to test</param>
-        public static bool testz(BitMatrix64 A)
-        {
-            const int rowstep = 4;
-            for(var i=0; i< A.RowCount; i += rowstep)
-            {
-                A.Load(i, out Vector256<ulong> v);
-                if(!dinx.vtestz(v, v))
-                    return false;
-            }
-            return true;
-        }        
+        [MethodImpl(Inline)]
+        public static unsafe bool testz(in BitMatrix8 A)
+            => BitPoints.testz(A.HeadPtr);
 
-        /// <summary>
-        /// Returns true if the source matrix has 0 in each entry and false otherwise
-        /// </summary>
-        /// <param name="A">The matrix to test</param>
-        public static bool testz(BitMatrix32 A)
-        {
-            const int rowstep = 8;
-            for(var i=0; i< A.RowCount; i += rowstep)
-            {
-                A.Load(i, out Vector256<uint> vSrc);
-                if(!ginx.vtestz<uint>(vSrc,vSrc))
-                    return false;
-            }
-            return true;
-        }
+        [MethodImpl(Inline)]
+        public static unsafe bool testz(in BitMatrix8 A, in BitMatrix8 B)
+            => BitPoints.testz(A.HeadPtr, B.HeadPtr);
+
+        [MethodImpl(Inline)]
+        public static unsafe bool testz(in BitMatrix16 A)
+            => BitPoints.testz(A.HeadPtr);
+
+        [MethodImpl(Inline)]
+        public static unsafe bool testz(in BitMatrix16 A, in BitMatrix16 B)
+            => BitPoints.testz(A.HeadPtr, B.HeadPtr);
+
+        [MethodImpl(Inline)]
+        public static unsafe bool testz(in BitMatrix32 A)
+            => BitPoints.testz(A.HeadPtr);
+
+        [MethodImpl(Inline)]
+        public static unsafe bool testz(in BitMatrix32 A, in BitMatrix32 B)
+            => BitPoints.testz(A.HeadPtr, B.HeadPtr);
+
+        [MethodImpl(Inline)]
+        public static unsafe bool testz(in BitMatrix64 A)
+            => BitPoints.testz(A.HeadPtr);
+
+        [MethodImpl(Inline)]
+        public static unsafe bool testz(in BitMatrix64 A, in BitMatrix64 B)
+            => BitPoints.testz(A.HeadPtr, B.HeadPtr);
     }
 }

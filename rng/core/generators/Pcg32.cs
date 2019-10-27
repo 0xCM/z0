@@ -11,7 +11,7 @@ namespace Z0
     using static zfunc;
     using static math;
 
-    public class Pcg32 : IStepwiseSource<uint>
+    public class Pcg32 : INavigableSource<uint>
     {
         /// <summary>
         /// Creates a pcg 64-bit rng

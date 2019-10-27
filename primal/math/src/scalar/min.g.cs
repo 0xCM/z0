@@ -18,106 +18,107 @@ namespace Z0
         /// <summary>
         /// mintiplies two primal values
         /// </summary>
-        /// <param name="lhs">The left value</param>
-        /// <param name="rhs">The right value</param>
+        /// <param name="a">The left value</param>
+        /// <param name="b">The right value</param>
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
-        public static T min<T>(T lhs, T rhs)
+        public static T min<T>(T a, T b)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte) 
             || typeof(T) == typeof(ushort) 
             || typeof(T) == typeof(uint) 
             || typeof(T) == typeof(ulong))
-                return minu(lhs,rhs);
+                return min_u(a,b);
             else if(typeof(T) == typeof(sbyte) 
             || typeof(T) == typeof(short) 
             || typeof(T) == typeof(int) 
             || typeof(T) == typeof(long))
-                return mini(lhs,rhs);
-            else return gfp.min(lhs,rhs);
+                return min_i(a,b);
+            else 
+                return gfp.min(a,b);
         }
 
         /// <summary>
         /// mintiplies two primal values
         /// </summary>
-        /// <param name="lhs">The left value</param>
-        /// <param name="rhs">The right value</param>
+        /// <param name="a">The left value</param>
+        /// <param name="b">The right value</param>
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
-        public static ref T min<T>(ref T lhs, T rhs)
+        public static ref T min<T>(ref T a, T b)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte) 
             || typeof(T) == typeof(ushort) 
             || typeof(T) == typeof(uint) 
             || typeof(T) == typeof(ulong))
-                minu(ref lhs,rhs);
+                return ref min_u(ref a,b);
             else if(typeof(T) == typeof(sbyte) 
             || typeof(T) == typeof(short) 
             || typeof(T) == typeof(int) 
             || typeof(T) == typeof(long))
-                mini(ref lhs,rhs);
-            else gfp.min(ref lhs,rhs);
-            return ref lhs;
+                return ref min_i(ref a,b);
+            else 
+                return ref gfp.min(ref a,b);
         }
 
         [MethodImpl(Inline)]
-        static T mini<T>(T lhs, T rhs)
+        static T min_i<T>(T a, T b)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                 return generic<T>(math.min(int8(lhs), int8(rhs)));
+                 return generic<T>(math.min(int8(a), int8(b)));
             else if(typeof(T) == typeof(short))
-                 return generic<T>(math.min(int16(lhs), int16(rhs)));
+                 return generic<T>(math.min(int16(a), int16(b)));
             else if(typeof(T) == typeof(int))
-                 return generic<T>(math.min(int32(lhs), int32(rhs)));
+                 return generic<T>(math.min(int32(a), int32(b)));
             else
-                 return generic<T>(math.min(int64(lhs), int64(rhs)));
+                 return generic<T>(math.min(int64(a), int64(b)));
         }
 
         [MethodImpl(Inline)]
-        static T minu<T>(T lhs, T rhs)
+        static T min_u<T>(T a, T b)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(math.min(uint8(lhs), uint8(rhs)));
+                return generic<T>(math.min(uint8(a), uint8(b)));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(math.min(uint16(lhs), uint16(rhs)));
+                return generic<T>(math.min(uint16(a), uint16(b)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(math.min(uint32(lhs), uint32(rhs)));
+                return generic<T>(math.min(uint32(a), uint32(b)));
             else 
-                return generic<T>(math.min(uint64(lhs), uint64(rhs)));
+                return generic<T>(math.min(uint64(a), uint64(b)));
         }
 
         [MethodImpl(Inline)]
-        static ref T mini<T>(ref T lhs, T rhs)
+        static ref T min_i<T>(ref T a, T b)
             where T : unmanaged
         {
-            if(typeof(T) == typeof(byte))
-                 math.min(ref int8(ref lhs), int8(rhs));
+            if(typeof(T) == typeof(sbyte))
+                 math.min(ref int8(ref a), int8(b));
             else if(typeof(T) == typeof(short))
-                 math.min(ref int16(ref lhs), int16(rhs));
+                 math.min(ref int16(ref a), int16(b));
             else if(typeof(T) == typeof(int))
-                 math.min(ref int32(ref lhs), int32(rhs));
+                 math.min(ref int32(ref a), int32(b));
             else
-                 math.min(ref int64(ref lhs), int64(rhs));
-            return ref lhs;
+                 math.min(ref int64(ref a), int64(b));
+            return ref a;
         }
 
         [MethodImpl(Inline)]
-        static ref T minu<T>(ref T lhs, T rhs)
+        static ref T min_u<T>(ref T a, T b)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                math.min(ref uint8(ref lhs), uint8(rhs));
+                math.min(ref uint8(ref a), uint8(b));
             else if(typeof(T) == typeof(ushort))
-                math.min(ref uint16(ref lhs), uint16(rhs));
+                math.min(ref uint16(ref a), uint16(b));
             else if(typeof(T) == typeof(uint))
-                math.min(ref uint32(ref lhs), uint32(rhs));
+                math.min(ref uint32(ref a), uint32(b));
             else 
-                math.min(ref uint64(ref lhs), uint64(rhs));
-            return ref lhs;
+                math.min(ref uint64(ref a), uint64(b));
+            return ref a;
         }
     }
 }

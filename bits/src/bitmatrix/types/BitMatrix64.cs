@@ -72,6 +72,13 @@ namespace Z0
         public static BitMatrix64 Alloc()        
             => new BitMatrix64(new ulong[N]);
 
+        /// <summary>
+        /// Allocates a matrix with a fill value
+        /// </summary>
+        [MethodImpl(Inline)]
+        public static BitMatrix64 Alloc(bit fill)                
+            => new BitMatrix64(fill);
+
         [MethodImpl(Inline)]
         public static BitMatrix64 From(params ulong[] src)        
             => src.Length == 0 ? Alloc() : new BitMatrix64(src);
@@ -114,7 +121,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static BitMatrix64 operator - (BitMatrix64 A, BitMatrix64 B)
-            => BitMatrix.sub(A,B);
+            => BitMatrix.xornot(A,B);
 
         [MethodImpl(Inline)]
         public static BitMatrix64 operator * (BitMatrix64 A, BitMatrix64 B)
@@ -139,18 +146,13 @@ namespace Z0
             this.data = src;
         }
 
-        // [MethodImpl(Inline)]
-        // BitMatrix64(Span<ulong> src)
-        // {                        
-        //     require(src.Length == Pow2.T06);
-        //     this.data = src;
-        // }
+        BitMatrix64(bit fill)
+        {
+            this.data = new ulong[N];
+            if(fill)
+                Array.Fill(data,ulong.MaxValue);
+        }
 
-        // [MethodImpl(Inline)]
-        // BitMatrix64(Span<N64,ulong> src)
-        // {                        
-        //     this.data = src;
-        // }
 
         /// <summary>
         /// Specifies the number of rows in the matrix
@@ -402,7 +404,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public void XOr(BitMatrix64 rhs)
         {
-            BitMatrix.xor(ref this, rhs);
+            BitMatrix.xor(this, rhs, ref this);
         }
 
         /// <summary>
@@ -412,12 +414,19 @@ namespace Z0
         [MethodImpl(Inline)]
         public void Not()
         {
-            BitMatrix.not(ref this);
+            BitMatrix.not(this, ref this);
         }
  
         [MethodImpl(Inline)] 
         public readonly BitMatrix64 Replicate()
             => From(data.ToArray()); 
+
+        /// <summary>
+        /// Creates a generic matrix from the primal source data
+        /// </summary>
+        [MethodImpl(Inline)]
+        public BitMatrix<ulong> ToGeneric()
+            => new BitMatrix<ulong>(data);
 
         [MethodImpl(Inline)]
         public string Format()
@@ -434,8 +443,7 @@ namespace Z0
             => throw new NotSupportedException();
         
         public override string ToString()
-            => throw new NotSupportedException();
-       
+            => throw new NotSupportedException();       
 
         [MethodImpl(Inline)]
         static unsafe Vec256<ulong> load(ref ulong head)
@@ -509,6 +517,12 @@ namespace Z0
             0, 0, 0, 0, 0, 0, 0, Pow2.T06,
             0, 0, 0, 0, 0, 0, 0, Pow2.T07,
         };
+
+        public unsafe ulong* HeadPtr
+        {
+            [MethodImpl(Inline)]
+            get => refptr(ref Head);
+        }
 
     }
 }

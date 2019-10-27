@@ -240,7 +240,7 @@ namespace Z0
                 {
                     var x = ginx.vextract(dst, (byte)j);
                     var y = ginx.vextract(src, (byte)j);
-                    Claim.eq(x, gbits.srl(y,offset));
+                    Claim.eq(x, gmath.srl(y,offset));
                 }
             }
         }
@@ -258,11 +258,11 @@ namespace Z0
                 {
                     var x = ginx.vextract(ginx.vlo(dst), (byte)j);
                     var y = ginx.vextract(ginx.vlo(src), (byte)j);
-                    Claim.eq(x, gbits.srl(y,offset));
+                    Claim.eq(x, gmath.srl(y,offset));
 
                     x = ginx.vextract(ginx.vhi(dst), (byte)j);
                     y = ginx.vextract(ginx.vhi(src), (byte)j);
-                    Claim.eq(x, gbits.srl(y,offset));
+                    Claim.eq(x, gmath.srl(y,offset));
 
                 }
             }

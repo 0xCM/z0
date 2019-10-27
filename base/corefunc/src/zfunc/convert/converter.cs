@@ -10,6 +10,10 @@ namespace Z0
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;    
     using System.Runtime.InteropServices;    
+    using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
+    using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
+    using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
+
     using static AsIn;
     using static As;
     
@@ -19,132 +23,79 @@ namespace Z0
     {
 
         [MethodImpl(Inline)]   
-        public static T convert<S,T>(in S src)
+        public static T convert<S,T>(S src)
             where T : unmanaged
             where S : unmanaged
         {
-            if(typeof(T) == typeof(sbyte) 
-            || typeof(T) == typeof(short) 
-            || typeof(T) == typeof(int) 
-            || typeof(T) == typeof(long))
-                return converti<S,T>(ref asRef(in src));
-            else if(typeof(T) == typeof(byte) 
-            || typeof(T) == typeof(ushort) 
-            || typeof(T) == typeof(uint) 
-            || typeof(T) == typeof(ulong))
-                return convertu<S,T>(ref asRef(in src));
-            else
-                return convertx<S,T>(ref asRef(in src));
+            if(typeof(S) == typeof(sbyte) ||
+                typeof(S) == typeof(short) ||
+                typeof(S) == typeof(int) ||
+                typeof(S) == typeof(long))
+                return convert_i<S,T>(src);
+            else if(typeof(S) == typeof(byte) ||
+                typeof(S) == typeof(ushort) ||
+                typeof(S) == typeof(uint) ||
+                typeof(S) == typeof(ulong))
+                return convert_u<S,T>(src);
+            else    
+                return convert_x<S,T>(src);
         }
-
         
 
         [MethodImpl(Inline)]
-        static T converti<S,T>(ref S src)
+        static T convert_i<S,T>(S src)
                 where S : unmanaged
                 where T : unmanaged
         {
             if(typeof(S) == typeof(sbyte))
-                return convert<T>(int8(ref src));
+                return convert<T>(int8(src));
             else if(typeof(S) == typeof(short))
-                return convert<T>(int16(ref src));
+                return convert<T>(int16(src));
             else if(typeof(S) == typeof(int))
-                return convert<T>(int32(ref src));
+                return convert<T>(int32(src));
             else 
-                return convert<T>(int64(ref src));                            
+                return convert<T>(int64(src));
         }
 
 
         [MethodImpl(Inline)]
-        static T convertu<S,T>(ref S src)
+        static T convert_u<S,T>(S src)
             where S : unmanaged
             where T : unmanaged
         {
             if(typeof(S) == typeof(byte))
-                return convert<T>(uint8(ref src));
+                return convert<T>(uint8(src));
             else if(typeof(S) == typeof(ushort))
-                return convert<T>(uint16(ref src));
+                return convert<T>(uint16(src));
             else if(typeof(S) == typeof(uint))
-                return convert<T>(uint32(ref src));
+                return convert<T>(uint32(src));
             else
-                return convert<T>(uint64(ref src));
+                return convert<T>(uint64(src));
         }
 
 
-
-
         [MethodImpl(Inline)]
-        static T convertx<S,T>(ref S src)
+        static T convert_x<S,T>(S src)
             where S : unmanaged
             where T : unmanaged
         {
             if(typeof(S) == typeof(float))
-                return convert<T>(float32(ref src));
+                return convert<T>(float32(src));
             else if(typeof(S) == typeof(double))
-                return convert<T>(float64(ref src));
+                return convert<T>(float64(src));
             else if(typeof(S) == typeof(char))
-                return convert<T>(char16(ref src));
+                return convert<T>(char16(src));
             else            
-                throw unsupported<T>();                            
+                return unhandled<S,T>(src);
         }
 
 
-        [MethodImpl(Inline)]
-        static ref sbyte int8<T>(ref T src)
+        static T unhandled<S,T>(S src,[Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             where T : unmanaged
-                => ref Unsafe.As<T,sbyte>(ref src);
-
-        [MethodImpl(Inline)]
-        static ref byte uint8<T>(ref T src)
-            where T : unmanaged
-                => ref Unsafe.As<T,byte>(ref src);
-
-        [MethodImpl(Inline)]
-        static ref short int16<T>(ref T src)
-            where T : unmanaged
-                => ref Unsafe.As<T,short>(ref src);
-
-        [MethodImpl(Inline)]
-        static ref ushort uint16<T>(ref T src)
-            where T : unmanaged
-                => ref Unsafe.As<T,ushort>(ref src);
-
-        [MethodImpl(Inline)]
-        static ref int int32<T>(ref T src)
-            where T : unmanaged
-                => ref Unsafe.As<T,int>(ref src);
-
-        [MethodImpl(Inline)]
-        static ref uint uint32<T>(ref T src)
-            where T : unmanaged
-                => ref Unsafe.As<T,uint>(ref src);
-
-        [MethodImpl(Inline)]
-        static ref long int64<T>(ref T src)
-            where T : unmanaged
-                => ref Unsafe.As<T,long>(ref src);
-
-        [MethodImpl(Inline)]
-        static ref ulong uint64<T>(ref T src)
-            where T : unmanaged
-                => ref Unsafe.As<T,ulong>(ref src);
-
-        [MethodImpl(Inline)]
-        static ref float float32<T>(ref T src)
-            where T : unmanaged
-                => ref Unsafe.As<T,float>(ref src);
-
-        [MethodImpl(Inline)]
-        static ref double float64<T>(ref T src)
-            where T : unmanaged
-                => ref Unsafe.As<T,double>(ref src); //*(double*)(Unsafe.AsPointer(ref src));
-
-        [MethodImpl(Inline)]
-        static ref char char16<T>(ref T src)
-            where T : unmanaged
-                => ref Unsafe.As<T,char>(ref src);
-
-
+        {
+            Errors.Throw($"The conversion {typename<S>()} -> {typename<T>()} needed for the value {src} doesn't exist", caller,file,line);
+            return default;
+        }
 
     }
 }

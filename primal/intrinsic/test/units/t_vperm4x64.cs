@@ -19,25 +19,25 @@ namespace Z0.Test
 
         public void perm4x64_256x64u_methodical()
         {
-            var x = v256(1ul,2,3,4);
+            var x = cpuvec(1ul,2,3,4);
             
-            Vector256<ulong> y = dinx.vperm4x64(x, Perm4.ABCD);
-            Claim.eq(v256(1ul,2,3,4),y);            
+            var y = dinx.vperm4x64(x, Perm4.ABCD);
+            Claim.eq(cpuvec(1ul,2,3,4),y);            
             
             y = dinx.vperm4x64(x, Perm4.ABDC);
-            Claim.eq(v256(1ul,2,4,3), y);
+            Claim.eq(cpuvec(1ul,2,4,3), y);
 
             y = dinx.vperm4x64(x, Perm4.ACBD);
-            Claim.eq(v256(1ul,3,2,4), y);
+            Claim.eq(cpuvec(1ul,3,2,4), y);
 
             y = dinx.vperm4x64(x, Perm4.ACDB);
-            Claim.eq(v256(1ul,3,4,2), y);
+            Claim.eq(cpuvec(1ul,3,4,2), y);
 
             y = dinx.vperm4x64(x, Perm4.ADBC);
-            Claim.eq(v256(1ul,4,2,3), y);
+            Claim.eq(cpuvec(1ul,4,2,3), y);
 
             y = dinx.vperm4x64(x, Perm4.ADCB);
-            Claim.eq(v256(1ul,4,3,2), y);
+            Claim.eq(cpuvec(1ul,4,3,2), y);
 
         }
 
@@ -46,7 +46,7 @@ namespace Z0.Test
             for(var i=0; i<SampleSize; i++)
             {
                 var src = Vec256Pattern.Increments<ulong>();
-                Vector256<ulong> x = dinx.vperm4x64(src, Perm4.BADC);
+                var x = dinx.vperm4x64(src, Perm4.BADC);
                 var srcs = src.ToSpan();
                 var y = Vector256.Create(srcs[1], srcs[0], srcs[3], srcs[2]);
                 Claim.eq(x,y);

@@ -34,7 +34,7 @@ namespace Z0
 
         public Vec256<ulong> perm4x64_256x64(ulong a, ulong b, ulong c, ulong d)
         {            
-            var x = v256(a,b,c,d);
+            var x = cpuvec(a,b,c,d);
             var y = dinx.vperm4x64(x, Perm4.ABCD);            
             y = dinx.vperm4x64(y, Perm4.ABDC);
             y = dinx.vperm4x64(y, Perm4.ACBD);
@@ -46,11 +46,6 @@ namespace Z0
         }
 
 
-        public static Vec256<uint> blend(Vec256<uint> x, Vec256<uint> y)
-            => dinx.vblend(x,y, Blend32x8.LRLRLRLR);
-
-        public static Vec128<uint> blend(Vec128<uint> x, Vec128<uint> y)
-            => dinx.vblend(x,y, Blend32x4.LRLR);
 
         public int Switch14(int x)
         {

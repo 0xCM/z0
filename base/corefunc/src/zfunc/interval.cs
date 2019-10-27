@@ -23,7 +23,7 @@ partial class zfunc
     [MethodImpl(Inline)]
     public static Interval<T> closed<T>(T left, T right)
         where T : unmanaged
-            => Interval.closed(left,right);
+            => new Interval<T>(left,right, IntervalKind.Closed);
 
     /// <summary>
     /// Constructs the left-open(or right-closed interval) interval (left,right]
@@ -34,7 +34,7 @@ partial class zfunc
     [MethodImpl(Inline)]
     public static Interval<T> leftopen<T>(T left, T right)
         where T : unmanaged
-            => Interval.leftopen(left,right);
+            => new Interval<T>(left,right, IntervalKind.LeftOpen);
 
     /// <summary>
     /// Constructs the left-closed (or right-open interval) interval [left,right)
@@ -45,7 +45,7 @@ partial class zfunc
     [MethodImpl(Inline)]
     public static Interval<T> leftclosed<T>(T left, T right)
         where T : unmanaged
-            => Interval.leftclosed(left,right);
+            => new Interval<T>(left,right, IntervalKind.LeftClosed);
 
     /// <summary>
     /// Constructs the left-closed (or right-open interval) interval [left,right)
@@ -56,7 +56,7 @@ partial class zfunc
     [MethodImpl(Inline)]
     public static Interval<T> rightclosed<T>(T left, T right)
         where T : unmanaged
-            => Interval.rightclosed(left,right);
+            => new Interval<T>(left,right, IntervalKind.RightClosed);
 
     /// <summary>
     /// Constructs the open interval (left,right)
@@ -67,5 +67,5 @@ partial class zfunc
     [MethodImpl(Inline)]
     public static Interval<T> open<T>(T left, T right)
         where T : unmanaged
-            => Interval.open(left,right);
+            => new Interval<T>(left,right, IntervalKind.Open);
 }

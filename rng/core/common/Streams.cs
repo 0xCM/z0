@@ -18,7 +18,7 @@ namespace Z0
         [MethodImpl(Inline)]
         static IRandomStream<T> stream<T>(IEnumerable<T> src, RngKind rng)
             where T : struct
-                =>  new RandomStream<T>(rng,src);
+                =>  RandomStream.From(src,rng);
 
         /// <summary>
         /// Produces a random stream of bytes

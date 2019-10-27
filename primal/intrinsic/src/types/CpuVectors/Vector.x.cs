@@ -22,17 +22,6 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <typeparam name="T">The primitive type</typeparam>
         [MethodImpl(Inline)]
-        public static int Length<T>(this in Vec128<T> src)
-            where T : unmanaged            
-                => Vec128<T>.Length;
-
-        /// <summary>
-        /// Specifies the length, i.e. the number of components, of an
-        /// intrnsic vector
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <typeparam name="T">The primitive type</typeparam>
-        [MethodImpl(Inline)]
         public static int Length<T>(this Vector128<T> src)
             where T : unmanaged            
                 => Vec128<T>.Length;
@@ -52,17 +41,6 @@ namespace Z0
             src.StoreTo(ref head(dst));
             return dst;
         }
-
-        /// <summary>
-        /// Specifies the length, i.e. the number of components, of an
-        /// intrnsic vector
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <typeparam name="T">The primitive type</typeparam>
-        [MethodImpl(Inline)]
-        public static int Length<T>(this in Vec256<T> src)
-            where T : unmanaged            
-                => Vec256<T>.Length;    
 
         /// <summary>
         /// Specifies the length, i.e. the number of components, of an
@@ -92,19 +70,7 @@ namespace Z0
         }
 
         /// <summary>
-        /// Loads a 256-bit cpu vector from a blocked span
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <param name="block">The block index</param>
-        /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline)]
-        public static Vec256<T> ToCpuVec256<T>(this Span256<T> src, int block = 0)
-            where T : unmanaged
-                => Vec256.Load(ref src.Block(block));
-
-
-        /// <summary>
-        /// Loads a 256-bit cpu vector from a blocked span
+        /// Loads a 256-bit cpu vector from a compatibly-blocked span
         /// </summary>
         /// <param name="src">The source span</param>
         /// <param name="block">The block index</param>
@@ -114,27 +80,16 @@ namespace Z0
             where T : unmanaged
                 => ginx.vloadu(n256, in src.Block(block));
 
-
-
         /// <summary>
-        /// Projects a 128-bit source vector into a 128-bit target vector via a mapping function
+        /// Loads a 128-bit cpu vector from a compatibly-blocked span
         /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <param name="f">The mapping function</param>
-        /// <typeparam name="S">The source primal type</typeparam>
-        /// <typeparam name="T">The target primal type</typeparam>
-        public static Vec128<T> Map128<S,T>(this Vec128<S> src, Func<S,T> f)
+        /// <param name="src">The source span</param>
+        /// <param name="block">The block index</param>
+        /// <typeparam name="T">The primal type</typeparam>
+        [MethodImpl(Inline)]
+        public static Vector128<T> ToCpuVector<T>(this Span128<T> src, int block = 0)
             where T : unmanaged
-            where S : unmanaged
-        {
-            var xLen = Math.Min(Vec128<S>.Length, Vec128<T>.Length);
-            var dstLen = Vec128<T>.Length;
-            var data = src.ToSpan();            
-            Span<T> dst = new T[dstLen];
-            for(var i=0; i< xLen; i++)
-                dst[i] = f(src[i]);
-            return Vec128.Load(ref head(dst));        
-        } 
+                => ginx.vloadu(n128, in src.Block(block));
 
         /// <summary>
         /// Combines two 128-bit source vectors into a 128-bit target vector via a mapping function
@@ -144,7 +99,7 @@ namespace Z0
         /// <param name="f">The mapping function</param>
         /// <typeparam name="S">The source primal type</typeparam>
         /// <typeparam name="T">The target primal type</typeparam>
-        public static Vector128<T> Map128<S,T>(this Vector128<S> lhs, Vector128<S> rhs, Func<S,S,T> f)
+        public static Vector128<T> Map<S,T>(this Vector128<S> lhs, Vector128<S> rhs, Func<S,S,T> f)
             where T : unmanaged
             where S : unmanaged
         {
@@ -155,7 +110,7 @@ namespace Z0
             Span<T> dst = new T[dstLen];
             for(var i=0; i< xLen; i++)
                 dst[i] = f(lhsData[i],rhsData[i]);
-            return ginx.vloadu128(in head(dst));        
+            return ginx.vloadu(n128, in head(dst));        
         } 
 
         /// <summary>
@@ -165,7 +120,7 @@ namespace Z0
         /// <param name="f">The mapping function</param>
         /// <typeparam name="S">The source primal type</typeparam>
         /// <typeparam name="T">The target primal type</typeparam>
-        public static Vector128<T> Map128<S,T>(this Vector128<S> src, Func<S,T> f)
+        public static Vector128<T> Map<S,T>(this Vector128<S> src, Func<S,T> f)
             where T : unmanaged
             where S : unmanaged
         {
@@ -175,7 +130,7 @@ namespace Z0
             Span<T> dst = new T[dstLen];
             for(var i=0; i< xLen; i++)
                 dst[i] = f(data[i]);
-            return ginx.vloadu128(in head(dst));        
+            return ginx.vloadu(n128, in head(dst));        
         } 
 
         /// <summary>
@@ -183,18 +138,18 @@ namespace Z0
         /// dst[j] = f(lhs[i])
         /// dst[j+1] = f(rhs[i])
         /// </summary>
-        /// <param name="lhs">The left source vector</param>
-        /// <param name="rhs">The right source vector</param>
+        /// <param name="x">The left source vector</param>
+        /// <param name="y">The right source vector</param>
         /// <param name="f">The mapping function</param>
         /// <typeparam name="S">The source primal type</typeparam>
         /// <typeparam name="T">The target primal type</typeparam>
-        public static Vec256<T> Map256<T>(this Vector128<T> lhs, Vector128<T> rhs, Func<T,T> f)
+        public static Vector256<T> Merge<T>(this Vector128<T> x, Vector128<T> y, Func<T,T> f)
             where T : unmanaged
         {
             var srcLen = Vec128<T>.Length;
             var dstLen = 2*srcLen;
-            var lhsData = lhs.ToSpan();
-            var rhsData = rhs.ToSpan();
+            var lhsData = x.ToSpan();
+            var rhsData = y.ToSpan();
             Span<T> dst = new T[dstLen];
             var j=0;
             for(var i=0; i< srcLen; i++)
@@ -203,7 +158,7 @@ namespace Z0
                 dst[j++] = f(rhsData[i]);
             }
             
-            return Vec256.Load(ref head(dst));        
+            return ginx.vloadu(n256, in head(dst));        
         } 
 
         /// <summary>
@@ -213,7 +168,7 @@ namespace Z0
         /// <param name="f">The mapping function</param>
         /// <typeparam name="S">The source primal type</typeparam>
         /// <typeparam name="T">The target primal type</typeparam>
-        public static Vector256<T> Map256<S,T>(this Vector256<S> src, Func<S,T> f)
+        public static Vector256<T> Map<S,T>(this Vector256<S> src, Func<S,T> f)
             where T : unmanaged
             where S : unmanaged
         {
@@ -223,29 +178,29 @@ namespace Z0
             Span<T> dst = new T[dstLen];
             for(var i=0; i< xLen; i++)
                 dst[i] = f(data[i]);            
-            return ginx.vloadu256(in head(dst));        
+            return ginx.vloadu(n256, in head(dst));        
         } 
 
         /// <summary>
         /// Combines two 128-bit source vectors into a 128-bit target vector via a mapping function
         /// </summary>
-        /// <param name="lhs">The left source vector</param>
-        /// <param name="rhs">The right source vector</param>
+        /// <param name="x">The left source vector</param>
+        /// <param name="y">The right source vector</param>
         /// <param name="f">The mapping function</param>
         /// <typeparam name="S">The source primal type</typeparam>
         /// <typeparam name="T">The target primal type</typeparam>
-        public static Vector256<T> Map256<S,T>(this Vector256<S> lhs, Vector256<S> rhs, Func<S,S,T> f)
+        public static Vector256<T> Map<S,T>(this Vector256<S> x, Vector256<S> y, Func<S,S,T> f)
             where T : unmanaged
             where S : unmanaged
         {
             var xLen = Math.Min(Vector256<S>.Count, Vector256<T>.Count);
             var dstLen = Vector256<T>.Count;
-            var lhsData = lhs.ToSpan();
-            var rhsData = rhs.ToSpan();
+            var lhsData = x.ToSpan();
+            var rhsData = y.ToSpan();
             Span<T> dst = new T[dstLen];
             for(var i=0; i< xLen; i++)
                 dst[i] = f(lhsData[i],rhsData[i]);
-            return ginx.vloadu256(in head(dst));        
+            return ginx.vloadu(n256, in head(dst));        
         } 
     }
 }

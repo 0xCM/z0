@@ -23,7 +23,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">A readonly memory reference</param>
         [MethodImpl(Inline)]
-        public static unsafe Vec128<byte> vloada128(in byte src)
+        public static unsafe Vector128<byte> vloada(N128 n, in byte src)
             => LoadAlignedVector128(constptr(in src));
 
         /// <summary>
@@ -32,7 +32,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">A readonly memory reference</param>
         [MethodImpl(Inline)]
-        public static unsafe Vec128<sbyte> vloada128(in sbyte src)
+        public static unsafe Vector128<sbyte> vloada(N128 n, in sbyte src)
             => LoadAlignedVector128(constptr(in src));
 
         /// <summary>
@@ -41,7 +41,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">A readonly memory reference</param>
         [MethodImpl(Inline)]
-        public static unsafe Vec128<short> vloada128(in short src)
+        public static unsafe Vector128<short> vloada(N128 n, in short src)
             => LoadAlignedVector128(constptr(in src));
 
         /// <summary>
@@ -50,7 +50,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">A readonly memory reference</param>
         [MethodImpl(Inline)]
-        public static unsafe Vec128<ushort> vloada128(in ushort src)
+        public static unsafe Vector128<ushort> vloada(N128 n, in ushort src)
             => LoadAlignedVector128(constptr(in src));
 
         /// <summary>
@@ -59,7 +59,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">A readonly memory reference</param>
         [MethodImpl(Inline)]
-        public static unsafe Vec128<int> vloada128(in int src)
+        public static unsafe Vector128<int> vloada(N128 n, in int src)
             => LoadAlignedVector128(constptr(in src));
 
         /// <summary>
@@ -68,7 +68,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">A readonly memory reference</param>
         [MethodImpl(Inline)]
-        public static unsafe Vec128<uint> vloada128(in uint src)
+        public static unsafe Vector128<uint> vloada(N128 n, in uint src)
             => LoadAlignedVector128(constptr(in src));
 
         /// <summary>
@@ -77,7 +77,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">A readonly memory reference</param>
         [MethodImpl(Inline)]
-        public static unsafe Vec128<long> vloada128(in long src)
+        public static unsafe Vector128<long> vloada(N128 n, in long src)
             => LoadAlignedVector128(constptr(in src));
  
         /// <summary>
@@ -86,7 +86,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">A readonly memory reference</param>
         [MethodImpl(Inline)]
-        public static unsafe Vec128<ulong> vloada128(in ulong src)
+        public static unsafe Vector128<ulong> vloada(N128 n, in ulong src)
             => LoadAlignedVector128(constptr(in src));
 
         /// <summary>
@@ -95,7 +95,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">A readonly memory reference</param>
         [MethodImpl(Inline)]
-        public static unsafe Vec256<byte> vloada256(in byte src)
+        public static unsafe Vector256<byte> vloada(N256 n, in byte src)
             => LoadAlignedVector256(constptr(in src));
 
         /// <summary>
@@ -104,7 +104,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">A readonly memory reference</param>
         [MethodImpl(Inline)]
-        public static unsafe Vec256<sbyte> vloada256(in sbyte src)
+        public static unsafe Vector256<sbyte> vloada(N256 n, in sbyte src)
             => LoadAlignedVector256(constptr(in src));
 
         /// <summary>
@@ -113,7 +113,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">A readonly memory reference</param>
         [MethodImpl(Inline)]
-        public static unsafe Vec256<short> vloada256(in short src)
+        public static unsafe Vector256<short> vloada(N256 n, in short src)
             => LoadAlignedVector256(constptr(in src));
 
         /// <summary>
@@ -122,7 +122,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">A readonly memory reference</param>
         [MethodImpl(Inline)]
-        public static unsafe Vec256<ushort> vloada256(in ushort src)
+        public static unsafe Vector256<ushort> vloada(N256 n, in ushort src)
             => LoadAlignedVector256(constptr(in src));
 
         /// <summary>
@@ -131,7 +131,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">A readonly memory reference</param>
         [MethodImpl(Inline)]
-        public static unsafe Vec256<int> vloada256(in int src)
+        public static unsafe Vector256<int> vloada(N256 n, in int src)
             => LoadAlignedVector256(constptr(in src));
 
         /// <summary>
@@ -140,7 +140,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">A readonly memory reference</param>
         [MethodImpl(Inline)]
-        public static unsafe Vec256<uint> vloada256(in uint src)
+        public static unsafe Vector256<uint> vloada(N256 n, in uint src)
             => LoadAlignedVector256(constptr(in src));
 
         /// <summary>
@@ -149,7 +149,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">A readonly memory reference</param>
         [MethodImpl(Inline)]
-        public static unsafe Vec256<long> vloada256(in long src)
+        public static unsafe Vector256<long> vloada(N256 n, in long src)
             => LoadAlignedVector256(constptr(in src));
  
         /// <summary>
@@ -158,7 +158,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">A readonly memory reference</param>
         [MethodImpl(Inline)]
-        public static unsafe Vec256<ulong> vloada256(in ulong src)
+        public static unsafe Vector256<ulong> vloada(N256 n, in ulong src)
             => LoadAlignedVector256(constptr(in src));
  
     }

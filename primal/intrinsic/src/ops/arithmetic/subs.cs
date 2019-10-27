@@ -27,8 +27,8 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vec128<byte> subs(in Vec128<byte> x, in Vec128<byte> y)        
-            => SubtractSaturate(x.xmm, y.xmm);
+        public static Vector128<byte> subs(Vector128<byte> x, Vector128<byte> y)        
+            => SubtractSaturate(x, y);
 
         /// <summary>
         /// __m128i _mm_subs_epi8 (__m128i a, __m128i b) PSUBSB xmm, xmm/m128
@@ -36,8 +36,8 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vec128<sbyte> subs(in Vec128<sbyte> x, in Vec128<sbyte> y)        
-            => SubtractSaturate(x.xmm, y.xmm);
+        public static Vector128<sbyte> subs(Vector128<sbyte> x, Vector128<sbyte> y)        
+            => SubtractSaturate(x, y);
 
         /// <summary>
         /// __m128i _mm_subs_epi16 (__m128i a, __m128i b) PSUBSW xmm, xmm/m128
@@ -45,8 +45,8 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vec128<short> subs(in Vec128<short> x, in Vec128<short> y)        
-            => SubtractSaturate(x.xmm, y.xmm);
+        public static Vector128<short> subs(Vector128<short> x, Vector128<short> y)        
+            => SubtractSaturate(x, y);
 
         /// <summary>
         /// __m128i _mm_subs_epi16 (__m128i a, __m128i b)PSUBSW xmm, xmm/m128
@@ -54,8 +54,8 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]        
-        public static Vec128<ushort> subs(in Vec128<ushort> x, in Vec128<ushort> y)        
-            => SubtractSaturate(x.xmm, y.xmm);
+        public static Vector128<ushort> subs(Vector128<ushort> x, Vector128<ushort> y)        
+            => SubtractSaturate(x, y);
 
         /// <summary>
         ///  __m256i _mm256_subs_epu8 (__m256i a, __m256i b)VPSUBUSB ymm, ymm, ymm/m256
@@ -63,8 +63,8 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<byte> subs(in Vec256<byte> x, in Vec256<byte> y)        
-            => SubtractSaturate(x.ymm, y.ymm);
+        public static Vector256<byte> subs(Vector256<byte> x, Vector256<byte> y)        
+            => SubtractSaturate(x, y);
         
         /// <summary>
         ///  __m256i _mm256_subs_epi8 (__m256i a, __m256i b)VPSUBSB ymm, ymm, ymm/m256
@@ -72,8 +72,8 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<sbyte> subs(in Vec256<sbyte> x, in Vec256<sbyte> y)        
-            => SubtractSaturate(x.ymm, y.ymm);
+        public static Vector256<sbyte> subs(Vector256<sbyte> x, Vector256<sbyte> y)        
+            => SubtractSaturate(x, y);
 
         /// <summary>
         /// __m256i _mm256_subs_epi16 (__m256i a, __m256i b)VPSUBSW ymm, ymm, ymm/m256
@@ -81,8 +81,8 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]        
-        public static Vec256<short> subs(in Vec256<short> x, in Vec256<short> y)        
-            => SubtractSaturate(x.ymm, y.ymm);
+        public static Vector256<short> subs(Vector256<short> x, Vector256<short> y)        
+            => SubtractSaturate(x, y);
 
         /// <summary>
         /// __m256i _mm256_subs_epu16 (__m256i a, __m256i b) VPSUBUSW ymm, ymm, ymm/m256
@@ -90,8 +90,8 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<ushort> subs(in Vec256<ushort> x, in Vec256<ushort> y)        
-            => SubtractSaturate(x.ymm, y.ymm);
+        public static Vector256<ushort> subs(Vector256<ushort> x, Vector256<ushort> y)        
+            => SubtractSaturate(x, y);
     }
 
 }

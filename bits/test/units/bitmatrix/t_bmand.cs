@@ -14,33 +14,70 @@ namespace Z0
     
     public class tbm_and : BitMatrixTest<tbm_and>
     {
-        void bm_and_4x4_check_fixme()
-        {            
-            for(var i=0; i<SampleSize; i++)
+        protected override int CycleCount => Pow2.T10;
+
+        public void bmand_8x8g_check()
+            => bmand_check<byte>();
+
+        public void bmand_16x16g_check()
+            => bmand_check<ushort>();
+
+        public void bmand_32x32g_check()
+            => bmand_check<uint>();
+
+        public void bmand_64x64g_check()
+            => bmand_check<ulong>();
+        
+        public void bmand_8x8g_bench()
+            => bmand_gbench<byte>();
+
+        public void bmand_16x16g_bench()
+            => bmand_gbench<ushort>();
+
+        public void bmand_32x32g_bench()
+            => bmand_gbench<uint>();
+
+        public void bmand_64x64g_bench()
+            => bmand_gbench<ulong>();
+
+        void bmand_gbench<T>()
+            where T : unmanaged
+        {
+            var count = counter();
+            var A = BitMatrix.alloc<T>();
+            var B = BitMatrix.alloc<T>();
+            var C = BitMatrix.alloc<T>();
+
+            for(var i=0; i<OpCount; i++)
             {
-                var x = Random.BitMatrix(n4);
-                var y = Random.BitMatrix(n4);
-
-                var xBytes = x.Data.Replicate();
-                var yBytes = y.Data.Replicate();
-                var zBytes = mathspan.xor(xBytes, yBytes);
-                var expect = BitMatrix4.Define(zBytes);
-
-                var actual = x ^ y;
-                Claim.yea(expect == actual);                
+                Random.BitMatrix<T>(ref A);
+                Random.BitMatrix<T>(ref B);
+                count.Start();
+                BitMatrix.and(A,B, ref C);
+                count.Stop();
             }
+
+            var n = BitMatrix<T>.N;
+            Benchmark($"bmand_{n}x{n}g", count);
         }
 
 
-        public void ms_and_8u_check()
+        void bmand_check<T>()
+            where T : unmanaged
         {
-            for(var i=0; i<SampleSize; i++)
+            for(var i = 0; i< SampleSize; i++)
             {
-                var x = Random.Span<byte>(SampleSize);
-                var y = Random.Span<byte>(SampleSize);
-                var z0 = mathspan.and(x,y);
-                for(var j=0; j<z0.Length; j++)
-                    Claim.eq((byte)(x[i] & y[i]), z0[i]);
+                var A = Random.BitMatrix<T>();
+                var B = Random.BitMatrix<T>();
+                var C = BitMatrix.alloc<T>();                
+                BitMatrix.and(A,B, ref C);
+
+                var rbA = A.ToRowBits();
+                var rbB = B.ToRowBits();
+                var rbC = rbA & rbB;
+
+                Claim.yea(BitMatrix.eq(rbC.ToBitMatrix(),C));
+                                                                        
             }
         }
 
@@ -54,15 +91,11 @@ namespace Z0
                 for(var j=0; j<dst.Length; j++)
                     dst[j] = (byte)(A.Bytes[j] & B.Bytes[j]);
                 var expect = BitMatrix8.From(dst);
-
-
-                //var expect = BitMatrix8.From(mathspan.and(A.Bytes.Replicate(), B.Bytes));
-
                 var C = A & B;
-
                 Claim.yea(expect == C);                
             }
         }
+
 
         public void bmand_8x8x8g_bench()
         {
@@ -121,20 +154,6 @@ namespace Z0
             }
         }
 
-        public void bmand_32x32x32d_bench()
-        {
-            var sw = stopwatch(false);
-            for(var i=0; i<OpCount; i++)
-            {
-                var x = Random.BitMatrix(n32);
-                var y = Random.BitMatrix(n32);
-                sw.Start();
-                var result = x & y;                               
-                sw.Stop();
-            }
-            OpTime time = (OpCount, sw, "bmand_32x32x32d");            
-            Collect(time);
-        }
 
         public void bmand_32x32x32g_check()
         {            
@@ -190,18 +209,27 @@ namespace Z0
             }
         }
 
-        public void bmand_64x64x64d_bench()
+        public void bmand_ng_64x64x64g_check()
+            => bmand_NxNg_check<N64,ulong>();
+
+        public void bmand_ng_37x37x16g_check()
+            => bmand_NxNg_check<N64,ushort>();
+
+        public void bmand_ng_256x256x32g_check()
+            => bmand_NxNg_check<N256,uint>();
+
+        void bmand_NxNg_check<N,T>()
+            where N : unmanaged, ITypeNat
+            where T : unmanaged
         {
-            var sw = stopwatch(false);
-            for(var i=0; i<OpCount; i++)
+            for(var i=0; i<SampleSize; i++)
             {
-                var x = Random.BitMatrix(n64);
-                var y = Random.BitMatrix(n64);
-                sw.Start();
-                var result = x & y;                               
-                sw.Stop();
+                var A = Random.BitMatrix<N,T>();
+                var B = Random.BitMatrix<N,T>();
+                var C1 = BitMatrix.and(in A, in B).Data;
+                var C2 = mathspan.and(A.Data, B.Data);
+                Claim.eq(C1,C2);
             }
-            Collect((OpCount, sw, "bmand_64x64x64d"));            
         }
 
         public void bmand_64x64x64g_check()

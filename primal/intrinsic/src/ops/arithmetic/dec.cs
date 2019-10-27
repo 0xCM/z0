@@ -13,131 +13,131 @@ namespace Z0
     partial class dinx    
     {
         /// <summary>
-        /// Inrements each component by 1
+        /// Decrements each component by 1
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
-        public static Vec128<sbyte> vdec(in Vec128<sbyte> src)
+        public static Vector128<sbyte> vdec(Vector128<sbyte> src)
             =>  vsub(src, ginx.vpUnits<sbyte>(n128));
 
         /// <summary>
-        /// Inrements each component by 1
+        /// Decrements each component by 1
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
-        public static Vec128<byte> vdec(in Vec128<byte> src)
+        public static Vector128<byte> vdec(Vector128<byte> src)
             =>  vsub(src, ginx.vpUnits<byte>(n128));
 
         /// <summary>
-        /// Inrements each component by 1
+        /// Decrements each component by 1
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
-        public static Vec128<short> vdec(in Vec128<short> src)
+        public static Vector128<short> vdec(Vector128<short> src)
             =>  vsub(src, ginx.vpUnits<short>(n128));
 
         /// <summary>
-        /// Inrements each component by 1
+        /// Decrements each component by 1
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
-        public static Vec128<ushort> vdec(in Vec128<ushort> src)
+        public static Vector128<ushort> vdec(Vector128<ushort> src)
             =>  vsub(src, ginx.vpUnits<ushort>(n128));
 
         /// <summary>
-        /// Inrements each component by 1
+        /// Decrements each component by 1
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
-        public static Vec128<int> vdec(in Vec128<int> src)
+        public static Vector128<int> vdec(Vector128<int> src)
             =>  vsub(src, ginx.vpUnits<int>(n128));
 
         /// <summary>
-        /// Inrements each component by 1
+        /// Decrements each component by 1
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
-        public static Vec128<uint> vdec(in Vec128<uint> src)
+        public static Vector128<uint> vdec(Vector128<uint> src)
             =>  vsub(src, ginx.vpUnits<uint>(n128));
 
         /// <summary>
-        /// Inrements each component by 1
+        /// Decrements each component by 1
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
-        public static Vec128<long> vdec(in Vec128<long> src)
+        public static Vector128<long> vdec(Vector128<long> src)
             =>  vsub(src, ginx.vpUnits<long>(n128));
 
         /// <summary>
-        /// Inrements each component by 1
+        /// Decrements each component by 1
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
-        public static Vec128<ulong> vdec(in Vec128<ulong> src)
+        public static Vector128<ulong> vdec(Vector128<ulong> src)
             =>  vsub(src, ginx.vpUnits<ulong>(n128));
 
         /// <summary>
-        /// Inrements each component by 1
+        /// Decrements each component by 1
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<sbyte> vdec(in Vec256<sbyte> src)
+        public static Vector256<sbyte> vdec(Vector256<sbyte> src)
             =>  vsub(src, ginx.vpUnits<sbyte>(n256));
 
         /// <summary>
-        /// Inrements each component by 1
+        /// Decrements each component by 1
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<byte> vdec(in Vec256<byte> src)
+        public static Vector256<byte> vdec(Vector256<byte> src)
             =>  vsub(src, ginx.vpUnits<byte>(n256));
 
         /// <summary>
-        /// Inrements each component by 1
+        /// Decrements each component by 1
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<short> vdec(in Vec256<short> src)
+        public static Vector256<short> vdec(Vector256<short> src)
             =>  vsub(src, ginx.vpUnits<short>(n256));
 
         /// <summary>
-        /// Inrements each component by 1
+        /// Decrements each component by 1
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<ushort> vdec(in Vec256<ushort> src)
+        public static Vector256<ushort> vdec(Vector256<ushort> src)
             =>  vsub(src, ginx.vpUnits<ushort>(n256));
 
         /// <summary>
-        /// Inrements each component by 1
+        /// Decrements each component by 1
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<int> vdec(in Vec256<int> src)
+        public static Vector256<int> vdec(Vector256<int> src)
             =>  vsub(src, ginx.vpUnits<int>(n256));
 
         /// <summary>
-        /// Inrements each component by 1
+        /// Decrements each component by 1
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<uint> vdec(in Vec256<uint> src)
+        public static Vector256<uint> vdec(Vector256<uint> src)
             =>  vsub(src, ginx.vpUnits<uint>(n256));
 
         /// <summary>
-        /// Inrements each component by 1
+        /// Decrements each component by 1
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<long> vdec(in Vec256<long> src)
+        public static Vector256<long> vdec(Vector256<long> src)
             =>  vsub(src, ginx.vpUnits<long>(n256));
 
         /// <summary>
-        /// Inrements each component by 1
+        /// Decrements each component by 1
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<ulong> vdec(in Vec256<ulong> src)
+        public static Vector256<ulong> vdec(Vector256<ulong> src)
             =>  vsub(src, ginx.vpUnits<ulong>(n256));
 
 

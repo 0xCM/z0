@@ -49,6 +49,10 @@ namespace Z0
             return new BitMatrix<N, T>(src);
         }
 
+        [MethodImpl(Inline)]
+        public static BitMatrix<N,T> Load(Span<T> data)
+            => new BitMatrix<N, T>(data);
+
         /// <summary>
         /// Multiplies the left matrix by the right
         /// </summary>
@@ -103,6 +107,12 @@ namespace Z0
 
         [MethodImpl(Inline)]
         BitMatrix(T[] src)
+        {
+            this.data = src;
+        }
+
+        [MethodImpl(Inline)]
+        BitMatrix(Span<T> src)
         {
             this.data = src;
         }

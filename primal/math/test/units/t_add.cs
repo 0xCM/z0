@@ -19,6 +19,7 @@ namespace Z0.Test
 
         public void add_g8i_bench()
         {
+            var x = closed(1,2);
             gadd_bench<sbyte>();
 
         }

@@ -13,19 +13,11 @@ namespace Z0
     public class t_partition : UnitTest<t_partition>
     {        
 
-        public void points()
+
+        public void part_points_32i_check()
         {
             points_check(0, 99, 1);
-            points_check(0.0, 99.0, 1.0);
-            points_check(0.0, 100, 0.5);
-            points_check(0.0, 100, 0.72);
             points_check(0, 99, 1);
-            points_check(0u, 99u, 1u);
-            points_check(0L, 99L, 1u);
-            points_check(0ul,99ul, 1ul);
-            points_check(-250.75, 100.20, 1.0);
-            points_check(-250.75f, 100.20f, 1.0f);
-
             points_check(100, 233, 5);
             points_check(100, 234, 5);
             points_check(100, 235, 5);
@@ -33,19 +25,50 @@ namespace Z0
 
         }
 
+        public void part_points_32u_check()
+        {
+            points_check(0u, 99u, 1u);
+
+        }
+
+        public void part_points_64i_check()
+        {
+            points_check(0L, 99L, 1L);
+        }
+
+        public void part_points_64u_check()
+        {
+            points_check(0ul,99ul, 1ul);
+
+        }
+
+        public void part_points_32f_check()
+        {
+            points_check(-250.75f, 100.20f, 1.0f);
+
+        }
+
+        public void part_points_64f_check()
+        {
+            points_check(0.0, 99.0, 1.0);
+            points_check(0.0, 100, 0.5);
+            points_check(-250.75, 100.20, 1.0);
+
+        }
+
         public void part0()
         {
             var src = leftclosed(5,12);
-            var dst = src.StepwisePartitionPoints(1);
+            var dst = src.PartPoints();
             var fmt = dst.Map(x => x.ToString()).Concat(", ");
-            Claim.eq(src.Width() + 1, dst.Length);            
+            Claim.eq(src.Length() + 1, dst.Length);            
             items(5,6,7,8,9,10,11,12).ToSpan().ClaimEqual(dst);
         }
 
         public void part1()
         {
             var src = leftclosed(5,20);
-            var dst = src.StepwisePartition(1);
+            var dst = src.Partition();
             var fmt = dst.Map(x => x.ToString()).Concat(" + ");
             Claim.eq(src.Right - src.Left, dst.Length);
             Claim.eq(leftclosed(5,6), dst.First());
@@ -56,7 +79,7 @@ namespace Z0
         public void part2()
         {
             var src = closed(5,20);
-            var dst = src.StepwisePartition(1);
+            var dst = src.Partition();
             var fmt = dst.Map(x => x.ToString()).Concat(" + ");
             Claim.eq(src.Right - src.Left, dst.Length);
             Claim.eq(leftclosed(5,6), dst.First());
@@ -66,7 +89,7 @@ namespace Z0
         public void part3()
         {
             var src = open(5,20);
-            var dst = src.StepwisePartition(1);
+            var dst = src.Partition();
             var fmt = dst.Map(x => x.ToString()).Concat(" + ");
             Claim.eq(src.Right - src.Left, dst.Length);
             Claim.eq(open(5,6), dst.First());
@@ -77,34 +100,35 @@ namespace Z0
         public void part4()
         {
             var src = leftopen(1,100);
-            var dst = src.PartitionPoints(10);
+            var dst = src.PartPointByCount(10);
             Claim.eq(10,dst.Length);
             Claim.eq(1, dst.First());
             Claim.eq(100, dst.Last());
         }
 
+        
         public void part6()
         {
             var src = closed(1,103);
             var dst = src.Partition(13);            
-            var fmt = dst.Map(x => x.ToString()).Concat(" + ");   
-            Claim.yea(dst.Last().RightClosed);
+            var fmt = dst.Map(x => x.Format()).Concat(" + ");  
+            Claim.yea(dst.Last().Closed);
         }
 
-        void points_check<T>(T min, T max, T step)
+        void points_check<T>(T min, T max, T width)
             where T : unmanaged
         {
-            var points = open(min, max).StepwisePartitionPoints(step); 
-            var width = gmath.sub(max,min);
+            var points = open(min, max).PartPoints(width); 
+            var len = gmath.sub(max,min);
             var deltaSum = gmath.zero<T>();
             for(var i=0; i<points.Length - 1; i++)           
             {
                 var left = points[i];
-                var right = points[i + 1];
+                var right = points[i + 1];                
                 gmath.add<T>(ref deltaSum, gmath.sub(right,left));                
             }
 
-            Claim.eq(width, deltaSum);                        
+            Claim.eq(len, deltaSum);                        
         }
     }
 }

@@ -1,4 +1,192 @@
-// 2019-10-25 21:50:48:396
+// 2019-10-27 03:48:28:709
+bool positive(ulong x)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldc.i4.0
+    IL_0002: conv.i8
+    IL_0003: cgt.un
+    IL_0005: ret
+
+}
+bool positive(float x)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldc.r4 0
+    IL_0006: cgt
+    IL_0008: ret
+
+}
+bool positive(double x)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldc.r8 0
+    IL_000A: cgt
+    IL_000C: ret
+
+}
+sbyte pow(sbyte b, uint exp)
+{
+    IL_0000: ldarg.1
+    IL_0001: brtrue.s IL_0005
+    IL_0003: ldc.i4.1
+    IL_0004: ret
+    IL_0005: ldc.i4.1
+    IL_0006: stloc.0
+    IL_0007: ldarg.1
+    IL_0008: ldc.i4.1
+    IL_0009: and
+    IL_000A: brfalse.s IL_0011
+    IL_000C: ldloc.0
+    IL_000D: ldarg.0
+    IL_000E: mul
+    IL_000F: conv.i1
+    IL_0010: stloc.0
+    IL_0011: ldarg.1
+    IL_0012: ldc.i4.1
+    IL_0013: shr.un
+    IL_0014: starg.s exp
+    IL_0016: ldarg.1
+    IL_0017: brfalse.s IL_0021
+    IL_0019: ldarg.0
+    IL_001A: ldarg.0
+    IL_001B: mul
+    IL_001C: conv.i1
+    IL_001D: starg.s b
+    IL_001F: br.s IL_0007
+    IL_0021: ldloc.0
+    IL_0022: ret
+
+}
+byte pow(byte b, uint exp)
+{
+    IL_0000: ldarg.1
+    IL_0001: brtrue.s IL_0005
+    IL_0003: ldc.i4.1
+    IL_0004: ret
+    IL_0005: ldc.i4.1
+    IL_0006: stloc.0
+    IL_0007: ldarg.1
+    IL_0008: ldc.i4.1
+    IL_0009: and
+    IL_000A: brfalse.s IL_0011
+    IL_000C: ldloc.0
+    IL_000D: ldarg.0
+    IL_000E: mul
+    IL_000F: conv.u1
+    IL_0010: stloc.0
+    IL_0011: ldarg.1
+    IL_0012: ldc.i4.1
+    IL_0013: shr.un
+    IL_0014: starg.s exp
+    IL_0016: ldarg.1
+    IL_0017: brfalse.s IL_0021
+    IL_0019: ldarg.0
+    IL_001A: ldarg.0
+    IL_001B: mul
+    IL_001C: conv.u1
+    IL_001D: starg.s b
+    IL_001F: br.s IL_0007
+    IL_0021: ldloc.0
+    IL_0022: ret
+
+}
+short pow(short b, uint exp)
+{
+    IL_0000: ldarg.1
+    IL_0001: brtrue.s IL_0005
+    IL_0003: ldc.i4.1
+    IL_0004: ret
+    IL_0005: ldc.i4.1
+    IL_0006: stloc.0
+    IL_0007: ldarg.1
+    IL_0008: ldc.i4.1
+    IL_0009: and
+    IL_000A: brfalse.s IL_0011
+    IL_000C: ldloc.0
+    IL_000D: ldarg.0
+    IL_000E: mul
+    IL_000F: conv.i2
+    IL_0010: stloc.0
+    IL_0011: ldarg.1
+    IL_0012: ldc.i4.1
+    IL_0013: shr.un
+    IL_0014: starg.s exp
+    IL_0016: ldarg.1
+    IL_0017: brfalse.s IL_0021
+    IL_0019: ldarg.0
+    IL_001A: ldarg.0
+    IL_001B: mul
+    IL_001C: conv.i2
+    IL_001D: starg.s b
+    IL_001F: br.s IL_0007
+    IL_0021: ldloc.0
+    IL_0022: ret
+
+}
+ushort pow(ushort b, uint exp)
+{
+    IL_0000: ldarg.1
+    IL_0001: brtrue.s IL_0005
+    IL_0003: ldc.i4.1
+    IL_0004: ret
+    IL_0005: ldc.i4.1
+    IL_0006: stloc.0
+    IL_0007: ldarg.1
+    IL_0008: ldc.i4.1
+    IL_0009: and
+    IL_000A: brfalse.s IL_0011
+    IL_000C: ldloc.0
+    IL_000D: ldarg.0
+    IL_000E: mul
+    IL_000F: conv.u2
+    IL_0010: stloc.0
+    IL_0011: ldarg.1
+    IL_0012: ldc.i4.1
+    IL_0013: shr.un
+    IL_0014: starg.s exp
+    IL_0016: ldarg.1
+    IL_0017: brfalse.s IL_0021
+    IL_0019: ldarg.0
+    IL_001A: ldarg.0
+    IL_001B: mul
+    IL_001C: conv.u2
+    IL_001D: starg.s b
+    IL_001F: br.s IL_0007
+    IL_0021: ldloc.0
+    IL_0022: ret
+
+}
+int pow(int b, uint exp)
+{
+    IL_0000: ldarg.1
+    IL_0001: brtrue.s IL_0005
+    IL_0003: ldc.i4.1
+    IL_0004: ret
+    IL_0005: ldc.i4.1
+    IL_0006: stloc.0
+    IL_0007: ldarg.1
+    IL_0008: ldc.i4.1
+    IL_0009: and
+    IL_000A: brfalse.s IL_0010
+    IL_000C: ldloc.0
+    IL_000D: ldarg.0
+    IL_000E: mul
+    IL_000F: stloc.0
+    IL_0010: ldarg.1
+    IL_0011: ldc.i4.1
+    IL_0012: shr.un
+    IL_0013: starg.s exp
+    IL_0015: ldarg.1
+    IL_0016: brfalse.s IL_001F
+    IL_0018: ldarg.0
+    IL_0019: ldarg.0
+    IL_001A: mul
+    IL_001B: starg.s b
+    IL_001D: br.s IL_0007
+    IL_001F: ldloc.0
+    IL_0020: ret
+
+}
 uint pow(uint b, uint exp)
 {
     IL_0000: ldarg.1
@@ -604,191 +792,242 @@ ref ulong sub(ref ulong lhs, ulong rhs)
     IL_0007: ret
 
 }
-bool within(byte lhs, byte rhs, byte epsilon)
+bool isPow2(ushort src)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.0
+    IL_0002: ldc.i4.1
+    IL_0003: sub
+    IL_0004: and
+    IL_0005: ldc.i4.0
+    IL_0006: ceq
+    IL_0008: ret
+
+}
+bool isPow2(int src)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.0
+    IL_0002: ldc.i4.1
+    IL_0003: sub
+    IL_0004: and
+    IL_0005: ldc.i4.0
+    IL_0006: ceq
+    IL_0008: ret
+
+}
+bool isPow2(uint src)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.0
+    IL_0002: ldc.i4.1
+    IL_0003: sub
+    IL_0004: and
+    IL_0005: ldc.i4.0
+    IL_0006: ceq
+    IL_0008: ret
+
+}
+bool isPow2(long src)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.0
+    IL_0002: ldc.i4.1
+    IL_0003: conv.i8
+    IL_0004: sub
+    IL_0005: and
+    IL_0006: ldc.i4.0
+    IL_0007: conv.i8
+    IL_0008: ceq
+    IL_000A: ret
+
+}
+bool isPow2(ulong src)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.0
+    IL_0002: ldc.i4.1
+    IL_0003: conv.i8
+    IL_0004: sub
+    IL_0005: and
+    IL_0006: ldc.i4.0
+    IL_0007: conv.i8
+    IL_0008: ceq
+    IL_000A: ret
+
+}
+ref ulong log2(ref ulong dst, ref ulong x, ulong power)
+{
+    IL_0000: ldarg.1
+    IL_0001: ldind.i8
+    IL_0002: ldc.i4.1
+    IL_0003: conv.i8
+    IL_0004: ldarg.2
+    IL_0005: conv.i4
+    IL_0006: ldc.i4.s 63
+    IL_0008: and
+    IL_0009: shl
+    IL_000A: blt.un.s IL_001C
+    IL_000C: ldarg.1
+    IL_000D: ldarg.1
+    IL_000E: ldind.i8
+    IL_000F: ldarg.2
+    IL_0010: conv.i4
+    IL_0011: ldc.i4.s 63
+    IL_0013: and
+    IL_0014: shr.un
+    IL_0015: stind.i8
+    IL_0016: ldarg.0
+    IL_0017: ldarg.0
+    IL_0018: ldind.i8
+    IL_0019: ldarg.2
+    IL_001A: or
+    IL_001B: stind.i8
+    IL_001C: ldarg.0
+    IL_001D: ret
+
+}
+ulong log2(ulong src)
+{
+    IL_0000: ldc.i4.0
+    IL_0001: conv.i8
+    IL_0002: stloc.0
+    IL_0003: ldarg.0
+    IL_0004: stloc.1
+    IL_0005: ldloca.s V_0
+    IL_0007: ldloca.s V_1
+    IL_0009: ldc.i4.s 32
+    IL_000B: conv.i8
+    IL_000C: call System.UInt64& Z0.math::log2(System.UInt64&,System.UInt64&,System.UInt64)
+    IL_0011: pop
+    IL_0012: ldloca.s V_0
+    IL_0014: ldloca.s V_1
+    IL_0016: ldc.i4.s 16
+    IL_0018: conv.i8
+    IL_0019: call System.UInt64& Z0.math::log2(System.UInt64&,System.UInt64&,System.UInt64)
+    IL_001E: pop
+    IL_001F: ldloca.s V_0
+    IL_0021: ldloca.s V_1
+    IL_0023: ldc.i4.8
+    IL_0024: conv.i8
+    IL_0025: call System.UInt64& Z0.math::log2(System.UInt64&,System.UInt64&,System.UInt64)
+    IL_002A: pop
+    IL_002B: ldloca.s V_0
+    IL_002D: ldloca.s V_1
+    IL_002F: ldc.i4.4
+    IL_0030: conv.i8
+    IL_0031: call System.UInt64& Z0.math::log2(System.UInt64&,System.UInt64&,System.UInt64)
+    IL_0036: pop
+    IL_0037: ldloca.s V_0
+    IL_0039: ldloca.s V_1
+    IL_003B: ldc.i4.2
+    IL_003C: conv.i8
+    IL_003D: call System.UInt64& Z0.math::log2(System.UInt64&,System.UInt64&,System.UInt64)
+    IL_0042: pop
+    IL_0043: ldloc.1
+    IL_0044: ldc.i4.2
+    IL_0045: conv.i8
+    IL_0046: blt.un.s IL_004D
+    IL_0048: ldloc.0
+    IL_0049: ldc.i4.1
+    IL_004A: conv.i8
+    IL_004B: or
+    IL_004C: stloc.0
+    IL_004D: ldloc.0
+    IL_004E: ret
+
+}
+ulong log2(int src)
+{
+    IL_0000: ldarg.0
+    IL_0001: conv.i8
+    IL_0002: call System.UInt64 Z0.math::log2(System.UInt64)
+    IL_0007: ret
+
+}
+uint log2(uint src)
+{
+    IL_0000: ldarg.0
+    IL_0001: conv.u8
+    IL_0002: call System.UInt64 Z0.math::log2(System.UInt64)
+    IL_0007: conv.u4
+    IL_0008: ret
+
+}
+byte log2(byte src)
+{
+    IL_0000: ldarg.0
+    IL_0001: conv.u8
+    IL_0002: call System.UInt64 Z0.math::log2(System.UInt64)
+    IL_0007: conv.u1
+    IL_0008: ret
+
+}
+ushort log2(ushort src)
+{
+    IL_0000: ldarg.0
+    IL_0001: conv.u8
+    IL_0002: call System.UInt64 Z0.math::log2(System.UInt64)
+    IL_0007: conv.u2
+    IL_0008: ret
+
+}
+sbyte max(sbyte a, sbyte b)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: bgt.s IL_000E
+    IL_0002: bgt.s IL_0006
     IL_0004: ldarg.1
-    IL_0005: ldarg.0
-    IL_0006: sub
-    IL_0007: ldarg.2
-    IL_0008: cgt
-    IL_000A: ldc.i4.0
-    IL_000B: ceq
-    IL_000D: ret
-    IL_000E: ldarg.0
-    IL_000F: ldarg.1
-    IL_0010: sub
-    IL_0011: ldarg.2
-    IL_0012: cgt
-    IL_0014: ldc.i4.0
-    IL_0015: ceq
-    IL_0017: ret
+    IL_0005: ret
+    IL_0006: ldarg.0
+    IL_0007: ret
 
 }
-bool within(sbyte lhs, sbyte rhs, sbyte epsilon)
+byte max(byte a, byte b)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: bgt.s IL_000E
+    IL_0002: bgt.s IL_0006
     IL_0004: ldarg.1
-    IL_0005: ldarg.0
-    IL_0006: sub
-    IL_0007: ldarg.2
-    IL_0008: cgt
-    IL_000A: ldc.i4.0
-    IL_000B: ceq
-    IL_000D: ret
-    IL_000E: ldarg.0
-    IL_000F: ldarg.1
-    IL_0010: sub
-    IL_0011: ldarg.2
-    IL_0012: cgt
-    IL_0014: ldc.i4.0
-    IL_0015: ceq
-    IL_0017: ret
+    IL_0005: ret
+    IL_0006: ldarg.0
+    IL_0007: ret
 
 }
-bool within(short lhs, short rhs, short epsilon)
+short max(short a, short b)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: bgt.s IL_000E
+    IL_0002: bgt.s IL_0006
     IL_0004: ldarg.1
-    IL_0005: ldarg.0
-    IL_0006: sub
-    IL_0007: ldarg.2
-    IL_0008: cgt
-    IL_000A: ldc.i4.0
-    IL_000B: ceq
-    IL_000D: ret
-    IL_000E: ldarg.0
-    IL_000F: ldarg.1
-    IL_0010: sub
-    IL_0011: ldarg.2
-    IL_0012: cgt
-    IL_0014: ldc.i4.0
-    IL_0015: ceq
-    IL_0017: ret
+    IL_0005: ret
+    IL_0006: ldarg.0
+    IL_0007: ret
 
 }
-bool within(ushort lhs, ushort rhs, ushort epsilon)
+ushort max(ushort a, ushort b)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: bgt.s IL_000E
+    IL_0002: bgt.s IL_0006
     IL_0004: ldarg.1
-    IL_0005: ldarg.0
-    IL_0006: sub
-    IL_0007: ldarg.2
-    IL_0008: cgt
-    IL_000A: ldc.i4.0
-    IL_000B: ceq
-    IL_000D: ret
-    IL_000E: ldarg.0
-    IL_000F: ldarg.1
-    IL_0010: sub
-    IL_0011: ldarg.2
-    IL_0012: cgt
-    IL_0014: ldc.i4.0
-    IL_0015: ceq
-    IL_0017: ret
+    IL_0005: ret
+    IL_0006: ldarg.0
+    IL_0007: ret
 
 }
-bool within(int lhs, int rhs, int epsilon)
+int max(int a, int b)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: bgt.s IL_000E
+    IL_0002: bgt.s IL_0006
     IL_0004: ldarg.1
-    IL_0005: ldarg.0
-    IL_0006: sub
-    IL_0007: ldarg.2
-    IL_0008: cgt
-    IL_000A: ldc.i4.0
-    IL_000B: ceq
-    IL_000D: ret
-    IL_000E: ldarg.0
-    IL_000F: ldarg.1
-    IL_0010: sub
-    IL_0011: ldarg.2
-    IL_0012: cgt
-    IL_0014: ldc.i4.0
-    IL_0015: ceq
-    IL_0017: ret
+    IL_0005: ret
+    IL_0006: ldarg.0
+    IL_0007: ret
 
 }
-bool within(uint lhs, uint rhs, uint epsilon)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: bgt.un.s IL_000E
-    IL_0004: ldarg.1
-    IL_0005: ldarg.0
-    IL_0006: sub
-    IL_0007: ldarg.2
-    IL_0008: cgt.un
-    IL_000A: ldc.i4.0
-    IL_000B: ceq
-    IL_000D: ret
-    IL_000E: ldarg.0
-    IL_000F: ldarg.1
-    IL_0010: sub
-    IL_0011: ldarg.2
-    IL_0012: cgt.un
-    IL_0014: ldc.i4.0
-    IL_0015: ceq
-    IL_0017: ret
-
-}
-bool within(long lhs, long rhs, long epsilon)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: bgt.s IL_000E
-    IL_0004: ldarg.1
-    IL_0005: ldarg.0
-    IL_0006: sub
-    IL_0007: ldarg.2
-    IL_0008: cgt
-    IL_000A: ldc.i4.0
-    IL_000B: ceq
-    IL_000D: ret
-    IL_000E: ldarg.0
-    IL_000F: ldarg.1
-    IL_0010: sub
-    IL_0011: ldarg.2
-    IL_0012: cgt
-    IL_0014: ldc.i4.0
-    IL_0015: ceq
-    IL_0017: ret
-
-}
-bool within(ulong lhs, ulong rhs, ulong epsilon)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: bgt.un.s IL_000E
-    IL_0004: ldarg.1
-    IL_0005: ldarg.0
-    IL_0006: sub
-    IL_0007: ldarg.2
-    IL_0008: cgt.un
-    IL_000A: ldc.i4.0
-    IL_000B: ceq
-    IL_000D: ret
-    IL_000E: ldarg.0
-    IL_000F: ldarg.1
-    IL_0010: sub
-    IL_0011: ldarg.2
-    IL_0012: cgt.un
-    IL_0014: ldc.i4.0
-    IL_0015: ceq
-    IL_0017: ret
-
-}
-ulong max(ulong lhs, ulong rhs)
+uint max(uint a, uint b)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
@@ -799,7 +1038,29 @@ ulong max(ulong lhs, ulong rhs)
     IL_0007: ret
 
 }
-ref sbyte max(ref sbyte lhs, sbyte rhs)
+long max(long a, long b)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: bgt.s IL_0006
+    IL_0004: ldarg.1
+    IL_0005: ret
+    IL_0006: ldarg.0
+    IL_0007: ret
+
+}
+ulong max(ulong a, ulong b)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: bgt.un.s IL_0006
+    IL_0004: ldarg.1
+    IL_0005: ret
+    IL_0006: ldarg.0
+    IL_0007: ret
+
+}
+ref sbyte max(ref sbyte a, sbyte b)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.0
@@ -815,7 +1076,7 @@ ref sbyte max(ref sbyte lhs, sbyte rhs)
     IL_000D: ret
 
 }
-ref byte max(ref byte lhs, byte rhs)
+ref byte max(ref byte a, byte b)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.0
@@ -831,7 +1092,7 @@ ref byte max(ref byte lhs, byte rhs)
     IL_000D: ret
 
 }
-ref short max(ref short lhs, short rhs)
+ref short max(ref short a, short b)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.0
@@ -847,7 +1108,7 @@ ref short max(ref short lhs, short rhs)
     IL_000D: ret
 
 }
-ref ushort max(ref ushort lhs, ushort rhs)
+ref ushort max(ref ushort a, ushort b)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.0
@@ -863,7 +1124,7 @@ ref ushort max(ref ushort lhs, ushort rhs)
     IL_000D: ret
 
 }
-ref int max(ref int lhs, int rhs)
+ref int max(ref int a, int b)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.0
@@ -879,7 +1140,7 @@ ref int max(ref int lhs, int rhs)
     IL_000D: ret
 
 }
-ref uint max(ref uint lhs, uint rhs)
+ref uint max(ref uint a, uint b)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.0
@@ -895,7 +1156,7 @@ ref uint max(ref uint lhs, uint rhs)
     IL_000D: ret
 
 }
-ref long max(ref long lhs, long rhs)
+ref long max(ref long a, long b)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.0
@@ -911,7 +1172,7 @@ ref long max(ref long lhs, long rhs)
     IL_000D: ret
 
 }
-ref ulong max(ref ulong lhs, ulong rhs)
+ref ulong max(ref ulong a, ulong b)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.0
@@ -927,7 +1188,7 @@ ref ulong max(ref ulong lhs, ulong rhs)
     IL_000D: ret
 
 }
-sbyte min(sbyte lhs, sbyte rhs)
+sbyte min(sbyte a, sbyte b)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
@@ -938,7 +1199,7 @@ sbyte min(sbyte lhs, sbyte rhs)
     IL_0007: ret
 
 }
-byte min(byte lhs, byte rhs)
+byte min(byte a, byte b)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
@@ -949,7 +1210,7 @@ byte min(byte lhs, byte rhs)
     IL_0007: ret
 
 }
-short min(short lhs, short rhs)
+short min(short a, short b)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
@@ -960,7 +1221,7 @@ short min(short lhs, short rhs)
     IL_0007: ret
 
 }
-ushort min(ushort lhs, ushort rhs)
+ushort min(ushort a, ushort b)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
@@ -971,7 +1232,7 @@ ushort min(ushort lhs, ushort rhs)
     IL_0007: ret
 
 }
-int min(int lhs, int rhs)
+int min(int a, int b)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
@@ -982,7 +1243,7 @@ int min(int lhs, int rhs)
     IL_0007: ret
 
 }
-uint min(uint lhs, uint rhs)
+uint min(uint a, uint b)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
@@ -993,7 +1254,7 @@ uint min(uint lhs, uint rhs)
     IL_0007: ret
 
 }
-long min(long lhs, long rhs)
+long min(long a, long b)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
@@ -1004,7 +1265,7 @@ long min(long lhs, long rhs)
     IL_0007: ret
 
 }
-ulong min(ulong lhs, ulong rhs)
+ulong min(ulong a, ulong b)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
@@ -1015,7 +1276,7 @@ ulong min(ulong lhs, ulong rhs)
     IL_0007: ret
 
 }
-ref sbyte min(ref sbyte lhs, sbyte rhs)
+ref sbyte min(ref sbyte a, sbyte b)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.0
@@ -1031,7 +1292,7 @@ ref sbyte min(ref sbyte lhs, sbyte rhs)
     IL_000D: ret
 
 }
-ref byte min(ref byte lhs, byte rhs)
+ref byte min(ref byte a, byte b)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.0
@@ -1047,7 +1308,7 @@ ref byte min(ref byte lhs, byte rhs)
     IL_000D: ret
 
 }
-ref short min(ref short lhs, short rhs)
+ref short min(ref short a, short b)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.0
@@ -1063,7 +1324,7 @@ ref short min(ref short lhs, short rhs)
     IL_000D: ret
 
 }
-ref ushort min(ref ushort lhs, ushort rhs)
+ref ushort min(ref ushort a, ushort b)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.0
@@ -1079,7 +1340,7 @@ ref ushort min(ref ushort lhs, ushort rhs)
     IL_000D: ret
 
 }
-ref int min(ref int lhs, int rhs)
+ref int min(ref int a, int b)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.0
@@ -1095,7 +1356,7 @@ ref int min(ref int lhs, int rhs)
     IL_000D: ret
 
 }
-ref uint min(ref uint lhs, uint rhs)
+ref uint min(ref uint a, uint b)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.0
@@ -1111,7 +1372,7 @@ ref uint min(ref uint lhs, uint rhs)
     IL_000D: ret
 
 }
-ref long min(ref long lhs, long rhs)
+ref long min(ref long a, long b)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.0
@@ -1127,7 +1388,7 @@ ref long min(ref long lhs, long rhs)
     IL_000D: ret
 
 }
-ref ulong min(ref ulong lhs, ulong rhs)
+ref ulong min(ref ulong a, ulong b)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.0
@@ -1833,92 +2094,6 @@ bool negative(double x)
     IL_000C: ret
 
 }
-bool nonzero(sbyte src)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldc.i4.0
-    IL_0002: cgt.un
-    IL_0004: ret
-
-}
-bool nonzero(byte src)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldc.i4.0
-    IL_0002: cgt.un
-    IL_0004: ret
-
-}
-bool nonzero(short src)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldc.i4.0
-    IL_0002: cgt.un
-    IL_0004: ret
-
-}
-bool nonzero(ushort src)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldc.i4.0
-    IL_0002: cgt.un
-    IL_0004: ret
-
-}
-bool nonzero(int src)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldc.i4.0
-    IL_0002: cgt.un
-    IL_0004: ret
-
-}
-bool nonzero(uint src)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldc.i4.0
-    IL_0002: cgt.un
-    IL_0004: ret
-
-}
-bool nonzero(long src)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldc.i4.0
-    IL_0002: conv.i8
-    IL_0003: cgt.un
-    IL_0005: ret
-
-}
-bool nonzero(ulong src)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldc.i4.0
-    IL_0002: conv.i8
-    IL_0003: cgt.un
-    IL_0005: ret
-
-}
-bool nonzero(float src)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldc.r4 0
-    IL_0006: ceq
-    IL_0008: ldc.i4.0
-    IL_0009: ceq
-    IL_000B: ret
-
-}
-bool nonzero(double src)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldc.r8 0
-    IL_000A: ceq
-    IL_000C: ldc.i4.0
-    IL_000D: ceq
-    IL_000F: ret
-
-}
 sbyte parse(string src, out sbyte dst)
 {
     IL_0000: ldarg.1
@@ -2096,7 +2271,335 @@ bool positive(long x)
     IL_0005: ret
 
 }
-bool positive(ulong x)
+bool gt(byte a, byte b)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: cgt
+    IL_0004: ret
+
+}
+bool gt(short a, short b)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: cgt
+    IL_0004: ret
+
+}
+bool gt(ushort a, ushort b)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: cgt
+    IL_0004: ret
+
+}
+bool gt(int a, int b)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: cgt
+    IL_0004: ret
+
+}
+bool gt(uint a, uint b)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: cgt.un
+    IL_0004: ret
+
+}
+bool gt(long a, long b)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: cgt
+    IL_0004: ret
+
+}
+bool gt(ulong a, ulong b)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: cgt.un
+    IL_0004: ret
+
+}
+bool gteq(sbyte a, sbyte b)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: clt
+    IL_0004: ldc.i4.0
+    IL_0005: ceq
+    IL_0007: ret
+
+}
+bool gteq(byte a, byte b)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: clt
+    IL_0004: ldc.i4.0
+    IL_0005: ceq
+    IL_0007: ret
+
+}
+bool gteq(short a, short b)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: clt
+    IL_0004: ldc.i4.0
+    IL_0005: ceq
+    IL_0007: ret
+
+}
+bool gteq(ushort a, ushort b)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: clt
+    IL_0004: ldc.i4.0
+    IL_0005: ceq
+    IL_0007: ret
+
+}
+bool gteq(int a, int b)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: clt
+    IL_0004: ldc.i4.0
+    IL_0005: ceq
+    IL_0007: ret
+
+}
+bool gteq(uint a, uint b)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: clt.un
+    IL_0004: ldc.i4.0
+    IL_0005: ceq
+    IL_0007: ret
+
+}
+bool gteq(long a, long b)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: clt
+    IL_0004: ldc.i4.0
+    IL_0005: ceq
+    IL_0007: ret
+
+}
+bool gteq(ulong a, ulong b)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: clt.un
+    IL_0004: ldc.i4.0
+    IL_0005: ceq
+    IL_0007: ret
+
+}
+bool lt(sbyte lhs, sbyte rhs)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: clt
+    IL_0004: ret
+
+}
+bool lt(byte lhs, byte rhs)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: clt
+    IL_0004: ret
+
+}
+bool lt(short lhs, short rhs)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: clt
+    IL_0004: ret
+
+}
+bool lt(ushort lhs, ushort rhs)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: clt
+    IL_0004: ret
+
+}
+bool lt(int lhs, int rhs)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: clt
+    IL_0004: ret
+
+}
+bool lt(uint lhs, uint rhs)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: clt.un
+    IL_0004: ret
+
+}
+bool lt(long lhs, long rhs)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: clt
+    IL_0004: ret
+
+}
+bool lt(ulong lhs, ulong rhs)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: clt.un
+    IL_0004: ret
+
+}
+bool lteq(sbyte lhs, sbyte rhs)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: cgt
+    IL_0004: ldc.i4.0
+    IL_0005: ceq
+    IL_0007: ret
+
+}
+bool lteq(byte lhs, byte rhs)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: cgt
+    IL_0004: ldc.i4.0
+    IL_0005: ceq
+    IL_0007: ret
+
+}
+bool lteq(short lhs, short rhs)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: cgt
+    IL_0004: ldc.i4.0
+    IL_0005: ceq
+    IL_0007: ret
+
+}
+bool lteq(ushort lhs, ushort rhs)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: cgt
+    IL_0004: ldc.i4.0
+    IL_0005: ceq
+    IL_0007: ret
+
+}
+bool lteq(int lhs, int rhs)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: cgt
+    IL_0004: ldc.i4.0
+    IL_0005: ceq
+    IL_0007: ret
+
+}
+bool lteq(uint lhs, uint rhs)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: cgt.un
+    IL_0004: ldc.i4.0
+    IL_0005: ceq
+    IL_0007: ret
+
+}
+bool lteq(long lhs, long rhs)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: cgt
+    IL_0004: ldc.i4.0
+    IL_0005: ceq
+    IL_0007: ret
+
+}
+bool lteq(ulong lhs, ulong rhs)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: cgt.un
+    IL_0004: ldc.i4.0
+    IL_0005: ceq
+    IL_0007: ret
+
+}
+bool nonzero(sbyte src)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldc.i4.0
+    IL_0002: cgt.un
+    IL_0004: ret
+
+}
+bool nonzero(byte src)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldc.i4.0
+    IL_0002: cgt.un
+    IL_0004: ret
+
+}
+bool nonzero(short src)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldc.i4.0
+    IL_0002: cgt.un
+    IL_0004: ret
+
+}
+bool nonzero(ushort src)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldc.i4.0
+    IL_0002: cgt.un
+    IL_0004: ret
+
+}
+bool nonzero(int src)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldc.i4.0
+    IL_0002: cgt.un
+    IL_0004: ret
+
+}
+bool nonzero(uint src)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldc.i4.0
+    IL_0002: cgt.un
+    IL_0004: ret
+
+}
+bool nonzero(long src)
 {
     IL_0000: ldarg.0
     IL_0001: ldc.i4.0
@@ -2105,183 +2608,422 @@ bool positive(ulong x)
     IL_0005: ret
 
 }
-bool positive(float x)
+bool nonzero(ulong src)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldc.i4.0
+    IL_0002: conv.i8
+    IL_0003: cgt.un
+    IL_0005: ret
+
+}
+bool nonzero(float src)
 {
     IL_0000: ldarg.0
     IL_0001: ldc.r4 0
-    IL_0006: cgt
-    IL_0008: ret
+    IL_0006: ceq
+    IL_0008: ldc.i4.0
+    IL_0009: ceq
+    IL_000B: ret
 
 }
-bool positive(double x)
+bool nonzero(double src)
 {
     IL_0000: ldarg.0
     IL_0001: ldc.r8 0
-    IL_000A: cgt
-    IL_000C: ret
+    IL_000A: ceq
+    IL_000C: ldc.i4.0
+    IL_000D: ceq
+    IL_000F: ret
 
 }
-sbyte pow(sbyte b, uint exp)
+bool within(byte lhs, byte rhs, byte epsilon)
 {
-    IL_0000: ldarg.1
-    IL_0001: brtrue.s IL_0005
-    IL_0003: ldc.i4.1
-    IL_0004: ret
-    IL_0005: ldc.i4.1
-    IL_0006: stloc.0
-    IL_0007: ldarg.1
-    IL_0008: ldc.i4.1
-    IL_0009: and
-    IL_000A: brfalse.s IL_0011
-    IL_000C: ldloc.0
-    IL_000D: ldarg.0
-    IL_000E: mul
-    IL_000F: conv.i1
-    IL_0010: stloc.0
-    IL_0011: ldarg.1
-    IL_0012: ldc.i4.1
-    IL_0013: shr.un
-    IL_0014: starg.s exp
-    IL_0016: ldarg.1
-    IL_0017: brfalse.s IL_0021
-    IL_0019: ldarg.0
-    IL_001A: ldarg.0
-    IL_001B: mul
-    IL_001C: conv.i1
-    IL_001D: starg.s b
-    IL_001F: br.s IL_0007
-    IL_0021: ldloc.0
-    IL_0022: ret
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: bgt.s IL_000E
+    IL_0004: ldarg.1
+    IL_0005: ldarg.0
+    IL_0006: sub
+    IL_0007: ldarg.2
+    IL_0008: cgt
+    IL_000A: ldc.i4.0
+    IL_000B: ceq
+    IL_000D: ret
+    IL_000E: ldarg.0
+    IL_000F: ldarg.1
+    IL_0010: sub
+    IL_0011: ldarg.2
+    IL_0012: cgt
+    IL_0014: ldc.i4.0
+    IL_0015: ceq
+    IL_0017: ret
 
 }
-byte pow(byte b, uint exp)
+bool within(sbyte lhs, sbyte rhs, sbyte epsilon)
 {
-    IL_0000: ldarg.1
-    IL_0001: brtrue.s IL_0005
-    IL_0003: ldc.i4.1
-    IL_0004: ret
-    IL_0005: ldc.i4.1
-    IL_0006: stloc.0
-    IL_0007: ldarg.1
-    IL_0008: ldc.i4.1
-    IL_0009: and
-    IL_000A: brfalse.s IL_0011
-    IL_000C: ldloc.0
-    IL_000D: ldarg.0
-    IL_000E: mul
-    IL_000F: conv.u1
-    IL_0010: stloc.0
-    IL_0011: ldarg.1
-    IL_0012: ldc.i4.1
-    IL_0013: shr.un
-    IL_0014: starg.s exp
-    IL_0016: ldarg.1
-    IL_0017: brfalse.s IL_0021
-    IL_0019: ldarg.0
-    IL_001A: ldarg.0
-    IL_001B: mul
-    IL_001C: conv.u1
-    IL_001D: starg.s b
-    IL_001F: br.s IL_0007
-    IL_0021: ldloc.0
-    IL_0022: ret
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: bgt.s IL_000E
+    IL_0004: ldarg.1
+    IL_0005: ldarg.0
+    IL_0006: sub
+    IL_0007: ldarg.2
+    IL_0008: cgt
+    IL_000A: ldc.i4.0
+    IL_000B: ceq
+    IL_000D: ret
+    IL_000E: ldarg.0
+    IL_000F: ldarg.1
+    IL_0010: sub
+    IL_0011: ldarg.2
+    IL_0012: cgt
+    IL_0014: ldc.i4.0
+    IL_0015: ceq
+    IL_0017: ret
 
 }
-short pow(short b, uint exp)
+bool within(short lhs, short rhs, short epsilon)
 {
-    IL_0000: ldarg.1
-    IL_0001: brtrue.s IL_0005
-    IL_0003: ldc.i4.1
-    IL_0004: ret
-    IL_0005: ldc.i4.1
-    IL_0006: stloc.0
-    IL_0007: ldarg.1
-    IL_0008: ldc.i4.1
-    IL_0009: and
-    IL_000A: brfalse.s IL_0011
-    IL_000C: ldloc.0
-    IL_000D: ldarg.0
-    IL_000E: mul
-    IL_000F: conv.i2
-    IL_0010: stloc.0
-    IL_0011: ldarg.1
-    IL_0012: ldc.i4.1
-    IL_0013: shr.un
-    IL_0014: starg.s exp
-    IL_0016: ldarg.1
-    IL_0017: brfalse.s IL_0021
-    IL_0019: ldarg.0
-    IL_001A: ldarg.0
-    IL_001B: mul
-    IL_001C: conv.i2
-    IL_001D: starg.s b
-    IL_001F: br.s IL_0007
-    IL_0021: ldloc.0
-    IL_0022: ret
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: bgt.s IL_000E
+    IL_0004: ldarg.1
+    IL_0005: ldarg.0
+    IL_0006: sub
+    IL_0007: ldarg.2
+    IL_0008: cgt
+    IL_000A: ldc.i4.0
+    IL_000B: ceq
+    IL_000D: ret
+    IL_000E: ldarg.0
+    IL_000F: ldarg.1
+    IL_0010: sub
+    IL_0011: ldarg.2
+    IL_0012: cgt
+    IL_0014: ldc.i4.0
+    IL_0015: ceq
+    IL_0017: ret
 
 }
-ushort pow(ushort b, uint exp)
+bool within(ushort lhs, ushort rhs, ushort epsilon)
 {
-    IL_0000: ldarg.1
-    IL_0001: brtrue.s IL_0005
-    IL_0003: ldc.i4.1
-    IL_0004: ret
-    IL_0005: ldc.i4.1
-    IL_0006: stloc.0
-    IL_0007: ldarg.1
-    IL_0008: ldc.i4.1
-    IL_0009: and
-    IL_000A: brfalse.s IL_0011
-    IL_000C: ldloc.0
-    IL_000D: ldarg.0
-    IL_000E: mul
-    IL_000F: conv.u2
-    IL_0010: stloc.0
-    IL_0011: ldarg.1
-    IL_0012: ldc.i4.1
-    IL_0013: shr.un
-    IL_0014: starg.s exp
-    IL_0016: ldarg.1
-    IL_0017: brfalse.s IL_0021
-    IL_0019: ldarg.0
-    IL_001A: ldarg.0
-    IL_001B: mul
-    IL_001C: conv.u2
-    IL_001D: starg.s b
-    IL_001F: br.s IL_0007
-    IL_0021: ldloc.0
-    IL_0022: ret
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: bgt.s IL_000E
+    IL_0004: ldarg.1
+    IL_0005: ldarg.0
+    IL_0006: sub
+    IL_0007: ldarg.2
+    IL_0008: cgt
+    IL_000A: ldc.i4.0
+    IL_000B: ceq
+    IL_000D: ret
+    IL_000E: ldarg.0
+    IL_000F: ldarg.1
+    IL_0010: sub
+    IL_0011: ldarg.2
+    IL_0012: cgt
+    IL_0014: ldc.i4.0
+    IL_0015: ceq
+    IL_0017: ret
 
 }
-int pow(int b, uint exp)
+bool within(int lhs, int rhs, int epsilon)
 {
-    IL_0000: ldarg.1
-    IL_0001: brtrue.s IL_0005
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: bgt.s IL_000E
+    IL_0004: ldarg.1
+    IL_0005: ldarg.0
+    IL_0006: sub
+    IL_0007: ldarg.2
+    IL_0008: cgt
+    IL_000A: ldc.i4.0
+    IL_000B: ceq
+    IL_000D: ret
+    IL_000E: ldarg.0
+    IL_000F: ldarg.1
+    IL_0010: sub
+    IL_0011: ldarg.2
+    IL_0012: cgt
+    IL_0014: ldc.i4.0
+    IL_0015: ceq
+    IL_0017: ret
+
+}
+bool within(uint lhs, uint rhs, uint epsilon)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: bgt.un.s IL_000E
+    IL_0004: ldarg.1
+    IL_0005: ldarg.0
+    IL_0006: sub
+    IL_0007: ldarg.2
+    IL_0008: cgt.un
+    IL_000A: ldc.i4.0
+    IL_000B: ceq
+    IL_000D: ret
+    IL_000E: ldarg.0
+    IL_000F: ldarg.1
+    IL_0010: sub
+    IL_0011: ldarg.2
+    IL_0012: cgt.un
+    IL_0014: ldc.i4.0
+    IL_0015: ceq
+    IL_0017: ret
+
+}
+bool within(long lhs, long rhs, long epsilon)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: bgt.s IL_000E
+    IL_0004: ldarg.1
+    IL_0005: ldarg.0
+    IL_0006: sub
+    IL_0007: ldarg.2
+    IL_0008: cgt
+    IL_000A: ldc.i4.0
+    IL_000B: ceq
+    IL_000D: ret
+    IL_000E: ldarg.0
+    IL_000F: ldarg.1
+    IL_0010: sub
+    IL_0011: ldarg.2
+    IL_0012: cgt
+    IL_0014: ldc.i4.0
+    IL_0015: ceq
+    IL_0017: ret
+
+}
+bool within(ulong lhs, ulong rhs, ulong epsilon)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: bgt.un.s IL_000E
+    IL_0004: ldarg.1
+    IL_0005: ldarg.0
+    IL_0006: sub
+    IL_0007: ldarg.2
+    IL_0008: cgt.un
+    IL_000A: ldc.i4.0
+    IL_000B: ceq
+    IL_000D: ret
+    IL_000E: ldarg.0
+    IL_000F: ldarg.1
+    IL_0010: sub
+    IL_0011: ldarg.2
+    IL_0012: cgt.un
+    IL_0014: ldc.i4.0
+    IL_0015: ceq
+    IL_0017: ret
+
+}
+sbyte dec(sbyte src)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldc.i4.1
+    IL_0002: sub
+    IL_0003: conv.i1
+    IL_0004: dup
+    IL_0005: starg.s src
+    IL_0007: ret
+
+}
+byte dec(byte src)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldc.i4.1
+    IL_0002: sub
+    IL_0003: conv.u1
+    IL_0004: dup
+    IL_0005: starg.s src
+    IL_0007: ret
+
+}
+short dec(short src)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldc.i4.1
+    IL_0002: sub
+    IL_0003: conv.i2
+    IL_0004: dup
+    IL_0005: starg.s src
+    IL_0007: ret
+
+}
+ushort dec(ushort src)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldc.i4.1
+    IL_0002: sub
+    IL_0003: conv.u2
+    IL_0004: dup
+    IL_0005: starg.s src
+    IL_0007: ret
+
+}
+int dec(int src)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldc.i4.1
+    IL_0002: sub
+    IL_0003: dup
+    IL_0004: starg.s src
+    IL_0006: ret
+
+}
+uint dec(uint src)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldc.i4.1
+    IL_0002: sub
+    IL_0003: dup
+    IL_0004: starg.s src
+    IL_0006: ret
+
+}
+long dec(long src)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldc.i4.1
+    IL_0002: conv.i8
+    IL_0003: sub
+    IL_0004: dup
+    IL_0005: starg.s src
+    IL_0007: ret
+
+}
+ulong dec(ulong src)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldc.i4.1
+    IL_0002: conv.i8
+    IL_0003: sub
+    IL_0004: dup
+    IL_0005: starg.s src
+    IL_0007: ret
+
+}
+ref sbyte dec(ref sbyte src)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.0
+    IL_0002: ldind.i1
     IL_0003: ldc.i4.1
-    IL_0004: ret
-    IL_0005: ldc.i4.1
-    IL_0006: stloc.0
-    IL_0007: ldarg.1
-    IL_0008: ldc.i4.1
-    IL_0009: and
-    IL_000A: brfalse.s IL_0010
-    IL_000C: ldloc.0
-    IL_000D: ldarg.0
-    IL_000E: mul
-    IL_000F: stloc.0
-    IL_0010: ldarg.1
-    IL_0011: ldc.i4.1
-    IL_0012: shr.un
-    IL_0013: starg.s exp
-    IL_0015: ldarg.1
-    IL_0016: brfalse.s IL_001F
-    IL_0018: ldarg.0
-    IL_0019: ldarg.0
-    IL_001A: mul
-    IL_001B: starg.s b
-    IL_001D: br.s IL_0007
-    IL_001F: ldloc.0
-    IL_0020: ret
+    IL_0004: sub
+    IL_0005: conv.i1
+    IL_0006: stind.i1
+    IL_0007: ldarg.0
+    IL_0008: ret
+
+}
+ref byte dec(ref byte src)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.0
+    IL_0002: ldind.u1
+    IL_0003: ldc.i4.1
+    IL_0004: sub
+    IL_0005: conv.u1
+    IL_0006: stind.i1
+    IL_0007: ldarg.0
+    IL_0008: ret
+
+}
+ref short dec(ref short src)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.0
+    IL_0002: ldind.i2
+    IL_0003: ldc.i4.1
+    IL_0004: sub
+    IL_0005: conv.i2
+    IL_0006: stind.i2
+    IL_0007: ldarg.0
+    IL_0008: ret
+
+}
+ref ushort dec(ref ushort src)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.0
+    IL_0002: ldind.u2
+    IL_0003: ldc.i4.1
+    IL_0004: sub
+    IL_0005: conv.u2
+    IL_0006: stind.i2
+    IL_0007: ldarg.0
+    IL_0008: ret
+
+}
+ref int dec(ref int src)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.0
+    IL_0002: ldind.i4
+    IL_0003: ldc.i4.1
+    IL_0004: sub
+    IL_0005: stind.i4
+    IL_0006: ldarg.0
+    IL_0007: ret
+
+}
+ref uint dec(ref uint src)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.0
+    IL_0002: ldind.u4
+    IL_0003: ldc.i4.1
+    IL_0004: sub
+    IL_0005: stind.i4
+    IL_0006: ldarg.0
+    IL_0007: ret
+
+}
+ref long dec(ref long src)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.0
+    IL_0002: ldind.i8
+    IL_0003: ldc.i4.1
+    IL_0004: conv.i8
+    IL_0005: sub
+    IL_0006: stind.i8
+    IL_0007: ldarg.0
+    IL_0008: ret
+
+}
+ref ulong dec(ref ulong src)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.0
+    IL_0002: ldind.i8
+    IL_0003: ldc.i4.1
+    IL_0004: conv.i8
+    IL_0005: sub
+    IL_0006: stind.i8
+    IL_0007: ldarg.0
+    IL_0008: ret
+
+}
+ulong dist(byte a, byte b)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: bge.s IL_0009
+    IL_0004: ldarg.1
+    IL_0005: ldarg.0
+    IL_0006: sub
+    IL_0007: conv.i8
+    IL_0008: ret
+    IL_0009: ldarg.0
+    IL_000A: ldarg.1
+    IL_000B: sub
+    IL_000C: conv.i8
+    IL_000D: ret
 
 }
 ulong dist(sbyte a, sbyte b)
@@ -2573,150 +3315,6 @@ ref ulong div(ref ulong lhs, in ulong rhs)
     IL_0006: stind.i8
     IL_0007: ldarg.0
     IL_0008: ret
-
-}
-bool eq(sbyte lhs, sbyte rhs)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: ceq
-    IL_0004: ret
-
-}
-bool eq(byte lhs, byte rhs)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: ceq
-    IL_0004: ret
-
-}
-bool eq(short lhs, short rhs)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: ceq
-    IL_0004: ret
-
-}
-bool eq(ushort lhs, ushort rhs)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: ceq
-    IL_0004: ret
-
-}
-bool eq(int lhs, int rhs)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: ceq
-    IL_0004: ret
-
-}
-bool eq(uint lhs, uint rhs)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: ceq
-    IL_0004: ret
-
-}
-bool eq(long lhs, long rhs)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: ceq
-    IL_0004: ret
-
-}
-bool eq(ulong lhs, ulong rhs)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: ceq
-    IL_0004: ret
-
-}
-bool neq(sbyte lhs, sbyte rhs)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: ceq
-    IL_0004: ldc.i4.0
-    IL_0005: ceq
-    IL_0007: ret
-
-}
-bool neq(byte lhs, byte rhs)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: ceq
-    IL_0004: ldc.i4.0
-    IL_0005: ceq
-    IL_0007: ret
-
-}
-bool neq(short lhs, short rhs)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: ceq
-    IL_0004: ldc.i4.0
-    IL_0005: ceq
-    IL_0007: ret
-
-}
-bool neq(ushort lhs, ushort rhs)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: ceq
-    IL_0004: ldc.i4.0
-    IL_0005: ceq
-    IL_0007: ret
-
-}
-bool neq(int lhs, int rhs)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: ceq
-    IL_0004: ldc.i4.0
-    IL_0005: ceq
-    IL_0007: ret
-
-}
-bool neq(uint lhs, uint rhs)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: ceq
-    IL_0004: ldc.i4.0
-    IL_0005: ceq
-    IL_0007: ret
-
-}
-bool neq(long lhs, long rhs)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: ceq
-    IL_0004: ldc.i4.0
-    IL_0005: ceq
-    IL_0007: ret
-
-}
-bool neq(ulong lhs, ulong rhs)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: ceq
-    IL_0004: ldc.i4.0
-    IL_0005: ceq
-    IL_0007: ret
 
 }
 sbyte fma(sbyte x, sbyte y, sbyte z)
@@ -3128,150 +3726,6 @@ ushort gcdbin(ushort u, ushort v)
     IL_0008: ret
 
 }
-bool gt(sbyte lhs, sbyte rhs)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: cgt
-    IL_0004: ret
-
-}
-bool gt(byte lhs, byte rhs)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: cgt
-    IL_0004: ret
-
-}
-bool gt(short lhs, short rhs)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: cgt
-    IL_0004: ret
-
-}
-bool gt(ushort lhs, ushort rhs)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: cgt
-    IL_0004: ret
-
-}
-bool gt(int lhs, int rhs)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: cgt
-    IL_0004: ret
-
-}
-bool gt(uint lhs, uint rhs)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: cgt.un
-    IL_0004: ret
-
-}
-bool gt(long lhs, long rhs)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: cgt
-    IL_0004: ret
-
-}
-bool gt(ulong lhs, ulong rhs)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: cgt.un
-    IL_0004: ret
-
-}
-bool gteq(sbyte lhs, sbyte rhs)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: clt
-    IL_0004: ldc.i4.0
-    IL_0005: ceq
-    IL_0007: ret
-
-}
-bool gteq(byte lhs, byte rhs)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: clt
-    IL_0004: ldc.i4.0
-    IL_0005: ceq
-    IL_0007: ret
-
-}
-bool gteq(short lhs, short rhs)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: clt
-    IL_0004: ldc.i4.0
-    IL_0005: ceq
-    IL_0007: ret
-
-}
-bool gteq(ushort lhs, ushort rhs)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: clt
-    IL_0004: ldc.i4.0
-    IL_0005: ceq
-    IL_0007: ret
-
-}
-bool gteq(int lhs, int rhs)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: clt
-    IL_0004: ldc.i4.0
-    IL_0005: ceq
-    IL_0007: ret
-
-}
-bool gteq(uint lhs, uint rhs)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: clt.un
-    IL_0004: ldc.i4.0
-    IL_0005: ceq
-    IL_0007: ret
-
-}
-bool gteq(long lhs, long rhs)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: clt
-    IL_0004: ldc.i4.0
-    IL_0005: ceq
-    IL_0007: ret
-
-}
-bool gteq(ulong lhs, ulong rhs)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: clt.un
-    IL_0004: ldc.i4.0
-    IL_0005: ceq
-    IL_0007: ret
-
-}
 sbyte inc(sbyte src)
 {
     IL_0000: ldarg.0
@@ -3494,407 +3948,6 @@ bool isPow2(short src)
     IL_0005: ldc.i4.0
     IL_0006: ceq
     IL_0008: ret
-
-}
-bool isPow2(ushort src)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.0
-    IL_0002: ldc.i4.1
-    IL_0003: sub
-    IL_0004: and
-    IL_0005: ldc.i4.0
-    IL_0006: ceq
-    IL_0008: ret
-
-}
-bool isPow2(int src)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.0
-    IL_0002: ldc.i4.1
-    IL_0003: sub
-    IL_0004: and
-    IL_0005: ldc.i4.0
-    IL_0006: ceq
-    IL_0008: ret
-
-}
-bool isPow2(uint src)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.0
-    IL_0002: ldc.i4.1
-    IL_0003: sub
-    IL_0004: and
-    IL_0005: ldc.i4.0
-    IL_0006: ceq
-    IL_0008: ret
-
-}
-bool isPow2(long src)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.0
-    IL_0002: ldc.i4.1
-    IL_0003: conv.i8
-    IL_0004: sub
-    IL_0005: and
-    IL_0006: ldc.i4.0
-    IL_0007: conv.i8
-    IL_0008: ceq
-    IL_000A: ret
-
-}
-bool isPow2(ulong src)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.0
-    IL_0002: ldc.i4.1
-    IL_0003: conv.i8
-    IL_0004: sub
-    IL_0005: and
-    IL_0006: ldc.i4.0
-    IL_0007: conv.i8
-    IL_0008: ceq
-    IL_000A: ret
-
-}
-ref ulong log2(ref ulong dst, ref ulong x, ulong power)
-{
-    IL_0000: ldarg.1
-    IL_0001: ldind.i8
-    IL_0002: ldc.i4.1
-    IL_0003: conv.i8
-    IL_0004: ldarg.2
-    IL_0005: conv.i4
-    IL_0006: ldc.i4.s 63
-    IL_0008: and
-    IL_0009: shl
-    IL_000A: blt.un.s IL_001C
-    IL_000C: ldarg.1
-    IL_000D: ldarg.1
-    IL_000E: ldind.i8
-    IL_000F: ldarg.2
-    IL_0010: conv.i4
-    IL_0011: ldc.i4.s 63
-    IL_0013: and
-    IL_0014: shr.un
-    IL_0015: stind.i8
-    IL_0016: ldarg.0
-    IL_0017: ldarg.0
-    IL_0018: ldind.i8
-    IL_0019: ldarg.2
-    IL_001A: or
-    IL_001B: stind.i8
-    IL_001C: ldarg.0
-    IL_001D: ret
-
-}
-ulong log2(ulong src)
-{
-    IL_0000: ldc.i4.0
-    IL_0001: conv.i8
-    IL_0002: stloc.0
-    IL_0003: ldarg.0
-    IL_0004: stloc.1
-    IL_0005: ldloca.s V_0
-    IL_0007: ldloca.s V_1
-    IL_0009: ldc.i4.s 32
-    IL_000B: conv.i8
-    IL_000C: call System.UInt64& Z0.math::log2(System.UInt64&,System.UInt64&,System.UInt64)
-    IL_0011: pop
-    IL_0012: ldloca.s V_0
-    IL_0014: ldloca.s V_1
-    IL_0016: ldc.i4.s 16
-    IL_0018: conv.i8
-    IL_0019: call System.UInt64& Z0.math::log2(System.UInt64&,System.UInt64&,System.UInt64)
-    IL_001E: pop
-    IL_001F: ldloca.s V_0
-    IL_0021: ldloca.s V_1
-    IL_0023: ldc.i4.8
-    IL_0024: conv.i8
-    IL_0025: call System.UInt64& Z0.math::log2(System.UInt64&,System.UInt64&,System.UInt64)
-    IL_002A: pop
-    IL_002B: ldloca.s V_0
-    IL_002D: ldloca.s V_1
-    IL_002F: ldc.i4.4
-    IL_0030: conv.i8
-    IL_0031: call System.UInt64& Z0.math::log2(System.UInt64&,System.UInt64&,System.UInt64)
-    IL_0036: pop
-    IL_0037: ldloca.s V_0
-    IL_0039: ldloca.s V_1
-    IL_003B: ldc.i4.2
-    IL_003C: conv.i8
-    IL_003D: call System.UInt64& Z0.math::log2(System.UInt64&,System.UInt64&,System.UInt64)
-    IL_0042: pop
-    IL_0043: ldloc.1
-    IL_0044: ldc.i4.2
-    IL_0045: conv.i8
-    IL_0046: blt.un.s IL_004D
-    IL_0048: ldloc.0
-    IL_0049: ldc.i4.1
-    IL_004A: conv.i8
-    IL_004B: or
-    IL_004C: stloc.0
-    IL_004D: ldloc.0
-    IL_004E: ret
-
-}
-ulong log2(int src)
-{
-    IL_0000: ldarg.0
-    IL_0001: conv.i8
-    IL_0002: call System.UInt64 Z0.math::log2(System.UInt64)
-    IL_0007: ret
-
-}
-uint log2(uint src)
-{
-    IL_0000: ldarg.0
-    IL_0001: conv.u8
-    IL_0002: call System.UInt64 Z0.math::log2(System.UInt64)
-    IL_0007: conv.u4
-    IL_0008: ret
-
-}
-byte log2(byte src)
-{
-    IL_0000: ldarg.0
-    IL_0001: conv.u8
-    IL_0002: call System.UInt64 Z0.math::log2(System.UInt64)
-    IL_0007: conv.u1
-    IL_0008: ret
-
-}
-ushort log2(ushort src)
-{
-    IL_0000: ldarg.0
-    IL_0001: conv.u8
-    IL_0002: call System.UInt64 Z0.math::log2(System.UInt64)
-    IL_0007: conv.u2
-    IL_0008: ret
-
-}
-bool lt(sbyte lhs, sbyte rhs)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: clt
-    IL_0004: ret
-
-}
-bool lt(byte lhs, byte rhs)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: clt
-    IL_0004: ret
-
-}
-bool lt(short lhs, short rhs)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: clt
-    IL_0004: ret
-
-}
-bool lt(ushort lhs, ushort rhs)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: clt
-    IL_0004: ret
-
-}
-bool lt(int lhs, int rhs)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: clt
-    IL_0004: ret
-
-}
-bool lt(uint lhs, uint rhs)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: clt.un
-    IL_0004: ret
-
-}
-bool lt(long lhs, long rhs)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: clt
-    IL_0004: ret
-
-}
-bool lt(ulong lhs, ulong rhs)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: clt.un
-    IL_0004: ret
-
-}
-bool lteq(sbyte lhs, sbyte rhs)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: cgt
-    IL_0004: ldc.i4.0
-    IL_0005: ceq
-    IL_0007: ret
-
-}
-bool lteq(byte lhs, byte rhs)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: cgt
-    IL_0004: ldc.i4.0
-    IL_0005: ceq
-    IL_0007: ret
-
-}
-bool lteq(short lhs, short rhs)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: cgt
-    IL_0004: ldc.i4.0
-    IL_0005: ceq
-    IL_0007: ret
-
-}
-bool lteq(ushort lhs, ushort rhs)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: cgt
-    IL_0004: ldc.i4.0
-    IL_0005: ceq
-    IL_0007: ret
-
-}
-bool lteq(int lhs, int rhs)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: cgt
-    IL_0004: ldc.i4.0
-    IL_0005: ceq
-    IL_0007: ret
-
-}
-bool lteq(uint lhs, uint rhs)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: cgt.un
-    IL_0004: ldc.i4.0
-    IL_0005: ceq
-    IL_0007: ret
-
-}
-bool lteq(long lhs, long rhs)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: cgt
-    IL_0004: ldc.i4.0
-    IL_0005: ceq
-    IL_0007: ret
-
-}
-bool lteq(ulong lhs, ulong rhs)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: cgt.un
-    IL_0004: ldc.i4.0
-    IL_0005: ceq
-    IL_0007: ret
-
-}
-sbyte max(sbyte lhs, sbyte rhs)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: bgt.s IL_0006
-    IL_0004: ldarg.1
-    IL_0005: ret
-    IL_0006: ldarg.0
-    IL_0007: ret
-
-}
-byte max(byte lhs, byte rhs)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: bgt.s IL_0006
-    IL_0004: ldarg.1
-    IL_0005: ret
-    IL_0006: ldarg.0
-    IL_0007: ret
-
-}
-short max(short lhs, short rhs)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: bgt.s IL_0006
-    IL_0004: ldarg.1
-    IL_0005: ret
-    IL_0006: ldarg.0
-    IL_0007: ret
-
-}
-ushort max(ushort lhs, ushort rhs)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: bgt.s IL_0006
-    IL_0004: ldarg.1
-    IL_0005: ret
-    IL_0006: ldarg.0
-    IL_0007: ret
-
-}
-int max(int lhs, int rhs)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: bgt.s IL_0006
-    IL_0004: ldarg.1
-    IL_0005: ret
-    IL_0006: ldarg.0
-    IL_0007: ret
-
-}
-uint max(uint lhs, uint rhs)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: bgt.un.s IL_0006
-    IL_0004: ldarg.1
-    IL_0005: ret
-    IL_0006: ldarg.0
-    IL_0007: ret
-
-}
-long max(long lhs, long rhs)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: bgt.s IL_0006
-    IL_0004: ldarg.1
-    IL_0005: ret
-    IL_0006: ldarg.0
-    IL_0007: ret
 
 }
 short srl(short src, int offset)
@@ -5162,209 +5215,156 @@ bool between(ulong x, ulong a, ulong b)
     IL_000D: ret
 
 }
-sbyte dec(sbyte src)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldc.i4.1
-    IL_0002: sub
-    IL_0003: conv.i1
-    IL_0004: dup
-    IL_0005: starg.s src
-    IL_0007: ret
-
-}
-byte dec(byte src)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldc.i4.1
-    IL_0002: sub
-    IL_0003: conv.u1
-    IL_0004: dup
-    IL_0005: starg.s src
-    IL_0007: ret
-
-}
-short dec(short src)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldc.i4.1
-    IL_0002: sub
-    IL_0003: conv.i2
-    IL_0004: dup
-    IL_0005: starg.s src
-    IL_0007: ret
-
-}
-ushort dec(ushort src)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldc.i4.1
-    IL_0002: sub
-    IL_0003: conv.u2
-    IL_0004: dup
-    IL_0005: starg.s src
-    IL_0007: ret
-
-}
-int dec(int src)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldc.i4.1
-    IL_0002: sub
-    IL_0003: dup
-    IL_0004: starg.s src
-    IL_0006: ret
-
-}
-uint dec(uint src)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldc.i4.1
-    IL_0002: sub
-    IL_0003: dup
-    IL_0004: starg.s src
-    IL_0006: ret
-
-}
-long dec(long src)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldc.i4.1
-    IL_0002: conv.i8
-    IL_0003: sub
-    IL_0004: dup
-    IL_0005: starg.s src
-    IL_0007: ret
-
-}
-ulong dec(ulong src)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldc.i4.1
-    IL_0002: conv.i8
-    IL_0003: sub
-    IL_0004: dup
-    IL_0005: starg.s src
-    IL_0007: ret
-
-}
-ref sbyte dec(ref sbyte src)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.0
-    IL_0002: ldind.i1
-    IL_0003: ldc.i4.1
-    IL_0004: sub
-    IL_0005: conv.i1
-    IL_0006: stind.i1
-    IL_0007: ldarg.0
-    IL_0008: ret
-
-}
-ref byte dec(ref byte src)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.0
-    IL_0002: ldind.u1
-    IL_0003: ldc.i4.1
-    IL_0004: sub
-    IL_0005: conv.u1
-    IL_0006: stind.i1
-    IL_0007: ldarg.0
-    IL_0008: ret
-
-}
-ref short dec(ref short src)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.0
-    IL_0002: ldind.i2
-    IL_0003: ldc.i4.1
-    IL_0004: sub
-    IL_0005: conv.i2
-    IL_0006: stind.i2
-    IL_0007: ldarg.0
-    IL_0008: ret
-
-}
-ref ushort dec(ref ushort src)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.0
-    IL_0002: ldind.u2
-    IL_0003: ldc.i4.1
-    IL_0004: sub
-    IL_0005: conv.u2
-    IL_0006: stind.i2
-    IL_0007: ldarg.0
-    IL_0008: ret
-
-}
-ref int dec(ref int src)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.0
-    IL_0002: ldind.i4
-    IL_0003: ldc.i4.1
-    IL_0004: sub
-    IL_0005: stind.i4
-    IL_0006: ldarg.0
-    IL_0007: ret
-
-}
-ref uint dec(ref uint src)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.0
-    IL_0002: ldind.u4
-    IL_0003: ldc.i4.1
-    IL_0004: sub
-    IL_0005: stind.i4
-    IL_0006: ldarg.0
-    IL_0007: ret
-
-}
-ref long dec(ref long src)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.0
-    IL_0002: ldind.i8
-    IL_0003: ldc.i4.1
-    IL_0004: conv.i8
-    IL_0005: sub
-    IL_0006: stind.i8
-    IL_0007: ldarg.0
-    IL_0008: ret
-
-}
-ref ulong dec(ref ulong src)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.0
-    IL_0002: ldind.i8
-    IL_0003: ldc.i4.1
-    IL_0004: conv.i8
-    IL_0005: sub
-    IL_0006: stind.i8
-    IL_0007: ldarg.0
-    IL_0008: ret
-
-}
-ulong dist(byte a, byte b)
+bool eq(sbyte lhs, sbyte rhs)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: bge.s IL_0009
-    IL_0004: ldarg.1
-    IL_0005: ldarg.0
-    IL_0006: sub
-    IL_0007: conv.i8
-    IL_0008: ret
-    IL_0009: ldarg.0
-    IL_000A: ldarg.1
-    IL_000B: sub
-    IL_000C: conv.i8
-    IL_000D: ret
+    IL_0002: ceq
+    IL_0004: ret
+
+}
+bool eq(byte lhs, byte rhs)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: ceq
+    IL_0004: ret
+
+}
+bool eq(short lhs, short rhs)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: ceq
+    IL_0004: ret
+
+}
+bool eq(ushort lhs, ushort rhs)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: ceq
+    IL_0004: ret
+
+}
+bool eq(int lhs, int rhs)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: ceq
+    IL_0004: ret
+
+}
+bool eq(uint lhs, uint rhs)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: ceq
+    IL_0004: ret
+
+}
+bool eq(long lhs, long rhs)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: ceq
+    IL_0004: ret
+
+}
+bool eq(ulong lhs, ulong rhs)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: ceq
+    IL_0004: ret
+
+}
+bool neq(sbyte lhs, sbyte rhs)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: ceq
+    IL_0004: ldc.i4.0
+    IL_0005: ceq
+    IL_0007: ret
+
+}
+bool neq(byte lhs, byte rhs)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: ceq
+    IL_0004: ldc.i4.0
+    IL_0005: ceq
+    IL_0007: ret
+
+}
+bool neq(short lhs, short rhs)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: ceq
+    IL_0004: ldc.i4.0
+    IL_0005: ceq
+    IL_0007: ret
+
+}
+bool neq(ushort lhs, ushort rhs)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: ceq
+    IL_0004: ldc.i4.0
+    IL_0005: ceq
+    IL_0007: ret
+
+}
+bool neq(int lhs, int rhs)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: ceq
+    IL_0004: ldc.i4.0
+    IL_0005: ceq
+    IL_0007: ret
+
+}
+bool neq(uint lhs, uint rhs)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: ceq
+    IL_0004: ldc.i4.0
+    IL_0005: ceq
+    IL_0007: ret
+
+}
+bool neq(long lhs, long rhs)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: ceq
+    IL_0004: ldc.i4.0
+    IL_0005: ceq
+    IL_0007: ret
+
+}
+bool neq(ulong lhs, ulong rhs)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: ceq
+    IL_0004: ldc.i4.0
+    IL_0005: ceq
+    IL_0007: ret
+
+}
+bool gt(sbyte a, sbyte b)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: cgt
+    IL_0004: ret
 
 }
 sbyte and(sbyte lhs, sbyte rhs)

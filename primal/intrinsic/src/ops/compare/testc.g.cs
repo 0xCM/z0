@@ -15,6 +15,17 @@ namespace Z0
     partial class ginx
     {
         /// <summary>
+        /// Determines whether all source bits are all on
+        /// </summary>
+        /// <param name="src">The source bits</param>
+        /// <param name="mask">Specifies the bits in the source to test</param>
+        /// <typeparam name="T">The primal component type</typeparam>
+        [MethodImpl(Inline)]
+        public static bool vtestc<T>(Vector128<T> src)
+            where T : unmanaged
+                => vtestc(src, vpOnes<T>(n128));
+        
+        /// <summary>
         /// Determines whether mask-specified source bits are all on
         /// </summary>
         /// <param name="src">The source bits</param>
@@ -37,7 +48,17 @@ namespace Z0
             else 
                 return vtestc_f(src,mask);
         }
-
+        
+        /// <summary>
+        /// Determines whether all source bits are on
+        /// </summary>
+        /// <param name="src">The source bits</param>
+        /// <typeparam name="T">The primal component type</typeparam>
+        [MethodImpl(Inline)]
+        public static bool vtestc<T>(Vector256<T> src)
+            where T : unmanaged
+                => vtestc(src, vpOnes<T>(n256));
+        
         /// <summary>
         /// Determines whether mask-specified source bits are all on
         /// </summary>

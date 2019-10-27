@@ -82,33 +82,6 @@ namespace Z0
         /// <param name="y">The right operand</param>
         [MethodImpl(Inline)]
         public static Vector256<ulong> vmul(Vector256<uint> x,Vector256<uint> y)
-            => Multiply(x, y);
-                        
-        /// <summary>
-        /// Multiplies two two 256-bit/u64 vectors to yield a 256-bit/u64 vector
-        /// </summary>
-        /// <param name="x">The left vector</param>
-        /// <param name="y">The right vector</param>
-        public static Vector256<ulong> vmul(Vector256<ulong> x, Vector256<ulong> y)    
-        {
-            var loMask = ginx.vbroadcast(n256, 0x00000000fffffffful);  
-              
-            var xl = dinx.vand(x, loMask).AsUInt32();
-            var xh = dinx.vsrl(x, 32).AsUInt32();
-            var yl = dinx.vand(y, loMask).AsUInt32();
-            var yh = dinx.vsrl(y, 32).AsUInt32();
-
-            var xh_yl = dinx.vmul(xh, yl);
-            var hl = dinx.vsll(xh_yl, 32);
-
-            var xh_mh = dinx.vmul(xh, yh);
-            var lh = dinx.vsll(xh_mh, 32);
-
-            var xl_yl = dinx.vmul(xl, yl);
-
-            var hl_lh = dinx.vadd(hl, lh);
-            var z = dinx.vadd(xl_yl, hl_lh);
-            return z;
-        }
+            => Multiply(x, y);                        
     }
 }

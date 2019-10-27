@@ -1,4 +1,4 @@
-// 2019-10-25 21:50:50:402
+// 2019-10-27 03:48:30:802
 BitMatrix<byte> alloc_8x8u()
 {
     IL_0000: call Z0.BitMatrix`1<System.Byte> Z0.BitMatrix::alloc<System.Byte>()
@@ -23,7 +23,7 @@ BitMatrix<ulong> alloc_g64x64u()
     IL_0005: ret
 
 }
-ref BitMatrix<byte> and_bm8x8u(in BitMatrix<byte> A, in BitMatrix<byte> B, ref BitMatrix<byte> C)
+ref BitMatrix<byte> gbm_and_8x8(in BitMatrix<byte> A, in BitMatrix<byte> B, ref BitMatrix<byte> C)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
@@ -32,16 +32,7 @@ ref BitMatrix<byte> and_bm8x8u(in BitMatrix<byte> A, in BitMatrix<byte> B, ref B
     IL_0008: ret
 
 }
-ref BitMatrix<byte> andg_bm8x8u(in BitMatrix<byte> A, in BitMatrix<byte> B, ref BitMatrix<byte> C)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: ldarg.2
-    IL_0003: call Z0.BitMatrix`1<System.Byte>& Z0.BitMatrix::and<System.Byte>(Z0.BitMatrix`1<System.Byte>&,Z0.BitMatrix`1<System.Byte>&,Z0.BitMatrix`1<System.Byte>&)
-    IL_0008: ret
-
-}
-ref BitMatrix<ushort> and_bm16x16u(in BitMatrix<ushort> A, in BitMatrix<ushort> B, ref BitMatrix<ushort> C)
+ref BitMatrix<ushort> gbm_and_16x16(in BitMatrix<ushort> A, in BitMatrix<ushort> B, ref BitMatrix<ushort> C)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
@@ -50,16 +41,32 @@ ref BitMatrix<ushort> and_bm16x16u(in BitMatrix<ushort> A, in BitMatrix<ushort> 
     IL_0008: ret
 
 }
-ref BitMatrix<ushort> andg_bm16x16u(in BitMatrix<ushort> A, in BitMatrix<ushort> B, ref BitMatrix<ushort> C)
+BitMatrix<ushort> gbm_and_16x16_alloc(in BitMatrix<ushort> A, in BitMatrix<ushort> B)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call Z0.BitMatrix`1<System.UInt16> Z0.BitMatrix::and<System.UInt16>(Z0.BitMatrix`1<System.UInt16>&,Z0.BitMatrix`1<System.UInt16>&)
+    IL_0007: ret
+
+}
+ref BitMatrix16 pbm_and_16x16(in BitMatrix16 A, in BitMatrix16 B, ref BitMatrix16 C)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call Z0.BitMatrix`1<System.UInt16>& Z0.BitMatrix::and<System.UInt16>(Z0.BitMatrix`1<System.UInt16>&,Z0.BitMatrix`1<System.UInt16>&,Z0.BitMatrix`1<System.UInt16>&)
+    IL_0003: call Z0.BitMatrix16& Z0.BitMatrix::and(Z0.BitMatrix16&,Z0.BitMatrix16&,Z0.BitMatrix16&)
     IL_0008: ret
 
 }
-ref BitMatrix<uint> and_bm32x32u(in BitMatrix<uint> A, in BitMatrix<uint> B, ref BitMatrix<uint> C)
+BitMatrix16 pbm_and_16x16_alloc(in BitMatrix16 A, in BitMatrix16 B)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call Z0.BitMatrix16 Z0.BitMatrix::and(Z0.BitMatrix16&,Z0.BitMatrix16&)
+    IL_0007: ret
+
+}
+ref BitMatrix<uint> gbm_and_32x32(in BitMatrix<uint> A, in BitMatrix<uint> B, ref BitMatrix<uint> C)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
@@ -68,25 +75,7 @@ ref BitMatrix<uint> and_bm32x32u(in BitMatrix<uint> A, in BitMatrix<uint> B, ref
     IL_0008: ret
 
 }
-ref BitMatrix<uint> andg_bm32x32u(in BitMatrix<uint> A, in BitMatrix<uint> B, ref BitMatrix<uint> C)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: ldarg.2
-    IL_0003: call Z0.BitMatrix`1<System.UInt32>& Z0.BitMatrix::and<System.UInt32>(Z0.BitMatrix`1<System.UInt32>&,Z0.BitMatrix`1<System.UInt32>&,Z0.BitMatrix`1<System.UInt32>&)
-    IL_0008: ret
-
-}
-ref BitMatrix<ulong> and_bm64x64u(in BitMatrix<ulong> A, in BitMatrix<ulong> B, ref BitMatrix<ulong> C)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: ldarg.2
-    IL_0003: call Z0.BitMatrix`1<System.UInt64>& Z0.BitMatrix::and<System.UInt64>(Z0.BitMatrix`1<System.UInt64>&,Z0.BitMatrix`1<System.UInt64>&,Z0.BitMatrix`1<System.UInt64>&)
-    IL_0008: ret
-
-}
-ref BitMatrix<ulong> andg_bm64x64u(in BitMatrix<ulong> A, in BitMatrix<ulong> B, ref BitMatrix<ulong> C)
+ref BitMatrix<ulong> gbm_and_64x64(in BitMatrix<ulong> A, in BitMatrix<ulong> B, ref BitMatrix<ulong> C)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1

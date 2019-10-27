@@ -13,97 +13,84 @@ namespace Z0
 
     partial class BitMatrix
     {
-        public static RowBits<T> not<T>(RowBits<T> A, RowBits<T> B)
-            where T : unmanaged
-        {            
-            for(var i=0; i<A.RowCount; i++)
-                B[i] = bitvector.not(A[i]); 
-            return B;
-        }
-
         [MethodImpl(Inline)]
-        public static RowBits<T> not<T>(RowBits<T> A)
-            where T : unmanaged
-                => not(A, A.Replicate(true));
-
-        [MethodImpl(Inline)]
-        public static BitMatrix8 not(BitMatrix8 src)
-             => BitMatrix8.From(BitConverter.GetBytes((~(ulong)src)));
-
-        [MethodImpl(Inline)]
-        public static BitMatrix16 not(BitMatrix16 src)
-        {
-            src.Load(out Vector256<ushort> vSrc);
-            dinx.vnot(vSrc).StoreTo(ref src.Data[0]);
-            return src;
-        }
-
-        public static BitMatrix32 not(BitMatrix32 A)
-        {
-            const int rowstep = 8;
-            var dst = BitMatrix32.Alloc();
-            for(var i=0; i< A.RowCount; i += rowstep)
-            {
-                var x1 = vload256(ref A[i]);
-                dinx.vnot(x1).StoreTo(ref dst[i]);
-            }
-            return dst;
-        }
-
-        public static ref BitMatrix64 not(ref BitMatrix64 A)
-        {
-            const int rowstep = 4;
-            for(var i=0; i< A.RowCount; i += rowstep)
-            {
-                A.GetCells(i, out Vec256<ulong> vSrc);
-                dinx.vnot(vSrc).StoreTo(ref A[i]);
-            }
-            return ref A;
-        }
-
-        [MethodImpl(Inline)]
-        public static BitMatrix64 not(BitMatrix64 A)
-        {
-            var dst = A.Replicate();
-            return not(ref dst);
-        }
-
-        /// <summary>
-        /// Computes the bitwise compliement of entries in the source matrix and stores the
-        /// result a caller-supplied target matrix
-        /// </summary>
-        /// <param name="A">The source matrix</param>
-        /// <param name="B">The target matrix</param>
-        /// <typeparam name="N">The col dimension type</typeparam>
-        /// <typeparam name="T">The matrix storage type</typeparam>
-        [MethodImpl(Inline)]
-        public static BitMatrix<N,T> not<N,T>(BitMatrix<N,T> A, BitMatrix<N,T> B)        
-            where N : ITypeNat, new()
+        public static unsafe BitMatrix<T> not<T>(in BitMatrix<T> A)
             where T : unmanaged
         {
-            mathspan.not(A.Data, B.Data);
-            return  B;
+            var C = BitMatrix.alloc<T>();
+            BitPoints.not(A.HeadPtr, C.HeadPtr);
+            return C;
         }
 
-        /// <summary>
-        /// Computes the bitwise compliement of entries in the source matrix and stores the
-        /// result to a caller-supplied target matrix
-        /// </summary>
-        /// <param name="A">The source matrix</param>
-        /// <param name="B">The target matrix</param>
-        /// <typeparam name="M">The row dimension type</typeparam>
-        /// <typeparam name="N">The col dimension type</typeparam>
-        /// <typeparam name="T">The matrix storage type</typeparam>
         [MethodImpl(Inline)]
-        public static  BitMatrix<M,N,T> not<M,N,T>(BitMatrix<M,N,T> A, BitMatrix<M,N,T> B)        
-            where M : ITypeNat, new()
-            where N : ITypeNat, new()
+        public static unsafe ref BitMatrix<T> not<T>(in BitMatrix<T> A, ref BitMatrix<T> C)
             where T : unmanaged
         {
-            mathspan.not(A.Data,B.Data);
-            return B;
+            BitPoints.not(A.HeadPtr, C.HeadPtr);
+            return ref C;
         }
 
+        [MethodImpl(Inline)]
+        public static unsafe BitMatrix8 not(in BitMatrix8 A)
+        {
+            var C = BitMatrix.alloc(n8);
+            BitPoints.not(A.HeadPtr,C.HeadPtr);
+            return C;
+        }
+
+        [MethodImpl(Inline)]
+        public static unsafe ref BitMatrix8 not(in BitMatrix8 A, ref BitMatrix8 C)
+        {
+            BitPoints.not(A.HeadPtr, C.HeadPtr);
+            return ref C;
+        }
+
+
+        [MethodImpl(Inline)]
+        public static unsafe ref BitMatrix16 not(in BitMatrix16 A, ref BitMatrix16 C)
+        {
+            BitPoints.not(A.HeadPtr, C.HeadPtr);
+            return ref C;
+        }
+
+        [MethodImpl(Inline)]
+        public static unsafe BitMatrix16 not(in BitMatrix16 A)
+        {
+            var C = BitMatrix.alloc(n16);
+            BitPoints.not(A.HeadPtr,C.HeadPtr);
+            return C;
+        }
+        
+        [MethodImpl(Inline)]
+        public static unsafe ref BitMatrix32 not(in BitMatrix32 A, ref BitMatrix32 C)
+        {
+            BitPoints.not(A.HeadPtr, C.HeadPtr);
+            return ref C;
+        }
+
+        [MethodImpl(Inline)]
+        public static unsafe BitMatrix32 not(in BitMatrix32 A)
+        {
+            var C = BitMatrix.alloc(n32);
+            BitPoints.not(A.HeadPtr,C.HeadPtr);
+            return C;
+        }
+
+        [MethodImpl(Inline)]
+        public static unsafe ref BitMatrix64 not(in BitMatrix64 A, ref BitMatrix64 C)
+        {
+            BitPoints.not(A.HeadPtr, C.HeadPtr);
+            return ref C;
+        }
+
+        [MethodImpl(Inline)]
+        public static unsafe BitMatrix64 not(in BitMatrix64 A)
+        {
+            var C = BitMatrix.alloc(n64);
+            BitPoints.not(A.HeadPtr, C.HeadPtr);
+            return C;
+        }
+ 
 
     }
 

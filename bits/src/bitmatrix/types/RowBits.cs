@@ -38,7 +38,7 @@ namespace Z0
         public static RowBits<T> From(Span<byte> src)        
             => new RowBits<T>(ByteSpan.Cast<T>(src));
 
-        [MethodImpl(Inline)]
+        [MethodImpl(NotInline)]
         public static RowBits<T> Alloc(int rows)        
             => new RowBits<T>(new T[rows]);
 
@@ -67,7 +67,7 @@ namespace Z0
         /// <param name="B">The right matrix</param>
         [MethodImpl(Inline)]
         public static RowBits<T> operator ^(RowBits<T> A, RowBits<T> B)
-            => BitMatrix.xor(A, B);
+            => RowBits.xor(A, B);
 
         /// <summary>
         /// Computes the bitwise complement of the source matrix
@@ -75,7 +75,7 @@ namespace Z0
         /// <param name="src">The source matrix</param>
         [MethodImpl(Inline)]
         public static RowBits<T> operator ~(RowBits<T> src)
-            => BitMatrix.not(src);
+            => RowBits.not(src);
 
         [MethodImpl(Inline)]
         RowBits(Span<T> rows)

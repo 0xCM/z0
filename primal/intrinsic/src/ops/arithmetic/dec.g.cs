@@ -15,93 +15,95 @@ namespace Z0
     partial class ginx
     {
         [MethodImpl(Inline)]
-        public static Vec128<T> vdec<T>(in Vec128<T> src)
+        public static Vector128<T> vdec<T>(Vector128<T> src)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte) 
             || typeof(T) == typeof(ushort) 
             || typeof(T) == typeof(uint) 
             || typeof(T) == typeof(ulong))
-                return vdecu(in src);
+                return vdecu(src);
             else if(typeof(T) == typeof(sbyte) 
             || typeof(T) == typeof(short) 
             || typeof(T) == typeof(int) 
             || typeof(T) == typeof(long))
                 return vdeci(src);
-            else throw unsupported<T>();
+            else 
+                throw unsupported<T>();
         }
 
         [MethodImpl(Inline)]
-        public static Vec256<T> vdec<T>(in Vec256<T> src)
+        public static Vector256<T> vdec<T>(Vector256<T> src)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte) 
             || typeof(T) == typeof(ushort) 
             || typeof(T) == typeof(uint) 
             || typeof(T) == typeof(ulong))
-                return vdecu(in src);
+                return vdecu(src);
             else if(typeof(T) == typeof(sbyte) 
             || typeof(T) == typeof(short) 
             || typeof(T) == typeof(int) 
             || typeof(T) == typeof(long))
                 return vdeci(src);
-            else throw unsupported<T>();
+            else 
+                throw unsupported<T>();
         }
 
         [MethodImpl(Inline)]
-        static Vec128<T> vdeci<T>(in Vec128<T> lhs)
+        static Vector128<T> vdeci<T>(Vector128<T> lhs)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                 return generic<T>(dinx.vdec(in int8(in lhs)));
+                 return generic<T>(dinx.vdec(int8(lhs)));
             else if(typeof(T) == typeof(short))
-                 return generic<T>(dinx.vdec(in int16(in lhs)));
+                 return generic<T>(dinx.vdec(int16(lhs)));
             else if(typeof(T) == typeof(int))
-                 return generic<T>(dinx.vdec(in int32(in lhs)));
+                 return generic<T>(dinx.vdec(int32(lhs)));
             else
-                 return generic<T>(dinx.vdec(in int64(in lhs)));
+                 return generic<T>(dinx.vdec(int64(lhs)));
         }
 
         [MethodImpl(Inline)]
-        static Vec128<T> vdecu<T>(in Vec128<T> lhs)
+        static Vector128<T> vdecu<T>(Vector128<T> lhs)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(dinx.vdec(in uint8(in lhs)));
+                return generic<T>(dinx.vdec(uint8(lhs)));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(dinx.vdec(in uint16(in lhs)));
+                return generic<T>(dinx.vdec(uint16(lhs)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(dinx.vdec(in uint32(lhs)));
+                return generic<T>(dinx.vdec(uint32(lhs)));
             else 
-                return generic<T>(dinx.vdec(in uint64(in lhs)));
+                return generic<T>(dinx.vdec(uint64(lhs)));
         }
 
         [MethodImpl(Inline)]
-        static Vec256<T> vdeci<T>(in Vec256<T> lhs)
+        static Vector256<T> vdeci<T>(Vector256<T> lhs)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                 return generic<T>(dinx.vdec(in int8(in lhs)));
+                 return generic<T>(dinx.vdec(int8(lhs)));
             else if(typeof(T) == typeof(short))
-                 return generic<T>(dinx.vdec(in int16(in lhs)));
+                 return generic<T>(dinx.vdec(int16(lhs)));
             else if(typeof(T) == typeof(int))
-                 return generic<T>(dinx.vdec(in int32(in lhs)));
+                 return generic<T>(dinx.vdec(int32(lhs)));
             else
-                 return generic<T>(dinx.vdec(in int64(in lhs)));
+                 return generic<T>(dinx.vdec(int64(lhs)));
         }
 
         [MethodImpl(Inline)]
-        static Vec256<T> vdecu<T>(in Vec256<T> lhs)
+        static Vector256<T> vdecu<T>(Vector256<T> lhs)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(dinx.vdec(in uint8(in lhs)));
+                return generic<T>(dinx.vdec(uint8(lhs)));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(dinx.vdec(in uint16(in lhs)));
+                return generic<T>(dinx.vdec(uint16(lhs)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(dinx.vdec(in uint32(lhs)));
+                return generic<T>(dinx.vdec(uint32(lhs)));
             else 
-                return generic<T>(dinx.vdec(in uint64(in lhs)));
+                return generic<T>(dinx.vdec(uint64(lhs)));
         }
 
     }

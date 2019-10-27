@@ -22,7 +22,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="pos">The index of the lane to extract</param>
         [MethodImpl(Inline)]
-        public static Vec128<sbyte> vhi(in Vec256<sbyte> src)
+        public static Vector128<sbyte> vhi(Vector256<sbyte> src)
             => ExtractVector128(src, 1);
 
         /// <summary>
@@ -32,7 +32,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="pos">The index of the lane to extract</param>
         [MethodImpl(Inline)]
-        public static Vec128<byte> vhi(in Vec256<byte> src)
+        public static Vector128<byte> vhi(Vector256<byte> src)
             => ExtractVector128(src, 1);
 
         /// <summary>
@@ -42,7 +42,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="pos">The index of the lane to extract</param>
         [MethodImpl(Inline)]
-        public static Vec128<short> vhi(in Vec256<short> src)
+        public static Vector128<short> vhi(Vector256<short> src)
             => ExtractVector128(src, 1);
 
         /// <summary>
@@ -52,7 +52,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="pos">The index of the lane to extract</param>
         [MethodImpl(Inline)]
-        public static Vec128<ushort> vhi(in Vec256<ushort> src)
+        public static Vector128<ushort> vhi(Vector256<ushort> src)
             => ExtractVector128(src, 1);
 
         /// <summary>
@@ -62,7 +62,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="pos">The index of the lane to extract</param>
         [MethodImpl(Inline)]
-        public static Vec128<int> vhi(in Vec256<int> src)
+        public static Vector128<int> vhi(Vector256<int> src)
             => ExtractVector128(src, 1);
 
         /// <summary>
@@ -72,7 +72,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="pos">The index of the lane to extract</param>
         [MethodImpl(Inline)]
-        public static Vec128<uint> vhi(in Vec256<uint> src)
+        public static Vector128<uint> vhi(Vector256<uint> src)
             => ExtractVector128(src, 1);
 
         /// <summary>
@@ -82,7 +82,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="pos">The index of the lane to extract</param>
         [MethodImpl(Inline)]
-        public static Vec128<long> vhi(in Vec256<long> src)
+        public static Vector128<long> vhi(Vector256<long> src)
             => ExtractVector128(src, 1);
 
         /// <summary>
@@ -92,7 +92,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="pos">The index of the lane to extract</param>
         [MethodImpl(Inline)]
-        public static Vec128<ulong> vhi(in Vec256<ulong> src)
+        public static Vector128<ulong> vhi(Vector256<ulong> src)
             => ExtractVector128(src, 1);
     }
 }

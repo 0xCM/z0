@@ -18,18 +18,18 @@ namespace Z0
         [MethodImpl(Inline)]
         static Vec256<T> vload<T>(ref YMM src)
             where T : unmanaged
-            => ginx.vloadu256(in YMM.As<T>(ref src));
+            => ginx.vloadu(n256, in YMM.As<T>(ref src));
 
 
         [MethodImpl(Inline)]
         static Vec128<T> vload<T>(ref XMM src)
             where T : unmanaged
-            => ginx.vloadu128(in src.As<T>());
+            => ginx.vloadu(n128, in src.As<T>());
 
         [MethodImpl(Inline)]
         static Vec256<T> vload<T>(ref Perm8Select src)
             where T : unmanaged
-                => ginx.vloadu256(in head(src.ToSpan<T>()));
+                => ginx.vloadu(n256, in head(src.ToSpan<T>()));
 
     }
 

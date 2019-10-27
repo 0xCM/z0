@@ -61,6 +61,14 @@ namespace Z0
             vloadu(pY, out Vector256<T> vB);
             return vxor(vA,vB);
         }
+        
+        [MethodImpl(Inline)]
+        public static unsafe Vector256<T> vxor<T>(Vector256<T> x, T* pY)
+            where T : unmanaged
+        {                    
+            vloadu(pY, out Vector256<T> vB);
+            return vxor(x,vB);
+        }
 
         /// <summary>
         /// Loads two vectors from respective pointers computes the XOR between them, storing the result to a target pointer

@@ -9,6 +9,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
     using System.Runtime.Intrinsics.X86;
 
+    using static System.Runtime.Intrinsics.X86.Avx;
     using static System.Runtime.Intrinsics.X86.Avx2;
     using static System.Runtime.Intrinsics.X86.Sse2;
 
@@ -17,6 +18,18 @@ namespace Z0
 
     partial class dinx
     {         
+        [MethodImpl(Inline)]
+        public static Vector256<short> vsrl(Vector256<short> src, Vector128<short> offset)
+            => ShiftRightLogical(src, offset);
+
+        [MethodImpl(Inline)]
+        public static Vector256<int> vsrl(Vector256<int> src, Vector128<int> offset)
+            => ShiftRightLogical(src, offset);
+
+
+        [MethodImpl(Inline)]
+        public static Vector256<long> vsrl(Vector256<long> src, Vector128<long> offset)
+            => ShiftRightLogical(src, offset);
 
 
         /// <summary>

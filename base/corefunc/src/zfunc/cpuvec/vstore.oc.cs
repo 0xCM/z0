@@ -28,7 +28,7 @@ namespace Z0
             => vstore(src, ref dst);
 
         public static unsafe void vstore_d128x16u(Vector128<ushort> src, ref ushort dst)
-            => cpuvec.vstore(src, ref dst);
+            => cpufunc.vstore(src, ref dst);
 
         public static unsafe void vstore_g128x32i(Vector128<int> src, ref int dst)
             => vstore(src, ref dst);

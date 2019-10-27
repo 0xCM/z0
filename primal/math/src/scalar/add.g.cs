@@ -35,7 +35,8 @@ namespace Z0
             || typeof(T) == typeof(int) 
             || typeof(T) == typeof(long))
                 return addi(lhs,rhs);
-            else return gfp.add(lhs,rhs);
+            else 
+                return gfp.add(lhs,rhs);
         }
 
         /// <summary>

@@ -330,7 +330,6 @@ namespace Z0
             return sb.ToString();
         }
 
-
         public bool Equals(BitMatrix<M,N,T> rhs)        
         {
             var eq = mathspan.eq<T>(Data, rhs.Data);

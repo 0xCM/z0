@@ -16,6 +16,16 @@ namespace Z0
     public static partial class BitMatrixX
     {   
         /// <summary>
+        /// Loads a generic bitmatrix from size-conformant sequence of row bits
+        /// </summary>
+        /// <param name="src">The source bits</param>
+        /// <typeparam name="T">The primal data type</typeparam>
+        [MethodImpl(Inline)]
+        public static BitMatrix<T> ToBitMatrix<T>(this RowBits<T> src)
+            where T : unmanaged
+                => BitMatrix.from(src);
+
+        /// <summary>
         /// Converts the matrix to a bitvector
         /// </summary>
         [MethodImpl(Inline)]
@@ -124,25 +134,10 @@ namespace Z0
         internal static string FormatMatrixBits(this byte[] src, int rowlen)            
             => src.AsSpan().FormatMatrixBits(rowlen);
 
-        // [MethodImpl(Inline)]
-        // internal static string FormatMatrixBits(this Span<ushort> src, int rowlen)            
-        //     => src.AsBytes().FormatMatrixBits(rowlen);
-
-        // [MethodImpl(Inline)]
-        // internal static string FormatMatrixBits(this ushort[] src, int rowlen)            
-        //     => src.AsSpan().AsBytes().FormatMatrixBits(rowlen);
-
-        // [MethodImpl(Inline)]
-        // internal static string FormatMatrixBits(this Span<uint> src, int rowlen)            
-        //     => src.AsBytes().FormatMatrixBits(rowlen);
 
         [MethodImpl(Inline)]
         internal static string FormatMatrixBits(this uint[] src, int rowlen)            
             => src.AsSpan().AsBytes().FormatMatrixBits(rowlen);
-
-        // [MethodImpl(Inline)]
-        // internal static string FormatMatrixBits(this Span<ulong> src, int rowlen)            
-        //     => src.AsBytes().FormatMatrixBits(rowlen);
 
         [MethodImpl(Inline)]
         internal static string FormatMatrixBits(this ulong[] src, int rowlen)            

@@ -22,10 +22,10 @@ namespace Z0
         /// specified by the amount the corresponding control vector component
         /// </summary>
         /// <param name="src">The source vector</param>
-        /// <param name="control">The control vector</param>
+        /// <param name="offset">The control vector</param>
         [MethodImpl(Inline)]
-        public static Vector128<int> vsrlv(Vector128<int> src, Vector128<uint> control)
-            => ShiftRightLogicalVariable(src, control);
+        public static Vector128<int> vsrlv(Vector128<int> src, Vector128<uint> offset)
+            => ShiftRightLogicalVariable(src, offset);
 
         /// <summary>
         /// __m128i _mm_srlv_epi32 (__m128i a, __m128i count) VPSRLVD xmm, xmm, xmm/m128
@@ -70,6 +70,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<int> vsrlv(Vector256<int> src, Vector256<uint> offset)
             => ShiftRightLogicalVariable(src, offset);
+
 
         /// <summary>
         /// __m256i _mm256_srlv_epi32 (__m256i a, __m256i count) VPSRLVD ymm, ymm, ymm/m256

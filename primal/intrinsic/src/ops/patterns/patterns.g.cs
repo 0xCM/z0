@@ -15,6 +15,11 @@ namespace Z0
     partial class ginx
     {
         [MethodImpl(Inline)]
+        public static Vector128<T> vzero<T>(N128 n)
+            where T : unmanaged
+               => default;
+
+        [MethodImpl(Inline)]
         public static Vector128<T> vpOnes<T>(N128 n)
             where T : unmanaged
                => Vec128Pattern.Ones<T>();
@@ -29,6 +34,11 @@ namespace Z0
             where T : unmanaged
                 => Vec128Pattern.Increments<T>();
         
+        [MethodImpl(Inline)]
+        public static Vector256<T> vzero<T>(N256 n)
+            where T : unmanaged
+               => default;
+
         [MethodImpl(Inline)]
         public static Vector256<T> vpOnes<T>(N256 n)
             where T : unmanaged

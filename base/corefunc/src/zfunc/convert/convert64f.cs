@@ -21,44 +21,44 @@ namespace Z0
             || typeof(T) == typeof(short) 
             || typeof(T) == typeof(int) 
             || typeof(T) == typeof(long))
-                return converti<T>(src);
+                return convert_i<T>(src);
             else if(typeof(T) == typeof(byte) 
             || typeof(T) == typeof(ushort) 
             || typeof(T) == typeof(uint) 
             || typeof(T) == typeof(ulong))
-                return convertu<T>(src);
+                return convert_u<T>(src);
             else
-                return convertx<T>(src);
+                return convert_x<T>(src);
         }
 
         [MethodImpl(Inline)]
-        static T converti<T>(double src)
+        static T convert_i<T>(double src)
         {
             if(typeof(T) == typeof(sbyte))
-                return generic<T>((sbyte)((int)src));
+                return generic<T>(FloatConvert.to8i(src));
             else if(typeof(T) == typeof(short))
-                return generic<T>((sbyte)((int)src));
+                return generic<T>(FloatConvert.to16i(src));
             else if(typeof(T) == typeof(int))
-                return generic<T>((int)src);
+                return generic<T>(FloatConvert.to32i(src));
             else  
-                return generic<T>((long)src);           
+                return generic<T>(FloatConvert.to64i(src));
         }
 
         [MethodImpl(Inline)]
-        static T convertu<T>(double src)
+        static T convert_u<T>(double src)
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>((byte)((int)src));
+                return generic<T>(FloatConvert.to8u(src));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>((ushort)((int)src));
+                return generic<T>(FloatConvert.to16u(src));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(Float64Convert.to32u(src));
+                return generic<T>(FloatConvert.to32u(src));
             else  
-                return generic<T>((ulong)((int)src));
+                return generic<T>(FloatConvert.to64u(src));
         }
 
         [MethodImpl(Inline)]
-        static T convertx<T>(in double src)
+        static T convert_x<T>(double src)
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
@@ -68,7 +68,7 @@ namespace Z0
             else if(typeof(T) == typeof(char))
                 return g16ch<T>((char)(int)src);
             else            
-                throw unsupported<T>();
+                return unhandled<double,T>(src);
         }
     }
 }

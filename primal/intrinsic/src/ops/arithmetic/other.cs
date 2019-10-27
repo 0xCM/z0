@@ -22,8 +22,8 @@ namespace Z0
         /// </summary>
         /// <param name="lhs"></param>
         /// <param name="rhs"></param>
-        public static Vec128<ushort> vsad(in Vec128<byte> lhs, in Vec128<byte> rhs)
-            => SumAbsoluteDifferences(lhs.xmm,rhs.xmm);
+        public static Vector128<ushort> vsad(Vector128<byte> lhs, Vector128<byte> rhs)
+            => SumAbsoluteDifferences(lhs,rhs);
 
         /// <summary>
         /// __m256i _mm256_sad_epu8 (__m256i a, __m256i b) VPSADBW ymm, ymm, ymm/m256
@@ -34,8 +34,8 @@ namespace Z0
         /// </summary>
         /// <param name="lhs"></param>
         /// <param name="rhs"></param>
-        public static Vec256<ushort> vsad(in Vec256<byte> lhs, in Vec256<byte> rhs)
-            => SumAbsoluteDifferences(lhs.ymm,rhs.ymm);
+        public static Vector256<ushort> vsad(Vector256<byte> lhs, Vector256<byte> rhs)
+            => SumAbsoluteDifferences(lhs,rhs);
     }
 
 }

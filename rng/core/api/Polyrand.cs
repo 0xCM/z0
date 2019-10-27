@@ -16,19 +16,19 @@ namespace Z0
         internal Polyrand(IBoundPointSource<ulong> Points)
         {
             this.Points = Points;            
-            this.Nav = default;
+            this.Navigator = default;
         }
 
 
-        internal Polyrand(IStepwiseSource<ulong> Points)
+        internal Polyrand(INavigableSource<ulong> Points)
         {
             this.Points = Points;            
-            this.Nav = some(Points as IRandomNav);
+            this.Navigator = some(Points as IRandomNav);
         }
 
         readonly IBoundPointSource<ulong> Points;
 
-        public Option<IRandomNav> Nav {get;}
+        public Option<IRandomNav> Navigator {get;}
 
         public RngKind RngKind 
             => Points.RngKind;

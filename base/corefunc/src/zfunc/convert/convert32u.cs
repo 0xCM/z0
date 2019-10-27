@@ -28,9 +28,7 @@ namespace Z0
             || typeof(T) == typeof(ulong))
                 return convertu<T>(src);
             else
-            {
                 return convertx<T>(src);
-            }
         }
 
 
@@ -71,7 +69,7 @@ namespace Z0
             else if(typeof(T) == typeof(char))
                 return generic<T>((char)src);
             else            
-                 throw unsupported<T>();
+                 return unhandled<uint,T>(src);
         }
     }
 }

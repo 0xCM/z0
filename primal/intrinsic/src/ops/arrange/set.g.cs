@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Runtime.Intrinsics;
     using System.Runtime.Intrinsics.X86;
     using Z0;
  
@@ -21,7 +22,7 @@ namespace Z0
         /// <param name="hi">The hi part</param>
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
-        public static Vec256<T> vset<T>(in Vec128<T> lo, in Vec128<T> hi)
+        public static Vector256<T> vset<T>(Vector128<T> lo, Vector128<T> hi)
             where T : unmanaged
                 => vinsert(hi, vinsert(lo, default,0), 1);        
     }

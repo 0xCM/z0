@@ -93,6 +93,7 @@ namespace Z0
             Disassemble(typeof(circop));    
             Disassemble(typeof(BitParts));                
             Disassemble(typeof(LogicOps));   
+            Disassemble(typeof(convoc));   
             Disassemble(typeof(LogicExprEval));             
             Disassemble(typeof(LogicDispatcher)); 
         }

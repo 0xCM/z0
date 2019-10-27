@@ -24,8 +24,8 @@ namespace Z0
         /// </summary>
         /// <param name="src">A readonly memory reference</param>
         [MethodImpl(Inline)]
-        public static unsafe Vec128<byte> vloadu128(in byte src)
-            => LoadDquVector128(constptr(in src));
+        public static unsafe Vector128<byte> vloadu(in byte src, out Vector128<byte> dst)
+            => dst = LoadDquVector128(constptr(in src));
 
         /// <summary>
         /// __m128i _mm_lddqu_si128 (__m128i const* mem_addr) LDDQU xmm, m128
@@ -33,8 +33,8 @@ namespace Z0
         /// </summary>
         /// <param name="src">A readonly memory reference</param>
         [MethodImpl(Inline)]
-        public static unsafe Vec128<sbyte> vloadu128(in sbyte src)
-            => LoadDquVector128(constptr(in src));
+        public static unsafe Vector128<sbyte> vloadu(in sbyte src, out Vector128<sbyte> dst)
+            => dst = LoadDquVector128(constptr(in src));
 
         /// <summary>
         /// __m128i _mm_lddqu_si128 (__m128i const* mem_addr) LDDQU xmm, m128
@@ -42,8 +42,8 @@ namespace Z0
         /// </summary>
         /// <param name="src">A readonly memory reference</param>
         [MethodImpl(Inline)]
-        public static unsafe Vec128<short> vloadu128(in short src)
-            => LoadDquVector128(constptr(in src));
+        public static unsafe Vector128<short> vloadu(in short src, out Vector128<short> dst)
+            => dst = LoadDquVector128(constptr(in src));
 
         /// <summary>
         /// __m128i _mm_lddqu_si128 (__m128i const* mem_addr) LDDQU xmm, m128
@@ -51,8 +51,8 @@ namespace Z0
         /// </summary>
         /// <param name="src">A readonly memory reference</param>
         [MethodImpl(Inline)]
-        public static unsafe Vec128<ushort> vloadu128(in ushort src)
-            => LoadDquVector128(constptr(in src));
+        public static unsafe Vector128<ushort> vloadu(in ushort src, out Vector128<ushort> dst)
+            => dst = LoadDquVector128(constptr(in src));
 
         /// <summary>
         /// __m128i _mm_lddqu_si128 (__m128i const* mem_addr) LDDQU xmm, m128
@@ -60,8 +60,8 @@ namespace Z0
         /// </summary>
         /// <param name="src">A readonly memory reference</param>
         [MethodImpl(Inline)]
-        public static unsafe Vec128<int> vloadu128(in int src)
-            => LoadDquVector128(constptr(in src));
+        public static unsafe Vector128<int> vloadu(in int src, out Vector128<int> dst)
+            => dst = LoadDquVector128(constptr(in src));
 
         /// <summary>
         /// __m128i _mm_lddqu_si128 (__m128i const* mem_addr) LDDQU xmm, m128
@@ -69,8 +69,8 @@ namespace Z0
         /// </summary>
         /// <param name="src">A readonly memory reference</param>
         [MethodImpl(Inline)]
-        public static unsafe Vec128<uint> vloadu128(in uint src)
-            => LoadDquVector128(constptr(in src));
+        public static unsafe Vector128<uint> vloadu(in uint src, out Vector128<uint> dst)
+            => dst = LoadDquVector128(constptr(in src));
 
         /// <summary>
         /// __m128i _mm_lddqu_si128 (__m128i const* mem_addr) LDDQU xmm, m128
@@ -78,8 +78,8 @@ namespace Z0
         /// </summary>
         /// <param name="src">A readonly memory reference</param>
         [MethodImpl(Inline)]
-        public static unsafe Vec128<long> vloadu128(in long src)
-            => LoadDquVector128(constptr(in src));
+        public static unsafe Vector128<long> vloadu(in long src, out Vector128<long> dst)
+            => dst = LoadDquVector128(constptr(in src));
 
         /// <summary>
         /// __m128i _mm_lddqu_si128 (__m128i const* mem_addr) LDDQU xmm, m128
@@ -87,8 +87,8 @@ namespace Z0
         /// </summary>
         /// <param name="src">A readonly memory reference</param>
         [MethodImpl(Inline)]
-        public static unsafe Vec128<ulong> vloadu128(in ulong src)
-            => LoadDquVector128(constptr(in src));
+        public static unsafe Vector128<ulong> vloadu(in ulong src, out Vector128<ulong> dst)
+            => dst = LoadDquVector128(constptr(in src));
 
         /// <summary>
         /// __m256i _mm256_lddqu_si256 (__m256i const * mem_addr) VLDDQU ymm, m256
@@ -96,8 +96,8 @@ namespace Z0
         /// </summary>
         /// <param name="src">A readonly memory reference</param>
         [MethodImpl(Inline)]
-        public static unsafe Vec256<byte> vloadu256(in byte src)
-            => LoadDquVector256(constptr(in src));
+        public static unsafe Vector256<byte> vloadu(in byte src, out Vector256<byte> dst)
+            => dst = LoadDquVector256(constptr(in src));
 
         /// <summary>
         /// __m256i _mm256_lddqu_si256 (__m256i const * mem_addr) VLDDQU ymm, m256
@@ -105,8 +105,8 @@ namespace Z0
         /// </summary>
         /// <param name="src">A readonly memory reference</param>
         [MethodImpl(Inline)]
-        public static unsafe Vec256<sbyte> vloadu256(in sbyte src)
-            => LoadDquVector256(constptr(in src));
+        public static unsafe Vector256<sbyte> vloadu(in sbyte src, out Vector256<sbyte> dst)
+            => dst = LoadDquVector256(constptr(in src));
 
         /// <summary>
         /// __m256i _mm256_lddqu_si256 (__m256i const * mem_addr) VLDDQU ymm, m256
@@ -114,8 +114,8 @@ namespace Z0
         /// </summary>
         /// <param name="src">A readonly memory reference</param>
         [MethodImpl(Inline)]
-        public static unsafe Vec256<short> vloadu256(in short src)
-            => LoadDquVector256(constptr(in src));
+        public static unsafe Vector256<short> vloadu(in short src, out Vector256<short> dst)
+            => dst = LoadDquVector256(constptr(in src));
 
         /// <summary>
         /// __m256i _mm256_lddqu_si256 (__m256i const * mem_addr) VLDDQU ymm, m256
@@ -123,8 +123,8 @@ namespace Z0
         /// </summary>
         /// <param name="src">A readonly memory reference</param>
         [MethodImpl(Inline)]
-        public static unsafe Vec256<ushort> vloadu256(in ushort src)
-            => LoadDquVector256(constptr(in src));
+        public static unsafe Vector256<ushort> vloadu(in ushort src, out Vector256<ushort> dst)
+            => dst = LoadDquVector256(constptr(in src));
 
         /// <summary>
         /// __m256i _mm256_lddqu_si256 (__m256i const * mem_addr) VLDDQU ymm, m256
@@ -132,8 +132,8 @@ namespace Z0
         /// </summary>
         /// <param name="src">A readonly memory reference</param>
         [MethodImpl(Inline)]
-        public static unsafe Vec256<int> vloadu256(in int src)
-            => LoadDquVector256(constptr(in src));
+        public static unsafe Vector256<int> vloadu(in int src, out Vector256<int> dst)
+            => dst = LoadDquVector256(constptr(in src));
 
         /// <summary>
         /// __m256i _mm256_lddqu_si256 (__m256i const * mem_addr) VLDDQU ymm, m256
@@ -141,8 +141,8 @@ namespace Z0
         /// </summary>
         /// <param name="src">A readonly memory reference</param>
         [MethodImpl(Inline)]
-        public static unsafe Vec256<uint> vloadu256(in uint src)
-            => LoadDquVector256(constptr(in src));
+        public static unsafe Vector256<uint> vloadu(in uint src, out Vector256<uint> dst)
+            => dst = LoadDquVector256(constptr(in src));
 
         /// <summary>
         /// __m256i _mm256_lddqu_si256 (__m256i const * mem_addr) VLDDQU ymm, m256
@@ -150,8 +150,8 @@ namespace Z0
         /// </summary>
         /// <param name="src">A readonly memory reference</param>
         [MethodImpl(Inline)]
-        public static unsafe Vec256<long> vloadu256(in long src)
-            => LoadDquVector256(constptr(in src));
+        public static unsafe Vector256<long> vloadu(in long src, out Vector256<long> dst)
+            => dst = LoadDquVector256(constptr(in src));
 
         /// <summary>
         /// __m256i _mm256_lddqu_si256 (__m256i const * mem_addr) VLDDQU ymm, m256
@@ -159,7 +159,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">A readonly memory reference</param>
         [MethodImpl(Inline)]
-        public static unsafe Vec256<ulong> vloadu256(in ulong src)
-            => LoadDquVector256(constptr(in src));
+        public static unsafe Vector256<ulong> vloadu(in ulong src, out Vector256<ulong> dst)
+            => dst = LoadDquVector256(constptr(in src));
    }
 }

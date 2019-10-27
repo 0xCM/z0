@@ -16,43 +16,97 @@ namespace Z0
     partial class ginx
     {        
         [MethodImpl(Inline)]
-        public static Vec128<T> vmax<T>(in Vec128<T> x, in Vec128<T> y)
+        public static Vector128<T> vmax<T>(Vector128<T> x, Vector128<T> y)
             where T : unmanaged
         {
-            if(typeof(T) == typeof(sbyte))
-                return generic<T>(dinx.vmax(int8(x), int8(y)));
-            else if(typeof(T) == typeof(byte))
-                return generic<T>(dinx.vmax(uint8(x), uint8(y)));
-            else if(typeof(T) == typeof(short))
-                return generic<T>(dinx.vmax(int16(x), int16(y)));
-            else if(typeof(T) == typeof(ushort))
-                return generic<T>(dinx.vmax(uint16(x), uint16(y)));
-            else if(typeof(T) == typeof(int))
-                return generic<T>(dinx.vmax(int32(x), int32(y)));
-            else if(typeof(T) == typeof(uint))
-                return generic<T>(dinx.vmax(uint32(x), uint32(y)));
+            if(typeof(T) == typeof(byte) 
+            || typeof(T) == typeof(ushort) 
+            || typeof(T) == typeof(uint) 
+            || typeof(T) == typeof(ulong))
+                return vmax_u(x,y);
+            else if(typeof(T) == typeof(sbyte) 
+            || typeof(T) == typeof(short) 
+            || typeof(T) == typeof(int) 
+            || typeof(T) == typeof(long))
+                return vmax_i(x,y);
             else 
-                throw unsupported<T>();
+                return gfpv.vmax(x,y);
         }
          
        [MethodImpl(Inline)]
-       public static Vec256<T> vmax<T>(in Vec256<T> x, in Vec256<T> y)
+       public static Vector256<T> vmax<T>(Vector256<T> x, Vector256<T> y)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(byte) 
+            || typeof(T) == typeof(ushort) 
+            || typeof(T) == typeof(uint) 
+            || typeof(T) == typeof(ulong))
+                return vmax_u(x,y);
+            else if(typeof(T) == typeof(sbyte) 
+            || typeof(T) == typeof(short) 
+            || typeof(T) == typeof(int) 
+            || typeof(T) == typeof(long))
+                return vmax_i(x,y);
+            else 
+                return gfpv.vmax(x,y);
+        }        
+
+        [MethodImpl(Inline)]
+        static Vector128<T> vmax_i<T>(Vector128<T> x, Vector128<T> y)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return generic<T>(dinx.vmax(int8(x), int8(y)));
-            else if(typeof(T) == typeof(byte))
-                return generic<T>(dinx.vmax(uint8(x), uint8(y)));
+                 return generic<T>(dinx.vmax(int8(x), int8(y)));
             else if(typeof(T) == typeof(short))
-                return generic<T>(dinx.vmax(int16(x), int16(y)));
+                 return generic<T>(dinx.vmax(int16(x), int16(y)));
+            else if(typeof(T) == typeof(int))
+                 return generic<T>(dinx.vmax(int32(x), int32(y)));
+            else
+                 return generic<T>(dinx.vmax(int64(x), int64(y)));
+        }
+
+        [MethodImpl(Inline)]
+        static Vector128<T> vmax_u<T>(Vector128<T> x, Vector128<T> y)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(byte))
+                return generic<T>(dinx.vmax(uint8(x), uint8(y)));
             else if(typeof(T) == typeof(ushort))
                 return generic<T>(dinx.vmax(uint16(x), uint16(y)));
-            else if(typeof(T) == typeof(int))
-                return generic<T>(dinx.vmax(int32(x), int32(y)));
             else if(typeof(T) == typeof(uint))
                 return generic<T>(dinx.vmax(uint32(x), uint32(y)));
             else 
-                throw unsupported<T>();
-        }        
+                return generic<T>(dinx.vmax(uint64(x), uint64(y)));
+        }
+
+        [MethodImpl(Inline)]
+        static Vector256<T> vmax_i<T>(Vector256<T> x, Vector256<T> y)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(sbyte))
+                 return generic<T>(dinx.vmax(int8(x), int8(y)));
+            else if(typeof(T) == typeof(short))
+                 return generic<T>(dinx.vmax(int16(x), int16(y)));
+            else if(typeof(T) == typeof(int))
+                 return generic<T>(dinx.vmax(int32(x), int32(y)));
+            else
+                 return generic<T>(dinx.vmax(int64(x), int64(y)));
+        }
+
+        [MethodImpl(Inline)]
+        static Vector256<T> vmax_u<T>(Vector256<T> x, Vector256<T> y)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(byte))
+                return generic<T>(dinx.vmax(uint8(x), uint8(y)));
+            else if(typeof(T) == typeof(ushort))
+                return generic<T>(dinx.vmax(uint16(x), uint16(y)));
+            else if(typeof(T) == typeof(uint))
+                return generic<T>(dinx.vmax(uint32(x), uint32(y)));
+            else 
+                return generic<T>(dinx.vmax(uint64(x), uint64(y)));
+        }
+
+
     }
 }

@@ -31,7 +31,7 @@ namespace Z0
         /// Samples one point from each generator
         /// </summary>
         /// <param name="sources">A set of random point sources</param>
-        public static Span<T> Next<T>(this Span<IStepwiseSource<T>> generators)
+        public static Span<T> Next<T>(this Span<INavigableSource<T>> generators)
             where T : unmanaged
         {
             Span<T> dst = new T[generators.Length];
@@ -57,7 +57,7 @@ namespace Z0
         /// Samples one point from each generator
         /// </summary>
         /// <param name="sources">A set of random point sources</param>
-        public static T[] Next<T>(this IStepwiseSource<T>[] sources)
+        public static T[] Next<T>(this INavigableSource<T>[] sources)
             where T : unmanaged
         {
             var dst = new T[sources.Length];

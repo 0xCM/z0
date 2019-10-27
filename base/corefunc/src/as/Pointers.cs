@@ -33,7 +33,12 @@ namespace Z0
         [MethodImpl(Inline)]
         public static unsafe T* refptr<T>(ref T src)
             where T : unmanaged
-                => (T*)Unsafe.AsPointer(ref src);
+                => (T*)pvoid(ref src);
+
+        [MethodImpl(Inline)]
+        public static unsafe T* constptr<T>(in T src)
+            where T : unmanaged
+                => refptr(ref asRef(in src));
 
         /// <summary>
         /// Increments a generic pointer by a specified amount

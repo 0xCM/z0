@@ -71,10 +71,23 @@ namespace Z0
         public static IndexOutOfRangeException OutOfRange(int index, int min, int max, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => new IndexOutOfRangeException(ErrorMessages.IndexOutOfRange(index,min,max, caller, file, line).ToString());
 
+        [MethodImpl(NotInline)]
         public static IndexOutOfRangeException OutOfRange<T>(T value, T min, T max, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-                    => new IndexOutOfRangeException($"Value {value} is not between {min} and {max}: line {line}, member {caller} in file {file}");
+                => new IndexOutOfRangeException($"Value {value} is not between {min} and {max}: line {line}, member {caller} in file {file}");
+
+        [MethodImpl(NotInline)]
+        public static T Throw<T>(string reason, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+            => throw AppException.Define(reason, caller,file,line);
+
+        [MethodImpl(NotInline)]
+        public static void Throw(string reason, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+            => throw AppException.Define(reason, caller,file,line);
+
+        [MethodImpl(NotInline)]
         public static T ThrowOutOfRange<T>(int index, int min, int max, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => throw OutOfRange(index, min, max, caller, file, line);
+
+        [MethodImpl(NotInline)]
         public static void ThrowTooShort(int dstLen, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => throw new IndexOutOfRangeException($"The target length {dstLen} is tooShort: line {line}, member {caller} in file {file}");
 

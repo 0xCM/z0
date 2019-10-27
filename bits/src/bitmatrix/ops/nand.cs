@@ -13,21 +13,82 @@ namespace Z0
 
     partial class BitMatrix
     {
-        public static RowBits<T> nand<T>(RowBits<T> A, RowBits<T> B, RowBits<T> C)
+        [MethodImpl(Inline)]
+        public static unsafe BitMatrix<T> nand<T>(in BitMatrix<T> A, in BitMatrix<T> B)
             where T : unmanaged
         {
-            var rc = rowdim(A,B,C);
-            for(var i=0; i<rc; i++)
-                C[i] = bitvector.nand(A[i],B[i]);
+            var C = BitMatrix.alloc<T>();
+            BitPoints.nand(A.HeadPtr,B.HeadPtr,C.HeadPtr);
             return C;
         }
 
         [MethodImpl(Inline)]
-        public static RowBits<T> nand<T>(RowBits<T> A, RowBits<T> B)
+        public static unsafe ref BitMatrix<T> nand<T>(in BitMatrix<T> A, in BitMatrix<T> B, ref BitMatrix<T> C)
             where T : unmanaged
-                => nand(A,B, A.Replicate(true));
+        {
+            BitPoints.nand(A.HeadPtr,B.HeadPtr,C.HeadPtr);
+            return ref C;
+        }
 
+        [MethodImpl(Inline)]
+        public static unsafe ref BitMatrix8 nand(in BitMatrix8 A, in BitMatrix8 B, ref BitMatrix8 C)
+        {
+             BitPoints.nand(A.HeadPtr,B.HeadPtr,C.HeadPtr);
+             return ref C;
+        }
 
+        [MethodImpl(Inline)]
+        public static unsafe BitMatrix8 nand(BitMatrix8 A, BitMatrix8 B)
+        {
+            var C = BitMatrix.alloc(n8);
+            BitPoints.nand(A.HeadPtr,B.HeadPtr,C.HeadPtr);
+            return C;
+        }
+
+        [MethodImpl(Inline)]
+        public static unsafe ref BitMatrix16 nand(in BitMatrix16 A, in BitMatrix16 B, ref BitMatrix16 C)
+        {
+            BitPoints.nand(A.HeadPtr, B.HeadPtr, C.HeadPtr);
+            return ref C;
+        }
+
+        [MethodImpl(Inline)]
+        public static unsafe BitMatrix16 nand(BitMatrix16 A, BitMatrix16 B)
+        {
+            var C = BitMatrix.alloc(n16);
+            BitPoints.nand(A.HeadPtr,B.HeadPtr,C.HeadPtr);
+            return C;
+        }
+
+        [MethodImpl(Inline)]
+        public static unsafe ref BitMatrix32 nand(in BitMatrix32 A, in BitMatrix32 B, ref BitMatrix32 C)
+        {
+            BitPoints.nand(A.HeadPtr, B.HeadPtr, C.HeadPtr);
+            return ref C;
+        }
+
+        [MethodImpl(Inline)]
+        public static unsafe BitMatrix32 nand(BitMatrix32 A, BitMatrix32 B)
+        {
+            var C = BitMatrix.alloc(n32);
+            BitPoints.nand(A.HeadPtr,B.HeadPtr,C.HeadPtr);
+            return C;
+        }
+
+        [MethodImpl(Inline)]
+        public static unsafe ref BitMatrix64 nand(in BitMatrix64 A, in BitMatrix64 B, ref BitMatrix64 C)
+        {
+            BitPoints.nand(A.HeadPtr, B.HeadPtr, C.HeadPtr);
+            return ref C;
+        }
+
+        [MethodImpl(Inline)]
+        public static unsafe BitMatrix64 nand(in BitMatrix64 A, in BitMatrix64 B)
+        {
+            var C = BitMatrix.alloc(n64);
+            BitPoints.nand(A.HeadPtr,B.HeadPtr,C.HeadPtr);
+            return C;
+        }
     }
 
 }

@@ -13,6 +13,29 @@ namespace Z0
 
     public static partial class BitRng
     {
+
+        /// <summary>
+        /// Produces a generic bitmatrix predicated on a primal type
+        /// </summary>
+        /// <param name="random">The random source</param>
+        /// <typeparam name="T">The defining primal type</typeparam>
+        [MethodImpl(Inline)]
+        public static BitMatrix<T> BitMatrix<T>(this IPolyrand random)
+            where T : unmanaged
+        {                        
+            var bytes = math.square(Z0.BitMatrix<T>.N) >> 3;
+            var data = random.Span<byte>((int)bytes);
+            return Z0.BitMatrix.load(data.As<byte,T>());
+        }
+
+        [MethodImpl(Inline)]
+        public static ref BitMatrix<T> BitMatrix<T>(this IPolyrand random, ref BitMatrix<T> dst)
+            where T : unmanaged
+        {                        
+            random.StreamTo((int)Z0.BitMatrix<T>.N, ref dst.Head);
+            return ref dst;            
+        }
+
         /// <summary>
         /// Produces a 4x4 bitmatrix from a random source
         /// </summary>

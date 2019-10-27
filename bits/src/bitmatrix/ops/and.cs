@@ -19,6 +19,23 @@ namespace Z0
     partial class BitMatrix
     {
         [MethodImpl(Inline)]
+        public static unsafe BitMatrix<T> and<T>(in BitMatrix<T> A, in BitMatrix<T> B)
+            where T : unmanaged
+        {
+            var C = BitMatrix.alloc<T>();
+            BitPoints.and(A.HeadPtr,B.HeadPtr,C.HeadPtr);
+            return C;
+        }
+
+        [MethodImpl(Inline)]
+        public static unsafe ref BitMatrix<T> and<T>(in BitMatrix<T> A, in BitMatrix<T> B, ref BitMatrix<T> C)
+            where T : unmanaged
+        {
+            BitPoints.and(A.HeadPtr,B.HeadPtr,C.HeadPtr);
+            return ref C;
+        }
+
+        [MethodImpl(Inline)]
         public static BitMatrix4 and(in BitMatrix4 A, in BitMatrix4 B)
         {
             var a = (ushort)A;
@@ -28,96 +45,66 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static BitMatrix8 and(in BitMatrix8 A, in BitMatrix8 B)
+        public static unsafe BitMatrix8 and(in BitMatrix8 A, in BitMatrix8 B)
         {
-            var x = A.Bytes.TakeUInt64();
-            var y = B.Bytes.TakeUInt64();
-            return BitMatrix8.From(x & y);
+            var C = BitMatrix.alloc(n8);
+            BitPoints.and(A.HeadPtr,B.HeadPtr,C.HeadPtr);
+            return C;
+        }
+
+        [MethodImpl(Inline)]
+        public static unsafe ref BitMatrix8 and(in BitMatrix8 A, in BitMatrix8 B, ref BitMatrix8 C)
+        {
+            BitPoints.and(A.HeadPtr, B.HeadPtr, C.HeadPtr);
+            return ref C;
+        }
+
+
+        [MethodImpl(Inline)]
+        public static unsafe BitMatrix16 and(in BitMatrix16 A, in BitMatrix16 B)
+        {
+            var C = BitMatrix.alloc(n16);
+            BitPoints.and(A.HeadPtr,B.HeadPtr,C.HeadPtr);
+            return C;
         }
 
         [MethodImpl(Inline)]
         public static unsafe ref BitMatrix16 and(in BitMatrix16 A, in BitMatrix16 B, ref BitMatrix16 C)
         {
-            BitPoints256.and(refptr(ref A.Head), refptr(ref B.Head), refptr(ref C.Head));
+            BitPoints.and(A.HeadPtr, B.HeadPtr, C.HeadPtr);
             return ref C;
         }
 
         [MethodImpl(Inline)]
-        public static BitMatrix16 and(in BitMatrix16 A, in BitMatrix16 B)
+        public static unsafe BitMatrix32 and(in BitMatrix32 A, in BitMatrix32 B)
         {
-            var C = BitMatrix16.Alloc();
-            return and(A,B, ref C);
+            var C = BitMatrix.alloc(n32);
+            BitPoints.and(A.HeadPtr,B.HeadPtr,C.HeadPtr);
+            return C;
         }
-        
+
         [MethodImpl(Inline)]
         public static unsafe ref BitMatrix32 and(in BitMatrix32 A, in BitMatrix32 B, ref BitMatrix32 C)
         {
-            BitPoints256.and(refptr(ref A.Head), refptr(ref B.Head), refptr(ref C.Head));
+            BitPoints.and(A.HeadPtr, B.HeadPtr, C.HeadPtr);
             return ref C;
         }
 
         [MethodImpl(Inline)]
-        public static BitMatrix32 and(in BitMatrix32 A, in BitMatrix32 B)
+        public static unsafe BitMatrix64 and(in BitMatrix64 A, in BitMatrix64 B)
         {
-            var C = BitMatrix32.Alloc();
-            return and(A,B, ref C);
+            var C = BitMatrix.alloc(n64);
+            BitPoints.and(A.HeadPtr,B.HeadPtr,C.HeadPtr);
+            return C;
         }
 
         [MethodImpl(Inline)]
         public static unsafe ref BitMatrix64 and(in BitMatrix64 A, in BitMatrix64 B, ref BitMatrix64 C)
         {
-            BitPoints256.and(refptr(ref A.Head), refptr(ref B.Head), refptr(ref C.Head));
+            BitPoints.and(A.HeadPtr, B.HeadPtr, C.HeadPtr);
             return ref C;
         }
 
-        /// <summary>
-        /// Computes the bitwise AND between two square bitmatrices of common natural order and stores the
-        /// result a caller-supplied target matrix
-        /// </summary>
-        /// <param name="A">The first source operand</param>
-        /// <param name="B">The second source operand</param>
-        /// <param name="C">The target</param>
-        /// <typeparam name="N">The matrix order</typeparam>
-        /// <typeparam name="T">The matrix storage type</typeparam>
-        [MethodImpl(Inline)]
-        public static ref BitMatrix<N,T> and<N,T>(in BitMatrix<N,T> A, in BitMatrix<N,T> B, ref BitMatrix<N,T> C)
-            where N : ITypeNat, new()
-            where T : unmanaged
-        {
-            mathspan.and(A.Data, B.Data, C.Data);
-            return ref C;
-        }
 
-        /// <summary>
-        /// Computes the bitwise AND between two square bitmatrices of common order
-        /// </summary>
-        [MethodImpl(Inline)]
-        public static BitMatrix<N,T> and<N,T>(in BitMatrix<N,T> A, in BitMatrix<N,T> B)
-            where N : ITypeNat, new()
-            where T : unmanaged
-        {
-            var C = alloc<N,T>();
-            return and(in A, in B, ref C);
-        }
-
-        /// <summary>
-        /// Computes the bitwise AND between two bitmatrices of common dimension and stores the
-        /// result a caller-supplied target matrix
-        /// </summary>
-        /// <param name="A">The first source operand</param>
-        /// <param name="B">The second source operand</param>
-        /// <param name="C">The target</param>
-        /// <typeparam name="N">The matrix order</typeparam>
-        /// <typeparam name="T">The matrix storage type</typeparam>
-        [MethodImpl(Inline)]
-        public static ref BitMatrix<M,N,T> and<M,N,T>(in BitMatrix<M,N,T> A, in BitMatrix<M,N,T> B, ref BitMatrix<M,N,T> C)        
-            where M : ITypeNat, new()
-            where N : ITypeNat, new()
-            where T : unmanaged
-        {
-            mathspan.and(A.Data, B.Data, C.Data);
-            return ref C;
-        } 
- 
     }
 }

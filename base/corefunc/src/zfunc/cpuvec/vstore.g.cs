@@ -92,13 +92,13 @@ partial class zfunc
         where T : unmanaged
     {
         if(typeof(T) == typeof(byte))
-            cpuvec.vstore(uint8(src), ref uint8(ref dst));
+            cpufunc.vstore(uint8(src), ref uint8(ref dst));
         else if(typeof(T) == typeof(ushort))
-            cpuvec.vstore(uint16(src), ref uint16(ref dst));
+            cpufunc.vstore(uint16(src), ref uint16(ref dst));
         else if(typeof(T) == typeof(uint))
-            cpuvec.vstore(uint32(src), ref uint32(ref dst));
+            cpufunc.vstore(uint32(src), ref uint32(ref dst));
         else
-            cpuvec.vstore(uint64(src), ref uint64(ref dst));
+            cpufunc.vstore(uint64(src), ref uint64(ref dst));
     }
 
     [MethodImpl(Inline)]
@@ -106,13 +106,13 @@ partial class zfunc
         where T : unmanaged
     {
         if(typeof(T) == typeof(sbyte))
-            cpuvec.vstore(int8(src), ref int8(ref dst));
+            cpufunc.vstore(int8(src), ref int8(ref dst));
         else if(typeof(T) == typeof(short))
-            cpuvec.vstore(int16(src), ref int16(ref dst));
+            cpufunc.vstore(int16(src), ref int16(ref dst));
         else if(typeof(T) == typeof(int))
-            cpuvec.vstore(int32(src), ref int32(ref dst));
+            cpufunc.vstore(int32(src), ref int32(ref dst));
         else
-            cpuvec.vstore(int64(src), ref int64(ref dst));
+            cpufunc.vstore(int64(src), ref int64(ref dst));
     }
 
     [MethodImpl(Inline)]
@@ -120,9 +120,9 @@ partial class zfunc
         where T : unmanaged
     {
         if(typeof(T) == typeof(float))
-            cpuvec.vstore(float32(src), ref float32(ref dst));
+            cpufunc.vstore(float32(src), ref float32(ref dst));
         else if(typeof(T) == typeof(double))
-            cpuvec.vstore(float64(src), ref float64(ref dst));
+            cpufunc.vstore(float64(src), ref float64(ref dst));
         else 
             throw unsupported<T>();                
     }
@@ -132,13 +132,13 @@ partial class zfunc
         where T : unmanaged
     {
         if(typeof(T) == typeof(byte))
-            cpuvec.vstore(uint8(src), ref uint8(ref dst));
+            cpufunc.vstore(uint8(src), ref uint8(ref dst));
         else if(typeof(T) == typeof(ushort))
-            cpuvec.vstore(uint16(src), ref uint16(ref dst));
+            cpufunc.vstore(uint16(src), ref uint16(ref dst));
         else if(typeof(T) == typeof(uint))
-            cpuvec.vstore(uint32(src), ref uint32(ref dst));
+            cpufunc.vstore(uint32(src), ref uint32(ref dst));
         else
-            cpuvec.vstore(uint64(src), ref uint64(ref dst));
+            cpufunc.vstore(uint64(src), ref uint64(ref dst));
     }
 
     [MethodImpl(Inline)]
@@ -146,13 +146,13 @@ partial class zfunc
         where T : unmanaged
     {
         if(typeof(T) == typeof(sbyte))
-            cpuvec.vstore(int8(src), ref int8(ref dst));
+            cpufunc.vstore(int8(src), ref int8(ref dst));
         else if(typeof(T) == typeof(short))
-            cpuvec.vstore(int16(src), ref int16(ref dst));
+            cpufunc.vstore(int16(src), ref int16(ref dst));
         else if(typeof(T) == typeof(int))
-            cpuvec.vstore(int32(src), ref int32(ref dst));
+            cpufunc.vstore(int32(src), ref int32(ref dst));
         else
-            cpuvec.vstore(int64(src), ref int64(ref dst));
+            cpufunc.vstore(int64(src), ref int64(ref dst));
     }
 
     [MethodImpl(Inline)]
@@ -160,9 +160,9 @@ partial class zfunc
         where T : unmanaged
     {
         if(typeof(T) == typeof(float))
-            cpuvec.vstore(float32(src), ref float32(ref dst));
+            cpufunc.vstore(float32(src), ref float32(ref dst));
         else if(typeof(T) == typeof(double))
-            cpuvec.vstore(float64(src), ref float64(ref dst));
+            cpufunc.vstore(float64(src), ref float64(ref dst));
         else 
             throw unsupported<T>();                
     }
@@ -173,13 +173,13 @@ partial class zfunc
         where T : unmanaged
     {
         if(typeof(T) == typeof(byte))
-            cpuvec.vstore(uint8(src), ref uint8(ref dst));
+            cpufunc.vstore(uint8(src), ref uint8(ref dst));
         else if(typeof(T) == typeof(ushort))
-            cpuvec.vstore(uint16(src), ref uint16(ref dst));
+            cpufunc.vstore(uint16(src), ref uint16(ref dst));
         else if(typeof(T) == typeof(uint))
-            cpuvec.vstore(uint32(src), ref uint32(ref dst));
+            cpufunc.vstore(uint32(src), ref uint32(ref dst));
         else
-            cpuvec.vstore(uint64(src), ref uint64(ref dst));
+            cpufunc.vstore(uint64(src), ref uint64(ref dst));
     }
 
     [MethodImpl(Inline)]
@@ -187,13 +187,13 @@ partial class zfunc
         where T : unmanaged
     {
         if(typeof(T) == typeof(sbyte))
-            cpuvec.vstore(int8(src), ref int8(ref dst));
+            cpufunc.vstore(int8(src), ref int8(ref dst));
         else if(typeof(T) == typeof(short))
-            cpuvec.vstore(int16(src), ref int16(ref dst));
+            cpufunc.vstore(int16(src), ref int16(ref dst));
         else if(typeof(T) == typeof(int))
-            cpuvec.vstore(int32(src), ref int32(ref dst));
+            cpufunc.vstore(int32(src), ref int32(ref dst));
         else
-            cpuvec.vstore(int64(src), ref int64(ref dst));
+            cpufunc.vstore(int64(src), ref int64(ref dst));
     }
 
     [MethodImpl(Inline)]
@@ -201,9 +201,9 @@ partial class zfunc
         where T : unmanaged
     {
         if(typeof(T) == typeof(float))
-            cpuvec.vstore(float32(src), ref float32(ref dst));
+            cpufunc.vstore(float32(src), ref float32(ref dst));
         else if(typeof(T) == typeof(double))
-            cpuvec.vstore(float64(src), ref float64(ref dst));
+            cpufunc.vstore(float64(src), ref float64(ref dst));
         else 
             throw unsupported<T>();                
     }
@@ -213,13 +213,13 @@ partial class zfunc
         where T : unmanaged
     {
         if(typeof(T) == typeof(byte))
-            cpuvec.vstore(uint8(src), ref uint8(ref dst));
+            cpufunc.vstore(uint8(src), ref uint8(ref dst));
         else if(typeof(T) == typeof(ushort))
-            cpuvec.vstore(uint16(src), ref uint16(ref dst));
+            cpufunc.vstore(uint16(src), ref uint16(ref dst));
         else if(typeof(T) == typeof(uint))
-            cpuvec.vstore(uint32(src), ref uint32(ref dst));
+            cpufunc.vstore(uint32(src), ref uint32(ref dst));
         else
-            cpuvec.vstore(uint64(src), ref uint64(ref dst));
+            cpufunc.vstore(uint64(src), ref uint64(ref dst));
     }
 
     [MethodImpl(Inline)]
@@ -227,13 +227,13 @@ partial class zfunc
         where T : unmanaged
     {
         if(typeof(T) == typeof(sbyte))
-            cpuvec.vstore(int8(src), ref int8(ref dst));
+            cpufunc.vstore(int8(src), ref int8(ref dst));
         else if(typeof(T) == typeof(short))
-            cpuvec.vstore(int16(src), ref int16(ref dst));
+            cpufunc.vstore(int16(src), ref int16(ref dst));
         else if(typeof(T) == typeof(int))
-            cpuvec.vstore(int32(src), ref int32(ref dst));
+            cpufunc.vstore(int32(src), ref int32(ref dst));
         else
-            cpuvec.vstore(int64(src), ref int64(ref dst));
+            cpufunc.vstore(int64(src), ref int64(ref dst));
     }
 
     [MethodImpl(Inline)]
@@ -241,9 +241,9 @@ partial class zfunc
         where T : unmanaged
     {
         if(typeof(T) == typeof(float))
-            cpuvec.vstore(float32(src), ref float32(ref dst));
+            cpufunc.vstore(float32(src), ref float32(ref dst));
         else if(typeof(T) == typeof(double))
-            cpuvec.vstore(float64(src), ref float64(ref dst));
+            cpufunc.vstore(float64(src), ref float64(ref dst));
         else 
             throw unsupported<T>();                
     }

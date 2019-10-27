@@ -83,7 +83,7 @@ namespace Z0
             else if(typeof(T) == typeof(char))
                 return g16ch<T>((char)src);
             else            
-                throw unsupported<T>();
+                return unhandled<ulong,T>(src);
         }
     }
 }

@@ -17,9 +17,9 @@ namespace Z0.Test
         {            
             for(var j=0; j < SampleSize; j++)
             {
-                var x = Random.CpuVec256<byte>();
-                var y = Random.CpuVec256<byte>();
-                var a = dinx.vavg(x,y);
+                var x = Random.CpuVector<byte>(n256);
+                var y = Random.CpuVector<byte>(n256);
+                var a = dinx.vavg(x,y).ToSpan();
                 var b = mathspan.avgi(x.ToSpan(), y.ToSpan());
                 for(var i=0; i< b.Length; i++)
                     Claim.eq(a[i], b[i]);
@@ -30,9 +30,9 @@ namespace Z0.Test
         {            
             for(var j=0; j < SampleSize; j++)
             {
-                var x = Random.CpuVec256<ushort>();
-                var y = Random.CpuVec256<ushort>();
-                var a = dinx.vavg(x,y);
+                var x = Random.CpuVector<ushort>(n256);
+                var y = Random.CpuVector<ushort>(n256);
+                var a = dinx.vavg(x,y).ToSpan();
                 var b = mathspan.avgi(x.ToSpan(), y.ToSpan());
                 for(var i=0; i< b.Length; i++)
                     Claim.eq(a[i], b[i]);

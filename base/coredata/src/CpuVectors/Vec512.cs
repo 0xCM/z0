@@ -49,7 +49,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public Vec512(in Vector256<T> lo, in Vector256<T> hi)     
+        public Vec512(Vector256<T> lo, Vector256<T> hi)     
             : this()    
         {
             this.lo = lo;

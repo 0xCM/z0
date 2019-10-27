@@ -63,11 +63,11 @@ namespace Z0
             if(typeof(T) == typeof(float))
                 return generic<T>((float)src);
             else if(typeof(T) == typeof(double))
-                return generic<T>(Float64Convert.to64f(src));
+                return generic<T>(FloatConvert.to64f(src));
             else if(typeof(T) == typeof(char))
                 return  generic<T>((char)src);
             else            
-                throw unsupported<T>();
-        }
+                return unhandled<ushort,T>(src);
+       }
     }
 }

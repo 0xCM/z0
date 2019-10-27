@@ -72,15 +72,16 @@ namespace Z0
 
         public void movemask256_f32()
         {
-            var n = Pow2.T12;
-            var src = Random.Span256<float>(n);
-            for(var i=0; i<n; i++)
+            var samples = Pow2.T12;
+            var src = Random.BlockedSpan<float>(n256,samples);
+            for(var i=0; i<samples; i++)
             {
-                var srcVector = src.ToCpuVec256(i);
+                var srcVector = src.ToCpuVector(i);
+                var srcSpan = srcVector.ToSpan();
 
                 var mmExpect = BitVector32.Alloc();
                 for(byte r=0; r<srcVector.Length(); r++)
-                    if(BitMask.test(srcVector[r], 31))
+                    if(BitMask.test(srcSpan[r], 31))
                         mmExpect.Enable(r);
                 
                 var mmActual = dinx.movemask(srcVector).ToBitVector(n32);
@@ -91,15 +92,16 @@ namespace Z0
 
         public void movemask256_f64()
         {
-            var n = Pow2.T12;
-            var src = Random.Span256<double>(n);
-            for(var i=0; i<n; i++)
+            var samples = Pow2.T12;
+            var src = Random.BlockedSpan<double>(n256, samples);
+            for(var i=0; i<samples; i++)
             {
-                var srcVector = src.ToCpuVec256(i);
+                var srcVector = src.ToCpuVector(i);
+                var srcSpan = srcVector.ToSpan();
 
                 var mmExpect = BitVector32.Alloc();
                 for(byte r=0; r<srcVector.Length(); r++)
-                    if(BitMask.test(srcVector[r], 63))
+                    if(BitMask.test(srcSpan[r], 63))
                         mmExpect.Enable(r);
                 
                 var mmActual = dinx.movemask(srcVector).ToBitVector(n32);

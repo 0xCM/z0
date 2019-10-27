@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;    
+    using System.Runtime.Intrinsics;    
 
     using static System.Runtime.Intrinsics.X86.Avx2;
         
@@ -20,8 +21,8 @@ namespace Z0
         /// <param name="spec">The control vector</param>
         /// <summary>__m256i _mm256_permutevar8x32_epi32 (__m256i a, __m256i idx) VPERMD ymm, ymm/m256, ymm</summary>
         [MethodImpl(Inline)]
-        public static Vec256<int> vpermvar8x32(in Vec256<int> src, in Vec256<int> spec)
-            => PermuteVar8x32(src.ymm, spec.ymm);
+        public static Vector256<int> vpermvar8x32(Vector256<int> src, Vector256<int> spec)
+            => PermuteVar8x32(src, spec);
 
         /// <summary>
         /// Permutes components in the source vector across lanes as specified by the control vector
@@ -30,8 +31,8 @@ namespace Z0
         /// <param name="spec">The control vector</param>
         /// <summary>__m256i _mm256_permutevar8x32_epi32 (__m256i a, __m256i idx) VPERMD ymm, ymm/m256, ymm</summary>
         [MethodImpl(Inline)]
-        public static Vec256<uint> vpermvar8x32(in Vec256<uint> src, in Vec256<uint> spec)
-            => PermuteVar8x32(src.ymm, spec.ymm);
+        public static Vector256<uint> vpermvar8x32(Vector256<uint> src, Vector256<uint> spec)
+            => PermuteVar8x32(src, spec);
 
         /// <summary>
         /// Permutes components in the source vector across lanes as specified by the control vector
@@ -40,7 +41,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="spec">The control vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<float> vpermvar8x32(in Vec256<float> src, in Vec256<int> spec)
-            => PermuteVar8x32(src.ymm, spec.ymm);
+        public static Vector256<float> vpermvar8x32(Vector256<float> src, Vector256<int> spec)
+            => PermuteVar8x32(src, spec);
     }
 }

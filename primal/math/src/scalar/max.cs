@@ -13,92 +13,92 @@ namespace Z0
     partial class math
     {
         [MethodImpl(Inline)]
-        public static sbyte max(sbyte lhs, sbyte rhs)
-            => lhs > rhs ? lhs : rhs;
+        public static sbyte max(sbyte a, sbyte b)
+            => a > b ? a : b;
 
         [MethodImpl(Inline)]
-        public static byte max(byte lhs, byte rhs)
-            => lhs > rhs ? lhs : rhs;
+        public static byte max(byte a, byte b)
+            => a > b ? a : b;
 
         [MethodImpl(Inline)]
-        public static short max(short lhs, short rhs)
-            => lhs > rhs ? lhs : rhs;
+        public static short max(short a, short b)
+            => a > b ? a : b;
 
         [MethodImpl(Inline)]
-        public static ushort max(ushort lhs, ushort rhs)
-            => lhs > rhs ? lhs : rhs;
+        public static ushort max(ushort a, ushort b)
+            => a > b ? a : b;
 
         [MethodImpl(Inline)]
-        public static int max(int lhs, int rhs)
-            => lhs > rhs ? lhs : rhs;
+        public static int max(int a, int b)
+            => a > b ? a : b;
 
         [MethodImpl(Inline)]
-        public static uint max(uint lhs, uint rhs)
-            => lhs > rhs ? lhs : rhs;
+        public static uint max(uint a, uint b)
+            => a > b ? a : b;
 
         [MethodImpl(Inline)]
-        public static long max(long lhs, long rhs)
-            => lhs > rhs ? lhs : rhs;
+        public static long max(long a, long b)
+            => a > b ? a : b;
 
         [MethodImpl(Inline)]
-        public static ulong max(ulong lhs, ulong rhs)
-            => lhs > rhs ? lhs : rhs;
+        public static ulong max(ulong a, ulong b)
+            => a > b ? a : b;
 
 
         [MethodImpl(Inline)]
-        public static ref sbyte max(ref sbyte lhs, sbyte rhs)
+        public static ref sbyte max(ref sbyte a, sbyte b)
         {
-            lhs = lhs > rhs ? lhs : rhs;
-            return ref lhs;
+            a = a > b ? a : b;
+            return ref a;
         }
 
         [MethodImpl(Inline)]
-        public static ref byte max(ref byte lhs, byte rhs)
+        public static ref byte max(ref byte a, byte b)
         {
-            lhs = lhs > rhs ? lhs : rhs;
-            return ref lhs;
+            a = a > b ? a : b;
+            return ref a;
         }
 
         [MethodImpl(Inline)]
-        public static ref short max(ref short lhs, short rhs)
+        public static ref short max(ref short a, short b)
         {
-            lhs = lhs > rhs ? lhs : rhs;
-            return ref lhs;
+            a = a > b ? a : b;
+            return ref a;
         }
 
         [MethodImpl(Inline)]
-        public static ref ushort max(ref ushort lhs, ushort rhs)
+        public static ref ushort max(ref ushort a, ushort b)
         {
-            lhs = lhs > rhs ? lhs : rhs;
-            return ref lhs;
+            a = a > b ? a : b;
+            return ref a;
         }
 
         [MethodImpl(Inline)]
-        public static ref int max(ref int lhs, int rhs)
+        public static ref int max(ref int a, int b)
         {
-            lhs = lhs > rhs ? lhs : rhs;
-            return ref lhs;
+            a = a > b ? a : b;
+            return ref a;
         }
 
         [MethodImpl(Inline)]
-        public static ref uint max(ref uint lhs, uint rhs)
+        public static ref uint max(ref uint a, uint b)
         {
-            lhs = lhs > rhs ? lhs : rhs;
-            return ref lhs;
+            a = a > b ? a : b;
+            return ref a;
         }
 
         [MethodImpl(Inline)]
-        public static ref long max(ref long lhs, long rhs)
+        public static ref long max(ref long a, long b)
         {
-            lhs = lhs > rhs ? lhs : rhs;
-            return ref lhs;
+            a = a > b ? a : b;
+            return ref a;
         }
 
         [MethodImpl(Inline)]
-        public static ref ulong max(ref ulong lhs, ulong rhs)
+        public static ref ulong max(ref ulong a, ulong b)
         {
-            lhs = lhs > rhs ? lhs : rhs;
-            return ref lhs;
+            a = a > b ? a : b;
+            return ref a;
         }
 
     }
