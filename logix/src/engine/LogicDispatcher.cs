@@ -21,7 +21,7 @@ namespace Z0.Logix
         bit unhandled(ILogicExpr expr)
             => throw new Exception($"{expr} unhandled");
 
-        bit Dispatch(IEqualityExpr expr)
+        bit Dispatch(IComparisonExpr expr)
             => Eval(expr.Lhs) == Eval(expr.Rhs);
 
         bit Dispatch(ILogicVarExpr expr)
@@ -52,7 +52,7 @@ namespace Z0.Logix
             {
                 case ILogicLiteral x:
                     return Dispatch(x);
-                case IEqualityExpr x:
+                case IComparisonExpr x:
                     return Dispatch(x);
                 case ILogicVarExpr x:
                     return Dispatch(x);
@@ -77,7 +77,7 @@ namespace Z0.Logix
         /// <param name="a">The first variable value</param>
         /// <param name="b">The second variable value</param>
         [MethodImpl(Inline)]
-        public bit Satisfied(EqualityExpr expr, bit a, bit b)
+        public bit Satisfied(ComparisonExpr expr, bit a, bit b)
         {
             expr.SetVars(a,b);
             return Dispatch(expr);

@@ -15,10 +15,10 @@ namespace Z0
     {                
 
         /// <summary>
-        /// Enables a pow-2 bit in the target
+        /// Enables a bit in the target identified its pow2 exponent
         /// </summary>
         /// <param name="dst">The mask reference</param>
-        /// <param name="exp0">A power of 2 exponent value in the integral range [0,63] </param>
+        /// <param name="exp0">An integer within the range [0,63]</param>
         [MethodImpl(Inline)]
         public static ref ulong mask(ref ulong dst, int exp0)
         {
@@ -27,62 +27,123 @@ namespace Z0
         }
 
         /// <summary>
-        /// Enables 2 pow-2 bits in the target
+        /// Enables 2 bits in the target identified by pow2 exponents
         /// </summary>
         /// <param name="dst">The mask reference</param>
-        /// <param name="exp0">A power of 2 exponent value in the integral range [0,63] </param>
-        /// <param name="exp1">A power of 2 exponent value in the integral range [0,63] </param>
+        /// <param name="exp0">An integer within the range [0,63]</param>
+        /// <param name="exp1">An integer within the range [0,63]</param>
         [MethodImpl(Inline)]
         public static ref ulong mask(ref ulong dst, int exp0, int exp1)
         {
-            dst |= ((1ul << exp0) | (1ul << exp1));
+            mask(ref dst, exp0); 
+            mask(ref dst, exp1);
             return ref dst;
         }
 
         /// <summary>
-        /// Enables 3 pow-2 bits in the target
+        /// Enables 3 bits in the target identified by pow2 exponents
         /// </summary>
         /// <param name="dst">The mask reference</param>
-        /// <param name="exp0">A power of 2 exponent value in the integral range [0,63] </param>
-        /// <param name="exp1">A power of 2 exponent value in the integral range [0,63] </param>
-        /// <param name="exp2">A power of 2 exponent value in the integral range [0,63] </param>
+        /// <param name="exp0">An integer within the range [0,63]</param>
+        /// <param name="exp1">An integer within the range [0,63]</param>
+        /// <param name="exp2">An integer within the range [0,63]</param>
         [MethodImpl(Inline)]
         public static ref ulong mask(ref ulong dst, int exp0, int exp1, int exp2)
         {
-            dst |= ((1ul << exp0) | (1ul << exp1) | (1ul << exp2));
+            mask(ref dst, exp0, exp1); 
+            mask(ref dst, exp2);
             return ref dst;
         }
 
-        /// <summary>
-        /// Enables 3 pow-2 bits in the source
-        /// </summary>
-        /// <param name="src">The mask reference</param>
-        /// <param name="exp0">A power of 2 exponent value in the integral range [0,63] </param>
-        /// <param name="exp1">A power of 2 exponent value in the integral range [0,63] </param>
-        /// <param name="exp2">A power of 2 exponent value in the integral range [0,63] </param>
-        [MethodImpl(Inline)]
-        public static ulong mask(ulong src, int exp0, int exp1, int exp2)
-        {
-            var dst = src | ((1ul << exp0) | (1ul << exp1) | (1ul << exp2));
-            return dst;
-        }
 
         /// <summary>
-        /// Enables 4 pow-2 bits in the target
+        /// Enables 4 bits in the target identified by pow2 exponents
         /// </summary>
         /// <param name="dst">The mask reference</param>
-        /// <param name="exp0">A power of 2 exponent value in the integral range [0,63] </param>
-        /// <param name="exp1">A power of 2 exponent value in the integral range [0,63] </param>
-        /// <param name="exp2">A power of 2 exponent value in the integral range [0,63] </param>
-        /// <param name="exp3">A power of 2 exponent value in the integral range [0,63] </param>
+        /// <param name="exp0">An integer within the range [0,63]</param>
+        /// <param name="exp1">An integer within the range [0,63]</param>
+        /// <param name="exp2">An integer within the range [0,63]</param>
+        /// <param name="exp3">An integer within the range [0,63]</param>
         [MethodImpl(Inline)]
         public static ref ulong mask(ref ulong dst, int exp0, int exp1, int exp2, int exp3)
         {
-            dst |= ((1ul << exp0) | (1ul << exp1) | (1ul << exp2) | (1ul << exp3));
+            mask(ref dst, exp0, exp1); 
+            mask(ref dst, exp2, exp3);
             return ref dst;
         }
 
+        /// <summary>
+        /// Enables 5 bits in the target identified by pow2 exponents
+        /// </summary>
+        /// <param name="dst">The mask reference</param>
+        /// <param name="exp0">An integer within the range [0,63]</param>
+        /// <param name="exp1">An integer within the range [0,63]</param>
+        /// <param name="exp2">An integer within the range [0,63]</param>
+        /// <param name="exp3">An integer within the range [0,63]</param>
+        /// <param name="exp4">An integer within the range [0,63]</param>
+        [MethodImpl(Inline)]
+        public static ref ulong mask(ref ulong dst, int exp0, int exp1, int exp2, int exp3, int exp4)
+        {
+            mask(ref dst, exp0, exp1, exp2, exp3); 
+            mask(ref dst, exp4);
+            return ref dst;
+        }
 
+        /// <summary>
+        /// Enables 6 bits in the target identified by pow2 exponents
+        /// </summary>
+        /// <param name="dst">The mask reference</param>
+        /// <param name="exp0">An integer within the range [0,63]</param>
+        /// <param name="exp1">An integer within the range [0,63]</param>
+        /// <param name="exp2">An integer within the range [0,63]</param>
+        /// <param name="exp3">An integer within the range [0,63]</param>
+        /// <param name="exp4">An integer within the range [0,63]</param>
+        /// <param name="exp5">An integer within the range [0,63]</param>
+        [MethodImpl(Inline)]
+        public static ref ulong mask(ref ulong dst, int exp0, int exp1, int exp2, int exp3, int exp4, int exp5)
+        {
+            mask(ref dst, exp0, exp1, exp2, exp3); 
+            mask(ref dst, exp4, exp5);
+            return ref dst;
+        }
+
+        /// <summary>
+        /// Enables 7 bits in the target identified by pow2 exponents
+        /// </summary>
+        /// <param name="dst">The mask reference</param>
+        /// <param name="exp0">An integer within the range [0,63]</param>
+        /// <param name="exp1">An integer within the range [0,63]</param>
+        /// <param name="exp2">An integer within the range [0,63]</param>
+        /// <param name="exp3">An integer within the range [0,63]</param>
+        /// <param name="exp4">An integer within the range [0,63]</param>
+        /// <param name="exp5">An integer within the range [0,63]</param>
+        /// <param name="exp6">An integer within the range [0,63]</param>
+        [MethodImpl(Inline)]
+        public static ref ulong mask(ref ulong dst, int exp0, int exp1, int exp2, int exp3, int exp4, int exp5, int exp6)
+        {
+            mask(ref dst, exp0, exp1, exp2, exp3); 
+            mask(ref dst, exp4, exp5, exp6);
+            return ref dst;
+        }
+
+        /// <summary>
+        /// Enables 8 bits in the target identified by pow2 exponents
+        /// </summary>
+        /// <param name="dst">The mask reference</param>
+        /// <param name="exp0">An integer within the range [0,63]</param>
+        /// <param name="exp1">An integer within the range [0,63]</param>
+        /// <param name="exp2">An integer within the range [0,63]</param>
+        /// <param name="exp3">An integer within the range [0,63]</param>
+        /// <param name="exp4">An integer within the range [0,63]</param>
+        /// <param name="exp5">An integer within the range [0,63]</param>
+        /// <param name="exp6">An integer within the range [0,63]</param>
+        /// <param name="exp7">An integer within the range [0,63]</param>
+        [MethodImpl(Inline)]
+        public static ref ulong mask(ref ulong dst, int exp0, int exp1, int exp2, int exp3, int exp4, int exp5, int exp6, int exp7)
+        {
+            dst |= ((1ul << exp0) | (1ul << exp1) | (1ul << exp2) | (1ul << exp3) | (1ul << exp4) | (1ul << exp6) | (1ul << exp6) | (1ul << exp7));
+            return ref dst;
+        }
 
     }
 

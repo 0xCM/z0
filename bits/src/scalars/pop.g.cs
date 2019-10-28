@@ -16,6 +16,19 @@ namespace Z0
 
     partial class gbits
     {
+        [MethodImpl(Inline)]
+        public static uint pop<T>(T x0, T x1, T x2, T x3)
+            where T : unmanaged
+                => Bits.pop(convert<T,ulong>(x0),convert<T,ulong>(x1), convert<T,ulong>(x2), convert<T,ulong>(x3));
+
+        [MethodImpl(Inline)]
+        public static uint pop<T>(T x0, T x1, T x2, T x3,T x4, T x5, T x6, T x7)
+            where T : unmanaged
+                => Bits.pop(
+                    convert<T,ulong>(x0),convert<T,ulong>(x1), convert<T,ulong>(x2), convert<T,ulong>(x3),
+                    convert<T,ulong>(x4),convert<T,ulong>(x5), convert<T,ulong>(x6), convert<T,ulong>(x7)
+                    );
+
         /// <summary>
         /// Counts the number enabled source bits
         /// </summary>

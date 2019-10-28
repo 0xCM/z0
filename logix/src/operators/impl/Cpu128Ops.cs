@@ -13,15 +13,15 @@ namespace Z0.Logix
     using static zfunc;    
     using static As;
 
-    public static class Cpu128Ops
+    public static partial class CpuOps
     {
         [MethodImpl(Inline)]
-        public static Vector128<T> @false<T>()
+        public static Vector128<T> @false<T>(N128 n)
             where T : unmanaged
                 => default;
 
         [MethodImpl(Inline)]
-        public static Vector128<T> @true<T>()
+        public static Vector128<T> @true<T>(N128 n)
             where T:unmanaged
                 => ginx.vpOnes<T>(n128);
 
@@ -66,16 +66,6 @@ namespace Z0.Logix
             where T : unmanaged
                 => ginx.vnot(a);
 
-        [MethodImpl(Inline)]
-        public static Vector128<T> negate<T>(Vector128<T> a)
-            where T : unmanaged
-                => ginx.vnegate<T>(a);
-
-
-        [MethodImpl(Inline)]
-        public static Vector128<T> xor1<T>(Vector128<T> a)
-            where T : unmanaged
-                => ginx.vxor1(a);
 
         [MethodImpl(Inline)]
         public static Vector128<T> and<T>(Vector128<T> a, Vector128<T> b)
@@ -114,6 +104,35 @@ namespace Z0.Logix
             where T : unmanaged
                 => ginx.vandnot(a,b);
 
+        [MethodImpl(Inline)]
+        public static Vector128<T> left<T>(Vector128<T> a, Vector128<T> b)
+            where T : unmanaged
+                => a;
+
+        [MethodImpl(Inline)]
+        public static Vector128<T> leftnot<T>(Vector128<T> a, Vector128<T> b)
+            where T : unmanaged
+                => not(a);
+
+        [MethodImpl(Inline)]
+        public static Vector128<T> right<T>(Vector128<T> a, Vector128<T> b)
+            where T : unmanaged
+                => b;
+
+        [MethodImpl(Inline)]
+        public static Vector128<T> rightnot<T>(Vector128<T> a, Vector128<T> b)
+            where T : unmanaged
+                => not(b);
+
+        [MethodImpl(Inline)]
+        public static Vector128<T> xornot<T>(Vector128<T> a, Vector128<T> b)
+            where T : unmanaged
+                => ginx.vxornot(a,b);
+
+        [MethodImpl(Inline)]
+        public static Vector128<T> xor1<T>(Vector128<T> a)
+            where T : unmanaged
+                => ginx.vxor1(a);
 
         [MethodImpl(Inline)]
         public static Vector128<T> sll<T>(Vector128<T> a, int offset)
@@ -135,6 +154,20 @@ namespace Z0.Logix
             where T : unmanaged
                 => ginx.vrotr<T>(a,(byte)offset);
 
+        [MethodImpl(Inline)]
+        public static Vector128<T> inc<T>(Vector128<T> a)
+            where T : unmanaged
+                => ginx.vinc(a);
+
+        [MethodImpl(Inline)]
+        public static Vector128<T> dec<T>(Vector128<T> a)
+            where T : unmanaged
+                => ginx.vdec(a);
+
+        [MethodImpl(Inline)]
+        public static Vector128<T> negate<T>(Vector128<T> a)
+            where T : unmanaged
+                => ginx.vnegate<T>(a);
 
         [MethodImpl(Inline)]
         public static Vector128<T> add<T>(Vector128<T> a, Vector128<T> b)
@@ -147,6 +180,16 @@ namespace Z0.Logix
                 => ginx.vsub(a,b);
 
         [MethodImpl(Inline)]
+        public static Vector128<T> equals<T>(Vector128<T> a, Vector128<T> b)
+            where T : unmanaged
+                => ginx.veq(a,b);
+
+        [MethodImpl(Inline)]
+        public static bit same<T>(Vector128<T> a, Vector128<T> b)
+            where T : unmanaged
+                => ginx.vtestc(equals(a,b));
+
+        [MethodImpl(Inline)]
         public static Vector128<T> lt<T>(Vector128<T> a, Vector128<T> b)
             where T : unmanaged
                 => ginx.vlt(a,b);
@@ -156,25 +199,12 @@ namespace Z0.Logix
             where T : unmanaged
                 => ginx.vgt(a,b);
 
-        [MethodImpl(Inline)]
-        public static Vector128<T> eq<T>(Vector128<T> a, Vector128<T> b)
-            where T : unmanaged
-                => ginx.vcmpeq(a,b);
 
         [MethodImpl(Inline)]
         public static Vector128<T> max<T>(Vector128<T> a, Vector128<T> b)
             where T : unmanaged
                 => ginx.vmax(a,b);
 
-        [MethodImpl(Inline)]
-        public static Vector128<T> inc<T>(Vector128<T> a)
-            where T : unmanaged
-                => ginx.vinc(a);
-
-        [MethodImpl(Inline)]
-        public static Vector128<T> dec<T>(Vector128<T> a)
-            where T : unmanaged
-                => ginx.vdec(a);
 
         [MethodImpl(Inline)]
         public static Vector128<T> select<T>(Vector128<T> a, Vector128<T> b, Vector128<T> c)

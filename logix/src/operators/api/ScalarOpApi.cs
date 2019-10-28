@@ -20,18 +20,43 @@ namespace Z0.Logix
     public static class ScalarOpApi
     {
         public static IEnumerable<UnaryBitwiseOpKind> UnaryBitwiseKinds
-            => items(UnaryBitwiseOpKind.Not, UnaryBitwiseOpKind.Identity, UnaryBitwiseOpKind.Negate);
+            => new UnaryBitwiseOpKind[]{
+                UnaryBitwiseOpKind.Not, UnaryBitwiseOpKind.Identity, UnaryBitwiseOpKind.Negate
+                };
 
         /// <summary>
         /// Advertises the supported binary operators
         /// </summary>
-        public static IEnumerable<BinaryBitwiseOpKind> BinaryBitwiseKinds
-            => items(
+        public static BinaryBitwiseOpKind[] BinaryBitwiseKinds
+            => new BinaryBitwiseOpKind[]{
                 BinaryBitwiseOpKind.And, BinaryBitwiseOpKind.Or, BinaryBitwiseOpKind.XOr,
                 BinaryBitwiseOpKind.Nand, BinaryBitwiseOpKind.Nor, BinaryBitwiseOpKind.Xnor,
                 BinaryBitwiseOpKind.AndNot, BinaryBitwiseOpKind.True, BinaryBitwiseOpKind.False,
                 BinaryBitwiseOpKind.Implies
-            );
+            };
+
+        public static UnaryArithmeticOpKind[] UnaryAritmeticKinds
+            => new UnaryArithmeticOpKind[]{
+                UnaryArithmeticOpKind.Inc, UnaryArithmeticOpKind.Dec, UnaryArithmeticOpKind.Negate
+            };
+
+
+        public static BinaryArithmeticOpKind[] BinaryArithmeticKinds
+            => new BinaryArithmeticOpKind[]{
+                BinaryArithmeticOpKind.Add, BinaryArithmeticOpKind.Sub, 
+            };
+
+
+        /// <summary>
+        /// Specifies the supported comparison operators
+        /// </summary>
+        public static ComparisonKind[] ComparisonKinds
+            => new ComparisonKind[]{
+                ComparisonKind.Eq, ComparisonKind.Neq, 
+                ComparisonKind.Lt, ComparisonKind.LtEq, 
+                ComparisonKind.Gt, ComparisonKind.GtEq, 
+            };
+
 
         /// <summary>
         /// Advertises the supported ternary opeators
@@ -39,11 +64,6 @@ namespace Z0.Logix
         public static IEnumerable<TernaryBitOpKind> TernaryBitwiseKinds
             => range((byte)1,(byte)X4F).Cast<TernaryBitOpKind>();
 
-        /// <summary>
-        /// Advertises the supported comparison opeators
-        /// </summary>
-        public static IEnumerable<ComparisonOpKind> ComparisonOpKinds
-            => EnumValues.Get<ComparisonOpKind>().Enumerate();
 
         public static T eval<T>(BinaryBitwiseOpKind kind, T a, T b)
             where T : unmanaged
@@ -76,19 +96,21 @@ namespace Z0.Logix
             }
         }
 
-        public static bit eval<T>(ComparisonOpKind kind, T a, T b)
+        public static T eval<T>(ComparisonKind kind, T a, T b)
             where T : unmanaged            
         {
             switch(kind)
             {
-                case ComparisonOpKind.Eq: return eq(a,b);
-                case ComparisonOpKind.Lt: return lt(a,b);
-                case ComparisonOpKind.LtEq: return lteq(a,b);
-                case ComparisonOpKind.Gt: return gt(a,b);
-                case ComparisonOpKind.GtEq: return gteq(a,b);
-                default: return dne<ComparisonOpKind,bit>(kind);
+                case ComparisonKind.Eq: return equals(a,b);
+                case ComparisonKind.Neq: return neq(a,b);
+                case ComparisonKind.Lt: return lt(a,b);
+                case ComparisonKind.LtEq: return lteq(a,b);
+                case ComparisonKind.Gt: return gt(a,b);
+                case ComparisonKind.GtEq: return gteq(a,b);
+                default: return dne<ComparisonKind,T>(kind);
             }
         }
+
 
         /// <summary>
         /// Evaluates an identified ternary operator
@@ -209,9 +231,7 @@ namespace Z0.Logix
                 default: return dne<ShiftOpKind,T>(kind);
             }
         }
-
-        
-        
+            
         public static Shifter<T> lookup<T>(ShiftOpKind kind)
             where T : unmanaged            
         {
@@ -225,16 +245,17 @@ namespace Z0.Logix
             }
         }
 
-        public static BinaryPred<T> lookup<T>(ComparisonOpKind kind)
-            where T : unmanaged            
+        public static BinaryOp<T> lookup<T>(ComparisonKind kind)
+            where T : unmanaged
         {
             switch(kind)
             {
-                case ComparisonOpKind.Eq: return eq;
-                case ComparisonOpKind.Lt: return lt;
-                case ComparisonOpKind.LtEq: return lteq;
-                case ComparisonOpKind.Gt: return gt;
-                case ComparisonOpKind.GtEq: return gteq;
+                case ComparisonKind.Eq: return equals;
+                case ComparisonKind.Neq: return neq;
+                case ComparisonKind.Lt: return lt;
+                case ComparisonKind.LtEq: return lteq;
+                case ComparisonKind.Gt: return gt;
+                case ComparisonKind.GtEq: return gteq;
                 default: return dne<T>(kind);
             }
         }
@@ -273,8 +294,6 @@ namespace Z0.Logix
                 default: return dne<T>(kind);
             }
         }
-
-
 
         public static TernaryOp<T> lookup<T>(TernaryBitOpKind id)
             where T : unmanaged

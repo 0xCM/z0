@@ -27,11 +27,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static unsafe void vgt<T>(N128 n, T* pX, T* pY, T* pDst)
             where T : unmanaged
-        {                    
-            vloadu(pX, out Vector128<T> vA);
-            vloadu(pY, out Vector128<T> vB);
-            vstore(vgt(vA,vB), pDst);
-        }
+                => vstore(vgt(n,pX,pY), pDst);
 
         [MethodImpl(Inline)]
         public static unsafe Vector256<T> vgt<T>(N256 n, T* pA, T* pB)
@@ -45,13 +41,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static unsafe void vgt<T>(N256 n, T* pX, T* pY, T* pDst)
             where T : unmanaged
-        {                    
-            vloadu(pX, out Vector256<T> vA);
-            vloadu(pY, out Vector256<T> vB);
-            vstore(vgt(vA,vB), pDst);
-        }
-
-
+                => vstore(vgt(n,pX,pY), pDst);
     }
 
 }

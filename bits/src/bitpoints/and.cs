@@ -42,10 +42,10 @@ namespace Z0
         static unsafe void and(uint* pA, uint* pB, uint* pDst)
         {
             const int step = 8;
-            ginx.vand(n, pA,pB,pDst);
-            ginx.vand(n, pA+=step,pB+=step,pDst+=step);
-            ginx.vand(n, pA+=step,pB+=step,pDst+=step);
-            ginx.vand(n, pA+=step,pB+=step,pDst+=step);
+            ginx.vand(n, pA,pB, pDst);
+            ginx.vand(n, pA+=step, pB+=step, pDst+=step);
+            ginx.vand(n, pA+=step, pB+=step, pDst+=step);
+            ginx.vand(n, pA+=step, pB+=step, pDst+=step);
         }
 
         [MethodImpl(Inline)]

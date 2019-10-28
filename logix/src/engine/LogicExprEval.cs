@@ -25,7 +25,7 @@ namespace Z0.Logix
                     return x.Value;
                 case ILogicOpExpr x:
                     return eval(x);
-                case IEqualityExpr x:
+                case IComparisonExpr x:
                     return eval(x.Lhs) == eval(x.Rhs);
                 default: 
                     return unhandled(expr);

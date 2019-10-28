@@ -15,28 +15,41 @@ namespace Z0.Logix
     using static TernaryBitOpKind;
     using static As;
     using static OpHelpers;
-    using static Cpu128Ops;
+    using static CpuOps;
 
     /// <summary>
     /// Defines services for 128-bit instrinsic operators
     /// </summary>
-    public static class Cpu128OpApi
+    public static partial class CpuOpApi
     {
         /// <summary>
         /// Advertises the supported unary bitwise operators
         /// </summary>
-        public static IEnumerable<UnaryBitwiseOpKind> UnaryBitwiseKinds
-            => items(UnaryBitwiseOpKind.Not, UnaryBitwiseOpKind.Identity, UnaryBitwiseOpKind.Negate);
+        public static UnaryBitwiseOpKind[] UnaryBitwiseKinds
+            => new UnaryBitwiseOpKind[]{
+                UnaryBitwiseOpKind.Not, UnaryBitwiseOpKind.Identity, UnaryBitwiseOpKind.Negate            
+                };
 
         /// <summary>
         /// Advertises the supported binary operators
         /// </summary>
-        public static IEnumerable<BinaryBitwiseOpKind> BinaryBitwiseKinds
-            => items(
+        public static BinaryBitwiseOpKind[] BinaryBitwiseKinds
+            => new BinaryBitwiseOpKind[]{
                 BinaryBitwiseOpKind.And, BinaryBitwiseOpKind.Or, BinaryBitwiseOpKind.XOr,
                 BinaryBitwiseOpKind.Nand, BinaryBitwiseOpKind.Nor, BinaryBitwiseOpKind.Xnor,
                 BinaryBitwiseOpKind.AndNot, BinaryBitwiseOpKind.False, BinaryBitwiseOpKind.True
-            );
+            };
+
+        /// <summary>
+        /// Specifies the supported comparison operators
+        /// </summary>
+        public static ComparisonKind[] ComparisonKinds
+            => new ComparisonKind[]{
+                ComparisonKind.Eq, 
+                ComparisonKind.Lt, 
+                ComparisonKind.Gt, 
+            };
+
 
         /// <summary>
         /// Advertises the supported ternary opeators
@@ -57,14 +70,33 @@ namespace Z0.Logix
             switch(kind)
             {
                 case UnaryBitwiseOpKind.Not: return not(a);
-                case UnaryBitwiseOpKind.Identity: return ScalarOps.identity(a);
+                case UnaryBitwiseOpKind.Identity: return identity(a);
                 case UnaryBitwiseOpKind.Negate: return negate(a);
                 default: return dne<UnaryBitwiseOpKind,Vector128<T>>(kind);            
             }
         }
 
         /// <summary>
-        /// Evaluates an identified binary operator over supplied operands
+        /// Evaluates a comparison operator over supplied operands
+        /// </summary>
+        /// <param name="kind">The operator kind</param>
+        /// <param name="a">The left operand</param>
+        /// <param name="b">The right operand</param>
+        /// <typeparam name="T">The primal vector component type</typeparam>
+        public static Vector128<T> eval<T>(ComparisonKind kind, Vector128<T> a, Vector128<T> b)
+            where T : unmanaged            
+        {
+            switch(kind)
+            {
+                case ComparisonKind.Eq: return equals(a,b);
+                case ComparisonKind.Lt: return lt(a,b);
+                case ComparisonKind.Gt: return gt(a,b);
+                default: return dne<ComparisonKind,Vector128<T>>(kind);
+            }         
+        }
+
+        /// <summary>
+        /// Evaluates an identified binary bitwise operator over supplied operands
         /// </summary>
         /// <param name="kind">The operator kind</param>
         /// <param name="a">The left operand</param>
@@ -75,24 +107,19 @@ namespace Z0.Logix
         {
             switch(kind)
             {
-                case BinaryBitwiseOpKind.And:
-                    return and(a,b);
-                case BinaryBitwiseOpKind.Or:
-                    return or(a,b);
-                case BinaryBitwiseOpKind.XOr:
-                    return xor(a,b);
-                case BinaryBitwiseOpKind.Nand:
-                    return nand(a,b);
-                case BinaryBitwiseOpKind.Nor:
-                    return nor(a,b);
-                case BinaryBitwiseOpKind.Xnor:
-                    return xnor(a,b);
-                case BinaryBitwiseOpKind.AndNot:
-                    return andnot(a,b);
-                case BinaryBitwiseOpKind.False:
-                    return @false(a,b);
-                case BinaryBitwiseOpKind.True:
-                    return @true(a,b);
+                case BinaryBitwiseOpKind.And: return and(a,b);
+                case BinaryBitwiseOpKind.Or: return or(a,b);
+                case BinaryBitwiseOpKind.XOr: return xor(a,b);
+                case BinaryBitwiseOpKind.Nand: return nand(a,b);
+                case BinaryBitwiseOpKind.Nor: return nor(a,b);
+                case BinaryBitwiseOpKind.Xnor: return xnor(a,b);
+                case BinaryBitwiseOpKind.AndNot: return andnot(a,b);
+                case BinaryBitwiseOpKind.LeftProject: return left(a,b);
+                case BinaryBitwiseOpKind.LeftNot: return leftnot(a,b);
+                case BinaryBitwiseOpKind.RightProject: return right(a,b);
+                case BinaryBitwiseOpKind.RightNot: return rightnot(a,b);
+                case BinaryBitwiseOpKind.False: return @false(a,b);
+                case BinaryBitwiseOpKind.True: return @true(a,b);
                 default:
                     return dne<BinaryBitwiseOpKind,Vector128<T>>(kind);
             }
@@ -109,7 +136,7 @@ namespace Z0.Logix
         [MethodImpl(Inline)]
         public static Vector128<T> eval<T>(TernaryBitOpKind kind, Vector128<T> x, Vector128<T> y, Vector128<T> z)
             where T : unmanaged
-                => lookup<T>(kind)(x,y,z);
+                => lookup<T>(n128,kind)(x,y,z);
 
         /// <summary>
         /// Evaluates an identified shift operator over supplied operands
@@ -132,12 +159,28 @@ namespace Z0.Logix
             }
         }
 
+        [MethodImpl(Inline)]
+        public static Vector128<T> eval<T>(BinaryArithmeticOpKind kind, Vector128<T> x, Vector128<T> y)
+            where T : unmanaged
+        {
+            switch(kind)
+            {
+                case BinaryArithmeticOpKind.Add: return add(x,y);
+                case BinaryArithmeticOpKind.Sub: return sub(x,y);
+                case BinaryArithmeticOpKind.Eq: 
+                case BinaryArithmeticOpKind.Lt: 
+                case BinaryArithmeticOpKind.Gt: return eval((ComparisonKind)kind, x, y);
+                default: return dne<BinaryArithmeticOpKind,Vector128<T>>(kind);
+            }
+        }
+
+
         /// <summary>
         /// Returns a kind-identified delegate if possible; otherwise, raises an exception
         /// </summary>
         /// <param name="kind">The operator kind</param>
         /// <typeparam name="T">The primal vector component type</typeparam>
-        public static UnaryOp<Vector128<T>> lookup<T>(UnaryBitwiseOpKind id)
+        public static UnaryOp<Vector128<T>> lookup<T>(N128 n, UnaryBitwiseOpKind id)
             where T : unmanaged            
         {
             switch(id)
@@ -149,12 +192,24 @@ namespace Z0.Logix
             }
         }
 
+        public static BinaryOp<Vector128<T>> lookup<T>(N128 n,ComparisonKind kind)
+            where T : unmanaged
+        {
+            switch(kind)
+            {
+                case ComparisonKind.Eq: return equals;
+                case ComparisonKind.Lt: return lt;
+                case ComparisonKind.Gt: return gt;
+                default: return dne<Vector128<T>>(kind);
+            }
+        }
+
         /// <summary>
         /// Returns a kind-identified delegate if possible; otherwise, raises an exception
         /// </summary>
         /// <param name="kind">The operator kind</param>
         /// <typeparam name="T">The primal vector component type</typeparam>
-       public static Shifter<Vector128<T>> lookup<T>(ShiftOpKind id)
+       public static Shifter<Vector128<T>> lookup<T>(N128 n, ShiftOpKind id)
             where T : unmanaged
         {
             switch(id)
@@ -172,7 +227,7 @@ namespace Z0.Logix
         /// </summary>
         /// <param name="kind">The operator kind</param>
         /// <typeparam name="T">The primal vector component type</typeparam>
-       public static BinaryOp<Vector128<T>> lookup<T>(BinaryBitwiseOpKind id)
+       public static BinaryOp<Vector128<T>> lookup<T>(N128 n, BinaryBitwiseOpKind id)
             where T : unmanaged
         {
             switch(id)
@@ -195,7 +250,7 @@ namespace Z0.Logix
         /// </summary>
         /// <param name="kind">The operator kind</param>
         /// <typeparam name="T">The primal vector component type</typeparam>
-        public static TernaryOp<Vector128<T>> lookup<T>(TernaryBitOpKind id)
+        public static TernaryOp<Vector128<T>> lookup<T>(N128 n, TernaryBitOpKind id)
             where T : unmanaged
         {
             switch(id)

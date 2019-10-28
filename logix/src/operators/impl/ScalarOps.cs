@@ -15,6 +15,7 @@ namespace Z0.Logix
 
     public static class ScalarOps
     {
+        
         [MethodImpl(Inline)]
         public static T zero<T>()
             where T : unmanaged
@@ -28,52 +29,103 @@ namespace Z0.Logix
         [MethodImpl(Inline)]
         public static T one<T>()
             where T : unmanaged
+                => gmath.one<T>();
+
+        [MethodImpl(Inline)]
+        public static T ones<T>()
+            where T : unmanaged
                 => gmath.maxval<T>();
 
         [MethodImpl(Inline)]
-        public static T add<T>(T a, T b)
-            where T : unmanaged
-                => gmath.add(a,b);
+        public static T @false<T>()
+            where T:unmanaged
+                => zero<T>();
 
         [MethodImpl(Inline)]
-        public static T sub<T>(T a, T b)
-            where T : unmanaged
-                => gmath.sub(a,b);
+        public static T @false<T>(T a)
+            where T:unmanaged
+                => @false<T>();
 
         [MethodImpl(Inline)]
-        public static T div<T>(T a, T b)
-            where T : unmanaged
-                => gmath.div(a,b);
+        public static T @false<T>(T a, T b)
+            where T:unmanaged
+                => @false<T>();
 
         [MethodImpl(Inline)]
-        public static T mod<T>(T a, T b)
-            where T : unmanaged
-                => gmath.mod(a,b);
+        public static T @false<T>(T a, T b, T c)
+            where T:unmanaged
+                => @false<T>();
 
         [MethodImpl(Inline)]
-        public static bit eq<T>(T a, T b)
-            where T : unmanaged
-                => gmath.eq(a,b);
+        public static T @true<T>()
+            where T:unmanaged
+                => ones<T>();
 
         [MethodImpl(Inline)]
-        public static bit lt<T>(T a, T b)
-            where T : unmanaged
-                => gmath.lt(a,b);
+        public static T @true<T>(T a)
+            where T:unmanaged
+                => @true<T>();
 
         [MethodImpl(Inline)]
-        public static bit lteq<T>(T a, T b)
-            where T : unmanaged
-                => gmath.lteq(a,b);
+        public static T @true<T>(T a, T b)
+            where T:unmanaged
+                => @true<T>();
 
         [MethodImpl(Inline)]
-        public static bit gt<T>(T a, T b)
-            where T : unmanaged
-                => gmath.gt(a,b);
+        public static T @true<T>(T a, T b, T c)
+            where T:unmanaged
+                => @true<T>();
 
         [MethodImpl(Inline)]
-        public static bit gteq<T>(T a, T b)
+        public static T not<T>(T a)
             where T : unmanaged
-                => gmath.gteq(a,b);
+                => gmath.not(a);
+
+        /// <summary>
+        /// Promotes a bit to the full splendor of a scalar, with all scalar bits enabled if
+        /// the source bit is enabled and no scalar bits enabled otherwise
+        /// </summary>
+        /// <param name="src">The source bit</param>
+        /// <typeparam name="T">The scalar type</typeparam>
+        [MethodImpl(Inline)]   
+        public static T promote<T>(bit src)
+            where T : unmanaged
+                => src ? ones<T>() : zero<T>();
+
+        [MethodImpl(Inline)]
+        public static bit testc<T>(T a)
+            where T : unmanaged
+                => gbits.pop(a) == bitsize<T>();
+
+        [MethodImpl(Inline)]
+        public static T equals<T>(T a, T b)
+            where T : unmanaged
+                => promote<T>(Predicates.equals(a,b));
+
+        [MethodImpl(Inline)]
+        public static T neq<T>(T a, T b)
+            where T : unmanaged
+                => promote<T>(Predicates.neq(a,b));
+
+        [MethodImpl(Inline)]
+        public static T lt<T>(T a, T b)
+            where T : unmanaged
+                => promote<T>(Predicates.lt(a,b));
+
+        [MethodImpl(Inline)]
+        public static T lteq<T>(T a, T b)
+            where T : unmanaged
+                => promote<T>(Predicates.lteq(a,b));
+
+        [MethodImpl(Inline)]
+        public static T gt<T>(T a, T b)
+            where T : unmanaged
+                => promote<T>(Predicates.gt(a,b));
+
+        [MethodImpl(Inline)]
+        public static T gteq<T>(T a, T b)
+            where T : unmanaged
+                => promote<T>(Predicates.gteq(a,b));
 
         [MethodImpl(Inline)]
         public static T and<T>(T a, T b)
@@ -106,6 +158,11 @@ namespace Z0.Logix
                 => gmath.xor(a,b);
 
         [MethodImpl(Inline)]
+        public static T xornot<T>(T a, T b)
+            where T : unmanaged
+                => gmath.xornot(a,b);
+
+        [MethodImpl(Inline)]
         public static T xnor<T>(T a, T b)
             where T : unmanaged
                 => gmath.xnor(a,b);
@@ -113,12 +170,12 @@ namespace Z0.Logix
         [MethodImpl(Inline)]
         public static T left<T>(T a, T b)
             where T : unmanaged
-            => a;
+                => a;
 
         [MethodImpl(Inline)]
         public static T right<T>(T a, T b)
             where T : unmanaged
-            => b;
+                => b;
 
         [MethodImpl(Inline)]
         public static T rightnot<T>(T a, T b)
@@ -131,15 +188,15 @@ namespace Z0.Logix
                 => not(a);
 
         [MethodImpl(Inline)]
-        public static T implies<T>(T antecedent, T consequent)
+        public static T implies<T>(T a, T b)
             where T : unmanaged
-                => not(andnot(antecedent, consequent));
+                => not(andnot(a, b));
 
 
         [MethodImpl(Inline)]
-        public static T not<T>(T a)
+        public static bit same<T>(T a, T b)
             where T : unmanaged
-                => gmath.not(a);
+                => gmath.eq(a,b);
 
         [MethodImpl(Inline)]
         public static T xor1<T>(T a)
@@ -167,6 +224,26 @@ namespace Z0.Logix
                 => gbits.rotr(a,offset);
 
         [MethodImpl(Inline)]
+        public static T add<T>(T a, T b)
+            where T : unmanaged
+                => gmath.add(a,b);
+
+        [MethodImpl(Inline)]
+        public static T sub<T>(T a, T b)
+            where T : unmanaged
+                => gmath.sub(a,b);
+
+        [MethodImpl(Inline)]
+        public static T div<T>(T a, T b)
+            where T : unmanaged
+                => gmath.div(a,b);
+
+        [MethodImpl(Inline)]
+        public static T mod<T>(T a, T b)
+            where T : unmanaged
+                => gmath.mod(a,b);
+        
+        [MethodImpl(Inline)]
         public static T negate<T>(T a)
             where T : unmanaged
                 => gmath.negate(a); 
@@ -182,36 +259,6 @@ namespace Z0.Logix
                 => gmath.dec(a); 
 
         [MethodImpl(Inline)]
-        public static T @false<T>(T a)
-            where T:unmanaged
-                => default;
-
-        [MethodImpl(Inline)]
-        public static T @false<T>(T a, T b)
-            where T:unmanaged
-                => default;
-
-        [MethodImpl(Inline)]
-        public static T @false<T>(T a, T b, T c)
-            where T:unmanaged
-                => default;
-
-        [MethodImpl(Inline)]
-        public static T @true<T>(T a)
-            where T:unmanaged
-                => gmath.maxval<T>();         
-
-        [MethodImpl(Inline)]
-        public static T @true<T>(T a, T b)
-            where T:unmanaged
-                => gmath.maxval<T>();
-
-        [MethodImpl(Inline)]
-        public static T @true<T>(T a, T b, T c)
-            where T:unmanaged
-                => gmath.maxval<T>();
-
-        [MethodImpl(Inline)]
         public static T select<T>(T a, T b, T c)
             where T : unmanaged
                 => gmath.select(a,b,c);
@@ -219,7 +266,7 @@ namespace Z0.Logix
         [MethodImpl(Inline),TernaryOp(X00)]
         public static T f00<T>(T a, T b, T c)
             where T : unmanaged
-            => default;
+                => default;
 
         // a nor (b or c)
         [MethodImpl(Inline),TernaryOp(X01)]
@@ -768,6 +815,7 @@ namespace Z0.Logix
             where T : unmanaged
                 => select(c, xnor(b,c), nand(b,c));
   
+
     }    
 
 }

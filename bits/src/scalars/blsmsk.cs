@@ -17,8 +17,7 @@ namespace Z0
     {                
         /// <summary>
         /// unsigned int _blsmsk_u32 (unsigned int a) BLSMSK reg, reg/m32
-        /// Logically equivalent to the composite operation (src-1) ^ src that enables the 
-        /// lower bits of the source up to and including the least set bit
+        /// Logically equivalent to the composite operation (src-1) ^ src that enables the lower bits of the source up to and including the least set bit
         /// </summary>
         /// <param name="src">The bit source</param>
         [MethodImpl(Inline)]
@@ -52,5 +51,4 @@ namespace Z0
         public static ulong blsmsk(ulong src)
             => GetMaskUpToLowestSetBit(src);
     }
-
 }

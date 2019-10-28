@@ -31,9 +31,9 @@ namespace Z0.Logix
         Literal = Pow2.T03,
 
         /// <summary>
-        /// Classifies a boolean equality expression
+        /// Classifies a boolean comparison expression
         /// </summary>
-        Equality = Pow2.T04,
+        Comparison = Pow2.T04,
 
         /// <summary>
         /// Classifies a boolean unary operator

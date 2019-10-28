@@ -34,8 +34,40 @@ namespace Z0.Logix
         /// <param name="expr">The expression to evaluate</param>
         [MethodImpl(Inline)]
         public static TypedLiteralExpr<T> eval<T>(ITypedExpr<T> expr)
-            where T : unmanaged
+            where T : unmanaged                
                 => ScalarExprEval.eval(expr);
+
+        /// <summary>
+        /// Evaluates a comparison expression, returning literal expression over the comparison type
+        /// and the interpretation of this literal is type-dependent
+        /// </summary>
+        /// <param name="expr">The predicate to evaluate</param>
+        /// <typeparam name="T">The type over which the comparison is defined</typeparam>
+        [MethodImpl(Inline)]
+        public static TypedLiteralExpr<T> eval<T>(IComparisonExpr<T> expr)
+            where T : unmanaged
+                => CompareEval.eval(expr);
+
+        [MethodImpl(Inline)]
+        public static TypedLiteralExpr<Vector128<T>> eval<T>(IComparisonExpr<Vector128<T>> expr)
+            where T : unmanaged
+                => CompareEval.eval(expr);
+
+        [MethodImpl(Inline)]
+        public static TypedLiteralExpr<Vector256<T>> eval<T>(IComparisonExpr<Vector256<T>> expr)
+            where T : unmanaged
+                => CompareEval.eval(expr);
+
+        /// <summary>
+        /// Evaluates a comparison predicate, returning an enabled bit if the comparison succeeds and 
+        /// a disabled bit otherwise
+        /// </summary>
+        /// <param name="expr">The predicate to evaluate</param>
+        /// <typeparam name="T">The type over which the comparison is defined</typeparam>
+        [MethodImpl(Inline)]
+        public static bit eval<T>(IComparisonPred<T> expr)
+            where T : unmanaged
+                => CompareEval.eval(expr);
 
         /// <summary>
         /// Evalutates a typed scalar expression
@@ -72,7 +104,7 @@ namespace Z0.Logix
         /// <param name="a">The first variable value</param>
         /// <param name="b">The second variable value</param>
         [MethodImpl(Inline)]
-        public static bit satisfied(EqualityExpr expr, bit a, bit b)
+        public static bit satisfied(ComparisonExpr expr, bit a, bit b)
         {
             expr.SetVars(a,b);
             return LogicEngine.eval(expr);
@@ -86,7 +118,7 @@ namespace Z0.Logix
         /// <param name="a">The first variable value</param>
         /// <param name="b">The second variable value</param>
         [MethodImpl(Inline)]
-        public static bit satisfied<T>(TypedEqualityExpr<T> expr, T a, T b)
+        public static bit satisfied<T>(ComparisonExpr<T> expr, T a, T b)
             where T :unmanaged
         {
             expr.SetVars(a,b);
@@ -101,11 +133,11 @@ namespace Z0.Logix
         /// <param name="a">The first variable value</param>
         /// <param name="b">The second variable value</param>
         [MethodImpl(Inline)]
-        public static bit satisfied<T>(TypedEqualityExpr<Vector128<T>> expr, Vector128<T> a, Vector128<T> b)
+        public static bit satisfied<T>(ComparisonExpr<Vector128<T>> expr, Vector128<T> a, Vector128<T> b)
             where T :unmanaged
         {
             expr.SetVars(a,b);
-            var result = LogicEngine.eval(expr);
+            var result = eval(expr);
             return ginx.vtestc(result.Value, ginx.vpOnes<T>(n128));
         }
 
@@ -117,11 +149,11 @@ namespace Z0.Logix
         /// <param name="a">The first variable value</param>
         /// <param name="b">The second variable value</param>
         [MethodImpl(Inline)]
-        public static bit satisfied<T>(TypedEqualityExpr<Vector256<T>> expr, Vector256<T> a, Vector256<T> b)
+        public static bit satisfied<T>(ComparisonExpr<Vector256<T>> expr, Vector256<T> a, Vector256<T> b)
             where T :unmanaged
         {
             expr.SetVars(a,b);
-            var result = LogicEngine.eval(expr);
+            var result = eval(expr);
             return ginx.vtestc(result.Value, ginx.vpOnes<T>(n256));
         }
 
@@ -144,7 +176,7 @@ namespace Z0.Logix
             return bit.On;
         }
 
-        public static IReadOnlyList<T> solve<T>(TypedEqualityExpr<T> expr,  Interval<T> domain, int varyix)
+        public static IReadOnlyList<T> solve<T>(ComparisonExpr<T> expr, Interval<T> domain, int varyix)
             where T : unmanaged
         {
             var sln = new List<T>();
@@ -160,7 +192,7 @@ namespace Z0.Logix
             return sln;
         }
 
-        public static IReadOnlyList<T> solve<T>(TypedEqualityExpr<T> expr, Interval<T> domain)
+        public static IReadOnlyList<T> solve<T>(ComparisonExpr<T> expr, Interval<T> domain)
             where T : unmanaged
         {
 

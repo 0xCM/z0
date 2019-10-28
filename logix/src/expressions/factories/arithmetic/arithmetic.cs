@@ -9,7 +9,6 @@ namespace Z0.Logix
     using System.Runtime.CompilerServices;
     
     using static zfunc;
-    //using static TypedLogicSpec;
 
     public static class ArithmeticSpec
     {
@@ -19,9 +18,9 @@ namespace Z0.Logix
         /// <param name="value">The literal value</param>
         /// <typeparam name="T">The literal type</typeparam>
         [MethodImpl(Inline)]
-        public static TypedLiteralExpr<T> literal<T>(T value)
+        static TypedLiteralExpr<T> literal<T>(T value)
             where T : unmanaged
-                => new TypedLiteralExpr<T>(value);
+                => TypedLogicSpec.literal(value);
 
         /// <summary>
         /// Creates an arithmetic unary expression
@@ -101,9 +100,9 @@ namespace Z0.Logix
         /// <param name="b">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static BinaryAritheticOp<T> add<T>(ITypedExpr<T> a, ITypedExpr<T> b)
+        public static BinaryArithmeticOp<T> add<T>(ITypedExpr<T> a, ITypedExpr<T> b)
             where T : unmanaged
-                => new BinaryAritheticOp<T>(BinaryArithmeticOpKind.Add, a, b);
+                => new BinaryArithmeticOp<T>(BinaryArithmeticOpKind.Add, a, b);
 
         /// <summary>
         /// Defines a binary addition expression over literal operands
@@ -112,9 +111,9 @@ namespace Z0.Logix
         /// <param name="b">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static BinaryAritheticOp<T> add<T>(T a, T b)
+        public static BinaryArithmeticOp<T> add<T>(T a, T b)
             where T : unmanaged
-                => new BinaryAritheticOp<T>(BinaryArithmeticOpKind.Add, literal(a), literal(b));
+                => new BinaryArithmeticOp<T>(BinaryArithmeticOpKind.Add, literal(a), literal(b));
 
         /// <summary>
         /// Defines a binary subtraction expression
@@ -123,9 +122,9 @@ namespace Z0.Logix
         /// <param name="b">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static BinaryAritheticOp<T> sub<T>(ITypedExpr<T> a, ITypedExpr<T> b)
+        public static BinaryArithmeticOp<T> sub<T>(ITypedExpr<T> a, ITypedExpr<T> b)
             where T : unmanaged
-                => new BinaryAritheticOp<T>(BinaryArithmeticOpKind.Sub, a, b);
+                => new BinaryArithmeticOp<T>(BinaryArithmeticOpKind.Sub, a, b);
 
         /// <summary>
         /// Defines a binary subtraction expression over literal operands
@@ -134,119 +133,10 @@ namespace Z0.Logix
         /// <param name="b">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static BinaryAritheticOp<T> sub<T>(T a, T b)
+        public static BinaryArithmeticOp<T> sub<T>(T a, T b)
             where T : unmanaged
-                => new BinaryAritheticOp<T>(BinaryArithmeticOpKind.Sub, literal(a), literal(b));
+                => new BinaryArithmeticOp<T>(BinaryArithmeticOpKind.Sub, literal(a), literal(b));
 
-        /// <summary>
-        /// Defines an equality comparison expression
-        /// </summary>
-        /// <param name="a">The left operand</param>
-        /// <param name="b">The right operand</param>
-        /// <typeparam name="T">The operand type</typeparam>
-        [MethodImpl(Inline)]
-        public static ComparisonExpr<T> cmpeq<T>(ITypedExpr<T> a, ITypedExpr<T> b)
-            where T : unmanaged
-                => new ComparisonExpr<T>(ComparisonOpKind.Eq, a, b);
-
-        /// <summary>
-        /// Defines an equality comparison expression over literal operands
-        /// </summary>
-        /// <param name="a">The left operand</param>
-        /// <param name="b">The right operand</param>
-        /// <typeparam name="T">The operand type</typeparam>
-        [MethodImpl(Inline)]
-        public static ComparisonExpr<T> cmpeq<T>(T a, T b)
-            where T : unmanaged
-                => new ComparisonExpr<T>(ComparisonOpKind.Eq, literal(a), literal(b));
-
-        /// <summary>
-        /// Defines a less-than comparison expression
-        /// </summary>
-        /// <param name="a">The left operand</param>
-        /// <param name="b">The right operand</param>
-        /// <typeparam name="T">The operand type</typeparam>
-        [MethodImpl(Inline)]
-        public static ComparisonExpr<T> lt<T>(ITypedExpr<T> a, ITypedExpr<T> b)
-            where T : unmanaged
-                => new ComparisonExpr<T>(ComparisonOpKind.Lt, a, b);
-
-        /// <summary>
-        /// Defines a less-than comparison expression over literal operands
-        /// </summary>
-        /// <param name="a">The left operand</param>
-        /// <param name="b">The right operand</param>
-        /// <typeparam name="T">The operand type</typeparam>
-        [MethodImpl(Inline)]
-        public static ComparisonExpr<T> lt<T>(T a, T b)
-            where T : unmanaged
-                => new ComparisonExpr<T>(ComparisonOpKind.Lt, literal(a), literal(b));
-
-        /// <summary>
-        /// Defines a less-than or equal comparison expression
-        /// </summary>
-        /// <param name="a">The left operand</param>
-        /// <param name="b">The right operand</param>
-        /// <typeparam name="T">The operand type</typeparam>
-        [MethodImpl(Inline)]
-        public static ComparisonExpr<T> lteq<T>(ITypedExpr<T> a, ITypedExpr<T> b)
-            where T : unmanaged
-                => new ComparisonExpr<T>(ComparisonOpKind.LtEq, a, b);
-
-        /// <summary>
-        /// Defines a less-than or equal comparison expression over literal operands
-        /// </summary>
-        /// <param name="a">The left operand</param>
-        /// <param name="b">The right operand</param>
-        /// <typeparam name="T">The operand type</typeparam>
-        [MethodImpl(Inline)]
-        public static ComparisonExpr<T> lteq<T>(T a, T b)
-            where T : unmanaged
-                => new ComparisonExpr<T>(ComparisonOpKind.LtEq, literal(a), literal(b));
-
-        /// <summary>
-        /// Defines a greater-than comparison expression
-        /// </summary>
-        /// <param name="a">The left operand</param>
-        /// <param name="b">The right operand</param>
-        /// <typeparam name="T">The operand type</typeparam>
-        [MethodImpl(Inline)]
-        public static ComparisonExpr<T> gt<T>(ITypedExpr<T> a, ITypedExpr<T> b)
-            where T : unmanaged
-                => new ComparisonExpr<T>(ComparisonOpKind.Gt, a, b);
-
-        /// <summary>
-        /// Defines a greater-than comparison expression over literal operands
-        /// </summary>
-        /// <param name="a">The left operand</param>
-        /// <param name="b">The right operand</param>
-        /// <typeparam name="T">The operand type</typeparam>
-        [MethodImpl(Inline)]
-        public static ComparisonExpr<T> gt<T>(T a, T b)
-            where T : unmanaged
-                => new ComparisonExpr<T>(ComparisonOpKind.Gt, literal(a), literal(b));
-
-        /// <summary>
-        /// Defines a greater-than or equal comparison expression
-        /// </summary>
-        /// <param name="a">The left operand</param>
-        /// <param name="b">The right operand</param>
-        /// <typeparam name="T">The operand type</typeparam>
-        [MethodImpl(Inline)]
-        public static ComparisonExpr<T> gteq<T>(ITypedExpr<T> a, ITypedExpr<T> b)
-            where T : unmanaged
-                => new ComparisonExpr<T>(ComparisonOpKind.GtEq, a, b);
-
-        /// <summary>
-        /// Defines a greater-than or equal comparison expression over literal operands
-        /// </summary>
-        /// <param name="a">The left operand</param>
-        /// <param name="b">The right operand</param>
-        /// <typeparam name="T">The operand type</typeparam>
-        [MethodImpl(Inline)]
-        public static ComparisonExpr<T> gteq<T>(T a, T b)
-            where T : unmanaged
-                => new ComparisonExpr<T>(ComparisonOpKind.GtEq, literal(a), literal(b));
 
     }
 

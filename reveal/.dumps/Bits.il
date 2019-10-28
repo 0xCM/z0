@@ -1,4 +1,78 @@
-// 2019-10-27 03:48:29:849
+// 2019-10-27 16:51:32:005
+float segment(float src, int i0, int i1)
+{
+    IL_0000: ldarg.0
+    IL_0001: call System.Int32 Z0.MathX::ToBits(System.Single)
+    IL_0006: ldarg.1
+    IL_0007: ldarg.2
+    IL_0008: call System.Int32 Z0.Bits::segment(System.Int32,System.Int32,System.Int32)
+    IL_000D: call System.Single System.BitConverter::Int32BitsToSingle(System.Int32)
+    IL_0012: ret
+
+}
+double segment(double src, int i0, int i1)
+{
+    IL_0000: ldarg.0
+    IL_0001: call System.Int64 Z0.MathX::ToBits(System.Double)
+    IL_0006: ldarg.1
+    IL_0007: ldarg.2
+    IL_0008: call System.Int64 Z0.Bits::segment(System.Int64,System.Int32,System.Int32)
+    IL_000D: call System.Double System.BitConverter::Int64BitsToDouble(System.Int64)
+    IL_0012: ret
+
+}
+void split(byte src, out byte x0, out byte x1)
+{
+    IL_0000: ldarg.1
+    IL_0001: ldarg.0
+    IL_0002: ldc.i4.s 15
+    IL_0004: and
+    IL_0005: conv.u1
+    IL_0006: stind.i1
+    IL_0007: ldarg.2
+    IL_0008: ldarg.0
+    IL_0009: ldc.i4.4
+    IL_000A: shr
+    IL_000B: conv.u1
+    IL_000C: stind.i1
+    IL_000D: ret
+
+}
+ValueTuple<sbyte,sbyte> split(short src, N2 parts)
+{
+    IL_0000: ldarg.0
+    IL_0001: call System.SByte Z0.Bits::lo(System.Int16)
+    IL_0006: ldarg.0
+    IL_0007: call System.SByte Z0.Bits::hi(System.Int16)
+    IL_000C: newobj System.Void System.ValueTuple`2<System.SByte,System.SByte>::.ctor(System.SByte,System.SByte)
+    IL_0011: ret
+
+}
+void split(ushort src, out byte x0, out byte x1)
+{
+    IL_0000: ldarg.1
+    IL_0001: ldarg.0
+    IL_0002: conv.u1
+    IL_0003: stind.i1
+    IL_0004: ldarg.2
+    IL_0005: ldarg.0
+    IL_0006: ldc.i4.8
+    IL_0007: shr
+    IL_0008: conv.u1
+    IL_0009: stind.i1
+    IL_000A: ret
+
+}
+ValueTuple<short,short> split(int src, N2 parts)
+{
+    IL_0000: ldarg.0
+    IL_0001: call System.Int16 Z0.Bits::lo(System.Int32)
+    IL_0006: ldarg.0
+    IL_0007: call System.Int16 Z0.Bits::hi(System.Int32)
+    IL_000C: newobj System.Void System.ValueTuple`2<System.Int16,System.Int16>::.ctor(System.Int16,System.Int16)
+    IL_0011: ret
+
+}
 void split(uint src, out ushort x0, out ushort x1)
 {
     IL_0000: ldarg.1
@@ -1321,88 +1395,103 @@ ref ulong mask(ref ulong dst, int exp0)
 ref ulong mask(ref ulong dst, int exp0, int exp1)
 {
     IL_0000: ldarg.0
-    IL_0001: ldarg.0
-    IL_0002: ldind.i8
-    IL_0003: ldc.i4.1
-    IL_0004: conv.i8
-    IL_0005: ldarg.1
-    IL_0006: ldc.i4.s 63
-    IL_0008: and
-    IL_0009: shl
-    IL_000A: ldc.i4.1
-    IL_000B: conv.i8
-    IL_000C: ldarg.2
-    IL_000D: ldc.i4.s 63
-    IL_000F: and
-    IL_0010: shl
-    IL_0011: or
-    IL_0012: or
-    IL_0013: stind.i8
-    IL_0014: ldarg.0
-    IL_0015: ret
+    IL_0001: ldarg.1
+    IL_0002: call System.UInt64& Z0.Bits::mask(System.UInt64&,System.Int32)
+    IL_0007: pop
+    IL_0008: ldarg.0
+    IL_0009: ldarg.2
+    IL_000A: call System.UInt64& Z0.Bits::mask(System.UInt64&,System.Int32)
+    IL_000F: pop
+    IL_0010: ldarg.0
+    IL_0011: ret
 
 }
 ref ulong mask(ref ulong dst, int exp0, int exp1, int exp2)
 {
     IL_0000: ldarg.0
-    IL_0001: ldarg.0
-    IL_0002: ldind.i8
-    IL_0003: ldc.i4.1
-    IL_0004: conv.i8
-    IL_0005: ldarg.1
-    IL_0006: ldc.i4.s 63
-    IL_0008: and
-    IL_0009: shl
-    IL_000A: ldc.i4.1
-    IL_000B: conv.i8
-    IL_000C: ldarg.2
-    IL_000D: ldc.i4.s 63
-    IL_000F: and
-    IL_0010: shl
-    IL_0011: or
-    IL_0012: ldc.i4.1
-    IL_0013: conv.i8
-    IL_0014: ldarg.3
-    IL_0015: ldc.i4.s 63
-    IL_0017: and
-    IL_0018: shl
-    IL_0019: or
-    IL_001A: or
-    IL_001B: stind.i8
-    IL_001C: ldarg.0
-    IL_001D: ret
-
-}
-ulong mask(ulong src, int exp0, int exp1, int exp2)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldc.i4.1
-    IL_0002: conv.i8
-    IL_0003: ldarg.1
-    IL_0004: ldc.i4.s 63
-    IL_0006: and
-    IL_0007: shl
-    IL_0008: ldc.i4.1
-    IL_0009: conv.i8
-    IL_000A: ldarg.2
-    IL_000B: ldc.i4.s 63
-    IL_000D: and
-    IL_000E: shl
-    IL_000F: or
-    IL_0010: ldc.i4.1
-    IL_0011: conv.i8
-    IL_0012: ldarg.3
-    IL_0013: ldc.i4.s 63
-    IL_0015: and
-    IL_0016: shl
-    IL_0017: or
-    IL_0018: or
-    IL_0019: stloc.0
-    IL_001A: ldloc.0
-    IL_001B: ret
+    IL_0001: ldarg.1
+    IL_0002: ldarg.2
+    IL_0003: call System.UInt64& Z0.Bits::mask(System.UInt64&,System.Int32,System.Int32)
+    IL_0008: pop
+    IL_0009: ldarg.0
+    IL_000A: ldarg.3
+    IL_000B: call System.UInt64& Z0.Bits::mask(System.UInt64&,System.Int32)
+    IL_0010: pop
+    IL_0011: ldarg.0
+    IL_0012: ret
 
 }
 ref ulong mask(ref ulong dst, int exp0, int exp1, int exp2, int exp3)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: ldarg.2
+    IL_0003: call System.UInt64& Z0.Bits::mask(System.UInt64&,System.Int32,System.Int32)
+    IL_0008: pop
+    IL_0009: ldarg.0
+    IL_000A: ldarg.3
+    IL_000B: ldarg.s exp3
+    IL_000D: call System.UInt64& Z0.Bits::mask(System.UInt64&,System.Int32,System.Int32)
+    IL_0012: pop
+    IL_0013: ldarg.0
+    IL_0014: ret
+
+}
+ref ulong mask(ref ulong dst, int exp0, int exp1, int exp2, int exp3, int exp4)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: ldarg.2
+    IL_0003: ldarg.3
+    IL_0004: ldarg.s exp3
+    IL_0006: call System.UInt64& Z0.Bits::mask(System.UInt64&,System.Int32,System.Int32,System.Int32,System.Int32)
+    IL_000B: pop
+    IL_000C: ldarg.0
+    IL_000D: ldarg.s exp4
+    IL_000F: call System.UInt64& Z0.Bits::mask(System.UInt64&,System.Int32)
+    IL_0014: pop
+    IL_0015: ldarg.0
+    IL_0016: ret
+
+}
+ref ulong mask(ref ulong dst, int exp0, int exp1, int exp2, int exp3, int exp4, int exp5)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: ldarg.2
+    IL_0003: ldarg.3
+    IL_0004: ldarg.s exp3
+    IL_0006: call System.UInt64& Z0.Bits::mask(System.UInt64&,System.Int32,System.Int32,System.Int32,System.Int32)
+    IL_000B: pop
+    IL_000C: ldarg.0
+    IL_000D: ldarg.s exp4
+    IL_000F: ldarg.s exp5
+    IL_0011: call System.UInt64& Z0.Bits::mask(System.UInt64&,System.Int32,System.Int32)
+    IL_0016: pop
+    IL_0017: ldarg.0
+    IL_0018: ret
+
+}
+ref ulong mask(ref ulong dst, int exp0, int exp1, int exp2, int exp3, int exp4, int exp5, int exp6)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: ldarg.2
+    IL_0003: ldarg.3
+    IL_0004: ldarg.s exp3
+    IL_0006: call System.UInt64& Z0.Bits::mask(System.UInt64&,System.Int32,System.Int32,System.Int32,System.Int32)
+    IL_000B: pop
+    IL_000C: ldarg.0
+    IL_000D: ldarg.s exp4
+    IL_000F: ldarg.s exp5
+    IL_0011: ldarg.s exp6
+    IL_0013: call System.UInt64& Z0.Bits::mask(System.UInt64&,System.Int32,System.Int32,System.Int32)
+    IL_0018: pop
+    IL_0019: ldarg.0
+    IL_001A: ret
+
+}
+ref ulong mask(ref ulong dst, int exp0, int exp1, int exp2, int exp3, int exp4, int exp5, int exp6, int exp7)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.0
@@ -1434,10 +1523,38 @@ ref ulong mask(ref ulong dst, int exp0, int exp1, int exp2, int exp3)
     IL_0020: and
     IL_0021: shl
     IL_0022: or
-    IL_0023: or
-    IL_0024: stind.i8
-    IL_0025: ldarg.0
-    IL_0026: ret
+    IL_0023: ldc.i4.1
+    IL_0024: conv.i8
+    IL_0025: ldarg.s exp4
+    IL_0027: ldc.i4.s 63
+    IL_0029: and
+    IL_002A: shl
+    IL_002B: or
+    IL_002C: ldc.i4.1
+    IL_002D: conv.i8
+    IL_002E: ldarg.s exp6
+    IL_0030: ldc.i4.s 63
+    IL_0032: and
+    IL_0033: shl
+    IL_0034: or
+    IL_0035: ldc.i4.1
+    IL_0036: conv.i8
+    IL_0037: ldarg.s exp6
+    IL_0039: ldc.i4.s 63
+    IL_003B: and
+    IL_003C: shl
+    IL_003D: or
+    IL_003E: ldc.i4.1
+    IL_003F: conv.i8
+    IL_0040: ldarg.s exp7
+    IL_0042: ldc.i4.s 63
+    IL_0044: and
+    IL_0045: shl
+    IL_0046: or
+    IL_0047: or
+    IL_0048: stind.i8
+    IL_0049: ldarg.0
+    IL_004A: ret
 
 }
 uint nlz(in byte src)
@@ -2337,6 +2454,50 @@ uint pop(ulong src)
     IL_0007: ret
 
 }
+uint pop(ulong x0, ulong x1)
+{
+    IL_0000: ldarg.0
+    IL_0001: call System.UInt64 System.Runtime.Intrinsics.X86.Popcnt/X64::PopCount(System.UInt64)
+    IL_0006: ldarg.1
+    IL_0007: call System.UInt64 System.Runtime.Intrinsics.X86.Popcnt/X64::PopCount(System.UInt64)
+    IL_000C: add
+    IL_000D: conv.u4
+    IL_000E: ret
+
+}
+uint pop(ulong x0, ulong x1, ulong x2, ulong x3)
+{
+    IL_0000: ldarg.0
+    IL_0001: call System.UInt64 System.Runtime.Intrinsics.X86.Popcnt/X64::PopCount(System.UInt64)
+    IL_0006: ldarg.1
+    IL_0007: call System.UInt64 System.Runtime.Intrinsics.X86.Popcnt/X64::PopCount(System.UInt64)
+    IL_000C: add
+    IL_000D: ldarg.2
+    IL_000E: call System.UInt64 System.Runtime.Intrinsics.X86.Popcnt/X64::PopCount(System.UInt64)
+    IL_0013: add
+    IL_0014: ldarg.3
+    IL_0015: call System.UInt64 System.Runtime.Intrinsics.X86.Popcnt/X64::PopCount(System.UInt64)
+    IL_001A: add
+    IL_001B: conv.u4
+    IL_001C: ret
+
+}
+uint pop(ulong x0, ulong x1, ulong x2, ulong x3, ulong x4, ulong x5, ulong x6, ulong x7)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: ldarg.2
+    IL_0003: ldarg.3
+    IL_0004: call System.UInt32 Z0.Bits::pop(System.UInt64,System.UInt64,System.UInt64,System.UInt64)
+    IL_0009: ldarg.s x4
+    IL_000B: ldarg.s x5
+    IL_000D: ldarg.s x6
+    IL_000F: ldarg.s x7
+    IL_0011: call System.UInt32 Z0.Bits::pop(System.UInt64,System.UInt64,System.UInt64,System.UInt64)
+    IL_0016: add
+    IL_0017: ret
+
+}
 uint posl(byte src)
 {
     IL_0000: ldarg.0
@@ -3180,80 +3341,6 @@ ulong segment(ulong src, int i0, int i1)
     IL_0006: conv.u1
     IL_0007: call System.UInt64 System.Runtime.Intrinsics.X86.Bmi1/X64::BitFieldExtract(System.UInt64,System.Byte,System.Byte)
     IL_000C: ret
-
-}
-float segment(float src, int i0, int i1)
-{
-    IL_0000: ldarg.0
-    IL_0001: call System.Int32 Z0.MathX::ToBits(System.Single)
-    IL_0006: ldarg.1
-    IL_0007: ldarg.2
-    IL_0008: call System.Int32 Z0.Bits::segment(System.Int32,System.Int32,System.Int32)
-    IL_000D: call System.Single System.BitConverter::Int32BitsToSingle(System.Int32)
-    IL_0012: ret
-
-}
-double segment(double src, int i0, int i1)
-{
-    IL_0000: ldarg.0
-    IL_0001: call System.Int64 Z0.MathX::ToBits(System.Double)
-    IL_0006: ldarg.1
-    IL_0007: ldarg.2
-    IL_0008: call System.Int64 Z0.Bits::segment(System.Int64,System.Int32,System.Int32)
-    IL_000D: call System.Double System.BitConverter::Int64BitsToDouble(System.Int64)
-    IL_0012: ret
-
-}
-void split(byte src, out byte x0, out byte x1)
-{
-    IL_0000: ldarg.1
-    IL_0001: ldarg.0
-    IL_0002: ldc.i4.s 15
-    IL_0004: and
-    IL_0005: conv.u1
-    IL_0006: stind.i1
-    IL_0007: ldarg.2
-    IL_0008: ldarg.0
-    IL_0009: ldc.i4.4
-    IL_000A: shr
-    IL_000B: conv.u1
-    IL_000C: stind.i1
-    IL_000D: ret
-
-}
-ValueTuple<sbyte,sbyte> split(short src, N2 parts)
-{
-    IL_0000: ldarg.0
-    IL_0001: call System.SByte Z0.Bits::lo(System.Int16)
-    IL_0006: ldarg.0
-    IL_0007: call System.SByte Z0.Bits::hi(System.Int16)
-    IL_000C: newobj System.Void System.ValueTuple`2<System.SByte,System.SByte>::.ctor(System.SByte,System.SByte)
-    IL_0011: ret
-
-}
-void split(ushort src, out byte x0, out byte x1)
-{
-    IL_0000: ldarg.1
-    IL_0001: ldarg.0
-    IL_0002: conv.u1
-    IL_0003: stind.i1
-    IL_0004: ldarg.2
-    IL_0005: ldarg.0
-    IL_0006: ldc.i4.8
-    IL_0007: shr
-    IL_0008: conv.u1
-    IL_0009: stind.i1
-    IL_000A: ret
-
-}
-ValueTuple<short,short> split(int src, N2 parts)
-{
-    IL_0000: ldarg.0
-    IL_0001: call System.Int16 Z0.Bits::lo(System.Int32)
-    IL_0006: ldarg.0
-    IL_0007: call System.Int16 Z0.Bits::hi(System.Int32)
-    IL_000C: newobj System.Void System.ValueTuple`2<System.Int16,System.Int16>::.ctor(System.Int16,System.Int16)
-    IL_0011: ret
 
 }
 BitVector128 clmul_ref(BitVector64 x, BitVector64 y)

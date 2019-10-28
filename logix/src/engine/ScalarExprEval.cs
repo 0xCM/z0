@@ -25,8 +25,8 @@ namespace Z0.Logix
                     return eval(x.Value);
                 case ITypedOpExpr<T> x:
                     return eval(x);
-                case ITypedEqualityExpr<T> x:
-                    return gmath.xnor(eval(x.Lhs).Value, eval(x.Rhs).Value);
+                case IComparisonExpr<T> x:
+                    return gmath.xnor(eval(x.LeftArg).Value, eval(x.RightArg).Value);
                 default:
                     return unhandled(expr);
             }

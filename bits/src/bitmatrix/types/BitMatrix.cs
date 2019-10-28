@@ -79,6 +79,10 @@ namespace Z0
             => src.CopyTo(data);
 
         [MethodImpl(Inline)]
+        public void Update(BitMatrix<T> src)
+            => src.data.CopyTo(data);
+
+        [MethodImpl(Inline)]
         public void Load(int row, out Vector256<T> dst)
         {            
             if(typeof(T) == typeof(byte))

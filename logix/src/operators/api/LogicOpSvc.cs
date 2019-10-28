@@ -11,8 +11,10 @@ namespace Z0.Logix
 
     using static zfunc;
 
+
     public readonly struct LogicOpSvc : ILogicOpSvc
     {
+
         public static ILogicOpSvc Factory
         {
             [MethodImpl(Inline)]

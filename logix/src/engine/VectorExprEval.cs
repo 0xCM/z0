@@ -26,8 +26,8 @@ namespace Z0.Logix
                     return eval(x.BaseExpr);
                 case ITypedOpExpr<Vector128<T>> x:
                     return eval(x);
-                case ITypedEqualityExpr<Vector128<T>> x:
-                    return ginx.vxnor(eval(x.Lhs).Value, eval(x.Rhs).Value);
+                case IComparisonExpr<Vector128<T>> x:
+                    return ginx.vxnor(eval(x.LeftArg).Value, eval(x.RightArg).Value);
                 default:
                     return unhandled(expr);
             }
@@ -47,8 +47,8 @@ namespace Z0.Logix
                     return eval(x.BaseExpr);
                 case ITypedOpExpr<Vector256<T>> x:
                     return eval(x);
-                case ITypedEqualityExpr<Vector256<T>> x:
-                    return ginx.vxnor(eval(x.Lhs).Value, eval(x.Rhs).Value);
+                case IComparisonExpr<Vector256<T>> x:
+                    return ginx.vxnor(eval(x.LeftArg).Value, eval(x.RightArg).Value);
                 default:
                     return unhandled(expr);
             }
@@ -60,13 +60,13 @@ namespace Z0.Logix
             switch(expr)               
             {
                 case IUnaryBitwiseOp<Vector128<T>> x:
-                    return Cpu128OpApi.eval(x.OpKind, eval(x.Arg).Value);
+                    return CpuOpApi.eval(x.OpKind, eval(x.Arg).Value);
                 case IBinaryBitwiseOp<Vector128<T>> x:
-                    return Cpu128OpApi.eval(x.OpKind, eval(x.LeftArg).Value, eval(x.RightArg).Value);
+                    return CpuOpApi.eval(x.OpKind, eval(x.LeftArg).Value, eval(x.RightArg).Value);
                 case IShiftOp<Vector128<T>> x:
-                    return Cpu128OpApi.eval(x.OpKind, eval(x.Subject).Value, (byte)ScalarExprEval.eval(x.Offset).Value);
+                    return CpuOpApi.eval(x.OpKind, eval(x.Subject).Value, (byte)ScalarExprEval.eval(x.Offset).Value);
                 case ITernaryBitwiseOp<Vector128<T>> x:
-                    return Cpu128OpApi.eval(x.OpKind, eval(x.FirstArg).Value, eval(x.SecondArg).Value, eval(x.ThirdArg));
+                    return CpuOpApi.eval(x.OpKind, eval(x.FirstArg).Value, eval(x.SecondArg).Value, eval(x.ThirdArg));
                 default:
                     return unhandled(expr);
             }
@@ -78,13 +78,13 @@ namespace Z0.Logix
             switch(expr)               
             {
                 case IUnaryBitwiseOp<Vector256<T>> x:
-                    return Cpu256OpApi.eval(x.OpKind, eval(x.Arg).Value);
+                    return CpuOpApi.eval(x.OpKind, eval(x.Arg).Value);
                 case IBinaryBitwiseOp<Vector256<T>> x:
-                    return Cpu256OpApi.eval(x.OpKind, eval(x.LeftArg).Value, eval(x.RightArg).Value);
+                    return CpuOpApi.eval(x.OpKind, eval(x.LeftArg).Value, eval(x.RightArg).Value);
                 case IShiftOp<Vector256<T>> x:
-                    return Cpu256OpApi.eval(x.OpKind, eval(x.Subject).Value, (byte)ScalarExprEval.eval(x.Offset).Value);
+                    return CpuOpApi.eval(x.OpKind, eval(x.Subject).Value, (byte)ScalarExprEval.eval(x.Offset).Value);
                 case ITernaryBitwiseOp<Vector256<T>> x:
-                    return Cpu256OpApi.eval(x.OpKind, eval(x.FirstArg).Value, eval(x.SecondArg).Value, eval(x.ThirdArg));
+                    return CpuOpApi.eval(x.OpKind, eval(x.FirstArg).Value, eval(x.SecondArg).Value, eval(x.ThirdArg));
                 default:
                     return unhandled(expr);
             }

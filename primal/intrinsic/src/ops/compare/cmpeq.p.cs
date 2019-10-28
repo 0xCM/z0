@@ -21,17 +21,14 @@ namespace Z0
         {                    
             vloadu(pX, out Vector128<T> vA);
             vloadu(pY, out Vector128<T> vB);
-            return vcmpeq(vA,vB);
+            return veq(vA,vB);
         }
 
         [MethodImpl(Inline)]
         public static unsafe void vcmpeq<T>(N128 n, T* pX, T* pY, T* pDst)
             where T : unmanaged
-        {                    
-            vloadu(pX, out Vector128<T> vA);
-            vloadu(pY, out Vector128<T> vB);
-            vstore(vcmpeq(vA,vB), pDst);
-        }
+                => vstore(vcmpeq(n,pX,pY), pDst);
+
 
         [MethodImpl(Inline)]
         public static unsafe Vector256<T> vcmpeq<T>(N256 n, T* pA, T* pB)
@@ -39,19 +36,13 @@ namespace Z0
         {                    
             vloadu(pA, out Vector256<T> vA);
             vloadu(pB, out Vector256<T> vB);
-            return vcmpeq(vA,vB);
+            return veq(vA,vB);
         }
 
         [MethodImpl(Inline)]
         public static unsafe void vcmpeq<T>(N256 n, T* pX, T* pY, T* pDst)
             where T : unmanaged
-        {                    
-            vloadu(pX, out Vector256<T> vA);
-            vloadu(pY, out Vector256<T> vB);
-            vstore(vcmpeq(vA,vB), pDst);
-        }
-
-
+                => vstore(vcmpeq(n,pX,pY), pDst);
     }
 
 }

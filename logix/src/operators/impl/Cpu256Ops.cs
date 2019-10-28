@@ -13,15 +13,15 @@ namespace Z0.Logix
     using static zfunc;    
     using static TernaryBitOpKind;
 
-    public static class Cpu256Ops
+    public static partial class CpuOps
     {
         [MethodImpl(Inline)]
-        public static Vector256<T> @false<T>()
+        public static Vector256<T> @false<T>(N256 n)
             where T : unmanaged
                 => default;
 
         [MethodImpl(Inline)]
-        public static Vector256<T> @true<T>()
+        public static Vector256<T> @true<T>(N256 n)
             where T:unmanaged
                 => ginx.vpOnes<T>(n256);
 
@@ -100,6 +100,33 @@ namespace Z0.Logix
             where T : unmanaged
                 => ginx.vxnor(a,b);
 
+
+        [MethodImpl(Inline)]
+        public static Vector256<T> left<T>(Vector256<T> a, Vector256<T> b)
+            where T : unmanaged
+                => a;
+
+        [MethodImpl(Inline)]
+        public static Vector256<T> leftnot<T>(Vector256<T> a, Vector256<T> b)
+            where T : unmanaged
+                => not(a);
+
+        [MethodImpl(Inline)]
+        public static Vector256<T> right<T>(Vector256<T> a, Vector256<T> b)
+            where T : unmanaged
+                => b;
+
+        [MethodImpl(Inline)]
+        public static Vector256<T> rightnot<T>(Vector256<T> a, Vector256<T> b)
+            where T : unmanaged
+                => not(b);
+
+
+        [MethodImpl(Inline)]
+        public static Vector256<T> xornot<T>(Vector256<T> a, Vector256<T> b)
+            where T : unmanaged
+                => ginx.vxornot(a,b);
+
         [MethodImpl(Inline)]
         public static Vector256<T> xor1<T>(Vector256<T> a)
             where T : unmanaged
@@ -126,9 +153,55 @@ namespace Z0.Logix
                 => ginx.vrotr<T>(a,(byte)offset);
 
         [MethodImpl(Inline)]
+        public static Vector256<T> inc<T>(Vector256<T> a)
+            where T : unmanaged
+                => ginx.vinc(a);
+
+        [MethodImpl(Inline)]
+        public static Vector256<T> dec<T>(Vector256<T> a)
+            where T : unmanaged
+                => ginx.vdec(a);
+
+        [MethodImpl(Inline)]
         public static Vector256<T> negate<T>(Vector256<T> a)
             where T : unmanaged
                 => ginx.vnegate<T>(a);
+
+        [MethodImpl(Inline)]
+        public static Vector256<T> add<T>(Vector256<T> a, Vector256<T> b)
+            where T : unmanaged
+                => ginx.vadd(a,b);
+
+        [MethodImpl(Inline)]
+        public static Vector256<T> sub<T>(Vector256<T> a, Vector256<T> b)
+            where T : unmanaged
+                => ginx.vsub(a,b);
+
+        [MethodImpl(Inline)]
+        public static Vector256<T> equals<T>(Vector256<T> a, Vector256<T> b)
+            where T : unmanaged
+                => ginx.veq(a,b);
+
+        [MethodImpl(Inline)]
+        public static bit same<T>(Vector256<T> a, Vector256<T> b)
+            where T : unmanaged
+                => ginx.vtestc(equals(a,b));
+
+        [MethodImpl(Inline)]
+        public static Vector256<T> lt<T>(Vector256<T> a, Vector256<T> b)
+            where T : unmanaged
+                => ginx.vlt(a,b);
+
+        [MethodImpl(Inline)]
+        public static Vector256<T> gt<T>(Vector256<T> a, Vector256<T> b)
+            where T : unmanaged
+                => ginx.vgt(a,b);
+
+
+        [MethodImpl(Inline)]
+        public static Vector256<T> max<T>(Vector256<T> a, Vector256<T> b)
+            where T : unmanaged
+                => ginx.vmax(a,b);
 
         [MethodImpl(Inline)]
         public static Vector256<T> select<T>(Vector256<T> a, Vector256<T> b, Vector256<T> c)

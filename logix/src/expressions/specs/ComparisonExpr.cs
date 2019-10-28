@@ -10,48 +10,85 @@ namespace Z0.Logix
     
     using static zfunc;
 
-    /// <summary>
-    /// Captures a comparison expression along with with its operands
-    /// </summary>
-    public sealed class ComparisonExpr<T> : IComparisonExpr<T>
-        where T : unmanaged
+    public sealed class ComparisonExpr : IComparisonExpr
     {
+        
         [MethodImpl(Inline)]
-        public ComparisonExpr(ComparisonOpKind op, ITypedExpr<T> left, ITypedExpr<T> right)
+        public static ComparisonExpr<T> Define<T>(ComparisonKind kind, ITypedExpr<T> lhs, ITypedExpr<T> rhs, params VariableExpr<T>[] vars)
+            where T : unmanaged
+                => new ComparisonExpr<T>(kind,lhs,rhs,vars);
+        
+        [MethodImpl(Inline)]
+        public static ComparisonExpr Define(ComparisonKind kind, ILogicExpr lhs, ILogicExpr rhs, params LogicVariable[] vars)
+            => new ComparisonExpr(kind,lhs,rhs,vars);
+            
+        ComparisonExpr(ComparisonKind kind, ILogicExpr lhs, ILogicExpr rhs, params LogicVariable[] vars)
         {
-            this.OpKind = op;
-            this.LeftArg = left;
-            this.RightArg = right;
+            this.ComparisonKind = kind;
+            this.Lhs = lhs;
+            this.Rhs = rhs;
+            this.Vars = vars;
         }
+
+
+        public ComparisonKind ComparisonKind {get;}
+
+        /// <summary>
+        /// The left expression
+        /// </summary>
+        public ILogicExpr Lhs {get;}
         
         /// <summary>
-        /// The expression classifier
+        /// The right expression
         /// </summary>
-        public TypedExprKind ExprKind 
-            => TypedExprKind.Comparison;
+        public ILogicExpr Rhs {get;}
 
-        /// <summary>
-        /// The operator
-        /// </summary>
-        public ComparisonOpKind OpKind {get;}
+        public LogicVariable[] Vars {get;}
 
-        /// <summary>
-        /// The left operand
-        /// </summary>
-        public ITypedExpr<T> LeftArg {get;}
+        public void SetVars(params ILogicExpr[] values)
+        {
+            var count = Math.Min(Vars.Length, values.Length);
+            for(var i=0; i<count; i++)
+                Vars[i].Set(values[i]);
+        }
 
-        /// <summary>
-        /// The right operand
-        /// </summary>
-        public ITypedExpr<T> RightArg {get;}
+        public void SetVars(ILiteralLogicSeq values)
+        {
+            var count = Math.Min(Vars.Length, values.Length);
+            for(var i=0; i<count; i++)
+                Vars[i].Set(values[i]);
+        }
+
+        public void SetVars(params bit[] values)
+        {
+            var count = Math.Min(Vars.Length, values.Length);
+            for(var i=0; i<count; i++)
+                Vars[i].Set(values[i]);
+        }
+
+        [MethodImpl(Inline)]
+        public void SetVar(bit a)
+        {
+            Vars[0].Set(a);
+        }
+
+        [MethodImpl(Inline)]
+        public void SetVars(bit a, bit b)
+        {
+            Vars[0].Set(a);
+            Vars[1].Set(b);
+        }
+
+        [MethodImpl(Inline)]
+        public void SetVars(bit a, bit b, bit c)
+        {
+            Vars[0].Set(a);
+            Vars[1].Set(b);
+            Vars[2].Set(c);
+        }
+
 
         public string Format()
-            => OpKind.Format(LeftArg,RightArg);
-        
-        public override string ToString()
-            => Format();
-
+            => Lhs.Format() + " == " + Rhs.Format();
     }
-
-
 }

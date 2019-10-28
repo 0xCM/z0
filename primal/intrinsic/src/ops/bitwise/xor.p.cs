@@ -13,13 +13,6 @@ namespace Z0
 
     partial class ginx
     {
-        /// <summary>
-        /// Loads two vectors from respective pointers computes the XOR between them, return the result to the caller
-        /// </summary>
-        /// <param name="n">The bitness selector</param>
-        /// <param name="pX">A pointer from which the first vector will be read</param>
-        /// <param name="pY">A pointer from which the second vector will be read</param>
-        /// <typeparam name="T">The primal component type</typeparam>
         [MethodImpl(Inline)]
         public static unsafe Vector128<T> vxor<T>(N128 n, T* pX, T* pY)
             where T : unmanaged
@@ -29,30 +22,11 @@ namespace Z0
             return vxor(vA,vB);
         }
 
-        /// <summary>
-        /// Loads two vectors from respective pointers computes the XOR between them, storing the result to a target pointer
-        /// </summary>
-        /// <param name="n">The bitness selector</param>
-        /// <param name="pX">A pointer from which the first vector will be read</param>
-        /// <param name="pY">A pointer from which the second vector will be read</param>
-        /// <param name="pDst">A pointer to at at least 16 bytes of memory to which the computation result is stored</param>
-        /// <typeparam name="T">The primal component type</typeparam>
         [MethodImpl(Inline)]
         public static unsafe void vxor<T>(N128 n, T* pX, T* pY, T* pDst)
             where T : unmanaged
-        {                    
-            vloadu(pX, out Vector128<T> vA);
-            vloadu(pY, out Vector128<T> vB);
-            vstore(vxor(vA,vB), pDst);
-        }
+                => vstore(vxor(n,pX,pY), pDst);
 
-        /// <summary>
-        /// Loads two vectors from respective pointers computes the XOR between them, return the result to the caller
-        /// </summary>
-        /// <param name="n">The bitness selector</param>
-        /// <param name="pX">A pointer from which the first vector will be read</param>
-        /// <param name="pY">A pointer from which the second vector will be read</param>
-        /// <typeparam name="T">The primal component type</typeparam>
         [MethodImpl(Inline)]
         public static unsafe Vector256<T> vxor<T>(N256 n, T* pX, T* pY)
             where T : unmanaged
@@ -62,33 +36,11 @@ namespace Z0
             return vxor(vA,vB);
         }
         
-        [MethodImpl(Inline)]
-        public static unsafe Vector256<T> vxor<T>(Vector256<T> x, T* pY)
-            where T : unmanaged
-        {                    
-            vloadu(pY, out Vector256<T> vB);
-            return vxor(x,vB);
-        }
 
-        /// <summary>
-        /// Loads two vectors from respective pointers computes the XOR between them, storing the result to a target pointer
-        /// </summary>
-        /// <param name="n">The bitness selector</param>
-        /// <param name="pX">A pointer from which the first vector will be read</param>
-        /// <param name="pY">A pointer from which the second vector will be read</param>
-        /// <param name="pDst">A pointer to at at least 256 bytes of memory to which the computation result is stored</param>
-        /// <typeparam name="T">The primal component type</typeparam>
         [MethodImpl(Inline)]
         public static unsafe void vxor<T>(N256 n, T* pX, T* pY, T* pDst)
             where T : unmanaged
-        {                    
-            vloadu(pX, out Vector256<T> vA);
-            vloadu(pY, out Vector256<T> vB);
-            vstore(vxor(vA,vB), pDst);
-        }
-
-
-
+                => vstore(vxor(n,pX,pY), pDst);
 
     }
 }

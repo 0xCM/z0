@@ -10,7 +10,7 @@ using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;    
 
 using Z0;
-
+using static Z0.As;
 partial class zfunc
 {
 
@@ -124,6 +124,28 @@ partial class zfunc
         return dst;
     }
 
+    /// <summary>
+    /// Converts a bit to an unsigned integral type with the value 0 or 1 as determined by the state of thebit 
+    /// </summary>
+    /// <param name="src">The source bit</param>
+    /// <typeparam name="T">The target primal type</typeparam>
+    [MethodImpl(Inline)]   
+    public static T convert<T>(bit src)
+        where T : unmanaged
+    {
+        if(typeof(T) == typeof(byte))
+            return generic<T>(src.AsUInt8());
+        else if(typeof(T) == typeof(ushort))
+            return generic<T>(src.AsUInt16());
+        else if(typeof(T) == typeof(uint))
+            return generic<T>(src.AsUInt32());
+        else if(typeof(T) == typeof(ulong))
+            return generic<T>(src.AsUInt64());
+        else
+            throw unsupported<T>();
+    }
+
+    
     /// <summary>
     /// If possible, applies the conversion sbyte -> T
     /// </summary>

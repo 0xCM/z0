@@ -82,7 +82,7 @@ namespace Z0.Logix
         /// <param name="expr">The expression to test</param>
         /// <param name="a">The first variable value</param>
         /// <param name="b">The second variable value</param>
-        bit Satisfied(EqualityExpr expr, bit a, bit b);
+        bit Satisfied(ComparisonExpr expr, bit a, bit b);
     }
 
 

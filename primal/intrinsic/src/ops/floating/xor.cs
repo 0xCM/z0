@@ -17,7 +17,7 @@ namespace Z0
 
     partial class dfp
     {
-         /// <summary>
+        /// <summary>
         /// __m128 _mm_andnot_ps (__m128 a, __m128 b) ANDNPS xmm, xmm/m128
         /// Effects the composite operation x & (~y) for the left and right operands
         /// </summary>

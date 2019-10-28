@@ -40,20 +40,20 @@ namespace Z0.Logix
             where T : unmanaged
                 => throw new NotSupportedException($"{id}");
 
+       public static BinaryOp<T> dne<T>(ComparisonKind id, T x = default)        
+            where T : unmanaged
+                => throw new NotSupportedException($"{id}");
+
        public static BinaryOp<T> dne<T>(BinaryBitwiseOpKind id, T x = default)        
             where T : unmanaged
                 => throw new NotSupportedException($"{id}");
 
        public static T dne<K,T>(K kind)        
-            where T : unmanaged
                 => throw new NotSupportedException($"{kind}");
 
        public static Shifter<T> dne<T>(ShiftOpKind id, T x = default)        
             where T : unmanaged
                 => throw new NotSupportedException($"{id}");
-       public static BinaryPred<T> dne<T>(ComparisonOpKind id)
-            where T : unmanaged
-            => throw new NotSupportedException($"{id}");
 
        public static TernaryOp<T> dne<T>(TernaryBitOpKind id, T x = default)        
             where T : unmanaged

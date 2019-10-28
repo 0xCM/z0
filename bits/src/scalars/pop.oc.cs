@@ -1,0 +1,26 @@
+//-----------------------------------------------------------------------------
+// Copyright   :  (c) Chris Moore, 2019
+// License     :  MIT
+//-----------------------------------------------------------------------------
+namespace Z0
+{
+    using System;
+    using System.Runtime.CompilerServices;
+    using System.Runtime.InteropServices;
+
+    using static zfunc;
+    using static As;
+    using static AsIn;
+
+    partial class bvoc
+    {
+
+        public static uint pop_4x64(ulong x0, ulong x1, ulong x2, ulong x3)
+            => gbits.pop(x0,x1,x2,x3);
+
+        public static uint pop_8x64(ulong x0, ulong x1, ulong x2, ulong x3, ulong x4, ulong x5, ulong x6, ulong x7)
+            => gbits.pop(x0,x1,x2,x3,x4,x5,x6,x7);
+
+    }
+
+}

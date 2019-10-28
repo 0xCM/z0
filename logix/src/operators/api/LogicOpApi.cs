@@ -44,16 +44,11 @@ namespace Z0.Logix
         {        
             switch(kind)
             {
-                case UnaryLogicOpKind.False:
-                    return off;
-                case UnaryLogicOpKind.Not:
-                    return bit.not(a);
-                case UnaryLogicOpKind.Identity:
-                    return a;
-                case UnaryLogicOpKind.True:
-                    return on;
-                default:
-                    return dne(kind);
+                case UnaryLogicOpKind.False: return off;
+                case UnaryLogicOpKind.Not: return bit.not(a);
+                case UnaryLogicOpKind.Identity: return a;
+                case UnaryLogicOpKind.True: return on;
+                default: return dne(kind);
             }
         }    
 
@@ -80,10 +75,10 @@ namespace Z0.Logix
                 case BinaryLogicOpKind.LeftNot: return leftnot(a,b);
                 case BinaryLogicOpKind.RightProject: return right(a,b);
                 case BinaryLogicOpKind.RightNot: return rightnot(a,b);
-                case BinaryLogicOpKind.True: return @true(a,b);
                 case BinaryLogicOpKind.Implies: return implies(a,b);
                 case BinaryLogicOpKind.ConvImplies: return conimplies(a,b);
                 case BinaryLogicOpKind.MaterialNonimplication: return notimplies(a,b);
+                case BinaryLogicOpKind.True: return @true(a,b);
 
                 default: return dne(kind);
             }

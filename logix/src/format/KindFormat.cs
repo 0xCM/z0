@@ -59,8 +59,9 @@ namespace Z0.Logix
         public static string Format(this BinaryBitwiseOpKind kind)
             => kind.ToString().ToLower();
 
+
         [MethodImpl(Inline)]
-        public static string Format(this ComparisonOpKind kind)
+        public static string Format(this ComparisonKind kind)
             => kind.ToString().ToLower();
 
         [MethodImpl(Inline)]
@@ -71,8 +72,9 @@ namespace Z0.Logix
         public static string Format<T>(this BinaryBitwiseOpKind kind, T arg1, T arg2)
             => $"{kind.Format()}({arg1}, {arg2})";
 
+
         [MethodImpl(Inline)]
-        public static string Format<T>(this ComparisonOpKind kind, T arg1, T arg2)
+        public static string Format<T>(this ComparisonKind kind, T arg1, T arg2)
             => $"{kind.Format()}({arg1}, {arg2})";
 
         [MethodImpl(Inline)]

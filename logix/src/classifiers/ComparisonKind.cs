@@ -7,9 +7,9 @@ namespace Z0.Logix
     using System;
 
     /// <summary>
-    /// Classifies binary boolean comparison operators
+    /// Classifies comparisons
     /// </summary>
-    public enum ComparisonOpKind : byte
+    public enum ComparisonKind : uint
     {        
         /// <summary>
         /// Classifies a binary operator that returns true iff its operands are equal
@@ -29,12 +29,17 @@ namespace Z0.Logix
         /// <summary>
         /// Classifies a binary operator that returns true if the left operand is strictly greater than the left operand
         /// </summary>
-        Gt = Pow2.T03,
+        Gt  = Pow2.T03,
 
         /// <summary>
         /// Classifies a binary operator that returns true if the left operand is greater than or equal to the left operand
         /// </summary>
-        GtEq = Pow2.T04
+        GtEq =Pow2.T04,
+        
+        /// <summary>
+        /// Classifies a binary operator that returns true iff its operands are not equal
+        /// </summary>
+        Neq = Pow2.T05,
     }
 }
 

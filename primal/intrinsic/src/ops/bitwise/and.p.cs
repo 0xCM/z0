@@ -15,73 +15,33 @@ namespace Z0
     partial class ginx
     {
 
-        /// <summary>
-        /// Loads two 128-bit vectors from supplied pointers and returns the bitwise AND between them
-        /// </summary>
-        /// <param name="n">The bitness selector</param>
-        /// <param name="pX">A pointer to at at least 16 bytes of memory from which to load the first vector</param>
-        /// <param name="pY">A pointer to at at least 16 bytes of memory from which to load the second vector</param>
-        /// <typeparam name="T">The primal component type</typeparam>
         [MethodImpl(Inline)]
-        public static unsafe Vector128<T> vand<T>(N128 n, T* pX, T* pY)
+        public static unsafe Vector128<T> vand<T>(N128 n, T* pX, T* pDst)
             where T : unmanaged
         {                    
             vloadu(pX, out Vector128<T> vA);
-            vloadu(pY, out Vector128<T> vB);
+            vloadu(pDst, out Vector128<T> vB);
             return vand(vA,vB);
         }
 
-        /// <summary>
-        /// Loads two 128-bit vectors from the first two pointers and stores the bitwise AND computation between them to
-        /// memory identified by the third pointer
-        /// </summary>
-        /// <param name="n">The bitness selector</param>
-        /// <param name="pX">A pointer to at at least 16 bytes of memory from which to load the first vector</param>
-        /// <param name="pY">A pointer to at at least 16 bytes of memory from which to load the second vector</param>
-        /// <param name="pZ">A pointer to at at least 16 bytes of memory to which the computation result is stored</param>
-        /// <typeparam name="T">The primal component type</typeparam>
         [MethodImpl(Inline)]
-        public static unsafe void vand<T>(N128 n, T* pX, T* pY, T* pZ)
+        public static unsafe void vand<T>(N128 n, T* pX, T* pY, T* pDst)
             where T : unmanaged
-        {                    
-            vloadu(pX, out Vector128<T> vA);
-            vloadu(pY, out Vector128<T> vB);
-            vstore(vand(vA,vB), pZ);
-        }
+                => vstore(vand(n, pX,pY), pDst);
 
-        /// <summary>
-        /// Loads two 256-bit vectors from supplied pointers and returns the bitwise AND between them
-        /// </summary>
-        /// <param name="n">The bitness selector</param>
-        /// <param name="pX">A pointer to at at least 16 bytes of memory from which to load the first vector</param>
-        /// <param name="pY">A pointer to at at least 16 bytes of memory from which to load the second vector</param>
-        /// <typeparam name="T">The primal component type</typeparam>
         [MethodImpl(Inline)]
-        public static unsafe Vector256<T> vand<T>(N256 n, T* pA, T* pB)
+        public static unsafe Vector256<T> vand<T>(N256 n, T* pX, T* pY)
             where T : unmanaged
         {                    
-            vloadu(pA, out Vector256<T> vA);
-            vloadu(pB, out Vector256<T> vB);
+            vloadu(pX, out Vector256<T> vA);
+            vloadu(pY, out Vector256<T> vB);
             return vand(vA,vB);
         }
 
-        /// <summary>
-        /// Loads two 256-bit vectors from the first two pointers and stores the bitwise AND computation between them to
-        /// memory identified by the third pointer
-        /// </summary>
-        /// <param name="n">The bitness selector</param>
-        /// <param name="pX">A pointer to at at least 16 bytes of memory from which to load the first vector</param>
-        /// <param name="pY">A pointer to at at least 16 bytes of memory from which to load the second vector</param>
-        /// <param name="pZ">A pointer to at at least 16 bytes of memory to which the computation result is stored</param>
-        /// <typeparam name="T">The primal component type</typeparam>
         [MethodImpl(Inline)]
-        public static unsafe void vand<T>(N256 n, T* pA, T* pB, T* pC)
+        public static unsafe void vand<T>(N256 n, T* pX, T* pY, T* pDst)
             where T : unmanaged
-        {                    
-            vloadu(pA, out Vector256<T> vA);
-            vloadu(pB, out Vector256<T> vB);
-            vstore(vand(vA,vB), pC);
-        }
+                => vstore(vand(n, pX,pY), pDst);
 
 
 

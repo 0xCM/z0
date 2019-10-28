@@ -83,7 +83,15 @@ namespace Z0
         /// <param name="src">The source bit</param>
         [MethodImpl(Inline)]
         public static explicit operator byte(bit src)
-            => (byte)src.state;
+            => src.AsUInt8();
+
+        /// <summary>
+        /// Defines an explicit byte -> bit conversion
+        /// </summary>
+        /// <param name="src">The source value</param>
+        [MethodImpl(Inline)]
+        public static explicit operator bit(byte src)
+            => SafeWrap(src);
 
         /// <summary>
         /// Defines an explicit bit -> ushort conversion
@@ -91,7 +99,15 @@ namespace Z0
         /// <param name="src">The source bit</param>
         [MethodImpl(Inline)]
         public static explicit operator ushort(bit src)
-            => (ushort)src.state;
+            => src.AsUInt16();
+
+        /// <summary>
+        /// Defines an explicit ushort -> bit conversion
+        /// </summary>
+        /// <param name="src">The source value</param>
+        [MethodImpl(Inline)]
+        public static explicit operator bit(ushort src)
+            => SafeWrap(src);
 
         /// <summary>
         /// Defines an explicit bit -> uint conversion
@@ -100,6 +116,30 @@ namespace Z0
         [MethodImpl(Inline)]
         public static explicit operator uint(bit src)
             => src.state;
+
+        /// <summary>
+        /// Defines an explicit uint -> bit conversion
+        /// </summary>
+        /// <param name="src">The source value</param>
+        [MethodImpl(Inline)]
+        public static explicit operator bit(uint src)
+            => SafeWrap(src);
+
+        /// <summary>
+        /// Defines an explicit bit -> ulong conversion
+        /// </summary>
+        /// <param name="src">The source bit</param>
+        [MethodImpl(Inline)]
+        public static explicit operator ulong(bit src)
+            => src.state;
+
+        /// <summary>
+        /// Defines an explicit ulong -> bit conversion
+        /// </summary>
+        /// <param name="src">The source value</param>
+        [MethodImpl(Inline)]
+        public static explicit operator bit(ulong src)
+            => SafeWrap(src);
 
         /// <summary>
         /// Combines the states of the source bits
@@ -244,10 +284,10 @@ namespace Z0
             => SafeWrap(~(a.state ^ b.state));
 
         /// <summary>
-        /// Computes a & ~b
+        /// Computes and(a,not(b))
         /// </summary>
-        /// <param name="a"></param>
-        /// <param name="b"></param>    
+        /// <param name="a">The first operand</param>
+        /// <param name="b">The second operand</param>
         [MethodImpl(Inline)]
         public static bit andnot(bit a, bit b)
             => SafeWrap(a.state & ~b.state);
@@ -272,22 +312,46 @@ namespace Z0
         public static bit select(bit a, bit b, bit c)
             => SafeWrap((a.state & b.state) | (~a.state & c.state));
 
-
+        /// <summary>
+        /// Computes xor(a,1)
+        /// </summary>
+        /// <param name="a">The operand</param>
         [MethodImpl(Inline)]
         public static bit xor1(bit a)
             => !(a ^ On);
 
-        [MethodImpl(Inline)]
-        static bit Wrap(uint state)
-            => new bit(state);
-
-        [MethodImpl(Inline)]
-        static bit SafeWrap(uint state)
-            => new bit(state & 1);
 
         [MethodImpl(Inline)]
         public bool Equals(bit b)
             => state == b.state;
+        
+        /// <summary>
+        /// Presents the bit state as an 8-bit unsigned integer
+        /// </summary>
+        [MethodImpl(Inline)]
+        public byte AsUInt8()
+            => (byte)state;            
+
+        /// <summary>
+        /// Presents the bit state as a 16-bit unsigned integer
+        /// </summary>
+        [MethodImpl(Inline)]
+        public ushort AsUInt16()
+            => (ushort)state;
+
+        /// <summary>
+        /// Presents the bit state as a 32-bit unsigned integer
+        /// </summary>
+        [MethodImpl(Inline)]
+        public uint AsUInt32()
+            => state;
+
+        /// <summary>
+        /// Presents the bit state as a 64-bit unsigned integer
+        /// </summary>
+        [MethodImpl(Inline)]
+        public ulong AsUInt64()
+            => state;
 
         public override bool Equals(object b)
             => b is bit x && Equals(x);
@@ -301,7 +365,25 @@ namespace Z0
         public override string ToString()
             => Format();
 
+        [MethodImpl(Inline)]
+        static bit Wrap(uint state)
+            => new bit(state);
+
+        [MethodImpl(Inline)]
+        static bit SafeWrap(byte state)
+            => new bit((uint)state & 1);
+
+        [MethodImpl(Inline)]
+        static bit SafeWrap(ushort state)
+            => new bit((uint)state & 1);
+
+        [MethodImpl(Inline)]
+        static bit SafeWrap(uint state)
+            => new bit(state & 1);
+
+        [MethodImpl(Inline)]
+        static bit SafeWrap(ulong state)
+            => new bit((uint)state & 1);
+
     }
-
-
 }

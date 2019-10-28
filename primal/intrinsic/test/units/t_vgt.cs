@@ -82,7 +82,7 @@ namespace Z0
 
                 var expect = ginx.vloadu(n, in head(z));
                 var actual = ginx.vgt(x.LoadVector(),y.LoadVector());
-                var result = ginx.vcmpeq(expect,actual);
+                var result = ginx.veq(expect,actual);
                 var equal = ginx.vtestc(result,ones);
                 Claim.yea(equal);       
 
@@ -107,7 +107,7 @@ namespace Z0
                 
                 var expect = ginx.vloadu(n, in head(z));
                 var actual = ginx.vgt(x.LoadVector(),y.LoadVector());
-                var result = ginx.vcmpeq(expect,actual);
+                var result = ginx.veq(expect,actual);
                 var equal = ginx.vtestc(result,ones);
                 Claim.yea(equal);       
 

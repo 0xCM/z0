@@ -14,13 +14,7 @@ namespace Z0
 
     partial class ginx
     {
-        /// <summary>
-        /// Loads a source vector and mask from respective pointers and computes the testz metric, returning the result to the caller
-        /// </summary>
-        /// <param name="n">The bitness selector</param>
-        /// <param name="pX">A pointer to the data for the first vector</param>
-        /// <param name="pY">A pointer to the data for the first vector</param>
-        /// <typeparam name="T">The primal component type</typeparam>
+
         [MethodImpl(Inline)]
         public static unsafe bool vtestz<T>(N128 n, T* pX, T* pY)
             where T : unmanaged
@@ -30,13 +24,12 @@ namespace Z0
             return vtestz(vA,vB);
         }
 
-        /// <summary>
-        /// Loads a source vector and mask from respective pointers and computes the testz metric, returning the result to the caller
-        /// </summary>
-        /// <param name="n">The bitness selector</param>
-        /// <param name="pX">A pointer to the data for the first vector</param>
-        /// <param name="pY">A pointer to the data for the first vector</param>
-        /// <typeparam name="T">The primal component type</typeparam>
+        [MethodImpl(Inline)]
+        public static unsafe bool vtestz<T>(N128 n, T* pX)
+            where T : unmanaged
+            => vtestz(n, pX,pX);
+
+
         [MethodImpl(Inline)]
         public static unsafe bool vtestz<T>(N256 n, T* pA, T* pB)
             where T : unmanaged
@@ -45,5 +38,11 @@ namespace Z0
             vloadu(pB, out Vector256<T> vB);
             return vtestz(vA,vB);
         }
+
+        [MethodImpl(Inline)]
+        public static unsafe bool vtestz<T>(N256 n, T* pX)
+            where T : unmanaged
+            => vtestz(n, pX,pX);
+
     }
 }

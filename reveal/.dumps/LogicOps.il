@@ -1,4 +1,4 @@
-// 2019-10-27 03:48:31:953
+// 2019-10-27 16:51:34:077
 bit zero()
 {
     IL_0000: call Z0.bit zfunc::get_off()
@@ -33,6 +33,31 @@ bit false(bit a)
 {
     IL_0000: call Z0.bit zfunc::get_off()
     IL_0005: ret
+
+}
+bit true(bit a)
+{
+    IL_0000: call Z0.bit zfunc::get_on()
+    IL_0005: ret
+
+}
+bit true(bit a, bit b)
+{
+    IL_0000: call Z0.bit zfunc::get_on()
+    IL_0005: ret
+
+}
+bit true(bit a, bit b, bit c)
+{
+    IL_0000: call Z0.bit zfunc::get_on()
+    IL_0005: ret
+
+}
+bit not(bit a)
+{
+    IL_0000: ldarg.0
+    IL_0001: call Z0.bit Z0.bit::op_LogicalNot(Z0.bit)
+    IL_0006: ret
 
 }
 bit and(bit a, bit b)
@@ -117,25 +142,7 @@ bit rightnot(bit a, bit b)
     IL_0006: ret
 
 }
-bit true(bit a)
-{
-    IL_0000: call Z0.bit zfunc::get_on()
-    IL_0005: ret
-
-}
-bit true(bit a, bit b)
-{
-    IL_0000: call Z0.bit zfunc::get_on()
-    IL_0005: ret
-
-}
-bit true(bit a, bit b, bit c)
-{
-    IL_0000: call Z0.bit zfunc::get_on()
-    IL_0005: ret
-
-}
-bit implies(bit antecedent, bit consequent)
+bit implies(bit a, bit b)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
@@ -143,7 +150,7 @@ bit implies(bit antecedent, bit consequent)
     IL_0007: ret
 
 }
-bit notimplies(bit antecedent, bit consequent)
+bit notimplies(bit a, bit b)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
@@ -152,19 +159,12 @@ bit notimplies(bit antecedent, bit consequent)
     IL_000C: ret
 
 }
-bit conimplies(bit consequent, bit antecedent)
+bit conimplies(bit a, bit b)
 {
     IL_0000: ldarg.1
     IL_0001: ldarg.0
     IL_0002: call Z0.bit Z0.bit::implies(Z0.bit,Z0.bit)
     IL_0007: ret
-
-}
-bit not(bit a)
-{
-    IL_0000: ldarg.0
-    IL_0001: call Z0.bit Z0.bit::op_LogicalNot(Z0.bit)
-    IL_0006: ret
 
 }
 bit xor1(bit a)

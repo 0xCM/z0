@@ -14,7 +14,7 @@ namespace Z0
 
     partial class gbits
     {
-       /// <summary>
+        /// <summary>
         /// Scatters contiguous low bits from the source across a target according to a mask
         /// </summary>
         /// <param name="src">The bit source</param>

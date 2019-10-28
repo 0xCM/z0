@@ -64,15 +64,25 @@ namespace Z0.Logix
             => VariedLogicExpr.Define(subject, variables);
 
         /// <summary>
-        /// Defines an untyped test expression
+        /// Defines comparison expression
         /// </summary>
-        /// <param name="test">The logical operator to use for the test</param>
-        /// <param name="lhs">The control expression</param>
-        /// <param name="rhs">The test subject</param>
+        /// <param name="kind">The comparisonkind</param>
+        /// <param name="lhs">The left expression</param>
+        /// <param name="rhs">The right expression</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static EqualityExpr equals(ILogicExpr lhs, ILogicExpr rhs, params LogicVariable[] variables)
-            => EqualityExpr.Define(lhs,rhs,variables);
+        public static ComparisonExpr compare(ComparisonKind kind, ILogicExpr lhs, ILogicExpr rhs, params LogicVariable[] variables)
+            => ComparisonExpr.Define(kind, lhs,rhs,variables);
+
+        /// <summary>
+        /// Defines an equality comparison expression
+        /// </summary>
+        /// <param name="lhs">The left expression</param>
+        /// <param name="rhs">The right expression</param>
+        /// <typeparam name="T">The operand type</typeparam>
+        [MethodImpl(Inline)]
+        public static ComparisonExpr equals(ILogicExpr lhs, ILogicExpr rhs, params LogicVariable[] variables)
+            => ComparisonExpr.Define(ComparisonKind.Eq, lhs,rhs,variables);
 
     }   
 

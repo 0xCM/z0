@@ -9,6 +9,7 @@ namespace Z0.Logix
 
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
+    using System.Runtime.Intrinsics;
     
     using static zfunc;
 
@@ -29,10 +30,6 @@ namespace Z0.Logix
     /// </summary>
     public interface ILogicExpr : IExpr
     {
-        /// <summary>
-        /// Specifies the class to which the expression belongs
-        /// </summary>
-        LogicExprKind ExprKind {get;}
     }
 
     /// <summary>
@@ -42,11 +39,14 @@ namespace Z0.Logix
     public interface ITypedExpr<T> : IExpr
         where T : unmanaged
     {
-        /// <summary>
-        /// Specifies the class to which the expression belongs
-        /// </summary>
-        TypedExprKind ExprKind {get;}
+
     }
     
+    public interface ITypedLogicExpr<T> : ITypedExpr<T>, ILogicExpr
+        where T : unmanaged
+    {
+
+    }
+
 
 }

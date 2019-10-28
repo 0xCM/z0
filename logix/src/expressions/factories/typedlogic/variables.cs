@@ -84,15 +84,6 @@ namespace Z0.Logix
             where T : unmanaged             
                 => new VariedExpr<T>(baseExpr, variables);
 
-        // [MethodImpl(Inline)]
-        // static VariedExpr<N,T> Define<N,T>(N n, IExpr<T> baseExpr, params VariableExpr<T>[] variables)
-        //     where N : unmanaged, ITypeNat
-        //     where T : unmanaged
-        // {
-        //     Nat.require<N>(variables.Length);
-        //     return new VariedExpr<N,T>(baseExpr, variables);
-        // }
-
 
         /// <summary>
         /// Creates a varied expression predicated on a typed variable sequence of natural length
@@ -155,9 +146,9 @@ namespace Z0.Logix
         /// <param name="rhs">The test subject</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static TypedEqualityExpr<T> equals<T>(ITypedExpr<T> lhs, ITypedExpr<T> rhs, params VariableExpr<T>[] variables)
+        public static ComparisonExpr<T> equals<T>(ITypedExpr<T> lhs, ITypedExpr<T> rhs, params VariableExpr<T>[] variables)
             where T : unmanaged
-                => new TypedEqualityExpr<T>(lhs,rhs,variables);
+                => new ComparisonExpr<T>(ComparisonKind.Eq, lhs,rhs,variables);
 
     }
 

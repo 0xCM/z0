@@ -21,8 +21,7 @@ namespace Z0
     {
 
         /// <summary>
-        /// Extracts mask-identified bits from the source and deposits 
-        /// the result to the contiguous low bits of a zero-initialied target 
+        /// Extracts mask-identified bits from the source and deposits the result to the contiguous low bits of a zero-initialied target 
         /// </summary>
         /// <param name="src">The source vale</param>
         /// <typeparam name="T">The source type</typeparam>
@@ -41,9 +40,6 @@ namespace Z0
             else            
                 throw unsupported<T>();
         }           
-
-
-
     }
 
 }

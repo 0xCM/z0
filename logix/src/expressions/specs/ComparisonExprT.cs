@@ -10,33 +10,30 @@ namespace Z0.Logix
     
     using static zfunc;
 
-    public sealed class TypedEqualityExpr<T> : ITypedEqualityExpr<T>
+    public sealed class ComparisonExpr<T> : IComparisonExpr<T>
         where T : unmanaged
     {
 
         [MethodImpl(Inline)]
-        public TypedEqualityExpr(ITypedExpr<T> lhs, ITypedExpr<T> rhs, params VariableExpr<T>[] vars)
+        public ComparisonExpr(ComparisonKind kind, ITypedExpr<T> lhs, ITypedExpr<T> rhs, params VariableExpr<T>[] vars)
         {
-            this.Lhs = lhs;
-            this.Rhs = rhs;
+            this.ComparisonKind = kind;
+            this.LeftArg = lhs;
+            this.RightArg = rhs;
             this.Vars = vars;
         }
 
-        /// <summary>
-        /// The expression classifier
-        /// </summary>
-        public TypedExprKind ExprKind 
-            => TypedExprKind.Equality;
+        public ComparisonKind ComparisonKind {get;}
 
         /// <summary>
         /// The left expression
         /// </summary>
-        public ITypedExpr<T> Lhs {get;}
+        public ITypedExpr<T> LeftArg {get;}
         
         /// <summary>
         /// The right expression
         /// </summary>
-        public ITypedExpr<T> Rhs {get;}
+        public ITypedExpr<T> RightArg {get;}
 
         public VariableExpr<T>[] Vars {get;}
 
@@ -60,8 +57,8 @@ namespace Z0.Logix
             => Vars[index].Set(value);
          
         public string Format()
-            => Lhs.Format() + " == " + Rhs.Format();
-        
+            => ComparisonKind.Format(LeftArg,RightArg);
+       
         public override string ToString()
             => Format();
     }

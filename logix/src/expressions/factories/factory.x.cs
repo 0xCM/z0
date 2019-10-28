@@ -20,6 +20,10 @@ namespace Z0.Logix
 
 
         [MethodImpl(Inline)]
+        public static bit ToBit(this bool x)
+            => x;
+
+        [MethodImpl(Inline)]
         public static bit ToBit<T>(this T x)
             where T : unmanaged
                 => gmath.neq(x,default);

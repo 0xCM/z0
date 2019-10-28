@@ -32,9 +32,9 @@ namespace Z0.Logix
         Literal = LogicExprKind.Literal,
 
         /// <summary>
-        /// Classifies an identity
+        /// Classifies a comparison expression
         /// </summary>
-        Equality = LogicExprKind.Equality,
+        Comparison = LogicExprKind.Comparison,
 
         /// <summary>
         /// Classifies a unary operator
@@ -50,12 +50,7 @@ namespace Z0.Logix
         /// Classifies a ternary operator
         /// </summary>
         TernaryOperator = LogicExprKind.TernaryOperator,
-
-        /// <summary>
-        /// Classifies a comparision (operator?)
-        /// </summary>
-        Comparison = Pow2.T13,
-
+        
         /// <summary>
         /// Classifies a shift expression
         /// </summary>

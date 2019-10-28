@@ -86,7 +86,7 @@ namespace Z0.Logix
                 var a = Random.CpuVector128<T>();
                 var b = Random.CpuVector128<T>();
                 var c = Random.CpuVector128<T>();
-                var x = Cpu128Ops.select(a,b,c);
+                var x = CpuOps.select(a,b,c);
 
                 var sa = a.ToSpan();
                 var sb = b.ToSpan();
@@ -108,7 +108,7 @@ namespace Z0.Logix
                 var a = Random.CpuVector256<T>();
                 var b = Random.CpuVector256<T>();
                 var c = Random.CpuVector256<T>();
-                var x = Cpu256Ops.select(a,b,c);
+                var x = CpuOps.select(a,b,c);
 
                 var sa = a.ToSpan();
                 var sb = b.ToSpan();

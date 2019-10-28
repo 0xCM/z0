@@ -14,12 +14,6 @@ namespace Z0
 
     partial class ginx
     {
-        /// <summary>
-        /// Loads a source vector from a pointer and returns true if all bits are on, and false otherwise
-        /// </summary>
-        /// <param name="n">The bitness selector</param>
-        /// <param name="pX">A pointer to the data for the source vector</param>
-        /// <typeparam name="T">The primal component type</typeparam>
         [MethodImpl(Inline)]
         public static unsafe bool vtestc<T>(N128 n, T* pX)
             where T : unmanaged
@@ -28,13 +22,6 @@ namespace Z0
             return vtestc(vA);
         }
 
-        /// <summary>
-        /// Loads a source vector and mask from respective pointers and computes the testc metric, returning the result to the caller
-        /// </summary>
-        /// <param name="n">The bitness selector</param>
-        /// <param name="pX">A pointer to the data for the first vector</param>
-        /// <param name="pY">A pointer to the data for the first vector</param>
-        /// <typeparam name="T">The primal component type</typeparam>
         [MethodImpl(Inline)]
         public static unsafe bool vtestc<T>(N128 n, T* pX, T* pY)
             where T : unmanaged
@@ -44,12 +31,6 @@ namespace Z0
             return vtestc(vA,vB);
         }
 
-        /// <summary>
-        /// Loads a source vector from a pointer and returns true if all bits are on, and false otherwise
-        /// </summary>
-        /// <param name="n">The bitness selector</param>
-        /// <param name="pX">A pointer to the data for the source vector</param>
-        /// <typeparam name="T">The primal component type</typeparam>
         [MethodImpl(Inline)]
         public static unsafe bool vtestc<T>(N256 n, T* pX)
             where T : unmanaged
@@ -58,13 +39,6 @@ namespace Z0
             return vtestc(vA);
         }
 
-        /// <summary>
-        /// Loads a source vector and mask from respective pointers and computes the testc metric, returning the result to the caller
-        /// </summary>
-        /// <param name="n">The bitness selector</param>
-        /// <param name="pX">A pointer to the data for the first vector</param>
-        /// <param name="pY">A pointer to the data for the first vector</param>
-        /// <typeparam name="T">The primal component type</typeparam>
         [MethodImpl(Inline)]
         public static unsafe bool vtestc<T>(N256 n, T* pA, T* pB)
             where T : unmanaged
@@ -74,5 +48,4 @@ namespace Z0
             return vtestc(vA,vB);
         }
     }
-
 }

@@ -23,7 +23,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vector128<T> vcmpeq<T>(Vector128<T> x, Vector128<T> y)
+        public static Vector128<T> veq<T>(Vector128<T> x, Vector128<T> y)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte) 
@@ -48,7 +48,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vector256<T> vcmpeq<T>(Vector256<T> x, Vector256<T> y)
+        public static Vector256<T> veq<T>(Vector256<T> x, Vector256<T> y)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte) 

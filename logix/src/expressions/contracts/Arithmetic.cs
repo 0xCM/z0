@@ -58,32 +58,15 @@ namespace Z0.Logix
 
     }
 
-    public interface IBinaryArithmeticOp<T> :  IBinaryArithmeticOp,  IArithmeticOp<T,BinaryArithmeticOpKind>
+    public interface IBinaryArithmeticOp<T> : IBinaryArithmeticOp, IArithmeticOp<T,BinaryArithmeticOpKind>
         where T : unmanaged
     {
         ITypedExpr<T> LeftArg {get;}
 
         ITypedExpr<T> RightArg {get;}
 
-
     }
 
-    public interface IComparisonExpr : IArithmeticOp
-    {
 
-    }
-
-    /// <summary>
-    /// Characterizes a comparson expression over a parametric type
-    /// </summary>
-    /// <typeparam name="T">The type over which the comparison is defined</typeparam>
-    public interface IComparisonExpr<T> : IComparisonExpr, IArithmeticOp<T,ComparisonOpKind>
-        where T : unmanaged
-    {
-
-        ITypedExpr<T> LeftArg {get;}
-
-        ITypedExpr<T> RightArg {get;}
-    }
 
 }

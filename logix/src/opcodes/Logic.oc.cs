@@ -28,10 +28,10 @@ namespace Z0.Logix
 
 
         public static Vector128<ulong> and_v128x64u(Vector128<ulong> a, Vector128<ulong> b)
-            => Cpu128Ops.and(a,b);
+            => CpuOps.and(a,b);
 
         public static Vector256<ulong> and_v256x64u(Vector256<ulong> a, Vector256<ulong> b)
-            => Cpu256Ops.and(a,b);
+            => CpuOps.and(a,b);
 
 
         // ~
@@ -40,10 +40,10 @@ namespace Z0.Logix
             => ScalarOps.or(a,b);
 
         public static Vector128<ulong> or_v128x64u(Vector128<ulong> a, Vector128<ulong> b)
-            => Cpu128Ops.or(a,b);
+            => CpuOps.or(a,b);
 
          public static Vector256<ulong> or_v256x64u(Vector256<ulong> a, Vector256<ulong> b)
-            => Cpu256Ops.or(a,b);
+            => CpuOps.or(a,b);
 
        // ~
 
@@ -51,10 +51,10 @@ namespace Z0.Logix
             => ScalarOps.xor(a,b);
 
         public static Vector128<ulong> xor_v128x64u(Vector128<ulong> a, Vector128<ulong> b)
-            => Cpu128Ops.xor(a,b);
+            => CpuOps.xor(a,b);
 
         public static Vector256<ulong> xor_v256x64u(Vector256<ulong> a, Vector256<ulong> b)
-            => Cpu256Ops.xor(a,b);
+            => CpuOps.xor(a,b);
 
         // ~
 
@@ -62,10 +62,10 @@ namespace Z0.Logix
             => ScalarOps.not(a);
 
         public static Vector128<ulong> not_v128x64u(Vector128<ulong> a)
-            => Cpu128Ops.not(a);
+            => CpuOps.not(a);
 
         public static Vector256<ulong> not_v256x64u(Vector256<ulong> a)
-            => Cpu256Ops.not(a);
+            => CpuOps.not(a);
 
 
         // ~
@@ -74,20 +74,20 @@ namespace Z0.Logix
             => ScalarOps.nand(a,b);
 
         public static Vector128<ulong> nand_v128x64u(Vector128<ulong> a, Vector128<ulong> b)
-            => Cpu128Ops.nand(a,b);
+            => CpuOps.nand(a,b);
 
         public static Vector256<ulong> nand_v256x64u(Vector256<ulong> a, Vector256<ulong> b)
-            => Cpu256Ops.nand(a,b);
+            => CpuOps.nand(a,b);
 
         // ~
         public static ulong nor_64u(ulong a, ulong b)
             => ScalarOps.nor(a,b);
 
         public static Vector128<ulong> nor_v128x64u(Vector128<ulong> a, Vector128<ulong> b)
-            => Cpu128Ops.nor(a,b);
+            => CpuOps.nor(a,b);
         
         public static Vector256<ulong> nor_v256x64u(Vector256<ulong> a, Vector256<ulong> b)
-            => Cpu256Ops.nor(a,b);
+            => CpuOps.nor(a,b);
 
         // ~
 
@@ -95,10 +95,10 @@ namespace Z0.Logix
             => ScalarOps.xnor(a,b);
 
         public static Vector128<ulong> xnor_v128x64u(Vector128<ulong> a, Vector128<ulong> b)
-            => Cpu128Ops.xnor(a,b);
+            => CpuOps.xnor(a,b);
 
         public static Vector256<ulong> xnor_v256x64u(Vector256<ulong> a, Vector256<ulong> b)
-            => Cpu256Ops.xnor(a,b);
+            => CpuOps.xnor(a,b);
 
         // ~
 
@@ -106,10 +106,10 @@ namespace Z0.Logix
             => ScalarOps.xor1(a);
 
         public static Vector128<ulong> xor1_v128x64u(Vector128<ulong> a)
-            => Cpu128Ops.xor1(a);
+            => CpuOps.xor1(a);
 
         public static Vector256<ulong> xor1_v256x64u(Vector256<ulong> a)
-            => Cpu256Ops.xor1(a);
+            => CpuOps.xor1(a);
 
         // ~
 
@@ -117,10 +117,10 @@ namespace Z0.Logix
             => ScalarOps.select(a,b,c);
 
         public static Vector128<ulong> select_v128x64u(Vector128<ulong> a, Vector128<ulong> b, Vector128<ulong> c)
-            => Cpu128Ops.select(a,b,c);
+            => CpuOps.select(a,b,c);
 
         public static Vector256<ulong> select_v256x64u(Vector256<ulong> a, Vector256<ulong> b, Vector256<ulong> c)
-            => Cpu256Ops.select(a,b,c);
+            => CpuOps.select(a,b,c);
 
         // ~ 
 
@@ -132,10 +132,10 @@ namespace Z0.Logix
 
  
         public static Vector128<ulong> f01_128x64u(Vector128<ulong> a, Vector128<ulong> b, Vector128<ulong> c)
-            => Cpu128Ops.f01(a,b,c);
+            => CpuOps.f01(a,b,c);
 
         public static Vector256<ulong> f01_256x64u(Vector256<ulong> a, Vector256<ulong> b, Vector256<ulong> c)
-            => Cpu256Ops.f01(a,b,c);
+            => CpuOps.f01(a,b,c);
 
         // ~ 
 
@@ -146,10 +146,10 @@ namespace Z0.Logix
             => ScalarOps.f02(a,b,c);
 
         public static Vector128<ulong> f02_128x64u(Vector128<ulong> a, Vector128<ulong> b, Vector128<ulong> c)
-            => Cpu128Ops.f02(a,b,c);
+            => CpuOps.f02(a,b,c);
  
         public static Vector256<ulong> f02_256x64u(Vector256<ulong> a, Vector256<ulong> b, Vector256<ulong> c)
-            => Cpu256Ops.f02(a,b,c);
+            => CpuOps.f02(a,b,c);
 
         // ~ 
 
@@ -160,10 +160,10 @@ namespace Z0.Logix
             => ScalarOps.f03(a,b,c);
 
         public static Vector128<ulong> f03_128x64u(Vector128<ulong> a, Vector128<ulong> b, Vector128<ulong> c)
-            => Cpu128Ops.f03(a,b,c);
+            => CpuOps.f03(a,b,c);
 
         public static Vector256<ulong> f03_256x64u(Vector256<ulong> a, Vector256<ulong> b, Vector256<ulong> c)
-            => Cpu256Ops.f03(a,b,c);
+            => CpuOps.f03(a,b,c);
 
         // ~ 
 
@@ -174,10 +174,10 @@ namespace Z0.Logix
             => ScalarOps.f04(a,b,c);
 
         public static Vector128<ulong> f04_128x64u(Vector128<ulong> a, Vector128<ulong> b, Vector128<ulong> c)
-            => Cpu128Ops.f04(a,b,c);
+            => CpuOps.f04(a,b,c);
 
         public static Vector256<ulong> f04_256x64u(Vector256<ulong> a, Vector256<ulong> b, Vector256<ulong> c)
-            => Cpu256Ops.f04(a,b,c);
+            => CpuOps.f04(a,b,c);
 
         // ~ 
 
@@ -190,11 +190,11 @@ namespace Z0.Logix
             => ScalarOps.f05(a,b,c);
 
         public static Vector128<ulong> f05_128x64u(Vector128<ulong> a, Vector128<ulong> b, Vector128<ulong> c)
-            => Cpu128Ops.f05(a,b,c);
+            => CpuOps.f05(a,b,c);
 
         // c nor a
         public static Vector256<ulong> f05_256x64u(Vector256<ulong> a, Vector256<ulong> b, Vector256<ulong> c)
-            => Cpu256Ops.f05(a,b,c);
+            => CpuOps.f05(a,b,c);
 
         // ~ 
  
@@ -207,10 +207,10 @@ namespace Z0.Logix
             => ScalarOps.f06(a,b,c);
 
         public static Vector128<ulong> f06_128x64u(Vector128<ulong> a, Vector128<ulong> b, Vector128<ulong> c)
-            => Cpu128Ops.f06(a,b,c);
+            => CpuOps.f06(a,b,c);
 
         public static Vector256<ulong> f06_256x64u(Vector256<ulong> a, Vector256<ulong> b, Vector256<ulong> c)
-            => Cpu256Ops.f06(a,b,c);
+            => CpuOps.f06(a,b,c);
 
         // ~ not a and (b xor c)
 
@@ -221,10 +221,10 @@ namespace Z0.Logix
             => ScalarOps.f07(a,b,c);
 
         public static Vector128<ulong> f07_128x64u(Vector128<ulong> a, Vector128<ulong> b, Vector128<ulong> c)
-            => Cpu128Ops.f07(a,b,c);
+            => CpuOps.f07(a,b,c);
 
         public static Vector256<ulong> f07_256x64u(Vector256<ulong> a, Vector256<ulong> b, Vector256<ulong> c)
-            => Cpu256Ops.f07(a,b,c);
+            => CpuOps.f07(a,b,c);
 
         // ~ (not a and b) and c
 
@@ -236,10 +236,10 @@ namespace Z0.Logix
             => ScalarOps.f08(a,b,c);
 
         public static Vector128<ulong> f08_128x64u(Vector128<ulong> a, Vector128<ulong> b, Vector128<ulong> c)
-            => Cpu128Ops.f08(a,b,c);
+            => CpuOps.f08(a,b,c);
 
         public static Vector256<ulong> f08_256x64u(Vector256<ulong> a, Vector256<ulong> b, Vector256<ulong> c)
-            => Cpu256Ops.f08(a,b,c);
+            => CpuOps.f08(a,b,c);
 
         // ~ a nor (b xor c)
         public static bit f09_bit(bit a, bit b, bit c)
@@ -249,10 +249,10 @@ namespace Z0.Logix
             => ScalarOps.f09(a,b,c);
 
         public static Vector128<ulong> f09_128x64u(Vector128<ulong> a, Vector128<ulong> b, Vector128<ulong> c)
-            => Cpu128Ops.f09(a,b,c);
+            => CpuOps.f09(a,b,c);
 
         public static Vector256<ulong> f09_256x64u(Vector256<ulong> a, Vector256<ulong> b, Vector256<ulong> c)
-            => Cpu256Ops.f09(a,b,c);
+            => CpuOps.f09(a,b,c);
 
         // ~ c and (not a)
 
@@ -264,10 +264,10 @@ namespace Z0.Logix
 
 
         public static Vector128<ulong> f0a_128x64u(Vector128<ulong> a, Vector128<ulong> b, Vector128<ulong> c)
-            => Cpu128Ops.f0a(a,b,c);
+            => CpuOps.f0a(a,b,c);
 
         public static Vector256<ulong> f0a_256x64u(Vector256<ulong> a, Vector256<ulong> b, Vector256<ulong> c)
-            => Cpu256Ops.f0a(a,b,c);
+            => CpuOps.f0a(a,b,c);
 
         // ~ not a and ((b xor 1) or c)
 
@@ -278,11 +278,11 @@ namespace Z0.Logix
             => ScalarOps.f0b(a,b,c);
 
         public static Vector128<ulong> f0b_128x64u(Vector128<ulong> a, Vector128<ulong> b, Vector128<ulong> c)
-            => Cpu128Ops.f0b(a,b,c);
+            => CpuOps.f0b(a,b,c);
 
 
         public static Vector256<ulong> f0b_256x64u(Vector256<ulong> a, Vector256<ulong> b, Vector256<ulong> c)
-            => Cpu256Ops.f0b(a,b,c);
+            => CpuOps.f0b(a,b,c);
 
         // ~ b and (not a)
 
@@ -293,10 +293,10 @@ namespace Z0.Logix
             => ScalarOps.f0c(a,b,c);
 
         public static Vector128<ulong> f0c_128x64u(Vector128<ulong> a, Vector128<ulong> b, Vector128<ulong> c)
-            => Cpu128Ops.f0c(a,b,c);
+            => CpuOps.f0c(a,b,c);
 
         public static Vector256<ulong> f0c_256x64u(Vector256<ulong> a, Vector256<ulong> b, Vector256<ulong> c)
-            => Cpu256Ops.f0c(a,b,c);
+            => CpuOps.f0c(a,b,c);
 
         // ~ not (A) and (B or (C xor 1))
 
@@ -307,10 +307,10 @@ namespace Z0.Logix
             => ScalarOps.f0d(a,b,c);
 
         public static Vector128<ulong> f0d_128x64u(Vector128<ulong> a, Vector128<ulong> b, Vector128<ulong> c)
-            => Cpu128Ops.f0d(a,b,c);
+            => CpuOps.f0d(a,b,c);
 
         public static Vector256<ulong> f0d_256x64u(Vector256<ulong> a, Vector256<ulong> b, Vector256<ulong> c)
-            => Cpu256Ops.f0d(a,b,c);
+            => CpuOps.f0d(a,b,c);
 
         // ~ not a and (b or c)
 
@@ -321,10 +321,10 @@ namespace Z0.Logix
             => ScalarOps.f0e(a,b,c);
 
         public static Vector128<ulong> f0e_128x64u(Vector128<ulong> a, Vector128<ulong> b, Vector128<ulong> c)
-            => Cpu128Ops.f0e(a,b,c);
+            => CpuOps.f0e(a,b,c);
 
         public static Vector256<ulong> f0e_256x64u(Vector256<ulong> a, Vector256<ulong> b, Vector256<ulong> c)
-            => Cpu256Ops.f0e(a,b,c);
+            => CpuOps.f0e(a,b,c);
 
 
         // ~ not a
@@ -339,11 +339,11 @@ namespace Z0.Logix
 
         // not a
         public static Vector128<ulong> f0f_128x64u(Vector128<ulong> a, Vector128<ulong> b, Vector128<ulong> c)
-            => Cpu128Ops.f0f(a,b,c);
+            => CpuOps.f0f(a,b,c);
 
         // not a
         public static Vector256<ulong> f0f_256x64u(Vector256<ulong> a, Vector256<ulong> b, Vector256<ulong> c)
-            => Cpu256Ops.f0f(a,b,c);
+            => CpuOps.f0f(a,b,c);
 
         // ~ a and (b nor c)
 
@@ -354,10 +354,10 @@ namespace Z0.Logix
             => ScalarOps.f10(a,b,c);
         
         public static Vector128<ulong> f10_128x64u(Vector128<ulong> a, Vector128<ulong> b, Vector128<ulong> c)
-            => Cpu128Ops.f10(a,b,c);
+            => CpuOps.f10(a,b,c);
         
         public static Vector256<ulong> f10_256x64u(Vector256<ulong> a, Vector256<ulong> b, Vector256<ulong> c)
-            => Cpu256Ops.f10(a,b,c);        
+            => CpuOps.f10(a,b,c);        
 
         // ~ 
 
@@ -372,12 +372,12 @@ namespace Z0.Logix
 
         // a and (b nor c)
         public static Vector128<ulong> f11_128x64u(Vector128<ulong> a, Vector128<ulong> b, Vector128<ulong> c)
-            => Cpu128Ops.f11(a,b,c);
+            => CpuOps.f11(a,b,c);
         
 
         // a and (b nor c)
         public static Vector256<ulong> f11_256x64u(Vector256<ulong> a, Vector256<ulong> b, Vector256<ulong> c)
-            => Cpu256Ops.f11(a,b,c);
+            => CpuOps.f11(a,b,c);
         
 
         // ~ not b and (a xor c) 
@@ -390,11 +390,11 @@ namespace Z0.Logix
             => ScalarOps.f12(a,b,c);
 
         public static Vector128<ulong> f12_128x64u(Vector128<ulong> a, Vector128<ulong> b, Vector128<ulong> c)
-            => Cpu128Ops.f12(a,b,c);
+            => CpuOps.f12(a,b,c);
 
         // not b and (a xor c) 
         public static Vector256<ulong> f12_256x64u(Vector256<ulong> a, Vector256<ulong> b, Vector256<ulong> c)
-            => Cpu256Ops.f12(a,b,c);
+            => CpuOps.f12(a,b,c);
 
         // ~ b nor (a and c)
 
@@ -406,10 +406,10 @@ namespace Z0.Logix
 
 
         public static Vector128<ulong> f13_128x64u(Vector128<ulong> a, Vector128<ulong> b, Vector128<ulong> c)
-            => Cpu128Ops.f13(a,b,c);
+            => CpuOps.f13(a,b,c);
 
         public static Vector256<ulong> f13_256x64u(Vector256<ulong> a, Vector256<ulong> b, Vector256<ulong> c)
-            => Cpu256Ops.f13(a,b,c);
+            => CpuOps.f13(a,b,c);
 
 
         // ~ 
@@ -421,10 +421,10 @@ namespace Z0.Logix
             => ScalarOps.f14(a,b,c);
 
         public static Vector128<ulong> f14_128x64u(Vector128<ulong> a, Vector128<ulong> b, Vector128<ulong> c)
-            => Cpu128Ops.f14(a,b,c);
+            => CpuOps.f14(a,b,c);
 
         public static Vector256<ulong> f14_256x64u(Vector256<ulong> a, Vector256<ulong> b, Vector256<ulong> c)
-            => Cpu256Ops.f14(a,b,c);
+            => CpuOps.f14(a,b,c);
 
         // ~ 
 
@@ -435,10 +435,10 @@ namespace Z0.Logix
             => ScalarOps.f15(a,b,c);
 
         public static Vector128<ulong> f15_128x64u(Vector128<ulong> a, Vector128<ulong> b, Vector128<ulong> c)
-            => Cpu128Ops.f15(a,b,c);
+            => CpuOps.f15(a,b,c);
 
         public static Vector256<ulong> f15_256x64u(Vector256<ulong> a, Vector256<ulong> b, Vector256<ulong> c)
-            => Cpu256Ops.f15(a,b,c);
+            => CpuOps.f15(a,b,c);
 
         // ~ 
 
@@ -452,11 +452,11 @@ namespace Z0.Logix
 
         // a ? (b nor c) : (b xor c)
         public static Vector128<ulong> f16_128x64u(Vector128<ulong> a, Vector128<ulong> b, Vector128<ulong> c)
-            => Cpu128Ops.f16(a,b,c);
+            => CpuOps.f16(a,b,c);
 
         // a ? (b nor c) : (b xor c)
         public static Vector256<ulong> f16_256x64u(Vector256<ulong> a, Vector256<ulong> b, Vector256<ulong> c)
-            => Cpu256Ops.f16(a,b,c);
+            => CpuOps.f16(a,b,c);
 
         // ~ 
 
@@ -467,10 +467,10 @@ namespace Z0.Logix
             => ScalarOps.f17(a,b,c);
 
         public static Vector128<ulong> f17_128x64u(Vector128<ulong> a, Vector128<ulong> b, Vector128<ulong> c)
-            => Cpu128Ops.f17(a,b,c);
+            => CpuOps.f17(a,b,c);
 
         public static Vector256<ulong> f17_256x64u(Vector256<ulong> a, Vector256<ulong> b, Vector256<ulong> c)
-            => Cpu256Ops.f17(a,b,c);
+            => CpuOps.f17(a,b,c);
 
 
         // ~ 
@@ -484,10 +484,10 @@ namespace Z0.Logix
 
  
         public static Vector128<ulong> f18_128x64u(Vector128<ulong> a, Vector128<ulong> b, Vector128<ulong> c)
-            => Cpu128Ops.f18(a,b,c);
+            => CpuOps.f18(a,b,c);
 
         public static Vector256<ulong> f18_256x64u(Vector256<ulong> a, Vector256<ulong> b, Vector256<ulong> c)
-            => Cpu256Ops.f18(a,b,c);
+            => CpuOps.f18(a,b,c);
 
         // ~ 
         public static bit f19_bit(bit a, bit b, bit c)
@@ -498,10 +498,10 @@ namespace Z0.Logix
 
  
         public static Vector128<ulong> f19_128x64u(Vector128<ulong> a, Vector128<ulong> b, Vector128<ulong> c)
-            => Cpu128Ops.f19(a,b,c);
+            => CpuOps.f19(a,b,c);
 
         public static Vector256<ulong> f19_256x64u(Vector256<ulong> a, Vector256<ulong> b, Vector256<ulong> c)
-            => Cpu256Ops.f19(a,b,c);
+            => CpuOps.f19(a,b,c);
 
         // ~ 
 
@@ -513,10 +513,10 @@ namespace Z0.Logix
 
  
         public static Vector128<ulong> f1a_128x64u(Vector128<ulong> a, Vector128<ulong> b, Vector128<ulong> c)
-            => Cpu128Ops.f1a(a,b,c);
+            => CpuOps.f1a(a,b,c);
 
         public static Vector256<ulong> f1a_256x64u(Vector256<ulong> a, Vector256<ulong> b, Vector256<ulong> c)
-            => Cpu256Ops.f1a(a,b,c);
+            => CpuOps.f1a(a,b,c);
 
         // ~ c ? not a : not b
 
@@ -527,10 +527,10 @@ namespace Z0.Logix
             => ScalarOps.f1b(a,b,c);
 
         public static Vector128<ulong> f1b_128x64u(Vector128<ulong> a, Vector128<ulong> b, Vector128<ulong> c)
-            => Cpu128Ops.f1b(a,b,c);
+            => CpuOps.f1b(a,b,c);
 
         public static Vector256<ulong> f1b_256x64u(Vector256<ulong> a, Vector256<ulong> b, Vector256<ulong> c)
-            => Cpu256Ops.f1b(a,b,c);
+            => CpuOps.f1b(a,b,c);
 
 
         public static ulong f1c_64u(ulong a, ulong b, ulong c)
@@ -695,10 +695,10 @@ namespace Z0.Logix
             => ScalarOps.f97(a,b,c);
 
        public static Vector128<ulong> f97_128x64u(Vector128<ulong> a, Vector128<ulong> b, Vector128<ulong> c)
-            => Cpu128Ops.f97(a,b,c);
+            => CpuOps.f97(a,b,c);
 
        public static Vector256<ulong> f97_256x64u(Vector256<ulong> a, Vector256<ulong> b, Vector256<ulong> c)
-            => Cpu256Ops.f97(a,b,c);
+            => CpuOps.f97(a,b,c);
 
     }
 }

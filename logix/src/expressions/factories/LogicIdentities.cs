@@ -14,13 +14,13 @@ namespace Z0.Logix
 
     public static class LogicIdentities
     {
-        public static IEnumerable<EqualityExpr> All
+        public static IEnumerable<ComparisonExpr> All
             => items(AndOverOr, AndOverXOr, OrOverAnd, NotOverAnd, NotOverXOr);
 
         /// <summary>
         /// Specifies the identity and(a,or(b,c)) == or(and(a,b), and(a,c))
         /// </summary>
-        public static EqualityExpr AndOverOr
+        public static ComparisonExpr AndOverOr
         {
             get
             {
@@ -34,7 +34,7 @@ namespace Z0.Logix
         /// <summary>
         /// Specifies the identity and(a,xor(b,c)) == xor(and(a,b), and(a,c))
         /// </summary>
-        public static EqualityExpr AndOverXOr
+        public static ComparisonExpr AndOverXOr
         {
             get
             {
@@ -49,7 +49,7 @@ namespace Z0.Logix
         /// <summary>
         /// Specifies the identity or(a,and(b,c)) == and(or(a,b), or(a,c))
         /// </summary>
-        public static EqualityExpr OrOverAnd
+        public static ComparisonExpr OrOverAnd
         {
             get
             {
@@ -64,7 +64,7 @@ namespace Z0.Logix
         /// <summary>
         /// Specifies the identity not(and(a,b)) == or(not(x),not(y))
         /// </summary>
-        public static EqualityExpr NotOverAnd
+        public static ComparisonExpr NotOverAnd
         {
             get
             {
@@ -79,7 +79,7 @@ namespace Z0.Logix
         /// <summary>
         /// Specifies the identity not(xor(a,b)) == xor(not(x),y)
         /// </summary>
-        public static EqualityExpr NotOverXOr
+        public static ComparisonExpr NotOverXOr
         {
             get
             {                

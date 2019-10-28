@@ -36,7 +36,7 @@ namespace Z0.Logix
             => check_identity_sln(TypedIdentities.NotOverXOr<byte>(), (byte)0,(byte)30);
 
 
-        void check_identity_sln<T>(TypedEqualityExpr<T> identity, T min, T max)
+        void check_identity_sln<T>(ComparisonExpr<T> identity, T min, T max)
             where T : unmanaged
         {
             var count = convert<T,int>(gmath.add(gmath.sub(max, min), gmath.one<T>()));

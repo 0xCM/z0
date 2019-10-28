@@ -59,8 +59,6 @@ namespace Z0.Logix
         K OpKind {get;}
     }
 
-
-
     public interface ILogicOpExpr<K> : ILogicOpExpr, IOpExpr
         where K : Enum
     {

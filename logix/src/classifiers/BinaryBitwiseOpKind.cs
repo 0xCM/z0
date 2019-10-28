@@ -11,7 +11,7 @@ namespace Z0.Logix
     /// <summary>
     /// Classifies binary bitwise operators
     /// </summary>
-    [Flags]
+    //[Flags]
     public enum BinaryBitwiseOpKind : uint
     {
         /// <summary>
@@ -70,6 +70,11 @@ namespace Z0.Logix
         LeftProject = BinaryLogicOpKind.LeftProject,
 
         /// <summary>
+        /// Identifies an operator that computes the bitwise equivalent of the material conditional
+        /// </summary>
+        Implies = BinaryLogicOpKind.Implies,
+
+        /// <summary>
         /// Identifies an operator that computes right(a,b) = b
         /// </summary>
         RightProject = BinaryLogicOpKind.RightProject,
@@ -79,10 +84,6 @@ namespace Z0.Logix
         /// </summary>
         True = BinaryLogicOpKind.True,
 
-        /// <summary>
-        /// Identifies an operator that computes the bitwise equivalent of the material conditional
-        /// </summary>
-        Implies = BinaryLogicOpKind.Implies,
 
     }
      

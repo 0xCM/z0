@@ -1,4 +1,4 @@
-// 2019-10-27 03:48:30:802
+// 2019-10-27 16:51:32:982
 BitMatrix<byte> alloc_8x8u()
 {
     IL_0000: call Z0.BitMatrix`1<System.Byte> Z0.BitMatrix::alloc<System.Byte>()
@@ -21,6 +21,13 @@ BitMatrix<ulong> alloc_g64x64u()
 {
     IL_0000: call Z0.BitMatrix`1<System.UInt64> Z0.BitMatrix::alloc<System.UInt64>()
     IL_0005: ret
+
+}
+BitMatrix64 bm_from_natspan_64x64x64u(in Span<N64,ulong> src)
+{
+    IL_0000: ldarg.0
+    IL_0001: call Z0.BitMatrix64 Z0.BitMatrix64::From(Z0.Span`2<Z0.N64,System.UInt64>&)
+    IL_0006: ret
 
 }
 ref BitMatrix<byte> gbm_and_8x8(in BitMatrix<byte> A, in BitMatrix<byte> B, ref BitMatrix<byte> C)
@@ -82,12 +89,5 @@ ref BitMatrix<ulong> gbm_and_64x64(in BitMatrix<ulong> A, in BitMatrix<ulong> B,
     IL_0002: ldarg.2
     IL_0003: call Z0.BitMatrix`1<System.UInt64>& Z0.BitMatrix::and<System.UInt64>(Z0.BitMatrix`1<System.UInt64>&,Z0.BitMatrix`1<System.UInt64>&,Z0.BitMatrix`1<System.UInt64>&)
     IL_0008: ret
-
-}
-BitMatrix64 bm_from_natspan_64x64x64u(in Span<N64,ulong> src)
-{
-    IL_0000: ldarg.0
-    IL_0001: call Z0.BitMatrix64 Z0.BitMatrix64::From(Z0.Span`2<Z0.N64,System.UInt64>&)
-    IL_0006: ret
 
 }

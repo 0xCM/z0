@@ -1,4 +1,4 @@
-// 2019-10-27 03:48:30:693
+// 2019-10-27 16:51:32:874
 BitVector32 and_bv_32u(BitVector32 x, BitVector32 y)
 {
     IL_0000: ldarga.s x
@@ -591,52 +591,128 @@ ulong gather_g64u(ulong src, ulong mask)
     IL_0009: ret
 
 }
-ref ulong mask_1x64u_ref(ref ulong dst, int exp0)
+ulong mask_1x64u(ulong dst, int exp0)
 {
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: call System.UInt64& Z0.Bits::mask(System.UInt64&,System.Int32)
-    IL_0007: ret
-
-}
-ref ulong mask_2x64u_ref(ref ulong dst, int exp0, int exp1)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: ldarg.2
-    IL_0003: call System.UInt64& Z0.Bits::mask(System.UInt64&,System.Int32,System.Int32)
-    IL_0008: ret
-
-}
-ref ulong mask_3x64u_ref(ref ulong dst, int exp0, int exp1, int exp2)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: ldarg.2
-    IL_0003: ldarg.3
-    IL_0004: call System.UInt64& Z0.Bits::mask(System.UInt64&,System.Int32,System.Int32,System.Int32)
+    IL_0000: ldarga.s dst
+    IL_0002: ldarg.1
+    IL_0003: call System.UInt64& Z0.Bits::mask(System.UInt64&,System.Int32)
+    IL_0008: ldind.i8
     IL_0009: ret
 
 }
-ulong mask_3x64u(ulong src, int exp0, int exp1, int exp2)
+ulong mask_2x64u(ulong dst, int exp0, int exp1)
 {
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: ldarg.2
-    IL_0003: ldarg.3
-    IL_0004: call System.UInt64 Z0.Bits::mask(System.UInt64,System.Int32,System.Int32,System.Int32)
-    IL_0009: ret
+    IL_0000: ldarga.s dst
+    IL_0002: ldarg.1
+    IL_0003: ldarg.2
+    IL_0004: call System.UInt64& Z0.Bits::mask(System.UInt64&,System.Int32,System.Int32)
+    IL_0009: ldind.i8
+    IL_000A: ret
 
 }
-ref ulong mask_4x64u_ref(ref ulong dst, int exp0, int exp1, int exp2, int exp3)
+ulong mask_3x64u(ulong dst, int exp0, int exp1, int exp2)
+{
+    IL_0000: ldarga.s dst
+    IL_0002: ldarg.1
+    IL_0003: ldarg.2
+    IL_0004: ldarg.3
+    IL_0005: call System.UInt64& Z0.Bits::mask(System.UInt64&,System.Int32,System.Int32,System.Int32)
+    IL_000A: ldind.i8
+    IL_000B: ret
+
+}
+ulong mask_4x64u(ulong dst, int exp0, int exp1, int exp2, int exp3)
+{
+    IL_0000: ldarga.s dst
+    IL_0002: ldarg.1
+    IL_0003: ldarg.2
+    IL_0004: ldarg.3
+    IL_0005: ldarg.s exp3
+    IL_0007: call System.UInt64& Z0.Bits::mask(System.UInt64&,System.Int32,System.Int32,System.Int32,System.Int32)
+    IL_000C: ldind.i8
+    IL_000D: ret
+
+}
+ulong mask_5x64u(ref ulong dst, int exp0, int exp1, int exp2, int exp3, int exp4)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
     IL_0003: ldarg.3
     IL_0004: ldarg.s exp3
-    IL_0006: call System.UInt64& Z0.Bits::mask(System.UInt64&,System.Int32,System.Int32,System.Int32,System.Int32)
-    IL_000B: ret
+    IL_0006: ldarg.s exp4
+    IL_0008: call System.UInt64& Z0.Bits::mask(System.UInt64&,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)
+    IL_000D: ldind.i8
+    IL_000E: ret
+
+}
+ulong mask_6x64u(ref ulong dst, int exp0, int exp1, int exp2, int exp3, int exp4, int exp5)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: ldarg.2
+    IL_0003: ldarg.3
+    IL_0004: ldarg.s exp3
+    IL_0006: ldarg.s exp4
+    IL_0008: ldarg.s exp5
+    IL_000A: call System.UInt64& Z0.Bits::mask(System.UInt64&,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)
+    IL_000F: ldind.i8
+    IL_0010: ret
+
+}
+ulong mask_7x64u(ref ulong dst, int exp0, int exp1, int exp2, int exp3, int exp4, int exp5, int exp6)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: ldarg.2
+    IL_0003: ldarg.3
+    IL_0004: ldarg.s exp3
+    IL_0006: ldarg.s exp4
+    IL_0008: ldarg.s exp5
+    IL_000A: ldarg.s exp6
+    IL_000C: call System.UInt64& Z0.Bits::mask(System.UInt64&,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)
+    IL_0011: ldind.i8
+    IL_0012: ret
+
+}
+ulong mask_8x64u(ref ulong dst, int exp0, int exp1, int exp2, int exp3, int exp4, int exp5, int exp6, int exp7)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: ldarg.2
+    IL_0003: ldarg.3
+    IL_0004: ldarg.s exp3
+    IL_0006: ldarg.s exp4
+    IL_0008: ldarg.s exp5
+    IL_000A: ldarg.s exp6
+    IL_000C: ldarg.s exp7
+    IL_000E: call System.UInt64& Z0.Bits::mask(System.UInt64&,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)
+    IL_0013: ldind.i8
+    IL_0014: ret
+
+}
+uint pop_4x64(ulong x0, ulong x1, ulong x2, ulong x3)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: ldarg.2
+    IL_0003: ldarg.3
+    IL_0004: call System.UInt32 Z0.gbits::pop<System.UInt64>(System.UInt64,System.UInt64,System.UInt64,System.UInt64)
+    IL_0009: ret
+
+}
+uint pop_8x64(ulong x0, ulong x1, ulong x2, ulong x3, ulong x4, ulong x5, ulong x6, ulong x7)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: ldarg.2
+    IL_0003: ldarg.3
+    IL_0004: ldarg.s x4
+    IL_0006: ldarg.s x5
+    IL_0008: ldarg.s x6
+    IL_000A: ldarg.s x7
+    IL_000C: call System.UInt32 Z0.gbits::pop<System.UInt64>(System.UInt64,System.UInt64,System.UInt64,System.UInt64,System.UInt64,System.UInt64,System.UInt64,System.UInt64)
+    IL_0011: ret
 
 }
 sbyte segment_d8i(sbyte src, int i0, int i1)

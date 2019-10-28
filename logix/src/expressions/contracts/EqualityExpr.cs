@@ -11,50 +11,6 @@ namespace Z0.Logix
     using static zfunc;
 
 
-    /// <summary>
-    /// Characterizes a multi-varied expression that represents a question or claim
-    /// regarding the equality of two untyped logic expressions
-    /// </summary>
-    public interface IEqualityExpr : ILogicExpr
-    {
-        /// <summary>
-        /// The left expression
-        /// </summary>
-        ILogicExpr Lhs {get;}
-        
-        /// <summary>
-        /// The right expression
-        /// </summary>
-        ILogicExpr Rhs {get;}
 
-        LogicVariable[] Vars {get;}
-        
-    }
-
-    /// <summary>
-    /// Characterizes a claim that two variable-dependent typed expressions are equivalent
-    /// </summary>
-    public interface ITypedEqualityExpr<T> : ITypedExpr<T>
-        where T : unmanaged
-    {
-        /// <summary>
-        /// The left expression
-        /// </summary>
-        ITypedExpr<T> Lhs {get;}
-        
-        /// <summary>
-        /// The right expression
-        /// </summary>
-        ITypedExpr<T> Rhs {get;}
-
-        VariableExpr<T>[] Vars {get;}
-
-    }
-
-    public interface ILieralEqualityExpr<T> : ITypedExpr<T>
-        where T : unmanaged
-    {
-
-    }
 
 }

@@ -11,36 +11,15 @@ namespace Z0.Logix
     using System.Runtime.Intrinsics;
 
     using static OpHelpers;
-    using static Cpu256Ops;    
+    using static CpuOps;    
     using static TernaryBitOpKind;
     using static zfunc;
 
     /// <summary>
     /// Defines services for 256-bit instrinsic operators
     /// </summary>
-    public static class Cpu256OpApi
+    public static partial class CpuOpApi
     {
-        /// <summary>
-        /// Advertises the supported unary bitwise operators
-        /// </summary>
-        public static IEnumerable<UnaryBitwiseOpKind> UnaryBitwiseKinds
-            => items(UnaryBitwiseOpKind.Not, UnaryBitwiseOpKind.Identity, UnaryBitwiseOpKind.Negate);
-
-        /// <summary>
-        /// Advertises the supported binary bitwise operators
-        /// </summary>
-        public static IEnumerable<BinaryBitwiseOpKind> BinaryBitwiseKinds
-            => items(
-                BinaryBitwiseOpKind.And, BinaryBitwiseOpKind.Or, BinaryBitwiseOpKind.XOr,
-                BinaryBitwiseOpKind.Nand, BinaryBitwiseOpKind.Nor, BinaryBitwiseOpKind.Xnor,
-                BinaryBitwiseOpKind.AndNot, BinaryBitwiseOpKind.True, BinaryBitwiseOpKind.False
-            );
-
-        /// <summary>
-        /// Advertises the supported ternary opeators
-        /// </summary>
-        public static IEnumerable<TernaryBitOpKind> TernaryBitwiseKinds
-            => range((byte)1,(byte)X1B).Cast<TernaryBitOpKind>();
 
         /// <summary>
         /// Evaluates an identified unary operator over a supplied operand
@@ -61,6 +40,26 @@ namespace Z0.Logix
         }
 
         /// <summary>
+        /// Evaluates a comparison operator over supplied operands
+        /// </summary>
+        /// <param name="kind">The operator kind</param>
+        /// <param name="a">The left operand</param>
+        /// <param name="b">The right operand</param>
+        /// <typeparam name="T">The primal vector component type</typeparam>
+        public static Vector256<T> eval<T>(ComparisonKind kind, Vector256<T> a, Vector256<T> b)
+            where T : unmanaged            
+        {
+            switch(kind)
+            {
+                case ComparisonKind.Eq: return equals(a,b);
+                case ComparisonKind.Lt: return lt(a,b);
+                case ComparisonKind.Gt: return gt(a,b);
+                default: return dne<ComparisonKind,Vector256<T>>(kind);
+            }
+         
+        }
+
+        /// <summary>
         /// Evaluates an identified binary operator over supplied operands
         /// </summary>
         /// <param name="kind">The operator kind</param>
@@ -72,26 +71,20 @@ namespace Z0.Logix
         {
             switch(kind)
             {
-                case BinaryBitwiseOpKind.True:
-                    return @true(a,b);
-                case BinaryBitwiseOpKind.And:
-                    return and(a,b);
-                case BinaryBitwiseOpKind.Or:
-                    return or(a,b);
-                case BinaryBitwiseOpKind.XOr:
-                    return xor(a,b);
-                case BinaryBitwiseOpKind.Nand:
-                    return nand(a,b);
-                case BinaryBitwiseOpKind.Nor:
-                    return nor(a,b);
-                case BinaryBitwiseOpKind.Xnor:
-                    return xnor(a,b);
-                case BinaryBitwiseOpKind.AndNot:
-                    return andnot(a,b);
-                case BinaryBitwiseOpKind.False:
-                    return @false(a,b);
-                default:
-                    return dne<BinaryBitwiseOpKind,Vector256<T>>(kind);
+                case BinaryBitwiseOpKind.True: return @true(a,b);
+                case BinaryBitwiseOpKind.And: return and(a,b);
+                case BinaryBitwiseOpKind.Or: return or(a,b);
+                case BinaryBitwiseOpKind.XOr: return xor(a,b);
+                case BinaryBitwiseOpKind.Nand: return nand(a,b);
+                case BinaryBitwiseOpKind.Nor: return nor(a,b);
+                case BinaryBitwiseOpKind.Xnor: return xnor(a,b);
+                case BinaryBitwiseOpKind.AndNot: return andnot(a,b);
+                case BinaryBitwiseOpKind.LeftProject: return left(a,b);
+                case BinaryBitwiseOpKind.LeftNot: return leftnot(a,b);
+                case BinaryBitwiseOpKind.RightProject: return right(a,b);
+                case BinaryBitwiseOpKind.RightNot: return rightnot(a,b);
+                case BinaryBitwiseOpKind.False: return @false(a,b);
+                default: return dne<BinaryBitwiseOpKind,Vector256<T>>(kind);
             }
         }
 
@@ -116,6 +109,22 @@ namespace Z0.Logix
             }
         }
 
+        [MethodImpl(Inline)]
+        public static Vector256<T> eval<T>(BinaryArithmeticOpKind kind, Vector256<T> x, Vector256<T> y)
+            where T : unmanaged
+        {
+            switch(kind)
+            {
+                case BinaryArithmeticOpKind.Add: return add(x,y);
+                case BinaryArithmeticOpKind.Sub: return sub(x,y);
+                case BinaryArithmeticOpKind.Eq: 
+                case BinaryArithmeticOpKind.Lt: 
+                case BinaryArithmeticOpKind.Gt: return eval((ComparisonKind)kind, x, y);
+                default: return dne<BinaryArithmeticOpKind,Vector256<T>>(kind);
+            }
+        }
+
+
         /// <summary>
         /// Evaluates an ternary operator over supplied operands
         /// </summary>
@@ -127,14 +136,14 @@ namespace Z0.Logix
         [MethodImpl(Inline)]
         public static Vector256<T> eval<T>(TernaryBitOpKind kind, Vector256<T> x, Vector256<T> y, Vector256<T> z)
             where T : unmanaged
-                => lookup<T>(kind)(x,y,z);
+                => lookup<T>(n256,kind)(x,y,z);
 
         /// <summary>
         /// Returns a kind-identified delegate if possible; otherwise, raises an exception
         /// </summary>
         /// <param name="kind">The operator kind</param>
         /// <typeparam name="T">The primal vector component type</typeparam>
-        public static UnaryOp<Vector256<T>> lookup<T>(UnaryBitwiseOpKind kind)
+        public static UnaryOp<Vector256<T>> lookup<T>(N256 n, UnaryBitwiseOpKind kind)
             where T : unmanaged            
         {
             switch(kind)
@@ -144,7 +153,18 @@ namespace Z0.Logix
                 case UnaryBitwiseOpKind.Negate: return negate;
                 default: return dne<Vector256<T>>(kind);            
             }
+        }
 
+        public static BinaryOp<Vector256<T>> lookup<T>(N256 n, ComparisonKind kind)
+            where T : unmanaged
+        {
+            switch(kind)
+            {
+                case ComparisonKind.Eq: return equals;
+                case ComparisonKind.Lt: return lt;
+                case ComparisonKind.Gt: return gt;
+                default: return dne<Vector256<T>>(kind);
+            }
         }
 
         /// <summary>
@@ -152,7 +172,7 @@ namespace Z0.Logix
         /// </summary>
         /// <param name="kind">The operator kind</param>
         /// <typeparam name="T">The primal vector component type</typeparam>
-        public static BinaryOp<Vector256<T>> lookup<T>(BinaryBitwiseOpKind kind)
+        public static BinaryOp<Vector256<T>> lookup<T>(N256 n, BinaryBitwiseOpKind kind)
             where T : unmanaged
         {
             switch(kind)
@@ -175,7 +195,7 @@ namespace Z0.Logix
         /// </summary>
         /// <param name="kind">The operator kind</param>
         /// <typeparam name="T">The primal vector component type</typeparam>
-        public static Shifter<Vector256<T>> lookup<T>(ShiftOpKind kind)
+        public static Shifter<Vector256<T>> lookup<T>(N256 n, ShiftOpKind kind)
             where T : unmanaged
         {
             switch(kind)
@@ -193,7 +213,7 @@ namespace Z0.Logix
         /// </summary>
         /// <param name="kind">The operator kind</param>
         /// <typeparam name="T">The primal vector component type</typeparam>
-        public static TernaryOp<Vector256<T>> lookup<T>(TernaryBitOpKind kind)
+        public static TernaryOp<Vector256<T>> lookup<T>(N256 n, TernaryBitOpKind kind)
             where T : unmanaged
         {
             switch(kind)

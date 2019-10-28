@@ -27,11 +27,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static unsafe void vadd<T>(N128 n, T* pX, T* pY, T* pDst)
             where T : unmanaged
-        {                    
-            vloadu(pX, out Vector128<T> vA);
-            vloadu(pY, out Vector128<T> vB);
-            vstore(vadd(vA,vB), pDst);
-        }
+            => vstore(vadd(n,pX,pY), pDst);                                       
 
         [MethodImpl(Inline)]
         public static unsafe Vector256<T> vadd<T>(N256 n, T* pX, T* pY)
@@ -45,10 +41,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static unsafe void vadd<T>(N256 n, T* pX, T* pY, T* pDst)
             where T : unmanaged
-        {                    
-            vloadu(pX, out Vector256<T> vA);
-            vloadu(pY, out Vector256<T> vB);
-            vstore(vadd(vA,vB), pDst);
-        }
+                => vstore(vadd(n,pX,pY), pDst);                    
     }
 }

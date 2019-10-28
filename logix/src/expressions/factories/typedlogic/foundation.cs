@@ -47,6 +47,18 @@ namespace Z0.Logix
                 => new BinaryBitwiseOp<T>(op,left,right);
 
         /// <summary>
+        /// Creates a binary comparison expression
+        /// </summary>
+        /// <param name="op">The operator classifier</param>
+        /// <param name="left">The left operand</param>
+        /// <param name="right">The right operand</param>
+        /// <typeparam name="T">The operand type</typeparam>
+        [MethodImpl(Inline)]
+        public static ComparisonExpr<T> binary<T>(ComparisonKind op, ITypedExpr<T> left, ITypedExpr<T> right)
+            where T : unmanaged
+                => new ComparisonExpr<T>(op,left,right);
+
+        /// <summary>
         /// Creates a bitwise ternary expression
         /// </summary>
         /// <param name="op">The operator classifier</param>

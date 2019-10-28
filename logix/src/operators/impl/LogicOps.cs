@@ -43,6 +43,22 @@ namespace Z0.Logix
             => off;
 
         [MethodImpl(Inline)]
+        public static bit @true(bit a)
+            => on;
+
+        [MethodImpl(Inline)]
+        public static bit @true(bit a, bit b)
+            => on;
+
+        [MethodImpl(Inline)]
+        public static bit @true(bit a, bit b, bit c)
+            => on;
+
+        [MethodImpl(Inline)]
+        public static bit not(bit a)
+            => !a;
+
+        [MethodImpl(Inline)]
         public static bit and(bit a, bit b)
             => bit.and(a,b);
 
@@ -86,34 +102,21 @@ namespace Z0.Logix
         public static bit rightnot(bit a, bit b)
             => not(b);
 
+        [MethodImpl(Inline)]
+        public static bit implies(bit a, bit b)
+            => bit.implies(a,b);
 
         [MethodImpl(Inline)]
-        public static bit @true(bit a)
-            => on;
+        public static bit notimplies(bit a, bit b)
+            => not(bit.implies(a,b));
 
         [MethodImpl(Inline)]
-        public static bit @true(bit a, bit b)
-            => on;
+        public static bit conimplies(bit a, bit b)
+            => bit.implies(b,a);
 
         [MethodImpl(Inline)]
-        public static bit @true(bit a, bit b, bit c)
-            => on;
-
-        [MethodImpl(Inline)]
-        public static bit implies(bit antecedent, bit consequent)
-            => bit.implies(antecedent,consequent);
-
-        [MethodImpl(Inline)]
-        public static bit notimplies(bit antecedent, bit consequent)
-            => not(bit.implies(antecedent,consequent));
-
-        [MethodImpl(Inline)]
-        public static bit conimplies(bit consequent, bit antecedent)
-            => bit.implies(antecedent,consequent);
-
-        [MethodImpl(Inline)]
-        public static bit not(bit a)
-            => !a;
+        public static bit same(bit a, bit b)
+            => a == b;
 
         [MethodImpl(Inline)]
         public static bit xor1(bit a)

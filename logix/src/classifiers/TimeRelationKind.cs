@@ -17,7 +17,7 @@ namespace Z0.Logix
     /// <summary>
     /// Classifies the chronological disposition of one instant in time with respect to another
     /// </summary>
-    public enum TimeMarker : byte
+    public enum TimeRelationKind : byte
     {
         /// <summary>
         /// Indicates the subject is antecedent to the comperand

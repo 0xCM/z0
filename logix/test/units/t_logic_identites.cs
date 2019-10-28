@@ -25,7 +25,7 @@ namespace Z0.Logix
             iter(LogicIdentities.All, check_exhaustive);
         }
         
-        void check_exhaustive(EqualityExpr t)
+        void check_exhaustive(ComparisonExpr t)
         {
             var disp = LogicEngine.dispatcher();
             foreach(var c in bitcombo(t.Vars.Length))
@@ -52,7 +52,7 @@ namespace Z0.Logix
             }
         }
 
-        void identity_bench(string opname, Func<EqualityExpr,bit,bit,bit> checker, SystemCounter clock = default)
+        void identity_bench(string opname, Func<ComparisonExpr,bit,bit,bit> checker, SystemCounter clock = default)
         {
             var opcount = 0;
             var sat = bit.On;

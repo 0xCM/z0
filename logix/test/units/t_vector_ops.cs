@@ -38,7 +38,7 @@ namespace Z0.Logix
             var x = Random.CpuVector128<T>();
             var y = Random.CpuVector128<T>();
             var result = default(Vector128<T>);
-            var kinds = Cpu128OpApi.BinaryBitwiseKinds.ToArray();
+            var kinds = CpuOpApi.BinaryBitwiseKinds.ToArray();
             var opcount = 0;
 
             clock.Start();
@@ -49,7 +49,7 @@ namespace Z0.Logix
                 for(var sample=0; sample< SampleSize; sample++)
                 for(var k=0; k< kinds.Length; k++, opcount++)
                 {
-                    result = Cpu128OpApi.lookup<T>(kinds[k])(x, y);
+                    result = CpuOpApi.lookup<T>(n128,kinds[k])(x, y);
                     y = x;
                     x = result;
                 }
@@ -61,7 +61,7 @@ namespace Z0.Logix
                 for(var sample=0; sample< SampleSize; sample++)
                 for(var k=0; k< kinds.Length; k++, opcount++)
                 {
-                    result = Cpu128OpApi.eval(kinds[k],x, y);
+                    result = CpuOpApi.eval(kinds[k],x, y);
                     y = x;
                     x = result;
                 }
@@ -82,7 +82,7 @@ namespace Z0.Logix
             var x = Random.CpuVector256<T>();
             var y = Random.CpuVector256<T>();
             var result = default(Vector256<T>);
-            var kinds = Cpu256OpApi.BinaryBitwiseKinds.ToArray();
+            var kinds = CpuOpApi.BinaryBitwiseKinds.ToArray();
             var opcount = 0;
 
             clock.Start();
@@ -93,7 +93,7 @@ namespace Z0.Logix
                 for(var sample=0; sample< SampleSize; sample++)
                 for(var k=0; k< kinds.Length; k++, opcount++)
                 {
-                    result = Cpu256OpApi.lookup<T>(kinds[k])(x, y);
+                    result = CpuOpApi.lookup<T>(n256,kinds[k])(x, y);
                     y = x;
                     x = result;
                 }
@@ -105,7 +105,7 @@ namespace Z0.Logix
                 for(var sample=0; sample< SampleSize; sample++)
                 for(var k=0; k< kinds.Length; k++, opcount++)
                 {
-                    result = Cpu256OpApi.eval(kinds[k],x, y);
+                    result = CpuOpApi.eval(kinds[k],x, y);
                     y = x;
                     x = result;
                 }

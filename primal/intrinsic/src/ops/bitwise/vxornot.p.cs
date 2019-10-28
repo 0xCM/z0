@@ -20,13 +20,13 @@ namespace Z0
         {                    
             vloadu(pX, out Vector128<T> vA);
             vloadu(pY, out Vector128<T> vB);
-            return vxor(vA,vnot(vB));
+            return vxornot(vA,vB);
         }
 
         [MethodImpl(Inline)]
         public static unsafe void vxornot<T>(N128 n, T* pX, T* pY, T* pDst)
             where T : unmanaged
-            => vstore(vxornot(n, pX,pY), pDst);
+            => vstore(vxornot(n, pX, pY), pDst);
 
         [MethodImpl(Inline)]
         public static unsafe Vector256<T> vxornot<T>(N256 n, T* pX, T* pY)
@@ -34,14 +34,12 @@ namespace Z0
         {                    
             vloadu(pX, out Vector256<T> vA);
             vloadu(pY, out Vector256<T> vB);
-            return vxor(vA,vnot(vB));
+            return vxornot(vA,vB);
         }
 
         [MethodImpl(Inline)]
         public static unsafe void vxornot<T>(N256 n, T* pX, T* pY, T* pDst)
             where T : unmanaged
-            => vstore(vxornot(n, pX,pY), pDst);
-
+                => vstore(vxornot(n, pX,pY), pDst);
     }
-
 }

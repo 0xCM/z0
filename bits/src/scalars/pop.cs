@@ -8,6 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
     using System.Runtime.Intrinsics.X86;
+    using static System.Runtime.Intrinsics.X86.Popcnt;
+    using static System.Runtime.Intrinsics.X86.Popcnt.X64;
  
     using static zfunc;
     
@@ -19,7 +21,7 @@ namespace Z0
         /// <param name="src">The source bits</param>
         [MethodImpl(Inline)]
         public static uint pop(sbyte src)
-            => Popcnt.PopCount((uint)src);
+            => PopCount((uint)src);
 
         /// <summary>
         /// Counts the enabled bits in the source
@@ -27,7 +29,7 @@ namespace Z0
         /// <param name="src">The source bits</param>
         [MethodImpl(Inline)]
         public static uint pop(byte src)
-            => Popcnt.PopCount(src);
+            => PopCount(src);
 
         /// <summary>
         /// Counts the enabled bits in the source
@@ -35,7 +37,7 @@ namespace Z0
         /// <param name="src">The source bits</param>
         [MethodImpl(Inline)]
         public static uint pop(short src)
-            => Popcnt.PopCount((uint)src);
+            => PopCount((uint)src);
 
         /// <summary>
         /// Counts the enabled bits in the source
@@ -43,7 +45,7 @@ namespace Z0
         /// <param name="src">The source bits</param>
         [MethodImpl(Inline)]
         public static uint pop(ushort src)
-            => Popcnt.PopCount(src);
+            => PopCount(src);
 
         /// <summary>
         /// Counts the enabled bits in the source
@@ -51,7 +53,7 @@ namespace Z0
         /// <param name="src">The source bits</param>
         [MethodImpl(Inline)]
         public static uint pop(int src)
-            => Popcnt.PopCount((uint)src);
+            => PopCount((uint)src);
 
         /// <summary>
         /// Counts the enabled bits in the source
@@ -59,7 +61,7 @@ namespace Z0
         /// <param name="src">The source bits</param>
         [MethodImpl(Inline)]
         public static uint pop(uint src)
-            => Popcnt.PopCount(src);
+            => PopCount(src);
 
         /// <summary>
         /// Counts the enabled bits in the source
@@ -67,7 +69,7 @@ namespace Z0
         /// <param name="src">The source bits</param>
         [MethodImpl(Inline)]
         public static uint pop(long src)
-            => (uint)Popcnt.X64.PopCount((ulong)src);
+            => (uint)PopCount((ulong)src);
 
         /// <summary>
         /// Counts the enabled bits in the source
@@ -75,7 +77,19 @@ namespace Z0
         /// <param name="src">The source bits</param>
         [MethodImpl(Inline)]
         public static uint pop(ulong src)
-            => (uint)Popcnt.X64.PopCount(src);
- 
+            => (uint)PopCount(src);
+
+        [MethodImpl(Inline)]
+        public static uint pop(ulong x0, ulong x1)
+            => (uint)(PopCount(x0) + PopCount(x1));
+
+        [MethodImpl(Inline)]
+        public static uint pop(ulong x0, ulong x1, ulong x2, ulong x3)
+            => (uint)(PopCount(x0) + PopCount(x1) + PopCount(x2) + PopCount(x3));
+
+        [MethodImpl(Inline)]
+        public static uint pop(ulong x0, ulong x1, ulong x2, ulong x3, ulong x4, ulong x5, ulong x6, ulong x7)
+            => pop(x0,x1,x2,x3) + pop(x4,x5,x6,x7);
+
     }
 }

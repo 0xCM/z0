@@ -26,10 +26,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static unsafe void vinc<T>(N128 n, T* pX, T* pDst)
             where T : unmanaged
-        {                    
-            vloadu(pX, out Vector128<T> vA);
-            vstore(vinc(vA), pDst);
-        }
+                => vstore(vinc(n,pX), pDst);                    
 
         [MethodImpl(Inline)]
         public static unsafe Vector256<T> vinc<T>(N256 n, T* pX)
@@ -42,9 +39,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static unsafe void vinc<T>(N256 n, T* pX, T* pDst)
             where T : unmanaged
-        {                    
-            vloadu(pX, out Vector256<T> vA);
-            vstore(vinc(vA), pDst);
-        }
+                => vstore(vinc(n,pX), pDst);                    
     }
 }

@@ -24,6 +24,16 @@ namespace Z0
             =>  *((byte*)(&src));
 
         /// <summary>
+        /// Converts a bit to an unsinged integral type
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <typeparam name="T">The target type</typeparam>
+        [MethodImpl(Inline)]
+        public static T Convert<T>(this bit src)
+            where T : unmanaged
+                => convert<T>(src);
+
+        /// <summary>
         /// Unconditionally converts the source value to the target type
         /// </summary>
         /// <param name="src">The source value</param>

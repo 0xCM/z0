@@ -27,11 +27,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static unsafe void vlt<T>(N128 n, T* pX, T* pY, T* pDst)
             where T : unmanaged
-        {                    
-            vloadu(pX, out Vector128<T> vA);
-            vloadu(pY, out Vector128<T> vB);
-            vstore(vlt(vA,vB), pDst);
-        }
+                => vstore(vlt(n,pX,pY), pDst);
 
         [MethodImpl(Inline)]
         public static unsafe Vector256<T> vlt<T>(N256 n, T* pA, T* pB)
@@ -45,13 +41,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static unsafe void vlt<T>(N256 n, T* pX, T* pY, T* pDst)
             where T : unmanaged
-        {                    
-            vloadu(pX, out Vector256<T> vA);
-            vloadu(pY, out Vector256<T> vB);
-            vstore(vlt(vA,vB), pDst);
-        }
-
-
+                 => vstore(vlt(n,pX,pY), pDst);
     }
 
 }

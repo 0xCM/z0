@@ -13,10 +13,10 @@ namespace Z0.Logix
     /// <summary>
     /// Captures a binary arithmetic operator along with with its operands
     /// </summary>
-    public sealed class BinaryAritheticOp<T> : IBinaryArithmeticOp<T>
+    public sealed class BinaryArithmeticOp<T> : IBinaryArithmeticOp<T>
         where T : unmanaged
     {
-        public BinaryAritheticOp(BinaryArithmeticOpKind op, ITypedExpr<T> lhs, ITypedExpr<T> rhs)
+        public BinaryArithmeticOp(BinaryArithmeticOpKind op, ITypedExpr<T> lhs, ITypedExpr<T> rhs)
         {
             this.OpKind = op;
             this.LeftArg= lhs;

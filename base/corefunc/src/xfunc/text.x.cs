@@ -470,7 +470,6 @@ namespace Z0
         /// <param name="s">The string to search</param>
         /// <param name="l">The left boundary</param>
         /// <param name="r">The right boundary</param>
-        /// <returns></returns>
         public static IEnumerable<string> GetBoundedContent(this string s, char l, char r)
             => s.GetBoundedContent((l, r));
 

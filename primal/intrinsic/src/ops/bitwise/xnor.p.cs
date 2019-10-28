@@ -32,24 +32,21 @@ namespace Z0
         }
 
         /// <summary>
-        /// Loads two vectors from respective pointers computes the XNOR between them, storing the result to a target pointer
+        /// Computes XNOR between pointer-identified vectors, storing the result to a target pointer
         /// </summary>
         /// <param name="n">The bitness selector</param>
         /// <param name="pX">A pointer from which the first vector will be read</param>
         /// <param name="pY">A pointer from which the second vector will be read</param>
-        /// <param name="pDst">A pointer to which the computation will be stored</param>
+        /// <param name="pDst">A pointer to which the computation result will be written</param>
         /// <typeparam name="T">The primal component type</typeparam>
         [MethodImpl(Inline)]
         public static unsafe void vxnor<T>(N128 n, T* pX, T* pY, T* pDst)
             where T : unmanaged
-        {                    
-            vloadu(pX, out Vector128<T> vA);
-            vloadu(pY, out Vector128<T> vB);
-            vstore(vxnor(vA,vB), pDst);
-        }
+                => vstore(vxnor(n,pX,pY), pDst);                    
+                    
 
         /// <summary>
-        /// Loads two vectors from respective pointers computes the XNOR between them, returning the result to the caller
+        /// Computes XNOR between pointer-identified vectors, returning the result to the caller
         /// </summary>
         /// <param name="n">The bitness selector</param>
         /// <param name="pX">A pointer from which the first vector will be read</param>
@@ -65,21 +62,17 @@ namespace Z0
         }
 
         /// <summary>
-        /// Loads two vectors from respective pointers computes the XNOR between them, storing the result to a target pointer
+        /// Computes XNOR between pointer-identified vectors, storing the result to a target pointer
         /// </summary>
         /// <param name="n">The bitness selector</param>
         /// <param name="pX">A pointer from which the first vector will be read</param>
         /// <param name="pY">A pointer from which the second vector will be read</param>
-        /// <param name="pDst">A pointer to which the computation will be stored</param>
+        /// <param name="pDst">A pointer to which the computation result will be written</param>
         /// <typeparam name="T">The primal component type</typeparam>
         [MethodImpl(Inline)]
         public static unsafe void vxnor<T>(N256 n, T* pX, T* pY, T* pDst)
             where T : unmanaged
-        {                    
-            vloadu(pX, out Vector256<T> vA);
-            vloadu(pY, out Vector256<T> vB);
-            vstore(vxnor(vA,vB), pDst);
-        }
+                => vstore(vxnor(n,pX,pY), pDst);                    
     }
 
 }
