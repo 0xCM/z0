@@ -17,7 +17,7 @@ namespace Z0
     {
 
         /// <summary>
-        /// Constructs a graph from an adjacency bitmatrix of natural dimension
+        /// Constructs a graph from an adjacency bitmatrix of natural order
         /// </summary>
         /// <param name="src">The source matrix</param>
         /// <param name="dim">The dimension of the matrix</param>
@@ -25,22 +25,7 @@ namespace Z0
         /// <typeparam name="V">The vertex index type</typeparam>
         /// <typeparam name="N">The dimension type</typeparam>
         /// <typeparam name="T">The source matrix element type</typeparam>
-        internal static Graph<V> FromMatrix<V,N,T>(BitMatrix<N,N,T> src, N dim = default, V v = default)
-            where N : ITypeNat, new()
-            where V : unmanaged
-            where T : unmanaged
-        {
-            var n = (int)dim.value;
-            var nodes = Graph.Vertices<V>(n);
-            var edges = new List<Edge<V>>();
-            for(var row = 0; row < n; row++)
-            for(var col = 0; col < n; col++)
-                if(src[row,col])
-                    edges.Add(Graph.Connect(nodes[row], nodes[col]));
-            return Graph.Define(nodes, edges);
-        }
-
-        internal static Graph<T> FromMatrix<N,T>(BitMatrix<N,T> src, N dim = default)
+        internal static Graph<T> from<N,T>(BitMatrix<N,T> src, N dim = default)
             where N : ITypeNat, new()
             where T : unmanaged
         {
@@ -54,12 +39,12 @@ namespace Z0
             return Graph.Define(nodes, edges);
         }
 
-        internal static Graph<V> FromMatrix<V,T>(RowBits<T> src)
+        internal static Graph<V> from<V,T>(RowBits<T> src)
             where V : unmanaged
             where T : unmanaged
         {
             var m = src.RowCount;
-            var n = src.ColCount;
+            var n = src.RowWidth;
             
             var nodes = Graph.Vertices<V>(m);
             var edges = new List<Edge<V>>();

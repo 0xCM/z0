@@ -95,15 +95,15 @@ namespace Z0.Logix
                 => gbits.pop(a) == bitsize<T>();
 
 
-        [MethodImpl(Inline), BinaryBitwiseOp(BinaryBitwiseOpKind.False)]
-        public static T @false<T>(T a, T b)
-            where T:unmanaged
-                => @false<T>();
-
         [MethodImpl(Inline), BinaryBitwiseOp(BinaryBitwiseOpKind.True)]
         public static T @true<T>(T a, T b)
             where T:unmanaged
                 => @true<T>();
+
+        [MethodImpl(Inline), BinaryBitwiseOp(BinaryBitwiseOpKind.False)]
+        public static T @false<T>(T a, T b)
+            where T:unmanaged
+                => @false<T>();
 
         [MethodImpl(Inline), BinaryBitwiseOp(BinaryBitwiseOpKind.And)]
         public static T and<T>(T a, T b)
@@ -114,11 +114,6 @@ namespace Z0.Logix
         public static T nand<T>(T a, T b)
             where T : unmanaged
                 => gmath.nand(a,b);
-
-        [MethodImpl(Inline), BinaryBitwiseOp(BinaryBitwiseOpKind.ConverseNonimplication)]
-        public static T cnotimply<T>(T a, T b)
-            where T : unmanaged
-                => gmath.andnot(a,b);
 
         [MethodImpl(Inline), BinaryBitwiseOp(BinaryBitwiseOpKind.Or)]
         public static T or<T>(T a, T b)
@@ -135,11 +130,6 @@ namespace Z0.Logix
             where T : unmanaged
                 => gmath.xor(a,b);
 
-        [MethodImpl(Inline)]
-        public static T xornot<T>(T a, T b)
-            where T : unmanaged
-                => gmath.xornot(a,b);
-
         [MethodImpl(Inline), BinaryBitwiseOp(BinaryBitwiseOpKind.Xnor)]
         public static T xnor<T>(T a, T b)
             where T : unmanaged
@@ -155,20 +145,40 @@ namespace Z0.Logix
             where T : unmanaged
                 => b;
 
-        [MethodImpl(Inline), BinaryBitwiseOp(BinaryBitwiseOpKind.RightNot)]
-        public static T rnot<T>(T a, T b)
-            where T : unmanaged
-                => not(b);
-
         [MethodImpl(Inline), BinaryBitwiseOp(BinaryBitwiseOpKind.LeftNot)]
         public static T lnot<T>(T a, T b)
             where T : unmanaged
                 => not(a);
 
+        [MethodImpl(Inline), BinaryBitwiseOp(BinaryBitwiseOpKind.RightNot)]
+        public static T rnot<T>(T a, T b)
+            where T : unmanaged
+                => not(b);
+
+        [MethodImpl(Inline), BinaryBitwiseOp(BinaryBitwiseOpKind.Implication)]
+        public static T imply<T>(T a, T b)
+            where T : unmanaged
+                => or(a,  not(b));
+
+        [MethodImpl(Inline), BinaryBitwiseOp(BinaryBitwiseOpKind.Nonimplication)]
+        public static T notimply<T>(T a, T b)
+            where T : unmanaged
+                => gmath.notimply(a,b);
+
         [MethodImpl(Inline), BinaryBitwiseOp(BinaryBitwiseOpKind.ConverseImplication)]
         public static T cimply<T>(T a, T b)
             where T : unmanaged
-                => not(cnotimply(a, b));
+                => or(not(a), b);
+        
+        [MethodImpl(Inline), BinaryBitwiseOp(BinaryBitwiseOpKind.ConverseNonimplication)]
+        public static T cnotimply<T>(T a, T b)
+            where T : unmanaged
+                => gmath.cnotimply(a,b);
+                
+        [MethodImpl(Inline)]
+        public static T xornot<T>(T a, T b)
+            where T : unmanaged
+                => gmath.xornot(a,b);
 
         [MethodImpl(Inline), ComparisonOp(ComparisonKind.Eq)]
         public static T equals<T>(T a, T b)

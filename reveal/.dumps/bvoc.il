@@ -1,9 +1,9 @@
-// 2019-10-28 07:21:25:707
+// 2019-10-29 02:32:28:019
 BitVector32 and_bv_32u(BitVector32 x, BitVector32 y)
 {
     IL_0000: ldarga.s x
     IL_0002: ldarga.s y
-    IL_0004: call Z0.BitVector32 Z0.bitvector::and(Z0.BitVector32&,Z0.BitVector32&)
+    IL_0004: call Z0.BitVector32 Z0.BitVector::and(Z0.BitVector32&,Z0.BitVector32&)
     IL_0009: ret
 
 }
@@ -19,7 +19,7 @@ BitVector32 or_bv_32u(BitVector32 x, BitVector32 y)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: call Z0.BitVector32 Z0.bitvector::or(Z0.BitVector32,Z0.BitVector32)
+    IL_0002: call Z0.BitVector32 Z0.BitVector::or(Z0.BitVector32,Z0.BitVector32)
     IL_0007: ret
 
 }
@@ -35,7 +35,7 @@ BitVector32 xor_bv_32u(BitVector32 x, BitVector32 y)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: call Z0.BitVector32 Z0.bitvector::xor(Z0.BitVector32,Z0.BitVector32)
+    IL_0002: call Z0.BitVector32 Z0.BitVector::xor(Z0.BitVector32,Z0.BitVector32)
     IL_0007: ret
 
 }
@@ -51,7 +51,7 @@ BitVector32 sll_bv_32u(BitVector32 x, int offset)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: call Z0.BitVector32 Z0.bitvector::sll(Z0.BitVector32,System.Int32)
+    IL_0002: call Z0.BitVector32 Z0.BitVector::sll(Z0.BitVector32,System.Int32)
     IL_0007: ret
 
 }
@@ -67,7 +67,7 @@ BitVector32 srl_bv_32u(BitVector32 x, int offset)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: call Z0.BitVector32 Z0.bitvector::srl(Z0.BitVector32,System.Int32)
+    IL_0002: call Z0.BitVector32 Z0.BitVector::srl(Z0.BitVector32,System.Int32)
     IL_0007: ret
 
 }
@@ -82,7 +82,7 @@ BitVector32 srl_bv_o32u(BitVector32 x, int offset)
 BitVector32 flip_bv_32u(BitVector32 x)
 {
     IL_0000: ldarg.0
-    IL_0001: call Z0.BitVector32 Z0.bitvector::not(Z0.BitVector32)
+    IL_0001: call Z0.BitVector32 Z0.BitVector::not(Z0.BitVector32)
     IL_0006: ret
 
 }
@@ -96,7 +96,7 @@ BitVector32 flip_bv_o32u(BitVector32 x)
 BitVector32 negate_bv_32u(BitVector32 x)
 {
     IL_0000: ldarg.0
-    IL_0001: call Z0.BitVector32 Z0.bitvector::negate(Z0.BitVector32)
+    IL_0001: call Z0.BitVector32 Z0.BitVector::negate(Z0.BitVector32)
     IL_0006: ret
 
 }
@@ -110,7 +110,7 @@ BitVector32 negate_bv_o32u(BitVector32 x)
 BitVector32 inc_bv_32u(BitVector32 x)
 {
     IL_0000: ldarg.0
-    IL_0001: call Z0.BitVector32 Z0.bitvector::inc(Z0.BitVector32)
+    IL_0001: call Z0.BitVector32 Z0.BitVector::inc(Z0.BitVector32)
     IL_0006: ret
 
 }
@@ -126,7 +126,7 @@ BitVector32 inc_bv_o32u(BitVector32 x)
 BitVector32 dec_bv_32u(BitVector32 x)
 {
     IL_0000: ldarg.0
-    IL_0001: call Z0.BitVector32 Z0.bitvector::dec(Z0.BitVector32)
+    IL_0001: call Z0.BitVector32 Z0.BitVector::dec(Z0.BitVector32)
     IL_0006: ret
 
 }
@@ -143,7 +143,7 @@ BitVector32 rotl_bv_32u(BitVector32 x, int offset)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: call Z0.BitVector32 Z0.bitvector::rotl(Z0.BitVector32,System.Int32)
+    IL_0002: call Z0.BitVector32 Z0.BitVector::rotl(Z0.BitVector32,System.Int32)
     IL_0007: ret
 
 }
@@ -151,7 +151,7 @@ BitVector32 rotr_bv_32u(BitVector32 x, int offset)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: call Z0.BitVector32 Z0.bitvector::rotr(Z0.BitVector32,System.Int32)
+    IL_0002: call Z0.BitVector32 Z0.BitVector::rotr(Z0.BitVector32,System.Int32)
     IL_0007: ret
 
 }
@@ -362,31 +362,6 @@ ref double bitmapbit_d64f_to_64f(in double src, byte srcOffset, byte len, byte d
     IL_0004: ldarg.s dst
     IL_0006: call System.Double& Z0.Bits::bitmap(System.Double&,System.Byte,System.Byte,System.Byte,System.Double&)
     IL_000B: ret
-
-}
-ref double bitmap_g64f_to_64f(in double src, byte srcOffset, byte len, byte dstOffset, ref double dst)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: ldarg.2
-    IL_0003: ldarg.3
-    IL_0004: ldarg.s dst
-    IL_0006: call System.Double& Z0.gbits::bitmap<System.Double>(System.Double&,System.Byte,System.Byte,System.Byte,System.Double&)
-    IL_000B: ret
-
-}
-byte blsmsk_d8u(byte src)
-{
-    IL_0000: ldarg.0
-    IL_0001: call System.Byte Z0.Bits::blsmsk(System.Byte)
-    IL_0006: ret
-
-}
-byte blsmsk_g8u(byte src)
-{
-    IL_0000: ldarg.0
-    IL_0001: call System.Byte Z0.gbits::blsmsk<System.Byte>(System.Byte)
-    IL_0006: ret
 
 }
 ushort blsmsk_d16u(ushort src)
@@ -689,6 +664,66 @@ ulong mask_8x64u(ref ulong dst, int exp0, int exp1, int exp2, int exp3, int exp4
     IL_000E: call System.UInt64& Z0.Bits::mask(System.UInt64&,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)
     IL_0013: ldind.i8
     IL_0014: ret
+
+}
+ulong pack8(Span<bit> src)
+{
+    IL_0000: call Z0.N8 zfunc::get_n8()
+    IL_0005: ldarg.0
+    IL_0006: call System.UInt64 Z0.Bits::pack(Z0.N8,System.Span`1<Z0.bit>)
+    IL_000B: ret
+
+}
+BitVector<byte> pack8g(Span<bit> src)
+{
+    IL_0000: ldarg.0
+    IL_0001: call Z0.BitVector`1<System.Byte> Z0.gbits::pack<System.Byte>(System.Span`1<Z0.bit>)
+    IL_0006: ret
+
+}
+ulong pack16(Span<bit> src)
+{
+    IL_0000: call Z0.N16 zfunc::get_n16()
+    IL_0005: ldarg.0
+    IL_0006: call System.UInt64 Z0.Bits::pack(Z0.N16,System.Span`1<Z0.bit>)
+    IL_000B: ret
+
+}
+BitVector<ushort> pack16g(Span<bit> src)
+{
+    IL_0000: ldarg.0
+    IL_0001: call Z0.BitVector`1<System.UInt16> Z0.gbits::pack<System.UInt16>(System.Span`1<Z0.bit>)
+    IL_0006: ret
+
+}
+ulong pack32(Span<bit> src)
+{
+    IL_0000: call Z0.N32 zfunc::get_n32()
+    IL_0005: ldarg.0
+    IL_0006: call System.UInt64 Z0.Bits::pack(Z0.N32,System.Span`1<Z0.bit>)
+    IL_000B: ret
+
+}
+BitVector<uint> pack32g(Span<bit> src)
+{
+    IL_0000: ldarg.0
+    IL_0001: call Z0.BitVector`1<System.UInt32> Z0.gbits::pack<System.UInt32>(System.Span`1<Z0.bit>)
+    IL_0006: ret
+
+}
+BitVector<ulong> pack64g(Span<bit> src)
+{
+    IL_0000: ldarg.0
+    IL_0001: call Z0.BitVector`1<System.UInt64> Z0.gbits::pack<System.UInt64>(System.Span`1<Z0.bit>)
+    IL_0006: ret
+
+}
+ulong pack64(Span<bit> src)
+{
+    IL_0000: call Z0.N64 zfunc::get_n64()
+    IL_0005: ldarg.0
+    IL_0006: call System.UInt64 Z0.Bits::pack(Z0.N64,System.Span`1<Z0.bit>)
+    IL_000B: ret
 
 }
 uint pop_4x64(ulong x0, ulong x1, ulong x2, ulong x3)

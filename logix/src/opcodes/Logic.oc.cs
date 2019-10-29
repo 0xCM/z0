@@ -100,16 +100,6 @@ namespace Z0.Logix
         public static Vector256<ulong> xnor_v256x64u(Vector256<ulong> a, Vector256<ulong> b)
             => CpuOps.xnor(a,b);
 
-        // ~
-
-        public static ulong xor1_64u(ulong a)
-            => ScalarOps.xor1(a);
-
-        public static Vector128<ulong> xor1_v128x64u(Vector128<ulong> a)
-            => CpuOps.xor1(a);
-
-        public static Vector256<ulong> xor1_v256x64u(Vector256<ulong> a)
-            => CpuOps.xor1(a);
 
         // ~
 

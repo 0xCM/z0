@@ -15,7 +15,6 @@ namespace Z0
     [StructLayout(LayoutKind.Sequential)]
     public struct BitVector128
     {
-
         ulong x0;
 
         ulong x1;
@@ -23,21 +22,19 @@ namespace Z0
         /// <summary>
         /// Defines a reference vector consisting of only zeros
         /// </summary>
-        public static readonly BitVector128 Zero = default;
+        public static BitVector128 Zero => default;
 
         /// <summary>
         /// Defines a reference vector that has the numeric value 1
         /// </summary>
-        public static readonly BitVector128 One = (1,0);
+        public static BitVector128 One => FromScalar(1);
 
         /// <summary>
         /// Defines a reference vector consisting of only ones
         /// </summary>
-        public static readonly BitVector128 Ones = (UInt64.MaxValue, UInt64.MaxValue);
+        public static BitVector128 Ones => FromScalars(UInt64.MaxValue, UInt64.MaxValue);
 
-        public const int Width = 128;
-
-        public const int LastPos = Width - 1;
+        public const int N = 128;        
 
         /// <summary>
         /// Allocates a new empty vector
@@ -74,16 +71,16 @@ namespace Z0
         /// Creates a vector from a primal source value
         /// </summary>
         [MethodImpl(Inline)]
-        public static BitVector128 FromScalar(ulong src)
-            => new BitVector128(src,0);
+        public static BitVector128 FromScalar(ulong lo)
+            => new BitVector128(lo,0);
 
         /// <summary>
         /// Creates a vector from two unsigned 64-bit integers
         /// </summary>
         /// <param name="src">The source bitstring</param>
         [MethodImpl(Inline)]
-        public static BitVector128 FromScalars(uint x00, uint x01, uint x10, uint x11)
-            => new BitVector128(x00,x01,x10,x11);
+        public static BitVector128 FromScalars(uint x0, uint x1, uint x2, uint x3)
+            => new BitVector128(x0,x1,x2,x3);
 
         /// <summary>
         /// Creates a vector from two unsigned 64-bit integers
@@ -112,7 +109,6 @@ namespace Z0
         [MethodImpl(Inline)]    
         public static implicit operator (ulong x0, ulong x1)(BitVector128 src)
             => (src.x0, src.x1);
-
 
         /// <summary>
         /// Implicitly converts an unsigned 128-bit integer to a bitvector
@@ -226,7 +222,6 @@ namespace Z0
         public static explicit operator BitVector64(BitVector128 src)
             => src.ToBitVector64();
 
-
         /// <summary>
         /// Computes the bitwise XOR of the source operands
         /// Note that the XOR operator is equivalent to the (+) operator
@@ -307,7 +302,6 @@ namespace Z0
 
         [MethodImpl(Inline)]    
         public BitVector128(ulong x0, ulong x1)
-            : this()
         {
             this.x0 = x0; 
             this.x1 = x1;
@@ -315,7 +309,6 @@ namespace Z0
 
         [MethodImpl(Inline)]    
         public BitVector128(uint x00, uint x01,uint x10, uint x11)
-            : this()
         {
             this.x0 = Bits.pack(x00,x01);
             this.x1 = Bits.pack(x10, x11);
@@ -324,10 +317,9 @@ namespace Z0
 
         [MethodImpl(Inline)]    
         public BitVector128(UInt128 src)
-            : this()
         {
             this.x0 = src.lo;
-            this.x0 = src.hi;
+            this.x1 = src.hi;
         }
 
         /// <summary>
@@ -365,7 +357,7 @@ namespace Z0
         public readonly uint Length
         {
             [MethodImpl(Inline)]
-            get => Width;
+            get => N;
         }
 
         /// <summary>
@@ -576,7 +568,6 @@ namespace Z0
             => HashCode.Combine(x0,x1);
 
         public override string ToString()
-            => FormatBits();
- 
+            => FormatBits(); 
     }
 }

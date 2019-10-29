@@ -10,187 +10,278 @@ namespace Z0.Logix
     using System.Runtime.CompilerServices;
     
     using static zfunc;
-    
+    using static BinaryLogicOpKind;
+    using static UnaryLogicOpKind;
+
     public static partial class BitLogicSpec
     {
         /// <summary>
-        /// Defines a logical AND expression
+        /// Defines a logical not operator over an expression
+        /// </summary>
+        /// <param name="a">The operand</param>
+        [MethodImpl(Inline)]
+        public static UnaryLogicOp not(ILogicExpr a)
+            => unary(Not, a);
+
+        /// <summary>
+        /// Defines a logical not operator over a literal operand
+        /// </summary>
+        /// <param name="a">The operand</param>
+        [MethodImpl(Inline)]
+        public static UnaryLogicOp not(bit a)
+            => unary(Not, a);
+
+        /// <summary>
+        /// Defines a logical And operator over expression operands
         /// </summary>
         /// <param name="a">The first operand</param>
         /// <param name="b">The second operand</param>
         [MethodImpl(Inline)]
         public static BinaryLogicOp and(ILogicExpr a, ILogicExpr b)
-            => binary(BinaryLogicOpKind.And, a, b);
+            => binary(And, a, b);
 
         /// <summary>
-        /// Defines a logical AND expression between literals
+        /// Defines a logical And operator over literal operands
         /// </summary>
         /// <param name="a">The first operand</param>
         /// <param name="b">The second operand</param>
         [MethodImpl(Inline)]
-        public static BinaryLogicOp and(LiteralLogicExpr a, LiteralLogicExpr b)
-            => binary(BinaryLogicOpKind.Or, a, b);
+        public static BinaryLogicOp and(bit a, bit b)
+            => binary(And, a, b);
 
         /// <summary>
-        /// Defines a logical OR expression
-        /// </summary>
-        /// <param name="a">The first operand</param>
-        /// <param name="b">The second operand</param>
-        [MethodImpl(Inline)]
-        public static BinaryLogicOp or(ILogicExpr a, ILogicExpr b)
-            => binary(BinaryLogicOpKind.Or, a, b);
-
-        /// <summary>
-        /// Defines a logical OR expression between literals
-        /// </summary>
-        /// <param name="a">The first operand</param>
-        /// <param name="b">The second operand</param>
-        [MethodImpl(Inline)]
-        public static BinaryLogicOp or(LiteralLogicExpr a, LiteralLogicExpr b)
-            => binary(BinaryLogicOpKind.Or, a, b);
-
-        /// <summary>
-        /// Defines a logical XOR expression
-        /// </summary>
-        /// <param name="a">The first operand</param>
-        /// <param name="b">The second operand</param>
-        [MethodImpl(Inline)]
-        public static BinaryLogicOp xor(ILogicExpr a, ILogicExpr b)
-            => binary(BinaryLogicOpKind.XOr, a, b);
-
-        /// <summary>
-        /// Defines a logical XOR expression between literals
-        /// </summary>
-        /// <param name="a">The first operand</param>
-        /// <param name="b">The second operand</param>
-        [MethodImpl(Inline)]
-        public static BinaryLogicOp xor(LiteralLogicExpr a, LiteralLogicExpr b)
-            => binary(BinaryLogicOpKind.XOr, a, b);
-
-        /// <summary>
-        /// Defines the operator expression not(a) for a logic expression a
-        /// </summary>
-        /// <param name="a">The operand</param>
-        [MethodImpl(Inline)]
-        public static UnaryLogicOp not(ILogicExpr a)
-            => unary(UnaryLogicOpKind.Not, a);
-
-        /// <summary>
-        /// Defines the operator expression nor(a,b) := not(or(a,b)) for logic expressions a and b
-        /// </summary>
-        /// <param name="a">The first operand</param>
-        /// <param name="b">The second operand</param>
-        [MethodImpl(Inline)]
-        public static BinaryLogicOp nor(ILogicExpr a, ILogicExpr b)
-            => binary(BinaryLogicOpKind.Nor, a, b);
-
-        /// <summary>
-        /// Defines the operator expression nor(a,b) := not(or(a,b)) for literal expressions a and b
-        /// </summary>
-        /// <param name="a">The first operand</param>
-        /// <param name="b">The second operand</param>
-        [MethodImpl(Inline)]
-        public static BinaryLogicOp nor(LiteralLogicExpr a, LiteralLogicExpr b)
-            => binary(BinaryLogicOpKind.Nor, a, b);
-
-        /// <summary>
-        /// Defines the operator expression xnor(a,b) := not(xor(a,b)) for logic expressions a and b
-        /// </summary>
-        /// <param name="a">The first operand</param>
-        /// <param name="b">The second operand</param>
-        [MethodImpl(Inline)]
-        public static BinaryLogicOp xnor(ILogicExpr a, ILogicExpr b)
-            => binary(BinaryLogicOpKind.Xnor, a, b);
-
-        /// <summary>
-        /// Defines the operator expression xnor(a,b) := not(xor(a,b)) for literal expressions a and b
-        /// </summary>
-        /// <param name="a">The first operand</param>
-        /// <param name="b">The second operand</param>
-        [MethodImpl(Inline)]
-        public static BinaryLogicOp xnor(LiteralLogicExpr a, LiteralLogicExpr b)
-            => binary(BinaryLogicOpKind.Xnor, a, b);
-
-        /// <summary>
-        /// Defines the operator expression nand(a,b) := not(and(a,b)) for logic expressions a and b
+        /// Defines a logical Nand operator over expression operands
         /// </summary>
         /// <param name="a">The first operand</param>
         /// <param name="b">The second operand</param>
         [MethodImpl(Inline)]
         public static BinaryLogicOp nand(ILogicExpr a, ILogicExpr b)
-            => binary(BinaryLogicOpKind.Nand, a, b);
+            => binary(Nand, a, b);
 
         /// <summary>
-        /// Defines the operator expression nand(a,b) := not(and(a,b)) for literal expressions a and b
+        /// Defines a logical Nand operator over literal operands
         /// </summary>
         /// <param name="a">The first operand</param>
         /// <param name="b">The second operand</param>
         [MethodImpl(Inline)]
-        public static BinaryLogicOp nand(LiteralLogicExpr a, LiteralLogicExpr b)
-            => binary(BinaryLogicOpKind.Nand, a, b);
+        public static BinaryLogicOp nand(bit a, bit b)
+            => binary(Nand, a, b);
 
         /// <summary>
-        /// Defines the operator expression and(a, not(b)) for logic expressions a and b
+        /// Defines a logical Or operator over expression operands
         /// </summary>
         /// <param name="a">The first operand</param>
         /// <param name="b">The second operand</param>
         [MethodImpl(Inline)]
-        public static BinaryLogicOp andnot(ILogicExpr a, ILogicExpr b)
-            => binary(BinaryLogicOpKind.Nonimplication, a, b);
-        
+        public static BinaryLogicOp or(ILogicExpr a, ILogicExpr b)
+            => binary(Or, a, b);
+
         /// <summary>
-        /// Defines the operator expression and(a, not(b)) for literal expressions a and b
+        /// Defines a logical Or operator over literal operands
         /// </summary>
         /// <param name="a">The first operand</param>
         /// <param name="b">The second operand</param>
         [MethodImpl(Inline)]
-        public static BinaryLogicOp andnot(LiteralLogicExpr a, LiteralLogicExpr b)
-            => binary(BinaryLogicOpKind.Nonimplication, a, b);
+        public static BinaryLogicOp or(bit a, bit b)
+            => binary(Or, a, b);
 
         /// <summary>
-        /// Defines the operator expression left(a, b) for logic expressions a and b
+        /// Defines a nor operator over expression operands
+        /// </summary>
+        /// <param name="a">The first operand</param>
+        /// <param name="b">The second operand</param>
+        [MethodImpl(Inline)]
+        public static BinaryLogicOp nor(ILogicExpr a, ILogicExpr b)
+            => binary(Nor, a, b);
+
+        /// <summary>
+        /// Defines a nor operator over literal operands
+        /// </summary>
+        /// <param name="a">The first operand</param>
+        /// <param name="b">The second operand</param>
+        [MethodImpl(Inline)]
+        public static BinaryLogicOp nor(bit a, bit b)
+            => binary(Nor, a, b);
+
+        /// <summary>
+        /// Defines a logical Xor operator over expression operands
+        /// </summary>
+        /// <param name="a">The first operand</param>
+        /// <param name="b">The second operand</param>
+        [MethodImpl(Inline)]
+        public static BinaryLogicOp xor(ILogicExpr a, ILogicExpr b)
+            => binary(XOr, a, b);
+
+        /// <summary>
+        /// Defines a logical Xor operator over literal operands
+        /// </summary>
+        /// <param name="a">The first operand</param>
+        /// <param name="b">The second operand</param>
+        [MethodImpl(Inline)]
+        public static BinaryLogicOp xor(bit a, bit b)
+            => binary(XOr, a, b);
+
+        /// <summary>
+        /// Defines an xnor operator over expression operands
+        /// </summary>
+        /// <param name="a">The first operand</param>
+        /// <param name="b">The second operand</param>
+        [MethodImpl(Inline)]
+        public static BinaryLogicOp xnor(ILogicExpr a, ILogicExpr b)
+            => binary(Xnor, a, b);
+
+        /// <summary>
+        /// Defines an xnor operator over literal operands
+        /// </summary>
+        /// <param name="a">The first operand</param>
+        /// <param name="b">The second operand</param>
+        [MethodImpl(Inline)]
+        public static BinaryLogicOp xnor(bit a, bit b)
+            => binary(Xnor, a, b);
+
+        /// <summary>
+        /// Defines a left projection operator over expression operands
         /// </summary>
         /// <param name="a">The first operand</param>
         /// <param name="b">The second operand</param>
         [MethodImpl(Inline)]
         public static BinaryLogicOp left(ILogicExpr a, ILogicExpr b)
-            => binary(BinaryLogicOpKind.LeftProject, a, b);
+            => binary(LeftProject, a, b);
 
         /// <summary>
-        /// Defines the operator expression left(a, b) for literal expressions a and b
+        /// Defines a left projection over literal operands
         /// </summary>
         /// <param name="a">The first operand</param>
         /// <param name="b">The second operand</param>
         [MethodImpl(Inline)]
-        public static BinaryLogicOp left(LiteralLogicExpr a, LiteralLogicExpr b)
-            => binary(BinaryLogicOpKind.LeftProject, a, b);
+        public static BinaryLogicOp left(bit a, bit b)
+            => binary(LeftProject, a, b);
 
         /// <summary>
-        /// Defines the operator expression right(a, b) for logic expressions a and b
+        /// Defines a right projection operator over expression operands
         /// </summary>
         /// <param name="a">The first operand</param>
         /// <param name="b">The second operand</param>
         [MethodImpl(Inline)]
         public static BinaryLogicOp right(ILogicExpr a, ILogicExpr b)
-            => binary(BinaryLogicOpKind.RightProject, a, b);
+            => binary(RightProject, a, b);
 
         /// <summary>
-        /// Defines the operator expression right(a, b) for literal expressions a and b
+        /// Defines a right projection over literal operands
         /// </summary>
         /// <param name="a">The first operand</param>
         /// <param name="b">The second operand</param>
         [MethodImpl(Inline)]
-        public static BinaryLogicOp right(LiteralLogicExpr a, LiteralLogicExpr b)
-            => binary(BinaryLogicOpKind.RightProject, a, b);
+        public static BinaryLogicOp right(bit a, bit b)
+            => binary(RightProject, a, b);
 
         /// <summary>
-        /// Defines a material conditional, otherwise known as an implication operator
+        /// Defines a left negation operator over expression operands
         /// </summary>
-        /// <param name="antecedent">The first operand</param>
-        /// <param name="consequent">The second operand</param>
+        /// <param name="a">The first operand</param>
+        /// <param name="b">The second operand</param>
         [MethodImpl(Inline)]
-        public static BinaryLogicOp implies(ILogicExpr antecedent, ILogicExpr consequent)
-            => binary(BinaryLogicOpKind.ConverseImplication, antecedent, consequent);
+        public static BinaryLogicOp lnot(ILogicExpr a, ILogicExpr b)
+            => binary(LeftNot, a, b);
+
+        /// <summary>
+        /// Defines a left negation operator over literal operands
+        /// </summary>
+        /// <param name="a">The first operand</param>
+        /// <param name="b">The second operand</param>
+        [MethodImpl(Inline)]
+        public static BinaryLogicOp lnot(bit a, bit b)
+            => binary(LeftNot, a, b);
+
+        /// <summary>
+        /// Defines a right negation operator over expression operands 
+        /// </summary>
+        /// <param name="a">The first operand</param>
+        /// <param name="b">The second operand</param>
+        [MethodImpl(Inline)]
+        public static BinaryLogicOp rnot(ILogicExpr a, ILogicExpr b)
+            => binary(RightNot, a, b);
+
+        /// <summary>
+        /// Defines a right negation operator over literal operands
+        /// </summary>
+        /// <param name="a">The first operand</param>
+        /// <param name="b">The second operand</param>
+        [MethodImpl(Inline)]
+        public static BinaryLogicOp rnot(bit a, bit b)
+            => binary(RightNot, a, b);
+
+        /// <summary>
+        /// Defines a material implication operator over expression operands
+        /// </summary>
+        /// <param name="a">The first operand</param>
+        /// <param name="b">The second operand</param>
+        [MethodImpl(Inline)]
+        public static BinaryLogicOp imply(ILogicExpr a, ILogicExpr b)
+            => binary(Implication, a, b);
+        
+        /// <summary>
+        /// Defines a material implication operator over literal operands
+        /// </summary>
+        /// <param name="a">The first operand</param>
+        /// <param name="b">The second operand</param>
+        [MethodImpl(Inline)]
+        public static BinaryLogicOp imply(bit a, bit b)
+            => binary(Implication, a, b);
+
+        /// <summary>
+        /// Defines a material nonimplication operator over expression operands
+        /// </summary>
+        /// <param name="a">The first operand</param>
+        /// <param name="b">The second operand</param>
+        [MethodImpl(Inline)]
+        public static BinaryLogicOp notimply(ILogicExpr a, ILogicExpr b)
+            => binary(Nonimplication, a, b);
+        
+        /// <summary>
+        /// Defines a material nonimplication operator over literal operands
+        /// </summary>
+        /// <param name="a">The first operand</param>
+        /// <param name="b">The second operand</param>
+        [MethodImpl(Inline)]
+        public static BinaryLogicOp notimply(bit a, bit b)
+            => binary(Nonimplication, a, b);
+
+        /// <summary>
+        /// Defines a converse implication operator over expression operands
+        /// </summary>
+        /// <param name="a">The first operand</param>
+        /// <param name="b">The second operand</param>
+        [MethodImpl(Inline)]
+        public static BinaryLogicOp cimply(ILogicExpr a, ILogicExpr b)
+            => binary(ConverseImplication, a, b);
+
+        /// <summary>
+        /// Defines a converse implication operator over literal operands
+        /// </summary>
+        /// <param name="a">The first operand</param>
+        /// <param name="b">The second operand</param>
+        [MethodImpl(Inline)]
+        public static BinaryLogicOp cimply(bit a, bit b)
+            => binary(ConverseImplication, a, b);
+
+        /// <summary>
+        /// Defines a converse nonimplication operator over expression operands
+        /// </summary>
+        /// <param name="a">The first operand</param>
+        /// <param name="b">The second operand</param>
+        [MethodImpl(Inline)]
+        public static BinaryLogicOp cnotimply(ILogicExpr a, ILogicExpr b)
+            => binary(ConverseNonimplication, a, b);
+
+        /// <summary>
+        /// Defines a converse nonimplication operator over literal operands
+        /// </summary>
+        /// <param name="a">The first operand</param>
+        /// <param name="b">The second operand</param>
+        [MethodImpl(Inline)]
+        public static BinaryLogicOp cnotimply(bit a, bit b)
+            => binary(ConverseNonimplication, a, b);
 
     }
 }

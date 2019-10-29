@@ -24,15 +24,13 @@ namespace Z0
         /// <summary>
         /// Specifies the MxN matrix dimension
         /// </summary>
-        static readonly Dim<N,N> Dim = default;
+        static int Order => (int)new N().value;
 
-        static readonly GridSpec<T> GridSpec = (bitsize<T>(), (int)Dim.I, (int)Dim.J);
-        
-        public static readonly GridLayout<T> GridLayout = GridSpec.CalcLayout();
+        public static BitMatrix<N,T> Identity => BitMatrix.identity<N,T>();
 
-        public static BitMatrix<N,T> Identity => CreateIdentity();
+        public static BitMatrix<N,T> Ones => BitMatrix.ones<N,T>();
 
-        public static BitMatrix<N,T> Ones => CreateOnes();
+        public static readonly GridLayout<T> GridLayout = BitMatrix.layout<N,T>();
 
         /// <summary>
         /// Allocates a Zero-filled NxN matrix
@@ -56,46 +54,46 @@ namespace Z0
         /// <summary>
         /// Multiplies the left matrix by the right
         /// </summary>
-        /// <param name="lhs">The left matrix</param>
-        /// <param name="rhs">The right matrix</param>
+        /// <param name="A">The left matrix</param>
+        /// <param name="B">The right matrix</param>
         [MethodImpl(Inline)]
-        public static BitMatrix<N,T> operator *(BitMatrix<N,T> lhs, BitMatrix<N,T> rhs)
-            => Mul(ref lhs, rhs);
+        public static BitMatrix<N,T> operator *(BitMatrix<N,T> A, BitMatrix<N,T> B)
+            => BitMatrix.mul(A, B, ref A);
 
         /// <summary>
         /// Computes the bitwise XOR between the operands
         /// </summary>
-        /// <param name="lhs">The left matrix</param>
-        /// <param name="rhs">The right matrix</param>
+        /// <param name="A">The left matrix</param>
+        /// <param name="B">The right matrix</param>
         [MethodImpl(Inline)]
-        public static BitMatrix<N,T> operator ^(BitMatrix<N,T> lhs, BitMatrix<N,T> rhs)
-            => XOr(ref lhs, rhs);
+        public static BitMatrix<N,T> operator ^(BitMatrix<N,T> A, BitMatrix<N,T> B)
+            => XOr(ref A, B);
 
         /// <summary>
         /// Computes the bitwise AND between the operands
         /// </summary>
-        /// <param name="lhs">The left matrix</param>
-        /// <param name="rhs">The right matrix</param>
+        /// <param name="A">The left matrix</param>
+        /// <param name="B">The right matrix</param>
         [MethodImpl(Inline)]
-        public static BitMatrix<N,T> operator &(BitMatrix<N,T> lhs, BitMatrix<N,T> rhs)
-            => And(ref lhs, rhs);
+        public static BitMatrix<N,T> operator &(BitMatrix<N,T> A, BitMatrix<N,T> B)
+            => And(ref A, B);
 
         /// <summary>
         /// Computes the bitwise Or between the operands
         /// </summary>
-        /// <param name="lhs">The left matrix</param>
-        /// <param name="rhs">The right matrix</param>
+        /// <param name="A">The left matrix</param>
+        /// <param name="B">The right matrix</param>
         [MethodImpl(Inline)]
-        public static BitMatrix<N,T> operator |(BitMatrix<N,T> lhs, BitMatrix<N,T> rhs)
-            => Or(ref lhs, rhs);
+        public static BitMatrix<N,T> operator |(BitMatrix<N,T> A, BitMatrix<N,T> B)
+            => Or(ref A, B);
 
         /// <summary>
         /// Computes the bitwise complement of the source matrix
         /// </summary>
-        /// <param name="src">The source matrix</param>
+        /// <param name="A">The source matrix</param>
         [MethodImpl(Inline)]
-        public static BitMatrix<N,T> operator ~(BitMatrix<N,T> src)
-            => Flip(ref src);
+        public static BitMatrix<N,T> operator ~(BitMatrix<N,T> A)
+            => Flip(ref A);
 
         [MethodImpl(Inline)]
         public static bool operator ==(BitMatrix<N,T> lhs, BitMatrix<N,T> rhs)
@@ -249,7 +247,7 @@ namespace Z0
         /// </summary>
         [MethodImpl(Inline)]
         public Span<byte> Unpack()
-            => data.AsBytes().Unpack().Slice(0, (int)Dim.Volume);
+            => data.AsBytes().Unpack().Slice(0, math.square(Order));
 
         /// <summary>
         /// Sets all the bits to align with the source value
@@ -304,17 +302,17 @@ namespace Z0
         public override bool Equals(object rhs)
             => throw new NotSupportedException();
 
-        static ref BitMatrix<N,T> And(ref BitMatrix<N,T> lhs, in BitMatrix<N,T> rhs)        
+        static ref BitMatrix<N,T> And(ref BitMatrix<N,T> A, in BitMatrix<N,T> B)        
         {
-            mathspan.and(lhs.Data, rhs.Data, lhs.Data);
-            return ref lhs;
+            mathspan.and(A.Data, B.Data, A.Data);
+            return ref A;
         }
 
-        static ref BitMatrix<N,T> Mul(ref BitMatrix<N,T> lhs, in BitMatrix<N,T> rhs)
+        static ref BitMatrix<N,T> Mul(ref BitMatrix<N,T> A, in BitMatrix<N,T> B)
         {
-            var x = lhs;
-            var y = rhs.Transpose();
-            ref var dst = ref lhs;
+            var x = A;
+            var y = B.Transpose();
+            ref var dst = ref A;
             var n = (int)new N().value;
 
             for(var i=0; i< n; i++)
@@ -328,10 +326,10 @@ namespace Z0
             return ref dst;
         }
 
-        static ref BitMatrix<N,T> XOr(ref BitMatrix<N,T> lhs, in BitMatrix<N,T> rhs)        
+        static ref BitMatrix<N,T> XOr(ref BitMatrix<N,T> A, in BitMatrix<N,T> B)        
         {
-            mathspan.xor(lhs.Data, rhs.Data, lhs.Data);
-            return ref lhs;
+            mathspan.xor(A.Data, B.Data, A.Data);
+            return ref A;
         }
 
         static ref BitMatrix<N,T> Or(ref BitMatrix<N,T> lhs, in BitMatrix<N,T> rhs)        
@@ -346,25 +344,5 @@ namespace Z0
             return ref src;
         }
         
-        static BitMatrix<N,T> CreateIdentity()
-        {            
-            var dst = Alloc();
-            for(var row = 0; row < dst.RowCount; row++)
-            for(var col = 0; col < dst.ColCount; col++)
-                if(row == col)
-                    dst[row,col] = true;            
-            return dst;
-        }    
-
-        /// <summary>
-        /// Allocates a One-filled mxn matrix
-        /// </summary>
-        static BitMatrix<N,T> CreateOnes()
-        {                    
-            var data = new T[GridLayout.TotalCellCount];
-            data.Fill(PrimalInfo.Get<T>().MaxVal);
-            return new BitMatrix<N, T>(data);
-        }
-
     }
 }

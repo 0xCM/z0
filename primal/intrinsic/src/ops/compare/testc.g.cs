@@ -50,7 +50,7 @@ namespace Z0
         }
         
         /// <summary>
-        /// Determines whether all source bits are on
+        /// Returns true if all bits in the source vector are enabled, false otherwise
         /// </summary>
         /// <param name="src">The source bits</param>
         /// <typeparam name="T">The primal component type</typeparam>

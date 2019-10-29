@@ -183,7 +183,7 @@ namespace Z0.Logix
 
             var dst = BitMatrix.alloc<T>();
             for(var i=0; i< rowcount; i++)
-                dst.RowVector(i) = Vector(src.Answered[i]);
+                dst[i] = Vector(src.Answered[i]);
             return dst;                
         }
 
@@ -202,7 +202,7 @@ namespace Z0.Logix
 
             var dst = BitMatrix.alloc<T>();
             for(var i=0; i< rowcount; i++)
-                dst.RowVector(i) = Vector(src.Questions[i]);
+                dst[i] = Vector(src.Questions[i]);
             return dst;                
         }
 
@@ -222,7 +222,7 @@ namespace Z0.Logix
             var rowcount = src.Answered.Length;
             var dst = RowBits.alloc<T>(rowcount);
             for(var i=0; i< rowcount; i++)
-                dst.RowVector(i) = Vector(src.Answered[i]);
+                dst[i] = Vector(src.Answered[i]);
             return dst;
 
         }

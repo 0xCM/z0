@@ -13,6 +13,22 @@ namespace Z0
 
     partial class gbits
     {    
+        [MethodImpl(Inline)]
+        public static BitVector<T> pack<T>(Span<bit> src)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(byte))
+                return generic<T>((byte)Bits.pack(n8,src));
+            else if(typeof(T) == typeof(ushort))
+                return generic<T>((ushort)Bits.pack(n16,src));
+            else if(typeof(T) == typeof(uint))
+                return generic<T>((uint)Bits.pack(n32,src));
+            else if(typeof(T) == typeof(ulong))
+                return generic<T>((ulong)Bits.pack(n64,src));
+            else
+                throw unsupported<T>();
+        }
+
         public static ref T pack<T>(ReadOnlySpan<bit> src, ref T dst)         
             where T : unmanaged
         {

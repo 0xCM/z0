@@ -55,6 +55,10 @@ namespace Z0
         public static implicit operator BitVector<T>(T src)
             => new BitVector<T>(src);
 
+        [MethodImpl(Inline)]
+        public static implicit operator T(BitVector<T> src)
+            => src.data;
+
         /// <summary>
         /// Computes the bitwias AND between the operands
         /// </summary>

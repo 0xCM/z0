@@ -36,6 +36,7 @@ namespace Z0
             return ref dst;
         }
 
+
         public static ref ulong pack64x1(Span<byte> src, ref ulong dst)
         {
             const int width = 8;

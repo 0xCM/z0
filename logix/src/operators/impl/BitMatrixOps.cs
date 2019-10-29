@@ -141,12 +141,12 @@ namespace Z0.Logix
         [MethodImpl(Inline)]
         public static BitMatrix<T> cnotimply<T>(BitMatrix<T> A, BitMatrix<T> B)
             where T : unmanaged
-                => BitMatrix.andnot(A,B);
+                => BitMatrix.cnotimply(A,B);
 
         [MethodImpl(Inline)]
         public static BitMatrix<T> andnot<T>(BitMatrix<T> A, BitMatrix<T> B, ref BitMatrix<T> Z)
             where T : unmanaged
-                => BitMatrix.andnot(A,B, ref Z);
+                => BitMatrix.cnotimply(A,B, ref Z);
 
         [MethodImpl(Inline)]
         public static BitMatrix<T> left<T>(BitMatrix<T> A, BitMatrix<T> B)

@@ -15,17 +15,21 @@ namespace Z0
 
     using static zfunc;
 
-
     /// <summary>
-    /// Defines a rectangular bitmatrix with an aribitrary number of primal rows
+    /// Defines a sequence of generic bitvectors, interpreted as rows, for which the width is determined by 
+    /// the bitvector primal type
     /// </summary>
     public ref struct RowBits<T>
         where T : unmanaged
     {
         internal Span<T> data;
 
-        public static readonly BitSize Width = bitsize<T>();
-
+        public static int Width 
+        {
+            [MethodImpl(Inline)]
+            get => bitsize<T>();
+        }
+        
         [MethodImpl(Inline)]
         public static RowBits<T> From(T[] src)        
             => new RowBits<T>(src);
@@ -91,7 +95,7 @@ namespace Z0
             get  => data.Length;
         }
 
-        public int ColCount
+        public int RowWidth
         {
             [MethodImpl(Inline)]
             get => Width;
@@ -112,7 +116,7 @@ namespace Z0
         public ref T Head
         {
             [MethodImpl(Inline)]
-            get => ref data[0];
+            get => ref head(data);
         }
 
         /// <summary>
@@ -127,19 +131,11 @@ namespace Z0
         /// <summary>
         ///  Specifies the size of the matrix in bytes
         /// </summary>
-        public ByteSize ByteSize
+        public ByteSize Allocation
         {
             [MethodImpl(Inline)]
             get => size<T>()*RowCount;
         }
-
-        [MethodImpl(Inline)]
-        public BitVector<T> GetRow(int row)
-            => data[row];
-
-        [MethodImpl(Inline)]
-        public void SetRow(int row, BitVector<T> src)
-            => this.data[row] = src.Data;
 
         /// <summary>
         /// Gets the the value of bit identified by row/col indices
@@ -165,14 +161,11 @@ namespace Z0
         public ref BitVector<T> this[int row]
         {
             [MethodImpl(Inline)]
-            get => ref RowVector(row);
-
-            // [MethodImpl(Inline)]
-            // set => SetRow(row, value);
+            get => ref Row(row);
         }
 
         [MethodImpl(Inline)]
-        public ref BitVector<T> RowVector(int offset)
+        ref BitVector<T> Row(int offset)
             => ref AsBitVector(ref tail(data, offset));
 
         [MethodImpl(Inline)]
@@ -190,7 +183,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => Bytes.FormatMatrixBits(ColCount);
+            => Bytes.FormatMatrixBits(RowWidth);
     
         [MethodImpl(Inline)]
         public RowBits<T> Fill(T value)

@@ -15,7 +15,8 @@ namespace Z0
     partial class gmath
     {
         /// <summary>
-        /// Defines the ternary bitwise select operator
+        /// Defines the ternary bitwise select operator over primal unsigned integers, 
+        /// select(a,b,c) := or(and(a, b), and(not(a), c)) = or(and(a,b), notimply(a,c));
         /// </summary>
         /// <param name="a">The first operand</param>
         /// <param name="b">The second operand</param>
@@ -25,7 +26,8 @@ namespace Z0
         [MethodImpl(Inline)]
         public static T select<T>(T a, T b, T c)
             where T : unmanaged
-                => or(and(a, b), and(not(a), c));
+                //=> or(and(a, b), and(not(a), c));
+                => or(and(a,b), notimply(a,c));
     }
 
 }

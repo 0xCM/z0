@@ -18,19 +18,5 @@ namespace Z0
 
     }
 
-    public static partial class Bitwise
-    {
 
-    }
-
-
-    public static class Circuits
-    {
-
-        [MethodImpl(Inline)]
-        public static ref readonly HalfAdder<T> halfadder<T>()
-            where T : unmanaged 
-                => ref HalfAdder<T>.Circuit;            
-
-    }
 }

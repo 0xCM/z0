@@ -530,7 +530,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public BitVector8 AndNot(BitVector8 y)
         {
-            data = math.andnot(data, y.data);            
+            data = math.cnotimply(data, y.data);            
             return this;
         }        
 

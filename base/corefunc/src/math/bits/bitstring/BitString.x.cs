@@ -122,6 +122,14 @@ namespace Z0
             => BitString.FromBits(src);
 
         /// <summary>
+        /// Converts a readonly bitspan to a bitstring
+        /// </summary>
+        /// <param name="src">The source bits</param>
+        [MethodImpl(Inline)]        
+        public static BitString ToBitString(this bit[] src)
+            => BitString.FromBits(src);
+
+        /// <summary>
         /// Converts span content to a to a bitstring
         /// </summary>
         /// <param name="src">The source bits</param>

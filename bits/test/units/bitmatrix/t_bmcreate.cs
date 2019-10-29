@@ -167,7 +167,7 @@ namespace Z0
 
         public void create7x9()
         {
-            var m1 = BitMatrix.alloc<N7,N9,byte>();
+            var m1 = BitMatrix.natural<N7,N9,byte>();
             m1.Fill(Bit.On);
             var fmt = m1.Format().RemoveWhitespace();
             Claim.eq(BitMatrix<N7,N9,byte>.TotalBitCount, fmt.Length);    
@@ -175,7 +175,7 @@ namespace Z0
         }
         public void create7x7()
         {
-            var m1 = BitMatrix.alloc<N7,byte>();
+            var m1 = BitMatrix.natural<N7,byte>();
             m1.Fill(Bit.On);
             var fmt = m1.Format().RemoveWhitespace();
             Claim.eq(7*7, fmt.Length);

@@ -65,6 +65,25 @@ namespace Z0.Logix
             Claim.eq(Pow2.T08, bitcombo(n8).Distinct().Count());
         }
 
+        public void bitcombo_emit()
+        {
+            var width = n8;
+            var terms = bitcombo(width).Select(x => x.Terms).SelectMany(x => x).ToSpan();
+            var expectations = terms.ToBitString().Pack().AsUInt64();
+            var matrix = BitMatrix.alloc<ulong>();
+            
+            for(int i=0, j=0; i< terms.Length; i+= 64, j++)
+            {
+                var actual = gbits.pack<ulong>(terms.Slice(i));
+                BitVector<ulong> expect = expectations[j];
+                Claim.eq(actual,expect);
+                matrix[j] = actual;
+            
+                Trace(actual.Format(blockWidth: 8));
+            }
+            
+        }
+
         public void t_bitseq_check()
         {
             for(var sample=0; sample<SampleSize; sample++)          

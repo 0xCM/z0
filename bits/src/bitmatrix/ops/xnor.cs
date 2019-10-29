@@ -89,9 +89,5 @@ namespace Z0
             BitPoints.xnor(A.HeadPtr, B.HeadPtr, C.HeadPtr);
             return ref C;
         }
-
-
- 
     }
-
 }

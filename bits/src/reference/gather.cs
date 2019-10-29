@@ -15,12 +15,11 @@ namespace Z0
     partial class BitRef
     {
         /// <summary>
-        /// Collects mask-identified source bits that are deposited to
-        /// contiguous low bits in the target
+        /// Collects mask-identified source bits that are deposited to contiguous low bits in a target
         /// </summary>
         /// <param name="src">The bit source</param>
         /// <param name="mask">The scatter spec</param>
-        /// <typeparam name="T">The identifiying mask</typeparam>
+        /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
         public static T gather<T>(T src, T mask)
             where T : unmanaged

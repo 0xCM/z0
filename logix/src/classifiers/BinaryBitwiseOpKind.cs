@@ -87,7 +87,7 @@ namespace Z0.Logix
         /// <summary>
         /// Identifies an operator cnotimply(a,b) := and(a,not(b))
         /// </summary>
-        ConverseNonimplication = BinaryLogicOpKind.ConverseNomimplication,
+        ConverseNonimplication = BinaryLogicOpKind.ConverseNonimplication,
 
         /// <summary>
         /// Classifies a bitwise binary operator cimply(a,b) := or(not(a), b)

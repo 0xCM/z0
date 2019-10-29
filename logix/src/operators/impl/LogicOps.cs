@@ -85,11 +85,11 @@ namespace Z0.Logix
 
         [MethodImpl(Inline), BinaryLogicOp(BinaryLogicOpKind.Implication)]
         public static bit imply(bit a, bit b)
-            => bit.implies(a,b);
+            => bit.imply(a,b);
 
         [MethodImpl(Inline), BinaryLogicOp(BinaryLogicOpKind.Nonimplication)]
         public static bit notimply(bit a, bit b)
-            => bit.and(not(a),b);
+            => bit.notimply(a,b);
 
         [MethodImpl(Inline), BinaryLogicOp(BinaryLogicOpKind.LeftProject)]
         public static bit left(bit a, bit b)
@@ -100,21 +100,21 @@ namespace Z0.Logix
             => b;
 
         [MethodImpl(Inline), BinaryLogicOp(BinaryLogicOpKind.LeftNot)]
-        public static bit leftnot(bit a, bit b)
+        public static bit lnot(bit a, bit b)
             => not(a);
 
         [MethodImpl(Inline), BinaryLogicOp(BinaryLogicOpKind.RightNot)]
-        public static bit rightnot(bit a, bit b)
+        public static bit rnot(bit a, bit b)
             => not(b);
 
 
         [MethodImpl(Inline), BinaryLogicOp(BinaryLogicOpKind.ConverseImplication)]
         public static bit cimply(bit a, bit b)
-            => bit.implies(b,a);
+            => bit.cimply(a,b);
 
-        [MethodImpl(Inline), BinaryLogicOp(BinaryLogicOpKind.ConverseNomimplication)]
+        [MethodImpl(Inline), BinaryLogicOp(BinaryLogicOpKind.ConverseNonimplication)]
         public static bit cnotimply(bit a, bit b)
-            => bit.andnot(a,b);
+            => bit.cnotimply(a,b);
 
 
         [MethodImpl(Inline)]

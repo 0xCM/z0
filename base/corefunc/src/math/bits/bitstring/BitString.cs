@@ -545,7 +545,7 @@ namespace Z0
                 return new byte[minlen ?? 1];
 
             var srcLen = (uint)(src.Length - offset);
-            var dstLen = Mod<N8>.div(srcLen) + (Mod<N8>.mod(srcLen) == 0 ? 0 : 1);   
+            var dstLen = Mod8.div(srcLen) + (Mod8.mod(srcLen) == 0 ? 0 : 1);   
             if(minlen != null && dstLen < minlen)
                 dstLen = minlen.Value;
 

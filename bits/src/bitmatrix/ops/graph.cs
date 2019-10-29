@@ -15,38 +15,26 @@ namespace Z0
 
     partial class BitMatrix
     {
+        /// <summary>
+        /// Constructs the a generic graph determined by a generic adjacency bitmatrix
+        /// </summary>
+        /// <param name="A">The source matrix</param>
+        /// <typeparam name="T">The type over which the matrix is constructed</typeparam>
         [MethodImpl(Inline)]
-        public static Graph<byte> graph<T>(in BitMatrix<T> A)
+        public static Graph<T> graph<T>(in BitMatrix<T> A)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return BitGraph.FromMatrix(BitMatrix<N8,byte>.Load(A.Bytes));
+                return BitGraph.from(BitMatrix<N8,T>.Load(A.Data));
             else if(typeof(T) == typeof(ushort))
-                return BitGraph.FromMatrix(BitMatrix<N16,byte>.Load(A.Bytes));
+                return BitGraph.from(BitMatrix<N16,T>.Load(A.Data));
             else if(typeof(T) == typeof(uint))
-                return BitGraph.FromMatrix(BitMatrix<N32,byte>.Load(A.Bytes));
+                return BitGraph.from(BitMatrix<N32,T>.Load(A.Data));
             else if(typeof(T) == typeof(uint))
-                return BitGraph.FromMatrix(BitMatrix<N64,byte>.Load(A.Bytes));
+                return BitGraph.from(BitMatrix<N64,T>.Load(A.Data));
             else
                 throw unsupported<T>();
         }
-
-
-        [MethodImpl(Inline)]    
-        public static BitMatrix<N8,byte> natural(BitMatrix8 A)
-            => BitMatrix<N8,byte>.Load(A.Bytes);
-
-        [MethodImpl(Inline)]    
-        public static BitMatrix<N16,byte> natural(BitMatrix16 A)
-            => BitMatrix<N16,byte>.Load(A.Bytes);
-
-        [MethodImpl(Inline)]    
-        public static BitMatrix<N32,byte> natural(BitMatrix32 A)
-            => BitMatrix<N32,byte>.Load(A.Bytes);
-
-        [MethodImpl(Inline)]    
-        public static BitMatrix<N64,byte> natural(BitMatrix64 A)
-            => BitMatrix<N64,byte>.Load(A.Bytes);
 
         /// <summary>
         /// Constructs a 16-node graph via the adjacency matrix interpretation
@@ -54,7 +42,7 @@ namespace Z0
         /// <param name="src">The source matrix</param>
         [MethodImpl(Inline)]    
         public static Graph<byte> graph(BitMatrix8 A)
-            => BitGraph.FromMatrix(natural(A));            
+            => BitGraph.from(natural(A));            
 
         /// <summary>
         /// Constructs a 16-node graph via the adjacency matrix interpretation
@@ -62,7 +50,7 @@ namespace Z0
         /// <param name="src">The source matrix</param>
         [MethodImpl(Inline)]    
         public static Graph<byte> graph(BitMatrix16 A)
-            => BitGraph.FromMatrix(natural(A));            
+            => BitGraph.from(natural(A));            
 
         /// <summary>
         /// Constructs a 32-node graph via the adjacency matrix interpretation
@@ -70,7 +58,7 @@ namespace Z0
         /// <param name="src">The source matrix</param>
         [MethodImpl(Inline)]    
         public static Graph<byte> graph(BitMatrix32 A)
-            => BitGraph.FromMatrix(natural(A));            
+            => BitGraph.from(natural(A));            
 
         /// <summary>
         /// Constructs a 64-node graph via the adjacency matrix interpretation
@@ -78,7 +66,7 @@ namespace Z0
         /// <param name="src">The source matrix</param>
         [MethodImpl(Inline)]    
         public static Graph<byte> graph(BitMatrix64 A)
-            => BitGraph.FromMatrix(natural(A));            
+            => BitGraph.from(natural(A));            
 
     }
 

@@ -27,6 +27,16 @@ namespace Z0
             where T : unmanaged
                 => new BitMatrix<T>(new Span<T>(new T[BitMatrix<T>.N]));
 
+        /// <summary>
+        /// Allocates a bitmatrix filled with specified content
+        /// </summary>
+        /// <param name="row">The row content source</param>
+        /// <typeparam name="T">The matrix primal type</typeparam>
+        [MethodImpl(NotInline)]
+        public static BitMatrix<T> fill<T>(BitVector<T> row)
+            where T : unmanaged
+                => new BitMatrix<T>(row);
+
         [MethodImpl(NotInline)]
         public static void alloc<T>(out BitMatrix<T> dst)
             where T : unmanaged
@@ -47,6 +57,7 @@ namespace Z0
         [MethodImpl(NotInline)]
         public static BitMatrix64 alloc(N64 n, bit fill = default)
             => BitMatrix64.Alloc(fill);
+
 
         [MethodImpl(Inline)]
         public static BitMatrix<T> from<T>(RowBits<T> src)

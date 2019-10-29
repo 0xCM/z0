@@ -325,9 +325,11 @@ namespace Z0.Logix
                 var b = Random.Next<T>();
                 v1.Set(a);
                 v2.Set(b);
-                T actual = LogicEngine.eval(expr);
                 T expect = ScalarOpApi.eval(op,a,b);
-                Claim.eq(actual,expect);                            
+                T result1 = LogicEngine.eval(expr);
+                T result2 = BitVectorOpApi.eval(op, BitVector.generic(a),BitVector.generic(b)).Data;
+                Claim.eq(expect, result1);                            
+                Claim.eq(expect, result2);                            
             }
         }
 

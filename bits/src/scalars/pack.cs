@@ -245,6 +245,92 @@ namespace Z0
         }
 
         /// <summary>
+        /// Packs an arbitrary number of isolated bits into a contiguous sequence of 
+        /// bits in a bytespan
+        /// </summary>
+        /// <param name="src">The source bits</param>
+        public static Span<byte> pack(bit[] src)
+        {
+            var srcLen = (uint)src.Length;
+            var div = Mod8.div(srcLen);
+            var rem = Mod8.mod(srcLen);
+            var dstLen = div + (rem != 0 ? 1 : 0);            
+            Span<byte> dst = new byte[dstLen];
+
+            for (int i = 0; i < srcLen; i++)
+            for (var j = 0; j < 8; j++)
+                dst[j] |= (byte)((uint)src[i] << j);
+            return dst;
+        }
+
+        /// <summary>
+        /// Packs 8 source bits into the least 8 bits of a 32-bit integer
+        /// </summary>
+        /// <param name="src">The bit source</param>
+        /// <param name="dst">The target integer</param>
+        [MethodImpl(Inline)]
+        public static ulong pack(N8 n, Span<bit> src)
+        {
+            var dst = (uint)src[0];
+            dst |= ((uint)src[1] << 1);
+            dst |= ((uint)src[2] << 2);
+            dst |= ((uint)src[3] << 3);
+            dst |= ((uint)src[4] << 4);
+            dst |= ((uint)src[5] << 5);
+            dst |= ((uint)src[6] << 6);
+            dst |= ((uint)src[7] << 7);
+            return dst;
+        }
+
+        /// <summary>
+        /// Packs 16 source bits into the lo part of a 32-bit integer
+        /// </summary>
+        /// <param name="src">The bit source</param>
+        [MethodImpl(Inline)]
+        public static ulong pack(N16 n, Span<bit> src)
+        {
+           var dst = pack(n8, src);
+           dst |= (pack(n8, src.Slice(8)) << 8);
+           return dst;          
+        }
+
+        /// <summary>
+        /// Packs 32 source bits into a 32-bit integer
+        /// </summary>
+        /// <param name="src">The bit source</param>
+        [MethodImpl(Inline)]
+        public static ulong pack(N32 n, Span<bit> src)
+        {
+           var dst = pack(n16, src);
+           dst |= (pack(n16, src.Slice(16)) << 16);
+           return dst;          
+        }
+
+        /// <summary>
+        /// Packs 64 source bits into a 64-bit integer
+        /// </summary>
+        /// <param name="src">The bit source</param>
+        [MethodImpl(Inline)]
+        public static ulong pack(N64 n, Span<bit> src)
+        {
+           ulong dst = pack(n32, src);
+           dst |= (pack(n32, src.Slice(32)) << 32);
+           return dst;          
+        }
+
+        /// <summary>
+        /// Packs 128 source bits into 2 64-bit unsigned integers
+        /// </summary>
+        /// <param name="src">The bit source</param>
+        /// <remarks>The function inlines, but it clocks in at almost 5000 bytes of instuctions!</remarks>
+        [MethodImpl(Inline)]
+        static void pack(Span<bit> src, out ulong lo, out ulong hi)
+        {
+           lo = pack(n64, src);
+           hi = pack(n64, src.Slice(64));
+        }
+
+        /// <summary>
         /// Packs bits into bytes
         /// </summary>
         /// <param name="src">The source values</param>

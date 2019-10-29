@@ -10,19 +10,10 @@ namespace Z0.Logix
     
     using static zfunc;
     using static ComparisonKind;
+    using static TypedLogicSpec;
 
     public static class PredicateSpec
     {
-        /// <summary>
-        /// Creates a literal expression
-        /// </summary>
-        /// <param name="value">The literal value</param>
-        /// <typeparam name="T">The literal type</typeparam>
-        [MethodImpl(Inline)]
-        static TypedLiteralExpr<T> literal<T>(T value)
-            where T : unmanaged
-                => TypedLogicSpec.literal(value);
-
         [MethodImpl(Inline)]
         public static ComparisonPred<T> compare<T>(ComparisonKind kind, ITypedExpr<T> a, ITypedExpr<T> b)
             where T : unmanaged
@@ -31,7 +22,7 @@ namespace Z0.Logix
         [MethodImpl(Inline)]
         public static ComparisonPred<T> compare<T>(ComparisonKind kind, T a, T b)
             where T : unmanaged
-                => new ComparisonPred<T>(kind,literal(a),literal(b));
+                => new ComparisonPred<T>(kind, literal(a), literal(b));
 
         /// <summary>
         /// Defines an equality comparison expression
@@ -75,7 +66,7 @@ namespace Z0.Logix
         [MethodImpl(Inline)]
         public static ComparisonPred<T> lt<T>(T a, T b)
             where T : unmanaged
-                => compare(Lt, literal(a), literal(b));
+                => compare(Lt, a, b);
 
         /// <summary>
         /// Defines a less-than or equal comparison expression
@@ -97,7 +88,7 @@ namespace Z0.Logix
         [MethodImpl(Inline)]
         public static ComparisonPred<T> lteq<T>(T a, T b)
             where T : unmanaged
-                => compare(LtEq, literal(a), literal(b));
+                => compare(LtEq, a, b);
 
         /// <summary>
         /// Defines a greater-than comparison expression
@@ -119,7 +110,7 @@ namespace Z0.Logix
         [MethodImpl(Inline)]
         public static ComparisonPred<T> gt<T>(T a, T b)
             where T : unmanaged
-                => compare(Gt, literal(a), literal(b));
+                => compare(Gt, a, b);
 
         /// <summary>
         /// Defines a greater-than or equal comparison expression
@@ -141,7 +132,7 @@ namespace Z0.Logix
         [MethodImpl(Inline)]
         public static ComparisonPred<T> gteq<T>(T a, T b)
             where T : unmanaged
-                => compare(GtEq, literal(a), literal(b));
+                => compare(GtEq, a, b);
     }
 
 }

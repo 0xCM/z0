@@ -293,14 +293,31 @@ namespace Z0
             => SafeWrap(a.state & ~b.state);
 
         /// <summary>
-        /// Evaluates the implication a -> b
+        /// Evaluates the implication a -> b := a | ~b
         /// </summary>
-        /// <param name="antecedent">The first operand</param>
-        /// <param name="consequent">The second operand</param>
+        /// <param name="a">The first operand</param>
+        /// <param name="b">The second operand</param>
         /// <remarks>See https://en.wikipedia.org/wiki/Material_conditional</remarks>
         [MethodImpl(Inline)]
-        public static bit implies(bit antecedent, bit consequent)
-            => !(antecedent.state == 1 && consequent.state == 0);
+        public static bit imply(bit a, bit b)
+            => a | ~b;
+
+        /// <summary>
+        /// Evaluates the nonimplication a <- b := ~(a | ~b) = ~a & b
+        /// </summary>
+        /// <param name="a">The first operand</param>
+        /// <param name="b">The second operand</param>
+        [MethodImpl(Inline)]
+        public static bit notimply(bit a, bit b)
+            => ~a & b;
+
+        [MethodImpl(Inline)]
+        public static bit cimply(bit a, bit b)
+            => ~a | b;
+
+        [MethodImpl(Inline)]
+        public static bit cnotimply(bit a, bit b)
+            => a & ~b;
 
         /// <summary>
         /// Evaluates the ternary select where the second operand is returned if the first 

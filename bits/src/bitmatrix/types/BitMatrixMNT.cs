@@ -308,7 +308,7 @@ namespace Z0
         /// </summary>
         public readonly BitMatrix<N,M,T> Transpose()
         {
-            var dst = BitMatrix.alloc<N,M,T>();
+            var dst = BitMatrix.natural<N,M,T>();
             for(var row = 0; row < RowCount; row++)
                 dst.SetCol(row, CopyRow(row));            
             return dst;

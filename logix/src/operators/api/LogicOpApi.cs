@@ -20,8 +20,13 @@ namespace Z0.Logix
         /// <summary>
         /// Advertises the supported unary opeators
         /// </summary>
-        public static IEnumerable<UnaryLogicOpKind> UnaryOpKinds
-            => EnumValues.Get<UnaryLogicOpKind>().Enumerate();
+        public static UnaryLogicOpKind[] UnaryOpKinds
+            => new UnaryLogicOpKind[]{
+                UnaryLogicOpKind.False,
+                UnaryLogicOpKind.True,
+                UnaryLogicOpKind.Not,
+                UnaryLogicOpKind.Identity,
+            };
 
         /// <summary>
         /// Advertises the supported binary opeators
@@ -35,15 +40,15 @@ namespace Z0.Logix
                 BinaryLogicOpKind.LeftProject, BinaryLogicOpKind.RightProject,
                 BinaryLogicOpKind.LeftNot, BinaryLogicOpKind.RightNot,
                 BinaryLogicOpKind.Implication, BinaryLogicOpKind.Nonimplication,
-                BinaryLogicOpKind.ConverseImplication, BinaryLogicOpKind.ConverseNomimplication, 
+                BinaryLogicOpKind.ConverseImplication, BinaryLogicOpKind.ConverseNonimplication, 
                 
             };
 
         /// <summary>
         /// Advertises the supported ternary opeators
         /// </summary>
-        public static IEnumerable<TernaryBitOpKind> TernaryOpKinds
-            => range((byte)1,(byte)X4F).Cast<TernaryBitOpKind>();
+        public static TernaryBitOpKind[] TernaryOpKinds
+            => range((byte)1,(byte)X4F).Cast<TernaryBitOpKind>().ToArray();
 
         /// <summary>
         /// Evaluates a unary operator directly without lookup/delegate indirection
@@ -91,11 +96,11 @@ namespace Z0.Logix
                 case BinaryLogicOpKind.LeftProject: return left(a,b);
                 case BinaryLogicOpKind.RightProject: return right(a,b);
 
-                case BinaryLogicOpKind.LeftNot: return leftnot(a,b);
-                case BinaryLogicOpKind.RightNot: return rightnot(a,b);
+                case BinaryLogicOpKind.LeftNot: return lnot(a,b);
+                case BinaryLogicOpKind.RightNot: return rnot(a,b);
                 
                 case BinaryLogicOpKind.ConverseImplication: return cimply(a,b);
-                case BinaryLogicOpKind.ConverseNomimplication: return cnotimply(a,b);
+                case BinaryLogicOpKind.ConverseNonimplication: return cnotimply(a,b);
 
                 default: return dne(kind);
             }
@@ -126,22 +131,22 @@ namespace Z0.Logix
         {
             switch(kind)
             {
+                case BinaryLogicOpKind.True: return @true;
                 case BinaryLogicOpKind.False: return @false;
                 case BinaryLogicOpKind.And: return and;
-                case BinaryLogicOpKind.ConverseNomimplication: return cnotimply;
                 case BinaryLogicOpKind.Nand: return nand;
                 case BinaryLogicOpKind.Or: return or;
                 case BinaryLogicOpKind.Nor: return nor;
                 case BinaryLogicOpKind.XOr: return xor;
                 case BinaryLogicOpKind.Xnor: return xnor;
-                case BinaryLogicOpKind.Nonimplication: return notimply;
                 case BinaryLogicOpKind.LeftProject: return left;
-                case BinaryLogicOpKind.LeftNot: return leftnot;
                 case BinaryLogicOpKind.RightProject: return right;
-                case BinaryLogicOpKind.RightNot: return rightnot;
-                case BinaryLogicOpKind.ConverseImplication: return imply;
-                case BinaryLogicOpKind.Implication: return cimply;
-                case BinaryLogicOpKind.True: return @true;
+                case BinaryLogicOpKind.LeftNot: return lnot;
+                case BinaryLogicOpKind.RightNot: return rnot;
+                case BinaryLogicOpKind.Implication: return imply;
+                case BinaryLogicOpKind.Nonimplication: return notimply;
+                case BinaryLogicOpKind.ConverseImplication: return cimply;
+                case BinaryLogicOpKind.ConverseNonimplication: return cnotimply;
                 default: return dne<bit>(kind);
             }
         }

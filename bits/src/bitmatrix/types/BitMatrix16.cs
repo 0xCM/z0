@@ -318,7 +318,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public BitMatrix16 AndNot(in BitMatrix16 rhs)
-            => BitMatrix.andnot(this, rhs, ref this);
+            => BitMatrix.cnotimply(this, rhs, ref this);
 
         [MethodImpl(Inline)]
         public readonly BitVector16 Diagonal()

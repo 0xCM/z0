@@ -27,10 +27,10 @@ namespace Z0.Logix
         {
             var op = LogicOpApi.lookup(id);
             var x = BitVector4.Zero;
-            x[0] = op(off,off); // 00 -> (0,0)
-            x[1] = op(on,off);  // 01 -> (1,0)
-            x[2] = op(off,on);  // 10 -> (0,1)
-            x[3] = op(on,on);   // 11 -> (1,1)
+            x[0] = op(off,off);
+            x[1] = op(on,off);
+            x[2] = op(off,on);
+            x[3] = op(on,on);
             return x;
         }
         
@@ -52,7 +52,7 @@ namespace Z0.Logix
         public static BitMatrix<N2,N2,byte> Build(UnaryLogicOpKind kind)
         {
             var f = LogicOpApi.lookup(kind);
-            var table = BitMatrix.alloc<N2,N2,byte>();
+            var table = BitMatrix.natural<N2,N2,byte>();
             table[0] = BitVector.natural<N2,byte>(Bits.pack2(f(off), off));
             table[1] = BitVector.natural<N2,byte>(Bits.pack2(f(on), on));
             return table;            
@@ -60,7 +60,7 @@ namespace Z0.Logix
 
         public static BitMatrix<N4,N3,byte> Build(BinaryLogicOpKind kind)
         {
-            var tt = BitMatrix.alloc<N4,N3,byte>();
+            var tt = BitMatrix.natural<N4,N3,byte>();
             var f = LogicOpApi.lookup(kind);
             tt[0] = BitVector.natural<N3,byte>(Bits.pack3(f(off, off), off, off));
             tt[1] = BitVector.natural<N3,byte>(Bits.pack3(f(on, off), off, on));
@@ -71,7 +71,7 @@ namespace Z0.Logix
 
         public static BitMatrix<N8,N4,byte> Build(TernaryBitOpKind kind)
         {
-            var tt = BitMatrix.alloc<N8,N4,byte>();
+            var tt = BitMatrix.natural<N8,N4,byte>();
             var f = LogicOpApi.lookup(kind);
             tt[0] = BitVector.natural<N4,byte>(Bits.pack4(f(off, off, off), off, off, off));
             tt[1] = BitVector.natural<N4,byte>(Bits.pack4(f(off, off, on), off, off, on));
@@ -134,7 +134,7 @@ namespace Z0.Logix
             for(var i=0; i< ops.Length; i++)
             {
                 BitVector4 result = (byte)i;
-                var table = BitMatrix.alloc<N2,N2,byte>();
+                var table = BitMatrix.natural<N2,N2,byte>();
                 table[0] = BitVector.natural<N2,byte>(Bits.pack2(result[0], off));
                 table[1] = BitVector.natural<N2,byte>(Bits.pack2(result[0], on));
                 table.Emit2(dst);
@@ -147,7 +147,7 @@ namespace Z0.Logix
             for(var i=0; i< 16; i++)
             {
                 BitVector4 result = (byte)i;
-                var table = BitMatrix.alloc<N4,N3,byte>();
+                var table = BitMatrix.natural<N4,N3,byte>();
                 table[0] = BitVector.natural<N3,byte>(Bits.pack3(result[0], off, off));
                 table[1] = BitVector.natural<N3,byte>(Bits.pack3(result[1], off, on));
                 table[2] = BitVector.natural<N3,byte>(Bits.pack3(result[2], on, off));
@@ -162,7 +162,7 @@ namespace Z0.Logix
             for(var i=0; i< 256; i++)
             {
                 BitVector8 result = (byte)i;
-                var table = BitMatrix.alloc<N8,N4,byte>();
+                var table = BitMatrix.natural<N8,N4,byte>();
                 table[0] = BitVector.natural<N4,byte>(Bits.pack4(result[0], off, off, off));
                 table[1] = BitVector.natural<N4,byte>(Bits.pack4(result[1], off, off, on));
                 table[2] = BitVector.natural<N4,byte>(Bits.pack4(result[2], off, on, off));

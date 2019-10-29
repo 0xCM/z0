@@ -18,6 +18,7 @@ namespace Z0.Logix
     {
         protected override int CycleCount => Pow2.T08;
 
+
         public void scalar_op_bench()
         {
             scalar_op_bench<uint>(true);

@@ -241,7 +241,7 @@ namespace Z0
         /// Constructs an 8-node graph via the adjacency matrix interpretation
         /// </summary>
         public Graph<byte> ToGraph()
-            => BitGraph.FromMatrix<byte,N8,byte>(BitMatrix<N8,N8,byte>.Load(data));            
+            => BitGraph.from(BitMatrix<N8,byte>.Load(data));            
 
         /// <summary>
         /// Packs the matrix into an unsigned 64-bit integer
@@ -301,7 +301,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public BitMatrix8 AndNot(in BitMatrix8 rhs)
-            => BitMatrix.andnot(this, rhs, ref this);
+            => BitMatrix.cnotimply(this, rhs, ref this);
 
         /// <summary>
         /// Retrives the bitvector determined by the matrix diagonal

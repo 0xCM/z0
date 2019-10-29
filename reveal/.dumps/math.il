@@ -1,4 +1,37 @@
-// 2019-10-28 07:21:23:706
+// 2019-10-29 02:32:26:089
+bool positive(ushort x)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldc.i4.0
+    IL_0002: cgt
+    IL_0004: ret
+
+}
+bool positive(int x)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldc.i4.0
+    IL_0002: cgt
+    IL_0004: ret
+
+}
+bool positive(uint x)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldc.i4.0
+    IL_0002: cgt.un
+    IL_0004: ret
+
+}
+bool positive(long x)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldc.i4.0
+    IL_0002: conv.i8
+    IL_0003: cgt
+    IL_0005: ret
+
+}
 bool positive(ulong x)
 {
     IL_0000: ldarg.0
@@ -790,6 +823,55 @@ ref ulong sub(ref ulong lhs, ulong rhs)
     IL_0005: stind.i8
     IL_0006: ldarg.0
     IL_0007: ret
+
+}
+ref ulong inc(ref ulong src)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.0
+    IL_0002: ldind.i8
+    IL_0003: ldc.i4.1
+    IL_0004: conv.i8
+    IL_0005: add
+    IL_0006: stind.i8
+    IL_0007: ldarg.0
+    IL_0008: ret
+
+}
+bool isPow2(sbyte src)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.0
+    IL_0002: ldc.i4.1
+    IL_0003: sub
+    IL_0004: and
+    IL_0005: ldc.i4.0
+    IL_0006: ceq
+    IL_0008: ret
+
+}
+bool isPow2(byte src)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.0
+    IL_0002: ldc.i4.1
+    IL_0003: sub
+    IL_0004: and
+    IL_0005: ldc.i4.0
+    IL_0006: ceq
+    IL_0008: ret
+
+}
+bool isPow2(short src)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.0
+    IL_0002: ldc.i4.1
+    IL_0003: sub
+    IL_0004: and
+    IL_0005: ldc.i4.0
+    IL_0006: ceq
+    IL_0008: ret
 
 }
 bool isPow2(ushort src)
@@ -2238,37 +2320,42 @@ bool positive(short x)
     IL_0004: ret
 
 }
-bool positive(ushort x)
+bool neq(uint lhs, uint rhs)
 {
     IL_0000: ldarg.0
-    IL_0001: ldc.i4.0
+    IL_0001: ldarg.1
+    IL_0002: ceq
+    IL_0004: ldc.i4.0
+    IL_0005: ceq
+    IL_0007: ret
+
+}
+bool neq(long lhs, long rhs)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: ceq
+    IL_0004: ldc.i4.0
+    IL_0005: ceq
+    IL_0007: ret
+
+}
+bool neq(ulong lhs, ulong rhs)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: ceq
+    IL_0004: ldc.i4.0
+    IL_0005: ceq
+    IL_0007: ret
+
+}
+bool gt(sbyte a, sbyte b)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
     IL_0002: cgt
     IL_0004: ret
-
-}
-bool positive(int x)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldc.i4.0
-    IL_0002: cgt
-    IL_0004: ret
-
-}
-bool positive(uint x)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldc.i4.0
-    IL_0002: cgt.un
-    IL_0004: ret
-
-}
-bool positive(long x)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldc.i4.0
-    IL_0002: conv.i8
-    IL_0003: cgt
-    IL_0005: ret
 
 }
 bool gt(byte a, byte b)
@@ -3901,52 +3988,50 @@ ref long inc(ref long src)
     IL_0008: ret
 
 }
-ref ulong inc(ref ulong src)
+ref long sll(ref long src, int offset)
+{
+    IL_0000: ldarg.0
+    IL_0001: call System.Int64& Z0.math::abs(System.Int64&)
+    IL_0006: dup
+    IL_0007: ldind.i8
+    IL_0008: ldarg.1
+    IL_0009: ldc.i4.s 63
+    IL_000B: and
+    IL_000C: shl
+    IL_000D: stind.i8
+    IL_000E: ldarg.0
+    IL_000F: ret
+
+}
+ref ulong sll(ref ulong src, int offset)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.0
     IL_0002: ldind.i8
-    IL_0003: ldc.i4.1
-    IL_0004: conv.i8
-    IL_0005: add
-    IL_0006: stind.i8
-    IL_0007: ldarg.0
+    IL_0003: ldarg.1
+    IL_0004: ldc.i4.s 63
+    IL_0006: and
+    IL_0007: shl
+    IL_0008: stind.i8
+    IL_0009: ldarg.0
+    IL_000A: ret
+
+}
+sbyte srl(sbyte src, int offset)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call System.Int32 Z0.math::srl32i(System.Int32,System.Int32)
+    IL_0007: conv.i1
     IL_0008: ret
 
 }
-bool isPow2(sbyte src)
+byte srl(byte src, int offset)
 {
     IL_0000: ldarg.0
-    IL_0001: ldarg.0
-    IL_0002: ldc.i4.1
-    IL_0003: sub
-    IL_0004: and
-    IL_0005: ldc.i4.0
-    IL_0006: ceq
-    IL_0008: ret
-
-}
-bool isPow2(byte src)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.0
-    IL_0002: ldc.i4.1
-    IL_0003: sub
-    IL_0004: and
-    IL_0005: ldc.i4.0
-    IL_0006: ceq
-    IL_0008: ret
-
-}
-bool isPow2(short src)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.0
-    IL_0002: ldc.i4.1
-    IL_0003: sub
-    IL_0004: and
-    IL_0005: ldc.i4.0
-    IL_0006: ceq
+    IL_0001: ldarg.1
+    IL_0002: call System.UInt32 Z0.math::srl32u(System.UInt32,System.Int32)
+    IL_0007: conv.u1
     IL_0008: ret
 
 }
@@ -5329,44 +5414,6 @@ bool neq(int lhs, int rhs)
     IL_0007: ret
 
 }
-bool neq(uint lhs, uint rhs)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: ceq
-    IL_0004: ldc.i4.0
-    IL_0005: ceq
-    IL_0007: ret
-
-}
-bool neq(long lhs, long rhs)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: ceq
-    IL_0004: ldc.i4.0
-    IL_0005: ceq
-    IL_0007: ret
-
-}
-bool neq(ulong lhs, ulong rhs)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: ceq
-    IL_0004: ldc.i4.0
-    IL_0005: ceq
-    IL_0007: ret
-
-}
-bool gt(sbyte a, sbyte b)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: cgt
-    IL_0004: ret
-
-}
 sbyte and(sbyte lhs, sbyte rhs)
 {
     IL_0000: ldarg.0
@@ -5721,7 +5768,7 @@ ref double and(ref double lhs, double rhs)
     IL_000B: ret
 
 }
-ulong andnot(ulong a, ulong b)
+ulong cnotimply(ulong a, ulong b)
 {
     IL_0000: ldarg.1
     IL_0001: ldarg.0
@@ -5729,7 +5776,7 @@ ulong andnot(ulong a, ulong b)
     IL_0007: ret
 
 }
-uint andnot(uint a, uint b)
+uint cnotimply(uint a, uint b)
 {
     IL_0000: ldarg.1
     IL_0001: ldarg.0
@@ -5737,7 +5784,7 @@ uint andnot(uint a, uint b)
     IL_0007: ret
 
 }
-byte andnot(byte a, byte b)
+byte cnotimply(byte a, byte b)
 {
     IL_0000: ldarg.1
     IL_0001: ldarg.0
@@ -5746,7 +5793,7 @@ byte andnot(byte a, byte b)
     IL_0008: ret
 
 }
-ushort andnot(ushort a, ushort b)
+ushort cnotimply(ushort a, ushort b)
 {
     IL_0000: ldarg.1
     IL_0001: ldarg.0
@@ -5977,6 +6024,40 @@ ref ulong not(ref ulong src)
     IL_0004: stind.i8
     IL_0005: ldarg.0
     IL_0006: ret
+
+}
+byte notimply(byte a, byte b)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call System.UInt32 System.Runtime.Intrinsics.X86.Bmi1::AndNot(System.UInt32,System.UInt32)
+    IL_0007: conv.u1
+    IL_0008: ret
+
+}
+ushort notimply(ushort a, ushort b)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call System.UInt32 System.Runtime.Intrinsics.X86.Bmi1::AndNot(System.UInt32,System.UInt32)
+    IL_0007: conv.u2
+    IL_0008: ret
+
+}
+ulong notimply(ulong a, ulong b)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call System.UInt64 System.Runtime.Intrinsics.X86.Bmi1/X64::AndNot(System.UInt64,System.UInt64)
+    IL_0007: ret
+
+}
+uint notimply(uint a, uint b)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call System.UInt32 System.Runtime.Intrinsics.X86.Bmi1::AndNot(System.UInt32,System.UInt32)
+    IL_0007: ret
 
 }
 sbyte or(sbyte a, sbyte b)
@@ -6774,52 +6855,5 @@ ref uint sll(ref uint src, int offset)
     IL_0008: stind.i4
     IL_0009: ldarg.0
     IL_000A: ret
-
-}
-ref long sll(ref long src, int offset)
-{
-    IL_0000: ldarg.0
-    IL_0001: call System.Int64& Z0.math::abs(System.Int64&)
-    IL_0006: dup
-    IL_0007: ldind.i8
-    IL_0008: ldarg.1
-    IL_0009: ldc.i4.s 63
-    IL_000B: and
-    IL_000C: shl
-    IL_000D: stind.i8
-    IL_000E: ldarg.0
-    IL_000F: ret
-
-}
-ref ulong sll(ref ulong src, int offset)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.0
-    IL_0002: ldind.i8
-    IL_0003: ldarg.1
-    IL_0004: ldc.i4.s 63
-    IL_0006: and
-    IL_0007: shl
-    IL_0008: stind.i8
-    IL_0009: ldarg.0
-    IL_000A: ret
-
-}
-sbyte srl(sbyte src, int offset)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: call System.Int32 Z0.math::srl32i(System.Int32,System.Int32)
-    IL_0007: conv.i1
-    IL_0008: ret
-
-}
-byte srl(byte src, int offset)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: call System.UInt32 Z0.math::srl32u(System.UInt32,System.Int32)
-    IL_0007: conv.u1
-    IL_0008: ret
 
 }

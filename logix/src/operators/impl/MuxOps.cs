@@ -27,7 +27,6 @@ namespace Z0.Logix
                 return i2;
             else
                 return i3;
-
         }
 
         /*

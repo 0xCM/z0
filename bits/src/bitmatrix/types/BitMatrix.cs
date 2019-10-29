@@ -23,6 +23,7 @@ namespace Z0
                 
         Span<T> data;
 
+
         public static readonly uint N = bitsize<T>();
 
         
@@ -38,10 +39,11 @@ namespace Z0
             this.data = data;
         }
 
-        public Span<T> Rows 
+        [MethodImpl(Inline)]
+        public BitMatrix(BitVector<T> fill)
         {
-            [MethodImpl(Inline)]
-            get => data;
+            this.data = new T[fill.Length];
+            this.data.Fill(fill);
         }
 
         public ref T Head 
@@ -56,18 +58,34 @@ namespace Z0
             get => data.AsBytes();
         }
 
-        public ref T this[int row]
+        public Span<T> Data
         {
             [MethodImpl(Inline)]
-            get => ref Row(row);
+            get => data;
         }
+
+        public ref BitVector<T> this[int row]
+        {
+            [MethodImpl(Inline)]
+            get => ref RowVector(row);
+        }
+
+        public bit this[int row, int col]
+        {
+            [MethodImpl(Inline)]
+            get => gbits.test(data[row],col);
+            
+            [MethodImpl(Inline)]
+            set => gbits.set(ref data[row], (byte)col, value);
+        }
+
 
         [MethodImpl(Inline)]
         public ref T Row(int offset)
             => ref tail(data, offset);
 
         [MethodImpl(Inline)]
-        public ref BitVector<T> RowVector(int offset)
+        ref BitVector<T> RowVector(int offset)
             => ref AsBitVector(ref tail(data, offset));
 
         [MethodImpl(Inline)]
@@ -88,7 +106,7 @@ namespace Z0
             if(typeof(T) == typeof(byte))
                 dst = generic<T>(Vector256.CreateScalar(data.TakeUInt64()));
             else if(typeof(T) == typeof(short))
-                ginx.vloadu(in Head, out dst);
+                ginx.vloadu(in head(data), out dst);
             else
                 ginx.vloadu(in Row(row), out dst);
         }

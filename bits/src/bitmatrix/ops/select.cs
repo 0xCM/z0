@@ -90,7 +90,5 @@ namespace Z0
             BitPoints.select(A.HeadPtr, B.HeadPtr, C.HeadPtr, Z.HeadPtr);
             return ref Z;
         }
-
     }
-
 }

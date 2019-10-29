@@ -33,10 +33,10 @@ namespace Z0.Logix
         /// <summary>
         /// Creates a bit literal expression
         /// </summary>
-        /// <param name="value">The literal value</param>
+        /// <param name="a">The literal value</param>
         [MethodImpl(Inline)]
-        public static LiteralLogicExpr literal(bit value)
-            => new LiteralLogicExpr(value);
+        public static LiteralLogicExpr literal(bit a)
+            => new LiteralLogicExpr(a);
 
         /// <summary>
         /// Defines a logical identity expression
@@ -47,33 +47,66 @@ namespace Z0.Logix
             => unary(UnaryLogicOpKind.Identity, a);
 
         /// <summary>
-        /// Defines a unary logic expression
+        /// Defines a unary logic operator over an expression
         /// </summary>
         /// <param name="op">The operator classifier</param>
-        /// <param name="operand">The operand</param>
+        /// <param name="a">The operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static UnaryLogicOp unary(UnaryLogicOpKind op, ILogicExpr operand)
-            => new UnaryLogicOp(op,operand);
+        public static UnaryLogicOp unary(UnaryLogicOpKind op, ILogicExpr a)
+            => new UnaryLogicOp(op,a);
 
         /// <summary>
-        /// Defines a binary logic operator
+        /// Defines a unary logic operator over a literal
         /// </summary>
-        /// <param name="op">The operator classifier</param>
-        /// <param name="left">The first operand</param>
-        /// <param name="right">The second operand</param>
+        /// <param name="kind">The operator classifier</param>
+        /// <param name="a">The operand</param>
+        /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static BinaryLogicOp binary(BinaryLogicOpKind op, ILogicExpr left, ILogicExpr right)
-            => new BinaryLogicOp(op,left,right);
+        public static UnaryLogicOp unary(UnaryLogicOpKind kind, bit a)
+            => new UnaryLogicOp(kind,literal(a));
 
         /// <summary>
-        /// Defines a binary logic operator
+        /// Defines a binary logic operator over expression operands
         /// </summary>
-        /// <param name="op">The operator classifier</param>
-        /// <param name="left">The first operand</param>
-        /// <param name="right">The second operand</param>
+        /// <param name="kind">The operator classifier</param>
+        /// <param name="a">The first operand</param>
+        /// <param name="b">The second operand</param>
         [MethodImpl(Inline)]
-        public static TernaryLogicOp ternary(TernaryBitOpKind op, ILogicExpr first, ILogicExpr second, ILogicExpr third)
-            => new TernaryLogicOp(op,first,second,third);
+        public static BinaryLogicOp binary(BinaryLogicOpKind kind, ILogicExpr a, ILogicExpr b)
+            => new BinaryLogicOp(kind,a,b);
+
+        /// <summary>
+        /// Defines a binary logic operator over literal operands
+        /// </summary>
+        /// <param name="kind">The operator classifier</param>
+        /// <param name="a">The first operand</param>
+        /// <param name="b">The second operand</param>
+        [MethodImpl(Inline)]
+        public static BinaryLogicOp binary(BinaryLogicOpKind kind, bit a, bit b)
+            => new BinaryLogicOp(kind,literal(a),literal(b));
+
+        /// <summary>
+        /// Defines a ternary logic operator over expression operands
+        /// </summary>
+        /// <param name="kind">The operator classifier</param>
+        /// <param name="a">The first operand</param>
+        /// <param name="b">The second operand</param>
+        /// <param name="c">The third operand</param>
+        [MethodImpl(Inline)]
+        public static TernaryLogicOp ternary(TernaryBitOpKind kind, ILogicExpr a, ILogicExpr b, ILogicExpr c)
+            => new TernaryLogicOp(kind,a,b,c);
+
+        /// <summary>
+        /// Defines a ternary logic operator over literal operands
+        /// </summary>
+        /// <param name="kind">The operator classifier</param>
+        /// <param name="a">The first operand</param>
+        /// <param name="b">The second operand</param>
+        /// <param name="c">The third operand</param>
+        [MethodImpl(Inline)]
+        public static TernaryLogicOp ternary(TernaryBitOpKind kind, bit a, bit b, bit c)
+            => new TernaryLogicOp(kind,literal(a),literal(b),literal(c));
+
     }
 }

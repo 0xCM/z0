@@ -108,7 +108,7 @@ namespace Z0
         {
             var rc = rowdim(A,B,C);
             for(var i=0; i<rc; i++)
-                C[i] = BitVector.andnot(A[i],B[i]);
+                C[i] = BitVector.cnotimply(A[i],B[i]);
             return C;
 
         }
@@ -193,7 +193,7 @@ namespace Z0
         [MethodImpl(Inline)]
         static Dim2 dim<T>(RowBits<T> A)
             where T : unmanaged
-                => (A.RowCount, A.ColCount);
+                => (A.RowCount, A.RowWidth);
 
         [MethodImpl(Inline)]
         static int rowdim<T>(RowBits<T> A)

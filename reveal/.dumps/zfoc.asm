@@ -1,6 +1,6 @@
-; 2019-10-28 07:21:26:282
+; 2019-10-29 02:32:28:677
 ; function: ReadOnlySpan<byte> bitseq(byte value)
-; location: [7FFDDBAEDC30h, 7FFDDBAEDC71h]
+; location: [7FFDDBAF25D0h, 7FFDDBAF2611h]
 0000h sub rsp,28h                   ; SUB(Sub_rm64_imm8) [RSP,28h:imm64]                   encoding(4 bytes) = 48 83 ec 28
 0004h nop                           ; NOP(Nopd)                                            encoding(1 byte ) = 90
 0005h movzx eax,dl                  ; MOVZX(Movzx_r32_rm8) [EAX,DL]                        encoding(3 bytes) = 0f b6 c2
@@ -10,19 +10,19 @@
 0011h cmp rdx,800h                  ; CMP(Cmp_rm64_imm32) [RDX,800h:imm64]                 encoding(7 bytes) = 48 81 fa 00 08 00 00
 0018h ja short 003ch                ; JA(Ja_rel8_64) [3Ch:jmp64]                           encoding(2 bytes) = 77 22
 001ah movsxd rax,eax                ; MOVSXD(Movsxd_r64_rm32) [RAX,EAX]                    encoding(3 bytes) = 48 63 c0
-001dh mov rdx,20574D98401h          ; MOV(Mov_r64_imm64) [RDX,20574d98401h:imm64]          encoding(10 bytes) = 48 ba 01 84 d9 74 05 02 00 00
+001dh mov rdx,1CFF8CB83DDh          ; MOV(Mov_r64_imm64) [RDX,1cff8cb83ddh:imm64]          encoding(10 bytes) = 48 ba dd 83 cb f8 cf 01 00 00
 0027h add rax,rdx                   ; ADD(Add_r64_rm64) [RAX,RDX]                          encoding(3 bytes) = 48 03 c2
 002ah mov [rcx],rax                 ; MOV(Mov_rm64_r64) [mem(64u,RCX:br,DS:sr),RAX]        encoding(3 bytes) = 48 89 01
 002dh mov dword ptr [rcx+8],8       ; MOV(Mov_rm32_imm32) [mem(32u,RCX:br,DS:sr),8h:imm32] encoding(7 bytes) = c7 41 08 08 00 00 00
 0034h mov rax,rcx                   ; MOV(Mov_r64_rm64) [RAX,RCX]                          encoding(3 bytes) = 48 8b c1
 0037h add rsp,28h                   ; ADD(Add_rm64_imm8) [RSP,28h:imm64]                   encoding(4 bytes) = 48 83 c4 28
 003bh ret                           ; RET(Retnq)                                           encoding(1 byte ) = c3
-003ch call 7FFDDB4304C8h            ; CALL(Call_rel32_64) [FFFFFFFFFF942898h:jmp64]        encoding(5 bytes) = e8 57 28 94 ff
+003ch call 7FFDDB4305C8h            ; CALL(Call_rel32_64) [FFFFFFFFFF93DFF8h:jmp64]        encoding(5 bytes) = e8 b7 df 93 ff
 0041h int 3                         ; INT(Int3)                                            encoding(1 byte ) = cc
-; static ReadOnlySpan<byte> bitseqBytes => new byte[66]{0x48,0x83,0xEC,0x28,0x90,0x0F,0xB6,0xC2,0xC1,0xE0,0x03,0x8B,0xD0,0x48,0x83,0xC2,0x08,0x48,0x81,0xFA,0x00,0x08,0x00,0x00,0x77,0x22,0x48,0x63,0xC0,0x48,0xBA,0x01,0x84,0xD9,0x74,0x05,0x02,0x00,0x00,0x48,0x03,0xC2,0x48,0x89,0x01,0xC7,0x41,0x08,0x08,0x00,0x00,0x00,0x48,0x8B,0xC1,0x48,0x83,0xC4,0x28,0xC3,0xE8,0x57,0x28,0x94,0xFF,0xCC};
+; static ReadOnlySpan<byte> bitseqBytes => new byte[66]{0x48,0x83,0xEC,0x28,0x90,0x0F,0xB6,0xC2,0xC1,0xE0,0x03,0x8B,0xD0,0x48,0x83,0xC2,0x08,0x48,0x81,0xFA,0x00,0x08,0x00,0x00,0x77,0x22,0x48,0x63,0xC0,0x48,0xBA,0xDD,0x83,0xCB,0xF8,0xCF,0x01,0x00,0x00,0x48,0x03,0xC2,0x48,0x89,0x01,0xC7,0x41,0x08,0x08,0x00,0x00,0x00,0x48,0x8B,0xC1,0x48,0x83,0xC4,0x28,0xC3,0xE8,0xB7,0xDF,0x93,0xFF,0xCC};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: ReadOnlySpan<byte> bitseq(BitSize offset, BitSize count)
-; location: [7FFDDBAEDC90h, 7FFDDBAEDCC9h]
+; location: [7FFDDBAF2630h, 7FFDDBAF2669h]
 0000h sub rsp,28h                   ; SUB(Sub_rm64_imm8) [RSP,28h:imm64]                   encoding(4 bytes) = 48 83 ec 28
 0004h nop                           ; NOP(Nopd)                                            encoding(1 byte ) = 90
 0005h mov eax,edx                   ; MOV(Mov_r32_rm32) [EAX,EDX]                          encoding(2 bytes) = 8b c2
@@ -31,19 +31,19 @@
 000dh cmp rax,800h                  ; CMP(Cmp_RAX_imm32) [RAX,800h:imm64]                  encoding(6 bytes) = 48 3d 00 08 00 00
 0013h ja short 0034h                ; JA(Ja_rel8_64) [34h:jmp64]                           encoding(2 bytes) = 77 1f
 0015h movsxd rax,edx                ; MOVSXD(Movsxd_r64_rm32) [RAX,EDX]                    encoding(3 bytes) = 48 63 c2
-0018h mov rdx,20574D98401h          ; MOV(Mov_r64_imm64) [RDX,20574d98401h:imm64]          encoding(10 bytes) = 48 ba 01 84 d9 74 05 02 00 00
+0018h mov rdx,1CFF8CB83DDh          ; MOV(Mov_r64_imm64) [RDX,1cff8cb83ddh:imm64]          encoding(10 bytes) = 48 ba dd 83 cb f8 cf 01 00 00
 0022h add rax,rdx                   ; ADD(Add_r64_rm64) [RAX,RDX]                          encoding(3 bytes) = 48 03 c2
 0025h mov [rcx],rax                 ; MOV(Mov_rm64_r64) [mem(64u,RCX:br,DS:sr),RAX]        encoding(3 bytes) = 48 89 01
 0028h mov [rcx+8],r8d               ; MOV(Mov_rm32_r32) [mem(32u,RCX:br,DS:sr),R8D]        encoding(4 bytes) = 44 89 41 08
 002ch mov rax,rcx                   ; MOV(Mov_r64_rm64) [RAX,RCX]                          encoding(3 bytes) = 48 8b c1
 002fh add rsp,28h                   ; ADD(Add_rm64_imm8) [RSP,28h:imm64]                   encoding(4 bytes) = 48 83 c4 28
 0033h ret                           ; RET(Retnq)                                           encoding(1 byte ) = c3
-0034h call 7FFDDB4304C8h            ; CALL(Call_rel32_64) [FFFFFFFFFF942838h:jmp64]        encoding(5 bytes) = e8 ff 27 94 ff
+0034h call 7FFDDB4305C8h            ; CALL(Call_rel32_64) [FFFFFFFFFF93DF98h:jmp64]        encoding(5 bytes) = e8 5f df 93 ff
 0039h int 3                         ; INT(Int3)                                            encoding(1 byte ) = cc
-; static ReadOnlySpan<byte> bitseqBytes => new byte[58]{0x48,0x83,0xEC,0x28,0x90,0x8B,0xC2,0x45,0x8B,0xC8,0x49,0x03,0xC1,0x48,0x3D,0x00,0x08,0x00,0x00,0x77,0x1F,0x48,0x63,0xC2,0x48,0xBA,0x01,0x84,0xD9,0x74,0x05,0x02,0x00,0x00,0x48,0x03,0xC2,0x48,0x89,0x01,0x44,0x89,0x41,0x08,0x48,0x8B,0xC1,0x48,0x83,0xC4,0x28,0xC3,0xE8,0xFF,0x27,0x94,0xFF,0xCC};
+; static ReadOnlySpan<byte> bitseqBytes => new byte[58]{0x48,0x83,0xEC,0x28,0x90,0x8B,0xC2,0x45,0x8B,0xC8,0x49,0x03,0xC1,0x48,0x3D,0x00,0x08,0x00,0x00,0x77,0x1F,0x48,0x63,0xC2,0x48,0xBA,0xDD,0x83,0xCB,0xF8,0xCF,0x01,0x00,0x00,0x48,0x03,0xC2,0x48,0x89,0x01,0x44,0x89,0x41,0x08,0x48,0x8B,0xC1,0x48,0x83,0xC4,0x28,0xC3,0xE8,0x5F,0xDF,0x93,0xFF,0xCC};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: ByteInfo byteinfo(byte src)
-; location: [7FFDDBAEE0F0h, 7FFDDBAEE18Fh]
+; location: [7FFDDBAF2A90h, 7FFDDBAF2B2Fh]
 0000h push rdi                      ; PUSH(Push_r64) [RDI]                                 encoding(1 byte ) = 57
 0001h push rsi                      ; PUSH(Push_r64) [RSI]                                 encoding(1 byte ) = 56
 0002h push rbx                      ; PUSH(Push_r64) [RBX]                                 encoding(1 byte ) = 53
@@ -56,8 +56,8 @@
 001bh mov esi,edx                   ; MOV(Mov_r32_rm32) [ESI,EDX]                          encoding(2 bytes) = 8b f2
 001dh mov rcx,7FFDDB4D8058h         ; MOV(Mov_r64_imm64) [RCX,7ffddb4d8058h:imm64]         encoding(10 bytes) = 48 b9 58 80 4d db fd 7f 00 00
 0027h mov edx,17Ah                  ; MOV(Mov_r32_imm32) [EDX,17ah:imm32]                  encoding(5 bytes) = ba 7a 01 00 00
-002ch call 7FFE3AF248B0h            ; CALL(Call_rel32_64) [5F4367C0h:jmp64]                encoding(5 bytes) = e8 8f 67 43 5f
-0031h mov rax,205100057C0h          ; MOV(Mov_r64_imm64) [RAX,205100057c0h:imm64]          encoding(10 bytes) = 48 b8 c0 57 00 10 05 02 00 00
+002ch call 7FFE3AF248B0h            ; CALL(Call_rel32_64) [5F431E20h:jmp64]                encoding(5 bytes) = e8 ef 1d 43 5f
+0031h mov rax,1CFF06557C0h          ; MOV(Mov_r64_imm64) [RAX,1cff06557c0h:imm64]          encoding(10 bytes) = 48 b8 c0 57 65 f0 cf 01 00 00
 003bh mov rax,[rax]                 ; MOV(Mov_r64_rm64) [RAX,mem(64u,RAX:br,DS:sr)]        encoding(3 bytes) = 48 8b 00
 003eh movzx edx,sil                 ; MOVZX(Movzx_r32_rm8) [EDX,SIL]                       encoding(4 bytes) = 40 0f b6 d6
 0042h cmp edx,[rax+8]               ; CMP(Cmp_r32_rm32) [EDX,mem(32u,RAX:br,DS:sr)]        encoding(3 bytes) = 3b 50 08
@@ -76,9 +76,9 @@
 0072h mov [r9+18h],dl               ; MOV(Mov_rm8_r8) [mem(8u,R9:br,DS:sr),DL]             encoding(4 bytes) = 41 88 51 18
 0076h mov rdi,rbx                   ; MOV(Mov_r64_rm64) [RDI,RBX]                          encoding(3 bytes) = 48 8b fb
 0079h lea rsi,[rsp+20h]             ; LEA(Lea_r64_m) [RSI,mem(Unknown,RSP:br,SS:sr)]       encoding(5 bytes) = 48 8d 74 24 20
-007eh call 7FFE3AF23690h            ; CALL(Call_rel32_64) [5F4355A0h:jmp64]                encoding(5 bytes) = e8 1d 55 43 5f
-0083h call 7FFE3AF23690h            ; CALL(Call_rel32_64) [5F4355A0h:jmp64]                encoding(5 bytes) = e8 18 55 43 5f
-0088h call 7FFE3AF23690h            ; CALL(Call_rel32_64) [5F4355A0h:jmp64]                encoding(5 bytes) = e8 13 55 43 5f
+007eh call 7FFE3AF23690h            ; CALL(Call_rel32_64) [5F430C00h:jmp64]                encoding(5 bytes) = e8 7d 0b 43 5f
+0083h call 7FFE3AF23690h            ; CALL(Call_rel32_64) [5F430C00h:jmp64]                encoding(5 bytes) = e8 78 0b 43 5f
+0088h call 7FFE3AF23690h            ; CALL(Call_rel32_64) [5F430C00h:jmp64]                encoding(5 bytes) = e8 73 0b 43 5f
 008dh movsq                         ; MOVSQ(Movsq_m64_m64) [mem(64u),mem(64u,DS:sr)]       encoding(2 bytes) = 48 a5
 008fh mov rax,rbx                   ; MOV(Mov_r64_rm64) [RAX,RBX]                          encoding(3 bytes) = 48 8b c3
 0092h add rsp,40h                   ; ADD(Add_rm64_imm8) [RSP,40h:imm64]                   encoding(4 bytes) = 48 83 c4 40
@@ -86,12 +86,12 @@
 0097h pop rsi                       ; POP(Pop_r64) [RSI]                                   encoding(1 byte ) = 5e
 0098h pop rdi                       ; POP(Pop_r64) [RDI]                                   encoding(1 byte ) = 5f
 0099h ret                           ; RET(Retnq)                                           encoding(1 byte ) = c3
-009ah call 7FFE3B04EF00h            ; CALL(Call_rel32_64) [5F560E10h:jmp64]                encoding(5 bytes) = e8 71 0d 56 5f
+009ah call 7FFE3B04EF00h            ; CALL(Call_rel32_64) [5F55C470h:jmp64]                encoding(5 bytes) = e8 d1 c3 55 5f
 009fh int 3                         ; INT(Int3)                                            encoding(1 byte ) = cc
-; static ReadOnlySpan<byte> byteinfoBytes => new byte[160]{0x57,0x56,0x53,0x48,0x83,0xEC,0x40,0x33,0xC0,0x48,0x89,0x44,0x24,0x20,0x48,0x89,0x44,0x24,0x28,0x48,0x89,0x44,0x24,0x30,0x48,0x8B,0xD9,0x8B,0xF2,0x48,0xB9,0x58,0x80,0x4D,0xDB,0xFD,0x7F,0x00,0x00,0xBA,0x7A,0x01,0x00,0x00,0xE8,0x8F,0x67,0x43,0x5F,0x48,0xB8,0xC0,0x57,0x00,0x10,0x05,0x02,0x00,0x00,0x48,0x8B,0x00,0x40,0x0F,0xB6,0xD6,0x3B,0x50,0x08,0x73,0x53,0x48,0x63,0xD2,0x48,0xC1,0xE2,0x05,0x48,0x8D,0x44,0x10,0x10,0x0F,0xB6,0x50,0x18,0x48,0x8B,0x08,0x4C,0x8B,0x40,0x08,0x48,0x8B,0x40,0x10,0x4C,0x8D,0x4C,0x24,0x20,0x49,0x89,0x09,0x4D,0x89,0x41,0x08,0x49,0x89,0x41,0x10,0x41,0x88,0x51,0x18,0x48,0x8B,0xFB,0x48,0x8D,0x74,0x24,0x20,0xE8,0x1D,0x55,0x43,0x5F,0xE8,0x18,0x55,0x43,0x5F,0xE8,0x13,0x55,0x43,0x5F,0x48,0xA5,0x48,0x8B,0xC3,0x48,0x83,0xC4,0x40,0x5B,0x5E,0x5F,0xC3,0xE8,0x71,0x0D,0x56,0x5F,0xCC};
+; static ReadOnlySpan<byte> byteinfoBytes => new byte[160]{0x57,0x56,0x53,0x48,0x83,0xEC,0x40,0x33,0xC0,0x48,0x89,0x44,0x24,0x20,0x48,0x89,0x44,0x24,0x28,0x48,0x89,0x44,0x24,0x30,0x48,0x8B,0xD9,0x8B,0xF2,0x48,0xB9,0x58,0x80,0x4D,0xDB,0xFD,0x7F,0x00,0x00,0xBA,0x7A,0x01,0x00,0x00,0xE8,0xEF,0x1D,0x43,0x5F,0x48,0xB8,0xC0,0x57,0x65,0xF0,0xCF,0x01,0x00,0x00,0x48,0x8B,0x00,0x40,0x0F,0xB6,0xD6,0x3B,0x50,0x08,0x73,0x53,0x48,0x63,0xD2,0x48,0xC1,0xE2,0x05,0x48,0x8D,0x44,0x10,0x10,0x0F,0xB6,0x50,0x18,0x48,0x8B,0x08,0x4C,0x8B,0x40,0x08,0x48,0x8B,0x40,0x10,0x4C,0x8D,0x4C,0x24,0x20,0x49,0x89,0x09,0x4D,0x89,0x41,0x08,0x49,0x89,0x41,0x10,0x41,0x88,0x51,0x18,0x48,0x8B,0xFB,0x48,0x8D,0x74,0x24,0x20,0xE8,0x7D,0x0B,0x43,0x5F,0xE8,0x78,0x0B,0x43,0x5F,0xE8,0x73,0x0B,0x43,0x5F,0x48,0xA5,0x48,0x8B,0xC3,0x48,0x83,0xC4,0x40,0x5B,0x5E,0x5F,0xC3,0xE8,0xD1,0xC3,0x55,0x5F,0xCC};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: ReadOnlySpan<byte> bitseq8i(sbyte src)
-; location: [7FFDDBAEE1B0h, 7FFDDBAEE220h]
+; location: [7FFDDBAF2B50h, 7FFDDBAF2BC0h]
 0000h push rdi                      ; PUSH(Push_r64) [RDI]                                 encoding(1 byte ) = 57
 0001h push rsi                      ; PUSH(Push_r64) [RSI]                                 encoding(1 byte ) = 56
 0002h sub rsp,28h                   ; SUB(Sub_rm64_imm8) [RSP,28h:imm64]                   encoding(4 bytes) = 48 83 ec 28
@@ -100,8 +100,8 @@
 000dh movsx rdi,byte ptr [rsp+48h]  ; MOVSX(Movsx_r64_rm8) [RDI,mem(8i,RSP:br,SS:sr)]      encoding(6 bytes) = 48 0f be 7c 24 48
 0013h mov rcx,7FFDDB4D8058h         ; MOV(Mov_r64_imm64) [RCX,7ffddb4d8058h:imm64]         encoding(10 bytes) = 48 b9 58 80 4d db fd 7f 00 00
 001dh mov edx,17Ah                  ; MOV(Mov_r32_imm32) [EDX,17ah:imm32]                  encoding(5 bytes) = ba 7a 01 00 00
-0022h call 7FFE3AF248B0h            ; CALL(Call_rel32_64) [5F436700h:jmp64]                encoding(5 bytes) = e8 d9 66 43 5f
-0027h mov rax,205100057C0h          ; MOV(Mov_r64_imm64) [RAX,205100057c0h:imm64]          encoding(10 bytes) = 48 b8 c0 57 00 10 05 02 00 00
+0022h call 7FFE3AF248B0h            ; CALL(Call_rel32_64) [5F431D60h:jmp64]                encoding(5 bytes) = e8 39 1d 43 5f
+0027h mov rax,1CFF06557C0h          ; MOV(Mov_r64_imm64) [RAX,1cff06557c0h:imm64]          encoding(10 bytes) = 48 b8 c0 57 65 f0 cf 01 00 00
 0031h mov rax,[rax]                 ; MOV(Mov_r64_rm64) [RAX,mem(64u,RAX:br,DS:sr)]        encoding(3 bytes) = 48 8b 00
 0034h movzx edx,dil                 ; MOVZX(Movzx_r32_rm8) [EDX,DIL]                       encoding(4 bytes) = 40 0f b6 d7
 0038h cmp edx,[rax+8]               ; CMP(Cmp_r32_rm32) [EDX,mem(32u,RAX:br,DS:sr)]        encoding(3 bytes) = 3b 50 08
@@ -123,12 +123,12 @@
 0068h pop rsi                       ; POP(Pop_r64) [RSI]                                   encoding(1 byte ) = 5e
 0069h pop rdi                       ; POP(Pop_r64) [RDI]                                   encoding(1 byte ) = 5f
 006ah ret                           ; RET(Retnq)                                           encoding(1 byte ) = c3
-006bh call 7FFE3B04EF00h            ; CALL(Call_rel32_64) [5F560D50h:jmp64]                encoding(5 bytes) = e8 e0 0c 56 5f
+006bh call 7FFE3B04EF00h            ; CALL(Call_rel32_64) [5F55C3B0h:jmp64]                encoding(5 bytes) = e8 40 c3 55 5f
 0070h int 3                         ; INT(Int3)                                            encoding(1 byte ) = cc
-; static ReadOnlySpan<byte> bitseq8iBytes => new byte[113]{0x57,0x56,0x48,0x83,0xEC,0x28,0x89,0x54,0x24,0x48,0x48,0x8B,0xF1,0x48,0x0F,0xBE,0x7C,0x24,0x48,0x48,0xB9,0x58,0x80,0x4D,0xDB,0xFD,0x7F,0x00,0x00,0xBA,0x7A,0x01,0x00,0x00,0xE8,0xD9,0x66,0x43,0x5F,0x48,0xB8,0xC0,0x57,0x00,0x10,0x05,0x02,0x00,0x00,0x48,0x8B,0x00,0x40,0x0F,0xB6,0xD7,0x3B,0x50,0x08,0x73,0x2E,0x48,0x63,0xD2,0x48,0xC1,0xE2,0x05,0x48,0x8B,0x44,0x10,0x10,0x48,0x85,0xC0,0x75,0x06,0x33,0xD2,0x33,0xC9,0xEB,0x07,0x48,0x8D,0x50,0x10,0x8B,0x48,0x08,0x48,0x89,0x16,0x89,0x4E,0x08,0x48,0x8B,0xC6,0x48,0x83,0xC4,0x28,0x5E,0x5F,0xC3,0xE8,0xE0,0x0C,0x56,0x5F,0xCC};
+; static ReadOnlySpan<byte> bitseq8iBytes => new byte[113]{0x57,0x56,0x48,0x83,0xEC,0x28,0x89,0x54,0x24,0x48,0x48,0x8B,0xF1,0x48,0x0F,0xBE,0x7C,0x24,0x48,0x48,0xB9,0x58,0x80,0x4D,0xDB,0xFD,0x7F,0x00,0x00,0xBA,0x7A,0x01,0x00,0x00,0xE8,0x39,0x1D,0x43,0x5F,0x48,0xB8,0xC0,0x57,0x65,0xF0,0xCF,0x01,0x00,0x00,0x48,0x8B,0x00,0x40,0x0F,0xB6,0xD7,0x3B,0x50,0x08,0x73,0x2E,0x48,0x63,0xD2,0x48,0xC1,0xE2,0x05,0x48,0x8B,0x44,0x10,0x10,0x48,0x85,0xC0,0x75,0x06,0x33,0xD2,0x33,0xC9,0xEB,0x07,0x48,0x8D,0x50,0x10,0x8B,0x48,0x08,0x48,0x89,0x16,0x89,0x4E,0x08,0x48,0x8B,0xC6,0x48,0x83,0xC4,0x28,0x5E,0x5F,0xC3,0xE8,0x40,0xC3,0x55,0x5F,0xCC};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: ReadOnlySpan<byte> bitseq8u(byte src)
-; location: [7FFDDBAEE240h, 7FFDDBAEE2ACh]
+; location: [7FFDDBAF2BE0h, 7FFDDBAF2C4Ch]
 0000h push rdi                      ; PUSH(Push_r64) [RDI]                                 encoding(1 byte ) = 57
 0001h push rsi                      ; PUSH(Push_r64) [RSI]                                 encoding(1 byte ) = 56
 0002h sub rsp,28h                   ; SUB(Sub_rm64_imm8) [RSP,28h:imm64]                   encoding(4 bytes) = 48 83 ec 28
@@ -137,8 +137,8 @@
 000dh movzx edi,byte ptr [rsp+48h]  ; MOVZX(Movzx_r32_rm8) [EDI,mem(8u,RSP:br,SS:sr)]      encoding(6 bytes) = 40 0f b6 7c 24 48
 0013h mov rcx,7FFDDB4D8058h         ; MOV(Mov_r64_imm64) [RCX,7ffddb4d8058h:imm64]         encoding(10 bytes) = 48 b9 58 80 4d db fd 7f 00 00
 001dh mov edx,17Ah                  ; MOV(Mov_r32_imm32) [EDX,17ah:imm32]                  encoding(5 bytes) = ba 7a 01 00 00
-0022h call 7FFE3AF248B0h            ; CALL(Call_rel32_64) [5F436670h:jmp64]                encoding(5 bytes) = e8 49 66 43 5f
-0027h mov rax,205100057C0h          ; MOV(Mov_r64_imm64) [RAX,205100057c0h:imm64]          encoding(10 bytes) = 48 b8 c0 57 00 10 05 02 00 00
+0022h call 7FFE3AF248B0h            ; CALL(Call_rel32_64) [5F431CD0h:jmp64]                encoding(5 bytes) = e8 a9 1c 43 5f
+0027h mov rax,1CFF06557C0h          ; MOV(Mov_r64_imm64) [RAX,1cff06557c0h:imm64]          encoding(10 bytes) = 48 b8 c0 57 65 f0 cf 01 00 00
 0031h mov rax,[rax]                 ; MOV(Mov_r64_rm64) [RAX,mem(64u,RAX:br,DS:sr)]        encoding(3 bytes) = 48 8b 00
 0034h cmp edi,[rax+8]               ; CMP(Cmp_r32_rm32) [EDI,mem(32u,RAX:br,DS:sr)]        encoding(3 bytes) = 3b 78 08
 0037h jae short 0067h               ; JAE(Jae_rel8_64) [67h:jmp64]                         encoding(2 bytes) = 73 2e
@@ -159,12 +159,12 @@
 0064h pop rsi                       ; POP(Pop_r64) [RSI]                                   encoding(1 byte ) = 5e
 0065h pop rdi                       ; POP(Pop_r64) [RDI]                                   encoding(1 byte ) = 5f
 0066h ret                           ; RET(Retnq)                                           encoding(1 byte ) = c3
-0067h call 7FFE3B04EF00h            ; CALL(Call_rel32_64) [5F560CC0h:jmp64]                encoding(5 bytes) = e8 54 0c 56 5f
+0067h call 7FFE3B04EF00h            ; CALL(Call_rel32_64) [5F55C320h:jmp64]                encoding(5 bytes) = e8 b4 c2 55 5f
 006ch int 3                         ; INT(Int3)                                            encoding(1 byte ) = cc
-; static ReadOnlySpan<byte> bitseq8uBytes => new byte[109]{0x57,0x56,0x48,0x83,0xEC,0x28,0x89,0x54,0x24,0x48,0x48,0x8B,0xF1,0x40,0x0F,0xB6,0x7C,0x24,0x48,0x48,0xB9,0x58,0x80,0x4D,0xDB,0xFD,0x7F,0x00,0x00,0xBA,0x7A,0x01,0x00,0x00,0xE8,0x49,0x66,0x43,0x5F,0x48,0xB8,0xC0,0x57,0x00,0x10,0x05,0x02,0x00,0x00,0x48,0x8B,0x00,0x3B,0x78,0x08,0x73,0x2E,0x48,0x63,0xD7,0x48,0xC1,0xE2,0x05,0x48,0x8B,0x44,0x10,0x10,0x48,0x85,0xC0,0x75,0x06,0x33,0xD2,0x33,0xC9,0xEB,0x07,0x48,0x8D,0x50,0x10,0x8B,0x48,0x08,0x48,0x89,0x16,0x89,0x4E,0x08,0x48,0x8B,0xC6,0x48,0x83,0xC4,0x28,0x5E,0x5F,0xC3,0xE8,0x54,0x0C,0x56,0x5F,0xCC};
+; static ReadOnlySpan<byte> bitseq8uBytes => new byte[109]{0x57,0x56,0x48,0x83,0xEC,0x28,0x89,0x54,0x24,0x48,0x48,0x8B,0xF1,0x40,0x0F,0xB6,0x7C,0x24,0x48,0x48,0xB9,0x58,0x80,0x4D,0xDB,0xFD,0x7F,0x00,0x00,0xBA,0x7A,0x01,0x00,0x00,0xE8,0xA9,0x1C,0x43,0x5F,0x48,0xB8,0xC0,0x57,0x65,0xF0,0xCF,0x01,0x00,0x00,0x48,0x8B,0x00,0x3B,0x78,0x08,0x73,0x2E,0x48,0x63,0xD7,0x48,0xC1,0xE2,0x05,0x48,0x8B,0x44,0x10,0x10,0x48,0x85,0xC0,0x75,0x06,0x33,0xD2,0x33,0xC9,0xEB,0x07,0x48,0x8D,0x50,0x10,0x8B,0x48,0x08,0x48,0x89,0x16,0x89,0x4E,0x08,0x48,0x8B,0xC6,0x48,0x83,0xC4,0x28,0x5E,0x5F,0xC3,0xE8,0xB4,0xC2,0x55,0x5F,0xCC};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: ReadOnlySpan<byte> bitseq16i(short src)
-; location: [7FFDDBAEE6D0h, 7FFDDBAEE7F6h]
+; location: [7FFDDBAF3070h, 7FFDDBAF3196h]
 0000h push r14                      ; PUSH(Push_r64) [R14]                                 encoding(2 bytes) = 41 56
 0002h push rdi                      ; PUSH(Push_r64) [RDI]                                 encoding(1 byte ) = 57
 0003h push rsi                      ; PUSH(Push_r64) [RSI]                                 encoding(1 byte ) = 56
@@ -180,14 +180,14 @@
 0021h movzx ebx,cl                  ; MOVZX(Movzx_r32_rm8) [EBX,CL]                        encoding(3 bytes) = 0f b6 d9
 0024h mov rcx,7FFDDB3EEA10h         ; MOV(Mov_r64_imm64) [RCX,7ffddb3eea10h:imm64]         encoding(10 bytes) = 48 b9 10 ea 3e db fd 7f 00 00
 002eh mov edx,10h                   ; MOV(Mov_r32_imm32) [EDX,10h:imm32]                   encoding(5 bytes) = ba 10 00 00 00
-0033h call 7FFE3AF245E0h            ; CALL(Call_rel32_64) [5F435F10h:jmp64]                encoding(5 bytes) = e8 d8 5e 43 5f
+0033h call 7FFE3AF245E0h            ; CALL(Call_rel32_64) [5F431570h:jmp64]                encoding(5 bytes) = e8 38 15 43 5f
 0038h add rax,10h                   ; ADD(Add_rm64_imm8) [RAX,10h:imm64]                   encoding(4 bytes) = 48 83 c0 10
 003ch mov rbp,rax                   ; MOV(Mov_r64_rm64) [RBP,RAX]                          encoding(3 bytes) = 48 8b e8
 003fh mov r14d,10h                  ; MOV(Mov_r32_imm32) [R14D,10h:imm32]                  encoding(6 bytes) = 41 be 10 00 00 00
 0045h mov rcx,7FFDDB4D8058h         ; MOV(Mov_r64_imm64) [RCX,7ffddb4d8058h:imm64]         encoding(10 bytes) = 48 b9 58 80 4d db fd 7f 00 00
 004fh mov edx,17Ah                  ; MOV(Mov_r32_imm32) [EDX,17ah:imm32]                  encoding(5 bytes) = ba 7a 01 00 00
-0054h call 7FFE3AF248B0h            ; CALL(Call_rel32_64) [5F4361E0h:jmp64]                encoding(5 bytes) = e8 87 61 43 5f
-0059h mov rcx,205100057C0h          ; MOV(Mov_r64_imm64) [RCX,205100057c0h:imm64]          encoding(10 bytes) = 48 b9 c0 57 00 10 05 02 00 00
+0054h call 7FFE3AF248B0h            ; CALL(Call_rel32_64) [5F431840h:jmp64]                encoding(5 bytes) = e8 e7 17 43 5f
+0059h mov rcx,1CFF06557C0h          ; MOV(Mov_r64_imm64) [RCX,1cff06557c0h:imm64]          encoding(10 bytes) = 48 b9 c0 57 65 f0 cf 01 00 00
 0063h mov rcx,[rcx]                 ; MOV(Mov_r64_rm64) [RCX,mem(64u,RCX:br,DS:sr)]        encoding(3 bytes) = 48 8b 09
 0066h cmp edi,[rcx+8]               ; CMP(Cmp_r32_rm32) [EDI,mem(32u,RCX:br,DS:sr)]        encoding(3 bytes) = 3b 79 08
 0069h jae near ptr 0121h            ; JAE(Jae_rel32_64) [121h:jmp64]                       encoding(6 bytes) = 0f 83 b2 00 00 00
@@ -207,8 +207,8 @@
 0097h ja short 010fh                ; JA(Ja_rel8_64) [10Fh:jmp64]                          encoding(2 bytes) = 77 76
 0099h movsxd r8,r8d                 ; MOVSXD(Movsxd_r64_rm32) [R8,R8D]                     encoding(3 bytes) = 4d 63 c0
 009ch mov rcx,rbp                   ; MOV(Mov_r64_rm64) [RCX,RBP]                          encoding(3 bytes) = 48 8b cd
-009fh call 7FFE3A868F00h            ; CALL(Call_rel32_64) [5ED7A830h:jmp64]                encoding(5 bytes) = e8 8c a7 d7 5e
-00a4h mov rcx,205100057C0h          ; MOV(Mov_r64_imm64) [RCX,205100057c0h:imm64]          encoding(10 bytes) = 48 b9 c0 57 00 10 05 02 00 00
+009fh call 7FFE3A868F00h            ; CALL(Call_rel32_64) [5ED75E90h:jmp64]                encoding(5 bytes) = e8 ec 5d d7 5e
+00a4h mov rcx,1CFF06557C0h          ; MOV(Mov_r64_imm64) [RCX,1cff06557c0h:imm64]          encoding(10 bytes) = 48 b9 c0 57 65 f0 cf 01 00 00
 00aeh mov rcx,[rcx]                 ; MOV(Mov_r64_rm64) [RCX,mem(64u,RCX:br,DS:sr)]        encoding(3 bytes) = 48 8b 09
 00b1h cmp ebx,[rcx+8]               ; CMP(Cmp_r32_rm32) [EBX,mem(32u,RCX:br,DS:sr)]        encoding(3 bytes) = 3b 59 08
 00b4h jae short 0121h               ; JAE(Jae_rel8_64) [121h:jmp64]                        encoding(2 bytes) = 73 6b
@@ -230,7 +230,7 @@
 00e7h ja short 011bh                ; JA(Ja_rel8_64) [11Bh:jmp64]                          encoding(2 bytes) = 77 32
 00e9h mov rcx,rax                   ; MOV(Mov_r64_rm64) [RCX,RAX]                          encoding(3 bytes) = 48 8b c8
 00ech movsxd r8,r8d                 ; MOVSXD(Movsxd_r64_rm32) [R8,R8D]                     encoding(3 bytes) = 4d 63 c0
-00efh call 7FFE3A868F00h            ; CALL(Call_rel32_64) [5ED7A830h:jmp64]                encoding(5 bytes) = e8 3c a7 d7 5e
+00efh call 7FFE3A868F00h            ; CALL(Call_rel32_64) [5ED75E90h:jmp64]                encoding(5 bytes) = e8 9c 5d d7 5e
 00f4h mov [rsi],rbp                 ; MOV(Mov_rm64_r64) [mem(64u,RSI:br,DS:sr),RBP]        encoding(3 bytes) = 48 89 2e
 00f7h mov [rsi+8],r14d              ; MOV(Mov_rm32_r32) [mem(32u,RSI:br,DS:sr),R14D]       encoding(4 bytes) = 44 89 76 08
 00fbh mov rax,rsi                   ; MOV(Mov_r64_rm64) [RAX,RSI]                          encoding(3 bytes) = 48 8b c6
@@ -241,20 +241,20 @@
 0105h pop rdi                       ; POP(Pop_r64) [RDI]                                   encoding(1 byte ) = 5f
 0106h pop r14                       ; POP(Pop_r64) [R14]                                   encoding(2 bytes) = 41 5e
 0108h ret                           ; RET(Retnq)                                           encoding(1 byte ) = c3
-0109h call 7FFDDB4304C8h            ; CALL(Call_rel32_64) [FFFFFFFFFF941DF8h:jmp64]        encoding(5 bytes) = e8 ea 1c 94 ff
+0109h call 7FFDDB4305C8h            ; CALL(Call_rel32_64) [FFFFFFFFFF93D558h:jmp64]        encoding(5 bytes) = e8 4a d4 93 ff
 010eh int 3                         ; INT(Int3)                                            encoding(1 byte ) = cc
-010fh call 7FFDDB4304D0h            ; CALL(Call_rel32_64) [FFFFFFFFFF941E00h:jmp64]        encoding(5 bytes) = e8 ec 1c 94 ff
+010fh call 7FFDDB4305D0h            ; CALL(Call_rel32_64) [FFFFFFFFFF93D560h:jmp64]        encoding(5 bytes) = e8 4c d4 93 ff
 0114h int 3                         ; INT(Int3)                                            encoding(1 byte ) = cc
-0115h call 7FFDDB4304C8h            ; CALL(Call_rel32_64) [FFFFFFFFFF941DF8h:jmp64]        encoding(5 bytes) = e8 de 1c 94 ff
+0115h call 7FFDDB4305C8h            ; CALL(Call_rel32_64) [FFFFFFFFFF93D558h:jmp64]        encoding(5 bytes) = e8 3e d4 93 ff
 011ah int 3                         ; INT(Int3)                                            encoding(1 byte ) = cc
-011bh call 7FFDDB4304D0h            ; CALL(Call_rel32_64) [FFFFFFFFFF941E00h:jmp64]        encoding(5 bytes) = e8 e0 1c 94 ff
+011bh call 7FFDDB4305D0h            ; CALL(Call_rel32_64) [FFFFFFFFFF93D560h:jmp64]        encoding(5 bytes) = e8 40 d4 93 ff
 0120h int 3                         ; INT(Int3)                                            encoding(1 byte ) = cc
-0121h call 7FFE3B04EF00h            ; CALL(Call_rel32_64) [5F560830h:jmp64]                encoding(5 bytes) = e8 0a 07 56 5f
+0121h call 7FFE3B04EF00h            ; CALL(Call_rel32_64) [5F55BE90h:jmp64]                encoding(5 bytes) = e8 6a bd 55 5f
 0126h int 3                         ; INT(Int3)                                            encoding(1 byte ) = cc
-; static ReadOnlySpan<byte> bitseq16iBytes => new byte[295]{0x41,0x56,0x57,0x56,0x55,0x53,0x48,0x83,0xEC,0x20,0x89,0x54,0x24,0x58,0x48,0x8B,0xF1,0x48,0x0F,0xBF,0x4C,0x24,0x58,0x0F,0xB7,0xC9,0x40,0x0F,0xB6,0xF9,0xC1,0xF9,0x08,0x0F,0xB6,0xD9,0x48,0xB9,0x10,0xEA,0x3E,0xDB,0xFD,0x7F,0x00,0x00,0xBA,0x10,0x00,0x00,0x00,0xE8,0xD8,0x5E,0x43,0x5F,0x48,0x83,0xC0,0x10,0x48,0x8B,0xE8,0x41,0xBE,0x10,0x00,0x00,0x00,0x48,0xB9,0x58,0x80,0x4D,0xDB,0xFD,0x7F,0x00,0x00,0xBA,0x7A,0x01,0x00,0x00,0xE8,0x87,0x61,0x43,0x5F,0x48,0xB9,0xC0,0x57,0x00,0x10,0x05,0x02,0x00,0x00,0x48,0x8B,0x09,0x3B,0x79,0x08,0x0F,0x83,0xB2,0x00,0x00,0x00,0x48,0x63,0xD7,0x48,0xC1,0xE2,0x05,0x48,0x8B,0x4C,0x11,0x10,0x48,0x85,0xC9,0x75,0x07,0x33,0xD2,0x45,0x33,0xC0,0xEB,0x08,0x48,0x8D,0x51,0x10,0x44,0x8B,0x41,0x08,0x45,0x85,0xF6,0x72,0x75,0x45,0x3B,0xC6,0x77,0x76,0x4D,0x63,0xC0,0x48,0x8B,0xCD,0xE8,0x8C,0xA7,0xD7,0x5E,0x48,0xB9,0xC0,0x57,0x00,0x10,0x05,0x02,0x00,0x00,0x48,0x8B,0x09,0x3B,0x59,0x08,0x73,0x6B,0x48,0x63,0xD3,0x48,0xC1,0xE2,0x05,0x48,0x8B,0x4C,0x11,0x10,0x48,0x85,0xC9,0x75,0x07,0x33,0xD2,0x45,0x33,0xC0,0xEB,0x08,0x48,0x8D,0x51,0x10,0x44,0x8B,0x41,0x08,0x41,0x83,0xFE,0x08,0x72,0x39,0x41,0x8D,0x4E,0xF8,0x48,0x8D,0x45,0x08,0x44,0x3B,0xC1,0x77,0x32,0x48,0x8B,0xC8,0x4D,0x63,0xC0,0xE8,0x3C,0xA7,0xD7,0x5E,0x48,0x89,0x2E,0x44,0x89,0x76,0x08,0x48,0x8B,0xC6,0x48,0x83,0xC4,0x20,0x5B,0x5D,0x5E,0x5F,0x41,0x5E,0xC3,0xE8,0xEA,0x1C,0x94,0xFF,0xCC,0xE8,0xEC,0x1C,0x94,0xFF,0xCC,0xE8,0xDE,0x1C,0x94,0xFF,0xCC,0xE8,0xE0,0x1C,0x94,0xFF,0xCC,0xE8,0x0A,0x07,0x56,0x5F,0xCC};
+; static ReadOnlySpan<byte> bitseq16iBytes => new byte[295]{0x41,0x56,0x57,0x56,0x55,0x53,0x48,0x83,0xEC,0x20,0x89,0x54,0x24,0x58,0x48,0x8B,0xF1,0x48,0x0F,0xBF,0x4C,0x24,0x58,0x0F,0xB7,0xC9,0x40,0x0F,0xB6,0xF9,0xC1,0xF9,0x08,0x0F,0xB6,0xD9,0x48,0xB9,0x10,0xEA,0x3E,0xDB,0xFD,0x7F,0x00,0x00,0xBA,0x10,0x00,0x00,0x00,0xE8,0x38,0x15,0x43,0x5F,0x48,0x83,0xC0,0x10,0x48,0x8B,0xE8,0x41,0xBE,0x10,0x00,0x00,0x00,0x48,0xB9,0x58,0x80,0x4D,0xDB,0xFD,0x7F,0x00,0x00,0xBA,0x7A,0x01,0x00,0x00,0xE8,0xE7,0x17,0x43,0x5F,0x48,0xB9,0xC0,0x57,0x65,0xF0,0xCF,0x01,0x00,0x00,0x48,0x8B,0x09,0x3B,0x79,0x08,0x0F,0x83,0xB2,0x00,0x00,0x00,0x48,0x63,0xD7,0x48,0xC1,0xE2,0x05,0x48,0x8B,0x4C,0x11,0x10,0x48,0x85,0xC9,0x75,0x07,0x33,0xD2,0x45,0x33,0xC0,0xEB,0x08,0x48,0x8D,0x51,0x10,0x44,0x8B,0x41,0x08,0x45,0x85,0xF6,0x72,0x75,0x45,0x3B,0xC6,0x77,0x76,0x4D,0x63,0xC0,0x48,0x8B,0xCD,0xE8,0xEC,0x5D,0xD7,0x5E,0x48,0xB9,0xC0,0x57,0x65,0xF0,0xCF,0x01,0x00,0x00,0x48,0x8B,0x09,0x3B,0x59,0x08,0x73,0x6B,0x48,0x63,0xD3,0x48,0xC1,0xE2,0x05,0x48,0x8B,0x4C,0x11,0x10,0x48,0x85,0xC9,0x75,0x07,0x33,0xD2,0x45,0x33,0xC0,0xEB,0x08,0x48,0x8D,0x51,0x10,0x44,0x8B,0x41,0x08,0x41,0x83,0xFE,0x08,0x72,0x39,0x41,0x8D,0x4E,0xF8,0x48,0x8D,0x45,0x08,0x44,0x3B,0xC1,0x77,0x32,0x48,0x8B,0xC8,0x4D,0x63,0xC0,0xE8,0x9C,0x5D,0xD7,0x5E,0x48,0x89,0x2E,0x44,0x89,0x76,0x08,0x48,0x8B,0xC6,0x48,0x83,0xC4,0x20,0x5B,0x5D,0x5E,0x5F,0x41,0x5E,0xC3,0xE8,0x4A,0xD4,0x93,0xFF,0xCC,0xE8,0x4C,0xD4,0x93,0xFF,0xCC,0xE8,0x3E,0xD4,0x93,0xFF,0xCC,0xE8,0x40,0xD4,0x93,0xFF,0xCC,0xE8,0x6A,0xBD,0x55,0x5F,0xCC};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: ReadOnlySpan<byte> bitseq16u(ushort src)
-; location: [7FFDDBAEE820h, 7FFDDBAEE942h]
+; location: [7FFDDBAF31C0h, 7FFDDBAF32E2h]
 0000h push r14                      ; PUSH(Push_r64) [R14]                                 encoding(2 bytes) = 41 56
 0002h push rdi                      ; PUSH(Push_r64) [RDI]                                 encoding(1 byte ) = 57
 0003h push rsi                      ; PUSH(Push_r64) [RSI]                                 encoding(1 byte ) = 56
@@ -269,14 +269,14 @@
 001dh movzx ebx,cl                  ; MOVZX(Movzx_r32_rm8) [EBX,CL]                        encoding(3 bytes) = 0f b6 d9
 0020h mov rcx,7FFDDB3EEA10h         ; MOV(Mov_r64_imm64) [RCX,7ffddb3eea10h:imm64]         encoding(10 bytes) = 48 b9 10 ea 3e db fd 7f 00 00
 002ah mov edx,10h                   ; MOV(Mov_r32_imm32) [EDX,10h:imm32]                   encoding(5 bytes) = ba 10 00 00 00
-002fh call 7FFE3AF245E0h            ; CALL(Call_rel32_64) [5F435DC0h:jmp64]                encoding(5 bytes) = e8 8c 5d 43 5f
+002fh call 7FFE3AF245E0h            ; CALL(Call_rel32_64) [5F431420h:jmp64]                encoding(5 bytes) = e8 ec 13 43 5f
 0034h add rax,10h                   ; ADD(Add_rm64_imm8) [RAX,10h:imm64]                   encoding(4 bytes) = 48 83 c0 10
 0038h mov rbp,rax                   ; MOV(Mov_r64_rm64) [RBP,RAX]                          encoding(3 bytes) = 48 8b e8
 003bh mov r14d,10h                  ; MOV(Mov_r32_imm32) [R14D,10h:imm32]                  encoding(6 bytes) = 41 be 10 00 00 00
 0041h mov rcx,7FFDDB4D8058h         ; MOV(Mov_r64_imm64) [RCX,7ffddb4d8058h:imm64]         encoding(10 bytes) = 48 b9 58 80 4d db fd 7f 00 00
 004bh mov edx,17Ah                  ; MOV(Mov_r32_imm32) [EDX,17ah:imm32]                  encoding(5 bytes) = ba 7a 01 00 00
-0050h call 7FFE3AF248B0h            ; CALL(Call_rel32_64) [5F436090h:jmp64]                encoding(5 bytes) = e8 3b 60 43 5f
-0055h mov rcx,205100057C0h          ; MOV(Mov_r64_imm64) [RCX,205100057c0h:imm64]          encoding(10 bytes) = 48 b9 c0 57 00 10 05 02 00 00
+0050h call 7FFE3AF248B0h            ; CALL(Call_rel32_64) [5F4316F0h:jmp64]                encoding(5 bytes) = e8 9b 16 43 5f
+0055h mov rcx,1CFF06557C0h          ; MOV(Mov_r64_imm64) [RCX,1cff06557c0h:imm64]          encoding(10 bytes) = 48 b9 c0 57 65 f0 cf 01 00 00
 005fh mov rcx,[rcx]                 ; MOV(Mov_r64_rm64) [RCX,mem(64u,RCX:br,DS:sr)]        encoding(3 bytes) = 48 8b 09
 0062h cmp edi,[rcx+8]               ; CMP(Cmp_r32_rm32) [EDI,mem(32u,RCX:br,DS:sr)]        encoding(3 bytes) = 3b 79 08
 0065h jae near ptr 011dh            ; JAE(Jae_rel32_64) [11Dh:jmp64]                       encoding(6 bytes) = 0f 83 b2 00 00 00
@@ -296,8 +296,8 @@
 0093h ja short 010bh                ; JA(Ja_rel8_64) [10Bh:jmp64]                          encoding(2 bytes) = 77 76
 0095h movsxd r8,r8d                 ; MOVSXD(Movsxd_r64_rm32) [R8,R8D]                     encoding(3 bytes) = 4d 63 c0
 0098h mov rcx,rbp                   ; MOV(Mov_r64_rm64) [RCX,RBP]                          encoding(3 bytes) = 48 8b cd
-009bh call 7FFE3A868F00h            ; CALL(Call_rel32_64) [5ED7A6E0h:jmp64]                encoding(5 bytes) = e8 40 a6 d7 5e
-00a0h mov rcx,205100057C0h          ; MOV(Mov_r64_imm64) [RCX,205100057c0h:imm64]          encoding(10 bytes) = 48 b9 c0 57 00 10 05 02 00 00
+009bh call 7FFE3A868F00h            ; CALL(Call_rel32_64) [5ED75D40h:jmp64]                encoding(5 bytes) = e8 a0 5c d7 5e
+00a0h mov rcx,1CFF06557C0h          ; MOV(Mov_r64_imm64) [RCX,1cff06557c0h:imm64]          encoding(10 bytes) = 48 b9 c0 57 65 f0 cf 01 00 00
 00aah mov rcx,[rcx]                 ; MOV(Mov_r64_rm64) [RCX,mem(64u,RCX:br,DS:sr)]        encoding(3 bytes) = 48 8b 09
 00adh cmp ebx,[rcx+8]               ; CMP(Cmp_r32_rm32) [EBX,mem(32u,RCX:br,DS:sr)]        encoding(3 bytes) = 3b 59 08
 00b0h jae short 011dh               ; JAE(Jae_rel8_64) [11Dh:jmp64]                        encoding(2 bytes) = 73 6b
@@ -319,7 +319,7 @@
 00e3h ja short 0117h                ; JA(Ja_rel8_64) [117h:jmp64]                          encoding(2 bytes) = 77 32
 00e5h mov rcx,rax                   ; MOV(Mov_r64_rm64) [RCX,RAX]                          encoding(3 bytes) = 48 8b c8
 00e8h movsxd r8,r8d                 ; MOVSXD(Movsxd_r64_rm32) [R8,R8D]                     encoding(3 bytes) = 4d 63 c0
-00ebh call 7FFE3A868F00h            ; CALL(Call_rel32_64) [5ED7A6E0h:jmp64]                encoding(5 bytes) = e8 f0 a5 d7 5e
+00ebh call 7FFE3A868F00h            ; CALL(Call_rel32_64) [5ED75D40h:jmp64]                encoding(5 bytes) = e8 50 5c d7 5e
 00f0h mov [rsi],rbp                 ; MOV(Mov_rm64_r64) [mem(64u,RSI:br,DS:sr),RBP]        encoding(3 bytes) = 48 89 2e
 00f3h mov [rsi+8],r14d              ; MOV(Mov_rm32_r32) [mem(32u,RSI:br,DS:sr),R14D]       encoding(4 bytes) = 44 89 76 08
 00f7h mov rax,rsi                   ; MOV(Mov_r64_rm64) [RAX,RSI]                          encoding(3 bytes) = 48 8b c6
@@ -330,27 +330,27 @@
 0101h pop rdi                       ; POP(Pop_r64) [RDI]                                   encoding(1 byte ) = 5f
 0102h pop r14                       ; POP(Pop_r64) [R14]                                   encoding(2 bytes) = 41 5e
 0104h ret                           ; RET(Retnq)                                           encoding(1 byte ) = c3
-0105h call 7FFDDB4304C8h            ; CALL(Call_rel32_64) [FFFFFFFFFF941CA8h:jmp64]        encoding(5 bytes) = e8 9e 1b 94 ff
+0105h call 7FFDDB4305C8h            ; CALL(Call_rel32_64) [FFFFFFFFFF93D408h:jmp64]        encoding(5 bytes) = e8 fe d2 93 ff
 010ah int 3                         ; INT(Int3)                                            encoding(1 byte ) = cc
-010bh call 7FFDDB4304D0h            ; CALL(Call_rel32_64) [FFFFFFFFFF941CB0h:jmp64]        encoding(5 bytes) = e8 a0 1b 94 ff
+010bh call 7FFDDB4305D0h            ; CALL(Call_rel32_64) [FFFFFFFFFF93D410h:jmp64]        encoding(5 bytes) = e8 00 d3 93 ff
 0110h int 3                         ; INT(Int3)                                            encoding(1 byte ) = cc
-0111h call 7FFDDB4304C8h            ; CALL(Call_rel32_64) [FFFFFFFFFF941CA8h:jmp64]        encoding(5 bytes) = e8 92 1b 94 ff
+0111h call 7FFDDB4305C8h            ; CALL(Call_rel32_64) [FFFFFFFFFF93D408h:jmp64]        encoding(5 bytes) = e8 f2 d2 93 ff
 0116h int 3                         ; INT(Int3)                                            encoding(1 byte ) = cc
-0117h call 7FFDDB4304D0h            ; CALL(Call_rel32_64) [FFFFFFFFFF941CB0h:jmp64]        encoding(5 bytes) = e8 94 1b 94 ff
+0117h call 7FFDDB4305D0h            ; CALL(Call_rel32_64) [FFFFFFFFFF93D410h:jmp64]        encoding(5 bytes) = e8 f4 d2 93 ff
 011ch int 3                         ; INT(Int3)                                            encoding(1 byte ) = cc
-011dh call 7FFE3B04EF00h            ; CALL(Call_rel32_64) [5F5606E0h:jmp64]                encoding(5 bytes) = e8 be 05 56 5f
+011dh call 7FFE3B04EF00h            ; CALL(Call_rel32_64) [5F55BD40h:jmp64]                encoding(5 bytes) = e8 1e bc 55 5f
 0122h int 3                         ; INT(Int3)                                            encoding(1 byte ) = cc
-; static ReadOnlySpan<byte> bitseq16uBytes => new byte[291]{0x41,0x56,0x57,0x56,0x55,0x53,0x48,0x83,0xEC,0x20,0x89,0x54,0x24,0x58,0x48,0x8B,0xF1,0x0F,0xB7,0x4C,0x24,0x58,0x40,0x0F,0xB6,0xF9,0xC1,0xF9,0x08,0x0F,0xB6,0xD9,0x48,0xB9,0x10,0xEA,0x3E,0xDB,0xFD,0x7F,0x00,0x00,0xBA,0x10,0x00,0x00,0x00,0xE8,0x8C,0x5D,0x43,0x5F,0x48,0x83,0xC0,0x10,0x48,0x8B,0xE8,0x41,0xBE,0x10,0x00,0x00,0x00,0x48,0xB9,0x58,0x80,0x4D,0xDB,0xFD,0x7F,0x00,0x00,0xBA,0x7A,0x01,0x00,0x00,0xE8,0x3B,0x60,0x43,0x5F,0x48,0xB9,0xC0,0x57,0x00,0x10,0x05,0x02,0x00,0x00,0x48,0x8B,0x09,0x3B,0x79,0x08,0x0F,0x83,0xB2,0x00,0x00,0x00,0x48,0x63,0xD7,0x48,0xC1,0xE2,0x05,0x48,0x8B,0x4C,0x11,0x10,0x48,0x85,0xC9,0x75,0x07,0x33,0xD2,0x45,0x33,0xC0,0xEB,0x08,0x48,0x8D,0x51,0x10,0x44,0x8B,0x41,0x08,0x45,0x85,0xF6,0x72,0x75,0x45,0x3B,0xC6,0x77,0x76,0x4D,0x63,0xC0,0x48,0x8B,0xCD,0xE8,0x40,0xA6,0xD7,0x5E,0x48,0xB9,0xC0,0x57,0x00,0x10,0x05,0x02,0x00,0x00,0x48,0x8B,0x09,0x3B,0x59,0x08,0x73,0x6B,0x48,0x63,0xD3,0x48,0xC1,0xE2,0x05,0x48,0x8B,0x4C,0x11,0x10,0x48,0x85,0xC9,0x75,0x07,0x33,0xD2,0x45,0x33,0xC0,0xEB,0x08,0x48,0x8D,0x51,0x10,0x44,0x8B,0x41,0x08,0x41,0x83,0xFE,0x08,0x72,0x39,0x41,0x8D,0x4E,0xF8,0x48,0x8D,0x45,0x08,0x44,0x3B,0xC1,0x77,0x32,0x48,0x8B,0xC8,0x4D,0x63,0xC0,0xE8,0xF0,0xA5,0xD7,0x5E,0x48,0x89,0x2E,0x44,0x89,0x76,0x08,0x48,0x8B,0xC6,0x48,0x83,0xC4,0x20,0x5B,0x5D,0x5E,0x5F,0x41,0x5E,0xC3,0xE8,0x9E,0x1B,0x94,0xFF,0xCC,0xE8,0xA0,0x1B,0x94,0xFF,0xCC,0xE8,0x92,0x1B,0x94,0xFF,0xCC,0xE8,0x94,0x1B,0x94,0xFF,0xCC,0xE8,0xBE,0x05,0x56,0x5F,0xCC};
+; static ReadOnlySpan<byte> bitseq16uBytes => new byte[291]{0x41,0x56,0x57,0x56,0x55,0x53,0x48,0x83,0xEC,0x20,0x89,0x54,0x24,0x58,0x48,0x8B,0xF1,0x0F,0xB7,0x4C,0x24,0x58,0x40,0x0F,0xB6,0xF9,0xC1,0xF9,0x08,0x0F,0xB6,0xD9,0x48,0xB9,0x10,0xEA,0x3E,0xDB,0xFD,0x7F,0x00,0x00,0xBA,0x10,0x00,0x00,0x00,0xE8,0xEC,0x13,0x43,0x5F,0x48,0x83,0xC0,0x10,0x48,0x8B,0xE8,0x41,0xBE,0x10,0x00,0x00,0x00,0x48,0xB9,0x58,0x80,0x4D,0xDB,0xFD,0x7F,0x00,0x00,0xBA,0x7A,0x01,0x00,0x00,0xE8,0x9B,0x16,0x43,0x5F,0x48,0xB9,0xC0,0x57,0x65,0xF0,0xCF,0x01,0x00,0x00,0x48,0x8B,0x09,0x3B,0x79,0x08,0x0F,0x83,0xB2,0x00,0x00,0x00,0x48,0x63,0xD7,0x48,0xC1,0xE2,0x05,0x48,0x8B,0x4C,0x11,0x10,0x48,0x85,0xC9,0x75,0x07,0x33,0xD2,0x45,0x33,0xC0,0xEB,0x08,0x48,0x8D,0x51,0x10,0x44,0x8B,0x41,0x08,0x45,0x85,0xF6,0x72,0x75,0x45,0x3B,0xC6,0x77,0x76,0x4D,0x63,0xC0,0x48,0x8B,0xCD,0xE8,0xA0,0x5C,0xD7,0x5E,0x48,0xB9,0xC0,0x57,0x65,0xF0,0xCF,0x01,0x00,0x00,0x48,0x8B,0x09,0x3B,0x59,0x08,0x73,0x6B,0x48,0x63,0xD3,0x48,0xC1,0xE2,0x05,0x48,0x8B,0x4C,0x11,0x10,0x48,0x85,0xC9,0x75,0x07,0x33,0xD2,0x45,0x33,0xC0,0xEB,0x08,0x48,0x8D,0x51,0x10,0x44,0x8B,0x41,0x08,0x41,0x83,0xFE,0x08,0x72,0x39,0x41,0x8D,0x4E,0xF8,0x48,0x8D,0x45,0x08,0x44,0x3B,0xC1,0x77,0x32,0x48,0x8B,0xC8,0x4D,0x63,0xC0,0xE8,0x50,0x5C,0xD7,0x5E,0x48,0x89,0x2E,0x44,0x89,0x76,0x08,0x48,0x8B,0xC6,0x48,0x83,0xC4,0x20,0x5B,0x5D,0x5E,0x5F,0x41,0x5E,0xC3,0xE8,0xFE,0xD2,0x93,0xFF,0xCC,0xE8,0x00,0xD3,0x93,0xFF,0xCC,0xE8,0xF2,0xD2,0x93,0xFF,0xCC,0xE8,0xF4,0xD2,0x93,0xFF,0xCC,0xE8,0x1E,0xBC,0x55,0x5F,0xCC};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: ReadOnlySpan<byte> bitseq32i(int src)
-; location: [7FFDDBAEE960h, 7FFDDBAEE990h]
+; location: [7FFDDBAF3300h, 7FFDDBAF3330h]
 0000h push rsi                      ; PUSH(Push_r64) [RSI]                                 encoding(1 byte ) = 56
 0001h sub rsp,30h                   ; SUB(Sub_rm64_imm8) [RSP,30h:imm64]                   encoding(4 bytes) = 48 83 ec 30
 0005h xor eax,eax                   ; XOR(Xor_r32_rm32) [EAX,EAX]                          encoding(2 bytes) = 33 c0
 0007h mov [rsp+20h],rax             ; MOV(Mov_rm64_r64) [mem(64u,RSP:br,SS:sr),RAX]        encoding(5 bytes) = 48 89 44 24 20
 000ch mov rsi,rcx                   ; MOV(Mov_r64_rm64) [RSI,RCX]                          encoding(3 bytes) = 48 8b f1
 000fh lea rcx,[rsp+20h]             ; LEA(Lea_r64_m) [RCX,mem(Unknown,RSP:br,SS:sr)]       encoding(5 bytes) = 48 8d 4c 24 20
-0014h call 7FFDDBAEDA00h            ; CALL(Call_rel32_64) [FFFFFFFFFFFFF0A0h:jmp64]        encoding(5 bytes) = e8 87 f0 ff ff
+0014h call 7FFDDBAF23E0h            ; CALL(Call_rel32_64) [FFFFFFFFFFFFF0E0h:jmp64]        encoding(5 bytes) = e8 c7 f0 ff ff
 0019h mov rax,[rsp+20h]             ; MOV(Mov_r64_rm64) [RAX,mem(64u,RSP:br,SS:sr)]        encoding(5 bytes) = 48 8b 44 24 20
 001eh mov edx,[rsp+28h]             ; MOV(Mov_r32_rm32) [EDX,mem(32u,RSP:br,SS:sr)]        encoding(4 bytes) = 8b 54 24 28
 0022h mov [rsi],rax                 ; MOV(Mov_rm64_r64) [mem(64u,RSI:br,DS:sr),RAX]        encoding(3 bytes) = 48 89 06
@@ -359,17 +359,17 @@
 002bh add rsp,30h                   ; ADD(Add_rm64_imm8) [RSP,30h:imm64]                   encoding(4 bytes) = 48 83 c4 30
 002fh pop rsi                       ; POP(Pop_r64) [RSI]                                   encoding(1 byte ) = 5e
 0030h ret                           ; RET(Retnq)                                           encoding(1 byte ) = c3
-; static ReadOnlySpan<byte> bitseq32iBytes => new byte[49]{0x56,0x48,0x83,0xEC,0x30,0x33,0xC0,0x48,0x89,0x44,0x24,0x20,0x48,0x8B,0xF1,0x48,0x8D,0x4C,0x24,0x20,0xE8,0x87,0xF0,0xFF,0xFF,0x48,0x8B,0x44,0x24,0x20,0x8B,0x54,0x24,0x28,0x48,0x89,0x06,0x89,0x56,0x08,0x48,0x8B,0xC6,0x48,0x83,0xC4,0x30,0x5E,0xC3};
+; static ReadOnlySpan<byte> bitseq32iBytes => new byte[49]{0x56,0x48,0x83,0xEC,0x30,0x33,0xC0,0x48,0x89,0x44,0x24,0x20,0x48,0x8B,0xF1,0x48,0x8D,0x4C,0x24,0x20,0xE8,0xC7,0xF0,0xFF,0xFF,0x48,0x8B,0x44,0x24,0x20,0x8B,0x54,0x24,0x28,0x48,0x89,0x06,0x89,0x56,0x08,0x48,0x8B,0xC6,0x48,0x83,0xC4,0x30,0x5E,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: ReadOnlySpan<byte> bitseq32u(uint src)
-; location: [7FFDDBAEE9B0h, 7FFDDBAEE9E0h]
+; location: [7FFDDBAF3350h, 7FFDDBAF3380h]
 0000h push rsi                      ; PUSH(Push_r64) [RSI]                                 encoding(1 byte ) = 56
 0001h sub rsp,30h                   ; SUB(Sub_rm64_imm8) [RSP,30h:imm64]                   encoding(4 bytes) = 48 83 ec 30
 0005h xor eax,eax                   ; XOR(Xor_r32_rm32) [EAX,EAX]                          encoding(2 bytes) = 33 c0
 0007h mov [rsp+20h],rax             ; MOV(Mov_rm64_r64) [mem(64u,RSP:br,SS:sr),RAX]        encoding(5 bytes) = 48 89 44 24 20
 000ch mov rsi,rcx                   ; MOV(Mov_r64_rm64) [RSI,RCX]                          encoding(3 bytes) = 48 8b f1
 000fh lea rcx,[rsp+20h]             ; LEA(Lea_r64_m) [RCX,mem(Unknown,RSP:br,SS:sr)]       encoding(5 bytes) = 48 8d 4c 24 20
-0014h call 7FFDDBAEDA00h            ; CALL(Call_rel32_64) [FFFFFFFFFFFFF050h:jmp64]        encoding(5 bytes) = e8 37 f0 ff ff
+0014h call 7FFDDBAF23E0h            ; CALL(Call_rel32_64) [FFFFFFFFFFFFF090h:jmp64]        encoding(5 bytes) = e8 77 f0 ff ff
 0019h mov rax,[rsp+20h]             ; MOV(Mov_r64_rm64) [RAX,mem(64u,RSP:br,SS:sr)]        encoding(5 bytes) = 48 8b 44 24 20
 001eh mov edx,[rsp+28h]             ; MOV(Mov_r32_rm32) [EDX,mem(32u,RSP:br,SS:sr)]        encoding(4 bytes) = 8b 54 24 28
 0022h mov [rsi],rax                 ; MOV(Mov_rm64_r64) [mem(64u,RSI:br,DS:sr),RAX]        encoding(3 bytes) = 48 89 06
@@ -378,17 +378,17 @@
 002bh add rsp,30h                   ; ADD(Add_rm64_imm8) [RSP,30h:imm64]                   encoding(4 bytes) = 48 83 c4 30
 002fh pop rsi                       ; POP(Pop_r64) [RSI]                                   encoding(1 byte ) = 5e
 0030h ret                           ; RET(Retnq)                                           encoding(1 byte ) = c3
-; static ReadOnlySpan<byte> bitseq32uBytes => new byte[49]{0x56,0x48,0x83,0xEC,0x30,0x33,0xC0,0x48,0x89,0x44,0x24,0x20,0x48,0x8B,0xF1,0x48,0x8D,0x4C,0x24,0x20,0xE8,0x37,0xF0,0xFF,0xFF,0x48,0x8B,0x44,0x24,0x20,0x8B,0x54,0x24,0x28,0x48,0x89,0x06,0x89,0x56,0x08,0x48,0x8B,0xC6,0x48,0x83,0xC4,0x30,0x5E,0xC3};
+; static ReadOnlySpan<byte> bitseq32uBytes => new byte[49]{0x56,0x48,0x83,0xEC,0x30,0x33,0xC0,0x48,0x89,0x44,0x24,0x20,0x48,0x8B,0xF1,0x48,0x8D,0x4C,0x24,0x20,0xE8,0x77,0xF0,0xFF,0xFF,0x48,0x8B,0x44,0x24,0x20,0x8B,0x54,0x24,0x28,0x48,0x89,0x06,0x89,0x56,0x08,0x48,0x8B,0xC6,0x48,0x83,0xC4,0x30,0x5E,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: ReadOnlySpan<byte> bitseq64i(long src)
-; location: [7FFDDBAEEA00h, 7FFDDBAEEA30h]
+; location: [7FFDDBAF33A0h, 7FFDDBAF33D0h]
 0000h push rsi                      ; PUSH(Push_r64) [RSI]                                 encoding(1 byte ) = 56
 0001h sub rsp,30h                   ; SUB(Sub_rm64_imm8) [RSP,30h:imm64]                   encoding(4 bytes) = 48 83 ec 30
 0005h xor eax,eax                   ; XOR(Xor_r32_rm32) [EAX,EAX]                          encoding(2 bytes) = 33 c0
 0007h mov [rsp+20h],rax             ; MOV(Mov_rm64_r64) [mem(64u,RSP:br,SS:sr),RAX]        encoding(5 bytes) = 48 89 44 24 20
 000ch mov rsi,rcx                   ; MOV(Mov_r64_rm64) [RSI,RCX]                          encoding(3 bytes) = 48 8b f1
 000fh lea rcx,[rsp+20h]             ; LEA(Lea_r64_m) [RCX,mem(Unknown,RSP:br,SS:sr)]       encoding(5 bytes) = 48 8d 4c 24 20
-0014h call 7FFDDBAEDA18h            ; CALL(Call_rel32_64) [FFFFFFFFFFFFF018h:jmp64]        encoding(5 bytes) = e8 ff ef ff ff
+0014h call 7FFDDBAF23F8h            ; CALL(Call_rel32_64) [FFFFFFFFFFFFF058h:jmp64]        encoding(5 bytes) = e8 3f f0 ff ff
 0019h mov rax,[rsp+20h]             ; MOV(Mov_r64_rm64) [RAX,mem(64u,RSP:br,SS:sr)]        encoding(5 bytes) = 48 8b 44 24 20
 001eh mov edx,[rsp+28h]             ; MOV(Mov_r32_rm32) [EDX,mem(32u,RSP:br,SS:sr)]        encoding(4 bytes) = 8b 54 24 28
 0022h mov [rsi],rax                 ; MOV(Mov_rm64_r64) [mem(64u,RSI:br,DS:sr),RAX]        encoding(3 bytes) = 48 89 06
@@ -397,17 +397,17 @@
 002bh add rsp,30h                   ; ADD(Add_rm64_imm8) [RSP,30h:imm64]                   encoding(4 bytes) = 48 83 c4 30
 002fh pop rsi                       ; POP(Pop_r64) [RSI]                                   encoding(1 byte ) = 5e
 0030h ret                           ; RET(Retnq)                                           encoding(1 byte ) = c3
-; static ReadOnlySpan<byte> bitseq64iBytes => new byte[49]{0x56,0x48,0x83,0xEC,0x30,0x33,0xC0,0x48,0x89,0x44,0x24,0x20,0x48,0x8B,0xF1,0x48,0x8D,0x4C,0x24,0x20,0xE8,0xFF,0xEF,0xFF,0xFF,0x48,0x8B,0x44,0x24,0x20,0x8B,0x54,0x24,0x28,0x48,0x89,0x06,0x89,0x56,0x08,0x48,0x8B,0xC6,0x48,0x83,0xC4,0x30,0x5E,0xC3};
+; static ReadOnlySpan<byte> bitseq64iBytes => new byte[49]{0x56,0x48,0x83,0xEC,0x30,0x33,0xC0,0x48,0x89,0x44,0x24,0x20,0x48,0x8B,0xF1,0x48,0x8D,0x4C,0x24,0x20,0xE8,0x3F,0xF0,0xFF,0xFF,0x48,0x8B,0x44,0x24,0x20,0x8B,0x54,0x24,0x28,0x48,0x89,0x06,0x89,0x56,0x08,0x48,0x8B,0xC6,0x48,0x83,0xC4,0x30,0x5E,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: ReadOnlySpan<byte> bitseq64u(ulong src)
-; location: [7FFDDBAEEA50h, 7FFDDBAEEA80h]
+; location: [7FFDDBAF33F0h, 7FFDDBAF3420h]
 0000h push rsi                      ; PUSH(Push_r64) [RSI]                                 encoding(1 byte ) = 56
 0001h sub rsp,30h                   ; SUB(Sub_rm64_imm8) [RSP,30h:imm64]                   encoding(4 bytes) = 48 83 ec 30
 0005h xor eax,eax                   ; XOR(Xor_r32_rm32) [EAX,EAX]                          encoding(2 bytes) = 33 c0
 0007h mov [rsp+20h],rax             ; MOV(Mov_rm64_r64) [mem(64u,RSP:br,SS:sr),RAX]        encoding(5 bytes) = 48 89 44 24 20
 000ch mov rsi,rcx                   ; MOV(Mov_r64_rm64) [RSI,RCX]                          encoding(3 bytes) = 48 8b f1
 000fh lea rcx,[rsp+20h]             ; LEA(Lea_r64_m) [RCX,mem(Unknown,RSP:br,SS:sr)]       encoding(5 bytes) = 48 8d 4c 24 20
-0014h call 7FFDDBAEDA18h            ; CALL(Call_rel32_64) [FFFFFFFFFFFFEFC8h:jmp64]        encoding(5 bytes) = e8 af ef ff ff
+0014h call 7FFDDBAF23F8h            ; CALL(Call_rel32_64) [FFFFFFFFFFFFF008h:jmp64]        encoding(5 bytes) = e8 ef ef ff ff
 0019h mov rax,[rsp+20h]             ; MOV(Mov_r64_rm64) [RAX,mem(64u,RSP:br,SS:sr)]        encoding(5 bytes) = 48 8b 44 24 20
 001eh mov edx,[rsp+28h]             ; MOV(Mov_r32_rm32) [EDX,mem(32u,RSP:br,SS:sr)]        encoding(4 bytes) = 8b 54 24 28
 0022h mov [rsi],rax                 ; MOV(Mov_rm64_r64) [mem(64u,RSI:br,DS:sr),RAX]        encoding(3 bytes) = 48 89 06
@@ -416,10 +416,10 @@
 002bh add rsp,30h                   ; ADD(Add_rm64_imm8) [RSP,30h:imm64]                   encoding(4 bytes) = 48 83 c4 30
 002fh pop rsi                       ; POP(Pop_r64) [RSI]                                   encoding(1 byte ) = 5e
 0030h ret                           ; RET(Retnq)                                           encoding(1 byte ) = c3
-; static ReadOnlySpan<byte> bitseq64uBytes => new byte[49]{0x56,0x48,0x83,0xEC,0x30,0x33,0xC0,0x48,0x89,0x44,0x24,0x20,0x48,0x8B,0xF1,0x48,0x8D,0x4C,0x24,0x20,0xE8,0xAF,0xEF,0xFF,0xFF,0x48,0x8B,0x44,0x24,0x20,0x8B,0x54,0x24,0x28,0x48,0x89,0x06,0x89,0x56,0x08,0x48,0x8B,0xC6,0x48,0x83,0xC4,0x30,0x5E,0xC3};
+; static ReadOnlySpan<byte> bitseq64uBytes => new byte[49]{0x56,0x48,0x83,0xEC,0x30,0x33,0xC0,0x48,0x89,0x44,0x24,0x20,0x48,0x8B,0xF1,0x48,0x8D,0x4C,0x24,0x20,0xE8,0xEF,0xEF,0xFF,0xFF,0x48,0x8B,0x44,0x24,0x20,0x8B,0x54,0x24,0x28,0x48,0x89,0x06,0x89,0x56,0x08,0x48,0x8B,0xC6,0x48,0x83,0xC4,0x30,0x5E,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: ReadOnlySpan<byte> bitseq32f(float src)
-; location: [7FFDDBAEEAA0h, 7FFDDBAEEADDh]
+; location: [7FFDDBAF3440h, 7FFDDBAF347Dh]
 0000h push rsi                      ; PUSH(Push_r64) [RSI]                                 encoding(1 byte ) = 56
 0001h sub rsp,40h                   ; SUB(Sub_rm64_imm8) [RSP,40h:imm64]                   encoding(4 bytes) = 48 83 ec 40
 0005h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
@@ -429,7 +429,7 @@
 0012h vmovss dword ptr [rsp+2Ch],xmm1; VMOVSS(VEX_Vmovss_m32_xmm) [mem(Float32,RSP:br,SS:sr),XMM1] encoding(VEX, 6 bytes) = c5 fa 11 4c 24 2c
 0018h mov edx,[rsp+2Ch]             ; MOV(Mov_r32_rm32) [EDX,mem(32u,RSP:br,SS:sr)]        encoding(4 bytes) = 8b 54 24 2c
 001ch lea rcx,[rsp+30h]             ; LEA(Lea_r64_m) [RCX,mem(Unknown,RSP:br,SS:sr)]       encoding(5 bytes) = 48 8d 4c 24 30
-0021h call 7FFDDBAEDA00h            ; CALL(Call_rel32_64) [FFFFFFFFFFFFEF60h:jmp64]        encoding(5 bytes) = e8 3a ef ff ff
+0021h call 7FFDDBAF23E0h            ; CALL(Call_rel32_64) [FFFFFFFFFFFFEFA0h:jmp64]        encoding(5 bytes) = e8 7a ef ff ff
 0026h mov rax,[rsp+30h]             ; MOV(Mov_r64_rm64) [RAX,mem(64u,RSP:br,SS:sr)]        encoding(5 bytes) = 48 8b 44 24 30
 002bh mov edx,[rsp+38h]             ; MOV(Mov_r32_rm32) [EDX,mem(32u,RSP:br,SS:sr)]        encoding(4 bytes) = 8b 54 24 38
 002fh mov [rsi],rax                 ; MOV(Mov_rm64_r64) [mem(64u,RSI:br,DS:sr),RAX]        encoding(3 bytes) = 48 89 06
@@ -438,10 +438,10 @@
 0038h add rsp,40h                   ; ADD(Add_rm64_imm8) [RSP,40h:imm64]                   encoding(4 bytes) = 48 83 c4 40
 003ch pop rsi                       ; POP(Pop_r64) [RSI]                                   encoding(1 byte ) = 5e
 003dh ret                           ; RET(Retnq)                                           encoding(1 byte ) = c3
-; static ReadOnlySpan<byte> bitseq32fBytes => new byte[62]{0x56,0x48,0x83,0xEC,0x40,0xC5,0xF8,0x77,0x33,0xC0,0x48,0x89,0x44,0x24,0x30,0x48,0x8B,0xF1,0xC5,0xFA,0x11,0x4C,0x24,0x2C,0x8B,0x54,0x24,0x2C,0x48,0x8D,0x4C,0x24,0x30,0xE8,0x3A,0xEF,0xFF,0xFF,0x48,0x8B,0x44,0x24,0x30,0x8B,0x54,0x24,0x38,0x48,0x89,0x06,0x89,0x56,0x08,0x48,0x8B,0xC6,0x48,0x83,0xC4,0x40,0x5E,0xC3};
+; static ReadOnlySpan<byte> bitseq32fBytes => new byte[62]{0x56,0x48,0x83,0xEC,0x40,0xC5,0xF8,0x77,0x33,0xC0,0x48,0x89,0x44,0x24,0x30,0x48,0x8B,0xF1,0xC5,0xFA,0x11,0x4C,0x24,0x2C,0x8B,0x54,0x24,0x2C,0x48,0x8D,0x4C,0x24,0x30,0xE8,0x7A,0xEF,0xFF,0xFF,0x48,0x8B,0x44,0x24,0x30,0x8B,0x54,0x24,0x38,0x48,0x89,0x06,0x89,0x56,0x08,0x48,0x8B,0xC6,0x48,0x83,0xC4,0x40,0x5E,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: ReadOnlySpan<byte> bitseq64f(double src)
-; location: [7FFDDBAEEB00h, 7FFDDBAEEB3Eh]
+; location: [7FFDDBAF34A0h, 7FFDDBAF34DEh]
 0000h push rsi                      ; PUSH(Push_r64) [RSI]                                 encoding(1 byte ) = 56
 0001h sub rsp,40h                   ; SUB(Sub_rm64_imm8) [RSP,40h:imm64]                   encoding(4 bytes) = 48 83 ec 40
 0005h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
@@ -451,7 +451,7 @@
 0012h vmovsd qword ptr [rsp+28h],xmm1; VMOVSD(VEX_Vmovsd_m64_xmm) [mem(Float64,RSP:br,SS:sr),XMM1] encoding(VEX, 6 bytes) = c5 fb 11 4c 24 28
 0018h mov rdx,[rsp+28h]             ; MOV(Mov_r64_rm64) [RDX,mem(64u,RSP:br,SS:sr)]        encoding(5 bytes) = 48 8b 54 24 28
 001dh lea rcx,[rsp+30h]             ; LEA(Lea_r64_m) [RCX,mem(Unknown,RSP:br,SS:sr)]       encoding(5 bytes) = 48 8d 4c 24 30
-0022h call 7FFDDBAEDA18h            ; CALL(Call_rel32_64) [FFFFFFFFFFFFEF18h:jmp64]        encoding(5 bytes) = e8 f1 ee ff ff
+0022h call 7FFDDBAF23F8h            ; CALL(Call_rel32_64) [FFFFFFFFFFFFEF58h:jmp64]        encoding(5 bytes) = e8 31 ef ff ff
 0027h mov rax,[rsp+30h]             ; MOV(Mov_r64_rm64) [RAX,mem(64u,RSP:br,SS:sr)]        encoding(5 bytes) = 48 8b 44 24 30
 002ch mov edx,[rsp+38h]             ; MOV(Mov_r32_rm32) [EDX,mem(32u,RSP:br,SS:sr)]        encoding(4 bytes) = 8b 54 24 38
 0030h mov [rsi],rax                 ; MOV(Mov_rm64_r64) [mem(64u,RSI:br,DS:sr),RAX]        encoding(3 bytes) = 48 89 06
@@ -460,10 +460,10 @@
 0039h add rsp,40h                   ; ADD(Add_rm64_imm8) [RSP,40h:imm64]                   encoding(4 bytes) = 48 83 c4 40
 003dh pop rsi                       ; POP(Pop_r64) [RSI]                                   encoding(1 byte ) = 5e
 003eh ret                           ; RET(Retnq)                                           encoding(1 byte ) = c3
-; static ReadOnlySpan<byte> bitseq64fBytes => new byte[63]{0x56,0x48,0x83,0xEC,0x40,0xC5,0xF8,0x77,0x33,0xC0,0x48,0x89,0x44,0x24,0x30,0x48,0x8B,0xF1,0xC5,0xFB,0x11,0x4C,0x24,0x28,0x48,0x8B,0x54,0x24,0x28,0x48,0x8D,0x4C,0x24,0x30,0xE8,0xF1,0xEE,0xFF,0xFF,0x48,0x8B,0x44,0x24,0x30,0x8B,0x54,0x24,0x38,0x48,0x89,0x06,0x89,0x56,0x08,0x48,0x8B,0xC6,0x48,0x83,0xC4,0x40,0x5E,0xC3};
+; static ReadOnlySpan<byte> bitseq64fBytes => new byte[63]{0x56,0x48,0x83,0xEC,0x40,0xC5,0xF8,0x77,0x33,0xC0,0x48,0x89,0x44,0x24,0x30,0x48,0x8B,0xF1,0xC5,0xFB,0x11,0x4C,0x24,0x28,0x48,0x8B,0x54,0x24,0x28,0x48,0x8D,0x4C,0x24,0x30,0xE8,0x31,0xEF,0xFF,0xFF,0x48,0x8B,0x44,0x24,0x30,0x8B,0x54,0x24,0x38,0x48,0x89,0x06,0x89,0x56,0x08,0x48,0x8B,0xC6,0x48,0x83,0xC4,0x40,0x5E,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: ref sbyte enable_d8i(ref sbyte src, int pos)
-; location: [7FFDDBAEEB60h, 7FFDDBAEEB79h]
+; location: [7FFDDBAF3500h, 7FFDDBAF3519h]
 0000h nop dword ptr [rax+rax]       ; NOP(Nop_rm32) [mem(32u,RAX:br,DS:sr)]                encoding(5 bytes) = 0f 1f 44 00 00
 0005h mov rax,rcx                   ; MOV(Mov_r64_rm64) [RAX,RCX]                          encoding(3 bytes) = 48 8b c1
 0008h mov r8d,1                     ; MOV(Mov_r32_imm32) [R8D,1h:imm32]                    encoding(6 bytes) = 41 b8 01 00 00 00
@@ -475,7 +475,7 @@
 ; static ReadOnlySpan<byte> enable_d8iBytes => new byte[26]{0x0F,0x1F,0x44,0x00,0x00,0x48,0x8B,0xC1,0x41,0xB8,0x01,0x00,0x00,0x00,0x8B,0xCA,0x41,0xD3,0xE0,0x49,0x0F,0xBE,0xD0,0x08,0x10,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: ref sbyte enable_g8i(ref sbyte src, int pos)
-; location: [7FFDDBAEEB90h, 7FFDDBAEEBA9h]
+; location: [7FFDDBAF3530h, 7FFDDBAF3549h]
 0000h nop dword ptr [rax+rax]       ; NOP(Nop_rm32) [mem(32u,RAX:br,DS:sr)]                encoding(5 bytes) = 0f 1f 44 00 00
 0005h mov rax,rcx                   ; MOV(Mov_r64_rm64) [RAX,RCX]                          encoding(3 bytes) = 48 8b c1
 0008h mov r8d,1                     ; MOV(Mov_r32_imm32) [R8D,1h:imm32]                    encoding(6 bytes) = 41 b8 01 00 00 00
@@ -487,7 +487,7 @@
 ; static ReadOnlySpan<byte> enable_g8iBytes => new byte[26]{0x0F,0x1F,0x44,0x00,0x00,0x48,0x8B,0xC1,0x41,0xB8,0x01,0x00,0x00,0x00,0x8B,0xCA,0x41,0xD3,0xE0,0x49,0x0F,0xBE,0xD0,0x08,0x10,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: ref byte enable_d8u(ref byte src, int pos)
-; location: [7FFDDBAEEBC0h, 7FFDDBAEEBD9h]
+; location: [7FFDDBAF3560h, 7FFDDBAF3579h]
 0000h nop dword ptr [rax+rax]       ; NOP(Nop_rm32) [mem(32u,RAX:br,DS:sr)]                encoding(5 bytes) = 0f 1f 44 00 00
 0005h mov rax,rcx                   ; MOV(Mov_r64_rm64) [RAX,RCX]                          encoding(3 bytes) = 48 8b c1
 0008h mov r8d,1                     ; MOV(Mov_r32_imm32) [R8D,1h:imm32]                    encoding(6 bytes) = 41 b8 01 00 00 00
@@ -499,7 +499,7 @@
 ; static ReadOnlySpan<byte> enable_d8uBytes => new byte[26]{0x0F,0x1F,0x44,0x00,0x00,0x48,0x8B,0xC1,0x41,0xB8,0x01,0x00,0x00,0x00,0x8B,0xCA,0x41,0xD3,0xE0,0x41,0x0F,0xB6,0xD0,0x08,0x10,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: ref byte enable_g8u(ref byte src, int pos)
-; location: [7FFDDBAEEBF0h, 7FFDDBAEEC09h]
+; location: [7FFDDBAF3590h, 7FFDDBAF35A9h]
 0000h nop dword ptr [rax+rax]       ; NOP(Nop_rm32) [mem(32u,RAX:br,DS:sr)]                encoding(5 bytes) = 0f 1f 44 00 00
 0005h mov rax,rcx                   ; MOV(Mov_r64_rm64) [RAX,RCX]                          encoding(3 bytes) = 48 8b c1
 0008h mov r8d,1                     ; MOV(Mov_r32_imm32) [R8D,1h:imm32]                    encoding(6 bytes) = 41 b8 01 00 00 00
@@ -511,7 +511,7 @@
 ; static ReadOnlySpan<byte> enable_g8uBytes => new byte[26]{0x0F,0x1F,0x44,0x00,0x00,0x48,0x8B,0xC1,0x41,0xB8,0x01,0x00,0x00,0x00,0x8B,0xCA,0x41,0xD3,0xE0,0x41,0x0F,0xB6,0xD0,0x08,0x10,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: ref short enable_d16i(ref short src, int pos)
-; location: [7FFDDBAEEC20h, 7FFDDBAEEC3Ah]
+; location: [7FFDDBAF35C0h, 7FFDDBAF35DAh]
 0000h nop dword ptr [rax+rax]       ; NOP(Nop_rm32) [mem(32u,RAX:br,DS:sr)]                encoding(5 bytes) = 0f 1f 44 00 00
 0005h mov rax,rcx                   ; MOV(Mov_r64_rm64) [RAX,RCX]                          encoding(3 bytes) = 48 8b c1
 0008h mov r8d,1                     ; MOV(Mov_r32_imm32) [R8D,1h:imm32]                    encoding(6 bytes) = 41 b8 01 00 00 00
@@ -523,7 +523,7 @@
 ; static ReadOnlySpan<byte> enable_d16iBytes => new byte[27]{0x0F,0x1F,0x44,0x00,0x00,0x48,0x8B,0xC1,0x41,0xB8,0x01,0x00,0x00,0x00,0x8B,0xCA,0x41,0xD3,0xE0,0x49,0x0F,0xBF,0xD0,0x66,0x09,0x10,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: ref short enable_g16i(ref short src, int pos)
-; location: [7FFDDBAEEC50h, 7FFDDBAEEC6Ah]
+; location: [7FFDDBAF35F0h, 7FFDDBAF360Ah]
 0000h nop dword ptr [rax+rax]       ; NOP(Nop_rm32) [mem(32u,RAX:br,DS:sr)]                encoding(5 bytes) = 0f 1f 44 00 00
 0005h mov rax,rcx                   ; MOV(Mov_r64_rm64) [RAX,RCX]                          encoding(3 bytes) = 48 8b c1
 0008h mov r8d,1                     ; MOV(Mov_r32_imm32) [R8D,1h:imm32]                    encoding(6 bytes) = 41 b8 01 00 00 00
@@ -535,7 +535,7 @@
 ; static ReadOnlySpan<byte> enable_g16iBytes => new byte[27]{0x0F,0x1F,0x44,0x00,0x00,0x48,0x8B,0xC1,0x41,0xB8,0x01,0x00,0x00,0x00,0x8B,0xCA,0x41,0xD3,0xE0,0x49,0x0F,0xBF,0xD0,0x66,0x09,0x10,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: ref ushort enable_d16u(ref ushort src, int pos)
-; location: [7FFDDBAEEC80h, 7FFDDBAEEC9Ah]
+; location: [7FFDDBAF3620h, 7FFDDBAF363Ah]
 0000h nop dword ptr [rax+rax]       ; NOP(Nop_rm32) [mem(32u,RAX:br,DS:sr)]                encoding(5 bytes) = 0f 1f 44 00 00
 0005h mov rax,rcx                   ; MOV(Mov_r64_rm64) [RAX,RCX]                          encoding(3 bytes) = 48 8b c1
 0008h mov r8d,1                     ; MOV(Mov_r32_imm32) [R8D,1h:imm32]                    encoding(6 bytes) = 41 b8 01 00 00 00
@@ -547,7 +547,7 @@
 ; static ReadOnlySpan<byte> enable_d16uBytes => new byte[27]{0x0F,0x1F,0x44,0x00,0x00,0x48,0x8B,0xC1,0x41,0xB8,0x01,0x00,0x00,0x00,0x8B,0xCA,0x41,0xD3,0xE0,0x41,0x0F,0xB7,0xD0,0x66,0x09,0x10,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: ref ushort enable_g16u(ref ushort src, int pos)
-; location: [7FFDDBAEECB0h, 7FFDDBAEECCAh]
+; location: [7FFDDBAF3A60h, 7FFDDBAF3A7Ah]
 0000h nop dword ptr [rax+rax]       ; NOP(Nop_rm32) [mem(32u,RAX:br,DS:sr)]                encoding(5 bytes) = 0f 1f 44 00 00
 0005h mov rax,rcx                   ; MOV(Mov_r64_rm64) [RAX,RCX]                          encoding(3 bytes) = 48 8b c1
 0008h mov r8d,1                     ; MOV(Mov_r32_imm32) [R8D,1h:imm32]                    encoding(6 bytes) = 41 b8 01 00 00 00
@@ -559,7 +559,7 @@
 ; static ReadOnlySpan<byte> enable_g16uBytes => new byte[27]{0x0F,0x1F,0x44,0x00,0x00,0x48,0x8B,0xC1,0x41,0xB8,0x01,0x00,0x00,0x00,0x8B,0xCA,0x41,0xD3,0xE0,0x41,0x0F,0xB7,0xD0,0x66,0x09,0x10,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: ref int enable_d32i(ref int src, int pos)
-; location: [7FFDDBAEECE0h, 7FFDDBAEECF6h]
+; location: [7FFDDBAF3A90h, 7FFDDBAF3AA6h]
 0000h nop dword ptr [rax+rax]       ; NOP(Nop_rm32) [mem(32u,RAX:br,DS:sr)]                encoding(5 bytes) = 0f 1f 44 00 00
 0005h mov rax,rcx                   ; MOV(Mov_r64_rm64) [RAX,RCX]                          encoding(3 bytes) = 48 8b c1
 0008h mov r8d,1                     ; MOV(Mov_r32_imm32) [R8D,1h:imm32]                    encoding(6 bytes) = 41 b8 01 00 00 00
@@ -570,7 +570,7 @@
 ; static ReadOnlySpan<byte> enable_d32iBytes => new byte[23]{0x0F,0x1F,0x44,0x00,0x00,0x48,0x8B,0xC1,0x41,0xB8,0x01,0x00,0x00,0x00,0x8B,0xCA,0x41,0xD3,0xE0,0x44,0x09,0x00,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: ref int enable_g32i(ref int src, int pos)
-; location: [7FFDDBAEED10h, 7FFDDBAEED26h]
+; location: [7FFDDBAF3AC0h, 7FFDDBAF3AD6h]
 0000h nop dword ptr [rax+rax]       ; NOP(Nop_rm32) [mem(32u,RAX:br,DS:sr)]                encoding(5 bytes) = 0f 1f 44 00 00
 0005h mov rax,rcx                   ; MOV(Mov_r64_rm64) [RAX,RCX]                          encoding(3 bytes) = 48 8b c1
 0008h mov r8d,1                     ; MOV(Mov_r32_imm32) [R8D,1h:imm32]                    encoding(6 bytes) = 41 b8 01 00 00 00
@@ -581,7 +581,7 @@
 ; static ReadOnlySpan<byte> enable_g32iBytes => new byte[23]{0x0F,0x1F,0x44,0x00,0x00,0x48,0x8B,0xC1,0x41,0xB8,0x01,0x00,0x00,0x00,0x8B,0xCA,0x41,0xD3,0xE0,0x44,0x09,0x00,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: ref uint enable_d32u(ref uint src, int pos)
-; location: [7FFDDBAEED40h, 7FFDDBAEED56h]
+; location: [7FFDDBAF3AF0h, 7FFDDBAF3B06h]
 0000h nop dword ptr [rax+rax]       ; NOP(Nop_rm32) [mem(32u,RAX:br,DS:sr)]                encoding(5 bytes) = 0f 1f 44 00 00
 0005h mov rax,rcx                   ; MOV(Mov_r64_rm64) [RAX,RCX]                          encoding(3 bytes) = 48 8b c1
 0008h mov r8d,1                     ; MOV(Mov_r32_imm32) [R8D,1h:imm32]                    encoding(6 bytes) = 41 b8 01 00 00 00
@@ -592,7 +592,7 @@
 ; static ReadOnlySpan<byte> enable_d32uBytes => new byte[23]{0x0F,0x1F,0x44,0x00,0x00,0x48,0x8B,0xC1,0x41,0xB8,0x01,0x00,0x00,0x00,0x8B,0xCA,0x41,0xD3,0xE0,0x44,0x09,0x00,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: ref uint enable_g32u(ref uint src, int pos)
-; location: [7FFDDBAEF170h, 7FFDDBAEF186h]
+; location: [7FFDDBAF3B20h, 7FFDDBAF3B36h]
 0000h nop dword ptr [rax+rax]       ; NOP(Nop_rm32) [mem(32u,RAX:br,DS:sr)]                encoding(5 bytes) = 0f 1f 44 00 00
 0005h mov rax,rcx                   ; MOV(Mov_r64_rm64) [RAX,RCX]                          encoding(3 bytes) = 48 8b c1
 0008h mov r8d,1                     ; MOV(Mov_r32_imm32) [R8D,1h:imm32]                    encoding(6 bytes) = 41 b8 01 00 00 00
@@ -603,7 +603,7 @@
 ; static ReadOnlySpan<byte> enable_g32uBytes => new byte[23]{0x0F,0x1F,0x44,0x00,0x00,0x48,0x8B,0xC1,0x41,0xB8,0x01,0x00,0x00,0x00,0x8B,0xCA,0x41,0xD3,0xE0,0x44,0x09,0x00,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: ref long enable_d64i(ref long src, int pos)
-; location: [7FFDDBAEF1A0h, 7FFDDBAEF1B6h]
+; location: [7FFDDBAF3B50h, 7FFDDBAF3B66h]
 0000h nop dword ptr [rax+rax]       ; NOP(Nop_rm32) [mem(32u,RAX:br,DS:sr)]                encoding(5 bytes) = 0f 1f 44 00 00
 0005h mov rax,rcx                   ; MOV(Mov_r64_rm64) [RAX,RCX]                          encoding(3 bytes) = 48 8b c1
 0008h mov r8d,1                     ; MOV(Mov_r32_imm32) [R8D,1h:imm32]                    encoding(6 bytes) = 41 b8 01 00 00 00
@@ -614,7 +614,7 @@
 ; static ReadOnlySpan<byte> enable_d64iBytes => new byte[23]{0x0F,0x1F,0x44,0x00,0x00,0x48,0x8B,0xC1,0x41,0xB8,0x01,0x00,0x00,0x00,0x8B,0xCA,0x49,0xD3,0xE0,0x4C,0x09,0x00,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: ref long enable_g64i(ref long src, int pos)
-; location: [7FFDDBAEF1D0h, 7FFDDBAEF1E6h]
+; location: [7FFDDBAF3B80h, 7FFDDBAF3B96h]
 0000h nop dword ptr [rax+rax]       ; NOP(Nop_rm32) [mem(32u,RAX:br,DS:sr)]                encoding(5 bytes) = 0f 1f 44 00 00
 0005h mov rax,rcx                   ; MOV(Mov_r64_rm64) [RAX,RCX]                          encoding(3 bytes) = 48 8b c1
 0008h mov r8d,1                     ; MOV(Mov_r32_imm32) [R8D,1h:imm32]                    encoding(6 bytes) = 41 b8 01 00 00 00
@@ -625,7 +625,7 @@
 ; static ReadOnlySpan<byte> enable_g64iBytes => new byte[23]{0x0F,0x1F,0x44,0x00,0x00,0x48,0x8B,0xC1,0x41,0xB8,0x01,0x00,0x00,0x00,0x8B,0xCA,0x49,0xD3,0xE0,0x4C,0x09,0x00,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: ref ulong enable_d64u(ref ulong src, int pos)
-; location: [7FFDDBAEF200h, 7FFDDBAEF216h]
+; location: [7FFDDBAF3BB0h, 7FFDDBAF3BC6h]
 0000h nop dword ptr [rax+rax]       ; NOP(Nop_rm32) [mem(32u,RAX:br,DS:sr)]                encoding(5 bytes) = 0f 1f 44 00 00
 0005h mov rax,rcx                   ; MOV(Mov_r64_rm64) [RAX,RCX]                          encoding(3 bytes) = 48 8b c1
 0008h mov r8d,1                     ; MOV(Mov_r32_imm32) [R8D,1h:imm32]                    encoding(6 bytes) = 41 b8 01 00 00 00
@@ -636,7 +636,7 @@
 ; static ReadOnlySpan<byte> enable_d64uBytes => new byte[23]{0x0F,0x1F,0x44,0x00,0x00,0x48,0x8B,0xC1,0x41,0xB8,0x01,0x00,0x00,0x00,0x8B,0xCA,0x49,0xD3,0xE0,0x4C,0x09,0x00,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: ref ulong enable_g64u(ref ulong src, int pos)
-; location: [7FFDDBAEF230h, 7FFDDBAEF246h]
+; location: [7FFDDBAF3BE0h, 7FFDDBAF3BF6h]
 0000h nop dword ptr [rax+rax]       ; NOP(Nop_rm32) [mem(32u,RAX:br,DS:sr)]                encoding(5 bytes) = 0f 1f 44 00 00
 0005h mov rax,rcx                   ; MOV(Mov_r64_rm64) [RAX,RCX]                          encoding(3 bytes) = 48 8b c1
 0008h mov r8d,1                     ; MOV(Mov_r32_imm32) [R8D,1h:imm32]                    encoding(6 bytes) = 41 b8 01 00 00 00
@@ -647,7 +647,7 @@
 ; static ReadOnlySpan<byte> enable_g64uBytes => new byte[23]{0x0F,0x1F,0x44,0x00,0x00,0x48,0x8B,0xC1,0x41,0xB8,0x01,0x00,0x00,0x00,0x8B,0xCA,0x49,0xD3,0xE0,0x4C,0x09,0x00,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: ref float enable_d32f(ref float src, int pos)
-; location: [7FFDDBAEF260h, 7FFDDBAEF296h]
+; location: [7FFDDBAF3C10h, 7FFDDBAF3C46h]
 0000h push rax                      ; PUSH(Push_r64) [RAX]                                 encoding(1 byte ) = 50
 0001h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0004h nop                           ; NOP(Nopd)                                            encoding(1 byte ) = 90
@@ -667,7 +667,7 @@
 ; static ReadOnlySpan<byte> enable_d32fBytes => new byte[55]{0x50,0xC5,0xF8,0x77,0x90,0x48,0x8B,0xC1,0xC5,0xFA,0x10,0x00,0xC5,0xFA,0x11,0x44,0x24,0x04,0x44,0x8B,0x44,0x24,0x04,0x41,0xB9,0x01,0x00,0x00,0x00,0x8B,0xCA,0x41,0xD3,0xE1,0x45,0x0B,0xC1,0x44,0x89,0x04,0x24,0xC5,0xFA,0x10,0x04,0x24,0xC5,0xFA,0x11,0x00,0x48,0x83,0xC4,0x08,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: ref float enable_g32f(ref float src, int pos)
-; location: [7FFDDBAEF2B0h, 7FFDDBAEF2E6h]
+; location: [7FFDDBAF3C60h, 7FFDDBAF3C96h]
 0000h push rax                      ; PUSH(Push_r64) [RAX]                                 encoding(1 byte ) = 50
 0001h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0004h nop                           ; NOP(Nopd)                                            encoding(1 byte ) = 90
@@ -687,7 +687,7 @@
 ; static ReadOnlySpan<byte> enable_g32fBytes => new byte[55]{0x50,0xC5,0xF8,0x77,0x90,0x48,0x8B,0xC1,0xC5,0xFA,0x10,0x00,0xC5,0xFA,0x11,0x44,0x24,0x04,0x44,0x8B,0x44,0x24,0x04,0x41,0xB9,0x01,0x00,0x00,0x00,0x8B,0xCA,0x41,0xD3,0xE1,0x45,0x0B,0xC1,0x44,0x89,0x04,0x24,0xC5,0xFA,0x10,0x04,0x24,0xC5,0xFA,0x11,0x00,0x48,0x83,0xC4,0x08,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: ref double enable_d64f(ref double src, int pos)
-; location: [7FFDDBAEF300h, 7FFDDBAEF33Ah]
+; location: [7FFDDBAF3CB0h, 7FFDDBAF3CEAh]
 0000h sub rsp,18h                   ; SUB(Sub_rm64_imm8) [RSP,18h:imm64]                   encoding(4 bytes) = 48 83 ec 18
 0004h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0007h mov rax,rcx                   ; MOV(Mov_r64_rm64) [RAX,RCX]                          encoding(3 bytes) = 48 8b c1
@@ -706,7 +706,7 @@
 ; static ReadOnlySpan<byte> enable_d64fBytes => new byte[59]{0x48,0x83,0xEC,0x18,0xC5,0xF8,0x77,0x48,0x8B,0xC1,0xC5,0xFB,0x10,0x00,0xC5,0xFB,0x11,0x44,0x24,0x10,0x4C,0x8B,0x44,0x24,0x10,0x41,0xB9,0x01,0x00,0x00,0x00,0x8B,0xCA,0x49,0xD3,0xE1,0x4D,0x0B,0xC1,0x4C,0x89,0x44,0x24,0x08,0xC5,0xFB,0x10,0x44,0x24,0x08,0xC5,0xFB,0x11,0x00,0x48,0x83,0xC4,0x18,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: ref double enable_g64f(ref double src, int pos)
-; location: [7FFDDBAEF360h, 7FFDDBAEF39Ah]
+; location: [7FFDDBAF3D10h, 7FFDDBAF3D4Ah]
 0000h sub rsp,18h                   ; SUB(Sub_rm64_imm8) [RSP,18h:imm64]                   encoding(4 bytes) = 48 83 ec 18
 0004h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0007h mov rax,rcx                   ; MOV(Mov_r64_rm64) [RAX,RCX]                          encoding(3 bytes) = 48 8b c1
@@ -725,7 +725,7 @@
 ; static ReadOnlySpan<byte> enable_g64fBytes => new byte[59]{0x48,0x83,0xEC,0x18,0xC5,0xF8,0x77,0x48,0x8B,0xC1,0xC5,0xFB,0x10,0x00,0xC5,0xFB,0x11,0x44,0x24,0x10,0x4C,0x8B,0x44,0x24,0x10,0x41,0xB9,0x01,0x00,0x00,0x00,0x8B,0xCA,0x49,0xD3,0xE1,0x4D,0x0B,0xC1,0x4C,0x89,0x44,0x24,0x08,0xC5,0xFB,0x10,0x44,0x24,0x08,0xC5,0xFB,0x11,0x00,0x48,0x83,0xC4,0x18,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: bool testbit_d8i(sbyte src, int pos)
-; location: [7FFDDBAEF3C0h, 7FFDDBAEF3F2h]
+; location: [7FFDDBAF3D70h, 7FFDDBAF3DA2h]
 0000h push rax                      ; PUSH(Push_r64) [RAX]                                 encoding(1 byte ) = 50
 0001h nop dword ptr [rax]           ; NOP(Nop_rm32) [mem(32u,RAX:br,DS:sr)]                encoding(4 bytes) = 0f 1f 40 00
 0005h xor eax,eax                   ; XOR(Xor_r32_rm32) [EAX,EAX]                          encoding(2 bytes) = 33 c0
@@ -747,7 +747,7 @@
 ; static ReadOnlySpan<byte> testbit_d8iBytes => new byte[51]{0x50,0x0F,0x1F,0x40,0x00,0x33,0xC0,0x89,0x04,0x24,0x48,0x8D,0x04,0x24,0x48,0x0F,0xBE,0xC9,0x0F,0xA3,0xD1,0x72,0x04,0x33,0xD2,0xEB,0x05,0xBA,0x01,0x00,0x00,0x00,0x89,0x10,0x8B,0x04,0x24,0x83,0xF8,0x01,0x0F,0x94,0xC0,0x0F,0xB6,0xC0,0x48,0x83,0xC4,0x08,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: bool testbit_g8i(sbyte src, int pos)
-; location: [7FFDDBAEF410h, 7FFDDBAEF442h]
+; location: [7FFDDBAF3DC0h, 7FFDDBAF3DF2h]
 0000h push rax                      ; PUSH(Push_r64) [RAX]                                 encoding(1 byte ) = 50
 0001h nop dword ptr [rax]           ; NOP(Nop_rm32) [mem(32u,RAX:br,DS:sr)]                encoding(4 bytes) = 0f 1f 40 00
 0005h movsx rax,cl                  ; MOVSX(Movsx_r64_rm8) [RAX,CL]                        encoding(4 bytes) = 48 0f be c1
@@ -769,7 +769,7 @@
 ; static ReadOnlySpan<byte> testbit_g8iBytes => new byte[51]{0x50,0x0F,0x1F,0x40,0x00,0x48,0x0F,0xBE,0xC1,0x33,0xC9,0x89,0x0C,0x24,0x48,0x8D,0x0C,0x24,0x0F,0xA3,0xD0,0x72,0x04,0x33,0xC0,0xEB,0x05,0xB8,0x01,0x00,0x00,0x00,0x89,0x01,0x8B,0x04,0x24,0x83,0xF8,0x01,0x0F,0x94,0xC0,0x0F,0xB6,0xC0,0x48,0x83,0xC4,0x08,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: bool testbit_d8u(byte src, int pos)
-; location: [7FFDDBAEF460h, 7FFDDBAEF491h]
+; location: [7FFDDBAF3E10h, 7FFDDBAF3E41h]
 0000h push rax                      ; PUSH(Push_r64) [RAX]                                 encoding(1 byte ) = 50
 0001h nop dword ptr [rax]           ; NOP(Nop_rm32) [mem(32u,RAX:br,DS:sr)]                encoding(4 bytes) = 0f 1f 40 00
 0005h xor eax,eax                   ; XOR(Xor_r32_rm32) [EAX,EAX]                          encoding(2 bytes) = 33 c0
@@ -791,7 +791,7 @@
 ; static ReadOnlySpan<byte> testbit_d8uBytes => new byte[50]{0x50,0x0F,0x1F,0x40,0x00,0x33,0xC0,0x89,0x04,0x24,0x48,0x8D,0x04,0x24,0x0F,0xB6,0xC9,0x0F,0xA3,0xD1,0x72,0x04,0x33,0xD2,0xEB,0x05,0xBA,0x01,0x00,0x00,0x00,0x89,0x10,0x8B,0x04,0x24,0x83,0xF8,0x01,0x0F,0x94,0xC0,0x0F,0xB6,0xC0,0x48,0x83,0xC4,0x08,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: bool testbit_g8u(byte src, int pos)
-; location: [7FFDDBAEF4B0h, 7FFDDBAEF4E1h]
+; location: [7FFDDBAF3E60h, 7FFDDBAF3E91h]
 0000h push rax                      ; PUSH(Push_r64) [RAX]                                 encoding(1 byte ) = 50
 0001h nop dword ptr [rax]           ; NOP(Nop_rm32) [mem(32u,RAX:br,DS:sr)]                encoding(4 bytes) = 0f 1f 40 00
 0005h movzx eax,cl                  ; MOVZX(Movzx_r32_rm8) [EAX,CL]                        encoding(3 bytes) = 0f b6 c1
@@ -813,7 +813,7 @@
 ; static ReadOnlySpan<byte> testbit_g8uBytes => new byte[50]{0x50,0x0F,0x1F,0x40,0x00,0x0F,0xB6,0xC1,0x33,0xC9,0x89,0x0C,0x24,0x48,0x8D,0x0C,0x24,0x0F,0xA3,0xD0,0x72,0x04,0x33,0xC0,0xEB,0x05,0xB8,0x01,0x00,0x00,0x00,0x89,0x01,0x8B,0x04,0x24,0x83,0xF8,0x01,0x0F,0x94,0xC0,0x0F,0xB6,0xC0,0x48,0x83,0xC4,0x08,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: bool testbit_d16i(short src, int pos)
-; location: [7FFDDBAEF500h, 7FFDDBAEF532h]
+; location: [7FFDDBAF3EB0h, 7FFDDBAF3EE2h]
 0000h push rax                      ; PUSH(Push_r64) [RAX]                                 encoding(1 byte ) = 50
 0001h nop dword ptr [rax]           ; NOP(Nop_rm32) [mem(32u,RAX:br,DS:sr)]                encoding(4 bytes) = 0f 1f 40 00
 0005h xor eax,eax                   ; XOR(Xor_r32_rm32) [EAX,EAX]                          encoding(2 bytes) = 33 c0
@@ -835,7 +835,7 @@
 ; static ReadOnlySpan<byte> testbit_d16iBytes => new byte[51]{0x50,0x0F,0x1F,0x40,0x00,0x33,0xC0,0x89,0x04,0x24,0x48,0x8D,0x04,0x24,0x48,0x0F,0xBF,0xC9,0x0F,0xA3,0xD1,0x72,0x04,0x33,0xD2,0xEB,0x05,0xBA,0x01,0x00,0x00,0x00,0x89,0x10,0x8B,0x04,0x24,0x83,0xF8,0x01,0x0F,0x94,0xC0,0x0F,0xB6,0xC0,0x48,0x83,0xC4,0x08,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: bool testbit_g16i(short src, int pos)
-; location: [7FFDDBAEF550h, 7FFDDBAEF582h]
+; location: [7FFDDBAF3F00h, 7FFDDBAF3F32h]
 0000h push rax                      ; PUSH(Push_r64) [RAX]                                 encoding(1 byte ) = 50
 0001h nop dword ptr [rax]           ; NOP(Nop_rm32) [mem(32u,RAX:br,DS:sr)]                encoding(4 bytes) = 0f 1f 40 00
 0005h movsx rax,cx                  ; MOVSX(Movsx_r64_rm16) [RAX,CX]                       encoding(4 bytes) = 48 0f bf c1
@@ -857,7 +857,7 @@
 ; static ReadOnlySpan<byte> testbit_g16iBytes => new byte[51]{0x50,0x0F,0x1F,0x40,0x00,0x48,0x0F,0xBF,0xC1,0x33,0xC9,0x89,0x0C,0x24,0x48,0x8D,0x0C,0x24,0x0F,0xA3,0xD0,0x72,0x04,0x33,0xC0,0xEB,0x05,0xB8,0x01,0x00,0x00,0x00,0x89,0x01,0x8B,0x04,0x24,0x83,0xF8,0x01,0x0F,0x94,0xC0,0x0F,0xB6,0xC0,0x48,0x83,0xC4,0x08,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: bool testbit_d16u(ushort src, int pos)
-; location: [7FFDDBAEF5A0h, 7FFDDBAEF5D1h]
+; location: [7FFDDBAF3F50h, 7FFDDBAF3F81h]
 0000h push rax                      ; PUSH(Push_r64) [RAX]                                 encoding(1 byte ) = 50
 0001h nop dword ptr [rax]           ; NOP(Nop_rm32) [mem(32u,RAX:br,DS:sr)]                encoding(4 bytes) = 0f 1f 40 00
 0005h xor eax,eax                   ; XOR(Xor_r32_rm32) [EAX,EAX]                          encoding(2 bytes) = 33 c0
@@ -879,7 +879,7 @@
 ; static ReadOnlySpan<byte> testbit_d16uBytes => new byte[50]{0x50,0x0F,0x1F,0x40,0x00,0x33,0xC0,0x89,0x04,0x24,0x48,0x8D,0x04,0x24,0x0F,0xB7,0xC9,0x0F,0xA3,0xD1,0x72,0x04,0x33,0xD2,0xEB,0x05,0xBA,0x01,0x00,0x00,0x00,0x89,0x10,0x8B,0x04,0x24,0x83,0xF8,0x01,0x0F,0x94,0xC0,0x0F,0xB6,0xC0,0x48,0x83,0xC4,0x08,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: bool testbit_g16u(ushort src, int pos)
-; location: [7FFDDBAEF5F0h, 7FFDDBAEF621h]
+; location: [7FFDDBAF3FA0h, 7FFDDBAF3FD1h]
 0000h push rax                      ; PUSH(Push_r64) [RAX]                                 encoding(1 byte ) = 50
 0001h nop dword ptr [rax]           ; NOP(Nop_rm32) [mem(32u,RAX:br,DS:sr)]                encoding(4 bytes) = 0f 1f 40 00
 0005h movzx eax,cx                  ; MOVZX(Movzx_r32_rm16) [EAX,CX]                       encoding(3 bytes) = 0f b7 c1
@@ -901,7 +901,7 @@
 ; static ReadOnlySpan<byte> testbit_g16uBytes => new byte[50]{0x50,0x0F,0x1F,0x40,0x00,0x0F,0xB7,0xC1,0x33,0xC9,0x89,0x0C,0x24,0x48,0x8D,0x0C,0x24,0x0F,0xA3,0xD0,0x72,0x04,0x33,0xC0,0xEB,0x05,0xB8,0x01,0x00,0x00,0x00,0x89,0x01,0x8B,0x04,0x24,0x83,0xF8,0x01,0x0F,0x94,0xC0,0x0F,0xB6,0xC0,0x48,0x83,0xC4,0x08,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: bool testbit_d32i(int src, int pos)
-; location: [7FFDDBAEF640h, 7FFDDBAEF66Eh]
+; location: [7FFDDBAF3FF0h, 7FFDDBAF401Eh]
 0000h push rax                      ; PUSH(Push_r64) [RAX]                                 encoding(1 byte ) = 50
 0001h nop dword ptr [rax]           ; NOP(Nop_rm32) [mem(32u,RAX:br,DS:sr)]                encoding(4 bytes) = 0f 1f 40 00
 0005h xor eax,eax                   ; XOR(Xor_r32_rm32) [EAX,EAX]                          encoding(2 bytes) = 33 c0
@@ -922,7 +922,7 @@
 ; static ReadOnlySpan<byte> testbit_d32iBytes => new byte[47]{0x50,0x0F,0x1F,0x40,0x00,0x33,0xC0,0x89,0x04,0x24,0x48,0x8D,0x04,0x24,0x0F,0xA3,0xD1,0x72,0x04,0x33,0xD2,0xEB,0x05,0xBA,0x01,0x00,0x00,0x00,0x89,0x10,0x8B,0x04,0x24,0x83,0xF8,0x01,0x0F,0x94,0xC0,0x0F,0xB6,0xC0,0x48,0x83,0xC4,0x08,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: bool testbit_g32i(int src, int pos)
-; location: [7FFDDBAEF690h, 7FFDDBAEF6BEh]
+; location: [7FFDDBAF4040h, 7FFDDBAF406Eh]
 0000h push rax                      ; PUSH(Push_r64) [RAX]                                 encoding(1 byte ) = 50
 0001h nop dword ptr [rax]           ; NOP(Nop_rm32) [mem(32u,RAX:br,DS:sr)]                encoding(4 bytes) = 0f 1f 40 00
 0005h xor eax,eax                   ; XOR(Xor_r32_rm32) [EAX,EAX]                          encoding(2 bytes) = 33 c0
@@ -943,7 +943,7 @@
 ; static ReadOnlySpan<byte> testbit_g32iBytes => new byte[47]{0x50,0x0F,0x1F,0x40,0x00,0x33,0xC0,0x89,0x04,0x24,0x48,0x8D,0x04,0x24,0x0F,0xA3,0xD1,0x72,0x04,0x33,0xD2,0xEB,0x05,0xBA,0x01,0x00,0x00,0x00,0x89,0x10,0x8B,0x04,0x24,0x83,0xF8,0x01,0x0F,0x94,0xC0,0x0F,0xB6,0xC0,0x48,0x83,0xC4,0x08,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: bool testbit_d32u(uint src, int pos)
-; location: [7FFDDBAEF6E0h, 7FFDDBAEF70Eh]
+; location: [7FFDDBAF4090h, 7FFDDBAF40BEh]
 0000h push rax                      ; PUSH(Push_r64) [RAX]                                 encoding(1 byte ) = 50
 0001h nop dword ptr [rax]           ; NOP(Nop_rm32) [mem(32u,RAX:br,DS:sr)]                encoding(4 bytes) = 0f 1f 40 00
 0005h xor eax,eax                   ; XOR(Xor_r32_rm32) [EAX,EAX]                          encoding(2 bytes) = 33 c0
@@ -964,7 +964,7 @@
 ; static ReadOnlySpan<byte> testbit_d32uBytes => new byte[47]{0x50,0x0F,0x1F,0x40,0x00,0x33,0xC0,0x89,0x04,0x24,0x48,0x8D,0x04,0x24,0x0F,0xA3,0xD1,0x72,0x04,0x33,0xD2,0xEB,0x05,0xBA,0x01,0x00,0x00,0x00,0x89,0x10,0x8B,0x04,0x24,0x83,0xF8,0x01,0x0F,0x94,0xC0,0x0F,0xB6,0xC0,0x48,0x83,0xC4,0x08,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: bool testbit_g32u(uint src, int pos)
-; location: [7FFDDBAEF730h, 7FFDDBAEF75Eh]
+; location: [7FFDDBAF40E0h, 7FFDDBAF410Eh]
 0000h push rax                      ; PUSH(Push_r64) [RAX]                                 encoding(1 byte ) = 50
 0001h nop dword ptr [rax]           ; NOP(Nop_rm32) [mem(32u,RAX:br,DS:sr)]                encoding(4 bytes) = 0f 1f 40 00
 0005h xor eax,eax                   ; XOR(Xor_r32_rm32) [EAX,EAX]                          encoding(2 bytes) = 33 c0
@@ -985,7 +985,7 @@
 ; static ReadOnlySpan<byte> testbit_g32uBytes => new byte[47]{0x50,0x0F,0x1F,0x40,0x00,0x33,0xC0,0x89,0x04,0x24,0x48,0x8D,0x04,0x24,0x0F,0xA3,0xD1,0x72,0x04,0x33,0xD2,0xEB,0x05,0xBA,0x01,0x00,0x00,0x00,0x89,0x10,0x8B,0x04,0x24,0x83,0xF8,0x01,0x0F,0x94,0xC0,0x0F,0xB6,0xC0,0x48,0x83,0xC4,0x08,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: bool testbit_d64i(long src, int pos)
-; location: [7FFDDBAEF780h, 7FFDDBAEF78Fh]
+; location: [7FFDDBAF4130h, 7FFDDBAF413Fh]
 0000h nop dword ptr [rax+rax]       ; NOP(Nop_rm32) [mem(32u,RAX:br,DS:sr)]                encoding(5 bytes) = 0f 1f 44 00 00
 0005h bt rcx,rdx                    ; BT(Bt_rm64_r64) [RCX,RDX]                            encoding(4 bytes) = 48 0f a3 d1
 0009h setb al                       ; SETB(Setb_rm8) [AL]                                  encoding(3 bytes) = 0f 92 c0
@@ -994,7 +994,7 @@
 ; static ReadOnlySpan<byte> testbit_d64iBytes => new byte[16]{0x0F,0x1F,0x44,0x00,0x00,0x48,0x0F,0xA3,0xD1,0x0F,0x92,0xC0,0x0F,0xB6,0xC0,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: bool testbit_g64i(long src, int pos)
-; location: [7FFDDBAEF7A0h, 7FFDDBAEF7AFh]
+; location: [7FFDDBAF4150h, 7FFDDBAF415Fh]
 0000h nop dword ptr [rax+rax]       ; NOP(Nop_rm32) [mem(32u,RAX:br,DS:sr)]                encoding(5 bytes) = 0f 1f 44 00 00
 0005h bt rcx,rdx                    ; BT(Bt_rm64_r64) [RCX,RDX]                            encoding(4 bytes) = 48 0f a3 d1
 0009h setb al                       ; SETB(Setb_rm8) [AL]                                  encoding(3 bytes) = 0f 92 c0
@@ -1003,7 +1003,7 @@
 ; static ReadOnlySpan<byte> testbit_g64iBytes => new byte[16]{0x0F,0x1F,0x44,0x00,0x00,0x48,0x0F,0xA3,0xD1,0x0F,0x92,0xC0,0x0F,0xB6,0xC0,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: bool testbit_d64u(ulong src, int pos)
-; location: [7FFDDBAEF7C0h, 7FFDDBAEF7EFh]
+; location: [7FFDDBAF4170h, 7FFDDBAF419Fh]
 0000h push rax                      ; PUSH(Push_r64) [RAX]                                 encoding(1 byte ) = 50
 0001h nop dword ptr [rax]           ; NOP(Nop_rm32) [mem(32u,RAX:br,DS:sr)]                encoding(4 bytes) = 0f 1f 40 00
 0005h xor eax,eax                   ; XOR(Xor_r32_rm32) [EAX,EAX]                          encoding(2 bytes) = 33 c0
@@ -1024,7 +1024,7 @@
 ; static ReadOnlySpan<byte> testbit_d64uBytes => new byte[48]{0x50,0x0F,0x1F,0x40,0x00,0x33,0xC0,0x89,0x04,0x24,0x48,0x8D,0x04,0x24,0x48,0x0F,0xA3,0xD1,0x72,0x04,0x33,0xD2,0xEB,0x05,0xBA,0x01,0x00,0x00,0x00,0x89,0x10,0x8B,0x04,0x24,0x83,0xF8,0x01,0x0F,0x94,0xC0,0x0F,0xB6,0xC0,0x48,0x83,0xC4,0x08,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: bool testbit_g64u(ulong src, int pos)
-; location: [7FFDDBAEF810h, 7FFDDBAEF83Fh]
+; location: [7FFDDBAF41C0h, 7FFDDBAF41EFh]
 0000h push rax                      ; PUSH(Push_r64) [RAX]                                 encoding(1 byte ) = 50
 0001h nop dword ptr [rax]           ; NOP(Nop_rm32) [mem(32u,RAX:br,DS:sr)]                encoding(4 bytes) = 0f 1f 40 00
 0005h xor eax,eax                   ; XOR(Xor_r32_rm32) [EAX,EAX]                          encoding(2 bytes) = 33 c0
@@ -1045,7 +1045,7 @@
 ; static ReadOnlySpan<byte> testbit_g64uBytes => new byte[48]{0x50,0x0F,0x1F,0x40,0x00,0x33,0xC0,0x89,0x04,0x24,0x48,0x8D,0x04,0x24,0x48,0x0F,0xA3,0xD1,0x72,0x04,0x33,0xD2,0xEB,0x05,0xBA,0x01,0x00,0x00,0x00,0x89,0x10,0x8B,0x04,0x24,0x83,0xF8,0x01,0x0F,0x94,0xC0,0x0F,0xB6,0xC0,0x48,0x83,0xC4,0x08,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: bool testbit_d32f(float src, int pos)
-; location: [7FFDDBAEF860h, 7FFDDBAEF89Dh]
+; location: [7FFDDBAF4210h, 7FFDDBAF424Dh]
 0000h sub rsp,18h                   ; SUB(Sub_rm64_imm8) [RSP,18h:imm64]                   encoding(4 bytes) = 48 83 ec 18
 0004h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0007h vmovss dword ptr [rsp+14h],xmm0; VMOVSS(VEX_Vmovss_m32_xmm) [mem(Float32,RSP:br,SS:sr),XMM0] encoding(VEX, 6 bytes) = c5 fa 11 44 24 14
@@ -1068,7 +1068,7 @@
 ; static ReadOnlySpan<byte> testbit_d32fBytes => new byte[62]{0x48,0x83,0xEC,0x18,0xC5,0xF8,0x77,0xC5,0xFA,0x11,0x44,0x24,0x14,0x8B,0x44,0x24,0x14,0x33,0xC9,0x89,0x4C,0x24,0x08,0x48,0x8D,0x4C,0x24,0x08,0x0F,0xA3,0xD0,0x72,0x04,0x33,0xC0,0xEB,0x05,0xB8,0x01,0x00,0x00,0x00,0x89,0x01,0x8B,0x44,0x24,0x08,0x83,0xF8,0x01,0x0F,0x94,0xC0,0x0F,0xB6,0xC0,0x48,0x83,0xC4,0x18,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: bool testbit_g32f(float src, int pos)
-; location: [7FFDDBAEF8C0h, 7FFDDBAEF8FDh]
+; location: [7FFDDBAF4270h, 7FFDDBAF42ADh]
 0000h sub rsp,18h                   ; SUB(Sub_rm64_imm8) [RSP,18h:imm64]                   encoding(4 bytes) = 48 83 ec 18
 0004h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0007h vmovss dword ptr [rsp+14h],xmm0; VMOVSS(VEX_Vmovss_m32_xmm) [mem(Float32,RSP:br,SS:sr),XMM0] encoding(VEX, 6 bytes) = c5 fa 11 44 24 14
@@ -1091,7 +1091,7 @@
 ; static ReadOnlySpan<byte> testbit_g32fBytes => new byte[62]{0x48,0x83,0xEC,0x18,0xC5,0xF8,0x77,0xC5,0xFA,0x11,0x44,0x24,0x14,0x8B,0x44,0x24,0x14,0x33,0xC9,0x89,0x4C,0x24,0x08,0x48,0x8D,0x4C,0x24,0x08,0x0F,0xA3,0xD0,0x72,0x04,0x33,0xC0,0xEB,0x05,0xB8,0x01,0x00,0x00,0x00,0x89,0x01,0x8B,0x44,0x24,0x08,0x83,0xF8,0x01,0x0F,0x94,0xC0,0x0F,0xB6,0xC0,0x48,0x83,0xC4,0x18,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: bool testbit_d64f(double src, int pos)
-; location: [7FFDDBAEF920h, 7FFDDBAEF95Fh]
+; location: [7FFDDBAF42D0h, 7FFDDBAF430Fh]
 0000h sub rsp,18h                   ; SUB(Sub_rm64_imm8) [RSP,18h:imm64]                   encoding(4 bytes) = 48 83 ec 18
 0004h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0007h vmovsd qword ptr [rsp+10h],xmm0; VMOVSD(VEX_Vmovsd_m64_xmm) [mem(Float64,RSP:br,SS:sr),XMM0] encoding(VEX, 6 bytes) = c5 fb 11 44 24 10
@@ -1114,7 +1114,7 @@
 ; static ReadOnlySpan<byte> testbit_d64fBytes => new byte[64]{0x48,0x83,0xEC,0x18,0xC5,0xF8,0x77,0xC5,0xFB,0x11,0x44,0x24,0x10,0x48,0x8B,0x44,0x24,0x10,0x33,0xC9,0x89,0x4C,0x24,0x08,0x48,0x8D,0x4C,0x24,0x08,0x48,0x0F,0xA3,0xD0,0x72,0x04,0x33,0xC0,0xEB,0x05,0xB8,0x01,0x00,0x00,0x00,0x89,0x01,0x8B,0x44,0x24,0x08,0x83,0xF8,0x01,0x0F,0x94,0xC0,0x0F,0xB6,0xC0,0x48,0x83,0xC4,0x18,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: bool testbit_g64f(double src, int pos)
-; location: [7FFDDBAEF980h, 7FFDDBAEF9BFh]
+; location: [7FFDDBAF4330h, 7FFDDBAF436Fh]
 0000h sub rsp,18h                   ; SUB(Sub_rm64_imm8) [RSP,18h:imm64]                   encoding(4 bytes) = 48 83 ec 18
 0004h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0007h vmovsd qword ptr [rsp+10h],xmm0; VMOVSD(VEX_Vmovsd_m64_xmm) [mem(Float64,RSP:br,SS:sr),XMM0] encoding(VEX, 6 bytes) = c5 fb 11 44 24 10
@@ -1137,7 +1137,7 @@
 ; static ReadOnlySpan<byte> testbit_g64fBytes => new byte[64]{0x48,0x83,0xEC,0x18,0xC5,0xF8,0x77,0xC5,0xFB,0x11,0x44,0x24,0x10,0x48,0x8B,0x44,0x24,0x10,0x33,0xC9,0x89,0x4C,0x24,0x08,0x48,0x8D,0x4C,0x24,0x08,0x48,0x0F,0xA3,0xD0,0x72,0x04,0x33,0xC0,0xEB,0x05,0xB8,0x01,0x00,0x00,0x00,0x89,0x01,0x8B,0x44,0x24,0x08,0x83,0xF8,0x01,0x0F,0x94,0xC0,0x0F,0xB6,0xC0,0x48,0x83,0xC4,0x18,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: uint mod_const_16(uint a)
-; location: [7FFDDBAEF9E0h, 7FFDDBAEF9F5h]
+; location: [7FFDDBAF4390h, 7FFDDBAF43A5h]
 0000h nop dword ptr [rax+rax]       ; NOP(Nop_rm32) [mem(32u,RAX:br,DS:sr)]                encoding(5 bytes) = 0f 1f 44 00 00
 0005h mov edx,ecx                   ; MOV(Mov_r32_rm32) [EDX,ECX]                          encoding(2 bytes) = 8b d1
 0007h shl rdx,3Ch                   ; SHL(Shl_rm64_imm8) [RDX,3ch:imm8]                    encoding(4 bytes) = 48 c1 e2 3c
@@ -1147,7 +1147,7 @@
 ; static ReadOnlySpan<byte> mod_const_16Bytes => new byte[22]{0x0F,0x1F,0x44,0x00,0x00,0x8B,0xD1,0x48,0xC1,0xE2,0x3C,0xB8,0x10,0x00,0x00,0x00,0xC4,0xE2,0xFB,0xF6,0xC0,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: uint div_const_16(uint a)
-; location: [7FFDDBAEFA10h, 7FFDDBAEFA26h]
+; location: [7FFDDBAF43C0h, 7FFDDBAF43D6h]
 0000h nop dword ptr [rax+rax]       ; NOP(Nop_rm32) [mem(32u,RAX:br,DS:sr)]                encoding(5 bytes) = 0f 1f 44 00 00
 0005h mov eax,ecx                   ; MOV(Mov_r32_rm32) [EAX,ECX]                          encoding(2 bytes) = 8b c1
 0007h mov rdx,1000000000000000h     ; MOV(Mov_r64_imm64) [RDX,1000000000000000h:imm64]     encoding(10 bytes) = 48 ba 00 00 00 00 00 00 00 10
@@ -1156,7 +1156,7 @@
 ; static ReadOnlySpan<byte> div_const_16Bytes => new byte[23]{0x0F,0x1F,0x44,0x00,0x00,0x8B,0xC1,0x48,0xBA,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x10,0xC4,0xE2,0xFB,0xF6,0xC0,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: uint mod_const_25(uint a)
-; location: [7FFDDBAEFA40h, 7FFDDBAEFA5Fh]
+; location: [7FFDDBAF43F0h, 7FFDDBAF440Fh]
 0000h nop dword ptr [rax+rax]       ; NOP(Nop_rm32) [mem(32u,RAX:br,DS:sr)]                encoding(5 bytes) = 0f 1f 44 00 00
 0005h mov edx,ecx                   ; MOV(Mov_r32_rm32) [EDX,ECX]                          encoding(2 bytes) = 8b d1
 0007h mov rax,0A3D70A3D70A3D71h     ; MOV(Mov_r64_imm64) [RAX,a3d70a3d70a3d71h:imm64]      encoding(10 bytes) = 48 b8 71 3d 0a d7 a3 70 3d 0a
@@ -1167,7 +1167,7 @@
 ; static ReadOnlySpan<byte> mod_const_25Bytes => new byte[32]{0x0F,0x1F,0x44,0x00,0x00,0x8B,0xD1,0x48,0xB8,0x71,0x3D,0x0A,0xD7,0xA3,0x70,0x3D,0x0A,0x48,0x0F,0xAF,0xD0,0xB8,0x19,0x00,0x00,0x00,0xC4,0xE2,0xFB,0xF6,0xC0,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: uint div_const_25(uint a)
-; location: [7FFDDBAEFA70h, 7FFDDBAEFA86h]
+; location: [7FFDDBAF4420h, 7FFDDBAF4436h]
 0000h nop dword ptr [rax+rax]       ; NOP(Nop_rm32) [mem(32u,RAX:br,DS:sr)]                encoding(5 bytes) = 0f 1f 44 00 00
 0005h mov eax,ecx                   ; MOV(Mov_r32_rm32) [EAX,ECX]                          encoding(2 bytes) = 8b c1
 0007h mov rdx,0A3D70A3D70A3D71h     ; MOV(Mov_r64_imm64) [RDX,a3d70a3d70a3d71h:imm64]      encoding(10 bytes) = 48 ba 71 3d 0a d7 a3 70 3d 0a
@@ -1176,7 +1176,7 @@
 ; static ReadOnlySpan<byte> div_const_25Bytes => new byte[23]{0x0F,0x1F,0x44,0x00,0x00,0x8B,0xC1,0x48,0xBA,0x71,0x3D,0x0A,0xD7,0xA3,0x70,0x3D,0x0A,0xC4,0xE2,0xFB,0xF6,0xC0,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: uint mod_const_32(uint a)
-; location: [7FFDDBAEFAA0h, 7FFDDBAEFAB5h]
+; location: [7FFDDBAF4450h, 7FFDDBAF4465h]
 0000h nop dword ptr [rax+rax]       ; NOP(Nop_rm32) [mem(32u,RAX:br,DS:sr)]                encoding(5 bytes) = 0f 1f 44 00 00
 0005h mov edx,ecx                   ; MOV(Mov_r32_rm32) [EDX,ECX]                          encoding(2 bytes) = 8b d1
 0007h shl rdx,3Bh                   ; SHL(Shl_rm64_imm8) [RDX,3bh:imm8]                    encoding(4 bytes) = 48 c1 e2 3b
@@ -1186,7 +1186,7 @@
 ; static ReadOnlySpan<byte> mod_const_32Bytes => new byte[22]{0x0F,0x1F,0x44,0x00,0x00,0x8B,0xD1,0x48,0xC1,0xE2,0x3B,0xB8,0x20,0x00,0x00,0x00,0xC4,0xE2,0xFB,0xF6,0xC0,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: uint div_const_32(uint a)
-; location: [7FFDDBAEFAD0h, 7FFDDBAEFAE6h]
+; location: [7FFDDBAF4480h, 7FFDDBAF4496h]
 0000h nop dword ptr [rax+rax]       ; NOP(Nop_rm32) [mem(32u,RAX:br,DS:sr)]                encoding(5 bytes) = 0f 1f 44 00 00
 0005h mov eax,ecx                   ; MOV(Mov_r32_rm32) [EAX,ECX]                          encoding(2 bytes) = 8b c1
 0007h mov rdx,800000000000000h      ; MOV(Mov_r64_imm64) [RDX,800000000000000h:imm64]      encoding(10 bytes) = 48 ba 00 00 00 00 00 00 00 08
@@ -1195,7 +1195,7 @@
 ; static ReadOnlySpan<byte> div_const_32Bytes => new byte[23]{0x0F,0x1F,0x44,0x00,0x00,0x8B,0xC1,0x48,0xBA,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x08,0xC4,0xE2,0xFB,0xF6,0xC0,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: uint mul_lo_32u(uint x, uint y)
-; location: [7FFDDBAEFB00h, 7FFDDBAEFB0Ch]
+; location: [7FFDDBAF44B0h, 7FFDDBAF44BCh]
 0000h nop dword ptr [rax+rax]       ; NOP(Nop_rm32) [mem(32u,RAX:br,DS:sr)]                encoding(5 bytes) = 0f 1f 44 00 00
 0005h mov eax,ecx                   ; MOV(Mov_r32_rm32) [EAX,ECX]                          encoding(2 bytes) = 8b c1
 0007h mov edx,edx                   ; MOV(Mov_r32_rm32) [EDX,EDX]                          encoding(2 bytes) = 8b d2
@@ -1204,7 +1204,7 @@
 ; static ReadOnlySpan<byte> mul_lo_32uBytes => new byte[13]{0x0F,0x1F,0x44,0x00,0x00,0x8B,0xC1,0x8B,0xD2,0x0F,0xAF,0xC2,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: ulong mul_lo_64u(ulong x, ulong y)
-; location: [7FFDDBAEFB20h, 7FFDDBAEFB2Ch]
+; location: [7FFDDBAF44D0h, 7FFDDBAF44DCh]
 0000h nop dword ptr [rax+rax]       ; NOP(Nop_rm32) [mem(32u,RAX:br,DS:sr)]                encoding(5 bytes) = 0f 1f 44 00 00
 0005h mov rax,rcx                   ; MOV(Mov_r64_rm64) [RAX,RCX]                          encoding(3 bytes) = 48 8b c1
 0008h imul rax,rdx                  ; IMUL(Imul_r64_rm64) [RAX,RDX]                        encoding(4 bytes) = 48 0f af c2
@@ -1212,7 +1212,7 @@
 ; static ReadOnlySpan<byte> mul_lo_64uBytes => new byte[13]{0x0F,0x1F,0x44,0x00,0x00,0x48,0x8B,0xC1,0x48,0x0F,0xAF,0xC2,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: uint mul_hi_32u(uint x, uint y)
-; location: [7FFDDBAEFB40h, 7FFDDBAEFB51h]
+; location: [7FFDDBAF44F0h, 7FFDDBAF4501h]
 0000h nop dword ptr [rax+rax]       ; NOP(Nop_rm32) [mem(32u,RAX:br,DS:sr)]                encoding(5 bytes) = 0f 1f 44 00 00
 0005h mov eax,ecx                   ; MOV(Mov_r32_rm32) [EAX,ECX]                          encoding(2 bytes) = 8b c1
 0007h mov edx,edx                   ; MOV(Mov_r32_rm32) [EDX,EDX]                          encoding(2 bytes) = 8b d2
@@ -1222,7 +1222,7 @@
 ; static ReadOnlySpan<byte> mul_hi_32uBytes => new byte[18]{0x0F,0x1F,0x44,0x00,0x00,0x8B,0xC1,0x8B,0xD2,0x48,0x0F,0xAF,0xC2,0x48,0xC1,0xE8,0x20,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: ulong mul_hi_64u(ulong x, ulong y)
-; location: [7FFDDBAEFB70h, 7FFDDBAEFB87h]
+; location: [7FFDDBAF4520h, 7FFDDBAF4537h]
 0000h nop dword ptr [rax+rax]       ; NOP(Nop_rm32) [mem(32u,RAX:br,DS:sr)]                encoding(5 bytes) = 0f 1f 44 00 00
 0005h mov [rsp+10h],rdx             ; MOV(Mov_rm64_r64) [mem(64u,RSP:br,SS:sr),RDX]        encoding(5 bytes) = 48 89 54 24 10
 000ah mov rax,[rsp+10h]             ; MOV(Mov_r64_rm64) [RAX,mem(64u,RSP:br,SS:sr)]        encoding(5 bytes) = 48 8b 44 24 10
@@ -1232,7 +1232,7 @@
 ; static ReadOnlySpan<byte> mul_hi_64uBytes => new byte[24]{0x0F,0x1F,0x44,0x00,0x00,0x48,0x89,0x54,0x24,0x10,0x48,0x8B,0x44,0x24,0x10,0x48,0x8B,0xD1,0xC4,0xE2,0xFB,0xF6,0xC0,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: void mul_full_32u(uint a, uint b, out uint lo, out uint hi)
-; location: [7FFDDBAEFBA0h, 7FFDDBAEFBB7h]
+; location: [7FFDDBAF4550h, 7FFDDBAF4567h]
 0000h nop dword ptr [rax+rax]       ; NOP(Nop_rm32) [mem(32u,RAX:br,DS:sr)]                encoding(5 bytes) = 0f 1f 44 00 00
 0005h mov eax,ecx                   ; MOV(Mov_r32_rm32) [EAX,ECX]                          encoding(2 bytes) = 8b c1
 0007h mov edx,edx                   ; MOV(Mov_r32_rm32) [EDX,EDX]                          encoding(2 bytes) = 8b d2
@@ -1244,7 +1244,7 @@
 ; static ReadOnlySpan<byte> mul_full_32uBytes => new byte[24]{0x0F,0x1F,0x44,0x00,0x00,0x8B,0xC1,0x8B,0xD2,0x48,0x0F,0xAF,0xC2,0x41,0x89,0x00,0x48,0xC1,0xE8,0x20,0x41,0x89,0x01,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: void mul_full_64u(ulong x, ulong y, out ulong lo, out ulong hi)
-; location: [7FFDDBAEFBD0h, 7FFDDBAEFBF4h]
+; location: [7FFDDBAF4580h, 7FFDDBAF45A4h]
 0000h nop dword ptr [rax+rax]       ; NOP(Nop_rm32) [mem(32u,RAX:br,DS:sr)]                encoding(5 bytes) = 0f 1f 44 00 00
 0005h mov [rsp+10h],rdx             ; MOV(Mov_rm64_r64) [mem(64u,RSP:br,SS:sr),RDX]        encoding(5 bytes) = 48 89 54 24 10
 000ah mov rax,rcx                   ; MOV(Mov_r64_rm64) [RAX,RCX]                          encoding(3 bytes) = 48 8b c1
@@ -1258,7 +1258,7 @@
 ; static ReadOnlySpan<byte> mul_full_64uBytes => new byte[37]{0x0F,0x1F,0x44,0x00,0x00,0x48,0x89,0x54,0x24,0x10,0x48,0x8B,0xC1,0x48,0x0F,0xAF,0xC2,0x49,0x89,0x00,0x48,0x8B,0x44,0x24,0x10,0x48,0x8B,0xD1,0xC4,0xE2,0xFB,0xF6,0xC0,0x49,0x89,0x01,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: UInt8 bitview8_and(UInt8 a, UInt8 b)
-; location: [7FFDDBAEFC10h, 7FFDDBAEFC19h]
+; location: [7FFDDBAF45C0h, 7FFDDBAF45C9h]
 0000h nop dword ptr [rax+rax]       ; NOP(Nop_rm32) [mem(32u,RAX:br,DS:sr)]                encoding(5 bytes) = 0f 1f 44 00 00
 0005h mov eax,ecx                   ; MOV(Mov_r32_rm32) [EAX,ECX]                          encoding(2 bytes) = 8b c1
 0007h and eax,edx                   ; AND(And_r32_rm32) [EAX,EDX]                          encoding(2 bytes) = 23 c2
@@ -1266,7 +1266,7 @@
 ; static ReadOnlySpan<byte> bitview8_andBytes => new byte[10]{0x0F,0x1F,0x44,0x00,0x00,0x8B,0xC1,0x23,0xC2,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: UInt8 bitview8_sll(UInt8 a, int offset)
-; location: [7FFDDBAEFC30h, 7FFDDBAEFC40h]
+; location: [7FFDDBAF45E0h, 7FFDDBAF45F0h]
 0000h nop dword ptr [rax+rax]       ; NOP(Nop_rm32) [mem(32u,RAX:br,DS:sr)]                encoding(5 bytes) = 0f 1f 44 00 00
 0005h mov eax,ecx                   ; MOV(Mov_r32_rm32) [EAX,ECX]                          encoding(2 bytes) = 8b c1
 0007h mov ecx,edx                   ; MOV(Mov_r32_rm32) [ECX,EDX]                          encoding(2 bytes) = 8b ca
@@ -1276,7 +1276,7 @@
 ; static ReadOnlySpan<byte> bitview8_sllBytes => new byte[17]{0x0F,0x1F,0x44,0x00,0x00,0x8B,0xC1,0x8B,0xCA,0xD3,0xE0,0x25,0xFF,0x00,0x00,0x00,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: UInt8 bitview8_rotl(UInt8 a, int offset)
-; location: [7FFDDBAEFC60h, 7FFDDBAEFC82h]
+; location: [7FFDDBAF4610h, 7FFDDBAF4632h]
 0000h nop dword ptr [rax+rax]       ; NOP(Nop_rm32) [mem(32u,RAX:br,DS:sr)]                encoding(5 bytes) = 0f 1f 44 00 00
 0005h mov eax,ecx                   ; MOV(Mov_r32_rm32) [EAX,ECX]                          encoding(2 bytes) = 8b c1
 0007h mov ecx,edx                   ; MOV(Mov_r32_rm32) [ECX,EDX]                          encoding(2 bytes) = 8b ca
@@ -1292,7 +1292,7 @@
 ; static ReadOnlySpan<byte> bitview8_rotlBytes => new byte[35]{0x0F,0x1F,0x44,0x00,0x00,0x8B,0xC1,0x8B,0xCA,0x44,0x8B,0xC0,0x41,0xD3,0xE0,0x41,0x81,0xE0,0xFF,0x00,0x00,0x00,0x8B,0xCA,0xF7,0xD9,0x83,0xC1,0x08,0xD3,0xE8,0x41,0x0B,0xC0,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: UInt8 bitview8_rotr(UInt8 a, int offset)
-; location: [7FFDDBAEFCA0h, 7FFDDBAEFCC0h]
+; location: [7FFDDBAF4650h, 7FFDDBAF4670h]
 0000h nop dword ptr [rax+rax]       ; NOP(Nop_rm32) [mem(32u,RAX:br,DS:sr)]                encoding(5 bytes) = 0f 1f 44 00 00
 0005h mov eax,ecx                   ; MOV(Mov_r32_rm32) [EAX,ECX]                          encoding(2 bytes) = 8b c1
 0007h mov ecx,edx                   ; MOV(Mov_r32_rm32) [ECX,EDX]                          encoding(2 bytes) = 8b ca
@@ -1308,7 +1308,7 @@
 ; static ReadOnlySpan<byte> bitview8_rotrBytes => new byte[33]{0x0F,0x1F,0x44,0x00,0x00,0x8B,0xC1,0x8B,0xCA,0x44,0x8B,0xC0,0x41,0xD3,0xE8,0x8B,0xCA,0xF7,0xD9,0x83,0xC1,0x08,0xD3,0xE0,0x25,0xFF,0x00,0x00,0x00,0x41,0x0B,0xC0,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: UInt8 bitview8_mul(UInt8 a, UInt8 b)
-; location: [7FFDDBAEFCE0h, 7FFDDBAEFCEFh]
+; location: [7FFDDBAF4690h, 7FFDDBAF469Fh]
 0000h nop dword ptr [rax+rax]       ; NOP(Nop_rm32) [mem(32u,RAX:br,DS:sr)]                encoding(5 bytes) = 0f 1f 44 00 00
 0005h imul edx,ecx                  ; IMUL(Imul_r32_rm32) [EDX,ECX]                        encoding(3 bytes) = 0f af d1
 0008h mov eax,edx                   ; MOV(Mov_r32_rm32) [EAX,EDX]                          encoding(2 bytes) = 8b c2
@@ -1317,7 +1317,7 @@
 ; static ReadOnlySpan<byte> bitview8_mulBytes => new byte[16]{0x0F,0x1F,0x44,0x00,0x00,0x0F,0xAF,0xD1,0x8B,0xC2,0x25,0xFF,0x00,0x00,0x00,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: UInt8 bitview8_or(UInt8 a, UInt8 b)
-; location: [7FFDDBAEFD00h, 7FFDDBAEFD09h]
+; location: [7FFDDBAF46B0h, 7FFDDBAF46B9h]
 0000h nop dword ptr [rax+rax]       ; NOP(Nop_rm32) [mem(32u,RAX:br,DS:sr)]                encoding(5 bytes) = 0f 1f 44 00 00
 0005h mov eax,ecx                   ; MOV(Mov_r32_rm32) [EAX,ECX]                          encoding(2 bytes) = 8b c1
 0007h or eax,edx                    ; OR(Or_r32_rm32) [EAX,EDX]                            encoding(2 bytes) = 0b c2
@@ -1325,20 +1325,20 @@
 ; static ReadOnlySpan<byte> bitview8_orBytes => new byte[10]{0x0F,0x1F,0x44,0x00,0x00,0x8B,0xC1,0x0B,0xC2,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: Span<byte> tospan_128x8i(Vector128<byte> src)
-; location: [7FFDDBAEFD20h, 7FFDDBAEFD38h]
+; location: [7FFDDBAF46D0h, 7FFDDBAF46E8h]
 0000h push rsi                      ; PUSH(Push_r64) [RSI]                                 encoding(1 byte ) = 56
 0001h sub rsp,20h                   ; SUB(Sub_rm64_imm8) [RSP,20h:imm64]                   encoding(4 bytes) = 48 83 ec 20
 0005h mov rsi,rcx                   ; MOV(Mov_r64_rm64) [RSI,RCX]                          encoding(3 bytes) = 48 8b f1
 0008h mov rcx,rsi                   ; MOV(Mov_r64_rm64) [RCX,RSI]                          encoding(3 bytes) = 48 8b ce
-000bh call 7FFDDBAEF0A8h            ; CALL(Call_rel32_64) [FFFFFFFFFFFFF388h:jmp64]        encoding(5 bytes) = e8 78 f3 ff ff
+000bh call 7FFDDBAF39D0h            ; CALL(Call_rel32_64) [FFFFFFFFFFFFF300h:jmp64]        encoding(5 bytes) = e8 f0 f2 ff ff
 0010h mov rax,rsi                   ; MOV(Mov_r64_rm64) [RAX,RSI]                          encoding(3 bytes) = 48 8b c6
 0013h add rsp,20h                   ; ADD(Add_rm64_imm8) [RSP,20h:imm64]                   encoding(4 bytes) = 48 83 c4 20
 0017h pop rsi                       ; POP(Pop_r64) [RSI]                                   encoding(1 byte ) = 5e
 0018h ret                           ; RET(Retnq)                                           encoding(1 byte ) = c3
-; static ReadOnlySpan<byte> tospan_128x8iBytes => new byte[25]{0x56,0x48,0x83,0xEC,0x20,0x48,0x8B,0xF1,0x48,0x8B,0xCE,0xE8,0x78,0xF3,0xFF,0xFF,0x48,0x8B,0xC6,0x48,0x83,0xC4,0x20,0x5E,0xC3};
+; static ReadOnlySpan<byte> tospan_128x8iBytes => new byte[25]{0x56,0x48,0x83,0xEC,0x20,0x48,0x8B,0xF1,0x48,0x8B,0xCE,0xE8,0xF0,0xF2,0xFF,0xFF,0x48,0x8B,0xC6,0x48,0x83,0xC4,0x20,0x5E,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: void vstore_g128x8u(Vector128<byte> src, ref byte dst)
-; location: [7FFDDBAEFD50h, 7FFDDBAEFD5Dh]
+; location: [7FFDDBAF4700h, 7FFDDBAF470Dh]
 0000h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                    ; NOP(Nopw)                                            encoding(2 bytes) = 66 90
 0005h vmovupd xmm0,[rcx]            ; VMOVUPD(VEX_Vmovupd_xmm_xmmm128) [XMM0,mem(Packed128_Float64,RCX:br,DS:sr)] encoding(VEX, 4 bytes) = c5 f9 10 01
@@ -1347,7 +1347,7 @@
 ; static ReadOnlySpan<byte> vstore_g128x8uBytes => new byte[14]{0xC5,0xF8,0x77,0x66,0x90,0xC5,0xF9,0x10,0x01,0xC5,0xFA,0x7F,0x02,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: void vstore_g128x8i(Vector128<sbyte> src, ref sbyte dst)
-; location: [7FFDDBAEFD70h, 7FFDDBAEFD7Dh]
+; location: [7FFDDBAF4B30h, 7FFDDBAF4B3Dh]
 0000h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                    ; NOP(Nopw)                                            encoding(2 bytes) = 66 90
 0005h vmovupd xmm0,[rcx]            ; VMOVUPD(VEX_Vmovupd_xmm_xmmm128) [XMM0,mem(Packed128_Float64,RCX:br,DS:sr)] encoding(VEX, 4 bytes) = c5 f9 10 01
@@ -1356,7 +1356,7 @@
 ; static ReadOnlySpan<byte> vstore_g128x8iBytes => new byte[14]{0xC5,0xF8,0x77,0x66,0x90,0xC5,0xF9,0x10,0x01,0xC5,0xFA,0x7F,0x02,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: void vstore_g128x16i(Vector128<short> src, ref short dst)
-; location: [7FFDDBAF01A0h, 7FFDDBAF01ADh]
+; location: [7FFDDBAF4B50h, 7FFDDBAF4B5Dh]
 0000h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                    ; NOP(Nopw)                                            encoding(2 bytes) = 66 90
 0005h vmovupd xmm0,[rcx]            ; VMOVUPD(VEX_Vmovupd_xmm_xmmm128) [XMM0,mem(Packed128_Float64,RCX:br,DS:sr)] encoding(VEX, 4 bytes) = c5 f9 10 01
@@ -1365,7 +1365,7 @@
 ; static ReadOnlySpan<byte> vstore_g128x16iBytes => new byte[14]{0xC5,0xF8,0x77,0x66,0x90,0xC5,0xF9,0x10,0x01,0xC5,0xFA,0x7F,0x02,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: void vstore_g128x16u(Vector128<ushort> src, ref ushort dst)
-; location: [7FFDDBAF01C0h, 7FFDDBAF01CDh]
+; location: [7FFDDBAF4B70h, 7FFDDBAF4B7Dh]
 0000h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                    ; NOP(Nopw)                                            encoding(2 bytes) = 66 90
 0005h vmovupd xmm0,[rcx]            ; VMOVUPD(VEX_Vmovupd_xmm_xmmm128) [XMM0,mem(Packed128_Float64,RCX:br,DS:sr)] encoding(VEX, 4 bytes) = c5 f9 10 01
@@ -1374,7 +1374,7 @@
 ; static ReadOnlySpan<byte> vstore_g128x16uBytes => new byte[14]{0xC5,0xF8,0x77,0x66,0x90,0xC5,0xF9,0x10,0x01,0xC5,0xFA,0x7F,0x02,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: void vstore_d128x16u(Vector128<ushort> src, ref ushort dst)
-; location: [7FFDDBAF01E0h, 7FFDDBAF01EDh]
+; location: [7FFDDBAF4B90h, 7FFDDBAF4B9Dh]
 0000h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                    ; NOP(Nopw)                                            encoding(2 bytes) = 66 90
 0005h vmovupd xmm0,[rcx]            ; VMOVUPD(VEX_Vmovupd_xmm_xmmm128) [XMM0,mem(Packed128_Float64,RCX:br,DS:sr)] encoding(VEX, 4 bytes) = c5 f9 10 01
@@ -1383,7 +1383,7 @@
 ; static ReadOnlySpan<byte> vstore_d128x16uBytes => new byte[14]{0xC5,0xF8,0x77,0x66,0x90,0xC5,0xF9,0x10,0x01,0xC5,0xFA,0x7F,0x02,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: void vstore_g128x32i(Vector128<int> src, ref int dst)
-; location: [7FFDDBAF0200h, 7FFDDBAF020Dh]
+; location: [7FFDDBAF4BB0h, 7FFDDBAF4BBDh]
 0000h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                    ; NOP(Nopw)                                            encoding(2 bytes) = 66 90
 0005h vmovupd xmm0,[rcx]            ; VMOVUPD(VEX_Vmovupd_xmm_xmmm128) [XMM0,mem(Packed128_Float64,RCX:br,DS:sr)] encoding(VEX, 4 bytes) = c5 f9 10 01
@@ -1392,7 +1392,7 @@
 ; static ReadOnlySpan<byte> vstore_g128x32iBytes => new byte[14]{0xC5,0xF8,0x77,0x66,0x90,0xC5,0xF9,0x10,0x01,0xC5,0xFA,0x7F,0x02,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: void vstore_g128x32u(Vector128<uint> src, ref uint dst)
-; location: [7FFDDBAF0220h, 7FFDDBAF022Dh]
+; location: [7FFDDBAF4BD0h, 7FFDDBAF4BDDh]
 0000h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                    ; NOP(Nopw)                                            encoding(2 bytes) = 66 90
 0005h vmovupd xmm0,[rcx]            ; VMOVUPD(VEX_Vmovupd_xmm_xmmm128) [XMM0,mem(Packed128_Float64,RCX:br,DS:sr)] encoding(VEX, 4 bytes) = c5 f9 10 01
@@ -1401,7 +1401,7 @@
 ; static ReadOnlySpan<byte> vstore_g128x32uBytes => new byte[14]{0xC5,0xF8,0x77,0x66,0x90,0xC5,0xF9,0x10,0x01,0xC5,0xFA,0x7F,0x02,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: void vstore_g128x64i(Vector128<long> src, ref long dst)
-; location: [7FFDDBAF0240h, 7FFDDBAF024Dh]
+; location: [7FFDDBAF4BF0h, 7FFDDBAF4BFDh]
 0000h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                    ; NOP(Nopw)                                            encoding(2 bytes) = 66 90
 0005h vmovupd xmm0,[rcx]            ; VMOVUPD(VEX_Vmovupd_xmm_xmmm128) [XMM0,mem(Packed128_Float64,RCX:br,DS:sr)] encoding(VEX, 4 bytes) = c5 f9 10 01
@@ -1410,7 +1410,7 @@
 ; static ReadOnlySpan<byte> vstore_g128x64iBytes => new byte[14]{0xC5,0xF8,0x77,0x66,0x90,0xC5,0xF9,0x10,0x01,0xC5,0xFA,0x7F,0x02,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: void vstore_g128x64u(Vector128<ulong> src, ref ulong dst)
-; location: [7FFDDBAF0260h, 7FFDDBAF026Dh]
+; location: [7FFDDBAF4C10h, 7FFDDBAF4C1Dh]
 0000h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                    ; NOP(Nopw)                                            encoding(2 bytes) = 66 90
 0005h vmovupd xmm0,[rcx]            ; VMOVUPD(VEX_Vmovupd_xmm_xmmm128) [XMM0,mem(Packed128_Float64,RCX:br,DS:sr)] encoding(VEX, 4 bytes) = c5 f9 10 01
@@ -1419,7 +1419,7 @@
 ; static ReadOnlySpan<byte> vstore_g128x64uBytes => new byte[14]{0xC5,0xF8,0x77,0x66,0x90,0xC5,0xF9,0x10,0x01,0xC5,0xFA,0x7F,0x02,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: void vstore_g128x32f(Vector128<float> src, ref float dst)
-; location: [7FFDDBAF0280h, 7FFDDBAF028Dh]
+; location: [7FFDDBAF4C30h, 7FFDDBAF4C3Dh]
 0000h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                    ; NOP(Nopw)                                            encoding(2 bytes) = 66 90
 0005h vmovupd xmm0,[rcx]            ; VMOVUPD(VEX_Vmovupd_xmm_xmmm128) [XMM0,mem(Packed128_Float64,RCX:br,DS:sr)] encoding(VEX, 4 bytes) = c5 f9 10 01
@@ -1428,7 +1428,7 @@
 ; static ReadOnlySpan<byte> vstore_g128x32fBytes => new byte[14]{0xC5,0xF8,0x77,0x66,0x90,0xC5,0xF9,0x10,0x01,0xC5,0xF8,0x11,0x02,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: void vstore_g128x64f(Vector128<double> src, ref double dst)
-; location: [7FFDDBAF02A0h, 7FFDDBAF02ADh]
+; location: [7FFDDBAF4C50h, 7FFDDBAF4C5Dh]
 0000h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                    ; NOP(Nopw)                                            encoding(2 bytes) = 66 90
 0005h vmovupd xmm0,[rcx]            ; VMOVUPD(VEX_Vmovupd_xmm_xmmm128) [XMM0,mem(Packed128_Float64,RCX:br,DS:sr)] encoding(VEX, 4 bytes) = c5 f9 10 01
@@ -1437,7 +1437,7 @@
 ; static ReadOnlySpan<byte> vstore_g128x64fBytes => new byte[14]{0xC5,0xF8,0x77,0x66,0x90,0xC5,0xF9,0x10,0x01,0xC5,0xF9,0x11,0x02,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: void vstore_g256x8u(Vector256<byte> src, ref byte dst)
-; location: [7FFDDBAF02C0h, 7FFDDBAF02D0h]
+; location: [7FFDDBAF4C70h, 7FFDDBAF4C80h]
 0000h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                    ; NOP(Nopw)                                            encoding(2 bytes) = 66 90
 0005h vmovupd ymm0,[rcx]            ; VMOVUPD(VEX_Vmovupd_ymm_ymmm256) [YMM0,mem(Packed256_Float64,RCX:br,DS:sr)] encoding(VEX, 4 bytes) = c5 fd 10 01
@@ -1447,7 +1447,7 @@
 ; static ReadOnlySpan<byte> vstore_g256x8uBytes => new byte[17]{0xC5,0xF8,0x77,0x66,0x90,0xC5,0xFD,0x10,0x01,0xC5,0xFE,0x7F,0x02,0xC5,0xF8,0x77,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: void vstore_g256x8i(Vector256<sbyte> src, ref sbyte dst)
-; location: [7FFDDBAF02F0h, 7FFDDBAF0300h]
+; location: [7FFDDBAF4CA0h, 7FFDDBAF4CB0h]
 0000h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                    ; NOP(Nopw)                                            encoding(2 bytes) = 66 90
 0005h vmovupd ymm0,[rcx]            ; VMOVUPD(VEX_Vmovupd_ymm_ymmm256) [YMM0,mem(Packed256_Float64,RCX:br,DS:sr)] encoding(VEX, 4 bytes) = c5 fd 10 01
@@ -1457,7 +1457,7 @@
 ; static ReadOnlySpan<byte> vstore_g256x8iBytes => new byte[17]{0xC5,0xF8,0x77,0x66,0x90,0xC5,0xFD,0x10,0x01,0xC5,0xFE,0x7F,0x02,0xC5,0xF8,0x77,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: void vstore_g256x16i(Vector256<short> src, ref short dst)
-; location: [7FFDDBAF0320h, 7FFDDBAF0330h]
+; location: [7FFDDBAF4CD0h, 7FFDDBAF4CE0h]
 0000h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                    ; NOP(Nopw)                                            encoding(2 bytes) = 66 90
 0005h vmovupd ymm0,[rcx]            ; VMOVUPD(VEX_Vmovupd_ymm_ymmm256) [YMM0,mem(Packed256_Float64,RCX:br,DS:sr)] encoding(VEX, 4 bytes) = c5 fd 10 01
@@ -1467,7 +1467,7 @@
 ; static ReadOnlySpan<byte> vstore_g256x16iBytes => new byte[17]{0xC5,0xF8,0x77,0x66,0x90,0xC5,0xFD,0x10,0x01,0xC5,0xFE,0x7F,0x02,0xC5,0xF8,0x77,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: void vstore_g256x16u(Vector256<ushort> src, ref ushort dst)
-; location: [7FFDDBAF0350h, 7FFDDBAF0360h]
+; location: [7FFDDBAF4D00h, 7FFDDBAF4D10h]
 0000h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                    ; NOP(Nopw)                                            encoding(2 bytes) = 66 90
 0005h vmovupd ymm0,[rcx]            ; VMOVUPD(VEX_Vmovupd_ymm_ymmm256) [YMM0,mem(Packed256_Float64,RCX:br,DS:sr)] encoding(VEX, 4 bytes) = c5 fd 10 01
@@ -1477,7 +1477,7 @@
 ; static ReadOnlySpan<byte> vstore_g256x16uBytes => new byte[17]{0xC5,0xF8,0x77,0x66,0x90,0xC5,0xFD,0x10,0x01,0xC5,0xFE,0x7F,0x02,0xC5,0xF8,0x77,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: void vstore_g256x32i(Vector256<int> src, ref int dst)
-; location: [7FFDDBAF0380h, 7FFDDBAF0390h]
+; location: [7FFDDBAF4D30h, 7FFDDBAF4D40h]
 0000h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                    ; NOP(Nopw)                                            encoding(2 bytes) = 66 90
 0005h vmovupd ymm0,[rcx]            ; VMOVUPD(VEX_Vmovupd_ymm_ymmm256) [YMM0,mem(Packed256_Float64,RCX:br,DS:sr)] encoding(VEX, 4 bytes) = c5 fd 10 01
@@ -1487,7 +1487,7 @@
 ; static ReadOnlySpan<byte> vstore_g256x32iBytes => new byte[17]{0xC5,0xF8,0x77,0x66,0x90,0xC5,0xFD,0x10,0x01,0xC5,0xFE,0x7F,0x02,0xC5,0xF8,0x77,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: void vstore_g256x32u(Vector256<uint> src, ref uint dst)
-; location: [7FFDDBAF03B0h, 7FFDDBAF03C0h]
+; location: [7FFDDBAF4D60h, 7FFDDBAF4D70h]
 0000h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                    ; NOP(Nopw)                                            encoding(2 bytes) = 66 90
 0005h vmovupd ymm0,[rcx]            ; VMOVUPD(VEX_Vmovupd_ymm_ymmm256) [YMM0,mem(Packed256_Float64,RCX:br,DS:sr)] encoding(VEX, 4 bytes) = c5 fd 10 01
@@ -1497,7 +1497,7 @@
 ; static ReadOnlySpan<byte> vstore_g256x32uBytes => new byte[17]{0xC5,0xF8,0x77,0x66,0x90,0xC5,0xFD,0x10,0x01,0xC5,0xFE,0x7F,0x02,0xC5,0xF8,0x77,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: void vstore_g256x64i(Vector256<long> src, ref long dst)
-; location: [7FFDDBAF03E0h, 7FFDDBAF03F0h]
+; location: [7FFDDBAF5190h, 7FFDDBAF51A0h]
 0000h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                    ; NOP(Nopw)                                            encoding(2 bytes) = 66 90
 0005h vmovupd ymm0,[rcx]            ; VMOVUPD(VEX_Vmovupd_ymm_ymmm256) [YMM0,mem(Packed256_Float64,RCX:br,DS:sr)] encoding(VEX, 4 bytes) = c5 fd 10 01
@@ -1507,7 +1507,7 @@
 ; static ReadOnlySpan<byte> vstore_g256x64iBytes => new byte[17]{0xC5,0xF8,0x77,0x66,0x90,0xC5,0xFD,0x10,0x01,0xC5,0xFE,0x7F,0x02,0xC5,0xF8,0x77,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: void vstore_g256x64u(Vector256<ulong> src, ref ulong dst)
-; location: [7FFDDBAF0810h, 7FFDDBAF0820h]
+; location: [7FFDDBAF51C0h, 7FFDDBAF51D0h]
 0000h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                    ; NOP(Nopw)                                            encoding(2 bytes) = 66 90
 0005h vmovupd ymm0,[rcx]            ; VMOVUPD(VEX_Vmovupd_ymm_ymmm256) [YMM0,mem(Packed256_Float64,RCX:br,DS:sr)] encoding(VEX, 4 bytes) = c5 fd 10 01
@@ -1517,7 +1517,7 @@
 ; static ReadOnlySpan<byte> vstore_g256x64uBytes => new byte[17]{0xC5,0xF8,0x77,0x66,0x90,0xC5,0xFD,0x10,0x01,0xC5,0xFE,0x7F,0x02,0xC5,0xF8,0x77,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: void vstore_g256x32f(Vector256<float> src, ref float dst)
-; location: [7FFDDBAF0840h, 7FFDDBAF0850h]
+; location: [7FFDDBAF51F0h, 7FFDDBAF5200h]
 0000h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                    ; NOP(Nopw)                                            encoding(2 bytes) = 66 90
 0005h vmovupd ymm0,[rcx]            ; VMOVUPD(VEX_Vmovupd_ymm_ymmm256) [YMM0,mem(Packed256_Float64,RCX:br,DS:sr)] encoding(VEX, 4 bytes) = c5 fd 10 01
@@ -1527,7 +1527,7 @@
 ; static ReadOnlySpan<byte> vstore_g256x32fBytes => new byte[17]{0xC5,0xF8,0x77,0x66,0x90,0xC5,0xFD,0x10,0x01,0xC5,0xFC,0x11,0x02,0xC5,0xF8,0x77,0xC3};
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 ; function: void vstore_g256x64f(Vector256<double> src, ref double dst)
-; location: [7FFDDBAF0870h, 7FFDDBAF0880h]
+; location: [7FFDDBAF5220h, 7FFDDBAF5230h]
 0000h vzeroupper                    ; VZEROUPPER(VEX_Vzeroupper)                           encoding(VEX, 3 bytes) = c5 f8 77
 0003h xchg ax,ax                    ; NOP(Nopw)                                            encoding(2 bytes) = 66 90
 0005h vmovupd ymm0,[rcx]            ; VMOVUPD(VEX_Vmovupd_ymm_ymmm256) [YMM0,mem(Packed256_Float64,RCX:br,DS:sr)] encoding(VEX, 4 bytes) = c5 fd 10 01

@@ -10,12 +10,37 @@ namespace Z0.Logix
     
     using static zfunc;
     using TLS = TypedLogicSpec;
+    using static TypedLogicSpec;
 
     /// <summary>
     /// Constructs type operator comparison expressions
     /// </summary>
     public static class TypedComparisonSpec
     {
+        /// <summary>
+        /// Defines a comparison expression of specified kind over typed expressions
+        /// </summary>
+        /// <param name="kind">The comparison kind</param>
+        /// <param name="lhs">The left expression</param>
+        /// <param name="rhs">The right expression</param>
+        /// <typeparam name="T">The operand type</typeparam>
+        [MethodImpl(Inline)]
+        public static ComparisonExpr<T> compare<T>(ComparisonKind kind, ITypedExpr<T> lhs, ITypedExpr<T> rhs)
+            where T : unmanaged
+                => binary(kind, lhs,rhs);
+
+        /// <summary>
+        /// Defines a comparison expression of specified kind over literals
+        /// </summary>
+        /// <param name="kind">The comparison kind</param>
+        /// <param name="lhs">The left operand</param>
+        /// <param name="rhs">The right operand</param>
+        /// <typeparam name="T">The operand type</typeparam>
+        [MethodImpl(Inline)]
+        public static ComparisonExpr<T> compare<T>(ComparisonKind kind, T lhs, T rhs)
+            where T : unmanaged
+                => compare(kind, literal(lhs), literal(rhs));
+
         /// <summary>
         /// Defines an equals operator expression
         /// </summary>
@@ -25,7 +50,7 @@ namespace Z0.Logix
         [MethodImpl(Inline)]
         public static ComparisonExpr<T> equals<T>(ITypedExpr<T> lhs, ITypedExpr<T> rhs)
             where T : unmanaged
-                => TLS.binary(ComparisonKind.Eq, lhs,rhs);
+                => compare(ComparisonKind.Eq, lhs,rhs);
 
         /// <summary>
         /// Defines an equals operator expression over literal values
@@ -47,7 +72,7 @@ namespace Z0.Logix
         [MethodImpl(Inline)]
         public static ComparisonExpr<T> neq<T>(ITypedExpr<T> lhs, ITypedExpr<T> rhs)
             where T : unmanaged
-                => TLS.binary(ComparisonKind.Neq, lhs,rhs);
+                => compare(ComparisonKind.Neq, lhs,rhs);
 
         /// <summary>
         /// Defines a not equal operator expression over literal values
@@ -69,7 +94,7 @@ namespace Z0.Logix
         [MethodImpl(Inline)]
         public static ComparisonExpr<T> lt<T>(ITypedExpr<T> lhs, ITypedExpr<T> rhs)
             where T : unmanaged
-                => TLS.binary(ComparisonKind.Lt, lhs,rhs);
+                => compare(ComparisonKind.Lt, lhs,rhs);
 
         /// <summary>
         /// Defines an less than operator expression over literal values
@@ -91,7 +116,7 @@ namespace Z0.Logix
         [MethodImpl(Inline)]
         public static ComparisonExpr<T> lteq<T>(ITypedExpr<T> lhs, ITypedExpr<T> rhs)
             where T : unmanaged
-                => TLS.binary(ComparisonKind.LtEq, lhs,rhs);
+                => compare(ComparisonKind.LtEq, lhs,rhs);
 
         /// <summary>
         /// Defines an less than or equal operator expression over literal values
@@ -113,7 +138,7 @@ namespace Z0.Logix
         [MethodImpl(Inline)]
         public static ComparisonExpr<T> gt<T>(ITypedExpr<T> lhs, ITypedExpr<T> rhs)
             where T : unmanaged
-                => TLS.binary(ComparisonKind.Gt, lhs,rhs);
+                => compare(ComparisonKind.Gt, lhs,rhs);
 
         /// <summary>
         /// Defines greater than operator expression over literal values
@@ -135,7 +160,7 @@ namespace Z0.Logix
         [MethodImpl(Inline)]
         public static ComparisonExpr<T> gteq<T>(ITypedExpr<T> lhs, ITypedExpr<T> rhs)
             where T : unmanaged
-                => TLS.binary(ComparisonKind.GtEq, lhs,rhs);
+                => compare(ComparisonKind.GtEq, lhs,rhs);
 
         /// <summary>
         /// Defines a greater than or equal operator expression over literal values

@@ -211,7 +211,7 @@ namespace Z0.Logix
         /// 0 1 0
         /// 1 1 0
         /// </remarks>
-        ConverseNomimplication = 0b0010,
+        ConverseNonimplication = 0b0010,
            
     
     } 

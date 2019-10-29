@@ -17,54 +17,38 @@ namespace Z0
     partial class BitMatrix
     {        
 
+        /// <summary>
+        /// Allocates a 1-filled generic bitmatrix
+        /// </summary>
+        /// <typeparam name="T">The matrix primal type</typeparam>
         [MethodImpl(Inline)]
         public static BitMatrix<T> ones<T>()
             where T : unmanaged
-        {
-            var dst = BitMatrix.alloc<T>();
-            dst.Rows.Fill(gmath.maxval<T>());
-            return dst;
-        }
+                => BitMatrix.fill<T>(BitVector.ones<T>());
 
+        /// <summary>
+        /// Allocates a 0-filled generic bitmatrix
+        /// </summary>
+        /// <typeparam name="T">The matrix primal type</typeparam>
         [MethodImpl(Inline)]
         public static BitMatrix<T> zero<T>()
             where T : unmanaged
                 => BitMatrix.alloc<T>();
 
         /// <summary>
-        /// Allocates a one-filled mxn matrix
+        /// Allocates a generic identity matrix
         /// </summary>
-        /// <typeparam name="M">The row dimension</typeparam>
-        /// <typeparam name="N">The column dimension</typeparam>
-        /// <typeparam name="T">The element type</typeparam>
-        [MethodImpl(Inline)]
-        public static BitMatrix<M,N,T> ones<M,N,T>(M m = default, N n = default)
-            where M : ITypeNat, new()
-            where N : ITypeNat, new()
+        /// <typeparam name="T">The matrix primal type</typeparam>
+        public static BitMatrix<T> identity<T>()
             where T : unmanaged
-                => BitMatrix<M,N,T>.Ones();
-
-        /// <summary>
-        /// Returns an immutable reference to the 1-filled N-square matrix
-        /// </summary>
-        /// <typeparam name="M">The row dimension</typeparam>
-        /// <typeparam name="N">The column dimension</typeparam>
-        /// <typeparam name="T">The element type</typeparam>
-        [MethodImpl(Inline)]
-        public static BitMatrix<N,T> ones<N,T>(N n = default)
-            where N : ITypeNat, new()
-            where T : unmanaged
-                => BitMatrix<N,T>.Ones;
-
-        /// <summary>
-        /// Returns an immutable reference to the N-square identity matrix
-        /// </summary>
-        /// <typeparam name="N">The column/row dimension</typeparam>
-        /// <typeparam name="T">The element type</typeparam>
-        public static BitMatrix<N,T> identity<N,T>(N n = default, T rep = default)
-            where N : ITypeNat, new()
-            where T : unmanaged
-                => BitMatrix<N,T>.Identity;
+        {            
+            var dst = zero<T>();
+            var len = bitsize<T>();
+            var one = gmath.one<T>();
+            for(var i=0; i < len; i++)
+                dst[i] = gmath.sll(one,i);
+            return dst;
+        }
 
 
     }

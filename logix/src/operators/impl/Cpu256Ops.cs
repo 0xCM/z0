@@ -70,10 +70,6 @@ namespace Z0.Logix
             where T : unmanaged
                 => ginx.vand(a,b);
 
-        [MethodImpl(Inline)]
-        public static Vector256<T> cnotimply<T>(Vector256<T> a, Vector256<T> b)
-            where T : unmanaged
-                => ginx.vandnot(a,b);
 
         [MethodImpl(Inline)]
         public static Vector256<T> nand<T>(Vector256<T> a, Vector256<T> b)
@@ -121,16 +117,30 @@ namespace Z0.Logix
             where T : unmanaged
                 => not(b);
 
+        [MethodImpl(Inline)]
+        public static Vector256<T> imply<T>(Vector256<T> a, Vector256<T> b)
+            where T : unmanaged
+                => or(a,  not(b));
+
+        [MethodImpl(Inline)]
+        public static Vector256<T> notimply<T>(Vector256<T> a, Vector256<T> b)
+            where T : unmanaged
+                => ginx.vnotimply(a,b); 
+
+        [MethodImpl(Inline)]
+        public static Vector256<T> cimply<T>(Vector256<T> a, Vector256<T> b)
+            where T : unmanaged
+                => or(not(a), b);
+
+        [MethodImpl(Inline)]
+        public static Vector256<T> cnotimply<T>(Vector256<T> a, Vector256<T> b)
+            where T : unmanaged
+                => ginx.vcnotimply(a,b);
 
         [MethodImpl(Inline)]
         public static Vector256<T> xornot<T>(Vector256<T> a, Vector256<T> b)
             where T : unmanaged
                 => ginx.vxornot(a,b);
-
-        [MethodImpl(Inline)]
-        public static Vector256<T> xor1<T>(Vector256<T> a)
-            where T : unmanaged
-                => ginx.vxor1(a);
 
         [MethodImpl(Inline)]
         public static Vector256<T> sll<T>(Vector256<T> a, int offset)
@@ -271,7 +281,7 @@ namespace Z0.Logix
         [MethodImpl(Inline)]
         public static Vector256<T> f0b<T>(Vector256<T> a, Vector256<T> b, Vector256<T> c)
             where T : unmanaged
-                => and(not(a), or(xor1(b),  c));   
+                => and(not(a), or(not(b),  c));   
 
         // b and (not a)
         [MethodImpl(Inline)]
@@ -283,7 +293,7 @@ namespace Z0.Logix
         [MethodImpl(Inline)]
         public static Vector256<T> f0d<T>(Vector256<T> a, Vector256<T> b, Vector256<T> c)
             where T : unmanaged
-                => and(not(a), or(b, xor1(c)));
+                => and(not(a), or(b, not(c)));
 
 
         // not a and (b or c)
