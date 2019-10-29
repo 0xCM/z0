@@ -16,7 +16,6 @@ namespace Z0
 
     partial class BitMatrix
     {        
-
         /// <summary>
         /// Allocates a 1-filled generic bitmatrix
         /// </summary>

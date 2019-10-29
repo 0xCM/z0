@@ -423,7 +423,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public readonly bool Equals(BitMatrix8 rhs)
-            => BitMatrix.eq(this,rhs);
+            => BitMatrix.same(this,rhs);
 
         [MethodImpl(Inline)]
 

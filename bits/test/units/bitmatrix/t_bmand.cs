@@ -76,7 +76,7 @@ namespace Z0
                 var rbB = B.ToRowBits();
                 var rbC = rbA & rbB;
 
-                Claim.yea(BitMatrix.eq(rbC.ToBitMatrix(),C));
+                Claim.yea(BitMatrix.same(rbC.ToBitMatrix(),C));
                                                                         
             }
         }

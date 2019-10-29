@@ -101,15 +101,11 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static BitMatrix64 operator & (BitMatrix64 A, BitMatrix64 B)
-        {
-            var C = BitMatrix64.Alloc();
-            BitMatrix.and(A,B, ref C);
-            return C;
-        }
+            => BitMatrix.and(A,B);
 
         [MethodImpl(Inline)]
         public static BitMatrix64 operator | (BitMatrix64 A, BitMatrix64 B)
-            => BitMatrix.or(ref A,B);
+            => BitMatrix.or(A,B);
 
         [MethodImpl(Inline)]
         public static BitMatrix64 operator ^ (BitMatrix64 A, BitMatrix64 B)
@@ -152,7 +148,6 @@ namespace Z0
             if(fill)
                 Array.Fill(data,ulong.MaxValue);
         }
-
 
         /// <summary>
         /// Specifies the number of rows in the matrix
@@ -294,10 +289,6 @@ namespace Z0
         public Span<byte> Unpack()
             => Bytes.Unpack();
 
-        [MethodImpl(Inline)]
-        public BitMatrix64 Compare(BitMatrix64 rhs)
-            => this.AndNot(rhs);
-
         /// <summary>
         /// Determines whether this matrix is equivalent to the canonical 0 matrix
         /// </summary>
@@ -387,15 +378,6 @@ namespace Z0
             BitMatrix.and(this, rhs, ref this);
         }
 
-        /// <summary>
-        /// Computes the bitwise OR of the source matrix and the operand in-place
-        /// </summary>
-        /// <param name="rhs">The operand</param>
-        [MethodImpl(Inline)]
-        public void Or(BitMatrix64 rhs)
-        {
-            BitMatrix.or(ref this, rhs);
-        }
 
         /// <summary>
         /// Computes the bitwise XOR of the source matrix and the operand in-place
@@ -434,7 +416,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public bool Equals(BitMatrix64 rhs)
-            => BitMatrix.eq(this,rhs);
+            => BitMatrix.same(this,rhs);
 
         public override bool Equals(object obj)
             => throw new NotSupportedException();

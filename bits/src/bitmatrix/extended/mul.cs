@@ -46,7 +46,6 @@ namespace Z0
             var C = A.Replicate();
             return mul(ref C, B);
         }
-
         
         public static BitVector16 mul(BitMatrix16 A, BitVector16 x)
         {

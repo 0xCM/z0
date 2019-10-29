@@ -196,7 +196,7 @@ namespace Z0.Logix
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         /// <typeparam name="T">The primal scalar upon which the bitvector is predicated</typeparam>
-        public static BitVector<T> and_cw<T>(BitVector<T> x, BitVector<T> y)
+        public static BitVector<T> and_ref<T>(BitVector<T> x, BitVector<T> y)
             where T : unmanaged
         {
             var len = x.Length;
@@ -212,7 +212,7 @@ namespace Z0.Logix
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         /// <typeparam name="T">The primal scalar upon which the bitvector is predicated</typeparam>
-        public static BitVector<T> nand_cw<T>(BitVector<T> x, BitVector<T> y)
+        public static BitVector<T> nand_ref<T>(BitVector<T> x, BitVector<T> y)
             where T : unmanaged
         {
             var len = x.Length;

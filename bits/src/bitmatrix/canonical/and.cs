@@ -98,7 +98,7 @@ namespace Z0
         }
 
         /// <summary>
-        /// Computes the logical and btween two source bitmatrices and deposits the result to a caller-supplied target
+        /// Computes the logical And btween two source bitmatrices and deposits the result to a caller-supplied target
         /// </summary>
         /// <param name="A">The left matrix</param>
         /// <param name="B">The right matrix</param>

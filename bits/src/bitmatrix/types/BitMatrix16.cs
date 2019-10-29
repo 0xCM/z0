@@ -365,7 +365,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public bool Equals(BitMatrix16 rhs)
-            => BitMatrix.eq(this,rhs);
+            => BitMatrix.same(this,rhs);
 
         [MethodImpl(Inline)]
         public override bool Equals(object obj)

@@ -56,8 +56,8 @@ namespace Z0.Logix
             {
                 case BinaryBitwiseOpKind.True: return @true(x,y);
                 case BinaryBitwiseOpKind.False: return @false(x,y);
-                case BinaryBitwiseOpKind.And: return and_cw(x,y);
-                case BinaryBitwiseOpKind.Nand: return nand_cw(x,y);
+                case BinaryBitwiseOpKind.And: return and_ref(x,y);
+                case BinaryBitwiseOpKind.Nand: return nand_ref(x,y);
                 case BinaryBitwiseOpKind.Or: return or_ref(x,y);
                 case BinaryBitwiseOpKind.Nor: return nor_ref(x,y);
                 case BinaryBitwiseOpKind.XOr: return xor_ref(x,y);

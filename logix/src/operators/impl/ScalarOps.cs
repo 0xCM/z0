@@ -158,7 +158,8 @@ namespace Z0.Logix
         [MethodImpl(Inline), BinaryBitwiseOp(BinaryBitwiseOpKind.Implication)]
         public static T imply<T>(T a, T b)
             where T : unmanaged
-                => or(a,  not(b));
+                => gmath.imply(a,b);
+                //=> or(a,  not(b));
 
         [MethodImpl(Inline), BinaryBitwiseOp(BinaryBitwiseOpKind.Nonimplication)]
         public static T notimply<T>(T a, T b)
@@ -168,7 +169,7 @@ namespace Z0.Logix
         [MethodImpl(Inline), BinaryBitwiseOp(BinaryBitwiseOpKind.ConverseImplication)]
         public static T cimply<T>(T a, T b)
             where T : unmanaged
-                => or(not(a), b);
+                => gmath.cimply(a,b);
         
         [MethodImpl(Inline), BinaryBitwiseOp(BinaryBitwiseOpKind.ConverseNonimplication)]
         public static T cnotimply<T>(T a, T b)

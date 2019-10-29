@@ -19,7 +19,7 @@ namespace Z0
         /// <param name="B">The right matrix</param>
         /// <typeparam name="T">The primal type over which the matrices are constructed</typeparam>        
         [MethodImpl(Inline)]
-        public static unsafe bit eq<T>(in BitMatrix<T> A, in BitMatrix<T> B)
+        public static unsafe bit same<T>(in BitMatrix<T> A, in BitMatrix<T> B)
             where T : unmanaged
         {
             var C = BitMatrix.alloc<T>();
@@ -33,7 +33,7 @@ namespace Z0
         /// <param name="A">The left matrix</param>
         /// <param name="B">The right matrix</param>
         [MethodImpl(Inline)]
-        public static unsafe bit eq(BitMatrix8 A, BitMatrix8 B)
+        public static unsafe bit same(BitMatrix8 A, BitMatrix8 B)
         {
             var C = BitMatrix.alloc(n8);
             BitPoints.xnor(A.HeadPtr,B.HeadPtr,C.HeadPtr);
@@ -46,7 +46,7 @@ namespace Z0
         /// <param name="A">The left matrix</param>
         /// <param name="B">The right matrix</param>
         [MethodImpl(Inline)]
-        public static unsafe bit eq(BitMatrix16 A, BitMatrix16 B)
+        public static unsafe bit same(BitMatrix16 A, BitMatrix16 B)
         {
             var C = BitMatrix.alloc(n16);
             BitPoints.xnor(A.HeadPtr,B.HeadPtr,C.HeadPtr);
@@ -59,7 +59,7 @@ namespace Z0
         /// <param name="A">The left matrix</param>
         /// <param name="B">The right matrix</param>
         [MethodImpl(Inline)]
-        public static unsafe bit eq(BitMatrix32 A, BitMatrix32 B)
+        public static unsafe bit same(BitMatrix32 A, BitMatrix32 B)
         {
             var C = BitMatrix.alloc(n32);
             BitPoints.xnor(A.HeadPtr,B.HeadPtr,C.HeadPtr);
@@ -72,7 +72,7 @@ namespace Z0
         /// <param name="A">The left matrix</param>
         /// <param name="B">The right matrix</param>
         [MethodImpl(Inline)]
-        public static unsafe bit eq(BitMatrix64 A, BitMatrix64 B)
+        public static unsafe bit same(BitMatrix64 A, BitMatrix64 B)
         {
             var C = BitMatrix.alloc(n64);
             BitPoints.xnor(A.HeadPtr,B.HeadPtr,C.HeadPtr);

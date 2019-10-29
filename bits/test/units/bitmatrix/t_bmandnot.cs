@@ -27,12 +27,6 @@ namespace Z0.Test
             Claim.yea(lhs.AndNot(rhs).IsZero());
         }
 
-        public void AndNot32()
-        {
-            var lhs = Random.BitMatrix32();
-            var rhs = lhs.Replicate();
-            Claim.yea(lhs.AndNot(rhs).IsZero());
-        }
 
         public void AndNot64()
         {

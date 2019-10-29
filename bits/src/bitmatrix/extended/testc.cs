@@ -15,7 +15,6 @@ namespace Z0
 
     partial class BitMatrix
     {
-
         /// <summary>
         /// Returns true if all bits in the source matrix are enabled, false otherwise
         /// </summary>

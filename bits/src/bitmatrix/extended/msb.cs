@@ -13,21 +13,10 @@ namespace Z0
 
     partial class BitMatrix
     {
-
-        public static Vector<N64,byte> nlz(BitMatrix64 A)
-        {
-            var rows = A.RowCount;
-            var dst = Vector.alloc<N64,byte>();            
-            for(int i=0, j=rows - 1; i < rows; i++, j--)            
-                dst[i] = (byte)gbits.nlz(A[i++]);
-            return dst;            
-        }
-
         /// <summary>
-        /// Computes the position of the MSB for each row. 
+        /// Computes the position of the most significant bit for each row in the source matrix. 
         /// </summary>
         /// <param name="A">The source matrix</param>
-        /// <returns></returns>
         public static Vector<N64,byte> msb(BitMatrix64 A)
         {
             var dst = Vector.alloc<N64,byte>();            
@@ -36,6 +25,10 @@ namespace Z0
             return dst;
         }
 
+        /// <summary>
+        /// Computes the position of the least significant bit for each row in the source matrix. 
+        /// </summary>
+        /// <param name="A">The source matrix</param>
         public static Vector<N64,byte> lsb(BitMatrix64 A)
         {
             var x = Vector.alloc<N64,byte>();            

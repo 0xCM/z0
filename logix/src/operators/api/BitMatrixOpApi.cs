@@ -31,14 +31,7 @@ namespace Z0.Logix
         /// Advertises the supported binary bitwise operators
         /// </summary>
         public static IEnumerable<BinaryBitwiseOpKind> BinaryBitwiseKinds
-            => new BinaryBitwiseOpKind[]
-            {
-                BinaryBitwiseOpKind.False, BinaryBitwiseOpKind.Nor, BinaryBitwiseOpKind.ConverseNonimplication, 
-                BinaryBitwiseOpKind.RightNot, BinaryBitwiseOpKind.LeftNot, BinaryBitwiseOpKind.XOr,                
-                BinaryBitwiseOpKind.Nand, BinaryBitwiseOpKind.And, BinaryBitwiseOpKind.Or, 
-                BinaryBitwiseOpKind.Xnor, BinaryBitwiseOpKind.LeftProject, BinaryBitwiseOpKind.ConverseImplication, 
-                BinaryBitwiseOpKind.RightProject, BinaryBitwiseOpKind.True,
-            };
+            => new BinaryBitwiseOpKind[]{};
 
         [MethodImpl(Inline)]
         public static BitMatrix<T> eval<T>(UnaryBitwiseOpKind kind, BitMatrix<T> A)
@@ -81,7 +74,7 @@ namespace Z0.Logix
                 case BinaryBitwiseOpKind.RightProject: return right(A,B);
                 case BinaryBitwiseOpKind.LeftNot: return lnot(A,B);
                 case BinaryBitwiseOpKind.RightNot: return rnot(A,B);
-                case BinaryBitwiseOpKind.ConverseImplication: return cimply(A,B);
+                //case BinaryBitwiseOpKind.ConverseImplication: return cimply(A,B);
                 case BinaryBitwiseOpKind.ConverseNonimplication: return cnotimply(A,B);
                 default: return dne(kind,A,B);
             }
@@ -93,6 +86,7 @@ namespace Z0.Logix
         {
             switch(kind)
             {
+                case BinaryBitwiseOpKind.True: return @true<T>();
                 case BinaryBitwiseOpKind.False: return @false<T>();
                 case BinaryBitwiseOpKind.And: return and(A,B, ref Z);
                 case BinaryBitwiseOpKind.Nand: return nand(A,B, ref Z);
@@ -100,13 +94,12 @@ namespace Z0.Logix
                 case BinaryBitwiseOpKind.Nor: return nor(A,B, ref Z);
                 case BinaryBitwiseOpKind.XOr: return xor(A,B, ref Z);
                 case BinaryBitwiseOpKind.Xnor: return xnor(A,B, ref Z);
-                case BinaryBitwiseOpKind.ConverseNonimplication: return andnot(A,B, ref Z);
                 case BinaryBitwiseOpKind.LeftProject: return left(A,B, ref Z);
                 case BinaryBitwiseOpKind.LeftNot: return leftnot(A,B, ref Z);
                 case BinaryBitwiseOpKind.RightProject: return right(A,B, ref Z);
                 case BinaryBitwiseOpKind.RightNot: return rightnot(A, B, ref Z);
-                case BinaryBitwiseOpKind.ConverseImplication: return implies(A,B, ref Z);
-                case BinaryBitwiseOpKind.True: return @true<T>();
+                //case BinaryBitwiseOpKind.ConverseImplication: return imply(A,B, ref Z);
+                case BinaryBitwiseOpKind.ConverseNonimplication: return cnotimply(A,B, ref Z);
                 default: return dne(kind,A,B);
             }
 

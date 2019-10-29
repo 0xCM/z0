@@ -15,7 +15,7 @@ namespace Z0
     partial class ginx
     {
         /// <summary>
-        /// Determines whether all mask-specified source bits are off
+        /// Determines whether all mask-identified source bits are off
         /// </summary>
         /// <param name="src">The bit source</param>
         /// <param name="mask">The mask</param>
@@ -38,7 +38,7 @@ namespace Z0
          }
 
         /// <summary>
-        /// Determines whether all mask-specified source bits are off
+        /// Determines whether all mask-identified source bits are off
         /// </summary>
         /// <param name="src">The bit source</param>
         /// <param name="mask">The mask</param>

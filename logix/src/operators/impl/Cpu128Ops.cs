@@ -119,7 +119,7 @@ namespace Z0.Logix
         [MethodImpl(Inline)]
         public static Vector128<T> imply<T>(Vector128<T> a, Vector128<T> b)
             where T : unmanaged
-                => or(a,  not(b));
+                => ginx.vimply(a,b); //or(a,  not(b));
 
         [MethodImpl(Inline)]
         public static Vector128<T> notimply<T>(Vector128<T> a, Vector128<T> b)

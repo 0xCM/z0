@@ -126,11 +126,11 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static bool operator ==(BitMatrix32 lhs, BitMatrix32 rhs)
-            => BitMatrix.eq(lhs,rhs);
+            => BitMatrix.same(lhs,rhs);
 
         [MethodImpl(Inline)]
         public static bool operator !=(BitMatrix32 lhs, BitMatrix32 rhs)
-            => !BitMatrix.eq(lhs,rhs);
+            => !BitMatrix.same(lhs,rhs);
 
         [MethodImpl(Inline)]
         BitMatrix32(Span<uint> src)
@@ -303,15 +303,12 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public bool Equals(BitMatrix32 rhs)
-            => BitMatrix.eq(this,rhs);
+            => BitMatrix.same(this,rhs);
 
         [MethodImpl(Inline)]
         public readonly bool IsZero()
             => BitMatrix.testz(this);
 
-        [MethodImpl(Inline)]
-        public  BitMatrix32 AndNot(BitMatrix32 rhs)
-            => BitMatrix.andnot(this, rhs, ref this);
         
         public readonly BitMatrix32 Transpose()
         {

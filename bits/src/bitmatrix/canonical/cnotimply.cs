@@ -29,7 +29,7 @@ namespace Z0
         }
 
         /// <summary>
-        /// Computes the converse nonimplication, Z :=- A & (~B) for source generic bitmatrices A and B and target matrix Z
+        /// Computes the converse nonimplication, Z := A & (~B) for source generic bitmatrices A and B and target matrix Z
         /// </summary>
         /// <param name="A">The left matrix</param>
         /// <param name="B">The right matrix</param>
@@ -70,7 +70,7 @@ namespace Z0
         }
 
         /// <summary>
-        /// Computes the converse nonimplication, Z :=- A & (~B) for source bitmatrices A and B and target matrix Z
+        /// Computes the converse nonimplication, Z := A & (~B) for source bitmatrices A and B and target matrix Z
         /// </summary>
         /// <param name="A">The left matrix</param>
         /// <param name="B">The right matrix</param>
@@ -96,13 +96,13 @@ namespace Z0
         }
 
         /// <summary>
-        /// Computes the converse nonimplication, Z :=- A & (~B) for source bitmatrices A and B and target matrix Z
+        /// Computes the converse nonimplication, Z := A & (~B) for source bitmatrices A and B and target matrix Z
         /// </summary>
         /// <param name="A">The left matrix</param>
         /// <param name="B">The right matrix</param>
         /// <param name="B">The target matrix</param>
         [MethodImpl(Inline)]
-        public static unsafe ref BitMatrix32 andnot(in BitMatrix32 A, in BitMatrix32 B, ref BitMatrix32 Z)
+        public static unsafe ref BitMatrix32 cnotimply(in BitMatrix32 A, in BitMatrix32 B, ref BitMatrix32 Z)
         {
             BitPoints.cnotimply(A.HeadPtr, B.HeadPtr, Z.HeadPtr);
             return ref Z;
@@ -122,7 +122,7 @@ namespace Z0
         }
 
         /// <summary>
-        /// Computes the converse nonimplication, Z :=- A & (~B) for source bitmatrices A and B and target matrix Z
+        /// Computes the converse nonimplication, Z := A & (~B) for source bitmatrices A and B and target matrix Z
         /// </summary>
         /// <param name="A">The left matrix</param>
         /// <param name="B">The right matrix</param>

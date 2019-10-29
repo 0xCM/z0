@@ -14,45 +14,43 @@ namespace Z0
  
     using static zfunc;
     
-    public static partial class math
+    partial class math
     {                
         /// <summary>
-        /// Computes a & (~b)
+        /// Computes ~a | b, the converse implication;;
         /// </summary>
         /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
         [MethodImpl(Inline)]
-        public static byte cnotimply(byte a, byte b)
-            => (byte)AndNot((uint)b,(uint)a);
+        public static byte cimply(byte a, byte b)
+            => (byte)(~a | b);
 
         /// <summary>
-        /// Computes a & (~b)
+        /// Computes ~a | b, the converse implication;
         /// </summary>
         /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
         [MethodImpl(Inline)]
-        public static ushort cnotimply(ushort a, ushort b)
-            => (ushort)AndNot((uint)b,(uint)a);
+        public static ushort cimply(ushort a, ushort b)
+            => (ushort)(~a | b);
 
         /// <summary>
-        /// Computes a & (~b)
+        /// Computes ~a | b, the converse implication;;
         /// </summary>
         /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
         [MethodImpl(Inline)]
-        public static ulong cnotimply(ulong a, ulong b)
-            => AndNot(b,a);
+        public static uint cimply(uint a, uint b)
+            => ~a | b;
 
         /// <summary>
-        /// Computes a & (~b)
+        /// Computes ~a | b, the converse implication;
         /// </summary>
         /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
         [MethodImpl(Inline)]
-        public static uint cnotimply(uint a, uint b)
-            => AndNot(b,a);
-
-
+        public static ulong cimply(ulong a, ulong b)
+            => ~a | b;
     }
 
 }
