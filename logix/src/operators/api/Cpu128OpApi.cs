@@ -37,7 +37,7 @@ namespace Z0.Logix
             => new BinaryBitwiseOpKind[]{
                 BinaryBitwiseOpKind.And, BinaryBitwiseOpKind.Or, BinaryBitwiseOpKind.XOr,
                 BinaryBitwiseOpKind.Nand, BinaryBitwiseOpKind.Nor, BinaryBitwiseOpKind.Xnor,
-                BinaryBitwiseOpKind.AndNot, BinaryBitwiseOpKind.False, BinaryBitwiseOpKind.True
+                BinaryBitwiseOpKind.ConverseNonimplication, BinaryBitwiseOpKind.False, BinaryBitwiseOpKind.True
             };
 
         /// <summary>
@@ -55,7 +55,7 @@ namespace Z0.Logix
         /// Advertises the supported ternary opeators
         /// </summary>
         public static IEnumerable<TernaryBitOpKind> TernaryBitwiseKinds
-            => range((byte)1,(byte)X1B).Cast<TernaryBitOpKind>();
+            => range((byte)1,(byte)X18).Cast<TernaryBitOpKind>();
 
         /// <summary>
         /// Evaluates an identified unary operator over a supplied operand
@@ -107,19 +107,19 @@ namespace Z0.Logix
         {
             switch(kind)
             {
-                case BinaryBitwiseOpKind.And: return and(a,b);
-                case BinaryBitwiseOpKind.Or: return or(a,b);
-                case BinaryBitwiseOpKind.XOr: return xor(a,b);
-                case BinaryBitwiseOpKind.Nand: return nand(a,b);
-                case BinaryBitwiseOpKind.Nor: return nor(a,b);
-                case BinaryBitwiseOpKind.Xnor: return xnor(a,b);
-                case BinaryBitwiseOpKind.AndNot: return andnot(a,b);
-                case BinaryBitwiseOpKind.LeftProject: return left(a,b);
-                case BinaryBitwiseOpKind.LeftNot: return leftnot(a,b);
-                case BinaryBitwiseOpKind.RightProject: return right(a,b);
-                case BinaryBitwiseOpKind.RightNot: return rightnot(a,b);
-                case BinaryBitwiseOpKind.False: return @false(a,b);
                 case BinaryBitwiseOpKind.True: return @true(a,b);
+                case BinaryBitwiseOpKind.False: return @false(a,b);
+                case BinaryBitwiseOpKind.And: return and(a,b);
+                case BinaryBitwiseOpKind.Nand: return nand(a,b);
+                case BinaryBitwiseOpKind.Or: return or(a,b);
+                case BinaryBitwiseOpKind.Nor: return nor(a,b);
+                case BinaryBitwiseOpKind.XOr: return xor(a,b);
+                case BinaryBitwiseOpKind.Xnor: return xnor(a,b);
+                case BinaryBitwiseOpKind.LeftProject: return left(a,b);
+                case BinaryBitwiseOpKind.RightProject: return right(a,b);
+                case BinaryBitwiseOpKind.LeftNot: return lnot(a,b);
+                case BinaryBitwiseOpKind.RightNot: return rnot(a,b);
+                case BinaryBitwiseOpKind.ConverseNonimplication: return cnotimply(a,b);
                 default:
                     return dne<BinaryBitwiseOpKind,Vector128<T>>(kind);
             }
@@ -238,7 +238,7 @@ namespace Z0.Logix
                 case BinaryBitwiseOpKind.Nor: return nor;
                 case BinaryBitwiseOpKind.XOr: return xor;
                 case BinaryBitwiseOpKind.Xnor: return xnor;
-                case BinaryBitwiseOpKind.AndNot: return andnot;
+                case BinaryBitwiseOpKind.ConverseNonimplication: return cnotimply;
                 case BinaryBitwiseOpKind.False: return @false;
                 case BinaryBitwiseOpKind.True: return @true;
                 default: return dne<Vector128<T>>(id);

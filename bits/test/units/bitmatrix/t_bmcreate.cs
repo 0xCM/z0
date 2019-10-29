@@ -56,7 +56,7 @@ namespace Z0
                 var v1 = Random.BitVector(n64);
                 var v2 = mat * v1;
                 var v3 = v1.Replicate();
-                v3 = bitvector.rev(v3);
+                v3 = BitVector.rev(v3);
                 Claim.eq(v3,v2);
             }
         }
@@ -180,7 +180,7 @@ namespace Z0
             var fmt = m1.Format().RemoveWhitespace();
             Claim.eq(7*7, fmt.Length);
             var d = m1.Diagonal();
-            var x = BitVector.Alloc<N7,byte>();
+            var x = BitVector.natural<N7,byte>();
             x.Fill(Bit.On);
 
             Claim.yea(d == x);                        

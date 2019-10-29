@@ -12,7 +12,7 @@ namespace Z0
     using static zfunc;
     using static BitParts;
 
-    partial class bitvector
+    partial class BitVector
     {
         /// <summary>
         /// Rearranges the vector in-place as specified by a permutation

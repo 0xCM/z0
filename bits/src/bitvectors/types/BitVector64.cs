@@ -110,7 +110,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator BitVector<N64,ulong>(in BitVector64 src)
-            => BitVector<N64,ulong>.FromCells(src.data);
+            => BitVector<N64,ulong>.FromArray(src.data);
 
         [MethodImpl(Inline)]
         public static implicit operator BitVector<ulong>(BitVector64 src)
@@ -196,7 +196,7 @@ namespace Z0
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
         public static BitVector64 operator ^(BitVector64 x, BitVector64 y)
-            => bitvector.xor(x,y);
+            => BitVector.xor(x,y);
         /// <summary>
         /// Computes the bitwise AND of the source operands
         /// </summary>
@@ -204,7 +204,7 @@ namespace Z0
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
         public static BitVector64 operator &(BitVector64 x, BitVector64 y)
-            => bitvector.and(x,y);
+            => BitVector.and(x,y);
 
         /// <summary>
         /// Computes the bitwise OR of the source operands
@@ -213,7 +213,7 @@ namespace Z0
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
         public static BitVector64 operator |(BitVector64 x, BitVector64 y)
-            => bitvector.or(x,y);
+            => BitVector.or(x,y);
 
         /// <summary>
         /// Computes the scalar product of the operands
@@ -222,7 +222,7 @@ namespace Z0
         /// <param name="y">The right operand</param>
         [MethodImpl(Inline)]
         public static Bit operator %(in BitVector64 x, in BitVector64 y)
-            => bitvector.dot(x,y);
+            => BitVector.dot(x,y);
 
         /// <summary>
         /// Computes the arithmetic sum of the source operands. 
@@ -231,7 +231,7 @@ namespace Z0
         /// <param name="y">The right operand</param>
         [MethodImpl(Inline)]
         public static BitVector64 operator +(BitVector64 x, BitVector64 y)
-            => bitvector.add(x,y);
+            => BitVector.add(x,y);
 
         /// <summary>
         /// Computes the bitwise complement of the operand
@@ -239,7 +239,7 @@ namespace Z0
         /// <param name="src">The source operand</param>
         [MethodImpl(Inline)]
         public static BitVector64 operator ~(BitVector64 src)
-            => bitvector.not(src);
+            => BitVector.not(src);
 
         /// <summary>
         /// Negates the operand via two's complement
@@ -247,7 +247,7 @@ namespace Z0
         /// <param name="x">The source operand</param>
         [MethodImpl(Inline)]
         public static BitVector64 operator -(BitVector64 src)
-            => bitvector.negate(src);
+            => BitVector.negate(src);
 
         /// <summary>
         /// Arithmetically subtracts the second operand from the first. 
@@ -256,7 +256,7 @@ namespace Z0
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
         public static BitVector64 operator - (BitVector64 x, BitVector64 y)
-            => bitvector.sub(x,y);
+            => BitVector.sub(x,y);
 
         /// <summary>
         /// Shifts the source bits leftwards
@@ -264,7 +264,7 @@ namespace Z0
         /// <param name="x">The source operand</param>
         [MethodImpl(Inline)]
         public static BitVector64 operator <<(BitVector64 x, int offset)
-            => bitvector.sll(x,offset);
+            => BitVector.sll(x,offset);
 
         /// <summary>
         /// Shifts the source bits rightwards
@@ -272,7 +272,7 @@ namespace Z0
         /// <param name="x">The source operand</param>
         [MethodImpl(Inline)]
         public static BitVector64 operator >>(BitVector64 x, int offset)
-            => bitvector.srl(x,offset);
+            => BitVector.srl(x,offset);
 
         /// <summary>
         /// Increments the vector arithmetically
@@ -280,7 +280,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
         public static BitVector64 operator ++(BitVector64 src)
-            => bitvector.inc(src);
+            => BitVector.inc(src);
 
         /// <summary>
         /// Decrements the vector arithmetically
@@ -288,7 +288,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
         public static BitVector64 operator --(BitVector64 src)
-            => bitvector.dec(src);
+            => BitVector.dec(src);
 
         /// <summary>
         /// Returns true if the source vector is nonzero, false otherwise
@@ -348,7 +348,7 @@ namespace Z0
         public BitVector64 this[Range range]
         {
             [MethodImpl(Inline)]
-            get => bitvector.between(this,range.Start.Value, range.End.Value);
+            get => BitVector.between(this,range.Start.Value, range.End.Value);
         }
 
         /// <summary>
@@ -359,7 +359,7 @@ namespace Z0
         public BitVector64 this[int first, int last]
         {
             [MethodImpl(Inline)]
-            get => bitvector.between(this,first, last);
+            get => BitVector.between(this,first, last);
         }
 
         /// <summary>
@@ -471,7 +471,7 @@ namespace Z0
         /// <param name="spec">The permutation</param>
         [MethodImpl(Inline)]
         public BitVector64 Permute(Perm spec)
-            => bitvector.perm(ref this, spec);
+            => BitVector.perm(ref this, spec);
 
         /// <summary>
         /// Determines whether a bit is enabled

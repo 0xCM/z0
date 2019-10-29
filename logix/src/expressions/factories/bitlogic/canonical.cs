@@ -136,7 +136,7 @@ namespace Z0.Logix
         /// <param name="b">The second operand</param>
         [MethodImpl(Inline)]
         public static BinaryLogicOp andnot(ILogicExpr a, ILogicExpr b)
-            => binary(BinaryLogicOpKind.AndNot, a, b);
+            => binary(BinaryLogicOpKind.Nonimplication, a, b);
         
         /// <summary>
         /// Defines the operator expression and(a, not(b)) for literal expressions a and b
@@ -145,7 +145,7 @@ namespace Z0.Logix
         /// <param name="b">The second operand</param>
         [MethodImpl(Inline)]
         public static BinaryLogicOp andnot(LiteralLogicExpr a, LiteralLogicExpr b)
-            => binary(BinaryLogicOpKind.AndNot, a, b);
+            => binary(BinaryLogicOpKind.Nonimplication, a, b);
 
         /// <summary>
         /// Defines the operator expression left(a, b) for logic expressions a and b
@@ -190,7 +190,7 @@ namespace Z0.Logix
         /// <param name="consequent">The second operand</param>
         [MethodImpl(Inline)]
         public static BinaryLogicOp implies(ILogicExpr antecedent, ILogicExpr consequent)
-            => binary(BinaryLogicOpKind.Implies, antecedent, consequent);
+            => binary(BinaryLogicOpKind.ConverseImplication, antecedent, consequent);
 
     }
 }

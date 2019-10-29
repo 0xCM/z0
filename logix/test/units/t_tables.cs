@@ -42,7 +42,7 @@ namespace Z0.Logix
         public void binary_logic_check()
         {
             using var dst = LogArea.Test.LogWriter(FileName.Define("BinaryTruth.txt"));
-            var ops = LogicOpApi.BinaryOpKinds.ToArray();
+            var ops = LogicOpApi.BinaryOpKinds;
             TruthTables.Emit(dst,ops);
             TruthTables.Emit(dst,OpArityKind.Binary);
         }

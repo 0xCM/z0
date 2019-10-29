@@ -26,8 +26,18 @@ namespace Z0.Logix
         /// <summary>
         /// Advertises the supported binary opeators
         /// </summary>
-        public static IEnumerable<BinaryLogicOpKind> BinaryOpKinds
-            => EnumValues.Get<BinaryLogicOpKind>().Enumerate();
+        public static BinaryLogicOpKind[] BinaryOpKinds
+            => new BinaryLogicOpKind[]{
+                BinaryLogicOpKind.True, BinaryLogicOpKind.False,
+                BinaryLogicOpKind.And, BinaryLogicOpKind.Nand, 
+                BinaryLogicOpKind.Or, BinaryLogicOpKind.Nor, 
+                BinaryLogicOpKind.XOr, BinaryLogicOpKind.Xnor,                
+                BinaryLogicOpKind.LeftProject, BinaryLogicOpKind.RightProject,
+                BinaryLogicOpKind.LeftNot, BinaryLogicOpKind.RightNot,
+                BinaryLogicOpKind.Implication, BinaryLogicOpKind.Nonimplication,
+                BinaryLogicOpKind.ConverseImplication, BinaryLogicOpKind.ConverseNomimplication, 
+                
+            };
 
         /// <summary>
         /// Advertises the supported ternary opeators
@@ -63,22 +73,29 @@ namespace Z0.Logix
         {
             switch(kind)
             {
+                case BinaryLogicOpKind.True: return @true(a,b);
                 case BinaryLogicOpKind.False: return @false(a,b);
+
                 case BinaryLogicOpKind.And: return and(a,b);
                 case BinaryLogicOpKind.Nand: return nand(a,b);
+
                 case BinaryLogicOpKind.Or: return or(a,b);
                 case BinaryLogicOpKind.Nor: return nor(a,b);
+
                 case BinaryLogicOpKind.XOr: return xor(a,b);
                 case BinaryLogicOpKind.Xnor: return xnor(a,b);
-                case BinaryLogicOpKind.AndNot: return andnot(a,b);
+
+                case BinaryLogicOpKind.Implication: return imply(a,b); 
+                case BinaryLogicOpKind.Nonimplication: return notimply(a,b);
+
                 case BinaryLogicOpKind.LeftProject: return left(a,b);
-                case BinaryLogicOpKind.LeftNot: return leftnot(a,b);
                 case BinaryLogicOpKind.RightProject: return right(a,b);
+
+                case BinaryLogicOpKind.LeftNot: return leftnot(a,b);
                 case BinaryLogicOpKind.RightNot: return rightnot(a,b);
-                case BinaryLogicOpKind.Implies: return implies(a,b);
-                case BinaryLogicOpKind.ConvImplies: return conimplies(a,b);
-                case BinaryLogicOpKind.MaterialNonimplication: return notimplies(a,b);
-                case BinaryLogicOpKind.True: return @true(a,b);
+                
+                case BinaryLogicOpKind.ConverseImplication: return cimply(a,b);
+                case BinaryLogicOpKind.ConverseNomimplication: return cnotimply(a,b);
 
                 default: return dne(kind);
             }
@@ -111,19 +128,19 @@ namespace Z0.Logix
             {
                 case BinaryLogicOpKind.False: return @false;
                 case BinaryLogicOpKind.And: return and;
+                case BinaryLogicOpKind.ConverseNomimplication: return cnotimply;
                 case BinaryLogicOpKind.Nand: return nand;
                 case BinaryLogicOpKind.Or: return or;
                 case BinaryLogicOpKind.Nor: return nor;
                 case BinaryLogicOpKind.XOr: return xor;
                 case BinaryLogicOpKind.Xnor: return xnor;
-                case BinaryLogicOpKind.AndNot: return andnot;
+                case BinaryLogicOpKind.Nonimplication: return notimply;
                 case BinaryLogicOpKind.LeftProject: return left;
                 case BinaryLogicOpKind.LeftNot: return leftnot;
                 case BinaryLogicOpKind.RightProject: return right;
                 case BinaryLogicOpKind.RightNot: return rightnot;
-                case BinaryLogicOpKind.Implies: return implies;
-                case BinaryLogicOpKind.ConvImplies: return conimplies;
-                case BinaryLogicOpKind.MaterialNonimplication: return notimplies;
+                case BinaryLogicOpKind.ConverseImplication: return imply;
+                case BinaryLogicOpKind.Implication: return cimply;
                 case BinaryLogicOpKind.True: return @true;
                 default: return dne<bit>(kind);
             }

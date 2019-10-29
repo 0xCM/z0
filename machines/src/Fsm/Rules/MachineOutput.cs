@@ -51,8 +51,8 @@ namespace Z0.Machines
         }
 
         [MethodImpl(Inline)]
-        Option<IRule> IFsmFunction.Rule(IRuleKey key)
-            => Rule(key).TryMap(r => r as IRule);
+        Option<IFsmRule> IFsmFunction.Rule(IRuleKey key)
+            => Rule(key).TryMap(r => r as IFsmRule);
     }
 
 }

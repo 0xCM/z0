@@ -100,7 +100,7 @@ namespace Z0.Logix
                 => ginx.vxnor(a,b);
 
         [MethodImpl(Inline)]
-        public static Vector128<T> andnot<T>(Vector128<T> a, Vector128<T> b)
+        public static Vector128<T> cnotimply<T>(Vector128<T> a, Vector128<T> b)
             where T : unmanaged
                 => ginx.vandnot(a,b);
 
@@ -110,7 +110,7 @@ namespace Z0.Logix
                 => a;
 
         [MethodImpl(Inline)]
-        public static Vector128<T> leftnot<T>(Vector128<T> a, Vector128<T> b)
+        public static Vector128<T> lnot<T>(Vector128<T> a, Vector128<T> b)
             where T : unmanaged
                 => not(a);
 
@@ -120,7 +120,7 @@ namespace Z0.Logix
                 => b;
 
         [MethodImpl(Inline)]
-        public static Vector128<T> rightnot<T>(Vector128<T> a, Vector128<T> b)
+        public static Vector128<T> rnot<T>(Vector128<T> a, Vector128<T> b)
             where T : unmanaged
                 => not(b);
 

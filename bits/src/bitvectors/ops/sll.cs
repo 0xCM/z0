@@ -13,7 +13,7 @@ namespace Z0
     using static nfunc;
     using static As;
 
-    partial class bitvector
+    partial class BitVector
     {
         /// <summary>
         /// Applies a logical left shift to the source vector

@@ -10,9 +10,7 @@ namespace Z0
     using System.Linq;
 
     using static zfunc;
-    using static nfunc;
-
-    using BV = Z0.BitVector;
+    using static nfunc;    
 
     public static partial class BitRng
     {

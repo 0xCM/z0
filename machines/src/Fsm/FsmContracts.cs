@@ -87,9 +87,9 @@ namespace Z0.Machines
     }
 
 
-    public interface IFsmRule : IRule
+    public interface IFsmRule
     {
-
+        int RuleId {get;}   
     }
 
 
@@ -183,7 +183,7 @@ namespace Z0.Machines
     /// </summary>
     public interface IFsmFunction
     {        
-        Option<IRule> Rule(IRuleKey key);
+        Option<IFsmRule> Rule(IRuleKey key);
     }
 
     public interface IFsmFunction<E,S> : IFsmFunction

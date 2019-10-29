@@ -91,6 +91,39 @@ namespace Z0.Logix
 
         public override string KindName => kindName;
 
+    }
+
+    public class ComparisonOpAttribute : OpAttribute
+    {
+        static readonly string kindName = typeof(ComparisonKind).DisplayName();
+
+        public ComparisonOpAttribute(ComparisonKind kind)
+            : base((uint)kind,kind.Format())
+        {
+            this.Kind = kind;
+        }
+
+        public ComparisonKind Kind {get;}
+
+        public override string KindName => kindName;
+    }
+
+    public class ShiftOpAttribute : OpAttribute
+    {
+        static readonly string kindName = typeof(ShiftOpKind).DisplayName();
+
+        public ShiftOpAttribute(ShiftOpKind kind)
+            : base((uint)kind,kind.Format())
+        {
+            this.Kind = kind;
+        }
+
+        public ShiftOpKind Kind {get;}
+
+        public override string KindName => kindName;
+
 
     }
+
+
 }

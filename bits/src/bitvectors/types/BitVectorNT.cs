@@ -59,11 +59,11 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        internal static BitVector<N,T> LoadUnchecked(T[] src)
+        internal static BitVector<N,T> FromArrayUnchecked(T[] src)
             => new BitVector<N,T>(src,true);
 
         [MethodImpl(Inline)]
-        internal static BitVector<N,T> LoadUnchecked(Span<T> src)
+        internal static BitVector<N,T> FromSpanUnchecked(Span<T> src)
             => new BitVector<N,T>(src,true);
 
         [MethodImpl(Inline)]
@@ -71,11 +71,11 @@ namespace Z0
             => new BitVector<N, T>(src);        
         
         [MethodImpl(Inline)]
-        public static BitVector<N,T> FromCells(params T[] src)
+        public static BitVector<N,T> FromArray(params T[] src)
             => new BitVector<N,T>(src);    
 
         [MethodImpl(Inline)]
-        public static BitVector<N,T> FromCells(Span<T> src)
+        public static BitVector<N,T> FromSpan(Span<T> src)
             => new BitVector<N,T>(src);    
 
         [MethodImpl(Inline)]
@@ -430,7 +430,7 @@ namespace Z0
         public BitVector<N,T> BitVector
         {
             [MethodImpl(Inline)]
-            get => BitVector<N,T>.LoadUnchecked(data);
+            get => BitVector<N,T>.FromArrayUnchecked(data);
         }
 
     }

@@ -190,7 +190,7 @@ namespace Z0
         /// <param name="index">The 0-based row index</param>
         [MethodImpl(Inline)]
         public BitVector<N,T> RowVector(int index)                    
-            => BitVector<N,T>.FromCells(RowCells(index));                
+            => BitVector<N,T>.FromSpan(RowCells(index));                
 
         /// <summary>
         /// Replaces an index-identied column of data with the content of a row vector
@@ -202,7 +202,7 @@ namespace Z0
 
         public readonly BitVector<N,T> Diagonal()
         {
-            var dst = BitVector.Alloc<N,T>();
+            var dst = BitVector.natural<N,T>();
             for(var i=0; i<RowCount; i++)
                 dst[i] = GetBit(i,i);
             return dst;
@@ -320,7 +320,7 @@ namespace Z0
             for(var i=0; i< n; i++)
             {
                 var r = x.RowVector(i);
-                var z = BitVector.Alloc<N,T>();
+                var z = BitVector.natural<N,T>();
                 for(var j = 0; j< n; j++)
                     z[j] = r % y.RowVector(j);
                 dst[i] = z;

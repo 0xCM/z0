@@ -12,7 +12,7 @@ namespace Z0
     using static zfunc;    
     using static nfunc;
 
-    partial class bitvector
+    partial class BitVector
     {
         /// <summary>
         /// Counts the number of leading zero bits

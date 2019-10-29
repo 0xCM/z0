@@ -28,6 +28,14 @@ namespace Z0.Logix
         public static bool IsOperator(this TypedExprKind kind)
             => (uint)kind >= (uint)TypedExprKind.UnaryOperator;
 
+        [MethodImpl(Inline)]
+        public static BinaryLogicOpKind ToLogical(this BinaryBitwiseOpKind kind)
+            => (BinaryLogicOpKind)kind;
+
+        [MethodImpl(Inline)]
+        public static BinaryBitwiseOpKind ToBitwise(this BinaryLogicOpKind kind)
+            => (BinaryBitwiseOpKind)kind;
+
     }
 
 }

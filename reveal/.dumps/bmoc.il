@@ -1,4 +1,13 @@
-// 2019-10-27 16:51:32:982
+// 2019-10-28 07:21:25:822
+BitMatrix8 bm_transpose_8x8(BitMatrix8 A, ref BitMatrix8 Z)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call Z0.BitMatrix8& Z0.BitMatrix::transpose(Z0.BitMatrix8,Z0.BitMatrix8&)
+    IL_0007: ldobj Z0.BitMatrix8
+    IL_000C: ret
+
+}
 BitMatrix<byte> alloc_8x8u()
 {
     IL_0000: call Z0.BitMatrix`1<System.Byte> Z0.BitMatrix::alloc<System.Byte>()

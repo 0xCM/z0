@@ -13,7 +13,7 @@ namespace Z0
     using static nfunc;
     using static As;
 
-    partial class bitvector
+    partial class BitVector
     {
         /// <summary>
         /// Computes the bitwise XOR between two generic source vectors

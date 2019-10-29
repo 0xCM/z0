@@ -139,7 +139,7 @@ namespace Z0.Logix
                 => BitMatrix.xnor(A,B, ref Z);
 
         [MethodImpl(Inline)]
-        public static BitMatrix<T> andnot<T>(BitMatrix<T> A, BitMatrix<T> B)
+        public static BitMatrix<T> cnotimply<T>(BitMatrix<T> A, BitMatrix<T> B)
             where T : unmanaged
                 => BitMatrix.andnot(A,B);
 
@@ -175,7 +175,7 @@ namespace Z0.Logix
         }
 
         [MethodImpl(Inline)]
-        public static BitMatrix<T> leftnot<T>(BitMatrix<T> A, BitMatrix<T> B)
+        public static BitMatrix<T> lnot<T>(BitMatrix<T> A, BitMatrix<T> B)
             where T : unmanaged
                 => not(A);
 
@@ -185,7 +185,7 @@ namespace Z0.Logix
                 => not(A, ref Z);
 
         [MethodImpl(Inline)]
-        public static BitMatrix<T> rightnot<T>(BitMatrix<T> A, BitMatrix<T> B)
+        public static BitMatrix<T> rnot<T>(BitMatrix<T> A, BitMatrix<T> B)
             where T : unmanaged
                 => not(B);
 
@@ -195,9 +195,9 @@ namespace Z0.Logix
                 => not(B, ref Z);
 
         [MethodImpl(Inline)]
-        public static BitMatrix<T> implies<T>(BitMatrix<T> A, BitMatrix<T> B)
+        public static BitMatrix<T> cimply<T>(BitMatrix<T> A, BitMatrix<T> B)
             where T : unmanaged
-                => not(andnot(A, B));
+                => not(cnotimply(A, B));
 
         [MethodImpl(Inline)]
         public static BitMatrix<T> implies<T>(BitMatrix<T> A, BitMatrix<T> B, ref BitMatrix<T> C)

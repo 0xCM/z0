@@ -69,7 +69,7 @@ namespace Z0.Test
             var pc1 = 0ul;
             for(var i = 0; i<src.Length; i++)
             {
-                var bv = BitVector<N,T>.FromCells(src[i]);
+                var bv = BitVector<N,T>.FromArray(src[i]);
                 pc1 += bv.Pop();
             }
 

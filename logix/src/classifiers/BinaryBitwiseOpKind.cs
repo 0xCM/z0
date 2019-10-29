@@ -15,64 +15,49 @@ namespace Z0.Logix
     public enum BinaryBitwiseOpKind : uint
     {
         /// <summary>
+        /// Classifies a bitwise binary operator true(a,b) = 0xFFFFFFF...
+        /// </summary>
+        True = BinaryLogicOpKind.True,
+
+        /// <summary>
         /// Identifies a binary bitwise operator that always a value will all bits off
         /// </summary>
         False = BinaryLogicOpKind.False,
 
         /// <summary>
-        /// Identifies an operator that computes not(or(a,b))
-        /// </summary>
-        Nor = BinaryLogicOpKind.Nor,
-
-        /// <summary>
-        /// Identifies an operator that computes and(a,not(b))
-        /// </summary>
-        AndNot = BinaryLogicOpKind.AndNot,
-
-        /// <summary>
-        /// Identifies an operator that computes right(a,not(b)) = not(b)
-        /// </summary>
-        RightNot = BinaryLogicOpKind.RightNot,
-
-        /// <summary>
-        /// Identifies an operator that computes left(not(a), b) = not(a)
-        /// </summary>
-        LeftNot = BinaryLogicOpKind.LeftNot,
-
-        /// <summary>
-        /// Identifies an operator that computes xor(a,b)
-        /// </summary>
-        XOr = BinaryLogicOpKind.XOr,
-
-        /// <summary>
-        /// Identifies an operator that computes not(and(a,b))
-        /// </summary>
-        Nand = BinaryLogicOpKind.Nand,
-
-        /// <summary>
         /// Identifies an operator that computes and(a,b)
         /// </summary>
         And = BinaryLogicOpKind.And,
-        
+
         /// <summary>
-        /// Identifies an operator that computes or(a,b)
+        /// Classifies a bitwise binary operator nand(a,b) := not(and(a,b))
+        /// </summary>
+        Nand = BinaryLogicOpKind.Nand,
+
+            /// <summary>
+        /// Classifies a bitwise binary operator or(a,b) := OR(a,b)
         /// </summary>
         Or = BinaryLogicOpKind.Or,
 
         /// <summary>
-        /// Identifies an operator that computes not(xor(a,b))
+        /// Classifies a bitwise binary operator that computes nor(a,b) := not(or(a,b))
+        /// </summary>
+        Nor = BinaryLogicOpKind.Nor,
+
+        /// <summary>
+        /// Classifies a bitwise binary operator that computes xor(a,b) = XOR(a,b)
+        /// </summary>
+        XOr = BinaryLogicOpKind.XOr,
+    
+        /// <summary>
+        /// Classifies a bitwise binary operator xnor(a,b) := ~xor(a,b)
         /// </summary>
         Xnor = BinaryLogicOpKind.Xnor,
         
         /// <summary>
-        /// Identifies an operator that computes left(a,b) = a
+        /// Classifes a bitwise binary operator left(a,b) := a
         /// </summary>
         LeftProject = BinaryLogicOpKind.LeftProject,
-
-        /// <summary>
-        /// Identifies an operator that computes the bitwise equivalent of the material conditional
-        /// </summary>
-        Implies = BinaryLogicOpKind.Implies,
 
         /// <summary>
         /// Identifies an operator that computes right(a,b) = b
@@ -80,13 +65,36 @@ namespace Z0.Logix
         RightProject = BinaryLogicOpKind.RightProject,
 
         /// <summary>
-        /// Identifies an operator for which the result always has all bits on
+        /// Classifies a bitwise binary operator lnot(a,b) := not(a)
         /// </summary>
-        True = BinaryLogicOpKind.True,
+        LeftNot = BinaryLogicOpKind.LeftNot,
 
+        /// <summary>
+        /// Classifes a bitwise binary operator rnot(a,b) := not(b)
+        /// </summary>
+        RightNot = BinaryLogicOpKind.RightNot,
+
+        /// <summary>
+        /// Classifies a bitwise binary operator imply(a,b) := or(a, not(b))
+        /// </summary>
+        Implication = BinaryLogicOpKind.Implication,
+
+        /// <summary>
+        /// Identifies a bitwise binary operator notimply(a,b) := and(not(a), b)
+        /// </summary>
+        Nonimplication = BinaryLogicOpKind.Nonimplication,
+
+        /// <summary>
+        /// Identifies an operator cnotimply(a,b) := and(a,not(b))
+        /// </summary>
+        ConverseNonimplication = BinaryLogicOpKind.ConverseNomimplication,
+
+        /// <summary>
+        /// Classifies a bitwise binary operator cimply(a,b) := or(not(a), b)
+        /// </summary>
+        ConverseImplication = BinaryLogicOpKind.ConverseImplication,
 
     }
-     
-
+    
 
 }

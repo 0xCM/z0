@@ -13,7 +13,7 @@ namespace Z0
     using static nfunc;
     using static As;
 
-    partial class bitvector
+    partial class BitVector
     {
         /// <summary>
         /// Extracts a contiguous sequence of bits defined by an inclusive range

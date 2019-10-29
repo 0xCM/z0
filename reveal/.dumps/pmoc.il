@@ -1,4 +1,4 @@
-// 2019-10-27 16:51:32:504
+// 2019-10-28 07:21:25:372
 Sign:int signum_d8i(sbyte x)
 {
     IL_0000: ldarg.0
@@ -3141,11 +3141,11 @@ ulong dist_d32u(uint lhs, uint rhs)
     IL_0007: ret
 
 }
-ulong dist_g32u(uint lhs, uint rhs)
+ulong dist_d64u(ulong lhs, ulong rhs)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: call System.UInt64 Z0.gmath::dist<System.UInt32>(System.UInt32,System.UInt32)
+    IL_0002: call System.UInt64 Z0.math::dist(System.UInt64,System.UInt64)
     IL_0007: ret
 
 }

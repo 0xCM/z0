@@ -80,7 +80,7 @@ namespace Z0
             Disassemble(new ExperimentalScenarios());
             Disassemble(typeof(math));
             Disassemble(typeof(dinx));    
-            Disassemble(typeof(bitvector));    
+            Disassemble(typeof(BitVector));    
             Disassemble(typeof(Bits));    
             Disassemble(typeof(pmoc));    
             Disassemble(typeof(loc));    

@@ -1,4 +1,4 @@
-// 2019-10-27 16:51:34:537
+// 2019-10-28 07:21:27:423
 bit eval(ILogicExpr expr)
 {
     IL_0000: ldarg.0
@@ -22,7 +22,7 @@ bit eval(ILogicExpr expr)
     IL_0025: ldloc.3
     IL_0026: brtrue.s IL_0055
     IL_0028: ldarg.0
-    IL_0029: isinst Z0.Logix.IEqualityExpr
+    IL_0029: isinst Z0.Logix.IComparisonExpr
     IL_002E: stloc.s V_4
     IL_0030: ldloc.s V_4
     IL_0032: brtrue.s IL_005C
@@ -42,10 +42,10 @@ bit eval(ILogicExpr expr)
     IL_0056: call Z0.bit Z0.Logix.LogicExprEval::eval(Z0.Logix.ILogicOpExpr)
     IL_005B: ret
     IL_005C: ldloc.s V_4
-    IL_005E: callvirt Z0.Logix.ILogicExpr Z0.Logix.IEqualityExpr::get_Lhs()
+    IL_005E: callvirt Z0.Logix.ILogicExpr Z0.Logix.IComparisonExpr::get_Lhs()
     IL_0063: call Z0.bit Z0.Logix.LogicExprEval::eval(Z0.Logix.ILogicExpr)
     IL_0068: ldloc.s V_4
-    IL_006A: callvirt Z0.Logix.ILogicExpr Z0.Logix.IEqualityExpr::get_Rhs()
+    IL_006A: callvirt Z0.Logix.ILogicExpr Z0.Logix.IComparisonExpr::get_Rhs()
     IL_006F: call Z0.bit Z0.Logix.LogicExprEval::eval(Z0.Logix.ILogicExpr)
     IL_0074: call System.Boolean Z0.bit::op_Equality(Z0.bit,Z0.bit)
     IL_0079: call Z0.bit Z0.bit::op_Implicit(System.Boolean)

@@ -12,7 +12,7 @@ namespace Z0
     using static zfunc;
     using static BitParts;
 
-    partial class bitvector
+    partial class BitVector
     {
         [MethodImpl(Inline)]
         public static Span<BitVector4> partition(BitVector16 src, Span<BitVector4> dst)

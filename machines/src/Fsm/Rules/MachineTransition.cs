@@ -42,8 +42,8 @@ namespace Z0.Machines
                 return default;
         }
 
-        Option<IRule> IFsmFunction.Rule(IRuleKey key)
-            => Rule(key).TryMap(r => r as IRule);
+        Option<IFsmRule> IFsmFunction.Rule(IRuleKey key)
+            => Rule(key).TryMap(r => r as IFsmRule);
 
         /// <summary>
         /// Specifies the set of events that can effect a transition

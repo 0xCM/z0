@@ -19,11 +19,11 @@ namespace Z0.Logix
         public void check_implies()
         {
             var dst = BitVector4.Alloc();
-            dst[0] = (byte)(ScalarOps.implies((byte)0,(byte)0) & 1) == 1;
-            dst[1] = (byte)(ScalarOps.implies((byte)1,(byte)0) & 1) == 1;
-            dst[2] = (byte)(ScalarOps.implies((byte)0,(byte)1) & 1) == 1;
-            dst[3] = (byte)(ScalarOps.implies((byte)1,(byte)1) & 1) == 1;
-            var sig = TruthTables.Signature(BinaryLogicOpKind.Implies);
+            dst[0] = (byte)(ScalarOps.cimply((byte)0,(byte)0) & 1) == 1;
+            dst[1] = (byte)(ScalarOps.cimply((byte)1,(byte)0) & 1) == 1;
+            dst[2] = (byte)(ScalarOps.cimply((byte)0,(byte)1) & 1) == 1;
+            dst[3] = (byte)(ScalarOps.cimply((byte)1,(byte)1) & 1) == 1;
+            var sig = TruthTables.Signature(BinaryLogicOpKind.ConverseImplication);
             Claim.eq(sig,dst);
         }
 

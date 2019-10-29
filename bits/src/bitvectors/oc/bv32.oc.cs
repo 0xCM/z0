@@ -15,66 +15,66 @@ namespace Z0
     partial class bvoc
     {
         public static BitVector32 and_bv_32u(BitVector32 x, BitVector32 y)
-            => bitvector.and(x,y);
+            => BitVector.and(x,y);
 
         public static BitVector32 and_bv_o32u(BitVector32 x, BitVector32 y)
             => x & y;
 
         
         public static BitVector32 or_bv_32u(BitVector32 x, BitVector32 y)
-            => bitvector.or(x,y);
+            => BitVector.or(x,y);
 
         public static BitVector32 or_bv_o32u(BitVector32 x, BitVector32 y)
             => x | y;
 
         
         public static BitVector32 xor_bv_32u(BitVector32 x, BitVector32 y)
-            => bitvector.xor(x,y);
+            => BitVector.xor(x,y);
 
         public static BitVector32 xor_bv_o32u(BitVector32 x, BitVector32 y)
             => x ^ y;
 
         public static BitVector32 sll_bv_32u(BitVector32 x, int offset)
-            => bitvector.sll(x,offset);
+            => BitVector.sll(x,offset);
 
         public static BitVector32 sll_bv_o32u(BitVector32 x, int offset)
             => x << offset;
         
         public static BitVector32 srl_bv_32u(BitVector32 x, int offset)
-            => bitvector.srl(x,offset);
+            => BitVector.srl(x,offset);
 
         public static BitVector32 srl_bv_o32u(BitVector32 x, int offset)
             => x >> offset;
 
         public static BitVector32 flip_bv_32u(BitVector32 x)
-            => bitvector.not(x);
+            => BitVector.not(x);
 
         public static BitVector32 flip_bv_o32u(BitVector32 x)
             => ~x;
         
         public static BitVector32 negate_bv_32u(BitVector32 x)
-            => bitvector.negate(x);
+            => BitVector.negate(x);
 
         public static BitVector32 negate_bv_o32u(BitVector32 x)
             => -x;
 
         public static BitVector32 inc_bv_32u(BitVector32 x)
-            => bitvector.inc(x);
+            => BitVector.inc(x);
 
         public static BitVector32 inc_bv_o32u(BitVector32 x)
             => ++x;
 
         public static BitVector32 dec_bv_32u(BitVector32 x)
-            => bitvector.dec(x);
+            => BitVector.dec(x);
 
         public static BitVector32 dec_bv_o32u(BitVector32 x)
             => --x;
 
         public static BitVector32 rotl_bv_32u(BitVector32 x, int offset)
-            => bitvector.rotl(x,offset);
+            => BitVector.rotl(x,offset);
 
         public static BitVector32 rotr_bv_32u(BitVector32 x, int offset)
-            => bitvector.rotr(x, offset);
+            => BitVector.rotr(x, offset);
     }
 
 }

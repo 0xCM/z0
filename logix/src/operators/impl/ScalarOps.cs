@@ -46,10 +46,6 @@ namespace Z0.Logix
             where T:unmanaged
                 => @false<T>();
 
-        [MethodImpl(Inline)]
-        public static T @false<T>(T a, T b)
-            where T:unmanaged
-                => @false<T>();
 
         [MethodImpl(Inline)]
         public static T @false<T>(T a, T b, T c)
@@ -66,10 +62,6 @@ namespace Z0.Logix
             where T:unmanaged
                 => @true<T>();
 
-        [MethodImpl(Inline)]
-        public static T @true<T>(T a, T b)
-            where T:unmanaged
-                => @true<T>();
 
         [MethodImpl(Inline)]
         public static T @true<T>(T a, T b, T c)
@@ -80,6 +72,11 @@ namespace Z0.Logix
         public static T not<T>(T a)
             where T : unmanaged
                 => gmath.not(a);
+
+        [MethodImpl(Inline)]
+        public static T xor1<T>(T a)
+            where T : unmanaged
+                => gmath.xor1(a); 
 
         /// <summary>
         /// Promotes a bit to the full splendor of a scalar, with all scalar bits enabled if
@@ -97,62 +94,43 @@ namespace Z0.Logix
             where T : unmanaged
                 => gbits.pop(a) == bitsize<T>();
 
-        [MethodImpl(Inline)]
-        public static T equals<T>(T a, T b)
-            where T : unmanaged
-                => promote<T>(Predicates.equals(a,b));
 
-        [MethodImpl(Inline)]
-        public static T neq<T>(T a, T b)
-            where T : unmanaged
-                => promote<T>(Predicates.neq(a,b));
+        [MethodImpl(Inline), BinaryBitwiseOp(BinaryBitwiseOpKind.False)]
+        public static T @false<T>(T a, T b)
+            where T:unmanaged
+                => @false<T>();
 
-        [MethodImpl(Inline)]
-        public static T lt<T>(T a, T b)
-            where T : unmanaged
-                => promote<T>(Predicates.lt(a,b));
+        [MethodImpl(Inline), BinaryBitwiseOp(BinaryBitwiseOpKind.True)]
+        public static T @true<T>(T a, T b)
+            where T:unmanaged
+                => @true<T>();
 
-        [MethodImpl(Inline)]
-        public static T lteq<T>(T a, T b)
-            where T : unmanaged
-                => promote<T>(Predicates.lteq(a,b));
-
-        [MethodImpl(Inline)]
-        public static T gt<T>(T a, T b)
-            where T : unmanaged
-                => promote<T>(Predicates.gt(a,b));
-
-        [MethodImpl(Inline)]
-        public static T gteq<T>(T a, T b)
-            where T : unmanaged
-                => promote<T>(Predicates.gteq(a,b));
-
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), BinaryBitwiseOp(BinaryBitwiseOpKind.And)]
         public static T and<T>(T a, T b)
             where T : unmanaged
                 => gmath.and(a,b);
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), BinaryBitwiseOp(BinaryBitwiseOpKind.Nand)]
         public static T nand<T>(T a, T b)
             where T : unmanaged
                 => gmath.nand(a,b);
 
-        [MethodImpl(Inline)]
-        public static T andnot<T>(T a, T b)
+        [MethodImpl(Inline), BinaryBitwiseOp(BinaryBitwiseOpKind.ConverseNonimplication)]
+        public static T cnotimply<T>(T a, T b)
             where T : unmanaged
                 => gmath.andnot(a,b);
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), BinaryBitwiseOp(BinaryBitwiseOpKind.Or)]
         public static T or<T>(T a, T b)
             where T : unmanaged
                 => gmath.or(a,b);
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), BinaryBitwiseOp(BinaryBitwiseOpKind.Nor)]
         public static T nor<T>(T a, T b)
             where T : unmanaged
                 => gmath.nor(a,b);
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), BinaryBitwiseOp(BinaryBitwiseOpKind.XOr)]
         public static T xor<T>(T a, T b)
             where T : unmanaged
                 => gmath.xor(a,b);
@@ -162,46 +140,70 @@ namespace Z0.Logix
             where T : unmanaged
                 => gmath.xornot(a,b);
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), BinaryBitwiseOp(BinaryBitwiseOpKind.Xnor)]
         public static T xnor<T>(T a, T b)
             where T : unmanaged
                 => gmath.xnor(a,b);
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), BinaryBitwiseOp(BinaryBitwiseOpKind.LeftProject)]
         public static T left<T>(T a, T b)
             where T : unmanaged
                 => a;
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), BinaryBitwiseOp(BinaryBitwiseOpKind.RightProject)]
         public static T right<T>(T a, T b)
             where T : unmanaged
                 => b;
 
-        [MethodImpl(Inline)]
-        public static T rightnot<T>(T a, T b)
+        [MethodImpl(Inline), BinaryBitwiseOp(BinaryBitwiseOpKind.RightNot)]
+        public static T rnot<T>(T a, T b)
             where T : unmanaged
                 => not(b);
 
-        [MethodImpl(Inline)]
-        public static T leftnot<T>(T a, T b)
+        [MethodImpl(Inline), BinaryBitwiseOp(BinaryBitwiseOpKind.LeftNot)]
+        public static T lnot<T>(T a, T b)
             where T : unmanaged
                 => not(a);
 
-        [MethodImpl(Inline)]
-        public static T implies<T>(T a, T b)
+        [MethodImpl(Inline), BinaryBitwiseOp(BinaryBitwiseOpKind.ConverseImplication)]
+        public static T cimply<T>(T a, T b)
             where T : unmanaged
-                => not(andnot(a, b));
+                => not(cnotimply(a, b));
 
+        [MethodImpl(Inline), ComparisonOp(ComparisonKind.Eq)]
+        public static T equals<T>(T a, T b)
+            where T : unmanaged
+                => promote<T>(Predicates.equals(a,b));
+
+        [MethodImpl(Inline), ComparisonOp(ComparisonKind.Neq)]
+        public static T neq<T>(T a, T b)
+            where T : unmanaged
+                => promote<T>(Predicates.neq(a,b));
+
+        [MethodImpl(Inline), ComparisonOp(ComparisonKind.Lt)]
+        public static T lt<T>(T a, T b)
+            where T : unmanaged
+                => promote<T>(Predicates.lt(a,b));
+
+        [MethodImpl(Inline), ComparisonOp(ComparisonKind.LtEq)]
+        public static T lteq<T>(T a, T b)
+            where T : unmanaged
+                => promote<T>(Predicates.lteq(a,b));
+
+        [MethodImpl(Inline), ComparisonOp(ComparisonKind.Gt)]
+        public static T gt<T>(T a, T b)
+            where T : unmanaged
+                => promote<T>(Predicates.gt(a,b));
+
+        [MethodImpl(Inline), ComparisonOp(ComparisonKind.GtEq)]
+        public static T gteq<T>(T a, T b)
+            where T : unmanaged
+                => promote<T>(Predicates.gteq(a,b));
 
         [MethodImpl(Inline)]
         public static bit same<T>(T a, T b)
             where T : unmanaged
                 => gmath.eq(a,b);
-
-        [MethodImpl(Inline)]
-        public static T xor1<T>(T a)
-            where T : unmanaged
-                => gmath.xor1(a); 
 
         [MethodImpl(Inline)]
         public static T sll<T>(T a, int offset)
@@ -470,7 +472,7 @@ namespace Z0.Logix
         [MethodImpl(Inline)]
         public static T f22<T>(T a, T b, T c)
             where T : unmanaged
-                => andnot(c,b);
+                => cnotimply(c,b);
 
         // not (B) and ((A xor 1) or C)
         [MethodImpl(Inline)]
@@ -554,7 +556,7 @@ namespace Z0.Logix
         [MethodImpl(Inline),TernaryOp(X30)]
         public static T f30<T>(T a, T b, T c)
             where T : unmanaged
-                => andnot(a,b);
+                => cnotimply(a,b);
 
         // not (B) and (A or (C xor 1))
         [MethodImpl(Inline),TernaryOp(X31)]
@@ -674,7 +676,7 @@ namespace Z0.Logix
         [MethodImpl(Inline),TernaryOp(X44)]
         public static T f44<T>(T a, T b, T c)
             where T : unmanaged
-                => andnot(b,c);
+                => cnotimply(b,c);
 
         // not (C) and ((A xor 1) or B)
         [MethodImpl(Inline),TernaryOp(X45)]
@@ -740,13 +742,13 @@ namespace Z0.Logix
         [MethodImpl(Inline),TernaryOp(X4F)]
         public static T f4f<T>(T a, T b, T c)
             where T : unmanaged
-                => or(not(a),andnot(b,c));
+                => or(not(a),cnotimply(b,c));
 
         // A and not (C)
         [MethodImpl(Inline),TernaryOp(X50)]
         public static T f50<T>(T a, T b, T c)
             where T : unmanaged
-                => andnot(a,c);
+                => cnotimply(a,c);
 
         // not (C) and (A or (B xor 1))
         [MethodImpl(Inline),TernaryOp(X51)]

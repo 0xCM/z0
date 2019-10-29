@@ -12,7 +12,7 @@ namespace Z0
     using static zfunc;    
     using static nfunc;
 
-    partial class bitvector
+    partial class BitVector
     {
         /// <summary>
         /// Creates a generic bitvector of natural length from a single cell

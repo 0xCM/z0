@@ -11,175 +11,208 @@ namespace Z0.Logix
     /// <summary>
     /// Classifies boolean binary operators
     /// </summary>
-    [Flags]
+    /// <remarks>
+    /// The numeric values assinged to the classifications are not the same as the signature bitvector.
+    /// </remarks>
     public enum BinaryLogicOpKind : uint
     {        
         /// <summary>
-        /// Classifies a binary operator that always returns FALSE
+        /// Classifies a logical binary operator true(a,b) = bv(1111)
         /// </summary>
         /// <remarks>
-        /// Signature: 0000
+        /// bv(1111) = id(False)
+        /// </remarks>
+        True = 0b1111,
+ 
+         /// <summary>
+        /// Classifies a logical  binary operator false(a,b) := bv(0000)
+        /// </summary>
+        /// <remarks>
+        /// bv(0000) = id(True)
         /// </remarks>
         False = 0b0000,
 
         /// <summary>
-        /// Identifies a binary operator that computes the complement of OR
+        /// Classifies a logical binary operator and(a,b) := bv(1000)
         /// </summary>
         /// <remarks>
-        /// Signature: 0001
-        /// </remarks>
-        Nor = 0b001,
-
-        /// <summary>
-        /// Identifies a binary operator that computes the converse nonimplication (AND NOT) operator  that 
-        /// computes the conjunction of the first operand with the negation of the second
-        /// </summary>
-        /// <remarks>
-        /// Signature: 0010
-        /// Truth table:
-        /// 0 0 0
-        /// 1 0 1
-        /// 0 1 0
-        /// 1 1 0
-        /// </remarks>
-        AndNot = 0b0010,
-
-        /// <summary>
-        /// Identifies a binary operator that computes the negation of the right operand
-        /// </summary>
-        /// <remarks>
-        /// Signature: 0011
-        /// Truth table:
-        /// 0 0 1
-        /// 1 0 1
-        /// 0 1 0
-        /// 1 1 0
-        /// </remarks>
-        RightNot = 0b0011,
-
-        /// <summary>
-        /// Identifies a binary operator that computes the negation of the material conditional
-        /// </summary>
-        /// <remarks>
-        /// Signature: 0100
-        /// Truth table:
+        /// bv(1000) = id(Nor)
         /// 0 0 0
         /// 1 0 0
+        /// 0 1 0
+        /// 1 1 1
+        /// </remarks>
+        And = 0b0001,
+
+        /// <summary>
+        /// Classifies a logical binary operator nand(a,b) := not(and(a,b)) = bv(0111)
+        /// </summary>
+        /// <remarks>
+        /// bv(0111) = id(Or)
+        /// Truth Table:
+        /// 0 0 1
+        /// 1 0 1
         /// 0 1 1
         /// 1 1 0
         /// </remarks>
-        MaterialNonimplication = 0b0100,
+        Nand = 0b1110, 
 
         /// <summary>
-        /// Classifies a binary operator that computes the negation of the left operand
+        /// Classifies a logical binary operator or(a,b) := bv(1110)
         /// </summary>
         /// <remarks>
-        /// Signature: 0101
+        /// bv(1110) = id(Nand)
+        /// Truth Table:
+        /// 0 0 0
+        /// 1 0 1
+        /// 0 1 1
+        /// 1 1 1
+        /// </remarks>
+        Or = 0b0111,
+
+        /// <summary>
+        /// Classifies a logical binary operator that computes nor(a,b) := not(or(a,b)) = bv(0001)
+        /// </summary>
+        /// <remarks>
+        /// bv(0001) = id(And)
+        /// Truth Table:
         /// 0 0 1
         /// 1 0 0
-        /// 0 1 1
+        /// 0 1 0
         /// 1 1 0
         /// </remarks>
-        LeftNot = 0b0101,
+        Nor = 0b1000, 
 
         /// <summary>
-        /// Classifies a binary operator that computes the XOR between its operands
+        /// Classifies a logical binary operator xor(a,b) := bv(0110)
         /// </summary>
         /// <remarks>
-        /// Signature: 0110
+        /// bv(0110) = id(XOr)
+        /// Truth Table:
+        /// 0 0 0
+        /// 1 0 1
+        /// 0 1 1
+        /// 1 1 0
         /// </remarks>
         XOr = 0b0110,
 
         /// <summary>
-        /// Identifies a binary operator that computes the complement of AND and evaluates to true iff one or both operands are false
+        /// Classifies a binary operator xnor(a,b) := not(xor(a,b)) = bv(1001)
         /// </summary>
         /// <remarks>
-        /// Signature: 0111
+        /// bv(1001) = id(Xnor)
+        /// Truth Table:
+        /// 0 0 1
+        /// 1 0 0
+        /// 0 1 0
+        /// 1 1 1
         /// </remarks>
-        Nand = 0b0111,
+        Xnor = 0b1001, 
 
         /// <summary>
-        /// Classifies a binary operator that computes the conjunction of its operands
+        /// Classifes a logical binary operator left(a,b) := a = bv(1010)
         /// </summary>
         /// <remarks>
-        /// Signature: 1000
-        /// </remarks>
-        And = 0b1000,
-
-        /// <summary>
-        /// Classifies a binary operator that computes the negation of XOR and can be interpreted as an equality operator
-        /// </summary>
-        /// <remarks>
-        /// Signature: 1001
-        /// </remarks>
-        Xnor = 0b1001,
-        
-        /// <summary>
-        /// Classifes a binary operator that selects the value of the left operand
-        /// </summary>
-        /// <remarks>
-        /// Signature: 1010
+        /// bv(1010) = id(RightNot)
+        /// Truth Table:
         /// 0 0 0
         /// 1 0 1
         /// 0 1 0
         /// 1 1 1
         /// </remarks>
-        LeftProject = 0b1010,
+        LeftProject = 0b0011, 
 
         /// <summary>
-        /// Classifies a binary operator that evaluates the material conditional (implication) a → b
+        /// Classifies a logical binary operator right(a,b) := b = bv(1100)
         /// </summary>
         /// <remarks>
-        /// Truth table:
-        /// Signature: 1011
-        /// 0 0 1
-        /// 1 0 0
-        /// 0 1 1
-        /// 1 1 1
-        /// </remarks>
-        Implies = 0b1011,
-
-        /// <summary>
-        /// Classifies a binary operator that selects the value of the right operand
-        /// </summary>
-        /// <remarks>
-        /// Signature: 1100
+        /// bv(1100) = id(LeftNot)
         /// Truth table:
         /// 0 0 0
         /// 1 0 0
         /// 0 1 1
         /// 1 1 1
         /// </remarks>
-        RightProject = 0b1100,
+        RightProject = 0b0101,
 
         /// <summary>
-        /// Classifies a binary operator that computes the converse implication a ← b
+        /// Classifies a logical binary operator lnot(a,b) := not(a) = bv(0101)
         /// </summary>
         /// <remarks>
-        /// Signature: 1101
+        /// bv(0101) = id(RightProject)
+        /// Truth table:
+        /// 0 0 1
+        /// 1 0 0
+        /// 0 1 1
+        /// 1 1 0
+        /// </remarks>
+        LeftNot = 0b1100, 
+
+        /// <summary>
+        /// Classifes a logical binary operator rnot(a,b) := not(b) = bv(0011)
+        /// </summary>
+        /// <remarks>
+        /// bv(0011) = id(LeftProject)
+        /// Truth table:
+        /// 0 0 1
+        /// 1 0 1
+        /// 0 1 0
+        /// 1 1 0
+        /// </remarks>
+        RightNot = 0b1010, 
+
+        /// <summary>
+        /// Classifies a logical binary operator imply(a,b) := or(a, not(b)) = bv(1011)
+        /// </summary>
+        /// <remarks>
+        /// bv(1011) = id(Implication)
         /// Truth table:
         /// 0 0 1
         /// 1 0 1
         /// 0 1 0
         /// 1 1 1
         /// </remarks>
-        ConvImplies = 0b1101,
+        Implication = 0b1011,
 
         /// <summary>
-        /// Classifies a binary operator that computes the disjunction of its operands
+        /// Identifies a logical binary operator notimply(a,b) := and(~a, b) = bv(0100)
         /// </summary>
         /// <remarks>
-        /// Signature: 1110
+        /// bv(0100) = id(Nonimplication)
+        /// Truth table:
+        /// 0 0 0
+        /// 1 0 0
+        /// 0 1 1
+        /// 1 1 0
         /// </remarks>
-        Or = 0b1110,
+        Nonimplication = 0b0100,        
 
         /// <summary>
-        /// Classifies a binary operator that always returns TRUE
+        /// Classifies a logical binary operator cimply(a,b) := or(not(a), b) = bv(1101)
+        /// </summary>
+        /// bv(1101) = id(ConverseImplication)
+        /// <remarks>
+        /// Truth table:
+        /// 0 0 1
+        /// 1 0 0
+        /// 0 1 1
+        /// 1 1 1
+        /// </remarks>
+        ConverseImplication = 0b1101,
+
+        /// <summary>
+        /// Classifies a logical binary operator cnotimply(a,b) := and(a, ~b) = bv(0010)
         /// </summary>
         /// <remarks>
-        /// Signature: 1111
+        /// bv(0010) = id(ConverseNonimplication)
+        /// Truth table:
+        /// 0 0 0
+        /// 1 0 1
+        /// 0 1 0
+        /// 1 1 0
         /// </remarks>
-        True = 0b1111,
+        ConverseNomimplication = 0b0010,
+           
     
     } 
 }

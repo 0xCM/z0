@@ -123,7 +123,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator BitVector<N4,byte>(in BitVector4 src)
-            => BitVector<N4,byte>.FromCells(src.data);
+            => BitVector<N4,byte>.FromArray(src.data);
 
         [MethodImpl(Inline)]
         public static implicit operator BitVector4(in byte src)
@@ -160,7 +160,7 @@ namespace Z0
         /// <param name="rhs">The right vector</param>
         [MethodImpl(Inline)]
         public static BitVector4 operator |(in BitVector4 lhs, in BitVector4 rhs)
-            => bitvector.or(lhs,rhs);
+            => BitVector.or(lhs,rhs);
 
         /// <summary>
         /// Computes the bitwise complement
@@ -168,7 +168,7 @@ namespace Z0
         /// <param name="x">The left bitvector</param>
         [MethodImpl(Inline)]
         public static BitVector4 operator ~(BitVector4 src)
-            => bitvector.not(src);
+            => BitVector.not(src);
 
         /// <summary>
         /// Computes the arithmetic sum of the source operands. 
@@ -177,7 +177,7 @@ namespace Z0
         /// <param name="rhs">The right operand</param>
         [MethodImpl(Inline)]
         public static BitVector4 operator +(BitVector4 x, BitVector4 y)
-            => bitvector.add(x,y);
+            => BitVector.add(x,y);
 
         /// <summary>
         /// Computes the product of the operands. 
@@ -196,11 +196,11 @@ namespace Z0
         /// <param name="rhs">The right operand</param>
         [MethodImpl(Inline)]
         public static Bit operator %(BitVector4 lhs, BitVector4 rhs)
-            => bitvector.dot(lhs,rhs);
+            => BitVector.dot(lhs,rhs);
 
         [MethodImpl(Inline)]
         public static BitVector4 operator -(in BitVector4 src)
-            => bitvector.negate(src);
+            => BitVector.negate(src);
 
         /// <summary>
         /// Subtracts the second operand from the first. 
@@ -209,15 +209,15 @@ namespace Z0
         /// <param name="rhs">The right vector</param>
         [MethodImpl(Inline)]
         public static BitVector4 operator - (BitVector4 lhs, BitVector4 rhs)
-            => bitvector.sub(lhs,rhs);
+            => BitVector.sub(lhs,rhs);
 
         [MethodImpl(Inline)]
         public static BitVector4 operator >>(BitVector4 lhs, int offset)
-            => bitvector.srl(lhs,offset);
+            => BitVector.srl(lhs,offset);
 
         [MethodImpl(Inline)]
         public static BitVector4 operator <<(BitVector4 lhs, int offset)
-            => bitvector.sll(lhs,offset);
+            => BitVector.sll(lhs,offset);
 
         [MethodImpl(Inline)]
         public static bool operator ==(in BitVector4 lhs, in BitVector4 rhs)
@@ -286,7 +286,7 @@ namespace Z0
         /// </summary>
         /// <param name="rhs">The right operand</param>
         public readonly bit Dot(BitVector4 rhs)
-            => bitvector.dot(this,rhs);
+            => BitVector.dot(this,rhs);
 
         [MethodImpl(Inline)]
         static byte TakeHi(byte src)        
@@ -407,7 +407,7 @@ namespace Z0
         /// <param name="last">The last bit position</param>
         [MethodImpl(Inline)]
         public BitVector4 Between(int first, int last)
-            => bitvector.between(this,first,last);
+            => BitVector.between(this,first,last);
 
 
         /// <summary>

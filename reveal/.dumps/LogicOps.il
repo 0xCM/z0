@@ -1,4 +1,4 @@
-// 2019-10-27 16:51:34:077
+// 2019-10-28 07:21:26:944
 bit zero()
 {
     IL_0000: call Z0.bit zfunc::get_off()
@@ -159,12 +159,21 @@ bit notimplies(bit a, bit b)
     IL_000C: ret
 
 }
-bit conimplies(bit a, bit b)
+bit ornot(bit a, bit b)
 {
     IL_0000: ldarg.1
     IL_0001: ldarg.0
     IL_0002: call Z0.bit Z0.bit::implies(Z0.bit,Z0.bit)
     IL_0007: ret
+
+}
+bit same(bit a, bit b)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call System.Boolean Z0.bit::op_Equality(Z0.bit,Z0.bit)
+    IL_0007: call Z0.bit Z0.bit::op_Implicit(System.Boolean)
+    IL_000C: ret
 
 }
 bit xor1(bit a)
@@ -654,41 +663,6 @@ bit f2b(bit a, bit b, bit c)
     IL_000A: call Z0.bit Z0.Logix.LogicOps::nor(Z0.bit,Z0.bit)
     IL_000F: call Z0.bit Z0.Logix.LogicOps::select(Z0.bit,Z0.bit,Z0.bit)
     IL_0014: ret
-
-}
-bit f2c(bit a, bit b, bit c)
-{
-    IL_0000: ldarg.1
-    IL_0001: ldarg.2
-    IL_0002: call Z0.bit Z0.Logix.LogicOps::or(Z0.bit,Z0.bit)
-    IL_0007: ldarg.0
-    IL_0008: ldarg.1
-    IL_0009: call Z0.bit Z0.Logix.LogicOps::xor(Z0.bit,Z0.bit)
-    IL_000E: call Z0.bit Z0.Logix.LogicOps::and(Z0.bit,Z0.bit)
-    IL_0013: ret
-
-}
-bit f2d(bit a, bit b, bit c)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: ldarg.2
-    IL_0003: call Z0.bit Z0.Logix.LogicOps::not(Z0.bit)
-    IL_0008: call Z0.bit Z0.Logix.LogicOps::or(Z0.bit,Z0.bit)
-    IL_000D: call Z0.bit Z0.Logix.LogicOps::xor(Z0.bit,Z0.bit)
-    IL_0012: ret
-
-}
-bit f2e(bit a, bit b, bit c)
-{
-    IL_0000: ldarg.1
-    IL_0001: ldarg.2
-    IL_0002: call Z0.bit Z0.Logix.LogicOps::or(Z0.bit,Z0.bit)
-    IL_0007: ldarg.0
-    IL_0008: ldarg.1
-    IL_0009: call Z0.bit Z0.Logix.LogicOps::or(Z0.bit,Z0.bit)
-    IL_000E: call Z0.bit Z0.Logix.LogicOps::xor(Z0.bit,Z0.bit)
-    IL_0013: ret
 
 }
 bit f2f(bit a, bit b, bit c)

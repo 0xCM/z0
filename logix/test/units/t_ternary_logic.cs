@@ -154,9 +154,9 @@ namespace Z0.Logix
                 var sa = Random.Next<T>();
                 var sb = Random.Next<T>();
 
-                var z0 = BitVector.Generic<T>();
-                var va = BitVector.Generic(sa);
-                var vb = BitVector.Generic(sb);
+                var z0 = BitVector.generic<T>();
+                var va = BitVector.generic(sa);
+                var vb = BitVector.generic(sb);
 
                 for(var i=0; i< z0.Length; i++)
                     z0[i] = BL(va[i],vb[i]);

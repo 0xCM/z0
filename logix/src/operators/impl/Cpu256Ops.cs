@@ -71,7 +71,7 @@ namespace Z0.Logix
                 => ginx.vand(a,b);
 
         [MethodImpl(Inline)]
-        public static Vector256<T> andnot<T>(Vector256<T> a, Vector256<T> b)
+        public static Vector256<T> cnotimply<T>(Vector256<T> a, Vector256<T> b)
             where T : unmanaged
                 => ginx.vandnot(a,b);
 
@@ -107,7 +107,7 @@ namespace Z0.Logix
                 => a;
 
         [MethodImpl(Inline)]
-        public static Vector256<T> leftnot<T>(Vector256<T> a, Vector256<T> b)
+        public static Vector256<T> lnot<T>(Vector256<T> a, Vector256<T> b)
             where T : unmanaged
                 => not(a);
 
@@ -117,7 +117,7 @@ namespace Z0.Logix
                 => b;
 
         [MethodImpl(Inline)]
-        public static Vector256<T> rightnot<T>(Vector256<T> a, Vector256<T> b)
+        public static Vector256<T> rnot<T>(Vector256<T> a, Vector256<T> b)
             where T : unmanaged
                 => not(b);
 

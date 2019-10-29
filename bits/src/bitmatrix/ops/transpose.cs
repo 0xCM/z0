@@ -13,6 +13,27 @@ namespace Z0
 
     partial class BitMatrix
     {
+
+        /// <summary>
+        /// Transposes an 8x8 bitmatrix
+        /// </summary>
+        /// <param name="A"></param>
+        /// <param name="Z"></param>
+        /// <remarks>Code adapted from Hacker's Delight</remarks>
+        [MethodImpl(Inline)]
+        public static ref BitMatrix8 transpose(BitMatrix8 A, ref BitMatrix8 Z)
+        {
+            var src = (ulong)A;
+            var t = (src ^ (src >> 7)) & 0x00AA00AA00AA00AAul;
+            src = src ^ t ^ (t << 7);
+            t = (src ^ (src >> 14)) & 0x0000CCCC0000CCCCul;
+            src = src ^ t ^ (t << 14);
+            t = (src ^ (src >> 28)) & 0x00000000F0F0F0F0ul;
+            src = src ^ t ^ (t << 28);
+            bytes(src).CopyTo(Z.Bytes);
+            return ref Z;
+        }
+
         public static ref BitMatrix<N8,N16,uint> Transpose(this ref BitMatrix<N8,N16,uint> A)
         {
             var vec = cpuvec(n128,A.Bytes);

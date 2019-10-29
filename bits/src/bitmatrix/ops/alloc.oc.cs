@@ -14,6 +14,9 @@ namespace Z0
     partial class bmoc
     {
 
+        public static BitMatrix8 bm_transpose_8x8(BitMatrix8 A, ref BitMatrix8 Z)
+            => BitMatrix.transpose(A, ref Z);
+
         public static BitMatrix<byte> alloc_8x8u()
             => BitMatrix.alloc<byte>();
 

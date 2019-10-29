@@ -115,7 +115,7 @@ namespace Z0
                 ref readonly var row = ref A.RowData(i);
                 var z = BitVector64.Alloc();
                 for(var j=0; j< N; j++)
-                    z[j] = Z0.bitvector.dot(row, C.RowData(j));
+                    z[j] = Z0.BitVector.dot(row, C.RowData(j));
                 A[i] = (ulong)z;
             }
 

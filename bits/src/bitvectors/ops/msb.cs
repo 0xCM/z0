@@ -12,7 +12,7 @@ namespace Z0
     using static zfunc;    
     using static nfunc;
 
-    partial class bitvector
+    partial class BitVector
     {
         /// <summary>
         /// Constructs a bitvector formed from the n lest significant bits of the source vector
@@ -49,7 +49,7 @@ namespace Z0
         /// <param name="n">The count of most significant bits</param>
         [MethodImpl(Inline)]
         public static BitVector16 msb(BitVector16 x, int n)                
-            => bitvector.between(x.data, BitVector16.Width - n, BitVector16.Width - 1);                
+            => BitVector.between(x.data, BitVector16.Width - n, BitVector16.Width - 1);                
 
         /// <summary>
         /// Constructs a bitvector formed from the n most significant bits of the source vector
@@ -58,7 +58,7 @@ namespace Z0
         /// <param name="n">The count of most significant bits</param>
         [MethodImpl(Inline)]
         public static BitVector32  msb(BitVector32 x, int n)                
-            => bitvector.between(x.data, BitVector32.Width - n, BitVector32.Width - 1);                
+            => BitVector.between(x.data, BitVector32.Width - n, BitVector32.Width - 1);                
 
         /// <summary>
         /// Constructs a bitvector formed from the n most significant bits of the source vector
@@ -67,6 +67,6 @@ namespace Z0
         /// <param name="n">The count of most significant bits</param>
         [MethodImpl(Inline)]
         public static BitVector64  msb(BitVector64 x, int n)                
-            => bitvector.between(x.data, BitVector64.Width - n, BitVector64.Width - 1);
+            => BitVector.between(x.data, BitVector64.Width - n, BitVector64.Width - 1);
     }
 }

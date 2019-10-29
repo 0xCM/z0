@@ -116,7 +116,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator BitVector<N32,uint>(BitVector32 src)
-            => BitVector<N32,uint>.FromCells(src.data);
+            => BitVector<N32,uint>.FromArray(src.data);
 
 
         [MethodImpl(Inline)]
@@ -175,7 +175,7 @@ namespace Z0
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
         public static BitVector32 operator ^(in BitVector32 x, in BitVector32 y)
-            => bitvector.xor(x,y);
+            => BitVector.xor(x,y);
 
         /// <summary>
         /// Computes the bitwise AND of the source operands
@@ -184,7 +184,7 @@ namespace Z0
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
         public static BitVector32 operator &(in BitVector32 x, in BitVector32 y)
-            => bitvector.and(x,y);
+            => BitVector.and(x,y);
 
         /// <summary>
         /// Computes the scalar product of the operands
@@ -193,7 +193,7 @@ namespace Z0
         /// <param name="y">The right operand</param>
         [MethodImpl(Inline)]
         public static Bit operator %(in BitVector32 x, in BitVector32 y)
-            => bitvector.dot(x,y);
+            => BitVector.dot(x,y);
 
         /// <summary>
         /// Computes the bitwise OR of the source operands
@@ -202,7 +202,7 @@ namespace Z0
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
         public static BitVector32 operator |(in BitVector32 x, in BitVector32 y)
-            => bitvector.or(x,y);
+            => BitVector.or(x,y);
 
         /// <summary>
         /// Computes the bitwise complement of the operand. 
@@ -210,7 +210,7 @@ namespace Z0
         /// <param name="x">The source operand</param>
         [MethodImpl(Inline)]
         public static BitVector32 operator ~(BitVector32 src)
-            => bitvector.not(src);
+            => BitVector.not(src);
 
         /// <summary>
         /// Computes the arithmetic sum of the source operands. 
@@ -219,7 +219,7 @@ namespace Z0
         /// <param name="y">The right operand</param>
         [MethodImpl(Inline)]
         public static BitVector32 operator +(BitVector32 x, BitVector32 y)
-            => bitvector.add(x,y);
+            => BitVector.add(x,y);
 
         /// <summary>
         /// Arithmetically increments the source vector 
@@ -227,7 +227,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
         public static BitVector32 operator ++(BitVector32 src)
-            => bitvector.inc(src);
+            => BitVector.inc(src);
 
         /// <summary>
         /// Arithmetically decrements the source vector 
@@ -235,7 +235,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
         public static BitVector32 operator --(BitVector32 src)
-            => bitvector.dec(src);
+            => BitVector.dec(src);
 
         /// <summary>
         /// Subtracts the second operand from the first. 
@@ -244,7 +244,7 @@ namespace Z0
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
         public static BitVector32 operator - (BitVector32 x, BitVector32 y)
-            => bitvector.sub(x,y);
+            => BitVector.sub(x,y);
 
         /// <summary>
         /// Negates the operand. Note that this operator is equivalent to the 
@@ -253,7 +253,7 @@ namespace Z0
         /// <param name="x">The source operand</param>
         [MethodImpl(Inline)]
         public static BitVector32 operator -(BitVector32 src)
-            => bitvector.negate(src);
+            => BitVector.negate(src);
 
         /// <summary>
         /// Left-shifts the bits in the source
@@ -261,7 +261,7 @@ namespace Z0
         /// <param name="x">The source operand</param>
         [MethodImpl(Inline)]
         public static BitVector32 operator <<(BitVector32 x, int offset)
-            => bitvector.sll(x,offset);
+            => BitVector.sll(x,offset);
 
         /// <summary>
         /// Right-shifts the bits in the source
@@ -269,7 +269,7 @@ namespace Z0
         /// <param name="x">The source operand</param>
         [MethodImpl(Inline)]
         public static BitVector32 operator >>(BitVector32 x, int offset)
-            => bitvector.srl(x,offset);
+            => BitVector.srl(x,offset);
 
         /// <summary>
         /// Returns true if the source vector is nonzero, false otherwise
@@ -474,7 +474,7 @@ namespace Z0
         /// <param name="spec">The permutation</param>
         [MethodImpl(Inline)]
         public BitVector32 Permute(Perm spec)
-            => bitvector.perm(ref this, spec);
+            => BitVector.perm(ref this, spec);
             
         /// <summary>
         /// Counts the number of enabled bits in the source

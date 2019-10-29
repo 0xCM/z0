@@ -77,7 +77,7 @@ namespace Z0
             where T : unmanaged
         {            
             for(var i=0; i<A.RowCount; i++)
-                B[i] = bitvector.not(A[i]); 
+                B[i] = BitVector.not(A[i]); 
             return B;
         }
 
@@ -91,7 +91,7 @@ namespace Z0
         {
             var rc = rowdim(A,B,C);
             for(var i=0; i<rc; i++)
-                C[i] = bitvector.and(A[i],B[i]);
+                C[i] = BitVector.and(A[i],B[i]);
             return ref C;
         }
 
@@ -108,7 +108,7 @@ namespace Z0
         {
             var rc = rowdim(A,B,C);
             for(var i=0; i<rc; i++)
-                C[i] = bitvector.andnot(A[i],B[i]);
+                C[i] = BitVector.andnot(A[i],B[i]);
             return C;
 
         }
@@ -124,7 +124,7 @@ namespace Z0
         {
             var rc = rowdim(A,B,C);
             for(var i=0; i<rc; i++)
-                C[i] = bitvector.or(A[i],B[i]);
+                C[i] = BitVector.or(A[i],B[i]);
             return C;
         }
 
@@ -138,7 +138,7 @@ namespace Z0
         {
             var rc = rowdim(A,B,C);
             for(var i=0; i<rc; i++)
-                C[i] = bitvector.xor(A[i],B[i]);
+                C[i] = BitVector.xor(A[i],B[i]);
             return C;
         }
 
@@ -152,7 +152,7 @@ namespace Z0
         {
             var rc = rowdim(A,B,C);
             for(var i=0; i<rc; i++)
-                C[i] = bitvector.nand(A[i],B[i]);
+                C[i] = BitVector.nand(A[i],B[i]);
             return C;
         }
 
@@ -167,7 +167,7 @@ namespace Z0
         {
             var rc = rowdim(A,B,C);
             for(var i=0; i<rc; i++)
-                C[i] = bitvector.nor(A[i],B[i]);
+                C[i] = BitVector.nor(A[i],B[i]);
             return C;
         }
 
@@ -181,7 +181,7 @@ namespace Z0
         {
             var rc = rowdim(A,B,C);
             for(var i=0; i<rc; i++)
-                C[i] = bitvector.xnor(A[i],B[i]);
+                C[i] = BitVector.xnor(A[i],B[i]);
             return C;
         }
 

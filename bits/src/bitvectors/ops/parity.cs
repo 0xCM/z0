@@ -12,7 +12,7 @@ namespace Z0
     using static zfunc;
     using static BitParts;
 
-    partial class bitvector
+    partial class BitVector
     {
         /// <summary>
         /// Computes the parity of a generic bitvector, which is 1 if an odd number of its components are enabled and 0 otherwise

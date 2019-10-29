@@ -53,8 +53,8 @@ namespace Z0.Logix
         {
             var f = LogicOpApi.lookup(kind);
             var table = BitMatrix.alloc<N2,N2,byte>();
-            table[0] = BitVector.Define<N2,byte>(Bits.pack2(f(off), off));
-            table[1] = BitVector.Define<N2,byte>(Bits.pack2(f(on), on));
+            table[0] = BitVector.natural<N2,byte>(Bits.pack2(f(off), off));
+            table[1] = BitVector.natural<N2,byte>(Bits.pack2(f(on), on));
             return table;            
         }
 
@@ -62,10 +62,10 @@ namespace Z0.Logix
         {
             var tt = BitMatrix.alloc<N4,N3,byte>();
             var f = LogicOpApi.lookup(kind);
-            tt[0] = BitVector.Define<N3,byte>(Bits.pack3(f(off, off), off, off));
-            tt[1] = BitVector.Define<N3,byte>(Bits.pack3(f(on, off), off, on));
-            tt[2] = BitVector.Define<N3,byte>(Bits.pack3(f(off, on), on, off));
-            tt[3] = BitVector.Define<N3,byte>(Bits.pack3(f(on, on),  on, on));
+            tt[0] = BitVector.natural<N3,byte>(Bits.pack3(f(off, off), off, off));
+            tt[1] = BitVector.natural<N3,byte>(Bits.pack3(f(on, off), off, on));
+            tt[2] = BitVector.natural<N3,byte>(Bits.pack3(f(off, on), on, off));
+            tt[3] = BitVector.natural<N3,byte>(Bits.pack3(f(on, on),  on, on));
             return tt;
         }
 
@@ -73,14 +73,14 @@ namespace Z0.Logix
         {
             var tt = BitMatrix.alloc<N8,N4,byte>();
             var f = LogicOpApi.lookup(kind);
-            tt[0] = BitVector.Define<N4,byte>(Bits.pack4(f(off, off, off), off, off, off));
-            tt[1] = BitVector.Define<N4,byte>(Bits.pack4(f(off, off, on), off, off, on));
-            tt[2] = BitVector.Define<N4,byte>(Bits.pack4(f(off, on, off), off, on, off));
-            tt[3] = BitVector.Define<N4,byte>(Bits.pack4(f(off, on, on), off, on, on));
-            tt[4] = BitVector.Define<N4,byte>(Bits.pack4(f(on, off, off), on, off, off));
-            tt[5] = BitVector.Define<N4,byte>(Bits.pack4(f(on, off, on), on, off, on));
-            tt[6] = BitVector.Define<N4,byte>(Bits.pack4(f(on, on, off), off, on, on));
-            tt[7] = BitVector.Define<N4,byte>(Bits.pack4(f(on, on, on), on, on, on));
+            tt[0] = BitVector.natural<N4,byte>(Bits.pack4(f(off, off, off), off, off, off));
+            tt[1] = BitVector.natural<N4,byte>(Bits.pack4(f(off, off, on), off, off, on));
+            tt[2] = BitVector.natural<N4,byte>(Bits.pack4(f(off, on, off), off, on, off));
+            tt[3] = BitVector.natural<N4,byte>(Bits.pack4(f(off, on, on), off, on, on));
+            tt[4] = BitVector.natural<N4,byte>(Bits.pack4(f(on, off, off), on, off, off));
+            tt[5] = BitVector.natural<N4,byte>(Bits.pack4(f(on, off, on), on, off, on));
+            tt[6] = BitVector.natural<N4,byte>(Bits.pack4(f(on, on, off), off, on, on));
+            tt[7] = BitVector.natural<N4,byte>(Bits.pack4(f(on, on, on), on, on, on));
             return tt;
         }
 
@@ -135,8 +135,8 @@ namespace Z0.Logix
             {
                 BitVector4 result = (byte)i;
                 var table = BitMatrix.alloc<N2,N2,byte>();
-                table[0] = BitVector.Define<N2,byte>(Bits.pack2(result[0], off));
-                table[1] = BitVector.Define<N2,byte>(Bits.pack2(result[0], on));
+                table[0] = BitVector.natural<N2,byte>(Bits.pack2(result[0], off));
+                table[1] = BitVector.natural<N2,byte>(Bits.pack2(result[0], on));
                 table.Emit2(dst);
                 
             }
@@ -148,10 +148,10 @@ namespace Z0.Logix
             {
                 BitVector4 result = (byte)i;
                 var table = BitMatrix.alloc<N4,N3,byte>();
-                table[0] = BitVector.Define<N3,byte>(Bits.pack3(result[0], off, off));
-                table[1] = BitVector.Define<N3,byte>(Bits.pack3(result[1], off, on));
-                table[2] = BitVector.Define<N3,byte>(Bits.pack3(result[2], on, off));
-                table[3] = BitVector.Define<N3,byte>(Bits.pack3(result[3], on, on));
+                table[0] = BitVector.natural<N3,byte>(Bits.pack3(result[0], off, off));
+                table[1] = BitVector.natural<N3,byte>(Bits.pack3(result[1], off, on));
+                table[2] = BitVector.natural<N3,byte>(Bits.pack3(result[2], on, off));
+                table[3] = BitVector.natural<N3,byte>(Bits.pack3(result[3], on, on));
                 require(table.GetCol(2) == result);                
                 table.Emit2(dst);
             }
@@ -163,14 +163,14 @@ namespace Z0.Logix
             {
                 BitVector8 result = (byte)i;
                 var table = BitMatrix.alloc<N8,N4,byte>();
-                table[0] = BitVector.Define<N4,byte>(Bits.pack4(result[0], off, off, off));
-                table[1] = BitVector.Define<N4,byte>(Bits.pack4(result[1], off, off, on));
-                table[2] = BitVector.Define<N4,byte>(Bits.pack4(result[2], off, on, off));
-                table[3] = BitVector.Define<N4,byte>(Bits.pack4(result[3], off, on, on));
-                table[4] = BitVector.Define<N4,byte>(Bits.pack4(result[4], on, off, off));
-                table[5] = BitVector.Define<N4,byte>(Bits.pack4(result[5], on, off, on));
-                table[6] = BitVector.Define<N4,byte>(Bits.pack4(result[6], on, on, off));
-                table[7] = BitVector.Define<N4,byte>(Bits.pack4(result[7], on, on, on));
+                table[0] = BitVector.natural<N4,byte>(Bits.pack4(result[0], off, off, off));
+                table[1] = BitVector.natural<N4,byte>(Bits.pack4(result[1], off, off, on));
+                table[2] = BitVector.natural<N4,byte>(Bits.pack4(result[2], off, on, off));
+                table[3] = BitVector.natural<N4,byte>(Bits.pack4(result[3], off, on, on));
+                table[4] = BitVector.natural<N4,byte>(Bits.pack4(result[4], on, off, off));
+                table[5] = BitVector.natural<N4,byte>(Bits.pack4(result[5], on, off, on));
+                table[6] = BitVector.natural<N4,byte>(Bits.pack4(result[6], on, on, off));
+                table[7] = BitVector.natural<N4,byte>(Bits.pack4(result[7], on, on, on));
                 require(table.GetCol(3) == result);                
                 table.Emit2(dst);
 
@@ -185,7 +185,8 @@ namespace Z0.Logix
         {
             var lastCol = src.ColCount - 1;
             var result = src.GetCol(lastCol);
-            var title = $"{label} {result.Format()}";
+            var sig = result.ToBitString().Format();
+            var title = $"{label} {sig}";
             var sep = new string('-',80);
             var header = lines(title,sep);
             return header;
@@ -204,24 +205,6 @@ namespace Z0.Logix
             where T: unmanaged
                 => src.Header("Table");
 
-        // static string UnaryHeader<M,N,T>(this BitMatrix<M,N,T> src, UnaryLogicOpKind? kind = null)
-        //     where M: unmanaged, ITypeNat
-        //     where N: unmanaged, ITypeNat
-        //     where T: unmanaged
-        //         => src.Header(kind.HasValue ? kind.Value.ToString() : "Table");
-
-
-        // static string TernaryHeader<M,N,T>(this BitMatrix<M,N, T> src, TernaryBitOpKind? kind = null)
-        //     where M: unmanaged, ITypeNat
-        //     where N: unmanaged, ITypeNat
-        //     where T: unmanaged
-        //         => src.Header(kind.HasValue ? kind.Value.ToString() : "Table");
-
-        // static void Emit(this BitMatrix<N4,N3,byte> src, TextWriter dst)
-        // {
-        //     dst.Write(src.TableHeader());
-        //     dst.WriteLine(src.Format());
-        // }
 
         static void Emit2<M,N,T>(this BitMatrix<M,N,T> src, TextWriter dst)
             where M: unmanaged, ITypeNat
@@ -242,30 +225,6 @@ namespace Z0.Logix
             dst.WriteLine(src.Format());
         }
 
-        // static void Emit(this BitMatrix<N8,N4,byte> src, TextWriter dst)
-        // {
-        //     dst.Write(src.TableHeader());
-        //     dst.WriteLine(src.Format());
-
-        // }
-
-        // static void Emit(this BitMatrix<N2,N2,byte> src, UnaryLogicOpKind op, TextWriter dst)
-        // {
-        //     dst.Write(src.KindHeader(op));
-        //     dst.WriteLine(src.Format());
-        // }
-
-        // static void Emit(this BitMatrix<N4,N3,byte> src, BinaryLogicOpKind op, TextWriter dst)
-        // {
-        //     dst.Write(src.KindHeader(op));
-        //     dst.WriteLine(src.Format());
-        // }
-
-        // static void Emit(this BitMatrix<N8,N4, byte> src, TernaryBitOpKind op, TextWriter dst)
-        // {
-        //     dst.Write(src.KindHeader(op));
-        //     dst.WriteLine(src.Format());
-        // }
 
     }
 

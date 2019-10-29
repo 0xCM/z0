@@ -62,7 +62,7 @@ namespace Z0
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
         public static BitVector<T> operator &(BitVector<T> x, BitVector<T> y)
-            => bitvector.and(x,y);
+            => BitVector.and(x,y);
 
         /// <summary>
         /// Computes the bitwias AND between the operands
@@ -71,7 +71,7 @@ namespace Z0
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
         public static BitVector<T> operator |(BitVector<T> x, BitVector<T> y)
-            => bitvector.or(x,y);
+            => BitVector.or(x,y);
 
         /// <summary>
         /// Computes the bitwise XOR between the operands
@@ -80,7 +80,7 @@ namespace Z0
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
         public static BitVector<T> operator ^(BitVector<T> x, BitVector<T> y)
-            => bitvector.xor(x,y);
+            => BitVector.xor(x,y);
 
         /// <summary>
         /// Computes the scalar product of the operands
@@ -89,7 +89,7 @@ namespace Z0
         /// <param name="y">The right operand</param>
         [MethodImpl(Inline)]
         public static bit operator %(BitVector<T> x, BitVector<T> y)
-            => bitvector.dot(x,y);
+            => BitVector.dot(x,y);
 
         /// <summary>
         /// Computes the bitwise complement of the operand
@@ -97,7 +97,7 @@ namespace Z0
         /// <param name="x">The source operand</param>
         [MethodImpl(Inline)]
         public static BitVector<T> operator ~(BitVector<T> src)
-            => bitvector.not(src);
+            => BitVector.not(src);
 
         /// <summary>
         /// Computes the two's complement negation of the operand
@@ -105,7 +105,7 @@ namespace Z0
         /// <param name="x">The source operand</param>
         [MethodImpl(Inline)]
         public static BitVector<T> operator -(BitVector<T> src)
-            => bitvector.negate(src);
+            => BitVector.negate(src);
 
         /// <summary>
         /// Computes the arithmetic sum of the source operands. 
@@ -114,7 +114,7 @@ namespace Z0
         /// <param name="y">The right operand</param>
         [MethodImpl(Inline)]
         public static BitVector<T> operator +(BitVector<T> x, BitVector<T> y)
-            => bitvector.add(x,y);
+            => BitVector.add(x,y);
 
         /// <summary>
         /// Arithmetically subtracts the second operand from the first. 
@@ -123,7 +123,7 @@ namespace Z0
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
         public static BitVector<T> operator - (BitVector<T> x, BitVector<T> y)
-            => bitvector.sub(x,y);
+            => BitVector.sub(x,y);
 
         /// <summary>
         /// Shifts the source bits leftwards
@@ -131,7 +131,7 @@ namespace Z0
         /// <param name="x">The source operand</param>
         [MethodImpl(Inline)]
         public static BitVector<T> operator <<(BitVector<T> x, int offset)
-            => bitvector.sll(x,offset);
+            => BitVector.sll(x,offset);
 
         /// <summary>
         /// Shifts the source bits rightwards
@@ -139,7 +139,7 @@ namespace Z0
         /// <param name="x">The source operand</param>
         [MethodImpl(Inline)]
         public static BitVector<T> operator >>(BitVector<T> x, int offset)
-            => bitvector.srl(x,offset);
+            => BitVector.srl(x,offset);
 
         /// <summary>
         /// Increments the vector arithmetically
@@ -147,7 +147,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
         public static BitVector<T> operator ++(BitVector<T> src)
-            => bitvector.inc(src);
+            => BitVector.inc(src);
 
         /// <summary>
         /// Decrements the vector arithmetically
@@ -155,7 +155,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
         public static BitVector<T> operator --(BitVector<T> src)
-            => bitvector.dec(src);
+            => BitVector.dec(src);
 
         /// <summary>
         /// Returns true if the source vector is nonzero, false otherwise
@@ -327,7 +327,7 @@ namespace Z0
         /// </summary>
         [MethodImpl(Inline)]
         public readonly uint Pop()
-            => bitvector.pop(this);
+            => BitVector.pop(this);
 
         /// <summary>
         /// Clones the vector

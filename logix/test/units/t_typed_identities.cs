@@ -11,10 +11,7 @@ namespace Z0.Logix
     using System.Runtime.Intrinsics;
     
     using static zfunc;
-    using BL = BitLogicSpec;
     using TL = TypedLogicSpec;
-    // using static BitLogicSpec;
-    // using static TypedLogicSpec;
     
     public class t_typed_identities : UnitTest<t_typed_identities>
     {

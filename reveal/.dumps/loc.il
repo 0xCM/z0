@@ -1,10 +1,10 @@
-// 2019-10-27 16:51:32:729
+// 2019-10-28 07:21:25:562
 Vector256<ulong> f19_256x64u(Vector256<ulong> a, Vector256<ulong> b, Vector256<ulong> c)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Logix.Cpu256Ops::f19<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
+    IL_0003: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Logix.CpuOps::f19<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
     IL_0008: ret
 
 }
@@ -31,7 +31,7 @@ Vector128<ulong> f1a_128x64u(Vector128<ulong> a, Vector128<ulong> b, Vector128<u
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Logix.Cpu128Ops::f1a<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
+    IL_0003: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Logix.CpuOps::f1a<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
     IL_0008: ret
 
 }
@@ -40,7 +40,7 @@ Vector256<ulong> f1a_256x64u(Vector256<ulong> a, Vector256<ulong> b, Vector256<u
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Logix.Cpu256Ops::f1a<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
+    IL_0003: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Logix.CpuOps::f1a<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
     IL_0008: ret
 
 }
@@ -67,7 +67,7 @@ Vector128<ulong> f1b_128x64u(Vector128<ulong> a, Vector128<ulong> b, Vector128<u
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Logix.Cpu128Ops::f1b<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
+    IL_0003: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Logix.CpuOps::f1b<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
     IL_0008: ret
 
 }
@@ -76,7 +76,7 @@ Vector256<ulong> f1b_256x64u(Vector256<ulong> a, Vector256<ulong> b, Vector256<u
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Logix.Cpu256Ops::f1b<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
+    IL_0003: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Logix.CpuOps::f1b<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
     IL_0008: ret
 
 }
@@ -562,7 +562,7 @@ Vector128<ulong> f97_128x64u(Vector128<ulong> a, Vector128<ulong> b, Vector128<u
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Logix.Cpu128Ops::f97<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
+    IL_0003: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Logix.CpuOps::f97<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
     IL_0008: ret
 
 }
@@ -571,7 +571,7 @@ Vector256<ulong> f97_256x64u(Vector256<ulong> a, Vector256<ulong> b, Vector256<u
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Logix.Cpu256Ops::f97<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
+    IL_0003: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Logix.CpuOps::f97<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
     IL_0008: ret
 
 }
@@ -617,7 +617,7 @@ Vector128<ulong> and_v128x64u(Vector128<ulong> a, Vector128<ulong> b)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Logix.Cpu128Ops::and<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
+    IL_0002: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Logix.CpuOps::and<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
     IL_0007: ret
 
 }
@@ -625,7 +625,7 @@ Vector256<ulong> and_v256x64u(Vector256<ulong> a, Vector256<ulong> b)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Logix.Cpu256Ops::and<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
+    IL_0002: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Logix.CpuOps::and<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
     IL_0007: ret
 
 }
@@ -641,7 +641,7 @@ Vector128<ulong> or_v128x64u(Vector128<ulong> a, Vector128<ulong> b)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Logix.Cpu128Ops::or<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
+    IL_0002: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Logix.CpuOps::or<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
     IL_0007: ret
 
 }
@@ -649,7 +649,7 @@ Vector256<ulong> or_v256x64u(Vector256<ulong> a, Vector256<ulong> b)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Logix.Cpu256Ops::or<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
+    IL_0002: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Logix.CpuOps::or<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
     IL_0007: ret
 
 }
@@ -665,7 +665,7 @@ Vector128<ulong> xor_v128x64u(Vector128<ulong> a, Vector128<ulong> b)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Logix.Cpu128Ops::xor<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
+    IL_0002: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Logix.CpuOps::xor<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
     IL_0007: ret
 
 }
@@ -673,7 +673,7 @@ Vector256<ulong> xor_v256x64u(Vector256<ulong> a, Vector256<ulong> b)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Logix.Cpu256Ops::xor<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
+    IL_0002: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Logix.CpuOps::xor<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
     IL_0007: ret
 
 }
@@ -687,14 +687,14 @@ ulong not_64u(ulong a)
 Vector128<ulong> not_v128x64u(Vector128<ulong> a)
 {
     IL_0000: ldarg.0
-    IL_0001: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Logix.Cpu128Ops::not<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
+    IL_0001: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Logix.CpuOps::not<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
     IL_0006: ret
 
 }
 Vector256<ulong> not_v256x64u(Vector256<ulong> a)
 {
     IL_0000: ldarg.0
-    IL_0001: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Logix.Cpu256Ops::not<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
+    IL_0001: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Logix.CpuOps::not<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
     IL_0006: ret
 
 }
@@ -710,7 +710,7 @@ Vector128<ulong> nand_v128x64u(Vector128<ulong> a, Vector128<ulong> b)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Logix.Cpu128Ops::nand<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
+    IL_0002: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Logix.CpuOps::nand<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
     IL_0007: ret
 
 }
@@ -718,7 +718,7 @@ Vector256<ulong> nand_v256x64u(Vector256<ulong> a, Vector256<ulong> b)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Logix.Cpu256Ops::nand<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
+    IL_0002: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Logix.CpuOps::nand<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
     IL_0007: ret
 
 }
@@ -734,7 +734,7 @@ Vector128<ulong> nor_v128x64u(Vector128<ulong> a, Vector128<ulong> b)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Logix.Cpu128Ops::nor<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
+    IL_0002: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Logix.CpuOps::nor<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
     IL_0007: ret
 
 }
@@ -742,7 +742,7 @@ Vector256<ulong> nor_v256x64u(Vector256<ulong> a, Vector256<ulong> b)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Logix.Cpu256Ops::nor<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
+    IL_0002: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Logix.CpuOps::nor<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
     IL_0007: ret
 
 }
@@ -758,7 +758,7 @@ Vector128<ulong> xnor_v128x64u(Vector128<ulong> a, Vector128<ulong> b)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Logix.Cpu128Ops::xnor<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
+    IL_0002: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Logix.CpuOps::xnor<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
     IL_0007: ret
 
 }
@@ -766,7 +766,7 @@ Vector256<ulong> xnor_v256x64u(Vector256<ulong> a, Vector256<ulong> b)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Logix.Cpu256Ops::xnor<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
+    IL_0002: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Logix.CpuOps::xnor<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
     IL_0007: ret
 
 }
@@ -780,14 +780,14 @@ ulong xor1_64u(ulong a)
 Vector128<ulong> xor1_v128x64u(Vector128<ulong> a)
 {
     IL_0000: ldarg.0
-    IL_0001: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Logix.Cpu128Ops::xor1<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
+    IL_0001: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Logix.CpuOps::xor1<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
     IL_0006: ret
 
 }
 Vector256<ulong> xor1_v256x64u(Vector256<ulong> a)
 {
     IL_0000: ldarg.0
-    IL_0001: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Logix.Cpu256Ops::xor1<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
+    IL_0001: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Logix.CpuOps::xor1<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
     IL_0006: ret
 
 }
@@ -805,7 +805,7 @@ Vector128<ulong> select_v128x64u(Vector128<ulong> a, Vector128<ulong> b, Vector1
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Logix.Cpu128Ops::select<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
+    IL_0003: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Logix.CpuOps::select<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
     IL_0008: ret
 
 }
@@ -814,7 +814,7 @@ Vector256<ulong> select_v256x64u(Vector256<ulong> a, Vector256<ulong> b, Vector2
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Logix.Cpu256Ops::select<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
+    IL_0003: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Logix.CpuOps::select<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
     IL_0008: ret
 
 }
@@ -841,7 +841,7 @@ Vector128<ulong> f01_128x64u(Vector128<ulong> a, Vector128<ulong> b, Vector128<u
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Logix.Cpu128Ops::f01<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
+    IL_0003: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Logix.CpuOps::f01<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
     IL_0008: ret
 
 }
@@ -850,7 +850,7 @@ Vector256<ulong> f01_256x64u(Vector256<ulong> a, Vector256<ulong> b, Vector256<u
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Logix.Cpu256Ops::f01<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
+    IL_0003: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Logix.CpuOps::f01<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
     IL_0008: ret
 
 }
@@ -877,7 +877,7 @@ Vector128<ulong> f02_128x64u(Vector128<ulong> a, Vector128<ulong> b, Vector128<u
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Logix.Cpu128Ops::f02<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
+    IL_0003: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Logix.CpuOps::f02<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
     IL_0008: ret
 
 }
@@ -886,7 +886,7 @@ Vector256<ulong> f02_256x64u(Vector256<ulong> a, Vector256<ulong> b, Vector256<u
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Logix.Cpu256Ops::f02<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
+    IL_0003: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Logix.CpuOps::f02<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
     IL_0008: ret
 
 }
@@ -913,7 +913,7 @@ Vector128<ulong> f03_128x64u(Vector128<ulong> a, Vector128<ulong> b, Vector128<u
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Logix.Cpu128Ops::f03<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
+    IL_0003: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Logix.CpuOps::f03<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
     IL_0008: ret
 
 }
@@ -922,7 +922,7 @@ Vector256<ulong> f03_256x64u(Vector256<ulong> a, Vector256<ulong> b, Vector256<u
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Logix.Cpu256Ops::f03<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
+    IL_0003: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Logix.CpuOps::f03<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
     IL_0008: ret
 
 }
@@ -949,7 +949,7 @@ Vector128<ulong> f04_128x64u(Vector128<ulong> a, Vector128<ulong> b, Vector128<u
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Logix.Cpu128Ops::f04<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
+    IL_0003: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Logix.CpuOps::f04<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
     IL_0008: ret
 
 }
@@ -958,7 +958,7 @@ Vector256<ulong> f04_256x64u(Vector256<ulong> a, Vector256<ulong> b, Vector256<u
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Logix.Cpu256Ops::f04<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
+    IL_0003: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Logix.CpuOps::f04<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
     IL_0008: ret
 
 }
@@ -985,7 +985,7 @@ Vector128<ulong> f05_128x64u(Vector128<ulong> a, Vector128<ulong> b, Vector128<u
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Logix.Cpu128Ops::f05<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
+    IL_0003: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Logix.CpuOps::f05<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
     IL_0008: ret
 
 }
@@ -994,7 +994,7 @@ Vector256<ulong> f05_256x64u(Vector256<ulong> a, Vector256<ulong> b, Vector256<u
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Logix.Cpu256Ops::f05<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
+    IL_0003: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Logix.CpuOps::f05<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
     IL_0008: ret
 
 }
@@ -1021,7 +1021,7 @@ Vector128<ulong> f06_128x64u(Vector128<ulong> a, Vector128<ulong> b, Vector128<u
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Logix.Cpu128Ops::f06<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
+    IL_0003: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Logix.CpuOps::f06<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
     IL_0008: ret
 
 }
@@ -1030,7 +1030,7 @@ Vector256<ulong> f06_256x64u(Vector256<ulong> a, Vector256<ulong> b, Vector256<u
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Logix.Cpu256Ops::f06<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
+    IL_0003: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Logix.CpuOps::f06<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
     IL_0008: ret
 
 }
@@ -1057,7 +1057,7 @@ Vector128<ulong> f07_128x64u(Vector128<ulong> a, Vector128<ulong> b, Vector128<u
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Logix.Cpu128Ops::f07<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
+    IL_0003: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Logix.CpuOps::f07<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
     IL_0008: ret
 
 }
@@ -1066,7 +1066,7 @@ Vector256<ulong> f07_256x64u(Vector256<ulong> a, Vector256<ulong> b, Vector256<u
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Logix.Cpu256Ops::f07<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
+    IL_0003: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Logix.CpuOps::f07<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
     IL_0008: ret
 
 }
@@ -1093,7 +1093,7 @@ Vector128<ulong> f08_128x64u(Vector128<ulong> a, Vector128<ulong> b, Vector128<u
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Logix.Cpu128Ops::f08<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
+    IL_0003: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Logix.CpuOps::f08<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
     IL_0008: ret
 
 }
@@ -1102,7 +1102,7 @@ Vector256<ulong> f08_256x64u(Vector256<ulong> a, Vector256<ulong> b, Vector256<u
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Logix.Cpu256Ops::f08<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
+    IL_0003: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Logix.CpuOps::f08<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
     IL_0008: ret
 
 }
@@ -1129,7 +1129,7 @@ Vector128<ulong> f09_128x64u(Vector128<ulong> a, Vector128<ulong> b, Vector128<u
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Logix.Cpu128Ops::f09<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
+    IL_0003: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Logix.CpuOps::f09<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
     IL_0008: ret
 
 }
@@ -1138,7 +1138,7 @@ Vector256<ulong> f09_256x64u(Vector256<ulong> a, Vector256<ulong> b, Vector256<u
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Logix.Cpu256Ops::f09<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
+    IL_0003: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Logix.CpuOps::f09<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
     IL_0008: ret
 
 }
@@ -1165,7 +1165,7 @@ Vector128<ulong> f0a_128x64u(Vector128<ulong> a, Vector128<ulong> b, Vector128<u
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Logix.Cpu128Ops::f0a<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
+    IL_0003: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Logix.CpuOps::f0a<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
     IL_0008: ret
 
 }
@@ -1174,7 +1174,7 @@ Vector256<ulong> f0a_256x64u(Vector256<ulong> a, Vector256<ulong> b, Vector256<u
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Logix.Cpu256Ops::f0a<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
+    IL_0003: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Logix.CpuOps::f0a<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
     IL_0008: ret
 
 }
@@ -1201,7 +1201,7 @@ Vector128<ulong> f0b_128x64u(Vector128<ulong> a, Vector128<ulong> b, Vector128<u
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Logix.Cpu128Ops::f0b<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
+    IL_0003: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Logix.CpuOps::f0b<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
     IL_0008: ret
 
 }
@@ -1210,7 +1210,7 @@ Vector256<ulong> f0b_256x64u(Vector256<ulong> a, Vector256<ulong> b, Vector256<u
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Logix.Cpu256Ops::f0b<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
+    IL_0003: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Logix.CpuOps::f0b<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
     IL_0008: ret
 
 }
@@ -1237,7 +1237,7 @@ Vector128<ulong> f0c_128x64u(Vector128<ulong> a, Vector128<ulong> b, Vector128<u
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Logix.Cpu128Ops::f0c<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
+    IL_0003: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Logix.CpuOps::f0c<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
     IL_0008: ret
 
 }
@@ -1246,7 +1246,7 @@ Vector256<ulong> f0c_256x64u(Vector256<ulong> a, Vector256<ulong> b, Vector256<u
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Logix.Cpu256Ops::f0c<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
+    IL_0003: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Logix.CpuOps::f0c<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
     IL_0008: ret
 
 }
@@ -1273,7 +1273,7 @@ Vector128<ulong> f0d_128x64u(Vector128<ulong> a, Vector128<ulong> b, Vector128<u
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Logix.Cpu128Ops::f0d<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
+    IL_0003: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Logix.CpuOps::f0d<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
     IL_0008: ret
 
 }
@@ -1282,7 +1282,7 @@ Vector256<ulong> f0d_256x64u(Vector256<ulong> a, Vector256<ulong> b, Vector256<u
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Logix.Cpu256Ops::f0d<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
+    IL_0003: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Logix.CpuOps::f0d<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
     IL_0008: ret
 
 }
@@ -1309,7 +1309,7 @@ Vector128<ulong> f0e_128x64u(Vector128<ulong> a, Vector128<ulong> b, Vector128<u
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Logix.Cpu128Ops::f0e<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
+    IL_0003: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Logix.CpuOps::f0e<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
     IL_0008: ret
 
 }
@@ -1318,7 +1318,7 @@ Vector256<ulong> f0e_256x64u(Vector256<ulong> a, Vector256<ulong> b, Vector256<u
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Logix.Cpu256Ops::f0e<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
+    IL_0003: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Logix.CpuOps::f0e<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
     IL_0008: ret
 
 }
@@ -1345,7 +1345,7 @@ Vector128<ulong> f0f_128x64u(Vector128<ulong> a, Vector128<ulong> b, Vector128<u
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Logix.Cpu128Ops::f0f<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
+    IL_0003: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Logix.CpuOps::f0f<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
     IL_0008: ret
 
 }
@@ -1354,7 +1354,7 @@ Vector256<ulong> f0f_256x64u(Vector256<ulong> a, Vector256<ulong> b, Vector256<u
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Logix.Cpu256Ops::f0f<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
+    IL_0003: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Logix.CpuOps::f0f<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
     IL_0008: ret
 
 }
@@ -1381,7 +1381,7 @@ Vector128<ulong> f10_128x64u(Vector128<ulong> a, Vector128<ulong> b, Vector128<u
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Logix.Cpu128Ops::f10<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
+    IL_0003: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Logix.CpuOps::f10<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
     IL_0008: ret
 
 }
@@ -1390,7 +1390,7 @@ Vector256<ulong> f10_256x64u(Vector256<ulong> a, Vector256<ulong> b, Vector256<u
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Logix.Cpu256Ops::f10<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
+    IL_0003: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Logix.CpuOps::f10<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
     IL_0008: ret
 
 }
@@ -1417,7 +1417,7 @@ Vector128<ulong> f11_128x64u(Vector128<ulong> a, Vector128<ulong> b, Vector128<u
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Logix.Cpu128Ops::f11<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
+    IL_0003: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Logix.CpuOps::f11<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
     IL_0008: ret
 
 }
@@ -1426,7 +1426,7 @@ Vector256<ulong> f11_256x64u(Vector256<ulong> a, Vector256<ulong> b, Vector256<u
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Logix.Cpu256Ops::f11<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
+    IL_0003: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Logix.CpuOps::f11<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
     IL_0008: ret
 
 }
@@ -1453,7 +1453,7 @@ Vector128<ulong> f12_128x64u(Vector128<ulong> a, Vector128<ulong> b, Vector128<u
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Logix.Cpu128Ops::f12<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
+    IL_0003: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Logix.CpuOps::f12<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
     IL_0008: ret
 
 }
@@ -1462,7 +1462,7 @@ Vector256<ulong> f12_256x64u(Vector256<ulong> a, Vector256<ulong> b, Vector256<u
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Logix.Cpu256Ops::f12<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
+    IL_0003: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Logix.CpuOps::f12<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
     IL_0008: ret
 
 }
@@ -1489,7 +1489,7 @@ Vector128<ulong> f13_128x64u(Vector128<ulong> a, Vector128<ulong> b, Vector128<u
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Logix.Cpu128Ops::f13<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
+    IL_0003: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Logix.CpuOps::f13<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
     IL_0008: ret
 
 }
@@ -1498,7 +1498,7 @@ Vector256<ulong> f13_256x64u(Vector256<ulong> a, Vector256<ulong> b, Vector256<u
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Logix.Cpu256Ops::f13<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
+    IL_0003: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Logix.CpuOps::f13<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
     IL_0008: ret
 
 }
@@ -1525,7 +1525,7 @@ Vector128<ulong> f14_128x64u(Vector128<ulong> a, Vector128<ulong> b, Vector128<u
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Logix.Cpu128Ops::f14<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
+    IL_0003: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Logix.CpuOps::f14<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
     IL_0008: ret
 
 }
@@ -1534,7 +1534,7 @@ Vector256<ulong> f14_256x64u(Vector256<ulong> a, Vector256<ulong> b, Vector256<u
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Logix.Cpu256Ops::f14<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
+    IL_0003: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Logix.CpuOps::f14<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
     IL_0008: ret
 
 }
@@ -1561,7 +1561,7 @@ Vector128<ulong> f15_128x64u(Vector128<ulong> a, Vector128<ulong> b, Vector128<u
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Logix.Cpu128Ops::f15<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
+    IL_0003: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Logix.CpuOps::f15<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
     IL_0008: ret
 
 }
@@ -1570,7 +1570,7 @@ Vector256<ulong> f15_256x64u(Vector256<ulong> a, Vector256<ulong> b, Vector256<u
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Logix.Cpu256Ops::f15<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
+    IL_0003: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Logix.CpuOps::f15<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
     IL_0008: ret
 
 }
@@ -1597,7 +1597,7 @@ Vector128<ulong> f16_128x64u(Vector128<ulong> a, Vector128<ulong> b, Vector128<u
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Logix.Cpu128Ops::f16<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
+    IL_0003: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Logix.CpuOps::f16<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
     IL_0008: ret
 
 }
@@ -1606,7 +1606,7 @@ Vector256<ulong> f16_256x64u(Vector256<ulong> a, Vector256<ulong> b, Vector256<u
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Logix.Cpu256Ops::f16<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
+    IL_0003: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Logix.CpuOps::f16<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
     IL_0008: ret
 
 }
@@ -1633,7 +1633,7 @@ Vector128<ulong> f17_128x64u(Vector128<ulong> a, Vector128<ulong> b, Vector128<u
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Logix.Cpu128Ops::f17<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
+    IL_0003: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Logix.CpuOps::f17<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
     IL_0008: ret
 
 }
@@ -1642,7 +1642,7 @@ Vector256<ulong> f17_256x64u(Vector256<ulong> a, Vector256<ulong> b, Vector256<u
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Logix.Cpu256Ops::f17<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
+    IL_0003: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Logix.CpuOps::f17<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
     IL_0008: ret
 
 }
@@ -1669,7 +1669,7 @@ Vector128<ulong> f18_128x64u(Vector128<ulong> a, Vector128<ulong> b, Vector128<u
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Logix.Cpu128Ops::f18<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
+    IL_0003: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Logix.CpuOps::f18<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
     IL_0008: ret
 
 }
@@ -1678,7 +1678,7 @@ Vector256<ulong> f18_256x64u(Vector256<ulong> a, Vector256<ulong> b, Vector256<u
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Logix.Cpu256Ops::f18<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
+    IL_0003: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.Logix.CpuOps::f18<System.UInt64>(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
     IL_0008: ret
 
 }
@@ -1705,7 +1705,7 @@ Vector128<ulong> f19_128x64u(Vector128<ulong> a, Vector128<ulong> b, Vector128<u
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Logix.Cpu128Ops::f19<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
+    IL_0003: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Logix.CpuOps::f19<System.UInt64>(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
     IL_0008: ret
 
 }

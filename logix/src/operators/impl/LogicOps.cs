@@ -58,61 +58,64 @@ namespace Z0.Logix
         public static bit not(bit a)
             => !a;
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), BinaryLogicOp(BinaryLogicOpKind.And)]
         public static bit and(bit a, bit b)
             => bit.and(a,b);
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), BinaryLogicOp(BinaryLogicOpKind.Nand)]
         public static bit nand(bit a, bit b)
             => bit.nand(a,b);
 
-        [MethodImpl(Inline)]
-        public static bit andnot(bit a, bit b)
-            => bit.andnot(a,b);
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), BinaryLogicOp(BinaryLogicOpKind.Or)]
         public static bit or(bit a, bit b)
             => bit.or(a,b);
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), BinaryLogicOp(BinaryLogicOpKind.Nor)]
         public static bit nor(bit a, bit b)
             => bit.nor(a,b);
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), BinaryLogicOp(BinaryLogicOpKind.XOr)]
         public static bit xor(bit a, bit b)
             => bit.xor(a,b);
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), BinaryLogicOp(BinaryLogicOpKind.Xnor)]
         public static bit xnor(bit a, bit b)
             => bit.xnor(a,b);
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), BinaryLogicOp(BinaryLogicOpKind.Implication)]
+        public static bit imply(bit a, bit b)
+            => bit.implies(a,b);
+
+        [MethodImpl(Inline), BinaryLogicOp(BinaryLogicOpKind.Nonimplication)]
+        public static bit notimply(bit a, bit b)
+            => bit.and(not(a),b);
+
+        [MethodImpl(Inline), BinaryLogicOp(BinaryLogicOpKind.LeftProject)]
         public static bit left(bit a, bit b)
             => a;
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), BinaryLogicOp(BinaryLogicOpKind.RightProject)]
         public static bit right(bit a, bit b)
             => b;
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), BinaryLogicOp(BinaryLogicOpKind.LeftNot)]
         public static bit leftnot(bit a, bit b)
             => not(a);
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), BinaryLogicOp(BinaryLogicOpKind.RightNot)]
         public static bit rightnot(bit a, bit b)
             => not(b);
 
-        [MethodImpl(Inline)]
-        public static bit implies(bit a, bit b)
-            => bit.implies(a,b);
 
-        [MethodImpl(Inline)]
-        public static bit notimplies(bit a, bit b)
-            => not(bit.implies(a,b));
-
-        [MethodImpl(Inline)]
-        public static bit conimplies(bit a, bit b)
+        [MethodImpl(Inline), BinaryLogicOp(BinaryLogicOpKind.ConverseImplication)]
+        public static bit cimply(bit a, bit b)
             => bit.implies(b,a);
+
+        [MethodImpl(Inline), BinaryLogicOp(BinaryLogicOpKind.ConverseNomimplication)]
+        public static bit cnotimply(bit a, bit b)
+            => bit.andnot(a,b);
+
 
         [MethodImpl(Inline)]
         public static bit same(bit a, bit b)
@@ -288,7 +291,7 @@ namespace Z0.Logix
         //((not b) and a) and C
         [MethodImpl(Inline),TernaryOp(X20)]
         public static bit f20(bit a, bit b, bit c)
-            => and(andnot(a,b),c);
+            => and(cnotimply(a,b),c);
 
         // b nor (a xor c)
         [MethodImpl(Inline),TernaryOp(X21)]
@@ -298,7 +301,7 @@ namespace Z0.Logix
         // c and (not b)
         [MethodImpl(Inline),TernaryOp(X22)]
         public static bit f22(bit a, bit b, bit c)
-            => andnot(c,b);
+            => cnotimply(c,b);
 
         // not (B) and ((A xor 1) or C)
         [MethodImpl(Inline),TernaryOp(X23)]
@@ -368,7 +371,7 @@ namespace Z0.Logix
         // a and not(b)
         [MethodImpl(Inline),TernaryOp(X30)]
         public static bit f30(bit a, bit b, bit c)
-            => andnot(a,b);
+            => cnotimply(a,b);
 
         // not (B) and (A or (C xor 1))
         [MethodImpl(Inline),TernaryOp(X31)]
@@ -468,7 +471,7 @@ namespace Z0.Logix
         // B and not (C)
         [MethodImpl(Inline),TernaryOp(X44)]
         public static bit f44(bit a, bit b, bit c)
-            => andnot(b,c);
+            => cnotimply(b,c);
 
         // not (C) and ((A xor 1) or B)
         [MethodImpl(Inline),TernaryOp(X45)]
@@ -523,12 +526,12 @@ namespace Z0.Logix
         // not (A) or (B and not (C))
         [MethodImpl(Inline),TernaryOp(X4F)]
         public static bit f4f(bit a, bit b, bit c)
-            => or(not(a),andnot(b,c));
+            => or(not(a),cnotimply(b,c));
 
         // A and not (C)
         [MethodImpl(Inline),TernaryOp(X50)]
         public static bit f50(bit a, bit b, bit c)
-            => andnot(a,c);
+            => cnotimply(a,c);
 
         // not (C) and (A or (B xor 1))
         [MethodImpl(Inline),TernaryOp(X51)]

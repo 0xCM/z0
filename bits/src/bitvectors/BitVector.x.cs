@@ -121,7 +121,7 @@ namespace Z0
         public static BitVector<N,T> ToBitVector<N,T>(this Span<T> src, N n = default)
             where N : ITypeNat, new()
             where T : unmanaged
-                => BitVector.Load(src,n);
+                => BitVector.natural(src,n);
 
         /// <summary>
         /// Constructs a bitvector of natural length from a source span
@@ -134,7 +134,7 @@ namespace Z0
         public static BitVector<N,T> ToBitVector<N,T>(this ReadOnlySpan<T> src, N n = default)
             where N : ITypeNat, new()
             where T : unmanaged
-                => BitVector.Load(src,n);
+                => BitVector.natural(src,n);
 
         /// <summary>
         /// Converts the least significant elements of a generic natural bitvector to a 8-bit primal bitvector

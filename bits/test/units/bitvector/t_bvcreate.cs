@@ -151,7 +151,7 @@ namespace Z0.Test
 
         public void create_N12i32()
         {
-            var bv = bitvector.from(0b101110001110, n12);
+            var bv = BitVector.from(0b101110001110, n12);
             Claim.eq(bv[0], Bit.Off);
             Claim.eq(bv[1], Bit.On);
             Claim.eq(bv[11], Bit.On);
@@ -164,7 +164,7 @@ namespace Z0.Test
             {
                 var bv = Random.BitVector(n64);
                 var n = Random.Next(1, bv.Length);
-                var result = bitvector.lsb(bv,n).ToBitString();
+                var result = BitVector.lsb(bv,n).ToBitString();
                 var expect = bv.ToBitString()[0, n - 1];
                 Claim.eq(expect, result);
             }
@@ -177,7 +177,7 @@ namespace Z0.Test
             {
                 var bv = Random.BitVector(n64);
                 var n = Random.Next(1, bv.Length);
-                var result = bitvector.msb(bv,n).ToBitString();
+                var result = BitVector.msb(bv,n).ToBitString();
                 var expect = bv.ToBitString().Reverse()[0, n - 1].Reverse();
                 Claim.eq(expect, result);
             }
@@ -190,7 +190,7 @@ namespace Z0.Test
             while(++x)
             {
                 var y = x.Replicate();
-                Trace($"rotl({y}:{offset}) = {bitvector.rotl(y,offset)}"); 
+                Trace($"rotl({y}:{offset}) = {BitVector.rotl(y,offset)}"); 
             }
         }
 

@@ -1,4 +1,4 @@
-// 2019-10-27 16:51:34:617
+// 2019-10-28 07:21:27:495
 ILogicDispatcher get_Instance()
 {
     IL_0000: ldloca.s V_0
@@ -17,15 +17,15 @@ bit unhandled(ILogicExpr expr)
     IL_0010: throw
 
 }
-bit Dispatch(IEqualityExpr expr)
+bit Dispatch(IComparisonExpr expr)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: callvirt Z0.Logix.ILogicExpr Z0.Logix.IEqualityExpr::get_Lhs()
+    IL_0002: callvirt Z0.Logix.ILogicExpr Z0.Logix.IComparisonExpr::get_Lhs()
     IL_0007: call Z0.bit Z0.Logix.LogicDispatcher::Eval(Z0.Logix.ILogicExpr)
     IL_000C: ldarg.0
     IL_000D: ldarg.1
-    IL_000E: callvirt Z0.Logix.ILogicExpr Z0.Logix.IEqualityExpr::get_Rhs()
+    IL_000E: callvirt Z0.Logix.ILogicExpr Z0.Logix.IComparisonExpr::get_Rhs()
     IL_0013: call Z0.bit Z0.Logix.LogicDispatcher::Eval(Z0.Logix.ILogicExpr)
     IL_0018: call System.Boolean Z0.bit::op_Equality(Z0.bit,Z0.bit)
     IL_001D: call Z0.bit Z0.bit::op_Implicit(System.Boolean)
