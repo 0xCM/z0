@@ -55,7 +55,7 @@ namespace Z0
                     mask[i + half] = convert<byte,T>(i);
             }
 
-            return Vec256.Load(mask);
+            return mask.LoadVector();
         }
 
         public static Vector256<T> FpSignMask 
@@ -71,7 +71,7 @@ namespace Z0
         public static Vector256<T> Increments(T first = default, params Swap[] swaps)
         {
             var src = Span256.Load(range(first, gmath.add(first, convert<T>(Length - 1))).ToArray().AsSpan());
-            return Vec256.Load(src.Swap(swaps));
+            return src.Swap(swaps).LoadVector();
         }
 
         /// <summary>
@@ -92,15 +92,15 @@ namespace Z0
                 gmath.dec(ref val);
             }
 
-            return Vec256.Load(dst.Swap(swaps));
+            return dst.Swap(swaps).LoadVector();
         }
 
         static Vector256<T> CalcFpSignMask()
         {
             if(typeof(T) == typeof(float))
-                return CalcFpSignMask32().As<T>();
+                return As.generic<T>(CalcFpSignMask32());
             else if(typeof(T) == typeof(double))
-                return CalcFpSignMask64().As<T>();
+                return As.generic<T>(CalcFpSignMask64());
             else 
                 return default;
         }
@@ -129,14 +129,14 @@ namespace Z0
                     mask[i + half] = convert<byte,T>(i);
             }
 
-            return Vec256.Load(mask);
+            return mask.LoadVector();
         }
             
-        static Vec256<double> CalcFpSignMask64()
-            => Vec256.Fill(-0.0);
+        static Vector256<double> CalcFpSignMask64()
+            => dfp.vbroadcast(n256,-0.0);
 
-        static Vec256<float> CalcFpSignMask32()
-            => Vec256.Fill(-0.0f);
+        static Vector256<float> CalcFpSignMask32()
+            => dfp.vbroadcast(n256,-0.0f);
     }
 
 }

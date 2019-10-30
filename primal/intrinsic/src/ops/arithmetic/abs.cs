@@ -17,38 +17,38 @@ namespace Z0
     partial class dinx
     {    
         [MethodImpl(Inline)]
-        public static Vector128<byte> abs(Vector128<sbyte> src)
+        public static Vector128<byte> vabs(Vector128<sbyte> src)
             => Abs(src);
 
         [MethodImpl(Inline)]
-        public static Vector128<ushort> abs(Vector128<short> src)
+        public static Vector128<ushort> vabs(Vector128<short> src)
             => Abs(src);
 
         [MethodImpl(Inline)]
-        public static Vector128<uint> abs(Vector128<int> src)
+        public static Vector128<uint> vabs(Vector128<int> src)
             => Abs(src);
 
         [MethodImpl(Inline)]
-        public static Vector128<long> abs(Vector128<long> src)
+        public static Vector128<long> vabs(Vector128<long> src)
         {
             var mask = vnegate(vsrl(src, 63));                        
             return vsub(vxor(mask, src), mask);
         }
 
         [MethodImpl(Inline)]
-        public static Vector256<byte> abs(Vector256<sbyte> src)
+        public static Vector256<byte> vabs(Vector256<sbyte> src)
             => Abs(src);
 
         [MethodImpl(Inline)]
-        public static Vector256<ushort> abs(Vector256<short> src)
+        public static Vector256<ushort> vabs(Vector256<short> src)
             => Abs(src);
 
         [MethodImpl(Inline)]
-        public static Vector256<uint> abs(Vector256<int> src)
+        public static Vector256<uint> vabs(Vector256<int> src)
             => Abs(src);        
  
         [MethodImpl(Inline)]
-        public static Vector256<long> abs(Vector256<long> src)
+        public static Vector256<long> vabs(Vector256<long> src)
         {
             var mask = vnegate(vsrl(src, 63));
             return vsub(vxor(mask, src), mask);

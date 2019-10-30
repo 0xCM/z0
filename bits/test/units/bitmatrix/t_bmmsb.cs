@@ -15,15 +15,6 @@ namespace Z0
     {
 
 
-        public void bmmsb_64x64x64_check()
-        {
-            var A = BitMatrix64.Identity;
-            
-            var msb = BitMatrix.msb(A);
-            var expect = Vector.load(mathspan.steps(63,0).ToArray(),n64).Convert<byte>();
-            Claim.eq(expect,msb);
-
-        }
 
 
 

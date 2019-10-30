@@ -21,10 +21,6 @@ namespace Z0
     {        
         Span<T> data;
 
-        /// <summary>
-        /// Specifies the MxN matrix dimension
-        /// </summary>
-        static int Order => (int)new N().value;
 
         public static BitMatrix<N,T> Identity => BitMatrix.identity<N,T>();
 
@@ -139,6 +135,11 @@ namespace Z0
         }            
 
         /// <summary>
+        /// Specifies the MxN matrix dimension
+        /// </summary>
+        public int Order => (int)new N().value;
+
+        /// <summary>
         /// The number of rows in the matrix
         /// </summary>
         public readonly int RowCount
@@ -247,7 +248,7 @@ namespace Z0
         /// </summary>
         [MethodImpl(Inline)]
         public Span<byte> Unpack()
-            => data.AsBytes().Unpack().Slice(0, math.square(Order));
+            => data.AsBytes().Unpack().Slice(0, math.square(natval<N>()));
 
         /// <summary>
         /// Sets all the bits to align with the source value

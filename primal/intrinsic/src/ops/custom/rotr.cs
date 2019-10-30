@@ -156,7 +156,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="offset">The magnitude of the rotation</param>
         [MethodImpl(Inline)]
-        public static Vector128<uint> rotr(Vector128<uint> src, Vector128<uint> offsets)
+        public static Vector128<uint> vrotr(Vector128<uint> src, Vector128<uint> offsets)
         {
             var x = dinx.vsrlv(src, offsets);
             var y = dinx.vsllv(src, dinx.vsub(Vector128u32, offsets));
@@ -170,7 +170,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="offset">The magnitude of the rotation</param>
         [MethodImpl(Inline)]
-        public static Vector128<ulong> rotr(Vector128<ulong> src, Vector128<ulong> offsets)
+        public static Vector128<ulong> vrotr(Vector128<ulong> src, Vector128<ulong> offsets)
         {
             var x = dinx.vsrlv(src, offsets);
             var y = dinx.vsllv(src, dinx.vsub(Vector128u64, offsets));
@@ -184,7 +184,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="offset">The magnitude of the rotation</param>
         [MethodImpl(Inline)]
-        public static Vector256<uint> rotr(Vector256<uint> src, Vector256<uint> offsets)
+        public static Vector256<uint> vrotr(Vector256<uint> src, Vector256<uint> offsets)
         {
             var x = dinx.vsrlv(src, offsets);
             var y = dinx.vsllv(src, dinx.vsub(Vector256u32, offsets));
@@ -198,7 +198,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="offset">The magnitude of the rotation</param>
         [MethodImpl(Inline)]
-        public static Vector256<ulong> rotr(Vector256<ulong> src, Vector256<ulong> offsets)
+        public static Vector256<ulong> vrotr(Vector256<ulong> src, Vector256<ulong> offsets)
         {
             var x = dinx.vsrlv(src, offsets);
             var y = dinx.vsllv(src, dinx.vsub(Vector256u64, offsets));

@@ -34,7 +34,7 @@ namespace Z0
             return ref Z;
         }
 
-        public static ref BitMatrix<N8,N16,uint> Transpose(this ref BitMatrix<N8,N16,uint> A)
+        public static ref BitMatrix<N8,N16,uint> transpose(this ref BitMatrix<N8,N16,uint> A)
         {
             var vec = cpuvec(n128,A.Bytes);
             vstore(dinx.vshuffle(vec, Tr8x16Mask), ref head(A.Bytes));
@@ -57,7 +57,7 @@ namespace Z0
         static Vec128<byte> Tr8x16Mask
         {
             [MethodImpl(Inline)]
-            get => Vec128.Load(ref As.asRef(in Tr8x16MaskBytes[0]));
+            get => ginx.vloadu(n128,in head(Tr8x16MaskBytes));
         }
 
         /// <summary>

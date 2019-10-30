@@ -159,7 +159,6 @@ namespace Z0.Logix
         public static T imply<T>(T a, T b)
             where T : unmanaged
                 => gmath.imply(a,b);
-                //=> or(a,  not(b));
 
         [MethodImpl(Inline), BinaryBitwiseOp(BinaryBitwiseOpKind.Nonimplication)]
         public static T notimply<T>(T a, T b)

@@ -23,7 +23,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitMatrix<T> ToBitMatrix<T>(this RowBits<T> src)
             where T : unmanaged
-                => BitMatrix.from(src);
+                => BitMatrix.load(src);
 
         /// <summary>
         /// Converts the matrix to a bitvector

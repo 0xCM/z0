@@ -447,31 +447,7 @@ namespace Z0
         public uint Pop()
             => Bits.pop(data);
 
-        /// <summary>
-        /// Counts the vector's leading zero bits
-        /// </summary>
-        /// <param name="src">The bit source</param>
-        [MethodImpl(Inline)]
-        public uint Nlz()
-            => Bits.nlz(data);
 
-        /// <summary>
-        /// Counts the vector's trailing zero bits
-        /// </summary>
-        /// <param name="src">The bit source</param>
-        [MethodImpl(Inline)]
-        public uint Ntz()
-            => Bits.ntz(data);
-
-
-        /// <summary>
-        /// Counts the number of bits set up to and including the specified position
-        /// </summary>
-        /// <param name="src">The bit source</param>
-        /// <param name="pos">The position of the bit for which rank will be calculated</param>
-        [MethodImpl(Inline)]
-        public uint Rank(int pos)
-            => Bits.rank(data,pos);
 
         /// <summary>
         /// Rearranges the vector in-place as specified by a permutation

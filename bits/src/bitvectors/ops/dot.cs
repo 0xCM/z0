@@ -15,23 +15,18 @@ namespace Z0
 
     partial class BitVector
     {
-                
         [MethodImpl(Inline)]
         public static bit dot<T>(BitVector<T> x, BitVector<T> y)
             where T : unmanaged
-        {
-            var result = bit.Off;
-            for(var i=0; i<x.Length; i++)
-                result ^= x[i] & y[i];
-            return result;
-        }
+                => gbits.dot(x.data, y.data);
 
         /// <summary>
         /// Computes the scalar product of the source vector and another
         /// </summary>
         /// <param name="y">The right operand</param>
+        [MethodImpl(Inline)]
         public static bit dot(BitVector4 x, BitVector4 y)
-            => odd((uint)Bits.pop(x.data & y.data));              
+            => odd(Bits.pop(x.data & y.data));              
 
         /// <summary>
         /// Computes the scalar product of the source vector and another
@@ -64,8 +59,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bit dot(BitVector64 x, BitVector64 y)
             => odd(Bits.pop(x.data & y.data));
-
-
     }
-
 }

@@ -214,7 +214,7 @@ namespace Z0
 
         public void bs_bitview()
         {
-            var x = Random.CpuVec256<int>();
+            var x = Random.CpuVector<int>(n128);
             var y = BitView.ViewBits(ref x);
             var ys = y.Bytes.ToBitString();
             var xs = x.ToBitString();

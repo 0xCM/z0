@@ -33,19 +33,10 @@ namespace Z0.Logix
                 };
 
         /// <summary>
-        /// Advertises the supported binary operators
+        /// Advertises the supported binary bitwise operators
         /// </summary>
         public static BinaryBitwiseOpKind[] BinaryBitwiseKinds
-            => new BinaryBitwiseOpKind[]{
-                BinaryBitwiseOpKind.True, BinaryBitwiseOpKind.False,
-                BinaryBitwiseOpKind.And, BinaryBitwiseOpKind.Nand,
-                BinaryBitwiseOpKind.Or, BinaryBitwiseOpKind.Nor, 
-                BinaryBitwiseOpKind.XOr,  BinaryBitwiseOpKind.Xnor,
-                BinaryBitwiseOpKind.LeftProject, BinaryBitwiseOpKind.RightProject, 
-                BinaryBitwiseOpKind.LeftNot, BinaryBitwiseOpKind.RightNot, 
-                BinaryBitwiseOpKind.Implication, BinaryBitwiseOpKind.Nonimplication, 
-                BinaryBitwiseOpKind.ConverseImplication, BinaryBitwiseOpKind.ConverseNonimplication, 
-            };
+            => ScalarOpApi.BinaryBitwiseKinds;
 
         /// <summary>
         /// Specifies the supported comparison operators

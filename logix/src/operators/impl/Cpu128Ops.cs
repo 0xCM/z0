@@ -119,7 +119,7 @@ namespace Z0.Logix
         [MethodImpl(Inline)]
         public static Vector128<T> imply<T>(Vector128<T> a, Vector128<T> b)
             where T : unmanaged
-                => ginx.vimply(a,b); //or(a,  not(b));
+                => ginx.vimply(a,b);
 
         [MethodImpl(Inline)]
         public static Vector128<T> notimply<T>(Vector128<T> a, Vector128<T> b)
@@ -129,7 +129,7 @@ namespace Z0.Logix
         [MethodImpl(Inline)]
         public static Vector128<T> cimply<T>(Vector128<T> a, Vector128<T> b)
             where T : unmanaged
-                => or(not(a), b);
+                => ginx.vcimply(a,b); //or(not(a), b);
 
         [MethodImpl(Inline)]
         public static Vector128<T> cnotimply<T>(Vector128<T> a, Vector128<T> b)

@@ -13,6 +13,7 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Sse41.X64;
     using static System.Runtime.Intrinsics.X86.Sse42.X64;
     using static System.Runtime.Intrinsics.X86.Sse2;
+    using static System.Runtime.Intrinsics.X86.Sse2.X64;
     using static System.Runtime.Intrinsics.X86.Avx;
     
     using static zfunc;
@@ -99,9 +100,7 @@ namespace Z0
         public static ulong vextract(Vector128<ulong> src, byte pos)
             => Extract(src, pos);
 
-        [MethodImpl(Inline)]
-        public static float vextract(Vector128<float> src, byte pos)
-            => Extract(src, pos);
+
 
     }
 }

@@ -254,14 +254,6 @@ namespace Z0
         public void RowSwap(int i, int j)
             => data.Swap(i,j);
 
-        /// <summary>
-        /// Applies a permutation to the matrix by swapping the rows
-        /// as indicated by permutation transpositions
-        /// </summary>
-        /// <param name="spec">The permutation definition</param>
-        [MethodImpl(Inline)]
-        public BitMatrix64 Apply(Perm<N64> perm)
-            => BitMatrix.apply(perm, ref this);
 
         /// <summary>
         /// Returns the data for an index-identified column

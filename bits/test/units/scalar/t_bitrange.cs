@@ -19,13 +19,8 @@ namespace Z0.Test
             const uint U32_01 = 0b00001001_11110000_11001001_10011111;
 
             Span<byte> dst = stackalloc byte[8];
-            
-            BitPos pos1 = 0;
-            BitPos pos7 = 7;
-            var width = pos7 - pos1;
-            Claim.eq(8,width);
-            
-            var r1 = Bits.range(U64_00, 0, 7);
+                        
+            var r1 = gbits.range(U64_00, 0, 7);
             Claim.eq((byte)0b11110000, r1);
 
             gbits.range(U64_00, 0, 7, dst, 0);
@@ -94,7 +89,5 @@ namespace Z0.Test
                 Claim.eq(x,y);
             }
         }
-
-
     }
 }

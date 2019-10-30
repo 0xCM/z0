@@ -125,24 +125,23 @@ namespace Z0
         /// <typeparam name="N">The order type</typeparam>
         /// <typeparam name="T">The scalar type</typeparam>
         [MethodImpl(Inline)]
-        public static BitMatrix<M,N,T> BitMatrix<M,N,T>(this IPolyrand random, M m = default, N n = default, T rep = default)
+        public static BitMatrix<M,N,T> BitMatrix<M,N,T>(this IPolyrand random, M m = default, N n = default)
             where M : ITypeNat, new()
             where N : ITypeNat, new()
             where T : unmanaged
-                => BM.load(random.Array<T>(BitGrid.Specify(m,n,rep).TotalCellCount),m,n);
+                => BM.load(random.Array<T>(BitGrid.Specify(m,n,default(T)).TotalCellCount), m, n);
 
         /// <summary>
         /// Produces an generic bitmatrix of natural order
         /// </summary>
         /// <param name="random">The random source</param>
         /// <param name="n">The matrix order</param>
-        /// <param name="rep">A scalar representative</param>
         /// <typeparam name="N">The order type</typeparam>
         /// <typeparam name="T">The scalar type</typeparam>
         [MethodImpl(Inline)]
-        public static BitMatrix<N,T> BitMatrix<N,T>(this IPolyrand random, N n = default, T rep = default)
+        public static BitMatrix<N,T> BitMatrix<N,T>(this IPolyrand random, N n = default)
             where N : ITypeNat, new()
             where T : unmanaged
-                => BM.load(random.Array<T>(BitGrid.Specify(n,n,rep).TotalCellCount), n);                
+                => BM.load(random.Array<T>(BitGrid.Specify(n,n,default(T)).TotalCellCount), n);                
     }
 }

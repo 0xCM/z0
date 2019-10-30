@@ -14,87 +14,45 @@ namespace Z0
     using static AsIn;
     
     partial class gbits
-    {                        
+    {                
         /// <summary>
-        /// Extracts an index-identified contiguous range of bits from the source,
+        /// Extracts a contiguous sequence of bits defined by an inclusive index range
         /// </summary>
-        /// <param name="src">The bit source</param>
-        /// <param name="i0">The position of the first bit</param>
-        /// <param name="i1">The position of the last bit</param>
+        /// <param name="a">The bit source</param>
+        /// <param name="min">The first bit selected</param>
+        /// <param name="max">The last bit selected</param>
         [MethodImpl(Inline)]
-        public static T range<T>(in T src, BitPos i0, BitPos i1)
-        {
-            if(typeof(T) == typeof(byte) 
-                || typeof(T) == typeof(ushort) 
-                || typeof(T) == typeof(uint) 
-                || typeof(T) == typeof(ulong))
-                    return rangeu(src,i0,i1);
-            else if(typeof(T) == typeof(sbyte) 
-                || typeof(T) == typeof(short)
-                || typeof(T) == typeof(int) 
-                || typeof(T) == typeof(long))
-                    return rangei(src,i0,i1);
-            else
-                return rangef(src,i0,i1);
-        }
-
-        [MethodImpl(Inline)]
-        static T rangei<T>(in T src, BitPos i0, BitPos i1)
-        {
-            if(typeof(T) == typeof(sbyte))
-                return generic<T>(Bits.range(int8(src),i0,i1));
-            else if(typeof(T) == typeof(short))
-                return generic<T>(Bits.range(int16(src),i0,i1));
-            else if(typeof(T) == typeof(int))
-                return generic<T>(Bits.range(int32(src),i0,i1));
-            else 
-                return generic<T>(Bits.range(int64(src),i0,i1));
-        }
-
-        [MethodImpl(Inline)]
-        static T rangeu<T>(in T src, BitPos i0, BitPos i1)
+        public static T range<T>(T a, uint min, uint max)
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(Bits.range(uint8(src),i0,i1));
+                return generic<T>(Bits.range(uint8(a), min, max));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(Bits.range(uint16(src),i0,i1));
+                return generic<T>(Bits.range(uint16(a), min, max));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(Bits.range(uint32(src),i0,i1));
+                return generic<T>(Bits.range(uint32(a), min, max));
+            else if(typeof(T) == typeof(ulong))
+                return generic<T>(Bits.range(uint64(a), min, max));
             else 
-                return generic<T>(Bits.range(uint64(src),i0,i1));
-            
-        }
-
-        [MethodImpl(Inline)]
-        static T rangef<T>(in T src, BitPos i0, BitPos i1)
-        {
-            if(typeof(T) == typeof(float))
-                return generic<T>(Bits.range(float32(src),i0,i1));
-            else if(typeof(T) == typeof(double))
-                return generic<T>(Bits.range(float64(src),i0,i1));
-            else            
                 throw unsupported<T>();
         }
 
         /// <summary>
-        /// Reads a contiguous range of bits and deposits the result in a bytespan
+        /// Extracts a contiguous sequence of bits from a source and deposits the result to a caller-supplied target
         /// </summary>
-        /// <param name="src">The bit source</param>
-        /// <param name="i0">The start bit position</param>
-        /// <param name="i1">The end bit position</param>
+        /// <param name="a">The bit source</param>
+        /// <param name="min">The first bit selected</param>
+        /// <param name="max">The last bit selected</param>
+        /// <param name="dst">The target that receives the sequence</param>
+        /// <param name="offset">The target offset</param>
         /// <typeparam name="T">The primal bit source type</typeparam>
         [MethodImpl(Inline)]
-        public static void range<T>(T src, BitPos i0, BitPos i1, Span<byte> dst, int offset)
+        public static void range<T>(T a, uint min, uint max, Span<byte> dst, int offset)
             where T : unmanaged
-                => bytes(gbits.range(src,i0,i1)).Slice(0, ByteCount(i0,i1)).CopyTo(dst,offset);                 
+                => bytes(gbits.range(a,min,max)).Slice(0, ByteCount(max - min + 1)).CopyTo(dst,offset);                 
 
         [MethodImpl(Inline)]
-        static ByteSize ByteCount(BitPos i0, BitPos i1)
-            => ByteCount(i1 - i0);
-
-        [MethodImpl(Inline)]
-        static uint ByteCount(uint bitcount)
-            => (uint)(Mod8.div(bitcount) + (Mod8.mod(bitcount) == 0 ? 0 : 1));
+        static int ByteCount(uint bitcount)
+            => (int)(Mod8.div(bitcount) + (Mod8.mod(bitcount) == 0 ? 0 : 1));
 
     }
 

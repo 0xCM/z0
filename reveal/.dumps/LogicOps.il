@@ -1,4 +1,4 @@
-// 2019-10-29 02:32:29:508
+// 2019-10-30 04:19:54:668
 bit zero()
 {
     IL_0000: call Z0.bit zfunc::get_off()
@@ -106,6 +106,28 @@ bit xnor(bit a, bit b)
     IL_0001: ldarg.1
     IL_0002: call Z0.bit Z0.bit::xnor(Z0.bit,Z0.bit)
     IL_0007: ret
+
+}
+bit imply(bit a, bit b)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call Z0.bit Z0.bit::imply(Z0.bit,Z0.bit)
+    IL_0007: ret
+
+}
+bit notimply(bit a, bit b)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call Z0.bit Z0.bit::notimply(Z0.bit,Z0.bit)
+    IL_0007: ret
+
+}
+bit left(bit a, bit b)
+{
+    IL_0000: ldarg.0
+    IL_0001: ret
 
 }
 bit right(bit a, bit b)
@@ -1056,41 +1078,6 @@ bit f51(bit a, bit b, bit c)
     IL_000D: call Z0.bit Z0.Logix.LogicOps::or(Z0.bit,Z0.bit)
     IL_0012: call Z0.bit Z0.Logix.LogicOps::and(Z0.bit,Z0.bit)
     IL_0017: ret
-
-}
-bit f52(bit a, bit b, bit c)
-{
-    IL_0000: ldarg.1
-    IL_0001: ldarg.2
-    IL_0002: call Z0.bit Z0.Logix.LogicOps::and(Z0.bit,Z0.bit)
-    IL_0007: call Z0.bit Z0.Logix.LogicOps::not(Z0.bit)
-    IL_000C: ldarg.0
-    IL_000D: ldarg.2
-    IL_000E: call Z0.bit Z0.Logix.LogicOps::xor(Z0.bit,Z0.bit)
-    IL_0013: call Z0.bit Z0.Logix.LogicOps::and(Z0.bit,Z0.bit)
-    IL_0018: ret
-
-}
-bit f53(bit a, bit b, bit c)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.2
-    IL_0002: call Z0.bit Z0.Logix.LogicOps::not(Z0.bit)
-    IL_0007: ldarg.1
-    IL_0008: call Z0.bit Z0.Logix.LogicOps::not(Z0.bit)
-    IL_000D: call Z0.bit Z0.Logix.LogicOps::select(Z0.bit,Z0.bit,Z0.bit)
-    IL_0012: ret
-
-}
-bit f54(bit a, bit b, bit c)
-{
-    IL_0000: ldarg.2
-    IL_0001: call Z0.bit Z0.Logix.LogicOps::not(Z0.bit)
-    IL_0006: ldarg.0
-    IL_0007: ldarg.1
-    IL_0008: call Z0.bit Z0.Logix.LogicOps::or(Z0.bit,Z0.bit)
-    IL_000D: call Z0.bit Z0.Logix.LogicOps::and(Z0.bit,Z0.bit)
-    IL_0012: ret
 
 }
 bit f55(bit a, bit b, bit c)

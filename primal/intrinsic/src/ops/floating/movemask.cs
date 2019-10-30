@@ -18,23 +18,23 @@ namespace Z0
     using static zfunc;
     using static As;
 
-    partial class dinx
+    partial class dfp
     {        
         /// <summary>
         /// int _mm_movemask_ps (__m128 a) MOVMSKPS reg, xmm<
         /// Constructs an integer from the most significant bit of each source vector component
         /// </summary>
         [MethodImpl(Inline)]
-        public static int movemask(in Vec128<float> src)
-            => MoveMask(src.xmm);
+        public static int vmovemask(Vector128<float> src)
+            => MoveMask(src);
 
         /// <summary>
         /// int _mm_movemask_pd (__m128d a) MOVMSKPD reg, xmm
         /// Constructs an integer from the most significant bit of each source vector component
         /// </summary>
         [MethodImpl(Inline)]
-        public static int movemask(in Vec128<double> src)
-            => MoveMask(src.xmm);
+        public static int vmovemask(Vector128<double> src)
+            => MoveMask(src);
 
         /// <summary>
         /// int _mm256_movemask_ps (__m256 a) VMOVMSKPS reg, ymm
@@ -42,8 +42,8 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
-        public static int movemask(in Vec256<float> src)
-            => MoveMask(src.ymm);
+        public static int vmovemask(Vector256<float> src)
+            => MoveMask(src);
 
         /// <summary>
         /// int _mm256_movemask_pd (__m256d a) VMOVMSKPD reg, ymm
@@ -51,8 +51,8 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
-        public static int movemask(in Vec256<double> src)
-            => MoveMask(src.ymm);
+        public static int vmovemask(Vector256<double> src)
+            => MoveMask(src);
     }
 
 }

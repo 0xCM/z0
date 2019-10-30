@@ -18,7 +18,7 @@ namespace Z0
             => add_bench<byte>();
 
 
-        void add_bench<T>(SystemCounter subject = default, SystemCounter compare = default)
+        void add_bench<T>(SystemCounter subject = default, N128 n = default, SystemCounter compare = default)
             where T : unmanaged
         {
             var last = default(Vector128<T>);
@@ -26,14 +26,14 @@ namespace Z0
             
             for(var i=0; i<OpCount; i++)
             {
-                var a = Random.CpuVector128<T>();
-                var b = Random.CpuVector128<T>();
+                var a = Random.CpuVector<T>(n);
+                var b = Random.CpuVector<T>(n);
                 subject.Start();
                 last = del(a,b);
                 subject.Stop();
 
-                var c = Random.CpuVector128<T>();
-                var d = Random.CpuVector128<T>();
+                var c = Random.CpuVector<T>(n);
+                var d = Random.CpuVector<T>(n);
                 compare.Start();
                 last = ginx.vadd(c,d);
                 compare.Stop();

@@ -67,8 +67,8 @@ namespace Z0.Test
                 var sw = stopwatch(false);
                 for(var i=0; i<SampleSize; i++)
                 {
-                    var x = Random.CpuVec256<byte>();
-                    var y = Random.CpuVec256<byte>();
+                    var x = Random.CpuVector<byte>(n256);
+                    var y = Random.CpuVector<byte>(n256);
                     sw.Start();
                     var a = dinx.vavg(x,y);
                     sw.Stop();

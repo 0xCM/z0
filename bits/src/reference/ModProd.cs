@@ -13,13 +13,12 @@ namespace Z0
 
     partial class BitRef
     {
-
         /// <summary>
         /// Compultes the scalar product between two bitvectors using modular arithmetic
         /// </summary>
         /// <param name="lhs">The first vector</param>
         /// <param name="rhs">The second vector</param>
-        public static int ModProd(BitVector4 lhs, BitVector4 rhs)
+        public static int modprod(BitVector4 lhs, BitVector4 rhs)
         {
             var result = 0;
             for(var i=0; i<lhs.Length; i++)
@@ -36,7 +35,7 @@ namespace Z0
         /// </summary>
         /// <param name="lhs">The first vector</param>
         /// <param name="rhs">The second vector</param>
-        public static int ModProd(BitVector8 lhs, BitVector8 rhs)
+        public static int modprod(BitVector8 lhs, BitVector8 rhs)
         {
             var result = 0;
             for(var i=0; i<lhs.Length; i++)
@@ -53,7 +52,7 @@ namespace Z0
         /// </summary>
         /// <param name="lhs">The first vector</param>
         /// <param name="rhs">The second vector</param>
-        public static int ModProd(BitVector16 lhs, BitVector16 rhs)
+        public static int modprod(BitVector16 lhs, BitVector16 rhs)
         {
             var result = 0;
             for(var i=0; i<lhs.Length; i++)
@@ -70,8 +69,7 @@ namespace Z0
         /// </summary>
         /// <param name="lhs">The first vector</param>
         /// <param name="rhs">The second vector</param>
-        /// <returns></returns>
-        public static int ModProd(BitVector32 lhs, BitVector32 rhs)
+        public static int modprod(BitVector32 lhs, BitVector32 rhs)
         {
             var result = 0;
             for(var i=0; i<lhs.Length; i++)
@@ -88,7 +86,7 @@ namespace Z0
         /// </summary>
         /// <param name="lhs">The first vector</param>
         /// <param name="rhs">The second vector</param>
-        public static bit ModProd(BitVector64 lhs, BitVector64 rhs)
+        public static bit modprod(BitVector64 lhs, BitVector64 rhs)
         {
             var result = 0;
             for(var i=0; i<lhs.Length; i++)
@@ -105,38 +103,39 @@ namespace Z0
         /// </summary>
         /// <param name="lhs">The first vector</param>
         /// <param name="rhs">The second vector</param>
-        public static bit ModProd<T>(BitCells<T> lhs, BitCells<T> rhs)
+        public static bit modprod<T>(BitCells<T> lhs, BitCells<T> rhs)
             where T : unmanaged
         {
             var result = 0;
             for(var i=0; i<lhs.Length; i++)
             {
-                var x = lhs[i] ? 1 : 0;
-                var y = rhs[i] ? 1 : 0;
-                result += x*y;
+                var a = lhs[i] ? 1 : 0;
+                var b = rhs[i] ? 1 : 0;
+                result += a*b;
             }
             return odd(result);
         }
 
         /// <summary>
-        /// Compultes the scalar product between two bitvectors using modular arithmetic
+        /// Compultes the scalar product between two generic bitvectors using modular arithmetic
         /// </summary>
-        /// <param name="lhs">The first vector</param>
-        /// <param name="rhs">The second vector</param>
-        /// <returns></returns>
-        public static bit ModProd<N,T>(BitVector<N,T> lhs, BitVector<N,T> rhs)
+        /// <param name="x">The first vector</param>
+        /// <param name="y">The second vector</param>
+        [MethodImpl(Inline)]
+        public static bit modprod<T>(BitVector<T> x, BitVector<T> y)
             where T : unmanaged
-            where N : ITypeNat, new()
-        {
-            var result = 0;
-            for(var i=0; i<lhs.Length; i++)
-            {
-                var x = lhs[i] ? 1 : 0;
-                var y = rhs[i] ? 1 : 0;
-                result += x*y;
-            }
-            return odd(result);
-        }
+                => modprod(x.ToBitCells(), y.ToBitCells());
+
+        /// <summary>
+        /// Compultes the scalar product between two natural bitvectors using modular arithmetic
+        /// </summary>
+        /// <param name="x">The first vector</param>
+        /// <param name="y">The second vector</param>
+        [MethodImpl(Inline)]
+        public static bit modprod<N,T>(BitVector<N,T> x, BitVector<N,T> y)
+            where N : unmanaged, ITypeNat
+            where T : unmanaged
+                => modprod(x.ToBitCells(),y.ToBitCells());
 
 
     }

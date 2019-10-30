@@ -39,9 +39,7 @@ namespace Z0
         /// <param name="x1">Taken from bits 16-31 of the source value</param>
         [MethodImpl(Inline)]
         public static (sbyte x0, sbyte x1) split(short src, N2 parts = default)
-          => (lo(src), hi(src));
-
-
+            => (lo(src), hi(src));
 
         /// <summary>
         /// Partitions a 16-bit unsigned integer into a pair of unsigned 8-bit integers
@@ -84,7 +82,6 @@ namespace Z0
             x0 = (ushort)(src); 
             x1 = (ushort)(src >> 16);
         }
-
 
         /// <summary>
         /// Partitions a 64-bit signed integer into a pair of signed 32-bit integers
@@ -156,32 +153,5 @@ namespace Z0
             x6 = (byte)(src >> 6*8);
             x7 = (byte)(src >> 7*8);
         }
-
-
-        /// <summary>
-        /// Splits an unsigned 32-bit integer into two segments as determined by an index
-        /// </summary>
-        /// <param name="x0">The lower segment</param>
-        /// <param name="y0">The upper segment</param>
-        [MethodImpl(Inline)]
-        public static void split(uint src, int index, out uint x0, out uint x1)        
-        {
-           x0 = segment(src, 0, index - 1); 
-           x1 = segment(src, index, bitsize<uint>() - 1);
-        }
-        
-        /// <summary>
-        /// Splits an unsigned 64-bit integer into two segments as determined by an index
-        /// </summary>
-        /// <param name="x0">The lower segment</param>
-        /// <param name="y0">The upper segment</param>
-        [MethodImpl(Inline)]
-        public static void split(ulong src, int index, out ulong x0, out ulong x1)        
-        {           
-           x0 = segment(src, 0, index - 1);
-           x1 = segment(src, index, bitsize<ulong>() - 1);
-        }
-
     }
-
 }

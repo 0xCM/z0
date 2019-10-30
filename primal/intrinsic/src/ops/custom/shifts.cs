@@ -73,7 +73,7 @@ namespace Z0
             var permA = dinx.vpermvar32x8(trA, permSpec);
             var permB = dinx.vpermvar32x8(trB, permSpec);
             
-            return dinx.insert(dinx.vlo(permA), dinx.vlo(permB), out Vector256<byte> _);            
+            return dinx.vinsert(dinx.vlo(permA), dinx.vlo(permB), out Vector256<byte> _);            
         }
 
         /// <summary>
@@ -113,7 +113,7 @@ namespace Z0
             var permSpec = ginx.vpLaneMerge<byte>();
             var permA = dinx.vpermvar32x8(trA, permSpec);
             var permB = dinx.vpermvar32x8(trB, permSpec);
-            return dinx.insert(dinx.vlo(permA), dinx.vlo(permB), out Vector256<byte> _);            
+            return dinx.vinsert(dinx.vlo(permA), dinx.vlo(permB), out Vector256<byte> _);            
         } 
 
         [MethodImpl(Inline)]

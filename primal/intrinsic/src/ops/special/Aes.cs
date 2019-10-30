@@ -109,10 +109,10 @@ namespace Z0
                  vstore(enc(src.LoadVector(block),key), ref dst.Block(block));
         }
 
-        public static void dec(Span128<byte> src, Vec128<byte> key, Span128<byte> dst)            
+        public static void dec(Span128<byte> src, Vector128<byte> key, Span128<byte> dst)            
         {
             for(var block = 0; block < src.BlockCount; block++)
-                 vstore(dec(src.LoadVec128(block),key), ref dst.Block(block));
+                 vstore(dec(src.LoadVector(block),key), ref dst.Block(block));
         }
 
     }

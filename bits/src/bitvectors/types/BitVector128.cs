@@ -187,7 +187,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]    
-        public static implicit operator Vec128<ulong>(BitVector128 src)
+        public static implicit operator Vector128<ulong>(BitVector128 src)
             => src.ToCpuVec();
 
         /// <summary>
@@ -508,8 +508,8 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public readonly Vec128<ulong> ToCpuVec()
-            => Vec128.FromParts(x0,x1);
+        public readonly Vector128<ulong> ToCpuVec()
+            => Vector128.Create(x0,x1);
 
         /// <summary>
         /// Returns a copy of the vector

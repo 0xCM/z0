@@ -120,7 +120,6 @@ namespace Z0
         public static BitMatrix8 From(uint lo, uint hi)
             => From(Z0.Bits.pack(lo, hi));
 
-
         [MethodImpl(Inline)]
         public static BitMatrix8 operator & (BitMatrix8 lhs, BitMatrix8 rhs)
             =>  BitMatrix.and(lhs,rhs);
@@ -376,15 +375,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public readonly BitVector8 ColVector(int index)
             => ColData(index);
-
-        /// <summary>
-        /// Applies a permutation to the matrix by swapping the rows
-        /// as indicated by permutation transpositions
-        /// </summary>
-        /// <param name="spec">The permutation definition</param>
-        [MethodImpl(Inline)]
-        public BitMatrix8 Apply(Perm<N8> perm)    
-            => BitMatrix.apply(perm, ref this);
 
         /// <summary>
         /// Creates a new matrix by cloning the existing matrix or allocating

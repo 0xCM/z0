@@ -130,7 +130,7 @@ namespace Z0.Test
 
             for(var i=0; i< SampleSize; i++)
             {
-                var x = Random.CpuVec128<T>();
+                var x = Random.CpuVector<T>(n128);
                 var xbs = x.ToBitString();
                 var ybs = BitString.Alloc(xbs.Length);
                 for(var j = 0; j<xbs.Length; j++)
@@ -153,7 +153,7 @@ namespace Z0.Test
 
             for(var i=0; i< SampleSize; i++)
             {
-                var x = Random.CpuVec256<T>();
+                var x = Random.CpuVector<T>(n256);
                 var xbs = x.ToBitString();
                 var ybs = BitString.Alloc(xbs.Length);
                 for(var j = 0; j<xbs.Length; j++)

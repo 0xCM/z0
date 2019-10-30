@@ -16,51 +16,6 @@ namespace Z0
 
     public static partial class ginxx
     {
-        /// <summary>
-        /// Loads a 128-bit vector from a blocked span
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <param name="block">The block index</param>
-        /// <typeparam name="T">The primitive type</typeparam>
-        [MethodImpl(Inline)]
-        public static Vec128<T> LoadVec128<T>(this Span128<T> src, int block = 0)            
-            where T : unmanaged            
-                => Vec128.Load(src, block);
-
-        /// <summary>
-        /// Loads a 128-bit vector from a blocked readonly span
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <param name="block">The block index</param>
-        /// <typeparam name="T">The primitive type</typeparam>
-        [MethodImpl(Inline)]
-        public static Vec128<T> LoadVec128<T>(this ReadOnlySpan128<T> src, int block = 0)            
-            where T : unmanaged            
-                => Vec128.Load(src, block);
-
-        /// <summary>
-        /// Loads a 256-bit vector from a blocked span
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <param name="block">The block index</param>
-        /// <typeparam name="T">The primitive type</typeparam>
-        [MethodImpl(Inline)]
-        public static Vec256<T> LoadVec256<T>(this Span256<T> src, int block = 0)            
-            where T : unmanaged            
-                => Vec256.Load(src, block);
-
-        /// <summary>
-        /// Loads a 256-bit vector from a blocked readonly span
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <param name="block">The block index</param>
-        /// <typeparam name="T">The primitive type</typeparam>
-        [MethodImpl(Inline)]
-        public static Vec256<T> LoadVec256<T>(this ReadOnlySpan256<T> src, int block = 0)            
-            where T : unmanaged            
-                => Vec256.Load(src,block);
-
-        [MethodImpl(Inline)]
         public static Vector256<T> LoadVector<T>(this ReadOnlySpan256<T> src, int block = 0)            
             where T : unmanaged      
         {      

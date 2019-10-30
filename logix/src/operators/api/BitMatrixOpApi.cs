@@ -30,8 +30,8 @@ namespace Z0.Logix
         /// <summary>
         /// Advertises the supported binary bitwise operators
         /// </summary>
-        public static IEnumerable<BinaryBitwiseOpKind> BinaryBitwiseKinds
-            => new BinaryBitwiseOpKind[]{};
+        public static BinaryBitwiseOpKind[] BinaryBitwiseKinds
+            => ScalarOpApi.BinaryBitwiseKinds;
 
         [MethodImpl(Inline)]
         public static BitMatrix<T> eval<T>(UnaryBitwiseOpKind kind, BitMatrix<T> A)
@@ -74,7 +74,9 @@ namespace Z0.Logix
                 case BinaryBitwiseOpKind.RightProject: return right(A,B);
                 case BinaryBitwiseOpKind.LeftNot: return lnot(A,B);
                 case BinaryBitwiseOpKind.RightNot: return rnot(A,B);
-                //case BinaryBitwiseOpKind.ConverseImplication: return cimply(A,B);
+                case BinaryBitwiseOpKind.Implication: return imply(A,B);
+                case BinaryBitwiseOpKind.Nonimplication: return notimply(A,B);
+                case BinaryBitwiseOpKind.ConverseImplication: return cimply(A,B);
                 case BinaryBitwiseOpKind.ConverseNonimplication: return cnotimply(A,B);
                 default: return dne(kind,A,B);
             }
@@ -98,13 +100,21 @@ namespace Z0.Logix
                 case BinaryBitwiseOpKind.LeftNot: return leftnot(A,B, ref Z);
                 case BinaryBitwiseOpKind.RightProject: return right(A,B, ref Z);
                 case BinaryBitwiseOpKind.RightNot: return rightnot(A, B, ref Z);
-                //case BinaryBitwiseOpKind.ConverseImplication: return imply(A,B, ref Z);
+                case BinaryBitwiseOpKind.Implication: return imply(A,B, ref Z);
+                case BinaryBitwiseOpKind.Nonimplication: return notimply(A,B, ref Z);
+                case BinaryBitwiseOpKind.ConverseImplication: return cimply(A,B, ref Z);
                 case BinaryBitwiseOpKind.ConverseNonimplication: return cnotimply(A,B, ref Z);
                 default: return dne(kind,A,B);
             }
 
         }
 
+        public static ref BitMatrix<T> blend<T>(BinaryBitwiseOpKind kind, BitMatrix<T> A, BitVector<T> x, ref BitMatrix<T> Z)
+            where T : unmanaged
+        {
+            
+            return ref Z;
+        }
 
         static BitMatrix<T> dne<T,E>(E kind,BitMatrix<T> A, BitMatrix<T> B = default)
             where T : unmanaged

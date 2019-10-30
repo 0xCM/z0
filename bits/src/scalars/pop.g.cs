@@ -16,6 +16,17 @@ namespace Z0
 
     partial class gbits
     {
+        /// <summary>
+        /// Pretends that the operands are bitvectors and computes their scalar product
+        /// </summary>
+        /// <param name="x">The left scalar</param>
+        /// <param name="y">The right scalar</param>
+        /// <typeparam name="T">The primal unsigned integral type</typeparam>
+        [MethodImpl(Inline)]
+        public static bit dot<T>(T x, T y)
+            where T : unmanaged
+                => odd(pop(gmath.and(x,y)));
+
         [MethodImpl(Inline)]
         public static uint pop<T>(T x0, T x1, T x2, T x3)
             where T : unmanaged

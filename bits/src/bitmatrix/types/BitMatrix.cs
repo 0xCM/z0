@@ -79,6 +79,14 @@ namespace Z0
             set => gbits.set(ref data[row], (byte)col, value);
         }
 
+        /// <summary>
+        /// Interchanges the i'th and j'th rows where  0 <= i,j < N
+        /// </summary>
+        /// <param name="i">A row index</param>
+        /// <param name="j">A row index</param>
+        [MethodImpl(Inline)]
+        public void RowSwap(int i, int j)
+            => data.Swap(i,j);
 
         [MethodImpl(Inline)]
         public ref T Row(int offset)
@@ -100,15 +108,12 @@ namespace Z0
         public void Update(BitMatrix<T> src)
             => src.data.CopyTo(data);
 
-        [MethodImpl(Inline)]
-        public void Load(int row, out Vector256<T> dst)
-        {            
-            if(typeof(T) == typeof(byte))
-                dst = generic<T>(Vector256.CreateScalar(data.TakeUInt64()));
-            else if(typeof(T) == typeof(short))
-                ginx.vloadu(in head(data), out dst);
-            else
-                ginx.vloadu(in Row(row), out dst);
+        [MethodImpl(NotInline)]
+        public BitMatrix<T> Replicate()
+        {
+            Span<T> dst = new T[data.Length];
+            data.CopyTo(dst);
+            return new BitMatrix<T>(dst);
         }
 
         [MethodImpl(Inline)]

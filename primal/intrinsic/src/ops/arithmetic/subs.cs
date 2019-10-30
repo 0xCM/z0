@@ -27,7 +27,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vector128<byte> subs(Vector128<byte> x, Vector128<byte> y)        
+        public static Vector128<byte> vsubs(Vector128<byte> x, Vector128<byte> y)        
             => SubtractSaturate(x, y);
 
         /// <summary>
@@ -36,7 +36,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vector128<sbyte> subs(Vector128<sbyte> x, Vector128<sbyte> y)        
+        public static Vector128<sbyte> vsubs(Vector128<sbyte> x, Vector128<sbyte> y)        
             => SubtractSaturate(x, y);
 
         /// <summary>
@@ -45,7 +45,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vector128<short> subs(Vector128<short> x, Vector128<short> y)        
+        public static Vector128<short> vsubs(Vector128<short> x, Vector128<short> y)        
             => SubtractSaturate(x, y);
 
         /// <summary>
@@ -54,7 +54,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]        
-        public static Vector128<ushort> subs(Vector128<ushort> x, Vector128<ushort> y)        
+        public static Vector128<ushort> vsubs(Vector128<ushort> x, Vector128<ushort> y)        
             => SubtractSaturate(x, y);
 
         /// <summary>
@@ -63,7 +63,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vector256<byte> subs(Vector256<byte> x, Vector256<byte> y)        
+        public static Vector256<byte> vsubs(Vector256<byte> x, Vector256<byte> y)        
             => SubtractSaturate(x, y);
         
         /// <summary>
@@ -72,7 +72,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vector256<sbyte> subs(Vector256<sbyte> x, Vector256<sbyte> y)        
+        public static Vector256<sbyte> vsubs(Vector256<sbyte> x, Vector256<sbyte> y)        
             => SubtractSaturate(x, y);
 
         /// <summary>
@@ -81,7 +81,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]        
-        public static Vector256<short> subs(Vector256<short> x, Vector256<short> y)        
+        public static Vector256<short> vsubs(Vector256<short> x, Vector256<short> y)        
             => SubtractSaturate(x, y);
 
         /// <summary>
@@ -90,7 +90,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vector256<ushort> subs(Vector256<ushort> x, Vector256<ushort> y)        
+        public static Vector256<ushort> vsubs(Vector256<ushort> x, Vector256<ushort> y)        
             => SubtractSaturate(x, y);
     }
 

@@ -15,7 +15,7 @@ namespace Z0
     partial class gmath
     {
         /// <summary>
-        /// Computes the material nonimplication, equivalent to the bitwise expression a & (~b) for operands a and b
+        /// Computes the material nonimplication, equivalent to the bitwise expression ~a & b for operands a and b
         /// </summary>
         /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>

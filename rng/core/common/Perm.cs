@@ -18,13 +18,19 @@ namespace Z0
         /// Produces a random permutation of a specified length
         /// </summary>
         /// <param name="random">The random source</param>
-        /// <param name="n">The length representative</param>
-        /// <param name="rep">A primal type representative</param>
-        /// <typeparam name="N">The length type</typeparam>
-        /// <typeparam name="T">The primal symbol type</typeparam>
+        /// <param name="n">The permutation length</param>
         [MethodImpl(Inline)]
-        public static Perm Perm(this IPolyrand random, int len)
-            => Z0.Perm.Identity(len).Shuffle(random);
+        public static Perm Perm(this IPolyrand random, int n)
+            => Z0.Perm.Identity(n).Shuffle(random);
+
+        /// <summary>
+        /// Produces a random permutation of a specified length
+        /// </summary>
+        /// <param name="random">The random source</param>
+        /// <param name="n">The permutation length</param>
+        [MethodImpl(Inline)]
+        public static Perm Perm(this IPolyrand random, uint n)
+            => random.Perm((int)n);
 
         /// <summary>
         /// Produces a stream of random permutation of a specified length

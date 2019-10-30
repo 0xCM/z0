@@ -1,37 +1,4 @@
-// 2019-10-29 02:32:28:170
-BitMatrix8 bm_transpose_8x8(BitMatrix8 A, ref BitMatrix8 Z)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: call Z0.BitMatrix8& Z0.BitMatrix::transpose(Z0.BitMatrix8,Z0.BitMatrix8&)
-    IL_0007: ldobj Z0.BitMatrix8
-    IL_000C: ret
-
-}
-BitMatrix<byte> alloc_8x8u()
-{
-    IL_0000: call Z0.BitMatrix`1<System.Byte> Z0.BitMatrix::alloc<System.Byte>()
-    IL_0005: ret
-
-}
-BitMatrix<ushort> alloc_16x16u()
-{
-    IL_0000: call Z0.BitMatrix`1<System.UInt16> Z0.BitMatrix::alloc<System.UInt16>()
-    IL_0005: ret
-
-}
-BitMatrix<uint> alloc_32x32u()
-{
-    IL_0000: call Z0.BitMatrix`1<System.UInt32> Z0.BitMatrix::alloc<System.UInt32>()
-    IL_0005: ret
-
-}
-BitMatrix<ulong> alloc_g64x64u()
-{
-    IL_0000: call Z0.BitMatrix`1<System.UInt64> Z0.BitMatrix::alloc<System.UInt64>()
-    IL_0005: ret
-
-}
+// 2019-10-30 04:19:52:252
 BitMatrix64 bm_from_natspan_64x64x64u(in Span<N64,ulong> src)
 {
     IL_0000: ldarg.0

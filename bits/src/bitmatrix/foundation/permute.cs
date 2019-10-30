@@ -1,0 +1,96 @@
+//-----------------------------------------------------------------------------
+// Copyright   :  (c) Chris Moore, 2019
+// License     :  MIT
+//-----------------------------------------------------------------------------
+namespace Z0
+{
+    using System;
+    using System.Runtime.CompilerServices;
+
+    using static zfunc;
+    using static As;
+
+    partial class BitMatrix
+    {
+        /// <summary>
+        /// Permutes the rows of a matrix in-place
+        /// </summary>
+        /// <param name="spec">The permutation definition</param>
+        /// <param name="A">The matrix to be permuted</param>
+        public static ref BitMatrix<T> permute<T>(Perm spec, ref BitMatrix<T> A)
+            where T : unmanaged
+        {
+            for(var row = 0; row < spec.Length; row++)
+                if(spec[row] != row)
+                    A.RowSwap(row, spec[row]);
+            return ref A;
+        }
+
+        /// <summary>
+        /// Permutes the the rows of an allocated replica, leaving the source matrix unmodified.
+        /// </summary>
+        /// <param name="spec">The permutation definition</param>
+        /// <param name="A">The matrix to be permuted</param>
+        public static BitMatrix<T> permute<T>(Perm spec, BitMatrix<T> A)
+            where T : unmanaged
+        {
+            var Z = A.Replicate();
+            for(var row = 0; row < spec.Length; row++)
+                if(spec[row] != row)
+                    Z.RowSwap(row, spec[row]);
+            return Z;
+        }
+
+        /// <summary>
+        /// Permutes the rows of a matrix according to a specified permutation
+        /// </summary>
+        /// <param name="spec">The permutation definition</param>
+        /// <param name="A">The matrix to be permuted</param>
+        public static ref BitMatrix8 permute(Perm<N16> spec, ref BitMatrix8 A)
+        {
+            for(var row = 0; row < spec.Length; row++)
+                if(spec[row] != row)
+                    A.RowSwap(row, spec[row]);
+            return ref A;
+        }
+
+        /// <summary>
+        /// Permutes the rows of a matrix according to a specified permutation
+        /// </summary>
+        /// <param name="spec">The permutation definition</param>
+        /// <param name="A">The matrix to be permuted</param>
+        public static ref BitMatrix16 permute(Perm<N16> spec, ref BitMatrix16 A)
+        {
+            for(var row = 0; row < spec.Length; row++)
+                if(spec[row] != row)
+                    A.RowSwap(row, spec[row]);
+            return ref A;
+        }
+
+        /// <summary>
+        /// Permutes the rows of a matrix according to a specified permutation
+        /// </summary>
+        /// <param name="spec">The permutation definition</param>
+        /// <param name="A">The matrix to be permuted</param>
+        public static ref BitMatrix32 permute(Perm<N32> spec, ref BitMatrix32 A)
+        {
+            for(var row = 0; row < spec.Length; row++)
+                if(spec[row] != row)
+                    A.RowSwap(row, spec[row]);
+            return ref A;
+        }
+
+        /// <summary>
+        /// Applies a permutation to a target matrix by swapping the rows
+        /// according to permutation transpositions
+        /// </summary>
+        /// <param name="spec">The permutation definition</param>
+        public static ref BitMatrix64 permute(Perm<N64> spec, ref BitMatrix64 dst)
+        {
+            for(var row = 0; row < spec.Length; row++)
+                if(spec[row] != row)
+                    dst.RowSwap(row, spec[row]);
+            return ref dst;
+        }
+    }
+}

@@ -377,7 +377,7 @@ namespace Z0
         }
         
 
-        static Vec256<byte> ShuffleIdentityMask()
+        static Vector256<byte> ShuffleIdentityMask()
         {
             Span256<byte> mask = Span256.Alloc<byte>(1);
 
@@ -390,12 +390,12 @@ namespace Z0
             for(byte i=0; i< half; i++)
                 mask[i + half] = i;
 
-            return Vec256.Load(mask);
+            return mask.LoadVector();
         }
 
 
         // Truncates alternating source vector components
-        static Vec256<T> ShuffleTruncateMask<T>()
+        static Vector256<T> ShuffleTruncateMask<T>()
             where T : unmanaged
 
         {
@@ -421,10 +421,10 @@ namespace Z0
                     mask[i + half] = convert<byte,T>(i);
             }
 
-            return Vec256.Load(mask);
+            return mask.LoadVector();
         }
 
-        static Vec256<T> BlendAltMask<T>()
+        static Vector256<T> BlendAltMask<T>()
             where T : unmanaged
         {
             Span256<T> mask = Span256.Alloc<T>(1);
@@ -438,7 +438,7 @@ namespace Z0
                 else
                     mask[i] = no;
             }
-            return Vec256.Load(mask);
+            return mask.LoadVector();
 
         }
 
@@ -454,7 +454,7 @@ namespace Z0
             for(var cycle=0; cycle<cycles; cycle++)
             for(var block = 0; block<blocks; block++)
             {
-                var x = Vec256.Load(src.ToSpan(blocklen));
+                var x = ginx.vloadu(n256, in head(src.ToSpan(blocklen)));
                 var offset = offsets.First();
                 sw.Start();
                 dinx.vsll(x,offset);

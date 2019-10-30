@@ -30,13 +30,13 @@ namespace Z0.Logix
             vector_op256_bench<uint>(false);
         }
 
-        void vector_op128_bench<T>(bool lookup, SystemCounter clock = default)
+        void vector_op128_bench<T>(bool lookup, N128 n = default, SystemCounter clock = default)
             where T : unmanaged
         {
             var opname = $"ops/vector128[{typename<T>()}]/lookup[{lookup}]";
 
-            var x = Random.CpuVector128<T>();
-            var y = Random.CpuVector128<T>();
+            var x = Random.CpuVector<T>(n);
+            var y = Random.CpuVector<T>(n);
             var result = default(Vector128<T>);
             var kinds = CpuOpApi.BinaryBitwiseKinds.ToArray();
             var opcount = 0;
@@ -74,13 +74,13 @@ namespace Z0.Logix
         }
 
 
-        void vector_op256_bench<T>(bool lookup, SystemCounter clock = default)
+        void vector_op256_bench<T>(bool lookup, N256 n = default, SystemCounter clock = default)
             where T : unmanaged
         {
             var opname = $"ops/vector256[{typename<T>()}]/lookup[{lookup}]";
 
-            var x = Random.CpuVector256<T>();
-            var y = Random.CpuVector256<T>();
+            var x = Random.CpuVector<T>(n);
+            var y = Random.CpuVector<T>(n);
             var result = default(Vector256<T>);
             var kinds = CpuOpApi.BinaryBitwiseKinds.ToArray();
             var opcount = 0;

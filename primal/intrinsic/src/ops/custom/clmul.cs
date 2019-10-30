@@ -97,8 +97,8 @@ namespace Z0
         [MethodImpl(Inline)]
         public static UInt128 clmul(ulong lhs, ulong rhs)
         {
-            var a = Vec128.LoadScalar(lhs);
-            var b = Vec128.LoadScalar(rhs);
+            var a = Vec128.scalar(lhs);
+            var b = Vec128.scalar(rhs);
             return CarrylessMultiply(a,b,0x00);
         }
 

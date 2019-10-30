@@ -1,4 +1,4 @@
-// 2019-10-29 02:32:27:597
+// 2019-10-30 04:19:51:350
 Sign:int signum_d8i(sbyte x)
 {
     IL_0000: ldarg.0
@@ -3025,27 +3025,6 @@ uint dec_g32u(uint x)
     IL_0006: ret
 
 }
-long dec_d64i(long x)
-{
-    IL_0000: ldarg.0
-    IL_0001: call System.Int64 Z0.math::dec(System.Int64)
-    IL_0006: ret
-
-}
-long dec_g64i(long x)
-{
-    IL_0000: ldarg.0
-    IL_0001: call System.Int64 Z0.gmath::dec<System.Int64>(System.Int64)
-    IL_0006: ret
-
-}
-ulong dec_d64u(ulong x)
-{
-    IL_0000: ldarg.0
-    IL_0001: call System.UInt64 Z0.math::dec(System.UInt64)
-    IL_0006: ret
-
-}
 ulong dec_g64u(ulong x)
 {
     IL_0000: ldarg.0
@@ -3098,6 +3077,30 @@ ulong dist_g16i(short lhs, short rhs)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: call System.UInt64 Z0.gmath::dist<System.Int16>(System.Int16,System.Int16)
+    IL_0007: ret
+
+}
+ulong dist_d16u(ushort lhs, ushort rhs)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call System.UInt64 Z0.math::dist(System.UInt16,System.UInt16)
+    IL_0007: ret
+
+}
+ulong dist_g16u(ushort lhs, ushort rhs)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call System.UInt64 Z0.gmath::dist<System.UInt16>(System.UInt16,System.UInt16)
+    IL_0007: ret
+
+}
+ulong dist_d32i(int lhs, int rhs)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call System.UInt64 Z0.math::dist(System.Int32,System.Int32)
     IL_0007: ret
 
 }

@@ -21,8 +21,8 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vec128<float> vhsub(in Vec128<float> x, in Vec128<float> y)
-            => HorizontalSubtract(x.xmm, y.xmm);
+        public static Vector128<float> vhsub(Vector128<float> x, Vector128<float> y)
+            => HorizontalSubtract(x, y);
 
         /// <summary>
         /// __m128d _mm_hsub_pd (__m128d a, __m128d b) HSUBPD xmm, xmm/m128
@@ -30,8 +30,8 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vec128<double> vhsub(in Vec128<double> x, in Vec128<double> y)
-            => HorizontalSubtract(x.xmm, y.xmm);
+        public static Vector128<double> vhsub(Vector128<double> x, Vector128<double> y)
+            => HorizontalSubtract(x, y);
 
         /// <summary>
         /// __m256 _mm256_hsub_ps (__m256 a, __m256 b) VHSUBPS ymm, ymm, ymm/m256
@@ -39,8 +39,8 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<float> vhsub(in Vec256<float> x, in Vec256<float> y)
-            => HorizontalSubtract(x.ymm, y.ymm);
+        public static Vector256<float> vhsub(Vector256<float> x, Vector256<float> y)
+            => HorizontalSubtract(x, y);
 
         /// <summary>
         /// __m256d _mm256_hsub_pd (__m256d a, __m256d b) VHSUBPD ymm, ymm, ymm/m256
@@ -48,8 +48,8 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<double> vhsub(in Vec256<double> x, in Vec256<double> y)
-            => HorizontalSubtract(x.ymm, y.ymm);
+        public static Vector256<double> vhsub(Vector256<double> x, Vector256<double> y)
+            => HorizontalSubtract(x, y);
     }
 
 }

@@ -54,14 +54,14 @@ namespace Z0.Logix
             }
         }
 
-        void check_identity<T>(ComparisonExpr<Vector128<T>> identity)
+        void check_identity<T>(ComparisonExpr<Vector128<T>> identity, N128 n = default)
             where T :unmanaged
         {
             var @true = CpuOps.@true<T>(n128);
             for(var i=0; i<SampleSize; i++)
             {
-                var x = Random.CpuVector128<T>();
-                var y = Random.CpuVector128<T>();
+                var x = Random.CpuVector<T>(n);
+                var y = Random.CpuVector<T>(n);
                 identity.SetVars(x,y);
 
                 Claim.eq(@true,LogicEngine.eval(identity).Value);   
@@ -69,14 +69,14 @@ namespace Z0.Logix
             }
         }
 
-        void check_identity<T>(ComparisonExpr<Vector256<T>> equality)
+        void check_identity<T>(ComparisonExpr<Vector256<T>> equality, N256 n = default)
             where T :unmanaged
         {
-            var @true = CpuOps.@true<T>(n256);
+            var @true = CpuOps.@true<T>(n);
             for(var i=0; i<SampleSize; i++)
             {
-                var x = Random.CpuVector256<T>();
-                var y = Random.CpuVector256<T>();
+                var x = Random.CpuVector<T>(n);
+                var y = Random.CpuVector<T>(n);
 
                 equality.SetVars(x,y);
 

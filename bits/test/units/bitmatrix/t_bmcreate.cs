@@ -61,7 +61,6 @@ namespace Z0
             }
         }
 
-
         public void create_8x8()
         {
             var src = Random.Stream<ulong>().Take(Pow2.T07).GetEnumerator();
@@ -69,7 +68,7 @@ namespace Z0
             {
                 var m1 = BitMatrix8.From(src.Current);
                 var n = new N8();
-                var m2 = BitMatrix.load(n,n, src.Current.ToBytes());
+                var m2 = BitMatrix.load(src.Current.ToBytes(),n, n);
                 for(var i=0; i<8; i++)
                 for(var j=0; j<8; j++)
                     Claim.eq(m1[i,j], m2[i,j]);
@@ -85,9 +84,9 @@ namespace Z0
             for(var j=0; j<m.ColCount; j++)
             {
                 if(p[i] == j)
-                    Claim.eq(m[i,j], Bit.On);
+                    Claim.eq(m[i,j], on);
                 else
-                    Claim.eq(m[i,j], Bit.Off);
+                    Claim.eq(m[i,j], off);
             }
         }
 
@@ -102,9 +101,9 @@ namespace Z0
                 for(var j=0; j<m.ColCount; j++)
                 {
                     if(p[i] == j)
-                        Claim.eq(m[i,j], Bit.On);
+                        Claim.eq(m[i,j], on);
                     else
-                        Claim.eq(m[i,j], Bit.Off);
+                        Claim.eq(m[i,j], off);
                 }
             }
         }
@@ -123,9 +122,9 @@ namespace Z0
                 for(var j=0; j<m.ColCount; j++)
                 {
                     if(p[i] == j)
-                        Claim.eq(m[i,j], Bit.On);
+                        Claim.eq(m[i,j], on);
                     else
-                        Claim.eq(m[i,j], Bit.Off);
+                        Claim.eq(m[i,j], off);
                 }
 
             }
@@ -185,6 +184,7 @@ namespace Z0
 
             Claim.yea(d == x);                        
         }
+
         public void create16x16()
         {
             var spec = BitGrid.Specify<N16,N16,byte>();    
@@ -226,13 +226,13 @@ namespace Z0
             Claim.eq(1, (int)row0[9].Segment);
 
             var m = BitMatrix.ones<N16,byte>();
-            Claim.eq(16,m.RowCount);
-            Claim.eq(16,m.ColCount);
+            Claim.eq(16, m.RowCount);
+            Claim.eq(16, m.ColCount);
             Claim.eq(2, m.RowSegCount);
-
-            for(var i=0; i< m.RowCount; i++)
-                for(var j=0; j<m.ColCount; j++)
-                    Claim.eq(Bit.On, m[i,j]);
+            
+            for(var i=0; i < m.RowCount; i++)
+            for(var j=0; j < m.ColCount; j++)
+                Claim.eq(on, m[i,j]);
         }
     }
 }

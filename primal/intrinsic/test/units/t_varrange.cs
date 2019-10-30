@@ -31,7 +31,7 @@ namespace Z0.Test
         {
             var v1 = Vec128Pattern.Increments<byte>(0);
             var v2 = Vec128Pattern.Decrements<byte>(15);
-            var v3 = dinx.reverse(v1);
+            var v3 = dinx.vreverse(v1);
             Claim.eq(v2,v3);
         }
 
@@ -51,29 +51,29 @@ namespace Z0.Test
         {
             var inc = Vec256Pattern.Increments((byte)0);
             var dec = Vec256Pattern.Decrements((byte)31);            
-            var v2 = dinx.reverse(inc);
+            var v2 = dinx.vreverse(inc);
             Claim.eq(dec,v2);
 
         }
 
         public void reverse_256x32u()
         {
-            var src = Random.CpuVec256Stream<uint>().Take(Pow2.T14);
-            foreach(var v in src)
+            for(var i = 0; i< SampleSize; i++)
             {
-                var expect = Vector256.Create(v[7],v[6],v[5],v[4],v[3],v[2],v[1],v[0]);
-                var actual = dinx.reverse(v);                
+                var data = Random.BlockedSpan<uint>(n256);
+                var expect = Vector256.Create(data[7],data[6],data[5],data[4],data[3],data[2],data[1],data[0]);
+                var actual = dinx.vreverse(data.LoadVector());
                 Claim.eq(expect, actual);
             }
         }
 
         public void reverse_256x32f()
         {
-            var src = Random.CpuVec256Stream<float>().Take(Pow2.T14);
-            foreach(var v in src)
+            for(var i = 0; i< SampleSize; i++)
             {
-                var expect = Vector256.Create(v[7],v[6],v[5],v[4],v[3],v[2],v[1],v[0]);
-                var actual = dinx.reverse(v);
+                var data = Random.BlockedSpan<float>(n256);
+                var expect = Vector256.Create(data[7],data[6],data[5],data[4],data[3],data[2],data[1],data[0]);
+                var actual = dinx.vreverse(data.LoadVector());
                 Claim.eq(expect, actual);
             }
         }
@@ -100,9 +100,9 @@ namespace Z0.Test
 
         public void swap_256_i32()
         {
-            var subject = Vec256.FromParts(2, 4, 6, 8, 10, 12, 14, 16);
+            var subject = Vector256.Create(2, 4, 6, 8, 10, 12, 14, 16);
             var swapped = dinx.vswap_ref(subject, 2, 3);
-            var expect = Vec256.FromParts(2, 4, 8, 6, 10, 12, 14, 16);
+            var expect = Vector256.Create(2, 4, 8, 6, 10, 12, 14, 16);
             Claim.eq(expect, swapped);
         }
 
@@ -116,7 +116,8 @@ namespace Z0.Test
                 var v1s = v1.ToSpan();
                 var v0s = v0.ToSpan();
                 var bits = Random.BitString<N32>();
-                var mask = Vec256.Load(bits.Map(x => x ? (byte)0xFF : (byte)0));
+                var bitmap = bits.Map(x => x ? (byte)0xFF : (byte)0);
+                var mask = ginx.vloadu(n, in head(bitmap));
                 var v3 = dinx.vblendv(v0,v1, mask);
                 
                 var selection = Span256.AllocBlocks<byte>(1);
@@ -129,8 +130,8 @@ namespace Z0.Test
 
             Verify(Test1);
 
-            var v1 = Vec256.Fill<byte>(3);
-            var v2 = Vec256.Fill<byte>(4);
+            var v1 = ginx.vbroadcast<byte>(n256,3);
+            var v2 = ginx.vbroadcast<byte>(n256,4);
             var control = Vec256Pattern.Alternate<byte>(0, 0xFF);
             var v3 = dinx.vblendv(v1,v2, control);
             var block = Span256.AllocBlocks<byte>(1);

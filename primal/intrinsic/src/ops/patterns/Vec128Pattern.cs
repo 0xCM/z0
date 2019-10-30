@@ -28,10 +28,10 @@ namespace Z0
         /// <param name="first">The value of the first component</param>
         /// <typeparam name="T">The primal component type</typeparam>
         [MethodImpl(Inline)]
-        public static Vec128<T> Increments(T first = default, params Swap[] swaps)
+        public static Vector128<T> Increments(T first = default, params Swap[] swaps)
         {
             var src = Span128.Load(range(first, gmath.add(first, convert<T>(Length - 1))).ToArray().AsSpan());
-            return Vec128.Load(src.Swap(swaps));
+            return ginx.vloadu(n128, head(src.Swap(swaps)));
         }
 
     }

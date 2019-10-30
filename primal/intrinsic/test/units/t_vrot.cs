@@ -185,10 +185,10 @@ namespace Z0
                 var offsets = Random.CpuVector(n,closed(2ul, 30ul));
                 
                 var vL = dinx.vrotl(src,offsets);
-                var vRL = dinx.rotr(vL,offsets);
+                var vRL = dinx.vrotr(vL,offsets);
                 Claim.eq(src,vRL);
                 
-                var vR = dinx.rotr(src,offsets);
+                var vR = dinx.vrotr(src,offsets);
                 var vLR = dinx.vrotl(vR,offsets);
                 Claim.eq(src,vLR);
 
@@ -220,10 +220,10 @@ namespace Z0
                 var offsets = Random.CpuVector(n,closed(2ul, 30ul));
                 
                 var vL = dinx.vrotl(src,offsets);
-                var vRL = dinx.rotr(vL,offsets);
+                var vRL = dinx.vrotr(vL,offsets);
                 Claim.eq(src,vRL);
                 
-                var vR = dinx.rotr(src,offsets);
+                var vR = dinx.vrotr(src,offsets);
                 var vLR = dinx.vrotl(vR,offsets);
                 Claim.eq(src,vLR);
 
@@ -375,12 +375,12 @@ namespace Z0
                 var vL = dinx.vrotl(vSrc,vOffsets);
                 var left = vL.ToSpan();
                 
-                var vRL = dinx.rotr(vL,vOffsets);
+                var vRL = dinx.vrotr(vL,vOffsets);
                 var lrl = vRL.ToSpan();
                 
                 Claim.eq(vSrc,vRL);
                 
-                var vR = dinx.rotr(vSrc,vOffsets);
+                var vR = dinx.vrotr(vSrc,vOffsets);
                 var right = vR.ToSpan();
 
                 var vLR = dinx.vrotl(vR,vOffsets);

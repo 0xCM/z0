@@ -46,7 +46,7 @@ namespace Z0
 
             var x = Vec256Pattern.Increasing<byte>();
             var y = Vec256Pattern.Decreasing<byte>();
-            var z = dinx.reverse(dinx.vpermvar32x8(x,y));
+            var z = dinx.vreverse(dinx.vpermvar32x8(x,y));
             Claim.eq(x,z);
 
         }

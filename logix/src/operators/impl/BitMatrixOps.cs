@@ -70,18 +70,15 @@ namespace Z0.Logix
             return Z;
         }
 
-
         [MethodImpl(Inline)]
         public static BitMatrix<T> @false<T>(BitMatrix<T> A, BitMatrix<T> B)
             where T:unmanaged
                 => @false<T>();
 
-
         [MethodImpl(Inline)]
         public static BitMatrix<T> @true<T>(BitMatrix<T> A, BitMatrix<T> B)
             where T:unmanaged
                 => @true<T>();
-
 
         [MethodImpl(Inline)]
         public static BitMatrix<T> and<T>(BitMatrix<T> A, BitMatrix<T> B)
@@ -189,16 +186,35 @@ namespace Z0.Logix
             where T : unmanaged
                 => not(B, ref Z);
 
+        [MethodImpl(Inline)]
+        public static BitMatrix<T> imply<T>(BitMatrix<T> A, BitMatrix<T> B)
+            where T : unmanaged
+                => BitMatrix.imply(A,B);
 
-        // [MethodImpl(Inline)]
-        // public static BitMatrix<T> imply<T>(BitMatrix<T> A, BitMatrix<T> B, ref BitMatrix<T> C)
-        //     where T : unmanaged
-        //         => not(cnotimply(A,B, ref C), ref C);       
+        [MethodImpl(Inline)]
+        public static BitMatrix<T> imply<T>(BitMatrix<T> A, BitMatrix<T> B, ref BitMatrix<T> Z)
+            where T : unmanaged
+                => BitMatrix.imply(A,B, ref Z);
 
-        // [MethodImpl(Inline)]
-        // public static BitMatrix<T> cimply<T>(BitMatrix<T> A, BitMatrix<T> B)
-        //     where T : unmanaged
-        //         => BitMatrix.cimply(A,B);
+        [MethodImpl(Inline)]
+        public static BitMatrix<T> notimply<T>(BitMatrix<T> A, BitMatrix<T> B)
+            where T : unmanaged
+                => BitMatrix.notimply(A,B);
+
+        [MethodImpl(Inline)]
+        public static BitMatrix<T> notimply<T>(BitMatrix<T> A, BitMatrix<T> B, ref BitMatrix<T> Z)
+            where T : unmanaged
+                => BitMatrix.notimply(A,B, ref Z);
+
+        [MethodImpl(Inline)]
+        public static BitMatrix<T> cimply<T>(BitMatrix<T> A, BitMatrix<T> B)
+            where T : unmanaged
+                => BitMatrix.cimply(A,B);
+
+        [MethodImpl(Inline)]
+        public static BitMatrix<T> cimply<T>(BitMatrix<T> A, BitMatrix<T> B, ref BitMatrix<T> Z)
+            where T : unmanaged
+                => BitMatrix.cimply(A,B, ref Z);
 
         [MethodImpl(Inline)]
         public static BitMatrix<T> cnotimply<T>(BitMatrix<T> A, BitMatrix<T> B)
@@ -210,7 +226,6 @@ namespace Z0.Logix
             where T : unmanaged
                 => BitMatrix.cnotimply(A,B, ref Z);
 
-
         [MethodImpl(Inline)]
         public static BitMatrix<T> xornot<T>(BitMatrix<T> A, BitMatrix<T> B)
             where T : unmanaged
@@ -220,7 +235,6 @@ namespace Z0.Logix
         public static BitMatrix<T> xornot<T>(BitMatrix<T> A, BitMatrix<T> B, ref BitMatrix<T> Z)
             where T : unmanaged
                 => BitMatrix.xornot(A,B, ref Z);
-
 
         [MethodImpl(Inline)]
         public static BitMatrix<T> select<T>(BitMatrix<T> A, BitMatrix<T> B, BitMatrix<T> C)

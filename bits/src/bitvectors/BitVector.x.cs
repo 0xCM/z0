@@ -581,6 +581,17 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitVector128 Expand(this BitVector64 src, N128 width)
             => BitVector128.FromScalar(src.data);
+        
+        [MethodImpl(Inline)]
+        public static BitCells<T> ToBitCells<T>(this BitVector<T> src)
+            where T : unmanaged
+                => BitCells.Load(src.Data);
+
+        [MethodImpl(Inline)]
+        public static BitCells<T> ToBitCells<N,T>(this BitVector<N,T> src)
+            where N : unmanaged, ITypeNat
+            where T : unmanaged
+                => BitCells.Load(src.Data, natval<N>());
 
     }
 }

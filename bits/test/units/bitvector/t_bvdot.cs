@@ -15,27 +15,27 @@ namespace Z0.Test
 
     public class t_bvdot : BitVectorTest<t_bvdot>
     {
-        public void bvdot_4u()
+        public void dot_4u_check()
         {
             dot4_check();            
         }
 
-        public void bvdot_8u()
+        public void dot_8u_check()
         {
             dot8_check();            
         }
 
-        public void bvdot_16u()
+        public void dot_16u_check()
         {
             dot16_check();            
         }
 
-        public void bv_dot_32u()
+        public void dot_32u_check()
         {
             dot32_check();            
         }
 
-        public void bv_dot_64u()
+        public void dot_64u_check()
         {
             dot64_check();  
 
@@ -51,59 +51,61 @@ namespace Z0.Test
             }
         }
 
-        public void dotg()
+        public void dot_generic_check()
         {
-            dotg_check<uint>(10);
-            dotg_check<uint>(20);
-            dotg_check<ulong>(63);
-            dotg_check<ulong>(64);
-            dotg_check<byte>(87);
-            dotg_check<ushort>(128);
-            dotg_check<ushort>(25);
-            dotg_check<ulong>(256);
-            dotg_check<uint>(2048);
+            dot_generic_check<byte>();
+            dot_generic_check<ushort>();
+            dot_generic_check<uint>();
+            dot_generic_check<ulong>();
         }
 
-        public void dotng()
+        public void dot_nat_check()
         {
-            dotng_check(n10,0u);
-            dotng_check(n20,0u);
-            dotng_check(n63,0ul);
-            dotng_check(n64,0ul);
-            dotng_check(n87,(byte)0);
-            dotng_check(n128,(ushort)0);
-            dotng_check(n25,(ushort)0);
-            dotng_check(n256,0ul);
-            dotng_check(n2048,0u);
+            dot_natural_check<N8,byte>();
+            dot_natural_check<N16,ushort>();
+            dot_natural_check<N32,uint>();
+            dot_natural_check<N64,ulong>();
+
+
+            dot_natural_check<N64,uint>();
+
+            dot_natural_check<N128,ushort>();
+            dot_natural_check<N128,uint>();
+            dot_natural_check<N256,uint>();
+            dot_natural_check<N256,ulong>();
+            dot_natural_check<N2048,uint>();
+
+            dot_natural_check<N10,uint>();
+            dot_natural_check<N20,uint>();
+
+
+            dot_natural_check(n63,0ul);
+            dot_natural_check(n87,(byte)0);
+            dot_natural_check(n25,(ushort)0);
+
         }
 
-
-        void Dot4Table()
+        public void dot_bitcells_check()
         {
-            var result = sbuild();
-            for(byte i=0; i< 0xF; i++)
-            {
-                var x = BitVector4.FromScalar(i);
-                for(byte j = 0; j<0xF; j++)
-                {
-                    var y = BitVector4.FromScalar(j);
-                    var a = x & y;
-                    var and = $"AND = {a.Format()}";
-                    var popMod2 = $"AND > POP % 2 = {a.Pop() % 2}";
-                    result.AppendLine($"{x.Format()} * {y.Format()} = {x % y} | {and} | {popMod2}");
-                }
-            }
-            Trace(result.ToString());
+            dot_bitcells_check<uint>(10);
+            dot_bitcells_check<uint>(20);
+            dot_bitcells_check<ulong>(63);
+            dot_bitcells_check<ulong>(64);
+            dot_bitcells_check<byte>(87);
+            dot_bitcells_check<ushort>(128);
+            dot_bitcells_check<ushort>(25);
+            dot_bitcells_check<ulong>(256);
+            dot_bitcells_check<uint>(2048);
         }
 
-        void dot4_check(int cycles = DefaltCycleCount)
+        void dot4_check()
         {
-            for(var i=0; i<cycles; i++)
+            for(var i=0; i<SampleSize; i++)
             {
                 var x = Random.BitVector(n4);
                 var y = Random.BitVector(n4);
                 var a = x % y;
-                var b = ModProd(x,y);
+                var b = modprod(x,y);
                 Claim.yea(a == b);            
             }
         }
@@ -115,7 +117,7 @@ namespace Z0.Test
                 var x = Random.BitVector(n8);
                 var y = Random.BitVector(n8);
                 var a = x % y;
-                var b = ModProd(x,y);
+                var b = modprod(x,y);
                 Claim.yea(a == b);            
 
                 var zx = x.ToNatBits();
@@ -133,7 +135,7 @@ namespace Z0.Test
                 var x = Random.BitVector(n16);
                 var y = Random.BitVector(n16);
                 var a = x % y;
-                var b = ModProd(x,y);
+                var b = modprod(x,y);
                 Claim.yea(a == b);   
 
                 var zx = x.ToNatBits();
@@ -151,14 +153,13 @@ namespace Z0.Test
                 var x = Random.BitVector(n32);
                 var y = Random.BitVector(n32);
                 var a = x % y;
-                var b = ModProd(x,y);
+                var b = modprod(x,y);
                 Claim.yea(a == b);
             
                 var zx = x.ToNatBits();
                 var zy = y.ToNatBits();
                 var c = zx % zy;
                 Claim.yea(a == c);
-
             }
         }
 
@@ -169,7 +170,7 @@ namespace Z0.Test
                 var x = Random.BitVector(n64);
                 var y = Random.BitVector(n64);
                 bit a = x % y;
-                var b = ModProd(x,y);
+                var b = modprod(x,y);
                 Claim.yea(a == b);
 
                 var zx = x.ToNatBits();
@@ -180,7 +181,7 @@ namespace Z0.Test
             }
         }
 
-        void dotg_check<T>(int bitcount, T rep = default)
+        void dot_bitcells_check<T>(int bitcount)
             where T : unmanaged
         {
             TypeCaseStart<T>();
@@ -190,7 +191,7 @@ namespace Z0.Test
                 var x = Random.BitCells<T>(bitcount);
                 var y = Random.BitCells<T>(bitcount);
                 var a = x % y;
-                var b = ModProd(x,y);
+                var b = modprod(x,y);
                 Claim.yea(a == b);
             
             }
@@ -198,9 +199,24 @@ namespace Z0.Test
             TypeCaseEnd<T>();
         }
 
-        void dotng_check<N,T>(N bitcount = default, T rep = default)
+        void dot_generic_check<T>()
             where T : unmanaged
-            where N : ITypeNat, new()
+        {
+            TypeCaseStart<T>();
+            for(var i=0; i<CycleCount; i++)
+            {
+                var x = Random.BitVector<T>();
+                var y = Random.BitVector<T>();
+                var actual = BitVector.dot(x,y);
+                var expect = modprod(x,y);
+                Claim.yea(actual == expect);            
+            }
+            TypeCaseEnd<T>();
+        }
+
+        void dot_natural_check<N,T>(N bitcount = default, T rep = default)
+            where N : unmanaged, ITypeNat
+            where T : unmanaged
         {
             NatCaseStart<N,T>();
             for(var i=0; i<CycleCount; i++)
@@ -208,10 +224,9 @@ namespace Z0.Test
                 var x = Random.BitVector<N,T>();
                 var y = Random.BitVector<N,T>();
                 bit a = x % y;
-                var b = ModProd(x,y);
+                var b = modprod(x,y);
                 Claim.yea(a == b);            
             }
-
             NatCaseStart<N,T>();
         }
  

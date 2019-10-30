@@ -76,4 +76,11 @@ namespace Z0
 
     }
 
+    /// <summary>
+    /// Opcodes for custom intrinsic operations
+    /// </summary>
+    public static partial class inxcoc
+    {
+
+    }
 }

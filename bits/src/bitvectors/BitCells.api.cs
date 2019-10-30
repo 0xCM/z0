@@ -74,8 +74,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static int CellCount<T>(int len)
             where T : unmanaged
-            => BitCells<T>.CellCount(len);
-
+                => BitCells<T>.CellCount(len);
 
         /// <summary>
         /// Constructs a bitvector from a primal array

@@ -84,7 +84,7 @@ namespace Z0
                     if(BitMask.test(srcSpan[r], 31))
                         mmExpect.Enable(r);
                 
-                var mmActual = dinx.movemask(srcVector).ToBitVector(n32);
+                var mmActual = dfp.vmovemask(srcVector).ToBitVector(n32);
                 Claim.yea(mmExpect == mmActual);
             }
         }
@@ -104,7 +104,7 @@ namespace Z0
                     if(BitMask.test(srcSpan[r], 63))
                         mmExpect.Enable(r);
                 
-                var mmActual = dinx.movemask(srcVector).ToBitVector(n32);
+                var mmActual = dfp.vmovemask(srcVector).ToBitVector(n32);
                 Claim.yea(mmExpect == mmActual);
             }
         }

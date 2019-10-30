@@ -50,14 +50,14 @@ namespace Z0.Logix
             check_select<ushort>();
             check_select<uint>();
             check_select<ulong>();
-            check_select_128<byte>();
-            check_select_128<ushort>();
-            check_select_128<uint>();
-            check_select_128<ulong>();
-            check_select_256<byte>();
-            check_select_256<ushort>();
-            check_select_256<uint>();
-            check_select_256<ulong>();
+            check_select<byte>(n128);
+            check_select<ushort>(n128);
+            check_select<uint>(n128);
+            check_select<ulong>(n128);
+            check_select<byte>(n256);
+            check_select<ushort>(n256);
+            check_select<uint>(n256);
+            check_select<ulong>(n256);
 
         }
 
@@ -78,14 +78,14 @@ namespace Z0.Logix
 
         }
 
-        void check_select_128<T>()
+        void check_select<T>(N128 n = default)
             where T : unmanaged
         {
             for(var i=0; i<SampleSize; i++)
             {
-                var a = Random.CpuVector128<T>();
-                var b = Random.CpuVector128<T>();
-                var c = Random.CpuVector128<T>();
+                var a = Random.CpuVector<T>(n);
+                var b = Random.CpuVector<T>(n);
+                var c = Random.CpuVector<T>(n);
                 var x = CpuOps.select(a,b,c);
 
                 var sa = a.ToSpan();
@@ -100,14 +100,14 @@ namespace Z0.Logix
         }
 
 
-        void check_select_256<T>()
+        void check_select<T>(N256 n = default)
             where T : unmanaged
         {
             for(var i=0; i<SampleSize; i++)
             {
-                var a = Random.CpuVector256<T>();
-                var b = Random.CpuVector256<T>();
-                var c = Random.CpuVector256<T>();
+                var a = Random.CpuVector<T>(n);
+                var b = Random.CpuVector<T>(n);
+                var c = Random.CpuVector<T>(n);
                 var x = CpuOps.select(a,b,c);
 
                 var sa = a.ToSpan();

@@ -21,7 +21,7 @@ namespace Z0
         /// <param name="src">The bit source</param>
         /// <param name="pos">The position of the bit for which rank will be calculated</param>
         [MethodImpl(Inline)]
-        public static uint rank<T>(T src, int pos)
+        public static uint rank<T>(T src, uint pos)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))

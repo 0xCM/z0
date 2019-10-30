@@ -369,14 +369,6 @@ namespace Z0
         public uint Ntz()
             => Bits.ntz(data);
 
-        /// <summary>
-        /// Counts the number of bits set up to and including the specified position
-        /// </summary>
-        /// <param name="src">The bit source</param>
-        /// <param name="pos">The position of the bit for which rank will be calculated</param>
-        [MethodImpl(Inline)]
-        public uint Rank(int pos)
-            => Bits.rank(data,pos);
 
         [MethodImpl(Inline)]
         public bool Equals(in BitVector4 rhs)
@@ -418,7 +410,6 @@ namespace Z0
             [MethodImpl(Inline)]
             get => data;
         }
-
 
         /// <summary>
         /// Returns a copy of the vector
@@ -478,22 +469,6 @@ namespace Z0
         
         public override string ToString()
             => Format();
-
-        public BitVector4 Rotr(int offset)
-        {
-            throw new NotImplementedException();
-            
-        }
-
-        public BitVector4 Rotl(int offset)
-        {
-            throw new NotImplementedException();
-        }
-
-        public ref byte Byte(int index)
-        {
-            throw new NotImplementedException();
-        }
 
         public BitVector4 Inc()
         {

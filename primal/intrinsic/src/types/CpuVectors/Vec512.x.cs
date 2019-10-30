@@ -39,8 +39,8 @@ namespace Z0
         public static void ToSpan<T>(this in Vec512<T> src, Span<T> dst)
             where T : unmanaged            
         {
-            Vec256.Store(src.lo, ref dst[0]);
-            Vec256.Store(src.hi, ref dst[Vec256<T>.Length]);
+            vstore(src.lo, ref dst[0]);
+            vstore(src.hi, ref dst[Vec256<T>.Length]);
         }       
 
         /// <summary>

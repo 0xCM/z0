@@ -15,7 +15,7 @@ namespace Z0
 
     public static class CpuOpVerify
     {
-        public static void VerifyUnaryOp<T>(IPolyrand random, int blocks, Vec128UnaryOp<T> inXOp, Func<T,T> primalOp)
+        public static void VerifyUnaryOp<T>(IPolyrand random, int blocks, Vector128UnaryOp<T> inXOp, Func<T,T> primalOp)
             where T : unmanaged
         {
             var blocklen = Span128<T>.BlockLength;                     
@@ -37,9 +37,9 @@ namespace Z0
                 for(var i =0; i<blocklen; i++)
                     tmp[i] = primalOp(src[offset + i]);
 
-                var vExpect = Vec128.Load<T>(ref tmp[0]);
+                var vExpect = ginx.vloadu<T>(n128, in head(tmp));
              
-                var vX = src.LoadVec128(block);
+                var vX = src.LoadVector(block);
                 var vActual = inXOp(vX);
 
                 Claim.eq(vExpect, vActual);
@@ -50,7 +50,7 @@ namespace Z0
             Claim.eq(expect, actual);
         }
 
-        public static void VerifyUnaryOp<T>(IPolyrand random, int blocks, Vec256UnaryOp<T> inXOp, Func<T,T> primalOp)
+        public static void VerifyUnaryOp<T>(IPolyrand random, int blocks, Vector256UnaryOp<T> inXOp, Func<T,T> primalOp)
             where T : unmanaged
         {
             var blocklen = Span256<T>.BlockLength;                     
@@ -72,9 +72,9 @@ namespace Z0
                 for(var i =0; i<blocklen; i++)
                     tmp[i] = primalOp(src[offset + i]);
 
-                var vExpect = Vec256.Load<T>(ref tmp[0]);
+                var vExpect = ginx.vloadu<T>(n256, in head(tmp));
              
-                var vX = src.LoadVec256(block);
+                var vX = src.LoadVector(block);
                 var vActual = inXOp(vX);
 
                 Claim.eq(vExpect, vActual);

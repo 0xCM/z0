@@ -176,7 +176,7 @@ namespace Z0
         /// <param name="index">Identifies the lane in the target to overwrite, either 0 or 1 respectively 
         /// identifing low or hi</param>
         [MethodImpl(Inline)]
-        public static Vector256<uint> insert(Vector128<uint> src, Vector256<uint> dst, byte index)        
+        public static Vector256<uint> vinsert(Vector128<uint> src, Vector256<uint> dst, byte index)        
             => InsertVector128(dst, src, index);
 
         /// <summary>
@@ -210,7 +210,7 @@ namespace Z0
         /// <param name="hi">The vector that will be inserted into the hi 128-bit lane of the target</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline)]
-        public static Vector256<byte> insert(Vector128<byte> lo, Vector128<byte> hi, out Vector256<byte> dst)        
+        public static Vector256<byte> vinsert(Vector128<byte> lo, Vector128<byte> hi, out Vector256<byte> dst)        
             => dst = InsertVector128(InsertVector128(default, lo, 0), hi, 1);
     }
 }

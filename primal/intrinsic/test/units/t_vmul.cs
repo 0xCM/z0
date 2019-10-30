@@ -20,30 +20,31 @@ namespace Z0
 
             for(var i=0; i<DefaultSampleSize; i++)
             {
-                var v1 = Random.CpuVec128<ulong>(UInt32.MinValue, UInt32.MaxValue);
-                var v2 = Random.CpuVec128<ulong>(UInt32.MinValue, UInt32.MaxValue);
-                
+                var v1s = Random.BlockedSpan<ulong>(n128, UInt32.MinValue, UInt32.MaxValue);
+                var v2s = Random.BlockedSpan<ulong>(n128, UInt32.MinValue, UInt32.MaxValue);
+                var v1 = v1s.ToCpuVector();
+                var v2 = v2s.ToCpuVector();
 
-                UInt128 x00 = dinx.clmul(in v1, in v2, ClMulMask.X00);
-                UInt128 x01 = dinx.clmul(in v1, in v2, ClMulMask.X01);
-                UInt128 x10 = dinx.clmul(in v1, in v2, ClMulMask.X10);
-                UInt128 x11 = dinx.clmul(in v1, in v2, ClMulMask.X11);
+                UInt128 x00 = dinx.clmul(v1, v2, ClMulMask.X00);
+                UInt128 x01 = dinx.clmul(v1, v2, ClMulMask.X01);
+                UInt128 x10 = dinx.clmul(v1, v2, ClMulMask.X10);
+                UInt128 x11 = dinx.clmul(v1, v2, ClMulMask.X11);
 
-                var y00 = dinx.clmul(v1[0], v2[0]);
+                var y00 = dinx.clmul(v1s[0], v2s[0]);
                 Claim.eq(x00, y00);
-                Claim.eq(x00, Bits.clmul_ref(v1[0], v2[0]));
+                Claim.eq(x00, Bits.clmul_ref(v1s[0], v2s[0]));
 
-                var y01 = dinx.clmul(v1[1], v2[0]);
+                var y01 = dinx.clmul(v1s[1], v2s[0]);
                 Claim.eq(x01, y01);
-                Claim.eq(x01, Bits.clmul_ref(v1[1], v2[0]));
+                Claim.eq(x01, Bits.clmul_ref(v1s[1], v2s[0]));
 
-                var y10 = dinx.clmul(v1[0], v2[1]);
+                var y10 = dinx.clmul(v1s[0], v2s[1]);
                 Claim.eq(x10, y10);
-                Claim.eq(x10, Bits.clmul_ref(v1[0],v2[1]));
+                Claim.eq(x10, Bits.clmul_ref(v1s[0],v2s[1]));
 
-                var y11 = dinx.clmul(v1[1], v2[1]);
+                var y11 = dinx.clmul(v1s[1], v2s[1]);
                 Claim.eq(x11, y11);
-                Claim.eq(x11, Bits.clmul_ref(v1[1], v2[1]));
+                Claim.eq(x11, Bits.clmul_ref(v1s[1], v2s[1]));
             }
         
         }

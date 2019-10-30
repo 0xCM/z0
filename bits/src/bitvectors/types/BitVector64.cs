@@ -488,14 +488,6 @@ namespace Z0
         public readonly uint Pop()
             => Bits.pop(data);
         
-        /// <summary>
-        /// Counts the number of bits set up to and including the specified position
-        /// </summary>
-        /// <param name="src">The bit source</param>
-        /// <param name="pos">The position of the bit for which rank will be calculated</param>
-        [MethodImpl(Inline)]
-        public readonly uint Rank(int pos)
-            => Bits.rank(data,pos);
 
         /// <summary>
         /// Tests whether all bits are on
