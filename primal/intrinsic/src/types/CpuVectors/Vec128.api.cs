@@ -10,25 +10,12 @@ namespace Z0
     using System.Runtime.InteropServices;    
     using System.Runtime.Intrinsics;
     using System.Runtime.Intrinsics.X86;
-
-    using static System.Runtime.Intrinsics.X86.Sse2;
-    using static System.Runtime.Intrinsics.X86.Sse;
     
     using static zfunc;
     using static As;
-    
-    
+        
     public static partial class Vec128
     {
-
-
-        [MethodImpl(Inline)]
-        public static Vec128<T> Load<T>(ref T src)
-            where T : unmanaged  
-                => ginx.vloadu(in src, out Vector128<T> _);
-
-
-
         /// <summary>
         /// Loads the source value into the first component of a new vector
         /// </summary>
@@ -91,9 +78,6 @@ namespace Z0
             else 
                 throw unsupported<T>();
         }        
-
-
-
 
     }
 }

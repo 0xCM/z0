@@ -20,35 +20,39 @@ namespace Z0
                => default;
 
         [MethodImpl(Inline)]
-        public static Vector128<T> vpOnes<T>(N128 n)
-            where T : unmanaged
-               => Vec128Pattern.Ones<T>();
-
-        [MethodImpl(Inline)]
-        public static Vector128<T> vpUnits<T>(N128 n)
-            where T : unmanaged
-                => Vec128Pattern.Units<T>();
-
-        [MethodImpl(Inline)]
-        public static Vector128<T> vpIncrements<T>(N128 n)
-            where T : unmanaged
-                => Vec128Pattern.Increments<T>();
-        
-        [MethodImpl(Inline)]
         public static Vector256<T> vzero<T>(N256 n)
             where T : unmanaged
                => default;
 
         [MethodImpl(Inline)]
-        public static Vector256<T> vpOnes<T>(N256 n)
+        public static Vector128<T> vones<T>(N128 n)
             where T : unmanaged
-                => Vec256Pattern.Ones<T>();
+               => Vec128Pattern.ones<T>();
 
         [MethodImpl(Inline)]
-        public static Vector256<T> vpUnits<T>(N256 n)
+        public static Vector256<T> vones<T>(N256 n)
             where T : unmanaged
-                => Vec256Pattern.Units<T>();
+                => Vec256Pattern.ones<T>();
 
+        [MethodImpl(Inline)]
+        public static Vector128<T> vunits<T>(N128 n)
+            where T : unmanaged
+                => Vec128Pattern.units<T>();
+
+        [MethodImpl(Inline)]
+        public static Vector256<T> vunits<T>(N256 n)
+            where T : unmanaged
+                => Vec256Pattern.units<T>();
+
+        [MethodImpl(Inline)]
+        public static Vector128<T> vincrements<T>(N128 n)
+            where T : unmanaged
+                => Vec128Pattern.increments<T>();
+
+        [MethodImpl(Inline)]
+        public static Vector256<T> vincrements<T>(N256 n)
+            where T : unmanaged
+                => Vec256Pattern.increments<T>();        
 
         /// <summary>
         /// Returns a vector that decribes a lo/hi lane merge permutation
@@ -59,7 +63,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<T> vpLaneMerge<T>()
             where T : unmanaged
-                => Vec256Pattern.LaneMergeVector<T>();
+                => Vec256Pattern.LaneMerge<T>();
 
 
     }

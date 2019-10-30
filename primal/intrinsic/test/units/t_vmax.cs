@@ -30,7 +30,7 @@ namespace Z0.Test
                 for(var i=0; i<zs.Length; i++)
                     zs[i] = gmath.max(xs[i],ys[i]);
                 
-                var expect = zs.ToCpuVector();                
+                var expect = zs.TakeVector();                
                 var actual = dinx.vmax(x,y);
                 Claim.eq(expect,actual);
 
@@ -113,7 +113,7 @@ namespace Z0.Test
                 for(var i=0; i<zs.Length; i++)
                     zs[i] = gmath.max(xs[i],ys[i]);
                 
-                var expect = zs.ToCpuVector();                
+                var expect = zs.TakeVector();                
                 var actual = ginx.vmax(x,y);
                 Claim.eq(expect,actual);                
             }
@@ -134,7 +134,7 @@ namespace Z0.Test
                 for(var i=0; i<zs.Length; i++)
                     zs[i] = gmath.max(xs[i],ys[i]);
                 
-                var expect = zs.ToCpuVector();                
+                var expect = zs.TakeVector();                
                 var actual = ginx.vmax(x,y);
                 Claim.eq(expect,actual);                
             }

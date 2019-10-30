@@ -22,7 +22,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
         public static Vec128<float> vnegate(in Vec128<float> x)
-            =>  vsub(default, x.xmm);
+            =>  vsub(default, x);
 
         /// <summary>
         /// Negates each source vector component
@@ -30,7 +30,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
         public static Vec128<double> vnegate(in Vec128<double> x)
-            =>  vsub(default, x.xmm);
+            =>  vsub(default, x);
 
         /// <summary>
         /// Negates each source vector component
@@ -38,7 +38,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
         public static Vec256<float> vnegate(in Vec256<float> x)
-            =>  vsub(default, x.ymm);
+            =>  vsub(default, x);
 
         /// <summary>
         /// Negates each source vector component
@@ -46,7 +46,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
         public static Vec256<double> vnegate(in Vec256<double> x)
-            =>  vsub(default, x.ymm);
+            =>  vsub(default, x);
     }
 
 }

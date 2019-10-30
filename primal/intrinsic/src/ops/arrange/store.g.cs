@@ -8,13 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;    
     using System.Runtime.Intrinsics;    
 
-    using static System.Runtime.Intrinsics.X86.Sse;
-    using static System.Runtime.Intrinsics.X86.Sse2;
-    using static System.Runtime.Intrinsics.X86.Avx;
-
     using static zfunc;    
-    using static As;
-    
+    using static As;    
 
     partial class ginx
     {
@@ -36,7 +31,6 @@ namespace Z0
                 vstore_f(src,ref dst);
         }
 
-
         [MethodImpl(Inline)]
         public static unsafe void vstore<T>(Vector256<T> src, ref T dst)
             where T : unmanaged
@@ -54,7 +48,6 @@ namespace Z0
             else 
                 vstore_f(src,ref dst);
         }
-
 
         [MethodImpl(Inline)]
         static unsafe void vstore_i<T>(Vector128<T> src, ref T dst)

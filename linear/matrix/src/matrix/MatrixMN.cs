@@ -203,7 +203,7 @@ namespace Z0
         /// </summary>
         public Matrix<N,M,T> Transpose()
         {
-            var dst = Matrix.Alloc<N,M,T>();
+            var dst = Matrix.alloc<N,M,T>();
             for(var row = 0; row < _RowCount; row++)
                 dst.SetCol(row, GetRow(row));            
             return dst;

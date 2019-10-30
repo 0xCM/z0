@@ -319,57 +319,44 @@ namespace Z0
             where T : unmanaged
                 => src.ReadOnly().FormatProperty<T>(name);
         
-
         public static string Format<T>(this Vector128<T> src, SeqFmtKind sfmt = SeqFmtKind.List, char sep = ',', int pad = 0)
             where T : unmanaged
         {
             var elements = src.ToSpan();
-            switch(sfmt)
-            {
-                case SeqFmtKind.Vector:
-                    return elements.FormatVector(sep.ToString());
-                default:
-                    return elements.FormatList(sep,0,pad);                    
-            }
-        }
-
-        public static string FormatList<T>(this Vector128<T> src, char sep = ',', int pad = 0)
-            where T : unmanaged
-                => src.Format(SeqFmtKind.List, sep, pad);
-
-        public static string Format<T>(this Vec256<T> src, SeqFmtKind sfmt = SeqFmtKind.List, char sep = ',', int pad = 0)
-            where T : unmanaged
-        {
-            var elements = src.ToSpan();
-            switch(sfmt)
-            {
-                case SeqFmtKind.Vector:
-                    return elements.FormatVector(sep.ToString());
-                default:
-                    return elements.FormatList(sep,0,pad);
-                    
-            }
+            return sfmt == SeqFmtKind.Vector 
+                ? elements.FormatVector(sep.ToString()) 
+                : elements.FormatList(sep,0,pad);
         }
 
         public static string Format<T>(this Vector256<T> src, SeqFmtKind sfmt = SeqFmtKind.List, char sep = ',', int pad = 0)
             where T : unmanaged
         {
             var elements = src.ToSpan();
-            switch(sfmt)
-            {
-                case SeqFmtKind.Vector:
-                    return elements.FormatVector(sep.ToString());
-                default:
-                    return elements.FormatList(sep,0,pad);
-                    
-            }
+            return sfmt == SeqFmtKind.Vector 
+                ? elements.FormatVector(sep.ToString()) 
+                : elements.FormatList(sep,0,pad);
         }
 
+        /// <summary>
+        /// Formats vector content for console/file output
+        /// </summary>
+        /// <param name="src">The vector to format</param>
+        /// <param name="sep">The component separator</param>
+        /// <param name="pad">The per-component padding</param>
+        /// <typeparam name="T">The vector component type</typeparam>
+        public static string FormatList<T>(this Vector128<T> src, char sep = ',', int pad = 0)
+            where T : unmanaged
+                => src.Format(SeqFmtKind.List, sep, pad);
+
+        /// <summary>
+        /// Formats vector content for console/file output
+        /// </summary>
+        /// <param name="src">The vector to format</param>
+        /// <param name="sep">The component separator</param>
+        /// <param name="pad">The per-component padding</param>
+        /// <typeparam name="T">The vector component type</typeparam>
         public static string FormatList<T>(this Vector256<T> src, char sep = ',', int pad = 0)
             where T : unmanaged
                 => src.Format(SeqFmtKind.List,sep,pad);
-
-
     }
-
 }

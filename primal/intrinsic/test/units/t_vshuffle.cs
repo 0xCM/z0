@@ -38,8 +38,8 @@ namespace Z0.Test
         public void shuffle_128x8u_1()
         {
             var n = n128;
-            var src = ginx.vloadu(n, in head(Inc8u));
-            var spec = ginx.vloadu(n, in head(Pattern1));
+            var src = ginx.vload(n, in head(Inc8u));
+            var spec = ginx.vload(n, in head(Pattern1));
             var dst = dinx.vshuffle(src,spec);
             Claim.eq(spec,dst);
         }
@@ -47,8 +47,8 @@ namespace Z0.Test
         public void shuffle_128x8u_2()
         {
             var n = n128;
-            var src = ginx.vloadu(n, in head(Inc8u));
-            var spec = ginx.vloadu(n, in head(Pattern2));
+            var src = ginx.vload(n, in head(Inc8u));
+            var spec = ginx.vload(n, in head(Pattern2));
             var dst = dinx.vshuffle(src,spec);
             Claim.eq(spec,dst);
 
@@ -57,8 +57,8 @@ namespace Z0.Test
         public void shuffle_128x8u_3()
         {
             var n = n128;
-            var src = ginx.vloadu(n, in head(Inc8u));
-            var spec = ginx.vloadu(n, in head(Pattern3));
+            var src = ginx.vload(n, in head(Inc8u));
+            var spec = ginx.vload(n, in head(Pattern3));
             var dst = dinx.vshuffle(src,spec);
             Claim.eq(spec,dst);
         }
@@ -66,8 +66,8 @@ namespace Z0.Test
         public void shuffle_128x8u_4()
         {
             var n = n128;
-            var src = ginx.vloadu(n, in head(Inc8u));
-            var spec = ginx.vloadu(n, in head(RotL_8x8u));
+            var src = ginx.vload(n, in head(Inc8u));
+            var spec = ginx.vload(n, in head(RotL_8x8u));
             var dst = dinx.vshuffle(src,spec);
             Claim.eq(spec,dst);
         }
@@ -75,8 +75,8 @@ namespace Z0.Test
         public void shuffle_128x8u_5()
         {
             var n = n128;
-            var src = ginx.vloadu(n, in head(Inc8u));
-            var spec = ginx.vloadu(n, in head(RotR_8x8u));
+            var src = ginx.vload(n, in head(Inc8u));
+            var spec = ginx.vload(n, in head(RotR_8x8u));
             var dst = dinx.vshuffle(src,spec);
             Claim.eq(spec,dst);
         }
@@ -84,9 +84,9 @@ namespace Z0.Test
         public void shuffle_128x8u_composite()
         {
             var n = n128;
-            var src = ginx.vloadu(n, in head(Inc8u));
-            var spec1 = ginx.vloadu(n, in head(RotL_8x8u));
-            var spec2 = ginx.vloadu(n, in head(RotR_8x8u));
+            var src = ginx.vload(n, in head(Inc8u));
+            var spec1 = ginx.vload(n, in head(RotL_8x8u));
+            var spec2 = ginx.vload(n, in head(RotR_8x8u));
             var dst = dinx.vshuffle(dinx.vshuffle(src,spec1), spec2);
             Claim.eq(src,dst);
         }
@@ -104,20 +104,20 @@ namespace Z0.Test
         public void shuffle_128x32u()
         {
             var n = n128;
-            var src = cpuvec(1u,2u,3u,4u);
+            var src = vparts(1u,2u,3u,4u);
             var spec = Perm4.ABCD;
-            var y = cpuvec(4u,3u,2u,1u);
+            var y = vparts(4u,3u,2u,1u);
             var x = dinx.vshuffle(src, Perm4.ABCD);
             Claim.eq(x, src);
             Trace($"shuffle({x},{spec}) = {y}");           
 
-            y = cpuvec(4u,3u,2u,1u);
+            y = vparts(4u,3u,2u,1u);
             spec = Perm4.DCBA;
             x = dinx.vshuffle(src,spec);
             Claim.eq(x, y); 
             Trace($"shuffle({x},{spec}) = {y}");           
 
-            y = cpuvec(4u,3u,2u,1u);
+            y = vparts(4u,3u,2u,1u);
             spec = Perm4.DCBA;
             x = dinx.vshuffle(src,spec);
             Claim.eq(x, y); 
@@ -128,27 +128,27 @@ namespace Z0.Test
 
         public void shuffle_lo_128x16u()
         {
-            var id = cpuvec((ushort)0,(ushort)1,(ushort)2,(ushort)3,(ushort)6,(ushort)7,(ushort)8,(ushort)9);
-            Claim.eq(dinx.vshufflelo(id, Perm4.ADCB), cpuvec((ushort)0,(ushort)3,(ushort)2,(ushort)1,(ushort)6,(ushort)7,(ushort)8,(ushort)9));
+            var id = vparts((ushort)0,(ushort)1,(ushort)2,(ushort)3,(ushort)6,(ushort)7,(ushort)8,(ushort)9);
+            Claim.eq(dinx.vshufflelo(id, Perm4.ADCB), vparts((ushort)0,(ushort)3,(ushort)2,(ushort)1,(ushort)6,(ushort)7,(ushort)8,(ushort)9));
         }
 
         public void shuffle_hi_128x16u()
         {
-            var id = cpuvec((ushort)0,(ushort)1,(ushort)2,(ushort)3,(ushort)6,(ushort)7,(ushort)8,(ushort)9);
-            Claim.eq(dinx.vshufflehi(id, Perm4.ADCB), cpuvec((ushort)0,(ushort)1,(ushort)2,(ushort)3,(ushort)6,(ushort)9,(ushort)8,(ushort)7));
+            var id = vparts((ushort)0,(ushort)1,(ushort)2,(ushort)3,(ushort)6,(ushort)7,(ushort)8,(ushort)9);
+            Claim.eq(dinx.vshufflehi(id, Perm4.ADCB), vparts((ushort)0,(ushort)1,(ushort)2,(ushort)3,(ushort)6,(ushort)9,(ushort)8,(ushort)7));
         }
 
         public void shuffle_128x16u()
         {
-            var id = cpuvec((ushort)0,(ushort)1,(ushort)2,(ushort)3,(ushort)6,(ushort)7,(ushort)8,(ushort)9);
-            Claim.eq(dinx.vshuffle(id, Perm4.ADCB, Perm4.ADCB), cpuvec((ushort)0,(ushort)3,(ushort)2,(ushort)1,(ushort)6,(ushort)9,(ushort)8,(ushort)7));
+            var id = vparts((ushort)0,(ushort)1,(ushort)2,(ushort)3,(ushort)6,(ushort)7,(ushort)8,(ushort)9);
+            Claim.eq(dinx.vshuffle(id, Perm4.ADCB, Perm4.ADCB), vparts((ushort)0,(ushort)3,(ushort)2,(ushort)1,(ushort)6,(ushort)9,(ushort)8,(ushort)7));
         }
 
         public void permute128i32()
         {
-            var id = cpuvec(0,1,2,3);
-            Claim.eq(dinx.vshuffle(id, Perm4.ADCB), cpuvec(0,3,2,1));
-            Claim.eq(dinx.vshuffle(id, Perm4.DBCA), cpuvec(3,1,2,0));
+            var id = vparts(0,1,2,3);
+            Claim.eq(dinx.vshuffle(id, Perm4.ADCB), vparts(0,3,2,1));
+            Claim.eq(dinx.vshuffle(id, Perm4.DBCA), vparts(3,1,2,0));
             Permute4i32();        
         }
 
@@ -179,7 +179,7 @@ namespace Z0.Test
                 var v2 = dinx.vshuffle(v1,p);
 
                 // Permute vector manually
-                var v3 = cpuvec(v1s[p0],v1s[p1],v1s[p2],v1s[p3]);
+                var v3 = vparts(v1s[p0],v1s[p1],v1s[p2],v1s[p3]);
 
                 // Same?
                 Claim.eq(v3,v2);

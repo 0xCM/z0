@@ -24,7 +24,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<T> vnext<T>(Vector128<T> src)
             where T : unmanaged
-                => vadd<T>(src, vpUnits<T>(n128));
+                => vadd<T>(src, vunits<T>(n128));
 
         /// <summary>
         /// Increments each source vector component by a unit
@@ -34,7 +34,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<T> vnext<T>(Vector256<T> src)
             where T : unmanaged
-                => vadd<T>(src, vpUnits<T>(n256));
+                => vadd<T>(src, vunits<T>(n256));
 
         /// <summary>
         /// Decrements each source vector component by a unit
@@ -44,7 +44,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<T> vprior<T>(Vector128<T> src)
             where T : unmanaged
-                => vsub<T>(src, vpUnits<T>(n128));
+                => vsub<T>(src, vunits<T>(n128));
 
         /// <summary>
         /// Decrements each source vector component by a unit
@@ -54,7 +54,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<T> vprior<T>(Vector256<T> src)
             where T : unmanaged
-                => vsub<T>(src, vpUnits<T>(n256));
+                => vsub<T>(src, vunits<T>(n256));
 
     }
 

@@ -16,17 +16,17 @@ namespace Z0
     {
         public void perm_2x128_check()
         {
-            var x = Vec256Pattern.Increasing<ulong>(0,2);
-            var y = Vec256Pattern.Increasing<ulong>(1,2);
+            var x = Vec256Pattern.increments<ulong>(0,2);
+            var y = Vec256Pattern.increments<ulong>(1,2);
 
-            Claim.eq(cpuvec(1ul,3,0,2), dinx.vperm2x128(x,y,Perm2x128.AC));
-            Claim.eq(cpuvec(5ul,7,0,2), dinx.vperm2x128(x,y,Perm2x128.AD));
-            Claim.eq(cpuvec(1ul,3,4,6), dinx.vperm2x128(x,y,Perm2x128.BC));
-            Claim.eq(cpuvec(5ul,7,4,6), dinx.vperm2x128(x,y,Perm2x128.BD));
-            Claim.eq(cpuvec(0ul,2,1,3), dinx.vperm2x128(x,y,Perm2x128.CA));
-            Claim.eq(cpuvec(4ul,6,1,3), dinx.vperm2x128(x,y,Perm2x128.CB));
-            Claim.eq(cpuvec(0ul,2,5,7), dinx.vperm2x128(x,y,Perm2x128.DA));
-            Claim.eq(cpuvec(4ul,6,5,7), dinx.vperm2x128(x,y,Perm2x128.DB));
+            Claim.eq(vparts(1ul,3,0,2), dinx.vperm2x128(x,y,Perm2x128.AC));
+            Claim.eq(vparts(5ul,7,0,2), dinx.vperm2x128(x,y,Perm2x128.AD));
+            Claim.eq(vparts(1ul,3,4,6), dinx.vperm2x128(x,y,Perm2x128.BC));
+            Claim.eq(vparts(5ul,7,4,6), dinx.vperm2x128(x,y,Perm2x128.BD));
+            Claim.eq(vparts(0ul,2,1,3), dinx.vperm2x128(x,y,Perm2x128.CA));
+            Claim.eq(vparts(4ul,6,1,3), dinx.vperm2x128(x,y,Perm2x128.CB));
+            Claim.eq(vparts(0ul,2,5,7), dinx.vperm2x128(x,y,Perm2x128.DA));
+            Claim.eq(vparts(4ul,6,5,7), dinx.vperm2x128(x,y,Perm2x128.DB));
         }
 
         public void swaphl_2x128()
@@ -44,8 +44,8 @@ namespace Z0
         public void perm256u8()
         {
 
-            var x = Vec256Pattern.Increasing<byte>();
-            var y = Vec256Pattern.Decreasing<byte>();
+            var x = Vec256Pattern.increments<byte>();
+            var y = Vec256Pattern.decrements<byte>();
             var z = dinx.vreverse(dinx.vpermvar32x8(x,y));
             Claim.eq(x,z);
 
@@ -66,8 +66,8 @@ namespace Z0
             var pformat_actual = p.FormatMap();
             Claim.eq(pformat_epect, pformat_actual);
 
-            var vIn = cpuvec(0,1,2,3);
-            var vExpect = cpuvec(3,2,1,0);
+            var vIn = vparts(0,1,2,3);
+            var vExpect = vparts(3,2,1,0);
             var vActual = dinx.vshuffle(vIn,p);
             Claim.eq(vExpect, vActual);                                
         }        

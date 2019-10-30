@@ -116,7 +116,7 @@ namespace Z0
                 rhs.StoreTo(ref head(rDst));
 
                 var expect = fmath.fcmp(lDst, rDst, mode);
-                var actual = dfp.cmpf(lhs, rhs, mode);
+                var actual = dfp.vcmpf(lhs, rhs, mode);
                 Claim.eq(expect,actual);
             }
 

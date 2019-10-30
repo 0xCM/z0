@@ -23,7 +23,7 @@ namespace Z0
         /// <param name="mask">The mask</param>
         [MethodImpl(Inline)]
         public static bool testz(in Vec128<float> src, in Vec128<float> mask)
-            => TestZ(src.xmm,mask.xmm);        
+            => TestZ(src,mask);        
 
         /// <summary>
         /// int _mm_testz_pd (__m128d a, __m128d b) VTESTPD xmm, xmm/m128
@@ -33,7 +33,7 @@ namespace Z0
         /// <param name="mask">The mask</param>
         [MethodImpl(Inline)]
         public static bool testz(in Vec128<double> src, in Vec128<double> mask)
-            => TestZ(src.xmm,mask.xmm);        
+            => TestZ(src,mask);        
 
         /// <summary>
         /// int _mm256_testz_ps (__m256 a, __m256 b) VTESTPS ymm, ymm/m256
@@ -43,7 +43,7 @@ namespace Z0
         /// <param name="mask">The mask</param>
         [MethodImpl(Inline)]
         public static bool testz(in Vec256<float> src, in Vec256<float> mask)
-            => TestZ(src.ymm,mask.ymm);        
+            => TestZ(src,mask);        
 
         /// <summary>
         /// int _mm256_testz_pd (__m256d a, __m256d b) VTESTPD ymm, ymm/m256
@@ -53,7 +53,7 @@ namespace Z0
         /// <param name="mask">The mask</param>
         [MethodImpl(Inline)]
         public static bool testz(in Vec256<double> src, in Vec256<double> mask)
-            => TestZ(src.ymm,mask.ymm);        
+            => TestZ(src,mask);        
 
 
     }

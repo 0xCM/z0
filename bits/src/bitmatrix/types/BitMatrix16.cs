@@ -103,18 +103,6 @@ namespace Z0
         /// </summary>
         /// <param name="src">The matrix bits</param>
         [MethodImpl(Inline)]
-        public static BitMatrix16 From(in Vec256<ushort> src)
-        {
-            Span<ushort> dst = new ushort[Vec256<short>.Length];
-            vstore(src, ref dst[0]);
-            return new BitMatrix16(dst);
-        }
-
-        /// <summary>
-        /// Loads a bitmatrix from the bits in cpu vector
-        /// </summary>
-        /// <param name="src">The matrix bits</param>
-        [MethodImpl(Inline)]
         public static BitMatrix16 From(Vector256<ushort> src)
         {
             Span<ushort> dst = new ushort[Vec256<short>.Length];
@@ -372,7 +360,7 @@ namespace Z0
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline)]
         public void Load(out Vector256<ushort> dst)
-            => dinx.vloadu(in Head, out dst);
+            => dinx.vload(in Head, out dst);
 
         /// <summary>
         /// Creates a generic matrix from the primal source data
@@ -387,7 +375,7 @@ namespace Z0
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline)]
         public void Load(int row, out Vector256<ushort> dst)
-            => dinx.vloadu(in Head, out dst);
+            => dinx.vload(in Head, out dst);
 
         static ReadOnlySpan<byte> Identity16x16 => new byte[]
         {

@@ -9,9 +9,6 @@ namespace Z0
     using System.Runtime.Intrinsics;    
     using static System.Runtime.Intrinsics.X86.Avx;
     using static System.Runtime.Intrinsics.X86.Avx2;
-    using static System.Runtime.Intrinsics.X86.Sse;
-    using static System.Runtime.Intrinsics.X86.Sse.X64;
-    using static System.Runtime.Intrinsics.X86.Sse2;
     using static System.Runtime.Intrinsics.X86.Sse41;
     
     using static As;
@@ -84,7 +81,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<double> vblendv(Vector256<double> x, Vector256<double> y, Vector256<double> control)        
             => BlendVariable(x, y, control);
-
     }
-
 }

@@ -67,7 +67,7 @@ namespace Z0
         void cmp_lt_check<T>(N128 n = default)
             where T : unmanaged
         {
-            var ones = ginx.vpOnes<T>(n);
+            var ones = ginx.vones<T>(n);
             var one = ginx.vextract(ones,0);
             
             for(var i=0; i< SampleSize; i++)
@@ -80,7 +80,7 @@ namespace Z0
                     if(gmath.lt(x[j],y[j]))
                         z[j] = one;
 
-                var expect = ginx.vloadu(n, in head(z));
+                var expect = ginx.vload(n, in head(z));
                 var actual = ginx.vlt(x.LoadVector(),y.LoadVector());
                 var result = ginx.veq(expect,actual);
                 var equal = ginx.vtestc(result,ones);
@@ -92,7 +92,7 @@ namespace Z0
         void cmp_lt_check<T>(N256 n = default)
             where T : unmanaged
         {
-            var ones = ginx.vpOnes<T>(n);
+            var ones = ginx.vones<T>(n);
             var one = ginx.vextract(ginx.vlo(ones),0);
             
             for(var i=0; i< SampleSize; i++)
@@ -105,7 +105,7 @@ namespace Z0
                     if(gmath.lt(x[j],y[j]))
                         z[j] = one;
                 
-                var expect = ginx.vloadu(n, in head(z));
+                var expect = ginx.vload(n, in head(z));
                 var actual = ginx.vlt(x.LoadVector(),y.LoadVector());
                 var result = ginx.veq(expect,actual);
                 var equal = ginx.vtestc(result,ones);

@@ -192,7 +192,7 @@ namespace Z0
         /// </summary>
         public Matrix<N,T> Transpose()
         {
-            var dst = Matrix.Alloc<N,T>();
+            var dst = Matrix.alloc<N,T>();
             for(var i = 0; i < RowCount; i++)
                 dst.SetRow(i,Col(i));            
             return dst;

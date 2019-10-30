@@ -22,84 +22,57 @@ namespace Z0
         /// Allocates a square matrix of natual dimension
         /// </summary>
         /// <param name="n">The square dimension; specified, if desired, to aid type inference</param>
-        /// <param name="exemplar">An example value; specified, if desired, to aid type inference</param>
+        /// <param name="fill">A value to which each cell is initialized</param>
         /// <typeparam name="N">The natural dimension type</typeparam>
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
-        public static Matrix<N,T> Alloc<N,T>(N n = default, T exemplar = default)
+        public static Matrix<N,T> alloc<N,T>(N n = default, T fill = default)
             where N : ITypeNat, new()
             where T : unmanaged
-                => new Matrix<N, T>(MemorySpan.Alloc<T>(nati<N>()*nati<N>()));
+                => new Matrix<N, T>(MemorySpan.Alloc<T>(nati<N>()*nati<N>(),fill));
 
         /// <summary>
         /// Allocates a matrix of natual dimensions
         /// </summary>
         /// <param name="m">The row count, specified if desired to aid type inference</param>
         /// <param name="n">The column count, specified if desired to aid type inference</param>
-        /// <param name="exemplar">An example value, specified if desired to aid type inference</param>
+        /// <param name="fill">A value to which each cell is initialized</param>
         /// <typeparam name="M">The row count type</typeparam>
         /// <typeparam name="N">The col count type</typeparam>
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
-        public static Matrix<M,N,T> Alloc<M,N,T>(M m = default, N n = default, T exemplar = default)
+        public static Matrix<M,N,T> alloc<M,N,T>(M m = default, N n = default, T fill = default)
             where M : ITypeNat, new()
             where N : ITypeNat, new()
             where T : unmanaged
-                => new Matrix<M, N, T>(MemorySpan.Alloc<T>(nati<M>()* nati<N>()));
+                => new Matrix<M, N, T>(MemorySpan.Alloc<T>(nati<M>()* nati<N>(),fill));
          
         /// <summary>
-        /// Loads a matrix of natural dimensions from a blocked span
+        /// Loads a matrix of natural dimensions from an array
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="M">The row count type</typeparam>
         /// <typeparam name="N">The col count type</typeparam>
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
-        public static Matrix<M,N,T> Load<M,N,T>(T[] src, M m = default, N n = default)
+        public static Matrix<M,N,T> load<M,N,T>(T[] src, M m = default, N n = default)
             where M : ITypeNat, new()
             where N : ITypeNat, new()
             where T : unmanaged
                 => new Matrix<M, N, T>(src);
 
         /// <summary>
-        /// Loads a square matrix of natural dimensions from a blocked span
+        /// Loads a square matrix of natural order from an array
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="M">The row count type</typeparam>
         /// <typeparam name="N">The col count type</typeparam>
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
-        public static Matrix<N,T> Load<N,T>(T[] src,  N n = default)
+        public static Matrix<N,T> load<N,T>(N n, params T[] src)
             where N : ITypeNat, new()
             where T : unmanaged
                 => new Matrix<N, T>(src);
-
-
-        /// <summary>
-        /// Defines a square matrix
-        /// </summary>
-        /// <param name="src">The source data </param>
-        /// <param name="n">The order</param>
-        /// <typeparam name="N">The square dimension type</typeparam>
-        /// <typeparam name="T">The element type</typeparam>
-        [MethodImpl(Inline)]
-        public static Matrix<N,T> Define<N,T>(T[] src, N n = default)
-            where N : ITypeNat, new()
-            where T : unmanaged
-                => new Matrix<N,T>(src);
-
-        /// <summary>
-        /// Defines a square matrix
-        /// </summary>
-        /// <param name="src">The source data </param>
-        /// <param name="n">The order</param>
-        /// <typeparam name="N">The square dimension type</typeparam>
-        /// <typeparam name="T">The element type</typeparam>
-        [MethodImpl(Inline)]
-        public static Matrix<N,T> Define<N,T>(N n, params T[] src )
-            where N : ITypeNat, new()
-            where T : unmanaged
-                => Define<N,T>(src,n);
 
         /// <summary>
         /// Defines the canonical filename for a matrix data file
@@ -108,7 +81,7 @@ namespace Z0
         /// <typeparam name="N">The column count type</typeparam>
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
-        public static FileName DataFileName<M,N,T>(string fileId = null)
+        public static FileName filename<M,N,T>(string fileId = null)
             where M : ITypeNat, new()
             where N : ITypeNat, new()
             where T : unmanaged    
@@ -122,7 +95,7 @@ namespace Z0
         /// <typeparam name="M">The natural row count type</typeparam>
         /// <typeparam name="N">The natural column count type</typeparam>
         /// <typeparam name="T">The element type</typeparam>
-        public static void WriteTo<M,N,T>(BlockMatrix<M,N,T> src, FilePath dst, bool overwrite = true, TextFormat? fmt = null)
+        public static void write<M,N,T>(BlockMatrix<M,N,T> src, FilePath dst, bool overwrite = true, TextFormat? fmt = null)
             where M : ITypeNat, new()
             where N : ITypeNat, new()
             where T : unmanaged
@@ -159,7 +132,7 @@ namespace Z0
         /// <typeparam name="M">The row count type</typeparam>
         /// <typeparam name="N">The column count type</typeparam>
         /// <typeparam name="T">The element type</typeparam>
-        public static Matrix<M,N,T> ReadFrom<M,N,T>(FilePath src, TextFormat? format = null)
+        public static Matrix<M,N,T> read<M,N,T>(FilePath src, TextFormat? format = null)
             where M : ITypeNat, new()
             where N : ITypeNat, new()
             where T : unmanaged    
@@ -174,7 +147,7 @@ namespace Z0
             if(n != doc.Rows[0].Cells.Length)
                 return default;
 
-            var dst =  Load<M,N,T>(MemorySpan.Alloc<T>(m * n));
+            var dst =  load<M,N,T>(MemorySpan.Alloc<T>(m * n));
             for(var i = 0; i<doc.Rows.Length; i++)
             {
                 ref readonly var row = ref doc[i];

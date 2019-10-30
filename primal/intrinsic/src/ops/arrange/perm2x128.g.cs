@@ -44,8 +44,8 @@ namespace Z0
             var x0 = gmath.zero<T>();
             var y0 = gmath.one<T>();
             var step = convert<T>(2);
-            var x = Vec256Pattern.Increasing<T>(x0,step);
-            var y = Vec256Pattern.Increasing(y0,step);        
+            var x = Vec256Pattern.increments<T>(x0,step);
+            var y = Vec256Pattern.increments(y0,step);        
 
             addRow("x", x.ToString());
             addRow("y", y.ToString());

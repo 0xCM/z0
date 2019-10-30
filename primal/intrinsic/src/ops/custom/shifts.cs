@@ -17,7 +17,6 @@ namespace Z0
 
     partial class dinxc
     {   
-
         /// <summary>
         /// Shifts the entire 128-bit vector leftwards at bit-level resolution
         /// </summary>
@@ -40,7 +39,7 @@ namespace Z0
             var dstA = dinx.vsll(srcX, offset).AsByte();
 
             // Truncate overflows to sets up the component pattern [X 0 X 0 ... X 0]
-            var trm =  Vec256Pattern.ClearAltVector<byte>();
+            var trm =  Vec256Pattern.altclear<byte>();
             var trA = dinx.vshuffle(dstA, trm);
 
             // Transform the result back the source space
@@ -61,7 +60,7 @@ namespace Z0
             var dstB = dinx.vsll(srcY, offset).AsByte();
 
             // Truncate overflows to sets up the component pattern [X 0 X 0 ... X 0] in each vector
-            var trm =  Vec256Pattern.ClearAltVector<byte>();
+            var trm =  Vec256Pattern.altclear<byte>();
             var trA = dinx.vshuffle(dstA, trm);
             var trB = dinx.vshuffle(dstB, trm);
 
@@ -102,7 +101,7 @@ namespace Z0
             var dstB = dinx.vsrl(srcY, offset).AsByte();
 
             // Truncate overflows to sets up the component pattern [X 0 X 0 ... X 0] in each vector
-            var trm = Vec256Pattern.ClearAltVector<byte>();
+            var trm = Vec256Pattern.altclear<byte>();
             var trA = dinx.vshuffle(dstA, trm);
             var trB = dinx.vshuffle(dstB, trm);
                         
@@ -124,7 +123,7 @@ namespace Z0
             var dstA = dinx.vsrl(srcX, offset).AsByte();
 
             // Truncate overflows to sets up the component pattern [X 0 X 0 ... X 0]
-            var trm =  Vec256Pattern.ClearAltVector<byte>();
+            var trm =  Vec256Pattern.altclear<byte>();
             var trA = dinx.vshuffle(dstA, trm);
 
             // Transform the result back the source space

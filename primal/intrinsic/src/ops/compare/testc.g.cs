@@ -23,7 +23,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bool vtestc<T>(Vector128<T> src)
             where T : unmanaged
-                => vtestc(src, vpOnes<T>(n128));
+                => vtestc(src, vones<T>(n128));
         
         /// <summary>
         /// Determines whether mask-specified source bits are all on
@@ -57,7 +57,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bool vtestc<T>(Vector256<T> src)
             where T : unmanaged
-                => vtestc(src, vpOnes<T>(n256));
+                => vtestc(src, vones<T>(n256));
         
         /// <summary>
         /// Determines whether mask-specified source bits are all on

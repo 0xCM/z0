@@ -21,7 +21,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
         public static Vec128<float> sqrt(in Vec128<float> src)
-            => Sqrt(src.xmm);
+            => Sqrt(src);
 
         /// <summary>
         /// __m128d _mm_sqrt_pd (__m128d a) SQRTPD xmm, xmm/m128
@@ -29,7 +29,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
         public static Vec128<double> sqrt(in Vec128<double> src)
-            => Sqrt(src.xmm);
+            => Sqrt(src);
  
         /// <summary>
         /// __m256 _mm256_sqrt_ps (__m256 a) VSQRTPS ymm, ymm/m256
@@ -53,6 +53,6 @@ namespace Z0
         /// <param name="src"></param>
         [MethodImpl(Inline)]
         public static Vec128<float> rsqrt(in Vec128<float> src)
-            => ReciprocalSqrt(src.xmm);         
+            => ReciprocalSqrt(src);         
     }
 }

@@ -8,6 +8,7 @@ namespace Z0
     using System.Linq;
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
+    using System.Runtime.Intrinsics;
     using System.IO;
     
     using static zfunc;
@@ -16,10 +17,86 @@ namespace Z0
     public class t_vswaps : IntrinsicTest<t_vswaps>
     {
         
+        public void transpose_check()
+        {
+            var a = Vec128Pattern.increments(0u);
+            var b = Vec128Pattern.increments(4u);
+            var c = Vec128Pattern.increments(8u);
+            var d = Vec128Pattern.increments(12u);
+            var x0 = dinx.vunpacklo(v8u(a), v8u(b));
+            var y0 = dinx.vunpacklo(v8u(c), v8u(d));
+            var z0 = v8u(dinx.vunpacklo(v16u(x0),v16u(y0)));
+            var z1 = v8u(dinx.vunpackhi(v16u(x0),v16u(y0)));
+            var x1 = dinx.vunpackhi(v8u(a), v8u(b));
+            var y1 = dinx.vunpackhi(v8u(c), v8u(d));
+            var z2 = v8u(dinx.vunpacklo(v16u(x1),v16u(y1)));
+            var z3 = v8u(dinx.vunpackhi(v16u(x1),v16u(y1)));
+                            
+        }
+
+        public void transpose_4x4_check()
+        {
+            var order = n4;        
+            var cells = order*order;
+            var src = new uint[cells];
+            var n = n128;
+            int step = order;
+        
+            for(var i=0u; i< cells; i++)
+                src[i] = i;
+
+            var a = vload(n, head(src), step*0);
+            var b = vload(n, head(src), step*1);
+            var c = vload(n, head(src), step*2);
+            var d = vload(n, head(src), step*3);
+            dinx.vtranspose(ref a, ref b, ref c, ref d);
+            
+            
+            var dst = new uint[cells];
+            vstore(a, ref head(dst), step*0);
+            vstore(b, ref head(dst), step*1);
+            vstore(c, ref head(dst), step*2);
+            vstore(d, ref head(dst), step*3);
+
+            var A = Matrix.load(order, src);
+            var B = Matrix.load(order, dst);
+            for(var i=0; i < order; i++)
+            for(var j=0; j < order; j++)
+                Claim.eq(A[i,j], B[j,i]);
+
+        }
+
+        public void shift_test()
+        {
+            var m = dinx.vbroadcast(n128, (ushort)0xFF);
+            var x = ginx.vincrements<byte>(n128);
+            dinx.vconvert(x, out Vector256<ushort> y);
+            var z = dinx.vsll(y,1);
+            Trace(z.Format());
+            var z0 = dinx.vand(dinx.vlo(z),m);
+            var z1 = dinx.vand(dinx.vhi(z),m);
+            Trace(z0.Format());
+            Trace(z1.Format());
+        }
+
+        public void convert_check()
+        {
+            var x128 = ginx.vincrements<byte>(n128);
+            var x256 = ginx.vincrements<byte>(n256);
+            dinx.vconvert(x128, out Vector128<ushort> a1);
+            dinx.vconvert(x128, out Vector128<uint> a2);
+            dinx.vconvert(x128, out Vector128<ulong> a3);
+            dinx.vconvert(x128, out Vector256<ushort> b1);
+            dinx.vconvert(x128, out Vector256<uint> b2);
+            dinx.vconvert(x128, out Vector256<ulong> b3);
+
+
+        }
+
         public void perm_swaps()
         {            
             
-            var src = Vec128Pattern.Increments((byte)0);
+            var src = Vec128Pattern.increments((byte)0);
 
             Swap s = (0,1);
             var x1 = dinx.vswap(src, s);

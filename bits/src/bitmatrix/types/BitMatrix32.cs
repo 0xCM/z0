@@ -312,7 +312,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public void Load(int row, out Vector256<uint> dst)
-            => dst = dinx.vloadu(in data[row], out dst);
+            => dst = dinx.vload(in data[row], out dst);
 
         /// <summary>
         /// Counts the number of enabled bits in the matrix

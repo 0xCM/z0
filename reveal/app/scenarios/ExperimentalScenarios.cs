@@ -34,7 +34,7 @@ namespace Z0
 
         public Vec256<ulong> perm4x64_256x64(ulong a, ulong b, ulong c, ulong d)
         {            
-            var x = cpuvec(a,b,c,d);
+            var x = vparts(a,b,c,d);
             var y = dinx.vperm4x64(x, Perm4.ABCD);            
             y = dinx.vperm4x64(y, Perm4.ABDC);
             y = dinx.vperm4x64(y, Perm4.ACBD);

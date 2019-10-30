@@ -15,7 +15,7 @@ namespace Z0.Test
     {
         public void bm_unpack_8x8x8_8x8x8()
         {
-            var dst = Matrix.Alloc<N8,byte>();
+            var dst = Matrix.alloc<N8,byte>();
             var m = dst.ColCount;
             var n = dst.RowCount;
             for(var sample=0; sample<SampleSize; sample++)
@@ -31,7 +31,7 @@ namespace Z0.Test
 
         public void bm_unpack_64x64x64_64x64x64()
         {
-            var dst = Matrix.Alloc<N64,ulong>();
+            var dst = Matrix.alloc<N64,ulong>();
             var m = dst.ColCount;
             var n = dst.RowCount;
             for(var sample=0; sample<SampleSize; sample++)

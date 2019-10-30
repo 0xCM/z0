@@ -406,8 +406,8 @@ namespace Z0
         [MethodImpl(Inline)]
         public BitVector128 And(BitVector128 rhs)
         {
-            dinx.vloadu(in x0, out Vector128<ulong> x);
-            dinx.vloadu(in rhs.x0, out Vector128<ulong> y);
+            dinx.vload(in x0, out Vector128<ulong> x);
+            dinx.vload(in rhs.x0, out Vector128<ulong> y);
             vstore(dinx.vand(x,y), ref x0);
             return this;
         }
@@ -419,8 +419,8 @@ namespace Z0
         [MethodImpl(Inline)]
         public BitVector128 Or(BitVector128 rhs)
         {
-            dinx.vloadu(in x0, out Vector128<ulong> x);
-            dinx.vloadu(in rhs.x0, out Vector128<ulong> y);
+            dinx.vload(in x0, out Vector128<ulong> x);
+            dinx.vload(in rhs.x0, out Vector128<ulong> y);
             vstore(dinx.vor(x,y), ref x0);
             return this;
         }
@@ -432,8 +432,8 @@ namespace Z0
         [MethodImpl(Inline)]
         public BitVector128 XOr(BitVector128 rhs)
         {
-            dinx.vloadu(in x0, out Vector128<ulong> x);
-            dinx.vloadu(in rhs.x0, out Vector128<ulong> y);
+            dinx.vload(in x0, out Vector128<ulong> x);
+            dinx.vload(in rhs.x0, out Vector128<ulong> y);
             vstore(dinx.vxor(x,y), ref x0);
             return this;
         }
@@ -444,7 +444,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public BitVector128 Negate()
         {
-            dinx.vloadu(in x0, out Vector128<ulong> x);
+            dinx.vload(in x0, out Vector128<ulong> x);
             vstore(dinx.vnegate(x), ref x0);
             return this;
         }
@@ -455,7 +455,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public BitVector128 Not()
         {
-            dinx.vloadu(in x0, out Vector128<ulong> x);
+            dinx.vload(in x0, out Vector128<ulong> x);
             vstore(dinx.vnot(x), ref x0);
             return this;
         }

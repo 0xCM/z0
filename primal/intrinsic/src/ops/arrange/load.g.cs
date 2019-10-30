@@ -23,23 +23,22 @@ namespace Z0
     {        
 
         [MethodImpl(Inline)]
-        public static unsafe ref Vector128<T> vloadu<T>(in T src, out Vector128<T> dst)
+        public static unsafe ref Vector128<T> vload<T>(in T src, out Vector128<T> dst)
             where T : unmanaged
                 => ref vloadu(constptr(in src), out dst);
 
         [MethodImpl(Inline)]
-        public static unsafe ref Vector256<T> vloadu<T>(in T src, out Vector256<T> dst)
+        public static unsafe ref Vector256<T> vload<T>(in T src, out Vector256<T> dst)
             where T : unmanaged
                 => ref vloadu(constptr(in src), out dst);
 
         [MethodImpl(Inline)]
-        public static unsafe Vector128<T> vloadu<T>(N128 n, in T src)
+        public static unsafe Vector128<T> vload<T>(N128 n, in T src)
             where T : unmanaged                    
                 => vloadu(constptr(in src), out Vector128<T> _);
         
-
         [MethodImpl(Inline)]
-        public static unsafe Vector256<T> vloadu<T>(N256 n, in T src)
+        public static unsafe Vector256<T> vload<T>(N256 n, in T src)
             where T : unmanaged
                 => vloadu(constptr(in src), out Vector256<T> _);
     }

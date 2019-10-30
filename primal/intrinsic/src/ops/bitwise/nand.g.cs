@@ -32,7 +32,6 @@ namespace Z0
                 return vnand_128f(x,y);
         }
 
-
         [MethodImpl(Inline)]
         public static Vector256<T> vnand<T>(Vector256<T> x, Vector256<T> y)
             where T : unmanaged

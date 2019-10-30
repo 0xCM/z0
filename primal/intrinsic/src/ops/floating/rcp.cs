@@ -21,7 +21,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
         public static Vec128<float> rcp(in Vec128<float> x)
-            => Reciprocal(x.xmm);
+            => Reciprocal(x);
 
         /// <summary>
         /// __m256 _mm256_rcp_ps (__m256 a) VRCPPS ymm, ymm/m256

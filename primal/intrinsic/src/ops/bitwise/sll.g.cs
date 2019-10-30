@@ -25,7 +25,6 @@ namespace Z0
             where T : unmanaged
                 => generic<T>(dinxc.vsllx(src.AsUInt64(), offset));
 
-
         [MethodImpl(Inline)]
         public static Vector128<T> vsll<T>(Vector128<T> x, byte offset)
             where T : unmanaged
@@ -118,7 +117,5 @@ namespace Z0
             else 
                 return generic<T>(dinx.vsll(uint64(x), offset));
         }
-
-
     }
 }

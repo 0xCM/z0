@@ -89,14 +89,5 @@ namespace Z0
             where T : unmanaged    
                 => DeciDigits.Parse(src.Abs().ToString());
 
-        /// <summary>
-        /// Converts a number to a string of decimal digits
-        /// </summary>
-        /// <param name="src">The source integer</param>
-        /// <typeparam name="T">The underlying primitive type</typeparam>
-         [MethodImpl(Inline)]   
-        public static Span<HexDigit> ToHexDigits<T>(this num<T> src)
-            where T : unmanaged    
-                =>  HexDigits.Parse(src.ToString());
     }
 }

@@ -16,7 +16,7 @@ namespace Z0
     {
 
         [MethodImpl(Inline)]
-        public static unsafe Vector128<T> vcmpeq<T>(N128 n, T* pX, T* pY)
+        public static unsafe Vector128<T> veq<T>(N128 n, T* pX, T* pY)
             where T : unmanaged
         {                    
             vloadu(pX, out Vector128<T> vA);
@@ -25,13 +25,13 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static unsafe void vcmpeq<T>(N128 n, T* pX, T* pY, T* pDst)
+        public static unsafe void veq<T>(N128 n, T* pX, T* pY, T* pDst)
             where T : unmanaged
-                => vstore(vcmpeq(n,pX,pY), pDst);
+                => vstore(veq(n,pX,pY), pDst);
 
 
         [MethodImpl(Inline)]
-        public static unsafe Vector256<T> vcmpeq<T>(N256 n, T* pA, T* pB)
+        public static unsafe Vector256<T> veq<T>(N256 n, T* pA, T* pB)
             where T : unmanaged
         {                    
             vloadu(pA, out Vector256<T> vA);
@@ -40,9 +40,9 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static unsafe void vcmpeq<T>(N256 n, T* pX, T* pY, T* pDst)
+        public static unsafe void veq<T>(N256 n, T* pX, T* pY, T* pDst)
             where T : unmanaged
-                => vstore(vcmpeq(n,pX,pY), pDst);
+                => vstore(veq(n,pX,pY), pDst);
     }
 
 }

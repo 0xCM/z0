@@ -56,7 +56,7 @@ namespace Z0.Test
                     Claim.neq(bsX[j],bsY[j]);
 
                 var xData = x.ToSpan();
-                var expect  = ginx.vloadu(n, in head(mathspan.not(xData)));
+                var expect  = ginx.vload(n, in head(mathspan.not(xData)));
                 Claim.eq(expect,actual);
 
             }
@@ -76,7 +76,7 @@ namespace Z0.Test
                     Claim.neq(bsX[j],bsY[j]);
 
                 var xData = x.ToSpan();                
-                var expect  = ginx.vloadu(n, in head(mathspan.not(xData)));
+                var expect  = ginx.vload(n, in head(mathspan.not(xData)));
                 Claim.eq(expect,actual);
 
 

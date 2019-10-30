@@ -26,8 +26,8 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vec128<float> cmpeq(in Vec128<float> x, in Vec128<float> y)
-            => CompareEqual(x.xmm, y.xmm);
+        public static Vector128<float> veq(Vector128<float> x, Vector128<float> y)
+            => CompareEqual(x, y);
 
         /// <summary>
         /// __m128d _mm_cmpeq_pd (__m128d a, __m128d b) CMPPD xmm, xmm/m128, imm8(0)
@@ -35,8 +35,8 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vec128<double> cmpeq(in Vec128<double> x, in Vec128<double> y)
-            => CompareEqual(x.xmm, y.xmm);
+        public static Vector128<double> veq(Vector128<double> x, Vector128<double> y)
+            => CompareEqual(x, y);
 
         /// <summary>
         /// __m256 _mm256_cmp_ps (__m256 a, __m256 b, const int imm8) VCMPPS ymm, ymm, ymm/m256, imm8
@@ -44,8 +44,8 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<float> cmpeq(in Vec256<float> x, in Vec256<float> y)
-            => Compare(x.ymm, y.ymm, FloatComparisonMode.UnorderedEqualNonSignaling);
+        public static Vector256<float> veq(Vector256<float> x, Vector256<float> y)
+            => Compare(x, y, FloatComparisonMode.UnorderedEqualNonSignaling);
 
         /// <summary>
         /// __m256d _mm256_cmp_pd (__m256d a, __m256d b, const int imm8) VCMPPD ymm, ymm, ymm/m256, imm8
@@ -53,8 +53,8 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<double> cmpeq(in Vec256<double> x, in Vec256<double> y)
-            => Compare(x.ymm, y.ymm, FloatComparisonMode.UnorderedEqualNonSignaling);
+        public static Vector256<double> veq(Vector256<double> x, Vector256<double> y)
+            => Compare(x, y, FloatComparisonMode.UnorderedEqualNonSignaling);
 
 
     }

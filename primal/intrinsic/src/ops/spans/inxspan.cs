@@ -52,7 +52,7 @@ namespace Z0
         {
             var blocks = dst.BlockCount;
             for(var block = 0; block < blocks; block++)
-                ginx.vstore(ginx.vsub<T>(ginx.vloadu(n128,in lhs.Block(block)), ginx.vloadu(n128,in rhs.Block(block))), ref dst.Block(block));
+                ginx.vstore(ginx.vsub<T>(ginx.vload(n128,in lhs.Block(block)), ginx.vload(n128,in rhs.Block(block))), ref dst.Block(block));
             return dst;
         }
 
@@ -61,7 +61,7 @@ namespace Z0
         {            
             var blocks = dst.BlockCount;
             for(var block = 0; block < blocks; block++)
-                ginx.vstore(ginx.vsub<T>(ginx.vloadu(n256,in lhs.Block(block)), ginx.vloadu(n256,in rhs.Block(block))), ref dst.Block(block));
+                ginx.vstore(ginx.vsub<T>(ginx.vload(n256,in lhs.Block(block)), ginx.vload(n256,in rhs.Block(block))), ref dst.Block(block));
             return dst;
         }
 
@@ -70,7 +70,7 @@ namespace Z0
         {
             var blocks = dst.BlockCount;
             for(var block = 0; block < blocks; block++)
-                ginx.vstore(ginx.vadd(ginx.vloadu(n128,in lhs.Block(block)), ginx.vloadu(n128,in rhs.Block(block))), ref dst.Block(block));
+                ginx.vstore(ginx.vadd(ginx.vload(n128,in lhs.Block(block)), ginx.vload(n128,in rhs.Block(block))), ref dst.Block(block));
             return dst;
         }
 
@@ -79,10 +79,9 @@ namespace Z0
         {
             var blocks = dst.BlockCount;
             for(var block = 0; block < blocks; block++)
-                ginx.vstore(ginx.vadd(ginx.vloadu(n256,in lhs.Block(block)), ginx.vloadu(n256,in rhs.Block(block))), ref dst.Block(block));
+                ginx.vstore(ginx.vadd(ginx.vload(n256,in lhs.Block(block)), ginx.vload(n256,in rhs.Block(block))), ref dst.Block(block));
             return dst;
         } 
-
 
         public static Span128<float> div(ReadOnlySpan128<float> lhs, ReadOnlySpan128<float> rhs, Span128<float> dst)
         {
@@ -115,70 +114,5 @@ namespace Z0
                 ginx.vstore(dfp.vdiv(lhs.LoadVector(block), rhs.LoadVector(block)), ref dst[block]);            
             return dst;            
         }     
-
-
-        // public static short Sum(ReadOnlySpan<short> src)
-        // {
-        //     var veclen = Vec128<short>.Length;
-        //     var seglen = 2*veclen;
-        //     var srclen = src.Length;
-        //     require(0 == srclen % seglen);
-
-        //     var dst = dinx.vbroadcast(n128,(short)0);
-        //     var offset = 0;
-        //     for(var i=0; i< srclen; i+= seglen)
-        //     {
-        //         var v1 = Vec128.Load(src, offset);
-        //         offset += veclen;
-        //         var v2 = Vec128.Load(src, offset);
-        //         offset += veclen;
-        //         var vSum = dinx.vhadd(v1, v2);
-        //         dst = dinx.vadd(dst,vSum);                
-        //     }
-            
-        //     Span<short> final = stackalloc short[veclen];
-        //     vstore(dst, ref final[0]);
-
-        //     var total = (short)0;
-        //     for(var i=0; i< veclen; i++)
-        //          total += final[i];            
-        //     return total;
-        // }
-
-            
-        // public static int Sum(ReadOnlySpan<int> src)
-        // {
-        //     var veclen = Vec128<int>.Length;
-        //     var seglen = 2*veclen;
-        //     var srclen = src.Length;
-        //     require(0 == srclen % seglen);
-
-        //     var dst = dinx.vbroadcast(n128,(int)0);
-        //     var offset = 0;
-        //     for(var i=0; i< srclen; i+= seglen)
-        //     {
-        //         var v1 = Vec128.Load(src, offset);
-        //         offset += veclen;
-        //         var v2 = Vec128.Load(src, offset);
-        //         offset += veclen;
-        //         var vSum = dinx.vhadd(v1, v2);
-        //         dst = dinx.vadd(dst,vSum);                
-        //     }
-            
-        //     Span<int> final = stackalloc int[veclen];
-        //     vstore(dst, ref final[0]);
-
-        //     var total = (int)0;
-        //     for(var i=0; i< veclen; i++)
-        //          total += final[i];            
-        //     return total;
-        // }
-
-        // [MethodImpl(Inline)]
-        // public static int Sum(Span<int> src)
-        //     => Sum(src.ReadOnly());
-
     }
-
-
 }

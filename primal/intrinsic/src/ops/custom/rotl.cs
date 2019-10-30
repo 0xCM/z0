@@ -70,7 +70,6 @@ namespace Z0
             return dinx.vor(x,y);             
         }
 
-
         /// <summary>
         /// Rotates each component the source vector leftwards by a specified offset
         /// </summary>

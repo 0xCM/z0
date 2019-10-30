@@ -172,26 +172,6 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <typeparam name="T">The underlying primal type</typeparam>
         [MethodImpl(Inline)]   
-        public static BitString ToBitString<T>(this Vec128<T> src)
-            where T : unmanaged        
-                => BitString.FromScalars(src.ToSpan());
-        
-        /// <summary>
-        /// Converts an 256-bit intrinsic vector representation to a bistring
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <typeparam name="T">The underlying primal type</typeparam>
-        [MethodImpl(Inline)]   
-        public static BitString ToBitString<T>(this Vec256<T> src)
-            where T : unmanaged        
-                => BitString.FromScalars(src.ToSpan());        
-
-        /// <summary>
-        /// Converts an 128-bit intrinsic vector representation to a bistring
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <typeparam name="T">The underlying primal type</typeparam>
-        [MethodImpl(Inline)]   
         public static BitString ToBitString<T>(this Vector128<T> src)
             where T : unmanaged        
                 => BitString.FromScalars(src.ToSpan());

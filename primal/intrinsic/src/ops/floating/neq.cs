@@ -24,8 +24,8 @@ namespace Z0
         /// <param name="lhs">The left vector</param>
         /// <param name="rhs">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vec128<float> cmpneq(in Vec128<float> lhs, in Vec128<float> rhs)
-            => CompareNotEqual(lhs.xmm, rhs.xmm);
+        public static Vec128<float> vneq(in Vec128<float> lhs, in Vec128<float> rhs)
+            => CompareNotEqual(lhs, rhs);
         
         /// <summary>
         /// __m128d _mm_cmpneq_pd (__m128d a, __m128d b) CMPPD xmm, xmm/m128, imm8(4)
@@ -33,8 +33,8 @@ namespace Z0
         /// <param name="lhs">The left vector</param>
         /// <param name="rhs">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vec128<double> cmpneq(in Vec128<double> lhs, in Vec128<double> rhs)
-            => CompareNotEqual(lhs.xmm, rhs.xmm);
+        public static Vec128<double> vneq(in Vec128<double> lhs, in Vec128<double> rhs)
+            => CompareNotEqual(lhs, rhs);
 
         /// <summary>
         /// __m256 _mm256_cmp_ps (__m256 a, __m256 b, const int imm8) VCMPPS ymm, ymm, ymm/m256, imm8
@@ -42,8 +42,8 @@ namespace Z0
         /// <param name="lhs">The left vector</param>
         /// <param name="rhs">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<float> cmpneq(in Vec256<float> lhs, in Vec256<float> rhs)
-            => Compare(lhs.ymm, rhs.ymm, FloatComparisonMode.OrderedNotEqualNonSignaling);
+        public static Vec256<float> vneq(in Vec256<float> lhs, in Vec256<float> rhs)
+            => Compare(lhs, rhs, FloatComparisonMode.OrderedNotEqualNonSignaling);
 
         /// <summary>
         /// __m256d _mm256_cmp_pd (__m256d a, __m256d b, const int imm8) VCMPPD ymm, ymm, ymm/m256, imm8
@@ -51,8 +51,8 @@ namespace Z0
         /// <param name="lhs">The left vector</param>
         /// <param name="rhs">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<double> cmpneq(in Vec256<double> lhs, in Vec256<double> rhs)
-            => Compare(lhs.ymm, rhs.ymm, FloatComparisonMode.OrderedNotEqualNonSignaling);
+        public static Vec256<double> vneq(in Vec256<double> lhs, in Vec256<double> rhs)
+            => Compare(lhs, rhs, FloatComparisonMode.OrderedNotEqualNonSignaling);
     }
 
 }

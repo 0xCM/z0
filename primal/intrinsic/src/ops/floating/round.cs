@@ -27,7 +27,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
         public static Vec128<float> vround(in Vec128<float> x)
-            => RoundToNearestInteger(x.xmm);
+            => RoundToNearestInteger(x);
 
         /// <summary>
         /// _mm_round_pd:
@@ -36,7 +36,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
         public static Vec128<double> vround(in Vec128<double> x)
-            => RoundToNearestInteger(x.xmm);
+            => RoundToNearestInteger(x);
 
         /// <summary>
         /// _mm_round_ss:
@@ -45,7 +45,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
         public static Vec128<float> vroundz(in Vec128<float> x)
-            => RoundToZero(x.xmm);
+            => RoundToZero(x);
 
         /// <summary>
         /// _mm_round_sd:
@@ -54,7 +54,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
         public static Vec128<double> vroundz(in Vec128<double> x)
-            => RoundToZero(x.xmm);
+            => RoundToZero(x);
 
         /// <summary>
         /// _mm256_round_ps:
@@ -63,7 +63,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
         public static Vec256<float> vround(in Vec256<float> x)
-            => RoundToNearestInteger(x.ymm);
+            => RoundToNearestInteger(x);
 
         /// <summary>
         /// __m256d _mm256_round_pd (__m256d a, _MM_FROUND_TO_NEAREST_INT | _MM_FROUND_NO_EXC) VROUNDPD ymm, ymm/m256, imm8(8)
@@ -72,7 +72,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
         public static Vec256<double> vround(in Vec256<double> x)
-            => RoundToNearestInteger(x.ymm);
+            => RoundToNearestInteger(x);
 
         /// <summary>
         /// __m256 _mm256_round_ps (__m256 a, _MM_FROUND_TO_ZERO | _MM_FROUND_NO_EXC)VROUNDPS ymm, ymm/m256, imm8(11)
@@ -81,7 +81,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
         public static Vec256<float> vroundz(in Vec256<float> x)
-            => RoundToZero(x.ymm);
+            => RoundToZero(x);
 
         /// <summary>
         /// __m256d _mm256_round_pd (__m256d a, _MM_FROUND_TO_ZERO | _MM_FROUND_NO_EXC) VROUNDPD ymm, ymm/m256, imm8(11)
@@ -90,6 +90,6 @@ namespace Z0
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
         public static Vec256<double> vroundz(in Vec256<double> x)
-            => RoundToZero(x.ymm);
+            => RoundToZero(x);
     }
 }

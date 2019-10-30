@@ -19,7 +19,7 @@ namespace Z0
             where M : ITypeNat, new()
             where N : ITypeNat, new()
             where T : unmanaged    
-                => Matrix.Load<M,N,T>(src.Unblocked.ToArray());
+                => Matrix.load<M,N,T>(src.Unblocked.ToArray());
 
         public static string Format<M,N,T>(this BlockMatrix<M,N,T> src, int? cellwidth = null, char? cellsep = null, Func<T,string> render = null)
             where M : ITypeNat, new()

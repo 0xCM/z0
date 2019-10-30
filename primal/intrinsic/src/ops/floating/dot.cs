@@ -20,8 +20,8 @@ namespace Z0
         /// <param name="x"></param>
         /// <param name="y"></param>
         [MethodImpl(Inline)]
-        public static Vec128<float> dot(in Vec128<float> x, in Vec128<float> y, byte? control = null)
-            => DotProduct(x.xmm, y.xmm, control ?? 0xFF);
+        public static Vec128<float> vdot(in Vec128<float> x, in Vec128<float> y, byte? control = null)
+            => DotProduct(x, y, control ?? 0xFF);
         
         /// <summary>
         /// __m128d _mm_dp_pd (__m128d a, __m128d b, const int imm8) DPPD xmm, xmm/m128, imm8
@@ -29,8 +29,8 @@ namespace Z0
         /// <param name="x"></param>
         /// <param name="y"></param>
         [MethodImpl(Inline)]
-        public static Vec128<double> dot(in Vec128<double> x, in Vec128<double> y, byte? control = null)
-            => DotProduct(x.xmm, y.xmm, control ?? 0xFF);
+        public static Vec128<double> vdot(in Vec128<double> x, in Vec128<double> y, byte? control = null)
+            => DotProduct(x, y, control ?? 0xFF);
 
         /// <summary>
         /// __m256 _mm256_dp_ps (__m256 a, __m256 b, const int imm8) VDPPS ymm, ymm, ymm/m256,
@@ -38,8 +38,8 @@ namespace Z0
         /// <param name="x"></param>
         /// <param name="y"></param>
         [MethodImpl(Inline)]
-        public static Vec256<float> dot(in Vec256<float> x, in Vec256<float> y, byte? control = null)
-            => DotProduct(x.ymm, y.ymm, control ?? 0xFF);
+        public static Vec256<float> vdot(in Vec256<float> x, in Vec256<float> y, byte? control = null)
+            => DotProduct(x, y, control ?? 0xFF);
     }
 
 }

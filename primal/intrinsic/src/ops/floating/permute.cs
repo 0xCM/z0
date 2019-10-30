@@ -22,7 +22,7 @@ namespace Z0
         /// <param name="imm8"></param>
         [MethodImpl(Inline)]
         public static Vec128<float> vpermute(in Vec128<float> x, byte imm8)
-            => Permute(x.xmm, imm8);
+            => Permute(x, imm8);
 
         /// <summary>
         /// __m128d _mm_permute_pd (__m128d a, int imm8) VPERMILPD xmm, xmm, imm8
@@ -31,7 +31,7 @@ namespace Z0
         /// <param name="imm8"></param>
         [MethodImpl(Inline)]
         public static Vec128<double> vpermute(in Vec128<double> x, byte imm8)
-            => Permute(x.xmm, imm8);
+            => Permute(x, imm8);
 
         /// <summary>
         /// __m256 _mm256_permute_ps (__m256 a, int imm8) VPERMILPS ymm, ymm, imm8
@@ -40,7 +40,7 @@ namespace Z0
         /// <param name="imm8"></param>
         [MethodImpl(Inline)]
         public static Vec256<float> vpermute(in Vec256<float> x, byte imm8)
-            => Permute(x.ymm, imm8);
+            => Permute(x, imm8);
 
         /// <summary>
         /// __m256d _mm256_permute_pd (__m256d a, int imm8) VPERMILPD ymm, ymm, imm8
@@ -49,7 +49,7 @@ namespace Z0
         /// <param name="imm8"></param>
         [MethodImpl(Inline)]
         public static Vec256<double> vpermute(in Vec256<double> x, byte imm8)
-            => Permute(x.ymm, imm8);
+            => Permute(x, imm8);
     
 
 

@@ -27,18 +27,18 @@ namespace Z0
                 => Vec128<T>.Length;
 
         [MethodImpl(Inline)]
-        public static ref T StoreTo<T>(this Vector128<T> src, ref T dst)
-            where T : unmanaged            
-        {
-            vstore(src, ref dst);
-            return ref dst;
-        }
-
-        [MethodImpl(Inline)]
         public static Span<T> StoreTo<T>(this Vector128<T> src, Span<T> dst)
             where T : unmanaged            
         {
-            src.StoreTo(ref head(dst));
+            vstore(src, ref head(dst));
+            return dst;
+        }
+
+        [MethodImpl(Inline)]
+        public static Span<T> StoreTo<T>(this Vector256<T> src, Span<T> dst)
+            where T : unmanaged            
+        {
+            vstore(src, ref head(dst));
             return dst;
         }
 
@@ -51,23 +51,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static int Length<T>(this Vector256<T> src)
             where T : unmanaged            
-                => Vec256<T>.Length;    
-
-        [MethodImpl(Inline)]
-        public static ref T StoreTo<T>(this Vector256<T> src, ref T dst)
-            where T : unmanaged            
-        {
-            vstore(src, ref dst);
-            return ref dst;
-        }
-
-        [MethodImpl(Inline)]
-        public static Span<T> StoreTo<T>(this Vector256<T> src, Span<T> dst)
-            where T : unmanaged            
-        {
-            src.StoreTo(ref head(dst));
-            return dst;
-        }
+                => Vector256<T>.Count;    
 
         /// <summary>
         /// Loads a 256-bit cpu vector from a compatibly-blocked span
@@ -76,9 +60,9 @@ namespace Z0
         /// <param name="block">The block index</param>
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector256<T> ToCpuVector<T>(this Span256<T> src, int block = 0)
+        public static Vector256<T> TakeVector<T>(this Span256<T> src, int block = 0)
             where T : unmanaged
-                => ginx.vloadu(n256, in src.Block(block));
+                => ginx.vload(n256, in src.Block(block));
 
         /// <summary>
         /// Loads a 128-bit cpu vector from a compatibly-blocked span
@@ -87,9 +71,9 @@ namespace Z0
         /// <param name="block">The block index</param>
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector128<T> ToCpuVector<T>(this Span128<T> src, int block = 0)
+        public static Vector128<T> TakeVector<T>(this Span128<T> src, int block = 0)
             where T : unmanaged
-                => ginx.vloadu(n128, in src.Block(block));
+                => ginx.vload(n128, in src.Block(block));
 
         /// <summary>
         /// Combines two 128-bit source vectors into a 128-bit target vector via a mapping function
@@ -110,7 +94,7 @@ namespace Z0
             Span<T> dst = new T[dstLen];
             for(var i=0; i< xLen; i++)
                 dst[i] = f(lhsData[i],rhsData[i]);
-            return ginx.vloadu(n128, in head(dst));        
+            return ginx.vload(n128, in head(dst));        
         } 
 
         /// <summary>
@@ -130,7 +114,7 @@ namespace Z0
             Span<T> dst = new T[dstLen];
             for(var i=0; i< xLen; i++)
                 dst[i] = f(data[i]);
-            return ginx.vloadu(n128, in head(dst));        
+            return ginx.vload(n128, in head(dst));        
         } 
 
         /// <summary>
@@ -158,7 +142,7 @@ namespace Z0
                 dst[j++] = f(rhsData[i]);
             }
             
-            return ginx.vloadu(n256, in head(dst));        
+            return ginx.vload(n256, in head(dst));        
         } 
 
         /// <summary>
@@ -178,7 +162,7 @@ namespace Z0
             Span<T> dst = new T[dstLen];
             for(var i=0; i< xLen; i++)
                 dst[i] = f(data[i]);            
-            return ginx.vloadu(n256, in head(dst));        
+            return ginx.vload(n256, in head(dst));        
         } 
 
         /// <summary>
@@ -200,7 +184,7 @@ namespace Z0
             Span<T> dst = new T[dstLen];
             for(var i=0; i< xLen; i++)
                 dst[i] = f(lhsData[i],rhsData[i]);
-            return ginx.vloadu(n256, in head(dst));        
+            return ginx.vload(n256, in head(dst));        
         } 
     }
 }

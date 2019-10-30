@@ -19,7 +19,6 @@ namespace Z0
 
     partial class dinx
     {                
-
         /// <summary>
         /// __m128i _mm_cvtepi8_epi16 (__m128i a) PMOVSXBW xmm, xmm/m64
         /// </summary>
@@ -43,7 +42,6 @@ namespace Z0
             dst = ConvertToVector128Int32(src);
             return ref dst;
         }
-
 
         /// <summary>
         /// __m128i _mm_cvtepi8_epi64 (__m128i a) PMOVSXBQ xmm, xmm/m16
@@ -83,7 +81,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ref Vector128<ushort> vconvert(Vector128<byte> src, out Vector128<ushort> dst)
         {
-            dst = ConvertToVector128Int16(src).AsUInt16();
+            dst = v16u(ConvertToVector128Int16(src));
             return ref dst;
         }
 
@@ -102,7 +100,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ref Vector128<uint> vconvert(Vector128<byte> src, out Vector128<uint> dst)
         {
-            dst = ConvertToVector128Int32(src).AsUInt32();
+            dst = v32u(ConvertToVector128Int32(src));
             return ref dst;
         }
 
@@ -121,7 +119,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ref Vector128<ulong> vconvert(Vector128<byte> src, out Vector128<ulong> dst)
         {
-            dst = ConvertToVector128Int64(src).AsUInt64();
+            dst = v64u(ConvertToVector128Int64(src));
             return ref dst;
         }
 
@@ -165,7 +163,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ref Vector128<uint> vconvert(Vector128<ushort> src, out Vector128<uint> dst)
         {
-            dst = ConvertToVector128Int32(src).AsUInt32();
+            dst = v32u(ConvertToVector128Int32(src));
             return ref dst;
         }
 
@@ -185,7 +183,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ref Vector128<ulong> vconvert(Vector128<ushort> src, out Vector128<ulong> dst)
         {
-           dst = ConvertToVector128Int64(src).AsUInt64();
+           dst = v64u(ConvertToVector128Int64(src));
            return ref dst;
         }
 
@@ -231,7 +229,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ref Vector128<ulong> vconvert(Vector128<uint> src, out Vector128<ulong> dst)
         {
-           dst = ConvertToVector128Int64(src).AsUInt64();
+           dst = v64u(ConvertToVector128Int64(src));
            return ref dst;
         }
 
@@ -293,7 +291,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ref Vector256<ushort> vconvert(Vector128<byte> src, out Vector256<ushort> dst)
         {
-            dst = ConvertToVector256Int16(src).AsUInt16();
+            dst = v16u(ConvertToVector256Int16(src));
             return ref dst;
         }
 
@@ -319,7 +317,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ref Vector256<uint> vconvert(Vector128<byte> src, out Vector256<uint> dst)
         {
-            dst = ConvertToVector256Int32(src).AsUInt32();
+            dst = v32u(ConvertToVector256Int32(src));
             return ref dst;
         }
 
@@ -343,7 +341,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ref Vector256<ulong> vconvert(Vector128<byte> src, out Vector256<ulong> dst)
         {
-            dst = ConvertToVector256Int64(src).AsUInt64();
+            dst = v64u(ConvertToVector256Int64(src));
             return ref dst;
         }
 
@@ -404,7 +402,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ref Vector256<uint> vconvert(Vector128<ushort> src, out Vector256<uint> dst)
         {
-            dst = ConvertToVector256Int32(src).AsUInt32();
+            dst = v32u(ConvertToVector256Int32(src));
             return ref dst;
         }
 
@@ -423,7 +421,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ref Vector256<ulong> vconvert(Vector128<ushort> src, out Vector256<ulong> dst)
         {
-            dst = ConvertToVector256Int64(src).AsUInt64();
+            dst = v64u(ConvertToVector256Int64(src));
             return ref dst;
         }
 
@@ -447,7 +445,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ref Vector256<ulong> vconvert(Vector128<uint> src, out Vector256<ulong> dst)
         {
-            dst = ConvertToVector256Int64(src).AsUInt64();
+            dst = v64u(ConvertToVector256Int64(src));
             return ref dst;
         }
     }

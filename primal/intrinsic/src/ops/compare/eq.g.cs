@@ -14,7 +14,6 @@ namespace Z0
     
     partial class ginx
     {
-
         /// <summary>
         /// Compares corresponding components each vector for equality. For equal
         /// components, the corresponding component the result vector has all bits 
@@ -30,14 +29,14 @@ namespace Z0
             || typeof(T) == typeof(ushort) 
             || typeof(T) == typeof(uint) 
             || typeof(T) == typeof(ulong))
-                return vcmpeq_u(x,y);
+                return veq_u(x,y);
             else if(typeof(T) == typeof(sbyte) 
             || typeof(T) == typeof(short) 
             || typeof(T) == typeof(int) 
             || typeof(T) == typeof(long))
-                return vcmpeq_i(x,y);
+                return veq_i(x,y);
             else 
-                return vcmpeq_f<T>(x,y);
+                return veq_f<T>(x,y);
         }
 
         /// <summary>
@@ -55,99 +54,94 @@ namespace Z0
             || typeof(T) == typeof(ushort) 
             || typeof(T) == typeof(uint) 
             || typeof(T) == typeof(ulong))
-                return vcmpeq_u(x,y);
+                return veq_u(x,y);
             else if(typeof(T) == typeof(sbyte) 
             || typeof(T) == typeof(short) 
             || typeof(T) == typeof(int) 
             || typeof(T) == typeof(long))
-                return vcmpeq_i(x,y);
+                return veq_i(x,y);
             else 
-                return vcmpeq_f<T>(x,y);
+                return veq_f<T>(x,y);
         }
 
         [MethodImpl(Inline)]
-        static Vector128<T> vcmpeq_i<T>(Vector128<T> x, Vector128<T> y)
+        static Vector128<T> veq_i<T>(Vector128<T> x, Vector128<T> y)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return generic<T>(dinx.vcmpeq(int8(x), int8(y)));
+                return generic<T>(dinx.veq(int8(x), int8(y)));
             else if(typeof(T) == typeof(short))
-                return generic<T>(dinx.vcmpeq(int16(x), int16(y)));
+                return generic<T>(dinx.veq(int16(x), int16(y)));
             else if(typeof(T) == typeof(int))
-                return generic<T>(dinx.vcmpeq(int32(x), int32(y)));
+                return generic<T>(dinx.veq(int32(x), int32(y)));
             else 
-                return generic<T>(dinx.vcmpeq(int64(x), int64(y)));
+                return generic<T>(dinx.veq(int64(x), int64(y)));
         }
 
         [MethodImpl(Inline)]
-        static Vector128<T> vcmpeq_u<T>(Vector128<T> x, Vector128<T> y)
+        static Vector128<T> veq_u<T>(Vector128<T> x, Vector128<T> y)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(dinx.vcmpeq(uint8(x), uint8(y)));
+                return generic<T>(dinx.veq(uint8(x), uint8(y)));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(dinx.vcmpeq(uint16(x), uint16(y)));
+                return generic<T>(dinx.veq(uint16(x), uint16(y)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(dinx.vcmpeq(uint32(x), uint32(y)));
+                return generic<T>(dinx.veq(uint32(x), uint32(y)));
             else 
-                return generic<T>(dinx.vcmpeq(uint64(x), uint64(y)));
+                return generic<T>(dinx.veq(uint64(x), uint64(y)));
         }
 
-
         [MethodImpl(Inline)]
-        static Vector128<T> vcmpeq_f<T>(Vector128<T> x, Vector128<T> y)
+        static Vector128<T> veq_f<T>(Vector128<T> x, Vector128<T> y)
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return generic<T>(dfp.cmpeq(float32(x), float32(y)));
+                return generic<T>(dfp.veq(float32(x), float32(y)));
             else if(typeof(T) == typeof(double))
-                return generic<T>(dfp.cmpeq(float64(x), float64(y)));
+                return generic<T>(dfp.veq(float64(x), float64(y)));
             else 
                 throw unsupported<T>();
         }
 
-
         [MethodImpl(Inline)]
-        static Vector256<T> vcmpeq_i<T>(Vector256<T> x, Vector256<T> y)
+        static Vector256<T> veq_i<T>(Vector256<T> x, Vector256<T> y)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return generic<T>(dinx.vcmpeq(int8(x), int8(y)));
+                return generic<T>(dinx.veq(int8(x), int8(y)));
             else if(typeof(T) == typeof(short))
-                return generic<T>(dinx.vcmpeq(int16(x), int16(y)));
+                return generic<T>(dinx.veq(int16(x), int16(y)));
             else if(typeof(T) == typeof(int))
-                return generic<T>(dinx.vcmpeq(int32(x), int32(y)));
+                return generic<T>(dinx.veq(int32(x), int32(y)));
             else 
-                return generic<T>(dinx.vcmpeq(int64(x), int64(y)));
+                return generic<T>(dinx.veq(int64(x), int64(y)));
         }
 
         [MethodImpl(Inline)]
-        static Vector256<T> vcmpeq_u<T>(Vector256<T> x, Vector256<T> y)
+        static Vector256<T> veq_u<T>(Vector256<T> x, Vector256<T> y)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(dinx.vcmpeq(uint8(x), uint8(y)));
+                return generic<T>(dinx.veq(uint8(x), uint8(y)));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(dinx.vcmpeq(uint16(x), uint16(y)));
+                return generic<T>(dinx.veq(uint16(x), uint16(y)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(dinx.vcmpeq(uint32(x), uint32(y)));
+                return generic<T>(dinx.veq(uint32(x), uint32(y)));
             else 
-                return generic<T>(dinx.vcmpeq(uint64(x), uint64(y)));
+                return generic<T>(dinx.veq(uint64(x), uint64(y)));
         }
 
-
         [MethodImpl(Inline)]
-        static Vector256<T> vcmpeq_f<T>(Vector256<T> x, Vector256<T> y)
+        static Vector256<T> veq_f<T>(Vector256<T> x, Vector256<T> y)
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return generic<T>(dfp.cmpeq(float32(x), float32(y)));
+                return generic<T>(dfp.veq(float32(x), float32(y)));
             else if(typeof(T) == typeof(double))
-                return generic<T>(dfp.cmpeq(float64(x), float64(y)));
+                return generic<T>(dfp.veq(float64(x), float64(y)));
             else 
                 throw unsupported<T>();
         }
-
-
     }
 }

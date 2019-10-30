@@ -19,13 +19,13 @@ namespace Z0
     public struct Vec1024<T>
         where T : unmanaged
     {            
-        public Vec256<T> v00;
+        public Vector256<T> v00;
 
-        public Vec256<T> v01;
+        public Vector256<T> v01;
 
-        public Vec256<T> v10;
+        public Vector256<T> v10;
 
-        public Vec256<T> v11;
+        public Vector256<T> v11;
 
         public static readonly int Length = 4*Vec256<T>.Length;
 
@@ -38,7 +38,7 @@ namespace Z0
         public static readonly Vec1024<T> Zero = default;        
 
         [MethodImpl(Inline)]
-        public Vec1024(Vec256<T> v0, Vec256<T> v1, Vec256<T> v2, Vec256<T> v3)     
+        public Vec1024(Vector256<T> v0, Vector256<T> v1, Vector256<T> v2, Vector256<T> v3)     
         {
             this.v00 = v0;
             this.v01 = v1;

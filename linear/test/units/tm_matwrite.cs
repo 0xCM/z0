@@ -45,7 +45,7 @@ namespace Z0.Test
                 var A = Random.BlockMatrix<M,N,T>();
                 if(isFp)
                     A.Apply(round);
-                Matrix.WriteTo(A,dstpath);
+                Matrix.write(A,dstpath);
 
                 var srcPath = dstpath;
                 var B = BlockMatrix.ReadFrom<M,N,T>(srcPath);

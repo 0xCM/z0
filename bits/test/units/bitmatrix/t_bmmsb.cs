@@ -13,11 +13,6 @@ namespace Z0
     
     public class t_bmmsb : BitMatrixTest<t_bmor>
     {
-
-
-
-
-
         public static Span<int> steps(int first, int last)
         {
             if(first == last)
@@ -36,13 +31,9 @@ namespace Z0
             {
                 var current = first;
                 while(current >= last)
-                    dst[pos++] = current--;                
-
+                    dst[pos++] = current--;
             }   
             return dst;         
         }
-        
-
     }
-
 }

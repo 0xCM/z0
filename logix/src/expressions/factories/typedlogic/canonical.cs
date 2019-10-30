@@ -29,7 +29,7 @@ namespace Z0.Logix
         [MethodImpl(Inline)]
         public static TypedLiteralExpr<Vector128<T>> @true<T>(N128 n)
             where T : unmanaged
-                => literal(ginx.vpOnes<T>(n));
+                => literal(ginx.vones<T>(n));
 
 
         /// <summary>
@@ -39,7 +39,7 @@ namespace Z0.Logix
         [MethodImpl(Inline)]
         public static TypedLiteralExpr<Vector256<T>> @true<T>(N256 n)
             where T : unmanaged
-                => literal(ginx.vpOnes<T>(n));
+                => literal(ginx.vones<T>(n));
 
         /// <summary>
         /// Defines a typed literal where all bits are off

@@ -22,8 +22,8 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vec128<float> vhadd(in Vec128<float> x, in Vec128<float> y)
-            => HorizontalAdd(x.xmm, y.xmm);
+        public static Vector128<float> vhadd(Vector128<float> x, Vector128<float> y)
+            => HorizontalAdd(x, y);
 
         /// <summary>
         ///  __m128d _mm_hadd_pd (__m128d a, __m128d b) HADDPD xmm, xmm/m128
@@ -31,8 +31,8 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vec128<double> vhadd(in Vec128<double> x, in Vec128<double> y)
-            => HorizontalAdd(x.xmm, y.xmm);
+        public static Vector128<double> vhadd(Vector128<double> x, Vector128<double> y)
+            => HorizontalAdd(x, y);
 
         /// <summary>
         /// __m256 _mm256_hadd_ps (__m256 a, __m256 b) VHADDPS ymm, ymm, ymm/m256
@@ -40,8 +40,8 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<float> vhadd(in Vec256<float> x, in Vec256<float> y)
-            => HorizontalAdd(x.ymm, y.ymm);
+        public static Vector256<float> vhadd(Vector256<float> x, Vector256<float> y)
+            => HorizontalAdd(x, y);
 
         /// <summary>
         /// __m256d _mm256_hadd_pd (__m256d a, __m256d b) VHADDPD ymm, ymm, ymm/m256
@@ -49,7 +49,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<double> vhadd(in Vec256<double> x, in Vec256<double> y)
-            => HorizontalAdd(x.ymm, y.ymm); 
+        public static Vector256<double> vhadd(Vector256<double> x, Vector256<double> y)
+            => HorizontalAdd(x, y); 
     }
 }

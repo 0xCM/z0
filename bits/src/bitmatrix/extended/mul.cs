@@ -15,7 +15,6 @@ namespace Z0
 
     partial class BitMatrix
     {
-
         public static BitVector8 mul(BitMatrix8 lhs, BitVector8 rhs)
         {
             var dst = BitVector8.Alloc();

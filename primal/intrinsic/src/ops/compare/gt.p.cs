@@ -14,7 +14,6 @@ namespace Z0
 
     partial class ginx
     {
-
         [MethodImpl(Inline)]
         public static unsafe Vector128<T> vgt<T>(N128 n, T* pX, T* pY)
             where T : unmanaged

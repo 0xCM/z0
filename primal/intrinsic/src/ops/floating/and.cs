@@ -24,7 +24,7 @@ namespace Z0
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
         public static Vec128<float> vand(in Vec128<float> x, in Vec128<float> y)
-            => And(x.xmm, y.xmm);
+            => And(x, y);
         
         /// <summary>
         /// __m128d _mm_and_pd (__m128d a, __m128d b)ANDPD xmm, xmm/m128
@@ -34,7 +34,7 @@ namespace Z0
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
         public static Vec128<double> vand(in Vec128<double> x, in Vec128<double> y)
-            => And(x.xmm, y.xmm);
+            => And(x, y);
 
         /// <summary>
         /// __m128 _mm_and_ps (__m128 a, __m128 b)ANDPS xmm, xmm/m128
@@ -44,7 +44,7 @@ namespace Z0
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
         public static Vec256<float> vand(in Vec256<float> x, in Vec256<float> y)
-            => And(x.ymm, y.ymm);
+            => And(x, y);
         
         /// <summary>
         /// __m128d _mm_and_pd (__m128d a, __m128d b) ANDPD xmm, xmm/m128
@@ -54,7 +54,7 @@ namespace Z0
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
         public static Vec256<double> vand(in Vec256<double> x, in Vec256<double> y)
-            => And(x.ymm, y.ymm);
+            => And(x, y);
     }
 
 }

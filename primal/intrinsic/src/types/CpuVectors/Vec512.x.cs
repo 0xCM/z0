@@ -27,8 +27,6 @@ namespace Z0
             return dst;
         }                       
 
-
-
         /// <summary>
         /// Copies the source data to a specified span
         /// </summary>

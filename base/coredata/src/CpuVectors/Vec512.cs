@@ -25,11 +25,11 @@ namespace Z0
     public struct Vec512<T>
         where T : unmanaged
     {                    
-        public Vec256<T> lo;
+        public Vector256<T> lo;
 
-        public Vec256<T> hi;
+        public Vector256<T> hi;
 
-        public static readonly int Length = 2*Vec256<T>.Length;
+        public static readonly int Length = 2*Vector256<T>.Count;
 
         public static readonly int CellSize = Unsafe.SizeOf<T>();
 
@@ -38,15 +38,8 @@ namespace Z0
         /// </summary>
         public const int ByteCount = 64;
 
-        public static readonly Vec512<T> Zero = default;        
+        public static Vec512<T> Zero => default;
 
-        [MethodImpl(Inline)]
-        public Vec512(in Vec256<T> lo, in Vec256<T> hi) 
-            : this()    
-        {
-            this.lo = lo;
-            this.hi = hi;
-        }
 
         [MethodImpl(Inline)]
         public Vec512(Vector256<T> lo, Vector256<T> hi)     

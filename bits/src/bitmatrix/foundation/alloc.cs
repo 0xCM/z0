@@ -24,8 +24,6 @@ namespace Z0
             where T : unmanaged
         {
             Span<T> content = new T[BitMatrix<T>.N];
-            // if(gmath.nonzero(fill))
-            //     content.Fill(fill);            
             return new BitMatrix<T>(content);
         }
 
@@ -64,7 +62,5 @@ namespace Z0
         [MethodImpl(NotInline)]
         public static BitMatrix64 alloc(N64 n, bit fill = default)
             => BitMatrix64.Alloc(fill);
-
-
     }
 }

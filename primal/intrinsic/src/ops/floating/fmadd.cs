@@ -24,7 +24,7 @@ namespace Z0
         /// <param name="z">The third operand</param>
         [MethodImpl(Inline)]
         public static Vec128<float> fmadd(in Vec128<float> x, in Vec128<float> y, in Vec128<float> z)
-            => MultiplyAdd(x.xmm, y.xmm, z.xmm);
+            => MultiplyAdd(x, y, z);
                     
         /// <summary>
         /// dst = x*y + z
@@ -35,7 +35,7 @@ namespace Z0
         /// <param name="z">The third operand</param>
         [MethodImpl(Inline)]
         public static Vec128<double> fmadd(in Vec128<double> x, in Vec128<double> y, in Vec128<double> z)
-            => MultiplyAdd(x.xmm, y.xmm, z.xmm);
+            => MultiplyAdd(x, y, z);
 
         /// <summary>
         /// __m128 _mm_fmadd_ss (__m128 a, __m128 b, __m128 c) VFMADDSS xmm, xmm, xmm/m32

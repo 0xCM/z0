@@ -22,8 +22,8 @@ namespace Z0
             {
                 var v1s = Random.BlockedSpan<ulong>(n128, UInt32.MinValue, UInt32.MaxValue);
                 var v2s = Random.BlockedSpan<ulong>(n128, UInt32.MinValue, UInt32.MaxValue);
-                var v1 = v1s.ToCpuVector();
-                var v2 = v2s.ToCpuVector();
+                var v1 = v1s.TakeVector();
+                var v2 = v2s.TakeVector();
 
                 UInt128 x00 = dinx.clmul(v1, v2, ClMulMask.X00);
                 UInt128 x01 = dinx.clmul(v1, v2, ClMulMask.X01);

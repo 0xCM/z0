@@ -76,7 +76,7 @@ namespace Z0
             var src = Random.BlockedSpan<float>(n256,samples);
             for(var i=0; i<samples; i++)
             {
-                var srcVector = src.ToCpuVector(i);
+                var srcVector = src.TakeVector(i);
                 var srcSpan = srcVector.ToSpan();
 
                 var mmExpect = BitVector32.Alloc();
@@ -96,7 +96,7 @@ namespace Z0
             var src = Random.BlockedSpan<double>(n256, samples);
             for(var i=0; i<samples; i++)
             {
-                var srcVector = src.ToCpuVector(i);
+                var srcVector = src.TakeVector(i);
                 var srcSpan = srcVector.ToSpan();
 
                 var mmExpect = BitVector32.Alloc();

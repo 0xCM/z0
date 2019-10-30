@@ -100,7 +100,7 @@ namespace Z0
         {
             var rc = C.RowCount;
             var cc = C.ColCount;
-            var W = Matrix.Alloc<N,uint>();
+            var W = Matrix.alloc<N,uint>();
             var v = Vector.alloc<N,uint>();
 
             for (var i = 0; i < cc;  ++i) 
@@ -134,7 +134,7 @@ namespace Z0
             var rc = C.RowCount;
             var cc = C.ColCount;
             
-            var W = Matrix.Alloc<N,ulong>();
+            var W = Matrix.alloc<N,ulong>();
             var v = Vector.alloc<N,ulong>();
 
             for (var i = 0; i < cc;  ++i) 
@@ -167,7 +167,7 @@ namespace Z0
             int r = C.RowCount;
             int c = B.ColCount;
             var V = Vector.alloc<N,double>();
-            var W = Matrix.Alloc<N,double>();
+            var W = Matrix.alloc<N,double>();
             for (var i = 0; i < c;  ++i) 
             {
                 for (var j = 0; j < r;  ++j)
@@ -198,7 +198,7 @@ namespace Z0
         {
             
             var length = A.RowCount;
-            var W = Matrix.Alloc<N,uint>();
+            var W = Matrix.alloc<N,uint>();
 
             /* initialize: W = A; B = I */
             for (var i = 0; i < length; i++) 
@@ -236,7 +236,7 @@ namespace Z0
         {
             
             var length = A.RowCount;
-            var W = Matrix.Alloc<N,ulong>();
+            var W = Matrix.alloc<N,ulong>();
 
             /* initialize: W = A; B = I */
             for (var i = 0; i < length; i++) 
@@ -275,7 +275,7 @@ namespace Z0
             int i, j;
             var n = e;
             var s = A.RowCount;
-            var W = Matrix.Alloc<N,double>();
+            var W = Matrix.alloc<N,double>();
 
             /* initialize: W = A; B = I */
             for (i = 0; i < s; i++) 

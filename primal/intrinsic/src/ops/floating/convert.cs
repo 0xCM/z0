@@ -24,7 +24,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ref Vec128<int> convert(in Vec128<float> src, out Vec128<int> dst)
         {
-            dst = ConvertToVector128Int32WithTruncation(src.xmm);
+            dst = ConvertToVector128Int32WithTruncation(src);
             return ref dst;
         }
 
@@ -36,7 +36,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ref Vec128<float> convert(in Vec128<int> src, out Vec128<float> dst)
         {
-            dst = ConvertToVector128Single(src.xmm);
+            dst = ConvertToVector128Single(src);
             return ref dst;
         }
 
@@ -48,7 +48,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ref Vec128<float> convert(in Vec128<double> src, out Vec128<float> dst)
         {
-            dst = ConvertToVector128Single(src.xmm);
+            dst = ConvertToVector128Single(src);
             return ref dst;
         }
 
@@ -61,7 +61,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ref Vec128<int> convert(in Vec128<double> src, out Vec128<int> dst)
         {
-            dst = ConvertToVector128Int32WithTruncation(src.xmm);
+            dst = ConvertToVector128Int32WithTruncation(src);
             return ref dst;
         }
 

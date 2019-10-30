@@ -72,12 +72,12 @@ namespace Z0
             {
                 var srcX = Random.BlockedSpan<T>(N);
                 var srcY = Random.BlockedSpan<T>(N);
-                var vX = ginx.vloadu(N, in head(srcX));
-                var vY = ginx.vloadu(N, in head(srcY));
+                var vX = ginx.vload(N, in head(srcX));
+                var vY = ginx.vload(N, in head(srcY));
                 var dstExpect = BlockedSpan.AllocBlock<T>(N);
                 for(var i=0; i< dstExpect.Length; i++)
                     dstExpect[i] = gmath.and(srcX[i], srcY[i]);
-                var expect = ginx.vloadu(N, in head(dstExpect));
+                var expect = ginx.vload(N, in head(dstExpect));
                 var actual = ginx.vand(vX,vY);
                 Claim.eq(expect,actual);
                 
@@ -92,12 +92,12 @@ namespace Z0
             {
                 var srcX = Random.BlockedSpan<T>(N);
                 var srcY = Random.BlockedSpan<T>(N);
-                var vX = ginx.vloadu(N, in head(srcX));
-                var vY = ginx.vloadu(N, in head(srcY));
+                var vX = ginx.vload(N, in head(srcX));
+                var vY = ginx.vload(N, in head(srcY));
                 var dstExpect = BlockedSpan.AllocBlock<T>(N);
                 for(var i=0; i< dstExpect.Length; i++)
                     dstExpect[i] = gmath.and(srcX[i], srcY[i]);
-                var expect = ginx.vloadu(N, in head(dstExpect));
+                var expect = ginx.vload(N, in head(dstExpect));
                 var actual = ginx.vand(vX,vY);
                 Claim.eq(expect,actual);
                 

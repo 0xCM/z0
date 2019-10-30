@@ -37,13 +37,13 @@ namespace Z0
         static Vector256<byte> K0V 
         {
             [MethodImpl(Inline)]
-            get => dinx.vloadu(in head(K0Bytes), out Vector256<byte> _);
+            get => dinx.vload(in head(K0Bytes), out Vector256<byte> _);
         }
 
         static Vector256<byte> K1V 
         {
             [MethodImpl(Inline)]
-            get => dinx.vloadu(in head(K1Bytes), out Vector256<byte> _);
+            get => dinx.vload(in head(K1Bytes), out Vector256<byte> _);
         }
 
         static ReadOnlySpan<byte> K0Bytes

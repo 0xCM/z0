@@ -454,7 +454,7 @@ namespace Z0
             for(var cycle=0; cycle<cycles; cycle++)
             for(var block = 0; block<blocks; block++)
             {
-                var x = ginx.vloadu(n256, in head(src.ToSpan(blocklen)));
+                var x = ginx.vload(n256, in head(src.ToSpan(blocklen)));
                 var offset = offsets.First();
                 sw.Start();
                 dinx.vsll(x,offset);

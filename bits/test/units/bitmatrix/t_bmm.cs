@@ -112,9 +112,9 @@ namespace Z0.Test
 
         void bmm_64x64x64_()
         {
-            var Aup = Matrix.Alloc<N64,byte>();
-            var Bup = Matrix.Alloc<N64,byte>();
-            var Cup = Matrix.Alloc<N64,byte>();
+            var Aup = Matrix.alloc<N64,byte>();
+            var Bup = Matrix.alloc<N64,byte>();
+            var Cup = Matrix.alloc<N64,byte>();
             var A = Random.BitMatrix64();
             var B = Random.BitMatrix64();
             var C = A * B;

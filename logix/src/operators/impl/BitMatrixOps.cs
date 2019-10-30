@@ -245,6 +245,5 @@ namespace Z0.Logix
         public static BitMatrix<T> select<T>(BitMatrix<T> A, BitMatrix<T> B, BitMatrix<T> C, ref BitMatrix<T> Z)
             where T : unmanaged
                 => BitMatrix.select(A,B,C, ref Z);
-
     }
 }

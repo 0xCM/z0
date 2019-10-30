@@ -19,7 +19,6 @@ namespace Z0
 
     partial class dfp
     {
-
         /// <summary>
         /// __m128 _mm_shuffle_ps (__m128 a, __m128 b, unsigned int control) SHUFPS xmm, xmm/m128, imm8
         /// </summary>
@@ -27,8 +26,8 @@ namespace Z0
         /// <param name="y">The right vector</param>
         /// <param name="control"></param>
         [MethodImpl(Inline)]
-        public static Vec128<float> vshuffle(Vec128<float> x, Vec128<float> y, byte control)
-            => Shuffle(x.xmm, y.xmm, control);
+        public static Vector128<float> vshuffle(Vector128<float> x, Vector128<float> y, byte control)
+            => Shuffle(x, y, control);
 
         /// <summary>
         /// __m128d _mm_shuffle_pd (__m128d a, __m128d b, int immediate) SHUFPD xmm, xmm/m128, imm8
@@ -37,28 +36,9 @@ namespace Z0
         /// <param name="y">The right vector</param>
         /// <param name="control"></param>
         [MethodImpl(Inline)]
-        public static Vec128<double> vshuffle(Vec128<double> x, Vec128<double> y, byte control)
-            => Shuffle(x.xmm, y.xmm, control);
+        public static Vector128<double> vshuffle(Vector128<double> x, Vector128<double> y, byte control)
+            => Shuffle(x, y, control);
  
-        /// <summary>
-        /// Transposes a 4x4 matrix of floats, adapted from MSVC intrinsic headers
-        /// </summary>
-        /// <param name="row0">The first row</param>
-        /// <param name="row1">The second row</param>
-        /// <param name="row2">The third row</param>
-        /// <param name="row3">The fourth row</param>
-        [MethodImpl(Inline)]
-        public static void transpose(ref Vec128<float> row0, ref Vec128<float> row1,ref Vec128<float> row2,ref Vec128<float> row3)
-        {
-            var tmp0 = Shuffle(row0.xmm,row1.xmm, 0x44);
-            var tmp2 = Shuffle(row0.xmm, row1.xmm, 0xEE);
-            var tmp1 = Shuffle(row2, row3.xmm, 0x44);
-            var tmp3 = Shuffle(row2.xmm,row3.xmm, 0xEE);
-            row0 = Shuffle(tmp0,tmp1, 0x88);
-            row1 = Shuffle(tmp0,tmp1, 0xDD);
-            row2 = Shuffle(tmp2,tmp3, 0x88);
-            row3 = Shuffle(tmp2, tmp3, 0xDD);
-        }    
 
         /// <summary>
         /// __m128 _mm_move_ss (__m128 a, __m128 b) MOVSS xmm, xmm
@@ -66,8 +46,8 @@ namespace Z0
         /// the upper 3 elements from a to the upper elements of dst.
         /// </summary>
         [MethodImpl(Inline)]
-        public static Vec128<float> movescalar(in Vec128<float> x, in Vec128<float> y)
-            => MoveScalar(y.xmm,x.xmm);
+        public static Vec128<float> vmovescalar(Vector128<float> x, Vector128<float> y)
+            => MoveScalar(y,x);
 
         /// <summary>
         /// __m128d _mm_move_sd (__m128d a, __m128d b) MOVSD xmm, xmm
@@ -77,8 +57,8 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vec128<double> movescalar(in Vec128<double> x, in Vec128<double> y)
-            => MoveScalar(y.xmm,x.xmm);
+        public static Vec128<double> vmovescalar(Vector128<double> x, Vector128<double> y)
+            => MoveScalar(y,x);
 
         /// <summary>
         /// _mm256_insertf128_ps: Overwrites a 128-bit lane in the target with the content of the source vector
@@ -88,8 +68,8 @@ namespace Z0
         /// <param name="index">Identifies the lane the target to overwrite, either 0 or 1 respectively 
         /// identifing low or hi</param>
         [MethodImpl(Inline)]
-        public static Vec256<float> vinsert(in Vec128<float> src, in Vec256<float> dst, byte index)        
-            => InsertVector128(dst.ymm, src.xmm, index);
+        public static Vector256<float> vinsert(Vector128<float> src, in Vector256<float> dst, byte index)        
+            => InsertVector128(dst, src, index);
 
         /// <summary>
         /// _mm256_insertf128_pd: Overwrites a 128-bit lane in the target with the content of the source vector
@@ -99,8 +79,7 @@ namespace Z0
         /// <param name="index">Identifies the lane in the target to overwrite, either 0 or 1 respectively 
         /// identifing low or hi</param>
         [MethodImpl(Inline)]
-        public static Vec256<double> vinsert(in Vec128<double> src, in Vec256<double> dst, byte index)        
-            => InsertVector128(dst.ymm, src.xmm, index);
- 
+        public static Vector256<double> vinsert(Vector128<double> src, in Vector256<double> dst, byte index)        
+            => InsertVector128(dst, src, index);
     }
 }

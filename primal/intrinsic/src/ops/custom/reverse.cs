@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
         public static Vector128<byte> vreverse(Vector128<byte> src)
-            => vshuffle(src, Vec128Pattern.Decrements<byte>(15));
+            => vshuffle(src, Vec128Pattern.decrements<byte>(15));
 
         /// <summary>
         /// Reverses the componets in the source vector
@@ -26,7 +26,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
         public static Vector128<sbyte> vreverse(Vector128<sbyte> src)
-            => vshuffle(src, Vec128Pattern.Decrements<sbyte>(15));
+            => vshuffle(src, Vec128Pattern.decrements<sbyte>(15));
 
         /// <summary>
         /// Reverses the componets in the source vector
@@ -46,7 +46,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static Vector256<byte> vreverse(Vector256<byte> src)
-            => vpermvar32x8(src, Vec256Pattern.Decrements<byte>(31));
+            => vpermvar32x8(src, Vec256Pattern.decrements<byte>(31));
 
         [MethodImpl(Inline)]
         public static Vector256<int> vreverse(Vector256<int> src)
@@ -61,13 +61,13 @@ namespace Z0
             => vpermvar8x32(src,MRev256f32);    
  
         static Vector256<int> MRev256i32 
-            => cpuvec(7, 5, 6, 4, 3, 2, 1, 0);
+            => vparts(7, 5, 6, 4, 3, 2, 1, 0);
         
         static Vector256<uint> MRev256u32 
-            => cpuvec(7u, 6u, 5u, 4u, 3u, 2u, 1u, 0u);
+            => vparts(7u, 6u, 5u, 4u, 3u, 2u, 1u, 0u);
         
         static Vector256<int> MRev256f32 
-            => cpuvec(7, 6, 5, 4, 3, 2, 1, 0);    
+            => vparts(7, 6, 5, 4, 3, 2, 1, 0);    
 
     }
 }

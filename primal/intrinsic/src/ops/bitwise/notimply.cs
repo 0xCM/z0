@@ -18,7 +18,6 @@ namespace Z0
     
     public static partial class dinx
     {                
-
         /// <summary>
         /// Computes the material nomimplication, equivalent to the bitwise expression ~x & y for operands x and y
         /// </summary>

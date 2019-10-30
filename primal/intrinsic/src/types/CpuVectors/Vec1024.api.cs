@@ -17,7 +17,7 @@ namespace Z0
     public static class Vec1024
     {
         [MethodImpl(Inline)]
-        public static Vec1024<T> Define<T>(in Vec256<T> v0, in Vec256<T> v1, in Vec256<T> v2, in Vec256<T> v3)        
+        public static Vec1024<T> Define<T>(Vector256<T> v0, Vector256<T> v1, Vector256<T> v2, Vector256<T> v3)        
             where T : unmanaged
                 => new Vec1024<T>(v0, v1, v2, v3);        
 

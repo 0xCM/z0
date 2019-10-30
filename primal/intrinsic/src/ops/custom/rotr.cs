@@ -36,7 +36,6 @@ namespace Z0
             get => dinx.vbroadcast(n128,32u);
         }
 
-
         /// <summary>
         /// Rotates each component the source vector rightwards by a constant offset
         /// </summary>

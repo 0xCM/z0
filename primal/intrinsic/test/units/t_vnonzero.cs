@@ -47,7 +47,7 @@ namespace Z0.Test
             var  src = Random.BlockedSpan<T>(n, blocks: SampleSize);
             for(var i = 0; i< src.BlockCount; i++)
             {
-                var v = ginx.vloadu(n, in src.Block(i));
+                var v = ginx.vload(n, in src.Block(i));
                 Claim.yea(ginx.vnonz(v));
             }
             
@@ -60,7 +60,7 @@ namespace Z0.Test
             var  src = Random.BlockedSpan<T>(n, blocks: SampleSize);
             for(var i = 0; i< src.BlockCount; i++)
             {
-                var v = ginx.vloadu(n, in src.Block(i));
+                var v = ginx.vload(n, in src.Block(i));
                 Claim.yea(ginx.vnonz(v));
             }
             

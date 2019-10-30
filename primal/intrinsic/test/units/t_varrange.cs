@@ -15,7 +15,7 @@ namespace Z0.Test
     {     
         public void shift128()
         {
-            var src = ginx.vpOnes<ulong>(n128);
+            var src = ginx.vones<ulong>(n128);
             const byte offset = 19;
             var y = ginx.vsllx(src,offset);
             var z = ginx.vsrlx(src,offset);
@@ -29,18 +29,18 @@ namespace Z0.Test
 
         public void reverse_128x8u()
         {
-            var v1 = Vec128Pattern.Increments<byte>(0);
-            var v2 = Vec128Pattern.Decrements<byte>(15);
+            var v1 = Vec128Pattern.increments<byte>(0);
+            var v2 = Vec128Pattern.decrements<byte>(15);
             var v3 = dinx.vreverse(v1);
             Claim.eq(v2,v3);
         }
 
         public void shuffle_128x32i()
         {
-            var u = ginx.vpIncrements<int>(n128);
+            var u = ginx.vincrements<int>(n128);
             Claim.eq(Vector128.Create(0,1,2,3), u);
 
-            var v = Vec128Pattern.Decrements<int>(3);
+            var v = Vec128Pattern.decrements<int>(3);
             Claim.eq(Vector128.Create(3,2,1,0),v);
 
             Claim.eq(v, dinx.vshuffle(u, Perm4.DCBA));
@@ -49,8 +49,8 @@ namespace Z0.Test
 
         public void reverse_256x8u()
         {
-            var inc = Vec256Pattern.Increments((byte)0);
-            var dec = Vec256Pattern.Decrements((byte)31);            
+            var inc = Vec256Pattern.increments((byte)0);
+            var dec = Vec256Pattern.decrements((byte)31);            
             var v2 = dinx.vreverse(inc);
             Claim.eq(dec,v2);
 
@@ -80,9 +80,9 @@ namespace Z0.Test
 
         public void hi_256_u64()
         {            
-            var x = cpuvec(1ul,2ul,3ul,4ul);
-            var y = cpuvec(5ul,6ul,7ul,8ul);
-            var expect = cpuvec(2ul,6ul,4ul,8ul);
+            var x = vparts(1ul,2ul,3ul,4ul);
+            var y = vparts(5ul,6ul,7ul,8ul);
+            var expect = vparts(2ul,6ul,4ul,8ul);
 
             var actual = dinx.vunpackhi(x,y);
             Claim.eq(expect, actual);
@@ -90,11 +90,11 @@ namespace Z0.Test
 
         public void hi_256_u32()
         {
-            var x = cpuvec(1u, 2u,  3u,4u,   5u,6u,   7u,8u);
-            var y = cpuvec(10u,12u, 13u,14u, 15u,16u, 17u,18u);
+            var x = vparts(1u, 2u,  3u,4u,   5u,6u,   7u,8u);
+            var y = vparts(10u,12u, 13u,14u, 15u,16u, 17u,18u);
 
             var actual = dinx.vunpackhi(x,y);
-            var expect = cpuvec(3u,13u,4u,14u,7u,17u,8u,18u);
+            var expect = vparts(3u,13u,4u,14u,7u,17u,8u,18u);
             Claim.eq(expect, actual);
         }
 
@@ -117,13 +117,13 @@ namespace Z0.Test
                 var v0s = v0.ToSpan();
                 var bits = Random.BitString<N32>();
                 var bitmap = bits.Map(x => x ? (byte)0xFF : (byte)0);
-                var mask = ginx.vloadu(n, in head(bitmap));
+                var mask = ginx.vload(n, in head(bitmap));
                 var v3 = dinx.vblendv(v0,v1, mask);
                 
                 var selection = Span256.AllocBlocks<byte>(1);
                 for(var i=0; i< selection.Length; i++)
                     selection[i] = bits[i] ? v1s[i] : v0s[i];
-                var v4 =  selection.ToCpuVector();            
+                var v4 =  selection.TakeVector();            
                 
                 Claim.eq(v3, v4);
             }
@@ -132,17 +132,17 @@ namespace Z0.Test
 
             var v1 = ginx.vbroadcast<byte>(n256,3);
             var v2 = ginx.vbroadcast<byte>(n256,4);
-            var control = Vec256Pattern.Alternate<byte>(0, 0xFF);
+            var control = Vec256Pattern.alternating<byte>(0, 0xFF);
             var v3 = dinx.vblendv(v1,v2, control);
             var block = Span256.AllocBlocks<byte>(1);
             for(var i=0; i<32; i++)
                 block[i] = (byte) (even(i) ? 3 : 4);
-            var v4 = block.ToCpuVector();
+            var v4 = block.TakeVector();
             Claim.eq(v3, v4);
 
         }
 
-        static string DescribeShuffle<T>(Vec256<T> src, byte spec, Vec256<T> dst)
+        static string DescribeShuffle<T>(Vector256<T> src, byte spec, Vector256<T> dst)
             where T : unmanaged
         {
             var xFmt = src.FormatHexBlocks();
@@ -158,7 +158,7 @@ namespace Z0.Test
             return fmt.ToString();
         }
 
-        static string Describe2x128Perm<T>(Vec256<T> x, Vec256<T> y, byte spec, Vec256<T> dst)
+        static string Describe2x128Perm<T>(Vector256<T> x, Vector256<T> y, byte spec, Vector256<T> dst)
             where T : unmanaged
         {
             var xFmt = x.FormatHexBlocks();

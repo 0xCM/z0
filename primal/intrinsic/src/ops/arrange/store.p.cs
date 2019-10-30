@@ -13,12 +13,10 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Avx;
 
     using static zfunc;    
-    using static As;
-    
+    using static As;    
 
     partial class ginx
     {
-
         [MethodImpl(Inline)]
         public static unsafe void vstore<T>(Vector128<T> src, T* pDst)
             where T : unmanaged
@@ -120,9 +118,5 @@ namespace Z0
             else
                 throw unsupported<T>();
         }
-
-
-
     }
-
 }

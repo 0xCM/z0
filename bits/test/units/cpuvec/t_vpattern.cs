@@ -15,7 +15,7 @@ namespace Z0
     {
         public void pattern_clearalt_256x8()
         {
-            var tr = Vec256Pattern.ClearAltVector<byte>();
+            var tr = Vec256Pattern.altclear<byte>();
             for(var i=0; i<SampleSize; i++)
             {
                 var x = Random.CpuVector<byte>(n256);
@@ -27,7 +27,7 @@ namespace Z0
                         xs[j] = 0;
                 }
 
-                var xt = xs.ToCpuVector();
+                var xt = xs.TakeVector();
 
                 Claim.eq(xt,y);
             }

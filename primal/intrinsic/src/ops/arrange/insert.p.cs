@@ -14,7 +14,6 @@ namespace Z0
 
     partial class ginx
     {
-
         [MethodImpl(Inline)]
         public static unsafe Vector256<T> vinsert<T>(T* pSrc, T* pReceiver, byte index)
             where T : unmanaged

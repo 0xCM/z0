@@ -42,7 +42,7 @@ namespace Z0
 
         public void shuffle_hi_128x16u_check()
         {
-            var x = ginx.vpIncrements<ushort>(n128);
+            var x = ginx.vincrements<ushort>(n128);
             var xs = x.ToSpan();
             Claim.eq(Vector128.Create(xs[A], xs[B], xs[C], xs[D], xs[A+4], xs[B+ 4], xs[C + 4], xs[D + 4]), x);
 
@@ -58,7 +58,7 @@ namespace Z0
 
         public void shuffle_lo_128x16u_check()
         {
-            var x = ginx.vpIncrements<ushort>(n128);
+            var x = ginx.vincrements<ushort>(n128);
             var xs = x.ToSpan();
             Claim.eq(Vector128.Create(xs[A], xs[B], xs[C], xs[D], xs[A + 4], xs[B + 4], xs[C + 4], xs[D + 4]), x);
 
@@ -75,14 +75,14 @@ namespace Z0
 
         public void shuffle_128x8u_check()
         {
-            var src = ginx.vpIncrements<byte>(n128);
+            var src = ginx.vincrements<byte>(n128);
             var perm = Perm16Spec.Reverse.ToPerm();
             for(int i=0,j=15; i<perm.Length; i++, j--)
                 Claim.eq(perm[i],j);
 
             var shufspec = perm.ToShuffleSpec();
             var dst = dinx.vshuffle(src,shufspec);
-            var expect = Vec128Pattern.Decrements<byte>(15);
+            var expect = Vec128Pattern.decrements<byte>(15);
             Claim.eq(expect, dst);
 
             var dstPerm = dst.ToPerm();

@@ -24,9 +24,8 @@ namespace Z0
             var len = Vector128<T>.Count;
             var src = BlockedSpan.Load(n, range(default, gmath.add(default, convert<T>(len - 1))).ToArray().AsSpan());
             var dst = src.Swap(swaps);
-            return ginx.vloadu(n, in dst.Head);
+            return ginx.vload(n, in dst.Head);
         }
-
 
         [MethodImpl(Inline)]
         public static Vector128<byte> vswap(Vector128<byte> src, params Swap[] swaps)
@@ -44,7 +43,7 @@ namespace Z0
                 else
                     control[k] = k;
             }
-            return vpermvar8x32(src,ginx.vloadu(n256, head(control)));
+            return vpermvar8x32(src,ginx.vload(n256, head(control)));
         }
 
         /// <summary>
@@ -59,7 +58,6 @@ namespace Z0
             y = dinx.vinsert(dinx.vlo(x), y, 1);
             return y;
         }
-
 
         [MethodImpl(Inline)]
         public static Vector256<byte> vswaphl(Vector256<byte> x)

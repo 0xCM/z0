@@ -45,7 +45,7 @@ namespace Z0
         void ones_pattern_check<T>(N128 n = default)
             where T : unmanaged
         {
-            var ones = ginx.vpOnes<T>(n);
+            var ones = ginx.vones<T>(n);
             var bs = ones.ToBitString();
             Claim.eq(n,bs.Length);
             Claim.eq(n,bs.PopCount());
@@ -54,7 +54,7 @@ namespace Z0
         void ones_pattern_check<T>(N256 n = default)
             where T : unmanaged
         {
-            var ones = ginx.vpOnes<T>(n);
+            var ones = ginx.vones<T>(n);
             var bs = ones.ToBitString();
             Claim.eq(n,bs.Length);
             Claim.eq(n,bs.PopCount());

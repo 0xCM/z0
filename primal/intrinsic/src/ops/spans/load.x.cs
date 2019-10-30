@@ -19,7 +19,7 @@ namespace Z0
         public static Vector256<T> LoadVector<T>(this ReadOnlySpan256<T> src, int block = 0)            
             where T : unmanaged      
         {      
-            ginx.vloadu(in src.Block(block), out Vector256<T> x);
+            ginx.vload(in src.Block(block), out Vector256<T> x);
             return x;
         }
 
@@ -27,7 +27,7 @@ namespace Z0
         public static Vector128<T> LoadVector<T>(this ReadOnlySpan128<T> src, int block = 0)            
             where T : unmanaged      
         {      
-            ginx.vloadu(in src.Block(block), out Vector128<T> x);
+            ginx.vload(in src.Block(block), out Vector128<T> x);
             return x;
         }
 
@@ -39,7 +39,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<T> LoadVector<T>(this Span<T> src, N128 n, int offset = 0)
             where T : unmanaged            
-                => ginx.vloadu(n,in src[offset]);
+                => ginx.vload(n,in src[offset]);
 
         /// <summary>
         /// Loads a 256-bit vector from a span beginning at a specified offset
@@ -49,7 +49,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<T> LoadVector<T>(this Span<T> src, N256 n, int offset = 0)
             where T : unmanaged            
-                => ginx.vloadu(n,in src[offset]);
+                => ginx.vload(n,in src[offset]);
 
         /// <summary>
         /// Loads a 128-bit vector from a span beginning at a specified offset
@@ -59,7 +59,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<T> LoadVector<T>(this ReadOnlySpan<T> src, N128 n, int offset = 0)
             where T : unmanaged            
-                => ginx.vloadu(n,in src[offset]);
+                => ginx.vload(n,in src[offset]);
 
         /// <summary>
         /// Loads a 256-bit vector from a span beginning at a specified offset
@@ -69,7 +69,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<T> LoadVector<T>(this ReadOnlySpan<T> src, N256 n, int offset = 0)
             where T : unmanaged            
-                => ginx.vloadu(n,in src[offset]);
+                => ginx.vload(n,in src[offset]);
 
         /// <summary>
         /// Loads a 128-bit vector from a blocked span
@@ -80,7 +80,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<T> LoadVector<T>(this Span128<T> src, int block = 0)            
             where T : unmanaged            
-                => ginx.vloadu(n128, in src.Block(block));
+                => ginx.vload(n128, in src.Block(block));
 
         /// <summary>
         /// Loads a 256-bit vector from a blocked span
@@ -91,7 +91,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<T> LoadVector<T>(this Span256<T> src, int block = 0)            
             where T : unmanaged            
-                => ginx.vloadu(n256, in src.Block(block));
+                => ginx.vload(n256, in src.Block(block));
 
     }
 

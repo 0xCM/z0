@@ -335,10 +335,10 @@ namespace Z0
 
         void rot_256x64u()
         {
-            static void rotl_check(Vec256<ulong> src, ulong offset, Vector256<ulong> computed)        
+            static void rotl_check(Vector256<ulong> src, ulong offset, Vector256<ulong> computed)        
                 => Claim.eq(BitRot.rotl(src.ToSpan(), offset), computed.ToSpan());
 
-            static void rotr_check(Vec256<ulong> src, ulong offset, Vector256<ulong> computed)        
+            static void rotr_check(Vector256<ulong> src, ulong offset, Vector256<ulong> computed)        
                 => Claim.eq(BitRot.rotr(src.ToSpan(), offset), computed.ToSpan());
 
             for(var i=0; i< SampleSize; i++)

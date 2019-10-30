@@ -24,8 +24,8 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vec128<float> cmpgt(in Vec128<float> x, in Vec128<float> y)
-            => CompareGreaterThan(x.xmm, y.xmm);
+        public static Vector128<float> vgt(Vector128<float> x, Vector128<float> y)
+            => CompareGreaterThan(x, y);
         
         /// <summary>
         /// __m128d _mm_cmpgt_pd (__m128d a, __m128d b) CMPPD xmm, xmm/m128, imm8(6)
@@ -33,8 +33,8 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vec128<double> cmpgt(in Vec128<double> x, in Vec128<double> y)
-            => CompareGreaterThan(x.xmm, y.xmm);
+        public static Vector128<double> vgt(Vector128<double> x, Vector128<double> y)
+            => CompareGreaterThan(x, y);
 
         /// <summary>
         /// __m256 _mm256_cmp_ps (__m256 a, __m256 b, const int imm8) VCMPPS ymm, ymm, ymm/m256, imm8
@@ -42,8 +42,8 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<float> cmpgt(in Vec256<float> x, in Vec256<float> y)
-            => Compare(x.ymm, y.ymm, FloatComparisonMode.OrderedGreaterThanNonSignaling);
+        public static Vector256<float> vgt(Vector256<float> x, Vector256<float> y)
+            => Compare(x, y, FloatComparisonMode.OrderedGreaterThanNonSignaling);
 
         /// <summary>
         /// __m256d _mm256_cmp_pd (__m256d a, __m256d b, const int imm8) VCMPPD ymm, ymm,ymm/m256, imm8
@@ -51,8 +51,8 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<double> cmpgt(in Vec256<double> x, in Vec256<double> y)
-            => Compare(x.ymm, y.ymm, FloatComparisonMode.OrderedGreaterThanNonSignaling);
+        public static Vector256<double> vgt(Vector256<double> x, Vector256<double> y)
+            => Compare(x, y, FloatComparisonMode.OrderedGreaterThanNonSignaling);
  
     }
 

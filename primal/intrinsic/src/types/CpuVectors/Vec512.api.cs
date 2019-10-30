@@ -32,7 +32,6 @@ namespace Z0
             return new Vec512<T>(lo, hi);
         }
 
-
         /// <summary>
         /// Constructs a 512-bit vector from two 256-bit vectors
         /// </summary>

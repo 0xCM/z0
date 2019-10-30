@@ -37,7 +37,7 @@ namespace Z0
                 for(var i =0; i<blocklen; i++)
                     tmp[i] = primalOp(src[offset + i]);
 
-                var vExpect = ginx.vloadu<T>(n128, in head(tmp));
+                var vExpect = ginx.vload<T>(n128, in head(tmp));
              
                 var vX = src.LoadVector(block);
                 var vActual = inXOp(vX);
@@ -72,7 +72,7 @@ namespace Z0
                 for(var i =0; i<blocklen; i++)
                     tmp[i] = primalOp(src[offset + i]);
 
-                var vExpect = ginx.vloadu<T>(n256, in head(tmp));
+                var vExpect = ginx.vload<T>(n256, in head(tmp));
              
                 var vX = src.LoadVector(block);
                 var vActual = inXOp(vX);
@@ -111,7 +111,7 @@ namespace Z0
                 for(var i =0; i<blocklen; i++)
                     tmp[i] = primalOp(lhs[offset + i], rhs[offset + i]);
 
-                ginx.vloadu(in head(tmp), out Vector128<T> vExpect);
+                ginx.vload(in head(tmp), out Vector128<T> vExpect);
              
                 var vX = lhs.LoadVector(block);
                 var vY = rhs.LoadVector(block);
@@ -151,7 +151,7 @@ namespace Z0
                 for(var i =0; i<blocklen; i++)
                     tmp[i] = primalOp(lhs[offset + i], rhs[offset + i]);
 
-                ginx.vloadu(in head(tmp), out Vector256<T> vExpect);
+                ginx.vload(in head(tmp), out Vector256<T> vExpect);
              
                 var vX = lhs.LoadVector(block);
                 var vY = rhs.LoadVector(block);

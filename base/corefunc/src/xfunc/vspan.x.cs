@@ -28,20 +28,6 @@ namespace Z0
         }
 
         /// <summary>
-        /// Allocates a span into which vector content is stored
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <typeparam name="T">The component type</typeparam>
-        [MethodImpl(NotInline)]
-        public static ref Span128<T> ToSpan<T>(this Vector128<T> src, out Span128<T> dst)
-            where T : unmanaged            
-        {
-            dst = BlockedSpan.AllocBlock<T>(n128);
-            vstore(src, ref dst.Head);
-            return ref dst;
-        }
-
-        /// <summary>
         /// Allocates a blocked span into which vector content is stored
         /// </summary>
         /// <param name="src">The source span</param>
@@ -82,54 +68,6 @@ namespace Z0
             vstore(src, ref dst.Head);
             return dst;
         }                       
-
-        /// <summary>
-        /// Allocates a blocked span into which vector content is stored
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <typeparam name="T">The primitive type</typeparam>
-        [MethodImpl(NotInline)]
-        public static Span128<T> ToSpan128<T>(this Vec128<T> src)
-            where T : unmanaged     
-        {
-            var dst = BlockedSpan.AllocBlock<T>(n128);
-            vstore(src, ref head(dst));
-            return dst;
-        }                       
-        
-        /// <summary>
-        /// Allocates a blocked span into which vector content is stored
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <typeparam name="T">The primitive type</typeparam>
-        [MethodImpl(NotInline)]
-        public static Span256<T> ToSpan256<T>(this Vec256<T> src)
-            where T : unmanaged            
-        {
-            var dst = BlockedSpan.AllocBlock<T>(n256);
-            vstore(src, ref head(dst));
-            return dst;
-        }                       
-
-        /// <summary>
-        /// Allocates a span into which vector content is stored
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <typeparam name="T">The component type</typeparam>
-        [MethodImpl(Inline)]
-        public static Span<T> ToSpan<T>(this Vec128<T> src)
-            where T : unmanaged            
-                => src.ToSpan128();
-
-        /// <summary>
-        /// Allocates a blocked span into which vector content is stored
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <typeparam name="T">The component type</typeparam>
-        [MethodImpl(Inline)]
-        public static Span<T> ToSpan<T>(this Vec256<T> src)
-            where T : unmanaged            
-                => src.ToSpan256();
 
         /// <summary>
         /// Extracts vector content as a span

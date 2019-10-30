@@ -15,19 +15,19 @@ namespace Z0
     partial class inxvoc
     {
         public static Vector128<byte> ones_128x8u()
-            => ginx.vpOnes<byte>(n128);
+            => ginx.vones<byte>(n128);
 
         public static Vector128<ulong> ones_128x64u()
-            => ginx.vpOnes<ulong>(n128);
+            => ginx.vones<ulong>(n128);
 
         public static Vector256<byte> ones_256x8u()
-            => ginx.vpOnes<byte>(n256);
+            => ginx.vones<byte>(n256);
 
         public static Vector256<ulong> ones_256x64u()
-            => ginx.vpOnes<ulong>(n256);
+            => ginx.vones<ulong>(n256);
 
         public static Vector256<double> ones_256x64f()
-            => ginx.vpOnes<double>(n256);
+            => ginx.vones<double>(n256);
 
         public static Vector256<byte> pattern_lanemerge_256x8u()            
             => ginx.vpLaneMerge<byte>();

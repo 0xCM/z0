@@ -19,16 +19,13 @@ namespace Z0
 
     public static partial class dinx
     {
-
         /// <summary>
         /// Computes the sum of the source vector components
         /// </summary>
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
         public static ulong vsum(Vector128<ulong> x)
-        {            
-            return default;
-        }
+            => x.GetElement(0) + x.GetElement(1);
 
         /// <summary>
         /// Computes the sum of the source vector components
