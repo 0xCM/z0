@@ -14,6 +14,10 @@ namespace Z0
 
     partial class bvoc
     {
+
+        public static ReadOnlySpan<char> bitchars_32u(uint value)
+            => gbits.bitchars(value);
+
         public static BitVector32 and_bv_32u(BitVector32 x, BitVector32 y)
             => BitVector.and(x,y);
 

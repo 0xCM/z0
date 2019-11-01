@@ -13,24 +13,11 @@ namespace Z0.Test
 
     public class t_varrange : IntrinsicTest<t_varrange>
     {     
-        public void shift128()
-        {
-            var src = ginx.vones<ulong>(n128);
-            const byte offset = 19;
-            var y = ginx.vsllx(src,offset);
-            var z = ginx.vsrlx(src,offset);
-            
-
-            Trace(src.ToBitString());
-            Trace(src.ToBitString().Sll(offset).Format());
-            Trace(y.ToBitString());
-            Trace(z.ToBitString());
-        }
 
         public void reverse_128x8u()
         {
-            var v1 = Vec128Pattern.increments<byte>(0);
-            var v2 = Vec128Pattern.decrements<byte>(15);
+            var v1 = ginx.vincrements<byte>(n128);
+            var v2 = ginx.vdecrements<byte>(n128,15);
             var v3 = dinx.vreverse(v1);
             Claim.eq(v2,v3);
         }
@@ -40,7 +27,7 @@ namespace Z0.Test
             var u = ginx.vincrements<int>(n128);
             Claim.eq(Vector128.Create(0,1,2,3), u);
 
-            var v = Vec128Pattern.decrements<int>(3);
+            var v = ginx.vdecrements<int>(n128,3);
             Claim.eq(Vector128.Create(3,2,1,0),v);
 
             Claim.eq(v, dinx.vshuffle(u, Perm4.DCBA));

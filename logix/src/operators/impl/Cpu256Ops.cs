@@ -11,7 +11,7 @@ namespace Z0.Logix
     using System.Collections.Generic;
 
     using static zfunc;    
-    using static TernaryBitOpKind;
+    using static TernaryOpKind;
 
     public static partial class CpuOps
     {

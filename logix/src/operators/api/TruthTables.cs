@@ -34,7 +34,7 @@ namespace Z0.Logix
             return x;
         }
         
-        public static BitVector8 Signature(TernaryBitOpKind id)
+        public static BitVector8 Signature(TernaryOpKind id)
         {
             var op = LogicOpApi.lookup(id);
             var x = BitVector8.Zero;
@@ -53,8 +53,8 @@ namespace Z0.Logix
         {
             var f = LogicOpApi.lookup(kind);
             var table = BitMatrix.natural<N2,N2,byte>();
-            table[0] = BitVector.natural<N2,byte>(Bits.pack2(f(off), off));
-            table[1] = BitVector.natural<N2,byte>(Bits.pack2(f(on), on));
+            table[0] = BitVector.natural<N2,byte>((byte)Bits.pack(n2, f(off), off));
+            table[1] = BitVector.natural<N2,byte>((byte)Bits.pack(n2, f(on), on));
             return table;            
         }
 
@@ -62,25 +62,25 @@ namespace Z0.Logix
         {
             var tt = BitMatrix.natural<N4,N3,byte>();
             var f = LogicOpApi.lookup(kind);
-            tt[0] = BitVector.natural<N3,byte>(Bits.pack3(f(off, off), off, off));
-            tt[1] = BitVector.natural<N3,byte>(Bits.pack3(f(on, off), off, on));
-            tt[2] = BitVector.natural<N3,byte>(Bits.pack3(f(off, on), on, off));
-            tt[3] = BitVector.natural<N3,byte>(Bits.pack3(f(on, on),  on, on));
+            tt[0] = BitVector.natural<N3,byte>((byte)Bits.pack(n3, f(off, off), off, off));
+            tt[1] = BitVector.natural<N3,byte>((byte)Bits.pack(n3, f(on, off), off, on));
+            tt[2] = BitVector.natural<N3,byte>((byte)Bits.pack(n3, f(off, on), on, off));
+            tt[3] = BitVector.natural<N3,byte>((byte)Bits.pack(n3, f(on, on),  on, on));
             return tt;
         }
 
-        public static BitMatrix<N8,N4,byte> Build(TernaryBitOpKind kind)
+        public static BitMatrix<N8,N4,byte> Build(TernaryOpKind kind)
         {
             var tt = BitMatrix.natural<N8,N4,byte>();
             var f = LogicOpApi.lookup(kind);
-            tt[0] = BitVector.natural<N4,byte>(Bits.pack4(f(off, off, off), off, off, off));
-            tt[1] = BitVector.natural<N4,byte>(Bits.pack4(f(off, off, on), off, off, on));
-            tt[2] = BitVector.natural<N4,byte>(Bits.pack4(f(off, on, off), off, on, off));
-            tt[3] = BitVector.natural<N4,byte>(Bits.pack4(f(off, on, on), off, on, on));
-            tt[4] = BitVector.natural<N4,byte>(Bits.pack4(f(on, off, off), on, off, off));
-            tt[5] = BitVector.natural<N4,byte>(Bits.pack4(f(on, off, on), on, off, on));
-            tt[6] = BitVector.natural<N4,byte>(Bits.pack4(f(on, on, off), off, on, on));
-            tt[7] = BitVector.natural<N4,byte>(Bits.pack4(f(on, on, on), on, on, on));
+            tt[0] = BitVector.natural<N4,byte>((byte)Bits.pack(n4, f(off, off, off), off, off, off));
+            tt[1] = BitVector.natural<N4,byte>((byte)Bits.pack(n4, f(off, off, on), off, off, on));
+            tt[2] = BitVector.natural<N4,byte>((byte)Bits.pack(n4, f(off, on, off), off, on, off));
+            tt[3] = BitVector.natural<N4,byte>((byte)Bits.pack(n4, f(off, on, on), off, on, on));
+            tt[4] = BitVector.natural<N4,byte>((byte)Bits.pack(n4, f(on, off, off), on, off, off));
+            tt[5] = BitVector.natural<N4,byte>((byte)Bits.pack(n4, f(on, off, on), on, off, on));
+            tt[6] = BitVector.natural<N4,byte>((byte)Bits.pack(n4, f(on, on, off), off, on, on));
+            tt[7] = BitVector.natural<N4,byte>((byte)Bits.pack(n4, f(on, on, on), on, on, on));
             return tt;
         }
 
@@ -90,7 +90,7 @@ namespace Z0.Logix
         public static void Emit(TextWriter dst, params BinaryLogicOpKind[] kinds)
             => kinds.Iterate(k => Emit(k,dst));
 
-        public static void Emit(TextWriter dst, params TernaryBitOpKind[] kinds)
+        public static void Emit(TextWriter dst, params TernaryOpKind[] kinds)
             => kinds.Iterate(k => Emit(k,dst));
 
         public static void Emit(TextWriter dst, OpArityKind arity)
@@ -120,7 +120,7 @@ namespace Z0.Logix
             return table;
         }
 
-        static BitMatrix<N8,N4,byte> Emit(TernaryBitOpKind kind, TextWriter dst)
+        static BitMatrix<N8,N4,byte> Emit(TernaryOpKind kind, TextWriter dst)
         {
             var table = Build(kind);
             table.Emit2(kind,dst);
@@ -135,8 +135,8 @@ namespace Z0.Logix
             {
                 BitVector4 result = (byte)i;
                 var table = BitMatrix.natural<N2,N2,byte>();
-                table[0] = BitVector.natural<N2,byte>(Bits.pack2(result[0], off));
-                table[1] = BitVector.natural<N2,byte>(Bits.pack2(result[0], on));
+                table[0] = BitVector.natural<N2,byte>((byte)Bits.pack(n2, result[0], off));
+                table[1] = BitVector.natural<N2,byte>((byte)Bits.pack(n2, result[1], on));
                 table.Emit2(dst);
                 
             }
@@ -148,10 +148,10 @@ namespace Z0.Logix
             {
                 BitVector4 result = (byte)i;
                 var table = BitMatrix.natural<N4,N3,byte>();
-                table[0] = BitVector.natural<N3,byte>(Bits.pack3(result[0], off, off));
-                table[1] = BitVector.natural<N3,byte>(Bits.pack3(result[1], off, on));
-                table[2] = BitVector.natural<N3,byte>(Bits.pack3(result[2], on, off));
-                table[3] = BitVector.natural<N3,byte>(Bits.pack3(result[3], on, on));
+                table[0] = BitVector.natural<N3,byte>((byte)Bits.pack(n3, result[0], off, off));
+                table[1] = BitVector.natural<N3,byte>((byte)Bits.pack(n3, result[1], off, on));
+                table[2] = BitVector.natural<N3,byte>((byte)Bits.pack(n3, result[2], on, off));
+                table[3] = BitVector.natural<N3,byte>((byte)Bits.pack(n3, result[3], on, on));
                 require(table.GetCol(2) == result);                
                 table.Emit2(dst);
             }
@@ -163,14 +163,14 @@ namespace Z0.Logix
             {
                 BitVector8 result = (byte)i;
                 var table = BitMatrix.natural<N8,N4,byte>();
-                table[0] = BitVector.natural<N4,byte>(Bits.pack4(result[0], off, off, off));
-                table[1] = BitVector.natural<N4,byte>(Bits.pack4(result[1], off, off, on));
-                table[2] = BitVector.natural<N4,byte>(Bits.pack4(result[2], off, on, off));
-                table[3] = BitVector.natural<N4,byte>(Bits.pack4(result[3], off, on, on));
-                table[4] = BitVector.natural<N4,byte>(Bits.pack4(result[4], on, off, off));
-                table[5] = BitVector.natural<N4,byte>(Bits.pack4(result[5], on, off, on));
-                table[6] = BitVector.natural<N4,byte>(Bits.pack4(result[6], on, on, off));
-                table[7] = BitVector.natural<N4,byte>(Bits.pack4(result[7], on, on, on));
+                table[0] = BitVector.natural<N4,byte>((byte)Bits.pack(n4, result[0], off, off, off));
+                table[1] = BitVector.natural<N4,byte>((byte)Bits.pack(n4, result[1], off, off, on));
+                table[2] = BitVector.natural<N4,byte>((byte)Bits.pack(n4, result[2], off, on, off));
+                table[3] = BitVector.natural<N4,byte>((byte)Bits.pack(n4, result[3], off, on, on));
+                table[4] = BitVector.natural<N4,byte>((byte)Bits.pack(n4, result[4], on, off, off));
+                table[5] = BitVector.natural<N4,byte>((byte)Bits.pack(n4, result[5], on, off, on));
+                table[6] = BitVector.natural<N4,byte>((byte)Bits.pack(n4, result[6], on, on, off));
+                table[7] = BitVector.natural<N4,byte>((byte)Bits.pack(n4, result[7], on, on, on));
                 require(table.GetCol(3) == result);                
                 table.Emit2(dst);
 

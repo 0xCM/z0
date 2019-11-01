@@ -133,57 +133,6 @@ namespace Z0
             return sb.ToString();
         }
 
-        /// <summary>
-        /// Formats vector components as bitstrings
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <param name="tlz">Whether to trim leading zeros from the component values</param>
-        /// <param name="specifier">Whether to prefix rendered bitstrings with the '0b' specifier</param>
-        /// <param name="blockWidth">The number of binary digits per block, if specified</param>
-        /// <typeparam name="T">The primal component type</typeparam>
-        [MethodImpl(Inline)]
-        public static string FormatBits<T>(this Vector128<T> src, bool tlz = false, bool specifier = false, int? blockWidth = null)
-            where T : unmanaged
-                => src.ToSpan().ReadOnly().FormatBits(tlz,specifier, blockWidth);
-
-        /// <summary>
-        /// Formats the vector content as bitstring(s)
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <param name="tlz">Whether to trim leading zeros from the component values</param>
-        /// <param name="specifier">Whether to prefix rendered bitstrings with the '0b' specifier</param>
-        /// <param name="blockWidth">The number of binary digits per block, if specified</param>
-        /// <typeparam name="T">The primal component type</typeparam>
-        [MethodImpl(Inline)]
-        public static string FormatBits<T>(this Vector256<T> src, bool tlz = false, bool specifier = false, int? blockWidth = null)
-            where T : unmanaged
-                => src.ToSpan().ReadOnly().FormatBits(tlz,specifier, blockWidth);
-
-        /// <summary>
-        /// Formats the vector content as bitstring(s)
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <param name="tlz">Whether to trim leading zeros from the component values</param>
-        /// <param name="specifier">Whether to prefix rendered bitstrings with the '0b' specifier</param>
-        /// <param name="blockWidth">The number of binary digits per block, if specified</param>
-        /// <typeparam name="T">The primal component type</typeparam>
-        [MethodImpl(Inline)]
-        public static string FormatBits<T>(this Vec512<T> src, bool tlz = false, bool specifier = false, int? blockWidth = null)
-            where T : unmanaged
-                => src.ToReadOnlySpan().FormatBits(tlz,specifier, blockWidth);
-
-        /// <summary>
-        /// Formats the vector content as bitstring(s)
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <param name="tlz">Whether to trim leading zeros from the component values</param>
-        /// <param name="specifier">Whether to prefix rendered bitstrings with the '0b' specifier</param>
-        /// <param name="blockWidth">The number of binary digits per block, if specified</param>
-        /// <typeparam name="T">The primal component type</typeparam>
-        [MethodImpl(Inline)]
-        public static string FormatBits<T>(this Vec1024<T> src, bool tlz = false, bool specifier = false, int? blockWidth = null)
-            where T : unmanaged
-                => src.ToReadOnlySpan().FormatBits(tlz,specifier, blockWidth);
     }
 
 }

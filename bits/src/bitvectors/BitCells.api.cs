@@ -19,7 +19,7 @@ namespace Z0
         /// <param name="init">The initial value</param>
         /// <typeparam name="T">The component type</typeparam>
         [MethodImpl(Inline)]
-        public static BitCells<T> Alloc<T>(T? init = null)
+        public static BitCells<T> alloc<T>(T? init = null)
             where T : unmanaged
                 => BitCells<T>.FromCell(init ?? default);
             
@@ -31,7 +31,7 @@ namespace Z0
         /// <typeparam name="N">The length type</typeparam>
         /// <typeparam name="T">The component type</typeparam>
         [MethodImpl(Inline)]
-        public static BitCells<T> Alloc<T>(int len, T? fill = null)
+        public static BitCells<T> alloc<T>(int len, T? fill = null)
             where T : unmanaged
                 => BitCells<T>.Alloc(len, fill);
 
@@ -42,7 +42,7 @@ namespace Z0
         /// <param name="n">The vector length</param>
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
-        public static BitCells<T> Load<T>(Span<T> src, int n)
+        public static BitCells<T> load<T>(Span<T> src, int n)
             where T : unmanaged
                 => BitCells<T>.FromCells(src, n);
 
@@ -53,7 +53,7 @@ namespace Z0
         /// <param name="src">The source from which the bits will be extracted</param>
         /// <typeparam name="T">The source type</typeparam>
         [MethodImpl(Inline)]
-        public static BitCells<T> Load<T>(T[] src, int n)
+        public static BitCells<T> load<T>(T[] src, int n)
             where T : unmanaged
                 => BitCells<T>.From(src,n);
 
@@ -62,7 +62,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source segment</param>
         [MethodImpl(Inline)]
-        public static BitCells<T> Load<T>(params T[] src)
+        public static BitCells<T> load<T>(params T[] src)
             where T : unmanaged
                 => BitCells<T>.From(src, bitsize<T>()*src.Length);
  
@@ -72,70 +72,9 @@ namespace Z0
         /// <param name="len">The number of bits to store</param>
         /// <typeparam name="T">The primal storage type</typeparam>
         [MethodImpl(Inline)]
-        public static int CellCount<T>(int len)
+        public static int cells<T>(int len)
             where T : unmanaged
                 => BitCells<T>.CellCount(len);
 
-        /// <summary>
-        /// Constructs a bitvector from a primal array
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <param name="len">The bitvector length, if specified</param>
-        /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline)]
-        public static BitCells<T> ToBitCells<T>(this T[] src, int len)
-            where T : unmanaged
-                => BitCells.Load(src,len);
-
-        /// <summary>
-        /// Constructs a bitvector from a primal span
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <param name="len">The bitvector length, if specified</param>
-        /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline)]
-        public static BitCells<T> ToBitCells<T>(this Span<T> src, int len)
-            where T : unmanaged
-                => BitCells.Load(src,len);
-
-        /// <summary>
-        /// Converts the leading elements of generic bitvector to an 8-bit primal bitvector
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <typeparam name="T">The primal source type</typeparam>        
-        [MethodImpl(Inline)]
-        public static BitVector8 ToPrimalBits<T>(this BitCells<T> src, N8 n)        
-            where T : unmanaged
-                => src.Data.TakeUInt8();
-
-        /// <summary>
-        /// Converts the leading elements of generic bitvector to a 64-bit primal bitvector
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <typeparam name="T">The primal source type</typeparam>        
-        [MethodImpl(Inline)]
-        public static BitVector16 ToPrimalBits<T>(this BitCells<T> src, N16 n)
-            where T : unmanaged
-                => src.Data.TakeUInt16();
-
-        /// <summary>
-        /// Converts the leading elements of generic bitvector to a 32-bit primal bitvector
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <typeparam name="T">The primal source type</typeparam>        
-        [MethodImpl(Inline)]
-        public static BitVector32 ToPrimalBits<T>(this BitCells<T> src, N32 n)
-            where T : unmanaged
-                => src.Data.TakeUInt32();
-
-        /// <summary>
-        /// Converts the leading elements of generic bitvector to a 64-bit primal bitvector
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <typeparam name="T">The primal source type</typeparam>        
-        [MethodImpl(Inline)]
-        public static BitVector64 ToPrimalBits<T>(this BitCells<T> src, N64 n)
-            where T : unmanaged
-                => src.Data.TakeUInt64();
    }
 }

@@ -44,8 +44,8 @@ namespace Z0.Test
                 var x32 = Random.BitVector(n32);
                 var y32 = Random.BitVector(n32);
                 var dot32 = BitVector.dot(x32,y32);
-                var x64 = x32.ToBitVector64();
-                var y64 = y32.ToBitVector64();
+                var x64 = x32.Expand(n64);
+                var y64 = y32.Expand(n64);
                 var dot64 = BitVector.dot(x64,y64);
                 Claim.eq(dot32,dot64);
             }

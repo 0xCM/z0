@@ -1,4 +1,4 @@
-// 2019-10-30 14:10:38:641
+// 2019-10-31 21:45:34:516
 ReadOnlySpan<byte> bitseq(byte value)
 {
     IL_0000: ldarg.0
@@ -6,11 +6,11 @@ ReadOnlySpan<byte> bitseq(byte value)
     IL_0006: ret
 
 }
-ReadOnlySpan<byte> bitseq(BitSize offset, BitSize count)
+ReadOnlySpan<byte> bitseq(int offset, int count)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: call System.ReadOnlySpan`1<System.Byte> Z0.BitStore::select(Z0.BitSize,Z0.BitSize)
+    IL_0002: call System.ReadOnlySpan`1<System.Byte> Z0.BitStore::select(System.Int32,System.Int32)
     IL_0007: ret
 
 }

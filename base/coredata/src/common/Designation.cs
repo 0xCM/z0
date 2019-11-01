@@ -35,6 +35,8 @@ namespace Z0
         /// </summary>
         public static readonly Assembly Assembly = typeof(T).Assembly;
 
+        public static readonly T Designated = new T();
+
         public Assembly DeclaringAssembly 
             => Assembly;
 

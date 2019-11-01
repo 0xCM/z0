@@ -22,19 +22,19 @@ namespace Z0.Logix
 
         IEnumerable<BinaryLogicOpKind> BinaryOpKinds {get;}
 
-        IEnumerable<TernaryBitOpKind> TernaryOpKinds {get;}
+        IEnumerable<TernaryOpKind> TernaryOpKinds {get;}
 
         bit Eval(UnaryLogicOpKind kind, bit a);
 
         bit eval(BinaryLogicOpKind kind, bit a, bit b);        
 
-        bit eval(TernaryBitOpKind kind, bit a, bit b, bit c);        
+        bit eval(TernaryOpKind kind, bit a, bit b, bit c);        
 
         UnaryOp<bit> Lookup(UnaryLogicOpKind kind);
 
         BinaryOp<bit> Lookup(BinaryLogicOpKind kind);
 
-        TernaryOp<bit> Lookup(TernaryBitOpKind kind);
+        TernaryOp<bit> Lookup(TernaryOpKind kind);
 
     }
     
@@ -44,7 +44,7 @@ namespace Z0.Logix
 
         IEnumerable<BinaryBitwiseOpKind> BinaryBitwiseKinds {get;}
 
-        IEnumerable<TernaryBitOpKind> TernaryBitOpKinds {get;}
+        IEnumerable<TernaryOpKind> TernaryBitOpKinds {get;}
 
         T Eval<T>(UnaryBitwiseOpKind kind, T a)
             where T : unmanaged;
@@ -52,7 +52,7 @@ namespace Z0.Logix
         T Eval<T>(BinaryBitwiseOpKind kind, T a, T b)
             where T : unmanaged;
 
-        T Eval<T>(TernaryBitOpKind kind, T a, T b, T c)
+        T Eval<T>(TernaryOpKind kind, T a, T b, T c)
             where T : unmanaged;
 
         UnaryOp<T> Lookup<T>(UnaryBitwiseOpKind kind)
@@ -61,7 +61,7 @@ namespace Z0.Logix
         BinaryOp<T> Lookup<T>(BinaryBitwiseOpKind kind)
             where T : unmanaged;
 
-        TernaryOp<T> Lookup<T>(TernaryBitOpKind kind)
+        TernaryOp<T> Lookup<T>(TernaryOpKind kind)
             where T : unmanaged;
 
     }

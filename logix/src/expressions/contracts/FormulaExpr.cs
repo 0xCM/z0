@@ -37,6 +37,6 @@ namespace Z0.Logix
         /// <summary>
         /// The defining expression
         /// </summary>
-        new ITypedExpr<T> Encoding {get;}
+        new IExpr<T> Encoding {get;}
     }
 }

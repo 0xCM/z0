@@ -20,7 +20,6 @@ namespace Z0
         where V : unmanaged
         where T : unmanaged
     {
-
         /// <summary>
         /// Creates a graph from supplied vertices and edges, sorting the provided vertices according to their index
         /// </summary>
@@ -53,5 +52,4 @@ namespace Z0
         public ReadOnlySpan<Edge<V>> Edges 
             => edges;
     }
-
 }

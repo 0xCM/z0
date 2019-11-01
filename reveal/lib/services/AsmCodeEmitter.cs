@@ -33,28 +33,51 @@ namespace Z0
 
         public readonly FilePath TargetPath {get;}
 
-        public void EmitAsm(IEnumerable<MethodDisassembly> disassembly)        
+        void EmitTimestamp(StreamWriter writer)
+            => writer.WriteLine($"; {now().ToLexicalString()}"); 
+
+        public void EmitAsm(IEnumerable<MethodDisassembly> disassembly, bool append = false)        
         {
             using var writer = Writer();
+
             var asm = disassembly.DistillAsm().ToArray();
-            Emit(asm, writer);
+            if(asm.Length != 0)
+            {
+                if(append)
+                    EmitTimestamp(writer);
+
+                Emit(asm, writer, !append);
+            }
         }
 
-        public void EmitAsm(IEnumerable<AsmFuncInfo> disassembly)        
+        public void EmitAsm(IEnumerable<AsmFuncInfo> disassembly, bool append = false)        
         {
-            using var writer = Writer();
-            Emit(disassembly.ToArray(), writer);
+            using var writer = Writer(append);
+
+            var asm = disassembly.ToArray();
+            if(asm.Length != 0)
+            {            
+                if(append)
+                    EmitTimestamp(writer);
+                
+                Emit(asm, writer, !append);
+            }
         }
 
-        StreamWriter Writer()   
+        StreamWriter Writer(bool append = false)   
         {
             TargetRoot.CreateIfMissing();
-            return new StreamWriter(TargetPath.FullPath, false);
+            return new StreamWriter(TargetPath.FullPath, append);
         }
 
-        void Emit(AsmFuncInfo[] src, StreamWriter dst)
+        void Emit(AsmFuncInfo[] src, StreamWriter dst, bool timestamp)
         {
-            dst.WriteLine($"; {now().ToLexicalString()}");
+            if(src.Length == 0)
+                return;
+            
+            if(timestamp)
+                EmitTimestamp(dst);
+
             for(var i=0; i< src.Length; i++)
             {   
                 var spec = src[i];             

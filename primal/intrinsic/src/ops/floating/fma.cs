@@ -24,7 +24,7 @@ namespace Z0
         /// <param name="y">The second operand</param>
         /// <param name="z">The third operand</param>
         [MethodImpl(Inline)]
-        public static Vec128<float> fnmadd(in Vec128<float> x, in Vec128<float> y, in Vec128<float> z)
+        public static Vector128<float> vfnmadd(Vector128<float> x, Vector128<float> y, Vector128<float> z)
             => MultiplyAddNegated(x,y,z);
 
         /// <summary>
@@ -35,7 +35,7 @@ namespace Z0
         /// <param name="y">The second operand</param>
         /// <param name="z">The third operand</param>
         [MethodImpl(Inline)]
-        public static Vec128<double> fnmadd(in Vec128<double> x, in Vec128<double> y, in Vec128<double> z)
+        public static Vector128<double> vfnmadd(Vector128<double> x, Vector128<double> y, Vector128<double> z)
             => MultiplyAddNegated(x,y,z);
 
 
@@ -47,7 +47,7 @@ namespace Z0
         /// <param name="y">The second operand</param>
         /// <param name="z">The third operand</param>
         [MethodImpl(Inline)]
-        public static Vec128<float> fmaddsub(in Vec128<float> x, in Vec128<float> y, in Vec128<float> z)
+        public static Vector128<float> vfmaddsub(Vector128<float> x, Vector128<float> y, Vector128<float> z)
             => MultiplyAddSubtract(x,y,z);
 
         /// <summary>
@@ -59,7 +59,7 @@ namespace Z0
         /// <param name="y">The second operand</param>
         /// <param name="z">The third operand</param>
         [MethodImpl(Inline)]
-        public static Vec128<double> fmaddsub(in Vec128<double> x, in Vec128<double> y, in Vec128<double> z)
+        public static Vector128<double> vfmaddsub(Vector128<double> x, Vector128<double> y, Vector128<double> z)
             => MultiplyAddSubtract(x,y,z);
 
         /// <summary>
@@ -70,7 +70,7 @@ namespace Z0
         /// <param name="y">The second operand</param>
         /// <param name="z">The third operand</param>
         [MethodImpl(Inline)]
-        public static Vec256<float> fnmadd(in Vec256<float> x, in Vec256<float> y, in Vec256<float> z)
+        public static Vector256<float> vfnmadd(Vector256<float> x, Vector256<float> y, Vector256<float> z)
             => MultiplyAddNegated(x,y,z);
 
         /// <summary>
@@ -81,7 +81,7 @@ namespace Z0
         /// <param name="y">The second operand</param>
         /// <param name="z">The third operand</param>
         [MethodImpl(Inline)]
-        public static Vec256<double> fnmadd(in Vec256<double> x, in Vec256<double> y, in Vec256<double> z)
+        public static Vector256<double> vfnmadd(Vector256<double> x, Vector256<double> y, Vector256<double> z)
             => MultiplyAddNegated(x,y,z);
 
         /// <summary>
@@ -91,7 +91,7 @@ namespace Z0
         /// <param name="y">The second operand</param>
         /// <param name="z">The third operand</param>
         [MethodImpl(Inline)]
-        public static Vec256<float> fmaddsub(in Vec256<float> x, in Vec256<float> y, in Vec256<float> z)
+        public static Vector256<float> vfmaddsub(Vector256<float> x, Vector256<float> y, Vector256<float> z)
             => MultiplyAddSubtract(x,y,z);
 
         /// <summary>
@@ -103,7 +103,7 @@ namespace Z0
         /// <param name="y">The second operand</param>
         /// <param name="z">The third operand</param>
         [MethodImpl(Inline)]
-        public static Vec256<double> fmaddsub(in Vec256<double> x, in Vec256<double> y, in Vec256<double> z)
+        public static Vector256<double> vfmaddsub(Vector256<double> x, Vector256<double> y, Vector256<double> z)
             => MultiplyAddSubtract(x,y,z);
     }
 }

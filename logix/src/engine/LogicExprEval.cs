@@ -23,7 +23,7 @@ namespace Z0.Logix
                     return eval(x.BaseExpr);
                 case ILogicLiteral x:
                     return x.Value;
-                case ILogicOpExpr x:
+                case ILogicOp x:
                     return eval(x);
                 case IComparisonExpr x:
                     return eval(x.Lhs) == eval(x.Rhs);
@@ -36,7 +36,7 @@ namespace Z0.Logix
         /// Evaluates a logical operator expression
         /// </summary>
         /// <param name="expr">The expression to evaluate</param>
-        static bit eval(ILogicOpExpr expr)
+        static bit eval(ILogicOp expr)
         {
             switch(expr)               
             {

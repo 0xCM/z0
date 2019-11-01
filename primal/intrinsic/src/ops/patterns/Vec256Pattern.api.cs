@@ -99,12 +99,12 @@ namespace Z0
         /// </summary>
         /// <typeparam name="T">The primal component type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector256<T> decrements<T>(T last = default, params Swap[] swaps)
+        public static Vector256<T> decrements<T>(T start, params Swap[] swaps)
             where T : unmanaged
         {
             var n = Vector256<T>.Count;
             var dst = Span256.Alloc<T>(n);
-            var val = last;
+            var val = start;
             for(var i=0; i<n; i++)
             {
                 dst[i] = val;

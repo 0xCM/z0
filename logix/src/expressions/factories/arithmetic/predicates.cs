@@ -15,7 +15,7 @@ namespace Z0.Logix
     public static class PredicateSpec
     {
         [MethodImpl(Inline)]
-        public static ComparisonPred<T> compare<T>(ComparisonKind kind, ITypedExpr<T> a, ITypedExpr<T> b)
+        public static ComparisonPred<T> compare<T>(ComparisonKind kind, IExpr<T> a, IExpr<T> b)
             where T : unmanaged
                 => new ComparisonPred<T>(kind,a,b);
 
@@ -31,7 +31,7 @@ namespace Z0.Logix
         /// <param name="b">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static ComparisonPred<T> equals<T>(ITypedExpr<T> a, ITypedExpr<T> b)
+        public static ComparisonPred<T> equals<T>(IExpr<T> a, IExpr<T> b)
             where T : unmanaged
                 => compare(Eq, a, b);
 
@@ -53,7 +53,7 @@ namespace Z0.Logix
         /// <param name="b">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static ComparisonPred<T> lt<T>(ITypedExpr<T> a, ITypedExpr<T> b)
+        public static ComparisonPred<T> lt<T>(IExpr<T> a, IExpr<T> b)
             where T : unmanaged
                 => compare(Lt, a, b);
 
@@ -75,7 +75,7 @@ namespace Z0.Logix
         /// <param name="b">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static ComparisonPred<T> lteq<T>(ITypedExpr<T> a, ITypedExpr<T> b)
+        public static ComparisonPred<T> lteq<T>(IExpr<T> a, IExpr<T> b)
             where T : unmanaged
                 => compare(LtEq, a, b);
 
@@ -97,7 +97,7 @@ namespace Z0.Logix
         /// <param name="b">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static ComparisonPred<T> gt<T>(ITypedExpr<T> a, ITypedExpr<T> b)
+        public static ComparisonPred<T> gt<T>(IExpr<T> a, IExpr<T> b)
             where T : unmanaged
                 => compare(Gt, a, b);
 
@@ -119,7 +119,7 @@ namespace Z0.Logix
         /// <param name="b">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static ComparisonPred<T> gteq<T>(ITypedExpr<T> a, ITypedExpr<T> b)
+        public static ComparisonPred<T> gteq<T>(IExpr<T> a, IExpr<T> b)
             where T : unmanaged
                 => compare(GtEq, a, b);
 

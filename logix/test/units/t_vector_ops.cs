@@ -6,14 +6,10 @@ namespace Z0.Logix
 {
     using System;
     using System.Linq;
-    using System.Collections.Generic;
-    using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
-    using System.Reflection;
     
     using static zfunc;
     
-
     public class t_vector_ops : UnitTest<t_vector_ops>
     {
         protected override int CycleCount => Pow2.T08;
@@ -55,8 +51,7 @@ namespace Z0.Logix
                 }
             }
             else
-            {
-                
+            {                
                 for(var i=0; i<CycleCount; i++)
                 for(var sample=0; sample< SampleSize; sample++)
                 for(var k=0; k< kinds.Length; k++, opcount++)
@@ -65,14 +60,12 @@ namespace Z0.Logix
                     y = x;
                     x = result;
                 }
-
             }
 
             clock.Stop();
 
             Benchmark(opname, clock, opcount);
         }
-
 
         void vector_op256_bench<T>(bool lookup, N256 n = default, SystemCounter clock = default)
             where T : unmanaged

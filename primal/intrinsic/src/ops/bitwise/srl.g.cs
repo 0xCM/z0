@@ -16,17 +16,7 @@ namespace Z0
     partial class ginx
     {
         
-        /// <summary>
-        /// Shifts the entire 128-bit vector rightwards at bit-level resolution
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <param name="offset">The number of bits the shift rightward</param>
-        [MethodImpl(Inline)]
-        public static Vector128<T> vsrlx<T>(Vector128<T> src, byte offset)        
-            where T : unmanaged
-                => generic<T>(dinxc.vsrlx(src.AsUInt64(), offset));
 
- 
         [MethodImpl(Inline)]
         public static Vector128<T> vsrl<T>(Vector128<T> lhs, byte offset)
             where T : unmanaged

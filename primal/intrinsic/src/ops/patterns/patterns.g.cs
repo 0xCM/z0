@@ -45,14 +45,24 @@ namespace Z0
                 => Vec256Pattern.units<T>();
 
         [MethodImpl(Inline)]
-        public static Vector128<T> vincrements<T>(N128 n)
+        public static Vector128<T> vincrements<T>(N128 n,T first = default, params Swap[] swaps)
             where T : unmanaged
-                => Vec128Pattern.increments<T>();
+                => Vec128Pattern.increments<T>(first,swaps);
 
         [MethodImpl(Inline)]
-        public static Vector256<T> vincrements<T>(N256 n)
+        public static Vector256<T> vincrements<T>(N256 n,T first = default, params Swap[] swaps)
             where T : unmanaged
-                => Vec256Pattern.increments<T>();        
+                => Vec256Pattern.increments<T>(first,swaps);        
+
+        [MethodImpl(Inline)]
+        public static Vector128<T> vdecrements<T>(N128 n, T first, params Swap[] swaps)
+            where T : unmanaged
+                => Vec128Pattern.decrements<T>(first,swaps);
+
+        [MethodImpl(Inline)]
+        public static Vector256<T> vdecrements<T>(N256 n, T first, params Swap[] swaps)
+            where T : unmanaged
+                => Vec256Pattern.decrements<T>(first,swaps);        
 
         /// <summary>
         /// Returns a vector that decribes a lo/hi lane merge permutation

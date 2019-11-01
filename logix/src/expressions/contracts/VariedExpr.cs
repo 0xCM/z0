@@ -29,14 +29,14 @@ namespace Z0.Logix
 
     }
 
-    public interface IVariedExpr<T> : IVariedExpr, ITypedExpr<T>
+    public interface IVariedExpr<T> : IVariedExpr, IExpr<T>
         where T : unmanaged
     {
-        ITypedExpr<T> BaseExpr {get;}
+        IExpr<T> BaseExpr {get;}
 
         VariableExpr<T>[] Vars {get;}
 
-        void SetVars(params ITypedExpr<T>[] values);        
+        void SetVars(params IExpr<T>[] values);        
 
         void SetVars(params T[] values);
 

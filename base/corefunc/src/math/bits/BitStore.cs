@@ -23,6 +23,25 @@ namespace Z0
             => BitSeqData.Slice(index*8,8);
 
         /// <summary>
+        /// Constructs a sequence of 8 bytes {bi} := [b7,...b0] over the domain {0,1} according to whether the
+        /// bit in the i'th position of the source is respecively disabled/enabled
+        /// </summary>
+        /// <param name="value">The source value</param>
+        [MethodImpl(Inline)]
+        public static ReadOnlySpan<byte> select_alt(byte value)        
+            => U8Index[value].bitseq;
+        
+
+        /// <summary>
+        /// Selects unpacked bits from a block of 8*256 bytes, where each byte represents 1 bit
+        /// </summary>
+        /// <param name="offset">The bit offset index</param>
+        /// <param name="length">The number of bits to select</param>
+        [MethodImpl(Inline)]
+        public static ReadOnlySpan<byte> select(int offset, int length)
+            => BitSeqData.Slice(offset,length);
+
+        /// <summary>
         /// Constructs a span of bytes where each byte, ordered from lo to hi, 
         /// represents a single bit in the source value
         /// </summary>
@@ -88,7 +107,7 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return ReadSeq(uint8(src));
+                return select_alt(uint8(src));
             else if(typeof(T) == typeof(ushort))
                 return ReadSeq(uint16(src));
             else if(typeof(T) == typeof(uint))
@@ -125,21 +144,12 @@ namespace Z0
 
         /// <summary>
         /// Constructs a sequence of 8 bytes {bi} := [b7,...b0] over the domain {0,1} according to whether the
-        /// bit in the i'th position of the source is respecively disabled/enabled
-        /// </summary>
-        /// <param name="value">The source value</param>
-        [MethodImpl(Inline)]
-        static ReadOnlySpan<byte> ReadSeq(byte value)        
-            => U8Index[value].bitseq;
-        
-        /// <summary>
-        /// Constructs a sequence of 8 bytes {bi} := [b7,...b0] over the domain {0,1} according to whether the
         /// bit in the i'th position of the source is respecively disabled/enabled. The uppermost bit b7 determines
         /// the sign
         /// </summary>
         [MethodImpl(Inline)]
         static ReadOnlySpan<byte> ReadSeq(sbyte src)
-            => ReadSeq((byte)src);
+            => select_alt((byte)src);
 
         /// <summary>
         /// Constructs a sequence of 16 bytes {bi} := [b15,...b0] over the domain {0,1} according to whether the
@@ -151,8 +161,8 @@ namespace Z0
         {
             (var lo, var hi) = ((byte)src, (byte)(src >> 8));
             Span<byte> dst = new byte[16];
-            ReadSeq(lo).CopyTo(dst,0);
-            ReadSeq(hi).CopyTo(dst,8);
+            select_alt(lo).CopyTo(dst,0);
+            select_alt(hi).CopyTo(dst,8);
             return dst;            
         }
 
@@ -235,14 +245,6 @@ namespace Z0
         static (sbyte index, sbyte[] bitseq, char[] bitchars, string text)[] I8Index
             = DefineI8Index();        
 
-        /// <summary>
-        /// Selects unpacked bits from a block of 8*256 bytes, where each byte represents 1 bit
-        /// </summary>
-        /// <param name="offset">The bit offset index</param>
-        /// <param name="length">The number of bits to select</param>
-        [MethodImpl(Inline)]
-        public static ReadOnlySpan<byte> select(BitSize offset, BitSize length)
-            => BitSeqData.Slice(offset,length);
 
         static ref readonly byte BitSeqHead 
         {

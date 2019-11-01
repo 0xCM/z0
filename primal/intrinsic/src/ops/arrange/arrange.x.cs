@@ -14,9 +14,8 @@ namespace Z0
     using static zfunc;
     using static As;
 
-    public static class ArrangeX
+    partial class dinxx
     {
-
         /// <summary>
         /// Defines a shuffle spec from a permutation
         /// </summary>
@@ -27,7 +26,6 @@ namespace Z0
             var data = src.Terms.Convert<byte>();
             return ginx.vload(n128,in head(data));
         }
-
 
         [MethodImpl(Inline)]
         public static Perm<N16> ToPerm(this Vector128<byte> src)

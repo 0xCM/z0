@@ -126,7 +126,7 @@ namespace Z0.Test
         public void span_bits()
         {
             var src = Random.Span<byte>(Pow2.T03);
-            var bv = BitVector64.FromScalar(BitConverter.ToUInt64(src));
+            var bv = BitVector.from(n64,BitConverter.ToUInt64(src));
             Claim.eq(src.ToBitString(), bv.ToBitString());
 
             for(var i=0; i<src.Length; i++)
@@ -141,7 +141,7 @@ namespace Z0.Test
             var n = 40;      
             var bvz = BitCells<ulong>.FromCell(z,n);
             Span<byte> xSrc =  BitConverter.GetBytes(z);
-            var bvx = BitCells.Load(xSrc.Slice(0,5).ToArray());
+            var bvx = BitCells.load(xSrc.Slice(0,5).ToArray());
             Claim.eq(gbits.pop(z), bvz.Pop());
             Claim.eq(gbits.pop(z), bvx.Pop());
 

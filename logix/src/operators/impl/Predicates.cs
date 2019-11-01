@@ -10,7 +10,7 @@ namespace Z0.Logix
     using System.Runtime.CompilerServices;
 
     using static zfunc;    
-    using static TernaryBitOpKind;
+    using static TernaryOpKind;
 
     /// <summary>
     /// Defines predicate operations

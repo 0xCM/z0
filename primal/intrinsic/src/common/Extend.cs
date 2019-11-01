@@ -11,9 +11,6 @@ namespace Z0
     
     using static zfunc;    
 
-    public delegate Vec256<T> Perm64x4<T>(Vec256<T> src)
-        where T : unmanaged;
-
     partial class ginxx
     {
 

@@ -16,7 +16,7 @@ namespace Z0
         public static ReadOnlySpan<byte> bitseq(byte value)
             => BitStore.select(value);
 
-        public static ReadOnlySpan<byte> bitseq(BitSize offset, BitSize count)
+        public static ReadOnlySpan<byte> bitseq(int offset, int count)
             => BitStore.select(offset,count);
 
         public static ByteInfo byteinfo(byte src)

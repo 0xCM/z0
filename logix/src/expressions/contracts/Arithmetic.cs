@@ -15,27 +15,27 @@ namespace Z0.Logix
 
     }
     
-    public interface IArithmeticExpr<T> : IArithmeticExpr, ITypedExpr<T>
+    public interface IArithmeticExpr<T> : IArithmeticExpr, IExpr<T>
         where  T : unmanaged
     {
         
     }
 
-    public interface IArithmeticOp : IOpExpr
+    public interface IArithmeticOp : IOperator
     {
 
     }
 
-    public interface IArithmeticOp<T> : IArithmeticOp, IArithmeticExpr<T>, ITypedOpExpr<T>
+    public interface IArithmeticOp<T> : IArithmeticOp, IArithmeticExpr<T>, IOperator<T>
         where T : unmanaged
     {
 
 
     }
 
-    public interface IArithmeticOp<T,K> : IArithmeticOp<T>, ITypedOpExpr<T,K>
+    public interface IArithmeticOp<T,K> : IArithmeticOp<T>, IOperator<T,K>
         where T : unmanaged
-        where K : Enum
+        where K : unmanaged, Enum
     {
 
 
@@ -47,7 +47,7 @@ namespace Z0.Logix
     }
 
 
-    public interface IUnaryArithmeticOp<T> :  IUnaryArithmeticOp, IArithmeticOp<T>, ITypedUnaryOp<T, UnaryArithmeticOpKind> 
+    public interface IUnaryArithmeticOp<T> :  IUnaryArithmeticOp, IArithmeticOp<T, UnaryArithmeticOpKind>
         where T : unmanaged
     {
 
@@ -61,12 +61,10 @@ namespace Z0.Logix
     public interface IBinaryArithmeticOp<T> : IBinaryArithmeticOp, IArithmeticOp<T,BinaryArithmeticOpKind>
         where T : unmanaged
     {
-        ITypedExpr<T> LeftArg {get;}
+        IExpr<T> LeftArg {get;}
 
-        ITypedExpr<T> RightArg {get;}
+        IExpr<T> RightArg {get;}
 
     }
-
-
 
 }

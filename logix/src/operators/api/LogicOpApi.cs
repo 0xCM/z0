@@ -12,7 +12,7 @@ namespace Z0.Logix
     using static zfunc;
     using static LogicOps;
     using static OpHelpers;
-    using static TernaryBitOpKind;
+    using static TernaryOpKind;
 
     public static class LogicOpApi
     {
@@ -47,8 +47,8 @@ namespace Z0.Logix
         /// <summary>
         /// Advertises the supported ternary opeators
         /// </summary>
-        public static TernaryBitOpKind[] TernaryOpKinds
-            => range((byte)1,(byte)X4F).Cast<TernaryBitOpKind>().ToArray();
+        public static TernaryOpKind[] TernaryOpKinds
+            => range((byte)1,(byte)X4F).Cast<TernaryOpKind>().ToArray();
 
         /// <summary>
         /// Evaluates a unary operator directly without lookup/delegate indirection
@@ -158,7 +158,7 @@ namespace Z0.Logix
         /// <param name="a">The first operand</param>
         /// <param name="b">The second operand</param>
         /// <param name="c">The third operand</param>
-        public static bit eval(TernaryBitOpKind kind, bit a, bit b, bit c)
+        public static bit eval(TernaryOpKind kind, bit a, bit b, bit c)
         {
             switch(kind)
             {
@@ -264,7 +264,7 @@ namespace Z0.Logix
         /// Returns a kind-indentified ternary operator
         /// </summary>
         /// <param name="kind">The operator kind</param>
-        public static TernaryOp<bit> lookup(TernaryBitOpKind kind)
+        public static TernaryOp<bit> lookup(TernaryOpKind kind)
         {
             switch(kind)
             {

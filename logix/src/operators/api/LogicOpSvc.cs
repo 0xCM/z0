@@ -27,7 +27,7 @@ namespace Z0.Logix
         public IEnumerable<BinaryLogicOpKind> BinaryOpKinds 
             => LogicOpApi.BinaryOpKinds;
 
-        public IEnumerable<TernaryBitOpKind> TernaryOpKinds 
+        public IEnumerable<TernaryOpKind> TernaryOpKinds 
             => LogicOpApi.TernaryOpKinds;
 
         public bit Eval(UnaryLogicOpKind kind, bit a)
@@ -36,7 +36,7 @@ namespace Z0.Logix
         public bit eval(BinaryLogicOpKind kind, bit a, bit b)
             => LogicOpApi.eval(kind,a,b);
 
-        public bit eval(TernaryBitOpKind kind, bit a, bit b, bit c)
+        public bit eval(TernaryOpKind kind, bit a, bit b, bit c)
             => LogicOpApi.eval(kind,a,b,c);
 
         public UnaryOp<bit> Lookup(UnaryLogicOpKind kind)
@@ -45,7 +45,7 @@ namespace Z0.Logix
         public BinaryOp<bit> Lookup(BinaryLogicOpKind kind)
             => LogicOpApi.lookup(kind);
 
-        public TernaryOp<bit> Lookup(TernaryBitOpKind kind)
+        public TernaryOp<bit> Lookup(TernaryOpKind kind)
             => LogicOpApi.lookup(kind);
     }
 

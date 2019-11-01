@@ -23,23 +23,50 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ReadOnlySpan<char> bitchars<T>(in T src)
         {
+            if(typeof(T) == typeof(byte) 
+            || typeof(T) == typeof(ushort) 
+            || typeof(T) == typeof(uint) 
+            || typeof(T) == typeof(ulong))
+                return bitchars_u(src);
+            else if(typeof(T) == typeof(sbyte) 
+            || typeof(T) == typeof(short) 
+            || typeof(T) == typeof(int) 
+            || typeof(T) == typeof(long))
+                return bitchars_i(src);
+            else 
+                return bitchars_f(src);            
+        }
+
+        [MethodImpl(Inline)]
+        static ReadOnlySpan<char> bitchars_u<T>(in T src)
+        {
             if(typeof(T) == typeof(byte))
                 return BitStore.bitchars(uint8(in src));
-            else if(typeof(T) == typeof(sbyte))
+            else if(typeof(T) == typeof(ushort))
+                return bitchars(uint16(in src));
+            else if(typeof(T) == typeof(uint))
+                return bitchars(uint32(in src));
+            else 
+                return bitchars(uint64(in src));
+        }
+
+        [MethodImpl(Inline)]
+        static ReadOnlySpan<char> bitchars_i<T>(in T src)
+        {
+            if(typeof(T) == typeof(sbyte))
                 return BitStore.bitchars(int8(in src));
             else if(typeof(T) == typeof(short))
                 return bitchars(int16(in src));
-            else if(typeof(T) == typeof(ushort))
-                return bitchars(uint16(in src));
             else if(typeof(T) == typeof(int))
                 return bitchars(int32(in src));
-            else if(typeof(T) == typeof(uint))
-                return bitchars(uint32(in src));
-            else if(typeof(T) == typeof(long))
+            else 
                 return bitchars(int64(in src));
-            else if(typeof(T) == typeof(ulong))
-                return bitchars(uint64(in src));
-            else if(typeof(T) == typeof(float))
+        }
+
+        [MethodImpl(Inline)]
+        static ReadOnlySpan<char> bitchars_f<T>(in T src)
+        {
+            if(typeof(T) == typeof(float))
                 return bitchars(float32(in src));
             else if(typeof(T) == typeof(double))
                 return bitchars(float64(in src));
@@ -86,13 +113,18 @@ namespace Z0
         [MethodImpl(Inline)]
         static ReadOnlySpan<char> bitchars(ushort src)
         {
-            const int len = 16;
-            const int midpoint = 8;
+            // const int len = 16;
+            // const int midpoint = 8;
+            //Bits.split(src, out var lo, out var hi);
+            
+            // Span<char> dst = new char[len];            
+            // BitStore.bitchars(lo).CopyTo(dst,0);
+            // BitStore.bitchars(hi).CopyTo(dst,midpoint);
+            // return dst;            
+
             Bits.split(src, out var lo, out var hi);
-            Span<char> dst = new char[len];
-            BitStore.bitchars(lo).CopyTo(dst,0);
-            BitStore.bitchars(hi).CopyTo(dst,midpoint);
-            return dst;            
+            return BitStore.bitchars(lo).Concat(BitStore.bitchars(hi));
+
         }
 
         /// <summary>
@@ -115,13 +147,16 @@ namespace Z0
         [MethodImpl(Inline)]
         static ReadOnlySpan<char> bitchars(uint src)
         {
-            const int len = 32;
-            const int midpoint = 16;
-            Bits.split(src,out var lo, out var hi);
-            Span<char> dst = new char[len];
-            bitchars(lo).CopyTo(dst,0);
-            bitchars(hi).CopyTo(dst,midpoint);
-            return dst;            
+            // const int len = 32;
+            // const int midpoint = 16;
+            // Bits.split(src,out var lo, out var hi);
+            // Span<char> dst = new char[len];
+            // bitchars(lo).CopyTo(dst,0);
+            // bitchars(hi).CopyTo(dst,midpoint);
+            // return dst;            
+            Bits.split(src, out var lo, out var hi);
+            return bitchars(lo).Concat(bitchars(hi));
+
         }
 
         [MethodImpl(Inline)]
@@ -139,13 +174,17 @@ namespace Z0
         [MethodImpl(Inline)]
         static ReadOnlySpan<char> bitchars(ulong src)
         {
-            const int len = 64;
-            const int midpoint = 32;
+            // const int len = 64;
+            // const int midpoint = 32;
+            // Bits.split(src, out var lo, out var hi);
+            // Span<char> dst = new char[len];
+            // bitchars(lo).CopyTo(dst,0);
+            // bitchars(hi).CopyTo(dst,midpoint);
+            // return dst;            
+
             Bits.split(src, out var lo, out var hi);
-            Span<char> dst = new char[len];
-            bitchars(lo).CopyTo(dst,0);
-            bitchars(hi).CopyTo(dst,midpoint);
-            return dst;            
+            return bitchars(lo).Concat(bitchars(hi));
+
         }
 
         [MethodImpl(Inline)]
@@ -164,7 +203,6 @@ namespace Z0
         static ReadOnlySpan<char> bitchars(float src)
             => bitchars(src.ToBits());
  
-
         [MethodImpl(Inline)]
         static ReadOnlySpan<char> bitchars(double src)
             => bitchars(src.ToBits());

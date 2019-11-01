@@ -44,9 +44,9 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<byte> vrotr(Vector128<byte> src, byte offset)
         {
-            const byte bitsize = 8;
+            const byte seglen = 8;
             var x = dinx.vsrl(src, offset);
-            var y = dinx.vsll(src, (byte)(bitsize - offset));   
+            var y = dinx.vsll(src, (byte)(seglen - offset));   
             return dinx.vor(x,y);             
         }
 
@@ -58,9 +58,9 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<ushort> vrotr(Vector128<ushort> src, byte offset)
         {
-            const byte bitsize = 16;
+            const byte seglen = 16;
             var x = dinx.vsrl(src, offset);
-            var y = dinx.vsll(src, (byte)(bitsize - offset));   
+            var y = dinx.vsll(src, (byte)(seglen - offset));   
             return dinx.vor(x,y);             
         }
 
@@ -72,9 +72,9 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<uint> vrotr(Vector128<uint> src, byte offset)
         {
-            const byte bitsize = 32;
+            const byte seglen = 32;
             var x = dinx.vsrl(src, offset);
-            var y = dinx.vsll(src, (byte)(bitsize - offset));   
+            var y = dinx.vsll(src, (byte)(seglen - offset));   
             return dinx.vor(x,y);             
         }
 
@@ -86,9 +86,9 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<ulong> vrotr(Vector128<ulong> src, byte offset)
         {
-            const byte bitsize = 64;
+            const byte seglen = 64;
             var x = dinx.vsrl(src, offset);
-            var y = dinx.vsll(src, (byte)(bitsize - offset));   
+            var y = dinx.vsll(src, (byte)(seglen - offset));   
             return dinx.vor(x,y);             
         }
 
@@ -100,9 +100,9 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<byte> vrotr(Vector256<byte> src, byte offset)
         {
-            const byte bitsize = 8;
+            const byte seglen = 8;
             var x = dinx.vsrl(src, offset);
-            var y = dinx.vsll(src, (byte)(bitsize - offset));   
+            var y = dinx.vsll(src, (byte)(seglen - offset));   
             return dinx.vor(x,y);             
         }
 
@@ -114,9 +114,9 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<ushort> vrotr(Vector256<ushort> src, byte offset)
         {
-            const byte bitsize = 16;
+            const byte seglen = 16;
             var x = dinx.vsrl(src, offset);
-            var y = dinx.vsll(src, (byte)(bitsize - offset));   
+            var y = dinx.vsll(src, (byte)(seglen - offset));   
             return dinx.vor(x,y);             
         }
 
@@ -128,9 +128,9 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<uint> vrotr(Vector256<uint> src, byte offset)
         {
-            const byte bitsize = 32;
+            const byte seglen = 32;
             var x = dinx.vsrl(src, offset);
-            var y = dinx.vsll(src, (byte)(bitsize - offset));   
+            var y = dinx.vsll(src, (byte)(seglen - offset));   
             return dinx.vor(x,y);             
         }
 
@@ -142,9 +142,9 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<ulong> vrotr(Vector256<ulong> src, byte offset)
         {
-            const byte bitsize = 64;
+            const byte seglen = 64;
             var x = dinx.vsrl(src, offset);
-            var y = dinx.vsll(src, (byte)(bitsize - offset));   
+            var y = dinx.vsll(src, (byte)(seglen - offset));   
             return dinx.vor(x,y);             
         }
 

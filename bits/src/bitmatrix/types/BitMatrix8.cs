@@ -402,7 +402,7 @@ namespace Z0
         /// </summary>
         [MethodImpl(Inline)]
         public readonly BitVector64 ToBitVector()
-            => BitVector64.FromScalar((ulong)this);
+            => BitVector.from(n64,(ulong)this);
 
         /// <summary>
         /// Creates a generic matrix from the primal source data

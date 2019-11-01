@@ -14,7 +14,7 @@ namespace Z0.Designators
     /// <summary>
     /// Represents the assembly
     /// </summary>
-    public sealed class Logix : AssemblyDesignator<Logix>
+    public sealed class LogixTest : AssemblyDesignator<LogixTest>
     {
 
     }

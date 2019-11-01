@@ -17,26 +17,13 @@ namespace Z0
 
     partial class dinxc
     {   
-        /// <summary>
-        /// Shifts the entire 128-bit vector leftwards at bit-level resolution
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <param name="offset">The number of bits the shift leftward</param>
-        /// <remarks>Taken from http://programming.sirrida.de</remarks>
-        [MethodImpl(Inline)]
-        public static Vector128<ulong> vsllx(Vector128<ulong> src, byte offset)        
-        {
-            var x = dinx.vbsll(src, 8);
-            var y = dinx.vsll(src, offset);
-            return dinx.vor(y, dinx.vsrl(x, (byte)(64 - offset)));
-        }
 
         [MethodImpl(Inline)]
         public static Vector128<byte> vsll(Vector128<byte> src, byte offset)
         {
             // Lift the source vector into a space where the SLL operation exists and perform it there
             var srcX = vconvert(src, out Vector256<ushort> _);
-            var dstA = dinx.vsll(srcX, offset).AsByte();
+            var dstA = v8u(dinx.vsll(srcX, offset));
 
             // Truncate overflows to sets up the component pattern [X 0 X 0 ... X 0]
             var trm =  Vec256Pattern.altclear<byte>();
@@ -75,19 +62,6 @@ namespace Z0
             return dinx.vinsert(dinx.vlo(permA), dinx.vlo(permB), out Vector256<byte> _);            
         }
 
-        /// <summary>
-        /// Shifts the entire 128-bit vector rightwards at bit-level resolution
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <param name="offset">The number of bits the shift rightward</param>
-        /// <remarks>Taken from http://programming.sirrida.de</remarks>
-        [MethodImpl(Inline)]
-        public static Vector128<ulong> vsrlx(Vector128<ulong> src, byte offset)        
-        {
-            var x = dinx.vbsrl(src, 8);
-            var y = dinx.vsrl(src, offset);
-            return dinx.vor(y,dinx.vsll(x, (byte)(64 - offset)));
-        }
 
         [MethodImpl(Inline)]
         public static Vector256<byte> vsrl(Vector256<byte> src, byte offset)

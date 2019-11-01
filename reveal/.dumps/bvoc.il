@@ -1,4 +1,11 @@
-// 2019-10-30 14:10:38:968
+// 2019-10-31 21:45:34:838
+ReadOnlySpan<Char> bitchars_32u(uint value)
+{
+    IL_0000: ldarga.s value
+    IL_0002: call System.ReadOnlySpan`1<System.Char> Z0.gbits::bitchars<System.UInt32>(System.UInt32&)
+    IL_0007: ret
+
+}
 BitVector32 and_bv_32u(BitVector32 x, BitVector32 y)
 {
     IL_0000: ldarga.s x
@@ -691,87 +698,30 @@ ulong mask_8x64u(ref ulong dst, int exp0, int exp1, int exp2, int exp3, int exp4
     IL_0014: ret
 
 }
-ulong pack8(Span<bit> src)
+void pack8(ref bit src, ref uint dst)
 {
     IL_0000: call Z0.N8 zfunc::get_n8()
     IL_0005: ldarg.0
-    IL_0006: call System.UInt64 Z0.Bits::pack(Z0.N8,System.Span`1<Z0.bit>)
-    IL_000B: ret
+    IL_0006: ldarg.1
+    IL_0007: call System.Void Z0.Bits::pack(Z0.N8,Z0.bit&,System.UInt32&)
+    IL_000C: ret
 
 }
-BitVector<byte> pack8g(Span<bit> src)
-{
-    IL_0000: ldarg.0
-    IL_0001: call Z0.BitVector`1<System.Byte> Z0.gbits::pack<System.Byte>(System.Span`1<Z0.bit>)
-    IL_0006: ret
-
-}
-ulong pack16(Span<bit> src)
+void pack16(ref bit src, ref uint dst)
 {
     IL_0000: call Z0.N16 zfunc::get_n16()
     IL_0005: ldarg.0
-    IL_0006: call System.UInt64 Z0.Bits::pack(Z0.N16,System.Span`1<Z0.bit>)
-    IL_000B: ret
+    IL_0006: ldarg.1
+    IL_0007: call System.Void Z0.Bits::pack(Z0.N16,Z0.bit&,System.UInt32&)
+    IL_000C: ret
 
 }
-BitVector<ushort> pack16g(Span<bit> src)
-{
-    IL_0000: ldarg.0
-    IL_0001: call Z0.BitVector`1<System.UInt16> Z0.gbits::pack<System.UInt16>(System.Span`1<Z0.bit>)
-    IL_0006: ret
-
-}
-ulong pack32(Span<bit> src)
+void pack32(ref bit src, ref uint dst)
 {
     IL_0000: call Z0.N32 zfunc::get_n32()
     IL_0005: ldarg.0
-    IL_0006: call System.UInt64 Z0.Bits::pack(Z0.N32,System.Span`1<Z0.bit>)
-    IL_000B: ret
-
-}
-BitVector<uint> pack32g(Span<bit> src)
-{
-    IL_0000: ldarg.0
-    IL_0001: call Z0.BitVector`1<System.UInt32> Z0.gbits::pack<System.UInt32>(System.Span`1<Z0.bit>)
-    IL_0006: ret
-
-}
-BitVector<ulong> pack64g(Span<bit> src)
-{
-    IL_0000: ldarg.0
-    IL_0001: call Z0.BitVector`1<System.UInt64> Z0.gbits::pack<System.UInt64>(System.Span`1<Z0.bit>)
-    IL_0006: ret
-
-}
-ulong pack64(Span<bit> src)
-{
-    IL_0000: call Z0.N64 zfunc::get_n64()
-    IL_0005: ldarg.0
-    IL_0006: call System.UInt64 Z0.Bits::pack(Z0.N64,System.Span`1<Z0.bit>)
-    IL_000B: ret
-
-}
-uint pop_4x64(ulong x0, ulong x1, ulong x2, ulong x3)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: ldarg.2
-    IL_0003: ldarg.3
-    IL_0004: call System.UInt32 Z0.gbits::pop<System.UInt64>(System.UInt64,System.UInt64,System.UInt64,System.UInt64)
-    IL_0009: ret
-
-}
-uint pop_8x64(ulong x0, ulong x1, ulong x2, ulong x3, ulong x4, ulong x5, ulong x6, ulong x7)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: ldarg.2
-    IL_0003: ldarg.3
-    IL_0004: ldarg.s x4
-    IL_0006: ldarg.s x5
-    IL_0008: ldarg.s x6
-    IL_000A: ldarg.s x7
-    IL_000C: call System.UInt32 Z0.gbits::pop<System.UInt64>(System.UInt64,System.UInt64,System.UInt64,System.UInt64,System.UInt64,System.UInt64,System.UInt64,System.UInt64)
-    IL_0011: ret
+    IL_0006: ldarg.1
+    IL_0007: call System.Void Z0.Bits::pack(Z0.N32,Z0.bit&,System.UInt32&)
+    IL_000C: ret
 
 }

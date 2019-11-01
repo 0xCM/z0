@@ -18,8 +18,8 @@ namespace Z0
             where R : struct, ICpuReg<N>
         {
             ref var src = ref Unsafe.As<R,byte>(ref register);
-            var dst = new byte[register.ByteSize];
-            Unsafe.CopyBlock(ref dst[0], ref src, register.ByteSize);
+            Span<byte> dst = stackalloc byte[register.ByteSize];
+            Unsafe.CopyBlock(ref head(dst), ref src, register.ByteSize);
             return dst.FormatHexBlocks();
         }
 

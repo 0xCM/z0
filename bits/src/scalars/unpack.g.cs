@@ -44,19 +44,35 @@ namespace Z0
             where S : unmanaged
             where T : unmanaged
         {
-            var srcsize = bitsize<S>();
-            var bitcount = bitsize<S>()*src.Length;
+            if(typeof(T) == typeof(bit))
+                return MemoryMarshal.Cast<bit,T>(unpack(src, MemoryMarshal.Cast<T,bit>(dst)));
+            else
+            {
+                var srcsize = bitsize<S>();
+                var bitcount = bitsize<S>()*src.Length;
+                require(dst.Length >= bitcount);
+
+                var k = 0;
+                for(var i=0; i< src.Length; i++)
+                for(var j=0; j< srcsize; j++)
+                    dst[k++]  = test(src[i], j) == Bit.On ? one<T>() : zero<T>();            
+                return dst;
+            }
+        }
+
+        public static Span<bit> unpack<T>(Span<T> src, Span<bit> dst)
+            where T : unmanaged
+        {
+            var srcsize = bitsize<T>();
+            var bitcount = bitsize<T>()*src.Length;
             require(dst.Length >= bitcount);
 
             var k = 0;
             for(var i=0; i< src.Length; i++)
             for(var j=0; j< srcsize; j++)
-                dst[k++]  = test(src[i], j) == Bit.On ? one<T>() : zero<T>();            
+                dst[k++]  = test(src[i], j);
             return dst;
         }
-
-
-
     }
 
 }

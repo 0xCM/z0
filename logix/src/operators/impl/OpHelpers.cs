@@ -20,7 +20,7 @@ namespace Z0.Logix
             where T : unmanaged
                 => throw new NotSupportedException($"{id}");
 
-       public static TernaryBitwiseOp<T> nologic<T>(TernaryBitOpKind id, T x = default)        
+       public static TernaryBitwiseOp<T> nologic<T>(TernaryOpKind id, T x = default)        
             where T : unmanaged
                 => throw new NotSupportedException($"{id}");
 
@@ -55,7 +55,7 @@ namespace Z0.Logix
             where T : unmanaged
                 => throw new NotSupportedException($"{id}");
 
-       public static TernaryOp<T> dne<T>(TernaryBitOpKind id, T x = default)        
+       public static TernaryOp<T> dne<T>(TernaryOpKind id, T x = default)        
             where T : unmanaged
                 => throw new NotSupportedException($"{id}");
 
@@ -64,7 +64,7 @@ namespace Z0.Logix
             where E : Enum
                 => throw new NotSupportedException($"{id}");
 
-        public static void Set<T>(IVariedExpr<T> expr, params ITypedExpr<T>[] values)
+        public static void Set<T>(IVariedExpr<T> expr, params IExpr<T>[] values)
             where T : unmanaged
         {
             var n = Math.Min(expr.Vars.Length, values.Length);

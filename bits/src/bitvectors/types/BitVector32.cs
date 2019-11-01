@@ -38,7 +38,6 @@ namespace Z0
         public static BitVector32 Alloc()
             => new BitVector32(0);
 
-
         /// <summary>
         /// Creates a vector from an usigned 32-bit integer
         /// </summary>
@@ -94,14 +93,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitVector32 FromBitString(in BitString src)        
             => src.TakeUInt32();
-
-        public static BitVector32 Parse(string src)
-        {
-            var bs = BitString.Parse(src);
-            var len = math.min(bs.Length, Width);
-            Bits.packseq(bs.BitSeq, out uint dst);
-            return dst;
-        }
     
         /// <summary>
         /// Enumerates all 32-bit bitvectors whose width is less than or equal to a specified maximum
@@ -388,7 +379,7 @@ namespace Z0
         /// </summary>
         [MethodImpl(Inline)]
         public BitVector64 Expand()
-            => BitVector64.FromScalar(data);
+            => BitVector.from(n64,data);
 
         /// <summary>
         /// Presents bitvector content as a bytespan
@@ -519,35 +510,6 @@ namespace Z0
             get => data;
         }
 
-
-        /// <summary>
-        /// Applies a truncating reduction Bv32 -> Bv8
-        /// </summary>
-        [MethodImpl(Inline)]
-        public BitVector8 ToBitVector8()
-            => BitVector8.FromScalar(data);
-
-        /// <summary>
-        /// Applies a truncating reduction Bv32 -> Bv16
-        /// </summary>
-        [MethodImpl(Inline)]
-        public BitVector16 ToBitVector16()
-            => BitVector16.FromScalar(data);
-
-        /// <summary>
-        /// Applies the identity conversion Bv32 -> Bv32
-        /// </summary>
-        [MethodImpl(Inline)]
-        public BitVector32 ToBitVector32()
-            => BitVector32.FromScalar(data);
-
-        /// <summary>
-        /// Applies a widening conversion Bv16 -> Bv64
-        /// </summary>
-        [MethodImpl(Inline)]
-        public BitVector64 ToBitVector64()
-            => BitVector64.FromScalar(data);
-
         /// <summary>
         /// Returns a copy of the vector
         /// </summary>
@@ -566,10 +528,6 @@ namespace Z0
             dst.Permute(p);
             return dst;
         }
-
-        [MethodImpl(Inline)]
-        public BitVector64 Concat(BitVector32 tail)
-            => BitVector64.FromScalars(tail.data, data);
 
         /// <summary>
         /// Formats the bitvector as a bitstring

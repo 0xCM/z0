@@ -72,7 +72,6 @@ namespace Z0
         public static bool operator != (Matrix<M,N,T> lhs, Matrix<M,N,T> rhs) 
             => !lhs.Equals(rhs);
 
-
         [MethodImpl(Inline)]
         public Matrix(T[] src)
         {
@@ -279,12 +278,10 @@ namespace Z0
             return ref dst;
         }
 
-
         public override bool Equals(object rhs)
             => rhs is Matrix<M,N,T> x && Equals(x);
  
         public override int GetHashCode()
             => data.GetHashCode();
     }
-
 }

@@ -111,7 +111,7 @@ namespace Z0
         /// <param name="first">The value of the first component</param>
         /// <param name="swaps">Transpositions applied to the decreasing sequence prior to vector creation</param>
         /// <typeparam name="T">The primal component type</typeparam>        
-        public static Vector128<T> decrements<T>(T first = default, params Swap[] swaps)
+        public static Vector128<T> decrements<T>(T first, params Swap[] swaps)
             where T : unmanaged  
         {
             var n = Vector128<T>.Count;
@@ -142,27 +142,27 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static Vector128<short> inc_128x16i(N128 n = default)
-            => ginx.vload(n, in head(Vec128PatternData.Inc16u)).AsInt16();
+            => v16i(ginx.vload(n, in head(Vec128PatternData.Inc16u)));
 
         [MethodImpl(Inline)]
         static Vector128<ushort> inc_128x16u(N128 n = default)
-            => ginx.vload(n, in head(Vec128PatternData.Inc16u)).AsUInt16();
+            => v16u(ginx.vload(n, in head(Vec128PatternData.Inc16u)));
 
         [MethodImpl(Inline)]
         static Vector128<int> inc_128x32i(N128 n = default)
-            => ginx.vload(n, in head(Vec128PatternData.Inc32u)).AsInt32();
+            => v32i(ginx.vload(n, in head(Vec128PatternData.Inc32u)));
 
         [MethodImpl(Inline)]
         static Vector128<uint> inc_128x32u(N128 n = default)
-            => ginx.vload(n, in head(Vec128PatternData.Inc32u)).AsUInt32();
+            => v32u(ginx.vload(n, in head(Vec128PatternData.Inc32u)));
 
         [MethodImpl(Inline)]
         static Vector128<long> inc_128x64i(N128 n = default)
-            => ginx.vload(n, in head(Vec128PatternData.Inc64u)).AsInt64();
+            => v64i(ginx.vload(n, in head(Vec128PatternData.Inc64u)));
 
         [MethodImpl(Inline)]
         static Vector128<ulong> inc_128x64u(N128 n = default)
-            => ginx.vload(n, in head(Vec128PatternData.Inc64u)).AsUInt64();
+            => v64u(ginx.vload(n, in head(Vec128PatternData.Inc64u)));
 
 
     }

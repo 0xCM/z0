@@ -27,13 +27,13 @@ namespace Z0.Logix
         
         void check_exhaustive(ComparisonExpr t)
         {
-            var disp = LogicEngine.dispatcher();
+            
             foreach(var c in bitcombo(t.Vars.Length))
             {
                 t.SetVars(c);
                 Claim.eq(bit.On,LogicEngine.eval(t));            
                 Claim.yea(LogicEngine.satisfied(t, c[0], c[1]));
-                Claim.yea(disp.Satisfied(t, c[0], c[1]));
+                
             }
         }
 
@@ -42,11 +42,9 @@ namespace Z0.Logix
             if(odd(now().Ticks))
             {
                 evaluator_bench();
-                dispatcher_bench();
             }
             else
             {
-                dispatcher_bench();
                 evaluator_bench();
 
             }
@@ -75,8 +73,6 @@ namespace Z0.Logix
         }
         
 
-        void dispatcher_bench()
-            => identity_bench("identity/dispatcher", LogicEngine.dispatcher().Satisfied);
 
         void evaluator_bench()
             => identity_bench("identity/evaluator", LogicEngine.satisfied);

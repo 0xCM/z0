@@ -15,6 +15,7 @@ namespace Z0
         
     partial class dinx
     {                
+
         /// <summary>
         /// Multiplies two two 256-bit/u64 vectors to yield a 256-bit/u64 vector
         /// </summary>
@@ -23,24 +24,13 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<ulong> vmul(Vector256<ulong> x, Vector256<ulong> y)    
         {
-            var loMask = ginx.vbroadcast(n256, 0x00000000fffffffful);  
-              
-            var xl = dinx.vand(x, loMask).AsUInt32();
-            var xh = dinx.vsrl(x, 32).AsUInt32();
-            var yl = dinx.vand(y, loMask).AsUInt32();
-            var yh = dinx.vsrl(y, 32).AsUInt32();
-
-            var xh_yl = dinx.vmul(xh, yl);
-            var hl = dinx.vsll(xh_yl, 32);
-
-            var xh_mh = dinx.vmul(xh, yh);
-            var lh = dinx.vsll(xh_mh, 32);
-
-            var xl_yl = dinx.vmul(xl, yl);
-
-            var hl_lh = dinx.vadd(hl, lh);
-            var z = dinx.vadd(xl_yl, hl_lh);
-            return z;
+            var loMask = vbroadcast(n256, 0x00000000fffffffful);                
+            var xh = v32u(vsrl(x, 32));
+            var yl = v32u(vand(y, loMask));
+            return vadd(
+                vmul(v32u(vand(x, loMask)), yl), 
+                vadd(vsll(vmul(xh, yl), 32), 
+                    vsll(vmul(xh, v32u(vsrl(y, 32))), 32)));
         }
 
         /// <summary>
@@ -109,19 +99,8 @@ namespace Z0
         /// <param name="lhs">The left operand</param>
         /// <param name="rhs">The right operand</param>
         [MethodImpl(Inline)]
-        public static Vec128<ulong> clmul(Scalar128<ulong> a, Scalar128<ulong> b)
+        public static Vec128<ulong> clmul(Vector128<ulong> a, Vector128<ulong> b)
             => CarrylessMultiply(a,b,0x00);
-
-        /// <summary>
-        /// __m128i _mm_clmulepi64_si128 (__m128i a, __m128i b, const int imm8) PCLMULQDQ xmm, xmm/m128, imm8
-        /// Computes the caryless 128-bit product of two 64-bit operands
-        /// </summary>
-        /// <param name="lhs">The left operand</param>
-        /// <param name="rhs">The right operand</param>
-        /// <param name="mask">Specifies the components of the source vectors to multiply</param>
-        [MethodImpl(Inline)]
-        public static Vec128<ulong> clmul(in Vec128<ulong> lhs, in Vec128<ulong> rhs, ClMulMask mask)
-            =>  CarrylessMultiply(lhs, rhs, (byte)mask);
 
         /// __m128i _mm_clmulepi64_si128 (__m128i a, __m128i b, const int imm8) PCLMULQDQ xmm, xmm/m128, imm8
         /// Computes the caryless 128-bit product of two 64-bit operands
@@ -167,11 +146,11 @@ namespace Z0
         /// <param name="b">The second operand</param>
         /// <param name="poly">The reducing polynomial</param>
         [MethodImpl(Inline)]
-        public static Scalar128<ulong> clmulr(Scalar128<ulong> a, Scalar128<ulong> b, Vec128<ulong> poly)
+        public static Vector128<ulong> clmulr(Vector128<ulong> a, Vector128<ulong> b, Vector128<ulong> poly)
         {
-            var prod = dinx.clmul(a,b);
-            prod = dinx.vxor(prod, dinx.clmul(vsrl(prod, 64), poly, ClMulMask.X00));
-            prod = dinx.vxor(prod, dinx.clmul(vsrl(prod, 64), poly, ClMulMask.X00));
+            var prod = clmul(a,b);
+            prod = vxor(prod, clmul(vsrl(prod, 64), poly, ClMulMask.X00));
+            prod = vxor(prod, clmul(vsrl(prod, 64), poly, ClMulMask.X00));
             return prod;
         }
 

@@ -10,53 +10,41 @@ namespace Z0.Logix
     
     using static zfunc;
 
+
     /// <summary>
-    /// Characterizes a ternary operator
+    /// Characterizes a ternary operator parametrized by expression type
     /// </summary>
-    public interface ITernaryOp : IOpExpr
+    public interface ITernaryOp<X> : IOperator
+        where X : IExpr
     {
-        
+        X FirstArg {get;}
+
+        X SecondArg {get;}
+
+        X ThirdArg {get;}
     }
 
-    public interface ITernaryLogicOp : ITernaryOp, ILogicOpExpr<TernaryBitOpKind>
-    {
-        /// <summary>
-        /// The first operand
-        /// </summary>
-        ILogicExpr FirstArg {get;}
-
-        /// <summary>
-        /// The second operand
-        /// </summary>
-        ILogicExpr SecondArg {get;}
-
-        /// <summary>
-        /// The third operand
-        /// </summary>
-        ILogicExpr ThirdArg {get;}
-    }
 
     /// <summary>
     /// Characterizes a typed ternary bitwise operator
     /// </summary>
     /// <typeparam name="T">The type over which the operator is defined</typeparam>
-    public interface ITernaryBitwiseOp<T> : ITernaryOp, ITypedOpExpr<T,TernaryBitOpKind> 
+    public interface ITernaryBitwiseOp<T> : ITernaryOp<IExpr<T>>, IOperator<T,TernaryOpKind> 
         where T : unmanaged
     {
-        /// <summary>
-        /// The first operand
-        /// </summary>
-        ITypedExpr<T> FirstArg {get;}
 
-        /// <summary>
-        /// The second operand
-        /// </summary>
-        ITypedExpr<T> SecondArg {get;}
 
-        /// <summary>
-        /// The third operand
-        /// </summary>
-        ITypedExpr<T> ThirdArg {get;}
+    }
+
+
+    public interface ITernaryLogicOp :  ITernaryOp<ILogicExpr>,  ILogicOp<TernaryOpKind> 
+    {
+
+    }
+
+    public interface ITernaryLogicOp<T> : ITernaryLogicOp, ITernaryOp<ILogicExpr<T>>,ILogicOp<T,TernaryOpKind>
+        where T : unmanaged
+    {
 
     }
 

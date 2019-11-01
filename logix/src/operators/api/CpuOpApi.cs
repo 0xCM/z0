@@ -12,7 +12,7 @@ namespace Z0.Logix
     using System.Runtime.Intrinsics;
 
     using static zfunc;    
-    using static TernaryBitOpKind;
+    using static TernaryOpKind;
     using static As;
     using static OpHelpers;
     using static CpuOps;
@@ -52,8 +52,8 @@ namespace Z0.Logix
         /// <summary>
         /// Advertises the supported ternary opeators
         /// </summary>
-        public static IEnumerable<TernaryBitOpKind> TernaryBitwiseKinds
-            => range((byte)1,(byte)X18).Cast<TernaryBitOpKind>();
+        public static IEnumerable<TernaryOpKind> TernaryBitwiseKinds
+            => range((byte)1,(byte)X18).Cast<TernaryOpKind>();
 
         /// <summary>
         /// Evaluates an identified unary operator over a supplied operand
@@ -204,7 +204,7 @@ namespace Z0.Logix
         /// <param name="z">The third operand</param>
         /// <typeparam name="T">The primal vector component type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector128<T> eval<T>(TernaryBitOpKind kind, Vector128<T> x, Vector128<T> y, Vector128<T> z)
+        public static Vector128<T> eval<T>(TernaryOpKind kind, Vector128<T> x, Vector128<T> y, Vector128<T> z)
             where T : unmanaged
                 => lookup<T>(n128,kind)(x,y,z);
 
@@ -217,7 +217,7 @@ namespace Z0.Logix
         /// <param name="z">The third operand</param>
         /// <typeparam name="T">The primal vector component type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector256<T> eval<T>(TernaryBitOpKind kind, Vector256<T> x, Vector256<T> y, Vector256<T> z)
+        public static Vector256<T> eval<T>(TernaryOpKind kind, Vector256<T> x, Vector256<T> y, Vector256<T> z)
             where T : unmanaged
                 => lookup<T>(n256,kind)(x,y,z);
 
@@ -454,7 +454,7 @@ namespace Z0.Logix
         /// </summary>
         /// <param name="kind">The operator kind</param>
         /// <typeparam name="T">The primal vector component type</typeparam>
-        public static TernaryOp<Vector128<T>> lookup<T>(N128 n, TernaryBitOpKind id)
+        public static TernaryOp<Vector128<T>> lookup<T>(N128 n, TernaryOpKind id)
             where T : unmanaged
         {
             switch(id)
@@ -495,7 +495,7 @@ namespace Z0.Logix
         /// </summary>
         /// <param name="kind">The operator kind</param>
         /// <typeparam name="T">The primal vector component type</typeparam>
-        public static TernaryOp<Vector256<T>> lookup<T>(N256 n, TernaryBitOpKind kind)
+        public static TernaryOp<Vector256<T>> lookup<T>(N256 n, TernaryOpKind kind)
             where T : unmanaged
         {
             switch(kind)

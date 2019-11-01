@@ -130,7 +130,7 @@ namespace Z0.Logix
             check_binary_op<ulong>(op);
         }
 
-        void check_op_identity<T>(TernaryBitOpKind id)
+        void check_op_identity<T>(TernaryOpKind id)
             where T: unmanaged
         {
             var a = convert<T>(0b1111_0000);

@@ -181,18 +181,18 @@ namespace Z0.Logix
             TruthTables.Emit(dst,OpArityKind.Ternary);
         }
 
-        void render_check()
-        {
-            var v1 = variable("a");
-            var v2 = variable("b");
-            var expr1 = and(v1,v2);
-            var expr4 = xnor(v1,v2);
-            var expr2 = and(expr1,expr4);
-            var expr3 = not(expr2);
-            Trace(expr1.Format());
-            Trace(expr2.Format());
-            Trace(expr3.Format());
-        }
+        // void render_check()
+        // {
+        //     var v1 = variable("a");
+        //     var v2 = variable("b");
+        //     var expr1 = and(v1,v2);
+        //     var expr4 = xnor(v1,v2);
+        //     var expr2 = and(expr1,expr4);
+        //     var expr3 = not(expr2);
+        //     Trace(expr1.Format());
+        //     Trace(expr2.Format());
+        //     Trace(expr3.Format());
+        // }
 
 
     }

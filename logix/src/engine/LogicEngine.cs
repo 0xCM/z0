@@ -15,25 +15,28 @@ namespace Z0.Logix
     public static partial class LogicEngine
     {
         /// <summary>
-        /// Returns a reference to the logic evaulator
-        /// </summary>
-        public static ILogicDispatcher dispatcher()        
-            => LogicDispatcher.Instance;
-
-        /// <summary>
         /// Evalutates an untyped expression
         /// </summary>
         /// <param name="expr">The expression to evaluate</param>
         [MethodImpl(Inline)]
         public static bit eval(ILogicExpr expr)
             => LogicExprEval.eval(expr);
-        
+
+        /// <summary>
+        /// Evalutates a typed logic expression
+        /// </summary>
+        /// <param name="expr">The expression to evaluate</param>
+        [MethodImpl(Inline)]
+        public static bit eval<T>(ILogicExpr<T> expr)
+            where T : unmanaged
+                => LogicExprEval.eval(expr);
+
         /// <summary>
         /// Evalutates a typed scalar expression
         /// </summary>
         /// <param name="expr">The expression to evaluate</param>
         [MethodImpl(Inline)]
-        public static TypedLiteralExpr<T> eval<T>(ITypedExpr<T> expr)
+        public static LiteralExpr<T> eval<T>(IExpr<T> expr)
             where T : unmanaged                
                 => ScalarExprEval.eval(expr);
 
@@ -44,17 +47,17 @@ namespace Z0.Logix
         /// <param name="expr">The predicate to evaluate</param>
         /// <typeparam name="T">The type over which the comparison is defined</typeparam>
         [MethodImpl(Inline)]
-        public static TypedLiteralExpr<T> eval<T>(IComparisonExpr<T> expr)
+        public static LiteralExpr<T> eval<T>(IComparisonExpr<T> expr)
             where T : unmanaged
                 => CompareEval.eval(expr);
 
         [MethodImpl(Inline)]
-        public static TypedLiteralExpr<Vector128<T>> eval<T>(IComparisonExpr<Vector128<T>> expr)
+        public static LiteralExpr<Vector128<T>> eval<T>(IComparisonExpr<Vector128<T>> expr)
             where T : unmanaged
                 => CompareEval.eval(expr);
 
         [MethodImpl(Inline)]
-        public static TypedLiteralExpr<Vector256<T>> eval<T>(IComparisonExpr<Vector256<T>> expr)
+        public static LiteralExpr<Vector256<T>> eval<T>(IComparisonExpr<Vector256<T>> expr)
             where T : unmanaged
                 => CompareEval.eval(expr);
 
@@ -74,7 +77,7 @@ namespace Z0.Logix
         /// </summary>
         /// <param name="expr">The expression to evaluate</param>
         [MethodImpl(Inline)]
-        public static TypedLiteralExpr<T> eval<T>(IArithmeticExpr<T> expr)
+        public static LiteralExpr<T> eval<T>(IArithmeticExpr<T> expr)
             where T : unmanaged
                 => ArithExprEval.eval(expr);
 
@@ -83,7 +86,7 @@ namespace Z0.Logix
         /// </summary>
         /// <param name="expr">The expression to evaluate</param>
         [MethodImpl(Inline)]
-        public static TypedLiteralExpr<Vector128<T>> eval<T>(ITypedExpr<Vector128<T>> expr)
+        public static LiteralExpr<Vector128<T>> eval<T>(IExpr<Vector128<T>> expr)
             where T : unmanaged
                 => VectorExprEval.eval(expr);
 
@@ -92,7 +95,7 @@ namespace Z0.Logix
         /// </summary>
         /// <param name="expr">The expression to evaluate</param>
         [MethodImpl(Inline)]
-        public static TypedLiteralExpr<Vector256<T>> eval<T>(ITypedExpr<Vector256<T>> expr)
+        public static LiteralExpr<Vector256<T>> eval<T>(IExpr<Vector256<T>> expr)
             where T : unmanaged
                 => VectorExprEval.eval(expr);
   

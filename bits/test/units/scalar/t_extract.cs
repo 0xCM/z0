@@ -45,10 +45,10 @@ namespace Z0.Test
 
         public void extract_64u()
         {
-            var bv8 = BitVector8.FromScalar(0b10000000);
+            var bv8 = BitVector.from(n8, 0b10000000);
             var bv16 = bv8.Concat(bv8);
             var bv32 = bv16.Concat(bv16);
-            var bv64 = bv32.Concat(bv32);
+            var bv64 = BitVector.concat(bv32,bv32);
 
             var bs8 = bv8.ToBitString();
             var bs16 = bs8.Concat(bs8);

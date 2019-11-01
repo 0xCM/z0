@@ -107,24 +107,6 @@ namespace Z0.Test
             Claim.eq(y3,z3);
         }
 
-        public void pack_bools()
-        {                
-            var r1 = Bits.pack(false,true, true, false);
-            var e1 = (byte)0b0110;
-            Claim.eq(1,r1.Length);
-            Claim.eq(e1, r1[0]);
-
-            var r2 = Bits.pack(false, true, true, true);
-            var e2 = (byte)0b1110;
-            Claim.eq(1,r2.Length);
-            Claim.eq(e2, r2[0]);
-
-            var r3 = Bits.pack(false, true, true, true, true, false);
-            var e3 = (byte)0b011110;
-            Claim.eq(1,r3.Length);
-            Claim.eq(e3, r3[0]);
-        }
-
         public void pack_bistring()
         {
             var x =  0b111010010110011010111001110000100001101ul;
@@ -152,7 +134,7 @@ namespace Z0.Test
                 {
                     var dst = (byte)0;
                     var pos = (byte)(Pow2.pow(i) - 1);
-                    Bits.pack(x0, x1, x2, x3, x4, x5, x6, x7, pos, ref dst);
+                    pack(x0, x1, x2, x3, x4, x5, x6, x7, pos, ref dst);
                     
                     var j = 0;
                     Claim.yea(gbits.match(dst, j++, x0, pos));
@@ -165,6 +147,27 @@ namespace Z0.Test
                     Claim.yea(gbits.match(dst, j++, x7, pos));                    
                 }
             }
+        }
+
+        public static ref byte pack(byte x0, byte x1, byte x2, byte x3, byte x4, byte x5, byte x6, byte x7, byte pos, ref byte dst)
+        {
+          if(BitMask.test(x0, pos)) 
+            BitMask.enable(ref dst, 0);
+          if(BitMask.test(x1, pos)) 
+            BitMask.enable(ref dst, 1);
+          if(BitMask.test(x2, pos)) 
+            BitMask.enable(ref dst, 2);
+          if(BitMask.test(x3, pos)) 
+            BitMask.enable(ref dst, 3);
+          if(BitMask.test(x4, pos)) 
+            BitMask.enable(ref dst, 4);
+          if(BitMask.test(x5, pos)) 
+            BitMask.enable(ref dst, 5);
+          if(BitMask.test(x6, pos)) 
+            BitMask.enable(ref dst, 6);
+          if(BitMask.test(x7, pos)) 
+            BitMask.enable(ref dst, 7);
+          return ref dst;
         }
 
         public void pack_span32u()
@@ -193,8 +196,8 @@ namespace Z0.Test
 
             for(var i = 0; i<packed.Length; i++)
             {
-                 var x = BitVector64.FromScalar(BitConverter.ToUInt64(src.Slice(8*i)));
-                 var y = BitVector64.FromScalar(packed[i]);
+                 var x = BitVector.from(n64, BitConverter.ToUInt64(src.Slice(8*i)));
+                 var y = BitVector.from(n64, packed[i]);
                 Claim.eq((ulong)x, (ulong)y, AppMsg.Error($"{x.ToBitString()} != {y.ToBitString()}"));
             }        
         }
@@ -214,7 +217,32 @@ namespace Z0.Test
 
             }        
         }
-        
+
+        /// <summary>
+        /// Packs bits into bytes
+        /// </summary>
+        /// <param name="src">The source values</param>
+        /// <remarks>Adapted from https://stackoverflow.com/questions/713057/convert-bool-to-byte</remarks>
+        static Span<byte> pack(ReadOnlySpan<bit> src, Span<byte> dst)
+        {
+            int srcLen = src.Length;
+            for (int i = 0; i < srcLen; i++)
+                if (src[i])
+                    dst[i >> 3] |= (byte)((byte)1 << (i & 0x07));
+            return dst;
+        }
+
+        static Span<byte> pack(ReadOnlySpan<bit> src)
+        {
+            int srcLen = src.Length;
+            int dstLen = srcLen >> 3;
+            
+            if ((srcLen & 0x07) != 0) 
+                ++dstLen;
+
+            return pack(src, new byte[dstLen]);            
+        }
+
         void pack_roundtrip_check<T>(BitSize bitcount)
             where T : unmanaged
         {
@@ -224,7 +252,7 @@ namespace Z0.Test
             var x = src.ToBits();
             Claim.eq(bitcount, x.Length);
             
-            var y = Bits.pack(x);
+            var y = pack(x);
             var sizeT = size<T>();
             
             var q = Math.DivRem(bitcount, 8, out int r);

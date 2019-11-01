@@ -20,49 +20,44 @@ namespace Z0.Logix
         /// </summary>
         string Name {get;}            
 
-        void Set(IExpr value);
+    }
 
-        IExpr Value {get;}
+    public interface IVarExpr<T,X> : IVarExpr, IExpr<T>
+        where T : unmanaged
+        where X : IExpr
+        
+    {
+        /// <summary>
+        /// Updates the variable
+        /// </summary>
+        /// <param name="expr">The value to assigned to the variable</param>
+        void Set(X expr);
+
+        /// <summary>
+        /// Updates the expression value
+        /// </summary>
+        /// <param name="literal">The literal value to assign to the variable</param>
+        void Set(T literal);
+        
+        X Value {get;}
     }
 
     /// <summary>
     /// Characterizes a logical variable
     /// </summary>
-    public interface ILogicVarExpr : IVarExpr, ILogicExpr
+    public interface ILogicVarExpr : IVarExpr<bit,ILogicExpr>, ILogicExpr
     {
-        void Set(ILogicExpr value);
-
-        void Set(bit value);
-
-        new ILogicExpr Value {get;}
 
     }
 
     /// <summary>
     /// Characterizes a typed variable
     /// </summary>
-    public interface IVarExpr<T> : IVarExpr, ITypedExpr<T>
+    public interface IVarExpr<T> : IVarExpr<T, IExpr<T>>
         where T : unmanaged
     {
-        /// <summary>
-        /// Gets the current value of the variable
-        /// </summary>
-        new ITypedExpr<T> Value {get;}
 
-        /// <summary>
-        /// Sets the variable value
-        /// </summary>
-        void Set(ITypedExpr<T> value);
-
-        void Set(T value);
     }
 
-    public interface ILiteralVarExpr<T> : IVarExpr, ITypedExpr<T>
-        where T : unmanaged
-    {
-        void Set(T value);
-
-        new T Value {get;}
-    }
 
 }

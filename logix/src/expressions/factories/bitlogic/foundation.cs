@@ -94,7 +94,7 @@ namespace Z0.Logix
         /// <param name="b">The second operand</param>
         /// <param name="c">The third operand</param>
         [MethodImpl(Inline)]
-        public static TernaryLogicOp ternary(TernaryBitOpKind kind, ILogicExpr a, ILogicExpr b, ILogicExpr c)
+        public static TernaryLogicOp ternary(TernaryOpKind kind, ILogicExpr a, ILogicExpr b, ILogicExpr c)
             => new TernaryLogicOp(kind,a,b,c);
 
         /// <summary>
@@ -105,7 +105,7 @@ namespace Z0.Logix
         /// <param name="b">The second operand</param>
         /// <param name="c">The third operand</param>
         [MethodImpl(Inline)]
-        public static TernaryLogicOp ternary(TernaryBitOpKind kind, bit a, bit b, bit c)
+        public static TernaryLogicOp ternary(TernaryOpKind kind, bit a, bit b, bit c)
             => new TernaryLogicOp(kind,literal(a),literal(b),literal(c));
 
     }

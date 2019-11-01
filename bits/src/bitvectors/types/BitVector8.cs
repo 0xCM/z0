@@ -36,11 +36,6 @@ namespace Z0
         public static BitVector8 Alloc()
             => new BitVector8();
 
-
-        [MethodImpl(Inline)]
-        public static BitVector8 Parse(string src)
-            =>  FromBitString(BitString.Parse(src));
-
         /// <summary>
         /// Creates a vector from the primal source value it represents
         /// </summary>
@@ -102,24 +97,8 @@ namespace Z0
         /// Enumerates each and every 8-bit bitvector exactly once
         /// </summary>
         public static IEnumerable<BitVector8> All
-        {
-           get
-           {
-                var bv = BitVector8.Zero;
-                do            
-                    yield return bv;            
-                while(++bv);
-           }
-        }
+            => BitVector.all(n8);
 
-        public static IEnumerable<BitVector8> Gray
-        {
-            get
-            {
-                foreach(var x in All)
-                    yield return x ^ (x >> 1);
-            }
-        }
 
         /// <summary>
         /// Enumerates each and every nonmpty 8-bit bitvector exactly once
@@ -644,7 +623,7 @@ namespace Z0
         /// </summary>
         [MethodImpl(Inline)]
         public BitVector64 ToBitVector64()
-            => BitVector64.FromScalar(data);
+            => BitVector.from(n64,data);
 
         /// <summary>
         /// Formats the bitvector as a bitstring

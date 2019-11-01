@@ -25,18 +25,18 @@ namespace Z0.Logix
 
         public void check_vec128_identities()
         {
-            iter(TypedIdentities.Vec128Identities<byte>(), check_identity);
-            iter(TypedIdentities.Vec128Identities<ushort>(), check_identity);
-            iter(TypedIdentities.Vec128Identities<uint>(), check_identity);
-            iter(TypedIdentities.Vec128Identities<ulong>(), check_identity);
+            iter(TypedIdentities.Vec128Identities<byte>(), id => check_identity(n128,id));
+            iter(TypedIdentities.Vec128Identities<ushort>(), id => check_identity(n128,id));
+            iter(TypedIdentities.Vec128Identities<uint>(), id => check_identity(n128,id));
+            iter(TypedIdentities.Vec128Identities<ulong>(), id => check_identity(n128,id));
         }
 
         public void check_vec256_identities()
         {
-            iter(TypedIdentities.Vec256Identities<byte>(), check_identity);
-            iter(TypedIdentities.Vec256Identities<ushort>(), check_identity);
-            iter(TypedIdentities.Vec256Identities<uint>(), check_identity);
-            iter(TypedIdentities.Vec256Identities<ulong>(), check_identity);
+            iter(TypedIdentities.Vec256Identities<byte>(), id => check_identity(n256,id));
+            iter(TypedIdentities.Vec256Identities<ushort>(), id => check_identity(n256,id));
+            iter(TypedIdentities.Vec256Identities<uint>(), id => check_identity(n256,id));
+            iter(TypedIdentities.Vec256Identities<ulong>(), id => check_identity(n256,id));
         }
 
         void check_identity<T>(ComparisonExpr<T> identity)
@@ -54,7 +54,7 @@ namespace Z0.Logix
             }
         }
 
-        void check_identity<T>(ComparisonExpr<Vector128<T>> identity, N128 n = default)
+        void check_identity<T>(N128 n, ComparisonExpr<Vector128<T>> identity)
             where T :unmanaged
         {
             var @true = CpuOps.@true<T>(n128);
@@ -69,7 +69,7 @@ namespace Z0.Logix
             }
         }
 
-        void check_identity<T>(ComparisonExpr<Vector256<T>> equality, N256 n = default)
+        void check_identity<T>(N256 n, ComparisonExpr<Vector256<T>> equality)
             where T :unmanaged
         {
             var @true = CpuOps.@true<T>(n);

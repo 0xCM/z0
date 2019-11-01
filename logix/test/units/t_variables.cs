@@ -55,7 +55,7 @@ namespace Z0.Logix
         }
 
 
-        IReadOnlyList<T> solve<T>(VariedExpr<N1,T> expr, TypedLiteralExpr<T> match, Interval<T> domain)
+        IReadOnlyList<T> solve<T>(VariedExpr<N1,T> expr, LiteralExpr<T> match, Interval<T> domain)
             where T : unmanaged
         {
             var sln = new List<T>();
@@ -70,7 +70,7 @@ namespace Z0.Logix
             return sln;
         }
 
-        IReadOnlyList<T> solve<T>(VariedExpr<N2,T> expr, TypedLiteralExpr<T> match, Interval<T> domain)
+        IReadOnlyList<T> solve<T>(VariedExpr<N2,T> expr, LiteralExpr<T> match, Interval<T> domain)
             where T : unmanaged
         {
 

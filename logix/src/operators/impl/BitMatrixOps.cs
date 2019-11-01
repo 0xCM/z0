@@ -11,7 +11,7 @@ namespace Z0.Logix
 
     using static zfunc;    
     using static As;
-    using static TernaryBitOpKind;
+    using static TernaryOpKind;
 
     public static class BitMatrixOps
     {

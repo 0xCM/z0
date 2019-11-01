@@ -13,7 +13,7 @@ namespace Z0.Logix
     /// <summary>
     /// Characterizes a unary operator
     /// </summary>
-    public interface IUnaryOp : IOpExpr
+    public interface IUnaryOp : IOperator
     {
         
     }
@@ -30,35 +30,22 @@ namespace Z0.Logix
         X Arg {get;}
     }
 
-    public interface IUnaryLogicOp : IUnaryOp<ILogicExpr>, ILogicOpExpr<UnaryLogicOpKind>
-    {
 
-    }
-
-    /// <summary>
-    /// Characterizes a typed unary operator
-    /// </summary>
-    /// <typeparam name="T">The type over which the operator is defined</typeparam>
-    /// <typeparam name="K">The operator classifier</typeparam>
-    public interface ITypedUnaryOp<T> : IUnaryOp<ITypedExpr<T>>, ITypedOpExpr<T> 
-        where T : unmanaged
-    {
-
-
-    }
-
-    public interface ITypedUnaryOp<T,K> :  ITypedUnaryOp<T>, ITypedOpExpr<T,K>
-        where K : Enum
-        where T : unmanaged
-    {
-
-    }
-
-    public interface IUnaryBitwiseOp<T> : ITypedUnaryOp<T, UnaryBitwiseOpKind>
+    public interface IUnaryBitwiseOp<T> : IUnaryOp<IExpr<T>>, IOperator<T, UnaryBitwiseOpKind>
         where T : unmanaged
     {
         
     }
 
+    public interface IUnaryLogicOp : IUnaryOp<ILogicExpr>, ILogicOp<UnaryLogicOpKind>
+    {
+
+    }
+
+    public interface IUnaryLogicOp<T> :  IUnaryLogicOp, IUnaryOp<ILogicExpr<T>>, ILogicOp<T,UnaryLogicOpKind>
+        where T : unmanaged
+    {
+
+    }
 
 }

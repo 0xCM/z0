@@ -22,9 +22,7 @@ namespace Z0
 
         public static readonly BitVector64 Zero = default;
 
-        public static readonly BitVector64 One = 1;
-
-        public static readonly BitVector64 Ones = ulong.MaxValue;
+        public static readonly BitVector64 One = 1;        
 
         public const int Width = 64;
 
@@ -37,65 +35,6 @@ namespace Z0
         public static BitVector64 Alloc()
             => new BitVector64(0);
 
-        /// <summary>
-        /// Creates a vector from a primal source value
-        /// </summary>
-        /// <param name="src">The source value</param>
-        [MethodImpl(Inline)]
-        public static BitVector64 FromScalar(byte src)
-            => new BitVector64(src);    
-
-        /// <summary>
-        /// Creates a vector from a primal source value
-        /// </summary>
-        /// <param name="src">The source value</param>
-        [MethodImpl(Inline)]
-        public static BitVector64 FromScalar(ushort src)
-            => new BitVector64(src);    
-
-        /// <summary>
-        /// Creates a vector from a primal source value
-        /// </summary>
-        /// <param name="src">The source value</param>
-        [MethodImpl(Inline)]
-        public static BitVector64 FromScalar(uint src)
-            => new BitVector64(src);    
-
-        /// <summary>
-        /// Creates a vector from a primal source value
-        /// </summary>
-        /// <param name="src">The source value</param>
-        [MethodImpl(Inline)]
-        public static BitVector64 FromScalar(ulong src)
-            => new BitVector64(src);    
-
-        /// <summary>
-        /// Creates a vector from two unsigned 32-bit integers
-        /// </summary>
-        /// <param name="src">The source bitstring</param>
-        [MethodImpl(Inline)]
-        public static BitVector64 FromScalars(uint lo, uint hi)
-            => FromScalar((ulong)hi << 32 | (ulong)lo);
-
-        /// <summary>
-        /// Creates a vector from a bitstring
-        /// </summary>
-        /// <param name="src">The source bitstring</param>
-        [MethodImpl(Inline)]
-        public static BitVector64 FromBitString(BitString src)
-            => src.TakeUInt64();
-
-        /// <summary>
-        /// Parses a bitvector from a 0-1 string
-        /// </summary>
-        /// <param name="src">The source text</param>
-        public static BitVector64 Parse(string src)
-        {
-            var bs = BitString.Parse(src);
-            var len = math.min(bs.Length, Width);
-            Bits.packseq(bs.BitSeq, out ulong dst);
-            return dst;
-        }
 
         /// <summary>
         /// Enumerates all 32-bit bitvectors whose width is less than or equal to a specified maximum
@@ -170,7 +109,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]    
         public static implicit operator BitVector64(byte src)
-            => FromScalar(src);
+            => BitVector.from(n64,src);
 
         /// <summary>
         /// Implicitly converts a scalar value to a 64-bit bitvector
@@ -178,7 +117,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]    
         public static implicit operator BitVector64(ushort src)
-            => FromScalar(src);
+            => BitVector.from(n64,src);
 
         /// <summary>
         /// Implicitly converts a scalar value to a 64-bit bitvector
@@ -186,7 +125,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]    
         public static implicit operator BitVector64(uint src)
-            => FromScalar(src);
+            => BitVector.from(n64,src);
 
         /// <summary>
         /// Computes the bitwise XOR of the source operands
@@ -328,7 +267,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public Span<byte> AsBytes()
             => bytespan(ref data);
-
 
         /// <summary>
         /// Reads/Manipulates a source bit at a specified position
@@ -488,7 +426,6 @@ namespace Z0
         public readonly uint Pop()
             => Bits.pop(data);
         
-
         /// <summary>
         /// Tests whether all bits are on
         /// </summary>

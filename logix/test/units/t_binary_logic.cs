@@ -65,7 +65,7 @@ namespace Z0.Logix
             Claim.eq(Pow2.T08, bitcombo(n8).Distinct().Count());
         }
 
-        public void bitcombo_emit()
+        void bitcombo_emit()
         {
             var width = n8;
             var terms = bitcombo(width).Select(x => x.Terms).SelectMany(x => x).ToSpan();
@@ -125,7 +125,6 @@ namespace Z0.Logix
             var v1 = variable(1);
             var v2 = variable(2);
             var expr = binary(kind, v1,v2);
-            var disp = dispatcher();
 
             foreach(var seq in bitcombo(n2)) 
             {
@@ -135,9 +134,7 @@ namespace Z0.Logix
                 v2.Set(s2);
                 var expect = rule(s1,s2);
                 var e1 = eval(expr);
-                var e2 = disp.Eval(expr);
                 Claim.eq(expect,e1);
-                Claim.eq(expect,e2);
             }
         }
 

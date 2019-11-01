@@ -1,4 +1,4 @@
-// 2019-10-30 14:10:37:590
+// 2019-10-31 21:45:33:655
 bool vtestz_g256x16i(Vector256<short> src, Vector256<short> mask)
 {
     IL_0000: ldarg.0
@@ -90,35 +90,35 @@ bool vtestz_g256x64u(Vector256<ulong> src, Vector256<ulong> mask)
 Vector128<byte> ones_128x8u()
 {
     IL_0000: call Z0.N128 zfunc::get_n128()
-    IL_0005: call System.Runtime.Intrinsics.Vector128`1<System.Byte> Z0.ginx::vpOnes<System.Byte>(Z0.N128)
+    IL_0005: call System.Runtime.Intrinsics.Vector128`1<System.Byte> Z0.ginx::vones<System.Byte>(Z0.N128)
     IL_000A: ret
 
 }
 Vector128<ulong> ones_128x64u()
 {
     IL_0000: call Z0.N128 zfunc::get_n128()
-    IL_0005: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.ginx::vpOnes<System.UInt64>(Z0.N128)
+    IL_0005: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.ginx::vones<System.UInt64>(Z0.N128)
     IL_000A: ret
 
 }
 Vector256<byte> ones_256x8u()
 {
     IL_0000: call Z0.N256 zfunc::get_n256()
-    IL_0005: call System.Runtime.Intrinsics.Vector256`1<System.Byte> Z0.ginx::vpOnes<System.Byte>(Z0.N256)
+    IL_0005: call System.Runtime.Intrinsics.Vector256`1<System.Byte> Z0.ginx::vones<System.Byte>(Z0.N256)
     IL_000A: ret
 
 }
 Vector256<ulong> ones_256x64u()
 {
     IL_0000: call Z0.N256 zfunc::get_n256()
-    IL_0005: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.ginx::vpOnes<System.UInt64>(Z0.N256)
+    IL_0005: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.ginx::vones<System.UInt64>(Z0.N256)
     IL_000A: ret
 
 }
 Vector256<double> ones_256x64f()
 {
     IL_0000: call Z0.N256 zfunc::get_n256()
-    IL_0005: call System.Runtime.Intrinsics.Vector256`1<System.Double> Z0.ginx::vpOnes<System.Double>(Z0.N256)
+    IL_0005: call System.Runtime.Intrinsics.Vector256`1<System.Double> Z0.ginx::vones<System.Double>(Z0.N256)
     IL_000A: ret
 
 }

@@ -15,10 +15,10 @@ namespace Z0.Logix
     public static class KindExtensions
     {
        [MethodImpl(Inline)]
-        public static TernaryBitOpKind Next(this TernaryBitOpKind src)
-            => src != TernaryBitOpKind.XFF 
-                ? (TernaryBitOpKind)((uint)(src) + 1u)
-                : TernaryBitOpKind.X00;
+        public static TernaryOpKind Next(this TernaryOpKind src)
+            => src != TernaryOpKind.XFF 
+                ? (TernaryOpKind)((uint)(src) + 1u)
+                : TernaryOpKind.X00;
         
         [MethodImpl(Inline)]
         public static bool IsOperator(this LogicExprKind kind)

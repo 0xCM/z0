@@ -25,8 +25,6 @@ namespace Z0
     {        
         T[] data;
 
-        public static readonly Dim<N,N> Dim = default;        
-
         /// <summary>
         /// The number of rows in the structure
         /// </summary>
@@ -67,7 +65,6 @@ namespace Z0
         /// </summary>
         public static N ColRep = default;
 
-
         [MethodImpl(Inline)]
         public static implicit operator Matrix<N,T>(Matrix<N,N,T> src)
             => new Matrix<N,T>(src.Data);
@@ -91,7 +88,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bool operator != (Matrix<N,T> lhs, Matrix<N,T> rhs) 
             => !lhs.Equals(rhs);
-
 
         [MethodImpl(Inline)]
         public Matrix(T[] src)

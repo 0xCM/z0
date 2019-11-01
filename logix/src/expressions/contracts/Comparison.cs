@@ -36,18 +36,18 @@ namespace Z0.Logix
     /// <summary>
     /// Characterizes a claim that two variable-dependent typed comparison expressions are equivalent
     /// </summary>
-    public interface IComparisonExpr<T> : ITypedExpr<T>
+    public interface IComparisonExpr<T> : IExpr<T>
         where T : unmanaged
     {
         /// <summary>
         /// The left expression
         /// </summary>
-        ITypedExpr<T> LeftArg {get;}
+        IExpr<T> LeftArg {get;}
         
         /// <summary>
         /// The right expression
         /// </summary>
-        ITypedExpr<T> RightArg {get;}
+        IExpr<T> RightArg {get;}
 
         /// <summary>
         /// Variables upon which the expression depends
@@ -72,7 +72,4 @@ namespace Z0.Logix
     {
 
     }
-
-
-
 }

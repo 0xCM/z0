@@ -10,21 +10,21 @@ namespace Z0.Logix
     
     using static zfunc;
 
-    public interface IShiftOp : IOpExpr
+    public interface IShiftOp : IOperator
     {
         
     }
 
-    public interface IShiftOp<T> : IShiftOp, ITypedOpExpr<T, ShiftOpKind>
+    public interface IShiftOp<T> : IShiftOp, IOperator<T, ShiftOpKind>
         where T : unmanaged
     {
         /// <summary>
         /// The thing to shift
         /// </summary>
-        ITypedExpr<T> Subject {get;}
+        IExpr<T> Subject {get;}
 
 
-        ITypedExpr<int> Offset {get;}
+        IExpr<int> Offset {get;}
     }
 
 }

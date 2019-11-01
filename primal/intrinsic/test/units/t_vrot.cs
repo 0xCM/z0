@@ -16,6 +16,25 @@ namespace Z0
     public class t_vrot : IntrinsicTest<t_vrot>
     {
 
+        public void rotrx_check()
+        {
+            var x = ginx.vunits<byte>(n128);            
+            var y = ginx.vrotrx(x, 8);
+            var z = ginx.vrotr(x, 8);
+            Claim.eq(y,z);
+
+        }
+
+
+        public void rotlx_check()
+        {
+            var x = ginx.vunits<byte>(n128);
+            var y = ginx.vrotlx(x, 8);
+            var z = ginx.vrotl(x, 8);
+            Claim.eq(y,z);
+        }
+
+
         public void vrotl_128x8_check()
         {
             vrotl_128_check<byte>();

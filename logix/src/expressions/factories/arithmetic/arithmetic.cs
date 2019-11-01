@@ -23,7 +23,7 @@ namespace Z0.Logix
         /// <param name="a">The operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static UnaryAritheticOp<T> unary<T>(UnaryArithmeticOpKind op, ITypedExpr<T> a)
+        public static UnaryAritheticOp<T> unary<T>(UnaryArithmeticOpKind op, IExpr<T> a)
             where T : unmanaged
                 => new UnaryAritheticOp<T>(op,a);
 
@@ -45,7 +45,7 @@ namespace Z0.Logix
         /// <param name="b">The right expression</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static BinaryArithmeticOp<T> binary<T>(BinaryArithmeticOpKind op, ITypedExpr<T> a, ITypedExpr<T> b)
+        public static BinaryArithmeticOp<T> binary<T>(BinaryArithmeticOpKind op, IExpr<T> a, IExpr<T> b)
             where T : unmanaged
                 => new BinaryArithmeticOp<T>(op, a, b);
 
@@ -66,7 +66,7 @@ namespace Z0.Logix
         /// <param name="a">The expression operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static UnaryAritheticOp<T> inc<T>(ITypedExpr<T> a)
+        public static UnaryAritheticOp<T> inc<T>(IExpr<T> a)
             where T : unmanaged
                 => unary(Inc, a);
 
@@ -86,7 +86,7 @@ namespace Z0.Logix
         /// <param name="a">The expression operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static UnaryAritheticOp<T> dec<T>(ITypedExpr<T> a)
+        public static UnaryAritheticOp<T> dec<T>(IExpr<T> a)
             where T : unmanaged
                 => unary(Dec, a);
 
@@ -106,7 +106,7 @@ namespace Z0.Logix
         /// <param name="a">The expression operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static UnaryAritheticOp<T> negate<T>(ITypedExpr<T> a)
+        public static UnaryAritheticOp<T> negate<T>(IExpr<T> a)
             where T : unmanaged
                 => unary(Negate, a);
 
@@ -127,7 +127,7 @@ namespace Z0.Logix
         /// <param name="b">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static BinaryArithmeticOp<T> add<T>(ITypedExpr<T> a, ITypedExpr<T> b)
+        public static BinaryArithmeticOp<T> add<T>(IExpr<T> a, IExpr<T> b)
             where T : unmanaged
                 => binary(Add, a, b);
 
@@ -149,7 +149,7 @@ namespace Z0.Logix
         /// <param name="b">The right expression</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static BinaryArithmeticOp<T> sub<T>(ITypedExpr<T> a, ITypedExpr<T> b)
+        public static BinaryArithmeticOp<T> sub<T>(IExpr<T> a, IExpr<T> b)
             where T : unmanaged
                 => binary(Sub, a, b);
 

@@ -19,9 +19,9 @@ namespace Z0.Logix
         /// <param name="value">The literal value</param>
         /// <typeparam name="T">The literal type</typeparam>
         [MethodImpl(Inline)]
-        public static TypedLiteralExpr<T> literal<T>(T value)
+        public static LiteralExpr<T> literal<T>(T value)
             where T : unmanaged
-                => new TypedLiteralExpr<T>(value);
+                => new LiteralExpr<T>(value);
 
         /// <summary>
         /// Creates a bitwise unary expression
@@ -30,7 +30,7 @@ namespace Z0.Logix
         /// <param name="operand">The operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static UnaryBitwiseOpSpec<T> unary<T>(UnaryBitwiseOpKind op, ITypedExpr<T> operand)
+        public static UnaryBitwiseOpSpec<T> unary<T>(UnaryBitwiseOpKind op, IExpr<T> operand)
             where T : unmanaged
                 => new UnaryBitwiseOpSpec<T>(op,operand);
 
@@ -42,7 +42,7 @@ namespace Z0.Logix
         /// <param name="right">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static BinaryBitwiseOp<T> binary<T>(BinaryBitwiseOpKind op, ITypedExpr<T> left, ITypedExpr<T> right)
+        public static BinaryBitwiseOp<T> binary<T>(BinaryBitwiseOpKind op, IExpr<T> left, IExpr<T> right)
             where T : unmanaged
                 => new BinaryBitwiseOp<T>(op,left,right);
 
@@ -54,7 +54,7 @@ namespace Z0.Logix
         /// <param name="right">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static ComparisonExpr<T> binary<T>(ComparisonKind op, ITypedExpr<T> left, ITypedExpr<T> right)
+        public static ComparisonExpr<T> binary<T>(ComparisonKind op, IExpr<T> left, IExpr<T> right)
             where T : unmanaged
                 => new ComparisonExpr<T>(op,left,right);
 
@@ -66,7 +66,7 @@ namespace Z0.Logix
         /// <param name="b">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static TernaryBitwiseOp<T> ternary<T>(TernaryBitOpKind op, ITypedExpr<T> a, ITypedExpr<T> b, ITypedExpr<T> c)
+        public static TernaryBitwiseOp<T> ternary<T>(TernaryOpKind op, IExpr<T> a, IExpr<T> b, IExpr<T> c)
             where T : unmanaged
                 => new TernaryBitwiseOp<T>(op,a,b,c);
 

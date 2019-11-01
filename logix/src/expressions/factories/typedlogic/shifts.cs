@@ -20,7 +20,7 @@ namespace Z0.Logix
         /// <param name="offset">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static ShiftOpSpec<T> shift<T>(ShiftOpKind op, ITypedExpr<T> src, int offset)
+        public static ShiftOpSpec<T> shift<T>(ShiftOpKind op, IExpr<T> src, int offset)
             where T : unmanaged
                 => new ShiftOpSpec<T>(op,src,literal(offset));
 
@@ -32,7 +32,7 @@ namespace Z0.Logix
         /// <param name="offset">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static ShiftOpSpec<T> shiftx<T>(ShiftOpKind op, ITypedExpr<T> src, ITypedExpr<int> offset)
+        public static ShiftOpSpec<T> shiftx<T>(ShiftOpKind op, IExpr<T> src, IExpr<int> offset)
             where T : unmanaged
                 => new ShiftOpSpec<T>(op,src, offset);
 
@@ -43,7 +43,7 @@ namespace Z0.Logix
         /// <param name="offset">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static ShiftOpSpec<T> sll<T>(ITypedExpr<T> src, int offset)
+        public static ShiftOpSpec<T> sll<T>(IExpr<T> src, int offset)
             where T : unmanaged
                 => shift(ShiftOpKind.Sll, src, offset);
 
@@ -65,7 +65,7 @@ namespace Z0.Logix
         /// <param name="offset">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static ShiftOpSpec<T> srl<T>(ITypedExpr<T> src, int offset)
+        public static ShiftOpSpec<T> srl<T>(IExpr<T> src, int offset)
             where T : unmanaged
                 => shift(ShiftOpKind.Srl, src, offset);
 
@@ -87,7 +87,7 @@ namespace Z0.Logix
         /// <param name="offset">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static ShiftOpSpec<T> rotr<T>(ITypedExpr<T> src, int offset)
+        public static ShiftOpSpec<T> rotr<T>(IExpr<T> src, int offset)
             where T : unmanaged
                 => shift(ShiftOpKind.Rotr, src, offset);
 
@@ -109,7 +109,7 @@ namespace Z0.Logix
         /// <param name="offset">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static ShiftOpSpec<T> rotl<T>(ITypedExpr<T> src, int offset)
+        public static ShiftOpSpec<T> rotl<T>(IExpr<T> src, int offset)
             where T : unmanaged
                 => shift(ShiftOpKind.Rotl, src, offset);
 
@@ -131,7 +131,7 @@ namespace Z0.Logix
         /// <param name="offset">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static ShiftOpSpec<T> sll<T>(ITypedExpr<T> src, ITypedExpr<int> offset)
+        public static ShiftOpSpec<T> sll<T>(IExpr<T> src, IExpr<int> offset)
             where T : unmanaged
                 => shiftx(ShiftOpKind.Sll, src, offset);
 
@@ -142,7 +142,7 @@ namespace Z0.Logix
         /// <param name="offset">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static ShiftOpSpec<T> sllx<T>(T src, ITypedExpr<int> offset)
+        public static ShiftOpSpec<T> sllx<T>(T src, IExpr<int> offset)
             where T : unmanaged
                 => sll(literal(src), offset);
 
@@ -153,7 +153,7 @@ namespace Z0.Logix
         /// <param name="offset">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static ShiftOpSpec<T> srl<T>(ITypedExpr<T> src, ITypedExpr<int> offset)
+        public static ShiftOpSpec<T> srl<T>(IExpr<T> src, IExpr<int> offset)
             where T : unmanaged
                 => shiftx(ShiftOpKind.Srl, src, offset);
 
@@ -164,7 +164,7 @@ namespace Z0.Logix
         /// <param name="offset">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static ShiftOpSpec<T> srl<T>(T src, ITypedExpr<int> offset)
+        public static ShiftOpSpec<T> srl<T>(T src, IExpr<int> offset)
             where T : unmanaged
                 => srl(literal(src), offset);
 
@@ -175,7 +175,7 @@ namespace Z0.Logix
         /// <param name="offset">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static ShiftOpSpec<T> rotr<T>(ITypedExpr<T> src, ITypedExpr<int> offset)
+        public static ShiftOpSpec<T> rotr<T>(IExpr<T> src, IExpr<int> offset)
             where T : unmanaged
                 => shiftx(ShiftOpKind.Rotr, src, offset);
 
@@ -186,7 +186,7 @@ namespace Z0.Logix
         /// <param name="offset">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static ShiftOpSpec<T> rotr<T>(T src, ITypedExpr<int> offset)
+        public static ShiftOpSpec<T> rotr<T>(T src, IExpr<int> offset)
             where T : unmanaged
                 => rotr(literal(src), offset);
         
@@ -197,7 +197,7 @@ namespace Z0.Logix
         /// <param name="offset">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static ShiftOpSpec<T> rotl<T>(ITypedExpr<T> src, ITypedExpr<int> offset)
+        public static ShiftOpSpec<T> rotl<T>(IExpr<T> src, IExpr<int> offset)
             where T : unmanaged
                 => shiftx(ShiftOpKind.Rotl, src, offset);
 
@@ -208,7 +208,7 @@ namespace Z0.Logix
         /// <param name="offset">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static ShiftOpSpec<T> rotl<T>(T src, ITypedExpr<int> offset)
+        public static ShiftOpSpec<T> rotl<T>(T src, IExpr<int> offset)
             where T : unmanaged
                 => rotl(literal(src), offset);
 

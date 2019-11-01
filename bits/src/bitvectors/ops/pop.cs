@@ -65,8 +65,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static uint pop(BitVector64 x)
             => Bits.pop(x.Scalar);
-
-
     }
 
 }

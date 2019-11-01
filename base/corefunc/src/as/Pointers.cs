@@ -281,35 +281,6 @@ namespace Z0
             where P : unmanaged
                 => (P*)Unsafe.AsPointer(ref src);
 
-        [MethodImpl(Inline)]
-        public static IntPtr intptr(long i)
-            => new IntPtr(i);
-
-        [MethodImpl(Inline)]
-        public static IntPtr intptr(int i)
-            => new IntPtr(i);
-
-        /// <summary>
-        /// Adds an offset to a reference, measured relative to the reference type
-        /// </summary>
-        /// <param name="src">The soruce reference</param>
-        /// <param name="bytes">The number of elements to add</param>
-        /// <typeparam name="T">The element type</typeparam>
-        [MethodImpl(Inline)]
-        public static ref T advance<T>(ref T src, int elements)
-            where T : unmanaged
-                => ref Unsafe.Add(ref src, elements);
-
-        /// <summary>
-        /// Adds an offset to a reference, measured in bytes
-        /// </summary>
-        /// <param name="src">The soruce reference</param>
-        /// <param name="bytes">The number of bytes to add</param>
-        /// <typeparam name="T">The element type</typeparam>
-        [MethodImpl(Inline)]
-        public static ref T advanceb<T>(ref T src, long bytes)
-            where T : unmanaged
-                => ref Unsafe.AddByteOffset(ref src, intptr(bytes));
 
     }
 

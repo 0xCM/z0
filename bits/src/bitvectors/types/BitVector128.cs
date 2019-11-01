@@ -544,7 +544,7 @@ namespace Z0
         /// </summary>
         [MethodImpl(Inline)]
         public BitVector64 ToBitVector64()
-            => BitVector64.FromScalar(x0);
+            => BitVector.from(n64, x0);
 
         /// <summary>
         /// Converts the vector to a bitstring

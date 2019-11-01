@@ -39,7 +39,6 @@ namespace Z0
         public static Vector128<double> vshuffle(Vector128<double> x, Vector128<double> y, byte control)
             => Shuffle(x, y, control);
  
-
         /// <summary>
         /// __m128 _mm_move_ss (__m128 a, __m128 b) MOVSS xmm, xmm
         /// Moves the lower single-precision (32-bit) floating-point element from b to the lower element of dst, and copy 

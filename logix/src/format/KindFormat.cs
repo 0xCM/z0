@@ -78,11 +78,11 @@ namespace Z0.Logix
             => $"{kind.Format()}({arg1}, {arg2})";
 
         [MethodImpl(Inline)]
-        public static string Format(this TernaryBitOpKind kind)
+        public static string Format(this TernaryOpKind kind)
             => kind.ToString();
 
         [MethodImpl(Inline)]
-        public static string Format<T>(this TernaryBitOpKind kind, T arg1, T arg2, T arg3)
+        public static string Format<T>(this TernaryOpKind kind, T arg1, T arg2, T arg3)
             => $"{kind.Format()}({arg1}, {arg2}, {arg3})";
 
 
@@ -98,7 +98,7 @@ namespace Z0.Logix
         public static string Format<S,T>(this ShiftOpKind kind, S arg1, T arg2)
             => $"{arg1} {kind.Format()} {arg2}";
  
-        public static string FormatTuple(IEnumerable<IOpExpr> terms)            
+        public static string FormatTuple(IEnumerable<IOperator> terms)            
             => parenthetical(string.Join(',',terms.Select(t => t.Format()))); 
     }
 }

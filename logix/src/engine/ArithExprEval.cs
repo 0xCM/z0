@@ -13,12 +13,12 @@ namespace Z0.Logix
 
     public static class ArithExprEval
     {
-        public static TypedLiteralExpr<T> eval<T>(IArithmeticExpr<T> expr)
+        public static LiteralExpr<T> eval<T>(IArithmeticExpr<T> expr)
             where T : unmanaged
         {
             switch(expr)
             {
-                case ITypedLiteral<T> x:
+                case ILiteralExpr<T> x:
                     return x.Value;
                 case IVarExpr<T> x:
                     return eval(x);
@@ -30,7 +30,7 @@ namespace Z0.Logix
         }
 
 
-        static TypedLiteralExpr<T> eval<T>(ITypedExpr<T> expr)
+        static LiteralExpr<T> eval<T>(IExpr<T> expr)
             where T : unmanaged
         {
             switch(expr)
@@ -40,19 +40,19 @@ namespace Z0.Logix
             }
         }
 
-        static TypedLiteralExpr<T> eval<T>(IVarExpr<T> expr)
+        static LiteralExpr<T> eval<T>(IVarExpr<T> expr)
             where T : unmanaged
         {
             switch(expr.Value)
             {
-                case ITypedLiteral<T> x:
+                case ILiteralExpr<T> x:
                     return x.Value;
                 default:
                     return eval(expr.Value);                
             }
         }
 
-        static TypedLiteralExpr<T> eval<T>(IArithmeticOp<T> expr)
+        static LiteralExpr<T> eval<T>(IArithmeticOp<T> expr)
             where T : unmanaged
         {
             switch(expr)               
@@ -66,7 +66,7 @@ namespace Z0.Logix
             }
         }
 
-        static TypedLiteralExpr<T> eval<T>(IUnaryArithmeticOp<T> expr)
+        static LiteralExpr<T> eval<T>(IUnaryArithmeticOp<T> expr)
             where T : unmanaged
         {
             switch(expr.OpKind)               
@@ -78,7 +78,7 @@ namespace Z0.Logix
             }
         }
 
-        static TypedLiteralExpr<T> eval<T>(IBinaryArithmeticOp<T> expr)
+        static LiteralExpr<T> eval<T>(IBinaryArithmeticOp<T> expr)
             where T : unmanaged
         {
             switch(expr)
@@ -95,32 +95,32 @@ namespace Z0.Logix
             }
         }
 
-        static TypedLiteralExpr<T> eval<T>(IComparisonExpr<T> expr)
+        static LiteralExpr<T> eval<T>(IComparisonExpr<T> expr)
             where T : unmanaged
                 => ScalarOpApi.eval(expr.ComparisonKind, eval(expr.LeftArg).Value, eval(expr.RightArg).Value);
 
-        static TypedLiteralExpr<T> inc<T>(IUnaryArithmeticOp<T> a)
+        static LiteralExpr<T> inc<T>(IUnaryArithmeticOp<T> a)
             where T : unmanaged
                 => ScalarOps.inc(eval(a).Value);
 
-        static TypedLiteralExpr<T> dec<T>(IUnaryArithmeticOp<T> a)
+        static LiteralExpr<T> dec<T>(IUnaryArithmeticOp<T> a)
             where T : unmanaged
                 => ScalarOps.dec(eval(a).Value);
 
-        static TypedLiteralExpr<T> negate<T>(IUnaryArithmeticOp<T> a)
+        static LiteralExpr<T> negate<T>(IUnaryArithmeticOp<T> a)
             where T : unmanaged
                 => ScalarOps.negate(eval(a).Value);
     
         [MethodImpl(Inline)]
-        static TypedLiteralExpr<T> add<T>(IBinaryArithmeticOp<T> expr)
+        static LiteralExpr<T> add<T>(IBinaryArithmeticOp<T> expr)
             where T : unmanaged
                 => ScalarOps.add(eval(expr.LeftArg).Value, eval(expr.RightArg).Value);
 
-        static TypedLiteralExpr<T> sub<T>(IBinaryArithmeticOp<T> expr)
+        static LiteralExpr<T> sub<T>(IBinaryArithmeticOp<T> expr)
             where T : unmanaged
                 => ScalarOps.sub(eval(expr.LeftArg).Value, eval(expr.RightArg).Value);
 
-        static TypedLiteralExpr<T> unhandled<T>(ITypedExpr<T> a)
+        static LiteralExpr<T> unhandled<T>(IExpr<T> a)
             where T : unmanaged
                 => throw new Exception($"{a} unhandled");
     }

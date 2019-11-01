@@ -18,7 +18,7 @@ namespace Z0.Logix
         /// <param name="value">The initial value of the variable</param>
         /// <typeparam name="T">The variable type</typeparam>
         [MethodImpl(Inline)]
-        public static VariableExpr<T> variable<T>(string name, ITypedExpr<T> value)
+        public static VariableExpr<T> variable<T>(string name, IExpr<T> value)
             where T : unmanaged
                 => new VariableExpr<T>(name, value);
 
@@ -28,7 +28,7 @@ namespace Z0.Logix
         /// <param name="value">The initial value of the variable</param>
         /// <typeparam name="T">The variable type</typeparam>
         [MethodImpl(Inline)]
-        public static VariableExpr<T> variable<T>(char name, ITypedExpr<T> value)
+        public static VariableExpr<T> variable<T>(char name, IExpr<T> value)
             where T : unmanaged
                 => new VariableExpr<T>(name.ToString(), value);
 
@@ -39,7 +39,7 @@ namespace Z0.Logix
         /// <param name="name">The variable's name</param>
         /// <param name="init">The variable's initial value</param>
         [MethodImpl(Inline)]
-        public static VariableExpr<T> variable<T>(uint name, ITypedExpr<T> init)
+        public static VariableExpr<T> variable<T>(uint name, IExpr<T> init)
             where T : unmanaged
             => new VariableExpr<T>(name.ToString(), init);
 
@@ -80,7 +80,7 @@ namespace Z0.Logix
         /// <param name="subject">The variable-dependent expression</param>
         /// <param name="variables">The variable sequence</param>
         [MethodImpl(Inline)]
-        public static VariedExpr<T> varied<T>(ITypedExpr<T> baseExpr, params VariableExpr<T>[] variables)
+        public static VariedExpr<T> varied<T>(IExpr<T> baseExpr, params VariableExpr<T>[] variables)
             where T : unmanaged             
                 => new VariedExpr<T>(baseExpr, variables);
 
@@ -91,7 +91,7 @@ namespace Z0.Logix
         /// <param name="subject">The variable-dependent expression</param>
         /// <param name="variables">The variable sequence</param>
         [MethodImpl(Inline)]
-        public static VariedExpr<N,T> varied<N,T>(N n, ITypedExpr<T> baseExpr, params VariableExpr<T>[] variables)
+        public static VariedExpr<N,T> varied<N,T>(N n, IExpr<T> baseExpr, params VariableExpr<T>[] variables)
             where T : unmanaged             
             where N : unmanaged, ITypeNat
         {
@@ -107,7 +107,7 @@ namespace Z0.Logix
         /// <param name="v0">The variable</param>
         /// <typeparam name="T">The type over which the expression is defined</typeparam>
         [MethodImpl(Inline)]
-        public static VariedExpr<N1,T> varied<T>(N1 n, ITypedExpr<T> baseExpr, VariableExpr<T> v0)
+        public static VariedExpr<N1,T> varied<T>(N1 n, IExpr<T> baseExpr, VariableExpr<T> v0)
             where T : unmanaged             
                 => varied<N1,T>(n, baseExpr, v0);
 
@@ -120,7 +120,7 @@ namespace Z0.Logix
         /// <param name="v1">The second variable</param>
         /// <typeparam name="T">The type over which the expression is defined</typeparam>
         [MethodImpl(Inline)]
-        public static VariedExpr<N2,T> varied<T>(N2 n, ITypedExpr<T> baseExpr, VariableExpr<T> v0, VariableExpr<T> v1)
+        public static VariedExpr<N2,T> varied<T>(N2 n, IExpr<T> baseExpr, VariableExpr<T> v0, VariableExpr<T> v1)
             where T : unmanaged             
                 => varied<N2,T>(n, baseExpr, v0, v1);
 
@@ -134,7 +134,7 @@ namespace Z0.Logix
         /// <param name="v2">The third variable</param>
         /// <typeparam name="T">The type over which the expression is defined</typeparam>
         [MethodImpl(Inline)]
-        public static VariedExpr<N3,T> varied<T>(N3 n, ITypedExpr<T> baseExpr, VariableExpr<T> v0, VariableExpr<T> v1, VariableExpr<T> v2)
+        public static VariedExpr<N3,T> varied<T>(N3 n, IExpr<T> baseExpr, VariableExpr<T> v0, VariableExpr<T> v1, VariableExpr<T> v2)
             where T : unmanaged             
                 => varied<N3,T>(n, baseExpr, v0, v1, v2);
 
@@ -146,7 +146,7 @@ namespace Z0.Logix
         /// <param name="rhs">The test subject</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static ComparisonExpr<T> equals<T>(ITypedExpr<T> lhs, ITypedExpr<T> rhs, params VariableExpr<T>[] variables)
+        public static ComparisonExpr<T> equals<T>(IExpr<T> lhs, IExpr<T> rhs, params VariableExpr<T>[] variables)
             where T : unmanaged
                 => new ComparisonExpr<T>(ComparisonKind.Eq, lhs,rhs,variables);
 

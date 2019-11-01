@@ -101,26 +101,45 @@ namespace Z0
             where T : unmanaged
                 => src.FormatHex(false, AsciSym.Space);
 
+
         /// <summary>
-        /// Converts an 128-bit intrinsic vector representation to a bistring
+        /// Formats vector bits
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <typeparam name="T">The underlying primal type</typeparam>
         [MethodImpl(Inline)]   
         public static string FormatBits<T>(this Vector128<T> src, bool tlz = false, bool specifier = false, int? blockWidth = null, char? blocksep = null)
             where T : unmanaged        
-                => src.ToBitString().Format(tlz,specifier,blockWidth ?? bitsize<T>(),blocksep);
+                => src.ToBitString().Format(tlz, specifier, blockWidth, blocksep);
         
         /// <summary>
-        /// Converts an 256-bit intrinsic vector representation to a bistring
+        /// Formats vector bits
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <typeparam name="T">The underlying primal type</typeparam>
         [MethodImpl(Inline)]   
         public static string FormatBits<T>(this Vector256<T> src, bool tlz = false, bool specifier = false, int? blockWidth = null, char? blocksep = null)
             where T : unmanaged        
-                => src.ToBitString().Format(tlz,specifier,blockWidth ?? bitsize<T>(), blocksep);
+                => src.ToBitString().Format(tlz, specifier, blockWidth, blocksep);
 
+        /// <summary>
+        /// Formats each vector component as a distinct bitstring
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <typeparam name="T">The underlying primal type</typeparam>
+        [MethodImpl(Inline)]   
+        public static string FormatBitBlocks<T>(this Vector128<T> src)
+            where T : unmanaged
+                => src.FormatBits(false,false,bitsize<T>());
+
+        /// <summary>
+        /// Formats each vector component as a distinct bitstring
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <typeparam name="T">The underlying primal type</typeparam>
+        [MethodImpl(Inline)]   
+        public static string FormatBitBlocks<T>(this Vector256<T> src)
+            where T : unmanaged
+                => src.FormatBits(false,false,bitsize<T>());
     }
-
 }

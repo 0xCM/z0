@@ -232,7 +232,7 @@ namespace Z0.Logix
             iter(common,check_ternary_ops);
         }
 
-        void check_ternary_ops(TernaryBitOpKind op)
+        void check_ternary_ops(TernaryOpKind op)
         {
             check_ternary_ops<byte>(op);
             check_ternary_ops<ushort>(op);
@@ -241,7 +241,7 @@ namespace Z0.Logix
 
         }
 
-        void check_op_identity<T>(TernaryBitOpKind id)
+        void check_op_identity<T>(TernaryOpKind id)
             where T: unmanaged
         {
             var a = convert<T>(0b1111_0000);
@@ -254,7 +254,7 @@ namespace Z0.Logix
             Claim.eq(expect.FormatHex(), actual.FormatHex());
         }
 
-        void check_ternary_ops<T>(TernaryBitOpKind id)
+        void check_ternary_ops<T>(TernaryOpKind id)
             where T : unmanaged
         {
             var BL = LogicOpApi.lookup(id);

@@ -18,7 +18,7 @@ namespace Z0.Logix
         /// </summary>
         /// <typeparam name="T">The literal type</typeparam>
         [MethodImpl(Inline)]
-        public static TypedLiteralExpr<T> @true<T>()
+        public static LiteralExpr<T> @true<T>()
             where T : unmanaged
                 => gmath.maxval<T>();
 
@@ -27,7 +27,7 @@ namespace Z0.Logix
         /// </summary>
         /// <typeparam name="T">The literal type</typeparam>
         [MethodImpl(Inline)]
-        public static TypedLiteralExpr<Vector128<T>> @true<T>(N128 n)
+        public static LiteralExpr<Vector128<T>> @true<T>(N128 n)
             where T : unmanaged
                 => literal(ginx.vones<T>(n));
 
@@ -37,7 +37,7 @@ namespace Z0.Logix
         /// </summary>
         /// <typeparam name="T">The literal type</typeparam>
         [MethodImpl(Inline)]
-        public static TypedLiteralExpr<Vector256<T>> @true<T>(N256 n)
+        public static LiteralExpr<Vector256<T>> @true<T>(N256 n)
             where T : unmanaged
                 => literal(ginx.vones<T>(n));
 
@@ -46,12 +46,12 @@ namespace Z0.Logix
         /// </summary>
         /// <typeparam name="T">The literal type</typeparam>
         [MethodImpl(Inline)]
-        public static TypedLiteralExpr<T> @false<T>()
+        public static LiteralExpr<T> @false<T>()
             where T : unmanaged
                 => gmath.zero<T>();
 
         [MethodImpl(Inline)]
-        public static TypedLiteralExpr<Vector256<T>> @false<T>(N256 n)
+        public static LiteralExpr<Vector256<T>> @false<T>(N256 n)
             where T : unmanaged
                 => literal(default(Vector256<T>));
 
@@ -62,7 +62,7 @@ namespace Z0.Logix
         /// <param name="rhs">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static BinaryBitwiseOp<T> and<T>(ITypedExpr<T> lhs, ITypedExpr<T> rhs)
+        public static BinaryBitwiseOp<T> and<T>(IExpr<T> lhs, IExpr<T> rhs)
             where T : unmanaged
                 => binary(BinaryBitwiseOpKind.And, lhs,rhs);
 
@@ -84,7 +84,7 @@ namespace Z0.Logix
         /// <param name="rhs">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static BinaryBitwiseOp<T> or<T>(ITypedExpr<T> lhs, ITypedExpr<T> rhs)
+        public static BinaryBitwiseOp<T> or<T>(IExpr<T> lhs, IExpr<T> rhs)
             where T : unmanaged
                 => binary(BinaryBitwiseOpKind.Or, lhs,rhs);
 
@@ -106,7 +106,7 @@ namespace Z0.Logix
         /// <param name="rhs">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static BinaryBitwiseOp<T> xor<T>(ITypedExpr<T> lhs, ITypedExpr<T> rhs)
+        public static BinaryBitwiseOp<T> xor<T>(IExpr<T> lhs, IExpr<T> rhs)
             where T : unmanaged
                 => binary(BinaryBitwiseOpKind.XOr, lhs,rhs);
 
@@ -127,7 +127,7 @@ namespace Z0.Logix
         /// <param name="operand">The expression operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static UnaryBitwiseOpSpec<T> not<T>(ITypedExpr<T> operand)
+        public static UnaryBitwiseOpSpec<T> not<T>(IExpr<T> operand)
             where T : unmanaged
                 => unary(UnaryBitwiseOpKind.Not, operand);
 
@@ -147,7 +147,7 @@ namespace Z0.Logix
         /// <param name="operand">The expression operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static UnaryBitwiseOpSpec<T> negate<T>(ITypedExpr<T> operand)
+        public static UnaryBitwiseOpSpec<T> negate<T>(IExpr<T> operand)
             where T : unmanaged
                 => unary(UnaryBitwiseOpKind.Negate, operand);
 
@@ -168,7 +168,7 @@ namespace Z0.Logix
         /// <param name="rhs">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static BinaryBitwiseOp<T> nand<T>(ITypedExpr<T> lhs, ITypedExpr<T> rhs)
+        public static BinaryBitwiseOp<T> nand<T>(IExpr<T> lhs, IExpr<T> rhs)
             where T : unmanaged
                 => binary(BinaryBitwiseOpKind.Nand, lhs,rhs);
 
@@ -190,7 +190,7 @@ namespace Z0.Logix
         /// <param name="rhs">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static BinaryBitwiseOp<T> nor<T>(ITypedExpr<T> lhs, ITypedExpr<T> rhs)
+        public static BinaryBitwiseOp<T> nor<T>(IExpr<T> lhs, IExpr<T> rhs)
             where T : unmanaged
                 => binary(BinaryBitwiseOpKind.Nor, lhs,rhs);
 
@@ -212,7 +212,7 @@ namespace Z0.Logix
         /// <param name="rhs">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static BinaryBitwiseOp<T> xnor<T>(ITypedExpr<T> lhs, ITypedExpr<T> rhs)
+        public static BinaryBitwiseOp<T> xnor<T>(IExpr<T> lhs, IExpr<T> rhs)
             where T : unmanaged
                 => binary(BinaryBitwiseOpKind.Xnor, lhs,rhs);
 

@@ -88,24 +88,7 @@ namespace Z0
         public static BitVector16 FromBitString(in BitString src)
             => src.TakeUInt16();    
 
-        public static BitVector16 Parse(string src)
-        {
-            var bs = BitString.Parse(src);
-            var len = math.min(bs.Length, Width);
-            Bits.packseq(bs.BitSeq, out ushort dst);
-            return dst;
-        }
 
-        /// <summary>
-        /// Enumerates all 16-bit bitvectors whose width is less than or equal to a specified maximum width
-        /// </summary>
-        public static IEnumerable<BitVector16> All(int maxwidth)
-        {
-            var maxval = Pow2.pow(maxwidth);
-            var bv = BitVector16.Zero;
-            while(bv < maxval)
-                yield return bv++;            
-        }
 
         [MethodImpl(Inline)]
         public static implicit operator BitVector<N16,ushort>(BitVector16 src)
@@ -523,7 +506,7 @@ namespace Z0
         /// </summary>
         [MethodImpl(Inline)]
         public BitVector8 ToBitVector8()
-            => BitVector8.FromScalar(data);
+            => BitVector.from(n8, data);
 
         /// <summary>
         /// The identity conversion Bv16 -> Bv16
@@ -544,7 +527,7 @@ namespace Z0
         /// </summary>
         [MethodImpl(Inline)]
         public BitVector64 ToBitVector64()
-            => BitVector64.FromScalar(data);
+            => BitVector.from(n64,data);
 
         [MethodImpl(Inline)]
         public bool Equals(BitVector16 y)

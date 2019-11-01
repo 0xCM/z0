@@ -5,6 +5,7 @@
 namespace Z0
 {        
     using System;
+    using System.Reflection;
     using System.Linq;
     using Z0.Logix;
 
@@ -16,7 +17,7 @@ namespace Z0
         static readonly FolderPath DumpFolder
             = FolderPath.Define(Settings.ProjectDir("reveal")) +  FolderName.Define(".dumps");
         
-        static FilePath DefineAsmOutPath(string label)
+        static FilePath AsmOutPath(string label)
             => DumpFolder + (FileName.Define(label) + FileExtension.Define("asm"));
 
         static void Disassemble(bool asm, bool cil, params Type[] types)
@@ -37,6 +38,13 @@ namespace Z0
 
         }
 
+        static void EmitAsm(Type[] types, FilePath dst)
+        {
+            var emitter = AsmCodeEmitter.Create(dst);
+            dst.DeleteIfExists();
+            iter(types, t => emitter.EmitAsm(t.DistillAsm(),true));
+        }
+
         public static Option<MethodDisassembly> DeconstructGeneric<T>(Type host, string opname)
         {
             var method = 
@@ -47,6 +55,7 @@ namespace Z0
                 select m).FirstOrDefault();
             return method == null ? default : Deconstructor.DeconstructGeneric<T>(method);            
         }
+
         public static MethodDisassembly[] DeconstructGeneric(Type host, string[] opnames, Type[] typeargs, string name)
         {
             var open = from m in host.Methods().Public().OpenGeneric()
@@ -75,6 +84,17 @@ namespace Z0
 
         void Disassemble(Type t)
             => Disassemble(true, true, t);
+
+        /// <summary>
+        /// Emits assembly for an entire assembly. Heh.
+        /// </summary>
+        /// <param name="a">The source assembly from which the assembly will be distilled</param>
+        void EmitAsm(Assembly a)
+            => EmitAsm(a.GetTypes(), AsmOutPath(a.GetSimpleName()));
+
+        void EmitAsm(IAssemblyDesignator a)
+            => EmitAsm(a.DeclaringAssembly);
+
         void Disassemble(bool asm, bool cil)
         {
             Disassemble(new ExperimentalScenarios());
@@ -88,15 +108,15 @@ namespace Z0
             Disassemble(typeof(bvoc));    
             Disassemble(typeof(bmoc));    
             Disassemble(typeof(convoc));   
-
             Disassemble(typeof(math));
             Disassemble(typeof(dinx));    
             Disassemble(typeof(BitVector));    
             Disassemble(typeof(Bits));    
-            Disassemble(typeof(BitParts));                
-            Disassemble(typeof(LogicOps));   
-            Disassemble(typeof(LogicExprEval));             
-            Disassemble(typeof(LogicDispatcher)); 
+            Disassemble(typeof(BitParts));  
+            EmitAsm(Designators.Logix.Designated);  
+            // Disassemble(typeof(LogicOps));   
+            // Disassemble(typeof(LogicExprEval));             
+            // Disassemble(typeof(LogicDispatcher)); 
         }
 
         public unsafe void ListMethods(Type t)

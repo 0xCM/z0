@@ -13,18 +13,18 @@ namespace Z0.Logix
 
     static class VectorExprEval
     {
-         public static TypedLiteralExpr<Vector128<T>> eval<T>(ITypedExpr<Vector128<T>> expr)
+         public static LiteralExpr<Vector128<T>> eval<T>(IExpr<Vector128<T>> expr)
             where T : unmanaged
         {
             switch(expr)
             {
-                case ITypedLiteral<Vector128<T>> x:
+                case ILiteralExpr<Vector128<T>> x:
                     return x.Value;
                 case IVarExpr<Vector128<T>> x:
                     return eval(x.Value);
                 case IVariedExpr<Vector128<T>> x:
                     return eval(x.BaseExpr);
-                case ITypedOpExpr<Vector128<T>> x:
+                case IOperator<Vector128<T>> x:
                     return eval(x);
                 case IComparisonExpr<Vector128<T>> x:
                     return ginx.vxnor(eval(x.LeftArg).Value, eval(x.RightArg).Value);
@@ -34,18 +34,18 @@ namespace Z0.Logix
 
         }
 
-        public static TypedLiteralExpr<Vector256<T>> eval<T>(ITypedExpr<Vector256<T>> expr)
+        public static LiteralExpr<Vector256<T>> eval<T>(IExpr<Vector256<T>> expr)
             where T : unmanaged
         {
             switch(expr)
             {
-                case ITypedLiteral<Vector256<T>> x:
+                case ILiteralExpr<Vector256<T>> x:
                     return x.Value;
                 case IVarExpr<Vector256<T>> x:
                     return eval(x.Value);
                 case IVariedExpr<Vector256<T>> x:
                     return eval(x.BaseExpr);
-                case ITypedOpExpr<Vector256<T>> x:
+                case IOperator<Vector256<T>> x:
                     return eval(x);
                 case IComparisonExpr<Vector256<T>> x:
                     return ginx.vxnor(eval(x.LeftArg).Value, eval(x.RightArg).Value);
@@ -54,7 +54,7 @@ namespace Z0.Logix
             }
         }
 
-        static TypedLiteralExpr<Vector128<T>> eval<T>(ITypedOpExpr<Vector128<T>> expr)
+        static LiteralExpr<Vector128<T>> eval<T>(IOperator<Vector128<T>> expr)
             where T : unmanaged
         {
             switch(expr)               
@@ -72,7 +72,7 @@ namespace Z0.Logix
             }
         }
 
-        static TypedLiteralExpr<Vector256<T>> eval<T>(ITypedOpExpr<Vector256<T>> expr)
+        static LiteralExpr<Vector256<T>> eval<T>(IOperator<Vector256<T>> expr)
             where T : unmanaged
         {
             switch(expr)               
@@ -90,11 +90,11 @@ namespace Z0.Logix
             }
         }
  
-        static TypedLiteralExpr<Vector128<T>> unhandled<T>(ITypedExpr<Vector128<T>> expr)       
+        static LiteralExpr<Vector128<T>> unhandled<T>(IExpr<Vector128<T>> expr)       
             where T : unmanaged
                 => throw new Exception($"{expr} unhandled");
 
-        static TypedLiteralExpr<Vector256<T>> unhandled<T>(ITypedExpr<Vector256<T>> expr)       
+        static LiteralExpr<Vector256<T>> unhandled<T>(IExpr<Vector256<T>> expr)       
             where T : unmanaged
                 => throw new Exception($"{expr} unhandled");
     }

@@ -10,7 +10,7 @@ namespace Z0.Logix
     using System.Runtime.CompilerServices;
     
     using static zfunc;
-    using static TernaryBitOpKind;
+    using static TernaryOpKind;
     using static ScalarOps;
     using static OpHelpers;
 
@@ -66,8 +66,8 @@ namespace Z0.Logix
         /// <summary>
         /// Advertises the supported ternary opeators
         /// </summary>
-        public static IEnumerable<TernaryBitOpKind> TernaryBitwiseKinds
-            => range((byte)1,(byte)X4F).Cast<TernaryBitOpKind>();
+        public static IEnumerable<TernaryOpKind> TernaryBitwiseKinds
+            => range((byte)1,(byte)X4F).Cast<TernaryOpKind>();
 
 
         public static T eval<T>(BinaryBitwiseOpKind kind, T a, T b)
@@ -130,7 +130,7 @@ namespace Z0.Logix
         /// <param name="a">The first operand</param>
         /// <param name="b">The second operand</param>
         /// <param name="c">The third operand</param>
-        public static T eval<T>(TernaryBitOpKind kind, T a, T b, T c)
+        public static T eval<T>(TernaryOpKind kind, T a, T b, T c)
             where T : unmanaged
         {
             switch(kind)
@@ -225,7 +225,7 @@ namespace Z0.Logix
                 case X58: return f58(a, b, c);
                 case X59: return f59(a, b, c);
                 case X5A: return f5a(a, b, c);
-                default: return canteval<T,TernaryBitOpKind>(kind);
+                default: return canteval<T,TernaryOpKind>(kind);
             }
         }
 
@@ -308,7 +308,7 @@ namespace Z0.Logix
             }
         }
 
-        public static TernaryOp<T> lookup<T>(TernaryBitOpKind id)
+        public static TernaryOp<T> lookup<T>(TernaryOpKind id)
             where T : unmanaged
         {
             switch(id)

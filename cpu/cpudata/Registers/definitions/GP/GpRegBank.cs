@@ -239,8 +239,6 @@ namespace Z0
         [FieldOffset(R15Offset)]
         public R15B r15b;
 
-
-
         const int RaxOffset = 0;
         
         const int RbxOffset = 8;

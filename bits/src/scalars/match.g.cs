@@ -29,8 +29,6 @@ namespace Z0
             where S : unmanaged
             where T : unmanaged
                 => test(lhs,nx) == test(rhs,ny);     
-
-
     }
 
 }

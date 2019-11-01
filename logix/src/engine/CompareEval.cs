@@ -14,7 +14,7 @@ namespace Z0.Logix
 
     public static class CompareEval
     {
-        public static TypedLiteralExpr<T> eval<T>(IComparisonExpr<T> expr)
+        public static LiteralExpr<T> eval<T>(IComparisonExpr<T> expr)
             where T : unmanaged
                 => ScalarOpApi.eval(expr.ComparisonKind, eval(expr.LeftArg).Value, eval(expr.RightArg).Value);
 
@@ -22,16 +22,16 @@ namespace Z0.Logix
             where T : unmanaged
                 => PredicateApi.eval(expr.ComparisonKind, eval(expr.LeftArg).Value, eval(expr.RightArg).Value);
 
-        public static TypedLiteralExpr<Vector128<T>> eval<T>(IComparisonExpr<Vector128<T>> expr)
+        public static LiteralExpr<Vector128<T>> eval<T>(IComparisonExpr<Vector128<T>> expr)
             where T : unmanaged
                 => CpuOpApi.eval(expr.ComparisonKind, eval(expr.LeftArg).Value, eval(expr.RightArg).Value);
 
 
-        public static TypedLiteralExpr<Vector256<T>> eval<T>(IComparisonExpr<Vector256<T>> expr)
+        public static LiteralExpr<Vector256<T>> eval<T>(IComparisonExpr<Vector256<T>> expr)
             where T : unmanaged
                 => CpuOpApi.eval(expr.ComparisonKind, eval(expr.LeftArg).Value, eval(expr.RightArg).Value);
 
-        static TypedLiteralExpr<T> eval<T>(ITypedExpr<T> expr)
+        static LiteralExpr<T> eval<T>(IExpr<T> expr)
             where T : unmanaged
         {
             switch(expr)
@@ -41,11 +41,11 @@ namespace Z0.Logix
             }
         }
 
-        static TypedLiteralExpr<Vector128<T>> eval<T>(ITypedExpr<Vector128<T>> expr)
+        static LiteralExpr<Vector128<T>> eval<T>(IExpr<Vector128<T>> expr)
             where T : unmanaged
                 => LogicEngine.eval(expr);
 
-        static TypedLiteralExpr<Vector256<T>> eval<T>(ITypedExpr<Vector256<T>> expr)
+        static LiteralExpr<Vector256<T>> eval<T>(IExpr<Vector256<T>> expr)
             where T : unmanaged
                 => LogicEngine.eval(expr);
 
