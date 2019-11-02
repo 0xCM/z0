@@ -59,8 +59,8 @@ namespace Z0.Mkl
         }
 
         void Getrf64<M,N>()
-            where M : ITypeNat, new()
-            where N : ITypeNat, new()
+            where M : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
         {
             var m = nati<M>();
             var n = nati<N>(); 

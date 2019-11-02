@@ -22,7 +22,7 @@ namespace Z0
                 var y = BitStore.select(b);
                 Claim.eq(x,y);
 
-                var up1 = BitParts.unpack8x1((byte)i);
+                var up1 = BitStore.select((byte)i);
                 Span<byte> up2 = stackalloc byte[8];
                 BitParts.unpack8x1(b, up2);
                 Claim.eq(BitString.FromBitSeq(up1), BitString.FromBitSeq(up2));
@@ -52,7 +52,7 @@ namespace Z0
             for(var i=0; i< SampleSize; i++)
             {
                 var x = Random.Next<uint>();
-                BitParts.unpack32x1_bmi(x, y1);
+                BitParts.unpack32x1(x, y1);
                 BitParts.unpack32x1(x, y2);
                 Claim.eq(y1.ToBitString(), y2.ToBitString());
             }            
@@ -78,7 +78,7 @@ namespace Z0
             {
                 var x = Random.Next<uint>();
                 counter.Start();            
-                BitParts.unpack32x1_bmi(x, y1);
+                BitParts.unpack32x1(x, y1);
                 counter.Stop();
             }
 
@@ -107,7 +107,7 @@ namespace Z0
             {
                 var x = Random.Next<byte>();
                 counter.Start();            
-                last = BitParts.unpack8x1(x);
+                last = BitStore.select(x);
                 counter.Stop();
             }
 

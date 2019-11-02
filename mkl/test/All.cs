@@ -221,8 +221,8 @@ namespace Z0.Mkl
         }
 
         static string gemm<M,N>(bool silent = true)
-            where M : ITypeNat, new()
-            where N : ITypeNat, new()
+            where M : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
         {
             var m = nati<M>();
             var n = nati<N>();

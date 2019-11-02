@@ -118,7 +118,6 @@ namespace Z0
             where T : unmanaged
                 => andnot(A,B, A.Replicate(true));
 
-
         public static RowBits<T> or<T>(RowBits<T> A, RowBits<T> B, RowBits<T> C)
             where T : unmanaged
         {
@@ -189,25 +188,6 @@ namespace Z0
         public static RowBits<T> xnor<T>(RowBits<T> A, RowBits<T> B)
             where T : unmanaged
                 => xnor(A,B, A.Replicate(true));
-
-        [MethodImpl(Inline)]
-        static Dim2 dim<T>(RowBits<T> A)
-            where T : unmanaged
-                => (A.RowCount, A.RowWidth);
-
-        [MethodImpl(Inline)]
-        static int rowdim<T>(RowBits<T> A)
-            where T : unmanaged
-                => A.RowCount;
-
-        [MethodImpl(Inline)]
-        static int rowdim<T>(RowBits<T> A, RowBits<T> B)
-            where T : unmanaged
-        {
-            if(A.RowCount != B.RowCount)
-                Errors.CountMismatch(A.RowCount, B.RowCount);
-            return A.RowCount;
-        }
 
         [MethodImpl(Inline)]
         static int rowdim<T>(RowBits<T> A, RowBits<T> B, RowBits<T> C)

@@ -16,6 +16,7 @@ namespace Z0.Logix
     public class t_bitmatrix_ops : UnitTest<t_bitmatrix_ops>
     {
     
+
         public void bm_and_check()
         {
             bm_and_check<N8,byte>();
@@ -39,6 +40,8 @@ namespace Z0.Logix
             {
                 BitMatrixOpApi.eval(BinaryBitwiseOpKind.And, A, B, ref C);
                 BitMatrix.unpack(C, ref Z);
+
+                
 
                 for(var i = 0; i< n; i++)
                 for(var j = 0; j< n; j++)

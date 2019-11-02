@@ -14,28 +14,52 @@ namespace Z0
 
     partial class BitParts
     {        
+        const uint M4 = 0b1111;
 
         /// <summary>
         /// Partitions an 8-bit source value into 2 target segments each with an effective width of 4
         /// </summary>
         /// <param name="src">The source value</param>
         /// <param name="dst">A target span of sufficient length</param>
+        [MethodImpl(Inline)]
         public static void part8x4(uint src, Span<byte> dst)
         {
-            dst[0] = project<byte>(select(src, Part8x4.Part0), Part8x4.First);
-            dst[1] = project<byte>(select(src, Part8x4.Part1), Part8x4.First);
+            seek(ref head(dst), 0) = (byte)((src >> 0) & M4);
+            seek(ref head(dst), 1) = (byte)((src >> 4) & M4);
         }
 
         /// <summary>
-        /// Partitions an 8-bit source value into 2 target segments each with an effective width of 4
+        /// Partitions the first 12 bits of a 32-bit source value into 3 target segments each with an effective width of 4
         /// </summary>
         /// <param name="src">The source value</param>
         /// <param name="dst">A target span of sufficient length</param>
+        [MethodImpl(Inline)]
         public static void part12x4(uint src, Span<byte> dst)
         {
-            dst[0] = project<byte>(select(src, Part12x4.Part0), Part12x4.First);
-            dst[1] = project<byte>(select(src, Part12x4.Part1), Part12x4.First);
-            dst[2] = project<byte>(select(src, Part12x4.Part2), Part12x4.First);
+            seek(ref head(dst), 0) = (byte)((src >> 0) & M4);
+            seek(ref head(dst), 1) = (byte)((src >> 4) & M4);
+            seek(ref head(dst), 2) = (byte)((src >> 8) & M4);
+        }
+
+        /// <summary>
+        /// Partitions a 32-bit source value into 4 target segments each with an effective width of 4
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <param name="dst">A target span of sufficient length</param>
+        [MethodImpl(Inline)]
+        public static void part16x4(uint src, ref byte dst)
+        {
+            seek(ref dst, 0) = (byte)((src >> 0) & M4);
+            seek(ref dst, 1) = (byte)((src >> 4) & M4);
+            seek(ref dst, 2) = (byte)((src >> 8) & M4);
+            seek(ref dst, 3) = (byte)((src >> 12) & M4);
+        }
+
+        [MethodImpl(Inline)]
+        public static void part32x4(uint src, ref byte dst)
+        {
+            part16x4(src, ref dst);
+            part16x4(src >> 16, ref seek(ref dst, 4));
         }
 
         /// <summary>
@@ -43,30 +67,18 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <param name="dst">A target span of sufficient length</param>
+        [MethodImpl(Inline)]
         public static void part16x4(uint src, Span<byte> dst)
-        {
-            dst[0] = project<byte>(select(src, Part16x4.Part0), Part16x4.First);
-            dst[1] = project<byte>(select(src, Part16x4.Part1), Part16x4.First);
-            dst[2] = project<byte>(select(src, Part16x4.Part2), Part16x4.First);
-            dst[3] = project<byte>(select(src, Part16x4.Part3), Part16x4.First);
-        }
+            => part16x4(src, ref head(dst));
 
         /// <summary>
         /// Partitions a 32-bit source value into 8 segments with an effective bit width of 4
         /// </summary>
         /// <param name="src">The source value</param>
         /// <param name="dst">A target span of sufficient length</param>
+        [MethodImpl(Inline)]
         public static void part32x4(uint src, Span<byte> dst)
-        {
-            dst[0] = project<byte>(select(src, Part32x4.Part0), Part32x4.First);
-            dst[1] = project<byte>(select(src, Part32x4.Part1), Part32x4.First);
-            dst[2] = project<byte>(select(src, Part32x4.Part2), Part32x4.First);
-            dst[3] = project<byte>(select(src, Part32x4.Part3), Part32x4.First);
-            dst[4] = project<byte>(select(src, Part32x4.Part4), Part32x4.First);
-            dst[5] = project<byte>(select(src, Part32x4.Part5), Part32x4.First);
-            dst[6] = project<byte>(select(src, Part32x4.Part6), Part32x4.First);
-            dst[7] = project<byte>(select(src, Part32x4.Part7), Part32x4.First);
-        }
+            => part32x4(src, ref head(dst));
 
     }
 }

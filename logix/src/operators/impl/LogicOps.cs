@@ -11,6 +11,7 @@ namespace Z0.Logix
 
     using static zfunc;
     using static TernaryOpKind;
+    using static BinaryLogicOpKind;
 
     /// <summary>
     /// Defines logical operations over 1, 2 or 3 bits
@@ -58,64 +59,61 @@ namespace Z0.Logix
         public static bit not(bit a)
             => !a;
 
-        [MethodImpl(Inline), BinaryLogicOp(BinaryLogicOpKind.And)]
+        [MethodImpl(Inline), BinaryLogicOp(And)]
         public static bit and(bit a, bit b)
-            => bit.and(a,b);
+            => a & b;
 
-        [MethodImpl(Inline), BinaryLogicOp(BinaryLogicOpKind.Nand)]
+        [MethodImpl(Inline), BinaryLogicOp(Nand)]
         public static bit nand(bit a, bit b)
-            => bit.nand(a,b);
+            => !(a & b);
 
-
-        [MethodImpl(Inline), BinaryLogicOp(BinaryLogicOpKind.Or)]
+        [MethodImpl(Inline), BinaryLogicOp(Or)]
         public static bit or(bit a, bit b)
-            => bit.or(a,b);
+            => a | b;
 
-        [MethodImpl(Inline), BinaryLogicOp(BinaryLogicOpKind.Nor)]
+        [MethodImpl(Inline), BinaryLogicOp(Nor)]
         public static bit nor(bit a, bit b)
-            => bit.nor(a,b);
+            => ~(a | b);
 
-        [MethodImpl(Inline), BinaryLogicOp(BinaryLogicOpKind.XOr)]
+        [MethodImpl(Inline), BinaryLogicOp(XOr)]
         public static bit xor(bit a, bit b)
-            => bit.xor(a,b);
+            => a ^ b;
 
-        [MethodImpl(Inline), BinaryLogicOp(BinaryLogicOpKind.Xnor)]
+        [MethodImpl(Inline), BinaryLogicOp(Xnor)]
         public static bit xnor(bit a, bit b)
-            => bit.xnor(a,b);
+            => !(a ^ b);
 
-        [MethodImpl(Inline), BinaryLogicOp(BinaryLogicOpKind.Implication)]
+        [MethodImpl(Inline), BinaryLogicOp(Implication)]
         public static bit imply(bit a, bit b)
-            => bit.imply(a,b);
+            => a | ~b;
 
-        [MethodImpl(Inline), BinaryLogicOp(BinaryLogicOpKind.Nonimplication)]
+        [MethodImpl(Inline), BinaryLogicOp(Nonimplication)]
         public static bit notimply(bit a, bit b)
-            => bit.notimply(a,b);
+            => ~a & b;
 
-        [MethodImpl(Inline), BinaryLogicOp(BinaryLogicOpKind.LeftProject)]
+        [MethodImpl(Inline), BinaryLogicOp(LeftProject)]
         public static bit left(bit a, bit b)
             => a;
 
-        [MethodImpl(Inline), BinaryLogicOp(BinaryLogicOpKind.RightProject)]
+        [MethodImpl(Inline), BinaryLogicOp(RightProject)]
         public static bit right(bit a, bit b)
             => b;
 
-        [MethodImpl(Inline), BinaryLogicOp(BinaryLogicOpKind.LeftNot)]
+        [MethodImpl(Inline), BinaryLogicOp(LeftNot)]
         public static bit lnot(bit a, bit b)
-            => not(a);
+            => !a;
 
-        [MethodImpl(Inline), BinaryLogicOp(BinaryLogicOpKind.RightNot)]
+        [MethodImpl(Inline), BinaryLogicOp(RightNot)]
         public static bit rnot(bit a, bit b)
-            => not(b);
+            => ~b;
 
-
-        [MethodImpl(Inline), BinaryLogicOp(BinaryLogicOpKind.ConverseImplication)]
+        [MethodImpl(Inline), BinaryLogicOp(ConverseImplication)]
         public static bit cimply(bit a, bit b)
-            => bit.cimply(a,b);
+            => ~a | b;
 
-        [MethodImpl(Inline), BinaryLogicOp(BinaryLogicOpKind.ConverseNonimplication)]
+        [MethodImpl(Inline), BinaryLogicOp(ConverseNonimplication)]
         public static bit cnotimply(bit a, bit b)
-            => bit.cnotimply(a,b);
-
+            => a & ~b;
 
         [MethodImpl(Inline)]
         public static bit same(bit a, bit b)

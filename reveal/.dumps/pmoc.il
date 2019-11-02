@@ -1,4 +1,4 @@
-// 2019-10-31 21:45:34:183
+// 2019-11-02 09:11:44:647
 Sign:int signum_d8i(sbyte x)
 {
     IL_0000: ldarg.0
@@ -1601,227 +1601,227 @@ bool divides_g64f(double lhs, double rhs)
     IL_0007: ret
 
 }
-bool even_d8i(sbyte x)
+bit even_d8i(sbyte x)
 {
     IL_0000: ldarg.0
-    IL_0001: call System.Boolean zfunc::even(System.SByte)
+    IL_0001: call Z0.bit zfunc::even(System.SByte)
     IL_0006: ret
 
 }
-bool even_g8i(sbyte x)
+bit even_g8i(sbyte x)
 {
     IL_0000: ldarg.0
-    IL_0001: call System.Boolean Z0.gmath::even<System.SByte>(System.SByte)
+    IL_0001: call Z0.bit Z0.gmath::even<System.SByte>(System.SByte)
     IL_0006: ret
 
 }
-bool even_d8u(byte x)
+bit even_d8u(byte x)
 {
     IL_0000: ldarg.0
-    IL_0001: call System.Boolean zfunc::even(System.Byte)
+    IL_0001: call Z0.bit zfunc::even(System.Byte)
     IL_0006: ret
 
 }
-bool even_g8u(byte x)
+bit even_g8u(byte x)
 {
     IL_0000: ldarg.0
-    IL_0001: call System.Boolean Z0.gmath::even<System.Byte>(System.Byte)
+    IL_0001: call Z0.bit Z0.gmath::even<System.Byte>(System.Byte)
     IL_0006: ret
 
 }
-bool even_d16i(short x)
+bit even_d16i(short x)
 {
     IL_0000: ldarg.0
-    IL_0001: call System.Boolean zfunc::even(System.Int16)
+    IL_0001: call Z0.bit zfunc::even(System.Int16)
     IL_0006: ret
 
 }
-bool even_g16i(short x)
+bit even_g16i(short x)
 {
     IL_0000: ldarg.0
-    IL_0001: call System.Boolean Z0.gmath::even<System.Int16>(System.Int16)
+    IL_0001: call Z0.bit Z0.gmath::even<System.Int16>(System.Int16)
     IL_0006: ret
 
 }
-bool even_d16u(ushort x)
+bit even_d16u(ushort x)
 {
     IL_0000: ldarg.0
-    IL_0001: call System.Boolean zfunc::even(System.UInt16)
+    IL_0001: call Z0.bit zfunc::even(System.UInt16)
     IL_0006: ret
 
 }
-bool even_g16u(ushort x)
+bit even_g16u(ushort x)
 {
     IL_0000: ldarg.0
-    IL_0001: call System.Boolean Z0.gmath::even<System.UInt16>(System.UInt16)
+    IL_0001: call Z0.bit Z0.gmath::even<System.UInt16>(System.UInt16)
     IL_0006: ret
 
 }
-bool even_d32i(int x)
+bit even_d32i(int x)
 {
     IL_0000: ldarg.0
-    IL_0001: call System.Boolean zfunc::even(System.Int32)
+    IL_0001: call Z0.bit zfunc::even(System.Int32)
     IL_0006: ret
 
 }
-bool even_g32i(int x)
+bit even_g32i(int x)
 {
     IL_0000: ldarg.0
-    IL_0001: call System.Boolean Z0.gmath::even<System.Int32>(System.Int32)
+    IL_0001: call Z0.bit Z0.gmath::even<System.Int32>(System.Int32)
     IL_0006: ret
 
 }
-bool even_d32u(uint x)
+bit even_d32u(uint x)
 {
     IL_0000: ldarg.0
-    IL_0001: call System.Boolean zfunc::even(System.UInt32)
+    IL_0001: call Z0.bit zfunc::even(System.UInt32)
     IL_0006: ret
 
 }
-bool even_g32u(uint x)
+bit even_g32u(uint x)
 {
     IL_0000: ldarg.0
-    IL_0001: call System.Boolean Z0.gmath::even<System.UInt32>(System.UInt32)
+    IL_0001: call Z0.bit Z0.gmath::even<System.UInt32>(System.UInt32)
     IL_0006: ret
 
 }
-bool even_d64i(long x)
+bit even_d64i(long x)
 {
     IL_0000: ldarg.0
-    IL_0001: call System.Boolean zfunc::even(System.Int64)
+    IL_0001: call Z0.bit zfunc::even(System.Int64)
     IL_0006: ret
 
 }
-bool even_g64i(long x)
+bit even_g64i(long x)
 {
     IL_0000: ldarg.0
-    IL_0001: call System.Boolean Z0.gmath::even<System.Int64>(System.Int64)
+    IL_0001: call Z0.bit Z0.gmath::even<System.Int64>(System.Int64)
     IL_0006: ret
 
 }
-bool even_d64u(ulong x)
+bit even_d64u(ulong x)
 {
     IL_0000: ldarg.0
-    IL_0001: call System.Boolean zfunc::even(System.UInt64)
+    IL_0001: call Z0.bit zfunc::even(System.UInt64)
     IL_0006: ret
 
 }
-bool even_g64u(ulong x)
+bit even_g64u(ulong x)
 {
     IL_0000: ldarg.0
-    IL_0001: call System.Boolean Z0.gmath::even<System.UInt64>(System.UInt64)
+    IL_0001: call Z0.bit Z0.gmath::even<System.UInt64>(System.UInt64)
     IL_0006: ret
 
 }
-bool odd_d8i(sbyte x)
+bit odd_d8i(sbyte x)
 {
     IL_0000: ldarg.0
-    IL_0001: call System.Boolean zfunc::odd(System.SByte)
+    IL_0001: call Z0.bit zfunc::odd(System.SByte)
     IL_0006: ret
 
 }
-bool odd_g8i(sbyte x)
+bit odd_g8i(sbyte x)
 {
     IL_0000: ldarg.0
-    IL_0001: call System.Boolean Z0.gmath::odd<System.SByte>(System.SByte)
+    IL_0001: call Z0.bit Z0.gmath::odd<System.SByte>(System.SByte)
     IL_0006: ret
 
 }
-bool odd_d8u(byte x)
+bit odd_d8u(byte x)
 {
     IL_0000: ldarg.0
-    IL_0001: call System.Boolean zfunc::odd(System.Byte)
+    IL_0001: call Z0.bit zfunc::odd(System.Byte)
     IL_0006: ret
 
 }
-bool odd_g8u(byte x)
+bit odd_g8u(byte x)
 {
     IL_0000: ldarg.0
-    IL_0001: call System.Boolean Z0.gmath::odd<System.Byte>(System.Byte)
+    IL_0001: call Z0.bit Z0.gmath::odd<System.Byte>(System.Byte)
     IL_0006: ret
 
 }
-bool odd_d16i(short x)
+bit odd_d16i(short x)
 {
     IL_0000: ldarg.0
-    IL_0001: call System.Boolean zfunc::odd(System.Int16)
+    IL_0001: call Z0.bit zfunc::odd(System.Int16)
     IL_0006: ret
 
 }
-bool odd_g16i(short x)
+bit odd_g16i(short x)
 {
     IL_0000: ldarg.0
-    IL_0001: call System.Boolean Z0.gmath::odd<System.Int16>(System.Int16)
+    IL_0001: call Z0.bit Z0.gmath::odd<System.Int16>(System.Int16)
     IL_0006: ret
 
 }
-bool odd_d16u(ushort x)
+bit odd_d16u(ushort x)
 {
     IL_0000: ldarg.0
-    IL_0001: call System.Boolean zfunc::odd(System.UInt16)
+    IL_0001: call Z0.bit zfunc::odd(System.UInt16)
     IL_0006: ret
 
 }
-bool odd_g16u(ushort x)
+bit odd_g16u(ushort x)
 {
     IL_0000: ldarg.0
-    IL_0001: call System.Boolean Z0.gmath::odd<System.UInt16>(System.UInt16)
+    IL_0001: call Z0.bit Z0.gmath::odd<System.UInt16>(System.UInt16)
     IL_0006: ret
 
 }
-bool odd_d32i(int x)
+bit odd_d32i(int x)
 {
     IL_0000: ldarg.0
-    IL_0001: call System.Boolean zfunc::odd(System.Int32)
+    IL_0001: call Z0.bit zfunc::odd(System.Int32)
     IL_0006: ret
 
 }
-bool odd_g32i(int x)
+bit odd_g32i(int x)
 {
     IL_0000: ldarg.0
-    IL_0001: call System.Boolean Z0.gmath::odd<System.Int32>(System.Int32)
+    IL_0001: call Z0.bit Z0.gmath::odd<System.Int32>(System.Int32)
     IL_0006: ret
 
 }
-bool odd_d32u(uint x)
+bit odd_d32u(uint x)
 {
     IL_0000: ldarg.0
-    IL_0001: call System.Boolean zfunc::odd(System.UInt32)
+    IL_0001: call Z0.bit zfunc::odd(System.UInt32)
     IL_0006: ret
 
 }
-bool odd_g32u(uint x)
+bit odd_g32u(uint x)
 {
     IL_0000: ldarg.0
-    IL_0001: call System.Boolean Z0.gmath::odd<System.UInt32>(System.UInt32)
+    IL_0001: call Z0.bit Z0.gmath::odd<System.UInt32>(System.UInt32)
     IL_0006: ret
 
 }
-bool odd_d64i(long x)
+bit odd_d64i(long x)
 {
     IL_0000: ldarg.0
-    IL_0001: call System.Boolean zfunc::odd(System.Int64)
+    IL_0001: call Z0.bit zfunc::odd(System.Int64)
     IL_0006: ret
 
 }
-bool odd_g64i(long x)
+bit odd_g64i(long x)
 {
     IL_0000: ldarg.0
-    IL_0001: call System.Boolean Z0.gmath::odd<System.Int64>(System.Int64)
+    IL_0001: call Z0.bit Z0.gmath::odd<System.Int64>(System.Int64)
     IL_0006: ret
 
 }
-bool odd_d64u(ulong x)
+bit odd_d64u(ulong x)
 {
     IL_0000: ldarg.0
-    IL_0001: call System.Boolean zfunc::odd(System.UInt64)
+    IL_0001: call Z0.bit zfunc::odd(System.UInt64)
     IL_0006: ret
 
 }
-bool odd_g64u(ulong x)
+bit odd_g64u(ulong x)
 {
     IL_0000: ldarg.0
-    IL_0001: call System.Boolean Z0.gmath::odd<System.UInt64>(System.UInt64)
+    IL_0001: call Z0.bit Z0.gmath::odd<System.UInt64>(System.UInt64)
     IL_0006: ret
 
 }

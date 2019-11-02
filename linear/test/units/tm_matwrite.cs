@@ -32,8 +32,8 @@ namespace Z0.Test
         }
 
         void VerifyWriter<M,N,T>(int count, M m = default, N n = default, T exemplar = default)
-            where M : ITypeNat, new()
-            where N : ITypeNat, new()
+            where M : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
             where T : unmanaged    
         {
             var isFp = isFloat<T>();

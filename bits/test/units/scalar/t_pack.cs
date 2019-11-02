@@ -249,7 +249,7 @@ namespace Z0.Test
             var src = Random.BitString(bitcount);
             Claim.eq(bitcount, src.Length);
 
-            var x = src.ToBits();
+            var x = src.ToBitSpan();
             Claim.eq(bitcount, x.Length);
             
             var y = pack(x);

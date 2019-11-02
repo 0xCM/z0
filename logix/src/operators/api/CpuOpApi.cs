@@ -35,7 +35,7 @@ namespace Z0.Logix
         /// <summary>
         /// Advertises the supported binary bitwise operators
         /// </summary>
-        public static BinaryBitwiseOpKind[] BinaryBitwiseKinds
+        public static ReadOnlySpan<BinaryBitwiseOpKind> BinaryBitwiseKinds
             => ScalarOpApi.BinaryBitwiseKinds;
 
         /// <summary>
@@ -271,9 +271,6 @@ namespace Z0.Logix
             {
                 case BinaryArithmeticOpKind.Add: return add(x,y);
                 case BinaryArithmeticOpKind.Sub: return sub(x,y);
-                case BinaryArithmeticOpKind.Eq: 
-                case BinaryArithmeticOpKind.Lt: 
-                case BinaryArithmeticOpKind.Gt: return eval((ComparisonKind)kind, x, y);
                 default: return dne<BinaryArithmeticOpKind,Vector128<T>>(kind);
             }
         }
@@ -287,9 +284,6 @@ namespace Z0.Logix
             {
                 case BinaryArithmeticOpKind.Add: return add(x,y);
                 case BinaryArithmeticOpKind.Sub: return sub(x,y);
-                case BinaryArithmeticOpKind.Eq: 
-                case BinaryArithmeticOpKind.Lt: 
-                case BinaryArithmeticOpKind.Gt: return eval((ComparisonKind)kind, x, y);
                 default: return dne<BinaryArithmeticOpKind,Vector256<T>>(kind);
             }
         }

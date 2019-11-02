@@ -116,7 +116,7 @@ namespace Z0
         void bm_xor_32x32_bench_noalloc(SystemCounter sw = default)
         {
             var opname = "bm_xor_32x32";
-            var last = BitMatrix32.Alloc();
+            var last = BitMatrix.alloc(n32);
             for(var i=0; i<OpCount; i++)
             {
                 var A = Random.BitMatrix(n32);

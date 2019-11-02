@@ -12,7 +12,7 @@ namespace Z0.Logix
     /// Classifies unary logic operators
     /// </summary>
     [Flags]
-    public enum UnaryLogicOpKind : uint
+    public enum UnaryLogicOpKind : byte
     {
         /// <summary>
         /// The unary operator that always returns false

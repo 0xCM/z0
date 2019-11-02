@@ -184,6 +184,7 @@ namespace Z0
             set => SetBit(row, col, value);
         }            
 
+
         /// <summary>
         /// Queries mainpulates a row
         /// </summary>
@@ -363,11 +364,6 @@ namespace Z0
             return ref src;
         }
 
-        static ref BitMatrix<M,N,T> Or(ref BitMatrix<M,N,T> lhs, in BitMatrix<M,N,T> rhs)        
-        {
-            mathspan.or(lhs.Data, rhs.Data, lhs.Data);
-            return ref lhs;
-        }
 
     }
 }

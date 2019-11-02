@@ -9,6 +9,7 @@ namespace Z0.Logix
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     
+    
     using static zfunc;
     using static LogicOps;
     using static OpHelpers;
@@ -31,18 +32,12 @@ namespace Z0.Logix
         /// <summary>
         /// Advertises the supported binary opeators
         /// </summary>
-        public static BinaryLogicOpKind[] BinaryOpKinds
-            => new BinaryLogicOpKind[]{
-                BinaryLogicOpKind.True, BinaryLogicOpKind.False,
-                BinaryLogicOpKind.And, BinaryLogicOpKind.Nand, 
-                BinaryLogicOpKind.Or, BinaryLogicOpKind.Nor, 
-                BinaryLogicOpKind.XOr, BinaryLogicOpKind.Xnor,                
-                BinaryLogicOpKind.LeftProject, BinaryLogicOpKind.RightProject,
-                BinaryLogicOpKind.LeftNot, BinaryLogicOpKind.RightNot,
-                BinaryLogicOpKind.Implication, BinaryLogicOpKind.Nonimplication,
-                BinaryLogicOpKind.ConverseImplication, BinaryLogicOpKind.ConverseNonimplication, 
-                
-            };
+        public static ReadOnlySpan<BinaryLogicOpKind> BinaryOpKinds
+            => BinaryOpKindData.As<BinaryLogicOpKind>();
+
+        static ReadOnlySpan<byte> BinaryOpKindData
+            => new byte[]{0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15};
+         
 
         /// <summary>
         /// Advertises the supported ternary opeators

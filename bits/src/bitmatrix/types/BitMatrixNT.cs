@@ -21,12 +21,16 @@ namespace Z0
     {        
         Span<T> data;
 
-
         public static BitMatrix<N,T> Identity => BitMatrix.identity<N,T>();
 
         public static BitMatrix<N,T> Ones => BitMatrix.ones<N,T>();
 
         public static readonly GridLayout<T> GridLayout = BitMatrix.layout<N,T>();
+
+        /// <summary>
+        /// Specifies the square matrix dimension
+        /// </summary>
+        public int Order => (int)new N().value;
 
         /// <summary>
         /// Allocates a Zero-filled NxN matrix
@@ -55,41 +59,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitMatrix<N,T> operator *(BitMatrix<N,T> A, BitMatrix<N,T> B)
             => BitMatrix.mul(A, B, ref A);
-
-        /// <summary>
-        /// Computes the bitwise XOR between the operands
-        /// </summary>
-        /// <param name="A">The left matrix</param>
-        /// <param name="B">The right matrix</param>
-        [MethodImpl(Inline)]
-        public static BitMatrix<N,T> operator ^(BitMatrix<N,T> A, BitMatrix<N,T> B)
-            => XOr(ref A, B);
-
-        /// <summary>
-        /// Computes the bitwise AND between the operands
-        /// </summary>
-        /// <param name="A">The left matrix</param>
-        /// <param name="B">The right matrix</param>
-        [MethodImpl(Inline)]
-        public static BitMatrix<N,T> operator &(BitMatrix<N,T> A, BitMatrix<N,T> B)
-            => And(ref A, B);
-
-        /// <summary>
-        /// Computes the bitwise Or between the operands
-        /// </summary>
-        /// <param name="A">The left matrix</param>
-        /// <param name="B">The right matrix</param>
-        [MethodImpl(Inline)]
-        public static BitMatrix<N,T> operator |(BitMatrix<N,T> A, BitMatrix<N,T> B)
-            => Or(ref A, B);
-
-        /// <summary>
-        /// Computes the bitwise complement of the source matrix
-        /// </summary>
-        /// <param name="A">The source matrix</param>
-        [MethodImpl(Inline)]
-        public static BitMatrix<N,T> operator ~(BitMatrix<N,T> A)
-            => Flip(ref A);
 
         [MethodImpl(Inline)]
         public static bool operator ==(BitMatrix<N,T> lhs, BitMatrix<N,T> rhs)
@@ -134,10 +103,6 @@ namespace Z0
             set => SetBit(row, col, value);
         }            
 
-        /// <summary>
-        /// Specifies the MxN matrix dimension
-        /// </summary>
-        public int Order => (int)new N().value;
 
         /// <summary>
         /// The number of rows in the matrix
@@ -244,13 +209,6 @@ namespace Z0
         }
 
         /// <summary>
-        /// Extracts the bits that comprise the matrix in row-major order
-        /// </summary>
-        [MethodImpl(Inline)]
-        public Span<byte> Unpack()
-            => data.AsBytes().Unpack().Slice(0, math.square(natval<N>()));
-
-        /// <summary>
         /// Sets all the bits to align with the source value
         /// </summary>
         /// <param name="value">The source value</param>
@@ -264,10 +222,6 @@ namespace Z0
                 Data.Fill(primal.Zero);
         }
 
-        [MethodImpl(Inline)]    
-        public BitString ToBitString()
-            => Data.ToBitString();
- 
         [MethodImpl(Inline)]
         public string Format()
         {
@@ -302,48 +256,6 @@ namespace Z0
 
         public override bool Equals(object rhs)
             => throw new NotSupportedException();
-
-        static ref BitMatrix<N,T> And(ref BitMatrix<N,T> A, in BitMatrix<N,T> B)        
-        {
-            mathspan.and(A.Data, B.Data, A.Data);
-            return ref A;
-        }
-
-        static ref BitMatrix<N,T> Mul(ref BitMatrix<N,T> A, in BitMatrix<N,T> B)
-        {
-            var x = A;
-            var y = B.Transpose();
-            ref var dst = ref A;
-            var n = (int)new N().value;
-
-            for(var i=0; i< n; i++)
-            {
-                var r = x.RowVector(i);
-                var z = BitVector.natural<N,T>();
-                for(var j = 0; j< n; j++)
-                    z[j] = r % y.RowVector(j);
-                dst[i] = z;
-            }
-            return ref dst;
-        }
-
-        static ref BitMatrix<N,T> XOr(ref BitMatrix<N,T> A, in BitMatrix<N,T> B)        
-        {
-            mathspan.xor(A.Data, B.Data, A.Data);
-            return ref A;
-        }
-
-        static ref BitMatrix<N,T> Or(ref BitMatrix<N,T> lhs, in BitMatrix<N,T> rhs)        
-        {
-            mathspan.or(lhs.Data, rhs.Data, lhs.Data);
-            return ref lhs;
-        }
-
-        static ref BitMatrix<N,T> Flip(ref BitMatrix<N,T> src)        
-        {
-            mathspan.not(src.Data);
-            return ref src;
-        }
         
     }
 }

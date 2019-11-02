@@ -19,14 +19,15 @@ namespace Z0
     [StructLayout(LayoutKind.Sequential)]
     public ref struct BitMatrix<T>
         where T : unmanaged
-    {        
-                
+    {                        
         Span<T> data;
-
 
         public static readonly uint N = bitsize<T>();
 
-        
+        [MethodImpl(Inline)]
+        public static BitVector<T> operator * (BitMatrix<T> A, BitVector<T> x)
+            => BitMatrix.mul(A,x);
+
         [MethodImpl(Inline)]
         public BitMatrix(params T[] data)
         {

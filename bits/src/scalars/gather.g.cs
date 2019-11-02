@@ -41,5 +41,4 @@ namespace Z0
                 throw unsupported<T>();
         }           
     }
-
 }

@@ -129,9 +129,9 @@ namespace Z0.Mkl.Test
         }
     
         OpTime gemm_check<M,K,N,T>(IEnumerable<T> src, T epsilon = default, M m = default, K k = default, N n = default, bool trace = false)
-            where M : ITypeNat, new()
-            where K : ITypeNat, new()
-            where N : ITypeNat, new()
+            where M : unmanaged, ITypeNat
+            where K : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
             where T : unmanaged
 
         {

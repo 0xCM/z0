@@ -16,35 +16,33 @@ namespace Z0
     {        
         byte[] data;
 
-        public static readonly N4 N = default;
+        const uint Order = 4;
+
+        /// <summary>
+        /// The order type
+        /// </summary>
+        public static  N4 N => default;
 
         /// <summary>
         /// The number of bits per row
         /// </summary>
-        public static readonly BitSize RowBitCount = N.value;        
+        public const uint RowBitCount = Order;
 
         /// <summary>
         /// The number of bits per column
         /// </summary>
-        public static readonly BitSize ColBitCount = N.value;
+        public const uint ColBitCount = Order;
 
         /// <summary>
         /// The number of bits apprehended by the matrix = 64
         /// </summary>
-        public static readonly BitSize TotalBitCount = RowBitCount * ColBitCount;
+        public const uint TotalBitCount = RowBitCount * ColBitCount;
                                 
-        static ReadOnlySpan<byte> Identity4x8 => new byte[]
-        {
-            1 << 0, 
-            1 << 1, 
-            1 << 2, 
-            1 << 3
-        };
                 
         public static BitMatrix4 Identity 
         {
             [MethodImpl(Inline)]
-            get => Define(Identity4x8);
+            get => Define(IdentityData);
         }
 
         public static BitMatrix4 Zero 
@@ -91,33 +89,36 @@ namespace Z0
             => src.ToScalar();
 
         [MethodImpl(Inline)]
-        public static BitMatrix4 operator & (BitMatrix4 lhs, BitMatrix4 rhs)
-            => BitMatrix.and(lhs,rhs);
+        public static BitMatrix4 operator & (BitMatrix4 A, BitMatrix4 B)
+            => BitMatrix.and(A,B);
 
         [MethodImpl(Inline)]
-        public static BitMatrix4 operator | (BitMatrix4 lhs, BitMatrix4 rhs)
-            => Or(ref lhs, rhs);
+        public static BitMatrix4 operator | (BitMatrix4 A, BitMatrix4 B)
+            => Or(ref A, B);
 
         [MethodImpl(Inline)]
-        public static BitMatrix4 operator ^ (BitMatrix4 lhs, BitMatrix4 rhs)
-            => XOr(ref lhs,rhs);
+        public static BitMatrix4 operator ^ (BitMatrix4 A, BitMatrix4 B)
+            => XOr(ref A,B);
 
         [MethodImpl(Inline)]
         public static BitMatrix4 operator ~ (BitMatrix4 src)
             => Flip(ref src);
 
         [MethodImpl(Inline)]
-        public static BitMatrix4 operator * (BitMatrix4 lhs, BitMatrix4 rhs)
-            => Mul(ref lhs,rhs);
-
-
-        [MethodImpl(Inline)]
-        public static bool operator ==(BitMatrix4 lhs, BitMatrix4 rhs)
-            => lhs.Equals(rhs);
+        public static BitMatrix4 operator * (BitMatrix4 A, BitMatrix4 B)
+            => Mul(ref A,B);
 
         [MethodImpl(Inline)]
-        public static bool operator !=(BitMatrix4 lhs, BitMatrix4 rhs)
-            => !(lhs.Equals(rhs));
+        public static BitVector4 operator * (BitMatrix4 A, BitVector4 x)
+            => BitMatrix.mul(A,x);
+
+        [MethodImpl(Inline)]
+        public static bool operator ==(BitMatrix4 A, BitMatrix4 B)
+            => A.Equals(B);
+
+        [MethodImpl(Inline)]
+        public static bool operator !=(BitMatrix4 A, BitMatrix4 B)
+            => !(A.Equals(B));
 
 
         [MethodImpl(Inline)]
@@ -126,8 +127,7 @@ namespace Z0
                 
         [MethodImpl(Inline)]
         BitMatrix4(Span<byte> src)
-        {                    
-            require(src.Length == 4);
+        {                                
             this.data = src.ToArray();
         }
 
@@ -138,6 +138,14 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitMatrix4 Alloc(Bit? fill = null)                
             => fill == Bit.On ? new BitMatrix4(0xF,0xF,0xF,0xF) : new BitMatrix4(0,0,0,0);
+
+        public static BitMatrix4 Alloc(BitVector4 fill)                
+        {
+            var data = new byte[4];
+            data.Fill(fill);
+            return new BitMatrix4(data);
+        }
+
         public int RowCount
         {
             [MethodImpl(Inline)]
@@ -217,8 +225,8 @@ namespace Z0
         }
 
         [MethodImpl(Inline)] 
-        public BitMatrix4 AndNot(BitMatrix4 rhs)
-            => AndNot(ref this, rhs);
+        public BitMatrix4 AndNot(BitMatrix4 B)
+            => AndNot(ref this, B);
 
         public readonly BitVector4 Diagonal()
         {
@@ -235,8 +243,8 @@ namespace Z0
             => BitMatrix4.Define(data.Replicate());
 
         [MethodImpl(Inline)]
-        public readonly bool Equals(in BitMatrix4 rhs)
-            => BitConverter.ToUInt16(data) == rhs.Data.TakeUInt16();
+        public readonly bool Equals(in BitMatrix4 B)
+            => BitConverter.ToUInt16(data) == B.Data.TakeUInt16();
 
         [MethodImpl(Inline)]
         public readonly string Format()
@@ -289,24 +297,24 @@ namespace Z0
 
 
         [MethodImpl(Inline)]
-        static ref BitMatrix4 XOr(ref BitMatrix4 lhs, in BitMatrix4 rhs)
+        static ref BitMatrix4 XOr(ref BitMatrix4 A, in BitMatrix4 B)
         {
-             lhs.data = BitConverter.GetBytes((ushort) ((ushort)lhs ^ (ushort)rhs));
-             return ref lhs;
+             A.data = BitConverter.GetBytes((ushort) ((ushort)A ^ (ushort)B));
+             return ref A;
         }
 
         [MethodImpl(Inline)]
-        static ref BitMatrix4 Or(ref BitMatrix4 lhs, in BitMatrix4 rhs)
+        static ref BitMatrix4 Or(ref BitMatrix4 A, in BitMatrix4 B)
         {
-             lhs.data =  BitConverter.GetBytes((ushort) ((ushort)lhs | (ushort)rhs));
-             return ref lhs;
+             A.data =  BitConverter.GetBytes((ushort) ((ushort)A | (ushort)B));
+             return ref A;
         }
 
         [MethodImpl(Inline)]
-        static ref BitMatrix4 AndNot(ref BitMatrix4 lhs, in BitMatrix4 rhs)
+        static ref BitMatrix4 AndNot(ref BitMatrix4 A, in BitMatrix4 B)
         {
-             lhs.data = BitConverter.GetBytes((ushort)lhs &~ (ushort)rhs);
-             return ref lhs;
+             A.data = BitConverter.GetBytes((ushort)A &~ (ushort)B);
+             return ref A;
         }
 
         [MethodImpl(Inline)]
@@ -316,11 +324,11 @@ namespace Z0
              return ref src;
         }
 
-        static ref BitMatrix4 Mul(ref BitMatrix4 lhs, in BitMatrix4 rhs)
+        static ref BitMatrix4 Mul(ref BitMatrix4 A, in BitMatrix4 B)
         {
-            var x = lhs;
-            var y = rhs.Transpose();
-            ref var dst = ref lhs;
+            var x = A;
+            var y = B.Transpose();
+            ref var dst = ref A;
 
             for(var i=0; i< N; i++)
             {
@@ -339,6 +347,13 @@ namespace Z0
         public override int GetHashCode()
             => throw new NotSupportedException();
 
+        static ReadOnlySpan<byte> IdentityData => new byte[]
+        {
+            1 << 0, 
+            1 << 1, 
+            1 << 2, 
+            1 << 3
+        };
 
     }
 }

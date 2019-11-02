@@ -31,7 +31,7 @@ namespace Z0
         public static Perm<N16> ToPerm(this Vector128<byte> src)
         {
             Span<byte> dst = new byte[16];
-            vstore(src, ref head(dst));
+            ginx.vstore(src, ref head(dst));
             return Perm.Define(n16, dst.Convert<int>());
         }
 

@@ -67,9 +67,9 @@ namespace Z0.Test
 
         public void hi_256_u64()
         {            
-            var x = vparts(1ul,2ul,3ul,4ul);
-            var y = vparts(5ul,6ul,7ul,8ul);
-            var expect = vparts(2ul,6ul,4ul,8ul);
+            var x = dinx.vparts(1ul,2ul,3ul,4ul);
+            var y = dinx.vparts(5ul,6ul,7ul,8ul);
+            var expect = dinx.vparts(2ul,6ul,4ul,8ul);
 
             var actual = dinx.vunpackhi(x,y);
             Claim.eq(expect, actual);
@@ -77,11 +77,11 @@ namespace Z0.Test
 
         public void hi_256_u32()
         {
-            var x = vparts(1u, 2u,  3u,4u,   5u,6u,   7u,8u);
-            var y = vparts(10u,12u, 13u,14u, 15u,16u, 17u,18u);
+            var x = dinx.vparts(1u, 2u,  3u,4u,   5u,6u,   7u,8u);
+            var y = dinx.vparts(10u,12u, 13u,14u, 15u,16u, 17u,18u);
 
             var actual = dinx.vunpackhi(x,y);
-            var expect = vparts(3u,13u,4u,14u,7u,17u,8u,18u);
+            var expect = dinx.vparts(3u,13u,4u,14u,7u,17u,8u,18u);
             Claim.eq(expect, actual);
         }
 

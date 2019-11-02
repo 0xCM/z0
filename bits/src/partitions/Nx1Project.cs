@@ -14,7 +14,6 @@ namespace Z0
 
     partial class BitParts
     {
-
         /// <summary>
         /// Replicates the low bit of a source to an identified partition of an empty target
         /// </summary>

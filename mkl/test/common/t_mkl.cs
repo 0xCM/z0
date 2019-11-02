@@ -39,10 +39,10 @@ namespace Z0.Mkl
         /// <typeparam name="N">The column count type</typeparam>
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
-        protected BlockMatrix<M,N,T> RMat<M,N,T>(Interval<T>? domain = null, M m = default, N n = default)
+        protected BlockMatrix<M,N,T> RMat<M,N,T>(Interval<T> domain, M m = default, N n = default)
             where T : unmanaged
-            where M : ITypeNat, new()
-            where N : ITypeNat, new()
+            where M : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
                 => Random.BlockMatrix<M,N,T>(domain);
 
         [MethodImpl(Inline)]

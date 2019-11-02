@@ -12,46 +12,47 @@ namespace Z0.Logix
     using static zfunc;
     using static BitLogicSpec;
     using static LogicEngine;
+    using BL = BinaryLogicOpKind;
 
     public class t_binary_logic : UnitTest<t_binary_logic>
     {
         protected override int CycleCount => Pow2.T08;
                 
         public void and_op_check()
-            => logic_op_check(BinaryLogicOpKind.And, (a,b) => a & b);
-
-        public void or_op_check()
-            => logic_op_check(BinaryLogicOpKind.Or, (a,b) => a | b);
-
-        public void xor_op_check()
-            => logic_op_check(BinaryLogicOpKind.XOr, (a,b) => a ^ b);
-
-        public void nand_op_check()
-            => logic_op_check(BinaryLogicOpKind.Nand, (a,b) => !(a & b));
-
-        public void nor_op_check()
-            => logic_op_check(BinaryLogicOpKind.Nor, (a,b) => !(a | b));
-
-        public void xnor_op_check()
-            => logic_op_check(BinaryLogicOpKind.Xnor, (a,b) => !(a ^ b));
+            => logic_op_check(BL.And, (a,b) => a & b);
 
         public void and_expr_check()
-            => logic_expr_check(BinaryLogicOpKind.And, LogicOps.and);
+            => logic_expr_check(BL.And, LogicOps.and);
 
-        public void or_expr_check()
-            => logic_expr_check(BinaryLogicOpKind.Or, LogicOps.or);
-
-        public void xor_expr_check()
-            => logic_expr_check(BinaryLogicOpKind.XOr, LogicOps.xor);
+        public void nand_op_check()
+            => logic_op_check(BL.Nand, (a,b) => !(a & b));
 
         public void nand_expr_check()
-            => logic_expr_check(BinaryLogicOpKind.Nand, LogicOps.nand);
+            => logic_expr_check(BL.Nand, LogicOps.nand);
+
+        public void or_op_check()
+            => logic_op_check(BL.Or, (a,b) => a | b);
+
+        public void or_expr_check()
+            => logic_expr_check(BL.Or, LogicOps.or);
+
+        public void nor_op_check()
+            => logic_op_check(BL.Nor, (a,b) => !(a | b));
 
         public void nor_expr_check()
-            => logic_expr_check(BinaryLogicOpKind.Nor, LogicOps.nor);
+            => logic_expr_check(BL.Nor, LogicOps.nor);
+
+        public void xor_op_check()
+            => logic_op_check(BL.XOr, (a,b) => a ^ b);
+
+        public void xor_expr_check()
+            => logic_expr_check(BL.XOr, LogicOps.xor);
+
+        public void xnor_op_check()
+            => logic_op_check(BL.Xnor, (a,b) => !(a ^ b));
 
         public void xnor_expr_check()
-            => logic_expr_check(BinaryLogicOpKind.Xnor, LogicOps.xnor);
+            => logic_expr_check(BL.Xnor, LogicOps.xnor);
 
         public void t_bitcombo_check()
         {
@@ -105,7 +106,7 @@ namespace Z0.Logix
             logic_op_bench(false);
         }
 
-        void logic_op_check(BinaryLogicOpKind kind, Func<bit,bit,bit> rule)
+        void logic_op_check(BL kind, Func<bit,bit,bit> rule)
         {
             var lhsBits = Random.BitSpan(SampleSize);
             var rhsBits = Random.BitSpan(SampleSize);
@@ -120,7 +121,7 @@ namespace Z0.Logix
 
         }
 
-        void logic_expr_check(BinaryLogicOpKind kind, Func<bit,bit,bit> rule)
+        void logic_expr_check(BL kind, Func<bit,bit,bit> rule)
         {
             var v1 = variable(1);
             var v2 = variable(2);
@@ -145,7 +146,7 @@ namespace Z0.Logix
             var lhsSamples = Random.Bits().Take(SampleSize).ToArray();
             var rhsSamples = Random.Bits().Take(SampleSize).ToArray();
             var result = bit.Off;
-            var kinds = LogicOpApi.BinaryOpKinds.ToArray();
+            var kinds = LogicOpApi.BinaryOpKinds;
             var opcount = 0;
 
             clock.Start();

@@ -34,7 +34,7 @@ namespace Z0
             var v = Vec128.scalar(y);
             var z = CarrylessMultiply(u, v, 0);
             var dst = default(UInt128);
-            vstore(z, ref dst.lo);
+            ginx.vstore(z, ref dst.lo);
             return dst;
         }
 
@@ -64,7 +64,7 @@ namespace Z0
             var u = Vec128.scalar(x);
             var v = Vec128.scalar(y);
             var z = CarrylessMultiply(u, v, 0);
-            vstore(z,ref dst.lo);
+            ginx.vstore(z,ref dst.lo);
             return ref dst;
         }
     }

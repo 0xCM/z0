@@ -77,7 +77,7 @@ namespace Z0
             where S : unmanaged
             where T : unmanaged
         {
-            var dst = NatSpan.Alloc<M,N,T>();
+            var dst = NatSpan.alloc<M,N,T>();
             var m = nfunc.nati<M>();
             var n = nfunc.nati<N>();
             for(var i=0; i < m; i++)

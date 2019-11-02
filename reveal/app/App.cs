@@ -29,7 +29,7 @@ namespace Z0
                 {
                     var dstPath = AsmCodeEmitter.OutPath(DumpFolder, t.DisplayName());
                     var emitter = AsmCodeEmitter.Create(dstPath);
-                    emitter.EmitAsm(t.DistillAsm());                    
+                    emitter.EmitAsm(t.DistillAsm(),false);                    
                 }
 
                 if(cil)
@@ -41,8 +41,7 @@ namespace Z0
         static void EmitAsm(Type[] types, FilePath dst)
         {
             var emitter = AsmCodeEmitter.Create(dst);
-            dst.DeleteIfExists();
-            iter(types, t => emitter.EmitAsm(t.DistillAsm(),true));
+            emitter.EmitAsm(types,dst);
         }
 
         public static Option<MethodDisassembly> DeconstructGeneric<T>(Type host, string opname)
@@ -108,15 +107,14 @@ namespace Z0
             Disassemble(typeof(bvoc));    
             Disassemble(typeof(bmoc));    
             Disassemble(typeof(convoc));   
-            Disassemble(typeof(math));
-            Disassemble(typeof(dinx));    
-            Disassemble(typeof(BitVector));    
-            Disassemble(typeof(Bits));    
+            Disassemble(typeof(SimdPack));
+            Disassemble(typeof(logixoc));
             Disassemble(typeof(BitParts));  
-            EmitAsm(Designators.Logix.Designated);  
-            // Disassemble(typeof(LogicOps));   
-            // Disassemble(typeof(LogicExprEval));             
-            // Disassemble(typeof(LogicDispatcher)); 
+            //Disassemble(typeof(BitVector));   
+            // Disassemble(typeof(math));
+            // Disassemble(typeof(dinx));    
+            // Disassemble(typeof(Bits));    
+            //EmitAsm(Designators.Logix.Designated);  
         }
 
         public unsafe void ListMethods(Type t)

@@ -36,5 +36,4 @@ namespace Z0
             return ref x;
         }
     }
-
 }

@@ -408,7 +408,7 @@ namespace Z0
         {
             dinx.vload(in x0, out Vector128<ulong> x);
             dinx.vload(in rhs.x0, out Vector128<ulong> y);
-            vstore(dinx.vand(x,y), ref x0);
+            ginx.vstore(dinx.vand(x,y), ref x0);
             return this;
         }
 
@@ -421,7 +421,7 @@ namespace Z0
         {
             dinx.vload(in x0, out Vector128<ulong> x);
             dinx.vload(in rhs.x0, out Vector128<ulong> y);
-            vstore(dinx.vor(x,y), ref x0);
+            ginx.vstore(dinx.vor(x,y), ref x0);
             return this;
         }
 
@@ -434,7 +434,7 @@ namespace Z0
         {
             dinx.vload(in x0, out Vector128<ulong> x);
             dinx.vload(in rhs.x0, out Vector128<ulong> y);
-            vstore(dinx.vxor(x,y), ref x0);
+            ginx.vstore(dinx.vxor(x,y), ref x0);
             return this;
         }
 
@@ -445,7 +445,7 @@ namespace Z0
         public BitVector128 Negate()
         {
             dinx.vload(in x0, out Vector128<ulong> x);
-            vstore(dinx.vnegate(x), ref x0);
+            ginx.vstore(dinx.vnegate(x), ref x0);
             return this;
         }
 
@@ -456,7 +456,7 @@ namespace Z0
         public BitVector128 Not()
         {
             dinx.vload(in x0, out Vector128<ulong> x);
-            vstore(dinx.vnot(x), ref x0);
+            ginx.vstore(dinx.vnot(x), ref x0);
             return this;
         }
 

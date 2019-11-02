@@ -13,7 +13,7 @@ namespace Z0.Logix
     /// <summary>
     /// Classifies typed expressions
     /// </summary>
-    public enum TypedExprKind : uint
+    public enum TypedExprKind : byte
     {
         
         /// <summary>
@@ -54,7 +54,7 @@ namespace Z0.Logix
         /// <summary>
         /// Classifies a shift expression
         /// </summary>
-        ShiftExpr = Pow2.T14,
+        ShiftExpr = 17,
     }
 
 

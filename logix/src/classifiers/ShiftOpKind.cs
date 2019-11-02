@@ -13,8 +13,7 @@ namespace Z0.Logix
     /// <summary>
     /// Classifies bitwise shift operators
     /// </summary>
-    [Flags]
-    public enum ShiftOpKind : uint
+    public enum ShiftOpKind : byte
     {
         /// <summary>
         /// Classifies a logical left-shift

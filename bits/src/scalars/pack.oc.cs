@@ -13,14 +13,6 @@ namespace Z0
     partial class bvoc
     {
 
-        public static void pack8(ref bit src, ref uint dst)
-            => Bits.pack(n8, ref src, ref dst);
-
-        public static void pack16(ref bit src, ref uint dst)
-            => Bits.pack(n16, ref src, ref dst);
-
-        public static void pack32(ref bit src, ref uint dst)
-            => Bits.pack(n32, ref src, ref dst);
 
     }
 

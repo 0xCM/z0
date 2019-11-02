@@ -50,7 +50,22 @@ namespace Z0
             }
         }
 
-        public void EmitAsm(IEnumerable<AsmFuncInfo> disassembly, bool append = false)        
+        public void EmitAsm(IEnumerable<Type> types, FilePath dst)        
+        {
+            using var writer = Writer(false);
+            EmitTimestamp(writer);                
+
+            foreach(var t in types)
+            {
+                var asm = t.DistillAsm();
+                if(asm.Length == 0)
+                    continue;
+
+                Emit(asm, writer, false);
+            }            
+        }
+
+        public void EmitAsm(IEnumerable<AsmFuncInfo> disassembly, bool append)        
         {
             using var writer = Writer(append);
 

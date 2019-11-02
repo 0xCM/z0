@@ -20,24 +20,29 @@ namespace Z0
     /// Defines a 32x32 matrix of bits
     /// </summary>
     
-    public struct BitMatrix32 : IBitSquare<BitMatrix32,uint>
+    public struct BitMatrix32
     {                
         uint[] data;        
 
         /// <summary>
+        /// The order type
+        /// </summary>
+        public static N32 N => default;
+
+        /// <summary>
         /// The matrix order
         /// </summary>
-        public const uint N = 32;
+        const uint Order = 32;
 
         /// <summary>
         /// The number of bits per row
         /// </summary>
-        public const uint RowBitCount = N;
+        public const uint RowBitCount = Order;
 
         /// <summary>
         /// The number of bits per column
         /// </summary>
-        public const uint ColBitCount = N;
+        public const uint ColBitCount = Order;
 
         /// <summary>
         /// The number of bits apprehended by the matrix
@@ -70,15 +75,27 @@ namespace Z0
         public static BitMatrix32 Zero => Alloc();
                 
         [MethodImpl(Inline)]
-        public static BitMatrix32 Alloc()        
-            => new BitMatrix32(new uint[N]);
+        internal static BitMatrix32 Alloc()        
+            => new BitMatrix32(new uint[Order]);
 
         /// <summary>
         /// Allocates a matrix with a fill value
         /// </summary>
         [MethodImpl(Inline)]
-        public static BitMatrix32 Alloc(bit fill)                
+        internal static BitMatrix32 Alloc(bit fill)                
             => new BitMatrix32(fill);
+
+        /// <summary>
+        /// Allocates a matrix where each row is initialized to a common vector
+        /// </summary>
+        /// <param name="fill">The fill vector</param>
+        [MethodImpl(Inline)]
+        internal static BitMatrix32 Alloc(BitVector32 fill)
+        {
+            var data = new uint[Order];
+            data.Fill(fill);
+            return new BitMatrix32(data);
+        }
 
         [MethodImpl(Inline)]
         public static BitMatrix32 From(params uint[] src)        
@@ -135,14 +152,12 @@ namespace Z0
         [MethodImpl(Inline)]
         BitMatrix32(Span<uint> src)
         {                        
-            require(src.Length == Pow2.T05);
             this.data = src.ToArray();
         }        
 
         [MethodImpl(Inline)]
         BitMatrix32(uint[] src)
         {                        
-            require(src.Length == Pow2.T05);
             this.data = src;
         }        
 
@@ -152,24 +167,24 @@ namespace Z0
             this.data = src.Data.ToArray();
         }
 
+        [MethodImpl(Inline)]
         BitMatrix32(bit fill)
         {
-            this.data = new uint[N];
+            this.data = new uint[Order];
             if(fill)
                 Array.Fill(data,uint.MaxValue);
         }
 
-
         public readonly int RowCount
         {
             [MethodImpl(Inline)]
-            get => (int)N;
+            get => (int)Order;
         }
 
         public readonly int ColCount
         {
             [MethodImpl(Inline)]
-            get => (int)N;
+            get => (int)Order;
         }
 
         /// <summary>
@@ -284,7 +299,7 @@ namespace Z0
         public readonly uint ColData(int index)
         {
             uint col = 0;
-            for(var r = 0; r < N; r++)
+            for(var r = 0; r < Order; r++)
                 BitMask.setif(in data[r], index, ref col, r);
             return col;
         }
@@ -305,7 +320,7 @@ namespace Z0
         public readonly BitMatrix32 Transpose()
         {
             var dst = Replicate();
-            for(var i=0; i<N; i++)
+            for(var i=0; i<Order; i++)
                 dst.data[i] = ColData(i);
             return dst;
         }

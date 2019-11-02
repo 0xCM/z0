@@ -24,14 +24,14 @@ namespace Z0.Logix
         [MethodImpl(Inline)]
         public static LookupKey GetKey(in Lut16 table, LookupSlot slot)
         {
-            ref var key = ref advanceb(ref Unsafe.As<Lut16,byte>(ref asRef(in table)), (byte)slot);
+            ref var key = ref seekb(ref Unsafe.As<Lut16,byte>(ref asRef(in table)), (byte)slot);
             return (LookupKey)key;
         }
 
         [MethodImpl(Inline)]
         public static void SetKey(ref Lut16 table, LookupSlot slot, LookupKey value)
         {
-            ref var key = ref advanceb(ref Unsafe.As<Lut16,byte>(ref table), (byte)slot);
+            ref var key = ref seekb(ref Unsafe.As<Lut16,byte>(ref table), (byte)slot);
             key = (byte)value;
         }
 
@@ -43,7 +43,7 @@ namespace Z0.Logix
         public static Vector128<byte> LoadVector(in Lut16 src)
         {
             ref var mem = ref Unsafe.As<Lut16,byte>(ref As.asRef(in src));
-            return vload(n128, in mem);
+            return ginx.vload(n128, in mem);
         }
 
         /// <summary>
@@ -54,7 +54,7 @@ namespace Z0.Logix
         public static Vector256<byte> LoadVector(in Lut32 src)
         {
             ref var mem = ref Unsafe.As<Lut32,byte>(ref As.asRef(in src));
-            return vload(n256, in mem);
+            return ginx.vload(n256, in mem);
         }
 
         /// <summary>
@@ -88,7 +88,7 @@ namespace Z0.Logix
         public static ref Lut16 From(Vector128<byte> src, ref Lut16 dst)
         {            
             ref var mem = ref Unsafe.As<Lut16,byte>(ref dst);
-            vstore(src, ref mem);
+            ginx.vstore(src, ref mem);
             return ref dst;            
         }
 
@@ -101,7 +101,7 @@ namespace Z0.Logix
         public static ref Lut32 From(Vector256<byte> src, ref Lut32 dst)
         {            
             ref var mem = ref Unsafe.As<Lut32,byte>(ref dst);
-            vstore(src, ref mem);
+            ginx.vstore(src, ref mem);
             return ref dst;            
         }
 

@@ -33,7 +33,7 @@ namespace Z0
         /// <remarks>See https://en.wikipedia.org/wiki/Hadamard_product_(matrices)</remarks>
         public static BitMatrix32 hprod(BitMatrix32 A, BitMatrix32 B)
         {
-            var C = BitMatrix32.Alloc();
+            var C = BitMatrix.alloc(n32);
             for(var i=0; i<A.RowCount; i++)
             for(var j=0; j<B.ColCount; j++)
                 C[i,j] = A.GetBit(i,j) & B[i,j];

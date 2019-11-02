@@ -462,12 +462,24 @@ namespace Z0
             get => data != 0;
         }
 
+        [MethodImpl(Inline)]
+        public BitVector32 Concat(BitVector16 tail)
+            => BitVector32.FromScalars(tail.data, data);
+
         /// <summary>
         /// Returns a copy of the vector
         /// </summary>
         [MethodImpl(Inline)]
         public BitVector16 Replicate()
             => new BitVector16(data);
+
+        [MethodImpl(Inline)]
+        public BitVector32 Replicate(N2 n)
+            => Concat(this);
+
+        [MethodImpl(Inline)]
+        public BitVector64 Replicate(N4 n)
+            => Concat(this).Replicate(n2);
 
         /// <summary>
         /// Applies a permutation to a replicated vector
@@ -481,9 +493,6 @@ namespace Z0
             return dst;
         }
 
-        [MethodImpl(Inline)]
-        public BitVector32 Concat(BitVector16 tail)
-            => BitVector32.FromScalars(tail.data, data);
 
         /// <summary>
         /// Returns the vector's bitstring representation
@@ -540,8 +549,8 @@ namespace Z0
         /// <param name="specifier">True if the prefix specifier '0b' should be prepended</param>
         /// <param name="blockWidth">The width of the blocks, if any</param>
         [MethodImpl(Inline)]
-        public string Format(bool tlz = false, bool specifier = false, int? blockWidth = null)
-            => ToBitString().Format(tlz, specifier, blockWidth);
+        public string Format(bool tlz = false, bool specifier = false, int? blockWidth = null, char? blocksep = null)
+            => ToBitString().Format(tlz, specifier, blockWidth, blocksep);
 
          public override bool Equals(object obj)
             => obj is BitVector16 x ? Equals(x) : false;

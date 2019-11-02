@@ -96,8 +96,8 @@ namespace Z0
         /// <typeparam name="N">The natural column count type</typeparam>
         /// <typeparam name="T">The element type</typeparam>
         public static void write<M,N,T>(BlockMatrix<M,N,T> src, FilePath dst, bool overwrite = true, TextFormat? fmt = null)
-            where M : ITypeNat, new()
-            where N : ITypeNat, new()
+            where M : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
             where T : unmanaged
         {
             var _fmt = fmt ?? TextFormat.Default;

@@ -14,127 +14,83 @@ namespace Z0
 
     partial class BitParts
     {        
+        const ulong MPack1 = (ulong)BitMask64.Lsb8;
+
+
         [MethodImpl(Inline)]
-        public static ref ushort pack16x1(Span<byte> src, ref ushort dst)
+        public static void pack16x1(ReadOnlySpan<byte> src, Span<byte> dst)
+            => pack16x1(src, ref head64(dst));
+
+        [MethodImpl(Inline)]
+        public static void pack32x1(ReadOnlySpan<byte> src, Span<byte> dst)
         {            
-            const int width = 8;
-            const ulong selected = (ulong)BitMask64.Lsb8;
-
-            dst |= (ushort)Bits.gather(block64u(src, 0*width), selected);
-            dst |= (ushort)(Bits.gather(block64u(src, 1*width), selected) << 1*width);
-            return ref dst;
+            pack16x1(src, dst);
+            pack16x1(src.Slice(16), dst.Slice(2));
         }
 
-        public static ref uint pack32x1(Span<byte> src, ref uint dst)
-        {            
-            const int width = 8;
-            const ulong selected = (ulong)BitMask64.Lsb8;
-            dst |= (uint)Bits.gather(block64u(src, 0*width), selected);
-            dst |= (uint)(Bits.gather(block64u(src, 1*width), selected) << 1*width);
-            dst |= (uint)(Bits.gather(block64u(src, 2*width), selected) << 2*width);
-            dst |= (uint)(Bits.gather(block64u(src, 3*width), selected) << 3*width);
-            return ref dst;
-        }
-
-
-        public static ref ulong pack64x1(Span<byte> src, ref ulong dst)
+        [MethodImpl(Inline)]
+        public static void pack64x1(ReadOnlySpan<byte> src, Span<byte> dst)
         {
-            const int width = 8;
-            const ulong selected = (ulong)BitMask64.Lsb8;
-            dst |= Bits.gather(block64u(src, 0*width), selected);
-            dst |= (Bits.gather(block64u(src, 1*width), selected) << 1*width);
-            dst |= (Bits.gather(block64u(src, 2*width), selected) << 2*width);
-            dst |= (Bits.gather(block64u(src, 3*width), selected) << 3*width);
-            dst |= (Bits.gather(block64u(src, 4*width), selected) << 4*width);
-            dst |= (Bits.gather(block64u(src, 5*width), selected) << 5*width);
-            dst |= (Bits.gather(block64u(src, 6*width), selected) << 6*width);
-            dst |= (Bits.gather(block64u(src, 7*width), selected) << 7*width);
-            return ref dst;
-        }
-
-        /// <summary>
-        /// Unpacks 8 bits from a byte 
-        /// </summary>
-        /// <param name="src">The source value</param>
-        /// <param name="dst">The target span</param>
-        /// <remarks>This operation is non-allocating</remarks>
-        [MethodImpl(Inline)]
-        public static ReadOnlySpan<byte> unpack8x1(byte src)
-            => BitStore.select(src);
-
-        /// <summary>
-        /// Unpacks 8 bits from a byte to caller-supplied bytespan
-        /// </summary>
-        /// <param name="src">The source value</param>
-        /// <param name="dst">The target span</param>
-        [MethodImpl(Inline)]
-        public static void unpack8x1(byte src, Span<byte> dst)
-            => BitConverter.GetBytes(Bits.scatter((uint)src, (ulong)BitMask64.Lsb8)).CopyTo(dst);
-
-        /// <summary>
-        /// Unpacks 16 bits from a 16-bit unsigned integer to a caller-supplied 
-        /// bytespan of length ath least 16
-        /// </summary>
-        /// <param name="src">The bit source</param>
-        /// <param name="dst">The target span</param>
-        [MethodImpl(Inline)]
-        public static Span<byte> unpack16x1(ushort src, Span<byte> dst)
-        {
-            Bits.split(src,out var lo, out var hi);
-            unpack8x1(lo, dst);
-            unpack8x1(hi, dst.Slice(8));
-            return dst;
+            pack32x1(src,dst);
+            pack32x1(src.Slice(32), dst.Slice(4));
         }
 
         [MethodImpl(Inline)]
-        public static Span<byte> unpack16x1(ushort src)
-            => unpack16x1(src, new byte[16]);
-        
+        public static void unpack8x1(uint src, Span<byte> dst)
+            => unpack8x1(src, ref head64(dst));
 
+        [MethodImpl(Inline)]
+        public static void unpack16x1(uint src, Span<byte> dst)
+            => unpack16x1(src, ref head64(dst));        
+
+        [MethodImpl(Inline)]
         public static void unpack32x1(uint src, Span<byte> dst)
+            => unpack32x1(src, ref head64(dst));
+
+        [MethodImpl(Inline)]
+        public static void unpack64x1(ulong src, Span<byte> dst)
+            => unpack64x1(src, ref head64(dst));
+
+        [MethodImpl(Inline)]
+        static void unpack32x1(uint src, ref ulong dst)
         {
-            var bytes = BitConverter.GetBytes(src);
-            BitStore.select(bytes[0]).CopyTo(dst,0);
-            BitStore.select(bytes[1]).CopyTo(dst,8);
-            BitStore.select(bytes[2]).CopyTo(dst,16);
-            BitStore.select(bytes[3]).CopyTo(dst,24);
+            unpack16x1(src, ref dst);
+            unpack16x1(src >> 16, ref seekb(ref dst, 16));
         }
 
-        public static Span<byte> unpack32x1_bmi(uint src, Span<byte> dst)
+        [MethodImpl(Inline)]
+        static void unpack64x1(ulong src, ref ulong dst)
         {
-            Bits.split(src,out var lo, out var hi);
-            unpack16x1(lo, dst);
-            unpack16x1(hi, dst.Slice(16));
-            return dst;
+            unpack32x1((uint)src, ref dst);
+            unpack32x1((uint)(src >> 32), ref seekb(ref dst, 32));
         }
 
-        public static Span<byte> unpack64x1(ulong src, Span<byte> dst)
-        {
-            Bits.split(src, out var lo, out var hi);
-            unpack32x1_bmi(lo, dst);
-            unpack32x1_bmi(hi, dst.Slice(32));
-            return dst;
-        }        
+        [MethodImpl(Inline)]
+        static void unpack8x1(uint src, ref ulong dst)
+            => dst = Bits.scatter(src, MPack1);
 
-        public static Span<byte> unpack8x1(ReadOnlySpan<byte> src, Span<byte> dst)
+        [MethodImpl(Inline)]
+        static void unpack16x1(uint src, ref ulong dst)
+        {
+            seek(ref dst, 0) = Bits.scatter(src, MPack1);
+            seek(ref dst, 1) = Bits.scatter(src >> 8, MPack1);
+        }
+
+        [MethodImpl(Inline)]
+        static void pack16x1(ReadOnlySpan<byte> src, ref ulong dst)
         {            
-            var offset = 0;
-            for(var i = 0; i<src.Length; i++, offset += 8)
-                unpack8x1(src[i]).CopyTo(dst.Slice(offset));
-            return dst;
+            const int width = 8;
+            ref readonly var start = ref head64(src);
+
+            seekb(ref dst, 0) = Bits.gather(start, MPack1);
+            seekb(ref dst, width) = Bits.gather(skipb(in start, width), MPack1);
         }
 
-        [MethodImpl(Inline)]        
-        public static Span<byte> unpack16x1(ReadOnlySpan<ushort> src, Span<byte> dst)
-            => unpack8x1(src.AsBytes(),dst);
-
-        [MethodImpl(Inline)]        
-        public static Span<byte> unpack32x1(ReadOnlySpan<uint> src, Span<byte> dst)
-            => unpack8x1(src.AsBytes(),dst);
-
-        [MethodImpl(Inline)]        
-        public static Span<byte> unpack64x1(ReadOnlySpan<ulong> src, Span<byte> dst)
-            => unpack8x1(src.AsBytes(),dst);
-
+        [MethodImpl(Inline)]
+        static void pack32x1(ReadOnlySpan<byte> src, ref ulong dst)
+        {   
+            pack16x1(src, ref dst);
+            pack16x1(src.Slice(16), ref seekb(ref dst, 2));
+        }
     }
 }

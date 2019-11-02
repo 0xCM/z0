@@ -300,7 +300,7 @@ namespace Z0
         /// <remarks>See https://en.wikipedia.org/wiki/Material_conditional</remarks>
         [MethodImpl(Inline)]
         public static bit imply(bit a, bit b)
-            => a | ~b;
+            => or(a,  not(b));
 
         /// <summary>
         /// Evaluates the nonimplication a <- b := ~(a | ~b) = ~a & b
@@ -309,15 +309,15 @@ namespace Z0
         /// <param name="b">The second operand</param>
         [MethodImpl(Inline)]
         public static bit notimply(bit a, bit b)
-            => ~a & b;
+            => and(not(a),  b);
 
         [MethodImpl(Inline)]
         public static bit cimply(bit a, bit b)
-            => ~a | b;
+            => or(not(a),  b);
 
         [MethodImpl(Inline)]
         public static bit cnotimply(bit a, bit b)
-            => a & ~b;
+            => and(a, not(b));
 
         /// <summary>
         /// Evaluates the ternary select where the second operand is returned if the first 

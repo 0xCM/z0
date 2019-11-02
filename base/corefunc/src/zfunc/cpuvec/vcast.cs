@@ -114,7 +114,6 @@ partial class zfunc
         where T : unmanaged
             => x.AsDouble();
 
-
     /// <summary>
     /// Presents a generic cpu vector as a cpu vector with components of type int8
     /// </summary>

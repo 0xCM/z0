@@ -75,34 +75,75 @@ namespace Z0
             lo = gmath.xor(u,c);
         }
 
-        static Vector256<byte> M1 
+        [MethodImpl(Inline)]
+        static Vector128<byte> M1(N128 n)  
+            => vbroadcast(n128,(byte)0x55);
+
+        [MethodImpl(Inline)]
+        static Vector128<byte> M2(N128 n)   
+            => vbroadcast(n128,(byte)0x33);
+
+        [MethodImpl(Inline)]
+        static Vector128<byte> M3(N128 n)  
+            => vbroadcast(n128,(byte)0x0F);
+
+        [MethodImpl(Inline)]
+        static Vector256<byte> M1(N256 n) 
             => vbroadcast(n256,(byte)0x55);
 
-        static Vector256<byte> M2 
+        [MethodImpl(Inline)]
+        static Vector256<byte> M2(N256 n)  
             => vbroadcast(n256,(byte)0x33);
 
-        static Vector256<byte> M3 
+        [MethodImpl(Inline)]
+        static Vector256<byte> M3(N256 n)  
             => vbroadcast(n256,(byte)0x0F);
 
-        //popcnt-avx2-harley-seal.cpp
         [MethodImpl(Inline)]
-        public static Vector256<ulong> avxpop(Vector256<ulong> v)
+        public static Vector128<ulong> avxpop(Vector128<ulong> v, N128 n = default)
         {
             var x = v8u(vsrl(v16u(v),1));
-            var y = vand(x,M1);                        
+            var y = vand(x,M1(n));                        
             var t1 = vsub(v8u(v), y);
             x = v8u(vsrl(v16u(t1), 2));
-            var t2 = vadd(vand(t1,M2), x);
+            var t2 = vadd(vand(t1,M2(n)), x);
             x = v8u(vsrl(v16u(t2),4));
-            var t3 = vand(vadd(t2, x), M3);
+            var t3 = vand(vadd(t2, x), M3(n));
             return v64u(vsad(t3, default));
         }
+
+        [MethodImpl(Inline)]
+        public static Vector256<ulong> avxpop(Vector256<ulong> v, N256 n = default)
+        {
+            var x = v8u(vsrl(v16u(v),1));
+            var y = vand(x,M1(n));                        
+            var t1 = vsub(v8u(v), y);
+            x = v8u(vsrl(v16u(t1), 2));
+            var t2 = vadd(vand(t1,M2(n)), x);
+            x = v8u(vsrl(v16u(t2),4));
+            var t3 = vand(vadd(t2, x), M3(n));
+            return v64u(vsad(t3, default));
+        }
+
+        [MethodImpl(Inline)]
+        public static Vector128<T> genpop<T>(Vector128<T> v)
+            where T : unmanaged
+                => vgeneric<T>(avxpop(v64u(v)));    
 
         [MethodImpl(Inline)]
         public static Vector256<T> genpop<T>(Vector256<T> v)
             where T : unmanaged
                 => vgeneric<T>(avxpop(v64u(v)));    
     
+
+        /// <summary>
+        /// Creates a zero-filled 256x64u cpu vector
+        /// </summary>
+        /// <param name="n">The bitness selector</param>
+        [MethodImpl(Inline)]
+        public static Vector256<ulong> vzero64u(N256 n)
+            => default;
+
         [MethodImpl(Inline)]
         public static ulong popcsa_1(in ulong data)
         {

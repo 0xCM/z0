@@ -160,5 +160,135 @@ namespace Z0
         [MethodImpl(Inline)]
         public static unsafe Vector256<ulong> vload(in ulong src, out Vector256<ulong> dst)
             => dst = LoadDquVector256(constptr(in src));
+  
+
+        [MethodImpl(Inline)]
+        public static unsafe Vector128<byte> vload(N128 n, in byte src)
+            => LoadDquVector128(constptr(src));
+
+        [MethodImpl(Inline)]
+        public static unsafe Vector128<sbyte> vload(N128 n, in sbyte src)
+            => LoadDquVector128(constptr(src));
+
+        [MethodImpl(Inline)]
+        public static unsafe Vector128<short> vload(N128 n, in short src)
+            => LoadDquVector128(constptr(src));
+
+        [MethodImpl(Inline)]
+        public static unsafe Vector128<ushort> vload(N128 n, in ushort src)
+            => LoadDquVector128(constptr(src));
+
+        [MethodImpl(Inline)]
+        public static unsafe Vector128<int> vload(N128 n, in int src)
+            => LoadDquVector128(constptr(src));
+
+        [MethodImpl(Inline)]
+        public static unsafe Vector128<uint> vload(N128 n, in uint src)
+            => LoadDquVector128(constptr(src));
+
+        [MethodImpl(Inline)]
+        public static unsafe Vector128<long> vload(N128 n, in long src)
+            => LoadDquVector128(constptr(src));
+
+        [MethodImpl(Inline)]
+        public static unsafe Vector128<ulong> vload(N128 n, in ulong src)
+            => LoadDquVector128(constptr(src));
+
+        [MethodImpl(Inline)]
+        public static unsafe Vector256<byte> vload(N256 n, in byte src)
+            => LoadDquVector256(constptr(src));
+
+        [MethodImpl(Inline)]
+        public static unsafe Vector256<sbyte> vload(N256 n, in sbyte src)
+            => LoadDquVector256(constptr(src));
+
+        [MethodImpl(Inline)]
+        public static unsafe Vector256<short> vload(N256 n, in short src)
+            => LoadDquVector256(constptr(src));
+
+        [MethodImpl(Inline)]
+        public static unsafe Vector256<ushort> vload(N256 n, in ushort src)
+            => LoadDquVector256(constptr(src));
+
+        [MethodImpl(Inline)]
+        public static unsafe Vector256<int> vload(N256 n, in int src)
+            => LoadDquVector256(constptr(src));
+
+        [MethodImpl(Inline)]
+        public static unsafe Vector256<uint> vload(N256 n, in uint src)
+            => LoadDquVector256(constptr(src));
+
+        [MethodImpl(Inline)]
+        public static unsafe Vector256<long> vload(N256 n, in long src)
+            => LoadDquVector256(constptr(src));
+
+        [MethodImpl(Inline)]
+        public static unsafe Vector256<ulong> vload(N256 n, in ulong src)
+            => LoadDquVector256(constptr(src));
+
+        [MethodImpl(Inline)]
+        public static unsafe Vector128<byte> vload(N128 n, in byte src, int offset)
+            => LoadDquVector128(constptr(src, offset));
+
+        [MethodImpl(Inline)]
+        public static unsafe Vector128<sbyte> vload(N128 n, in sbyte src, int offset)
+            => LoadDquVector128(constptr(src, offset));
+
+        [MethodImpl(Inline)]
+        public static unsafe Vector128<short> vload(N128 n, in short src, int offset)
+            => LoadDquVector128(constptr(src, offset));
+
+        [MethodImpl(Inline)]
+        public static unsafe Vector128<ushort> vload(N128 n, in ushort src, int offset)
+            => LoadDquVector128(constptr(src, offset));
+
+        [MethodImpl(Inline)]
+        public static unsafe Vector128<int> vload(N128 n, in int src, int offset)
+            => LoadDquVector128(constptr(src, offset));
+
+        [MethodImpl(Inline)]
+        public static unsafe Vector128<uint> vload(N128 n, in uint src, int offset)
+            => LoadDquVector128(constptr(src, offset));
+
+        [MethodImpl(Inline)]
+        public static unsafe Vector128<long> vload(N128 n, in long src, int offset)
+            => LoadDquVector128(constptr(src, offset));
+
+        [MethodImpl(Inline)]
+        public static unsafe Vector128<ulong> vload(N128 n, in ulong src, int offset)
+            => LoadDquVector128(constptr(src, offset));
+
+        [MethodImpl(Inline)]
+        public static unsafe Vector256<byte> vload(N256 n, in byte src, int offset)
+            => LoadDquVector256(constptr(src,offset));
+
+        [MethodImpl(Inline)]
+        public static unsafe Vector256<sbyte> vload(N256 n, in sbyte src, int offset)
+            => LoadDquVector256(constptr(src,offset));
+
+        [MethodImpl(Inline)]
+        public static unsafe Vector256<short> vload(N256 n, in short src, int offset)
+            => LoadDquVector256(constptr(src,offset));
+
+        [MethodImpl(Inline)]
+        public static unsafe Vector256<ushort> vload(N256 n, in ushort src, int offset)
+            => LoadDquVector256(constptr(src,offset));
+
+        [MethodImpl(Inline)]
+        public static unsafe Vector256<int> vload(N256 n, in int src, int offset)
+            => LoadDquVector256(constptr(src,offset));
+
+        [MethodImpl(Inline)]
+        public static unsafe Vector256<uint> vload(N256 n, in uint src, int offset)
+            => LoadDquVector256(constptr(src,offset));
+
+        [MethodImpl(Inline)]
+        public static unsafe Vector256<long> vload(N256 n, in long src, int offset)
+            => LoadDquVector256(constptr(src,offset));
+
+        [MethodImpl(Inline)]
+        public static unsafe Vector256<ulong> vload(N256 n, in ulong src, int offset)
+            => LoadDquVector256(constptr(src,offset));
+
    }
 }

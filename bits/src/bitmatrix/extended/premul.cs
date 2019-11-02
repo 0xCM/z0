@@ -12,11 +12,11 @@ namespace Z0
 
     partial class BitMatrix
     {
-
         /// <summary>
         /// Permutes the rows of a target matrix via premultiplication by a permutation-identified permutation matrix 
         /// </summary>
         /// <param name="spec">The permutation definition</param>
+        [MethodImpl(Inline)]
         public static ref BitMatrix8 premul(Perm<N8> spec, ref BitMatrix8 A)
         {
             var P = spec.ToBitMatrix();
@@ -29,6 +29,7 @@ namespace Z0
         /// </summary>
         /// <param name="spec">The permutation definition</param>
         /// <param name="A">The target matrix</param>
+        [MethodImpl(Inline)]
         public static BitMatrix16 premul(Perm<N16> spec, BitMatrix16 A)
         {
             var P = spec.ToBitMatrix();
@@ -36,11 +37,12 @@ namespace Z0
             return A;
         }
 
-        // <summary>
+        /// <summary>
         /// Permutes the rows of a target matrix via premultiplication by a permutation-identified permutation matrix 
         /// </summary>
         /// <param name="spec">The permutation definition</param>
         /// <param name="A">The target matrix</param>
+        [MethodImpl(Inline)]
         public static BitMatrix32 premul(Perm<N32> spec, BitMatrix32 A)
         {
             var P = spec.ToBitMatrix();
@@ -53,6 +55,7 @@ namespace Z0
         /// </summary>
         /// <param name="spec">The permutation definition</param>
         /// <param name="A">The target matrix</param>
+        [MethodImpl(Inline)]
         public static BitMatrix64 premul(Perm<N64> spec, BitMatrix64 A)
         {
             var P = spec.ToBitMatrix();

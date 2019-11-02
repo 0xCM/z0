@@ -19,14 +19,14 @@ namespace Z0
             var x = Vec256Pattern.increments<ulong>(0,2);
             var y = Vec256Pattern.increments<ulong>(1,2);
 
-            Claim.eq(vparts(1ul,3,0,2), dinx.vperm2x128(x,y,Perm2x128.AC));
-            Claim.eq(vparts(5ul,7,0,2), dinx.vperm2x128(x,y,Perm2x128.AD));
-            Claim.eq(vparts(1ul,3,4,6), dinx.vperm2x128(x,y,Perm2x128.BC));
-            Claim.eq(vparts(5ul,7,4,6), dinx.vperm2x128(x,y,Perm2x128.BD));
-            Claim.eq(vparts(0ul,2,1,3), dinx.vperm2x128(x,y,Perm2x128.CA));
-            Claim.eq(vparts(4ul,6,1,3), dinx.vperm2x128(x,y,Perm2x128.CB));
-            Claim.eq(vparts(0ul,2,5,7), dinx.vperm2x128(x,y,Perm2x128.DA));
-            Claim.eq(vparts(4ul,6,5,7), dinx.vperm2x128(x,y,Perm2x128.DB));
+            Claim.eq(dinx.vparts(1ul,3,0,2), dinx.vperm2x128(x,y,Perm2x128.AC));
+            Claim.eq(dinx.vparts(5ul,7,0,2), dinx.vperm2x128(x,y,Perm2x128.AD));
+            Claim.eq(dinx.vparts(1ul,3,4,6), dinx.vperm2x128(x,y,Perm2x128.BC));
+            Claim.eq(dinx.vparts(5ul,7,4,6), dinx.vperm2x128(x,y,Perm2x128.BD));
+            Claim.eq(dinx.vparts(0ul,2,1,3), dinx.vperm2x128(x,y,Perm2x128.CA));
+            Claim.eq(dinx.vparts(4ul,6,1,3), dinx.vperm2x128(x,y,Perm2x128.CB));
+            Claim.eq(dinx.vparts(0ul,2,5,7), dinx.vperm2x128(x,y,Perm2x128.DA));
+            Claim.eq(dinx.vparts(4ul,6,5,7), dinx.vperm2x128(x,y,Perm2x128.DB));
         }
 
         public void swaphl_2x128()
@@ -66,8 +66,8 @@ namespace Z0
             var pformat_actual = p.FormatMap();
             Claim.eq(pformat_epect, pformat_actual);
 
-            var vIn = vparts(0,1,2,3);
-            var vExpect = vparts(3,2,1,0);
+            var vIn = dinx.vparts(0,1,2,3);
+            var vExpect = dinx.vparts(3,2,1,0);
             var vActual = dinx.vshuffle(vIn,p);
             Claim.eq(vExpect, vActual);                                
         }        

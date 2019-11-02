@@ -12,16 +12,22 @@ namespace Z0
     
     partial class Bits
     {         
+        /// <summary>
+        /// Packs 2 bits into the least bits of an unsigned integer
+        /// </summary>
         [MethodImpl(Inline)]
-        public static uint pack(N2 n, bit b0, bit b1)
+        public static uint pack(bit b0, bit b1)
         {
             var dst = (uint)b0;
             dst |= ((uint)b1 << 1);
             return dst;
         }
 
+        /// <summary>
+        /// Packs 3 bits into the least bits of an unsigned integer
+        /// </summary>
         [MethodImpl(Inline)]
-        public static uint pack(N3 n, bit b0, bit b1, bit b2)
+        public static uint pack(bit b0, bit b1, bit b2)
         {
             var dst = (uint)b0;
             dst |= ((uint)b1 << 1);
@@ -29,8 +35,11 @@ namespace Z0
             return dst;
         }
 
+        /// <summary>
+        /// Packs 4 bits into the least bits of an unsigned integer
+        /// </summary>
         [MethodImpl(Inline)]
-        public static uint pack(N4 n, bit b0, bit b1, bit b2, bit b3)
+        public static uint pack(bit b0, bit b1, bit b2, bit b3)
         {
             var dst = (uint)b0;
             dst |= ((uint)b1 << 1);
@@ -39,62 +48,101 @@ namespace Z0
             return dst;
         }
 
+        /// <summary>
+        /// Packs 5 bits into the least bits of an unsigned integer
+        /// </summary>
         [MethodImpl(Inline)]
-        public static ref uint pack(N2 n, ref bit src, ref uint dst)
+        public static uint pack(bit b0, bit b1, bit b2, bit b3, bit b4)
         {
-            dst |= ((uint)advance(ref src, 0)) << 0;
-            dst |= ((uint)advance(ref src, 1)) << 1;
-            return ref dst;
+            var dst = (uint)b0;
+            dst |= ((uint)b1 << 1);
+            dst |= ((uint)b2 << 2);
+            dst |= ((uint)b3 << 3);
+            dst |= ((uint)b4 << 4);
+            return dst;
         }
 
+        /// <summary>
+        /// Packs 8 bits into the least bits of an unsigned integer
+        /// </summary>
         [MethodImpl(Inline)]
-        public static ref uint pack(N1 n, ref bit src, ref uint dst)
+        public static uint pack(bit b0, bit b1, bit b2, bit b3, bit b4, bit b5, bit b6, bit b7)
+        {
+            var dst = pack(b0, b1, b2, b3);
+            dst |= (pack(b4, b5, b6, b7) << 4);
+            return dst;
+        }
+
+        /// <summary>
+        /// Packs 1 bits into the least bits of an unsigned integer
+        /// </summary>
+        [MethodImpl(Inline)]
+        public static ref uint pack(N1 n, in bit src, ref uint dst)
         {
             dst |= (uint)src;
             return ref dst;
         }
 
+        /// <summary>
+        /// Packs 2 bits into the least bits of an unsigned integer
+        /// </summary>
         [MethodImpl(Inline)]
-        public static ref uint pack(N3 n, ref bit src, ref uint dst)
+        public static ref uint pack(N2 n, in bit src, ref uint dst)
         {
-            dst |= ((uint)advance(ref src, 0)) << 0;
-            dst |= ((uint)advance(ref src, 1)) << 1;
-            dst |= ((uint)advance(ref src, 2)) << 2;
+            dst |= ((uint)skip(in src, 0)) << 0;
+            dst |= ((uint)skip(in src, 1)) << 1;
             return ref dst;
         }
 
-
+        /// <summary>
+        /// Packs 3 bits into the least bits of an unsigned integer
+        /// </summary>
         [MethodImpl(Inline)]
-        public static ref uint pack(N4 n, ref bit src, ref uint dst)
+        public static ref uint pack(N3 n, in bit src, ref uint dst)
         {
-            dst |= ((uint)advance(ref src, 0)) << 0;
-            dst |= ((uint)advance(ref src, 1)) << 1;
-            dst |= ((uint)advance(ref src, 2)) << 2;
-            dst |= ((uint)advance(ref src, 3)) << 3;
+            dst |= ((uint)skip(in src, 0)) << 0;
+            dst |= ((uint)skip(in src, 1)) << 1;
+            dst |= ((uint)skip(in src, 2)) << 2;
+            return ref dst;
+        }
+
+        /// <summary>
+        /// Packs 4 bits into the least bits of an unsigned integer
+        /// </summary>
+        [MethodImpl(Inline)]
+        public static ref uint pack(N4 n, in bit src, ref uint dst)
+        {
+            dst |= ((uint)skip(in src, 0)) << 0;
+            dst |= ((uint)skip(in src, 1)) << 1;
+            dst |= ((uint)skip(in src, 2)) << 2;
+            dst |= ((uint)skip(in src, 3)) << 3;
+            return ref dst;
+        }
+
+        /// <summary>
+        /// Packs 8 bits into the least bits of an unsigned integer
+        /// </summary>
+        [MethodImpl(Inline)]
+        public static ref uint pack(N8 n, in bit src, ref uint dst)
+        {
+            pack(n4, in src, ref dst);
+            pack(n4, in skip(in src,4), ref seek(ref dst,4));
             return ref dst;
         }
 
         [MethodImpl(Inline)]
-        public static ref uint pack(N8 n, ref bit src, ref uint dst)
+        public static ref uint pack(N16 n, in bit src, ref uint dst)
         {
-            pack(n4, ref src, ref dst);
-            pack(n4, ref advance(ref src,4), ref advance(ref dst,4));
+            pack(n8, in src, ref dst);
+            pack(n8, in skip(in src,8), ref seek(ref dst,8));
             return ref dst;
         }
 
         [MethodImpl(Inline)]
-        public static ref uint pack(N16 n, ref bit src, ref uint dst)
+        public static ref uint pack(N32 n, in bit src, ref uint dst)
         {
-            pack(n8, ref src, ref dst);
-            pack(n8, ref advance(ref src,8), ref advance(ref dst,8));
-            return ref dst;
-        }
-
-        [MethodImpl(Inline)]
-        public static ref uint pack(N32 n, ref bit src, ref uint dst)
-        {
-            pack(n16, ref src, ref dst);
-            pack(n16, ref advance(ref src,16), ref advance(ref dst,16));
+            pack(n16, in src, ref dst);
+            pack(n16, in skip(in src,16), ref seek(ref dst,16));
             return ref dst;
         }
 

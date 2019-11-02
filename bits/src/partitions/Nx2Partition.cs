@@ -12,37 +12,34 @@ namespace Z0
     using static zfunc;
     using static Bits;
 
-    partial class BitParts
+    partial class BitParts    
     {        
+        const uint M2 = 0b11;
 
         /// <summary>
-        /// Partitions an 8-bit source into 4 target segments each with an effective width of 2
+        /// Partitions the first 8 bits of a 32-bit source into 4 target segments each with an effective width of 2
         /// </summary>
         /// <param name="src">The source value</param>
-        /// <param name="dst">A target span of sufficient length</param>
-        public static void part8x2(uint src, Span<byte> dst)
+        /// <param name="dst">The target memory location</param>
+        [MethodImpl(Inline)]
+        public static void part8x2(uint src, ref byte dst)
         {
-            dst[0] = project<byte>(select(src, Part8x2.Part0), Part8x2.First);
-            dst[1] = project<byte>(select(src, Part8x2.Part1), Part8x2.First);
-            dst[2] = project<byte>(select(src, Part8x2.Part2), Part8x2.First);
-            dst[3] = project<byte>(select(src, Part8x2.Part3), Part8x2.First);
+            seek(ref dst, 0) = (byte)(src >> 0 & M2);
+            seek(ref dst, 1) = (byte)(src >> 2 & M2);
+            seek(ref dst, 2) = (byte)(src >> 4 & M2);
+            seek(ref dst, 3) = (byte)(src >> 6 & M2);
         }
 
         /// <summary>
-        /// Partitions a 16-bit source into 8 target segments each with an effective width of 2
+        /// Partitions the first 16 bits of a 32-bit source into 8 target segments each with an effective width of 2
         /// </summary>
         /// <param name="src">The source value</param>
-        /// <param name="dst">A target span of sufficient length</param>
-        public static void part16x2(uint src, Span<byte> dst)
+        /// <param name="dst">The target memory location</param>
+        [MethodImpl(Inline)]
+        public static void part16x2(uint src, ref byte dst)
         {
-            dst[0] = project<byte>(select(src, Part16x2.Part0), Part16x2.First);
-            dst[1] = project<byte>(select(src, Part16x2.Part1), Part16x2.First);
-            dst[2] = project<byte>(select(src, Part16x2.Part2), Part16x2.First);
-            dst[3] = project<byte>(select(src, Part16x2.Part3), Part16x2.First);
-            dst[4] = project<byte>(select(src, Part16x2.Part4), Part16x2.First);
-            dst[5] = project<byte>(select(src, Part16x2.Part5), Part16x2.First);
-            dst[6] = project<byte>(select(src, Part16x2.Part6), Part16x2.First);
-            dst[7] = project<byte>(select(src, Part16x2.Part7), Part16x2.First);
+            part8x2(src, ref dst);
+            part8x2(src >> 8, ref seek(ref dst, 4));
         }
 
         /// <summary>
@@ -50,25 +47,11 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <param name="dst">A target span of sufficient length</param>
-        public static void part32x2(uint src, Span<byte> dst)
+        [MethodImpl(Inline)]
+        public static void part32x2(uint src, ref byte dst)
         {
-            dst[0] = project<byte>(select(src, Part32x2.Part0), Part32x2.First);
-            dst[1] = project<byte>(select(src, Part32x2.Part1), Part32x2.First);
-            dst[2] = project<byte>(select(src, Part32x2.Part2), Part32x2.First);
-            dst[3] = project<byte>(select(src, Part32x2.Part3), Part32x2.First);
-            dst[4] = project<byte>(select(src, Part32x2.Part4), Part32x2.First);
-            dst[5] = project<byte>(select(src, Part32x2.Part5), Part32x2.First);
-            dst[6] = project<byte>(select(src, Part32x2.Part6), Part32x2.First);
-            dst[7] = project<byte>(select(src, Part32x2.Part7), Part32x2.First);
-            dst[8] = project<byte>(select(src, Part32x2.Part8), Part32x2.First);
-            dst[9] = project<byte>(select(src, Part32x2.Part9), Part32x2.First);
-            dst[10] = project<byte>(select(src, Part32x2.Part10), Part32x2.First);
-            dst[11] = project<byte>(select(src, Part32x2.Part11), Part32x2.First);
-            dst[12] = project<byte>(select(src, Part32x2.Part12), Part32x2.First);
-            dst[13] = project<byte>(select(src, Part32x2.Part13), Part32x2.First);
-            dst[14] = project<byte>(select(src, Part32x2.Part14), Part32x2.First);
-            dst[15] = project<byte>(select(src, Part32x2.Part15), Part32x2.First);
+            part16x2(src, ref dst);
+            part16x2(src >> 16, ref seek(ref dst, 8));
         }
-
     }
 }

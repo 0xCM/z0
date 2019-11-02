@@ -22,11 +22,11 @@ namespace Z0
         /// <typeparam name="M">The row type</typeparam>
         /// <typeparam name="N">The column Type</typeparam>
         /// <typeparam name="T">The element type</typeparam>
-         public static BlockMatrix<M,N,T> BlockMatrix<M,N,T>(this IPolyrand random, Interval<T>? domain = null)
-            where M : ITypeNat, new()
-            where N : ITypeNat, new()
+         public static BlockMatrix<M,N,T> BlockMatrix<M,N,T>(this IPolyrand random)
+            where M : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
             where T : unmanaged    
-                => Z0.BlockMatrix.Load<M,N,T>(random.Span256<T>(Z0.Span256.MinBlocks<M,N,T>(), domain));                    
+                => Z0.BlockMatrix.Load<M,N,T>(random.Span256<T>(Z0.Span256.MinBlocks<M,N,T>()));                    
 
          public static BlockMatrix<M,N,T> BlockMatrix<M,N,T>(this IPolyrand random, Interval<T> domain, M m = default, N n = default)
             where M : ITypeNat, new()
@@ -58,12 +58,12 @@ namespace Z0
          /// <typeparam name="N">The column type</typeparam>
          /// <typeparam name="S">The sample type</typeparam>
          /// <typeparam name="T">The matrix element type</typeparam>
-          public static BlockMatrix<M,N,T> BlockMatrix<M,N,S,T>(this IPolyrand random, Interval<S>? domain = null, M m = default, N n = default,  T rep = default)
-            where M : ITypeNat, new()
-            where N : ITypeNat, new()
+          public static BlockMatrix<M,N,T> BlockMatrix<M,N,S,T>(this IPolyrand random, M m = default, N n = default,  T rep = default)
+            where M : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
             where T : unmanaged    
             where S : unmanaged
-                => random.BlockMatrix<M,N,S>(domain).Convert<T>();
+                => random.BlockMatrix<M,N,S>().Convert<T>();
  
          /// <summary>
          /// Samples values over an S-domain, transforms the sample into a T-domain and from this transformed
@@ -117,45 +117,6 @@ namespace Z0
             where N : ITypeNat, new()
                 => random.BlockMatrix<N,long, double>(closed(min ?? -25L, max ?? 25L));
 
-        /// <summary>
-        /// Samples 32-bit integers that are converted to 32-bit floats to populate a matrix of natural dimensions
-        /// </summary>
-        /// <param name="random">The random source</param>
-        /// <param name="min">The minimum entry value</param>
-        /// <param name="max">The maximum entry value</param>
-        /// <param name="m">The row count</param>
-        /// <param name="n">The col count</param>
-        /// <typeparam name="N">The col count type</typeparam>
-        /// <typeparam name="N">The row count type</typeparam>
-        /// <typeparam name="S">The sample type</typeparam>
-        /// <typeparam name="T">The matrix element type</typeparam>
-        [MethodImpl(Inline)]
-        public static BlockMatrix<M,N,float> BlockMatrixF32<M,N,S,T>(this IPolyrand random, int? min = null, int? max = null, M m = default, N n = default)
-            where T : unmanaged
-            where S : unmanaged
-            where M : ITypeNat, new()
-            where N : ITypeNat, new()
-                => random.BlockMatrix<M,N,int, float>(closed(min ?? -25, max ?? 25));
-
-        /// <summary>
-        /// Samples 64-bit integers that are converted to 64-bit floats to populate a matrix of natural dimensions
-        /// </summary>
-        /// <param name="random">The random source</param>
-        /// <param name="min">The minimum entry value</param>
-        /// <param name="max">The maximum entry value</param>
-        /// <param name="m">The row count</param>
-        /// <param name="n">The col count</param>
-        /// <typeparam name="N">The col count type</typeparam>
-        /// <typeparam name="N">The row count type</typeparam>
-        /// <typeparam name="S">The sample type</typeparam>
-        /// <typeparam name="T">The matrix element type</typeparam>
-        [MethodImpl(Inline)]
-        public static BlockMatrix<M,N,double> BlockMatrixF64<M,N,S,T>(this IPolyrand random, long? min = null, long? max = null, M m = default,  N n = default)
-            where T : unmanaged
-            where S : unmanaged
-            where M : ITypeNat, new()
-            where N : ITypeNat, new()
-                => random.BlockMatrix<M,N,long, double>(closed(min ?? -25L, max ?? 25L));
 
     }
 }

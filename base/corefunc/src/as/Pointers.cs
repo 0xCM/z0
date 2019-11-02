@@ -111,43 +111,43 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static unsafe sbyte* refptr(ref sbyte src, int offset)
-            => (sbyte*)pvoid(ref advance(ref src, offset));
+            => (sbyte*)pvoid(ref seek(ref src, offset));
 
         [MethodImpl(Inline)]
         public static unsafe byte* refptr(ref byte src, int offset)
-            => (byte*)pvoid(ref advance(ref src, offset));
+            => (byte*)pvoid(ref seek(ref src, offset));
 
         [MethodImpl(Inline)]
         public static unsafe short* refptr(ref short src, int offset)
-            => (short*)pvoid(ref advance(ref src, offset));
+            => (short*)pvoid(ref seek(ref src, offset));
 
         [MethodImpl(Inline)]
         public static unsafe ushort* refptr(ref ushort src, int offset)
-            => (ushort*)pvoid(ref advance(ref src, offset));
+            => (ushort*)pvoid(ref seek(ref src, offset));
 
         [MethodImpl(Inline)]
         public static unsafe int* refptr(ref int src, int offset)
-            => (int*)pvoid(ref advance(ref src, offset));
+            => (int*)pvoid(ref seek(ref src, offset));
 
         [MethodImpl(Inline)]
         public static unsafe uint* refptr(ref uint src, int offset)
-            => (uint*)pvoid(ref advance(ref src, offset));
+            => (uint*)pvoid(ref seek(ref src, offset));
 
         [MethodImpl(Inline)]
         public static unsafe long* refptr(ref long src, int offset)
-            => (long*)pvoid(ref advance(ref src, offset));
+            => (long*)pvoid(ref seek(ref src, offset));
 
         [MethodImpl(Inline)]
         public static unsafe ulong* refptr(ref ulong src, int offset)
-            => (ulong*)pvoid(ref advance(ref src, offset));
+            => (ulong*)pvoid(ref seek(ref src, offset));
 
         [MethodImpl(Inline)]
         public static unsafe float* refptr(ref float src, int offset)
-            => (float*)pvoid(ref advance(ref src, offset));
+            => (float*)pvoid(ref seek(ref src, offset));
 
         [MethodImpl(Inline)]
         public static unsafe double* refptr(ref double src, int offset)
-            => (double*)pvoid(ref advance(ref src, offset));
+            => (double*)pvoid(ref seek(ref src, offset));
 
 
         [MethodImpl(Inline)]
@@ -237,43 +237,43 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static unsafe sbyte* constptr(in sbyte src, int offset)
-            => refptr(ref advance(ref asRef(in src), offset));
+            => refptr(ref seek(ref asRef(in src), offset));
 
         [MethodImpl(Inline)]
         public static unsafe byte* constptr(in byte src, int offset)
-            => refptr(ref advance(ref asRef(in src), offset));
+            => refptr(ref seek(ref asRef(in src), offset));
 
         [MethodImpl(Inline)]
         public static unsafe short* constptr(in short src, int offset)
-            => refptr(ref advance(ref asRef(in src), offset));
+            => refptr(ref seek(ref asRef(in src), offset));
 
         [MethodImpl(Inline)]
         public static unsafe ushort* constptr(in ushort src, int offset)
-            => refptr(ref advance(ref asRef(in src), offset));
+            => refptr(ref seek(ref asRef(in src), offset));
 
         [MethodImpl(Inline)]
         public static unsafe int* constptr(in int src, int offset)
-            => refptr(ref advance(ref asRef(in src), offset));
+            => refptr(ref seek(ref asRef(in src), offset));
 
         [MethodImpl(Inline)]
         public static unsafe uint* constptr(in uint src, int offset)
-            => refptr(ref advance(ref asRef(in src), offset));
+            => refptr(ref seek(ref asRef(in src), offset));
 
         [MethodImpl(Inline)]
         public static unsafe long* constptr(in long src, int offset)
-            => refptr(ref advance(ref asRef(in src), offset));
+            => refptr(ref seek(ref asRef(in src), offset));
 
         [MethodImpl(Inline)]
         public static unsafe ulong* constptr(in ulong src, int offset)
-            => refptr(ref advance(ref asRef(in src), offset));
+            => refptr(ref seek(ref asRef(in src), offset));
 
         [MethodImpl(Inline)]
         public static unsafe float* constptr(in float src, int offset)
-            => refptr(ref advance(ref asRef(in src), offset));
+            => refptr(ref seek(ref asRef(in src), offset));
 
         [MethodImpl(Inline)]
         public static unsafe double* constptr(in double src, int offset)
-            => refptr(ref advance(ref asRef(in src), offset));
+            => refptr(ref seek(ref asRef(in src), offset));
 
         [MethodImpl(Inline)]
         public static unsafe P* refptr<P,T>(ref T src)

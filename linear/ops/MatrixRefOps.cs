@@ -27,7 +27,7 @@ namespace Z0
             var m = nati<M>();
             var n = nati<N>();
             var p = nati<P>();
-            var dst = NatSpan.Alloc<M,P,double>();
+            var dst = NatSpan.alloc<M,P,double>();
             for(var r = 0; r< m; r++)
                 for(var c = 0; c < p; c++)
                     for(var i=0; i<nati<N>(); i++)

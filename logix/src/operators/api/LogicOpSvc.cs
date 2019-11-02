@@ -24,7 +24,7 @@ namespace Z0.Logix
         public IEnumerable<UnaryLogicOpKind> UnaryOpKinds 
             => LogicOpApi.UnaryOpKinds;
 
-        public IEnumerable<BinaryLogicOpKind> BinaryOpKinds 
+        public ReadOnlySpan<BinaryLogicOpKind> BinaryOpKinds 
             => LogicOpApi.BinaryOpKinds;
 
         public IEnumerable<TernaryOpKind> TernaryOpKinds 

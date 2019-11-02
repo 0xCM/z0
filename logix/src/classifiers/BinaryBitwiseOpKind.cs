@@ -12,7 +12,7 @@ namespace Z0.Logix
     /// Classifies binary bitwise operators
     /// </summary>
     //[Flags]
-    public enum BinaryBitwiseOpKind : uint
+    public enum BinaryBitwiseOpKind : byte
     {
         /// <summary>
         /// Classifies a bitwise binary operator true(a,b) = 0xFFFFFFF...

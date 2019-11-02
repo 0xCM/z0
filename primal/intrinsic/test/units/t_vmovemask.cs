@@ -29,7 +29,7 @@ namespace Z0
                 var srcBitVec = srcCpuVec.ToSpan().ToBitCells(bits);
                 
                 Claim.eq(bits, srcBitVec.Length);
-                Claim.eq(srcCpuVec.ToBitString().ToBits().ToBitString(), srcBitVec.ToBitString());
+                Claim.eq(srcCpuVec.ToBitString().ToBitSpan().ToBitString(), srcBitVec.ToBitString());
                                                 
                 var mask = 0u;
                 for(var r=0; r<srcCpuVec.Length(); r++)
@@ -57,7 +57,7 @@ namespace Z0
                 var srcBitVec = srcCpuVec.ToSpan().ToBitCells(bits);
                 
                 Claim.eq(bits, srcBitVec.Length);
-                Claim.eq(srcCpuVec.ToBitString().ToBits().ToBitString(), srcBitVec.ToBitString());
+                Claim.eq(srcCpuVec.ToBitString().ToBitSpan().ToBitString(), srcBitVec.ToBitString());
                                                 
                 var mask = 0u;
                 for(var r=0; r<srcCpuVec.Length(); r++)

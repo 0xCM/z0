@@ -2,18 +2,23 @@
 // Copyright   :  (c) Chris Moore, 2019
 // License     :  MIT
 //-----------------------------------------------------------------------------
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Runtime.Intrinsics;
-
-using Z0;
-
-partial class zfunc
+namespace Z0
 {
+    using System;
+    using System.Runtime.CompilerServices;    
+    using System.Runtime.Intrinsics;
+    using System.Runtime.Intrinsics.X86;
+
+    using static System.Runtime.Intrinsics.X86.Sse2;
+    using static System.Runtime.Intrinsics.X86.Avx;
+    using static System.Runtime.Intrinsics.X86.Avx2;
+
+    using static zfunc;
+    using static As;
+
+    partial class dinx
+    {
+
     /// <summary>
     /// Defines a cpu vector by its constituent parts, from least -> most significant
     /// </summary>
@@ -92,5 +97,8 @@ partial class zfunc
     [MethodImpl(Inline)]
     public static Vector256<ulong> vparts(ulong x0, ulong x1, ulong x2, ulong x3)
         => Vector256.Create(x0,x1,x2,x3);
+
+
+    }
 
 }

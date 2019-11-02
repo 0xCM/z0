@@ -6,11 +6,8 @@ namespace Z0
 {
     using System;
     using System.Linq;
-    using System.Collections;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
-    
+
     using static nfunc;
     using static zfunc;
 
@@ -125,9 +122,9 @@ namespace Z0
             return ref dst;
         }
 
-        [MethodImpl(Inline)]
-        public Covector<N,T> Transpose()
-            => Covector<N, T>.Load(data);
+        // [MethodImpl(Inline)]
+        // public Covector<N,T> Transpose()
+        //     => Covector<N, T>.Load(data);
 
         /// <summary>
         /// Loads the data from the source into a block vector, allocating as necessary to ensure alignment

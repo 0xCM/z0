@@ -1,4 +1,13 @@
-// 2019-10-31 21:45:33:777
+// 2019-11-02 09:11:44:246
+void avxpack(ref uint src, ref uint dst)
+{
+    IL_0000: call Z0.N1 zfunc::get_n1()
+    IL_0005: ldarg.0
+    IL_0006: ldarg.1
+    IL_0007: call System.Void Z0.AvxBitpack::pack(Z0.N1,System.UInt32&,System.UInt32&)
+    IL_000C: ret
+
+}
 ulong sum_256x64u(Vector256<ulong> src)
 {
     IL_0000: ldarg.0

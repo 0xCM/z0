@@ -86,7 +86,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitMatrix32 ToBitMatrix(this Perm<N32> perm)
         {
-            var dst = BitMatrix32.Alloc();
+            var dst = BitMatrix.alloc(n32);
             for(var row = 0; row<perm.Length; row++)
                 dst[row,perm[row]] = Bit.On;
             return dst;
@@ -142,6 +142,28 @@ namespace Z0
         [MethodImpl(Inline)]
         internal static string FormatMatrixBits(this ulong[] src, int rowlen)            
             => src.AsSpan().AsBytes().FormatMatrixBits(rowlen);
+
+        /// <summary>
+        /// Exracts a contiguous bitstring that captures the defined matrix
+        /// </summary>
+        public static BitString ToBitString<M,N,T>(this BitMatrix<M,N,T> src)
+            where M : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
+            where T : unmanaged
+
+        {
+            Span<byte> bits = stackalloc byte[src.RowCount*src.ColCount];
+            for(var i=0;i<src.RowCount; i++)
+                src[i].ToBitString().BitSeq.CopyTo(bits.Slice(i*src.ColCount));
+            return BitString.FromBitSeq(bits);                            
+        }
+
+        [MethodImpl(Inline)]
+        public static Span<byte> Pack<M,N,T>(this BitMatrix<M,N,T> src)
+            where M : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
+            where T : unmanaged
+                => src.ToBitString().ToPackedBytes();
 
         /// <summary>
         /// Part of a pattern to do cross-lane 256-bit shuffles

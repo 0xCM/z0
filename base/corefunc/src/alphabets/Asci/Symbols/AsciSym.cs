@@ -37,14 +37,29 @@ namespace Z0
         /// </summary>
         public const char Bang = '!';
 
+        /// <summary>
+        /// Defines the backslash symbol
+        /// </summary>
         public const char BSlash = '\\';
 
+        /// <summary>
+        /// Defines the '^' symbol
+        /// </summary>
         public const char Caret = '^';
 
+        /// <summary>
+        /// Defines the ':' symbol
+        /// </summary>
         public const char Colon = ':';
 
+        /// <summary>
+        /// Defines the ',' symbol
+        /// </summary>
         public const char Comma = ',';
 
+        /// <summary>
+        /// Defines the '$' symbol
+        /// </summary>
         public const char Dollar = '$';
 
         /// <summary>
@@ -113,6 +128,11 @@ namespace Z0
         public const char Plus = '+';
 
         /// <summary>
+        /// Defines the '?' character
+        /// </summary>
+        public const char Question = '?';
+
+        /// <summary>
         /// Specifies '"', the double-quote character
         /// </summary>
         public const char Quote = '\"';
@@ -136,7 +156,6 @@ namespace Z0
         /// Defines the ';' character
         /// </summary>
         public const char Semicolon = ';';
-
         
         /// <summary>
         /// Defines the ' ' character
@@ -159,8 +178,9 @@ namespace Z0
         public const char Tilde = '~'; 
 
         /// <summary>
-        /// Defines the '?' character
+        /// Defines the '~' character
         /// </summary>
-        public const char Question = '?';
+        public const char Underscore = '_'; 
+
     }
 }

@@ -14,7 +14,7 @@ namespace Z0.Logix
     /// <remarks>
     /// The numeric values assinged to the classifications are not the same as the signature bitvector.
     /// </remarks>
-    public enum BinaryLogicOpKind : uint
+    public enum BinaryLogicOpKind : byte
     {        
         /// <summary>
         /// Classifies a logical binary operator true(a,b) = bv(1111)

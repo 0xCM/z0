@@ -19,24 +19,29 @@ namespace Z0
     /// <summary>
     /// Defines an 8x8 matrix of bits
     /// </summary>
-    public struct BitMatrix8 : IBitSquare<BitMatrix8, byte>
+    public struct BitMatrix8
     {        
         byte[] data;
-                    
+                                        
         /// <summary>
         /// The matrix order
         /// </summary>
-        public const uint N = 8;
+        const uint Order = 8;
+
+        /// <summary>
+        /// The order type
+        /// </summary>
+        public static N8 N => default;
 
         /// <summary>
         /// The number of bits per row
         /// </summary>
-        public const uint RowBitCount = N;
+        public const uint RowBitCount = Order;
 
         /// <summary>
         /// The number of bits per column
         /// </summary>
-        public const uint ColBitCount = N;
+        public const uint ColBitCount = Order;
 
         /// <summary>
         /// The number of bits apprehended by the matrix = 64
@@ -72,6 +77,17 @@ namespace Z0
             => fill ? new BitMatrix8(UInt64.MaxValue) : new BitMatrix8(0ul);
 
         /// <summary>
+        /// Allocates a matrix where each row is initialized to a common vector
+        /// </summary>
+        /// <param name="fill">The fill vector</param>
+        public static BitMatrix8 Alloc(BitVector8 fill)
+        {
+            var data = new byte[Order];
+            data.Fill(fill);
+            return new BitMatrix8(data);
+        }
+
+        /// <summary>
         /// Loads a matrix from the source value
         /// </summary>
         /// <param name="src">The bit source</param>
@@ -98,14 +114,6 @@ namespace Z0
         /// <summary>
         /// Defines a matrix by the explicit specification of 8 bytes
         /// </summary>
-        /// <param name="row0">Specifies the bits in row0</param>
-        /// <param name="row1">Specifies the bits in row1</param>
-        /// <param name="row2">Specifies the bits in row2</param>
-        /// <param name="row3">Specifies the bits in row3</param>
-        /// <param name="row4">Specifies the bits in row4</param>
-        /// <param name="row5">Specifies the bits in row5</param>
-        /// <param name="row6">Specifies the bits in row6</param>
-        /// <param name="row7">Specifies the bits in row7</param>
         [MethodImpl(Inline)]
         public static BitMatrix8 From(byte row0, byte row1, byte row2, byte row3, byte row4, byte row5, byte row6, byte row7)        
             => new BitMatrix8(MemorySpan.From(row0,row1,row2,row3,row4,row5,row6, row7));
@@ -167,14 +175,13 @@ namespace Z0
         [MethodImpl(Inline)]
         BitMatrix8(Span<byte> src)
         {
-            require(src.Length == Pow2.T03);
             this.data = src.ToArray();
         }
 
         [MethodImpl(Inline)]
         BitMatrix8(byte[] src)
         {
-            require(src.Length == Pow2.T03);
+            //require(src.Length == Pow2.T03);
             this.data = src;
         }
 
@@ -190,7 +197,7 @@ namespace Z0
         public readonly int RowCount
         {
             [MethodImpl(Inline)]
-            get => (int)N;
+            get => (int)Order;
         }
 
         /// <summary>
@@ -199,7 +206,7 @@ namespace Z0
         public readonly int ColCount
         {
             [MethodImpl(Inline)]
-            get => (int)N;
+            get => (int)Order;
         }
 
         public Span<byte> Bytes
@@ -361,7 +368,7 @@ namespace Z0
         public readonly byte ColData(int index)
         {
             byte col = 0;
-            for(var r = 0; r < N; r++)
+            for(var r = 0; r < Order; r++)
                 if(BitMask.test(data[r], index))
                     BitMask.enable(ref col, r);
             return col;

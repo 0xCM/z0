@@ -30,7 +30,7 @@ namespace Z0
         public static Span<T> StoreTo<T>(this Vector128<T> src, Span<T> dst)
             where T : unmanaged            
         {
-            vstore(src, ref head(dst));
+            ginx.vstore(src, ref head(dst));
             return dst;
         }
 
@@ -38,7 +38,7 @@ namespace Z0
         public static Span<T> StoreTo<T>(this Vector256<T> src, Span<T> dst)
             where T : unmanaged            
         {
-            vstore(src, ref head(dst));
+            ginx.vstore(src, ref head(dst));
             return dst;
         }
 

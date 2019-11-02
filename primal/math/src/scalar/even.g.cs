@@ -19,7 +19,7 @@ namespace Z0
         /// <param name="src">The value to test</param>
         /// <typeparam name="T">The primal integer type</typeparam>
         [MethodImpl(Inline)]
-        public static bool odd<T>(T src)
+        public static bit odd<T>(T src)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
@@ -48,10 +48,9 @@ namespace Z0
         /// <param name="src">The value to test</param>
         /// <typeparam name="T">The primal integer type</typeparam>
         [MethodImpl(Inline)]
-        public static bool even<T>(T src)
+        public static bit even<T>(T src)
             where T : unmanaged
                 => !odd<T>(src);    
-
     }
 
 }

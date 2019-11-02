@@ -20,24 +20,29 @@ namespace Z0
     /// <summary>
     /// Defines a 16x16 matrix of bits
     /// </summary>
-    public struct BitMatrix16  : IBitSquare<BitMatrix16,ushort>
+    public struct BitMatrix16 
     {   
         ushort[] data;
 
         /// <summary>
+        /// The order type
+        /// </summary>
+        public static N16 N => default;
+
+        /// <summary>
         /// The matrix order
         /// </summary>
-        public const uint N = 16;
+        const uint Order = 16;
 
         /// <summary>
         /// The number of bits per row
         /// </summary>
-        public const uint RowBitCount = N;
+        public const uint RowBitCount = Order;
 
         /// <summary>
         /// The number of bits per column
         /// </summary>
-        public const uint ColBitCount = N;
+        public const uint ColBitCount = Order;
 
         /// <summary>
         /// The number of bits apprehended by the matrix
@@ -73,7 +78,18 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static BitMatrix16 Alloc()        
-            => From(new ushort[N]);
+            => From(new ushort[Order]);
+
+        /// <summary>
+        /// Allocates a matrix where each row is initialized to a common vector
+        /// </summary>
+        /// <param name="fill">The fill vector</param>
+        public static BitMatrix16 Alloc(BitVector16 fill)
+        {
+            var data = new ushort[Order];
+            data.Fill(fill);
+            return new BitMatrix16(data);
+        }
 
         /// <summary>
         /// Allocates a matrix with a fill value
@@ -103,10 +119,10 @@ namespace Z0
         /// </summary>
         /// <param name="src">The matrix bits</param>
         [MethodImpl(Inline)]
-        public static BitMatrix16 From(Vector256<ushort> src)
+        internal static BitMatrix16 From(Vector256<ushort> src)
         {
             Span<ushort> dst = new ushort[Vec256<short>.Length];
-            vstore(src, ref dst[0]);
+            ginx.vstore(src, ref dst[0]);
             return new BitMatrix16(dst);
         }
 
@@ -149,23 +165,20 @@ namespace Z0
         public static bool operator !=(BitMatrix16 A, BitMatrix16 B)
             => !A.Equals(B);
 
-        [MethodImpl(Inline)]
         BitMatrix16(ushort[] src)
         {                        
-            require(src.Length == Pow2.T04);
             this.data = src;
         }
 
         [MethodImpl(Inline)]
         BitMatrix16(Span<ushort> src)
         {                        
-            require(src.Length == Pow2.T04);
             this.data = src.ToArray();
         }
 
         BitMatrix16(bit fill)
         {
-            this.data = new ushort[N];
+            this.data = new ushort[Order];
             if(fill)
                 Array.Fill(data, ushort.MaxValue);
         }
@@ -243,19 +256,19 @@ namespace Z0
         public readonly int RowCount
         {
             [MethodImpl(Inline)]
-            get => (int)N;
+            get => (int)Order;
         }
 
         public readonly int ColCount
         {
             [MethodImpl(Inline)]
-            get => (int)N;
+            get => (int)Order;
         }
 
         public readonly ushort ColData(int index)
         {
             ushort col = 0;
-            for(var r = 0; r < N; r++)
+            for(var r = 0; r < Order; r++)
                 BitMask.setif(in data[r], index, ref col, r);
             return col;
         }
@@ -307,7 +320,7 @@ namespace Z0
         public readonly BitMatrix16 Transpose()
         {
             var dst = Replicate();
-            for(var i=0; i<N; i++)
+            for(var i=0; i<Order; i++)
                 dst.data[i] = ColData(i);
             return dst;
         }

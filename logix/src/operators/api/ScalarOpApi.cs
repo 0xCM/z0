@@ -27,18 +27,11 @@ namespace Z0.Logix
         /// <summary>
         /// Advertises the supported binary operators
         /// </summary>
-        public static BinaryBitwiseOpKind[] BinaryBitwiseKinds
-            => new BinaryBitwiseOpKind[]{
-                BinaryBitwiseOpKind.True, BinaryBitwiseOpKind.False,
-                BinaryBitwiseOpKind.And, BinaryBitwiseOpKind.Nand,
-                BinaryBitwiseOpKind.Or, BinaryBitwiseOpKind.Nor, 
-                BinaryBitwiseOpKind.XOr,  BinaryBitwiseOpKind.Xnor,
-                BinaryBitwiseOpKind.LeftProject, BinaryBitwiseOpKind.RightProject, 
-                BinaryBitwiseOpKind.LeftNot, BinaryBitwiseOpKind.RightNot, 
-                BinaryBitwiseOpKind.Implication, BinaryBitwiseOpKind.Nonimplication, 
-                BinaryBitwiseOpKind.ConverseImplication, BinaryBitwiseOpKind.ConverseNonimplication, 
-                
-            };
+        public static ReadOnlySpan<BinaryBitwiseOpKind> BinaryBitwiseKinds
+            => BinaryOpKindData.As<BinaryBitwiseOpKind>();
+
+        static ReadOnlySpan<byte> BinaryOpKindData
+            => new byte[]{0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15};
 
         public static UnaryArithmeticOpKind[] UnaryAritmeticKinds
             => new UnaryArithmeticOpKind[]{

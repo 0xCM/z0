@@ -1,4 +1,4 @@
-// 2019-10-31 21:45:33:336
+// 2019-11-02 09:11:43:862
 Vec256<ulong> perm4x64_256x64(Vec256<ulong> src)
 {
     IL_0000: ldarg.1
@@ -37,7 +37,7 @@ Vec256<ulong> perm4x64_256x64(ulong a, ulong b, ulong c, ulong d)
     IL_0001: ldarg.2
     IL_0002: ldarg.3
     IL_0003: ldarg.s d
-    IL_0005: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> zfunc::vparts(System.UInt64,System.UInt64,System.UInt64,System.UInt64)
+    IL_0005: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.dinx::vparts(System.UInt64,System.UInt64,System.UInt64,System.UInt64)
     IL_000A: stloc.0
     IL_000B: ldloc.0
     IL_000C: ldc.i4 228

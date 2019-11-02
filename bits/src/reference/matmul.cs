@@ -47,7 +47,7 @@ namespace Z0
 
         public static BitMatrix32 bmm(BitMatrix32 lhs, BitMatrix32 rhs)
         {
-            var dst = BitMatrix32.Alloc();
+            var dst = BitMatrix.alloc(n32);
             rhs = rhs.Transpose();
             for(var i=0; i< lhs.RowCount; i++)
             {

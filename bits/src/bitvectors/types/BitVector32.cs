@@ -510,12 +510,20 @@ namespace Z0
             get => data;
         }
 
+        [MethodImpl(Inline)]
+        public BitVector64 Concat(BitVector32 tail)
+            => BitVector.from(n64,tail.data, data);
+
         /// <summary>
         /// Returns a copy of the vector
         /// </summary>
         [MethodImpl(Inline)]
         public readonly BitVector32 Replicate()
             => new BitVector32(data);
+
+        [MethodImpl(Inline)]
+        public BitVector64 Replicate(N2 n)
+            => Concat(this);
 
         /// <summary>
         /// Applies a permutation to a replicated vector

@@ -13,6 +13,8 @@ namespace Z0
     partial class inxcoc
     {                
 
+        public static void avxpack(ref uint src, ref uint dst)
+            => AvxBitpack.pack(n1, ref src, ref dst);
         public static ulong sum_256x64u(Vector256<ulong> src)
             => dinx.vsum(src);
 

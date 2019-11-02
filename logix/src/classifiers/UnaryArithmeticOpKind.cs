@@ -11,14 +11,13 @@ namespace Z0.Logix
     /// <summary>
     /// Classifies unary arithmetic operators
     /// </summary>
-    [Flags]
-    public enum UnaryArithmeticOpKind : uint
+    public enum UnaryArithmeticOpKind : byte
     {
         Inc = 1,
 
-        Dec = Inc << 1,
+        Dec = 2,
 
-        Negate = Dec << 1,
+        Negate = 3,
 
     }
 }

@@ -20,7 +20,7 @@ namespace Z0.Test
             var src = Random.Next<ushort>();
             var maskA = (ushort)0b111;
             var maskB = Part10x1.Part0 | Part10x1.Part1 | Part10x1.Part2;
-            var maskC = maskB.ToScalar();
+            var maskC = (ushort)maskB;
             Claim.eq(maskA,maskC);
             
             var a = Bits.gather(src, maskA);

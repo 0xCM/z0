@@ -13,6 +13,8 @@ namespace Z0.Test
     public class t_bvpop : BitVectorTest<t_bvpop>
     {
 
+        
+        
         public void pop_generic()
         {
             BitSize bitlen = 128 + 8;
@@ -32,6 +34,18 @@ namespace Z0.Test
 
         }
 
+        public void pop_spans()
+        {
+            var src = Random.Span<ulong>(SampleSize);
+            var actual = bitspan.pop(src);
+            
+            var expect = 0u;
+            for(var i=0; i<src.Length; i++)
+            {
+                expect += gbits.pop(src[i]);
+            }
+            Claim.eq(expect, actual);
+        }
 
 
     }

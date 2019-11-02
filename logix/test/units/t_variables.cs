@@ -17,7 +17,7 @@ namespace Z0.Logix
     {
         public void check_compositions()
         {
-            var ops = ScalarOpApi.BinaryBitwiseKinds;
+            var ops = ScalarOpApi.BinaryBitwiseKinds.ToArray();
             var pairs = from op1 in ops
                         from op2 in ops
                         select (op1, op2);            
@@ -27,7 +27,7 @@ namespace Z0.Logix
 
         public void check_binop_vars()
         {
-            ScalarOpApi.BinaryBitwiseKinds.Iterate(check_binop_vars);
+            ScalarOpApi.BinaryBitwiseKinds.ToArray().Iterate(check_binop_vars);
         }
 
         public void check_solution()

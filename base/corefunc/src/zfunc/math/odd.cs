@@ -15,7 +15,7 @@ partial class zfunc
     /// </summary>
     /// <param name="test">The value to test</param>
     [MethodImpl(Inline)]
-    public static bool odd(sbyte test)
+    public static bit odd(sbyte test)
         => (test & 1) != 0;
 
     /// <summary>
@@ -23,7 +23,7 @@ partial class zfunc
     /// </summary>
     /// <param name="test">The value to test</param>
     [MethodImpl(Inline)]
-    public static bool odd(byte test)
+    public static bit odd(byte test)
         => (test & 1) != 0;
 
     /// <summary>
@@ -31,7 +31,7 @@ partial class zfunc
     /// </summary>
     /// <param name="test">The value to test</param>
     [MethodImpl(Inline)]
-    public static bool odd(short test)
+    public static bit odd(short test)
         => (test & 1) != 0;
 
     /// <summary>
@@ -39,7 +39,7 @@ partial class zfunc
     /// </summary>
     /// <param name="test">The value to test</param>
     [MethodImpl(Inline)]
-    public static bool odd(ushort test)
+    public static bit odd(ushort test)
         => (test & 1) != 0;
 
     /// <summary>
@@ -47,7 +47,7 @@ partial class zfunc
     /// </summary>
     /// <param name="test">The value to test</param>
     [MethodImpl(Inline)]
-    public static bool odd(int test)
+    public static bit odd(int test)
         => (test & 1) != 0;
 
     /// <summary>
@@ -55,7 +55,7 @@ partial class zfunc
     /// </summary>
     /// <param name="test">The value to test</param>
     [MethodImpl(Inline)]
-    public static bool odd(uint test)
+    public static bit odd(uint test)
         => (test & 1) != 0;
 
     /// <summary>
@@ -63,7 +63,7 @@ partial class zfunc
     /// </summary>
     /// <param name="test">The value to test</param>
     [MethodImpl(Inline)]
-    public static bool odd(long test)
+    public static bit odd(long test)
         => (test & 1) != 0;
 
     /// <summary>
@@ -71,7 +71,7 @@ partial class zfunc
     /// </summary>
     /// <param name="test">The value to test</param>
     [MethodImpl(Inline)]
-    public static bool odd(ulong test)
+    public static bit odd(ulong test)
         => (test & 1) != 0;
 
     /// <summary>
@@ -79,7 +79,7 @@ partial class zfunc
     /// </summary>
     /// <param name="test">The value to test</param>
     [MethodImpl(Inline)]
-    public static bool even(sbyte test)
+    public static bit even(sbyte test)
         => !odd(test);
 
     /// <summary>
@@ -87,7 +87,7 @@ partial class zfunc
     /// </summary>
     /// <param name="test">The value to test</param>
     [MethodImpl(Inline)]
-    public static bool even(byte test)
+    public static bit even(byte test)
         => !odd(test);
 
     /// <summary>
@@ -95,7 +95,7 @@ partial class zfunc
     /// </summary>
     /// <param name="test">The value to test</param>
     [MethodImpl(Inline)]
-    public static bool even(short test)
+    public static bit even(short test)
         => !odd(test);
 
     /// <summary>
@@ -103,7 +103,7 @@ partial class zfunc
     /// </summary>
     /// <param name="test">The value to test</param>
     [MethodImpl(Inline)]
-    public static bool even(int test)
+    public static bit even(int test)
         => !odd(test);
 
     /// <summary>
@@ -111,7 +111,7 @@ partial class zfunc
     /// </summary>
     /// <param name="test">The value to test</param>
     [MethodImpl(Inline)]
-    public static bool even(ushort test)
+    public static bit even(ushort test)
         => !odd(test);
 
     /// <summary>
@@ -119,7 +119,7 @@ partial class zfunc
     /// </summary>
     /// <param name="test">The value to test</param>
     [MethodImpl(Inline)]
-    public static bool even(uint test)
+    public static bit even(uint test)
         => !odd(test);
 
     /// <summary>
@@ -127,7 +127,7 @@ partial class zfunc
     /// </summary>
     /// <param name="test">The value to test</param>
     [MethodImpl(Inline)]
-    public static bool even(long test)
+    public static bit even(long test)
         => !odd(test);
 
     /// <summary>
@@ -135,7 +135,7 @@ partial class zfunc
     /// </summary>
     /// <param name="test">The value to test</param>
     [MethodImpl(Inline)]
-    public static bool even(ulong test)
+    public static bit even(ulong test)
         => !odd(test);
 }
 

@@ -21,7 +21,6 @@ namespace Z0
 
     partial class ginx
     {        
-
         [MethodImpl(Inline)]
         public static unsafe ref Vector128<T> vloadu<T>(T* pSrc, out Vector128<T> dst)
             where T : unmanaged
@@ -60,7 +59,6 @@ namespace Z0
             
             return ref dst;
         }
-
 
         [MethodImpl(Inline)]
         static unsafe void vloadu_u<T>(T* pSrc, out Vector256<T> dst)

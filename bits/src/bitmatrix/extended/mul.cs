@@ -15,18 +15,58 @@ namespace Z0
 
     partial class BitMatrix
     {
+        /// <summary>
+        /// Applies a bitmatrix to a bitvector to yield a transformed bitvector
+        /// </summary>
+        /// <param name="A">The bitmatrix that defines the transformation</param>
+        /// <param name="x">The vector to be transformed</param>
+        public static BitVector<T> mul<T>(BitMatrix<T> A, BitVector<T> x)
+            where T : unmanaged
+        {
+            var n = BitMatrix<T>.N;
+            var dst = BitVector.generic<T>();
+            for(var i=0; i< n; i++)
+                dst[i] = BitVector.dot(A[i], x);
+            return dst;        
+        }
+
+        /// <summary>
+        /// Applies a bitmatrix to a bitvector to yield a transformed bitvector
+        /// </summary>
+        /// <param name="A">The bitmatrix that defines the transformation</param>
+        /// <param name="x">The vector to be transformed</param>
+        public static BitVector4 mul(BitMatrix4 A, BitVector4 x)
+        {
+            var n = BitMatrix4.N;
+            var dst = BitVector.alloc(n);
+            for(var i=0; i< n; i++)
+                dst[i] = A.RowVector(i) % x;
+            return dst;        
+        }
+
+        /// <summary>
+        /// Applies a bitmatrix to a bitvector to yield a transformed bitvector
+        /// </summary>
+        /// <param name="A">The bitmatrix that defines the transformation</param>
+        /// <param name="x">The vector to be transformed</param>
         public static BitVector8 mul(BitMatrix8 lhs, BitVector8 rhs)
         {
-            var dst = BitVector8.Alloc();
-            for(var i=0; i< 8; i++)
+            var n = BitMatrix8.N;
+            var dst = BitVector.alloc(n);
+            for(var i=0; i< n; i++)
                 dst[i] = lhs.RowVector(i) % rhs;
             return dst;        
         }
 
+        /// <summary>
+        /// Multiplies two primal bitmatrices of order 8, overwriting the left matrix with the result
+        /// </summary>
+        /// <param name="A">The left matrix</param>
+        /// <param name="B">The right matrix</param>
         public static ref BitMatrix8 mul(ref BitMatrix8 A, BitMatrix8 B)
         {
             var C = B.Transpose();
-            var n = 8;
+            var n = BitMatrix8.N;
 
             for(var i=0; i< n; i++)
             {
@@ -39,6 +79,11 @@ namespace Z0
             return ref A;
         }
 
+        /// <summary>
+        /// Multiplies two primal bitmatrices of order 8, returning the allocated result
+        /// </summary>
+        /// <param name="A">The left matrix</param>
+        /// <param name="B">The right matrix</param>
         public static BitMatrix8 mul(BitMatrix8 A, BitMatrix8 B)
         {
             var C = A.Replicate();
@@ -47,24 +92,24 @@ namespace Z0
         
         public static BitVector16 mul(BitMatrix16 A, BitVector16 x)
         {
-            const int N = 16;
-            var dst = BitVector16.Alloc();
-            for(var i=0; i< N; i++)
+            var n = BitMatrix16.N;
+            var dst = BitVector.alloc(n);
+            for(var i=0; i< n; i++)
                 dst[i] = A.RowVector(i) % x;
             return dst;        
         }
 
         public static BitMatrix16 mul(BitMatrix16 A, BitMatrix16 B)
         {
-            const int N = 16;
+            var n = BitMatrix16.N;
             var X = A.Replicate();
             var Y = B.Transpose();
 
-            var dst = BitMatrix16.Alloc();
-            for(var i=0; i< N; i++)
+            var dst = BitMatrix.alloc(n);
+            for(var i=0; i< n; i++)
             {
                 var row = X.RowVector(i);
-                for(var j = 0; j< N; j++)
+                for(var j = 0; j< n; j++)
                     dst[i,j] = Y.RowVector(j) % row;
             }
             return dst;
@@ -72,14 +117,14 @@ namespace Z0
 
         public static ref BitMatrix32 mul(ref BitMatrix32 A, BitMatrix32 B)
         {
-            const int N = 32;
+            var n = BitMatrix32.N;
             var C = B.Transpose();            
             
-            for(var i=0; i< N; i++)
+            for(var i=0; i< n; i++)
             {
                 var r = A.RowVector(i);
-                var z = BitVector32.Alloc();
-                for(var j = 0; j< N; j++)
+                var z = BitVector.alloc(n);
+                for(var j = 0; j< n; j++)
                     z[j] = r % C.RowVector(j);
                 A[i] = (uint)z;
             }

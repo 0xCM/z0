@@ -14,8 +14,9 @@ namespace Z0.Test
     {
         public void pop1()
         {
+            Span<byte> bits = stackalloc byte[16];
             var src = (ushort)0b11001111;
-            var bits = BitParts.unpack16x1(src);
+            BitParts.unpack16x1(src,bits);
             var bitsPC = bits.PopCount();
             Claim.eq(6,bitsPC);
 
@@ -34,7 +35,7 @@ namespace Z0.Test
             for(var i=0; i< SampleSize; i++)
             {
                 var y = BitConverter.GetBytes(Random.Next<ulong>()).ToSpan();
-                BitParts.unpack8x1(y, x);            
+                y.Unpack(x);
                 Claim.eq(x.PopCount(), y.PopCount());
             }
         }

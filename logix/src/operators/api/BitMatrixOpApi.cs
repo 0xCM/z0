@@ -30,7 +30,7 @@ namespace Z0.Logix
         /// <summary>
         /// Advertises the supported binary bitwise operators
         /// </summary>
-        public static BinaryBitwiseOpKind[] BinaryBitwiseKinds
+        public static ReadOnlySpan<BinaryBitwiseOpKind> BinaryBitwiseKinds
             => ScalarOpApi.BinaryBitwiseKinds;
 
         [MethodImpl(Inline)]

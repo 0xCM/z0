@@ -13,42 +13,42 @@ namespace Z0.Logix
     /// <summary>
     /// Classifier for logical expressions
     /// </summary>
-    public enum LogicExprKind : uint
+    public enum LogicExprKind : byte
     {        
         /// <summary>
         /// Classifies boolean bariables
         /// </summary>
-        Variable = Pow2.T01,
+        Variable = 1,
 
         /// <summary>
         /// Classifies a boolean expression that depends on one or more variables
         /// </summary>
-        Varied = Pow2.T02,
+        Varied = 2,
 
         /// <summary>
         /// Classifies a boolean literal expression
         /// </summary>
-        Literal = Pow2.T03,
+        Literal = 3,
 
         /// <summary>
         /// Classifies a boolean comparison expression
         /// </summary>
-        Comparison = Pow2.T04,
+        Comparison = 4,
 
         /// <summary>
         /// Classifies a boolean unary operator
         /// </summary>
-        UnaryOperator = Pow2.T05,
+        UnaryOperator = 5,
 
         /// <summary>
         /// Classifies a boolean binary operator
         /// </summary>
-        BinaryOperator = Pow2.T06,
+        BinaryOperator = 6,
 
         /// <summary>
         /// Classifies a boolean ternary operator
         /// </summary>
-        TernaryOperator = Pow2.T07,
+        TernaryOperator = 7,
 
     }
 

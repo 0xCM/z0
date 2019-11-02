@@ -35,7 +35,6 @@ namespace Z0
         public static BitVector64 Alloc()
             => new BitVector64(0);
 
-
         /// <summary>
         /// Enumerates all 32-bit bitvectors whose width is less than or equal to a specified maximum
         /// </summary>

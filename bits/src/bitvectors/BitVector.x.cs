@@ -675,6 +675,5 @@ namespace Z0
         public static BitVector64 ToBitVector<T>(this BitCells<T> src, N64 n)
             where T : unmanaged
                 => src.Data.TakeUInt64();
- 
     }
 }

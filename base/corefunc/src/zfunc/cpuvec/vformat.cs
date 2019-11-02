@@ -38,33 +38,7 @@ namespace Z0
         public static string FormatHex<T>(this Vector256<T> src, bool vectorize = true, char? sep = null, bool specifier = false)
              where T : unmanaged
                 => src.ToSpan().FormatHex(vectorize,sep, specifier); 
-
-        /// <summary>
-        /// Formats cpu vector components of integral type as a sequence of hex values
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <param name="vectorize">Whether to render comma-separated values enclosed by angular brackets</param>
-        /// <param name="sep">The character to use as a separator, if applicable</param>
-        /// <param name="specifier">Whether to prefix each number with the canonical hex specifier, "0x"</param>
-        /// <typeparam name="T">The primal component type</typeparam>
-        [MethodImpl(Inline)]
-        public static string FormatHex<T>(this Vec512<T> src, bool vectorize = true, char? sep = null, bool specifier = false)
-            where T : unmanaged
-                => src.ToSpan().FormatHex(vectorize,sep, specifier);
-
-        /// <summary>
-        /// Formats cpu vector components of integral type as a sequence of hex values
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <param name="vectorize">Whether to render comma-separated values enclosed by angular brackets</param>
-        /// <param name="sep">The character to use as a separator, if applicable</param>
-        /// <param name="specifier">Whether to prefix each number with the canonical hex specifier, "0x"</param>
-        /// <typeparam name="T">The primal component type</typeparam>
-        [MethodImpl(Inline)]
-        public static string FormatHex<T>(this Vec1024<T> src, bool vectorize = true, char? sep = null, bool specifier = false)
-            where T : unmanaged
-                => src.ToSpan().FormatHex(vectorize,sep, specifier);
-
+                
         /// <summary>
         /// Formats vector components as blocked hex
         /// </summary>
@@ -88,19 +62,6 @@ namespace Z0
         public static string FormatHexBlocks<T>(this Vector256<T> src)
             where T : unmanaged
                 => src.FormatHex(false, AsciSym.Space);
-
-        /// <summary>
-        /// Formats vector components as blocked hex
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <param name="width">The block width</param>
-        /// <param name="sep">The block delimiter</param>
-        /// <typeparam name="T">The cell component type</typeparam>
-        [MethodImpl(Inline)]
-        public static string FormatHexBlocks<T>(this Vec512<T> src)
-            where T : unmanaged
-                => src.FormatHex(false, AsciSym.Space);
-
 
         /// <summary>
         /// Formats vector bits

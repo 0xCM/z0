@@ -28,7 +28,7 @@ namespace Z0
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
         public static Covector<N,T> Load<N,T>(T[] src, N length = default)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
             where T : unmanaged
                 => Covector<N,T>.Load(src);
      

@@ -419,6 +419,18 @@ namespace Z0
             => new BitVector4(data);
 
         /// <summary>
+        /// Creates a new vector via concatenation
+        /// </summary>
+        /// <param name="tail">The lower bits of the new vector</param>
+        [MethodImpl(Inline)]
+        public BitVector8 Concat(BitVector4 tail)
+            => BitVector8.FromScalar(data << 4 | tail.data);
+
+        [MethodImpl(Inline)]
+        public BitVector8 Replicate(N2 n)
+            => Concat(this);
+
+        /// <summary>
         /// Applies a permutation to a replicated vector
         /// </summary>
         /// <param name="p">The permutation</param>

@@ -19,7 +19,7 @@ namespace Z0
     /// salient distinction between row and column-major matrix storage
     /// </summary>
     public struct Covector<N,T>
-        where N : ITypeNat, new()
+        where N : unmanaged, ITypeNat
         where T : unmanaged
     {
         T[] data;
@@ -41,7 +41,7 @@ namespace Z0
         /// <typeparam name="T">THe component type</typeparam>
         [MethodImpl(Inline)]   
         public static implicit operator Span<N,T>(Covector<N,T> src)
-            => NatSpan.Load<N,T>(src.data);
+            => NatSpan.load(default(N), src.data);
 
         [MethodImpl(Inline)]
         public static bool operator == (Covector<N,T> lhs, Covector<N,T> rhs) 

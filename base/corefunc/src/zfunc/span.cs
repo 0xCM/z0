@@ -291,6 +291,28 @@ partial class zfunc
     /// <param name="src">The source span</param>
     /// <typeparam name="T">The element type</typeparam>
     [MethodImpl(Inline)]
+    public static ref T head<N,T>(Span<N,T> src)
+        where N : ITypeNat,new()
+        where T : unmanaged
+            =>  ref src.Head;
+
+    /// <summary>
+    /// Returns a reference to the location of the first span element
+    /// </summary>
+    /// <param name="src">The source span</param>
+    /// <typeparam name="T">The element type</typeparam>
+    [MethodImpl(Inline)]
+    public static ref readonly T head<N,T>(ReadOnlySpan<N,T> src)
+        where N : ITypeNat,new()
+        where T : unmanaged
+            =>  ref src.Head;
+
+    /// <summary>
+    /// Returns a reference to the location of the first span element
+    /// </summary>
+    /// <param name="src">The source span</param>
+    /// <typeparam name="T">The element type</typeparam>
+    [MethodImpl(Inline)]
     public static ref T head<T>(Span128<T> src)
         where T : unmanaged
             =>  ref MemoryMarshal.GetReference<T>(src.Unblocked);
@@ -334,6 +356,42 @@ partial class zfunc
     public static ref readonly T head<T>(ReadOnlySpan<T> src)
         where T : unmanaged
             =>  ref MemoryMarshal.GetReference<T>(src);
+
+    /// <summary>
+    /// Returns a uint32 reference to the head of a bytespan
+    /// </summary>
+    /// <param name="src">The source span</param>
+    /// <typeparam name="T">The cell type</typeparam>
+    [MethodImpl(Inline)]
+    public static ref uint head32(Span<byte> src)
+        => ref head(src.AsUInt32());
+
+    /// <summary>
+    /// Returns a readonly uint32 reference to the head of a readonly bytespan
+    /// </summary>
+    /// <param name="src">The source span</param>
+    /// <typeparam name="T">The cell type</typeparam>
+    [MethodImpl(Inline)]
+    public static ref readonly uint head32(ReadOnlySpan<byte> src)
+        => ref head(src.AsUInt32());
+
+    /// <summary>
+    /// Returns a uint64 reference to the head of a bytespan
+    /// </summary>
+    /// <param name="src">The source span</param>
+    /// <typeparam name="T">The cell type</typeparam>
+    [MethodImpl(Inline)]
+    public static ref ulong head64(Span<byte> src)
+        => ref head(src.AsUInt64());
+
+    /// <summary>
+    /// Returns a readonly uint64 reference to the head of a readonly bytespan
+    /// </summary>
+    /// <param name="src">The source span</param>
+    /// <typeparam name="T">The cell type</typeparam>
+    [MethodImpl(Inline)]
+    public static ref readonly ulong head64(ReadOnlySpan<byte> src)
+        => ref head(src.AsUInt64());
 
     /// <summary>
     /// Returns a reference to the location of a non-leading span element

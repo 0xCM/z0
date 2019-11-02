@@ -11,8 +11,7 @@ namespace Z0.Logix
     /// <summary>
     /// Classifies unary bitwise operators
     /// </summary>
-    [Flags]
-    public enum UnaryBitwiseOpKind : uint
+    public enum UnaryBitwiseOpKind : byte
     {
         /// <summary>
         /// The unary operator that always returns false
@@ -37,7 +36,7 @@ namespace Z0.Logix
         /// <summary>
         /// Two's complement negation
         /// </summary>
-        Negate = Pow2.T08,
+        Negate = 17,
 
     }
 

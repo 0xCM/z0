@@ -22,78 +22,119 @@ namespace Z0
     {
         Span<T> data;
 
-        public static readonly int SpanLength = nati<N>();
+        public static int Count => nati<N>();
 
+        [MethodImpl(Inline)]
         public static implicit operator Span<T>(Span<N,T> src)
             => src.data;
 
+        [MethodImpl(Inline)]
         public static implicit operator Span<N,T>(Span<T> src)
-            => new Span<N,T>(src);
+            => CheckedTransfer(src);
 
+        [MethodImpl(Inline)]
         public static implicit operator ReadOnlySpan<T> (Span<N,T> src)
             => src.data;
-    
+
+        [MethodImpl(Inline)]
+        public static implicit operator ReadOnlySpan<N,T>(Span<N,T> src)
+            => new ReadOnlySpan<N, T>(src);
+
+        [MethodImpl(Inline)]
         public static implicit operator Span<N,T>(Span256<T> src)
             => new Span<N, T>(src);
 
+        [MethodImpl(Inline)]
         public static bool operator == (Span<N,T> lhs, Span<N,T> rhs)
             => lhs.data == rhs.data;
 
+        [MethodImpl(Inline)]
         public static bool operator != (Span<N,T> lhs, Span<N,T> rhs)
             => lhs.data != rhs.data;            
 
+        /// <summary>
+        /// Uncritically assigns a source span to the state store of natural span
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <typeparam name="U">The source element type</typeparam>
         [MethodImpl(Inline)]
-        public Span(T value)
+        internal static Span<N,U> Transfer<U>(Span<U> src)
+            where U : unmanaged
+                => new Span<N, U>(src);
+
+        /// <summary>
+        /// Verifies correct source span length prior to backing store assignment
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <typeparam name="U">The source element type</typeparam>
+        [MethodImpl(Inline)]
+        public static Span<N,U> CheckedTransfer<U>(Span<U> src)
+            where U : unmanaged
+        {
+            require(src.Length >= Count, $"length(src) = {src.Length} < {Count} = SpanLength");               
+            return new Span<N, U>(src);
+        }
+
+        /// <summary>
+        /// Verifies correct source span length prior to backing store assignment
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <typeparam name="U">The source element type</typeparam>
+        [MethodImpl(Inline)]
+        public static Span<N,U> CheckedTransfer<U>(U[] src)
+            where U : unmanaged
+        {
+            require(src.Length >= Count, $"length(src) = {src.Length} < {Count} = SpanLength");               
+            return new Span<N, U>(src);
+        }
+
+        /// <summary>
+        /// Verifies correct source span length prior to backing store assignment
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <typeparam name="U">The source element type</typeparam>
+        [MethodImpl(Inline)]
+        public static Span<N,U> CheckedTransfer<U>(ReadOnlySpan<U> src)
+            where U : unmanaged
+        {
+            require(src.Length >= Count, $"length(src) = {src.Length} < {Count} = SpanLength");               
+            return new Span<N, U>(src);
+        }
+
+        [MethodImpl(Inline)]
+        internal Span(T fill)
         {                    
-            this.data = new Span<T>(new T[SpanLength]);
-            this.data.Fill(value);
+            this.data = new Span<T>(new T[Count]);
+            this.data.Fill(fill);
         }
 
         [MethodImpl(Inline)]
-        public Span(Span<T> src)
-        {
-            require(src.Length >= SpanLength, $"length(src) = {src.Length} < {SpanLength} = SpanLength");
-            this.data = src;
-        }
+        Span(Span<T> src)
+            => this.data = src;
 
         [MethodImpl(Inline)]
-        public Span(T[] src)
-        {
-            require(src.Length >= SpanLength, $"length(src) = {src.Length} < {SpanLength} = SpanLength");
-            this.data = src;
-        }
+        Span(ReadOnlySpan<T> src)
+            => data = src.ToArray();            
 
         [MethodImpl(Inline)]
-        public Span(ReadOnlySpan<T> src)
-        {
-            require(src.Length >= SpanLength, $"length(src) = {src.Length} < {SpanLength} = SpanLength");         
-            data = src.ToArray();            
-        }
+        Span(T[] src)
+            => this.data = src;
 
         [MethodImpl(Inline)]
-        public Span(Span<N,T> src)
-        {
-            this.data = src;
-        }
+        internal Span(Span<N,T> src)
+            => this.data = src;
 
         [MethodImpl(Inline)]
-        public Span(Span256<T> src)
-        {
-            this.data = src;
-        }
+        internal Span(Span256<T> src)
+            => this.data = src;
 
         [MethodImpl(Inline)]
-        public Span(ref T src)
-        {
-            data = MemoryMarshal.CreateSpan(ref src, SpanLength);
-        }
+        internal Span(ref T src)
+            => data = MemoryMarshal.CreateSpan(ref src, Count);
 
         [MethodImpl(Inline)]
-        public Span(ReadOnlySpan<N,T> src)
-        {
-            data = src.ToArray();
-        }
-
+        internal Span(ReadOnlySpan<N,T> src)
+            => data = src.ToArray();
  
         public ref T this[int ix] 
         {
@@ -105,6 +146,12 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => data;
+        }
+
+        public ref T Head
+        {
+            [MethodImpl(Inline)]
+            get => ref MemoryMarshal.GetReference(data);
         }
 
         [MethodImpl(Inline)]
@@ -140,10 +187,15 @@ namespace Z0
             => new Span<N,T>(data.Replicate());
         
         public int Length 
-            => SpanLength;
+            => Count;
             
         public bool IsEmpty
             => data.IsEmpty;
+
+        [MethodImpl(Inline)]
+        public Span<N,S> As<S>()
+            where S : unmanaged
+                => Transfer(MemoryMarshal.Cast<T,S>(data));
 
        public override bool Equals(object rhs) 
             => throw new NotSupportedException();

@@ -104,20 +104,20 @@ namespace Z0.Test
         public void shuffle_128x32u()
         {
             var n = n128;
-            var src = vparts(1u,2u,3u,4u);
+            var src = dinx.vparts(1u,2u,3u,4u);
             var spec = Perm4.ABCD;
-            var y = vparts(4u,3u,2u,1u);
+            var y = dinx.vparts(4u,3u,2u,1u);
             var x = dinx.vshuffle(src, Perm4.ABCD);
             Claim.eq(x, src);
             Trace($"shuffle({x},{spec}) = {y}");           
 
-            y = vparts(4u,3u,2u,1u);
+            y = dinx.vparts(4u,3u,2u,1u);
             spec = Perm4.DCBA;
             x = dinx.vshuffle(src,spec);
             Claim.eq(x, y); 
             Trace($"shuffle({x},{spec}) = {y}");           
 
-            y = vparts(4u,3u,2u,1u);
+            y = dinx.vparts(4u,3u,2u,1u);
             spec = Perm4.DCBA;
             x = dinx.vshuffle(src,spec);
             Claim.eq(x, y); 
@@ -128,27 +128,27 @@ namespace Z0.Test
 
         public void shuffle_lo_128x16u()
         {
-            var id = vparts((ushort)0,(ushort)1,(ushort)2,(ushort)3,(ushort)6,(ushort)7,(ushort)8,(ushort)9);
-            Claim.eq(dinx.vshufflelo(id, Perm4.ADCB), vparts((ushort)0,(ushort)3,(ushort)2,(ushort)1,(ushort)6,(ushort)7,(ushort)8,(ushort)9));
+            var id = dinx.vparts((ushort)0,(ushort)1,(ushort)2,(ushort)3,(ushort)6,(ushort)7,(ushort)8,(ushort)9);
+            Claim.eq(dinx.vshufflelo(id, Perm4.ADCB), dinx.vparts((ushort)0,(ushort)3,(ushort)2,(ushort)1,(ushort)6,(ushort)7,(ushort)8,(ushort)9));
         }
 
         public void shuffle_hi_128x16u()
         {
-            var id = vparts((ushort)0,(ushort)1,(ushort)2,(ushort)3,(ushort)6,(ushort)7,(ushort)8,(ushort)9);
-            Claim.eq(dinx.vshufflehi(id, Perm4.ADCB), vparts((ushort)0,(ushort)1,(ushort)2,(ushort)3,(ushort)6,(ushort)9,(ushort)8,(ushort)7));
+            var id = dinx.vparts((ushort)0,(ushort)1,(ushort)2,(ushort)3,(ushort)6,(ushort)7,(ushort)8,(ushort)9);
+            Claim.eq(dinx.vshufflehi(id, Perm4.ADCB), dinx.vparts((ushort)0,(ushort)1,(ushort)2,(ushort)3,(ushort)6,(ushort)9,(ushort)8,(ushort)7));
         }
 
         public void shuffle_128x16u()
         {
-            var id = vparts((ushort)0,(ushort)1,(ushort)2,(ushort)3,(ushort)6,(ushort)7,(ushort)8,(ushort)9);
-            Claim.eq(dinx.vshuffle(id, Perm4.ADCB, Perm4.ADCB), vparts((ushort)0,(ushort)3,(ushort)2,(ushort)1,(ushort)6,(ushort)9,(ushort)8,(ushort)7));
+            var id = dinx.vparts((ushort)0,(ushort)1,(ushort)2,(ushort)3,(ushort)6,(ushort)7,(ushort)8,(ushort)9);
+            Claim.eq(dinx.vshuffle(id, Perm4.ADCB, Perm4.ADCB), dinx.vparts((ushort)0,(ushort)3,(ushort)2,(ushort)1,(ushort)6,(ushort)9,(ushort)8,(ushort)7));
         }
 
         public void permute128i32()
         {
-            var id = vparts(0,1,2,3);
-            Claim.eq(dinx.vshuffle(id, Perm4.ADCB), vparts(0,3,2,1));
-            Claim.eq(dinx.vshuffle(id, Perm4.DBCA), vparts(3,1,2,0));
+            var id = dinx.vparts(0,1,2,3);
+            Claim.eq(dinx.vshuffle(id, Perm4.ADCB), dinx.vparts(0,3,2,1));
+            Claim.eq(dinx.vshuffle(id, Perm4.DBCA), dinx.vparts(3,1,2,0));
             Permute4i32();        
         }
 
@@ -179,7 +179,7 @@ namespace Z0.Test
                 var v2 = dinx.vshuffle(v1,p);
 
                 // Permute vector manually
-                var v3 = vparts(v1s[p0],v1s[p1],v1s[p2],v1s[p3]);
+                var v3 = dinx.vparts(v1s[p0],v1s[p1],v1s[p2],v1s[p3]);
 
                 // Same?
                 Claim.eq(v3,v2);

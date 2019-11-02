@@ -20,7 +20,7 @@ namespace Z0.Logix
     {
         IEnumerable<UnaryLogicOpKind> UnaryOpKinds {get;}
 
-        IEnumerable<BinaryLogicOpKind> BinaryOpKinds {get;}
+        ReadOnlySpan<BinaryLogicOpKind> BinaryOpKinds {get;}
 
         IEnumerable<TernaryOpKind> TernaryOpKinds {get;}
 

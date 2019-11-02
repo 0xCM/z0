@@ -97,19 +97,6 @@ namespace Z0
         }
 
 
-        public void bmand_8x8x8g_bench()
-        {
-            var sw = stopwatch(false);
-            for(var i=0; i<SampleSize; i++)
-            {
-                var A = Random.BitMatrix<N8,byte>();
-                var B = Random.BitMatrix<N8,byte>();
-                sw.Start();
-                var result = A & B;                               
-                sw.Stop();
-            }
-            Collect((SampleSize, sw, "bmand_8x8x8g"));            
-        }
 
 
         public void bmand_16x16x16d_bench()
@@ -126,19 +113,6 @@ namespace Z0
             Benchmark("bmand_16x16x16d", count);            
         }
 
-        public void bmand_16x16x16g_bench()
-        {
-            var sw = stopwatch(false);
-            for(var i=0; i<OpCount; i++)
-            {
-                var A = Random.BitMatrix<N16,ushort>();
-                var B = Random.BitMatrix<N16,ushort>();
-                sw.Start();
-                var result = A & B;                               
-                sw.Stop();
-            }
-            Collect((OpCount, sw, "bmand_16x16x16g"));            
-        }
 
 
         public void bmand_32x32x32d_check()
@@ -168,33 +142,7 @@ namespace Z0
             }
         }
 
-        public void bmand_32x32x32g_bench()
-        {
-            var sw = stopwatch(false);
-            for(var i=0; i<OpCount; i++)
-            {
-                var A = Random.BitMatrix<N32,uint>();
-                var B = Random.BitMatrix<N32,uint>();
-                sw.Start();
-                var result = A & B;                               
-                sw.Stop();
-            }
-            Collect((OpCount, sw, "bmand_32x32x32g"));            
-        }
 
-        public void bmand_63x63x8g_bench()
-        {
-            var sw = stopwatch(false);
-            for(var i=0; i<OpCount; i++)
-            {
-                var A = Random.BitMatrix<N63,byte>();
-                var B = Random.BitMatrix<N63,byte>();
-                sw.Start();
-                var result = A & B;                               
-                sw.Stop();
-            }
-            Collect((OpCount, sw, "bmand_63x63x8g"));            
-        }
 
         public void bmand_64x64x64d_check()
         {
@@ -245,20 +193,6 @@ namespace Z0
             }
         }
          
-        public void bmand_64x64x64g_bench()
-        {
-            var sw = stopwatch(false);
-            for(var i=0; i<OpCount; i++)
-            {
-                var A = Random.BitMatrix<N64,ulong>();
-                var B = Random.BitMatrix<N64,ulong>();
-                sw.Start();
-                var result = A & B;                               
-                sw.Stop();
-            }
-            Collect((OpCount, sw, "bmand_64x64x64g"));            
-        }
-
 
     }
 

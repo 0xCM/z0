@@ -200,7 +200,6 @@ namespace Z0
         public RowBits<S> As<S>()
             where S : unmanaged
                 => new RowBits<S>(data.As<T,S>());
-
     }
 
 }

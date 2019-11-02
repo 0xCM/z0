@@ -1,4 +1,4 @@
-// 2019-10-31 21:45:34:838
+// 2019-11-02 09:11:45:280
 ReadOnlySpan<Char> bitchars_32u(uint value)
 {
     IL_0000: ldarga.s value
@@ -696,32 +696,5 @@ ulong mask_8x64u(ref ulong dst, int exp0, int exp1, int exp2, int exp3, int exp4
     IL_000E: call System.UInt64& Z0.Bits::mask(System.UInt64&,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)
     IL_0013: ldind.i8
     IL_0014: ret
-
-}
-void pack8(ref bit src, ref uint dst)
-{
-    IL_0000: call Z0.N8 zfunc::get_n8()
-    IL_0005: ldarg.0
-    IL_0006: ldarg.1
-    IL_0007: call System.Void Z0.Bits::pack(Z0.N8,Z0.bit&,System.UInt32&)
-    IL_000C: ret
-
-}
-void pack16(ref bit src, ref uint dst)
-{
-    IL_0000: call Z0.N16 zfunc::get_n16()
-    IL_0005: ldarg.0
-    IL_0006: ldarg.1
-    IL_0007: call System.Void Z0.Bits::pack(Z0.N16,Z0.bit&,System.UInt32&)
-    IL_000C: ret
-
-}
-void pack32(ref bit src, ref uint dst)
-{
-    IL_0000: call Z0.N32 zfunc::get_n32()
-    IL_0005: ldarg.0
-    IL_0006: ldarg.1
-    IL_0007: call System.Void Z0.Bits::pack(Z0.N32,Z0.bit&,System.UInt32&)
-    IL_000C: ret
 
 }

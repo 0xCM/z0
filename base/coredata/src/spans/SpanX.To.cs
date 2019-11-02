@@ -146,6 +146,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ISet<T> ToSet<N,T>(this ReadOnlySpan<N,T> src)        
             where N : ITypeNat, new()
+            where T : unmanaged
                 => new HashSet<T>(src.ToArray());   
 
         /// <summary>
@@ -177,8 +178,7 @@ namespace Z0
         public static Span256<T> ToSpan256<T>(this Span<T> src)
              where T : unmanaged
                 => Z0.Span256.Load(src);
-
-
+                
         /// <summary>
         /// Constructs a span from an array selection
         /// </summary>
@@ -189,7 +189,19 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Span<T> ToSpan<T>(this T[] src, int offset, int length)
             => new Span<T>(src, offset, length);
- 
+    
+        [MethodImpl(Inline)]
+        public static Span<N,T> ToNatural<N,T>(this Span<T> src, N n = default)
+            where T : unmanaged
+            where N : unmanaged, ITypeNat
+                => NatSpan.load(n,src);
+
+        [MethodImpl(Inline)]
+        public static ReadOnlySpan<N,T> ToNatural<N,T>(this ReadOnlySpan<T> src, N n = default)
+            where T : unmanaged
+            where N : unmanaged, ITypeNat
+                => NatSpan.load(n,src);
+
  
     }
 

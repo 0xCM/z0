@@ -65,6 +65,15 @@ namespace Z0
         /// Produces a span populated with a specified number of random bits
         /// </summary>
         /// <param name="random">The random source</param>
+        [MethodImpl(Inline)]
+        public static Span<N,bit> BitSpan<N>(this IPolyrand random, N len = default)
+            where N : unmanaged, ITypeNat
+                => random.BitSpan((int)len.value);
+
+        /// <summary>
+        /// Produces a span populated with a specified number of random bits
+        /// </summary>
+        /// <param name="random">The random source</param>
         public static void BitSpan(this IPolyrand random, Span<bit> dst)
         {
             var src = random.Bits(dst.Length);

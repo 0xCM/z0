@@ -10,12 +10,9 @@ namespace Z0
     using Z0;
 
     using static zfunc;
-    using static BitParts;
 
     partial class BitParts
     {
-
-
         /// <summary>
         /// Replicates the low bits of a source to an identified partition of an empty target
         /// </summary>
@@ -66,7 +63,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ulong project(ulong src, Part64x8 part)
             => Bits.scatter(src, (ulong)part);
-
 
         /// <summary>
         /// Replicates the low bits of a source to an identified partition of an empty target

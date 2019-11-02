@@ -97,7 +97,7 @@ namespace Z0.Test
             var last = BitMatrix32.Zero;            
             var sw = stopwatch(false);
 
-            var dst = BitMatrix32.Alloc();
+            var dst = BitMatrix.alloc(n32);
             for(var i=0; i< OpCount; i++)
             {
                 var m1 = Random.BitMatrix(n32);

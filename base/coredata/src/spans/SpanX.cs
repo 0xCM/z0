@@ -58,6 +58,17 @@ namespace Z0
             => src;
 
         /// <summary>
+        /// Presents a mutable natural span as a readonly natural span
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <typeparam name="T">The element type</typeparam>
+        [MethodImpl(Inline)]
+        public static ReadOnlySpan<N,T> ReadOnly<N,T>(this Span<N,T> src)
+            where N : unmanaged, ITypeNat
+            where T : unmanaged
+                => src;
+
+        /// <summary>
         /// Fills an allocated span from a sequence
         /// </summary>
         /// <param name="src">The source sequence</param>

@@ -15,13 +15,21 @@ namespace Z0
 
     partial class BitMatrix
     {        
-
+        /// <summary>
+        /// Loads a generic bitmatrix from a span
+        /// </summary>
+        /// <param name="src">The row content</param>
+        /// <typeparam name="T">The primal type over which the matrix is constructed</typeparam>
         [MethodImpl(Inline)]
-        public static BitMatrix<T> load<T>(Span<T> rows)
+        public static BitMatrix<T> load<T>(Span<T> src)
             where T : unmanaged
-                => new BitMatrix<T>(rows);
+                => new BitMatrix<T>(src);
 
-
+        /// <summary>
+        /// Loads a generic bitmatrix from a rowbit sequence
+        /// </summary>
+        /// <param name="rows">The row content</param>
+        /// <typeparam name="T">The primal type over which the matrix is constructed</typeparam>
         [MethodImpl(Inline)]
         public static BitMatrix<T> load<T>(RowBits<T> src)
             where T : unmanaged
@@ -30,18 +38,6 @@ namespace Z0
                 Errors.Throw($"{bitsize<T>()} != {src.RowCount}");
 
             return load(src.data);                
-        }
-
-        /// <summary>
-        /// Creates a canonical permutation matrix by swapping matrix rows of the identity matrix as specified by a permutation
-        /// </summary>
-        /// <param name="spec">The permutation spec</param>
-        [MethodImpl(Inline)]
-        public static BitMatrix64 from(Perm<N64> spec)
-        {
-            var id = BitMatrix64.Identity;
-            permute(spec, ref id);
-            return id;
         }
 
         /// <summary>
@@ -83,7 +79,5 @@ namespace Z0
             where N : ITypeNat, new()
             where T : unmanaged
                 => BitMatrix<M,N,T>.Load(src); 
-
     }
-
 }

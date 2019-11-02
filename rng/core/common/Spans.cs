@@ -74,16 +74,16 @@ namespace Z0
         /// Allocates a span of natural dimensions and populates it with random values
         /// </summary>
         /// <param name="random">The random source</param>
-        /// <param name="length">The natural length of the produced span</param>
+        /// <param name="n">The natural length of the produced span</param>
         /// <param name="domain">An optional domain to which values are constrained</param>
         /// <param name="filter">An optional filter that refines the domain</param>
         /// <typeparam name="N">The length type</typeparam>
         /// <typeparam name="T">The primal random value type</typeparam>
         [MethodImpl(Inline)]
-        public static Span<N,T> Span<N,T>(this IPolyrand random, N length = default, Interval<T>? domain = null, Func<T,bool> filter = null)
+        public static Span<N,T> Span<N,T>(this IPolyrand random, N n = default, Interval<T>? domain = null, Func<T,bool> filter = null)
             where T : unmanaged  
-            where N : ITypeNat, new()
-                => NatSpan.Load<N,T>(random.Span<T>((int)length.value, domain, filter));                                    
+            where N : unmanaged, ITypeNat
+                => NatSpan.load(n, random.Span<T>((int)n.value, domain, filter));                                    
 
         /// <summary>
         /// Allocates a table span of natural dimensions and populates the cells with random values
@@ -99,7 +99,7 @@ namespace Z0
             where T : unmanaged  
             where M : ITypeNat, new()
             where N : ITypeNat, new()
-                => NatSpan.Load<M,N,T>(random.Span<T>(nfunc.muli(rows,cols)), rows, cols);
+                => NatSpan.load<M,N,T>(random.Span<T>(nfunc.muli(rows,cols)), rows, cols);
 
         /// <summary>
         /// Allocates a table span of natural dimensions and populates the cells with random values that
@@ -117,7 +117,7 @@ namespace Z0
             where T : unmanaged  
             where M : ITypeNat, new()
             where N : ITypeNat, new()
-                => NatSpan.Load<M,N,T>(random.Span<T>(nfunc.muli(rows,cols),domain), rows, cols);
+                => NatSpan.load<M,N,T>(random.Span<T>(nfunc.muli(rows,cols),domain), rows, cols);
 
         /// <summary>
         /// Allocates a 128-bit blocked span and populates it with random values

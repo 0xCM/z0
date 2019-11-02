@@ -111,7 +111,15 @@ namespace Z0
                 => BitVector<N, T>.FromSpan(src);
 
         /// <summary>
-        /// Allocates a primal 8-bit bitvector
+        /// Allocates a 4-bit primal bitvector
+        /// </summary>
+        /// <param name="n">The width discriminator</param>
+        [MethodImpl(Inline)]
+        public static BitVector4 alloc(N4 n)
+            => BitVector4.Alloc();
+
+        /// <summary>
+        /// Allocates an 8-bit primal bitvector
         /// </summary>
         /// <param name="n">The width discriminator</param>
         [MethodImpl(Inline)]

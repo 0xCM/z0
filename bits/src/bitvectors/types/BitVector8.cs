@@ -17,18 +17,17 @@ namespace Z0
     {
         internal byte data;
 
-        public static readonly BitVector8 Zero = 0;
+        public static BitVector8 Zero => default;
 
-        public static readonly BitVector8 One = 1;
+        public static BitVector8 One => 1;
 
-        public static readonly BitVector8 Ones = byte.MaxValue;
+        public static BitVector8 Ones => byte.MaxValue;
         
         public const int Width = 8;
 
         public const int FirstPos = 0;
 
         public const int LastPos = Width - 1;
-
         
         /// <summary>
         /// Allocates a zero-filled vector
@@ -581,6 +580,14 @@ namespace Z0
         [MethodImpl(Inline)]
         public BitVector16 Concat(BitVector8 tail)
             => BitVector16.FromScalars(tail.data, data);
+
+        [MethodImpl(Inline)]
+        public BitVector16 Replicate(N2 n)
+            => Concat(this);
+
+        [MethodImpl(Inline)]
+        public BitVector32 Replicate(N4 n)
+            => Replicate(n2).Replicate(n2);
 
         /// <summary>
         /// Extracts the scalar represented by the vector

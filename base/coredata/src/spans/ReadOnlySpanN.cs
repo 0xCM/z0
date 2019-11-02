@@ -18,43 +18,68 @@ namespace Z0
     /// </summary>
     public ref struct ReadOnlySpan<N,T>
         where N : ITypeNat, new()
+        where T : unmanaged
     {
         ReadOnlySpan<T> data;
 
-        public static readonly int SpanLength = nati<N>();
+        public static int Count => nati<N>();
 
+        /// <summary>
+        /// Uncritically assigns a source span to the state store of natural span
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <typeparam name="U">The source element type</typeparam>
+        [MethodImpl(Inline)]
+        internal static ReadOnlySpan<N,U> Transfer<U>(ReadOnlySpan<U> src)
+            where U : unmanaged
+                => new ReadOnlySpan<N, U>(src);
+
+        /// <summary>
+        /// Verifies correct source span length prior to backing store assignment
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <typeparam name="U">The source element type</typeparam>
+        [MethodImpl(Inline)]
+        public static ReadOnlySpan<N,U> CheckedTransfer<U>(ReadOnlySpan<U> src)
+            where U : unmanaged
+        {
+            
+            require(src.Length >= Count, $"length(src) = {src.Length} < {Count} = SpanLength");               
+            return new ReadOnlySpan<N, U>(src);
+        }
+
+        [MethodImpl(Inline)]
         public static implicit operator ReadOnlySpan<T> (ReadOnlySpan<N,T> src)
             => src.data;
     
+        [MethodImpl(Inline)]
         public static implicit operator ReadOnlySpan<N,T> (T[] src)
-            => new ReadOnlySpan<N, T>(src);
+            => CheckedTransfer<T>(src);
 
+        [MethodImpl(Inline)]
         public static implicit operator ReadOnlySpan<N,T> (ReadOnlySpan<T> src)
-            => new ReadOnlySpan<N, T>(src);
+            => CheckedTransfer<T>(src);
 
+        [MethodImpl(Inline)]
         public static bool operator == (ReadOnlySpan<N,T> lhs, ReadOnlySpan<N,T> rhs)
             => lhs.data == rhs.data;
 
+        [MethodImpl(Inline)]
         public static bool operator != (ReadOnlySpan<N,T> lhs, ReadOnlySpan<N,T> rhs)
             => lhs.data != rhs.data;
 
         [MethodImpl(Inline)]
-        public ReadOnlySpan(ref T src)
-            => data = MemoryMarshal.CreateReadOnlySpan(ref src, SpanLength);
+        internal ReadOnlySpan(ref T src)
+            => data = MemoryMarshal.CreateReadOnlySpan(ref src, Count);
 
         [MethodImpl(Inline)]
-        public ReadOnlySpan(ref ReadOnlySpan<T> src)
-        {
-            require(src.Length == SpanLength, $"length(src) = {src.Length} != {SpanLength} = SpanLength");         
-            this.data = src;
-        }
+        internal ReadOnlySpan(Span<N,T> src)
+            => this.data = src;
+
 
         [MethodImpl(Inline)]
-        public ReadOnlySpan(ReadOnlySpan<T> src)
-        {
-            require(src.Length == SpanLength, $"length(src) = {src.Length} != {SpanLength} = SpanLength");         
-            this.data = src;
-        }
+        ReadOnlySpan(ReadOnlySpan<T> src)
+            => this.data = src;
 
         public ref readonly T this[int ix] 
         {
@@ -68,8 +93,15 @@ namespace Z0
         public ReadOnlySpan<T> Unsized
         {
             [MethodImpl(Inline)]
-            get => data;
+            get =>  data;
         }
+
+        public ref readonly T Head
+        {
+            [MethodImpl(Inline)]
+            get => ref MemoryMarshal.GetReference(data);
+        }
+
 
         [MethodImpl(Inline)]
         public T[] ToArray()
@@ -98,8 +130,13 @@ namespace Z0
         public bool TryCopyTo (Span<T> dst)
             => data.TryCopyTo(dst);
 
+        [MethodImpl(Inline)]
+        public ReadOnlySpan<N,S> As<S>()
+            where S : unmanaged
+                => Transfer(MemoryMarshal.Cast<T,S>(data));
+ 
         public int Length 
-            => SpanLength;
+            => Count;
             
         public bool IsEmpty
             => data.IsEmpty;

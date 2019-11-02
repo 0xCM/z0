@@ -13,7 +13,7 @@ namespace Z0.Logix
     /// <summary>
     /// Classifies operator arities
     /// </summary>
-    public enum OpArityKind : uint
+    public enum OpArityKind : byte
     {
        
         /// <summary>

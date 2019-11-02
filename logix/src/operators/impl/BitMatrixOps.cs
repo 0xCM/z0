@@ -37,213 +37,213 @@ namespace Z0.Logix
 
 
         [MethodImpl(Inline)]
-        public static BitMatrix<T> @false<T>(BitMatrix<T> A)
+        public static BitMatrix<T> @false<T>(in BitMatrix<T> A)
             where T:unmanaged
                 => @false<T>();
 
 
         [MethodImpl(Inline)]
-        public static BitMatrix<T> @true<T>(BitMatrix<T> A)
+        public static BitMatrix<T> @true<T>(in BitMatrix<T> A)
             where T:unmanaged
                 => @true<T>();
 
         [MethodImpl(Inline)]
-        public static BitMatrix<T> not<T>(BitMatrix<T> A)
+        public static BitMatrix<T> not<T>(in BitMatrix<T> A)
             where T : unmanaged
                 => BitMatrix.not(A);
 
         [MethodImpl(Inline)]
-        public static BitMatrix<T> not<T>(BitMatrix<T> A, ref BitMatrix<T> Z)
+        public static ref BitMatrix<T> not<T>(in BitMatrix<T> A, ref BitMatrix<T> Z)
             where T : unmanaged
-                => BitMatrix.not(A, ref Z);
+                => ref BitMatrix.not(A, ref Z);
 
         [MethodImpl(Inline)]
-        public static BitMatrix<T> identity<T>(BitMatrix<T> A)
+        public static BitMatrix<T> identity<T>(in BitMatrix<T> A)
             where T : unmanaged
                 => A;
 
         [MethodImpl(Inline)]
-        public static BitMatrix<T> identity<T>(BitMatrix<T> A, ref BitMatrix<T> Z)
+        public static ref BitMatrix<T> identity<T>(in BitMatrix<T> A, ref BitMatrix<T> Z)
             where T : unmanaged
         {
             Z.Update(A);
-            return Z;
+            return ref Z;
         }
 
         [MethodImpl(Inline)]
-        public static BitMatrix<T> @false<T>(BitMatrix<T> A, BitMatrix<T> B)
+        public static BitMatrix<T> @false<T>(in BitMatrix<T> A, in BitMatrix<T> B)
             where T:unmanaged
                 => @false<T>();
 
         [MethodImpl(Inline)]
-        public static BitMatrix<T> @true<T>(BitMatrix<T> A, BitMatrix<T> B)
+        public static BitMatrix<T> @true<T>(in BitMatrix<T> A, in BitMatrix<T> B)
             where T:unmanaged
                 => @true<T>();
 
         [MethodImpl(Inline)]
-        public static BitMatrix<T> and<T>(BitMatrix<T> A, BitMatrix<T> B)
+        public static BitMatrix<T> and<T>(in BitMatrix<T> A, in BitMatrix<T> B)
             where T : unmanaged
                 => BitMatrix.and(A,B);
 
         [MethodImpl(Inline)]
-        public static BitMatrix<T> and<T>(BitMatrix<T> A, BitMatrix<T> B, ref BitMatrix<T> Z)
+        public static ref BitMatrix<T> and<T>(in BitMatrix<T> A, in BitMatrix<T> B, ref BitMatrix<T> Z)
             where T : unmanaged
-                => BitMatrix.and(A,B, ref Z);
+                => ref BitMatrix.and(A,B, ref Z);
 
         [MethodImpl(Inline)]
-        public static BitMatrix<T> nand<T>(BitMatrix<T> A, BitMatrix<T> B)
+        public static BitMatrix<T> nand<T>(in BitMatrix<T> A, in BitMatrix<T> B)
             where T : unmanaged
                 => BitMatrix.nand(A,B);
 
         [MethodImpl(Inline)]
-        public static BitMatrix<T> nand<T>(BitMatrix<T> A, BitMatrix<T> B, ref BitMatrix<T> Z)
+        public static ref BitMatrix<T> nand<T>(in BitMatrix<T> A, in BitMatrix<T> B, ref BitMatrix<T> Z)
             where T : unmanaged
-                => BitMatrix.nand(A,B, ref Z);
+                => ref BitMatrix.nand(A,B, ref Z);
 
         [MethodImpl(Inline)]
-        public static BitMatrix<T> or<T>(BitMatrix<T> A, BitMatrix<T> B)
+        public static BitMatrix<T> or<T>(in BitMatrix<T> A, in BitMatrix<T> B)
             where T : unmanaged
                 => BitMatrix.or(A,B);
 
         [MethodImpl(Inline)]
-        public static BitMatrix<T> or<T>(BitMatrix<T> A, BitMatrix<T> B, ref BitMatrix<T> Z)
+        public static ref BitMatrix<T> or<T>(in BitMatrix<T> A, in BitMatrix<T> B, ref BitMatrix<T> Z)
             where T : unmanaged
-                => BitMatrix.or(A,B, ref Z);
+                => ref BitMatrix.or(A,B, ref Z);
 
         [MethodImpl(Inline)]
-        public static BitMatrix<T> nor<T>(BitMatrix<T> A, BitMatrix<T> B)
+        public static BitMatrix<T> nor<T>(in BitMatrix<T> A, in BitMatrix<T> B)
             where T : unmanaged
                 => BitMatrix.nor(A,B);
 
         [MethodImpl(Inline)]
-        public static BitMatrix<T> nor<T>(BitMatrix<T> A, BitMatrix<T> B, ref BitMatrix<T> Z)
+        public static ref BitMatrix<T> nor<T>(in BitMatrix<T> A, in BitMatrix<T> B, ref BitMatrix<T> Z)
             where T : unmanaged
-                => BitMatrix.nor(A,B, ref Z);
+                => ref BitMatrix.nor(A,B, ref Z);
 
         [MethodImpl(Inline)]
-        public static BitMatrix<T> xor<T>(BitMatrix<T> A, BitMatrix<T> B)
+        public static BitMatrix<T> xor<T>(in BitMatrix<T> A, in BitMatrix<T> B)
             where T : unmanaged
                 => BitMatrix.xor(A,B);
 
         [MethodImpl(Inline)]
-        public static BitMatrix<T> xor<T>(BitMatrix<T> A, BitMatrix<T> B, ref BitMatrix<T> Z)
+        public static ref BitMatrix<T> xor<T>(in BitMatrix<T> A, in BitMatrix<T> B, ref BitMatrix<T> Z)
             where T : unmanaged
-                => BitMatrix.xor(A,B, ref Z);
+                => ref BitMatrix.xor(A,B, ref Z);
 
         [MethodImpl(Inline)]
-        public static BitMatrix<T> xnor<T>(BitMatrix<T> A, BitMatrix<T> B)
+        public static BitMatrix<T> xnor<T>(in BitMatrix<T> A, in BitMatrix<T> B)
             where T : unmanaged
                 => BitMatrix.xnor(A,B);
 
         [MethodImpl(Inline)]
-        public static BitMatrix<T> xnor<T>(BitMatrix<T> A, BitMatrix<T> B, ref BitMatrix<T> Z)
+        public static ref BitMatrix<T> xnor<T>(in BitMatrix<T> A, in BitMatrix<T> B, ref BitMatrix<T> Z)
             where T : unmanaged
-                => BitMatrix.xnor(A,B, ref Z);
+                => ref BitMatrix.xnor(A,B, ref Z);
 
         [MethodImpl(Inline)]
-        public static BitMatrix<T> left<T>(BitMatrix<T> A, BitMatrix<T> B)
+        public static BitMatrix<T> left<T>(in BitMatrix<T> A, in BitMatrix<T> B)
             where T : unmanaged
                 => A;
 
         [MethodImpl(Inline)]
-        public static BitMatrix<T> left<T>(BitMatrix<T> A, BitMatrix<T> B, ref BitMatrix<T> Z)
+        public static ref BitMatrix<T> left<T>(in BitMatrix<T> A, in BitMatrix<T> B, ref BitMatrix<T> Z)
             where T : unmanaged
         {
             Z.Update(A);
-            return Z;
+            return ref Z;
         }
 
         [MethodImpl(Inline)]
-        public static BitMatrix<T> right<T>(BitMatrix<T> A, BitMatrix<T> B)
+        public static BitMatrix<T> right<T>(in BitMatrix<T> A, in BitMatrix<T> B)
             where T : unmanaged
                 => B;
 
         [MethodImpl(Inline)]
-        public static BitMatrix<T> right<T>(BitMatrix<T> A, BitMatrix<T> B, ref BitMatrix<T> Z)
+        public static ref BitMatrix<T> right<T>(in BitMatrix<T> A, in BitMatrix<T> B, ref BitMatrix<T> Z)
             where T : unmanaged
         {
             Z.Update(B);
-            return Z;
+            return ref Z;
         }
 
         [MethodImpl(Inline)]
-        public static BitMatrix<T> lnot<T>(BitMatrix<T> A, BitMatrix<T> B)
+        public static BitMatrix<T> lnot<T>(in BitMatrix<T> A, in BitMatrix<T> B)
             where T : unmanaged
                 => not(A);
 
         [MethodImpl(Inline)]
-        public static BitMatrix<T> leftnot<T>(BitMatrix<T> A, BitMatrix<T> B, ref BitMatrix<T> Z)
+        public static ref BitMatrix<T> leftnot<T>(in BitMatrix<T> A, in BitMatrix<T> B, ref BitMatrix<T> Z)
             where T : unmanaged
-                => not(A, ref Z);
+                => ref not(A, ref Z);
 
         [MethodImpl(Inline)]
-        public static BitMatrix<T> rnot<T>(BitMatrix<T> A, BitMatrix<T> B)
+        public static BitMatrix<T> rnot<T>(in BitMatrix<T> A, in BitMatrix<T> B)
             where T : unmanaged
                 => not(B);
 
         [MethodImpl(Inline)]
-        public static BitMatrix<T> rightnot<T>(BitMatrix<T> A, BitMatrix<T> B, ref BitMatrix<T> Z)
+        public static ref BitMatrix<T> rightnot<T>(in BitMatrix<T> A, in BitMatrix<T> B, ref BitMatrix<T> Z)
             where T : unmanaged
-                => not(B, ref Z);
+                => ref not(B, ref Z);
 
         [MethodImpl(Inline)]
-        public static BitMatrix<T> imply<T>(BitMatrix<T> A, BitMatrix<T> B)
+        public static BitMatrix<T> imply<T>(in BitMatrix<T> A, in BitMatrix<T> B)
             where T : unmanaged
                 => BitMatrix.imply(A,B);
 
         [MethodImpl(Inline)]
-        public static BitMatrix<T> imply<T>(BitMatrix<T> A, BitMatrix<T> B, ref BitMatrix<T> Z)
+        public static ref BitMatrix<T> imply<T>(in BitMatrix<T> A, in BitMatrix<T> B, ref BitMatrix<T> Z)
             where T : unmanaged
-                => BitMatrix.imply(A,B, ref Z);
+                => ref BitMatrix.imply(A,B, ref Z);
 
         [MethodImpl(Inline)]
-        public static BitMatrix<T> notimply<T>(BitMatrix<T> A, BitMatrix<T> B)
+        public static BitMatrix<T> notimply<T>(in BitMatrix<T> A, in BitMatrix<T> B)
             where T : unmanaged
                 => BitMatrix.notimply(A,B);
 
         [MethodImpl(Inline)]
-        public static BitMatrix<T> notimply<T>(BitMatrix<T> A, BitMatrix<T> B, ref BitMatrix<T> Z)
+        public static ref BitMatrix<T> notimply<T>(in BitMatrix<T> A, in BitMatrix<T> B, ref BitMatrix<T> Z)
             where T : unmanaged
-                => BitMatrix.notimply(A,B, ref Z);
+                => ref BitMatrix.notimply(A,B, ref Z);
 
         [MethodImpl(Inline)]
-        public static BitMatrix<T> cimply<T>(BitMatrix<T> A, BitMatrix<T> B)
+        public static BitMatrix<T> cimply<T>(in BitMatrix<T> A, in BitMatrix<T> B)
             where T : unmanaged
                 => BitMatrix.cimply(A,B);
 
         [MethodImpl(Inline)]
-        public static BitMatrix<T> cimply<T>(BitMatrix<T> A, BitMatrix<T> B, ref BitMatrix<T> Z)
+        public static ref BitMatrix<T> cimply<T>(in BitMatrix<T> A, in BitMatrix<T> B, ref BitMatrix<T> Z)
             where T : unmanaged
-                => BitMatrix.cimply(A,B, ref Z);
+                => ref BitMatrix.cimply(A,B, ref Z);
 
         [MethodImpl(Inline)]
-        public static BitMatrix<T> cnotimply<T>(BitMatrix<T> A, BitMatrix<T> B)
+        public static BitMatrix<T> cnotimply<T>(in BitMatrix<T> A,in  BitMatrix<T> B)
             where T : unmanaged
                 => BitMatrix.cnotimply(A,B);
 
         [MethodImpl(Inline)]
-        public static BitMatrix<T> cnotimply<T>(BitMatrix<T> A, BitMatrix<T> B, ref BitMatrix<T> Z)
+        public static ref BitMatrix<T> cnotimply<T>(in BitMatrix<T> A, in BitMatrix<T> B, ref BitMatrix<T> Z)
             where T : unmanaged
-                => BitMatrix.cnotimply(A,B, ref Z);
+                => ref BitMatrix.cnotimply(A,B, ref Z);
 
         [MethodImpl(Inline)]
-        public static BitMatrix<T> xornot<T>(BitMatrix<T> A, BitMatrix<T> B)
+        public static BitMatrix<T> xornot<T>(in BitMatrix<T> A, in BitMatrix<T> B)
             where T : unmanaged
                 => BitMatrix.xornot(A,B);
 
         [MethodImpl(Inline)]
-        public static BitMatrix<T> xornot<T>(BitMatrix<T> A, BitMatrix<T> B, ref BitMatrix<T> Z)
+        public static ref BitMatrix<T> xornot<T>(in BitMatrix<T> A, in BitMatrix<T> B, ref BitMatrix<T> Z)
             where T : unmanaged
-                => BitMatrix.xornot(A,B, ref Z);
+                => ref BitMatrix.xornot(A,B, ref Z);
 
         [MethodImpl(Inline)]
-        public static BitMatrix<T> select<T>(BitMatrix<T> A, BitMatrix<T> B, BitMatrix<T> C)
+        public static BitMatrix<T> select<T>(in BitMatrix<T> A, in BitMatrix<T> B, in BitMatrix<T> C)
             where T : unmanaged
                 => BitMatrix.select(A,B,C);
 
         [MethodImpl(Inline)]
-        public static BitMatrix<T> select<T>(BitMatrix<T> A, BitMatrix<T> B, BitMatrix<T> C, ref BitMatrix<T> Z)
+        public static ref BitMatrix<T> select<T>(in BitMatrix<T> A, in BitMatrix<T> B, in BitMatrix<T> C, ref BitMatrix<T> Z)
             where T : unmanaged
-                => BitMatrix.select(A,B,C, ref Z);
+                => ref BitMatrix.select(A,B,C, ref Z);
     }
 }

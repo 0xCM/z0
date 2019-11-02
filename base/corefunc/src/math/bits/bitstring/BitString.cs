@@ -280,13 +280,28 @@ namespace Z0
             return count;
         }
 
-        [MethodImpl(Inline)]        
+        /// <summary>
+        /// Creates a replica of the bitstring
+        /// </summary>
         public BitString Replicate()
         {
             Span<byte> dst = new byte[Length];
             bitseq.CopyTo(dst);
             return new BitString(dst);
         }
+
+        /// <summary>
+        /// Copies n replicas to a new bitstring
+        /// </summary>
+        /// <param name="n">Then number of times to replicate the bistring in the target</param>
+        public BitString Replicate(int n)
+        {            
+            Span<byte> dst = new byte[Length*n];
+            for(var i=0; i<n; i++)
+                bitseq.CopyTo(dst.Slice(i*Length));
+            return new BitString(dst);
+        }
+
 
         /// <summary>
         /// Rotates the bits leftwards by a specified offset
@@ -358,11 +373,23 @@ namespace Z0
         /// <summary>
         /// Renders the content as a span of bits
         /// </summary>
-        public Span<bit> ToBits()
+        public Span<bit> ToBitSpan()
         {
             Span<bit> dst = new bit[bitseq.Length];
             for(var i=0; i< bitseq.Length; i++)
-                dst[i] = bitseq[i] == 1;
+                dst[i] = (bit)bitseq[i];
+            return dst;
+        }
+
+        /// <summary>
+        /// Renders the content as a natural bitspan
+        /// </summary>
+        public Span<N,bit> ToBitSpan<N>(N n = default)
+            where N : unmanaged, ITypeNat
+        {
+            var dst = NatSpan.alloc<N,bit>();
+            for(var i=0; i< bitseq.Length; i++)
+                dst[i] = (bit)bitseq[i];
             return dst;
         }
 
