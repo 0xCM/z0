@@ -227,7 +227,7 @@ namespace Z0
         /// <param name="row">The row index</param>
         /// <param name="col">The column index</param>
         /// <param name="src">The source value</param>
-        public Bit this[int row, int col]
+        public bit this[int row, int col]
         {
             [MethodImpl(Inline)]
             get => GetBit(row, col);
@@ -270,7 +270,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public void RowSwap(int i, int j)
             => data.Swap(i,j);
-
 
         /// <summary>
         /// Returns the data for an index-identified column
@@ -321,21 +320,6 @@ namespace Z0
             return dst;
         }
 
-        /// <summary>
-        /// Loads a CPU vector from matrix content
-        /// </summary>
-        /// <param name="dst">The target vector</param>
-        /// <param name="row">The row index of where the load should begin</param>
-        [MethodImpl(Inline)]
-        public readonly ref Vec256<ulong> GetCells(int row, out Vec256<ulong> dst)
-        {
-            dst = load(ref data[row]);
-            return ref dst;
-        }
-
-        [MethodImpl(Inline)]
-        public void Load(int row, out Vector256<ulong> dst)
-            => dst = dinx.vload(in data[row], out dst);
 
         /// <summary>
         /// Counts the number of enabled bits in the matrix
@@ -361,7 +345,7 @@ namespace Z0
         /// <summary>
         /// A reference to the first row of the matrix
         /// </summary>
-        public ref ulong Head
+        public unsafe ref ulong Head
         {
             [MethodImpl(Inline)] 
             get => ref data[0];
@@ -386,7 +370,6 @@ namespace Z0
         {
             BitMatrix.and(this, rhs, ref this);
         }
-
 
         /// <summary>
         /// Computes the bitwise XOR of the source matrix and the operand in-place
@@ -512,8 +495,8 @@ namespace Z0
         public unsafe ulong* HeadPtr
         {
             [MethodImpl(Inline)]
-            get => refptr(ref Head);
-        }
+             get => (ulong*)Unsafe.AsPointer(ref data[0]);
+       }
 
     }
 }

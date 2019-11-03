@@ -194,7 +194,7 @@ namespace Z0
         /// <typeparam name="T">The primal type</typeparam>
         /// <param name="offset">The index of the first bit </param>
         [MethodImpl(Inline)]
-        public T TakeValue<T>(int offset = 0)
+        public T TakeScalar<T>(int offset = 0)
             where T : unmanaged
                 => PackSingle<T>(offset, Unsafe.SizeOf<T>());
 
@@ -204,7 +204,7 @@ namespace Z0
         /// <param name="offset">The index of the first bit </param>
         [MethodImpl(Inline)]
         public byte TakeUInt8(int offset = 0)
-            => TakeValue<byte>(offset);
+            => TakeScalar<byte>(offset);
 
         /// <summary>
         /// Renders a bitstring segment as a packed ushort value
@@ -212,7 +212,7 @@ namespace Z0
         /// <param name="offset">The index of the first bit </param>
         [MethodImpl(Inline)]
         public ushort TakeUInt16(int offset = 0)
-            => TakeValue<ushort>(offset);
+            => TakeScalar<ushort>(offset);
 
         /// <summary>
         /// Renders a bitstring segment as a packed uint value
@@ -220,7 +220,7 @@ namespace Z0
         /// <param name="offset">The index of the first bit </param>
         [MethodImpl(Inline)]
         public uint TakeUInt32(int offset = 0)
-            => TakeValue<uint>(offset);
+            => TakeScalar<uint>(offset);
 
         /// <summary>
         /// Renders a bitstring segment as a packed ulong value
@@ -228,7 +228,7 @@ namespace Z0
         /// <param name="offset">The index of the first bit </param>
         [MethodImpl(Inline)]
         public ulong TakeUInt64(int offset = 0)
-            => TakeValue<ulong>(offset);
+            => TakeScalar<ulong>(offset);
 
         /// <summary>
         /// Packs a section of the represented bits into a bytespan

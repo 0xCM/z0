@@ -22,7 +22,7 @@ namespace Z0
         /// <summary>
         /// Correlates linear bit positions and storage segments
         /// </summary>
-        readonly CellIndex<T>[] BitMap;
+        readonly BitCellIndex<T>[] BitMap;
 
         /// <summary>
         /// The maximum number of bits that can be represented by the vector
@@ -308,7 +308,7 @@ namespace Z0
         /// </summary>
         /// <param name="pos">The bit position</param>
         [MethodImpl(Inline)]
-        public readonly Bit Get(BitPos pos)
+        public readonly Bit Get(int pos)
         {
             ref readonly var loc = ref Location(pos);
             return gbits.test(data[loc.Segment], loc.Offset);
@@ -329,10 +329,10 @@ namespace Z0
         /// <param name="pos">The absolute bit position</param>
         /// <param name="value">The value the bit will receive</param>
         [MethodImpl(Inline)]
-        public void Set(BitPos pos, bit value)
+        public void Set(int pos, bit value)
         {
             ref readonly var loc = ref Location(pos);
-            gbits.set(ref data[loc.Segment], loc.Offset, value);
+            gbits.set(ref data[loc.Segment], (byte)loc.Offset, value);
         }
 
         /// <summary>
@@ -340,7 +340,7 @@ namespace Z0
         /// </summary>
         /// <param name="pos">The position of the bit to test</param>
         [MethodImpl(Inline)]
-        public bool Test(BitPos pos)
+        public bool Test(int pos)
             => Get(pos);
 
         /// <summary>
@@ -348,7 +348,7 @@ namespace Z0
         /// </summary>
         /// <param name="pos">The position of the bit to enable</param>
         [MethodImpl(Inline)]
-        public void Enable(BitPos pos)
+        public void Enable(int pos)
             => Set(pos, bit.On);
 
         /// <summary>
@@ -356,24 +356,10 @@ namespace Z0
         /// </summary>
         /// <param name="pos">The position of the bit to disable</param>
         [MethodImpl(Inline)]
-        public void Disable(BitPos pos)
+        public void Disable(int pos)
         {
             ref readonly var cell = ref BitMap[pos];
-            gbits.disable(ref data[cell.Segment], cell.Offset);
-        }
-
-        /// <summary>
-        /// Computes the scalar product between this vector and another of identical length
-        /// </summary>
-        /// <param name="y">The right vector</param>
-        public bit Dot(BitCells<T> y)
-        {
-            require(this.Length == y.Length);
-
-            var result = bit.Off;
-            for(var i=0; i<Length; i++)
-                result ^= this[i] & y[i];
-            return result;
+            gbits.disable(ref data[cell.Segment], (byte)cell.Offset);
         }
 
         /// <summary>
@@ -382,14 +368,14 @@ namespace Z0
         public ref T Head
         {
             [MethodImpl(Inline)]
-            get => ref Data[0];
+            get => ref head(data);
         }
 
         [MethodImpl(Inline)]
         public void Toggle(int pos)
         {         
             ref readonly var loc = ref Location(pos);
-            BitMaskG.toggle(ref data[loc.Segment],  loc.Offset);
+            BitMaskG.toggle(ref data[loc.Segment],  (byte)loc.Offset);
         }
 
         [MethodImpl(Inline)]
@@ -457,7 +443,7 @@ namespace Z0
         /// </summary>
         /// <param name="pos">The bit position</param>
         [MethodImpl(Inline)]
-        readonly ref readonly CellIndex<T> Location(int pos)
+        readonly ref readonly BitCellIndex<T> Location(int pos)
             => ref BitMap[pos];
 
         /// <summary>
@@ -465,7 +451,7 @@ namespace Z0
         /// </summary>
         /// <param name="pos">The segmented bit position</param>
         [MethodImpl(Inline)]
-        public ref T Segment(in CellIndex<T> pos)
+        public ref T Segment(in BitCellIndex<T> pos)
             => ref data[pos.Segment];
 
         /// <summary>
@@ -484,7 +470,7 @@ namespace Z0
         readonly Span<T> Segments(int pos)
             => data.Slice(0, Location(pos).Segment - 1);
 
-        T Extract(in CellIndex<T> first, in CellIndex<T> last, bool describe = false)
+        T Extract(in BitCellIndex<T> first, in BitCellIndex<T> last, bool describe = false)
         {
 
             var sameSeg = first.Segment == last.Segment;
@@ -496,7 +482,7 @@ namespace Z0
                 throw new ArgumentException($"The total count {wantedCount} exceeds segment capacity of {CellCapacity}");
 
             ref var seg1 = ref Segment(in first);
-            var part1 = gbits.extract(seg1, first.Offset, (byte)firstCount);
+            var part1 = gbits.extract(seg1, (byte)first.Offset, (byte)firstCount);
             
             if(sameSeg)
                 return part1;

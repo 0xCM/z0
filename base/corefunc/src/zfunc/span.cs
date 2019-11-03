@@ -51,12 +51,13 @@ partial class zfunc
         where T : unmanaged
         where S : unmanaged
     {
+        
         var srcLen = (uint)(size<S>() * src.Length);
         var dstLen = (uint)(size<T>() * dst.Length);
         if(srcLen != dstLen)
             return false;
 
-        zfunc.memcpy(ref head(src), ref head(dst), srcLen);
+        zfunc.memcpy(ref head(ref src), ref head(ref dst), srcLen);
         return true;
     }
 
@@ -244,7 +245,7 @@ partial class zfunc
     [MethodImpl(Inline)]
     public static void bytes<T>(in T src, Span<byte> dst)
         where T : unmanaged
-            => As.generic<T>(ref dst[0]) = src;
+            => As.generic<T>(ref head(dst)) = src;
 
     /// <summary>
     /// Converts the source value to a bytespan
@@ -273,9 +274,15 @@ partial class zfunc
     /// <param name="src">The source span</param>
     /// <typeparam name="T">The element type</typeparam>
     [MethodImpl(Inline)]
-    public static ref T head<T>(T[] src)
-        =>  ref src[0];
+    public static unsafe ref T first<T>(T[] src)
+        where T : unmanaged
+            => ref src[0];
 
+    [MethodImpl(Inline)]
+    public static unsafe ref T head<T>(ref T[] src)
+        where T : unmanaged
+            => ref src[0];
+    
     /// <summary>
     /// Returns a reference to the location of the first span element
     /// </summary>

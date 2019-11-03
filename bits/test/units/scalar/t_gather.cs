@@ -14,7 +14,7 @@ namespace Z0.Test
 
     public class t_gather : ScalarBitTest<t_gather>
     {            
-        public void gather__masks()
+        public void gather_masks()
         {
             var m1 = BitMask32.Even;
             var x1 = Bits.gather(UInt32.MaxValue, m1);
@@ -33,14 +33,10 @@ namespace Z0.Test
                 Claim.eq(y2[i], i % 8 == 0 ? Bit.On : Bit.Off);
 
         }
+
         public void gather_8u()
         {
             gather_check<byte>();
-        }
-
-        public void gather_8u_bench()
-        {
-            Collect(gather_bench<byte>());
         }
 
         public void gather_16u()
@@ -48,48 +44,17 @@ namespace Z0.Test
             gather_check<ushort>();
         }
 
-        public void gather_16u_bench()
-        {
-            Collect(gather_bench<ushort>());
-        }
-
         public void gather_32u()
         {
             gather_check<uint>();
         }
 
-        public void gather_32u_bench()
-        {
-            Collect(gather_bench<uint>());
-        }
 
         public void gather_64u()
         {
             gather_check<ulong>();
         }
-
-        public void gather_64u_bench()
-        {
-            Collect(gather_bench<ulong>());
-        }
         
-        OpTime gather_bench<T>()
-            where T : unmanaged
-        {
-            var opcount = CycleCount * RoundCount;
-            var sw = stopwatch(false);
-            for(var i=0; i<opcount; i++)
-            {
-                var src = Random.Next<T>();
-                var mask = Random.Next<T>();
-                sw.Start();
-                var dst = gbits.gather(src,mask);
-                sw.Stop();
-            }
-            
-            return (opcount, sw, $"gather{bitsize<T>()}");        
-        }
-
         void gather_check<T>()
             where T : unmanaged
         {

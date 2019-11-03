@@ -110,11 +110,7 @@ namespace Z0
             Disassemble(typeof(SimdPack));
             Disassemble(typeof(logixoc));
             Disassemble(typeof(BitParts));  
-            //Disassemble(typeof(BitVector));   
-            // Disassemble(typeof(math));
-            // Disassemble(typeof(dinx));    
-            // Disassemble(typeof(Bits));    
-            //EmitAsm(Designators.Logix.Designated);  
+            Disassemble(typeof(Bits));
         }
 
         public unsafe void ListMethods(Type t)

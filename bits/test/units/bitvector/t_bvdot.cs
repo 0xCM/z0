@@ -95,23 +95,30 @@ namespace Z0.Test
             dot_natural_check<N16,ushort>();
             dot_natural_check<N32,uint>();
             dot_natural_check<N64,ulong>();
-
-
             dot_natural_check<N64,uint>();
-
-            dot_natural_check<N128,ushort>();
-            dot_natural_check<N128,uint>();
-            dot_natural_check<N256,uint>();
-            dot_natural_check<N256,ulong>();
-            dot_natural_check<N2048,uint>();
 
             dot_natural_check<N10,uint>();
             dot_natural_check<N20,uint>();
-
+            dot_natural_check(n25,(ushort)0);
+            dot_natural_check(n27, ushort.MinValue);
 
             dot_natural_check(n63,0ul);
             dot_natural_check(n87,(byte)0);
-            dot_natural_check(n25,(ushort)0);
+
+            dot_natural_check<N128,ushort>();
+            dot_natural_check<N128,uint>();
+
+            var n217 = natseq(n2,n1,n7);
+
+            dot_natural_check(n217, uint.MinValue);
+            dot_natural_check(n217, ushort.MinValue);
+            dot_natural_check(n217, ulong.MinValue);
+            dot_natural_check<N256,uint>();
+            dot_natural_check<N256,ulong>();
+
+
+
+
 
         }
 
@@ -255,6 +262,8 @@ namespace Z0.Test
                 var y = Random.BitVector<N,T>();
                 bit a = x % y;
                 var b = modprod(x,y);
+                if(a != b)
+                    Trace($"{bitcount}x{moniker<T>()} is a problem");
                 Claim.yea(a == b);            
             }
             NatCaseStart<N,T>();

@@ -49,7 +49,7 @@ namespace Z0
             var C = BitMatrix64.Alloc();
             for(var i=0; i<A.RowCount; i++)
             for(var j=0; j<B.ColCount; j++)
-                C[i,j] = A.GetBit(i,j) & B[i,j];
+                C[i,j] = A[i,j] & B[i,j];
             return C;
         }
     }

@@ -202,18 +202,9 @@ namespace Z0
         }
 
         /// <summary>
-        /// The data enclosed by the matrix
-        /// </summary>
-        public ushort[] Rows
-        {
-            [MethodImpl(Inline)] 
-            get => data;
-        }
-
-        /// <summary>
         /// A reference to the first row of the matrix
         /// </summary>
-        public ref ushort Head
+        public unsafe ref ushort Head
         {
             [MethodImpl(Inline)] 
             get => ref data[0];
@@ -225,8 +216,8 @@ namespace Z0
         /// <param name="row">The row index</param>
         /// <param name="col">The column index</param>
         [MethodImpl(Inline)]
-        public readonly Bit GetBit(int row, int col)
-            => BitMask.test(data[row], col);
+        public bit GetBit(int row, int col)
+            => BitMask.test(skip(in Head, row), col);
 
         /// <summary>
         /// Sets the bit in a specified cell
@@ -235,8 +226,8 @@ namespace Z0
         /// <param name="col">The column index</param>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
-        public void SetBit(int row, int col, Bit src)
-            => BitMask.set(ref data[row], (byte)col, src);
+        public void SetBit(int row, int col, bit src)
+            => BitMask.set(ref seek(ref Head, row), (byte)col, src);
 
         /// <summary>
         /// Reads/manipulates the bit in a specified cell
@@ -244,7 +235,7 @@ namespace Z0
         /// <param name="row">The row index</param>
         /// <param name="col">The column index</param>
         /// <param name="src">The source value</param>
-        public Bit this[int row, int col]
+        public bit this[int row, int col]
         {
             [MethodImpl(Inline)]
             get => GetBit(row,col);
@@ -285,7 +276,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public void RowSwap(int i, int j)
             => data.Swap(i,j);
-
 
         [MethodImpl(Inline)]
         public readonly BitVector16 RowVector(int index)
@@ -413,7 +403,7 @@ namespace Z0
         public unsafe ushort* HeadPtr
         {
             [MethodImpl(Inline)]
-            get => refptr(ref Head);
+            get => (ushort*)Unsafe.AsPointer(ref data[0]);
         }
 
    }

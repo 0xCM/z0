@@ -23,24 +23,14 @@ namespace Z0
         }
 
         public void binary_digits_16u()
-        {
-            binary_digits_check<ushort>();
-        }
+            => binary_digits_check<ushort>();
 
         public void binary_digits_32u()
-        {
-            binary_digits_check<uint>();
-        }
+            => binary_digits_check<uint>();
 
         public void binary_digits_64u()
-        {
-            binary_digits_check<ulong>();
-        }
+            => binary_digits_check<ulong>();
 
-        public void binary_digits_64i()
-        {
-            binary_digits_check<long>();
-        }
 
         public void decimal_digit_match_8u()
         {

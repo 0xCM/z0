@@ -63,9 +63,9 @@ namespace Z0
         /// </summary>
         static readonly BitSize CellBitSize = Unsafe.SizeOf<T>()*8;
 
-        static readonly GridSpec<T> GridSpec = (CellBitSize, RowBitCount, ColBitCount);
+        static readonly BitGridSpec<T> GridSpec = (CellBitSize, RowBitCount, ColBitCount);
         
-        public static readonly GridLayout<T> Layout = GridSpec.CalcLayout();
+        public static readonly BitGridLayout<T> Layout = GridSpec.CalcLayout();
 
         /// <summary>
         /// Allocates a Zero-filled mxn matrix
@@ -169,7 +169,7 @@ namespace Z0
         public void SetBit(int row, int col, bit value)
         {
             var cell = Layout.Row(row)[col];
-            gbits.set(ref data[cell.Segment], cell.Offset, value);
+            gbits.set(ref data[cell.Segment], (byte)cell.Offset, value);
         }
 
         /// <summary>

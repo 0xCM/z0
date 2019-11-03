@@ -1,84 +1,4 @@
-// 2019-10-31 21:45:37:152
-bool test(byte src, int pos)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: call Z0.bit Z0.BitMask::test(System.Byte,System.Int32)
-    IL_0007: call System.Boolean Z0.bit::op_Implicit(Z0.bit)
-    IL_000C: ret
-
-}
-bool test(short src, int pos)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: call Z0.bit Z0.BitMask::test(System.Int16,System.Int32)
-    IL_0007: call System.Boolean Z0.bit::op_Implicit(Z0.bit)
-    IL_000C: ret
-
-}
-bool test(ushort src, int pos)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: call Z0.bit Z0.BitMask::test(System.UInt16,System.Int32)
-    IL_0007: call System.Boolean Z0.bit::op_Implicit(Z0.bit)
-    IL_000C: ret
-
-}
-bool test(int src, int pos)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: call Z0.bit Z0.BitMask::test(System.Int32,System.Int32)
-    IL_0007: call System.Boolean Z0.bit::op_Implicit(Z0.bit)
-    IL_000C: ret
-
-}
-bool test(uint src, int pos)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: call Z0.bit Z0.BitMask::test(System.UInt32,System.Int32)
-    IL_0007: call System.Boolean Z0.bit::op_Implicit(Z0.bit)
-    IL_000C: ret
-
-}
-bool test(long src, int pos)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: call System.Boolean Z0.BitMask::test(System.Int64,System.Int32)
-    IL_0007: ret
-
-}
-bool test(ulong src, int pos)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: call Z0.bit Z0.BitMask::test(System.UInt64,System.Int32)
-    IL_0007: call System.Boolean Z0.bit::op_Implicit(Z0.bit)
-    IL_000C: ret
-
-}
-bool test(float src, int pos)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: call Z0.bit Z0.BitMask::test(System.Single,System.Int32)
-    IL_0007: call System.Boolean Z0.bit::op_Implicit(Z0.bit)
-    IL_000C: ret
-
-}
-bool test(double src, int pos)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: call Z0.bit Z0.BitMask::test(System.Double,System.Int32)
-    IL_0007: call System.Boolean Z0.bit::op_Implicit(Z0.bit)
-    IL_000C: ret
-
-}
+// 2019-11-03 08:18:57:426
 sbyte toggle(sbyte src, int pos)
 {
     IL_0000: ldarg.0
@@ -953,6 +873,20 @@ ref ulong xorsr(ref ulong src, int offset)
     IL_000D: ret
 
 }
+ushort lo(uint src)
+{
+    IL_0000: ldarg.0
+    IL_0001: conv.u2
+    IL_0002: ret
+
+}
+int lo(long src)
+{
+    IL_0000: ldarg.0
+    IL_0001: conv.i4
+    IL_0002: ret
+
+}
 uint lo(ulong src)
 {
     IL_0000: ldarg.0
@@ -1395,6 +1329,328 @@ uint ntz(ulong src)
     IL_0007: ret
 
 }
+uint pack(bit b0, bit b1)
+{
+    IL_0000: ldarg.0
+    IL_0001: call System.UInt32 Z0.bit::op_Explicit(Z0.bit)
+    IL_0006: stloc.0
+    IL_0007: ldloc.0
+    IL_0008: ldarg.1
+    IL_0009: call System.UInt32 Z0.bit::op_Explicit(Z0.bit)
+    IL_000E: ldc.i4.1
+    IL_000F: shl
+    IL_0010: or
+    IL_0011: stloc.0
+    IL_0012: ldloc.0
+    IL_0013: ret
+
+}
+uint pack(bit b0, bit b1, bit b2)
+{
+    IL_0000: ldarg.0
+    IL_0001: call System.UInt32 Z0.bit::op_Explicit(Z0.bit)
+    IL_0006: stloc.0
+    IL_0007: ldloc.0
+    IL_0008: ldarg.1
+    IL_0009: call System.UInt32 Z0.bit::op_Explicit(Z0.bit)
+    IL_000E: ldc.i4.1
+    IL_000F: shl
+    IL_0010: or
+    IL_0011: stloc.0
+    IL_0012: ldloc.0
+    IL_0013: ldarg.2
+    IL_0014: call System.UInt32 Z0.bit::op_Explicit(Z0.bit)
+    IL_0019: ldc.i4.2
+    IL_001A: shl
+    IL_001B: or
+    IL_001C: stloc.0
+    IL_001D: ldloc.0
+    IL_001E: ret
+
+}
+uint pack(bit b0, bit b1, bit b2, bit b3)
+{
+    IL_0000: ldarg.0
+    IL_0001: call System.UInt32 Z0.bit::op_Explicit(Z0.bit)
+    IL_0006: stloc.0
+    IL_0007: ldloc.0
+    IL_0008: ldarg.1
+    IL_0009: call System.UInt32 Z0.bit::op_Explicit(Z0.bit)
+    IL_000E: ldc.i4.1
+    IL_000F: shl
+    IL_0010: or
+    IL_0011: stloc.0
+    IL_0012: ldloc.0
+    IL_0013: ldarg.2
+    IL_0014: call System.UInt32 Z0.bit::op_Explicit(Z0.bit)
+    IL_0019: ldc.i4.2
+    IL_001A: shl
+    IL_001B: or
+    IL_001C: stloc.0
+    IL_001D: ldloc.0
+    IL_001E: ldarg.3
+    IL_001F: call System.UInt32 Z0.bit::op_Explicit(Z0.bit)
+    IL_0024: ldc.i4.3
+    IL_0025: shl
+    IL_0026: or
+    IL_0027: stloc.0
+    IL_0028: ldloc.0
+    IL_0029: ret
+
+}
+uint pack(bit b0, bit b1, bit b2, bit b3, bit b4)
+{
+    IL_0000: ldarg.0
+    IL_0001: call System.UInt32 Z0.bit::op_Explicit(Z0.bit)
+    IL_0006: stloc.0
+    IL_0007: ldloc.0
+    IL_0008: ldarg.1
+    IL_0009: call System.UInt32 Z0.bit::op_Explicit(Z0.bit)
+    IL_000E: ldc.i4.1
+    IL_000F: shl
+    IL_0010: or
+    IL_0011: stloc.0
+    IL_0012: ldloc.0
+    IL_0013: ldarg.2
+    IL_0014: call System.UInt32 Z0.bit::op_Explicit(Z0.bit)
+    IL_0019: ldc.i4.2
+    IL_001A: shl
+    IL_001B: or
+    IL_001C: stloc.0
+    IL_001D: ldloc.0
+    IL_001E: ldarg.3
+    IL_001F: call System.UInt32 Z0.bit::op_Explicit(Z0.bit)
+    IL_0024: ldc.i4.3
+    IL_0025: shl
+    IL_0026: or
+    IL_0027: stloc.0
+    IL_0028: ldloc.0
+    IL_0029: ldarg.s b4
+    IL_002B: call System.UInt32 Z0.bit::op_Explicit(Z0.bit)
+    IL_0030: ldc.i4.4
+    IL_0031: shl
+    IL_0032: or
+    IL_0033: stloc.0
+    IL_0034: ldloc.0
+    IL_0035: ret
+
+}
+uint pack(bit b0, bit b1, bit b2, bit b3, bit b4, bit b5, bit b6, bit b7)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: ldarg.2
+    IL_0003: ldarg.3
+    IL_0004: call System.UInt32 Z0.Bits::pack(Z0.bit,Z0.bit,Z0.bit,Z0.bit)
+    IL_0009: stloc.0
+    IL_000A: ldloc.0
+    IL_000B: ldarg.s b4
+    IL_000D: ldarg.s b5
+    IL_000F: ldarg.s b6
+    IL_0011: ldarg.s b7
+    IL_0013: call System.UInt32 Z0.Bits::pack(Z0.bit,Z0.bit,Z0.bit,Z0.bit)
+    IL_0018: ldc.i4.4
+    IL_0019: shl
+    IL_001A: or
+    IL_001B: stloc.0
+    IL_001C: ldloc.0
+    IL_001D: ret
+
+}
+ref uint pack(N1 n, in bit src, ref uint dst)
+{
+    IL_0000: ldarg.2
+    IL_0001: ldarg.2
+    IL_0002: ldind.u4
+    IL_0003: ldarg.1
+    IL_0004: ldobj Z0.bit
+    IL_0009: call System.UInt32 Z0.bit::op_Explicit(Z0.bit)
+    IL_000E: or
+    IL_000F: stind.i4
+    IL_0010: ldarg.2
+    IL_0011: ret
+
+}
+ref uint pack(N2 n, in bit src, ref uint dst)
+{
+    IL_0000: ldarg.2
+    IL_0001: ldarg.2
+    IL_0002: ldind.u4
+    IL_0003: ldarg.1
+    IL_0004: ldc.i4.0
+    IL_0005: call Z0.bit& modreq(System.Runtime.InteropServices.InAttribute) zfunc::skip<Z0.bit>(Z0.bit&,System.Int32)
+    IL_000A: ldobj Z0.bit
+    IL_000F: call System.UInt32 Z0.bit::op_Explicit(Z0.bit)
+    IL_0014: or
+    IL_0015: stind.i4
+    IL_0016: ldarg.2
+    IL_0017: ldarg.2
+    IL_0018: ldind.u4
+    IL_0019: ldarg.1
+    IL_001A: ldc.i4.1
+    IL_001B: call Z0.bit& modreq(System.Runtime.InteropServices.InAttribute) zfunc::skip<Z0.bit>(Z0.bit&,System.Int32)
+    IL_0020: ldobj Z0.bit
+    IL_0025: call System.UInt32 Z0.bit::op_Explicit(Z0.bit)
+    IL_002A: ldc.i4.1
+    IL_002B: shl
+    IL_002C: or
+    IL_002D: stind.i4
+    IL_002E: ldarg.2
+    IL_002F: ret
+
+}
+ref uint pack(N3 n, in bit src, ref uint dst)
+{
+    IL_0000: ldarg.2
+    IL_0001: ldarg.2
+    IL_0002: ldind.u4
+    IL_0003: ldarg.1
+    IL_0004: ldc.i4.0
+    IL_0005: call Z0.bit& modreq(System.Runtime.InteropServices.InAttribute) zfunc::skip<Z0.bit>(Z0.bit&,System.Int32)
+    IL_000A: ldobj Z0.bit
+    IL_000F: call System.UInt32 Z0.bit::op_Explicit(Z0.bit)
+    IL_0014: or
+    IL_0015: stind.i4
+    IL_0016: ldarg.2
+    IL_0017: ldarg.2
+    IL_0018: ldind.u4
+    IL_0019: ldarg.1
+    IL_001A: ldc.i4.1
+    IL_001B: call Z0.bit& modreq(System.Runtime.InteropServices.InAttribute) zfunc::skip<Z0.bit>(Z0.bit&,System.Int32)
+    IL_0020: ldobj Z0.bit
+    IL_0025: call System.UInt32 Z0.bit::op_Explicit(Z0.bit)
+    IL_002A: ldc.i4.1
+    IL_002B: shl
+    IL_002C: or
+    IL_002D: stind.i4
+    IL_002E: ldarg.2
+    IL_002F: ldarg.2
+    IL_0030: ldind.u4
+    IL_0031: ldarg.1
+    IL_0032: ldc.i4.2
+    IL_0033: call Z0.bit& modreq(System.Runtime.InteropServices.InAttribute) zfunc::skip<Z0.bit>(Z0.bit&,System.Int32)
+    IL_0038: ldobj Z0.bit
+    IL_003D: call System.UInt32 Z0.bit::op_Explicit(Z0.bit)
+    IL_0042: ldc.i4.2
+    IL_0043: shl
+    IL_0044: or
+    IL_0045: stind.i4
+    IL_0046: ldarg.2
+    IL_0047: ret
+
+}
+ref uint pack(N4 n, in bit src, ref uint dst)
+{
+    IL_0000: ldarg.2
+    IL_0001: ldarg.2
+    IL_0002: ldind.u4
+    IL_0003: ldarg.1
+    IL_0004: ldc.i4.0
+    IL_0005: call Z0.bit& modreq(System.Runtime.InteropServices.InAttribute) zfunc::skip<Z0.bit>(Z0.bit&,System.Int32)
+    IL_000A: ldobj Z0.bit
+    IL_000F: call System.UInt32 Z0.bit::op_Explicit(Z0.bit)
+    IL_0014: or
+    IL_0015: stind.i4
+    IL_0016: ldarg.2
+    IL_0017: ldarg.2
+    IL_0018: ldind.u4
+    IL_0019: ldarg.1
+    IL_001A: ldc.i4.1
+    IL_001B: call Z0.bit& modreq(System.Runtime.InteropServices.InAttribute) zfunc::skip<Z0.bit>(Z0.bit&,System.Int32)
+    IL_0020: ldobj Z0.bit
+    IL_0025: call System.UInt32 Z0.bit::op_Explicit(Z0.bit)
+    IL_002A: ldc.i4.1
+    IL_002B: shl
+    IL_002C: or
+    IL_002D: stind.i4
+    IL_002E: ldarg.2
+    IL_002F: ldarg.2
+    IL_0030: ldind.u4
+    IL_0031: ldarg.1
+    IL_0032: ldc.i4.2
+    IL_0033: call Z0.bit& modreq(System.Runtime.InteropServices.InAttribute) zfunc::skip<Z0.bit>(Z0.bit&,System.Int32)
+    IL_0038: ldobj Z0.bit
+    IL_003D: call System.UInt32 Z0.bit::op_Explicit(Z0.bit)
+    IL_0042: ldc.i4.2
+    IL_0043: shl
+    IL_0044: or
+    IL_0045: stind.i4
+    IL_0046: ldarg.2
+    IL_0047: ldarg.2
+    IL_0048: ldind.u4
+    IL_0049: ldarg.1
+    IL_004A: ldc.i4.3
+    IL_004B: call Z0.bit& modreq(System.Runtime.InteropServices.InAttribute) zfunc::skip<Z0.bit>(Z0.bit&,System.Int32)
+    IL_0050: ldobj Z0.bit
+    IL_0055: call System.UInt32 Z0.bit::op_Explicit(Z0.bit)
+    IL_005A: ldc.i4.3
+    IL_005B: shl
+    IL_005C: or
+    IL_005D: stind.i4
+    IL_005E: ldarg.2
+    IL_005F: ret
+
+}
+ref uint pack(N8 n, in bit src, ref uint dst)
+{
+    IL_0000: call Z0.N4 zfunc::get_n4()
+    IL_0005: ldarg.1
+    IL_0006: ldarg.2
+    IL_0007: call System.UInt32& Z0.Bits::pack(Z0.N4,Z0.bit&,System.UInt32&)
+    IL_000C: pop
+    IL_000D: call Z0.N4 zfunc::get_n4()
+    IL_0012: ldarg.1
+    IL_0013: ldc.i4.4
+    IL_0014: call Z0.bit& modreq(System.Runtime.InteropServices.InAttribute) zfunc::skip<Z0.bit>(Z0.bit&,System.Int32)
+    IL_0019: ldarg.2
+    IL_001A: ldc.i4.4
+    IL_001B: call System.UInt32& zfunc::seek<System.UInt32>(System.UInt32&,System.Int32)
+    IL_0020: call System.UInt32& Z0.Bits::pack(Z0.N4,Z0.bit&,System.UInt32&)
+    IL_0025: pop
+    IL_0026: ldarg.2
+    IL_0027: ret
+
+}
+ref uint pack(N16 n, in bit src, ref uint dst)
+{
+    IL_0000: call Z0.N8 zfunc::get_n8()
+    IL_0005: ldarg.1
+    IL_0006: ldarg.2
+    IL_0007: call System.UInt32& Z0.Bits::pack(Z0.N8,Z0.bit&,System.UInt32&)
+    IL_000C: pop
+    IL_000D: call Z0.N8 zfunc::get_n8()
+    IL_0012: ldarg.1
+    IL_0013: ldc.i4.8
+    IL_0014: call Z0.bit& modreq(System.Runtime.InteropServices.InAttribute) zfunc::skip<Z0.bit>(Z0.bit&,System.Int32)
+    IL_0019: ldarg.2
+    IL_001A: ldc.i4.8
+    IL_001B: call System.UInt32& zfunc::seek<System.UInt32>(System.UInt32&,System.Int32)
+    IL_0020: call System.UInt32& Z0.Bits::pack(Z0.N8,Z0.bit&,System.UInt32&)
+    IL_0025: pop
+    IL_0026: ldarg.2
+    IL_0027: ret
+
+}
+ref uint pack(N32 n, in bit src, ref uint dst)
+{
+    IL_0000: call Z0.N16 zfunc::get_n16()
+    IL_0005: ldarg.1
+    IL_0006: ldarg.2
+    IL_0007: call System.UInt32& Z0.Bits::pack(Z0.N16,Z0.bit&,System.UInt32&)
+    IL_000C: pop
+    IL_000D: call Z0.N16 zfunc::get_n16()
+    IL_0012: ldarg.1
+    IL_0013: ldc.i4.s 16
+    IL_0015: call Z0.bit& modreq(System.Runtime.InteropServices.InAttribute) zfunc::skip<Z0.bit>(Z0.bit&,System.Int32)
+    IL_001A: ldarg.2
+    IL_001B: ldc.i4.s 16
+    IL_001D: call System.UInt32& zfunc::seek<System.UInt32>(System.UInt32&,System.Int32)
+    IL_0022: call System.UInt32& Z0.Bits::pack(Z0.N16,Z0.bit&,System.UInt32&)
+    IL_0027: pop
+    IL_0028: ldarg.2
+    IL_0029: ret
+
+}
 ushort pack(byte x0, byte x1)
 {
     IL_0000: ldarg.0
@@ -1448,28 +1704,6 @@ uint pack(byte x0, byte x1, byte x2, byte x3)
     IL_000F: ret
 
 }
-ulong pack(ushort x0, ushort x1, ushort x2, ushort x3)
-{
-    IL_0000: ldarg.0
-    IL_0001: conv.u8
-    IL_0002: ldarg.1
-    IL_0003: conv.u8
-    IL_0004: ldc.i4.s 16
-    IL_0006: shl
-    IL_0007: or
-    IL_0008: ldarg.1
-    IL_0009: conv.u8
-    IL_000A: ldc.i4.s 32
-    IL_000C: shl
-    IL_000D: or
-    IL_000E: ldarg.1
-    IL_000F: conv.u8
-    IL_0010: ldc.i4.s 48
-    IL_0012: shl
-    IL_0013: or
-    IL_0014: ret
-
-}
 ulong pack(byte x0, byte x1, byte x2, byte x3, byte x4, byte x5, byte x6, byte x7)
 {
     IL_0000: ldarg.0
@@ -1510,747 +1744,6 @@ ulong pack(byte x0, byte x1, byte x2, byte x3, byte x4, byte x5, byte x6, byte x
     IL_002D: shl
     IL_002E: or
     IL_002F: ret
-
-}
-ref byte pack(byte x0, byte x1, byte x2, byte x3, byte x4, byte x5, byte x6, byte x7, byte pos, ref byte dst)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.s pos
-    IL_0003: call Z0.bit Z0.BitMask::test(System.Byte,System.Byte)
-    IL_0008: call System.Boolean Z0.bit::op_Implicit(Z0.bit)
-    IL_000D: brfalse.s IL_0018
-    IL_000F: ldarg.s dst
-    IL_0011: ldc.i4.0
-    IL_0012: call System.Byte& Z0.BitMask::enable(System.Byte&,System.Int32)
-    IL_0017: pop
-    IL_0018: ldarg.1
-    IL_0019: ldarg.s pos
-    IL_001B: call Z0.bit Z0.BitMask::test(System.Byte,System.Byte)
-    IL_0020: call System.Boolean Z0.bit::op_Implicit(Z0.bit)
-    IL_0025: brfalse.s IL_0030
-    IL_0027: ldarg.s dst
-    IL_0029: ldc.i4.1
-    IL_002A: call System.Byte& Z0.BitMask::enable(System.Byte&,System.Int32)
-    IL_002F: pop
-    IL_0030: ldarg.2
-    IL_0031: ldarg.s pos
-    IL_0033: call Z0.bit Z0.BitMask::test(System.Byte,System.Byte)
-    IL_0038: call System.Boolean Z0.bit::op_Implicit(Z0.bit)
-    IL_003D: brfalse.s IL_0048
-    IL_003F: ldarg.s dst
-    IL_0041: ldc.i4.2
-    IL_0042: call System.Byte& Z0.BitMask::enable(System.Byte&,System.Int32)
-    IL_0047: pop
-    IL_0048: ldarg.3
-    IL_0049: ldarg.s pos
-    IL_004B: call Z0.bit Z0.BitMask::test(System.Byte,System.Byte)
-    IL_0050: call System.Boolean Z0.bit::op_Implicit(Z0.bit)
-    IL_0055: brfalse.s IL_0060
-    IL_0057: ldarg.s dst
-    IL_0059: ldc.i4.3
-    IL_005A: call System.Byte& Z0.BitMask::enable(System.Byte&,System.Int32)
-    IL_005F: pop
-    IL_0060: ldarg.s x4
-    IL_0062: ldarg.s pos
-    IL_0064: call Z0.bit Z0.BitMask::test(System.Byte,System.Byte)
-    IL_0069: call System.Boolean Z0.bit::op_Implicit(Z0.bit)
-    IL_006E: brfalse.s IL_0079
-    IL_0070: ldarg.s dst
-    IL_0072: ldc.i4.4
-    IL_0073: call System.Byte& Z0.BitMask::enable(System.Byte&,System.Int32)
-    IL_0078: pop
-    IL_0079: ldarg.s x5
-    IL_007B: ldarg.s pos
-    IL_007D: call Z0.bit Z0.BitMask::test(System.Byte,System.Byte)
-    IL_0082: call System.Boolean Z0.bit::op_Implicit(Z0.bit)
-    IL_0087: brfalse.s IL_0092
-    IL_0089: ldarg.s dst
-    IL_008B: ldc.i4.5
-    IL_008C: call System.Byte& Z0.BitMask::enable(System.Byte&,System.Int32)
-    IL_0091: pop
-    IL_0092: ldarg.s x6
-    IL_0094: ldarg.s pos
-    IL_0096: call Z0.bit Z0.BitMask::test(System.Byte,System.Byte)
-    IL_009B: call System.Boolean Z0.bit::op_Implicit(Z0.bit)
-    IL_00A0: brfalse.s IL_00AB
-    IL_00A2: ldarg.s dst
-    IL_00A4: ldc.i4.6
-    IL_00A5: call System.Byte& Z0.BitMask::enable(System.Byte&,System.Int32)
-    IL_00AA: pop
-    IL_00AB: ldarg.s x7
-    IL_00AD: ldarg.s pos
-    IL_00AF: call Z0.bit Z0.BitMask::test(System.Byte,System.Byte)
-    IL_00B4: call System.Boolean Z0.bit::op_Implicit(Z0.bit)
-    IL_00B9: brfalse.s IL_00C4
-    IL_00BB: ldarg.s dst
-    IL_00BD: ldc.i4.7
-    IL_00BE: call System.Byte& Z0.BitMask::enable(System.Byte&,System.Int32)
-    IL_00C3: pop
-    IL_00C4: ldarg.s dst
-    IL_00C6: ret
-
-}
-byte pack2(bool b0, bool b1)
-{
-    IL_0000: ldc.i4.0
-    IL_0001: stloc.0
-    IL_0002: ldarg.0
-    IL_0003: brfalse.s IL_000E
-    IL_0005: ldloca.s V_0
-    IL_0007: ldc.i4.0
-    IL_0008: call System.Byte& Z0.BitMask::enable(System.Byte&,System.Int32)
-    IL_000D: pop
-    IL_000E: ldarg.1
-    IL_000F: brfalse.s IL_001A
-    IL_0011: ldloca.s V_0
-    IL_0013: ldc.i4.1
-    IL_0014: call System.Byte& Z0.BitMask::enable(System.Byte&,System.Int32)
-    IL_0019: pop
-    IL_001A: ldloc.0
-    IL_001B: ret
-
-}
-byte pack3(bool b0, bool b1, bool b2)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: call System.Byte Z0.Bits::pack2(System.Boolean,System.Boolean)
-    IL_0007: stloc.0
-    IL_0008: ldarg.2
-    IL_0009: brfalse.s IL_0014
-    IL_000B: ldloca.s V_0
-    IL_000D: ldc.i4.2
-    IL_000E: call System.Byte& Z0.BitMask::enable(System.Byte&,System.Int32)
-    IL_0013: pop
-    IL_0014: ldloc.0
-    IL_0015: ret
-
-}
-byte pack4(bool b0, bool b1, bool b2, bool b3)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: ldarg.2
-    IL_0003: call System.Byte Z0.Bits::pack3(System.Boolean,System.Boolean,System.Boolean)
-    IL_0008: stloc.0
-    IL_0009: ldarg.3
-    IL_000A: brfalse.s IL_0015
-    IL_000C: ldloca.s V_0
-    IL_000E: ldc.i4.3
-    IL_000F: call System.Byte& Z0.BitMask::enable(System.Byte&,System.Int32)
-    IL_0014: pop
-    IL_0015: ldloc.0
-    IL_0016: ret
-
-}
-byte pack5(bool b0, bool b1, bool b2, bool b3, bool b4)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: ldarg.2
-    IL_0003: ldarg.3
-    IL_0004: call System.Byte Z0.Bits::pack4(System.Boolean,System.Boolean,System.Boolean,System.Boolean)
-    IL_0009: stloc.0
-    IL_000A: ldarg.s b4
-    IL_000C: brfalse.s IL_0017
-    IL_000E: ldloca.s V_0
-    IL_0010: ldc.i4.4
-    IL_0011: call System.Byte& Z0.BitMask::enable(System.Byte&,System.Int32)
-    IL_0016: pop
-    IL_0017: ldloc.0
-    IL_0018: ret
-
-}
-byte pack6(bool b0, bool b1, bool b2, bool b3, bool b4, bool b5)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: ldarg.2
-    IL_0003: ldarg.3
-    IL_0004: ldarg.s b4
-    IL_0006: call System.Byte Z0.Bits::pack5(System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Boolean)
-    IL_000B: stloc.0
-    IL_000C: ldarg.s b5
-    IL_000E: brfalse.s IL_0019
-    IL_0010: ldloca.s V_0
-    IL_0012: ldc.i4.5
-    IL_0013: call System.Byte& Z0.BitMask::enable(System.Byte&,System.Int32)
-    IL_0018: pop
-    IL_0019: ldloc.0
-    IL_001A: ret
-
-}
-byte pack7(bool b0, bool b1, bool b2, bool b3, bool b4, bool b5, bool b6)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.0
-    IL_0002: ldarg.2
-    IL_0003: ldarg.3
-    IL_0004: ldarg.s b4
-    IL_0006: ldarg.s b5
-    IL_0008: call System.Byte Z0.Bits::pack6(System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Boolean)
-    IL_000D: stloc.0
-    IL_000E: ldarg.s b6
-    IL_0010: brfalse.s IL_001B
-    IL_0012: ldloca.s V_0
-    IL_0014: ldc.i4.6
-    IL_0015: call System.Byte& Z0.BitMask::enable(System.Byte&,System.Int32)
-    IL_001A: pop
-    IL_001B: ldloc.0
-    IL_001C: ret
-
-}
-byte pack8(bool b0, bool b1, bool b2, bool b3, bool b4, bool b5, bool b6, bool b7)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.0
-    IL_0002: ldarg.2
-    IL_0003: ldarg.3
-    IL_0004: ldarg.s b4
-    IL_0006: ldarg.s b5
-    IL_0008: ldarg.s b6
-    IL_000A: call System.Byte Z0.Bits::pack7(System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Boolean)
-    IL_000F: stloc.0
-    IL_0010: ldarg.s b7
-    IL_0012: brfalse.s IL_001D
-    IL_0014: ldloca.s V_0
-    IL_0016: ldc.i4.7
-    IL_0017: call System.Byte& Z0.BitMask::enable(System.Byte&,System.Int32)
-    IL_001C: pop
-    IL_001D: ldloc.0
-    IL_001E: ret
-
-}
-Span<byte> pack(ReadOnlySpan<bit> src)
-{
-    IL_0000: ldarga.s src
-    IL_0002: call System.Int32 System.ReadOnlySpan`1<Z0.bit>::get_Length()
-    IL_0007: stloc.0
-    IL_0008: ldloc.0
-    IL_0009: ldc.i4.3
-    IL_000A: shr
-    IL_000B: stloc.1
-    IL_000C: ldloc.0
-    IL_000D: ldc.i4.7
-    IL_000E: and
-    IL_000F: brfalse.s IL_0015
-    IL_0011: ldloc.1
-    IL_0012: ldc.i4.1
-    IL_0013: add
-    IL_0014: stloc.1
-    IL_0015: ldarg.0
-    IL_0016: ldloc.1
-    IL_0017: newarr System.Byte
-    IL_001C: call System.Span`1<System.Byte> System.Span`1<System.Byte>::op_Implicit(System.Byte[])
-    IL_0021: call System.Span`1<System.Byte> Z0.Bits::pack(System.ReadOnlySpan`1<Z0.bit>,System.Span`1<System.Byte>)
-    IL_0026: ret
-
-}
-Span<byte> pack(bit[] src)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldlen
-    IL_0002: conv.i4
-    IL_0003: stloc.0
-    IL_0004: ldloc.0
-    IL_0005: call System.UInt32 Z0.Mod8::div(System.UInt32)
-    IL_000A: stloc.1
-    IL_000B: ldloc.0
-    IL_000C: call System.UInt32 Z0.Mod8::mod(System.UInt32)
-    IL_0011: stloc.2
-    IL_0012: ldloc.1
-    IL_0013: conv.u8
-    IL_0014: ldloc.2
-    IL_0015: brtrue.s IL_001A
-    IL_0017: ldc.i4.0
-    IL_0018: br.s IL_001B
-    IL_001A: ldc.i4.1
-    IL_001B: conv.i8
-    IL_001C: add
-    IL_001D: stloc.3
-    IL_001E: ldloc.3
-    IL_001F: conv.ovf.i
-    IL_0020: newarr System.Byte
-    IL_0025: call System.Span`1<System.Byte> System.Span`1<System.Byte>::op_Implicit(System.Byte[])
-    IL_002A: stloc.s V_4
-    IL_002C: ldc.i4.0
-    IL_002D: stloc.s V_5
-    IL_002F: br.s IL_0069
-    IL_0031: ldc.i4.0
-    IL_0032: stloc.s V_6
-    IL_0034: br.s IL_005E
-    IL_0036: ldloca.s V_4
-    IL_0038: ldloc.s V_6
-    IL_003A: call System.Byte& System.Span`1<System.Byte>::get_Item(System.Int32)
-    IL_003F: dup
-    IL_0040: ldind.u1
-    IL_0041: ldarg.0
-    IL_0042: ldloc.s V_5
-    IL_0044: ldelem Z0.bit
-    IL_0049: call System.UInt32 Z0.bit::op_Explicit(Z0.bit)
-    IL_004E: ldloc.s V_6
-    IL_0050: ldc.i4.s 31
-    IL_0052: and
-    IL_0053: shl
-    IL_0054: conv.u1
-    IL_0055: or
-    IL_0056: conv.u1
-    IL_0057: stind.i1
-    IL_0058: ldloc.s V_6
-    IL_005A: ldc.i4.1
-    IL_005B: add
-    IL_005C: stloc.s V_6
-    IL_005E: ldloc.s V_6
-    IL_0060: ldc.i4.8
-    IL_0061: blt.s IL_0036
-    IL_0063: ldloc.s V_5
-    IL_0065: ldc.i4.1
-    IL_0066: add
-    IL_0067: stloc.s V_5
-    IL_0069: ldloc.s V_5
-    IL_006B: conv.i8
-    IL_006C: ldloc.0
-    IL_006D: conv.u8
-    IL_006E: blt.s IL_0031
-    IL_0070: ldloc.s V_4
-    IL_0072: ret
-
-}
-ulong pack(N8 n, Span<bit> src)
-{
-    IL_0000: ldarga.s src
-    IL_0002: ldc.i4.0
-    IL_0003: call Z0.bit& System.Span`1<Z0.bit>::get_Item(System.Int32)
-    IL_0008: ldobj Z0.bit
-    IL_000D: call System.UInt32 Z0.bit::op_Explicit(Z0.bit)
-    IL_0012: stloc.0
-    IL_0013: ldloc.0
-    IL_0014: ldarga.s src
-    IL_0016: ldc.i4.1
-    IL_0017: call Z0.bit& System.Span`1<Z0.bit>::get_Item(System.Int32)
-    IL_001C: ldobj Z0.bit
-    IL_0021: call System.UInt32 Z0.bit::op_Explicit(Z0.bit)
-    IL_0026: ldc.i4.1
-    IL_0027: shl
-    IL_0028: or
-    IL_0029: stloc.0
-    IL_002A: ldloc.0
-    IL_002B: ldarga.s src
-    IL_002D: ldc.i4.2
-    IL_002E: call Z0.bit& System.Span`1<Z0.bit>::get_Item(System.Int32)
-    IL_0033: ldobj Z0.bit
-    IL_0038: call System.UInt32 Z0.bit::op_Explicit(Z0.bit)
-    IL_003D: ldc.i4.2
-    IL_003E: shl
-    IL_003F: or
-    IL_0040: stloc.0
-    IL_0041: ldloc.0
-    IL_0042: ldarga.s src
-    IL_0044: ldc.i4.3
-    IL_0045: call Z0.bit& System.Span`1<Z0.bit>::get_Item(System.Int32)
-    IL_004A: ldobj Z0.bit
-    IL_004F: call System.UInt32 Z0.bit::op_Explicit(Z0.bit)
-    IL_0054: ldc.i4.3
-    IL_0055: shl
-    IL_0056: or
-    IL_0057: stloc.0
-    IL_0058: ldloc.0
-    IL_0059: ldarga.s src
-    IL_005B: ldc.i4.4
-    IL_005C: call Z0.bit& System.Span`1<Z0.bit>::get_Item(System.Int32)
-    IL_0061: ldobj Z0.bit
-    IL_0066: call System.UInt32 Z0.bit::op_Explicit(Z0.bit)
-    IL_006B: ldc.i4.4
-    IL_006C: shl
-    IL_006D: or
-    IL_006E: stloc.0
-    IL_006F: ldloc.0
-    IL_0070: ldarga.s src
-    IL_0072: ldc.i4.5
-    IL_0073: call Z0.bit& System.Span`1<Z0.bit>::get_Item(System.Int32)
-    IL_0078: ldobj Z0.bit
-    IL_007D: call System.UInt32 Z0.bit::op_Explicit(Z0.bit)
-    IL_0082: ldc.i4.5
-    IL_0083: shl
-    IL_0084: or
-    IL_0085: stloc.0
-    IL_0086: ldloc.0
-    IL_0087: ldarga.s src
-    IL_0089: ldc.i4.6
-    IL_008A: call Z0.bit& System.Span`1<Z0.bit>::get_Item(System.Int32)
-    IL_008F: ldobj Z0.bit
-    IL_0094: call System.UInt32 Z0.bit::op_Explicit(Z0.bit)
-    IL_0099: ldc.i4.6
-    IL_009A: shl
-    IL_009B: or
-    IL_009C: stloc.0
-    IL_009D: ldloc.0
-    IL_009E: ldarga.s src
-    IL_00A0: ldc.i4.7
-    IL_00A1: call Z0.bit& System.Span`1<Z0.bit>::get_Item(System.Int32)
-    IL_00A6: ldobj Z0.bit
-    IL_00AB: call System.UInt32 Z0.bit::op_Explicit(Z0.bit)
-    IL_00B0: ldc.i4.7
-    IL_00B1: shl
-    IL_00B2: or
-    IL_00B3: stloc.0
-    IL_00B4: ldloc.0
-    IL_00B5: conv.u8
-    IL_00B6: ret
-
-}
-void pack(N8 n, ref bit src, ref uint dst)
-{
-    IL_0000: ldarg.2
-    IL_0001: ldarg.2
-    IL_0002: ldind.u4
-    IL_0003: ldarg.1
-    IL_0004: ldc.i4.0
-    IL_0005: call Z0.bit& zfunc::advance<Z0.bit>(Z0.bit&,System.Int32)
-    IL_000A: ldobj Z0.bit
-    IL_000F: call System.UInt32 Z0.bit::op_Explicit(Z0.bit)
-    IL_0014: or
-    IL_0015: stind.i4
-    IL_0016: ldarg.2
-    IL_0017: ldarg.2
-    IL_0018: ldind.u4
-    IL_0019: ldarg.1
-    IL_001A: ldc.i4.1
-    IL_001B: call Z0.bit& zfunc::advance<Z0.bit>(Z0.bit&,System.Int32)
-    IL_0020: ldobj Z0.bit
-    IL_0025: call System.UInt32 Z0.bit::op_Explicit(Z0.bit)
-    IL_002A: ldc.i4.1
-    IL_002B: shl
-    IL_002C: or
-    IL_002D: stind.i4
-    IL_002E: ldarg.2
-    IL_002F: ldarg.2
-    IL_0030: ldind.u4
-    IL_0031: ldarg.1
-    IL_0032: ldc.i4.2
-    IL_0033: call Z0.bit& zfunc::advance<Z0.bit>(Z0.bit&,System.Int32)
-    IL_0038: ldobj Z0.bit
-    IL_003D: call System.UInt32 Z0.bit::op_Explicit(Z0.bit)
-    IL_0042: ldc.i4.2
-    IL_0043: shl
-    IL_0044: or
-    IL_0045: stind.i4
-    IL_0046: ldarg.2
-    IL_0047: ldarg.2
-    IL_0048: ldind.u4
-    IL_0049: ldarg.1
-    IL_004A: ldc.i4.3
-    IL_004B: call Z0.bit& zfunc::advance<Z0.bit>(Z0.bit&,System.Int32)
-    IL_0050: ldobj Z0.bit
-    IL_0055: call System.UInt32 Z0.bit::op_Explicit(Z0.bit)
-    IL_005A: ldc.i4.3
-    IL_005B: shl
-    IL_005C: or
-    IL_005D: stind.i4
-    IL_005E: ldarg.2
-    IL_005F: ldarg.2
-    IL_0060: ldind.u4
-    IL_0061: ldarg.1
-    IL_0062: ldc.i4.4
-    IL_0063: call Z0.bit& zfunc::advance<Z0.bit>(Z0.bit&,System.Int32)
-    IL_0068: ldobj Z0.bit
-    IL_006D: call System.UInt32 Z0.bit::op_Explicit(Z0.bit)
-    IL_0072: ldc.i4.4
-    IL_0073: shl
-    IL_0074: or
-    IL_0075: stind.i4
-    IL_0076: ldarg.2
-    IL_0077: ldarg.2
-    IL_0078: ldind.u4
-    IL_0079: ldarg.1
-    IL_007A: ldc.i4.5
-    IL_007B: call Z0.bit& zfunc::advance<Z0.bit>(Z0.bit&,System.Int32)
-    IL_0080: ldobj Z0.bit
-    IL_0085: call System.UInt32 Z0.bit::op_Explicit(Z0.bit)
-    IL_008A: ldc.i4.5
-    IL_008B: shl
-    IL_008C: or
-    IL_008D: stind.i4
-    IL_008E: ldarg.2
-    IL_008F: ldarg.2
-    IL_0090: ldind.u4
-    IL_0091: ldarg.1
-    IL_0092: ldc.i4.6
-    IL_0093: call Z0.bit& zfunc::advance<Z0.bit>(Z0.bit&,System.Int32)
-    IL_0098: ldobj Z0.bit
-    IL_009D: call System.UInt32 Z0.bit::op_Explicit(Z0.bit)
-    IL_00A2: ldc.i4.6
-    IL_00A3: shl
-    IL_00A4: or
-    IL_00A5: stind.i4
-    IL_00A6: ldarg.2
-    IL_00A7: ldarg.2
-    IL_00A8: ldind.u4
-    IL_00A9: ldarg.1
-    IL_00AA: ldc.i4.7
-    IL_00AB: call Z0.bit& zfunc::advance<Z0.bit>(Z0.bit&,System.Int32)
-    IL_00B0: ldobj Z0.bit
-    IL_00B5: call System.UInt32 Z0.bit::op_Explicit(Z0.bit)
-    IL_00BA: ldc.i4.7
-    IL_00BB: shl
-    IL_00BC: or
-    IL_00BD: stind.i4
-    IL_00BE: ret
-
-}
-void pack(N16 n, ref bit src, ref uint dst)
-{
-    IL_0000: call Z0.N8 zfunc::get_n8()
-    IL_0005: ldarg.1
-    IL_0006: ldarg.2
-    IL_0007: call System.Void Z0.Bits::pack(Z0.N8,Z0.bit&,System.UInt32&)
-    IL_000C: call Z0.N8 zfunc::get_n8()
-    IL_0011: ldarg.1
-    IL_0012: ldc.i4.8
-    IL_0013: call Z0.bit& zfunc::advance<Z0.bit>(Z0.bit&,System.Int32)
-    IL_0018: ldarg.2
-    IL_0019: ldc.i4.8
-    IL_001A: call System.UInt32& zfunc::advance<System.UInt32>(System.UInt32&,System.Int32)
-    IL_001F: call System.Void Z0.Bits::pack(Z0.N8,Z0.bit&,System.UInt32&)
-    IL_0024: ret
-
-}
-void pack(N32 n, ref bit src, ref uint dst)
-{
-    IL_0000: call Z0.N16 zfunc::get_n16()
-    IL_0005: ldarg.1
-    IL_0006: ldarg.2
-    IL_0007: call System.Void Z0.Bits::pack(Z0.N16,Z0.bit&,System.UInt32&)
-    IL_000C: call Z0.N16 zfunc::get_n16()
-    IL_0011: ldarg.1
-    IL_0012: ldc.i4.s 16
-    IL_0014: call Z0.bit& zfunc::advance<Z0.bit>(Z0.bit&,System.Int32)
-    IL_0019: ldarg.2
-    IL_001A: ldc.i4.s 16
-    IL_001C: call System.UInt32& zfunc::advance<System.UInt32>(System.UInt32&,System.Int32)
-    IL_0021: call System.Void Z0.Bits::pack(Z0.N16,Z0.bit&,System.UInt32&)
-    IL_0026: ret
-
-}
-ulong pack(N16 n, Span<bit> src)
-{
-    IL_0000: call Z0.N8 zfunc::get_n8()
-    IL_0005: ldarg.1
-    IL_0006: call System.UInt64 Z0.Bits::pack(Z0.N8,System.Span`1<Z0.bit>)
-    IL_000B: stloc.0
-    IL_000C: ldloc.0
-    IL_000D: call Z0.N8 zfunc::get_n8()
-    IL_0012: ldarga.s src
-    IL_0014: ldc.i4.8
-    IL_0015: call System.Span`1<Z0.bit> System.Span`1<Z0.bit>::Slice(System.Int32)
-    IL_001A: call System.UInt64 Z0.Bits::pack(Z0.N8,System.Span`1<Z0.bit>)
-    IL_001F: ldc.i4.8
-    IL_0020: shl
-    IL_0021: or
-    IL_0022: stloc.0
-    IL_0023: ldloc.0
-    IL_0024: ret
-
-}
-ulong pack(N32 n, Span<bit> src)
-{
-    IL_0000: call Z0.N16 zfunc::get_n16()
-    IL_0005: ldarg.1
-    IL_0006: call System.UInt64 Z0.Bits::pack(Z0.N16,System.Span`1<Z0.bit>)
-    IL_000B: stloc.0
-    IL_000C: ldloc.0
-    IL_000D: call Z0.N16 zfunc::get_n16()
-    IL_0012: ldarga.s src
-    IL_0014: ldc.i4.s 16
-    IL_0016: call System.Span`1<Z0.bit> System.Span`1<Z0.bit>::Slice(System.Int32)
-    IL_001B: call System.UInt64 Z0.Bits::pack(Z0.N16,System.Span`1<Z0.bit>)
-    IL_0020: ldc.i4.s 16
-    IL_0022: shl
-    IL_0023: or
-    IL_0024: stloc.0
-    IL_0025: ldloc.0
-    IL_0026: ret
-
-}
-ulong pack(N64 n, Span<bit> src)
-{
-    IL_0000: call Z0.N32 zfunc::get_n32()
-    IL_0005: ldarg.1
-    IL_0006: call System.UInt64 Z0.Bits::pack(Z0.N32,System.Span`1<Z0.bit>)
-    IL_000B: stloc.0
-    IL_000C: ldloc.0
-    IL_000D: call Z0.N32 zfunc::get_n32()
-    IL_0012: ldarga.s src
-    IL_0014: ldc.i4.s 32
-    IL_0016: call System.Span`1<Z0.bit> System.Span`1<Z0.bit>::Slice(System.Int32)
-    IL_001B: call System.UInt64 Z0.Bits::pack(Z0.N32,System.Span`1<Z0.bit>)
-    IL_0020: ldc.i4.s 32
-    IL_0022: shl
-    IL_0023: or
-    IL_0024: stloc.0
-    IL_0025: ldloc.0
-    IL_0026: ret
-
-}
-void pack(Span<bit> src, out ulong lo, out ulong hi)
-{
-    IL_0000: ldarg.1
-    IL_0001: call Z0.N64 zfunc::get_n64()
-    IL_0006: ldarg.0
-    IL_0007: call System.UInt64 Z0.Bits::pack(Z0.N64,System.Span`1<Z0.bit>)
-    IL_000C: stind.i8
-    IL_000D: ldarg.2
-    IL_000E: call Z0.N64 zfunc::get_n64()
-    IL_0013: ldarga.s src
-    IL_0015: ldc.i4.s 64
-    IL_0017: call System.Span`1<Z0.bit> System.Span`1<Z0.bit>::Slice(System.Int32)
-    IL_001C: call System.UInt64 Z0.Bits::pack(Z0.N64,System.Span`1<Z0.bit>)
-    IL_0021: stind.i8
-    IL_0022: ret
-
-}
-Span<byte> pack(ReadOnlySpan<bit> src, Span<byte> dst)
-{
-    IL_0000: ldarga.s src
-    IL_0002: call System.Int32 System.ReadOnlySpan`1<Z0.bit>::get_Length()
-    IL_0007: stloc.0
-    IL_0008: ldc.i4.0
-    IL_0009: stloc.1
-    IL_000A: br.s IL_003C
-    IL_000C: ldarga.s src
-    IL_000E: ldloc.1
-    IL_000F: call Z0.bit& modreq(System.Runtime.InteropServices.InAttribute) System.ReadOnlySpan`1<Z0.bit>::get_Item(System.Int32)
-    IL_0014: ldobj Z0.bit
-    IL_0019: call System.Boolean Z0.bit::op_Implicit(Z0.bit)
-    IL_001E: brfalse.s IL_0038
-    IL_0020: ldarga.s dst
-    IL_0022: ldloc.1
-    IL_0023: ldc.i4.3
-    IL_0024: shr
-    IL_0025: call System.Byte& System.Span`1<System.Byte>::get_Item(System.Int32)
-    IL_002A: dup
-    IL_002B: ldind.u1
-    IL_002C: ldc.i4.1
-    IL_002D: ldloc.1
-    IL_002E: ldc.i4.7
-    IL_002F: and
-    IL_0030: ldc.i4.s 31
-    IL_0032: and
-    IL_0033: shl
-    IL_0034: conv.u1
-    IL_0035: or
-    IL_0036: conv.u1
-    IL_0037: stind.i1
-    IL_0038: ldloc.1
-    IL_0039: ldc.i4.1
-    IL_003A: add
-    IL_003B: stloc.1
-    IL_003C: ldloc.1
-    IL_003D: ldloc.0
-    IL_003E: blt.s IL_000C
-    IL_0040: ldarg.1
-    IL_0041: ret
-
-}
-Span<byte> pack(ReadOnlySpan<byte> src, Span<byte> dst)
-{
-    IL_0000: ldarga.s src
-    IL_0002: call System.Int32 System.ReadOnlySpan`1<System.Byte>::get_Length()
-    IL_0007: stloc.0
-    IL_0008: ldc.i4.0
-    IL_0009: stloc.1
-    IL_000A: br.s IL_0034
-    IL_000C: ldarga.s src
-    IL_000E: ldloc.1
-    IL_000F: call System.Byte& modreq(System.Runtime.InteropServices.InAttribute) System.ReadOnlySpan`1<System.Byte>::get_Item(System.Int32)
-    IL_0014: ldind.u1
-    IL_0015: ldc.i4.1
-    IL_0016: bne.un.s IL_0030
-    IL_0018: ldarga.s dst
-    IL_001A: ldloc.1
-    IL_001B: ldc.i4.3
-    IL_001C: shr
-    IL_001D: call System.Byte& System.Span`1<System.Byte>::get_Item(System.Int32)
-    IL_0022: dup
-    IL_0023: ldind.u1
-    IL_0024: ldc.i4.1
-    IL_0025: ldloc.1
-    IL_0026: ldc.i4.7
-    IL_0027: and
-    IL_0028: ldc.i4.s 31
-    IL_002A: and
-    IL_002B: shl
-    IL_002C: conv.u1
-    IL_002D: or
-    IL_002E: conv.u1
-    IL_002F: stind.i1
-    IL_0030: ldloc.1
-    IL_0031: ldc.i4.1
-    IL_0032: add
-    IL_0033: stloc.1
-    IL_0034: ldloc.1
-    IL_0035: ldloc.0
-    IL_0036: blt.s IL_000C
-    IL_0038: ldarg.1
-    IL_0039: ret
-
-}
-Span<byte> pack(Boolean[] src)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldlen
-    IL_0002: conv.i4
-    IL_0003: stloc.0
-    IL_0004: ldloc.0
-    IL_0005: ldc.i4.3
-    IL_0006: shr
-    IL_0007: stloc.1
-    IL_0008: ldloc.0
-    IL_0009: ldc.i4.7
-    IL_000A: and
-    IL_000B: brfalse.s IL_0011
-    IL_000D: ldloc.1
-    IL_000E: ldc.i4.1
-    IL_000F: add
-    IL_0010: stloc.1
-    IL_0011: ldloc.1
-    IL_0012: newarr System.Byte
-    IL_0017: call System.Span`1<System.Byte> System.Span`1<System.Byte>::op_Implicit(System.Byte[])
-    IL_001C: stloc.2
-    IL_001D: ldc.i4.0
-    IL_001E: stloc.3
-    IL_001F: br.s IL_0042
-    IL_0021: ldarg.0
-    IL_0022: ldloc.3
-    IL_0023: ldelem.u1
-    IL_0024: brfalse.s IL_003E
-    IL_0026: ldloca.s V_2
-    IL_0028: ldloc.3
-    IL_0029: ldc.i4.3
-    IL_002A: shr
-    IL_002B: call System.Byte& System.Span`1<System.Byte>::get_Item(System.Int32)
-    IL_0030: dup
-    IL_0031: ldind.u1
-    IL_0032: ldc.i4.1
-    IL_0033: ldloc.3
-    IL_0034: ldc.i4.7
-    IL_0035: and
-    IL_0036: ldc.i4.s 31
-    IL_0038: and
-    IL_0039: shl
-    IL_003A: conv.u1
-    IL_003B: or
-    IL_003C: conv.u1
-    IL_003D: stind.i1
-    IL_003E: ldloc.3
-    IL_003F: ldc.i4.1
-    IL_0040: add
-    IL_0041: stloc.3
-    IL_0042: ldloc.3
-    IL_0043: ldloc.0
-    IL_0044: blt.s IL_0021
-    IL_0046: ldloc.2
-    IL_0047: ret
 
 }
 ref byte packseq(ReadOnlySpan<byte> src, out byte dst)
@@ -2755,19 +2248,7 @@ ushort rev(ushort src)
     IL_001B: ret
 
 }
-uint rev(uint src)
-{
-    IL_0000: ldarg.0
-    IL_0001: call System.UInt16 Z0.Bits::hi(System.UInt32)
-    IL_0006: call System.UInt16 Z0.Bits::rev(System.UInt16)
-    IL_000B: ldarg.0
-    IL_000C: call System.UInt16 Z0.Bits::lo(System.UInt32)
-    IL_0011: call System.UInt16 Z0.Bits::rev(System.UInt16)
-    IL_0016: call System.UInt32 Z0.Bits::pack(System.UInt16,System.UInt16)
-    IL_001B: ret
-
-}
-uint rev2(uint x)
+uint rev(uint x)
 {
     IL_0000: ldarg.0
     IL_0001: ldc.i4 -1431655766
@@ -3395,6 +2876,128 @@ bool test(sbyte src, int pos)
     IL_0002: call Z0.bit Z0.BitMask::test(System.SByte,System.Int32)
     IL_0007: call System.Boolean Z0.bit::op_Implicit(Z0.bit)
     IL_000C: ret
+
+}
+bool test(byte src, int pos)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call Z0.bit Z0.BitMask::test(System.Byte,System.Int32)
+    IL_0007: call System.Boolean Z0.bit::op_Implicit(Z0.bit)
+    IL_000C: ret
+
+}
+bool test(short src, int pos)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call Z0.bit Z0.BitMask::test(System.Int16,System.Int32)
+    IL_0007: call System.Boolean Z0.bit::op_Implicit(Z0.bit)
+    IL_000C: ret
+
+}
+bool test(ushort src, int pos)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call Z0.bit Z0.BitMask::test(System.UInt16,System.Int32)
+    IL_0007: call System.Boolean Z0.bit::op_Implicit(Z0.bit)
+    IL_000C: ret
+
+}
+bool test(int src, int pos)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call Z0.bit Z0.BitMask::test(System.Int32,System.Int32)
+    IL_0007: call System.Boolean Z0.bit::op_Implicit(Z0.bit)
+    IL_000C: ret
+
+}
+bool test(uint src, int pos)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call Z0.bit Z0.BitMask::test(System.UInt32,System.Int32)
+    IL_0007: call System.Boolean Z0.bit::op_Implicit(Z0.bit)
+    IL_000C: ret
+
+}
+bool test(long src, int pos)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call System.Boolean Z0.BitMask::test(System.Int64,System.Int32)
+    IL_0007: ret
+
+}
+bool test(ulong src, int pos)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call Z0.bit Z0.BitMask::test(System.UInt64,System.Int32)
+    IL_0007: call System.Boolean Z0.bit::op_Implicit(Z0.bit)
+    IL_000C: ret
+
+}
+bool test(float src, int pos)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call Z0.bit Z0.BitMask::test(System.Single,System.Int32)
+    IL_0007: call System.Boolean Z0.bit::op_Implicit(Z0.bit)
+    IL_000C: ret
+
+}
+bool test(double src, int pos)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call Z0.bit Z0.BitMask::test(System.Double,System.Int32)
+    IL_0007: call System.Boolean Z0.bit::op_Implicit(Z0.bit)
+    IL_000C: ret
+
+}
+bit dot(Vector128<ulong> x, Vector128<ulong> y)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.dinx::vand(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
+    IL_0007: ldloca.s V_0
+    IL_0009: initobj Z0.N128
+    IL_000F: ldloc.0
+    IL_0010: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.AvxPops::avxpop(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,Z0.N128)
+    IL_0015: ldc.i4.0
+    IL_0016: call System.UInt64 Z0.dinx::vextract(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Byte)
+    IL_001B: call Z0.bit zfunc::odd(System.UInt64)
+    IL_0020: ret
+
+}
+bit dot(Vector256<ulong> x, Vector256<ulong> y)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.dinx::vand(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
+    IL_0007: ldloca.s V_3
+    IL_0009: initobj Z0.N256
+    IL_000F: ldloc.3
+    IL_0010: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.AvxPops::avxpop(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,Z0.N256)
+    IL_0015: stloc.0
+    IL_0016: ldloc.0
+    IL_0017: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.dinx::vlo(System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
+    IL_001C: ldc.i4.0
+    IL_001D: call System.UInt64 Z0.dinx::vextract(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Byte)
+    IL_0022: stloc.1
+    IL_0023: ldloc.0
+    IL_0024: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.dinx::vhi(System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
+    IL_0029: ldc.i4.0
+    IL_002A: call System.UInt64 Z0.dinx::vextract(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Byte)
+    IL_002F: stloc.2
+    IL_0030: ldloc.1
+    IL_0031: ldloc.2
+    IL_0032: add
+    IL_0033: call Z0.bit zfunc::odd(System.UInt64)
+    IL_0038: ret
 
 }
 Vec128<sbyte> vpackss(in Vec128<short> lhs, in Vec128<short> rhs)
@@ -5148,20 +4751,6 @@ short lo(int src)
 {
     IL_0000: ldarg.0
     IL_0001: conv.i2
-    IL_0002: ret
-
-}
-ushort lo(uint src)
-{
-    IL_0000: ldarg.0
-    IL_0001: conv.u2
-    IL_0002: ret
-
-}
-int lo(long src)
-{
-    IL_0000: ldarg.0
-    IL_0001: conv.i4
     IL_0002: ret
 
 }

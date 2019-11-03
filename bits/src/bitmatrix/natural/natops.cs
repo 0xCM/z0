@@ -40,13 +40,13 @@ namespace Z0
         /// <typeparam name="N">The order type</typeparam>
         /// <typeparam name="T">The primal type over which the matrix is defined</typeparam>
         [MethodImpl(Inline)]
-        public static GridSpec<T> grid<N,T>(N n = default)
+        public static BitGridSpec<T> grid<N,T>(N n = default)
             where N : ITypeNat, new()
             where T : unmanaged
-                => new GridSpec<T>(bitsize<T>(), (int)n.value,(int)n.value);
+                => new BitGridSpec<T>(bitsize<T>(), (int)n.value,(int)n.value);
 
         [MethodImpl(Inline)]
-        public static GridLayout<T> layout<N,T>()
+        public static BitGridLayout<T> layout<N,T>()
             where N : ITypeNat,new()
             where T : unmanaged
                 => grid<N,T>().CalcLayout();

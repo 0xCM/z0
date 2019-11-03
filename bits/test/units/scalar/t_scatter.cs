@@ -15,87 +15,16 @@ namespace Z0.Test
     public class t_scatter : ScalarBitTest<t_scatter>
     {        
         public void scatter_8x8()
-        {
-            scatter_check<byte>();
-        }
-
-        public void scatter_8x8_bench()
-        {
-            scatter_bench<byte>();
-            scatter_bench_ref<byte>();
-        }
+            => scatter_check<byte>();
 
         public void scatter_16x16()
-        {
-            scatter_check<ushort>();
-        }
-
-        public void scatter_16x16_bench()
-        {
-            scatter_bench<ushort>();
-            scatter_bench_ref<ushort>();
-
-        }
+            => scatter_check<ushort>();
 
         public void scatter_32x32()
-        {
-            scatter_check<uint>();
-        }
-
-        public void scatter_32x32_bench()
-        {
-            scatter_bench<uint>();
-            scatter_bench_ref<uint>();
-        }
+            => scatter_check<uint>();
 
         public void scatter_64x64()
-        {
-            scatter_check<ulong>();
-        }
-
-        public void scatter_64x64_bench()
-        {
-            scatter_bench<ulong>();
-            scatter_bench_ref<ulong>();
-        }
-
-        void scatter_bench_ref<T>()
-            where T : unmanaged
-        {
-            var sw = stopwatch(false);
-            var opcount = CycleCount * RoundCount;
-            var size = bitsize<T>();
-            var opname = $"scatter_{size}x{size}_ref";
-            for(var i=0; i<opcount; i++)
-            {
-                var src = Random.Next<T>();
-                var mask = Random.Next<T>();
-                sw.Start();
-                var dst = BitRef.scatter(src,mask);
-                sw.Stop();
-            }
-            
-            Collect((opcount,sw,opname));
-        }
-
-        void scatter_bench<T>()
-            where T : unmanaged
-        {
-            var sw = stopwatch(false);
-            var opcount = CycleCount * RoundCount;
-            var size = bitsize<T>();
-            var opname = $"scatter_{size}x{size}";
-            for(var i=0; i<opcount; i++)
-            {
-                var src = Random.Next<T>();
-                var mask = Random.Next<T>();
-                sw.Start();
-                var dst = gbits.scatter(src,mask);
-                sw.Stop();
-            }
-            
-            Collect((opcount,sw,opname));
-        }
+            => scatter_check<ulong>();
 
         void scatter_check<T>()
             where T : unmanaged

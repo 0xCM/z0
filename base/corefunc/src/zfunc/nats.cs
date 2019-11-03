@@ -17,9 +17,40 @@ partial class zfunc
     /// </summary>
     /// <typeparam name="N">The natural type</typeparam>
     [MethodImpl(Inline)]   
-    public static int natval<N>(N n = default) 
+    public static int inat<N>(N n = default) 
         where N : ITypeNat, new()
             => (int)new N().value;
+
+    /// <summary>
+    /// Returns the integral value represented by a natural type as an unsigned 32-bit integer
+    /// </summary>
+    /// <typeparam name="N">The natural type</typeparam>
+    [MethodImpl(Inline)]   
+    public static uint unat<N>(N n = default) 
+        where N : ITypeNat, new()
+            => (uint)new N().value;
+
+    [MethodImpl(Inline)]   
+    public static NatSeq<T0,T1> natseq<T0,T1>(T0 t0 = default, T1 t1 = default)
+        where T0 : unmanaged, INatPrimitive<T0>
+        where T1 : unmanaged, INatPrimitive<T1>
+            => NatSeq<T0,T1>.Rep;
+
+    [MethodImpl(Inline)]   
+    public static NatSeq<T0,T1,T2> natseq<T0,T1,T2>(T0 t0 = default, T1 t1 = default, T2 t2 = default)
+        where T0 : unmanaged, INatPrimitive<T0>
+        where T1 : unmanaged, INatPrimitive<T1>
+        where T2 : unmanaged, INatPrimitive<T2>
+            => NatSeq<T0,T1,T2>.Rep;
+
+    [MethodImpl(Inline)]   
+    public static NatSeq<T0,T1,T2,T3> natseq<T0,T1,T2,T3>(T0 t0 = default, T1 t1 = default, T2 t2 = default, T3 t3 = default)
+        where T0 : unmanaged, INatPrimitive<T0>
+        where T1 : unmanaged, INatPrimitive<T1>
+        where T2 : unmanaged, INatPrimitive<T2>
+        where T3 : unmanaged, INatPrimitive<T3>
+            => NatSeq<T0,T1,T2,T3>.Rep;
+
 
     public static N0 n0 => default;
 

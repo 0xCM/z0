@@ -71,7 +71,7 @@ namespace Z0
                 for(var j =0; j< rhs.ColCount; j++)
                 {
                     var col = rhs.RowVector(j);
-                    dst[i,j] = (Bit)modprod(row,col);
+                    dst[i,j] = modprod(row,col);
                 }
             }
             return dst;

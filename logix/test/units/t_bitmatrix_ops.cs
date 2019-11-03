@@ -34,7 +34,7 @@ namespace Z0.Logix
             var B = Random.BitMatrix<T>();
             var C = BitMatrix.alloc<T>();
             var Z = Matrix.alloc<N,bit>();
-            var n = natval<N>();
+            var n = inat<N>();
 
             for(var sample=0; sample< SampleSize; sample++)
             {

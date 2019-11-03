@@ -22,7 +22,8 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bool test(sbyte src, int pos)
             => BitMask.test(src, pos);
-            
+
+
         /// <summary>
         /// Determines whether a bit in a specified position is enabled
         /// </summary>

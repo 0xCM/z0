@@ -15,6 +15,57 @@ namespace Z0
     partial class bvoc
     {
 
+
+
+        [MethodImpl(Inline)]
+        public static uint testbit2(ref uint src, int row, int col)
+            => seek(ref src, col);
+
+        public static uint testbit2(uint[] src, int row, int col)
+        {
+            //ref var head = ref Unsafe.AsRef<uint>((Unsafe.AsPointer(ref src)));
+            return testbit2(ref head(ref src), row, col);
+        }
+
+        public static unsafe uint testbit3(uint[] src, int row, int col)
+        {
+            ref var head = ref Unsafe.AsRef<uint>((Unsafe.AsPointer(ref src)));
+            return testbit2(ref head, row, col);
+        }
+
+        public static uint testbit14(uint[] src, int row, int col)
+        {
+            //ref var head = ref Unsafe.AsRef<uint>((Unsafe.AsPointer(ref src)));
+            return testbit2(ref first(src), row, col);
+        }
+
+        public static bit testbit(BitMatrix32 src, int row, int col)
+            => src[row,col];
+
+        public static bool bg_lookup_rc(in BitGrid<N8,N8,byte> src, GridMap map, int row, int col)
+            => src.GetState(row, col);
+
+        public static bit bg_lookup_pos(in BitGrid<N8,N8,byte> src, int pos)
+            => src.GetState(pos);
+
+        public static byte bg_get_head(in BitGrid<N8,N8,byte> src)
+            => src.Head;
+
+        public static ref readonly CellMap bg_cellmap_lookup_1(in BitGrid<N8,N8,byte> src, int row, int col)
+            => ref src.CellMap(row,col);
+
+        public static ref readonly CellMap bg_cellmap_lookup_2(in BitGrid<N8,N8,byte> src, int pos)
+            => ref src.CellMap(pos);
+
+        public static ref readonly CellMap cellmap_lookup_1(GridMap src, int row, int col)
+            => ref src[row,col];
+
+        public static ref readonly CellMap cellmap_lookup_2(GridMap src, int pos)
+            => ref src[pos];
+
+        public static ref uint bitcells_segment_32u(BitCells<uint> src, int pos)
+            => ref src.Segment(pos);
+            
         public static ReadOnlySpan<char> bitchars_32u(uint value)
             => gbits.bitchars(value);
 
@@ -24,7 +75,8 @@ namespace Z0
         public static BitVector32 and_bv_o32u(BitVector32 x, BitVector32 y)
             => x & y;
 
-        
+    
+
         public static BitVector32 or_bv_32u(BitVector32 x, BitVector32 y)
             => BitVector.or(x,y);
 

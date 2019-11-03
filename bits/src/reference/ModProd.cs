@@ -106,11 +106,11 @@ namespace Z0
         public static bit modprod<T>(BitCells<T> lhs, BitCells<T> rhs)
             where T : unmanaged
         {
-            var result = 0;
+            var result = 0u;
             for(var i=0; i<lhs.Length; i++)
             {
-                var a = lhs[i] ? 1 : 0;
-                var b = rhs[i] ? 1 : 0;
+                var a = (uint)lhs[i];
+                var b = (uint)rhs[i];
                 result += a*b;
             }
             return odd(result);

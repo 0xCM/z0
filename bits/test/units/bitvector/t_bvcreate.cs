@@ -213,7 +213,7 @@ namespace Z0.Test
 
                 var x = src[i];
                 for(byte j = 0; j < (int)dim.value; j++)
-                    Claim.eq(gbits.test(x,j).ToBit(), bv[j]);     
+                    Claim.eq(gbits.test(x,j), bv[j]);     
 
                 // bv.Fill(Bit.On);
                 // Claim.eq(dim.value, bv.Pop());                    

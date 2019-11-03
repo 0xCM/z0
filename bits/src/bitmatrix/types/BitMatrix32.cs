@@ -164,7 +164,7 @@ namespace Z0
         [MethodImpl(Inline)]
         BitMatrix32(BitMatrix<N32,uint> src)
         {
-            this.data = src.Data.ToArray();
+            this.data = src.Data.ToArray();            
         }
 
         [MethodImpl(Inline)]
@@ -193,7 +193,7 @@ namespace Z0
         /// <param name="row">The row index</param>
         /// <param name="col">The column index</param>
         [MethodImpl(Inline)]
-        public readonly Bit GetBit(int row, int col)
+        public readonly bit GetBit(int row, int col)
             => BitMask.test(data[row], col);
 
         /// <summary>
@@ -203,7 +203,7 @@ namespace Z0
         /// <param name="col">The column index</param>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
-        public void SetBit(int row, int col, Bit src)
+        public void SetBit(int row, int col, bit src)
             => BitMask.set(ref data[row], (byte)col, src);
 
         /// <summary>
@@ -211,7 +211,7 @@ namespace Z0
         /// </summary>
         /// <param name="row">The row index</param>
         /// <param name="col">The column index</param>
-        public Bit this[int row, int col]
+        public bit this[int row, int col]
         {
             [MethodImpl(Inline)]
             get => GetBit(row,col);
@@ -259,18 +259,9 @@ namespace Z0
         }
 
         /// <summary>
-        /// The data enclosed by the matrix
-        /// </summary>
-        public uint[] Rows
-        {
-            [MethodImpl(Inline)] 
-            get => data;
-        }
-
-        /// <summary>
         /// A reference to the first row of the matrix
         /// </summary>
-        public ref uint Head
+        public unsafe ref uint Head
         {
             [MethodImpl(Inline)] 
             get => ref data[0];
@@ -295,7 +286,6 @@ namespace Z0
         public void RowSwap(int i, int j)
             => data.Swap(i,j);
 
-
         public readonly uint ColData(int index)
         {
             uint col = 0;
@@ -315,7 +305,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public readonly bool IsZero()
             => BitMatrix.testz(this);
-
         
         public readonly BitMatrix32 Transpose()
         {
@@ -401,7 +390,7 @@ namespace Z0
         public unsafe uint* HeadPtr
         {
             [MethodImpl(Inline)]
-            get => refptr(ref Head);
+            get => (uint*)Unsafe.AsPointer(ref data[0]);
         }
 
     }

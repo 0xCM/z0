@@ -133,7 +133,7 @@ namespace Z0
                 if(i <= 63)
                 {
                     var val1 = Pow2.pow((byte)i);
-                    var val2 = bs.TakeValue<ulong>();
+                    var val2 = bs.TakeScalar<ulong>();
                     Claim.eq(val1,val2);
                 }    
             }
@@ -143,7 +143,7 @@ namespace Z0
         {
             var x0 = 0b_01011000_00001000_11111010_01100101u;
             var x1 = x0.ToBitString();
-            var x2 = x1.TakeValue<uint>();
+            var x2 = x1.TakeScalar<uint>();
             Claim.eq(x0,x2);            
 
             var x = 0b10100001100101010001u;
@@ -152,7 +152,7 @@ namespace Z0
             Claim.eq((int)bs1.Length, bsSrc.Length);
 
             var bs2 = BitString.FromScalar(x);
-            var y = bs1.TakeValue<uint>();
+            var y = bs1.TakeScalar<uint>();
             Claim.eq(x,y);
             Claim.yea(bs1.Equals(bs2));
 
@@ -176,7 +176,7 @@ namespace Z0
             var src = Random.BitStrings(5, 60).Take(Pow2.T14);
             foreach(var bs in src)
             {
-                var bvX = bs.TakeValue<ulong>().ToBitString();
+                var bvX = bs.TakeScalar<ulong>().ToBitString();
                 var nlzX = bvX.PopCount();
                 var bv = bs.ToBitVector(n64);
                 var nlzY = bv.Pop();
@@ -233,7 +233,7 @@ namespace Z0
             for(var i=0u; i<wordCount; i++)
             {
                 var w = words[i];
-                var value = w.TakeValue<byte>();
+                var value = w.TakeScalar<byte>();
                 Claim.eq(i, value);
             }
         }    
@@ -279,7 +279,7 @@ namespace Z0
         public void bs_parselit()
         {
             var a = BitString.Parse("01010111");
-            var b = a.TakeValue<byte>();
+            var b = a.TakeScalar<byte>();
             Claim.eq((byte)0b01010111, b);
 
             var x =  0b111010010110011010111001110000100001101ul;
@@ -287,10 +287,10 @@ namespace Z0
             var ybs = x.ToBitString();
             Claim.eq(xbs, ybs);                
 
-            var y = xbs.TakeValue<ulong>();
+            var y = xbs.TakeScalar<ulong>();
             Claim.eq(x, y);
 
-            var z = ybs.TakeValue<ulong>();
+            var z = ybs.TakeScalar<ulong>();
             Claim.eq(x, z);
 
             
@@ -315,7 +315,7 @@ namespace Z0
                 
                 var bytes = span<byte>(8);
                 for(var i=0; i<8; i++)         
-                    bytes[i] = blocks[i].TakeValue<byte>();
+                    bytes[i] = blocks[i].TakeScalar<byte>();
                 
                 var j = 0;
                 var y = Bits.pack(bytes[j++], bytes[j++], bytes[j++], bytes[j++], 
@@ -332,11 +332,11 @@ namespace Z0
             var signed = signedint<T>();
             var bitsize = BitSize.Size<T>();
             var bs10 = BitString.Parse("1" + repeat('0', bitsize - 1).Concat());
-            var x10 = bs10.TakeValue<T>();
+            var x10 = bs10.TakeScalar<T>();
             var bs11 = BitString.Parse("11" + repeat('0', bitsize - 2).Concat());
-            var x11 = bs11.TakeValue<T>();
+            var x11 = bs11.TakeScalar<T>();
             var bs01 = BitString.Parse("01" + repeat('0', bitsize - 2).Concat());
-            var x01 = bs01.TakeValue<T>();
+            var x01 = bs01.TakeScalar<T>();
             var y = gmath.sar(x10, 1);
             if(signed)
                 Claim.eq(x11, y);
@@ -355,7 +355,7 @@ namespace Z0
             {
                 var x = src[i];
                 var bs = BitString.FromScalar(src[i]);
-                var y = bs.TakeValue<T>();
+                var y = bs.TakeScalar<T>();
                 Claim.eq(x,y);
                 Claim.eq(bs.Format(), BitString.FromScalar(y).Format());
             }
@@ -426,7 +426,7 @@ namespace Z0
                 Claim.eq(seqlen, bitsize<T>());
 
                 for(byte j = 0; j < seqlen; j++)
-                    Claim.eq(gbits.test(x0, j), x1[j] == 1);
+                    Claim.eq(gbits.test(x0, j), (bit)(x1[j] == 1));
             }
 
             TypeCaseEnd<T>();
@@ -441,7 +441,7 @@ namespace Z0
             foreach(var x in src)
             {
                 var y = BitString.FromScalar(x);
-                var z = y.TakeValue<T>();
+                var z = y.TakeScalar<T>();
                 Claim.eq(x,z);
             }
             TypeCaseEnd<T>();            

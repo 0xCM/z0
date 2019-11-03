@@ -67,6 +67,15 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source bitstring</param>
         [MethodImpl(Inline)]
+        public static BitVector<T> from<T>(BitString src)
+            where T : unmanaged
+                => src.TakeScalar<T>();
+
+        /// <summary>
+        /// Creates a vector from a bitstring
+        /// </summary>
+        /// <param name="src">The source bitstring</param>
+        [MethodImpl(Inline)]
         public static BitVector16 from(N16 n, BitString src)
             => src.TakeUInt16();
 

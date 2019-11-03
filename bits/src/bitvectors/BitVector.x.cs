@@ -459,6 +459,15 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
+        public static BitVector<T> ToBitVector<T>(this BitString src)
+            where T : unmanaged
+            => BitVector.from<T>(src);
+
+        /// <summary>
+        /// Constructs a 4-bit bitvector from bitstring
+        /// </summary>
+        /// <param name="src">The source value</param>
+        [MethodImpl(Inline)]
         public static BitVector4 ToBitVector(this BitString src, N4 n)
             => BitVector4.FromBitString(src);
 
@@ -634,7 +643,7 @@ namespace Z0
         public static BitCells<T> ToBitCells<N,T>(this BitVector<N,T> src)
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => BitCells.load(src.Data, natval<N>());
+                => BitCells.load(src.Data, inat<N>());
 
         /// <summary>
         /// Converts the leading elements of generic bitvector to an 8-bit primal bitvector

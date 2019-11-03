@@ -93,7 +93,7 @@ namespace Z0.Test
         {
             var m = BitMatrix64.Identity;
             for(byte i=0; i < m.RowCount; i++)
-                Claim.eq(m[i,i],Bit.On);
+                Claim.eq(m[i,i],bit.On);
             Claim.yea(m.Diagonal().AllOnes());
 
             var lhs = BitMatrix64.Identity;

@@ -47,7 +47,7 @@ namespace Z0
 
         static readonly BitPos MaxBitIndex = BitCount - 1;
     
-        static readonly CellIndex<T>[] BitMap = BitSize.BitMap<T>(BitCount);
+        static readonly BitCellIndex<T>[] BitMap = BitSize.BitMap<T>(BitCount);
 
         [MethodImpl(Inline)]
         public static BitVector<N,T> Alloc(T? fill = null)
@@ -79,6 +79,10 @@ namespace Z0
             => new BitVector<N,T>(src);    
 
         [MethodImpl(Inline)]
+        public static BitVector<N,T> FromBytes(Span<byte> src)
+            => new BitVector<N,T>(src.As<byte,T>());    
+
+        [MethodImpl(Inline)]
         public static implicit operator BitCells<T>(BitVector<N,T> src)
             => BitCells<T>.FromCells(src.data, (int)new N().value);
 
@@ -103,14 +107,6 @@ namespace Z0
             => new BitVector<N,T>(mathspan.not(src.data, src.data.Replicate(true)));                        
 
         /// <summary>
-        /// Computes the bitwise complement of the operand
-        /// </summary>
-        /// <param name="lhs">The source operand</param>
-        [MethodImpl(Inline)]
-        public static BitVector<N,T> operator -(BitVector<N,T> src)
-            => new BitVector<N,T>(mathspan.negate(src.data, src.data.Replicate(true)));                        
-
-        /// <summary>
         /// Computes the scalar product of the operands
         /// </summary>
         /// <param name="lhs">The left operand</param>
@@ -118,6 +114,14 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Bit operator %(BitVector<N,T> lhs, BitVector<N,T> rhs)
             => lhs.Dot(rhs);
+
+        /// <summary>
+        /// Computes the bitwise complement of the operand
+        /// </summary>
+        /// <param name="lhs">The source operand</param>
+        [MethodImpl(Inline)]
+        public static BitVector<N,T> operator -(BitVector<N,T> src)
+            => new BitVector<N,T>(mathspan.negate(src.data, src.data.Replicate(true)));                        
 
         /// <summary>
         /// Returns true if the source vector is nonzero, false otherwise
@@ -176,7 +180,7 @@ namespace Z0
         /// </summary>
         /// <param name="pos">The bit position</param>
         [MethodImpl(Inline)]
-        public Bit Get(BitPos pos)
+        public bit Get(BitPos pos)
         {
             ref readonly var cell = ref BitMap[CheckIndex(pos)];
             return gbits.test(Data[cell.Segment], cell.Offset);
@@ -188,16 +192,16 @@ namespace Z0
         /// <param name="pos">The absolute bit position</param>
         /// <param name="value">The value the bit will receive</param>
         [MethodImpl(Inline)]
-        public void Set(BitPos pos, Bit value)
+        public void Set(BitPos pos, bit value)
         {
             ref readonly var cell = ref BitMap[CheckIndex(pos)];
-            gbits.set(ref Data[cell.Segment], cell.Offset, value);
+            gbits.set(ref Data[cell.Segment], (byte)cell.Offset, value);
         }
 
         /// <summary>
         /// A bit-level accessor/manipulator
         /// </summary>
-        public Bit this[BitPos index]
+        public bit this[BitPos index]
         {
             [MethodImpl(Inline)]
             get => Get(index);
@@ -210,9 +214,9 @@ namespace Z0
         /// Computes the scalar product between this vector and another
         /// </summary>
         /// <param name="rhs">The other vector</param>
-        public Bit Dot(BitVector<N,T> rhs)
+        public bit Dot(BitVector<N,T> rhs)
         {             
-            var result = Bit.Off;
+            var result = bit.Off;
             for(var i=0; i<Length; i++)
                 result ^= this[i] & rhs[i];
             return result;
@@ -278,7 +282,7 @@ namespace Z0
         public void Toggle(BitPos index)
         {         
             ref readonly var pos = ref BitMap[CheckIndex(index)];
-            BitMaskG.toggle(ref Data[pos.Segment],  pos.Offset);
+            BitMaskG.toggle(ref Data[pos.Segment],  (byte)pos.Offset);
         }
 
         /// <summary>
@@ -300,7 +304,7 @@ namespace Z0
         public void Disable(BitPos index)
         {
             ref readonly var pos = ref BitMap[CheckIndex(index)];
-            gbits.disable(ref Data[pos.Segment], pos.Offset);
+            gbits.disable(ref Data[pos.Segment], (byte)pos.Offset);
         }
 
         /// <summary>
@@ -315,12 +319,12 @@ namespace Z0
         /// Counts the vector's enabled bits
         /// </summary>
         [MethodImpl(Inline)]
-        public BitSize Pop()
+        public int Pop()
         {
             var count = 0u;
             for(var i=0; i < MinCellCount; i++)
                 count += gbits.pop(Data[i]);
-            return count;
+            return (int)count;
         }
 
         /// <summary>
@@ -400,39 +404,5 @@ namespace Z0
             => throw new NotImplementedException();
     }
 
-    public readonly struct BitVectorProxy<N,T>
-        where T : unmanaged
-        where N : ITypeNat, new()
-    {
-        readonly T[] data;
-
-        [MethodImpl(Inline)]
-        public static BitVectorProxy<N,T> From(in BitVector<N,T> src)
-            => new BitVectorProxy<N,T>(src);
-        
-        [MethodImpl(Inline)]
-        public static implicit operator BitVectorProxy<N,T>(in BitVector<N,T> src)
-            => From(src);
-
-        [MethodImpl(Inline)]
-        public static implicit operator BitVector<N,T>(BitVectorProxy<N,T> src)
-            => src.BitVector;
-        
-        [MethodImpl(Inline)]
-        public BitVectorProxy(in BitVector<N,T> src)
-        {
-            data = src.Data.ToArray();
-        }
-
-        /// <summary>
-        /// The subject of the proxy, in this case a T-bitvector
-        /// </summary>
-        public BitVector<N,T> BitVector
-        {
-            [MethodImpl(Inline)]
-            get => BitVector<N,T>.FromArrayUnchecked(data);
-        }
-
-    }
 
 }

@@ -218,6 +218,52 @@ namespace Z0.Test
             }        
         }
 
+        public void unpack_8x1_check()
+        {
+            for(var i=0; i<= 255; i++)            
+            {
+                byte b = (byte)i;
+                var x = BitStore.bitseq(b);
+                var y = BitStore.select(b);
+                Claim.eq(x,y);
+
+                var up1 = BitStore.select((byte)i);
+                Span<byte> up2 = stackalloc byte[8];
+                BitParts.unpack8x1(b, up2);
+                Claim.eq(BitString.FromBitSeq(up1), BitString.FromBitSeq(up2));
+            }
+        }
+
+        public void unpack_64x1_check()
+        {
+            Span<byte> dst = stackalloc byte[64];
+
+            for(var i=0; i< SampleSize; i++)
+            {
+                var src = Random.Next<ulong>();
+                BitParts.unpack64x1(src, dst);
+                var bitsPC = dst.PopCount();
+                var bytes = Unmanaged.ByteSpan(ref src);
+                var bytesPC = bytes.PopCount();
+                Claim.eq(bitsPC, bytesPC);        
+            }
+        }
+
+        public void unpack_32x1_check()
+        {
+
+            Span<byte> y1 = stackalloc byte[32];
+            Span<byte> y2 = stackalloc byte[32];
+            for(var i=0; i< SampleSize; i++)
+            {
+                var x = Random.Next<uint>();
+                BitParts.unpack32x1(x, y1);
+                BitParts.unpack32x1(x, y2);
+                Claim.eq(y1.ToBitString(), y2.ToBitString());
+            }            
+        }    
+    
+
         /// <summary>
         /// Packs bits into bytes
         /// </summary>

@@ -25,7 +25,7 @@ namespace Z0
 
         public static BitMatrix<N,T> Ones => BitMatrix.ones<N,T>();
 
-        public static readonly GridLayout<T> GridLayout = BitMatrix.layout<N,T>();
+        public static readonly BitGridLayout<T> GridLayout = BitMatrix.layout<N,T>();
 
         /// <summary>
         /// Specifies the square matrix dimension
@@ -91,7 +91,7 @@ namespace Z0
         void SetBit(int row, int col, bit value)
         {
             var cell = GridLayout.Row(row)[col];
-            gbits.set(ref Data[cell.Segment], cell.Offset, value);
+            gbits.set(ref Data[cell.Segment], (byte)cell.Offset, value);
         }
 
         public Bit this[int row, int col]

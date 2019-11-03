@@ -51,10 +51,10 @@ namespace Z0
         /// Calculates a canonical bijection from a contiguous sequence of bits onto a contiguous sequence of segments
         /// </summary>
         /// <param name="bitcount">The total number of bits to distribute over one or more segments</param>        
-        public static CellIndex<T>[] BitMap<T>(BitSize bitcount)
+        public static BitCellIndex<T>[] BitMap<T>(BitSize bitcount)
             where T : unmanaged
         {
-            var dst =  new CellIndex<T>[bitcount];
+            var dst =  new BitCellIndex<T>[bitcount];
             var capacity = bitsize<T>();            
             ushort seg = 0;
             byte offset = 0;

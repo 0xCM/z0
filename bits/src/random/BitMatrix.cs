@@ -129,7 +129,7 @@ namespace Z0
             where M : ITypeNat, new()
             where N : ITypeNat, new()
             where T : unmanaged
-                => BM.load(random.Array<T>(BitGrid.Specify(m,n,default(T)).TotalCellCount), m, n);
+                => BM.load(random.Array<T>(BitGridSpec.Define(m,n,default(T)).TotalCellCount), m, n);
 
         /// <summary>
         /// Produces an generic bitmatrix of natural order
@@ -142,6 +142,44 @@ namespace Z0
         public static BitMatrix<N,T> BitMatrix<N,T>(this IPolyrand random, N n = default)
             where N : ITypeNat, new()
             where T : unmanaged
-                => BM.load(random.Array<T>(BitGrid.Specify(n,n,default(T)).TotalCellCount), n);                
+                => BM.load(random.Array<T>(BitGridSpec.Define(n,n,default(T)).TotalCellCount), n);                
+ 
+        /// <summary>
+        /// Allocates and populates a bitgrid
+        /// </summary>
+        /// <param name="random">The random source</param>
+        /// <param name="n">The matrix order</param>
+        /// <param name="rep">A scalar representative</param>
+        /// <typeparam name="N">The order type</typeparam>
+        /// <typeparam name="T">The scalar type</typeparam>
+        [MethodImpl(Inline)]
+        public static BitGrid<M,N,T> BitGrid<M,N,T>(this IPolyrand random, M m = default, N n = default, T zero = default)
+            where M : unmanaged,ITypeNat
+            where N : unmanaged,ITypeNat
+            where T : unmanaged
+        {
+            var map = GridLayout.map(m,n,zero);
+            var data = random.Span<T>(map.Segments);
+            return Z0.BitGrid.load(data, m, n);
+        }
+
+        /// <summary>
+        /// Allocates and populates a bitgrid
+        /// </summary>
+        /// <param name="random">The random source</param>
+        /// <param name="n">The matrix order</param>
+        /// <param name="rep">A scalar representative</param>
+        /// <typeparam name="N">The order type</typeparam>
+        /// <typeparam name="T">The scalar type</typeparam>
+        [MethodImpl(Inline)]
+        public static BitGrid<M,N,T> Fill<M,N,T>(this IPolyrand random, BitGrid<M,N,T> dst)
+            where M : unmanaged,ITypeNat
+            where N : unmanaged,ITypeNat
+            where T : unmanaged
+        {
+            random.StreamTo(dst.BitMap.Segments, ref dst.Head);
+            return dst;
+        }
+
     }
 }

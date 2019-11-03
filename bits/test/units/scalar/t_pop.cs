@@ -59,25 +59,46 @@ namespace Z0.Test
             var xBytesPC = xBytes.PopCount();
             var xBitsPC = xBytes.Unpack().PopCount();
             Claim.eq(xBitsPC, xBytesPC);
+
         }
 
-        void PopCounts<N,T>()
-            where T : unmanaged
-            where N : INatPow2, new()
+        public void natural_pops()
         {
-            var src = Random.Span<T>((int)new N().value);
-
-            var pc1 = 0ul;
-            for(var i = 0; i<src.Length; i++)
-            {
-                var bv = BitVector<N,T>.FromArray(src[i]);
-                pc1 += bv.Pop();
-            }
-
-            for(var i = 0; i<src.Length; i++)
-            {
-                var bs = BitString.FromScalar(in src[i]);
-            }
+            pop_check2<N8,byte>();
+            pop_check2<N9,byte>();
+            pop_check2<N10,ushort>();
+            pop_check2<N11,ushort>();
+            pop_check2<N16,byte>();
+            pop_check2<N16,ushort>();
+            pop_check2<N31,byte>();
+            pop_check2<N64,ulong>();
+            pop_check2<N128,uint>();
+            pop_check2<N256,ulong>();
+            pop_check2<N512,ulong>();
+            pop_check2<N1024,ulong>();
+            pop_check2<N2048,ulong>();
+            pop_check2<N4096,ulong>();
+            pop_check2<N8192,ulong>();
+            pop_check2<N16384,ushort>();            
         }
+
+        void pop_check2<N,T>(N n = default)
+            where T : unmanaged
+            where N : unmanaged, ITypeNat
+        {
+            
+            var len = (int)(Mod8.div((uint)n.value) + (Mod8.mod((uint)n.value) != 0 ? 1 : 0));
+            
+            var src = Random.Span<byte>(len);
+
+            var bv = BitVector<N,T>.FromBytes(src);
+            var pc1 = bv.Pop();
+
+            var bs = BitString.FromScalars(src);
+            var pc2 = bs.PopCount();
+
+            Claim.eq(pc1,pc2);
+        }
+
     }
 }

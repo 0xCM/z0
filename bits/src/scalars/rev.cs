@@ -5,11 +5,7 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Reflection;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
-    using System.Diagnostics;
     
     using static zfunc;    
     
@@ -32,16 +28,8 @@ namespace Z0
         public static ushort rev(ushort src)
             => pack(rev(hi(src)),rev(lo(src)));
 
-        /// <summary>
-        /// Reverses the bits in the source
-        /// </summary>
-        /// <param name="src">The source bits</param>
         [MethodImpl(Inline)]
-        public static uint rev(uint src)
-            => pack(rev(hi(src)),rev(lo(src)));
-
-        [MethodImpl(Inline)]
-        public static uint rev2(uint x)
+        public static uint rev(uint x)
         {
             x = (((x & 0xaaaaaaaa) >> 1) | ((x & 0x55555555) << 1));
             x = (((x & 0xcccccccc) >> 2) | ((x & 0x33333333) << 2));
@@ -57,7 +45,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ulong rev(ulong src)
             => pack(rev(hi(src)),rev(lo(src)));
-
     }
-
 }

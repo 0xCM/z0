@@ -225,23 +225,13 @@ namespace Z0
         }
 
         /// <summary>
-        /// The data enclosed by the matrix
-        /// </summary>
-        public byte[] Rows
-        {
-            [MethodImpl(Inline)] 
-            get => data;
-        }
-
-        /// <summary>
         /// A reference to the first row of the matrix
         /// </summary>
-        public ref byte Head
+        public unsafe ref byte Head
         {
             [MethodImpl(Inline)] 
-            get => ref head(data);
+            get => ref data[0];
         }
-
 
         /// <summary>
         /// Constructs an 8-node graph via the adjacency matrix interpretation
@@ -322,7 +312,7 @@ namespace Z0
         /// <param name="row">The row index</param>
         [MethodImpl(Inline)]
         public ref byte RowData(int row)
-            => ref data[row];
+            => ref seek(ref Head, row);
 
         /// <summary>
         /// Interchanges the i'th and j'th rows where  0 <= i,j < 32
@@ -430,7 +420,6 @@ namespace Z0
         public override int GetHashCode() 
             => throw new NotSupportedException();
 
-
         static ReadOnlySpan<byte> Identity8x8 => new byte[]
         {
             1 << 0, 1 << 1, 1 << 2, 1 << 3, 1 << 4, 1 << 5, 1 << 6, 1 << 7
@@ -439,7 +428,7 @@ namespace Z0
         public unsafe byte* HeadPtr
         {
             [MethodImpl(Inline)]
-            get => refptr(ref Head);
+            get => (byte*)Unsafe.AsPointer(ref data[0]);
         }
     }
 }

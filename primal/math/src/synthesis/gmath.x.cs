@@ -38,7 +38,6 @@ namespace Z0
         static bool SequenceEqual<T>(ref T first, ref T second, int length)
             where T : unmanaged
         {
-
             if (Unsafe.AreSame(ref first, ref second))
                 return true;
 
@@ -203,7 +202,7 @@ namespace Z0
             
             if(lhs.Length != rhs.Length)
                 return false;
-            return SequenceEqual(ref lhs[0], ref rhs[0], lhs.Length);
+            return SequenceEqual(ref head(lhs), ref head(rhs), lhs.Length);
         }
 
         [MethodImpl(Inline)]
@@ -212,7 +211,7 @@ namespace Z0
         {
             if(lhs.Length != rhs.Length)
                 return false;
-            return SequenceEqual(ref asRef(in lhs[0]), ref asRef(in rhs[0]), lhs.Length);
+            return SequenceEqual(ref asRef(in head(lhs)), ref asRef(in head(rhs)), lhs.Length);
         }
 
         [MethodImpl(Inline)]
