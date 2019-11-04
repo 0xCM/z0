@@ -192,24 +192,5 @@ namespace Z0
             return and(in A, in B, ref C);
         }
 
-        /// <summary>
-        /// Computes the bitwise AND between two bitmatrices of common dimension and stores the
-        /// result a caller-supplied target matrix
-        /// </summary>
-        /// <param name="A">The first source operand</param>
-        /// <param name="B">The second source operand</param>
-        /// <param name="C">The target</param>
-        /// <typeparam name="N">The matrix order</typeparam>
-        /// <typeparam name="T">The matrix storage type</typeparam>
-        [MethodImpl(Inline)]
-        public static ref BitMatrix<M,N,T> and<M,N,T>(in BitMatrix<M,N,T> A, in BitMatrix<M,N,T> B, ref BitMatrix<M,N,T> C)        
-            where M : unmanaged, ITypeNat
-            where N : unmanaged, ITypeNat
-            where T : unmanaged
-        {
-            mathspan.and(A.Data, B.Data, C.Data);
-            return ref C;
-        } 
- 
     }
 }

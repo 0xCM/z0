@@ -23,9 +23,9 @@ namespace Z0
         public static unsafe BitMatrix<T> cimply<T>(in BitMatrix<T> A, in BitMatrix<T> B)
             where T : unmanaged
         {
-            var C = BitMatrix.alloc<T>();
-            BitPoints.cimply(A.HeadPtr,B.HeadPtr,C.HeadPtr);
-            return C;
+            var Z = BitMatrix.alloc<T>();
+            BitPoints.cimply(in A.Head, in B.Head, ref Z.Head);
+            return Z;
         }
 
         /// <summary>
@@ -39,7 +39,7 @@ namespace Z0
         public static unsafe ref BitMatrix<T> cimply<T>(in BitMatrix<T> A, in BitMatrix<T> B, ref BitMatrix<T> Z)
             where T : unmanaged
         {
-            BitPoints.cimply(A.HeadPtr,B.HeadPtr,Z.HeadPtr);
+            BitPoints.cimply(in A.Head, in B.Head, ref Z.Head);
             return ref Z;
         }
 
@@ -52,7 +52,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static unsafe ref BitMatrix8 cimply(in BitMatrix8 A, in BitMatrix8 B, ref BitMatrix8 Z)
         {
-             BitPoints.cimply(A.HeadPtr,B.HeadPtr,Z.HeadPtr);
+             BitPoints.cimply(in A.Head, in B.Head, ref Z.Head);
              return ref Z;
         }
 
@@ -64,9 +64,9 @@ namespace Z0
         [MethodImpl(Inline)]
         public static unsafe BitMatrix8 cimply(BitMatrix8 A, BitMatrix8 B)
         {
-            var C = BitMatrix.alloc(n8);
-            BitPoints.cimply(A.HeadPtr,B.HeadPtr,C.HeadPtr);
-            return C;
+            var Z = BitMatrix.alloc(n8);
+            BitPoints.cimply(in A.Head, in B.Head, ref Z.Head);
+            return Z;
         }
 
         /// <summary>
@@ -78,7 +78,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static unsafe ref BitMatrix16 cimply(in BitMatrix16 A, in BitMatrix16 B, ref BitMatrix16 Z)
         {
-            BitPoints.cimply(A.HeadPtr, B.HeadPtr, Z.HeadPtr);
+            BitPoints.cimply(in A.Head, in B.Head, ref Z.Head);
             return ref Z;
         }
 
@@ -90,9 +90,9 @@ namespace Z0
         [MethodImpl(Inline)]
         public static unsafe BitMatrix16 cimply(BitMatrix16 A, BitMatrix16 B)
         {
-            var C = BitMatrix.alloc(n16);
-            BitPoints.cimply(A.HeadPtr,B.HeadPtr,C.HeadPtr);
-            return C;
+            var Z = BitMatrix.alloc(n16);
+            BitPoints.cimply(in A.Head, in B.Head, ref Z.Head);
+            return Z;
         }
 
         /// <summary>
@@ -104,7 +104,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static unsafe ref BitMatrix32 cimply(in BitMatrix32 A, in BitMatrix32 B, ref BitMatrix32 Z)
         {
-            BitPoints.cimply(A.HeadPtr, B.HeadPtr, Z.HeadPtr);
+            BitPoints.cimply(in A.Head, in B.Head, ref Z.Head);
             return ref Z;
         }
 
@@ -116,9 +116,9 @@ namespace Z0
         [MethodImpl(Inline)]
         public static unsafe BitMatrix32 cimply(BitMatrix32 A, BitMatrix32 B)
         {
-            var C = BitMatrix.alloc(n32);
-            BitPoints.cimply(A.HeadPtr,B.HeadPtr,C.HeadPtr);
-            return C;
+            var Z = BitMatrix.alloc(n32);
+            BitPoints.cimply(in A.Head, in B.Head, ref Z.Head);
+            return Z;
         }
 
         /// <summary>
@@ -130,7 +130,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static unsafe ref BitMatrix64 cimply(in BitMatrix64 A, in BitMatrix64 B, ref BitMatrix64 Z)
         {
-            BitPoints.cimply(A.HeadPtr, B.HeadPtr, Z.HeadPtr);
+            BitPoints.cimply(in A.Head, in B.Head, ref Z.Head);
             return ref Z;
         }
 
@@ -142,9 +142,9 @@ namespace Z0
         [MethodImpl(Inline)]
         public static unsafe BitMatrix64 cimply(in BitMatrix64 A, in BitMatrix64 B)
         {
-            var C = BitMatrix.alloc(n64);
-            BitPoints.cimply(A.HeadPtr,B.HeadPtr,C.HeadPtr);
-            return C;
+            var Z = BitMatrix.alloc(n64);
+            BitPoints.cimply(in A.Head, in B.Head, ref Z.Head);
+            return Z;
         }
     }
 }

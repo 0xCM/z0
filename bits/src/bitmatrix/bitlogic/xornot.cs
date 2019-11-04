@@ -40,7 +40,7 @@ namespace Z0
         public static unsafe BitMatrix8 xornot(in BitMatrix8 A, in BitMatrix8 B)
         {
             var C = BitMatrix.alloc(n8);
-            BitPoints.xornot(A.HeadPtr,B.HeadPtr,C.HeadPtr);
+            BitPoints.xornot(A.HeadPtr, B.HeadPtr,C.HeadPtr);
             return C;
         }
 

@@ -22,9 +22,9 @@ namespace Z0
         public static unsafe bit same<T>(in BitMatrix<T> A, in BitMatrix<T> B)
             where T : unmanaged
         {
-            var C = BitMatrix.alloc<T>();
-            BitPoints.xnor(A.HeadPtr,B.HeadPtr,C.HeadPtr);
-            return BitPoints.testc(C.HeadPtr);
+            var Z = BitMatrix.alloc<T>();
+            BitPoints.xnor(in A.Head,in B.Head, ref Z.Head);
+            return BitPoints.testc(Z.HeadPtr);
         }
 
         /// <summary>
@@ -35,9 +35,9 @@ namespace Z0
         [MethodImpl(Inline)]
         public static unsafe bit same(BitMatrix8 A, BitMatrix8 B)
         {
-            var C = BitMatrix.alloc(n8);
-            BitPoints.xnor(A.HeadPtr,B.HeadPtr,C.HeadPtr);
-            return BitPoints.testc(C.HeadPtr);
+            var Z = BitMatrix.alloc(n8);
+            BitPoints.xnor(A.HeadPtr,B.HeadPtr,Z.HeadPtr);
+            return BitPoints.testc(Z.HeadPtr);
         }
 
         /// <summary>
@@ -48,9 +48,9 @@ namespace Z0
         [MethodImpl(Inline)]
         public static unsafe bit same(BitMatrix16 A, BitMatrix16 B)
         {
-            var C = BitMatrix.alloc(n16);
-            BitPoints.xnor(A.HeadPtr,B.HeadPtr,C.HeadPtr);
-            return BitPoints.testc(C.HeadPtr);
+            var Z = BitMatrix.alloc(n16);
+            BitPoints.xnor(A.HeadPtr,B.HeadPtr,Z.HeadPtr);
+            return BitPoints.testc(Z.HeadPtr);
         }
 
         /// <summary>
@@ -61,9 +61,9 @@ namespace Z0
         [MethodImpl(Inline)]
         public static unsafe bit same(BitMatrix32 A, BitMatrix32 B)
         {
-            var C = BitMatrix.alloc(n32);
-            BitPoints.xnor(A.HeadPtr,B.HeadPtr,C.HeadPtr);
-            return BitPoints.testc(C.HeadPtr);
+            var Z = BitMatrix.alloc(n32);
+            BitPoints.xnor(A.HeadPtr,B.HeadPtr,Z.HeadPtr);
+            return BitPoints.testc(Z.HeadPtr);
         }
 
         /// <summary>
@@ -74,9 +74,9 @@ namespace Z0
         [MethodImpl(Inline)]
         public static unsafe bit same(BitMatrix64 A, BitMatrix64 B)
         {
-            var C = BitMatrix.alloc(n64);
-            BitPoints.xnor(A.HeadPtr,B.HeadPtr,C.HeadPtr);
-            return BitPoints.testc(C.HeadPtr);
+            var Z = BitMatrix.alloc(n64);
+            BitPoints.xnor(A.HeadPtr,B.HeadPtr,Z.HeadPtr);
+            return BitPoints.testc(Z.HeadPtr);
         }
     }
 }

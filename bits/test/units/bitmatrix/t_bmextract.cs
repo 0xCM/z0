@@ -45,6 +45,47 @@ namespace Z0.Test
             CycleColExtract64();
         }
 
+        public void eq32()
+        {
+            var x = Random.BitMatrix(n32);
+            var y = Random.BitMatrix(n32);
+            Claim.nea(x.Equals(y));
+            Claim.yea(x.Equals(x));
+            Claim.yea(y.Equals(y));
+        }
+
+        public void eq64()
+        {
+            var x = Random.BitMatrix(n64);
+            var y = Random.BitMatrix(n64);
+            Claim.nea(x.Equals(y));
+            Claim.nea(x == y);
+            Claim.yea(x != y);
+
+            Claim.yea(x.Equals(x));
+            Claim.yea(x == x);
+
+            Claim.yea(y.Equals(y));
+            Claim.yea(y == y);
+        }
+
+        public void flip64()
+        {
+            
+            var x = Random.BitMatrix(n64);
+            var y = x.Replicate();
+            var xff = ~(~x);
+            Claim.yea(xff == y);
+
+            var c = Random.BitMatrix(n64);
+            var a = new ulong[64];
+            for(var i = 0; i<64; i++)
+                a[i] = ~ c.RowData(i);
+            var b = BitMatrix64.From(a);
+            Claim.yea(b == ~c);        
+        }
+
+
         void check_extract<M,N,T>(BitMatrix<M,N,T> src)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
@@ -115,46 +156,6 @@ namespace Z0.Test
                 }
             }
 
-        }
-
-        public void eq32()
-        {
-            var x = Random.BitMatrix(n32);
-            var y = Random.BitMatrix(n32);
-            Claim.nea(x.Equals(y));
-            Claim.yea(x.Equals(x));
-            Claim.yea(y.Equals(y));
-        }
-
-        public void eq64()
-        {
-            var x = Random.BitMatrix(n64);
-            var y = Random.BitMatrix(n64);
-            Claim.nea(x.Equals(y));
-            Claim.nea(x == y);
-            Claim.yea(x != y);
-
-            Claim.yea(x.Equals(x));
-            Claim.yea(x == x);
-
-            Claim.yea(y.Equals(y));
-            Claim.yea(y == y);
-        }
-
-        public void flip64()
-        {
-            
-            var x = Random.BitMatrix(n64);
-            var y = x.Replicate();
-            var xff = ~(~x);
-            Claim.yea(xff == y);
-
-            var c = Random.BitMatrix(n64);
-            var a = new ulong[64];
-            for(var i = 0; i<64; i++)
-                a[i] = ~ c.RowData(i);
-            var b = BitMatrix64.From(a);
-            Claim.yea(b == ~c);        
         }
 
 

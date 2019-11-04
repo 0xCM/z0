@@ -40,46 +40,15 @@ namespace Z0
         public void bmand_64x64g_bench()
             => bmand_gbench<ulong>();
 
-        void bmand_gbench<T>()
-            where T : unmanaged
-        {
-            var count = counter();
-            var A = BitMatrix.alloc<T>();
-            var B = BitMatrix.alloc<T>();
-            var C = BitMatrix.alloc<T>();
+        public void bmand_ng_64x64x64g_check()
+            => bmand_NxNg_check<N64,ulong>();
 
-            for(var i=0; i<OpCount; i++)
-            {
-                Random.BitMatrix<T>(ref A);
-                Random.BitMatrix<T>(ref B);
-                count.Start();
-                BitMatrix.and(A,B, ref C);
-                count.Stop();
-            }
+        public void bmand_ng_37x37x16g_check()
+            => bmand_NxNg_check<N64,ushort>();
 
-            var n = BitMatrix<T>.N;
-            Benchmark($"bmand_{n}x{n}g", count);
-        }
+        public void bmand_ng_256x256x32g_check()
+            => bmand_NxNg_check<N256,uint>();
 
-
-        void bmand_check<T>()
-            where T : unmanaged
-        {
-            for(var i = 0; i< SampleSize; i++)
-            {
-                var A = Random.BitMatrix<T>();
-                var B = Random.BitMatrix<T>();
-                var C = BitMatrix.alloc<T>();                
-                BitMatrix.and(A,B, ref C);
-
-                var rbA = A.ToRowBits();
-                var rbB = B.ToRowBits();
-                var rbC = rbA & rbB;
-
-                Claim.yea(BitMatrix.same(rbC.ToBitMatrix(),C));
-                                                                        
-            }
-        }
 
         public void bmand_8x8x8d_check()
         {
@@ -96,25 +65,6 @@ namespace Z0
             }
         }
 
-
-
-
-        public void bmand_16x16x16d_bench()
-        {
-            var count = counter();
-            for(var i=0; i<OpCount; i++)
-            {
-                var x = Random.BitMatrix(n16);
-                var y = Random.BitMatrix(n16);
-                count.Start();
-                var result = x & y;                               
-                count.Stop();
-            }
-            Benchmark("bmand_16x16x16d", count);            
-        }
-
-
-
         public void bmand_32x32x32d_check()
         {
             for(var i=0; i<SampleSize; i++)
@@ -127,7 +77,6 @@ namespace Z0
                 Claim.yea(C == D);
             }
         }
-
 
         public void bmand_32x32x32g_check()
         {            
@@ -142,8 +91,6 @@ namespace Z0
             }
         }
 
-
-
         public void bmand_64x64x64d_check()
         {
             for(var i=0; i<SampleSize; i++)
@@ -156,15 +103,6 @@ namespace Z0
                 Claim.yea(C == D);
             }
         }
-
-        public void bmand_ng_64x64x64g_check()
-            => bmand_NxNg_check<N64,ulong>();
-
-        public void bmand_ng_37x37x16g_check()
-            => bmand_NxNg_check<N64,ushort>();
-
-        public void bmand_ng_256x256x32g_check()
-            => bmand_NxNg_check<N256,uint>();
 
         void bmand_NxNg_check<N,T>()
             where N : unmanaged, ITypeNat
@@ -192,8 +130,45 @@ namespace Z0
                 Claim.yea(C2 == C3);                    
             }
         }
-         
 
+         void bmand_gbench<T>()
+            where T : unmanaged
+        {
+            var count = counter();
+            var A = BitMatrix.alloc<T>();
+            var B = BitMatrix.alloc<T>();
+            var C = BitMatrix.alloc<T>();
+
+            for(var i=0; i<OpCount; i++)
+            {
+                Random.BitMatrix<T>(ref A);
+                Random.BitMatrix<T>(ref B);
+                count.Start();
+                BitMatrix.and(A,B, ref C);
+                count.Stop();
+            }
+
+            var n = BitMatrix<T>.N;
+            Benchmark($"bmand_{n}x{n}g", count);
+        }
+
+        void bmand_check<T>()
+            where T : unmanaged
+        {
+            for(var i = 0; i< SampleSize; i++)
+            {
+                var A = Random.BitMatrix<T>();
+                var B = Random.BitMatrix<T>();
+                var C = BitMatrix.alloc<T>();                
+                BitMatrix.and(A,B, ref C);
+
+                var rbA = A.ToRowBits();
+                var rbB = B.ToRowBits();
+                var rbC = rbA & rbB;
+
+                Claim.yea(BitMatrix.same(rbC.ToBitMatrix(),C));
+                                                                        
+            }
+        }
     }
-
 }
