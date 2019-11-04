@@ -15,17 +15,17 @@ namespace Z0
     partial class ginx
     {
         [MethodImpl(Inline)]
-        public static unsafe Vector256<T> vinsert<T>(T* pSrc, T* pReceiver, byte index)
+        public static unsafe Vector256<T> vinsert<T>(T* pSrc, T* pDst, byte index)
             where T : unmanaged
         {                    
-            vloadu(pSrc, out Vector128<T> vA);
-            vloadu(pReceiver, out Vector256<T> vB);
+            vload(pSrc, out Vector128<T> vA);
+            vload(pDst, out Vector256<T> vB);
             return vinsert(vA,vB, index);
         }
 
         [MethodImpl(Inline)]
-        public static unsafe void vinsert<T>(N256 n, T* pSrc, T* pReceiver, byte index, T* pDst)
+        public static unsafe void vinsert<T>(N256 n, T* pSrc, T* pDst, byte index, T* pStore)
             where T : unmanaged
-                => vstore(vinsert(pSrc,pReceiver,index), pDst);                    
+                => vstore(vinsert(pSrc,pDst,index), pStore);                    
     }
 }

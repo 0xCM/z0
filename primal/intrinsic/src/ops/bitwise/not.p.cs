@@ -18,7 +18,7 @@ namespace Z0
         public static unsafe Vector128<T> vnot<T>(N128 n, T* pX)
             where T : unmanaged
         {                    
-            vloadu(pX, out Vector128<T> vA);
+            vload(pX, out Vector128<T> vA);
             return vnot(vA);
         }
 
@@ -31,7 +31,7 @@ namespace Z0
         public static unsafe Vector256<T> vnot<T>(N256 n, T* pX)
             where T : unmanaged
         {                    
-            vloadu(pX, out Vector256<T> vA);
+            vload(pX, out Vector256<T> vA);
             return vnot(vA);
         }
 

@@ -19,8 +19,8 @@ namespace Z0
         public static unsafe Vector128<T> veq<T>(N128 n, T* pX, T* pY)
             where T : unmanaged
         {                    
-            vloadu(pX, out Vector128<T> vA);
-            vloadu(pY, out Vector128<T> vB);
+            vload(pX, out Vector128<T> vA);
+            vload(pY, out Vector128<T> vB);
             return veq(vA,vB);
         }
 
@@ -34,8 +34,8 @@ namespace Z0
         public static unsafe Vector256<T> veq<T>(N256 n, T* pA, T* pB)
             where T : unmanaged
         {                    
-            vloadu(pA, out Vector256<T> vA);
-            vloadu(pB, out Vector256<T> vB);
+            vload(pA, out Vector256<T> vA);
+            vload(pB, out Vector256<T> vB);
             return veq(vA,vB);
         }
 

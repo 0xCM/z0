@@ -14,12 +14,17 @@ namespace Z0
         static ulong content(byte* pA)
             => *(ulong*)pA;
 
-        
+        [MethodImpl(Inline)]
+        static ulong content(in byte rA)
+            => *(ulong*)As.constptr(in rA);
+
         [MethodImpl(Inline)]
         static void content(ulong src, byte* pDst)
-        {
-             *((ulong*)pDst) = src;
-        }
+             => *((ulong*)pDst) = src;
+
+        [MethodImpl(Inline)]
+        static void content(ulong src, ref byte pDst)
+             => *((ulong*)As.refptr(ref pDst)) = src;
 
     }
 
@@ -60,12 +65,5 @@ namespace Z0
 
     }
 
-    /// <summary>
-    /// Opcodes for bitmatrix operations
-    /// </summary>
-    public static partial class bmoc
-    {
-
-    }
 
 }

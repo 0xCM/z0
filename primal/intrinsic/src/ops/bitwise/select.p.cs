@@ -20,9 +20,9 @@ namespace Z0
         public static unsafe Vector128<T> vselect<T>(N128 n, T* pX, T* pY, T* pZ)
             where T : unmanaged
         {                    
-            vloadu(pX, out Vector128<T> vA);
-            vloadu(pY, out Vector128<T> vB);
-            vloadu(pZ, out Vector128<T> vC);
+            vload(pX, out Vector128<T> vA);
+            vload(pY, out Vector128<T> vB);
+            vload(pZ, out Vector128<T> vC);
             return vselect(vA,vB,vC);
         }
 
@@ -35,9 +35,9 @@ namespace Z0
         public static unsafe Vector256<T> vselect<T>(N256 n, T* pX, T* pY, T* pZ)
             where T : unmanaged
         {                    
-            vloadu(pX, out Vector256<T> vA);
-            vloadu(pY, out Vector256<T> vB);
-            vloadu(pZ, out Vector256<T> vC);
+            vload(pX, out Vector256<T> vA);
+            vload(pY, out Vector256<T> vB);
+            vload(pZ, out Vector256<T> vC);
             return vselect(vA,vB,vC);
         }
 

@@ -26,8 +26,8 @@ namespace Z0
         public static unsafe Vector128<T> vxnor<T>(N128 n, T* pX, T* pY)
             where T : unmanaged
         {                    
-            vloadu(pX, out Vector128<T> vA);
-            vloadu(pY, out Vector128<T> vB);
+            vload(pX, out Vector128<T> vA);
+            vload(pY, out Vector128<T> vB);
             return vxnor(vA,vB);
         }
 
@@ -56,8 +56,8 @@ namespace Z0
         public static unsafe Vector256<T> vxnor<T>(N256 n, T* pX, T* pY)
             where T : unmanaged
         {                    
-            vloadu(pX, out Vector256<T> vA);
-            vloadu(pY, out Vector256<T> vB);
+            vload(pX, out Vector256<T> vA);
+            vload(pY, out Vector256<T> vB);
             return vxnor(vA,vB);
         }
 

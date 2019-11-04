@@ -33,19 +33,17 @@ namespace Z0.Logix
             var A = Random.BitMatrix<T>();
             var B = Random.BitMatrix<T>();
             var C = BitMatrix.alloc<T>();
-            var Z = Matrix.alloc<N,bit>();
             var n = inat<N>();
 
             for(var sample=0; sample< SampleSize; sample++)
             {
                 BitMatrixOpApi.eval(BinaryBitwiseOpKind.And, A, B, ref C);
-                BitMatrix.unpack(C, ref Z);
-
-                
-
-                for(var i = 0; i< n; i++)
-                for(var j = 0; j< n; j++)
-                    Claim.eq(C[i,j], Z[i,j]);
+                for(var i=0; i<n; i++)
+                {
+                    var expect = A[i] & B[i];
+                    var actual = C[i];
+                    Claim.yea(expect == actual);
+                }
 
                 Random.BitMatrix(ref A);
                 Random.BitMatrix(ref B);

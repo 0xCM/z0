@@ -295,7 +295,6 @@ namespace Z0
 
         }
 
-
         void rot_256x16u()
         {
             static void rotl_check(Vector256<ushort> src, ushort offset, Vector256<ushort> computed)        
@@ -352,71 +351,6 @@ namespace Z0
             }
         }
 
-        void rot_256x64u()
-        {
-            static void rotl_check(Vector256<ulong> src, ulong offset, Vector256<ulong> computed)        
-                => Claim.eq(BitRot.rotl(src.ToSpan(), offset), computed.ToSpan());
-
-            static void rotr_check(Vector256<ulong> src, ulong offset, Vector256<ulong> computed)        
-                => Claim.eq(BitRot.rotr(src.ToSpan(), offset), computed.ToSpan());
-
-            for(var i=0; i< SampleSize; i++)
-            {
-                var src = Random.CpuVector256<ulong>();
-                var offset = Random.Next(closed<byte>(2, 14));
-                
-                var vL = dinx.vrotl(src,offset);
-                var vRL = dinx.vrotr(vL,offset);                
-                Claim.eq(src,vRL);
-                
-                var vR = dinx.vrotr(src,offset);
-                var vLR = dinx.vrotl(vR,offset);
-                Claim.eq(src,vLR);
-
-                rotl_check(src, offset, vL);
-                rotr_check(vL, offset, vRL);
-                rotr_check(src, offset, vR);
-                rotl_check(vR, offset, vLR);
-            }
-        }
-
-
-        void rotv_256x32u()
-        {
-            for(var sample=0; sample < SampleSize; sample++)
-            {
-                var vSrc = Random.CpuVector256<uint>();
-                var src = vSrc.ToSpan();
-
-                var vOffsets = Random.CpuVector256(closed(2u, 30u));
-                var offsets = vOffsets.ToSpan();
-                
-                var vL = dinx.vrotl(vSrc,vOffsets);
-                var left = vL.ToSpan();
-                
-                var vRL = dinx.vrotr(vL,vOffsets);
-                var lrl = vRL.ToSpan();
-                
-                Claim.eq(vSrc,vRL);
-                
-                var vR = dinx.vrotr(vSrc,vOffsets);
-                var right = vR.ToSpan();
-
-                var vLR = dinx.vrotl(vR,vOffsets);
-                var rlr = vLR.ToSpan();
-                Claim.eq(vSrc,vLR);
-                
-
-                for(var i=0; i<vSrc.Length(); i++)
-                {
-                    Claim.eq(Bits.rotl(src[i], offsets[i]), left[i]);
-                    Claim.eq(Bits.rotr(left[i], offsets[i]), lrl[i]);
-                    
-                    Claim.eq(Bits.rotr(src[i], offsets[i]), right[i]);
-                    Claim.eq(Bits.rotl(right[i], offsets[i]), rlr[i]);
-                }        
-            }
-        }
 
 
 

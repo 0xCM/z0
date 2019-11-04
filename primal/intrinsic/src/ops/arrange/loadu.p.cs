@@ -22,7 +22,7 @@ namespace Z0
     partial class ginx
     {        
         [MethodImpl(Inline)]
-        public static unsafe ref Vector128<T> vloadu<T>(T* pSrc, out Vector128<T> dst)
+        public static unsafe ref Vector128<T> vload<T>(T* pSrc, out Vector128<T> dst)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte) 
@@ -41,7 +41,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static unsafe ref Vector256<T> vloadu<T>(T* pSrc, out Vector256<T> dst)
+        public static unsafe ref Vector256<T> vload<T>(T* pSrc, out Vector256<T> dst)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte) 
@@ -144,7 +144,5 @@ namespace Z0
             else 
                 throw unsupported<T>();
         }
-
-
     }
 }

@@ -19,8 +19,8 @@ namespace Z0
         public static unsafe Vector128<T> vand<T>(N128 n, T* pX, T* pDst)
             where T : unmanaged
         {                    
-            vloadu(pX, out Vector128<T> vA);
-            vloadu(pDst, out Vector128<T> vB);
+            vload(pX, out Vector128<T> vA);
+            vload(pDst, out Vector128<T> vB);
             return vand(vA,vB);
         }
 
@@ -33,8 +33,8 @@ namespace Z0
         public static unsafe Vector256<T> vand<T>(N256 n, T* pX, T* pY)
             where T : unmanaged
         {                    
-            vloadu(pX, out Vector256<T> vA);
-            vloadu(pY, out Vector256<T> vB);
+            vload(pX, out Vector256<T> vA);
+            vload(pY, out Vector256<T> vB);
             return vand(vA,vB);
         }
 
@@ -50,7 +50,6 @@ namespace Z0
             pX += offset;
             pY += offset;
             pDst += offset;
-
         }
 
         [MethodImpl(Inline)]
@@ -62,9 +61,7 @@ namespace Z0
             vstore(vand(n, pXNext, pYNext), pDstNext);
             next(ref pXNext, ref pYNext, ref pDstNext, step);
             vstore(vand(n, pXNext, pYNext), pDstNext);
-
         }
-
     }
 
 }

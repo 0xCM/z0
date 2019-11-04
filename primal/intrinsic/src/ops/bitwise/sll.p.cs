@@ -19,7 +19,7 @@ namespace Z0
         public static unsafe Vector128<T> vsll<T>(N128 n, T* pX, byte offset)
             where T : unmanaged
         {                    
-            vloadu(pX, out Vector128<T> vA);
+            vload(pX, out Vector128<T> vA);
             return vsll(vA,offset);
         }
 
@@ -33,7 +33,7 @@ namespace Z0
         public static unsafe Vector256<T> vsll<T>(N256 n, T* pX, byte offset)
             where T : unmanaged
         {                    
-            vloadu(pX, out Vector256<T> vA);
+            vload(pX, out Vector256<T> vA);
             return vsll(vA,offset);
         }
 
