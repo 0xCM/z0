@@ -18,7 +18,7 @@ namespace Z0
     {
         [MethodImpl(Inline)]
         public static ref Matrix<N,T> add<N,T>(Matrix<N,T> A, Matrix<N,T> B, ref Matrix<N,T> C)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
             where T : unmanaged
         {
             mathspan.add(A.Span, B.Span, C.Span);
@@ -27,7 +27,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static ref Matrix<N,T> sub<N,T>(Matrix<N,T> A, Matrix<N,T> B, ref Matrix<N,T> C)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
             where T : unmanaged
         {
             mathspan.sub(A.Span, B.Span, C.Span);
@@ -35,7 +35,7 @@ namespace Z0
         }
 
         public static ref Matrix<N,T> mul<N,T>(Matrix<N,T> A, Matrix<N,T> B, ref Matrix<N,T> C)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
             where T : unmanaged
         {
             var tB = B.Transpose();
@@ -46,9 +46,9 @@ namespace Z0
         }
 
         public static ref Matrix<M,N,T> mul<M,P,N,T>(Matrix<M,P,T> A, Matrix<P,N,T> B, ref Matrix<M,N,T> C)
-            where M : ITypeNat, new()
-            where P : ITypeNat, new()
-            where N : ITypeNat, new()
+            where M : unmanaged, ITypeNat
+            where P : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
             where T : unmanaged
         {
             var tB = B.Transpose();

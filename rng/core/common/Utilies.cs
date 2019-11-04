@@ -26,7 +26,7 @@ namespace Z0
         /// <typeparam name="N">The length type</typeparam>
         /// <typeparam name="T">The unsigned primal type</typeparam>
          public static BlockVector<N,T> Contract<N,T>(this BlockVector<N,T> src, BlockVector<N,T> max)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
             where T : unmanaged
         {
             var dst = NatSpan.alloc<N,T>();
@@ -36,7 +36,7 @@ namespace Z0
         }
 
          public static Span<N,T> Contract<N,T>(this Span<N,T> src, Span<N,T> max)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
             where T : unmanaged
         {
             var dst = NatSpan.alloc<N,T>();

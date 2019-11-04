@@ -237,7 +237,7 @@ partial class zfunc
     [MethodImpl(Inline)]
     public static IEnumerable<T> range<N,T>(T first, N n = default)
         where T : unmanaged
-        where N : ITypeNat, new()
+        where N : unmanaged, ITypeNat
     {
         var last = convert<T>(n.value);
         return range(first,last);

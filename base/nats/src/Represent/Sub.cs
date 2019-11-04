@@ -17,8 +17,8 @@ namespace Z0
     /// Encodes a natural number k such that k1:K1 & k2:K2 => k = k1 - k2
     /// </summary>
     public readonly struct Sub<K1, K2> : INatSub<Sub<K1,K2>, K1,K2>
-            where K1 : ITypeNat, new()
-            where K2 : ITypeNat, new()
+            where K1 : unmanaged, ITypeNat
+            where K2 : unmanaged, ITypeNat
     {
         static readonly K1 k1 = default;
 

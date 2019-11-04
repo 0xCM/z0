@@ -91,7 +91,7 @@ namespace Z0
         /// <typeparam name="N">The span length type</typeparam>
         /// <typeparam name="T">The element type</typeparam>
         public static void StreamTo<N,T>(this IEnumerable<T> src, Span<N,T> dst, N n = default)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
             where T : unmanaged
                 => src.Take(nati<N>()).StreamTo(dst.Unsized);
 
@@ -104,8 +104,8 @@ namespace Z0
         /// <typeparam name="N">The column dimension type</typeparam>
         /// <typeparam name="T">The element type</typeparam>
         public static void StreamTo<M,N,T>(this IEnumerable<T> src, Span<M,N,T> dst)
-            where M : ITypeNat, new()
-            where N : ITypeNat, new()
+            where M : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
             where T : unmanaged
                 => src.Take(nati<M>() *nati<N>()).StreamTo(dst.Unsized);
 

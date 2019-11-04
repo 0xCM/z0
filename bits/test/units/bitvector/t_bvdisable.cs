@@ -90,7 +90,7 @@ namespace Z0.Test
 
         void bv_disable_ng_check<N,T>(N n = default, T rep = default)
             where T : unmanaged
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
         {
             for(var k=0; k<SampleSize; k++)
             {

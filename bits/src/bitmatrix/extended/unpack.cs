@@ -195,7 +195,7 @@ namespace Z0
         public static ref Matrix<N, T> unpack<N,S,T>(BitMatrix<N,S> src, ref Matrix<N,T> dst)
             where S : unmanaged
             where T : unmanaged
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
         {
             gbits.unpack(src.Data, dst.Data.AsSpan());            
             return ref dst;
@@ -213,8 +213,8 @@ namespace Z0
         public static ref Matrix<M, N, T> unpack<M,N,S,T>(BitMatrix<M,N,S> src, ref Matrix<M,N,T> dst)
             where S : unmanaged
             where T : unmanaged
-            where M : ITypeNat, new()
-            where N : ITypeNat, new()
+            where M : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
         {
             gbits.unpack(src.Data, dst.Data.AsSpan());            
             return ref dst;
@@ -233,7 +233,7 @@ namespace Z0
         public static ref BlockMatrix<N, T> unpack<N,S,T>(BitMatrix<N,S> src, ref BlockMatrix<N,T> dst)
             where S : unmanaged
             where T : unmanaged
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
         {
             gbits.unpack(src.Data, dst.Unblocked);            
             return ref dst;
@@ -251,8 +251,8 @@ namespace Z0
         public static ref BlockMatrix<M,N,T> unpack<M,N,S,T>(BitMatrix<M,N,S> src, ref BlockMatrix<M,N,T> dst)
             where S : unmanaged
             where T : unmanaged
-            where M : ITypeNat, new()
-            where N : ITypeNat, new()
+            where M : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
         {
             gbits.unpack(src.Data, dst.Unblocked);            
             return ref dst;

@@ -44,7 +44,7 @@ namespace Z0
     /// by a natural type parameter
     /// </summary>
     public interface IEnumerable<N,I> : IEnumerable<I>
-        where N : ITypeNat, new()
+        where N : unmanaged, ITypeNat
     {
         /// <summary>
         /// The value of the natural parameter
@@ -53,7 +53,7 @@ namespace Z0
     }
 
     public interface IArray<N,T> : IEnumerable<N,T>
-        where N : ITypeNat, new()
+        where N : unmanaged, ITypeNat
     {
         /// <summary>
         /// Specifies or retrieves an array value via an unchecked index
@@ -72,7 +72,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="K1">The Nat type</typeparam>
     public interface INatDemand<K1> : INatDemand
-        where K1 : ITypeNat, new()
+        where K1 : unmanaged, ITypeNat
     {
         /// <summary>
         /// Specifies whether reification satisfies demand
@@ -90,7 +90,7 @@ namespace Z0
     /// <typeparam name="K1">The first nat type</typeparam>
     /// <typeparam name="K2">The second nat type</typeparam>
     public interface INatDemand<K1,K2> : INatDemand
-        where K1 : ITypeNat, new()
+        where K1 : unmanaged, ITypeNat
         where K2 : ITypeNat
     {
         
@@ -103,9 +103,9 @@ namespace Z0
     /// <typeparam name="K2">The second nat type</typeparam>
     /// <typeparam name="K3">The third nat type</typeparam>
     public interface IDemand<K1,K2,K3> : INatDemand
-        where K1 : ITypeNat, new()
-        where K2 : ITypeNat, new()
-        where K3 : ITypeNat, new()
+        where K1 : unmanaged, ITypeNat
+        where K2 : unmanaged, ITypeNat
+        where K3 : unmanaged, ITypeNat
     {
         
     }
@@ -116,9 +116,9 @@ namespace Z0
     /// <typeparam name="K1">The first nat type</typeparam>
     /// <typeparam name="K2">The second nat type</typeparam>
     public interface INatBetween<K,K1,K2> : IDemand<K,K1,K2>
-        where K : ITypeNat, new()
-        where K1: ITypeNat, new()
-        where K2: ITypeNat, new()
+        where K : unmanaged, ITypeNat
+        where K1: unmanaged, ITypeNat
+        where K2: unmanaged, ITypeNat
     {
         
     }
@@ -129,8 +129,8 @@ namespace Z0
     /// <typeparam name="K1">The first nat type</typeparam>
     /// <typeparam name="K2">The second nat type</typeparam>
     public interface INatEq<K1,K2> : INatDemand<K1,K2>
-        where K1: ITypeNat, new()
-        where K2: ITypeNat, new()
+        where K1: unmanaged, ITypeNat
+        where K2: unmanaged, ITypeNat
     {
         
     }
@@ -141,8 +141,8 @@ namespace Z0
     /// <typeparam name="K1">The first nat type</typeparam>
     /// <typeparam name="K2">The second nat type</typeparam>
     public interface INatNEq<K1,K2> : INatDemand<K1,K2>
-        where K1: ITypeNat, new()
-        where K2: ITypeNat, new()
+        where K1: unmanaged, ITypeNat
+        where K2: unmanaged, ITypeNat
     {
         
     }
@@ -153,8 +153,8 @@ namespace Z0
     /// <typeparam name="K1">The larger nat type</typeparam>
     /// <typeparam name="K2">The smaller nat type</typeparam>
     public interface INatGt<K1,K2> : INatDemand<K1,K2>
-        where K1: ITypeNat, new()
-        where K2: ITypeNat, new()
+        where K1: unmanaged, ITypeNat
+        where K2: unmanaged, ITypeNat
     {
         
     }
@@ -166,9 +166,9 @@ namespace Z0
     /// <typeparam name="K2">The second nat type</typeparam>
     /// <typeparam name="K3">The third nat type</typeparam>
     public interface INatMod<K1,K2,K3> : IDemand<K1,K2,K3>
-        where K1 : ITypeNat, new()
-        where K2 : ITypeNat, new()
-        where K3 : ITypeNat, new()
+        where K1 : unmanaged, ITypeNat
+        where K2 : unmanaged, ITypeNat
+        where K3 : unmanaged, ITypeNat
     {
 
     }
@@ -178,7 +178,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="K">An even natural type</typeparam>
     public interface INatEven<K> : ITypeNat
-        where K : ITypeNat, new()
+        where K : unmanaged, ITypeNat
     {
 
     }
@@ -188,7 +188,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="K">An Odd natural type</typeparam>
     public interface INatOdd<K> : ITypeNat
-        where K : ITypeNat, new()
+        where K : unmanaged, ITypeNat
     {
 
     }
@@ -199,8 +199,8 @@ namespace Z0
     /// <typeparam name="K1"></typeparam>
     /// <typeparam name="K2"></typeparam>
     public interface INatPrior<K1,K2> : INatGt<K1,K2>
-        where K1 : ITypeNat, new()
-        where K2 : ITypeNat, new()
+        where K1 : unmanaged, ITypeNat
+        where K2 : unmanaged, ITypeNat
     {
 
     }       
@@ -213,8 +213,8 @@ namespace Z0
     /// <typeparam name="E">The exponent type</typeparam>
     public interface INatProduct<S,K1,K2> : ITypeNat
         where S : INatProduct<S,K1,K2>, new()
-        where K1 : ITypeNat, new()
-        where K2 : ITypeNat, new()
+        where K1 : unmanaged, ITypeNat
+        where K2 : unmanaged, ITypeNat
     {
 
     }
@@ -225,8 +225,8 @@ namespace Z0
     /// <typeparam name="B">The base type</typeparam>
     /// <typeparam name="E">The exponent type</typeparam>
     public interface INatPow<B,E> : ITypeNat
-        where B : ITypeNat, new()
-        where E : ITypeNat, new()
+        where B : unmanaged, ITypeNat
+        where E : unmanaged, ITypeNat
     {
         
     }
@@ -242,7 +242,7 @@ namespace Z0
     /// <typeparam name="B">The base type</typeparam>
     /// <typeparam name="E">The exponent type</typeparam>
     public interface INatPow2<E> : INatPow2, INatPow<N2,E>
-        where E : ITypeNat, new()
+        where E : unmanaged, ITypeNat
     {
 
     }
@@ -255,8 +255,8 @@ namespace Z0
     /// <typeparam name="E">The exponent type</typeparam>
     public interface INatPow<S,B,E> : INatPow<B,E>, ITypeNat<S>
         where S : INatPow<S,B,E>, new()
-        where B : ITypeNat, new()
-        where E : ITypeNat, new()
+        where B : unmanaged, ITypeNat
+        where E : unmanaged, ITypeNat
     {
         
     }
@@ -269,8 +269,8 @@ namespace Z0
     /// <typeparam name="E">The exponent type</typeparam>
     public interface INatSub<S,K1,K2> : ITypeNat
         where S : INatSub<S,K1,K2>, new()
-        where K1 : ITypeNat, new()
-        where K2 : ITypeNat, new()
+        where K1 : unmanaged, ITypeNat
+        where K2 : unmanaged, ITypeNat
     {
 
     }
@@ -282,8 +282,8 @@ namespace Z0
     /// <typeparam name="K1">The first nat type</typeparam>
     /// <typeparam name="K2">The second nat type</typeparam>
     public interface INatNext<K1,K2> : INatLt<K1,K2> 
-        where K1 : ITypeNat, new()
-        where K2 : ITypeNat, new()
+        where K1 : unmanaged, ITypeNat
+        where K2 : unmanaged, ITypeNat
     {
 
     } 
@@ -294,7 +294,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="K">A prime nat type</typeparam>
     public interface INatPrime<K> : ITypeNat
-        where K : ITypeNat, new()
+        where K : unmanaged, ITypeNat
     {
         
     }
@@ -304,7 +304,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T"></typeparam>
     public interface IPrimePower<T> : INatDemand<T>
-        where T : ITypeNat, new()
+        where T : unmanaged, ITypeNat
     {
 
     }
@@ -315,8 +315,8 @@ namespace Z0
     /// <typeparam name="P">The prime type</typeparam>
     /// <typeparam name="N">The power type</typeparam>
     public interface IPrimePower<P,N> : INatDemand<P,N>
-        where P : ITypeNat, INatPrime<P>,new()
-        where N : ITypeNat, new()
+        where P : unmanaged, ITypeNat, INatPrime<P>
+        where N : unmanaged, ITypeNat
     {
 
     }
@@ -325,8 +325,8 @@ namespace Z0
     /// Requires n1:T1 & n2:T2 => n1 < T2
     /// </summary>
     public interface INatLt<K1,K2> : INatDemand<K1,K2>
-        where K1: ITypeNat, new()
-        where K2: ITypeNat, new()
+        where K1: unmanaged, ITypeNat
+        where K2: unmanaged, ITypeNat
     {
         
     }
@@ -336,7 +336,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="K">A nonzero natural type</typeparam>
     public interface INatNonZero<K> : INatDemand<K>, INatGt<K,N0>
-        where K : ITypeNat, new()
+        where K : unmanaged, ITypeNat
     {
 
     }

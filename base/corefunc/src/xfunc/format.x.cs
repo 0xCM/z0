@@ -99,7 +99,7 @@ namespace Z0
         /// <typeparam name="N">The length type</typeparam>
         [MethodImpl(Inline)]        
         public static string FormatList<N,T>(this Span<N,T> src, char delimiter = ',', int offset = 0, int pad = 0)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
             where T : unmanaged 
                 => src.Unsize().FormatList(delimiter,offset,pad);
 
@@ -213,8 +213,8 @@ namespace Z0
         /// <typeparam name="N">The row count type</typeparam>
         public static string Format<M,N,T>(this Span<M,N,T> src, 
             int? padlen = null, char? padchar = null, char? rowsep = null, char? cellsep = null)
-                where M : ITypeNat, new()
-                where N : ITypeNat, new()
+                where M : unmanaged, ITypeNat
+                where N : unmanaged, ITypeNat
                 where T : unmanaged
                     => src.Unsized.FormatTable(nati<M>(), nati<N>(),  padlen, padchar, rowsep, cellsep); 
 

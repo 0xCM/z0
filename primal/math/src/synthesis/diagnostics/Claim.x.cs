@@ -189,8 +189,8 @@ namespace Z0
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
         public static void ClaimEqual<M,N,T>(Span<M,N,T> lhs, Span<M,N,T> rhs, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
-            where N : ITypeNat, new()
-            where M : ITypeNat, new()
+            where N : unmanaged, ITypeNat
+            where M : unmanaged, ITypeNat
             where T : unmanaged 
                 => lhs.Unsized.ClaimEqual(rhs.Unsized, caller, file, line);
 
@@ -206,7 +206,7 @@ namespace Z0
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
         public static void ClaimEqual<N,T>(Span<N,T> lhs, Span<N,T> rhs, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
             where T : unmanaged 
                 => lhs.Unsized.ClaimEqual(rhs.Unsized, caller, file, line);
     }

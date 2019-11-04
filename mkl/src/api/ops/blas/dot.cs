@@ -23,7 +23,7 @@ namespace Z0.Mkl
         /// <param name="Y">The right vector</param>
         [MethodImpl(Inline)]
         public static float dot<N>(BlockVector<N,float> x, BlockVector<N,float> y)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
                 => dot(x.Unsized, y.Unsized);
 
         /// <summary>
@@ -33,7 +33,7 @@ namespace Z0.Mkl
         /// <param name="Y">The right vector</param>
         [MethodImpl(Inline)]
         public static double dot<N>(BlockVector<N,double> x, BlockVector<N,double> y)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
                 => dot(x.Unsized, y.Unsized);
 
         /// <summary>

@@ -21,7 +21,7 @@ namespace Z0.Mkl
 
         [MethodImpl(Inline)]
         internal static T dot<N,T>(in BlockVector<N,T> lhs, in BlockVector<N,T> rhs)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
             where T : unmanaged    
                 => mathspan.dot<T>(lhs.Unsized,rhs.Unsized);
 

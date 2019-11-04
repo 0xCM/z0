@@ -14,8 +14,8 @@ namespace Z0
     /// Reifies a nondegenerate interval of natural numbers
     /// </summary>
     public readonly struct NatInterval<K1,K2>
-        where K1: ITypeNat, INatLt<K1,K2>, new()
-        where K2 : ITypeNat, new()        
+        where K1: unmanaged, ITypeNat, INatLt<K1,K2>
+        where K2 : unmanaged, ITypeNat        
     {                 
         public static IEnumerable<ulong> values()
         {

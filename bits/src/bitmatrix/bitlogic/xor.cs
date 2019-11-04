@@ -159,7 +159,7 @@ namespace Z0
         /// <typeparam name="T">The matrix storage type</typeparam>
         [MethodImpl(Inline)]
         public static ref BitMatrix<N,T> xor<N,T>(in BitMatrix<N,T> A, in BitMatrix<N,T> B, ref BitMatrix<N,T> C)        
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
             where T : unmanaged
         {
             mathspan.xor(A.Data, B.Data, C.Data);
@@ -177,8 +177,8 @@ namespace Z0
         /// <typeparam name="T">The matrix storage type</typeparam>
         [MethodImpl(Inline)]
         public static ref BitMatrix<M,N,T> xor<M,N,T>(in BitMatrix<M,N,T> A, in BitMatrix<M,N,T> B, ref BitMatrix<M,N,T> C)        
-            where M : ITypeNat, new()
-            where N : ITypeNat, new()
+            where M : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
             where T : unmanaged
         {
             mathspan.xor(A.Data, B.Data, C.Data);

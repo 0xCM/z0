@@ -17,7 +17,7 @@ namespace Z0
     /// Encodes a natural number k such that k:K & j:Prior[K] => k = j + 1
     /// </summary>
     public readonly struct Prior<K1> : ITypeNat
-        where K1 : ITypeNat, new()
+        where K1 : unmanaged, ITypeNat
     {
         
         static K1 k = default;

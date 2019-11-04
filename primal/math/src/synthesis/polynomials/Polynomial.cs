@@ -183,8 +183,8 @@ namespace Z0
     /// <typeparam name="N">The polynomial degree</typeparam>
     /// <typeparam name="T">The primal coefficient type</typeparam>
     public readonly struct Polynomial<M,N,T>
-        where M : ITypeNat, new()
-        where N : ITypeNat, new()
+        where M : unmanaged, ITypeNat
+        where N : unmanaged, ITypeNat
         where T : unmanaged
     {
         public readonly Monomial<M,T>[] Terms;

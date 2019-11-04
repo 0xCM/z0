@@ -18,14 +18,14 @@ namespace Z0
     {        
         [MethodImpl(Inline)]   
         public static Span<N,T> alloc<N,T>(T fill = default(T), N n = default) 
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
             where T : unmanaged
                 => new Span<N,T>(fill);
 
         [MethodImpl(Inline)]   
         public static Span<M,N,T> alloc<M,N,T>(T fill = default(T), M m = default, N n = default) 
-            where M : ITypeNat, new()
-            where N : ITypeNat, new()
+            where M : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
             where T : unmanaged
                 => new Span<M,N,T>(fill);
 
@@ -37,8 +37,8 @@ namespace Z0
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]   
         public static Span<M,N,T> load<M,N,T>(M m, N n, ref T src)    
-            where M : ITypeNat, new()
-            where N : ITypeNat, new()
+            where M : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
             where T : unmanaged
                 => new Span<M,N,T>(ref src);
 
@@ -50,7 +50,7 @@ namespace Z0
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]   
         public static Span<N,T> load<N,T>(N n, ReadOnlySpan<T> src)    
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
             where T : unmanaged
                 => Span<N,T>.CheckedTransfer(src);
 
@@ -62,7 +62,7 @@ namespace Z0
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]   
         public static Span<N,T> load<N,T>(N n, ref T src)    
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
             where T : unmanaged
                 => new Span<N,T>(ref src);
 
@@ -80,27 +80,27 @@ namespace Z0
 
         [MethodImpl(Inline)]   
         public static Span<N,T> load<N,T>(Span<N,T> src)    
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
             where T : unmanaged
                 => new Span<N,T>(src);
 
         [MethodImpl(Inline)]   
         public static Span<M,N,T> load<M,N,T>(ReadOnlySpan<T> src, M m = default, N n = default)    
-            where M : ITypeNat, new()
-            where N : ITypeNat, new()
+            where M : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
             where T : unmanaged
                 => new Span<M,N,T>(src);
 
         [MethodImpl(Inline)]   
         public static Span<M,N,T> load<M,N,T>(Span<T> src, M m = default, N n = default)    
-            where M : ITypeNat, new()
-            where N : ITypeNat, new()
+            where M : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
             where T : unmanaged
                 => new Span<M,N,T>(src);
 
         [MethodImpl(Inline)]   
         public static Span<N,T> parts<N,T>(N n, params T[] elements) 
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
             where T : unmanaged
                 => Span<N,T>.CheckedTransfer(elements);
     }

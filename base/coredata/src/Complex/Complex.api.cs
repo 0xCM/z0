@@ -24,7 +24,7 @@ namespace Z0
 
         
         public static Span<N,Complex<T>> FromPaired<N,T>(Span<N,T> re, Span<N,T> im)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
             where T : unmanaged
         {
             Span<Complex<T>> dst = new Complex<T>[nati<N>()];

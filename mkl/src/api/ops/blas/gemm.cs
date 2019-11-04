@@ -25,9 +25,9 @@ namespace Z0.Mkl
 		/// <param name="K">The number of columns in A and rows in B</param>
         [MethodImpl(Inline)]
         public static ref BlockMatrix<M,N,T> gemm<M,K,N,T>(BlockMatrix<M,K,T> A, BlockMatrix<K,N,T> B, ref BlockMatrix<M,N,T> X)
-            where M : ITypeNat, new()
-            where K : ITypeNat, new()
-            where N : ITypeNat, new()
+            where M : unmanaged, ITypeNat
+            where K : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
@@ -67,7 +67,7 @@ namespace Z0.Mkl
 		/// <param name="N">The number of columns in B and C</param>
 		/// <param name="K">The number of columns in A and rows in B</param>
         public static ref BlockMatrix<N,T> gemm<N,T>(BlockMatrix<N,T> A, BlockMatrix<N,T> B, ref BlockMatrix<N,T> X)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
@@ -107,9 +107,9 @@ namespace Z0.Mkl
 		/// <param name="N">The number of columns in B and C</param>
 		/// <param name="K">The number of columns in A and rows in B</param>
         public static BlockMatrix<M,N,float> gemm<M,K,N>(BlockMatrix<M,K,float> A, BlockMatrix<K,N,float> B)
-            where M : ITypeNat, new()
-            where K : ITypeNat, new()
-            where N : ITypeNat, new()
+            where M : unmanaged, ITypeNat
+            where K : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
         {
             var m = nati<M>();
             var k = nati<K>();
@@ -131,9 +131,9 @@ namespace Z0.Mkl
 		/// <param name="N">The number of columns in B and C</param>
 		/// <param name="K">The number of columns in A and rows in B</param>
         public static BlockMatrix<M,N,double> gemm<M,K,N>(BlockMatrix<M,K,double> A, BlockMatrix<K,N,double> B)
-            where M : ITypeNat, new()
-            where K : ITypeNat, new()
-            where N : ITypeNat, new()
+            where M : unmanaged, ITypeNat
+            where K : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
         {
             var m = nati<M>();
             var k = nati<K>();
@@ -155,9 +155,9 @@ namespace Z0.Mkl
 		/// <param name="N">The number of columns in B and C</param>
 		/// <param name="K">The number of columns in A and rows in B</param>
         public static ref BlockMatrix<M,N,float> gemm<M,K,N>(BlockMatrix<M,K,float> A, BlockMatrix<K,N,float> B, ref BlockMatrix<M,N,float> X)
-            where M : ITypeNat, new()
-            where K : ITypeNat, new()
-            where N : ITypeNat, new()
+            where M : unmanaged, ITypeNat
+            where K : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
         {
             var m = nati<M>();
             var k = nati<K>();
@@ -178,9 +178,9 @@ namespace Z0.Mkl
 		/// <param name="N">The number of columns in B and C</param>
 		/// <param name="K">The number of columns in A and rows in B</param>
         public static ref BlockMatrix<M,N,double> gemm<M,K,N>(BlockMatrix<M,K,double> A, BlockMatrix<K,N,double> B, ref BlockMatrix<M,N,double> X)
-            where M : ITypeNat, new()
-            where K : ITypeNat, new()
-            where N : ITypeNat, new()
+            where M : unmanaged, ITypeNat
+            where K : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
         {
             var m = nati<M>();
             var k = nati<K>();
@@ -200,7 +200,7 @@ namespace Z0.Mkl
         /// <param name="X">The target matrix</param>
 		/// <param name="N">The number of columns in B and C</param>
         public static ref BlockMatrix<N,float> gemm<N>(BlockMatrix<N,float> A, BlockMatrix<N,float> B, ref BlockMatrix<N,float> X)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
         {
             var n = nati<N>();
             var ld = n;
@@ -216,7 +216,7 @@ namespace Z0.Mkl
         /// <param name="X">The target matrix</param>
 		/// <param name="N">The number of columns in B and C</param>
         public static ref BlockMatrix<N,double> gemm<N>(BlockMatrix<N,double> A, BlockMatrix<N,double> B, ref BlockMatrix<N,double> X)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
         {
             var n = nati<N>();
             var ld = n;

@@ -105,7 +105,7 @@ namespace Z0
     /// </summary>
     public readonly struct Monomial<N,T>
         where T : unmanaged
-        where N : ITypeNat, new()
+        where N : unmanaged, ITypeNat
     {
         /// <summary>
         /// The monomial coefficient

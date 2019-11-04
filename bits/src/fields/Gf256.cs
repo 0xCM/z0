@@ -47,7 +47,7 @@ namespace Z0
         /// </summary>
         /// <typeparam name="N">The table order</typeparam>
         public static BlockMatrix<N,byte> products<N>(N n = default)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
         {
             var dst = BlockMatrix.Alloc<N,byte>();
             products(1, (byte)n.value, ref dst.Unblocked[0]);

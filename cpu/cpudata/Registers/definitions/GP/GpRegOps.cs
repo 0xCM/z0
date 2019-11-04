@@ -14,7 +14,7 @@ namespace Z0
     public static class GpRegOps
     {
         public static string Format<N,R>(this ref R register)
-            where N : ITypeNat, INatPow2, new()
+            where N : unmanaged, ITypeNat, INatPow2
             where R : struct, ICpuReg<N>
         {
             ref var src = ref Unsafe.As<R,byte>(ref register);

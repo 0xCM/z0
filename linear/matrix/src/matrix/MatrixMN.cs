@@ -21,8 +21,8 @@ namespace Z0
     /// <typeparam name="N">The column count type</typeparam>
     /// <typeparam name="T">The primal type</typeparam>
     public struct Matrix<M,N,T>
-        where M : ITypeNat, new()
-        where N : ITypeNat, new()
+        where M : unmanaged, ITypeNat
+        where N : unmanaged, ITypeNat
         where T : unmanaged    
     {        
         T[] data;

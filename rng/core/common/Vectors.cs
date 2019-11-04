@@ -41,7 +41,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector<N,T> Vector<N,T>(this IPolyrand random, Interval<T> domain, N n = default)
             where T : unmanaged
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
         {
             var dst = Z0.Vector.alloc<N,T>();
             random.Fill(domain, ref dst);
@@ -57,7 +57,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector<N,T> Vector<N,T>(this IPolyrand random, T min, T max,  N n = default)
             where T : unmanaged
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
         {
             var dst = Z0.Vector.alloc<N,T>();
             random.Fill(closed(min,max), ref dst);
@@ -73,7 +73,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector<N,T> Vector<N,T>(this IPolyrand random, N n = default)
             where T : unmanaged
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
         {
             var dst = Z0.Vector.alloc<N,T>();
             random.Fill(ref dst);
@@ -93,7 +93,7 @@ namespace Z0
         public static Vector<N,T> Vector<N,S,T>(this IPolyrand random, Interval<S> domain, N n = default)
             where T : unmanaged
             where S : unmanaged
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
                 => random.Vector<N,S>(domain).Convert<T>();
 
         /// <summary>
@@ -122,7 +122,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static void Fill<N,T>(this IPolyrand random, Interval<T> domain, ref Vector<N,T> vector, N n = default)
             where T : unmanaged
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
                 => random.StreamTo<T>(domain, nati<N>(), ref vector.Data[0]);
 
         /// <summary>
@@ -136,7 +136,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static void Fill<N,T>(this IPolyrand random, ref Vector<N,T> vector, N n = default)
             where T : unmanaged
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
                 => random.StreamTo<T>(nati<N>(), ref vector.Data[0]);
 
     }

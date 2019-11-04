@@ -46,8 +46,8 @@ namespace Z0.Test
         }
 
         void check_extract<M,N,T>(BitMatrix<M,N,T> src)
-            where M : ITypeNat, new()
-            where N : ITypeNat, new()
+            where M : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
             where T : unmanaged
         {
             for(var row=0; row< src.RowCount; row++)

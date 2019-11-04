@@ -51,7 +51,7 @@ namespace Z0
         /// <typeparam name="T">The matrix cell type</typeparam>
         [MethodImpl(Inline)]
         public static BitMatrix<N,T> load<N,T>(N n, Span<T> src)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
             where T : unmanaged
                 => BitMatrix<N,T>.Load(src); 
 
@@ -63,7 +63,7 @@ namespace Z0
         /// <typeparam name="T">The matrix cell type</typeparam>
         [MethodImpl(Inline)]
         public static BitMatrix<N,T> load<N,T>(Span<T> src)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
             where T : unmanaged
                 => BitMatrix<N,T>.Load(src); 
 
@@ -76,8 +76,8 @@ namespace Z0
         /// <typeparam name="T">The matrix cell type</typeparam>
         [MethodImpl(NotInline)]
         public static BitMatrix<M,N,T> load<M,N,T>(M m, N n, Span<T> src)        
-            where M : ITypeNat, new()
-            where N : ITypeNat, new()
+            where M : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
             where T : unmanaged
                 => BitMatrix<M,N,T>.Load(src); 
 

@@ -13,7 +13,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="K">An odd natural type</typeparam>
     public readonly struct NatOdd<K> : INatOdd<K>
-        where K: ITypeNat, new()
+        where K: unmanaged, ITypeNat
     {
         static readonly K k = default;
         

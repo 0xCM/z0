@@ -19,7 +19,7 @@ partial class zfunc
     /// <typeparam name="N">The modulus type</typeparam>
     [MethodImpl(Inline)]
     public static bool divides<N>(N n, uint m)
-        where N : ITypeNat, new()
+        where N : unmanaged, ITypeNat
             => Mod<N>.divisible(m);
 
     /// <summary>
@@ -30,7 +30,7 @@ partial class zfunc
     /// <typeparam name="N">The modulus type</typeparam>
     [MethodImpl(Inline)]
     public static bool divides<N>(N n, long m)
-        where N : ITypeNat, new()
+        where N : unmanaged, ITypeNat
             => (ulong)m % n.value == 0;
 
     /// <summary>
@@ -41,7 +41,7 @@ partial class zfunc
     /// <typeparam name="N">The modulus type</typeparam>
     [MethodImpl(Inline)]
     public static bool divides<N>(N n, ulong m)
-        where N : ITypeNat, new()
+        where N : unmanaged, ITypeNat
             => m % n.value == 0;
 
     /// <summary>
@@ -52,7 +52,7 @@ partial class zfunc
     /// <typeparam name="N">The modulus type</typeparam>
     [MethodImpl(Inline)]
     public static bool divides<N>(N n, int m)
-        where N : ITypeNat, new()
+        where N : unmanaged, ITypeNat
             => divides<N>(n, (uint)m);
 
     /// <summary>
@@ -63,7 +63,7 @@ partial class zfunc
     /// <typeparam name="N">The modulus type</typeparam>
     [MethodImpl(Inline)]
     public static bool divides<N>(N n, short m)
-        where N : ITypeNat, new()
+        where N : unmanaged, ITypeNat
             => divides<N>(n, (uint)m);
 
     /// <summary>
@@ -74,7 +74,7 @@ partial class zfunc
     /// <typeparam name="N">The modulus type</typeparam>
     [MethodImpl(Inline)]
     public static bool divides<N>(N n, ushort m)
-        where N : ITypeNat, new()
+        where N : unmanaged, ITypeNat
             => divides<N>(n, (uint)m);
 
     /// <summary>
@@ -85,7 +85,7 @@ partial class zfunc
     /// <typeparam name="N">The modulus type</typeparam>
     [MethodImpl(Inline)]
     public static bool divides<N>(N n, byte m)
-        where N : ITypeNat, new()
+        where N : unmanaged, ITypeNat
             => divides<N>(n, (uint)m);
     
     /// <summary>
@@ -96,7 +96,7 @@ partial class zfunc
     /// <typeparam name="N">The modulus type</typeparam>
     [MethodImpl(Inline)]
     public static bool divides<N>(N n, sbyte m)
-        where N : ITypeNat, new()
+        where N : unmanaged, ITypeNat
             => divides<N>(n, (uint)m);
 
 

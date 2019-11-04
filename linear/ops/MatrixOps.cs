@@ -28,8 +28,8 @@ namespace Z0
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
         public static ref BlockMatrix<M,N,T> add<M,N,T>(BlockMatrix<M,N,T> A, BlockMatrix<M,N,T> B, ref BlockMatrix<M,N,T> C)
-            where M : ITypeNat, new()
-            where N : ITypeNat, new()
+            where M : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
             where T : unmanaged    
         {
             inxspan.add(A.Unsized, B.Unsized, C.Unsized);
@@ -47,8 +47,8 @@ namespace Z0
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
         public static ref BlockMatrix<M,N,T> sub<M,N,T>(BlockMatrix<M,N,T> A, BlockMatrix<M,N,T> B, ref BlockMatrix<M,N,T> C)
-            where M : ITypeNat, new()
-            where N : ITypeNat, new()
+            where M : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
             where T : unmanaged    
         {
             inxspan.sub(A.Unsized, B.Unsized, C.Unsized);
@@ -66,8 +66,8 @@ namespace Z0
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
         public static ref BlockMatrix<M,N,T> and<M,N,T>(BlockMatrix<M,N,T> A, BlockMatrix<M,N,T> B, ref BlockMatrix<M,N,T> C)
-            where M : ITypeNat, new()
-            where N : ITypeNat, new()
+            where M : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
             where T : unmanaged    
         {
             and(A.Unsized,B.Unsized, C.Unsized);

@@ -21,8 +21,8 @@ namespace Z0
     /// Reifies a natural k such that b:B & e:E => k = b^e
     /// </summary>
     public readonly struct Pow<B,E> : INatPow<Pow<B, E>, B, E>
-        where B : ITypeNat, new()
-        where E : ITypeNat, new()
+        where B : unmanaged, ITypeNat
+        where E : unmanaged, ITypeNat
     {
         public static readonly Pow<B,E> Rep = default;
 

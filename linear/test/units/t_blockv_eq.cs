@@ -14,7 +14,7 @@ namespace Z0
     {
         public static void ClaimEqual<N,T>(BlockVector<N,T> x, BlockVector<N,T> y)
             where T : unmanaged
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
         {
             var len = (int)(new N().value);
 

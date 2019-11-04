@@ -143,14 +143,14 @@ namespace Z0.Mkl
 
         [MethodImpl(Inline)]
         public static double MaxEntry<M,N>(this Span<M,N,double> src)
-            where M : ITypeNat, new()
-            where N : ITypeNat, new()
+            where M : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
                 => src.Reduce(Math.Max);
 
         [MethodImpl(Inline)]
         public static int EntryPadWidth<M,N>(this Span<M,N,double> src)
-            where M : ITypeNat, new()
-            where N : ITypeNat, new()
+            where M : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
                 => ((long)src.Reduce(Math.Max)).ToDeciDigits().Length;
 
 

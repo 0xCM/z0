@@ -40,7 +40,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="N">The dimension type</typeparam>
     public readonly struct Dim<N> : IDim
-        where N : ITypeNat, new()
+        where N : unmanaged, ITypeNat
     {
         public static readonly Dim<N> Rep = default;
 

@@ -25,7 +25,7 @@ namespace Z0
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline)]
         public static BlockVector<N,T> add<N,T>(BlockVector<N,T> src, T scalar)
-            where N : ITypeNat, new()            
+            where N : unmanaged, ITypeNat            
             where T : unmanaged   
         { 
             var dst = src.Replicate(true);
@@ -44,7 +44,7 @@ namespace Z0
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline)]
         public static ref BlockVector<N,T> add<N,T>(BlockVector<N,T> src, T scalar, ref BlockVector<N,T> dst)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
             where T : unmanaged    
         {
              src.Data.CopyTo(dst.Data);
@@ -54,7 +54,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static ref BlockVector<N,T> add<N,T>(BlockVector<N,T> x, BlockVector<N,T> y, ref BlockVector<N,T> dst)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
             where T : unmanaged    
         {
             inxspan.add(x.Data, y.Data, dst.Data);
@@ -63,7 +63,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static BlockVector<N,T> add<N,T>(BlockVector<N,T> x, BlockVector<N,T> y)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
             where T : unmanaged    
         {
             var dst = x.Replicate(true);
@@ -93,7 +93,7 @@ namespace Z0
         /// <typeparam name="T">The component type</typeparam>
         [MethodImpl(Inline)]
         public static ref BlockVector<N,T> add<N,T>(ref BlockVector<N,T> lhs, in T rhs)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
             where T : unmanaged    
         {
             mathspan.add(lhs.Unsized, rhs);
@@ -109,7 +109,7 @@ namespace Z0
         /// <typeparam name="T">The component type</typeparam>
         [MethodImpl(Inline)]
         public static ref BlockVector<N,T> add<N,T>(ref BlockVector<N,T> x, in BlockVector<N,T> y)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
             where T : unmanaged    
         {
             inxspan.add<T>(x,y,x);
@@ -126,7 +126,7 @@ namespace Z0
         /// <typeparam name="T">The component type</typeparam>
         [MethodImpl(Inline)]
         public static ref BlockVector<N,T> add<N,T>(in BlockVector<N,T> x, in BlockVector<N,T> y, ref BlockVector<N,T> z)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
             where T : unmanaged    
         {
             mathspan.add(x.Unsized, y.Unsized, z.Unsized);

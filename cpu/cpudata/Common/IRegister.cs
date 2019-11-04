@@ -18,7 +18,7 @@ namespace Z0
     }
 
     public interface ICpuReg<N> : ICpuReg
-        where N : ITypeNat, new()
+        where N : unmanaged, ITypeNat
     {
         static readonly BitSize BW =new N().value;
 
@@ -39,14 +39,14 @@ namespace Z0
     }
 
     public interface ICpuReg<N, T> : ICpuReg<N>
-        where N : ITypeNat, new()
+        where N : unmanaged, ITypeNat
         where T : unmanaged
     {
     
     }
 
     public interface IVectorReg<N> : ICpuReg<N>
-        where N : ITypeNat, INatPow2, new()
+        where N : unmanaged, ITypeNat, INatPow2
     {
         Volatility Volatility(int index);
     }
@@ -96,7 +96,7 @@ namespace Z0
     }
 
     public interface IGpReg<N,R,T> : ICpuReg<N,T>, IGpReg
-        where N : ITypeNat, INatPow2, new()
+        where N : unmanaged, ITypeNat, INatPow2
         where R : struct, ICpuReg
         where T : unmanaged
     {        

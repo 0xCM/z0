@@ -125,7 +125,7 @@ namespace Z0.Test
 
         
         void bm_identity_ng_check<N,T>()
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
             where T : unmanaged
        {
             TypeCaseStart<N>();

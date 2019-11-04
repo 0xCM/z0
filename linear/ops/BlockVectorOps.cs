@@ -18,7 +18,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static BlockVector<N,T> xor<N,T>(BlockVector<N,T> x, BlockVector<N,T> y)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
             where T : unmanaged    
         {
             var dst = x.Replicate(true);
@@ -28,7 +28,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static BlockVector<N,T> sll<N,T>(BlockVector<N,T> src, byte offset, BlockVector<N,T> dst)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
             where T : unmanaged    
         {
             inxspan.sll(src.Data, offset, dst.Data);
@@ -37,7 +37,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static BlockVector<N,T> sll<N,T>(BlockVector<N,T> src, byte offset)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
             where T : unmanaged    
         {
             var dst = src.Replicate(true);
@@ -47,7 +47,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static ref BlockVector<N,T> srl<N,T>(BlockVector<N,T> src, byte offset, ref BlockVector<N,T> dst)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
             where T : unmanaged    
         {
             inxspan.srl(src.Data,offset,dst.Data);
@@ -56,7 +56,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static BlockVector<N,T> srl<N,T>(BlockVector<N,T> src, byte offset)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
             where T : unmanaged    
         {
             var dst = src.Replicate(true);
@@ -129,7 +129,7 @@ namespace Z0
         /// <typeparam name="T">The component type</typeparam>
         [MethodImpl(Inline)]
         public static ref BlockVector<N,T> mul<N,T>(ref BlockVector<N,T> x, in BlockVector<N,T> rhs)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
             where T : unmanaged    
         {
             mathspan.mul(x.Unsized, rhs.Unsized);
@@ -148,7 +148,7 @@ namespace Z0
         /// <typeparam name="T">The component type</typeparam>
         [MethodImpl(Inline)]
         public static ref BlockVector<N,T> xor<N,T>(ref BlockVector<N,T> x, in BlockVector<N,T> rhs)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
             where T : unmanaged
 
         {
@@ -165,7 +165,7 @@ namespace Z0
         /// <typeparam name="T">The component type</typeparam>
         [MethodImpl(Inline)]
         public static ref BlockVector<N,T> xor<N,T>(ref BlockVector<N,T> x, in T rhs)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
             where T : unmanaged
 
         {
@@ -182,7 +182,7 @@ namespace Z0
         /// <typeparam name="T">The component type</typeparam>
         [MethodImpl(Inline)]
         public static ref BlockVector<N,T> pow<N,T>(ref BlockVector<N,T> x, uint rhs)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
             where T : unmanaged
 
         {
@@ -198,7 +198,7 @@ namespace Z0
         /// <typeparam name="T">The component type</typeparam>
         [MethodImpl(Inline)]
         public static ref BlockVector<N,T> flip<N,T>(ref BlockVector<N,T> src)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
             where T : unmanaged    
 
         {
@@ -226,7 +226,7 @@ namespace Z0
         /// <typeparam name="T">The component type</typeparam>
         [MethodImpl(Inline)]
         public static ref BlockVector<N,T> inc<N,T>(ref BlockVector<N,T> src)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
             where T : unmanaged    
         {
             mathspan.inc(src.Unsized);
@@ -249,7 +249,7 @@ namespace Z0
         /// <typeparam name="T">The component type</typeparam>
         [MethodImpl(Inline)]
         public static ref BlockVector<N,T> dec<N,T>(ref BlockVector<N,T> src)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
             where T : unmanaged    
 
         {
@@ -259,9 +259,9 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static BlockVector<P,T> concat<M,N,P,T>(in BlockVector<M,T> head, BlockVector<N,T> tail, P sum = default)
-            where M : ITypeNat, new()
-            where N : ITypeNat, new()
-            where P : INatSum<M,N>, new()
+            where M : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
+            where P : unmanaged, INatSum<M,N>
             where T : unmanaged
         {
             var dst = span<T>(new NatSum<M,N>());

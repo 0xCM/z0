@@ -188,9 +188,9 @@ namespace Z0
         /// <typeparam name="N">The order type</typeparam>
         /// <typeparam name="T">The matrix storage type</typeparam>
         public static ref BitMatrix<M, N, T> mul<M,P,N,T>(in BitMatrix<M,P,T> A, in BitMatrix<P,N,T> B, ref BitMatrix<M,N,T> Z)
-            where M : ITypeNat, new()
-            where P : ITypeNat, new()
-            where N : ITypeNat, new()
+            where M : unmanaged, ITypeNat
+            where P : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
             where T : unmanaged
         {
             var x = A;
@@ -208,9 +208,9 @@ namespace Z0
 
         [MethodImpl(NotInline)]
         public static BitMatrix<M, N, T> mul<M,P,N,T>(in BitMatrix<M,P,T> A, in BitMatrix<P,N,T> B)
-            where M : ITypeNat, new()
-            where P : ITypeNat, new()
-            where N : ITypeNat, new()
+            where M : unmanaged, ITypeNat
+            where P : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
             where T : unmanaged
         {
             var Z = alloc<M,N,T>();
@@ -227,7 +227,7 @@ namespace Z0
         /// <typeparam name="N">The order type</typeparam>
         /// <typeparam name="T">The matrix storage type</typeparam>
         public static ref BitMatrix<N,T> mul<N,T>(in BitMatrix<N,T> A, in BitMatrix<N,T> B, ref BitMatrix<N,T> Z)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
             where T : unmanaged
         {
             var tr = B.Transpose();
@@ -252,7 +252,7 @@ namespace Z0
         /// <typeparam name="T">The matrix storage type</typeparam>
         [MethodImpl(NotInline)]
         public static BitMatrix<N,T> mul<N,T>(in BitMatrix<N,T> A, in BitMatrix<N,T> B)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
             where T : unmanaged
         {
             var Z = alloc<N,T>();

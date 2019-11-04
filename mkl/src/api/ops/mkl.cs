@@ -53,7 +53,7 @@ namespace Z0.Mkl
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
         static ref T head<N,T>(BlockVector<N,T> src)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
             where T : unmanaged
                 =>  ref MemoryMarshal.GetReference<T>(src.Unsized);
 
@@ -64,7 +64,7 @@ namespace Z0.Mkl
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
         static ref T head<N,T>(BlockMatrix<N,T> src)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
             where T : unmanaged
                 =>  ref MemoryMarshal.GetReference<T>(src.Unsized);
 
@@ -75,8 +75,8 @@ namespace Z0.Mkl
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
         static ref T head<M,N,T>(BlockMatrix<M,N,T> src)
-            where N : ITypeNat, new()
-            where M : ITypeNat, new()
+            where N : unmanaged, ITypeNat
+            where M : unmanaged, ITypeNat
             where T : unmanaged
                 =>  ref MemoryMarshal.GetReference<T>(src.Unsized);
 
@@ -97,7 +97,7 @@ namespace Z0.Mkl
         [MethodImpl(Inline)]
         static ref T head<N,T>(Span<N,T> src)
             where T : unmanaged
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
             =>  ref MemoryMarshal.GetReference<T>(src.Unsized);
 
 

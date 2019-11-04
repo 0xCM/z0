@@ -18,7 +18,7 @@ namespace Z0
 
          [MethodImpl(Inline)]
         public static BitGridLayout<T> layout<N,T>(N n = default)
-            where N : ITypeNat,new()
+            where N : unmanaged, ITypeNat
             where T : unmanaged
                 => new BitGridSpec<T>(bitsize<T>(), (int)n.value,(int)n.value).CalcLayout();
 

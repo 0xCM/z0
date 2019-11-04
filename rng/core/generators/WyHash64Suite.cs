@@ -10,7 +10,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     class WyHash64Suite<N> : IPointSource<N, ulong>
-        where N : ITypeNat, new()
+        where N : unmanaged, ITypeNat
 
     {
         static readonly int MemberCount = (int)new N().value;

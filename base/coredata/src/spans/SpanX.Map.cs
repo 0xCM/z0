@@ -72,8 +72,8 @@ namespace Z0
             => src.ReadOnly().MapRange(offset,length, f);
 
         public static Span<T> Map<M,N,S,T>(this Span<M,N,S> src, Func<S, T> f)
-            where M : ITypeNat, new()
-            where N : ITypeNat, new()
+            where M : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
             where S : unmanaged
             where T : unmanaged
         {

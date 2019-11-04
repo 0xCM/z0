@@ -28,7 +28,7 @@ namespace Z0.Logix
         /// <param name="terms">The sequence terms</param>
         [MethodImpl(Inline)]
         public static LiteralLogicSeq<N> bitseq<N>(N length, params bit[] terms)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
                 => LiteralLogicSeq.FromBits(length,terms);
     }
 }

@@ -17,7 +17,7 @@ namespace Z0
     /// Defines a readonly span of natural length N
     /// </summary>
     public ref struct ReadOnlySpan<N,T>
-        where N : ITypeNat, new()
+        where N : unmanaged, ITypeNat
         where T : unmanaged
     {
         ReadOnlySpan<T> data;

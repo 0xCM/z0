@@ -18,7 +18,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static ref Vector<N,T> mod<N,T>(Vector<N,T> div, Vector<N,T> mod, ref Vector<N,T> dst)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
             where T : unmanaged    
 
         {
@@ -28,7 +28,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static ref Vector<N,T> fmod<N,T>(Vector<N,T> div, Vector<N,T> mod, ref Vector<N,T> dst)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
             where T : unmanaged    
 
         {
@@ -59,7 +59,7 @@ namespace Z0
         /// <typeparam name="T">The component type</typeparam>
         [MethodImpl(Inline)]
         public static ref BlockVector<N,T> mod<N,T>(ref BlockVector<N,T> lhs, in BlockVector<N,T> rhs)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
             where T : unmanaged    
         {
             var x = lhs.Unsized;

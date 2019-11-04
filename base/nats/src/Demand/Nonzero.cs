@@ -13,7 +13,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="K">A nonzero natural type</typeparam>
     public readonly struct Nonzero<K> : INatNonZero<K>
-        where K: ITypeNat, new()
+        where K: unmanaged, ITypeNat
     {
         static readonly K k = default;
         static readonly string description = $"{k} != 0";

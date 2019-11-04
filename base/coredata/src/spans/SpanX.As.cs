@@ -255,7 +255,7 @@ namespace Z0
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]        
         public static Span<N,T> AsNatural<N,T>(this Span<T> src, N size = default)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
             where T : unmanaged
                 => Span<N, T>.CheckedTransfer(src);       
 

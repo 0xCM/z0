@@ -47,7 +47,7 @@ namespace Z0
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(NotInline)]
         public static BitMatrix<N,T> alloc<N,T>(N n = default, T fill = default)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
             where T : unmanaged
         {
 
@@ -65,8 +65,8 @@ namespace Z0
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(NotInline)]
         public static BitMatrix<M,N,T> alloc<M,N,T>(M m = default, N n = default, T fill = default)
-            where M : ITypeNat, new()
-            where N : ITypeNat, new()
+            where M : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
             where T : unmanaged
         {
 

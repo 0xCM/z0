@@ -9,8 +9,8 @@ namespace Z0
     /// Reifies a natural prime base raised to a natural power
     /// </summary>
     public readonly struct PrimePow<P, E> : ITypeNat
-        where E : ITypeNat, new()
-        where P : ITypeNat, INatPrime<P>, new()
+        where E : unmanaged, ITypeNat
+        where P : unmanaged, ITypeNat, INatPrime<P>
     {
         public static readonly PrimePow<P,E> Rep = default;
 

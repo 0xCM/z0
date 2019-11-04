@@ -97,8 +97,8 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Span<M,N,T> Span<M,N,T>(this IPolyrand random, M rows = default, N cols = default)
             where T : unmanaged  
-            where M : ITypeNat, new()
-            where N : ITypeNat, new()
+            where M : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
                 => NatSpan.load<M,N,T>(random.Span<T>(nfunc.muli(rows,cols)), rows, cols);
 
         /// <summary>
@@ -115,8 +115,8 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Span<M,N,T> Span<M,N,T>(this IPolyrand random, M rows, N cols, Interval<T> domain)
             where T : unmanaged  
-            where M : ITypeNat, new()
-            where N : ITypeNat, new()
+            where M : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
                 => NatSpan.load<M,N,T>(random.Span<T>(nfunc.muli(rows,cols),domain), rows, cols);
 
         /// <summary>

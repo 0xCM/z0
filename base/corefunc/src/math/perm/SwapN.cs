@@ -16,7 +16,7 @@ namespace Z0
     /// Defines a transposition in the context of a permutation of natural length
     /// </summary>
     public struct Swap<N>
-        where N : ITypeNat, new()
+        where N : unmanaged, ITypeNat
     {
         /// <summary>
         /// The first index

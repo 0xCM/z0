@@ -11,7 +11,7 @@ namespace Z0
         /// </summary>
         /// <typeparam name="N">The axis type</typeparam>
         public static Dim<N> Define<N>()
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
                 => Dim<N>.Rep;
 
         /// <summary>
@@ -20,8 +20,8 @@ namespace Z0
         /// <typeparam name="M">The type of the first axis</typeparam>
         /// <typeparam name="N">The type of the second axis</typeparam>
         public static Dim<M,N> Define<M,N>()
-            where M : ITypeNat, new()
-            where N : ITypeNat, new()
+            where M : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
                 => Dim<M,N>.Rep;
 
         /// <summary>
@@ -31,9 +31,9 @@ namespace Z0
         /// <typeparam name="N">The type of the second axis</typeparam>
         /// <typeparam name="P">The type of the third axis</typeparam>
         public static Dim<M,N,P> Define<M,N,P>()
-            where M : ITypeNat, new()
-            where N : ITypeNat, new()
-            where P : ITypeNat, new()
+            where M : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
+            where P : unmanaged, ITypeNat
                 => Dim<M,N,P>.Rep;
     
         /// <summary>

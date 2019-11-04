@@ -25,8 +25,8 @@ namespace Z0.Mkl
         /// <typeparam name="M">The row dimension type of A</typeparam>
         /// <typeparam name="N">The column dimension type of A</typeparam>
         public static ref BlockVector<M,double> gemv<M,N>(BlockMatrix<M,N,double> A, BlockVector<N,double> x, ref BlockVector<M,double> y)
-            where M : ITypeNat, new()
-            where N : ITypeNat, new()
+            where M : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
         {
             var m = nati<M>();
             var n = nati<N>();
@@ -44,8 +44,8 @@ namespace Z0.Mkl
         /// <typeparam name="M">The row dimension type of A</typeparam>
         /// <typeparam name="N">The column dimension type of A</typeparam>
         public static ref BlockVector<M,float> gemv<M,N>(BlockMatrix<M,N,float> A, BlockVector<N,float> x, ref BlockVector<M,float> y)
-            where M : ITypeNat, new()
-            where N : ITypeNat, new()
+            where M : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
         {
             var m = nati<M>();
             var n = nati<N>();

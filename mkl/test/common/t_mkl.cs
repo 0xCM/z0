@@ -25,7 +25,7 @@ namespace Z0.Mkl
 
         [MethodImpl(Inline)]
         protected BlockVector<N,T> RVec<N,T>(N len = default, T rep = default)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
             where T : unmanaged
                 => Random.BlockVec<N,T>();
 
@@ -55,12 +55,12 @@ namespace Z0.Mkl
 
         [MethodImpl(Inline)]
         protected BlockVector<float> RVecF32<N>(N len = default, int? min = null, int? max = null)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
                 => Random.BlockVec<N,int,float>(closed(min ?? -25, max ?? 25));
 
         [MethodImpl(Inline)]
         protected BlockVector<double> RVecF64<N>(N len = default, long? min = null, long? max = null)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
                 => Random.BlockVec<N,long,double>(closed(min ?? -25L, max ?? 25L));
     }
 }

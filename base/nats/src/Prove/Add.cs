@@ -23,16 +23,16 @@ namespace Z0
         /// <typeparam name="K1">The first type</typeparam>
         /// <typeparam name="K2">The second type</typeparam>
         public static NatSum<K1,K2> add<K1,K2>(uint expected)
-            where K1 : ITypeNat, new()
-            where K2 : ITypeNat, new()
+            where K1 : unmanaged, ITypeNat
+            where K2 : unmanaged, ITypeNat
         {
             eq<NatSum<K1, K2>>((ulong)expected);
             return Nat.add<K1,K2>();
         } 
 
         public static NatSum<K1,K2> add<K1,K2>(int expected)
-            where K1 : ITypeNat, new()
-            where K2 : ITypeNat, new()
+            where K1 : unmanaged, ITypeNat
+            where K2 : unmanaged, ITypeNat
         {
             eq<NatSum<K1,K2>>(expected);
             return Nat.add<K1,K2>();
@@ -48,8 +48,8 @@ namespace Z0
         /// <typeparam name="K1">The first type</typeparam>
         /// <typeparam name="K2">The second type</typeparam>
         public static NatSum<K1,K2> sum<K1,K2>(K1 k1, K2 k2, uint expected)
-            where K1 : ITypeNat, new()
-            where K2 : ITypeNat, new()
+            where K1 : unmanaged, ITypeNat
+            where K2 : unmanaged, ITypeNat
         {
             eq<NatSum<K1, K2>>((ulong)expected);
             return Nat.add<K1,K2>();
@@ -65,8 +65,8 @@ namespace Z0
         /// <typeparam name="K1">The first type</typeparam>
         /// <typeparam name="K2">The second type</typeparam>
         public static NatSum<K1,K2> add<K1,K2>(K1 k1, K2 k2, ulong expected)
-            where K1 : ITypeNat, new()
-            where K2 : ITypeNat, new()
+            where K1 : unmanaged, ITypeNat
+            where K2 : unmanaged, ITypeNat
         {
             eq<NatSum<K1,K2>>(expected);
             return Nat.add<K1,K2>();

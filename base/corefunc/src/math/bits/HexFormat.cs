@@ -140,7 +140,7 @@ namespace Z0
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
         public static string FormatHex<N,T>(this Span<N,T> src, bool vectorize = false, char? sep = null, bool specifier = false)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
             where T : unmanaged
                 => src.Unsize().FormatHex(vectorize, sep, specifier);
 
@@ -154,7 +154,7 @@ namespace Z0
         /// <typeparam name="T">The primal cell type</typeparam>
         [MethodImpl(Inline)]
         public static string FormatHex<N,T>(this ReadOnlySpan<N,T> src, bool vectorize = false, char? sep = null, bool specifier = false)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
             where T : unmanaged
                 => src.Unsize().FormatHex(vectorize, sep, specifier);
 
@@ -216,7 +216,7 @@ namespace Z0
         /// <typeparam name="T">The cell component type</typeparam>
         [MethodImpl(Inline)]
         public static string FormatHexBlocks<N,T>(this Span<N,T> src, int? width = null, char? sep = null)
-                where N : ITypeNat, new()
+                where N : unmanaged, ITypeNat
                 where T : unmanaged
                     => src.Unsize().FormatHexBlocks(width,sep);
 
@@ -229,7 +229,7 @@ namespace Z0
         /// <typeparam name="T">The cell component type</typeparam>
         [MethodImpl(Inline)]
         public static string FormatHexBlocks<N,T>(this ReadOnlySpan<N,T> src, int? width = null, char? sep = null)
-                where N : ITypeNat, new()
+                where N : unmanaged, ITypeNat
                 where T : unmanaged
                     => src.Unsize().FormatHexBlocks(width,sep);        
     }

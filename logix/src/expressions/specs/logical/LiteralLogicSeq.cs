@@ -29,7 +29,7 @@ namespace Z0.Logix
 
         [MethodImpl(Inline)]
         public static LiteralLogicSeq<N> FromBits<N>(N n, params bit[] src)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
                 => LiteralLogicSeq<N>.FromBits(src);
 
         [MethodImpl(Inline)]

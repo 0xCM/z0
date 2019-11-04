@@ -22,7 +22,7 @@ namespace Z0
         /// <typeparam name="N">The vector length type</typeparam>
         /// <typeparam name="S">The vector cell type</typeparam>
         protected void ClaimEqual<N,S>(BitVector<N,S> bv, BitString bs)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
             where S : unmanaged
         {
             var n = (int)(new N().value);

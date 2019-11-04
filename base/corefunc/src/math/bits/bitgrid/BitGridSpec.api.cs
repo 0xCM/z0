@@ -23,8 +23,8 @@ namespace Z0
         /// <typeparam name="N">The column count type</typeparam>
         /// <typeparam name="T">The storage type</typeparam>
         public static BitGridSpec<T> Define<M,N,T>(M m = default, N n = default, T rep = default)
-            where N : ITypeNat, new()
-            where M : ITypeNat, new()
+            where N : unmanaged, ITypeNat
+            where M : unmanaged, ITypeNat
             where T : unmanaged
                 => new BitGridSpec<T>(bitsize<T>(), (int)m.value, (int)n.value);
     }

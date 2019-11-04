@@ -16,8 +16,8 @@ namespace Z0.Mkl.Test
     public class t_gemm : UnitTest<t_gemm>
     {        
         internal static void refmul<M,N,T>(BlockMatrix<M,N,T> A, BlockVector<N,T> B, BlockVector<M,T> X)
-            where M : ITypeNat, new()
-            where N : ITypeNat, new()
+            where M : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
             where T : unmanaged
         {
             var m = nati<M>();
@@ -171,9 +171,9 @@ namespace Z0.Mkl.Test
         }
 
         OpTime gemm_direct_check<M,K,N>(IEnumerable<float> src, M m = default, K k = default, N n = default)
-            where M : ITypeNat, new()
-            where K : ITypeNat, new()
-            where N : ITypeNat, new()
+            where M : unmanaged, ITypeNat
+            where K : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
 
         {
             var A = BlockMatrix.Alloc<M,K,float>();
@@ -205,9 +205,9 @@ namespace Z0.Mkl.Test
         }
 
         OpTime gemm_direct_check<M,K,N>(IEnumerable<double> src, M m = default, K k = default, N n = default)
-            where M : ITypeNat, new()
-            where K : ITypeNat, new()
-            where N : ITypeNat, new()
+            where M : unmanaged, ITypeNat
+            where K : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
 
         {
             var A = BlockMatrix.Alloc<M,K,double>();
@@ -240,8 +240,8 @@ namespace Z0.Mkl.Test
         }
 
         OpTime Gemv64<M,N>(IEnumerable<double> src, int cycles, M m = default, N n = default)
-            where M : ITypeNat, new()
-            where N : ITypeNat, new()
+            where M : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
         {
             var A = BlockMatrix.Alloc<M,N,double>();
             var x = BlockVector.Alloc<N,double>();
@@ -267,7 +267,7 @@ namespace Z0.Mkl.Test
         }
 
         static double Dot<N>(BlockVector<N,double> x, BlockVector<N,double> y)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
         {
             var result = 0d;
             for(var i=0; i< nati<N>(); i++)
@@ -278,7 +278,7 @@ namespace Z0.Mkl.Test
         }
 
         static float Dot<N>(BlockVector<N,float> x, BlockVector<N,float> y)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
         {
             var result = 0f;
             for(var i=0; i< nati<N>(); i++)
@@ -309,9 +309,9 @@ namespace Z0.Mkl.Test
         }
 
         static ref BlockMatrix<M,N,float> Mul<M,K,N>(BlockMatrix<M,K,float> A, BlockMatrix<K,N,float> B, ref BlockMatrix<M,N,float> X)
-            where M : ITypeNat, new()
-            where K : ITypeNat, new()
-            where N : ITypeNat, new()
+            where M : unmanaged, ITypeNat
+            where K : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
         {
             var m = nati<M>();
             var n = nati<N>();
@@ -328,9 +328,9 @@ namespace Z0.Mkl.Test
         }
 
         static ref BlockMatrix<M,N,double> Mul<M,K,N>(BlockMatrix<M,K,double> A, BlockMatrix<K,N,double> B, ref BlockMatrix<M,N,double> X)
-            where M : ITypeNat, new()
-            where K : ITypeNat, new()
-            where N : ITypeNat, new()
+            where M : unmanaged, ITypeNat
+            where K : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
         {
             var m = nati<M>();
             var n = nati<N>();

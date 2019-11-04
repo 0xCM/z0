@@ -14,9 +14,9 @@ namespace Z0
     /// <typeparam name="K1">The first nat type</typeparam>
     /// <typeparam name="K2">The second nat type</typeparam>
     public readonly struct NatBetween<K,K1,K2> : INatBetween<K,K1,K2>
-        where K: ITypeNat, new()
-        where K1: ITypeNat, new()
-        where K2: ITypeNat, new()
+        where K: unmanaged, ITypeNat
+        where K1: unmanaged, ITypeNat
+        where K2: unmanaged, ITypeNat
     {        
         static readonly K k = default;
 

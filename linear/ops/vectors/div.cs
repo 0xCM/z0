@@ -18,7 +18,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static ref Vector<N,T> idiv<N,T>(Vector<N,T> lhs, Vector<N,T> rhs, ref Vector<N,T> dst)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
             where T : unmanaged    
         {
             mathspan.idiv<T>(lhs.Data, rhs.Data, dst.Data);
@@ -27,7 +27,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static ref Vector<N,T> fdiv<N,T>(Vector<N,T> lhs, Vector<N,T> rhs, ref Vector<N,T> dst)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
             where T : unmanaged    
         {
             mathspan.fdiv<T>(lhs.Data, rhs.Data, dst.Data);
@@ -60,7 +60,7 @@ namespace Z0
         /// <typeparam name="T">The component type</typeparam>
         [MethodImpl(Inline)]
         public static ref BlockVector<N,T> div<N,T>(ref BlockVector<N,T> lhs, in BlockVector<N,T> rhs)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
             where T : unmanaged    
         {
             if(typeof(T) == typeof(float) || typeof(T) == typeof(double))

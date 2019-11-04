@@ -28,8 +28,8 @@ namespace Z0
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
         public static Matrix<M,N,T> Matrix<M,N,T>(this IPolyrand random, Interval<T>? domain = null, M m = default, N n = default)
-            where M : ITypeNat, new()
-            where N : ITypeNat, new()
+            where M : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
             where T : unmanaged    
                 => Z0.Matrix.load<M,N,T>(random.Array<T>(Z0.Matrix<M,N,T>.CellCount, domain));                    
 
@@ -45,8 +45,8 @@ namespace Z0
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
         public static Matrix<M,N,T> Matrix<M,N,T>(this IPolyrand random, Interval<T> domain, M m = default, N n = default)
-            where M : ITypeNat, new()
-            where N : ITypeNat, new()
+            where M : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
             where T : unmanaged    
                 => Z0.Matrix.load<M,N,T>(random.Array<T>(Z0.Matrix<M,N,T>.CellCount, domain));                    
                
@@ -61,7 +61,7 @@ namespace Z0
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
         public static Matrix<N,T> Matrix<N,T>(this IPolyrand random, N n, T min, T max)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
             where T : unmanaged   
                 => Z0.Matrix.load(n, random.Array<T>(Z0.Matrix<N,T>.CellCount, (min,max)));                    
 
@@ -80,8 +80,8 @@ namespace Z0
          /// <typeparam name="T">The matrix element type</typeparam>
          [MethodImpl(Inline)]
          static Matrix<M,N,T> Matrix<M,N,S,T>(this IPolyrand random, Interval<S>? domain = null, M m = default, N n = default,  T rep = default)
-            where M : ITypeNat, new()
-            where N : ITypeNat, new()
+            where M : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
             where T : unmanaged    
             where S : unmanaged
                 => random.Matrix<M,N,S>(domain).Convert<T>();
@@ -100,7 +100,7 @@ namespace Z0
          /// <typeparam name="T">The matrix element type</typeparam>
          [MethodImpl(Inline)]
          static Matrix<N,T> Matrix<N,S,T>(this IPolyrand random, Interval<S> domain, N n = default,  T rep = default)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
             where T : unmanaged    
             where S : unmanaged
                 => random.Matrix<N,S>(new N(), domain.Left, domain.Right).Convert<T>();
@@ -118,7 +118,7 @@ namespace Z0
          [MethodImpl(Inline)]
          public static Matrix<N,float> MatrixF32<N,S>(this IPolyrand random, S? min = null, S? max = null, N n = default)
             where S : unmanaged
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
                 => random.Matrix<N,S, float>(closed(min ?? TypeMin<S>(), max ?? TypeMax<S>()));
 
         /// <summary>
@@ -133,7 +133,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static  Matrix<N,double> MatrixF64<N,S>(this IPolyrand random, S? min = null, S? max = null, N n = default)
             where S : unmanaged
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
                 => random.Matrix<N,S, double>(closed(min ?? TypeMin<S>(), max ?? TypeMax<S>()));
 
         /// <summary>
@@ -150,8 +150,8 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Matrix<M,N,float> MatrixF32<M,N,S>(this IPolyrand random, S? min = null, S? max = null, M m = default,  N n = default)
             where S : unmanaged
-            where M : ITypeNat, new()
-            where N : ITypeNat, new()
+            where M : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
                 => random.Matrix<M,N,S, float>(closed(min ?? TypeMin<S>(), max ?? TypeMax<S>()));
 
         /// <summary>
@@ -168,8 +168,8 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Matrix<M,N,double> MatrixF64<M,N,S>(this IPolyrand random, S? min = null, S? max = null, M m = default,  N n = default)
             where S : unmanaged
-            where M : ITypeNat, new()
-            where N : ITypeNat, new()
+            where M : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
                 => random.Matrix<M,N,S, double>(closed(min ?? TypeMin<S>(), max ?? TypeMax<S>()));
     }
 }

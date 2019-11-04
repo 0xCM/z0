@@ -19,9 +19,9 @@ namespace Z0
     public static class MatMulRef
     {
         public static ref BlockMatrix<M,N,T> Mul<M,K,N,T>(BlockMatrix<M,K,T> A, BlockMatrix<K,N,T> B, ref BlockMatrix<M,N,T> X)
-            where M : ITypeNat, new()
-            where K : ITypeNat, new()
-            where N : ITypeNat, new()
+            where M : unmanaged, ITypeNat
+            where K : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
             where T : unmanaged    
         {
             var m = nati<M>();

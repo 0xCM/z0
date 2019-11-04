@@ -31,7 +31,7 @@ namespace Z0.Test
 
         void and<N,T>()
             where T : unmanaged
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
         {
             var rep = new N();
             var len = (int)rep.value;

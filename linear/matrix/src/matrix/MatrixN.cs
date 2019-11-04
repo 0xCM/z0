@@ -20,7 +20,7 @@ namespace Z0
     /// <typeparam name="N">The order type</typeparam>
     /// <typeparam name="T">The primal type</typeparam>
     public struct Matrix<N,T>
-        where N : ITypeNat, new()
+        where N : unmanaged, ITypeNat
         where T : unmanaged    
     {        
         T[] data;

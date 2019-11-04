@@ -38,7 +38,7 @@ namespace Z0.Test
         }
 
         static unsafe MethodMemory ReadUntil<N>(MethodInfo m, Span<N,byte> dst, params byte[] conditions)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
         {
             
             var pSrc = (byte*)m.Prepare().ToPointer();

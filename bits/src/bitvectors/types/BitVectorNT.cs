@@ -18,7 +18,7 @@ namespace Z0
     /// <typeparam name="N">The vector length type</typeparam>
     /// <typeparam name="T">The vector component type</typeparam>
     public ref struct BitVector<N,T>
-        where N : ITypeNat, new()
+        where N : unmanaged, ITypeNat
         where T : unmanaged
     {        
         Span<T> data;

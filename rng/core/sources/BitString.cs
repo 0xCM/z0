@@ -123,7 +123,7 @@ namespace Z0
         /// <param name="len">The bitstring length</param>
         [MethodImpl(Inline)]
         public static BitString BitString<N>(this IPolyrand random, N n = default)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
                 => random.BitString((int)n.value);
 
         /// <summary>

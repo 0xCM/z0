@@ -15,7 +15,7 @@ namespace Z0
     using static zfunc;
 
     public ref struct BlockVector<N,T>
-        where N : ITypeNat, new()
+        where N : unmanaged, ITypeNat
         where T : unmanaged    
     {
         Span256<T> data;

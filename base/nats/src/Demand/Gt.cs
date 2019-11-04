@@ -14,8 +14,8 @@ namespace Z0
     /// <typeparam name="K1">The larger nat type</typeparam>
     /// <typeparam name="K2">The smaller nat type</typeparam>
     public readonly struct NatGt<K1,K2> : INatGt<K1,K2>
-        where K1: ITypeNat, new()
-        where K2: ITypeNat, new()
+        where K1: unmanaged, ITypeNat
+        where K2: unmanaged, ITypeNat
     {
         static readonly K1 k1 = default;
         static readonly K2 k2 = default;

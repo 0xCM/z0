@@ -35,8 +35,8 @@ namespace Z0
         /// <typeparam name="N">The column count type</typeparam>
         /// <typeparam name="T">The storage type</typeparam>
         public static GridSpec specify<M,N,T>(M m = default, N n = default, T zero = default)
-            where N : ITypeNat, new()
-            where M : ITypeNat, new()
+            where N : unmanaged, ITypeNat
+            where M : unmanaged, ITypeNat
             where T : unmanaged
                 => new GridSpec(unat<M>(), unat<N>(), bitsize<T>());
 
@@ -58,8 +58,8 @@ namespace Z0
         /// <param name="CellWidth">The width of a grid cell</param>
         [MethodImpl(Inline)]
         public static GridMap map<M,N,T>(M m = default, N n = default, T zero = default)    
-            where N : ITypeNat, new()
-            where M : ITypeNat, new()
+            where N : unmanaged, ITypeNat
+            where M : unmanaged, ITypeNat
             where T : unmanaged
                 => map(specify(m,n, zero));
 

@@ -197,8 +197,8 @@ namespace Z0
         }
 
         public static T Reduce<M,N,T>(this Span<M,N,T> src, Func<T,T,T> f)
-            where M : ITypeNat, new()
-            where N : ITypeNat, new()
+            where M : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
             where T : unmanaged
                 => Reduce(src.ReadOnly(), f);
 

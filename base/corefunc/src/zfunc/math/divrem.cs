@@ -20,7 +20,7 @@ partial class zfunc
     /// <typeparam name="N">The modulus type</typeparam>
     [MethodImpl(Inline)]
     public static uint divrem<N>(uint m, out uint r, N n = default)
-        where N : ITypeNat, new()
+        where N : unmanaged, ITypeNat
             => Mod<N>.divrem(m, out r);
 
     /// <summary>
@@ -32,7 +32,7 @@ partial class zfunc
     /// <typeparam name="N">The modulus type</typeparam>
     [MethodImpl(Inline)]
     public static int divrem<N>(int m, out int r, N n = default)
-        where N : ITypeNat, new()
+        where N : unmanaged, ITypeNat
     {
         var q = (int)divrem((uint)m, out uint ur, n);
         r = (int)ur;
@@ -48,7 +48,7 @@ partial class zfunc
     /// <typeparam name="N">The modulus type</typeparam>
     [MethodImpl(Inline)]
     public static ushort divrem<N>(ushort m, out ushort r, N n = default)
-        where N : ITypeNat, new()
+        where N : unmanaged, ITypeNat
     {
         var q = (ushort)divrem((uint)m, out uint ur, n);
         r = (ushort)ur;
@@ -64,7 +64,7 @@ partial class zfunc
     /// <typeparam name="N">The modulus type</typeparam>
     [MethodImpl(Inline)]
     public static short divrem<N>(short m, out short r, N n = default)
-        where N : ITypeNat, new()
+        where N : unmanaged, ITypeNat
     {
         var q = divrem((uint)m, out uint ur, n);
         r = (short)ur;
@@ -80,7 +80,7 @@ partial class zfunc
     /// <typeparam name="N">The modulus type</typeparam>
     [MethodImpl(Inline)]
     public static byte divrem<N>(byte m, out byte r, N n = default)
-        where N : ITypeNat, new()
+        where N : unmanaged, ITypeNat
     {
         var q = (byte)divrem((uint)m, out uint ur, n);
         r = (byte)ur;
@@ -96,7 +96,7 @@ partial class zfunc
     /// <typeparam name="N">The modulus type</typeparam>
     [MethodImpl(Inline)]
     public static long divrem<N>(long m, out long r, N n = default)
-        where N : ITypeNat, new()
+        where N : unmanaged, ITypeNat
             => Math.DivRem(m,(long)n.value, out r);
 
     /// <summary>
@@ -108,7 +108,7 @@ partial class zfunc
     /// <typeparam name="N">The modulus type</typeparam>
     [MethodImpl(Inline)]
     public static ulong divrem<N>(ulong m, out ulong r, N n = default)
-        where N : ITypeNat, new()
+        where N : unmanaged, ITypeNat
     {
         var q = m / n.value;
         r = m - n.value * q;

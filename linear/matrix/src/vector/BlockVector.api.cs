@@ -25,7 +25,7 @@ namespace Z0
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
         public static BlockVector<N,T> Alloc<N,T>(N n = default)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
             where T : unmanaged
                 =>  BlockVector<N,T>.LoadAligned(Span256.Alloc<N,T>());
 
@@ -38,7 +38,7 @@ namespace Z0
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
         public static BlockVector<N,T> Alloc<N,T>(N n, T fill)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
             where T : unmanaged
                 =>  BlockVector<N,T>.LoadAligned(Span256.Alloc<N,T>(fill));
         
@@ -63,7 +63,7 @@ namespace Z0
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
         public static BlockVector<N,T> Load<N,T>(Span<T> src, N n = default)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
             where T : unmanaged
                 => BlockVector<N,T>.LoadAligned(Span256.Load(src));
 
@@ -77,7 +77,7 @@ namespace Z0
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
         public static BlockVector<N,T> Load<N,T>(N length, params T[] src)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
             where T : unmanaged
                 => BlockVector<N,T>.LoadAligned(Span256.Load<T>(src));
 
@@ -93,13 +93,13 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static BlockVector<N,T> Load<N,T>(Span256<T> src)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
             where T : unmanaged
                 => BlockVector<N, T>.LoadAligned(src);
 
         [MethodImpl(Inline)]
         public static BlockVector<N,T> Load<N,T>(Span<N,T> src)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
             where T : unmanaged
                 => src;
 
@@ -115,7 +115,7 @@ namespace Z0
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
         public static BlockVector<N,T> Zero<N,T>()
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
             where T : unmanaged
                 => Alloc<N,T>();
 

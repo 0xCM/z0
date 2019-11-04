@@ -67,7 +67,7 @@ public static class nfunc
     /// <typeparam name="N">The nat type</typeparam>
     [MethodImpl(Inline)]   
     public static ulong natu<N>() 
-        where N : ITypeNat, new()
+        where N : unmanaged, ITypeNat
             => new N().value; 
 
     /// <summary>
@@ -76,7 +76,7 @@ public static class nfunc
     /// <typeparam name="N">The nat type</typeparam>
     [MethodImpl(Inline)]   
     public static int nati<N>() 
-        where N : ITypeNat, new()
+        where N : unmanaged, ITypeNat
             => (int)natu<N>();
 
     /// <summary>
@@ -85,7 +85,7 @@ public static class nfunc
     /// <typeparam name="N">The nat type</typeparam>
     [MethodImpl(Inline)]   
     public static uint natui<N>() 
-        where N : ITypeNat, new()
+        where N : unmanaged, ITypeNat
             => (uint)natu<N>();
 
     /// <summary>
@@ -94,7 +94,7 @@ public static class nfunc
     /// <typeparam name="N">The nat type</typeparam>
     [MethodImpl(Inline)]   
     public static int nati<N>(N rep) 
-        where N : ITypeNat, new()
+        where N : unmanaged, ITypeNat
             => (int)rep.value;
 
     /// <summary>
@@ -103,7 +103,7 @@ public static class nfunc
     /// <typeparam name="K">The representative type</typeparam>
     [MethodImpl(Inline)]   
     public static K natrep<K>()
-        where K : ITypeNat,new()
+        where K : unmanaged, ITypeNat
             => new K(); 
 
     /// <summary>
@@ -112,7 +112,7 @@ public static class nfunc
     /// <typeparam name="K">The natural type</typeparam>
     [MethodImpl(Inline)]   
     public static Dim<K> dim<K>()
-        where K : ITypeNat, new()
+        where K : unmanaged, ITypeNat
             => Dim.Define<K>();
 
     /// <summary>
@@ -121,7 +121,7 @@ public static class nfunc
     /// <typeparam name="K">The natural type</typeparam>
     [MethodImpl(Inline)]   
     public static Dim<K> dim<K>(K k)
-        where K : ITypeNat, new()
+        where K : unmanaged, ITypeNat
             => Dim.Define<K>();
 
     /// <summary>
@@ -131,8 +131,8 @@ public static class nfunc
     /// <typeparam name="K2">The type of the second component</typeparam>
     [MethodImpl(Inline)]   
     public static Dim<K1,K2> dim<K1,K2>()
-        where K1 : ITypeNat, new()
-        where K2 : ITypeNat, new()
+        where K1 : unmanaged, ITypeNat
+        where K2 : unmanaged, ITypeNat
             => Dim.Define<K1,K2>();
 
     /// <summary>
@@ -142,8 +142,8 @@ public static class nfunc
     /// <typeparam name="K2">The type of the second component</typeparam>
     [MethodImpl(Inline)]   
     public static Dim<K1,K2> dim<K1,K2>(K1 k1, K2 k2)
-        where K1 : ITypeNat, new()
-        where K2 : ITypeNat, new()
+        where K1 : unmanaged, ITypeNat
+        where K2 : unmanaged, ITypeNat
             => Dim.Define<K1,K2>();
 
     /// <summary>
@@ -154,9 +154,9 @@ public static class nfunc
     /// <typeparam name="K3">The type of the third component</typeparam>
     [MethodImpl(Inline)]   
     public static Dim<K1,K2,K3> dim<K1,K2,K3>()
-        where K1 : ITypeNat, new()
-        where K2 : ITypeNat, new()
-        where K3 : ITypeNat, new()
+        where K1 : unmanaged, ITypeNat
+        where K2 : unmanaged, ITypeNat
+        where K3 : unmanaged, ITypeNat
             => Dim.Define<K1,K2,K3>();
 
     /// <summary>
@@ -167,9 +167,9 @@ public static class nfunc
     /// <typeparam name="K3">The type of the third component</typeparam>
     [MethodImpl(Inline)]   
     public static Dim<K1,K2,K3> dim<K1,K2,K3>(K1 k1, K2 k2, K3 k3)
-        where K1 : ITypeNat, new()
-        where K2 : ITypeNat, new()
-        where K3 : ITypeNat, new()
+        where K1 : unmanaged, ITypeNat
+        where K2 : unmanaged, ITypeNat
+        where K3 : unmanaged, ITypeNat
             => Dim.Define<K1,K2,K3>();
 
     /// <summary>
@@ -182,31 +182,31 @@ public static class nfunc
 
     [MethodImpl(Inline)]   
     public static Product<K1, K2> mul<K1,K2>(K1 k1 = default, K2 k2 = default)
-        where K1 : ITypeNat, new()
-        where K2 : ITypeNat, new()
+        where K1 : unmanaged, ITypeNat
+        where K2 : unmanaged, ITypeNat
             => Product<K1,K2>.Rep;
 
     [MethodImpl(Inline)]   
     public static int muli<K1,K2>(K1 k1 = default, K2 k2 = default)
-        where K1 : ITypeNat, new()
-        where K2 : ITypeNat, new()
+        where K1 : unmanaged, ITypeNat
+        where K2 : unmanaged, ITypeNat
             => (int)mul(k1,k2).value;
 
     [MethodImpl(Inline)]   
     public static NatSum<K1, K2> sum<K1,K2>(K1 k1 = default, K2 k2 = default)
-        where K1 : ITypeNat, new()
-        where K2 : ITypeNat, new()
+        where K1 : unmanaged, ITypeNat
+        where K2 : unmanaged, ITypeNat
             => NatSum<K1,K2>.Rep;
 
     [MethodImpl(Inline)]   
     public static int sumi<K1,K2>(K1 k1 = default, K2 k2 = default)
-        where K1 : ITypeNat, new()
-        where K2 : ITypeNat, new()
+        where K1 : unmanaged, ITypeNat
+        where K2 : unmanaged, ITypeNat
             => (int)sum(k1,k2).value;
 
     [MethodImpl(Inline)]
     public static void require<N>(int value)
-        where N : ITypeNat, new()
+        where N : unmanaged, ITypeNat
         => demand(nati<N>() == value, $"The source value {value} does not match the required natural {new N()}");
 
 }

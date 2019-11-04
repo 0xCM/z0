@@ -117,7 +117,7 @@ namespace Z0
         }
 
         void blockv_sub_check<N,T>()
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
             where T : unmanaged
         {
             var n = new N();
@@ -134,7 +134,7 @@ namespace Z0
 
         void blockv_sub_bench<N,T>(N n = default)
             where T : unmanaged
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
         {
             var opcount = CycleCount*RoundCount;
             var sw = stopwatch(false);

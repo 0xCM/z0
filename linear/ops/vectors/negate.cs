@@ -36,7 +36,7 @@ namespace Z0
         /// <typeparam name="T">The component type</typeparam>
         [MethodImpl(Inline)]
         public static ref BlockVector<N,T> negate<N,T>(ref BlockVector<N,T> src)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
             where T : unmanaged    
         {
             var x = src.Unsized;

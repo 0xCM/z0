@@ -145,7 +145,7 @@ namespace Z0
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
         public static ISet<T> ToSet<N,T>(this ReadOnlySpan<N,T> src)        
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
             where T : unmanaged
                 => new HashSet<T>(src.ToArray());   
 

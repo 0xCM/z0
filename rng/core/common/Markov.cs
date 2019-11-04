@@ -56,7 +56,7 @@ namespace Z0
         /// <typeparam name="N">The length type</typeparam>
         [MethodImpl(Inline)]
         public static BlockVector<N,T> MarkovVec<N,T>(this IPolyrand random)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
             where T : unmanaged
         {
             var dst = BlockVector.Alloc<N,T>();
@@ -75,7 +75,7 @@ namespace Z0
         /// <typeparam name="T"></typeparam>
         public static BlockMatrix<N,T> MarkovMat<N,T>(this IPolyrand random, T rep = default, N dim = default)
             where T : unmanaged
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
         {
             var data = Z0.Span256.Alloc<N,N,T>();
             var n = nati<N>();
@@ -86,7 +86,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static ref BlockVector<N,T> MarkovVec<N,T>(this IPolyrand random, ref BlockVector<N,T> dst)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
             where T : unmanaged
         {
             random.MarkovVec(dst.Unsized);
@@ -101,7 +101,7 @@ namespace Z0
         /// <typeparam name="N">The natural dimension type</typeparam>
         /// <typeparam name="T">The element type</typeparam>
          public static bool IsRightStochastic<N,T>(this BlockMatrix<N,T> src, N n = default)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
             where T : unmanaged
         {
             var tol = .001;
@@ -118,7 +118,7 @@ namespace Z0
 
         public static ref BlockMatrix<N,T> MarkovMat<N,T>(this IPolyrand random, ref BlockMatrix<N,T> dst)
             where T : unmanaged
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
         {
             var data = dst.Unsized;
             var n = nati<N>();

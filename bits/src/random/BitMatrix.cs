@@ -126,8 +126,8 @@ namespace Z0
         /// <typeparam name="T">The scalar type</typeparam>
         [MethodImpl(Inline)]
         public static BitMatrix<M,N,T> BitMatrix<M,N,T>(this IPolyrand random, M m = default, N n = default)
-            where M : ITypeNat, new()
-            where N : ITypeNat, new()
+            where M : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
             where T : unmanaged
                 => BM.load(m, n, random.Span<T>(BitGridSpec.Define(m,n,default(T)).TotalCellCount));
 
@@ -140,7 +140,7 @@ namespace Z0
         /// <typeparam name="T">The scalar type</typeparam>
         [MethodImpl(Inline)]
         public static BitMatrix<N,T> BitMatrix<N,T>(this IPolyrand random, N n = default)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
             where T : unmanaged
                 => BM.load(n,random.Span<T>(BitGridSpec.Define(n,n,default(T)).TotalCellCount));                
  

@@ -185,7 +185,7 @@ namespace Z0
         /// <typeparam name="T">The primal component type</typeparam>
         [MethodImpl(Inline)]
         public static string FormatBits<N>(this ReadOnlySpan<N,bit> src, bool tlz = false, bool specifier = false, int? blockWidth = null)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
                 => src.Unsized.FormatBits(tlz,specifier,blockWidth);
 
         /// <summary>
@@ -210,7 +210,7 @@ namespace Z0
         /// <typeparam name="N">The natural length type</typeparam>
         [MethodImpl(Inline)]
         public static string FormatBits<N>(this Span<N,bit> src, bool tlz = false, bool specifier = false, int? blockWidth = null)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
                 => src.Unsized.FormatBits(tlz,specifier,blockWidth);
     }
 }

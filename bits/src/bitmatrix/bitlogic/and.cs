@@ -173,7 +173,7 @@ namespace Z0
         /// <typeparam name="T">The matrix storage type</typeparam>
         [MethodImpl(Inline)]
         public static ref BitMatrix<N,T> and<N,T>(in BitMatrix<N,T> A, in BitMatrix<N,T> B, ref BitMatrix<N,T> C)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
             where T : unmanaged
         {
             mathspan.and(A.Data, B.Data, C.Data);
@@ -185,7 +185,7 @@ namespace Z0
         /// </summary>
         [MethodImpl(Inline)]
         public static BitMatrix<N,T> and<N,T>(in BitMatrix<N,T> A, in BitMatrix<N,T> B)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
             where T : unmanaged
         {
             var C = alloc<N,T>();
@@ -203,8 +203,8 @@ namespace Z0
         /// <typeparam name="T">The matrix storage type</typeparam>
         [MethodImpl(Inline)]
         public static ref BitMatrix<M,N,T> and<M,N,T>(in BitMatrix<M,N,T> A, in BitMatrix<M,N,T> B, ref BitMatrix<M,N,T> C)        
-            where M : ITypeNat, new()
-            where N : ITypeNat, new()
+            where M : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
             where T : unmanaged
         {
             mathspan.and(A.Data, B.Data, C.Data);

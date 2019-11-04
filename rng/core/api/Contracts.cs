@@ -16,7 +16,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="N">The number of generators in the suite</typeparam>
     public interface IRngSuite<N>
-        where N : ITypeNat, new()
+        where N : unmanaged, ITypeNat
     {
         /// <summary>
         /// Retrieves the next vector from the suite, where the components 
@@ -67,7 +67,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The primal component type</typeparam>
     public interface IPointSource<N,T>
-        where N : ITypeNat, new()
+        where N : unmanaged, ITypeNat
         where T : unmanaged
     {
         Span<N,T> Next();

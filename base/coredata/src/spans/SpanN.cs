@@ -17,7 +17,7 @@ namespace Z0
     /// Defines a span of natural length N
     /// </summary>
     public ref struct Span<N,T>
-        where N : ITypeNat, new()
+        where N : unmanaged, ITypeNat
         where T : unmanaged
     {
         Span<T> data;

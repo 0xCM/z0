@@ -19,7 +19,7 @@ namespace Z0
     /// Reifies a natural k such that e:E => k = 2^e
     /// </summary>
     public readonly struct NatPow2<E> : INatPow2<E>
-        where E : ITypeNat, new()
+        where E : unmanaged, ITypeNat
     {
         public static readonly NatPow2<E> Rep = default;
 

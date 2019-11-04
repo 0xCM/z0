@@ -24,7 +24,7 @@ namespace Z0
         /// <typeparam name="T">The component type</typeparam>
         [MethodImpl(Inline)]
         public static BlockVector<N,T> and<N,T>(BlockVector<N,T> lhs, BlockVector<N,T> rhs)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
             where T : unmanaged    
         {
             var dst = BlockVector.Alloc<N,T>();
@@ -43,7 +43,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static ref BlockVector<N,T> and<N,T>(BlockVector<N,T> lhs, BlockVector<N,T> rhs, ref BlockVector<N,T> dst)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
             where T : unmanaged    
         {
             and<T>(lhs.Data, rhs.Data, dst);
@@ -59,7 +59,7 @@ namespace Z0
         /// <typeparam name="T">The component type</typeparam>
         [MethodImpl(Inline)]
         public static BlockVector<N,T> and<N,T>(BlockVector<N,T> lhs, T rhs)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
             where T : unmanaged    
         {
             var dst = lhs.Replicate();
@@ -69,7 +69,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static ref BlockVector<N,T> and<N,T>(BlockVector<N,T> lhs, T rhs, ref BlockVector<N,T> dst)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
             where T : unmanaged    
         {
             lhs.Data.CopyTo(dst.Data);

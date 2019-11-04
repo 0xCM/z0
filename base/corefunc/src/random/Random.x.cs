@@ -69,7 +69,7 @@ namespace  Z0
         /// <typeparam name="N">The permutation length</typeparam>
         [MethodImpl(Inline)]
         public static Perm<N> Shuffle<N>(this IPolyrand random, in Perm<N> src)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
         {
             var copy = src.Replicate();
             copy.Shuffle(random);

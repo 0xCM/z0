@@ -24,7 +24,7 @@ namespace Z0
     /// be placed in RAX after the call completes
     /// </remarks>
     public abstract class AsmCallExpr<N> : AsmInstrExpr
-        where N : ITypeNat, new()
+        where N : unmanaged, ITypeNat
     {
         public readonly int ArgCount
             = (int)new N().value;
@@ -42,7 +42,7 @@ namespace Z0
     }
 
     public abstract class AsmCallExpr<N,R> : AsmCallExpr<N>
-        where N : ITypeNat, new()
+        where N : unmanaged, ITypeNat
     {
         protected AsmCallExpr(string Function)
             : base(Function)

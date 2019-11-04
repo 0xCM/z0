@@ -37,7 +37,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="K1">The type of the first term</typeparam>
     public readonly struct NatSeq1<K1> : INatSeq<NatSeq1<K1>>
-        where K1 : INatPrimitive<K1>, new()
+        where K1 : unmanaged, INatPrimitive<K1>
     {
         public static readonly NatSeq1<K1> Rep = default;
         
@@ -63,11 +63,9 @@ namespace Z0
     /// <summary>
     /// Reifies a two-term natural sequence
     /// </summary>
-    /// <typeparam name="K1">The type of the first term</typeparam>
-    /// <typeparam name="K2">The type of the second term</typeparam>
     public readonly struct NatSeq<K1,K2> : INatSeq<NatSeq<K1,K2>>
-        where K1 : INatPrimitive<K1>, new()
-        where K2 : INatPrimitive<K2>, new()
+        where K1 : unmanaged, INatPrimitive<K1>
+        where K2 : unmanaged, INatPrimitive<K2>
     {
         public static readonly NatSeq<K1,K2> Rep = default;
 
@@ -94,13 +92,10 @@ namespace Z0
     /// <summary>
     /// Reifies a three-term natural sequence
     /// </summary>
-    /// <typeparam name="K1">The type of the first term</typeparam>
-    /// <typeparam name="K2">The type of the second term</typeparam>
-    /// <typeparam name="K3">The type of the third term</typeparam>
     public readonly struct NatSeq<K1,K2,K3> : INatSeq<NatSeq<K1,K2,K3>>
-        where K1 : INatPrimitive<K1>, new()
-        where K2 : INatPrimitive<K2>, new()
-        where K3 : INatPrimitive<K3>, new()
+        where K1 : unmanaged, INatPrimitive<K1>
+        where K2 : unmanaged, INatPrimitive<K2>
+        where K3 : unmanaged, INatPrimitive<K3>
     {
         public static readonly NatSeq<K1,K2,K3> Rep = default;
         
@@ -128,15 +123,11 @@ namespace Z0
     /// <summary>
     /// Reifies a four-term natural sequence
     /// </summary>
-    /// <typeparam name="K1">The type of the first term</typeparam>
-    /// <typeparam name="K2">The type of the second term</typeparam>
-    /// <typeparam name="K3">The type of the third term</typeparam>
-    /// <typeparam name="K4">The type of the fourth term</typeparam>
     public readonly struct NatSeq<K1,K2,K3,K4> : INatSeq<NatSeq<K1,K2,K3,K4>>
-        where K1 : INatPrimitive<K1>, new()
-        where K2 : INatPrimitive<K2>, new()
-        where K3 : INatPrimitive<K3>, new()
-        where K4 : INatPrimitive<K4>, new()
+        where K1 : unmanaged, INatPrimitive<K1>
+        where K2 : unmanaged, INatPrimitive<K2>
+        where K3 : unmanaged, INatPrimitive<K3>
+        where K4 : unmanaged, INatPrimitive<K4>
     {
         public static readonly NatSeq<K1,K2,K3,K4> Rep = default;
 
@@ -165,17 +156,12 @@ namespace Z0
     /// <summary>
     /// Reifies a five-term natural sequence
     /// </summary>
-    /// <typeparam name="K1">The type of the first term</typeparam>
-    /// <typeparam name="K2">The type of the second term</typeparam>
-    /// <typeparam name="K3">The type of the third term</typeparam>
-    /// <typeparam name="K4">The type of the fourth term</typeparam>
-    /// <typeparam name="K5">The type of the fifth term</typeparam>
     public readonly struct NatSeq<K1,K2,K3,K4,K5> : INatSeq<NatSeq<K1,K2,K3,K4,K5>>
-        where K1 : INatPrimitive<K1>, new()
-        where K2 : INatPrimitive<K2>, new()
-        where K3 : INatPrimitive<K3>, new()
-        where K4 : INatPrimitive<K4>, new()
-        where K5 : INatPrimitive<K5>, new()
+        where K1 : unmanaged, INatPrimitive<K1>
+        where K2 : unmanaged, INatPrimitive<K2>
+        where K3 : unmanaged, INatPrimitive<K3>
+        where K4 : unmanaged, INatPrimitive<K4>
+        where K5 : unmanaged, INatPrimitive<K5>
     {
         public static readonly NatSeq<K1,K2,K3,K4,K5> Rep = default;
 
@@ -203,15 +189,15 @@ namespace Z0
     }
 
     /// <summary>
-    /// A nat sequence of length 6
+    /// Reifies a six-term natural sequence
     /// </summary>
     public readonly struct NatSeq<K1,K2,K3,K4,K5,K6> : INatSeq<NatSeq<K1,K2,K3,K4,K5,K6>>
-        where K1 : INatPrimitive<K1>, new()
-        where K2 : INatPrimitive<K2>, new()
-        where K3 : INatPrimitive<K3>, new()
-        where K4 : INatPrimitive<K4>, new()
-        where K5 : INatPrimitive<K5>, new()
-        where K6 : INatPrimitive<K6>, new()
+        where K1 : unmanaged, INatPrimitive<K1>
+        where K2 : unmanaged, INatPrimitive<K2>
+        where K3 : unmanaged, INatPrimitive<K3>
+        where K4 : unmanaged, INatPrimitive<K4>
+        where K5 : unmanaged, INatPrimitive<K5>
+        where K6 : unmanaged, INatPrimitive<K6>
     {
         public static readonly NatSeq<K1,K2,K3,K4,K5,K6> Rep = default;
 
@@ -242,21 +228,14 @@ namespace Z0
     /// <summary>
     /// Reifies a seven-term natural sequence
     /// </summary>
-    /// <typeparam name="K1">The type of the first term</typeparam>
-    /// <typeparam name="K2">The type of the second term</typeparam>
-    /// <typeparam name="K3">The type of the third term</typeparam>
-    /// <typeparam name="K4">The type of the fourth term</typeparam>
-    /// <typeparam name="K5">The type of the fifth term</typeparam>
-    /// <typeparam name="K6">The type of the sixth term</typeparam>
-    /// <typeparam name="K7">The type of the seventh term</typeparam>
     public readonly struct NatSeq<K1,K2,K3,K4,K5,K6,K7> : INatSeq<NatSeq<K1,K2,K3,K4,K5,K6,K7>>
-        where K1 : INatPrimitive<K1>, new()
-        where K2 : INatPrimitive<K2>, new()
-        where K3 : INatPrimitive<K3>, new()
-        where K4 : INatPrimitive<K4>, new()
-        where K5 : INatPrimitive<K5>, new()
-        where K6 : INatPrimitive<K6>, new()
-        where K7 : INatPrimitive<K7>, new()
+        where K1 : unmanaged, INatPrimitive<K1>
+        where K2 : unmanaged, INatPrimitive<K2>
+        where K3 : unmanaged, INatPrimitive<K3>
+        where K4 : unmanaged, INatPrimitive<K4>
+        where K5 : unmanaged, INatPrimitive<K5>
+        where K6 : unmanaged, INatPrimitive<K6>
+        where K7 : unmanaged, INatPrimitive<K7>
     {
         public static readonly NatSeq<K1,K2,K3,K4,K5,K6,K7> Rep = default;
 
@@ -291,23 +270,15 @@ namespace Z0
     /// <summary>
     /// Reifies an eight-term natural sequence
     /// </summary>
-    /// <typeparam name="K1">The type of the first term</typeparam>
-    /// <typeparam name="K2">The type of the second term</typeparam>
-    /// <typeparam name="K3">The type of the third term</typeparam>
-    /// <typeparam name="K4">The type of the fourth term</typeparam>
-    /// <typeparam name="K5">The type of the fifth term</typeparam>
-    /// <typeparam name="K6">The type of the sixth term</typeparam>
-    /// <typeparam name="K7">The type of the seventh term</typeparam>
-    /// <typeparam name="K8">The type of the eight term</typeparam>
     public readonly struct NatSeq<K1,K2,K3,K4,K5,K6,K7,K8> : INatSeq<NatSeq<K1,K2,K3,K4,K5,K6,K7,K8>>
-        where K1 : INatPrimitive<K1>, new()
-        where K2 : INatPrimitive<K2>, new()
-        where K3 : INatPrimitive<K3>, new()
-        where K4 : INatPrimitive<K4>, new()
-        where K5 : INatPrimitive<K5>, new()
-        where K6 : INatPrimitive<K6>, new()
-        where K7 : INatPrimitive<K7>, new()
-        where K8 : INatPrimitive<K8>, new()
+        where K1 : unmanaged, INatPrimitive<K1>
+        where K2 : unmanaged, INatPrimitive<K2>
+        where K3 : unmanaged, INatPrimitive<K3>
+        where K4 : unmanaged, INatPrimitive<K4>
+        where K5 : unmanaged, INatPrimitive<K5>
+        where K6 : unmanaged, INatPrimitive<K6>
+        where K7 : unmanaged, INatPrimitive<K7>
+        where K8 : unmanaged, INatPrimitive<K8>
     {
         public static readonly NatSeq<K1,K2,K3,K4,K5,K6,K7,K8> Rep = default;
 
@@ -340,28 +311,19 @@ namespace Z0
             => format();
     } 
 
-   /// <summary>
+    /// <summary>
     /// Reifies an nine-term natural sequence
     /// </summary>
-    /// <typeparam name="K1">The type of the first term</typeparam>
-    /// <typeparam name="K2">The type of the second term</typeparam>
-    /// <typeparam name="K3">The type of the third term</typeparam>
-    /// <typeparam name="K4">The type of the fourth term</typeparam>
-    /// <typeparam name="K5">The type of the fifth term</typeparam>
-    /// <typeparam name="K6">The type of the sixth term</typeparam>
-    /// <typeparam name="K7">The type of the seventh term</typeparam>
-    /// <typeparam name="K8">The type of the eight term</typeparam>
-    /// <typeparam name="K9">The type of the ningth term</typeparam>
     public readonly struct NatSeq<K1,K2,K3,K4,K5,K6,K7,K8,K9> : INatSeq<NatSeq<K1,K2,K3,K4,K5,K6,K7,K8,K9>>
-        where K1 : INatPrimitive<K1>, new()
-        where K2 : INatPrimitive<K2>, new()
-        where K3 : INatPrimitive<K3>, new()
-        where K4 : INatPrimitive<K4>, new()
-        where K5 : INatPrimitive<K5>, new()
-        where K6 : INatPrimitive<K6>, new()
-        where K7 : INatPrimitive<K7>, new()
-        where K8 : INatPrimitive<K8>, new()
-        where K9 : INatPrimitive<K9>, new()
+        where K1 : unmanaged, INatPrimitive<K1>
+        where K2 : unmanaged, INatPrimitive<K2>
+        where K3 : unmanaged, INatPrimitive<K3>
+        where K4 : unmanaged, INatPrimitive<K4>
+        where K5 : unmanaged, INatPrimitive<K5>
+        where K6 : unmanaged, INatPrimitive<K6>
+        where K7 : unmanaged, INatPrimitive<K7>
+        where K8 : unmanaged, INatPrimitive<K8>
+        where K9 : unmanaged, INatPrimitive<K9>
     {
         public static readonly NatSeq<K1,K2,K3,K4,K5,K6,K7,K8,K9> Rep = default;
 

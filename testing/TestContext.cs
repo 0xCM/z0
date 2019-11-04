@@ -310,18 +310,18 @@ namespace Z0
             => Notify(AppMsg.Define($"{typeof(T).DisplayName()}/{caller}<{typeof(A).DisplayName()},{typeof(B).DisplayName()}> succeeded", SeverityLevel.HiliteCL));
 
         protected void NatCaseStart<N,A>([CallerMemberName] string caller = null)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
             => Notify(AppMsg.Define($"{typeof(T).DisplayName()}/{caller}<N{nati<N>()},{typeof(A).DisplayName()}> executing", SeverityLevel.HiliteCL));
 
         protected void TypeCaseStart<M,N,S>([CallerMemberName] string caller = null)
-            where M : ITypeNat, new()
-            where N : ITypeNat, new()
+            where M : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
             where S : unmanaged
                 => Notify(AppMsg.Define($"{typeof(T).DisplayName()}/{caller}<N{nati<M>()}xN{nati<N>()}:{typeof(S).DisplayName()}> executing", SeverityLevel.HiliteCL));
 
         protected void TypeCaseEnd<M,N,S>([CallerMemberName] string caller = null)
-            where M : ITypeNat, new()
-            where N : ITypeNat, new()
+            where M : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
             where S : unmanaged
                 => Notify(AppMsg.Define($"{typeof(T).Name}/{caller}<N{nati<M>()}xN{nati<N>()}:{typeof(S).DisplayName()}> succeeded", SeverityLevel.HiliteCL));
     }

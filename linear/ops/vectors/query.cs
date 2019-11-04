@@ -23,7 +23,7 @@ namespace Z0
         /// <typeparam name="N">The natural type</typeparam>
         /// <typeparam name="T">The component type</typeparam>
         public static bool all<N,T>(in BlockVector<N,T> src, T match)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
             where T : unmanaged    
         {
             for(var i=0; i< BlockVector<N,T>.Length; i++)            

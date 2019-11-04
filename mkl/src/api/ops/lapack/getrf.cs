@@ -25,8 +25,8 @@ namespace Z0.Mkl
         /// <typeparam name="M"></typeparam>
         /// <typeparam name="N"></typeparam>
         public static ref BlockMatrix<M,N,double> getrf<M,N>(BlockMatrix<M,N,double> A, Span<int> P, ref BlockMatrix<M,N,double> X)
-            where M : ITypeNat, new()
-            where N : ITypeNat, new()
+            where M : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
         {
             var m = nati<M>();
             var n = nati<N>();
@@ -47,7 +47,7 @@ namespace Z0.Mkl
         /// <typeparam name="M"></typeparam>
         /// <typeparam name="N"></typeparam>
         public static ref BlockMatrix<N,double> getrf<N>(BlockMatrix<N,double> A, Span<int> P, ref BlockMatrix<N,double> X)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
         {
             var n = nati<N>();
             var lda = n;

@@ -16,7 +16,7 @@ namespace Z0
     /// <typeparam name="N">The matrix order</typeparam>
     /// <typeparam name="T">The element type</typeparam>
     public ref struct BitMatrix<N,T>
-        where N : ITypeNat, new()
+        where N : unmanaged, ITypeNat
         where T : unmanaged
     {        
         Span<T> data;

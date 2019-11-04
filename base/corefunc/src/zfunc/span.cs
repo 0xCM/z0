@@ -300,7 +300,7 @@ partial class zfunc
     /// <typeparam name="T">The element type</typeparam>
     [MethodImpl(Inline)]
     public static ref T head<N,T>(Span<N,T> src)
-        where N : ITypeNat,new()
+        where N : unmanaged, ITypeNat
         where T : unmanaged
             =>  ref src.Head;
 
@@ -311,7 +311,7 @@ partial class zfunc
     /// <typeparam name="T">The element type</typeparam>
     [MethodImpl(Inline)]
     public static ref readonly T head<N,T>(ReadOnlySpan<N,T> src)
-        where N : ITypeNat,new()
+        where N : unmanaged, ITypeNat
         where T : unmanaged
             =>  ref src.Head;
 

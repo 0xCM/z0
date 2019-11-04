@@ -18,7 +18,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static Span<N,bool> eq<N,T>(BlockVector<N,T> lhs, BlockVector<N,T> rhs)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
             where T : unmanaged    
                 => mathspan.eq<T>(lhs.Unsized, rhs.Unsized).AsNatural<N,bool>();            
 
@@ -49,31 +49,31 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static Span<N,bool> neq<N,T>(in BlockVector<N,T> lhs, in BlockVector<N,T> rhs)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
             where T : unmanaged           
                 => mathspan.neq<T>(lhs.Unsized, rhs.Unsized).AsNatural<N,bool>();                   
 
         [MethodImpl(Inline)]
         public static Span<N,bool> gt<N,T>(in BlockVector<N,T> lhs, in BlockVector<N,T> rhs)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
             where T : unmanaged            
                 => mathspan.gt<T>(lhs.Unsized, rhs.Unsized).AsNatural<N,bool>();            
         
         [MethodImpl(Inline)]
         public static Span<N,bool> gteq<N,T>(in BlockVector<N,T> lhs, in BlockVector<N,T> rhs)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
             where T : unmanaged    
                 => mathspan.gteq<T>(lhs.Unsized, rhs.Unsized).AsNatural<N,bool>();            
 
         [MethodImpl(Inline)]
         public static Span<N,bool> lt<N,T>(in BlockVector<N,T> lhs, in BlockVector<N,T> rhs)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
             where T : unmanaged    
                 => mathspan.lt<T>(lhs.Unsized, rhs.Unsized).AsNatural<N,bool>();            
 
         [MethodImpl(Inline)]
         public static Span<N,bool> lteq<N,T>(in BlockVector<N,T> lhs, in BlockVector<N,T> rhs)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
             where T : unmanaged    
                 => mathspan.lteq<T>(lhs.Unsized, rhs.Unsized).AsNatural<N,bool>();
 

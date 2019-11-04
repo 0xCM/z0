@@ -33,7 +33,7 @@ namespace Z0
         [MethodImpl(NotInline)]
         public static BitVector<N,T> alloc<N,T>(N n = default, T fill = default)
             where T : unmanaged
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
                 => BitVector<N,T>.Alloc(fill);
 
         /// <summary>

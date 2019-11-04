@@ -56,7 +56,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BlockVector<N,T> BlockVec<N,T>(this IPolyrand random, Interval<T> domain, N n = default)
             where T : unmanaged
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
         {
             var dst = BlockVector.Alloc<N,T>();
             random.Fill(domain, ref dst);
@@ -76,7 +76,7 @@ namespace Z0
         public static BlockVector<N,T> BlockVec<N,S,T>(this IPolyrand random, Interval<S> domain, N n = default)
             where T : unmanaged
             where S: unmanaged
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
                 => random.BlockVec<N,S>(domain).Convert<T>();
 
         /// <summary>
@@ -88,7 +88,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BlockVector<N,T> BlockVec<N,T>(this IPolyrand random,  N n = default)
             where T : unmanaged
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
         {
             var dst = BlockVector.Alloc<N,T>();
             random.Fill(ref dst);
@@ -106,7 +106,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static void Fill<N,T>(this IPolyrand random, Interval<T> domain, ref BlockVector<N,T> vector, N n = default)
             where T : unmanaged
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
                 => random.StreamTo<T>(domain, nati<N>(), ref vector.Unsized[0]);
 
         /// <summary>
@@ -120,7 +120,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static void Fill<N,T>(this IPolyrand random, ref BlockVector<N,T> vector, N n = default)
             where T : unmanaged
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
                 => random.StreamTo<T>(nati<N>(), ref vector.Unsized[0]);
 
     }

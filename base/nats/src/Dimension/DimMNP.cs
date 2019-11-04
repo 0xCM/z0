@@ -48,9 +48,9 @@ namespace Z0
     /// <typeparam name="N">The type of the second dimension</typeparam>
     /// <typeparam name="P">The type of the third dimension</typeparam>
     public readonly struct Dim<M,N,P> : IDim
-        where M : ITypeNat, new()
-        where N : ITypeNat, new()
-        where P : ITypeNat, new()
+        where M : unmanaged, ITypeNat
+        where N : unmanaged, ITypeNat
+        where P : unmanaged, ITypeNat
     {
         public static readonly Dim<M,N,P> Rep = default;
 

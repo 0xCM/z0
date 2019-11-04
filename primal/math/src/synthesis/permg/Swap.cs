@@ -159,7 +159,7 @@ namespace Z0
     /// Defines a transposition in the context of a permutation of natural length
     /// </summary>
     public struct SwapG<N,T>
-        where N : ITypeNat, new()
+        where N : unmanaged, ITypeNat
         where T : unmanaged
     {
         /// <summary>

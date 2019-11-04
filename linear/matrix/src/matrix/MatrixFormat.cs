@@ -22,8 +22,8 @@ namespace Z0
                 => Matrix.load<M,N,T>(src.Unblocked.ToArray());
 
         public static string Format<M,N,T>(this BlockMatrix<M,N,T> src, int? cellwidth = null, char? cellsep = null, Func<T,string> render = null)
-            where M : ITypeNat, new()
-            where N : ITypeNat, new()
+            where M : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
             where T : unmanaged    
         {
             var sep = cellsep ?? '|';
@@ -98,7 +98,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static string Fomat<N,T>(this BlockVector<N,T> src)
             where T : unmanaged    
-            where N: ITypeNat, new()
+            where N: unmanaged, ITypeNat
                 => src.Unsized.FormatList();
 
     }

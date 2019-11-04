@@ -189,7 +189,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static void eq<N,T>(Span<N,T> lhs, Span<N,T> rhs, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
             where T : unmanaged 
-            where N : ITypeNat, new()             
+            where N : unmanaged, ITypeNat             
                 => lhs.Unsized.ClaimEqual(rhs.Unsized, caller,file,line);
 
         [MethodImpl(Inline)]

@@ -27,7 +27,7 @@ namespace Z0
         /// <typeparam name="K">The natural type</typeparam>
         [MethodImpl(Inline)]   
         public static ulong eq<K>(ulong expected)
-            where K : ITypeNat, new()
+            where K : unmanaged, ITypeNat
                 => natu<K>() == expected  ? expected : failure<K,ulong>("eq", expected);
 
         /// <summary>
@@ -40,7 +40,7 @@ namespace Z0
         /// <typeparam name="K">The natural type</typeparam>
         [MethodImpl(Inline)]   
         public static ulong eq<K>(K k, ulong expected)
-                where K : ITypeNat, new()
+                where K : unmanaged, ITypeNat
                     => k.value == expected  ? expected : failure<K,ulong>("eq", expected);
 
         /// <summary>
@@ -52,7 +52,7 @@ namespace Z0
         /// <typeparam name="K">The natural type</typeparam>
         [MethodImpl(Inline)]   
         public static uint eq<K>(int expected)
-            where K : ITypeNat, new()
+            where K : unmanaged, ITypeNat
                 => natu<K>() == (uint)expected ? (uint)expected : failure<K,uint>("eq", (uint)expected);
 
         /// <summary>
@@ -65,7 +65,7 @@ namespace Z0
         /// <typeparam name="K">The natural type</typeparam>
         [MethodImpl(Inline)]   
         public static uint eq<K>(K k, int expected)
-                where K : ITypeNat, new()
+                where K : unmanaged, ITypeNat
                     => k.value == (uint)expected ? (uint)expected : failure<K,uint>("eq", (uint)expected);
 
         /// <summary>
@@ -76,7 +76,7 @@ namespace Z0
         /// <typeparam name="K">The natural representative</typeparam>
         [MethodImpl(Inline)]   
         public static bool eq<K>(uint test, bool raise = true)
-            where K : ITypeNat, new() 
+            where K : unmanaged, ITypeNat 
                 =>  natu<K>() == test ? true : failure<K>("eq", test, raise);
 
         /// <summary>
@@ -87,8 +87,8 @@ namespace Z0
         /// <typeparam name="K2">The second type</typeparam>
         /// <returns></returns>
         public static NatEq<K1,K2> eq<K1,K2>()
-            where K1: ITypeNat, new()
-            where K2: ITypeNat, new()
+            where K1: unmanaged, ITypeNat
+            where K2: unmanaged, ITypeNat
                 => new NatEq<K1,K2>(natrep<K1>(),natrep<K2>());                             
 
         /// <summary>
@@ -99,8 +99,8 @@ namespace Z0
         /// <typeparam name="K2">The second type</typeparam>
         /// <returns></returns>
         public static NatEq<K1,K2> eq<K1,K2>(K1 k1, K2 k2)
-            where K1: ITypeNat, new()
-            where K2: ITypeNat, new()
+            where K1: unmanaged, ITypeNat
+            where K2: unmanaged, ITypeNat
                 => new NatEq<K1,K2>(k1,k2);                             
 
         /// <summary>
@@ -111,8 +111,8 @@ namespace Z0
         /// <typeparam name="K2">The second type</typeparam>
         /// <returns></returns>
         public static NatNEq<K1,K2> neq<K1,K2>()
-            where K1: ITypeNat, new()
-            where K2: ITypeNat, new()
+            where K1: unmanaged, ITypeNat
+            where K2: unmanaged, ITypeNat
                 => new NatNEq<K1,K2>(natrep<K1>(),natrep<K2>());                             
 
         /// <summary>
@@ -123,8 +123,8 @@ namespace Z0
         /// <typeparam name="K2">The second type</typeparam>
         /// <returns></returns>
         public static NatNEq<K1,K2> neq<K1,K2>(K1 k1, K2 k2)
-            where K1: ITypeNat, new()
-            where K2: ITypeNat, new()
+            where K1: unmanaged, ITypeNat
+            where K2: unmanaged, ITypeNat
                 => new NatNEq<K1,K2>(k1,k2);
 
 

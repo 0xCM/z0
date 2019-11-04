@@ -17,7 +17,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="N">The number of generators in the suite</typeparam>
     class RngSuite<N> : IRngSuite<N>
-        where N : ITypeNat, new()
+        where N : unmanaged, ITypeNat
     {
         readonly IPolyrand[] members;
 

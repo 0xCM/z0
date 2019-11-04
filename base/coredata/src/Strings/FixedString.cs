@@ -21,7 +21,7 @@ namespace Z0
         
     }
     public interface IFixedString<N> : IFixedString
-        where N : ITypeNat,new()
+        where N : unmanaged, ITypeNat
     {
 
     }

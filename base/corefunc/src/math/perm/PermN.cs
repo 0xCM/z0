@@ -16,7 +16,7 @@ namespace Z0
     /// Defines a permutation of natural length N over the natural numbers 0,1,...,N-1
     /// </summary>
     public struct Perm<N>
-        where N : ITypeNat, new()
+        where N : unmanaged, ITypeNat
     {
         Perm perm;
 

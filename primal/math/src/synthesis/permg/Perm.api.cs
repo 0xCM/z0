@@ -82,7 +82,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static SwapG<N,T> Swap<N,T>(T i, T j, N n = default)
             where T : unmanaged
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
                 => (i,j);
 
     }

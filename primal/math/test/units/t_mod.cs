@@ -119,7 +119,7 @@ namespace Z0.Test
         }
 
         void mod_add_check<N>(int samples, N n = default)
-            where N :ITypeNat, new()
+            where N :unmanaged, ITypeNat
         {
             TypeCaseStart<N>();
 
@@ -174,7 +174,7 @@ namespace Z0.Test
         }
 
         void mod_mul_check<N>(N n = default)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
         {
             TypeCaseStart<N>();
             var nVal = (uint)n.value;
@@ -194,7 +194,7 @@ namespace Z0.Test
         }
  
         void mod_inverse_check<N>(N n = default)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
         {
 
             TypeCaseStart<N>();
@@ -211,7 +211,7 @@ namespace Z0.Test
         }
 
         void mod_dec_check<N>(N n = default)
-            where N :ITypeNat, new()
+            where N :unmanaged, ITypeNat
         {
             TypeCaseStart<N>();
 
@@ -239,7 +239,7 @@ namespace Z0.Test
         }
 
         void mod_inc_check<N>(N n = default)
-            where N :ITypeNat, new()
+            where N :unmanaged, ITypeNat
         {
             TypeCaseStart<N>();
 

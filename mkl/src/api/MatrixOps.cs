@@ -28,9 +28,9 @@ namespace Z0
         /// <typeparam name="N">The B column count type</typeparam>
         [MethodImpl(Inline)]
         public static BlockMatrix<M,N,float> Mul<M,K,N>(this BlockMatrix<M,K,float> A, BlockMatrix<K,N,float> B)
-            where M : ITypeNat, new()
-            where K : ITypeNat, new()
-            where N : ITypeNat, new()
+            where M : unmanaged, ITypeNat
+            where K : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
                 => BlockMatrix.Load<M,N,float>(mkl.gemm<M,K,N>(A.Unsized, B.Unsized));
 
         /// <summary>
@@ -43,9 +43,9 @@ namespace Z0
         /// <typeparam name="N">The B column count type</typeparam>
         [MethodImpl(Inline)]
         public static BlockMatrix<M,N,double> Mul<M,K,N>(this BlockMatrix<M,K,double> A, BlockMatrix<K,N,double> B)
-            where M : ITypeNat, new()
-            where K : ITypeNat, new()
-            where N : ITypeNat, new()
+            where M : unmanaged, ITypeNat
+            where K : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
                 => BlockMatrix.Load<M,N,double>(mkl.gemm<M,K,N>(A.Unsized, B.Unsized));
 
         /// <summary>
@@ -59,9 +59,9 @@ namespace Z0
         /// <typeparam name="N">The B column count type</typeparam>
         [MethodImpl(Inline)]
         public static ref BlockMatrix<M,N,float> Mul<M,K,N>(this BlockMatrix<M,K,float> A, BlockMatrix<K,N,float> B, ref BlockMatrix<M,N, float> X)
-            where M : ITypeNat, new()
-            where K : ITypeNat, new()
-            where N : ITypeNat, new()
+            where M : unmanaged, ITypeNat
+            where K : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
         {
             mkl.gemm<M,K,N>(A, B, ref X);
             return ref X;
@@ -78,9 +78,9 @@ namespace Z0
         /// <typeparam name="N">The B column count type</typeparam>
         [MethodImpl(Inline)]
         public static ref BlockMatrix<M,N,double> Mul<M,K,N>(this BlockMatrix<M,K,double> A, BlockMatrix<K,N,double> B, ref BlockMatrix<M,N,double> X)
-            where M : ITypeNat, new()
-            where N : ITypeNat, new()
-            where K : ITypeNat, new()
+            where M : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
+            where K : unmanaged, ITypeNat
         {
             mkl.gemm(A, B, ref X);   
             return ref X;
@@ -95,7 +95,7 @@ namespace Z0
         /// <typeparam name="N">The common order of all matrices</typeparam>
         [MethodImpl(Inline)]
         public static ref BlockMatrix<N,float> Mul<N>(this BlockMatrix<N,float> A, BlockMatrix<N,float> B, ref BlockMatrix<N, float> X)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
         {
             mkl.gemm(A, B, ref X);
             return ref X;
@@ -111,7 +111,7 @@ namespace Z0
         /// <typeparam name="N">The common order of all matrices</typeparam>
         [MethodImpl(Inline)]
         public static ref BlockMatrix<N,double> Mul<N>(this BlockMatrix<N,double> A, BlockMatrix<N,double> B, ref BlockMatrix<N, double> X)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
         {
             mkl.gemm(A, B, ref X);
             return ref X;
@@ -119,7 +119,7 @@ namespace Z0
         
         [MethodImpl(Inline)]
         public static BlockMatrix<N,T> Map<N,S,T>(this BlockMatrix<N,S> A, Func<S,T> f)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
             where T : unmanaged
             where S : unmanaged
         {
@@ -132,7 +132,7 @@ namespace Z0
         }
 
         public static BlockMatrix<N,double> Pow<N>(this BlockMatrix<N,double> A, int exp)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
         {
             if(exp == 1)
                 return A;

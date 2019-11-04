@@ -94,7 +94,7 @@ namespace Z0
         }        
 
         void perm_comp_check<N>(N n = default)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
         {
             var p1 = Random.Perm<N>();
             var p2 = p1 * Perm<N>.Identity;
@@ -102,7 +102,7 @@ namespace Z0
         }
 
        void perm_identity_check<N>(N rep = default)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
         {
             var permA = Perm<N>.Identity;
             var n = nati<N>();
@@ -117,7 +117,7 @@ namespace Z0
         }
 
         void perm_invert_check<N>(N n = default, int cycles = DefaltCycleCount)
-            where N: ITypeNat, new()
+            where N: unmanaged, ITypeNat
         {
             for(var i=0; i<(int)n.value; i++)
             {

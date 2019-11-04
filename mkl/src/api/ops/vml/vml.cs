@@ -48,7 +48,7 @@ namespace Z0.Mkl
 		/// <param name="dst">The caller-allocated target vector</param>
         [MethodImpl(Inline)]
         public static ref BlockVector<N,float> add<N>(BlockVector<N,float> lhs, BlockVector<N,float> rhs, ref BlockVector<N,float> dst)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
         {
             VmlImport.vsAdd(nati<N>(), ref head(lhs), ref head(rhs), ref head(dst));
             return ref dst;
@@ -62,7 +62,7 @@ namespace Z0.Mkl
 		/// <param name="dst">The caller-allocated target vector</param>
         [MethodImpl(Inline)]
         public static ref BlockVector<N,double> add<N>(BlockVector<N,double> lhs, BlockVector<N,double> rhs, ref BlockVector<N,double> dst)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
         {
             VmlImport.vdAdd(nati<N>(), ref head(lhs), ref head(rhs), ref head(dst));
             return ref dst;
@@ -102,7 +102,7 @@ namespace Z0.Mkl
 		/// <param name="dst">The caller-allocated target vector</param>
         [MethodImpl(Inline)]
         public static ref BlockVector<N,float> sub<N>(BlockVector<N,float> lhs, BlockVector<N,float> rhs, ref BlockVector<N,float> dst)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
         {
             VmlImport.vsSub(nati<N>(), ref head(lhs), ref head(rhs), ref head(dst));
             return ref dst;
@@ -116,7 +116,7 @@ namespace Z0.Mkl
 		/// <param name="dst">The caller-allocated target vector</param>
         [MethodImpl(Inline)]
         public static ref BlockVector<N,double> sub<N>(BlockVector<N,double> lhs, BlockVector<N,double> rhs, ref BlockVector<N,double> dst)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
         {
             VmlImport.vdSub(nati<N>(), ref head(lhs), ref head(rhs), ref head(dst));
             return ref dst;
@@ -156,7 +156,7 @@ namespace Z0.Mkl
 		/// <param name="dst">The caller-allocated target vector</param>
         [MethodImpl(Inline)]
         public static ref BlockVector<N,float> mul<N>(BlockVector<N,float> lhs, BlockVector<N,float> rhs, ref BlockVector<N,float> dst)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
         {
             VmlImport.vsMul(nati<N>(), ref head(lhs), ref head(rhs), ref head(dst));
             return ref dst;
@@ -170,7 +170,7 @@ namespace Z0.Mkl
 		/// <param name="dst">The caller-allocated target vector</param>
         [MethodImpl(Inline)]
         public static ref BlockVector<N,double> mul<N>(BlockVector<N,double> lhs, BlockVector<N,double> rhs, ref BlockVector<N,double> dst)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
         {
             VmlImport.vdMul(nati<N>(), ref head(lhs), ref head(rhs), ref head(dst));
             return ref dst;
@@ -236,8 +236,8 @@ namespace Z0.Mkl
 		/// <param name="X">The caller-allocated target vector</param>
         [MethodImpl(Inline)]
         public static ref BlockMatrix<M,N,float> mod<M,N>(BlockMatrix<M,N,float> A, BlockMatrix<M,N,float> B, ref BlockMatrix<M,N,float> X)
-            where N : ITypeNat, new()
-            where M : ITypeNat, new()
+            where N : unmanaged, ITypeNat
+            where M : unmanaged, ITypeNat
 
         {
             VmlImport.vsFmod(BlockMatrix<M,N,float>.CellCount, ref head(A), ref head(B), ref head(X));
@@ -252,8 +252,8 @@ namespace Z0.Mkl
 		/// <param name="X">The caller-allocated target vector</param>
         [MethodImpl(Inline)]
         public static ref BlockMatrix<M,N,double> mod<M,N>(BlockMatrix<M,N,double> lhs, BlockMatrix<M,N,double> rhs, ref BlockMatrix<M,N,double> dst)
-            where N : ITypeNat, new()
-            where M : ITypeNat, new()
+            where N : unmanaged, ITypeNat
+            where M : unmanaged, ITypeNat
 
         {
             VmlImport.vdFmod(BlockMatrix<M,N,float>.CellCount, ref head(lhs), ref head(rhs), ref head(dst));
@@ -584,8 +584,8 @@ namespace Z0.Mkl
 		/// <param name="src">The source/target matrix</param>
         [MethodImpl(Inline)]
         public static ref BlockMatrix<M,N,float> round<M,N>(ref BlockMatrix<M,N,float> A)
-            where M : ITypeNat, new()
-            where N : ITypeNat, new()
+            where M : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
         {
             VmlImport.vsRound(BlockMatrix<M,N,float>.CellCount, ref head(A), ref head(A));
             return ref A;
@@ -597,8 +597,8 @@ namespace Z0.Mkl
 		/// <param name="src">The source/target matrix</param>
         [MethodImpl(Inline)]
         public static ref BlockMatrix<M,N,double> round<M,N>(ref BlockMatrix<M,N,double> A)
-            where M : ITypeNat, new()
-            where N : ITypeNat, new()
+            where M : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
         {
 
             VmlImport.vdRound(BlockMatrix<M,N,double>.CellCount, ref head(A), ref head(A));
@@ -635,8 +635,8 @@ namespace Z0.Mkl
 		/// <param name="src">The source/target matrix</param>
         [MethodImpl(Inline)]
         public static ref BlockMatrix<M,N,double> trunc<M,N>(ref BlockMatrix<M,N,double> A)
-            where M : ITypeNat, new()
-            where N : ITypeNat, new()
+            where M : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
         {
             VmlImport.vdTrunc(BlockMatrix<M,N,double>.CellCount, ref head(A), ref head(A));
             return ref A;
@@ -648,8 +648,8 @@ namespace Z0.Mkl
 		/// <param name="src">The source/target matrix</param>
         [MethodImpl(Inline)]
         public static ref BlockMatrix<M,N,float> trunc<M,N>(ref BlockMatrix<M,N,float> A)
-            where M : ITypeNat, new()
-            where N : ITypeNat, new()
+            where M : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
         {
             VmlImport.vsTrunc(BlockMatrix<M,N,float>.CellCount, ref head(A), ref head(A));
             return ref A;

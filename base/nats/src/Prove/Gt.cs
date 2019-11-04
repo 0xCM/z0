@@ -26,7 +26,7 @@ namespace Z0
         /// <typeparam name="K">The natural representative</typeparam>
         [MethodImpl(Inline)]   
         public static bool gt<K>(uint t, bool raise = true)
-            where K : ITypeNat, new() 
+            where K : unmanaged, ITypeNat 
                 =>  natu<K>() > t ? true : failure<K>("gt", t, raise);
 
         /// <summary>
@@ -39,7 +39,7 @@ namespace Z0
         /// <typeparam name="K">The natural representative</typeparam>
         [MethodImpl(Inline)]   
         public static bool gteq<K>(uint test, bool raise = true)
-            where K : ITypeNat, new() 
+            where K : unmanaged, ITypeNat 
                 =>  natu<K>() >= test ? true : failure<K>("gteq", test, raise);
 
         /// <summary>
@@ -51,8 +51,8 @@ namespace Z0
         /// <typeparam name="K2">The smaller type</typeparam>
         [MethodImpl(Inline)]   
         public static NatGt<K1,K2> gt<K1,K2>()
-            where K1: ITypeNat, new()
-            where K2: ITypeNat, new()
+            where K1: unmanaged, ITypeNat
+            where K2: unmanaged, ITypeNat
                 => new NatGt<K1,K2>(natrep<K1>(),natrep<K2>());                             
 
         /// <summary>
@@ -64,8 +64,8 @@ namespace Z0
         /// <typeparam name="K2">The smaller type</typeparam>
         [MethodImpl(Inline)]   
         public static NatGt<K1,K2> gt<K1,K2>(K1 k1, K2 k2)
-            where K1: ITypeNat, new()
-            where K2: ITypeNat, new()
+            where K1: unmanaged, ITypeNat
+            where K2: unmanaged, ITypeNat
                 => new NatGt<K1,K2>(k1,k2);                             
 
     }

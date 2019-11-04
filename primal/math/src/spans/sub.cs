@@ -48,7 +48,7 @@ namespace Z0
         /// <typeparam name="T">The span element type</typeparam>
         public static Span<N,T> sub<N,T>(Span<N,T> src, T scalar)
             where T : unmanaged
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
         {
             for(var i=0; i< src.Length; i++)
                 gmath.sub(ref src[i],scalar);

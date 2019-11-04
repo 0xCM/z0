@@ -23,7 +23,7 @@ namespace Z0
         /// <typeparam name="T">The primal type upon which the vector is predicated</typeparam>
         [MethodImpl(Inline)]
         public static BitVector<N,T> natural<N,T>(N len = default, T? fill = null)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
             where T : unmanaged
                 => BitVector<N,T>.Alloc(fill);
 
@@ -36,7 +36,7 @@ namespace Z0
         /// <typeparam name="T">The primal type upon which the vector is predicated</typeparam>
         [MethodImpl(Inline)]
         public static BitVector<N,T> natural<N,T>(params T[] src)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
             where T : unmanaged
                 => BitVector<N, T>.FromArray(src);
 
@@ -50,7 +50,7 @@ namespace Z0
         /// <typeparam name="T">The primal type upon which the vector is predicated</typeparam>
         [MethodImpl(Inline)]
         public static BitVector<N,T> natural<N,T>(T[] src, N n = default)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
             where T : unmanaged
                 => BitVector<N, T>.FromArray(src);
 
@@ -63,7 +63,7 @@ namespace Z0
         /// <typeparam name="T">The primal type upon which the vector is predicated</typeparam>
         [MethodImpl(Inline)]
         public static BitVector<N,T> natural<N,T>(ReadOnlySpan<T> src, N n = default)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
             where T : unmanaged
                 => BitVector<N, T>.FromSpan(src.ToSpan());
 
@@ -76,7 +76,7 @@ namespace Z0
         /// <typeparam name="T">The primal type upon which the vector is predicated</typeparam>
         [MethodImpl(Inline)]
         public static BitVector<N,T> natural<N,T>(Span<T> src, N n = default)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
             where T : unmanaged
                 => BitVector<N, T>.FromSpan(src);
 

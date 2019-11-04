@@ -22,7 +22,7 @@ namespace Z0
         /// </summary>
         /// <typeparam name="K">The subject</typeparam>
         public static NatPrime<K> prime<K>()
-            where K: ITypeNat, new()
+            where K: unmanaged, ITypeNat
                 => new NatPrime<K>(natrep<K>());
 
         /// <summary>
@@ -31,7 +31,7 @@ namespace Z0
         /// </summary>
         /// <typeparam name="K">The subject</typeparam>
         public static NatPrime<K> prime<K>(K k)
-            where K: ITypeNat, new()
+            where K: unmanaged, ITypeNat
                 => new NatPrime<K>(k);
 
 

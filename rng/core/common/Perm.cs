@@ -57,7 +57,7 @@ namespace Z0
         /// <typeparam name="T">The primal symbol type</typeparam>
         [MethodImpl(Inline)]
         public static Perm<N> Perm<N>(this IPolyrand random, N n = default)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
                 => Z0.Perm.Identity(n).Shuffle(random);
 
 
@@ -70,7 +70,7 @@ namespace Z0
         /// <typeparam name="N">The length type</typeparam>
         /// <typeparam name="T">The primal symbol type</typeparam>
         public static IEnumerable<Perm<N>> Perms<N>(this IPolyrand random, N n = default)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
         {
             while(true)
                 yield return random.Perm(n);

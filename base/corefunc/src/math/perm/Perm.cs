@@ -46,7 +46,7 @@ namespace Z0
         /// <typeparam name="T">The term type</typeparam>
         [MethodImpl(Inline)]
         public static Perm<N> Identity<N>(N n = default)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
                 => Perm<N>.Identity.Replicate();
 
         /// <summary>
@@ -59,7 +59,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static Perm<N> Define<N>(N n, ReadOnlySpan<int> src)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
                 => new Perm<N>(src.ToArray());
 
         /// <summary>
@@ -71,7 +71,7 @@ namespace Z0
         /// <typeparam name="T">The symbol type</typeparam>
         [MethodImpl(Inline)]
         public static Perm<N> Define<N>(N length, params int[] terms)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
                 => new Perm<N>(terms);
 
         /// <summary>
@@ -82,7 +82,7 @@ namespace Z0
         /// <typeparam name="N">The length type</typeparam>
         [MethodImpl(Inline)]
         public static Perm<N> Define<N>(N n, params Swap<N>[] swaps)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
                 => new Perm<N>(swaps);
 
         /// <summary>
@@ -93,7 +93,7 @@ namespace Z0
         /// <typeparam name="N">The length type</typeparam>
         [MethodImpl(Inline)]
         public static Perm<N> Define<N>(params Swap<N>[] swaps)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
                 => new Perm<N>(swaps);
 
         /// <summary>
@@ -104,7 +104,7 @@ namespace Z0
         /// <typeparam name="N">The length type</typeparam>
         [MethodImpl(Inline)]
         public static Swap<N> Swap<N>(int i, int j)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
                 => (i,j);
 
 

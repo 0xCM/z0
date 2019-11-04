@@ -196,7 +196,7 @@ namespace Z0.Test
 
 
         void bvcreate_natg_check<N,T>()
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
             where T : unmanaged
         {
             var dim = default(N);

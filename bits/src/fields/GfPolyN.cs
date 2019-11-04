@@ -17,7 +17,7 @@ namespace Z0
     /// a_i * x^i + . . . a_1 * x^1 + a_0 * x^0 where  a_i = 0 | 1 and i = 0..N
     /// </summary>
     public readonly struct GfPoly<N,T>
-        where N : ITypeNat, new()
+        where N : unmanaged, ITypeNat
         where T : unmanaged
     {
         readonly T data;
@@ -100,7 +100,7 @@ namespace Z0
                 => Unsafe.As<GfPoly<N,T>, GfPoly<N,U>>(ref Unsafe.AsRef(in this));
 
         public GfPoly<M,U> As<M,U>()
-            where M : ITypeNat, new()
+            where M : unmanaged, ITypeNat
             where U: unmanaged
                 => Unsafe.As<GfPoly<N,T>, GfPoly<M,U>>(ref Unsafe.AsRef(in this));
     }

@@ -22,7 +22,7 @@ namespace Z0
 
 
     public interface IMemory<N> : IMemory
-        where N : ITypeNat, new()
+        where N : unmanaged, ITypeNat
     {
         BitSize Size 
             => new N().value;
@@ -30,7 +30,7 @@ namespace Z0
     }
 
     public interface IMemory<N,T> : IMemory<N>
-        where N : ITypeNat, new()
+        where N : unmanaged, ITypeNat
     {
         T Content {get;}
     }

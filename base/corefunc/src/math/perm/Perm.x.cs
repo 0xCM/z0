@@ -160,7 +160,7 @@ namespace Z0
         }
 
         public static Swap[] Unsized<N>(this Swap<N>[] src)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
         {
             var dst = new Swap[src.Length];
             for(var i=0; i<src.Length; i++)

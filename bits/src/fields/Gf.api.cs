@@ -44,7 +44,7 @@ namespace Z0
         /// <typeparam name="T">The polynomial scalar type</typeparam>
         public static GfPoly<N,T> Poly<N,T>(params byte[] exponents)
             where T : unmanaged
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
                 => new GfPoly<N, T>(exponents);
 
         /// <summary>

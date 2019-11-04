@@ -22,8 +22,8 @@ namespace Z0
         /// <typeparam name="K1">The source type</typeparam>
         /// <typeparam name="K2">The successor type</typeparam>
         public static NatNext<K1,K2> next<K1,K2>()
-            where K1: ITypeNat, new()
-            where K2: ITypeNat, new()
+            where K1: unmanaged, ITypeNat
+            where K2: unmanaged, ITypeNat
                 => new NatNext<K1,K2>(natrep<K1>(),natrep<K2>());                             
 
         /// <summary>
@@ -33,8 +33,8 @@ namespace Z0
         /// <typeparam name="K1">The source type</typeparam>
         /// <typeparam name="K2">The successor type</typeparam>
         public static NatNext<K1,K2> next<K1,K2>(K1 k1, K2 k2)
-            where K1: ITypeNat, new()
-            where K2: ITypeNat, new()
+            where K1: unmanaged, ITypeNat
+            where K2: unmanaged, ITypeNat
                 => new NatNext<K1,K2>(k1,k2);                             
 
     }

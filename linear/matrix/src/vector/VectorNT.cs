@@ -12,7 +12,7 @@ namespace Z0
     using static zfunc;
 
     public struct Vector<N,T>  
-        where N : ITypeNat, new()
+        where N : unmanaged, ITypeNat
         where T : unmanaged
     {
          T[] data;

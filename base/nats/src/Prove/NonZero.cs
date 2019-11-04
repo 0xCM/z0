@@ -25,7 +25,7 @@ namespace Z0
         /// <typeparam name="K">A nonzero natural type</typeparam>
         [MethodImpl(Inline)]
         public static Nonzero<K> nonzero<K>()
-            where K: ITypeNat, new()
+            where K: unmanaged, ITypeNat
                 => new Nonzero<K>(natrep<K>());                             
 
         /// <summary>
@@ -36,7 +36,7 @@ namespace Z0
         /// <typeparam name="K">A nonzero natural type</typeparam>
         [MethodImpl(Inline)]
         public static Nonzero<K> nonzero<K>(K k)
-            where K: ITypeNat, new()
+            where K: unmanaged, ITypeNat
                 => new Nonzero<K>(k);                             
 
     }

@@ -165,7 +165,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitMatrix<N,T> AsSquare<N,T>(this BitMatrix<N,N,T> src)
             where T : unmanaged
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
                     => BitMatrix.load<N,T>(src.Data);
                     
         internal static string FormatMatrixBits(this Span<byte> src, int rowlen)            

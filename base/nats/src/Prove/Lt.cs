@@ -26,7 +26,7 @@ namespace Z0
         /// <typeparam name="K">The natural representative</typeparam>
         [MethodImpl(Inline)]   
         public static bool lt<K>(uint t, bool raise = true)
-            where K : ITypeNat, new() 
+            where K : unmanaged, ITypeNat 
                 =>  natu<K>() < t ? true : failure<K>("lt", t, raise);
 
         /// <summary>
@@ -39,7 +39,7 @@ namespace Z0
         /// <typeparam name="K">The natural representative</typeparam>
         [MethodImpl(Inline)]   
         public static bool lteq<K>(uint t, bool raise = true)
-            where K : ITypeNat, new() 
+            where K : unmanaged, ITypeNat 
                 =>  natu<K>() <= t ? true : failure<K>("lteq", t, raise);
 
         /// <summary>
@@ -51,8 +51,8 @@ namespace Z0
         /// <typeparam name="K2">The larger type</typeparam>
         [MethodImpl(Inline)]   
         public static NatLt<K1,K2> lt<K1,K2>()
-            where K1: ITypeNat, new()
-            where K2: ITypeNat, new()
+            where K1: unmanaged, ITypeNat
+            where K2: unmanaged, ITypeNat
                 => new NatLt<K1,K2>(natrep<K1>(),natrep<K2>());                             
 
         /// <summary>
@@ -64,8 +64,8 @@ namespace Z0
         /// <typeparam name="K2">The larger type</typeparam>
         [MethodImpl(Inline)]   
         public static NatLt<K1,K2> lt<K1,K2>(K1 k1, K2 k2)
-            where K1: ITypeNat, new()
-            where K2: ITypeNat, new()
+            where K1: unmanaged, ITypeNat
+            where K2: unmanaged, ITypeNat
                 => new NatLt<K1,K2>(k1,k2);
 
     }

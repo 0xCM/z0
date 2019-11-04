@@ -49,7 +49,7 @@ namespace Z0
         /// <typeparam name="T">The span element type</typeparam>
         public static Span<N,T> add<N,T>(Span<N,T> src, T scalar)
             where T : unmanaged
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
         {
             for(var i=0; i< src.Length; i++)
                 gmath.add(ref src[i],scalar);

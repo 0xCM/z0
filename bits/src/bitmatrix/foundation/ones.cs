@@ -55,7 +55,7 @@ namespace Z0
         /// <typeparam name="N">The column/row dimension</typeparam>
         /// <typeparam name="T">The element type</typeparam>
         public static BitMatrix<N,T> identity<N,T>(N n = default, T zero = default)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
             where T : unmanaged
        {            
             var dst = alloc(n,zero);
@@ -73,8 +73,8 @@ namespace Z0
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
         public static BitMatrix<M,N,T> ones<M,N,T>(M m = default, N n = default)
-            where M : ITypeNat, new()
-            where N : ITypeNat, new()
+            where M : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
             where T : unmanaged
                 => alloc(m,n, gmath.maxval<T>());
 
@@ -86,7 +86,7 @@ namespace Z0
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
         public static BitMatrix<N,T> ones<N,T>(N n = default)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
             where T : unmanaged
                 => alloc(n, gmath.maxval<T>());
 

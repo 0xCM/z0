@@ -20,14 +20,14 @@ namespace Z0
     /// <typeparam name="K2">The base type</typeparam>
     /// <typeparam name="E">The exponent type</typeparam>
     public interface INatSum<K1,K2> : ITypeNat
-        where K1 : ITypeNat, new()
-        where K2 : ITypeNat, new()
+        where K1 : unmanaged, ITypeNat
+        where K2 : unmanaged, ITypeNat
     {
 
     }
 
     public interface INatSum<K> : ITypeNat
-        where K : ITypeNat, new()
+        where K : unmanaged, ITypeNat
     {
         ITypeNat Lhs {get;}        
 
@@ -35,7 +35,7 @@ namespace Z0
     }
 
     public readonly struct NatSum<K> : INatSum<K>
-        where K : ITypeNat, new()
+        where K : unmanaged, ITypeNat
     {
         public static readonly K Rep = default;
 
@@ -61,8 +61,8 @@ namespace Z0
     /// Encodes a natural number k such that k1:K1 & k2:K2 => k = k1 + k2
     /// </summary>
     public readonly struct NatSum<K1, K2> : INatSum<K1,K2>
-            where K1 : ITypeNat, new()
-            where K2 : ITypeNat, new()
+            where K1 : unmanaged, ITypeNat
+            where K2 : unmanaged, ITypeNat
     {
         static readonly K1 k1 = default;
 
@@ -114,7 +114,7 @@ namespace Z0
  
         [MethodImpl(Inline)]
         public NatSum<K> Reduce<K>(K target = default)
-            where K : ITypeNat, new()
+            where K : unmanaged, ITypeNat
         {
             if(Value == target.value)
                 return new NatSum<K>(k1,k2);

@@ -37,7 +37,7 @@ namespace Z0
         /// <typeparam name="T">The common component type</typeparam>
         [MethodImpl(Inline)]
         public static T dot<N,T>(BlockVector<N,T> x, BlockVector<N,T> y)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
             where T : unmanaged    
                 => mathspan.dot<T>(x.Unsized,y.Unsized);
 

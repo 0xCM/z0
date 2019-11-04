@@ -88,7 +88,7 @@ namespace Z0
         /// <remarks>Note that exp values should not include the order itself</remarks>
         public static GfPoly<N,T> Lookup<N,T>(N degree = default, T rep = default)
             where T : unmanaged
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
         {
             var n = nfunc.nati<N>();
             switch(n)

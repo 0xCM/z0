@@ -21,7 +21,7 @@ namespace Z0
         /// <typeparam name="T">The digit's enumeration type</typeparam>
         /// <typeparam name="N">The natural base type</typeparam>
         public static Digit<N,T> Define<N,T>(T src)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
             where T : Enum
                 => new Digit<N,T>(src);
 
@@ -33,13 +33,13 @@ namespace Z0
         /// <typeparam name="T">The digit's enumeration type</typeparam>
         /// <typeparam name="N">The natural base type</typeparam>
         public static Digit<N,T> Define<N,T>(T src, N b)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
             where T : Enum
                 => new Digit<N,T>(src);
     }
 
     public interface IDigit<N,S,T>
-        where N : ITypeNat, new()
+        where N : unmanaged, ITypeNat
         where S : IDigit<N,S,T>
         where T : Enum
     {
@@ -53,7 +53,7 @@ namespace Z0
     /// <typeparam name="T">The digit's enumeration type</typeparam>
     public readonly struct Digit<N,T> : IDigit<N,Digit<N,T>,T>
         where T : Enum
-        where N : ITypeNat, new()
+        where N : unmanaged, ITypeNat
     {
         /// <summary>
         /// Specifies the value of the structurel digit corresponding to 0

@@ -94,12 +94,12 @@ namespace Z0
         /// <param name="n">The divisor</param>
         [MethodImpl(Inline)]
         public static Mod<N> Define<N>(N n = default)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
                 => new Mod<N>();
 
         [MethodImpl(Inline)]
         public static Mod<N> Define<N>(uint state, N n = default)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
                 => Mod<N>.Define(state);
         
         /// <summary>

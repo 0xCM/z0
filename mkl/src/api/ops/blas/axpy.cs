@@ -25,7 +25,7 @@ namespace Z0.Mkl
         /// <param name="Z">The target vector</param>        
         [MethodImpl(Inline)]
         public static void axpy<N>(float a, BlockVector<N,float> X, BlockVector<N,float> Y, ref BlockVector<N,float> Z)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
         {
             Y.CopyTo(ref Z);        
             CBLAS.cblas_saxpy(nati<N>(), a, ref head(X), 1, ref head(Z), 1);

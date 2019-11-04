@@ -27,7 +27,7 @@ namespace Z0
         /// <typeparam name="T">The component type</typeparam>
         [MethodImpl(Inline)]
         public static ref BlockVector<N,T> Add<N,T>(in BlockVector<N,T> x, in BlockVector<N,T> y, ref BlockVector<N,T> z)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
             where T : unmanaged    
         {
             if(typeof(T) == typeof(float))
@@ -49,7 +49,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static T Dot<N,T>(BlockVector<N,T> x, BlockVector<N,T> y)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))

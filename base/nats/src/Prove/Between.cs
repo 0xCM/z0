@@ -28,9 +28,9 @@ namespace Z0
         /// <typeparam name="K2">The upper inclusive bound</typeparam>
         [MethodImpl(Inline)]
         public static NatBetween<K, K1, K2> between<K,K1,K2>()
-            where K: ITypeNat, new()
-            where K1: ITypeNat, new()
-            where K2: ITypeNat, new()
+            where K: unmanaged, ITypeNat
+            where K1: unmanaged, ITypeNat
+            where K2: unmanaged, ITypeNat
                 => new NatBetween<K,K1,K2>(natrep<K>(), natrep<K1>(), natrep<K2>());
 
         /// <summary>
@@ -43,9 +43,9 @@ namespace Z0
         /// <typeparam name="K2">The upper inclusive bound</typeparam>
         [MethodImpl(Inline)]
         public static NatBetween<K, K1, K2> between<K,K1,K2>(K k, K1 k1, K2 k2)
-            where K: ITypeNat, new()
-            where K1: ITypeNat, new()
-            where K2: ITypeNat, new()
+            where K: unmanaged, ITypeNat
+            where K1: unmanaged, ITypeNat
+            where K2: unmanaged, ITypeNat
                 => new NatBetween<K,K1,K2>(k, k1, k2);
 
     }

@@ -189,7 +189,7 @@ namespace Z0
         /// <typeparam name="T">The source type</typeparam>
         [MethodImpl(Inline)]
         public static BitVector<N,T> from<N,T>(T src, N n = default)        
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
             where T : unmanaged
                 => BitVector<N,T>.FromCell(src);
     }

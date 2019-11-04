@@ -13,7 +13,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="K">An even natural type</typeparam>
     public readonly struct NatEven<K> : INatEven<K>
-        where K: ITypeNat, new()
+        where K: unmanaged, ITypeNat
     {
         static readonly K k = default;
         static readonly string description = $"{k} % {2} = {0}";

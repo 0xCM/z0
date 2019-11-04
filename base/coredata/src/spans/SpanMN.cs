@@ -22,8 +22,8 @@ namespace Z0
     /// <typeparam name="N">The row count type</typeparam>
     /// <typeparam name="T">The span element type</typeparam>
      public ref struct Span<M,N,T>
-        where M : ITypeNat, new()
-        where N : ITypeNat, new()
+        where M : unmanaged, ITypeNat
+        where N : unmanaged, ITypeNat
         where T : unmanaged
     {
         Span<T> data;
@@ -216,8 +216,8 @@ namespace Z0
             => index == 0 || index % RowLenth == 0;
 
         public Span<I,J,T> SubSpan<I,J>((uint r, uint c) origin, Dim<I,J> dim = default)
-            where I : ITypeNat, new()
-            where J : ITypeNat, new()
+            where I : unmanaged, ITypeNat
+            where J : unmanaged, ITypeNat
         {            
             var  dst = NatSpan.alloc<I,J,T>();
             var curidx = 0;
@@ -258,12 +258,12 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public Span<N,T> Row<I>()
-            where I : ITypeNat, new()
+            where I : unmanaged, ITypeNat
                 => Row(nati<I>());
 
         [MethodImpl(Inline)]
         public Span<M,T> Col<J>()
-            where J : ITypeNat, new()
+            where J : unmanaged, ITypeNat
                 => Col(nati<J>());
 
         public Span<N,M,T> Transpose()

@@ -150,7 +150,7 @@ namespace Z0
         /// <param name="seed">The initial state of a generator</param>
         /// <param name="index">The stream index</param>
         public static IRngSuite<N> Pcg64Suite<N>(N n, params (ulong seed, ulong index)[] specs)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
         {
             var suite = new IPolyrand[specs.Length];
             for(var i=0; i < suite.Length; i++)
@@ -167,7 +167,7 @@ namespace Z0
         /// <param name="seed">The initial rng states</param>
         /// <param name="indices">A span of index values</param>
         public static IRngSuite<N> Pcg64Suite<N>(Span<ulong> seeds, Span<ulong> indices)        
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
 
         {
             var count = length(seeds,indices);
@@ -184,7 +184,7 @@ namespace Z0
         /// <param name="seed">The optional seed which, if of nonzero length, must have matching natural length</param>
         /// <typeparam name="N">The natural length type</typeparam>
         public static IRngSuite<N> WyHash64Suite<N>(N n = default, params ulong[] seed)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
         {
             Span<N,ulong> _seed;
             if(seed.Length == 0)

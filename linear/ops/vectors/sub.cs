@@ -25,7 +25,7 @@ namespace Z0
         /// <typeparam name="T">The component type</typeparam>
         [MethodImpl(Inline)]
         public static ref BlockVector<N,T> sub<N,T>(BlockVector<N,T> x, BlockVector<N,T> y, ref BlockVector<N,T> z)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
             where T : unmanaged    
         {
             inxspan.sub(x.Data,y.Data,z.Data);
@@ -41,7 +41,7 @@ namespace Z0
         /// <typeparam name="T">The component type</typeparam>
         [MethodImpl(Inline)]
         public static BlockVector<N,T> sub<N,T>(BlockVector<N,T> x, BlockVector<N,T> y)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
             where T : unmanaged    
         {
             var dst = x.Replicate(true);

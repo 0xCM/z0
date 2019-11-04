@@ -83,8 +83,8 @@ namespace Z0
         }
 
         void bm_transpose_gn_check<M,N,T>()
-            where M : ITypeNat, new()
-            where N : ITypeNat, new()
+            where M : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
             where T : unmanaged
         {
             for(var sample = 0; sample <SampleSize; sample++)

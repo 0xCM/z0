@@ -118,7 +118,7 @@ namespace Z0
         /// <typeparam name="T">The primal segment type</typeparam>
         [MethodImpl(Inline)]
         public static BitVector<N,T> ToBitVector<N,T>(this Span<T> src, N n = default)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
             where T : unmanaged
                 => BitVector.natural(src,n);
 
@@ -131,7 +131,7 @@ namespace Z0
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
         public static BitVector<N,T> ToBitVector<N,T>(this ReadOnlySpan<T> src, N n = default)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
             where T : unmanaged
                 => BitVector.natural(src,n);
 
@@ -143,7 +143,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitVector8 ToPrimal<N,T>(this BitVector<N,T> src, N8 n)        
             where T : unmanaged
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
                 => src.Data.TakeUInt8();
 
         /// <summary>
@@ -154,7 +154,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitVector16 ToPrimal<N,T>(this BitVector<N,T> src, N16 n)        
             where T : unmanaged
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
                 => src.Data.TakeUInt16();
 
         /// <summary>
@@ -165,7 +165,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitVector32 ToPrimal<N,T>(this BitVector<N,T> src, N32 n)        
             where T : unmanaged
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
                 => src.Data.TakeUInt32();
 
         /// <summary>
@@ -176,7 +176,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitVector64 ToPrimal<N,T>(this BitVector<N,T> src, N64 n)        
             where T : unmanaged
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
                 => src.Data.TakeUInt64();
 
         /// <summary>

@@ -17,7 +17,7 @@ namespace Z0
    // Captures evidence that k:K => k is prime
    // </summary>
    public readonly struct NatPrime<K> : INatPrime<K>
-        where K : ITypeNat, new()
+        where K : unmanaged, ITypeNat
     {
         static readonly K k = default;
 

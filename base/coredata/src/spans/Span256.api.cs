@@ -74,7 +74,7 @@ namespace Z0
         /// <typeparam name="T">The scalar type</typeparam>
         [MethodImpl(Inline)]
         public static Span256<T> Alloc<N,T>(T? fill = null)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
             where T : unmanaged
         {
             var dataLen = nati<N>();
@@ -93,8 +93,8 @@ namespace Z0
         /// <typeparam name="T">The scalar type</typeparam>
         [MethodImpl(Inline)]
         public static Span256<T> Alloc<M,N,T>(T? fill = null)
-            where M : ITypeNat, new()
-            where N : ITypeNat, new()
+            where M : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
             where T : unmanaged
         {
             var dataLen = nati<M>() * nati<N>();
@@ -146,7 +146,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Span256<T> Load<N,T>(Span<N,T> src)
             where T : unmanaged
-            where N : ITypeNat,new()
+            where N : unmanaged, ITypeNat
                 => Load<T>(src.Unsized);
 
         /// <summary>
@@ -203,8 +203,8 @@ namespace Z0
         /// <typeparam name="T">The scalar type</typeparam>
         [MethodImpl(Inline)]
         public static int MinBlocks<M,N,T>()
-            where M : ITypeNat, new()
-            where N : ITypeNat, new()
+            where M : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
             where T : unmanaged        
         {
             var srclen = nati<M>() * nati<N>();

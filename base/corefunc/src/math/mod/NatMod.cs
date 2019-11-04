@@ -16,7 +16,7 @@ namespace Z0
     /// typically denoted Z/nZ. Moreover, Z/nZ is a field iff n is prime
     /// </summary>
     public struct Mod<N>
-        where N : ITypeNat, new()
+        where N : unmanaged, ITypeNat
     {        
         uint state;
 

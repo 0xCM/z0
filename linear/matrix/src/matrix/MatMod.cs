@@ -28,7 +28,7 @@ namespace Z0
         /// <param name="u">The transformed vector</param>
         /// <param name="m">The modulus</param>
         public static ref Vector<N,uint> MVMul<N>(in Matrix<N,uint> A, in Vector<N,uint> v, uint m, ref Vector<N,uint> u) 
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
         {
             //var x = new uint[v.Length];
             var x = Vector.alloc<N,uint>();
@@ -50,7 +50,7 @@ namespace Z0
         /// <param name="u">The transformed vector</param>
         /// <param name="m">The modulus</param>
         public static ref Vector<N,ulong> MVMul<N>(in Matrix<N,ulong> A, in Vector<N,ulong> v, ulong m, ref Vector<N,ulong> u) 
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
         {
             //var x = new ulong[v.Length];
             var rc = A.RowCount;
@@ -74,7 +74,7 @@ namespace Z0
         /// <param name="u">The transformed vector</param>
         /// <param name="m">The modulus</param>
         public static ref Vector<N,double> MVMul<N>(in Matrix<N,double> A, in Vector<N,double> v, double m, ref Vector<N,double> u) 
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
         {
             var x = new double[u.Length];
             for(var i = 0; i < u.Length; ++i) 
@@ -96,7 +96,7 @@ namespace Z0
         /// <param name="m">The modulus</param>
         /// <typeparam name="N">The matrix order type</typeparam>
         public static ref Matrix<N,uint> Mul<N>(in Matrix<N,uint> A, in Matrix<N,uint> B, uint m, ref Matrix<N,uint> C) 
-            where N: ITypeNat, new()
+            where N: unmanaged, ITypeNat
         {
             var rc = C.RowCount;
             var cc = C.ColCount;
@@ -129,7 +129,7 @@ namespace Z0
         /// <param name="C">The result matrix</param>
         /// <param name="m">The modulus</param>
         public static ref Matrix<N,ulong> Mul<N>(in Matrix<N,ulong> A, in Matrix<N,ulong> B, ulong m, ref Matrix<N,ulong> C) 
-            where N: ITypeNat, new()
+            where N: unmanaged, ITypeNat
         {
             var rc = C.RowCount;
             var cc = C.ColCount;
@@ -162,7 +162,7 @@ namespace Z0
         /// <param name="C">The result matrix</param>
         /// <param name="m">The modulus</param>
         public static ref Matrix<N,double> Mul<N>(in Matrix<N,double> A, in Matrix<N,double> B, double m, ref Matrix<N,double> C) 
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
         {
             int r = C.RowCount;
             int c = B.ColCount;
@@ -194,7 +194,7 @@ namespace Z0
         /// <param name="m">The modulus</param>
         /// <param name="B">The result matrix</param>
         public static ref Matrix<N,uint> Pow<N>(in Matrix<N,uint> A, uint e, uint m, ref Matrix<N,uint> B) 
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
         {
             
             var length = A.RowCount;
@@ -232,7 +232,7 @@ namespace Z0
         /// <param name="m">The modulus</param>
         /// <param name="B">The result matrix</param>
         public static ref Matrix<N,ulong> Pow<N>(in Matrix<N,ulong> A, uint e, ulong m, ref Matrix<N,ulong> B) 
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
         {
             
             var length = A.RowCount;
@@ -270,7 +270,7 @@ namespace Z0
         /// <param name="m">The modulus</param>
         /// <param name="B">The result matrix</param>
         public static ref Matrix<N,double> Pow<N>(in Matrix<N,double> A, uint e, double m, ref Matrix<N,double> B) 
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
         {
             int i, j;
             var n = e;
@@ -310,7 +310,7 @@ namespace Z0
         /// <param name="m">The modulus</param>
         /// <param name="B">The result matrix</param>
         public static ref Matrix<N,uint> Pow2<N>(in Matrix<N,uint> A, uint e, uint m, ref Matrix<N,uint> B) 
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
         {            
             /* initialize: B = A */
             var n = A.RowCount;
@@ -336,7 +336,7 @@ namespace Z0
         /// <param name="m">The modulus</param>
         /// <param name="B">The result matrix</param>
         public static ref Matrix<N,ulong> Pow2<N>(in Matrix<N,ulong> A, uint e, ulong m, ref Matrix<N,ulong> B) 
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
         {            
             /* initialize: B = A */
             var n = A.RowCount;
@@ -362,7 +362,7 @@ namespace Z0
         /// <param name="m">The modulus</param>
         /// <param name="B">The result matrix</param>
         public static ref Matrix<N,double> Pow2<N>(in Matrix<N,double> A, uint e, double m, ref Matrix<N,double> B) 
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
         {
             /* initialize: B = A */
             var n = A.RowCount;

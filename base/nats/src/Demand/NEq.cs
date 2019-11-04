@@ -14,8 +14,8 @@ namespace Z0
     /// <typeparam name="K1">The first nat type</typeparam>
     /// <typeparam name="N2">The second nat type</typeparam>
      public readonly struct NatNEq<K1,K2> : INatNEq<K1,K2>
-        where K1: ITypeNat, new()
-        where K2: ITypeNat, new()
+        where K1: unmanaged, ITypeNat
+        where K2: unmanaged, ITypeNat
     {
         static readonly K1 k1 = default;
         static readonly K2 k2 = default;

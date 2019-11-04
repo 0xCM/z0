@@ -115,7 +115,7 @@ namespace Z0.Test
         }
 
         void gfpoly_check<N,T>(GfPoly<N,T> p, BitString match)
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
             where T : unmanaged
         {
 

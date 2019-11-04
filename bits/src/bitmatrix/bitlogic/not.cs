@@ -148,7 +148,7 @@ namespace Z0
         /// <typeparam name="T">The matrix storage type</typeparam>
         [MethodImpl(Inline)]
         public static BitMatrix<N,T> not<N,T>(BitMatrix<N,T> A, BitMatrix<N,T> B)        
-            where N : ITypeNat, new()
+            where N : unmanaged, ITypeNat
             where T : unmanaged
         {
             mathspan.not(A.Data, B.Data);
@@ -166,8 +166,8 @@ namespace Z0
         /// <typeparam name="T">The matrix storage type</typeparam>
         [MethodImpl(Inline)]
         public static  BitMatrix<M,N,T> not<M,N,T>(BitMatrix<M,N,T> A, BitMatrix<M,N,T> B)        
-            where M : ITypeNat, new()
-            where N : ITypeNat, new()
+            where M : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
             where T : unmanaged
         {
             mathspan.not(A.Data,B.Data);
