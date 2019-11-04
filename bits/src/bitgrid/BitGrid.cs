@@ -10,6 +10,36 @@ namespace Z0
 
     using static zfunc;
 
+    public unsafe ref struct BitGrid2
+    {
+        Span<byte> data;
+
+        [MethodImpl(Inline)]
+        internal BitGrid2(Span<byte> data)
+        {
+            this.data = data;
+        }
+
+        public ref byte Head
+        {
+            [MethodImpl(Inline)]
+            get => ref head(data);
+        }
+
+        public int SegCount
+        {
+            [MethodImpl(Inline)]
+            get => data.Length;
+        }
+
+        public unsafe byte* HeadPtr
+        {
+            [MethodImpl(Inline)]
+            get => As.refptr(ref head(data));
+        }
+
+    }
+
     /// <summary>
     /// Defines a bitgrid of natural dimensions over a primal type
     /// </summary>
@@ -22,7 +52,7 @@ namespace Z0
         Span<T> data;
 
         GridMap bitmap;
-        
+                
 
         [MethodImpl(Inline)]
         internal BitGrid(Span<T> data, GridMap layout)
@@ -49,6 +79,12 @@ namespace Z0
             get => bitmap;
         }
         
+        public int SegCount
+        {
+            [MethodImpl(Inline)]
+            get => data.Length;
+        }
+
         public bit this[int row, int col]
         {
             [MethodImpl(Inline)]
@@ -109,5 +145,12 @@ namespace Z0
         [MethodImpl(Inline)]
         public bool Equals(BitGrid<M,N,T> rhs)
             => data.Identical(rhs.data);
+ 
+        public unsafe T* HeadPtr
+        {
+            [MethodImpl(Inline)]
+            get => As.refptr(ref head(data));
+        }
+
     }
 }

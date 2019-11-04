@@ -71,7 +71,7 @@ namespace Z0.Test
             ClaimEqual(bv,bv.ToBitString());
             
             Claim.eq(dim, bv.Length);
-            Claim.eq(bitsize<byte>() * bv.CellCount, bv.Capacity);
+            Claim.eq(bitsize<byte>() * bv.SegCount, bv.Capacity);
             Claim.eq(bv.Capacity - dim, bv.Unused);
             bv.Fill(Bit.On);
             Claim.eq(dim, bv.Pop());                    
@@ -208,7 +208,7 @@ namespace Z0.Test
                 var bv = bvSrc.ToBitVector(dim);
                 ClaimEqual(bv,bv.ToBitString());
                 Claim.eq(dim.value, bv.Length);
-                Claim.eq(bitsize<T>() * bv.CellCount, bv.Capacity);
+                Claim.eq(bitsize<T>() * bv.SegCount, bv.Capacity);
                 Claim.eq(bv.Capacity - dim.value, bv.Unused);
 
                 var x = src[i];

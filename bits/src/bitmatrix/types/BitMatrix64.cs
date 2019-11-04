@@ -97,8 +97,8 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static BitMatrix64 From(params ulong[] src)        
-            => src.Length == 0 ? Alloc() : new BitMatrix64(src);
+        public static BitMatrix64 From(ulong[] src)        
+            => new BitMatrix64(src);
 
         [MethodImpl(Inline)]
         public static BitMatrix64 From(BitMatrix<N64,ulong> src)        
@@ -345,7 +345,7 @@ namespace Z0
         /// <summary>
         /// A reference to the first row of the matrix
         /// </summary>
-        public unsafe ref ulong Head
+        public ref ulong Head
         {
             [MethodImpl(Inline)] 
             get => ref data[0];

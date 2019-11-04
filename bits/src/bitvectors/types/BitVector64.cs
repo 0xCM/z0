@@ -159,7 +159,7 @@ namespace Z0
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
         [MethodImpl(Inline)]
-        public static Bit operator %(in BitVector64 x, in BitVector64 y)
+        public static bit operator %(in BitVector64 x, in BitVector64 y)
             => BitVector.dot(x,y);
 
         /// <summary>

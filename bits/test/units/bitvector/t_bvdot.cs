@@ -10,7 +10,7 @@ namespace Z0.Test
 
     using static zfunc;
 
-    using static BitRef;
+    using static BitVector;
 
 
     public class t_bvdot : BitVectorTest<t_bvdot>
@@ -115,11 +115,6 @@ namespace Z0.Test
             dot_natural_check(n217, ulong.MinValue);
             dot_natural_check<N256,uint>();
             dot_natural_check<N256,ulong>();
-
-
-
-
-
         }
 
         public void dot_bitcells_check()
@@ -228,7 +223,7 @@ namespace Z0.Test
                 var x = Random.BitCells<T>(bitcount);
                 var y = Random.BitCells<T>(bitcount);
                 var a = x % y;
-                var b = modprod(x,y);
+                var b = BitCells.modprod(x,y);
                 Claim.yea(a == b);
             
             }

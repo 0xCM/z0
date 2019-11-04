@@ -45,6 +45,13 @@ namespace Z0
             get => new bit[]{Off,On};
         }
         
+        [MethodImpl(Inline)]
+        public unsafe static bit From(bool src)        
+        {
+            uint state = *((byte*)(&src));
+            return new bit(state);
+        }
+
         /// <summary>
         /// Returns true if the bit is enabled, false otherwise
         /// </summary>
@@ -202,8 +209,8 @@ namespace Z0
             => a.state != b.state;
 
         [MethodImpl(Inline)]
-        bit(bool on)
-            => this.state  = on ? 1u : 0u;
+        unsafe bit(bool on)
+            => this.state  = *((byte*)(&on));
 
         [MethodImpl(Inline)]
         bit(uint state)
@@ -336,7 +343,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bit xor1(bit a)
             => !(a ^ On);
-
 
         [MethodImpl(Inline)]
         public bool Equals(bit b)

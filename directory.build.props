@@ -11,7 +11,7 @@
     <IntermediateBuildDir>$(BuildRootDir)obj\$(MSBuildProjectName)\</IntermediateBuildDir>
     <BaseIntermediateOutputPath>$(IntermediateBuildDir)</BaseIntermediateOutputPath>
     <IntermediateOutputPath>$(IntermediateBuildDir)</IntermediateOutputPath>
-    <NoWarn>1591;1572;1573;1701;1702;1712;1711;1570;1571;1574;1710;8321;NETSDK1057</NoWarn>
+    <NoWarn>1591;1572;1573;1701;1702;1712;1711;1570;1571;1574;1710;8321;NETSDK1057;0169;0414;0219</NoWarn>
     <NullableReferenceTypes>true</NullableReferenceTypes>
     <NullableContextOptions>disable</NullableContextOptions>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>

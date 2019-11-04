@@ -15,6 +15,7 @@ namespace Z0
 
     partial class BitMatrix
     {        
+                
         /// <summary>
         /// Loads a generic bitmatrix from a span
         /// </summary>
@@ -25,36 +26,24 @@ namespace Z0
             where T : unmanaged
                 => new BitMatrix<T>(src);
 
-        /// <summary>
-        /// Loads a generic bitmatrix from a rowbit sequence
-        /// </summary>
-        /// <param name="rows">The row content</param>
-        /// <typeparam name="T">The primal type over which the matrix is constructed</typeparam>
         [MethodImpl(Inline)]
-        public static BitMatrix<T> load<T>(RowBits<T> src)
-            where T : unmanaged
-        {
-            if(src.RowCount != bitsize<T>())
-                Errors.Throw($"{bitsize<T>()} != {src.RowCount}");
+        public static BitMatrix8 load(N8 n, byte[] src)
+            => BitMatrix8.From(src);
 
-            return load(src.data);                
-        }
-
-        /// <summary>
-        /// Loads an n-square bitmatrix from an array
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <param name="n">The matrix order</param>
-        /// <typeparam name="N">The matrix order type</typeparam>
-        /// <typeparam name="T">The matrix cell type</typeparam>
         [MethodImpl(Inline)]
-        public static BitMatrix<N,T> load<N,T>(T[] src, N n = default)        
-            where N : ITypeNat, new()
-            where T : unmanaged
-                => BitMatrix<N,T>.Load(src); 
+        public static BitMatrix16 load(N16 n, ushort[] src)
+            => BitMatrix16.From(src);
+
+        [MethodImpl(Inline)]
+        public static BitMatrix32 load(N32 n, uint[] src)
+            => BitMatrix32.From(src);
+
+        [MethodImpl(Inline)]
+        public static BitMatrix64 load(N64 n, ulong[] src)
+            => BitMatrix64.From(src);
 
         /// <summary>
-        /// Loads an n-square bitmatrix from an span
+        /// Loads a square bitmatrix of natural order from an span
         /// </summary>
         /// <param name="src">The source span</param>
         /// <param name="n">The matrix order</param>
@@ -67,6 +56,18 @@ namespace Z0
                 => BitMatrix<N,T>.Load(src); 
 
         /// <summary>
+        /// Loads a square bitmatrix of natural order from an span
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <typeparam name="N">The matrix order type</typeparam>
+        /// <typeparam name="T">The matrix cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static BitMatrix<N,T> load<N,T>(Span<T> src)
+            where N : ITypeNat, new()
+            where T : unmanaged
+                => BitMatrix<N,T>.Load(src); 
+
+        /// <summary>
         /// Loads an MxN natural bitmatrix from an array
         /// </summary>
         /// <param name="src">The source array</param>
@@ -74,10 +75,11 @@ namespace Z0
         /// <typeparam name="N">The matrix order type</typeparam>
         /// <typeparam name="T">The matrix cell type</typeparam>
         [MethodImpl(NotInline)]
-        public static BitMatrix<M,N,T> load<M,N,T>(T[] src, M m = default, N n = default)        
+        public static BitMatrix<M,N,T> load<M,N,T>(M m, N n, Span<T> src)        
             where M : ITypeNat, new()
             where N : ITypeNat, new()
             where T : unmanaged
                 => BitMatrix<M,N,T>.Load(src); 
+
     }
 }

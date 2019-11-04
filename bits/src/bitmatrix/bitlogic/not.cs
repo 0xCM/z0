@@ -138,6 +138,42 @@ namespace Z0
             return ref Z;
         } 
 
+         /// <summary>
+        /// Computes the bitwise compliement of entries in the source matrix not stores the
+        /// result a caller-supplied target matrix
+        /// </summary>
+        /// <param name="A">The source matrix</param>
+        /// <param name="B">The target matrix</param>
+        /// <typeparam name="N">The col dimension type</typeparam>
+        /// <typeparam name="T">The matrix storage type</typeparam>
+        [MethodImpl(Inline)]
+        public static BitMatrix<N,T> not<N,T>(BitMatrix<N,T> A, BitMatrix<N,T> B)        
+            where N : ITypeNat, new()
+            where T : unmanaged
+        {
+            mathspan.not(A.Data, B.Data);
+            return  B;
+        }
+
+        /// <summary>
+        /// Computes the bitwise compliement of entries in the source matrix not stores the
+        /// result to a caller-supplied target matrix
+        /// </summary>
+        /// <param name="A">The source matrix</param>
+        /// <param name="B">The target matrix</param>
+        /// <typeparam name="M">The row dimension type</typeparam>
+        /// <typeparam name="N">The col dimension type</typeparam>
+        /// <typeparam name="T">The matrix storage type</typeparam>
+        [MethodImpl(Inline)]
+        public static  BitMatrix<M,N,T> not<M,N,T>(BitMatrix<M,N,T> A, BitMatrix<M,N,T> B)        
+            where M : ITypeNat, new()
+            where N : ITypeNat, new()
+            where T : unmanaged
+        {
+            mathspan.not(A.Data,B.Data);
+            return B;
+        }
+
     }
 
 }

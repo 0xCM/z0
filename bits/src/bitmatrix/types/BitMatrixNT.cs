@@ -58,7 +58,7 @@ namespace Z0
         /// <param name="B">The right matrix</param>
         [MethodImpl(Inline)]
         public static BitMatrix<N,T> operator *(BitMatrix<N,T> A, BitMatrix<N,T> B)
-            => BitMatrix.mul(A, B, ref A);
+            => BitMatrix.mul(A, B);
 
         [MethodImpl(Inline)]
         public static bool operator ==(BitMatrix<N,T> lhs, BitMatrix<N,T> rhs)
@@ -139,7 +139,16 @@ namespace Z0
             [MethodImpl(Inline)]
             get => data;
         }
-        
+
+        /// <summary>
+        /// Returns a reference to the leading segment of the underlying storage
+        /// </summary>
+        public ref T Head
+        {
+            [MethodImpl(Inline)]
+            get => ref head(data);
+        }
+
         [MethodImpl(Inline)]
         readonly int RowOffset(int row)        
             => GridLayout.Row(row)[0].Segment;
@@ -239,6 +248,7 @@ namespace Z0
             return dst;
         }
 
+        [MethodImpl(NotInline)] 
         public BitMatrix<N,T> Replicate()
             => new BitMatrix<N, T>(data.ToArray());
 

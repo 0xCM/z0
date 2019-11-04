@@ -52,7 +52,8 @@ namespace Z0
             || typeof(T) == typeof(int) 
             || typeof(T) == typeof(long))
                 and_i(ref lhs, rhs);
-            else gfp.and(ref lhs,rhs);
+            else 
+                gfp.and(ref lhs,rhs);
             return ref lhs;
         }
 

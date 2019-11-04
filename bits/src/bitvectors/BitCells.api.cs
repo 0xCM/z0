@@ -76,5 +76,24 @@ namespace Z0
             where T : unmanaged
                 => BitCells<T>.CellCount(len);
 
+        /// <summary>
+        /// Computes the Euclidean scalar product between two bitvectors using modular arithmetic
+        /// </summary>
+        /// <param name="x">The first vector</param>
+        /// <param name="y">The second vector</param>
+        /// <remarks>This should be considered a reference implementation; the dot operation is considerably faster</remarks>
+        public static bit modprod<T>(BitCells<T> x, BitCells<T> y)
+            where T : unmanaged
+        {
+            var result = 0u;
+            for(var i=0; i<x.Length; i++)
+            {
+                var a = (uint)x[i];
+                var b = (uint)y[i];
+                result += a*b;
+            }
+            return odd(result);
+        }
+
    }
 }

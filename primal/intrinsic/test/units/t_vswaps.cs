@@ -45,18 +45,18 @@ namespace Z0
             for(var i=0u; i< cells; i++)
                 src[i] = i;
 
-            var a = ginx.vload(n, head(ref src), step*0);
-            var b = ginx.vload(n, head(ref src), step*1);
-            var c = ginx.vload(n, head(ref src), step*2);
-            var d = ginx.vload(n, head(ref src), step*3);
+            var a = ginx.vload(n, head(src), step*0);
+            var b = ginx.vload(n, head(src), step*1);
+            var c = ginx.vload(n, head(src), step*2);
+            var d = ginx.vload(n, head(src), step*3);
             dinx.vtranspose(ref a, ref b, ref c, ref d);
             
             
             var dst = new uint[cells];
-            ginx.vstore(a, ref head(ref dst), step*0);
-            ginx.vstore(b, ref head(ref dst), step*1);
-            ginx.vstore(c, ref head(ref dst), step*2);
-            ginx.vstore(d, ref head(ref dst), step*3);
+            ginx.vstore(a, ref head(dst), step*0);
+            ginx.vstore(b, ref head(dst), step*1);
+            ginx.vstore(c, ref head(dst), step*2);
+            ginx.vstore(d, ref head(dst), step*3);
 
             var A = Matrix.load(order, src);
             var B = Matrix.load(order, dst);

@@ -129,7 +129,7 @@ namespace Z0
             where M : ITypeNat, new()
             where N : ITypeNat, new()
             where T : unmanaged
-                => BM.load(random.Array<T>(BitGridSpec.Define(m,n,default(T)).TotalCellCount), m, n);
+                => BM.load(m, n, random.Span<T>(BitGridSpec.Define(m,n,default(T)).TotalCellCount));
 
         /// <summary>
         /// Produces an generic bitmatrix of natural order
@@ -142,7 +142,7 @@ namespace Z0
         public static BitMatrix<N,T> BitMatrix<N,T>(this IPolyrand random, N n = default)
             where N : ITypeNat, new()
             where T : unmanaged
-                => BM.load(random.Array<T>(BitGridSpec.Define(n,n,default(T)).TotalCellCount), n);                
+                => BM.load(n,random.Span<T>(BitGridSpec.Define(n,n,default(T)).TotalCellCount));                
  
         /// <summary>
         /// Allocates and populates a bitgrid

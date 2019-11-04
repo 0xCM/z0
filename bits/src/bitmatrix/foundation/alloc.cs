@@ -41,6 +41,42 @@ namespace Z0
         }
 
         /// <summary>
+        /// Allocates a square bitmatrix of natural order, optionally filled with a nonzero bitpattern
+        /// </summary>
+        /// <typeparam name="N">The square dimension</typeparam>
+        /// <typeparam name="T">The element type</typeparam>
+        [MethodImpl(NotInline)]
+        public static BitMatrix<N,T> alloc<N,T>(N n = default, T fill = default)
+            where N : ITypeNat, new()
+            where T : unmanaged
+        {
+
+            var dst = BitMatrix<N,T>.Alloc();
+            if(gmath.nonzero(fill))
+                dst.Data.Fill(fill);
+            return dst;
+        }
+
+        /// <summary>
+        /// Allocates a bitmatrix of natural dimensions, optionally filled with a nonzero bitpattern
+        /// </summary>
+        /// <typeparam name="M">The row dimension</typeparam>
+        /// <typeparam name="N">The column dimension</typeparam>
+        /// <typeparam name="T">The element type</typeparam>
+        [MethodImpl(NotInline)]
+        public static BitMatrix<M,N,T> alloc<M,N,T>(M m = default, N n = default, T fill = default)
+            where M : ITypeNat, new()
+            where N : ITypeNat, new()
+            where T : unmanaged
+        {
+
+            var dst = BitMatrix<M,N,T>.Alloc();
+            if(gmath.nonzero(fill))
+                dst.Data.Fill(fill);
+            return dst;
+        }
+
+        /// <summary>
         /// Allocates a primal bitmatrix 
         /// </summary>
         /// <param name="n">The bitness selector</param>

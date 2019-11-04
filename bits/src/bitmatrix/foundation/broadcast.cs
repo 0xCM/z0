@@ -40,6 +40,48 @@ namespace Z0
         }
 
         /// <summary>
+        /// Creates a new generic bitmatrix where each row is initialized to a common source vector
+        /// </summary>
+        /// <param name="row">The source vector used to fill each row</param>
+        /// <typeparam name="T">The primal type over which the matrix is constructed</typeparam>
+        [MethodImpl(NotInline)]
+        public static BitMatrix<N,T> broadcast<N,T>(BitVector<N,T> row)
+            where T : unmanaged
+            where N : unmanaged, ITypeNat
+        {
+            var matrix = alloc<N,T>();
+            var count = row.SegCount;
+            var n= inat<N>();
+            ref readonly var src = ref row.Head;
+            ref var dst = ref matrix.Head;
+            for(var i=0; i< n; i++)
+                memcpy(in src, ref seek(ref dst, i*count), count);
+            return matrix;
+        }
+
+        /// <summary>
+        /// Creates a new generic bitmatrix where each row is initialized to a common source vector
+        /// </summary>
+        /// <param name="row">The source vector used to fill each row</param>
+        /// <typeparam name="T">The primal type over which the matrix is constructed</typeparam>
+        [MethodImpl(NotInline)]
+        public static BitMatrix<M,N,T> broadcast<M,N,T>(BitVector<N,T> row, M m = default)
+            where T : unmanaged
+            where N : unmanaged, ITypeNat
+            where M : unmanaged, ITypeNat
+        {
+            var matrix = alloc<M,N,T>();
+            var count = row.SegCount;
+            var n= inat<N>();
+            ref readonly var src = ref row.Head;
+            ref var dst = ref matrix.Head;
+            for(var i=0; i< n; i++)
+                memcpy(in src, ref seek(ref dst, i*count), count);
+            return matrix;
+        }
+
+
+        /// <summary>
         /// Creates a new primal bitmatrix where each row is initialized to a common source vector
         /// </summary>
         /// <param name="src">The source vector</param>

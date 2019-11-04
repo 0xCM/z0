@@ -1,135 +1,51 @@
-// 2019-11-03 08:18:56:171
-uint testbit2(ref uint src, int row, int col)
+// 2019-11-04 04:06:02:466
+bit dot_32g(BitVector<uint> x, BitVector<uint> y)
 {
     IL_0000: ldarg.0
-    IL_0001: ldarg.2
-    IL_0002: call System.UInt32& zfunc::seek<System.UInt32>(System.UInt32&,System.Int32)
-    IL_0007: ldind.u4
-    IL_0008: ret
+    IL_0001: ldarg.1
+    IL_0002: call Z0.bit Z0.BitVector::dot<System.UInt32>(Z0.BitVector`1<System.UInt32>,Z0.BitVector`1<System.UInt32>)
+    IL_0007: ret
 
 }
-uint testbit2(UInt32[] src, int row, int col)
-{
-    IL_0000: ldarga.s src
-    IL_0002: call System.UInt32& zfunc::head<System.UInt32>(System.UInt32[]&)
-    IL_0007: ldarg.1
-    IL_0008: ldarg.2
-    IL_0009: call System.UInt32 Z0.bvoc::testbit2(System.UInt32&,System.Int32,System.Int32)
-    IL_000E: ret
-
-}
-uint testbit3(UInt32[] src, int row, int col)
-{
-    IL_0000: ldarga.s src
-    IL_0002: call System.Void* System.Runtime.CompilerServices.Unsafe::AsPointer<System.UInt32[]>(System.UInt32[]&)
-    IL_0007: call System.UInt32& System.Runtime.CompilerServices.Unsafe::AsRef<System.UInt32>(System.Void*)
-    IL_000C: stloc.0
-    IL_000D: ldloc.0
-    IL_000E: ldarg.1
-    IL_000F: ldarg.2
-    IL_0010: call System.UInt32 Z0.bvoc::testbit2(System.UInt32&,System.Int32,System.Int32)
-    IL_0015: ret
-
-}
-uint testbit14(UInt32[] src, int row, int col)
+bool dot_32g_2(BitVector<uint> x, BitVector<uint> y)
 {
     IL_0000: ldarg.0
-    IL_0001: call System.UInt32& zfunc::first<System.UInt32>(System.UInt32[])
-    IL_0006: ldarg.1
-    IL_0007: ldarg.2
-    IL_0008: call System.UInt32 Z0.bvoc::testbit2(System.UInt32&,System.Int32,System.Int32)
-    IL_000D: ret
+    IL_0001: ldarg.1
+    IL_0002: call System.Boolean Z0.BitVector::dot2<System.UInt32>(Z0.BitVector`1<System.UInt32>,Z0.BitVector`1<System.UInt32>)
+    IL_0007: ret
 
 }
-bit testbit(BitMatrix32 src, int row, int col)
-{
-    IL_0000: ldarga.s src
-    IL_0002: ldarg.1
-    IL_0003: ldarg.2
-    IL_0004: call Z0.bit Z0.BitMatrix32::get_Item(System.Int32,System.Int32)
-    IL_0009: ret
-
-}
-bool bg_lookup_rc(in BitGrid<N8,N8,byte> src, GridMap map, int row, int col)
+BitMatrix<uint> oprod_1(BitVector32 x, BitVector32 y)
 {
     IL_0000: ldarg.0
-    IL_0001: ldobj Z0.BitGrid`3<Z0.N8,Z0.N8,System.Byte>
-    IL_0006: stloc.0
-    IL_0007: ldloca.s V_0
-    IL_0009: ldarg.2
-    IL_000A: ldarg.3
-    IL_000B: call Z0.bit Z0.BitGrid`3<Z0.N8,Z0.N8,System.Byte>::GetState(System.Int32,System.Int32)
-    IL_0010: call System.Boolean Z0.bit::op_Implicit(Z0.bit)
-    IL_0015: ret
+    IL_0001: ldarg.1
+    IL_0002: call Z0.BitMatrix`1<System.UInt32> Z0.BitVector::oprod(Z0.BitVector32,Z0.BitVector32)
+    IL_0007: ret
 
 }
-bit bg_lookup_pos(in BitGrid<N8,N8,byte> src, int pos)
+BitMatrix<uint> oprod_2(BitVector<uint> x, BitVector<uint> y)
 {
     IL_0000: ldarg.0
-    IL_0001: ldobj Z0.BitGrid`3<Z0.N8,Z0.N8,System.Byte>
-    IL_0006: stloc.0
-    IL_0007: ldloca.s V_0
-    IL_0009: ldarg.1
-    IL_000A: call Z0.bit Z0.BitGrid`3<Z0.N8,Z0.N8,System.Byte>::GetState(System.Int32)
-    IL_000F: ret
+    IL_0001: ldarg.1
+    IL_0002: call Z0.BitMatrix`1<System.UInt32> Z0.BitVector::oprod<System.UInt32>(Z0.BitVector`1<System.UInt32>,Z0.BitVector`1<System.UInt32>)
+    IL_0007: ret
 
 }
-byte bg_get_head(in BitGrid<N8,N8,byte> src)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldobj Z0.BitGrid`3<Z0.N8,Z0.N8,System.Byte>
-    IL_0006: stloc.0
-    IL_0007: ldloca.s V_0
-    IL_0009: call System.Byte& Z0.BitGrid`3<Z0.N8,Z0.N8,System.Byte>::get_Head()
-    IL_000E: ldind.u1
-    IL_000F: ret
-
-}
-ref CellMap bg_cellmap_lookup_1(in BitGrid<N8,N8,byte> src, int row, int col)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldobj Z0.BitGrid`3<Z0.N8,Z0.N8,System.Byte>
-    IL_0006: stloc.0
-    IL_0007: ldloca.s V_0
-    IL_0009: ldarg.1
-    IL_000A: ldarg.2
-    IL_000B: call Z0.CellMap& modreq(System.Runtime.InteropServices.InAttribute) Z0.BitGrid`3<Z0.N8,Z0.N8,System.Byte>::CellMap(System.Int32,System.Int32)
-    IL_0010: ret
-
-}
-ref CellMap bg_cellmap_lookup_2(in BitGrid<N8,N8,byte> src, int pos)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldobj Z0.BitGrid`3<Z0.N8,Z0.N8,System.Byte>
-    IL_0006: stloc.0
-    IL_0007: ldloca.s V_0
-    IL_0009: ldarg.1
-    IL_000A: call Z0.CellMap& modreq(System.Runtime.InteropServices.InAttribute) Z0.BitGrid`3<Z0.N8,Z0.N8,System.Byte>::CellMap(System.Int32)
-    IL_000F: ret
-
-}
-ref CellMap cellmap_lookup_1(GridMap src, int row, int col)
+ref BitMatrix<uint> oprod_3(BitVector<uint> x, BitVector<uint> y, ref BitMatrix<uint> z)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: callvirt Z0.CellMap& modreq(System.Runtime.InteropServices.InAttribute) Z0.GridMap::get_Item(System.Int32,System.Int32)
+    IL_0003: call Z0.BitMatrix`1<System.UInt32>& Z0.BitVector::oprod<System.UInt32>(Z0.BitVector`1<System.UInt32>,Z0.BitVector`1<System.UInt32>,Z0.BitMatrix`1<System.UInt32>&)
     IL_0008: ret
 
 }
-ref CellMap cellmap_lookup_2(GridMap src, int pos)
+ref BitMatrix<ulong> oprod_4(BitVector<ulong> x, BitVector<ulong> y, ref BitMatrix<ulong> z)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: callvirt Z0.CellMap& modreq(System.Runtime.InteropServices.InAttribute) Z0.GridMap::get_Item(System.Int32)
-    IL_0007: ret
-
-}
-ref uint bitcells_segment_32u(BitCells<uint> src, int pos)
-{
-    IL_0000: ldarga.s src
-    IL_0002: ldarg.1
-    IL_0003: call System.UInt32& Z0.BitCells`1<System.UInt32>::Segment(System.Int32)
+    IL_0002: ldarg.2
+    IL_0003: call Z0.BitMatrix`1<System.UInt64>& Z0.BitVector::oprod<System.UInt64>(Z0.BitVector`1<System.UInt64>,Z0.BitVector`1<System.UInt64>,Z0.BitMatrix`1<System.UInt64>&)
     IL_0008: ret
 
 }

@@ -20,14 +20,14 @@ namespace Z0.Logix
         /// Creates a logical TRUE expression, i.e. an expression that is always true
         /// </summary>
         [MethodImpl(Inline)]
-        public static LiteralLogicExpr on()
+        public static LiteralLogicExpr @true()
             => literal(bit.On);
 
         /// <summary>
         /// Creates a logical FALSE expression, i.e. an expression that is always false
         /// </summary>
         [MethodImpl(Inline)]
-        public static LiteralLogicExpr off()
+        public static LiteralLogicExpr @false()
             => literal(bit.Off);
 
         /// <summary>

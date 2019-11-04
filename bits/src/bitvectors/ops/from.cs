@@ -19,8 +19,63 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source bitstring</param>
         [MethodImpl(Inline)]
+        public static BitVector<T> from<T>(BitString src)
+            where T : unmanaged
+                => src.TakeScalar<T>();
+
+        /// <summary>
+        /// Allocates and fills a byte-secialized generic bitvector
+        /// </summary>
+        [MethodImpl(Inline)]
+        public static BitVector<byte> generic(N8 n8, byte init)
+            => init;
+
+        /// <summary>
+        /// Allocates and fills a byte-secialized generic bitvector
+        /// </summary>
+        [MethodImpl(Inline)]
+        public static BitVector<byte> generic(N8 n, bit b0, bit b1, bit b2, bit b3)
+            => from(n, b0, b1, b2, b3);
+
+        /// <summary>
+        /// Creates a 4-bit bitvector from 4 explicit bits
+        /// </summary>
+        /// <param name="src">The source bitstring</param>
+        [MethodImpl(Inline)]
+        public static BitVector4 from(N4 n, bit b0, bit b1, bit b2, bit b3)
+            => BitVector4.FromBits(b0,b1,b2,b3);
+
+        /// <summary>
+        /// Creates a 4-bit bitvector from explicit bitss
+        /// </summary>
+        /// <param name="src">The source bitstring</param>
+        [MethodImpl(Inline)]
+        public static BitVector4 from(N4 n, bit b0, bit b1, bit b2)
+            => BitVector4.FromBits(b0,b1,b2);
+
+        /// <summary>
+        /// Creates a 4-bit bitvector from explicit bitss
+        /// </summary>
+        /// <param name="src">The source bitstring</param>
+        [MethodImpl(Inline)]
+        public static BitVector4 from(N4 n, bit b0, bit b1)
+            => BitVector4.FromBits(b0,b1);
+
+        /// <summary>
+        /// Creates a vector from a bitstring
+        /// </summary>
+        /// <param name="src">The source bitstring</param>
+        [MethodImpl(Inline)]
         public static BitVector8 from(N8 n, BitString src)
             => src.TakeUInt8();
+
+        /// <summary>
+        /// Creates an 8-bit bitvector from 4 explicit bits
+        /// </summary>
+        /// <param name="src">The source bitstring</param>
+        [MethodImpl(Inline)]
+        public static BitVector8 from(N8 n, bit b0, bit b1, bit b2, bit b3)
+            => (byte)Bits.pack(b0, b1, b2, b3);
 
         /// <summary>
         /// Creates an 8-bit bitvector from 8 explicit bits
@@ -61,15 +116,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitVector8 from(N8 n, ulong src)
             => new BitVector8((byte)src);
-
-        /// <summary>
-        /// Creates a vector from a bitstring
-        /// </summary>
-        /// <param name="src">The source bitstring</param>
-        [MethodImpl(Inline)]
-        public static BitVector<T> from<T>(BitString src)
-            where T : unmanaged
-                => src.TakeScalar<T>();
 
         /// <summary>
         /// Creates a vector from a bitstring

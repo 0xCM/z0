@@ -98,8 +98,8 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static BitMatrix32 From(params uint[] src)        
-            => src.Length == 0 ? Alloc() : new BitMatrix32(src);
+        public static BitMatrix32 From(uint[] src)        
+            => new BitMatrix32(src);
 
         [MethodImpl(Inline)]
         public static BitMatrix32 From(BitMatrix<N32,uint> src)        
@@ -134,12 +134,12 @@ namespace Z0
             => BitMatrix.xornot(A,B);
 
         [MethodImpl(Inline)]
-        public static BitMatrix32 operator * (BitMatrix32 lhs, BitMatrix32 rhs)
-            => BitMatrix.mul(lhs, rhs);
+        public static BitMatrix32 operator * (BitMatrix32 A, BitMatrix32 B)
+            => BitMatrix.mul(A, B);
 
         [MethodImpl(Inline)]
-        public static BitVector32 operator * (BitMatrix32 lhs, BitVector32 rhs)
-            => BitMatrix.mul(lhs, rhs);
+        public static BitVector32 operator * (BitMatrix32 A, BitVector32 B)
+            => BitMatrix.mul(A, B);
 
         [MethodImpl(Inline)]
         public static bool operator ==(BitMatrix32 lhs, BitMatrix32 rhs)
@@ -224,7 +224,7 @@ namespace Z0
         public readonly BitVector32 Diagonal()
             => BitMatrix.diagonal(this);
 
-        [MethodImpl(Inline)] 
+        [MethodImpl(NotInline)] 
         public readonly BitMatrix32 Replicate()
             => new BitMatrix32(data.ToArray());
 

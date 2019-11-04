@@ -10,7 +10,7 @@ namespace Z0
 
     using static zfunc;
 
-    public static class BitGrid
+    public static unsafe class BitGrid
     {
         [MethodImpl(NotInline)]
         public static BitGrid<M,N,T> alloc<M,N,T>(M m = default, N n = default, T zero = default)
@@ -42,6 +42,29 @@ namespace Z0
                 => grid.Data.Fill(state ? gmath.maxval<T>() : gmath.zero<T>());
 
 
+        [MethodImpl(Inline)]
+        public static ref BitGrid2 and(in BitGrid2 g1, in BitGrid2 g2, ref BitGrid2 g3)
+        {
+            var pX = g1.HeadPtr;
+            var pY = g2.HeadPtr;
+            var pZ = g3.HeadPtr;
+            ginx.vand(n128, pX, pY, pZ);
+            return ref g3;
+        }
+
+        [MethodImpl(Inline)]
+        public static ref BitGrid<M,N,T> and<M,N,T>(in BitGrid<M,N,T> g1, in BitGrid<M,N,T> g2, ref BitGrid<M,N,T> g3)
+            where M : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
+            where T : unmanaged
+        {
+            var pX = g1.HeadPtr;
+            var pY = g2.HeadPtr;
+            var pZ = g3.HeadPtr;
+            ginx.vand(n128, pX, pY, pZ);
+            return ref g3;
+        }
+
     }
 
     class BitGridInfo<M,N,T>
@@ -50,6 +73,5 @@ namespace Z0
         where T : unmanaged
     {
         public static readonly GridMap Map = GridLayout.map<M,N,T>();
-
     }
 }

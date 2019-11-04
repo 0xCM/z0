@@ -442,50 +442,7 @@ namespace Z0
 
         }
 
-        OpTime slli256u16Bench(int blocks, int cycles)
-        {
-            var blocklen = Vec256<ushort>.Length;
-            var opcount = blocks*cycles*blocklen;
-            var shiftRange = closed<byte>(2,14);
-            
-            var sw = stopwatch(false);
-            var src = Random.Stream<ushort>();
-            var offsets = Random.Stream(shiftRange);
-            for(var cycle=0; cycle<cycles; cycle++)
-            for(var block = 0; block<blocks; block++)
-            {
-                var x = ginx.vload(n256, in head(src.ToSpan(blocklen)));
-                var offset = offsets.First();
-                sw.Start();
-                dinx.vsll(x,offset);
-                sw.Stop();
-            
-            }
-            return OpTime.Define(opcount, snapshot(sw),"slli16u");
-        }
 
-        OpTime ShiftLeft256x16uRef(int blocks, int cycles)
-        {
-            var blocklen = Vec256<ushort>.Length;
-            var opcount = blocks*cycles*blocklen;
-            var shiftRange = closed<byte>(2,14);
-            
-            var sw = stopwatch(false);
-            var src = Random.Stream<ushort>();
-            var offsets = Random.Stream(shiftRange);
-
-            for(var cycle=0; cycle<cycles; cycle++)
-            for(var block = 0; block<blocks; block++)
-            {
-                var x = src.ToSpan(blocklen);
-                var offset = offsets.First();
-                
-                sw.Start();                
-                BitRef.ShiftL(x,offset);
-                sw.Stop();
-            }
-            return OpTime.Define(opcount, snapshot(sw),"slli16uRef");            
-        }
 
         static BitVector32[]  GfPoly =
         {
@@ -631,27 +588,6 @@ namespace Z0
             return tmp6;            
         }
 
-        void sll_256x8u_bench_ref(int blocks, int cycles)
-        {
-            var opcount = RoundCount * CycleCount;
-            var sw = stopwatch(false);
-            var bitlen = bitsize<byte>();
-            var opname = $"sll_256x{bitlen}_ref";
-
-            Span<byte> buffer = new byte[32];
-
-            for(var i=0; i<opcount; i++)
-            {
-                var offset = Random.Next(2, bitlen - 1);
-                var x = Random.Span<byte>(32);
-                
-                sw.Start();                
-                BitRef.ShiftL(x,offset,buffer);
-                sw.Stop();
-            }
-
-            Collect((opcount, snapshot(sw), opname));            
-        }
    
     }
 

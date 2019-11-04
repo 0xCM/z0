@@ -7,13 +7,22 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
+    using System.Runtime.Intrinsics;
  
     using static zfunc;
     using static As;
 
     partial class bmoc
     {
+        
+        public static unsafe void and_lean(ReadOnlySpan<uint> a, ReadOnlySpan<uint> b, Span<uint> c)
+            => ginx.vand(n128, constptr(in head(a)), constptr(in head(b)), refptr(ref head(c)));
 
+        public static unsafe void and_lean_2(ReadOnlySpan<uint> a, ReadOnlySpan<uint> b, Span<uint> c)
+            => ginx.vand(n128, n2, constptr(in head(a)), constptr(in head(b)), refptr(ref head(c)));
+
+        public static ref BitGrid<N32,N32,uint> and_awful(in BitGrid<N32,N32,uint> g1, in BitGrid<N32,N32,uint> g2, ref BitGrid<N32,N32,uint> g3)
+            => ref BitGrid.and(g1,g2,ref g3);
         public static BitMatrix64 bm_from_natspan_64x64x64u(in Span<N64,ulong> src)
             => BitMatrix64.From(src);
     

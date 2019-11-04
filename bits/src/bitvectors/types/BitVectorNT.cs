@@ -49,6 +49,8 @@ namespace Z0
     
         static readonly BitCellIndex<T>[] BitMap = BitSize.BitMap<T>(BitCount);
 
+        //static readonly GridMap BitMap2 = BitGridInfo<N,N,T>.Map
+
         [MethodImpl(Inline)]
         public static BitVector<N,T> Alloc(T? fill = null)
         {
@@ -112,7 +114,7 @@ namespace Z0
         /// <param name="lhs">The left operand</param>
         /// <param name="rhs">The right operand</param>
         [MethodImpl(Inline)]
-        public static Bit operator %(BitVector<N,T> lhs, BitVector<N,T> rhs)
+        public static bit operator %(BitVector<N,T> lhs, BitVector<N,T> rhs)
             => lhs.Dot(rhs);
 
         /// <summary>
@@ -163,7 +165,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        BitVector(Span<T> src,bool skipChecks)
+        BitVector(Span<T> src, bool skipChecks)
             : this()
         {
             this.data = src;
@@ -266,9 +268,9 @@ namespace Z0
         }
 
         /// <summary>
-        /// The number of allocated cells
+        /// The number of allocated segments
         /// </summary>
-        public int CellCount
+        public int SegCount
         {
             [MethodImpl(Inline)]
             get => Data.Length;
@@ -346,24 +348,24 @@ namespace Z0
         }
 
         /// <summary>
+        /// Returns a reference to the leading segment of the underlying storage
+        /// </summary>
+        public ref T Head
+        {
+            [MethodImpl(Inline)]
+            get => ref head(data);
+        }
+
+        /// <summary>
         /// Sets all the bits in use to the specified state
         /// </summary>
         /// <param name="state">The source state</param>
-        public void Fill(Bit state)
+        public void Fill(bit state)
         {            
-            var primal = PrimalInfo.Get<T>();
-            var fillval = state ? primal.MaxVal : primal.Zero;
-            if(Unused != 0 && Length > 1)
-            {
-                Data.Slice(0, Data.Length - 1).Fill(fillval);
-                ref var last = ref Data.Last();
-                for(var i=0; i< LastUsedBits; i++)
-                    gbits.set(ref last, (byte)i, state);                
-            }
+            if(state)
+                data.Fill(gmath.maxval<T>());
             else
-            {
-              Data.Fill(fillval);
-            }
+                data.Clear();
         }
 
         /// <summary>

@@ -24,7 +24,7 @@ namespace Z0
             where T : unmanaged
         {
             var n = BitMatrix<T>.N;
-            var dst = BitVector.generic<T>();
+            var dst = BitVector.alloc<T>();
             for(var i=0; i< n; i++)
                 dst[i] = BitVector.dot(A[i], x);
             return dst;        
@@ -132,7 +132,6 @@ namespace Z0
 
         }
 
-        [MethodImpl(Inline)]
         public static BitMatrix32 mul(BitMatrix32 A, BitMatrix32 B)
         {
             var C = A.Replicate();
@@ -164,7 +163,6 @@ namespace Z0
             return ref A;
         }
 
-        [MethodImpl(Inline)]
         public static BitMatrix64 mul(BitMatrix64 A, BitMatrix64 B)
         {
             var C = A.Replicate();
@@ -186,10 +184,10 @@ namespace Z0
         /// </summary>
         /// <param name="A">The left matrix</param>
         /// <param name="B">The right matrix</param>
-        /// <param name="C">The target matrix</param>
+        /// <param name="Z">The target matrix</param>
         /// <typeparam name="N">The order type</typeparam>
         /// <typeparam name="T">The matrix storage type</typeparam>
-        public static ref BitMatrix<M, N, T> mul<M,P,N,T>(in BitMatrix<M,P,T> A, in BitMatrix<P,N,T> B, ref BitMatrix<M,N,T> C)
+        public static ref BitMatrix<M, N, T> mul<M,P,N,T>(in BitMatrix<M,P,T> A, in BitMatrix<P,N,T> B, ref BitMatrix<M,N,T> Z)
             where M : ITypeNat, new()
             where P : ITypeNat, new()
             where N : ITypeNat, new()
@@ -202,10 +200,22 @@ namespace Z0
             {
                 var row = x.RowVector(i);
                 for(var j=0; j<n; j++)
-                    C[i,j] = row % y.RowVector(j);
+                    Z[i,j] = row % y.RowVector(j);
             }
 
-            return ref C;
+            return ref Z;
+        }
+
+        [MethodImpl(NotInline)]
+        public static BitMatrix<M, N, T> mul<M,P,N,T>(in BitMatrix<M,P,T> A, in BitMatrix<P,N,T> B)
+            where M : ITypeNat, new()
+            where P : ITypeNat, new()
+            where N : ITypeNat, new()
+            where T : unmanaged
+        {
+            var Z = alloc<M,N,T>();
+            mul(A,B, ref Z);
+            return Z;
         }
 
         /// <summary>
@@ -213,10 +223,10 @@ namespace Z0
         /// </summary>
         /// <param name="A">The left matrix</param>
         /// <param name="B">The right matrix</param>
-        /// <param name="C">The target matrix</param>
+        /// <param name="Z">The target matrix</param>
         /// <typeparam name="N">The order type</typeparam>
         /// <typeparam name="T">The matrix storage type</typeparam>
-        public static ref BitMatrix<N,T> mul<N,T>(in BitMatrix<N,T> A, in BitMatrix<N,T> B, ref BitMatrix<N,T> C)
+        public static ref BitMatrix<N,T> mul<N,T>(in BitMatrix<N,T> A, in BitMatrix<N,T> B, ref BitMatrix<N,T> Z)
             where N : ITypeNat, new()
             where T : unmanaged
         {
@@ -226,10 +236,28 @@ namespace Z0
             {
                 var row = A[i];
                 for(var j=0; j<n; j++)
-                    C[i,j] = row % tr.RowVector(j);
+                    Z[i,j] = row % tr.RowVector(j);
             }
 
-            return ref C;
+            return ref Z;
         }    
+
+        /// <summary>
+        /// Computes the product of square bitmatrices of common natural order and returns the allocated result
+        /// </summary>
+        /// <param name="A">The left matrix</param>
+        /// <param name="B">The right matrix</param>
+        /// <param name="Z">The target matrix</param>
+        /// <typeparam name="N">The order type</typeparam>
+        /// <typeparam name="T">The matrix storage type</typeparam>
+        [MethodImpl(NotInline)]
+        public static BitMatrix<N,T> mul<N,T>(in BitMatrix<N,T> A, in BitMatrix<N,T> B)
+            where N : ITypeNat, new()
+            where T : unmanaged
+        {
+            var Z = alloc<N,T>();
+            mul(A,B, ref Z);
+            return Z;
+        }
    }
 }

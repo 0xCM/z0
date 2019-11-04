@@ -12,23 +12,7 @@ namespace Z0
     using static zfunc;
     
     public class t_bitgrid : BitMatrixTest<t_bitgrid>
-    {
-        
-        public unsafe void memtest()
-        {
-            var data = new uint[40];
-            ref var h = ref first(data);
-            // var h2 = __makeref(data);
-            // ref var h = ref Unsafe.AsRef<uint>(&(h2));
-                        
-            Random.StreamTo(40, ref first(data));
-            var result = 0xFu;
-            //ref var h = ref head(ref data);
-            for(var i=0; i<40; i++)
-                result ^= seek(ref h, i);
-
-        }
-
+    {        
         public void layout_8x8()
         {
             

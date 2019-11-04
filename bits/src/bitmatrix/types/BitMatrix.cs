@@ -22,7 +22,7 @@ namespace Z0
     {                        
         Span<T> data;
 
-        public static readonly uint N = bitsize<T>();
+        public static uint N => bitsize<T>();
 
         [MethodImpl(Inline)]
         public static BitVector<T> operator * (BitMatrix<T> A, BitVector<T> x)

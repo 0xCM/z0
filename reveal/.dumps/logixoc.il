@@ -1,4 +1,49 @@
-// 2019-11-03 08:18:56:975
+// 2019-11-04 04:06:03:238
+int work_ring_buffer()
+{
+    IL_0000: ldc.i4.s 64
+    IL_0002: call Z0.RingBuffer`1<System.Byte> Z0.RingBuffer::alloc<System.Byte>(System.Int32)
+    IL_0007: stloc.0
+    IL_0008: ldloca.s V_0
+    IL_000A: ldc.i4.3
+    IL_000B: stloc.3
+    IL_000C: ldloca.s V_3
+    IL_000E: call System.Void Z0.RingBuffer`1<System.Byte>::Push(System.Byte&)
+    IL_0013: ldloca.s V_0
+    IL_0015: ldc.i4.4
+    IL_0016: stloc.3
+    IL_0017: ldloca.s V_3
+    IL_0019: call System.Void Z0.RingBuffer`1<System.Byte>::Push(System.Byte&)
+    IL_001E: ldloca.s V_0
+    IL_0020: call System.Byte& modreq(System.Runtime.InteropServices.InAttribute) Z0.RingBuffer`1<System.Byte>::Pop()
+    IL_0025: ldind.u1
+    IL_0026: stloc.1
+    IL_0027: ldloca.s V_0
+    IL_0029: call System.Byte& modreq(System.Runtime.InteropServices.InAttribute) Z0.RingBuffer`1<System.Byte>::Pop()
+    IL_002E: ldind.u1
+    IL_002F: stloc.2
+    IL_0030: ldloc.1
+    IL_0031: ldloc.2
+    IL_0032: add
+    IL_0033: ret
+
+}
+ref BitStack push(bit src, ref BitStack dst)
+{
+    IL_0000: ldarg.1
+    IL_0001: ldarg.0
+    IL_0002: call System.Void Z0.BitStack::Push(Z0.bit)
+    IL_0007: ldarg.1
+    IL_0008: ret
+
+}
+bit pop(ref BitStack src)
+{
+    IL_0000: ldarg.0
+    IL_0001: call Z0.bit Z0.BitStack::Pop()
+    IL_0006: ret
+
+}
 bit and_logic(bit a, bit b)
 {
     IL_0000: ldarg.0

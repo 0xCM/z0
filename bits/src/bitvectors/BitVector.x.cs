@@ -50,7 +50,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
-        public static BitVector<byte> ToGenericBits(this byte src)
+        public static BitVector<byte> ToBitVectorG(this byte src)
             => src;
 
         /// <summary>
@@ -58,7 +58,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
-        public static BitVector<ushort> ToGenericBits(this ushort src)
+        public static BitVector<ushort> ToBitVectorG(this ushort src)
             => src;
 
         /// <summary>
@@ -66,7 +66,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
-        public static BitVector<uint> ToGenericBits(this uint src)
+        public static BitVector<uint> ToBitVectorG(this uint src)
             => src;
 
         /// <summary>
@@ -74,16 +74,15 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
-        public static BitVector<ulong> ToGenericBits(this ulong src)
-            => src;
-        
+        public static BitVector<ulong> ToBitVectorG(this ulong src)
+            => src;        
 
         /// <summary>
         /// Converts the source bitvector to an equivalent generic bitvector
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
-        public static BitVector<byte> ToGenericBits(this BitVector8 src)
+        public static BitVector<byte> ToGeneric(this BitVector8 src)
             => src.data;
     
         /// <summary>
@@ -91,7 +90,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
-        public static BitVector<ushort> ToGenericBits(this BitVector16 src)
+        public static BitVector<ushort> ToGeneric(this BitVector16 src)
             => src.data;
 
         /// <summary>
@@ -99,7 +98,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
-        public static BitVector<uint> ToGenericBits(this BitVector32 src)
+        public static BitVector<uint> ToGeneric(this BitVector32 src)
             => src.data;
 
         /// <summary>
@@ -107,7 +106,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
-        public static BitVector<ulong> ToGenericBits(this BitVector64 src)
+        public static BitVector<ulong> ToGeneric(this BitVector64 src)
             => src.data;
 
         /// <summary>

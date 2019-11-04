@@ -13,7 +13,6 @@ namespace Z0
 
     partial class BitPoints
     {
-
         [MethodImpl(Inline)]
         public static unsafe void and<T>(T* pA, T* pB, T* pDst)
             where T : unmanaged
@@ -71,8 +70,5 @@ namespace Z0
             ginx.vand(n, pA+=step, pB+=step,pDst+=step);
             ginx.vand(n, pA+=step, pB+=step,pDst+=step);
         }        
-
-
     }
-
 }

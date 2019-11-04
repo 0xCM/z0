@@ -25,7 +25,7 @@ namespace Z0
             where T : unmanaged
         {
             var C = BitMatrix.alloc<T>();
-            BitPoints.and(A.HeadPtr,B.HeadPtr,C.HeadPtr);
+            BitPoints.and(A.HeadPtr, B.HeadPtr, C.HeadPtr);
             return C;
         }
 
@@ -161,5 +161,55 @@ namespace Z0
             BitPoints.and(A.HeadPtr, B.HeadPtr, Z.HeadPtr);
             return ref Z;
         }
+
+        /// <summary>
+        /// Computes the bitwise AND between two square bitmatrices of common natural order and stores the
+        /// result a caller-supplied target matrix
+        /// </summary>
+        /// <param name="A">The first source operand</param>
+        /// <param name="B">The second source operand</param>
+        /// <param name="C">The target</param>
+        /// <typeparam name="N">The matrix order</typeparam>
+        /// <typeparam name="T">The matrix storage type</typeparam>
+        [MethodImpl(Inline)]
+        public static ref BitMatrix<N,T> and<N,T>(in BitMatrix<N,T> A, in BitMatrix<N,T> B, ref BitMatrix<N,T> C)
+            where N : ITypeNat, new()
+            where T : unmanaged
+        {
+            mathspan.and(A.Data, B.Data, C.Data);
+            return ref C;
+        }
+
+        /// <summary>
+        /// Computes the bitwise AND between two square bitmatrices of common order
+        /// </summary>
+        [MethodImpl(Inline)]
+        public static BitMatrix<N,T> and<N,T>(in BitMatrix<N,T> A, in BitMatrix<N,T> B)
+            where N : ITypeNat, new()
+            where T : unmanaged
+        {
+            var C = alloc<N,T>();
+            return and(in A, in B, ref C);
+        }
+
+        /// <summary>
+        /// Computes the bitwise AND between two bitmatrices of common dimension and stores the
+        /// result a caller-supplied target matrix
+        /// </summary>
+        /// <param name="A">The first source operand</param>
+        /// <param name="B">The second source operand</param>
+        /// <param name="C">The target</param>
+        /// <typeparam name="N">The matrix order</typeparam>
+        /// <typeparam name="T">The matrix storage type</typeparam>
+        [MethodImpl(Inline)]
+        public static ref BitMatrix<M,N,T> and<M,N,T>(in BitMatrix<M,N,T> A, in BitMatrix<M,N,T> B, ref BitMatrix<M,N,T> C)        
+            where M : ITypeNat, new()
+            where N : ITypeNat, new()
+            where T : unmanaged
+        {
+            mathspan.and(A.Data, B.Data, C.Data);
+            return ref C;
+        } 
+ 
     }
 }

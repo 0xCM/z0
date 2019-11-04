@@ -68,7 +68,7 @@ namespace Z0
             {
                 var m1 = BitMatrix8.From(src.Current);
                 var n = new N8();
-                var m2 = BitMatrix.load(src.Current.ToBytes(),n, n);
+                var m2 = BitMatrix.load(n, n,src.Current.ToBytes().ToSpan());
                 for(var i=0; i<8; i++)
                 for(var j=0; j<8; j++)
                     Claim.eq(m1[i,j], m2[i,j]);
@@ -160,27 +160,36 @@ namespace Z0
             {
                 for(var j=0; j<m.ColCount; j++)
                     Claim.eq(m[i,j], Bit.On);
-            }
-            
+            }            
         }
 
-        public void create7x9()
+        public void create_7x9x8u()
         {
-            var m1 = BitMatrix.natural<N7,N9,byte>();
+            var m1 = BitMatrix.alloc<N7,N9,byte>();
             m1.Fill(Bit.On);
             var fmt = m1.Format().RemoveWhitespace();
             Claim.eq(BitMatrix<N7,N9,byte>.TotalBitCount, fmt.Length);    
 
         }
+
+        public void broadcast_7x9x8u()
+        {
+            const byte pattern = 0b01010101;
+            var fill = BitVector.alloc(n9, pattern);
+            var matrix = BitMatrix.broadcast(fill, n7);
+            for(var i=0; i<matrix.RowCount; i++)
+                Claim.yea(fill == matrix[i]);
+        }
+
         public void create7x7()
         {
-            var m1 = BitMatrix.natural<N7,byte>();
-            m1.Fill(Bit.On);
+            var m1 = BitMatrix.alloc<N7,byte>();
+            m1.Fill(on);
             var fmt = m1.Format().RemoveWhitespace();
             Claim.eq(7*7, fmt.Length);
             var d = m1.Diagonal();
-            var x = BitVector.natural<N7,byte>();
-            x.Fill(Bit.On);
+            var x = BitVector.alloc<N7,byte>();
+            x.Fill(on);
 
             Claim.yea(d == x);                        
         }

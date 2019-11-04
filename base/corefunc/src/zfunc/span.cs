@@ -47,6 +47,12 @@ partial class zfunc
         => Unsafe.CopyBlock(Unsafe.AsPointer(ref dst), Unsafe.AsPointer(ref src), srclen);
 
     [MethodImpl(Inline)]
+    public static unsafe void memcpy<S,T>(in S src, ref T dst, int count)
+        where T : unmanaged
+        where S : unmanaged
+            => Unsafe.CopyBlock(Unsafe.AsPointer(ref dst), Unsafe.AsPointer(ref Unsafe.AsRef(in src)), count*size<T>());
+
+    [MethodImpl(Inline)]
     public static unsafe bool memcpy<S,T>(S[] src, T[] dst)
         where T : unmanaged
         where S : unmanaged
@@ -57,7 +63,7 @@ partial class zfunc
         if(srcLen != dstLen)
             return false;
 
-        zfunc.memcpy(ref head(ref src), ref head(ref dst), srcLen);
+        zfunc.memcpy(ref head(src), ref head(dst), srcLen);
         return true;
     }
 
@@ -271,15 +277,10 @@ partial class zfunc
     /// <summary>
     /// Returns a reference to the location of the first element
     /// </summary>
-    /// <param name="src">The source span</param>
+    /// <param name="src">The source array</param>
     /// <typeparam name="T">The element type</typeparam>
     [MethodImpl(Inline)]
-    public static unsafe ref T first<T>(T[] src)
-        where T : unmanaged
-            => ref src[0];
-
-    [MethodImpl(Inline)]
-    public static unsafe ref T head<T>(ref T[] src)
+    public static unsafe ref T head<T>(T[] src)
         where T : unmanaged
             => ref src[0];
     

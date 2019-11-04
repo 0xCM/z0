@@ -99,8 +99,8 @@ namespace Z0
             => new BitMatrix16(fill);
 
         [MethodImpl(Inline)]
-        public static BitMatrix16 From(params ushort[] src)        
-            => src.Length == 0 ? Alloc() : new BitMatrix16(src);
+        public static BitMatrix16 From(ushort[] src)        
+            => new BitMatrix16(src);
 
         [MethodImpl(Inline)]
         public static BitMatrix16 From(Span<ushort> src)        
@@ -315,7 +315,7 @@ namespace Z0
             return dst;
         }
 
-        [MethodImpl(Inline)] 
+        [MethodImpl(NotInline)] 
         public readonly BitMatrix16 Replicate()
             => From(data.ToArray());
         

@@ -136,8 +136,8 @@ namespace Z0.Logix
                 var a = Random.Next<T>();
                 var b = Random.Next<T>();
                 var result1 = ScalarOpApi.eval(kind,a,b);    
-                var result2 = BitVectorOpApi.eval(kind, BitVector.generic(a), BitVector.generic(b)).Data;
-                var result3 = BitVectorOpApi.evalref(kind, BitVector.generic(a), BitVector.generic(b)).Data;
+                var result2 = BitVectorOpApi.eval(kind, BitVector.alloc(a), BitVector.alloc(b)).Data;
+                var result3 = BitVectorOpApi.evalref(kind, BitVector.alloc(a), BitVector.alloc(b)).Data;
                 var result4 = CpuOpApi.eval(kind, ginx.vbroadcast(n128,a), ginx.vbroadcast(n128,b)).ToScalar();
                 var result5 = CpuOpApi.eval(kind, ginx.vbroadcast(n256,a), ginx.vbroadcast(n256,b)).ToScalar();
                 Claim.eq(result1, result2);

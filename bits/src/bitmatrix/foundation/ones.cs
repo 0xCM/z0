@@ -50,6 +50,22 @@ namespace Z0
         }
 
         /// <summary>
+        /// Allocates an identity bitmatrix of natural order
+        /// </summary>
+        /// <typeparam name="N">The column/row dimension</typeparam>
+        /// <typeparam name="T">The element type</typeparam>
+        public static BitMatrix<N,T> identity<N,T>(N n = default, T zero = default)
+            where N : ITypeNat, new()
+            where T : unmanaged
+       {            
+            var dst = alloc(n,zero);
+            var order  = (int)n.value;
+            for(var i = 0; i< order; i++)
+                dst[i,i] = true;            
+            return dst;
+        }    
+
+        /// <summary>
         /// Allocates a 1-filled natural bitmatrix
         /// </summary>
         /// <typeparam name="M">The row dimension</typeparam>
@@ -60,7 +76,7 @@ namespace Z0
             where M : ITypeNat, new()
             where N : ITypeNat, new()
             where T : unmanaged
-                => BitMatrix<M,N,T>.Ones();
+                => alloc(m,n, gmath.maxval<T>());
 
         /// <summary>
         /// Allocates a 1-filled bitmatrix of natural order
@@ -72,11 +88,7 @@ namespace Z0
         public static BitMatrix<N,T> ones<N,T>(N n = default)
             where N : ITypeNat, new()
             where T : unmanaged
-        {                                
-            var A = BitMatrix<N,T>.Alloc();
-            A.Data.Fill(gmath.maxval<T>());
-            return A;
-        }
+                => alloc(n, gmath.maxval<T>());
 
     }
 

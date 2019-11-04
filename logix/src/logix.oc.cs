@@ -19,6 +19,27 @@ namespace Z0.Logix
 
     public static partial class logixoc
     {
+        public static int work_ring_buffer()
+        {
+            var buffer = RingBuffer.alloc<byte>(64);
+            buffer.Push(3);
+            buffer.Push(4);
+            var x = buffer.Pop();
+            var y = buffer.Pop();
+            return x + y;
+        }
+
+
+
+        public static ref BitStack push(bit src, ref BitStack dst)
+        {
+            dst.Push(src);
+            return ref dst;
+        }
+
+        public static bit pop(ref BitStack src)
+            => src.Pop();
+
         public static bit and_logic(bit a, bit b)
             => and(a,b);
 

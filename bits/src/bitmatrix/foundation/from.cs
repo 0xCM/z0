@@ -28,6 +28,21 @@ namespace Z0
             return id;
         }
 
+        /// <summary>
+        /// Loads a generic bitmatrix from a rowbit sequence
+        /// </summary>
+        /// <param name="rows">The row content</param>
+        /// <typeparam name="T">The primal type over which the matrix is constructed</typeparam>
+        [MethodImpl(Inline)]
+        public static BitMatrix<T> from<T>(RowBits<T> src)
+            where T : unmanaged
+        {
+            if(src.RowCount != bitsize<T>())
+                Errors.Throw($"{bitsize<T>()} != {src.RowCount}");
+
+            return load(src.data);                
+        }
+
     }
 
 }

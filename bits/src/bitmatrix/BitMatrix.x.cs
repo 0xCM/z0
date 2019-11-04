@@ -23,7 +23,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitMatrix<T> ToBitMatrix<T>(this RowBits<T> src)
             where T : unmanaged
-                => BitMatrix.load(src);
+                => BitMatrix.from(src);
 
         /// <summary>
         /// Converts the matrix to a bitvector
@@ -36,21 +36,22 @@ namespace Z0
         /// Converts the matrix to a bitvector
         /// </summary>
         [MethodImpl(Inline)]
-        public static BitVector<N256,ushort> ToBitvector(this BitMatrix16 A)
+        public static BitVector<N256,ushort> ToBitVector(this BitMatrix16 A)
             => BitVector.natural(A.Data, n256);
 
         /// <summary>
         /// Converts the matrix to a bitvector
         /// </summary>
         [MethodImpl(Inline)]
-        public static BitVector<N1024,uint> ToBitvector(this BitMatrix32 A)
+        public static BitVector<N1024,uint> ToBitVector(this BitMatrix32 A)
             => BitVector.natural(A.Data, n1024);
+
 
         /// <summary>
         /// Converts the matrix to a bitvector
         /// </summary>
         [MethodImpl(Inline)]
-        public static BitVector<N4096,ulong> ToBitvector(this BitMatrix64 A)
+        public static BitVector<N4096,ulong> ToBitVector(this BitMatrix64 A)
             => BitVector.natural(A.Data, n4096);
 
         /// <summary>
@@ -105,6 +106,68 @@ namespace Z0
             return dst;
         }
 
+        /// <summary>
+        /// Converts the source matrix to a square matrix of natural order
+        /// </summary>
+        [MethodImpl(Inline)]
+        public static BitMatrix<N8,byte> ToNatural(this BitMatrix8 A)
+            => BitMatrix.load(n8,A.Data);
+
+        /// <summary>
+        /// Converts the source matrix to a square matrix of natural order
+        /// </summary>
+        [MethodImpl(Inline)]
+        public static BitMatrix<N8,byte> ToNatural(this BitMatrix<byte> A)
+            => BitMatrix.load(n8,A.Data);
+
+        /// <summary>
+        /// Converts the source matrix to a square matrix of natural order
+        /// </summary>
+        [MethodImpl(Inline)]
+        public static BitMatrix<N16,ushort> ToNatural(this BitMatrix16 A)
+            => BitMatrix.load(n16,A.Data);
+
+        /// <summary>
+        /// Converts the source matrix to a square matrix of natural order
+        /// </summary>
+        [MethodImpl(Inline)]
+        public static BitMatrix<N16,ushort> ToNatural(this BitMatrix<ushort> A)
+            => BitMatrix.load(n16,A.Data);
+
+        /// <summary>
+        /// Converts the source matrix to a square matrix of natural order
+        /// </summary>
+        [MethodImpl(Inline)]
+        public static BitMatrix<N32,uint> ToNatural(this BitMatrix32 A)
+            => BitMatrix.load(n32,A.Data);
+
+        /// <summary>
+        /// Converts the source matrix to a square matrix of natural order
+        /// </summary>
+        [MethodImpl(Inline)]
+        public static BitMatrix<N32,uint> ToNatural(this BitMatrix<uint> A)
+            => BitMatrix.load(n32,A.Data);
+
+        /// <summary>
+        /// Converts the source matrix to a square matrix of natural order
+        /// </summary>
+        [MethodImpl(Inline)]
+        public static BitMatrix<N64,ulong> ToNatural(this BitMatrix64 A)
+            => BitMatrix.load(n64,A.Data);
+
+        /// <summary>
+        /// Converts the source matrix to a square matrix of natural order
+        /// </summary>
+        [MethodImpl(Inline)]
+        public static BitMatrix<N64,ulong> ToNatural(this BitMatrix<ulong> A)
+            => BitMatrix.load(n64,A.Data);
+
+        [MethodImpl(Inline)]
+        public static BitMatrix<N,T> AsSquare<N,T>(this BitMatrix<N,N,T> src)
+            where T : unmanaged
+            where N : ITypeNat, new()
+                    => BitMatrix.load<N,T>(src.Data);
+                    
         internal static string FormatMatrixBits(this Span<byte> src, int rowlen)            
         {
             var dst = gbits.bitchars(src);

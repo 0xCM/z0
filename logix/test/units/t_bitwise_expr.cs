@@ -269,10 +269,10 @@ namespace Z0.Logix
                 var sb = Random.Next<T>();
                 var sc = Random.Next<T>();
 
-                var z0 = BitVector.generic<T>();
-                var va = BitVector.generic(sa);
-                var vb = BitVector.generic(sb);
-                var vc = BitVector.generic(sc);
+                var z0 = BitVector.alloc<T>();
+                var va = BitVector.alloc(sa);
+                var vb = BitVector.alloc(sb);
+                var vc = BitVector.alloc(sc);
                 for(var i=0; i< z0.Length; i++)
                     z0[i] = BL(va[i],vb[i],vc[i]);
 
@@ -327,7 +327,7 @@ namespace Z0.Logix
                 v2.Set(b);
                 T expect = ScalarOpApi.eval(op,a,b);
                 T result1 = LogicEngine.eval(expr);
-                T result2 = BitVectorOpApi.eval(op, BitVector.generic(a),BitVector.generic(b)).Data;
+                T result2 = BitVectorOpApi.eval(op, BitVector.alloc(a),BitVector.alloc(b)).Data;
                 Claim.eq(expect, result1);                            
                 Claim.eq(expect, result2);                            
             }

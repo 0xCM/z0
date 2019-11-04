@@ -43,7 +43,27 @@ namespace Z0
             where T : unmanaged
                 => vstore(vand(n, pX,pY), pDst);
 
+        [MethodImpl(Inline)]
+        public static unsafe void next<T>(ref T* pX, ref T* pY, ref T* pDst, int offset)
+            where T : unmanaged
+        {
+            pX += offset;
+            pY += offset;
+            pDst += offset;
 
+        }
+
+        [MethodImpl(Inline)]
+        public static unsafe void vand<T>(N128 n, N2 n2, T* pX, T* pY, T* pDst)
+            where T : unmanaged
+        {
+            var step = 128/Unsafe.SizeOf<T>();
+            T* pXNext = pX, pYNext = pY, pDstNext = pDst;
+            vstore(vand(n, pXNext, pYNext), pDstNext);
+            next(ref pXNext, ref pYNext, ref pDstNext, step);
+            vstore(vand(n, pXNext, pYNext), pDstNext);
+
+        }
 
     }
 

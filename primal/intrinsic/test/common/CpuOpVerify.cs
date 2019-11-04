@@ -37,7 +37,7 @@ namespace Z0
                 for(var i =0; i<blocklen; i++)
                     tmp[i] = primalOp(src[offset + i]);
 
-                var vExpect = ginx.vload<T>(n128, in head(ref tmp));
+                var vExpect = ginx.vload<T>(n128, in head(tmp));
              
                 var vX = src.LoadVector(block);
                 var vActual = inXOp(vX);
@@ -72,7 +72,7 @@ namespace Z0
                 for(var i =0; i<blocklen; i++)
                     tmp[i] = primalOp(src[offset + i]);
 
-                var vExpect = ginx.vload<T>(n256, in head(ref tmp));
+                var vExpect = ginx.vload<T>(n256, in head(tmp));
              
                 var vX = src.LoadVector(block);
                 var vActual = inXOp(vX);
