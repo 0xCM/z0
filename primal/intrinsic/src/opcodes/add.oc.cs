@@ -12,12 +12,20 @@ namespace Z0
 
     using static zfunc;    
 
-    partial class inxvoc
+    partial class inxoc
     {
+        public static UInt128 clmul(ulong x, ulong y)
+            => Cl.clmul(x,y);
+
+        public static ref UInt128 clmul(ulong x, ulong y, ref UInt128 dst)
+            => ref Cl.clmul(x,y, ref dst);
+
+        public static ulong clmulr8u(ulong a, ulong b, ulong poly)
+            => Cl.clmulr8u(a,b,poly);
+
         [MethodImpl(Inline)]
         public static Vector128<sbyte> vadd_d128x8i(Vector128<sbyte> lhs, Vector128<sbyte> rhs)
             => dinx.vadd(lhs,rhs);
-
 
         [MethodImpl(Inline)]
         public static Vector128<sbyte> vadd_g128x8i(Vector128<sbyte> lhs, Vector128<sbyte> rhs) 

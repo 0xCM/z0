@@ -80,6 +80,12 @@ namespace Z0
             set => gbits.set(ref data[row], (byte)col, value);
         }
 
+        public int Order
+        {
+            [MethodImpl(Inline)]
+            get => (int)N;
+        }
+
         /// <summary>
         /// Interchanges the i'th and j'th rows where  0 <= i,j < N
         /// </summary>
@@ -102,10 +108,6 @@ namespace Z0
             => ref Unsafe.As<T,BitVector<T>>(ref src);
 
         [MethodImpl(Inline)]
-        public void Update(Span<T> src)
-            => src.CopyTo(data);
-
-        [MethodImpl(Inline)]
         public void Update(BitMatrix<T> src)
             => src.data.CopyTo(data);
 
@@ -122,17 +124,9 @@ namespace Z0
             where S : unmanaged
                 => new BitMatrix<S>(data.As<T,S>());
          
-        [MethodImpl(Inline)]
-        public ref S HeadAs<S>()
-            where S : unmanaged
-                => ref Unsafe.As<T,S>(ref head(data));
 
-        [MethodImpl(Inline)]
-        public string Format()
-            => data.FormatMatrixBits();
-
-        public RowBits<T> ToRowBits()
-            => RowBits.load(data);
+        // public RowBits<T> ToRowBits()
+        //     => RowBits.load(data);
 
         public unsafe T* HeadPtr
         {

@@ -16,6 +16,22 @@ namespace Z0
     public class t_clmul : IntrinsicTest<t_clmul>
     {
 
+        //Cant get this to check
+        void pop_count_check()
+        {
+            for(var i=0; i< SampleSize; i++)
+            {
+                var x = Random.CpuVector<ushort>(n256);
+                var expect = AvxPops.pop64(x);
+                var actual = AvxPops.avxpop(x);
+                
+                Trace($"expect {expect}, actual {actual.Format()}");
+                if(i == 3)
+                    break;
+
+            }
+        }
+
         public void clmul_8u()
         {
             for(var i=0; i< SampleSize; i++)
@@ -30,8 +46,6 @@ namespace Z0
             }
             
         }
-
-
     }
 
 }

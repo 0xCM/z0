@@ -81,5 +81,20 @@ namespace Z0
             where T : unmanaged
                 => BitMatrix<M,N,T>.Load(src); 
 
+        /// <summary>
+        /// Loads an MxN natural bitmatrix from an array
+        /// </summary>
+        /// <param name="src">The source array</param>
+        /// <param name="n">The matrix order</param>
+        /// <typeparam name="N">The matrix order type</typeparam>
+        /// <typeparam name="T">The matrix cell type</typeparam>
+        [MethodImpl(NotInline)]
+        public static BitMatrix<M,N,T> load<M,N,T>(Span<T> src)        
+            where M : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
+            where T : unmanaged
+                => BitMatrix<M,N,T>.Load(src); 
+
+
     }
 }

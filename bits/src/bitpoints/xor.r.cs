@@ -42,18 +42,18 @@ namespace Z0
         [MethodImpl(Inline)]
         static void xor(in uint rA, in uint rB, ref uint rDst)
         {
-            const int segments = 4;
-            const int segsize = 8;
-            for(int i=0, offset = 0; i < segments; i++, offset += segsize)
+            const int partcount = 4;
+            const int partwidth = 8;
+            for(int i=0, offset = 0; i < partcount; i++, offset += partwidth)
                 ginx.vxor(n, in skip(in rA, offset), in skip(in rB, offset), ref seek(ref rDst, offset));
         }
 
         [MethodImpl(Inline)]
         static void xor(in ulong rA, in ulong rB, ref ulong rDst)
         {
-            const int segments = 16;
-            const int segsize = 4;
-            for(int i=0, offset = 0; i < segments; i++, offset += segsize)
+            const int partcount = 16;
+            const int partwidth = 4;
+            for(int i=0, offset = 0; i < partcount; i++, offset += partwidth)
                 ginx.vxor(n, in skip(in rA, offset), in skip(in rB, offset), ref seek(ref rDst, offset));
         }
 

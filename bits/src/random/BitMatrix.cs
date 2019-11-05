@@ -158,9 +158,18 @@ namespace Z0
             where N : unmanaged,ITypeNat
             where T : unmanaged
         {
-            var map = GridLayout.map(m,n,zero);
-            var data = random.Span<T>(map.Segments);
-            return Z0.BitGrid.load(data, m, n);
+            var grid = Z0.BitGrid.alloc(m,n,zero);
+            random.StreamTo(grid.SegCount, ref grid.Head);
+            return grid;
+        }
+
+        [MethodImpl(Inline)]
+        public static BitGrid<T> BitGrid<T>(this IPolyrand random, int rows, int cols)
+            where T : unmanaged
+        {
+            var grid = Z0.BitGrid.alloc<T>(rows,cols);
+            random.StreamTo(grid.SegCount, ref grid.Head);
+            return grid;
         }
 
         /// <summary>
@@ -177,7 +186,7 @@ namespace Z0
             where N : unmanaged,ITypeNat
             where T : unmanaged
         {
-            random.StreamTo(dst.BitMap.Segments, ref dst.Head);
+            random.StreamTo(dst.BitMap.StorageSegs, ref dst.Head);
             return dst;
         }
 

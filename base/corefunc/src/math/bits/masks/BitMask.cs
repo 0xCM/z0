@@ -597,17 +597,107 @@ namespace Z0
         /// Aligns an index-identified bit in a source value with a supplied bit value
         /// </summary>
         /// <param name="src">The source</param>
-        /// <param name="index">The source bit index</param>
-        /// <param name="value">The state with which to align a source bit</param>
+        /// <param name="pos">The source bit index</param>
+        /// <param name="state">The state with which to align a source bit</param>
         [MethodImpl(Inline)]
-        public static ref byte set(ref byte src, byte index, bit value)            
+        public static ref byte set(ref byte src, byte pos, bit state)            
         {
-            if(value) 
-                enable(ref src, index);
-            else 
-                disable(ref src, index);
+            var c = ~(byte)state + 1;
+            src ^= (byte)((c ^ src) & (1 << pos));
             return ref src;
         }
+        
+        /// <summary>
+        /// Aligns an index-identified bit in a source value with a supplied bit value
+        /// </summary>
+        /// <param name="src">The source</param>
+        /// <param name="pos">The source bit index</param>
+        /// <param name="state">The state with which to align a source bit</param>
+        [MethodImpl(Inline)]
+        public static ref sbyte set(ref sbyte src, byte pos, bit state)            
+        {
+            var c = ~(sbyte)state + 1;
+            src ^= (sbyte)((c ^ src) & (1 << pos));
+            return ref src;
+        }
+
+        /// <summary>
+        /// Aligns an index-identified bit in a source value with a supplied bit value
+        /// </summary>
+        /// <param name="src">The source</param>
+        /// <param name="pos">The source bit index</param>
+        /// <param name="state">The state with which to align a source bit</param>
+        [MethodImpl(Inline)]
+        public static ref short set(ref short src, byte pos, bit state)            
+        {
+            var c = ~(short)state + 1;
+            src ^= (short)((c ^ src) & (1 << pos));
+            return ref src;
+        }
+
+        /// <summary>
+        /// Aligns an index-identified bit in a source value with a supplied bit value
+        /// </summary>
+        /// <param name="src">The source</param>
+        /// <param name="pos">The source bit index</param>
+        /// <param name="state">The state with which to align a source bit</param>
+        [MethodImpl(Inline)]
+        public static ref ushort set(ref ushort src, byte pos, bit state)            
+        {
+            var c = ~(ushort)state + 1;
+            src ^= (ushort)((c ^ src) & (1 << pos));
+            return ref src;
+        }
+
+        /// <summary>
+        /// Aligns an index-identified bit in a source value with a supplied bit value
+        /// </summary>
+        /// <param name="src">The source</param>
+        /// <param name="pos">The source bit index</param>
+        /// <param name="state">The state with which to align a source bit</param>
+        [MethodImpl(Inline)]
+        public static ref int set(ref int src, byte pos, bit state)            
+        {
+            var c = ~(int)state + 1;
+            src ^= (c ^ src) & (1 << pos);
+            return ref src;
+        }
+
+        /// <summary>
+        /// Aligns an index-identified bit in a source value with a supplied bit value
+        /// </summary>
+        /// <param name="src">The source</param>
+        /// <param name="pos">The source bit index</param>
+        /// <param name="state">The state with which to align a source bit</param>
+        [MethodImpl(Inline)]
+        public static ref uint set(ref uint src, byte pos, bit state)            
+        {
+            var c = ~(uint)state + 1u;
+            src ^= (c ^ src) & (1u << pos);
+            return ref src;
+        }
+
+        /// <summary>
+        /// Aligns an index-identified bit in a source value with a supplied bit value
+        /// </summary>
+        /// <param name="src">The source</param>
+        /// <param name="pos">The source bit index</param>
+        /// <param name="state">The state with which to align a source bit</param>
+        [MethodImpl(Inline)]
+        public static ref long set(ref long src, byte pos, bit state)            
+        {
+            var c = ~(long)state + 1L;
+            src ^= (c ^ src) & (1L << pos);
+            return ref src;
+        }
+
+        // [MethodImpl(Inline)]
+        // public static ref ulong set(ref ulong src, byte pos, bit state)            
+        // {
+        //     if(state) enable(ref src, pos);
+        //     else disable(ref src, pos);
+        //     return ref src;
+        // }
 
         /// <summary>
         /// Aligns an index-identified bit in a source value with a supplied bit value
@@ -616,124 +706,13 @@ namespace Z0
         /// <param name="index">The source bit index</param>
         /// <param name="value">The state with which to align a source bit</param>
         [MethodImpl(Inline)]
-        public static ref sbyte set(ref sbyte src, byte index, bit value)            
+        public static ref ulong set(ref ulong src, byte pos, bit state)
         {
-            if(value) enable(ref src, index);
-            else disable(ref src, index);
+            var c = ~(ulong)state + 1ul;
+            src ^= (c ^ src) & (1ul << pos);
             return ref src;
         }
-
-        /// <summary>
-        /// Aligns an index-identified bit in a source value with a supplied bit value
-        /// </summary>
-        /// <param name="src">The source</param>
-        /// <param name="index">The source bit index</param>
-        /// <param name="value">The state with which to align a source bit</param>
-        [MethodImpl(Inline)]
-        public static ref short set(ref short src, byte index, bit value)            
-        {
-            if(value) enable(ref src, index);
-            else disable(ref src, index);
-            return ref src;
-        }
-
-        /// <summary>
-        /// Aligns an index-identified bit in a source value with a supplied bit value
-        /// </summary>
-        /// <param name="src">The source</param>
-        /// <param name="index">The source bit index</param>
-        /// <param name="value">The state with which to align a source bit</param>
-        [MethodImpl(Inline)]
-        public static ref ushort set(ref ushort src, byte index, bit value)            
-        {
-            if(value) enable(ref src, index);
-            else disable(ref src, index);
-            return ref src;
-        }
-
-        /// <summary>
-        /// Aligns an index-identified bit in a source value with a supplied bit value
-        /// </summary>
-        /// <param name="src">The source</param>
-        /// <param name="index">The source bit index</param>
-        /// <param name="value">The state with which to align a source bit</param>
-        [MethodImpl(Inline)]
-        public static ref int set(ref int src, byte index, bit value)            
-        {
-            if(value) enable(ref src, index);
-            else disable(ref src, index);
-            return ref src;
-        }
-
-        /// <summary>
-        /// Aligns an index-identified bit in a source value with a supplied bit value
-        /// </summary>
-        /// <param name="src">The source</param>
-        /// <param name="index">The source bit index</param>
-        /// <param name="value">The state with which to align a source bit</param>
-        [MethodImpl(Inline)]
-        public static ref uint set(ref uint src, byte index, bit value)            
-        {
-            if(value) enable(ref src, index);
-            else disable(ref src, index);
-            return ref src;
-        }
-
-        /// <summary>
-        /// Aligns an index-identified bit in a source value with a supplied bit value
-        /// </summary>
-        /// <param name="src">The source</param>
-        /// <param name="index">The source bit index</param>
-        /// <param name="value">The state with which to align a source bit</param>
-        [MethodImpl(Inline)]
-        public static ref long set(ref long src, byte index, bit value)            
-        {
-            if(value) enable(ref src, index);
-            else disable(ref src, index);
-            return ref src;
-        }
-
-        /// <summary>
-        /// Aligns an index-identified bit in a source value with a supplied bit value
-        /// </summary>
-        /// <param name="src">The source</param>
-        /// <param name="index">The source bit index</param>
-        /// <param name="value">The state with which to align a source bit</param>
-        [MethodImpl(Inline)]
-        public static ref ulong set(ref ulong src, byte index, bit value)            
-        {
-            if(value) enable(ref src, index);
-            else disable(ref src, index);
-            return ref src;
-        }
-
-        /// <summary>
-        /// Aligns an index-identified bit in a source value with a supplied bit value
-        /// </summary>
-        /// <param name="src">The source</param>
-        /// <param name="index">The source bit index</param>
-        /// <param name="value">The state with which to align a source bit</param>
-        [MethodImpl(Inline)]
-        public static ref float set(ref float src, byte index, bit value)            
-        {
-            if(value) enable(ref src, index);
-            else disable(ref src, index);
-            return ref src;
-        }
-
-        /// <summary>
-        /// Aligns an index-identified bit in a source value with a supplied bit value
-        /// </summary>
-        /// <param name="src">The source</param>
-        /// <param name="index">The source bit index</param>
-        /// <param name="value">The state with which to align a source bit</param>
-        [MethodImpl(Inline)]
-        public static ref double set(ref double src, byte index, bit value)            
-        {
-            if(value) enable(ref src, index);
-            else disable(ref src, index);
-            return ref src;
-        }
+        
 
         /// <summary>
         /// Enaables a bit in the target if it is enabled in the source

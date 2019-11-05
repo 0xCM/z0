@@ -10,7 +10,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
     using System.Runtime.Intrinsics.X86;
 
-    partial class inxvoc
+    partial class inxoc
     {
         public static bool vtestz_d128x8i(Vector128<sbyte> src, Vector128<sbyte> mask)
             => dinx.vtestz(src,mask);

@@ -13,17 +13,6 @@ namespace Z0
  
     using static zfunc;
 
-    partial class inxsoc
-    {
-        public static UInt128 clmul(ulong x, ulong y)
-            => Cl.clmul(x,y);
-
-        public static ref UInt128 clmul(ulong x, ulong y, ref UInt128 dst)
-            => ref Cl.clmul(x,y, ref dst);
-
-        public static ulong clmulr8u(ulong a, ulong b, ulong poly)
-            => Cl.clmulr8u(a,b,poly);
-    }
 
     public static class Cl
     {

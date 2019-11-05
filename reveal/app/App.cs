@@ -97,9 +97,7 @@ namespace Z0
         void Disassemble(bool asm, bool cil)
         {
             Disassemble(new ExperimentalScenarios());
-            Disassemble(typeof(inxsoc));    
-            Disassemble(typeof(inxvoc));    
-            Disassemble(typeof(inxcoc));   
+            Disassemble(typeof(inxoc));    
             Disassemble(typeof(pmoc));    
             Disassemble(typeof(zfoc));    
             Disassemble(typeof(fpoc));    
@@ -107,6 +105,7 @@ namespace Z0
             Disassemble(typeof(bvoc));    
             Disassemble(typeof(bmoc));    
             Disassemble(typeof(convoc));   
+            Disassemble(typeof(bgoc));   
             Disassemble(typeof(SimdPack));
             Disassemble(typeof(logixoc));
             Disassemble(typeof(BitParts));  

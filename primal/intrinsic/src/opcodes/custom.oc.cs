@@ -10,7 +10,7 @@ namespace Z0
 
     using static zfunc;    
     
-    partial class inxcoc
+    partial class inxoc
     {                
 
         public static void avxpack(ref uint src, ref uint dst)
@@ -21,8 +21,6 @@ namespace Z0
         public static ulong sum_256x64u(Vector128<ulong> src)
             => dinx.vsum(src);
 
-        public static Vector256<ulong> avxpop(Vector256<ulong> src)
-            => AvxPops.genpop(src);
 
         public static ulong avxpop_csa(in ulong src)
             => AvxPops.popcsa_1(in src);

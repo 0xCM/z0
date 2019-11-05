@@ -14,15 +14,15 @@ namespace Z0
  
     partial class gbits
     {    
-        [MethodImpl(Inline)]
-        public static bit dot<T>(Vector128<T> x, Vector128<T> y)
-            where T : unmanaged
-                => Bits.dot(x.AsUInt64(), y.AsUInt64());
+        // [MethodImpl(Inline)]
+        // public static bit dot<T>(Vector128<T> x, Vector128<T> y)
+        //     where T : unmanaged
+        //         => Bits.dot(x.AsUInt64(), y.AsUInt64());
 
-        [MethodImpl(Inline)]
-        public static bit dot<T>(Vector256<T> x, Vector256<T> y)
-            where T : unmanaged
-                => Bits.dot(x.AsUInt64(), y.AsUInt64());
+        // [MethodImpl(Inline)]
+        // public static bit dot<T>(Vector256<T> x, Vector256<T> y)
+        //     where T : unmanaged
+        //         => Bits.dot(x.AsUInt64(), y.AsUInt64());
 
     }
 

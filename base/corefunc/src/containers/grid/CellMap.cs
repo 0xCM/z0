@@ -45,7 +45,7 @@ namespace Z0
 
 
         [MethodImpl(Inline)]
-        public CellMap(CellIndex index, ushort row, ushort col)
+        public CellMap(in CellIndex index, ushort row, ushort col)
         {
             this.Row = row;
             this.Col = col;
@@ -54,6 +54,15 @@ namespace Z0
             this.Position = index.Position;
         }
 
+        [MethodImpl(Inline)]
+        public CellMap(uint pos, ushort seg, ushort offset, ushort row, ushort col)
+        {
+            this.Row = row;
+            this.Col = col;
+            this.Segment = seg;
+            this.Offset = offset;
+            this.Position = pos;
+        }
 
         public string Format()
             => $"({Row},{Col},{Position})";

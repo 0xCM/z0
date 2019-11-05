@@ -90,7 +90,15 @@ namespace Z0
         /// <param name="src">The source bit</param>
         [MethodImpl(Inline)]
         public static explicit operator byte(bit src)
-            => src.AsUInt8();
+            => (byte)src.state;
+
+        /// <summary>
+        /// Defines an explicit bit -> byte conversion
+        /// </summary>
+        /// <param name="src">The source bit</param>
+        [MethodImpl(Inline)]
+        public static explicit operator sbyte(bit src)
+            => (sbyte)src.state;
 
         /// <summary>
         /// Defines an explicit byte -> bit conversion
@@ -106,7 +114,15 @@ namespace Z0
         /// <param name="src">The source bit</param>
         [MethodImpl(Inline)]
         public static explicit operator ushort(bit src)
-            => src.AsUInt16();
+            => (ushort)src.state;
+
+        /// <summary>
+        /// Defines an explicit bit -> ushort conversion
+        /// </summary>
+        /// <param name="src">The source bit</param>
+        [MethodImpl(Inline)]
+        public static explicit operator short(bit src)
+            => (short)src.state;
 
         /// <summary>
         /// Defines an explicit ushort -> bit conversion
@@ -123,6 +139,22 @@ namespace Z0
         [MethodImpl(Inline)]
         public static explicit operator uint(bit src)
             => src.state;
+
+        /// <summary>
+        /// Defines an explicit bit -> long conversion
+        /// </summary>
+        /// <param name="src">The source bit</param>
+        [MethodImpl(Inline)]
+        public static explicit operator long(bit src)
+            => src.state;
+
+        /// <summary>
+        /// Defines an explicit bit -> int conversion
+        /// </summary>
+        /// <param name="src">The source bit</param>
+        [MethodImpl(Inline)]
+        public static explicit operator int(bit src)
+            => (int)src.state;
 
         /// <summary>
         /// Defines an explicit uint -> bit conversion
@@ -348,34 +380,6 @@ namespace Z0
         public bool Equals(bit b)
             => state == b.state;
         
-        /// <summary>
-        /// Presents the bit state as an 8-bit unsigned integer
-        /// </summary>
-        [MethodImpl(Inline)]
-        public byte AsUInt8()
-            => (byte)state;            
-
-        /// <summary>
-        /// Presents the bit state as a 16-bit unsigned integer
-        /// </summary>
-        [MethodImpl(Inline)]
-        public ushort AsUInt16()
-            => (ushort)state;
-
-        /// <summary>
-        /// Presents the bit state as a 32-bit unsigned integer
-        /// </summary>
-        [MethodImpl(Inline)]
-        public uint AsUInt32()
-            => state;
-
-        /// <summary>
-        /// Presents the bit state as a 64-bit unsigned integer
-        /// </summary>
-        [MethodImpl(Inline)]
-        public ulong AsUInt64()
-            => state;
-
         public override bool Equals(object b)
             => b is bit x && Equals(x);
 

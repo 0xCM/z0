@@ -51,35 +51,6 @@ namespace Z0.Test
             }
         }
 
-        public void dot_128x64u_check()
-        {
-            for(var i=0; i<SampleSize; i++)
-            {
-                var a = Random.BitVector(n64);
-                var b = Random.BitVector(n64);
-                var x = dinx.vparts(a,0ul);
-                var y = dinx.vparts(b,0ul);
-                var actual = Bits.dot(x,y);
-                var expect = BitVector.dot(a,b);
-                Claim.eq(actual,expect);
-            }
-        }
-
-        public void dot_256x64u_check()
-        {
-            for(var i=0; i<SampleSize; i++)
-            {
-                var x = dinx.vinsert(Random.CpuVector<ulong>(n128), default,0);
-                var y = dinx.vinsert(Random.CpuVector<ulong>(n128), default,0);
-                var actual = gbits.dot(x,y);
-
-                var x0 = dinx.vlo(x);
-                var y0 = dinx.vlo(y);
-                var expect = gbits.dot(x0,y0);
-                Claim.eq(actual,expect);
-                
-            }
-        }
 
         public void dot_generic_check()
         {

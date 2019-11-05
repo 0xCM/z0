@@ -16,7 +16,7 @@ namespace Z0
     using static zfunc;
     using static As;
 
-    partial class inxvoc
+    partial class inxoc
     {
         public static Vector128<short> vblend_128x16u_LLLLLLLL(Vector128<short> x, Vector128<short> y)        
             => dinx.vblend(x,y,Blend16x8.LLLLLLLL);

@@ -10,7 +10,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
     using System.Runtime.Intrinsics.X86;
 
-    partial class inxvoc
+    partial class inxoc
     {
 
         public static Vector128<byte> rotl_g128x8u(Vector128<byte> src, byte offset)

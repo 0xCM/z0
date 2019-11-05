@@ -11,7 +11,7 @@ namespace Z0
 
     using static zfunc;    
 
-    partial class inxvoc
+    partial class inxoc
     {
         public static byte vextract_128x8u_0(Vector128<byte> src)
             => ginx.vextract(src,n0);

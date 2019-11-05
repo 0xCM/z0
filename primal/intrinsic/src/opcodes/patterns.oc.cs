@@ -12,7 +12,7 @@ namespace Z0
 
     using static zfunc;
 
-    partial class inxvoc
+    partial class inxoc
     {
         public static Vector128<byte> ones_128x8u()
             => ginx.vones<byte>(n128);

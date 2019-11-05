@@ -43,6 +43,15 @@ namespace Z0
         [MethodImpl(Inline)]
         public static uint div(uint a)
             => ModOps.div(M, N, a);
+
+        [MethodImpl(Inline)]
+        public static int mod(int a)
+            => (int)ModOps.mod(M, N, (uint)a);
+
+        [MethodImpl(Inline)]
+        public static int div(int a)
+            => (int)ModOps.div(M, N, (uint)a);
+
     }
 
     public static class Mod16

@@ -206,6 +206,16 @@ namespace Z0
         internal static string FormatMatrixBits(this ulong[] src, int rowlen)            
             => src.AsSpan().AsBytes().FormatMatrixBits(rowlen);
 
+        [MethodImpl(Inline)]
+        public static string Format<T>(this BitMatrix<T> src)
+            where T : unmanaged
+                => src.Data.FormatMatrixBits();
+
+        [MethodImpl(Inline)]
+        public static RowBits<T> ToRowBits<T>(this BitMatrix<T> src)
+            where T : unmanaged
+                => RowBits.load(src.Data);
+
         /// <summary>
         /// Exracts a contiguous bitstring that captures the defined matrix
         /// </summary>

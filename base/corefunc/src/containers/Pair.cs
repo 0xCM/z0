@@ -28,7 +28,7 @@ namespace Z0
     /// <summary>
     /// A pair. That's it.
     /// </summary>
-    public ref struct Pair<T>
+    public struct Pair<T>
         where T : unmanaged
     {
         [MethodImpl(Inline)]

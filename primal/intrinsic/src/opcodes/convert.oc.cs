@@ -11,7 +11,7 @@ namespace Z0
 
     using static zfunc;    
 
-    partial class inxvoc
+    partial class inxoc
     {
         //vpmovsxbw
         public static ref Vector128<short> vconvert_128x8i_to_128x16i(Vector128<sbyte> src, out Vector128<short> dst)        

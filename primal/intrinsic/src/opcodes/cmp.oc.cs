@@ -12,7 +12,7 @@ namespace Z0
 
     using static zfunc;
 
-    partial class inxvoc
+    partial class inxoc
     {
 
         public static Vector128<int> vcmplt_128x32i(Vector128<int> x, Vector128<int> y)

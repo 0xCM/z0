@@ -10,55 +10,29 @@ namespace Z0
 
     using static zfunc;
 
-    public unsafe ref struct BitGrid2
-    {
-        Span<byte> data;
-
-        [MethodImpl(Inline)]
-        internal BitGrid2(Span<byte> data)
-        {
-            this.data = data;
-        }
-
-        public ref byte Head
-        {
-            [MethodImpl(Inline)]
-            get => ref head(data);
-        }
-
-        public int SegCount
-        {
-            [MethodImpl(Inline)]
-            get => data.Length;
-        }
-
-        public unsafe byte* HeadPtr
-        {
-            [MethodImpl(Inline)]
-            get => As.refptr(ref head(data));
-        }
-
-    }
-
     /// <summary>
-    /// Defines a bitgrid of natural dimensions over a primal type
+    /// Defines a grid of bits over a contiguous sequence of primal values
     /// </summary>
-    public ref struct BitGrid<M,N,T>
-        where M : unmanaged, ITypeNat
-        where N : unmanaged, ITypeNat
+    public ref struct BitGrid<T>
         where T : unmanaged
     {        
-
+        
         Span<T> data;
 
-        GridMap bitmap;
+        GridMap map;
                 
+        readonly int M;
+
+        readonly int N;
+
 
         [MethodImpl(Inline)]
-        internal BitGrid(Span<T> data, GridMap layout)
+        internal BitGrid(Span<T> data, GridMap map)
         {
             this.data = data;
-            this.bitmap = layout;
+            this.map = map;
+            this.M = map.RowCount;
+            this.N = map.ColCount;
         }
 
         public Span<T> Data
@@ -76,7 +50,7 @@ namespace Z0
         public GridMap BitMap
         {
             [MethodImpl(Inline)]
-            get => bitmap;
+            get => map;
         }
         
         public int SegCount
@@ -88,10 +62,10 @@ namespace Z0
         public bit this[int row, int col]
         {
             [MethodImpl(Inline)]
-            get => GetState(row,col);
+            get => BitGrid.bitread(in Head, M, N, row, col);
 
             [MethodImpl(Inline)]
-            set => SetState(row,col,value);
+            set => BitGrid.bitset(ref Head, M, N, row, col, value);
         }
 
         public bit this[int pos]
@@ -103,13 +77,14 @@ namespace Z0
             set => SetState(pos, value);
         }
 
+
         [MethodImpl(Inline)]
         public ref readonly CellMap CellMap(int row, int col)
-            => ref bitmap.Cell(row,col);
+            => ref map.Cell(row,col);
 
         [MethodImpl(Inline)]
         public ref readonly CellMap CellMap(int pos)
-            => ref bitmap.Cell(pos);
+            => ref map.Cell(pos);
             
         [MethodImpl(Inline)]
         public bit GetState(int row, int col)
@@ -140,17 +115,10 @@ namespace Z0
             => gbits.set(ref Segment(cell.Segment), (byte)cell.Offset, state);
 
         public string Format()
-            => data.FormatMatrixBits((int)bitmap.ColCount);
+            => data.FormatMatrixBits((int)map.ColCount);
 
         [MethodImpl(Inline)]
-        public bool Equals(BitGrid<M,N,T> rhs)
+        public bool Equals(BitGrid<T> rhs)
             => data.Identical(rhs.data);
- 
-        public unsafe T* HeadPtr
-        {
-            [MethodImpl(Inline)]
-            get => As.refptr(ref head(data));
-        }
-
     }
 }

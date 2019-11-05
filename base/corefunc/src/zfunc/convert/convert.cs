@@ -134,13 +134,13 @@ partial class zfunc
         where T : unmanaged
     {
         if(typeof(T) == typeof(byte))
-            return generic<T>(src.AsUInt8());
+            return generic<T>((byte)src);
         else if(typeof(T) == typeof(ushort))
-            return generic<T>(src.AsUInt16());
+            return generic<T>((ushort)src);
         else if(typeof(T) == typeof(uint))
-            return generic<T>(src.AsUInt32());
+            return generic<T>((uint)src);
         else if(typeof(T) == typeof(ulong))
-            return generic<T>(src.AsUInt64());
+            return generic<T>((ulong)src);
         else
             throw unsupported<T>();
     }

@@ -11,7 +11,7 @@ namespace Z0
 
     using static zfunc;    
 
-    partial class inxvoc
+    partial class inxoc
     {
         public static Vector256<int> vpermvar8x32_256x32i(Vector256<int> src, Vector256<int> spec)
             => dinx.vpermvar8x32(src,spec);

@@ -17,12 +17,13 @@ namespace Z0
     {                
 
         /// <summary>
-        /// Multiplies two two 256-bit/u64 vectors to yield a 256-bit/u64 vector
+        /// Multiplies two two 256-bit/u64 vectors to yield a 256-bit/u64 vector; only provides reasonable
+        /// results if there's no 64-bit overflow
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vector256<ulong> vmul(Vector256<ulong> x, Vector256<ulong> y)    
+        static Vector256<ulong> vmul(Vector256<ulong> x, Vector256<ulong> y)    
         {
             var loMask = vbroadcast(n256, 0x00000000fffffffful);                
             var xh = v32u(vsrl(x, 32));
@@ -99,7 +100,7 @@ namespace Z0
         /// <param name="lhs">The left operand</param>
         /// <param name="rhs">The right operand</param>
         [MethodImpl(Inline)]
-        public static Vec128<ulong> clmul(Vector128<ulong> a, Vector128<ulong> b)
+        public static Vector128<ulong> clmul(Vector128<ulong> a, Vector128<ulong> b)
             => CarrylessMultiply(a,b,0x00);
 
         /// __m128i _mm_clmulepi64_si128 (__m128i a, __m128i b, const int imm8) PCLMULQDQ xmm, xmm/m128, imm8
@@ -153,12 +154,10 @@ namespace Z0
             prod = vxor(prod, clmul(vsrl(prod, 64), poly, ClMulMask.X00));
             return prod;
         }
-
     }
 
     /// <summary>
-    /// Defines a mask that specifies the left/right vector components from which
-    /// a carry-less product will be formed
+    /// Defines a mask that specifies the left/right vector components from which a carry-less product will be formed
     /// </summary>
     public enum ClMulMask : byte
     {

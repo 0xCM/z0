@@ -63,7 +63,7 @@ namespace Z0
     /// <summary>
     /// Opcodes for intrinsic vectorized operations
     /// </summary>
-    public static partial class inxvoc
+    public static partial class inxoc
     {
 
     }
@@ -71,7 +71,7 @@ namespace Z0
     /// <summary>
     /// Opcodes for intrinsic scalar operations
     /// </summary>
-    public static partial class inxsoc    
+    public static partial class inxoc    
     {
 
     }
@@ -83,4 +83,10 @@ namespace Z0
     {
 
     }
+
+    public static partial class gparts
+    {
+        
+    }
+
 }

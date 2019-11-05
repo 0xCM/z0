@@ -84,6 +84,10 @@ namespace Z0
             => throw AppException.Define(reason, caller,file,line);
 
         [MethodImpl(NotInline)]
+        public static bool ThrowInvariantFailure(string reason)
+            => throw new Exception(reason);
+
+        [MethodImpl(NotInline)]
         public static T ThrowOutOfRange<T>(int index, int min, int max, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => throw OutOfRange(index, min, max, caller, file, line);
 

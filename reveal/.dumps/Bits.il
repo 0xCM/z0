@@ -1,36 +1,4 @@
-// 2019-11-04 05:50:16:457
-sbyte toggle(sbyte src, int pos)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldc.i4.1
-    IL_0002: ldarg.1
-    IL_0003: ldc.i4.s 31
-    IL_0005: and
-    IL_0006: shl
-    IL_0007: conv.i1
-    IL_0008: xor
-    IL_0009: conv.i1
-    IL_000A: dup
-    IL_000B: starg.s src
-    IL_000D: ret
-
-}
-byte toggle(byte src, int pos)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldc.i4.1
-    IL_0002: ldarg.1
-    IL_0003: ldc.i4.s 31
-    IL_0005: and
-    IL_0006: shl
-    IL_0007: conv.u1
-    IL_0008: xor
-    IL_0009: conv.u1
-    IL_000A: dup
-    IL_000B: starg.s src
-    IL_000D: ret
-
-}
+// 2019-11-05 06:49:44:538
 short toggle(short src, int pos)
 {
     IL_0000: ldarg.0
@@ -871,20 +839,6 @@ ref ulong xorsr(ref ulong src, int offset)
     IL_000B: stind.i8
     IL_000C: ldarg.0
     IL_000D: ret
-
-}
-ushort lo(uint src)
-{
-    IL_0000: ldarg.0
-    IL_0001: conv.u2
-    IL_0002: ret
-
-}
-int lo(long src)
-{
-    IL_0000: ldarg.0
-    IL_0001: conv.i4
-    IL_0002: ret
 
 }
 uint lo(ulong src)
@@ -2958,46 +2912,36 @@ bool test(double src, int pos)
     IL_000C: ret
 
 }
-bit dot(Vector128<ulong> x, Vector128<ulong> y)
+sbyte toggle(sbyte src, int pos)
 {
     IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.dinx::vand(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
-    IL_0007: ldloca.s V_0
-    IL_0009: initobj Z0.N128
-    IL_000F: ldloc.0
-    IL_0010: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.AvxPops::avxpop(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,Z0.N128)
-    IL_0015: ldc.i4.0
-    IL_0016: call System.UInt64 Z0.dinx::vextract(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Byte)
-    IL_001B: call Z0.bit zfunc::odd(System.UInt64)
-    IL_0020: ret
+    IL_0001: ldc.i4.1
+    IL_0002: ldarg.1
+    IL_0003: ldc.i4.s 31
+    IL_0005: and
+    IL_0006: shl
+    IL_0007: conv.i1
+    IL_0008: xor
+    IL_0009: conv.i1
+    IL_000A: dup
+    IL_000B: starg.s src
+    IL_000D: ret
 
 }
-bit dot(Vector256<ulong> x, Vector256<ulong> y)
+byte toggle(byte src, int pos)
 {
     IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.dinx::vand(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
-    IL_0007: ldloca.s V_3
-    IL_0009: initobj Z0.N256
-    IL_000F: ldloc.3
-    IL_0010: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.AvxPops::avxpop(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,Z0.N256)
-    IL_0015: stloc.0
-    IL_0016: ldloc.0
-    IL_0017: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.dinx::vlo(System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
-    IL_001C: ldc.i4.0
-    IL_001D: call System.UInt64 Z0.dinx::vextract(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Byte)
-    IL_0022: stloc.1
-    IL_0023: ldloc.0
-    IL_0024: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.dinx::vhi(System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
-    IL_0029: ldc.i4.0
-    IL_002A: call System.UInt64 Z0.dinx::vextract(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Byte)
-    IL_002F: stloc.2
-    IL_0030: ldloc.1
-    IL_0031: ldloc.2
-    IL_0032: add
-    IL_0033: call Z0.bit zfunc::odd(System.UInt64)
-    IL_0038: ret
+    IL_0001: ldc.i4.1
+    IL_0002: ldarg.1
+    IL_0003: ldc.i4.s 31
+    IL_0005: and
+    IL_0006: shl
+    IL_0007: conv.u1
+    IL_0008: xor
+    IL_0009: conv.u1
+    IL_000A: dup
+    IL_000B: starg.s src
+    IL_000D: ret
 
 }
 Vec128<sbyte> vpackss(in Vec128<short> lhs, in Vec128<short> rhs)
@@ -4751,6 +4695,20 @@ short lo(int src)
 {
     IL_0000: ldarg.0
     IL_0001: conv.i2
+    IL_0002: ret
+
+}
+ushort lo(uint src)
+{
+    IL_0000: ldarg.0
+    IL_0001: conv.u2
+    IL_0002: ret
+
+}
+int lo(long src)
+{
+    IL_0000: ldarg.0
+    IL_0001: conv.i4
     IL_0002: ret
 
 }
