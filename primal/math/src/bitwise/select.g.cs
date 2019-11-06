@@ -26,7 +26,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static T select<T>(T a, T b, T c)
             where T : unmanaged
-                //=> or(and(a, b), and(not(a), c));
                 => or(and(a,b), notimply(a,c));
     }
 

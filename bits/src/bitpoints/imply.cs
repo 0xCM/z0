@@ -10,66 +10,72 @@ namespace Z0
     using System.Runtime.Intrinsics;
     using System.Runtime.Intrinsics.X86;
     using static zfunc;
+    using static As;
+    using static AsIn;
 
-    partial class BitPoints
+    unsafe partial class BitPoints
     {
-
         [MethodImpl(Inline)]
-        public static unsafe void imply<T>(T* pA, T* pB, T* pDst)
+        public static void imply<T>(in T rA, in T rB, ref T rDst)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-               imply((byte*)pA, (byte*)pB, (byte*)pDst);
+               imply(in uint8(in rA), in uint8(in rB), ref uint8(ref rDst));
             else if(typeof(T) == typeof(ushort))
-                imply((ushort*)pA, (ushort*)pB, (ushort*)pDst);
+                gparts.imply(n, in rA, in rB, ref rDst);
             else if(typeof(T) == typeof(uint))
-                imply((uint*)pA, (uint*)pB, (uint*)pDst);
+                gparts.imply(n, 4, 8, in rA, in rB, ref rDst);
             else if(typeof(T) == typeof(ulong))
-                imply((ulong*)pA, (ulong*)pB, (ulong*)pDst);
+                gparts.imply(n, 16, 4, in rA, in rB, ref rDst);
             else
                 throw unsupported<T>();
         }
 
         [MethodImpl(Inline)]
-        static unsafe void imply(byte* pA, byte* pB, byte* pDst)
-            => content(math.imply(content(pA), content(pB)), pDst);
+        static unsafe void imply(in byte rA, in byte rB, ref byte rDst)
+            => content(math.imply(content(rA), content(rB)), ref rDst);
 
-        [MethodImpl(Inline)]
-        static unsafe void imply(ushort* pA, ushort* pB, ushort* pDst)
-            => ginx.vstore(ginx.vimply(n, pA, pB),pDst);
+        // [MethodImpl(Inline)]
+        // public static unsafe void imply<T>(in T rA, in T rB, ref T rDst)
+        //     where T : unmanaged
+        // {
+        //     if(typeof(T) == typeof(byte))
+        //        imply(in uint8(in rA), in uint8(in rB), ref uint8(ref rDst));
+        //     else if(typeof(T) == typeof(ushort))
+        //        imply(in uint16(in rA), in uint16(in rB), ref uint16(ref rDst));
+        //     else if(typeof(T) == typeof(uint))
+        //        imply(in uint32(in rA), in uint32(in rB), ref uint32(ref rDst));
+        //     else if(typeof(T) == typeof(ulong))
+        //        imply(in uint64(in rA), in uint64(in rB), ref uint64(ref rDst));
+        //     else
+        //         throw unsupported<T>();
+        // }
 
-        [MethodImpl(Inline)]
-        static unsafe void imply(uint* pA, uint* pB, uint* pDst)
-        {
-            const int step = 8;
-            ginx.vimply(n, pA,pB,pDst);
-            ginx.vimply(n, pA+=step,pB+=step,pDst+=step);
-            ginx.vimply(n, pA+=step,pB+=step,pDst+=step);
-            ginx.vimply(n, pA+=step,pB+=step,pDst+=step);
-        }
+        // [MethodImpl(Inline)]
+        // static unsafe void imply(in byte rA, in byte rB, ref byte rDst)
+        //     => content(math.imply(content(rA), content(rB)), ref rDst);
 
-        [MethodImpl(Inline)]
-        static unsafe void imply(ulong* pA, ulong* pB, ulong* pDst)
-        {
-            const int step = 4;
-            const int offset = step*8;            
-            imply8(pA, pB, pDst);
-            imply8(pA + offset, pB + offset, pDst + offset);
-        }
+        // [MethodImpl(Inline)]
+        // static void imply(in ushort rA, in ushort rB, ref ushort rDst)
+        //     => ginx.vimply(n, in rA, in rB, ref rDst);
+        
+        // [MethodImpl(Inline)]
+        // static void imply(in uint rA, in uint rB, ref uint rDst)
+        // {
+        //     const int segments = 4;
+        //     const int segsize = 8;
+        //     for(int i=0, offset = 0; i < segments; i++, offset += segsize)
+        //         ginx.vimply(n, in skip(in rA, offset), in skip(in rB, offset), ref seek(ref rDst, offset));
+        // }
 
-        [MethodImpl(Inline)]
-        static unsafe void imply8(ulong* pA, ulong* pB, ulong* pDst)
-        {            
-            const int step = 4;
-            ginx.vimply(n, pA, pB, pDst);
-            ginx.vimply(n, pA+=step, pB+=step,pDst+=step);
-            ginx.vimply(n, pA+=step, pB+=step,pDst+=step);
-            ginx.vimply(n, pA+=step, pB+=step,pDst+=step);
+        // [MethodImpl(Inline)]
+        // static void imply(in ulong rA, in ulong rB, ref ulong rDst)
+        // {
+        //     const int segments = 16;
+        //     const int segsize = 4;
+        //     for(int i=0, offset = 0; i < segments; i++, offset += segsize)
+        //         ginx.vimply(n, in skip(in rA, offset), in skip(in rB, offset), ref seek(ref rDst, offset));
+        // }
 
-            ginx.vimply(n, pA+=step, pB+=step,pDst+=step);
-            ginx.vimply(n, pA+=step, pB+=step,pDst+=step);
-            ginx.vimply(n, pA+=step, pB+=step,pDst+=step);
-            ginx.vimply(n, pA+=step, pB+=step,pDst+=step);
-        }        
     }
 }

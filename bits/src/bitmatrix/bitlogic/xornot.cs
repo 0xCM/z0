@@ -13,80 +13,80 @@ namespace Z0
     partial class BitMatrix
     {
         [MethodImpl(Inline)]
-        public static unsafe BitMatrix<T> xornot<T>(in BitMatrix<T> A, in BitMatrix<T> B)
+        public static BitMatrix<T> xornot<T>(in BitMatrix<T> A, in BitMatrix<T> B)
             where T : unmanaged
         {
-            var C = BitMatrix.alloc<T>();
-            BitPoints.xornot(A.HeadPtr,B.HeadPtr,C.HeadPtr);
-            return C;
+            var Z = BitMatrix.alloc<T>();
+            BitPoints.xornot(in A.Head, in B.Head, ref Z.Head);
+            return Z;
         }
 
         [MethodImpl(Inline)]
-        public static unsafe ref BitMatrix<T> xornot<T>(in BitMatrix<T> A, in BitMatrix<T> B, ref BitMatrix<T> C)
+        public static ref BitMatrix<T> xornot<T>(in BitMatrix<T> A, in BitMatrix<T> B, ref BitMatrix<T> Z)
             where T : unmanaged
         {
-            BitPoints.xornot(A.HeadPtr,B.HeadPtr,C.HeadPtr);
-            return ref C;
+            BitPoints.xornot(in A.Head, in B.Head, ref Z.Head);
+            return ref Z;
         }
 
         [MethodImpl(Inline)]
-        public static unsafe ref BitMatrix8 xornot(in BitMatrix8 A, in BitMatrix8 B, ref BitMatrix8 C)
+        public static ref BitMatrix8 xornot(in BitMatrix8 A, in BitMatrix8 B, ref BitMatrix8 Z)
         {
-            BitPoints.xornot(A.HeadPtr, B.HeadPtr, C.HeadPtr);
-            return ref C;
+            BitPoints.xornot(in A.Head, in B.Head, ref Z.Head);
+            return ref Z;
         }
 
         [MethodImpl(Inline)]
-        public static unsafe BitMatrix8 xornot(in BitMatrix8 A, in BitMatrix8 B)
+        public static BitMatrix8 xornot(in BitMatrix8 A, in BitMatrix8 B)
         {
-            var C = BitMatrix.alloc(n8);
-            BitPoints.xornot(A.HeadPtr, B.HeadPtr,C.HeadPtr);
-            return C;
+            var Z = BitMatrix.alloc(n8);
+            BitPoints.xornot(in A.Head, in B.Head, ref Z.Head);
+            return Z;
         }
 
         [MethodImpl(Inline)]
-        public static unsafe BitMatrix16 xornot(in BitMatrix16 A, in BitMatrix16 B)
+        public static BitMatrix16 xornot(in BitMatrix16 A, in BitMatrix16 B)
         {
-            var C = BitMatrix.alloc(n16);
-            BitPoints.xornot(A.HeadPtr,B.HeadPtr,C.HeadPtr);
-            return C;
+            var Z = BitMatrix.alloc(n16);
+            BitPoints.xornot(in A.Head, in B.Head, ref Z.Head);
+            return Z;
         }
 
         [MethodImpl(Inline)]
-        public static unsafe ref BitMatrix16 xornot(in BitMatrix16 A, in BitMatrix16 B, ref BitMatrix16 C)
+        public static ref BitMatrix16 xornot(in BitMatrix16 A, in BitMatrix16 B, ref BitMatrix16 Z)
         {
-            BitPoints.xornot(A.HeadPtr, B.HeadPtr, C.HeadPtr);
-            return ref C;
+            BitPoints.xornot(in A.Head, in B.Head, ref Z.Head);
+            return ref Z;
         }
 
         [MethodImpl(Inline)]
-        public static unsafe BitMatrix32 xornot(in BitMatrix32 A, in BitMatrix32 B)
+        public static BitMatrix32 xornot(in BitMatrix32 A, in BitMatrix32 B)
         {
-            var C = BitMatrix.alloc(n32);
-            BitPoints.xornot(A.HeadPtr,B.HeadPtr,C.HeadPtr);
-            return C;
+            var Z = BitMatrix.alloc(n32);
+            BitPoints.xornot(in A.Head, in B.Head, ref Z.Head);
+            return Z;
         }
 
         [MethodImpl(Inline)]
-        public static unsafe ref BitMatrix32 xornot(in BitMatrix32 A, in BitMatrix32 B, ref BitMatrix32 C)
+        public static ref BitMatrix32 xornot(in BitMatrix32 A, in BitMatrix32 B, ref BitMatrix32 Z)
         {
-            BitPoints.xornot(A.HeadPtr, B.HeadPtr, C.HeadPtr);
-            return ref C;
+            BitPoints.xornot(in A.Head, in B.Head, ref Z.Head);
+            return ref Z;
         }
 
          [MethodImpl(Inline)]
-        public static unsafe BitMatrix64 xornot(in BitMatrix64 A, in BitMatrix64 B)
+        public static BitMatrix64 xornot(in BitMatrix64 A, in BitMatrix64 B)
         {
-            var C = BitMatrix.alloc(n64);
-            BitPoints.xornot(A.HeadPtr,B.HeadPtr,C.HeadPtr);
-            return C;
+            var Z = BitMatrix.alloc(n64);
+            BitPoints.xornot(in A.Head, in B.Head, ref Z.Head);
+            return Z;
         }
 
         [MethodImpl(Inline)]
-        public static unsafe ref BitMatrix64 xornot(in BitMatrix64 A, in BitMatrix64 B, ref BitMatrix64 C)
+        public static ref BitMatrix64 xornot(in BitMatrix64 A, in BitMatrix64 B, ref BitMatrix64 Z)
         {
-            BitPoints.xornot(A.HeadPtr, B.HeadPtr, C.HeadPtr);
-            return ref C;
+            BitPoints.xornot(in A.Head, in B.Head, ref Z.Head);
+            return ref Z;
         }
    }
 

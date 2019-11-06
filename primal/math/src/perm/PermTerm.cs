@@ -12,8 +12,7 @@ namespace Z0
     using static zfunc;    
 
     /// <summary>
-    /// Describes an indivual term of a permutation p, i.e. the point 
-    /// of evaluation i and its image p(i)
+    /// Describes an indivual term of a permutation p: the point of evaluation i and its image p(i)
     /// </summary>
     public readonly struct PermTerm<T>
         where T : unmanaged

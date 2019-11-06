@@ -32,9 +32,21 @@ namespace Z0
         /// <param name="point">The point to test</param>
         /// <typeparam name="T">The interval primal type</typeparam>
         [MethodImpl(Inline)]
-        public static bool Contains<T>(IInterval<T> src, T point)
+        public static bit contains<T>(IInterval<T> src, T point)
             where T : unmanaged
-                => gmath.contains(src,point);
+        {
+            switch(src.Kind)
+            {
+                case IntervalKind.Closed:
+                    return gmath.gteq(point, src.Left) && gmath.lteq(point, src.Right);
+                case IntervalKind.Open:
+                    return gmath.gt(point, src.Left) && gmath.lt(point, src.Right);
+                case IntervalKind.LeftClosed:
+                    return gmath.gteq(point, src.Left) && gmath.lt(point, src.Right);
+                default:        
+                    return gmath.gt(point, src.Left) && gmath.lteq(point, src.Right);
+            }
+        }
 
         /// <summary>
         /// Partitions an interval predicated on partition count

@@ -17,12 +17,11 @@ namespace Z0
     public readonly struct GridSpec
     {
         [MethodImpl(Inline)]
-        public GridSpec(int rows, int cols, int segwidth, int points, int bytes, int bits, int segs)
+        public GridSpec(int rows, int cols, int segwidth, int bytes, int bits, int segs)
         {
             this.RowCount = rows;
             this.ColCount = cols;
             this.SegWidth = segwidth;
-            this.PointCount = points;
             this.StorageBytes = bytes;
             this.StorageBits = bits;
             this.StorageSegs = segs;
@@ -37,11 +36,6 @@ namespace Z0
         /// The number of grid columns
         /// </summary>
         public readonly int ColCount;
-
-        /// <summary>
-        /// The number of individuals covered by the grid
-        /// </summary>
-        public readonly int PointCount;
 
         /// <summary>
         /// The number of bits in a storage segment

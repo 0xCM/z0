@@ -15,11 +15,25 @@ namespace Z0
     {     
 
         [MethodImpl(Inline)]
+        public static void negate<T>(N256 n, in T a, ref T z)
+            where T : unmanaged
+        {
+            ginx.vnegate(n, in a, ref z);
+        }
+
+        [MethodImpl(Inline)]
         public static void negate<T>(N256 n, int partcount, int partwidth, in T a, ref T z)
             where T : unmanaged
         {
             for(int i=0, offset = 0; i < partcount; i++, offset += partwidth)
                 ginx.vnegate(n, in skip(in a, offset), ref seek(ref z, offset));
+        }
+
+        [MethodImpl(Inline)]
+        public static void inc<T>(N256 n, in T a, ref T z)
+            where T : unmanaged
+        {
+            ginx.vinc(n, in a, ref z);
         }
 
         [MethodImpl(Inline)]
@@ -31,11 +45,25 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
+        public static void dec<T>(N256 n, in T a, ref T z)
+            where T : unmanaged
+        {
+            ginx.vdec(n, in a, ref z);
+        }
+
+        [MethodImpl(Inline)]
         public static void vdec<T>(N256 n, int partcount, int partwidth, in T a, ref T z)
             where T : unmanaged
         {
             for(int i=0, offset = 0; i < partcount; i++, offset += partwidth)
                 ginx.vdec(n, in skip(in a, offset), ref seek(ref z, offset));
+        }
+
+        [MethodImpl(Inline)]
+        public static void not<T>(N256 n, in T a, ref T z)
+            where T : unmanaged
+        {
+            ginx.vnot(n, in a, ref z);
         }
 
         [MethodImpl(Inline)]
@@ -47,11 +75,25 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
+        public static void and<T>(N256 n, in T a, in T b, ref T z)
+            where T : unmanaged
+        {
+            ginx.vand(n, in a, in b, ref z);
+        }
+
+        [MethodImpl(Inline)]
         public static void and<T>(N256 n, int partcount, int partwidth, in T a, in T b, ref T z)
             where T : unmanaged
         {
             for(int i=0, offset = 0; i < partcount; i++, offset += partwidth)
                 ginx.vand(n, in skip(in a, offset), in skip(in b, offset), ref seek(ref z, offset));
+        }
+
+        [MethodImpl(Inline)]
+        public static void nand<T>(N256 n, in T a, in T b, ref T z)
+            where T : unmanaged
+        {
+            ginx.vnand(n, in a, in b, ref z);
         }
 
         [MethodImpl(Inline)]
@@ -63,11 +105,26 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
+        public static void or<T>(N256 n, in T a, in T b, ref T z)
+            where T : unmanaged
+        {
+            ginx.vor(n, in a, in b, ref z);
+        }
+
+        [MethodImpl(Inline)]
         public static void or<T>(N256 n, int partcount, int partwidth, in T a, in T b, ref T z)
             where T : unmanaged
         {
             for(int i=0, offset = 0; i < partcount; i++, offset += partwidth)
                 ginx.vor(n, in skip(in a, offset), in skip(in b, offset), ref seek(ref z, offset));
+        }
+
+
+        [MethodImpl(Inline)]
+        public static void nor<T>(N256 n, in T a, in T b, ref T z)
+            where T : unmanaged
+        {
+            ginx.vnor(n, in a, in b, ref z);
         }
 
         [MethodImpl(Inline)]
@@ -79,6 +136,13 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
+        public static void xor<T>(N256 n, in T a, in T b, ref T z)
+            where T : unmanaged
+        {
+            ginx.vxor(n, in a, in b, ref z);
+        }
+
+        [MethodImpl(Inline)]
         public static void xor<T>(N256 n, int partcount, int partwidth, in T a, in T b, ref T z)
             where T : unmanaged
         {
@@ -87,11 +151,25 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
+        public static void xnor<T>(N256 n, in T a, in T b, ref T z)
+            where T : unmanaged
+        {
+            ginx.vxnor(n, in a, in b, ref z);
+        }
+
+        [MethodImpl(Inline)]
         public static void xnor<T>(N256 n, int partcount, int partwidth, in T a, in T b, ref T z)
             where T : unmanaged
         {
             for(int i=0, offset = 0; i < partcount; i++, offset += partwidth)
-                ginx.vxor(n, in skip(in a, offset), in skip(in b, offset), ref seek(ref z, offset));
+                ginx.vxnor(n, in skip(in a, offset), in skip(in b, offset), ref seek(ref z, offset));
+        }
+
+        [MethodImpl(Inline)]
+        public static void imply<T>(N256 n, in T a, in T b, ref T z)
+            where T : unmanaged
+        {
+            ginx.vimply(n, in a, in b, ref z);
         }
 
         [MethodImpl(Inline)]
@@ -103,11 +181,25 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
+        public static void notimply<T>(N256 n, in T a, in T b, ref T z)
+            where T : unmanaged
+        {
+            ginx.vnotimply(n, in a, in b, ref z);
+        }
+
+        [MethodImpl(Inline)]
         public static void notimply<T>(N256 n, int partcount, int partwidth, in T a, in T b, ref T z)
             where T : unmanaged
         {
             for(int i=0, offset = 0; i < partcount; i++, offset += partwidth)
                 ginx.vnotimply(n, in skip(in a, offset), in skip(in b, offset), ref seek(ref z, offset));
+        }
+
+        [MethodImpl(Inline)]
+        public static void cimply<T>(N256 n, in T a, in T b, ref T z)
+            where T : unmanaged
+        {
+            ginx.vcimply(n, in a, in b, ref z);
         }
 
         [MethodImpl(Inline)]
@@ -119,11 +211,25 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
+        public static void cnotimply<T>(N256 n, in T a, in T b, ref T z)
+            where T : unmanaged
+        {
+            ginx.vcnotimply(n, in a, in b, ref z);
+        }
+
+        [MethodImpl(Inline)]
         public static void cnotimply<T>(N256 n, int partcount, int partwidth, in T a, in T b, ref T z)
             where T : unmanaged
         {
             for(int i=0, offset = 0; i < partcount; i++, offset += partwidth)
                 ginx.vcnotimply(n, in skip(in a, offset), in skip(in b, offset), ref seek(ref z, offset));
+        }
+
+        [MethodImpl(Inline)]
+        public static void select<T>(N256 n, in T a, in T b, in T c, ref T z)
+            where T : unmanaged
+        {
+            ginx.vselect(n, in a, in b, in c, ref z);
         }
 
         [MethodImpl(Inline)]
@@ -135,11 +241,25 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
+        public static void sll<T>(N256 n, in T a, byte count, ref T z)
+            where T : unmanaged
+        {
+            ginx.vsll(n, in a, count, ref z);
+        }
+
+        [MethodImpl(Inline)]
         public static void sll<T>(N256 n, int partcount, int partwidth, in T a, byte count, ref T z)
             where T : unmanaged
         {
             for(int i=0, offset = 0; i < partcount; i++, offset += partwidth)
                 ginx.vsll(n, in skip(in a, offset), count, ref seek(ref z, offset));
+        }
+
+        [MethodImpl(Inline)]
+        public static void srl<T>(N256 n, in T a, byte count, ref T z)
+            where T : unmanaged
+        {
+            ginx.vsrl(n, in a, count, ref z);
         }
 
         [MethodImpl(Inline)]
@@ -151,11 +271,25 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
+        public static void rotl<T>(N256 n, in T a, byte count, ref T z)
+            where T : unmanaged
+        {
+            ginx.vrotl(n, in a, count, ref z);
+        }
+
+        [MethodImpl(Inline)]
         public static void rotl<T>(N256 n, int partcount, int partwidth, in T a, byte count, ref T z)
             where T : unmanaged
         {
             for(int i=0, offset = 0; i < partcount; i++, offset += partwidth)
                 ginx.vrotl(n, in skip(in a, offset), count, ref seek(ref z, offset));
+        }
+
+        [MethodImpl(Inline)]
+        public static void rotr<T>(N256 n, in T a, byte count, ref T z)
+            where T : unmanaged
+        {
+            ginx.vrotr(n, in a, count, ref z);
         }
 
         [MethodImpl(Inline)]
@@ -167,11 +301,25 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
+        public static void bsll<T>(N256 n, in T a, byte count, ref T z)
+            where T : unmanaged
+        {
+            ginx.vbsll(n, in a, count, ref z);
+        }
+
+        [MethodImpl(Inline)]
         public static void bsll<T>(N256 n, int partcount, int partwidth, in T a, byte count, ref T z)
             where T : unmanaged
         {
             for(int i=0, offset = 0; i < partcount; i++, offset += partwidth)
                 ginx.vbsll(n, in skip(in a, offset), count, ref seek(ref z, offset));
+        }
+
+        [MethodImpl(Inline)]
+        public static void bsrl<T>(N256 n, in T a, byte count, ref T z)
+            where T : unmanaged
+        {
+            ginx.vbsrl(n, in a, count, ref z);
         }
 
         [MethodImpl(Inline)]

@@ -12,23 +12,15 @@ namespace Z0
 
     partial class pmoc
     {
-        public static sbyte one_n8i()
-            => 1;
-
-        public static sbyte one_g8i()
-            => gmath.one<sbyte>();
+        public static ulong altodd_u64
+            => gmath.altodd<ulong>();
+        
 
         public static byte one_n8u()
             => 1;
 
         public static byte one_g8u()
             => gmath.one<byte>();
-
-        public static short one_n16i()
-            => 1;
-
-        public static short one_g16i()
-            => gmath.one<short>();
 
         public static ushort one_n16u()
             => 1;

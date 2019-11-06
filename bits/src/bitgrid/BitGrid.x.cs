@@ -111,12 +111,33 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitString ToBitString<T>(this BitGrid<T> src)
             where T : unmanaged
-                => src.Data.ToBitString(src.BitMap.PointCount);
+                => src.Data.ToBitString(src.M * src.N);
 
         [MethodImpl(NotInline)]
         public static BitGrid<T> Replicate<T>(this BitGrid<T> src)
             where T : unmanaged
-                => new BitGrid<T>(src.Data.Replicate(), src.BitMap);
+                => new BitGrid<T>(src.Data.Replicate(), src.M, src.N);
+
+        public static string Format(this GridMap map, int? colpad = null, char? delimiter = null)
+            => BitGrid.format(map, colpad, delimiter);
+
+        public static string Format(this GridStats stats, int? colpad = null, char? delimiter = null)
+            => BitGrid.format(stats, colpad, delimiter);
+
+        /// <summary>
+        /// Calculates a grid layout from a specification
+        /// </summary>
+        /// <param name="spec">The grid specification that characterizes the layout</param>
+        /// <typeparam name="T">The storage type</typeparam>
+        public static GridMap Map(this GridSpec spec)
+            => BitGrid.map(spec);
+
+        public static GridStats Stats(this GridMap map)
+            => BitGrid.stats(map);
+
+        public static GridStats Stats(this GridSpec spec)
+            => BitGrid.stats(BitGrid.map(spec));
+
 
     }
 

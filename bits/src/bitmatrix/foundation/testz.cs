@@ -21,9 +21,9 @@ namespace Z0
         /// <param name="A">The source matrix</param>
         /// <typeparam name="T">The primal type over which the matrix is defined</typeparam>
         [MethodImpl(Inline)]
-        public static unsafe bool testz<T>(in BitMatrix<T> A)
+        public static bit testz<T>(in BitMatrix<T> A)
             where T : unmanaged
-                => BitPoints.testz(A.HeadPtr);
+                => BitPoints.testz(in A.Head, in A.Head);
 
         /// <summary>
         /// Returns true if all mask-identified bits in a matrix are disabled, false otherwise
@@ -32,17 +32,17 @@ namespace Z0
         /// <param name="M">The mask matrix</param>
         /// <typeparam name="T">The primal type over which the matrix is defined</typeparam>
         [MethodImpl(Inline)]
-        public static unsafe bool testz<T>(in BitMatrix<T> A, in BitMatrix<T> M)
+        public static bit testz<T>(in BitMatrix<T> A, in BitMatrix<T> M)
             where T : unmanaged
-                => BitPoints.testz(A.HeadPtr, M.HeadPtr);
+                => BitPoints.testz(in A.Head, in M.Head);
 
         /// <summary>
         /// Returns true if all bits in a matrix are disabled, false otherwise
         /// </summary>
         /// <param name="A">The source matrix</param>
         [MethodImpl(Inline)]
-        public static unsafe bool testz(in BitMatrix8 A)
-            => BitPoints.testz(A.HeadPtr);
+        public static bit testz(in BitMatrix8 A)
+            => BitPoints.testz(in A.Head, in A.Head);
 
         /// <summary>
         /// Returns true if all mask-identified bits in a matrix are disabled, false otherwise
@@ -50,16 +50,16 @@ namespace Z0
         /// <param name="A">The source matrix</param>
         /// <param name="M">The mask matrix</param>
         [MethodImpl(Inline)]
-        public static unsafe bool testz(in BitMatrix8 A, in BitMatrix8 M)
-            => BitPoints.testz(A.HeadPtr, M.HeadPtr);
+        public static bit testz(in BitMatrix8 A, in BitMatrix8 M)
+            => BitPoints.testz(in A.Head, in M.Head);
 
         /// <summary>
         /// Returns true if all bits in a matrix are disabled, false otherwise
         /// </summary>
         /// <param name="A">The source matrix</param>
         [MethodImpl(Inline)]
-        public static unsafe bool testz(in BitMatrix16 A)
-            => BitPoints.testz(A.HeadPtr);
+        public static bit testz(in BitMatrix16 A)
+            => BitPoints.testz(in A.Head, in A.Head);
 
         /// <summary>
         /// Returns true if all mask-identified bits in a matrix are disabled, false otherwise
@@ -67,16 +67,16 @@ namespace Z0
         /// <param name="A">The source matrix</param>
         /// <param name="M">The mask matrix</param>
         [MethodImpl(Inline)]
-        public static unsafe bool testz(in BitMatrix16 A, in BitMatrix16 M)
-            => BitPoints.testz(A.HeadPtr, M.HeadPtr);
+        public static bit testz(in BitMatrix16 A, in BitMatrix16 M)
+            => BitPoints.testz(in A.Head, in M.Head);
 
         /// <summary>
         /// Returns true if all bits in a matrix are disabled, false otherwise
         /// </summary>
         /// <param name="A">The source matrix</param>
         [MethodImpl(Inline)]
-        public static unsafe bool testz(in BitMatrix32 A)
-            => BitPoints.testz(A.HeadPtr);
+        public static bit testz(in BitMatrix32 A)
+            => BitPoints.testz(in A.Head, in A.Head);
 
         /// <summary>
         /// Returns true if all mask-identified bits in a matrix are disabled, false otherwise
@@ -84,16 +84,16 @@ namespace Z0
         /// <param name="A">The source matrix</param>
         /// <param name="M">The mask matrix</param>
         [MethodImpl(Inline)]
-        public static unsafe bool testz(in BitMatrix32 A, in BitMatrix32 M)
-            => BitPoints.testz(A.HeadPtr, M.HeadPtr);
+        public static bit testz(in BitMatrix32 A, in BitMatrix32 M)
+            => BitPoints.testz(in A.Head, in M.Head);
 
         /// <summary>
         /// Returns true if all bits in a matrix are disabled, false otherwise
         /// </summary>
         /// <param name="A">The source matrix</param>
         [MethodImpl(Inline)]
-        public static unsafe bool testz(in BitMatrix64 A)
-            => BitPoints.testz(A.HeadPtr);
+        public static bit testz(in BitMatrix64 A)
+            => BitPoints.testz(in A.Head, in A.Head);
 
         /// <summary>
         /// Returns true if all mask-identified bits in a matrix are disabled, false otherwise
@@ -101,7 +101,7 @@ namespace Z0
         /// <param name="A">The source matrix</param>
         /// <param name="M">The mask matrix</param>
         [MethodImpl(Inline)]
-        public static unsafe bool testz(in BitMatrix64 A, in BitMatrix64 M)
-            => BitPoints.testz(A.HeadPtr, M.HeadPtr);
+        public static bit testz(in BitMatrix64 A, in BitMatrix64 M)
+            => BitPoints.testz(in A.Head, in M.Head);
     }
 }

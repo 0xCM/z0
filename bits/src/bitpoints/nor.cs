@@ -10,70 +10,72 @@ namespace Z0
     using System.Runtime.Intrinsics;
     using System.Runtime.Intrinsics.X86;
     using static zfunc;
+    using static As;
+    using static AsIn;
 
-    partial class BitPoints
+    unsafe partial class BitPoints
     {
-        static N256 n => n256;
-
         [MethodImpl(Inline)]
-        public static unsafe void nor<T>(T* pA, T* pB, T* pDst)
+        public static void nor<T>(in T rA, in T rB, ref T rDst)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-               nor((byte*)pA, (byte*)pB, (byte*)pDst);
+               nor(in uint8(in rA), in uint8(in rB), ref uint8(ref rDst));
             else if(typeof(T) == typeof(ushort))
-                nor((ushort*)pA, (ushort*)pB, (ushort*)pDst);
+                gparts.nor(n, in rA, in rB, ref rDst);
             else if(typeof(T) == typeof(uint))
-                nor((uint*)pA, (uint*)pB, (uint*)pDst);
+                gparts.nor(n, 4, 8, in rA, in rB, ref rDst);
             else if(typeof(T) == typeof(ulong))
-                nor((ulong*)pA, (ulong*)pB, (ulong*)pDst);
+                gparts.nor(n, 16, 4, in rA, in rB, ref rDst);
             else
                 throw unsupported<T>();
         }
 
         [MethodImpl(Inline)]
-        static unsafe void nor(byte* pA, byte* pB, byte* pDst)
-            => content(math.nor(content(pA), content(pB)), pDst);
+        static unsafe void nor(in byte rA, in byte rB, ref byte rDst)
+            => content(math.nor(content(rA), content(rB)), ref rDst);
 
-        [MethodImpl(Inline)]
-        static unsafe void nor(ushort* pA, ushort* pB, ushort* pDst)
-            => ginx.vstore(ginx.vnor(n256, pA, pB),pDst);
+    //     [MethodImpl(Inline)]
+    //     public static void nor<T>(in T rA, in T rB, ref T rDst)
+    //         where T : unmanaged
+    //     {
+    //         if(typeof(T) == typeof(byte))
+    //            nor(in uint8(in rA), in uint8(in rB), ref uint8(ref rDst));
+    //         else if(typeof(T) == typeof(ushort))
+    //            nor(in uint16(in rA), in uint16(in rB), ref uint16(ref rDst));
+    //         else if(typeof(T) == typeof(uint))
+    //            nor(in uint32(in rA), in uint32(in rB), ref uint32(ref rDst));
+    //         else if(typeof(T) == typeof(ulong))
+    //            nor(in uint64(in rA), in uint64(in rB), ref uint64(ref rDst));
+    //         else
+    //             throw unsupported<T>();
+    //     }
 
-        [MethodImpl(Inline)]
-        static unsafe void nor(uint* pA, uint* pB, uint* pDst)
-        {
-            const int step = 8;
-            ginx.vnor(n, pA,pB,pDst);
-            ginx.vnor(n, pA+=step,pB+=step,pDst+=step);
-            ginx.vnor(n, pA+=step,pB+=step,pDst+=step);
-            ginx.vnor(n, pA+=step,pB+=step,pDst+=step);
-        }
+    //     [MethodImpl(Inline)]
+    //     static unsafe void nor(in byte rA, in byte rB, ref byte rDst)
+    //         => content(math.nor(content(rA), content(rB)), ref rDst);
 
-        [MethodImpl(Inline)]
-        static unsafe void nor(ulong* pA, ulong* pB, ulong* pDst)
-        {
-            const int step = 4;
-            const int offset = step*8;            
-            nor8(pA, pB, pDst);
-            nor8(pA + offset, pB + offset, pDst + offset);
-        }
+    //     [MethodImpl(Inline)]
+    //     static void nor(in ushort rA, in ushort rB, ref ushort rDst)
+    //         => ginx.vnor(n, in rA, in rB, ref rDst);
+        
+    //     [MethodImpl(Inline)]
+    //     static void nor(in uint rA, in uint rB, ref uint rDst)
+    //     {
+    //         const int segments = 4;
+    //         const int segsize = 8;
+    //         for(int i=0, offset = 0; i < segments; i++, offset += segsize)
+    //             ginx.vnor(n, in skip(in rA, offset), in skip(in rB, offset), ref seek(ref rDst, offset));
+    //     }
 
-        [MethodImpl(Inline)]
-        static unsafe void nor8(ulong* pA, ulong* pB, ulong* pDst)
-        {            
-            const int step = 4;
-            ginx.vnor(n256, pA, pB, pDst);
-            ginx.vnor(n256, pA+=step, pB+=step,pDst+=step);
-            ginx.vnor(n256, pA+=step, pB+=step,pDst+=step);
-            ginx.vnor(n256, pA+=step, pB+=step,pDst+=step);
-
-            ginx.vnor(n256, pA+=step, pB+=step,pDst+=step);
-            ginx.vnor(n256, pA+=step, pB+=step,pDst+=step);
-            ginx.vnor(n256, pA+=step, pB+=step,pDst+=step);
-            ginx.vnor(n256, pA+=step, pB+=step,pDst+=step);
-        }        
-
+    //     [MethodImpl(Inline)]
+    //     static void nor(in ulong rA, in ulong rB, ref ulong rDst)
+    //     {
+    //         const int segments = 16;
+    //         const int segsize = 4;
+    //         for(int i=0, offset = 0; i < segments; i++, offset += segsize)
+    //             ginx.vnor(n, in skip(in rA, offset), in skip(in rB, offset), ref seek(ref rDst, offset));
+    //     }
 
     }
-
 }

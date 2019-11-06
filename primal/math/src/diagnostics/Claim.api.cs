@@ -292,8 +292,20 @@ namespace Z0
         /// <param name="line">The source file line number where invocation ocurred</param>
         [MethodImpl(Inline)]
         public static bool yea(bool src, string msg = null, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
-            => src ? true 
-                : throw ClaimException.Define(NotTrue(msg, caller, file,line));
+            => src ? true : throw ClaimException.Define(NotTrue(msg, caller, file,line));
+
+        /// <summary>
+        /// Asserts the operand is true
+        /// </summary>
+        /// <param name="src">The value claimed to be true</param>
+        /// <param name="msg">An optional message describint the assertion</param>
+        /// <param name="caller">The caller member name</param>
+        /// <param name="file">The source file of the calling function</param>
+        /// <param name="line">The source file line number where invocation ocurred</param>
+        [MethodImpl(Inline)]
+        public static bool yea<T>(bool src, string msg = null, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
+            where T : unmanaged
+            => src ? true : throw ClaimException.Define(NotTrue($"{moniker<T>() }" + (msg ?? string.Empty) , caller, file,line));
 
         /// <summary>
         /// Asserts the operand is false

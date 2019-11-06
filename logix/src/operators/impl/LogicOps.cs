@@ -184,7 +184,7 @@ namespace Z0.Logix
         // not a and ((b xor 1) or c)
         [MethodImpl(Inline),TernaryOp(X0B)]
         public static bit f0b(bit a, bit b, bit c)
-            => and(not(a), or(b^one(),  c));   
+            => and(not(a), or(not(b),  c));   
 
         // b and (not a)
         [MethodImpl(Inline),TernaryOp(X0C)]
@@ -194,7 +194,7 @@ namespace Z0.Logix
         // not (A) and (B or (C xor 1))
         [MethodImpl(Inline),TernaryOp(X0D)]
         public static bit f0d(bit a, bit b, bit c)
-            => and(not(a), or(b, xor(c, one())));
+            => and(not(a), or(b, not(c)));
 
         // not a and (b or c)
         [MethodImpl(Inline),TernaryOp(X0E)]
@@ -209,7 +209,7 @@ namespace Z0.Logix
         // a and (b nor c)
         [MethodImpl(Inline),TernaryOp(X10)]
         public static bit f10(bit a, bit b, bit c)
-            => and(a, nor(b, c));        
+            => and(a, nor(b, c));
         
         // c nor b
         [MethodImpl(Inline),TernaryOp(X11)]
@@ -251,15 +251,16 @@ namespace Z0.Logix
         public static bit f18(bit a, bit b, bit c)
             => and(xor(a,b), xor(a,c));
 
-        // ((b xor c) xor (a and (b and c))
+        // not(((B xor C) xor (A and (B and C))))
         [MethodImpl(Inline),TernaryOp(X19)]
         public static bit f19(bit a, bit b, bit c)
-            => xor(xor(b,c), and(a, and(b,c)));
-
+            => not(xor(xor(b,c), and(a, and(b,c))));
+            
         // not ((a and b)) and (a xor c)
         [MethodImpl(Inline),TernaryOp(X1A)]
         public static bit f1a(bit a, bit b, bit c)
-            => not(and(and(a,b), xor(a, c)));
+            => and(not(and(a,b)), xor(a,c));
+            
 
         // c ? not a : not b
         [MethodImpl(Inline),TernaryOp(X1B)]
@@ -304,7 +305,7 @@ namespace Z0.Logix
         // not (B) and ((A xor 1) or C)
         [MethodImpl(Inline),TernaryOp(X23)]
         public static bit f23(bit a, bit b, bit c)
-            => and(not(b),or(xor1(a),c));
+            => and(not(b),or(not(a),c));
 
         // (a xor b) and (b xor c)
         [MethodImpl(Inline),TernaryOp(X24)]
@@ -314,7 +315,7 @@ namespace Z0.Logix
         // (not ((a and b)) and (a xor (c xor 1)))
         [MethodImpl(Inline),TernaryOp(X25)]
         public static bit f25(bit a, bit b, bit c)
-            => and(not(and(a,b)), xor(a, xor1(c)));
+            => and(not(and(a,b)), xor(a, not(c)));
 
         //not ((a and b)) and (b xor c)
         [MethodImpl(Inline),TernaryOp(X26)]
@@ -324,7 +325,7 @@ namespace Z0.Logix
         // C ? not (B) : not (A)
         [MethodImpl(Inline),TernaryOp(X27)]
         public static bit f27(bit a, bit b, bit c)
-            => select(c, not(b),not(c));
+            => select(c, not(b), not(a));
 
         // C and (B xor A)
         [MethodImpl(Inline),TernaryOp(X28)]
@@ -359,7 +360,7 @@ namespace Z0.Logix
         // (B or C) xor (A and B)
         [MethodImpl(Inline),TernaryOp(X2E)]
         public static bit f2e(bit a, bit b, bit c)
-            => xor(or(b,c), or(a,b));
+            => xor(or(b,c), and(a,b));
 
         // not (A) or (not (B) and C)
         [MethodImpl(Inline),TernaryOp(X2F)]
@@ -374,7 +375,7 @@ namespace Z0.Logix
         // not (B) and (A or (C xor 1))
         [MethodImpl(Inline),TernaryOp(X31)]
         public static bit f31(bit a, bit b, bit c)
-            => and(not(b), or(a,xor1(c)));
+            => and(not(b), or(a,not(c)));
 
         //not (B) and (A or C)
         [MethodImpl(Inline),TernaryOp(X32)]
@@ -414,7 +415,7 @@ namespace Z0.Logix
         // B xor (A or (C xor 1))
         [MethodImpl(Inline),TernaryOp(X39)]
         public static bit f39(bit a, bit b, bit c)
-            => xor(b, or(a,xor1(c)));
+            => xor(b, or(a, not(c)));
 
         // A ? not (B) : C
         [MethodImpl(Inline),TernaryOp(X3A)]
@@ -424,7 +425,7 @@ namespace Z0.Logix
         // (not (A) and C) or (B xor 1)
         [MethodImpl(Inline),TernaryOp(X3B)]
         public static bit f3b(bit a, bit b, bit c)
-            => or(and(not(a),c),xor1(b));
+            => or(and(not(a),c),not(b));
 
         // B xor A
         [MethodImpl(Inline),TernaryOp(X3C)]
@@ -464,7 +465,7 @@ namespace Z0.Logix
         // not ((A and C)) and (A xor (B xor 1))
         [MethodImpl(Inline),TernaryOp(X43)]
         public static bit f43(bit a, bit b, bit c)
-            => and(not(and(a,c)), xor(a,xor1(b)));
+            => and(not(and(a,c)), xor(a,not(b)));
 
         // B and not (C)
         [MethodImpl(Inline),TernaryOp(X44)]
@@ -474,7 +475,7 @@ namespace Z0.Logix
         // not (C) and ((A xor 1) or B)
         [MethodImpl(Inline),TernaryOp(X45)]
         public static bit f45(bit a, bit b, bit c)
-            => and(not(c), or(xor1(a), b));
+            => and(not(c), or(not(a), b));
 
         // not ((A and C)) and (B xor C)
         [MethodImpl(Inline),TernaryOp(X46)]
@@ -534,7 +535,7 @@ namespace Z0.Logix
         // not (C) and (A or (B xor 1))
         [MethodImpl(Inline),TernaryOp(X51)]
         public static bit f51(bit a, bit b, bit c)
-            => and(not(c),or(a,xor1(b)));
+            => and(not(c),or(a,not(b)));
 
         // not ((B and C)) and (A xor C)
         [MethodImpl(Inline),TernaryOp(X52)]
@@ -574,36 +575,48 @@ namespace Z0.Logix
         // C xor (A or (B xor 1))
         [MethodImpl(Inline),TernaryOp(X59)]
         public static bit f59(bit a, bit b, bit c)
-            => xor(c, or(a,xor1(b)));
+            => xor(c, or(a, not(b)));
 
         // C xor A
         [MethodImpl(Inline),TernaryOp(X5A)]
         public static bit f5a(bit a, bit b, bit c)
             => xor(c,a);
 
+        //((A xor C) or ((A or B) xor 1))
         [MethodImpl(Inline),TernaryOp(X5B)]
         public static bit f5b(bit a, bit b, bit c)
-            => default;
+            => or(xor(a,c), xor(or(a,b),on));
 
+        //(A ? not (C) : B)
         [MethodImpl(Inline),TernaryOp(X5C)]
         public static bit f5c(bit a, bit b, bit c)
-            => default;
+            => select(a,not(c), b);
 
+        // not (C) or (not (A) and B)
         [MethodImpl(Inline),TernaryOp(X5D)]
         public static bit f5d(bit a, bit b, bit c)
-            => default;
+            => or(not(c), and(not(a), b));
 
+        // (not (C) and B) or (A xor C)
         [MethodImpl(Inline),TernaryOp(X5E)]
         public static bit f5e(bit a, bit b, bit c)
-            => default;
+            => or(and(not(c),b),(xor(a,c)));
 
         [MethodImpl(Inline),TernaryOp(X5F)]
         public static bit f5f(bit a, bit b, bit c)
-            => default;
+            => nand(c,a);
 
         [MethodImpl(Inline), TernaryOp(XAA)]
         public static bit faa(bit a, bit b, bit c)
             => c;
+
+        [MethodImpl(Inline), TernaryOp(XCA)]
+        public static bit fca(bit a, bit b, bit c)
+            => select(a,b,c);
+
+        [MethodImpl(Inline), TernaryOp(XCB)]
+        public static bit fcb(bit a, bit b, bit c)
+            => b;
 
         [MethodImpl(Inline), TernaryOp(XFF)]
         public static bit fff(bit a, bit b, bit c)

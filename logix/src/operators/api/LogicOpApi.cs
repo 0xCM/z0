@@ -43,7 +43,7 @@ namespace Z0.Logix
         /// Advertises the supported ternary opeators
         /// </summary>
         public static TernaryOpKind[] TernaryOpKinds
-            => range((byte)1,(byte)X4F).Cast<TernaryOpKind>().ToArray();
+            => range((byte)1,(byte)X5F).Cast<TernaryOpKind>().ToArray();
 
         /// <summary>
         /// Evaluates a unary operator directly without lookup/delegate indirection
@@ -248,7 +248,13 @@ namespace Z0.Logix
                 case X58: return f58(a, b, c);
                 case X59: return f59(a, b, c);
                 case X5A: return f5a(a, b, c);
+                case X5B: return f5b(a, b, c);
+                case X5C: return f5c(a, b, c);
+                case X5D: return f5d(a, b, c);
+                case X5E: return f5e(a, b, c);
+                case X5F: return f5f(a, b, c);
                 
+                case XCA: return fca(a, b, c);
                 case XFF: return f5a(a, b, c);
                 default: return dne(kind);
 
@@ -354,6 +360,11 @@ namespace Z0.Logix
                 case X58: return f58;
                 case X59: return f59;
                 case X5A: return f5a;
+                case X5B: return f5b;
+                case X5C: return f5c;
+                case X5D: return f5d;
+                case X5E: return f5e;
+                case X5F: return f5f;
  
                 case XFF: return fff;
                 default: return dne<bit>(kind);

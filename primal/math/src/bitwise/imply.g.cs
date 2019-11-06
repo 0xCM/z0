@@ -15,7 +15,7 @@ namespace Z0
     partial class gmath
     {
         /// <summary>
-        /// Computes the material implication a -> b, equivalent to the bitwise expression a | ~b
+        /// Computes the material implication a -> b, i.e. a | ~b
         /// </summary>
         /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>

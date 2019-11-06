@@ -40,14 +40,14 @@ namespace Z0
                 ColCount = src.ColCount,
                 SegWidth = src.SegWidth,
                 Moniker = src.Moniker,
-                SorageSegs = src.StorageSegs,
+                SorageSegs = src.SegCount,
                 StorageBits = src.StorageBits,
                 StorageBytes = src.StorageBytes,
                 PointCount = src.PointCount,
-                Vec128Count = src.StorageBytes / 16 + (src.StorageBytes % 16 != 0 ? 1 : 0),
-                Vec128Remainder = src.StorageBytes % 16,
-                Vec256Count = src.StorageBytes / 32 + (src.StorageBytes % 32 != 0 ? 1 : 0),
-                Vec256Remainder = src.StorageBytes % 32,
+                Vec128Count = src.Vec128Count,
+                Vec128Remainder = src.Vec128Remainder,
+                Vec256Count = src.Vec256Count,
+                Vec256Remainder = src.Vec256Remainder
             };
         
         GridStats()

@@ -48,6 +48,10 @@ namespace Z0.Logix
             where T : unmanaged
                 => throw new NotSupportedException($"{id}");
 
+       public static BitMatrixBinaryRefOp<T> nomareftop<T>(BinaryBitwiseOpKind id)        
+            where T : unmanaged
+                => throw new NotSupportedException($"{id}");
+
        public static T dne<K,T>(K kind)        
                 => throw new NotSupportedException($"{kind}");
 

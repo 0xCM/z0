@@ -239,8 +239,7 @@ namespace Z0
         }
 
         /// <summary>
-        /// Converts the leading elements of a primal source span to a 64-bit unsigned integer,
-        /// 0-filling the high bits if the source is too short
+        /// Converts the leading elements of a primal source span to a 64-bit unsigned integer, 0-filling the high bits if the source is too short
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The primal source type</typeparam>

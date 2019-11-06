@@ -10,65 +10,72 @@ namespace Z0
     using System.Runtime.Intrinsics;
     using System.Runtime.Intrinsics.X86;
     using static zfunc;
+    using static As;
+    using static AsIn;
 
     partial class BitPoints
     {
         [MethodImpl(Inline)]
-        public static unsafe void cimply<T>(T* pA, T* pB, T* pDst)
+        public static void cimply<T>(in T rA, in T rB, ref T rDst)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-               cimply((byte*)pA, (byte*)pB, (byte*)pDst);
+               cimply(in uint8(in rA), in uint8(in rB), ref uint8(ref rDst));
             else if(typeof(T) == typeof(ushort))
-                cimply((ushort*)pA, (ushort*)pB, (ushort*)pDst);
+                gparts.cimply(n, in rA, in rB, ref rDst);
             else if(typeof(T) == typeof(uint))
-                cimply((uint*)pA, (uint*)pB, (uint*)pDst);
+                gparts.cimply(n, 4, 8, in rA, in rB, ref rDst);
             else if(typeof(T) == typeof(ulong))
-                cimply((ulong*)pA, (ulong*)pB, (ulong*)pDst);
+                gparts.cimply(n, 16, 4, in rA, in rB, ref rDst);
             else
                 throw unsupported<T>();
         }
 
         [MethodImpl(Inline)]
-        static unsafe void cimply(byte* pA, byte* pB, byte* pDst)
-            => content(math.cimply(content(pA), content(pB)), pDst);
+        static unsafe void cimply(in byte rA, in byte rB, ref byte rDst)
+            => content(math.cimply(content(rA), content(rB)), ref rDst);
 
-        [MethodImpl(Inline)]
-        static unsafe void cimply(ushort* pA, ushort* pB, ushort* pDst)
-            => ginx.vstore(ginx.vcimply(n, pA, pB),pDst);
+        // [MethodImpl(Inline)]
+        // public static void cimply<T>(in T rA, in T rB, ref T rDst)
+        //     where T : unmanaged
+        // {
+        //     if(typeof(T) == typeof(byte))
+        //        cimply(in uint8(in rA), in uint8(in rB), ref uint8(ref rDst));
+        //     else if(typeof(T) == typeof(ushort))
+        //        cimply(in uint16(in rA), in uint16(in rB), ref uint16(ref rDst));
+        //     else if(typeof(T) == typeof(uint))
+        //        cimply(in uint32(in rA), in uint32(in rB), ref uint32(ref rDst));
+        //     else if(typeof(T) == typeof(ulong))
+        //        cimply(in uint64(in rA), in uint64(in rB), ref uint64(ref rDst));
+        //     else
+        //         throw unsupported<T>();
+        // }
 
-        [MethodImpl(Inline)]
-        static unsafe void cimply(uint* pA, uint* pB, uint* pDst)
-        {
-            const int step = 8;
-            ginx.vcimply(n, pA,pB,pDst);
-            ginx.vcimply(n, pA+=step,pB+=step,pDst+=step);
-            ginx.vcimply(n, pA+=step,pB+=step,pDst+=step);
-            ginx.vcimply(n, pA+=step,pB+=step,pDst+=step);
-        }
+        // [MethodImpl(Inline)]
+        // static void cimply(in byte rA, in byte rB, ref byte rDst)
+        //     => content(math.cimply(content(rA), content(rB)), ref rDst);
 
-        [MethodImpl(Inline)]
-        static unsafe void cimply(ulong* pA, ulong* pB, ulong* pDst)
-        {
-            const int step = 4;
-            const int offset = step*8;            
-            cimply8(pA, pB, pDst);
-            cimply8(pA + offset, pB + offset, pDst + offset);
-        }
+        // [MethodImpl(Inline)]
+        // static void cimply(in ushort rA, in ushort rB, ref ushort rDst)
+        //     => ginx.vcimply(n, in rA, in rB, ref rDst);
+        
+        // [MethodImpl(Inline)]
+        // static void cimply(in uint rA, in uint rB, ref uint rDst)
+        // {
+        //     const int segments = 4;
+        //     const int segsize = 8;
+        //     for(int i=0, offset = 0; i < segments; i++, offset += segsize)
+        //         ginx.vcimply(n, in skip(in rA, offset), in skip(in rB, offset), ref seek(ref rDst, offset));
+        // }
 
-        [MethodImpl(Inline)]
-        static unsafe void cimply8(ulong* pA, ulong* pB, ulong* pDst)
-        {            
-            const int step = 4;
-            ginx.vcimply(n, pA, pB, pDst);
-            ginx.vcimply(n, pA+=step, pB+=step,pDst+=step);
-            ginx.vcimply(n, pA+=step, pB+=step,pDst+=step);
-            ginx.vcimply(n, pA+=step, pB+=step,pDst+=step);
+        // [MethodImpl(Inline)]
+        // static void cimply(in ulong rA, in ulong rB, ref ulong rDst)
+        // {
+        //     const int segments = 16;
+        //     const int segsize = 4;
+        //     for(int i=0, offset = 0; i < segments; i++, offset += segsize)
+        //         ginx.vcimply(n, in skip(in rA, offset), in skip(in rB, offset), ref seek(ref rDst, offset));
+        // }
 
-            ginx.vcimply(n, pA+=step, pB+=step,pDst+=step);
-            ginx.vcimply(n, pA+=step, pB+=step,pDst+=step);
-            ginx.vcimply(n, pA+=step, pB+=step,pDst+=step);
-            ginx.vcimply(n, pA+=step, pB+=step,pDst+=step);
-        }        
     }
 }

@@ -49,27 +49,27 @@ namespace Z0.Logix
             }
         }
 
-        public static BitVector<T> evalref<T>(BinaryBitwiseOpKind kind, BitVector<T> x, BitVector<T> y)
+        public static BitVector<T> evalspec<T>(BinaryBitwiseOpKind kind, BitVector<T> x, BitVector<T> y)
             where T : unmanaged
         {
             switch(kind)
             {
                 case BinaryBitwiseOpKind.True: return @true(x,y);
                 case BinaryBitwiseOpKind.False: return @false(x,y);
-                case BinaryBitwiseOpKind.And: return and_ref(x,y);
-                case BinaryBitwiseOpKind.Nand: return nand_ref(x,y);
-                case BinaryBitwiseOpKind.Or: return or_ref(x,y);
-                case BinaryBitwiseOpKind.Nor: return nor_ref(x,y);
-                case BinaryBitwiseOpKind.XOr: return xor_ref(x,y);
-                case BinaryBitwiseOpKind.Xnor: return xnor_ref(x,y);
-                case BinaryBitwiseOpKind.LeftProject: return left(x,y);
-                case BinaryBitwiseOpKind.RightProject: return right(x,y);
-                case BinaryBitwiseOpKind.LeftNot: return lnot_ref(x,y);
-                case BinaryBitwiseOpKind.RightNot: return rnot_ref(x,y);
-                case BinaryBitwiseOpKind.Implication: return imply_ref(x,y);                    
-                case BinaryBitwiseOpKind.Nonimplication: return notimply_ref(x,y);
-                case BinaryBitwiseOpKind.ConverseImplication: return cimply_ref(x,y);                    
-                case BinaryBitwiseOpKind.ConverseNonimplication: return cnotimply_ref(x,y);
+                case BinaryBitwiseOpKind.And: return BitVectorOpSpecs.and(x,y);
+                case BinaryBitwiseOpKind.Nand: return BitVectorOpSpecs.nand(x,y);
+                case BinaryBitwiseOpKind.Or: return BitVectorOpSpecs.or(x,y);
+                case BinaryBitwiseOpKind.Nor: return BitVectorOpSpecs.nor(x,y);
+                case BinaryBitwiseOpKind.XOr: return BitVectorOpSpecs.xor(x,y);
+                case BinaryBitwiseOpKind.Xnor: return BitVectorOpSpecs.xnor(x,y);
+                case BinaryBitwiseOpKind.LeftProject: return x;
+                case BinaryBitwiseOpKind.RightProject: return y;
+                case BinaryBitwiseOpKind.LeftNot: return BitVectorOpSpecs.lnot(x,y);
+                case BinaryBitwiseOpKind.RightNot: return BitVectorOpSpecs.rnot(x,y);
+                case BinaryBitwiseOpKind.Implication: return BitVectorOpSpecs.imply(x,y);                    
+                case BinaryBitwiseOpKind.Nonimplication: return BitVectorOpSpecs.notimply(x,y);
+                case BinaryBitwiseOpKind.ConverseImplication: return BitVectorOpSpecs.cimply(x,y);                    
+                case BinaryBitwiseOpKind.ConverseNonimplication: return BitVectorOpSpecs.cnotimply(x,y);
                 default: return dne<BinaryBitwiseOpKind,T>(kind);
             }
         }

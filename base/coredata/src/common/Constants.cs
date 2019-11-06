@@ -13,46 +13,109 @@ using Z0;
 
 public static class Constants
 {
-    public const sbyte I8Min = sbyte.MinValue;
 
-    public const byte U8Min = byte.MinValue;
+    /// <summary>
+    /// Defines a bit pattern consisting only of enabled bits
+    /// </summary>
+    public const byte U8_Ones = byte.MaxValue;
 
-    public const short I16Min = short.MinValue;
-    
-    public const ushort U16Min = ushort.MinValue;
 
-    public const int I32Min = int.MinValue;
+    /// <summary>
+    /// Defines a bit pattern consisting only of enabled bits
+    /// </summary>
+    public const ushort U16_Ones = ushort.MaxValue;
 
-    public const uint U32Min = uint.MinValue;
 
-    public const long I64Min = long.MinValue;
+    /// <summary>
+    /// Defines a bit pattern consisting only of enabled bits
+    /// </summary>
+    public const uint U32_Ones = uint.MaxValue;
 
-    public const ulong U64Min = ulong.MinValue;
 
-    public const float F32Min = float.MinValue;
-    
-    public const double F64Min = double.MinValue;
+    /// <summary>
+    /// Defines a bit pattern consisting only of enabled bits
+    /// </summary>
+    public const ulong U64_Ones = ulong.MaxValue;
 
-    public const sbyte I8Max = sbyte.MaxValue;
+    /// <summary>
+    /// The least significant bit of each 8-bit segment is enabled, the remaining bits are disabled
+    /// </summary>
+    public const byte U8_LSB = 0x01;
 
-    public const byte U8Max = byte.MaxValue;
+    /// <summary>
+    /// The most significant bit of each 8-bit segment is enabled, the remaining bits are disabled
+    /// </summary>
+    public const byte U8_MSB = 0x80;
 
-    public const short I16Max = short.MaxValue;
-    
-    public const ushort U16Max = ushort.MaxValue;
+    /// <summary>
+    /// Defines an alternating bit pattern 1010...10 where the first bit is disabled
+    /// </summary>
+    public const byte U8_AltEven = 0xAA;
 
-    public const int I32Max = int.MaxValue;
+    /// <summary>
+    /// Defines an alternating bit pattern 0101...01 where the first bit is enabled
+    /// </summary>
+    public const byte U8_AltOdd = 0x55;
 
-    public const uint U32Max = uint.MaxValue;
+    /// <summary>
+    /// The least significant bit of each 8-bit segment is enabled, the remaining bits are disabled
+    /// </summary>
+    public const ushort U16_LSB = 0x0101;
 
-    public const long I64Max = long.MaxValue;
+    /// <summary>
+    /// The most significant bit of each 8-bit segment is enabled, the remaining bits are disabled
+    /// </summary>
+    public const ushort U16_MSB = 0x8080;
 
-    public const ulong U64Max = ulong.MaxValue;
+    /// <summary>
+    /// Defines an alternating bit pattern 1010...10 where the first bit is disabled
+    /// </summary>
+    public const ushort U16_AltEven = 0xAAAA;
 
-    public const float F32Max = float.MaxValue;
-    
-    public const double F64Max = double.MaxValue;
+    /// <summary>
+    /// Defines an alternating bit pattern 0101...01 where the first bit is enabled
+    /// </summary>
+    public const ushort U16_AltOdd = 0x5555;
 
+    /// <summary>
+    /// The least significant bit of each 8-bit segment is enabled, the remaining bits are disabled
+    /// </summary>
+    public const uint U32_LSB = 0x01010101;
+
+    /// <summary>
+    /// The most significant bit of each 8-bit segment is enabled, the remaining bits are disabled
+    /// </summary>
+    public const uint U32_MSB = 0x80808080;
+
+    /// <summary>
+    /// Defines an alternating bit pattern 1010...10 where the first bit is disabled
+    /// </summary>
+    public const uint U32_AltEven = 0xAAAAAAAA;
+
+    /// <summary>
+    /// Defines an alternating bit pattern 0101...01 where the first bit is enabled
+    /// </summary>
+    public const uint U32_AltOdd = 0x55555555;
+
+    /// <summary>
+    /// The least significant bit of each 8-bit segment is enabled, the remaining bits are disabled
+    /// </summary>
+    public const ulong U64_LSB = 0x5555555555555555;
+
+    /// <summary>
+    /// The most significant bit of each 8-bit segment is enabled, the remaining bits are disabled
+    /// </summary>
+    public const ulong U64_MSB = 0x8080808080808080;
+
+    /// <summary>
+    /// Defines an alternating bit pattern 1010...10 where the first bit is disabled
+    /// </summary>
+    public const ulong U64_AltEven = 0xAAAAAAAAAAAAAAAA;
+
+    /// <summary>
+    /// Defines an alternating bit pattern 0101...01 where the first bit is enabled
+    /// </summary>
+    public const ulong U64_AltOdd = 0x5555555555555555;
 }
 
 

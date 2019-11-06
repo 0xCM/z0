@@ -11,7 +11,7 @@ namespace Z0
 
     using static zfunc;    
 
-    public delegate bool PrimalPredicate<T>(T a, T b)
+    public delegate bit PrimalPredicate<T>(T a, T b)
         where T : unmanaged;
 
     public static class PrimalDelegates

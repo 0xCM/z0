@@ -294,6 +294,16 @@ partial class zfunc
         =>  ref MemoryMarshal.GetReference<T>(src);
 
     /// <summary>
+    /// Returns a reference to the head of a readonly span
+    /// </summary>
+    /// <param name="src">The source span</param>
+    /// <typeparam name="T">The cell type</typeparam>
+    [MethodImpl(Inline)]
+    public static ref readonly T head<T>(ReadOnlySpan<T> src)
+        where T : unmanaged
+            =>  ref MemoryMarshal.GetReference<T>(src);
+
+    /// <summary>
     /// Returns a reference to the location of the first span element
     /// </summary>
     /// <param name="src">The source span</param>
@@ -355,15 +365,6 @@ partial class zfunc
         where T : unmanaged
             =>  ref MemoryMarshal.GetReference<T>(src.Unblocked);
 
-    /// <summary>
-    /// Returns a reference to the head of a readonly span
-    /// </summary>
-    /// <param name="src">The source span</param>
-    /// <typeparam name="T">The cell type</typeparam>
-    [MethodImpl(Inline)]
-    public static ref readonly T head<T>(ReadOnlySpan<T> src)
-        where T : unmanaged
-            =>  ref MemoryMarshal.GetReference<T>(src);
 
     /// <summary>
     /// Returns a uint32 reference to the head of a bytespan

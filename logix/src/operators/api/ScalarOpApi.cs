@@ -60,7 +60,7 @@ namespace Z0.Logix
         /// Advertises the supported ternary opeators
         /// </summary>
         public static IEnumerable<TernaryOpKind> TernaryBitwiseKinds
-            => range((byte)1,(byte)X4F).Cast<TernaryOpKind>();
+            => range((byte)1,(byte)X5F).Cast<TernaryOpKind>();
 
 
         public static T eval<T>(BinaryBitwiseOpKind kind, T a, T b)
@@ -218,6 +218,11 @@ namespace Z0.Logix
                 case X58: return f58(a, b, c);
                 case X59: return f59(a, b, c);
                 case X5A: return f5a(a, b, c);
+                case X5B: return f5b(a, b, c);
+                case X5C: return f5c(a, b, c);
+                case X5D: return f5d(a, b, c);
+                case X5E: return f5e(a, b, c);
+                case X5F: return f5f(a, b, c);
                 default: return canteval<T,TernaryOpKind>(kind);
             }
         }
@@ -396,6 +401,11 @@ namespace Z0.Logix
                 case X58: return f58;
                 case X59: return f59;
                 case X5A: return f5a;
+                case X5B: return f5b;
+                case X5C: return f5c;
+                case X5D: return f5d;
+                case X5E: return f5e;
+                case X5F: return f5f;
                 default: return dne<T>(id);
             }
         }

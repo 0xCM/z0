@@ -11,9 +11,41 @@ namespace Z0
     using static zfunc;
     using BM = Z0.BitMatrix;
 
+    public ref struct DataCircle<T>
+        where T : unmanaged
+    {
+        public static DataCircle<T> Load(Span<T> src, int partwidth)
+            => new DataCircle<T>(src, partwidth);
+
+        public DataCircle(Span<T> src, int partwidth)
+        {
+            this.Data = src;
+            this.PartCount = src.Length/partwidth;
+            this.Part = 0;
+            this.PartWidth = partwidth;            
+        }
+        
+        readonly Span<T> Data;
+
+        readonly int PartCount;
+        
+        readonly int PartWidth;
+
+        int Part;
+
+        public ref T Next()
+        {
+            if(Part == PartCount)
+                Part = 0;
+
+            ref var next = ref seek(ref head(Data), Part*PartWidth);
+            Part++;
+            return ref next;
+        }
+    }
+
     public static partial class BitRng
     {
-
         /// <summary>
         /// Produces a generic bitmatrix predicated on a primal type
         /// </summary>
@@ -186,7 +218,7 @@ namespace Z0
             where N : unmanaged,ITypeNat
             where T : unmanaged
         {
-            random.StreamTo(dst.BitMap.StorageSegs, ref dst.Head);
+            random.StreamTo(dst.BitMap.SegCount, ref dst.Head);
             return dst;
         }
 

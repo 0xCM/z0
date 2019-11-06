@@ -16,7 +16,7 @@ namespace Z0
     partial class gmath
     {
         [MethodImpl(Inline)]
-        public static bool gt<T>(T a, T b)
+        public static bit gt<T>(T a, T b)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte) 
@@ -34,7 +34,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static bool gteq<T>(T a, T b)
+        public static bit gteq<T>(T a, T b)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte) 
@@ -52,7 +52,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static bool gt_i<T>(T a, T b)
+        static bit gt_i<T>(T a, T b)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
@@ -66,7 +66,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static bool gt_u<T>(T a, T b)
+        static bit gt_u<T>(T a, T b)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -80,7 +80,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static bool gteq_i<T>(T a, T b)
+        static bit gteq_i<T>(T a, T b)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
@@ -94,7 +94,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static bool gteq_u<T>(T a, T b)
+        static bit gteq_u<T>(T a, T b)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))

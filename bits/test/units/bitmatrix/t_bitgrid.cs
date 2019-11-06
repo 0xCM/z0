@@ -19,7 +19,7 @@ namespace Z0
             {
                 var filename = FileName.Define($"GridMap{segwidth}.csv");
                 using var dst = LogArea.Test.LogWriter(filename);
-                dst.WriteLine(GridLayout.header());
+                dst.WriteLine(BitGrid.header());
                 var points = (
                     from r1 in range(minsegs,maxsegs)
                     from r2 in range(minsegs,maxsegs)
@@ -30,7 +30,7 @@ namespace Z0
                 for(var i = 0; i<points.Length; i++)
                 {
                     (var r, var c) = points[i];
-                    var gs = GridLayout.map(r,c,segwidth).Stats();
+                    var gs = BitGrid.map(r,c,segwidth).Stats();
                         if(gs.Vec256Remainder == 0 || gs.Vec128Remainder == 0)
                             dst.WriteLine(gs.Format());
                 }
@@ -52,7 +52,7 @@ namespace Z0
             data.Fill(0b10101010);
 
             ref readonly var src = ref head64(data);
-            var spec = GridLayout.specify(n8, n8, byte.MinValue);
+            var spec = BitGrid.specify(n8, n8, byte.MinValue);
             var map = spec.Map();
             var state = bit.Off;
             Claim.eq(map.PointCount, data.Length * bitsize<byte>());
@@ -70,6 +70,10 @@ namespace Z0
         {
             bitread_bench<ulong>(249,128, Pow2.T08);
             bitread_bench<byte>(249,128, Pow2.T08);
+            bitread_bench<ulong>(64,64, Pow2.T08);
+
+
+            bitmatrix_bitread_bench<ulong>(Pow2.T08);
         }
 
         public void bitset_bench()
@@ -77,7 +81,6 @@ namespace Z0
             bitset_bench<ulong>(249,128, Pow2.T08);
             bitset_bench<byte>(249,128, Pow2.T08);
         }
-
 
         void bitread_bench<T>(int M, int N, int cycles, SystemCounter counter = default)
             where T : unmanaged
@@ -95,6 +98,26 @@ namespace Z0
             }
 
             Benchmark($"gridread_{moniker<T>()}", counter, cycles*M*N);
+        }
+
+        void bitmatrix_bitread_bench<T>(int cycles, SystemCounter counter = default)
+            where T : unmanaged
+        {
+            var last = bit.Off;
+            int M = bitsize<T>();
+            int N = bitsize<T>();
+            for(var i = 0; i<cycles; i++)
+            {
+                var src = Random.BitMatrix<T>();
+
+                counter.Start();
+                for(var row = 0; row< M; row++)
+                for(var col = 0; col< N; col++)
+                    last = src[row,col];
+                counter.Stop();
+            }
+
+            Benchmark($"bitmatrix_bitread_{moniker<T>()}", counter, cycles*M*N);
         }
 
         void bitset_bench<T>(int M, int N, int cycles, SystemCounter counter = default)
@@ -123,10 +146,10 @@ namespace Z0
             int segwidth = bitsize<ulong>();
             var segorder = (int)math.log2(segwidth);
 
-            var map = GridLayout.map<ulong>(M,N);
+            var map = BitGrid.map<ulong>(M,N);
             var points = M*N;
             var segs = (points >> segorder) + (points % segwidth != 0 ? 1 : 0);
-            Claim.eq(map.StorageSegs, segs);
+            Claim.eq(map.SegCount, segs);
         
 
             var src = Random.Span<ulong>(segs);
@@ -143,7 +166,7 @@ namespace Z0
                 Claim.eq(map.Cell(pos).Segment, seg);
                 Claim.eq(map.Cell(pos).Offset, offset);
                 
-                var b1 = BitGrid.bitread(in head(src), M,N, row,col);
+                var b1 = BitGrid.bitread(in head(src), N, row,col);
                 var b2 = bg[row,col];
                 Claim.eq(b1,b2);
             }
@@ -157,7 +180,7 @@ namespace Z0
             const int rows = 32;
             const int cols = 8;            
             const int cellwidth = 8;
-            var map = GridLayout.map(rows, cols, cellwidth);
+            var map = BitGrid.map(rows, cols, cellwidth);
             Claim.eq(8*32, map.StorageBits);
             
             var current = 0;
@@ -185,8 +208,8 @@ namespace Z0
             var points = rows*cols;
             var bytes = points/8 + (points % 8 != 0 ? 1 : 0);
             var bits = bytes/8;
-            var map = GridLayout.map(rows,cols,segwidth);
-            Claim.eq(bytes, map.StorageSegs);
+            var map = BitGrid.map(rows,cols,segwidth);
+            Claim.eq(bytes, map.SegCount);
             Claim.eq(points, map.PointCount);
 
             var current = 0;
@@ -260,7 +283,7 @@ namespace Z0
 
             Claim.eq(bitmap.PointCount, points);
             Claim.eq(bitmap.StorageBits, bits);
-            Claim.eq(bitmap.StorageSegs, segments);
+            Claim.eq(bitmap.SegCount, segments);
 
             
             for(var i=0; i< SampleSize; i++)

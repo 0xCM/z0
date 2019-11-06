@@ -86,6 +86,14 @@ namespace Z0
             => (byte)Bits.pack(b0, b1, b2, b3, b4, b5, b6, b7);
 
         /// <summary>
+        /// Creates an 8-bit bitvector from 8 explicit bits
+        /// </summary>
+        /// <param name="src">The source bitstring</param>
+        [MethodImpl(Inline)]
+        public static BitVector8 from(N8 n, int b0, int b1, int b2, int b3, int b4, int b5, int b6, int b7)
+            => (byte)Bits.pack((bit)b0, (bit)b1, (bit)b2, (bit)b3, (bit)b4, (bit)b5, (bit)b6, (bit)b7);
+
+        /// <summary>
         /// Creates an 8-bit bitvector from a byte
         /// </summary>
         /// <param name="src">The source value</param>
@@ -134,7 +142,32 @@ namespace Z0
             => src.TakeUInt32();
 
         /// <summary>
-        /// Creates a vector from a primal source value
+        /// Creates a vector from a bitstring
+        /// </summary>
+        /// <param name="src">The source bitstring</param>
+        [MethodImpl(Inline)]
+        public static BitVector32 from(N32 n, byte x0, byte x1, byte x2, byte x3)
+            => new BitVector32(Bits.pack(x0,x1,x2,x3));
+
+        /// <summary>
+        /// Creates a generic bitvector from 4 explicit bytes
+        /// </summary>
+        /// <param name="src">The source bitstring</param>
+        [MethodImpl(Inline)]
+        public static BitVector<uint> from(byte x0, byte x1, byte x2, byte x3)
+            => BitVector<uint>.From(Bits.pack(x0,x1,x2,x3));
+
+        /// <summary>
+        /// Creates a primal bitvector from two unisigned short values
+        /// </summary>
+        /// <param name="src">The source bitstring</param>
+        [MethodImpl(Inline)]
+        public static BitVector32 from(N32 n, ushort x0, ushort x1)
+            => new BitVector32(Bits.pack(x0,x1));
+
+        /// <summary>
+        /// Creates a 64-bit bitvector where the first 8 bits a populated with a specified value and 
+        /// all others are zero
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]

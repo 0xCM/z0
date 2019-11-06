@@ -12,7 +12,6 @@ namespace Z0.Logix
     /// <summary>
     /// Classifies ternary logic and bitwise operators
     /// </summary>
-    [Flags]
     public enum TernaryOpKind : byte
     {
         X00 = 0x00,
@@ -28,12 +27,12 @@ namespace Z0.Logix
         X02 = 0x02,
         
         /// <summary>
-        /// 
+        /// nor(b,a)
         /// </summary>
         X03 = 0x03,
         
         /// <summary>
-        /// 
+        /// and(b, nor(a,c))
         /// </summary>
         X04 = 0x04,
         
@@ -68,52 +67,52 @@ namespace Z0.Logix
         X0A = 0x0a,
 
         /// <summary>
-        /// 
+        /// and(not(a), or(not(b),  c))
         /// </summary>
         X0B = 0x0b,
 
         /// <summary>
-        /// 
+        /// and(b, not(a))
         /// </summary>
         X0C = 0x0c,
 
         /// <summary>
-        /// 
+        /// and(not(a), or(b, not(c)))
         /// </summary>
         X0D = 0x0d,
 
         /// <summary>
-        /// 
+        /// and(not(a),or(b,c))
         /// </summary>
         X0E = 0x0e,
 
         /// <summary>
-        /// 
+        /// not(a)
         /// </summary>
         X0F = 0x0f,
 
         /// <summary>
-        /// 
+        /// and(a, nor(b, c))
         /// </summary>
         X10 = 0x10,
 
         /// <summary>
-        /// 
+        /// nor(c,b)
         /// </summary>
         X11 = 0x11,
 
         /// <summary>
-        /// 
+        /// and(not(b), xor(a,c))
         /// </summary>
         X12 = 0x12,
 
         /// <summary>
-        /// 
+        /// nor(b, and(a,c))
         /// </summary>
         X13 = 0x13,
 
         /// <summary>
-        /// 
+        /// and(not(c), xor(a,b))
         /// </summary>
         X14 = 0x14,
 
@@ -133,17 +132,17 @@ namespace Z0.Logix
         X17 = 0x17,
 
         /// <summary>
-        /// 
+        /// and(xor(a,b), xor(a,c))
         /// </summary>
         X18 = 0x18,
 
         /// <summary>
-        /// 
+        /// xor(xor(b,c), and(a, and(b,c)))
         /// </summary>
         X19 = 0x19,
 
         /// <summary>
-        /// 
+        /// not(and(and(a,b), xor(a, c)))
         /// </summary>
         X1A = 0x1a,
 
@@ -203,7 +202,7 @@ namespace Z0.Logix
         X25 = 0x25,
 
         /// <summary>
-        /// 
+        /// and(not(and(a,b)), xor(a, not(c)));
         /// </summary>
         X26 = 0x26,
 
@@ -213,7 +212,7 @@ namespace Z0.Logix
         X27 = 0x27,
 
         /// <summary>
-        /// 00101000
+        /// 
         /// </summary>
         X28 = 0x28,
 
@@ -223,22 +222,22 @@ namespace Z0.Logix
         X29 = 0x29,
 
         /// <summary>
-        /// 
+        /// and(c, nand(b,a))
         /// </summary>
         X2A = 0x2a,
 
         /// <summary>
-        /// 
+        /// select(c, nand(b,a), nor(b,a))
         /// </summary>
         X2B = 0x2b,
 
         /// <summary>
-        /// 
+        /// and(or(b,c), xor(a,b))
         /// </summary>
         X2C = 0x2c,
 
         /// <summary>
-        ///  
+        ///  xor(a,(or(b,not(c))))
         /// </summary>
         X2D = 0x2d,
 
@@ -253,22 +252,22 @@ namespace Z0.Logix
         X2F = 0x2f,
 
         /// <summary>
-        /// andnot(a,b)
+        /// cnotimply(a,b)
         /// </summary>
         X30 = 0x30,
 
         /// <summary>
-        /// 00110001
+        /// and(not(b), or(a,not(c)))
         /// </summary>
         X31 = 0x31,
 
         /// <summary>
-        /// 00110010
+        /// 
         /// </summary>
         X32 = 0x32,
 
         /// <summary>
-        /// not(b): 00110011
+        /// not(b)
         /// </summary>
         X33 = 0x33,
 
@@ -303,12 +302,12 @@ namespace Z0.Logix
         X39 = 0x39,
 
         /// <summary>
-        /// 
+        /// select(a, not(b), c)
         /// </summary>
         X3A = 0x3a,
 
         /// <summary>
-        /// 
+        /// or(and(not(a),c),not(b))
         /// </summary>
         X3B = 0x3b,
 
@@ -318,12 +317,12 @@ namespace Z0.Logix
         X3C = 0x3c,
 
         /// <summary>
-        /// 
+        /// or(xor(b,a),nor(a,c))
         /// </summary>
         X3D = 0x3d,
 
         /// <summary>
-        /// 
+        /// or(and(not(a),c),xor(a,b))
         /// </summary>
         X3E = 0x3e,
 
@@ -348,12 +347,12 @@ namespace Z0.Logix
         X42 = 0x42,
 
         /// <summary>
-        /// 
+        /// and(not(and(a,c)), xor(a,not(b)))
         /// </summary>
         X43 = 0x43,
 
         /// <summary>
-        /// andnot(b,c)
+        /// cnotimply(b,c)
         /// </summary>
         X44 = 0x44,
         
@@ -373,22 +372,22 @@ namespace Z0.Logix
         X47 = 0x47,
 
         /// <summary>
-        /// 
+        /// and(b,xor(a,c))
         /// </summary>
         X48 = 0x48,
 
         /// <summary>
-        /// 
+        /// select(b,xor(a,c),nor(a,c))
         /// </summary>
         X49 = 0x49,
 
         /// <summary>
-        /// 
+        /// and(or(b,c), xor(a,c))
         /// </summary>
         X4A = 0x4a,
 
         /// <summary>
-        /// 
+        /// xor(a, or(not(b), c))
         /// </summary>
         X4B = 0x4b,
 
@@ -413,12 +412,12 @@ namespace Z0.Logix
         X4F = 0x4f,
 
         /// <summary>
-        /// andnot(a,c)
+        /// cnotimply(a,c)
         /// </summary>
         X50 = 0x50,
 
         /// <summary>
-        /// 
+        /// and(not(c),or(a,not(b)))
         /// </summary>
         X51 = 0x51,
 
@@ -433,57 +432,57 @@ namespace Z0.Logix
         X53 = 0x53,
 
         /// <summary>
-        /// 
+        /// and(not(c), or(a,b))
         /// </summary>
         X54 = 0x54,
         
         /// <summary>
-        /// not(c): 01010101 
+        /// not(c)
         /// </summary>
         X55 = 0x55,
         
         /// <summary>
-        /// 
+        /// xor(c,or(b,a))
         /// </summary>
         X56 = 0x56,
 
         /// <summary>
-        /// 
+        /// nand(c,or(b,a))
         /// </summary>
         X57 = 0x57,
 
         /// <summary>
-        /// 
+        /// and(or(a,b),xor(a,c))
         /// </summary>
         X58 = 0x58,
 
         /// <summary>
-        /// 
+        /// xor(c, or(a,xor1(b)))
         /// </summary>
         X59 = 0x59,
 
         /// <summary>
-        /// 
+        /// xor(c,a)
         /// </summary>
         X5A = 0x5a,
 
         /// <summary>
-        /// 
+        /// or(xor(a,c), xor(or(a,b),on)) 
         /// </summary>
         X5B = 0x5b,
 
         /// <summary>
-        /// 
+        /// select(a,not(c), b)
         /// </summary>
         X5C = 0x5c,
 
         /// <summary>
-        /// 
+        /// or(not(c), and(not(a), b))
         /// </summary>
         X5D = 0x5d,
 
         /// <summary>
-        /// 
+        /// or(and(not(c),b),(xor(a,c)))
         /// </summary>
         X5E = 0x5e,
 
@@ -1028,12 +1027,12 @@ namespace Z0.Logix
         XC9 = 0xc9,
 
         /// <summary>
-        /// 
+        /// select(a,b,c)
         /// </summary>
         XCA = 0xca,
 
         /// <summary>
-        /// 
+        /// second(a,b,c) := b
         /// </summary>
         XCB = 0xcb,
 

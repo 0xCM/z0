@@ -79,7 +79,7 @@ namespace Z0.Logix
                 => gmath.xor1(a); 
 
         /// <summary>
-        /// Promotes a bit to the full splendor of a scalar, with all scalar bits enabled if
+        /// Promotes a T to the full splendor of a scalar, with all scalar bits enabled if
         /// the source bit is enabled and no scalar bits enabled otherwise
         /// </summary>
         /// <param name="src">The source bit</param>
@@ -341,223 +341,223 @@ namespace Z0.Logix
                 => and(c, not(a));
 
         // not a and ((b xor 1) or c)
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline),TernaryOp(X0B)]
         public static T f0b<T>(T a, T b, T c)
             where T : unmanaged
                 => and(not(a), or(xor1(b),  c));   
 
         // b and (not a)
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline),TernaryOp(X0C)]
         public static T f0c<T>(T a, T b, T c)
             where T : unmanaged
                 => and(b, not(a));
 
         // not a and (b or (c xor 1))
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline),TernaryOp(X0D)]
         public static T f0d<T>(T a, T b, T c)
             where T : unmanaged
                 => and(not(a), or(b, xor1(c)));
 
         // not a and (b or c)
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline),TernaryOp(X0E)]
         public static T f0e<T>(T a, T b, T c)
             where T : unmanaged
                 => and(not(a),or(b,c));
 
         // not a
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline),TernaryOp(X0F)]
         public static T f0f<T>(T a, T b, T c)
             where T : unmanaged
                 => not(a);
 
         // a and (b nor c)
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline),TernaryOp(X10)]
         public static T f10<T>(T a, T b, T c)
             where T : unmanaged
                 => and(a, nor(b, c));
         
         // c nor b
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline),TernaryOp(X11)]
         public static T f11<T>(T a, T b, T c)
             where T : unmanaged
                 => nor(c,b);
         
         // not b and (a xor c) 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline),TernaryOp(X12)]
         public static T f12<T>(T a, T b, T c)
             where T : unmanaged
                 => and(not(b), xor(a,c));
 
         // b nor (a and c)
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline),TernaryOp(X13)]
         public static T f13<T>(T a, T b, T c)
             where T : unmanaged
                 => nor(b, and(a,c));
 
         // not c and (a xor b)
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline),TernaryOp(X14)]
         public static T f14<T>(T a, T b, T c)
             where T : unmanaged
                 => and(not(c), xor(a,b));
 
         // c nor (b and a)
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline),TernaryOp(X15)]
         public static T f15<T>(T a, T b, T c)
             where T : unmanaged
                 => nor(c, and(a,b));
 
         // a ? (b nor c) : (b xor c)
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline),TernaryOp(X16)]
         public static T f16<T>(T a, T b, T c)
             where T : unmanaged
                 => select(a, nor(b,c), xor(b,c));
 
         // not(a ? (b or c) : (b and c))
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline),TernaryOp(X17)]
         public static T f17<T>(T a, T b, T c)
             where T : unmanaged
                 => not(select(a, or(b,c), and(b,c)));
 
         // (a xor b) and (a xor c)
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline),TernaryOp(X18)]
         public static T f18<T>(T a, T b, T c)
             where T : unmanaged
                 => and(xor(a,b), xor(a,c));
 
-        // not((b xor c) xor (a and (b and c)))
-        [MethodImpl(Inline)]
+        // not(((B xor C) xor (A and (B and C))))
+        [MethodImpl(Inline),TernaryOp(X19)]
         public static T f19<T>(T a, T b, T c)
             where T : unmanaged
                 => not(xor(xor(b,c), and(a, and(b,c))));
 
         // not ((A and B)) and (A xor C)
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline),TernaryOp(X1A)]
         public static T f1a<T>(T a, T b, T c)
             where T : unmanaged
                 => and(not(and(a,b)), xor(a,c));
 
         // c ? not a : not b
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline),TernaryOp(X1B)]
         public static T f1b<T>(T a, T b, T c)
             where T : unmanaged
                 => select(c, not(a), not(b));
 
         //not ((a and c)) and (a xor b)
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline),TernaryOp(X1C)]
         public static T f1c<T>(T a, T b, T c)
             where T : unmanaged
                 => and(not(and(a,c)), xor(a,b));
 
         //b ? (not a) : (not c)
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline),TernaryOp(X1D)]
         public static T f1d<T>(T a, T b, T c)
             where T : unmanaged
                 => select(b, not(a), not(c));
 
         //a xor (b or c)
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline),TernaryOp(X1E)]
         public static T f1e<T>(T a, T b, T c)
             where T : unmanaged
                 => xor(a, or(b,c));
 
         // a nand (b or c)
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline),TernaryOp(X1F)]
         public static T f1f<T>(T a, T b, T c)
             where T : unmanaged
                 => nand(a, or(b,c));
 
         //((not b) and a) and C
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline),TernaryOp(X20)]
         public static T f20<T>(T a, T b, T c)
             where T : unmanaged
                 => and(and(not(b),a),c);
 
         // b nor (a xor c)
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline),TernaryOp(X21)]
         public static T f21<T>(T a, T b, T c)
             where T : unmanaged
                 => nor(b, xor(a,c));
 
         // c and (not b)
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline),TernaryOp(X22)]
         public static T f22<T>(T a, T b, T c)
             where T : unmanaged
                 => cnotimply(c,b);
 
         // not (B) and ((A xor 1) or C)
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline),TernaryOp(X23)]
         public static T f23<T>(T a, T b, T c)
             where T : unmanaged
-                => and(not(b),or(xor1(a),c));
+                => and(not(b), or(not(a),c));
 
         // (a xor b) and (b xor c)
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline),TernaryOp(X24)]
         public static T f24<T>(T a, T b, T c)
             where T : unmanaged
                 => and(xor(a,b), xor(b,c));
 
         // (not ((A and B)) and (A xor (C xor 1)))
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), TernaryOp(X25)]
         public static T f25<T>(T a, T b, T c)
             where T : unmanaged
-                => and(not(and(a,b)), xor(a, xor1(c)));
+                => and(not(and(a,b)), xor(a, not(c)));
 
         // not ((A and B)) and (B xor C)
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), TernaryOp(X26)]
         public static T f26<T>(T a, T b, T c)
             where T : unmanaged
                 => and(not(and(a,b)),xor(b,c));
 
         //C ? not (B) : not (A)
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), TernaryOp(X27)]
         public static T f27<T>(T a, T b, T c)
             where T : unmanaged
-                => select(c,not(b),not(a));
+                => select(c,not(b), not(a));
 
         //C and (B xor A)
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), TernaryOp(X28)]
         public static T f28<T>(T a, T b, T c)
             where T : unmanaged
                 => and(c,xor(b,a));
 
         // C ? (B xor A) : (B nor A)
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), TernaryOp(X29)]
         public static T f29<T>(T a, T b, T c)
             where T : unmanaged
                 => select(c, xor(b,a),nor(b,a));
 
         // C and (B nand A)
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), TernaryOp(X2A)]
         public static T f2a<T>(T a, T b, T c)
             where T : unmanaged
                 => and(c,nand(b,a));
 
         // C ? (B nand A) : (B nor A)
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), TernaryOp(X2B)]
         public static T f2b<T>(T a, T b, T c)
             where T : unmanaged
                 => select(c,nand(b,a), nor(b,a));
 
         // (B or C) and (A xor B)
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), TernaryOp(X2C)]
         public static T f2c<T>(T a, T b, T c)
             where T : unmanaged
                 => and(or(b,c), xor(a,b));
 
         // A xor (B or not (C))
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), TernaryOp(X2D)]
         public static T f2d<T>(T a, T b, T c)
             where T : unmanaged
                 => xor(a, or(b, not(c)));
 
         // (B or C) xor (A and B)
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), TernaryOp(X2E)]
         public static T f2e<T>(T a, T b, T c)
             where T : unmanaged
                 => xor(or(b,c),and(a,b));
 
         // not (A) or (not (B) and C)
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), TernaryOp(X2F)]
         public static T f2f<T>(T a, T b, T c)
             where T : unmanaged
                 => or(not(a),(and(not(b),c)));
@@ -572,7 +572,7 @@ namespace Z0.Logix
         [MethodImpl(Inline),TernaryOp(X31)]
         public static T f31<T>(T a, T b, T c)
             where T : unmanaged
-                => and(not(b), or(a,xor1(c)));
+                => and(not(b), or(a,not(c)));
 
         //not (B) and (A or C)
         [MethodImpl(Inline),TernaryOp(X32)]
@@ -620,7 +620,7 @@ namespace Z0.Logix
         [MethodImpl(Inline),TernaryOp(X39)]
         public static T f39<T>(T a, T b, T c)
             where T : unmanaged
-                => xor(b, or(a,xor1(c)));
+                => xor(b, or(a, not(c)));
 
         // A ? not (B) : C
         [MethodImpl(Inline),TernaryOp(X3A)]
@@ -809,20 +809,48 @@ namespace Z0.Logix
                 => and(or(a,b),xor(a,c));
 
         // C xor (A or (B xor 1))
-        [MethodImpl(Inline),TernaryOp(X59)]
+        [MethodImpl(Inline), TernaryOp(X59)]
         public static T f59<T>(T a, T b, T c)
             where T : unmanaged
-                => xor(c, or(a,xor1(b)));
+                => xor(c, or(a, not(b)));
 
         // C xor A
-        [MethodImpl(Inline),TernaryOp(X5A)]
+        [MethodImpl(Inline), TernaryOp(X5A)]
         public static T f5a<T>(T a, T b, T c)
             where T : unmanaged
                 => xor(c,a);
 
+        //((A xor C) or ((A or B) xor 1))
+        [MethodImpl(Inline),TernaryOp(X5B)]
+        public static T f5b<T>(T a, T b, T c)
+            where T : unmanaged
+                => or(xor(a,c), xor(or(a,b),ones<T>()));
+
+        //(A ? not (C) : B)
+        [MethodImpl(Inline),TernaryOp(X5C)]
+        public static T f5c<T>(T a, T b, T c)
+            where T : unmanaged
+                => select(a,not(c), b);
+
+        // not (C) or (not (A) and B)
+        [MethodImpl(Inline),TernaryOp(X5D)]
+        public static T f5d<T>(T a, T b, T c)
+            where T : unmanaged
+                => or(not(c), and(not(a), b));
+
+        // (not (C) and B) or (A xor C)
+        [MethodImpl(Inline),TernaryOp(X5E)]
+        public static T f5e<T>(T a, T b, T c)
+            where T : unmanaged
+                => or(and(not(c),b),(xor(a,c)));
+
+        [MethodImpl(Inline),TernaryOp(X5F)]
+        public static T f5f<T>(T a, T b, T c)
+            where T : unmanaged
+                => nand(c,a);
 
         // a ? (b xnor c) : (b nand c)
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline),TernaryOp(X97)]
         public static T f97<T>(T a, T b, T c)
             where T : unmanaged
                 => select(c, xnor(b,c), nand(b,c));

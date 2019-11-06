@@ -16,67 +16,67 @@ namespace Z0
     partial class math
     {
         [MethodImpl(Inline)]
-        public static bool gt(sbyte a, sbyte b)
+        public static bit gt(sbyte a, sbyte b)
             => a > b;
 
         [MethodImpl(Inline)]
-        public static bool gt(byte a, byte b)
+        public static bit gt(byte a, byte b)
             => a > b;
 
         [MethodImpl(Inline)]
-        public static bool gt(short a, short b)
+        public static bit gt(short a, short b)
             => a > b;
 
         [MethodImpl(Inline)]
-        public static bool gt(ushort a, ushort b)
+        public static bit gt(ushort a, ushort b)
             => a > b;
 
         [MethodImpl(Inline)]
-        public static bool gt(int a, int b)
+        public static bit gt(int a, int b)
             => a > b;
 
         [MethodImpl(Inline)]
-        public static bool gt(uint a, uint b)
+        public static bit gt(uint a, uint b)
             => a > b;
 
         [MethodImpl(Inline)]
-        public static bool gt(long a, long b)
+        public static bit gt(long a, long b)
             => a > b;
 
         [MethodImpl(Inline)]
-        public static bool gt(ulong a, ulong b)
+        public static bit gt(ulong a, ulong b)
             => a > b;
  
          [MethodImpl(Inline)]
-        public static bool gteq(sbyte a, sbyte b)
+        public static bit gteq(sbyte a, sbyte b)
             => a >= b;
 
         [MethodImpl(Inline)]
-        public static bool gteq(byte a, byte b)
+        public static bit gteq(byte a, byte b)
             => a >= b;
 
         [MethodImpl(Inline)]
-        public static bool gteq(short a, short b)
+        public static bit gteq(short a, short b)
             => a >= b;
 
         [MethodImpl(Inline)]
-        public static bool gteq(ushort a, ushort b)
+        public static bit gteq(ushort a, ushort b)
             => a >= b;
 
         [MethodImpl(Inline)]
-        public static bool gteq(int a, int b)
+        public static bit gteq(int a, int b)
             => a >= b;
 
         [MethodImpl(Inline)]
-        public static bool gteq(uint a, uint b)
+        public static bit gteq(uint a, uint b)
             => a >= b;
 
         [MethodImpl(Inline)]
-        public static bool gteq(long a, long b)
+        public static bit gteq(long a, long b)
             => a >= b;
 
         [MethodImpl(Inline)]
-        public static bool gteq(ulong a, ulong b)
+        public static bit gteq(ulong a, ulong b)
             => a >= b;
     }
 }

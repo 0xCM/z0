@@ -18,107 +18,108 @@ namespace Z0
         /// <summary>
         /// addtiplies two primal values
         /// </summary>
-        /// <param name="lhs">The left value</param>
-        /// <param name="rhs">The right value</param>
+        /// <param name="a">The left value</param>
+        /// <param name="b">The right value</param>
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
-        public static T add<T>(T lhs, T rhs)
+        public static T add<T>(T a, T b)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte) 
             || typeof(T) == typeof(ushort) 
             || typeof(T) == typeof(uint) 
             || typeof(T) == typeof(ulong))
-                return addu(lhs,rhs);
+                return add_u(a,b);
             else if(typeof(T) == typeof(sbyte) 
             || typeof(T) == typeof(short) 
             || typeof(T) == typeof(int) 
             || typeof(T) == typeof(long))
-                return addi(lhs,rhs);
+                return add_i(a,b);
             else 
-                return gfp.add(lhs,rhs);
+                return gfp.add(a,b);
         }
 
         /// <summary>
         /// addtiplies two primal values
         /// </summary>
-        /// <param name="lhs">The left value</param>
-        /// <param name="rhs">The right value</param>
+        /// <param name="a">The left value</param>
+        /// <param name="b">The right value</param>
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
-        public static ref T add<T>(ref T lhs, T rhs)
+        public static ref T add<T>(ref T a, T b)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte) 
             || typeof(T) == typeof(ushort) 
             || typeof(T) == typeof(uint) 
             || typeof(T) == typeof(ulong))
-                addu(ref lhs,rhs);
+                add_u(ref a,b);
             else if(typeof(T) == typeof(sbyte) 
             || typeof(T) == typeof(short) 
             || typeof(T) == typeof(int) 
             || typeof(T) == typeof(long))
-                addi(ref lhs,rhs);
-            else gfp.add(ref lhs,rhs);
-            return ref lhs;
+                add_i(ref a,b);
+            else 
+                gfp.add(ref a,b);
+            return ref a;
         }
 
         [MethodImpl(Inline)]
-        static T addi<T>(T lhs, T rhs)
+        static T add_i<T>(T a, T b)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                 return generic<T>(math.add(int8(lhs), int8(rhs)));
+                 return generic<T>(math.add(int8(a), int8(b)));
             else if(typeof(T) == typeof(short))
-                 return generic<T>(math.add(int16(lhs), int16(rhs)));
+                 return generic<T>(math.add(int16(a), int16(b)));
             else if(typeof(T) == typeof(int))
-                 return generic<T>(math.add(int32(lhs), int32(rhs)));
+                 return generic<T>(math.add(int32(a), int32(b)));
             else
-                 return generic<T>(math.add(int64(lhs), int64(rhs)));
+                 return generic<T>(math.add(int64(a), int64(b)));
         }
 
         [MethodImpl(Inline)]
-        static T addu<T>(T lhs, T rhs)
+        static T add_u<T>(T a, T b)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(math.add(uint8(lhs), uint8(rhs)));
+                return generic<T>(math.add(uint8(a), uint8(b)));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(math.add(uint16(lhs), uint16(rhs)));
+                return generic<T>(math.add(uint16(a), uint16(b)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(math.add(uint32(lhs), uint32(rhs)));
+                return generic<T>(math.add(uint32(a), uint32(b)));
             else 
-                return generic<T>(math.add(uint64(lhs), uint64(rhs)));
+                return generic<T>(math.add(uint64(a), uint64(b)));
         }
 
         [MethodImpl(Inline)]
-        static ref T addi<T>(ref T lhs, T rhs)
+        static ref T add_i<T>(ref T a, T b)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                 math.add(ref int8(ref lhs), int8(rhs));
+                 math.add(ref int8(ref a), int8(b));
             else if(typeof(T) == typeof(short))
-                 math.add(ref int16(ref lhs), int16(rhs));
+                 math.add(ref int16(ref a), int16(b));
             else if(typeof(T) == typeof(int))
-                 math.add(ref int32(ref lhs), int32(rhs));
+                 math.add(ref int32(ref a), int32(b));
             else
-                 math.add(ref int64(ref lhs), int64(rhs));
-            return ref lhs;
+                 math.add(ref int64(ref a), int64(b));
+            return ref a;
         }
 
         [MethodImpl(Inline)]
-        static ref T addu<T>(ref T lhs, T rhs)
+        static ref T add_u<T>(ref T a, T b)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                math.add(ref uint8(ref lhs), uint8(rhs));
+                math.add(ref uint8(ref a), uint8(b));
             else if(typeof(T) == typeof(ushort))
-                math.add(ref uint16(ref lhs), uint16(rhs));
+                math.add(ref uint16(ref a), uint16(b));
             else if(typeof(T) == typeof(uint))
-                math.add(ref uint32(ref lhs), uint32(rhs));
+                math.add(ref uint32(ref a), uint32(b));
             else 
-                math.add(ref uint64(ref lhs), uint64(rhs));
-            return ref lhs;
+                math.add(ref uint64(ref a), uint64(b));
+            return ref a;
         }
     }
 }

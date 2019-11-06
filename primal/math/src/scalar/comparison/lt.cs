@@ -17,67 +17,67 @@ namespace Z0
     partial class math
     {
         [MethodImpl(Inline)]
-        public static bool lt(sbyte lhs, sbyte rhs)
+        public static bit lt(sbyte lhs, sbyte rhs)
             => lhs < rhs;
 
         [MethodImpl(Inline)]
-        public static bool lt(byte lhs, byte rhs)
+        public static bit lt(byte lhs, byte rhs)
             => lhs < rhs;
 
         [MethodImpl(Inline)]
-        public static bool lt(short lhs, short rhs)
+        public static bit lt(short lhs, short rhs)
             => lhs < rhs;
 
         [MethodImpl(Inline)]
-        public static bool lt(ushort lhs, ushort rhs)
+        public static bit lt(ushort lhs, ushort rhs)
             => lhs < rhs;
 
         [MethodImpl(Inline)]
-        public static bool lt(int lhs, int rhs)
+        public static bit lt(int lhs, int rhs)
             => lhs < rhs;
 
         [MethodImpl(Inline)]
-        public static bool lt(uint lhs, uint rhs)
+        public static bit lt(uint lhs, uint rhs)
             => lhs < rhs;
 
         [MethodImpl(Inline)]
-        public static bool lt(long lhs, long rhs)
+        public static bit lt(long lhs, long rhs)
             => lhs < rhs;
 
         [MethodImpl(Inline)]
-        public static bool lt(ulong lhs, ulong rhs)
+        public static bit lt(ulong lhs, ulong rhs)
             => lhs < rhs;
         
         [MethodImpl(Inline)]
-        public static bool lteq(sbyte lhs, sbyte rhs)
+        public static bit lteq(sbyte lhs, sbyte rhs)
             => lhs <= rhs;
 
         [MethodImpl(Inline)]
-        public static bool lteq(byte lhs, byte rhs)
+        public static bit lteq(byte lhs, byte rhs)
             => lhs <= rhs;
 
         [MethodImpl(Inline)]
-        public static bool lteq(short lhs, short rhs)
+        public static bit lteq(short lhs, short rhs)
             => lhs <= rhs;
 
         [MethodImpl(Inline)]
-        public static bool lteq(ushort lhs, ushort rhs)
+        public static bit lteq(ushort lhs, ushort rhs)
             => lhs <= rhs;
 
         [MethodImpl(Inline)]
-        public static bool lteq(int lhs, int rhs)
+        public static bit lteq(int lhs, int rhs)
             => lhs <= rhs;
 
         [MethodImpl(Inline)]
-        public static bool lteq(uint lhs, uint rhs)
+        public static bit lteq(uint lhs, uint rhs)
             => lhs <= rhs;
 
         [MethodImpl(Inline)]
-        public static bool lteq(long lhs, long rhs)
+        public static bit lteq(long lhs, long rhs)
             => lhs <= rhs;
 
         [MethodImpl(Inline)]
-        public static bool lteq(ulong lhs, ulong rhs)
+        public static bit lteq(ulong lhs, ulong rhs)
             => lhs <= rhs; 
     }
 }

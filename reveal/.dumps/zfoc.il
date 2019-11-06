@@ -1,4 +1,4 @@
-// 2019-11-05 06:49:42:909
+// 2019-11-06 08:55:37:224
 ReadOnlySpan<byte> bitseq(byte value)
 {
     IL_0000: ldarg.0
@@ -462,56 +462,33 @@ uint div_const_32(uint a)
     IL_0006: ret
 
 }
-uint mul_lo_32u(uint x, uint y)
+void mul_full_64u(in Pair<ulong> src, ref Pair<ulong> dst)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: call System.UInt32 Z0.MulOps::lo(System.UInt32,System.UInt32)
+    IL_0002: call System.Void Z0.BmiMul::full(Z0.Pair`1<System.UInt64>&,Z0.Pair`1<System.UInt64>&)
     IL_0007: ret
 
 }
-ulong mul_lo_64u(ulong x, ulong y)
+void mul_full_32u(in Pair<uint> src, ref Pair<uint> dst)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: call System.UInt64 Z0.MulOps::lo(System.UInt64,System.UInt64)
+    IL_0002: call System.Void Z0.BmiMul::full(Z0.Pair`1<System.UInt32>&,Z0.Pair`1<System.UInt32>&)
     IL_0007: ret
 
 }
-uint mul_hi_32u(uint x, uint y)
+ulong byteswap(ulong src)
 {
     IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: call System.UInt32 Z0.MulOps::hi(System.UInt32,System.UInt32)
-    IL_0007: ret
-
-}
-ulong mul_hi_64u(ulong x, ulong y)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: call System.UInt64 Z0.MulOps::hi(System.UInt64,System.UInt64)
-    IL_0007: ret
-
-}
-void mul_full_32u(uint a, uint b, out uint lo, out uint hi)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: ldarg.2
-    IL_0003: ldarg.3
-    IL_0004: call System.Void Z0.MulOps::full(System.UInt32,System.UInt32,System.UInt32&,System.UInt32&)
-    IL_0009: ret
-
-}
-void mul_full_64u(ulong x, ulong y, out ulong lo, out ulong hi)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: ldarg.2
-    IL_0003: ldarg.3
-    IL_0004: call System.Void Z0.MulOps::full(System.UInt64,System.UInt64,System.UInt64&,System.UInt64&)
-    IL_0009: ret
+    IL_0001: call System.Byte[] System.BitConverter::GetBytes(System.UInt64)
+    IL_0006: call System.Span`1<System.Byte> System.Span`1<System.Byte>::op_Implicit(System.Byte[])
+    IL_000B: stloc.0
+    IL_000C: ldloc.0
+    IL_000D: call System.Span`1<System.UInt64> Z0.SpanExtensions::AsUInt64<System.Byte>(System.Span`1<System.Byte>)
+    IL_0012: call System.UInt64& zfunc::head<System.UInt64>(System.Span`1<System.UInt64>)
+    IL_0017: ldind.i8
+    IL_0018: ret
 
 }
 UInt8 bitview8_and(UInt8 a, UInt8 b)

@@ -16,136 +16,181 @@ namespace Z0
     partial class math
     {
         /// <summary>
-        /// Takes the average of the operands, rounding toward zero
+        /// Computes the average of the operands, rounding toward zero
         /// </summary>
-        /// <param name="lhs">The left operand</param>
-        /// <param name="rhs">The right operand</param>
+        /// <param name="a">The left operand</param>
+        /// <param name="b">The right operand</param>
         /// <remarks>Algorithm adapted from Arndt, Matters Computational</remarks>
         [MethodImpl(Inline)]
-        public static byte avgz(byte lhs, byte rhs)
-            => (byte)((lhs & rhs) + ((lhs ^ rhs) >> 1));
+        public static byte avgz(byte a, byte b)
+            => (byte)((a & b) + ((a ^ b) >> 1));
 
         /// <summary>
         /// Takes the average of the operands, rounding toward zero
         /// </summary>
-        /// <param name="lhs">The left operand</param>
-        /// <param name="rhs">The right operand</param>
+        /// <param name="a">The left operand</param>
+        /// <param name="b">The right operand</param>
         /// <remarks>Algorithm adapted from Arndt, Matters Computational</remarks>
         [MethodImpl(Inline)]
-        public static ushort avgz(ushort lhs, ushort rhs)
-            => (ushort)((lhs & rhs) + ((lhs ^ rhs) >> 1));
+        public static ushort avgz(ushort a, ushort b)
+            => (ushort)((a & b) + ((a ^ b) >> 1));
 
         /// <summary>
         /// Takes the average of the operands, rounding toward zero
         /// </summary>
-        /// <param name="lhs">The left operand</param>
-        /// <param name="rhs">The right operand</param>
+        /// <param name="a">The left operand</param>
+        /// <param name="b">The right operand</param>
         /// <remarks>Algorithm adapted from Arndt, Matters Computational</remarks>
         [MethodImpl(Inline)]
-        public static uint avgz(uint lhs, uint rhs)
-            => (lhs & rhs) + ((lhs ^ rhs) >> 1);
+        public static uint avgz(uint a, uint b)
+            => (a & b) + ((a ^ b) >> 1);
 
         /// <summary>
         /// Takes the average of the operands, rounding toward zero
         /// </summary>
-        /// <param name="lhs">The left operand</param>
-        /// <param name="rhs">The right operand</param>
+        /// <param name="a">The left operand</param>
+        /// <param name="b">The right operand</param>
         /// <remarks>Algorithm adapted from Arndt, Matters Computational</remarks>
         [MethodImpl(Inline)]
-        public static ulong avgz(ulong lhs, ulong rhs)
-            => (lhs & rhs) + ((lhs ^ rhs) >> 1);
+        public static ulong avgz(ulong a, ulong b)
+            => (a & b) + ((a ^ b) >> 1);
 
         /// <summary>
-        /// Takes the average of the operands, rounding toward zero and
-        /// ovwriting the left operand with the result
+        /// Takes the average of the operands, rounding toward zero, and ovwriting the left operand with the result
         /// </summary>
-        /// <param name="lhs">The left operand</param>
-        /// <param name="rhs">The right operand</param>
+        /// <param name="a">The left operand</param>
+        /// <param name="b">The right operand</param>
         [MethodImpl(Inline)]
-        public static ref byte avgz(ref byte lhs, in byte rhs)
+        public static ref byte avgz(ref byte a, in byte b)
         {
-            lhs = avgz(lhs,rhs);
-            return ref lhs;
+            a = avgz(a,b);
+            return ref a;
         }
 
         /// <summary>
-        /// Computes average of the operands, rounding toward zero and ovwriting the 
-        /// first operand with the result
+        /// Computes average of the operands, rounding toward zero, and ovwriting the first operand with the result
         /// </summary>
-        /// <param name="lhs">The left operand</param>
-        /// <param name="rhs">The right operand</param>
+        /// <param name="a">The left operand</param>
+        /// <param name="b">The right operand</param>
         [MethodImpl(Inline)]
-        public static ref ushort avgz(ref ushort lhs, in ushort rhs)
+        public static ref ushort avgz(ref ushort a, in ushort b)
         {
-            lhs = avgz(lhs,rhs);
-            return ref lhs;
+            a = avgz(a,b);
+            return ref a;
         }
 
         /// <summary>
-        /// Computes average of the operands, rounding toward zero and ovwriting the 
-        /// first operand with the result
+        /// Computes average of the operands, rounding toward zero, and ovwriting the first operand with the result
         /// </summary>
-        /// <param name="lhs">The left operand</param>
-        /// <param name="rhs">The right operand</param>
+        /// <param name="a">The left operand</param>
+        /// <param name="b">The right operand</param>
         [MethodImpl(Inline)]
-        public static ref uint avgz(ref uint lhs, in uint rhs)
+        public static ref uint avgz(ref uint a, in uint b)
         {
-            lhs = avgz(lhs,rhs);
-            return ref lhs;
+            a = avgz(a,b);
+            return ref a;
         }
 
         /// <summary>
-        /// Computes average of the operands, rounding toward zero and ovwriting the 
-        /// first operand with the result
+        /// Computes average of the operands, rounding toward zero, and ovwriting the first operand with the result
         /// </summary>
-        /// <param name="lhs">The left operand</param>
-        /// <param name="rhs">The right operand</param>
+        /// <param name="a">The left operand</param>
+        /// <param name="b">The right operand</param>
         [MethodImpl(Inline)]
-        public static ref ulong avgz(ref ulong lhs, in ulong rhs)
+        public static ref ulong avgz(ref ulong a, in ulong b)
         {
-            lhs = avgz(lhs,rhs);
-            return ref lhs;
+            a = avgz(a,b);
+            return ref a;
         }
 
         /// <summary>
         /// Takes the average of the operands, rounding toward infinity
         /// </summary>
-        /// <param name="lhs">The left operand</param>
-        /// <param name="rhs">The right operand</param>
+        /// <param name="a">The left operand</param>
+        /// <param name="b">The right operand</param>
         /// <remarks>Algorithm adapted from Arndt, Matters Computational</remarks>
         [MethodImpl(Inline)]
-        public static byte avgi(byte lhs, byte rhs)
-            => (byte)((lhs | rhs) - ((lhs ^ rhs) >> 1));
+        public static byte avgi(byte a, byte b)
+            => (byte)((a | b) - ((a ^ b) >> 1));
 
         /// <summary>
         /// Takes the average of the operands, rounding toward infinity
         /// </summary>
-        /// <param name="lhs">The left operand</param>
-        /// <param name="rhs">The right operand</param>
+        /// <param name="a">The left operand</param>
+        /// <param name="b">The right operand</param>
         /// <remarks>Algorithm adapted from Arndt, Matters Computational</remarks>
         [MethodImpl(Inline)]
-        public static ushort avgi(ushort lhs, ushort rhs)
-            => (ushort)((lhs | rhs) - ((lhs ^ rhs) >> 1));
+        public static ushort avgi(ushort a, ushort b)
+            => (ushort)((a | b) - ((a ^ b) >> 1));
 
         /// <summary>
         /// Takes the average of the operands, rounding toward infinity
         /// </summary>
-        /// <param name="lhs">The left operand</param>
-        /// <param name="rhs">The right operand</param>
+        /// <param name="a">The left operand</param>
+        /// <param name="b">The right operand</param>
         /// <remarks>Algorithm adapted from Arndt, Matters Computational</remarks>
         [MethodImpl(Inline)]
-        public static uint avgi(uint lhs, uint rhs)
-            => (lhs | rhs) - ((lhs ^ rhs) >> 1);
+        public static uint avgi(uint a, uint b)
+            => (a | b) - ((a ^ b) >> 1);
 
         /// <summary>
         /// Takes the average of the operands, rounding toward infinity
         /// </summary>
-        /// <param name="lhs">The left operand</param>
-        /// <param name="rhs">The right operand</param>
+        /// <param name="a">The left operand</param>
+        /// <param name="b">The right operand</param>
         /// <remarks>Algorithm adapted from Arndt, Matters Computational</remarks>
         [MethodImpl(Inline)]
-        public static ulong avgi(ulong lhs, ulong rhs)
-            => (lhs | rhs) - ((lhs ^ rhs) >> 1);
+        public static ulong avgi(ulong a, ulong b)
+            => (a | b) - ((a ^ b) >> 1);
+
+        /// <summary>
+        /// Takes the average of the operands, rounding toward zero, and ovwriting the left operand with the result
+        /// </summary>
+        /// <param name="a">The left operand</param>
+        /// <param name="b">The right operand</param>
+        [MethodImpl(Inline)]
+        public static ref byte avgi(ref byte a, in byte b)
+        {
+            a = avgi(a,b);
+            return ref a;
+        }
+
+        /// <summary>
+        /// Computes average of the operands, rounding toward zero, and ovwriting the first operand with the result
+        /// </summary>
+        /// <param name="a">The left operand</param>
+        /// <param name="b">The right operand</param>
+        [MethodImpl(Inline)]
+        public static ref ushort avgi(ref ushort a, in ushort b)
+        {
+            a = avgi(a,b);
+            return ref a;
+        }
+
+        /// <summary>
+        /// Computes average of the operands, rounding toward zero, and ovwriting the first operand with the result
+        /// </summary>
+        /// <param name="a">The left operand</param>
+        /// <param name="b">The right operand</param>
+        [MethodImpl(Inline)]
+        public static ref uint avgi(ref uint a, in uint b)
+        {
+            a = avgi(a,b);
+            return ref a;
+        }
+
+        /// <summary>
+        /// Computes average of the operands, rounding toward zero, and ovwriting the first operand with the result
+        /// </summary>
+        /// <param name="a">The left operand</param>
+        /// <param name="b">The right operand</param>
+        [MethodImpl(Inline)]
+        public static ref ulong avgi(ref ulong a, in ulong b)
+        {
+            a = avgi(a,b);
+            return ref a;
+        }
+
 
     }
 }

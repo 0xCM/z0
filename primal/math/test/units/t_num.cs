@@ -9,7 +9,6 @@ namespace Z0.Test
 
     using static zfunc;
 
-    using D = PrimalDelegates;
 
     public class t_num : UnitTest<t_num>
     {

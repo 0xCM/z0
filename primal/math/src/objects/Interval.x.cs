@@ -35,7 +35,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bool Contains<T>(this IInterval<T> src, T point)
             where T : unmanaged
-                => Interval.Contains(src,point);
+                => Interval.contains(src,point);
 
         [MethodImpl(Inline)]
         public static IEnumerable<T> PartPointStream<T>(this Interval<T> src, T width, int? precision = null)

@@ -19,6 +19,15 @@ namespace Z0
             => Bmi2.X64.MultiplyNoFlags(x,y);
 
         [MethodImpl(Inline)]
+        public static ulong lo(ulong x, ulong y)
+        {
+            var lo = 0ul;            
+            Bmi2.X64.MultiplyNoFlags(x,y, &lo);
+            return lo;
+        }
+
+
+        [MethodImpl(Inline)]
         public static ulong hi(uint x, uint y)
             => Bmi2.MultiplyNoFlags(x,y);
 
@@ -27,14 +36,6 @@ namespace Z0
         {
             var lo = 0u;
             Bmi2.MultiplyNoFlags(x,y, refptr(ref lo));
-            return lo;
-        }
-
-        [MethodImpl(Inline)]
-        public static ulong lo(ulong x, ulong y)
-        {
-            var lo = 0ul;            
-            Bmi2.X64.MultiplyNoFlags(x,y, &lo);
             return lo;
         }
 
@@ -59,6 +60,15 @@ namespace Z0
            lo = 0ul;
            hi = Bmi2.X64.MultiplyNoFlags(x,y, refptr(ref lo));
         }
+
+
+        [MethodImpl(Inline)]
+        public static void full(in Pair<ulong> src, ref Pair<ulong> dst)                 
+            => dst.B = Bmi2.X64.MultiplyNoFlags(src.A, src.B, refptr(ref dst.A));
+
+        [MethodImpl(Inline)]
+        public static void full(in Pair<uint> src, ref Pair<uint> dst)                 
+            => dst.B = Bmi2.MultiplyNoFlags(src.A, src.B, refptr(ref dst.A));
 
     }
 

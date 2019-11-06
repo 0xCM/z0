@@ -16,67 +16,67 @@ namespace Z0
     partial class math
     {
         [MethodImpl(Inline)]
-        public static bool eq(sbyte lhs, sbyte rhs)
+        public static bit eq(sbyte lhs, sbyte rhs)
             => lhs == rhs;
 
         [MethodImpl(Inline)]
-        public static bool eq(byte lhs, byte rhs)
+        public static bit eq(byte lhs, byte rhs)
             => lhs == rhs;
 
         [MethodImpl(Inline)]
-        public static bool eq(short lhs, short rhs)
+        public static bit eq(short lhs, short rhs)
             => lhs == rhs;
 
         [MethodImpl(Inline)]
-        public static bool eq(ushort lhs, ushort rhs)
+        public static bit eq(ushort lhs, ushort rhs)
             => lhs == rhs;
 
         [MethodImpl(Inline)]
-        public static bool eq(int lhs, int rhs)
+        public static bit eq(int lhs, int rhs)
             => lhs == rhs;
 
         [MethodImpl(Inline)]
-        public static bool eq(uint lhs, uint rhs)
+        public static bit eq(uint lhs, uint rhs)
             => lhs == rhs;
 
         [MethodImpl(Inline)]
-        public static bool eq(long lhs, long rhs)
+        public static bit eq(long lhs, long rhs)
             => lhs == rhs;
 
         [MethodImpl(Inline)]
-        public static bool eq(ulong lhs, ulong rhs)
+        public static bit eq(ulong lhs, ulong rhs)
             => lhs == rhs;
   
         [MethodImpl(Inline)]
-        public static bool neq(sbyte lhs, sbyte rhs)
+        public static bit neq(sbyte lhs, sbyte rhs)
             => lhs != rhs;
 
         [MethodImpl(Inline)]
-        public static bool neq(byte lhs, byte rhs)
+        public static bit neq(byte lhs, byte rhs)
             => lhs != rhs;
 
         [MethodImpl(Inline)]
-        public static bool neq(short lhs, short rhs)
+        public static bit neq(short lhs, short rhs)
             => lhs != rhs;
 
         [MethodImpl(Inline)]
-        public static bool neq(ushort lhs, ushort rhs)
+        public static bit neq(ushort lhs, ushort rhs)
             => lhs != rhs;
 
         [MethodImpl(Inline)]
-        public static bool neq(int lhs, int rhs)
+        public static bit neq(int lhs, int rhs)
             => lhs != rhs;
 
         [MethodImpl(Inline)]
-        public static bool neq(uint lhs, uint rhs)
+        public static bit neq(uint lhs, uint rhs)
             => lhs != rhs;
 
         [MethodImpl(Inline)]
-        public static bool neq(long lhs, long rhs)
+        public static bit neq(long lhs, long rhs)
             => lhs != rhs;
 
         [MethodImpl(Inline)]
-        public static bool neq(ulong lhs, ulong rhs)
+        public static bit neq(ulong lhs, ulong rhs)
             => lhs != rhs;
 
  

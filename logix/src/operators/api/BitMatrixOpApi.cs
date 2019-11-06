@@ -16,6 +16,19 @@ namespace Z0.Logix
     using static OpHelpers;
     using static BitMatrixOps;
 
+    // public delegate BitMatrix<T> BitMatrixUnaryOp<T>(in BitMatrix<T> A)
+    //     where T : unmanaged;
+
+    public delegate ref BitMatrix<T> BitMatrixUnaryRefOp<T>(in BitMatrix<T> A, ref BitMatrix<T> Z)
+        where T : unmanaged;
+
+    // public delegate BitMatrix<T> BitMatrixBinaryOp<T>(in BitMatrix<T> A, in BitMatrix<T> B)
+    //     where T : unmanaged;
+
+    public delegate ref BitMatrix<T> BitMatrixBinaryRefOp<T>(in BitMatrix<T> A, in BitMatrix<T> B, ref BitMatrix<T> Z)
+        where T : unmanaged;
+
+
     /// <summary>
     /// Defines services for bitmatrix operators
     /// </summary>
@@ -90,12 +103,12 @@ namespace Z0.Logix
             {
                 case BinaryBitwiseOpKind.True: return @true<T>();
                 case BinaryBitwiseOpKind.False: return @false<T>();
-                case BinaryBitwiseOpKind.And: return and(A,B, ref Z);
-                case BinaryBitwiseOpKind.Nand: return nand(A,B, ref Z);
-                case BinaryBitwiseOpKind.Or: return or(A,B, ref Z);
-                case BinaryBitwiseOpKind.Nor: return nor(A,B, ref Z);
-                case BinaryBitwiseOpKind.XOr: return xor(A,B, ref Z);
-                case BinaryBitwiseOpKind.Xnor: return xnor(A,B, ref Z);
+                case BinaryBitwiseOpKind.And: return and(A, B, ref Z);
+                case BinaryBitwiseOpKind.Nand: return nand(A, B, ref Z);
+                case BinaryBitwiseOpKind.Or: return or(A, B, ref Z);
+                case BinaryBitwiseOpKind.Nor: return nor(A, B, ref Z);
+                case BinaryBitwiseOpKind.XOr: return xor(A, B, ref Z);
+                case BinaryBitwiseOpKind.Xnor: return xnor(A, B, ref Z);
                 case BinaryBitwiseOpKind.LeftProject: return left(A,B, ref Z);
                 case BinaryBitwiseOpKind.LeftNot: return leftnot(A,B, ref Z);
                 case BinaryBitwiseOpKind.RightProject: return right(A,B, ref Z);
@@ -109,12 +122,32 @@ namespace Z0.Logix
 
         }
 
-        public static ref BitMatrix<T> blend<T>(BinaryBitwiseOpKind kind, BitMatrix<T> A, BitVector<T> x, ref BitMatrix<T> Z)
+        public static BitMatrixBinaryRefOp<T> lookup<T>(BinaryBitwiseOpKind kind)
             where T : unmanaged
         {
-            
-            return ref Z;
+            switch(kind)
+            {
+                case BinaryBitwiseOpKind.True: return @true;
+                case BinaryBitwiseOpKind.False: return @false;
+                case BinaryBitwiseOpKind.And: return and;
+                case BinaryBitwiseOpKind.Nand: return nand;
+                case BinaryBitwiseOpKind.Or: return or;
+                case BinaryBitwiseOpKind.Nor: return nor;
+                case BinaryBitwiseOpKind.XOr: return xor;
+                case BinaryBitwiseOpKind.Xnor: return xnor;
+                case BinaryBitwiseOpKind.LeftProject: return left;
+                case BinaryBitwiseOpKind.LeftNot: return leftnot;
+                case BinaryBitwiseOpKind.RightProject: return right;
+                case BinaryBitwiseOpKind.RightNot: return rightnot;
+                case BinaryBitwiseOpKind.Implication: return imply;
+                case BinaryBitwiseOpKind.Nonimplication: return notimply;
+                case BinaryBitwiseOpKind.ConverseImplication: return cimply;
+                case BinaryBitwiseOpKind.ConverseNonimplication: return cnotimply;
+                default: return nomareftop<T>(kind);
+            }
+
         }
+
 
         static BitMatrix<T> dne<T,E>(E kind,BitMatrix<T> A, BitMatrix<T> B = default)
             where T : unmanaged

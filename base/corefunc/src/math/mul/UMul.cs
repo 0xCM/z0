@@ -51,8 +51,6 @@ namespace Z0
             return (((ulong)Bmi2.MultiplyNoFlags(lhs, rhs, refptr(ref dst))) << 32) | dst;
         }
 
-
-
         /// <summary>
         /// Calculates the 128-bit product of two 64-bit integers
         /// </summary>
@@ -154,5 +152,33 @@ namespace Z0
             dstLo -= srcLo;
         }
 
+        /// <summary>
+        /// 64x64 -> 128 multiplication
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <returns>
+        /// Taken from https://github.com/chfast/intx/blob/master/include/intx/int128.hpp
+        /// </returns>
+        [MethodImpl(Inline)]
+        public static Pair<ulong> mul128(ulong x, ulong y)
+        {
+            var xl = x & 0xffffffffu;
+            var xh = x >> 32;
+            var yl = y & 0xffffffffu;
+            var yh = y >> 32;
+
+            var t0 = xl * yl;
+            var t1 = xh * yl;
+            var t2 = xl * yh;
+            var t3 = xh * yh;
+
+            var u1 = t1 + (t0 >> 32);
+            var u2 = t2 + (u1 & 0xffffffffu);
+
+            var lo = (u2 << 32) | (t0 & 0xffffffffu);
+            var hi = t3 + (u2 >> 32) + (u1 >> 32);  
+            return Pair.Define(lo,hi);          
+        }
     }
 }

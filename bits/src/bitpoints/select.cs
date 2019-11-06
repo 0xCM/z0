@@ -10,66 +10,31 @@ namespace Z0
     using System.Runtime.Intrinsics;
     using System.Runtime.Intrinsics.X86;
     using static zfunc;
+    using static As;
+    using static AsIn;
 
-    partial class BitPoints
+    unsafe partial class BitPoints
     {
+
         [MethodImpl(Inline)]
-        public static unsafe void select<T>(T* pA, T* pB, T* pC, T* pDst)
+        public static unsafe void select<T>(in T rA, in T rB, in T rC, ref T rDst)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                select((byte*)pA, (byte*)pB, (byte*)pC, (byte*)pDst);
+               select(in uint8(in rA), in uint8(in rB), in uint8(in rC), ref uint8(ref rDst));
             else if(typeof(T) == typeof(ushort))
-                select((ushort*)pA, (ushort*)pB, (ushort*)pC, (ushort*)pDst);
+                gparts.select(n, in rA, in rB, in rC, ref rDst);
             else if(typeof(T) == typeof(uint))
-                select((uint*)pA, (uint*)pB, (uint*)pC, (uint*)pDst);
+                gparts.select(n, 4, 8, in rA, in rB, in rC, ref rDst);
             else if(typeof(T) == typeof(ulong))
-                select((ulong*)pA, (ulong*)pB, (ulong*)pC, (ulong*)pDst);
+                gparts.select(n, 16, 4, in rA, in rB, in rC, ref rDst);
             else
                 throw unsupported<T>();
         }
 
         [MethodImpl(Inline)]
-        static unsafe void select(byte* pA, byte* pB, byte* pC, byte* pDst)
-            => content(gmath.select(content(pA), content(pB), content(pC)), pDst);
+        static unsafe void select(in byte rA, in byte rB, in byte rC, ref byte rDst)
+            => content(gmath.select(content(rA), content(rB), content(rC)), ref rDst);
 
-        [MethodImpl(Inline)]
-        static unsafe void select(ushort* pA, ushort* pB, ushort* pC, ushort* pDst)
-            => ginx.vstore(ginx.vselect(n, pA, pB, pC),pDst);
-
-        [MethodImpl(Inline)]
-        static unsafe void select(uint* pA, uint* pB, uint* pC, uint* pDst)
-        {
-            const int step = 8;
-            ginx.vselect(n, pA, pB, pC, pDst);
-            ginx.vselect(n, pA+=step, pB+=step, pC+=step, pDst+=step);
-            ginx.vselect(n, pA+=step, pB+=step, pC+=step, pDst+=step);
-            ginx.vselect(n, pA+=step, pB+=step, pC+=step, pDst+=step);
-        }
-
-        [MethodImpl(Inline)]
-        static unsafe void select(ulong* pA, ulong* pB, ulong* pC, ulong* pDst)
-        {
-            const int step = 4;
-            const int offset = step*8;            
-            select8(pA, pB, pC, pDst);
-            select8(pA + offset, pB + offset, pC + offset, pDst + offset);
-        }
-
-
-        [MethodImpl(Inline)]
-        static unsafe void select8(ulong* pA, ulong* pB, ulong* pC, ulong* pDst)
-        {
-            const int step = 4;
-            ginx.vselect(n, pA, pB, pC, pDst);
-            ginx.vselect(n, pA+=step, pB+=step, pC+=step, pDst+=step);
-            ginx.vselect(n, pA+=step, pB+=step, pC+=step, pDst+=step);
-            ginx.vselect(n, pA+=step, pB+=step, pC+=step, pDst+=step);
-
-            ginx.vselect(n, pA+=step, pB+=step, pC+=step, pDst+=step);
-            ginx.vselect(n, pA+=step, pB+=step, pC+=step, pDst+=step);
-            ginx.vselect(n, pA+=step, pB+=step, pC+=step, pDst+=step);
-            ginx.vselect(n, pA+=step, pB+=step, pC+=step, pDst+=step);
-        }
     }
 }

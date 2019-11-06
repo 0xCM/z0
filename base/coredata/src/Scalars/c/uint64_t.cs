@@ -15,10 +15,9 @@ namespace Z0
     {
         prim data;
 
-        public static readonly analog zero = 0;
+        public static analog zero => 0;
 
-        public static readonly analog one = 1;
-
+        public static analog one => 1;
 
         [MethodImpl(Inline)]    
         public uint64_t(prim x)

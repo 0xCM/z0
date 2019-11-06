@@ -32,6 +32,7 @@ namespace Z0
             return dst;
         }
 
+
         /// <summary>
         /// Produces a span of random values constraint to a specified domain
         /// </summary>
@@ -43,6 +44,18 @@ namespace Z0
         public static Span<T> Span<T>(this IPolyrand random, int length, Interval<T> domain)
             where T : unmanaged
                 => random.Span<T>(length,domain,null);
+
+        /// <summary>
+        /// Produces a span of random values constraint to a specified domain
+        /// </summary>
+        /// <param name="random">The random source</param>
+        /// <param name="length">The length of the produced data</param>
+        /// <param name="domain">The interval domain to which values are constrained</param>
+        /// <typeparam name="T">The primal random value type</typeparam>
+        [MethodImpl(Inline)]
+        public static Span<T> Span<T>(this IPolyrand random, int length, T min, T max, Func<T,bool> filter = null)
+            where T : unmanaged
+                => random.Span<T>(length,(min,max),filter);
 
         /// <summary>
         /// Allocates and produces a readonly span populated with random values

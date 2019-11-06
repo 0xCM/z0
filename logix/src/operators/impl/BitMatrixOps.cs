@@ -11,7 +11,29 @@ namespace Z0.Logix
 
     using static zfunc;    
     using static As;
-    using static TernaryOpKind;
+
+    public interface IBitMatrixBinOp<T>
+        where T : unmanaged
+    {
+        ref BitMatrix<T> Apply(in BitMatrix<T> A, in BitMatrix<T> B, ref BitMatrix<T> C);
+    }
+
+    public readonly struct BMBinOp<T> : IBitMatrixBinOp<T>
+        where T : unmanaged, IBitMatrixBinOp<T>
+    {
+        readonly T proxy;
+
+        [MethodImpl(Inline)]
+        public BMBinOp(T proxy)
+        {   
+            this.proxy = proxy;
+        }
+
+        [MethodImpl(Inline)]
+        public ref BitMatrix<T> Apply(in BitMatrix<T> A, in BitMatrix<T> B, ref BitMatrix<T> C)
+            => ref proxy.Apply(in A, in B, ref C);
+    }
+
 
     public static class BitMatrixOps
     {
@@ -76,9 +98,25 @@ namespace Z0.Logix
                 => @false<T>();
 
         [MethodImpl(Inline)]
+        public static ref BitMatrix<T> @false<T>(in BitMatrix<T> A, in BitMatrix<T> B, ref BitMatrix<T> Z)
+            where T:unmanaged
+        {
+            Z.Data.Fill(gmath.zero<T>());
+            return ref Z;
+        }
+
+        [MethodImpl(Inline)]
         public static BitMatrix<T> @true<T>(in BitMatrix<T> A, in BitMatrix<T> B)
             where T:unmanaged
                 => @true<T>();
+
+        [MethodImpl(Inline)]
+        public static ref BitMatrix<T> @true<T>(in BitMatrix<T> A, in BitMatrix<T> B, ref BitMatrix<T> Z)
+            where T:unmanaged
+        {
+            Z.Data.Fill(gmath.maxval<T>());
+            return ref Z;
+        }
 
         [MethodImpl(Inline)]
         public static BitMatrix<T> and<T>(in BitMatrix<T> A, in BitMatrix<T> B)

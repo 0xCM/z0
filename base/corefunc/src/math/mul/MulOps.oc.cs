@@ -15,24 +15,11 @@ namespace Z0
 
     partial class zfoc
     {
-        public static uint mul_lo_32u(uint x, uint y)
-            => MulOps.lo(x,y);
+        public static void mul_full_64u(in Pair<ulong> src, ref Pair<ulong> dst)
+            => BmiMul.full(in src, ref dst);
 
-        public static ulong mul_lo_64u(ulong x, ulong y)
-            => MulOps.lo(x,y);
-
-        public static uint mul_hi_32u(uint x, uint y)
-            => MulOps.hi(x,y);
-
-        public static ulong mul_hi_64u(ulong x, ulong y)
-            => MulOps.hi(x,y);
-
-        public static void mul_full_32u(uint a, uint b, out uint lo, out uint hi)
-            => MulOps.full(a,b, out lo, out hi);
-
-        public static void mul_full_64u(ulong x, ulong y, out ulong lo, out ulong hi)
-            => MulOps.full(x,y, out lo, out hi);
-
+        public static void mul_full_32u(in Pair<uint> src, ref Pair<uint> dst)
+            => BmiMul.full(in src, ref dst);
 
     }
 

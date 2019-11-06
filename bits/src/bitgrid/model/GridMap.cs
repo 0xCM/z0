@@ -22,13 +22,13 @@ namespace Z0
             this.Moniker = GridMoniker.Define((ushort)RowCount,(ushort)ColCount, (ushort)SegWidth);
             this.StorageBits = spec.StorageBits;
             this.StorageBytes = spec.StorageBytes;
-            this.StorageSegs = spec.StorageSegs;            
-            this.PointCount = (int)spec.PointCount;        
+            this.SegCount = spec.StorageSegs;            
+            this.PointCount = spec.RowCount * spec.ColCount;
             this.Vec128Remainder = spec.StorageBytes % 16;
             this.Vec128Count = spec.StorageBytes / 16 + (this.Vec128Remainder != 0 ? 1 : 0);
             this.Vec256Remainder = spec.StorageBytes % 32;
             this.Vec256Count = spec.StorageBytes / 32 + (this.Vec256Remainder != 0 ? 1 : 0);
-            this._Positions = defer( () => GridLayout.cells(Spec));
+            this._Positions = defer( () => BitGrid.cells(Spec));
         }
 
         Lazy<CellMap[]> _Positions;
@@ -70,7 +70,7 @@ namespace Z0
         /// <summary>
         /// The number of segment-aligned storage segments
         /// </summary>
-        public int StorageSegs {get;}
+        public int SegCount {get;}
 
         /// <summary>
         /// The number of whole 128-bit vectors required for storage

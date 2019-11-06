@@ -28,7 +28,8 @@ namespace Z0
             || typeof(T) == typeof(int) 
             || typeof(T) == typeof(long))
                 return powi(b,exp);
-            else return gfp.pow(b,exp);
+            else 
+                return gfp.pow(b,exp);
         }
 
         [MethodImpl(Inline)]

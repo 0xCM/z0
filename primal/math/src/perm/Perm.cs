@@ -19,8 +19,7 @@ namespace Z0
         where T : unmanaged
     {
         /// <summary>
-        /// Defines the permutation (0 -> terms[0], 1 -> terms[1], ..., n - 1 -> terms[n-1])
-        /// where n is the length of the array
+        /// Defines the permutation (0 -> terms[0], 1 -> terms[1], ..., n - 1 -> terms[n-1]) where n is the length of the array
         /// </summary>
         T[] terms;
 
@@ -64,8 +63,7 @@ namespace Z0
             => Identity(n);
 
         /// <summary>
-        /// Computes the composition h of f and g where f and g have common length n and
-        /// h(i) = g(f(i)) for i = 0, ... n-1
+        /// Computes the composition h of f and g where f and g have common length n and h(i) = g(f(i)) for i = 0, ... n-1
         /// </summary>
         /// <param name="f">The left permutation</param>
         /// <param name="g">The right permutation</param>
@@ -253,8 +251,7 @@ namespace Z0
             => new PermG<T>(terms.Replicate());
 
         /// <summary>
-        /// Creates a new permutation p via composition, p[i] = g(f(i)) for i = 0, ... n
-        /// where f denotes the current permutation
+        /// Creates a new permutation p via composition, p[i] = g(f(i)) for i = 0, ... n where f denotes the current permutation
         /// </summary>
         /// <param name="f">The left permutation</param>
         /// <param name="g">The right permutation</param>
@@ -269,8 +266,7 @@ namespace Z0
         }
 
         /// <summary>
-        /// Computes the inverse permutation t of the current permutation p 
-        /// such that p*t = t*p = I where I denotes the identity permutation
+        /// Computes the inverse permutation t of the current permutation p such that p*t = t*p = I where I denotes the identity permutation
         /// </summary>
         public readonly PermG<T> Invert()
         {

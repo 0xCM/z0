@@ -1,4 +1,4 @@
-// 2019-11-05 06:49:43:257
+// 2019-11-06 08:55:37:616
 ref sbyte bitmap_d8i_to_8i(in sbyte src, byte srcOffset, byte len, byte dstOffset, ref sbyte dst)
 {
     IL_0000: ldarg.0
@@ -217,6 +217,58 @@ ref double bitmap_g64f_to_64f(in double src, byte srcOffset, byte len, byte dstO
     IL_0004: ldarg.s dst
     IL_0006: call System.Double& Z0.gbits::bitmap<System.Double>(System.Double&,System.Byte,System.Byte,System.Byte,System.Double&)
     IL_000B: ret
+
+}
+ref ulong bitset_2(ref ulong src, int pos, bit state)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.0
+    IL_0002: ldind.i8
+    IL_0003: ldc.i4.1
+    IL_0004: conv.i8
+    IL_0005: ldarg.1
+    IL_0006: ldc.i4.s 63
+    IL_0008: and
+    IL_0009: shl
+    IL_000A: not
+    IL_000B: and
+    IL_000C: ldarg.2
+    IL_000D: call System.UInt64 Z0.bit::op_Explicit(Z0.bit)
+    IL_0012: ldarg.1
+    IL_0013: ldc.i4.s 63
+    IL_0015: and
+    IL_0016: shl
+    IL_0017: or
+    IL_0018: stind.i8
+    IL_0019: ldarg.0
+    IL_001A: ret
+
+}
+ref ulong bitset_3(ref ulong src, byte pos, bit state)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: ldarg.2
+    IL_0003: call System.UInt64& Z0.BitMask::set(System.UInt64&,System.Byte,Z0.bit)
+    IL_0008: ret
+
+}
+ref ulong bitmask_set(ref ulong src, byte pos, bit state)
+{
+    IL_0000: ldarg.2
+    IL_0001: call System.Boolean Z0.bit::op_Implicit(Z0.bit)
+    IL_0006: brfalse.s IL_0012
+    IL_0008: ldarg.0
+    IL_0009: ldarg.1
+    IL_000A: call System.UInt64& Z0.BitMask::enable(System.UInt64&,System.Int32)
+    IL_000F: pop
+    IL_0010: br.s IL_001A
+    IL_0012: ldarg.0
+    IL_0013: ldarg.1
+    IL_0014: call System.UInt64& Z0.BitMask::disable(System.UInt64&,System.Int32)
+    IL_0019: pop
+    IL_001A: ldarg.0
+    IL_001B: ret
 
 }
 byte blsmsk_d8u(byte src)

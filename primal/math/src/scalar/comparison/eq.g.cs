@@ -16,7 +16,7 @@ namespace Z0
     partial class gmath
     {
         [MethodImpl(Inline)]
-        public static bool eq<T>(T lhs, T rhs)
+        public static bit eq<T>(T lhs, T rhs)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte) 
@@ -34,7 +34,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static bool neq<T>(T lhs, T rhs)
+        public static bit neq<T>(T lhs, T rhs)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte) 
@@ -51,7 +51,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static bool neqi<T>(T lhs, T rhs)
+        static bit neqi<T>(T lhs, T rhs)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
@@ -65,7 +65,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static bool nequ<T>(T lhs, T rhs)
+        static bit nequ<T>(T lhs, T rhs)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -79,7 +79,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static bool eqi<T>(T lhs, T rhs)
+        static bit eqi<T>(T lhs, T rhs)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
@@ -93,7 +93,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static bool equ<T>(T lhs, T rhs)
+        static bit equ<T>(T lhs, T rhs)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
