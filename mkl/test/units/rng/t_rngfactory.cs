@@ -136,7 +136,7 @@ namespace Z0
         {
             var segment = Pow2.T08;
             var total = Pow2.T17;
-            var stats = Collector.Create();
+            var stats = Collector.Create(0.0);
             var sw = stopwatch(false);
             for(var i=0; i< total; i+= segment)
             {

@@ -12,9 +12,7 @@ namespace Z0
     using static zfunc;
 
     public class t_bm_bitlogic : BitMatrixTest<t_bm_bitlogic>
-    {
-
-        
+    {        
         public void bmxor_generic_check_8x8()
             => bmxor_generic_check<byte>();
 

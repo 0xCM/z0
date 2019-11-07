@@ -12,9 +12,84 @@ namespace Z0
 
     using static zfunc;
 
-    [StructLayout(LayoutKind.Sequential)]
+    [StructLayout(LayoutKind.Sequential, Size = 4)]
+    public readonly struct GridMoniker<T>
+        where T : unmanaged
+    {
+        public readonly ushort RowCount;
+        
+        public readonly ushort ColCount;
+
+        public ushort SegWidth
+            => (ushort)bitsize<T>();
+
+        
+        [MethodImpl(Inline)]
+        public static implicit operator GridMoniker(GridMoniker<T> src)
+            => GridMoniker.Define(src.RowCount, src.ColCount, src.SegWidth);
+        
+        [MethodImpl(Inline)]
+        public static bool operator ==(GridMoniker<T> a, GridMoniker<T> b)
+            => a.Equals(b);
+
+        [MethodImpl(Inline)]
+        public static bool operator !=(GridMoniker<T> a, GridMoniker<T> b)
+            => !a.Equals(b);
+
+        [MethodImpl(Inline)]
+        public GridMoniker(ushort rows, ushort cols)
+        {
+            this.RowCount = rows;
+            this.ColCount = cols;
+        }
+
+        public ulong Identifier
+        {
+            [MethodImpl(Inline)]
+            get => (ulong)SegWidth << 32 | ((ulong)ColCount << 16) | RowCount; 
+        }
+
+        [MethodImpl(Inline)]
+        public bool Equals(GridMoniker<T> rhs)
+            => Identifier == rhs.Identifier;
+                   
+        public GridMoniker Untyped
+        {
+            [MethodImpl(Inline)]
+            get => this;
+        }                   
+        
+        /// <summary>
+        /// Presents the moniker as text
+        /// </summary>
+        public string Text
+            => $"{RowCount}x{ColCount}x{SegWidth}";
+
+        public override string ToString()
+            => Text;
+
+        public override int GetHashCode()
+            => Identifier.GetHashCode();
+
+        public override bool Equals(object rhs)
+            => rhs is GridMoniker<T> x && Equals(x);
+ 
+    }
+
+    /// <summary>
+    /// Identifies and characterizes a bit grid
+    /// </summary>
+    [StructLayout(LayoutKind.Sequential, Size = 8)]
     public readonly struct GridMoniker
     {
+        public readonly ushort RowCount;
+        
+        public readonly ushort ColCount;
+        
+        public readonly ushort SegWidth;
+
+        readonly ushort Filler;
+
         public static Option<GridMoniker> Parse(string text)
         {
             var parts = text.Split('x');
@@ -33,8 +108,21 @@ namespace Z0
             => new GridMoniker(rows,cols,segwidth);
 
         [MethodImpl(Inline)]
+        public static GridMoniker<T> Define<T>(ushort rows, ushort cols)
+            where T : unmanaged
+                => new GridMoniker<T>(rows,cols);
+
+        [MethodImpl(Inline)]
         public static GridMoniker Define(ulong id)
             => Unsafe.As<ulong,GridMoniker>(ref id);
+
+        [MethodImpl(Inline)]
+        public static bool operator ==(GridMoniker a, GridMoniker b)
+            => a.Equals(b);
+
+        [MethodImpl(Inline)]
+        public static bool operator !=(GridMoniker a, GridMoniker b)
+            => !a.Equals(b);
 
         [MethodImpl(Inline)]
         public GridMoniker(ushort rows, ushort cols, ushort segwidth)
@@ -45,20 +133,19 @@ namespace Z0
             this.Filler = 0;
         }
 
-        public readonly ushort RowCount;
-        
-        public readonly ushort ColCount;
-        
-        public readonly ushort SegWidth;
-
-        readonly ushort Filler;
-
         /// <summary>
         /// Presents the moniker as an integer 
         /// </summary>
         public ulong Identifier
-            => Unsafe.As<GridMoniker, ulong>(ref As.asRef(in this));
+        {
+            [MethodImpl(Inline)]
+            get => Unsafe.As<GridMoniker, ulong>(ref As.asRef(in this));
+        }
 
+        [MethodImpl(Inline)]
+        public bool Equals(GridMoniker rhs)
+            => Identifier == rhs.Identifier;
+                   
         /// <summary>
         /// Presents the moniker as text
         /// </summary>
@@ -67,6 +154,12 @@ namespace Z0
 
         public override string ToString()
             => Text;
+
+        public override int GetHashCode()
+            => Identifier.GetHashCode();
+
+        public override bool Equals(object rhs)
+            => rhs is GridMoniker x && Equals(x);
     }
 
 }

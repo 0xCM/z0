@@ -1,4 +1,4 @@
-// 2019-11-06 08:55:37:616
+// 2019-11-07 05:27:07:894
 ref sbyte bitmap_d8i_to_8i(in sbyte src, byte srcOffset, byte len, byte dstOffset, ref sbyte dst)
 {
     IL_0000: ldarg.0
@@ -530,6 +530,33 @@ BitVector32 rotr_bv_32u(BitVector32 x, int offset)
     IL_0001: ldarg.1
     IL_0002: call Z0.BitVector32 Z0.BitVector::rotr(Z0.BitVector32,System.Int32)
     IL_0007: ret
+
+}
+uint pop3x256(Vector256<ulong> x, Vector256<ulong> y, Vector256<ulong> z)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: ldarg.2
+    IL_0003: call System.UInt32 Z0.Bits::pop(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
+    IL_0008: ret
+
+}
+uint pop3x128(Vector128<ulong> x, Vector128<ulong> y, Vector128<ulong> z)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: ldarg.2
+    IL_0003: call System.UInt32 Z0.Bits::pop(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
+    IL_0008: ret
+
+}
+uint pop3x64(ulong x, ulong y, ulong z)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: ldarg.2
+    IL_0003: call System.UInt32 Z0.Bits::pop(System.UInt64,System.UInt64,System.UInt64)
+    IL_0008: ret
 
 }
 byte bzhi_d8u(byte src, uint index)

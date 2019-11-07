@@ -12,6 +12,8 @@ namespace Z0
 
     partial class pmoc
     {
+        public static void mul_u128(ReadOnlySpan<ulong> lhs, ReadOnlySpan<ulong> rhs, Span<Pair<ulong>> dst)
+            => math.mul(lhs,rhs, dst);
         public static sbyte mul_d8i(sbyte lhs, sbyte rhs)
             => math.mul(lhs,rhs);
 

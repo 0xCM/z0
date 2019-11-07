@@ -110,6 +110,7 @@ namespace Z0
             Disassemble(typeof(logixoc));
             Disassemble(typeof(BitParts));  
             Disassemble(typeof(Bits));
+
         }
 
         public unsafe void ListMethods(Type t)

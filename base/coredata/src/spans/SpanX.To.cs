@@ -40,7 +40,7 @@ namespace Z0
         /// <param name="offset">The number of elements to skip from the head of the sequence</param>
         /// <param name="length">The number of elements to take from the sequence</param>
         /// <typeparam name="T">The element type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(NotInline)]
         public static Span<T> ToSpan<T>(this IEnumerable<T> src)            
             => src.ToArray();
 
@@ -50,7 +50,7 @@ namespace Z0
         /// <param name="src">The source sequence</param>
         /// <param name="length">The length of the result span</param>
         /// <typeparam name="T">The element type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(NotInline)]
         public static Span<T> ToSpan<T>(this IEnumerable<T> src, int length)
             => src.Take(length).ToArray();            
 
@@ -62,7 +62,7 @@ namespace Z0
         /// <param name="skip">The number of elements to skip</param>
         /// <param name="length">The length of the result span</param>
         /// <typeparam name="T">The element type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(NotInline)]
         public static Span<T> ToSpan<T>(this IEnumerable<T> src, int skip, int length)
             => src.Skip(skip).Take(length).ToArray();            
 
@@ -80,10 +80,10 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The element type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(NotInline)]
         public static Span<T> ToSpan<T>(this ReadOnlySpan<T> src)
         {
-            Span<T> dst = new T[src.Length];
+            Span<T> dst =  new T[src.Length];
             src.CopyTo(dst);
             return dst;
         }
@@ -102,7 +102,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The element type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(NotInline)]
         public static ISet<T> ToSet<T>(this Span<T> src)        
             => new HashSet<T>(src.ToEnumerable());
 
@@ -133,7 +133,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The element type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(NotInline)]
         public static ISet<T> ToSet<T>(this ReadOnlySpan<T> src)        
             => new HashSet<T>(src.ToEnumerable());
 
@@ -143,7 +143,7 @@ namespace Z0
         /// <param name="src">The source span</param>
         /// <typeparam name="N">The source span length type</typeparam>
         /// <typeparam name="T">The element type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(NotInline)]
         public static ISet<T> ToSet<N,T>(this ReadOnlySpan<N,T> src)        
             where N : unmanaged, ITypeNat
             where T : unmanaged

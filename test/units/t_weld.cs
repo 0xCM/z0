@@ -8,24 +8,8 @@ namespace Z0
     
     using static zfunc;
 
-    public static class DataBlock
-    {
 
-    }
-
-    public struct Block128
-    {
-        ulong x0;
-
-        ulong x1;
-
-        public Block128(ulong x0, ulong x1)
-        {
-            this.x0 = x0;
-            this.x1 = x1;
-        }
-    }
-
+    
     public class t_weld : UnitTest<t_weld>
     {        
 

@@ -13,37 +13,8 @@ namespace Z0
     
     public class t_bitgrid : BitMatrixTest<t_bitgrid>
     {        
-        public void EmitGridMaps()
-        {
-            void Emit(int segwidth, int minsegs, int maxsegs)
-            {
-                var filename = FileName.Define($"GridMap{segwidth}.csv");
-                using var dst = LogArea.Test.LogWriter(filename);
-                dst.WriteLine(BitGrid.header());
-                var points = (
-                    from r1 in range(minsegs,maxsegs)
-                    from r2 in range(minsegs,maxsegs)
-                    let count = r1*r2
-                    orderby count
-                    select (r1, r2)).ToArray();
-
-                for(var i = 0; i<points.Length; i++)
-                {
-                    (var r, var c) = points[i];
-                    var gs = BitGrid.map(r,c,segwidth).Stats();
-                        if(gs.Vec256Remainder == 0 || gs.Vec128Remainder == 0)
-                            dst.WriteLine(gs.Format());
-                }
-                             
-                dst.Flush();
-            }
-
-            Emit(8, 1, 256);
-            Emit(16,1, 256);
-            Emit(32,1, 256);
-            Emit(64,1, 256);
-
-        }
+        public void emit_grid_maps()
+            => GridWriter.EmitGridMaps();
 
         public void layout_8x8()
         {
@@ -64,6 +35,21 @@ namespace Z0
                 Claim.yea(actual == state);
                 state = !state;
             }        
+        }
+
+        public void natural_layout()
+        {
+            var a0 = BitGrid.specify(n21,n32,0u);
+            var b0 = BitGrid.specify(21, 32, 32);
+            Claim.eq(a0,b0);
+
+            var a1 = BitGrid.specify(n32,n64,ushort.MinValue);
+            var b1 = BitGrid.specify(32, 64, 16);
+            Claim.eq(a1,b1);
+
+            var a2 = BitGrid.specify(n5,n15,byte.MinValue);
+            var b2 = BitGrid.specify(5, 15, 8);
+            Claim.eq(a2,b2);
         }
 
         public void bitread_bench()
@@ -166,12 +152,10 @@ namespace Z0
                 Claim.eq(map.Cell(pos).Segment, seg);
                 Claim.eq(map.Cell(pos).Offset, offset);
                 
-                var b1 = BitGrid.bitread(in head(src), N, row,col);
+                var b1 = BitGrid.readbit(in head(src), N, row,col);
                 var b2 = bg[row,col];
                 Claim.eq(b1,b2);
-            }
-
-            
+            }            
         }
 
 
@@ -270,8 +254,8 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where T : unmanaged
         {
-            var rows = inat(m);
-            var cols = inat(n);
+            var rows = natval(m);
+            var cols = natval(n);
             var points = rows*cols;
             var bytes = points/8 + (points % 8 != 0 ? 1 : 0);
             var bits = bytes*8;

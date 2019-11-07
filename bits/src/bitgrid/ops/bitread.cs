@@ -13,7 +13,6 @@ namespace Z0
 
     partial class BitGrid
     {
-
         /// <summary>
         /// Reads a single bit from a grid given a (row,col) coordinate
         /// </summary>
@@ -23,23 +22,23 @@ namespace Z0
         /// <param name="col">The grid col</param>
         /// <typeparam name="T">The segment storage type</typeparam>
         [MethodImpl(Inline)]
-        public static bit bitread<T>(in T src, int N, int row, int col)
+        public static bit readbit<T>(in T src, int N, int row, int col)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return bitread(in uint8(in src), N, row, col);
+                return readbit(in uint8(in src), N, row, col);
             else if(typeof(T) == typeof(ushort))
-                return bitread(in uint16(in src), N, row, col);
+                return readbit(in uint16(in src), N, row, col);
             else if(typeof(T) == typeof(uint))
-                return bitread(in uint32(in src), N, row, col);
+                return readbit(in uint32(in src), N, row, col);
             else if(typeof(T) == typeof(ulong))
-                return bitread(in uint64(in src), N, row, col);
+                return readbit(in uint64(in src), N, row, col);
             else            
                 throw unsupported<T>();
         }           
         
         [MethodImpl(Inline)]
-        static bit bitread(in byte src, int N, int row, int col)    
+        static bit readbit(in byte src, int N, int row, int col)    
         {
             const int segwidth = 8;
             const int segorder = 3;
@@ -52,7 +51,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static bit bitread(in ushort src, int N, int row, int col)    
+        static bit readbit(in ushort src, int N, int row, int col)    
         {
             const int segwidth = 16;
             const int segorder = 4;
@@ -65,7 +64,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static bit bitread(in uint src, int N, int row, int col)    
+        static bit readbit(in uint src, int N, int row, int col)    
         {
             const int segwidth = 32;
             const int segorder = 5;
@@ -78,7 +77,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static bit bitread(in ulong src, int N, int row, int col)    
+        static bit readbit(in ulong src, int N, int row, int col)    
         {
             const int segwidth = 64;
             const int segorder = 6;

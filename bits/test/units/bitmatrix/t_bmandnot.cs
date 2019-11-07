@@ -27,7 +27,6 @@ namespace Z0.Test
             Claim.yea(lhs.AndNot(rhs).IsZero());
         }
 
-
         public void AndNot64()
         {
             var lhs = Random.BitMatrix64();

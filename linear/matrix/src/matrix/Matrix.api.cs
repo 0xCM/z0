@@ -29,7 +29,7 @@ namespace Z0
         public static Matrix<N,T> alloc<N,T>(N n = default, T fill = default)
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => new Matrix<N, T>(MemorySpan.Alloc<T>(nati<N>()*nati<N>(),fill));
+                => new Matrix<N, T>(zfunc.alloc(zfunc.natval<N>()* zfunc.natval<N>(), fill));
 
         /// <summary>
         /// Allocates a matrix of natual dimensions

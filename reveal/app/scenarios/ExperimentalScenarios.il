@@ -1,4 +1,202 @@
-// 2019-11-06 08:55:36:201
+// 2019-11-07 05:27:06:607
+N3 nat3()
+{
+    IL_0000: call Z0.N3 Z0.N3::get_Rep()
+    IL_0005: ret
+
+}
+ulong nat3val()
+{
+    IL_0000: call Z0.N3 Z0.N3::get_Rep()
+    IL_0005: stloc.0
+    IL_0006: ldloca.s V_0
+    IL_0008: call System.UInt64 Z0.N3::get_value()
+    IL_000D: ret
+
+}
+int natval()
+{
+    IL_0000: ldloca.s V_0
+    IL_0002: initobj Z0.N30
+    IL_0008: ldloc.0
+    IL_0009: call Z0.NatVal Z0.NatMath::natval<Z0.N30>(Z0.N30)
+    IL_000E: call System.Int32 Z0.NatVal::op_Implicit(Z0.NatVal)
+    IL_0013: ret
+
+}
+int natseq2()
+{
+    IL_0000: ldloca.s V_0
+    IL_0002: initobj Z0.N3
+    IL_0008: ldloc.0
+    IL_0009: ldloca.s V_1
+    IL_000B: initobj Z0.N7
+    IL_0011: ldloc.1
+    IL_0012: call Z0.NatVal Z0.NatMath::natval<Z0.N3,Z0.N7>(Z0.N3,Z0.N7)
+    IL_0017: call System.Int32 Z0.NatVal::op_Implicit(Z0.NatVal)
+    IL_001C: ret
+
+}
+int natseq3()
+{
+    IL_0000: ldloca.s V_0
+    IL_0002: initobj Z0.N3
+    IL_0008: ldloc.0
+    IL_0009: ldloca.s V_1
+    IL_000B: initobj Z0.N7
+    IL_0011: ldloc.1
+    IL_0012: ldloca.s V_2
+    IL_0014: initobj Z0.N1
+    IL_001A: ldloc.2
+    IL_001B: call Z0.NatVal Z0.NatMath::natval<Z0.N3,Z0.N7,Z0.N1>(Z0.N3,Z0.N7,Z0.N1)
+    IL_0020: call System.Int32 Z0.NatVal::op_Implicit(Z0.NatVal)
+    IL_0025: ret
+
+}
+int natseq4()
+{
+    IL_0000: ldloca.s V_0
+    IL_0002: initobj Z0.N1
+    IL_0008: ldloc.0
+    IL_0009: ldloca.s V_1
+    IL_000B: initobj Z0.N0
+    IL_0011: ldloc.1
+    IL_0012: ldloca.s V_2
+    IL_0014: initobj Z0.N2
+    IL_001A: ldloc.2
+    IL_001B: ldloca.s V_3
+    IL_001D: initobj Z0.N4
+    IL_0023: ldloc.3
+    IL_0024: call Z0.NatVal Z0.NatMath::natval<Z0.N1,Z0.N0,Z0.N2,Z0.N4>(Z0.N1,Z0.N0,Z0.N2,Z0.N4)
+    IL_0029: call System.Int32 Z0.NatVal::op_Implicit(Z0.NatVal)
+    IL_002E: ret
+
+}
+int add()
+{
+    IL_0000: ldloca.s V_0
+    IL_0002: initobj Z0.N32
+    IL_0008: ldloc.0
+    IL_0009: ldloca.s V_1
+    IL_000B: initobj Z0.N4
+    IL_0011: ldloc.1
+    IL_0012: call Z0.NatVal Z0.NatMath::add<Z0.N32,Z0.N4>(Z0.N32,Z0.N4)
+    IL_0017: call System.Int32 Z0.NatVal::op_Implicit(Z0.NatVal)
+    IL_001C: ret
+
+}
+int sub()
+{
+    IL_0000: ldloca.s V_0
+    IL_0002: initobj Z0.N1024
+    IL_0008: ldloc.0
+    IL_0009: ldloca.s V_1
+    IL_000B: initobj Z0.N512
+    IL_0011: ldloc.1
+    IL_0012: call Z0.NatVal Z0.NatMath::sub<Z0.N1024,Z0.N512>(Z0.N1024,Z0.N512)
+    IL_0017: call System.Int32 Z0.NatVal::op_Implicit(Z0.NatVal)
+    IL_001C: ret
+
+}
+int mul()
+{
+    IL_0000: ldloca.s V_0
+    IL_0002: initobj Z0.N32
+    IL_0008: ldloc.0
+    IL_0009: ldloca.s V_0
+    IL_000B: initobj Z0.N32
+    IL_0011: ldloc.0
+    IL_0012: call Z0.NatVal Z0.NatMath::mul<Z0.N32,Z0.N32>(Z0.N32,Z0.N32)
+    IL_0017: call System.Int32 Z0.NatVal::op_Implicit(Z0.NatVal)
+    IL_001C: ret
+
+}
+int div()
+{
+    IL_0000: ldloca.s V_0
+    IL_0002: initobj Z0.N32
+    IL_0008: ldloc.0
+    IL_0009: ldloca.s V_1
+    IL_000B: initobj Z0.N4
+    IL_0011: ldloc.1
+    IL_0012: call Z0.NatVal Z0.NatMath::div<Z0.N32,Z0.N4>(Z0.N32,Z0.N4)
+    IL_0017: call System.Int32 Z0.NatVal::op_Implicit(Z0.NatVal)
+    IL_001C: ret
+
+}
+int mod()
+{
+    IL_0000: ldloca.s V_0
+    IL_0002: initobj Z0.N32
+    IL_0008: ldloc.0
+    IL_0009: ldloca.s V_1
+    IL_000B: initobj Z0.N4
+    IL_0011: ldloc.1
+    IL_0012: call Z0.NatVal Z0.NatMath::mod<Z0.N32,Z0.N4>(Z0.N32,Z0.N4)
+    IL_0017: call System.Int32 Z0.NatVal::op_Implicit(Z0.NatVal)
+    IL_001C: ret
+
+}
+ulong pow2()
+{
+    IL_0000: ldloca.s V_0
+    IL_0002: initobj Z0.N16
+    IL_0008: ldloc.0
+    IL_0009: call Z0.NatVal Z0.NatMath::pow2<Z0.N16>(Z0.N16)
+    IL_000E: call System.UInt64 Z0.NatVal::op_Implicit(Z0.NatVal)
+    IL_0013: ret
+
+}
+ulong sll()
+{
+    IL_0000: ldloca.s V_0
+    IL_0002: initobj Z0.N32
+    IL_0008: ldloc.0
+    IL_0009: ldloca.s V_0
+    IL_000B: initobj Z0.N32
+    IL_0011: ldloc.0
+    IL_0012: call Z0.NatVal Z0.NatMath::sll<Z0.N32,Z0.N32>(Z0.N32,Z0.N32)
+    IL_0017: call System.UInt64 Z0.NatVal::op_Implicit(Z0.NatVal)
+    IL_001C: ret
+
+}
+ulong srl()
+{
+    IL_0000: ldloca.s V_0
+    IL_0002: initobj Z0.N1024
+    IL_0008: ldloc.0
+    IL_0009: ldloca.s V_1
+    IL_000B: initobj Z0.N8
+    IL_0011: ldloc.1
+    IL_0012: call Z0.NatVal Z0.NatMath::sll<Z0.N1024,Z0.N8>(Z0.N1024,Z0.N8)
+    IL_0017: call System.UInt64 Z0.NatVal::op_Implicit(Z0.NatVal)
+    IL_001C: ret
+
+}
+ulong rotr64u()
+{
+    IL_0000: call System.UInt64 Z0.NatMath::rotr<System.UInt64,Z0.N1024,Z0.N8>()
+    IL_0005: ret
+
+}
+byte rotr8u_1()
+{
+    IL_0000: call System.Byte Z0.NatMath::rotr<System.Byte,Z0.N128,Z0.N1>()
+    IL_0005: ret
+
+}
+byte rotr8u_2()
+{
+    IL_0000: call System.Byte Z0.NatMath::rotr<System.Byte,Z0.N128,Z0.N2>()
+    IL_0005: ret
+
+}
+byte rotr8u_3()
+{
+    IL_0000: call System.Byte Z0.NatMath::rotr<System.Byte,Z0.N128,Z0.N3>()
+    IL_0005: ret
+
+}
 Vec256<ulong> perm4x64_256x64(Vec256<ulong> src)
 {
     IL_0000: ldarg.1
@@ -451,52 +649,83 @@ int CallInvokeBinOp(int x, int y)
     IL_0014: ret
 
 }
-int JumpTarget1()
+int And(int a, int b)
 {
-    IL_0000: ldc.i4.1
-    IL_0001: ret
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: and
+    IL_0003: ret
 
 }
-int JumpTarget2()
+int Or(int a, int b)
 {
-    IL_0000: ldc.i4.2
-    IL_0001: ret
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: or
+    IL_0003: ret
 
 }
-int JumpTarget3()
+int Xor(int a, int b)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: xor
+    IL_0003: ret
+
+}
+int Nand(int a, int b)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call System.Int32 Z0.ExperimentalScenarios::And(System.Int32,System.Int32)
+    IL_0007: not
+    IL_0008: ret
+
+}
+int Jump(int target, int a, int b)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldc.i4.1
+    IL_0002: beq.s IL_0024
+    IL_0004: ldarg.0
+    IL_0005: ldc.i4.2
+    IL_0006: beq.s IL_001C
+    IL_0008: ldarg.0
+    IL_0009: ldc.i4.3
+    IL_000A: beq.s IL_0014
+    IL_000C: ldarg.1
+    IL_000D: ldarg.2
+    IL_000E: call System.Int32 Z0.ExperimentalScenarios::Nand(System.Int32,System.Int32)
+    IL_0013: ret
+    IL_0014: ldarg.1
+    IL_0015: ldarg.2
+    IL_0016: call System.Int32 Z0.ExperimentalScenarios::Xor(System.Int32,System.Int32)
+    IL_001B: ret
+    IL_001C: ldarg.1
+    IL_001D: ldarg.2
+    IL_001E: call System.Int32 Z0.ExperimentalScenarios::Or(System.Int32,System.Int32)
+    IL_0023: ret
+    IL_0024: ldarg.1
+    IL_0025: ldarg.2
+    IL_0026: call System.Int32 Z0.ExperimentalScenarios::And(System.Int32,System.Int32)
+    IL_002B: ret
+
+}
+int Jump()
 {
     IL_0000: ldc.i4.3
-    IL_0001: ret
+    IL_0001: ldc.i4.s 11
+    IL_0003: ldc.i4.s 12
+    IL_0005: call System.Int32 Z0.ExperimentalScenarios::Jump(System.Int32,System.Int32,System.Int32)
+    IL_000A: ret
 
 }
-int JumpTarget4()
+int Mul(int a, int b)
 {
-    IL_0000: ldc.i4.4
-    IL_0001: ret
-
-}
-int Jump(int target)
-{
-    IL_0000: ldarg.1
-    IL_0001: ldc.i4.1
-    IL_0002: beq.s IL_0021
-    IL_0004: ldarg.1
-    IL_0005: ldc.i4.2
-    IL_0006: beq.s IL_001A
-    IL_0008: ldarg.1
-    IL_0009: ldc.i4.3
-    IL_000A: beq.s IL_0013
-    IL_000C: ldarg.0
-    IL_000D: call System.Int32 Z0.ExperimentalScenarios::JumpTarget4()
-    IL_0012: ret
-    IL_0013: ldarg.0
-    IL_0014: call System.Int32 Z0.ExperimentalScenarios::JumpTarget3()
-    IL_0019: ret
-    IL_001A: ldarg.0
-    IL_001B: call System.Int32 Z0.ExperimentalScenarios::JumpTarget2()
-    IL_0020: ret
-    IL_0021: ldarg.0
-    IL_0022: call System.Int32 Z0.ExperimentalScenarios::JumpTarget1()
-    IL_0027: ret
+    IL_0000: call Z0.IOp`1<System.Int32> Z0.OpFactory::Mul<System.Int32>()
+    IL_0005: ldarg.0
+    IL_0006: ldarg.1
+    IL_0007: call System.Int32 Z0.ExperimentalScenarios::Apply<System.Int32>(Z0.IOp`1<System.Int32>,System.Int32,System.Int32)
+    IL_000C: ret
 
 }

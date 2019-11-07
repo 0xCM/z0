@@ -61,6 +61,11 @@ public static class nfunc
         return divisors(x).Count() == 0;
     }                
 
+    [MethodImpl(Inline)]   
+    public static NatVal natval<N>()
+        where N : unmanaged, ITypeNat
+            => NatMath.natval<N>();
+
     /// <summary>
     /// Retrieves the value of the natural number associated with a typenat
     /// </summary>
@@ -68,7 +73,7 @@ public static class nfunc
     [MethodImpl(Inline)]   
     public static ulong natu<N>() 
         where N : unmanaged, ITypeNat
-            => new N().value; 
+            => natval<N>();
 
     /// <summary>
     /// Retrieves the value of a type natural represented as a signed integer
@@ -77,25 +82,7 @@ public static class nfunc
     [MethodImpl(Inline)]   
     public static int nati<N>() 
         where N : unmanaged, ITypeNat
-            => (int)natu<N>();
-
-    /// <summary>
-    /// Retrieves the value of a type natural represented as an usigned int
-    /// </summary>
-    /// <typeparam name="N">The nat type</typeparam>
-    [MethodImpl(Inline)]   
-    public static uint natui<N>() 
-        where N : unmanaged, ITypeNat
-            => (uint)natu<N>();
-
-    /// <summary>
-    /// Retrieves the value of a type natural represented as an integer
-    /// </summary>
-    /// <typeparam name="N">The nat type</typeparam>
-    [MethodImpl(Inline)]   
-    public static int nati<N>(N rep) 
-        where N : unmanaged, ITypeNat
-            => (int)rep.value;
+            => natval<N>();
 
     /// <summary>
     /// Constructs a natural representative
@@ -198,15 +185,10 @@ public static class nfunc
         where K2 : unmanaged, ITypeNat
             => NatSum<K1,K2>.Rep;
 
-    [MethodImpl(Inline)]   
-    public static int sumi<K1,K2>(K1 k1 = default, K2 k2 = default)
-        where K1 : unmanaged, ITypeNat
-        where K2 : unmanaged, ITypeNat
-            => (int)sum(k1,k2).value;
 
     [MethodImpl(Inline)]
     public static void require<N>(int value)
         where N : unmanaged, ITypeNat
-        => demand(nati<N>() == value, $"The source value {value} does not match the required natural {new N()}");
+            => demand(nati<N>() == value, $"The source value {value} does not match the required natural {new N()}");
 
 }

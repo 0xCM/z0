@@ -11,9 +11,9 @@ namespace Z0
 
     public readonly struct N255 : INatSeq<N255>, INatPrior<N255,N256>
     {
-        public static readonly N255 Rep = default;
+        public static N255 Rep => default;
 
-        public static readonly NatSeq<N2,N5,N5> Seq = default;
+        public static NatSeq<N2,N5,N5> Seq => default;
 
         [MethodImpl(Inline)]
         public static implicit operator int(N255 src)

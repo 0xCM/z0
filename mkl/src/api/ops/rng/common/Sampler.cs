@@ -27,7 +27,7 @@ namespace Z0.Mkl
         {
             this.Source = src;
             this.BufferLength  = bufferLen ?? Pow2.T14;
-            this.Buffer = MemorySpan.Alloc<T>(this.BufferLength);
+            this.Buffer = new T[BufferLength];
             this.Remaining = 0;
             this.DistSpec = distspec;
         }

@@ -42,7 +42,7 @@ namespace Z0
     public readonly struct Dim<N> : IDim
         where N : unmanaged, ITypeNat
     {
-        public static readonly Dim<N> Rep = default;
+        public static Dim<N> Rep => default;
 
         public static implicit operator ulong(Dim<N> x)
             => x.I;
@@ -64,7 +64,6 @@ namespace Z0
 
         public ulong Volume
             => I;
-
 
         public ulong this[int axis]            
             => axis == 0 ? I : 0;

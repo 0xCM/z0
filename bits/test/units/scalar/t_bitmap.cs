@@ -49,13 +49,8 @@ namespace Z0
             BitVector64 expect = 0b11111111101010101100110011110000ul;
             BitVector64 actual = dst;
 
-            Claim.eq(expect, actual);
-
-        
+            Claim.eq(expect, actual);        
         }
-
-
-
     }
 
 }

@@ -26,9 +26,7 @@ namespace Z0
         public string Desc {get;}
         public int? Width {get;}
     }
-
     
-
     public class GridStats
     {        
 
@@ -54,7 +52,6 @@ namespace Z0
         {
 
         }
-
 
         /// <summary>
         /// The number of grid rows
@@ -134,8 +131,6 @@ namespace Z0
         [ColInfo("id")]
         public ulong Identifier
             => Moniker.Identifier;
-
-
     }
 
 }

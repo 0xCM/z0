@@ -39,10 +39,10 @@ namespace Z0
     public readonly struct NatSeq1<K1> : INatSeq<NatSeq1<K1>>
         where K1 : unmanaged, INatPrimitive<K1>
     {
-        public static readonly NatSeq1<K1> Rep = default;
+        public static NatSeq1<K1> Rep => default;
         
-        public static readonly ulong Value 
-            = Nat.nat<K1>().value;
+        public static ulong Value =>
+             Nat.nat<K1>().value;
                 
         public ulong value 
             => Value;
@@ -67,10 +67,10 @@ namespace Z0
         where K1 : unmanaged, INatPrimitive<K1>
         where K2 : unmanaged, INatPrimitive<K2>
     {
-        public static readonly NatSeq<K1,K2> Rep = default;
+        public static NatSeq<K1,K2> Rep => default;
 
-        public static readonly ulong Value 
-            = Nat.nat<K1>().value * 10
+        public static ulong Value =>
+              Nat.nat<K1>().value * 10
             + Nat.nat<K2>().value;
 
         public ulong value 
@@ -97,10 +97,10 @@ namespace Z0
         where K2 : unmanaged, INatPrimitive<K2>
         where K3 : unmanaged, INatPrimitive<K3>
     {
-        public static readonly NatSeq<K1,K2,K3> Rep = default;
+        public static NatSeq<K1,K2,K3> Rep => default;
         
-        public static readonly ulong Value 
-            = Nat.nat<K1>().value * 100
+        public static ulong Value =>
+             Nat.nat<K1>().value * 100
             + Nat.nat<K2>().value * 10
             + Nat.nat<K3>().value;
 
@@ -129,10 +129,10 @@ namespace Z0
         where K3 : unmanaged, INatPrimitive<K3>
         where K4 : unmanaged, INatPrimitive<K4>
     {
-        public static readonly NatSeq<K1,K2,K3,K4> Rep = default;
+        public static NatSeq<K1,K2,K3,K4> Rep => default;
 
-        public static readonly ulong Value 
-            = Nat.nat<K1>().value * 1000
+        public static ulong Value =>
+              Nat.nat<K1>().value * 1000
             + Nat.nat<K2>().value * 100
             + Nat.nat<K3>().value * 10
             + Nat.nat<K4>().value;
@@ -163,10 +163,10 @@ namespace Z0
         where K4 : unmanaged, INatPrimitive<K4>
         where K5 : unmanaged, INatPrimitive<K5>
     {
-        public static readonly NatSeq<K1,K2,K3,K4,K5> Rep = default;
+        public static NatSeq<K1,K2,K3,K4,K5> Rep => default;
 
-        public static readonly ulong Value 
-            = Nat.nat<K1>().value * 10000
+        public static ulong Value =>
+              Nat.nat<K1>().value * 10000
             + Nat.nat<K2>().value * 1000
             + Nat.nat<K3>().value * 100
             + Nat.nat<K4>().value * 10
@@ -199,10 +199,10 @@ namespace Z0
         where K5 : unmanaged, INatPrimitive<K5>
         where K6 : unmanaged, INatPrimitive<K6>
     {
-        public static readonly NatSeq<K1,K2,K3,K4,K5,K6> Rep = default;
+        public static NatSeq<K1,K2,K3,K4,K5,K6> Rep => default;
 
-        public static readonly ulong Value 
-            = Nat.nat<K1>().value * 100000
+        public static ulong Value => 
+              Nat.nat<K1>().value * 100000
             + Nat.nat<K2>().value * 10000
             + Nat.nat<K3>().value * 1000
             + Nat.nat<K4>().value * 100
@@ -237,19 +237,16 @@ namespace Z0
         where K6 : unmanaged, INatPrimitive<K6>
         where K7 : unmanaged, INatPrimitive<K7>
     {
-        public static readonly NatSeq<K1,K2,K3,K4,K5,K6,K7> Rep = default;
+        public static NatSeq<K1,K2,K3,K4,K5,K6,K7> Rep => default;
 
-        public static readonly ulong Value 
-            = Nat.nat<K1>().value * 1000000
+        public static ulong Value =>
+              Nat.nat<K1>().value * 1000000
             + Nat.nat<K2>().value * 100000
             + Nat.nat<K3>().value * 10000
             + Nat.nat<K4>().value * 1000
             + Nat.nat<K5>().value * 100
             + Nat.nat<K6>().value * 10
             + Nat.nat<K7>().value;
-
-        public static readonly byte[] Digits 
-            = digits(Value);
 
         public ulong value 
             => Value;
@@ -280,10 +277,10 @@ namespace Z0
         where K7 : unmanaged, INatPrimitive<K7>
         where K8 : unmanaged, INatPrimitive<K8>
     {
-        public static readonly NatSeq<K1,K2,K3,K4,K5,K6,K7,K8> Rep = default;
+        public static NatSeq<K1,K2,K3,K4,K5,K6,K7,K8> Rep => default;
 
-        public static readonly ulong Value 
-            = Nat.nat<K1>().value * 10000000
+        public static ulong Value =>
+              Nat.nat<K1>().value * 10000000
             + Nat.nat<K2>().value * 1000000
             + Nat.nat<K3>().value * 100000
             + Nat.nat<K4>().value * 10000
@@ -291,9 +288,6 @@ namespace Z0
             + Nat.nat<K6>().value * 100
             + Nat.nat<K7>().value * 10
             + Nat.nat<K8>().value;
-
-        public static readonly byte[] Digits 
-            = digits(Value);
 
         public ulong value 
             => Value;
@@ -325,10 +319,10 @@ namespace Z0
         where K8 : unmanaged, INatPrimitive<K8>
         where K9 : unmanaged, INatPrimitive<K9>
     {
-        public static readonly NatSeq<K1,K2,K3,K4,K5,K6,K7,K8,K9> Rep = default;
+        public static NatSeq<K1,K2,K3,K4,K5,K6,K7,K8,K9> Rep => default;
 
-        public static readonly ulong Value 
-            = Nat.nat<K1>().value * 100000000
+        public static ulong Value =>
+              Nat.nat<K1>().value * 100000000
             + Nat.nat<K2>().value * 10000000
             + Nat.nat<K3>().value * 1000000
             + Nat.nat<K4>().value * 100000
@@ -338,8 +332,6 @@ namespace Z0
             + Nat.nat<K8>().value * 10
             + Nat.nat<K9>().value; 
 
-        public static readonly byte[] Digits 
-            = digits(Value);
 
         public ulong value 
             => Value;

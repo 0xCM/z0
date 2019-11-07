@@ -167,7 +167,7 @@ namespace Z0
             => rhs is Symbol<A> s ? Equals(s) : false;
 
         public override int GetHashCode() 
-            =>  hash(c0,c1);
+            =>  HashCode.Combine(c0, c1);
 
    }
 }

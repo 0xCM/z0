@@ -867,7 +867,7 @@ namespace Z0.Logix
 
         
         /// <summary>
-        /// 10101010
+        /// third(a,b,c) := c
         /// </summary>
         XAA = 0xaa,
 

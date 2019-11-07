@@ -8,9 +8,11 @@ namespace Z0
     using System.Linq;
     using System.ComponentModel;
     using System.Runtime.CompilerServices;
+    using System.Runtime.InteropServices;
+    using System.Security;
 
     using static zfunc;
-
+    using static NatMath;
 
     class ExperimentalScenarios : Deconstructable<ExperimentalScenarios>
     {
@@ -19,6 +21,61 @@ namespace Z0
         {
 
         }
+
+        public N3 nat3()
+            => N3.Rep;
+
+        public ulong nat3val()
+            => N3.Rep.value;
+
+        public int natval()
+            => NatMath.natval<N30>();
+
+        public int natseq2()
+            => NatMath.natval<N3,N7>();
+
+        public int natseq3()
+            => natval<N3,N7,N1>();
+
+        public int natseq4()
+            => natval<N1,N0,N2,N4>();
+
+        public int add()
+            => add<N32,N4>();
+
+        public int sub()
+            => sub<N1024,N512>();
+
+        public int mul()
+            => mul<N32,N32>();
+
+        public int div()
+            => div<N32,N4>();
+
+        public int mod()
+            => mod<N32,N4>();
+
+        public ulong pow2()
+            => pow2<N16>();
+        
+        public ulong sll()
+            => sll<N32,N32>();
+
+        public ulong srl()
+            => sll<N1024,N8>();
+
+        public ulong rotr64u()
+            => rotr<ulong,N1024,N8>();
+
+        public byte rotr8u_1()
+            => rotr<byte,N128,N1>();
+
+        public byte rotr8u_2()
+            => rotr<byte,N128,N2>();
+
+        public byte rotr8u_3()
+            => rotr<byte,N128,N3>();
+
 
         public Vec256<ulong> perm4x64_256x64(Vec256<ulong> src)
         {            
@@ -44,8 +101,6 @@ namespace Z0
             return y;
 
         }
-
-
 
         public int Switch14(int x)
         {
@@ -186,11 +241,6 @@ namespace Z0
         bool IsMatch<S,T>()
             => typeof(S) == typeof(T);
 
-
-
-
-
-
          public ReadOnlySpan<byte> ReadU8Data(int count)
             => U8Data;
 
@@ -252,31 +302,86 @@ namespace Z0
         public int CallInvokeBinOp(int x, int y)
             => InvokeBinOp(AddMulInline, x, y);
 
-        [MethodImpl(NotInline)]
-        public int JumpTarget1()
-            => 1;
+        [MethodImpl(Inline)]
+        public static int And(int a, int b)
+            => a & b;
 
-        [MethodImpl(NotInline)]
-        public int JumpTarget2()
-            => 2;
+        [MethodImpl(Inline)]
+        public static int Or(int a, int b)
+            => a | b;
 
-        [MethodImpl(NotInline)]
-        public int JumpTarget3()
-            => 3;
+        [MethodImpl(Inline)]
+        public static int Xor(int a, int b)
+            => a ^ b;
 
-        [MethodImpl(NotInline)]
-        public int JumpTarget4()
-            => 4;
+        [MethodImpl(Inline)]
+        public static int Nand(int a, int b)
+            => ~And(a,b);
 
-        public int Jump(int target)
-            => target == 1 ? JumpTarget1() 
-             : target == 2 ? JumpTarget2() 
-             : target == 3 ? JumpTarget3()
-             : JumpTarget4();
+        [MethodImpl(Inline)]
+        public static int Jump(int target, int a, int b)
+            => target == 1 ? And(a, b) 
+             : target == 2 ? Or(a, b) 
+             : target == 3 ? Xor(a, b)
+             : Nand(a, b);
+
+        public static int Jump()
+            => Jump(3, 11,12);
 
 
+        [MethodImpl(Inline)]
+        public static T Apply<T>(IOp<T> op, T a, T b)
+            where T : unmanaged
+                => op.Apply(a, b);
+
+        
+        public static int Mul(int a, int b)
+            => Apply(OpFactory.Mul<int>(), a, b);
             
 
     }
 
+    public static class OpFactory
+    {        
+        [MethodImpl(Inline)]
+        public static IOp<T> Mul<T>()
+            where T : unmanaged
+                => MulOp2<T>.Instance;
+
+
+    }
+    
+    public interface IOp<T> 
+        where T : unmanaged
+    {
+        T Apply(T a, T b);
+    }
+    public abstract class Op<T> : IOp<T>
+            where T : unmanaged
+    {
+        [MethodImpl(Inline)]
+        public T Apply(T a, T b) => Define(a,b);
+
+        protected abstract T Define(T a, T b);
+
+    }
+
+    public abstract class Op<B,T> : Op<T>
+        where B : Op<B,T>, new()
+        where T : unmanaged
+    {
+        public static readonly B Instance = new B();
+                
+        
+    }
+
+
+    public sealed class MulOp2<T> : Op<MulOp2<T>,T> 
+        where T : unmanaged
+    {
+
+        [MethodImpl(Inline)]
+        protected override T Define(T a, T b)
+            => gmath.mul(a,b);
+    }
 }

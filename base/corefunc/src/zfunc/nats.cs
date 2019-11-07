@@ -13,22 +13,22 @@ using static Z0.As;
 partial class zfunc
 {
     /// <summary>
-    /// Returns the integral value represented by a natural type as a signed 32-bit integer
+    /// Returns the value represented by a natural type
     /// </summary>
     /// <typeparam name="N">The natural type</typeparam>
     [MethodImpl(Inline)]   
-    public static int inat<N>(N n = default) 
+    public static NatVal natval<N>(N n = default) 
         where N : unmanaged, ITypeNat
-            => (int)new N().value;
+            => NatMath.natval<N>(); 
 
     /// <summary>
-    /// Returns the integral value represented by a natural type as an unsigned 32-bit integer
+    /// Returns the value represented by a natural sequence of length 2
     /// </summary>
-    /// <typeparam name="N">The natural type</typeparam>
     [MethodImpl(Inline)]   
-    public static uint unat<N>(N n = default) 
-        where N : unmanaged, ITypeNat
-            => (uint)new N().value;
+    public static NatVal natval<T0,T1>(T0 t0 = default, T1 t1 = default) 
+        where T0 : unmanaged, INatPrimitive<T0>
+        where T1 : unmanaged, INatPrimitive<T1>
+            => NatMath.natval<T0,T1>(); 
 
     [MethodImpl(Inline)]   
     public static NatSeq<T0,T1> natseq<T0,T1>(T0 t0 = default, T1 t1 = default)
@@ -50,7 +50,6 @@ partial class zfunc
         where T2 : unmanaged, INatPrimitive<T2>
         where T3 : unmanaged, INatPrimitive<T3>
             => NatSeq<T0,T1,T2,T3>.Rep;
-
 
     public static N0 n0 => default;
 
@@ -112,9 +111,9 @@ partial class zfunc
 
     public static N29 n29 => default;
 
-    public static NatSeq<N3,N0> n30 => default;
+    public static N30 n30 => default;
 
-    public static NatSeq<N3,N1> n31 => default;
+    public static N31 n31 => default;
 
     public static N32 n32 => default;
 

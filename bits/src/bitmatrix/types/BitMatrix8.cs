@@ -116,7 +116,7 @@ namespace Z0
         /// </summary>
         [MethodImpl(Inline)]
         public static BitMatrix8 From(byte row0, byte row1, byte row2, byte row3, byte row4, byte row5, byte row6, byte row7)        
-            => new BitMatrix8(MemorySpan.From(row0,row1,row2,row3,row4,row5,row6, row7));
+            => new BitMatrix8(array(row0,row1,row2,row3,row4,row5,row6, row7));
 
         /// <summary>
         /// Defifines a matrix from two 32-bit unsigned integers; the upper value contains

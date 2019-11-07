@@ -12,11 +12,11 @@ namespace Z0
         where E : unmanaged, ITypeNat
         where P : unmanaged, ITypeNat, INatPrime<P>
     {
-        public static readonly PrimePow<P,E> Rep = default;
+        public static PrimePow<P,E> Rep => default;
 
-        public static readonly Pow<P,E> Seq = default;
+        public static Pow<P,E> Seq => default;
 
-        public static readonly ulong Value = Seq.value;
+        public static ulong Value => Seq.value;
 
         public ITypeNat rep 
             => Rep;

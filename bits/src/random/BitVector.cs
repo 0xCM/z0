@@ -118,7 +118,7 @@ namespace Z0
         /// <param name="len">The bitvector length</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline)]
-        public static BitCells<T> BitCells<T>(this IPolyrand random, BitSize len)
+        public static BitCells<T> BitCells<T>(this IPolyrand random, int len)
             where T : unmanaged
                 => BC.load<T>(random.Stream<T>().ToSpan(BC.cells<T>(len)), len);
 
@@ -130,7 +130,7 @@ namespace Z0
         /// <param name="maxlen">The inclusive maximum bitvector length</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline)]
-        public static BitCells<T> BitCells<T>(this IPolyrand random, BitSize minlen, BitSize maxlen)
+        public static BitCells<T> BitCells<T>(this IPolyrand random, int minlen, int maxlen)
             where T : unmanaged
         {
             var len = random.Next<int>(minlen,++maxlen);

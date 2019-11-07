@@ -28,7 +28,7 @@ namespace Z0
     /// </summary>
     public readonly struct N0 : ITypeNat<N0>, INatSeq<N0>, INatPrimitive<N0>, INatEven<N0>, INatNext<N0,N1>
     {
-        public static readonly N0 Rep = default;        
+        public static N0 Rep => default;
 
 
         [MethodImpl(Inline)]
@@ -70,9 +70,7 @@ namespace Z0
         INatNext<N1,N2>,
         INatPow2<N0>
     {
-        public static readonly N1 Rep = default;
-
-
+        public static N1 Rep => default;
 
         [MethodImpl(Inline)]
         public static implicit operator int(N1 src)
@@ -116,7 +114,7 @@ namespace Z0
         INatNext<N2,N3>,
         INatPow2<N1>        
     {
-        public static readonly N2 Rep = default;        
+        public static N2 Rep => default;
 
         public const ulong Value = 2;
 
@@ -160,7 +158,7 @@ namespace Z0
         INatPrior<N3,N2>, 
         INatNext<N3,N4>
     {
-        public static readonly N3 Rep = default;        
+        public static N3 Rep => default;
 
         public ulong value 
             => 3;
@@ -201,7 +199,7 @@ namespace Z0
         INatPow2<N2>        
 
     {
-        public static readonly N4 Rep = default;
+        public static N4 Rep => default;
 
         public ulong value 
             => 4;
@@ -243,7 +241,7 @@ namespace Z0
         INatPrior<N5,N4>, 
         INatNext<N5,N6>
     {
-        public static readonly N5 Rep = default;
+        public static N5 Rep => default;
 
         public ulong value 
             => 5;
@@ -261,7 +259,6 @@ namespace Z0
         public bool valid 
             => true;
                 
-
         public string format()
             => value.ToString();
 
@@ -281,8 +278,7 @@ namespace Z0
         INatPrior<N6,N5>, 
         INatNext<N6,N7>
     {
-        public static readonly N6 Rep = default;
-
+        public static N6 Rep => default;
 
         public ulong value 
             => 6;
@@ -321,11 +317,10 @@ namespace Z0
         INatPrior<N7,N6>, 
         INatNext<N7,N8>
     {
-        public static readonly N7 Rep = default;
+        public static N7 Rep => default;
 
         public ulong value 
             => 7;
-
 
         [MethodImpl(Inline)]
         public static implicit operator int(N7 src)
@@ -363,7 +358,7 @@ namespace Z0
         INatPow2<N3>        
 
     { 
-        public static readonly N8 Rep = default;        
+        public static N8 Rep => default;
 
         public ulong value  
             => 8;
@@ -403,7 +398,7 @@ namespace Z0
         INatNonZero<N9>, 
         INatPrior<N9,N8>
     {
-        public static readonly N9 Rep = default;  
+        public static N9 Rep => default;
         
         public ulong value 
             => 9;

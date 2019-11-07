@@ -20,20 +20,17 @@ namespace Z0
         where K1 : unmanaged, ITypeNat
     {
         
-        static K1 k = default;
+        static K1 k => default;
 
-        public static readonly Prior<K1> Rep = default;
+        public static Prior<K1> Rep = default;
 
-        public static readonly ulong Value
-            = k.value - 1u;
+        public static ulong Value => k.value - 1u;
 
-        static readonly string description = $"--{k} = {Value}";
+        static string description => $"--{k} = {Value}";
 
-        public static readonly byte[] Digits 
-            = digits(Value);
+        public static byte[] Digits  => digits(Value);
 
-        public static readonly NatSeq Seq
-            = Nat.reflect(Digits);
+        public static NatSeq Seq => Nat.reflect(Digits);
 
         public ITypeNat rep 
             => Rep;

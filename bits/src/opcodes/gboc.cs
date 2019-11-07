@@ -18,14 +18,27 @@ namespace Z0
     public static class bgoc
     {        
 
+        public static GridSpec calc_spec_1()
+            => BitGrid.specify<N20,N30,uint>();
+
+        public static GridSpec calc_spec_3()
+            => BitGrid.specify(n20,n30,0u);
+
+        public static GridSpec calc_spec_2()
+            => BitGrid.specify<N20,N30,uint>();
+
+        public static int count_segs()
+            => BitGrid.segcount<N20,N30,uint>();
+
+
         public static bit bitread(in ulong src, int N, int row, int col)    
-            => BitGrid.bitread(in src, N, row, col);
+            => BitGrid.readbit(in src, N, row, col);
 
         public static void bitset(ref ulong src, int M, int N, int row, int col, bit state)    
-            => BitGrid.bitset(ref src, M, N, row, col, state);
+            => BitGrid.setbit(ref src, M, N, row, col, state);
 
         public static bit bitread(in byte src, int N, int row, int col)    
-            => BitGrid.bitread(in src, N, row, col);
+            => BitGrid.readbit(in src, N, row, col);
 
         public static BitGrid<uint> bg_load_32x32x32(Span<uint> src)
             => BitGrid.load(src, 32,32);

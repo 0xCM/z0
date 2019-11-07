@@ -24,26 +24,25 @@ namespace Z0
         where B : unmanaged, ITypeNat
         where E : unmanaged, ITypeNat
     {
-        public static readonly Pow<B,E> Rep = default;
+        public static Pow<B,E> Rep => default;
 
-        public static readonly ITypeNat[] Operands = {new B(), new E()};            
+        public static  ITypeNat[] Operands => new ITypeNat[] {new B(), new E()};            
 
         /// <summary>
         /// Raises a baise to a power
         /// </summary>
         /// <param name="@base">The base value</param>
         /// <param name="exp">The exponent value</param>
+        [MethodImpl(constant.Inline)]
         static ulong pow(ulong @base, ulong exp)
             => repeat(@base, exp).Aggregate((x,y) => x * y); 
 
-        public static readonly ulong Value
-            = pow(Nat.nat<B>().value, Nat.nat<E>().value);
+        public static ulong Value
+            => pow(Nat.nat<B>().value, Nat.nat<E>().value);
             
-        public static readonly byte[] Digits 
-            = digits(Value);
+        public static byte[] Digits => digits(Value);
 
-        public static readonly NatSeq Seq
-            = Nat.reflect(Digits);
+        public static NatSeq Seq => Nat.reflect(Digits);
 
         public ITypeNat rep 
             => Rep;

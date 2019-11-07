@@ -642,7 +642,7 @@ namespace Z0
         public static BitCells<T> ToBitCells<N,T>(this BitVector<N,T> src)
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => BitCells.load(src.Data, inat<N>());
+                => BitCells.load(src.Data, natval<N>());
 
         /// <summary>
         /// Converts the leading elements of generic bitvector to an 8-bit primal bitvector

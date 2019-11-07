@@ -74,7 +74,7 @@ namespace Z0
         where M : unmanaged, ITypeNat
         where N : unmanaged, ITypeNat
     {
-        public static readonly Dim<M,N> Rep = default;
+        public static Dim<M,N> Rep => default;
 
         [MethodImpl(Inline)]
         public static implicit operator (ulong i, ulong j)(Dim<M,N> x)

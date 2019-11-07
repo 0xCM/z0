@@ -1,4 +1,4 @@
-// 2019-11-06 08:55:37:224
+// 2019-11-07 05:27:07:608
 ReadOnlySpan<byte> bitseq(byte value)
 {
     IL_0000: ldarg.0
@@ -476,19 +476,6 @@ void mul_full_32u(in Pair<uint> src, ref Pair<uint> dst)
     IL_0001: ldarg.1
     IL_0002: call System.Void Z0.BmiMul::full(Z0.Pair`1<System.UInt32>&,Z0.Pair`1<System.UInt32>&)
     IL_0007: ret
-
-}
-ulong byteswap(ulong src)
-{
-    IL_0000: ldarg.0
-    IL_0001: call System.Byte[] System.BitConverter::GetBytes(System.UInt64)
-    IL_0006: call System.Span`1<System.Byte> System.Span`1<System.Byte>::op_Implicit(System.Byte[])
-    IL_000B: stloc.0
-    IL_000C: ldloc.0
-    IL_000D: call System.Span`1<System.UInt64> Z0.SpanExtensions::AsUInt64<System.Byte>(System.Span`1<System.Byte>)
-    IL_0012: call System.UInt64& zfunc::head<System.UInt64>(System.Span`1<System.UInt64>)
-    IL_0017: ldind.i8
-    IL_0018: ret
 
 }
 UInt8 bitview8_and(UInt8 a, UInt8 b)

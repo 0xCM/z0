@@ -11,9 +11,9 @@ namespace Z0
 
     public readonly struct N19 : INatSeq<N19>
     {
-        public static readonly N19 Rep = default;
+        public static N19 Rep => default;
 
-        public static readonly NatSeq<N1,N9> Seq = default;
+        public static NatSeq<N1,N9> Seq => default;
 
         [MethodImpl(Inline)]
         public static implicit operator int(N19 src)

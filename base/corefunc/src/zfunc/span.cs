@@ -98,11 +98,11 @@ partial class zfunc
     /// </summary>
     /// <param name="length">The number of T-sized cells to allocate</param>
     /// <typeparam name="T">The element type</typeparam>
-    [MethodImpl(Inline)]
+    [MethodImpl(NotInline)]
     public static Span<T> span<T>(int length)
         => new Span<T>(new T[length]);
 
-    [MethodImpl(Inline)]
+    [MethodImpl(NotInline)]
     public static Span<T> span<T>(uint length)
         => new Span<T>(new T[length]);
 

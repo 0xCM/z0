@@ -16,20 +16,6 @@ namespace Z0.Logix
 
     public class t_probes : UnitTest<t_probes>
     {
-        static BitVector<uint> M1 = 0xFFFFFFFF;
-
-        // Enables the least significant bit of each 8-bit segment
-        static BitVector<uint> MA = 0x01010101;
-
-        // Enables the most significant bit of each 8-bit segment
-        static BitVector<uint> MB = 0x80808080;
-
-        // Create an alternating bit pattern 0101...01
-        static BitVector<uint> MC = 0x55555555;
-
-        // Create an alternating bit pattern 1010...10
-        static BitVector<uint> MD = 0xAAAAAAAA;
-
         public void probe_select()
         {
             var a = BitVector.from(n8,0b10101010);

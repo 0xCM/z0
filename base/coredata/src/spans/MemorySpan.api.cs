@@ -32,16 +32,6 @@ namespace Z0
             return dst;
         }
     
-        /// <summary>
-        /// Creates a memory span from array content
-        /// </summary>
-        /// <param name="src">The data source</param>
-        /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
-        public static T[] From<T>(params T[] src)
-            where T : unmanaged
-                => src;
-    
 
     }
 

@@ -27,7 +27,7 @@ namespace Z0
         public static Word<A> Concat<A>(this Word<A> w, params Symbol<A>[] s)
             where A : struct, IAlphabet<A>
         {
-            var dst = array<Symbol<A>>(w.Length + s.Length);
+            var dst = alloc<Symbol<A>>(w.Length + s.Length);
             w.Symbols.CopyTo(dst, 0);
             s.CopyTo(dst, w.Length);
             return new Word<A>(dst);
@@ -41,7 +41,7 @@ namespace Z0
         public static Word<A> Concat<A>(this Symbol<A> s, Word<A> w)
             where A : struct, IAlphabet<A>
         {
-            var dst = array<Symbol<A>>(1 + w.Length);
+            var dst = alloc<Symbol<A>>(1 + w.Length);
             dst[0] = s;
             w.Symbols.CopyTo(dst, 1);
             return new Word<A>(dst);
@@ -55,7 +55,7 @@ namespace Z0
         public static Word<A> Concat<A>(this Symbol<A>[] s, Word<A> w)
             where A : struct, IAlphabet<A>
         {
-            var dst = array<Symbol<A>>(s.Length + w.Length);
+            var dst = alloc<Symbol<A>>(s.Length + w.Length);
             s.CopyTo(dst, 0);
             w.Symbols.CopyTo(dst, s.Length);
             return new Word<A>(dst);

@@ -12,9 +12,7 @@ namespace Z0
     using static zfunc;
     
     public class t_bmrowswap : BitMatrixTest<t_bmrowswap>
-    {
-        
-        
+    {        
         public void bmrowswap_64u_check()
         {
             var A = Random.BitMatrix64();

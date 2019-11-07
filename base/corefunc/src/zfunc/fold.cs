@@ -13,6 +13,10 @@ using Z0;
 
 partial class zfunc
 {
+    [MethodImpl(Inline)]
+    public static Pair<T> pair<T>(in T a, in T b)
+        where T : unmanaged
+            => Pair.Define(a,b);
 
     /// <summary>
     /// Reduces a stream to a single value via an additive monoid
@@ -22,11 +26,12 @@ partial class zfunc
     [MethodImpl(Inline)]
     public static T foldA<T>(IEnumerable<T> src)
         where T : unmanaged, IMonoidA<T>
-    {
-        
+    {        
         var cumulant = default(T).Zero;
-        foreach(var item in src)
-            cumulant = cumulant.Add(item);            
+        var items = src.ToArray();
+        var count = items.Length;
+        for(var i=0; i<count; i++)
+            cumulant = cumulant.Add(items[i]);            
         return cumulant;
     }
                 

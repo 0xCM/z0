@@ -111,7 +111,7 @@ namespace Z0.Logix
             var A = Random.BitMatrix<T>();
             var B = Random.BitMatrix<T>();
             var C = BitMatrix.alloc<T>();
-            var n = inat<N>();
+            var n = natval<N>();
 
             for(var sample=0; sample< SampleSize; sample++)
             {
@@ -136,7 +136,7 @@ namespace Z0.Logix
             var A = Random.BitMatrix<T>();
             var B = Random.BitMatrix<T>();
             var C = BitMatrix.alloc<T>();
-            var n = inat<N>();
+            var n = natval<N>();
 
             for(var sample=0; sample< SampleSize; sample++)
             {
@@ -161,7 +161,7 @@ namespace Z0.Logix
             var A = Random.BitMatrix<T>();
             var B = Random.BitMatrix<T>();
             var C = BitMatrix.alloc<T>();
-            var n = inat<N>();
+            var n = natval<N>();
 
             for(var sample=0; sample< SampleSize; sample++)
             {
@@ -186,7 +186,7 @@ namespace Z0.Logix
             var A = Random.BitMatrix<T>();
             var B = Random.BitMatrix<T>();
             var C = BitMatrix.alloc<T>();
-            var n = inat<N>();
+            var n = natval<N>();
 
             for(var sample=0; sample< SampleSize; sample++)
             {
@@ -211,7 +211,7 @@ namespace Z0.Logix
             var A = Random.BitMatrix<T>();
             var B = Random.BitMatrix<T>();
             var C = BitMatrix.alloc<T>();
-            var n = inat<N>();
+            var n = natval<N>();
 
             for(var sample=0; sample < SampleSize; sample++)
             {
@@ -236,7 +236,7 @@ namespace Z0.Logix
             var A = Random.BitMatrix<T>();
             var B = Random.BitMatrix<T>();
             var C = BitMatrix.alloc<T>();
-            var n = inat<N>();
+            var n = natval<N>();
 
             for(var sample=0; sample < SampleSize; sample++)
             {
@@ -262,7 +262,7 @@ namespace Z0.Logix
             var A = Random.BitMatrix<T>();
             var B = Random.BitMatrix<T>();
             var C = BitMatrix.alloc<T>();
-            var n = inat<N>();
+            var n = natval<N>();
 
             for(var sample=0; sample < SampleSize; sample++)
             {
@@ -288,7 +288,7 @@ namespace Z0.Logix
             var A = Random.BitMatrix<T>();
             var B = Random.BitMatrix<T>();
             var C = BitMatrix.alloc<T>();
-            var n = inat<N>();
+            var n = natval<N>();
 
             for(var sample=0; sample < SampleSize; sample++)
             {
@@ -313,7 +313,7 @@ namespace Z0.Logix
             var A = Random.BitMatrix<T>();
             var B = Random.BitMatrix<T>();
             var C = BitMatrix.alloc<T>();
-            var n = inat<N>();
+            var n = natval<N>();
 
             for(var sample=0; sample < SampleSize; sample++)
             {

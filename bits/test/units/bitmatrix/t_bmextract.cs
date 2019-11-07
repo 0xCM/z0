@@ -111,7 +111,6 @@ namespace Z0.Test
                         Claim.eq(col[r], src[r,c]);
                 }
             }
-
         }
 
         void CycleColExtract32(int cycles = DefaltCycleCount)
@@ -155,11 +154,7 @@ namespace Z0.Test
                         Claim.eq(col[r], src[r,c]);
                 }
             }
-
         }
-
-
     }
-
 
 }

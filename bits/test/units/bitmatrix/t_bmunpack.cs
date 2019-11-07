@@ -44,7 +44,6 @@ namespace Z0.Test
                     Claim.eq(src[i,j], dst[i,j] == 0 ? bit.Off : bit.On);
 
             }
-
         }
 
     }

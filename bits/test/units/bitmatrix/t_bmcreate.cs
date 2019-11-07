@@ -108,9 +108,6 @@ namespace Z0
             }
         }
 
-
-
-
         public void create64x64_from_perm()
         {
             for(var sample=0; sample<SampleSize; sample++)

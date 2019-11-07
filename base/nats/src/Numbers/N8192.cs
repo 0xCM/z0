@@ -13,9 +13,11 @@ namespace Z0
         INatPow<N8192, N2, N13>,
         INatPow2<N13>
     {
-        public static readonly N8192 Rep = default;
+        public const ulong Value = 1ul << 13;        
 
-        public static readonly NatSeq<N8,N1,N9,N2> Seq = default; 
+        public static N8192 Rep => default;
+
+        public static NatSeq<N8,N1,N9,N2> Seq => default; 
 
         [MethodImpl(Inline)]
         public static implicit operator int(N8192 src)
@@ -28,7 +30,7 @@ namespace Z0
             => Seq.seq;
 
         public ulong value 
-            => Seq.value;
+            => Value;
 
         ITypeNat INatPow2.Exponent 
             => N13.Rep;

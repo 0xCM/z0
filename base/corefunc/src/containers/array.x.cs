@@ -175,7 +175,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static T[] Replicate<T>(this T[] src)
         {
-            var dst = array<T>(src.Length);
+            var dst = alloc<T>(src.Length);
             Array.Copy(src, dst, src.Length);
             return dst;
         }

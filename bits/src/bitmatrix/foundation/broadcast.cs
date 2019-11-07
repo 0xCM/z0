@@ -51,7 +51,7 @@ namespace Z0
         {
             var matrix = alloc<N,T>();
             var count = row.SegCount;
-            var n= inat<N>();
+            var n= natval<N>();
             ref readonly var src = ref row.Head;
             ref var dst = ref matrix.Head;
             for(var i=0; i< n; i++)
@@ -72,7 +72,7 @@ namespace Z0
         {
             var matrix = alloc<M,N,T>();
             var count = row.SegCount;
-            var n= inat<N>();
+            var n= natval<N>();
             ref readonly var src = ref row.Head;
             ref var dst = ref matrix.Head;
             for(var i=0; i< n; i++)

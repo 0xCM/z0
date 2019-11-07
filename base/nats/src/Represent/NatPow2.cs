@@ -21,7 +21,7 @@ namespace Z0
     public readonly struct NatPow2<E> : INatPow2<E>
         where E : unmanaged, ITypeNat
     {
-        public static readonly NatPow2<E> Rep = default;
+        public static NatPow2<E> Rep => default;
 
         /// <summary>
         /// Raises a baise to a power

@@ -1,4 +1,11 @@
-// 2019-11-06 08:55:36:833
+// 2019-11-07 05:27:07:270
+ulong square_d64u(ulong x)
+{
+    IL_0000: ldarg.0
+    IL_0001: call System.UInt64 Z0.math::square(System.UInt64)
+    IL_0006: ret
+
+}
 ulong square_g64u(ulong x)
 {
     IL_0000: ldarg.0
@@ -388,6 +395,16 @@ ulong xor_g64u(ulong lhs, ulong rhs)
     IL_0001: ldarg.1
     IL_0002: call System.UInt64 Z0.gmath::xor<System.UInt64>(System.UInt64,System.UInt64)
     IL_0007: ret
+
+}
+bool nonzero_n16u(ushort x)
+{
+    IL_0000: ldarga.s x
+    IL_0002: ldc.i4.0
+    IL_0003: call System.Boolean System.UInt16::Equals(System.UInt16)
+    IL_0008: ldc.i4.0
+    IL_0009: ceq
+    IL_000B: ret
 
 }
 bool nonzero_g16u(ushort x)
@@ -1349,13 +1366,6 @@ long square_g64i(long x)
     IL_0006: ret
 
 }
-ulong square_d64u(ulong x)
-{
-    IL_0000: ldarg.0
-    IL_0001: call System.UInt64 Z0.math::square(System.UInt64)
-    IL_0006: ret
-
-}
 bool lt_g64i(long lhs, long rhs)
 {
     IL_0000: ldarg.0
@@ -1961,6 +1971,15 @@ double mod_g64f(double lhs, double rhs)
     IL_0007: ret
 
 }
+void mul_u128(ReadOnlySpan<ulong> lhs, ReadOnlySpan<ulong> rhs, Span<Pair<ulong>> dst)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: ldarg.2
+    IL_0003: call System.Void Z0.math::mul(System.ReadOnlySpan`1<System.UInt64>,System.ReadOnlySpan`1<System.UInt64>,System.Span`1<Z0.Pair`1<System.UInt64>>)
+    IL_0008: ret
+
+}
 sbyte mul_d8i(sbyte lhs, sbyte rhs)
 {
     IL_0000: ldarg.0
@@ -2362,16 +2381,6 @@ bool nonzero_g16i(short x)
     IL_0000: ldarg.0
     IL_0001: call System.Boolean Z0.gmath::nonzero<System.Int16>(System.Int16)
     IL_0006: ret
-
-}
-bool nonzero_n16u(ushort x)
-{
-    IL_0000: ldarga.s x
-    IL_0002: ldc.i4.0
-    IL_0003: call System.Boolean System.UInt16::Equals(System.UInt16)
-    IL_0008: ldc.i4.0
-    IL_0009: ceq
-    IL_000B: ret
 
 }
 bool neq_g64i(long lhs, long rhs)
@@ -3103,33 +3112,6 @@ bool gteq_g32i(int a, int b)
     IL_000C: ret
 
 }
-bool gteq_d32u(uint a, uint b)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: call Z0.bit Z0.math::gteq(System.UInt32,System.UInt32)
-    IL_0007: call System.Boolean Z0.bit::op_Implicit(Z0.bit)
-    IL_000C: ret
-
-}
-bool gteq_g32u(uint a, uint b)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: call Z0.bit Z0.gmath::gteq<System.UInt32>(System.UInt32,System.UInt32)
-    IL_0007: call System.Boolean Z0.bit::op_Implicit(Z0.bit)
-    IL_000C: ret
-
-}
-bool gteq_d64i(long a, long b)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: call Z0.bit Z0.math::gteq(System.Int64,System.Int64)
-    IL_0007: call System.Boolean Z0.bit::op_Implicit(Z0.bit)
-    IL_000C: ret
-
-}
 bool gteq_g64i(long a, long b)
 {
     IL_0000: ldarg.0
@@ -3162,6 +3144,30 @@ bool gteq_d32f(float a, float b)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: call System.Boolean Z0.fmath::gteq(System.Single,System.Single)
+    IL_0007: ret
+
+}
+bool gteq_g32f(float a, float b)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call System.Boolean Z0.gfp::gteq<System.Single>(System.Single,System.Single)
+    IL_0007: ret
+
+}
+bool gteq_d64f(double a, double b)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call System.Boolean Z0.fmath::gteq(System.Double,System.Double)
+    IL_0007: ret
+
+}
+bool gteq_g64f(double a, double b)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call System.Boolean Z0.gfp::gteq<System.Double>(System.Double,System.Double)
     IL_0007: ret
 
 }

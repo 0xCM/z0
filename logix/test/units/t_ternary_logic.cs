@@ -60,7 +60,6 @@ namespace Z0.Logix
 
         }
 
-
         void check_select<T>()
             where T : unmanaged
         {

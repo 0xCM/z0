@@ -13,9 +13,11 @@ namespace Z0
         INatPow<N32,N2,N5>,
         INatPow2<N5>
     {
-        public static readonly N32 Rep = default;
+        public const ulong Value = 1ul << 5;        
 
-        public static readonly NatSeq<N3,N2> Seq = default;
+        public static N32 Rep => default;
+
+        public static NatSeq<N3,N2> Seq => default;
 
         [MethodImpl(Inline)]
         public static implicit operator int(N32 src)

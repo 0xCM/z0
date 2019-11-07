@@ -52,7 +52,7 @@ namespace Z0
         where N : unmanaged, ITypeNat
         where P : unmanaged, ITypeNat
     {
-        public static readonly Dim<M,N,P> Rep = default;
+        public static Dim<M,N,P> Rep => default;
 
         public static implicit operator DimInfo(Dim<M,N,P> src)
             => new DimInfo(3, new ulong[]{natu<M>(), natu<N>(), natu<P>()}, natu<M>() * natu<N>()* natu<P>());

@@ -17,6 +17,14 @@ namespace Z0
     public readonly struct GridSpec
     {
         [MethodImpl(Inline)]
+        public static bool operator ==(GridSpec a, GridSpec b)
+            => a.Equals(b);
+
+        [MethodImpl(Inline)]
+        public static bool operator !=(GridSpec a, GridSpec b)
+            => !a.Equals(b);
+
+        [MethodImpl(Inline)]
         public GridSpec(int rows, int cols, int segwidth, int bytes, int bits, int segs)
         {
             this.RowCount = rows;
@@ -56,6 +64,18 @@ namespace Z0
         /// The the toal number of segments allocated for storage
         /// </summary>
         public readonly int StorageSegs;
+
+        [MethodImpl(Inline)]
+        public bool Equals(GridSpec rhs)
+            => RowCount == rhs.RowCount && ColCount == rhs.ColCount 
+            && SegWidth == rhs.SegWidth && StorageBits == rhs.StorageBits 
+            && StorageBytes == rhs.StorageBytes;
+        
+        public override int GetHashCode()
+            => HashCode.Combine(RowCount, ColCount, SegWidth, StorageBits, StorageSegs);
+
+        public override bool Equals(object rhs)
+            => rhs is GridSpec x && Equals(x);
 
         public string Format()
             => $"{RowCount}x{ColCount}x{SegWidth}"; 

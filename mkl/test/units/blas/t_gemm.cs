@@ -36,10 +36,10 @@ namespace Z0.Mkl.Test
         }
 
         
-        public void gemm16i()
-        {
-            gemm_check(closed((short)-1024, (short)1024));
-        }
+        // public void gemm16i()
+        // {
+        //     gemm_check(closed((short)-1024, (short)1024));
+        // }
 
         public void gemm16u()
         {
@@ -138,8 +138,11 @@ namespace Z0.Mkl.Test
             var A = BlockMatrix.Alloc<M,K,T>();
             var B = BlockMatrix.Alloc<K,N,T>();
             var X = BlockMatrix.Alloc<M,N,T>();
+            var XU = X.Unblocked;
             var E = BlockMatrix.Alloc<M,N,T>();
+            var EU = E.Unblocked;
             var collect = false;
+            var label = $"gemm<N{nati<M>()},N{nati<K>()},N{nati<N>()},{typeof(T).Name}>";
 
             var runtime = Duration.Zero;
             for(var i=0; i<CycleCount; i++)
@@ -158,11 +161,20 @@ namespace Z0.Mkl.Test
                     Trace($"X = {X.Format()}");
                     Trace($"E = {E.Format()}");
                 }
-            
+                
+                for(var j=0; j< X.Unblocked.Length; j++)
+                {
+                    if(!gmath.within(EU[j],XU[j],epsilon))
+                    {
+                        Trace($"{label} is a problem");
+                        break;
+                    }
+                }
+
+
                 E.Unblocked.ClaimEqual(X.Unblocked,epsilon);
             }
 
-            var label = $"gemm<N{nati<M>()},N{nati<K>()},N{nati<N>()},{typeof(T).Name}>";
             OpTime timing = optime(CycleCount, runtime, label);
             
             if(collect)

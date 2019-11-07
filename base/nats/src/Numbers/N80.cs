@@ -11,9 +11,9 @@ namespace Z0
 
     public readonly struct N80 : INatSeq<N80>
     {
-        public static readonly N80 Rep = default;
+        public static N80 Rep => default;
 
-        public static readonly NatSeq<N8,N0> Seq = default;
+        public static NatSeq<N8,N0> Seq => default;
 
         [MethodImpl(Inline)]
         public static implicit operator int(N80 src)

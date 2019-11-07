@@ -30,6 +30,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source stream</param>
         /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]
         public static ReadOnlyMemory<T> ToReadOnlyMemory<T>(this T[] src)
             => src;
 

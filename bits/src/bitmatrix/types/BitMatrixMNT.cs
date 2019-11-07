@@ -26,27 +26,23 @@ namespace Z0
         /// <summary>
         /// The number of bits per row
         /// </summary>
-        public static int RowBitCount  => inat<M>();
+        public static int RowBitCount  => natval<M>();
 
         /// <summary>
         /// The number of bits per column
         /// </summary>
-        public static int ColBitCount => inat<N>();
+        public static int ColBitCount => natval<N>();
+
+        /// <summary>
+        /// The number of bits per storage segment
+        /// </summary>
+        public static int SegSize => bitsize<T>();
 
         /// <summary>
         /// The number of bits apprehended by the matrix
         /// </summary>
-        public static int TotalBitCount => RowBitCount * ColBitCount;
+        public static int TotalBitCount => NatMath.mul<M,N>();
                         
-        /// <summary>
-        /// The (aligned) number of bytes needed for a row
-        /// </summary>
-        public static int RowByteCount => RowBitCount >> 3;
-
-        /// <summary>
-        /// The (aligned) number of bytes needed for a column
-        /// </summary>
-        public static int ColByteCount => ColBitCount >> 3;
         
         static readonly BitGridSpec<T> GridSpec = (Unsafe.SizeOf<T>()*8, RowBitCount, ColBitCount);
         
@@ -55,7 +51,7 @@ namespace Z0
         /// <summary>
         /// Allocates a Zero-filled mxn matrix
         /// </summary>
-        [MethodImpl(Inline)]
+        [MethodImpl(NotInline)]
         public static BitMatrix<M,N,T> Alloc()
             => new BitMatrix<M, N, T>(new T[Layout.TotalCellCount]);
 
@@ -117,7 +113,6 @@ namespace Z0
         {
             this.data = src;
         }
-
 
         /// <summary>
         /// Gets the the value of bit identified by row/col indices

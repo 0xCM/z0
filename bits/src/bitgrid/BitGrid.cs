@@ -51,10 +51,10 @@ namespace Z0
         public bit this[int row, int col]
         {
             [MethodImpl(Inline)]
-            get => BitGrid.bitread(in Head,  N, row, col);
+            get => BitGrid.readbit(in Head,  N, row, col);
 
             [MethodImpl(Inline)]
-            set => BitGrid.bitset(ref Head, M, N, row, col, value);
+            set => BitGrid.setbit(ref Head, M, N, row, col, value);
         }
 
         public string Format()

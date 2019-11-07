@@ -37,7 +37,7 @@ namespace Z0
     public readonly struct NatSum<K> : INatSum<K>
         where K : unmanaged, ITypeNat
     {
-        public static readonly K Rep = default;
+        public static K Rep => default;
 
         internal NatSum(ITypeNat lhs, ITypeNat rhs)
         {
@@ -64,26 +64,24 @@ namespace Z0
             where K1 : unmanaged, ITypeNat
             where K2 : unmanaged, ITypeNat
     {
-        static readonly K1 k1 = default;
+        static K1 k1 => default;
 
-        static readonly K2 k2 = default;
+        static K2 k2 => default;
 
-        public static readonly NatSum<K1,K2> Rep = default;
+        public static NatSum<K1,K2> Rep => default;
+
+        
+        public static ulong Value => k1.value + k2.value;
+
+        static string description => $"{k1} + {k2} = {Value}";
+
+        public static byte[] Digits  => digits(Value);
+
+        public static NatSeq Seq => Nat.reflect(Digits);
 
         [MethodImpl(Inline)]
         public static implicit operator int(NatSum<K1,K2> src)
             => (int)src.value;
-        
-        public static readonly ulong Value
-            = k1.value + k2.value;
-
-        static readonly string description = $"{k1} + {k2} = {Value}";
-
-        public static readonly byte[] Digits 
-            = digits(Value);
-
-        public static readonly NatSeq Seq
-            = Nat.reflect(Digits);
 
         NatSeq ITypeNat.seq
             => Seq;

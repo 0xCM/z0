@@ -18,10 +18,15 @@ namespace Z0
     /// </summary>
     public static class Vector
     {        
-        [MethodImpl(Inline)]
+        [MethodImpl(NotInline)]
         public static Vector<T> alloc<T>(int minlen, T? fill = null)               
-            where T : unmanaged        
-                => new Vector<T>(MemorySpan.Alloc<T>(minlen, fill));
+            where T : unmanaged  
+        {      
+            var mem = new T[minlen];
+            if(fill.HasValue)                
+                mem.Fill(fill.Value);
+            return new Vector<T>(mem);
+        }
 
         [MethodImpl(Inline)]
         public static Vector<N,T> alloc<N,T>(N n = default)

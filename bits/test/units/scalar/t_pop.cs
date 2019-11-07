@@ -12,6 +12,9 @@ namespace Z0.Test
     
     public class t_pop : ScalarBitTest<t_pop>
     {
+        protected override int CycleCount => Pow2.T10;
+        protected override int SampleSize => Pow2.T10;
+        
         public void pop1()
         {
             Span<byte> bits = stackalloc byte[16];
@@ -27,6 +30,25 @@ namespace Z0.Test
             Claim.eq(bitsPC, bytesPC);
         }
 
+        public void pop_3x256_check()
+        {
+            var src = Random.BlockedSpan<ulong>(n256, 3, (0,uint.MaxValue));
+            var x0 = src.TakeVector(0);
+            var x1 = src.TakeVector(1);
+            var x2 = src.TakeVector(2);
+            var pop2 = 0u;
+            var pop3 = 0u;
+            for(var i=0; i< src.Length; i++)
+            {
+                pop2 += Bits.pop(src[i]);
+                pop3 += Bits.pop(src[i],0,0);
+            }
+
+            var pop1 = Bits.pop(x0,x1,x2);
+            Claim.eq(pop2,pop3);
+            Claim.eq(pop1,pop3);
+
+        }
 
         public void pop_64u_check()
         {
@@ -61,6 +83,48 @@ namespace Z0.Test
             Claim.eq(xBitsPC, xBytesPC);
 
         }
+
+        public void pop_bench()
+        {
+            pop_bench_1x64();
+            pop_bench_3x256();
+        }
+
+        void pop_bench_3x256(SystemCounter counter = default, N256 n = default)
+        {
+            
+            var total = 0ul;
+            for(var cycle = 0; cycle < CycleCount; cycle++)
+            {
+                var x = Random.CpuVector<ulong>(n);
+                var y = Random.CpuVector<ulong>(n);
+                var z = Random.CpuVector<ulong>(n);
+                counter.Start();
+                for(var i=0; i<SampleSize; i++)
+                    total += Bits.pop(x,y,z);
+                counter.Stop();
+            }
+            Benchmark($"pop3x256", counter,(int)total);
+        }
+
+        void pop_bench_1x64(SystemCounter counter = default)
+        {
+            
+            var total = 0ul;
+            for(var cycle = 0; cycle < CycleCount; cycle++)
+            {
+                var src = Random.Span<ulong>(12);                
+                ref var s0 = ref head(src);
+
+                counter.Start();
+                for(var i=0; i<SampleSize; i++)
+                    for(var j=0; j<12; j++)
+                        total += Bits.pop(skip(in s0, j));
+                counter.Stop();
+            }
+            Benchmark($"pop1x64", counter,(int)total);
+        }
+
 
         public void natural_pops()
         {

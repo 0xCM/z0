@@ -96,7 +96,5 @@ namespace Z0
                     Claim.eq(tSrc[i,j], src[j,i]);
             }
         }
-
-
     }
 }

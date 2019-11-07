@@ -14,24 +14,34 @@ namespace Z0
     partial class BitGrid
     {
 
+        /// <summary>
+        /// Sets the state of an a coordinate-identified grid bit
+        /// </summary>
+        /// <param name="src">A reference to the grid storage</param>
+        /// <param name="M">The number of rows in the grid</param>
+        /// <param name="N">The number of columns in the grid</param>
+        /// <param name="row">The row of interest</param>
+        /// <param name="col">The column of interest</param>
+        /// <param name="state">The source state</param>
+        /// <typeparam name="T">The grid storage segment type</typeparam>
         [MethodImpl(Inline)]
-        public static void bitset<T>(ref T src, int M, int N, int row, int col, bit state)
+        public static void setbit<T>(ref T src, int M, int N, int row, int col, bit state)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                bitset(ref uint8(ref src), M, N, row, col, state);
+                setbit(ref uint8(ref src), M, N, row, col, state);
             else if(typeof(T) == typeof(ushort))
-                bitset(ref uint16(ref src), M, N, row, col, state);
+                setbit(ref uint16(ref src), M, N, row, col, state);
             else if(typeof(T) == typeof(uint))
-                bitset(ref uint32(ref src), M, N, row, col, state);
+                setbit(ref uint32(ref src), M, N, row, col, state);
             else if(typeof(T) == typeof(ulong))
-                bitset(ref uint64(ref src), M, N, row, col, state);
+                setbit(ref uint64(ref src), M, N, row, col, state);
             else            
                 throw unsupported<T>();
         }           
         
         [MethodImpl(Inline)]
-        static void bitset(ref byte src, int M, int N, int row, int col, bit state)    
+        static void setbit(ref byte src, int M, int N, int row, int col, bit state)    
         {
             const int segwidth = 8;
             const int segorder = 3;
@@ -43,7 +53,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static void bitset(ref ushort src, int M, int N, int row, int col, bit state)    
+        static void setbit(ref ushort src, int M, int N, int row, int col, bit state)    
         {
             const int segwidth = 16;
             const int segorder = 4;
@@ -55,7 +65,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static void bitset(ref uint src, int M, int N, int row, int col, bit state)    
+        static void setbit(ref uint src, int M, int N, int row, int col, bit state)    
         {
             const int segwidth = 32;
             const int segorder = 5;
@@ -67,7 +77,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static void bitset(ref ulong src, int M, int N, int row, int col, bit state)    
+        static void setbit(ref ulong src, int M, int N, int row, int col, bit state)    
         {
             const int segwidth = 64;
             const int segorder = 6;

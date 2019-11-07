@@ -18,7 +18,7 @@ internal static class constant
     /// Converts an integer to a sequence of digits
     /// </summary>
     /// <param name="src">The source value</param>
-    [MethodImpl(Inline)]
+    [MethodImpl(MethodImplOptions.NoInlining)]
     public static byte[] digits(ulong src)
         => src.ToString().Select(c => byte.Parse(c.ToString())).ToArray();
 

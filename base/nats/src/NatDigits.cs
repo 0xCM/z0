@@ -63,7 +63,7 @@ namespace Z0
         /// <summary>
         /// Specifies the integral value value of the natural base
         /// </summary>
-        public static readonly uint Base = natui<N>();
+        public static readonly uint Base = (uint)natu<N>();
 
         [MethodImpl(Inline)]
         public static bool operator ==(Digit<N,T> lhs, Digit<N,T> rhs)

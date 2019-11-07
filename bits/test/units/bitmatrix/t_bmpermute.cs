@@ -26,8 +26,6 @@ namespace Z0
                 BitMatrix.permute(perm, ref A);
             }
         }
-
-
     }
 
 }

@@ -13,9 +13,9 @@ namespace Z0
         INatPow<N1024, N2,N10>,
         INatPow2<N10>
     {
-        public static readonly N1024 Rep = default;
+        public static N1024 Rep => default;
 
-        public static readonly NatSeq<N1,N0,N2,N4> Seq = default;
+        public static NatSeq<N1,N0,N2,N4> Seq => default;
 
         [MethodImpl(Inline)]
         public static implicit operator int(N1024 src)

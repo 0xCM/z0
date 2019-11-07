@@ -34,10 +34,6 @@ namespace Z0
         }
 
 
-        public void bitseq_lookup_bench_1()
-        {
-
-        }
 
     }
 

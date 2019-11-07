@@ -106,19 +106,18 @@ namespace Z0
         [MethodImpl(Inline)]   
         public static K nat<K>()
             where K : unmanaged, ITypeNat
-             => new K(); 
+                => new K(); 
 
         [MethodImpl(Inline)]   
         public static Next<K> next<K>()
-                where K : unmanaged, ITypeNat
-            => new Next<K>();
+            where K : unmanaged, ITypeNat
+                => new Next<K>();
 
         /// <summary>
         /// Recuces the representation to canonical form
         /// </summary>
         /// <typeparam name="S">The source natural</typeparam>
         /// <typeparam name="T">The target natural</typeparam>
-        /// <returns></returns>
         [MethodImpl(Inline)]   
         public static T reduce<S,T>()
             where S : unmanaged, ITypeNat
@@ -132,18 +131,18 @@ namespace Z0
 
         [MethodImpl(Inline)]   
         public static Next<K> next<K>(K nat)
-                where K : unmanaged, ITypeNat
-            => new Next<K>();
+            where K : unmanaged, ITypeNat
+                => new Next<K>();
 
         [MethodImpl(Inline)]   
         public static Prior<K> prior<K>()
-                where K : unmanaged, ITypeNat
-            => new Prior<K>();
+            where K : unmanaged, ITypeNat
+                => new Prior<K>();
 
         [MethodImpl(Inline)]   
         public static Prior<K> prior<K>(K nat)
-                where K : unmanaged, ITypeNat
-            => new Prior<K>();
+            where K : unmanaged, ITypeNat
+                => new Prior<K>();
 
         /// <summary>
         /// Constructs (k1,k2) where k1:K2 & k2:K2 
@@ -155,6 +154,7 @@ namespace Z0
             where K2 : unmanaged, ITypeNat
             where K1 : unmanaged, ITypeNat
                 => (natu<K1>(), natu<K2>());            
+
 
         [MethodImpl(Inline)]   
         public static (int k1, int k2) pairi<K1,K2>()
@@ -201,7 +201,6 @@ namespace Z0
         /// </summary>
         /// <typeparam name="K1">The type of the left endpoint</typeparam>
         /// <typeparam name="K2">The type of the right endpoint</typeparam>
-        /// <returns></returns>
         [MethodImpl(Inline)]   
         public static NatInterval<K1,K2> interval<K1,K2>()
             where K1 : unmanaged, ITypeNat, INatLt<K1,K2>

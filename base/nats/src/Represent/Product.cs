@@ -22,24 +22,19 @@ namespace Z0
             where K1 : unmanaged, ITypeNat
             where K2 : unmanaged, ITypeNat
     {
-        static readonly K1 k1 = default;
+        static K1 k1 => default;
 
-        static readonly K2 k2 = default;
+        static K2 k2 => default;
 
-        public static readonly Product<K1,K2> Rep = default;        
+        public static Product<K1,K2> Rep => default;        
         
-        public static readonly ITypeNat[] Operands = {k1, k2};
+        public static ulong Value => k1.value * k2.value;
 
-        public static readonly ulong Value
-            = k1.value * k2.value;
+        static string description => $"{k1} * {k2} = {Value}";
 
-        static readonly string description = $"{k1} * {k2} = {Value}";
+        public static byte[] Digits  => digits(Value);
 
-        public static readonly byte[] Digits 
-            = digits(Value);
-
-        public static readonly NatSeq Seq
-            = Nat.reflect(Digits);
+        public static NatSeq Seq => Nat.reflect(Digits);
 
         public ITypeNat rep 
             => Rep;
