@@ -22,16 +22,38 @@ namespace Z0.Logix
 
     }
 
-    public interface IVarExpr<T,X> : IVarExpr, IExpr<T>
-        where T : unmanaged
-        where X : IExpr
-        
+    /// <summary>
+    /// Characterizes a logical variable
+    /// </summary>
+    public interface ILogicVarExpr : IVarExpr, ILogicExpr
     {
         /// <summary>
         /// Updates the variable
         /// </summary>
         /// <param name="expr">The value to assigned to the variable</param>
-        void Set(X expr);
+        void Set(ILogicExpr expr);
+
+        /// <summary>
+        /// Updates the expression value
+        /// </summary>
+        /// <param name="literal">The literal value to assign to the variable</param>
+        void Set(bit literal);
+        
+        ILogicExpr Value {get;}
+    }
+
+
+    /// <summary>
+    /// Characterizes a typed variable
+    /// </summary>
+    public interface IVarExpr<T> : IVarExpr, IExpr<T>
+        where T : unmanaged
+    {
+        /// <summary>
+        /// Updates the variable
+        /// </summary>
+        /// <param name="expr">The value to assigned to the variable</param>
+        void Set(IExpr<T> expr);
 
         /// <summary>
         /// Updates the expression value
@@ -39,25 +61,28 @@ namespace Z0.Logix
         /// <param name="literal">The literal value to assign to the variable</param>
         void Set(T literal);
         
-        X Value {get;}
-    }
-
-    /// <summary>
-    /// Characterizes a logical variable
-    /// </summary>
-    public interface ILogicVarExpr : IVarExpr<bit,ILogicExpr>, ILogicExpr
-    {
+        IExpr<T> Value {get;}
 
     }
 
-    /// <summary>
-    /// Characterizes a typed variable
-    /// </summary>
-    public interface IVarExpr<T> : IVarExpr<T, IExpr<T>>
+    public interface ILogicVarExpr<T> :  IVarExpr, ILogicExpr<T>
         where T : unmanaged
     {
+        /// <summary>
+        /// Updates the variable
+        /// </summary>
+        /// <param name="expr">The value to assigned to the variable</param>
+        void Set(ILogicExpr<T> expr);
+
+        /// <summary>
+        /// Updates the expression value
+        /// </summary>
+        /// <param name="literal">The literal value to assign to the variable</param>
+        void Set(T literal);
+        
+        ILogicExpr<T> Value {get;}
+
 
     }
-
 
 }

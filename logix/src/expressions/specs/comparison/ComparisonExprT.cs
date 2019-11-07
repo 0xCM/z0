@@ -15,7 +15,7 @@ namespace Z0.Logix
     {
 
         [MethodImpl(Inline)]
-        public ComparisonExpr(ComparisonKind kind, IExpr<T> lhs, IExpr<T> rhs, params VariableExpr<T>[] vars)
+        public ComparisonExpr(ComparisonKind kind, IExpr<T> lhs, IExpr<T> rhs, params IVarExpr<T>[] vars)
         {
             this.ComparisonKind = kind;
             this.LeftArg = lhs;
@@ -35,7 +35,7 @@ namespace Z0.Logix
         /// </summary>
         public IExpr<T> RightArg {get;}
 
-        public VariableExpr<T>[] Vars {get;}
+        public IVarExpr<T>[] Vars {get;}
 
 
         public void SetVars(params IExpr<T>[] values)

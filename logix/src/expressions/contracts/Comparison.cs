@@ -29,7 +29,7 @@ namespace Z0.Logix
         /// <summary>
         /// Variables upon which the expression depends
         /// </summary>
-        LogicVariable[] Vars {get;}
+        ILogicVarExpr[] Vars {get;}
         
     }
 
@@ -52,7 +52,7 @@ namespace Z0.Logix
         /// <summary>
         /// Variables upon which the expression depends
         /// </summary>
-        VariableExpr<T>[] Vars {get;}
+        IVarExpr<T>[] Vars {get;}
 
         /// <summary>
         /// The sort of comparison to be applied

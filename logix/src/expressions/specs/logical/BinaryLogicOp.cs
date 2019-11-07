@@ -37,21 +37,5 @@ namespace Z0.Logix
 
     } 
 
-    public sealed class BinaryLogicOp<T> : BinaryLogicOp, IBinaryLogicOp<T>
-        where T : unmanaged
-    {
-        [MethodImpl(Inline)]
-        public BinaryLogicOp(BinaryLogicOpKind op, ILogicExpr<T> left, ILogicExpr<T> right)
-            : base(op,left,right)
-        {
-            this.LeftArg = left;
-            this.RightArg = right;
-        }
-
-        public new ILogicExpr<T> LeftArg {get;}
-
-        public new ILogicExpr<T> RightArg {get;}
-    }
-
 
 }

@@ -47,8 +47,8 @@ namespace Z0.Logix
 
         public void test_1()
         {
-            var v1 = variable(1);
-            var v2 = variable(2);
+            var v1 = lvar(1);
+            var v2 = lvar(2);
             var expr = or(and(v1,v2), xor(v1,v2));
             // and(v1,v2) -> x1 | push
             // xor(v1,v2) -> x2 | push

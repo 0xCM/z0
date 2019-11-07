@@ -95,13 +95,13 @@ namespace Z0.Logix
         static (LogicVariable a, LogicVariable b) vars2
         {
             [MethodImpl(Inline)]
-            get => (variable('a'), variable('b'));
+            get => (lvar('a'), lvar('b'));
         }
 
         static (LogicVariable a, LogicVariable b, LogicVariable c) vars3
         {
             [MethodImpl(Inline)]
-            get => (variable('a'), variable('b'), variable('c'));
+            get => (lvar('a'), lvar('b'), lvar('c'));
         }
 
     }

@@ -41,5 +41,11 @@ namespace Z0.Logix
 
     }
 
+    public interface ILogicLiteral<T> : ILogicExpr<T>, ILiteralExpr<T>
+        where T : unmanaged
+    {
+
+    }
+
 
 }

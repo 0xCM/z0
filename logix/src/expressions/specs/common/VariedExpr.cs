@@ -22,7 +22,8 @@ namespace Z0.Logix
 
         public IExpr<T> BaseExpr {get;}
 
-        public VariableExpr<T>[] Vars {get;}
+        public IVarExpr<T>[] Vars {get;}
+
 
         [MethodImpl(Inline)]
         public void SetVars(params T[] values)
@@ -34,6 +35,11 @@ namespace Z0.Logix
         
         public string Format()
             => string.Empty;
+
+        public void SetVars(params IVarExpr<T>[] values)
+        {
+            throw new NotImplementedException();
+        }
     }
 
    public sealed class VariedExpr<N,T>  : IVariedExpr<T>
@@ -41,21 +47,16 @@ namespace Z0.Logix
         where N : unmanaged, ITypeNat
     {        
         [MethodImpl(Inline)]
-        internal VariedExpr(IExpr<T> baseExpr, params VariableExpr<T>[] variables)
+        internal VariedExpr(IExpr<T> baseExpr, params IVarExpr<T>[] variables)
         {
             this.BaseExpr = baseExpr;
             this.Vars = variables;
         }
 
-        /// <summary>
-        /// The expression classifier
-        /// </summary>
-        public TypedExprKind ExprKind 
-            => TypedExprKind.Varied;
 
         public IExpr<T> BaseExpr {get;}
 
-        public VariableExpr<T>[] Vars {get;}
+        public IVarExpr<T>[] Vars {get;}
 
         [MethodImpl(Inline)]
         public void SetVars(params T[] values)

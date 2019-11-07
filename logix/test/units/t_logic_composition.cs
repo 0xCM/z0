@@ -15,10 +15,19 @@ namespace Z0.Logix
 
     public class t_logic_composition : UnitTest<t_logic_composition>
     {
+
+        public void test1()
+        {
+
+            
+
+        }
+
+
         public void t_seqential_op_check()
         {
-            var a = variable(0);
-            var b = variable(1);
+            var a = lvar(0);
+            var b = lvar(1);
 
             var expr1 = and(a, b);
             var expr2 = or(a, b);
@@ -49,9 +58,9 @@ namespace Z0.Logix
         
         public void t_sop_expr()
         {
-            var v1 = variable(1);
-            var v2 = variable(2);
-            var v3 = variable(3);
+            var v1 = lvar(1);
+            var v2 = lvar(2);
+            var v3 = lvar(3);
             var expr = or(and(v1,v2), and(v2,v3));
 
             foreach(var seq in bitcombo(n4))
@@ -72,8 +81,8 @@ namespace Z0.Logix
         
         public void t_andnot_expr()
         {
-            var v1 = variable(1);
-            var v2 = variable(2);
+            var v1 = lvar(1);
+            var v2 = lvar(2);
             var expr = and(v1,not(v2));
             foreach(var seq in bitcombo(n2))
             {

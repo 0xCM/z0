@@ -123,8 +123,8 @@ namespace Z0.Logix
 
         void logic_expr_check(BL kind, Func<bit,bit,bit> rule)
         {
-            var v1 = variable(1);
-            var v2 = variable(2);
+            var v1 = lvar(1);
+            var v2 = lvar(2);
             var expr = binary(kind, v1,v2);
 
             foreach(var seq in bitcombo(n2)) 

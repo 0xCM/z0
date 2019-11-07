@@ -19,7 +19,7 @@ namespace Z0.Logix
         /// <param name="name">The variable's name</param>
         /// <param name="init">The variable's initial value</param>
         [MethodImpl(Inline)]
-        public static LogicVariable variable(string name, bit init = default)
+        public static LogicVariable lvar(string name, bit init = default)
             => new LogicVariable(name, init);
 
         /// <summary>
@@ -28,7 +28,7 @@ namespace Z0.Logix
         /// <param name="name">The variable's single-character name</param>
         /// <param name="init">The variable's initial value</param>
         [MethodImpl(Inline)]
-        public static LogicVariable variable(char name, bit init = default)
+        public static LogicVariable lvar(char name, bit init = default)
             => new LogicVariable(name.ToString(), init);
 
         /// <summary>
@@ -38,52 +38,84 @@ namespace Z0.Logix
         /// <param name="name">The variable's name</param>
         /// <param name="init">The variable's initial value</param>
         [MethodImpl(Inline)]
-        public static LogicVariable variable(uint name, bit init = default)
-            => variable(name.ToString(),init);
+        public static LogicVariable lvar(uint name, bit init = default)
+            => lvar(name.ToString(),init);
 
         /// <summary>
-        /// Defines a specified number n of logic variable expressions where
-        /// each variable is respectively named 0,..., n - 1
+        /// Defines a typed logic variable expression initialized to a literal value
+        /// </summary>
+        /// <param name="name">The variable's name</param>
+        /// <param name="init">The variable's initial value</param>
+        [MethodImpl(Inline)]
+        public static LogicVariable<T> lvar<T>(string name, T init = default)
+            where T : unmanaged
+                => new LogicVariable<T>(name, init);
+
+        /// <summary>
+        /// Defines a typed logic variable expression initialized to a literal value
+        /// </summary>
+        /// <param name="name">The variable's name</param>
+        /// <param name="init">The variable's initial value</param>
+        [MethodImpl(Inline)]
+        public static LogicVariable<T> lvar<T>(char name, T init = default)
+            where T : unmanaged
+                => new LogicVariable<T>(name.ToString(), init);
+
+        /// <summary>
+        /// Defines a typed logic variable expression initialized to a literal value
+        /// </summary>
+        /// <param name="name">The variable's name</param>
+        /// <param name="init">The variable's initial value</param>
+        [MethodImpl(Inline)]
+        public static LogicVariable<T> lvar<T>(uint name, T init = default)
+            where T : unmanaged
+                => new LogicVariable<T>(name.ToString(), init);
+
+        /// <summary>
+        /// Defines a specified number n of logic variable expressions where each variable is respectively named 0,..., n - 1
         /// </summary>
         /// <param name="n">The number of variables to define</param>
-        public static LogicVariable[] variables(int n)
+        public static LogicVariable[] lvars(int n)
         {
             var vars = new LogicVariable[n];
             for(var i =0; i<n; i++)
-                vars[i] = variable(i.ToString());
+                vars[i] = lvar(i.ToString());
             return vars;
         }
-            
+
+        /// <summary>
+        /// Defines a specified number n of typed logic variable expressions where each variable is respectively named 0,..., n - 1
+        /// </summary>
+        /// <param name="n">The number of variables to define</param>
+        public static LogicVariable<T>[] lvars<T>(int n)
+            where T : unmanaged
+        {
+            var vars = new LogicVariable<T>[n];
+            for(var i =0; i<n; i++)
+                vars[i] = lvar<T>(i.ToString());
+            return vars;
+        }
+
         /// <summary>
         /// Creates a varied expression predicated on a specified variable sequence
         /// </summary>
         /// <param name="subject">The variable-dependent expression</param>
         /// <param name="variables">The variable sequence</param>
         [MethodImpl(Inline)]
-        public static VariedLogicExpr varied(ILogicExpr subject, params ILogicVarExpr[] variables)
+        public static VariedLogicExpr varied(ILogicExpr subject, params LogicVariable[] variables)
             => VariedLogicExpr.Define(subject, variables);
 
         /// <summary>
-        /// Defines comparison expression
+        /// Creates a varied expression predicated on a specified variable sequence
         /// </summary>
-        /// <param name="kind">The comparisonkind</param>
-        /// <param name="lhs">The left expression</param>
-        /// <param name="rhs">The right expression</param>
-        /// <typeparam name="T">The operand type</typeparam>
+        /// <param name="subject">The variable-dependent expression</param>
+        /// <param name="variables">The variable sequence</param>
         [MethodImpl(Inline)]
-        public static ComparisonExpr compare(ComparisonKind kind, ILogicExpr lhs, ILogicExpr rhs, params LogicVariable[] variables)
-            => ComparisonExpr.Define(kind, lhs,rhs,variables);
+        public static VariedLogicExpr<T> varied<T>(ILogicExpr<T> subject, params LogicVariable<T>[] variables)
+            where T : unmanaged
+                => VariedLogicExpr.Define(subject, variables);
 
-        /// <summary>
-        /// Defines an equality comparison expression
-        /// </summary>
-        /// <param name="lhs">The left expression</param>
-        /// <param name="rhs">The right expression</param>
-        /// <typeparam name="T">The operand type</typeparam>
-        [MethodImpl(Inline)]
-        public static ComparisonExpr equals(ILogicExpr lhs, ILogicExpr rhs, params LogicVariable[] variables)
-            => ComparisonExpr.Define(ComparisonKind.Eq, lhs,rhs,variables);
-
+ 
     }   
 
 }

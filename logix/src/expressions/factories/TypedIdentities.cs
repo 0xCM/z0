@@ -13,6 +13,8 @@ namespace Z0.Logix
 
     using static TypedLogicSpec;
 
+    using TLS = TypedLogicSpec;
+
 
     internal static class TypedIdentities<T>
         where T : unmanaged
@@ -92,14 +94,13 @@ namespace Z0.Logix
             }
         }
 
-
-        static (VariableExpr<T> a, VariableExpr<T> b) vars2
+        static (IVarExpr<T> a, IVarExpr<T> b) vars2
         {
             [MethodImpl(Inline)]
             get => (variable<T>('a'), variable<T>('b'));
         }
 
-        static (VariableExpr<T> a, VariableExpr<T> b, VariableExpr<T> c) vars3
+        static (IVarExpr<T> a, IVarExpr<T> b, IVarExpr<T> c) vars3
         {
             [MethodImpl(Inline)]
             get => (variable<T>('a'), variable<T>('b'), variable<T>('c'));

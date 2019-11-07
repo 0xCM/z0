@@ -14,15 +14,15 @@ namespace Z0.Logix
     {
         
         [MethodImpl(Inline)]
-        public static ComparisonExpr<T> Define<T>(ComparisonKind kind, IExpr<T> lhs, IExpr<T> rhs, params VariableExpr<T>[] vars)
+        public static ComparisonExpr<T> Define<T>(ComparisonKind kind, IExpr<T> lhs, IExpr<T> rhs, params IVarExpr<T>[] vars)
             where T : unmanaged
                 => new ComparisonExpr<T>(kind,lhs,rhs,vars);
         
         [MethodImpl(Inline)]
-        public static ComparisonExpr Define(ComparisonKind kind, ILogicExpr lhs, ILogicExpr rhs, params LogicVariable[] vars)
+        public static ComparisonExpr Define(ComparisonKind kind, ILogicExpr lhs, ILogicExpr rhs, params ILogicVarExpr[] vars)
             => new ComparisonExpr(kind,lhs,rhs,vars);
             
-        ComparisonExpr(ComparisonKind kind, ILogicExpr lhs, ILogicExpr rhs, params LogicVariable[] vars)
+        ComparisonExpr(ComparisonKind kind, ILogicExpr lhs, ILogicExpr rhs, params ILogicVarExpr[] vars)
         {
             this.ComparisonKind = kind;
             this.Lhs = lhs;
@@ -43,7 +43,7 @@ namespace Z0.Logix
         /// </summary>
         public ILogicExpr Rhs {get;}
 
-        public LogicVariable[] Vars {get;}
+        public ILogicVarExpr[] Vars {get;}
 
         public void SetVars(params ILogicExpr[] values)
         {

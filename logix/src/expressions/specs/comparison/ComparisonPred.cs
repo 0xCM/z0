@@ -17,7 +17,7 @@ namespace Z0.Logix
         where T : unmanaged
     {
         [MethodImpl(Inline)]
-        public ComparisonPred(ComparisonKind op, IExpr<T> left, IExpr<T> right, params VariableExpr<T>[] vars)
+        public ComparisonPred(ComparisonKind op, IExpr<T> left, IExpr<T> right, params IVarExpr<T>[] vars)
         {
             this.ComparisonKind = op;
             this.LeftArg = left;
@@ -41,7 +41,7 @@ namespace Z0.Logix
         /// </summary>
         public IExpr<T> RightArg {get;}
 
-        public VariableExpr<T>[] Vars {get;}
+        public IVarExpr<T>[] Vars {get;}
 
 
         public void SetVars(params IExpr<T>[] values)
