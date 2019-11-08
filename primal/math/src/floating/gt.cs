@@ -13,19 +13,19 @@ namespace Z0
     {
 
         [MethodImpl(Inline)]
-        public static bool gt(float lhs, float rhs)
+        public static bit gt(float lhs, float rhs)
             => lhs > rhs;
 
         [MethodImpl(Inline)]
-        public static bool gt(double lhs, double rhs)
+        public static bit gt(double lhs, double rhs)
             => lhs > rhs;        
 
         [MethodImpl(Inline)]
-        public static bool gteq(float lhs, float rhs)
+        public static bit gteq(float lhs, float rhs)
             => lhs >= rhs;
 
         [MethodImpl(Inline)]
-        public static bool gteq(double lhs, double rhs)
+        public static bit gteq(double lhs, double rhs)
             => lhs >= rhs;        
 
     }

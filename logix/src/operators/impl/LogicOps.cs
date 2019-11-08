@@ -119,9 +119,6 @@ namespace Z0.Logix
         public static bit same(bit a, bit b)
             => a == b;
 
-        [MethodImpl(Inline)]
-        public static bit xor1(bit a)
-            => bit.xor1(a);
 
         [MethodImpl(Inline)]
         public static bit select(bit a, bit b, bit c)

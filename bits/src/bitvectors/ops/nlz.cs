@@ -29,7 +29,6 @@ namespace Z0
         public static uint nlz(BitVector8 x)
             => Bits.nlz(x.data);
 
-
         /// <summary>
         /// Counts the number of leading zero bits
         /// </summary>
@@ -52,15 +51,11 @@ namespace Z0
         public static uint ntz(BitVector8 x)
             => Bits.ntz(x.data);
 
-
         /// <summary>
         /// Counts the number of leading zero bits
         /// </summary>
         [MethodImpl(Inline)]
         public static uint nlz(BitVector64 x)
             => Bits.nlz(x.data);
-
-
     }
-
 }

@@ -21,29 +21,25 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The source type</typeparam>
         [MethodImpl(Inline)]
-        public static bool positive<T>(T src)
+        public static bit positive<T>(T src)
             where T : unmanaged 
         {
-
             if(typeof(T) == typeof(byte) 
             || typeof(T) == typeof(ushort) 
             || typeof(T) == typeof(uint) 
             || typeof(T) == typeof(ulong))
-                return positiveU(src);
+                return positive_u(src);
             else if(typeof(T) == typeof(sbyte) 
             || typeof(T) == typeof(short) 
             || typeof(T) == typeof(int) 
             || typeof(T) == typeof(long))
-                return positiveI(src);
+                return positive_i(src);
             else 
-                return positiveF(src);
-
+                return positive_f(src);
         }
 
-
-
         [MethodImpl(Inline)]
-        static bool positiveI<T>(T src)
+        static bit positive_i<T>(T src)
             where T : unmanaged
         {                        
             if(typeof(T) == typeof(sbyte))
@@ -57,7 +53,7 @@ namespace Z0
        }           
 
         [MethodImpl(Inline)]
-        static bool positiveU<T>(T src)
+        static bit positive_u<T>(T src)
             where T : unmanaged
         {                        
             if(typeof(T) == typeof(byte))
@@ -72,7 +68,7 @@ namespace Z0
 
 
         [MethodImpl(Inline)]
-        static bool positiveF<T>(T src)
+        static bit positive_f<T>(T src)
             where T : unmanaged
         {                        
             if(typeof(T) == typeof(float))

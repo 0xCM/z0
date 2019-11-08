@@ -98,10 +98,8 @@ namespace Z0.Logix
                 }
                 default:
                     return new LiteralLogicSeq[0]{};
-
            }
-           
-
+        
        }
        
         /// <summary>

@@ -106,7 +106,7 @@ namespace Z0.Logix
         }
 
         /// <summary>
-        /// Loads a new lookup table from a source span
+        /// Defines a 16-key lookup table from the elements in a span
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
@@ -114,7 +114,7 @@ namespace Z0.Logix
             => head(MemoryMarshal.Cast<byte,Lut16>(src));
 
         /// <summary>
-        /// Loads a new lookup table from a source span
+        /// Defines a 32-key lookup table from the elements in a span
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]

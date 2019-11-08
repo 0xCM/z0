@@ -15,93 +15,93 @@ namespace Z0
         /// <summary>
         /// Computes the absolute value of the source without branching
         /// </summary>
-        /// <param name="src">The source value</param>
+        /// <param name="a">The source value</param>
         [MethodImpl(Inline)]
-        public static sbyte abs(sbyte src)
-            => (sbyte)(src + (src >> 7)^(src >> 7));         
+        public static sbyte abs(sbyte a)
+            => (sbyte)(a + (a >> 7)^(a >> 7));         
 
         /// <summary>
         /// Computes the absolute value of the source without branching
         /// </summary>
-        /// <param name="src">The source value</param>
+        /// <param name="a">The source value</param>
         [MethodImpl(Inline)]
-        public static short abs(short src)
-            => (short)(src + (src >> 15)^(src >> 15));         
+        public static short abs(short a)
+            => (short)(a + (a >> 15)^(a >> 15));         
 
         /// <summary>
         /// Computes the absolute value of the source without branching
         /// </summary>
-        /// <param name="src">The source value</param>
+        /// <param name="a">The source value</param>
         [MethodImpl(Inline)]
-        public static int abs(int src)
-            => (src + (src >> 31)^(src >> 31));         
+        public static int abs(int a)
+            => (a + (a >> 31)^(a >> 31));         
 
         /// <summary>
         /// Computes the absolute value of the source without branching
         /// </summary>
-        /// <param name="src">The source value</param>
+        /// <param name="a">The source value</param>
         [MethodImpl(Inline)]
-        public static long abs(long src)
-            => (src + (src >> 63)^(src >> 63));         
+        public static long abs(long a)
+            => (a + (a >> 63)^(a >> 63));         
 
         /// <summary>
         /// Computes the absolute value of the source
         /// </summary>
-        /// <param name="src">The source value</param>
+        /// <param name="a">The source value</param>
         [MethodImpl(Inline)]
-        public static float abs(float src)
-            => MathF.Abs(src);
+        public static float abs(float a)
+            => MathF.Abs(a);
 
         /// <summary>
         /// Computes the absolute value of the source
         /// </summary>
-        /// <param name="src">The source value</param>
+        /// <param name="a">The source value</param>
         [MethodImpl(Inline)]
-        public static double abs(double src)
-            => Math.Abs(src);
+        public static double abs(double a)
+            => Math.Abs(a);
  
         /// <summary>
         /// Computes the absolute value of the source in-place
         /// </summary>
-        /// <param name="src">The source value</param>
+        /// <param name="a">The source value</param>
         [MethodImpl(Inline)]
-        public static ref sbyte abs(ref sbyte src)
+        public static ref sbyte abs(ref sbyte a)
         {
-            src = abs(src);
-            return ref src;
+            a = abs(a);
+            return ref a;
         }
 
         /// <summary>
         /// Computes the absolute value of the source in-place
         /// </summary>
-        /// <param name="src">The source value</param>
+        /// <param name="a">The source value</param>
         [MethodImpl(Inline)]
-        public static ref short abs(ref short src)
+        public static ref short abs(ref short a)
         {
-            src = abs(src);
-            return ref src;
+            a = abs(a);
+            return ref a;
         }
 
         /// <summary>
         /// Computes the absolute value of the source in-place
         /// </summary>
-        /// <param name="src">The source value</param>
+        /// <param name="a">The source value</param>
         [MethodImpl(Inline)]
-        public static ref int abs(ref int src)
+        public static ref int abs(ref int a)
         {
-            src = abs(src);
-            return ref src;
+            a = abs(a);
+            return ref a;
         }
 
         /// <summary>
         /// Computes the absolute value of the source in-place
         /// </summary>
-        /// <param name="src">The source value</param>
+        /// <param name="a">The source value</param>
         [MethodImpl(Inline)]
-        public static ref long abs(ref long src)
+        public static ref long abs(ref long a)
         {
-            src = abs(src);
-            return ref src;
+            a = abs(a);
+            return ref a;
         }
  
     }

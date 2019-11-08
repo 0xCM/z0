@@ -11,19 +11,6 @@ namespace Z0.Logix
     using static zfunc;
 
 
-    /// <summary>
-    /// Characterizes a ternary operator parametrized by expression type
-    /// </summary>
-    public interface ITernaryOp<X> : IOperator
-        where X : IExpr
-    {
-        X FirstArg {get;}
-
-        X SecondArg {get;}
-
-        X ThirdArg {get;}
-    }
-
 
     /// <summary>
     /// Characterizes a typed ternary bitwise operator

@@ -51,7 +51,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static T[] NonZeroArray<T>(this IPolyrand random, int length, Interval<T>? domain = null)
             where T : unmanaged
-                => random.Stream(domain, gmath.nonzero).TakeArray(length);        
+                => random.Stream(domain, x => gmath.nonzero(x)).TakeArray(length);        
     }
 
 }

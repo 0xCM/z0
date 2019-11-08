@@ -23,18 +23,18 @@ namespace Z0
             || typeof(T) == typeof(ushort) 
             || typeof(T) == typeof(uint) 
             || typeof(T) == typeof(ulong))
-                return parseU<T>(src);
+                return parse_u<T>(src);
             else if(typeof(T) == typeof(sbyte) 
             || typeof(T) == typeof(short) 
             || typeof(T) == typeof(int) 
             || typeof(T) == typeof(long))
-                return parseI<T>(src);
+                return parse_i<T>(src);
             else 
-                return parseF<T>(src);
+                return parse_f<T>(src);
         }
 
         [MethodImpl(Inline)]
-        static T parseI<T>(string src)
+        static T parse_i<T>(string src)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
@@ -49,7 +49,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static T parseU<T>(string src)
+        static T parse_u<T>(string src)
             where T : unmanaged
         {
 
@@ -64,7 +64,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static T parseF<T>(string src)
+        static T parse_f<T>(string src)
             where T : unmanaged
         {
 

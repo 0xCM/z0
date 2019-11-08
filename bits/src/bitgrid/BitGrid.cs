@@ -18,16 +18,21 @@ namespace Z0
     {                
         Span<T> data;
 
-        public readonly int M;
+        GridMoniker<T> moniker;
 
-        public readonly int N;
 
         [MethodImpl(Inline)]
-        internal BitGrid(Span<T> data, int M, int N)
+        internal BitGrid(Span<T> data, ushort m, ushort n)
         {
             this.data = data;
-            this.M = M;
-            this.N = N;
+            this.moniker = GridMoniker.Define<T>(m,n);
+        }
+
+        [MethodImpl(Inline)]
+        internal BitGrid(Span<T> data, GridMoniker<T> moniker)
+        {
+            this.data = data;
+            this.moniker = moniker;
         }
 
         public Span<T> Data
@@ -48,17 +53,48 @@ namespace Z0
             get => data.Length;
         }
 
+        public GridMoniker<T> Moniker
+        {
+            [MethodImpl(Inline)]
+            get => moniker;
+        }
+
         public bit this[int row, int col]
         {
             [MethodImpl(Inline)]
-            get => BitGrid.readbit(in Head,  N, row, col);
+            get => GetState(row,col);
 
             [MethodImpl(Inline)]
-            set => BitGrid.setbit(ref Head, M, N, row, col, value);
+            set => SetState(row,col,value);
         }
 
+        public bit this[int pos]
+        {
+            [MethodImpl(Inline)]
+            get => GetState(pos);
+
+            [MethodImpl(Inline)]
+            set => SetState(pos, value);
+        }
+
+        [MethodImpl(Inline)]
+        public bit GetState(int row, int col)
+            => BitGrid.readbit(Moniker, in Head, row, col);
+
+        [MethodImpl(Inline)]
+        public bit GetState(int bitpos)
+            => BitGrid.readbit(Moniker, in Head, bitpos);
+
+        [MethodImpl(Inline)]
+        public void SetState(int row, int col, bit state)
+            => BitGrid.setbit(Moniker, row, col, state, ref Head);
+
+        [MethodImpl(Inline)]
+        public void SetState(int bitpos, bit state)
+            => BitGrid.setbit(Moniker, bitpos, state, ref Head);
+
         public string Format()
-            => data.FormatMatrixBits((int)N);
+            => data.FormatMatrixBits((int)moniker.ColCount);
 
         [MethodImpl(Inline)]
         public bool Equals(BitGrid<T> rhs)

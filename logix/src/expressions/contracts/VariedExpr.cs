@@ -10,25 +10,18 @@ namespace Z0.Logix
     
     using static zfunc;
 
-
+    /// <summary>
+    /// Distinguishes varied expressions from other sorts of expressions
+    /// </summary>
     public interface IVariedExpr : IExpr
     {
 
     }
 
-
-    public interface IVariedLogicExpr : IVariedExpr, ILogicExpr
-    {
-        ILogicExpr BaseExpr {get;}        
-
-        ILogicVarExpr[] Vars {get;}        
-
-        void SetVars(params ILogicExpr[] values);        
-
-        void SetVars(params bit[] values);        
-
-    }
-
+    /// <summary>
+    /// Characterizes an expression that varies over a typed expression
+    /// </summary>
+    /// <typeparam name="T">The type over which the expression is defined</typeparam>
     public interface IVariedExpr<T> : IVariedExpr, IExpr<T>
         where T : unmanaged
     {
@@ -42,17 +35,34 @@ namespace Z0.Logix
 
     }
 
-    public interface IVariedLogicExpr<T> : IVariedExpr,  ILogicExpr<T>
+    /// <summary>
+    /// Characterizes an expression that depends on a boolean variable
+    /// </summary>
+    public interface IVariedLogicExpr : IVariedExpr, ILogicExpr
+    {
+        ILogicExpr BaseExpr {get;}        
+
+        ILogicVarExpr[] Vars {get;}        
+
+        void SetVars(params ILogicExpr[] values);        
+
+        void SetVars(params bit[] values);        
+
+    }
+
+    /// <summary>
+    /// Characterizes an expression that depends on a boolean variable but which
+    /// also carries type information
+    /// </summary>
+    public interface IVariedLogicExpr<T> : IVariedLogicExpr,  ILogicExpr<T>
         where T : unmanaged
     {
      
-        ILogicExpr<T> BaseExpr {get;}        
+        new ILogicExpr<T> BaseExpr {get;}        
 
-        ILogicVarExpr<T>[] Vars {get;}        
+        new ILogicVarExpr<T>[] Vars {get;}        
 
         void SetVars(params ILogicExpr<T>[] values);        
-
-
     }
 
 }

@@ -15,7 +15,6 @@ namespace Z0
     /// <summary>
     /// Correlates an cell index with a coordinate in a rectangular grid
     /// </summary>
-
     public readonly struct CellMap
     {                
         /// <summary>
@@ -42,17 +41,6 @@ namespace Z0
 		/// The absolute/linear zero-based cell position
 		/// </summary>
         public readonly uint Position;
-
-
-        [MethodImpl(Inline)]
-        public CellMap(in CellIndex index, ushort row, ushort col)
-        {
-            this.Row = row;
-            this.Col = col;
-            this.Segment = index.Segment;
-            this.Offset = index.Offset;
-            this.Position = index.Position;
-        }
 
         [MethodImpl(Inline)]
         public CellMap(uint pos, ushort seg, ushort offset, ushort row, ushort col)

@@ -13,7 +13,7 @@ namespace Z0
     using static As;
     using static AsIn;
 
-    unsafe partial class BitPoints
+    partial class BitPoints
     {
         static N256 n => n256;
 
@@ -34,30 +34,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static unsafe void and(in byte rA, in byte rB, ref byte rDst)
+        static void and(in byte rA, in byte rB, ref byte rDst)
             => content(math.and(content(rA), content(rB)), ref rDst);
-
-        // [MethodImpl(Inline)]
-        // static void and(in ushort rA, in ushort rB, ref ushort rDst)
-        //     => ginx.vand(n, in rA, in rB, ref rDst);
-        
-        // [MethodImpl(Inline)]
-        // static void and(in uint rA, in uint rB, ref uint rDst)
-        // {
-        //     const int segments = 4;
-        //     const int segsize = 8;
-        //     for(int i=0, offset = 0; i < segments; i++, offset += segsize)
-        //         ginx.vand(n, in skip(in rA, offset), in skip(in rB, offset), ref seek(ref rDst, offset));
-        // }
-
-        // [MethodImpl(Inline)]
-        // static void and(in ulong rA, in ulong rB, ref ulong rDst)
-        // {
-        //     const int segments = 16;
-        //     const int segsize = 4;
-        //     for(int i=0, offset = 0; i < segments; i++, offset += segsize)
-        //         ginx.vand(n, in skip(in rA, offset), in skip(in rB, offset), ref seek(ref rDst, offset));
-        // }
-
     }
 }

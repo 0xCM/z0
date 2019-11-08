@@ -18,106 +18,108 @@ namespace Z0
         /// <summary>
         /// divtiplies two primal values
         /// </summary>
-        /// <param name="lhs">The left value</param>
-        /// <param name="rhs">The right value</param>
+        /// <param name="a">The left value</param>
+        /// <param name="b">The right value</param>
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
-        public static T div<T>(T lhs, T rhs)
+        public static T div<T>(T a, T b)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte) 
             || typeof(T) == typeof(ushort) 
             || typeof(T) == typeof(uint) 
             || typeof(T) == typeof(ulong))
-                return divu(lhs,rhs);
+                return div_u(a,b);
             else if(typeof(T) == typeof(sbyte) 
             || typeof(T) == typeof(short) 
             || typeof(T) == typeof(int) 
             || typeof(T) == typeof(long))
-                return divi(lhs,rhs);
-            else return gfp.div(lhs,rhs);
+                return div_i(a,b);
+            else 
+                return gfp.div(a,b);
         }
 
         /// <summary>
         /// divtiplies two primal values
         /// </summary>
-        /// <param name="lhs">The left value</param>
-        /// <param name="rhs">The right value</param>
+        /// <param name="a">The left value</param>
+        /// <param name="b">The right value</param>
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
-        public static ref T div<T>(ref T lhs, T rhs)
+        public static ref T div<T>(ref T a, T b)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte) 
             || typeof(T) == typeof(ushort) 
             || typeof(T) == typeof(uint) 
             || typeof(T) == typeof(ulong))
-                divu(ref lhs,rhs);
+                div_u(ref a,b);
             else if(typeof(T) == typeof(sbyte) 
             || typeof(T) == typeof(short) 
             || typeof(T) == typeof(int) 
             || typeof(T) == typeof(long))
-                divi(ref lhs,rhs);
-            else gfp.div(ref lhs,rhs);
-            return ref lhs;
+                div_i(ref a,b);
+            else 
+                gfp.div(ref a,b);
+            return ref a;
         }
 
         [MethodImpl(Inline)]
-        static T divi<T>(T lhs, T rhs)
+        static T div_i<T>(T a, T b)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                 return generic<T>(math.div(int8(lhs), int8(rhs)));
+                 return generic<T>(math.div(int8(a), int8(b)));
             else if(typeof(T) == typeof(short))
-                 return generic<T>(math.div(int16(lhs), int16(rhs)));
+                 return generic<T>(math.div(int16(a), int16(b)));
             else if(typeof(T) == typeof(int))
-                 return generic<T>(math.div(int32(lhs), int32(rhs)));
+                 return generic<T>(math.div(int32(a), int32(b)));
             else
-                 return generic<T>(math.div(int64(lhs), int64(rhs)));
+                 return generic<T>(math.div(int64(a), int64(b)));
         }
 
         [MethodImpl(Inline)]
-        static T divu<T>(T lhs, T rhs)
+        static T div_u<T>(T a, T b)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(math.div(uint8(lhs), uint8(rhs)));
+                return generic<T>(math.div(uint8(a), uint8(b)));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(math.div(uint16(lhs), uint16(rhs)));
+                return generic<T>(math.div(uint16(a), uint16(b)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(math.div(uint32(lhs), uint32(rhs)));
+                return generic<T>(math.div(uint32(a), uint32(b)));
             else 
-                return generic<T>(math.div(uint64(lhs), uint64(rhs)));
+                return generic<T>(math.div(uint64(a), uint64(b)));
         }
 
         [MethodImpl(Inline)]
-        static ref T divi<T>(ref T lhs, T rhs)
+        static ref T div_i<T>(ref T a, T b)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                 math.div(ref int8(ref lhs), int8(rhs));
+                 math.div(ref int8(ref a), int8(b));
             else if(typeof(T) == typeof(short))
-                 math.div(ref int16(ref lhs), int16(rhs));
+                 math.div(ref int16(ref a), int16(b));
             else if(typeof(T) == typeof(int))
-                 math.div(ref int32(ref lhs), int32(rhs));
+                 math.div(ref int32(ref a), int32(b));
             else
-                 math.div(ref int64(ref lhs), int64(rhs));
-            return ref lhs;
+                 math.div(ref int64(ref a), int64(b));
+            return ref a;
         }
 
         [MethodImpl(Inline)]
-        static ref T divu<T>(ref T lhs, T rhs)
+        static ref T div_u<T>(ref T a, T b)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                math.div(ref uint8(ref lhs), uint8(rhs));
+                math.div(ref uint8(ref a), uint8(b));
             else if(typeof(T) == typeof(ushort))
-                math.div(ref uint16(ref lhs), uint16(rhs));
+                math.div(ref uint16(ref a), uint16(b));
             else if(typeof(T) == typeof(uint))
-                math.div(ref uint32(ref lhs), uint32(rhs));
+                math.div(ref uint32(ref a), uint32(b));
             else 
-                math.div(ref uint64(ref lhs), uint64(rhs));
-            return ref lhs;
+                math.div(ref uint64(ref a), uint64(b));
+            return ref a;
         }
     }
 }

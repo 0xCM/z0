@@ -29,7 +29,7 @@ namespace Z0.Logix
         [MethodImpl(Inline)]
         static LiteralLogicExpr<T> @true<T>()
             where T : unmanaged
-            => literal(gmath.maxval<T>());
+            => literal<T>(bit.On);
 
         /// <summary>
         /// Creates a logical FALSE expression, i.e. an expression that is always false
@@ -44,7 +44,7 @@ namespace Z0.Logix
         [MethodImpl(Inline)]
         static LiteralLogicExpr<T> @false<T>()
             where T : unmanaged
-                => literal(default(T));
+                => literal<T>(bit.Off);
 
         /// <summary>
         /// Creates a bit literal expression
@@ -59,9 +59,9 @@ namespace Z0.Logix
         /// </summary>
         /// <param name="a">The literal value</param>
         [MethodImpl(Inline)]
-        static LiteralLogicExpr<T> literal<T>(T a)
+        public static LiteralLogicExpr<T> literal<T>(bit a)
             where T : unmanaged
-             => new LiteralLogicExpr<T>(a);
+                => new LiteralLogicExpr<T>(a);
 
         /// <summary>
         /// Defines a logical identity expression
@@ -108,9 +108,9 @@ namespace Z0.Logix
         /// <param name="a">The operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        static UnaryLogicOp<T> unary<T>(UnaryLogicOpKind op, T a)
+        static UnaryLogicOp<T> unary<T>(UnaryLogicOpKind op, bit a)
             where T : unmanaged
-                => new UnaryLogicOp<T>(op,literal(a));
+                => new UnaryLogicOp<T>(op,literal<T>(a));
 
         /// <summary>
         /// Defines a unary logic operator over a literal
@@ -160,9 +160,9 @@ namespace Z0.Logix
         /// <param name="a">The first operand</param>
         /// <param name="b">The second operand</param>
         [MethodImpl(Inline)]
-        static BinaryLogicOp<T> binary<T>(BinaryLogicOpKind kind, T a, T b)
+        static BinaryLogicOp<T> binary<T>(BinaryLogicOpKind kind, bit a, bit b)
             where T : unmanaged
-                => new BinaryLogicOp<T>(kind,literal(a),literal(b));
+                => new BinaryLogicOp<T>(kind,literal<T>(a),literal<T>(b));
 
         /// <summary>
         /// Defines a ternary logic operator over expression operands
@@ -206,8 +206,8 @@ namespace Z0.Logix
         /// <param name="b">The second operand</param>
         /// <param name="c">The third operand</param>
         [MethodImpl(Inline)]
-        static TernaryLogicOp<T> ternary<T>(TernaryOpKind kind, T a, T b, T c)
+        static TernaryLogicOp<T> ternary<T>(TernaryOpKind kind, bit a, bit b, bit c)
             where T : unmanaged
-                => new TernaryLogicOp<T>(kind,literal(a),literal(b),literal(c));
+                => new TernaryLogicOp<T>(kind,literal<T>(a),literal<T>(b),literal<T>(c));
     }
 }

@@ -12,24 +12,8 @@ namespace Z0
 
     using static zfunc;
 
-    public class ColInfoAttribute : Attribute
-    {
-        public ColInfoAttribute(string Name, string desc = "", int Width = 0)
-        {
-            this.Name = Name;
-            this.Desc = desc;
-            this.Width = Width == 0 ? (int?)null : Width;
-        }
-        
-        public string Name {get;}
-
-        public string Desc {get;}
-        public int? Width {get;}
-    }
-    
     public class GridStats
     {        
-
         [MethodImpl(Inline)]
         public static GridStats Define(GridMap src)
             => new GridStats
@@ -57,19 +41,19 @@ namespace Z0
         /// The number of grid rows
         /// </summary>
         [ColInfo("rows","The number of grid rows")]
-        public int RowCount {get;set;}
+        public ushort RowCount {get;set;}
         
         /// <summary>
         /// The number of grid columns
         /// </summary>
         [ColInfo("cols","The number of grid columns")]
-        public int ColCount {get;set;}
+        public ushort ColCount {get;set;}
 
         /// <summary>
         /// The number of bits in a storage segment
         /// </summary>
         [ColInfo("segsize","The number of bits in a storage segment")]
-        public int SegWidth {get;set;}
+        public ushort SegWidth {get;set;}
 
         /// <summary>
         /// The number of points covered by the grid

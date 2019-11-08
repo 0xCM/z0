@@ -70,7 +70,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitVector64 imply(BitVector64 x, BitVector64 y)
             => math.imply(x.data, y.data);
- 
- 
     }
 }

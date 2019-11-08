@@ -19,34 +19,68 @@ namespace Z0
         /// <summary>
         /// Returns true if the difference between two operands is within a specified tolerance
         /// </summary>
-        /// <param name="x">The left operand</param>
-        /// <param name="y">The right operand</param>
+        /// <param name="a">The left operand</param>
+        /// <param name="b">The right operand</param>
         /// <param name="epsilon">The tolerance</param>
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
-        public static bool within<T>(T x, T y, T epsilon)
+        public static bit within<T>(T a, T b, T epsilon)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(byte) 
+            || typeof(T) == typeof(ushort) 
+            || typeof(T) == typeof(uint) 
+            || typeof(T) == typeof(ulong))
+                return within_u(a,b,epsilon);
+            else if(typeof(T) == typeof(sbyte) 
+            || typeof(T) == typeof(short) 
+            || typeof(T) == typeof(int) 
+            || typeof(T) == typeof(long))
+                return within_i(a,b,epsilon);
+            else
+                return within_f(a,b,epsilon);
+
+        }
+
+        [MethodImpl(Inline)]
+        static bit within_i<T>(T a, T b, T epsilon)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return math.within(int8(x), int8(y), int8(epsilon));
-            else if(typeof(T) == typeof(byte))
-                return math.within(uint8(x), uint8(y), uint8(epsilon));
+                return math.within(int8(a), int8(b), int8(epsilon));
             else if(typeof(T) == typeof(short))
-                return math.within(int16(x), int16(y), int16(epsilon));
-            else if(typeof(T) == typeof(ushort))
-                return math.within(uint16(x), uint16(y), uint16(epsilon));
+                return math.within(int16(a), int16(b), int16(epsilon));
             else if(typeof(T) == typeof(int))
-                return math.within(int32(x), int32(y), int32(epsilon));
+                return math.within(int32(a), int32(b), int32(epsilon));
+            else 
+                return math.within(int64(a), int64(b), int64(epsilon));
+
+        }
+
+        [MethodImpl(Inline)]
+        static bit within_u<T>(T a, T b, T epsilon)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(byte))
+                return math.within(uint8(a), uint8(b), uint8(epsilon));
+            else if(typeof(T) == typeof(ushort))
+                return math.within(uint16(a), uint16(b), uint16(epsilon));
             else if(typeof(T) == typeof(uint))
-                return math.within(uint32(x), uint32(y), uint32(epsilon));
-            else if(typeof(T) == typeof(long))
-                return math.within(int64(x), int64(y), int64(epsilon));
-            else if(typeof(T) == typeof(ulong))
-                return math.within(uint64(x), uint64(y), uint64(epsilon));
-            else if(typeof(T) == typeof(float))
-                return fmath.within(float32(x), float32(y), float32(epsilon));
+                return math.within(uint32(a), uint32(b), uint32(epsilon));
+            else 
+                return math.within(uint64(a), uint64(b), uint64(epsilon));
+
+        }
+
+
+        [MethodImpl(Inline)]
+        static bit within_f<T>(T a, T b, T epsilon)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(float))
+                return fmath.within(float32(a), float32(b), float32(epsilon));
             else if(typeof(T) == typeof(double))
-                return fmath.within(float64(x), float64(y), float64(epsilon));
+                return fmath.within(float64(a), float64(b), float64(epsilon));
             else            
                 throw unsupported<T>();
 

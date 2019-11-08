@@ -22,7 +22,7 @@ namespace Z0
         /// <param name="a">The lower bound</param>
         /// <param name="b">The uppper bound</param>
         [MethodImpl(Inline)]
-        public static bool between(byte x, byte a, byte b)    
+        public static bit between(byte x, byte a, byte b)    
             => x >= a && x <= b;
 
         /// <summary>
@@ -32,7 +32,7 @@ namespace Z0
         /// <param name="a">The lower bound</param>
         /// <param name="b">The uppper bound</param>
         [MethodImpl(Inline)]
-        public static bool between(sbyte x, sbyte a, sbyte b)    
+        public static bit between(sbyte x, sbyte a, sbyte b)    
             => x >= a && x <= b;
 
         /// <summary>
@@ -42,7 +42,7 @@ namespace Z0
         /// <param name="a">The lower bound</param>
         /// <param name="b">The uppper bound</param>
         [MethodImpl(Inline)]
-        public static bool between(short x, short a, short b)    
+        public static bit between(short x, short a, short b)    
             => x >= a && x <= b;
 
         /// <summary>
@@ -52,7 +52,7 @@ namespace Z0
         /// <param name="a">The lower bound</param>
         /// <param name="b">The uppper bound</param>
         [MethodImpl(Inline)]
-        public static bool between(ushort x, ushort a, ushort b)    
+        public static bit between(ushort x, ushort a, ushort b)    
             => x >= a && x <= b;
 
         /// <summary>
@@ -62,7 +62,7 @@ namespace Z0
         /// <param name="a">The lower bound</param>
         /// <param name="b">The uppper bound</param>
         [MethodImpl(Inline)]
-        public static bool between(int x, int a, int b)    
+        public static bit between(int x, int a, int b)    
             => x >= a && x <= b;
 
         /// <summary>
@@ -72,7 +72,7 @@ namespace Z0
         /// <param name="a">The lower bound</param>
         /// <param name="b">The uppper bound</param>
         [MethodImpl(Inline)]
-        public static bool between(uint x, uint a, uint b)    
+        public static bit between(uint x, uint a, uint b)    
             => x >= a && x <= b;
 
         /// <summary>
@@ -82,7 +82,7 @@ namespace Z0
         /// <param name="a">The lower bound</param>
         /// <param name="b">The uppper bound</param>
         [MethodImpl(Inline)]
-        public static bool between(long x, long a, long b)    
+        public static bit between(long x, long a, long b)    
             => x >= a && x <= b;
 
         /// <summary>
@@ -92,7 +92,7 @@ namespace Z0
         /// <param name="a">The lower bound</param>
         /// <param name="b">The uppper bound</param>
         [MethodImpl(Inline)]
-        public static bool between(ulong x, ulong a, ulong b)    
+        public static bit between(ulong x, ulong a, ulong b)    
             => x >= a && x <= b;
 
     }

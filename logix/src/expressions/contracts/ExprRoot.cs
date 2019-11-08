@@ -87,30 +87,40 @@ namespace Z0.Logix
     }
 
     /// <summary>
-    /// Characterizes an operator reified as a boolean function
+    /// Characterizes a binary operator parametrized by expression type
     /// </summary>
-    public interface ILogicOp : IOperator, ILogicExpr
+    public interface IBinaryOp<X> : IOperator
+        where X : IExpr
     {
+        X LeftArg {get;}
 
-    }
-
-    public interface ILogicOp<K> : ILogicOp
-        where K : unmanaged, Enum
-    {
-        K OpKind {get;}
+        X RightArg {get;}
     }
 
     /// <summary>
-    /// Characterizes a logic operator that varies over operator kind and is evaluated in the
-    /// context of a parametric type
+    /// Characterizes a unary operator parametrized by an expression type
     /// </summary>
-    /// <typeparam name="T">The context type</typeparam>
-    /// <typeparam name="K">The operator classifier</typeparam>
-   public interface ILogicOp<T,K> :  ILogicOp<K>, IOperator<T,K>, ILogicExpr<T>
-        where T : unmanaged
-        where K : unmanaged, Enum
+    public interface IUnaryOp<X> : IOperator
+        where X : IExpr
     {
-
+        /// <summary>
+        /// The operand
+        /// </summary>
+        X Arg {get;}
     }
-  
+
+    /// <summary>
+    /// Characterizes a ternary operator parametrized by expression type
+    /// </summary>
+    public interface ITernaryOp<X> : IOperator
+        where X : IExpr
+    {
+        X FirstArg {get;}
+
+        X SecondArg {get;}
+
+        X ThirdArg {get;}
+    }
+
+
 }

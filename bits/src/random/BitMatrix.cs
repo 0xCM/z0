@@ -191,12 +191,13 @@ namespace Z0
             where T : unmanaged
         {
             var grid = Z0.BitGrid.alloc(m,n,zero);
-            random.StreamTo(grid.SegCount, ref grid.Head);
+            var segments = Z0.BitGrid.segments(grid.Moniker);
+            random.StreamTo(segments, ref grid.Head);
             return grid;
         }
 
         [MethodImpl(Inline)]
-        public static BitGrid<T> BitGrid<T>(this IPolyrand random, int rows, int cols)
+        public static BitGrid<T> BitGrid<T>(this IPolyrand random, ushort rows, ushort cols)
             where T : unmanaged
         {
             var grid = Z0.BitGrid.alloc<T>(rows,cols);
@@ -218,7 +219,7 @@ namespace Z0
             where N : unmanaged,ITypeNat
             where T : unmanaged
         {
-            random.StreamTo(dst.BitMap.SegCount, ref dst.Head);
+            random.StreamTo(dst.Data.Length, ref dst.Head);
             return dst;
         }
 

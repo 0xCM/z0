@@ -16,7 +16,7 @@ namespace Z0.Logix
     using TLS = TypedLogicSpec;
 
 
-    internal static class TypedIdentities<T>
+    internal static class BitwiseIdentities<T>
         where T : unmanaged
     {
         /// <summary>

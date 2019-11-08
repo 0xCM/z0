@@ -17,16 +17,16 @@ namespace Z0
         where M : unmanaged, ITypeNat
         where N : unmanaged, ITypeNat
         where T : unmanaged
-    {        
-
-        static GridMap Map => BitGridInfo<M,N,T>.Map;
-        
+    {                
         Span<T> data;
+
+        readonly GridMoniker<T> moniker;
             
         [MethodImpl(Inline)]
         internal BitGrid(Span<T> data)
         {
             this.data = data;
+            this.moniker = BitGrid.moniker<M,N,T>();
         }
 
         public Span<T> Data
@@ -39,18 +39,6 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => ref head(data);
-        }
-
-        public GridMap BitMap
-        {
-            [MethodImpl(Inline)]
-            get => Map;
-        }
-        
-        public int SegCount
-        {
-            [MethodImpl(Inline)]
-            get => data.Length;
         }
 
         public bit this[int row, int col]
@@ -71,44 +59,30 @@ namespace Z0
             set => SetState(pos, value);
         }
 
-        [MethodImpl(Inline)]
-        public ref readonly CellMap CellMap(int row, int col)
-            => ref Map.Cell(row,col);
-
-        [MethodImpl(Inline)]
-        public ref readonly CellMap CellMap(int pos)
-            => ref Map.Cell(pos);
+        public GridMoniker<T> Moniker
+        {
+            [MethodImpl(Inline)]
+            get => moniker;
+        }
             
         [MethodImpl(Inline)]
         public bit GetState(int row, int col)
-            => GetState(in CellMap(row,col));
+            => BitGrid.readbit(Moniker, in Head, row, col);
+
+        [MethodImpl(Inline)]
+        public bit GetState(int bitpos)
+            => BitGrid.readbit(Moniker, in Head, bitpos);
 
         [MethodImpl(Inline)]
         public void SetState(int row, int col, bit state)
-            => SetState(in CellMap(row,col), state);
+            => BitGrid.setbit(Moniker, row, col, state, ref Head);
 
         [MethodImpl(Inline)]
-        public bit GetState(int pos)
-            => GetState(CellMap(pos));
-
-        [MethodImpl(Inline)]
-        public void SetState(int pos, bit state)
-            => SetState(CellMap(pos), state);
-
-        [MethodImpl(Inline)]
-        ref T Segment(int index)
-            => ref seek(ref head(data), index);
-
-        [MethodImpl(Inline)]
-        bit GetState(in CellMap cell)
-            => gbits.test(Segment(cell.Segment), cell.Offset);
-
-        [MethodImpl(Inline)]
-        void SetState(in CellMap cell, bit state)
-            => gbits.set(ref Segment(cell.Segment), (byte)cell.Offset, state);
+        public void SetState(int bitpos, bit state)
+            => BitGrid.setbit(Moniker, bitpos, state, ref Head);
 
         public string Format()
-            => data.FormatMatrixBits((int)Map.ColCount);
+            => data.FormatMatrixBits(Moniker.ColCount);
 
         [MethodImpl(Inline)]
         public bool Equals(BitGrid<M,N,T> rhs)

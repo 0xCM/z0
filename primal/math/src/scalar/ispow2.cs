@@ -17,35 +17,35 @@ namespace Z0
     partial class math
     {
         [MethodImpl(Inline)]
-        public static bool isPow2(sbyte src)
+        public static bit isPow2(sbyte src)
             => (src & (src - 1)) == 0;
 
         [MethodImpl(Inline)]
-        public static bool isPow2(byte src)
+        public static bit isPow2(byte src)
             => (src & (src - 1)) == 0;
 
         [MethodImpl(Inline)]
-        public static bool isPow2(short src)
+        public static bit isPow2(short src)
             => (src & (src - 1)) == 0;
 
         [MethodImpl(Inline)]
-        public static bool isPow2(ushort src)
+        public static bit isPow2(ushort src)
             => (src & (src - 1)) == 0;
 
         [MethodImpl(Inline)]
-        public static bool isPow2(int src)
+        public static bit isPow2(int src)
             => (src & (src - 1)) == 0;
 
         [MethodImpl(Inline)]
-        public static bool isPow2(uint src)
+        public static bit isPow2(uint src)
             => (src & (src - 1)) == 0;
 
         [MethodImpl(Inline)]
-        public static bool isPow2(long src)
+        public static bit isPow2(long src)
             => (src & (src - 1)) == 0;
 
         [MethodImpl(Inline)]
-        public static bool isPow2(ulong src)
+        public static bit isPow2(ulong src)
             => (src & (src - 1)) == 0;
     }
 }

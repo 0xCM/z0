@@ -24,6 +24,23 @@ namespace Z0
         
     }
 
+    public class ColInfoAttribute : Attribute
+    {
+        public ColInfoAttribute(string Name, string desc = "", int Width = 0)
+        {
+            this.Name = Name;
+            this.Desc = desc;
+            this.Width = Width == 0 ? (int?)null : Width;
+        }
+        
+        public string Name {get;}
+
+        public string Desc {get;}
+        
+        public int? Width {get;}
+    }
+    
+
     public interface IRecord<T> : IRecord
     {
         IReadOnlyList<string> Headers

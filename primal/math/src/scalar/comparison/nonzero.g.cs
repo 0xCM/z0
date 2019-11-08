@@ -14,7 +14,7 @@ namespace Z0
     partial class gmath
     {
         [MethodImpl(Inline)]
-        public static bool nonzero<T>(T src)
+        public static bit nonzero<T>(T src)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte) 
@@ -31,7 +31,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static bool nonzerou<T>(T src)
+        static bit nonzerou<T>(T src)
         {
             if(typeof(T) == typeof(byte))
                  return math.nonzero(uint8(src));
@@ -44,7 +44,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static bool nonzeroi<T>(T src)
+        static bit nonzeroi<T>(T src)
         {
             if(typeof(T) == typeof(sbyte))
                  return math.nonzero(int8(src));

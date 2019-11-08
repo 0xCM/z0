@@ -75,8 +75,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitVector64 alloc(N64 n)
             => BitVector64.Alloc();
-
-
     }
-
 }

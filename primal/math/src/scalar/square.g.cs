@@ -23,13 +23,14 @@ namespace Z0
             || typeof(T) == typeof(ushort) 
             || typeof(T) == typeof(uint) 
             || typeof(T) == typeof(ulong))
-                return squareu(src);
+                return square_u(src);
             else if(typeof(T) == typeof(sbyte) 
             || typeof(T) == typeof(short) 
             || typeof(T) == typeof(int) 
             || typeof(T) == typeof(long))
-                return squarei(src);
-            else return gfp.square(src);
+                return square_i(src);
+            else 
+                return gfp.square(src);
         }           
 
         [MethodImpl(Inline)]
@@ -40,18 +41,20 @@ namespace Z0
             || typeof(T) == typeof(ushort) 
             || typeof(T) == typeof(uint) 
             || typeof(T) == typeof(ulong))
-                squareu(ref src);
+                square_u(ref src);
             else if(typeof(T) == typeof(sbyte) 
             || typeof(T) == typeof(short) 
             || typeof(T) == typeof(int) 
             || typeof(T) == typeof(long))
-                squarei(ref src);
-            else gfp.square(ref src);
+                square_i(ref src);
+            else 
+                gfp.square(ref src);
+            
             return ref src;
         }           
 
         [MethodImpl(Inline)]
-        static T squarei<T>(T src)
+        static T square_i<T>(T src)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
@@ -65,7 +68,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static T squareu<T>(T src)
+        static T square_u<T>(T src)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -79,7 +82,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static ref T squarei<T>(ref T src)
+        static ref T square_i<T>(ref T src)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
@@ -94,7 +97,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static ref T squareu<T>(ref T src)
+        static ref T square_u<T>(ref T src)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -107,7 +110,5 @@ namespace Z0
                  math.square(ref uint64(ref src));
             return ref src;
         }
-
-
     }
 }

@@ -15,7 +15,6 @@ namespace Z0
 
     partial class BitVector
     {
-
         /// <summary>
         /// Counts the number of enabled bits in the source vector
         /// </summary>
@@ -66,5 +65,4 @@ namespace Z0
         public static uint pop(BitVector64 x)
             => Bits.pop(x.Scalar);
     }
-
 }

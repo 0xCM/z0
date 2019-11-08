@@ -14,7 +14,7 @@ namespace Z0
     {
 
         [MethodImpl(Inline)]
-        public static bool nonzero<T>(T lhs)
+        public static bit nonzero<T>(T lhs)
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))

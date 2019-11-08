@@ -23,27 +23,6 @@ namespace Z0.Logix
     }
 
     /// <summary>
-    /// Characterizes a logical variable
-    /// </summary>
-    public interface ILogicVarExpr : IVarExpr, ILogicExpr
-    {
-        /// <summary>
-        /// Updates the variable
-        /// </summary>
-        /// <param name="expr">The value to assigned to the variable</param>
-        void Set(ILogicExpr expr);
-
-        /// <summary>
-        /// Updates the expression value
-        /// </summary>
-        /// <param name="literal">The literal value to assign to the variable</param>
-        void Set(bit literal);
-        
-        ILogicExpr Value {get;}
-    }
-
-
-    /// <summary>
     /// Characterizes a typed variable
     /// </summary>
     public interface IVarExpr<T> : IVarExpr, IExpr<T>
@@ -61,11 +40,42 @@ namespace Z0.Logix
         /// <param name="literal">The literal value to assign to the variable</param>
         void Set(T literal);
         
+        /// <summary>
+        /// The current value of the variable
+        /// </summary>
         IExpr<T> Value {get;}
 
     }
 
-    public interface ILogicVarExpr<T> :  IVarExpr, ILogicExpr<T>
+    /// <summary>
+    /// Characterizes a logical variable
+    /// </summary>
+    public interface ILogicVarExpr : IVarExpr, ILogicExpr
+    {
+        /// <summary>
+        /// Updates the variable
+        /// </summary>
+        /// <param name="expr">The value to assigned to the variable</param>
+        void Set(ILogicExpr expr);
+
+        /// <summary>
+        /// Updates the expression value
+        /// </summary>
+        /// <param name="literal">The literal value to assign to the variable</param>
+        void Set(bit literal);
+        
+        /// <summary>
+        /// The current value of the variable
+        /// </summary>
+        ILogicExpr Value {get;}
+    }
+
+
+
+    /// <summary>
+    /// Characterizes a logical variable that also carries type information
+    /// </summary>
+    public interface ILogicVarExpr<T> :  ILogicVarExpr, ILogicExpr<T>
         where T : unmanaged
     {
         /// <summary>
@@ -74,13 +84,11 @@ namespace Z0.Logix
         /// <param name="expr">The value to assigned to the variable</param>
         void Set(ILogicExpr<T> expr);
 
-        /// <summary>
-        /// Updates the expression value
-        /// </summary>
-        /// <param name="literal">The literal value to assign to the variable</param>
-        void Set(T literal);
         
-        ILogicExpr<T> Value {get;}
+        /// <summary>
+        /// The current value of the variable
+        /// </summary>
+        new ILogicExpr<T> Value {get;}
 
 
     }

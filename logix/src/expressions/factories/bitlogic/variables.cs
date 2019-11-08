@@ -47,7 +47,7 @@ namespace Z0.Logix
         /// <param name="name">The variable's name</param>
         /// <param name="init">The variable's initial value</param>
         [MethodImpl(Inline)]
-        public static LogicVariable<T> lvar<T>(string name, T init = default)
+        public static LogicVariable<T> lvar<T>(string name, bit init = default)
             where T : unmanaged
                 => new LogicVariable<T>(name, init);
 
@@ -57,7 +57,7 @@ namespace Z0.Logix
         /// <param name="name">The variable's name</param>
         /// <param name="init">The variable's initial value</param>
         [MethodImpl(Inline)]
-        public static LogicVariable<T> lvar<T>(char name, T init = default)
+        public static LogicVariable<T> lvar<T>(char name, bit init = default)
             where T : unmanaged
                 => new LogicVariable<T>(name.ToString(), init);
 
@@ -67,7 +67,7 @@ namespace Z0.Logix
         /// <param name="name">The variable's name</param>
         /// <param name="init">The variable's initial value</param>
         [MethodImpl(Inline)]
-        public static LogicVariable<T> lvar<T>(uint name, T init = default)
+        public static LogicVariable<T> lvar<T>(uint name, bit init = default)
             where T : unmanaged
                 => new LogicVariable<T>(name.ToString(), init);
 

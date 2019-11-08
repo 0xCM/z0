@@ -69,8 +69,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitVector64 srl(BitVector64 x, int offset)
             => math.srl(x.data,offset);
- 
-
     }
-
 }

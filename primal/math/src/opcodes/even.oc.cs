@@ -60,8 +60,7 @@ namespace Z0
         public static bit even_g64u(ulong x)
             => gmath.even(x);
 
- 
-         public static bit odd_d8i(sbyte x)
+        public static bit odd_d8i(sbyte x)
             => zfunc.odd(x);
 
         public static bit odd_g8i(sbyte x)

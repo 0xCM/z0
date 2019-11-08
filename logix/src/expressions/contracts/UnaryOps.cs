@@ -10,26 +10,6 @@ namespace Z0.Logix
     
     using static zfunc;
 
-    /// <summary>
-    /// Characterizes a unary operator
-    /// </summary>
-    public interface IUnaryOp : IOperator
-    {
-        
-    }
-
-    /// <summary>
-    /// Characterizes a unary operator parametrized by an expression type
-    /// </summary>
-    public interface IUnaryOp<X> : IUnaryOp
-        where X : IExpr
-    {
-        /// <summary>
-        /// The operand
-        /// </summary>
-        X Arg {get;}
-    }
-
 
     public interface IUnaryBitwiseOp<T> : IUnaryOp<IExpr<T>>, IOperator<T, UnaryBitwiseOpKind>
         where T : unmanaged

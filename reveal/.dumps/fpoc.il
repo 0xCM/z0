@@ -1,4 +1,4 @@
-// 2019-11-07 05:27:07:739
+// 2019-11-08 02:45:46:774
 float abs_g32f(float x)
 {
     IL_0000: ldarg.0
@@ -80,8 +80,9 @@ bool between_g32f(float x, float a, float b)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.Boolean Z0.gmath::between<System.Single>(System.Single,System.Single,System.Single)
-    IL_0008: ret
+    IL_0003: call Z0.bit Z0.gmath::between<System.Single>(System.Single,System.Single,System.Single)
+    IL_0008: call System.Boolean Z0.bit::op_Implicit(Z0.bit)
+    IL_000D: ret
 
 }
 bool between_d64f(double x, double a, double b)
@@ -98,8 +99,9 @@ bool between_g64f(double x, double a, double b)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.Boolean Z0.gmath::between<System.Double>(System.Double,System.Double,System.Double)
-    IL_0008: ret
+    IL_0003: call Z0.bit Z0.gmath::between<System.Double>(System.Double,System.Double,System.Double)
+    IL_0008: call System.Boolean Z0.bit::op_Implicit(Z0.bit)
+    IL_000D: ret
 
 }
 float dec_g32f(float x)
@@ -162,64 +164,72 @@ bool lt_d32f(float lhs, float rhs)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: call System.Boolean Z0.fmath::lt(System.Single,System.Single)
-    IL_0007: ret
+    IL_0002: call Z0.bit Z0.fmath::lt(System.Single,System.Single)
+    IL_0007: call System.Boolean Z0.bit::op_Implicit(Z0.bit)
+    IL_000C: ret
 
 }
 bool lt_g32f(float lhs, float rhs)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: call System.Boolean Z0.gfp::lt<System.Single>(System.Single,System.Single)
-    IL_0007: ret
+    IL_0002: call Z0.bit Z0.gfp::lt<System.Single>(System.Single,System.Single)
+    IL_0007: call System.Boolean Z0.bit::op_Implicit(Z0.bit)
+    IL_000C: ret
 
 }
 bool lt_d64f(double lhs, double rhs)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: call System.Boolean Z0.fmath::lt(System.Double,System.Double)
-    IL_0007: ret
+    IL_0002: call Z0.bit Z0.fmath::lt(System.Double,System.Double)
+    IL_0007: call System.Boolean Z0.bit::op_Implicit(Z0.bit)
+    IL_000C: ret
 
 }
 bool lt_g64f(double lhs, double rhs)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: call System.Boolean Z0.gfp::lt<System.Double>(System.Double,System.Double)
-    IL_0007: ret
+    IL_0002: call Z0.bit Z0.gfp::lt<System.Double>(System.Double,System.Double)
+    IL_0007: call System.Boolean Z0.bit::op_Implicit(Z0.bit)
+    IL_000C: ret
 
 }
 bool lteq_d32f(float lhs, float rhs)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: call System.Boolean Z0.fmath::lteq(System.Single,System.Single)
-    IL_0007: ret
+    IL_0002: call Z0.bit Z0.fmath::lteq(System.Single,System.Single)
+    IL_0007: call System.Boolean Z0.bit::op_Implicit(Z0.bit)
+    IL_000C: ret
 
 }
 bool lteq_g32f(float lhs, float rhs)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: call System.Boolean Z0.gfp::lteq<System.Single>(System.Single,System.Single)
-    IL_0007: ret
+    IL_0002: call Z0.bit Z0.gfp::lteq<System.Single>(System.Single,System.Single)
+    IL_0007: call System.Boolean Z0.bit::op_Implicit(Z0.bit)
+    IL_000C: ret
 
 }
 bool lteq_d64f(double lhs, double rhs)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: call System.Boolean Z0.fmath::lteq(System.Double,System.Double)
-    IL_0007: ret
+    IL_0002: call Z0.bit Z0.fmath::lteq(System.Double,System.Double)
+    IL_0007: call System.Boolean Z0.bit::op_Implicit(Z0.bit)
+    IL_000C: ret
 
 }
 bool lteq_g64f(double lhs, double rhs)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: call System.Boolean Z0.gfp::lteq<System.Double>(System.Double,System.Double)
-    IL_0007: ret
+    IL_0002: call Z0.bit Z0.gfp::lteq<System.Double>(System.Double,System.Double)
+    IL_0007: call System.Boolean Z0.bit::op_Implicit(Z0.bit)
+    IL_000C: ret
 
 }
 float max_d32f(float lhs, float rhs)
@@ -329,8 +339,9 @@ bool negative_n32f(float x)
 bool negative_g32f(float x)
 {
     IL_0000: ldarg.0
-    IL_0001: call System.Boolean Z0.gmath::negative<System.Single>(System.Single)
-    IL_0006: ret
+    IL_0001: call Z0.bit Z0.gmath::negative<System.Single>(System.Single)
+    IL_0006: call System.Boolean Z0.bit::op_Implicit(Z0.bit)
+    IL_000B: ret
 
 }
 bool negative_n64f(double x)
@@ -344,8 +355,9 @@ bool negative_n64f(double x)
 bool negative_g64f(double x)
 {
     IL_0000: ldarg.0
-    IL_0001: call System.Boolean Z0.gmath::negative<System.Double>(System.Double)
-    IL_0006: ret
+    IL_0001: call Z0.bit Z0.gmath::negative<System.Double>(System.Double)
+    IL_0006: call System.Boolean Z0.bit::op_Implicit(Z0.bit)
+    IL_000B: ret
 
 }
 bool nonzero_n32f(float x)
@@ -361,8 +373,9 @@ bool nonzero_n32f(float x)
 bool nonzero_g32f(float x)
 {
     IL_0000: ldarg.0
-    IL_0001: call System.Boolean Z0.gmath::nonzero<System.Single>(System.Single)
-    IL_0006: ret
+    IL_0001: call Z0.bit Z0.gmath::nonzero<System.Single>(System.Single)
+    IL_0006: call System.Boolean Z0.bit::op_Implicit(Z0.bit)
+    IL_000B: ret
 
 }
 bool nonzero_n64f(double x)
@@ -378,8 +391,9 @@ bool nonzero_n64f(double x)
 bool nonzero_g64f(double x)
 {
     IL_0000: ldarg.0
-    IL_0001: call System.Boolean Z0.gmath::nonzero<System.Double>(System.Double)
-    IL_0006: ret
+    IL_0001: call Z0.bit Z0.gmath::nonzero<System.Double>(System.Double)
+    IL_0006: call System.Boolean Z0.bit::op_Implicit(Z0.bit)
+    IL_000B: ret
 
 }
 bool positive_n32f(float x)
@@ -393,8 +407,9 @@ bool positive_n32f(float x)
 bool positive_g32f(float x)
 {
     IL_0000: ldarg.0
-    IL_0001: call System.Boolean Z0.gmath::positive<System.Single>(System.Single)
-    IL_0006: ret
+    IL_0001: call Z0.bit Z0.gmath::positive<System.Single>(System.Single)
+    IL_0006: call System.Boolean Z0.bit::op_Implicit(Z0.bit)
+    IL_000B: ret
 
 }
 bool positive_n64f(double x)
@@ -408,8 +423,9 @@ bool positive_n64f(double x)
 bool positive_g64f(double x)
 {
     IL_0000: ldarg.0
-    IL_0001: call System.Boolean Z0.gmath::positive<System.Double>(System.Double)
-    IL_0006: ret
+    IL_0001: call Z0.bit Z0.gmath::positive<System.Double>(System.Double)
+    IL_0006: call System.Boolean Z0.bit::op_Implicit(Z0.bit)
+    IL_000B: ret
 
 }
 float pow_d32f(float b, uint exp)

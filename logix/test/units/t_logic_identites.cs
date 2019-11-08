@@ -72,8 +72,6 @@ namespace Z0.Logix
             Claim.yea(sat);
         }
         
-
-
         void evaluator_bench()
             => identity_bench("identity/evaluator", LogicEngine.satisfied);
     }

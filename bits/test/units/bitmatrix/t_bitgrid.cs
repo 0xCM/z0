@@ -68,7 +68,47 @@ namespace Z0
             bitset_bench<byte>(249,128, Pow2.T08);
         }
 
-        void bitread_bench<T>(int M, int N, int cycles, SystemCounter counter = default)
+        public void bitread_check()
+        {
+            bitread_check<uint>(20,20);
+            bitread_check<uint>(21,30);
+            bitread_check<uint>(17,25);
+            bitread_check<ulong>(250,67);
+            bitread_check<byte>(250,67);
+            bitread_check<ushort>(250,67);
+
+        }
+
+        void bitread_check<T>(ushort rows, ushort cols)
+            where T : unmanaged
+        {
+            for(var i = 0; i < SampleSize; i++)
+            {
+                var src = Random.BitGrid<T>(rows,cols);
+                var moniker = src.Moniker;
+                Claim.eq(moniker, BitGrid.moniker<T>(rows,cols));
+
+                var dstA = BitGrid.alloc<T>(rows,cols);
+                var dstB = BitGrid.alloc<T>(rows,cols);                
+
+                var bitpos = 0;
+                for(var row = 0; row < rows; row++)
+                for(var col = 0; col < cols; col++, bitpos++)
+                {
+                    var b1 = BitGrid.readbit(moniker, in src.Head, row, col);
+                    var b2 = BitGrid.readbit(moniker, in src.Head, bitpos);
+                    Claim.yea(b1 == b2);
+
+                    dstA[row,col] = b1;
+                    dstB[bitpos] = b2;                    
+                }
+                var bsA = dstA.ToBitString();
+                var bsB = dstB.ToBitString();
+                Claim.eq(bsA, bsB);
+            }
+
+        }
+        void bitread_bench<T>(ushort M, ushort N, int cycles, SystemCounter counter = default)
             where T : unmanaged
         {
             var last = bit.Off;
@@ -85,6 +125,8 @@ namespace Z0
 
             Benchmark($"gridread_{moniker<T>()}", counter, cycles*M*N);
         }
+
+
 
         void bitmatrix_bitread_bench<T>(int cycles, SystemCounter counter = default)
             where T : unmanaged
@@ -106,7 +148,7 @@ namespace Z0
             Benchmark($"bitmatrix_bitread_{moniker<T>()}", counter, cycles*M*N);
         }
 
-        void bitset_bench<T>(int M, int N, int cycles, SystemCounter counter = default)
+        void bitset_bench<T>(ushort M, ushort N, int cycles, SystemCounter counter = default)
             where T : unmanaged
         {
             var dst = BitGrid.alloc<T>(M,N);
@@ -127,8 +169,9 @@ namespace Z0
 
         public void bg_249x128x64()
         {
-            var M = 249;
-            var N = 128;
+            ushort M = 249;
+            ushort N = 128;
+            var moniker = GridMoniker.Define<ulong>(M,N);
             int segwidth = bitsize<ulong>();
             var segorder = (int)math.log2(segwidth);
 
@@ -152,18 +195,17 @@ namespace Z0
                 Claim.eq(map.Cell(pos).Segment, seg);
                 Claim.eq(map.Cell(pos).Offset, offset);
                 
-                var b1 = BitGrid.readbit(in head(src), N, row,col);
+                var b1 = BitGrid.readbit(moniker, in head(src), row,col);
                 var b2 = bg[row,col];
                 Claim.eq(b1,b2);
             }            
         }
 
-
         public void layout_32x8x8()
         {
-            const int rows = 32;
-            const int cols = 8;            
-            const int cellwidth = 8;
+            const ushort rows = 32;
+            const ushort cols = 8;            
+            const ushort cellwidth = 8;
             var map = BitGrid.map(rows, cols, cellwidth);
             Claim.eq(8*32, map.StorageBits);
             
@@ -186,9 +228,9 @@ namespace Z0
 
         public void bg_17x11x8_layout_check()
         {
-            const int rows = 17;
-            const int cols = 11;            
-            const int segwidth = 8;
+            const ushort rows = 17;
+            const ushort cols = 11;            
+            const ushort segwidth = 8;
             var points = rows*cols;
             var bytes = points/8 + (points % 8 != 0 ? 1 : 0);
             var bits = bytes/8;
@@ -205,8 +247,7 @@ namespace Z0
                 var pos2 = map[current].Position;
 
                 Claim.eq(pos1, current);
-                Claim.eq(pos2, current);
-                
+                Claim.eq(pos2, current);                
             }
 
             Claim.eq(current, rows*cols);
@@ -263,16 +304,11 @@ namespace Z0
             var segments = bytes/segbytes + (bytes % segbytes != 0 ? 1 : 0);
 
             var grid = BitGrid.alloc(m,n,zero);
-            var bitmap = grid.BitMap;
-
-            Claim.eq(bitmap.PointCount, points);
-            Claim.eq(bitmap.StorageBits, bits);
-            Claim.eq(bitmap.SegCount, segments);
 
             
             for(var i=0; i< SampleSize; i++)
             {
-                var input = Random.BitString(grid.BitMap.PointCount);
+                var input = Random.BitString(grid.Moniker.PointCount);
                 for(var pos=0; pos<input.Length; pos++)
                     grid[pos] = input[pos];
 

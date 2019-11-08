@@ -13,10 +13,10 @@ namespace Z0
     using static As;
     using static AsIn;
 
-    unsafe partial class BitPoints
+    partial class BitPoints
     {
         [MethodImpl(Inline)]
-        public static unsafe void xornot<T>(in T rA, in T rB, ref T rDst)
+        public static void xornot<T>(in T rA, in T rB, ref T rDst)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -32,7 +32,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static unsafe void xornot(in byte rA, in byte rB, ref byte rDst)
+        static void xornot(in byte rA, in byte rB, ref byte rDst)
             => content(math.xor(content(in rA), math.not(content(in rB))), ref rDst);
 
         [MethodImpl(Inline)]
@@ -56,6 +56,5 @@ namespace Z0
             for(int i=0, offset = 0; i < segments; i++, offset += segsize)
                 ginx.vxornot(n, in skip(in rA, offset), in skip(in rB, offset), ref seek(ref rDst, offset));
         }
-
     }
 }

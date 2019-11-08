@@ -22,7 +22,7 @@ namespace Z0.Logix
         }
 
         [MethodImpl(Inline)]
-        public LogicVariable(string name, T init)
+        public LogicVariable(string name, bit init)
         {
             this.Name = name;
             this.Value = new LiteralLogicExpr<T>(init);
@@ -38,6 +38,14 @@ namespace Z0.Logix
         /// </summary>
         public ILogicExpr<T> Value {get; private set;}
 
+        ILogicExpr ILogicVarExpr.Value 
+            => Value;
+
+        [MethodImpl(Inline)]
+        public void Set(ILogicExpr value)
+        {
+            this.Value = (ILogicExpr<T>)value;
+        }
 
         [MethodImpl(Inline)]
         public void Set(ILogicExpr<T> value)
@@ -46,15 +54,12 @@ namespace Z0.Logix
         }
 
         [MethodImpl(Inline)]
-        public void Set(T value)
+        public void Set(bit value)
         {
             this.Value = new LiteralLogicExpr<T>(value);
         }
 
 
-        [MethodImpl(Inline)]
-        public void Set(IExpr<T> value)
-            => Value = (ILogicExpr<T>)value;
 
         public string Format()
             => Format(false);

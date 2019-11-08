@@ -16,7 +16,7 @@ namespace Z0
     partial class gmath
     {
         [MethodImpl(Inline)]
-        public static bool between<T>(T x, T a, T b)
+        public static bit between<T>(T x, T a, T b)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte) 
@@ -35,7 +35,7 @@ namespace Z0
 
 
         [MethodImpl(Inline)]
-        static bool between_i<T>(T x, T a, T b)
+        static bit between_i<T>(T x, T a, T b)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
@@ -49,7 +49,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static bool between_u<T>(T x, T a, T b)
+        static bit between_u<T>(T x, T a, T b)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))

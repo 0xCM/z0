@@ -21,7 +21,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The value to inspect</param>
         [MethodImpl(Inline)]
-        public static bool positive(sbyte x)
+        public static bit positive(sbyte x)
             => x > 0;
 
         /// <summary>
@@ -29,7 +29,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The value to inspect</param>
         [MethodImpl(Inline)]
-        public static bool positive(byte x)
+        public static bit positive(byte x)
             => x > 0;
 
         /// <summary>
@@ -37,7 +37,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The value to inspect</param>
         [MethodImpl(Inline)]
-        public static bool positive(short x)
+        public static bit positive(short x)
             => x > 0;
 
         /// <summary>
@@ -45,7 +45,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The value to inspect</param>
         [MethodImpl(Inline)]
-        public static bool positive(ushort x)
+        public static bit positive(ushort x)
             => x > 0;
 
         /// <summary>
@@ -53,7 +53,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The value to inspect</param>
         [MethodImpl(Inline)]
-        public static bool positive(int x)
+        public static bit positive(int x)
             => x > 0;
 
         /// <summary>
@@ -61,7 +61,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The value to inspect</param>
         [MethodImpl(Inline)]
-        public static bool positive(uint x)
+        public static bit positive(uint x)
             => x > 0;
 
         /// <summary>
@@ -69,7 +69,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The value to inspect</param>
         [MethodImpl(Inline)]
-        public static bool positive(long x)
+        public static bit positive(long x)
             => x > 0;
 
         /// <summary>
@@ -77,7 +77,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The value to inspect</param>
         [MethodImpl(Inline)]
-        public static bool positive(ulong x)
+        public static bit positive(ulong x)
             => x > 0;
 
         /// <summary>
@@ -85,7 +85,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The value to inspect</param>
         [MethodImpl(Inline)]
-        public static bool positive(float x)
+        public static bit positive(float x)
             => x > 0;
 
         /// <summary>
@@ -93,7 +93,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The value to inspect</param>
         [MethodImpl(Inline)]
-        public static bool positive(double x)
+        public static bit positive(double x)
             => x > 0;
     }
 

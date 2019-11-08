@@ -25,12 +25,6 @@ namespace Z0.Logix
         }
 
         /// <summary>
-        /// The expression classifier
-        /// </summary>
-        public TypedExprKind ExprKind 
-            => TypedExprKind.BinaryOperator;
-
-        /// <summary>
         /// The operator
         /// </summary>
         public BinaryBitwiseOpKind OpKind {get;}

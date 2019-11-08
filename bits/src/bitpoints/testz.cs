@@ -13,10 +13,10 @@ namespace Z0
     using static As;
     using static AsIn;
 
-    unsafe partial class BitPoints
+    partial class BitPoints
     {
         [MethodImpl(Inline)]
-        public static unsafe bit testz<T>(in T rA, in T rB)
+        public static bit testz<T>(in T rA, in T rB)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -32,7 +32,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static unsafe bit testz(in byte rA, in byte rB)
+        static bit testz(in byte rA, in byte rB)
         {
             var a = content(in rA);
             var b = content(in rB);
@@ -67,6 +67,5 @@ namespace Z0
                 result &= ginx.vtestz(n, in skip(in rA, offset), in skip(in rB, offset));
             return result;
         }
-
     }
 }

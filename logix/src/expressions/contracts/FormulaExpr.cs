@@ -39,4 +39,7 @@ namespace Z0.Logix
         /// </summary>
         new IExpr<T> Encoding {get;}
     }
+
+
+
 }

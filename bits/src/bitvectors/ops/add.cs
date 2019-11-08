@@ -69,7 +69,6 @@ namespace Z0
         /// <param name="y">The right bitvector</param>
         [MethodImpl(Inline)]
         public static BitVector64 add(BitVector64 x, BitVector64 y)
-            => math.add(x.Scalar, y.Scalar);
- 
+            => math.add(x.Scalar, y.Scalar); 
     }
 }

@@ -80,7 +80,7 @@ partial class zfunc
     /// <param name="test">The value to test</param>
     [MethodImpl(Inline)]
     public static bit even(sbyte test)
-        => !odd(test);
+        => (test & 1) == 0;
 
     /// <summary>
     /// Returns true if the test value is even by examining the least significant bit
@@ -88,7 +88,7 @@ partial class zfunc
     /// <param name="test">The value to test</param>
     [MethodImpl(Inline)]
     public static bit even(byte test)
-        => !odd(test);
+        => (test & 1) == 0;
 
     /// <summary>
     /// Returns true if the test value is even by examining the least significant bit
@@ -96,7 +96,7 @@ partial class zfunc
     /// <param name="test">The value to test</param>
     [MethodImpl(Inline)]
     public static bit even(short test)
-        => !odd(test);
+        => (test & 1) == 0;
 
     /// <summary>
     /// Returns true if the test value is even by examining the least significant bit
@@ -104,7 +104,7 @@ partial class zfunc
     /// <param name="test">The value to test</param>
     [MethodImpl(Inline)]
     public static bit even(int test)
-        => !odd(test);
+        => (test & 1) == 0;
 
     /// <summary>
     /// Returns true if the test value is even by examining the least significant bit
@@ -112,7 +112,7 @@ partial class zfunc
     /// <param name="test">The value to test</param>
     [MethodImpl(Inline)]
     public static bit even(ushort test)
-        => !odd(test);
+        => (test & 1) == 0;
 
     /// <summary>
     /// Returns true if the test value is even by examining the least significant bit
@@ -120,7 +120,7 @@ partial class zfunc
     /// <param name="test">The value to test</param>
     [MethodImpl(Inline)]
     public static bit even(uint test)
-        => !odd(test);
+        => (test & 1) == 0;
 
     /// <summary>
     /// Returns true if the test value is even by examining the least significant bit
@@ -128,7 +128,7 @@ partial class zfunc
     /// <param name="test">The value to test</param>
     [MethodImpl(Inline)]
     public static bit even(long test)
-        => !odd(test);
+        => (test & 1) == 0;
 
     /// <summary>
     /// Returns true if the test value is even by examining the least significant bit
@@ -136,6 +136,6 @@ partial class zfunc
     /// <param name="test">The value to test</param>
     [MethodImpl(Inline)]
     public static bit even(ulong test)
-        => !odd(test);
+        => (test & 1) == 0;
 }
 

@@ -31,18 +31,5 @@ namespace Z0.Logix
             => OpKind.Format(Arg);        
     }
 
-    public sealed class UnaryLogicOp<T> : UnaryLogicOp,  IUnaryLogicOp<T>
-        where T : unmanaged
-    {
-        [MethodImpl(Inline)]
-        public UnaryLogicOp(UnaryLogicOpKind op, ILogicExpr<T> arg)
-            : base(op,arg)
-        {
-            this.Arg = arg;
-        }
-
-        public new ILogicExpr<T> Arg{get;}
-    }
-
 
 }

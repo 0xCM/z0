@@ -60,8 +60,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitVector64 Gather(BitVector64 src, BitVector64 spec)
             => Bits.gather(src.data, spec.data);
-
-
     }
-
 }

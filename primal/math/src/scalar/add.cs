@@ -16,95 +16,92 @@ namespace Z0
     partial class math
     {
         [MethodImpl(Inline)]
-        public static sbyte add(sbyte lhs, sbyte rhs)
-            => (sbyte)(lhs + rhs);
+        public static sbyte add(sbyte a, sbyte b)
+            => (sbyte)(a + b);
 
         [MethodImpl(Inline)]
-        public static byte add(byte lhs, byte rhs)
-            => (byte)(lhs + rhs);
+        public static byte add(byte a, byte b)
+            => (byte)(a + b);
+
 
         [MethodImpl(Inline)]
-        public static UInt8 add(UInt8 lhs, UInt8 rhs)
-            => lhs + rhs;
+        public static short add(short a, short b)
+            => (short)(a + b);
 
         [MethodImpl(Inline)]
-        public static short add(short lhs, short rhs)
-            => (short)(lhs + rhs);
+        public static ushort add(ushort a, ushort b)
+            => (ushort)(a + b);
 
         [MethodImpl(Inline)]
-        public static ushort add(ushort lhs, ushort rhs)
-            => (ushort)(lhs + rhs);
+        public static int add(int a, int b)
+            => a + b;
 
         [MethodImpl(Inline)]
-        public static int add(int lhs, int rhs)
-            => lhs + rhs;
+        public static uint add(uint a, uint b)
+            => a + b;
 
         [MethodImpl(Inline)]
-        public static uint add(uint lhs, uint rhs)
-            => lhs + rhs;
+        public static long add(long a, long b)
+            => a + b;
 
         [MethodImpl(Inline)]
-        public static long add(long lhs, long rhs)
-            => lhs + rhs;
+        public static ulong add(ulong a, ulong b)
+            => a + b;
 
         [MethodImpl(Inline)]
-        public static ulong add(ulong lhs, ulong rhs)
-            => lhs + rhs;
-
-        [MethodImpl(Inline)]
-        public static ref sbyte add(ref sbyte lhs, sbyte rhs)
+        public static ref sbyte add(ref sbyte a, sbyte b)
         {
-            lhs = (sbyte)(lhs + rhs);
-            return ref lhs;
+            a = (sbyte)(a + b);
+            return ref a;
         }
 
         [MethodImpl(Inline)]
-        public static ref byte add(ref byte lhs, byte rhs)
+        public static ref byte add(ref byte a, byte b)
         {
-            lhs = (byte)(lhs + rhs);
-            return ref lhs;
+            a = (byte)(a + b);
+            return ref a;
         }
 
         [MethodImpl(Inline)]
-        public static ref short add(ref short lhs, short rhs)
+        public static ref short add(ref short a, short b)
         {
-            lhs = (short)(lhs + rhs);
-            return ref lhs;
+            a = (short)(a + b);
+            return ref a;
         }
 
         [MethodImpl(Inline)]
-        public static ref ushort add(ref ushort lhs, ushort rhs)
+        public static ref ushort add(ref ushort a, ushort b)
         {
-            lhs = (ushort)(lhs + rhs);
-            return ref lhs;
+            a = (ushort)(a + b);
+            return ref a;
         }
 
         [MethodImpl(Inline)]
-        public static ref int add(ref int lhs, int rhs)
+        public static ref int add(ref int a, int b)
         {
-            lhs = lhs + rhs;
-            return ref lhs;
+            a = a + b;
+            return ref a;
         }
 
         [MethodImpl(Inline)]
-        public static ref uint add(ref uint lhs, uint rhs)
+        public static ref uint add(ref uint a, uint b)
         {
-            lhs = lhs + rhs;
-            return ref lhs;
+            a = a + b;
+            return ref a;
         }
 
         [MethodImpl(Inline)]
-        public static ref long add(ref long lhs, long rhs)
+        public static ref long add(ref long a, long b)
         {
-            lhs = lhs + rhs;
-            return ref lhs;
+            a = a + b;
+            return ref a;
         }
 
         [MethodImpl(Inline)]
-        public static ref ulong add(ref ulong lhs, ulong rhs)
+        public static ref ulong add(ref ulong a, ulong b)
         {
-            lhs = lhs + rhs;
-            return ref lhs;
+            a = a + b;
+            return ref a;
         }
     }
 }

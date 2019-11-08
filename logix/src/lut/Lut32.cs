@@ -21,16 +21,6 @@ namespace Z0.Logix
 
         Lut16 Hi;
 
-
-        // public LookupKey this[LookupSlot key]
-        // {
-        //     [MethodImpl(Inline)]
-        //     get => Lookup.GetKey(in this, key);
-
-        //     [MethodImpl(Inline)]
-        //     set => Lookup.SetKey(ref this, key, value);
-        // }
-
         public Vector256<byte> Vector
         {
             [MethodImpl(Inline)]

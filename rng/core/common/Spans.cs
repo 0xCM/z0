@@ -81,7 +81,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Span<T> NonZeroSpan<T>(this IPolyrand random, int samples, Interval<T>? domain = null)
                 where T : unmanaged
-                    => random.Span<T>(samples, domain, gmath.nonzero);        
+                    => random.Span<T>(samples, domain, x => gmath.nonzero(x));        
 
         /// <summary>
         /// Allocates a span of natural dimensions and populates it with random values
@@ -209,7 +209,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Span128<T> NonZeroSpan128<T>(this IPolyrand random, int blocks = 1, Interval<T>? domain = null)        
             where T : unmanaged  
-                => random.Span128(blocks, domain, gmath.nonzero);
+                => random.Span128(blocks, domain, x => gmath.nonzero(x));
 
         /// <summary>
         /// Allocates a 256-bit blocked span and populates it with random values
@@ -261,7 +261,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Span256<T> NonZeroSpan256<T>(this IPolyrand random, int blocks = 1, Interval<T>? domain = null)        
             where T : unmanaged  
-                => random.Span256(blocks, domain, gmath.nonzero); 
+                => random.Span256(blocks, domain, x => gmath.nonzero(x)); 
     }
 
 }

@@ -30,22 +30,22 @@ namespace Z0.Logix
 
         public static ComparisonExpr<T> AndOverOr<T>()
             where T : unmanaged
-                => TypedIdentities<T>.AndOverOr;
+                => BitwiseIdentities<T>.AndOverOr;
 
         public static ComparisonExpr<T> AndOverXOr<T>()
             where T : unmanaged
-                => TypedIdentities<T>.AndOverXOr;
+                => BitwiseIdentities<T>.AndOverXOr;
 
         public static ComparisonExpr<T> OrOverAnd<T>()
             where T : unmanaged
-                => TypedIdentities<T>.OrOverAnd;
+                => BitwiseIdentities<T>.OrOverAnd;
         public static ComparisonExpr<T> NotOverAnd<T>()
             where T : unmanaged
-                => TypedIdentities<T>.NotOverAnd;
+                => BitwiseIdentities<T>.NotOverAnd;
         
         public static ComparisonExpr<T> NotOverXOr<T>()
             where T : unmanaged
-                => TypedIdentities<T>.NotOverXOr;
+                => BitwiseIdentities<T>.NotOverXOr;
 
         public static ComparisonExpr<Vector128<T>> AndOverOr128<T>()
             where T : unmanaged

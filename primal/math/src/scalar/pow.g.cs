@@ -22,12 +22,12 @@ namespace Z0
             || typeof(T) == typeof(ushort) 
             || typeof(T) == typeof(uint) 
             || typeof(T) == typeof(ulong))
-                return powu(b,exp);
+                return pow_u(b,exp);
             else if(typeof(T) == typeof(sbyte) 
             || typeof(T) == typeof(short) 
             || typeof(T) == typeof(int) 
             || typeof(T) == typeof(long))
-                return powi(b,exp);
+                return pow_i(b,exp);
             else 
                 return gfp.pow(b,exp);
         }
@@ -40,18 +40,20 @@ namespace Z0
             || typeof(T) == typeof(ushort) 
             || typeof(T) == typeof(uint) 
             || typeof(T) == typeof(ulong))
-                powu(ref b, exp);
+                pow_u(ref b, exp);
             else if(typeof(T) == typeof(sbyte) 
             || typeof(T) == typeof(short) 
             || typeof(T) == typeof(int) 
             || typeof(T) == typeof(long))
-                powi(ref b,exp);
-            else gfp.pow(ref b,exp);
+                pow_i(ref b,exp);
+            else 
+                gfp.pow(ref b,exp);
+            
             return ref b;
         }
 
         [MethodImpl(Inline)]
-        static T powi<T>(T b, uint exp)
+        static T pow_i<T>(T b, uint exp)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
@@ -65,7 +67,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static T powu<T>(T b, uint exp)
+        static T pow_u<T>(T b, uint exp)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -79,7 +81,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static ref T powi<T>(ref T b, uint exp)
+        static ref T pow_i<T>(ref T b, uint exp)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
@@ -94,7 +96,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static ref T powu<T>(ref T b, uint exp)
+        static ref T pow_u<T>(ref T b, uint exp)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))

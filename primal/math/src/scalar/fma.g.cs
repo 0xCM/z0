@@ -23,19 +23,19 @@ namespace Z0
             || typeof(T) == typeof(ushort) 
             || typeof(T) == typeof(uint) 
             || typeof(T) == typeof(ulong))
-                return fmau(x,a,b);
+                return fma_u(x,a,b);
             else if(typeof(T) == typeof(sbyte) 
             || typeof(T) == typeof(short) 
             || typeof(T) == typeof(int) 
             || typeof(T) == typeof(long))
-                return fmai(x,a,b);
+                return fma_i(x,a,b);
             else
                 return gfp.fma(x,a,b);
         }
 
 
         [MethodImpl(Inline)]
-        static T fmai<T>(T x, T a, T b)
+        static T fma_i<T>(T x, T a, T b)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
@@ -49,7 +49,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static T fmau<T>(T x, T a, T b)
+        static T fma_u<T>(T x, T a, T b)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))

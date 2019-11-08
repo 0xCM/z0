@@ -150,9 +150,5 @@ namespace Z0
 		static uint CalcPosition<T>(ushort segment, ushort offset)
 			where T : unmanaged
 				=> CalcPosition(segment, offset, SegCapacity<T>());
-
-
 	}
-
-
 }

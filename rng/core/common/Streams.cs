@@ -98,6 +98,7 @@ namespace Z0
             where T : unmanaged
                 => stream(random.UniformStream(domain,filter), random.RngKind);
 
+
         /// <summary>
         /// Produces a stream values from the source subject to a specified maximum value and optional filter
         /// </summary>
@@ -173,7 +174,7 @@ namespace Z0
         /// <typeparam name="T">The element type</typeparam>
         public static IRandomStream<T> NonZeroStream<T>(this IPolyrand random, Interval<T>? domain = null)
                 where T : unmanaged
-                    => stream(random.UniformStream(domain, gmath.nonzero), random.RngKind);
+                    => stream(random.UniformStream(domain, x => gmath.nonzero(x)), random.RngKind);
 
         /// <summary>
         /// Produces a stream of nonzero uniformly random values
@@ -183,7 +184,7 @@ namespace Z0
         /// <typeparam name="T">The element type</typeparam>
         public static IRandomStream<T> NonZeroStream<T>(this IPolyrand random, Interval<T> domain)
             where T : unmanaged
-                => stream(random.UniformStream(domain, gmath.nonzero), random.RngKind);
+                => stream(random.UniformStream(domain, x => gmath.nonzero(x)), random.RngKind);
 
         static IEnumerable<T> UniformStream<T>(this IPolyrand src, Interval<T> domain, Func<T,bool> filter = null)
             where T : unmanaged

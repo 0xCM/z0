@@ -21,7 +21,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The value to inspect</param>
         [MethodImpl(Inline)]
-        public static bool negative(sbyte x)
+        public static bit negative(sbyte x)
             => x < 0;
 
         /// <summary>
@@ -29,7 +29,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The value to inspect</param>
         [MethodImpl(Inline)]
-        public static bool negative(short x)
+        public static bit negative(short x)
             => x < 0;
 
         /// <summary>
@@ -37,7 +37,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The value to inspect</param>
         [MethodImpl(Inline)]
-        public static bool negative(int x)
+        public static bit negative(int x)
             => x < 0;
 
         /// <summary>
@@ -45,7 +45,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The value to inspect</param>
         [MethodImpl(Inline)]
-        public static bool negative(long x)
+        public static bit negative(long x)
             => x < 0;
 
         /// <summary>
@@ -53,7 +53,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The value to inspect</param>
         [MethodImpl(Inline)]
-        public static bool negative(float x)
+        public static bit negative(float x)
             => x < 0;
 
         /// <summary>
@@ -61,7 +61,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The value to inspect</param>
         [MethodImpl(Inline)]
-        public static bool negative(double x)
+        public static bit negative(double x)
             => x < 0;
     }
 

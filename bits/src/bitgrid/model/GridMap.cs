@@ -28,7 +28,7 @@ namespace Z0
             this.Vec128Count = spec.StorageBytes / 16 + (this.Vec128Remainder != 0 ? 1 : 0);
             this.Vec256Remainder = spec.StorageBytes % 32;
             this.Vec256Count = spec.StorageBytes / 32 + (this.Vec256Remainder != 0 ? 1 : 0);
-            this._Positions = defer( () => BitGrid.cells(Spec));
+            this._Positions = defer(() => BitGrid.cells(Spec));
         }
 
         Lazy<CellMap[]> _Positions;
@@ -40,22 +40,22 @@ namespace Z0
         /// <summary>
         /// The number of rows in the layout
         /// </summary>
-        public int RowCount {get;}            
+        public ushort RowCount {get;}            
         
         /// <summary>
         /// The number of columns in the layout
         /// </summary>
-        public int ColCount {get;}
+        public ushort ColCount {get;}
+
+        /// <summary>
+        /// The number of bits in a segment
+        /// </summary>
+        public ushort SegWidth {get;}
 
         /// <summary>
         /// The total number of items covered by the grid
         /// </summary>
-        public int PointCount {get;}
-        
-        /// <summary>
-        /// The number of bits in a segment
-        /// </summary>
-        public int SegWidth {get;}
+        public int PointCount {get;}        
             
         /// <summary>
         /// The number of segment-aligned bits required for storage

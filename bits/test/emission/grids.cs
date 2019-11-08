@@ -15,22 +15,22 @@ namespace Z0
     {
         public static void EmitGridMaps()
         {
-            void Emit(int segwidth, int minsegs, int maxsegs)
+            void Emit(ushort segwidth, ushort minsegs, ushort maxsegs)
             {
                 var filename = FileName.Define($"GridMap{segwidth}.csv");
                 using var dst = LogArea.Test.LogWriter(filename);
                 dst.WriteLine(BitGrid.header());
                 var points = (
-                    from r1 in range(minsegs,maxsegs)
-                    from r2 in range(minsegs,maxsegs)
-                    let count = r1*r2
+                    from row in range(minsegs,maxsegs)
+                    from col in range(minsegs,maxsegs)
+                    let count = row*col
                     orderby count
-                    select (r1, r2)).ToArray();
+                    select (row, col)).ToArray();
 
                 for(var i = 0; i<points.Length; i++)
-                {
-                    (var r, var c) = points[i];
-                    var gs = BitGrid.map(r,c,segwidth).Stats();
+                {                    
+                    var moniker = GridMoniker.Define(points[i].row, points[i].col, segwidth);
+                    var gs = BitGrid.map(moniker).Stats();
                         if(gs.Vec256Remainder == 0 || gs.Vec128Remainder == 0)
                             dst.WriteLine(gs.Format());
                 }

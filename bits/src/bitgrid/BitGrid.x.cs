@@ -105,18 +105,17 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => src.Data.ToBitString(src.BitMap.PointCount);
-
+                => src.Data.ToBitString(BitGrid.points(src.Moniker));
 
         [MethodImpl(Inline)]
         public static BitString ToBitString<T>(this BitGrid<T> src)
             where T : unmanaged
-                => src.Data.ToBitString(src.M * src.N);
+                => src.Data.ToBitString(BitGrid.points(src.Moniker));
 
         [MethodImpl(NotInline)]
         public static BitGrid<T> Replicate<T>(this BitGrid<T> src)
             where T : unmanaged
-                => new BitGrid<T>(src.Data.Replicate(), src.M, src.N);
+                => new BitGrid<T>(src.Data.Replicate(), src.Moniker);
 
         public static string Format(this GridMap map, int? colpad = null, char? delimiter = null)
             => BitGrid.format(map, colpad, delimiter);

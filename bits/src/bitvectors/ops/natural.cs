@@ -13,7 +13,6 @@ namespace Z0
 
     public static partial class BitVector
     {
-
         /// <summary>
         /// Defines a natural generic bitvector, either tmpty or filled with an optional value if specified
         /// </summary>
@@ -79,9 +78,5 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where T : unmanaged
                 => BitVector<N, T>.FromSpan(src);
-
-
-
     }
-
 }

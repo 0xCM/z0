@@ -13,11 +13,10 @@ namespace Z0
     using static As;
     using static AsIn;
 
-    unsafe partial class BitPoints
+    partial class BitPoints
     {
-
         [MethodImpl(Inline)]
-        public static unsafe void select<T>(in T rA, in T rB, in T rC, ref T rDst)
+        public static void select<T>(in T rA, in T rB, in T rC, ref T rDst)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -33,7 +32,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static unsafe void select(in byte rA, in byte rB, in byte rC, ref byte rDst)
+        static void select(in byte rA, in byte rB, in byte rC, ref byte rDst)
             => content(gmath.select(content(rA), content(rB), content(rC)), ref rDst);
 
     }

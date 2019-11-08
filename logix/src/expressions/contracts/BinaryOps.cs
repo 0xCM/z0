@@ -11,17 +11,6 @@ namespace Z0.Logix
     using static zfunc;
 
 
-    /// <summary>
-    /// Characterizes a binary operator parametrized by expression type
-    /// </summary>
-    public interface IBinaryOp<X> : IOperator
-        where X : IExpr
-    {
-        X LeftArg {get;}
-
-        X RightArg {get;}
-    }
-
 
     public interface IBinaryBitwiseOp<T> : IBinaryOp<IExpr<T>>, IOperator<T,BinaryBitwiseOpKind>
         where T : unmanaged

@@ -14,7 +14,6 @@ namespace Z0
 
     partial class BitVector
     {
-
         /// <summary>
         /// Counts the number of trailing zero bits
         /// </summary>
@@ -42,8 +41,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static uint ntz(BitVector64 x)
             => Bits.ntz(x.data);
-
-
     }
-
 }

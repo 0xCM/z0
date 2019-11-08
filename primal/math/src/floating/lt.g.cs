@@ -15,31 +15,29 @@ namespace Z0
 
     partial class gfp
     {
-
         [MethodImpl(Inline)]
-        public static bool gt<T>(T lhs, T rhs)
+        public static bit lt<T>(T lhs, T rhs)
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                 return fmath.gt(float32(lhs), float32(rhs));
+                 return fmath.lt(float32(lhs), float32(rhs));
             else if(typeof(T) == typeof(double))
-                 return fmath.gt(float64(lhs), float64(rhs));
+                 return fmath.lt(float64(lhs), float64(rhs));
             else            
                 throw unsupported<T>();
         }
 
         [MethodImpl(Inline)]
-        public static bool gteq<T>(T lhs, T rhs)
+        public static bit lteq<T>(T lhs, T rhs)
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                 return fmath.gteq(float32(lhs), float32(rhs));
+                 return fmath.lteq(float32(lhs), float32(rhs));
             else if(typeof(T) == typeof(double))
-                 return fmath.gteq(float64(lhs), float64(rhs));
+                 return fmath.lteq(float64(lhs), float64(rhs));
             else            
                 throw unsupported<T>();
         }
-
 
 
     }

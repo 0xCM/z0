@@ -23,6 +23,8 @@ namespace Z0
         public ushort SegWidth
             => (ushort)bitsize<T>();
 
+        public int PointCount
+            => RowCount * ColCount;
         
         [MethodImpl(Inline)]
         public static implicit operator GridMoniker(GridMoniker<T> src)

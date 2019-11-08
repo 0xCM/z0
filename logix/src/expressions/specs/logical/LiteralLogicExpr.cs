@@ -53,46 +53,4 @@ namespace Z0.Logix
         public override string ToString() 
             => Format();
     }
-
-
-    /// <summary>    
-    /// Defines an untyped literal expression
-    /// </summary>
-    public sealed class LiteralLogicExpr<T> : ILogicLiteral<T>
-        where T : unmanaged
-    {
-        /// <summary>
-        /// Implicitly converts a literal expression to the underlying value 
-        /// </summary>
-        /// <param name="src">The source epxression</param>
-        [MethodImpl(Inline)]
-        public static implicit operator T(LiteralLogicExpr<T> src)
-            => src.Value;
-
-        /// <summary>
-        /// Implicitly converts a value to a literal expression
-        /// </summary>
-        /// <param name="src">The source value</param>
-        [MethodImpl(Inline)]
-        public static implicit operator LiteralLogicExpr<T>(T src)
-            => new LiteralLogicExpr<T>(src);
-
-        [MethodImpl(Inline)]
-        public LiteralLogicExpr(T value)
-        {                
-            this.Value= value;
-        }            
-
-        /// <summary>
-        /// The literal value
-        /// </summary>
-        public T Value {get;}
-         
-        public string Format()
-            => $"{Value}";
-
-        public override string ToString() 
-            => Format();
-    }
-
 }

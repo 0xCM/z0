@@ -25,23 +25,53 @@ namespace Z0
         public static Sign signum<T>(T src)
             where T : unmanaged
         {
+            if(typeof(T) == typeof(byte) 
+            || typeof(T) == typeof(ushort) 
+            || typeof(T) == typeof(uint) 
+            || typeof(T) == typeof(ulong))
+                return signum_u<T>(src);
+            else if(typeof(T) == typeof(sbyte) 
+            || typeof(T) == typeof(short) 
+            || typeof(T) == typeof(int) 
+            || typeof(T) == typeof(long))
+                return signum_i<T>(src);
+            else 
+                return signum_f<T>(src);
+        }           
+
+        [MethodImpl(Inline)]
+        static Sign signum_i<T>(T src)
+            where T : unmanaged
+        {
             if(typeof(T) == typeof(sbyte))
                 return math.signum(int8(src));
-            else if(typeof(T) == typeof(byte))
-                return math.signum(uint8(src));
             else if(typeof(T) == typeof(short))
                 return math.signum(int16(src));
-            else if(typeof(T) == typeof(ushort))
-                return math.signum(uint16(src));
-            else if(typeof(T) == typeof(int))
-                return math.signum(int32(src));
             else if(typeof(T) == typeof(uint))
                 return math.signum(uint32(src));
-            else if(typeof(T) == typeof(long))
+            else 
                 return math.signum(int64(src));
-            else if(typeof(T) == typeof(ulong))
+        }        
+
+        [MethodImpl(Inline)]
+        static Sign signum_u<T>(T src)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(byte))
+                return math.signum(uint8(src));
+            else if(typeof(T) == typeof(ushort))
+                return math.signum(uint16(src));
+            else if(typeof(T) == typeof(uint))
+                return math.signum(uint32(src));
+            else 
                 return math.signum(uint64(src));
-            else if(typeof(T) == typeof(float))
+       }           
+
+        [MethodImpl(Inline)]
+        static Sign signum_f<T>(T src)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(float))
                 return fmath.signum(float32(src));
             else if(typeof(T) == typeof(double))
                 return fmath.signum(float64(src));
@@ -49,5 +79,4 @@ namespace Z0
                 throw unsupported<T>();
         }           
     }
-
 }

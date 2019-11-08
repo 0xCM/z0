@@ -127,9 +127,5 @@ namespace Z0
             }
             return odd(result);
         }
-
-
-
     }
-
 }

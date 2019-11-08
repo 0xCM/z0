@@ -13,10 +13,10 @@ namespace Z0
     using static As;
     using static AsIn;
 
-    unsafe partial class BitPoints
+    partial class BitPoints
     {
         [MethodImpl(Inline)]
-        public static unsafe bit testc<T>(in T rA)
+        public static bit testc<T>(in T rA)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -32,7 +32,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static unsafe bit testc<T>(in T rA, in T rB)
+        public static bit testc<T>(in T rA, in T rB)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -49,7 +49,7 @@ namespace Z0
 
 
         [MethodImpl(Inline)]
-        static unsafe bit testc(in byte rA)
+        static bit testc(in byte rA)
         {
             var a = content(in rA);
             var x = ginx.vbroadcast(n128,a);
@@ -57,11 +57,11 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static unsafe bit testc(in ushort rA)
+        static bit testc(in ushort rA)
             => ginx.vtestc(n, in rA);
 
         [MethodImpl(Inline)]
-        static unsafe bit testc(in uint rA)
+        static bit testc(in uint rA)
         {
             const int segments = 4;
             const int segsize = 8;
@@ -73,7 +73,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static unsafe bit testc(in ulong rA)
+        static bit testc(in ulong rA)
         {
             const int segments = 16;
             const int segsize = 4;
@@ -84,7 +84,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static unsafe bit testc(in byte rA, in byte rB)
+        static bit testc(in byte rA, in byte rB)
         {
             var a = content(in rA);
             var b = content(in rB);
@@ -119,6 +119,5 @@ namespace Z0
                 result &= ginx.vtestc(n, in skip(in rA, offset), in skip(in rB, offset));
             return result;
         }
-
     }
 }

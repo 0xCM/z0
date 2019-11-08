@@ -15,17 +15,52 @@ namespace Z0
     public static partial class BitGrid
     {
         [MethodImpl(Inline)]
-        public static GridMoniker moniker(int rows, int cols, int segwidth)
-            => GridMoniker.Define((ushort)rows,(ushort)cols,(ushort)segwidth);
+        public static GridMoniker moniker(ushort rows, ushort cols, ushort segwidth)
+            => GridMoniker.Define(rows, cols, segwidth);
 
         [MethodImpl(Inline)]
-        public static GridMoniker<T> moniker<T>(int rows, int cols)
+        public static GridMoniker<T> moniker<M,N,T>(M m = default, N n = default, T zero = default)
             where T : unmanaged
-                => GridMoniker.Define<T>((ushort)rows,(ushort)cols);
+            where M : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
+                => GridMoniker.Define<T>(natval(m), natval(n));
 
         [MethodImpl(Inline)]
-        public static int minbytes(in GridMoniker moniker)    
-            => minbytes(moniker.RowCount, moniker.ColCount);
+        public static GridMoniker<T> moniker<T>(ushort rows, ushort cols)
+            where T : unmanaged
+                => GridMoniker.Define<T>(rows, cols);
+
+        [MethodImpl(Inline)]
+        public static int bytes(in GridMoniker moniker)    
+            => bytes(moniker.RowCount, moniker.ColCount);
+
+        /// <summary>
+        /// Computes the minimum number of bytes required to store a grid of specified dimensions
+        /// </summary>
+        /// <param name="rows">The number of grid rows</param>
+        /// <param name="cols">The number of grid columns</param>
+        [MethodImpl(Inline)]
+        public static int bytes(ushort rows, ushort cols)
+        {
+            var points = rows*cols;
+            return (points >> 3) + (points % 8 != 0 ? 1 : 0);
+        }
+        
+        /// <summary>
+        /// Computes the minimum number of bytes required to store a grid of specified dimensions
+        /// </summary>
+        /// <param name="m">The row count representative</param>
+        /// <param name="n">The col count representative</param>
+        /// <typeparam name="M">The row type</typeparam>
+        /// <typeparam name="N">The col type</typeparam>
+        [MethodImpl(Inline)]
+        public static int bytes<M,N>(M m = default, N n = default)
+            where M : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
+        {
+            var points = NatMath.mul(m,n);
+            return (points >> 3) + (points % 8 != 0 ? 1 : 0);
+        }
 
         /// <summary>
         /// Computes the minimum number of segments required to store a grid of specified dimensions
@@ -34,13 +69,17 @@ namespace Z0
         /// <param name="cols">The number of grid columns</param>
         /// <param name="segwidth">The segment bit width</param>
         [MethodImpl(Inline)]
-        public static int segcount(in GridMoniker moniker)
+        public static int segments(in GridMoniker moniker)
         {
-            var bytes = minbytes(moniker);
+            var bytes = BitGrid.bytes(moniker);
             var segbytes = moniker.SegWidth / 8;
             var segs = bytes/segbytes + (bytes % segbytes != 0 ? 1 : 0);            
             return segs;
         }
+
+        [MethodImpl(Inline)]
+        public static int points(in GridMoniker moniker)
+            => moniker.RowCount * moniker.ColCount;
 
         [MethodImpl(Inline)]
         public static GridSpec specify(in GridMoniker moniker)    
@@ -83,7 +122,7 @@ namespace Z0
         /// <param name="cols">The number of grid columns</param>
         /// <typeparam name="T">The segment type</typeparam>
         [MethodImpl(NotInline)]
-        public static BitGrid<T> alloc<T>(int rows, int cols)
+        public static BitGrid<T> alloc<T>(ushort rows, ushort cols)
             where T : unmanaged
         {
             var map = map<T>(rows,cols);
@@ -115,7 +154,7 @@ namespace Z0
         /// <param name="map">The grid map</param>
         /// <typeparam name="T">The segment type</typeparam>
         [MethodImpl(NotInline)]
-        public static BitGrid<T> load<T>(Span<T> src, int rows, int cols)
+        public static BitGrid<T> load<T>(Span<T> src, ushort rows, ushort cols)
             where T : unmanaged
                 => new BitGrid<T>(src, rows, cols);
 
@@ -141,35 +180,7 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where T : unmanaged
                 => grid.Data.Fill(state ? gmath.maxval<T>() : gmath.zero<T>());
-  
-        /// <summary>
-        /// Computes the minimum number of bytes required to store a grid of specified dimensions
-        /// </summary>
-        /// <param name="rows">The number of grid rows</param>
-        /// <param name="cols">The number of grid columns</param>
-        [MethodImpl(Inline)]
-        public static int minbytes(int rows, int cols)
-        {
-            var points = rows*cols;
-            return (points >> 3) + (points % 8 != 0 ? 1 : 0);
-        }
-        
-        /// <summary>
-        /// Computes the minimum number of bytes required to store a grid of specified dimensions
-        /// </summary>
-        /// <param name="m">The row count representative</param>
-        /// <param name="n">The col count representative</param>
-        /// <typeparam name="M">The row type</typeparam>
-        /// <typeparam name="N">The col type</typeparam>
-        [MethodImpl(Inline)]
-        public static int minbytes<M,N>(M m = default, N n = default)
-            where M : unmanaged, ITypeNat
-            where N : unmanaged, ITypeNat
-        {
-            var points = NatMath.mul(m,n);
-            return (points >> 3) + (points % 8 != 0 ? 1 : 0);
-        }
-                    
+                      
         /// <summary>
         /// Computes the minimum number of segments required to store a grid of specified dimensions
         /// </summary>
@@ -179,31 +190,31 @@ namespace Z0
         /// <typeparam name="M">The row type</typeparam>
         /// <typeparam name="N">The col type</typeparam>
         [MethodImpl(Inline)]
-        static int segcountW<M,N,W>(M m = default, N n = default, W w = default)
+        static int segmentsW<M,N,W>(M m = default, N n = default, W w = default)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where W : unmanaged, ITypeNat
         {                
-            var bytes = minbytes(m,n);    
+            var bytes = BitGrid.bytes(m, n);    
             var segbytes = NatMath.div(w,n8);
             var segs =  bytes/segbytes + (bytes % segbytes != 0 ? 1 : 0);            
             return segs;
         }
 
         [MethodImpl(Inline)]
-        public static int segcount<M,N,T>(M m = default, N n = default, T zero = default)
+        public static int segments<M,N,T>(M m = default, N n = default, T zero = default)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return segcountW(m,n,n8);
+                return segmentsW(m,n,n8);
             else if(typeof(T) == typeof(ushort))
-                return segcountW(m,n,n16);                
+                return segmentsW(m,n,n16);                
             else if(typeof(T) == typeof(uint))
-                return segcountW(m,n,n32);                
+                return segmentsW(m,n,n32);                
             else if(typeof(T) == typeof(ulong))
-                return segcountW(m,n,n64);                
+                return segmentsW(m,n,n64);                
             else
                 throw unsupported<T>();
         } 
@@ -215,23 +226,32 @@ namespace Z0
         /// <param name="cols">The number of columns in the grid</param>
         /// <param name="segwidth">The width of a grid cell</param>
         [MethodImpl(Inline)]
-        public static GridSpec specify(int rows, int cols, int segwidth)    
+        public static GridSpec specify(ushort rows, ushort cols, ushort segwidth)    
         { 
-            var bytes = minbytes(rows,cols);
+            var bytes = BitGrid.bytes(rows, cols);
             var segbytes = segwidth >> 3;
             var segs = bytes/segbytes + (bytes % segbytes != 0 ? 1 : 0);            
             return new GridSpec(rows: rows, cols : cols, segwidth : segwidth, bytes: bytes, bits: bytes*8, segs: segs);
         }            
             
+        [MethodImpl(Inline)]
+        public static ref T segment<T>(in GridMoniker<T> moniker, int bitpos, ref T src)            
+            where T : unmanaged   
+        {
+            var segwidth = bitsize<T>();
+            var offset = bitpos / segwidth;
+            return ref seek(ref src, offset);
+        }
+                    
         /// <summary>
         /// Defines a grid specification predicated on specified row count, col count and bit width of a parametric type
         /// </summary>
         /// <param name="rows">The number of rows in the grid</param>
         /// <param name="cols">The number of columns in the grid</param>
         [MethodImpl(Inline)]
-        public static GridSpec specify<T>(int rows, int cols) 
+        public static GridSpec specify<T>(ushort rows, ushort cols) 
             where T : unmanaged   
-                => specify(rows, cols, bitsize<T>());
+                => specify(rows, cols, (ushort)bitsize<T>());
          
         [MethodImpl(Inline)]
         public static GridSpec specify<M,N,T>(M m = default, N n = default, T zero = default)
@@ -247,7 +267,7 @@ namespace Z0
         /// <param name="cols">The number of columns in the grid</param>
         /// <param name="segwidth">The width of a grid cell</param>
         [MethodImpl(Inline)]
-        public static GridMap map(int rows, int cols, int segwidth)    
+        public static GridMap map(ushort rows, ushort cols, ushort segwidth)    
             => map(specify(rows,cols, segwidth));
 
         /// <summary>
@@ -256,7 +276,7 @@ namespace Z0
         /// <param name="rows">The number of rows in the grid</param>
         /// <param name="cols">The number of columns in the grid</param>
         [MethodImpl(NotInline)]
-        public static GridMap map<T>(int rows, int cols)    
+        public static GridMap map<T>(ushort rows, ushort cols)    
             where T : unmanaged
                 => map(specify<T>(rows,cols));
 
@@ -294,7 +314,7 @@ namespace Z0
         /// </summary>
         /// <param name="map">The map to summarize</param>
         [MethodImpl(Inline)]
-        public static GridStats stats<T>(int rows, int cols)
+        public static GridStats stats<T>(ushort rows, ushort cols)
             where T : unmanaged
                 => stats(map(specify<T>(rows,cols)));
 
@@ -303,9 +323,8 @@ namespace Z0
         /// </summary>
         /// <param name="map">The map to summarize</param>
         [MethodImpl(Inline)]
-        public static GridStats stats(int rows, int cols, int segwidth)
+        public static GridStats stats(ushort rows, ushort cols, ushort segwidth)
             => stats(map(specify(rows,cols,segwidth)));
-
 
         /// <summary>
         /// Defines a standard header for a grid map summary line

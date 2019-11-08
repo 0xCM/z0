@@ -17,36 +17,36 @@ namespace Z0
     {
 
         [MethodImpl(Inline)]
-        public static bool divides(sbyte lhs, sbyte rhs)
-            => rhs % lhs == 0;
+        public static bit divides(sbyte a, sbyte b)
+            => b % a == 0;
 
         [MethodImpl(Inline)]
-        public static bool divides(byte lhs, byte rhs)
-            => rhs % lhs == 0;
+        public static bit divides(byte a, byte b)
+            => b % a == 0;
 
         [MethodImpl(Inline)]
-        public static bool divides(short lhs, short rhs)
-            => rhs % lhs == 0;
+        public static bit divides(short a, short b)
+            => b % a == 0;
 
         [MethodImpl(Inline)]
-        public static bool divides(ushort lhs, ushort rhs)
-            => rhs % lhs == 0;
+        public static bit divides(ushort a, ushort b)
+            => b % a == 0;
 
         [MethodImpl(Inline)]
-        public static bool divides(int lhs, int rhs)
-            => rhs % lhs == 0;
+        public static bit divides(int a, int b)
+            => b % a == 0;
 
         [MethodImpl(Inline)]
-        public static bool divides(uint lhs, uint rhs)
-            => rhs % lhs == 0;
+        public static bit divides(uint a, uint b)
+            => b % a == 0;
 
         [MethodImpl(Inline)]
-        public static bool divides(long lhs, long rhs)
-            => rhs % lhs == 0;
+        public static bit divides(long a, long b)
+            => b % a == 0;
 
         [MethodImpl(Inline)]
-        public static bool divides(ulong lhs, ulong rhs)
-            => rhs % lhs == 0;
+        public static bit divides(ulong a, ulong b)
+            => b % a == 0;
 
     }
 

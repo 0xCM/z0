@@ -57,6 +57,5 @@ namespace Z0
         public static double parse(string src, out double dst)
             => dst = double.Parse(src);
 
-   
     }    
 }

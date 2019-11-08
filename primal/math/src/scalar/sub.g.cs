@@ -29,13 +29,14 @@ namespace Z0
             || typeof(T) == typeof(ushort) 
             || typeof(T) == typeof(uint) 
             || typeof(T) == typeof(ulong))
-                return subu(lhs,rhs);
+                return sub_u(lhs,rhs);
             else if(typeof(T) == typeof(sbyte) 
             || typeof(T) == typeof(short) 
             || typeof(T) == typeof(int) 
             || typeof(T) == typeof(long))
-                return subi(lhs,rhs);
-            else return gfp.sub(lhs,rhs);
+                return sub_i(lhs,rhs);
+            else 
+                return gfp.sub(lhs,rhs);
         }
 
         /// <summary>
@@ -63,7 +64,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static T subi<T>(T lhs, T rhs)
+        static T sub_i<T>(T lhs, T rhs)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
@@ -77,7 +78,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static T subu<T>(T lhs, T rhs)
+        static T sub_u<T>(T lhs, T rhs)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))

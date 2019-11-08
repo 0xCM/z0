@@ -70,7 +70,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitVector64 notimply(BitVector64 x, BitVector64 y)
             => math.notimply(x.data, y.data);
- 
- 
     }
 }

@@ -12,52 +12,52 @@ namespace Z0
 
     partial class pmoc
     {
-        public static bool nonzero_n8i(sbyte x)
+        public static bool nonzero_d8i(sbyte x)
             => !x.Equals(0);
 
-        public static bool nonzero_g8i(sbyte x)
+        public static bit nonzero_g8i(sbyte x)
             => gmath.nonzero(x);
 
-        public static bool nonzero_n8u(byte x)
+        public static bool nonzero_d8u(byte x)
             => !x.Equals(0);
 
-        public static bool nonzero_g8u(byte x)
+        public static bit nonzero_g8u(byte x)
             => gmath.nonzero(x);
 
-        public static bool nonzero_n16i(short x)
+        public static bool nonzero_d16i(short x)
             => !x.Equals(0);
 
-        public static bool nonzero_g16i(short x)
+        public static bit nonzero_g16i(short x)
             => gmath.nonzero(x);
 
-        public static bool nonzero_n16u(ushort x)
+        public static bool nonzero_d16u(ushort x)
             => !x.Equals(0);
 
-        public static bool nonzero_g16u(ushort x)
+        public static bit nonzero_g16u(ushort x)
             => gmath.nonzero(x);
 
-        public static bool nonzero_n32i(int x)
+        public static bool nonzero_d32i(int x)
             => !x.Equals(0);
 
-        public static bool nonzero_g32i(int x)
+        public static bit nonzero_g32i(int x)
             => gmath.nonzero(x);
 
-        public static bool nonzero_n32u(uint x)
+        public static bool nonzero_d32u(uint x)
             => !x.Equals(0);
 
-        public static bool nonzero_g32u(uint x)
+        public static bit nonzero_g32u(uint x)
             => gmath.nonzero(x);
 
-        public static bool nonzero_n64i(long x)
+        public static bool nonzero_d64i(long x)
             => !x.Equals(0);
 
-        public static bool nonzero_g64i(long x)
+        public static bit nonzero_g64i(long x)
             => gmath.nonzero(x);
 
         public static bool nonzero_n64u(ulong x)
             => !x.Equals(0);
 
-        public static bool nonzero_g64u(ulong x)
+        public static bit nonzero_g64u(ulong x)
             => gmath.nonzero(x);
     }
 }

@@ -25,7 +25,7 @@ namespace Z0
             => !a.Equals(b);
 
         [MethodImpl(Inline)]
-        public GridSpec(int rows, int cols, int segwidth, int bytes, int bits, int segs)
+        public GridSpec(ushort rows, ushort cols, ushort segwidth, int bytes, int bits, int segs)
         {
             this.RowCount = rows;
             this.ColCount = cols;
@@ -38,17 +38,17 @@ namespace Z0
         /// <summary>
         /// The number of grid rows
         /// </summary>
-        public readonly int RowCount;
+        public readonly ushort RowCount;
         
         /// <summary>
         /// The number of grid columns
         /// </summary>
-        public readonly int ColCount;
+        public readonly ushort ColCount;
 
         /// <summary>
         /// The number of bits in a storage segment
         /// </summary>
-        public readonly int SegWidth;
+        public readonly ushort SegWidth;
 
         /// <summary>
         /// The the toal number of segment-aligned bits allocated for storage

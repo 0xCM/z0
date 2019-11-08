@@ -22,7 +22,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static Sign signum(byte src)
-            => signum((uint)src);
+            => src != 0 ? Sign.Pos : Sign.Neg;
 
         [MethodImpl(Inline)]
         public static Sign signum(short src)
@@ -30,7 +30,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static Sign signum(ushort src)
-            => signum((uint)src);
+            => src != 0 ? Sign.Pos : Sign.Neg;
 
         [MethodImpl(Inline)]
         public static Sign signum(int src)
@@ -38,7 +38,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static Sign signum(uint src)
-            => (Sign)math.nonzero(src).ToByte();
+            => src != 0 ? Sign.Pos : Sign.Neg;
 
         [MethodImpl(Inline)]
         public static Sign signum(long src)
@@ -46,7 +46,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static Sign signum(ulong src)
-            => (Sign)math.nonzero(src).ToByte();
+            => src != 0 ? Sign.Pos : Sign.Neg;
 
 
     }

@@ -13,7 +13,7 @@ namespace Z0.Logix
     /// <summary>
     /// Defines a logic expression that is parametrized by one or more variables
     /// </summary>
-    public sealed class VariedLogicExpr<T> : IVariedLogicExpr<T>
+    public sealed class VariedLogicExpr<T> : IVariedLogicExpr<T> 
         where T : unmanaged
     {        
     
@@ -28,6 +28,11 @@ namespace Z0.Logix
 
         public ILogicVarExpr<T>[] Vars {get;}
 
+        ILogicExpr IVariedLogicExpr.BaseExpr 
+            => BaseExpr;
+
+        ILogicVarExpr[] IVariedLogicExpr.Vars 
+            => Vars.Map(v => v);
 
         public void SetVars(params ILogicExpr<T>[] values)
         {
@@ -36,17 +41,20 @@ namespace Z0.Logix
                 Vars[i].Set(values[i]);
         }
 
-        public void SetVars(params T[] values)
-        {
-            var n = Math.Min(Vars.Length, values.Length);
-            for(var i=0; i<n; i++)
-                Vars[i].Set(values[i]);
-        }
 
 
         public string Format()
             => BaseExpr.Format();
 
+        public void SetVars(params ILogicExpr[] values)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void SetVars(params bit[] values)
+        {
+            throw new NotImplementedException();
+        }
     }
 
 }

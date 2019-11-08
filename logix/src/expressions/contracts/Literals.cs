@@ -36,12 +36,12 @@ namespace Z0.Logix
 
     }
     
-    public interface ILogicLiteral : ILogicExpr, ILiteralExpr<bit>
+    public interface ILogicLiteral : ILogicExpr, ILiteralExpr
     {
-
+        bit Value {get;}
     }
 
-    public interface ILogicLiteral<T> : ILogicExpr<T>, ILiteralExpr<T>
+    public interface ILogicLiteral<T> : ILogicLiteral, ILogicExpr<T>
         where T : unmanaged
     {
 

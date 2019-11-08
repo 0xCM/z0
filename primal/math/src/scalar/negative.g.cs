@@ -21,7 +21,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The source type</typeparam>
         [MethodImpl(Inline)]
-        public static bool negative<T>(T src)
+        public static bit negative<T>(T src)
             where T : unmanaged
         {                        
             if(typeof(T) == typeof(sbyte))
