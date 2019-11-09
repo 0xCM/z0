@@ -107,36 +107,4 @@ namespace Z0
         Reverse =  H | G << 3 | F << 6 | E << 9 | D << 12 | C << 15 | B << 18 | A << 21,
     }
 
-    partial class xfunc
-    {
-
-        /// <summary>
-        /// Reifies a permutation of length 8 from its canonical scalar specification
-        /// </summary>
-        /// <param name="spec">The representative</param>
-        public static Perm<N8> ToPerm(this Perm8 spec)
-        {
-            uint data = (uint)spec;
-            var dst = Perm<N8>.Alloc();
-            for(int i=0, offset = 0; i<dst.Length; i++, offset +=3)
-                dst[i] = (int)BitMask.between(data, (byte)offset, (byte)(offset + 2));
-            return dst;
-        }
-
-        /// <summary>
-        /// Maps a permutation on 8 symbols to its canonical scalar specification
-        /// </summary>
-        /// <param name="src">The source permutation</param>
-        public static Perm8 ToSpec(this Perm<N8> src)
-        {
-            var dst = 0u;            
-            for(int i=0, offset = 0; i< src.Length; i++, offset +=3)
-                dst |= (uint)src[i] << offset;                        
-            return (Perm8)dst;
-        }
-
-
-    }
-
-
 }

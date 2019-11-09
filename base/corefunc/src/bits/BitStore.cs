@@ -26,7 +26,6 @@ namespace Z0
             return dst;
         }
 
-
         /// <summary>
         /// Selects an identified bit sequence
         /// </summary>
@@ -44,7 +43,6 @@ namespace Z0
         public static ReadOnlySpan<byte> select(int offset, int length)
             => BitSeqData.Slice(offset,length);
 
-
         /// <summary>
         /// Constructs a sequence of 8 bytes {bi} := [b7,...b0] over the domain {0,1} according to whether the
         /// bit in the i'th position of the source is respecively disabled/enabled
@@ -53,7 +51,6 @@ namespace Z0
         [MethodImpl(Inline)]
         static ReadOnlySpan<byte> select_alt(byte value)        
             => U8Index[value].bitseq;        
-
 
         /// <summary>
         /// Constructs a span of bytes where each byte, ordered from lo to hi, 

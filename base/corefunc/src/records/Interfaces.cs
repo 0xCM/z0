@@ -19,9 +19,7 @@ namespace Z0
         /// </summary>
         string DelimitedText(char delimiter);
 
-        IReadOnlyList<string> GetHeaders();
-
-        
+        IReadOnlyList<string> GetHeaders();    
     }
 
     public class ColInfoAttribute : Attribute

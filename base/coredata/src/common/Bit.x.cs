@@ -15,15 +15,6 @@ namespace Z0
     public static class BitX
     {
         /// <summary>
-        /// Converts a bool value to a bit value
-        /// </summary>
-        /// <param name="src">The source value to convert</param>
-        [MethodImpl(Inline)]
-        public static Bit ToBit(this bool src)
-            => src;
-
-
-        /// <summary>
         /// Converts the source value to an array of bytes
         /// </summary>
         /// <param name="src">The source value</param>

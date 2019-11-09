@@ -1,8 +1,7 @@
-//-------------------------------------------------------------------------------------------
-// OSS developed by Chris Moore and licensed via MIT: https://opensource.org/licenses/MIT
-// This license grants rights to merge, copy, distribute, sell or otherwise do with it 
-// as you like. But please, for the love of Zeus, don't clutter it with regions.
-//-------------------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+// Copyright   :  (c) Chris Moore, 2019
+// License     :  MIT
+//-----------------------------------------------------------------------------
 namespace Z0
 {
     using System;
@@ -18,18 +17,11 @@ namespace Z0
     public readonly struct DateRange : ITimeInterval<Date>
     {
         /// <summary>
-        /// Converts a <see cref="DateRange"/> value to a <see cref="TimestampRange"/> value
+        /// Converts a <see cref="DateRange"/> value to a <see cref="TimeInterval{DateTime}"/> value
         /// </summary>
         /// <param name="x"></param>
-        public static implicit operator TimestampRange(DateRange x)
-            => new TimestampRange(x.Min.ToDateTime().StartOfDay(), x.Min.ToDateTime().EndOfDay());
-
-        /// <summary>
-        /// Converts a <see cref="DateRange"/> value to a <see cref="Range{DateTime}"/> value
-        /// </summary>
-        /// <param name="x"></param>
-        public static implicit operator Range<DateTime>(DateRange x)
-            => new Range<DateTime>(x.Min.ToDateTime().StartOfDay(), x.Max.ToDateTime().EndOfDay());
+        public static implicit operator TimeInterval<DateTime>(DateRange x)
+            => new TimeInterval<DateTime>(x.Min.ToDateTime().StartOfDay(), x.Max.ToDateTime().EndOfDay());
 
         /// <summary>
         /// Produces a <see cref="DateRange"/> that [begins | ends] on the [first | last] day of a given year

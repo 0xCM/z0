@@ -243,7 +243,7 @@ namespace Z0.Test
                 var src = Random.Next<ulong>();
                 BitParts.unpack64x1(src, dst);
                 var bitsPC = dst.PopCount();
-                var bytes = Unmanaged.ByteSpan(ref src);
+                var bytes = ByteSpan.From(ref src);
                 var bytesPC = bytes.PopCount();
                 Claim.eq(bitsPC, bytesPC);        
             }

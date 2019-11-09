@@ -17,36 +17,36 @@ partial class zfunc
     /// </summary>
     /// <typeparam name="T">The primal source type</typeparam>
     [MethodImpl(Inline)]
-    public static ref readonly T zero<T>()
+    public static T zero<T>()
         where T : unmanaged
-            => ref GConst.zero<T>();
+            => default;
 
     /// <summary>
     /// Returns generic 1 for a primal source type
     /// </summary>
     /// <typeparam name="T">The primal source type</typeparam>
     [MethodImpl(Inline)]
-    public static ref readonly T one<T>()
+    public static T one<T>()
         where T : unmanaged
-            => ref GConst.one<T>();
+            => PrimalInfo.one<T>();
 
     /// <summary>
     /// Returns the minimum value for a primal source type
     /// </summary>
     /// <typeparam name="T">The primal source type</typeparam>
     [MethodImpl(Inline)]
-    public static ref readonly T minval<T>()
+    public static T minval<T>()
         where T : unmanaged
-            => ref GConst.minval<T>();
+            => PrimalInfo.minval<T>();
 
     /// <summary>
     /// Returns the minimum value for a primal source type
     /// </summary>
     /// <typeparam name="T">The primal source type</typeparam>
     [MethodImpl(Inline)]
-    public static ref readonly T maxval<T>()
+    public static T maxval<T>()
         where T : unmanaged
-            => ref GConst.maxval<T>();
+            => PrimalInfo.maxval<T>();
 
     /// <summary>
     /// Returns true if the primal source type is signed, false otherwise

@@ -77,9 +77,7 @@ namespace Z0
             bitread_check<byte>(250,67);
             bitread_check<ushort>(250,67);
         }
-
-
-
+        
         public void bitgrid_store()
         {
             // var g1 = Random.BitGrid<uint>(20,20);
@@ -94,23 +92,8 @@ namespace Z0
             var a = Random.Span128<byte>();
             var b = DataBlocks.alloc(n128);
             DataBlocks.store(in a.Head, 16, ref b);
-            Claim.eq(a, b.AsBytes());
-
-
-
-
-
-
-            
-
-
-            
-            
-            
-
+            Claim.eq(a, b.AsBytes());        
         }
-
-
 
         void bitread_check<T>(ushort rows, ushort cols)
             where T : unmanaged

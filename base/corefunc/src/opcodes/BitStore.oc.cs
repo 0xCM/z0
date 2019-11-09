@@ -28,37 +28,8 @@ namespace Z0
         public static ReadOnlySpan<byte> bitseq(int offset, int count)
             => BitStore.select(offset,count);
 
-        public static ByteInfo byteinfo(byte src)
-            => BitStore.info(src);
-
-        public static ReadOnlySpan<byte> bitseq8i(sbyte src)
-            => BitStore.bitseq(src);
 
         public static ReadOnlySpan<byte> bitseq8u(byte src)
-            => BitStore.bitseq(src);
-
-        public static ReadOnlySpan<byte> bitseq16i(short src)
-            => BitStore.bitseq(src);
-
-        public static ReadOnlySpan<byte> bitseq16u(ushort src)
-            => BitStore.bitseq(src);
-
-        public static ReadOnlySpan<byte> bitseq32i(int src)
-            => BitStore.bitseq(src);
-
-        public static ReadOnlySpan<byte> bitseq32u(uint src)
-            => BitStore.bitseq(src);
-
-        public static ReadOnlySpan<byte> bitseq64i(long src)
-            => BitStore.bitseq(src);
-
-        public static ReadOnlySpan<byte> bitseq64u(ulong src)
-            => BitStore.bitseq(src);
-
-        public static ReadOnlySpan<byte> bitseq32f(float src)
-            => BitStore.bitseq(src);
-
-        public static ReadOnlySpan<byte> bitseq64f(double src)
             => BitStore.bitseq(src);
 
 

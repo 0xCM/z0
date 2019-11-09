@@ -16,7 +16,7 @@ namespace Z0
     public class AsmMemInfo
     {
         
-        public Char8? BaseRegister {get;set;}
+        public string BaseRegister {get;set;}
         
         public uint? Displacement {get; set;}
         
@@ -24,9 +24,9 @@ namespace Z0
         
         public int? DisplacementSize {get;set;}
         
-        public Char8? SegmentRegister {get; set;}
+        public string SegmentRegister {get; set;}
         
-        public Char8? SegmentPrefix {get; set;}
+        public string SegmentPrefix {get; set;}
         
         public ulong Address {get; set;}
 

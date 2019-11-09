@@ -29,7 +29,7 @@ namespace Z0.Mkl
         
         public double dbR2;
         
-        public Char64 cFuncName;
+        //public Char64 cFuncName;
         
         public int iFuncNameLen;
         

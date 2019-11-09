@@ -25,6 +25,27 @@ namespace Z0
         }        
 
         /// <summary>
+        /// Presents a source reference as a byte reference
+        /// </summary>
+        /// <param name="src">The source reference</param>
+        /// <typeparam name="T">The source type</typeparam>
+        [MethodImpl(Inline)]
+        public static ref byte ByteRef<T>(ref T src)
+            where T : unmanaged
+                => ref Unsafe.As<T,byte>(ref src);
+
+
+        /// <summary>
+        /// Presents a source reference as a span of bytes
+        /// </summary>
+        /// <param name="src">The source reference</param>
+        /// <typeparam name="T">The source type</typeparam>
+        [MethodImpl(Inline)]   
+        public static Span<byte> From<T>(ref T src)
+            where T : unmanaged
+                => MemoryMarshal.CreateSpan(ref ByteRef(ref src), Unsafe.SizeOf<T>()); 
+
+        /// <summary>
         /// Reads a value from the head of a bytespan
         /// </summary>
         /// <param name="src">The source span</param>

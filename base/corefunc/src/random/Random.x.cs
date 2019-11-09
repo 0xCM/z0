@@ -48,33 +48,6 @@ namespace  Z0
         public static Span<T> Shuffle<T>(this IPolyrand random, ReadOnlySpan<T> src)
             => random.Shuffle(src.Replicate());    
 
-        /// <summary>
-        /// Shuffles a copy of the source permutation, leaving the original intact.
-        /// </summary>
-        /// <param name="random">The random source</param>
-        /// <param name="src">The permutation</param>
-        [MethodImpl(Inline)]
-        public static Perm Shuffle(this IPolyrand random, in Perm src)
-        {
-            var copy = src.Replicate();
-            copy.Shuffle(random);
-            return copy;
-        }
-
-        /// <summary>
-        /// Shuffles a copy of the source permutatiion, leaving the original intact.
-        /// </summary>
-        /// <param name="random">The random source</param>
-        /// <param name="src">The permutation</param>
-        /// <typeparam name="N">The permutation length</typeparam>
-        [MethodImpl(Inline)]
-        public static Perm<N> Shuffle<N>(this IPolyrand random, in Perm<N> src)
-            where N : unmanaged, ITypeNat
-        {
-            var copy = src.Replicate();
-            copy.Shuffle(random);
-            return copy;
-        }
 
         /// <summary>
         /// Returns the next pair of random primal values

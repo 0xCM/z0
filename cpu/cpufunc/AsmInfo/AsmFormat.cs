@@ -150,10 +150,12 @@ namespace Z0
             
             if(src.Size != string.Empty)
                 items.Add((src.Size, string.Empty));
-
-            src.BaseRegister.OnValue(value => items.Add((value.Format(),"br")));
-            src.SegmentPrefix.OnValue(value => items.Add((value.Format(),"")));
-            src.SegmentRegister.OnValue(value => items.Add((value.Format(), "sr")));
+            if(!string.IsNullOrWhiteSpace(src.BaseRegister))
+                items.Add((src.BaseRegister,"br"));
+            if(!string.IsNullOrWhiteSpace(src.SegmentPrefix))
+                items.Add((src.SegmentPrefix,""));
+            if(!string.IsNullOrWhiteSpace(src.SegmentRegister))
+                items.Add((src.SegmentPrefix,"sr"));
 
             var sb = sbuild();
             for(var i=0; i<items.Count; i++)

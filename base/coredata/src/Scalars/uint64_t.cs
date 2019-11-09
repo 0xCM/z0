@@ -21,7 +21,7 @@ namespace Z0
 
         [MethodImpl(Inline)]    
         public uint64_t(prim x)
-            => data =x;
+            => data = x;
 
         [MethodImpl(Inline)]    
         public static analog @bool(bool x)

@@ -14,6 +14,19 @@ namespace Z0.Logix
     public class SurveyTest : UnitTest<SurveyTest>
     {
 
+        void emit_asci_table()
+        {
+            using var dst = LogArea.Test.LogWriter(FileName.Define("Asci.csv"));                
+            var min = (int)'A';
+            var max = (int)'Z';
+            for(var i = min; i<=max; i++)
+                dst.Write($"'{Convert.ToChar(i)}', ");
+            dst.WriteLine();
+            for(var i = min; i<=max; i++)
+                dst.Write($"{i}, ");
+            
+
+        }
         public void survey_8u()
         {
             var survey = Survey.Template<byte>(1, "Survey 8u");

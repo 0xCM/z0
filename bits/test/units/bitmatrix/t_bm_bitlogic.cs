@@ -25,7 +25,6 @@ namespace Z0
         public void bmxor_generic_check_64x64()
             => bmxor_generic_check<ulong>();
         
-
         void bmxor_generic_check<T>()
             where T : unmanaged
         {

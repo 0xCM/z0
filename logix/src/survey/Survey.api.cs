@@ -13,8 +13,6 @@ namespace Z0.Logix
 
     public static class Survey
     {
-        static readonly char[] ChoiceLabels = new char[26]{'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'};
-
         /// <summary>
         /// Creates a stock survey that contains no meaningful content
         /// </summary>
@@ -26,6 +24,7 @@ namespace Z0.Logix
         public static Survey<T> Template<T>(uint id, string name, uint length, uint width)
             where T : unmanaged
         {
+
             var questions = new Question<T>[length];
 
             for(uint i=0u, questionId = 1; i< length; i++, questionId++)
@@ -229,10 +228,22 @@ namespace Z0.Logix
 
         static string ChoiceLabel(uint index)
         {
-            if(index < 26)
-                return ChoiceLabels[index].ToString();
-            else 
-                return new string(ChoiceLabels[index % 26].Replicate((index / 26) + 1));
+            var q = (int)(index / 26);
+            var r = (int)(index % 26);
+            var code = Convert.ToChar(ChoiceCodes[r]);        
+            var label = ChoiceCodes[r].ToString();
+            if(q != 0)
+                label = new string(code,q);
+            else
+                label = code.ToString();
+            return label;
         }
+
+        /// <summary>
+        /// The numeric codes for the asci characters 'A' .. 'Z'
+        /// </summary>
+        static ReadOnlySpan<byte> ChoiceCodes 
+            => new byte[26]{65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90};
+
     }
 }
