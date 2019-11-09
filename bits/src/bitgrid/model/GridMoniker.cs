@@ -12,7 +12,7 @@ namespace Z0
 
     using static zfunc;
 
-    [StructLayout(LayoutKind.Sequential, Size = 4)]
+    //[StructLayout(LayoutKind.Sequential, Size = 4)]
     public readonly struct GridMoniker<T>
         where T : unmanaged
     {
@@ -21,10 +21,16 @@ namespace Z0
         public readonly ushort ColCount;
 
         public ushort SegWidth
-            => (ushort)bitsize<T>();
+        {
+            [MethodImpl(Inline)]
+            get => (ushort)bitsize<T>();
+        }
 
         public int PointCount
-            => RowCount * ColCount;
+        {
+            [MethodImpl(Inline)]
+            get => RowCount * ColCount;
+        }
         
         [MethodImpl(Inline)]
         public static implicit operator GridMoniker(GridMoniker<T> src)
@@ -81,7 +87,7 @@ namespace Z0
     /// <summary>
     /// Identifies and characterizes a bit grid
     /// </summary>
-    [StructLayout(LayoutKind.Sequential, Size = 8)]
+    //[StructLayout(LayoutKind.Sequential, Size = 8)]
     public readonly struct GridMoniker
     {
         public readonly ushort RowCount;
@@ -91,6 +97,27 @@ namespace Z0
         public readonly ushort SegWidth;
 
         readonly ushort Filler;
+
+
+        [MethodImpl(Inline)]
+        public static GridMoniker<T> Define<M,N,T>(M m = default, N n = default, T zero = default)
+            where T : unmanaged
+            where M : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
+                => new GridMoniker<T>(natval<M>(),natval<N>());
+
+        [MethodImpl(Inline)]
+        public static GridMoniker Define(ushort rows, ushort cols, ushort segwidth)
+            => new GridMoniker(rows, cols, segwidth);
+
+        [MethodImpl(Inline)]
+        public static GridMoniker<T> Define<T>(ushort rows, ushort cols)
+            where T : unmanaged
+                => new GridMoniker<T>(rows,cols);
+
+        [MethodImpl(Inline)]
+        public static GridMoniker Define(ulong id)
+            => Unsafe.As<ulong,GridMoniker>(ref id);
 
         public static Option<GridMoniker> Parse(string text)
         {
@@ -104,19 +131,6 @@ namespace Z0
             }
             return default;
         }
-
-        [MethodImpl(Inline)]
-        public static GridMoniker Define(ushort rows, ushort cols, ushort segwidth)
-            => new GridMoniker(rows,cols,segwidth);
-
-        [MethodImpl(Inline)]
-        public static GridMoniker<T> Define<T>(ushort rows, ushort cols)
-            where T : unmanaged
-                => new GridMoniker<T>(rows,cols);
-
-        [MethodImpl(Inline)]
-        public static GridMoniker Define(ulong id)
-            => Unsafe.As<ulong,GridMoniker>(ref id);
 
         [MethodImpl(Inline)]
         public static bool operator ==(GridMoniker a, GridMoniker b)

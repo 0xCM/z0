@@ -43,7 +43,7 @@ namespace Z0
         /// <param name="segsize">The number of bytes that comprise each segment</param>
         /// <param name="bitcount">The number of bits</param>
         /// <typeparam name="T">The segment type</typeparam>
-        public static int Segments<T>(BitSize bitcount)
+        public static int Segments<T>(int bitcount)
             where T : unmanaged
                 => Segments(bitsize<T>(), bitcount);
 

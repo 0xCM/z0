@@ -13,8 +13,17 @@ namespace Z0
 
     partial class zfoc
     {
+        public static void datablock_store(in byte src, uint count, ref Block128 dst)
+            => DataBlocks.store(in src, count, ref dst);
+
+        public static void datablock_bytes(ref Block128 src)
+            => DataBlocks.bytes(ref src);
+
         public static ReadOnlySpan<byte> bitseq(byte value)
             => BitStore.select(value);
+
+        public static Span<byte> bitseq2(ulong value)
+            => BitStore.bitseq2(value);
 
         public static ReadOnlySpan<byte> bitseq(int offset, int count)
             => BitStore.select(offset,count);

@@ -23,16 +23,12 @@ namespace Z0
             where T : unmanaged
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
-                => GridMoniker.Define<T>(natval(m), natval(n));
+                => GridMoniker.Define(m,n,zero);
 
         [MethodImpl(Inline)]
         public static GridMoniker<T> moniker<T>(ushort rows, ushort cols)
             where T : unmanaged
                 => GridMoniker.Define<T>(rows, cols);
-
-        [MethodImpl(Inline)]
-        public static int bytes(in GridMoniker moniker)    
-            => bytes(moniker.RowCount, moniker.ColCount);
 
         /// <summary>
         /// Computes the minimum number of bytes required to store a grid of specified dimensions
@@ -45,7 +41,7 @@ namespace Z0
             var points = rows*cols;
             return (points >> 3) + (points % 8 != 0 ? 1 : 0);
         }
-        
+
         /// <summary>
         /// Computes the minimum number of bytes required to store a grid of specified dimensions
         /// </summary>
@@ -62,6 +58,26 @@ namespace Z0
             return (points >> 3) + (points % 8 != 0 ? 1 : 0);
         }
 
+        [MethodImpl(Inline)]
+        public static int bytes(in GridMoniker moniker)    
+            => bytes(moniker.RowCount, moniker.ColCount);
+        
+
+        [MethodImpl(Inline)]
+        public static int segments(ushort rows, ushort cols, ushort segwidth)
+        {
+            var _bytes = bytes(rows, cols);
+            var segbytes = segwidth / 8;
+            var segs = _bytes/segbytes + (_bytes % segbytes != 0 ? 1 : 0);            
+            return segs;
+        }
+
+        [MethodImpl(Inline)]
+        public static int segments<T>(ushort rows, ushort cols)
+            where T : unmanaged
+                => segments(rows,cols, (ushort)bitsize<T>());
+        
+
         /// <summary>
         /// Computes the minimum number of segments required to store a grid of specified dimensions
         /// </summary>
@@ -76,6 +92,45 @@ namespace Z0
             var segs = bytes/segbytes + (bytes % segbytes != 0 ? 1 : 0);            
             return segs;
         }
+
+        [MethodImpl(Inline)]
+        public static int segments<M,N,T>(M m = default, N n = default, T zero = default)
+            where M : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(byte))
+                return segmentsW(m,n,n8);
+            else if(typeof(T) == typeof(ushort))
+                return segmentsW(m,n,n16);                
+            else if(typeof(T) == typeof(uint))
+                return segmentsW(m,n,n32);                
+            else if(typeof(T) == typeof(ulong))
+                return segmentsW(m,n,n64);                
+            else
+                throw unsupported<T>();
+        } 
+
+        /// <summary>
+        /// Computes the minimum number of segments required to store a grid of specified dimensions
+        /// </summary>
+        /// <param name="m">The number of grid rows</param>
+        /// <param name="n">The number of grid columns</param>
+        /// <param name="w">The segment bit width</param>
+        /// <typeparam name="M">The row type</typeparam>
+        /// <typeparam name="N">The col type</typeparam>
+        [MethodImpl(Inline)]
+        static int segmentsW<M,N,W>(M m = default, N n = default, W w = default)
+            where M : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
+            where W : unmanaged, ITypeNat
+        {                
+            var bytes = BitGrid.bytes(m, n);    
+            var segbytes = NatMath.div(w,n8);
+            var segs =  bytes/segbytes + (bytes % segbytes != 0 ? 1 : 0);            
+            return segs;
+        }
+
 
         [MethodImpl(Inline)]
         public static int points(in GridMoniker moniker)
@@ -124,10 +179,9 @@ namespace Z0
         [MethodImpl(NotInline)]
         public static BitGrid<T> alloc<T>(ushort rows, ushort cols)
             where T : unmanaged
-        {
-            var map = map<T>(rows,cols);
-            Span<T> data = new T[map.SegCount];
-            return new BitGrid<T>(data,rows, cols);
+        {            
+            Span<T> data = new T[segments<T>(rows,cols)];
+            return new BitGrid<T>(data, rows, cols);
         }
 
         /// <summary>
@@ -169,6 +223,50 @@ namespace Z0
             return new BitGrid<M, N, T>(src);
         }
 
+        /// <summary>
+        /// Loads a natural bitgrid of dimensions Mx8 of type byte from primal bitvectors of length 8
+        /// </summary>
+        /// <param name="m">The row count</param>
+        /// <param name="src">The source data</param>
+        /// <typeparam name="M">The row count type</typeparam>
+        [MethodImpl(NotInline)]
+        public static BitGrid<M,N8,byte> load<M>(M m, Span<BitVector8> src)
+            where M : unmanaged, ITypeNat
+                => new BitGrid<M,N8,byte>(src.AsBytes());
+
+        /// <summary>
+        /// Loads a natural bitgrid of dimensions Mx16 of type ushort from primal bitvectors of length 16
+        /// </summary>
+        /// <param name="m">The row count</param>
+        /// <param name="src">The source data</param>
+        /// <typeparam name="M">The row count type</typeparam>
+        [MethodImpl(NotInline)]
+        public static BitGrid<M,N16,ushort> load<M>(M m, Span<BitVector16> src)
+            where M : unmanaged, ITypeNat
+                => new BitGrid<M,N16,ushort>(src.AsUInt16());
+
+        /// <summary>
+        /// Loads a natural bitgrid of dimensions Mx32 of type uint from primal bitvectors of length 32
+        /// </summary>
+        /// <param name="m">The row count</param>
+        /// <param name="src">The source data</param>
+        /// <typeparam name="M">The row count type</typeparam>
+        [MethodImpl(NotInline)]
+        public static BitGrid<M,N32,uint> load<M>(M m, Span<BitVector32> src)
+            where M : unmanaged, ITypeNat
+                => new BitGrid<M,N32,uint>(src.AsUInt32());
+
+        /// <summary>
+        /// Loads a natural bitmatrix of dimensions Mx64 of type ulong from primal bitvectors of length 64
+        /// </summary>
+        /// <param name="m">The row count</param>
+        /// <param name="src">The source data</param>
+        /// <typeparam name="M">The row count type</typeparam>
+        [MethodImpl(NotInline)]
+        public static BitGrid<M,N64,ulong> load<M>(M m, Span<BitVector64> src)
+            where M : unmanaged, ITypeNat
+                => new BitGrid<M,N64,ulong>(src.AsUInt64());
+                
         [MethodImpl(Inline)]
         public static void fill<T>(BitGrid<T> grid, bit state)    
             where T : unmanaged
@@ -181,43 +279,6 @@ namespace Z0
             where T : unmanaged
                 => grid.Data.Fill(state ? gmath.maxval<T>() : gmath.zero<T>());
                       
-        /// <summary>
-        /// Computes the minimum number of segments required to store a grid of specified dimensions
-        /// </summary>
-        /// <param name="m">The number of grid rows</param>
-        /// <param name="n">The number of grid columns</param>
-        /// <param name="w">The segment bit width</param>
-        /// <typeparam name="M">The row type</typeparam>
-        /// <typeparam name="N">The col type</typeparam>
-        [MethodImpl(Inline)]
-        static int segmentsW<M,N,W>(M m = default, N n = default, W w = default)
-            where M : unmanaged, ITypeNat
-            where N : unmanaged, ITypeNat
-            where W : unmanaged, ITypeNat
-        {                
-            var bytes = BitGrid.bytes(m, n);    
-            var segbytes = NatMath.div(w,n8);
-            var segs =  bytes/segbytes + (bytes % segbytes != 0 ? 1 : 0);            
-            return segs;
-        }
-
-        [MethodImpl(Inline)]
-        public static int segments<M,N,T>(M m = default, N n = default, T zero = default)
-            where M : unmanaged, ITypeNat
-            where N : unmanaged, ITypeNat
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(byte))
-                return segmentsW(m,n,n8);
-            else if(typeof(T) == typeof(ushort))
-                return segmentsW(m,n,n16);                
-            else if(typeof(T) == typeof(uint))
-                return segmentsW(m,n,n32);                
-            else if(typeof(T) == typeof(ulong))
-                return segmentsW(m,n,n64);                
-            else
-                throw unsupported<T>();
-        } 
 
         /// <summary>
         /// Defines a grid specification predicated on specified row count, col count and bit width
@@ -407,11 +468,4 @@ namespace Z0
 
     }
 
-    class BitGridInfo<M,N,T>
-        where M : unmanaged, ITypeNat
-        where N : unmanaged, ITypeNat
-        where T : unmanaged
-    {
-        public static readonly GridMap Map = BitGrid.map<M,N,T>();
-    }
 }

@@ -457,7 +457,7 @@ namespace Z0
         /// <param name="blockWidth">If unspecified, no blocking will be applied; otherwise, indicates the width of the block partitions</param>
         /// <param name="blocksep">If unspecified, when block formatting, indicates the default block delimiter (An ASCII space) will be used;
         /// if specified, when block formatting, indicates the block delimiter to place between the block partitions</param>
-        public string Format(bool tlz = false, bool specifier = false, int? blockWidth = null, char? blocksep = null)
+        public string Format(bool tlz = false, bool specifier = false, int? blockWidth = null, char? blocksep = null, int? rowWidth = null)
         {                                            
             if(blockWidth == null)
                 return FormatUnblocked(tlz,specifier);
@@ -467,11 +467,26 @@ namespace Z0
                 var sb = sbuild();
                 var blocks = Partition(blockWidth.Value).Reverse();
                 var lastix = blocks.Length - 1;
+                var counter = 0;
                 for(var i=0; i<=lastix; i++)
                 {
                     sb.Append(blocks[i].FormatUnblocked(false,false));
                     if(i != lastix)
-                        sb.Append(sep);
+                    {
+                        if(rowWidth != null)
+                        {
+                            if(++counter % rowWidth.Value == 0)
+                            {
+                                counter = 0;
+                                sb.AppendLine();
+                            }
+                            else 
+                                sb.Append(sep);
+                        }
+                        else
+                            sb.Append(sep);
+                    }
+                
                 }
                 var x = sb.ToString();
                 return  

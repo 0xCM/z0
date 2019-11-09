@@ -22,6 +22,15 @@ namespace Z0
 
 
         [MethodImpl(Inline)]
+        public static bool operator ==(BitGrid<T> lhs, BitGrid<T> rhs)
+            => lhs.Equals(rhs);
+
+        [MethodImpl(Inline)]
+        public static bool operator !=(BitGrid<T> lhs, BitGrid<T> rhs)
+            => !lhs.Equals(rhs);
+        
+
+        [MethodImpl(Inline)]
         internal BitGrid(Span<T> data, ushort m, ushort n)
         {
             this.data = data;
@@ -53,7 +62,7 @@ namespace Z0
             get => data.Length;
         }
 
-        public GridMoniker<T> Moniker
+        public readonly GridMoniker<T> Moniker
         {
             [MethodImpl(Inline)]
             get => moniker;
@@ -79,25 +88,52 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public bit GetState(int row, int col)
-            => BitGrid.readbit(Moniker, in Head, row, col);
+            => BitGrid.readbit(moniker, in Head, row, col);
 
         [MethodImpl(Inline)]
         public bit GetState(int bitpos)
-            => BitGrid.readbit(Moniker, in Head, bitpos);
+            => BitGrid.readbit(in Head, bitpos);
 
         [MethodImpl(Inline)]
         public void SetState(int row, int col, bit state)
-            => BitGrid.setbit(Moniker, row, col, state, ref Head);
+            => BitGrid.setbit(moniker, row, col, state, ref Head);
 
         [MethodImpl(Inline)]
         public void SetState(int bitpos, bit state)
-            => BitGrid.setbit(Moniker, bitpos, state, ref Head);
+            => BitGrid.setbit(bitpos, state, ref Head);
+
+        [MethodImpl(Inline)]
+        readonly int RowIndex(int row)        
+            => (Moniker.ColCount * row) / Moniker.SegWidth;
+
+        [MethodImpl(Inline)]
+        readonly int RowOffset(int row)        
+            => (Moniker.ColCount * row) % Moniker.SegWidth;
+
+        [MethodImpl(Inline)]
+        ref T RowSeg(int row)                
+            => ref data[RowIndex(row)];
+
+        
+        // [MethodImpl(Inline)]
+        // Span<T> RowData(int row)
+        //     => data.Slice(RowOffset(row), Layout.RowCellCount);
+
+        public BitString ToBitString()
+            => data.ToBitString(Moniker.PointCount);
 
         public string Format()
-            => data.FormatMatrixBits((int)moniker.ColCount);
+            => ToBitString().Format(blockWidth:1,rowWidth:Moniker.ColCount);
 
         [MethodImpl(Inline)]
         public bool Equals(BitGrid<T> rhs)
             => data.Identical(rhs.data);
+
+        public override bool Equals(object obj)
+            => throw new NotSupportedException();
+
+        public override int GetHashCode()
+            => throw new NotSupportedException();
+
     }
 }

@@ -64,7 +64,7 @@ namespace Z0
         public static ref BitMatrix<T> BitMatrix<T>(this IPolyrand random, ref BitMatrix<T> dst)
             where T : unmanaged
         {                        
-            random.StreamTo((int)Z0.BitMatrix<T>.N, ref dst.Head);
+            random.Fill((int)Z0.BitMatrix<T>.N, ref dst.Head);
             return ref dst;            
         }
 
@@ -192,7 +192,7 @@ namespace Z0
         {
             var grid = Z0.BitGrid.alloc(m,n,zero);
             var segments = Z0.BitGrid.segments(grid.Moniker);
-            random.StreamTo(segments, ref grid.Head);
+            random.Fill(segments, ref grid.Head);
             return grid;
         }
 
@@ -201,7 +201,7 @@ namespace Z0
             where T : unmanaged
         {
             var grid = Z0.BitGrid.alloc<T>(rows,cols);
-            random.StreamTo(grid.SegCount, ref grid.Head);
+            random.Fill(grid.SegCount, ref grid.Head);
             return grid;
         }
 
@@ -219,7 +219,7 @@ namespace Z0
             where N : unmanaged,ITypeNat
             where T : unmanaged
         {
-            random.StreamTo(dst.Data.Length, ref dst.Head);
+            random.Fill(dst.Data.Length, ref dst.Head);
             return dst;
         }
 

@@ -76,8 +76,41 @@ namespace Z0
             bitread_check<ulong>(250,67);
             bitread_check<byte>(250,67);
             bitread_check<ushort>(250,67);
+        }
+
+
+
+        public void bitgrid_store()
+        {
+            // var g1 = Random.BitGrid<uint>(20,20);
+            var dst = DataBlocks.alloc(n128);
+            var dst8u = dst.AsBytes();
+            for(var i=0; i<16; i++)
+                dst8u[i] = Random.Next<byte>();
+            var bs1 = dst.ToBitString();
+            var bs2 = dst8u.ToBitString();
+            Claim.eq(bs1,bs2);
+
+            var a = Random.Span128<byte>();
+            var b = DataBlocks.alloc(n128);
+            DataBlocks.store(in a.Head, 16, ref b);
+            Claim.eq(a, b.AsBytes());
+
+
+
+
+
+
+            
+
+
+            
+            
+            
 
         }
+
+
 
         void bitread_check<T>(ushort rows, ushort cols)
             where T : unmanaged
@@ -96,7 +129,7 @@ namespace Z0
                 for(var col = 0; col < cols; col++, bitpos++)
                 {
                     var b1 = BitGrid.readbit(moniker, in src.Head, row, col);
-                    var b2 = BitGrid.readbit(moniker, in src.Head, bitpos);
+                    var b2 = BitGrid.readbit(in src.Head, bitpos);
                     Claim.yea(b1 == b2);
 
                     dstA[row,col] = b1;

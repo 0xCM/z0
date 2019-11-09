@@ -24,7 +24,7 @@ namespace Z0
         /// <param name="value">The value to be applied</param>
         /// <typeparam name="T">The source element type</typeparam>
         [MethodImpl(Inline)]
-        public static ref T set<T>(ref T src, byte pos, Bit value)            
+        public static ref T set<T>(ref T src, byte pos, bit value)            
             where T : unmanaged
         {
             if(value)
@@ -34,42 +34,6 @@ namespace Z0
             return ref src;
         }
 
-        /// <summary>
-        /// Enables a bit in the target if it is enabled in the source
-        /// </summary>
-        /// <param name="src">The source value</param>
-        /// <param name="srcpos">The source bit position</param>
-        /// <param name="dst">The target value</param>
-        /// <param name="dstpos">The target bit position</param>
-        [MethodImpl(Inline)]
-        public static ref T setif<T>(in T src, int srcpos, ref T dst, int dstpos)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(sbyte))
-                BitMask.setif(in int8(in src), srcpos, ref int8(ref dst), dstpos);
-            else if(typeof(T) == typeof(byte))
-                BitMask.setif(in uint8(in src), srcpos, ref uint8(ref dst), dstpos);
-            else if(typeof(T) == typeof(short))
-                BitMask.setif(in int16(in src), srcpos, ref int16(ref dst), dstpos);
-            else if(typeof(T) == typeof(ushort))
-                BitMask.setif(in uint16(in src), srcpos, ref uint16(ref dst), dstpos);
-            else if(typeof(T) == typeof(int))
-                BitMask.setif(in int32(in src), srcpos, ref int32(ref dst), dstpos);
-            else if(typeof(T) == typeof(uint))
-                BitMask.setif(in uint32(in src), srcpos, ref uint32(ref dst), dstpos);
-            else if(typeof(T) == typeof(long))
-                BitMask.setif(in int64(in src), srcpos, ref int64(ref dst), dstpos);
-            else if(typeof(T) == typeof(ulong))
-                BitMask.setif(in uint64(in src), srcpos, ref uint64(ref dst), dstpos);
-            else if(typeof(T) == typeof(float))
-                BitMask.setif(in float32(in src), srcpos, ref float32(ref dst), dstpos);
-            else if(typeof(T) == typeof(double))
-                BitMask.setif(in float64(in src), srcpos, ref float64(ref dst), dstpos);
-            else
-                throw unsupported<T>();
-                
-            return ref dst;                            
-        }
 
 
 

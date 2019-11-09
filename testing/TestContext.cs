@@ -156,7 +156,7 @@ namespace Z0
             {
                 for(var cycle=0; cycle < CycleCount; cycle++)
                 {                
-                    Random.StreamTo((min,max), buffer.Length, ref buffer[0]);
+                    Random.Fill((min,max), buffer.Length, ref buffer[0]);
 
                     sw.Start();
                     worker(buffer);

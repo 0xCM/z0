@@ -1,4 +1,13 @@
-// 2019-11-08 02:45:48:319
+// 2019-11-09 03:33:42:264
+bool test(short src, int pos)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call Z0.bit Z0.BitMask::test(System.Int16,System.Int32)
+    IL_0007: call System.Boolean Z0.bit::op_Implicit(Z0.bit)
+    IL_000C: ret
+
+}
 bool test(ushort src, int pos)
 {
     IL_0000: ldarg.0
@@ -2129,6 +2138,120 @@ ref ulong packseq(ReadOnlySpan<byte> src, out ulong dst)
     IL_0038: ret
 
 }
+int popbs(ulong src)
+{
+    IL_0000: ldloca.s V_0
+    IL_0002: ldarga.s src
+    IL_0004: conv.u
+    IL_0005: ldc.i4.8
+    IL_0006: call System.Void System.Span`1<System.Byte>::.ctor(System.Void*,System.Int32)
+    IL_000B: ldloc.0
+    IL_000C: call System.Byte& zfunc::head<System.Byte>(System.Span`1<System.Byte>)
+    IL_0011: stloc.1
+    IL_0012: ldc.i4.0
+    IL_0013: stloc.2
+    IL_0014: ldc.i4.0
+    IL_0015: stloc.3
+    IL_0016: ldloc.2
+    IL_0017: ldloc.1
+    IL_0018: ldloc.3
+    IL_0019: dup
+    IL_001A: ldc.i4.1
+    IL_001B: add
+    IL_001C: stloc.3
+    IL_001D: call System.Byte& modreq(System.Runtime.InteropServices.InAttribute) zfunc::skip<System.Byte>(System.Byte&,System.Int32)
+    IL_0022: ldind.u1
+    IL_0023: call System.Int32 Z0.BitStore::PopCount(System.Byte)
+    IL_0028: add
+    IL_0029: stloc.2
+    IL_002A: ldloc.2
+    IL_002B: ldloc.1
+    IL_002C: ldloc.3
+    IL_002D: dup
+    IL_002E: ldc.i4.1
+    IL_002F: add
+    IL_0030: stloc.3
+    IL_0031: call System.Byte& modreq(System.Runtime.InteropServices.InAttribute) zfunc::skip<System.Byte>(System.Byte&,System.Int32)
+    IL_0036: ldind.u1
+    IL_0037: call System.Int32 Z0.BitStore::PopCount(System.Byte)
+    IL_003C: add
+    IL_003D: stloc.2
+    IL_003E: ldloc.2
+    IL_003F: ldloc.1
+    IL_0040: ldloc.3
+    IL_0041: dup
+    IL_0042: ldc.i4.1
+    IL_0043: add
+    IL_0044: stloc.3
+    IL_0045: call System.Byte& modreq(System.Runtime.InteropServices.InAttribute) zfunc::skip<System.Byte>(System.Byte&,System.Int32)
+    IL_004A: ldind.u1
+    IL_004B: call System.Int32 Z0.BitStore::PopCount(System.Byte)
+    IL_0050: add
+    IL_0051: stloc.2
+    IL_0052: ldloc.2
+    IL_0053: ldloc.1
+    IL_0054: ldloc.3
+    IL_0055: dup
+    IL_0056: ldc.i4.1
+    IL_0057: add
+    IL_0058: stloc.3
+    IL_0059: call System.Byte& modreq(System.Runtime.InteropServices.InAttribute) zfunc::skip<System.Byte>(System.Byte&,System.Int32)
+    IL_005E: ldind.u1
+    IL_005F: call System.Int32 Z0.BitStore::PopCount(System.Byte)
+    IL_0064: add
+    IL_0065: stloc.2
+    IL_0066: ldloc.2
+    IL_0067: ldloc.1
+    IL_0068: ldloc.3
+    IL_0069: dup
+    IL_006A: ldc.i4.1
+    IL_006B: add
+    IL_006C: stloc.3
+    IL_006D: call System.Byte& modreq(System.Runtime.InteropServices.InAttribute) zfunc::skip<System.Byte>(System.Byte&,System.Int32)
+    IL_0072: ldind.u1
+    IL_0073: call System.Int32 Z0.BitStore::PopCount(System.Byte)
+    IL_0078: add
+    IL_0079: stloc.2
+    IL_007A: ldloc.2
+    IL_007B: ldloc.1
+    IL_007C: ldloc.3
+    IL_007D: dup
+    IL_007E: ldc.i4.1
+    IL_007F: add
+    IL_0080: stloc.3
+    IL_0081: call System.Byte& modreq(System.Runtime.InteropServices.InAttribute) zfunc::skip<System.Byte>(System.Byte&,System.Int32)
+    IL_0086: ldind.u1
+    IL_0087: call System.Int32 Z0.BitStore::PopCount(System.Byte)
+    IL_008C: add
+    IL_008D: stloc.2
+    IL_008E: ldloc.2
+    IL_008F: ldloc.1
+    IL_0090: ldloc.3
+    IL_0091: dup
+    IL_0092: ldc.i4.1
+    IL_0093: add
+    IL_0094: stloc.3
+    IL_0095: call System.Byte& modreq(System.Runtime.InteropServices.InAttribute) zfunc::skip<System.Byte>(System.Byte&,System.Int32)
+    IL_009A: ldind.u1
+    IL_009B: call System.Int32 Z0.BitStore::PopCount(System.Byte)
+    IL_00A0: add
+    IL_00A1: stloc.2
+    IL_00A2: ldloc.2
+    IL_00A3: ldloc.1
+    IL_00A4: ldloc.3
+    IL_00A5: dup
+    IL_00A6: ldc.i4.1
+    IL_00A7: add
+    IL_00A8: stloc.3
+    IL_00A9: call System.Byte& modreq(System.Runtime.InteropServices.InAttribute) zfunc::skip<System.Byte>(System.Byte&,System.Int32)
+    IL_00AE: ldind.u1
+    IL_00AF: call System.Int32 Z0.BitStore::PopCount(System.Byte)
+    IL_00B4: add
+    IL_00B5: stloc.2
+    IL_00B6: ldloc.2
+    IL_00B7: ret
+
+}
 uint pop(sbyte src)
 {
     IL_0000: ldarg.0
@@ -3017,15 +3140,6 @@ bool test(byte src, int pos)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: call Z0.bit Z0.BitMask::test(System.Byte,System.Int32)
-    IL_0007: call System.Boolean Z0.bit::op_Implicit(Z0.bit)
-    IL_000C: ret
-
-}
-bool test(short src, int pos)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: call Z0.bit Z0.BitMask::test(System.Int16,System.Int32)
     IL_0007: call System.Boolean Z0.bit::op_Implicit(Z0.bit)
     IL_000C: ret
 

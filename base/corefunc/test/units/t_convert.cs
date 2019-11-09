@@ -14,13 +14,37 @@ namespace Z0
     public sealed class t_convert : UnitTest<t_convert>
     {
 
-        public void convert_64f_to32i()
+        public void convert_32u_to_bytes_check()
         {
-            var x = 32.44;
-            var y0 = convert<int>(x);
-            var y1 = convert<double,int>(x);
-            Claim.eq((int)x,y0);
-            Claim.eq(y0,y1);
+            for(var i=0; i<SampleSize; i++)
+            {
+                var x = Random.Next<uint>();
+                var y = x.AsBytes();
+                Span<byte> z = BitConverter.GetBytes(x);
+                Claim.eq(y,z);
+            }
+        }
+
+        public void convert_64u_to_bytes_check()
+        {
+            for(var i=0; i<SampleSize; i++)
+            {
+                var x = Random.Next<ulong>();
+                var y = x.AsBytes();
+                Span<byte> z = BitConverter.GetBytes(x);
+                Claim.eq(y,z);
+            }
+        }
+
+        public void convert_64f_to_bytes_check()
+        {
+            for(var i=0; i<SampleSize; i++)
+            {
+                var x = Random.Next<double>();
+                var y = x.AsBytes();
+                Span<byte> z = BitConverter.GetBytes(x);
+                Claim.eq(y,z);
+            }
         }
 
     }

@@ -21,7 +21,15 @@ namespace Z0
         Span<T> data;
 
         readonly GridMoniker<T> moniker;
-            
+
+        [MethodImpl(Inline)]
+        public static bool operator ==(BitGrid<M,N,T> lhs, BitGrid<M,N,T> rhs)
+            => lhs.Equals(rhs);
+
+        [MethodImpl(Inline)]
+        public static bool operator !=(BitGrid<M,N,T> lhs, BitGrid<M,N,T> rhs)
+            => !lhs.Equals(rhs);
+
         [MethodImpl(Inline)]
         internal BitGrid(Span<T> data)
         {
@@ -71,7 +79,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public bit GetState(int bitpos)
-            => BitGrid.readbit(Moniker, in Head, bitpos);
+            => BitGrid.readbit(in Head, bitpos);
 
         [MethodImpl(Inline)]
         public void SetState(int row, int col, bit state)
@@ -79,7 +87,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public void SetState(int bitpos, bit state)
-            => BitGrid.setbit(Moniker, bitpos, state, ref Head);
+            => BitGrid.setbit(bitpos, state, ref Head);
 
         public string Format()
             => data.FormatMatrixBits(Moniker.ColCount);
@@ -87,5 +95,12 @@ namespace Z0
         [MethodImpl(Inline)]
         public bool Equals(BitGrid<M,N,T> rhs)
             => data.Identical(rhs.data);
+ 
+        public override bool Equals(object obj)
+            => throw new NotSupportedException();
+
+        public override int GetHashCode()
+            => throw new NotSupportedException();
+
     }
 }

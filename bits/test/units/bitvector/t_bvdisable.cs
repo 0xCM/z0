@@ -100,8 +100,8 @@ namespace Z0.Test
                 Claim.eq(bv.Length, bs.Length);
                 for(var i=0; i<bv.Length; i+= 2)
                 {
-                    bv.Disable(i);
-                    bs[i] = Bit.Off;
+                    bv.SetBit(i, bit.Off);
+                    bs[i] = bit.Off;
                 }
 
                 Claim.eq(bv.ToBitString(),bs);

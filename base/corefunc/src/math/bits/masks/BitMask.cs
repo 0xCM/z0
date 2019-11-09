@@ -11,10 +11,29 @@ namespace Z0
     using static zfunc;
 
     /// <summary>
-    /// Defines non-parametric bitmasking and selection functions
+    /// Defines bitmasking and selection functions
     /// </summary>
     public static partial class BitMask
     {
+        [MethodImpl(Inline)]
+        public static bit testg<T>(T a, int pos)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(byte) 
+            || typeof(T) == typeof(ushort) 
+            || typeof(T) == typeof(uint) 
+            || typeof(T) == typeof(ulong))
+                return test_u(a,pos);
+            else if(typeof(T) == typeof(sbyte) 
+            || typeof(T) == typeof(short) 
+            || typeof(T) == typeof(int) 
+            || typeof(T) == typeof(long))
+                return test_i(a,pos);
+            else 
+                return test_f(a,pos);
+
+        }
+
         /// <summary>
         /// Enables a specified source bit
         /// </summary>
@@ -484,6 +503,47 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bit test(ulong src, int pos)
             => (src & (1ul << pos)) != 0ul;
+
+
+        [MethodImpl(Inline)]
+        static bit test_u<T>(T src, int pos)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(byte))
+                return test(As.uint8(src), pos);
+            else if(typeof(T) == typeof(ushort))
+                return test(As.uint16(src), pos);
+            else if(typeof(T) == typeof(uint))
+                return test(As.uint32(src), pos);
+            else 
+                return test(As.uint64(src), pos);            
+        }
+
+        [MethodImpl(Inline)]
+        static bit test_i<T>(T src, int pos)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(sbyte))
+                return test(As.int8(src), pos);
+            else if(typeof(T) == typeof(short))
+                return test(As.int16(src), pos);
+            else if(typeof(T) == typeof(int))
+                return test(As.int32(src), pos);
+            else 
+                return test(As.int64(src), pos);
+        }
+
+        [MethodImpl(Inline)]
+        static bit test_f<T>(T src, int pos)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(float))
+                return test(As.float32(src), pos);
+            else if(typeof(T) == typeof(short))
+                return test(As.float64(src), pos);
+            else 
+                throw unsupported<T>();
+        }
 
         /// <summary>
         /// Determines whether a bit in a specified position is enabled

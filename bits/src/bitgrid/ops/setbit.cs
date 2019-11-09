@@ -13,6 +13,7 @@ namespace Z0
 
     partial class BitGrid
     {
+
         /// <summary>
         /// Sets the state of an a coordinate-identified grid bit
         /// </summary>
@@ -49,17 +50,17 @@ namespace Z0
         /// <param name="state">The source state</param>
         /// <typeparam name="T">The grid storage segment type</typeparam>
         [MethodImpl(Inline)]
-        public static void setbit<T>(in GridMoniker moniker, int bitpos, bit state, ref T dst)    
+        public static void setbit<T>(int bitpos, bit state, ref T dst)    
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                setbit(moniker, bitpos, state,ref uint8(ref dst));
+                setbit(bitpos, state,ref uint8(ref dst));
             else if(typeof(T) == typeof(ushort))
-                setbit(moniker, bitpos, state, ref uint16(ref dst));
+                setbit(bitpos, state, ref uint16(ref dst));
             else if(typeof(T) == typeof(uint))
-                setbit(moniker, bitpos, state, ref uint32(ref dst));
+                setbit(bitpos, state, ref uint32(ref dst));
             else if(typeof(T) == typeof(ulong))
-                setbit(moniker, bitpos, state, ref uint64(ref dst));
+                setbit(bitpos, state, ref uint64(ref dst));
             else            
                 throw unsupported<T>();
         }
@@ -114,7 +115,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static void setbit(in GridMoniker moniker, int bitpos, bit state, ref byte dst)    
+        static void setbit(int bitpos, bit state, ref byte dst)    
         {
             const ushort segwidth = 8;            
             var index = bitpos / segwidth;
@@ -125,7 +126,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static void setbit(in GridMoniker moniker, int bitpos, bit state, ref ushort dst)    
+        static void setbit(int bitpos, bit state, ref ushort dst)    
         {
             const ushort segwidth = 16;            
             var index = bitpos / segwidth;
@@ -136,7 +137,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static void setbit(in GridMoniker moniker, int bitpos, bit state, ref uint dst)    
+        static void setbit(int bitpos, bit state, ref uint dst)    
         {
             const ushort segwidth = 32;            
             var index = bitpos / segwidth;
@@ -147,9 +148,66 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static void setbit(in GridMoniker moniker, int bitpos, bit state, ref ulong dst)    
+        static void setbit(int bitpos, bit state, ref ulong dst)    
         {
             const ushort segwidth = 64;            
+            var index = bitpos / segwidth;
+            var offset = bitpos % segwidth;
+            ref var segment = ref seek(ref dst, index);
+            
+            BitMask.set(ref segment, (byte)offset, state); 
+        }
+
+
+        [MethodImpl(Inline)]
+        static void setbit(ulong monikerid, int row, int col, bit state, ref byte dst)    
+        {
+            const ushort segwidth = 8;
+            var moniker = GridMoniker.Define(monikerid);
+
+            var bitpos = moniker.ColCount*row + col;
+            var index = bitpos / segwidth;
+            var offset = bitpos % segwidth;
+            ref var segment = ref seek(ref dst, index);
+            
+            BitMask.set(ref segment, (byte)offset, state); 
+        }
+
+        [MethodImpl(Inline)]
+        static void setbit(ulong monikerid, int row, int col, bit state, ref ushort dst)    
+        {
+            const ushort segwidth = 16;
+            var moniker = GridMoniker.Define(monikerid);
+            
+            var bitpos = moniker.ColCount*row + col;
+            var index = bitpos / segwidth;
+            var offset = bitpos % segwidth;
+            ref var segment = ref seek(ref dst, index);
+            
+            BitMask.set(ref segment, (byte)offset, state); 
+        }
+
+        [MethodImpl(Inline)]
+        static void setbit(ulong monikerid, int row, int col, bit state, ref uint dst)    
+        {
+            const ushort segwidth = 32;
+            var moniker = GridMoniker.Define(monikerid);
+
+            var bitpos = moniker.ColCount*row + col;
+            var index = bitpos / segwidth;
+            var offset = bitpos % segwidth;
+            ref var segment = ref seek(ref dst, index);
+            
+            BitMask.set(ref segment, (byte)offset, state); 
+        }
+
+        [MethodImpl(Inline)]
+        static void setbit(ulong monikerid, int row, int col, bit state, ref ulong dst)    
+        {
+            const ushort segwidth = 64;
+            var moniker = GridMoniker.Define(monikerid);
+
+            var bitpos = moniker.ColCount*row + col;
             var index = bitpos / segwidth;
             var offset = bitpos % segwidth;
             ref var segment = ref seek(ref dst, index);

@@ -1,4 +1,11 @@
-// 2019-11-08 02:45:46:988
+// 2019-11-09 03:33:41:011
+int popbs(ulong src)
+{
+    IL_0000: ldarg.0
+    IL_0001: call System.Int32 Z0.Bits::popbs(System.UInt64)
+    IL_0006: ret
+
+}
 ref sbyte bitmap_d8i_to_8i(in sbyte src, byte srcOffset, byte len, byte dstOffset, ref sbyte dst)
 {
     IL_0000: ldarg.0

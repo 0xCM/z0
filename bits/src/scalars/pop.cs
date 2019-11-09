@@ -15,6 +15,24 @@ namespace Z0
     
     partial class Bits
     {                
+        [MethodImpl(Inline)]
+        public static unsafe int popbs(ulong src)
+        {
+            Span<byte> bytes = new Span<byte>(&src,8);
+            ref readonly var data = ref head(bytes);
+            var count = 0;
+            var index = 0;
+            count += BitStore.PopCount(skip(in data, index++));
+            count += BitStore.PopCount(skip(in data, index++));
+            count += BitStore.PopCount(skip(in data, index++));
+            count += BitStore.PopCount(skip(in data, index++));
+            count += BitStore.PopCount(skip(in data, index++));
+            count += BitStore.PopCount(skip(in data, index++));
+            count += BitStore.PopCount(skip(in data, index++));
+            count += BitStore.PopCount(skip(in data, index++));
+            return count;
+        }
+
         /// <summary>
         /// Counts the enabled bits in the source
         /// </summary>

@@ -22,6 +22,15 @@ namespace Z0
 
         }
 
+        public Span<byte> GetBytes(in int src)
+            => src.AsBytes();
+
+        public Span<byte> GetBytes(in ulong src)
+            => src.AsBytes();
+         
+        public Span<byte> GetBytes(in double src)
+            => src.AsBytes();
+
         public N3 nat3()
             => N3.Rep;
 

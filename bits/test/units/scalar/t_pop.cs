@@ -9,12 +9,24 @@ namespace Z0.Test
     using System.Reflection;
     
     using static zfunc;
-    
+
     public class t_pop : ScalarBitTest<t_pop>
     {
+        
         protected override int CycleCount => Pow2.T10;
         protected override int SampleSize => Pow2.T10;
         
+
+        public void popbs_check()
+        {
+            for(var i=0; i< SampleSize; i++)
+            {
+                var src = Random.Next<ulong>();
+                var pc1 = Bits.popbs(src);
+                var pc2 = Bits.pop(src);
+                Claim.eq(pc1,pc2);
+            }
+        }
         public void pop1()
         {
             Span<byte> bits = stackalloc byte[16];
@@ -86,7 +98,8 @@ namespace Z0.Test
 
         public void pop_bench()
         {
-            pop_bench_1x64();
+            pop_bench_1x64_instruction();
+            pop_bench_1x64_lookup();
             pop_bench_3x256();
         }
 
@@ -107,22 +120,38 @@ namespace Z0.Test
             Benchmark($"pop3x256", counter,(int)total);
         }
 
-        void pop_bench_1x64(SystemCounter counter = default)
+        void pop_bench_1x64_instruction(SystemCounter counter = default)
         {
             
-            var total = 0ul;
-            for(var cycle = 0; cycle < CycleCount; cycle++)
+            var total = 0u;
+            Span<ulong> samples = stackalloc ulong[SampleSize];
+            ref readonly var src = ref head(samples);
+            for(var cycle = 0; cycle < OpCount; cycle++)
             {
-                var src = Random.Span<ulong>(12);                
-                ref var s0 = ref head(src);
-
+                Random.Fill(SampleSize, ref head(samples));
                 counter.Start();
-                for(var i=0; i<SampleSize; i++)
-                    for(var j=0; j<12; j++)
-                        total += Bits.pop(skip(in s0, j));
-                counter.Stop();
+                for(var i=0; i< SampleSize; i++)
+                    total += Bits.pop(skip(in head(samples), i));
+                counter .Stop();
             }
-            Benchmark($"pop1x64", counter,(int)total);
+            Benchmark($"pop1x64_instruction", counter,(int)total);
+        }
+
+        void pop_bench_1x64_lookup(SystemCounter counter = default)
+        {
+            
+            var total = 0;
+            Span<ulong> samples = stackalloc ulong[SampleSize];
+            ref readonly var src = ref head(samples);
+            for(var cycle = 0; cycle < OpCount; cycle++)
+            {
+                Random.Fill(SampleSize, ref head(samples));
+                counter.Start();
+                for(var i=0; i< SampleSize; i++)
+                    total += Bits.popbs(skip(in head(samples), i));
+                counter .Stop();
+            }
+            Benchmark($"pop1x64_lookup", counter,(int)total);
         }
 
 

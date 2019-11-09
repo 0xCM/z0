@@ -37,16 +37,48 @@ namespace Z0
         }           
 
         [MethodImpl(Inline)]
-        public static bit readbit<T>(in GridMoniker moniker, in T src, int bitpos)
+        public static bit readbit<T>(in T src, int bitpos)
             where T : unmanaged   
         {
             var segwidth = bitsize<T>();
             var index = bitpos / segwidth;
             var offset = bitpos % segwidth;
-            ref readonly var seg = ref skip(in src, index);
-            
+            ref readonly var seg = ref skip(in src, index);            
             return gmath.nonzero(gmath.and(seg, gmath.sll(gmath.one<T>(), offset)));            
         }
+
+
+        /// <summary>
+        /// Reads a bit from a grid with N columns
+        /// </summary>
+        [MethodImpl(Inline)]
+        public static bit readbit<N,T>(N n, in T src, int row, int col)
+            where T : unmanaged
+            where N : unmanaged, ITypeNat
+        {
+            var segwidth = bitsize<T>();
+            var bitpos = natval<N>()*row + col;
+            var index = bitpos / segwidth;
+            var offset = bitpos % segwidth;
+            ref readonly var seg = ref skip(in src, index);            
+            return gmath.nonzero(gmath.and(seg, gmath.sll(gmath.one<T>(), offset)));            
+        }
+
+        /// <summary>
+        /// Reads a bit from a grid with N columns
+        /// </summary>
+        [MethodImpl(Inline)]
+        public static bit readbit<T>(int N, in T src, int row, int col)
+            where T : unmanaged
+        {
+            var segwidth = bitsize<T>();
+            var bitpos = N*row + col;
+            var index = bitpos / segwidth;
+            var offset = bitpos % segwidth;
+            ref readonly var seg = ref skip(in src, index);            
+            return gmath.nonzero(gmath.and(seg, gmath.sll(gmath.one<T>(), offset)));            
+        }
+
 
         [MethodImpl(Inline)]
         static bit readbit(in GridMoniker moniker, in byte src, int row, int col)    

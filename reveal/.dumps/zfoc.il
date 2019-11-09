@@ -1,8 +1,32 @@
-// 2019-11-08 02:45:46:632
+// 2019-11-09 03:33:40:651
+void datablock_store(in byte src, uint count, ref Block128 dst)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: ldarg.2
+    IL_0003: call System.Void Z0.DataBlocks::store(System.Byte&,System.UInt32,Z0.Block128&)
+    IL_0008: ret
+
+}
+void datablock_bytes(ref Block128 src)
+{
+    IL_0000: ldarg.0
+    IL_0001: call System.Span`1<System.Byte> Z0.DataBlocks::bytes(Z0.Block128&)
+    IL_0006: pop
+    IL_0007: ret
+
+}
 ReadOnlySpan<byte> bitseq(byte value)
 {
     IL_0000: ldarg.0
     IL_0001: call System.ReadOnlySpan`1<System.Byte> Z0.BitStore::select(System.Byte)
+    IL_0006: ret
+
+}
+Span<byte> bitseq2(ulong value)
+{
+    IL_0000: ldarg.0
+    IL_0001: call System.Span`1<System.Byte> Z0.BitStore::bitseq2<System.UInt64>(System.UInt64)
     IL_0006: ret
 
 }

@@ -1,4 +1,25 @@
-// 2019-11-08 02:45:45:664
+// 2019-11-09 03:33:39:652
+Span<byte> GetBytes(in int src)
+{
+    IL_0000: ldarg.1
+    IL_0001: call System.Span`1<System.Byte> Z0.xfunc::AsBytes(System.Int32&)
+    IL_0006: ret
+
+}
+Span<byte> GetBytes(in ulong src)
+{
+    IL_0000: ldarg.1
+    IL_0001: call System.Span`1<System.Byte> Z0.xfunc::AsBytes(System.UInt64&)
+    IL_0006: ret
+
+}
+Span<byte> GetBytes(in double src)
+{
+    IL_0000: ldarg.1
+    IL_0001: call System.Span`1<System.Byte> Z0.xfunc::AsBytes(System.Double&)
+    IL_0006: ret
+
+}
 N3 nat3()
 {
     IL_0000: call Z0.N3 Z0.N3::get_Rep()

@@ -42,7 +42,8 @@ namespace Z0
         /// The number of bits apprehended by the matrix
         /// </summary>
         public static int TotalBitCount => NatMath.mul<M,N>();
-                        
+
+        GridMoniker moniker;                
         
         static readonly BitGridSpec<T> GridSpec = (Unsafe.SizeOf<T>()*8, RowBitCount, ColBitCount);
         
@@ -106,12 +107,14 @@ namespace Z0
         BitMatrix(T[] src)
         {
             this.data = src;
+            this.moniker = BitGrid.moniker<M,N,T>();
         }
 
         [MethodImpl(Inline)]
         BitMatrix(Span<T> src)
         {
             this.data = src;
+            this.moniker = BitGrid.moniker<M,N,T>();
         }
 
         /// <summary>

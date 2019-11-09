@@ -70,9 +70,13 @@ namespace Z0.Test
             var bv = Random.BitVector<N13,byte>();
             ClaimEqual(bv,bv.ToBitString());
             
+            var segcount = BitVector<N13,byte>.SegCount;
+            var capacity = BitVector<N13,byte>.TotalCapacity;
+            var unused = BitVector<N13,byte>.UnusedCapacity;
+            
             Claim.eq(dim, bv.Length);
-            Claim.eq(bitsize<byte>() * bv.SegCount, bv.Capacity);
-            Claim.eq(bv.Capacity - dim, bv.Unused);
+            Claim.eq(bitsize<byte>() * segcount, capacity);
+            Claim.eq(capacity - dim, unused);
             bv.Fill(Bit.On);
             Claim.eq(dim, bv.Pop());                    
         }
@@ -199,24 +203,29 @@ namespace Z0.Test
             where N : unmanaged, ITypeNat
             where T : unmanaged
         {
-            var dim = default(N);
-            var segcount = BitSize.Segments<T>(dim.value);
+            int n = natval<N>();
+            var rep = default(N);
+            var segcount = BitSize.Segments<T>(n);
+            Claim.eq(BitVector<N,T>.SegCount, segcount);
+            var totalcap = BitVector<N,T>.TotalCapacity;
+            var unusedcap = BitVector<N,T>.UnusedCapacity;
+            var segcap = bitsize<T>();
+            Claim.eq(BitVector<N,T>.SegWidth, segcap);
+
+
             var src = Random.Span<T>(SampleSize);
             for(var i=0; i<SampleSize; i+= segcount)
             {
                 var bvSrc = src.Slice(i,segcount);
-                var bv = bvSrc.ToBitVector(dim);
+                var bv = bvSrc.ToBitVector(rep);
                 ClaimEqual(bv,bv.ToBitString());
-                Claim.eq(dim.value, bv.Length);
-                Claim.eq(bitsize<T>() * bv.SegCount, bv.Capacity);
-                Claim.eq(bv.Capacity - dim.value, bv.Unused);
+                Claim.eq(n, bv.Length);
+                Claim.eq(segcap * segcount, totalcap);
+                Claim.eq(totalcap - n, unusedcap);
 
                 var x = src[i];
-                for(byte j = 0; j < (int)dim.value; j++)
+                for(byte j = 0; j < n; j++)
                     Claim.eq(gbits.test(x,j), bv[j]);     
-
-                // bv.Fill(Bit.On);
-                // Claim.eq(dim.value, bv.Pop());                    
 
             }
         }

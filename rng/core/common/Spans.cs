@@ -28,7 +28,7 @@ namespace Z0
             where T : unmanaged
         {
             Span<T> dst = new T[length];
-            random.StreamTo(domain.Configure(), length,ref head(dst), filter);
+            random.Fill(domain.Configure(), length,ref head(dst), filter);
             return dst;
         }
 

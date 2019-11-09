@@ -141,7 +141,7 @@ namespace Z0
         /// <param name="dst">A reference to the target location</param>
         /// <param name="filter">If specified, values that do not satisfy the predicate are excluded from the stream</param>
         /// <typeparam name="T">The element type</typeparam>
-        public static void StreamTo<T>(this IPolyrand random, Interval<T> domain, int count, ref T dst, Func<T,bool> filter = null)
+        public static void Fill<T>(this IPolyrand random, Interval<T> domain, int count, ref T dst, Func<T,bool> filter = null)
             where T : unmanaged
         {
             var it = random.Stream<T>(domain,filter).Take(count).GetEnumerator();
@@ -157,7 +157,7 @@ namespace Z0
         /// <param name="count">The number of values to send to the target</param>
         /// <param name="dst">A reference to the target location</param>
         /// <typeparam name="T">The element type</typeparam>
-        public static void StreamTo<T>(this IPolyrand random, int count, ref T dst)
+        public static void Fill<T>(this IPolyrand random, int count, ref T dst)
             where T : unmanaged
         {
             var it = random.Stream<T>().Take(count).GetEnumerator();
@@ -221,28 +221,29 @@ namespace Z0
             var tryMax = 10;
             while(true)            
             {
-                if(typeof(T) == typeof(sbyte))
-                    next = generic<T>(src.Next<sbyte>(domain.As<sbyte>()));                    
-                else if(typeof(T) == typeof(byte))
-                    next = generic<T>(src.Next<byte>(domain.As<byte>()));                    
-                else if(typeof(T) == typeof(short))
-                    next = generic<T>(src.Next<short>(domain.As<short>()));                    
-                else if(typeof(T) == typeof(ushort))
-                    next = generic<T>(src.Next<ushort>(domain.As<ushort>()));                    
-                else if(typeof(T) == typeof(int))
-                    next = generic<T>(src.Next<int>(domain.As<int>()));                    
-                else if(typeof(T) == typeof(uint))
-                    next = generic<T>(src.Next<uint>(domain.As<uint>()));                    
-                else if(typeof(T) == typeof(long))
-                    next = generic<T>(src.Next<long>(domain.As<long>()));                    
-                else if(typeof(T) == typeof(ulong))
-                    next = generic<T>(src.Next<ulong>(domain.As<ulong>()));                    
-                else if(typeof(T) == typeof(float))
-                    next = generic<T>(src.Next<float>(domain.As<float>()));                    
-                else if(typeof(T) == typeof(double))
-                    next = generic<T>(src.Next<double>(domain.As<double>()));                    
-                else 
-                    throw unsupported<T>();
+                next = src.Next<T>(domain);
+                // if(typeof(T) == typeof(sbyte))
+                //     next = generic<T>(src.Next<sbyte>(domain.As<sbyte>()));                    
+                // else if(typeof(T) == typeof(byte))
+                //     next = generic<T>(src.Next<byte>(domain.As<byte>()));                    
+                // else if(typeof(T) == typeof(short))
+                //     next = generic<T>(src.Next<short>(domain.As<short>()));                    
+                // else if(typeof(T) == typeof(ushort))
+                //     next = generic<T>(src.Next<ushort>(domain.As<ushort>()));                    
+                // else if(typeof(T) == typeof(int))
+                //     next = generic<T>(src.Next<int>(domain.As<int>()));                    
+                // else if(typeof(T) == typeof(uint))
+                //     next = generic<T>(src.Next<uint>(domain.As<uint>()));                    
+                // else if(typeof(T) == typeof(long))
+                //     next = generic<T>(src.Next<long>(domain.As<long>()));                    
+                // else if(typeof(T) == typeof(ulong))
+                //     next = generic<T>(src.Next<ulong>(domain.As<ulong>()));                    
+                // else if(typeof(T) == typeof(float))
+                //     next = generic<T>(src.Next<float>(domain.As<float>()));                    
+                // else if(typeof(T) == typeof(double))
+                //     next = generic<T>(src.Next<double>(domain.As<double>()));                    
+                // else 
+                //     throw unsupported<T>();
 
                 if(filter(next))
                 {

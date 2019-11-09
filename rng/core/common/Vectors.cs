@@ -25,9 +25,9 @@ namespace Z0
         {
             var dst = Z0.Vector.alloc<T>(len);
             if(domain != null)
-                random.StreamTo(domain.Value, len, ref dst[0]);
+                random.Fill(domain.Value, len, ref dst[0]);
             else
-                random.StreamTo(len, ref dst[0]);            
+                random.Fill(len, ref dst[0]);            
             return dst;
         }
 
@@ -123,7 +123,7 @@ namespace Z0
         public static void Fill<N,T>(this IPolyrand random, Interval<T> domain, ref Vector<N,T> vector, N n = default)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => random.StreamTo<T>(domain, nati<N>(), ref vector.Data[0]);
+                => random.Fill<T>(domain, nati<N>(), ref vector.Data[0]);
 
         /// <summary>
         /// Populates a vector of natural length with random values from the source
@@ -137,7 +137,7 @@ namespace Z0
         public static void Fill<N,T>(this IPolyrand random, ref Vector<N,T> vector, N n = default)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => random.StreamTo<T>(nati<N>(), ref vector.Data[0]);
+                => random.Fill<T>(nati<N>(), ref vector.Data[0]);
 
     }
 }

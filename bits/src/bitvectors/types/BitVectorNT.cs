@@ -22,42 +22,44 @@ namespace Z0
         where T : unmanaged
     {        
         Span<T> data;
+
+
+        /// <summary>
+        /// The maximum number of bits contained in an N[T] vector component
+        /// </summary>
+        public static int SegWidth => bitsize<T>();
+
+        /// <summary>
+        /// The number of bits represented by an N[T] vector
+        /// </summary>
+        public static int BitCount => natval<N>();
+
+        /// <summary>
+        /// The number of segments required to allocate an N[T] vector
+        /// </summary>
+        public static int SegCount 
+        {
+            [MethodImpl(Inline)]
+            get => BitGrid.segments(natval<N>(), natval<N1>(), (ushort)bitsize<T>());
+        }
         
         /// <summary>
-        /// The maximum number of bits contained in a vector component
+        /// The maximum number of bits that can be represented by an N[T] vector
         /// </summary>
-        /// <typeparam name="T">The vector component type</typeparam>
-        public static readonly BitSize SegmentCapacity = bitsize<T>();
-
-        public static readonly BitSize BitCount = new N().value;        
+        public static int TotalCapacity => SegCount * SegWidth;
 
         /// <summary>
-        /// The minimum number of cells of type T required to store N bits
+        /// Tne number of bits allocated but which are not in use, i.e. the delta between the capacity and length
         /// </summary>
-        public static int MinCellCount = BitCount/SegmentCapacity + (BitCount % SegmentCapacity == 0 ? + 0 : + 1);
+        public static int UnusedCapacity => TotalCapacity - BitCount;
 
-        public static readonly BitSize TotalCapacity = MinCellCount * SegmentCapacity;
-
-        public static readonly BitSize UnusedBits = TotalCapacity - BitCount;
-
-        /// <summary>
-        /// The number of bits used in the last cell
-        /// </summary>
-        static readonly BitSize LastUsedBits = SegmentCapacity - UnusedBits;
-
-        static readonly BitPos MaxBitIndex = BitCount - 1;
-    
-        static readonly BitCellIndex<T>[] BitMap = BitSize.BitMap<T>(BitCount);
-
-        //static readonly GridMap BitMap2 = BitGridInfo<N,N,T>.Map
-
-        [MethodImpl(Inline)]
+        [MethodImpl(NotInline)]
         public static BitVector<N,T> Alloc(T? fill = null)
-        {
-            Span<T> cells = new T[MinCellCount];
+        {                        
+            Span<T> cells = new T[SegCount];
             if(fill.HasValue)
                 cells.Fill(fill.Value);
-            return new BitVector<N,T>(cells);
+            return new BitVector<N,T>(cells, true);
         }
 
         [MethodImpl(Inline)]
@@ -151,9 +153,8 @@ namespace Z0
 
         [MethodImpl(Inline)]
         BitVector(Span<T> src)
-            : this()
         {
-            require(src.Length * SegmentCapacity >= BitCount);
+            require(src.Length * SegWidth >= BitCount);
             this.data = src;
         }
 
@@ -164,9 +165,9 @@ namespace Z0
 
         }
 
+
         [MethodImpl(Inline)]
         BitVector(Span<T> src, bool skipChecks)
-            : this()
         {
             this.data = src;
         }
@@ -182,23 +183,17 @@ namespace Z0
         /// </summary>
         /// <param name="pos">The bit position</param>
         [MethodImpl(Inline)]
-        public bit Get(BitPos pos)
-        {
-            ref readonly var cell = ref BitMap[CheckIndex(pos)];
-            return gbits.test(Data[cell.Segment], cell.Offset);
-        }
+        public bit GetBit(int bitpos)
+            => BitGrid.readbit(in Head, bitpos);
             
         /// <summary>
         /// Sets a bit value
         /// </summary>
         /// <param name="pos">The absolute bit position</param>
         /// <param name="value">The value the bit will receive</param>
-        [MethodImpl(Inline)]
-        public void Set(BitPos pos, bit value)
-        {
-            ref readonly var cell = ref BitMap[CheckIndex(pos)];
-            gbits.set(ref Data[cell.Segment], (byte)cell.Offset, value);
-        }
+        [MethodImpl(Inline)]            
+        public void SetBit(int bitpos, bit state)
+            => BitGrid.setbit(bitpos, state, ref Head);
 
         /// <summary>
         /// A bit-level accessor/manipulator
@@ -206,10 +201,10 @@ namespace Z0
         public bit this[BitPos index]
         {
             [MethodImpl(Inline)]
-            get => Get(index);
+            get => GetBit(index);
             
             [MethodImpl(Inline)]
-            set => Set(index, value);
+            set => SetBit(index, value);
         }
 
         /// <summary>
@@ -233,12 +228,6 @@ namespace Z0
             get => data;
         }
 
-        public Span<byte> Bytes
-        {
-            [MethodImpl(Inline)]
-            get => data.AsBytes();
-        }
-
         /// <summary>
         /// The number of bits represented by the vector
         /// </summary>
@@ -249,82 +238,13 @@ namespace Z0
         }
 
         /// <summary>
-        /// The maximum number of bits that can be represented by the vector
-        /// </summary>
-        public readonly BitSize Capacity
-        {
-            [MethodImpl(Inline)]
-            get => TotalCapacity;
-        }
-
-        /// <summary>
-        /// Tne number of bits allocated but which are not in use, i.e. the delta
-        /// between the capacity and length
-        /// </summary>
-        public readonly BitSize Unused
-        {
-            [MethodImpl(Inline)]
-            get => UnusedBits;
-        }
-
-        /// <summary>
-        /// The number of allocated segments
-        /// </summary>
-        public int SegCount
-        {
-            [MethodImpl(Inline)]
-            get => Data.Length;
-        }
-
-        /// <summary>
-        /// Toggles an index-identified bit
-        /// </summary>
-        /// <param name="pos">The position of the bit to enable</param>
-        [MethodImpl(Inline)]
-        public void Toggle(BitPos index)
-        {         
-            ref readonly var pos = ref BitMap[CheckIndex(index)];
-            BitMaskG.toggle(ref Data[pos.Segment],  (byte)pos.Offset);
-        }
-
-        /// <summary>
-        /// Enables an index-identified bit
-        /// </summary>
-        /// <param name="pos">The position of the bit to enable</param>
-        [MethodImpl(Inline)]
-        public void Enable(BitPos index)
-        {
-            ref readonly var pos = ref BitMap[CheckIndex(index)];
-            gbits.enable(ref Data[pos.Segment],  pos.Offset);
-        }
-
-        /// <summary>
-        /// Disables an identified bit
-        /// </summary>
-        /// <param name="pos">The position of the bit to disable</param>
-        [MethodImpl(Inline)]
-        public void Disable(BitPos index)
-        {
-            ref readonly var pos = ref BitMap[CheckIndex(index)];
-            gbits.disable(ref Data[pos.Segment], (byte)pos.Offset);
-        }
-
-        /// <summary>
-        /// Tests the status of an identified bit
-        /// </summary>
-        /// <param name="index">The position of the bit to test</param>
-        [MethodImpl(Inline)]
-        public bool Test(BitPos index)
-            => Get(index);
-
-        /// <summary>
         /// Counts the vector's enabled bits
         /// </summary>
         [MethodImpl(Inline)]
         public int Pop()
         {
             var count = 0u;
-            for(var i=0; i < MinCellCount; i++)
+            for(var i=0; i < data.Length; i++)
                 count += gbits.pop(Data[i]);
             return (int)count;
         }
@@ -373,7 +293,7 @@ namespace Z0
         /// </summary>
         [MethodImpl(Inline)]
         public BitString ToBitString()
-            => BitString.FromScalars<T>(Data, Length); 
+            => BitString.FromScalars(Data, Length); 
 
         [MethodImpl(Inline)]
         public string Format(bool tlz = false, bool specifier = false, int? blockWidth = null)
@@ -383,19 +303,7 @@ namespace Z0
         public bool Equals(in BitVector<N,T> rhs)
             => ToBitString().Equals(rhs.ToBitString());
            
-        [MethodImpl(Inline)]
-        static int CheckIndex(BitPos index)
-            =>  index <= MaxBitIndex ? index  : Errors.ThrowOutOfRange<BitPos>(index, 0, MaxBitIndex);
-
-        /// <summary>
-        /// Counts the number of bits set up to and including the specified position
-        /// </summary>
-        /// <param name="src">The bit source</param>
-        /// <param name="pos">The position of the bit for which rank will be calculated</param>
-        [MethodImpl(Inline)]
-        public uint Rank(BitPos pos)
-            => throw new NotImplementedException();
-
+        
         public override bool Equals(object obj)
             => throw new NotImplementedException();
         

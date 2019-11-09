@@ -109,7 +109,7 @@ namespace Z0
         public static BitVector<N,T> BitVector<N,T>(this IPolyrand random, N len = default, T rep = default)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => BV.natural<N,T>(random.Stream<T>().ToSpan(Z0.BitVector<N,T>.MinCellCount));
+                => BV.natural<N,T>(random.Stream<T>().ToSpan(Z0.BitGrid.segments<N,N1,T>()));
 
         /// <summary>
         /// Produces a random generic bitvector of specified length

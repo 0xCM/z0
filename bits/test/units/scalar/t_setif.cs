@@ -25,25 +25,6 @@ namespace Z0.Test
 
         }
 
-        public void setif8u()
-        {
-            setif_check<byte>();
-        }
-
-        public void setif16u()
-        {
-            setif_check<ushort>();
-        }
-
-        public void setif32u()
-        {
-            setif_check<uint>();
-        }
-
-        public void setif64u()
-        {
-            setif_check<ulong>();
-        }
 
         public void maskdef64u()
         {
@@ -62,20 +43,6 @@ namespace Z0.Test
             Claim.yea(bs.Format(true) == string.Empty);
         }
 
-        void setif_check<T>()
-            where T : unmanaged
-        {
-    
-            var bitcount = bitsize<T>();
-            for(var sample = 0; sample < SampleSize; sample++)
-            {
-                var src = Random.Next<T>();
-                var dst = gmath.zero<T>();
-                for(var i=0; i< bitcount; i++)
-                gbits.setif(in src, i, ref dst, i);
-                Claim.eq(src,dst);
-            }
-        }
 
     }
 

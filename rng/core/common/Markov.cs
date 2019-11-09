@@ -131,7 +131,7 @@ namespace Z0
         static void MarkovVec(this IPolyrand random, Span<float> dst)
         {            
             var length = dst.Length;
-            random.StreamTo(closed(1.0f,length << 4), length, ref dst[0]);
+            random.Fill(closed(1.0f,length << 4), length, ref dst[0]);
             mathspan.fdiv(dst, dst.Avg()*length);
         }
 
@@ -139,7 +139,7 @@ namespace Z0
         static void MarkovVec(this IPolyrand random, Span<double> dst)
         {            
             var length = dst.Length;
-            random.StreamTo(closed(1.0, length << 4), length, ref dst[0]);
+            random.Fill(closed(1.0, length << 4), length, ref dst[0]);
             mathspan.fdiv(dst, dst.Avg()*length);
         }
 
@@ -147,7 +147,7 @@ namespace Z0
         static BlockVector<float> MarkovVec(this IPolyrand random, int length, float min, float max)
         {            
             var dst = Z0.Span256.AllocBlocks<float>(Z0.Span256.MinBlocks<float>(length));
-            random.StreamTo(closed(min,max), length, ref dst[0]);
+            random.Fill(closed(min,max), length, ref dst[0]);
             mathspan.fdiv(dst.Unblocked, dst.Avg() * length);
             return dst; 
         }
@@ -156,7 +156,7 @@ namespace Z0
         static BlockVector<double> MarkovVec(this IPolyrand random, int length, double min, double max)
         {                        
             var dst = Z0.Span256.AllocBlocks<double>(Z0.Span256.MinBlocks<double>(length));
-            random.StreamTo(closed(min,max), length, ref dst[0]);
+            random.Fill(closed(min,max), length, ref dst[0]);
             mathspan.fdiv(dst.Unblocked, dst.Avg() * length);
             return dst; 
         }

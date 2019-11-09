@@ -14,6 +14,9 @@ namespace Z0
 
     partial class bvoc
     {
+          public static int popbs(ulong src)
+            => Bits.popbs(src);
+            
           public static ref sbyte bitmap_d8i_to_8i(in sbyte src, byte srcOffset, byte len, byte dstOffset, ref sbyte dst)
             => ref Bits.bitmap(src,srcOffset,len,dstOffset,ref dst);
 
