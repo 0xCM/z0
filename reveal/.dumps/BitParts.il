@@ -1,4 +1,13 @@
-// 2019-11-09 03:33:41:939
+// 2019-11-09 14:57:10:644
+byte select(uint src, Part30x5:uint part)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call System.UInt32 Z0.Bits::gather(System.UInt32,System.UInt32)
+    IL_0007: conv.u1
+    IL_0008: ret
+
+}
 uint select(uint src, Part12x6:uint part)
 {
     IL_0000: ldarg.0
@@ -876,6 +885,31 @@ void part64x1(ulong src, Span<byte> dst)
     IL_0002: call System.UInt64& zfunc::head64(System.Span`1<System.Byte>)
     IL_0007: call System.Void Z0.BitParts::part64x1(System.UInt64,System.UInt64&)
     IL_000C: ret
+
+}
+void part64x1(ulong src, Span<bit> dst)
+{
+    IL_0000: ldarg.1
+    IL_0001: call Z0.bit& zfunc::head<Z0.bit>(System.Span`1<Z0.bit>)
+    IL_0006: stloc.0
+    IL_0007: ldc.i4.0
+    IL_0008: stloc.1
+    IL_0009: br.s IL_0022
+    IL_000B: ldloc.0
+    IL_000C: ldloc.1
+    IL_000D: call Z0.bit& zfunc::seek<Z0.bit>(Z0.bit&,System.Int32)
+    IL_0012: ldarg.0
+    IL_0013: ldloc.1
+    IL_0014: call Z0.bit Z0.Bits::test(System.UInt64,System.Int32)
+    IL_0019: stobj Z0.bit
+    IL_001E: ldloc.1
+    IL_001F: ldc.i4.1
+    IL_0020: add
+    IL_0021: stloc.1
+    IL_0022: ldloc.1
+    IL_0023: ldc.i4.s 64
+    IL_0025: blt.s IL_000B
+    IL_0027: ret
 
 }
 ulong project(ulong src, Part64x1:ulong part)
@@ -1857,14 +1891,5 @@ uint project(uint src, Part30x5:uint part)
     IL_0001: ldarg.1
     IL_0002: call System.UInt32 Z0.Bits::scatter(System.UInt32,System.UInt32)
     IL_0007: ret
-
-}
-byte select(uint src, Part30x5:uint part)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: call System.UInt32 Z0.Bits::gather(System.UInt32,System.UInt32)
-    IL_0007: conv.u1
-    IL_0008: ret
 
 }

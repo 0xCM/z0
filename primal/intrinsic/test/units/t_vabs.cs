@@ -25,7 +25,7 @@ namespace Z0.Test
         {
             for(var cycle = 0; cycle < cycles; cycle++)
             {
-                var x = Random.CpuVector256<long>();            
+                var x = Random.CpuVector<long>(n256);            
                 var actual = dinx.vabs(x);
                 var expect = x.Map(Math.Abs);
                 Claim.eq(expect, actual);
@@ -33,7 +33,7 @@ namespace Z0.Test
 
             for(var cycle = 0; cycle < cycles; cycle++)
             {
-                var x = Random.CpuVector128<long>();            
+                var x = Random.CpuVector<long>(n128);            
                 var actual = dinx.vabs(x);
                 var expect = x.Map(Math.Abs);
                 Claim.eq(expect, actual);

@@ -61,6 +61,32 @@ namespace Z0
                 throw unsupported<T>();
         }
 
+        [MethodImpl(Inline)]
+        public static Vector128<T> vnotimply<T>(N128 n, in T rX, in T rY)
+            where T : unmanaged
+        {                    
+            vload(in rX, out Vector128<T> vA);
+            vload(in rY, out Vector128<T> vB);
+            return vnotimply(vA,vB);
+        }
 
+        [MethodImpl(Inline)]
+        public static unsafe void vnotimply<T>(N128 n, in T rX, in T rY, ref T rDst)
+            where T : unmanaged
+                => vstore(vnotimply(n, in rX, in rY), ref rDst);
+
+        [MethodImpl(Inline)]
+        public static Vector256<T> vnotimply<T>(N256 n, in T rX, in T rY)
+            where T : unmanaged
+        {                    
+            vload(in rX, out Vector256<T> vA);
+            vload(in rY, out Vector256<T> vB);
+            return vnotimply(vA,vB);
+        }
+
+        [MethodImpl(Inline)]
+        public static unsafe void vnotimply<T>(N256 n, in T rX, in T rY, ref T rDst)
+            where T : unmanaged
+                => vstore(vnotimply(n, in rX, in rY), ref rDst);
     }
 }

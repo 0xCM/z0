@@ -13,7 +13,7 @@ namespace Z0
 
     using static zfunc;
 
-    public static partial class BitMatrixX
+    public static class BitMatrixX
     {   
         /// <summary>
         /// Loads a generic bitmatrix from size-conformant sequence of row bits

@@ -16,14 +16,13 @@ namespace Z0
     /// </summary>
     partial class BitMaskG
     {
-
         /// <summary>
         /// Determines whether a bit in a specified position is enabled
         /// </summary>
         /// <param name="src">The value to interrogate</param>
         /// <param name="pos">The position to check</param>
         [MethodImpl(Inline)]
-        public static bool testbit<T>(T src, int pos)
+        public static bit testbit<T>(T src, int pos)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte) 
@@ -41,7 +40,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static bool testi<T>(T src, int pos)
+        static bit testi<T>(T src, int pos)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
@@ -55,7 +54,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static bool testu<T>(T src, int pos)
+        static bit testu<T>(T src, int pos)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -69,7 +68,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static bool testf<T>(T src, int pos)
+        static bit testf<T>(T src, int pos)
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
@@ -79,10 +78,5 @@ namespace Z0
             else
                 throw unsupported<T>();
         }
-
-
-
-
     }
-
 }

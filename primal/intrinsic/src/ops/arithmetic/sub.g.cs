@@ -53,7 +53,8 @@ namespace Z0
                 return vsubi(x,y);
             else return gfpv.vadd(x,y);
        }
-            
+
+             
         [MethodImpl(Inline)]
         static Vector128<T> vsubi<T>(Vector128<T> x, Vector128<T> y)
             where T : unmanaged
@@ -111,7 +112,5 @@ namespace Z0
             else 
                 return generic<T>(dinx.vsub(uint64(x), uint64(y)));
         }    
-
-
     }
 }

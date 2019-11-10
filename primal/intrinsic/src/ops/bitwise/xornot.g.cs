@@ -81,6 +81,34 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
+        public static Vector128<T> vxornot<T>(N128 n, in T rX, in T rY)
+            where T : unmanaged
+        {                    
+            vload(in rX, out Vector128<T> vA);
+            vload(in rY, out Vector128<T> vB);
+            return vxornot(vA,vB);
+        }
+
+        [MethodImpl(Inline)]
+        public static unsafe void vxornot<T>(N128 n, in T rX, in T rY, ref T rDst)
+            where T : unmanaged
+                => vstore(vxornot(n, in rX, in rY), ref rDst);
+
+        [MethodImpl(Inline)]
+        public static Vector256<T> vxornot<T>(N256 n, in T rX, in T rY)
+            where T : unmanaged
+        {                    
+            vload(in rX, out Vector256<T> vA);
+            vload(in rY, out Vector256<T> vB);
+            return vxornot(vA,vB);
+        }
+
+        [MethodImpl(Inline)]
+        public static unsafe void vxornot<T>(N256 n, in T rX, in T rY, ref T rDst)
+            where T : unmanaged
+                => vstore(vxornot(n, in rX, in rY), ref rDst);
+ 
+        [MethodImpl(Inline)]
         static Vector128<T> vxornot_128f<T>(Vector128<T> x, Vector128<T> y)
             where T : unmanaged
         {

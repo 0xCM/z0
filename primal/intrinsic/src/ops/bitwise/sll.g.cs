@@ -34,36 +34,7 @@ namespace Z0
                 throw unsupported<T>();
         }
 
-        [MethodImpl(Inline)]
-        static Vector128<T> vsll_i<T>(Vector128<T> x, byte offset)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(sbyte))
-                return generic<T>(dinx.vsll(int8(x), offset));
-            else if(typeof(T) == typeof(short))
-                return generic<T>(dinx.vsll(int16(x), offset));
-            else if(typeof(T) == typeof(int))
-                return generic<T>(dinx.vsll(int32(x), offset));
-            else 
-                return generic<T>(dinx.vsll(int64(x), offset));            
-        }
-
-        [MethodImpl(Inline)]
-        static Vector128<T> vsll_u<T>(Vector128<T> x, byte offset)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(byte))
-                return generic<T>(dinx.vsll(uint8(x), offset));
-            else if(typeof(T) == typeof(ushort))
-                return generic<T>(dinx.vsll(uint16(x), offset));
-            else if(typeof(T) == typeof(uint)) 
-                return generic<T>(dinx.vsll(uint32(x), offset));
-            else 
-                return generic<T>(dinx.vsll(uint64(x), offset));
-        }
-
-
-        [MethodImpl(Inline)]
+       [MethodImpl(Inline)]
         public static Vector256<T> vsll<T>(Vector256<T> x, byte offset)
             where T : unmanaged
         {
@@ -81,6 +52,64 @@ namespace Z0
                 throw unsupported<T>();
         }
 
+        [MethodImpl(Inline)]
+        public static unsafe Vector128<T> vsll<T>(N128 n, in T pX, byte offset)
+            where T : unmanaged
+        {                    
+            vload(pX, out Vector128<T> vA);
+            return vsll(vA,offset);
+        }
+
+        [MethodImpl(Inline)]
+        public static unsafe void vsll<T>(N128 n, in T pX, byte offset, ref T pDst)
+            where T : unmanaged
+                => vstore(vsll(n, in pX, offset), ref pDst);
+
+
+        [MethodImpl(Inline)]
+        public static unsafe Vector256<T> vsll<T>(N256 n, in T pX, byte offset)
+            where T : unmanaged
+        {                    
+            vload(pX, out Vector256<T> vA);
+            return vsll(vA,offset);
+        }
+
+        [MethodImpl(Inline)]
+        public static unsafe void vsll<T>(N256 n, in T pX, byte offset, ref T pDst)
+            where T : unmanaged
+                => vstore(vsll(n,in pX, offset), ref pDst);
+ 
+        [MethodImpl(Inline)]
+        static Vector128<T> vsll_i<T>(Vector128<T> x, byte offset)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(sbyte))
+                return generic<T>(dinx.vsll(int8(x), offset));
+            else if(typeof(T) == typeof(short))
+                return generic<T>(dinx.vsll(int16(x), offset));
+            else if(typeof(T) == typeof(int))
+                return generic<T>(dinx.vsll(int32(x), offset));
+            else 
+                return generic<T>(dinx.vsll(int64(x), offset));            
+        }
+
+
+        [MethodImpl(Inline)]
+        static Vector128<T> vsll_u<T>(Vector128<T> x, byte offset)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(byte))
+                return generic<T>(dinx.vsll(uint8(x), offset));
+            else if(typeof(T) == typeof(ushort))
+                return generic<T>(dinx.vsll(uint16(x), offset));
+            else if(typeof(T) == typeof(uint)) 
+                return generic<T>(dinx.vsll(uint32(x), offset));
+            else 
+                return generic<T>(dinx.vsll(uint64(x), offset));
+        }
+
+
+ 
         [MethodImpl(Inline)]
         static Vector256<T> vsll_i<T>(Vector256<T> x, byte offset)
             where T : unmanaged

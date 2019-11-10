@@ -1,73 +1,67 @@
-// 2019-11-09 03:33:42:264
-bool test(short src, int pos)
+// 2019-11-09 14:57:10:925
+bit test(short src, int pos)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: call Z0.bit Z0.BitMask::test(System.Int16,System.Int32)
-    IL_0007: call System.Boolean Z0.bit::op_Implicit(Z0.bit)
-    IL_000C: ret
+    IL_0007: ret
 
 }
-bool test(ushort src, int pos)
+bit test(ushort src, int pos)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: call Z0.bit Z0.BitMask::test(System.UInt16,System.Int32)
-    IL_0007: call System.Boolean Z0.bit::op_Implicit(Z0.bit)
-    IL_000C: ret
+    IL_0007: ret
 
 }
-bool test(int src, int pos)
+bit test(int src, int pos)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: call Z0.bit Z0.BitMask::test(System.Int32,System.Int32)
-    IL_0007: call System.Boolean Z0.bit::op_Implicit(Z0.bit)
-    IL_000C: ret
+    IL_0007: ret
 
 }
-bool test(uint src, int pos)
+bit test(uint src, int pos)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: call Z0.bit Z0.BitMask::test(System.UInt32,System.Int32)
-    IL_0007: call System.Boolean Z0.bit::op_Implicit(Z0.bit)
-    IL_000C: ret
+    IL_0007: ret
 
 }
-bool test(long src, int pos)
+bit test(long src, int pos)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: call System.Boolean Z0.BitMask::test(System.Int64,System.Int32)
-    IL_0007: ret
+    IL_0007: call Z0.bit Z0.bit::op_Implicit(System.Boolean)
+    IL_000C: ret
 
 }
-bool test(ulong src, int pos)
+bit test(ulong src, int pos)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: call Z0.bit Z0.BitMask::test(System.UInt64,System.Int32)
-    IL_0007: call System.Boolean Z0.bit::op_Implicit(Z0.bit)
-    IL_000C: ret
+    IL_0007: ret
 
 }
-bool test(float src, int pos)
+bit test(float src, int pos)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: call Z0.bit Z0.BitMask::test(System.Single,System.Int32)
-    IL_0007: call System.Boolean Z0.bit::op_Implicit(Z0.bit)
-    IL_000C: ret
+    IL_0007: ret
 
 }
-bool test(double src, int pos)
+bit test(double src, int pos)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: call Z0.bit Z0.BitMask::test(System.Double,System.Int32)
-    IL_0007: call System.Boolean Z0.bit::op_Implicit(Z0.bit)
-    IL_000C: ret
+    IL_0007: ret
 
 }
 sbyte toggle(sbyte src, int pos)
@@ -3126,22 +3120,20 @@ void split(ulong src, out byte x0, out byte x1, out byte x2, out byte x3, out by
     IL_0039: ret
 
 }
-bool test(sbyte src, int pos)
+bit test(sbyte src, int pos)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: call Z0.bit Z0.BitMask::test(System.SByte,System.Int32)
-    IL_0007: call System.Boolean Z0.bit::op_Implicit(Z0.bit)
-    IL_000C: ret
+    IL_0007: ret
 
 }
-bool test(byte src, int pos)
+bit test(byte src, int pos)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: call Z0.bit Z0.BitMask::test(System.Byte,System.Int32)
-    IL_0007: call System.Boolean Z0.bit::op_Implicit(Z0.bit)
-    IL_000C: ret
+    IL_0007: ret
 
 }
 Vec128<sbyte> vpackss(in Vec128<short> lhs, in Vec128<short> rhs)
@@ -3607,17 +3599,15 @@ UInt128 and(in UInt128 lhs, in UInt128 rhs)
 {
     IL_0000: ldarg.0
     IL_0001: ldobj Z0.UInt128
-    IL_0006: call Z0.Vec128`1<System.UInt64> Z0.UInt128X::ToVector128(Z0.UInt128)
+    IL_0006: call Z0.Vec128`1<System.UInt64> Z0.IntX::ToVector128(Z0.UInt128)
     IL_000B: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Vec128`1<System.UInt64>::op_Implicit(Z0.Vec128`1<System.UInt64>)
     IL_0010: ldarg.1
     IL_0011: ldobj Z0.UInt128
-    IL_0016: call Z0.Vec128`1<System.UInt64> Z0.UInt128X::ToVector128(Z0.UInt128)
+    IL_0016: call Z0.Vec128`1<System.UInt64> Z0.IntX::ToVector128(Z0.UInt128)
     IL_001B: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Vec128`1<System.UInt64>::op_Implicit(Z0.Vec128`1<System.UInt64>)
     IL_0020: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> System.Runtime.Intrinsics.X86.Sse2::And(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
-    IL_0025: stloc.0
-    IL_0026: ldloca.s V_0
-    IL_0028: call Z0.UInt128 Z0.UInt128X::ToUInt128(System.Runtime.Intrinsics.Vector128`1<System.UInt64>&)
-    IL_002D: ret
+    IL_0025: call Z0.UInt128 Z0.IntX::ToUInt128(System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
+    IL_002A: ret
 
 }
 ref UInt128 and(in UInt128 lhs, in UInt128 rhs, out UInt128 dst)
@@ -3625,36 +3615,32 @@ ref UInt128 and(in UInt128 lhs, in UInt128 rhs, out UInt128 dst)
     IL_0000: ldarg.2
     IL_0001: ldarg.0
     IL_0002: ldobj Z0.UInt128
-    IL_0007: call Z0.Vec128`1<System.UInt64> Z0.UInt128X::ToVector128(Z0.UInt128)
+    IL_0007: call Z0.Vec128`1<System.UInt64> Z0.IntX::ToVector128(Z0.UInt128)
     IL_000C: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Vec128`1<System.UInt64>::op_Implicit(Z0.Vec128`1<System.UInt64>)
     IL_0011: ldarg.1
     IL_0012: ldobj Z0.UInt128
-    IL_0017: call Z0.Vec128`1<System.UInt64> Z0.UInt128X::ToVector128(Z0.UInt128)
+    IL_0017: call Z0.Vec128`1<System.UInt64> Z0.IntX::ToVector128(Z0.UInt128)
     IL_001C: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Vec128`1<System.UInt64>::op_Implicit(Z0.Vec128`1<System.UInt64>)
     IL_0021: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> System.Runtime.Intrinsics.X86.Sse2::And(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
-    IL_0026: stloc.0
-    IL_0027: ldloca.s V_0
-    IL_0029: call Z0.UInt128 Z0.UInt128X::ToUInt128(System.Runtime.Intrinsics.Vector128`1<System.UInt64>&)
-    IL_002E: stobj Z0.UInt128
-    IL_0033: ldarg.2
-    IL_0034: ret
+    IL_0026: call Z0.UInt128 Z0.IntX::ToUInt128(System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
+    IL_002B: stobj Z0.UInt128
+    IL_0030: ldarg.2
+    IL_0031: ret
 
 }
 UInt128 or(in UInt128 lhs, in UInt128 rhs)
 {
     IL_0000: ldarg.0
     IL_0001: ldobj Z0.UInt128
-    IL_0006: call Z0.Vec128`1<System.UInt64> Z0.UInt128X::ToVec128(Z0.UInt128)
+    IL_0006: call Z0.Vec128`1<System.UInt64> Z0.IntX::ToVector128(Z0.UInt128)
     IL_000B: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Vec128`1<System.UInt64>::op_Implicit(Z0.Vec128`1<System.UInt64>)
     IL_0010: ldarg.1
     IL_0011: ldobj Z0.UInt128
-    IL_0016: call Z0.Vec128`1<System.UInt64> Z0.UInt128X::ToVec128(Z0.UInt128)
+    IL_0016: call Z0.Vec128`1<System.UInt64> Z0.IntX::ToVector128(Z0.UInt128)
     IL_001B: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Vec128`1<System.UInt64>::op_Implicit(Z0.Vec128`1<System.UInt64>)
     IL_0020: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> System.Runtime.Intrinsics.X86.Sse2::Or(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
-    IL_0025: stloc.0
-    IL_0026: ldloca.s V_0
-    IL_0028: call Z0.UInt128 Z0.UInt128X::ToUInt128(System.Runtime.Intrinsics.Vector128`1<System.UInt64>&)
-    IL_002D: ret
+    IL_0025: call Z0.UInt128 Z0.IntX::ToUInt128(System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
+    IL_002A: ret
 
 }
 ref UInt128 or(in UInt128 lhs, in UInt128 rhs, out UInt128 dst)
@@ -3662,36 +3648,32 @@ ref UInt128 or(in UInt128 lhs, in UInt128 rhs, out UInt128 dst)
     IL_0000: ldarg.2
     IL_0001: ldarg.0
     IL_0002: ldobj Z0.UInt128
-    IL_0007: call Z0.Vec128`1<System.UInt64> Z0.UInt128X::ToVec128(Z0.UInt128)
+    IL_0007: call Z0.Vec128`1<System.UInt64> Z0.IntX::ToVector128(Z0.UInt128)
     IL_000C: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Vec128`1<System.UInt64>::op_Implicit(Z0.Vec128`1<System.UInt64>)
     IL_0011: ldarg.1
     IL_0012: ldobj Z0.UInt128
-    IL_0017: call Z0.Vec128`1<System.UInt64> Z0.UInt128X::ToVec128(Z0.UInt128)
+    IL_0017: call Z0.Vec128`1<System.UInt64> Z0.IntX::ToVector128(Z0.UInt128)
     IL_001C: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Vec128`1<System.UInt64>::op_Implicit(Z0.Vec128`1<System.UInt64>)
     IL_0021: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> System.Runtime.Intrinsics.X86.Sse2::Or(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
-    IL_0026: stloc.0
-    IL_0027: ldloca.s V_0
-    IL_0029: call Z0.UInt128 Z0.UInt128X::ToUInt128(System.Runtime.Intrinsics.Vector128`1<System.UInt64>&)
-    IL_002E: stobj Z0.UInt128
-    IL_0033: ldarg.2
-    IL_0034: ret
+    IL_0026: call Z0.UInt128 Z0.IntX::ToUInt128(System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
+    IL_002B: stobj Z0.UInt128
+    IL_0030: ldarg.2
+    IL_0031: ret
 
 }
 UInt128 xor(in UInt128 lhs, in UInt128 rhs)
 {
     IL_0000: ldarg.0
     IL_0001: ldobj Z0.UInt128
-    IL_0006: call Z0.Vec128`1<System.UInt64> Z0.UInt128X::ToVec128(Z0.UInt128)
+    IL_0006: call Z0.Vec128`1<System.UInt64> Z0.IntX::ToVector128(Z0.UInt128)
     IL_000B: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Vec128`1<System.UInt64>::op_Implicit(Z0.Vec128`1<System.UInt64>)
     IL_0010: ldarg.1
     IL_0011: ldobj Z0.UInt128
-    IL_0016: call Z0.Vec128`1<System.UInt64> Z0.UInt128X::ToVec128(Z0.UInt128)
+    IL_0016: call Z0.Vec128`1<System.UInt64> Z0.IntX::ToVector128(Z0.UInt128)
     IL_001B: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Vec128`1<System.UInt64>::op_Implicit(Z0.Vec128`1<System.UInt64>)
     IL_0020: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> System.Runtime.Intrinsics.X86.Sse2::Xor(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
-    IL_0025: stloc.0
-    IL_0026: ldloca.s V_0
-    IL_0028: call Z0.UInt128 Z0.UInt128X::ToUInt128(System.Runtime.Intrinsics.Vector128`1<System.UInt64>&)
-    IL_002D: ret
+    IL_0025: call Z0.UInt128 Z0.IntX::ToUInt128(System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
+    IL_002A: ret
 
 }
 ref UInt128 xor(in UInt128 lhs, in UInt128 rhs, out UInt128 dst)
@@ -3699,19 +3681,17 @@ ref UInt128 xor(in UInt128 lhs, in UInt128 rhs, out UInt128 dst)
     IL_0000: ldarg.2
     IL_0001: ldarg.0
     IL_0002: ldobj Z0.UInt128
-    IL_0007: call Z0.Vec128`1<System.UInt64> Z0.UInt128X::ToVec128(Z0.UInt128)
+    IL_0007: call Z0.Vec128`1<System.UInt64> Z0.IntX::ToVector128(Z0.UInt128)
     IL_000C: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Vec128`1<System.UInt64>::op_Implicit(Z0.Vec128`1<System.UInt64>)
     IL_0011: ldarg.1
     IL_0012: ldobj Z0.UInt128
-    IL_0017: call Z0.Vec128`1<System.UInt64> Z0.UInt128X::ToVec128(Z0.UInt128)
+    IL_0017: call Z0.Vec128`1<System.UInt64> Z0.IntX::ToVector128(Z0.UInt128)
     IL_001C: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.Vec128`1<System.UInt64>::op_Implicit(Z0.Vec128`1<System.UInt64>)
     IL_0021: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> System.Runtime.Intrinsics.X86.Sse2::Xor(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
-    IL_0026: stloc.0
-    IL_0027: ldloca.s V_0
-    IL_0029: call Z0.UInt128 Z0.UInt128X::ToUInt128(System.Runtime.Intrinsics.Vector128`1<System.UInt64>&)
-    IL_002E: stobj Z0.UInt128
-    IL_0033: ldarg.2
-    IL_0034: ret
+    IL_0026: call Z0.UInt128 Z0.IntX::ToUInt128(System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
+    IL_002B: stobj Z0.UInt128
+    IL_0030: ldarg.2
+    IL_0031: ret
 
 }
 UInt128 bslli(UInt128 src, byte bytes)
@@ -3720,10 +3700,8 @@ UInt128 bslli(UInt128 src, byte bytes)
     IL_0002: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.UInt128::op_Implicit(Z0.UInt128&)
     IL_0007: ldarg.1
     IL_0008: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> System.Runtime.Intrinsics.X86.Sse2::ShiftLeftLogical128BitLane(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Byte)
-    IL_000D: stloc.0
-    IL_000E: ldloca.s V_0
-    IL_0010: call Z0.UInt128 Z0.UInt128X::ToUInt128(System.Runtime.Intrinsics.Vector128`1<System.UInt64>&)
-    IL_0015: ret
+    IL_000D: call Z0.UInt128 Z0.IntX::ToUInt128(System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
+    IL_0012: ret
 
 }
 sbyte between(sbyte src, byte i0, byte i1)

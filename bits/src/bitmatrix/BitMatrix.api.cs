@@ -16,7 +16,7 @@ namespace Z0
     public static partial class BitMatrix
     {        
 
-         [MethodImpl(Inline)]
+        [MethodImpl(Inline)]
         public static BitGridLayout<T> layout<N,T>(N n = default)
             where N : unmanaged, ITypeNat
             where T : unmanaged

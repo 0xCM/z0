@@ -45,11 +45,12 @@ namespace Z0
         public RngKind RngKind 
             => RngKind.XOrShift128;
 
+
         // From Marsaglia's Xorshift RNGs
         // The stream produced should have a period of 2^128 - 1
         public uint Next()
         {
-            var t = Bits.xorsl(a,15);
+            var t = xorsl(a,15);
             a = b; 
             b = c;
             c = d; 
@@ -57,9 +58,29 @@ namespace Z0
             return d;
         }
 
+        /// <summary>
+        /// Computes the XOR of the source value and the result of left-shifting 
+        /// the source by a specified offset
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <param name="offset">The number of bits to shift the source value leftwards</param>
+        [MethodImpl(Inline)]
+        static uint xorsl(uint src, int offset)
+            => src^(src << offset);
+
+        /// <summary>
+        /// Computes the XOR of the source value and the result of right-shifting 
+        /// the source by a specified offset
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <param name="offset">The number of bits to shift the source value rightwards</param>
+        [MethodImpl(Inline)]
+        public static uint xorsr(uint src, int offset)
+            => src^(src >> offset);
+
         [MethodImpl(Inline)]
         static uint Grind(uint d, uint t)
-            => Bits.xorsr(d, 21) ^ Bits.xorsr(t, 4);
+            => xorsr(d, 21) ^ xorsr(t, 4);
 
     }
 }

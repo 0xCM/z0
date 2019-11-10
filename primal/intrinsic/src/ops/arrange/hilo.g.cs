@@ -95,7 +95,6 @@ namespace Z0
                 throw unsupported<T>();
         }
 
-
         [MethodImpl(Inline)]
         static Vec128<T> vhi_i<T>(Vector256<T> src)
             where T : unmanaged

@@ -51,7 +51,6 @@ namespace Z0
                 throw unsupported<T>();
         }
 
-
         [MethodImpl(Inline)]
         static Vector128<T> vlt_i<T>(Vector128<T> x, Vector128<T> y)
             where T : unmanaged
@@ -108,7 +107,5 @@ namespace Z0
             else 
                 return generic<T>(dinx.vlt(uint64(x), uint64(y)));
         }    
-
-
     }
 }

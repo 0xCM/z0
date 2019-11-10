@@ -9,6 +9,8 @@ namespace Z0
     using System.Runtime.InteropServices;
     using System.Runtime.Intrinsics;
     using System.Runtime.Intrinsics.X86;
+    using static System.Runtime.Intrinsics.X86.Sse2;
+    using static System.Runtime.Intrinsics.X86.Avx2;
 
     using static zfunc;
 
@@ -66,6 +68,18 @@ namespace Z0
         [MethodImpl(Inline)]
         public static explicit operator ulong(in UInt128 src)
             => src.lo;
+
+        [MethodImpl(Inline)]
+        public static UInt128 operator &(UInt128 a, UInt128 b)
+            => and(a,b);
+
+        [MethodImpl(Inline)]
+        public static UInt128 operator |(UInt128 a, UInt128 b)
+            => or(a,b);
+
+        [MethodImpl(Inline)]
+        public static UInt128 operator ^(UInt128 a, UInt128 b)
+            => xor(a,b);
 
         [MethodImpl(Inline)]
         public static UInt128 operator ~(UInt128 src)
@@ -151,6 +165,50 @@ namespace Z0
             return str;
         }
         
+ 
+        [MethodImpl(Inline)]
+        static UInt128 and(in UInt128 lhs, in UInt128 rhs)
+            => And(lhs, rhs);
+
+        [MethodImpl(Inline)]
+        static ref UInt128 and(in UInt128 lhs, in UInt128 rhs, out UInt128 dst)
+        {
+            dst = And(lhs, rhs);
+            return ref dst;            
+        }
+
+        [MethodImpl(Inline)]
+        static UInt128 or(in UInt128 lhs, in UInt128 rhs)
+            => Or(lhs, rhs);
+
+        [MethodImpl(Inline)]
+        static ref UInt128 or(in UInt128 lhs, in UInt128 rhs, out UInt128 dst)
+        {
+            dst = Or(lhs, rhs);
+            return ref dst;            
+        }
+
+        [MethodImpl(Inline)]
+        static UInt128 xor(in UInt128 lhs, in UInt128 rhs)
+            => Xor(lhs, rhs);
+
+        [MethodImpl(Inline)]
+        static ref UInt128 xor(in UInt128 lhs, in UInt128 rhs, out UInt128 dst)
+        {
+            dst = Xor(lhs, rhs);
+            return ref dst;            
+        }
+
+        /// <summary>
+        /// __m128i _mm_bslli_si128 (__m128i a, int imm8) PSLLDQ xmm, imm8    
+        /// Shifts the source value leftwards with byte-level resolution
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="bytes">The number of bytes to shift</param>
+        [MethodImpl(Inline)]
+        static UInt128 bslli(UInt128 src, byte bytes)        
+            => ShiftLeftLogical128BitLane(src, bytes);                            
+
     }    
 
 }

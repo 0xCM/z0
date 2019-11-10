@@ -16,6 +16,13 @@ namespace Z0
 
     partial class bvoc
     {
+
+        public static void part64x1_byte(ulong src, Span<byte> dst)
+            => BitParts.part64x1(src, dst);
+
+        public static void part64x1_bit(ulong src, Span<bit> dst)
+            => BitParts.part64x1(src, dst);
+
         public static uint pop3x256(Vector256<ulong> x, Vector256<ulong> y, Vector256<ulong> z)
             => Bits.pop(x,y,z);
 

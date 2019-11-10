@@ -12,97 +12,97 @@ namespace Z0
 
     public class t_vfcmp : IntrinsicTest<t_vfcmp>
     {                    
-        public void eq128_f64()
-            => cmp128f64_check(FpCmpMode.EQ_OQ);
+        public void eq_128xf64()
+            => cmp_128x64_check(FpCmpMode.EQ_OQ);
 
-        public void neq128_f64()
-            => cmp128f64_check(FpCmpMode.NEQ_OQ);
+        public void neq_128xf64()
+            => cmp_128x64_check(FpCmpMode.NEQ_OQ);
 
-        public void lt128_f64()
-            => cmp128f64_check(FpCmpMode.LT_OQ);
+        public void lt_128xf64()
+            => cmp_128x64_check(FpCmpMode.LT_OQ);
 
-        public void lteq128_f64()
-            => cmp128f64_check(FpCmpMode.LE_OQ);
+        public void lteq_128xf64()
+            => cmp_128x64_check(FpCmpMode.LE_OQ);
 
-        public void nlt128_f64()
-            => cmp128f64_check(FpCmpMode.LE_OQ);
+        public void nlt_128xf64()
+            => cmp_128x64_check(FpCmpMode.LE_OQ);
 
-        public void nlteq128_f64()
-            => cmp128f64_check(FpCmpMode.NLE_UQ);
+        public void nlteq_128xf64()
+            => cmp_128x64_check(FpCmpMode.NLE_UQ);
 
         public void gt128_f64()
-            => cmp128f64_check(FpCmpMode.GT_OQ);
+            => cmp_128x64_check(FpCmpMode.GT_OQ);
 
         public void gteq128_f64()
-            => cmp128f64_check(FpCmpMode.GE_OQ);
+            => cmp_128x64_check(FpCmpMode.GE_OQ);
 
         public void ngt128_f64()
-            => cmp128f64_check(FpCmpMode.NGT_UQ);
+            => cmp_128x64_check(FpCmpMode.NGT_UQ);
 
         public void ngteq128_f64()
-            => cmp128f64_check(FpCmpMode.NGE_UQ);
+            => cmp_128x64_check(FpCmpMode.NGE_UQ);
 
-        public void eq256_f64()
-            => cmp256f64_check(FpCmpMode.EQ_OQ);
+        public void eq_256xf64()
+            => cmp_256x64_check(FpCmpMode.EQ_OQ);
 
-        public void neq256_f64()
-            => cmp256f64_check(FpCmpMode.NEQ_OQ);
+        public void neq_256xf64()
+            => cmp_256x64_check(FpCmpMode.NEQ_OQ);
 
-        public void lt256_f64()
-            => cmp256f64_check(FpCmpMode.LT_OQ);
+        public void lt_256xf64()
+            => cmp_256x64_check(FpCmpMode.LT_OQ);
 
-        public void lteq256_f64()
-            => cmp256f64_check(FpCmpMode.LE_OQ);
+        public void lteq_256xf64()
+            => cmp_256x64_check(FpCmpMode.LE_OQ);
 
-        public void nlt256_f64()
-            => cmp256f64_check(FpCmpMode.LE_OQ);
+        public void nlt_256xf64()
+            => cmp_256x64_check(FpCmpMode.LE_OQ);
 
-        public void nlteq256f64()
-            => cmp256f64_check(FpCmpMode.NLE_UQ);
+        public void nlteq_256xf64()
+            => cmp_256x64_check(FpCmpMode.NLE_UQ);
 
-        public void gt256_f64()
-            => cmp256f64_check(FpCmpMode.GT_OQ);
+        public void gt_256xf64()
+            => cmp_256x64_check(FpCmpMode.GT_OQ);
 
-        public void gteq256_f64()
-            => cmp256f64_check(FpCmpMode.GE_OQ);
+        public void gteq_256xf64()
+            => cmp_256x64_check(FpCmpMode.GE_OQ);
 
-        public void ngt256f64()
-            => cmp256f64_check(FpCmpMode.NGT_UQ);
+        public void ngt_256xf64()
+            => cmp_256x64_check(FpCmpMode.NGT_UQ);
 
         public void ngteq256_f64()
-            => cmp256f64_check(FpCmpMode.NGE_UQ);
+            => cmp_256x64_check(FpCmpMode.NGE_UQ);
 
-        public void eq256_f32()
-            => cmp256f32_check(FpCmpMode.EQ_OQ);
+        public void eq_256xf32()
+            => cmp_256xf32_check(FpCmpMode.EQ_OQ);
 
-        public void neq256_f32()
-            => cmp256f32_check(FpCmpMode.NEQ_OQ);
+        public void neq_256xf32()
+            => cmp_256xf32_check(FpCmpMode.NEQ_OQ);
 
-        public void lt256_f32()
-            => cmp256f32_check(FpCmpMode.LT_OQ);
+        public void lt_256xf32()
+            => cmp_256xf32_check(FpCmpMode.LT_OQ);
 
-        public void lteq256_f32()
-            => cmp256f32_check(FpCmpMode.LE_OQ);
+        public void lteq_256xf32()
+            => cmp_256xf32_check(FpCmpMode.LE_OQ);
 
-        public void nlt256_f32()
-            => cmp256f32_check(FpCmpMode.LE_OQ);
+        public void nlt_256xf32()
+            => cmp_256xf32_check(FpCmpMode.LE_OQ);
 
-        public void nlteq256_f32()
-            => cmp256f32_check(FpCmpMode.NLE_UQ);
+        public void nlteq_256xf32()
+            => cmp_256xf32_check(FpCmpMode.NLE_UQ);
 
-        public void gt256_f32()
-            => cmp256f32_check(FpCmpMode.GT_OQ);
+        public void gt_256xf32()
+            => cmp_256xf32_check(FpCmpMode.GT_OQ);
 
-        public void gteq256_f32()
-            => cmp256f32_check(FpCmpMode.GE_OQ);
+        public void gteq_256xf32()
+            => cmp_256xf32_check(FpCmpMode.GE_OQ);
 
-        public void ngt256_f32()
-            => cmp256f32_check(FpCmpMode.NGT_UQ);
+        public void ngt_256xf32()
+            => cmp_256xf32_check(FpCmpMode.NGT_UQ);
 
-        public void ngteq256_f32()
-            => cmp256f32_check(FpCmpMode.NGE_UQ);
+        public void ngteq_256xf32()
+            => cmp_256xf32_check(FpCmpMode.NGE_UQ);
 
-        void cmp128f64_check(FpCmpMode mode)
+        void cmp_128x64_check(FpCmpMode mode)
         {
             for(var i = 0; i<SampleSize; i++)
             {
@@ -122,7 +122,7 @@ namespace Z0
 
         }
 
-        void cmp256f32_check(FpCmpMode mode)
+        void cmp_256xf32_check(FpCmpMode mode)
         {
             for(var i = 0; i<SampleSize; i++)
             {
@@ -141,7 +141,7 @@ namespace Z0
             }
         }
 
-        void cmp256f64_check(FpCmpMode mode)
+        void cmp_256x64_check(FpCmpMode mode)
         {
             for(var i = 0; i<SampleSize; i++)
             {

@@ -11,99 +11,180 @@ namespace Z0
     using static zfunc;
     using D = PrimalDelegates;
 
-    public class t_or : IntrinsicTest<t_or>
+    public class t_vor : IntrinsicTest<t_vor>
     {
 
-        public void scalar_or_8i()
-        {
-            VerifyOp(OpKind.Or, (x,y) => (sbyte)(x | y), D.or<sbyte>());
+        public void vor_128x8i()
+            => vor_check<sbyte>(n128);
 
-        }
+        public void vor_128x8u()
+            => vor_check<byte>(n128);            
 
-        public void scalar_or_8u()
+        public void vor_128x16i()
+            => vor_check<short>(n128);
+
+        public void vor_128x16u()
+            => vor_check<ushort>(n128);
+
+        public void vor_128x32i()
+            => vor_check<int>(n128);
+
+        public void vor_128x32u()
+            => vor_check<uint>(n128);            
+
+        public void vor_128x64i()
+            => vor_check<long>(n128);            
+
+        public void vor_128x64u()
+            => vor_check<ulong>(n128);            
+
+        public void vor_256x8i()
+            => vor_check<sbyte>(n256);
+
+        public void vor_256x8u()
+            => vor_check<byte>(n256);            
+
+        public void vor_256x16i()
+            => vor_check<short>(n256);
+
+        public void vor_256x16u()
+            => vor_check<ushort>(n256);
+
+        public void vor_256x32i()
+            => vor_check<int>(n256);
+
+        public void vor_256x32u()
+            => vor_check<uint>(n256);            
+
+        public void vor_256x64i()
+            => vor_check<long>(n256);            
+
+        public void vor_256x64u()
+            => vor_check<ulong>(n256);            
+
+        public void vor_blocks_128x8i()
+            => vor_blocks_check<sbyte>(n128);
+
+        public void vor_blocks_256x8i()
+            => vor_blocks_check<sbyte>(n256);
+
+        public void vor_blocks_128x8u()
+            => vor_blocks_check<byte>(n128);
+
+        public void vor_blocks_128x16i()
+            => vor_blocks_check<short>(n128);
+
+        public void vor_blocks_128x16u()
+            => vor_blocks_check<ushort>(n128);
+
+        public void vor_blocks_128x32i()
+            => vor_blocks_check<int>(n128);
+
+        public void vor_blocks_128x32u()
+            => vor_blocks_check<uint>(n128);
+
+        public void vor_blocks_128x64i()
+            => vor_blocks_check<long>(n128);
+
+        public void vor_blocks_128x64u()
+            => vor_blocks_check<ulong>(n128);
+
+        public void vor_blocks_256x8u()
+            => vor_blocks_check<byte>(n256);
+
+        public void vor_blocks_256x16i()
+            => vor_blocks_check<short>(n256);
+
+        public void vor_blocks_256x16u()
+            => vor_blocks_check<ushort>(n256);
+
+        public void vor_blocks_256x32i()
+            => vor_blocks_check<int>(n256);
+
+        public void vor_blocks_256x32u()
+            => vor_blocks_check<uint>(n256);
+
+        public void vor_blocks_256x64i()
+            => vor_blocks_check<long>(n256);
+
+        public void vor_blocks_256x64u()
+            => vor_blocks_check<ulong>(n256);
+
+        void vor_blocks_check<T>(N128 n)
+            where T : unmanaged
         {
-            VerifyOp(OpKind.Or, (x,y) => (byte)(x | y), D.or<byte>());
+            var blocks = SampleSize;
+            var stats = VBlockStats.Calc<N128,T>(blocks);
+            var step = stats.StepSize;
+            var cells = stats.CellCount;
+
+            var lhs = Random.BlockedSpan<T>(n, blocks);
+            var rhs = Random.BlockedSpan<T>(n, blocks);
+            var dst = BlockedSpan.AllocBlocks<T>(n, blocks);
             
+            vblock.or(n, blocks, step, in lhs.Head, in rhs.Head, ref dst.Head);
+            for(var i=0; i<cells; i++)
+                Claim.eq(gmath.or(lhs[i],rhs[i]), dst[i]);
+
         }
 
-        public void scalar_or_16i()
+
+        void vor_blocks_check<T>(N256 n)
+            where T : unmanaged
         {
-            VerifyOp(OpKind.Or, (x,y) => (short)(x | y), D.or<short>());
+            var blocks = SampleSize;
+            var stats = VBlockStats.Calc<N256,T>(blocks);
+            var step = stats.StepSize;
+            var cells = stats.CellCount;
+
+            var lhs = Random.BlockedSpan<T>(n, blocks);
+            var rhs = Random.BlockedSpan<T>(n, blocks);
+            var dst = BlockedSpan.AllocBlocks<T>(n, blocks);
             
+            vblock.or(n, blocks, step, in lhs.Head, in rhs.Head, ref dst.Head);
+            for(var i=0; i<cells; i++)
+                Claim.eq(gmath.or(lhs[i],rhs[i]), dst[i]);
         }
-
-        public void scalar_or_16u()
+     
+        void vor_check<T>(N128 n)
+            where T : unmanaged
         {
-            VerifyOp(OpKind.Or, (x,y) => (ushort)(x | y), D.or<ushort>());
-            
+            for(var block = 0; block < SampleSize; block++)
+            {
+                var srcX = Random.BlockedSpan<T>(n);
+                var srcY = Random.BlockedSpan<T>(n);
+                var vX = srcX.TakeVector();
+                var vY = srcY.TakeVector();
+                
+                var dstExpect = BlockedSpan.AllocBlock<T>(n);
+                for(var i=0; i< dstExpect.Length; i++)
+                    dstExpect[i] = gmath.or(srcX[i], srcY[i]);
+                
+                var expect = dstExpect.TakeVector();
+                var actual = ginx.vor(vX,vY);
+                Claim.eq(expect,actual);                
+            }
         }
 
-        public void scalar_or_32i()
-        {
-            VerifyOp(OpKind.Or, (x,y) => (x | y), D.or<int>());
-        }
+        void vor_check<T>(N256 n)
+            where T : unmanaged
+        {            
+            for(var block = 0; block < SampleSize; block++)
+            {
+                var srcX = Random.BlockedSpan<T>(n);
+                var srcY = Random.BlockedSpan<T>(n);
+                var vX = srcX.TakeVector();
+                var vY = srcY.TakeVector();
 
-        public void scalar_or_32u()
-        {
-            VerifyOp(OpKind.Or, (x,y) => (x | y), D.or<uint>());
-
-        }
-
-        public void scalar_or_64i()
-        {
-            VerifyOp(OpKind.Or, (x,y) => (x | y), D.or<long>());
-
-        }
-
-        public void scalar_or_64u()
-        {
-            VerifyOp(OpKind.Or, (x,y) => (x | y), D.or<ulong>());
-
-        }
-
-        public void scalar_xor_8i()
-        {
-            VerifyOp(OpKind.XOr, (x,y) => (sbyte)(x ^ y), D.xor<sbyte>());
-
-        }
-
-        public void scalar_xor_8u()
-        {
-            VerifyOp(OpKind.XOr, (x,y) => (byte)(x ^ y), D.xor<byte>());
-            
-        }
-
-        public void scalar_xor_16i()
-        {
-            VerifyOp(OpKind.XOr, (x,y) => (short)(x ^ y), D.xor<short>());
-        }
-
-        public void scalar_xor_16u()
-        {
-            VerifyOp(OpKind.XOr, (x,y) => (ushort)(x ^ y), D.xor<ushort>());            
-        }
-
-        public void scalar_xor_32i()
-        {
-            VerifyOp(OpKind.XOr, (x,y) => (x ^ y), D.xor<int>());
-        }
-
-        public void scalar_xor_32u()
-        {
-            VerifyOp(OpKind.XOr, (x,y) => (x ^ y), D.xor<uint>());
-
-        }
-
-        public void scalar_xor_64i()
-        {
-            VerifyOp(OpKind.XOr, (x,y) => (x ^ y), D.xor<long>());
-        }
-
-        public void scalar_xor_64u()
-        {
-            VerifyOp(OpKind.XOr, (x,y) => (x ^ y), D.xor<ulong>());              
-        }
-
+                var dstExpect = BlockedSpan.AllocBlock<T>(n);
+                for(var i=0; i< dstExpect.Length; i++)
+                    dstExpect[i] = gmath.or(srcX[i], srcY[i]);
+                
+                var expect = dstExpect.TakeVector();
+                var actual = ginx.vor(vX,vY);
+                Claim.eq(expect,actual);
+                
+            }
+        } 
     }
-
 }

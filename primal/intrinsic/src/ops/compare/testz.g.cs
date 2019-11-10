@@ -20,7 +20,7 @@ namespace Z0
         /// <param name="src">The bit source</param>
         /// <param name="mask">The mask</param>
         [MethodImpl(Inline)]
-        public static bool vtestz<T>(Vector128<T> src, Vector128<T> mask)
+        public static bit vtestz<T>(Vector128<T> src, Vector128<T> mask)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte) 
@@ -43,7 +43,7 @@ namespace Z0
         /// <param name="src">The bit source</param>
         /// <param name="mask">The mask</param>
         [MethodImpl(Inline)]
-        public static bool vtestz<T>(Vector256<T> src, Vector256<T> mask)
+        public static bit vtestz<T>(Vector256<T> src, Vector256<T> mask)
             where T : unmanaged
         {
              if(typeof(T) == typeof(byte) 
@@ -61,7 +61,36 @@ namespace Z0
        }
 
         [MethodImpl(Inline)]
-        static bool vtestz_u<T>(Vector128<T> src, Vector128<T> mask)
+        public static unsafe bit vtestz<T>(N128 n, in T rX, in T rY)
+            where T : unmanaged
+        {                    
+            vload(rX, out Vector128<T> vA);
+            vload(rY, out Vector128<T> vB);
+            return vtestz(vA,vB);
+        }
+
+        [MethodImpl(Inline)]
+        public static unsafe bit vtestz<T>(N128 n, in T rX)
+            where T : unmanaged
+            => vtestz(n, rX,rX);
+
+
+        [MethodImpl(Inline)]
+        public static unsafe bit vtestz<T>(N256 n, in T rX, in T rY)
+            where T : unmanaged
+        {                    
+            vload(rX, out Vector256<T> vA);
+            vload(rY, out Vector256<T> vB);
+            return vtestz(vA,vB);
+        }
+
+        [MethodImpl(Inline)]
+        public static unsafe bit vtestz<T>(N256 n, in T rX)
+            where T : unmanaged
+            => vtestz(n, rX,rX);
+
+        [MethodImpl(Inline)]
+        static bit vtestz_u<T>(Vector128<T> src, Vector128<T> mask)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -75,7 +104,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static bool vtestz_i<T>(Vector128<T> src, Vector128<T> mask)
+        static bit vtestz_i<T>(Vector128<T> src, Vector128<T> mask)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
@@ -89,7 +118,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static bool vtestz_f<T>(Vector128<T> src, Vector128<T> mask)
+        static bit vtestz_f<T>(Vector128<T> src, Vector128<T> mask)
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
@@ -101,7 +130,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static bool vtestz_u<T>(Vector256<T> src, Vector256<T> mask)
+        static bit vtestz_u<T>(Vector256<T> src, Vector256<T> mask)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -115,7 +144,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static bool vtestz_i<T>(Vector256<T> src, Vector256<T> mask)
+        static bit vtestz_i<T>(Vector256<T> src, Vector256<T> mask)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
@@ -129,7 +158,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static bool vtestz_f<T>(Vector256<T> src, Vector256<T> mask)
+        static bit vtestz_f<T>(Vector256<T> src, Vector256<T> mask)
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))

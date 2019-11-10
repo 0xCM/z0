@@ -415,7 +415,7 @@ namespace Z0
         /// </summary>
         /// <param name="pos">The bit position</param>
         [MethodImpl(Inline)]
-        public readonly bool Test(int pos)
+        public readonly bit Test(int pos)
             => BitMask.test(data, pos);
         
         /// <summary>

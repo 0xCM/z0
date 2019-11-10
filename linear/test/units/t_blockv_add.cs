@@ -122,8 +122,8 @@ namespace Z0
             var v4 = BlockVector.Alloc<N,T>();
             for(var i=0; i< CycleCount; i++)            
             {
-                var v1 = Random.BlockVec<N,T>();
-                var v2 = Random.BlockVec<N,T>();
+                var v1 = Random.BlockVector<N,T>();
+                var v2 = Random.BlockVector<N,T>();
                 var v3 = BlockVector.Load(mathspan.add(v1.Unsized,v2.Unsized), n);
                 Linear.add(ref v1, v2);
                 Claim.yea(v3 == v1);
@@ -140,8 +140,8 @@ namespace Z0
             var dst = BlockVector.Zero<N,T>();
             for(var i=0; i<opcount; i++)
             {
-                var v1 = Random.BlockVec<N,T>();
-                var v2 = Random.BlockVec<N,T>();
+                var v1 = Random.BlockVector<N,T>();
+                var v2 = Random.BlockVector<N,T>();
                 sw.Start();
                 Linear.add(ref v1, v2);
                 sw.Stop();

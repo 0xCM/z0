@@ -22,12 +22,12 @@ namespace Z0
             || typeof(T) == typeof(ushort) 
             || typeof(T) == typeof(uint) 
             || typeof(T) == typeof(ulong))
-                return vdecu(src);
+                return vdec_u(src);
             else if(typeof(T) == typeof(sbyte) 
             || typeof(T) == typeof(short) 
             || typeof(T) == typeof(int) 
             || typeof(T) == typeof(long))
-                return vdeci(src);
+                return vdec_i(src);
             else 
                 throw unsupported<T>();
         }
@@ -40,18 +40,19 @@ namespace Z0
             || typeof(T) == typeof(ushort) 
             || typeof(T) == typeof(uint) 
             || typeof(T) == typeof(ulong))
-                return vdecu(src);
+                return vdec_u(src);
             else if(typeof(T) == typeof(sbyte) 
             || typeof(T) == typeof(short) 
             || typeof(T) == typeof(int) 
             || typeof(T) == typeof(long))
-                return vdeci(src);
+                return vdec_i(src);
             else 
                 throw unsupported<T>();
         }
 
+                    
         [MethodImpl(Inline)]
-        static Vector128<T> vdeci<T>(Vector128<T> lhs)
+        static Vector128<T> vdec_i<T>(Vector128<T> lhs)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
@@ -65,7 +66,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static Vector128<T> vdecu<T>(Vector128<T> lhs)
+        static Vector128<T> vdec_u<T>(Vector128<T> lhs)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -79,7 +80,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static Vector256<T> vdeci<T>(Vector256<T> lhs)
+        static Vector256<T> vdec_i<T>(Vector256<T> lhs)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
@@ -93,7 +94,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static Vector256<T> vdecu<T>(Vector256<T> lhs)
+        static Vector256<T> vdec_u<T>(Vector256<T> lhs)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))

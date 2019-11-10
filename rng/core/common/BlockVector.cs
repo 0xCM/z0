@@ -20,10 +20,10 @@ namespace Z0
         /// <param name="random">The random source</param>
         /// <param name="domain">The domain of the random variable</param>
         /// <typeparam name="T">The vector component type</typeparam>
-        public static BlockVector<T> BlockVec<T>(this IPolyrand random, int len, Interval<T>? domain = null)
+        public static BlockVector<T> BlockVector<T>(this IPolyrand random, int len, Interval<T>? domain = null)
             where T : unmanaged
         {
-            var dst = BlockVector.Alloc<T>(len);
+            var dst = Z0.BlockVector.Alloc<T>(len);
             if(domain != null)
                 random.Fill(domain.Value, len, ref dst[0]);
             else
@@ -41,10 +41,10 @@ namespace Z0
         /// <typeparam name="S">The source domain type</typeparam>
         /// <typeparam name="T">The target domain type</typeparam>
         [MethodImpl(Inline)]
-        public static BlockVector<T> BlockVec<S,T>(this IPolyrand random, int len, Interval<S>? domain = null, T rep = default)        
+        public static BlockVector<T> BlockVector<S,T>(this IPolyrand random, int len, Interval<S>? domain = null, T rep = default)        
             where S: unmanaged
             where T : unmanaged
-                => random.BlockVec<S>(len,domain).Convert<T>();
+                => random.BlockVector<S>(len,domain).Convert<T>();
 
         /// <summary>
         /// Allocates and populates a vector of natural length
@@ -54,11 +54,11 @@ namespace Z0
         /// <typeparam name="N">The length type</typeparam>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline)]
-        public static BlockVector<N,T> BlockVec<N,T>(this IPolyrand random, Interval<T> domain, N n = default)
+        public static BlockVector<N,T> BlockVector<N,T>(this IPolyrand random, Interval<T> domain, N n = default)
             where T : unmanaged
             where N : unmanaged, ITypeNat
         {
-            var dst = BlockVector.Alloc<N,T>();
+            var dst = Z0.BlockVector.Alloc<N, T>();
             random.Fill(domain, ref dst);
             return dst;
         }
@@ -73,11 +73,11 @@ namespace Z0
         /// <typeparam name="S">The sample domain type</typeparam>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline)]
-        public static BlockVector<N,T> BlockVec<N,S,T>(this IPolyrand random, Interval<S> domain, N n = default)
+        public static BlockVector<N,T> BlockVector<N,S,T>(this IPolyrand random, Interval<S> domain, N n = default)
             where T : unmanaged
             where S: unmanaged
             where N : unmanaged, ITypeNat
-                => random.BlockVec<N,S>(domain).Convert<T>();
+                => random.BlockVector<N,S>(domain).Convert<T>();
 
         /// <summary>
         /// Allocates and populates a vector of natural length
@@ -86,11 +86,11 @@ namespace Z0
         /// <typeparam name="N">The length type</typeparam>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline)]
-        public static BlockVector<N,T> BlockVec<N,T>(this IPolyrand random,  N n = default)
+        public static BlockVector<N,T> BlockVector<N,T>(this IPolyrand random,  N n = default)
             where T : unmanaged
             where N : unmanaged, ITypeNat
         {
-            var dst = BlockVector.Alloc<N,T>();
+            var dst = Z0.BlockVector.Alloc<N, T>();
             random.Fill(ref dst);
             return dst;
         }

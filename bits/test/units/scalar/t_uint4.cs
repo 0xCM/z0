@@ -16,67 +16,70 @@ namespace Z0
 
         public void add_4u_check()
         {
-            Claim.eq(8,Nibble.add(3,5));
-            Claim.eq(Nibble.MaxValue,Nibble.add(10,5));
-            Claim.eq(20 % 16,Nibble.add(10,10));
+            var x = UInt4.From(3) + UInt4.From(5);
+            Claim.eq(8u, x);
+
+            var y = UInt4.From(10) + UInt4.From(5);
+            Claim.eq(UInt4.MaxValue,y);
+
 
         }
 
         public void inc_4u_check()
         {
-            var i = Nibble.MinValue;
-            Nibble.inc(ref i);
-            Nibble.inc(ref i);
-            Nibble.inc(ref i);
-            Nibble.inc(ref i);
-            Claim.eq(i,Nibble.add(Nibble.MinValue, 4));
+            var i = UInt4.MinValue;
+            i++;
+            i++;
+            i++;
+            i++;
+            Claim.eq(i,4u);
 
-            Nibble.inc(ref i);
-            Nibble.inc(ref i);
-            Nibble.inc(ref i);
-            Nibble.inc(ref i);
-            Claim.eq(i,Nibble.add(Nibble.MinValue, 8));
+            i++;
+            i++;
+            i++;
+            i++;
+            Claim.eq(i,8u);
 
-            Nibble.inc(ref i);
-            Nibble.inc(ref i);
-            Nibble.inc(ref i);
-            Nibble.inc(ref i);
-            Claim.eq(i,Nibble.add(Nibble.MinValue, 12));
+            i++;
+            i++;
+            i++;
+            i++;
+            Claim.eq(i, 12u);
 
-            Nibble.inc(ref i);
-            Nibble.inc(ref i);
-            Nibble.inc(ref i);
-            Nibble.inc(ref i);
-            Claim.eq(i,Nibble.MinValue);
+            i++;
+            i++;
+            i++;
+            i++;
+            Claim.eq(i,UInt4.MaxValue);
 
         }
 
         public void dec_4u_check()
         {
-            var i = Nibble.MaxValue;
-            Nibble.dec(ref i);
-            Nibble.dec(ref i);
-            Nibble.dec(ref i);
-            Nibble.dec(ref i);
-            Claim.eq(i, Nibble.sub(Nibble.MaxValue, 4));
+            var i = UInt4.MaxValue;
+            i--;
+            i--;
+            i--;
+            i--;
+            Claim.eq(i, UInt4.MaxValue - 4);
 
-            Nibble.dec(ref i);
-            Nibble.dec(ref i);
-            Nibble.dec(ref i);
-            Nibble.dec(ref i);
-            Claim.eq(i, Nibble.sub(Nibble.MaxValue, 8));
+            i--;
+            i--;
+            i--;
+            i--;
+            Claim.eq(i, UInt4.MaxValue - 8);
 
-            Nibble.dec(ref i);
-            Nibble.dec(ref i);
-            Nibble.dec(ref i);
-            Nibble.dec(ref i);
-            Claim.eq(i, Nibble.sub(Nibble.MaxValue, 12));
+            i--;
+            i--;
+            i--;
+            i--;
+            Claim.eq(i, UInt4.MaxValue - 12);
 
-            Nibble.dec(ref i);
-            Nibble.dec(ref i);
-            Nibble.dec(ref i);
-            Nibble.dec(ref i);
-            Claim.eq(i,Nibble.MaxValue);
+            i--;
+            i--;
+            i--;
+            i--;
+            Claim.eq(i,UInt4.MaxValue);
 
         }
 
@@ -102,7 +105,7 @@ namespace Z0
             var z3 = (byte)0b1101;
             Claim.eq(y3,z3);
 
-            var x4 = UInt4.FromByte(0);
+            var x4 = UInt4.From((byte)0);
             Claim.eq(x4,(byte)0);
 
             byte y4 = x4;

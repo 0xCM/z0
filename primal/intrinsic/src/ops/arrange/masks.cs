@@ -76,7 +76,6 @@ namespace Z0
         public static int vmovemask(Vector256<byte> src)
             => MoveMask(src);
                  
-
         /// <summary>
         /// void _mm_maskstore_epi32 (int* mem_addr, __m128i mask, __m128i a) VPMASKMOVD m128, xmm, xmm
         /// </summary>

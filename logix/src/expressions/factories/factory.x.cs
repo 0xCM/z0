@@ -11,23 +11,7 @@ namespace Z0.Logix
     using static zfunc;
 
     public static class ExprX
-    {
-
-        [MethodImpl(Inline)]
-        public static T As<T>(this bit b)
-            where T : unmanaged
-                => convert<T>((uint)b);
-
-
-        [MethodImpl(Inline)]
-        public static bit ToBit(this bool x)
-            => x;
-
-        [MethodImpl(Inline)]
-        public static bit ToBit<T>(this T x)
-            where T : unmanaged
-                => gmath.neq(x,default);
-        
+    {        
         /// <summary>
         /// Assigns a random value to a variable and returns that value to the caller
         /// </summary>
@@ -274,7 +258,5 @@ namespace Z0.Logix
         public static IVarExpr<T> Var2<T>(this VariedExpr<N3,T> src, T value)
             where T : unmanaged
                 => src.Var2().Assign(value);
-
     }
-
 }

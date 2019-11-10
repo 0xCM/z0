@@ -1,12 +1,4 @@
-// 2019-11-09 03:33:39:916
-Vector256<ushort> rotl_g256x16u(Vector256<ushort> src, byte offset)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: call System.Runtime.Intrinsics.Vector256`1<System.UInt16> Z0.ginx::vrotl<System.UInt16>(System.Runtime.Intrinsics.Vector256`1<System.UInt16>,System.Byte)
-    IL_0007: ret
-
-}
+// 2019-11-09 14:57:08:577
 Vector256<uint> rotl_g256x32u(Vector256<uint> src, byte offset)
 {
     IL_0000: ldarg.0
@@ -870,13 +862,6 @@ ulong sum_256x64u(Vector128<ulong> src)
     IL_0006: ret
 
 }
-ulong avxpop_csa(in ulong src)
-{
-    IL_0000: ldarg.0
-    IL_0001: call System.UInt64 Z0.AvxPops::popcsa_1(System.UInt64&)
-    IL_0006: ret
-
-}
 ulong pop64_scalar(ulong a, ulong b, ulong c, ulong d)
 {
     IL_0000: ldarg.0
@@ -1351,6 +1336,14 @@ Vector256<byte> rotl_g256x8u(Vector256<byte> src, byte offset)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: call System.Runtime.Intrinsics.Vector256`1<System.Byte> Z0.ginx::vrotl<System.Byte>(System.Runtime.Intrinsics.Vector256`1<System.Byte>,System.Byte)
+    IL_0007: ret
+
+}
+Vector256<ushort> rotl_g256x16u(Vector256<ushort> src, byte offset)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call System.Runtime.Intrinsics.Vector256`1<System.UInt16> Z0.ginx::vrotl<System.UInt16>(System.Runtime.Intrinsics.Vector256`1<System.UInt16>,System.Byte)
     IL_0007: ret
 
 }

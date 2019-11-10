@@ -15,7 +15,7 @@ namespace Z0
     partial class ginx
     {
         [MethodImpl(Inline)]
-        public static bool vtestznc<T>(Vector128<T> src, Vector128<T> mask)
+        public static bit vtestznc<T>(Vector128<T> src, Vector128<T> mask)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte) 
@@ -33,7 +33,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static bool vtestznc<T>(Vector256<T> src, Vector256<T> mask)
+        public static bit vtestznc<T>(Vector256<T> src, Vector256<T> mask)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte) 
@@ -51,7 +51,25 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static bool vtestznc_i<T>(Vector128<T> src, Vector128<T> mask)
+        public static unsafe bit vtestznc<T>(N128 n, in T rX, in T rY)
+            where T : unmanaged
+        {                    
+            vload(rX, out Vector128<T> vA);
+            vload(rY, out Vector128<T> vB);
+            return vtestznc(vA,vB);
+        }
+
+        [MethodImpl(Inline)]
+        public static unsafe bit vtestznc<T>(N256 n, in T rX, in T rY)
+            where T : unmanaged
+        {                    
+            vload(rX, out Vector256<T> vA);
+            vload(rY, out Vector256<T> vB);
+            return vtestznc(vA,vB);
+        }
+
+        [MethodImpl(Inline)]
+        static bit vtestznc_i<T>(Vector128<T> src, Vector128<T> mask)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
@@ -65,7 +83,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static bool vtestznc_u<T>(Vector128<T> src, Vector128<T> mask)
+        static bit vtestznc_u<T>(Vector128<T> src, Vector128<T> mask)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -79,7 +97,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static bool vtestznc_f<T>(Vector128<T> src, Vector128<T> mask)
+        static bit vtestznc_f<T>(Vector128<T> src, Vector128<T> mask)
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
@@ -91,7 +109,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static bool vtestznc_i<T>(Vector256<T> src, Vector256<T> mask)
+        static bit vtestznc_i<T>(Vector256<T> src, Vector256<T> mask)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
@@ -105,7 +123,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static bool vtestznc_u<T>(Vector256<T> src, Vector256<T> mask)
+        static bit vtestznc_u<T>(Vector256<T> src, Vector256<T> mask)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -119,7 +137,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static bool vtestznc_f<T>(Vector256<T> src, Vector256<T> mask)
+        static bit vtestznc_f<T>(Vector256<T> src, Vector256<T> mask)
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))

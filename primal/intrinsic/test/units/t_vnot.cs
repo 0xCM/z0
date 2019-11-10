@@ -58,7 +58,6 @@ namespace Z0.Test
                 var xData = x.ToSpan();
                 var expect  = ginx.vload(n, in head(mathspan.not(xData)));
                 Claim.eq(expect,actual);
-
             }
         }
 

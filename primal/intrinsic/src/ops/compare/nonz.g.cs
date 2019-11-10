@@ -23,7 +23,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
-        public static bool vnonz<T>(Vector128<T> src)
+        public static bit vnonz<T>(Vector128<T> src)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte) 
@@ -41,7 +41,24 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static bool vnonz_i<T>(Vector128<T> src)
+        public static unsafe bit vnonz<T>(N128 n, in T rX)
+            where T : unmanaged
+        {                    
+            vload(rX, out Vector128<T> vA);
+            return vnonz(vA);
+        }
+
+        [MethodImpl(Inline)]
+        public static unsafe bit vnonz<T>(N256 n, in T rX)
+            where T : unmanaged
+        {                    
+            vload(rX, out Vector256<T> vA);
+            return vnonz(vA);
+        }
+
+
+        [MethodImpl(Inline)]
+        static bit vnonz_i<T>(Vector128<T> src)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
@@ -55,7 +72,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static bool vnonz_u<T>(Vector128<T> src)
+        static bit vnonz_u<T>(Vector128<T> src)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -69,7 +86,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static bool vnonz_f<T>(Vector128<T> src)
+        static bit vnonz_f<T>(Vector128<T> src)
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
@@ -87,7 +104,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
-        public static bool vnonz<T>(Vector256<T> src)
+        public static bit vnonz<T>(Vector256<T> src)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte) 
@@ -105,7 +122,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static bool vnonz_i<T>(Vector256<T> src)
+        static bit vnonz_i<T>(Vector256<T> src)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
@@ -119,7 +136,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static bool vnonz_u<T>(Vector256<T> src)
+        static bit vnonz_u<T>(Vector256<T> src)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -133,7 +150,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static bool vnonz_f<T>(Vector256<T> src)
+        static bit vnonz_f<T>(Vector256<T> src)
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))

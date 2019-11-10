@@ -99,5 +99,60 @@ namespace Z0
             else
                 throw unsupported<T>();
         }
+    
+        [MethodImpl(Inline)]
+        public static unsafe Vector128<T> vrotl<T>(N128 n, in T pX, byte offset)
+            where T : unmanaged
+        {                    
+            vload(pX, out Vector128<T> vA);
+            return vrotl(vA,offset);
+        }
+
+        [MethodImpl(Inline)]
+        public static unsafe void vrotl<T>(N128 n, in T pX, byte offset, ref T pDst)
+            where T : unmanaged
+                => vstore(vrotl(n, in pX, offset), ref pDst);
+
+
+        [MethodImpl(Inline)]
+        public static unsafe Vector256<T> vrotl<T>(N256 n, in T pX, byte offset)
+            where T : unmanaged
+        {                    
+            vload(pX, out Vector256<T> vA);
+            return vrotl(vA,offset);
+        }
+
+        [MethodImpl(Inline)]
+        public static unsafe void vrotl<T>(N256 n, in T pX, byte offset, ref T pDst)
+            where T : unmanaged
+                => vstore(vrotl(n,in pX, offset), ref pDst);
+
+        [MethodImpl(Inline)]
+        public static unsafe Vector128<T> vrotr<T>(N128 n, in T pX, byte offset)
+            where T : unmanaged
+        {                    
+            vload(pX, out Vector128<T> vA);
+            return vrotr(vA,offset);
+        }
+
+        [MethodImpl(Inline)]
+        public static unsafe void vrotr<T>(N128 n, in T pX, byte offset, ref T pDst)
+            where T : unmanaged
+                => vstore(vrotr(n, in pX, offset), ref pDst);
+
+        [MethodImpl(Inline)]
+        public static unsafe Vector256<T> vrotr<T>(N256 n, in T pX, byte offset)
+            where T : unmanaged
+        {                    
+            vload(pX, out Vector256<T> vA);
+            return vrotr(vA,offset);
+        }
+
+        [MethodImpl(Inline)]
+        public static unsafe void vrotr<T>(N256 n, in T pX, byte offset, ref T pDst)
+            where T : unmanaged
+                => vstore(vrotr(n,in pX, offset), ref pDst);
+     
     }
+
 }

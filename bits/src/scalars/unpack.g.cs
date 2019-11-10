@@ -28,7 +28,7 @@ namespace Z0
             var len = bitsize<S>();
             require(dst.Length - offset >= len);
             for(var i=0; i< len; i++)
-                dst[offset + i]  = test(src, i) == Bit.On ? one<T>() : zero<T>();            
+                dst[offset + i]  = test(src, i) == bit.On ? one<T>() : zero<T>();            
             return dst;
         }
 
@@ -55,7 +55,7 @@ namespace Z0
                 var k = 0;
                 for(var i=0; i< src.Length; i++)
                 for(var j=0; j< srcsize; j++)
-                    dst[k++]  = test(src[i], j) == Bit.On ? one<T>() : zero<T>();            
+                    dst[k++]  = test(src[i], j) == bit.On ? one<T>() : zero<T>();            
                 return dst;
             }
         }
@@ -74,5 +74,4 @@ namespace Z0
             return dst;
         }
     }
-
 }

@@ -102,18 +102,18 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<ushort> avxpop(Vector128<ushort> v, N128 n = default)
         {
-            var t1 = vsub(v8u(v),           vand( v8u(vsrl(v,  1)), M1(n)));
-            var t2 = vadd(vand(t1, M2(n)),  vand( v8u(vsrl(t1, 2)), M2(n)));
-            var t3 = vadd(t2,               vand( v8u(vsrl(t2, 4)), M4(n)));
+            var t1 = vsub(v8u(v),           vand(v8u(vsrl(v,  1)), M1(n)));
+            var t2 = vadd(vand(t1, M2(n)),  vand(v8u(vsrl(t1, 2)), M2(n)));
+            var t3 = vadd(t2,               vand(v8u(vsrl(t2, 4)), M4(n)));
             return vsad(t3, default);
         }
 
         [MethodImpl(Inline)]
         public static Vector256<ushort> avxpop(Vector256<ushort> v, N256 n = default)
         {
-            var t1 = vsub(v8u(v),           vand( v8u(vsrl(v,  1)), M1(n)));
-            var t2 = vadd(vand(t1, M2(n)),  vand( v8u(vsrl(t1, 2)), M2(n)));
-            var t3 = vadd(t2,               vand( v8u(vsrl(t2, 4)), M4(n)));
+            var t1 = vsub(v8u(v),           vand(v8u(vsrl(v,  1)), M1(n)));
+            var t2 = vadd(vand(t1, M2(n)),  vand(v8u(vsrl(t1, 2)), M2(n)));
+            var t3 = vadd(t2,               vand(v8u(vsrl(t2, 4)), M4(n)));
             return vsad(t3, default);
         }
 
@@ -124,6 +124,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<ulong> vzero64u(N256 n)
             => default;
+
 
         [MethodImpl(Inline)]
         public static ulong popcsa_1(in ulong data)

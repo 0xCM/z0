@@ -32,7 +32,6 @@ namespace Z0
             return dst;
         }
 
-
         /// <summary>
         /// Produces a span of random values constraint to a specified domain
         /// </summary>
@@ -197,7 +196,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ReadOnlySpan128<T> ReadOnlySpan128<T>(this IPolyrand random, int blocks = 1, Interval<T>? domain = null, Func<T,bool> filter = null)
             where T : unmanaged
-                => random.Span128<T>(blocks, domain, filter);
+                => random.BlockedSpan<T>(n128, blocks, domain, filter);
 
         /// <summary>
         /// Allocates a punctured 128-bit blocked span and populates it with nonzero random values
@@ -207,22 +206,9 @@ namespace Z0
         /// <param name="domain">An optional domain to which values are constrained</param>
         /// <typeparam name="T">The primal random value type</typeparam>
         [MethodImpl(Inline)]
-        public static Span128<T> NonZeroSpan128<T>(this IPolyrand random, int blocks = 1, Interval<T>? domain = null)        
+        public static Span128<T> NonZeroBlockedSpan<T>(this IPolyrand random, N128 n, int blocks = 1, Interval<T>? domain = null)        
             where T : unmanaged  
-                => random.Span128(blocks, domain, x => gmath.nonzero(x));
-
-        /// <summary>
-        /// Allocates a 256-bit blocked span and populates it with random values
-        /// </summary>
-        /// <param name="random">The random source</param>
-        /// <param name="blocks">The number of 256-bit blocks to allocate and fill</param>
-        /// <param name="domain">An optional domain to which values are constrained</param>
-        /// <param name="filter">An optional filter that refines the domain</param>
-        /// <typeparam name="T">The primal random value type</typeparam>
-        [MethodImpl(Inline)]
-        public static Span256<T> Span256<T>(this IPolyrand random, int blocks = 1, Interval<T>? domain = null, Func<T,bool> filter = null)
-            where T : unmanaged       
-                => random.Stream(domain,filter).ToSpan(Z0.Span256.BlockLength<T>(blocks)).ToSpan256();       
+                => random.BlockedSpan(n, blocks, domain, x => gmath.nonzero(x));
 
         /// <summary>
         /// Allocates a 256-bit blocked span and populates it with random values
@@ -249,7 +235,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static unsafe ReadOnlySpan256<T> ReadOnlySpan256<T>(this IPolyrand random, int blocks = 1, Interval<T>? domain = null, Func<T,bool> filter = null)
             where T : unmanaged
-                => random.Span256<T>(blocks, domain, filter);
+                => random.BlockedSpan<T>(n256,blocks, domain, filter);
 
         /// <summary>
         /// Allocates a punctured 256-bit blocked span and populates it with nonzero random values
@@ -259,9 +245,9 @@ namespace Z0
         /// <param name="domain">An optional domain to which values are constrained</param>
         /// <typeparam name="T">The primal random value type</typeparam>
         [MethodImpl(Inline)]
-        public static Span256<T> NonZeroSpan256<T>(this IPolyrand random, int blocks = 1, Interval<T>? domain = null)        
+        public static Span256<T> NonZeroBlockedSpan<T>(this IPolyrand random, N256 n, int blocks = 1, Interval<T>? domain = null)        
             where T : unmanaged  
-                => random.Span256(blocks, domain, x => gmath.nonzero(x)); 
+                => random.BlockedSpan(n,blocks, domain, x => gmath.nonzero(x)); 
     }
 
 }

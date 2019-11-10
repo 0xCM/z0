@@ -16,9 +16,11 @@ namespace Z0
     partial class RngX
     {
         /// <summary>
-        /// Allocates a matrix of natural dimensions and populates it with random values
+        /// Samples a blocked matrix of natural dimensions where the entries are constrained to a specified domain
         /// </summary>
         /// <param name="random">The random source</param>
+        /// <param name="m">The number of matrix rows</param>
+        /// <param name="n">The number of matrix columns</param>
         /// <typeparam name="M">The row type</typeparam>
         /// <typeparam name="N">The column Type</typeparam>
         /// <typeparam name="T">The element type</typeparam>
@@ -26,14 +28,24 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged    
-                => Z0.BlockMatrix.Load<M,N,T>(random.Span256<T>(Z0.Span256.MinBlocks<M,N,T>()));                    
+                => Z0.BlockMatrix.Load<M,N,T>(random.BlockedSpan<T>(n256,Z0.Span256.MinBlocks<M,N,T>()));                    
 
-         public static BlockMatrix<M,N,T> BlockMatrix<M,N,T>(this IPolyrand random, Interval<T> domain, M m = default, N n = default)
+        /// <summary>
+        /// Samples a blocked matrix of natural dimensions where the entries are constrained to a specified domain
+        /// </summary>
+        /// <param name="random">The random source</param>
+        /// <param name="domain">The domain to which the entry values are constrained</param>
+        /// <param name="m">The number of matrix rows</param>
+        /// <param name="n">The number of matrix columns</param>
+        /// <typeparam name="M">The row type</typeparam>
+        /// <typeparam name="N">The column Type</typeparam>
+        /// <typeparam name="T">The element type</typeparam>
+        public static BlockMatrix<M,N,T> BlockMatrix<M,N,T>(this IPolyrand random, Interval<T> domain, M m = default, N n = default)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged    
-                => Z0.BlockMatrix.Load<M,N,T>(random.Span256<T>(Z0.Span256.MinBlocks<M,N,T>(), domain));                    
-               
+                => Z0.BlockMatrix.Load<M,N,T>(random.BlockedSpan<T>(n256, Z0.Span256.MinBlocks<M,N,T>(), domain));                    
+                
         /// <summary>
         /// Samples a square matrix of natural order
         /// </summary>
@@ -43,7 +55,7 @@ namespace Z0
          public static BlockMatrix<N,T> BlockMatrix<N,T>(this IPolyrand random, Interval<T>? domain = null)
             where N : unmanaged, ITypeNat
             where T : unmanaged    
-                => Z0.BlockMatrix.Load<N,T>(random.Span256<T>(Z0.Span256.MinBlocks<N,N,T>(), domain));                    
+                => Z0.BlockMatrix.Load<N,T>(random.BlockedSpan<T>(n256, Z0.Span256.MinBlocks<N,N,T>(), domain));                    
 
          /// <summary>
          /// Samples values over an S-domain, transforms the sample into a T-domain and from this transformed
@@ -65,19 +77,7 @@ namespace Z0
             where S : unmanaged
                 => random.BlockMatrix<M,N,S>().Convert<T>();
  
-         /// <summary>
-         /// Samples values over an S-domain, transforms the sample into a T-domain and from this transformed
-         /// sample constructs a square matrix of natural order
-         /// </summary>
-         /// <param name="random">The random source</param>
-         /// <param name="domain">The sample domain</param>
-         /// <param name="m">The row count</param>
-         /// <param name="n">The column count</param>
-         /// <param name="rep">A scalar representative</param>
-         /// <typeparam name="N">The order type type</typeparam>
-         /// <typeparam name="S">The sample type</typeparam>
-         /// <typeparam name="T">The matrix element type</typeparam>
-          public static BlockMatrix<N,T> BlockMatrix<N,S,T>(this IPolyrand random, Interval<S>? domain = null, N n = default,  T rep = default)
+          static BlockMatrix<N,T> BlockMatrix<N,S,T>(this IPolyrand random, Interval<S>? domain = null, N n = default,  T rep = default)
             where N : unmanaged, ITypeNat
             where T : unmanaged    
             where S : unmanaged

@@ -21,7 +21,7 @@ namespace Z0
         /// <param name="pos">The bit position</param>
         /// <typeparam name="T">The primal value type</typeparam>
         [MethodImpl(Inline)]
-        public static bool test<T>(T src, int pos)
+        public static bit test<T>(T src, int pos)
             where T : unmanaged
                 => BitMaskG.testbit(src, (byte)pos);
 
@@ -45,8 +45,6 @@ namespace Z0
         public static bit test<T>(T src, byte pos)
             where T : unmanaged
                 => BitMaskG.testbit(src, pos);
-
-
     }
 
 }

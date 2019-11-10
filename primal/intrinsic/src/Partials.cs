@@ -84,7 +84,7 @@ namespace Z0
 
     }
 
-    public static partial class gparts
+    public static partial class vblock
     {
         
     }

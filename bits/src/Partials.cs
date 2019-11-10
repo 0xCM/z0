@@ -8,25 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using static zfunc;
 
-    public static unsafe partial class BitPoints
-    {
-        [MethodImpl(Inline)]
-        static ulong content(byte* pA)
-            => *(ulong*)pA;
-
-        [MethodImpl(Inline)]
-        static ulong content(in byte rA)
-            => *(ulong*)As.constptr(in rA);
-
-        [MethodImpl(Inline)]
-        static void content(ulong src, byte* pDst)
-             => *((ulong*)pDst) = src;
-
-        [MethodImpl(Inline)]
-        static void content(ulong src, ref byte pDst)
-             => *((ulong*)As.refptr(ref pDst)) = src;
-
-    }
 
     public static partial class BitMatrix
     {

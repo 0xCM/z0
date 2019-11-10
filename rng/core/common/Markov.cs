@@ -59,7 +59,7 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where T : unmanaged
         {
-            var dst = BlockVector.Alloc<N,T>();
+            var dst = Z0.BlockVector.Alloc<N, T>();
             random.MarkovVec(dst.Unsized);
             return dst;
         }

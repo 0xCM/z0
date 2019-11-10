@@ -27,8 +27,8 @@ namespace Z0.Mkl.Test
 
         public void dot()
         {
-            var v1 = Random.BlockVec<N256,double>();
-            var v2 = Random.BlockVec<N256,double>();
+            var v1 = Random.BlockVector<N256,double>();
+            var v2 = Random.BlockVector<N256,double>();
 
             var x = mkl.dot(v1,v2).Round(4);
             var y = Dot(v1,v2).Round(4);

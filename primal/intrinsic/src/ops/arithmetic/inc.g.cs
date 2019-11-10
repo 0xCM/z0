@@ -48,6 +48,7 @@ namespace Z0
             else throw unsupported<T>();
         }
 
+
         [MethodImpl(Inline)]
         static Vector128<T> vinci<T>(Vector128<T> lhs)
             where T : unmanaged

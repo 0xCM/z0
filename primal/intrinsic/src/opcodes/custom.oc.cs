@@ -22,8 +22,6 @@ namespace Z0
             => dinx.vsum(src);
 
 
-        public static ulong avxpop_csa(in ulong src)
-            => AvxPops.popcsa_1(in src);
 
         public static ulong pop64_scalar(ulong a, ulong b, ulong c, ulong d)
             => AvxPops.pop64(a,b,c,d);

@@ -91,7 +91,6 @@ namespace Z0.Logix
             }
         }
 
-
         static (LogicVariable a, LogicVariable b) vars2
         {
             [MethodImpl(Inline)]
@@ -103,7 +102,5 @@ namespace Z0.Logix
             [MethodImpl(Inline)]
             get => (lvar('a'), lvar('b'), lvar('c'));
         }
-
     }
-
 }

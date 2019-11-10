@@ -75,6 +75,28 @@ namespace Z0
             => Max(x, y);
 
         /// <summary>
+        /// Computes the maximum values of corresponding components
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        [MethodImpl(Inline)]
+        public static Vector128<ulong> vmax(Vector128<ulong> x, Vector128<ulong> y)
+            => vselect(vgt(x,y),x,y);
+
+        /// <summary>
+        /// Computes the maximum values of corresponding components
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        [MethodImpl(Inline)]
+        public static Vector128<long> vmax(Vector128<long> x, Vector128<long> y)
+        {
+            var xL = vinsert(x,default,0);
+            var yL = vinsert(y,default,0);
+            return vlo(vmax(xL,yL));
+        }
+
+        /// <summary>
         /// __m256i _mm256_max_epu8 (__m256i a, __m256i b) VPMAXUB ymm, ymm, ymm/m256
         /// </summary>
         /// <param name="x"></param>
@@ -128,69 +150,23 @@ namespace Z0
         public static Vector256<uint> vmax(Vector256<uint> x, Vector256<uint> y)
             => Max(x, y);
 
-
-        /// <summary>
-        /// Computes the maximum values of corresponding components
-        /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        /// <remarks>
-        /// Follows https://stackoverflow.com/questions/54394350/simd-implement-mm256-max-epu64-and-mm256-min-epu64
-        /// </remarks>
-        [MethodImpl(Inline)]
-        public static Vector128<ulong> vmax(Vector128<ulong> x, Vector128<ulong> y)
-        {
-            var xL = vinsert(x,default,0);
-            var yL = vinsert(y,default,0);
-            return vlo(vmax(xL,yL));
-        }
-
-        /// <summary>
-        /// Computes the maximum values of corresponding components (Works)
-        /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        /// <remarks>
-        /// Follows https://stackoverflow.com/questions/54394350/simd-implement-mm256-max-epu64-and-mm256-min-epu64
-        /// </remarks>
-        [MethodImpl(Inline)]
-        public static Vector128<long> vmax(Vector128<long> x, Vector128<long> y)
-        {
-            var xL = vinsert(x,default,0);
-            var yL = vinsert(y,default,0);
-            return vlo(vmax(xL,yL));
-        }
             
-
         /// <summary>
         /// Computes the maximum values of corresponding components
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        /// <remarks>
-        /// Follows https://stackoverflow.com/questions/54394350/simd-implement-mm256-max-epu64-and-mm256-min-epu64
-        /// </remarks>
         [MethodImpl(Inline)]
         public static Vector256<ulong> vmax(Vector256<ulong> x, Vector256<ulong> y)
-        {
-            var xi = x.AsInt64();
-            var yi = y.AsInt64();
-            var opposite_sign = vxor(xi,yi);
-            var mask = vgt(xi,yi);
-            var spec = vxor(mask, opposite_sign);
-            return vblendv_64i(yi,xi,spec).AsUInt64();
-        }
+            => vselect(vgt(x,y),x,y);
 
         /// <summary>
-        /// Computes the maximum values of corresponding components (Works)
+        /// Computes the maximum values of corresponding components
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        /// <remarks>
-        /// Follows https://stackoverflow.com/questions/54394350/simd-implement-mm256-max-epu64-and-mm256-min-epu64
-        /// </remarks>
         [MethodImpl(Inline)]
         public static Vector256<long> vmax(Vector256<long> x, Vector256<long> y)
-            => vblendv_64i(y,x, vgt(x,y));
+            => vblendv(y, x, vgt(x,y));
     }
 }

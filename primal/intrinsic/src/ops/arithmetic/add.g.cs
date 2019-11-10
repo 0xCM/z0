@@ -15,8 +15,6 @@ namespace Z0
 
     partial class ginx
     {
-
-
         [MethodImpl(Inline)]
         public static Vector128<T> vadd<T>(Vector128<T> x, Vector128<T> y)
             where T : unmanaged

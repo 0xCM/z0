@@ -86,6 +86,15 @@ namespace Z0
             = PcgShared.DefaultMultiplier;
             
         /// <summary>
+        /// Rotates bits in the source rightwards by a specified offset
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <param name="offset">The magnitude of the rotation</param>
+        [MethodImpl(Inline)]
+        static uint rotr(uint src, uint offset)
+            => (src >> (int)offset) | (src << (32 - (int)offset));
+
+        /// <summary>
         /// Produces a pseudorandom output from a given source state
         /// </summary>
         /// <param name="state">The source state</param>
@@ -94,7 +103,7 @@ namespace Z0
         static uint Grind(ulong state)
         {
             var src = ((state >> 18) ^ state) >> 27;            
-            var dst = Bits.rotr((uint)src,(uint)(state >> 59));
+            var dst = rotr((uint)src,(uint)(state >> 59));
             return dst;
         }
     }

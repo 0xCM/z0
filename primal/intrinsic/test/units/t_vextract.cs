@@ -12,53 +12,57 @@ namespace Z0.Test
 
     public class t_vextract : UnitTest<t_vextract>
     {     
+        public void extract_128x8u()
+            => extract_check<byte>(n128);
+
+        public void extract_128x8i()
+            => extract_check<sbyte>(n128);
+
         public void extract128()
         {
-            extract128_check<byte>();
-            extract128_check<sbyte>();
-            extract128_check<short>();
-            extract128_check<ushort>();
-            extract128_check<int>();
-            extract128_check<uint>();
-            extract128_check<long>();
-            extract128_check<ulong>();
+            
+            extract_check<short>(n128);
+            extract_check<ushort>(n128);
+            extract_check<int>(n128);
+            extract_check<uint>(n128);
+            extract_check<long>(n128);
+            extract_check<ulong>(n128);
 
         }
 
         public void extract256()
         {
-            extract256_check<byte>();
-            extract256_check<sbyte>();
-            extract256_check<short>();
-            extract256_check<ushort>();
-            extract256_check<int>();
-            extract256_check<uint>();
-            extract256_check<long>();
-            extract256_check<ulong>();
+            extract_check<byte>(n256);
+            extract_check<sbyte>(n256);
+            extract_check<short>(n256);
+            extract_check<ushort>(n256);
+            extract_check<int>(n256);
+            extract_check<uint>(n256);
+            extract_check<long>(n256);
+            extract_check<ulong>(n256);
             
         }
 
-        void extract128_check<T>()
+        void extract_check<T>(N128 n)
             where T : unmanaged
         {
 
             var len = Vec128<T>.Length;
-            var src = Random.CpuVector128<T>();
+            var src = Random.CpuVector<T>(n128);
             var actual = src.ToSpan();
             var expect = span<T>(len);
             src.StoreTo(expect);
             for(byte i = 0; i< len; i++)
                 Claim.eq(expect[i], actual[i]);
-
         }
             
-        public void extract256_check<T>()
+        public void extract_check<T>(N256 n)
             where T : unmanaged
         {
 
             var len = Vec256<T>.Length;
             var half = len >> 1;
-            var src = Random.CpuVector256<T>();
+            var src = Random.CpuVector<T>(n256);
             var srcData = src.StoreTo(span<T>(len));
             
             var x0 = ginx.vlo(src);

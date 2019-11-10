@@ -1,4 +1,62 @@
-// 2019-11-09 03:33:40:651
+// 2019-11-09 14:57:09:309
+uint mod_const_16(uint a)
+{
+    IL_0000: ldarg.0
+    IL_0001: call System.UInt32 Z0.Mod16::mod(System.UInt32)
+    IL_0006: ret
+
+}
+uint div_const_16(uint a)
+{
+    IL_0000: ldarg.0
+    IL_0001: call System.UInt32 Z0.Mod16::div(System.UInt32)
+    IL_0006: ret
+
+}
+uint mod_const_25(uint a)
+{
+    IL_0000: ldarg.0
+    IL_0001: call System.UInt32 Z0.Mod25::mod(System.UInt32)
+    IL_0006: ret
+
+}
+uint div_const_25(uint a)
+{
+    IL_0000: ldarg.0
+    IL_0001: call System.UInt32 Z0.Mod25::div(System.UInt32)
+    IL_0006: ret
+
+}
+uint mod_const_32(uint a)
+{
+    IL_0000: ldarg.0
+    IL_0001: call System.UInt32 Z0.Mod32::mod(System.UInt32)
+    IL_0006: ret
+
+}
+uint div_const_32(uint a)
+{
+    IL_0000: ldarg.0
+    IL_0001: call System.UInt32 Z0.Mod32::div(System.UInt32)
+    IL_0006: ret
+
+}
+void mul_full_64u(in Pair<ulong> src, ref Pair<ulong> dst)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call System.Void Z0.BmiMul::full(Z0.Pair`1<System.UInt64>&,Z0.Pair`1<System.UInt64>&)
+    IL_0007: ret
+
+}
+void mul_full_32u(in Pair<uint> src, ref Pair<uint> dst)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call System.Void Z0.BmiMul::full(Z0.Pair`1<System.UInt32>&,Z0.Pair`1<System.UInt32>&)
+    IL_0007: ret
+
+}
 void datablock_store(in byte src, uint count, ref Block128 dst)
 {
     IL_0000: ldarg.0
@@ -38,80 +96,10 @@ ReadOnlySpan<byte> bitseq(int offset, int count)
     IL_0007: ret
 
 }
-ByteInfo byteinfo(byte src)
-{
-    IL_0000: ldarg.0
-    IL_0001: call Z0.ByteInfo Z0.BitStore::info(System.Byte)
-    IL_0006: ret
-
-}
-ReadOnlySpan<byte> bitseq8i(sbyte src)
-{
-    IL_0000: ldarga.s src
-    IL_0002: call System.ReadOnlySpan`1<System.Byte> Z0.BitStore::bitseq<System.SByte>(System.SByte&)
-    IL_0007: ret
-
-}
 ReadOnlySpan<byte> bitseq8u(byte src)
 {
     IL_0000: ldarga.s src
     IL_0002: call System.ReadOnlySpan`1<System.Byte> Z0.BitStore::bitseq<System.Byte>(System.Byte&)
-    IL_0007: ret
-
-}
-ReadOnlySpan<byte> bitseq16i(short src)
-{
-    IL_0000: ldarga.s src
-    IL_0002: call System.ReadOnlySpan`1<System.Byte> Z0.BitStore::bitseq<System.Int16>(System.Int16&)
-    IL_0007: ret
-
-}
-ReadOnlySpan<byte> bitseq16u(ushort src)
-{
-    IL_0000: ldarga.s src
-    IL_0002: call System.ReadOnlySpan`1<System.Byte> Z0.BitStore::bitseq<System.UInt16>(System.UInt16&)
-    IL_0007: ret
-
-}
-ReadOnlySpan<byte> bitseq32i(int src)
-{
-    IL_0000: ldarga.s src
-    IL_0002: call System.ReadOnlySpan`1<System.Byte> Z0.BitStore::bitseq<System.Int32>(System.Int32&)
-    IL_0007: ret
-
-}
-ReadOnlySpan<byte> bitseq32u(uint src)
-{
-    IL_0000: ldarga.s src
-    IL_0002: call System.ReadOnlySpan`1<System.Byte> Z0.BitStore::bitseq<System.UInt32>(System.UInt32&)
-    IL_0007: ret
-
-}
-ReadOnlySpan<byte> bitseq64i(long src)
-{
-    IL_0000: ldarga.s src
-    IL_0002: call System.ReadOnlySpan`1<System.Byte> Z0.BitStore::bitseq<System.Int64>(System.Int64&)
-    IL_0007: ret
-
-}
-ReadOnlySpan<byte> bitseq64u(ulong src)
-{
-    IL_0000: ldarga.s src
-    IL_0002: call System.ReadOnlySpan`1<System.Byte> Z0.BitStore::bitseq<System.UInt64>(System.UInt64&)
-    IL_0007: ret
-
-}
-ReadOnlySpan<byte> bitseq32f(float src)
-{
-    IL_0000: ldarga.s src
-    IL_0002: call System.ReadOnlySpan`1<System.Byte> Z0.BitStore::bitseq<System.Single>(System.Single&)
-    IL_0007: ret
-
-}
-ReadOnlySpan<byte> bitseq64f(double src)
-{
-    IL_0000: ldarga.s src
-    IL_0002: call System.ReadOnlySpan`1<System.Byte> Z0.BitStore::bitseq<System.Double>(System.Double&)
     IL_0007: ret
 
 }
@@ -288,8 +276,9 @@ bool testbit_g8i(sbyte src, int pos)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: call System.Boolean Z0.BitMaskG::testbit<System.SByte>(System.SByte,System.Int32)
-    IL_0007: ret
+    IL_0002: call Z0.bit Z0.BitMaskG::testbit<System.SByte>(System.SByte,System.Int32)
+    IL_0007: call System.Boolean Z0.bit::op_Implicit(Z0.bit)
+    IL_000C: ret
 
 }
 bool testbit_d8u(byte src, int pos)
@@ -305,8 +294,9 @@ bool testbit_g8u(byte src, int pos)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: call System.Boolean Z0.BitMaskG::testbit<System.Byte>(System.Byte,System.Int32)
-    IL_0007: ret
+    IL_0002: call Z0.bit Z0.BitMaskG::testbit<System.Byte>(System.Byte,System.Int32)
+    IL_0007: call System.Boolean Z0.bit::op_Implicit(Z0.bit)
+    IL_000C: ret
 
 }
 bool testbit_d16i(short src, int pos)
@@ -322,8 +312,9 @@ bool testbit_g16i(short src, int pos)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: call System.Boolean Z0.BitMaskG::testbit<System.Int16>(System.Int16,System.Int32)
-    IL_0007: ret
+    IL_0002: call Z0.bit Z0.BitMaskG::testbit<System.Int16>(System.Int16,System.Int32)
+    IL_0007: call System.Boolean Z0.bit::op_Implicit(Z0.bit)
+    IL_000C: ret
 
 }
 bool testbit_d16u(ushort src, int pos)
@@ -339,8 +330,9 @@ bool testbit_g16u(ushort src, int pos)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: call System.Boolean Z0.BitMaskG::testbit<System.UInt16>(System.UInt16,System.Int32)
-    IL_0007: ret
+    IL_0002: call Z0.bit Z0.BitMaskG::testbit<System.UInt16>(System.UInt16,System.Int32)
+    IL_0007: call System.Boolean Z0.bit::op_Implicit(Z0.bit)
+    IL_000C: ret
 
 }
 bool testbit_d32i(int src, int pos)
@@ -356,8 +348,9 @@ bool testbit_g32i(int src, int pos)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: call System.Boolean Z0.BitMaskG::testbit<System.Int32>(System.Int32,System.Int32)
-    IL_0007: ret
+    IL_0002: call Z0.bit Z0.BitMaskG::testbit<System.Int32>(System.Int32,System.Int32)
+    IL_0007: call System.Boolean Z0.bit::op_Implicit(Z0.bit)
+    IL_000C: ret
 
 }
 bool testbit_d32u(uint src, int pos)
@@ -373,8 +366,9 @@ bool testbit_g32u(uint src, int pos)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: call System.Boolean Z0.BitMaskG::testbit<System.UInt32>(System.UInt32,System.Int32)
-    IL_0007: ret
+    IL_0002: call Z0.bit Z0.BitMaskG::testbit<System.UInt32>(System.UInt32,System.Int32)
+    IL_0007: call System.Boolean Z0.bit::op_Implicit(Z0.bit)
+    IL_000C: ret
 
 }
 bool testbit_d64i(long src, int pos)
@@ -389,8 +383,9 @@ bool testbit_g64i(long src, int pos)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: call System.Boolean Z0.BitMaskG::testbit<System.Int64>(System.Int64,System.Int32)
-    IL_0007: ret
+    IL_0002: call Z0.bit Z0.BitMaskG::testbit<System.Int64>(System.Int64,System.Int32)
+    IL_0007: call System.Boolean Z0.bit::op_Implicit(Z0.bit)
+    IL_000C: ret
 
 }
 bool testbit_d64u(ulong src, int pos)
@@ -406,8 +401,9 @@ bool testbit_g64u(ulong src, int pos)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: call System.Boolean Z0.BitMaskG::testbit<System.UInt64>(System.UInt64,System.Int32)
-    IL_0007: ret
+    IL_0002: call Z0.bit Z0.BitMaskG::testbit<System.UInt64>(System.UInt64,System.Int32)
+    IL_0007: call System.Boolean Z0.bit::op_Implicit(Z0.bit)
+    IL_000C: ret
 
 }
 bool testbit_d32f(float src, int pos)
@@ -423,8 +419,9 @@ bool testbit_g32f(float src, int pos)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: call System.Boolean Z0.BitMaskG::testbit<System.Single>(System.Single,System.Int32)
-    IL_0007: ret
+    IL_0002: call Z0.bit Z0.BitMaskG::testbit<System.Single>(System.Single,System.Int32)
+    IL_0007: call System.Boolean Z0.bit::op_Implicit(Z0.bit)
+    IL_000C: ret
 
 }
 bool testbit_d64f(double src, int pos)
@@ -440,66 +437,9 @@ bool testbit_g64f(double src, int pos)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: call System.Boolean Z0.BitMaskG::testbit<System.Double>(System.Double,System.Int32)
-    IL_0007: ret
-
-}
-uint mod_const_16(uint a)
-{
-    IL_0000: ldarg.0
-    IL_0001: call System.UInt32 Z0.Mod16::mod(System.UInt32)
-    IL_0006: ret
-
-}
-uint div_const_16(uint a)
-{
-    IL_0000: ldarg.0
-    IL_0001: call System.UInt32 Z0.Mod16::div(System.UInt32)
-    IL_0006: ret
-
-}
-uint mod_const_25(uint a)
-{
-    IL_0000: ldarg.0
-    IL_0001: call System.UInt32 Z0.Mod25::mod(System.UInt32)
-    IL_0006: ret
-
-}
-uint div_const_25(uint a)
-{
-    IL_0000: ldarg.0
-    IL_0001: call System.UInt32 Z0.Mod25::div(System.UInt32)
-    IL_0006: ret
-
-}
-uint mod_const_32(uint a)
-{
-    IL_0000: ldarg.0
-    IL_0001: call System.UInt32 Z0.Mod32::mod(System.UInt32)
-    IL_0006: ret
-
-}
-uint div_const_32(uint a)
-{
-    IL_0000: ldarg.0
-    IL_0001: call System.UInt32 Z0.Mod32::div(System.UInt32)
-    IL_0006: ret
-
-}
-void mul_full_64u(in Pair<ulong> src, ref Pair<ulong> dst)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: call System.Void Z0.BmiMul::full(Z0.Pair`1<System.UInt64>&,Z0.Pair`1<System.UInt64>&)
-    IL_0007: ret
-
-}
-void mul_full_32u(in Pair<uint> src, ref Pair<uint> dst)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: call System.Void Z0.BmiMul::full(Z0.Pair`1<System.UInt32>&,Z0.Pair`1<System.UInt32>&)
-    IL_0007: ret
+    IL_0002: call Z0.bit Z0.BitMaskG::testbit<System.Double>(System.Double,System.Int32)
+    IL_0007: call System.Boolean Z0.bit::op_Implicit(Z0.bit)
+    IL_000C: ret
 
 }
 UInt8 bitview8_and(UInt8 a, UInt8 b)

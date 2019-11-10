@@ -169,7 +169,7 @@ namespace Z0.Logix
             
             for(var i=0; i< SampleSize; i++)
             {
-                var a = Random.CpuVector128<T>();
+                var a = Random.CpuVector<T>(n128);
                 v1.Set(a);   
                 Vector128<T> actual = LogicEngine.eval(expr);
                 Vector128<T> expect = CpuOpApi.eval(op,a,offset);
@@ -186,7 +186,7 @@ namespace Z0.Logix
             
             for(var i=0; i< SampleSize; i++)
             {
-                var a = Random.CpuVector256<T>();
+                var a = Random.CpuVector<T>(n256);
                 v1.Set(a);   
                 Vector256<T> actual = LogicEngine.eval(expr);
                 Vector256<T> expect = CpuOpApi.eval(op,a,offset);

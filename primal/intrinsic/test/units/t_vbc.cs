@@ -14,102 +14,99 @@ namespace Z0
 
     public class t_vbc : IntrinsicTest<t_vbc>
     {
-        public void vbc_g128x8i_check()
-        {
-            vbc_g128_check<sbyte>();   
-        }
+        public void vbc_g128x8i()
+            => vbc_g128_check<sbyte>();   
 
-        public void vbc_g128x8u_check()
-        {
-            vbc_g128_check<byte>();   
-        }
+        public void vbc_g128x8u()        
+            => vbc_g128_check<byte>();   
+        
 
-        public void vbc_g128x16i_check()
+        public void vbc_g128x16i()
         {
             vbc_g128_check<short>();   
         }
 
-        public void vbc_g128x16u_check()
+        public void vbc_g128x16u()
         {
             vbc_g128_check<ushort>();   
         }
 
-        public void vbc_g128x32i_check()
+        public void vbc_g128x32i()
         {
             vbc_g128_check<int>();   
         }
 
-        public void vbc_g128x32u_check()
+        public void vbc_g128x32u()
         {
             vbc_g128_check<uint>();   
         }
 
-        public void vbc_g128x64i_check()
+        public void vbc_g128x64i()
         {
             vbc_g128_check<long>();   
         }
 
-        public void vbc_g128x64u_check()
+        public void vbc_g128x64u()
         {
             vbc_g128_check<ulong>();   
         }
 
-        public void vbc_g128x32f_check()
+        public void vbc_g128x32f()
         {
             vbc_g128_check<float>(); 
         }
 
-        public void vbc_g128x64f_check()
+        public void vbc_g128x64f()
         {
             vbc_g128_check<double>();
         }
 
-        public void vbc_g256x8i_check()
+        public void vbc_g256x8i()
         {
             vbc_g256_check<sbyte>();   
         }
 
-        public void vbc_g256x8u_check()
+        public void vbc_g256x8u()
         {
             vbc_g256_check<byte>();   
         }
 
-        public void vbc_g256x16i_check()
+        public void vbc_g256x16i()
         {
             vbc_g256_check<short>();   
         }
 
-        public void vbc_g256x16u_check()
+        public void vbc_g256x16u()
         {
             vbc_g256_check<ushort>();   
         }
 
-        public void vbc_g256x32i_check()
+        public void vbc_g256x32i()
         {
             vbc_g256_check<int>();   
         }
 
-        public void vbc_g256x32u_check()
+        public void vbc_g256x32u()
         {
             vbc_g256_check<uint>();   
         }
 
-        public void vbc_g256x64i_check()
+        public void vbc_g256x64i()
         {
             vbc_g256_check<long>();   
         }
 
-        public void vbc_g256x64u_check()
+        public void vbc_g256x64u()
         {
             vbc_g256_check<ulong>();   
         }
 
-        public void vbc_g256x32f_check()
+        public void vbc_g256x32f()
         {
             vbc_g256_check<float>(); 
         }
 
-        public void vbc_g256x64f_check()
+        public void vbc_g256x64f()
         {
             vbc_g256_check<double>();
         }

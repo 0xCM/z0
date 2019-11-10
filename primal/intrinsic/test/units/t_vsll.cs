@@ -191,7 +191,7 @@ namespace Z0
 
             for(var i=0; i< SampleSize; i++)
             {
-                var src = Random.CpuVector128<T>();
+                var src = Random.CpuVector<T>(n128);
                 var offset = Random.Next<byte>(2,7);
                 var dst = ginx.vsll(src,offset);
                 for(var j=0; j<dst.Length(); j++)
@@ -210,7 +210,7 @@ namespace Z0
 
             for(var i=0; i< SampleSize; i++)
             {
-                var src = Random.CpuVector256<T>();
+                var src = Random.CpuVector<T>(n256);
                 var offset = Random.Next<byte>(2,7);
                 var dst = ginx.vsll(src,offset);
                 for(var j=0; j<dst.Length(); j++)
@@ -233,7 +233,7 @@ namespace Z0
 
             for(var i=0; i< SampleSize; i++)
             {
-                var src = Random.CpuVector128<T>();
+                var src = Random.CpuVector<T>(n128);
                 var offset = Random.Next<byte>(2,7);
                 var dst = ginx.vsrl(src,offset);
                 for(var j=0; j<dst.Length(); j++)
@@ -251,7 +251,7 @@ namespace Z0
 
             for(var i=0; i< SampleSize; i++)
             {
-                var src = Random.CpuVector256<T>();
+                var src = Random.CpuVector<T>(n256);
                 var offset = Random.Next<byte>(2,7);
                 var dst = ginx.vsrl(src,offset);
                 for(var j=0; j<dst.Length(); j++)
@@ -281,7 +281,7 @@ namespace Z0
             for(var i=0; i<opcount; i++)
             {
                 var offset = Random.Next<byte>(2, (byte)(bitlen - 1));
-                var x = Random.CpuVector128<T>();
+                var x = Random.CpuVector<T>(n128);
                 sw.Start();
                 last = ginx.vsll(x,offset);
                 sw.Stop();
@@ -303,7 +303,7 @@ namespace Z0
             for(var i=0; i<opcount; i++)
             {
                 var offset = Random.Next<byte>(2, (byte)(bitlen - 1));
-                var x = Random.CpuVector256<T>();
+                var x = Random.CpuVector<T>(n256);
                 sw.Start();
                 last = ginx.vsll(x,offset);
                 sw.Stop();
@@ -324,7 +324,7 @@ namespace Z0
             for(var i=0; i<opcount; i++)
             {
                 var offset = Random.Next<byte>(2, (byte)(bitlen - 1));
-                var x = Random.CpuVector128<T>();
+                var x = Random.CpuVector<T>(n128);
                 sw.Start();
                 last = ginx.vsrl(x,offset);
                 sw.Stop();
@@ -347,7 +347,7 @@ namespace Z0
             for(var i=0; i<opcount; i++)
             {
                 var offset = Random.Next<byte>(2, (byte)(bitlen - 1));
-                var x = Random.CpuVector256<T>();
+                var x = Random.CpuVector<T>(n256);
                 sw.Start();
                 last = ginx.vsrl(x,offset);
                 sw.Stop();

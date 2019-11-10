@@ -179,5 +179,10 @@ namespace Z0
         public static Vector256<ulong> vand(Vector256<ulong> x, Vector256<ulong> y)
             => And(x, y);
 
+
+        [MethodImpl(Inline)]
+        public static Vector256<byte> vand8u<T>(Vector256<T> x, Vector256<T> y)
+            where T : unmanaged
+                => vand(v8u(x), v8u(y));
      }
 }

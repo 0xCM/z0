@@ -40,24 +40,6 @@ namespace Z0
         }
 
 
-        OpTime BaselineMul256u64()
-        {
-            var sw = stopwatch(false);
-            var domain = closed(0ul, UInt32.MaxValue);            
-            var counter = 0;
-            Span<ulong> last = default;
-            for(var i=0; i< SampleSize; i++)
-            {
-                var x = Random.Span(4, domain);
-                var y = Random.Span(4, domain);
-                sw.Start();
-                last = mathspan.mul(x, y);
-                sw.Stop();
-                counter += 4;
-            }
-
-            return (counter, snapshot(sw),"mul256u64:baseline");        
-        }
 
     }
 }

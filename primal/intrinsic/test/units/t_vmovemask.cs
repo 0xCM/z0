@@ -15,7 +15,7 @@ namespace Z0
 
     public class t_vmovemask : UnitTest<t_vmovemask>
     {
-        public void movemask256_u8()
+        public void movemask_256x8u()
         {
             var bits = n256;
             var bytes = n32;
@@ -42,7 +42,7 @@ namespace Z0
             }
         }
 
-        public void movemask128_u8()
+        public void movemask_128x8u()
         {
             const int hibit = 7;
             var bits = n128;
@@ -70,7 +70,7 @@ namespace Z0
             }
         }
 
-        public void movemask256_f32()
+        public void movemask_256x32f()
         {
             var samples = Pow2.T12;
             var src = Random.BlockedSpan<float>(n256,samples);
@@ -90,7 +90,7 @@ namespace Z0
         }
 
 
-        public void movemask256_f64()
+        public void movemask_256x64f()
         {
             var samples = Pow2.T12;
             var src = Random.BlockedSpan<double>(n256, samples);

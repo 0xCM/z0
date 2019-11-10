@@ -21,13 +21,13 @@ namespace Z0.Mkl
         [MethodImpl(Inline)]
         protected BlockVector<T> RVec<T>(int? len = null, T rep = default)
             where T : unmanaged
-                => Random.BlockVec<T>(len ?? DefaultVectorLength);
+                => Random.BlockVector<T>(len ?? DefaultVectorLength);
 
         [MethodImpl(Inline)]
         protected BlockVector<N,T> RVec<N,T>(N len = default, T rep = default)
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => Random.BlockVec<N,T>();
+                => Random.BlockVector<N,T>();
 
         /// <summary>
         /// Produces a random matrix of natural dimension
@@ -47,20 +47,20 @@ namespace Z0.Mkl
 
         [MethodImpl(Inline)]
         protected BlockVector<float> RVecF32(int len, int? min = null, int? max = null)
-            => Random.BlockVec<int,float>(len, closed(min ?? -25, max ?? 25));
+            => Random.BlockVector<int,float>(len, closed(min ?? -25, max ?? 25));
 
         [MethodImpl(Inline)]
         protected BlockVector<double> RVecF64(int len, long? min = null, long? max = null)
-            => Random.BlockVec<long,double>(len, closed(min ?? -25L, max ?? 25L));
+            => Random.BlockVector<long,double>(len, closed(min ?? -25L, max ?? 25L));
 
         [MethodImpl(Inline)]
         protected BlockVector<float> RVecF32<N>(N len = default, int? min = null, int? max = null)
             where N : unmanaged, ITypeNat
-                => Random.BlockVec<N,int,float>(closed(min ?? -25, max ?? 25));
+                => Random.BlockVector<N,int,float>(closed(min ?? -25, max ?? 25));
 
         [MethodImpl(Inline)]
         protected BlockVector<double> RVecF64<N>(N len = default, long? min = null, long? max = null)
             where N : unmanaged, ITypeNat
-                => Random.BlockVec<N,long,double>(closed(min ?? -25L, max ?? 25L));
+                => Random.BlockVector<N,long,double>(closed(min ?? -25L, max ?? 25L));
     }
 }

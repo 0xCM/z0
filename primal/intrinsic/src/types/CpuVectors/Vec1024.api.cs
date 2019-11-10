@@ -16,23 +16,6 @@ namespace Z0
 
     public static class Vec1024
     {
-        [MethodImpl(Inline)]
-        public static Vec1024<T> Define<T>(Vector256<T> v0, Vector256<T> v1, Vector256<T> v2, Vector256<T> v3)        
-            where T : unmanaged
-                => new Vec1024<T>(v0, v1, v2, v3);        
 
-        [MethodImpl(Inline)]
-        public static unsafe Span<T> Segment<T>(this ref Vec1024<T> src, int offset, int len)
-            where T : unmanaged
-        {
-            var askByteOffset = offset * Vec1024<T>.CellSize;
-            var askByteCount = len * Vec1024<T>.CellSize;
-            var haveByteCount = Pow2.T07 - askByteOffset;
-            if(askByteCount > haveByteCount)
-                throw Errors.TooManyBytes(askByteCount, haveByteCount);
-            ref var dst = ref Unsafe.Add(ref src, offset);
-            var pDst = Unsafe.AsPointer(ref dst);
-            return new Span<T>(pDst,len);
-        }
     }
 }

@@ -98,7 +98,6 @@ namespace Z0
             where T : unmanaged
                 => stream(random.UniformStream(domain,filter), random.RngKind);
 
-
         /// <summary>
         /// Produces a stream values from the source subject to a specified maximum value and optional filter
         /// </summary>
@@ -222,29 +221,6 @@ namespace Z0
             while(true)            
             {
                 next = src.Next<T>(domain);
-                // if(typeof(T) == typeof(sbyte))
-                //     next = generic<T>(src.Next<sbyte>(domain.As<sbyte>()));                    
-                // else if(typeof(T) == typeof(byte))
-                //     next = generic<T>(src.Next<byte>(domain.As<byte>()));                    
-                // else if(typeof(T) == typeof(short))
-                //     next = generic<T>(src.Next<short>(domain.As<short>()));                    
-                // else if(typeof(T) == typeof(ushort))
-                //     next = generic<T>(src.Next<ushort>(domain.As<ushort>()));                    
-                // else if(typeof(T) == typeof(int))
-                //     next = generic<T>(src.Next<int>(domain.As<int>()));                    
-                // else if(typeof(T) == typeof(uint))
-                //     next = generic<T>(src.Next<uint>(domain.As<uint>()));                    
-                // else if(typeof(T) == typeof(long))
-                //     next = generic<T>(src.Next<long>(domain.As<long>()));                    
-                // else if(typeof(T) == typeof(ulong))
-                //     next = generic<T>(src.Next<ulong>(domain.As<ulong>()));                    
-                // else if(typeof(T) == typeof(float))
-                //     next = generic<T>(src.Next<float>(domain.As<float>()));                    
-                // else if(typeof(T) == typeof(double))
-                //     next = generic<T>(src.Next<double>(domain.As<double>()));                    
-                // else 
-                //     throw unsupported<T>();
-
                 if(filter(next))
                 {
                     tries = 0;

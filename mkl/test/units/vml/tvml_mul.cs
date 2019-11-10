@@ -28,8 +28,8 @@ namespace Z0.Mkl.Test
 
         public void vMulF64()
         {
-            var lhs = Random.BlockVec<N256,double>();
-            var rhs = Random.BlockVec<N256,double>();
+            var lhs = Random.BlockVector<N256,double>();
+            var rhs = Random.BlockVector<N256,double>();
             var dst1 = BlockVector.Alloc<N256,double>();
             mkl.mul(lhs,rhs, ref dst1);
             

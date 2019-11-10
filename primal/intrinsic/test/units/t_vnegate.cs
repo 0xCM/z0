@@ -15,104 +15,127 @@ namespace Z0.Test
     public class t_vnegate : IntrinsicTest<t_vnegate>
     {
 
-        public void vnegate_g128x8i_check()
+        public void negate_128x8i()
+            => negate_128_check<sbyte>();
+
+        public void negate_128x16i()
+            => negate_128_check<short>();
+
+        public void negate_128x16u()
+            => negate_128_check<ushort>();
+
+        public void negate_128x32i()
         {
-            vnegate_g128_check<sbyte>();
+            negate_128_check<int>();
         }
 
-
-        public void vnegate_g128x16i_check()
+        public void negate_128x32u()
         {
-            vnegate_g128_check<short>();
+            negate_128_check<uint>();
         }
 
-        public void vnegate_g128x16u_check()
+        public void negate_128x64i()
         {
-            vnegate_g128_check<ushort>();
+            negate_128_check<long>();
         }
 
-        public void vnegate_g128x32i_check()
+        public void negate_128x64u()
         {
-            vnegate_g128_check<int>();
+            negate_128_check<ulong>();
         }
 
-        public void vnegate_g128x32u_check()
+        public void negate_128x32f()
+            => negate_128_check<float>();
+
+        public void negate_128x64f()
+            => negate_128_check<double>();
+
+        public void negate_256x8i()
         {
-            vnegate_g128_check<uint>();
+            negate_256_check<sbyte>();
         }
 
-        public void vnegate_g128x64i_check()
+        public void negate_256x8u()
         {
-            vnegate_g128_check<long>();
+            negate_256_check<byte>();
         }
 
-        public void vnegate_g128x64u_check()
+        public void negate_256x16i()
         {
-            vnegate_g128_check<ulong>();
+            negate_256_check<short>();
         }
 
-        public void vnegate_g128x32f_check()
+        public void negate_256x16u()
         {
-            vnegate_g128_check<float>();
+            negate_256_check<ushort>();
         }
 
-        public void vnegate_g128x64f_check()
+        public void negate_256x32i()
         {
-            vnegate_g128_check<double>();
+            negate_256_check<int>();
         }
 
-        public void vnegate_g256x8i_check()
+        public void negate_256x32u()
         {
-            vnegate_g256_check<sbyte>();
+            negate_256_check<uint>();
         }
 
-        public void vnegate_g256x8u_check()
+        public void negate_256x64i()
         {
-            vnegate_g256_check<byte>();
+            negate_256_check<long>();
         }
 
-        public void vnegate_g256x16i_check()
+        public void negate_256x64u()
         {
-            vnegate_g256_check<short>();
+            negate_256_check<ulong>();
         }
 
-        public void vnegate_g256x16u_check()
+        public void negate_256x32f()
+            => negate_256_check<float>();
+
+        public void negate_256x64f()
+            => negate_256_check<double>();
+
+        public void negate_blocks_256x8i()
+            => negate_blocks_check<sbyte>(n256);
+
+        public void negate_blocks_256x8u()
+            => negate_blocks_check<byte>(n256);
+
+        public void negate_blocks_256x16i()
+            => negate_blocks_check<short>(n256);
+
+        public void negate_blocks_256x16u()
+            => negate_blocks_check<ushort>(n256);
+
+        public void negate_blocks_256x32i()
+            => negate_blocks_check<int>(n256);
+
+        public void negate_blocks_256x32u()
+            => negate_blocks_check<uint>(n256);
+
+        public void negate_blocks_256x64i()
+            => negate_blocks_check<long>(n256);
+
+        public void negate_blocks_256x64u()
+            => negate_blocks_check<ulong>(n256);
+
+        void negate_blocks_check<T>(N256 n)
+            where T : unmanaged
         {
-            vnegate_g256_check<ushort>();
+            var blocks = SampleSize;
+            var stats = VBlockStats.Calc<N256,T>(blocks);
+            var step = stats.StepSize;
+            var cells = stats.CellCount;
+
+            var src = Random.BlockedSpan<T>(n, blocks);
+            var dst = BlockedSpan.AllocBlocks<T>(n, blocks);
+            vblock.negate(n, blocks, step, in src.Head, ref dst.Head);
+            for(var i=0; i<cells; i++)
+                Claim.eq(gmath.negate(src[i]), dst[i]);
         }
 
-        public void vnegate_g256x32i_check()
-        {
-            vnegate_g256_check<int>();
-        }
-
-        public void vnegate_g256x32u_check()
-        {
-            vnegate_g256_check<uint>();
-        }
-
-        public void vnegate_g256x64i_check()
-        {
-            vnegate_g256_check<long>();
-        }
-
-        public void vnegate_g256x64u_check()
-        {
-            vnegate_g256_check<ulong>();
-        }
-
-        public void vnegate_g256x32f_check()
-        {
-            vnegate_g256_check<float>();
-        }
-
-        public void vnegate_g256x64f_check()
-        {
-            vnegate_g256_check<double>();
-        }
-
-
-        void vnegate_g128_check<T>(N128 n = default)
+        void negate_128_check<T>(N128 n = default)
             where T : unmanaged
         {
             for(var i=0; i<SampleSize; i++)
@@ -124,7 +147,7 @@ namespace Z0.Test
             }
         }
 
-        void vnegate_g256_check<T>(N256 n = default)
+        void negate_256_check<T>(N256 n = default)
             where T : unmanaged
         {
             for(var i=0; i<SampleSize; i++)

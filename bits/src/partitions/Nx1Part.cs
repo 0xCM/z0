@@ -416,6 +416,19 @@ namespace Z0
             => part64x1(src, ref head64(dst));
  
         /// <summary>
+        /// Partitions a 64-bit source into 64 8-bit targets of effective width 1
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <param name="dst">The target span</param>
+        [MethodImpl(Inline)]
+        public static void part64x1(ulong src, Span<bit> dst)
+        {
+            ref var target = ref head(dst);
+            for(var i=0; i<64; i++)
+                seek(ref target, i) = Bits.test(src,i);
+        }
+
+        /// <summary>
         /// Replicates the low bit of a source to an identified partition of an empty target
         /// </summary>
         /// <param name="src">The bit source</param>

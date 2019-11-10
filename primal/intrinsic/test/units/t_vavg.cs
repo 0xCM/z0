@@ -53,8 +53,8 @@ namespace Z0.Test
                 var sw = stopwatch(false);
                 for(var i=0; i<SampleSize; i++)
                 {
-                    var x = Random.Span256<byte>();
-                    var y = Random.Span256<byte>();
+                    var x = Random.BlockedSpan<byte>(n256);
+                    var y = Random.BlockedSpan<byte>(n256);
                     sw.Start();
                     var b = mathspan.avgi(x, y);
                     sw.Stop();

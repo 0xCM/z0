@@ -59,8 +59,7 @@ namespace Z0
         public static Perm<N> Perm<N>(this IPolyrand random, N n = default)
             where N : unmanaged, ITypeNat
                 => Z0.Perm.Identity(n).Shuffle(random);
-
-
+                
         /// <summary>
         /// Produces a stream of random permutation of natural length N
         /// </summary>

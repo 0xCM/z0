@@ -20,17 +20,7 @@ namespace Z0
         /// <param name="src">The value to interrogate</param>
         /// <param name="pos">The position to check</param>
         [MethodImpl(Inline)]
-        public static bool test(sbyte src, int pos)
-            => BitMask.test(src, pos);
-
-
-        /// <summary>
-        /// Determines whether a bit in a specified position is enabled
-        /// </summary>
-        /// <param name="src">The value to interrogate</param>
-        /// <param name="pos">The position to check</param>
-        [MethodImpl(Inline)]
-        public static bool test(byte src, int pos)
+        public static bit test(sbyte src, int pos)
             => BitMask.test(src, pos);
 
         /// <summary>
@@ -39,7 +29,7 @@ namespace Z0
         /// <param name="src">The value to interrogate</param>
         /// <param name="pos">The position to check</param>
         [MethodImpl(Inline)]
-        public static bool test(short src, int pos)
+        public static bit test(byte src, int pos)
             => BitMask.test(src, pos);
 
         /// <summary>
@@ -48,7 +38,7 @@ namespace Z0
         /// <param name="src">The value to interrogate</param>
         /// <param name="pos">The position to check</param>
         [MethodImpl(Inline)]
-        public static bool test(ushort src, int pos)
+        public static bit test(short src, int pos)
             => BitMask.test(src, pos);
 
         /// <summary>
@@ -57,7 +47,7 @@ namespace Z0
         /// <param name="src">The value to interrogate</param>
         /// <param name="pos">The position to check</param>
         [MethodImpl(Inline)]
-        public static bool test(int src, int pos)
+        public static bit test(ushort src, int pos)
             => BitMask.test(src, pos);
 
         /// <summary>
@@ -66,7 +56,7 @@ namespace Z0
         /// <param name="src">The value to interrogate</param>
         /// <param name="pos">The position to check</param>
         [MethodImpl(Inline)]
-        public static bool test(uint src, int pos)
+        public static bit test(int src, int pos)
             => BitMask.test(src, pos);
 
         /// <summary>
@@ -75,7 +65,7 @@ namespace Z0
         /// <param name="src">The value to interrogate</param>
         /// <param name="pos">The position to check</param>
         [MethodImpl(Inline)]
-        public static bool test(long src, int pos)
+        public static bit test(uint src, int pos)
             => BitMask.test(src, pos);
 
         /// <summary>
@@ -84,7 +74,7 @@ namespace Z0
         /// <param name="src">The value to interrogate</param>
         /// <param name="pos">The position to check</param>
         [MethodImpl(Inline)]
-        public static bool test(ulong src, int pos)
+        public static bit test(long src, int pos)
             => BitMask.test(src, pos);
 
         /// <summary>
@@ -93,7 +83,7 @@ namespace Z0
         /// <param name="src">The value to interrogate</param>
         /// <param name="pos">The position to check</param>
         [MethodImpl(Inline)]
-        public static bool test(float src, int pos)
+        public static bit test(ulong src, int pos)
             => BitMask.test(src, pos);
 
         /// <summary>
@@ -102,10 +92,16 @@ namespace Z0
         /// <param name="src">The value to interrogate</param>
         /// <param name="pos">The position to check</param>
         [MethodImpl(Inline)]
-        public static bool test(double src, int pos)
+        public static bit test(float src, int pos)
             => BitMask.test(src, pos);
 
-
+        /// <summary>
+        /// Determines whether a bit in a specified position is enabled
+        /// </summary>
+        /// <param name="src">The value to interrogate</param>
+        /// <param name="pos">The position to check</param>
+        [MethodImpl(Inline)]
+        public static bit test(double src, int pos)
+            => BitMask.test(src, pos);
     }
-
 }

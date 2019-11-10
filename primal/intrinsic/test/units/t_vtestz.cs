@@ -20,102 +20,102 @@ namespace Z0.Test
     {
 
 
-        public void vtestz_g128x8i_check()
+        public void vtestz_g128x8i()
         {
             vtestz_g128_check<sbyte>();
         }
 
-        public void vtestz_g128x8u_check()
+        public void vtestz_g128x8u()
         {
             vtestz_g128_check<byte>();
         }
 
-        public void vtestz_g128x16i_check()
+        public void vtestz_g128x16i()
         {
             vtestz_g128_check<short>();
         }
 
-        public void vtestz_g128x16u_check()
+        public void vtestz_g128x16u()
         {
             vtestz_g128_check<ushort>();
         }
 
-        public void vtestz_g128x32i_check()
+        public void vtestz_g128x32i()
         {
             vtestz_g128_check<int>();
         }
 
-        public void vtestz_g128x32u_check()
+        public void vtestz_g128x32u()
         {
             vtestz_g128_check<uint>();
         }
 
-        public void vtestz_g128x64i_check()
+        public void vtestz_g128x64i()
         {
             vtestz_g128_check<long>();
         }
 
-        public void vtestz_g128x64u_check()
+        public void vtestz_g128x64u()
         {
             vtestz_g128_check<ulong>();
         }
 
-        public void vtestz_g128x32f_check()
+        public void vtestz_g128x32f()
         {
             vtestz_g128_check<float>();
         }
 
-        public void vtestz_g128x64f_check()
+        public void vtestz_g128x64f()
         {
             vtestz_g128_check<double>();
         }
 
-        public void vtestz_g256x8i_check()
+        public void vtestz_g256x8i()
         {
             vtestz_g256_check<sbyte>();
         }
 
-        public void vtestz_g256x8u_check()
+        public void vtestz_g256x8u()
         {
             vtestz_g256_check<byte>();
         }
 
-        public void vtestz_g256x16i_check()
+        public void vtestz_g256x16i()
         {
             vtestz_g256_check<short>();
         }
 
-        public void vtestz_g256x16u_check()
+        public void vtestz_g256x16u()
         {
             vtestz_g256_check<ushort>();
         }
 
-        public void vtestz_g256x32i_check()
+        public void vtestz_g256x32i()
         {
             vtestz_g256_check<int>();
         }
 
-        public void vtestz_g256x32u_check()
+        public void vtestz_g256x32u()
         {
             vtestz_g256_check<uint>();
         }
 
-        public void vtestz_g256x64i_check()
+        public void vtestz_g256x64i()
         {
             vtestz_g256_check<long>();
         }
 
-        public void vtestz_g256x64u_check()
+        public void vtestz_g256x64u()
         {
             vtestz_g256_check<ulong>();
         }
 
-        public void vtestz_g256x32f_check()
+        public void vtestz_g256x32f()
         {
             vtestz_g256_check<float>();
         }
 
-        public void vtestz_g256x64f_check()
+        public void vtestz_g256x64f()
         {
             vtestz_g256_check<double>();
         }

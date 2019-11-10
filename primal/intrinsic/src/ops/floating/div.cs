@@ -17,7 +17,6 @@ namespace Z0
 
     partial class dfp
     {
-
         /// <summary>
         /// __m128 _mm_div_ps (__m128 a, __m128 b)DIVPS xmm, xmm/m128
         /// </summary>
@@ -53,6 +52,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<double> vdiv(Vector256<double> x, Vector256<double> y)
             => Divide(x, y);
-
     }
 }

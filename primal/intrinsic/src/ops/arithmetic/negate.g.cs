@@ -12,7 +12,6 @@ namespace Z0
     using static zfunc;    
     using static As;
     
-
     partial class ginx
     {
         [MethodImpl(Inline)]
@@ -47,8 +46,8 @@ namespace Z0
             || typeof(T) == typeof(long))
                 return vnegate_i(src);
             else return gfpv.vnegate(src);
-        }
-
+        }                    
+ 
         [MethodImpl(Inline)]
         static Vector128<T> vnegate_i<T>(Vector128<T> lhs)
             where T : unmanaged

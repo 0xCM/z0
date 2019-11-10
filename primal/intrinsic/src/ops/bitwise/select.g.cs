@@ -39,6 +39,37 @@ namespace Z0
         public static Vector256<T> vselect<T>(Vector256<T> x, Vector256<T> y, Vector256<T> z)
             where T : unmanaged
                 => vor(vand(x,y), vnotimply(x,z));
+
+        [MethodImpl(Inline)]
+        public static unsafe Vector128<T> vselect<T>(N128 n, in T rX, in T rY, in T rZ)
+            where T : unmanaged
+        {                    
+            vload(rX, out Vector128<T> vA);
+            vload(rY, out Vector128<T> vB);
+            vload(rZ, out Vector128<T> vC);
+            return vselect(vA,vB,vC);
+        }
+
+        [MethodImpl(Inline)]
+        public static unsafe void vselect<T>(N128 n, in T rX, in T rY, in T rZ, ref T rDst)
+            where T : unmanaged
+                => vstore(vselect(n, in rX, in rY, in rZ), ref rDst);
+
+        [MethodImpl(Inline)]
+        public static unsafe Vector256<T> vselect<T>(N256 n, in T rX, in T rY, in T rZ)
+            where T : unmanaged
+        {                    
+            vload(rX, out Vector256<T> vA);
+            vload(rY, out Vector256<T> vB);
+            vload(rZ, out Vector256<T> vC);
+            return vselect(vA,vB,vC);
+        }
+
+        [MethodImpl(Inline)]
+        public static unsafe void vselect<T>(N256 n, in T rX, in T rY, in T rZ, ref T rDst)
+            where T : unmanaged
+                => vstore(vselect(n, in rX, in rY, in rZ), ref rDst);
+
     }
 
 }

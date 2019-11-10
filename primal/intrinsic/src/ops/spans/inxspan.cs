@@ -47,30 +47,12 @@ namespace Z0
             return dst;        
         } 
 
-        public static Span128<T> sub<T>(ReadOnlySpan128<T> lhs, ReadOnlySpan128<T> rhs, Span128<T> dst)
-            where T : unmanaged
-        {
-            var blocks = dst.BlockCount;
-            for(var block = 0; block < blocks; block++)
-                ginx.vstore(ginx.vsub<T>(ginx.vload(n128,in lhs.Block(block)), ginx.vload(n128,in rhs.Block(block))), ref dst.Block(block));
-            return dst;
-        }
-
         public static Span256<T> sub<T>(ReadOnlySpan256<T> lhs, ReadOnlySpan256<T> rhs, Span256<T> dst)
             where T : unmanaged
         {            
             var blocks = dst.BlockCount;
             for(var block = 0; block < blocks; block++)
                 ginx.vstore(ginx.vsub<T>(ginx.vload(n256,in lhs.Block(block)), ginx.vload(n256,in rhs.Block(block))), ref dst.Block(block));
-            return dst;
-        }
-
-        public static Span128<T> add<T>(ReadOnlySpan128<T> lhs, ReadOnlySpan128<T> rhs, Span128<T> dst)
-            where T : unmanaged
-        {
-            var blocks = dst.BlockCount;
-            for(var block = 0; block < blocks; block++)
-                ginx.vstore(ginx.vadd(ginx.vload(n128,in lhs.Block(block)), ginx.vload(n128,in rhs.Block(block))), ref dst.Block(block));
             return dst;
         }
 
@@ -83,36 +65,5 @@ namespace Z0
             return dst;
         } 
 
-        public static Span128<float> div(ReadOnlySpan128<float> lhs, ReadOnlySpan128<float> rhs, Span128<float> dst)
-        {
-            var blocks = dst.BlockCount;
-            for(var block = 0; block < blocks; block++)
-                ginx.vstore(dfp.vdiv(lhs.LoadVector(block), rhs.LoadVector(block)), ref dst[block]);            
-            return dst;            
-        }
-
-        public static Span128<double> div(ReadOnlySpan128<double> lhs, ReadOnlySpan128<double> rhs, Span128<double> dst)
-        {
-            var blocks = dst.BlockCount;
-            for(var block = 0; block < blocks; block++)
-                ginx.vstore(dfp.vdiv(lhs.LoadVector(block), rhs.LoadVector(block)), ref dst[block]);            
-            return dst;            
-        }
-
-        public static Span256<float> div(ReadOnlySpan256<float> lhs, ReadOnlySpan256<float> rhs, Span256<float> dst)
-        {
-            var blocks = dst.BlockCount;
-            for(var block = 0; block < blocks; block++)
-                ginx.vstore(dfp.vdiv(lhs.LoadVector(block), rhs.LoadVector(block)), ref dst[block]);            
-            return dst;            
-        }
-
-        public static Span256<double> div(ReadOnlySpan256<double> lhs, ReadOnlySpan256<double> rhs, Span256<double> dst)
-        {
-            var blocks = dst.BlockCount;
-            for(var block = 0; block < blocks; block++)
-                ginx.vstore(dfp.vdiv(lhs.LoadVector(block), rhs.LoadVector(block)), ref dst[block]);            
-            return dst;            
-        }     
-    }
+   }
 }

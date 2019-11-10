@@ -14,32 +14,53 @@ namespace Z0
 
     public class t_vcount : UnitTest<t_vcount>
     {   
-        public void next8i()
-            => next_check<byte>();
+        public void next_128x8i()
+            => next_check<byte>(n128);
 
-        public void next8u()        
-            => next_check<byte>();
-        
+        public void next_128x8u()        
+            => next_check<byte>(n128);
 
-        public void next32i()
-        {
-            next_check<int>();
-        }
+        public void next_128x16i()
+            => next_check<short>(n128);
 
-        public void next32u()
-        {
-            next_check<uint>();
-        }
+        public void next_128x16u()        
+            => next_check<ushort>(n128);
 
-        public void next64i()
-        {
-            next_check<long>();
-        }
+        public void next_128x32i()
+           => next_check<int>(n128);
 
-        public void next64u()
-        {
-            next_check<ulong>();
-        }
+        public void next_128x32u()
+            => next_check<uint>(n128);
+
+        public void next_128x64i()        
+            => next_check<long>(n128);        
+
+        public void next_128x64u()
+            => next_check<ulong>(n128);
+
+        public void next_256x8i()
+            => next_check<byte>(n256);
+
+        public void next_256x8u()        
+            => next_check<byte>(n256);
+
+        public void next_256x16i()
+            => next_check<short>(n256);
+
+        public void next_256x16u()        
+            => next_check<ushort>(n256);
+
+        public void next_256x32i()
+           => next_check<int>(n256);
+
+        public void next_256x32u()
+            => next_check<uint>(n256);
+
+        public void next_256x64i()        
+            => next_check<long>(n256);        
+
+        public void next_256x64u()
+            => next_check<ulong>(n256);
 
 
         void next_check<T>(N128 n)
@@ -65,7 +86,6 @@ namespace Z0
                     Claim.eq(xps[j], gmath.dec(xs[j]));
                 }
             }
-
         }
 
         void next_check<T>(N256 n)
@@ -93,11 +113,5 @@ namespace Z0
             }
         }
 
-        void next_check<T>()
-            where T : unmanaged
-        {
-            next_check<T>(n128);
-            next_check<T>(n256);
-        }
     }
 }

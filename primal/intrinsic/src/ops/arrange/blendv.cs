@@ -147,23 +147,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<double> vblendv(Vector256<double> x, Vector256<double> y, Vector256<double> spec)        
             => BlendVariable(x, y, spec);
-
-
-        [MethodImpl(Inline)]
-        public static Vector256<int> vblendv_32i(Vector256<int> x, Vector256<int> y, Vector256<int> mask)
-            => BlendVariable(x.AsSingle(),y.AsSingle(),mask.AsSingle()).AsInt32();
-
-        [MethodImpl(Inline)]
-        public static Vector256<uint> vblendv_32u(Vector256<uint> x, Vector256<uint> y, Vector256<uint> mask)
-            => BlendVariable(x.AsSingle(),y.AsSingle(),mask.AsSingle()).AsUInt32();
-
-        [MethodImpl(Inline)]
-        public static Vector256<long> vblendv_64i(Vector256<long> x, Vector256<long> y, Vector256<long> mask)
-            => BlendVariable(x.AsDouble(),y.AsDouble(),mask.AsDouble()).AsInt64();
-
-        [MethodImpl(Inline)]
-        public static Vector256<ulong> vblendv_64u(Vector256<ulong> x, Vector256<ulong> y, Vector256<ulong> mask)
-            => BlendVariable(x.AsDouble(),y.AsDouble(),mask.AsDouble()).AsUInt64();
     }
 
 }

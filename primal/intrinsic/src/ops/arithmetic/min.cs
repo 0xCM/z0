@@ -64,6 +64,28 @@ namespace Z0
             => Min(x, y);
 
         /// <summary>
+        /// Computes the maximum values of corresponding components
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        [MethodImpl(Inline)]
+        public static Vector128<long> vmin(Vector128<long> x, Vector128<long> y)
+        {
+            var xL = vinsert(x,default,0);
+            var yL = vinsert(y,default,0);
+            return vlo(vmin(xL,yL));
+        }
+
+        /// <summary>
+        /// Computes the maximum values of corresponding components
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        [MethodImpl(Inline)]
+        public static Vector128<ulong> vmin(Vector128<ulong> x, Vector128<ulong> y)
+            => vselect(vlt(x,y),x,y);
+
+        /// <summary>
         /// __m256i _mm256_min_epu8 (__m256i a, __m256i b) VPMINUB ymm, ymm, ymm/m256
         /// </summary>
         /// <param name="x"></param>
@@ -116,6 +138,24 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<uint> vmin(Vector256<uint> x, Vector256<uint> y)
             => Min(x, y);
+
+        /// <summary>
+        /// Computes the maximum values of corresponding components
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        [MethodImpl(Inline)]
+        public static Vector256<ulong> vmin(Vector256<ulong> x, Vector256<ulong> y)
+            => vselect(vlt(x,y),x,y);
+
+        /// <summary>
+        /// Computes the maximum values of corresponding components
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        [MethodImpl(Inline)]
+        public static Vector256<long> vmin(Vector256<long> x, Vector256<long> y)
+            => vblendv(y, x, vlt(x,y));
 
 
     }
