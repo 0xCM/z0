@@ -102,25 +102,25 @@ namespace Z0
         [MethodImpl(Inline)]
         BlockVector(ref T src)
         {  
-            data =  Span256.Load<T>(ref src, Length);  
+            data =  Span256.load<T>(ref src, Length);  
         }
 
         [MethodImpl(Inline)]
         BlockVector(in ReadOnlySpan<N,T> src)
         {
-            data = Span256.Load(src.Unsized);
+            data = Span256.load(src.Unsized);
         }
 
         [MethodImpl(Inline)]
         BlockVector(in ReadOnlySpan<T> src)
         {
-            data = Span256.Load(src);
+            data = Span256.load(src);
         }
 
         [MethodImpl(Inline)]
         BlockVector(Span<T> src)
         {
-            data = Span256.Load(src);
+            data = Span256.load(src);
         }
 
 
@@ -134,7 +134,7 @@ namespace Z0
         [MethodImpl(Inline)]
         BlockVector(Span<N,T> src)
         {
-            data = Span256.Load(src);
+            data = Span256.load(src);
         }
                     
         public ref T this[int index] 

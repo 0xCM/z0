@@ -14,7 +14,6 @@ namespace Z0
 
     partial class ginx
     {
-
         [MethodImpl(Inline)]
         public static Vector128<T> vnor<T>(Vector128<T> x, Vector128<T> y)
             where T : unmanaged
@@ -130,6 +129,5 @@ namespace Z0
             else
                 throw unsupported<T>();
         }
-
     }
 }

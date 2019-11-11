@@ -106,8 +106,5 @@ namespace Z0
             else
                 return generic<T>(dinx.vnot(int64(src)));
         }
-
-
     }
-
 }

@@ -22,17 +22,18 @@ namespace Z0
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The source value type</typeparam>
         [MethodImpl(Inline)]
-        public static Span128<byte> AsBytes<T>(Span128<T> src)
+        public static Span128<byte> bytes<T>(Span128<T> src)
             where T : unmanaged
-                => Span128.Load(MemoryMarshal.AsBytes(src.Unblock()));
+                => load(MemoryMarshal.AsBytes(src.Unblock()));
 
         /// <summary>
-        /// Allocates a span to hold a specified number of blocks
+        /// Allocates a span with a specified number of blocks
         /// </summary>
         /// <param name="blocks">The number of blocks for which memory should be alocated</param>
-        /// <typeparam name="T">The primitive type</typeparam>
-        [MethodImpl(Inline)]
-        public static Span128<T> AllocBlocks<T>(int blocks, T? fill = null)
+        /// <param name="fill">An optional value that, if specified, is used to initialize the cell values</param>
+        /// <typeparam name="T">The element type</typeparam>
+        [MethodImpl(NotInline)]
+        public static Span128<T> alloc<T>(int blocks, T? fill = null)
             where T : unmanaged        
                 => Span128<T>.AllocBlocks(blocks, fill);
 
@@ -41,26 +42,64 @@ namespace Z0
         /// </summary>
         /// <param name="fill">An optional value that, if specified, is used to initialize the cell values</param>
         /// <typeparam name="T">The element type</typeparam>
-        [MethodImpl(Inline)]
-        public static Span128<T> AllocBlock<T>(T? fill = null)
+        [MethodImpl(NotInline)]
+        public static Span128<T> alloc<T>(T? fill = null)
             where T : unmanaged        
                 => Span128<T>.AllocBlocks(1, fill);
 
         /// <summary>
-        /// Allocates a 256-bit blocked span of a specified minimum length which may not
-        /// partition evently into 256-bit blocks
+        /// Allocates a 256-bit blocked span of a specified minimum length which may not partition evently into 256-bit blocks
         /// </summary>
         /// <param name="minlen">The minimum allocation length</param>
         /// <typeparam name="T">The element type</typeparam>
-        [MethodImpl(Inline)]
-        public static Span128<T> Alloc<T>(int minlen, T? fill = null)
+        [MethodImpl(NotInline)]
+        public static Span128<T> allocu<T>(int minlen, T? fill = null)
             where T : unmanaged        
         {
-            Span128.Alignment<T>(minlen, out int blocklen, out int fullBlocks, out int remainder);            
+            alignment<T>(minlen, out int blocklen, out int fullBlocks, out int remainder);            
             if(remainder == 0)
-                return AllocBlocks<T>(fullBlocks, fill);
+                return alloc<T>(fullBlocks, fill);
             else
-                return Span128.AllocBlocks<T>(fullBlocks + 1, fill);
+                return alloc<T>(fullBlocks + 1, fill);
+        }
+
+        /// <summary>
+        /// Allocates the minimum amount of memory required to align data of natural length in 128-bit blocks
+        /// </summary>
+        /// <typeparam name="M">The row type </typeparam>
+        /// <typeparam name="N">The column type</typeparam>
+        /// <typeparam name="T">The scalar type</typeparam>
+        [MethodImpl(Inline)]
+        public static Span128<T> allocu<N,T>(T? fill = null)
+            where N : unmanaged, ITypeNat
+            where T : unmanaged
+        {
+            var dataLen = nfunc.nati<N>();
+            alignment<T>(dataLen, out int blocklen, out int fullBlocks, out int remainder);            
+            if(remainder == 0)
+                return alloc<T>(fullBlocks,fill);
+            else
+                return alloc<T>(fullBlocks + 1,fill);
+        }
+
+        /// <summary>
+        /// Allocates the minimum amount of memory required to align matrix/tabular data in 256-bit blocks
+        /// </summary>
+        /// <typeparam name="M">The row type </typeparam>
+        /// <typeparam name="N">The column type</typeparam>
+        /// <typeparam name="T">The scalar type</typeparam>
+        [MethodImpl(Inline)]
+        public static Span128<T> allocu<M,N,T>(T? fill = null)
+            where M : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
+            where T : unmanaged
+        {
+            var dataLen = nfunc.nati<M>() * nfunc.nati<N>();
+            alignment<T>(dataLen, out int blocklen, out int fullBlocks, out int remainder);            
+            if(remainder == 0)
+                return alloc<T>(fullBlocks, fill);
+            else
+                return alloc<T>(fullBlocks + 1,fill);
         }
 
         /// <summary>
@@ -80,9 +119,21 @@ namespace Z0
         /// <param name="offset">The span index at which to begin the load</param>
         /// <typeparam name="T">The primitive type</typeparam>
         [MethodImpl(Inline)]
-        public static Span128<T> Load<T>(Span<T> src, int offset = 0)
+        public static Span128<T> load<T>(Span<T> src, int offset = 0)
             where T : unmanaged
                 => Span128<T>.Load(src, offset);
+
+        /// <summary>
+        /// Loads an unsized 256-bit blocked span from a sized unblocked span
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <param name="offset">The span index at which to begin the load</param>
+        /// <typeparam name="T">The element type</typeparam>
+        [MethodImpl(Inline)]
+        public static Span128<T> load<N,T>(Span<N,T> src)
+            where T : unmanaged
+            where N : unmanaged, ITypeNat
+                => load(src.Unsized);
 
         /// <summary>
         /// Loads a blocked readonly span from an unblocked readonly span
@@ -91,7 +142,7 @@ namespace Z0
         /// <param name="offset">The span index at which to begin the load</param>
         /// <typeparam name="T">The primitive type</typeparam>
         [MethodImpl(Inline)]
-        public static Span128<T> Load<T>(ReadOnlySpan<T> src, int offset = 0)
+        public static Span128<T> load<T>(ReadOnlySpan<T> src, int offset = 0)
             where T : unmanaged
                 => Span128<T>.Load(src, offset);
 
@@ -100,7 +151,7 @@ namespace Z0
         /// </summary>
         /// <typeparam name="T">The block constituent type</typeparam>
         [MethodImpl(Inline)]
-        public static int CellSize<T>()
+        public static int cellsize<T>()
             where T : unmanaged        
                 => Span128<T>.CellSize;
 
@@ -109,54 +160,17 @@ namespace Z0
         /// </summary>
         /// <typeparam name="T">The block constituent type</typeparam>
         [MethodImpl(Inline)]
-        public static int BlockSize<T>()
+        public static int blocksize<T>()
             where T : unmanaged        
                 => Span128<T>.BlockSize;
 
-        /// <summary>
-        /// Returns a reference to the first element of a span
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <typeparam name="T">The element type</typeparam>
-        [MethodImpl(Inline)]
-        public static ref T Head<T>(in Span128<T> src)
-            where T : unmanaged
-                =>  ref MemoryMarshal.GetReference<T>(src);
-
-        /// <summary>
-        /// Returns a readonly reference to the first element of a readonly span
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <typeparam name="T">The element type</typeparam>
-        [MethodImpl(Inline)]
-        public static ref readonly T Head<T>(in ReadOnlySpan128<T> src)
-            where T : unmanaged
-                =>  ref MemoryMarshal.GetReference<T>(src);
-
-
-        [MethodImpl(Inline)]
-        public static ref T Offset<T>(in Span128<T> src, int index)
-            where T : unmanaged
-        {
-            ref var first = ref Head(in src);
-            return ref Unsafe.Add(ref first, index);
-        }
-
-        [MethodImpl(Inline)]
-        public static ref T BlockedOffset<T>(in Span128<T> src, int blocks)
-            where T : unmanaged
-        {
-            ref var first = ref Head(in src);
-            var index = blocks * Span128<T>.BlockLength;
-            return ref Unsafe.Add(ref first, index);
-        }
 
         /// <summary>
         /// Calculates the number of cells that comprise a specified number of block
         /// </summary>
         /// <typeparam name="T">The block constituent type</typeparam>
         [MethodImpl(Inline)]
-        public static int BlockLength<T>(int blocks = 1)
+        public static int blocklen<T>(int blocks = 1)
             where T : unmanaged        
                 => blocks * Span128<T>.BlockLength;
 
@@ -166,19 +180,9 @@ namespace Z0
         /// <param name="length">The length of the cell sequence</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        public static int WholeBlocks<T>(int length)
+        public static int fullblocks<T>(int length)
             where T : unmanaged  
-                => length / BlockLength<T>();
-
-        /// <summary>
-        /// Calculates the number of bytes consumed by a specified number of cells
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
-        public static ByteSize CellBytes<T>(int count)
-            where T : unmanaged        
-            => count * CellSize<T>();
+                => length / blocklen<T>();
 
         /// <summary>
         /// Determines whether data of a specified length can be evenly covered by 128-bit
@@ -187,19 +191,19 @@ namespace Z0
         /// <param name="datasize">The length, in bytes, of the source data</param>
         /// <typeparam name="T">The block constituent type</typeparam>
         [MethodImpl(Inline)]
-        public static bool IsAligned<T>(int length)
+        public static bool aligned<T>(int length)
             where T : unmanaged        
                 => Span128<T>.Aligned(length);
 
         [MethodImpl(Inline)]
-        public static int Align<T>(int length)
+        public static int align<T>(int length)
             where T : unmanaged        
         {
-            var remainder = length % BlockLength<T>();
+            var remainder = length % blocklen<T>();
             if(remainder == 0)
                 return length;
             else
-                return (length - remainder) + BlockLength<T>();
+                return (length - remainder) + blocklen<T>();
         }                    
 
         /// <summary>
@@ -211,12 +215,12 @@ namespace Z0
         /// <param name="remainder">The number of cells that cannot fit into a sequence of full blocks</param>
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
-        public static void Alignment<T>(int srcLen, out int blocklen, out int fullBlocks, out int remainder)
+        public static void alignment<T>(int srcLen, out int blocklen, out int fullBlocks, out int remainder)
             where T : unmanaged        
         {
-            blocklen = BlockLength<T>();
+            blocklen = blocklen<T>();
             fullBlocks = srcLen / blocklen;
-            remainder = srcLen % BlockLength<T>();
+            remainder = srcLen % blocklen<T>();
         } 
 
         /// <summary>
@@ -226,7 +230,7 @@ namespace Z0
         /// <param name="rhs">The right source</param>
         /// <typeparam name="T">The span element type</typeparam>
         [MethodImpl(Inline)]   
-        public static int Blocks<S,T>(Span128<S> lhs, Span128<T> rhs, [CallerFilePath] string caller = null,
+        public static int blocks<S,T>(Span128<S> lhs, Span128<T> rhs, [CallerFilePath] string caller = null,
             [CallerFilePath] string file = null, [CallerLineNumber] int? line = null)
                 where T : unmanaged
                 where S : unmanaged
@@ -240,7 +244,7 @@ namespace Z0
         /// <param name="rhs">The right source</param>
         /// <typeparam name="T">The span element type</typeparam>
         [MethodImpl(Inline)]   
-        public static int Blocks<S,T>(ReadOnlySpan128<S> lhs, ReadOnlySpan128<T> rhs, [CallerFilePath] string caller = null,
+        public static int blocks<S,T>(ReadOnlySpan128<S> lhs, ReadOnlySpan128<T> rhs, [CallerFilePath] string caller = null,
             [CallerFilePath] string file = null, [CallerLineNumber] int? line = null)
                 where T : unmanaged
                 where S : unmanaged
@@ -253,7 +257,7 @@ namespace Z0
         /// <param name="lhs">The left span</param>
         /// <param name="rhs">The right span</param>
         [MethodImpl(Inline)]   
-        public static int Length<S,T>(ReadOnlySpan128<S> lhs, ReadOnlySpan128<T> rhs, [CallerFilePath] string caller = null, 
+        public static int length<S,T>(ReadOnlySpan128<S> lhs, ReadOnlySpan128<T> rhs, [CallerFilePath] string caller = null, 
             [CallerFilePath] string file = null, [CallerLineNumber] int? line = null)        
             where T : unmanaged
             where S : unmanaged
@@ -266,12 +270,32 @@ namespace Z0
         /// <param name="lhs">The left span</param>
         /// <param name="rhs">The right span</param>
         [MethodImpl(Inline)]   
-        public static int Length<S,T>(Span128<S> lhs, Span128<T> rhs, [CallerFilePath] string caller = null,
+        public static int length<S,T>(Span128<S> lhs, Span128<T> rhs, [CallerFilePath] string caller = null,
             [CallerFilePath] string file = null, [CallerLineNumber] int? line = null)
                 where S : unmanaged
                 where T : unmanaged
                     => lhs.Length == rhs.Length ? lhs.Length 
-                        : throw CountMismatch(lhs.Length, rhs.Length, caller, file, line);
-   
+                        : throw CountMismatch(lhs.Length, rhs.Length, caller, file, line);   
+ 
+         /// <summary>
+        /// Returns a reference to the first element of a span
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <typeparam name="T">The element type</typeparam>
+        [MethodImpl(Inline)]
+        static ref T head<T>(in Span128<T> src)
+            where T : unmanaged
+                =>  ref MemoryMarshal.GetReference<T>(src);
+
+        /// <summary>
+        /// Returns a readonly reference to the first element of a readonly span
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <typeparam name="T">The element type</typeparam>
+        [MethodImpl(Inline)]
+        static ref readonly T head<T>(in ReadOnlySpan128<T> src)
+            where T : unmanaged
+                =>  ref MemoryMarshal.GetReference<T>(src);
+
     }
 }

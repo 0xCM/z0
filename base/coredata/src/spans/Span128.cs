@@ -66,7 +66,7 @@ namespace Z0
         public static bool Aligned(int length)
             => length % BlockLength == 0;
 
-        [MethodImpl(Inline)]
+        [MethodImpl(NotInline)]
         public static Span128<T> AllocBlocks(int count, T? fill = null)
         {
             var dst = new Span128<T>(new T[count * BlockLength]);
@@ -84,8 +84,14 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static Span128<T> Transfer(Span<T> src)
+        {
+            require(Aligned(src.Length));
+            return new Span128<T>(src);
+        }
+
+        [MethodImpl(Inline)]
+        internal static Span128<T> TransferUnsafe(Span<T> src)
             => new Span128<T>(src);
-         
 
         [MethodImpl(Inline)]
         public static Span128<T> Load(ReadOnlySpan<T> src, int offset = 0)
@@ -208,7 +214,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public Span128<S> As<S>()                
             where S : unmanaged
-                => Span128.Load(MemoryMarshal.Cast<T,S>(data));                    
+                => Span128.load(MemoryMarshal.Cast<T,S>(data));                    
 
         /// <summary>
         /// Provides access to the underlying storage

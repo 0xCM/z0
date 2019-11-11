@@ -336,22 +336,6 @@ namespace Z0
         }        
 
         /// <summary>
-        /// Projects 32 unsigned 8-bit integers onto 32 unsigned 32-bit integers that define the components of 4 256-bit vectors
-        /// </summary>
-        /// <param name="src"></param>
-        /// <param name="x0"></param>
-        /// <param name="x1"></param>
-        /// <param name="x2"></param>
-        /// <param name="x3"></param>
-        [MethodImpl(Inline)]
-        public static void vconvert(Vector256<byte> src, out Vector256<uint> x0, out Vector256<uint> x1, out Vector256<uint> x2, out Vector256<uint> x3)
-        {
-            vconvert(src, out Vector256<ushort> lo, out Vector256<ushort> hi);
-            vconvert(lo, out x0, out x1);
-            vconvert(hi, out x2, out x3);
-        }
-
-        /// <summary>
         /// __m256i _mm256_cvtepu8_epi64 (__m128i a) VPMOVZXBQ ymm, xmm
         /// </summary>
         /// <param name="src">The source vector</param>

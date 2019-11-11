@@ -57,8 +57,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bit vtestc<T>(Vector256<T> src)
             where T : unmanaged
-                => vtestc(src, vones<T>(n256));
-        
+                => vtestc(src, vones<T>(n256));        
 
         /// <summary>
         /// Determines whether mask-specified source bits are all on
@@ -182,7 +181,5 @@ namespace Z0
             else 
                 throw unsupported<T>();
         }
-
     }
-
 }

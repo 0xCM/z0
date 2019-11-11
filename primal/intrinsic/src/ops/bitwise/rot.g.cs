@@ -15,7 +15,6 @@ namespace Z0
 
     partial class ginx
     {
-
         /// <summary>
         /// Rotates each component the source vector leftwards by a constant offset
         /// </summary>
@@ -101,21 +100,21 @@ namespace Z0
         }
     
         [MethodImpl(Inline)]
-        public static unsafe Vector128<T> vrotl<T>(N128 n, in T pX, byte offset)
+        public static Vector128<T> vrotl<T>(N128 n, in T a, byte offset)
             where T : unmanaged
         {                    
-            vload(pX, out Vector128<T> vA);
+            vload(a, out Vector128<T> vA);
             return vrotl(vA,offset);
         }
 
         [MethodImpl(Inline)]
-        public static unsafe void vrotl<T>(N128 n, in T pX, byte offset, ref T pDst)
+        public static void vrotl<T>(N128 n, in T a, byte offset, ref T z)
             where T : unmanaged
-                => vstore(vrotl(n, in pX, offset), ref pDst);
+                => vstore(vrotl(n, in a, offset), ref z);
 
 
         [MethodImpl(Inline)]
-        public static unsafe Vector256<T> vrotl<T>(N256 n, in T pX, byte offset)
+        public static Vector256<T> vrotl<T>(N256 n, in T pX, byte offset)
             where T : unmanaged
         {                    
             vload(pX, out Vector256<T> vA);
@@ -123,35 +122,10 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static unsafe void vrotl<T>(N256 n, in T pX, byte offset, ref T pDst)
+        public static void vrotl<T>(N256 n, in T a, byte offset, ref T z)
             where T : unmanaged
-                => vstore(vrotl(n,in pX, offset), ref pDst);
+                => vstore(vrotl(n,in a, offset), ref z);
 
-        [MethodImpl(Inline)]
-        public static unsafe Vector128<T> vrotr<T>(N128 n, in T pX, byte offset)
-            where T : unmanaged
-        {                    
-            vload(pX, out Vector128<T> vA);
-            return vrotr(vA,offset);
-        }
-
-        [MethodImpl(Inline)]
-        public static unsafe void vrotr<T>(N128 n, in T pX, byte offset, ref T pDst)
-            where T : unmanaged
-                => vstore(vrotr(n, in pX, offset), ref pDst);
-
-        [MethodImpl(Inline)]
-        public static unsafe Vector256<T> vrotr<T>(N256 n, in T pX, byte offset)
-            where T : unmanaged
-        {                    
-            vload(pX, out Vector256<T> vA);
-            return vrotr(vA,offset);
-        }
-
-        [MethodImpl(Inline)]
-        public static unsafe void vrotr<T>(N256 n, in T pX, byte offset, ref T pDst)
-            where T : unmanaged
-                => vstore(vrotr(n,in pX, offset), ref pDst);
      
     }
 

@@ -18,27 +18,27 @@ namespace Z0
     {        
         
         [MethodImpl(Inline)]
-        public static unsafe Vector128<int> scalar(int src)
+        public static unsafe Vector128<int> vscalar(int src)
             => LoadScalarVector128(&src);
 
         [MethodImpl(Inline)]
-        public static unsafe Vector128<uint> scalar(uint src)
+        public static unsafe Vector128<uint> vscalar(uint src)
             => LoadScalarVector128(&src);
 
         [MethodImpl(Inline)]
-        public static unsafe Vector128<long> scalar(long src)
+        public static unsafe Vector128<long> vscalar(long src)
             => LoadScalarVector128(&src);
 
         [MethodImpl(Inline)]
-        public static unsafe Vector128<ulong> scalar(ulong src)
+        public static unsafe Vector128<ulong> vscalar(ulong src)
             => LoadScalarVector128(&src);
 
         [MethodImpl(Inline)]
-        public static unsafe Vector128<float> scalar(float src)
+        public static unsafe Vector128<float> vscalar(float src)
              => LoadScalarVector128(&src);
 
         [MethodImpl(Inline)]
-        public static unsafe Vector128<double> scalar(double src)
+        public static unsafe Vector128<double> vscalar(double src)
              => LoadScalarVector128(&src);
 
     }

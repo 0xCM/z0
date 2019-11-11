@@ -46,13 +46,13 @@ namespace Z0
             var xs = x.ToSpan();
             Claim.eq(Vector128.Create(xs[A], xs[B], xs[C], xs[D], xs[A+4], xs[B+ 4], xs[C + 4], xs[D + 4]), x);
 
-            var xABCD = dinx.vshufflehi(x, Perm4.ABCD);
+            var xABCD = dinx.vpermhi4x16(x, Perm4.ABCD);
             Claim.eq(xABCD, Vector128.Create(xs[A], xs[B], xs[C], xs[D], xs[A + 4], xs[B + 4], xs[C + 4], xs[D + 4]));
 
-            var xDCBA = dinx.vshufflehi(x, Perm4.DCBA);
+            var xDCBA = dinx.vpermhi4x16(x, Perm4.DCBA);
             Claim.eq(xDCBA, Vector128.Create(xs[A], xs[B], xs[C], xs[D], xs[D + 4], xs[C + 4], xs[B + 4], xs[A + 4]));
 
-            var xACBD = dinx.vshufflehi(x, Perm4.ACBD);
+            var xACBD = dinx.vpermhi4x16(x, Perm4.ACBD);
             Claim.eq(xACBD, Vector128.Create(xs[A], xs[B], xs[C], xs[D], xs[A + 4], xs[C + 4], xs[B + 4], xs[D + 4]));            
         }
 
@@ -62,13 +62,13 @@ namespace Z0
             var xs = x.ToSpan();
             Claim.eq(Vector128.Create(xs[A], xs[B], xs[C], xs[D], xs[A + 4], xs[B + 4], xs[C + 4], xs[D + 4]), x);
 
-            var xABCD = dinx.vshufflelo(x, Perm4.ABCD);
+            var xABCD = dinx.vpermlo4x16(x, Perm4.ABCD);
             Claim.eq(xABCD, Vector128.Create(xs[A], xs[B], xs[C], xs[D], xs[A + 4], xs[B + 4], xs[C + 4], xs[D + 4]));
 
-            var xDCBA = dinx.vshufflelo(x, Perm4.DCBA);
+            var xDCBA = dinx.vpermlo4x16(x, Perm4.DCBA);
             Claim.eq(xDCBA, Vector128.Create(xs[D], xs[C], xs[B], xs[A], xs[A + 4], xs[B + 4], xs[C + 4], xs[D + 4]));
 
-            var xACBD = dinx.vshufflelo(x, Perm4.ACBD);
+            var xACBD = dinx.vpermlo4x16(x, Perm4.ACBD);
             Claim.eq(xACBD, Vector128.Create(xs[A], xs[C], xs[B], xs[D], xs[A + 4], xs[B + 4], xs[C + 4], xs[D + 4]));
             
         }
@@ -81,8 +81,8 @@ namespace Z0
                 Claim.eq(perm[i],j);
 
             var shufspec = perm.ToShuffleSpec();
-            var dst = dinx.vshuffle(src,shufspec);
-            var expect = Vec128Pattern.decrements<byte>(15);
+            var dst = dinx.vshuf16x8(src,shufspec);
+            var expect = ginx.vdecrements<byte>(n128,15);
             Claim.eq(expect, dst);
 
             var dstPerm = dst.ToPerm();

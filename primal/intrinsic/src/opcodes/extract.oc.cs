@@ -14,30 +14,30 @@ namespace Z0
     partial class inxoc
     {
         public static byte vextract_128x8u_0(Vector128<byte> src)
-            => ginx.vextract(src,n0);
+            => ginx.vxscalar(src,n0);
 
         public static ulong vextract_128x64u_0(Vector128<ulong> src)
-            => ginx.vextract(src,n0);
+            => ginx.vxscalar(src,n0);
 
         public static ulong vextract_128x64u_1(Vector128<ulong> src)
-            => ginx.vextract(src,n1);
+            => ginx.vxscalar(src,n1);
 
         public static void vextract_128x64u_all(Vector128<ulong> src, out ulong x0, out ulong x1)
         {
-            x0 = ginx.vextract(src,n0);
-            x1 = ginx.vextract(src,n1);
+            x0 = ginx.vxscalar(src,n0);
+            x1 = ginx.vxscalar(src,n1);
         }
 
         public static void vextract_128x64u_all_2(Vector128<ulong> src, ref ulong dst)
         {
-            dst = ginx.vextract(src, n0);
-            Unsafe.Add(ref dst, 1) = ginx.vextract(src, n1);
+            dst = ginx.vxscalar(src, n0);
+            Unsafe.Add(ref dst, 1) = ginx.vxscalar(src, n1);
         }
 
         public static void vextract_128x64u_all_3(Vector128<ulong> src, out ulong x0, out ulong x1)
         {
-            x0 = ginx.vextract(src, 0);
-            x1 = ginx.vextract(src, 1);
+            x0 = ginx.vxscalar(src, 0);
+            x1 = ginx.vxscalar(src, 1);
         }
 
         public static void vextract_128x64u_all_4(Vector128<ulong> src, ref ulong dst)
@@ -46,25 +46,25 @@ namespace Z0
         }
 
         public static byte vextract_256x8u_0(Vector256<byte> src)
-            => ginx.vextract(src,n0);
+            => ginx.vxscalar(src,n0);
 
         public static byte vextract_256x8u_1(Vector256<byte> src)
-            => ginx.vextract(src,n1);
+            => ginx.vxscalar(src,n1);
 
         public static byte vextract_256x8u_2(Vector256<byte> src)
-            => ginx.vextract(src,n2);
+            => ginx.vxscalar(src,n2);
 
         public static uint vextract_256x32u_0(Vector256<uint> src)
-            => ginx.vextract(src,n0);
+            => ginx.vxscalar(src,n0);
 
         public static uint vextract_256x32u_1(Vector256<uint> src)
-            => ginx.vextract(src,n1);
+            => ginx.vxscalar(src,n1);
 
         public static ulong vextract_256x32u_2(Vector256<uint> src)
-            => ginx.vextract(src,n2);
+            => ginx.vxscalar(src,n2);
 
         public static uint vextract_256x32u_3(Vector256<uint> src)
-            => ginx.vextract(src,n3);
+            => ginx.vxscalar(src,n3);
 
 
         public static void vlo_256x8u_out(Vector256<byte> src, out ulong x0, out ulong x1)
@@ -86,28 +86,28 @@ namespace Z0
             => ref ginx.vhi(src, ref dst);
 
         public static ulong vextract_256x64u_0(Vector256<ulong> src)
-            => ginx.vextract(src,n0);
+            => ginx.vxscalar(src,n0);
 
         public static ulong vextract_256x64u_1(Vector256<ulong> src)
-            => ginx.vextract(src,n1);
+            => ginx.vxscalar(src,n1);
 
         public static ulong vextract_256x64u_2(Vector256<ulong> src)
-            => ginx.vextract(src,n2);
+            => ginx.vxscalar(src,n2);
 
         public static ulong vextract_256x64u_3(Vector256<ulong> src)
-            => ginx.vextract(src,n3);
+            => ginx.vxscalar(src,n3);
 
         public static Vector128<byte> vshuffle_128x8u(Vector128<byte> src, Vector128<byte> spec)
-            => dinx.vshuffle(src,spec);
+            => dinx.vshuf16x8(src,spec);
 
         public static Vector128<sbyte> vshuffle_128x8i(Vector128<sbyte> src, Vector128<sbyte> spec)
-            => dinx.vshuffle(src,spec);
+            => dinx.vshuf16x8(src,spec);
 
         public static Vector256<byte> vshuffle_256x8u(Vector256<byte> src, Vector256<byte> spec)
-            => dinx.vshuffle(src,spec);
+            => dinx.vshuf16x8(src,spec);
 
         public static Vector256<sbyte> vshuffle_256x8i(Vector256<sbyte> src, Vector256<sbyte> spec)
-            => dinx.vshuffle(src,spec);
+            => dinx.vshuf16x8(src,spec);
 
 
     }

@@ -374,7 +374,6 @@ namespace Z0
         }
 
         // ~ xor
-
         
         [MethodImpl(Inline)]
         public static Vector128<T> vxor<T>(N128 n, in T a, in T b)
@@ -394,12 +393,10 @@ namespace Z0
             return ginx.vxor(vA,vB);
         }
 
-
         [MethodImpl(Inline)]
         public static unsafe void xor<T>(N128 n, in T a, in T b, ref T z)
             where T : unmanaged
                 => vstore(vxor(n, in a, in b), ref z);
-
 
         [MethodImpl(Inline)]
         public static void xor<T>(N128 n, int vcount, int step, in T a, in T b, ref T z)
@@ -425,18 +422,39 @@ namespace Z0
         // ~ xnor
 
         [MethodImpl(Inline)]
+        public static Vector128<T> vxnor<T>(N128 n, in T rX, in T rY)
+            where T : unmanaged
+        {                    
+            vload(in rX, out Vector128<T> vA);
+            vload(in rY, out Vector128<T> vB);
+            return ginx.vxnor(vA,vB);
+        }
+
+        [MethodImpl(Inline)]
+        public static Vector256<T> vxnor<T>(N256 n, in T rX, in T rY)
+            where T : unmanaged
+        {                    
+            vload(in rX, out Vector256<T> vA);
+            vload(in rY, out Vector256<T> vB);
+            return ginx.vxnor(vA,vB);
+        }
+
+        [MethodImpl(Inline)]
+        public static unsafe void xnor<T>(N128 n, in T rX, in T rY, ref T rDst)
+            where T : unmanaged
+                => vstore(vxnor(n, in rX, in rY), ref rDst);
+
+        [MethodImpl(Inline)]
+        public static unsafe void xnor<T>(N256 n, in T rX, in T rY, ref T rDst)
+            where T : unmanaged
+                => vstore(vxnor(n, in rX, in rY), ref rDst);
+
+        [MethodImpl(Inline)]
         public static void xnor<T>(N128 n, int vcount, int step, in T a, in T b, ref T z)
             where T : unmanaged
         {
             for(int i=0, offset = 0; i < vcount; i++, offset += step)
-                ginx.vxnor(n, in skip(in a, offset), in skip(in b, offset), ref seek(ref z, offset));
-        }
-
-        [MethodImpl(Inline)]
-        public static void xnor<T>(N256 n, in T a, in T b, ref T z)
-            where T : unmanaged
-        {
-            ginx.vxnor(n, in a, in b, ref z);
+                xnor(n, in skip(in a, offset), in skip(in b, offset), ref seek(ref z, offset));
         }
 
         [MethodImpl(Inline)]
@@ -444,7 +462,7 @@ namespace Z0
             where T : unmanaged
         {
             for(int i=0, offset = 0; i < vcount; i++, offset += step)
-                ginx.vxnor(n, in skip(in a, offset), in skip(in b, offset), ref seek(ref z, offset));
+                xnor(n, in skip(in a, offset), in skip(in b, offset), ref seek(ref z, offset));
         }
 
         // ~ imply
@@ -456,7 +474,6 @@ namespace Z0
             for(int i=0, offset = 0; i < vcount; i++, offset += step)
                 ginx.vimply(n, in skip(in a, offset), in skip(in b, offset), ref seek(ref z, offset));
         }
-
 
         [MethodImpl(Inline)]
         public static void imply<T>(N256 n, in T a, in T b, ref T z)
@@ -476,18 +493,39 @@ namespace Z0
         // ~ notimply
 
         [MethodImpl(Inline)]
-        public static void notimply<T>(N128 n, int vcount, int step, in T a, in T b, ref T z)
+        public static Vector128<T> vnotimply<T>(N128 n, in T a, in T b)
             where T : unmanaged
-        {
-            for(int i=0, offset = 0; i < vcount; i++, offset += step)
-                ginx.vnotimply(n, in skip(in a, offset), in skip(in b, offset), ref seek(ref z, offset));
+        {                    
+            vload(in a, out Vector128<T> vA);
+            vload(in b, out Vector128<T> vB);
+            return ginx.vnotimply(vA,vB);
         }
+
+        [MethodImpl(Inline)]
+        public static Vector256<T> vnotimply<T>(N256 n, in T a, in T b)
+            where T : unmanaged
+        {                    
+            vload(in a, out Vector256<T> vA);
+            vload(in b, out Vector256<T> vB);
+            return ginx.vnotimply(vA,vB);
+        }
+
+        [MethodImpl(Inline)]
+        public static void notimply<T>(N128 n, in T a, in T b, ref T z)
+            where T : unmanaged
+                => vstore(vnotimply(n, in a, in b), ref z);
 
         [MethodImpl(Inline)]
         public static void notimply<T>(N256 n, in T a, in T b, ref T z)
             where T : unmanaged
+                => vstore(vnotimply(n, in a, in b), ref z);
+
+        [MethodImpl(Inline)]
+        public static void notimply<T>(N128 n, int vcount, int step, in T a, in T b, ref T z)
+            where T : unmanaged
         {
-            ginx.vnotimply(n, in a, in b, ref z);
+            for(int i=0, offset = 0; i < vcount; i++, offset += step)
+                notimply(n, in skip(in a, offset), in skip(in b, offset), ref seek(ref z, offset));
         }
 
         [MethodImpl(Inline)]
@@ -495,24 +533,45 @@ namespace Z0
             where T : unmanaged
         {
             for(int i=0, offset = 0; i < vcount; i++, offset += step)
-                ginx.vnotimply(n, in skip(in a, offset), in skip(in b, offset), ref seek(ref z, offset));
+                notimply(n, in skip(in a, offset), in skip(in b, offset), ref seek(ref z, offset));
         }
 
         // ~ cimply
+
+        [MethodImpl(Inline)]
+        public static Vector128<T> vcimply<T>(N128 n, in T a, in T b)
+            where T : unmanaged
+        {                    
+            vload(in a, out Vector128<T> vA);
+            vload(in b, out Vector128<T> vB);
+            return ginx.vcimply(vA,vB);
+        }
+
+        [MethodImpl(Inline)]
+        public static Vector256<T> vcimply<T>(N256 n, in T a, in T b)
+            where T : unmanaged
+        {                    
+            vload(in a, out Vector256<T> vA);
+            vload(in b, out Vector256<T> vB);
+            return ginx.vcimply(vA,vB);
+        }
+
+        [MethodImpl(Inline)]
+        public static unsafe void cimply<T>(N128 n, in T a, in T b, ref T z)
+            where T : unmanaged
+                => vstore(vcimply(n, in a, in b), ref z);
+
+        [MethodImpl(Inline)]
+        public static unsafe void cimply<T>(N256 n, in T a, in T b, ref T z)
+            where T : unmanaged
+                => vstore(vcimply(n, in a, in b), ref z);
 
         [MethodImpl(Inline)]
         public static void cimply<T>(N128 n, int vcount, int step, in T a, in T b, ref T z)
             where T : unmanaged
         {
             for(int i=0, offset = 0; i < vcount; i++, offset += step)
-                ginx.vcimply(n, in skip(in a, offset), in skip(in b, offset), ref seek(ref z, offset));
-        }
-
-        [MethodImpl(Inline)]
-        public static void cimply<T>(N256 n, in T a, in T b, ref T z)
-            where T : unmanaged
-        {
-            ginx.vcimply(n, in a, in b, ref z);
+                cimply(n, in skip(in a, offset), in skip(in b, offset), ref seek(ref z, offset));
         }
 
         [MethodImpl(Inline)]
@@ -520,7 +579,7 @@ namespace Z0
             where T : unmanaged
         {
             for(int i=0, offset = 0; i < vcount; i++, offset += step)
-                ginx.vcimply(n, in skip(in a, offset), in skip(in b, offset), ref seek(ref z, offset));
+                cimply(n, in skip(in a, offset), in skip(in b, offset), ref seek(ref z, offset));
         }
 
         // ~ cnotimply
@@ -551,26 +610,50 @@ namespace Z0
         // ~ select
 
         [MethodImpl(Inline)]
+        public static unsafe Vector128<T> vselect<T>(N128 n, in T a, in T b, in T c)
+            where T : unmanaged
+        {                    
+            vload(a, out Vector128<T> vA);
+            vload(b, out Vector128<T> vB);
+            vload(c, out Vector128<T> vC);
+            return ginx.vselect(vA,vB,vC);
+        }
+
+        [MethodImpl(Inline)]
+        public static unsafe Vector256<T> vselect<T>(N256 n, in T a, in T b, in T c)
+            where T : unmanaged
+        {                    
+            vload(a, out Vector256<T> vA);
+            vload(b, out Vector256<T> vB);
+            vload(c, out Vector256<T> vC);
+            return ginx.vselect(vA,vB,vC);
+        }
+
+        [MethodImpl(Inline)]
+        public static unsafe void select<T>(N128 n, in T a, in T b, in T c, ref T z)
+            where T : unmanaged
+                => vstore(vselect(n, in a, in b, in c), ref z);
+
+        [MethodImpl(Inline)]
+        public static unsafe void select<T>(N256 n, in T a, in T b, in T c, ref T z)
+            where T : unmanaged
+                => vstore(vselect(n, in a, in b, in c), ref z);
+
+        [MethodImpl(Inline)]
         public static void select<T>(N128 n, int vcount, int step, in T a, in T b, in T c, ref T z)
             where T : unmanaged
         {
             for(int i=0, offset = 0; i < vcount; i++, offset += step)
-                ginx.vselect(n, in skip(in a, offset), in skip(in b, offset), in skip(in c, offset), ref seek(ref z, offset));
+                select(n, in skip(in a, offset), in skip(in b, offset), in skip(in c, offset), ref seek(ref z, offset));
         }
 
-        [MethodImpl(Inline)]
-        public static void select<T>(N256 n, in T a, in T b, in T c, ref T z)
-            where T : unmanaged
-        {
-            ginx.vselect(n, in a, in b, in c, ref z);
-        }
 
         [MethodImpl(Inline)]
         public static void select<T>(N256 n, int vcount, int step, in T a, in T b, in T c, ref T z)
             where T : unmanaged
         {
             for(int i=0, offset = 0; i < vcount; i++, offset += step)
-                ginx.vselect(n, in skip(in a, offset), in skip(in b, offset), in skip(in c, offset), ref seek(ref z, offset));
+                select(n, in skip(in a, offset), in skip(in b, offset), in skip(in c, offset), ref seek(ref z, offset));
         }
 
         // ~ sll
@@ -582,7 +665,6 @@ namespace Z0
             for(int i=0, offset = 0; i < vcount; i++, offset += step)
                 ginx.vsll(n, in skip(in a, offset), count, ref seek(ref z, offset));
         }
-
 
         [MethodImpl(Inline)]
         public static void sll<T>(N256 n, in T a, byte count, ref T z)
@@ -601,19 +683,39 @@ namespace Z0
 
         // ~ srl
 
+
+        [MethodImpl(Inline)]
+        public static unsafe Vector128<T> vsrl<T>(N128 n, in T a, byte offset)
+            where T : unmanaged
+        {                    
+            vload(a, out Vector128<T> vA);
+            return ginx.vsrl(vA,offset);
+        }
+
+        [MethodImpl(Inline)]
+        public static unsafe Vector256<T> vsrl<T>(N256 n, in T a, byte offset)
+            where T : unmanaged
+        {                    
+            vload(a, out Vector256<T> vA);
+            return ginx.vsrl(vA,offset);
+        }
+
+        [MethodImpl(Inline)]
+        public static void srl<T>(N128 n, in T a, byte offset, ref T z)
+            where T : unmanaged
+                => vstore(vsrl(n, in a, offset), ref z);
+
+        [MethodImpl(Inline)]
+        public static void srl<T>(N256 n, in T a, byte offset, ref T z)
+            where T : unmanaged
+                => vstore(vsrl(n,in a, offset), ref z); 
+
         [MethodImpl(Inline)]
         public static void srl<T>(N128 n, int vcount, int step, in T a, byte count, ref T z)
             where T : unmanaged
         {
             for(int i=0, offset = 0; i < vcount; i++, offset += step)
-                ginx.vsrl(n, in skip(in a, offset), count, ref seek(ref z, offset));
-        }
-
-        [MethodImpl(Inline)]
-        public static void srl<T>(N256 n, in T a, byte count, ref T z)
-            where T : unmanaged
-        {
-            ginx.vsrl(n, in a, count, ref z);
+                srl(n, in skip(in a, offset), count, ref seek(ref z, offset));
         }
 
         [MethodImpl(Inline)]
@@ -621,7 +723,7 @@ namespace Z0
             where T : unmanaged
         {
             for(int i=0, offset = 0; i < vcount; i++, offset += step)
-                ginx.vsrl(n, in skip(in a, offset), count, ref seek(ref z, offset));
+                srl(n, in skip(in a, offset), count, ref seek(ref z, offset));
         }
 
         // ~ rotl
@@ -633,7 +735,6 @@ namespace Z0
             for(int i=0, offset = 0; i < vcount; i++, offset += step)
                 ginx.vrotl(n, in skip(in a, offset), count, ref seek(ref z, offset));
         }
-
 
         [MethodImpl(Inline)]
         public static void rotl<T>(N256 n, in T a, byte count, ref T z)
@@ -653,18 +754,37 @@ namespace Z0
         // ~ rotr
 
         [MethodImpl(Inline)]
+        public static Vector128<T> vrotr<T>(N128 n, in T a, byte offset)
+            where T : unmanaged
+        {                    
+            vload(a, out Vector128<T> vA);
+            return ginx.vrotr(vA,offset);
+        }
+
+        [MethodImpl(Inline)]
+        public static Vector256<T> vrotr<T>(N256 n, in T a, byte offset)
+            where T : unmanaged
+        {                    
+            vload(a, out Vector256<T> vA);
+            return ginx.vrotr(vA,offset);
+        }
+
+        [MethodImpl(Inline)]
+        public static void rotr<T>(N128 n, in T a, byte offset, ref T z)
+            where T : unmanaged
+                => vstore(vrotr(n, in a, offset), ref z);
+
+        [MethodImpl(Inline)]
+        public static void rotr<T>(N256 n, in T a, byte offset, ref T z)
+            where T : unmanaged
+                => vstore(vrotr(n,in a, offset), ref z);
+
+        [MethodImpl(Inline)]
         public static void rotr<T>(N128 n, int vcount, int step, in T a, byte count, ref T z)
             where T : unmanaged
         {
             for(int i=0, offset = 0; i < vcount; i++, offset += step)
-                ginx.vrotr(n, in skip(in a, offset), count, ref seek(ref z, offset));
-        }
-
-        [MethodImpl(Inline)]
-        public static void rotr<T>(N256 n, in T a, byte count, ref T z)
-            where T : unmanaged
-        {
-            ginx.vrotr(n, in a, count, ref z);
+                rotr(n, in skip(in a, offset), count, ref seek(ref z, offset));
         }
 
         [MethodImpl(Inline)]
@@ -672,7 +792,7 @@ namespace Z0
             where T : unmanaged
         {
             for(int i=0, offset = 0; i < vcount; i++, offset += step)
-                ginx.vrotr(n, in skip(in a, offset), count, ref seek(ref z, offset));
+                rotr(n, in skip(in a, offset), count, ref seek(ref z, offset));
         }
 
         // ~ bsll
@@ -681,15 +801,27 @@ namespace Z0
         public static Vector128<T> bsll<T>(N128 n, in T a, byte count)
             where T : unmanaged
         {                    
-            ginx.vload(in a, out Vector128<T> vA);
+            vload(in a, out Vector128<T> vA);
             return ginx.vbsll(vA, count);
+        }
+
+        [MethodImpl(Inline)]
+        public static Vector256<T> vbsll<T>(N256 n, in T a, byte count)
+            where T : unmanaged
+        {                    
+            vload(in a, out Vector256<T> vA);
+            return ginx.vbsll(vA,count);
         }
 
         [MethodImpl(Inline)]
         public static void bsll<T>(N128 n, in T a, byte count, ref T z)
             where T : unmanaged
-                => ginx.vstore(bsll(n, in a, count), ref z);
+                => vstore(bsll(n, in a, count), ref z);
 
+        [MethodImpl(Inline)]
+        public static void bsll<T>(N256 n, in T a, byte count, ref T z)
+            where T : unmanaged
+                => vstore(vbsll(n, in a, count), ref z); 
  
         [MethodImpl(Inline)]
         public static void bsll<T>(N128 n, int vcount, int step, in T a, byte count, ref T z)
@@ -700,43 +832,56 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static void bsll<T>(N256 n, in T a, byte count, ref T z)
-            where T : unmanaged
-        {
-            ginx.vbsll(n, in a, count, ref z);
-        }
-
-        [MethodImpl(Inline)]
         public static void bsll<T>(N256 n, int vcount, int step, in T a, byte count, ref T z)
             where T : unmanaged
         {
             for(int i=0, offset = 0; i < vcount; i++, offset += step)
-                ginx.vbsll(n, in skip(in a, offset), count, ref seek(ref z, offset));
+                bsll(n, in skip(in a, offset), count, ref seek(ref z, offset));
         }
 
         // ~ bsrl
+
+        [MethodImpl(Inline)]
+        public static Vector128<T> vbsrl<T>(N128 n, in T a, byte count)
+            where T : unmanaged
+        {                    
+            vload(in a, out Vector128<T> vA);
+            return ginx.vbsrl(vA, count);
+        }
+
+        [MethodImpl(Inline)]
+        public static Vector256<T> vbsrl<T>(N256 n, in T a, byte count)
+            where T : unmanaged
+        {                    
+            vload(in a, out Vector256<T> vA);
+            return ginx.vbsrl(vA,count);
+        }
+
+        [MethodImpl(Inline)]
+        public static void bsrl<T>(N128 n, in T a, byte count, ref T z)
+            where T : unmanaged
+                => vstore(vbsrl(n, in a, count), ref z);
+
+        [MethodImpl(Inline)]
+        public static void bsrl<T>(N256 n, in T a, byte count, ref T z)
+            where T : unmanaged
+                => vstore(vbsrl(n, in a, count), ref z);
 
         [MethodImpl(Inline)]
         public static void bsrl<T>(N128 n, int vcount, int step, in T a, byte count, ref T z)
             where T : unmanaged
         {
             for(int i=0, offset = 0; i < vcount; i++, offset += step)
-                ginx.vbsrl(n, in skip(in a, offset), count, ref seek(ref z, offset));
+                bsrl(n, in skip(in a, offset), count, ref seek(ref z, offset));
         }
 
-        [MethodImpl(Inline)]
-        public static void bsrl<T>(N256 n, in T a, byte count, ref T z)
-            where T : unmanaged
-        {
-            vbsrl(n, in a, count, ref z);
-        }
 
         [MethodImpl(Inline)]
         public static void bsrl<T>(N256 n, int vcount, int step, in T a, byte count, ref T z)
             where T : unmanaged
         {
             for(int i=0, offset = 0; i < vcount; i++, offset += step)
-                vbsrl(n, in skip(in a, offset), count, ref seek(ref z, offset));
+                bsrl(n, in skip(in a, offset), count, ref seek(ref z, offset));
         }
 
         // ~ add
@@ -1065,6 +1210,22 @@ namespace Z0
         // ~ nonz
 
         [MethodImpl(Inline)]
+        public static bit vnonz<T>(N128 n, in T rX)
+            where T : unmanaged
+        {                    
+            vload(rX, out Vector128<T> vA);
+            return ginx.vnonz(vA);
+        }
+
+        [MethodImpl(Inline)]
+        public static bit vnonz<T>(N256 n, in T rX)
+            where T : unmanaged
+        {                    
+            vload(rX, out Vector256<T> vA);
+            return ginx.vnonz(vA);
+        }
+
+        [MethodImpl(Inline)]
         public static bool nonz<T>(N128 n, int vcount, int step, in T a)
             where T : unmanaged
         {
@@ -1164,6 +1325,34 @@ namespace Z0
         // ~ testz
 
         [MethodImpl(Inline)]
+        public static unsafe bit vtestz<T>(N128 n, in T a, in T b)
+            where T : unmanaged
+        {                    
+            vload(a, out Vector128<T> vA);
+            vload(b, out Vector128<T> vB);
+            return ginx.vtestz(vA,vB);
+        }
+
+        [MethodImpl(Inline)]
+        public static unsafe bit vtestz<T>(N256 n, in T a, in T b)
+            where T : unmanaged
+        {                    
+            vload(a, out Vector256<T> vA);
+            vload(b, out Vector256<T> vB);
+            return ginx.vtestz(vA,vB);
+        }
+
+        [MethodImpl(Inline)]
+        public static unsafe bit vtestz<T>(N128 n, in T a)
+            where T : unmanaged
+            => vtestz(n, a,a);
+
+        [MethodImpl(Inline)]
+        public static unsafe bit vtestz<T>(N256 n, in T a)
+            where T : unmanaged
+            => vtestz(n, a,a);
+
+        [MethodImpl(Inline)]
         public static bool testz<T>(N128 n, int vcount, int step, in T a)
             where T : unmanaged
         {
@@ -1245,6 +1434,4 @@ namespace Z0
     }
 
 }
-
-
 

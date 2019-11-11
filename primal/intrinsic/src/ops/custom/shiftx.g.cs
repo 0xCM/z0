@@ -55,5 +55,85 @@ namespace Z0
             where T : unmanaged
                 => generic<T>(dinx.vrotrx(v64u(src), offset));
 
+        /// <summary>
+        /// Rotates the full 128 bits of a vector leftward by 8 bits
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="offset">The number of bits to shift</param>
+        [MethodImpl(Inline)]
+        public static Vector128<T> vrotlx<T>(Vector128<T> src, N8 offset)        
+            where T : unmanaged
+                => generic<T>(dinx.vrotlx(v8u(src), offset));
+
+        /// <summary>
+        /// Rotates the full 128 bits of a vector leftward by 16 bits
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="offset">The number of bits to shift</param>
+        [MethodImpl(Inline)]
+        public static Vector128<T> vrotlx<T>(Vector128<T> src, N16 offset)        
+            where T : unmanaged
+                => generic<T>(dinx.vrotlx(v8u(src), offset));
+
+        /// <summary>
+        /// Rotates the full 128 bits of a vector leftward by 24 bits
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="offset">The number of bits to shift</param>
+        [MethodImpl(Inline)]
+        public static Vector128<T> vrotlx<T>(Vector128<T> src, N24 offset)        
+            where T : unmanaged
+                => generic<T>(dinx.vrotlx(v8u(src), offset));
+
+        /// <summary>
+        /// Rotates the full 128 bits of a vector leftward by 32 bits
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="offset">The number of bits to shift</param>
+        [MethodImpl(Inline)]
+        public static Vector128<T> vrotlx<T>(Vector128<T> src, N32 offset)        
+            where T : unmanaged
+                => generic<T>(dinx.vrotlx(v8u(src), offset));
+
+        /// <summary>
+        /// Rotates the full 128 bits of a vector rightward by 8 bits
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="offset">The number of bits to shift</param>
+        [MethodImpl(Inline)]
+        public static Vector128<T> vrotrx<T>(Vector128<T> src, N8 offset)        
+            where T : unmanaged
+                => generic<T>(dinx.vrotrx(v8u(src), offset));
+
+        /// <summary>
+        /// Rotates the full 128 bits of a vector rightward by 16 bits
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="offset">The number of bits to shift</param>
+        [MethodImpl(Inline)]
+        public static Vector128<T> vrotrx<T>(Vector128<T> src, N16 offset)        
+            where T : unmanaged
+                => generic<T>(dinx.vrotrx(v8u(src), offset));
+
+        /// <summary>
+        /// Rotates the full 128 bits of a vector rightward by 24 bits
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="offset">The number of bits to shift</param>
+        [MethodImpl(Inline)]
+        public static Vector128<T> vrotrx<T>(Vector128<T> src, N24 offset)        
+            where T : unmanaged
+                => generic<T>(dinx.vrotrx(v8u(src), offset));
+
+        /// <summary>
+        /// Rotates the full 128 bits of a vector rightward by 32 bits
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="offset">The number of bits to shift</param>
+        [MethodImpl(Inline)]
+        public static Vector128<T> vrotrx<T>(Vector128<T> src, N32 offset)        
+            where T : unmanaged
+                => generic<T>(dinx.vrotrx(v8u(src), offset));
+
     }
 }

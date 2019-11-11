@@ -12,7 +12,6 @@ namespace Z0
     using System.Diagnostics;    
     
     using static zfunc;    
-    using static Span256;
     using static nfunc;
 
     public static class Span256
@@ -23,10 +22,9 @@ namespace Z0
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The source value type</typeparam>
         [MethodImpl(Inline)]
-        public static Span256<byte> AsBytes<T>(Span256<T> src)
+        public static Span256<byte> bytes<T>(Span256<T> src)
             where T : unmanaged
-                => Span256.Load(MemoryMarshal.AsBytes(src.Unblocked));
-
+                => Span256.load(MemoryMarshal.AsBytes(src.Unblocked));
 
         /// <summary>
         /// Allocates a span to hold a specified number of blocks
@@ -34,8 +32,8 @@ namespace Z0
         /// <param name="blocks">The number of blocks for which memory should be alocated</param>
         /// <param name="fill">An optional value that, if specified, is used to initialize the cell values</param>
         /// <typeparam name="T">The element type</typeparam>
-        [MethodImpl(Inline)]
-        public static Span256<T> AllocBlocks<T>(int blocks, T? fill = null)
+        [MethodImpl(NotInline)]
+        public static Span256<T> alloc<T>(int blocks, T? fill = null)
             where T : unmanaged        
                 => Span256<T>.AllocBlocks(blocks, fill);
 
@@ -44,8 +42,8 @@ namespace Z0
         /// </summary>
         /// <param name="fill">An optional value that, if specified, is used to initialize the cell values</param>
         /// <typeparam name="T">The element type</typeparam>
-        [MethodImpl(Inline)]
-        public static Span256<T> AllocBlock<T>(T? fill = null)
+        [MethodImpl(NotInline)]
+        public static Span256<T> alloc<T>(T? fill = null)
             where T : unmanaged        
                 => Span256<T>.AllocBlocks(1, fill);
 
@@ -56,14 +54,14 @@ namespace Z0
         /// <param name="minlen">The minimum allocation length</param>
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
-        public static Span256<T> Alloc<T>(int minlen, T? fill = null)
+        public static Span256<T> allocu<T>(int minlen, T? fill = null)
             where T : unmanaged        
         {
-            Span256.Alignment<T>(minlen, out int blocklen, out int fullBlocks, out int remainder);            
+            alignment<T>(minlen, out int blocklen, out int fullBlocks, out int remainder);            
             if(remainder == 0)
-                return AllocBlocks<T>(fullBlocks, fill);
+                return alloc<T>(fullBlocks, fill);
             else
-                return Span256.AllocBlocks<T>(fullBlocks + 1, fill);
+                return alloc<T>(fullBlocks + 1, fill);
         }
         
         /// <summary>
@@ -73,16 +71,16 @@ namespace Z0
         /// <typeparam name="N">The column type</typeparam>
         /// <typeparam name="T">The scalar type</typeparam>
         [MethodImpl(Inline)]
-        public static Span256<T> Alloc<N,T>(T? fill = null)
+        public static Span256<T> allocu<N,T>(T? fill = null)
             where N : unmanaged, ITypeNat
             where T : unmanaged
         {
             var dataLen = nati<N>();
-            Span256.Alignment<T>(dataLen, out int blocklen, out int fullBlocks, out int remainder);            
+            alignment<T>(dataLen, out int blocklen, out int fullBlocks, out int remainder);            
             if(remainder == 0)
-                return AllocBlocks<T>(fullBlocks);
+                return alloc<T>(fullBlocks,fill);
             else
-                return AllocBlocks<T>(fullBlocks + 1);
+                return alloc<T>(fullBlocks + 1,fill);
         }
 
         /// <summary>
@@ -92,17 +90,17 @@ namespace Z0
         /// <typeparam name="N">The column type</typeparam>
         /// <typeparam name="T">The scalar type</typeparam>
         [MethodImpl(Inline)]
-        public static Span256<T> Alloc<M,N,T>(T? fill = null)
+        public static Span256<T> allocu<M,N,T>(T? fill = null)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
         {
             var dataLen = nati<M>() * nati<N>();
-            Span256.Alignment<T>(dataLen, out int blocklen, out int fullBlocks, out int remainder);            
+            Span256.alignment<T>(dataLen, out int blocklen, out int fullBlocks, out int remainder);            
             if(remainder == 0)
-                return AllocBlocks<T>(fullBlocks,fill);
+                return alloc<T>(fullBlocks,fill);
             else
-                return AllocBlocks<T>(fullBlocks + 1,fill);
+                return alloc<T>(fullBlocks + 1,fill);
         }
 
 
@@ -112,15 +110,15 @@ namespace Z0
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The data type</typeparam>
         [MethodImpl(Inline)]
-        public static Span256<T> Load<T>(Span<T> src)
+        public static Span256<T> load<T>(Span<T> src)
             where T : unmanaged
         {
-            var bz = BlockCount<T>(src.Length, out int remainder);
+            var bz = blockcount<T>(src.Length, out int remainder);
             if(remainder == 0)
                 return Span256<T>.LoadAligned(src);
             else
             {
-                var dst = AllocBlocks<T>(bz + 1);
+                var dst = alloc<T>(bz + 1);
                 src.CopyTo(dst);
                 return dst;
             }
@@ -132,10 +130,9 @@ namespace Z0
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The data type</typeparam>
         [MethodImpl(Inline)]
-        public static Span256<T> Load<T>(T[] src)
+        public static Span256<T> load<T>(T[] src)
             where T : unmanaged
-            => Load(src.AsSpan());
-
+            => load(src.AsSpan());
                 
         /// <summary>
         /// Loads an unsized 256-bit blocked span from a sized unblocked span
@@ -144,10 +141,10 @@ namespace Z0
         /// <param name="offset">The span index at which to begin the load</param>
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
-        public static Span256<T> Load<N,T>(Span<N,T> src)
+        public static Span256<T> load<N,T>(Span<N,T> src)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => Load<T>(src.Unsized);
+                => load<T>(src.Unsized);
 
         /// <summary>
         /// Loads a 256-bit blocked span from a memory reference
@@ -156,26 +153,25 @@ namespace Z0
         /// <param name="minlen">The (256-bit aligned) length of the span </param>
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
-        public static Span256<T> Load<T>(ref T src, int minlen)
+        public static Span256<T> load<T>(ref T src, int minlen)
             where T : unmanaged
         {
-            var bz = BlockCount<T>(minlen, out int remainder);
-            var bl = BlockLength<T>();
+            var bz = blockcount<T>(minlen, out int remainder);
+            var bl = blocklen<T>();
             var len = remainder == 0 ? bz * bl : (bz + 1) * bl;            
             return Span256<T>.LoadAligned(ref src, len);
         }
 
-
         [MethodImpl(Inline)]
-        public static Span256<T> Load<T>(ReadOnlySpan<T> src)
+        public static Span256<T> load<T>(ReadOnlySpan<T> src)
             where T : unmanaged
         {
-            var bz = BlockCount<T>(src.Length, out int remainder);
+            var bz = blockcount<T>(src.Length, out int remainder);
             if(remainder == 0)
                 return Span256<T>.LoadAligned(src.Replicate());
             else
             {
-                var dst = AllocBlocks<T>(bz + 1);
+                var dst = alloc<T>(bz + 1);
                 src.CopyTo(dst);
                 return dst;
             }
@@ -187,10 +183,10 @@ namespace Z0
         /// <param name="srclen">The length of the source data</param>
         /// <typeparam name="T">The scalar type</typeparam>
         [MethodImpl(Inline)]
-        public static int MinBlocks<T>(ByteSize srclen)
+        public static int minblocks<T>(ByteSize srclen)
             where T : unmanaged        
         {
-            var bz = BlockCount<T>(srclen, out int remainder);
+            var bz = blockcount<T>(srclen, out int remainder);
             return remainder == 0 ? bz : bz + 1;
         }
 
@@ -202,13 +198,13 @@ namespace Z0
         /// <typeparam name="N">The column type</typeparam>
         /// <typeparam name="T">The scalar type</typeparam>
         [MethodImpl(Inline)]
-        public static int MinBlocks<M,N,T>()
+        public static int minblocks<M,N,T>()
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged        
         {
             var srclen = nati<M>() * nati<N>();
-            var bz = BlockCount<T>(srclen, out int remainder);
+            var bz = blockcount<T>(srclen, out int remainder);
             return remainder == 0 ? bz : bz + 1;
         }
 
@@ -217,7 +213,7 @@ namespace Z0
         /// </summary>
         /// <typeparam name="T">The block constituent type</typeparam>
         [MethodImpl(Inline)]
-        public static ByteSize CellSize<T>()
+        public static ByteSize cellsize<T>()
             where T : unmanaged        
                 => Span256<T>.CellSize;
 
@@ -226,7 +222,7 @@ namespace Z0
         /// </summary>
         /// <typeparam name="T">The block constituent type</typeparam>
         [MethodImpl(Inline)]
-        public static ByteSize BlockSize<T>()
+        public static ByteSize blocksize<T>()
             where T : unmanaged        
                 => Span256<T>.BlockSize;
 
@@ -235,7 +231,7 @@ namespace Z0
         /// </summary>
         /// <typeparam name="T">The block constituent type</typeparam>
         [MethodImpl(Inline)]
-        public static int BlockLength<T>(int blocks = 1)
+        public static int blocklen<T>(int blocks = 1)
             where T : unmanaged        
                 => blocks * Span256<T>.BlockLength;
 
@@ -245,14 +241,14 @@ namespace Z0
         /// <param name="length">The length of the cell sequence</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        public static int WholeBlocks<T>(int length)
+        public static int fullblocks<T>(int length)
             where T : unmanaged  
-                => length / BlockLength<T>();
+                => length / blocklen<T>();
 
         [MethodImpl(Inline)]
-        public static int BlockCount<T>(int length, out int remainder)
+        public static int blockcount<T>(int length, out int remainder)
             where T : unmanaged          
-            => Math.DivRem(length, BlockLength<T>(), out remainder);
+            => Math.DivRem(length, blocklen<T>(), out remainder);
         
         /// <summary>
         /// Determines whether data of a specified length can be evenly covered by blocks
@@ -260,7 +256,7 @@ namespace Z0
         /// <param name="datasize">The length, in bytes, of the source data</param>
         /// <typeparam name="T">The block constituent type</typeparam>
         [MethodImpl(Inline)]
-        public static bool IsAligned<T>(int length)
+        public static bool aligned<T>(int length)
             where T : unmanaged        
             => Span256<T>.Aligned(length);
         
@@ -273,12 +269,12 @@ namespace Z0
         /// <param name="remainder">The number of cells that cannot fit into a sequence of full blocks</param>
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
-        public static void Alignment<T>(int srcLen, out int blocklen, out int fullBlocks, out int remainder)
+        public static void alignment<T>(int srcLen, out int blocklen, out int fullBlocks, out int remainder)
             where T : unmanaged        
         {
-            blocklen = BlockLength<T>();
+            blocklen = blocklen<T>();
             fullBlocks = srcLen / blocklen;
-            remainder = srcLen % BlockLength<T>();
+            remainder = srcLen % blocklen<T>();
         } 
 
         /// <summary>
@@ -287,7 +283,7 @@ namespace Z0
         /// <param name="src">The source parameters</param>
         /// <typeparam name="T">The primitive type</typeparam>
         [MethodImpl(Inline)]
-        public static Span256<T> Single<T>(params T[] src)
+        static Span256<T> Single<T>(params T[] src)
             where T : unmanaged
                 => Span256<T>.Load(src);
 
@@ -297,9 +293,8 @@ namespace Z0
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        public static ByteSize CellBytes<T>(int count)
+        static ByteSize CellBytes<T>(int count)
             where T : unmanaged        
-                => count * CellSize<T>();
-
+                => count * cellsize<T>();
    }
 }

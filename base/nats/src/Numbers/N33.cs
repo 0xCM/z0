@@ -13,7 +13,7 @@ namespace Z0
     {
         public static N33 Rep => default;
 
-        public static NatSeq<N3,N2> Seq => default;
+        public static NatSeq<N3,N3> Seq => default;
 
         [MethodImpl(Inline)]
         public static implicit operator int(N33 src)

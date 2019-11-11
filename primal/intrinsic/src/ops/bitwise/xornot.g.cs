@@ -81,32 +81,32 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static Vector128<T> vxornot<T>(N128 n, in T rX, in T rY)
+        public static Vector128<T> vxornot<T>(N128 n, in T a, in T b)
             where T : unmanaged
         {                    
-            vload(in rX, out Vector128<T> vA);
-            vload(in rY, out Vector128<T> vB);
+            vload(in a, out Vector128<T> vA);
+            vload(in b, out Vector128<T> vB);
             return vxornot(vA,vB);
         }
 
         [MethodImpl(Inline)]
-        public static unsafe void vxornot<T>(N128 n, in T rX, in T rY, ref T rDst)
-            where T : unmanaged
-                => vstore(vxornot(n, in rX, in rY), ref rDst);
-
-        [MethodImpl(Inline)]
-        public static Vector256<T> vxornot<T>(N256 n, in T rX, in T rY)
+        public static Vector256<T> vxornot<T>(N256 n, in T a, in T b)
             where T : unmanaged
         {                    
-            vload(in rX, out Vector256<T> vA);
-            vload(in rY, out Vector256<T> vB);
+            vload(in a, out Vector256<T> vA);
+            vload(in b, out Vector256<T> vB);
             return vxornot(vA,vB);
         }
 
         [MethodImpl(Inline)]
-        public static unsafe void vxornot<T>(N256 n, in T rX, in T rY, ref T rDst)
+        public static unsafe void vxornot<T>(N128 n, in T a, in T b, ref T z)
             where T : unmanaged
-                => vstore(vxornot(n, in rX, in rY), ref rDst);
+                => vstore(vxornot(n, in a, in b), ref z);
+
+        [MethodImpl(Inline)]
+        public static unsafe void vxornot<T>(N256 n, in T a, in T b, ref T z)
+            where T : unmanaged
+                => vstore(vxornot(n, in a, in b), ref z);
  
         [MethodImpl(Inline)]
         static Vector128<T> vxornot_128f<T>(Vector128<T> x, Vector128<T> y)
@@ -119,7 +119,6 @@ namespace Z0
             else
                 throw unsupported<T>();
         }
-
 
         [MethodImpl(Inline)]
         static Vector256<T> vxornot_256u<T>(Vector256<T> x, Vector256<T> y)

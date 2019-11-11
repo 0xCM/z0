@@ -81,8 +81,5 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where T : unmanaged
                 => new Span<N,T>(src);
-
-
     }
-
 }

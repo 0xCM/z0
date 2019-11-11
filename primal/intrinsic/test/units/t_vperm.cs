@@ -9,6 +9,7 @@ namespace Z0
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
+    using System.Runtime.Intrinsics;
     
     using static zfunc;
 
@@ -16,8 +17,8 @@ namespace Z0
     {
         public void perm_2x128_check()
         {
-            var x = Vec256Pattern.increments<ulong>(0,2);
-            var y = Vec256Pattern.increments<ulong>(1,2);
+            var x = ginx.vincrements<ulong>(n256, 0, 2);
+            var y = ginx.vincrements<ulong>(n256, 1, 2);
 
             Claim.eq(dinx.vparts(1ul,3,0,2), dinx.vperm2x128(x,y,Perm2x128.AC));
             Claim.eq(dinx.vparts(5ul,7,0,2), dinx.vperm2x128(x,y,Perm2x128.AD));
@@ -29,12 +30,26 @@ namespace Z0
             Claim.eq(dinx.vparts(4ul,6,5,7), dinx.vperm2x128(x,y,Perm2x128.DB));
         }
 
+
+        /// <summary>
+        /// Swaps hi/lo 128-bit lanes
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        [MethodImpl(Inline)]
+        public static Vector256<byte> vswaphl(Vector256<byte> x)
+        {
+            Vector256<byte> y = default;
+            y = dinx.vinsert(dinx.vhi(x), y, 0);
+            y = dinx.vinsert(dinx.vlo(x), y, 1);
+            return y;
+        }
+
         public void swaphl_2x128()
         {
             for(var i=0; i < SampleSize; i++)
             {
                 var x = Random.CpuVector<byte>(n256);
-                var y = dinx.vswaphl_ref(x);
+                var y = vswaphl(x);
                 var z = dinx.vswaphl(x);
                 Claim.eq(y,z);
             }
@@ -44,9 +59,9 @@ namespace Z0
         public void perm256u8()
         {
 
-            var x = Vec256Pattern.increments<byte>();
-            var y = Vec256Pattern.decrements<byte>(31);
-            var z = dinx.vreverse(dinx.vpermvar32x8(x,y));
+            var x = ginx.vincrements<byte>(n256);
+            var y = ginx.vdecrements<byte>(n256,31);
+            var z = dinx.vreverse(dinx.vshuf32x8(x,y));
             Claim.eq(x,z);
 
         }
@@ -68,7 +83,7 @@ namespace Z0
 
             var vIn = dinx.vparts(0,1,2,3);
             var vExpect = dinx.vparts(3,2,1,0);
-            var vActual = dinx.vshuffle(vIn,p);
+            var vActual = dinx.vperm4x32(vIn,p);
             Claim.eq(vExpect, vActual);                                
         }        
     }

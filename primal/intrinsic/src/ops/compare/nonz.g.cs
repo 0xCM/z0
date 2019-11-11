@@ -40,22 +40,6 @@ namespace Z0
                 return vnonz_f(src);
         }
 
-        [MethodImpl(Inline)]
-        public static unsafe bit vnonz<T>(N128 n, in T rX)
-            where T : unmanaged
-        {                    
-            vload(rX, out Vector128<T> vA);
-            return vnonz(vA);
-        }
-
-        [MethodImpl(Inline)]
-        public static unsafe bit vnonz<T>(N256 n, in T rX)
-            where T : unmanaged
-        {                    
-            vload(rX, out Vector256<T> vA);
-            return vnonz(vA);
-        }
-
 
         [MethodImpl(Inline)]
         static bit vnonz_i<T>(Vector128<T> src)
@@ -160,8 +144,5 @@ namespace Z0
             else 
                 throw unsupported<T>();
         }
-
-
     }
-
 }

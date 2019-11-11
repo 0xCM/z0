@@ -38,8 +38,6 @@ namespace Z0
         public static void vtranspose(ref Vector128<uint> row0, ref Vector128<uint> row1, ref Vector128<uint> row2, ref Vector128<uint> row3)        
             => dinx.vtranspose(ref row0, ref row1, ref row2, ref row3);
 
-        public static void vtranspose(ref Vector128<float> row0, ref Vector128<float> row1, ref Vector128<float> row2, ref Vector128<float> row3)        
-            => dinx.vtranspose(ref row0, ref row1, ref row2, ref row3);
 
     }
 

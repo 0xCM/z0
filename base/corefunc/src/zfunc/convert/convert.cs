@@ -49,7 +49,7 @@ partial class zfunc
         where T : unmanaged
         where S : unmanaged
     {
-        var dst = Span256.Alloc<T>(src.Length);
+        var dst = Span256.allocu<T>(src.Length);
         for(var i=0; i< src.Length; i++)
             dst[i] = convert<S,T>(src[i]);
         return dst;

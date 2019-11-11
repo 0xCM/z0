@@ -13,9 +13,6 @@ namespace Z0
     using static As;
     using static AsIn;
     
-    using static Span256;
-    using static Span128;
-
     partial class ginx
     {
 
@@ -46,33 +43,5 @@ namespace Z0
             else
                 throw unsupported<T>();
         }
- 
- 
-        [MethodImpl(Inline)]
-        public static Vector128<T> vbsll<T>(N128 n, in T rX, byte count)
-            where T : unmanaged
-        {                    
-            vload(in rX, out Vector128<T> vA);
-            return vbsll(vA, count);
-        }
-
-        [MethodImpl(Inline)]
-        public static unsafe void vbsll<T>(N128 n, in T rX, byte count, ref T rDst)
-            where T : unmanaged
-                => vstore(vbsll(n, in rX, count), ref rDst);
-
-        [MethodImpl(Inline)]
-        public static Vector256<T> vbsll<T>(N256 n, in T rX, byte count)
-            where T : unmanaged
-        {                    
-            vload(in rX, out Vector256<T> vA);
-            return vbsll(vA,count);
-        }
-
-        [MethodImpl(Inline)]
-        public static unsafe void vbsll<T>(N256 n, in T rX, byte count, ref T rDst)
-            where T : unmanaged
-                => vstore(vbsll(n, in rX, count), ref rDst); 
     }
-
 }

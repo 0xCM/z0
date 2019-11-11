@@ -22,7 +22,7 @@ namespace Z0
         /// <param name="src">The source scalar</param>
         /// <typeparam name="T">The primal component type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector128<T> scalar<T>(in T src)
+        public static Vector128<T> vscalar<T>(in T src)
             where T : unmanaged
         {            
             if(typeof(T) == typeof(byte) 

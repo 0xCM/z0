@@ -46,6 +46,8 @@ namespace Z0
         DDDD = D | (D << 2) | (D << 4) | (D << 6),
 
         AABB = A | (A<< 2) | (B << 4) | (B << 6),
+
+        DCBA = D | (C << 2) | (B << 4) | (A << 6),
    }
 
 

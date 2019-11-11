@@ -45,7 +45,7 @@ namespace Z0.Test
         {
             for(var i=0; i<SampleSize; i++)
             {
-                var src = Vec256Pattern.increments<ulong>();
+                var src = ginx.vincrements<ulong>(n256);
                 var x = dinx.vperm4x64(src, Perm4.BADC);
                 var srcs = src.ToSpan();
                 var y = Vector256.Create(srcs[1], srcs[0], srcs[3], srcs[2]);

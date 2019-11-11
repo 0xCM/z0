@@ -329,7 +329,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static bit testz(in ushort rA, in ushort rB)
-            => ginx.vtestz(n, in rA, in rB);
+            => vblock.vtestz(n, in rA, in rB);
         
         [MethodImpl(Inline)]
         static bit testz(in uint rA, in uint rB)
@@ -339,7 +339,7 @@ namespace Z0
 
             var result = on;
             for(int i=0, offset = 0; i < segments; i++, offset += segsize)
-                result &= ginx.vtestz(n, in skip(in rA, offset), in skip(in rB, offset));
+                result &= vblock.vtestz(n, in skip(in rA, offset), in skip(in rB, offset));
             return result;
         }
 
@@ -350,10 +350,9 @@ namespace Z0
             const int segsize = 4;
             var result = on;
             for(int i=0, offset = 0; i < segments; i++, offset += segsize)
-                result &= ginx.vtestz(n, in skip(in rA, offset), in skip(in rB, offset));
+                result &= vblock.vtestz(n, in skip(in rA, offset), in skip(in rB, offset));
             return result;
         }
-
 
         [MethodImpl(Inline)]
         public static bit testc<T>(in T a)

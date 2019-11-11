@@ -92,13 +92,17 @@ namespace Z0
         /// <param name="i">The first index</param>
         /// <param name="j">The second index</param>
         /// <typeparam name="T">The element type</typeparam>
+        [MethodImpl(Inline)]
         public static Span<T> Swap<T>(this Span<T> src, params Swap[] swaps)           
             where T : unmanaged
         {
-            for(var k = 0; k< swaps.Length; k++)
+            var len = swaps.Length;
+            ref var srcmem = ref head(src);
+            ref var swapmem = ref head(swaps);
+            for(var k = 0; k < len; k++)
             {
-                (var i, var j) = swaps[k];
-                swap(ref src[i], ref src[j]);
+                (var i, var j) = skip(in swapmem, k);
+                swap(ref seek(ref srcmem, i), ref seek(ref srcmem, j));
             }
             return src;
         }

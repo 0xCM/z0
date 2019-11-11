@@ -14,6 +14,17 @@ namespace Z0
     
     partial class ginx
     {
+        /// <summary>
+        /// Creates a 256-bit vector from two 128-bit vectors    
+        /// This mimics the _mm256_set_m128i intrinsic which does not appear to be available
+        /// </summary>
+        /// <param name="lo">The lo part</param>
+        /// <param name="hi">The hi part</param>
+        /// <typeparam name="T">The primal type</typeparam>
+        [MethodImpl(Inline)]
+        public static Vector256<T> v256<T>(Vector128<T> lo, Vector128<T> hi)
+            where T : unmanaged
+                => vinsert(hi, vinsert(lo, default,0), 1);        
 
         /// <summary>
         /// Overwrites a 128-bit lane in the target with the content of the source vector
@@ -78,7 +89,6 @@ namespace Z0
                 return generic<T>(dfp.vinsert(float64(src), float64(dst), index));
             else
                 throw unsupported<T>();
-        }
- 
+        } 
     }
 }

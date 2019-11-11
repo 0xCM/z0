@@ -20,7 +20,7 @@ namespace Z0
             for(var i=0; i<DefaltCycleCount; i++)
             {
                 var x = Random.CpuVector<byte>(n256);
-                var y = dinx.vshuffle(x, id);
+                var y = dinx.vshuf16x8(x, id);
                 Claim.eq(x,y);
             }
         }
@@ -196,8 +196,8 @@ namespace Z0
                 var dst = ginx.vsll(src,offset);
                 for(var j=0; j<dst.Length(); j++)
                 {
-                    var x = ginx.vextract(dst, (byte)j);
-                    var y = ginx.vextract(src, (byte)j);
+                    var x = ginx.vxscalar(dst, (byte)j);
+                    var y = ginx.vxscalar(src, (byte)j);
                     Claim.eq(x, gmath.sll(y,offset));
                 }
             }
@@ -215,12 +215,12 @@ namespace Z0
                 var dst = ginx.vsll(src,offset);
                 for(var j=0; j<dst.Length(); j++)
                 {
-                    var x = ginx.vextract(ginx.vlo(dst), (byte)j);
-                    var y = ginx.vextract(ginx.vlo(src), (byte)j);
+                    var x = ginx.vxscalar(ginx.vlo(dst), (byte)j);
+                    var y = ginx.vxscalar(ginx.vlo(src), (byte)j);
                     Claim.eq(x, gmath.sll(y,offset));
 
-                    x = ginx.vextract(ginx.vhi(dst), (byte)j);
-                    y = ginx.vextract(ginx.vhi(src), (byte)j);
+                    x = ginx.vxscalar(ginx.vhi(dst), (byte)j);
+                    y = ginx.vxscalar(ginx.vhi(src), (byte)j);
                     Claim.eq(x, gmath.sll(y,offset));
 
                 }
@@ -238,8 +238,8 @@ namespace Z0
                 var dst = ginx.vsrl(src,offset);
                 for(var j=0; j<dst.Length(); j++)
                 {
-                    var x = ginx.vextract(dst, (byte)j);
-                    var y = ginx.vextract(src, (byte)j);
+                    var x = ginx.vxscalar(dst, (byte)j);
+                    var y = ginx.vxscalar(src, (byte)j);
                     Claim.eq(x, gmath.srl(y,offset));
                 }
             }
@@ -256,12 +256,12 @@ namespace Z0
                 var dst = ginx.vsrl(src,offset);
                 for(var j=0; j<dst.Length(); j++)
                 {
-                    var x = ginx.vextract(ginx.vlo(dst), (byte)j);
-                    var y = ginx.vextract(ginx.vlo(src), (byte)j);
+                    var x = ginx.vxscalar(ginx.vlo(dst), (byte)j);
+                    var y = ginx.vxscalar(ginx.vlo(src), (byte)j);
                     Claim.eq(x, gmath.srl(y,offset));
 
-                    x = ginx.vextract(ginx.vhi(dst), (byte)j);
-                    y = ginx.vextract(ginx.vhi(src), (byte)j);
+                    x = ginx.vxscalar(ginx.vhi(dst), (byte)j);
+                    y = ginx.vxscalar(ginx.vhi(src), (byte)j);
                     Claim.eq(x, gmath.srl(y,offset));
 
                 }
@@ -379,7 +379,7 @@ namespace Z0
 
         static Vector256<byte> ShuffleIdentityMask()
         {
-            Span256<byte> mask = Span256.Alloc<byte>(1);
+            Span256<byte> mask = Span256.allocu<byte>(1);
 
             //For the first 128-bit lane
             var half = mask.Length/2;
@@ -399,7 +399,7 @@ namespace Z0
             where T : unmanaged
 
         {
-            var mask = Span256.Alloc<T>(1);
+            var mask = Span256.allocu<T>(1);
             var chop = PrimalInfo.Get<T>().MaxVal;
             
             //For the first 128-bit lane
@@ -427,7 +427,7 @@ namespace Z0
         static Vector256<T> BlendAltMask<T>()
             where T : unmanaged
         {
-            Span256<T> mask = Span256.Alloc<T>(1);
+            Span256<T> mask = Span256.allocu<T>(1);
             var no = PrimalInfo.Get<T>().MaxVal;
             var yes = PrimalInfo.Get<T>().Zero;
             for(byte i=0; i< mask.Length; i++)

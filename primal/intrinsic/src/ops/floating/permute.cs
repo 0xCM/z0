@@ -15,44 +15,41 @@ namespace Z0
 
     partial class dfp
     {
-        ///<summary>
-        /// __m128 _mm_permute_ps (__m128 a, int imm8) VPERMILPS xmm, xmm, imm8
-        ///</summary>
-        /// <param name="x"></param>
-        /// <param name="imm8"></param>
+        /// <summary>
+        /// __m256d _mm256_permute4x64_pd (__m256d a, const int imm8) VPERMPD ymm, ymm/m256, imm8
+        /// Permutes components in the source vector across lanes as specified by the control byte
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="spec">The control byte</param>
         [MethodImpl(Inline)]
-        public static Vec128<float> vpermute(in Vec128<float> x, byte imm8)
-            => Permute(x, imm8);
+        public static Vector256<double> vperm4x64(Vector256<double> x, byte spec)
+            => Permute4x64(x,spec); 
 
         /// <summary>
-        /// __m128d _mm_permute_pd (__m128d a, int imm8) VPERMILPD xmm, xmm, imm8
+        /// __m256d _mm256_permute4x64_pd (__m256d a, const int imm8)VPERMPD ymm, ymm/m256, imm8
         /// </summary>
-        /// <param name="x"></param>
-        /// <param name="imm8"></param>
+        /// <param name="x">The source vector</param>
+        /// <param name="spec">The permutation spec</param>
         [MethodImpl(Inline)]
-        public static Vec128<double> vpermute(in Vec128<double> x, byte imm8)
-            => Permute(x, imm8);
+        public static Vector256<double> vperm4x64(Vector256<double> x, Perm4 spec)
+            => Permute4x64(x, (byte)spec); 
 
         /// <summary>
-        /// __m256 _mm256_permute_ps (__m256 a, int imm8) VPERMILPS ymm, ymm, imm8
+        /// Permutes components in the source vector across lanes as specified by the control vector
+        /// __m256 _mm256_permutevar8x32_ps (__m256 a, __m256i idx)VPERMPS ymm, ymm/m256, ymm
         /// </summary>
-        /// <param name="x"></param>
-        /// <param name="imm8"></param>
+        /// <param name="src">The source vector</param>
+        /// <param name="spec">The control vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<float> vpermute(in Vec256<float> x, byte imm8)
-            => Permute(x, imm8);
+        public static Vector256<float> vperm8x32(Vector256<float> src, Vector256<int> spec)
+            => PermuteVar8x32(src, spec);
 
-        /// <summary>
-        /// __m256d _mm256_permute_pd (__m256d a, int imm8) VPERMILPD ymm, ymm, imm8
-        /// </summary>
-        /// <param name="x"></param>
-        /// <param name="imm8"></param>
         [MethodImpl(Inline)]
-        public static Vec256<double> vpermute(in Vec256<double> x, byte imm8)
-            => Permute(x, imm8);
-    
+        public static Vector256<float> vreverse(Vector256<float> src)
+            => dfp.vperm8x32(src,MRev256f32);    
 
+        static Vector256<int> MRev256f32 
+            => dinx.vparts(n256, 7, 6, 5, 4, 3, 2, 1, 0);    
 
     }
-
 }

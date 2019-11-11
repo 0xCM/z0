@@ -120,7 +120,7 @@ namespace Z0
 
             var lhs = Random.BlockedSpan<T>(n, blocks);
             var rhs = Random.BlockedSpan<T>(n, blocks);
-            var dst = BlockedSpan.AllocBlocks<T>(n, blocks);
+            var dst = BlockedSpan.alloc<T>(n, blocks);
             
             vblock.or(n, blocks, step, in lhs.Head, in rhs.Head, ref dst.Head);
             for(var i=0; i<cells; i++)
@@ -139,7 +139,7 @@ namespace Z0
 
             var lhs = Random.BlockedSpan<T>(n, blocks);
             var rhs = Random.BlockedSpan<T>(n, blocks);
-            var dst = BlockedSpan.AllocBlocks<T>(n, blocks);
+            var dst = BlockedSpan.alloc<T>(n, blocks);
             
             vblock.or(n, blocks, step, in lhs.Head, in rhs.Head, ref dst.Head);
             for(var i=0; i<cells; i++)
@@ -156,7 +156,7 @@ namespace Z0
                 var vX = srcX.TakeVector();
                 var vY = srcY.TakeVector();
                 
-                var dstExpect = BlockedSpan.AllocBlock<T>(n);
+                var dstExpect = BlockedSpan.alloc<T>(n);
                 for(var i=0; i< dstExpect.Length; i++)
                     dstExpect[i] = gmath.or(srcX[i], srcY[i]);
                 
@@ -176,7 +176,7 @@ namespace Z0
                 var vX = srcX.TakeVector();
                 var vY = srcY.TakeVector();
 
-                var dstExpect = BlockedSpan.AllocBlock<T>(n);
+                var dstExpect = BlockedSpan.alloc<T>(n);
                 for(var i=0; i< dstExpect.Length; i++)
                     dstExpect[i] = gmath.or(srcX[i], srcY[i]);
                 

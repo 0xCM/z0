@@ -66,6 +66,17 @@ namespace Z0
             => length % BlockLength == 0;
         
         [MethodImpl(Inline)]
+        public static Span256<T> Transfer(Span<T> src)
+        {
+            require(Aligned(src.Length));
+            return new Span256<T>(src);
+        }
+            
+        [MethodImpl(Inline)]
+        internal static Span256<T> TransferUnsafe(Span<T> src)
+            => new Span256<T>(src);
+
+        [MethodImpl(NotInline)]
         public static Span256<T> AllocBlocks(int blocks, T? fill = null)
         {
             var dst = new Span256<T>(new T[blocks * BlockLength]);

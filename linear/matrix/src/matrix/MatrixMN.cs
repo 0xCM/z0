@@ -237,7 +237,7 @@ namespace Z0
         /// </summary>
         [MethodImpl(Inline)]
         public BlockMatrix<M,N,T> Block()
-            => Span256.Load(data);
+            => Span256.load(data);
 
         public bool Equals(Matrix<M,N,T> rhs)
         {

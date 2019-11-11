@@ -77,7 +77,7 @@ namespace Z0
             where T : unmanaged
             where N : unmanaged, ITypeNat
         {
-            var data = Z0.Span256.Alloc<N,N,T>();
+            var data = Z0.Span256.allocu<N,N,T>();
             var n = nati<N>();
             for(int row=0; row < n; row++)
                 random.MarkovVec<T>(data.Slice(row*n, n));                            
@@ -146,7 +146,7 @@ namespace Z0
         [MethodImpl(Inline)]
         static BlockVector<float> MarkovVec(this IPolyrand random, int length, float min, float max)
         {            
-            var dst = Z0.Span256.AllocBlocks<float>(Z0.Span256.MinBlocks<float>(length));
+            var dst = Z0.Span256.alloc<float>(Z0.Span256.minblocks<float>(length));
             random.Fill(closed(min,max), length, ref dst[0]);
             mathspan.fdiv(dst.Unblocked, dst.Avg() * length);
             return dst; 
@@ -155,7 +155,7 @@ namespace Z0
         [MethodImpl(Inline)]
         static BlockVector<double> MarkovVec(this IPolyrand random, int length, double min, double max)
         {                        
-            var dst = Z0.Span256.AllocBlocks<double>(Z0.Span256.MinBlocks<double>(length));
+            var dst = Z0.Span256.alloc<double>(Z0.Span256.minblocks<double>(length));
             random.Fill(closed(min,max), length, ref dst[0]);
             mathspan.fdiv(dst.Unblocked, dst.Avg() * length);
             return dst; 

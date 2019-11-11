@@ -157,7 +157,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Span256<T> ToSpan256<T>(this T[] src)
             where T : unmanaged
-            => Z0.Span256.Load<T>(src);
+            => Z0.Span256.load<T>(src);
 
         /// <summary>
         /// Constructs a 128-bit blocked span from an unblocked span
@@ -167,7 +167,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Span128<T> ToSpan128<T>(this Span<T> src)
              where T : unmanaged
-                => Z0.Span128.Load(src);
+                => Z0.Span128.load(src);
 
         /// <summary>
         /// Constructs a 128-bit blocked span from an unblocked span
@@ -177,7 +177,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Span256<T> ToSpan256<T>(this Span<T> src)
              where T : unmanaged
-                => Z0.Span256.Load(src);
+                => Z0.Span256.load(src);
                 
         /// <summary>
         /// Constructs a span from an array selection

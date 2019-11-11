@@ -61,35 +61,6 @@ namespace Z0
        }
 
         [MethodImpl(Inline)]
-        public static unsafe bit vtestz<T>(N128 n, in T a, in T b)
-            where T : unmanaged
-        {                    
-            vload(a, out Vector128<T> vA);
-            vload(b, out Vector128<T> vB);
-            return vtestz(vA,vB);
-        }
-
-        [MethodImpl(Inline)]
-        public static unsafe bit vtestz<T>(N128 n, in T a)
-            where T : unmanaged
-            => vtestz(n, a,a);
-
-
-        [MethodImpl(Inline)]
-        public static unsafe bit vtestz<T>(N256 n, in T a, in T b)
-            where T : unmanaged
-        {                    
-            vload(a, out Vector256<T> vA);
-            vload(b, out Vector256<T> vB);
-            return vtestz(vA,vB);
-        }
-
-        [MethodImpl(Inline)]
-        public static unsafe bit vtestz<T>(N256 n, in T a)
-            where T : unmanaged
-            => vtestz(n, a,a);
-
-        [MethodImpl(Inline)]
         static bit vtestz_u<T>(Vector128<T> src, Vector128<T> mask)
             where T : unmanaged
         {

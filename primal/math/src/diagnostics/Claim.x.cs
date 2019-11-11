@@ -58,7 +58,7 @@ namespace Z0
         public static void ClaimEqual<T>(this ReadOnlySpan128<T> lhs, ReadOnlySpan128<T> rhs,  [Member] string caller = null, [File] string file = null, [Line] int? line = null)
             where T : unmanaged 
         {
-            for(var i = 0; i< Span128.Length(lhs,rhs); i++)
+            for(var i = 0; i< Span128.length(lhs,rhs); i++)
                 if(!gmath.eq(lhs[i],rhs[i]))
                     throw Errors.ItemsNotEqual(i, lhs[i], rhs[i], caller, file, line);
         }

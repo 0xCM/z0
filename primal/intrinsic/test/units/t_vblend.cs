@@ -27,7 +27,7 @@ namespace Z0
             var y = dinx.vparts(1ul,3ul,5ul,7ul);
             var m = dinx.vparts(pickY, pickX, pickY, pickX);
             var expect = dinx.vparts(1ul, 2ul, 5ul, 6ul);
-            var actual = dinx.vblendv(x,y,m);
+            var actual = dinx.vblend4x64(x,y,m);
             Claim.eq(expect,actual);
 
             var xs = x.ToSpan();
@@ -56,12 +56,12 @@ namespace Z0
                 var y = Random.CpuVector<ulong>(n);
                 
                 var selector = Random.BitSpan(len);
-                var ms = BlockedSpan.AllocBlock<ulong>(n);
+                var ms = BlockedSpan.alloc<ulong>(n);
                 for(var i = 0; i< len; i++)
                     ms[i] = selector[i] ? pickY : pickX;
 
                 var m = ms.TakeVector();
-                var actual = dinx.vblendv(x,y,m);
+                var actual = dinx.vblend4x64(x,y,m);
 
                 
                 var xs = x.ToSpan();
@@ -94,16 +94,16 @@ namespace Z0
             var x = dinx.vparts(n128, 0,2,4,6,8,10,12,14); 
             var y = dinx.vparts(n128, 1,3,5,7,9,11,13,15); 
             
-            var z = dinx.vblend(x,y, Blend16x8.LLLLLLLL);
+            var z = dinx.vblend8x16(x,y, Blend8x16.LLLLLLLL);
             Claim.eq(x,z);          
 
-            z = dinx.vblend(x,y, Blend16x8.RRRRRRRR);
+            z = dinx.vblend8x16(x,y, Blend8x16.RRRRRRRR);
             Claim.eq(z,y);
 
-            z = dinx.vblend(x,y, Blend16x8.LLLLRRRR);
+            z = dinx.vblend8x16(x,y, Blend8x16.LLLLRRRR);
             Claim.eq(dinx.vparts(n128, 0,2,4,6,9,11,13,15), z);
 
-            z = dinx.vblend(x,y, Blend16x8.RRRRLLLL);
+            z = dinx.vblend8x16(x,y, Blend8x16.RRRRLLLL);
             Claim.eq(dinx.vparts(n128,1,3,5,7,8,10,12,14), z);
 
         }
@@ -113,50 +113,50 @@ namespace Z0
             var x = dinx.vparts(1u,3,5,7);
             var y = dinx.vparts(2u,4,6,8);
 
-            var spec = Blend32x4.LLLL;
-            Vector128<uint> z = dinx.vblend(x,y, spec);
+            var spec = Blend4x32.LLLL;
+            Vector128<uint> z = dinx.vblend4x32(x,y, spec);
             Claim.eq(z,x);
 
-            spec = Blend32x4.LLLR;
-            z = dinx.vblend(x,y, spec);
+            spec = Blend4x32.LLLR;
+            z = dinx.vblend4x32(x,y, spec);
             Claim.eq(z, dinx.vparts(1u,3,5,8));
 
-            spec = Blend32x4.LLRL;
-            z = dinx.vblend(x,y, spec);
+            spec = Blend4x32.LLRL;
+            z = dinx.vblend4x32(x,y, spec);
             Claim.eq(z, dinx.vparts(1u,3,6,7));
 
-            spec = Blend32x4.LLRR;
-            z = dinx.vblend(x,y, spec);
+            spec = Blend4x32.LLRR;
+            z = dinx.vblend4x32(x,y, spec);
             Claim.eq(z, dinx.vparts(1u,3,6,8));
 
-            spec = Blend32x4.RLLL;
-            z = dinx.vblend(x,y, spec);
+            spec = Blend4x32.RLLL;
+            z = dinx.vblend4x32(x,y, spec);
             Claim.eq(z, dinx.vparts(2u,3,5,7));
 
 
-            spec = Blend32x4.RRRR;
-            z = dinx.vblend(x,y, spec);
+            spec = Blend4x32.RRRR;
+            z = dinx.vblend4x32(x,y, spec);
             Claim.eq(z,y);
         }
 
         public void vblend_256x32u_check()
         {
 
-            var x = dinx.vparts(1u, 3, 5, 7, 9,  11, 13, 15);
-            var y = dinx.vparts(2u, 4, 6, 8, 10, 12, 14, 16);
-            var spec = Blend32x8.LLLLLLLL;
-            var z = dinx.vblend(x,y, spec);
+            var x = dinx.vparts(n256, 1u, 3, 5, 7, 9,  11, 13, 15);
+            var y = dinx.vparts(n256, 2u, 4, 6, 8, 10, 12, 14, 16);
+            var spec = Blend8x32.LLLLLLLL;
+            var z = dinx.vblend8x32(x,y, spec);
             Trace($"vblend({x},{y},{spec}) = {z}");
             Claim.eq(z,x);
 
-            spec = Blend32x8.LRLRLRLR;
-            z = dinx.vblend(x,y, spec);
+            spec = Blend8x32.LRLRLRLR;
+            z = dinx.vblend8x32(x,y, spec);
             Trace($"vblend({x},{y},{spec}) = {z}");
-            Claim.eq(z,dinx.vparts(1u,4,5,8,9,12,13,16));
+            Claim.eq(z,dinx.vparts(n256,1u,4,5,8,9,12,13,16));
 
 
-            spec = Blend32x8.RRRRRRRR;
-            z = dinx.vblend(x,y, spec);
+            spec = Blend8x32.RRRRRRRR;
+            z = dinx.vblend8x32(x,y, spec);
             Trace($"vblend({x},{y},{spec}) = {z}");
             Claim.eq(z,y);
 

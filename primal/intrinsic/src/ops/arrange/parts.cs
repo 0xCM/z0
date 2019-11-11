@@ -81,14 +81,14 @@ namespace Z0
         /// Defines a cpu vector by its constituent parts, from least -> most significant
         /// </summary>
         [MethodImpl(Inline)]
-        public static Vector256<int> vparts(int x0, int x1, int x2, int x3, int x4, int x5, int x6, int x7)
+        public static Vector256<int> vparts(N256 n, int x0, int x1, int x2, int x3, int x4, int x5, int x6, int x7)
             => Vector256.Create(x0,x1,x2,x3,x4,x5,x6,x7);
 
         /// <summary>
         /// Defines a cpu vector by its constituent parts, from least -> most significant
         /// </summary>
         [MethodImpl(Inline)]
-        public static Vector256<uint> vparts(uint x0, uint x1, uint x2, uint x3, uint x4, uint x5, uint x6, uint x7)
+        public static Vector256<uint> vparts(N256 n,uint x0, uint x1, uint x2, uint x3, uint x4, uint x5, uint x6, uint x7)
             => Vector256.Create(x0,x1,x2,x3,x4,x5,x6,x7);
 
         /// <summary>

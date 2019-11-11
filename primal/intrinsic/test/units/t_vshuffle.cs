@@ -13,7 +13,6 @@ namespace Z0.Test
     using static zfunc;
     
     using static VecParts128x8u;
-    using static Vec128PatternData;
     public class t_vshuffle : IntrinsicTest<t_vshuffle>
     {        
 
@@ -40,7 +39,7 @@ namespace Z0.Test
             var n = n128;
             var src = ginx.vload(n, in head(Inc8u));
             var spec = ginx.vload(n, in head(Pattern1));
-            var dst = dinx.vshuffle(src,spec);
+            var dst = dinx.vshuf16x8(src,spec);
             Claim.eq(spec,dst);
         }
 
@@ -49,7 +48,7 @@ namespace Z0.Test
             var n = n128;
             var src = ginx.vload(n, in head(Inc8u));
             var spec = ginx.vload(n, in head(Pattern2));
-            var dst = dinx.vshuffle(src,spec);
+            var dst = dinx.vshuf16x8(src,spec);
             Claim.eq(spec,dst);
 
         }
@@ -59,7 +58,7 @@ namespace Z0.Test
             var n = n128;
             var src = ginx.vload(n, in head(Inc8u));
             var spec = ginx.vload(n, in head(Pattern3));
-            var dst = dinx.vshuffle(src,spec);
+            var dst = dinx.vshuf16x8(src,spec);
             Claim.eq(spec,dst);
         }
 
@@ -67,8 +66,8 @@ namespace Z0.Test
         {
             var n = n128;
             var src = ginx.vload(n, in head(Inc8u));
-            var spec = ginx.vload(n, in head(RotL_8x8u));
-            var dst = dinx.vshuffle(src,spec);
+            var spec = ginx.vload(n, in head(VecPatternData.rotl(n128, n8)));
+            var dst = dinx.vshuf16x8(src,spec);
             Claim.eq(spec,dst);
         }
 
@@ -76,8 +75,8 @@ namespace Z0.Test
         {
             var n = n128;
             var src = ginx.vload(n, in head(Inc8u));
-            var spec = ginx.vload(n, in head(RotR_8x8u));
-            var dst = dinx.vshuffle(src,spec);
+            var spec = ginx.vload(n, in head(VecPatternData.rotr(n128, n8)));
+            var dst = dinx.vshuf16x8(src,spec);
             Claim.eq(spec,dst);
         }
 
@@ -85,9 +84,9 @@ namespace Z0.Test
         {
             var n = n128;
             var src = ginx.vload(n, in head(Inc8u));
-            var spec1 = ginx.vload(n, in head(RotL_8x8u));
-            var spec2 = ginx.vload(n, in head(RotR_8x8u));
-            var dst = dinx.vshuffle(dinx.vshuffle(src,spec1), spec2);
+            var spec1 = ginx.vload(n, in head(VecPatternData.rotl(n128, n8)));
+            var spec2 = ginx.vload(n, in head(VecPatternData.rotr(n128, n8)));
+            var dst = dinx.vshuf16x8(dinx.vshuf16x8(src,spec1), spec2);
             Claim.eq(src,dst);
         }
 
@@ -96,7 +95,7 @@ namespace Z0.Test
             var n = n128;
             var mask = ginx.vbroadcast(n,(byte)0b10000000);
             var src = Random.CpuVector<byte>(n);
-            var dst = dinx.vshuffle(src, mask);
+            var dst = dinx.vshuf16x8(src, mask);
             var zed = ginx.vbroadcast(n,(byte)0);            
             Claim.eq(dst,zed);                        
         }
@@ -107,19 +106,19 @@ namespace Z0.Test
             var src = dinx.vparts(1u,2u,3u,4u);
             var spec = Perm4.ABCD;
             var y = dinx.vparts(4u,3u,2u,1u);
-            var x = dinx.vshuffle(src, Perm4.ABCD);
+            var x = dinx.vperm4x32(src, Perm4.ABCD);
             Claim.eq(x, src);
             Trace($"shuffle({x},{spec}) = {y}");           
 
             y = dinx.vparts(4u,3u,2u,1u);
             spec = Perm4.DCBA;
-            x = dinx.vshuffle(src,spec);
+            x = dinx.vperm4x32(src,spec);
             Claim.eq(x, y); 
             Trace($"shuffle({x},{spec}) = {y}");           
 
             y = dinx.vparts(4u,3u,2u,1u);
             spec = Perm4.DCBA;
-            x = dinx.vshuffle(src,spec);
+            x = dinx.vperm4x32(src,spec);
             Claim.eq(x, y); 
             Trace($"shuffle({x},{spec}) = {y}");           
 
@@ -129,26 +128,26 @@ namespace Z0.Test
         public void shuffle_lo_128x16u()
         {
             var id = dinx.vparts(n128, 0,1,2,3,6,7,8,9);
-            Claim.eq(dinx.vshufflelo(id, Perm4.ADCB), dinx.vparts(n128, 0,3,2,1,6,7,8,9));
+            Claim.eq(dinx.vpermlo4x16(id, Perm4.ADCB), dinx.vparts(n128, 0,3,2,1,6,7,8,9));
         }
 
         public void shuffle_hi_128x16u()
         {
             var id = dinx.vparts(n128, 0,1,2,3,6,7,8,9);
-            Claim.eq(dinx.vshufflehi(id, Perm4.ADCB), dinx.vparts(n128,0,1,2,3,6,9,8,7));
+            Claim.eq(dinx.vpermhi4x16(id, Perm4.ADCB), dinx.vparts(n128,0,1,2,3,6,9,8,7));
         }
 
         public void shuffle_128x16u()
         {
             var id = dinx.vparts(n128,0,1,2,3,6,7,8,9);
-            Claim.eq(dinx.vshuffle(id, Perm4.ADCB, Perm4.ADCB), dinx.vparts(n128,0,3,2,1,6,9,8,7));
+            Claim.eq(dinx.vperm4x16(id, Perm4.ADCB, Perm4.ADCB), dinx.vparts(n128,0,3,2,1,6,9,8,7));
         }
 
         public void permute128i32()
         {
             var id = dinx.vparts(0,1,2,3);
-            Claim.eq(dinx.vshuffle(id, Perm4.ADCB), dinx.vparts(0,3,2,1));
-            Claim.eq(dinx.vshuffle(id, Perm4.DBCA), dinx.vparts(3,1,2,0));
+            Claim.eq(dinx.vperm4x32(id, Perm4.ADCB), dinx.vparts(0,3,2,1));
+            Claim.eq(dinx.vperm4x32(id, Perm4.DBCA), dinx.vparts(3,1,2,0));
             Permute4i32();        
         }
 
@@ -176,7 +175,7 @@ namespace Z0.Test
                 Claim.eq(p,q);
 
                 // Permute vector via api
-                var v2 = dinx.vshuffle(v1,p);
+                var v2 = dinx.vperm4x32(v1,p);
 
                 // Permute vector manually
                 var v3 = dinx.vparts(v1s[p0],v1s[p1],v1s[p2],v1s[p3]);

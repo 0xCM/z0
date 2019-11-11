@@ -159,7 +159,7 @@ namespace Z0
             
         [MethodImpl(Inline)]
         public Span128<T> ToSpan128()
-            => Span128.Load(data);
+            => Span128.load(data);
 
         [MethodImpl(Inline)]
         public Span<T> ToSpan()

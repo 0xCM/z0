@@ -68,13 +68,13 @@ namespace Z0
             where T : unmanaged
         {
             var ones = ginx.vones<T>(n);
-            var one = ginx.vextract(ones,0);
+            var one = ginx.vxscalar(ones,0);
             
             for(var i=0; i< SampleSize; i++)
             {
                 var x = Random.BlockedSpan<T>(n);
                 var y = Random.BlockedSpan<T>(n);
-                var z = BlockedSpan.AllocBlock<T>(n);
+                var z = BlockedSpan.alloc<T>(n);
                 
                 for(var j=0; j<z.Length; j++)
                     if(gmath.lt(x[j],y[j]))
@@ -93,13 +93,13 @@ namespace Z0
             where T : unmanaged
         {
             var ones = ginx.vones<T>(n);
-            var one = ginx.vextract(ginx.vlo(ones),0);
+            var one = ginx.vxscalar(ginx.vlo(ones),0);
             
             for(var i=0; i< SampleSize; i++)
             {
                 var x = Random.BlockedSpan<T>(n);
                 var y = Random.BlockedSpan<T>(n);
-                var z = BlockedSpan.AllocBlock<T>(n);
+                var z = BlockedSpan.alloc<T>(n);
                 
                 for(var j=0; j<z.Length; j++)
                     if(gmath.lt(x[j],y[j]))

@@ -184,8 +184,5 @@ namespace Z0
             dst |= (uint)s3 << 6;
             return (Perm4)dst;
         }
-
     }
-
-
 }

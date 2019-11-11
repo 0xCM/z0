@@ -39,7 +39,7 @@ namespace Z0.Logix
             
             var lut = Lookup.From(nCount,values).Vector;
             var keys = dinx.vparts(n128, 15,14,13,12,11,10,9,8,7,6,5,4,3,2,1,0);
-            var selected = dinx.vshuffle(lut,keys);
+            var selected = dinx.vshuf16x8(lut,keys);
             Trace(lut.Format());
             Trace(keys.Format());
             Trace(selected.Format());
@@ -67,7 +67,7 @@ namespace Z0.Logix
             Claim.eq(x,y);   
 
             var items = ginx.vincrements<byte>(nVec, 64);
-            var selected = dinx.vshuffle(items, x);
+            var selected = dinx.vshuf16x8(items, x);
             Claim.eq(items,selected);
 
         }
@@ -91,7 +91,7 @@ namespace Z0.Logix
             Claim.eq(x,y);   
 
             var items = ginx.vincrements<byte>(nVec, 64);
-            var selected = dinx.vshuffle(items, x);
+            var selected = dinx.vshuf16x8(items, x);
             Claim.eq(items,selected);
 
 

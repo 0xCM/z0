@@ -305,7 +305,7 @@ namespace Z0
         /// </summary>
         [MethodImpl(Inline)]
         public BlockMatrix<N,T> Block()
-            => Span256.Load(data);
+            => Span256.load(data);
 
         [MethodImpl(Inline)]
         public Matrix<N,U> Convert<U>()

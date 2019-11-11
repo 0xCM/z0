@@ -14,16 +14,13 @@ namespace Z0
     partial class inxoc
     {
         public static Vector256<int> vpermvar8x32_256x32i(Vector256<int> src, Vector256<int> spec)
-            => dinx.vpermvar8x32(src,spec);
+            => dinx.vperm8x32(src,spec);
 
         public static Vector256<uint> vpermvar8x32_256x32u(Vector256<uint> src, Vector256<uint> spec)
-            => dinx.vpermvar8x32(src,spec);
-
-        public static Vector256<float> vpermvar8x32_256x32f(Vector256<float> src, Vector256<int> spec)
-            => dinx.vpermvar8x32(src,spec);
+            => dinx.vperm8x32(src,spec);
 
         public static Vector256<byte> vpermvar32x8_256x8u(Vector256<byte> a, Vector256<byte> spec)
-            => dinx.vpermvar32x8(a,spec);
+            => dinx.vshuf32x8(a,spec);
  
     }
 }

@@ -23,10 +23,10 @@ namespace Z0
             var src = random.ReadOnlySpan128<T>(blocks);
             Claim.eq(blocks*blocklen,src.Length);
                         
-            var expect = Span128.AllocBlocks<T>(blocks);
+            var expect = Span128.alloc<T>(blocks);
             Claim.eq(blocks, expect.BlockCount);
 
-            var actual = Span128.AllocBlocks<T>(blocks);
+            var actual = Span128.alloc<T>(blocks);
             Claim.eq(blocks, actual.BlockCount);
 
             var tmp = new T[blocklen];
@@ -58,10 +58,10 @@ namespace Z0
             var src = random.ReadOnlySpan256<T>(blocks);
             Claim.eq(blocks*blocklen,src.Length);
                         
-            var expect = Span256.AllocBlocks<T>(blocks);
+            var expect = Span256.alloc<T>(blocks);
             Claim.eq(blocks, expect.BlockCount);
 
-            var actual = Span256.AllocBlocks<T>(blocks);
+            var actual = Span256.alloc<T>(blocks);
             Claim.eq(blocks, actual.BlockCount);
 
             var tmp = new T[blocklen];
@@ -97,10 +97,10 @@ namespace Z0
             var rhs = random.ReadOnlySpan128<T>(blocks);
             Claim.eq(blocks*blocklen,rhs.Length);
             
-            var expect = Span128.AllocBlocks<T>(blocks);
+            var expect = Span128.alloc<T>(blocks);
             Claim.eq(blocks, expect.BlockCount);
 
-            var actual = Span128.AllocBlocks<T>(blocks);
+            var actual = Span128.alloc<T>(blocks);
             Claim.eq(blocks, actual.BlockCount);
 
             Span<T> tmp = stackalloc T[blocklen];
@@ -137,10 +137,10 @@ namespace Z0
             var rhs = random.ReadOnlySpan256<T>(blocks);
             Claim.eq(blocks*blocklen,rhs.Length);
             
-            var expect = Span256.AllocBlocks<T>(blocks);
+            var expect = Span256.alloc<T>(blocks);
             Claim.eq(blocks, expect.BlockCount);
 
-            var actual = Span256.AllocBlocks<T>(blocks);
+            var actual = Span256.alloc<T>(blocks);
             Claim.eq(blocks, actual.BlockCount);
 
             Span<T> tmp = stackalloc T[blocklen];

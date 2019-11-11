@@ -22,25 +22,6 @@ namespace Z0
 
     partial class dinx 
     {
-        /// <summary>
-        /// Transposes a 4x4 matrix of floats, adapted from MSVC intrinsic headers
-        /// </summary>
-        /// <param name="row0">The first row</param>
-        /// <param name="row1">The second row</param>
-        /// <param name="row2">The third row</param>
-        /// <param name="row3">The fourth row</param>
-        [MethodImpl(Inline)]
-        public static void vtranspose(ref Vector128<float> row0, ref Vector128<float> row1, ref Vector128<float> row2, ref Vector128<float> row3)
-        {
-            var tmp0 = Shuffle(row0,row1, 0x44);
-            var tmp2 = Shuffle(row0, row1, 0xEE);
-            var tmp1 = Shuffle(row2, row3, 0x44);
-            var tmp3 = Shuffle(row2,row3, 0xEE);
-            row0 = Shuffle(tmp0,tmp1, 0x88);
-            row1 = Shuffle(tmp0,tmp1, 0xDD);
-            row2 = Shuffle(tmp2,tmp3, 0x88);
-            row3 = Shuffle(tmp2, tmp3, 0xDD);
-        }    
 
         /// <summary>
         /// Transposes a 4x4 matrix of unsigned integers, adapted from MSVC intrinsic headers

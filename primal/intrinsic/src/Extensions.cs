@@ -15,7 +15,7 @@ namespace Z0
     {
 
         [MethodImpl(Inline)]
-        public static string Format(this Blend32x4 src)                
+        public static string Format(this Blend4x32 src)                
             => BitString.FromScalar((byte)src).Format(true);
 
         /// <summary>

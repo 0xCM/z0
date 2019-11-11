@@ -236,7 +236,6 @@ namespace Z0
             dst.A = x.GetElement(0);
             dst.B = x.GetElement(1);
             return ref dst;
-
         }
 
         /// <summary>

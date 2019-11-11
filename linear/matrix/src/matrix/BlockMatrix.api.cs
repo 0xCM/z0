@@ -29,7 +29,7 @@ namespace Z0
         public static BlockMatrix<N,T> Alloc<N,T>(N n = default, T exemplar = default)
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => Span256.Alloc<N,N,T>(); 
+                => Span256.allocu<N,N,T>(); 
 
         /// <summary>
         /// Allocates a matrix of natual dimensions
@@ -45,7 +45,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => Span256.Alloc<M,N,T>(); 
+                => Span256.allocu<M,N,T>(); 
          
         /// <summary>
         /// Loads a matrix of natural dimensions from a blocked span
@@ -79,7 +79,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => Span256.Load(src);
+                => Span256.load(src);
 
         /// <summary>
         /// Defines a square matrix
@@ -147,7 +147,7 @@ namespace Z0
             if(n != doc.Rows[0].Cells.Length)
                 return default;
 
-            var dst =  Load<M,N,T>(Span256.Alloc<M,N,T>());
+            var dst =  Load<M,N,T>(Span256.allocu<M,N,T>());
             for(var i = 0; i<doc.Rows.Length; i++)
             {
                 ref readonly var row = ref doc[i];

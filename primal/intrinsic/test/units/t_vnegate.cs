@@ -129,7 +129,7 @@ namespace Z0.Test
             var cells = stats.CellCount;
 
             var src = Random.BlockedSpan<T>(n, blocks);
-            var dst = BlockedSpan.AllocBlocks<T>(n, blocks);
+            var dst = BlockedSpan.alloc<T>(n, blocks);
             vblock.negate(n, blocks, step, in src.Head, ref dst.Head);
             for(var i=0; i<cells; i++)
                 Claim.eq(gmath.negate(src[i]), dst[i]);

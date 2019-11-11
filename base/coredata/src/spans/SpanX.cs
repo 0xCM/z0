@@ -168,31 +168,30 @@ namespace Z0
         /// <summary>
         /// Fills a span with a supplied valuie
         /// </summary>
-        /// <param name="io">The span to manipulate</param>
+        /// <param name="src">The span to manipulate</param>
         /// <typeparam name="T">The element type</typeparam>
         /// <returns>The manipulated span</returns>
         [MethodImpl(Inline)]
-        public static Span<T> FillWith<T>(this Span<T> io, T value)
+        public static Span<T> FillWith<T>(this Span<T> src, T value)
         {
-            io.Fill(value);
-            return io;
+            src.Fill(value);
+            return src;
         }
 
         /// <summary>
         /// Overwrites span content with the default/zero value
         /// </summary>
-        /// <param name="io">The span to manipulate</param>
+        /// <param name="src">The span to manipulate</param>
         /// <typeparam name="T">The element type</typeparam>
         /// <returns>The manipulated span</returns>
         [MethodImpl(Inline)]
-        public static Span<T> ZeroFill<T>(this Span<T> io)
+        public static Span<T> ZeroFill<T>(this Span<T> src)
             where T : unmanaged
         {
-            io.Fill(default(T));
-            return io;
+            src.Fill(default(T));
+            return src;
         }
-        
-        
+            
         /// <summary>
         /// If the length of a source span is less than a specified length, a new span of the desired length
         /// is allocated and then filled with the source span content; otherwise, the source span is returned
@@ -271,5 +270,32 @@ namespace Z0
             dst.Reverse();
             return dst;
         }
+
+        /// <summary>
+        /// Reverses a blocked span in-place
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <typeparam name="T">The element type</typeparam>
+        [MethodImpl(Inline)]
+        public static Span256<T> Reverse<T>(this Span256<T> src)
+            where T : unmanaged
+        {
+            src.Unblocked.Reverse();
+            return src;
+        }
+
+        /// <summary>
+        /// Reverses a blocked span in-place
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <typeparam name="T">The element type</typeparam>
+        [MethodImpl(Inline)]
+        public static Span128<T> Reverse<T>(this Span128<T> src)
+            where T : unmanaged
+        {
+            src.Unblocked.Reverse();
+            return src;
+        }
+
     }
 }

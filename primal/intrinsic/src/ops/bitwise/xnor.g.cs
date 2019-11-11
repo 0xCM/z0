@@ -51,34 +51,6 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static Vector128<T> vxnor<T>(N128 n, in T rX, in T rY)
-            where T : unmanaged
-        {                    
-            vload(in rX, out Vector128<T> vA);
-            vload(in rY, out Vector128<T> vB);
-            return vxnor(vA,vB);
-        }
-
-        [MethodImpl(Inline)]
-        public static unsafe void vxnor<T>(N128 n, in T rX, in T rY, ref T rDst)
-            where T : unmanaged
-                => vstore(vxnor(n, in rX, in rY), ref rDst);
-
-        [MethodImpl(Inline)]
-        public static Vector256<T> vxnor<T>(N256 n, in T rX, in T rY)
-            where T : unmanaged
-        {                    
-            vload(in rX, out Vector256<T> vA);
-            vload(in rY, out Vector256<T> vB);
-            return vxnor(vA,vB);
-        }
-
-        [MethodImpl(Inline)]
-        public static unsafe void vxnor<T>(N256 n, in T rX, in T rY, ref T rDst)
-            where T : unmanaged
-                => vstore(vxnor(n, in rX, in rY), ref rDst);
-
-        [MethodImpl(Inline)]
         static Vector128<T> vxnor_128u<T>(Vector128<T> x, Vector128<T> y)
             where T : unmanaged
         {
@@ -118,7 +90,6 @@ namespace Z0
                 throw unsupported<T>();
         }
 
-
         [MethodImpl(Inline)]
         static Vector256<T> vxnor_256u<T>(Vector256<T> x, Vector256<T> y)
             where T : unmanaged
@@ -157,7 +128,6 @@ namespace Z0
                 return generic<T>(dfp.vxnor(float64(x), float64(y)));
             else
                 throw unsupported<T>();
-        }
- 
+        } 
     }
 }

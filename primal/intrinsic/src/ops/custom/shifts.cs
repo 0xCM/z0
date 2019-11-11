@@ -26,12 +26,12 @@ namespace Z0
             var dstA = v8u(dinx.vsll(srcX, offset));
 
             // Truncate overflows to sets up the component pattern [X 0 X 0 ... X 0]
-            var trm =  Vec256Pattern.altclear<byte>();
-            var trA = dinx.vshuffle(dstA, trm);
+            var trm =  ginx.valtclear<byte>(n256);
+            var trA = dinx.vshuf16x8(dstA, trm);
 
             // Transform the result back the source space
-            var permSpec = ginx.vpLaneMerge<byte>();
-            var permA = dinx.vpermvar32x8(trA, permSpec);
+            var permSpec = ginx.vlanemerge<byte>();
+            var permA = dinx.vshuf32x8(trA, permSpec);
             return dinx.vlo(permA);
         }
 
@@ -47,21 +47,20 @@ namespace Z0
             var dstB = dinx.vsll(srcY, offset).AsByte();
 
             // Truncate overflows to sets up the component pattern [X 0 X 0 ... X 0] in each vector
-            var trm =  Vec256Pattern.altclear<byte>();
-            var trA = dinx.vshuffle(dstA, trm);
-            var trB = dinx.vshuffle(dstB, trm);
+            var trm =  ginx.valtclear<byte>(n256);
+            var trA = dinx.vshuf16x8(dstA, trm);
+            var trB = dinx.vshuf16x8(dstB, trm);
 
             // Each vector contains 16 values that need to be merged
             // back into a single vector. The strategey is to condense
             // each vector via the "lane merge" pattern and construct
             // the result vector via insertion of these condensed vectors
-            var permSpec = ginx.vpLaneMerge<byte>();
-            var permA = dinx.vpermvar32x8(trA, permSpec);
-            var permB = dinx.vpermvar32x8(trB, permSpec);
+            var permSpec = ginx.vlanemerge<byte>();
+            var permA = dinx.vshuf32x8(trA, permSpec);
+            var permB = dinx.vshuf32x8(trB, permSpec);
             
             return dinx.vinsert(dinx.vlo(permA), dinx.vlo(permB), out Vector256<byte> _);            
         }
-
 
         [MethodImpl(Inline)]
         public static Vector256<byte> vsrl(Vector256<byte> src, byte offset)
@@ -75,17 +74,17 @@ namespace Z0
             var dstB = dinx.vsrl(srcY, offset).AsByte();
 
             // Truncate overflows to sets up the component pattern [X 0 X 0 ... X 0] in each vector
-            var trm = Vec256Pattern.altclear<byte>();
-            var trA = dinx.vshuffle(dstA, trm);
-            var trB = dinx.vshuffle(dstB, trm);
+            var trm = ginx.valtclear<byte>(n256);
+            var trA = dinx.vshuf16x8(dstA, trm);
+            var trB = dinx.vshuf16x8(dstB, trm);
                         
             // Each vector contains 16 values that need to be merged
             // back into a single vector. The strategey is to condense
             // each vector via the "lane merge" pattern and construct
             // the result vector via insertion of these condensed vectors
-            var permSpec = ginx.vpLaneMerge<byte>();
-            var permA = dinx.vpermvar32x8(trA, permSpec);
-            var permB = dinx.vpermvar32x8(trB, permSpec);
+            var permSpec = ginx.vlanemerge<byte>();
+            var permA = dinx.vshuf32x8(trA, permSpec);
+            var permB = dinx.vshuf32x8(trB, permSpec);
             return dinx.vinsert(dinx.vlo(permA), dinx.vlo(permB), out Vector256<byte> _);            
         } 
 
@@ -97,12 +96,12 @@ namespace Z0
             var dstA = dinx.vsrl(srcX, offset).AsByte();
 
             // Truncate overflows to sets up the component pattern [X 0 X 0 ... X 0]
-            var trm =  Vec256Pattern.altclear<byte>();
-            var trA = dinx.vshuffle(dstA, trm);
+            var trm =  ginx.valtclear<byte>(n256);
+            var trA = dinx.vshuf16x8(dstA, trm);
 
             // Transform the result back the source space
-            var permSpec = ginx.vpLaneMerge<byte>();
-            var permA = dinx.vpermvar32x8(trA, permSpec);
+            var permSpec = ginx.vlanemerge<byte>();
+            var permA = dinx.vshuf32x8(trA, permSpec);
             return dinx.vlo(permA);
         }
 

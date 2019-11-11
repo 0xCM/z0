@@ -130,7 +130,7 @@ namespace Z0
 
                 var xs = x.ToSpan();
                 var ys = y.ToSpan();
-                var zs = BlockedSpan.AllocBlock<T>(n);
+                var zs = BlockedSpan.alloc<T>(n);
                 for(var i=0; i<zs.Length; i++)
                     zs[i] = gmath.min(xs[i],ys[i]);
                 
@@ -150,7 +150,7 @@ namespace Z0
 
                 var xs = x.ToSpan();
                 var ys = y.ToSpan();
-                var zs = BlockedSpan.AllocBlock<T>(n);
+                var zs = BlockedSpan.alloc<T>(n);
                 for(var i=0; i<zs.Length; i++)
                     zs[i] = gmath.min(xs[i],ys[i]);
                 
@@ -171,7 +171,7 @@ namespace Z0
 
             var lhs = Random.BlockedSpan<T>(n, blocks);
             var rhs = Random.BlockedSpan<T>(n, blocks);
-            var dst = BlockedSpan.AllocBlocks<T>(n, blocks);
+            var dst = BlockedSpan.alloc<T>(n, blocks);
             vblock.min(n, blocks, step, in lhs.Head, in rhs.Head, ref dst.Head);
             for(var i=0; i<cells; i++)
                 Claim.eq(gmath.min(lhs[i],rhs[i]), dst[i]);
@@ -187,7 +187,7 @@ namespace Z0
 
             var lhs = Random.BlockedSpan<T>(n, blocks);
             var rhs = Random.BlockedSpan<T>(n, blocks);
-            var dst = BlockedSpan.AllocBlocks<T>(n, blocks);
+            var dst = BlockedSpan.alloc<T>(n, blocks);
             vblock.min(n, blocks, step, in lhs.Head, in rhs.Head, ref dst.Head);
             for(var i=0; i<cells; i++)
                 Claim.eq(gmath.min(lhs[i],rhs[i]), dst[i]);

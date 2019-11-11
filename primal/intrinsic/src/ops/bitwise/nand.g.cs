@@ -93,7 +93,6 @@ namespace Z0
                 throw unsupported<T>();
         }
 
-
         [MethodImpl(Inline)]
         static Vector256<T> vnand_256u<T>(Vector256<T> x, Vector256<T> y)
             where T : unmanaged
@@ -108,8 +107,6 @@ namespace Z0
                 return generic<T>(dinx.vnand(uint64(x), uint64(y)));
         }
 
- 
- 
         [MethodImpl(Inline)]
         static Vector256<T> vnand_256i<T>(Vector256<T> x, Vector256<T> y)
             where T : unmanaged

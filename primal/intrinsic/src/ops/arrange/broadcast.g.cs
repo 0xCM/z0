@@ -32,7 +32,6 @@ namespace Z0
                 return broadcast128f(src);
         }
 
-
         [MethodImpl(Inline)]
         public static Vector256<T> vbroadcast<T>(N256 n, T src)
             where T : unmanaged

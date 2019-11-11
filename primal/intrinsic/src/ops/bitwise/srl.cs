@@ -26,11 +26,9 @@ namespace Z0
         public static Vector256<int> vsrl(Vector256<int> src, Vector128<int> offset)
             => ShiftRightLogical(src, offset);
 
-
         [MethodImpl(Inline)]
         public static Vector256<long> vsrl(Vector256<long> src, Vector128<long> offset)
             => ShiftRightLogical(src, offset);
-
 
         /// <summary>
         /// Shifts each component of the source vector rightwards by a common number of bits

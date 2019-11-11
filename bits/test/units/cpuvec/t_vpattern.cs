@@ -15,11 +15,11 @@ namespace Z0
     {
         public void pattern_clearalt_256x8()
         {
-            var tr = Vec256Pattern.altclear<byte>();
+            var tr = ginx.valtclear<byte>(n256);
             for(var i=0; i<SampleSize; i++)
             {
                 var x = Random.CpuVector<byte>(n256);
-                var y = dinx.vshuffle(x, tr);
+                var y = dinx.vshuf16x8(x, tr);
                 var xs = x.ToBlockedSpan();
                 for(var j =0; j< xs.Length; j++)
                 {

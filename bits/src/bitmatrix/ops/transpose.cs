@@ -24,7 +24,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ref BitMatrix8 transpose(in BitMatrix8 A, ref BitMatrix8 Z)
         {
-            var x = dinx.scalar((ulong)A);
+            var x = dinx.vscalar((ulong)A);
             for(var i=7; i>= 0; i--)
             {
                 Z[i] = (byte)dinx.vmovemask(v8u(x));
@@ -72,7 +72,7 @@ namespace Z0
         public static BitMatrix<N16,N8,uint> transpose(in BitMatrix<N8,N16,uint> A)
         {
             var vec = ginx.vload(n128,A.Bytes);
-            ginx.vstore(dinx.vshuffle(vec, Tr8x16Mask), ref head(A.Bytes));
+            ginx.vstore(dinx.vshuf16x8(vec, Tr8x16Mask), ref head(A.Bytes));
             return BitMatrix.load<N16,N8,uint>(A.Data);
         }
 

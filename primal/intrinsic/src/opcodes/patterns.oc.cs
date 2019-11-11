@@ -30,10 +30,10 @@ namespace Z0
             => ginx.vones<double>(n256);
 
         public static Vector256<byte> pattern_lanemerge_256x8u()            
-            => ginx.vpLaneMerge<byte>();
+            => ginx.vlanemerge<byte>();
 
         public static Vector256<ushort> pattern_lanemerge_256x16u()            
-            => ginx.vpLaneMerge<ushort>();
+            => ginx.vlanemerge<ushort>();
 
 
     }
