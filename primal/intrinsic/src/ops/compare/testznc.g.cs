@@ -50,23 +50,6 @@ namespace Z0
                 return vtestznc_f(src,mask);
         }
 
-        [MethodImpl(Inline)]
-        public static unsafe bit vtestznc<T>(N128 n, in T rX, in T rY)
-            where T : unmanaged
-        {                    
-            vload(rX, out Vector128<T> vA);
-            vload(rY, out Vector128<T> vB);
-            return vtestznc(vA,vB);
-        }
-
-        [MethodImpl(Inline)]
-        public static unsafe bit vtestznc<T>(N256 n, in T rX, in T rY)
-            where T : unmanaged
-        {                    
-            vload(rX, out Vector256<T> vA);
-            vload(rY, out Vector256<T> vB);
-            return vtestznc(vA,vB);
-        }
 
         [MethodImpl(Inline)]
         static bit vtestznc_i<T>(Vector128<T> src, Vector128<T> mask)

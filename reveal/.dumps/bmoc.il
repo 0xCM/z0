@@ -1,5 +1,13 @@
-// 2019-11-09 14:57:09:674
-ref BitMatrix<byte> gbm_and_8x8(in BitMatrix<byte> A, in BitMatrix<byte> B, ref BitMatrix<byte> C)
+// 2019-11-11 00:59:29:740
+ref BitMatrix8 transpose_8x8(in BitMatrix8 A, ref BitMatrix8 Z)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call Z0.BitMatrix8& Z0.BitMatrix::transpose(Z0.BitMatrix8&,Z0.BitMatrix8&)
+    IL_0007: ret
+
+}
+ref BitMatrix<byte> and_g8x8(in BitMatrix<byte> A, in BitMatrix<byte> B, ref BitMatrix<byte> C)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
@@ -8,7 +16,7 @@ ref BitMatrix<byte> gbm_and_8x8(in BitMatrix<byte> A, in BitMatrix<byte> B, ref 
     IL_0008: ret
 
 }
-ref BitMatrix<ushort> gbm_and_16x16(in BitMatrix<ushort> A, in BitMatrix<ushort> B, ref BitMatrix<ushort> C)
+ref BitMatrix<ushort> and_g16x16(in BitMatrix<ushort> A, in BitMatrix<ushort> B, ref BitMatrix<ushort> C)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
@@ -17,7 +25,7 @@ ref BitMatrix<ushort> gbm_and_16x16(in BitMatrix<ushort> A, in BitMatrix<ushort>
     IL_0008: ret
 
 }
-ref BitMatrix<uint> gbm_and_32x32(in BitMatrix<uint> A, in BitMatrix<uint> B, ref BitMatrix<uint> C)
+ref BitMatrix<uint> and_g32x32(in BitMatrix<uint> A, in BitMatrix<uint> B, ref BitMatrix<uint> C)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
@@ -26,7 +34,7 @@ ref BitMatrix<uint> gbm_and_32x32(in BitMatrix<uint> A, in BitMatrix<uint> B, re
     IL_0008: ret
 
 }
-ref BitMatrix<ulong> gbm_and_64x64(in BitMatrix<ulong> A, in BitMatrix<ulong> B, ref BitMatrix<ulong> C)
+ref BitMatrix<ulong> and_g64x64(in BitMatrix<ulong> A, in BitMatrix<ulong> B, ref BitMatrix<ulong> C)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1

@@ -18,60 +18,24 @@ namespace Z0
     /// <summary>
     /// Defines a 64x64 matrix of bits
     /// </summary>
-    public struct BitMatrix64
+    public ref struct BitMatrix64
     {                
-        ulong[] data;
-
-        /// <summary>
-        /// The order type
-        /// </summary>
-        public static N64 N => default;
+        Span<ulong> data;
 
         /// <summary>
         /// The matrix order
         /// </summary>
-        const uint Order = 64;
-
-        /// <summary>
-        /// The number of bits per row
-        /// </summary>
-        public const uint RowBitCount = Order;
-
-        /// <summary>
-        /// The number of bits per column
-        /// </summary>
-        public const uint ColBitCount = Order;
-
-        /// <summary>
-        /// The number of bits apprehended by the matrix
-        /// </summary>
-        public const uint TotalBitCount = RowBitCount * ColBitCount;
-                        
-        /// <summary>
-        /// The number of bytes needed for a row
-        /// </summary>
-        public const uint RowByteCount = RowBitCount >> 3;
-
-        /// <summary>
-        /// The number of bytes needed for a column
-        /// </summary>
-        public const uint ColByteCount = ColBitCount >> 3;
-
-        /// <summary>
-        /// To total number of bytes required to store the matrix data
-        /// </summary>
-        public const uint TotalByteCount = TotalBitCount >> 3;
-
+        public const uint Order = 64;
 
         /// <summary>
         /// Defines the 64x64 identity bitmatrix
         /// </summary>
-        public static BitMatrix64 Identity => From(Identity64x64.ToArray());
+        public static BitMatrix64 Identity => BitMatrix.identity(n64);
 
         /// <summary>
         /// Defines the 64x64 zero bitmatrix
         /// </summary>
-        public static BitMatrix64 Zero  => Alloc();
+        public static BitMatrix64 Zero => Alloc();
         
         [MethodImpl(Inline)]
         public static BitMatrix64 Alloc()        
@@ -102,19 +66,19 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static BitMatrix64 From(BitMatrix<N64,ulong> src)        
-            => From(src.Data.AsBytes());
+            => From(src.Data);
 
         [MethodImpl(Inline)]
         public static BitMatrix64 From(Span<ulong> src)        
-            => new BitMatrix64(src.ToArray());
+            => new BitMatrix64(src);
 
         [MethodImpl(Inline)]
         public static BitMatrix64 From(in Span<N64,ulong> src)        
-            => new BitMatrix64(src.ToArray());
+            => new BitMatrix64(src);
 
         [MethodImpl(Inline)]
         public static BitMatrix64 From(Span<byte> src)        
-            => new BitMatrix64(src.AsUInt64().ToArray());
+            => new BitMatrix64(src.AsUInt64());
 
         [MethodImpl(Inline)]
         public static BitMatrix64 operator & (BitMatrix64 A, BitMatrix64 B)
@@ -152,6 +116,14 @@ namespace Z0
         public static bool operator !=(BitMatrix64 A, BitMatrix64 B)
             => !A.Equals(B);
 
+
+        [MethodImpl(Inline)]
+        BitMatrix64(Span<ulong> src)
+        {                        
+            this.data = src;
+        }
+
+
         [MethodImpl(Inline)]
         BitMatrix64(ulong[] src)
         {                        
@@ -163,7 +135,7 @@ namespace Z0
         {
             this.data = new ulong[Order];
             if(fill)
-                Array.Fill(data,ulong.MaxValue);
+                data.Fill(ulong.MaxValue);
         }
 
         /// <summary>
@@ -190,7 +162,7 @@ namespace Z0
         public Span<byte> Bytes
         {
             [MethodImpl(Inline)]
-            get => data.AsSpan().AsBytes();
+            get => data.AsBytes();
         }
 
         /// <summary>
@@ -200,6 +172,31 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => data;
+        }
+
+        /// <summary>
+        /// Reads/manipulates the bit in a specified cell
+        /// </summary>
+        /// <param name="row">The row index</param>
+        /// <param name="col">The column index</param>
+        /// <param name="src">The source value</param>
+        public bit this[int row, int col]
+        {
+            [MethodImpl(Inline)]
+            get => GetBit(row, col);
+
+            [MethodImpl(Inline)]
+            set => SetBit(row,col,value);
+        }            
+
+        /// <summary>
+        /// Gets or sets the data for a specified row
+        /// </summary>
+        /// <param name="row">The row index</param>
+        public ref BitVector64 this[int row]
+        {
+            [MethodImpl(Inline)]
+            get => ref RowVector(row);
         }
 
         /// <summary>
@@ -222,54 +219,20 @@ namespace Z0
             => BitMask.set(ref data[row], (byte)col, src);
 
         /// <summary>
-        /// Reads/manipulates the bit in a specified cell
-        /// </summary>
-        /// <param name="row">The row index</param>
-        /// <param name="col">The column index</param>
-        /// <param name="src">The source value</param>
-        public bit this[int row, int col]
-        {
-            [MethodImpl(Inline)]
-            get => GetBit(row, col);
-
-            [MethodImpl(Inline)]
-            set => SetBit(row,col,value);
-        }            
-
-        /// <summary>
-        /// Creates a bitvector from the content of an index-identified row
+        /// Presents the data at a specified offset as a bitvector
         /// </summary>
         /// <param name="row">The row index</param>
         [MethodImpl(Inline)]
-        public readonly BitVector64 RowVector(int row)
-            => data[row];
+        public ref BitVector64 RowVector(int row)
+            => ref Unsafe.As<ulong,BitVector64>(ref seek(ref Head, row));
 
         /// <summary>
-        /// Returns a mutable reference for an index-identified matrix row
+        /// Presents the data at a specified offset as an unsigned integer
         /// </summary>
         /// <param name="row">The row index</param>
         [MethodImpl(Inline)]
         public ref ulong RowData(int row)
-            => ref data[row];
-
-        /// <summary>
-        /// A mutable indexer, functionally equivalent to <see cref='RowData' /> function
-        /// </summary>
-        /// <param name="row">The row index</param>
-        public ref ulong this[int row]
-        {
-            [MethodImpl(Inline)]
-            get => ref RowData(row);
-        }
-
-        /// <summary>
-        /// Interchanges the i'th and j'th rows where  0 <= i,j < 64
-        /// </summary>
-        /// <param name="i">A row index</param>
-        /// <param name="j">A row index</param>
-        [MethodImpl(Inline)]
-        public void RowSwap(int i, int j)
-            => data.Swap(i,j);
+            => ref seek(ref Head, row);
 
         /// <summary>
         /// Returns the data for an index-identified column
@@ -291,18 +254,21 @@ namespace Z0
             =>  ColData(col);
 
         /// <summary>
+        /// Interchanges the i'th and j'th rows where  0 <= i,j < 64
+        /// </summary>
+        /// <param name="i">A row index</param>
+        /// <param name="j">A row index</param>
+        [MethodImpl(Inline)]
+        public void RowSwap(int i, int j)
+            => data.Swap(i,j);
+
+        /// <summary>
         /// Extracts the bits that comprise the matrix in row-major order
         /// </summary>
         [MethodImpl(Inline)]
         public Span<byte> Unpack()
             => Bytes.Unpack();
 
-        /// <summary>
-        /// Determines whether this matrix is equivalent to the canonical 0 matrix
-        /// </summary>
-        [MethodImpl(Inline)] 
-        public readonly bool IsZero()
-            => BitMatrix.testz(this);
 
         [MethodImpl(Inline)] 
         public readonly BitVector64 Diagonal()
@@ -320,91 +286,18 @@ namespace Z0
             return dst;
         }
 
-
-        /// <summary>
-        /// Counts the number of enabled bits in the matrix
-        /// </summary>
-        [MethodImpl(Inline)] 
-        public readonly BitSize Pop()
-        {
-            var count = 0u;
-            for(var i=0; i<data.Length; i++)
-                count += Bits.pop(data[i]);
-            return count;
-        }
-
-        /// <summary>
-        /// The data enclosed by the matrix
-        /// </summary>
-        public ulong[] Rows
-        {
-            [MethodImpl(Inline)] 
-            get => data;
-        }
-
         /// <summary>
         /// A reference to the first row of the matrix
         /// </summary>
         public ref ulong Head
         {
             [MethodImpl(Inline)] 
-            get => ref data[0];
+            get => ref head(data);
         }
 
-        /// <summary>
-        /// Computes the product the source matrix and the operand in-place
-        /// </summary>
-        /// <param name="rhs">The operand</param>
-        [MethodImpl(Inline)]
-        public void Mul(BitMatrix64 rhs)
-        {
-            BitMatrix.mul(ref this, rhs);
-        }
-
-        /// <summary>
-        /// Computes the bitwise AND of the source matrix and the operand in-place
-        /// </summary>
-        /// <param name="rhs">The operand</param>
-        [MethodImpl(Inline)]
-        public void And(BitMatrix64 rhs)
-        {
-            BitMatrix.and(this, rhs, ref this);
-        }
-
-        /// <summary>
-        /// Computes the bitwise XOR of the source matrix and the operand in-place
-        /// </summary>
-        /// <param name="rhs">The operand</param>
-        [MethodImpl(Inline)]
-        public void XOr(BitMatrix64 rhs)
-        {
-            BitMatrix.xor(this, rhs, ref this);
-        }
-
-        /// <summary>
-        /// Computes the complement source matrix in-place
-        /// </summary>
-        /// <param name="rhs">The operand</param>
-        [MethodImpl(Inline)]
-        public void Not()
-        {
-            BitMatrix.not(this, ref this);
-        }
- 
         [MethodImpl(Inline)] 
         public readonly BitMatrix64 Replicate()
             => From(data.ToArray()); 
-
-        /// <summary>
-        /// Creates a generic matrix from the primal source data
-        /// </summary>
-        [MethodImpl(Inline)]
-        public BitMatrix<ulong> ToGeneric()
-            => new BitMatrix<ulong>(data);
-
-        [MethodImpl(Inline)]
-        public string Format()
-            => data.FormatMatrixBits(64);
 
         [MethodImpl(Inline)]
         public bool Equals(BitMatrix64 rhs)
@@ -417,86 +310,8 @@ namespace Z0
             => throw new NotSupportedException();
         
         public override string ToString()
-            => throw new NotSupportedException();       
-
-        [MethodImpl(Inline)]
-        static unsafe Vec256<ulong> load(ref ulong head)
-            => Avx.LoadVector256(refptr(ref head));
-
-
-        static ReadOnlySpan<byte> Identity64x64 => new byte[]
-        {
-            Pow2.T00, 0, 0, 0, 0, 0, 0, 0,
-            Pow2.T01, 0, 0, 0, 0, 0, 0, 0,
-            Pow2.T02, 0, 0, 0, 0, 0, 0, 0,
-            Pow2.T03, 0, 0, 0, 0, 0, 0, 0,
-            Pow2.T04, 0, 0, 0, 0, 0, 0, 0,
-            Pow2.T05, 0, 0, 0, 0, 0, 0, 0,
-            Pow2.T06, 0, 0, 0, 0, 0, 0, 0,
-            Pow2.T07, 0, 0, 0, 0, 0, 0, 0,
-            0, Pow2.T00, 0, 0, 0, 0, 0, 0,
-            0, Pow2.T01, 0, 0, 0, 0, 0, 0,
-            0, Pow2.T02, 0, 0, 0, 0, 0, 0,
-            0, Pow2.T03, 0, 0, 0, 0, 0, 0,
-            0, Pow2.T04, 0, 0, 0, 0, 0, 0,
-            0, Pow2.T05, 0, 0, 0, 0, 0, 0,
-            0, Pow2.T06, 0, 0, 0, 0, 0, 0,
-            0, Pow2.T07, 0, 0, 0, 0, 0, 0,
-            0, 0, Pow2.T00, 0, 0, 0, 0, 0,
-            0, 0, Pow2.T01, 0, 0, 0, 0, 0,
-            0, 0, Pow2.T02, 0, 0, 0, 0, 0,
-            0, 0, Pow2.T03, 0, 0, 0, 0, 0,
-            0, 0, Pow2.T04, 0, 0, 0, 0, 0,
-            0, 0, Pow2.T05, 0, 0, 0, 0, 0,
-            0, 0, Pow2.T06, 0, 0, 0, 0, 0,
-            0, 0, Pow2.T07, 0, 0, 0, 0, 0,
-            0, 0, 0, Pow2.T00, 0, 0, 0, 0,
-            0, 0, 0, Pow2.T01, 0, 0, 0, 0,
-            0, 0, 0, Pow2.T02, 0, 0, 0, 0,
-            0, 0, 0, Pow2.T03, 0, 0, 0, 0,
-            0, 0, 0, Pow2.T04, 0, 0, 0, 0,
-            0, 0, 0, Pow2.T05, 0, 0, 0, 0,
-            0, 0, 0, Pow2.T06, 0, 0, 0, 0,
-            0, 0, 0, Pow2.T07, 0, 0, 0, 0,
-            0, 0, 0, 0, Pow2.T00, 0, 0, 0,
-            0, 0, 0, 0, Pow2.T01, 0, 0, 0,
-            0, 0, 0, 0, Pow2.T02, 0, 0, 0,
-            0, 0, 0, 0, Pow2.T03, 0, 0, 0,
-            0, 0, 0, 0, Pow2.T04, 0, 0, 0,
-            0, 0, 0, 0, Pow2.T05, 0, 0, 0,
-            0, 0, 0, 0, Pow2.T06, 0, 0, 0,
-            0, 0, 0, 0, Pow2.T07, 0, 0, 0,
-            0, 0, 0, 0, 0, Pow2.T00, 0, 0,
-            0, 0, 0, 0, 0, Pow2.T01, 0, 0,
-            0, 0, 0, 0, 0, Pow2.T02, 0, 0,
-            0, 0, 0, 0, 0, Pow2.T03, 0, 0,
-            0, 0, 0, 0, 0, Pow2.T04, 0, 0,
-            0, 0, 0, 0, 0, Pow2.T05, 0, 0,
-            0, 0, 0, 0, 0, Pow2.T06, 0, 0,
-            0, 0, 0, 0, 0, Pow2.T07, 0, 0,
-            0, 0, 0, 0, 0, 0, Pow2.T00, 0,
-            0, 0, 0, 0, 0, 0, Pow2.T01, 0,
-            0, 0, 0, 0, 0, 0, Pow2.T02, 0,
-            0, 0, 0, 0, 0, 0, Pow2.T03, 0,
-            0, 0, 0, 0, 0, 0, Pow2.T04, 0,
-            0, 0, 0, 0, 0, 0, Pow2.T05, 0,
-            0, 0, 0, 0, 0, 0, Pow2.T06, 0,
-            0, 0, 0, 0, 0, 0, Pow2.T07, 0,
-            0, 0, 0, 0, 0, 0, 0, Pow2.T00,
-            0, 0, 0, 0, 0, 0, 0, Pow2.T01,
-            0, 0, 0, 0, 0, 0, 0, Pow2.T02,
-            0, 0, 0, 0, 0, 0, 0, Pow2.T03,
-            0, 0, 0, 0, 0, 0, 0, Pow2.T04,
-            0, 0, 0, 0, 0, 0, 0, Pow2.T05,
-            0, 0, 0, 0, 0, 0, 0, Pow2.T06,
-            0, 0, 0, 0, 0, 0, 0, Pow2.T07,
-        };
-
-        public unsafe ulong* HeadPtr
-        {
-            [MethodImpl(Inline)]
-             get => (ulong*)Unsafe.AsPointer(ref data[0]);
-       }
-
+            => throw new NotSupportedException();
+ 
+        
     }
 }

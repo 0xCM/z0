@@ -80,6 +80,9 @@ namespace Z0
             set => gbits.set(ref data[row], (byte)col, value);
         }
 
+        /// <summary>
+        /// Specifies the number of rows/columns in the matrix
+        /// </summary>
         public int Order
         {
             [MethodImpl(Inline)]
@@ -96,12 +99,12 @@ namespace Z0
             => data.Swap(i,j);
 
         [MethodImpl(Inline)]
-        public ref T Row(int offset)
-            => ref tail(data, offset);
+        public ref T Row(int row)
+            => ref tail(data, row);
 
         [MethodImpl(Inline)]
-        ref BitVector<T> RowVector(int offset)
-            => ref AsBitVector(ref tail(data, offset));
+        ref BitVector<T> RowVector(int row)
+            => ref AsBitVector(ref tail(data, row));
 
         [MethodImpl(Inline)]
         static ref BitVector<T> AsBitVector(ref T src)
@@ -122,17 +125,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public BitMatrix<S> To<S>()
             where S : unmanaged
-                => new BitMatrix<S>(data.As<T,S>());
-         
-
-        // public RowBits<T> ToRowBits()
-        //     => RowBits.load(data);
-
-        public unsafe T* HeadPtr
-        {
-            [MethodImpl(Inline)]
-            get => refptr(ref head(data));
-        }
-
+                => new BitMatrix<S>(data.As<T,S>());        
     }
 }

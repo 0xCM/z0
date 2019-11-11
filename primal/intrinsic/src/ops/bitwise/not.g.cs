@@ -50,31 +50,6 @@ namespace Z0
                 throw unsupported<T>();
         }
 
-        [MethodImpl(Inline)]
-        public static unsafe Vector128<T> vnot<T>(N128 n, in T rX)
-            where T : unmanaged
-        {                    
-            vload(rX, out Vector128<T> vA);
-            return vnot(vA);
-        }
-
-        [MethodImpl(Inline)]
-        public static unsafe void vnot<T>(N128 n, in T rX, ref T rDst)
-            where T : unmanaged
-                => vstore(vnot(n, in rX),ref rDst);
-
-        [MethodImpl(Inline)]
-        public static unsafe Vector256<T> vnot<T>(N256 n, in T rX)
-            where T : unmanaged
-        {                    
-            vload(rX, out Vector256<T> vA);
-            return vnot(vA);
-        }
-
-        [MethodImpl(Inline)]
-        public static unsafe void vnot<T>(N256 n, in T rX, ref T rDst)
-            where T : unmanaged
-                => vstore(vnot(n, in rX),ref rDst);
 
         [MethodImpl(Inline)]
         static Vector128<T> vnot_128u<T>(Vector128<T> src)

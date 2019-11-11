@@ -149,7 +149,7 @@ namespace Z0.Test
                 var y = BitVector64.Alloc();
                 for(var i = 0; i<A.RowCount; i++)           
                 {
-                    var r = A.RowVector(i);
+                    var r = A[i];
                     y[i] = r % x;
                 }
                 
@@ -190,10 +190,7 @@ namespace Z0.Test
                 var z1 = m * c;            
                 var z2 = BitVector8.Alloc();
                 for(var i = 0; i<m.RowCount; i++)           
-                {
-                    var r = m.RowVector(i);
-                    z2[i] = r % c;
-                }
+                    z2[i] = m[i] % c;
                 
                 Claim.yea(z1 == z2);
             }
@@ -209,7 +206,7 @@ namespace Z0.Test
                 var z2 = BitVector16.Alloc();
                 for(var i = 0; i<m.RowCount; i++)           
                 {
-                    var r = m.RowVector(i);
+                    var r = m[i];
                     z2[i] = r % c;
                 }
                 
@@ -227,7 +224,7 @@ namespace Z0.Test
                 var z2 = BitVector32.Alloc();
                 for(var i = 0; i<m.RowCount; i++)           
                 {
-                    var r = m.RowVector(i);
+                    var r = m[i];
                     z2[i] = r % c;
                 }
                 

@@ -66,6 +66,7 @@ namespace Z0
             return BitBlocks.testc(in Z.Head);
         }
 
+
         /// <summary>
         /// Determines whether two primal bitmatrices are identical, returning an enabled bit if so and a disabled bit otherwise
         /// </summary>

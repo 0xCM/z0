@@ -10,9 +10,18 @@ namespace Z0
 
     using static zfunc;
     using static As;
-
+    using static BlockStorage;
     partial class zfoc
     {
+        public static ReadOnlySpan<char> hexdigits(ushort a)
+            => Hex.digits(a);
+
+        public static char hexdigit(byte a)
+            => Hex.digit(a);
+
+        public static void hexdigits(byte a, out char d0, out char d1)
+            => Hex.digits(a, out d0, out d1);
+
         public static void datablock_store(in byte src, uint count, ref Block128 dst)
             => DataBlocks.store(in src, count, ref dst);
 

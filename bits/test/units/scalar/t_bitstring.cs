@@ -295,7 +295,7 @@ namespace Z0
 
             
             var byx = BitConverter.GetBytes(x).ToSpan();
-            Bytes.write(x, out Span<byte> byy);
+            var byy = Bytes.write(x);
             Claim.eq(byx,byy);
         }
 

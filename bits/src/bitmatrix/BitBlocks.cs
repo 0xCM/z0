@@ -59,17 +59,17 @@ namespace Z0
             => content(gmath.select(content(rA), content(rB), content(rC)), ref rDst);
 
         [MethodImpl(Inline)]
-        public static void and<T>(in T rA, in T rB, ref T rDst)
+        public static void and<T>(in T a, in T b, ref T z)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-               and(in uint8(in rA), in uint8(in rB), ref uint8(ref rDst));
+               and(in uint8(in a), in uint8(in b), ref uint8(ref z));
             else if(typeof(T) == typeof(ushort))
-                vblock.and(n, in rA, in rB, ref rDst);
+                vblock.and(n, in a, in b, ref z);
             else if(typeof(T) == typeof(uint))
-                vblock.and(n, 4, 8, in rA, in rB, ref rDst);
+                vblock.and(n, 4, 8, in a, in b, ref z);
             else if(typeof(T) == typeof(ulong))
-                vblock.and(n, 16, 4, in rA, in rB, ref rDst);
+                vblock.and(n, 16, 4, in a, in b, ref z);
             else
                 throw unsupported<T>();
         }
@@ -354,34 +354,35 @@ namespace Z0
             return result;
         }
 
+
         [MethodImpl(Inline)]
-        public static bit testc<T>(in T rA)
+        public static bit testc<T>(in T a)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-               return testc(in uint8(in rA));
+               return testc(in uint8(in a));
             else if(typeof(T) == typeof(ushort))
-               return testc(in uint16(in rA));
+               return vblock.vtestc(n, in a);
             else if(typeof(T) == typeof(uint))
-               return testc(in uint32(in rA));
+               return vblock.testc(n, 4, 8, in a);
             else if(typeof(T) == typeof(ulong))
-               return testc(in uint64(in rA));
+                return vblock.testc(n, 16, 4, in a);
             else
                 throw unsupported<T>();
         }
 
         [MethodImpl(Inline)]
-        public static bit testc<T>(in T rA, in T rB)
+        public static bit testc<T>(in T a, in T b)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-               return testc(in uint8(in rA), in uint8(in rB));
+               return testc(in uint8(in a),in uint8(in b));
             else if(typeof(T) == typeof(ushort))
-               return testc(in uint16(in rA), in uint16(in rB));
+               return vblock.vtestc(n, in a,in b);
             else if(typeof(T) == typeof(uint))
-               return testc(in uint32(in rA), in uint32(in rB));
+               return vblock.testc(n, 4, 8, in a, in b);
             else if(typeof(T) == typeof(ulong))
-               return testc(in uint64(in rA), in uint64(in rB));
+                return vblock.testc(n, 16, 4, in a, in b);
             else
                 throw unsupported<T>();
         }
@@ -396,67 +397,13 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static bit testc(in ushort rA)
-            => ginx.vtestc(n, in rA);
-
-        [MethodImpl(Inline)]
-        static bit testc(in uint rA)
-        {
-            const int segments = 4;
-            const int segsize = 8;
-
-            var result = on;
-            for(int i=0, offset = 0; i < segments; i++, offset += segsize)
-                result &= ginx.vtestc(n, in skip(in rA, offset));
-            return result;
-        }
-
-        [MethodImpl(Inline)]
-        static bit testc(in ulong rA)
-        {
-            const int segments = 16;
-            const int segsize = 4;
-            var result = on;
-            for(int i=0, offset = 0; i < segments; i++, offset += segsize)
-                result &= ginx.vtestc(n, in skip(in rA, offset));
-            return result;
-        }
-
-        [MethodImpl(Inline)]
         static bit testc(in byte rA, in byte rB)
         {
             var a = content(in rA);
             var b = content(in rB);
-            var x = dinx.vbroadcast(n128, a);
-            var y = dinx.vbroadcast(n128, b);
-            return dinx.vtestc(x,y);
-        }
-
-        [MethodImpl(Inline)]
-        static bit testc(in ushort rA, in ushort rB)
-            => ginx.vtestc(n, in rA, in rB);
-        
-        [MethodImpl(Inline)]
-        static bit testc(in uint rA, in uint rB)
-        {
-            const int segments = 4;
-            const int segsize = 8;
-
-            var result = on;
-            for(int i=0, offset = 0; i < segments; i++, offset += segsize)
-                result &= ginx.vtestc(n, in skip(in rA, offset), in skip(in rB, offset));
-            return result;
-        }
-
-        [MethodImpl(Inline)]
-        static bit testc(in ulong rA, in ulong rB)
-        {
-            const int segments = 16;
-            const int segsize = 4;
-            var result = on;
-            for(int i=0, offset = 0; i < segments; i++, offset += segsize)
-                result &= ginx.vtestc(n, in skip(in rA, offset), in skip(in rB, offset));
-            return result;
+            var x = ginx.vbroadcast(n128,a);
+            var y = ginx.vbroadcast(n128,b);
+            return ginx.vtestc(x,y);
         }
 
         [MethodImpl(Inline)]
@@ -466,5 +413,5 @@ namespace Z0
         [MethodImpl(Inline)]
         static unsafe void content(ulong src, ref byte pDst)
              => *((ulong*)As.refptr(ref pDst)) = src;
-   }
+    }
 }

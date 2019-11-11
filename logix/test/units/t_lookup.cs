@@ -38,7 +38,7 @@ namespace Z0.Logix
                 values[i] = Bits.rev((byte)i);
             
             var lut = Lookup.From(nCount,values).Vector;
-            var keys = dinx.vparts(15,14,13,12,11,10,9,8,7,6,5,4,3,2,1,0);
+            var keys = dinx.vparts(n128, 15,14,13,12,11,10,9,8,7,6,5,4,3,2,1,0);
             var selected = dinx.vshuffle(lut,keys);
             Trace(lut.Format());
             Trace(keys.Format());

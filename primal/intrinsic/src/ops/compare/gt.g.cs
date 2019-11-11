@@ -51,33 +51,6 @@ namespace Z0
                 throw unsupported<T>();
         }
 
-        [MethodImpl(Inline)]
-        public static unsafe Vector128<T> vgt<T>(N128 n, in T rX, in T rY)
-            where T : unmanaged
-        {                    
-            vload(rX, out Vector128<T> vA);
-            vload(rY, out Vector128<T> vB);
-            return vgt(vA,vB);
-        }
-
-        [MethodImpl(Inline)]
-        public static unsafe void vgt<T>(N128 n, in T rX, in T rY, ref T rDst)
-            where T : unmanaged
-                => vstore(vgt(n,in rX, in rY), ref rDst);
-
-        [MethodImpl(Inline)]
-        public static unsafe Vector256<T> vgt<T>(N256 n, in T pA, in T pB)
-            where T : unmanaged
-        {                    
-            vload(pA, out Vector256<T> vA);
-            vload(pB, out Vector256<T> vB);
-            return vgt(vA,vB);
-        }
-
-        [MethodImpl(Inline)]
-        public static unsafe void vgt<T>(N256 n, in T rX, in T rY, ref T rDst)
-            where T : unmanaged
-                => vstore(vgt(n,in rX, in rY), ref rDst);
  
         [MethodImpl(Inline)]
         static Vector128<T> vgt_i<T>(Vector128<T> x, Vector128<T> y)

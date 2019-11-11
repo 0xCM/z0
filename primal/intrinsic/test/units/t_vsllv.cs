@@ -21,9 +21,9 @@ namespace Z0.Test
             Claim.yea(ginx.vnonz(dinx.vparts(1ul, 0ul, 0ul, 0ul)));
             Claim.nea(ginx.vnonz(dinx.vparts(0ul, 0ul, 0ul, 0ul)));
 
-            Claim.yea(ginx.vnonz(dinx.vparts(1u, 2u, 3u, 4u)));
-            Claim.yea(ginx.vnonz(dinx.vparts(1u, 0u, 0u, 0u)));
-            Claim.nea(ginx.vnonz(dinx.vparts(0u, 0u, 0u, 0u)));
+            Claim.yea(ginx.vnonz(dinx.vparts(n128, 1u, 2u, 3u, 4u)));
+            Claim.yea(ginx.vnonz(dinx.vparts(n128, 1u, 0u, 0u, 0u)));
+            Claim.nea(ginx.vnonz(dinx.vparts(n128, 0u, 0u, 0u, 0u)));
         }
 
 

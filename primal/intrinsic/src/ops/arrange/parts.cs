@@ -23,7 +23,7 @@ namespace Z0
         /// Defines a cpu vector by its constituent parts, from least -> most significant
         /// </summary>
         [MethodImpl(Inline)]
-        public static Vector128<byte> vparts(
+        public static Vector128<byte> vparts(N128 n,
             byte x0, byte x1, byte x2, byte x3, byte x4, byte x5, byte x6, byte x7,
             byte x8, byte x9, byte xa, byte xb, byte xc, byte xd, byte xe, byte xf)
                 => Vector128.Create(x0,x1, x2, x3, x4, x5, x6, x7,x8,x9,xa,xb,xc,xd,xe,xf);
@@ -32,8 +32,15 @@ namespace Z0
         /// Defines a cpu vector by its constituent parts from least -> most significant
         /// </summary>
         [MethodImpl(Inline)]
-        public static Vector128<ushort> vparts(ushort x0, ushort x1, ushort x2, ushort x3, ushort x4, ushort x5, ushort x6, ushort x7)
+        public static Vector128<ushort> vparts(N128 n, ushort x0, ushort x1, ushort x2, ushort x3, ushort x4, ushort x5, ushort x6, ushort x7)
             => Vector128.Create(x0,x1, x2, x3, x4, x5, x6, x7);
+
+        /// <summary>
+        /// Defines a cpu vector by its constituent parts, from least -> most significant
+        /// </summary>
+        [MethodImpl(Inline)]
+        public static Vector128<uint> vparts(N128 n,uint x0, uint x1, uint x2, uint x3)
+            => Vector128.Create(x0,x1, x2, x3);
 
         /// <summary>
         /// Defines a cpu vector by its constituent parts, from least -> most significant
@@ -53,21 +60,21 @@ namespace Z0
         /// Defines a cpu vector by its constituent parts, from least -> most significant
         /// </summary>
         [MethodImpl(Inline)]
-        public static Vector128<ulong> vparts(ulong x0, ulong x1)
+        public static Vector128<ulong> vparts(N128 n, ulong x0, ulong x1)
             => Vector128.Create(x0,x1);
 
         /// <summary>
         /// Defines a cpu vector by its constituent parts, from least -> most significant
         /// </summary>
         [MethodImpl(Inline)]
-        public static Vector128<float> vparts(float x0, float x1, float x2, float x3)
+        public static Vector128<float> vparts(N128 n, float x0, float x1, float x2, float x3)
             => Vector128.Create(x0,x1,x2,x3);
 
         /// <summary>
         /// Defines a cpu vector by its constituent parts, from least -> most significant
         /// </summary>
         [MethodImpl(Inline)]
-        public static Vector128<double> vparts(double x0, double x1)
+        public static Vector128<double> vparts(N128 n,double x0, double x1)
             => Vector128.Create(x0,x1);
 
         /// <summary>

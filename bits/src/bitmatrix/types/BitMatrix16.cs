@@ -20,9 +20,9 @@ namespace Z0
     /// <summary>
     /// Defines a 16x16 matrix of bits
     /// </summary>
-    public struct BitMatrix16 
+    public ref struct BitMatrix16 
     {   
-        ushort[] data;
+        Span<ushort> data;
 
         /// <summary>
         /// The order type
@@ -32,43 +32,13 @@ namespace Z0
         /// <summary>
         /// The matrix order
         /// </summary>
-        const uint Order = 16;
+        public const uint Order = 16;
 
-        /// <summary>
-        /// The number of bits per row
-        /// </summary>
-        public const uint RowBitCount = Order;
-
-        /// <summary>
-        /// The number of bits per column
-        /// </summary>
-        public const uint ColBitCount = Order;
-
-        /// <summary>
-        /// The number of bits apprehended by the matrix
-        /// </summary>
-        public const uint TotalBitCount = RowBitCount * ColBitCount;
-                        
-        /// <summary>
-        /// The number of bytes needed for a row
-        /// </summary>
-        public const uint RowByteCount = RowBitCount >> 3;
-
-        /// <summary>
-        /// The number of bytes needed for a column
-        /// </summary>
-        public const uint ColByteCount = ColBitCount >> 3;
-
-        /// <summary>
-        /// To total number of bytes required to store the matrix data
-        /// </summary>
-        public const uint TotalByteCount = TotalBitCount >> 3;
                                 
         /// <summary>
         /// Defines the 16x16 identity bitmatrix
         /// </summary>
-        public static BitMatrix16 Identity 
-            => From(Identity16x16.ToSpan());
+        public static BitMatrix16 Identity => BitMatrix.identity(n16);
 
         /// <summary>
         /// Defines the 16x16 zero bitmatrix
@@ -107,24 +77,8 @@ namespace Z0
             => new BitMatrix16(src);
 
         [MethodImpl(Inline)]
-        public static BitMatrix16 From(BitMatrix<N16,ushort> src)        
-            => From(src.Data);
-
-        [MethodImpl(Inline)]
         public static BitMatrix16 From(Span<byte> src)        
             => new BitMatrix16(src.AsUInt16());
-
-        /// <summary>
-        /// Loads a bitmatrix from the bits in cpu vector
-        /// </summary>
-        /// <param name="src">The matrix bits</param>
-        [MethodImpl(Inline)]
-        internal static BitMatrix16 From(Vector256<ushort> src)
-        {
-            Span<ushort> dst = new ushort[Vec256<short>.Length];
-            ginx.vstore(src, ref dst[0]);
-            return new BitMatrix16(dst);
-        }
 
         /// <summary>
         /// Computes the bitwise and of the operands
@@ -180,7 +134,7 @@ namespace Z0
         {
             this.data = new ushort[Order];
             if(fill)
-                Array.Fill(data, ushort.MaxValue);
+                data.Fill(ushort.MaxValue);
         }
 
         /// <summary>
@@ -189,7 +143,7 @@ namespace Z0
         public Span<byte> Bytes
         {
             [MethodImpl(Inline)]
-            get => data.AsSpan().AsBytes();
+            get => data.AsBytes();
         }
 
         /// <summary>
@@ -207,27 +161,8 @@ namespace Z0
         public unsafe ref ushort Head
         {
             [MethodImpl(Inline)] 
-            get => ref data[0];
+            get => ref head(data);
         }
-
-        /// <summary>
-        /// Reads the bit in a specified cell
-        /// </summary>
-        /// <param name="row">The row index</param>
-        /// <param name="col">The column index</param>
-        [MethodImpl(Inline)]
-        public bit GetBit(int row, int col)
-            => BitMask.test(skip(in Head, row), col);
-
-        /// <summary>
-        /// Sets the bit in a specified cell
-        /// </summary>
-        /// <param name="row">The row index</param>
-        /// <param name="col">The column index</param>
-        /// <param name="src">The source value</param>
-        [MethodImpl(Inline)]
-        public void SetBit(int row, int col, bit src)
-            => BitMask.set(ref seek(ref Head, row), (byte)col, src);
 
         /// <summary>
         /// Reads/manipulates the bit in a specified cell
@@ -244,6 +179,16 @@ namespace Z0
             set => SetBit(row,col,value);
         }            
 
+        /// <summary>
+        /// Gets/sets an identified row
+        /// </summary>
+        /// <param name="row">The row index</param>
+        public ref BitVector16 this[int row]
+        {
+            [MethodImpl(Inline)]
+            get => ref RowVector(row);
+        }
+
         public readonly int RowCount
         {
             [MethodImpl(Inline)]
@@ -255,6 +200,22 @@ namespace Z0
             [MethodImpl(Inline)]
             get => (int)Order;
         }
+
+        /// <summary>
+        /// Presents the data at a specified offset as a bitvector
+        /// </summary>
+        /// <param name="row">The row index</param>
+        [MethodImpl(Inline)]
+        public ref BitVector16 RowVector(int row)
+            => ref Unsafe.As<ushort,BitVector16>(ref seek(ref Head, row));
+
+        /// <summary>
+        /// Returns a mutable reference for an index-identified matrix row
+        /// </summary>
+        /// <param name="row">The row index</param>
+        [MethodImpl(Inline)]
+        public ref ushort RowData(int row)
+            => ref data[row];
 
         public readonly ushort ColData(int index)
         {
@@ -277,27 +238,25 @@ namespace Z0
         public void RowSwap(int i, int j)
             => data.Swap(i,j);
 
-        [MethodImpl(Inline)]
-        public readonly BitVector16 RowVector(int index)
-            => data[index];
-
         /// <summary>
-        /// Returns a mutable reference for an index-identified matrix row
+        /// Reads the bit in a specified cell
         /// </summary>
         /// <param name="row">The row index</param>
+        /// <param name="col">The column index</param>
         [MethodImpl(Inline)]
-        public ref ushort RowData(int row)
-            => ref data[row];
+        public bit GetBit(int row, int col)
+            => BitMask.test(skip(in Head, row), col);
 
         /// <summary>
-        /// A mutable indexer, functionally equivalent to <see cref='RowData' /> function
+        /// Sets the bit in a specified cell
         /// </summary>
         /// <param name="row">The row index</param>
-        public ref ushort this[int row]
-        {
-            [MethodImpl(Inline)]
-            get => ref RowData(row);
-        }
+        /// <param name="col">The column index</param>
+        /// <param name="src">The source value</param>
+        [MethodImpl(Inline)]
+        public void SetBit(int row, int col, bit src)
+            => BitMask.set(ref seek(ref Head, row), (byte)col, src);
+
 
         [MethodImpl(Inline)]
         public BitMatrix16 AndNot(in BitMatrix16 rhs)
@@ -317,19 +276,7 @@ namespace Z0
 
         [MethodImpl(NotInline)] 
         public readonly BitMatrix16 Replicate()
-            => From(data.ToArray());
-        
-        /// <summary>
-        /// Counts the number of enabled bits in the matrix
-        /// </summary>
-        [MethodImpl(Inline)] 
-        public readonly BitSize Pop()
-        {
-            var count = 0u;
-            for(var i=0; i<data.Length; i++)
-                count += Popcnt.PopCount(data[i]);
-            return count;
-        }
+            => From(data.ToArray());        
 
         /// <summary>
         /// Extracts the bits that comprise the matrix in row-major order
@@ -339,12 +286,11 @@ namespace Z0
             => Bytes.Unpack();
 
         [MethodImpl(Inline)]
-        public bool IsZero()
-            => BitMatrix.testz(this);
-
-        [MethodImpl(Inline)]
         public string Format()
             => Bytes.FormatMatrixBits(16);
+
+        public override string ToString()
+            => Format();
 
         [MethodImpl(Inline)]
         public bool Equals(BitMatrix16 rhs)
@@ -356,55 +302,5 @@ namespace Z0
         
         public override int GetHashCode()
             => throw new NotSupportedException();
-
-        /// <summary>
-        /// Loads a cpu vector with the full content of the matrix
-        /// </summary>
-        /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
-        public void Load(out Vector256<ushort> dst)
-            => dinx.vload(in Head, out dst);
-
-        /// <summary>
-        /// Creates a generic matrix from the primal source data
-        /// </summary>
-        [MethodImpl(Inline)]
-        public BitMatrix<ushort> ToGeneric()
-            => new BitMatrix<ushort>(data);
-
-        /// <summary>
-        /// Loads a cpu vector with the full content of the matrix; the row parameter is ignored
-        /// </summary>
-        /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline)]
-        public void Load(int row, out Vector256<ushort> dst)
-            => dinx.vload(in Head, out dst);
-
-        static ReadOnlySpan<byte> Identity16x16 => new byte[]
-        {
-            Pow2.T00, 0,
-            Pow2.T01, 0,
-            Pow2.T02, 0,
-            Pow2.T03, 0,
-            Pow2.T04, 0,
-            Pow2.T05, 0,
-            Pow2.T06, 0,
-            Pow2.T07, 0,
-            0, Pow2.T00,
-            0, Pow2.T01,
-            0, Pow2.T02,
-            0, Pow2.T03,
-            0, Pow2.T04,
-            0, Pow2.T05,
-            0, Pow2.T06,
-            0, Pow2.T07,
-        };
-
-        public unsafe ushort* HeadPtr
-        {
-            [MethodImpl(Inline)]
-            get => (ushort*)Unsafe.AsPointer(ref data[0]);
-        }
-
    }
 }

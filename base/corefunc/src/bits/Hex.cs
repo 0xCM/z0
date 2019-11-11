@@ -13,13 +13,51 @@ namespace Z0
 
     public static class Hex
     {
-        [MethodImpl(Inline)]
-        public static string format<T>(T src, bool zpad = true, bool specifier = true, bool uppercase = true)
-            where T : unmanaged
-                => format_hex_digits<T>(digits(src,uppercase),zpad,specifier);
+        /// <summary>
+        /// Defines the asci character codes for uppercase hex digits 1,2, ..., 9, A, ..., F
+        /// </summary>
+        static ReadOnlySpan<byte> HexCodes 
+            => new byte[]{48,49,50,51,52,53,54,55,56,57,65,66,67,68,69,70};
 
         [MethodImpl(Inline)]
-        public static string digits<T>(T src, bool uppercase = true)
+        public static byte code(byte value)
+            => skip(in head(HexCodes), value & 0xf);
+
+        public static ReadOnlySpan<char> digits(byte value)
+        {
+            Span<char> digits = new char[2];
+            ref var dst = ref head(digits);
+            ref readonly var codes = ref head(HexCodes);
+            seek(ref dst, 1) = (char)skip(in codes, 0xF & value);
+            seek(ref dst, 0) = (char)skip(in codes, (value >> 4) & 0xF);
+            return digits;            
+        }
+
+        [MethodImpl(Inline)]
+        public static void digits(byte value, out char d0, out char d1)
+        {
+            ref readonly var codes = ref head(HexCodes);
+            d0 = (char)skip(in codes, 0xF & value);
+            d1 = (char)skip(in codes, (value >> 4) & 0xF);
+        }
+
+        [MethodImpl(Inline)]
+        public static char digit(byte value)
+            => (char)skip(in head(HexCodes), 0xF & value);
+
+        public static ReadOnlySpan<char> digits(ushort value)
+        {
+            var len = size<ushort>()*2;
+            Span<char> digits = new char[len];
+            ref var dst = ref head(digits);
+            ref readonly var codes = ref head(HexCodes);
+            for(var i=0; i < len; i++)
+                seek(ref dst, len - i - 1) = (char)skip(in codes, (value >> i*4) & 0xF);
+            return digits;            
+        }
+
+        [MethodImpl(Inline)]
+        public static string text<T>(T src, bool uppercase = true)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte) 
@@ -36,6 +74,11 @@ namespace Z0
                 return hexdigits_f(src,uppercase);
 
         }
+
+        [MethodImpl(Inline)]
+        public static string format<T>(T src, bool zpad = true, bool specifier = true, bool uppercase = true)
+            where T : unmanaged
+                => format_hex_digits<T>(text(src,uppercase),zpad,specifier);
 
         /// <summary>
         /// Parses the Hex digit if possible; otherwise raises an error

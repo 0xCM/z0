@@ -14,7 +14,6 @@ namespace Z0
 
     partial class ginx
     {
-
         [MethodImpl(Inline)]
         public static Vector128<T> vxor<T>(Vector128<T> x, Vector128<T> y)
             where T : unmanaged
@@ -33,7 +32,7 @@ namespace Z0
                 return vxor_128f(x,y);
         }
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline)]        
         public static Vector256<T> vxor<T>(Vector256<T> x, Vector256<T> y)
             where T : unmanaged
         {
@@ -51,35 +50,6 @@ namespace Z0
                 return vxor_256f(x,y);
         }
 
-
-        [MethodImpl(Inline)]
-        public static Vector128<T> vxor<T>(N128 n, in T rX, in T rY)
-            where T : unmanaged
-        {                    
-            vload(in rX, out Vector128<T> vA);
-            vload(in rY, out Vector128<T> vB);
-            return vxor(vA,vB);
-        }
-
-        [MethodImpl(Inline)]
-        public static unsafe void vxor<T>(N128 n, in T rX, in T rY, ref T rDst)
-            where T : unmanaged
-                => vstore(vxor(n, in rX, in rY), ref rDst);
-
-        [MethodImpl(Inline)]
-        public static Vector256<T> vxor<T>(N256 n, in T rX, in T rY)
-            where T : unmanaged
-        {                    
-            vload(in rX, out Vector256<T> vA);
-            vload(in rY, out Vector256<T> vB);
-            return vxor(vA,vB);
-        }
-
-        [MethodImpl(Inline)]
-        public static unsafe void vxor<T>(N256 n, in T rX, in T rY, ref T rDst)
-            where T : unmanaged
-                => vstore(vxor(n, in rX, in rY), ref rDst);
- 
         [MethodImpl(Inline)]
         static Vector128<T> vxor_128u<T>(Vector128<T> x, Vector128<T> y)
             where T : unmanaged

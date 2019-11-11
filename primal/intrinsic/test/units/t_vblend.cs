@@ -91,8 +91,8 @@ namespace Z0
 
         public void vblend_128x16u_check()
         {
-            var x = dinx.vparts((ushort)0,(ushort)2,(ushort)4,(ushort)6,(ushort)8,(ushort)10,(ushort)12,(ushort)14); 
-            var y = dinx.vparts((ushort)1,(ushort)3,(ushort)5,(ushort)7,(ushort)9,(ushort)11,(ushort)13,(ushort)15); 
+            var x = dinx.vparts(n128, 0,2,4,6,8,10,12,14); 
+            var y = dinx.vparts(n128, 1,3,5,7,9,11,13,15); 
             
             var z = dinx.vblend(x,y, Blend16x8.LLLLLLLL);
             Claim.eq(x,z);          
@@ -101,10 +101,10 @@ namespace Z0
             Claim.eq(z,y);
 
             z = dinx.vblend(x,y, Blend16x8.LLLLRRRR);
-            Claim.eq(dinx.vparts((ushort)0,(ushort)2,(ushort)4,(ushort)6,(ushort)9,(ushort)11,(ushort)13,(ushort)15), z);
+            Claim.eq(dinx.vparts(n128, 0,2,4,6,9,11,13,15), z);
 
             z = dinx.vblend(x,y, Blend16x8.RRRRLLLL);
-            Claim.eq(dinx.vparts((ushort)1,(ushort)3,(ushort)5,(ushort)7,(ushort)8,(ushort)10,(ushort)12,(ushort)14), z);
+            Claim.eq(dinx.vparts(n128,1,3,5,7,8,10,12,14), z);
 
         }
         public void vblend_128x32u_check()

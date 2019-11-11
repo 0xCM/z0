@@ -16,6 +16,10 @@ namespace Z0
     partial class BitMatrix
     {        
 
+        [MethodImpl(Inline)]
+        public static BitMatrix8 from(N8 n8, byte row0 = 0, byte row1 = 0, byte row2 = 0, byte row3 = 0, byte row4 = 0, byte row5 = 0, byte row6 = 0, byte row7 = 0)
+            => BitMatrix8.From(row0,row1,row2,row3,row4,row5,row6, row7);
+        
         /// <summary>
         /// Creates a canonical permutation matrix by swapping matrix rows of the identity matrix as specified by a permutation
         /// </summary>

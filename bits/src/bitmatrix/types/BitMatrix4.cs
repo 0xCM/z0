@@ -12,39 +12,17 @@ namespace Z0
 
     using static zfunc;
 
-    public struct BitMatrix4
+    public ref struct BitMatrix4
     {        
-        byte[] data;
-
-        const uint Order = 4;
+        Span<byte> data;
 
         /// <summary>
         /// The order type
         /// </summary>
         public static  N4 N => default;
-
-        /// <summary>
-        /// The number of bits per row
-        /// </summary>
-        public const uint RowBitCount = Order;
-
-        /// <summary>
-        /// The number of bits per column
-        /// </summary>
-        public const uint ColBitCount = Order;
-
-        /// <summary>
-        /// The number of bits apprehended by the matrix = 64
-        /// </summary>
-        public const uint TotalBitCount = RowBitCount * ColBitCount;
-                                
-                
-        public static BitMatrix4 Identity 
-        {
-            [MethodImpl(Inline)]
-            get => Define(IdentityData);
-        }
-
+                                        
+        public static BitMatrix4 Identity => Define(IdentityData);
+        
         public static BitMatrix4 Zero 
         {            
             [MethodImpl(Inline)]
@@ -354,6 +332,5 @@ namespace Z0
             1 << 2, 
             1 << 3
         };
-
     }
 }

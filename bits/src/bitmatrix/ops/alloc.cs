@@ -16,7 +16,7 @@ namespace Z0
     partial class BitMatrix
     {        
         /// <summary>
-        /// Allocates a zero-filled generic bitmatrix
+        /// Allocates a square, zero-filled generic bitmatrix
         /// </summary>
         /// <typeparam name="T">The primal type over which the bitmatrix is constructed</typeparam>
         [MethodImpl(NotInline)]
@@ -28,7 +28,19 @@ namespace Z0
         }
 
         /// <summary>
-        /// Allocates a generic bitmatrix filled with a specified row
+        /// Allocates a generic bitmatrix
+        /// </summary>
+        /// <typeparam name="T">The primal type over which the bitmatrix is constructed</typeparam>
+        [MethodImpl(NotInline)]
+        public static BitMatrix<T> alloc<T>(int rows)
+            where T : unmanaged
+        {
+            Span<T> content = new T[rows];
+            return new BitMatrix<T>(content);
+        }
+
+        /// <summary>
+        /// Allocates a square, generic bitmatrix filled with a specified row
         /// </summary>
         /// <typeparam name="T">The primal type over which the bitmatrix is constructed</typeparam>
         [MethodImpl(NotInline)]
@@ -36,6 +48,19 @@ namespace Z0
             where T : unmanaged
         {
             Span<T> content = new T[BitMatrix<T>.N];
+            content.Fill(fill);
+            return new BitMatrix<T>(content);
+        }
+
+        /// <summary>
+        /// Allocates a generic bitmatrix filled with a specified row
+        /// </summary>
+        /// <typeparam name="T">The primal type over which the bitmatrix is constructed</typeparam>
+        [MethodImpl(NotInline)]
+        public static BitMatrix<T> alloc<T>(BitVector<T> fill, int rows)
+            where T : unmanaged
+        {
+            Span<T> content = new T[rows];
             content.Fill(fill);
             return new BitMatrix<T>(content);
         }
@@ -153,7 +178,7 @@ namespace Z0
         public static BitMatrix64 alloc(N64 n, bit fill = default)
             => BitMatrix64.Alloc(fill);
  
-         /// <summary>
+        /// <summary>
         /// Allocates a primal bitmatrix with rows filled by a specified vector
         /// </summary>
         /// <param name="fill">The row with which the allocated matrix is filled</param>

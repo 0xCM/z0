@@ -25,7 +25,13 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ref T set<T>(ref T src, byte pos, bit value)            
             where T : unmanaged
-                => ref BitMaskG.set(ref src, pos, value);
+        {
+            if(value)
+                enable(ref src, pos);
+            else
+                disable(ref src, pos);
+            return ref src;
+        }
 
 
     }

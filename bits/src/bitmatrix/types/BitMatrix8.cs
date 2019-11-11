@@ -19,14 +19,14 @@ namespace Z0
     /// <summary>
     /// Defines an 8x8 matrix of bits
     /// </summary>
-    public struct BitMatrix8
+    public ref struct BitMatrix8
     {        
-        byte[] data;
+        Span<byte> data;
                                         
         /// <summary>
         /// The matrix order
         /// </summary>
-        const uint Order = 8;
+        public const uint Order = 8;
 
         /// <summary>
         /// The order type
@@ -34,36 +34,9 @@ namespace Z0
         public static N8 N => default;
 
         /// <summary>
-        /// The number of bits per row
-        /// </summary>
-        public const uint RowBitCount = Order;
-
-        /// <summary>
-        /// The number of bits per column
-        /// </summary>
-        public const uint ColBitCount = Order;
-
-        /// <summary>
-        /// The number of bits apprehended by the matrix = 64
-        /// </summary>
-        public const uint TotalBitCount = RowBitCount * ColBitCount;
-                        
-        /// <summary>
-        /// The (aligned) number of bytes needed for a row
-        /// </summary>
-        public const uint RowByteCount = RowBitCount >> 3;
-
-        /// <summary>
-        /// The (aligned) number of bytes needed for a column
-        /// </summary>
-        public const uint ColByteCount = ColBitCount >> 3;
-
-        public const uint TotalByteCount = TotalBitCount >> 3;
-
-        /// <summary>
         /// Defines the 8x8 identity bitmatrix
         /// </summary>
-        public static BitMatrix8 Identity => From(Identity8x8.ToSpan());
+        public static BitMatrix8 Identity => BitMatrix.identity(n8);
 
         /// <summary>
         /// Defines the 8x8 zero bitmatrix
@@ -166,7 +139,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static explicit operator ulong(BitMatrix8 src)
-            => BitConverter.ToUInt64(src.data);
+            => BitConvert.ToUInt64(src.data);
 
         [MethodImpl(Inline)]
         public static explicit operator BitMatrix8(ulong src)
@@ -175,20 +148,19 @@ namespace Z0
         [MethodImpl(Inline)]
         BitMatrix8(Span<byte> src)
         {
-            this.data = src.ToArray();
+            this.data = src;
         }
 
         [MethodImpl(Inline)]
         BitMatrix8(byte[] src)
         {
-            //require(src.Length == Pow2.T03);
             this.data = src;
         }
 
         [MethodImpl(Inline)]
         BitMatrix8(ulong src)
         {
-            this.data = src.ToBytes();
+            this.data = BitConvert.GetBytes(src);
         }
 
         /// <summary>
@@ -230,22 +202,15 @@ namespace Z0
         public unsafe ref byte Head
         {
             [MethodImpl(Inline)] 
-            get => ref data[0];
+            get => ref head(data);
         }
-
-        /// <summary>
-        /// Constructs an 8-node graph via the adjacency matrix interpretation
-        /// </summary>
-        public Graph<byte> ToGraph()
-            => BitGraph.from(BitMatrix<N8,byte>.Load(data));            
 
         /// <summary>
         /// Packs the matrix into an unsigned 64-bit integer
         /// </summary>
-        /// <returns></returns>
         [MethodImpl(Inline)]
         public ulong Pack()
-            => BitConverter.ToUInt64(data);
+            => BitConvert.ToUInt64(data);
 
         /// <summary>
         /// Reads the bit in a specified cell
@@ -285,15 +250,12 @@ namespace Z0
         /// A mutable indexer, functionally equivalent to <see cref='RowData' /> function
         /// </summary>
         /// <param name="row">The row index</param>
-        public ref byte this[int row]
+        public ref BitVector8 this[int row]
         {
             [MethodImpl(Inline)]
-            get => ref RowData(row);
+            get => ref RowVector(row);
         }
 
-        [MethodImpl(Inline)]
-        public readonly bool IsZero()
-            => BitMatrix.testz(this);
 
         [MethodImpl(Inline)]
         public BitMatrix8 AndNot(in BitMatrix8 rhs)
@@ -324,32 +286,18 @@ namespace Z0
             => data.Swap(i,j);
 
         /// <summary>
-        /// Queries the matrix for the data in an index-identified row and returns
-        /// the bitvector representative
+        /// Presents the data at a specified offset as a bitvector
         /// </summary>
-        /// <param name="index">The row index</param>
+        /// <param name="row">The row index</param>
         [MethodImpl(Inline)]
-        public readonly BitVector8 RowVector(int index)
-            => data[index];
-
-        /// <summary>
-        /// Replaces the data in an index-identified row with the data
-        /// represented by a bitvector source
-        /// </summary>
-        /// <param name="index">The row index</param>
-        [MethodImpl(Inline)]
-        public BitVector8 RowVector(int index, BitVector8 src)
-            => data[index] = (byte)src;
+        public ref BitVector8 RowVector(int row)
+            => ref Unsafe.As<byte,BitVector8>(ref seek(ref Head, row));
 
         /// <summary>
         /// Transposes a copy of the matrix
         /// </summary>
         public readonly BitMatrix8 Transpose()
             => BitMatrix.transpose(this);
-
-        [MethodImpl(Inline)]
-        public void Load(int row, out Vector256<byte> dst)
-            => dst = Vector256.CreateScalar(Pack()).AsByte();
 
         /// <summary>
         /// Queries the matrix for the data in an index-identified column 
@@ -384,17 +332,6 @@ namespace Z0
             => structureOnly ? Alloc() : From(data.Replicate());
 
         /// <summary>
-        /// Counts the number of enabled bits in the matrix
-        /// </summary>
-        [MethodImpl(Inline)]
-        public readonly BitSize Pop()
-            => Z0.Bits.pop((ulong)this);
-
-        [MethodImpl(Inline)]
-        public readonly string Format()
-            => data.FormatMatrixBits(8);
-
-        /// <summary>
         /// Converts the matrix to a bitvector
         /// </summary>
         [MethodImpl(Inline)]
@@ -408,6 +345,9 @@ namespace Z0
         public BitMatrix<byte> ToGeneric()
             => new BitMatrix<byte>(data);
 
+        public override string ToString()
+            => this.Format();
+
         [MethodImpl(Inline)]
         public readonly bool Equals(BitMatrix8 rhs)
             => BitMatrix.same(this,rhs);
@@ -419,16 +359,5 @@ namespace Z0
         
         public override int GetHashCode() 
             => throw new NotSupportedException();
-
-        static ReadOnlySpan<byte> Identity8x8 => new byte[]
-        {
-            1 << 0, 1 << 1, 1 << 2, 1 << 3, 1 << 4, 1 << 5, 1 << 6, 1 << 7
-        };
-
-        public unsafe byte* HeadPtr
-        {
-            [MethodImpl(Inline)]
-            get => (byte*)Unsafe.AsPointer(ref data[0]);
-        }
     }
 }

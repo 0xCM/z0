@@ -50,7 +50,7 @@ namespace Z0
             i++;
             i++;
             i++;
-            Claim.eq(i,UInt4.MaxValue);
+            Claim.eq(i,UInt4.MinValue);
 
         }
 

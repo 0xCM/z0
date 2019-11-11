@@ -85,9 +85,9 @@ namespace Z0
             var x256 = ginx.vincrements<byte>(n256);
             dinx.vconvert(x128, out Vector128<ushort> a1);
             dinx.vconvert(x128, out Vector128<uint> a2);
-            dinx.vconvert(x128, out Vector128<ulong> a3);
-            dinx.vconvert(x128, out Vector256<ushort> b1);
-            dinx.vconvert(x128, out Vector256<uint> b2);
+            //dinx.vconvert(x128, out Vector128<ulong> a3);
+            //dinx.vconvert(x128, out Vector256<ushort> b1);
+            //dinx.vconvert(x128, out Vector256<uint> b2);
             dinx.vconvert(x128, out Vector256<ulong> b3);
 
 

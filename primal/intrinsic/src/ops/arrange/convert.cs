@@ -70,7 +70,7 @@ namespace Z0
 
         /// <summary>
         /// __m128i _mm_cvtepu8_epi16 (__m128i a) PMOVZXBW xmm, xmm/m64
-        /// Zero extends 8 packed 8-bit integers the low 8 bytes of xmm2/m64 to 8 packed 16-bit integers xmm1.
+        /// Zero extends 8 packed 8-bit integers from the low 8 bytes of xmm2/m64 to 8 packed 16-bit integers in xmm1.
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
@@ -129,7 +129,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline)]
-        public static ref Vector128<int> vconvert( Vector128<short> src, out Vector128<int> dst)
+        public static ref Vector128<int> vconvert(Vector128<short> src, out Vector128<int> dst)
         {
             dst = ConvertToVector128Int32(src);
             return ref dst;
@@ -296,6 +296,20 @@ namespace Z0
         }
 
         /// <summary>
+        /// Zero extends each of the 16 8-bit integers in the lo half of the source to the lo target
+        /// and each of the 16 8-bit integers in the hi half of the source to the hi target
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="lo">The lo target</param>
+        /// <param name="hi">The hi target</param>
+        [MethodImpl(Inline)]
+        public static void vconvert(Vector256<byte> src, out Vector256<ushort> lo, out Vector256<ushort> hi)
+        {
+            lo = v16u(ConvertToVector256Int16(vlo(src)));
+            hi = v16u(ConvertToVector256Int16(vhi(src)));
+        }
+
+        /// <summary>
         ///  __m256i _mm256_cvtepu8_epi32 (__m128i a) VPMOVZXBD ymm, xmm
         /// Zero extend 8 packed 8-bit integers the low 8 bytes of xmm2/m64 to 8 packed 32-bit integers ymm1
         /// </summary>
@@ -319,6 +333,22 @@ namespace Z0
         {
             dst = v32u(ConvertToVector256Int32(src));
             return ref dst;
+        }        
+
+        /// <summary>
+        /// Projects 32 unsigned 8-bit integers onto 32 unsigned 32-bit integers that define the components of 4 256-bit vectors
+        /// </summary>
+        /// <param name="src"></param>
+        /// <param name="x0"></param>
+        /// <param name="x1"></param>
+        /// <param name="x2"></param>
+        /// <param name="x3"></param>
+        [MethodImpl(Inline)]
+        public static void vconvert(Vector256<byte> src, out Vector256<uint> x0, out Vector256<uint> x1, out Vector256<uint> x2, out Vector256<uint> x3)
+        {
+            vconvert(src, out Vector256<ushort> lo, out Vector256<ushort> hi);
+            vconvert(lo, out x0, out x1);
+            vconvert(hi, out x2, out x3);
         }
 
         /// <summary>
@@ -406,6 +436,13 @@ namespace Z0
             return ref dst;
         }
 
+        [MethodImpl(Inline)]
+        public static void vconvert(Vector256<ushort> src, out Vector256<uint> lo, out Vector256<uint> hi)
+        {
+            lo = v32u(ConvertToVector256Int32(vlo(src)));
+            hi = v32u(ConvertToVector256Int32(vhi(src)));            
+        }
+
         /// <summary>
         /// __m256i _mm256_cvtepu16_epi64 (__m128i a) VPMOVZXWQ ymm, xmm
         /// </summary>
@@ -423,6 +460,13 @@ namespace Z0
         {
             dst = v64u(ConvertToVector256Int64(src));
             return ref dst;
+        }
+
+        [MethodImpl(Inline)]
+        public static void vconvert(Vector256<ushort> src, out Vector256<ulong> lo, out Vector256<ulong> hi)
+        {
+            lo = v64u(ConvertToVector256Int64(vlo(src)));
+            hi = v64u(ConvertToVector256Int64(vhi(src)));
         }
 
         /// <summary>
@@ -448,5 +492,13 @@ namespace Z0
             dst = v64u(ConvertToVector256Int64(src));
             return ref dst;
         }
+
+        [MethodImpl(Inline)]
+        public static void vconvert(Vector256<uint> src, out Vector256<ulong> lo, out Vector256<ulong> hi)
+        {
+            lo = v64u(ConvertToVector256Int64(vlo(src)));
+            hi = v64u(ConvertToVector256Int64(vhi(src)));
+        }
+
     }
 }

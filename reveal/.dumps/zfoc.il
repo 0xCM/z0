@@ -1,4 +1,4 @@
-// 2019-11-09 14:57:09:309
+// 2019-11-11 00:59:29:225
 uint mod_const_16(uint a)
 {
     IL_0000: ldarg.0
@@ -57,19 +57,42 @@ void mul_full_32u(in Pair<uint> src, ref Pair<uint> dst)
     IL_0007: ret
 
 }
+ReadOnlySpan<Char> hexdigits(ushort a)
+{
+    IL_0000: ldarg.0
+    IL_0001: call System.ReadOnlySpan`1<System.Char> Z0.Hex::digits(System.UInt16)
+    IL_0006: ret
+
+}
+Char hexdigit(byte a)
+{
+    IL_0000: ldarg.0
+    IL_0001: call System.Char Z0.Hex::digit(System.Byte)
+    IL_0006: ret
+
+}
+void hexdigits(byte a, out Char d0, out Char d1)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: ldarg.2
+    IL_0003: call System.Void Z0.Hex::digits(System.Byte,System.Char&,System.Char&)
+    IL_0008: ret
+
+}
 void datablock_store(in byte src, uint count, ref Block128 dst)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.Void Z0.DataBlocks::store(System.Byte&,System.UInt32,Z0.Block128&)
+    IL_0003: call System.Void Z0.DataBlocks::store(System.Byte&,System.UInt32,Z0.BlockStorage/Block128&)
     IL_0008: ret
 
 }
 void datablock_bytes(ref Block128 src)
 {
     IL_0000: ldarg.0
-    IL_0001: call System.Span`1<System.Byte> Z0.DataBlocks::bytes(Z0.Block128&)
+    IL_0001: call System.Span`1<System.Byte> Z0.DataBlocks::bytes(Z0.BlockStorage/Block128&)
     IL_0006: pop
     IL_0007: ret
 

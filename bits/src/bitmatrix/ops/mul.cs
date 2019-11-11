@@ -49,34 +49,32 @@ namespace Z0
         /// </summary>
         /// <param name="A">The bitmatrix that defines the transformation</param>
         /// <param name="x">The vector to be transformed</param>
-        public static BitVector8 mul(BitMatrix8 lhs, BitVector8 rhs)
+        public static BitVector8 mul(BitMatrix8 A, BitVector8 B)
         {
             var n = BitMatrix8.N;
             var dst = BitVector.alloc(n);
             for(var i=0; i< n; i++)
-                dst[i] = lhs.RowVector(i) % rhs;
+                dst[i] = A[i] % B;
             return dst;        
         }
 
         /// <summary>
-        /// Multiplies two primal bitmatrices of order 8, overwriting the left matrix with the result
+        /// Multiplies two primal bitmatrices of order 8, writing the result to a caller-supplied target
         /// </summary>
         /// <param name="A">The left matrix</param>
         /// <param name="B">The right matrix</param>
-        public static ref BitMatrix8 mul(ref BitMatrix8 A, BitMatrix8 B)
+        public static ref BitMatrix8 mul(in BitMatrix8 A, in BitMatrix8 B, ref BitMatrix8 Z)
         {
-            var C = B.Transpose();
             var n = BitMatrix8.N;
-
+            var C = BitMatrix.transpose(B);
             for(var i=0; i< n; i++)
             {
-                var r = A.RowVector(i);
-                var z = BitVector8.Alloc();
+                ref var z = ref Z[i];
                 for(var j = 0; j< n; j++)
-                    z[j] = r % C.RowVector(j);
-                A[i] = (byte)z;
+                    z[j] = A[i] % C[j];
             }
-            return ref A;
+
+            return ref Z;
         }
 
         /// <summary>
@@ -84,10 +82,10 @@ namespace Z0
         /// </summary>
         /// <param name="A">The left matrix</param>
         /// <param name="B">The right matrix</param>
-        public static BitMatrix8 mul(BitMatrix8 A, BitMatrix8 B)
+        public static BitMatrix8 mul(in BitMatrix8 A, in BitMatrix8 B)
         {
-            var C = A.Replicate();
-            return mul(ref C, B);
+            var Z = alloc(n8);
+            return mul(A,B, ref Z);
         }
         
         public static BitVector16 mul(BitMatrix16 A, BitVector16 x)
@@ -95,7 +93,7 @@ namespace Z0
             var n = BitMatrix16.N;
             var dst = BitVector.alloc(n);
             for(var i=0; i< n; i++)
-                dst[i] = A.RowVector(i) % x;
+                dst[i] = A[i] % x;
             return dst;        
         }
 
@@ -108,9 +106,9 @@ namespace Z0
             var dst = BitMatrix.alloc(n);
             for(var i=0; i< n; i++)
             {
-                var row = X.RowVector(i);
+                var row = X[i];
                 for(var j = 0; j< n; j++)
-                    dst[i,j] = Y.RowVector(j) % row;
+                    dst[i,j] = Y[j] % row;
             }
             return dst;
         }
@@ -122,10 +120,10 @@ namespace Z0
             
             for(var i=0; i< n; i++)
             {
-                var r = A.RowVector(i);
+                var r = A[i];
                 var z = BitVector.alloc(n);
                 for(var j = 0; j< n; j++)
-                    z[j] = r % C.RowVector(j);
+                    z[j] = r % C[j];
                 A[i] = (uint)z;
             }
             return ref A;
@@ -143,7 +141,7 @@ namespace Z0
             const int N = 32;
             var y = BitVector32.Alloc();
             for(var i=0; i< N; i++)
-                y[i] = A.RowVector(i) % x;
+                y[i] = A[i] % x;
             return y;        
         }
 
@@ -174,7 +172,7 @@ namespace Z0
             const int N = 64;                        
             var dst = BitVector64.Alloc();
             for(var i=0; i< N; i++)
-                dst[i] = A.RowVector(i) % B;
+                dst[i] = A[i] % B;
             return dst;        
         }
 

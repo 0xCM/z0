@@ -59,7 +59,6 @@ namespace Z0
             where T : unmanaged        
                 => MemoryMarshal.Cast<T,short>(src);
 
-
         /// <summary>
         /// Reimagines a span of generic values as a span of unsigned 16-bit integers
         /// </summary>
@@ -79,7 +78,6 @@ namespace Z0
         public static Span<int> AsInt32<T>(this Span<T> src)
             where T : unmanaged        
                 => MemoryMarshal.Cast<T,int>(src);
-
 
         /// <summary>
         /// Reimagines a span of generic values as a span of unsigned 32-bit integers
@@ -131,6 +129,16 @@ namespace Z0
         public static Span<double> AsFloat64<T>(this Span<T> src)
             where T : unmanaged        
                 => MemoryMarshal.Cast<T,double>(src);
+
+        /// <summary>
+        /// Reimagines a span of generic values as a span of chars
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <typeparam name="T">The source value type</typeparam>
+        [MethodImpl(Inline)]
+        public static Span<char> AsChar<T>(this Span<T> src)
+            where T : unmanaged        
+                => MemoryMarshal.Cast<T,char>(src);
 
 
         /// <summary>

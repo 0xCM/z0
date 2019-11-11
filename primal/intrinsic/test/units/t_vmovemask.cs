@@ -15,6 +15,17 @@ namespace Z0
 
     public class t_vmovemask : UnitTest<t_vmovemask>
     {
+
+        public void pack_test()
+        {
+            var x = dinx.vparts(n128,0,1,2,4,4,5,6,7);
+            var y = dinx.vparts(n128,8,9,10,11,12,13,14,15);
+            var z = dinx.vpackus(x,y);
+            var e = dinx.vparts(n128,0,1,2,4,4,5,6,7,8,9,10,11,12,13,14,15);
+            Claim.eq(e,z);
+            
+        }
+        
         public void movemask_256x8u()
         {
             var bits = n256;

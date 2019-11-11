@@ -14,7 +14,7 @@ namespace Z0
     /// <summary>
     /// Defines generic bitmask functions that parameterize those defined in <see cref='BitMask'/>
     /// </summary>
-    partial class BitMaskG
+    public static partial class BitMaskG
     {
 
         /// <summary>

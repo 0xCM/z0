@@ -47,8 +47,8 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
-        public static int vmovemask(Vector128<byte> src)
-            => MoveMask(src);
+        public static uint vmovemask(Vector128<byte> src)
+            => (uint)MoveMask(src);
 
         /// <summary>
         /// Constructs an integer from the most significant bit of each source vector component
@@ -73,8 +73,8 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
-        public static int vmovemask(Vector256<byte> src)
-            => MoveMask(src);
+        public static uint vmovemask(Vector256<byte> src)
+            => (uint)MoveMask(src);
                  
         /// <summary>
         /// void _mm_maskstore_epi32 (int* mem_addr, __m128i mask, __m128i a) VPMASKMOVD m128, xmm, xmm

@@ -36,9 +36,9 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
+        [MethodImpl(Inline)]
         public static Vector256<short> vmulhrs(Vector256<short> x, Vector256<short> y)
             => MultiplyHighRoundScale(x,y);
-
 
         /// <summary>
         ///  __m128i _mm_mul_epi32 (__m128i a, __m128i b)PMULDQ xmm, xmm/m128

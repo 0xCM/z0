@@ -1,4 +1,4 @@
-// 2019-11-09 14:57:08:984
+// 2019-11-11 00:59:28:785
 long square_d64i(long x)
 {
     IL_0000: ldarg.0
@@ -2975,11 +2975,11 @@ bit gteq_d32i(int a, int b)
     IL_0007: ret
 
 }
-bit gteq_g32i(int a, int b)
+bit gteq_d64i(long a, long b)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: call Z0.bit Z0.gmath::gteq<System.Int32>(System.Int32,System.Int32)
+    IL_0002: call Z0.bit Z0.math::gteq(System.Int64,System.Int64)
     IL_0007: ret
 
 }

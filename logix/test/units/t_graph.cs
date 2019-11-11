@@ -49,7 +49,7 @@ namespace Z0.Logix
                 else
                     m[i] = Random.Pow2<ulong>(i + 1, penultimate);            
             }
-            var g = BitMatrix.graph(m);
+            var g = BitGraph.graph(m);
 
             Claim.eq(64,g.VertexCount);
             Claim.eq(63,g.EdgeCount);

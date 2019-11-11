@@ -33,6 +33,18 @@ namespace Z0
             bm_transpose_gn_check<N8,N8,byte>();
         }
 
+        public void bm_transpose_8x8x8_v2()
+        {
+            var m1 = Random.BitMatrix(n8);
+            var m2 = BitMatrix.transpose_v2(m1);
+            for(var i=0; i<m2.RowCount; i++)
+            for(var j=0; j<m2.ColCount; j++)
+                Claim.eq(m1[i,j], m2[j,i]);
+            
+            var m3 = BitMatrix.transpose_v2(m2);
+            Claim.yea(m3 == m1);
+        }
+
         public void bm_transpose_8x8x8()
         {
             var m1 = Random.BitMatrix(n8);
@@ -79,7 +91,7 @@ namespace Z0
             m2.RowSwap(1,2);
             m2.RowSwap(2,3);
 
-            Claim.yea(m1.RowVector(0) == m2.RowVector(3));
+            Claim.yea(m1[0] == m2.RowVector(3));
         }
 
         void bm_transpose_gn_check<M,N,T>()

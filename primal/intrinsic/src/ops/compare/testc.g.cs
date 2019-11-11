@@ -59,6 +59,7 @@ namespace Z0
             where T : unmanaged
                 => vtestc(src, vones<T>(n256));
         
+
         /// <summary>
         /// Determines whether mask-specified source bits are all on
         /// </summary>
@@ -122,6 +123,7 @@ namespace Z0
             else 
                 return dinx.vtestc(uint64(src), uint64(mask));
         }
+
 
         /// <summary>
         /// Determines whether mask-specified source bits are all on

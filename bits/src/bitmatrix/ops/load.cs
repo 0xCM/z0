@@ -26,22 +26,6 @@ namespace Z0
             where T : unmanaged
                 => new BitMatrix<T>(src);
 
-        [MethodImpl(Inline)]
-        public static BitMatrix8 load(N8 n, byte[] src)
-            => BitMatrix8.From(src);
-
-        [MethodImpl(Inline)]
-        public static BitMatrix16 load(N16 n, ushort[] src)
-            => BitMatrix16.From(src);
-
-        [MethodImpl(Inline)]
-        public static BitMatrix32 load(N32 n, uint[] src)
-            => BitMatrix32.From(src);
-
-        [MethodImpl(Inline)]
-        public static BitMatrix64 load(N64 n, ulong[] src)
-            => BitMatrix64.From(src);
-
         /// <summary>
         /// Loads a square bitmatrix of natural order from an span
         /// </summary>

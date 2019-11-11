@@ -20,9 +20,9 @@ namespace Z0
     /// Defines a 32x32 matrix of bits
     /// </summary>
     
-    public struct BitMatrix32
+    public ref struct BitMatrix32
     {                
-        uint[] data;        
+        Span<uint> data;        
 
         /// <summary>
         /// The order type
@@ -32,42 +32,12 @@ namespace Z0
         /// <summary>
         /// The matrix order
         /// </summary>
-        const uint Order = 32;
-
-        /// <summary>
-        /// The number of bits per row
-        /// </summary>
-        public const uint RowBitCount = Order;
-
-        /// <summary>
-        /// The number of bits per column
-        /// </summary>
-        public const uint ColBitCount = Order;
-
-        /// <summary>
-        /// The number of bits apprehended by the matrix
-        /// </summary>
-        public const uint TotalBitCount = RowBitCount * ColBitCount;
-                        
-        /// <summary>
-        /// The number of bytes needed for a row
-        /// </summary>
-        public const uint RowByteCount = RowBitCount >> 3;
-
-        /// <summary>
-        /// The number of bytes needed for a column
-        /// </summary>
-        public const uint ColByteCount = ColBitCount >> 3;
-
-        /// <summary>
-        /// To total number of bytes required to store the matrix data
-        /// </summary>
-        public const uint TotalByteCount = TotalBitCount >> 3;
+        public const uint Order = 32;
 
         /// <summary>
         /// Defines the 32x32 identity bitmatrix
         /// </summary>
-        public static BitMatrix32 Identity => From(Identity32x32.ToSpan());
+        public static BitMatrix32 Identity => BitMatrix.identity(n32);
 
         /// <summary>
         /// Defines the 32x32 zero bitmatrix
@@ -152,7 +122,7 @@ namespace Z0
         [MethodImpl(Inline)]
         BitMatrix32(Span<uint> src)
         {                        
-            this.data = src.ToArray();
+            this.data = src;
         }        
 
         [MethodImpl(Inline)]
@@ -164,7 +134,7 @@ namespace Z0
         [MethodImpl(Inline)]
         BitMatrix32(BitMatrix<N32,uint> src)
         {
-            this.data = src.Data.ToArray();            
+            this.data = src.Data;
         }
 
         [MethodImpl(Inline)]
@@ -172,7 +142,7 @@ namespace Z0
         {
             this.data = new uint[Order];
             if(fill)
-                Array.Fill(data,uint.MaxValue);
+                data.Fill(uint.MaxValue);
         }
 
         public readonly int RowCount
@@ -220,33 +190,13 @@ namespace Z0
             set => SetBit(row,col,value);
         }            
 
-        [MethodImpl(Inline)] 
-        public readonly BitVector32 Diagonal()
-            => BitMatrix.diagonal(this);
-
-        [MethodImpl(NotInline)] 
-        public readonly BitMatrix32 Replicate()
-            => new BitMatrix32(data.ToArray());
-
-        [MethodImpl(Inline)]
-        public readonly BitVector32 RowVector(int index)
-            => data[index];
-
-        /// <summary>
-        /// Returns a mutable reference for an index-identified matrix row
-        /// </summary>
-        /// <param name="row">The row index</param>
-        [MethodImpl(Inline)]
-        public ref uint RowData(int row)
-            => ref data[row];
-
         /// <summary>
         /// The underlying matrix presented as a bytespan
         /// </summary>
         public Span<byte> Bytes
         {
             [MethodImpl(Inline)]
-            get => data.AsSpan().AsBytes();
+            get => data.AsBytes();
         }
 
         /// <summary>
@@ -264,18 +214,42 @@ namespace Z0
         public unsafe ref uint Head
         {
             [MethodImpl(Inline)] 
-            get => ref data[0];
+            get => ref head(data);
         }
 
         /// <summary>
         /// Queries/manipulates row data
         /// </summary>
         /// <param name="row">The row index</param>
-        public ref uint this[int row]
+        public ref BitVector32 this[int row]
         {
             [MethodImpl(Inline)]
-            get => ref RowData(row);
+            get => ref RowVector(row);
         }
+
+        [MethodImpl(Inline)] 
+        public readonly BitVector32 Diagonal()
+            => BitMatrix.diagonal(this);
+
+        [MethodImpl(NotInline)] 
+        public readonly BitMatrix32 Replicate()
+            => new BitMatrix32(data.ToArray());
+
+        /// <summary>
+        /// Presents the data at a specified offset as a bitvector
+        /// </summary>
+        /// <param name="row">The row index</param>
+        [MethodImpl(Inline)]
+        public ref BitVector32 RowVector(int row)
+            => ref Unsafe.As<uint,BitVector32>(ref seek(ref Head, row));
+
+        /// <summary>
+        /// Presents the data at a specified offset as an unsigned integer
+        /// </summary>
+        /// <param name="row">The row index</param>
+        [MethodImpl(Inline)]
+        public ref uint RowData(int row)
+            => ref seek(ref Head, row);
 
         /// <summary>
         /// Interchanges the i'th and j'th rows where  0 <= i,j < 32
@@ -298,13 +272,6 @@ namespace Z0
         public readonly BitVector32 ColVec(int index)
             => ColData(index);
 
-        [MethodImpl(Inline)]
-        public bool Equals(BitMatrix32 rhs)
-            => BitMatrix.same(this,rhs);
-
-        [MethodImpl(Inline)]
-        public readonly bool IsZero()
-            => BitMatrix.testz(this);
         
         public readonly BitMatrix32 Transpose()
         {
@@ -313,33 +280,14 @@ namespace Z0
                 dst.data[i] = ColData(i);
             return dst;
         }
-
-        [MethodImpl(Inline)]
-        public void Load(int row, out Vector256<uint> dst)
-            => dst = dinx.vload(in data[row], out dst);
-
-        /// <summary>
-        /// Counts the number of enabled bits in the matrix
-        /// </summary>
-        [MethodImpl(Inline)] 
-        public readonly BitSize Pop()
-        {
-            var count = 0u;
-            for(var i=0; i<data.Length; i++)
-                count += Popcnt.PopCount(data[i]);
-            return count;
-        }
-
-        /// <summary>
-        /// Creates a generic matrix from the primal source data
-        /// </summary>
-        [MethodImpl(Inline)]
-        public BitMatrix<uint> ToGeneric()
-            => new BitMatrix<uint>(data);
-
+    
         [MethodImpl(Inline)]
         public string Format()
             => data.FormatMatrixBits(32);
+
+        [MethodImpl(Inline)]
+        public bool Equals(BitMatrix32 rhs)
+            => BitMatrix.same(this,rhs);
 
         public override bool Equals(object obj)
             => throw new NotSupportedException();
@@ -348,50 +296,6 @@ namespace Z0
             => throw new NotSupportedException();
         
         public override string ToString()
-            => Format();
-
-        static ReadOnlySpan<byte> Identity32x32 => new byte[]
-        {
-            Pow2.T00, 0, 0, 0,
-            Pow2.T01, 0, 0, 0,
-            Pow2.T02, 0, 0, 0,
-            Pow2.T03, 0, 0, 0,
-            Pow2.T04, 0, 0, 0,
-            Pow2.T05, 0, 0, 0,
-            Pow2.T06, 0, 0, 0,
-            Pow2.T07, 0, 0, 0,
-            0, Pow2.T00, 0, 0,
-            0, Pow2.T01, 0, 0,
-            0, Pow2.T02, 0, 0,
-            0, Pow2.T03, 0, 0,
-            0, Pow2.T04, 0, 0,
-            0, Pow2.T05, 0, 0,
-            0, Pow2.T06, 0, 0,
-            0, Pow2.T07, 0, 0,
-            0, 0, Pow2.T00, 0,
-            0, 0, Pow2.T01, 0,
-            0, 0, Pow2.T02, 0,
-            0, 0, Pow2.T03, 0,
-            0, 0, Pow2.T04, 0,
-            0, 0, Pow2.T05, 0,
-            0, 0, Pow2.T06, 0,
-            0, 0, Pow2.T07, 0,
-            0, 0, 0, Pow2.T00,
-            0, 0, 0, Pow2.T01,
-            0, 0, 0, Pow2.T02,
-            0, 0, 0, Pow2.T03,
-            0, 0, 0, Pow2.T04,
-            0, 0, 0, Pow2.T05,
-            0, 0, 0, Pow2.T06,
-            0, 0, 0, Pow2.T07,
-
-        };
-
-        public unsafe uint* HeadPtr
-        {
-            [MethodImpl(Inline)]
-            get => (uint*)Unsafe.AsPointer(ref data[0]);
-        }
-
+            => throw new NotSupportedException();
     }
 }
