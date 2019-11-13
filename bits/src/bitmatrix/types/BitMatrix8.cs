@@ -29,6 +29,11 @@ namespace Z0
         public const uint Order = 8;
 
         /// <summary>
+        /// The number of bytes required to store the matrix
+        /// </summary>
+        public const uint ByteCount = Order;
+
+        /// <summary>
         /// The order type
         /// </summary>
         public static N8 N => default;
@@ -151,11 +156,11 @@ namespace Z0
             this.data = src;
         }
 
-        [MethodImpl(Inline)]
-        BitMatrix8(byte[] src)
-        {
-            this.data = src;
-        }
+        // [MethodImpl(Inline)]
+        // BitMatrix8(byte[] src)
+        // {
+        //     this.data = src;
+        // }
 
         [MethodImpl(Inline)]
         BitMatrix8(ulong src)

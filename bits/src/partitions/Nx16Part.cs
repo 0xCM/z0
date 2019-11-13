@@ -15,6 +15,42 @@ namespace Z0
     partial class BitParts
     {        
         /// <summary>
+        /// Maps mask-identified source bits to the low bits of an empty target 
+        /// </summary>
+        /// <param name="src">The bit source</param>
+        /// <param name="part">The source partition to select/extract</param>
+        [MethodImpl(Inline)]
+        public static uint select(uint src, Part32x16 part)
+            => select(src, (uint)part);
+
+        /// <summary>
+        /// Maps mask-identified source bits to the low bits of an empty target 
+        /// </summary>
+        /// <param name="src">The bit source</param>
+        /// <param name="part">The source partition to select/extract</param>
+        [MethodImpl(Inline)]
+        public static ulong select(ulong src, Part48x16 part)
+            => select(src, (ulong)part);
+
+        /// <summary>
+        /// Maps mask-identified source bits to the low bits of an empty target 
+        /// </summary>
+        /// <param name="src">The bit source</param>
+        /// <param name="part">The source partition to select/extract</param>
+        [MethodImpl(Inline)]
+        public static ulong select(ulong src, Part64x16 part)
+            => select(src, (ulong)part);
+
+        /// <summary>
+        /// Maps low source bits to mask-identified bits of an empty target
+        /// </summary>
+        /// <param name="src">The bit source</param>
+        /// <param name="part">The target partition</param>
+        [MethodImpl(Inline)]
+        public static uint project(uint src, Part32x16 part)
+            => project(src, (uint)part);
+
+        /// <summary>
         /// Partitions a 32-bit source value into 2 segments of bit width 16
         /// </summary>
         /// <param name="src">The source value</param>
@@ -22,8 +58,8 @@ namespace Z0
         [MethodImpl(Inline)]
         public static void part32x16(uint src, Span<ushort> dst)
         {
-            dst[0] = (ushort)src;
-            dst[1] = (ushort)(src >> 16);
+            seek(dst,0) = (ushort)src;
+            seek(dst,1) = (ushort)(src >> 16);
         }
         
         /// <summary>
@@ -37,24 +73,5 @@ namespace Z0
             x0 = (ushort)src;
             x1 = (ushort)(src >> 16);
         }
-
-        /// <summary>
-        /// Replicates the low bits of a source to an identified partition of an empty target
-        /// </summary>
-        /// <param name="src">The bit source</param>
-        /// <param name="part">The target partition</param>
-        [MethodImpl(Inline)]
-        public static uint project(uint src, Part32x16 part)
-            => Bits.scatter(src, (uint)part);
-
-        /// <summary>
-        /// Replicates an identified partition of a bit source to the low bits of a target 
-        /// </summary>
-        /// <param name="src">The bit source</param>
-        /// <param name="part">The source partition to select/extract</param>
-        [MethodImpl(Inline)]
-        public static uint select(uint src, Part32x16 part)
-            => Bits.gather(src, (uint)part);
-
     }
 }

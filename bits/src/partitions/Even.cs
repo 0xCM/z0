@@ -6,60 +6,96 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Runtime.InteropServices;
     using System.Runtime.Intrinsics.X86;
     using Z0;
  
     using static zfunc;
+    using static Bits;
 
-    public static partial class BitMasks
+    partial class BitParts
     {        
+        /// <summary>
+        /// Replicates identified even bits of an 8-bit source to the low bits of an 8-bit target 
+        /// </summary>
+        /// <param name="src">The bit source</param>
+        /// <param name="parts">The bit selection</param>
+        [MethodImpl(Inline)]
+        public static uint select(uint src, Even8 parts)
+            => select(src, (uint)parts);
 
         /// <summary>
-        /// Identifies the even bits in a nibble
+        /// Replicates identified even bits of a 16-bit source to the low bits of a 16-bit target 
+        /// </summary>
+        /// <param name="src">The bit source</param>
+        /// <param name="parts">The bit selection</param>
+        [MethodImpl(Inline)]
+        public static uint select(uint src, Even16 parts)
+            => select(src, (uint)parts);
+
+        /// <summary>
+        /// Replicates identified even bits of a 32-bit source to the low bits of a 32-bit target 
+        /// </summary>
+        /// <param name="src">The bit source</param>
+        /// <param name="parts">The bit selection</param>
+        [MethodImpl(Inline)]
+        public static uint select(uint src, Even32 parts)
+            => select(src, (uint)parts);
+
+        /// <summary>
+        /// Replicates identified even bits of a 64-bit source to the low bits of a 64-bit target 
+        /// </summary>
+        /// <param name="src">The bit source</param>
+        /// <param name="parts">The bit selection</param>
+        [MethodImpl(Inline)]
+        public static ulong select(ulong src, Even64 parts)
+            => select(src, (ulong)parts);
+
+        /// <summary>
+        /// Identifies the even bits in a 4-bit segment
         /// </summary>
         [Flags]
-        public enum Even4x1 : byte
+        public enum Even4 : byte
         {
             /// <summary>
-            /// Identifies the first even bit
+            /// Identifies the bit at position 0
             /// </summary>
-            Bit0 = 1,
+            Bit0 = Pow2.T00,
             
             /// <summary>
-            /// Identifies the second even bit
+            /// Identifies the bit at position 2
             /// </summary>
             Bit2 = Bit0 << 2,
-                        
-                        
+                                                
             /// <summary>
-            /// Selects the even bits in a nibble
+            /// Selects the even bits in a 4-bit segment
             /// </summary>
             Select = Bit0 |  Bit2 
         }
 
         /// <summary>
-        /// Identifies the even bits in a byte
+        /// Identifies the even bits in an 8-bit segment
         /// </summary>
         [Flags]
-        public enum Even8x1 : byte
+        public enum Even8 : byte
         {
             /// <summary>
-            /// Identifies the first even bit
+            /// Identifies the bit at position 0
             /// </summary>
-            Bit0 = 1,
+            Bit0 = Pow2.T00,
             
             /// <summary>
-            /// Identifies the second even bit
+            /// Identifies the bit at position 2
             /// </summary>
             Bit2 = Bit0 << 2,
                         
             /// <summary>
-            /// Identifies third even bit
+            /// Identifies the bit at position 4
             /// </summary>
             Bit4 = Bit2 << 2,
                         
             /// <summary>
-            /// Identifies the fourth even bit
+            /// Identifies the bit at position 6
             /// </summary>
             Bit6 = Bit4 << 2,
                         
@@ -71,15 +107,15 @@ namespace Z0
         }
 
         /// <summary>
-        /// Identifies even bits in a 16-bit segment
+        /// Identifies the even bits in a 16-bit segment
         /// </summary>
         [Flags]
-        public enum Even16x8 : ushort
+        public enum Even16 : ushort
         {
             /// <summary>
             /// Identifies the even bits in the first byte
             /// </summary>
-            Byte0 = Even8x1.Select,
+            Byte0 = Even8.Select,
             
             /// <summary>
             /// Identifies the even bits in the second byte
@@ -96,12 +132,12 @@ namespace Z0
         /// Identifies even bits in a 32-bit segment
         /// </summary>
         [Flags]
-        public enum Even32x8 : uint
+        public enum Even32 : uint
         {
             /// <summary>
             /// Identifies the even bits in the first byte
             /// </summary>
-            Byte0 = Even8x1.Select,
+            Byte0 = Even8.Select,
             
             /// <summary>
             /// Identifies the even bits in the second byte
@@ -128,12 +164,12 @@ namespace Z0
         /// Identifies even bits in a 64-bit segment
         /// </summary>
         [Flags]
-        public enum Even64x8 : ulong
+        public enum Even64 : ulong
         {
             /// <summary>
             /// Identifies the even bits in the first byte
             /// </summary>
-            Byte0 = Even8x1.Select,
+            Byte0 = Even8.Select,
             
             /// <summary>
             /// Identifies the even bits in the second byte

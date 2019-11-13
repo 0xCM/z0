@@ -14,6 +14,11 @@ namespace Z0
 
     partial class ginx
     {
+        // [MethodImpl(Inline)]
+        // public static Vector256<T> vperm4x64<T>(Vector256<T> x, Perm4 spec)
+        //     where T : unmanaged
+        //         => dinx.vperm4x64(x.AsUInt64(), (byte)spec);
+
         [MethodImpl(Inline)]
         public static Vector256<T> vperm2x128<T>(Vector256<T> lhs, Vector256<T> rhs, Perm2x128 spec)
             where T : unmanaged
@@ -96,9 +101,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return generic<T>(dinx.vperm2x128(float32(lhs), float32(rhs),spec));
+                return generic<T>(dfp.vperm2x128(float32(lhs), float32(rhs),spec));
             else if(typeof(T) == typeof(double))
-                return generic<T>(dinx.vperm2x128(float64(lhs), float64(rhs),spec));
+                return generic<T>(dfp.vperm2x128(float64(lhs), float64(rhs),spec));
             else
                 throw unsupported<T>();
         }

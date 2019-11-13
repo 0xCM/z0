@@ -16,7 +16,6 @@ namespace Z0
     
     partial class dinx
     {
-
         /// <summary>
         /// Creates a target vector z from components chosen from two source vectors x and y 
         /// as determined by the hi bit of each corresponding specifier component,
@@ -40,9 +39,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<ushort> vblend16x16(Vector256<ushort> x, Vector256<ushort> y, Vector256<ushort> spec)        
             => BlendVariable(x, y, spec);
-
-
-
     }
-
 }

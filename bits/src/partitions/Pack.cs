@@ -13,9 +13,7 @@ namespace Z0
     using static Bits;
 
     partial class BitParts
-    {        
-        const ulong MLsb8 = (ulong)BitMask64.Lsb8;
-
+    {            
         [MethodImpl(Inline)]
         public static void unpack8x1(uint src, Span<byte> dst)
             => Part64.unpack8x1(src, ref head64(dst));

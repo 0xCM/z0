@@ -14,6 +14,30 @@ namespace Z0
 
     partial class dinx    
     {        
+        [MethodImpl(Inline)]
+        public static Vector256<sbyte> vperm4x64(Vector256<sbyte> x, Perm4 spec)
+            => Permute4x64(x.AsUInt64(), (byte)spec).AsSByte(); 
+
+        [MethodImpl(Inline)]
+        public static Vector256<byte> vperm4x64(Vector256<byte> x, Perm4 spec)
+            => Permute4x64(x.AsUInt64(), (byte)spec).AsByte(); 
+
+        [MethodImpl(Inline)]
+        public static Vector256<short> vperm4x64(Vector256<short> x, Perm4 spec)
+            => Permute4x64(x.AsUInt64(), (byte)spec).AsInt16(); 
+
+        [MethodImpl(Inline)]
+        public static Vector256<ushort> vperm4x64(Vector256<ushort> x, Perm4 spec)
+            => Permute4x64(x.AsUInt64(), (byte)spec).AsUInt16(); 
+
+        [MethodImpl(Inline)]
+        public static Vector256<int> vperm4x64(Vector256<int> x, Perm4 spec)
+            => Permute4x64(x.AsUInt64(), (byte)spec).AsInt32(); 
+
+        [MethodImpl(Inline)]
+        public static Vector256<uint> vperm4x64(Vector256<uint> x, Perm4 spec)
+            => Permute4x64(x.AsUInt64(), (byte)spec).AsUInt32(); 
+
         /// <summary>
         /// __m256i _mm256_permute4x64_epi64 (__m256i a, const int imm8)VPERMQ ymm, ymm/m256, imm8
         /// Permutes components in the source vector across lanes per the supplied specification

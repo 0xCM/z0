@@ -530,37 +530,7 @@ namespace Z0
             where T : unmanaged
                 => src.Pack().As<byte, T>().ToSpan256().LoadVector();
 
-        /// <summary>
-        /// Converts an 8-bit bitmask to an 8-bit bitvector
-        /// </summary>
-        /// <param name="src">The source mask</param>
-        [MethodImpl(Inline)]
-        public static BitVector8 ToBitVector(this BitMask8 src)
-            => ((byte)src).ToBitVector();
 
-        /// <summary>
-        /// Converts a 16-bit bitmask to a 16-bit bitvector
-        /// </summary>
-        /// <param name="src">The source mask</param>
-        [MethodImpl(Inline)]
-        public static BitVector16 ToBitVector(this BitMask16 src)
-            => ((ushort)src).ToBitVector();
-
-        /// <summary>
-        /// Converts a 32-bit bitmask to a 32-bit bitvector
-        /// </summary>
-        /// <param name="src">The source mask</param>
-        [MethodImpl(Inline)]
-        public static BitVector32 ToBitVector(this BitMask32 src)
-            => ((uint)src).ToBitVector();
-
-        /// <summary>
-        /// Converts a 64-bit bitmask to a 64-bit bitvector
-        /// </summary>
-        /// <param name="src">The source mask</param>
-        [MethodImpl(Inline)]
-        public static BitVector64 ToBitVector(this BitMask64 src)
-            => ((ulong)src).ToBitVector();
 
         /// <summary>
         /// Applies a truncating reduction Bv32 -> Bv8

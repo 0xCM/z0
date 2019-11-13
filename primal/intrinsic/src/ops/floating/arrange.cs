@@ -100,5 +100,73 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<double> vinsert(Vector128<double> src, in Vector256<double> dst, byte index)        
             => InsertVector128(dst, src, index);
+
+        /// <summary>
+        /// __m256 _mm256_blendv_ps (__m256 a, __m256 b, __m256 mask) VBLENDVPS ymm, ymm, ymm/m256, ymm
+        /// Creates a target vector z from components chosen from two source vectors x and y 
+        /// as determined by the hi bit of each corresponding specifier component, z[i] = testbit(spec[i],31) ? x[i] : y[i]
+        /// </summary>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
+        /// <param name="spec">The blend specification</param>
+        [MethodImpl(Inline)]
+        public static Vector256<float> vblend8x32(Vector256<float> x, Vector256<float> y, Vector256<float> spec)        
+            => BlendVariable(x, y, spec);
+
+        /// <summary>
+        /// __m256d _mm256_blendv_pd (__m256d a, __m256d b, __m256d mask)VBLENDVPD ymm, ymm, ymm/m256, ymm
+        /// Creates a target vector z from components chosen from two source vectors x and y 
+        /// as determined by the hi bit of each corresponding specifier component, z[i] = testbit(spec[i],63) ? x[i] : y[i]
+        /// </summary>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
+        /// <param name="spec">The blend specification</param>
+        [MethodImpl(Inline)]
+        public static Vector256<double> vblend4x64(Vector256<double> x, Vector256<double> y, Vector256<double> spec)        
+            => BlendVariable(x, y, spec);
+
+        /// <summary>
+        /// __m256 _mm256_permute2f128_ps (__m256 a, __m256 b, int imm8) VPERM2F128 ymm, ymm, ymm/m256, imm8
+        /// </summary>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
+        /// <param name="spec">The permutation spec</param>
+        [MethodImpl(Inline)]
+        public static Vector256<float> vperm2x128(Vector256<float> x, Vector256<float> y, Perm2x128 spec)
+            => Permute2x128(x, y, (byte)spec);
+
+        /// <summary>
+        /// __m256d _mm256_permute2f128_pd (__m256d a, __m256d b, int imm8) VPERM2F128 ymm, ymm, ymm/m256, imm8
+        /// </summary>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
+        /// <param name="spec">The permutation spec</param>
+        [MethodImpl(Inline)]
+        public static Vector256<double> vperm2x128(Vector256<double> x, Vector256<double> y, Perm2x128 spec)
+            => Permute2x128(x, y, (byte)spec);
+
+        /// <summary>
+        /// Swaps hi/lo 128-bit lanes
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        [MethodImpl(Inline)]
+        public static Vector256<float> vswaphl(Vector256<float> x)
+            => vperm2x128(x,x, Perm2x128.AD);
+
+        /// <summary>
+        /// Swaps hi/lo 128-bit lanes
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        [MethodImpl(Inline)]
+        public static Vector256<double> vswaphl(Vector256<double> x)
+            => vperm2x128(x,x, Perm2x128.AD);
+
+        [MethodImpl(Inline)]
+        public static Vector256<float> vreverse(Vector256<float> src)
+            => dfp.vperm8x32(src,MRev256f32);    
+
+        static Vector256<int> MRev256f32 
+            => dinx.vparts(n256, 7, 6, 5, 4, 3, 2, 1, 0);    
+
     }
 }

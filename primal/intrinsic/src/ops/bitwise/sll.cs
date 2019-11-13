@@ -43,7 +43,6 @@ namespace Z0
         public static Vector256<sbyte> vsll(Vector256<sbyte> src, byte offset)
             => vsll(src.AsByte(), offset).AsSByte();
 
-
         /// <summary>
         /// __m128i _mm_slli_epi16 (__m128i a, int immediate) PSLLW xmm, imm8
         /// Shifts each component of the source vector leftwards by a common number of bits

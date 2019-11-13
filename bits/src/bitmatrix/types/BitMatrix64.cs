@@ -28,6 +28,16 @@ namespace Z0
         public const uint Order = 64;
 
         /// <summary>
+        /// The number of bytes required to store the matrix
+        /// </summary>
+        public const uint ByteCount = Order * 8;
+
+        /// <summary>
+        /// The order representative
+        /// </summary>
+        public static N64 N => default;
+
+        /// <summary>
         /// Defines the 64x64 identity bitmatrix
         /// </summary>
         public static BitMatrix64 Identity => BitMatrix.identity(n64);
@@ -119,13 +129,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         BitMatrix64(Span<ulong> src)
-        {                        
-            this.data = src;
-        }
-
-
-        [MethodImpl(Inline)]
-        BitMatrix64(ulong[] src)
         {                        
             this.data = src;
         }
@@ -261,13 +264,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public void RowSwap(int i, int j)
             => data.Swap(i,j);
-
-        /// <summary>
-        /// Extracts the bits that comprise the matrix in row-major order
-        /// </summary>
-        [MethodImpl(Inline)]
-        public Span<byte> Unpack()
-            => Bytes.Unpack();
 
 
         [MethodImpl(Inline)] 

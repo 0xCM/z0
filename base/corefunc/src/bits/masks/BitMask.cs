@@ -34,6 +34,13 @@ namespace Z0
 
         }
 
+
+        public const uint Lsb32x8 = 1u | (1u << 8) | (1u << 16) | (1u << 24);
+
+        public const ulong Lsb64x8 = 1ul | (1ul << 8) | (1ul << 16) | (1ul << 24) | (1ul << 32) | (1ul << 40) | (1ul << 48) | (1ul << 56);
+
+        public const ulong Msb64x8 = 128ul | (128ul << 8) | (128ul << 16) | (128ul << 24) | (128ul << 32) | (128ul << 40) | (128ul << 48) | (128ul << 56);
+
         /// <summary>
         /// Enables a specified source bit
         /// </summary>

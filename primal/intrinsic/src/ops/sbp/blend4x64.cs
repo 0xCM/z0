@@ -17,8 +17,8 @@ namespace Z0
     partial class dinx
     {
         /// <summary>
-        /// Creates a target vector z from components chosen from two source vectors x and y 
-        /// as determined by the hi bit of each corresponding specifier component, z[i] = testbit(spec[i],63) ? x[i] : y[i]
+        /// Combines components from left/right vectors as determined by the hi bit of each corresponding specifier component
+        /// z[i] = testbit(spec[i],63) ? x[i] : y[i]
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
@@ -36,18 +36,6 @@ namespace Z0
         /// <param name="spec">The blend specification</param>
         [MethodImpl(Inline)]
         public static Vector256<ulong> vblend4x64(Vector256<ulong> x, Vector256<ulong> y, Vector256<ulong> spec)        
-            => BlendVariable(x, y, spec);
-
-        /// <summary>
-        /// __m256d _mm256_blendv_pd (__m256d a, __m256d b, __m256d mask)VBLENDVPD ymm, ymm, ymm/m256, ymm
-        /// Creates a target vector z from components chosen from two source vectors x and y 
-        /// as determined by the hi bit of each corresponding specifier component, z[i] = testbit(spec[i],63) ? x[i] : y[i]
-        /// </summary>
-        /// <param name="x">The left vector</param>
-        /// <param name="y">The right vector</param>
-        /// <param name="spec">The blend specification</param>
-        [MethodImpl(Inline)]
-        public static Vector256<double> vblend4x64(Vector256<double> x, Vector256<double> y, Vector256<double> spec)        
             => BlendVariable(x, y, spec);
     }
 

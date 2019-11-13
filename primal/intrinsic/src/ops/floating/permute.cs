@@ -44,12 +44,5 @@ namespace Z0
         public static Vector256<float> vperm8x32(Vector256<float> src, Vector256<int> spec)
             => PermuteVar8x32(src, spec);
 
-        [MethodImpl(Inline)]
-        public static Vector256<float> vreverse(Vector256<float> src)
-            => dfp.vperm8x32(src,MRev256f32);    
-
-        static Vector256<int> MRev256f32 
-            => dinx.vparts(n256, 7, 6, 5, 4, 3, 2, 1, 0);    
-
     }
 }

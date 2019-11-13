@@ -14,26 +14,26 @@ namespace Z0
     partial class dinx
     {
         /// <summary>
-        /// Rotates the full 128 bits of a vector leftward a bit-level resolution
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <param name="offset">The number of bits to rotate</param>
-        [MethodImpl(Inline)]
-        public static Vector128<ulong> vrotlx(Vector128<ulong> src, byte offset)
-        {
-            const byte seglen = 128;
-            var x = vsllx(src, offset);
-            var y = vsrlx(src, (byte)(seglen - offset));   
-            return vor(x,y);             
-        }
-
-        /// <summary>
         /// Rotates the full 128 bits of a vector rightward a bit-level resolution
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="offset">The number of bits to rotate</param>
         [MethodImpl(Inline)]
         public static Vector128<ulong> vrotrx(Vector128<ulong> src, byte offset)
+        {
+            const byte seglen = 128;
+            var x = vsrlx(src, offset);
+            var y = vsllx(src, (byte)(seglen - offset));   
+            return vor(x,y);             
+        }
+
+        /// <summary>
+        /// Rotates each 128 bit lane rightward a bit-level resolution
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="offset">The number of bits to rotate</param>
+        [MethodImpl(Inline)]
+        public static Vector256<ulong> vrotrx(Vector256<ulong> src, byte offset)
         {
             const byte seglen = 128;
             var x = vsrlx(src, offset);
@@ -137,5 +137,4 @@ namespace Z0
             return vshuf16x8(src, spec);
         }
     }
-
 }

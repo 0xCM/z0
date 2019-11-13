@@ -60,6 +60,12 @@ namespace Z0
             }
         }
 
+        /// <summary>
+        /// Extracts each bit from source and writes the state to a caller-supplied target
+        /// </summary>
+        /// <param name="src">The source values to be unpacked</param>
+        /// <param name="dst"></param>
+        /// <typeparam name="T">The source value type</typeparam>
         public static Span<bit> unpack<T>(Span<T> src, Span<bit> dst)
             where T : unmanaged
         {
@@ -67,11 +73,34 @@ namespace Z0
             var bitcount = bitsize<T>()*src.Length;
             require(dst.Length >= bitcount);
 
+            ref var target = ref head(dst);
             var k = 0;
             for(var i=0; i< src.Length; i++)
-            for(var j=0; j< srcsize; j++)
-                dst[k++]  = test(src[i], j);
+            for(var j=0; j< srcsize; j++, k++)
+                seek(ref target, k) = test(src[i], j);
             return dst;
         }
+
+        /// <summary>
+        /// Extracts each bit from source and writes the state to a caller-supplied target
+        /// </summary>
+        /// <param name="src">The source values to be unpacked</param>
+        /// <param name="dst"></param>
+        /// <typeparam name="T">The source value type</typeparam>
+        public static Span<bit> unpack<T>(Span<T> src, bit[] dst)
+            where T : unmanaged
+        {
+            var srcsize = bitsize<T>();
+            var bitcount = bitsize<T>()*src.Length;
+            require(dst.Length >= bitcount);
+
+            ref var target = ref head(dst);
+            var k = 0;
+            for(var i=0; i< src.Length; i++)
+            for(var j=0; j< srcsize; j++, k++)
+                seek(ref target, k) = test(src[i], j);
+            return dst;
+        }
+
     }
 }

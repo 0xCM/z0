@@ -114,9 +114,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static double between(double src, byte i0, byte i1)        
             => BitConverter.Int64BitsToDouble(between(BitConverter.DoubleToInt64Bits(src), i0, i1));
-
-
     }
-
 
 }

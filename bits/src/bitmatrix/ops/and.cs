@@ -191,6 +191,5 @@ namespace Z0
             var C = alloc<N,T>();
             return and(in A, in B, ref C);
         }
-
     }
 }

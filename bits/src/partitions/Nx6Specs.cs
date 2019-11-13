@@ -241,7 +241,7 @@ namespace Z0
         /// Partitions as 36-bit container into 6-bit segments
         /// </summary>
         [Flags]
-        public enum Part36x6 : uint
+        public enum Part36x6 : ulong
         {
             /// <summary>
             /// The total count of partitioned bits

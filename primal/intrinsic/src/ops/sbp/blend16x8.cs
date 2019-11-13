@@ -17,7 +17,7 @@ namespace Z0
     partial class dinx
     {
         /// <summary>
-        /// __m128i _mm_blendv_epi8 (__m128i a, __m128i b, __m128i mask)PBLENDVB xmm, xmm/m128, xmm
+        /// __m128i _mm_blendv_epi8 (__m128i a, __m128i b, __m128i mask) PBLENDVB xmm, xmm/m128, xmm
         /// Produces a new vector by assembling components from two source vectors as specified by a control vector
         /// </summary>
         /// <param name="x">The left vector</param>
@@ -37,8 +37,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<sbyte> vblend16x8(Vector128<sbyte> x, Vector128<sbyte> y, Vector128<sbyte> spec)        
             =>  BlendVariable(x, y, spec);
-
-
 
     }
 

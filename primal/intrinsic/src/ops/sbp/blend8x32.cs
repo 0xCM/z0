@@ -25,45 +25,8 @@ namespace Z0
         /// <param name="y">The right vector</param>
         /// <param name="spec">The blend specification</param>
         [MethodImpl(Inline)]
-        public static Vector256<int> vblend8x32(Vector256<int> x, Vector256<int> y, byte spec)        
-            => Blend(x, y, spec);
-
-        /// <summary>
-        ///  __m256i _mm256_blend_epi32 (__m256i a, __m256i b, const int imm8)VPBLENDD ymm,ymm, ymm/m256, imm8
-        /// Produces the target vector by assembling components from two source vectors as specified by a control mask,
-        /// dst[i] = testbit(control,i) ? x[i] : y[i]
-        /// </summary>
-        /// <param name="x">The left vector</param>
-        /// <param name="y">The right vector</param>
-        /// <param name="spec">The blend specification</param>
-        [MethodImpl(Inline)]
         public static Vector256<int> vblend8x32(Vector256<int> x, Vector256<int> y, Blend8x32 spec)        
             => Blend(x, y, (byte)spec);
-
-        /// <summary>
-        /// Creates a target vector z from components chosen from two source vectors x and y 
-        /// as determined by the hi bit of each corresponding specifier component,
-        /// z[i] = testbit(spec[i],7) ? x[i] : y[i]
-        /// </summary>
-        /// <param name="x">The left vector</param>
-        /// <param name="y">The right vector</param>
-        /// <param name="spec">The blend specification</param>
-        [MethodImpl(Inline)]
-        public static Vector256<int> vblend8x32(Vector256<int> x, Vector256<int> y, Vector256<int> spec)        
-            => BlendVariable(x, y, spec);
-
-        /// <summary>
-        /// __m256i _mm256_blend_epi32 (__m256i a, __m256i b, const int imm8) VPBLENDD ymm, ymm, ymm/m256, imm8
-        /// Produces the target vector by assembling components from two source vectors as specified by a control mask,
-        /// dst[i] = testbit(control,i) ? x[i] : y[i]
-        /// </summary>
-        /// <param name="x">The left vector</param>
-        /// <param name="y">The right vector</param>
-        /// <param name="spec">The blend specification</param>
-        /// <remarks>https://www.felixcloutier.com/x86/vpblendd</remarks>
-        [MethodImpl(Inline)]
-        public static Vector256<uint> vblend8x32(Vector256<uint> x, Vector256<uint> y, byte spec)        
-            => Blend(x, y, spec);
 
         /// <summary>
         /// __m256i _mm256_blend_epi32 (__m256i a, __m256i b, const int imm8) VPBLENDD ymm, ymm, ymm/m256, imm8
@@ -79,6 +42,42 @@ namespace Z0
             => Blend(x, y, (byte)spec);
 
         /// <summary>
+        /// __m256i _mm256_blendv_epi8 (__m256i a, __m256i b, __m256i mask)VPBLENDVB ymm,ymm, ymm/m256, ymm
+        /// </summary>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
+        /// <param name="spec">The blend specification</param>
+        [MethodImpl(Inline)]
+        public static Vector256<int> vblend8x32(Vector256<int> x, Vector256<int> y, Vector256<int> spec)        
+            => BlendVariable(x, y, spec);
+
+        /// <summary>
+        ///  __m256i _mm256_blend_epi32 (__m256i a, __m256i b, const int imm8)VPBLENDD ymm,ymm, ymm/m256, imm8
+        /// Produces the target vector by assembling components from two source vectors as specified by a control mask,
+        /// dst[i] = testbit(control,i) ? x[i] : y[i]
+        /// </summary>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
+        /// <param name="spec">The blend specification</param>
+        [MethodImpl(Inline)]
+        public static Vector256<int> vblend8x32(Vector256<int> x, Vector256<int> y, byte spec)        
+            => Blend(x, y, spec);
+
+        /// <summary>
+        /// __m256i _mm256_blend_epi32 (__m256i a, __m256i b, const int imm8) VPBLENDD ymm, ymm, ymm/m256, imm8
+        /// Produces the target vector by assembling components from two source vectors as specified by a control mask,
+        /// dst[i] = testbit(control,i) ? x[i] : y[i]
+        /// </summary>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
+        /// <param name="spec">The blend specification</param>
+        /// <remarks>https://www.felixcloutier.com/x86/vpblendd</remarks>
+        [MethodImpl(Inline)]
+        public static Vector256<uint> vblend8x32(Vector256<uint> x, Vector256<uint> y, byte spec)        
+            => Blend(x, y, spec);
+
+        /// <summary>
+        /// __m256i _mm256_blendv_epi8 (__m256i a, __m256i b, __m256i mask)VPBLENDVB ymm,
         /// Creates a target vector z from components chosen from two source vectors x and y 
         /// as determined by the hi bit of each corresponding specifier component,
         /// z[i] = testbit(spec[i],7) ? x[i] : y[i]
@@ -90,17 +89,6 @@ namespace Z0
         public static Vector256<uint> vblend8x32(Vector256<uint> x, Vector256<uint> y, Vector256<uint> spec)        
             => BlendVariable(x, y, spec);
 
-        /// <summary>
-        /// __m256 _mm256_blendv_ps (__m256 a, __m256 b, __m256 mask) VBLENDVPS ymm, ymm, ymm/m256, ymm
-        /// Creates a target vector z from components chosen from two source vectors x and y 
-        /// as determined by the hi bit of each corresponding specifier component, z[i] = testbit(spec[i],31) ? x[i] : y[i]
-        /// </summary>
-        /// <param name="x">The left vector</param>
-        /// <param name="y">The right vector</param>
-        /// <param name="spec">The blend specification</param>
-        [MethodImpl(Inline)]
-        public static Vector256<float> vblend8x32(Vector256<float> x, Vector256<float> y, Vector256<float> spec)        
-            => BlendVariable(x, y, spec);
     }
 
     /// <summary>

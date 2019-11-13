@@ -27,14 +27,28 @@ namespace Z0
         /// Counts the number of enabled bits in the matrix
         /// </summary>
         [MethodImpl(Inline)] 
+        public static uint pop(in BitMatrix16 A)
+        {
+            ref readonly var src = ref head(A.Data.AsUInt64());
+            var count = 0u;
+            count += Bits.pop(skip(in src, 0));
+            count += Bits.pop(skip(in src, 1));
+            count += Bits.pop(skip(in src, 2));
+            count += Bits.pop(skip(in src, 3));
+            return count;            
+        }
+
+        /// <summary>
+        /// Counts the number of enabled bits in the matrix
+        /// </summary>
+        [MethodImpl(Inline)] 
         public static uint pop(in BitMatrix32 A)
         {
-            const int N = 32;
+            const uint bytes = BitMatrix32.Order * 3;
+            
+            ref readonly var src = ref head(A.Data.AsUInt64());
             var count = 0u;
-            ref var src = ref A.Head;
-            for(var i=0; i < N; i++)
-                count += Bits.pop(skip(in src, i));
-            return count;
+            return count;            
         }
 
         /// <summary>
@@ -50,7 +64,6 @@ namespace Z0
                 count += Bits.pop(skip(in src, i));
             return count;
         }
-
     }
 
 }

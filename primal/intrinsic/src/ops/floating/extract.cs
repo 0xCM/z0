@@ -46,5 +46,24 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vec128<double> vextract(Vector256<double> src, byte pos)
             => ExtractVector128(src, pos);
+
+        /// <summary>
+        /// Extracts the value of an identified source vector component
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="pos">The zero-based index of the source component to extract</param>
+        [MethodImpl(Inline)]
+        public static float vxscalar(Vector128<float> src, byte pos)
+            => Extract(src,pos);
+
+        /// <summary>
+        /// Extracts the value of an identified source vector component
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="pos">The zero-based index of the source component to extract</param>
+        [MethodImpl(Inline)]
+        public static double vxscalar(Vector128<double> src, byte pos)
+            => src.GetElement(pos);
+
     }
 }

@@ -14,7 +14,6 @@ namespace Z0
 
     partial class ginx
     {
-
         /// <summary>
         /// Swaps hi/lo 64 bit segments of the source vector
         /// </summary>
@@ -25,6 +24,14 @@ namespace Z0
             where T : unmanaged
                 => generic<T>(dinx.vswaphl(x.AsUInt64()));        
 
+        /// <summary>
+        /// Swaps hi/lo 128-bit lanes of the source vector
+        /// </summary>
+        /// <param name="x">The source vector</param>
+        /// <typeparam name="T">The primal component type</typeparam>
+        [MethodImpl(Inline)]
+        public static Vector256<T> vswaphl<T>(Vector256<T> x)
+            where T : unmanaged
+                => vperm2x128(x,x,Perm2x128.AD);
     }
-
 }

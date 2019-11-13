@@ -57,6 +57,19 @@ namespace Z0
         }
 
         /// <summary>
+        /// Computes the logical Xnor between two bitmatrices and returns the allocated result to the caller
+        /// </summary>
+        /// <param name="A">The left matrix</param>
+        /// <param name="B">The right matrix</param>
+        [MethodImpl(Inline)]
+        public static BitMatrix4 xnor(in BitMatrix4 A, in BitMatrix4 B)
+        {
+            var a = (ushort)A;
+            var b = (ushort)B;
+            return math.xnor(a,b);
+        }
+
+        /// <summary>
         /// Computes the converse implication for primal bitmatrices, returning the allocated result
         /// </summary>
         /// <param name="A">The left matrix</param>

@@ -24,7 +24,7 @@ partial class zfunc
     /// <summary>
     /// Adds an offset to a reference, measured relative to the reference type
     /// </summary>
-    /// <param name="src">The soruce reference</param>
+    /// <param name="src">The source reference</param>
     /// <param name="bytes">The number of elements to advance</param>
     /// <typeparam name="T">The element type</typeparam>
     [MethodImpl(Inline)]
@@ -33,36 +33,79 @@ partial class zfunc
             => ref Unsafe.Add(ref src, count);
 
     /// <summary>
+    /// Adds an offset to the head of a span, measured relative to the reference type
+    /// </summary>
+    /// <param name="src">The source span</param>
+    /// <param name="bytes">The number of elements to advance</param>
+    /// <typeparam name="T">The element type</typeparam>
+    [MethodImpl(Inline)]
+    public static ref T seek<T>(Span<T> src, int count)
+        where T : unmanaged
+            => ref seek(ref head(src), count);
+
+    /// <summary>
     /// Adds an offset to a reference, measured in bytes
     /// </summary>
     /// <param name="src">The soruce reference</param>
-    /// <param name="bytes">The number of bytes to add</param>
+    /// <param name="count">The number of bytes to add</param>
     /// <typeparam name="T">The element type</typeparam>
     [MethodImpl(Inline)]
-    public static ref T seekb<T>(ref T src, long bytes)
+    public static ref T seekb<T>(ref T src, long count)
         where T : unmanaged
-            => ref Unsafe.AddByteOffset(ref src, intptr(bytes));
+            => ref Unsafe.AddByteOffset(ref src, intptr(count));
 
     /// <summary>
-    /// Returns an readonly reference to a memory location, following a specified number of elements
+    /// Adds an offset to the head of a span, measured in bytes
+    /// </summary>
+    /// <param name="src">The soruce reference</param>
+    /// <param name="count">The number of bytes to add</param>
+    /// <typeparam name="T">The element type</typeparam>
+    [MethodImpl(Inline)]
+    public static ref T seekb<T>(Span<T> src, long count)
+        where T : unmanaged
+            => ref seekb(ref head(src), count);
+
+    /// <summary>
+    /// Returns an readonly reference to a memory location following a specified number of elements
     /// </summary>
     /// <param name="src">The source reference</param>
-    /// <param name="elements">The number of elements to skip</param>
+    /// <param name="count">The number of elements to skip</param>
     /// <typeparam name="T">The source element type</typeparam>
     [MethodImpl(Inline)]
-    public static ref readonly T skip<T>(in T src, int elements)
+    public static ref readonly T skip<T>(in T src, int count)
         where T : unmanaged
-            => ref Unsafe.Add(ref As.asRef(in src), elements);
+            => ref Unsafe.Add(ref As.asRef(in src), count);
+
+    /// <summary>
+    /// Returns an readonly reference to a memory location following a specified number of elements
+    /// </summary>
+    /// <param name="src">The source span</param>
+    /// <param name="count">The number of elements to skip</param>
+    /// <typeparam name="T">The source element type</typeparam>
+    [MethodImpl(Inline)]
+    public static ref readonly T skip<T>(ReadOnlySpan<T> src, int count)
+        where T : unmanaged
+            => ref skip(in head(src), count);
 
     /// <summary>
     /// Returns an readonly reference to a memory location, following a specified number of bytes
     /// </summary>
     /// <param name="src">The source reference</param>
-    /// <param name="bytes">The number of elements to skip</param>
+    /// <param name="count">The number of elements to skip</param>
     /// <typeparam name="T">The source element type</typeparam>
     [MethodImpl(Inline)]
-    public static ref readonly T skipb<T>(in T src, long bytes)
+    public static ref readonly T skipb<T>(in T src, long count)
         where T : unmanaged
-            => ref Unsafe.Add(ref As.asRef(in src), intptr(bytes));
+            => ref Unsafe.Add(ref As.asRef(in src), intptr(count));
 
+    /// <summary>
+    /// Returns an readonly reference to a memory location, following a specified number of bytes
+    /// </summary>
+    /// <param name="src">The source reference</param>
+    /// <param name="count">The number of elements to skip</param>
+    /// <typeparam name="T">The source element type</typeparam>
+    [MethodImpl(Inline)]
+    public static ref readonly T skipb<T>(ReadOnlySpan<T> src, long count)
+        where T : unmanaged
+            => ref skipb(in head(src), count);
 }

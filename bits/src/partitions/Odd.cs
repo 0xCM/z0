@@ -6,46 +6,83 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Runtime.InteropServices;
     using System.Runtime.Intrinsics.X86;
     using Z0;
  
     using static zfunc;
+    using static Bits;
 
-    partial class BitMasks
+    partial class BitParts
     {        
         /// <summary>
-        /// Identifies the even bits in a nibble
+        /// Replicates identified odd bits of an 8-bit source to the low bits of an 8-bit target 
         /// </summary>
-        [Flags]
-        public enum Odd4x1 : byte
-        {
-            /// <summary>
-            /// Identifies the first even bit
-            /// </summary>
-            Bit1 = 1,
-            
-            /// <summary>
-            /// Identifies the second even bit
-            /// </summary>
-            Bit4 = Bit1 << 2,
-                                                
-            /// <summary>
-            /// Selects the odd bits in a nibble
-            /// </summary>
-            Select = Bit1 |  Bit4
-        }
-
+        /// <param name="src">The bit source</param>
+        /// <param name="parts">The bit selection</param>
+        [MethodImpl(Inline)]
+        public static byte select(byte src, Odd8 parts)
+            => select(src, (byte)parts);
 
         /// <summary>
-        /// Identifies the odd bits in a byte
+        /// Replicates identified odd bits of a 16-bit source to the low bits of a 16-bit target 
+        /// </summary>
+        /// <param name="src">The bit source</param>
+        /// <param name="parts">The bit selection</param>
+        [MethodImpl(Inline)]
+        public static ushort select(ushort src, Odd16 parts)
+            => select(src, (ushort)parts);
+
+        /// <summary>
+        /// Replicates identified odd bits of a 32-bit source to the low bits of a 32-bit target 
+        /// </summary>
+        /// <param name="src">The bit source</param>
+        /// <param name="parts">The bit selection</param>
+        [MethodImpl(Inline)]
+        public static uint select(uint src, Odd32 parts)
+            => select(src, (uint)parts);
+
+        /// <summary>
+        /// Replicates identified odd bits of a 64-bit source to the low bits of a 64-bit target 
+        /// </summary>
+        /// <param name="src">The bit source</param>
+        /// <param name="parts">The bit selection</param>
+        [MethodImpl(Inline)]
+        public static ulong select(ulong src, Odd64 parts)
+            => select(src, (ulong)parts);
+
+        /// <summary>
+        /// Identifies the odd bits in a 4-bit sgement
         /// </summary>
         [Flags]
-        public enum Odd8x1 : byte
+        public enum Odd4 : byte
         {
             /// <summary>
             /// Identifies the bit at position 1
             /// </summary>
-            Bit1 = 1,
+            Bit1 = 0b10,
+            
+            /// <summary>
+            /// Identifies the bit at position 3
+            /// </summary>
+            Bit3 = Bit1 << 2,
+                                                
+            /// <summary>
+            /// Selects all odd bits from the segment
+            /// </summary>
+            Select = Bit1 |  Bit3
+        }
+
+        /// <summary>
+        /// Identifies the odd bits in an 8-bit segment at bit-level granularity
+        /// </summary>
+        [Flags]
+        public enum Odd8 : byte
+        {
+            /// <summary>
+            /// Identifies the bit at position 1
+            /// </summary>
+            Bit1 = 0b10,
             
             /// <summary>
             /// Identifies the bit at position 3
@@ -63,7 +100,7 @@ namespace Z0
             Bit7 = Bit5 << 2,
             
             /// <summary>
-            /// Selects the odd bits in the byte
+            /// Selects all odd bits from the segment
             /// </summary>
             Select = Bit1 |  Bit3 |  Bit5 |  Bit7
 
@@ -73,12 +110,12 @@ namespace Z0
         /// Identifies odd bits in a 16-bit segment
         /// </summary>
         [Flags]
-        public enum Odd16x8 : ushort
+        public enum Odd16 : ushort
         {
             /// <summary>
             /// Identifies the odd bits in the first byte
             /// </summary>
-            Byte0 = Odd8x1.Select,
+            Byte0 = Odd8.Select,
             
             /// <summary>
             /// Identifies the odd bits in the second byte
@@ -95,12 +132,12 @@ namespace Z0
         /// Identifies odd bits in a 32-bit segment
         /// </summary>
         [Flags]
-        public enum Odd32x8 : uint
+        public enum Odd32 : uint
         {
             /// <summary>
             /// Identifies the odd bits in the first byte
             /// </summary>
-            Byte0 = Odd8x1.Select,
+            Byte0 = Odd8.Select,
             
             /// <summary>
             /// Identifies the odd bits in the second byte
@@ -127,12 +164,12 @@ namespace Z0
         /// Identifies odd bits in a 64-bit segment
         /// </summary>
         [Flags]
-        public enum Odd64x8 : ulong
+        public enum Odd64 : ulong
         {
             /// <summary>
             /// Identifies the odd bits in the first byte
             /// </summary>
-            Byte0 = Odd8x1.Select,
+            Byte0 = Odd8.Select,
             
             /// <summary>
             /// Identifies the odd bits in the second byte
@@ -170,12 +207,10 @@ namespace Z0
             Byte7 = Byte6 << 8,
 
             /// <summary>
-            /// Selects the od bits in a 64-bit segment
+            /// Selects the odd bits in a 64-bit segment
             /// </summary>
             Select = Byte0 | Byte1 | Byte2 | Byte3 | Byte4 | Byte5 | Byte6 | Byte7
         }
 
-
     }
-
 }

@@ -10,9 +10,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static zfunc;
-    using static nfunc;
     
-    public class tbm_and : BitMatrixTest<tbm_and>
+    public class t_bm_and : BitMatrixTest<t_bm_and>
     {
         protected override int CycleCount => Pow2.T10;
 

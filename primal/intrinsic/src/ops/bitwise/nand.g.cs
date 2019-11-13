@@ -50,7 +50,6 @@ namespace Z0
                 return vnand_256f(x,y);
         }
 
-
         [MethodImpl(Inline)]
         static Vector128<T> vnand_128u<T>(Vector128<T> x, Vector128<T> y)
             where T : unmanaged
@@ -64,8 +63,6 @@ namespace Z0
             else
                 return generic<T>(dinx.vnand(uint64(x), uint64(y)));
         }
-
-
 
         [MethodImpl(Inline)]
         static Vector128<T> vnand_128i<T>(Vector128<T> x, Vector128<T> y)

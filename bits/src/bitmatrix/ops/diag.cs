@@ -9,6 +9,7 @@ namespace Z0
 
     using static zfunc;
     using static As;
+    using static BitParts;
 
     partial class BitMatrix
     {
@@ -27,17 +28,15 @@ namespace Z0
             return dst;                    
         }
 
-        /// <summary>
-        /// Extracts the diagonal from a primal bitmatrix
-        /// </summary>
-        /// <param name="A">The source matrix</param>
+        [MethodImpl(Inline)]
+        public static BitVector4 diagonal(in BitMatrix4 A)                    
+            => (byte)Bits.gather((uint)A, 0b1000_0100_0010_0001);
+        
+        [MethodImpl(Inline)]
         public static BitVector8 diagonal(in BitMatrix8 A)
         {
-            const uint N = 8;            
-            var dst = (byte)0;
-            for(byte i=0; i < N; i++)
-                gbits.set(ref dst, i,A[i,i]);
-            return dst;                    
+            const ulong mask = 0b10000000_01000000_00100000_00010000_00001000_00000100_00000010_00000001ul;
+            return (byte)Bits.gather((ulong)A, mask);
         }
 
         /// <summary>

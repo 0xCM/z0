@@ -151,7 +151,7 @@ partial class zfunc
             => dst = MemoryMarshal.Cast<S,T>(src);
 
     /// <summary>
-    /// Constructs a span from an array
+    /// Constructs a span from a parameter array
     /// </summary>
     /// <param name="src">The source array</param>
     /// <typeparam name="T">The element type</typeparam>

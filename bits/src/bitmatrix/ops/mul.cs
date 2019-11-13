@@ -59,13 +59,46 @@ namespace Z0
         }
 
         /// <summary>
+        /// Multiplies two primal bitmatrices of order 4, writing the result to a caller-supplied target
+        /// </summary>
+        /// <param name="A">The left matrix</param>
+        /// <param name="B">The right matrix</param>
+        public static ref BitMatrix4 mul(in BitMatrix4 A, in BitMatrix4 B, ref BitMatrix4 Z)
+        {
+            var n = BitMatrix4.Order;
+            var C = transpose(A);
+            for(var i=0; i < n; i++)
+            {
+                var row = A.RowVector(i);
+                for(var j = 0; j< n; j++)
+                {
+                    var col = C.RowVector(j);
+                    Z[i,j] = row % col;
+                }
+            }
+
+            return ref Z;
+        }
+
+        /// <summary>
+        /// Multiplies two primal bitmatrices of order 8, returning the allocated result
+        /// </summary>
+        /// <param name="A">The left matrix</param>
+        /// <param name="B">The right matrix</param>
+        public static BitMatrix4 mul(in BitMatrix4 A, in BitMatrix4 B)
+        {
+            var Z = alloc(n4);
+            return mul(A,B, ref Z);
+        }
+        
+        /// <summary>
         /// Multiplies two primal bitmatrices of order 8, writing the result to a caller-supplied target
         /// </summary>
         /// <param name="A">The left matrix</param>
         /// <param name="B">The right matrix</param>
         public static ref BitMatrix8 mul(in BitMatrix8 A, in BitMatrix8 B, ref BitMatrix8 Z)
         {
-            var n = BitMatrix8.N;
+            var n = BitMatrix8.Order;
             var C = BitMatrix.transpose(B);
             for(var i=0; i< n; i++)
             {

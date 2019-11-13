@@ -15,7 +15,6 @@ namespace Z0
     
     partial class ginx
     {
-
         [MethodImpl(Inline)]
         public static Vector128<T> vsll<T>(Vector128<T> x, byte offset)
             where T : unmanaged
@@ -51,33 +50,6 @@ namespace Z0
             else
                 throw unsupported<T>();
         }
-
-        [MethodImpl(Inline)]
-        public static unsafe Vector128<T> vsll<T>(N128 n, in T pX, byte offset)
-            where T : unmanaged
-        {                    
-            vload(pX, out Vector128<T> vA);
-            return vsll(vA,offset);
-        }
-
-        [MethodImpl(Inline)]
-        public static unsafe void vsll<T>(N128 n, in T pX, byte offset, ref T pDst)
-            where T : unmanaged
-                => vstore(vsll(n, in pX, offset), ref pDst);
-
-
-        [MethodImpl(Inline)]
-        public static unsafe Vector256<T> vsll<T>(N256 n, in T pX, byte offset)
-            where T : unmanaged
-        {                    
-            vload(pX, out Vector256<T> vA);
-            return vsll(vA,offset);
-        }
-
-        [MethodImpl(Inline)]
-        public static unsafe void vsll<T>(N256 n, in T pX, byte offset, ref T pDst)
-            where T : unmanaged
-                => vstore(vsll(n,in pX, offset), ref pDst);
  
         [MethodImpl(Inline)]
         static Vector128<T> vsll_i<T>(Vector128<T> x, byte offset)
@@ -93,7 +65,6 @@ namespace Z0
                 return generic<T>(dinx.vsll(int64(x), offset));            
         }
 
-
         [MethodImpl(Inline)]
         static Vector128<T> vsll_u<T>(Vector128<T> x, byte offset)
             where T : unmanaged
@@ -108,8 +79,6 @@ namespace Z0
                 return generic<T>(dinx.vsll(uint64(x), offset));
         }
 
-
- 
         [MethodImpl(Inline)]
         static Vector256<T> vsll_i<T>(Vector256<T> x, byte offset)
             where T : unmanaged

@@ -99,5 +99,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ulong vxscalar(Vector128<ulong> src, byte pos)
             => Extract(src, pos);
+
     }
 }

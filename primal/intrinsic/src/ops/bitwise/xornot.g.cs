@@ -99,12 +99,12 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static unsafe void vxornot<T>(N128 n, in T a, in T b, ref T z)
+        public static void vxornot<T>(N128 n, in T a, in T b, ref T z)
             where T : unmanaged
                 => vstore(vxornot(n, in a, in b), ref z);
 
         [MethodImpl(Inline)]
-        public static unsafe void vxornot<T>(N256 n, in T a, in T b, ref T z)
+        public static void vxornot<T>(N256 n, in T a, in T b, ref T z)
             where T : unmanaged
                 => vstore(vxornot(n, in a, in b), ref z);
  

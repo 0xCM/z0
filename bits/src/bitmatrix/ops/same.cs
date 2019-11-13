@@ -26,6 +26,15 @@ namespace Z0
             BitBlocks.xnor(in A.Head,in B.Head, ref Z.Head);
             return BitBlocks.testc(in Z.Head);
         }
+        
+        /// <summary>
+        /// Determines whether two primal bitmatrices are identical, returning an enabled bit if so and a disabled bit otherwise
+        /// </summary>
+        /// <param name="A">The left matrix</param>
+        /// <param name="B">The right matrix</param>
+        [MethodImpl(Inline)]
+        public static bit same(BitMatrix4 A, BitMatrix4 B)
+            => (ushort)A == (ushort)B;
 
         /// <summary>
         /// Determines whether two primal bitmatrices are identical, returning an enabled bit if so and a disabled bit otherwise

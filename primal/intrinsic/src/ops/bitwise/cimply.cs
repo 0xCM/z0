@@ -18,7 +18,6 @@ namespace Z0
     
     public static partial class dinx
     {                
-
         /// <summary>
         /// Computes the converse implication, equivalent to the bitwise expression ~x | y for vectors x and y
         /// </summary>

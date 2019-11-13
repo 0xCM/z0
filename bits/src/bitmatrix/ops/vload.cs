@@ -46,7 +46,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<ulong> vload(in BitMatrix64 A, int offset) 
             => ginx.vload(n256,A.Data.Slice(offset));
-
     }
 
 }

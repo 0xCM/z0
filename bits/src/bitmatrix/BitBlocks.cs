@@ -259,18 +259,18 @@ namespace Z0
         static void cnotimply(in byte rA, in byte rB, ref byte rDst)
             => content(math.cnotimply(content(rA), content(rB)), ref rDst);
  
-         [MethodImpl(Inline)]
-        public static void xornot<T>(in T rA, in T rB, ref T rDst)
+        [MethodImpl(Inline)]
+        public static void xornot<T>(in T a, in T b, ref T z)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-               xornot(in uint8(in rA), in uint8(in rB), ref uint8(ref rDst));
+               xornot(in uint8(in a), in uint8(in b), ref uint8(ref z));
             else if(typeof(T) == typeof(ushort))
-               xornot(in uint16(in rA), in uint16(in rB), ref uint16(ref rDst));
+               xornot(in uint16(in a), in uint16(in b), ref uint16(ref z));
             else if(typeof(T) == typeof(uint))
-               xornot(in uint32(in rA), in uint32(in rB), ref uint32(ref rDst));
+               xornot(in uint32(in a), in uint32(in b), ref uint32(ref z));
             else if(typeof(T) == typeof(ulong))
-               xornot(in uint64(in rA), in uint64(in rB), ref uint64(ref rDst));
+               xornot(in uint64(in a), in uint64(in b), ref uint64(ref z));
             else
                 throw unsupported<T>();
         }

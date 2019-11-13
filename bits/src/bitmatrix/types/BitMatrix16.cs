@@ -34,6 +34,10 @@ namespace Z0
         /// </summary>
         public const uint Order = 16;
 
+        /// <summary>
+        /// The number of bytes required to store the matrix
+        /// </summary>
+        public const uint ByteCount = Order * 2;
                                 
         /// <summary>
         /// Defines the 16x16 identity bitmatrix
@@ -119,15 +123,15 @@ namespace Z0
         public static bool operator !=(BitMatrix16 A, BitMatrix16 B)
             => !A.Equals(B);
 
-        BitMatrix16(ushort[] src)
-        {                        
-            this.data = src;
-        }
+        // BitMatrix16(ushort[] src)
+        // {                        
+        //     this.data = src;
+        // }
 
         [MethodImpl(Inline)]
         BitMatrix16(Span<ushort> src)
         {                        
-            this.data = src.ToArray();
+            this.data = src;
         }
 
         BitMatrix16(bit fill)

@@ -16,7 +16,7 @@ namespace Z0
     /// </summary>
     static class Part64
     {        
-        const ulong MLsb8 = (ulong)BitMask64.Lsb8;
+        const ulong MLsb8 = (ulong)BitMask.Lsb64x8;
 
         [MethodImpl(Inline)]
         public static void pack8x1(in byte src, ref ulong dst)

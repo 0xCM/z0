@@ -35,6 +35,11 @@ namespace Z0
         public const uint Order = 32;
 
         /// <summary>
+        /// The number of bytes required to store the matrix
+        /// </summary>
+        public const uint ByteCount = Order * 4;
+
+        /// <summary>
         /// Defines the 32x32 identity bitmatrix
         /// </summary>
         public static BitMatrix32 Identity => BitMatrix.identity(n32);
@@ -73,7 +78,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static BitMatrix32 From(BitMatrix<N32,uint> src)        
-            => new BitMatrix32(src);
+            => new BitMatrix32(src.Data);
 
         [MethodImpl(Inline)]
         public static BitMatrix32 From(Span<uint> src)        
@@ -124,18 +129,6 @@ namespace Z0
         {                        
             this.data = src;
         }        
-
-        [MethodImpl(Inline)]
-        BitMatrix32(uint[] src)
-        {                        
-            this.data = src;
-        }        
-
-        [MethodImpl(Inline)]
-        BitMatrix32(BitMatrix<N32,uint> src)
-        {
-            this.data = src.Data;
-        }
 
         [MethodImpl(Inline)]
         BitMatrix32(bit fill)

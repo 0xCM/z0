@@ -10,9 +10,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static zfunc;
-    #pragma warning disable 1718
 
-    public class tbm_create : BitMatrixTest<tbm_create>
+    public class t_bm_create : BitMatrixTest<t_bm_create>
     {
         public void permrev_8x8()
         {

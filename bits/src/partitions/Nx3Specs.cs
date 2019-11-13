@@ -37,12 +37,12 @@ namespace Z0
             Count = Length/Width,
 
             /// <summary>
-            /// Identifies the first 3-bit group
+            /// Identifies partition 0/1
             /// </summary>
             Part0 = Part3x1.Select,
 
             /// <summary>
-            /// Identifies the second 3-bit group
+            /// Identifies partition 1/1
             /// </summary>
             Part1 = Part0 << (int)Width,
 
@@ -56,13 +56,11 @@ namespace Z0
             /// </summary>
             Last = Part1,
 
-
             /// <summary>
             /// Selects all container bits
             /// </summary>
             Select = Part0 | Part1
         }
-
 
         /// <summary>
         /// Partitions a 9-bit container into 3-bit segments
@@ -86,17 +84,17 @@ namespace Z0
             Count = Length/Width,
 
             /// <summary>
-            /// Identifies the first 3-bit group
+            /// Identifies partition 0/2
             /// </summary>
             Part0 = Part3x1.Select,
 
             /// <summary>
-            /// Identifies the second 3-bit group
+            /// Identifies partition 1/2
             /// </summary>
             Part1 = Part0 << (int)Width,
 
             /// <summary>
-            /// Identifies the third 3-bit group
+            /// Identifies partition 2/2
             /// </summary>
             Part2 = Part1 << (int)Width,
 
@@ -109,7 +107,6 @@ namespace Z0
             /// Identifies the last partition
             /// </summary>
             Last = Part2,
-
 
             /// <summary>
             /// Selects all container bits
@@ -140,22 +137,22 @@ namespace Z0
             Count = Length/Width,
 
             /// <summary>
-            /// Identifies the first 3-bit group
+            /// Identifies partition 0/3
             /// </summary>
             Part0 = Part3x1.Select,
 
             /// <summary>
-            /// Identifies the second 3-bit group
+            /// Identifies partition 1/3
             /// </summary>
             Part1 = Part0 << (int)Width,
 
             /// <summary>
-            /// Identifies the third 3-bit group
+            /// Identifies partition 2/3
             /// </summary>
             Part2 = Part1 << (int)Width,
 
             /// <summary>
-            /// Identifies the fourth 3-bit group
+            /// Identifies partition 3/3
             /// </summary>
             Part3 = Part2 << (int)Width,
 
@@ -174,7 +171,6 @@ namespace Z0
             /// </summary>
             Select = Part0 | Part1 | Part2 | Part3
         }
-
 
         /// <summary>
         /// Partitions a 15-bit container into 3-bit segments
@@ -198,27 +194,27 @@ namespace Z0
             Count = Length/Width,
 
             /// <summary>
-            /// Specifies partition 1
+            /// Identifies partition 0/4
             /// </summary>
             Part0 = Part3x1.Select,
 
             /// <summary>
-            /// Specifies partition 2
+            /// Identifies partition 1/4
             /// </summary>
             Part1 = Part0 << (int)Width,
 
             /// <summary>
-            /// Specifies partition 3
+            /// Identifies partition 2/4
             /// </summary>
             Part2 = Part1 << (int)Width,
 
             /// <summary>
-            /// Specifies partition 4
+            /// Identifies partition 3/4
             /// </summary>
             Part3 = Part2 << (int)Width,
 
             /// <summary>
-            /// Specifies partition 5
+            /// Identifies partition 4/4
             /// </summary>
             Part4 = Part3 << (int)Width,
 
@@ -260,32 +256,32 @@ namespace Z0
             Count = Length/Width,
 
             /// <summary>
-            /// Identifies the first 3-bit group
+            /// Identifies partition 0/5
             /// </summary>
             Part0 = Part3x1.Select,
 
             /// <summary>
-            /// Identifies the second 3-bit group
+            /// Identifies partition 1/5
             /// </summary>
             Part1 = Part0 << (int)Width,
 
             /// <summary>
-            /// Identifies the third 3-bit group
+            /// Identifies partition 2/5
             /// </summary>
             Part2 = Part1 << (int)Width,
 
             /// <summary>
-            /// Identifies the fourth 3-bit group
+            /// Identifies partition 3/5
             /// </summary>
             Part3 = Part2 << (int)Width,
 
             /// <summary>
-            /// Identifies the fifth 3-bit group
+            /// Identifies partition 4/5
             /// </summary>
             Part4 = Part3 << (int)Width,
 
             /// <summary>
-            /// Identifies the sixth 3-bit group
+            /// Identifies partition 5/5
             /// </summary>
             Part5 = Part4 << (int)Width,
 
@@ -327,37 +323,37 @@ namespace Z0
             Count = Length/Width,
 
             /// <summary>
-            /// Identifies the first 3-bit group
+            /// Identifies partition 0/6
             /// </summary>
             Part0 = Part3x1.Select,
 
             /// <summary>
-            /// Identifies the second 3-bit group
+            /// Identifies partition 1/6
             /// </summary>
             Part1 = Part0 << (int)Width,
 
             /// <summary>
-            /// Identifies the third 3-bit group
+            /// Identifies partition 2/6
             /// </summary>
             Part2 = Part1 << (int)Width,
 
             /// <summary>
-            /// Identifies the fourth 3-bit group
+            /// Identifies partition 3/6
             /// </summary>
             Part3 = Part2 << (int)Width,
 
             /// <summary>
-            /// Identifies the fifth 3-bit group
+            /// Identifies partition 4/6
             /// </summary>
             Part4 = Part3 << (int)Width,
 
             /// <summary>
-            /// Identifies the sixth 3-bit group
+            /// Identifies partition 5/6
             /// </summary>
             Part5 = Part4 << (int)Width,
 
             /// <summary>
-            /// Identifies the seventh 3-bit group
+            /// Identifies partition 6/6
             /// </summary>
             Part6 = Part5 << (int)Width,
 
@@ -399,42 +395,42 @@ namespace Z0
             Count = Length/Width,
 
             /// <summary>
-            /// Specifies partition 1
+            /// Identifies partition 0/7
             /// </summary>
             Part0 = Part3x1.Select,
 
             /// <summary>
-            /// Specifies partition 2
+            /// Identifies partition 1/7
             /// </summary>
             Part1 = Part0 << (int)Width,
 
             /// <summary>
-            /// Specifies partition 3
+            /// Identifies partition 2/7
             /// </summary>
             Part2 = Part1 << (int)Width,
 
             /// <summary>
-            /// Specifies partition 4
+            /// Identifies partition 3/7
             /// </summary>
             Part3 = Part2 << (int)Width,
 
             /// <summary>
-            /// Specifies partition 5
+            /// Identifies partition 4/7
             /// </summary>
             Part4 = Part3 << (int)Width,
 
             /// <summary>
-            /// Specifies partition 6
+            /// Identifies partition 5/7
             /// </summary>
             Part5 = Part4 << (int)Width,
 
             /// <summary>
-            /// Specifies partition 7
+            /// Identifies partition 6/7
             /// </summary>
             Part6 = Part5 << (int)Width,
 
             /// <summary>
-            /// Specifies partition 8
+            /// Identifies partition 7/7
             /// </summary>
             Part7 = Part6 << (int)Width,
 
@@ -814,8 +810,6 @@ namespace Z0
             Select = Part0 | Part1 | Part2 | Part3 | Part4 | Part5 | Part6 | Part7 | Part8 | Part9 | Part10 | Part11,
         }
 
-
- 
     }
 
 }

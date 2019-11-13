@@ -39,8 +39,5 @@ namespace Z0
         public static Vector256<T> vselect<T>(Vector256<T> x, Vector256<T> y, Vector256<T> z)
             where T : unmanaged
                 => vor(vand(x,y), vnotimply(x,z));
-
-
     }
-
 }

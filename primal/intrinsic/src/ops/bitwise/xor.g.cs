@@ -90,7 +90,6 @@ namespace Z0
                 throw unsupported<T>();
         }
 
-
         [MethodImpl(Inline)]
         static Vector256<T> vxor_256u<T>(Vector256<T> x, Vector256<T> y)
             where T : unmanaged

@@ -16,10 +16,9 @@ namespace Z0
 
     partial class dinx
     {
-
         /// <summary>
         /// __m128i _mm_blend_epi32 (__m128i a, __m128i b, const int imm8) VPBLENDD xmm, xmm, xmm/m128, imm8
-        /// Produces a new vector by assembling components from two source vectors as specified by a control mask
+        /// Combines components from left/right vectors per the blend spec
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
@@ -30,18 +29,7 @@ namespace Z0
 
         /// <summary>
         /// __m128i _mm_blend_epi32 (__m128i a, __m128i b, const int imm8) VPBLENDD xmm, xmm, xmm/m128, imm8
-        /// Produces a new vector by assembling components from two source vectors as specified by a control mask
-        /// </summary>
-        /// <param name="x">The left vector</param>
-        /// <param name="y">The right vector</param>
-        /// <param name="spec">The blend specification</param>
-        [MethodImpl(Inline)]
-        public static Vector128<int> vblend4x32(Vector128<int> x, Vector128<int> y, byte spec)        
-            => Blend(x, y, (byte)spec);
-
-        /// <summary>
-        /// __m128i _mm_blend_epi32 (__m128i a, __m128i b, const int imm8) VPBLENDD xmm, xmm, xmm/m128, imm8
-        /// Produces a new vector by assembling components from two source vectors as specified by a control mask
+        /// Combines components from left/right vectors per the blend spec
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
@@ -52,7 +40,18 @@ namespace Z0
 
         /// <summary>
         /// __m128i _mm_blend_epi32 (__m128i a, __m128i b, const int imm8) VPBLENDD xmm, xmm, xmm/m128, imm8
-        /// Produces a new vector by assembling components from two source vectors as specified by a control mask
+        /// Combines components from left/right vectors per the blend spec
+        /// </summary>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
+        /// <param name="spec">The blend specification</param>
+        [MethodImpl(Inline)]
+        public static Vector128<int> vblend4x32(Vector128<int> x, Vector128<int> y, byte spec)        
+            => Blend(x, y, (byte)spec);
+
+        /// <summary>
+        /// __m128i _mm_blend_epi32 (__m128i a, __m128i b, const int imm8) VPBLENDD xmm, xmm, xmm/m128, imm8
+        /// Combines components from left/right vectors per the blend spec
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
@@ -60,8 +59,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<uint> vblend4x32(Vector128<uint> x, Vector128<uint> y, byte spec)        
             => Blend(x, y, spec);
-
-
     }
 
     /// <summary>
@@ -75,6 +72,9 @@ namespace Z0
         /// </summary>
         LLLL = 0b0000,
 
+        /// <summary>
+        /// Selects the first three components from the left vector and the last component from the right
+        /// </summary>
         LLLR = 0b1000,
 
         RLLL = 0b0001,
@@ -108,5 +108,4 @@ namespace Z0
         /// </summary>
         RRRR = 0b1111
     }
-
 }

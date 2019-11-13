@@ -22,7 +22,7 @@ namespace Z0
         /// <param name="C">The third matrix</param>
         /// <typeparam name="T">The primal type over which the matrices are constructed</typeparam>
         [MethodImpl(Inline)]
-        public static unsafe BitMatrix<T> select<T>(in BitMatrix<T> A, in BitMatrix<T> B, in BitMatrix<T> C)
+        public static BitMatrix<T> select<T>(in BitMatrix<T> A, in BitMatrix<T> B, in BitMatrix<T> C)
             where T : unmanaged
         {
             var Z = BitMatrix.alloc<T>();
@@ -38,7 +38,7 @@ namespace Z0
         /// <param name="C">The third matrix</param>
         /// <typeparam name="T">The primal type over which the matrices are constructed</typeparam>
         [MethodImpl(Inline)]
-        public static unsafe ref BitMatrix<T> select<T>(in BitMatrix<T> A, in BitMatrix<T> B, in BitMatrix<T> C, ref BitMatrix<T> Z)
+        public static ref BitMatrix<T> select<T>(in BitMatrix<T> A, in BitMatrix<T> B, in BitMatrix<T> C, ref BitMatrix<T> Z)
             where T : unmanaged
         {
             BitBlocks.select(in A.Head, in B.Head, in C.Head, ref Z.Head);
@@ -52,7 +52,7 @@ namespace Z0
         /// <param name="B">The second matrix</param>
         /// <param name="C">The third matrix</param>
         [MethodImpl(Inline)]
-        public static unsafe BitMatrix8 select(in BitMatrix8 A, in BitMatrix8 B, in BitMatrix8 C)
+        public static BitMatrix8 select(in BitMatrix8 A, in BitMatrix8 B, in BitMatrix8 C)
         {
             var Z = BitMatrix.alloc(n8);
             BitBlocks.select(in A.Head, in B.Head, in C.Head, ref Z.Head);
@@ -66,7 +66,7 @@ namespace Z0
         /// <param name="B">The second matrix</param>
         /// <param name="C">The third matrix</param>
         [MethodImpl(Inline)]
-        public static unsafe ref BitMatrix8 select(in BitMatrix8 A, in BitMatrix8 B, in BitMatrix8 C, ref BitMatrix8 Z)
+        public static ref BitMatrix8 select(in BitMatrix8 A, in BitMatrix8 B, in BitMatrix8 C, ref BitMatrix8 Z)
         {
             BitBlocks.select(in A.Head, in B.Head, in C.Head, ref Z.Head);
             return ref Z;
@@ -79,7 +79,7 @@ namespace Z0
         /// <param name="B">The second matrix</param>
         /// <param name="C">The third matrix</param>
         [MethodImpl(Inline)]
-        public static unsafe BitMatrix16 select(in BitMatrix16 A, in BitMatrix16 B, in BitMatrix16 C)
+        public static BitMatrix16 select(in BitMatrix16 A, in BitMatrix16 B, in BitMatrix16 C)
         {
             var Z = BitMatrix.alloc(n16);
             BitBlocks.select(in A.Head, in B.Head, in C.Head, ref Z.Head);
@@ -93,7 +93,7 @@ namespace Z0
         /// <param name="B">The second matrix</param>
         /// <param name="C">The third matrix</param>
         [MethodImpl(Inline)]
-        public static unsafe ref BitMatrix16 select(in BitMatrix16 A, in BitMatrix16 B, in BitMatrix16 C, ref BitMatrix16 Z)
+        public static ref BitMatrix16 select(in BitMatrix16 A, in BitMatrix16 B, in BitMatrix16 C, ref BitMatrix16 Z)
         {
             BitBlocks.select(in A.Head, in B.Head, in C.Head, ref Z.Head);
             return ref Z;
@@ -106,7 +106,7 @@ namespace Z0
         /// <param name="B">The second matrix</param>
         /// <param name="C">The third matrix</param>
         [MethodImpl(Inline)]
-        public static unsafe BitMatrix32 select(in BitMatrix32 A, in BitMatrix32 B, in BitMatrix32 C)
+        public static BitMatrix32 select(in BitMatrix32 A, in BitMatrix32 B, in BitMatrix32 C)
         {
             var Z = BitMatrix.alloc(n32);
             BitBlocks.select(in A.Head, in B.Head, in C.Head, ref Z.Head);
@@ -120,7 +120,7 @@ namespace Z0
         /// <param name="B">The second matrix</param>
         /// <param name="C">The third matrix</param>
         [MethodImpl(Inline)]
-        public static unsafe ref BitMatrix32 select(in BitMatrix32 A, in BitMatrix32 B, in BitMatrix32 C, ref BitMatrix32 Z)
+        public static ref BitMatrix32 select(in BitMatrix32 A, in BitMatrix32 B, in BitMatrix32 C, ref BitMatrix32 Z)
         {
             BitBlocks.select(in A.Head, in B.Head, in C.Head, ref Z.Head);
             return ref Z;
@@ -133,7 +133,7 @@ namespace Z0
         /// <param name="B">The second matrix</param>
         /// <param name="C">The third matrix</param>
         [MethodImpl(Inline)]
-        public static unsafe BitMatrix64 select(in BitMatrix64 A, in BitMatrix64 B, in BitMatrix64 C)
+        public static BitMatrix64 select(in BitMatrix64 A, in BitMatrix64 B, in BitMatrix64 C)
         {
             var Z = BitMatrix.alloc(n64);
             BitBlocks.select(in A.Head, in B.Head, in C.Head, ref Z.Head);
@@ -147,7 +147,7 @@ namespace Z0
         /// <param name="B">The second matrix</param>
         /// <param name="C">The third matrix</param>
         [MethodImpl(Inline)]
-        public static unsafe ref BitMatrix64 select(in BitMatrix64 A, in BitMatrix64 B, in BitMatrix64 C, ref BitMatrix64 Z)
+        public static ref BitMatrix64 select(in BitMatrix64 A, in BitMatrix64 B, in BitMatrix64 C, ref BitMatrix64 Z)
         {
             BitBlocks.select(in A.Head, in B.Head, in C.Head, ref Z.Head);
             return ref Z;

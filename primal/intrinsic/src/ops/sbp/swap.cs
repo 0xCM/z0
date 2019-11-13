@@ -30,13 +30,52 @@ namespace Z0
             => vshuf16x8(src,swapspec<byte>(n128,swaps));
 
         /// <summary>
-        /// Swaps hi/lo 128-bit lanes
+        /// Swaps 64-bit hi/lo segments of the source vector
         /// </summary>
-        /// <param name="x"></param>
-        /// <returns></returns>
+        /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
-        public static Vector256<byte> vswaphl(Vector256<byte> x)
-            => dinx.vperm2x128(x,x, Perm2x128.AD);
+        public static Vector128<sbyte> vswaphl(Vector128<sbyte> x)
+            => vswaphl(x.AsInt64()).AsSByte();
+
+        /// <summary>
+        /// Swaps 64-bit hi/lo segments of the source vector
+        /// </summary>
+        /// <param name="x">The source vector</param>
+        [MethodImpl(Inline)]
+        public static Vector128<byte> vswaphl(Vector128<byte> x)
+            => vswaphl(x.AsUInt64()).AsByte();
+
+        /// <summary>
+        /// Swaps 64-bit hi/lo segments of the source vector
+        /// </summary>
+        /// <param name="x">The source vector</param>
+        [MethodImpl(Inline)]
+        public static Vector128<short> vswaphl(Vector128<short> x)
+            => vswaphl(x.AsInt64()).AsInt16();
+
+        /// <summary>
+        /// Swaps 64-bit hi/lo segments of the source vector
+        /// </summary>
+        /// <param name="x">The source vector</param>
+        [MethodImpl(Inline)]
+        public static Vector128<ushort> vswaphl(Vector128<ushort> x)
+            => vswaphl(x.AsUInt64()).AsUInt16();
+
+        /// <summary>
+        /// Swaps 64-bit hi/lo segments of the source vector
+        /// </summary>
+        /// <param name="x">The source vector</param>
+        [MethodImpl(Inline)]
+        public static Vector128<int> vswaphl(Vector128<int> x)
+            => vswaphl(x.AsInt64()).AsInt32();
+
+        /// <summary>
+        /// Swaps 64-bit hi/lo segments of the source vector
+        /// </summary>
+        /// <param name="x">The source vector</param>
+        [MethodImpl(Inline)]
+        public static Vector128<uint> vswaphl(Vector128<uint> x)
+            => vswaphl(x.AsUInt64()).AsUInt32();
 
         /// <summary>
         /// Swaps 64-bit hi/lo segments of the source vector
@@ -55,52 +94,12 @@ namespace Z0
             => vinsert(vsxcalar(x,0), vscalar(vsxcalar(x,1)), 1);
 
         /// <summary>
-        /// Swaps 64-bit hi/lo segments of the source vector
+        /// Swaps the source vectors' hi/lo 128-bit lanes
         /// </summary>
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
-        public static Vector128<byte> vswaphl(Vector128<byte> x)
-            => vswaphl(x.AsUInt64()).AsByte();
-
-        /// <summary>
-        /// Swaps 64-bit hi/lo segments of the source vector
-        /// </summary>
-        /// <param name="x">The source vector</param>
-        [MethodImpl(Inline)]
-        public static Vector128<sbyte> vswaphl(Vector128<sbyte> x)
-            => vswaphl(x.AsInt64()).AsSByte();
-
-        /// <summary>
-        /// Swaps 64-bit hi/lo segments of the source vector
-        /// </summary>
-        /// <param name="x">The source vector</param>
-        [MethodImpl(Inline)]
-        public static Vector128<ushort> vswaphl(Vector128<ushort> x)
-            => vswaphl(x.AsUInt64()).AsUInt16();
-
-        /// <summary>
-        /// Swaps 64-bit hi/lo segments of the source vector
-        /// </summary>
-        /// <param name="x">The source vector</param>
-        [MethodImpl(Inline)]
-        public static Vector128<short> vswaphl(Vector128<short> x)
-            => vswaphl(x.AsInt64()).AsInt16();
-
-        /// <summary>
-        /// Swaps 64-bit hi/lo segments of the source vector
-        /// </summary>
-        /// <param name="x">The source vector</param>
-        [MethodImpl(Inline)]
-        public static Vector128<int> vswaphl(Vector128<int> x)
-            => vswaphl(x.AsInt64()).AsInt32();
-
-        /// <summary>
-        /// Swaps 64-bit hi/lo segments of the source vector
-        /// </summary>
-        /// <param name="x">The source vector</param>
-        [MethodImpl(Inline)]
-        public static Vector128<uint> vswaphl(Vector128<uint> x)
-            => vswaphl(x.AsUInt64()).AsUInt32();
+        public static Vector256<byte> vswaphl(Vector256<byte> x)
+            => dinx.vperm2x128(x,x, Perm2x128.AD);
 
         /// <summary>
         /// Swaps hi/lo 128-bit lanes
@@ -140,14 +139,6 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
         public static Vector256<ulong> vswaphl(Vector256<ulong> x)
-            => dinx.vperm2x128(x,x, Perm2x128.AD);
-
-        /// <summary>
-        /// Swaps hi/lo 128-bit lanes
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        [MethodImpl(Inline)]
-        public static Vector256<double> vswaphl(Vector256<double> x)
             => dinx.vperm2x128(x,x, Perm2x128.AD);
     }
 

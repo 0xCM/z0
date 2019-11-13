@@ -118,45 +118,6 @@ namespace Z0
         public static ulong gather(double src, ulong mask)        
             => ParallelBitExtract((ulong)src.ToBits(),mask);
 
-        /// <summary>
-        /// Extracts mask-identified bits from the source and deposits 
-        /// the result to the contiguous low bits of a zero-initialied target 
-        /// </summary>
-        /// <param name="src">The source value</param>
-        /// <param name="mask">The extraction mask</param>
-        [MethodImpl(Inline)]
-        public static byte gather(byte src, BitMask8 mask)
-            => gather(src,(byte)mask);
-
-        /// <summary>
-        /// Extracts mask-identified bits from the source and deposits 
-        /// the result to the contiguous low bits of a zero-initialied target 
-        /// </summary>
-        /// <param name="src">The source value</param>
-        /// <param name="mask">The extraction mask</param>
-        [MethodImpl(Inline)]
-        public static ushort gather(ushort src, BitMask16 mask)
-            => gather(src,(ushort)mask);
-
-        /// <summary>
-        /// Extracts mask-identified bits from the source and deposits 
-        /// the result to the contiguous low bits of a zero-initialied target 
-        /// </summary>
-        /// <param name="src">The source value</param>
-        /// <param name="mask">The extraction mask</param>
-        [MethodImpl(Inline)]
-        public static uint gather(uint src, BitMask32 mask)
-            => gather(src,(uint)mask);
-
-        /// <summary>
-        /// Extracts mask-identified bits from the source and deposits 
-        /// the result to the contiguous low bits of a zero-initialied target 
-        /// </summary>
-        /// <param name="src">The source value</param>
-        /// <param name="mask">The extraction mask</param>
-        [MethodImpl(Inline)]
-        public static ulong gather(ulong src, BitMask64 mask)
-            => gather(src,(ulong)mask);
 
         [MethodImpl(Inline)]
         public static ref byte gather(byte src, byte mask, ref byte dst)        

@@ -109,15 +109,7 @@ namespace Z0
         [MethodImpl(NotInline)]
         public static BitMatrix4 alloc(N4 n, bit fill = default)
             => BitMatrix4.Alloc(fill);
-
-        /// <summary>
-        /// Allocates a primal bitmatrix with rows filled by a specified vector
-        /// </summary>
-        /// <param name="fill">The row with which the allocated matrix is filled</param>
-        [MethodImpl(NotInline)]
-        public static BitMatrix4 alloc(BitVector4 fill)
-            => BitMatrix4.Alloc(fill);
-
+            
         /// <summary>
         /// Allocates a primal bitmatrix 
         /// </summary>

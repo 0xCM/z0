@@ -41,7 +41,6 @@ namespace Z0
         /// <remarks>https://www.felixcloutier.com/x86/pblendvb</remarks>
         [MethodImpl(Inline)]
         public static Vector256<byte> vblend32x8(Vector256<byte> x, Vector256<byte> y, Vector256<byte> spec)        
-            =>  BlendVariable(x, y, spec);
-
+            => BlendVariable(x, y, spec);
     }
 }

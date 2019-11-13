@@ -17,40 +17,148 @@ namespace Z0
         const uint M2 = 0b11;
 
         /// <summary>
-        /// Replicates the low bits of a source to an identified partition of an empty target
-        /// </summary>
-        /// <param name="src">The bit source</param>
-        /// <param name="part">The target partition</param>
-        [MethodImpl(Inline)]
-        public static byte project(byte src, Part4x2 part)
-            => Bits.scatter(src, (byte)part);
-
-        /// <summary>
-        /// Replicates an identified partition of a bit source to the low bits of a target 
+        /// Maps mask-identified source bits to the low bits of an empty target 
         /// </summary>
         /// <param name="src">The bit source</param>
         /// <param name="part">The source partition to select/extract</param>
         [MethodImpl(Inline)]
         public static uint select(uint src, Part4x2 part)
-            => Bits.gather(src, (uint)part);
+            => select(src, (uint)part);
 
         /// <summary>
-        /// Replicates the low bits of a source to an identified partition of an empty target
-        /// </summary>
-        /// <param name="src">The bit source</param>
-        /// <param name="part">The target partition</param>
-        [MethodImpl(Inline)]
-        public static byte project(byte src, Part6x2 part)
-            => Bits.scatter(src, (byte)part);
-
-        /// <summary>
-        /// Replicates an identified partition of a bit source to the low bits of a target 
+        /// Maps mask-identified source bits to the low bits of an empty target 
         /// </summary>
         /// <param name="src">The bit source</param>
         /// <param name="part">The source partition to select/extract</param>
         [MethodImpl(Inline)]
         public static uint select(uint src, Part6x2 part)
-            => Bits.gather(src, (uint)part);
+            => select(src, (uint)part);
+
+        /// <summary>
+        /// Maps mask-identified source bits to the low bits of an empty target 
+        /// </summary>
+        /// <param name="src">The bit source</param>
+        /// <param name="part">The source partition to select/extract</param>
+        [MethodImpl(Inline)]
+        public static uint select(uint src, Part8x2 part)
+            => select(src, (uint)part);
+
+        /// <summary>
+        /// Maps mask-identified source bits to the low bits of an empty target 
+        /// </summary>
+        /// <param name="src">The bit source</param>
+        /// <param name="part">The source partition to select/extract</param>
+        [MethodImpl(Inline)]
+        public static uint select(uint src, Part10x2 part)
+            => select(src, (uint)part);
+
+        /// <summary>
+        /// Maps mask-identified source bits to the low bits of an empty target 
+        /// </summary>
+        /// <param name="src">The bit source</param>
+        /// <param name="part">The source partition to select/extract</param>
+        [MethodImpl(Inline)]
+        public static uint select(uint src, Part12x2 part)
+            => select(src, (uint)part);
+
+        /// <summary>
+        /// Maps mask-identified source bits to the low bits of an empty target 
+        /// </summary>
+        /// <param name="src">The bit source</param>
+        /// <param name="part">The source partition to select/extract</param>
+        [MethodImpl(Inline)]
+        public static uint select(uint src, Part16x2 part)
+            => select(src, (uint)part);
+
+        /// <summary>
+        /// Maps mask-identified source bits to the low bits of an empty target 
+        /// </summary>
+        /// <param name="src">The bit source</param>
+        /// <param name="part">The source partition to select/extract</param>
+        [MethodImpl(Inline)]
+        public static uint select(uint src, Part32x2 part)
+            => select(src, (uint)part);
+
+        /// <summary>
+        /// Maps mask-identified source bits to the low bits of an empty target 
+        /// </summary>
+        /// <param name="src">The bit source</param>
+        /// <param name="part">The source partition to select/extract</param>
+        [MethodImpl(Inline)]
+        public static ulong select(ulong src, Part64x2 part)
+            => select(src, (ulong)part);
+
+        /// <summary>
+        /// Maps low source bits to mask-identified bits of an empty target
+        /// </summary>
+        /// <param name="src">The bit source</param>
+        /// <param name="part">The target partition</param>
+        [MethodImpl(Inline)]
+        public static uint project(uint src, Part4x2 part)
+            => project(src, (uint)part);
+
+        /// <summary>
+        /// Maps low source bits to mask-identified bits of an empty target
+        /// </summary>
+        /// <param name="src">The bit source</param>
+        /// <param name="part">The target partition</param>
+        [MethodImpl(Inline)]
+        public static uint project(byte src, Part6x2 part)
+            => project(src, (uint)part);
+
+        /// <summary>
+        /// Maps low source bits to mask-identified bits of an empty target
+        /// </summary>
+        /// <param name="src">The bit source</param>
+        /// <param name="part">The target partition</param>
+        [MethodImpl(Inline)]
+        public static uint project(uint src, Part8x2 part)
+            => project(src, (uint)part);
+
+        /// <summary>
+        /// Maps low source bits to mask-identified bits of an empty target
+        /// </summary>
+        /// <param name="src">The bit source</param>
+        /// <param name="part">The target partition</param>
+        [MethodImpl(Inline)]
+        public static uint project(uint src, Part10x2 part)
+            => project(src, (uint)part);
+
+        /// <summary>
+        /// Maps low source bits to mask-identified bits of an empty target
+        /// </summary>
+        /// <param name="src">The bit source</param>
+        /// <param name="part">The target partition</param>
+        [MethodImpl(Inline)]
+        public static uint project(uint src, Part12x2 part)
+            => project(src, (uint)part);
+
+        /// <summary>
+        /// Maps low source bits to mask-identified bits of an empty target
+        /// </summary>
+        /// <param name="src">The bit source</param>
+        /// <param name="part">The target partition</param>
+        [MethodImpl(Inline)]
+        public static uint project(uint src, Part16x2 part)
+            => project(src, (uint)part);
+        
+        /// <summary>
+        /// Maps low source bits to mask-identified bits of an empty target
+        /// </summary>
+        /// <param name="src">The bit source</param>
+        /// <param name="part">The target partition</param>
+        [MethodImpl(Inline)]
+        public static uint project(uint src, Part32x2 part)
+            => project(src, (uint)part);
+
+        /// <summary>
+        /// Maps low source bits to mask-identified bits of an empty target
+        /// </summary>
+        /// <param name="src">The bit source</param>
+        /// <param name="part">The target partition</param>
+        [MethodImpl(Inline)]
+        public static ulong project(ulong src, Part64x2 part)
+            => project(src, (ulong)part);
 
 
         /// <summary>
@@ -68,60 +176,6 @@ namespace Z0
         }
 
         /// <summary>
-        /// Replicates the low bits of a source to an identified partition of an empty target
-        /// </summary>
-        /// <param name="src">The bit source</param>
-        /// <param name="part">The target partition</param>
-        [MethodImpl(Inline)]
-        public static uint project(uint src, Part8x2 part)
-            => Bits.scatter(src, (uint)part);
-
-        /// <summary>
-        /// Replicates an identified partition of a bit source to the low bits of a target 
-        /// </summary>
-        /// <param name="src">The bit source</param>
-        /// <param name="part">The source partition to select/extract</param>
-        [MethodImpl(Inline)]
-        public static uint select(uint src, Part8x2 part)
-            => Bits.gather(src, (uint)part);
-
-        /// <summary>
-        /// Replicates the low bits of a source to an identified partition of an empty target
-        /// </summary>
-        /// <param name="src">The bit source</param>
-        /// <param name="part">The target partition</param>
-        [MethodImpl(Inline)]
-        public static uint project(uint src, Part10x2 part)
-            => Bits.scatter(src, (uint)part);
-
-        /// <summary>
-        /// Replicates an identified partition of a bit source to the low bits of a target 
-        /// </summary>
-        /// <param name="src">The bit source</param>
-        /// <param name="part">The source partition to select/extract</param>
-        [MethodImpl(Inline)]
-        public static uint select(uint src, Part10x2 part)
-            => Bits.gather(src, (uint)part);
-
-        /// <summary>
-        /// Replicates the low bits of a source to an identified partition of an empty target
-        /// </summary>
-        /// <param name="src">The bit source</param>
-        /// <param name="part">The target partition</param>
-        [MethodImpl(Inline)]
-        public static uint project(uint src, Part12x2 part)
-            => Bits.scatter(src, (uint)part);
-
-        /// <summary>
-        /// Replicates an identified partition of a bit source to the low bits of a target 
-        /// </summary>
-        /// <param name="src">The bit source</param>
-        /// <param name="part">The source partition to select/extract</param>
-        [MethodImpl(Inline)]
-        public static uint select(uint src, Part12x2 part)
-            => Bits.gather(src, (uint)part);
-
-        /// <summary>
         /// Partitions the first 16 bits of a 32-bit source into 8 target segments each with an effective width of 2
         /// </summary>
         /// <param name="src">The source value</param>
@@ -134,24 +188,6 @@ namespace Z0
         }
 
         /// <summary>
-        /// Replicates the low bits of a source to an identified partition of an empty target
-        /// </summary>
-        /// <param name="src">The bit source</param>
-        /// <param name="part">The target partition</param>
-        [MethodImpl(Inline)]
-        public static uint project(uint src, Part16x2 part)
-            => Bits.scatter(src, (uint)part);
-        /// <summary>
-        /// Replicates an identified partition of a bit source to the low bits of a target 
-        /// </summary>
-        /// <param name="src">The bit source</param>
-        /// <param name="part">The source partition to select/extract</param>
-        [MethodImpl(Inline)]
-        public static uint select(uint src, Part16x2 part)
-            => Bits.gather(src, (uint)part);
-
-
-        /// <summary>
         /// Partitions a 32-bit source into 16 target segments each with an effective width of 2
         /// </summary>
         /// <param name="src">The source value</param>
@@ -162,23 +198,5 @@ namespace Z0
             part16x2(src, ref dst);
             part16x2(src >> 16, ref seek(ref dst, 8));
         }
- 
-        /// <summary>
-        /// Replicates the low bits of a source to an identified partition of an empty target
-        /// </summary>
-        /// <param name="src">The bit source</param>
-        /// <param name="part">The target partition</param>
-        [MethodImpl(Inline)]
-        public static uint project(uint src, Part32x2 part)
-            => Bits.scatter(src, (uint)part);
-
-        /// <summary>
-        /// Replicates an identified partition of a bit source to the low bits of a target 
-        /// </summary>
-        /// <param name="src">The bit source</param>
-        /// <param name="part">The source partition to select/extract</param>
-        [MethodImpl(Inline)]
-        public static uint select(uint src, Part32x2 part)
-            => Bits.gather(src, (uint)part);
     }
 }

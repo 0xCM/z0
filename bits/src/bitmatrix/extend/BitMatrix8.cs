@@ -74,5 +74,4 @@ namespace Z0
         public static Graph<byte> ToGraph(this BitMatrix8 A)
             => BitGraph.graph(A);
     }
-
 }

@@ -97,36 +97,6 @@ namespace Z0
                 return generic<T>(dinx.vrotr(uint64(src), offset));
             else
                 throw unsupported<T>();
-        }
-    
-        [MethodImpl(Inline)]
-        public static Vector128<T> vrotl<T>(N128 n, in T a, byte offset)
-            where T : unmanaged
-        {                    
-            vload(a, out Vector128<T> vA);
-            return vrotl(vA,offset);
-        }
-
-        [MethodImpl(Inline)]
-        public static void vrotl<T>(N128 n, in T a, byte offset, ref T z)
-            where T : unmanaged
-                => vstore(vrotl(n, in a, offset), ref z);
-
-
-        [MethodImpl(Inline)]
-        public static Vector256<T> vrotl<T>(N256 n, in T pX, byte offset)
-            where T : unmanaged
-        {                    
-            vload(pX, out Vector256<T> vA);
-            return vrotl(vA,offset);
-        }
-
-        [MethodImpl(Inline)]
-        public static void vrotl<T>(N256 n, in T a, byte offset, ref T z)
-            where T : unmanaged
-                => vstore(vrotl(n,in a, offset), ref z);
-
-     
+        }     
     }
-
 }

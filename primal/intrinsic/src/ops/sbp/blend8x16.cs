@@ -16,10 +16,9 @@ namespace Z0
     
     partial class dinx
     {
-
         /// <summary>
         /// __m128i _mm_blend_epi16 (__m128i a, __m128i b, const int imm8)PBLENDW xmm, xmm/m128, imm8
-        /// Produces a new vector by assembling components from two source vectors as specified by a control mask
+        /// Combines components from left/right vectors per the blend spec
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
@@ -27,6 +26,40 @@ namespace Z0
         /// <remarks>https://www.felixcloutier.com/x86/pblendw</remarks>
         [MethodImpl(Inline)]
         public static Vector128<short> vblend8x16(Vector128<short> x, Vector128<short> y, Blend8x16 spec)        
+            => Blend(x, y, (byte)spec);
+
+        /// <summary>
+        /// __m256i _mm256_blend_epi16 (__m256i a, __m256i b, const int imm8) VPBLENDW ymm, ymm, ymm/m256, imm8
+        /// Combines components from left/right vectors within 128-bit lanes per the blend spec
+        /// </summary>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
+        /// <param name="spec">The blend specification</param>
+        [MethodImpl(Inline)]
+        public static Vector256<short> vblend8x16(Vector256<short> x, Vector256<short> y, Blend8x16 spec)        
+            => Blend(x, y, (byte)spec);
+
+        /// <summary>
+        /// __m128i _mm_blend_epi16 (__m128i a, __m128i b, const int imm8) PBLENDW xmm, xmm/m128, imm8
+        /// Combines components from left/right vectors per the blend spec
+        /// </summary>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
+        /// <param name="spec">The blend specification</param>
+        [MethodImpl(Inline)]
+        public static Vector128<ushort> vblend8x16(Vector128<ushort> x, Vector128<ushort> y, Blend8x16 spec)        
+            => Blend(x, y, (byte)spec);
+
+        /// <summary>
+        /// __m256i _mm256_blend_epi16 (__m256i a, __m256i b, const int imm8) VPBLENDW ymm, ymm, ymm/m256, imm8
+        /// Combines components from left/right vectors within 128-bit lanes per the blend spec
+        /// </summary>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
+        /// <param name="spec">The blend specification</param>
+        /// <remarks>https://www.felixcloutier.com/x86/pblendw</remarks>
+        [MethodImpl(Inline)]
+        public static Vector256<ushort> vblend8x16(Vector256<ushort> x, Vector256<ushort> y, Blend8x16 spec)        
             => Blend(x, y, (byte)spec);
 
         /// <summary>
@@ -49,42 +82,8 @@ namespace Z0
         /// <param name="y">The right vector</param>
         /// <param name="spec">The blend specification</param>
         [MethodImpl(Inline)]
-        public static Vector128<ushort> vblend8x16(Vector128<ushort> x, Vector128<ushort> y, Blend8x16 spec)        
-            => Blend(x, y, (byte)spec);
-
-        /// <summary>
-        /// __m128i _mm_blend_epi16 (__m128i a, __m128i b, const int imm8) PBLENDW xmm, xmm/m128, imm8
-        /// Produces a new vector by assembling components from two source vectors as specified by a control mask
-        /// </summary>
-        /// <param name="x">The left vector</param>
-        /// <param name="y">The right vector</param>
-        /// <param name="spec">The blend specification</param>
-        [MethodImpl(Inline)]
         public static Vector128<ushort> vblend8x16(Vector128<ushort> x, Vector128<ushort> y, byte spec)        
-            => Blend(x, y, spec);
- 
-        /// <summary>
-        /// __m256i _mm256_blend_epi16 (__m256i a, __m256i b, const int imm8) VPBLENDW ymm, ymm, ymm/m256, imm8
-        /// Produces a new vector by assembling components from two source vectors as specified by a control mask
-        /// </summary>
-        /// <param name="x">The left vector</param>
-        /// <param name="y">The right vector</param>
-        /// <param name="spec">The blend specification</param>
-        [MethodImpl(Inline)]
-        public static Vector256<short> vblend8x16(Vector256<short> x, Vector256<short> y, Blend8x16 spec)        
-            => Blend(x, y, (byte)spec);
-
-        /// <summary>
-        /// __m256i _mm256_blend_epi16 (__m256i a, __m256i b, const int imm8) VPBLENDW ymm, ymm, ymm/m256, imm8
-        /// Produces a new vector by assembling components from two source vectors as specified by a control mask
-        /// </summary>
-        /// <param name="x">The left vector</param>
-        /// <param name="y">The right vector</param>
-        /// <param name="spec">The blend specification</param>
-        /// <remarks>https://www.felixcloutier.com/x86/pblendw</remarks>
-        [MethodImpl(Inline)]
-        public static Vector256<ushort> vblend8x16(Vector256<ushort> x, Vector256<ushort> y, Blend8x16 spec)        
-            => Blend(x, y, (byte)spec);
+            => Blend(x, y, spec); 
     }
 
     /// <summary>

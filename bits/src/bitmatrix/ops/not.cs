@@ -19,7 +19,7 @@ namespace Z0
         /// <param name="A">The source matrix</param>
         /// <typeparam name="T">The primal type over which the matrix is constructed</typeparam>        
         [MethodImpl(Inline)]
-        public static unsafe BitMatrix<T> not<T>(in BitMatrix<T> A)
+        public static BitMatrix<T> not<T>(in BitMatrix<T> A)
             where T : unmanaged
         {
             var Z = BitMatrix.alloc<T>();
@@ -34,7 +34,7 @@ namespace Z0
         /// <param name="Z">The target matrix</param>
         /// <typeparam name="T">The primal type over which the matrix is constructed</typeparam>        
         [MethodImpl(Inline)]
-        public static unsafe ref BitMatrix<T> not<T>(in BitMatrix<T> A, ref BitMatrix<T> Z)
+        public static ref BitMatrix<T> not<T>(in BitMatrix<T> A, ref BitMatrix<T> Z)
             where T : unmanaged
         {
             BitBlocks.not(in A.Head, ref Z.Head);
@@ -42,11 +42,19 @@ namespace Z0
         }
 
         /// <summary>
+        /// Computes the logical negation of the source matrix, returning the allocated result to the caller 
+        /// </summary>
+        /// <param name="A">The source matrix</param>
+        [MethodImpl(Inline)]
+        public static BitMatrix4 not(in BitMatrix4 A)
+            => math.not((ushort)A);
+
+        /// <summary>
         /// Computes the logical negation of a primal bitmatrix, returning the allocated result to the caller
         /// </summary>
         /// <param name="A">The source matrix</param>
         [MethodImpl(Inline)]
-        public static unsafe BitMatrix8 not(in BitMatrix8 A)
+        public static BitMatrix8 not(in BitMatrix8 A)
         {
             var Z = BitMatrix.alloc(n8);
             BitBlocks.not(in A.Head, ref Z.Head);
@@ -59,7 +67,7 @@ namespace Z0
         /// <param name="A">The source matrix</param>
         /// <param name="Z">The target matrix</param>
         [MethodImpl(Inline)]
-        public static unsafe ref BitMatrix8 not(in BitMatrix8 A, ref BitMatrix8 Z)
+        public static ref BitMatrix8 not(in BitMatrix8 A, ref BitMatrix8 Z)
         {
             BitBlocks.not(in A.Head, ref Z.Head);
             return ref Z;
@@ -70,7 +78,7 @@ namespace Z0
         /// </summary>
         /// <param name="A">The source matrix</param>
         [MethodImpl(Inline)]
-        public static unsafe BitMatrix16 not(in BitMatrix16 A)
+        public static BitMatrix16 not(in BitMatrix16 A)
         {
             var Z = BitMatrix.alloc(n16);
             BitBlocks.not(in A.Head, ref Z.Head);
@@ -83,11 +91,10 @@ namespace Z0
         /// <param name="A">The source matrix</param>
         /// <param name="Z">The target matrix</param>
         [MethodImpl(Inline)]
-        public static unsafe ref BitMatrix16 not(in BitMatrix16 A, ref BitMatrix16 Z)
+        public static ref BitMatrix16 not(in BitMatrix16 A, ref BitMatrix16 Z)
         {
             BitBlocks.not(in A.Head, ref Z.Head);
             return ref Z;
-
         }
 
         /// <summary>
@@ -95,7 +102,7 @@ namespace Z0
         /// </summary>
         /// <param name="A">The source matrix</param>
         [MethodImpl(Inline)]
-        public static unsafe BitMatrix32 not(in BitMatrix32 A)
+        public static BitMatrix32 not(in BitMatrix32 A)
         {
             var Z = BitMatrix.alloc(n32);
             BitBlocks.not(in A.Head, ref Z.Head);
@@ -108,7 +115,7 @@ namespace Z0
         /// <param name="A">The source matrix</param>
         /// <param name="Z">The target matrix</param>
         [MethodImpl(Inline)]
-        public static unsafe ref BitMatrix32 not(in BitMatrix32 A, ref BitMatrix32 Z)
+        public static ref BitMatrix32 not(in BitMatrix32 A, ref BitMatrix32 Z)
         {
             BitBlocks.not(in A.Head, ref Z.Head);
             return ref Z;
@@ -119,7 +126,7 @@ namespace Z0
         /// </summary>
         /// <param name="A">The source matrix</param>
         [MethodImpl(Inline)]
-        public static unsafe BitMatrix64 not(in BitMatrix64 A)
+        public static BitMatrix64 not(in BitMatrix64 A)
         {
             var Z = BitMatrix.alloc(n64);
             BitBlocks.not(in A.Head, ref Z.Head);
@@ -132,7 +139,7 @@ namespace Z0
         /// <param name="A">The source matrix</param>
         /// <param name="Z">The target matrix</param>
         [MethodImpl(Inline)]
-        public static unsafe ref BitMatrix64 not(in BitMatrix64 A, ref BitMatrix64 Z)
+        public static ref BitMatrix64 not(in BitMatrix64 A, ref BitMatrix64 Z)
         {
             BitBlocks.not(in A.Head, ref Z.Head);
             return ref Z;
