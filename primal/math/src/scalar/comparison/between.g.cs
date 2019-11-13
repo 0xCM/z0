@@ -33,7 +33,6 @@ namespace Z0
                 return gfp.between(x,a,b);
         }
 
-
         [MethodImpl(Inline)]
         static bit between_i<T>(T x, T a, T b)
             where T : unmanaged
@@ -61,7 +60,5 @@ namespace Z0
             else 
                 return math.between(uint64(x), uint64(a), uint64(b));
         }
-
     }
-
 }

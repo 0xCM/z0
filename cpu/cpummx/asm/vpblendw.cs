@@ -18,8 +18,6 @@ namespace Z0
 
     partial class Asm
     {
-
-
         /// <summary>
         /// Selects words from xmm2 and xmm3/m128 according to a control mask imm8 
         /// and populates xmm1 with the result, xmm1[i] = testbit(imm8,i) ? xmm3[i] : xmm2[i]

@@ -12,47 +12,6 @@ namespace Z0
 
     partial class fpoc
     {
-
-
-        public static float abs_g32f(float x)
-            => gfp.abs(x);
-
-        public static float abs_d32f(float x)
-            => fmath.abs(x);
-
-        public static float square_g32f(float x)
-            => gfp.square(x);
-
-       public static double abs_d64f(double x)
-            => fmath.abs(x);
-
-        public static double abs_g64f(double x)
-            => gfp.abs(x);
-
-        public static float add_d32f(float lhs, float rhs)
-            => fmath.add(lhs,rhs);
- 
-        public static float add_g32f(float lhs, float rhs)
-            => gfp.add(lhs,rhs);
-
-        public static double add_d64f(double lhs, double rhs)
-            => fmath.add(lhs,rhs);
-
-        public static double add_g64f(double lhs, double rhs)
-            => gfp.add(lhs,rhs);                                
-
-        public static bool between_d32f(float x, float a, float b)    
-            => fmath.between(x,a,b);
-
-        public static bool between_g32f(float x, float a, float b)    
-            => gmath.between(x,a,b);
-
-        public static bool between_d64f(double x, double a, double b)    
-            => fmath.between(x,a,b);
-
-        public static bool between_g64f(double x, double a, double b)    
-            => gmath.between(x,a,b);
-
         public static float dec_g32f(float x)
             => gfp.dec(x);
 
@@ -161,75 +120,6 @@ namespace Z0
         public static bool nonzero_g64f(double x)
             => gmath.nonzero(x);
 
-        public static bool positive_n32f(float x)
-            => x > 0;
-
-        public static bool positive_g32f(float x)
-            => gmath.positive(x);
-
-        public static bool positive_n64f(double x)
-            => x > 0;
-
-        public static bool positive_g64f(double x)
-            => gmath.positive(x);
-
-        public static float pow_d32f(float b, uint exp)
-            => fmath.pow(b,exp);
-
-        public static float pow_g32f(float b, uint exp)
-            => gfp.pow(b,exp);
-
-        public static double pow_d64f(double b, uint exp)
-            => fmath.pow(b,exp);
-
-        public static double pow_g64f(double b, uint exp)
-            => gfp.pow(b,exp);
-
-        public static float square_d32f(float x)
-            => fmath.square(x);
-
-        public static double square_d64f(double x)
-            => fmath.square(x);
-
-        public static double square_g64f(double x)
-            => gfp.square(x);
-
-         public static Sign signum_g32f(float x)
-            => gfp.signum(x);
-
-        public static Sign signum_d32f(float x)
-            => fmath.signum(x);
-
-        public static Sign signum_d64f(double x)
-            => fmath.signum(x);
-
-        public static Sign signum_g64f(double x)
-            => gfp.signum(x);
-
-       public static float sub_d32f(float lhs, float rhs)
-            => fmath.sub(lhs,rhs);
-
-        public static float sub_g32f(float lhs, float rhs)
-            => gfp.sub(lhs,rhs);
-
-        public static double sub_d64f(double lhs, double rhs)
-            => fmath.sub(lhs,rhs);
-        
-        public static double sub_g64f(double lhs, double rhs)
-            => gfp.sub(lhs,rhs);
-
-       public static float xor_d32f(float lhs, float rhs)
-            => fmath.xor(lhs,rhs);
-
-        public static float xor_g32f(float lhs, float rhs)
-            => gfp.xor(lhs,rhs);
-
-        public static double xor_d64f(double lhs, double rhs)
-            => fmath.xor(lhs,rhs);
-        
-        public static double xor_g64f(double lhs, double rhs)
-            => gfp.xor(lhs,rhs);
- 
 
 
     }

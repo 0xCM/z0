@@ -85,7 +85,7 @@ namespace Z0
             var pbs_actual = BitString.FromScalar((byte)p);            
             Claim.eq(pbs_expect, pbs_actual);
             
-            var p_assembled = Perm4Spec.Assemble(Perm4.D, Perm4.C, Perm4.B, Perm4.A);            
+            var p_assembled = Perm4Spec.assemble(Perm4.D, Perm4.C, Perm4.B, Perm4.A);            
             Claim.eq(p, p_assembled);            
             
             var pformat_actual = p.FormatMap();
@@ -127,7 +127,5 @@ namespace Z0
                 Claim.yea(p3 == Perm<N>.Identity);
             }
         }
-
     }
-
 }

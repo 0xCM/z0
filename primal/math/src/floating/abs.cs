@@ -5,44 +5,27 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
     using System.Runtime.CompilerServices;
-    using System.Diagnostics;
     
     using static zfunc;    
     
     partial class fmath
     {
-
+        /// <summary>
+        /// Computes the absolute value of the source
+        /// </summary>
+        /// <param name="a">The source value</param>
         [MethodImpl(Inline)]
-        public static ref float and(ref float lhs, float rhs)
-        {
-            lhs = and(lhs,rhs);
-            return ref lhs;
-        }
-
-        [MethodImpl(Inline)]
-        public static ref double and(ref double lhs, double rhs)
-        {
-            lhs = and(lhs,rhs);
-            return ref lhs;
-        }
+        public static float abs(float a)
+            => MathF.Abs(a);
 
         /// <summary>
         /// Computes the absolute value of the source
         /// </summary>
-        /// <param name="src">The source value</param>
+        /// <param name="a">The source value</param>
         [MethodImpl(Inline)]
-        public static float abs(float src)
-            => MathF.Abs(src);
-
-        /// <summary>
-        /// Computes the absolute value of the source
-        /// </summary>
-        /// <param name="src">The source value</param>
-        [MethodImpl(Inline)]
-        public static double abs(double src)
-            => Math.Abs(src);
+        public static double abs(double a)
+            => Math.Abs(a);
 
         /// <summary>
         /// Computes the absolute value of the source in-place

@@ -25,12 +25,6 @@ namespace Z0
         static Vec128<T> vload<T>(ref XMM src)
             where T : unmanaged
             => ginx.vload(n128, in src.As<T>());
-
-        [MethodImpl(Inline)]
-        static Vec256<T> vload<T>(ref Perm8Select src)
-            where T : unmanaged
-                => ginx.vload(n256, in head(src.ToSpan<T>()));
-
     }
 
 

@@ -132,7 +132,7 @@ namespace Z0
         /// <param name="y">The right vector</param>
         /// <param name="spec">The permutation spec</param>
         [MethodImpl(Inline)]
-        public static Vector256<float> vperm2x128(Vector256<float> x, Vector256<float> y, Perm2x128 spec)
+        public static Vector256<float> vperm2x128(Vector256<float> x, Vector256<float> y, Perm2x4 spec)
             => Permute2x128(x, y, (byte)spec);
 
         /// <summary>
@@ -142,7 +142,7 @@ namespace Z0
         /// <param name="y">The right vector</param>
         /// <param name="spec">The permutation spec</param>
         [MethodImpl(Inline)]
-        public static Vector256<double> vperm2x128(Vector256<double> x, Vector256<double> y, Perm2x128 spec)
+        public static Vector256<double> vperm2x128(Vector256<double> x, Vector256<double> y, Perm2x4 spec)
             => Permute2x128(x, y, (byte)spec);
 
         /// <summary>
@@ -151,7 +151,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
         public static Vector256<float> vswaphl(Vector256<float> x)
-            => vperm2x128(x,x, Perm2x128.AD);
+            => vperm2x128(x,x, Perm2x4.DA);
 
         /// <summary>
         /// Swaps hi/lo 128-bit lanes
@@ -159,7 +159,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
         public static Vector256<double> vswaphl(Vector256<double> x)
-            => vperm2x128(x,x, Perm2x128.AD);
+            => vperm2x128(x,x, Perm2x4.DA);
 
         [MethodImpl(Inline)]
         public static Vector256<float> vreverse(Vector256<float> src)
@@ -167,6 +167,5 @@ namespace Z0
 
         static Vector256<int> MRev256f32 
             => dinx.vparts(n256, 7, 6, 5, 4, 3, 2, 1, 0);    
-
     }
 }

@@ -99,7 +99,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
         public static Vector256<byte> vswaphl(Vector256<byte> x)
-            => dinx.vperm2x128(x,x, Perm2x128.AD);
+            => dinx.vperm2x128(x,x, Perm2x4.DA);
 
         /// <summary>
         /// Swaps hi/lo 128-bit lanes
@@ -107,7 +107,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
         public static Vector256<sbyte> vswaphl(Vector256<sbyte> x)
-            => dinx.vperm2x128(x,x, Perm2x128.AD);
+            => dinx.vperm2x128(x,x, Perm2x4.DA);
 
         /// <summary>
         /// Swaps hi/lo 128-bit lanes
@@ -115,7 +115,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
         public static Vector256<short> vswaphl(Vector256<short> x)
-            => dinx.vperm2x128(x,x, Perm2x128.DA);
+            => dinx.vperm2x128(x,x, Perm2x4.DA);
 
         /// <summary>
         /// Swaps hi/lo 128-bit lanes
@@ -123,7 +123,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
         public static Vector256<ushort> vswaphl(Vector256<ushort> x)
-            => dinx.vperm2x128(x,x, Perm2x128.AD);
+            => dinx.vperm2x128(x,x, Perm2x4.DA);
 
         /// <summary>
         /// Swaps hi/lo 128-bit lanes
@@ -131,7 +131,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
         public static Vector256<long> vswaphl(Vector256<long> x)
-            => dinx.vperm2x128(x,x, Perm2x128.AD);
+            => dinx.vperm2x128(x,x, Perm2x4.DA);
 
         /// <summary>
         /// Swaps hi/lo 128-bit lanes
@@ -139,7 +139,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
         public static Vector256<ulong> vswaphl(Vector256<ulong> x)
-            => dinx.vperm2x128(x,x, Perm2x128.AD);
+            => dinx.vperm2x128(x,x, Perm2x4.DA);
     }
 
 }

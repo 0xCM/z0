@@ -34,6 +34,14 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
+        public static ref T parse<T>(string src, out T dst)
+            where T : unmanaged
+        {
+            dst = parse<T>(src);
+            return ref dst;
+        }
+
+        [MethodImpl(Inline)]
         static T parse_i<T>(string src)
             where T : unmanaged
         {
@@ -45,14 +53,12 @@ namespace Z0
                 return generic<T>(math.parse(src, out int x));
             else 
                 return generic<T>(math.parse(src, out long x));
-
         }
 
         [MethodImpl(Inline)]
         static T parse_u<T>(string src)
             where T : unmanaged
         {
-
             if(typeof(T) == typeof(byte))
                 return generic<T>(math.parse(src, out byte x));
             else if(typeof(T) == typeof(ushort))
@@ -67,42 +73,12 @@ namespace Z0
         static T parse_f<T>(string src)
             where T : unmanaged
         {
-
             if(typeof(T) == typeof(float))
                 return generic<T>(math.parse(src, out float x));
             else if(typeof(T) == typeof(double))
                 return generic<T>(math.parse(src, out double x));
             else            
                 throw unsupported<T>();
-        }
-
-        [MethodImpl(Inline)]
-        public static ref T parse<T>(string src, out T dst)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(sbyte))
-                dst = generic<T>(math.parse(src, out sbyte x));
-            else if(typeof(T) == typeof(byte))
-                dst = generic<T>(math.parse(src, out byte x));
-            else if(typeof(T) == typeof(short))
-                dst = generic<T>(math.parse(src, out short x));
-            else if(typeof(T) == typeof(ushort))
-                dst = generic<T>(math.parse(src, out ushort x));
-            else if(typeof(T) == typeof(int))
-                dst = generic<T>(math.parse(src, out int x));
-            else if(typeof(T) == typeof(uint))
-                dst = generic<T>(math.parse(src, out uint x));
-            else if(typeof(T) == typeof(long))
-                dst = generic<T>(math.parse(src, out long x));
-            else if(typeof(T) == typeof(ulong))
-                dst = generic<T>(math.parse(src, out ulong x));
-            else if(typeof(T) == typeof(float))
-                dst = generic<T>(math.parse(src, out float x));
-            else if(typeof(T) == typeof(double))
-                dst = generic<T>(math.parse(src, out double x));
-            else            
-                throw unsupported<T>();
-            return ref dst;
         }
     }
 }

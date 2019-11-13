@@ -14,62 +14,124 @@ namespace Z0
 
     partial class ginx
     {
-        // [MethodImpl(Inline)]
-        // public static Vector256<T> vperm4x64<T>(Vector256<T> x, Perm4 spec)
-        //     where T : unmanaged
-        //         => dinx.vperm4x64(x.AsUInt64(), (byte)spec);
-
         [MethodImpl(Inline)]
-        public static Vector256<T> vperm2x128<T>(Vector256<T> lhs, Vector256<T> rhs, Perm2x128 spec)
+        public static Vector256<T> vpermd<T>(Vector256<T> x, Perm8Spec spec)
+            where T : unmanaged
+                => vperm8x32(x, vload(n256, in head(spec.ToSpan<uint>())));
+
+        /// <summary>
+        /// Applies a cross-lane permutation over 8 32-bit segments in the source vector as indicated by the perm spec
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="spec">The perm spec</param>
+        /// <typeparam name="T">The primal component type</typeparam>
+        public static Vector256<T> vperm8x32<T>(Vector256<T> x, Vector256<uint> spec)        
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(byte))
+                return generic<T>(dinx.vperm8x32(uint8(x), spec));
+            else if(typeof(T) == typeof(ushort))
+                return generic<T>(dinx.vperm8x32(uint16(x),spec));
+            else if(typeof(T) == typeof(uint))
+                return generic<T>(dinx.vperm8x32(uint32(x), spec));
+            else if(typeof(T) == typeof(ulong))
+                return generic<T>(dinx.vperm8x32(uint64(x), spec));
+            else
+                throw unsupported<T>();
+        }
+
+        /// <summary>
+        /// Permutes 4 64-bit source vector segments as described by the perm spec
+        /// </summary>
+        /// <param name="x">The source vector</param>
+        /// <param name="spec">The perm spec</param>
+        /// <typeparam name="T">The primal component type</typeparam>
+        [MethodImpl(Inline)]
+        public static Vector256<T> vperm4x64<T>(Vector256<T> x, Perm4 spec)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte) 
             || typeof(T) == typeof(ushort) 
             || typeof(T) == typeof(uint) 
             || typeof(T) == typeof(ulong))
-                return vperm2x128_u(lhs,rhs,spec);
+                return vperm4x64_u(x,spec);
             else if(typeof(T) == typeof(sbyte) 
             || typeof(T) == typeof(short) 
             || typeof(T) == typeof(int) 
             || typeof(T) == typeof(long))
-                return vperm2x128_i(lhs,rhs,spec);
+                return vperm4x64_i(x,spec);
             else 
-                return vperm2x128_f(lhs,rhs,spec);
+                return vperm4x64_f(x,spec);
         }
 
-        public static string vperm256_info<T>()
+        /// <summary>
+        /// Permutes 4 128-bit source lanes from 2 256-bit vectors as described by the perm spec
+        /// </summary>
+        /// <param name="x">The first source vector</param>
+        /// <param name="y">The second source vector</param>
+        /// <param name="spec">The perm spec</param>
+        /// <typeparam name="T">The primal component type</typeparam>
+        [MethodImpl(Inline)]
+        public static Vector256<T> vperm2x128<T>(Vector256<T> x, Vector256<T> y, Perm2x4 spec)
             where T : unmanaged
-        {            
-            
-            var table = sbuild();
-
-            void addRow(string title, string content)
-                => table.AppendLine(title.PadRight(20) + content);
-
-            var x0 = gmath.zero<T>();
-            var y0 = gmath.one<T>();
-            var step = convert<T>(2);
-            var x = ginx.vincrements<T>(n256, x0,step);
-            var y = ginx.vincrements(n256, y0,step);        
-
-            addRow("x", x.ToString());
-            addRow("y", y.ToString());
-            addRow($"x y CA", ginx.vperm2x128(x,y,Perm2x128.CA).Format());
-            addRow($"x y DA", ginx.vperm2x128(x,y,Perm2x128.DA).Format());
-            addRow($"x y CB", ginx.vperm2x128(x,y,Perm2x128.CB).Format());
-            addRow($"x y DB", ginx.vperm2x128(x,y,Perm2x128.DB).Format());
-
-            addRow($"x y AC", ginx.vperm2x128(x,y,Perm2x128.AC).Format());
-            addRow($"x y AD", ginx.vperm2x128(x,y,Perm2x128.AD).Format());
-            addRow($"x y BC", ginx.vperm2x128(x,y,Perm2x128.BC).Format());
-            addRow($"x y BD", ginx.vperm2x128(x,y,Perm2x128.BD).Format());
-
-            return table.ToString();
+        {
+            if(typeof(T) == typeof(byte) 
+            || typeof(T) == typeof(ushort) 
+            || typeof(T) == typeof(uint) 
+            || typeof(T) == typeof(ulong))
+                return vperm2x128_u(x,y,spec);
+            else if(typeof(T) == typeof(sbyte) 
+            || typeof(T) == typeof(short) 
+            || typeof(T) == typeof(int) 
+            || typeof(T) == typeof(long))
+                return vperm2x128_i(x,y,spec);
+            else 
+                return vperm2x128_f(x,y,spec);
         }
 
+ 
+        [MethodImpl(Inline)]
+        static Vector256<T> vperm4x64_u<T>(Vector256<T> x, Perm4 spec)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(byte))
+                return generic<T>(dinx.vperm4x64(uint8(x), spec));
+            else if(typeof(T) == typeof(ushort))
+                return generic<T>(dinx.vperm4x64(uint16(x), spec));
+            else if(typeof(T) == typeof(uint))
+                return generic<T>(dinx.vperm4x64(uint32(x), spec));
+            else
+                return generic<T>(dinx.vperm4x64(uint64(x), spec));
+        }
 
         [MethodImpl(Inline)]
-        static Vector256<T> vperm2x128_u<T>(Vector256<T> lhs, Vector256<T> rhs, Perm2x128 spec)
+        static Vector256<T> vperm4x64_i<T>(Vector256<T> x, Perm4 spec)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(sbyte))
+                return generic<T>(dinx.vperm4x64(int8(x), spec));
+            else if(typeof(T) == typeof(short))
+                return generic<T>(dinx.vperm4x64(int16(x), spec));
+            else if(typeof(T) == typeof(int))
+                return generic<T>(dinx.vperm4x64(int32(x), spec));
+            else
+                return generic<T>(dinx.vperm4x64(int64(x), spec));
+        }
+
+        [MethodImpl(Inline)]
+        static Vector256<T> vperm4x64_f<T>(Vector256<T> x, Perm4 spec)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(float))
+                return generic<T>(dfp.vperm4x64(float32(x), spec));
+            else if(typeof(T) == typeof(double))
+                return generic<T>(dfp.vperm4x64(float64(x), spec));
+            else
+                throw unsupported<T>();
+        }
+
+        [MethodImpl(Inline)]
+        static Vector256<T> vperm2x128_u<T>(Vector256<T> lhs, Vector256<T> rhs, Perm2x4 spec)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -83,7 +145,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static Vector256<T> vperm2x128_i<T>(Vector256<T> lhs, Vector256<T> rhs, Perm2x128 spec)
+        static Vector256<T> vperm2x128_i<T>(Vector256<T> lhs, Vector256<T> rhs, Perm2x4 spec)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
@@ -97,7 +159,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static Vector256<T> vperm2x128_f<T>(Vector256<T> lhs, Vector256<T> rhs, Perm2x128 spec)
+        static Vector256<T> vperm2x128_f<T>(Vector256<T> lhs, Vector256<T> rhs, Perm2x4 spec)
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))

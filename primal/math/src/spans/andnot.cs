@@ -11,7 +11,6 @@ namespace Z0
 
     partial class mathspan
     {
-
        public static Span<T> andnot<T>(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs, Span<T> dst)
             where T : unmanaged
         {
@@ -21,7 +20,7 @@ namespace Z0
             return dst;
         }
 
-       [MethodImpl(Inline)]
+        [MethodImpl(Inline)]
         public static Span<T> andnot<T>(Span<T> lhs, ReadOnlySpan<T> rhs)
             where T : unmanaged
                 => andnot(lhs,rhs,lhs);
@@ -30,8 +29,5 @@ namespace Z0
         public static Span<T> andnot<T>(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs)
             where T : unmanaged
                 => andnot(lhs,rhs,lhs.Replicate(true));
-
-
     }
-
 }

@@ -13,7 +13,6 @@ namespace Z0
 
     partial class ginxx
     {
-
         [MethodImpl(Inline)]
         public static string Format(this Blend4x32 src)                
             => BitString.FromScalar((byte)src).Format(true);
@@ -36,14 +35,6 @@ namespace Z0
             ginx.vstore(src, ref head(dst));
             return Perm.Define(n16, dst.Convert<int>());
         }
-
-        /// <summary>
-        /// Defines a shuffle spec from a permutation spec
-        /// </summary>
-        /// <param name="src">The defining permutation</param>
-        [MethodImpl(Inline)]
-        public static Vector128<byte> ToShuffleSpec(this Perm16 src)
-            => src.ToPerm().ToShuffleSpec();
 
         /// <summary>
         /// Increments each source vector component by a unit
@@ -333,6 +324,5 @@ namespace Z0
                 dst[i] = f(lhsData[i],rhsData[i]);
             return ginx.vload(n256, in head(dst));        
         } 
- 
     }
 }

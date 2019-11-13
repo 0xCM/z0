@@ -59,6 +59,18 @@ namespace Z0
                     
         public static ulong add_g64u(ulong lhs, ulong rhs)
             => gmath.add(lhs,rhs); 
+ 
+         public static float add_d32f(float lhs, float rhs)
+            => fmath.add(lhs,rhs);
+ 
+        public static float add_g32f(float lhs, float rhs)
+            => gfp.add(lhs,rhs);
+
+        public static double add_d64f(double lhs, double rhs)
+            => fmath.add(lhs,rhs);
+
+        public static double add_g64f(double lhs, double rhs)
+            => gfp.add(lhs,rhs);                                
     }
 
 }

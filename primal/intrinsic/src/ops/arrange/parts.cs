@@ -9,16 +9,11 @@ namespace Z0
     using System.Runtime.Intrinsics;
     using System.Runtime.Intrinsics.X86;
 
-    using static System.Runtime.Intrinsics.X86.Sse2;
-    using static System.Runtime.Intrinsics.X86.Avx;
-    using static System.Runtime.Intrinsics.X86.Avx2;
-
     using static zfunc;
     using static As;
 
     partial class dinx
     {
-
         /// <summary>
         /// Defines a cpu vector by its constituent parts, from least -> most significant
         /// </summary>
@@ -105,7 +100,11 @@ namespace Z0
         public static Vector256<ulong> vparts(ulong x0, ulong x1, ulong x2, ulong x3)
             => Vector256.Create(x0,x1,x2,x3);
 
-
+        /// <summary>
+        /// Defines a cpu vector by its constituent parts, from least -> most significant
+        /// </summary>
+        [MethodImpl(Inline)]
+        public static Vector256<ulong> vparts(N256 n, ulong x0, ulong x1, ulong x2, ulong x3)
+            => Vector256.Create(x0,x1,x2,x3);
     }
-
 }

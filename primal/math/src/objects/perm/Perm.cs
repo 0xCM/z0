@@ -378,10 +378,7 @@ namespace Z0
             return true;
         }
 
-
         public override bool Equals(object o)
             => o is Perm p  && Equals(p);
     }
-
-
 }

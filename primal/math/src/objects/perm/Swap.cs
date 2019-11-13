@@ -18,6 +18,7 @@ namespace Z0
     /// </summary>
     public struct Swap
     {
+     
         /// <summary>
         /// The first index
         /// </summary>
@@ -27,6 +28,27 @@ namespace Z0
         /// The second index
         /// </summary>
         public int j;
+
+        /// <summary>
+        /// Effects (i j) -> ((i + 1) (j+ 1))
+        /// </summary>
+        [MethodImpl(Inline)]
+        public static ref Swap Inc(ref Swap src)
+        {
+            ++src;
+            return ref src;
+        }
+
+        /// <summary>
+        /// Effects (i j) -> ((i - 1) (j - 1)) where decremented indices are clamped to 0 
+        /// </summary>
+        [MethodImpl(Inline)]
+        public static ref Swap Dec(ref Swap src)
+        {
+            --src;
+            return ref src;
+        }
+
 
         /// <summary>
         /// The empty element
@@ -160,5 +182,4 @@ namespace Z0
             => throw new NotSupportedException();
 
     }
-
 }

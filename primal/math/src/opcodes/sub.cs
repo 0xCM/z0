@@ -59,5 +59,17 @@ namespace Z0
 
         public static ulong sub_g64u(ulong lhs, ulong rhs)
             => gmath.sub(lhs,rhs);
+ 
+        public static float sub_d32f(float lhs, float rhs)
+            => fmath.sub(lhs,rhs);
+
+        public static float sub_g32f(float lhs, float rhs)
+            => gfp.sub(lhs,rhs);
+
+        public static double sub_d64f(double lhs, double rhs)
+            => fmath.sub(lhs,rhs);
+        
+        public static double sub_g64f(double lhs, double rhs)
+            => gfp.sub(lhs,rhs);
     }
 }

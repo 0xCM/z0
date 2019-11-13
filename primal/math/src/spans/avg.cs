@@ -30,12 +30,10 @@ namespace Z0
                 return avg_f(src);
         }           
 
-
         [MethodImpl(Inline)]
         public static T avg<T>(Span<T> src)
             where T : unmanaged
                 => avg(src.ReadOnly());
-
 
         [MethodImpl(Inline)]
         public static T avgz<T>(ReadOnlySpan<T> src)
@@ -68,7 +66,6 @@ namespace Z0
                 dst[i] = math.avgi(lhs[i],rhs[i]);
             return dst;
         }
-
 
         static sbyte avg(ReadOnlySpan<sbyte> src)
         {

@@ -5,8 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Collections.Generic;
     using System.Runtime.Intrinsics;
 
     using static zfunc;
@@ -82,17 +80,17 @@ namespace Z0
 
         public static Vector256<int> vswap_ref(Vector256<int> src, byte i, byte j)
         {
-            Span<int> control = stackalloc int[Vector256<int>.Count];
-            for(byte k=0; k<control.Length; k++)
+            Span<uint> spec = stackalloc uint[Vector256<uint>.Count];
+            for(byte k=0; k<spec.Length; k++)
             {
                 if(k == i)        
-                    control[k] = j;
+                    spec[k] = j;
                 else if(k == j)
-                    control[k] = i;
+                    spec[k] = i;
                 else
-                    control[k] = k;
+                    spec[k] = k;
             }
-            return dinx.vperm8x32(src,ginx.vload(n256, head(control)));
+            return dinx.vperm8x32i(src,ginx.vload(n256, head(spec)));
         }
 
 
@@ -172,7 +170,5 @@ namespace Z0
             fmt.AppendLine(dstFmt);
             return fmt.ToString();
         }
-
     }
-
 }

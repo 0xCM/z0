@@ -16,14 +16,13 @@ namespace Z0
 
     partial class MathX
     {
-
         [MethodImpl(Inline)]
         public static int ToBits(this float src)
-            => BitConverter.SingleToInt32Bits(src);
+            => BitConvert.ToInt32(src);
 
         [MethodImpl(Inline)]
         public static long ToBits(this double src)
-            => BitConverter.DoubleToInt64Bits(src);
+            => BitConvert.ToInt64(src);
 
         public static Option<int> WriteTo<T>(this DivisorIndex<T> src, FolderPath dst)
             where T : unmanaged
@@ -219,5 +218,4 @@ namespace Z0
             where T : unmanaged       
                 => gmath.div(src.A, src.B);
     }
-
 }

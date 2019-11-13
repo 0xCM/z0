@@ -12,10 +12,8 @@ namespace Z0
 
     using static zfunc;    
 
-
-
     /// <summary>
-    /// Defines literals that identity each 4-element permutation
+    /// Identifies 4-element permutations
     /// </summary>
     [Flags]
     public enum Perm4 : byte
@@ -175,7 +173,7 @@ namespace Z0
         /// <param name="s2">The symbol in the third position</param>
         /// <param name="s3">The symbol in the fourth position</param>
         [MethodImpl(Inline)]
-        public static Perm4 Assemble(Perm4 s0, Perm4 s1, Perm4 s2, Perm4 s3)
+        public static Perm4 assemble(Perm4 s0, Perm4 s1, Perm4 s2, Perm4 s3)
         {               
             var dst = 0u;
             dst |= (uint)s0;
@@ -184,5 +182,82 @@ namespace Z0
             dst |= (uint)s3 << 6;
             return (Perm4)dst;
         }
+
+        public static Perm4[] Symbols(this Perm4 src)
+        {            
+            var dst = new Perm4[4];
+            for(var i=0; i<4; i++)
+            {
+                var sym = src.Symbol(i);
+                if(!sym)
+                    return new Perm4[0]{};
+                sym.OnSome(s => dst[i] = s);
+            }
+            return dst;
+        }
+
+        /// <summary>
+        /// Computes the digigs corresponding to each 2-segment of the permutation spec
+        /// </summary>
+        /// <param name="src">The perm spec</param>
+        public static Span<N4, byte> Digits(this Perm4 src)
+        {
+            var scalar = (byte)src;
+            var dst = NatSpan.alloc<N4,byte>();
+            dst[0] = BitMask.between(scalar, 0, 1);
+            dst[1] = BitMask.between(scalar, 2, 3);
+            dst[2] = BitMask.between(scalar, 4, 5);
+            dst[3] = BitMask.between(scalar, 6, 7);
+            return dst;
+        }
+
+        /// <summary>
+        /// Maps a permutation on 8 symbols to its canonical scalar specification
+        /// </summary>
+        /// <param name="src">The source permutation</param>
+        public static Perm4 ToNatural(this Perm<N4> src)
+        {
+            var dst = 0u;            
+            for(int i=0, offset = 0; i< src.Length; i++, offset +=2)
+                dst |= (uint)src[i] << offset;                        
+            return (Perm4)dst;
+        }
+ 
+         /// <summary>
+        /// Formats the value as a permutation map, i.e., [00 01 10 11]: ABCD -> ABDC
+        /// </summary>
+        /// <param name="src">The permutation spec</param>
+        public static string FormatMap(this Perm4 src)
+        {
+            static char letter(bit x, bit y)
+            {
+                if(x && y)
+                    return 'D';
+                else if(!x && !y)
+                    return 'A';
+                else if(x && !y)
+                    return 'B';
+                else
+                    return 'C';
+            }
+
+            static string letters(BitString bs)
+            {
+                Span<char> letters = stackalloc char[4];
+                int i=0, j=0;
+                letters[i++] = letter(bs[j++], bs[j++]);
+                letters[i++] = letter(bs[j++], bs[j++]);
+                letters[i++] = letter(bs[j++], bs[j++]);            
+                letters[i++] = letter(bs[j++], bs[j++]);            
+                return new string(letters);
+            }
+
+            var bs = BitString.FromScalar((byte)src);
+            var block = bracket(bs.Format(false,false,2, AsciSym.Space));
+            var domain = $"{Perm4.A}{Perm4.B}{Perm4.C}{Perm4.D}";
+            var codomain = letters(bs);
+            var mapping = $"{block}: {domain} -> {codomain}";
+            return mapping;
+        }     
     }
 }

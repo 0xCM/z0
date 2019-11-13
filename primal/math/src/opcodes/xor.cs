@@ -59,5 +59,18 @@ namespace Z0
 
         public static ulong xor_g64u(ulong lhs, ulong rhs)
             => gmath.xor(lhs,rhs);
+ 
+        public static float xor_d32f(float lhs, float rhs)
+            => fmath.xor(lhs,rhs);
+
+        public static float xor_g32f(float lhs, float rhs)
+            => gfp.xor(lhs,rhs);
+
+        public static double xor_d64f(double lhs, double rhs)
+            => fmath.xor(lhs,rhs);
+        
+        public static double xor_g64f(double lhs, double rhs)
+            => gfp.xor(lhs,rhs);
+
     }
 }

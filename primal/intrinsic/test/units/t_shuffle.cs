@@ -76,7 +76,7 @@ namespace Z0
         public void shuffle_128x8u_check()
         {
             var src = ginx.vincrements<byte>(n128);
-            var perm = Perm16Spec.Reverse.ToPerm();
+            var perm = Perm16Spec.Reverse.ToNatural();
             for(int i=0,j=15; i<perm.Length; i++, j--)
                 Claim.eq(perm[i],j);
 

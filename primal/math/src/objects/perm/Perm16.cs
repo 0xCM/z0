@@ -8,6 +8,7 @@ namespace Z0
     using System.Linq;
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
+    using System.Runtime.Intrinsics;
 
     using static zfunc;    
 
@@ -46,7 +47,13 @@ namespace Z0
 
         XE = 0xE,
 
-        XF = 0xF,
+        XF = 0xF,   
+
+        Identity = 
+              X0 << 00 | X1 << 04 | X2 << 08 | X3 << 12 
+            | X4 << 16 | X5 << 20 | X6 << 24 | X7 << 28 
+            | X8 << 32 | X9 << 36 | XA << 40 | XB << 44 
+            | XC << 48 | XD << 52 | XE << 56 | XF << 60
 
     }
 
@@ -82,5 +89,48 @@ namespace Z0
                 Perm16.X7,Perm16.X6,Perm16.X5,Perm16.X4,
                 Perm16.X3,Perm16.X2,Perm16.X1,Perm16.X0);
 
+
+        [MethodImpl(Inline)]
+        public static bool Includes(this Perm16 src, int index)
+            => (((int)src & (4 << index)) != 0);
+
+        public static PermCycle Cycle(Perm16 src)
+        {            
+            Span<PermTerm> terms = stackalloc PermTerm[16];
+            var counter = 0;
+            for(var i=0; i<16; i++)   
+            {
+                if(src.Includes(i))
+                    terms[counter] = new PermTerm(counter,i);
+                counter++;
+            }
+            return new PermCycle(terms.Slice(0, counter));
+
+        }
+
+        /// <summary>
+        /// Maps a permutation on 16 symbols to its canonical scalar representation
+        /// </summary>
+        /// <param name="src">The source permutation</param>
+        public static Perm16 ToSpec(this Perm<N16> src)
+        {
+            var dst = 0ul;            
+            for(int i=0, offset = 0; i< src.Length; i++, offset +=3)
+                dst |= (ulong)src[i] << offset;                        
+            return (Perm16)dst;
+        }
+
+        /// <summary>
+        /// Reifies a permutation of length 16 from its canonical scalar representative 
+        /// </summary>
+        /// <param name="spec">The representative</param>
+        public static Perm<N16> ToNatural(this Perm16 spec)
+        {
+            ulong data = (ulong)spec;
+            var dst = Perm<N16>.Alloc();
+            for(int i=0, offset = 0; i<dst.Length; i++, offset +=4)
+                dst[i] = (int)BitMask.between(data, (byte)offset, (byte)(offset + 3));
+            return dst;
+        }
     }
 }

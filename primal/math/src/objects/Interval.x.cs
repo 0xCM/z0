@@ -5,8 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Reflection;
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
        
@@ -59,62 +57,6 @@ namespace Z0
         public static string Format<T>(this Span<Interval<T>> parts, char? sep = null)
             where T : unmanaged
                 => parts.Map(x => x.Format()).Concat($" {sep ?? AsciSym.Plus} ");            
-        // {
-        //     var negOne = gmath.dec(gmath.zero<T>());
-        //     var step = stepWidth ?? gmath.one<T>();
-        //     var width =  gmath.sub(src.Right, src.Left);            
-        //     convert<T,int>(gmath.div(width, step), out int count);
-            
-        //     var dst = span<T>(count + 1);
-        //     var point = src.Left;
-        //     for(var i=0; i < dst.Length; i++)
-        //     {
-        //         if(i == 0)            
-        //         {        
-        //             dst[i] = src.Left;
-        //             point = gmath.add(point, step);
-        //         }
-        //         else if(i == dst.Length - 1)
-        //         {
-        //             dst[i] = src.Right;                        
-        //         }
-        //         else
-        //         {
-        //             dst[i] = point;                            
-        //             point = gmath.add(point, step);
-        //         }
-                        
-        //     }
-        //     return dst;
-        // }
-
-        // {
-        //     var points = src.StepwisePartitionPoints(width);
-        //     var dst = span<Interval<T>>(points.Length - 1);
-        //     var lastIx = points.Length - 1;
-        //     var lastCycleIx = lastIx - 1;
-            
-        //     for(var i = 0; i < lastIx; i++)
-        //     {
-        //         var left = points[i];
-        //         var right = points[i + 1];
-        //         if(i == 0)
-        //             if(src.Open || src.LeftOpen)
-        //                 dst[i] = open(left,right);
-        //             else
-        //                 dst[i] = leftclosed(left,right);
-        //         else if(i == lastCycleIx)
-        //             if(src.Closed || src.RightClosed)
-        //                 dst[i] = closed(left, right);
-        //             else
-        //                 dst[i] = leftclosed(left,right);
-        //         else
-        //             dst[i] = leftclosed(left, right);
-        //     }
-        //     return dst;
-            
-        // }
-
 
         /// <summary>
         /// Computes the points that determine a partitioning predicated on partition width
