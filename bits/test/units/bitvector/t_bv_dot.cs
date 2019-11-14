@@ -13,7 +13,7 @@ namespace Z0.Test
     using static BitVector;
 
 
-    public class t_bvdot : BitVectorTest<t_bvdot>
+    public class t_bv_dot : BitVectorTest<t_bv_dot>
     {
         public void dot_4u_check()
         {

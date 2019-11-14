@@ -19,39 +19,49 @@ namespace Z0
         /// </summary>
         /// <param name="n">The permutation length</param>
         [MethodImpl(Inline)]
-        public static PermG<T> Identity<T>(T n)
+        public static PermG<T> identity<T>(T n)
             where T : unmanaged
-            => PermG<T>.Identity(n);
+                => PermG<T>.identity(n);
         
         /// <summary>
         /// Allocates an empty permutation of specified length
         /// </summary>
         [MethodImpl(Inline)]
-        public static PermG<T> Alloc<T>(int n)
+        public static PermG<T> alloc<T>(int n)
             where T : unmanaged
                 => new PermG<T>(new T[n]);
 
         /// <summary>
-        /// Creates a permutation by apply a sequence of transpositions to the identity permutation
+        /// Creates a generic permutation by application of a sequence of transpositions to the identity permutation
         /// </summary>
         /// <param name="n">The permutation length</param>
         /// <param name="swaps">Pairs of permutation indices (i,j) to be transposed</param>
         /// <typeparam name="T">The integral type</typeparam>
         [MethodImpl(Inline)]
-        public static PermG<T> FromSwaps<T>(T n, params (T i, T j)[] swaps)
+        public static PermG<T> from<T>(T n, params (T i, T j)[] swaps)
             where T : unmanaged
                 => new PermG<T>(n,swaps);
 
         /// <summary>
-        /// Creates a permutation by apply a sequence of transpositions to the identity permutation
+        /// Creates a generic permutation by application of a sequence of transpositions to the identity permutation
         /// </summary>
         /// <param name="n">The permutation length</param>
         /// <param name="swaps">Pairs of permutation indices (i,j) to be transposed</param>
         /// <typeparam name="T">The integral type</typeparam>
         [MethodImpl(Inline)]
-        public static PermG<T> FromSwaps<T>(T n, params SwapG<T>[] swaps)
+        public static PermG<T> from<T>(T n, params SwapG<T>[] swaps)
             where T : unmanaged
                 => new PermG<T>(n,swaps);
+
+        /// <summary>
+        /// Creates a permutation from the elements in a span
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <typeparam name="T">The integral type</typeparam>
+        [MethodImpl(Inline)]
+        public static PermG<T> from<T>(ReadOnlySpan<T> src)
+            where T : unmanaged
+                => new PermG<T>(src.ToArray());
 
         /// <summary>
         /// Creates a permutation from the elements in a parameter array
@@ -64,16 +74,6 @@ namespace Z0
             => new PermG<T>(src);
 
         /// <summary>
-        /// Creates a permutation from the elements in a span
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <typeparam name="T">The integral type</typeparam>
-        [MethodImpl(Inline)]
-        public static PermG<T> From<T>(ReadOnlySpan<T> src)
-            where T : unmanaged
-            => new PermG<T>(src.ToArray());
-
-        /// <summary>
         /// Defines a transposition for a permutation of natural length
         /// </summary>
         /// <param name="i">The first index</param>
@@ -84,7 +84,5 @@ namespace Z0
             where T : unmanaged
             where N : unmanaged, ITypeNat
                 => (i,j);
-
     }
-
 }

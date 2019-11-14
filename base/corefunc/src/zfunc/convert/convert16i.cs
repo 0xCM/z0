@@ -12,7 +12,6 @@ namespace Z0
 
     partial class Converter
     {
-
         [MethodImpl(Inline)]
         public static T convert<T>(short src)
             where T : unmanaged
@@ -69,7 +68,6 @@ namespace Z0
                 return  generic<T>((char)src);
             else            
                 return unhandled<short,T>(src);
-
         }
     }
 }

@@ -11,7 +11,7 @@ namespace Z0.Test
 
     using static zfunc;
 
-    public class tbm_identity : BitMatrixTest<tbm_identity>
+    public class t_bm_identity : BitMatrixTest<t_bm_identity>
     {
         public void bm_identity_ng8x8u_check()
         {

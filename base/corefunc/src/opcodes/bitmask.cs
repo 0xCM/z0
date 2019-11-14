@@ -14,7 +14,67 @@ namespace Z0
     partial class zfoc
     {
 
-        public static ref sbyte enable_d8i(ref sbyte src,int pos)
+        public static bit testbit_d8i(sbyte src, int pos)
+            => BitMask.test(src,pos);
+
+        public static bit testbit_g8i(sbyte src, int pos)
+            => BitMaskG.testbit(src,pos);
+
+        public static bit testbit_d8u(byte src, int pos)
+            => BitMask.test(src,pos);
+
+        public static bit testbit_g8u(byte src, int pos)
+            => BitMaskG.testbit(src,pos);
+
+        public static bit testbit_d16i(short src, int pos)
+            => BitMask.test(src,pos);
+
+        public static bit testbit_g16i(short src, int pos)
+            => BitMaskG.testbit(src,pos);
+
+        public static bit testbit_d16u(ushort src, int pos)
+            => BitMask.test(src,pos);
+
+        public static bit testbit_g16u(ushort src, int pos)
+            => BitMaskG.testbit(src,pos);
+
+        public static bit testbit_d32i(int src, int pos)
+            => BitMask.test(src,pos);
+
+        public static bit testbit_g32i(int src, int pos)
+            => BitMaskG.testbit(src,pos);
+
+        public static bit testbit_d32u(uint src, int pos)
+            => BitMask.test(src,pos);
+
+        public static bit testbit_g32u(uint src, int pos)
+            => BitMaskG.testbit(src,pos);
+
+        public static bit testbit_d64i(long src, int pos)
+            => BitMask.test(src,pos);
+
+        public static bit testbit_g64i(long src, int pos)
+            => BitMaskG.testbit(src,pos);
+    
+        public static bit testbit_d64u(ulong src, int pos)
+            => BitMask.test(src,pos);
+
+        public static bit testbit_g64u(ulong src, int pos)
+            => BitMaskG.testbit(src,pos);
+
+        public static bit testbit_d32f(float src, int pos)
+            => BitMask.test(src,pos);
+
+        public static bit testbit_g32f(float src, int pos)
+            => BitMaskG.testbit(src,pos);
+
+        public static bit testbit_d64f(double src, int pos)
+            => BitMask.test(src,pos);
+
+        public static bit testbit_g64f(double src, int pos)
+            => BitMaskG.testbit(src,pos);
+ 
+         public static ref sbyte enable_d8i(ref sbyte src,int pos)
             => ref BitMask.enable(ref src,pos);
 
         public static ref sbyte enable_g8i(ref sbyte src,int pos)
@@ -73,5 +133,6 @@ namespace Z0
 
         public static ref double enable_g64f(ref double src,int pos)
             => ref BitMaskG.enable(ref src,pos);
+ 
     }
 }

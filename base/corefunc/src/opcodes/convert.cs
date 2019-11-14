@@ -33,7 +33,6 @@ namespace Z0
         public static short convert_8i_to_16i(sbyte src)
             => src;
 
-
         public static short convert_g8i_to_g16i(sbyte src)
             => Converter.convert<sbyte,short>(src);
 

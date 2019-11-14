@@ -61,6 +61,10 @@ namespace Z0
         public static BitVector4 from(N4 n, bit b0, bit b1)
             => BitVector4.FromBits(b0,b1);
 
+        [MethodImpl(Inline)]
+        public static BitVector4 from(N4 n, byte src)
+            => BitVector4.FromScalar(src);
+
         /// <summary>
         /// Creates a vector from a bitstring
         /// </summary>

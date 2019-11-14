@@ -53,7 +53,7 @@ namespace Z0
 
         T Gcd(T lhs, T rhs);
 
-        Quorem<T> DivRem(T lhs, T rhs);
+        Pair<T> DivRem(T lhs, T rhs);
     }
 
     /// <summary>

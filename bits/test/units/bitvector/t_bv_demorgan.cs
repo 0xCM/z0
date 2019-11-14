@@ -14,7 +14,7 @@ namespace Z0
     /// <summary>
     /// Shows the "extended" De Morgan's laws hold as specified in Chapter 2 of Hacker's Delight
     /// </summary>
-    public class t_bvdemorgan : BitVectorTest<t_bvdemorgan>
+    public class t_bv_demorgan : BitVectorTest<t_bv_demorgan>
     {
 
         /// <summary>

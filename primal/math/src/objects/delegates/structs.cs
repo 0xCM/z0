@@ -12,7 +12,7 @@ namespace Z0
     using static zfunc;
 
     using static As;
-
+    
     public readonly struct AddOp<T>
         where T : unmanaged        
     {

@@ -24,27 +24,17 @@ namespace Z0
                 var y = Random.Next<uint>(2, Pow2.T08);
                 var z = Random.Next<uint>(2, Pow2.T08);
             
-                var lo = BmiMul.lo(x,y);
+                var lo = Math128.mullo(x,y);
                 Claim.eq(x*y,lo);
 
-                var hi = BmiMul.hi(x,y);
+                var hi = Math128.mulhi(x,y);
                 Claim.eq(0,hi);
 
-                var h2 = BmiMul.hi(z,MAX);
-                Claim.nonzero(h2);
-                var h3 = MulOps.hi(z,MAX);
-                Claim.eq(h3,h2);
-
-                var l2 = BmiMul.lo(z,MAX);
-                Claim.nonzero(h2);
-                var l3 = MulOps.lo(z,MAX);
-                Claim.eq(l3,l2);
-
-                BmiMul.full(x,y, out uint a, out uint b);
+                Math128.mul(x,y, out uint a, out uint b);
                 Claim.eq(lo, a);
                 Claim.eq(hi, b);
 
-                BmiMul.full(z,MAX, out uint c, out uint d);
+                Math128.mul(z,MAX, out uint c, out uint d);
                 Claim.gt(c,0u);
                 Claim.gt(d,0u);
 
@@ -85,19 +75,19 @@ namespace Z0
                 var y = Random.Next<ulong>(2, Pow2.T08);
                 var z = Random.Next<ulong>(2, Pow2.T08);
             
-                var lo = BmiMul.lo(x,y);
+                var lo = Math128.mullo(x,y);
                 Claim.eq(x*y,lo);
 
-                var hi = MulOps.hi(x,y);
+                var hi = Math128.mulhi(x,y);
                 Claim.eq(0,hi);
 
-                Claim.nonzero(MulOps.hi(z,MAX));
+                Claim.nonzero(Math128.mulhi(z,MAX));
 
-                BmiMul.full(x,y, out ulong a, out ulong b);
+                Math128.mul(x,y, out ulong a, out ulong b);
                 Claim.eq(lo, a);
                 Claim.eq(hi, b);
 
-                BmiMul.full(z,MAX, out ulong c, out ulong d);
+                Math128.mul(z,MAX, out ulong c, out ulong d);
                 Claim.gt(c,0ul);
                 Claim.gt(d,0ul);
             }
@@ -110,7 +100,7 @@ namespace Z0
             {
                 var a = Random.Next<ulong>(uint.MaxValue, ulong.MaxValue);
                 var b = Random.Next<ulong>(uint.MaxValue, ulong.MaxValue);
-                Claim.eq(MulOps.lo(a,b), BmiMul.lo(a,b));
+                Claim.eq(Math128.lo_ref(a,b), Math128.mullo(a,b));
             }
 
         }

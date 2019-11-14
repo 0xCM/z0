@@ -11,10 +11,10 @@ namespace Z0
 
     using static zfunc;
     
-    public class t_bmouter : BitMatrixTest<t_bmouter>
+    public class t_bm_outer : BitMatrixTest<t_bm_outer>
     {
 
-        public void outer_product_32_check()
+        public void outer_product_32()
         {
             const uint fill = 0x55555555;
             

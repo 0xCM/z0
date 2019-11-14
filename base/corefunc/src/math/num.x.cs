@@ -24,71 +24,12 @@ namespace  Z0
             => float.IsNaN(src);
 
         /// <summary>
-        /// Returns true if one of the supplied values is the NaN representative
-        /// </summary>
-        /// <param name="x0">The first source value</param>
-        /// <param name="x1">The second source value</param>
-        /// <param name="x2">The third source value</param>
-        /// <param name="x3">The fourth source value</param>
-        [MethodImpl(Inline)]
-        public static bool AnyNaN(this float x0, float x1, float x2, float x3)
-            => IsNaN(x0) || IsNaN(x1) || IsNaN(x2) || IsNaN(x3);
-
-        /// <summary>
         /// Returns true if a value is the NaN representative
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
         public static bool IsNaN(this double src)
             => double.IsNaN(src);
-
-        /// <summary>
-        /// Replaces a NaN representive value with 0
-        /// </summary>
-        /// <param name="src">The source value to sanitize</param>
-        [MethodImpl(Inline)]
-        public static double ClearNaN(this double x, double replacement = -1)
-            => x.IsNaN() ? replacement : x;
-
-        /// <summary>
-        /// Replaces a NaN representive value with 0
-        /// </summary>
-        /// <param name="src">The source value to sanitize</param>
-        [MethodImpl(Inline)]
-        public static float ClearNaN(this float x, float replacement = -1)
-            => x.IsNaN() ? replacement : x;
-
-        /// <summary>
-        /// Returns true if a floating point value represents positive infinity, false otherwise
-        /// </summary>
-        /// <param name="src">The source value</param>
-        [MethodImpl(Inline)]
-        public static bool IsPosInf(this float src)
-            => float.IsPositiveInfinity(src);
-
-        /// <summary>
-        /// Returns true if a floating point value represents positive infinity, false otherwise
-        /// </summary>
-        /// <param name="src">The source value</param>
-        [MethodImpl(Inline)]
-        public static bool IsPosInf(this double src)
-            => double.IsPositiveInfinity(src);
-
-        /// <summary>
-        /// Returns true if a floating point value represents negative infinity, false otherwise
-        /// </summary>
-        /// <param name="src">The source value</param>
-        [MethodImpl(Inline)]
-        public static bool IsNegInf(this float src)
-            => float.IsNegativeInfinity(src);
-
-        /// <summary>
-        /// Returns true if a floating point value represents negative infinity, false otherwise
-        /// </summary>
-        /// <param name="src">The source value</param>
-        [MethodImpl(Inline)]
-        public static bool IsNegInf(this double src)
-            => double.IsNegativeInfinity(src);
 
         /// <summary>
         /// Returns true if a floating point value represents an infinite value, false otherwise
@@ -146,8 +87,8 @@ namespace  Z0
         /// Produces an array of bits from a stream of binary digits
         /// </summary>
         /// <param name="src">The source digits</param>
-        public static Bit[] ToBits(this IEnumerable<BinaryDigit> src)
-            => src.Select(d => d == BinaryDigit.Zed ? Bit.Off : Bit.On).ToArray();
+        public static Span<bit> ToBits(this IEnumerable<BinaryDigit> src)
+            => src.Select(d => d == BinaryDigit.Zed ? bit.Off : bit.On).ToSpan();
 
         /// <summary>
         /// Formats the supplied decimal value as currency to two decimal places
@@ -221,7 +162,7 @@ namespace  Z0
             => src.ToString("#,#");
 
         [MethodImpl(Inline)]
-        public static char ToCharDigit(this byte src)
+        public static char ToDecimalChar(this byte src)
         {
             if(src == 0)
                 return '0';
@@ -247,31 +188,5 @@ namespace  Z0
                 return '∅';                        
         }
                         
-        public static IEnumerable<char> ToCharDigits(this IEnumerable<byte> src)
-        {
-            foreach(var item in src)
-                yield return item.ToCharDigit();
-        }
-
-        public static IEnumerable<char> ToCharDigits(this IEnumerable<sbyte> src)
-            => src.Convert<byte>().ToCharDigits();
-
-        public static IEnumerable<char> ToCharDigits(this IEnumerable<short> src)
-            => src.Convert<byte>().ToCharDigits();
-
-        public static IEnumerable<char> ToCharDigits(this IEnumerable<ushort> src)
-            => src.Convert<byte>().ToCharDigits();
-
-        public static IEnumerable<char> ToCharDigits(this IEnumerable<int> src)
-            => src.Convert<byte>().ToCharDigits();
-
-        public static IEnumerable<char> ToCharDigits(this IEnumerable<uint> src)
-            => src.Convert<byte>().ToCharDigits();
-
-        public static IEnumerable<char> ToCharDigits(this IEnumerable<long> src)
-            => src.Convert<byte>().ToCharDigits();
-
-        public static IEnumerable<char> ToCharDigits(this IEnumerable<ulong> src)
-            => src.Convert<byte>().ToCharDigits();
     }
 }

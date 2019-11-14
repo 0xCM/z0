@@ -26,6 +26,10 @@ namespace Z0
         public static BitVector16 ToBitVector(this BitMatrix4 A)
             => (ushort)A;
 
+        [MethodImpl(Inline)]
+        public static string Format(this BitMatrix4 src)            
+            => src.Bytes.FormatMatrixBits(src.RowCount);
+
     }
 
 }

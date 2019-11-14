@@ -31,10 +31,12 @@ namespace Z0
         public ulong Next()
         {
             State += X1;
-            State.UMul128(X2, out UInt128 a);
-            var m1 = a.hi ^ a.lo;
-            m1.UMul128(X3, out UInt128 b);
-            var m2 = b.hi ^ b.lo;
+            //State.UMul128(X2, out UInt128 a);
+            Math128.mul(State, X2, out Pair<ulong> Y1);
+            var m1 = Y1.A ^ Y1.B;
+            //m1.UMul128(X3, out UInt128 Y2);
+            Math128.mul(m1, X3, out Pair<ulong> Y2);
+            var m2 = Y2.A ^ Y2.B;
             return m2;
         }
 

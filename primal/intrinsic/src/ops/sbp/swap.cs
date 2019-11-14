@@ -35,7 +35,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
         public static Vector128<sbyte> vswaphl(Vector128<sbyte> x)
-            => vswaphl(x.AsInt64()).AsSByte();
+            => v8i(vswaphl(v64u(x)));
 
         /// <summary>
         /// Swaps 64-bit hi/lo segments of the source vector
@@ -43,7 +43,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
         public static Vector128<byte> vswaphl(Vector128<byte> x)
-            => vswaphl(x.AsUInt64()).AsByte();
+            => v8u(vswaphl(v64u(x)));
 
         /// <summary>
         /// Swaps 64-bit hi/lo segments of the source vector
@@ -51,7 +51,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
         public static Vector128<short> vswaphl(Vector128<short> x)
-            => vswaphl(x.AsInt64()).AsInt16();
+            => v16i(vswaphl(v64u(x)));
 
         /// <summary>
         /// Swaps 64-bit hi/lo segments of the source vector
@@ -59,7 +59,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
         public static Vector128<ushort> vswaphl(Vector128<ushort> x)
-            => vswaphl(x.AsUInt64()).AsUInt16();
+            => v16u(vswaphl(v64u(x)));
 
         /// <summary>
         /// Swaps 64-bit hi/lo segments of the source vector
@@ -67,7 +67,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
         public static Vector128<int> vswaphl(Vector128<int> x)
-            => vswaphl(x.AsInt64()).AsInt32();
+            => v32i(vswaphl(v64u(x)));
 
         /// <summary>
         /// Swaps 64-bit hi/lo segments of the source vector
@@ -75,7 +75,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
         public static Vector128<uint> vswaphl(Vector128<uint> x)
-            => vswaphl(x.AsUInt64()).AsUInt32();
+            => v32u(vswaphl(v64u(x)));
 
         /// <summary>
         /// Swaps 64-bit hi/lo segments of the source vector

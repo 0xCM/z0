@@ -13,7 +13,7 @@ namespace Z0
     
     public class t_bm_rowswap : BitMatrixTest<t_bm_rowswap>
     {        
-        public void bmrowswap_64u_check()
+        public void bm_rowswap_64u()
         {
             var A = Random.BitMatrix64();
             var a = A.Data.Replicate();
@@ -34,7 +34,7 @@ namespace Z0
                 
         }
 
-        public void leading_zeroes_8u()
+        public void bm_nlz_8u()
         {
             var A = BitMatrix8.Identity;
             int i=0, j=7;
@@ -50,7 +50,7 @@ namespace Z0
             Claim.eq(0,j);
         }
 
-        public void leading_zeroes_16u()
+        public void bm_nlz_16u()
         {
             var A = BitMatrix16.Identity;
             var rows = A.RowCount;
@@ -59,16 +59,15 @@ namespace Z0
 
         }
 
-        public void leading_zeroes_32u()
+        public void bm_nlz_32u()
         {
             var A = BitMatrix32.Identity;
             var rows = A.RowCount;
             for(int i=0, j=rows - 1; i < rows; i++, j--)            
                 Claim.eq(BitVector.nlz(A[i++]), j--);
-
         }
 
-        public void leading_zeroes_64u()
+        public void bm_nlz_64u()
         {
             var A = BitMatrix64.Identity;
             var rows = A.RowCount;
@@ -76,7 +75,5 @@ namespace Z0
                 Claim.eq(BitVector.nlz(A[i++]), j--);
 
         }
-
     }
-
 }

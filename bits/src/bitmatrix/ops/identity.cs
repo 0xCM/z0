@@ -96,7 +96,6 @@ namespace Z0
             0, 0, 0, Pow2.T05,
             0, 0, 0, Pow2.T06,
             0, 0, 0, Pow2.T07,
-
         };
  
          static ReadOnlySpan<byte> Identity64x64 => new byte[]
@@ -166,7 +165,5 @@ namespace Z0
             0, 0, 0, 0, 0, 0, 0, Pow2.T06,
             0, 0, 0, 0, 0, 0, 0, Pow2.T07,
         };
-
     }
-
 }

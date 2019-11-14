@@ -13,7 +13,6 @@ using Z0;
 using static Z0.As;
 partial class zfunc
 {
-
     /// <summary>
     /// If possible, applies the conversion S -> T
     /// </summary>

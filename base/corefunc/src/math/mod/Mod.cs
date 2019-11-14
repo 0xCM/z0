@@ -176,7 +176,7 @@ namespace Z0
         /// <param name="a">The dividend</param>
         [MethodImpl(Inline)]
         public uint mod(uint a)
-            => (uint) UMul.himul(M * a, n);
+            => (uint) Math128.mulhi(M * a, n);
 
         /// <summary>
         /// Computes the quotient a / n
@@ -184,7 +184,7 @@ namespace Z0
         /// <param name="a">The dividend</param>
         [MethodImpl(Inline)]
         public uint div(uint a)        
-            => (uint) UMul.himul(M, a);
+            => (uint) Math128.mulhi(M, a);
 
         /// <summary>
         /// Computes the quotient and remainder

@@ -58,7 +58,7 @@ namespace Z0
         /// <param name="max">The maximum value in the target interval</param>
         [MethodImpl(Inline)]
         public static ulong Contract(this ulong src, ulong max)
-            => src.MulHi(max); 
+            => Math128.mulhi(src,max);  //src.MulHi(max); 
 
         [MethodImpl(Inline)]
         public static T Contract<T>(T src, T max)

@@ -21,7 +21,7 @@ namespace Z0
         /// <param name="n">The permutation length</param>
         [MethodImpl(Inline)]
         public static Perm Perm(this IPolyrand random, int n)
-            => Z0.Perm.Identity(n).Shuffle(random);
+            => Z0.Perm.identity(n).Shuffle(random);
 
         /// <summary>
         /// Produces a random permutation of a specified length
@@ -58,7 +58,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Perm<N> Perm<N>(this IPolyrand random, N n = default)
             where N : unmanaged, ITypeNat
-                => Z0.Perm.Identity(n).Shuffle(random);
+                => Z0.Perm.identity(n).Shuffle(random);
                 
         /// <summary>
         /// Produces a stream of random permutation of natural length N

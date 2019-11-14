@@ -24,7 +24,7 @@ namespace Z0
         /// <param name="a">The dividend</param>
         [MethodImpl(Inline)]
         public static uint mod(ulong m, ulong n, uint a)
-            => (uint) MulOps.hi(m * a, n);
+            => (uint) Math128.mulhi(m * a, n);
 
         /// <summary>
         /// Computes the quotient a / N
@@ -32,7 +32,7 @@ namespace Z0
         /// <param name="a">The dividend</param>
         [MethodImpl(Inline)]
         public static uint div(ulong m, ulong n, uint a)        
-            => (uint) MulOps.hi(m, a);
+            => (uint) Math128.mulhi(m, a);
 
         /// <summary>
         /// Computes whether a % n == 0

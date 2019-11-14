@@ -40,7 +40,7 @@ namespace Z0
             var n = BitMatrix4.N;
             var dst = BitVector.alloc(n);
             for(var i=0; i< n; i++)
-                dst[i] = A.RowVector(i) % x;
+                dst[i] = A.GetRow(i) % x;
             return dst;        
         }
 
@@ -69,10 +69,10 @@ namespace Z0
             var C = transpose(A);
             for(var i=0; i < n; i++)
             {
-                var row = A.RowVector(i);
+                var row = A.GetRow(i);
                 for(var j = 0; j< n; j++)
                 {
-                    var col = C.RowVector(j);
+                    var col = C.GetRow(j);
                     Z[i,j] = row % col;
                 }
             }

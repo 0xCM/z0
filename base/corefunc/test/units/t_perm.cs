@@ -16,19 +16,19 @@ namespace Z0
     {
         public void perm_inc()
         {
-            var p = Perm.Identity(16);
+            var p = Perm.identity(16);
             for(var i=0; i<16; i++)
                 p.Inc();
-            Claim.eq(p, Perm.Identity(16));
+            Claim.eq(p, Perm.identity(16));
         }
 
         public void perm_dec()
         {
-            var p = Perm.Identity(16);
+            var p = Perm.identity(16);
             for(var i=0; i<16; i++)
                 p.Dec();
 
-            Claim.eq(p, Perm.Identity(16));
+            Claim.eq(p, Perm.identity(16));
         }
 
         public void perm_invert()
@@ -63,18 +63,6 @@ namespace Z0
             perm_comp_check(n257);
         }
 
-        public void perm4_check()
-        {
-            var perms = Random.EnumValues(Perm4.A, Perm4.B, Perm4.C, Perm4.D, Perm4.First, Perm4.Last);
-            var all = EnumG<Perm4,byte>.Values.ToSet();
-            for(var i=0; i<SampleSize; i++)
-            {
-                var perm = perms.First();
-                Claim.contains(all,perm);
-                var symbols = perm.Symbols();
-                Claim.eq(4, symbols.Length);
-            }
-        }
 
         public void perm_format()
         {
@@ -85,7 +73,7 @@ namespace Z0
             var pbs_actual = BitString.FromScalar((byte)p);            
             Claim.eq(pbs_expect, pbs_actual);
             
-            var p_assembled = Perm4Spec.assemble(Perm4.D, Perm4.C, Perm4.B, Perm4.A);            
+            var p_assembled = PermSpec.assemble(Perm4.D, Perm4.C, Perm4.B, Perm4.A);            
             Claim.eq(p, p_assembled);            
             
             var pformat_actual = p.FormatMap();

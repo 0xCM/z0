@@ -2,16 +2,14 @@
 // Copyright   :  (c) Chris Moore, 2019
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Test
+namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
 
     using static zfunc;
 
-    public class t_bvcreate : BitVectorTest<t_bvcreate>
+    public class t_bv_create : BitVectorTest<t_bv_create>
     {
         public void gbv_16u_from_bs_check()
         {

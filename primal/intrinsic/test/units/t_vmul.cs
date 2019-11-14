@@ -35,7 +35,7 @@ namespace Z0
                 var xi = Random.Next<uint>();
                 var yi = Random.Next<uint>();
                 var z = (ulong)xi * (ulong)yi;
-                Claim.eq(z, UMul.mul(xi,yi));
+                Claim.eq(z, Math128.mul(xi,yi));
             }
         }
 

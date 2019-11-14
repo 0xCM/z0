@@ -16,7 +16,7 @@ partial class zfunc
     [MethodImpl(Inline)]
     public static Pair<T> pair<T>(in T a, in T b)
         where T : unmanaged
-            => Pair.Define(a,b);
+            => Pair.define(a,b);
 
     /// <summary>
     /// Reduces a stream to a single value via an additive monoid

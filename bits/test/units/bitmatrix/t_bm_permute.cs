@@ -10,23 +10,22 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static zfunc;
-    
-    public class t_bmor : BitMatrixTest<t_bmor>
+
+    public class t_bm_permute : BitMatrixTest<t_bm_permute>
     {
 
-        public void t_bmor_32x32x32_check()
+        void permute_check<T>()
+            where T : unmanaged
         {
-            for(var i=0; i<SampleSize; i++)
+            
+            var A = BitMatrix.identity<T>();
+            var N = BitMatrix<T>.N;
+            for(var i=0; i< SampleSize; i++)
             {
-                var A = Random.BitMatrix(n32);
-                var B = Random.BitMatrix(n32);
-                var C = A | B;
-
-                var D = BitMatrix32.From(mathspan.or(A.Bytes, B.Bytes));
-                Claim.yea(C == D);
+                var perm = Random.Perm(N);
+                BitMatrix.permute(perm, ref A);
             }
         }
-
     }
 
 }

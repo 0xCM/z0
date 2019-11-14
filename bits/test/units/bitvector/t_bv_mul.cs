@@ -10,10 +10,8 @@ namespace Z0.Test
 
     using static zfunc;
 
-
-    public class t_bvmul : BitVectorTest<t_bvmul>
+    public class t_bv_mul : BitVectorTest<t_bv_mul>
     {
-
         public void bvmul_8u_check()
         {
             for(var i=0; i<SampleSize; i++)
@@ -43,10 +41,7 @@ namespace Z0.Test
             }   
 
             Measure(Bench);
-
         }
-
-
 
         public void gfmul8()
         {
@@ -91,7 +86,6 @@ namespace Z0.Test
             
         }
 
-
         void gfmul256ref_bench()
         {
             var lhsSrc = Random.Array<byte>(SampleSize);
@@ -123,7 +117,5 @@ namespace Z0.Test
             Claim.eq(bs, match);  
 
         }
-
     }
-
 }

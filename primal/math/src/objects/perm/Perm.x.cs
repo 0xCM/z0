@@ -187,27 +187,36 @@ namespace Z0
             copy.Shuffle(random);
             return copy;
         }
-        
-        public static Option<Perm4> Symbol(this Perm4 src, int index)
-        {            
-            if(index >=0 && index <= 3)
-            {
-                var start = (byte)(index * 2);
-                var end = (byte)(start + 1);
-                var value = BitMask.between((byte)src, start, end);
-                switch(value)
-                {
-                    case 0: return Perm4.A;
-                    case 1: return Perm4.B;
-                    case 2: return Perm4.C;
-                    case 3: return Perm4.D;
-                    default:
-                        return default;
-                }
-            }
-            return default;
+
+        /// <summary>
+        /// Computes the digigs corresponding to each 2-bit segment of the permutation spec
+        /// </summary>
+        /// <param name="src">The perm spec</param>
+        public static Span<N4, byte> Digits(this Perm4 src)
+        {
+            var scalar = (byte)src;
+            var dst = NatSpan.alloc<N4,byte>();
+            dst[0] = BitMask.between(scalar, 0, 1);
+            dst[1] = BitMask.between(scalar, 2, 3);
+            dst[2] = BitMask.between(scalar, 4, 5);
+            dst[3] = BitMask.between(scalar, 6, 7);
+            return dst;
         }
 
+        public static string FormatBlock(this Perm4 src, bool bracketed = true)
+        {
+            var bs = BitString.FromScalar((byte)src);
+            var data = bs.Format(false,false,2, AsciSym.Space);
+            return bracketed ? bracket(data) : data;
+        }
+
+        /// <summary>
+        /// Determines whether a perm value is a symbol
+        /// </summary>
+        /// <param name="src">The value to inspect</param>
+        public static bool IsSymbol(this Perm4 src)
+            => src == Perm4.A || src == Perm4.B || src == Perm4.C || src == Perm4.D;        
+        
         /// <summary>
         /// Usefully formats the permutation spec
         /// </summary>
@@ -215,5 +224,43 @@ namespace Z0
         [MethodImpl(Inline)]
         public static string Format(this Perm4 src)
             => $"{src} = {((byte)src).ToBitString()} = {((byte)src).FormatHex()}"; 
+
+        
+        /// <summary>
+        /// Formats the value as a permutation map, i.e., [00 01 10 11]: ABCD -> ABDC
+        /// </summary>
+        /// <param name="src">The permutation spec</param>
+        public static string FormatMap(this Perm4 src)
+        {
+            static char letter(bit x, bit y)
+            {
+                if(x && y)
+                    return 'D';
+                else if(!x && !y)
+                    return 'A';
+                else if(x && !y)
+                    return 'B';
+                else
+                    return 'C';
+            }
+
+            static string letters(BitString bs)
+            {
+                Span<char> letters = stackalloc char[4];
+                int i=0, j=0;
+                letters[i++] = letter(bs[j++], bs[j++]);
+                letters[i++] = letter(bs[j++], bs[j++]);
+                letters[i++] = letter(bs[j++], bs[j++]);            
+                letters[i++] = letter(bs[j++], bs[j++]);            
+                return new string(letters);
+            }
+
+            var bs = BitString.FromScalar((byte)src);
+            var block = src.FormatBlock();
+            var domain = $"{Perm4.A}{Perm4.B}{Perm4.C}{Perm4.D}";
+            var codomain = letters(bs);
+            var mapping = $"{block}: {domain} -> {codomain}";
+            return mapping;
+        }             
     }
 }

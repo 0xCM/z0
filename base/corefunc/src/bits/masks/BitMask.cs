@@ -758,14 +758,6 @@ namespace Z0
             return ref src;
         }
 
-        // [MethodImpl(Inline)]
-        // public static ref ulong set(ref ulong src, byte pos, bit state)            
-        // {
-        //     if(state) enable(ref src, pos);
-        //     else disable(ref src, pos);
-        //     return ref src;
-        // }
-
         /// <summary>
         /// Aligns an index-identified bit in a source value with a supplied bit value
         /// </summary>
@@ -780,7 +772,6 @@ namespace Z0
             return ref src;
         }
         
-
         /// <summary>
         /// Enaables a bit in the target if it is enabled in the source
         /// </summary>

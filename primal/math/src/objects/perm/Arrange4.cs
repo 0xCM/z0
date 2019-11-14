@@ -49,6 +49,4 @@ namespace Z0
 
         DCBA = D | (C << 2) | (B << 4) | (A << 6),
    }
-
-
 }

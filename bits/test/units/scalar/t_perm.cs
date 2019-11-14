@@ -26,7 +26,7 @@ namespace Z0.Test
 
         public void perm_swap()
         {
-            var id = PermG.Identity((byte)32);
+            var id = PermG.identity((byte)32);
             var p = id.Replicate();
             p.Swap(3,4).Swap(4,5).Swap(5,6);
             Claim.eq(p[6], id[3]);
@@ -36,10 +36,10 @@ namespace Z0.Test
             where T : unmanaged
         {
             
-            var perm = PermG<T>.Identity(n);
+            var perm = PermG<T>.identity(n);
             var lengths = range(m,n);
             iter(lengths, i => {
-                var p = PermG<T>.Identity(i);
+                var p = PermG<T>.identity(i);
                 var cycle = p.Cycle(default(T));
                 Claim.eq(cycle.Length, 1);                            
             });

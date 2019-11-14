@@ -11,7 +11,7 @@ namespace Z0.Test
     using static zfunc;
 
 
-    public class t_bvextract : BitVectorTest<t_bvextract>
+    public class t_bc_extract : BitVectorTest<t_bc_extract>
     {
         public void extract64()
         {

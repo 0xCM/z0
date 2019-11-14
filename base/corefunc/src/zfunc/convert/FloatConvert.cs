@@ -17,23 +17,23 @@ namespace Z0
     {
         [MethodImpl(Inline)]
         public static double to64f(sbyte src)        
-            => src;//ConvertScalarToVector128Double(default, src).GetElement(0);
+            => src;
 
         [MethodImpl(Inline)]
         public static double to64f(byte src)        
-            => src; //ConvertScalarToVector128Double(default, (int)src).GetElement(0);
+            => src;
         
         [MethodImpl(Inline)]
         public static double to64f(short src)        
-            => src;//ConvertScalarToVector128Double(default, (int)src).GetElement(0);
+            => src;
 
         [MethodImpl(Inline)]
         public static double to64f(ushort src)        
-            => src;//ConvertScalarToVector128Double(default, (int)src).GetElement(0);
+            => src;
 
         [MethodImpl(Inline)]
         public static double to64f(int src)        
-            => src;// ConvertScalarToVector128Double(default, src).GetElement(0);
+            => src;
 
         [MethodImpl(Inline)]
         public static double to64f(uint src)        

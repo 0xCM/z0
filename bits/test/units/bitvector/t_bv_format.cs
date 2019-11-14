@@ -11,7 +11,7 @@ namespace Z0.Test
     using static zfunc;
 
 
-    public class t_bvformat : BitVectorTest<t_bvformat>
+    public class t_bv_format : BitVectorTest<t_bv_format>
     {
 
         public void format16()

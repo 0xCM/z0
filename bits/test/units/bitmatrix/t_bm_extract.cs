@@ -23,29 +23,8 @@ namespace Z0.Test
             check_extract(Random.BitMatrix<N5,N7,uint>());            
         }
 
-        public void col8()
-        {
-            CycleColExtract8();
-        }
-
-        public void col16()
-        {
-
-            CycleColExtract16();
-
-        }
-
-        public void col32()
-        {
-            CycleColExtract32();
-        }
-
-        public void col64()
-        {
-            CycleColExtract64();
-        }
-
-        public void eq32()
+        
+        public void eq_32x32()
         {
             var x = Random.BitMatrix(n32);
             var y = Random.BitMatrix(n32);
@@ -54,7 +33,7 @@ namespace Z0.Test
             Claim.yea(y.Equals(y));
         }
 
-        public void eq64()
+        public void eq_64x64()
         {
             var x = Random.BitMatrix(n64);
             var y = Random.BitMatrix(n64);
@@ -69,9 +48,8 @@ namespace Z0.Test
             Claim.yea(y == y);
         }
 
-        public void flip64()
-        {
-            
+        public void not_64x64()
+        {            
             var x = Random.BitMatrix(n64);
             var y = x.Replicate();
             var xff = ~(~x);
@@ -98,12 +76,12 @@ namespace Z0.Test
                     Claim.eq(vector[col], src[row,col]);
             }
         }
-        
-        void CycleColExtract64(int cycles = DefaltCycleCount)
+
+        public void extract_col_8()
         {
-            for(var j = 0; j< cycles; j++)
+            for(var j = 0; j< SampleSize; j++)
             {
-                var src = Random.BitMatrix(n64);
+                var src = Random.BitMatrix8();
                 for(var c = 0; c < src.ColCount; c ++)
                 {
                     var col = src.ColVector(c);
@@ -113,9 +91,23 @@ namespace Z0.Test
             }
         }
 
-        void CycleColExtract32(int cycles = DefaltCycleCount)
+        public void extract_col_16()
         {
-            for(var j = 0; j< cycles; j++)
+            for(var j = 0; j< SampleSize; j++)
+            {
+                var src = Random.BitMatrix16();
+                for(var c = 0; c < src.ColCount; c ++)
+                {
+                    var col = src.ColVector(c);
+                    for(var r=0; r<src.RowCount; r++)
+                        Claim.eq(col[r], src[r,c]);
+                }
+            }
+        }
+
+        public void extract_col_32()
+        {
+            for(var j = 0; j< SampleSize; j++)
             {
                 var src = Random.BitMatrix(n32);
                 for(var c = 0; c < src.ColCount; c ++)
@@ -127,26 +119,11 @@ namespace Z0.Test
             }
         }
 
-        void CycleColExtract16(int cycles = DefaltCycleCount)
+        public void extract_col_64()
         {
-            for(var j = 0; j< cycles; j++)
+            for(var j = 0; j< SampleSize; j++)
             {
-                var src = Random.BitMatrix16();
-                for(var c = 0; c < src.ColCount; c ++)
-                {
-                    var col = src.ColVector(c);
-                    for(var r=0; r<src.RowCount; r++)
-                        Claim.eq(col[r], src[r,c]);
-                }
-            }
-
-        }
-
-        void CycleColExtract8(int cycles = DefaltCycleCount)
-        {
-            for(var j = 0; j< cycles; j++)
-            {
-                var src = Random.BitMatrix8();
+                var src = Random.BitMatrix(n64);
                 for(var c = 0; c < src.ColCount; c ++)
                 {
                     var col = src.ColVector(c);
@@ -156,5 +133,4 @@ namespace Z0.Test
             }
         }
     }
-
 }

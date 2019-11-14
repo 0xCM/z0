@@ -28,7 +28,7 @@ namespace Z0
         /// </summary>
         /// <param name="n">The permutation length</param>
         [MethodImpl(Inline)]
-        public static PermG<T> Identity(T n)
+        public static PermG<T> identity(T n)
             => new PermG<T>(range(default, gmath.dec(n)));
 
         /// <summary>
@@ -43,16 +43,16 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source span</param>
         [MethodImpl(Inline)]
-        public static PermG<T> Define(ReadOnlySpan<T> src)
+        public static PermG<T> From(ReadOnlySpan<T> src)
             => new PermG<T>(src.ToArray());
         
         [MethodImpl(Inline)]
         public static implicit operator PermG<T>(Span<T> src)
-            => Define(src);
+            => From(src);
 
         [MethodImpl(Inline)]
         public static implicit operator PermG<T>(ReadOnlySpan<T> src)
-            => Define(src);
+            => From(src);
 
         /// <summary>
         /// Implicitly converts an integral value n into an identity permutation of length n
@@ -60,7 +60,7 @@ namespace Z0
         /// <param name="n">The permutation length</param>
         [MethodImpl(Inline)]
         public static implicit operator PermG<T>(T n)
-            => Identity(n);
+            => identity(n);
 
         /// <summary>
         /// Computes the composition h of f and g where f and g have common length n and h(i) = g(f(i)) for i = 0, ... n-1
@@ -95,7 +95,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public PermG(T n, (T i, T j)[] swaps)
         {
-            terms = Identity(n).terms;
+            terms = identity(n).terms;
             Swap(swaps);
         }
 
@@ -107,7 +107,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public PermG(T n, SwapG<T>[] swaps)
         {
-            terms = Identity(n).terms;
+            terms = identity(n).terms;
             Swap(swaps);            
         }
 
@@ -134,7 +134,7 @@ namespace Z0
             for(var i=0; i< m; i++)
                 terms[i] = src[i];
 
-            var identity = Identity(n);
+            var identity = PermG<T>.identity(n);
             for(var i=m; i< count; i++)
                 terms[i] = identity[i - m];
         }

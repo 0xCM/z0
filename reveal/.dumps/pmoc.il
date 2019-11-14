@@ -1,4 +1,4 @@
-// 2019-11-13 09:54:09:474
+// 2019-11-13 14:17:00:049
 Sign:int signum_d16u(ushort x)
 {
     IL_0000: ldarg.0
@@ -1814,7 +1814,7 @@ bit lteq_g64u(ulong lhs, ulong rhs)
     IL_0007: ret
 
 }
-sbyte max_d8i(sbyte lhs, sbyte rhs)
+sbyte max_d8i(sbyte a, sbyte b)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
@@ -1822,7 +1822,7 @@ sbyte max_d8i(sbyte lhs, sbyte rhs)
     IL_0007: ret
 
 }
-sbyte max_g8i(sbyte lhs, sbyte rhs)
+sbyte max_g8i(sbyte a, sbyte b)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
@@ -1830,7 +1830,7 @@ sbyte max_g8i(sbyte lhs, sbyte rhs)
     IL_0007: ret
 
 }
-byte max_d8u(byte lhs, byte rhs)
+byte max_d8u(byte a, byte b)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
@@ -1838,7 +1838,7 @@ byte max_d8u(byte lhs, byte rhs)
     IL_0007: ret
 
 }
-byte max_g8u(byte lhs, byte rhs)
+byte max_g8u(byte a, byte b)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
@@ -1846,7 +1846,7 @@ byte max_g8u(byte lhs, byte rhs)
     IL_0007: ret
 
 }
-short max_d16i(short lhs, short rhs)
+short max_d16i(short a, short b)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
@@ -1854,7 +1854,7 @@ short max_d16i(short lhs, short rhs)
     IL_0007: ret
 
 }
-short max_g16i(short lhs, short rhs)
+short max_g16i(short a, short b)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
@@ -1862,7 +1862,7 @@ short max_g16i(short lhs, short rhs)
     IL_0007: ret
 
 }
-ushort max_d16u(ushort lhs, ushort rhs)
+ushort max_d16u(ushort a, ushort b)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
@@ -1870,7 +1870,7 @@ ushort max_d16u(ushort lhs, ushort rhs)
     IL_0007: ret
 
 }
-ushort max_g16u(ushort lhs, ushort rhs)
+ushort max_g16u(ushort a, ushort b)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
@@ -1878,7 +1878,7 @@ ushort max_g16u(ushort lhs, ushort rhs)
     IL_0007: ret
 
 }
-int max_d32i(int lhs, int rhs)
+int max_d32i(int a, int b)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
@@ -1886,7 +1886,7 @@ int max_d32i(int lhs, int rhs)
     IL_0007: ret
 
 }
-int max_g32i(int lhs, int rhs)
+int max_g32i(int a, int b)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
@@ -1894,7 +1894,7 @@ int max_g32i(int lhs, int rhs)
     IL_0007: ret
 
 }
-uint max_d32u(uint lhs, uint rhs)
+uint max_d32u(uint a, uint b)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
@@ -1902,7 +1902,7 @@ uint max_d32u(uint lhs, uint rhs)
     IL_0007: ret
 
 }
-uint max_g32u(uint lhs, uint rhs)
+uint max_g32u(uint a, uint b)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
@@ -1910,7 +1910,7 @@ uint max_g32u(uint lhs, uint rhs)
     IL_0007: ret
 
 }
-long max_d64i(long lhs, long rhs)
+long max_d64i(long a, long b)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
@@ -1918,7 +1918,7 @@ long max_d64i(long lhs, long rhs)
     IL_0007: ret
 
 }
-long max_g64i(long lhs, long rhs)
+long max_g64i(long a, long b)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
@@ -1926,7 +1926,7 @@ long max_g64i(long lhs, long rhs)
     IL_0007: ret
 
 }
-ulong max_d64u(ulong lhs, ulong rhs)
+ulong max_d64u(ulong a, ulong b)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
@@ -1934,7 +1934,7 @@ ulong max_d64u(ulong lhs, ulong rhs)
     IL_0007: ret
 
 }
-ulong max_g64u(ulong lhs, ulong rhs)
+ulong max_g64u(ulong a, ulong b)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
@@ -4343,8 +4343,9 @@ bool divides_d32f(float lhs, float rhs)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: call System.Boolean Z0.fmath::divides(System.Single,System.Single)
-    IL_0007: ret
+    IL_0002: call Z0.bit Z0.fmath::divides(System.Single,System.Single)
+    IL_0007: call System.Boolean Z0.bit::op_Implicit(Z0.bit)
+    IL_000C: ret
 
 }
 bool divides_g32f(float lhs, float rhs)
@@ -4359,8 +4360,9 @@ bool divides_d64f(double lhs, double rhs)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: call System.Boolean Z0.fmath::divides(System.Double,System.Double)
-    IL_0007: ret
+    IL_0002: call Z0.bit Z0.fmath::divides(System.Double,System.Double)
+    IL_0007: call System.Boolean Z0.bit::op_Implicit(Z0.bit)
+    IL_000C: ret
 
 }
 bool divides_g64f(double lhs, double rhs)

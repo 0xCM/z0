@@ -5,17 +5,13 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Collections.Generic;
-    using System.Threading;
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
 
     using static zfunc;
 
     partial class BitMatrix
-    {        
-                
+    {                        
         /// <summary>
         /// Loads a generic bitmatrix from a span
         /// </summary>
@@ -78,8 +74,5 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where T : unmanaged
                 => BitMatrix<M,N,T>.Load(src); 
-
-
-
     }
 }

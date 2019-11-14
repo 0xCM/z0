@@ -17,7 +17,6 @@ namespace Z0
     /// </summary>
     public struct Perm
     {
-
         /// <summary>
         /// Defines the permutation (0 -> terms[0], 1 -> terms[1], ..., n - 1 -> terms[n-1])
         /// where n is the length of the array
@@ -29,14 +28,14 @@ namespace Z0
         /// </summary>
         /// <param name="n">The permutation length</param>
         [MethodImpl(Inline)]
-        public static Perm Identity(int n)
+        public static Perm identity(int n)
             => new Perm(range(0, n-1));
 
         /// <summary>
         /// Allocates an empty permutation
         /// </summary>
         [MethodImpl(Inline)]
-        public static Perm Alloc(int n)
+        public static Perm alloc(int n)
             => new Perm(new int[n]);
 
         /// <summary>
@@ -45,7 +44,7 @@ namespace Z0
         /// <typeparam name="N">The length type</typeparam>
         /// <typeparam name="T">The term type</typeparam>
         [MethodImpl(Inline)]
-        public static Perm<N> Identity<N>(N n = default)
+        public static Perm<N> identity<N>(N n = default)
             where N : unmanaged, ITypeNat
                 => Perm<N>.Identity.Replicate();
 
@@ -107,7 +106,6 @@ namespace Z0
             where N : unmanaged, ITypeNat
                 => (i,j);
 
-
         [MethodImpl(Inline)]
         public static implicit operator Perm(Span<int> src)
             => Define(src);
@@ -151,14 +149,14 @@ namespace Z0
         [MethodImpl(Inline)]
         public Perm(int n, (int i, int j)[] src)
         {
-            terms = Identity(n).terms;
+            terms = identity(n).terms;
             Swap(src);
         }
 
         [MethodImpl(Inline)]
         public Perm(int n, Swap[] src)
         {
-            terms = Identity(n).terms;
+            terms = identity(n).terms;
             Apply(src);            
         }
 
@@ -178,7 +176,7 @@ namespace Z0
             for(var i=0; i< m; i++)
                 terms[i] = src[i];
 
-            var identity = Identity(n);
+            var identity = Perm.identity(n);
             for(var i=m; i< n; i++)
                 terms[i] = identity[i - m];
         }
@@ -271,7 +269,7 @@ namespace Z0
         public Perm Compose(Perm g)
         {
             var n = length(terms, g.terms);
-            var dst = Alloc(n);
+            var dst = alloc(n);
             var f = this;
             for(var i=0; i< n; i++)
                 dst[i] = g[f[i]];
@@ -294,7 +292,7 @@ namespace Z0
         /// </summary>
         public Perm Invert()
         {
-            var dst = Alloc(Length);
+            var dst = alloc(Length);
             for(var i=0; i< Length; i++)
                 dst[terms[i]] = i;
             return dst;

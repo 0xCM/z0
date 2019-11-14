@@ -57,7 +57,6 @@ namespace Z0
             Claim.yea(m3 == m1);
         }
 
-
         public void bm_transpose_16x16x16()
         {
             var m1 = Random.BitMatrix(n16);

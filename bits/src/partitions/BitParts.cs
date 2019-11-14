@@ -385,6 +385,9 @@ namespace Z0
         static uint project(uint src, uint mask)
             => Bits.scatter(src,mask);    
 
+        [MethodImpl(Inline)]
+        static ushort project(ushort src, ushort mask)
+            => Bits.scatter(src,mask);    
 
         [MethodImpl(Inline)]
         static byte select(byte src, byte mask)

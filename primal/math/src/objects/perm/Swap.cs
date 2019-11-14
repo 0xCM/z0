@@ -18,7 +18,6 @@ namespace Z0
     /// </summary>
     public struct Swap
     {
-     
         /// <summary>
         /// The first index
         /// </summary>
@@ -29,6 +28,16 @@ namespace Z0
         /// </summary>
         public int j;
 
+        /// <summary>
+        /// The monodial zero
+        /// </summary>
+        public static Swap Zero => (0,0);
+
+        /// <summary>
+        /// The empty element, which is not Zero
+        /// </summary>
+        public static Swap Empty => (-1,-1);
+        
         /// <summary>
         /// Effects (i j) -> ((i + 1) (j+ 1))
         /// </summary>
@@ -48,17 +57,6 @@ namespace Z0
             --src;
             return ref src;
         }
-
-
-        /// <summary>
-        /// The empty element
-        /// </summary>
-        public static readonly Swap Empty = (-1,-1);
-        
-        /// <summary>
-        /// The monodial zero
-        /// </summary>
-        public static readonly Swap Zero = (0,0);
 
         /// <summary>
         /// Creates a sequence of transpositions
@@ -99,7 +97,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator (int i, int j)(Swap src)
             => (src.i, src.j);
-
 
         [MethodImpl(Inline)]
         public static Swap operator ++(in Swap src)
@@ -176,10 +173,9 @@ namespace Z0
             => (i,j);
 
         public override int GetHashCode()
-            => throw new NotSupportedException();
+            => HashCode.Combine(i,j);
              
         public override bool Equals(object o)
-            => throw new NotSupportedException();
-
+            => o is Swap x && Equals(x);
     }
 }

@@ -25,6 +25,19 @@ namespace Z0
         public void xor_64x64g()
             => xor_generic_check<ulong>();
         
+        public void bm_or_32x32()
+        {
+            for(var i=0; i<SampleSize; i++)
+            {
+                var A = Random.BitMatrix(n32);
+                var B = Random.BitMatrix(n32);
+                var C = A | B;
+
+                var D = BitMatrix32.From(mathspan.or(A.Bytes, B.Bytes));
+                Claim.yea(C == D);
+            }
+        }
+
         public void not_32x32()
         {
             for(var i=0; i<SampleSize; i++)

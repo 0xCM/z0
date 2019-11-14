@@ -2,20 +2,16 @@
 // Copyright   :  (c) Chris Moore, 2019
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Test
+namespace Z0
 {
     using System;
-    using System.Linq;
     using System.Runtime.CompilerServices;
 
     using static zfunc;
 
-    using static BitRef;
 
-
-    public class t_bvconcat : BitVectorTest<t_bvconcat>
+    public class t_bv_concat : BitVectorTest<t_bv_concat>
     {
-
         public void bv_inc_8()
         {            
             var bv = BitVector8.Zero;
@@ -40,7 +36,5 @@ namespace Z0.Test
             var bsTail = tail.ToBitString();
             Claim.eq(bsWhole, bsHead + bsTail);        
         }
-
-
     }
 }

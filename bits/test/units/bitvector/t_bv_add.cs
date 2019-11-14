@@ -11,7 +11,7 @@ namespace Z0.Test
     using static zfunc;
 
 
-    public class t_bvadd : BitVectorTest<t_bvadd>
+    public class t_bv_add : BitVectorTest<t_bv_add>
     {
 
         public void bvadd_8()

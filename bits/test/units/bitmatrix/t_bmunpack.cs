@@ -11,9 +11,9 @@ namespace Z0.Test
     
     using static zfunc;
 
-    public class tbm_unpack : BitMatrixTest<tbm_unpack>
+    public class t_bm_unpack : BitMatrixTest<t_bm_unpack>
     {
-        public void bm_unpack_8x8x8_8x8x8()
+        public void bm_unpack_8x8()
         {
             var dst = Matrix.alloc<N8,byte>();
             var m = dst.ColCount;
@@ -29,7 +29,7 @@ namespace Z0.Test
             }
         }
 
-        public void bm_unpack_64x64x64_64x64x64()
+        public void bm_unpack_64x64()
         {
             var dst = Matrix.alloc<N64,ulong>();
             var m = dst.ColCount;
@@ -45,7 +45,5 @@ namespace Z0.Test
 
             }
         }
-
     }
-
 }

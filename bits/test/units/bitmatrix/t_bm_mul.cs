@@ -11,10 +11,8 @@ namespace Z0.Test
     
     using static zfunc;
 
-    public class tbm_mul : BitMatrixTest<tbm_mul>
+    public class t_bm_mul : BitMatrixTest<t_bm_mul>
     {
-
-
         public void bmm_4x4_bench()
         {
             var sw = stopwatch(false);
