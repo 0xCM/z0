@@ -10,8 +10,9 @@
     <ProjectReference Include="$(TopDir)base/coredata/src/z0.coredata.csproj" />    
     <ProjectReference Include="$(TopDir)base/corefunc/src/z0.corefunc.csproj" />
     <ProjectReference Include="$(TopDir)stats/dist/z0.statdist.csproj" />
-    <ProjectReference Include="$(TopDir)primal/math/src/z0.math.csproj" />
-    <ProjectReference Include="$(TopDir)primal/intrinsic/src/z0.intrinsic.csproj" />
+    <ProjectReference Include="$(TopDir)gmath/src/z0.gmath.csproj" />
+    <ProjectReference Include="$(TopDir)intrinsics/src/z0.intrinsics.csproj" />
+    
     <ProjectReference Include="$(TopDir)cpu/cpudata/z0.cpudata.csproj" />
     <ProjectReference Include="$(TopDir)cpu/cpufunc/z0.cpufunc.csproj" />
     <ProjectReference Include="$(TopDir)rng/core/z0.rng.core.csproj" />    
@@ -30,8 +31,8 @@
 
     <ProjectReference Include="$(TopDir)base/nats/test/z0.nats.test.csproj" />
     <ProjectReference Include="$(TopDir)base/corefunc/test/z0.corefunc.test.csproj" />
-    <ProjectReference Include="$(TopDir)primal/math/test/z0.math.test.csproj" />
-    <ProjectReference Include="$(TopDir)primal/intrinsic/test/z0.intrinsic.test.csproj" />
+    <ProjectReference Include="$(TopDir)gmath/test/z0.gmath.test.csproj" />
+    <ProjectReference Include="$(TopDir)intrinsics/test/z0.intrinsics.test.csproj" />
     <ProjectReference Include="$(TopDir)cpu/test/z0.cpu.test.csproj" />
     <ProjectReference Include="$(TopDir)bits/test/z0.bits.test.csproj" />
     <ProjectReference Include="$(TopDir)circuits/test/z0.circuits.test.csproj" />

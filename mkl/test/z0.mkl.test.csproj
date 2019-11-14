@@ -11,7 +11,8 @@
     <ProjectReference Include="$(TopDir)base/coredata/src/z0.coredata.csproj" />    
     <ProjectReference Include="$(TopDir)base/corefunc/src/z0.corefunc.csproj" />
     <ProjectReference Include="$(TopDir)stats/dist/z0.statdist.csproj" />
-    <ProjectReference Include="$(TopDir)primal/math/src/z0.math.csproj" />
+        <ProjectReference Include="$(TopDir)gmath/src/z0.gmath.csproj" />
+
     <ProjectReference Include="$(TopDir)linear/matrix/src/z0.matrix.csproj" />        
     <ProjectReference Include="$(TopDir)testing/z0.testing.csproj" />
     <ProjectReference Include="$(TopDir)mkl/src/z0.mkl.csproj" />        

@@ -1,8 +1,8 @@
 dotnet sln add base/nats/src/z0.nats.csproj
 dotnet sln add base/coredata/src/z0.coredata.csproj
 dotnet sln add base/corefunc/src/z0.corefunc.csproj
-dotnet sln add primal/math/src/z0.math.csproj
-dotnet sln add primal/intrinsic/src/z0.intrinsic.csproj
+dotnet sln add gmath/src/z0.gmath.csproj
+dotnet sln add intrinsics/src/z0.intrinsics.csproj
 dotnet sln add libm/src/z0.libm.csproj
 dotnet sln add cpu/cpudata/z0.cpudata.csproj
 dotnet sln add cpu/cpufunc/z0.cpufunc.csproj
@@ -23,11 +23,11 @@ dotnet sln add testing/z0.testing.csproj
 
 dotnet sln add reveal/app/z0.reveal.app.csproj
 
-dotnet sln add primal/math/test/z0.math.test.csproj
+dotnet sln add gmath/test/z0.gmath.test.csproj
+dotnet sln add intrinsics/test/z0.intrinsics.test.csproj
 dotnet sln add libm/test/z0.libm.test.csproj
 dotnet sln add base/nats/test/z0.nats.test.csproj
 dotnet sln add base/corefunc/test/z0.corefunc.test.csproj
-dotnet sln add primal/intrinsic/test/z0.intrinsic.test.csproj
 dotnet sln add cpu/test/z0.cpu.test.csproj
 dotnet sln add mkl/test/z0.mkl.test.csproj
 dotnet sln add bits/test/z0.bits.test.csproj
