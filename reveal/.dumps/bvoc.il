@@ -1,4 +1,4 @@
-// 2019-11-13 14:17:00:816
+// 2019-11-14 10:18:55:512
 int popbs(ulong src)
 {
     IL_0000: ldarg.0
@@ -226,114 +226,6 @@ ref double bitmap_g64f_to_64f(in double src, byte srcOffset, byte len, byte dstO
     IL_000B: ret
 
 }
-ref ulong bitset_2(ref ulong src, int pos, bit state)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.0
-    IL_0002: ldind.i8
-    IL_0003: ldc.i4.1
-    IL_0004: conv.i8
-    IL_0005: ldarg.1
-    IL_0006: ldc.i4.s 63
-    IL_0008: and
-    IL_0009: shl
-    IL_000A: not
-    IL_000B: and
-    IL_000C: ldarg.2
-    IL_000D: call System.UInt64 Z0.bit::op_Explicit(Z0.bit)
-    IL_0012: ldarg.1
-    IL_0013: ldc.i4.s 63
-    IL_0015: and
-    IL_0016: shl
-    IL_0017: or
-    IL_0018: stind.i8
-    IL_0019: ldarg.0
-    IL_001A: ret
-
-}
-ref ulong bitset_3(ref ulong src, byte pos, bit state)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: ldarg.2
-    IL_0003: call System.UInt64& Z0.BitMask::set(System.UInt64&,System.Byte,Z0.bit)
-    IL_0008: ret
-
-}
-ref ulong bitmask_set(ref ulong src, byte pos, bit state)
-{
-    IL_0000: ldarg.2
-    IL_0001: call System.Boolean Z0.bit::op_Implicit(Z0.bit)
-    IL_0006: brfalse.s IL_0012
-    IL_0008: ldarg.0
-    IL_0009: ldarg.1
-    IL_000A: call System.UInt64& Z0.BitMask::enable(System.UInt64&,System.Int32)
-    IL_000F: pop
-    IL_0010: br.s IL_001A
-    IL_0012: ldarg.0
-    IL_0013: ldarg.1
-    IL_0014: call System.UInt64& Z0.BitMask::disable(System.UInt64&,System.Int32)
-    IL_0019: pop
-    IL_001A: ldarg.0
-    IL_001B: ret
-
-}
-byte blsmsk_d8u(byte src)
-{
-    IL_0000: ldarg.0
-    IL_0001: call System.Byte Z0.Bits::blsmsk(System.Byte)
-    IL_0006: ret
-
-}
-byte blsmsk_g8u(byte src)
-{
-    IL_0000: ldarg.0
-    IL_0001: call System.Byte Z0.gbits::blsmsk<System.Byte>(System.Byte)
-    IL_0006: ret
-
-}
-ushort blsmsk_d16u(ushort src)
-{
-    IL_0000: ldarg.0
-    IL_0001: call System.UInt16 Z0.Bits::blsmsk(System.UInt16)
-    IL_0006: ret
-
-}
-ushort blsmsk_g16u(ushort src)
-{
-    IL_0000: ldarg.0
-    IL_0001: call System.UInt16 Z0.gbits::blsmsk<System.UInt16>(System.UInt16)
-    IL_0006: ret
-
-}
-uint blsmsk_d32u(uint src)
-{
-    IL_0000: ldarg.0
-    IL_0001: call System.UInt32 Z0.Bits::blsmsk(System.UInt32)
-    IL_0006: ret
-
-}
-uint blsmsk_g32u(uint src)
-{
-    IL_0000: ldarg.0
-    IL_0001: call System.UInt32 Z0.gbits::blsmsk<System.UInt32>(System.UInt32)
-    IL_0006: ret
-
-}
-ulong blsmsk_g64u(ulong src)
-{
-    IL_0000: ldarg.0
-    IL_0001: call System.UInt64 Z0.gbits::blsmsk<System.UInt64>(System.UInt64)
-    IL_0006: ret
-
-}
-ulong blsmsk_d64u(ulong src)
-{
-    IL_0000: ldarg.0
-    IL_0001: call System.UInt64 Z0.Bits::blsmsk(System.UInt64)
-    IL_0006: ret
-
-}
 bit dot_32g(BitVector<uint> x, BitVector<uint> y)
 {
     IL_0000: ldarg.0
@@ -539,143 +431,112 @@ BitVector32 rotr_bv_32u(BitVector32 x, int offset)
     IL_0007: ret
 
 }
-void part64x1_byte(ulong src, Span<byte> dst)
+ref ulong bitset_2(ref ulong src, int pos, bit state)
 {
     IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: call System.Void Z0.BitParts::part64x1(System.UInt64,System.Span`1<System.Byte>)
-    IL_0007: ret
+    IL_0001: ldarg.0
+    IL_0002: ldind.i8
+    IL_0003: ldc.i4.1
+    IL_0004: conv.i8
+    IL_0005: ldarg.1
+    IL_0006: ldc.i4.s 63
+    IL_0008: and
+    IL_0009: shl
+    IL_000A: not
+    IL_000B: and
+    IL_000C: ldarg.2
+    IL_000D: call System.UInt64 Z0.bit::op_Explicit(Z0.bit)
+    IL_0012: ldarg.1
+    IL_0013: ldc.i4.s 63
+    IL_0015: and
+    IL_0016: shl
+    IL_0017: or
+    IL_0018: stind.i8
+    IL_0019: ldarg.0
+    IL_001A: ret
 
 }
-void part64x1_bit(ulong src, Span<bit> dst)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: call System.Void Z0.BitParts::part64x1(System.UInt64,System.Span`1<Z0.bit>)
-    IL_0007: ret
-
-}
-uint pop3x256(Vector256<ulong> x, Vector256<ulong> y, Vector256<ulong> z)
+ref ulong bitset_3(ref ulong src, byte pos, bit state)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.UInt32 Z0.Bits::pop(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
+    IL_0003: call System.UInt64& Z0.BitMask::set(System.UInt64&,System.Byte,Z0.bit)
     IL_0008: ret
 
 }
-uint pop3x128(Vector128<ulong> x, Vector128<ulong> y, Vector128<ulong> z)
+ref ulong bitmask_set(ref ulong src, byte pos, bit state)
 {
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: ldarg.2
-    IL_0003: call System.UInt32 Z0.Bits::pop(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
-    IL_0008: ret
+    IL_0000: ldarg.2
+    IL_0001: call System.Boolean Z0.bit::op_Implicit(Z0.bit)
+    IL_0006: brfalse.s IL_0012
+    IL_0008: ldarg.0
+    IL_0009: ldarg.1
+    IL_000A: call System.UInt64& Z0.BitMask::enable(System.UInt64&,System.Int32)
+    IL_000F: pop
+    IL_0010: br.s IL_001A
+    IL_0012: ldarg.0
+    IL_0013: ldarg.1
+    IL_0014: call System.UInt64& Z0.BitMask::disable(System.UInt64&,System.Int32)
+    IL_0019: pop
+    IL_001A: ldarg.0
+    IL_001B: ret
 
 }
-uint pop3x64(ulong x, ulong y, ulong z)
+byte blsmsk_d8u(byte src)
 {
     IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: ldarg.2
-    IL_0003: call System.UInt32 Z0.Bits::pop(System.UInt64,System.UInt64,System.UInt64)
-    IL_0008: ret
+    IL_0001: call System.Byte Z0.Bits::blsmsk(System.Byte)
+    IL_0006: ret
 
 }
-byte bzhi_d8u(byte src, uint index)
+byte blsmsk_g8u(byte src)
 {
     IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: call System.Byte Z0.Bits::bzhi(System.Byte,System.UInt32)
-    IL_0007: ret
+    IL_0001: call System.Byte Z0.gbits::blsmsk<System.Byte>(System.Byte)
+    IL_0006: ret
 
 }
-byte bzhi_g8u(byte src, uint index)
+ushort blsmsk_d16u(ushort src)
 {
     IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: call System.Byte Z0.gbits::bzhi<System.Byte>(System.Byte,System.UInt32)
-    IL_0007: ret
+    IL_0001: call System.UInt16 Z0.Bits::blsmsk(System.UInt16)
+    IL_0006: ret
 
 }
-ref byte bzhi_g8u_ref(ref byte src, uint index)
+ushort blsmsk_g16u(ushort src)
 {
     IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: call System.Byte& Z0.gbits::bzhi<System.Byte>(System.Byte&,System.UInt32)
-    IL_0007: ret
+    IL_0001: call System.UInt16 Z0.gbits::blsmsk<System.UInt16>(System.UInt16)
+    IL_0006: ret
 
 }
-ushort bzhi_d16u(ushort src, ushort index)
+uint blsmsk_d32u(uint src)
 {
     IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: call System.UInt16 Z0.Bits::bzhi(System.UInt16,System.UInt32)
-    IL_0007: ret
+    IL_0001: call System.UInt32 Z0.Bits::blsmsk(System.UInt32)
+    IL_0006: ret
 
 }
-ushort bzhi_g16u(ushort src, ushort index)
+uint blsmsk_g32u(uint src)
 {
     IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: call System.UInt16 Z0.gbits::bzhi<System.UInt16>(System.UInt16,System.UInt32)
-    IL_0007: ret
+    IL_0001: call System.UInt32 Z0.gbits::blsmsk<System.UInt32>(System.UInt32)
+    IL_0006: ret
 
 }
-ref ushort bzhi_g16u_ref(ref ushort src, ushort index)
+ulong blsmsk_g64u(ulong src)
 {
     IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: call System.UInt16& Z0.gbits::bzhi<System.UInt16>(System.UInt16&,System.UInt32)
-    IL_0007: ret
+    IL_0001: call System.UInt64 Z0.gbits::blsmsk<System.UInt64>(System.UInt64)
+    IL_0006: ret
 
 }
-uint bzhi_d32u(uint src, uint index)
+ulong blsmsk_d64u(ulong src)
 {
     IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: call System.UInt32 Z0.Bits::bzhi(System.UInt32,System.UInt32)
-    IL_0007: ret
-
-}
-uint bzhi_g32u(uint src, uint index)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: call System.UInt32 Z0.gbits::bzhi<System.UInt32>(System.UInt32,System.UInt32)
-    IL_0007: ret
-
-}
-ref uint bzhi_g32u_ref(ref uint src, uint index)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: call System.UInt32& Z0.gbits::bzhi<System.UInt32>(System.UInt32&,System.UInt32)
-    IL_0007: ret
-
-}
-ulong bzhi_d64u(ulong src, uint index)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: call System.UInt64 Z0.Bits::bzhi(System.UInt64,System.UInt32)
-    IL_0007: ret
-
-}
-ulong bzhi_g64u(ulong src, uint index)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: call System.UInt64 Z0.gbits::bzhi<System.UInt64>(System.UInt64,System.UInt32)
-    IL_0007: ret
-
-}
-ref ulong bzhi_g64u_ref(ref ulong src, uint index)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: call System.UInt64& Z0.gbits::bzhi<System.UInt64>(System.UInt64&,System.UInt32)
-    IL_0007: ret
+    IL_0001: call System.UInt64 Z0.Bits::blsmsk(System.UInt64)
+    IL_0006: ret
 
 }
 byte gather_d8u(byte src, byte mask)
@@ -840,5 +701,48 @@ ulong mask_8x64u(ref ulong dst, int exp0, int exp1, int exp2, int exp3, int exp4
     IL_000E: call System.UInt64& Z0.Bits::mask(System.UInt64&,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)
     IL_0013: ldind.i8
     IL_0014: ret
+
+}
+void part64x1_byte(ulong src, Span<byte> dst)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call System.Void Z0.BitParts::part64x1(System.UInt64,System.Span`1<System.Byte>)
+    IL_0007: ret
+
+}
+void part64x1_bit(ulong src, Span<bit> dst)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call System.Void Z0.BitParts::part64x1(System.UInt64,System.Span`1<Z0.bit>)
+    IL_0007: ret
+
+}
+uint pop3x256(Vector256<ulong> x, Vector256<ulong> y, Vector256<ulong> z)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: ldarg.2
+    IL_0003: call System.UInt32 Z0.Bits::pop(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
+    IL_0008: ret
+
+}
+uint pop3x128(Vector128<ulong> x, Vector128<ulong> y, Vector128<ulong> z)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: ldarg.2
+    IL_0003: call System.UInt32 Z0.Bits::pop(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
+    IL_0008: ret
+
+}
+uint pop3x64(ulong x, ulong y, ulong z)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: ldarg.2
+    IL_0003: call System.UInt32 Z0.Bits::pop(System.UInt64,System.UInt64,System.UInt64)
+    IL_0008: ret
 
 }

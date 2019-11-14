@@ -42,55 +42,55 @@ namespace Z0
         }
 
         /// <summary>
-        /// Permutes the rows of a matrix according to a specified permutation
+        /// Permutes the rows of a matrix in-place according to a permutation
         /// </summary>
-        /// <param name="spec">The permutation definition</param>
+        /// <param name="perm">The permutation to apply</param>
         /// <param name="A">The matrix to be permuted</param>
-        public static ref BitMatrix8 permute(Perm<N16> spec, ref BitMatrix8 A)
+        public static ref BitMatrix8 permute(Perm<N8> perm, ref BitMatrix8 A)
         {
-            for(var row = 0; row < spec.Length; row++)
-                if(spec[row] != row)
-                    A.RowSwap(row, spec[row]);
+            for(var row = 0; row < perm.Length; row++)
+                if(perm[row] != row)
+                    A.RowSwap(row, perm[row]);
             return ref A;
         }
 
         /// <summary>
-        /// Permutes the rows of a matrix according to a specified permutation
+        /// Permutes the rows of a matrix in-place according to a specified permutation
         /// </summary>
-        /// <param name="spec">The permutation definition</param>
+        /// <param name="perm">The permutation to apply</param>
         /// <param name="A">The matrix to be permuted</param>
-        public static ref BitMatrix16 permute(Perm<N16> spec, ref BitMatrix16 A)
+        public static ref BitMatrix16 permute(Perm<N16> perm, ref BitMatrix16 A)
         {
-            for(var row = 0; row < spec.Length; row++)
-                if(spec[row] != row)
-                    A.RowSwap(row, spec[row]);
+            for(var row = 0; row < perm.Length; row++)
+                if(perm[row] != row)
+                    A.RowSwap(row, perm[row]);
             return ref A;
         }
 
         /// <summary>
-        /// Permutes the rows of a matrix according to a specified permutation
+        /// Permutes the rows of a matrix in-place according to a permutation
         /// </summary>
-        /// <param name="spec">The permutation definition</param>
-        /// <param name="A">The matrix to be permuted</param>
-        public static ref BitMatrix32 permute(Perm<N32> spec, ref BitMatrix32 A)
+        /// <param name="perm">The permutation definition</param>
+        /// <param name="A">The source/target matrix</param>
+        public static ref BitMatrix32 permute(Perm<N32> perm, ref BitMatrix32 A)
         {
-            for(var row = 0; row < spec.Length; row++)
-                if(spec[row] != row)
-                    A.RowSwap(row, spec[row]);
+            for(var row = 0; row < perm.Length; row++)
+                if(perm[row] != row)
+                    A.RowSwap(row, perm[row]);
             return ref A;
         }
 
         /// <summary>
-        /// Applies a permutation to a target matrix by swapping the rows
-        /// according to permutation transpositions
+        /// Permutes the rows of a matrix in-place according to a permutation
         /// </summary>
-        /// <param name="spec">The permutation definition</param>
-        public static ref BitMatrix64 permute(Perm<N64> spec, ref BitMatrix64 dst)
+        /// <param name="perm">The permutation definition</param>
+        /// <param name="A">The source/target matrix</param>
+        public static ref BitMatrix64 permute(Perm<N64> perm, ref BitMatrix64 A)
         {
-            for(var row = 0; row < spec.Length; row++)
-                if(spec[row] != row)
-                    dst.RowSwap(row, spec[row]);
-            return ref dst;
+            for(var row = 0; row < perm.Length; row++)
+                if(perm[row] != row)
+                    A.RowSwap(row, perm[row]);
+            return ref A;
         }
     }
 }

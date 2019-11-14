@@ -25,17 +25,7 @@ namespace Z0
         /// <summary>
         /// The matrix order
         /// </summary>
-        public const uint Order = 64;
-
-        /// <summary>
-        /// The number of bytes required to store the matrix
-        /// </summary>
-        public const uint ByteCount = Order * 8;
-
-        /// <summary>
-        /// The order representative
-        /// </summary>
-        public static N64 N => default;
+        public const uint N = 64;
 
         /// <summary>
         /// Defines the 64x64 identity bitmatrix
@@ -45,11 +35,11 @@ namespace Z0
         /// <summary>
         /// Defines the 64x64 zero bitmatrix
         /// </summary>
-        public static BitMatrix64 Zero => Alloc();
+        public static BitMatrix64 Zero => new BitMatrix64(new ulong[N]);
         
         [MethodImpl(Inline)]
         public static BitMatrix64 Alloc()        
-            => new BitMatrix64(new ulong[Order]);
+            => new BitMatrix64(new ulong[N]);
 
         /// <summary>
         /// Allocates a matrix with a fill value
@@ -65,7 +55,7 @@ namespace Z0
         [MethodImpl(Inline)]
         internal static BitMatrix64 Alloc(BitVector64 fill)
         {
-            var data = new ulong[Order];
+            var data = new ulong[N];
             data.Fill(fill);
             return new BitMatrix64(data);
         }
@@ -136,7 +126,7 @@ namespace Z0
         [MethodImpl(Inline)]
         BitMatrix64(bit fill)
         {
-            this.data = new ulong[Order];
+            this.data = new ulong[N];
             if(fill)
                 data.Fill(ulong.MaxValue);
         }
@@ -144,19 +134,10 @@ namespace Z0
         /// <summary>
         /// Specifies the number of rows in the matrix
         /// </summary>
-        public readonly int RowCount
+        public readonly int Order
         {
             [MethodImpl(Inline)]
-            get => (int)Order;
-        }
-
-        /// <summary>
-        /// Specifies the number of columns in the matrix
-        /// </summary>
-        public readonly int ColCount
-        {
-            [MethodImpl(Inline)]
-            get => (int)Order;
+            get => (int)N;
         }
 
         /// <summary>
@@ -175,6 +156,15 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => data;
+        }
+
+        /// <summary>
+        /// A reference to the first row of the matrix
+        /// </summary>
+        public ref ulong Head
+        {
+            [MethodImpl(Inline)] 
+            get => ref head(data);
         }
 
         /// <summary>
@@ -243,7 +233,7 @@ namespace Z0
         public readonly ulong ColData(int index)
         {
             ulong col = 0;
-            for(var r = 0; r < Order; r++)
+            for(var r = 0; r < N; r++)
                 BitMask.setif(in data[r], index, ref col, r);
             return col;
         }
@@ -277,19 +267,11 @@ namespace Z0
         public readonly BitMatrix64 Transpose()
         {
             var dst = Replicate();
-            for(var i=0; i<Order; i++)
+            for(var i=0; i<N; i++)
                 dst.data[i] = ColData(i);
             return dst;
         }
 
-        /// <summary>
-        /// A reference to the first row of the matrix
-        /// </summary>
-        public ref ulong Head
-        {
-            [MethodImpl(Inline)] 
-            get => ref head(data);
-        }
 
         [MethodImpl(Inline)] 
         public readonly BitMatrix64 Replicate()

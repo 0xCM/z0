@@ -1350,7 +1350,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static bool nonz<T>(N128 n, int vcount, int step, in T a)
+        public static bit nonz<T>(N128 n, int vcount, int step, in T a)
             where T : unmanaged
         {
             var result = true;
@@ -1360,7 +1360,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static bool nonz<T>(N256 n, int vcount, int step, in T a)
+        public static bit nonz<T>(N256 n, int vcount, int step, in T a)
             where T : unmanaged
         {
             var result = true;
@@ -1406,7 +1406,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static bool testc<T>(N128 n, int vcount, int step, in T a)
+        public static bit testc<T>(N128 n, int vcount, int step, in T a)
             where T : unmanaged
         {
             var result = true;
@@ -1416,7 +1416,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static bool testc<T>(N128 n, int vcount, int step, in T a, in T b)
+        public static bit testc<T>(N128 n, int vcount, int step, in T a, in T b)
             where T : unmanaged
         {
             var result = true;
@@ -1426,7 +1426,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static bool testc<T>(N256 n, int vcount, int step, in T a)
+        public static bit testc<T>(N256 n, int vcount, int step, in T a)
             where T : unmanaged
         {
             var result = true;
@@ -1436,7 +1436,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static bool testc<T>(N256 n, int vcount, int step, in T a, in T b)
+        public static bit testc<T>(N256 n, int vcount, int step, in T a, in T b)
             where T : unmanaged
         {
             var result = true;
@@ -1444,7 +1444,6 @@ namespace Z0
                 result &= vtestc(n, in skip(in a, offset), in skip(in b, offset));
             return result;
         }
-
 
         // ~ testz
 
@@ -1467,27 +1466,37 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static bit vtestz<T>(N128 n, in T a)
+        public static bit testz<T>(N128 n, in T a)
+            where T : unmanaged
+                => vtestz(n, a,a);
+
+        [MethodImpl(Inline)]
+        public static bit testz<T>(N128 n, in T a, in T b)
+            where T : unmanaged
+                => vtestz(n, a, b);
+
+        [MethodImpl(Inline)]
+        public static bit testz<T>(N256 n, in T a)
             where T : unmanaged
             => vtestz(n, a,a);
 
         [MethodImpl(Inline)]
-        public static bit vtestz<T>(N256 n, in T a)
+        public static bit testz<T>(N256 n, in T a, in T b)
             where T : unmanaged
-            => vtestz(n, a,a);
+            => vtestz(n, a, b);
 
         [MethodImpl(Inline)]
-        public static bool testz<T>(N128 n, int vcount, int step, in T a)
+        public static bit testz<T>(N128 n, int vcount, int step, in T a)
             where T : unmanaged
         {
             var result = true;
             for(int i=0, offset = 0; i < vcount; i++, offset += step)
-                result &= vtestz(n, in skip(in a, offset));
+                result &= testz(n, in skip(in a, offset));
             return result;
         }
 
         [MethodImpl(Inline)]
-        public static bool testz<T>(N128 n, int vcount, int step, in T a, in T b)
+        public static bit testz<T>(N128 n, int vcount, int step, in T a, in T b)
             where T : unmanaged
         {
             var result = true;
@@ -1497,17 +1506,17 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static bool testz<T>(N256 n, int vcount, int step, in T a)
+        public static bit testz<T>(N256 n, int vcount, int step, in T a)
             where T : unmanaged
         {
             var result = true;
             for(int i=0, offset = 0; i < vcount; i++, offset += step)
-                result &= vtestz(n, in skip(in a, offset));
+                result &= testz(n, in skip(in a, offset));
             return result;
         }
 
         [MethodImpl(Inline)]
-        public static bool testz<T>(N256 n, int vcount, int step, in T a, in T b)
+        public static bit testz<T>(N256 n, int vcount, int step, in T a, in T b)
             where T : unmanaged
         {
             var result = true;
@@ -1537,7 +1546,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static bool testznc<T>(N128 n, int vcount, int step, in T a, in T b)
+        public static bit testznc<T>(N128 n, int vcount, int step, in T a, in T b)
             where T : unmanaged
         {
             var result = true;
@@ -1547,7 +1556,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static bool testznc<T>(N256 n, int vcount, int step, in T a, in T b)
+        public static bit testznc<T>(N256 n, int vcount, int step, in T a, in T b)
             where T : unmanaged
         {
             var result = true;
@@ -1556,6 +1565,5 @@ namespace Z0
             return result;
         }
     }
-
 }
 

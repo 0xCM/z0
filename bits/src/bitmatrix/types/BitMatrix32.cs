@@ -25,34 +25,20 @@ namespace Z0
         Span<uint> data;        
 
         /// <summary>
-        /// The order type
-        /// </summary>
-        public static N32 N => default;
-
-        /// <summary>
         /// The matrix order
         /// </summary>
-        public const uint Order = 32;
+        public const uint N = 32;
 
         /// <summary>
-        /// The number of bytes required to store the matrix
-        /// </summary>
-        public const uint ByteCount = Order * 4;
-
-        /// <summary>
-        /// Defines the 32x32 identity bitmatrix
+        /// Allocates a 32x32 identity bitmatrix
         /// </summary>
         public static BitMatrix32 Identity => BitMatrix.identity(n32);
 
         /// <summary>
-        /// Defines the 32x32 zero bitmatrix
+        /// Allocates a 32x32 zero bitmatrix
         /// </summary>
-        public static BitMatrix32 Zero => Alloc();
+        public static BitMatrix32 Zero => new BitMatrix32(new uint[N]);
                 
-        [MethodImpl(Inline)]
-        internal static BitMatrix32 Alloc()        
-            => new BitMatrix32(new uint[Order]);
-
         /// <summary>
         /// Allocates a matrix with a fill value
         /// </summary>
@@ -67,7 +53,7 @@ namespace Z0
         [MethodImpl(Inline)]
         internal static BitMatrix32 Alloc(BitVector32 fill)
         {
-            var data = new uint[Order];
+            var data = new uint[N];
             data.Fill(fill);
             return new BitMatrix32(data);
         }
@@ -133,21 +119,15 @@ namespace Z0
         [MethodImpl(Inline)]
         BitMatrix32(bit fill)
         {
-            this.data = new uint[Order];
+            this.data = new uint[N];
             if(fill)
                 data.Fill(uint.MaxValue);
         }
 
-        public readonly int RowCount
+        public readonly int Order
         {
             [MethodImpl(Inline)]
-            get => (int)Order;
-        }
-
-        public readonly int ColCount
-        {
-            [MethodImpl(Inline)]
-            get => (int)Order;
+            get => (int)N;
         }
 
         /// <summary>
@@ -256,7 +236,7 @@ namespace Z0
         public readonly uint ColData(int index)
         {
             uint col = 0;
-            for(var r = 0; r < Order; r++)
+            for(var r = 0; r < N; r++)
                 BitMask.setif(in data[r], index, ref col, r);
             return col;
         }
@@ -269,7 +249,7 @@ namespace Z0
         public readonly BitMatrix32 Transpose()
         {
             var dst = Replicate();
-            for(var i=0; i<Order; i++)
+            for(var i=0; i<N; i++)
                 dst.data[i] = ColData(i);
             return dst;
         }

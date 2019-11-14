@@ -20,8 +20,15 @@ namespace Z0
         /// Converts the matrix to a bitvector
         /// </summary>
         [MethodImpl(Inline)]
-        public static BitVector64 ToBitvector(this BitMatrix8 A)
-            => A.Data.AsUInt64()[0];
+        public static BitVector64 ToBitVector(this BitMatrix8 A)
+            => BitVector.from(n64,(ulong)A);
+
+        /// <summary>
+        /// Creates a generic matrix from the primal source data
+        /// </summary>
+        [MethodImpl(Inline)]
+        public static BitMatrix<byte> ToGeneric(this BitMatrix8 A)
+            => new BitMatrix<byte>(A.Bytes);
 
         /// <summary>
         /// Creates the matrix determined by a permutation
@@ -37,29 +44,22 @@ namespace Z0
         }
 
         /// <summary>
-        /// Creates a generic matrix from the primal source data
-        /// </summary>
-        [MethodImpl(Inline)]
-        public static BitMatrix<byte> ToGeneric(this BitMatrix8 A)
-            => new BitMatrix<byte>(A.Data);
-
-        /// <summary>
         /// Converts the source matrix to a square matrix of natural order
         /// </summary>
         [MethodImpl(Inline)]
         public static BitMatrix<N8,byte> ToNatural(this BitMatrix8 A)
-            => BitMatrix.load(n8,A.Data);
+            => BitMatrix.load(n8,A.Bytes);
 
         /// <summary>
         /// Converts the source matrix to a square matrix of natural order
         /// </summary>
         [MethodImpl(Inline)]
         public static BitMatrix<N8,byte> ToNatural(this BitMatrix<byte> A)
-            => BitMatrix.load(n8,A.Data);
+            => BitMatrix.load(n8,A.Bytes);
 
         [MethodImpl(Inline)]
         public static string Format(this BitMatrix8 src)            
-            => src.Bytes.FormatMatrixBits(src.RowCount);
+            => src.Bytes.FormatMatrixBits(src.Order);
 
         /// <summary>
         /// Determines whether this matrix is equivalent to the canonical 0 matrix
@@ -71,7 +71,31 @@ namespace Z0
         /// <summary>
         /// Constructs an 8-node graph via the adjacency matrix interpretation
         /// </summary>
+        [MethodImpl(Inline)]
         public static Graph<byte> ToGraph(this BitMatrix8 A)
             => BitGraph.graph(A);
+
+        /// <summary>
+        /// Packs the matrix into an unsigned 64-bit integer
+        /// </summary>
+        [MethodImpl(Inline)]
+        public static ulong Pack(this BitMatrix8 A)
+            => BitConvert.ToUInt64(A.Bytes);
+
+        /// <summary>
+        /// Transposes a copy of the source matrix
+        /// </summary>
+        [MethodImpl(Inline)]
+        public static BitMatrix8 Transpose(this BitMatrix8 A)
+            => BitMatrix.transpose(A);
+ 
+        /// <summary>
+        /// Creates a new matrix by cloning the existing matrix or allocating a matrix with the same structure
+        /// </summary>
+        /// <param name="structureOnly">Specifies whether the replication reproduces only structure and is thus equivalent to an allocation</param>
+        [MethodImpl(Inline)] 
+        public static BitMatrix8 Replicate(this BitMatrix8 A, bool structureOnly = false)
+            => structureOnly ? BitMatrix.alloc(n8) : BitMatrix.primal(n8, A.Bytes.Replicate());
+
     }
 }

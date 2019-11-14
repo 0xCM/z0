@@ -26,27 +26,23 @@ namespace Z0
         /// <summary>
         /// The matrix order
         /// </summary>
-        public const uint Order = 8;
+        public const uint N = 8;
+
 
         /// <summary>
-        /// The number of bytes required to store the matrix
-        /// </summary>
-        public const uint ByteCount = Order;
-
-        /// <summary>
-        /// The order type
-        /// </summary>
-        public static N8 N => default;
-
-        /// <summary>
-        /// Defines the 8x8 identity bitmatrix
+        /// Allocates an 8x8 identity bitmatrix
         /// </summary>
         public static BitMatrix8 Identity => BitMatrix.identity(n8);
 
         /// <summary>
-        /// Defines the 8x8 zero bitmatrix
+        /// Allocates an 8x8 zero bitmatrix
         /// </summary>
-        public static BitMatrix8 Zero => Alloc();
+        public static BitMatrix8 Zero => new BitMatrix8(new byte[N]);
+
+        /// <summary>
+        /// Allocates an 8x8 1-filled bitmatrix
+        /// </summary>
+        public static BitMatrix8 Ones => new BitMatrix8(AllOnes.Replicate());
 
         /// <summary>
         /// Allocates a matrix with an optional fill value
@@ -60,7 +56,7 @@ namespace Z0
         /// <param name="fill">The fill vector</param>
         public static BitMatrix8 Alloc(BitVector8 fill)
         {
-            var data = new byte[Order];
+            var data = new byte[N];
             data.Fill(fill);
             return new BitMatrix8(data);
         }
@@ -148,7 +144,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static explicit operator BitMatrix8(ulong src)
-            => From(src);
+            => new BitMatrix8(src);
 
         [MethodImpl(Inline)]
         BitMatrix8(Span<byte> src)
@@ -156,11 +152,6 @@ namespace Z0
             this.data = src;
         }
 
-        // [MethodImpl(Inline)]
-        // BitMatrix8(byte[] src)
-        // {
-        //     this.data = src;
-        // }
 
         [MethodImpl(Inline)]
         BitMatrix8(ulong src)
@@ -171,19 +162,10 @@ namespace Z0
         /// <summary>
         /// The number of rows in the matrix
         /// </summary>
-        public readonly int RowCount
+        public readonly int Order
         {
             [MethodImpl(Inline)]
-            get => (int)Order;
-        }
-
-        /// <summary>
-        /// The number of columns in the matrix
-        /// </summary>
-        public readonly int ColCount
-        {
-            [MethodImpl(Inline)]
-            get => (int)Order;
+            get => (int)N;
         }
 
         public Span<byte> Bytes
@@ -195,10 +177,10 @@ namespace Z0
         /// <summary>
         /// The underlying matrix data
         /// </summary>
-        public Span<byte> Data
+        public BitView<ulong> Data
         {
             [MethodImpl(Inline)]
-            get => data;
+            get => BitView.Over(ref uint64(ref Head));
         }
 
         /// <summary>
@@ -211,19 +193,12 @@ namespace Z0
         }
 
         /// <summary>
-        /// Packs the matrix into an unsigned 64-bit integer
-        /// </summary>
-        [MethodImpl(Inline)]
-        public ulong Pack()
-            => BitConvert.ToUInt64(data);
-
-        /// <summary>
         /// Reads the bit in a specified cell
         /// </summary>
         /// <param name="row">The row index</param>
         /// <param name="col">The column index</param>
         [MethodImpl(Inline)]
-        public readonly Bit GetBit(int row, int col)
+        readonly Bit GetBit(int row, int col)
             => BitMask.test(data[row], col);
 
         /// <summary>
@@ -233,7 +208,7 @@ namespace Z0
         /// <param name="col">The column index</param>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
-        public void SetBit(int row, int col, Bit src)
+        void SetBit(int row, int col, Bit src)
             => BitMask.set(ref data[row], (byte)col, src);
 
         /// <summary>
@@ -260,7 +235,6 @@ namespace Z0
             [MethodImpl(Inline)]
             get => ref RowVector(row);
         }
-
 
         [MethodImpl(Inline)]
         public BitMatrix8 AndNot(in BitMatrix8 rhs)
@@ -298,11 +272,6 @@ namespace Z0
         public ref BitVector8 RowVector(int row)
             => ref Unsafe.As<byte,BitVector8>(ref seek(ref Head, row));
 
-        /// <summary>
-        /// Transposes a copy of the matrix
-        /// </summary>
-        public readonly BitMatrix8 Transpose()
-            => BitMatrix.transpose(this);
 
         /// <summary>
         /// Queries the matrix for the data in an index-identified column 
@@ -311,11 +280,14 @@ namespace Z0
         public readonly byte ColData(int index)
         {
             byte col = 0;
-            for(var r = 0; r < Order; r++)
+            for(var r = 0; r < N; r++)
                 if(BitMask.test(data[r], index))
                     BitMask.enable(ref col, r);
             return col;
         }
+
+        static ReadOnlySpan<byte> AllOnes
+            => new byte[8]{0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF};
 
         /// <summary>
         /// Queries the matrix for the data in an index-identified column and returns
@@ -326,29 +298,6 @@ namespace Z0
         public readonly BitVector8 ColVector(int index)
             => ColData(index);
 
-        /// <summary>
-        /// Creates a new matrix by cloning the existing matrix or allocating
-        /// a matrix with the same structure
-        /// </summary>
-        /// <param name="structureOnly">Specifies whether the replication reproduces
-        /// only structure and is thus equivalent to an allocation</param>
-        [MethodImpl(Inline)] 
-        public readonly BitMatrix8 Replicate(bool structureOnly = false)
-            => structureOnly ? Alloc() : From(data.Replicate());
-
-        /// <summary>
-        /// Converts the matrix to a bitvector
-        /// </summary>
-        [MethodImpl(Inline)]
-        public readonly BitVector64 ToBitVector()
-            => BitVector.from(n64,(ulong)this);
-
-        /// <summary>
-        /// Creates a generic matrix from the primal source data
-        /// </summary>
-        [MethodImpl(Inline)]
-        public BitMatrix<byte> ToGeneric()
-            => new BitMatrix<byte>(data);
 
         public override string ToString()
             => this.Format();

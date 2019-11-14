@@ -20,7 +20,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source reference</param>
         /// <typeparam name="T">The generic type</typeparam>
-        public static BitView<T> ViewBits<T>(ref T src)
+        public static BitView<T> Over<T>(ref T src)
             where T : unmanaged
                 => new BitView<T>(ref src);
     }

@@ -70,11 +70,11 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static BitGrid<N8,N8, byte> ToGrid(this BitMatrix8 src, N8 n)
-            => BitGrid.load(src.Data,n,n);
+            => BitGrid.load(src.Bytes,n,n);
 
         [MethodImpl(Inline)]
         public static BitGrid<byte> ToGrid(this BitMatrix8 src)
-            => BitGrid.load(src.Data, 8,8);
+            => BitGrid.load(src.Bytes, 8,8);
 
         [MethodImpl(Inline)]
         public static BitGrid<N16,N16, ushort> ToGrid(this BitMatrix16 src, N16 n)

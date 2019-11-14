@@ -268,7 +268,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public Span<T> AsSpan<T>()
             where T : unmanaged
-                => MemoryMarshal.Cast<byte,T>(BitView.ViewBits(ref this).Bytes);
+                => MemoryMarshal.Cast<byte,T>(BitView.Over(ref this).Bytes);
 
         /// <summary>
         /// Computes type-polymorphic cell count
@@ -295,7 +295,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public ref T First<T>()
             where T : unmanaged
-                => ref BitView.ViewBits(ref this).Bytes.As<T>()[0];
+                => ref BitView.Over(ref this).Bytes.As<T>()[0];
 
         [MethodImpl(Inline)]
         public ref T Cell<T>(int index)

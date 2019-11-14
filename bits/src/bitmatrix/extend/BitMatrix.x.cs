@@ -16,6 +16,26 @@ namespace Z0
     public static class BitMatrixX
     {   
         /// <summary>
+        /// Interchanges span elements i and j
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <param name="i">An index of a span element</param>
+        /// <param name="j">An index of a span element</param>
+        /// <typeparam name="T">The span element type</typeparam>
+        [MethodImpl(Inline)]
+        public static void Swap<T>(this Span<T> src, int i, int j)
+            where T : unmanaged
+        {
+            if(i==j)
+                return;
+            
+            ref var data = ref head(src);
+            var a = seek(ref data, i);
+            seek(ref data, i) = skip(in data, j);
+            seek(ref data, j) = a;
+        }
+
+        /// <summary>
         /// Loads a generic bitmatrix from size-conformant sequence of row bits
         /// </summary>
         /// <param name="src">The source bits</param>

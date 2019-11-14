@@ -229,34 +229,6 @@ namespace Z0
             }                        
         }
 
-        [MethodImpl(Inline)]
-        public static void Swap<T>(this T[] src, int i, int j)
-        {
-            if(i != j)
-            {
-                var tmp = src[i];
-                src[i] = src[j];
-                src[j] = tmp;
-            }
-        }
-
-        /// <summary>
-        /// Interchanges span elements i and j
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <param name="i">An index of a span element</param>
-        /// <param name="j">An index of a span element</param>
-        /// <typeparam name="T">The span element type</typeparam>
-        [MethodImpl(Inline)]
-        public static void Swap<T>(this Span<T> src, int i, int j)
-        {
-            if(i != j)
-            {
-                var tmp = src[i];
-                src[i] = src[j];
-                src[j] = tmp;
-            }
-        }
 
         /// <summary>
         /// Produces a reversed span from a readonly span

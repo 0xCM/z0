@@ -37,7 +37,7 @@ namespace Z0
         /// <param name="x">The vector to be transformed</param>
         public static BitVector4 mul(BitMatrix4 A, BitVector4 x)
         {
-            var n = BitMatrix4.N;
+            var n = n4;
             var dst = BitVector.alloc(n);
             for(var i=0; i< n; i++)
                 dst[i] = A.GetRow(i) % x;
@@ -51,7 +51,7 @@ namespace Z0
         /// <param name="x">The vector to be transformed</param>
         public static BitVector8 mul(BitMatrix8 A, BitVector8 B)
         {
-            var n = BitMatrix8.N;
+            var n = n8;
             var dst = BitVector.alloc(n);
             for(var i=0; i< n; i++)
                 dst[i] = A[i] % B;
@@ -65,7 +65,7 @@ namespace Z0
         /// <param name="B">The right matrix</param>
         public static ref BitMatrix4 mul(in BitMatrix4 A, in BitMatrix4 B, ref BitMatrix4 Z)
         {
-            var n = BitMatrix4.Order;
+            var n = BitMatrix4.N;
             var C = transpose(A);
             for(var i=0; i < n; i++)
             {
@@ -98,7 +98,7 @@ namespace Z0
         /// <param name="B">The right matrix</param>
         public static ref BitMatrix8 mul(in BitMatrix8 A, in BitMatrix8 B, ref BitMatrix8 Z)
         {
-            var n = BitMatrix8.Order;
+            var n = BitMatrix8.N;
             var C = BitMatrix.transpose(B);
             for(var i=0; i< n; i++)
             {
@@ -124,7 +124,7 @@ namespace Z0
         public static BitVector16 mul(BitMatrix16 A, BitVector16 x)
         {
             var n = BitMatrix16.N;
-            var dst = BitVector.alloc(n);
+            var dst = BitVector.alloc(n16);
             for(var i=0; i< n; i++)
                 dst[i] = A[i] % x;
             return dst;        
@@ -136,7 +136,7 @@ namespace Z0
             var X = A.Replicate();
             var Y = B.Transpose();
 
-            var dst = BitMatrix.alloc(n);
+            var dst = BitMatrix.alloc(n16);
             for(var i=0; i< n; i++)
             {
                 var row = X[i];
@@ -154,7 +154,7 @@ namespace Z0
             for(var i=0; i< n; i++)
             {
                 var r = A[i];
-                var z = BitVector.alloc(n);
+                var z = BitVector.alloc(n32);
                 for(var j = 0; j< n; j++)
                     z[j] = r % C[j];
                 A[i] = (uint)z;

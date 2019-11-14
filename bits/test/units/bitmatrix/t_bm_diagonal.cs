@@ -21,7 +21,7 @@ namespace Z0
                 var A = Random.BitMatrix(n4);
                 var x = BitMatrix.diagonal(A);
                 var y = BitVector.alloc(n4);
-                for(var j = 0; j< A.RowCount; j++)
+                for(var j = 0; j< A.Order; j++)
                     y[j] = A[j,j];
                 Claim.eq(x,y);
             }
@@ -34,7 +34,7 @@ namespace Z0
                 var A = Random.BitMatrix(n8);
                 var x = BitMatrix.diagonal(A);
                 var y = BitVector.alloc(n8);
-                for(var j = 0; j< A.RowCount; j++)
+                for(var j = 0; j< A.Order; j++)
                     y[j] = A[j,j];
                 Claim.eq(x,y);
             }

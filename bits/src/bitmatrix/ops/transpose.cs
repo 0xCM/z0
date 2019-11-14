@@ -20,7 +20,7 @@ namespace Z0
         public static BitVector4 column(in BitMatrix4 A, int index)
         {
             byte col = 0;
-            for(var r = 0; r < BitMatrix4.Order; r++)
+            for(var r = 0; r < BitMatrix4.N; r++)
                 BitMask.set(ref col, (byte)r, BitMask.test(A[r], index));
             return col;
         }
@@ -31,8 +31,11 @@ namespace Z0
         public static BitMatrix4 transpose(in BitMatrix4 A)
         {        
             var dst = A.Replicate();
-            for(var i=0; i<BitMatrix4.Order; i++)
-                dst[i] = column(A,i);
+            // for(var i=0; i<BitMatrix4.Order; i++)
+            //     dst[i] = column(A,i);
+            for(var i=0; i<BitMatrix4.N; i++)
+                A.SetRow(i, column(A,i));
+
             return dst;
         }
 
@@ -49,10 +52,17 @@ namespace Z0
         }
         
         [MethodImpl(Inline)]
-        public static BitMatrix8 transpose(BitMatrix8 A)
+        public static BitMatrix8 transpose(in BitMatrix8 A)
         {
-            var Z = BitMatrix.alloc(n8);
-            return transpose(A, ref Z);
+            var n = n8;
+            var src = (ulong)A;
+            var dst = 0ul;
+            for(var i=0; i<8; i++)
+            {
+                dst |= (Bits.gather(src, BitMask.Lsb64x8) << i*8);
+                src >>= 1;
+            }
+            return (BitMatrix8)dst;
         }
 
         /// <summary>
@@ -90,18 +100,6 @@ namespace Z0
             return BitMatrix.load<N16,N8,uint>(A.Data);
         }
 
-        public static BitMatrix8 transpose_v2(in BitMatrix8 A)
-        {
-            var src = (ulong)A;
-            var B = BitMatrix8.Alloc();
-            for(var i=0; i<8; i++)
-            {
-                B[i] = (byte)Bits.gather(src, BitMask.Lsb64x8);
-                src >>= 1;
-            }
-            
-            return B;
-        }
 
         static Vec128<byte> Tr8x16Mask
         {
@@ -121,5 +119,4 @@ namespace Z0
         };
 
     }
-
 }

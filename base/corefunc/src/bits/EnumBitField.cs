@@ -36,7 +36,7 @@ namespace Z0
         EnumBitField(ulong data)
         {
             this.data = data;    
-            this.bits = BitView.ViewBits(ref this.data);
+            this.bits = BitView.Over(ref this.data);
         }
 
         /// <summary>

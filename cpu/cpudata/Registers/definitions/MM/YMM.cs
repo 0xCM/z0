@@ -322,7 +322,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public Span<T> AsSpan<T>()
             where T : unmanaged
-                => BitView.ViewBits(ref this).Bytes.As<T>();
+                => BitView.Over(ref this).Bytes.As<T>();
 
         /// <summary>
         /// Returns a reference to the first cell
@@ -331,7 +331,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public ref T First<T>()
             where T : unmanaged
-                => ref BitView.ViewBits(ref this).Bytes.As<T>()[0];
+                => ref BitView.Over(ref this).Bytes.As<T>()[0];
                             
         /// <summary>
         /// Gets the value of an index-identified cell

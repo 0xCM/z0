@@ -67,9 +67,16 @@ namespace Z0
         /// <summary>
         /// Constructs an 8-node graph via the adjacency matrix interpretation
         /// </summary>
+        [MethodImpl(Inline)] 
         public static Graph<byte> ToGraph(this BitMatrix16 A)
             => BitGraph.graph(A);
 
+        /// <summary>
+        /// Transposes a copy of the source matrix
+        /// </summary>
+        [MethodImpl(Inline)]
+        public static BitMatrix16 Transpose(this BitMatrix16 A)
+            => BitMatrix.transpose(A);
 
     }
 

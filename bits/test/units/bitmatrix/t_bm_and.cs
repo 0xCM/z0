@@ -15,46 +15,6 @@ namespace Z0
     {
         protected override int CycleCount => Pow2.T10;
 
-        public void bm_and_8x8()
-        {
-            Span<byte> dst = stackalloc byte[8];
-            for(var i=0; i<SampleSize; i++)
-            {
-                var A = Random.BitMatrix(n8);
-                var B = Random.BitMatrix(n8);
-                for(var j=0; j<dst.Length; j++)
-                    dst[j] = (byte)(A.Bytes[j] & B.Bytes[j]);
-                var expect = BitMatrix8.From(dst);
-                var C = A & B;
-                Claim.yea(expect == C);                
-            }
-        }
-
-        public void bm_and_32x32()
-        {
-            for(var i=0; i<SampleSize; i++)
-            {
-                var A = Random.BitMatrix32();
-                var B = Random.BitMatrix32();
-                var C = A & B;
-
-                var D = BitMatrix32.From(mathspan.and(A.Bytes, B.Bytes));
-                Claim.yea(C == D);
-            }
-        }
-
-        public void bm_and_64x64()
-        {
-            for(var i=0; i<SampleSize; i++)
-            {
-                var A = Random.BitMatrix64();
-                var B = Random.BitMatrix64();
-                var C = A & B;
-
-                var D = BitMatrix64.From(mathspan.and(A.Bytes, B.Bytes));
-                Claim.yea(C == D);
-            }
-        }
 
         public void bm_and_8x8g()
             => bm_and_check<byte>();

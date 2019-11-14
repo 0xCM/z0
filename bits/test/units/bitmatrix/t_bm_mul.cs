@@ -145,7 +145,7 @@ namespace Z0.Test
                 var x = Random.BitVector(n64);
                 var z = A * x;            
                 var y = BitVector64.Alloc();
-                for(var i = 0; i<A.RowCount; i++)           
+                for(var i = 0; i<A.Order; i++)           
                 {
                     var r = A[i];
                     y[i] = r % x;
@@ -187,7 +187,7 @@ namespace Z0.Test
                 var c = Random.BitVector(n8);
                 var z1 = m * c;            
                 var z2 = BitVector8.Alloc();
-                for(var i = 0; i<m.RowCount; i++)           
+                for(var i = 0; i<m.Order; i++)           
                     z2[i] = m[i] % c;
                 
                 Claim.yea(z1 == z2);
@@ -220,7 +220,7 @@ namespace Z0.Test
                 var c = Random.BitVector(n32);
                 var z1 = m * c;            
                 var z2 = BitVector32.Alloc();
-                for(var i = 0; i<m.RowCount; i++)           
+                for(var i = 0; i<m.Order; i++)           
                 {
                     var r = m[i];
                     z2[i] = r % c;

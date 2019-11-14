@@ -13,15 +13,39 @@ namespace Z0
     
     public class t_bm_rowswap : BitMatrixTest<t_bm_rowswap>
     {        
-        public void bm_rowswap_64u()
+        public void bm_rowswap_4x4()
         {
-            var A = Random.BitMatrix64();
-            var a = A.Data.Replicate();
+            // var n = n4;
+            // var A = Random.BitMatrix(n);
+            
+            // var a = A.Data.Replicate();
+            // Claim.eq(a.Length, n);
 
-            Claim.eq(a.Length, 64);
-            for(var sample=0; sample< SampleSize; sample++)
+            // for(var sample=0; sample < SampleSize; sample++)
+            // {
+            //     (var i, var j) = Random.NextPair(0,n);
+            //     A.RowSwap(i,j);
+
+            //     var tmp = a[i];
+            //     a[i] = a[j];
+            //     a[j] = tmp;
+            // }
+
+            // var B = BitMatrix.primal(n,a);
+            // Claim.yea(A == B);
+        }
+
+        public void bm_rowswap_16x16()
+        {
+            var n = n16;
+            var A = Random.BitMatrix(n);
+            
+            var a = A.Data.Replicate();
+            Claim.eq(a.Length, n);
+
+            for(var sample=0; sample < SampleSize; sample++)
             {
-                (var i, var j) = Random.NextPair(0,64);
+                (var i, var j) = Random.NextPair(0,n);
                 A.RowSwap(i,j);
 
                 var tmp = a[i];
@@ -29,51 +53,57 @@ namespace Z0
                 a[j] = tmp;
             }
 
-            var B = BitMatrix64.From(a);
+            var B = BitMatrix.primal(n,a);
+            Claim.yea(A == B);
+        }
+
+
+        public void bm_rowswap_64x64()
+        {
+            var n = n64;
+            var A = Random.BitMatrix(n);
+            
+            var a = A.Data.Replicate();
+            Claim.eq(a.Length, n);
+
+            for(var sample=0; sample < SampleSize; sample++)
+            {
+                (var i, var j) = Random.NextPair(0,n);
+                A.RowSwap(i,j);
+
+                var tmp = a[i];
+                a[i] = a[j];
+                a[j] = tmp;
+            }
+
+            var B = BitMatrix.primal(n,a);
             Claim.yea(A == B);
                 
         }
 
-        public void bm_nlz_8u()
+
+        public void bm_rowswap_32x32()
         {
-            var A = BitMatrix8.Identity;
-            int i=0, j=7;
-            Claim.eq(BitVector.nlz(A[i++]), j--);
-            Claim.eq(BitVector.nlz(A[i++]), j--);
-            Claim.eq(BitVector.nlz(A[i++]), j--);
-            Claim.eq(BitVector.nlz(A[i++]), j--);
-            Claim.eq(BitVector.nlz(A[i++]), j--);
-            Claim.eq(BitVector.nlz(A[i++]), j--);
-            Claim.eq(BitVector.nlz(A[i++]), j--);
-            Claim.eq(BitVector.nlz(A[i]), j);
-            Claim.eq(7,i);
-            Claim.eq(0,j);
+            var n = n32;
+            var A = Random.BitMatrix(n);
+            
+            var a = A.Data.Replicate();
+            Claim.eq(a.Length, n);
+
+            for(var sample=0; sample < SampleSize; sample++)
+            {
+                (var i, var j) = Random.NextPair(0,n);
+                A.RowSwap(i,j);
+
+                var tmp = a[i];
+                a[i] = a[j];
+                a[j] = tmp;
+            }
+
+            var B = BitMatrix.primal(n,a);
+            Claim.yea(A == B);
         }
 
-        public void bm_nlz_16u()
-        {
-            var A = BitMatrix16.Identity;
-            var rows = A.RowCount;
-            for(int i=0, j=rows - 1; i < rows; i++, j--)            
-                Claim.eq(BitVector.nlz(A[i++]), j--);
 
-        }
-
-        public void bm_nlz_32u()
-        {
-            var A = BitMatrix32.Identity;
-            var rows = A.RowCount;
-            for(int i=0, j=rows - 1; i < rows; i++, j--)            
-                Claim.eq(BitVector.nlz(A[i++]), j--);
-        }
-
-        public void bm_nlz_64u()
-        {
-            var A = BitMatrix64.Identity;
-            var rows = A.RowCount;
-            for(int i=0, j=rows - 1; i < rows; i++, j--)            
-                Claim.eq(BitVector.nlz(A[i++]), j--);
-
-        }
     }
 }

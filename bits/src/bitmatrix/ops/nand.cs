@@ -24,7 +24,7 @@ namespace Z0
             where T : unmanaged
         {
             var Z = BitMatrix.alloc<T>();
-            BitBlocks.nand(in A.Head, in B.Head, ref Z.Head);
+            BitSquare.nand(in A.Head, in B.Head, ref Z.Head);
             return Z;
         }
 
@@ -39,7 +39,7 @@ namespace Z0
         public static unsafe ref BitMatrix<T> nand<T>(in BitMatrix<T> A, in BitMatrix<T> B, ref BitMatrix<T> Z)
             where T : unmanaged
         {
-            BitBlocks.nand(in A.Head, in B.Head, ref Z.Head);
+            BitSquare.nand(in A.Head, in B.Head, ref Z.Head);
             return ref Z;
         }
 
@@ -52,7 +52,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static unsafe ref BitMatrix8 nand(in BitMatrix8 A, in BitMatrix8 B, ref BitMatrix8 Z)
         {
-             BitBlocks.nand(in A.Head, in B.Head, ref Z.Head);
+             BitSquare.nand(in A.Head, in B.Head, ref Z.Head);
              return ref Z;
         }
 
@@ -65,7 +65,7 @@ namespace Z0
         public static unsafe BitMatrix8 nand(BitMatrix8 A, BitMatrix8 B)
         {
             var Z = BitMatrix.alloc(n8);
-            BitBlocks.nand(in A.Head, in B.Head, ref Z.Head);
+            BitSquare.nand(in A.Head, in B.Head, ref Z.Head);
             return Z;
         }
 
@@ -78,7 +78,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static unsafe ref BitMatrix16 nand(in BitMatrix16 A, in BitMatrix16 B, ref BitMatrix16 Z)
         {
-            BitBlocks.nand(in A.Head, in B.Head, ref Z.Head);
+            BitSquare.nand(in A.Head, in B.Head, ref Z.Head);
             return ref Z;
         }
 
@@ -91,7 +91,7 @@ namespace Z0
         public static unsafe BitMatrix16 nand(BitMatrix16 A, BitMatrix16 B)
         {
             var Z = BitMatrix.alloc(n16);
-            BitBlocks.nand(in A.Head, in B.Head, ref Z.Head);
+            BitSquare.nand(in A.Head, in B.Head, ref Z.Head);
             return Z;
         }
 
@@ -104,7 +104,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static unsafe ref BitMatrix32 nand(in BitMatrix32 A, in BitMatrix32 B, ref BitMatrix32 Z)
         {
-            BitBlocks.nand(in A.Head, in B.Head, ref Z.Head);
+            BitSquare.nand(in A.Head, in B.Head, ref Z.Head);
             return ref Z;
         }
 
@@ -117,7 +117,7 @@ namespace Z0
         public static unsafe BitMatrix32 nand(BitMatrix32 A, BitMatrix32 B)
         {
             var Z = BitMatrix.alloc(n32);
-            BitBlocks.nand(in A.Head, in B.Head, ref Z.Head);
+            BitSquare.nand(in A.Head, in B.Head, ref Z.Head);
             return Z;
         }
 
@@ -130,7 +130,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static unsafe ref BitMatrix64 nand(in BitMatrix64 A, in BitMatrix64 B, ref BitMatrix64 Z)
         {
-            BitBlocks.nand(in A.Head, in B.Head, ref Z.Head);
+            BitSquare.nand(in A.Head, in B.Head, ref Z.Head);
             return ref Z;
         }
 
@@ -143,7 +143,7 @@ namespace Z0
         public static unsafe BitMatrix64 nand(in BitMatrix64 A, in BitMatrix64 B)
         {
             var Z = BitMatrix.alloc(n64);
-            BitBlocks.nand(in A.Head, in B.Head, ref Z.Head);
+            BitSquare.nand(in A.Head, in B.Head, ref Z.Head);
             return Z;
         }
     }

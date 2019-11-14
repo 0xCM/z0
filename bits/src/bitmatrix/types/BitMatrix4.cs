@@ -15,34 +15,24 @@ namespace Z0
 
     public ref struct BitMatrix4
     {        
-        Span<byte> data;
-
-        ushort _data;
+        ushort data;
 
         /// <summary>
         /// The matrix order
         /// </summary>
-        public const uint Order = 4;
-
-        /// <summary>
-        /// The number of bytes required to store the matrix
-        /// </summary>
-        public const uint ByteCount = Order*Order / 8;
-
-        /// <summary>
-        /// The order type
-        /// </summary>
-        public static  N4 N => default;
+        public const uint N = 4;
                                         
+        /// <summary>
+        /// Allocates a 4x4 identity bitmatrix
+        /// </summary>
         public static BitMatrix4 Identity => BitMatrix.identity(n4); 
         
-        public static BitMatrix4 Zero => From(ushort.MinValue);
+        public static BitMatrix4 Zero => new BitMatrix4(ushort.MinValue);
 
-        public static BitMatrix4 Ones => From(ushort.MaxValue);
+        public static BitMatrix4 Ones => new BitMatrix4(ushort.MaxValue);
 
         /// <summary>
-        /// Allocates a matrix, optionally assigning each element to the
-        /// specified bit value
+        /// Allocates a matrix, optionally assigning each element to the specified bit value
         /// </summary>
         [MethodImpl(Inline)]
         public static BitMatrix4 Alloc(bit fill)                
@@ -63,11 +53,11 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static explicit operator ushort(BitMatrix4 src)
-            => src._data;
+            => src.data;
 
         [MethodImpl(Inline)]
         public static explicit operator uint(BitMatrix4 src)
-            => src._data;
+            => src.data;
 
         [MethodImpl(Inline)]
         public static implicit operator BitMatrix4(ushort src)
@@ -110,31 +100,21 @@ namespace Z0
         [MethodImpl(Inline)]
         BitMatrix4(ushort src)
         {
-            this._data = src;
-            this.data = span<byte>(
-                (byte)(M4 & src), 
-                (byte)(M4 & (src >> 4)),
-                (byte)(M4 & (src >> 8)),
-                (byte)(M4 & (src >> 12))
-                );
+            this.data = src;
         }
 
-        public int RowCount
-        {
-            [MethodImpl(Inline)]
-            get => N;
-        }
-
-        public int ColCount
-        {
-            [MethodImpl(Inline)]
-            get => N;
-        }
+        public int Order => (int)N;
 
         public Span<byte> Bytes
         {
             [MethodImpl(Inline)]
-            get => BitConvert.GetBytes(_data);
+            get =>  BitConvert.GetBytes(data);
+        }
+
+        public BitView<ushort> Data
+        {
+            [MethodImpl(Inline)]
+            get => BitView.Over(ref data);
         }
 
         /// <summary>
@@ -143,7 +123,7 @@ namespace Z0
         /// <param name="index">The row index</param>
         [MethodImpl(Inline)]
         public BitVector4 GetRow(int index)
-            => (byte)(M4 & (_data >> index*4));
+            => (byte)(M4 & (data >> index*4));
 
         void SetRow2(int index, BitVector4 src)
         {
@@ -157,31 +137,35 @@ namespace Z0
             ushort result = 0;
             for(var i=0; i<N; i++)
                 result |= (ushort)(i == index ? src.Scalar << 4*i : GetRow(index));
-            _data = result;
+            data = result;
         }
 
-        public Bit this[int row, int col]
+        [MethodImpl(Inline)]
+        bit TestBit(int row, int col)
+            => BitMask.test(data, row*4 + col);
+
+        [MethodImpl(Inline)]
+        void SetBit(int row, int col, bit state)
+            => BitMask.set(ref data, (byte)(row*4 + col), state);
+
+        public bit this[int row, int col]
         {
             [MethodImpl(Inline)]
-            get => BitMask.test(data[row], col);
+            get => TestBit(row,col);
 
             [MethodImpl(Inline)]
-            set => BitMask.set(ref data[row], (byte)col, value);
+            set => SetBit(row,col,value);
         }            
 
-        /// <summary>
-        /// A mutable indexer
-        /// </summary>
-        /// <param name="row">The row index</param>
-        public ref byte this[int row]
+        public BitVector4 this[int row]
         {
             [MethodImpl(Inline)]
-            get => ref data[row];
+            get => GetRow(row);
         }
             
         [MethodImpl(Inline)]
         public readonly bool Equals(in BitMatrix4 B)
-            => _data == B._data;
+            => data == B.data;
 
         public override bool Equals(object obj)
             => throw new NotSupportedException();

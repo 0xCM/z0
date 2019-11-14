@@ -60,15 +60,15 @@ namespace Z0.Test
         public void bm_identity_8x8u_check()
         {
             var m = BitMatrix8.Identity;
-            for(byte i=0; i < m.RowCount; i++)
+            for(byte i=0; i < m.Order; i++)
                 Claim.eq(m[i,i],Bit.On);
             Claim.yea(m.Diagonal().AllOnes());
 
             var lhs = BitMatrix8.Identity;
             var rhs = BitMatrix8.Identity;
             var result = lhs & rhs;
-            for(var row=0; row< result.RowCount; row++)
-            for(var col=0; col< result.ColCount; col++)    
+            for(var row=0; row< result.Order; row++)
+            for(var col=0; col< result.Order; col++)    
                 Claim.eq(result[row,col], rhs[row,col]);
 
         }
@@ -84,7 +84,7 @@ namespace Z0.Test
         public void bm_identity_32x32u_check()
         {        
             var m = BitMatrix32.Identity;
-            for(byte i=0; i < m.RowCount; i++)
+            for(byte i=0; i < m.Order; i++)
                 Claim.eq(m[i,i],Bit.On);
             Claim.yea(m.Diagonal().AllOnes());
         }
@@ -92,15 +92,15 @@ namespace Z0.Test
         public void bm_identity_64x64_check()
         {
             var m = BitMatrix64.Identity;
-            for(byte i=0; i < m.RowCount; i++)
+            for(byte i=0; i < m.Order; i++)
                 Claim.eq(m[i,i],bit.On);
             Claim.yea(m.Diagonal().AllOnes());
 
             var lhs = BitMatrix64.Identity;
             var rhs = BitMatrix64.Identity;
             var result = lhs & rhs;
-            for(var row=0; row<result.RowCount; row++)
-            for(var col=0; col<result.ColCount; col++)    
+            for(var row=0; row<result.Order; row++)
+            for(var col=0; col<result.Order; col++)    
                 Claim.eq(result[row,col], rhs[row,col]);
         }
 

@@ -33,8 +33,8 @@ namespace Z0
         public static BitMatrix32 hprod(BitMatrix32 A, BitMatrix32 B)
         {
             var C = BitMatrix.alloc(n32);
-            for(var i=0; i<A.RowCount; i++)
-            for(var j=0; j<B.ColCount; j++)
+            for(var i=0; i<A.Order; i++)
+            for(var j=0; j<B.Order; j++)
                 C[i,j] = A.GetBit(i,j) & B[i,j];
             return C;
         }
@@ -46,8 +46,8 @@ namespace Z0
         public static BitMatrix64 hprod(BitMatrix64 A, BitMatrix64 B)
         {
             var C = BitMatrix64.Alloc();
-            for(var i=0; i<A.RowCount; i++)
-            for(var j=0; j<B.ColCount; j++)
+            for(var i=0; i<A.Order; i++)
+            for(var j=0; j<B.Order; j++)
                 C[i,j] = A[i,j] & B[i,j];
             return C;
         }

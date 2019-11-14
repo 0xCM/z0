@@ -38,7 +38,6 @@ namespace Z0
             where T : unmanaged
                 => MemoryMarshal.AsBytes(src);
 
-
         /// <summary>
         /// Reimagines a readonly span of generic values as a span of signed bytes
         /// </summary>
@@ -98,7 +97,6 @@ namespace Z0
         public static Span<long> AsInt64<T>(this Span<T> src)
             where T : unmanaged        
                 => MemoryMarshal.Cast<T,long>(src);
-
 
         /// <summary>
         /// Reimagines a span of generic values as a span of 64-bit unsigned integers

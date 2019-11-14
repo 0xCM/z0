@@ -215,7 +215,7 @@ namespace Z0
         public void bs_bitview()
         {
             var x = Random.CpuVector<int>(n128);
-            var y = BitView.ViewBits(ref x);
+            var y = BitView.Over(ref x);
             var ys = y.Bytes.ToBitString();
             var xs = x.ToBitString();
             Claim.eq(ys,xs);

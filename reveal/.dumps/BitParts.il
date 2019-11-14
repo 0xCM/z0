@@ -1,4 +1,13 @@
-// 2019-11-13 14:17:01:854
+// 2019-11-14 10:18:56:606
+void part12x4(uint src, Span<byte> dst)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call System.Byte& zfunc::head<System.Byte>(System.Span`1<System.Byte>)
+    IL_0007: call System.Void Z0.BitParts::part12x4(System.UInt32,System.Byte&)
+    IL_000C: ret
+
+}
 void part16x4(uint src, ref byte dst)
 {
     IL_0000: ldarg.1
@@ -502,6 +511,14 @@ uint project(uint src, uint mask)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: call System.UInt32 Z0.Bits::scatter(System.UInt32,System.UInt32)
+    IL_0007: ret
+
+}
+ushort project(ushort src, ushort mask)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call System.UInt16 Z0.Bits::scatter(System.UInt16,System.UInt16)
     IL_0007: ret
 
 }
@@ -2072,14 +2089,5 @@ void part12x4(uint src, ref byte dst)
     IL_0029: conv.u1
     IL_002A: stind.i1
     IL_002B: ret
-
-}
-void part12x4(uint src, Span<byte> dst)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: call System.Byte& zfunc::head<System.Byte>(System.Span`1<System.Byte>)
-    IL_0007: call System.Void Z0.BitParts::part12x4(System.UInt32,System.Byte&)
-    IL_000C: ret
 
 }

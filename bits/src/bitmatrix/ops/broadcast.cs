@@ -89,7 +89,7 @@ namespace Z0
         public static BitMatrix8 broadcast(BitVector8 x)
         {
             var A = alloc(n8);
-            A.Data.Fill(x);
+            A.Bytes.Fill(x);
             return A;
         }
 
@@ -101,7 +101,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ref BitMatrix8 broadcast(BitVector8 x, ref BitMatrix8 A)
         {
-            A.Data.Fill(x);
+            A.Bytes.Fill(x);
             return ref A;
         }
 
@@ -161,7 +161,7 @@ namespace Z0
         public static BitMatrix64 broadcast(BitVector64 x)
         {
             var A = alloc(n64);
-            A.Data.Fill(x);
+            A.Bytes.AsUInt64().Fill(x);
             return A;
         }
 

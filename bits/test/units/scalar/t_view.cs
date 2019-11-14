@@ -17,7 +17,7 @@ namespace Z0
         {
             var src = UInt64.MaxValue;  
             var len = sizeof(ulong);
-            var view = BitView.ViewBits(ref src);
+            var view = BitView.Over(ref src);
             for(var i=0; i<len; i++)
             for(byte j=0; j<8; j++)
                 view[i,j] = j % 2 == 0;

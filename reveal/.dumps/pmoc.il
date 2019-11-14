@@ -1,4 +1,4 @@
-// 2019-11-13 14:17:00:049
+// 2019-11-14 10:18:54:845
 Sign:int signum_d16u(ushort x)
 {
     IL_0000: ldarg.0
@@ -1166,7 +1166,7 @@ Perm4:byte perm4_assemble_id()
     IL_0001: ldc.i4.1
     IL_0002: ldc.i4.2
     IL_0003: ldc.i4.3
-    IL_0004: call Z0.Perm4 Z0.Perm4Spec::assemble(Z0.Perm4,Z0.Perm4,Z0.Perm4,Z0.Perm4)
+    IL_0004: call Z0.Perm4 Z0.PermSpec::assemble(Z0.Perm4,Z0.Perm4,Z0.Perm4,Z0.Perm4)
     IL_0009: ret
 
 }
@@ -1176,7 +1176,7 @@ Perm4:byte perm4_assemble_rid()
     IL_0001: ldc.i4.2
     IL_0002: ldc.i4.1
     IL_0003: ldc.i4.0
-    IL_0004: call Z0.Perm4 Z0.Perm4Spec::assemble(Z0.Perm4,Z0.Perm4,Z0.Perm4,Z0.Perm4)
+    IL_0004: call Z0.Perm4 Z0.PermSpec::assemble(Z0.Perm4,Z0.Perm4,Z0.Perm4,Z0.Perm4)
     IL_0009: ret
 
 }
@@ -3225,30 +3225,6 @@ bit gt_d32u(uint a, uint b)
     IL_0007: ret
 
 }
-bit gt_g32u(uint a, uint b)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: call Z0.bit Z0.gmath::gt<System.UInt32>(System.UInt32,System.UInt32)
-    IL_0007: ret
-
-}
-bit gt_d64i(long a, long b)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: call Z0.bit Z0.math::gt(System.Int64,System.Int64)
-    IL_0007: ret
-
-}
-bit gt_g64i(long a, long b)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: call Z0.bit Z0.gmath::gt<System.Int64>(System.Int64,System.Int64)
-    IL_0007: ret
-
-}
 bit gt_d64u(ulong a, ulong b)
 {
     IL_0000: ldarg.0
@@ -3270,6 +3246,30 @@ bit gt_d32f(float a, float b)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: call Z0.bit Z0.fmath::gt(System.Single,System.Single)
+    IL_0007: ret
+
+}
+bit gt_g32f(float a, float b)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call Z0.bit Z0.gfp::gt<System.Single>(System.Single,System.Single)
+    IL_0007: ret
+
+}
+bit gt_d64f(double a, double b)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call Z0.bit Z0.fmath::gt(System.Double,System.Double)
+    IL_0007: ret
+
+}
+bit gt_g64f(double a, double b)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call Z0.bit Z0.gfp::gt<System.Double>(System.Double,System.Double)
     IL_0007: ret
 
 }

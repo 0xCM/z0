@@ -11,7 +11,7 @@ namespace Z0
     using static zfunc;
 
     partial class BitMatrix
-    {                        
+    {                                
         /// <summary>
         /// Loads a generic bitmatrix from a span
         /// </summary>

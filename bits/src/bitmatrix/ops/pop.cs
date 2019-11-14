@@ -44,7 +44,7 @@ namespace Z0
         [MethodImpl(Inline)] 
         public static uint pop(in BitMatrix32 A)
         {
-            const uint bytes = BitMatrix32.Order * 3;
+            const uint bytes = BitMatrix32.N * 3;
             
             ref readonly var src = ref head(A.Data.AsUInt64());
             var count = 0u;

@@ -82,10 +82,10 @@ namespace Z0.Test
             for(var j = 0; j< SampleSize; j++)
             {
                 var src = Random.BitMatrix8();
-                for(var c = 0; c < src.ColCount; c ++)
+                for(var c = 0; c < src.Order; c ++)
                 {
                     var col = src.ColVector(c);
-                    for(var r=0; r<src.RowCount; r++)
+                    for(var r=0; r<src.Order; r++)
                         Claim.eq(col[r], src[r,c]);
                 }
             }
@@ -110,10 +110,10 @@ namespace Z0.Test
             for(var j = 0; j< SampleSize; j++)
             {
                 var src = Random.BitMatrix(n32);
-                for(var c = 0; c < src.ColCount; c ++)
+                for(var c = 0; c < src.Order; c ++)
                 {
                     var col = src.ColVec(c);
-                    for(var r=0; r<src.RowCount; r++)
+                    for(var r=0; r<src.Order; r++)
                         Claim.eq(col[r], src[r,c]);
                 }
             }
@@ -124,10 +124,10 @@ namespace Z0.Test
             for(var j = 0; j< SampleSize; j++)
             {
                 var src = Random.BitMatrix(n64);
-                for(var c = 0; c < src.ColCount; c ++)
+                for(var c = 0; c < src.Order; c ++)
                 {
                     var col = src.ColVector(c);
-                    for(var r=0; r<src.RowCount; r++)
+                    for(var r=0; r<src.Order; r++)
                         Claim.eq(col[r], src[r,c]);
                 }
             }

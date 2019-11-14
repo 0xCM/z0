@@ -76,11 +76,13 @@ namespace Z0
 
         public void create8x8_from_perm()
         {
+            const uint n = BitMatrix8.N;
+
             var p = Random.Perm<N8>();
             var m = p.ToBitMatrix();
 
-            for(var i=0; i<m.RowCount; i++)
-            for(var j=0; j<m.ColCount; j++)
+            for(var i=0; i<n; i++)
+            for(var j=0; j<n; j++)
             {
                 if(p[i] == j)
                     Claim.eq(m[i,j], on);
@@ -91,13 +93,15 @@ namespace Z0
 
         public void create16x16_from_perm()
         {
+            const uint n = BitMatrix16.N;
+
             for(var sample=0; sample<SampleSize; sample++)
             {
                 var p = Random.Perm<N16>();
                 var m = p.ToBitMatrix();
 
-                for(var i=0; i<m.RowCount; i++)
-                for(var j=0; j<m.ColCount; j++)
+                for(var i=0; i<n; i++)
+                for(var j=0; j<n; j++)
                 {
                     if(p[i] == j)
                         Claim.eq(m[i,j], on);
@@ -109,13 +113,15 @@ namespace Z0
 
         public void create64x64_from_perm()
         {
+            const uint n = BitMatrix64.N;
+
             for(var sample=0; sample<SampleSize; sample++)
             {
                 var p = Random.Perm<N64>();
                 var m = p.ToBitMatrix();
 
-                for(var i=0; i<m.RowCount; i++)
-                for(var j=0; j<m.ColCount; j++)
+                for(var i=0; i<n; i++)
+                for(var j=0; j<n; j++)
                 {
                     if(p[i] == j)
                         Claim.eq(m[i,j], on);

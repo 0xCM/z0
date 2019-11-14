@@ -15,7 +15,6 @@ namespace Z0
 
     public static partial class As
     {
-
         /// <summary>
         /// Converts a generic reference into a void pointer
         /// </summary>
@@ -149,7 +148,6 @@ namespace Z0
         public static unsafe double* refptr(ref double src, int offset)
             => (double*)pvoid(ref seek(ref src, offset));
 
-
         [MethodImpl(Inline)]
         public static unsafe sbyte* pint8<T>(ref T src)
             => (sbyte*)pvoid(ref src);
@@ -184,7 +182,6 @@ namespace Z0
         public static unsafe ulong* puint64<T>(ref T src)
             => (ulong*)pvoid(ref src);
 
-
         [MethodImpl(Inline)]
         public static unsafe float* pfloat32<T>(ref T src)
             => (float*)pvoid(ref src);
@@ -192,7 +189,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static unsafe double* pfloat64<T>(ref T src)
             => (double*)pvoid(ref src);
-
 
         [MethodImpl(Inline)]
         public static unsafe sbyte* constptr(in sbyte src)
@@ -281,6 +277,37 @@ namespace Z0
             where P : unmanaged
                 => (P*)Unsafe.AsPointer(ref src);
 
+        [MethodImpl(Inline)]
+        public static unsafe byte read8(in byte src)
+            => *(byte*)constptr(in src);
+
+        [MethodImpl(Inline)]
+        public static unsafe void store8(byte src, ref byte dst)
+             => *((byte*)refptr(ref dst)) = src;
+
+        [MethodImpl(Inline)]
+        public static unsafe ushort read16(in byte src)
+            => *(ushort*)constptr(in src);
+
+        [MethodImpl(Inline)]
+        public static unsafe void store16(ushort src, ref byte dst)
+             => *((ushort*)refptr(ref dst)) = src;
+
+        [MethodImpl(Inline)]
+        public static unsafe uint read32(in byte src)
+            => *(uint*)constptr(in src);
+
+        [MethodImpl(Inline)]
+        public static unsafe void store32(uint src, ref byte dst)
+             => *((uint*)refptr(ref dst)) = src;
+
+        [MethodImpl(Inline)]
+        public static unsafe ulong read64(in byte src)
+            => *(ulong*)constptr(in src);
+
+        [MethodImpl(Inline)]
+        public static unsafe void store64(ulong src, ref byte dst)
+             => *((ulong*)refptr(ref dst)) = src;
 
     }
 

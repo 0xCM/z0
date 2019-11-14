@@ -23,7 +23,7 @@ namespace Z0
             where T : unmanaged
         {
             var Z = BitMatrix.alloc<T>();
-            BitBlocks.not(in A.Head, ref Z.Head);
+            BitSquare.not(in A.Head, ref Z.Head);
             return Z;
         }
 
@@ -37,7 +37,7 @@ namespace Z0
         public static ref BitMatrix<T> not<T>(in BitMatrix<T> A, ref BitMatrix<T> Z)
             where T : unmanaged
         {
-            BitBlocks.not(in A.Head, ref Z.Head);
+            BitSquare.not(in A.Head, ref Z.Head);
             return ref Z;
         }
 
@@ -57,7 +57,7 @@ namespace Z0
         public static BitMatrix8 not(in BitMatrix8 A)
         {
             var Z = BitMatrix.alloc(n8);
-            BitBlocks.not(in A.Head, ref Z.Head);
+            BitSquare.not(in A.Head, ref Z.Head);
             return Z;
         }
 
@@ -69,7 +69,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ref BitMatrix8 not(in BitMatrix8 A, ref BitMatrix8 Z)
         {
-            BitBlocks.not(in A.Head, ref Z.Head);
+            BitSquare.not(in A.Head, ref Z.Head);
             return ref Z;
         }
 
@@ -81,7 +81,7 @@ namespace Z0
         public static BitMatrix16 not(in BitMatrix16 A)
         {
             var Z = BitMatrix.alloc(n16);
-            BitBlocks.not(in A.Head, ref Z.Head);
+            BitSquare.not(in A.Head, ref Z.Head);
             return Z;
         }
         
@@ -93,7 +93,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ref BitMatrix16 not(in BitMatrix16 A, ref BitMatrix16 Z)
         {
-            BitBlocks.not(in A.Head, ref Z.Head);
+            BitSquare.not(in A.Head, ref Z.Head);
             return ref Z;
         }
 
@@ -105,7 +105,7 @@ namespace Z0
         public static BitMatrix32 not(in BitMatrix32 A)
         {
             var Z = BitMatrix.alloc(n32);
-            BitBlocks.not(in A.Head, ref Z.Head);
+            BitSquare.not(in A.Head, ref Z.Head);
             return Z;
         }
 
@@ -117,7 +117,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ref BitMatrix32 not(in BitMatrix32 A, ref BitMatrix32 Z)
         {
-            BitBlocks.not(in A.Head, ref Z.Head);
+            BitSquare.not(in A.Head, ref Z.Head);
             return ref Z;
         }
 
@@ -129,7 +129,7 @@ namespace Z0
         public static BitMatrix64 not(in BitMatrix64 A)
         {
             var Z = BitMatrix.alloc(n64);
-            BitBlocks.not(in A.Head, ref Z.Head);
+            BitSquare.not(in A.Head, ref Z.Head);
             return Z;
         }
 
@@ -141,7 +141,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ref BitMatrix64 not(in BitMatrix64 A, ref BitMatrix64 Z)
         {
-            BitBlocks.not(in A.Head, ref Z.Head);
+            BitSquare.not(in A.Head, ref Z.Head);
             return ref Z;
         } 
     }

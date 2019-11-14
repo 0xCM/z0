@@ -59,7 +59,7 @@ namespace Z0
         CpuFeatureSet(uint data)
         {
             this.data = data;    
-            this.bits = BitView.ViewBits(ref this.data);
+            this.bits = BitView.Over(ref this.data);
         }
 
         public Bit this[T id]
