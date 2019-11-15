@@ -15,7 +15,6 @@ namespace  Z0
     
     partial class xfunc
     {
-
         /// <summary>
         /// Partitions the source into sub-arrays of a maximum length
         /// </summary>

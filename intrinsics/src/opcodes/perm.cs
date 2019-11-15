@@ -12,6 +12,8 @@ namespace Z0
 
     partial class inxoc
     {
+        public static Vector128<ushort> vbswap_128x16u(Vector128<ushort> x)
+            => dinx.vbswap(x);
         public static Vector256<sbyte> vperm4x64(Vector256<sbyte> x)
             => dinx.vperm4x64(x, Perm4.ABCD);        
             

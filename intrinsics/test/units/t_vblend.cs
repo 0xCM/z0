@@ -14,82 +14,66 @@ namespace Z0
     public class t_vblend : IntrinsicTest<t_vblend>
     {
         
-        public void vblendv_256x64u_check_explicit()
+        public void vblend_32x8_256x32u_basecase()
         {
-            // z[i] = testbit(spec[i],7) ? y[i] : x[i]
-            const int bitpos = 63;
-            const ulong pickX = 0;
-            const ulong pickY = ulong.MaxValue;
-            const int len = 4;
-
-
-            var x = dinx.vparts(0ul,2ul,4ul,6ul);
-            var y = dinx.vparts(1ul,3ul,5ul,7ul);
-            var m = dinx.vparts(pickY, pickX, pickY, pickX);
-            var expect = dinx.vparts(1ul, 2ul, 5ul, 6ul);
-            var actual = dinx.vblend4x64(x,y,m);
-            Claim.eq(expect,actual);
-
-            var xs = x.ToSpan();
-            var ys = y.ToSpan();
-            var ms = m.ToSpan();
-            Span<ulong> zs = stackalloc ulong[len];
-            for(var i=0; i<len; i++)
-                zs[i] = gbits.test(ms[i], bitpos) ? ys[i] : xs[i];
-
-            var z = ginx.vload(n256,zs);
-            Claim.eq(expect,z);
-            
-        }
-        
-        public void vblend_256x64u_check()
-        {
-            const int bitpos = 63;
-            const ulong pickX = 0ul;
-            const ulong pickY = ulong.MaxValue;
-            const int len = 4;
             var n = n256;
+            var w = n32;
+            var x = dinx.vparts(n,0,1,2,3,4,5,6,7);
+            var y = dinx.vparts(n,8,9,A,B,C,D,E,F);
+            var e = dinx.vparts(n,0,9,2,B,4,D,6,F);
+            var o = dinx.vparts(n,8,1,A,3,C,5,E,7);
+            var mEven = DataPatterns.blendspec(n,w,false);
+            var mOdd = DataPatterns.blendspec(n,w,true);
+            Claim.eq(e,ginx.vblend32x8(x,y,mEven));
+            Claim.eq(o,ginx.vblend32x8(x,y,mOdd));
+
+        }
+
+        public void vblend_32x8_256x64u_basecase()
+        {
+            var n = n256;
+            var w = n64;
+            var x = dinx.vparts(n,0,1,2,3);
+            var y = dinx.vparts(n,4,5,6,7);
+            var e = dinx.vparts(n,0,5,2,7);
+            var o = dinx.vparts(n,4,1,6,3);
+            var mEven = DataPatterns.blendspec(n,w,false);
+            var mOdd = DataPatterns.blendspec(n,w,true);
+            Claim.eq(e,ginx.vblend32x8(x,y,mEven));
+            Claim.eq(o,ginx.vblend32x8(x,y,mOdd));
+
+        }
+
+        public void vblend_32x8_256x64u()
+        {
+            var n = n256;
+
+            var selectors = Random.Bits(SampleSize).ToArray();
 
             for(var sample=0; sample<SampleSize; sample++)
             {
-                var x = Random.CpuVector<ulong>(n);
-                var y = Random.CpuVector<ulong>(n);
-                
-                var selector = Random.BitSpan(len);
-                var ms = BlockedSpan.alloc<ulong>(n);
-                for(var i = 0; i< len; i++)
-                    ms[i] = selector[i] ? pickY : pickX;
+                var xs = Random.BlockedSpan<ulong>(n);
+                var x = xs.TakeVector();
+                Claim.eq(x,dinx.vparts(n, xs[0], xs[1], xs[2], xs[3]));
 
-                var m = ms.TakeVector();
-                var actual = dinx.vblend4x64(x,y,m);
+                var ys = Random.BlockedSpan<ulong>(n);
+                var y = ys.TakeVector();
+                Claim.eq(y,dinx.vparts(n, ys[0], ys[1], ys[2], ys[3]));
 
-                
-                var xs = x.ToSpan();
-                var ys = y.ToSpan();
+                var m = DataPatterns.blendspec(n256,n64,false);
 
-
-                Span<ulong> zs = stackalloc ulong[len];                
-                for(var i=0; i<len; i++)
-                    zs[i] = gbits.test(ms[i], bitpos) ? ys[i] : xs[i];
-
-
-                var expect = ginx.vload(n,zs);
-                if(!expect.Equals(actual))
-                {
-                    Trace("x", xs.FormatList());
-                    Trace("y", ys.FormatList());
-                    Trace("mask (vector)", m.FormatList());
-                    Trace("mask (span)", ms.FormatList());
-                    Trace("z", actual.FormatList());
-                }
+                var es = BlockedSpan.alloc<ulong>(n);
+                for(var i=0; i<es.Length; i++)
+                    es[i] = odd(i) ? ys[i] : xs[i];
+                var expect = es.TakeVector();
+                var actual = ginx.vblend32x8(x,y,m);
 
                 Claim.eq(expect,actual);
 
             }
-  
         }
 
-        public void vblend_128x16u_check()
+        public void vblend_8x16_128x16u_basecase()
         {
             var x = dinx.vparts(n128, 0,2,4,6,8,10,12,14); 
             var y = dinx.vparts(n128, 1,3,5,7,9,11,13,15); 
@@ -107,14 +91,14 @@ namespace Z0
             Claim.eq(dinx.vparts(n128,1,3,5,7,8,10,12,14), z);
 
         }
-        public void vblend_128x32u_check()
+        public void vblend_4x32_128x32u_basecase()
         {
 
             var x = dinx.vparts(1u,3,5,7);
             var y = dinx.vparts(2u,4,6,8);
 
             var spec = Blend4x32.LLLL;
-            Vector128<uint> z = dinx.vblend4x32(x,y, spec);
+            var z = dinx.vblend4x32(x,y, spec);
             Claim.eq(z,x);
 
             spec = Blend4x32.LLLR;
@@ -139,25 +123,22 @@ namespace Z0
             Claim.eq(z,y);
         }
 
-        public void vblend_256x32u_check()
+        public void vblend_8x32_256x32u_basecase()
         {
 
             var x = dinx.vparts(n256, 1u, 3, 5, 7, 9,  11, 13, 15);
             var y = dinx.vparts(n256, 2u, 4, 6, 8, 10, 12, 14, 16);
             var spec = Blend8x32.LLLLLLLL;
             var z = dinx.vblend8x32(x,y, spec);
-            Trace($"vblend({x},{y},{spec}) = {z}");
             Claim.eq(z,x);
 
             spec = Blend8x32.LRLRLRLR;
             z = dinx.vblend8x32(x,y, spec);
-            Trace($"vblend({x},{y},{spec}) = {z}");
             Claim.eq(z,dinx.vparts(n256,1u,4,5,8,9,12,13,16));
 
 
             spec = Blend8x32.RRRRRRRR;
             z = dinx.vblend8x32(x,y, spec);
-            Trace($"vblend({x},{y},{spec}) = {z}");
             Claim.eq(z,y);
 
         }

@@ -12,7 +12,7 @@ namespace Z0
     using static zfunc;
 
 
-    public class t_vcount : UnitTest<t_vcount>
+    public class t_vcount : IntrinsicTest<t_vcount>
     {   
         public void next_128x8i()
             => next_check<byte>(n128);

@@ -16,33 +16,33 @@ namespace Z0
     public class t_vpatterns : IntrinsicTest<t_vpatterns>
     {
 
-        public void ones_pattern_128()
+        public void vones_128()
         {
             var n = n128;
-            ones_pattern_check<byte>(n);            
-            ones_pattern_check<ushort>(n);            
-            ones_pattern_check<uint>(n);
-            ones_pattern_check<ulong>(n);
-            ones_pattern_check<sbyte>(n);            
-            ones_pattern_check<short>(n);            
-            ones_pattern_check<int>(n);
-            ones_pattern_check<long>(n);
+            vones_check<byte>(n);            
+            vones_check<ushort>(n);            
+            vones_check<uint>(n);
+            vones_check<ulong>(n);
+            vones_check<sbyte>(n);            
+            vones_check<short>(n);            
+            vones_check<int>(n);
+            vones_check<long>(n);
         }
 
-        public void ones_pattern_256()
+        public void vones_256()
         {
             var n = n256;
-            ones_pattern_check<byte>(n);            
-            ones_pattern_check<ushort>(n);            
-            ones_pattern_check<uint>(n);
-            ones_pattern_check<ulong>(n);
-            ones_pattern_check<sbyte>(n);            
-            ones_pattern_check<short>(n);            
-            ones_pattern_check<int>(n);
-            ones_pattern_check<long>(n);
+            vones_check<byte>(n);            
+            vones_check<ushort>(n);            
+            vones_check<uint>(n);
+            vones_check<ulong>(n);
+            vones_check<sbyte>(n);            
+            vones_check<short>(n);            
+            vones_check<int>(n);
+            vones_check<long>(n);
         }
 
-        void ones_pattern_check<T>(N128 n = default)
+        void vones_check<T>(N128 n)
             where T : unmanaged
         {
             var ones = ginx.vones<T>(n);
@@ -51,7 +51,7 @@ namespace Z0
             Claim.eq(n,bs.PopCount());
         }
 
-        void ones_pattern_check<T>(N256 n = default)
+        void vones_check<T>(N256 n)
             where T : unmanaged
         {
             var ones = ginx.vones<T>(n);
@@ -60,8 +60,6 @@ namespace Z0
             Claim.eq(n,bs.PopCount());
         }
 
- 
     }
-
 
 }

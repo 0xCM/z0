@@ -15,6 +15,7 @@ namespace Z0
     
     partial class ginx
     {
+
         /// <summary>
         /// Creates a vector populated with component values that alternate between the first operand and the second
         /// </summary>
@@ -25,13 +26,12 @@ namespace Z0
         public static Vector256<T> valt<T>(N256 n, T a, T b)
             where T : unmanaged
         {            
-            var data = BlockedSpan.alloc<T>(n);
-            var len = BlockedSpan.blocklen<T>(n);
-            ref var mem = ref head(data);
-            for(var i=0; i<len; i++)
-                seek(ref mem, i) = even(i) ? a : b;
-            return ginx.vload(n, in head(data));
+            var x = vbroadcast(n,a);
+            var y = vbroadcast(n,b);
+            var m = DataPatterns.blendspec<T>(n,false);
+            return vblend32x8(x,y,m);
         }
+
 
         /// <summary>
         /// Creates a vector populated with component values that alternate between the first operand and the second

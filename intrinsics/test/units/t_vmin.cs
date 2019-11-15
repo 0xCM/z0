@@ -10,7 +10,7 @@ namespace Z0
     
     using static zfunc;
 
-    public class t_vmin : UnitTest<t_vmin>
+    public class t_vmin : IntrinsicTest<t_vmin>
     {
         public void min_128x8i()
             => min_check<sbyte>(n128);

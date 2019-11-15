@@ -18,12 +18,12 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<T> vincrements<T>(N128 n)
             where T : unmanaged
-                => vload<T>(n, VecPatternData.increments<T>(n));
+                => DataPatterns.increments<T>(n);
 
         [MethodImpl(Inline)]
         public static Vector256<T> vincrements<T>(N256 n)
             where T : unmanaged
-                => vload<T>(n, VecPatternData.increments<T>(n));
+                => DataPatterns.increments<T>(n);
 
         /// <summary>
         /// Creates a 128-bit vector with components that increase by unit step from an initial value

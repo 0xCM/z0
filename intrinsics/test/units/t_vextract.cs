@@ -10,7 +10,7 @@ namespace Z0.Test
     
     using static zfunc;
 
-    public class t_vextract : UnitTest<t_vextract>
+    public class t_vextract : IntrinsicTest<t_vextract>
     {     
         public void extract_128x8u()
             => extract_check<byte>(n128);

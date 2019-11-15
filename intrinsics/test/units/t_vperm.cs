@@ -13,7 +13,7 @@ namespace Z0
     
     using static zfunc;
 
-    public class t_vperm : UnitTest<t_vperm>
+    public class t_vperm : IntrinsicTest<t_vperm>
     {
         const Perm4 A = Perm4.A;
 
@@ -22,6 +22,37 @@ namespace Z0
         const Perm4 C = Perm4.C;
 
         const Perm4 D = Perm4.D;
+
+        public void perm4x16()
+        {
+            var n = n128;
+            var x = dinx.vparts(n,0,1,2,3,4,5,6,7);
+            
+            
+            var a0 = dinx.vpermlo4x16(x, Perm4.DCBA);
+            var a1 = dinx.vparts(n,3,2,1,0,4,5,6,7);
+            Claim.eq(a0,a1);
+
+            var b0 = dinx.vpermhi4x16(x, Perm4.DCBA);
+            var b1 = dinx.vparts(n,0,1,2,3,7,6,5,4);
+            Claim.eq(b0,b1);
+
+            var c0 = dinx.vperm4x16(x,Perm4.DCBA,Perm4.DCBA);
+            var c1 = dinx.vparts(n,3,2,1,0,7,6,5,4);
+            Claim.eq(c0,c1);
+
+            var d0 = dinx.vpermlo4x16(x, Perm4.BADC);
+            var d1 = dinx.vparts(n,1,0,3,2,4,5,6,7);            
+            Claim.eq(d0,d1);
+
+            var e0 = dinx.vpermhi4x16(x, Perm4.BADC);
+            var e1 = dinx.vparts(n,0,1,2,3,5,4,7,6);
+            Claim.eq(e0,e1);
+
+            var f0 = dinx.vperm4x16(x, Perm4.BADC, Perm4.BADC);
+            var f1 = dinx.vparts(n,1,0,3,2,5,4,7,6);
+            Claim.eq(f0,f1);
+        }
 
         public void perm4x64()
         {
@@ -138,8 +169,8 @@ namespace Z0
 
         public void perm256u8()
         {
-            var x = ginx.vincrements<byte>(n256);
-            var y = ginx.vdecrements<byte>(n256,31);
+            var x = DataPatterns.increments<byte>(n256);
+            var y = DataPatterns.decrements<byte>(n256);
             var z = dinx.vreverse(dinx.vshuf32x8(x,y));
             Claim.eq(x,z);
 

@@ -15,344 +15,152 @@ namespace Z0
 
     public class t_vrot : IntrinsicTest<t_vrot>
     {
-        public void rotrx_check()
+        public void vrotrx_128x8u()
         {
-            var x = ginx.vunits<byte>(n128);            
-            var y = ginx.vrotrx(x, 8);
-            var z = ginx.vrotr(x, 8);
-            Claim.eq(y,z);
+            for(var i=0; i<SampleSize; i++)
+            {
+                var x = ginx.vunits<byte>(n128);            
+                Claim.eq(ginx.vrotrx(x,8), dinx.vrotrx(x,n8));
+                Claim.eq(ginx.vrotrx(x,16), dinx.vrotrx(x,n16));
+                Claim.eq(ginx.vrotrx(x,24), dinx.vrotrx(x,n24));
+                Claim.eq(ginx.vrotrx(x,32), dinx.vrotrx(x,n32));
+            }
 
         }
 
-        public void rotlx_check()
+        public void vrotlx_128x8u()
         {
-            var x = ginx.vunits<byte>(n128);
-            var y = ginx.vrotlx(x, 8);
-            var z = ginx.vrotl(x, 8);
-            Claim.eq(y,z);
+            for(var i=0; i<SampleSize; i++)
+            {
+                var x = ginx.vunits<byte>(n128);            
+                Claim.eq(ginx.vrotlx(x,8), dinx.vrotlx(x,n8));
+                Claim.eq(ginx.vrotlx(x,16), dinx.vrotlx(x,n16));
+                Claim.eq(ginx.vrotlx(x,24), dinx.vrotlx(x,n24));
+                Claim.eq(ginx.vrotlx(x,32), dinx.vrotlx(x,n32));
+            }
         }
 
+        public void vrotl_128x8()
+            => vrotl_check<byte>(n128);
 
-        public void vrotl_128x8_check()
-        {
-            vrotl_128_check<byte>();
-        }
+        public void vrotl_128x16()
+            => vrotl_check<ushort>(n128);
+
+        public void vrotl_128x32()
+            => vrotl_check<uint>(n128);
+
+        public void vrotl_128x64()
+            => vrotl_check<ulong>(n128);
+
+        public void vrotr_128x8()
+            => vrotr_check<byte>(n128);
+
+        public void vrotr_128x16()
+            => vrotr_check<ushort>(n128);
+
+        public void vrotr_128x32()
+            => vrotr_check<uint>(n128);
+
+        public void vrotr_128x64()
+            => vrotr_check<ulong>(n128);
 
         public void vrotl_128x8_bench()
-        {
-            vrotl_128_bench<byte>();
-        }
-
-        public void vrotl_128x16_check()
-        {
-            vrotl_128_check<ushort>();
-        }
+            => vrotl_bench<byte>(n128);
 
         public void vrotl_128x16_bench()
-        {
-            vrotl_128_bench<ushort>();
-        }
-
-        public void vrotl_128x32_check()
-        {
-            vrotl_128_check<uint>();
-        }
+            => vrotl_bench<ushort>(n128);
 
         public void vrotl_128x32_bench()
-        {
-            vrotl_128_bench<uint>();
-        }
-
-        public void vrotl_128x64_check()
-        {
-            vrotl_128_check<ulong>();
-        }
+            => vrotl_bench<uint>(n128);
 
         public void vrotl_128x64_bench()
-        {
-            vrotl_128_bench<ulong>();
-        }
-
-        public void vrotr_128x8_check()
-        {
-            vrotr_128_check<byte>();
-        }
+            => vrotl_bench<ulong>(n128);
 
         public void vrotr_128x8_bench()
-        {
-            rotr_128_bench<byte>();
-        }
-
-        public void vrotr_128x16_check()
-        {
-            vrotr_128_check<ushort>();
-        }
+            => rotr_bench<byte>(n128);
 
         public void vrotr_128x16_bench()
         {
-            rotr_128_bench<ushort>();
-        }
-
-        public void vrotr_128x32_check()
-        {
-            vrotr_128_check<uint>();
+            rotr_bench<ushort>(n128);
         }
 
         public void vrotr_128x32_bench()
         {
-            rotr_128_bench<uint>();
-        }
-
-        public void vrotr_128x64_check()
-        {
-            vrotr_128_check<ulong>();
+            rotr_bench<uint>(n128);
         }
 
         public void vrotr_128x64_bench()
         {
-            rotr_128_bench<ulong>();
+            rotr_bench<ulong>(n128);
         }
 
-        public void vrotl_256x8_check()
-        {
-            vrotl_256_check<byte>();
-        }
+        public void vrotl_256x8()
+            => vrotl_check<byte>(n256);
+
+        public void vrotl_256x16()
+            => vrotl_check<ushort>(n256);
+
+        public void vrotl_256x32()
+            => vrotl_check<uint>(n256);
+
+        public void vrotl_256x64()
+            => vrotl_check<ulong>(n256);
+
+        public void vrotr_256x8()
+            => vrotr_check<byte>(n256);
+
+        public void vrotr_256x16()
+            => vrotr_check<ushort>(n256);
+
+        public void vrotr_256x32()
+            => vrotr_check<uint>(n256);
+
+        public void vrotr_256x64()
+            => vrotr_check<ulong>(n256);
 
         public void vrotl_256x8_bench()
         {
-            vrotl_256_bench<byte>();
-        }
-
-        public void vrotl_256x16_check()
-        {
-            vrotl_256_check<ushort>();
+            vrotl_bench<byte>(n256);
         }
 
         public void vrotl_256x16_bench()
         {
-            vrotl_256_bench<ushort>();
-        }
-
-        public void vrotl_256x32_check()
-        {
-            vrotl_256_check<uint>();
+            vrotl_bench<ushort>(n256);
         }
 
         public void vrotl_256x32_bench()
         {
-            vrotl_256_bench<uint>();
-        }
-
-        public void vrotl_256x64_check()
-        {
-            vrotl_256_check<ulong>();
+            vrotl_bench<uint>(n256);
         }
 
         public void vrotl_256x64_bench()
         {
-            vrotl_256_bench<ulong>();
-        }
-
-        public void vrotr_256x8_check()
-        {
-            vrotr_256_check<byte>();
+            vrotl_bench<ulong>(n256);
         }
 
         public void vrotr_256x8_bench()
         {
-            vrotr_256_bench<byte>();
-        }
-
-        public void vrotr_256x16_check()
-        {
-            vrotr_256_check<ushort>();
+            vrotr_bench<byte>(n256);
         }
 
         public void vrotr_256x16_bench()
         {
-            vrotr_256_bench<ushort>();
+            vrotr_bench<ushort>(n256);
         }
 
-        public void vrotr_256x32_check()
-        {
-            vrotr_256_check<uint>();
-        }
 
         public void vrotr_256x32_bench()
         {
-            vrotr_256_bench<uint>();
+            vrotr_bench<uint>(n256);
         }
 
-        public void vrotr_256x64_check()
-        {
-            vrotr_256_check<ulong>();
-        }
 
         public void vrotr_256x64_bench()
         {
-            vrotr_256_bench<ulong>();
+            vrotr_bench<ulong>(n256);
         }
 
-        public void vrotv_128x64_check()
-        {
-            var n = n128;
-            for(var sample=0; sample < SampleSize; sample++)
-            {
-                var src = Random.CpuVector<ulong>(n);
-                var offsets = Random.CpuVector(n,closed(2ul, 30ul));
-                
-                var vL = dinx.vrotl(src,offsets);
-                var vRL = dinx.vrotr(vL,offsets);
-                Claim.eq(src,vRL);
-                
-                var vR = dinx.vrotr(src,offsets);
-                var vLR = dinx.vrotl(vR,offsets);
-                Claim.eq(src,vLR);
-
-
-                var srcSpan = src.ToSpan();
-                var offSpan = offsets.ToSpan();
-                var vRSpan = vR.ToSpan();
-                var vLSpan = vL.ToSpan();
-                var vRLSpan = vRL.ToSpan();
-                var vLRSpan = vLR.ToSpan();
-
-                for(var i=0; i<src.Length(); i++)
-                {
-                    Claim.eq(Bits.rotl(srcSpan[i], offSpan[i]), vLSpan[i]);
-                    Claim.eq(Bits.rotr(vLSpan[i], offSpan[i]), vRLSpan[i]);
-                    
-                    Claim.eq(Bits.rotr(srcSpan[i], offSpan[i]), vRSpan[i]);
-                    Claim.eq(Bits.rotl(vRSpan[i], offSpan[i]), vLRSpan[i]);
-                }        
-            }
-        }
-
-        public void vrotv_256x64_check()
-        {
-            var n = n256;
-            for(var sample=0; sample < SampleSize; sample++)
-            {
-                var src = Random.CpuVector<ulong>(n);
-                var offsets = Random.CpuVector(n,closed(2ul, 30ul));
-                
-                var vL = dinx.vrotl(src,offsets);
-                var vRL = dinx.vrotr(vL,offsets);
-                Claim.eq(src,vRL);
-                
-                var vR = dinx.vrotr(src,offsets);
-                var vLR = dinx.vrotl(vR,offsets);
-                Claim.eq(src,vLR);
-
-
-                var srcSpan = src.ToSpan();
-                var offSpan = offsets.ToSpan();
-                var vRSpan = vR.ToSpan();
-                var vLSpan = vL.ToSpan();
-                var vRLSpan = vRL.ToSpan();
-                var vLRSpan = vLR.ToSpan();
-
-                for(var i=0; i<src.Length(); i++)
-                {
-                    Claim.eq(Bits.rotl(srcSpan[i], offSpan[i]), vLSpan[i]);
-                    Claim.eq(Bits.rotr(vLSpan[i], offSpan[i]), vRLSpan[i]);
-                    
-                    Claim.eq(Bits.rotr(srcSpan[i], offSpan[i]), vRSpan[i]);
-                    Claim.eq(Bits.rotl(vRSpan[i], offSpan[i]), vLRSpan[i]);
-                }        
-            }
-        }
-
-        void rot_256x8_check()
-        {
-            static void rotl_check(Vector256<byte> src, byte offset, Vector256<byte> computed)        
-                => Claim.eq(BitRot.rotl(src.ToSpan(), offset), computed.ToSpan());
-
-            static void rotr_check(Vector256<byte> src, byte offset, Vector256<byte> computed)        
-                => Claim.eq(BitRot.rotr(src.ToSpan(), offset), computed.ToSpan());
-
-            for(var i=0; i< SampleSize; i++)
-            {
-                var src = Random.CpuVector<byte>(n256);
-                var offset = Random.Next(closed<byte>(2, 6));
-                
-                var vL = dinx.vrotl(src,offset);                
-                var vRL = dinx.vrotr(vL,offset);                
-                Claim.eq(src,vRL);
-                
-                var vR = dinx.vrotr(src,offset);
-                var vLR = dinx.vrotl(vR,offset);
-                Claim.eq(src,vLR);
-
-                rotl_check(src, offset, vL);
-                rotr_check(vL, offset, vRL);
-                rotr_check(src, offset, vR);
-                rotl_check(vR, offset, vLR);
-
-            }
-
-        }
-
-        void rot_256x16u()
-        {
-            static void rotl_check(Vector256<ushort> src, ushort offset, Vector256<ushort> computed)        
-                => Claim.eq(BitRot.rotl(src.ToSpan(), offset), computed.ToSpan());
-
-            static void rotr_check(Vector256<ushort> src, ushort offset, Vector256<ushort> computed)        
-                => Claim.eq(BitRot.rotr(src.ToSpan(), offset), computed.ToSpan());
-
-            for(var i=0; i< SampleSize; i++)
-            {
-                var src = Random.CpuVector<ushort>(n256);
-                var offset = Random.Next(closed<byte>(2, 14));
-                
-                var vL = dinx.vrotl(src,offset);
-                var vRL = dinx.vrotr(vL,offset);                
-                Claim.eq(src,vRL);
-                
-                var vR = dinx.vrotr(src,offset);
-                var vLR = dinx.vrotl(vR,offset);
-                Claim.eq(src,vLR);
-
-                rotl_check(src, offset, vL);
-                rotr_check(vL, offset, vRL);
-                rotr_check(src, offset, vR);
-                rotl_check(vR, offset, vLR);
-            }
-        }
-
-        void rot_256x32u()
-        {
-            static void rotl_check(Vector256<uint> src, uint offset, Vector256<uint> computed)        
-                => Claim.eq(BitRot.rotl(src.ToSpan(), offset), computed.ToSpan());
-
-            static void rotr_check(Vector256<uint> src, uint offset, Vector256<uint> computed)        
-                => Claim.eq(BitRot.rotr(src.ToSpan(), offset), computed.ToSpan());
-
-            for(var i=0; i< SampleSize; i++)
-            {
-                var src = Random.CpuVector<uint>(n256);
-                var offset = Random.Next(closed<byte>(2, 14));
-                
-                var vL = dinx.vrotl(src,offset);
-                var vRL = dinx.vrotr(vL,offset);                
-                Claim.eq(src,vRL);
-                
-                var vR = dinx.vrotr(src,offset);
-                var vLR = dinx.vrotl(vR,offset);
-                Claim.eq(src,vLR);
-
-                rotl_check(src, offset, vL);
-                rotr_check(vL, offset, vRL);
-                rotr_check(src, offset, vR);
-                rotl_check(vR, offset, vLR);
-            }
-        }
-
-
-
-
-        void vrotl_128_check<T>()
+        void vrotl_check<T>(N128 n)
             where T : unmanaged
         {
             var offMin = 2;
@@ -368,34 +176,59 @@ namespace Z0
             }
         }
 
-        void vrotl_128_bench<T>()
+        void vrotl_check<T>(N256 n)
             where T : unmanaged
         {
-            var bz = bitsize<T>();
-            var opname = $"rotl_128x{bz}";
-            var sw = stopwatch();
-            var opcount = RoundCount*CycleCount;
-            var last = default(Vec128<T>);
-
             byte offMin = 2;
-            byte offMax = (byte)(bz - 2);
-            
-            for(var rep=0; rep < opcount; rep++)
+            byte offMax = (byte)(bitsize<T>() - 2);
+            for(var sample=0; sample<SampleSize; sample++)
+            {
+                var x = Random.CpuVector<T>(n256);
+                var offset = Random.Next(offMin,offMax);
+                var result = ginx.vrotl(x,offset).ToSpan();
+                var expect = x.ToSpan().Map(src => gbits.rotl(src, (int)offset));
+                for(var i=0; i<expect.Length; i++)
+                    Claim.eq(expect[i],result[i]);
+            }
+        }
+
+        void vrotr_check<T>(N256 n)
+            where T : unmanaged
+        {
+            byte offMin = 2;
+            byte offMax = (byte)(bitsize<T>() - 2);
+            for(var sample=0; sample<SampleSize; sample++)
+            {
+                var x = Random.CpuVector<T>(n256);
+                var offset = Random.Next(offMin,offMax);
+                var result = ginx.vrotr(x,offset).ToSpan();
+                var expect = x.ToSpan().Map(src => gbits.rotr(src, (int)offset));
+                for(var i=0; i<expect.Length; i++)
+                    Claim.eq(expect[i],result[i]);
+            }
+        }
+
+        void vrotr_check<T>(N128 n)
+            where T : unmanaged
+        {
+            byte offMin = 2;
+            byte offMax = (byte)(bitsize<T>() - 2);
+            for(var sample=0; sample<SampleSize; sample++)
             {
                 var x = Random.CpuVector<T>(n128);
                 var offset = Random.Next(offMin,offMax);
-                sw.Start();
-                last = ginx.vrotl(x,offset);
-                sw.Stop();
+                var result = ginx.vrotr(x,offset).ToSpan();
+                var expect = x.ToSpan().Map(src => gbits.rotr(src, (int)offset));
+                for(var i=0; i<expect.Length; i++)
+                    Claim.eq(expect[i],result[i]);
             }
-            Collect((opcount,sw,opname));
         }
 
-        void vrotl_256_bench<T>()
+        void vrotl_bench<T>(N256 n)
             where T : unmanaged
         {
             var bz = bitsize<T>();
-            var opname = $"rotl_256x{bz}";
+            var opname = $"rotl_{n}x{bz}";
             var sw = stopwatch();
             var opcount = RoundCount*CycleCount;
             var last = default(Vec256<T>);
@@ -414,11 +247,11 @@ namespace Z0
             Collect((opcount,sw,opname));
         }
 
-        void rotr_128_bench<T>()
+        void rotr_bench<T>(N128 n)
             where T : unmanaged
         {
             var bz = bitsize<T>();
-            var opname = $"rotr_128x{bz}";
+            var opname = $"rotr_{n}x{bz}";
             var sw = stopwatch();
             var opcount = RoundCount*CycleCount;
             var last = default(Vector128<T>);
@@ -437,11 +270,11 @@ namespace Z0
             Collect((opcount,sw,opname));
         }
 
-        void vrotr_256_bench<T>()
+        void vrotr_bench<T>(N256 n)
             where T : unmanaged
         {
             var bz = bitsize<T>();
-            var opname = $"rotr_256x{bz}";
+            var opname = $"rotr_{n}x{bz}";
             var sw = stopwatch();
             var opcount = RoundCount*CycleCount;
             var last = default(Vector256<T>);
@@ -460,52 +293,27 @@ namespace Z0
             Collect((opcount,sw,opname));
         }
 
-        void vrotl_256_check<T>()
+        void vrotl_bench<T>(N128 n)
             where T : unmanaged
         {
-            byte offMin = 2;
-            byte offMax = (byte)(bitsize<T>() - 2);
-            for(var sample=0; sample<SampleSize; sample++)
-            {
-                var x = Random.CpuVector<T>(n256);
-                var offset = Random.Next(offMin,offMax);
-                var result = ginx.vrotl(x,offset).ToSpan();
-                var expect = x.ToSpan().Map(src => gbits.rotl(src, (int)offset));
-                for(var i=0; i<expect.Length; i++)
-                    Claim.eq(expect[i],result[i]);
-            }
-        }
+            var bz = bitsize<T>();
+            var opname = $"rotl_{n}x{bz}";
+            var sw = stopwatch();
+            var opcount = RoundCount*CycleCount;
+            var last = default(Vec128<T>);
 
-        void vrotr_128_check<T>()
-            where T : unmanaged
-        {
             byte offMin = 2;
-            byte offMax = (byte)(bitsize<T>() - 2);
-            for(var sample=0; sample<SampleSize; sample++)
+            byte offMax = (byte)(bz - 2);
+            
+            for(var rep=0; rep < opcount; rep++)
             {
                 var x = Random.CpuVector<T>(n128);
                 var offset = Random.Next(offMin,offMax);
-                var result = ginx.vrotr(x,offset).ToSpan();
-                var expect = x.ToSpan().Map(src => gbits.rotr(src, (int)offset));
-                for(var i=0; i<expect.Length; i++)
-                    Claim.eq(expect[i],result[i]);
+                sw.Start();
+                last = ginx.vrotl(x,offset);
+                sw.Stop();
             }
-        }
-
-        void vrotr_256_check<T>()
-            where T : unmanaged
-        {
-            byte offMin = 2;
-            byte offMax = (byte)(bitsize<T>() - 2);
-            for(var sample=0; sample<SampleSize; sample++)
-            {
-                var x = Random.CpuVector<T>(n256);
-                var offset = Random.Next(offMin,offMax);
-                var result = ginx.vrotr(x,offset).ToSpan();
-                var expect = x.ToSpan().Map(src => gbits.rotr(src, (int)offset));
-                for(var i=0; i<expect.Length; i++)
-                    Claim.eq(expect[i],result[i]);
-            }
+            Collect((opcount,sw,opname));
         }
 
     }

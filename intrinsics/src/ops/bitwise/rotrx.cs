@@ -48,10 +48,7 @@ namespace Z0
         /// <param name="offset">The offset selector</param>
         [MethodImpl(Inline)]
         public static Vector128<byte> vrotlx(Vector128<byte> src, N8 offset)
-        {
-            var spec = ginx.vload(n128, in head(VecPatternData.rotl(n128, offset)));
-            return vshuf16x8(src, spec);
-        }
+            => vshuf16x8(src, DataPatterns.rotl(n128, offset));   
 
         /// <summary>
         /// Rotates the full 128-bit vector content leftward by 16 bits
@@ -60,10 +57,7 @@ namespace Z0
         /// <param name="offset">The offset selector</param>
         [MethodImpl(Inline)]
         public static Vector128<byte> vrotlx(Vector128<byte> src, N16 offset)
-        {
-            var spec = ginx.vload(n128, in head(VecPatternData.rotl(n128, offset)));
-            return vshuf16x8(src, spec);
-        }
+            => vshuf16x8(src, DataPatterns.rotl(n128, offset));
 
         /// <summary>
         /// Rotates the full 128-bit vector content leftward by 24 bits
@@ -72,10 +66,7 @@ namespace Z0
         /// <param name="offset">The offset selector</param>
         [MethodImpl(Inline)]
         public static Vector128<byte> vrotlx(Vector128<byte> src, N24 offset)
-        {
-            var spec = ginx.vload(n128, in head(VecPatternData.rotl(n128, offset)));
-            return vshuf16x8(src, spec);
-        }
+            => vshuf16x8(src, DataPatterns.rotl(n128, offset));
 
         /// <summary>
         /// Rotates the full 128-bit vector content leftward by 32 bits
@@ -84,10 +75,7 @@ namespace Z0
         /// <param name="offset">The offset selector</param>
         [MethodImpl(Inline)]
         public static Vector128<byte> vrotlx(Vector128<byte> src, N32 offset)
-        {
-            var spec = ginx.vload(n128, in head(VecPatternData.rotl(n128, offset)));
-            return vshuf16x8(src, spec);
-        }
+            => vshuf16x8(src, DataPatterns.rotl(n128, offset));
 
         /// <summary>
         /// Rotates the full 128-bit vector content rightward by 8 bits
@@ -96,10 +84,7 @@ namespace Z0
         /// <param name="offset">The offset selector</param>
         [MethodImpl(Inline)]
         public static Vector128<byte> vrotrx(Vector128<byte> src, N8 offset)
-        {
-            var spec = ginx.vload(n128, in head(VecPatternData.rotr(n128, offset)));
-            return vshuf16x8(src, spec);
-        }
+            => vshuf16x8(src, DataPatterns.rotr(n128, offset));
 
         /// <summary>
         /// Rotates the full 128-bit vector content rightward by 16 bits
@@ -108,10 +93,7 @@ namespace Z0
         /// <param name="offset">The offset selector</param>
         [MethodImpl(Inline)]
         public static Vector128<byte> vrotrx(Vector128<byte> src, N16 offset)
-        {
-            var spec = ginx.vload(n128, in head(VecPatternData.rotr(n128, offset)));
-            return vshuf16x8(src, spec);
-        }
+            => vshuf16x8(src, DataPatterns.rotr(n128, offset));
 
         /// <summary>
         /// Rotates the full 128-bit vector content rightward by 24 bits
@@ -120,10 +102,7 @@ namespace Z0
         /// <param name="offset">The offset selector</param>
         [MethodImpl(Inline)]
         public static Vector128<byte> vrotrx(Vector128<byte> src, N24 offset)
-        {
-            var spec = ginx.vload(n128, in head(VecPatternData.rotr(n128, offset)));
-            return vshuf16x8(src, spec);
-        }
+            => vshuf16x8(src, DataPatterns.rotr(n128, offset));
 
         /// <summary>
         /// Rotates the full 128-bit vector content rightward by 32 bits
@@ -132,9 +111,6 @@ namespace Z0
         /// <param name="offset">The offset selector</param>
         [MethodImpl(Inline)]
         public static Vector128<byte> vrotrx(Vector128<byte> src, N32 offset)
-        {
-            var spec = ginx.vload(n128, in head(VecPatternData.rotr(n128, offset)));
-            return vshuf16x8(src, spec);
-        }
+            => vshuf16x8(src, DataPatterns.rotr(n128, offset));
     }
 }

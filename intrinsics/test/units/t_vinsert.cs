@@ -14,22 +14,37 @@ namespace Z0
 
     public class t_vinsert : IntrinsicTest<t_vinsert>
     {
-        public void insert128()
-        {
-            insert128_check<byte>();            
-            insert128_check<sbyte>();
-            insert128_check<short>();
-            insert128_check<ushort>();
-            insert128_check<int>();
-            insert128_check<uint>();
-            insert128_check<long>();
-            insert128_check<ulong>();
-            insert128_check<float>();
-            insert128_check<double>();
-        
-        }
+        public void vinsert_128x8i()
+            => vinsert_check<sbyte>(n128);            
 
-        void insert128_check<T>()
+        public void vinsert_128x8u()
+            => vinsert_check<byte>(n128);            
+
+        public void vinsert_128x16i()
+            => vinsert_check<short>(n128);            
+
+        public void vinsert_128x16u()
+            => vinsert_check<ushort>(n128);            
+
+        public void vinsert_128x32i()
+            => vinsert_check<int>(n128);            
+
+        public void vinsert_128x32u()
+            => vinsert_check<uint>(n128);            
+
+        public void vinsert_128x64i()
+            => vinsert_check<long>(n128);            
+
+        public void vinsert_128x64u()
+            => vinsert_check<ulong>(n128);            
+
+        public void vinsert_128x32f()
+            => vinsert_check<float>(n128);
+        
+        public void vinsert_128x64f()
+            => vinsert_check<double>(n128);
+
+        void vinsert_check<T>(N128 n)
             where T : unmanaged
         {
             for(var i=0; i < SampleSize; i++)
@@ -49,8 +64,5 @@ namespace Z0
                 Claim.eq(srcSpan, vHiSpan);
             }
         }
-        
-
     }
-
 }

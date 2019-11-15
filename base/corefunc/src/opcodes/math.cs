@@ -14,6 +14,9 @@ namespace Z0
 
     partial class zfoc
     {
+        public static ulong byteswap64(ulong src)
+            => bswap(src);
+            
         public static UInt8 mul_8u(UInt8 a, UInt8 b)
             => a * b;
 

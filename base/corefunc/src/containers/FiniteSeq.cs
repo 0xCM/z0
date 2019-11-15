@@ -12,7 +12,6 @@ namespace Z0
 
     using static zfunc;
 
-
     public readonly struct FiniteSeq<T> : IFiniteSeq<FiniteSeq<T>,T>
     {
         public static readonly FiniteSeq<T> Empty = default;

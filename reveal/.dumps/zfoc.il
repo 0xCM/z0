@@ -1,4 +1,4 @@
-// 2019-11-14 10:18:55:188
+// 2019-11-14 19:49:15:367
 bit testbit_d8i(sbyte src, int pos)
 {
     IL_0000: ldarg.0
@@ -387,6 +387,13 @@ ReadOnlySpan<byte> bitseq8u(byte src)
     IL_0000: ldarga.s src
     IL_0002: call System.ReadOnlySpan`1<System.Byte> Z0.BitStore::bitseq<System.Byte>(System.Byte&)
     IL_0007: ret
+
+}
+ulong byteswap64(ulong src)
+{
+    IL_0000: ldarg.0
+    IL_0001: call System.UInt64 zfunc::bswap(System.UInt64)
+    IL_0006: ret
 
 }
 UInt8 mul_8u(UInt8 a, UInt8 b)

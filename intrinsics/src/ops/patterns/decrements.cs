@@ -15,15 +15,7 @@ namespace Z0
     
     partial class ginx
     {
-        [MethodImpl(Inline)]
-        public static Vector128<T> vdecrements<T>(N128 n)
-            where T : unmanaged
-                => vload<T>(n, VecPatternData.decrements<T>(n));
 
-        [MethodImpl(Inline)]
-        public static Vector256<T> vdecrements<T>(N256 n)
-            where T : unmanaged
-                => vload<T>(n, VecPatternData.decrements<T>(n));
 
         /// <summary>
         /// Creates a 128-bit vector with components that decrease by uint step from an initial value

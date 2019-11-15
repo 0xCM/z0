@@ -101,7 +101,6 @@ namespace Z0
         public static Span<DeciDigit> ToDeciDigits(this long src)
             => DeciDigits.Parse(src.ToString());
 
-
         /// <summary>
         /// Formats a span of binary digits as a contiguous block
         /// </summary>

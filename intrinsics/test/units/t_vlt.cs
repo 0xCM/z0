@@ -16,55 +16,55 @@ namespace Z0
 
     public class t_vlt : IntrinsicTest<t_vlt>
     {        
-        public void cmp_lt_128x8i_check()
-            => cmp_lt_check<sbyte>(n128);
+        public void vlt_128x8i()
+            => vlt_check<sbyte>(n128);
 
-        public void cmp_lt_128x8u_check()
-            => cmp_lt_check<byte>(n128);
+        public void vlt_128x8u()
+            => vlt_check<byte>(n128);
 
-        public void cmp_lt_128x16i_check()
-            => cmp_lt_check<short>(n128);
+        public void vlt_128x16i()
+            => vlt_check<short>(n128);
 
-        public void cmp_lt_128x16u_check()
-            => cmp_lt_check<ushort>(n128);
+        public void vlt_128x16u()
+            => vlt_check<ushort>(n128);
 
-        public void cmp_lt_128x32i_check()
-            => cmp_lt_check<int>(n128);
+        public void vlt_128x32i()
+            => vlt_check<int>(n128);
 
-        public void cmp_lt_128x32u_check()
-            => cmp_lt_check<uint>(n128); 
+        public void vlt_128x32u()
+            => vlt_check<uint>(n128); 
 
-        public void cmp_lt_128x64i_check()
-            => cmp_lt_check<long>(n128); 
+        public void vlt_128x64i()
+            => vlt_check<long>(n128); 
 
-        public void cmp_lt_128x64u_check()
-            => cmp_lt_check<ulong>(n128); 
+        public void vlt_128x64u()
+            => vlt_check<ulong>(n128); 
 
-        public void cmp_lt_256x8i_check()
-            => cmp_lt_check<sbyte>(n256);
+        public void vlt_256x8i()
+            => vlt_check<sbyte>(n256);
 
-        public void cmp_lt_256x8u_check()
-            => cmp_lt_check<byte>(n256);
+        public void vlt_256x8u()
+            => vlt_check<byte>(n256);
 
-        public void cmp_lt_256x16i_check()
-            => cmp_lt_check<short>(n256);
+        public void vlt_256x16i()
+            => vlt_check<short>(n256);
 
-        public void cmp_lt_256x16u_check()
-            => cmp_lt_check<ushort>(n256);
+        public void vlt_256x16u()
+            => vlt_check<ushort>(n256);
 
-        public void cmp_lt_256x32i_check()
-            => cmp_lt_check<int>(n256);
+        public void vlt_256x32i()
+            => vlt_check<int>(n256);
 
-        public void cmp_lt_256x32u_check()
-            => cmp_lt_check<uint>(n256);
+        public void vlt_256x32u()
+            => vlt_check<uint>(n256);
 
-        public void cmp_lt_256x64i_check()
-            => cmp_lt_check<long>(n256);
+        public void vlt_256x64i()
+            => vlt_check<long>(n256);
 
-        public void cmp_lt_256x64u_check()
-            => cmp_lt_check<ulong>(n256);
+        public void vlt_256x64u()
+            => vlt_check<ulong>(n256);
 
-        void cmp_lt_check<T>(N128 n = default)
+        void vlt_check<T>(N128 n)
             where T : unmanaged
         {
             var ones = ginx.vones<T>(n);
@@ -89,7 +89,7 @@ namespace Z0
             }
         }
 
-        void cmp_lt_check<T>(N256 n = default)
+        void vlt_check<T>(N256 n)
             where T : unmanaged
         {
             var ones = ginx.vones<T>(n);

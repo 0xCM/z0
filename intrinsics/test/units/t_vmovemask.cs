@@ -13,7 +13,7 @@ namespace Z0
     
     using static zfunc;
 
-    public class t_vmovemask : UnitTest<t_vmovemask>
+    public class t_vmovemask : IntrinsicTest<t_vmovemask>
     {
 
         public void pack_test()

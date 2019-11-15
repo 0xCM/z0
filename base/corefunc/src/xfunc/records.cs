@@ -13,7 +13,7 @@ namespace Z0
 
     using static zfunc;
 
-    public static class RecordX
+    partial class xfunc
     {
         /// <summary>
         /// Manufactures the type that reifies the record definition

@@ -167,6 +167,6 @@ namespace Z0
         /// <param name="y"></param>
         [MethodImpl(Inline)]
         public static Vector256<long> vmax(Vector256<long> x, Vector256<long> y)
-            => vblend4x64(y, x, vgt(x,y));
+            => vblend32x8(y, x, v8u(vgt(x,y)));
     }
 }

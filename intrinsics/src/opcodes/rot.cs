@@ -9,9 +9,16 @@ namespace Z0
     using System.Runtime.InteropServices;
     using System.Runtime.Intrinsics;
     using System.Runtime.Intrinsics.X86;
+    using static zfunc;
 
     partial class inxoc
     {
+
+        public static Vector128<byte> rotl_128x16_pattern()
+            => DataPatterns.rotl(n128, n16);
+
+        public static Vector128<byte> rotl_128x32_pattern()
+            => DataPatterns.rotl(n128, n32);
 
         public static Vector128<byte> rotl_g128x8u(Vector128<byte> src, byte offset)
             => ginx.vrotl(src,offset);

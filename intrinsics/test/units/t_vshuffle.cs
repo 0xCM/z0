@@ -12,27 +12,21 @@ namespace Z0.Test
     
     using static zfunc;
     
-    using static VecParts128x8u;
+    //using static VecParts128x8u;
     public class t_vshuffle : IntrinsicTest<t_vshuffle>
     {        
 
         static ReadOnlySpan<byte> Inc8u  
-            => new byte[16]{A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P};
+            => new byte[16]{0,1,2,3,4,5,6,7,8,9,A,B,C,D,E,F};
 
-        static ReadOnlySpan<byte> Dec8u 
-            => new byte[16]{P,O,N,M,L,K,J,I,H,G,F,E,D,C,B,A};
 
         //Identity
         static ReadOnlySpan<byte> Pattern1  
-            => new byte[16]{A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P};
+            => new byte[16]{0,1,2,3,4,5,6,7,8,9,A,B,C,D,E,F};
 
         //Reversal
         static ReadOnlySpan<byte> Pattern2  
-            => new byte[16]{P,O,N,M,L,K,J,I,H,G,F,E,D,C,B,A};
-
-        //hi/lo swap
-        static ReadOnlySpan<byte> Pattern3  => new byte[16]{I,J, K,L, M,N, O,P, A,B, C,D, E,F, G,H};
-
+            => new byte[16]{F,E,D,C,B,A,9,8,7,6,5,4,3,2,1,0};
 
         public void shuffle_128x8u_1()
         {
@@ -53,20 +47,11 @@ namespace Z0.Test
 
         }
 
-        public void shuffle_128x8u_3()
-        {
-            var n = n128;
-            var src = ginx.vload(n, in head(Inc8u));
-            var spec = ginx.vload(n, in head(Pattern3));
-            var dst = dinx.vshuf16x8(src,spec);
-            Claim.eq(spec,dst);
-        }
-
         public void shuffle_128x8u_4()
         {
             var n = n128;
             var src = ginx.vload(n, in head(Inc8u));
-            var spec = ginx.vload(n, in head(VecPatternData.rotl(n128, n8)));
+            var spec = DataPatterns.rotl(n128, n8);
             var dst = dinx.vshuf16x8(src,spec);
             Claim.eq(spec,dst);
         }
@@ -75,7 +60,7 @@ namespace Z0.Test
         {
             var n = n128;
             var src = ginx.vload(n, in head(Inc8u));
-            var spec = ginx.vload(n, in head(VecPatternData.rotr(n128, n8)));
+            var spec = DataPatterns.rotr(n128, n8);
             var dst = dinx.vshuf16x8(src,spec);
             Claim.eq(spec,dst);
         }
@@ -84,8 +69,8 @@ namespace Z0.Test
         {
             var n = n128;
             var src = ginx.vload(n, in head(Inc8u));
-            var spec1 = ginx.vload(n, in head(VecPatternData.rotl(n128, n8)));
-            var spec2 = ginx.vload(n, in head(VecPatternData.rotr(n128, n8)));
+            var spec1 = DataPatterns.rotl(n128, n8);
+            var spec2 = DataPatterns.rotr(n128, n8);
             var dst = dinx.vshuf16x8(dinx.vshuf16x8(src,spec1), spec2);
             Claim.eq(src,dst);
         }

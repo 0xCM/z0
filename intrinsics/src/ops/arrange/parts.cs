@@ -35,7 +35,7 @@ namespace Z0
         /// </summary>
         [MethodImpl(Inline)]
         public static Vector128<uint> vparts(N128 n,uint x0, uint x1, uint x2, uint x3)
-            => Vector128.Create(x0,x1, x2, x3);
+            => Vector128.Create(x0, x1, x2, x3);
 
         /// <summary>
         /// Defines a cpu vector by its constituent parts, from least -> most significant

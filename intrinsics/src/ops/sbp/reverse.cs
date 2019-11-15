@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
         public static Vector128<byte> vreverse(Vector128<byte> src)
-            => vshuf16x8(src, ginx.vdecrements<byte>(n128));
+            => vshuf16x8(src, DataPatterns.decrements<byte>(n128));
 
         [MethodImpl(Inline)]
         public static Vector128<short> vreverse(Vector128<short> src)

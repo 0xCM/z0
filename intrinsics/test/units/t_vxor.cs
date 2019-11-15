@@ -9,11 +9,9 @@ namespace Z0
     using System.Reflection;
 
     using static zfunc;
-    using D = PrimalDelegates;
 
     public class t_vxor : IntrinsicTest<t_vxor>
     {
-
         public void vxor_128x8i()
             => vxor_check<sbyte>(n128);
 
