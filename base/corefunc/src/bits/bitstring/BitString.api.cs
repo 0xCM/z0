@@ -21,14 +21,14 @@ namespace Z0
         /// </summary>
         /// <param name="len">The length of the bitstring</param>
         [MethodImpl(Inline)]
-        public static BitString Alloc(int len)
+        public static BitString alloc(int len)
             => new BitString(new byte[len]);
 
         /// <summary>
         /// Constructs a bitstring from a clr string of 0's and 1's 
         /// </summary>
         /// <param name="src">The bit source</param>
-        public static BitString Parse(string src)                
+        public static BitString parse(string src)                
         {
             src = src.RemoveWhitespace();
             var len = src.Length;
@@ -40,20 +40,28 @@ namespace Z0
         }
 
         /// <summary>
+        /// Assembles a bistring given parts ordered from lo to hi
+        /// </summary>
+        /// <param name="parts">The source parts</param>
+        [MethodImpl(Inline)]
+        public static BitString assemble(params string[] parts)
+            => parse(string.Join(string.Empty, parts.Reverse()));
+
+        /// <summary>
         /// Constructs a bitstring from a pattern replicated a specified number of times
         /// </summary>
         /// <param name="src">The source pattern</param>
         /// <param name="reps">The number of times to repeat the pattern</param>
         /// <typeparam name="T">The primal source type</typeparam>
-        public static BitString FromPattern<T>(T src, int reps)                
+        public static BitString from<T>(T src, int reps)                
             where T : unmanaged
         {
             BitSize capacity = Unsafe.SizeOf<T>() * 8;
             Span<byte> bitseq = new byte[capacity*reps];            
-            var pattern = FromScalar(src);
+            var pattern = from(src);
             for(var i=0; i<reps; i++)
                 pattern.BitSeq.CopyTo(bitseq, i*capacity);
-            return FromBitSeq(bitseq);            
+            return fromseq(bitseq);            
         }
 
         /// <summary>
@@ -62,7 +70,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The primal source type</typeparam>
         [MethodImpl(Inline)]
-        public static BitString FromScalar<T>(in T src)
+        public static BitString from<T>(in T src)
             where T : unmanaged
                 => new BitString(BitStore.bitseq(in src));
 
@@ -72,7 +80,7 @@ namespace Z0
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
-        public static BitString FromScalars<T>(Span<T> src, BitSize? maxlen = null)
+        public static BitString from<T>(Span<T> src, BitSize? maxlen = null)
             where T : unmanaged
         {
             var segbits = bitsize<T>();
@@ -94,20 +102,20 @@ namespace Z0
         /// <param name="parts">The primal values that define bitstring segments</param>
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
-        public static BitString FromScalars<T>(params T[] parts)
+        public static BitString from<T>(T[] parts)
             where T : unmanaged
-                => FromScalars(parts.AsSpan(), bitsize<T>() * parts.Length);
+                => from(parts.AsSpan(), bitsize<T>() * parts.Length);
 
         /// <summary>
         /// Constructs a bitstring from a power of 2
         /// </summary>
         /// <param name="exp">The value of the expoonent</param>
         [MethodImpl(Inline)]
-        public static BitString FromPow2(int exp)
+        public static BitString frompow2(int exp)
         {
             Span<byte> dst = stackalloc byte[exp + 1];
             dst[exp] = 1;
-            return FromBitSeq(dst);
+            return fromseq(dst);
         }
 
         /// <summary>
@@ -115,7 +123,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The bit source</param>
         [MethodImpl(Inline)]
-        public static BitString FromBitSeq(params byte[] src)                
+        public static BitString fromseq(params byte[] src)                
             => new BitString(src);
 
         /// <summary>
@@ -123,7 +131,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The bit source</param>
         [MethodImpl(Inline)]
-        public static BitString FromBitSeq(ReadOnlySpan<byte> src)                
+        public static BitString fromseq(ReadOnlySpan<byte> src)                
             => new BitString(src);
 
         /// <summary>
@@ -131,15 +139,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The bit source</param>
         [MethodImpl(Inline)]
-        public static BitString FromBits(ReadOnlySpan<Bit> src)                
-            => new BitString(src);
-
-        /// <summary>
-        /// Constructs a bitstring from bitspan
-        /// </summary>
-        /// <param name="src">The bit source</param>
-        [MethodImpl(Inline)]
-        public static BitString FromBits(ReadOnlySpan<bit> src)                
+        public static BitString from(ReadOnlySpan<bit> src)                
             => new BitString(src);
 
         /// <summary>
@@ -147,23 +147,33 @@ namespace Z0
         /// </summary>
         /// <param name="src">The bit source</param>
         [MethodImpl(Inline)]
-        public static BitString FromBits(bit[] src)                
+        public static BitString from(bit[] src)                
             => new BitString(src);
 
         /// <summary>
-        /// Constructs a bitstring from a parameter array of bits, ordered hi -> lo
+        /// Projects the bitstring onto a span via a supplied transformation
         /// </summary>
-        /// <param name="src">The bit source</param>
+        /// <param name="f">The transformation</param>
+        /// <typeparam name="T">The span element type</typeparam>
         [MethodImpl(Inline)]
-        public static BitString FromHiToLo(params bit[] src)                
-            => new BitString(src.Reverse());
+        public void map<T>(Func<bit,T> f, Span<T> dst)
+        {
+            for(var i=0; i<dst.Length; i++)
+                dst[i] = f((bit)bitseq[i]);
+        }
 
         /// <summary>
-        /// Assembles a bistring given parts ordered from lo to hi
+        /// Projects the bitstring onto a span via a supplied transformation
         /// </summary>
-        /// <param name="parts">The source parts</param>
-        [MethodImpl(Inline)]
-        public static BitString Assemble(params string[] parts)
-            => Parse(string.Join(string.Empty, parts.Reverse()));
+        /// <param name="f">The transformation</param>
+        /// <typeparam name="T">The span element type</typeparam>
+        public Span<T> map<T>(Func<bit,T> f)
+        {
+            Span<T> dst = new T[Length];
+            map(f,dst);
+            return dst;
+        }
+
+
     }
 }

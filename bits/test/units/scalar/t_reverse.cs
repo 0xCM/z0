@@ -31,7 +31,7 @@ namespace Z0.Test
             {
                 var src = Random.Next<T>();
                 var r1 = gbits.rev(src);
-                var r2 = BitString.FromScalar(src).Reverse().TakeScalar<T>();
+                var r2 = BitString.from(src).Reverse().TakeScalar<T>();
                 Claim.eq(r1,r2);
             }
 

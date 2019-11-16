@@ -2,126 +2,107 @@
 // Copyright   :  (c) Chris Moore, 2019
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Test
+namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Reflection;
-    using System.ComponentModel;
-    using System.Collections.Generic;
-    using System.Runtime.CompilerServices;
-
-    using System.Runtime.Intrinsics;
-    using System.Runtime.Intrinsics.X86;
     
     using static zfunc;
 
     public class t_vtestz : IntrinsicTest<t_vtestz>
     {
 
+        public void vtestz_128x8i()
+            => vtestz_check<sbyte>(n128);
 
-        public void vtestz_g128x8i()
+        public void vtestz_128x8u()
+            => vtestz_check<byte>(n128);
+
+        public void vtestz_128x16i()
+            => vtestz_check<short>(n128);
+
+        public void vtestz_128x16u()
         {
-            vtestz_g128_check<sbyte>();
+            vtestz_check<ushort>(n128);
         }
 
-        public void vtestz_g128x8u()
+        public void vtestz_128x32i()
         {
-            vtestz_g128_check<byte>();
-        }
-
-        public void vtestz_g128x16i()
-        {
-            vtestz_g128_check<short>();
-        }
-
-        public void vtestz_g128x16u()
-        {
-            vtestz_g128_check<ushort>();
-        }
-
-        public void vtestz_g128x32i()
-        {
-            vtestz_g128_check<int>();
+            vtestz_check<int>(n128);
         }
 
         public void vtestz_g128x32u()
         {
-            vtestz_g128_check<uint>();
+            vtestz_check<uint>(n128);
         }
 
         public void vtestz_g128x64i()
         {
-            vtestz_g128_check<long>();
+            vtestz_check<long>(n128);
         }
 
         public void vtestz_g128x64u()
         {
-            vtestz_g128_check<ulong>();
+            vtestz_check<ulong>(n128);
         }
 
-        public void vtestz_g128x32f()
+        public void vtestz_128x32f()
         {
-            vtestz_g128_check<float>();
+            vtestz_check<float>(n128);
         }
 
-        public void vtestz_g128x64f()
+        public void vtestz_128x64f()
+            => vtestz_check<double>(n128);
+
+        public void vtestz_256x8i()
+            => vtestz_check<sbyte>(n256);
+
+        public void vtestz_256x8u()
         {
-            vtestz_g128_check<double>();
+            vtestz_check<byte>(n256);
         }
 
-        public void vtestz_g256x8i()
+        public void vtestz_256x16i()
         {
-            vtestz_g256_check<sbyte>();
+            vtestz_check<short>(n256);
         }
 
-        public void vtestz_g256x8u()
+        public void vtestz_256x16u()
         {
-            vtestz_g256_check<byte>();
+            vtestz_check<ushort>(n256);
         }
 
-        public void vtestz_g256x16i()
+        public void vtestz_256x32i()
         {
-            vtestz_g256_check<short>();
+            vtestz_check<int>(n256);
         }
 
-        public void vtestz_g256x16u()
+        public void vtestz_256x32u()
         {
-            vtestz_g256_check<ushort>();
+            vtestz_check<uint>(n256);
         }
 
-        public void vtestz_g256x32i()
+        public void vtestz_256x64i()
         {
-            vtestz_g256_check<int>();
+            vtestz_check<long>(n256);
         }
 
-        public void vtestz_g256x32u()
+        public void vtestz_256x64u()
         {
-            vtestz_g256_check<uint>();
+            vtestz_check<ulong>(n256);
         }
 
-        public void vtestz_g256x64i()
+        public void vtestz_256x32f()
         {
-            vtestz_g256_check<long>();
+            vtestz_check<float>(n256);
         }
 
-        public void vtestz_g256x64u()
+        public void vtestz_256x64f()
         {
-            vtestz_g256_check<ulong>();
-        }
-
-        public void vtestz_g256x32f()
-        {
-            vtestz_g256_check<float>();
-        }
-
-        public void vtestz_g256x64f()
-        {
-            vtestz_g256_check<double>();
+            vtestz_check<double>(n256);
         }
 
 
-        public void vtestz_g128_check<T>()
+        public void vtestz_check<T>(N128 n = default)
             where T : unmanaged
         {
             // Creates a mask corresponding to each off bit in the source vector
@@ -132,7 +113,7 @@ namespace Z0.Test
             {
                 var x = Random.CpuVector<T>(n128);
                 var xbs = x.ToBitString();
-                var ybs = BitString.Alloc(xbs.Length);
+                var ybs = BitString.alloc(xbs.Length);
                 for(var j = 0; j<xbs.Length; j++)
                     if(!xbs[j])
                         ybs[j] = Bit.On;
@@ -144,7 +125,7 @@ namespace Z0.Test
             }
         }
 
-        public void vtestz_g256_check<T>()
+        public void vtestz_check<T>(N256 n = default)
             where T : unmanaged
         {
             // Creates a mask corresponding to each off bit in the source vector
@@ -155,7 +136,7 @@ namespace Z0.Test
             {
                 var x = Random.CpuVector<T>(n256);
                 var xbs = x.ToBitString();
-                var ybs = BitString.Alloc(xbs.Length);
+                var ybs = BitString.alloc(xbs.Length);
                 for(var j = 0; j<xbs.Length; j++)
                     if(!xbs[j])
                         ybs[j] = Bit.On;
@@ -166,6 +147,5 @@ namespace Z0.Test
                 Claim.yea(z);
             }
         }
-
     }
 }

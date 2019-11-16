@@ -27,20 +27,20 @@ namespace Z0
         /// <summary>
         /// The number of cells in the block
         /// </summary>
-        public static readonly int BlockLength = Vector128<T>.Count;
+        public static int BlockLength => Vector128<T>.Count;
 
         /// <summary>
         /// The size, in bytes, of a block 
         /// </summary>
         /// <typeparam name="T">The primitive type</typeparam>
         /// <remarks>Should always be 16 irrespective of the cell type</remarks>
-        public static readonly int BlockSize = Unsafe.SizeOf<T>() * BlockLength; 
+        public static int BlockSize =>  Unsafe.SizeOf<T>() * BlockLength; 
 
         /// <summary>
         /// The size, in bytes, of a constituent block cell
         /// </summary>
         /// <typeparam name="T">The primitive type</typeparam>
-        public static readonly int CellSize = BlockSize / BlockLength;
+        public static int CellSize => BlockSize / BlockLength;
 
         [MethodImpl(Inline)]
         public static implicit operator Span<T>(Span128<T> src)
@@ -152,70 +152,6 @@ namespace Z0
             get => ref MemoryMarshal.GetReference(data);
         }
 
-        [MethodImpl(Inline)]
-        public ref T Block(int blockIndex)
-            => ref this[blockIndex*BlockLength];
-
-        [MethodImpl(Inline)]
-        public Span128<T> Blocked(int blockIndex)
-        {
-            var slice = data.Slice(blockIndex * BlockLength, BlockLength); 
-            return new Span128<T>(slice);
-        }
-
-        [MethodImpl(Inline)]
-        public Span<T> Slice(int offset)
-            => data.Slice(offset);
-            
-        [MethodImpl(Inline)]
-        public Span<T> Slice(int offset, int length)
-            => data.Slice(offset,length);
-
-        [MethodImpl(Inline)]
-        public Span128<T> SliceBlock(int blockIndex)
-            => new Span128<T>(data.Slice(blockIndex * BlockLength, BlockLength));
-        
-        [MethodImpl(Inline)]
-        public Span128<T> SliceBlocks(int blockIndex, int blockCount)
-            => new Span128<T>(Slice(blockIndex * BlockLength, blockCount * BlockLength ));
-            
-        [MethodImpl(Inline)]
-        public Span<T> Unblock()
-            => data;
-
-        [MethodImpl(Inline)]
-        public ReadOnlySpan128<T> ReadOnly()
-            => (ReadOnlySpan128<T>)data;
-
-        [MethodImpl(Inline)]
-        public T[] ToArray()
-            => data.ToArray();   
-
-        [MethodImpl(Inline)]
-        public void Fill(T value)
-            => data.Fill(value);
-
-        [MethodImpl(Inline)]
-        public Span<T>.Enumerator GetEnumerator()
-            => data.GetEnumerator();
-
-        [MethodImpl(Inline)]
-        public ref T GetPinnableReference()
-            => ref data.GetPinnableReference();
-
-        [MethodImpl(Inline)]
-        public void CopyTo (Span<T> dst)
-            => data.CopyTo(dst);
-
-        [MethodImpl(Inline)]
-        public bool TryCopyTo(Span<T> dst)
-            => data.TryCopyTo(dst);
-                
-        [MethodImpl(Inline)]
-        public Span128<S> As<S>()                
-            where S : unmanaged
-                => Span128.load(MemoryMarshal.Cast<T,S>(data));                    
-
         /// <summary>
         /// Provides access to the underlying storage
         /// </summary>
@@ -249,8 +185,65 @@ namespace Z0
             get => data.IsEmpty;
         }
 
-        public string Format() 
-            => data.ToString();
+        [MethodImpl(Inline)]
+        public ref T Block(int blockIndex)
+            => ref this[blockIndex*BlockLength];
+
+        [MethodImpl(Inline)]
+        public Span128<T> Blocked(int blockIndex)
+        {
+            var slice = data.Slice(blockIndex * BlockLength, BlockLength); 
+            return new Span128<T>(slice);
+        }
+
+        [MethodImpl(Inline)]
+        public Span<T> Slice(int offset)
+            => data.Slice(offset);
+            
+        [MethodImpl(Inline)]
+        public Span<T> Slice(int offset, int length)
+            => data.Slice(offset,length);
+
+        [MethodImpl(Inline)]
+        public Span128<T> SliceBlock(int blockIndex)
+            => new Span128<T>(data.Slice(blockIndex * BlockLength, BlockLength));
+        
+        [MethodImpl(Inline)]
+        public Span128<T> SliceBlocks(int blockIndex, int blockCount)
+            => new Span128<T>(Slice(blockIndex * BlockLength, blockCount * BlockLength ));
+            
+        [MethodImpl(Inline)]
+        public ReadOnlySpan128<T> ReadOnly()
+            => (ReadOnlySpan128<T>)data;
+
+        [MethodImpl(Inline)]
+        public T[] ToArray()
+            => data.ToArray();   
+
+        [MethodImpl(Inline)]
+        public void Fill(T value)
+            => data.Fill(value);
+
+        [MethodImpl(Inline)]
+        public Span<T>.Enumerator GetEnumerator()
+            => data.GetEnumerator();
+
+        [MethodImpl(Inline)]
+        public ref T GetPinnableReference()
+            => ref data.GetPinnableReference();
+
+        [MethodImpl(Inline)]
+        public void CopyTo (Span<T> dst)
+            => data.CopyTo(dst);
+
+        [MethodImpl(Inline)]
+        public bool TryCopyTo(Span<T> dst)
+            => data.TryCopyTo(dst);
+                
+        [MethodImpl(Inline)]
+        public Span128<S> As<S>()                
+            where S : unmanaged
+                => Span128.load(MemoryMarshal.Cast<T,S>(data));                    
 
        public override bool Equals(object rhs) 
             => throw new NotSupportedException();

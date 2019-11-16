@@ -23,6 +23,19 @@ namespace Z0
                 => new Span<N,T>(fill);
 
         [MethodImpl(Inline)]   
+        public static Span<N,T> alloc<N,T>(N n, T fill = default) 
+            where N : unmanaged, ITypeNat
+            where T : unmanaged
+                => new Span<N,T>(fill);
+
+        [MethodImpl(Inline)]   
+        public static Span<M,N,T> alloc<M,N,T>(M m, N n, T fill = default) 
+            where M : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
+            where T : unmanaged
+                => new Span<M,N,T>(fill);
+
+        [MethodImpl(Inline)]   
         public static Span<M,N,T> alloc<M,N,T>(T fill = default(T), M m = default, N n = default) 
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
@@ -71,6 +84,13 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where T : unmanaged
                 => Span<N,T>.CheckedTransfer(src);
+
+        [MethodImpl(Inline)]   
+        public static Span<M,N,T> load<M,N,T>(M m, N n, Span<T> src)    
+            where M : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
+            where T : unmanaged
+                => Span<M,N,T>.CheckedTransfer(src);
 
         [MethodImpl(Inline)]   
         public static Span<N,T> load<N,T>(N n, T[] src)    

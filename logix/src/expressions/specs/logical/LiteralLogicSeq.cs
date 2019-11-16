@@ -56,7 +56,7 @@ namespace Z0.Logix
             => Terms.Length;
 
         public BitString ToBitString()
-            => BitString.FromBits(Terms);
+            => BitString.from(Terms);
         
         public string Format()
             => ToBitString().Format();

@@ -5,11 +5,8 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Threading;
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
-    using System.Diagnostics;
 
     using static zfunc;
 
@@ -98,7 +95,7 @@ namespace Z0
             Span<byte> bits = stackalloc byte[src.RowCount*src.ColCount];
             for(var i=0;i<src.RowCount; i++)
                 src[i].ToBitString().BitSeq.CopyTo(bits.Slice(i*src.ColCount));
-            return BitString.FromBitSeq(bits);                            
+            return BitString.fromseq(bits);                            
         }
 
         [MethodImpl(Inline)]

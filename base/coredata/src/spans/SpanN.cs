@@ -58,9 +58,8 @@ namespace Z0
         /// <param name="src">The source span</param>
         /// <typeparam name="U">The source element type</typeparam>
         [MethodImpl(Inline)]
-        internal static Span<N,U> Transfer<U>(Span<U> src)
-            where U : unmanaged
-                => new Span<N, U>(src);
+        internal static Span<N,T> Transfer(Span<T> src)
+            => new Span<N, T>(src);
 
         /// <summary>
         /// Verifies correct source span length prior to backing store assignment
@@ -68,11 +67,10 @@ namespace Z0
         /// <param name="src">The source span</param>
         /// <typeparam name="U">The source element type</typeparam>
         [MethodImpl(Inline)]
-        public static Span<N,U> CheckedTransfer<U>(Span<U> src)
-            where U : unmanaged
+        public static Span<N,T> CheckedTransfer(Span<T> src)
         {
             require(src.Length >= Count, $"length(src) = {src.Length} < {Count} = SpanLength");               
-            return new Span<N, U>(src);
+            return new Span<N, T>(src);
         }
 
         /// <summary>
@@ -81,11 +79,10 @@ namespace Z0
         /// <param name="src">The source span</param>
         /// <typeparam name="U">The source element type</typeparam>
         [MethodImpl(Inline)]
-        public static Span<N,U> CheckedTransfer<U>(U[] src)
-            where U : unmanaged
+        public static Span<N,T> CheckedTransfer(T[] src)
         {
             require(src.Length >= Count, $"length(src) = {src.Length} < {Count} = SpanLength");               
-            return new Span<N, U>(src);
+            return new Span<N, T>(src);
         }
 
         /// <summary>
@@ -94,11 +91,10 @@ namespace Z0
         /// <param name="src">The source span</param>
         /// <typeparam name="U">The source element type</typeparam>
         [MethodImpl(Inline)]
-        public static Span<N,U> CheckedTransfer<U>(ReadOnlySpan<U> src)
-            where U : unmanaged
+        public static Span<N,T> CheckedTransfer(ReadOnlySpan<T> src)
         {
             require(src.Length >= Count, $"length(src) = {src.Length} < {Count} = SpanLength");               
-            return new Span<N, U>(src);
+            return new Span<N,T>(src);
         }
 
         [MethodImpl(Inline)]
@@ -178,9 +174,6 @@ namespace Z0
         public bool TryCopyTo (Span<T> dst)
             => data.TryCopyTo(dst);        
         
-        [MethodImpl(Inline)]
-        public Span<T> Unsize()
-            => data;
 
         [MethodImpl(Inline)]
         public Span<N,T> Replicate()        
@@ -195,7 +188,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public Span<N,S> As<S>()
             where S : unmanaged
-                => Transfer(MemoryMarshal.Cast<T,S>(data));
+                => new Span<N, S>(MemoryMarshal.Cast<T,S>(data));
 
        public override bool Equals(object rhs) 
             => throw new NotSupportedException();

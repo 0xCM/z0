@@ -7,6 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
+    using System.Runtime.Intrinsics;
 
     using static zfunc;
 
@@ -84,7 +85,7 @@ namespace Z0
         {
             const int bitcount = 128;
             var cellwidth = bitsize<T>();
-            var cellcount = Vec128<T>.Length;
+            var cellcount = Vector128<T>.Count;
             var indices = new BitIndex[bitcount];
             for(var cell = 0u; cell < cellcount; cell++)
             for(byte bit = 0; bit < cellwidth; bit++)

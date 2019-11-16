@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2019
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Test
+namespace Z0
 {
     using System;
     using System.Linq;
@@ -13,19 +13,13 @@ namespace Z0.Test
     public class t_pack : ScalarBitTest<t_pack>
     {
         public void pack_1x8()
-        {
-            pack1xN_check<byte>();
-        }
+            => pack1xN_check<byte>();
 
         public void pack_1x16()
-        {
-            pack1xN_check<ushort>();
-        }
+            => pack1xN_check<ushort>();
 
         public void pack_1x32()
-        {
-            pack1xN_check<uint>();
-        }
+            => pack1xN_check<uint>();
 
         public void pack_1x64()
         {
@@ -67,7 +61,7 @@ namespace Z0.Test
                 var bsActual = xval.ToBitString().Format();
                 Claim.eq(bsExpect, bsActual);
 
-                var bsAssembly = BitString.Assemble("10101000", "11100101", "00111000","10100111").Format();
+                var bsAssembly = BitString.assemble("10101000", "11100101", "00111000","10100111").Format();
                 Claim.eq(bsExpect, bsAssembly);
             }
         }
@@ -110,7 +104,7 @@ namespace Z0.Test
         public void pack_bistring()
         {
             var x =  0b111010010110011010111001110000100001101ul;
-            var xbs = BitString.Parse("111010010110011010111001110000100001101");
+            var xbs = BitString.parse("111010010110011010111001110000100001101");
             var packed = xbs.Pack(0, 8);
             var joined = packed.TakeUInt64();
             Claim.Equals(x,joined);
@@ -230,7 +224,7 @@ namespace Z0.Test
                 var up1 = BitStore.select((byte)i);
                 Span<byte> up2 = stackalloc byte[8];
                 BitParts.unpack8x1(b, up2);
-                Claim.eq(BitString.FromBitSeq(up1), BitString.FromBitSeq(up2));
+                Claim.eq(BitString.fromseq(up1), BitString.fromseq(up2));
             }
         }
 

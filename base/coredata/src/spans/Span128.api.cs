@@ -24,7 +24,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Span128<byte> bytes<T>(Span128<T> src)
             where T : unmanaged
-                => load(MemoryMarshal.AsBytes(src.Unblock()));
+                => load(MemoryMarshal.AsBytes(src.Unblocked));
 
         /// <summary>
         /// Allocates a span with a specified number of blocks

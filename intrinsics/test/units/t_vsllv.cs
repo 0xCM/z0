@@ -17,13 +17,13 @@ namespace Z0.Test
 
         public void Nonzero()
         {
-            Claim.yea(ginx.vnonz(dinx.vparts(1ul, 2ul, 3ul, 4ul)));
-            Claim.yea(ginx.vnonz(dinx.vparts(1ul, 0ul, 0ul, 0ul)));
-            Claim.nea(ginx.vnonz(dinx.vparts(0ul, 0ul, 0ul, 0ul)));
+            Claim.yea(ginx.vnonz(dinx.vparts(n256, 1, 2, 3, 4)));
+            Claim.yea(ginx.vnonz(dinx.vparts(n256, 1, 0, 0, 0)));
+            Claim.nea(ginx.vnonz(dinx.vparts(n256, 0, 0, 0, 0)));
 
-            Claim.yea(ginx.vnonz(dinx.vparts(n128, 1u, 2u, 3u, 4u)));
-            Claim.yea(ginx.vnonz(dinx.vparts(n128, 1u, 0u, 0u, 0u)));
-            Claim.nea(ginx.vnonz(dinx.vparts(n128, 0u, 0u, 0u, 0u)));
+            Claim.yea(ginx.vnonz(dinx.vparts(n128, 1, 2, 3, 4)));
+            Claim.yea(ginx.vnonz(dinx.vparts(n128, 1, 0, 0, 0)));
+            Claim.nea(ginx.vnonz(dinx.vparts(n128, 0, 0, 0, 0)));
         }
 
 

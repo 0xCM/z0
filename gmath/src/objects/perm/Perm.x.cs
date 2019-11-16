@@ -21,7 +21,7 @@ namespace Z0
         /// <param name="p">The permutation to apply</param>
         public static BitString Permute(this BitString src, Perm p)
         {
-            var dst = BitString.Alloc(p.Length);
+            var dst = BitString.alloc(p.Length);
             for(var i = 0; i < p.Length; i++)
                 dst[i] = src[p[i]];
             return dst;
@@ -205,7 +205,7 @@ namespace Z0
 
         public static string FormatBlock(this Perm4 src, bool bracketed = true)
         {
-            var bs = BitString.FromScalar((byte)src);
+            var bs = BitString.from((byte)src);
             var data = bs.Format(false,false,2, AsciSym.Space);
             return bracketed ? bracket(data) : data;
         }
@@ -255,7 +255,7 @@ namespace Z0
                 return new string(letters);
             }
 
-            var bs = BitString.FromScalar((byte)src);
+            var bs = BitString.from((byte)src);
             var block = src.FormatBlock();
             var domain = $"{Perm4.A}{Perm4.B}{Perm4.C}{Perm4.D}";
             var codomain = letters(bs);

@@ -12,6 +12,32 @@ namespace Z0
     public class t_varrange : IntrinsicTest<t_varrange>
     {     
 
+        public void duplicate32x0_256x32u_basecase()
+        {
+            var n = n256;
+            var width = n32;
+
+            var x0 = dinx.vparts(n,0,1,2,3,4,5,6,7);
+            var y0 = dinx.vduplicate(n0,width,x0);
+            var z0 = dinx.vduplicate(n1,width,x0);
+            Claim.eq(y0, dinx.vparts(n,0,0,2,2,4,4,6,6));
+            Claim.eq(z0, dinx.vparts(n,1,1,3,3,5,5,7,7));            
+
+            var x1 = dinx.vparts(n,0,1,2,3,4,5,6,7,8,9,A,B,C,D,E,F);
+            var y1 = dinx.vduplicate(n0,width,x1);
+            var z1 = dinx.vduplicate(n1,width,x1);
+            Claim.eq(y1, dinx.vparts(n,0,1, 0,1, 4,5, 4,5, 8,9, 8,9, C,D, C,D));
+            Claim.eq(z1, dinx.vparts(n,2,3, 2,3, 6,7, 6,7, A,B, A,B, E,F, E,F));
+            
+            var x2 = dinx.vparts(n,
+                ulong.MaxValue & 0x55555555AAAAAAAA, 
+                ulong.MaxValue & 0xCCCCCCCC88888888, 
+                ulong.MaxValue & 0x3333333377777777,
+                ulong.MaxValue & 0x2222222244444444);
+            var y2 = dinx.vduplicate(n0,width,x2);
+            var z2 = dinx.vduplicate(n1,width,x2);
+        }
+        
         public void reverse_128x8u_basecase()
         {
             var n = n128;
@@ -60,11 +86,11 @@ namespace Z0
         {
             var n = n128;
 
-            var u = ginx.vincrements<uint>(n);
-            Claim.eq(dinx.vparts(0,1,2,3), u);
+            var u = DataPatterns.increments<uint>(n);
+            Claim.eq(dinx.vparts(n,0,1,2,3), u);
 
-            var v = ginx.vdecrements<uint>(n,3);
-            Claim.eq(dinx.vparts(3,2,1,0),v);
+            var v = DataPatterns.decrements<uint>(n);
+            Claim.eq(dinx.vparts(n,3,2,1,0),v);
 
             Claim.eq(v, dinx.vperm4x32(u, Perm4.DCBA));
             Claim.eq(u, dinx.vperm4x32(v, Perm4.DCBA));
@@ -73,9 +99,10 @@ namespace Z0
 
         public void vunpackhi_256x64u_basecase()
         {            
-            var x = dinx.vparts(1ul,2ul,3ul,4ul);
-            var y = dinx.vparts(5ul,6ul,7ul,8ul);
-            var expect = dinx.vparts(2ul,6ul,4ul,8ul);
+            var n = n256;
+            var x = dinx.vparts(n,1,2,3,4);
+            var y = dinx.vparts(n,5,6,7,8);
+            var expect = dinx.vparts(n,2,6,4,8);
             var actual = dinx.vunpackhi(x,y);
             Claim.eq(expect, actual);
         }
@@ -116,9 +143,9 @@ namespace Z0
         static string DescribeShuffle<T>(Vector256<T> src, byte spec, Vector256<T> dst)
             where T : unmanaged
         {
-            var xFmt = src.FormatHexBlocks();
+            var xFmt = src.FormatHex();
             var specFmt = spec.ToBitString();
-            var dstFmt = dst.FormatHexBlocks();
+            var dstFmt = dst.FormatHex();
 
             var fmt = sbuild();
             var dataType = typeof(T).DisplayName();
@@ -132,9 +159,9 @@ namespace Z0
         static string Describe2x128Perm<T>(Vector256<T> x, Vector256<T> y, byte spec, Vector256<T> dst)
             where T : unmanaged
         {
-            var xFmt = x.FormatHexBlocks();
-            var yFmt = y.FormatHexBlocks();
-            var dstFmt = dst.FormatHexBlocks();
+            var xFmt = x.FormatHex();
+            var yFmt = y.FormatHex();
+            var dstFmt = dst.Format();
             var specFmt = spec.ToBitString();
             var fmt = sbuild();
             var dataType = typeof(T).DisplayName();

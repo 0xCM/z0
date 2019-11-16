@@ -24,20 +24,20 @@ namespace Z0
         /// <summary>
         /// The number of cells in the block
         /// </summary>
-        public static readonly int BlockLength = Span128<T>.BlockLength;
+        public static int BlockLength => Span128<T>.BlockLength;
 
         /// <summary>
         /// The size, in bytes, of a block 
         /// </summary>
         /// <typeparam name="T">The primitive type</typeparam>
         /// <remarks>Should always be 16 irrespective of the cell type</remarks>
-        public static readonly int BlockSize = Span128<T>.BlockSize;
+        public static int BlockSize => Span128<T>.BlockSize;
 
         /// <summary>
         /// The size, in bytes, of a constituent block cell
         /// </summary>
         /// <typeparam name="T">The primitive type</typeparam>
-        public static readonly int CellSize = Span128<T>.CellSize;
+        public static int CellSize => Span128<T>.CellSize;
 
         [MethodImpl(Inline)]
         public static implicit operator ReadOnlySpan<T>(ReadOnlySpan128<T> src)
@@ -98,7 +98,6 @@ namespace Z0
             require(aligned(length));
             return new ReadOnlySpan128<T>(src,length);
         }
-
 
         [MethodImpl(Inline)]
         unsafe ReadOnlySpan128(void* src, int length)    

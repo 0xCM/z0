@@ -18,8 +18,7 @@ namespace Z0
     using static As;
 
     partial class dinx
-    {
-
+    {    
         /// <summary>
         ///__m128i _mm_i32gather_epi32 (int const* base_addr, __m128i vindex, const int scale) VPGATHERDD xmm, vm32x, xmm 
         /// </summary>
@@ -85,7 +84,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static unsafe Vector128<ulong> vgather(N128 n, ref ulong mem, Vector128<long> index, byte scale)
             => GatherVector128(refptr(ref mem), index, scale);         
-
 
         /// <summary>
         /// __m256i _mm256_i32gather_epi32 (int const* base_addr, __m256i vindex, const int, scale)VPGATHERDD ymm, vm32y, ymm
@@ -158,5 +156,4 @@ namespace Z0
         public static unsafe Vector256<uint> vmgather(N256 n, Vector256<uint> src, ref uint mem, Vector256<int> index, Vector256<uint> mask, byte scale)
             => GatherMaskVector256(src, refptr(ref mem), index, mask, scale);
     }
-
 }

@@ -5,9 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Numerics;
-    using System.Linq;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;    
     using System.Runtime.InteropServices;    
     
@@ -22,15 +19,15 @@ namespace Z0
 
         public static readonly IPrimalInfo<T> NumInfo = PrimalInfo.Get<T>();
 
-        public static readonly bool Signed = NumInfo.Signed;
+        public static bool Signed => NumInfo.Signed;
 
-        public static readonly ByteSize ByteSize = NumInfo.ByteSize;
+        public static ByteSize ByteSize => NumInfo.ByteSize;
 
-        public static readonly BitSize BitSize = NumInfo.BitSize;
+        public static BitSize BitSize => NumInfo.BitSize;
 
-        public static readonly num<T> Zero = Num.zero<T>();
+        public static num<T> Zero => Num.zero<T>();
 
-        public static readonly num<T> One = Num.one<T>();
+        public static num<T> One => Num.one<T>();
 
         [MethodImpl(Inline)]
         public static explicit operator sbyte(in num<T> src)
@@ -287,7 +284,7 @@ namespace Z0
         /// <typeparam name="T">The underlying primal type</typeparam>
         [MethodImpl(Inline)]
         public BitString ToBitString()
-            => BitString.FromScalar<T>(in scalar(ref this));
+            => BitString.from<T>(in scalar(ref this));
  
         [MethodImpl(Inline)]
         static ref T scalar(ref num<T> src)
@@ -296,6 +293,5 @@ namespace Z0
         [MethodImpl(Inline)]
         static ref T unwrap(in num<T> src)
             => ref Unsafe.As<num<T>,T>(ref As.asRef(in src));
-
     }
 }

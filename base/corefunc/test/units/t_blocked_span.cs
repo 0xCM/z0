@@ -201,7 +201,7 @@ namespace Z0.Test
             blockX[2] = 3;
             blockX[3] = 4;
 
-            var blockY = Span128.load(blockX.Unblock());
+            var blockY = Span128.load(blockX.Unblocked);
             Claim.eq(blockX, blockY);
 
         }

@@ -5,17 +5,22 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;    
     using System.Runtime.Intrinsics;
     using System.Runtime.Intrinsics.X86;
-    using System.Runtime.InteropServices;
-    
-    using static zfunc;    
+    using static System.Runtime.Intrinsics.X86.Sse;
+    using static System.Runtime.Intrinsics.X86.Sse2;
+    using static System.Runtime.Intrinsics.X86.Sse41;
 
-    public static class Vec1024
+ 
+    using static zfunc;
+    using static As;
+    
+    
+    public static class CpuScalar
     {
 
-    }
+
+   }
 }

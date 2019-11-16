@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2019
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Test
+namespace Z0
 {
     using System;
     using System.Linq;
@@ -37,7 +37,7 @@ namespace Z0.Test
         void scalar_andn_check<T>()
             where T : unmanaged
         {
-            var vZero = Vec128<T>.Zero;
+            var vZero = ginx.vzero<T>(n128);
             for(var i=0; i<SampleSize; i++)
             {
                 var x = Random.Next<T>();                    

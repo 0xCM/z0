@@ -11,11 +11,55 @@ namespace Z0
     
     using static zfunc;    
 
-    partial class ginxx
+    public static class CpuVecX
     {
+        /// <summary>
+        /// Extracts the value of an index-identified component from the source vector
+        /// </summary>
+        /// <param name="src">THe source vector</param>
+        /// <param name="index">The component index</param>
+        /// <typeparam name="T">The component type</typeparam>
+        [MethodImpl(Inline)]
+        public static T Item<T>(this Vector128<T> src, int index)
+            where T : unmanaged
+                => CpuVec128.item(src,index);
+
+        /// <summary>
+        /// Extracts the value of an index-identified component from the source vector
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="index">The component index</param>
+        /// <typeparam name="T">The component type</typeparam>
+        [MethodImpl(Inline)]
+        public static T Item<T>(this Vector256<T> src, int index)
+            where T : unmanaged
+                => CpuVec256.item(src,index);
+
+        /// <summary>
+        /// Sets the value of an index-identified source vector component
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="index">The component index</param>
+        /// <typeparam name="T">The component type</typeparam>
+        [MethodImpl(Inline)]
+        public static Vector128<T> Item<T>(this Vector128<T> src, int index, T value)
+            where T : unmanaged
+                => CpuVec128.item(src,index, value);
+
+        /// <summary>
+        /// Sets the value of an index-identified source vector component
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="index">The component index</param>
+        /// <typeparam name="T">The component type</typeparam>
+        [MethodImpl(Inline)]
+        public static Vector256<T> Item<T>(this Vector256<T> src, int index, T value)
+            where T : unmanaged
+                => CpuVec256.item(src,index,value);
+
         [MethodImpl(Inline)]
         public static string Format(this Blend4x32 src)                
-            => BitString.FromScalar((byte)src).Format(true);
+            => BitString.from((byte)src).Format(true);
 
         /// <summary>
         /// Defines a shuffle spec from a permutation
@@ -76,6 +120,7 @@ namespace Z0
             where T : unmanaged
                 => ginx.vprior<T>(src);
  
+        [MethodImpl(Inline)]
         public static Vector256<T> LoadVector<T>(this ReadOnlySpan256<T> src, int block = 0)            
             where T : unmanaged      
         {      
@@ -153,7 +198,7 @@ namespace Z0
             where T : unmanaged            
                 => ginx.vload(n256, in src.Block(block));
 
-         /// <summary>
+        /// <summary>
         /// Specifies the length, i.e. the number of components, of an
         /// intrnsic vector
         /// </summary>
@@ -162,10 +207,10 @@ namespace Z0
         [MethodImpl(Inline)]
         public static int Length<T>(this Vector128<T> src)
             where T : unmanaged            
-                => Vec128<T>.Length;
+                => Vector128<T>.Count;
 
         [MethodImpl(Inline)]
-        public static Span<T> StoreTo<T>(this Vector128<T> src, Span<T> dst)
+        public static Span<T> Store<T>(this Vector128<T> src, Span<T> dst)
             where T : unmanaged            
         {
             ginx.vstore(src, ref head(dst));
@@ -173,7 +218,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static Span<T> StoreTo<T>(this Vector256<T> src, Span<T> dst)
+        public static Span<T> Store<T>(this Vector256<T> src, Span<T> dst)
             where T : unmanaged            
         {
             ginx.vstore(src, ref head(dst));
@@ -225,8 +270,8 @@ namespace Z0
             where T : unmanaged
             where S : unmanaged
         {
-            var xLen = Math.Min(Vec128<S>.Length, Vec128<T>.Length);
-            var dstLen = Vec128<T>.Length;
+            var xLen = Math.Min(ginx.vcount<S>(n128), ginx.vcount<T>(n128));
+            var dstLen = ginx.vcount<T>(n128);
             var lhsData = lhs.ToSpan();
             var rhsData = rhs.ToSpan();
             Span<T> dst = new T[dstLen];
@@ -246,8 +291,8 @@ namespace Z0
             where T : unmanaged
             where S : unmanaged
         {
-            var xLen = Math.Min(Vector128<S>.Count, Vector128<T>.Count);
-            var dstLen = Vec128<T>.Length;
+            var xLen = Math.Min(ginx.vcount<S>(n128), ginx.vcount<T>(n128));
+            var dstLen = ginx.vcount<T>(n128);
             var data = src.ToSpan();            
             Span<T> dst = new T[dstLen];
             for(var i=0; i< xLen; i++)
@@ -268,7 +313,7 @@ namespace Z0
         public static Vector256<T> Merge<T>(this Vector128<T> x, Vector128<T> y, Func<T,T> f)
             where T : unmanaged
         {
-            var srcLen = Vec128<T>.Length;
+            var srcLen = ginx.vcount<T>(n128);
             var dstLen = 2*srcLen;
             var lhsData = x.ToSpan();
             var rhsData = y.ToSpan();
@@ -294,8 +339,8 @@ namespace Z0
             where T : unmanaged
             where S : unmanaged
         {
-            var xLen = Math.Min(Vector256<S>.Count, Vector256<T>.Count);
-            var dstLen = Vector256<T>.Count;
+            var xLen = Math.Min(ginx.vcount<S>(n256), ginx.vcount<T>(n256));
+            var dstLen = ginx.vcount<T>(n256);
             var data = src.ToSpan();            
             Span<T> dst = new T[dstLen];
             for(var i=0; i< xLen; i++)
@@ -315,14 +360,15 @@ namespace Z0
             where T : unmanaged
             where S : unmanaged
         {
-            var xLen = Math.Min(Vector256<S>.Count, Vector256<T>.Count);
-            var dstLen = Vector256<T>.Count;
+            var n = n256;
+            var xLen = Math.Min(ginx.vcount<S>(n), ginx.vcount<T>(n));
+            var dstLen = ginx.vcount<T>(n);
             var lhsData = x.ToSpan();
             var rhsData = y.ToSpan();
             Span<T> dst = new T[dstLen];
             for(var i=0; i< xLen; i++)
                 dst[i] = f(lhsData[i],rhsData[i]);
-            return ginx.vload(n256, in head(dst));        
+            return ginx.vload(n, in head(dst));        
         } 
     }
 }

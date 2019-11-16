@@ -11,7 +11,6 @@ namespace Z0
 
     using static zfunc;    
 
-
     /// <summary>
     /// Defines a natural bitvector parametrized by a primal component type
     /// </summary>
@@ -293,7 +292,7 @@ namespace Z0
         /// </summary>
         [MethodImpl(Inline)]
         public BitString ToBitString()
-            => BitString.FromScalars(Data, Length); 
+            => BitString.from(Data, Length); 
 
         [MethodImpl(Inline)]
         public string Format(bool tlz = false, bool specifier = false, int? blockWidth = null)
@@ -313,6 +312,4 @@ namespace Z0
         public override string ToString()
             => throw new NotImplementedException();
     }
-
-
 }

@@ -316,7 +316,7 @@ namespace Z0
             where T : unmanaged
         {
             var opcount = RoundCount * CycleCount;
-            var last = Vec128<T>.Zero;
+            var last = ginx.vzero<T>(n128);
             var sw = stopwatch(false);
             var bitlen = bitsize<T>();
             var opname = $"srl_128x{bitlen}u";
@@ -587,8 +587,5 @@ namespace Z0
 
             return tmp6;            
         }
-
-   
     }
-
 }

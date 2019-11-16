@@ -13,6 +13,23 @@ namespace Z0
 
     partial class inxoc
     {
+        public static Vector128<byte> swap_hl(Vector128<byte> src)
+            => ginx.vswaphl(src);
+
+        [MethodImpl(Inline)]
+        public static Vector128<ulong> hi_128x64u(Vector128<ulong> src)
+            => ginx.vhi(src);
+
+        public static Vector128<byte> hi_128x8u(Vector128<byte> src)
+            => ginx.vhi(src);
+
+        [MethodImpl(Inline)]
+        public static Vector128<ulong> lo_128x64u(Vector128<ulong> src)
+            => ginx.vlo(src);
+
+        public static Vector128<byte> lo_128x8u(Vector128<byte> src)
+            => ginx.vlo(src);
+
         public static byte vextract_128x8u_0(Vector128<byte> src)
             => ginx.vxscalar(src,n0);
 

@@ -301,7 +301,6 @@ namespace Z0
         public static Vector256<ushort> vunpackhi(Vector256<ushort> x, Vector256<ushort> y)
             => UnpackHigh(x, y);
 
-
         /// <summary>
         /// __m256i _mm256_unpacklo_epi32 (__m256i a, __m256i b) VPUNPCKLDQ ymm, ymm, ymm/m256
         /// Creates a 256-bit vector where the lower 128 bits are taken from the
@@ -313,7 +312,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<int> vunpacklo(Vector256<int> x, Vector256<int> y)
             => UnpackLow(x, y);
-
  
         /// <summary>
         /// __m256i _mm256_unpackhi_epi32 (__m256i a, __m256i b) VPUNPCKHDQ ymm, ymm, ymm/m256

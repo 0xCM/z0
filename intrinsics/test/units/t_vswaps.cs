@@ -19,10 +19,10 @@ namespace Z0
         
         public void transpose_check()
         {
-            var a = ginx.vincrements(n128, 0u);
-            var b = ginx.vincrements(n128, 4u);
-            var c = ginx.vincrements(n128, 8u);
-            var d = ginx.vincrements(n128, 12u);
+            var a = dinx.vparts(n128, 0u,1,2,3);
+            var b = dinx.vparts(n128, 4u,5,6,7);
+            var c = dinx.vparts(n128, 8u,9,10,11);
+            var d = dinx.vparts(n128, 12u,13,14,15);
             var x0 = dinx.vunpacklo(v8u(a), v8u(b));
             var y0 = dinx.vunpacklo(v8u(c), v8u(d));
             var z0 = v8u(dinx.vunpacklo(v16u(x0),v16u(y0)));
@@ -74,17 +74,6 @@ namespace Z0
             var z = dinx.vsll(y,1);
             var z0 = dinx.vand(dinx.vlo(z),m);
             var z1 = dinx.vand(dinx.vhi(z),m);
-        }
-
-        public void convert_check()
-        {
-            var x128 = ginx.vincrements<byte>(n128);
-            var x256 = ginx.vincrements<byte>(n256);
-            dinx.vconvert(x128, out Vector128<ushort> a1);
-            dinx.vconvert(x128, out Vector128<uint> a2);
-            dinx.vconvert(x128, out Vector256<ulong> b3);
-
-
         }
 
         public void perm_swaps()

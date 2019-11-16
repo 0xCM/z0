@@ -13,15 +13,24 @@ namespace Z0
     partial class inxoc
     {                
 
-        public static void avxpack(ref uint src, ref uint dst)
-            => AvxBitpack.pack(n1, ref src, ref dst);
+        public static uint item_get_128x32u_1(Vector128<uint> x)
+            => CpuVec128.item(x, 1);
+
+        public static uint item_get_128x32u_2(Vector128<uint> x)
+            => CpuVec128.item(x, 2);
+
+        public static Vector128<uint> item_set_128x32u_2(Vector128<uint> x, uint value)
+            => CpuVec128.item(x, 2,value);
+
+
+        public static Vector256<uint> avxpack1(Span<N8,uint> src, int offset)
+            => AvxBitpack.pack(src, offset);
+        
         public static ulong sum_256x64u(Vector256<ulong> src)
             => dinx.vsum(src);
 
         public static ulong sum_256x64u(Vector128<ulong> src)
             => dinx.vsum(src);
-
-
 
         public static ulong pop64_scalar(ulong a, ulong b, ulong c, ulong d)
             => AvxPops.pop64(a,b,c,d);

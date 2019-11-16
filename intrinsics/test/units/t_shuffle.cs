@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
     using System.Linq;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
     using System.IO;
@@ -14,7 +13,7 @@ namespace Z0
     using static zfunc;
     using static nfunc;
 
-    public class t_shuffle : IntrinsicTest<t_shuffle>
+    public class t_vshuffle : IntrinsicTest<t_vshuffle>
     {
         const byte A = 0b00;
         
@@ -82,7 +81,7 @@ namespace Z0
 
             var shufspec = perm.ToShuffleSpec();
             var dst = dinx.vshuf16x8(src,shufspec);
-            var expect = ginx.vdecrements<byte>(n128,15);
+            var expect = DataPatterns.decrements<byte>(n128);
             Claim.eq(expect, dst);
 
             var dstPerm = dst.ToPerm();
@@ -90,7 +89,5 @@ namespace Z0
             Claim.eq(dstPerm, expectPerm);
 
         }
-
-
     }
 }

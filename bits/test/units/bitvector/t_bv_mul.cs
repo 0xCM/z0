@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2019
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Test
+namespace Z0
 {
     using System;
     using System.Linq;
@@ -77,12 +77,12 @@ namespace Z0.Test
 
         public void gfpoly()
         {            
-            gfpoly_check(GfPoly.Lookup<N3,byte>(), BitString.Parse("1011"));
+            gfpoly_check(GfPoly.Lookup<N3,byte>(), BitString.parse("1011"));
             
-            gfpoly_check(GfPoly.Lookup<N8,ushort>(), BitString.Parse("100011101"));
+            gfpoly_check(GfPoly.Lookup<N8,ushort>(), BitString.parse("100011101"));
             Claim.eq((ushort)0b100011101, GfPoly.Lookup<N8,ushort>().Scalar);
             
-            gfpoly_check(GfPoly.Lookup<N16,uint>(), BitString.Parse("10000001111011101"));
+            gfpoly_check(GfPoly.Lookup<N16,uint>(), BitString.parse("10000001111011101"));
             
         }
 
@@ -113,7 +113,7 @@ namespace Z0.Test
             where T : unmanaged
         {
 
-            var bs = BitString.FromScalar(p.Scalar).Truncate(p.Degree + 1);
+            var bs = BitString.from(p.Scalar).Truncate(p.Degree + 1);
             Claim.eq(bs, match);  
 
         }

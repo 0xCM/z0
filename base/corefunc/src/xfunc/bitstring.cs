@@ -31,7 +31,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
         public static BitString ToBitString(this sbyte src)
-            => BitString.FromScalar(src);
+            => BitString.from(src);
 
         /// <summary>
         /// Converts the source value to a bitstring
@@ -39,7 +39,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
         public static BitString ToBitString(this byte src)
-            => BitString.FromScalar(src);
+            => BitString.from(src);
 
         /// <summary>
         /// Converts the source value to a bitstring
@@ -47,7 +47,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
         public static BitString ToBitString(this short src)
-            => BitString.FromScalar(src);
+            => BitString.from(src);
 
         /// <summary>
         /// Converts the source value to a bitstring
@@ -55,7 +55,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
         public static BitString ToBitString(this ushort src)
-            => BitString.FromScalar(src);
+            => BitString.from(src);
 
         /// <summary>
         /// Converts the source value to a bitstring
@@ -63,7 +63,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
         public static BitString ToBitString(this int src)
-            => BitString.FromScalar(src);
+            => BitString.from(src);
 
         /// <summary>
         /// Converts the source value to a bitstring
@@ -71,7 +71,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
         public static BitString ToBitString(this uint src)
-            => BitString.FromScalar(src);
+            => BitString.from(src);
 
         /// <summary>
         /// Converts the source value to a bitstring
@@ -79,7 +79,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
         public static BitString ToBitString(this long src)
-            => BitString.FromScalar(src);
+            => BitString.from(src);
 
         /// <summary>
         /// Converts the source value to a bitstring
@@ -87,7 +87,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
         public static BitString ToBitString(this ulong src)
-            => BitString.FromScalar(src);
+            => BitString.from(src);
 
         /// <summary>
         /// Converts the source value to a bitstring
@@ -95,7 +95,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
         public static BitString ToBitString(this float src)
-            => BitString.FromScalar(src);
+            => BitString.from(src);
 
         /// <summary>
         /// Converts the source value to a bitstring
@@ -103,7 +103,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
         public static BitString ToBitString(this double src)
-            => BitString.FromScalar(src);
+            => BitString.from(src);
 
         /// <summary>
         /// Converts a bitspan to a to a bitstring
@@ -111,7 +111,7 @@ namespace Z0
         /// <param name="src">The source bits</param>
         [MethodImpl(Inline)]        
         public static BitString ToBitString(this Span<bit> src)
-            => BitString.FromBits(src); 
+            => BitString.from((ReadOnlySpan<bit>)src); 
 
         /// <summary>
         /// Converts a readonly bitspan to a bitstring
@@ -119,7 +119,7 @@ namespace Z0
         /// <param name="src">The source bits</param>
         [MethodImpl(Inline)]        
         public static BitString ToBitString(this ReadOnlySpan<bit> src)
-            => BitString.FromBits(src);
+            => BitString.from(src);
 
         /// <summary>
         /// Converts a readonly bitspan to a bitstring
@@ -127,7 +127,7 @@ namespace Z0
         /// <param name="src">The source bits</param>
         [MethodImpl(Inline)]        
         public static BitString ToBitString(this bit[] src)
-            => BitString.FromBits(src);
+            => BitString.from(src);
 
         /// <summary>
         /// Converts span content to a to a bitstring
@@ -136,17 +136,7 @@ namespace Z0
         [MethodImpl(Inline)]        
         public static BitString ToBitString<T>(this Span<T> src, BitSize? maxlen = null)
             where T : unmanaged
-                => BitString.FromScalars(src, maxlen); 
-
-        /// <summary>
-        /// Converts span content to a to a bitstring
-        /// </summary>
-        /// <param name="src">The source bits</param>
-        [MethodImpl(Inline)]        
-        public static BitString ToBitString<T>(this T[] src)
-            where T : unmanaged
-                => BitString.FromScalars(src); 
-
+                => BitString.from(src, maxlen); 
 
         /// <summary>
         /// Converts a bitview to a bitstring
@@ -164,7 +154,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
         public static BitString ToBitString(this UInt128 src)
-            => BitString.FromScalar(src.hi) + BitString.FromScalar(src.lo);
+            => BitString.from(src.hi) + BitString.from(src.lo);
  
         /// <summary>
         /// Converts an 128-bit intrinsic vector representation to a bistring
@@ -174,7 +164,7 @@ namespace Z0
         [MethodImpl(Inline)]   
         public static BitString ToBitString<T>(this Vector128<T> src)
             where T : unmanaged        
-                => BitString.FromScalars(src.ToSpan());
+                => BitString.from(src.ToSpan());
         
         /// <summary>
         /// Converts an 256-bit intrinsic vector representation to a bistring
@@ -184,7 +174,7 @@ namespace Z0
         [MethodImpl(Inline)]   
         public static BitString ToBitString<T>(this Vector256<T> src)
             where T : unmanaged        
-                => BitString.FromScalars(src.ToSpan());        
+                => BitString.from(src.ToSpan());        
 
     }
 }

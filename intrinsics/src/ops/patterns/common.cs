@@ -15,26 +15,71 @@ namespace Z0
     
     partial class ginx
     {
+        /// <summary>
+        /// Returns the number of components that comprise a 128-bit vector
+        /// </summary>
+        /// <param name="n">The bitness selector</param>
+        /// <typeparam name="T">The primal component type</typeparam>
+        [MethodImpl(Inline)]
+        public static int vcount<T>(N128 n)
+            where T : unmanaged
+               => Vector128<T>.Count;
+
+        /// <summary>
+        /// Returns the number of components that comprise a 256-bit vector
+        /// </summary>
+        /// <param name="n">The bitness selector</param>
+        /// <typeparam name="T">The primal component type</typeparam>
+        [MethodImpl(Inline)]
+        public static int vcount<T>(N256 n)
+            where T : unmanaged
+               => Vector256<T>.Count;
+
+        /// <summary>
+        /// Returns a 128-bit vector with all bits disabled
+        /// </summary>
+        /// <param name="n">The bitness selector</param>
+        /// <typeparam name="T">The primal component type</typeparam>
         [MethodImpl(Inline)]
         public static Vector128<T> vzero<T>(N128 n)
             where T : unmanaged
                => default;
 
+        /// <summary>
+        /// Returns a 256-bit vector with all bits disabled
+        /// </summary>
+        /// <param name="n">The bitness selector</param>
+        /// <typeparam name="T">The primal component type</typeparam>
         [MethodImpl(Inline)]
         public static Vector256<T> vzero<T>(N256 n)
             where T : unmanaged
                => default;
 
+        /// <summary>
+        /// Returns a 128-bit vector with all bits enabled
+        /// </summary>
+        /// <param name="n">The bitness selector</param>
+        /// <typeparam name="T">The primal component type</typeparam>
         [MethodImpl(Inline)]
         public static Vector128<T> vones<T>(N128 n)
             where T : unmanaged
                 => ginx.veq(default(Vector128<T>), default(Vector128<T>));
 
+        /// <summary>
+        /// Returns a 256-bit vector with all bits enabled
+        /// </summary>
+        /// <param name="n">The bitness selector</param>
+        /// <typeparam name="T">The primal component type</typeparam>
         [MethodImpl(Inline)]
         public static Vector256<T> vones<T>(N256 n)
             where T : unmanaged
                 => ginx.veq(default(Vector256<T>), default(Vector256<T>));
 
+        /// <summary>
+        /// Returns a 128-bit vector where each component is assigned the value 1
+        /// </summary>
+        /// <param name="n">The bitness selector</param>
+        /// <typeparam name="T">The primal component type</typeparam>
         [MethodImpl(Inline)]
         public static Vector128<T> vunits<T>(N128 n)
             where T : unmanaged
@@ -43,6 +88,11 @@ namespace Z0
             return ginx.vload(n, in data.Head);
         }
 
+        /// <summary>
+        /// Returns a 256-bit vector where each component is assigned the value 1
+        /// </summary>
+        /// <param name="n">The bitness selector</param>
+        /// <typeparam name="T">The primal component type</typeparam>
         [MethodImpl(Inline)]
         public static Vector256<T> vunits<T>(N256 n)
             where T : unmanaged
@@ -89,6 +139,7 @@ namespace Z0
         /// Defines a vector of 32 or 64-bit floating point values where each component has been intialized to the value -0.0
         /// </summary>
         /// <typeparam name="T">The floating point type</typeparam>
+        [MethodImpl(Inline)]
         public static Vector256<T> fpsign<T>(N256 n)
             where T : unmanaged
         {

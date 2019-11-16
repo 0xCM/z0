@@ -2,14 +2,11 @@
 // Copyright   :  (c) Chris Moore, 2019
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Test
+namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Reflection;
 
     using static zfunc;
-    using static Bit;
 
     public class t_unpack : ScalarBitTest<t_unpack>
     {
@@ -113,7 +110,7 @@ namespace Z0.Test
                 var src = Random.Next<S>();
                 Span<T> dst = stackalloc T[bitsize<S>()];   
                 gbits.unpack(src,dst);                     
-                var bs = BitString.FromScalar(src);
+                var bs = BitString.from(src);
                 for(var i = 0; i< bs.Length; i++)
                 {
                     var expect = bs[i] ? one<T>() : zero<T>();
@@ -125,7 +122,7 @@ namespace Z0.Test
             var x = Random.Span<S>(SampleSize);
             Span<T> y1 = new T[x.Length * bitsize<S>()];
             gbits.unpack(x,y1);
-            var y2 = BitString.FromScalars(x);
+            var y2 = BitString.from(x);
             for(var i=0; i< y1.Length; i++)
             {
                 var expect = y2[i] ? one<T>() : zero<T>();
@@ -156,7 +153,5 @@ namespace Z0.Test
 
             Collect((opcount,sw,opname));
         }
-
     }
-
 }

@@ -24,7 +24,7 @@ namespace Z0
         {
             while(src.MoveNext())
             {
-                var bs = BitString.FromScalar(src.Current);
+                var bs = BitString.from(src.Current);
                 for(var i = 0; i< 64; i++)
                     yield return bs[i];                                    
             }
@@ -39,6 +39,5 @@ namespace Z0
         public static IEnumerable<bit> ToBitStream<T>(this IEnumerable<T> src)
             where T : unmanaged
                 => src.GetEnumerator().ToBitStream();
-
     }
 }

@@ -5,8 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Reflection;
     using System.Runtime.CompilerServices;
 
     using static zfunc;
@@ -46,7 +44,7 @@ namespace Z0
             for(var i=0; i<SampleSize; i++)
             {
                 var x = Random.Next<T>();
-                bd_match_check<T>(BitString.FromScalar(x).Format(false,true),x);
+                bd_match_check<T>(BitString.from(x).Format(false,true),x);
             }
 
         }
@@ -58,6 +56,5 @@ namespace Z0
         static void dd_match_check<T>(string digits, num<T> value)
             where T : unmanaged
                 => Claim.eq(digits, value.ToDecimalDigits().Format());
-
     }
 }

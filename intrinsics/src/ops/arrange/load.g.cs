@@ -19,6 +19,7 @@ namespace Z0
     using static AsIn;
 
     using static zfunc;
+    using static aux;
     
     partial class ginx
     {        
@@ -140,7 +141,6 @@ namespace Z0
             where T : unmanaged
                 => vload(n256,src.Unblocked);
 
-
         [MethodImpl(Inline)]
         public static unsafe ref Vector128<T> vload<T>(T* pSrc, out Vector128<T> dst)
             where T : unmanaged
@@ -180,145 +180,5 @@ namespace Z0
             return ref dst;
         }
 
-        [MethodImpl(Inline)]
-        static unsafe void vloadu_u<T>(T* pSrc, out Vector256<T> dst)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(byte))
-                dst = generic<T>(LoadDquVector256((byte*)pSrc));
-            else if(typeof(T) == typeof(ushort))
-                dst = generic<T>(LoadDquVector256((ushort*)pSrc));
-            else if(typeof(T) == typeof(uint))
-                dst = generic<T>(LoadDquVector256((uint*)pSrc));
-            else 
-                dst = generic<T>(LoadDquVector256((ulong*)pSrc));
-
-        }
-
-        [MethodImpl(Inline)]
-        static unsafe void vloadu_i<T>(T* pSrc, out Vector256<T> dst)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(sbyte))
-                dst = generic<T>(LoadDquVector256((sbyte*)pSrc));
-            else if(typeof(T) == typeof(short))
-                dst = generic<T>(LoadDquVector256((short*)pSrc));
-            else if(typeof(T) == typeof(int))
-                dst = generic<T>(LoadDquVector256((int*)pSrc));
-            else 
-                dst = generic<T>(LoadDquVector256((long*)pSrc));
-
-        }
-
-        [MethodImpl(Inline)]
-        static unsafe void vloadu_f<T>(T* pSrc, out Vector256<T> dst)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(float))
-                dst = generic<T>(LoadVector256((float*)pSrc));
-            else if(typeof(T) == typeof(double))
-                dst = generic<T>(LoadVector256((double*)pSrc));
-            else 
-                throw unsupported<T>();
-        }
-
-
-        [MethodImpl(Inline)]
-        static unsafe void vloadu_u<T>(T* pSrc, out Vector128<T> dst)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(byte))
-                dst = generic<T>(LoadDquVector128((byte*)pSrc));
-            else if(typeof(T) == typeof(ushort))
-                dst = generic<T>(LoadDquVector128((ushort*)pSrc));
-            else if(typeof(T) == typeof(uint))
-                dst = generic<T>(LoadDquVector128((uint*)pSrc));
-            else 
-                dst = generic<T>(LoadDquVector128((ulong*)pSrc));
-
-        }
-
-        [MethodImpl(Inline)]
-        static unsafe void vloadu_i<T>(T* pSrc, out Vector128<T> dst)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(sbyte))
-                dst = generic<T>(LoadDquVector128((sbyte*)pSrc));
-            else if(typeof(T) == typeof(short))
-                dst = generic<T>(LoadDquVector128((short*)pSrc));
-            else if(typeof(T) == typeof(int))
-                dst = generic<T>(LoadDquVector128((int*)pSrc));
-            else 
-                dst = generic<T>(LoadDquVector128((long*)pSrc));
-
-        }
-
-        [MethodImpl(Inline)]
-        static unsafe void vloadu_f<T>(T* pSrc, out Vector128<T> dst)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(float))
-                dst = generic<T>(LoadVector128((float*)pSrc));
-            else if(typeof(T) == typeof(double))
-                dst = generic<T>(LoadVector128((double*)pSrc));
-            else 
-                throw unsupported<T>();
-        }
- 
-        [MethodImpl(Inline)]
-        static Vector128<T> vload_u<T>(N128 n, in T src, int offset)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(byte))
-                return generic<T>(dinx.vload(n, in uint8(in src), offset));
-            else if(typeof(T) == typeof(ushort))
-                return generic<T>(dinx.vload(n, in uint16(in src), offset));
-            else if(typeof(T) == typeof(uint))
-                return generic<T>(dinx.vload(n, in uint32(in src), offset));
-            else
-                return generic<T>(dinx.vload(n, in uint64(in src), offset));
-        }
-
-        [MethodImpl(Inline)]
-        static Vector128<T> vload_i<T>(N128 n, in T src, int offset)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(sbyte))
-                return generic<T>(dinx.vload(n, in int8(in src), offset));
-            else if(typeof(T) == typeof(short))
-                return generic<T>(dinx.vload(n, in int16(in src), offset));
-            else if(typeof(T) == typeof(int))
-                return generic<T>(dinx.vload(n, in int32(in src), offset));
-            else
-                return generic<T>(dinx.vload(n, in int64(in src), offset));
-        }
-
-        [MethodImpl(Inline)]
-        static Vector256<T> vload_u<T>(N256 n, in T src, int offset)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(byte))
-                return generic<T>(dinx.vload(n, in uint8(in src), offset));
-            else if(typeof(T) == typeof(ushort))
-                return generic<T>(dinx.vload(n, in uint16(in src), offset));
-            else if(typeof(T) == typeof(uint))
-                return generic<T>(dinx.vload(n, in uint32(in src), offset));
-            else
-                return generic<T>(dinx.vload(n, in uint64(in src), offset));
-        }
-
-        [MethodImpl(Inline)]
-        static Vector256<T> vload_i<T>(N256 n, in T src, int offset)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(sbyte))
-                return generic<T>(dinx.vload(n, in int8(in src), offset));
-            else if(typeof(T) == typeof(short))
-                return generic<T>(dinx.vload(n, in int16(in src), offset));
-            else if(typeof(T) == typeof(int))
-                return generic<T>(dinx.vload(n, in int32(in src), offset));
-            else
-                return generic<T>(dinx.vload(n, in int64(in src), offset));
-        }
     }
 }

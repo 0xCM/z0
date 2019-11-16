@@ -387,7 +387,7 @@ namespace Z0
         /// </summary>
         [MethodImpl(Inline)]
         public readonly BitString ToBitString()
-            => BitString.FromScalars<T>(data, Length); 
+            => BitString.from<T>(data, Length); 
 
         /// <summary>
         /// Counts the vector's enabled bits
@@ -518,7 +518,5 @@ namespace Z0
     
         public override string ToString()
             => throw new NotImplementedException();
-
     }
-
 }

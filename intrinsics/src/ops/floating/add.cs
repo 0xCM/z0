@@ -21,7 +21,7 @@ namespace Z0
         /// <param name="x"></param>
         /// <param name="y"></param>
         [MethodImpl(Inline)]
-        public static Vec128<float> vadd(in Vec128<float> x, in Vec128<float> y)
+        public static Vector128<float> vadd(Vector128<float> x, Vector128<float> y)
             => Add(x, x);
 
         /// <summary>
@@ -30,7 +30,7 @@ namespace Z0
         /// <param name="x"></param>
         /// <param name="y"></param>
         [MethodImpl(Inline)]
-        public static Vec128<double> vadd(in Vec128<double> x, in Vec128<double> y)
+        public static Vector128<double> vadd(Vector128<double> x, Vector128<double> y)
             => Add(x, y);
 
         /// <summary>
@@ -39,7 +39,7 @@ namespace Z0
         /// <param name="x"></param>
         /// <param name="y"></param>
         [MethodImpl(Inline)]
-        public static Vec256<float> vadd(in Vec256<float> x, in Vec256<float> y)
+        public static Vector256<float> vadd(Vector256<float> x, Vector256<float> y)
             => Add(x, y);
 
         /// <summary>
@@ -48,7 +48,7 @@ namespace Z0
         /// <param name="x"></param>
         /// <param name="y"></param>
         [MethodImpl(Inline)]
-        public static Vec256<double> vadd(in Vec256<double> x, in Vec256<double> y)
+        public static Vector256<double> vadd(Vector256<double> x, Vector256<double> y)
             => Add(x, y);             
 
     }

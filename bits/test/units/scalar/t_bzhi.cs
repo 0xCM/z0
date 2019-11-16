@@ -37,7 +37,7 @@ namespace Z0
         {
             var width = bitsize<T>();
 
-            var bs0 = BitString.FromScalar(gmath.maxval<T>());
+            var bs0 = BitString.from(gmath.maxval<T>());
             var bv0 = bs0.ToBitVector<T>();
 
             Claim.eq(width, bs0.PopCount());

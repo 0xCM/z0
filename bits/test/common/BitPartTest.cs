@@ -6,10 +6,8 @@ namespace Z0
 {
     using System;
     using System.Linq;
-    using System.Reflection;
 
     using static zfunc;
-    using static BitParts;
 
     public abstract class BitPartTest<T> : BitLibTest<T>
         where T : BitPartTest<T>, new()
@@ -26,9 +24,9 @@ namespace Z0
                 var x = Random.Next<A>();
                 
                 part(x, dst);
-                var y = BitString.FromScalar(x).Partition(width).Map(bs => bs.ToBitVector(n8));
+                var y = BitString.from(x).Partition(width).Map(bs => bs.ToBitVector(n8));
                 for(var i=0; i<count; i++)  
-                    Claim.eq(y[i], BitString.FromScalar(dst[i]).ToBitVector(n8));
+                    Claim.eq(y[i], BitString.from(dst[i]).ToBitVector(n8));
             }
         }
 
@@ -50,7 +48,5 @@ namespace Z0
            for(var outer = 0; outer < 4; ++outer) 
                 unpack32x4(pSrc++,pDst);
         }
-
     }
-
 }

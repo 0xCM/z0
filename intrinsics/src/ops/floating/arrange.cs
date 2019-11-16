@@ -8,17 +8,38 @@ namespace Z0
     using System.Runtime.CompilerServices;    
     using System.Runtime.Intrinsics;    
     using static System.Runtime.Intrinsics.X86.Avx;
+    using static System.Runtime.Intrinsics.X86.Avx.X64;
     using static System.Runtime.Intrinsics.X86.Avx2;
     using static System.Runtime.Intrinsics.X86.Sse;
     using static System.Runtime.Intrinsics.X86.Sse.X64;
     using static System.Runtime.Intrinsics.X86.Sse2;
+    using static System.Runtime.Intrinsics.X86.Sse2.X64;
     using static System.Runtime.Intrinsics.X86.Sse41;
+    using static System.Runtime.Intrinsics.X86.Sse41.X64;
+    using static System.Runtime.Intrinsics.X86.Sse42;
     
     using static As;
     using static zfunc;    
 
     partial class dfp
     {
+        [MethodImpl(Inline)]
+        public static Vector128<float> vlo(Vector256<float> src)
+            => ExtractVector128(src, 0);
+
+        [MethodImpl(Inline)]
+        public static Vector128<double> vlo(Vector256<double> src)
+            => ExtractVector128(src, 0);
+
+        [MethodImpl(Inline)]
+        public static Vector128<float> vhi(Vector256<float> src)
+            => ExtractVector128(src, 1);
+
+        [MethodImpl(Inline)]
+        public static Vector128<double> vhi(Vector256<double> src)
+            => ExtractVector128(src, 1);
+
+
         /// <summary>
         /// Transposes a 4x4 matrix of floats, adapted from MSVC intrinsic headers
         /// </summary>
@@ -61,23 +82,47 @@ namespace Z0
  
         /// <summary>
         /// __m128 _mm_move_ss (__m128 a, __m128 b) MOVSS xmm, xmm
-        /// Moves the lower single-precision (32-bit) floating-point element from b to the lower element of dst, and copy 
-        /// the upper 3 elements from a to the upper elements of dst.
+        /// z[0] = y[0]
+        /// z[1] = x[1]
+        /// z[2] = x[2]
+        /// z[3] = x[3]
         /// </summary>
         [MethodImpl(Inline)]
-        public static Vec128<float> vmovescalar(Vector128<float> x, Vector128<float> y)
+        public static Vector128<float> vmovescalar(Vector128<float> x, Vector128<float> y)
             => MoveScalar(y,x);
 
         /// <summary>
         /// __m128d _mm_move_sd (__m128d a, __m128d b) MOVSD xmm, xmm
-        /// Moves the lower double-precision (64-bit) floating-point element from "b" to the lower element of "dst", and copy 
-        /// the upper element from "a" to the upper element of "dst"
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vec128<double> vmovescalar(Vector128<double> x, Vector128<double> y)
+        public static Vector128<double> vmovescalar(Vector128<double> x, Vector128<double> y)
             => MoveScalar(y,x);
+
+        /// <summary>
+        /// __m128 _mm_movehl_ps (__m128 a, __m128 b) MOVHLPS xmm, xmm
+        /// z[0] = x[3]
+        /// z[1] = y[3]
+        /// z[2] = x[0]
+        /// z[3] = y[0]
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        [MethodImpl(Inline)]
+        public static Vector128<float> movehl(Vector128<float> x, Vector128<float> y)
+            => MoveHighToLow(x,y);
+
+        /// <summary>
+        /// __m128 _mm_movelh_ps (__m128 a, __m128 b) MOVLHPS xmm, xmm
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <returns></returns>
+        [MethodImpl(Inline)]
+        public static Vector128<float> movelh(Vector128<float> x, Vector128<float> y)
+            => MoveLowToHigh(x,y);
+
 
     }
 }

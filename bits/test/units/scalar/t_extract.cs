@@ -2,11 +2,9 @@
 // Copyright   :  (c) Chris Moore, 2019
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Test
+namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Reflection;
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
 
@@ -74,10 +72,8 @@ namespace Z0.Test
             var x = BitConverter.ToUInt64(unpacked,0);
             var y = Bits.gather(x, BitMask.Lsb64x8).ToBitVector();
             var z1 = y.Byte(0).ToBitString();
-            var z2 = BitString.FromBitSeq(unpacked);
-            Claim.eq(z1,z2);
-        
+            var z2 = BitString.fromseq(unpacked);
+            Claim.eq(z1,z2);        
         }
     }
-
 }

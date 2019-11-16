@@ -11,12 +11,9 @@ namespace Z0
     using System.Runtime.Intrinsics;
     
     using static zfunc;
-    //#pragma warning disable 0675
 
     public class t_vbswap : IntrinsicTest<t_vbswap>
     {   
-
-
         public void vbswap_32u()
         {
             var x = dinx.vparts(n128, 

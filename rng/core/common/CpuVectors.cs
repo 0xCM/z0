@@ -112,7 +112,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<T> CpuVector<T>(this IPolyrand random, N128 n, Interval<T>? domain = null, Func<T,bool> filter = null)        
             where T : unmanaged
-                => ginxx.LoadVector(random.BlockedSpan(n128,1, domain, filter));
+                => CpuVecX.LoadVector(random.BlockedSpan(n128,1, domain, filter));
 
         /// <summary>
         /// Produces a random 128-bit cpu vector
@@ -124,7 +124,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<T> CpuVector<T>(this IPolyrand random, N128 n, Interval<T> domain, Func<T,bool> filter = null)        
             where T : unmanaged
-                => ginxx.LoadVector(random.BlockedSpan(n, 1, domain, filter));
+                => CpuVecX.LoadVector(random.BlockedSpan(n, 1, domain, filter));
 
         /// <summary>
         /// Produces a random 128-bit cpu vector
@@ -137,7 +137,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<T> CpuVector<T>(this IPolyrand random, N128 n, T min, T max, Func<T,bool> filter = null)        
             where T : unmanaged
-                => ginxx.LoadVector(random.BlockedSpan(n,1, (min, max), filter));
+                => CpuVecX.LoadVector(random.BlockedSpan(n,1, (min, max), filter));
 
         /// <summary>
         /// Produces a random 256-bit cpu vector
@@ -149,7 +149,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<T> CpuVector<T>(this IPolyrand random, N256 n, Interval<T>? domain = null, Func<T,bool> filter = null)        
             where T : unmanaged
-                => ginxx.LoadVector(random.BlockedSpan(n, 1, domain, filter));
+                => CpuVecX.LoadVector(random.BlockedSpan(n, 1, domain, filter));
 
         /// <summary>
         /// Produces a random 256-bit cpu vector
@@ -161,7 +161,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<T> CpuVector<T>(this IPolyrand random, N256 n, Interval<T> domain, Func<T,bool> filter = null)        
             where T : unmanaged
-                => ginxx.LoadVector(random.BlockedSpan(n,1, domain, filter));
+                => CpuVecX.LoadVector(random.BlockedSpan(n,1, domain, filter));
 
         /// <summary>
         /// Produces a random 256-bit cpu vector
@@ -174,6 +174,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<T> CpuVector<T>(this IPolyrand random, N256 n, T min, T max, Func<T,bool> filter = null)        
             where T : unmanaged
-                => ginxx.LoadVector(random.BlockedSpan(n,1, (min, max), filter));
+                => CpuVecX.LoadVector(random.BlockedSpan(n,1, (min, max), filter));
     }
 }

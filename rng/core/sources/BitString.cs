@@ -37,7 +37,7 @@ namespace Z0
             while(true)
             {
                 var scalar = random.Next<ulong>();
-                var bs = Z0.BitString.FromScalar(scalar);
+                var bs = Z0.BitString.from(scalar);
                 for(var i=0; i<bs.Length; i++)
                 {
                     yield return bs[i];
@@ -92,9 +92,8 @@ namespace Z0
         public static BitString BitString(this IPolyrand random, BitSize len)
         {
             var bytes = random.Span<byte>(len.UpperByteCount);
-            return Z0.BitString.FromScalars(bytes, len);        
+            return Z0.BitString.from(bytes, len);        
         }
-
 
         /// <summary>
         /// Produces a bitstring with randomized length

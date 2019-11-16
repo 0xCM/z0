@@ -9,7 +9,6 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
     
-
     public static class NamedValue
     {
         public static NamedValue<V> Define<V>(string name, V value)
@@ -25,8 +24,9 @@ namespace Z0
             => new NamedValue<V>(src);
 
         public static implicit operator (string name, V value)(NamedValue<V> src)
-            => src.Tuple;
+            => (src.Name, src.Value);
 
+        
         public NamedValue(string name, V value)
         {
             this.Name = name;
@@ -49,8 +49,11 @@ namespace Z0
         /// </summary>
         public readonly V Value;
 
-        public (string name, V value) Tuple
-            => this;
+        public void Deconstruct(out string name, out V value) 
+        {
+            name = Name;
+            value = Value;
+        }
 
         public override string ToString()
             => $"{Name} = {Value}";

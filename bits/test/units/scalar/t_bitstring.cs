@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
     using System.Linq;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     using System.IO;
     
@@ -120,7 +119,7 @@ namespace Z0
         {
             for(var i=0; i<=231; i++)
             {
-                var bs = BitString.FromPow2(i);
+                var bs = BitString.frompow2(i);
                 Claim.eq((int)bs.Length, i + 1);
                 for(var j=0; j<bs.Length; j++)
                 {
@@ -148,10 +147,10 @@ namespace Z0
 
             var x = 0b10100001100101010001u;
             var bsSrc = "0000010100001100101010001";
-            var bs1 = BitString.Parse(bsSrc);
+            var bs1 = BitString.parse(bsSrc);
             Claim.eq((int)bs1.Length, bsSrc.Length);
 
-            var bs2 = BitString.FromScalar(x);
+            var bs2 = BitString.from(x);
             var y = bs1.TakeScalar<uint>();
             Claim.eq(x,y);
             Claim.yea(bs1.Equals(bs2));
@@ -241,7 +240,7 @@ namespace Z0
         public void bsblocks()
         {
             var src = "0000010100001100101010001";
-            var bs = BitString.Parse(src);
+            var bs = BitString.parse(src);
             Claim.eq(bs.Length, 25);
             
             var b1 = bs.Partition(1);
@@ -257,12 +256,12 @@ namespace Z0
         public void bs_patterns()
         {
             var p1 = (byte)0b11001110;
-            var s1 = BitString.FromPattern(p1, 4);
+            var s1 = BitString.from(p1, 4);
             Claim.eq(s1.Length,32);
             Claim.eq(p1.ToBitString(), s1[8..15]);
 
             var p2 = (ushort)0b1111111100010001;
-            var s2 = BitString.FromPattern(p2, 2);
+            var s2 = BitString.from(p2, 2);
             Claim.eq(s2.Length,32);
             Claim.eq(p2.ToBitString(), s2[0..15]);
         }
@@ -270,20 +269,20 @@ namespace Z0
 
         public void bs_tlz()
         {
-            Claim.eq("100", BitString.FromScalar(0b00000100).Format(true));
-            Claim.eq("101", BitString.FromScalar(0b00000101).Format(true));
-            Claim.eq("1000101", BitString.FromScalar(0b01000101).Format(true));
-            Claim.eq("11010101", BitString.FromScalar(0b11010101).Format(true));
+            Claim.eq("100", BitString.from(0b00000100).Format(true));
+            Claim.eq("101", BitString.from(0b00000101).Format(true));
+            Claim.eq("1000101", BitString.from(0b01000101).Format(true));
+            Claim.eq("11010101", BitString.from(0b11010101).Format(true));
         }
 
         public void bs_parselit()
         {
-            var a = BitString.Parse("01010111");
+            var a = BitString.parse("01010111");
             var b = a.TakeScalar<byte>();
             Claim.eq((byte)0b01010111, b);
 
             var x =  0b111010010110011010111001110000100001101ul;
-            var xbs = BitString.Parse("111010010110011010111001110000100001101");
+            var xbs = BitString.parse("111010010110011010111001110000100001101");
             var ybs = x.ToBitString();
             Claim.eq(xbs, ybs);                
 
@@ -310,7 +309,7 @@ namespace Z0
                 var blocks = bsX.Partition(8);
                 Claim.eq(8, blocks.Length);   
 
-                var bsY = BitString.Assemble(blocks.Select(x => x.Format()).ToArray());
+                var bsY = BitString.assemble(blocks.Select(x => x.Format()).ToArray());
                 Claim.eq(bsX, bsY);
                 
                 var bytes = span<byte>(8);
@@ -331,11 +330,11 @@ namespace Z0
 
             var signed = signedint<T>();
             var bitsize = BitSize.Size<T>();
-            var bs10 = BitString.Parse("1" + repeat('0', bitsize - 1).Concat());
+            var bs10 = BitString.parse("1" + repeat('0', bitsize - 1).Concat());
             var x10 = bs10.TakeScalar<T>();
-            var bs11 = BitString.Parse("11" + repeat('0', bitsize - 2).Concat());
+            var bs11 = BitString.parse("11" + repeat('0', bitsize - 2).Concat());
             var x11 = bs11.TakeScalar<T>();
-            var bs01 = BitString.Parse("01" + repeat('0', bitsize - 2).Concat());
+            var bs01 = BitString.parse("01" + repeat('0', bitsize - 2).Concat());
             var x01 = bs01.TakeScalar<T>();
             var y = gmath.sar(x10, 1);
             if(signed)
@@ -354,10 +353,10 @@ namespace Z0
             for(var i=0; i<src.Length; i++)
             {
                 var x = src[i];
-                var bs = BitString.FromScalar(src[i]);
+                var bs = BitString.from(src[i]);
                 var y = bs.TakeScalar<T>();
                 Claim.eq(x,y);
-                Claim.eq(bs.Format(), BitString.FromScalar(y).Format());
+                Claim.eq(bs.Format(), BitString.from(y).Format());
             }
 
             TypeCaseEnd<T>();                
@@ -388,9 +387,9 @@ namespace Z0
             var src = Random.Span<T>(SampleSize);
             for(var i=0; i<src.Length; i++)
             {
-                var bc1 =  BitString.FromScalar(src[i]).Format();
+                var bc1 =  BitString.from(src[i]).Format();
                 var bc2 = gbits.bstext(src[i]);
-                var bc3 = BitString.FromScalar(src[i]);
+                var bc3 = BitString.from(src[i]);
                 Claim.eq(bc1,bc2);
                 Claim.eq(bc1,bc3);
             }
@@ -440,7 +439,7 @@ namespace Z0
             var src = Random.Span<T>(SampleSize);
             foreach(var x in src)
             {
-                var y = BitString.FromScalar(x);
+                var y = BitString.from(x);
                 var z = y.TakeScalar<T>();
                 Claim.eq(x,z);
             }
@@ -470,8 +469,8 @@ namespace Z0
             for(var cycle=0; cycle< CycleCount; cycle++)
             {            
                 var x = Random.BitString(minlen, maxlen);
-                var y = BitString.Parse(x).Format();
-                var z = BitString.Parse(y);
+                var y = BitString.parse(x).Format();
+                var z = BitString.parse(y);
 
                 Claim.eq(x.Length, y.Length);
                 Claim.eq(z.Length, y.Length);                

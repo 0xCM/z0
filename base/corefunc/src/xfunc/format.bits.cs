@@ -7,10 +7,11 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;    
     using System.Runtime.Intrinsics;    
+    using System.Text;
     
     using static zfunc;    
 
-    public static class BitFormat
+    partial class xfunc
     {
         /// <summary>
         /// Formats the source value as a bitstring
@@ -114,7 +115,7 @@ namespace Z0
             var sb = sbuild();
             for(var i=0; i<src.Length; i++)
             {
-                var bs = BitString.FromScalar(in src[i]).Format(tlz,specifier,blockWidth);
+                var bs = BitString.from(in src[i]).Format(tlz,specifier,blockWidth);
                 sb.Append(bs);
                 if(i != src.Length - 1)
                     sb.Append(AsciSym.Space);                    
@@ -212,5 +213,25 @@ namespace Z0
         public static string FormatBits<N>(this Span<N,bit> src, bool tlz = false, bool specifier = false, int? blockWidth = null)
             where N : unmanaged, ITypeNat
                 => src.Unsized.FormatBits(tlz,specifier,blockWidth);
+                 
+        /// <summary>
+        /// Formats vector bits
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <typeparam name="T">The underlying primal type</typeparam>
+        [MethodImpl(Inline)]   
+        public static string FormatBits<T>(this Vector128<T> src, bool tlz = false, bool specifier = false, int? blockWidth = null, char? blocksep = null)
+            where T : unmanaged        
+                => src.ToBitString().Format(tlz, specifier, blockWidth ?? bitsize<T>(), blocksep);
+        
+        /// <summary>
+        /// Formats vector bits
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <typeparam name="T">The underlying primal type</typeparam>
+        [MethodImpl(Inline)]   
+        public static string FormatBits<T>(this Vector256<T> src, bool tlz = false, bool specifier = false, int? blockWidth = null, char? blocksep = null)
+            where T : unmanaged        
+                => src.ToBitString().Format(tlz, specifier, blockWidth ?? bitsize<T>(), blocksep);
     }
 }

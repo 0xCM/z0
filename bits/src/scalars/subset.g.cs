@@ -20,8 +20,8 @@ namespace Z0
             where T : unmanaged
         {
 
-            var subset = BitString.FromScalar(test).BitSeq.ToHashSet();
-            var superset = BitString.FromScalar(set).BitSeq.ToHashSet();
+            var subset = BitString.from(test).BitSeq.ToHashSet();
+            var superset = BitString.from(set).BitSeq.ToHashSet();
             superset.IntersectWith(subset);
             return superset.IsNonEmpty();            
         }

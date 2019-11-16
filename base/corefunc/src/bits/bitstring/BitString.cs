@@ -25,7 +25,7 @@ namespace Z0
         /// <summary>
         /// Defines the canonical emtpy bitstring of 0 length
         /// </summary>
-        public static readonly BitString Empty = Parse(string.Empty);
+        public static BitString Empty => parse(string.Empty);
 
         [MethodImpl(Inline)]
         public static implicit operator string(BitString src)                
@@ -45,61 +45,27 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static BitString operator &(BitString lhs, BitString rhs)
-        {            
-            var len = length(lhs.bitseq,rhs.bitseq);
-            var dst = new BitString(new byte[len]);
-            for(var i=0; i< len; i++)
-                dst[i] = lhs[i] & rhs[i];
-            return dst;
-        }
+            => and(lhs,rhs);
 
         [MethodImpl(Inline)]
         public static BitString operator |(BitString lhs, BitString rhs)
-        {            
-            var len = length(lhs.bitseq,rhs.bitseq);
-            var dst = new BitString(new byte[len]);
-            for(var i=0; i< len; i++)
-                dst[i] = lhs[i] | rhs[i];
-            return dst;
-        }
+            => or(lhs,rhs);
 
         [MethodImpl(Inline)]
         public static BitString operator ^(BitString lhs, BitString rhs)
-        {            
-            var len = length(lhs.bitseq,rhs.bitseq);
-            var dst = new BitString(new byte[len]);
-            for(var i=0; i< len; i++)
-                dst[i] = lhs[i] ^ rhs[i];
-            return dst;
-        }
+            => xor(lhs,rhs);
 
         [MethodImpl(Inline)]
         public static BitString operator <<(BitString lhs, int offset)
-        {            
-            var dst = Alloc(lhs.Length);
-            for(var i=offset; i<dst.Length; i++)
-                dst[i] = lhs[i];
-            return dst;
-        }
+            => sll(lhs,offset);
 
         [MethodImpl(Inline)]
         public static BitString operator >>(BitString lhs, int offset)
-        {            
-            var dst = Alloc(lhs.Length);
-            for(var i=lhs.Length - offset; i>=0; i--)
-                dst[i] = lhs[i];
-            return dst;
-        }
+            => srl(lhs,offset);
 
         [MethodImpl(Inline)]
         public static BitString operator ~(BitString src)
-        {            
-            var len = src.Length;
-            var dst = new BitString(new byte[len]);
-            for(var i=0; i< len; i++)
-                dst[i] = ~src[i];
-            return dst;
-        }
+            => not(src);
 
         [MethodImpl(Inline)]
         BitString(byte[] src)
@@ -111,14 +77,6 @@ namespace Z0
         BitString(ReadOnlySpan<byte> src)
         {
             this.bitseq = src.ToArray();
-        }
-
-        [MethodImpl(Inline)]
-        BitString(ReadOnlySpan<Bit> src)
-        {
-            this.bitseq = new byte[src.Length];
-            for(var i=0; i<src.Length; i++)
-                this.bitseq[i] = (byte)src[i];
         }
 
         [MethodImpl(Inline)]
@@ -369,7 +327,6 @@ namespace Z0
             return dst;
         }
 
-
         /// <summary>
         /// Renders the content as a span of bits
         /// </summary>
@@ -449,6 +406,26 @@ namespace Z0
             return dst;
         }
 
+        readonly string FormatUnblocked(bool tlz, bool specifier)
+        {
+            if(bitseq == null || bitseq.Length == 0)
+                return string.Empty;
+
+            Span<char> dst = stackalloc char[bitseq.Length];
+            var lastix = dst.Length - 1;
+            for(var i=0; i< dst.Length; i++)
+                dst[lastix - i] = bitseq[i] == 0 ? '0' : '1';
+            
+            var result = new string(dst);
+            if(tlz)
+                result = result.TrimStart('0');
+            if(specifier)
+                result = $"0b{result}";
+            return result;
+
+        }
+
+
         /// <summary>
         /// Formats bitstring content
         /// </summary>
@@ -489,9 +466,7 @@ namespace Z0
                 
                 }
                 var x = sb.ToString();
-                return  
-                    (specifier ? "0b" : string.Empty) 
-                +   (tlz ? x.TrimStart('0') : x);
+                return  (specifier ? "0b" : string.Empty) + (tlz ? x.TrimStart('0') : x);
             }            
         }
 
@@ -511,25 +486,6 @@ namespace Z0
         public override bool Equals(object rhs)
             => rhs is BitString x && Equals(x);
 
-        readonly string FormatUnblocked(bool tlz, bool specifier)
-        {
-            if(bitseq == null || bitseq.Length == 0)
-                return string.Empty;
-
-            Span<char> dst = stackalloc char[bitseq.Length];
-            var lastix = dst.Length - 1;
-            for(var i=0; i< dst.Length; i++)
-                dst[lastix - i] = bitseq[i] == 0 ? '0' : '1';
-            
-            var result = new string(dst);
-            if(tlz)
-                result = result.TrimStart('0');
-            if(specifier)
-                result = $"0b{result}";
-            return result;
-
-        }
-
         [MethodImpl(Inline)]
         readonly T PackSingle<T>(int offset = 0, int? minlen = null)
             where T : unmanaged
@@ -539,18 +495,6 @@ namespace Z0
             return packed.Length != 0 ? SpanConvert.TakeSingle<byte,T>(packed) : default;
         }
 
-        /// <summary>
-        /// Projects the bitstring onto a span via a supplied transformation
-        /// </summary>
-        /// <param name="f">The transformation</param>
-        /// <typeparam name="T">The span element type</typeparam>
-        public Span<T> Map<T>(Func<Bit,T> f)
-        {
-            Span<T> dst = new T[Length];
-            for(var i=0; i<dst.Length; i++)
-                dst[i] = f(bitseq[i]);
-            return dst;
-        }
 
         [MethodImpl(Inline)]
         static bool HasBitSpecifier(in string bs)

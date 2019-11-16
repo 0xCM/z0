@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2019
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Test
+namespace Z0
 {
     using System;
     using System.Reflection;
@@ -62,7 +62,7 @@ namespace Z0.Test
             var startAddress = (ulong)pSrc;
             var endAddress = (ulong)pSrcCurrent;
             var bytesRead = (int)(endAddress - startAddress);
-            return new MethodMemory(m, startAddress, endAddress, dst.Unsize().Slice(0, bytesRead));         
+            return new MethodMemory(m, startAddress, endAddress, dst.Unsized.Slice(0, bytesRead));         
         }
         
         [MethodImpl(Inline)]

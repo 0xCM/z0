@@ -50,7 +50,7 @@ namespace Z0
 
 
         /// <summary>
-        /// Creates a 128-bit vector with components that increase by unit step from an initial value
+        /// Creates a 256-bit vector with components that increase by unit step from an initial value
         /// </summary>
         /// <param name="first">The value of the first component</param>
         /// <param name="step">The distance between adjacent components</param>
@@ -70,80 +70,6 @@ namespace Z0
             }
 
             return vload(n, in mem);
-        }            
-
-        /// <summary>
-        /// Creates a 128-bit vector with components that increase by a specified step from an initial value
-        /// </summary>
-        /// <param name="first">The value of the first component</param>
-        /// <param name="step">The distance between adjacent components</param>
-        /// <typeparam name="T">The primal component type</typeparam>
-        public static Vector128<T> vincrements<T>(N128 n, T first, T step)
-            where T : unmanaged
-        {
-            var current = first;
-            var data = BlockedSpan.alloc<T>(n);
-            var len = BlockedSpan.blocklen<T>(n);
-            ref var mem = ref head(data);
-            for(var i=0; i<len; i++)
-            {
-                seek(ref mem, i) = current;
-                gmath.add(ref current, step);
-            }
-            return vload(n, in mem);
-        }
-
-        /// <summary>
-        /// Creates a 256-bit vector with components that increase by a specified step from an initial value
-        /// </summary>
-        /// <param name="first">The value of the first component</param>
-        /// <param name="step">The distance between adjacent components</param>
-        /// <typeparam name="T">The primal component type</typeparam>
-        public static Vector256<T> vincrements<T>(N256 n, T first, T step)
-            where T : unmanaged
-        {
-            var current = first;
-            var data = BlockedSpan.alloc<T>(n);
-            var len = BlockedSpan.blocklen<T>(n);
-            ref var mem = ref head(data);
-            for(var i=0; i<len; i++)
-            {
-                seek(ref mem, i) = current;
-                gmath.add(ref current, step);
-            }
-            return vload(n, in mem);
-        }
-    
-        public static Vector128<T> vincrements<T>(N128 n, T first, params Swap[] swaps)
-            where T : unmanaged
-        {
-            var current = first;
-            var data = BlockedSpan.alloc<T>(n);
-            var len = BlockedSpan.blocklen<T>(n);
-            ref var mem = ref head(data);
-            for(var i=0; i<len; i++)
-            {
-                seek(ref mem, i) = current;
-                gmath.inc(ref current);
-            }
-
-            return vload(n, in head(data.Swap(swaps)));
-        }
-
-        public static Vector256<T> vincrements<T>(N256 n, T first, params Swap[] swaps)
-            where T : unmanaged
-        {
-            var current = first;
-            var data = BlockedSpan.alloc<T>(n);
-            var len = BlockedSpan.blocklen<T>(n);
-            ref var mem = ref head(data);
-            for(var i=0; i<len; i++)
-            {
-                seek(ref mem, i) = current;
-                gmath.inc(ref current);
-            }
-
-            return vload(n, in head(data.Swap(swaps)));
         }            
 
 

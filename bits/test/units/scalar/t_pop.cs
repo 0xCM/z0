@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2019
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Test
+namespace Z0
 {
     using System;
     using System.Linq;
@@ -187,11 +187,10 @@ namespace Z0.Test
             var bv = BitVector<N,T>.FromBytes(src);
             var pc1 = bv.Pop();
 
-            var bs = BitString.FromScalars(src);
+            var bs = BitString.from(src);
             var pc2 = bs.PopCount();
 
             Claim.eq(pc1,pc2);
         }
-
     }
 }

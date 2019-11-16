@@ -15,7 +15,6 @@ namespace Z0
 
     partial class dfp
     {
-
         /// <summary>
         /// __m128 _mm_and_ps (__m128 a, __m128 b)ANDPS xmm, xmm/m128
         /// Computes the logical and of the operands
@@ -23,7 +22,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vec128<float> vand(in Vec128<float> x, in Vec128<float> y)
+        public static Vector128<float> vand(Vector128<float> x, Vector128<float> y)
             => And(x, y);
         
         /// <summary>
@@ -33,7 +32,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vec128<double> vand(in Vec128<double> x, in Vec128<double> y)
+        public static Vector128<double> vand(Vector128<double> x, Vector128<double> y)
             => And(x, y);
 
         /// <summary>
@@ -43,7 +42,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<float> vand(in Vec256<float> x, in Vec256<float> y)
+        public static Vector256<float> vand(Vector256<float> x, Vector256<float> y)
             => And(x, y);
         
         /// <summary>
@@ -53,8 +52,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<double> vand(in Vec256<double> x, in Vec256<double> y)
+        public static Vector256<double> vand(Vector256<double> x, Vector256<double> y)
             => And(x, y);
     }
-
 }

@@ -17,16 +17,6 @@ namespace Z0
 
     }
 
-    public static partial class dinxx
-    {
-        
-    }
-
-    public static partial class ginxx
-    {        
-
-    }
-
     /// <summary>
     /// Namescope for custom intrinsic operators
     /// </summary>
@@ -43,14 +33,14 @@ namespace Z0
         [MethodImpl(Inline)]
         static FloatComparisonMode fpmode(FpCmpMode m)
             => (FloatComparisonMode)m;
-
-
     }
+
     public static partial class dfpx
     {
 
 
     }
+
     public static partial class ginx
     {        
         public static IEnumerable<MethodInfo> BinOps()
@@ -69,17 +59,9 @@ namespace Z0
     }
 
     /// <summary>
-    /// Opcodes for intrinsic scalar operations
+    /// Continer for internal helpers
     /// </summary>
-    public static partial class inxoc    
-    {
-
-    }
-
-    /// <summary>
-    /// Opcodes for custom intrinsic operations
-    /// </summary>
-    public static partial class inxcoc
+    internal static partial class aux
     {
 
     }

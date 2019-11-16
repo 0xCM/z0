@@ -10,13 +10,9 @@ namespace Z0
     using System.Runtime.Intrinsics.X86;
     using static System.Runtime.Intrinsics.X86.Sse41;
     using static System.Runtime.Intrinsics.X86.Avx;
-    using static System.Runtime.Intrinsics.X86.Sse;
-    using static System.Runtime.Intrinsics.X86.Sse2;
-    using static System.Runtime.Intrinsics.X86.Fma;        
     
     using static As;
     using static zfunc;    
-
     
     partial class dfp
     {
@@ -26,7 +22,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
-        public static Vec128<float> vround(in Vec128<float> x)
+        public static Vector128<float> vround(Vector128<float> x)
             => RoundToNearestInteger(x);
 
         /// <summary>
@@ -35,7 +31,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
-        public static Vec128<double> vround(in Vec128<double> x)
+        public static Vector128<double> vround(Vector128<double> x)
             => RoundToNearestInteger(x);
 
         /// <summary>
@@ -44,7 +40,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
-        public static Vec128<float> vroundz(in Vec128<float> x)
+        public static Vector128<float> vroundz(Vector128<float> x)
             => RoundToZero(x);
 
         /// <summary>
@@ -53,7 +49,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
-        public static Vec128<double> vroundz(in Vec128<double> x)
+        public static Vector128<double> vroundz(Vector128<double> x)
             => RoundToZero(x);
 
         /// <summary>
@@ -62,7 +58,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<float> vround(in Vec256<float> x)
+        public static Vector256<float> vround(Vector256<float> x)
             => RoundToNearestInteger(x);
 
         /// <summary>
@@ -71,7 +67,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<double> vround(in Vec256<double> x)
+        public static Vector256<double> vround(Vector256<double> x)
             => RoundToNearestInteger(x);
 
         /// <summary>
@@ -80,7 +76,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<float> vroundz(in Vec256<float> x)
+        public static Vector256<float> vroundz(Vector256<float> x)
             => RoundToZero(x);
 
         /// <summary>
@@ -89,7 +85,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<double> vroundz(in Vec256<double> x)
+        public static Vector256<double> vroundz(Vector256<double> x)
             => RoundToZero(x);
     }
 }

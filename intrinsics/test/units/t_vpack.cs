@@ -14,7 +14,7 @@ namespace Z0
 
     public class t_vpack : IntrinsicTest<t_vpack>
     {
-        public void pack32x1_example()
+        public void pack32x1_basecase()
         {            
             const uint pattern = 0xFFFFFFFF;
 
@@ -25,6 +25,33 @@ namespace Z0
             var output = SimdPack.pack(input);
             
             Claim.eq(ginx.vones<uint>(n128), output);            
+        }
+
+        public void pack8_basecase()
+        {
+            var src = NatSpan.parts(n8,1u,0u,1u,1u,1u,0u,0u,0u);            
+            var dst = AvxBitpack.pack(src,0);
+            Trace(src.FormatBits());
+            Trace(dst.FormatBits());
+        }
+
+        public void pack32()
+        {
+            var n = n32;
+
+            var bits = Random.BitSpan(n);
+            var src = NatSpan.alloc(n,0u);
+            for(var i=0; i<src.Length; i++)
+                src[i] = (uint)bits[i];
+
+            var dst = AvxBitpack.pack(src,0);
+            
+        
+            
+            Trace(bits.FormatBits());
+            Trace(src.FormatBits());
+            Trace(dst.FormatBits());
+            
         }
 
         static int pop(ReadOnlySpan<bit> src)

@@ -29,7 +29,8 @@ namespace Z0
             || typeof(T) == typeof(int) 
             || typeof(T) == typeof(long))
                 return vunpackhi_i(x,y);
-            else throw unsupported<T>();
+            else 
+                throw unsupported<T>();
         }
 
         [MethodImpl(Inline)]

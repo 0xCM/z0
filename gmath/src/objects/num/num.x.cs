@@ -20,7 +20,6 @@ namespace Z0
             where T : unmanaged
                 =>  ref Num.num(ref gmath.abs(ref Num.scalar(ref src)));
 
-
         [MethodImpl(Inline)]
         public static ref num<T> Square<T>(this ref num<T> src)
             where T : unmanaged
@@ -77,7 +76,7 @@ namespace Z0
         [MethodImpl(Inline)]   
         public static ReadOnlySpan<BinaryDigit> ToBinaryDigits<T>(this num<T> src)
             where T : unmanaged    
-                =>  BitString.FromScalar(src.Scalar()).ToDigits();
+                =>  BitString.from(src.Scalar()).ToDigits();
 
         /// <summary>
         /// Converts a number to a string of decimal digits
@@ -88,6 +87,5 @@ namespace Z0
         public static Span<DeciDigit> ToDecimalDigits<T>(this num<T> src)
             where T : unmanaged    
                 => DeciDigits.Parse(src.Abs().ToString());
-
     }
 }

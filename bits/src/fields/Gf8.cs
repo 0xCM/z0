@@ -55,7 +55,7 @@ namespace Z0
         public static string FormatTable<N,T>(BlockMatrix<N,T> src)
             where T : unmanaged
             where N: unmanaged, ITypeNat
-                => src.Format(render:x => BitString.FromScalar(x).Format());            
+                => src.Format(render:x => BitString.from(x).Format());            
 
     }
 

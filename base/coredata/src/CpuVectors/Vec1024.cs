@@ -27,8 +27,6 @@ namespace Z0
 
         public Vector256<T> v11;
 
-        public static readonly int Length = 4*Vec256<T>.Length;
-
         public static readonly int CellSize = Unsafe.SizeOf<T>();
 
         public static readonly int BitCount = 1024;

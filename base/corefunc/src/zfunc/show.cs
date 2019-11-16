@@ -18,7 +18,7 @@ partial class zfunc
     /// </summary>
     /// <param name="fx">The expression to evaluate</param>
     /// <typeparam name="T">The evaluation value type</typeparam>
-    public static void show<T>(Expression<Func<T>> fx)
+    public static void print<T>(Expression<Func<T>> fx)
     {
         var nv = fx.Evaluate();
         print(AppMsg.Define($"{nv}", SeverityLevel.HiliteCL));
@@ -29,13 +29,13 @@ partial class zfunc
     /// </summary>
     /// <param name="nv">The named vaue to emit</param>
     /// <typeparam name="T">The value type</typeparam>
-    public static void show<T>(NamedValue<T> nv)
+    public static void print<T>(NamedValue<T> nv)
     {
         print(AppMsg.Define($"{nv}", SeverityLevel.HiliteCL));
     }
 
-    public static void show<T>(string name, T value)
-        => show(NamedValue.Define(name,value));
+    public static void print<T>(string name, T value)
+        => print(NamedValue.Define(name,value));
 
 
 }

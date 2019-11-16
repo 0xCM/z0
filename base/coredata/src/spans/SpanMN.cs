@@ -35,37 +35,37 @@ namespace Z0
         /// <summary>
         /// The number of rows in the structure
         /// </summary>
-        public static readonly int RowCount = nati<M>();
+        public static int RowCount => nati<M>();
 
         /// <summary>
         /// The number of columns in the structure
         /// </summary>
-        public static readonly int ColCount = nati<N>();
+        public static int ColCount => nati<N>();
 
         /// <summary>
         /// The number of cells in each row
         /// </summary>
-        public static readonly int RowLenth = ColCount;
+        public static int RowLenth => ColCount;
 
         /// <summary>
         /// The number of cells in each column
         /// </summary>
-        public static readonly int ColLength = RowCount;
+        public static int ColLength => RowCount;
 
         /// <summary>
         /// The total number of allocated elements
         /// </summary>
-        public static readonly int CellCount = RowLenth * ColLength;
+        public static int CellCount => RowLenth * ColLength;
 
         /// <summary>
         /// The Row dimension representative
         /// </summary>
-        public static M RowRep = default;
+        public static M RowRep => default;
 
         /// <summary>
         /// The Column dimension representative
         /// </summary>
-        public static N ColRep = default;
+        public static N ColRep => default;
 
         public static implicit operator Span<M,N,T>(T[] src)
             => new Span<M, N, T>(src);
@@ -85,6 +85,18 @@ namespace Z0
         public static implicit operator ReadOnlySpan<M,N,T> (Span<M,N,T> src)
             => new ReadOnlySpan<M, N, T>(src);
 
+
+        /// <summary>
+        /// Verifies correct source span length prior to backing store assignment
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <typeparam name="U">The source element type</typeparam>
+        [MethodImpl(Inline)]
+        public static Span<M,N,T> CheckedTransfer(Span<T> src)
+        {
+            require(src.Length >= CellCount, $"length(src) = {src.Length} < {CellCount} = SpanLength");               
+            return new Span<M,N,T>(src);
+        }
 
         [MethodImpl(Inline)]
         public Span(ref T src)

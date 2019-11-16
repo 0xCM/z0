@@ -15,8 +15,20 @@ namespace Z0
     using static zfunc;
 
     partial class dinx    
-    {        
-        
+    {                
+        [MethodImpl(Inline)]
+        public static Vector128<long> vmovescalar(Vector128<long> src)
+            => MoveScalar(src);
+
+        /// <summary>
+        /// __m128i _mm_move_epi64 (__m128i a) MOVQ xmm, xmm
+        /// Extracts the lower 64 bits from the source vector to create a scalar vector
+        /// </summary>
+        /// <param name="x">The source vector</param>
+        [MethodImpl(Inline)]
+        public static Vector128<ulong> vmovescalar(Vector128<ulong> x)
+            => MoveScalar(x);
+
         [MethodImpl(Inline)]
         public static unsafe Vector128<int> vscalar(int src)
             => LoadScalarVector128(&src);
@@ -35,12 +47,10 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static unsafe Vector128<float> vscalar(float src)
-             => LoadScalarVector128(&src);
+            => LoadScalarVector128(&src);
 
         [MethodImpl(Inline)]
         public static unsafe Vector128<double> vscalar(double src)
-             => LoadScalarVector128(&src);
-
+            => LoadScalarVector128(&src);
     }
-
 }

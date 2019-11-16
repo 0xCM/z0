@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2019
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Test
+namespace Z0
 {
     using System;
     using System.Linq;
@@ -10,14 +10,13 @@ namespace Z0.Test
 
     using static zfunc;
 
-
     public class t_bvperm : BitVectorTest<t_bvperm>
     {        
         public void bv_perm8()
         {        
             var perm = Perm.Define<N8>((2,3), (6,7));
             var bs1 = ((byte)0b10001101).ToBitString();
-            var bs2 = BitString.Parse("01001101");
+            var bs2 = BitString.parse("01001101");
             var bs3 = bs1.Permute(perm);
             Claim.eq(bs2, bs3);            
 
@@ -27,7 +26,7 @@ namespace Z0.Test
         {        
             var p2 = Perm.Define<N16>((1,10), (2,11), (3, 8));
             var bsx2 = ((ushort)0b1000110111000100).ToBitString();
-            var bsy2 =  BitString.FromBitSeq(bsx2.BitSeq.Permute(p2));
+            var bsy2 =  BitString.fromseq(bsx2.BitSeq.Permute(p2));
             var bsz2 = bsx2.Permute(p2);            
             Claim.eq(bsy2, bsz2);
 
@@ -70,9 +69,6 @@ namespace Z0.Test
                 for(var i=0; i<v1.Length; i++)
                     Claim.eq(v1[p1[i]], v2[i]);
             }
-
         }
-
     }
-
 }
