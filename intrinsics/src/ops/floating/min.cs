@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;    
+    using System.Runtime.Intrinsics;
     using static System.Runtime.Intrinsics.X86.Avx;
     using static System.Runtime.Intrinsics.X86.Sse;
     using static System.Runtime.Intrinsics.X86.Sse2;
@@ -21,7 +22,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vec128<float> vmin(in Vec128<float> x, in Vec128<float> y)
+        public static Vector128<float> vmin(Vector128<float> x, Vector128<float> y)
             => Min(x, y);
 
         /// <summary>
@@ -30,7 +31,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vec128<double> vmin(in Vec128<double> x, in Vec128<double> y)
+        public static Vector128<double> vmin(Vector128<double> x, Vector128<double> y)
             => Min(x, y);
 
         /// <summary>
@@ -39,7 +40,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<float> vmin(in Vec256<float> x, in Vec256<float> y)
+        public static Vector256<float> vmin(Vector256<float> x, Vector256<float> y)
             => Min(x, y);
 
         /// <summary>
@@ -48,7 +49,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<double> vmin(in Vec256<double> x, in Vec256<double> y)
+        public static Vector256<double> vmin(Vector256<double> x, Vector256<double> y)
             => Min(x, y);
     }
 }

@@ -20,7 +20,9 @@ namespace Z0
         public static Vector128<T> vbsll<T>(Vector128<T> lhs, byte count)
             where T : unmanaged
         {
-            if(typeof(T) == typeof(ushort))
+            if(typeof(T) == typeof(byte))
+                return generic<T>(dinx.vbsll(uint8(lhs), count));
+            else if(typeof(T) == typeof(ushort))
                 return generic<T>(dinx.vbsll(uint16(lhs), count));
             else if(typeof(T) == typeof(uint)) 
                 return generic<T>(dinx.vbsll(uint32(lhs), count));
@@ -34,7 +36,9 @@ namespace Z0
         public static Vector256<T> vbsll<T>(Vector256<T> lhs, byte count)
             where T : unmanaged
         {
-            if(typeof(T) == typeof(ushort))
+            if(typeof(T) == typeof(byte))
+                return generic<T>(dinx.vbsll(uint8(lhs), count));
+            else if(typeof(T) == typeof(ushort))
                 return generic<T>(dinx.vbsll(uint16(lhs), count));
             else if(typeof(T) == typeof(uint)) 
                 return generic<T>(dinx.vbsll(uint32(lhs), count));

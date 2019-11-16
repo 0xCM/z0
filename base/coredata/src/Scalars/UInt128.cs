@@ -23,22 +23,22 @@ namespace Z0
         /// <summary>
         /// The 128-bit zero value
         /// </summary>
-        public static readonly UInt128 Zero = new UInt128(0,0);
+        public static UInt128 Zero => From(0,0);
 
         /// <summary>
         /// The 128-bit one value
         /// </summary>
-        public static readonly UInt128 One = new UInt128(1,0);
+        public static UInt128 One => From(1,0);
 
         /// <summary>
         /// The minimum value the type can represent
         /// </summary>
-        public static readonly UInt128 MinVal = Zero;
+        public static UInt128 MinVal => Zero;
 
         /// <summary>
         /// The maximum value the type can represent
         /// </summary>
-        public static readonly UInt128 MaxVal = new UInt128(ulong.MaxValue, ulong.MinValue);
+        public static UInt128 MaxVal => From(ulong.MaxValue, ulong.MinValue);
 
         /// <summary>
         /// Creates a new 128-bit integer with specifed lo/hi part values
@@ -71,15 +71,15 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static UInt128 operator &(UInt128 a, UInt128 b)
-            => and(a,b);
+             => And(a, b);
 
         [MethodImpl(Inline)]
         public static UInt128 operator |(UInt128 a, UInt128 b)
-            => or(a,b);
+             => Or(a, b);
 
         [MethodImpl(Inline)]
         public static UInt128 operator ^(UInt128 a, UInt128 b)
-            => xor(a,b);
+             => Xor(a, b);
 
         [MethodImpl(Inline)]
         public static UInt128 operator ~(UInt128 src)
@@ -88,7 +88,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator UInt128(ulong src)
             => new UInt128(src, 0ul);
-
 
         [MethodImpl(Inline)]
         public static UInt128 operator ++(in UInt128 src)
@@ -109,7 +108,7 @@ namespace Z0
             => lhs.Equals(rhs);
 
         [MethodImpl(Inline)]
-        public static bool operator !=(in UInt128 lhs, in UInt128 rhs)
+        public static bool operator !=(UInt128 lhs, UInt128 rhs)
             => !lhs.Equals(rhs);
 
         [MethodImpl(Inline)]
@@ -145,7 +144,6 @@ namespace Z0
                 lo--;
         }
 
-
         [MethodImpl(Inline)]
         public bool Equals(UInt128 lhs)
             => lo == lhs.lo && hi == lhs.hi;
@@ -163,52 +161,6 @@ namespace Z0
                 str = "0x" + hi.ToString("X") + " "; 
             str += ("0x" +  lo.ToString("X"));            
             return str;
-        }
-        
- 
-        [MethodImpl(Inline)]
-        static UInt128 and(in UInt128 lhs, in UInt128 rhs)
-            => And(lhs, rhs);
-
-        [MethodImpl(Inline)]
-        static ref UInt128 and(in UInt128 lhs, in UInt128 rhs, out UInt128 dst)
-        {
-            dst = And(lhs, rhs);
-            return ref dst;            
-        }
-
-        [MethodImpl(Inline)]
-        static UInt128 or(in UInt128 lhs, in UInt128 rhs)
-            => Or(lhs, rhs);
-
-        [MethodImpl(Inline)]
-        static ref UInt128 or(in UInt128 lhs, in UInt128 rhs, out UInt128 dst)
-        {
-            dst = Or(lhs, rhs);
-            return ref dst;            
-        }
-
-        [MethodImpl(Inline)]
-        static UInt128 xor(in UInt128 lhs, in UInt128 rhs)
-            => Xor(lhs, rhs);
-
-        [MethodImpl(Inline)]
-        static ref UInt128 xor(in UInt128 lhs, in UInt128 rhs, out UInt128 dst)
-        {
-            dst = Xor(lhs, rhs);
-            return ref dst;            
-        }
-
-        /// <summary>
-        /// __m128i _mm_bslli_si128 (__m128i a, int imm8) PSLLDQ xmm, imm8    
-        /// Shifts the source value leftwards with byte-level resolution
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <param name="bytes">The number of bytes to shift</param>
-        [MethodImpl(Inline)]
-        static UInt128 bslli(UInt128 src, byte bytes)        
-            => ShiftLeftLogical128BitLane(src, bytes);                            
-
+        }        
     }    
-
 }

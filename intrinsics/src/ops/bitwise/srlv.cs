@@ -71,7 +71,6 @@ namespace Z0
         public static Vector256<int> vsrlv(Vector256<int> src, Vector256<uint> offset)
             => ShiftRightLogicalVariable(src, offset);
 
-
         /// <summary>
         /// __m256i _mm256_srlv_epi32 (__m256i a, __m256i count) VPSRLVD ymm, ymm, ymm/m256
         /// Applies a rightward logical shift to each source vector component as 

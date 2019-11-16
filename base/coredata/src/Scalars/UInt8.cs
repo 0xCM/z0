@@ -110,7 +110,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static UInt8 operator >>(UInt8 a, int offset)
-            => Wrap((a.data >> offset));
+            => Wrap(a.data >> offset);
 
         [MethodImpl(Inline)]
         public static UInt8 rotl(UInt8 a, int offset)        

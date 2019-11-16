@@ -23,7 +23,7 @@ namespace Z0
         /// <param name="y">The second operand</param>
         /// <param name="z">The third operand</param>
         [MethodImpl(Inline)]
-        public static Vec128<float> fmadd(in Vec128<float> x, in Vec128<float> y, in Vec128<float> z)
+        public static Vector128<float> fmadd(Vector128<float> x, Vector128<float> y, Vector128<float> z)
             => MultiplyAdd(x, y, z);
                     
         /// <summary>
@@ -34,7 +34,7 @@ namespace Z0
         /// <param name="y">The second operand</param>
         /// <param name="z">The third operand</param>
         [MethodImpl(Inline)]
-        public static Vec128<double> fmadd(in Vec128<double> x, in Vec128<double> y, in Vec128<double> z)
+        public static Vector128<double> fmadd(Vector128<double> x, Vector128<double> y, Vector128<double> z)
             => MultiplyAdd(x, y, z);
 
         /// <summary>
@@ -44,7 +44,7 @@ namespace Z0
         /// <param name="y">The second operand</param>
         /// <param name="z">The third operand</param>
         [MethodImpl(Inline)]
-        public static Scalar128<float> fmadd(in Scalar128<float> x, in Scalar128<float> y, in Scalar128<float> z)
+        public static Scalar128<float> fmadd(Scalar128<float> x, Scalar128<float> y, Scalar128<float> z)
             => MultiplyAddScalar(x.mm, y.mm, z.mm);
 
         /// <summary>
@@ -54,7 +54,7 @@ namespace Z0
         /// <param name="y">The second operand</param>
         /// <param name="z">The third operand</param>
         [MethodImpl(Inline)]
-        public static Scalar128<double> fmadd(in Scalar128<double> x, in Scalar128<double> y, in Scalar128<double> z)
+        public static Scalar128<double> fmadd(Scalar128<double> x, Scalar128<double> y, Scalar128<double> z)
             => MultiplyAddScalar(x.mm, y.mm, z.mm);
 
         /// <summary>
@@ -65,7 +65,7 @@ namespace Z0
         /// <param name="y">The second operand</param>
         /// <param name="z">The third operand</param>
         [MethodImpl(Inline)]
-        public static Vec256<float> fmadd(in Vec256<float> x, in Vec256<float> y, in Vec256<float> z)
+        public static Vector256<float> fmadd(Vector256<float> x, Vector256<float> y, Vector256<float> z)
             => MultiplyAdd(x,y,z);
 
         /// <summary>
@@ -76,7 +76,7 @@ namespace Z0
         /// <param name="y">The second operand</param>
         /// <param name="z">The third operand</param>
         [MethodImpl(Inline)]
-        public static Vec256<double> fmadd(in Vec256<double> x, in Vec256<double> y, in Vec256<double> z)
+        public static Vector256<double> fmadd(Vector256<double> x, Vector256<double> y, Vector256<double> z)
             => MultiplyAdd(x,y,z);
     }
 

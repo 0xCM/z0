@@ -11,7 +11,7 @@ namespace Z0
     using prim = System.UInt16;
     using analog = uint16_t;
 
-    public struct uint16_t
+    public struct uint16_t : IEquatable<analog>
     {
         prim data;
 
@@ -170,7 +170,7 @@ namespace Z0
             =>  ++x.data;
         
         [MethodImpl(Inline)]
-        public bool Eq(analog rhs)
+        public bool Equals(analog rhs)
             => data == rhs.data;
         
         public override int GetHashCode()

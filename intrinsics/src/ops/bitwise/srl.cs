@@ -19,15 +19,71 @@ namespace Z0
     partial class dinx
     {         
         [MethodImpl(Inline)]
+        public static Vector256<sbyte> vsrl(Vector256<sbyte> src, Vector128<sbyte> offset)
+            => vsrl(src, (byte)offset.Item(0));
+
+        [MethodImpl(Inline)]
+        public static Vector256<byte> vsrl(Vector256<byte> src, Vector128<byte> offset)
+            => vsrl(src, offset.Item(0));
+
+        /// <summary>
+        /// __m256i _mm256_srl_epi16 (__m256i a, __m128i count)VPSRLW ymm, ymm, xmm/m128
+        /// </summary>
+        /// <param name="src"></param>
+        /// <param name="offset"></param>
+        /// <returns></returns>
+        [MethodImpl(Inline)]
         public static Vector256<short> vsrl(Vector256<short> src, Vector128<short> offset)
             => ShiftRightLogical(src, offset);
 
+        /// <summary>
+        /// __m256i _mm256_srl_epi16 (__m256i a, __m128i count)VPSRLW ymm, ymm, xmm/m128
+        /// </summary>
+        /// <param name="src"></param>
+        /// <param name="offset"></param>
+        /// <returns></returns>
+        [MethodImpl(Inline)]
+        public static Vector256<ushort> vsrl(Vector256<ushort> src, Vector128<ushort> offset)
+            => ShiftRightLogical(src, offset);
+
+        /// <summary>
+        /// __m256i _mm256_srl_epi32 (__m256i a, __m128i count)VPSRLD ymm, ymm, xmm/m128
+        /// </summary>
+        /// <param name="src"></param>
+        /// <param name="offset"></param>
+        /// <returns></returns>
         [MethodImpl(Inline)]
         public static Vector256<int> vsrl(Vector256<int> src, Vector128<int> offset)
             => ShiftRightLogical(src, offset);
 
+        /// <summary>
+        /// __m256i _mm256_srl_epi32 (__m256i a, __m128i count)VPSRLD ymm, ymm, xmm/m128
+        /// </summary>
+        /// <param name="src"></param>
+        /// <param name="offset"></param>
+        /// <returns></returns>
+        [MethodImpl(Inline)]
+        public static Vector256<uint> vsrl(Vector256<uint> src, Vector128<uint> offset)
+            => ShiftRightLogical(src, offset);
+
+        /// <summary>
+        /// __m256i _mm256_srl_epi64 (__m256i a, __m128i count)VPSRLQ ymm, ymm, xmm/m128
+        /// </summary>
+        /// <param name="src"></param>
+        /// <param name="offset"></param>
+        /// <returns></returns>
         [MethodImpl(Inline)]
         public static Vector256<long> vsrl(Vector256<long> src, Vector128<long> offset)
+            => ShiftRightLogical(src, offset);
+
+        /// <summary>
+        /// __m256i _mm256_srl_epi64 (__m256i a, __m128i count)VPSRLQ ymm, ymm, xmm/m128
+        /// </summary>
+        /// <param name="src"></param>
+        /// <param name="offset"></param>
+        /// <returns></returns>
+        [MethodImpl(Inline)]
+        public static Vector256<ulong> vsrl(Vector256<ulong> src, Vector128<ulong> offset)
             => ShiftRightLogical(src, offset);
 
         /// <summary>
@@ -109,10 +165,20 @@ namespace Z0
             => ShiftRightLogical(src, offset);
 
         /// <summary>
+        /// Shifts each componet in the source vector leftwards by a specified number of bits
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="offset">The number of bits to shift each component</param>
+        [MethodImpl(Inline)]
+        public static Vector256<sbyte> vsrl(Vector256<sbyte> src, byte offset)
+            => vsrl(src.AsByte(), offset).AsSByte();
+
+        /// <summary>
         /// Shifts each component of the source vector rightwards by a common number of bits
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="offset">The number of bits to shift</param>
+        [MethodImpl(Inline)]
         public static Vector256<byte> vsrl(Vector256<byte> src, byte offset)
             => dinxc.vsrl(src,offset);
 

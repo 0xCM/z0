@@ -14,184 +14,62 @@ namespace Z0
 
     public class t_vsll : IntrinsicTest<t_vsll>
     {
-        public void shuffleId()
-        {
-            var id = ShuffleIdentityMask();
-            for(var i=0; i<DefaltCycleCount; i++)
-            {
-                var x = Random.CpuVector<byte>(n256);
-                var y = dinx.vshuf16x8(x, id);
-                Claim.eq(x,y);
-            }
-        }
-
         public void vsll_128x8u()
-        {
-            vsll_128_check<byte>();
-        }
+            => vsll_check<byte>(n128);
 
         public void vsll_128x8u_bench()
-        {
-            vsll_128_bench<byte>();
-        }
+            =>vsll_bench<byte>(n128);
 
         public void vsll_128x16u()
-        {
-            vsll_128_check<ushort>();
-        }
+            => vsll_check<ushort>(n128);
 
         public void vsll_128x16u_bench()
-        {
-            vsll_128_bench<ushort>();
-        }
+            => vsll_bench<ushort>(n128);
 
         public void vsll_128x32u()
-        {
-            vsll_128_check<uint>();
-        }
+            => vsll_check<uint>(n128);
 
         public void vsll_128x32u_bench()
-        {
-            vsll_128_bench<uint>();
-        }
+            => vsll_bench<uint>(n128);
 
         public void vsll_128x64u()
-        {
-            vsll_128_check<ulong>();
-        }
+            => vsll_check<ulong>(n128);
 
         public void vsll_128x64u_bench()
-        {
-            vsll_128_bench<ulong>();
-        }
+            => vsll_bench<ulong>(n128);
 
         public void vsll_256x8u()
-        {
-            vsll_256_check<byte>();
-        }
+            => vsll_check<byte>(n256);
 
         public void vsll_256x8u_bench()
-        {
-            vsll_256_bench<byte>();
-        }
+            => vsll_bench<byte>(n256);
 
         public void vsll_256x16u()
-        {
-            vsll_256_check<ushort>();
-        }        
+            => vsll_check<ushort>(n256);
 
         public void vsll_256x16u_bench()
-        {
-            vsll_256_bench<ushort>();
-        }        
+            => vsll_bench<ushort>(n256);
 
         public void vsll_256x32u()
-        {
-            vsll_256_check<uint>();
-        }        
+            => vsll_check<uint>(n256);
 
         public void vsll_256x32u_bench()
-        {
-            vsll_256_bench<uint>();
-        }        
+            => vsll_bench<uint>(n256);
 
         public void vsll_256x64u()
-        {
-            vsll_256_check<ulong>();
-        }        
+            => vsll_check<ulong>(n256);
 
         public void vsll_256x64u_bench()
-        {
-            vsll_256_bench<ulong>();
-        }        
+            => vsll_bench<ulong>(n256);
 
-        public void vsrl_128x8u()
-        {
-            vsrl_128_check<byte>();
-        }
 
-        public void vsrl_128x8u_bench()
-        {
-            vsrl_128_bench<byte>();
-        }
-
-        public void vsrl_128x16u()
-        {
-            vsrl_128_check<ushort>();
-        }
-
-        public void vsrl_128x16u_bench()
-        {
-            vsrl_128_bench<ushort>();
-        }
-
-        public void vsrl_128x32u()
-        {
-            vsrl_128_check<uint>();
-        }
-
-        public void vsrl_128x32u_bench()
-        {
-            vsrl_128_bench<uint>();
-        }
-
-        public void vsrl_128x64u()
-        {
-            vsrl_128_check<ulong>();
-        }
-
-        public void vsrl_128x64u_bench()
-        {
-            vsrl_128_bench<ulong>();
-        }
-
-        public void vsrl_256x8u()
-        {
-            vsrl_256_check<byte>();
-        }
-
-        public void vsrl_256x8u_bench()
-        {
-            vsrl_256_bench<byte>();
-        }
-
-        public void vsrl_256x16u()
-        {
-            vsrl_256_check<ushort>();
-        }
-
-        public void vsrl_256x16u_bench()
-        {
-            vsrl_256_bench<ushort>();
-        }
-
-        public void vsrl_256x32u()
-        {
-            vsrl_256_check<uint>();
-        }
-
-        public void vsrl_256x32u_bench()
-        {
-            vsrl_256_bench<uint>();
-        }
-
-        public void vsrl_256x64u()
-        {
-            vsrl_256_check<ulong>();
-        }
-
-        public void vsrl_256x64u_bench()
-        {
-            vsrl_256_bench<ulong>();
-        }
-
-        void vsll_128_check<T>()
+        void vsll_check<T>(N128 n)
             where T : unmanaged
         {
 
             for(var i=0; i< SampleSize; i++)
             {
-                var src = Random.CpuVector<T>(n128);
+                var src = Random.CpuVector<T>(n);
                 var offset = Random.Next<byte>(2,7);
                 var dst = ginx.vsll(src,offset);
                 for(var j=0; j<dst.Length(); j++)
@@ -204,101 +82,62 @@ namespace Z0
 
         }
 
-        void vsll_256_check<T>()
+        void vsll_check<T>(N256 n)
             where T : unmanaged
         {
 
             for(var i=0; i< SampleSize; i++)
             {
-                var src = Random.CpuVector<T>(n256);
+                var src = Random.CpuVector<T>(n);
                 var offset = Random.Next<byte>(2,7);
-                var dst = ginx.vsll(src,offset);
-                for(var j=0; j<dst.Length(); j++)
+                var vOffset = ginx.vscalar(convert<byte,T>(offset));
+
+                var a = ginx.vsll(src, offset);
+                var b = ginx.vsll(src, vOffset);
+                Claim.eq(a,b);
+
+                for(var j=0; j<a.Length(); j++)
                 {
-                    var x = ginx.vxscalar(ginx.vlo(dst), (byte)j);
+                    var x = ginx.vxscalar(ginx.vlo(a), (byte)j);
                     var y = ginx.vxscalar(ginx.vlo(src), (byte)j);
                     Claim.eq(x, gmath.sll(y,offset));
 
-                    x = ginx.vxscalar(ginx.vhi(dst), (byte)j);
+                    x = ginx.vxscalar(ginx.vhi(a), (byte)j);
                     y = ginx.vxscalar(ginx.vhi(src), (byte)j);
                     Claim.eq(x, gmath.sll(y,offset));
-
                 }
             }
         }
 
-        void vsrl_128_check<T>()
-            where T : unmanaged
-        {
-
-            for(var i=0; i< SampleSize; i++)
-            {
-                var src = Random.CpuVector<T>(n128);
-                var offset = Random.Next<byte>(2,7);
-                var dst = ginx.vsrl(src,offset);
-                for(var j=0; j<dst.Length(); j++)
-                {
-                    var x = ginx.vxscalar(dst, (byte)j);
-                    var y = ginx.vxscalar(src, (byte)j);
-                    Claim.eq(x, gmath.srl(y,offset));
-                }
-            }
-        }
-
-        void vsrl_256_check<T>()
-            where T : unmanaged
-        {
-
-            for(var i=0; i< SampleSize; i++)
-            {
-                var src = Random.CpuVector<T>(n256);
-                var offset = Random.Next<byte>(2,7);
-                var dst = ginx.vsrl(src,offset);
-                for(var j=0; j<dst.Length(); j++)
-                {
-                    var x = ginx.vxscalar(ginx.vlo(dst), (byte)j);
-                    var y = ginx.vxscalar(ginx.vlo(src), (byte)j);
-                    Claim.eq(x, gmath.srl(y,offset));
-
-                    x = ginx.vxscalar(ginx.vhi(dst), (byte)j);
-                    y = ginx.vxscalar(ginx.vhi(src), (byte)j);
-                    Claim.eq(x, gmath.srl(y,offset));
-
-                }
-            }
-
-        }
-
-        void vsll_128_bench<T>()
+        void vsll_bench<T>(N128 n)
             where T : unmanaged
         {
             var opcount = RoundCount * CycleCount;
-            var last = default(Vector128<T>);
+            var last = ginx.vzero<T>(n);
             var sw = stopwatch(false);
             var bitlen = bitsize<T>();
-            var opname = $"sll_128x{bitlen}u";
+            var opname = $"sll_{n}x{bitlen}u";
 
             for(var i=0; i<opcount; i++)
             {
                 var offset = Random.Next<byte>(2, (byte)(bitlen - 1));
-                var x = Random.CpuVector<T>(n128);
+                var x = Random.CpuVector<T>(n);
                 sw.Start();
                 last = ginx.vsll(x,offset);
                 sw.Stop();
             
             }
             Collect((opcount, sw, opname));
-
         }
 
-        void vsll_256_bench<T>()
+        void vsll_bench<T>(N256 n)
             where T : unmanaged
         {
             var opcount = RoundCount * CycleCount;
-            var last = Vec256<T>.Zero;
+            var last = ginx.vzero<T>(n);
             var sw = stopwatch(false);
             var bitlen = bitsize<T>();
-            var opname = $"sll_256x{bitlen}u";
+            var opname = $"sll_{n}x{bitlen}u";
 
             for(var i=0; i<opcount; i++)
             {
@@ -312,70 +151,6 @@ namespace Z0
             Collect((opcount, sw, opname));
         }
 
-        void vsrl_128_bench<T>()
-            where T : unmanaged
-        {
-            var opcount = RoundCount * CycleCount;
-            var last = ginx.vzero<T>(n128);
-            var sw = stopwatch(false);
-            var bitlen = bitsize<T>();
-            var opname = $"srl_128x{bitlen}u";
-
-            for(var i=0; i<opcount; i++)
-            {
-                var offset = Random.Next<byte>(2, (byte)(bitlen - 1));
-                var x = Random.CpuVector<T>(n128);
-                sw.Start();
-                last = ginx.vsrl(x,offset);
-                sw.Stop();
-            
-            }
-            Collect((opcount, sw, opname));
-
-        }
-
-        void vsrl_256_bench<T>()
-            where T : unmanaged
-        {
-
-            var opcount = RoundCount * CycleCount;
-            var last = Vec256<T>.Zero;
-            var sw = stopwatch(false);
-            var bitlen = bitsize<T>();
-            var opname = $"srl_256x{bitlen}u";
-
-            for(var i=0; i<opcount; i++)
-            {
-                var offset = Random.Next<byte>(2, (byte)(bitlen - 1));
-                var x = Random.CpuVector<T>(n256);
-                sw.Start();
-                last = ginx.vsrl(x,offset);
-                sw.Stop();
-            
-            }
-            Collect((opcount, sw, opname));
-
-        }
-
-
-        void sll_8u_direct_bench()
-        {
-            var opname = $"sll_8u_direct";
-            var sw = stopwatch(false);
-            byte last = 0;
-            var opcount = CycleCount*RoundCount;
-            for(var i=0; i< opcount; i++)
-            {
-                var x = Random.Next<byte>();
-                var offset = Random.Next<byte>((2,6));
-                sw.Start();
-                last = (byte)(x << offset);
-                sw.Stop();
-            }
-
-            Collect((opcount, sw, opname));            
-        }
-        
 
         static Vector256<byte> ShuffleIdentityMask()
         {
@@ -392,57 +167,6 @@ namespace Z0
 
             return mask.LoadVector();
         }
-
-
-        // Truncates alternating source vector components
-        static Vector256<T> ShuffleTruncateMask<T>()
-            where T : unmanaged
-
-        {
-            var mask = Span256.allocu<T>(1);
-            var chop = PrimalInfo.Get<T>().MaxVal;
-            
-            //For the first 128-bit lane
-            var half = mask.Length/2;
-            for(byte i=0; i< half; i++)
-            {
-                if(i % 2 != 0)
-                    mask[i] = chop;
-                else
-                    mask[i] = convert<byte,T>(i);
-            }
-
-            //For the second 128-bit lane
-            for(byte i=0; i< half; i++)
-            {
-                if(i % 2 != 0)
-                    mask[i + half] = chop;
-                else
-                    mask[i + half] = convert<byte,T>(i);
-            }
-
-            return mask.LoadVector();
-        }
-
-        static Vector256<T> BlendAltMask<T>()
-            where T : unmanaged
-        {
-            Span256<T> mask = Span256.allocu<T>(1);
-            var no = PrimalInfo.Get<T>().MaxVal;
-            var yes = PrimalInfo.Get<T>().Zero;
-            for(byte i=0; i< mask.Length; i++)
-            {
-                                
-                if(i % 2 == 0)
-                    mask[i] = yes;
-                else
-                    mask[i] = no;
-            }
-            return mask.LoadVector();
-
-        }
-
-
 
         static BitVector32[]  GfPoly =
         {
@@ -587,5 +311,17 @@ namespace Z0
 
             return tmp6;            
         }
+
+        public void shuffleId()
+        {
+            var id = ShuffleIdentityMask();
+            for(var i=0; i<DefaltCycleCount; i++)
+            {
+                var x = Random.CpuVector<byte>(n256);
+                var y = dinx.vshuf16x8(x, id);
+                Claim.eq(x,y);
+            }
+        }
+
     }
 }

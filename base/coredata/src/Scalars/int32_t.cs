@@ -11,7 +11,7 @@ namespace Z0
     using prim = System.Int32;
     using analog = int32_t;
 
-    public struct int32_t 
+    public struct int32_t : IEquatable<analog>
     {
         prim data;
 
@@ -186,18 +186,17 @@ namespace Z0
             => @bool(lhs.data != rhs.data);
 
         [MethodImpl(Inline)]
-        public string Format()
-            => data.ToString();
-
-        [MethodImpl(Inline)]
-        public bool Eq(analog rhs)
+        public bool Equals(analog rhs)
             => data == rhs.data;
 
         public override int GetHashCode()
-            => throw new NotSupportedException();
+            => data.GetHashCode();
 
-        public override bool Equals(object rhs)
-            => throw new NotSupportedException();
+        public override bool Equals(object rhs)        
+            => rhs is analog a && Equals(a);
+        
+        public override string ToString()
+            => data.ToString();
         
     }
 }

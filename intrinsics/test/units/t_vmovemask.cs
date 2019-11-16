@@ -25,7 +25,25 @@ namespace Z0
             Claim.eq(e,z);
             
         }
-        
+
+        public void movemask_256x64u_examples()
+        {
+            var x = Random.CpuVector<uint>(n256);
+            var y = x;
+            Span<uint> m = new uint[8];
+            for(var i=0; i<8; i++)
+            {
+                m[i] = ginx.vmovemask(x);
+                x = ginx.vsll(x,1);
+            }
+
+            Trace(v8u(y).FormatBits());
+            Trace(m.FormatBits());
+
+            
+
+        }
+
         public void movemask_256x8u()
         {
             var bits = n256;

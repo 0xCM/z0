@@ -16,6 +16,11 @@ namespace Z0
 
     partial class dinx    
     {                
+        /// <summary>
+        /// __m128i _mm_move_epi64 (__m128i a) MOVQ xmm, xmm
+        /// Extracts the lower 64 bits from the source vector to create a scalar vector
+        /// </summary>
+        /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
         public static Vector128<long> vmovescalar(Vector128<long> src)
             => MoveScalar(src);
@@ -28,6 +33,22 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<ulong> vmovescalar(Vector128<ulong> x)
             => MoveScalar(x);
+
+        [MethodImpl(Inline)]
+        public static Vector128<sbyte> vscalar(sbyte src)
+            => v8i(vscalar((int)src));
+
+        [MethodImpl(Inline)]
+        public static Vector128<byte> vscalar(byte src)
+            => v8u(vscalar((uint)src));
+
+        [MethodImpl(Inline)]
+        public static Vector128<short> vscalar(short src)
+            => v16i(vscalar((int)src));
+
+        [MethodImpl(Inline)]
+        public static Vector128<ushort> vscalar(ushort src)
+            => v16u(vscalar((uint)src));
 
         [MethodImpl(Inline)]
         public static unsafe Vector128<int> vscalar(int src)

@@ -14,19 +14,18 @@ namespace Z0
     using prim = System.Byte;
     using analog = uint8_t;
 
-    public struct uint8_t
+    public struct uint8_t : IEquatable<analog>
     {
         prim data;
 
-        public static readonly analog zero = 0;
+        public static analog zero => 0;
 
-        public static readonly analog one = 1;
+        public static analog one => 1;
 
 
         [MethodImpl(Inline)]    
         public uint8_t(prim x)
             => data =x;
-
 
         [MethodImpl(Inline)]    
         public static analog @bool(bool x)
@@ -106,23 +105,23 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static analog operator + (analog lhs, analog rhs) 
-            => (analog)(lhs.data + rhs.data);
+            => wrap(lhs.data + rhs.data);
 
         [MethodImpl(Inline)]
         public static analog operator - (analog lhs, analog rhs) 
-            => (analog)(lhs.data - rhs.data);
+            => wrap(lhs.data - rhs.data);
 
         [MethodImpl(Inline)]
         public static analog operator * (analog lhs, analog rhs) 
-            => (analog)(lhs.data * rhs.data);
+            => wrap(lhs.data * rhs.data);
 
         [MethodImpl(Inline)]
         public static analog operator / (analog lhs, analog rhs) 
-            => (analog)(lhs.data / rhs.data);
+            => wrap(lhs.data / rhs.data);
 
         [MethodImpl(Inline)]
         public static analog operator % (analog lhs, analog rhs)
-            => (analog)(lhs.data % rhs.data);
+            => wrap(lhs.data % rhs.data);
 
         [MethodImpl(Inline)]
         public static analog operator < (analog lhs, analog rhs) 
@@ -146,28 +145,27 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static analog operator | (analog lhs, analog rhs) 
-            => (analog)(lhs.data | rhs.data);
+            => wrap(lhs.data | rhs.data);
 
         [MethodImpl(Inline)]
         public static analog operator ^ (analog lhs, analog rhs) 
-            => (analog)(lhs.data ^ rhs.data);
+            => wrap(lhs.data ^ rhs.data);
 
         [MethodImpl(Inline)]
         public static analog operator >> (analog lhs, int rhs) 
-            => (analog)(lhs.data >> rhs);
-
-        
+            => wrap(lhs.data >> rhs);
+    
         [MethodImpl(Inline)]
         public static analog operator << (analog lhs, int rhs) 
-            => (analog)(lhs.data << rhs);
+            => wrap(lhs.data << rhs);
 
         [MethodImpl(Inline)]
         public static analog operator ~ (analog src) 
-            => (analog)~ src.data;
+            => wrap(~ src.data);
 
         [MethodImpl(Inline)]
         public static analog operator - (analog src) 
-            => (analog)(~src.data + 1);
+            => wrap(~src.data + 1);
 
         [MethodImpl(Inline)]
         public static analog operator -- (analog src) 
@@ -177,18 +175,12 @@ namespace Z0
         public static analog operator ++ (analog src) 
             =>  ++src.data;
 
-        public analog positive
-        {
-            [MethodImpl(Inline)]
-            get{return data != zero;}
-        }
+        [MethodImpl(Inline)]
+        static analog wrap(int x)
+            => new analog((byte)x);
 
         [MethodImpl(Inline)]
-        public string format()
-            => data.ToString();
-
-        [MethodImpl(Inline)]
-        public bool Eq(analog rhs)
+        public bool Equals(analog rhs)
             => data == rhs.data;
 
         public override int GetHashCode()
@@ -198,6 +190,6 @@ namespace Z0
             => data.Equals(rhs);
         
         public override string ToString()
-            => format();
+            => data.ToString();
     }
 }

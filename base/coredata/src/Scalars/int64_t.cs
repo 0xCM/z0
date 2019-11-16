@@ -11,14 +11,14 @@ namespace Z0
     using prim = System.Int64;
     using analog = int64_t;
 
-    public struct int64_t 
+    public struct int64_t : IEquatable<analog>
     {
 
         prim data;
 
-        public static readonly analog zero = 0;
+        public static analog zero => 0;
 
-        public static readonly analog one = 1;
+        public static analog one => 1;
 
         public const int bitsize = 64;
         
@@ -164,18 +164,17 @@ namespace Z0
             =>  ++src.data;
 
         [MethodImpl(Inline)]
-        public string Format()
-            => data.ToString();
-
-        [MethodImpl(Inline)]
-        public bool Eq(analog rhs)
+        public bool Equals(analog rhs)
             => data == rhs.data;
 
         public override int GetHashCode()
-            => throw new NotSupportedException();
+            => data.GetHashCode();
 
-        public override bool Equals(object rhs)
-            => throw new NotSupportedException();
+        public override bool Equals(object rhs)        
+            => rhs is analog a && Equals(a);
+        
+        public override string ToString()
+            => data.ToString();
         
     }
 }

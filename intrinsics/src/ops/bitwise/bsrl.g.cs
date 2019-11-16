@@ -25,7 +25,9 @@ namespace Z0
         public static Vector128<T> vbsrl<T>(Vector128<T> x, byte count)
             where T : unmanaged
         {
-            if(typeof(T) == typeof(ushort))
+            if(typeof(T) == typeof(byte))
+                return generic<T>(dinx.vbsrl(uint8(x), count));
+            else if(typeof(T) == typeof(ushort))
                 return generic<T>(dinx.vbsrl(uint16(x), count));
             else if(typeof(T) == typeof(uint)) 
                 return generic<T>(dinx.vbsrl(uint32(x), count));
@@ -44,7 +46,9 @@ namespace Z0
         public static Vector256<T> vbsrl<T>(Vector256<T> x, byte count)
             where T : unmanaged
         {
-            if(typeof(T) == typeof(ushort))
+            if(typeof(T) == typeof(byte))
+                return generic<T>(dinx.vbsrl(uint8(x), count));
+            else if(typeof(T) == typeof(ushort))
                 return generic<T>(dinx.vbsrl(uint16(x), count));
             else if(typeof(T) == typeof(uint)) 
                 return generic<T>(dinx.vbsrl(uint32(x), count));

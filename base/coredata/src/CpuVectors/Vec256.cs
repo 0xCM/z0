@@ -18,24 +18,15 @@ namespace Z0
     /// <summary>
     /// Represents a 256-bit cpu vector for use with intrinsic operations
     /// </summary>
-    [StructLayout(LayoutKind.Sequential, Size = ByteCount)]
+    [StructLayout(LayoutKind.Sequential, Size = 32)]
     public readonly struct Vec256<T> : IEquatable<Vec256<T>>
         where T : unmanaged
     {
+
         /// <summary>
         /// The backing data
         /// </summary>
         public readonly Vector256<T> ymm;        
-
-        /// <summary>
-        /// The number of components in the vector
-        /// </summary>
-        public static readonly int Length = Vector256<T>.Count;
-
-        /// <summary>
-        /// The number of bytes occupied by a vector - which is invariant with respect to the primal component type
-        /// </summary>
-        public const int ByteCount = 32;
 
         /// <summary>
         /// The canonical zero vector

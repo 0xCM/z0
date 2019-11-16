@@ -6,7 +6,8 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;    
-    
+    using System.Runtime.Intrinsics;
+
     using static System.Runtime.Intrinsics.X86.Avx;
     using static System.Runtime.Intrinsics.X86.Sse;
     using static System.Runtime.Intrinsics.X86.Sse2;
@@ -21,7 +22,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
-        public static Vec128<float> vnegate(in Vec128<float> x)
+        public static Vector128<float> vnegate(Vector128<float> x)
             =>  vsub(default, x);
 
         /// <summary>
@@ -29,7 +30,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
-        public static Vec128<double> vnegate(in Vec128<double> x)
+        public static Vector128<double> vnegate(Vector128<double> x)
             =>  vsub(default, x);
 
         /// <summary>
@@ -37,7 +38,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<float> vnegate(in Vec256<float> x)
+        public static Vector256<float> vnegate(Vector256<float> x)
             =>  vsub(default, x);
 
         /// <summary>
@@ -45,7 +46,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<double> vnegate(in Vec256<double> x)
+        public static Vector256<double> vnegate(Vector256<double> x)
             =>  vsub(default, x);
     }
 

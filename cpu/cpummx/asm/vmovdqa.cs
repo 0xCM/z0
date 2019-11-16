@@ -43,33 +43,6 @@ namespace Z0
             return ref dst;
         }
 
-        /// <summary>
-        /// VMOVDQA ymm, m256
-        /// </summary>
-        /// <param name="src"></param>
-        /// <param name="dst"></param>
-        /// <remarks>See https://www.felixcloutier.com/x86/movdqa:vmovdqa32:vmovdqa64</remarks>
-        [MethodImpl(Inline)]
-        public unsafe static ref YMM vmovdqa(YMM src, ref YMM dst)
-        {
-            dst = YMM.From(vload<ulong>(ref src));
-            return ref dst;
-        }
-        
-        /// <summary>
-        /// VMOVDQA ymm, m256
-        /// </summary>
-        /// <param name="src"></param>
-        /// <param name="dst"></param>
-        /// <remarks>See https://www.felixcloutier.com/x86/movdqa:vmovdqa32:vmovdqa64</remarks>
-        [MethodImpl(Inline)]
-        public unsafe static ref YMEM vmovdqa(YMM src, ref YMEM dst)
-        {
-            dst = vload<ulong>(ref src);
-            return ref dst;
-        }
-
-
     }
 
 }

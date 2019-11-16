@@ -50,8 +50,6 @@ namespace Z0
                 throw unsupported<T>();
         }
 
-
-
         [MethodImpl(Inline)]
         static Vector128<T> vand_128u<T>(Vector128<T> x, Vector128<T> y)
             where T : unmanaged

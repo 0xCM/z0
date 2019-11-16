@@ -11,14 +11,13 @@ namespace Z0
     using prim = System.SByte;
     using analog = int8_t;
 
-    public struct int8_t
+    public struct int8_t : IEquatable<analog>
     {
         prim data;
 
-        public static readonly analog zero = 0;
+        public static analog zero => 0;
 
-        public static readonly analog one = 1;
-
+        public static analog one => 1;
 
         [MethodImpl(Inline)]    
         public int8_t(prim x)
@@ -160,27 +159,17 @@ namespace Z0
         public static analog operator ++ (analog src) 
             =>  ++src.data;
 
-        public analog positive
-        {
-            [MethodImpl(Inline)]
-            get{return data > zero;}
-        }
-
         [MethodImpl(Inline)]
-        public string format()
-            => data.ToString();
-
-        [MethodImpl(Inline)]
-        public bool Eq(analog rhs)
+        public bool Equals(analog rhs)
             => data == rhs.data;
 
         public override int GetHashCode()
-            => throw new NotSupportedException();
+            => data.GetHashCode();
 
-        public override bool Equals(object rhs)
-            => throw new NotSupportedException();
+        public override bool Equals(object rhs)        
+            => rhs is analog a && Equals(a);
         
         public override string ToString()
-            => format();
+            => data.ToString();
     }
 }

@@ -16,6 +16,74 @@ namespace Z0
     
     partial class dinx
     {   
+        [MethodImpl(Inline)]
+        public static Vector256<sbyte> vsll(Vector256<sbyte> src, Vector128<sbyte> offset)
+            => vsll(src, (byte)offset.Item(0));
+
+        [MethodImpl(Inline)]
+        public static Vector256<byte> vsll(Vector256<byte> src, Vector128<byte> offset)
+            => vsll(src, offset.Item(0));
+
+        /// <summary>
+        /// __m256i _mm256_sll_epi16 (__m256i a, __m128i count)VPSLLW ymm, ymm, xmm/m128
+        /// </summary>
+        /// <param name="src"></param>
+        /// <param name="offset"></param>
+        /// <returns></returns>
+        [MethodImpl(Inline)]
+        public static Vector256<short> vsll(Vector256<short> src, Vector128<short> offset)
+            => ShiftLeftLogical(src, offset);
+
+        /// <summary>
+        /// __m256i _mm256_sll_epi16 (__m256i a, __m128i count) VPSLLW ymm, ymm, xmm/m128
+        /// </summary>
+        /// <param name="src"></param>
+        /// <param name="offset"></param>
+        /// <returns></returns>
+        [MethodImpl(Inline)]
+        public static Vector256<ushort> vsll(Vector256<ushort> src, Vector128<ushort> offset)
+            => ShiftLeftLogical(src, offset);
+
+        /// <summary>
+        ///  __m256i _mm256_sll_epi32 (__m256i a, __m128i count) VPSLLD ymm, ymm, xmm/m128
+        /// </summary>
+        /// <param name="src"></param>
+        /// <param name="offset"></param>
+        /// <returns></returns>
+        [MethodImpl(Inline)]
+        public static Vector256<int> vsll(Vector256<int> src, Vector128<int> offset)
+            => ShiftLeftLogical(src, offset);
+
+        /// <summary>
+        ///  __m256i _mm256_sll_epi32 (__m256i a, __m128i count) VPSLLD ymm, ymm, xmm/m128
+        /// </summary>
+        /// <param name="src"></param>
+        /// <param name="offset"></param>
+        /// <returns></returns>
+        [MethodImpl(Inline)]
+        public static Vector256<uint> vsll(Vector256<uint> src, Vector128<uint> offset)
+            => ShiftLeftLogical(src, offset);
+
+        /// <summary>
+        /// _m256i _mm256_sll_epi64 (__m256i a, __m128i count)VPSLLQ ymm, ymm, xmm/m128
+        /// </summary>
+        /// <param name="src"></param>
+        /// <param name="offset"></param>
+        /// <returns></returns>
+        [MethodImpl(Inline)]
+        public static Vector256<long> vsll(Vector256<long> src, Vector128<long> offset)
+            => ShiftLeftLogical(src, offset);
+
+        /// <summary>
+        /// _m256i _mm256_sll_epi64 (__m256i a, __m128i count)VPSLLQ ymm, ymm, xmm/m128
+        /// </summary>
+        /// <param name="src"></param>
+        /// <param name="offset"></param>
+        /// <returns></returns>
+        [MethodImpl(Inline)]
+        public static Vector256<ulong> vsll(Vector256<ulong> src, Vector128<ulong> offset)
+            => ShiftLeftLogical(src, offset);
+
         /// <summary>
         /// Shifts each componet in the source vector leftwards by a specified number of bits
         /// </summary>

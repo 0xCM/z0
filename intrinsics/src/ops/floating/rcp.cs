@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;    
+    using System.Runtime.Intrinsics;    
 
     using static System.Runtime.Intrinsics.X86.Sse;
     using static System.Runtime.Intrinsics.X86.Sse2;
@@ -20,7 +21,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
-        public static Vec128<float> rcp(in Vec128<float> x)
+        public static Vector128<float> rcp(Vector128<float> x)
             => Reciprocal(x);
 
         /// <summary>
@@ -28,8 +29,8 @@ namespace Z0
         /// </summary>
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<float> rcp(in Vec256<float> x)
-            => Reciprocal(x.ymm);
+        public static Vector256<float> rcp(Vector256<float> x)
+            => Reciprocal(x);
     }
 
 }

@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;    
-    
+    using System.Runtime.Intrinsics;
     using System.Runtime.Intrinsics.X86;
     using static System.Runtime.Intrinsics.X86.Sse41;
     using static System.Runtime.Intrinsics.X86.Avx;
@@ -24,7 +24,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
-        public static Vec128<float> vfloor(in Vec128<float> x)
+        public static Vector128<float> vfloor(Vector128<float> x)
             => Floor(x);
 
         /// <summary>
@@ -32,7 +32,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
-        public static Vec128<double> vfloor(in Vec128<double> x)
+        public static Vector128<double> vfloor(Vector128<double> x)
             => Floor(x);
         
         /// <summary>
@@ -40,7 +40,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<float> vfloor(in Vec256<float> x)
+        public static Vector256<float> vfloor(Vector256<float> x)
             => Floor(x);
 
         /// <summary>
@@ -48,7 +48,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
-        public static Vec256<double> vfloor(in Vec256<double> x)
+        public static Vector256<double> vfloor(Vector256<double> x)
             => Floor(x);
     }
 }
