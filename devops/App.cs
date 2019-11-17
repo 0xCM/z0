@@ -56,7 +56,9 @@ namespace Z0
         void Run(params string[] args)
         {
 
-            PopCountGen.GenToFile();
+        
+            //PopCountGen.GenToFile();
+            BitCharsGen.GenToFile();
 
         }
             

@@ -21,271 +21,271 @@ namespace Z0
         /// Maps mask-identified source bits to the low bits of an empty target 
         /// </summary>
         /// <param name="src">The bit source</param>
-        /// <param name="part">Identifies the source bits to collect</param>
+        /// <param name="spec">Identifies the source bits to collect</param>
         [MethodImpl(Inline)]
-        public static uint select(uint src, Part2x1 part)
-            => select(src, (uint)part);
+        public static uint select(uint src, Part2x1 spec)
+            => select(src, (uint)spec);
 
         /// <summary>
         /// Maps mask-identified source bits to the low bits of an empty target 
         /// </summary>
         /// <param name="src">The bit source</param>
-        /// <param name="part">Identifies the source bits to collect</param>
+        /// <param name="spec">Identifies the source bits to collect</param>
         [MethodImpl(Inline)]
-        public static uint select(uint src, Part3x1 part)
-            => select(src, (uint)part);
+        public static uint select(uint src, Part3x1 spec)
+            => select(src, (uint)spec);
 
         /// <summary>
         /// Maps mask-identified source bits to the low bits of an empty target 
         /// </summary>
         /// <param name="src">The bit source</param>
-        /// <param name="part">Identifies the source bits to collect</param>
+        /// <param name="spec">Identifies the source bits to collect</param>
         [MethodImpl(Inline)]
-        public static uint select(uint src, Part4x1 part)
-            => select(src, (uint)part);
+        public static uint select(uint src, Part4x1 spec)
+            => select(src, (uint)spec);
 
         /// <summary>
         /// Maps mask-identified source bits to the low bits of an empty target 
         /// </summary>
         /// <param name="src">The bit source</param>
-        /// <param name="part">Identifies the source bits to collect</param>
+        /// <param name="spec">Identifies the source bits to collect</param>
         [MethodImpl(Inline)]
-        public static uint select(uint src, Part5x1 part)
-            => select(src, (uint)part);
+        public static uint select(uint src, Part5x1 spec)
+            => select(src, (uint)spec);
 
         /// <summary>
         /// Maps mask-identified source bits to the low bits of an empty target 
         /// </summary>
         /// <param name="src">The bit source</param>
-        /// <param name="part">Identifies the source bits to collect</param>
+        /// <param name="spec">Identifies the source bits to collect</param>
         [MethodImpl(Inline)]
-        public static uint select(uint src, Part6x1 part)
-            => select(src, (uint)part);
+        public static uint select(uint src, Part6x1 spec)
+            => select(src, (uint)spec);
 
         /// <summary>
         /// Maps mask-identified source bits to the low bits of an empty target 
         /// </summary>
         /// <param name="src">The bit source</param>
-        /// <param name="part">Identifies the source bits to collect</param>
+        /// <param name="spec">Identifies the source bits to collect</param>
         [MethodImpl(Inline)]
-        public static uint select(uint src, Part7x1 part)
-            => select(src, (uint)part);
+        public static uint select(uint src, Part7x1 spec)
+            => select(src, (uint)spec);
 
         /// <summary>
         /// Maps mask-identified source bits to the low bits of an empty target 
         /// </summary>
         /// <param name="src">The bit source</param>
-        /// <param name="part">Identifies the source bits to collect</param>
+        /// <param name="spec">Identifies the source bits to collect</param>
         [MethodImpl(Inline)]
-        public static uint select(uint src, Part8x1 part)
-            => select(src, (uint)part);
+        public static uint select(uint src, Part8x1 spec)
+            => select(src, (uint)spec);
 
         /// <summary>
         /// Maps mask-identified source bits to the low bits of an empty target 
         /// </summary>
         /// <param name="src">The bit source</param>
-        /// <param name="part">Identifies the source bits to collect</param>
+        /// <param name="spec">Identifies the source bits to collect</param>
         [MethodImpl(Inline)]
-        public static uint select(uint src, Part9x1 part)
-            => select(src, (uint)part);
+        public static uint select(uint src, Part9x1 spec)
+            => select(src, (uint)spec);
 
         /// <summary>
         /// Maps mask-identified source bits to the low bits of an empty target 
         /// </summary>
         /// <param name="src">The bit source</param>
-        /// <param name="part">Identifies the source bits to collect</param>
+        /// <param name="spec">Identifies the source bits to collect</param>
         [MethodImpl(Inline)]
-        public static uint select(uint src, Part10x1 part)
-            => select(src, (uint)part);
+        public static uint select(uint src, Part10x1 spec)
+            => select(src, (uint)spec);
 
         /// <summary>
         /// Maps mask-identified source bits to the low bits of an empty target 
         /// </summary>
         /// <param name="src">The bit source</param>
-        /// <param name="part">Identifies the source bits to collect</param>
+        /// <param name="spec">Identifies the source bits to collect</param>
         [MethodImpl(Inline)]
-        public static uint select(uint src, Part11x1 part)
-            => select(src, (uint)part);
+        public static uint select(uint src, Part11x1 spec)
+            => select(src, (uint)spec);
 
         /// <summary>
         /// Maps mask-identified source bits to the low bits of an empty target 
         /// </summary>
         /// <param name="src">The bit source</param>
-        /// <param name="part">Identifies the source bits to collect</param>
+        /// <param name="spec">Identifies the source bits to collect</param>
         [MethodImpl(Inline)]
-        public static uint select(uint src, Part12x1 part)
-            => select(src, (uint)part);
+        public static uint select(uint src, Part12x1 spec)
+            => select(src, (uint)spec);
 
         /// <summary>
         /// Maps mask-identified source bits to the low bits of an empty target 
         /// </summary>
         /// <param name="src">The bit source</param>
-        /// <param name="part">Identifies the source bits to collect</param>
+        /// <param name="spec">Identifies the source bits to collect</param>
         [MethodImpl(Inline)]
-        public static uint select(uint src, Part13x1 part)
-            => select(src, (uint)part);
+        public static uint select(uint src, Part13x1 spec)
+            => select(src, (uint)spec);
 
         /// <summary>
         /// Maps mask-identified source bits to the low bits of an empty target 
         /// </summary>
         /// <param name="src">The bit source</param>
-        /// <param name="part">Identifies the source bits to collect</param>
+        /// <param name="spec">Identifies the source bits to collect</param>
         [MethodImpl(Inline)]
-        public static uint select(uint src, Part16x1 part)
-            => select(src, (uint)part);
+        public static uint select(uint src, Part16x1 spec)
+            => select(src, (uint)spec);
 
         /// <summary>
         /// Maps mask-identified source bits to the low bits of an empty target 
         /// </summary>
         /// <param name="src">The bit source</param>
-        /// <param name="part">Identifies the source bits to collect</param>
+        /// <param name="spec">Identifies the source bits to collect</param>
         [MethodImpl(Inline)]
-        public static uint select(uint src, Part32x1 part)
-            => select(src, (uint)part);
+        public static uint select(uint src, Part32x1 spec)
+            => select(src, (uint)spec);
 
         /// <summary>
         /// Maps mask-identified source bits to the low bits of an empty target 
         /// </summary>
         /// <param name="src">The bit source</param>
-        /// <param name="part">Identifies the source bits to collect</param>
+        /// <param name="spec">Identifies the source bits to collect</param>
         [MethodImpl(Inline)]
-        public static ulong select(ulong src, Part64x1 part)
-            => select(src, (ulong)part);
+        public static ulong select(ulong src, Part64x1 spec)
+            => select(src, (ulong)spec);
 
         /// <summary>
         /// Maps low source bits to mask-identified bits of an empty target
         /// </summary>
         /// <param name="src">The bit source</param>
-        /// <param name="part">The target partition</param>
+        /// <param name="spec">The target bits to populate</param>
         [MethodImpl(Inline)]
-        public static uint project(uint src, Part2x1 part)
-            => project(src, (uint)part);
+        public static uint project(uint src, Part2x1 spec)
+            => project(src, (uint)spec);
 
         /// <summary>
         /// Maps low source bits to mask-identified bits of an empty target
         /// </summary>
         /// <param name="src">The bit source</param>
-        /// <param name="part">The target partition</param>
+        /// <param name="spec">The target bits to populate</param>
         [MethodImpl(Inline)]
-        public static uint project(uint src, Part3x1 part)
-            => project(src, (uint)part);
+        public static uint project(uint src, Part3x1 spec)
+            => project(src, (uint)spec);
 
         /// <summary>
         /// Maps low source bits to mask-identified bits of an empty target
         /// </summary>
         /// <param name="src">The bit source</param>
-        /// <param name="part">The target partition</param>
+        /// <param name="spec">The target bits to populate</param>
         [MethodImpl(Inline)]
-        public static uint project(uint src, Part4x1 part)
-            => project(src, (uint)part);
+        public static uint project(uint src, Part4x1 spec)
+            => project(src, (uint)spec);
 
         /// <summary>
         /// Maps low source bits to mask-identified bits of an empty target
         /// </summary>
         /// <param name="src">The bit source</param>
-        /// <param name="part">The target partition</param>
+        /// <param name="spec">The target bits to populate</param>
         [MethodImpl(Inline)]
-        public static uint project(uint src, Part8x1 part)
-            => project(src, (uint)part);
+        public static uint project(uint src, Part8x1 spec)
+            => project(src, (uint)spec);
 
         /// <summary>
         /// Maps low source bits to mask-identified bits of an empty target
         /// </summary>
         /// <param name="src">The bit source</param>
-        /// <param name="part">The target partition</param>
+        /// <param name="spec">The target bits to populate</param>
         [MethodImpl(Inline)]
-        public static uint project(uint src, Part10x1 part)
-            => project(src, (uint)part);
+        public static uint project(uint src, Part10x1 spec)
+            => project(src, (uint)spec);
 
         /// <summary>
         /// Maps low source bits to mask-identified bits of an empty target
         /// </summary>
         /// <param name="src">The bit source</param>
-        /// <param name="part">The target partition</param>
+        /// <param name="spec">The target bits to populate</param>
         [MethodImpl(Inline)]
-        public static uint project(uint src, Part5x1 part)
-            => project(src, (uint)part);
+        public static uint project(uint src, Part5x1 spec)
+            => project(src, (uint)spec);
 
         /// <summary>
         /// Maps low source bits to mask-identified bits of an empty target
         /// </summary>
         /// <param name="src">The bit source</param>
-        /// <param name="part">The target partition</param>
+        /// <param name="spec">The target bits to populate</param>
         [MethodImpl(Inline)]
-        public static uint project(uint src, Part6x1 part)
-            => project(src, (uint)part);
+        public static uint project(uint src, Part6x1 spec)
+            => project(src, (uint)spec);
 
         /// <summary>
         /// Maps low source bits to mask-identified bits of an empty target
         /// </summary>
         /// <param name="src">The bit source</param>
-        /// <param name="part">The target partition</param>
+        /// <param name="spec">The target bits to populate</param>
         [MethodImpl(Inline)]
-        public static uint project(uint src, Part9x1 part)
-            => project(src, (uint)part);
+        public static uint project(uint src, Part9x1 spec)
+            => project(src, (uint)spec);
 
         /// <summary>
         /// Maps low source bits to mask-identified bits of an empty target
         /// </summary>
         /// <param name="src">The bit source</param>
-        /// <param name="part">The target partition</param>
+        /// <param name="spec">The target bits to populate</param>
         [MethodImpl(Inline)]
-        public static uint project(uint src, Part7x1 part)
-            => project(src, (uint)part);
+        public static uint project(uint src, Part7x1 spec)
+            => project(src, (uint)spec);
 
         /// <summary>
         /// Maps low source bits to mask-identified bits of an empty target
         /// </summary>
         /// <param name="src">The bit source</param>
-        /// <param name="part">The target partition</param>
+        /// <param name="spec">The target bits to populate</param>
         [MethodImpl(Inline)]
-        public static uint project(uint src, Part11x1 part)
-            => project(src, (uint)part);
+        public static uint project(uint src, Part11x1 spec)
+            => project(src, (uint)spec);
 
         /// <summary>
         /// Maps low bits in a source to mask-identified bits of an empty target
         /// </summary>
         /// <param name="src">The bit source</param>
-        /// <param name="part">The target partition</param>
+        /// <param name="spec">The target bits to populate</param>
         [MethodImpl(Inline)]
-        public static uint project(uint src, Part12x1 part)
-            => project(src, (uint)part);
+        public static uint project(uint src, Part12x1 spec)
+            => project(src, (uint)spec);
 
         /// <summary>
-        /// Replicates the low bit of a source to an identified partition of an empty target
+        /// Maps low source bits to mask-identified bits of an empty target
         /// </summary>
         /// <param name="src">The bit source</param>
-        /// <param name="part">The target partition</param>
+        /// <param name="spec">The target bits to populate</param>
         [MethodImpl(Inline)]
-        public static uint project(uint src, Part13x1 part)
-            => project(src, (uint)part);
-
-        /// <summary>
-        /// Maps low bits in a source to mask-identified bits of an empty target
-        /// </summary>
-        /// <param name="src">The bit source</param>
-        /// <param name="part">The target partition</param>
-        [MethodImpl(Inline)]
-        public static uint project(uint src, Part16x1 part)
-            => project(src, (uint)part);
+        public static uint project(uint src, Part13x1 spec)
+            => project(src, (uint)spec);
 
         /// <summary>
         /// Maps low bits in a source to mask-identified bits of an empty target
         /// </summary>
         /// <param name="src">The bit source</param>
-        /// <param name="part">The target partition</param>
+        /// <param name="spec">The target bits to populate</param>
         [MethodImpl(Inline)]
-        public static uint project(uint src, Part32x1 part)
-            => project(src, (uint)part);
+        public static uint project(uint src, Part16x1 spec)
+            => project(src, (uint)spec);
 
         /// <summary>
         /// Maps low bits in a source to mask-identified bits of an empty target
         /// </summary>
         /// <param name="src">The bit source</param>
-        /// <param name="part">The target partition</param>
+        /// <param name="spec">The target bits to populate</param>
         [MethodImpl(Inline)]
-        public static ulong project(ulong src, Part64x1 part)
-            => project(src, (ulong)part);
+        public static uint project(uint src, Part32x1 spec)
+            => project(src, (uint)spec);
+
+        /// <summary>
+        /// Maps low bits in a source to mask-identified bits of an empty target
+        /// </summary>
+        /// <param name="src">The bit source</param>
+        /// <param name="spec">The target bits to populate</param>
+        [MethodImpl(Inline)]
+        public static ulong project(ulong src, Part64x1 spec)
+            => project(src, (ulong)spec);
 
         /// <summary>
         /// Partitions the first 4 bits of a 32-bit source into 4 8-bit targets of effective width 1 

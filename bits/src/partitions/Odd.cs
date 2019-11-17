@@ -19,37 +19,73 @@ namespace Z0
         /// Replicates identified odd bits of an 8-bit source to the low bits of an 8-bit target 
         /// </summary>
         /// <param name="src">The bit source</param>
-        /// <param name="parts">The bit selection</param>
+        /// <param name="spec">The bit selection</param>
         [MethodImpl(Inline)]
-        public static byte select(byte src, Odd8 parts)
-            => select(src, (byte)parts);
+        public static byte select(byte src, Odd8 spec)
+            => select(src, (byte)spec);
 
         /// <summary>
         /// Replicates identified odd bits of a 16-bit source to the low bits of a 16-bit target 
         /// </summary>
         /// <param name="src">The bit source</param>
-        /// <param name="parts">The bit selection</param>
+        /// <param name="spec">The bit selection</param>
         [MethodImpl(Inline)]
-        public static ushort select(ushort src, Odd16 parts)
-            => select(src, (ushort)parts);
+        public static ushort select(ushort src, Odd16 spec)
+            => select(src, (ushort)spec);
 
         /// <summary>
         /// Replicates identified odd bits of a 32-bit source to the low bits of a 32-bit target 
         /// </summary>
         /// <param name="src">The bit source</param>
-        /// <param name="parts">The bit selection</param>
+        /// <param name="spec">The bit selection</param>
         [MethodImpl(Inline)]
-        public static uint select(uint src, Odd32 parts)
-            => select(src, (uint)parts);
+        public static uint select(uint src, Odd32 spec)
+            => select(src, (uint)spec);
 
         /// <summary>
         /// Replicates identified odd bits of a 64-bit source to the low bits of a 64-bit target 
         /// </summary>
         /// <param name="src">The bit source</param>
-        /// <param name="parts">The bit selection</param>
+        /// <param name="spec">The bit selection</param>
         [MethodImpl(Inline)]
-        public static ulong select(ulong src, Odd64 parts)
-            => select(src, (ulong)parts);
+        public static ulong select(ulong src, Odd64 spec)
+            => select(src, (ulong)spec);
+
+        /// <summary>
+        /// Maps low source bits to mask-identified bits of an empty target
+        /// </summary>
+        /// <param name="src">The bit source</param>
+        /// <param name="spec">The target partition</param>
+        [MethodImpl(Inline)]
+        public static uint project(uint src, Odd8 spec)
+            => project(src, (uint)spec);
+
+        /// <summary>
+        /// Maps low source bits to mask-identified bits of an empty target
+        /// </summary>
+        /// <param name="src">The bit source</param>
+        /// <param name="spec">The target partition</param>
+        [MethodImpl(Inline)]
+        public static uint project(uint src, Odd16 spec)
+            => project(src, (uint)spec);
+
+        /// <summary>
+        /// Maps low source bits to mask-identified bits of an empty target
+        /// </summary>
+        /// <param name="src">The bit source</param>
+        /// <param name="spec">The target partition</param>
+        [MethodImpl(Inline)]
+        public static uint project(uint src, Odd32 spec)
+            => project(src, (uint)spec);
+
+        /// <summary>
+        /// Maps low source bits to mask-identified bits of an empty target
+        /// </summary>
+        /// <param name="src">The bit source</param>
+        /// <param name="spec">The target partition</param>
+        [MethodImpl(Inline)]
+        public static ulong project(ulong src, Odd64 spec)
+            => project(src, (ulong)spec);
 
         /// <summary>
         /// Identifies the odd bits in a 4-bit sgement

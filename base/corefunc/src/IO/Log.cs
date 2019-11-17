@@ -38,6 +38,13 @@ namespace Z0
         public static FolderPath AreaFolder(this LogTarget<LogArea> target)
             => LogSettings.Get().RootLogDir + FolderName.Define(target.Area.ToString().ToLower());
 
+        public static FilePath TargetPath(this LogArea area, FileName file)
+        {
+            var target = LogTarget.AreaRoot(area);
+            var folder = target.AreaFolder();
+            return folder + file;
+        }
+
         /// <summary>
         /// Creates a writer for a specified area and filename
         /// </summary>
@@ -45,11 +52,13 @@ namespace Z0
         /// <param name="file">The name of the log file</param>
         public static StreamWriter LogWriter(this LogArea area, FileName file)
         {
-            var target = LogTarget.AreaRoot(area);
-            var folder = target.AreaFolder();
-            var path = folder + file;
+            // var target = LogTarget.AreaRoot(area);
+            // var folder = target.AreaFolder();
+            // var path = folder + file;
+            var path = area.TargetPath(file);
             return new StreamWriter(path.ToString());
         }
+
 
 
         public static ILogger Get(ILogTarget dst)

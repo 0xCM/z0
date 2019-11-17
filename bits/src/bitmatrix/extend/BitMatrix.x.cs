@@ -46,8 +46,7 @@ namespace Z0
         public static BitMatrix<N,T> AsSquare<N,T>(this BitMatrix<N,N,T> src)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                    => BitMatrix.load<N,T>(src.Data);
-                    
+                    => BitMatrix.load<N,T>(src.Data);                    
         internal static string FormatMatrixBits(this Span<byte> src, int rowlen)            
         {
             var dst = gbits.bitchars(src);
@@ -97,6 +96,14 @@ namespace Z0
                 src[i].ToBitString().BitSeq.CopyTo(bits.Slice(i*src.ColCount));
             return BitString.fromseq(bits);                            
         }
+
+        // public static Perm ToPermutation(this BitGrid<N8,N4,ulong> src)
+        // {
+        //     var terms = new int[src.RowCount];
+        //     for(var row=0; row<terms.Length; row++)
+        //         terms[row] = src[row];
+        //     return Perm.Define(terms);
+        // }
 
         [MethodImpl(Inline)]
         public static Span<byte> Pack<M,N,T>(this BitMatrix<M,N,T> src)

@@ -19,7 +19,7 @@ namespace Z0
             var dst = new byte[256];
             for(var i=0; i<=255; i++)
             {
-                var bs = BitString.FromScalar(i);
+                var bs = BitString.from(i);
                 dst[i] = (byte)bs.PopCount();
             }
             return dst;
@@ -36,7 +36,6 @@ namespace Z0
             dst.WriteLine("{");
             dst.WriteLine(GenAccessor("PopCounts"));
             dst.WriteLine("}");
-
 
         }
     }

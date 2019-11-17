@@ -37,18 +37,6 @@ namespace Z0
         public void bs_sar_64u_check()        
             => bs_sar_check<ulong>();
                 
-        public void bschars()
-        {
-            bschars_check<byte>();
-            bschars_check<sbyte>();
-            bschars_check<ushort>();
-            bschars_check<short>();
-            bschars_check<uint>();
-            bschars_check<int>();
-            bschars_check<ulong>();
-            bschars_check<long>();
-        }
-
         public void bsfromscalar()
         {
             bsfromscalar_check<byte>();
@@ -266,7 +254,6 @@ namespace Z0
             Claim.eq(p2.ToBitString(), s2[0..15]);
         }
 
-
         public void bs_tlz()
         {
             Claim.eq("100", BitString.from(0b00000100).Format(true));
@@ -344,7 +331,6 @@ namespace Z0
 
         }
 
-
         void bsrep_check<T>()
             where T : unmanaged
         {
@@ -362,24 +348,6 @@ namespace Z0
             TypeCaseEnd<T>();                
         }
 
-
-        void bschars_check<T>()
-            where T : unmanaged
-        {
-            TypeCaseStart<T>();
-            var src = Random.Span<T>(SampleSize);
-            for(var i=0; i<src.Length; i++)
-            {
-                Span<char> bc1 = gbits.bitchars(src[i]).ToSpan();
-                Span<char> bc2 = new char[bitsize<T>()];
-                for(byte j=0; j<bc2.Length; j++)
-                    bc2[j] = gbits.test(src[i], j) ? '1' : '0';
-                Claim.yea(bc1.SequenceEqual(bc2));
-            }
-
-            TypeCaseEnd<T>();
-        }
-
         void bsfromscalar_check<T>()
             where T : unmanaged
         {
@@ -388,9 +356,7 @@ namespace Z0
             for(var i=0; i<src.Length; i++)
             {
                 var bc1 =  BitString.from(src[i]).Format();
-                var bc2 = gbits.bstext(src[i]);
                 var bc3 = BitString.from(src[i]);
-                Claim.eq(bc1,bc2);
                 Claim.eq(bc1,bc3);
             }
 

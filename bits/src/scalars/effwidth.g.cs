@@ -29,17 +29,17 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The source type</typeparam>
         [MethodImpl(Inline)]
-        public static T width<T>(in T src)
+        public static uint effwidth<T>(T src)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(Bits.width(in uint8(in src)));
+                return Bits.effwidth(uint8(src));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(Bits.width(in uint16(in src)));
+                return Bits.effwidth(uint16(src));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(Bits.width(uint32(in src)));
+                return Bits.effwidth(uint32(src));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(Bits.width(in uint64(in src)));
+                return Bits.effwidth(uint64(src));
             else            
                 throw unsupported<T>();
         }           

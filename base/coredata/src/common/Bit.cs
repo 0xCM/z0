@@ -58,7 +58,7 @@ namespace Z0
         /// <param name="b">The bit to test</param>
         [MethodImpl(Inline)]
         public static bool operator true(bit b)
-            => b.state == 1;
+            => b.state != 0;
 
         /// <summary>
         /// Returns false if the bit is disabled, true otherwise
@@ -82,7 +82,7 @@ namespace Z0
         /// <param name="state">The state of the bit to construct</param>
         [MethodImpl(Inline)]
         public static implicit operator bool(bit src)
-            => src.state == 1;
+            => src.state != 0;
 
         /// <summary>
         /// Defines an explicit bit -> byte conversion

@@ -176,5 +176,57 @@ namespace Z0
             where T : unmanaged        
                 => BitString.from(src.ToSpan());        
 
+        /// <summary>
+        /// Extracts the even bits
+        /// </summary>
+        public static BitString Even(this BitString src)
+        {
+            var count = src.Length>>1;
+            var dst = BitString.alloc(count);            
+            for(int i=0,j=0; i<src.Length; i+=2,j++)
+                dst[j] = src[i];
+            return dst;
+        }
+
+        /// <summary>
+        /// Extracts the odd bits
+        /// </summary>
+        public static BitString Odd(this BitString src)
+        {
+            var count = src.Length>>1;
+            var dst = BitString.alloc(count);            
+            for(int i=1,j=0; i<src.Length; i+=2,j++)
+                dst[j] = src[i];
+            return dst;
+        }
+
+        public static BitString Intersperse(this BitString lhs, BitString rhs)
+        {
+            var len = Math.Min(lhs.Length, rhs.Length);            
+            var dst = BitString.alloc(len*2);
+            for(int i=0, j=0; i< dst.Length; i+=2, j++)
+            {
+                dst[i] = lhs[j];
+
+                if(i+1 < dst.Length)
+                    dst[i+1] = rhs[j];
+            }
+            return dst;
+
+        }
+        
+        public static BitString Clear(this BitString src, int i0, int i1)
+        {
+            for(var i=i0; i<=i1; i++)
+                src[i] = off;
+            return src;
+        }
+
+        public static BitString Inject(this BitString dst, BitString src, int start, int len)
+        {
+            for(int i=start, j=0; i< start + len; i++, j++)
+                dst[i] = src[j];
+            return dst;
+        }
     }
 }

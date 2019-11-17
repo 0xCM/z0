@@ -5,33 +5,40 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
+
     using static zfunc;
     using static As;
     using static AsIn;
-
+    
     partial class gbits
-    {
+    {    
         /// <summary>
-        /// Logically equivalent to the composite operation (src - 1) & src that disables the least set bit in the source
+        /// Clears a contiguous range of bits from the source
         /// </summary>
         /// <param name="src">The bit source</param>
+        /// <param name="first">The position of the first bit to clear</param>
+        /// <param name="last">The position of the last bit to clear</param>
+        /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
-        public static T blsr<T>(T src)
+        public static T clear<T>(T src, int first, int last)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(Bits.blsr(uint8(src)));
+                 return generic<T>(Bits.clear(uint8(src), first, last));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(Bits.blsr(uint16(src)));
+                 return generic<T>(Bits.clear(uint16(src), first, last));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(Bits.blsr(uint32(src)));
+                 return generic<T>(Bits.clear(uint32(src), first, last));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(Bits.blsr(uint64(src)));
-            else            
+                 return generic<T>(Bits.clear(uint64(src), first, last));
+            else
                 throw unsupported<T>();
-        }           
+        }
+
+
+
     }
+
 }

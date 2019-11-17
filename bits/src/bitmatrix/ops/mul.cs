@@ -38,10 +38,10 @@ namespace Z0
         public static BitVector4 mul(BitMatrix4 A, BitVector4 x)
         {
             var n = n4;
-            var dst = BitVector.alloc(n);
+            var z = BitVector.alloc(n);
             for(var i=0; i< n; i++)
-                dst[i] = A.GetRow(i) % x;
-            return dst;        
+                z[i] = A[i] % x;
+            return z;        
         }
 
         /// <summary>
@@ -52,10 +52,10 @@ namespace Z0
         public static BitVector8 mul(BitMatrix8 A, BitVector8 B)
         {
             var n = n8;
-            var dst = BitVector.alloc(n);
+            var z = BitVector.alloc(n);
             for(var i=0; i< n; i++)
-                dst[i] = A[i] % B;
-            return dst;        
+                z[i] = A[i] % B;
+            return z;        
         }
 
         /// <summary>
@@ -69,10 +69,10 @@ namespace Z0
             var C = transpose(A);
             for(var i=0; i < n; i++)
             {
-                var row = A.GetRow(i);
+                var row = A[i];
                 for(var j = 0; j< n; j++)
                 {
-                    var col = C.GetRow(j);
+                    var col = C[j];
                     Z[i,j] = row % col;
                 }
             }

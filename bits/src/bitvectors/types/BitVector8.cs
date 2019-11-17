@@ -96,7 +96,7 @@ namespace Z0
         /// Enumerates each and every 8-bit bitvector exactly once
         /// </summary>
         public static IEnumerable<BitVector8> All
-            => BitVector.all(n8);
+            => BitVector.list(n8);
 
 
         /// <summary>

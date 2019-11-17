@@ -14,6 +14,15 @@ namespace Z0
     public class t_bm_permute : BitMatrixTest<t_bm_permute>
     {
 
+        // public void perm_16x4()
+        // {
+        //     var A = Random.BitMatrix(n16,n4, 0ul);
+        //     Trace(A.Format());
+        //     var perm = A.ToPermutation();
+        //     Trace(perm.Format());
+            
+        // }
+        
         void permute_check<T>()
             where T : unmanaged
         {

@@ -30,8 +30,13 @@ namespace Z0
         /// <param name="n">The order selector</param>
         /// <param name="src">The data used to populate the matrix</param>
         [MethodImpl(Inline)]
-        public static BitMatrix4 primal(N4 n, BitVector4[] src)
-            => BitMatrix4.From(src);
+        public static BitMatrix4 primal(N4 n, BitVector4[] rows)
+        {
+            ushort result = 0;
+            for(var i=0; i<rows.Length; i++)
+                result |= (ushort)(rows[i].Scalar << 4*i); 
+            return result;            
+        }
 
         /// <summary>
         /// Defines a primal bitmatrix of order 8

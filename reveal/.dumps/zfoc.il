@@ -1,4 +1,4 @@
-// 2019-11-15 15:23:01:114
+// 2019-11-17 00:33:32:008
 bit testbit_d8i(sbyte src, int pos)
 {
     IL_0000: ldarg.0
@@ -367,11 +367,40 @@ ReadOnlySpan<byte> bitseq(byte value)
     IL_0006: ret
 
 }
-Span<byte> bitseq2(ulong value)
+void bitseq_8u(byte value, Span<byte> dst)
 {
     IL_0000: ldarg.0
-    IL_0001: call System.Span`1<System.Byte> Z0.BitStore::bitseq2<System.UInt64>(System.UInt64)
-    IL_0006: ret
+    IL_0001: ldarg.1
+    IL_0002: ldc.i4.0
+    IL_0003: call System.Void Z0.BitStore::bitseq<System.Byte>(System.Byte,System.Span`1<System.Byte>,System.Int32)
+    IL_0008: ret
+
+}
+void bitseq_16u(ushort value, Span<byte> dst)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: ldc.i4.0
+    IL_0003: call System.Void Z0.BitStore::bitseq<System.UInt16>(System.UInt16,System.Span`1<System.Byte>,System.Int32)
+    IL_0008: ret
+
+}
+void bitseq_32u(uint value, Span<byte> dst)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: ldc.i4.0
+    IL_0003: call System.Void Z0.BitStore::bitseq<System.UInt32>(System.UInt32,System.Span`1<System.Byte>,System.Int32)
+    IL_0008: ret
+
+}
+void bitseq_64u(ulong value, Span<byte> dst)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: ldc.i4.0
+    IL_0003: call System.Void Z0.BitStore::bitseq<System.UInt64>(System.UInt64,System.Span`1<System.Byte>,System.Int32)
+    IL_0008: ret
 
 }
 ReadOnlySpan<byte> bitseq(int offset, int count)
@@ -384,9 +413,9 @@ ReadOnlySpan<byte> bitseq(int offset, int count)
 }
 ReadOnlySpan<byte> bitseq8u(byte src)
 {
-    IL_0000: ldarga.s src
-    IL_0002: call System.ReadOnlySpan`1<System.Byte> Z0.BitStore::bitseq<System.Byte>(System.Byte&)
-    IL_0007: ret
+    IL_0000: ldarg.0
+    IL_0001: call System.ReadOnlySpan`1<System.Byte> Z0.BitStore::bitseq<System.Byte>(System.Byte)
+    IL_0006: ret
 
 }
 ulong byteswap64(ulong src)

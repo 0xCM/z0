@@ -15,6 +15,12 @@ namespace Z0
     partial class bvoc
     {
 
+        public static BitVector32 alt_32()
+            => BitVector.alt(n32, off);
+
+        public static BitVector<uint> alt_32g()
+            => BitVector.alt<uint>(off);
+
         public static bit dot_32g(BitVector<uint> x, BitVector<uint> y)
         {
             return BitVector.dot(x,y);
@@ -40,9 +46,23 @@ namespace Z0
             return ref BitVector.oprod(x,y, ref z);
         }
 
-        public static ReadOnlySpan<char> bitchars_32u(uint value)
-            => gbits.bitchars(value);
+        public static ReadOnlySpan<char> bitchars_8u(byte value)
+            => BitStore.bitchars(value);
 
+
+        public static void bitchars_8u(byte value, Span<char> dst)
+            => BitStore.bitchars(value, dst);
+
+        public static void bitchars_16u(ushort value, Span<char> dst)
+            => BitStore.bitchars(value, dst);
+
+        public static void bitchars_32u(uint value, Span<char> dst)
+            => BitStore.bitchars(value, dst);
+
+        public static void bitchars_64u(ulong value, Span<char> dst)
+            => BitStore.bitchars(value, dst);
+
+            
         public static BitVector32 and_bv_32u(BitVector32 x, BitVector32 y)
             => BitVector.and(x,y);
 
@@ -132,23 +152,12 @@ namespace Z0
         public static byte blsmsk_g8u(byte src)
             => gbits.blsmsk(src);
 
-        public static ushort blsmsk_d16u(ushort src)
-            => Bits.blsmsk(src);
-
-        public static ushort blsmsk_g16u(ushort src)
-            => gbits.blsmsk(src);
-
         public static uint blsmsk_d32u(uint src)
             => Bits.blsmsk(src);
 
         public static uint blsmsk_g32u(uint src)
             => gbits.blsmsk(src);
 
-        public static ulong blsmsk_g64u(ulong src)
-            => gbits.blsmsk(src);
-
-        public static ulong blsmsk_d64u(ulong src)
-            => Bits.blsmsk(src);
     }
 
 }

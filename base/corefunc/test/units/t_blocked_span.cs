@@ -157,18 +157,18 @@ namespace Z0.Test
 
             var block0 = x.SliceBlock(0);
             Claim.eq(4, block0.Length);            
-            block0.ClaimEqual(Span128.load(span(1,2,3,4)));
+            Claim.eq(block0,Span128.load(span(1,2,3,4)));
 
             var block2 = x.SliceBlock(1);
             Claim.eq(4, block2.Length);
-            block2.ClaimEqual(Span128.FromParts(5,6,7,8));
+            Claim.eq(block2,Span128.FromParts(5,6,7,8));
 
         }
         public void Load1()
         {
             var x = Span128.load(span<int>(1,2,3,4,5,6,7,8));
             Claim.eq(x.BlockCount,2);
-            x.ClaimEqual(Span128.FromParts(1,2,3,4,5,6,7,8));
+            Claim.eq(x, Span128.FromParts(1,2,3,4,5,6,7,8));
             
         }
 
@@ -188,7 +188,7 @@ namespace Z0.Test
                     dst[block*blocklen + i] = src[block*blocklen + i];                
             }
 
-            src.ClaimEqual(dst);
+            Claim.eq(src,dst);
 
         }
 

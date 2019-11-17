@@ -30,13 +30,11 @@ namespace Z0
         /// </summary>
         public static BitMatrix4 transpose(in BitMatrix4 A)
         {        
-            var dst = A.Replicate();
-            // for(var i=0; i<BitMatrix4.Order; i++)
-            //     dst[i] = column(A,i);
-            for(var i=0; i<BitMatrix4.N; i++)
-                A.SetRow(i, column(A,i));
+            var B = A.Replicate();
+            for(var i=0; i<BitMatrix4.N; i++)                
+                B[i] = column(A,i);
 
-            return dst;
+            return B;
         }
 
         [MethodImpl(Inline)]

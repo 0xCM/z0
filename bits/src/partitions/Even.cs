@@ -19,37 +19,74 @@ namespace Z0
         /// Replicates identified even bits of an 8-bit source to the low bits of an 8-bit target 
         /// </summary>
         /// <param name="src">The bit source</param>
-        /// <param name="parts">The bit selection</param>
+        /// <param name="spec">The bit selection</param>
         [MethodImpl(Inline)]
-        public static uint select(uint src, Even8 parts)
-            => select(src, (uint)parts);
+        public static uint select(uint src, Even8 spec)
+            => select(src, (uint)spec);
 
         /// <summary>
         /// Replicates identified even bits of a 16-bit source to the low bits of a 16-bit target 
         /// </summary>
         /// <param name="src">The bit source</param>
-        /// <param name="parts">The bit selection</param>
+        /// <param name="spec">The bit selection</param>
         [MethodImpl(Inline)]
-        public static uint select(uint src, Even16 parts)
-            => select(src, (uint)parts);
+        public static uint select(uint src, Even16 spec)
+            => select(src, (uint)spec);
 
         /// <summary>
         /// Replicates identified even bits of a 32-bit source to the low bits of a 32-bit target 
         /// </summary>
         /// <param name="src">The bit source</param>
-        /// <param name="parts">The bit selection</param>
+        /// <param name="spec">The bit selection</param>
         [MethodImpl(Inline)]
-        public static uint select(uint src, Even32 parts)
-            => select(src, (uint)parts);
+        public static uint select(uint src, Even32 spec)
+            => select(src, (uint)spec);
 
         /// <summary>
         /// Replicates identified even bits of a 64-bit source to the low bits of a 64-bit target 
         /// </summary>
         /// <param name="src">The bit source</param>
-        /// <param name="parts">The bit selection</param>
+        /// <param name="spec">The bit selection</param>
         [MethodImpl(Inline)]
-        public static ulong select(ulong src, Even64 parts)
-            => select(src, (ulong)parts);
+        public static ulong select(ulong src, Even64 spec)
+            => select(src, (ulong)spec);
+
+        /// <summary>
+        /// Maps low source bits to mask-identified bits of an empty target
+        /// </summary>
+        /// <param name="src">The bit source</param>
+        /// <param name="spec">The target partition</param>
+        [MethodImpl(Inline)]
+        public static uint project(uint src, Even8 spec)
+            => project(src, (uint)spec);
+
+        /// <summary>
+        /// Maps low source bits to mask-identified bits of an empty target
+        /// </summary>
+        /// <param name="src">The bit source</param>
+        /// <param name="spec">The target partition</param>
+        [MethodImpl(Inline)]
+        public static uint project(uint src, Even16 spec)
+            => project(src, (uint)spec);
+
+        /// <summary>
+        /// Maps low source bits to mask-identified bits of an empty target
+        /// </summary>
+        /// <param name="src">The bit source</param>
+        /// <param name="spec">The target partition</param>
+        [MethodImpl(Inline)]
+        public static uint project(uint src, Even32 spec)
+            => project(src, (uint)spec);
+
+        /// <summary>
+        /// Maps low source bits to mask-identified bits of an empty target
+        /// </summary>
+        /// <param name="src">The bit source</param>
+        /// <param name="spec">The target partition</param>
+        [MethodImpl(Inline)]
+        public static ulong project(ulong src, Even64 spec)
+            => project(src, (ulong)spec);
+
 
         /// <summary>
         /// Identifies the even bits in a 4-bit segment

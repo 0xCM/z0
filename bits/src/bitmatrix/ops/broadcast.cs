@@ -55,7 +55,7 @@ namespace Z0
             ref readonly var src = ref row.Head;
             ref var dst = ref matrix.Head;
             for(var i=0; i< n; i++)
-                memcpy(in src, ref seek(ref dst, i*count), count);
+                memcpy(in src, ref seek(ref dst, i*count), (uint)count);
             return matrix;
         }
 
@@ -76,7 +76,7 @@ namespace Z0
             ref readonly var src = ref row.Head;
             ref var dst = ref matrix.Head;
             for(var i=0; i< n; i++)
-                memcpy(in src, ref seek(ref dst, i*count), count);
+                memcpy(in src, ref seek(ref dst, i*count), (uint)count);
             return matrix;
         }
 

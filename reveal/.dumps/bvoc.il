@@ -1,229 +1,132 @@
-// 2019-11-15 15:23:01:440
-int popbs(ulong src)
+// 2019-11-17 00:33:32:349
+ulong clear_64(ulong src, int p0, int p1)
 {
     IL_0000: ldarg.0
-    IL_0001: call System.Int32 Z0.Bits::popbs(System.UInt64)
-    IL_0006: ret
+    IL_0001: ldarg.1
+    IL_0002: ldarg.2
+    IL_0003: call System.UInt64 Z0.Bits::clear(System.UInt64,System.Int32,System.Int32)
+    IL_0008: ret
 
 }
-ref sbyte bitmap_d8i_to_8i(in sbyte src, byte srcOffset, byte len, byte dstOffset, ref sbyte dst)
+ulong inject_64(ulong src, ulong dst, byte index, byte length)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
     IL_0003: ldarg.3
-    IL_0004: ldarg.s dst
-    IL_0006: call System.SByte& Z0.Bits::bitmap(System.SByte&,System.Byte,System.Byte,System.Byte,System.SByte&)
-    IL_000B: ret
-
-}
-ref sbyte bitmap_g8i_to_8i(in sbyte src, byte srcOffset, byte len, byte dstOffset, ref sbyte dst)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: ldarg.2
-    IL_0003: ldarg.3
-    IL_0004: ldarg.s dst
-    IL_0006: call System.SByte& Z0.gbits::bitmap<System.SByte>(System.SByte&,System.Byte,System.Byte,System.Byte,System.SByte&)
-    IL_000B: ret
+    IL_0004: call System.UInt64 Z0.Bits::inject(System.UInt64,System.UInt64,System.Byte,System.Byte)
+    IL_0009: ret
 
 }
 ref byte bitmap_d8u_to_8u(in byte src, byte srcOffset, byte len, byte dstOffset, ref byte dst)
 {
     IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: ldarg.2
-    IL_0003: ldarg.3
-    IL_0004: ldarg.s dst
-    IL_0006: call System.Byte& Z0.Bits::bitmap(System.Byte&,System.Byte,System.Byte,System.Byte,System.Byte&)
-    IL_000B: ret
+    IL_0001: ldind.u1
+    IL_0002: ldarg.1
+    IL_0003: ldarg.2
+    IL_0004: ldarg.3
+    IL_0005: ldarg.s dst
+    IL_0007: call System.Byte& Z0.Bits::bitmap(System.Byte,System.Byte,System.Byte,System.Byte,System.Byte&)
+    IL_000C: ret
 
 }
 ref byte bitmap_g8u_to_8u(in byte src, byte srcOffset, byte len, byte dstOffset, ref byte dst)
 {
     IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: ldarg.2
-    IL_0003: ldarg.3
-    IL_0004: ldarg.s dst
-    IL_0006: call System.Byte& Z0.gbits::bitmap<System.Byte>(System.Byte&,System.Byte,System.Byte,System.Byte,System.Byte&)
-    IL_000B: ret
-
-}
-ref short bitmap_d16i_to_16i(in short src, byte srcOffset, byte len, byte dstOffset, ref short dst)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: ldarg.2
-    IL_0003: ldarg.3
-    IL_0004: ldarg.s dst
-    IL_0006: call System.Int16& Z0.Bits::bitmap(System.Int16&,System.Byte,System.Byte,System.Byte,System.Int16&)
-    IL_000B: ret
-
-}
-ref short bitmap_g16i_to_16i(in short src, byte srcOffset, byte len, byte dstOffset, ref short dst)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: ldarg.2
-    IL_0003: ldarg.3
-    IL_0004: ldarg.s dst
-    IL_0006: call System.Int16& Z0.gbits::bitmap<System.Int16>(System.Int16&,System.Byte,System.Byte,System.Byte,System.Int16&)
-    IL_000B: ret
+    IL_0001: ldind.u1
+    IL_0002: ldarg.1
+    IL_0003: ldarg.2
+    IL_0004: ldarg.3
+    IL_0005: ldarg.s dst
+    IL_0007: call System.Byte& Z0.gbits::bitmap<System.Byte>(System.Byte,System.Byte,System.Byte,System.Byte,System.Byte&)
+    IL_000C: ret
 
 }
 ref ushort bitmapd_16u_to_16u(in ushort src, byte srcOffset, byte len, byte dstOffset, ref ushort dst)
 {
     IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: ldarg.2
-    IL_0003: ldarg.3
-    IL_0004: ldarg.s dst
-    IL_0006: call System.UInt16& Z0.Bits::bitmap(System.UInt16&,System.Byte,System.Byte,System.Byte,System.UInt16&)
-    IL_000B: ret
+    IL_0001: ldind.u2
+    IL_0002: ldarg.1
+    IL_0003: ldarg.2
+    IL_0004: ldarg.3
+    IL_0005: ldarg.s dst
+    IL_0007: call System.UInt16& Z0.Bits::bitmap(System.UInt16,System.Byte,System.Byte,System.Byte,System.UInt16&)
+    IL_000C: ret
 
 }
 ref ushort bitmap_g16u_to_16u(in ushort src, byte srcOffset, byte len, byte dstOffset, ref ushort dst)
 {
     IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: ldarg.2
-    IL_0003: ldarg.3
-    IL_0004: ldarg.s dst
-    IL_0006: call System.UInt16& Z0.gbits::bitmap<System.UInt16>(System.UInt16&,System.Byte,System.Byte,System.Byte,System.UInt16&)
-    IL_000B: ret
-
-}
-ref int bitmap_d32i_to_32i(in int src, byte srcOffset, byte len, byte dstOffset, ref int dst)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: ldarg.2
-    IL_0003: ldarg.3
-    IL_0004: ldarg.s dst
-    IL_0006: call System.Int32& Z0.Bits::bitmap(System.Int32&,System.Byte,System.Byte,System.Byte,System.Int32&)
-    IL_000B: ret
-
-}
-ref int bitmap_g32i_to_32i(in int src, byte srcOffset, byte len, byte dstOffset, ref int dst)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: ldarg.2
-    IL_0003: ldarg.3
-    IL_0004: ldarg.s dst
-    IL_0006: call System.Int32& Z0.gbits::bitmap<System.Int32>(System.Int32&,System.Byte,System.Byte,System.Byte,System.Int32&)
-    IL_000B: ret
+    IL_0001: ldind.u2
+    IL_0002: ldarg.1
+    IL_0003: ldarg.2
+    IL_0004: ldarg.3
+    IL_0005: ldarg.s dst
+    IL_0007: call System.UInt16& Z0.gbits::bitmap<System.UInt16>(System.UInt16,System.Byte,System.Byte,System.Byte,System.UInt16&)
+    IL_000C: ret
 
 }
 ref uint bitmap_d32u_to_32u(in uint src, byte srcOffset, byte len, byte dstOffset, ref uint dst)
 {
     IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: ldarg.2
-    IL_0003: ldarg.3
-    IL_0004: ldarg.s dst
-    IL_0006: call System.UInt32& Z0.Bits::bitmap(System.UInt32&,System.Byte,System.Byte,System.Byte,System.UInt32&)
-    IL_000B: ret
+    IL_0001: ldind.u4
+    IL_0002: ldarg.1
+    IL_0003: ldarg.2
+    IL_0004: ldarg.3
+    IL_0005: ldarg.s dst
+    IL_0007: call System.UInt32& Z0.Bits::bitmap(System.UInt32,System.Byte,System.Byte,System.Byte,System.UInt32&)
+    IL_000C: ret
 
 }
 ref uint bitmap_g32u_to_32u(in uint src, byte srcOffset, byte len, byte dstOffset, ref uint dst)
 {
     IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: ldarg.2
-    IL_0003: ldarg.3
-    IL_0004: ldarg.s dst
-    IL_0006: call System.UInt32& Z0.gbits::bitmap<System.UInt32>(System.UInt32&,System.Byte,System.Byte,System.Byte,System.UInt32&)
-    IL_000B: ret
-
-}
-ref long bitmap_d64i_to_64i(in long src, byte srcOffset, byte len, byte dstOffset, ref long dst)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: ldarg.2
-    IL_0003: ldarg.3
-    IL_0004: ldarg.s dst
-    IL_0006: call System.Int64& Z0.Bits::bitmap(System.Int64&,System.Byte,System.Byte,System.Byte,System.Int64&)
-    IL_000B: ret
-
-}
-ref long bitmap_g64i_to_64i(in long src, byte srcOffset, byte len, byte dstOffset, ref long dst)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: ldarg.2
-    IL_0003: ldarg.3
-    IL_0004: ldarg.s dst
-    IL_0006: call System.Int64& Z0.gbits::bitmap<System.Int64>(System.Int64&,System.Byte,System.Byte,System.Byte,System.Int64&)
-    IL_000B: ret
+    IL_0001: ldind.u4
+    IL_0002: ldarg.1
+    IL_0003: ldarg.2
+    IL_0004: ldarg.3
+    IL_0005: ldarg.s dst
+    IL_0007: call System.UInt32& Z0.gbits::bitmap<System.UInt32>(System.UInt32,System.Byte,System.Byte,System.Byte,System.UInt32&)
+    IL_000C: ret
 
 }
 ref ulong bitmap_d64u_to_64u(in ulong src, byte srcOffset, byte len, byte dstOffset, ref ulong dst)
 {
     IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: ldarg.2
-    IL_0003: ldarg.3
-    IL_0004: ldarg.s dst
-    IL_0006: call System.UInt64& Z0.Bits::bitmap(System.UInt64&,System.Byte,System.Byte,System.Byte,System.UInt64&)
-    IL_000B: ret
+    IL_0001: ldind.i8
+    IL_0002: ldarg.1
+    IL_0003: ldarg.2
+    IL_0004: ldarg.3
+    IL_0005: ldarg.s dst
+    IL_0007: call System.UInt64& Z0.Bits::bitmap(System.UInt64,System.Byte,System.Byte,System.Byte,System.UInt64&)
+    IL_000C: ret
 
 }
 ref ulong bitmap_g64u_to_64u(in ulong src, byte srcOffset, byte len, byte dstOffset, ref ulong dst)
 {
     IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: ldarg.2
-    IL_0003: ldarg.3
-    IL_0004: ldarg.s dst
-    IL_0006: call System.UInt64& Z0.gbits::bitmap<System.UInt64>(System.UInt64&,System.Byte,System.Byte,System.Byte,System.UInt64&)
-    IL_000B: ret
+    IL_0001: ldind.i8
+    IL_0002: ldarg.1
+    IL_0003: ldarg.2
+    IL_0004: ldarg.3
+    IL_0005: ldarg.s dst
+    IL_0007: call System.UInt64& Z0.gbits::bitmap<System.UInt64>(System.UInt64,System.Byte,System.Byte,System.Byte,System.UInt64&)
+    IL_000C: ret
 
 }
-ref float bitmapbit_d32f_to_32f(in float src, byte srcOffset, byte len, byte dstOffset, ref float dst)
+BitVector32 alt_32()
 {
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: ldarg.2
-    IL_0003: ldarg.3
-    IL_0004: ldarg.s dst
-    IL_0006: call System.Single& Z0.Bits::bitmap(System.Single&,System.Byte,System.Byte,System.Byte,System.Single&)
-    IL_000B: ret
+    IL_0000: call Z0.N32 zfunc::get_n32()
+    IL_0005: call Z0.bit zfunc::get_off()
+    IL_000A: call Z0.BitVector32 Z0.BitVector::alt(Z0.N32,Z0.bit)
+    IL_000F: ret
 
 }
-ref float bitmap_g32f_to_32f(in float src, byte srcOffset, byte len, byte dstOffset, ref float dst)
+BitVector<uint> alt_32g()
 {
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: ldarg.2
-    IL_0003: ldarg.3
-    IL_0004: ldarg.s dst
-    IL_0006: call System.Single& Z0.gbits::bitmap<System.Single>(System.Single&,System.Byte,System.Byte,System.Byte,System.Single&)
-    IL_000B: ret
-
-}
-ref double bitmapbit_d64f_to_64f(in double src, byte srcOffset, byte len, byte dstOffset, ref double dst)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: ldarg.2
-    IL_0003: ldarg.3
-    IL_0004: ldarg.s dst
-    IL_0006: call System.Double& Z0.Bits::bitmap(System.Double&,System.Byte,System.Byte,System.Byte,System.Double&)
-    IL_000B: ret
-
-}
-ref double bitmap_g64f_to_64f(in double src, byte srcOffset, byte len, byte dstOffset, ref double dst)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: ldarg.2
-    IL_0003: ldarg.3
-    IL_0004: ldarg.s dst
-    IL_0006: call System.Double& Z0.gbits::bitmap<System.Double>(System.Double&,System.Byte,System.Byte,System.Byte,System.Double&)
-    IL_000B: ret
+    IL_0000: call Z0.bit zfunc::get_off()
+    IL_0005: call Z0.BitVector`1<System.UInt32> Z0.BitVector::alt<System.UInt32>(Z0.bit)
+    IL_000A: ret
 
 }
 bit dot_32g(BitVector<uint> x, BitVector<uint> y)
@@ -268,11 +171,47 @@ ref BitMatrix<ulong> oprod_4(BitVector<ulong> x, BitVector<ulong> y, ref BitMatr
     IL_0008: ret
 
 }
-ReadOnlySpan<Char> bitchars_32u(uint value)
+ReadOnlySpan<Char> bitchars_8u(byte value)
 {
-    IL_0000: ldarga.s value
-    IL_0002: call System.ReadOnlySpan`1<System.Char> Z0.gbits::bitchars<System.UInt32>(System.UInt32&)
-    IL_0007: ret
+    IL_0000: ldarg.0
+    IL_0001: call System.ReadOnlySpan`1<System.Char> Z0.BitStore::bitchars(System.Byte)
+    IL_0006: ret
+
+}
+void bitchars_8u(byte value, Span<Char> dst)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: ldc.i4.0
+    IL_0003: call System.Void Z0.BitStore::bitchars<System.Byte>(System.Byte,System.Span`1<System.Char>,System.Int32)
+    IL_0008: ret
+
+}
+void bitchars_16u(ushort value, Span<Char> dst)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: ldc.i4.0
+    IL_0003: call System.Void Z0.BitStore::bitchars<System.UInt16>(System.UInt16,System.Span`1<System.Char>,System.Int32)
+    IL_0008: ret
+
+}
+void bitchars_32u(uint value, Span<Char> dst)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: ldc.i4.0
+    IL_0003: call System.Void Z0.BitStore::bitchars<System.UInt32>(System.UInt32,System.Span`1<System.Char>,System.Int32)
+    IL_0008: ret
+
+}
+void bitchars_64u(ulong value, Span<Char> dst)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: ldc.i4.0
+    IL_0003: call System.Void Z0.BitStore::bitchars<System.UInt64>(System.UInt64,System.Span`1<System.Char>,System.Int32)
+    IL_0008: ret
 
 }
 BitVector32 and_bv_32u(BitVector32 x, BitVector32 y)
@@ -497,20 +436,6 @@ byte blsmsk_g8u(byte src)
     IL_0006: ret
 
 }
-ushort blsmsk_d16u(ushort src)
-{
-    IL_0000: ldarg.0
-    IL_0001: call System.UInt16 Z0.Bits::blsmsk(System.UInt16)
-    IL_0006: ret
-
-}
-ushort blsmsk_g16u(ushort src)
-{
-    IL_0000: ldarg.0
-    IL_0001: call System.UInt16 Z0.gbits::blsmsk<System.UInt16>(System.UInt16)
-    IL_0006: ret
-
-}
 uint blsmsk_d32u(uint src)
 {
     IL_0000: ldarg.0
@@ -522,20 +447,6 @@ uint blsmsk_g32u(uint src)
 {
     IL_0000: ldarg.0
     IL_0001: call System.UInt32 Z0.gbits::blsmsk<System.UInt32>(System.UInt32)
-    IL_0006: ret
-
-}
-ulong blsmsk_g64u(ulong src)
-{
-    IL_0000: ldarg.0
-    IL_0001: call System.UInt64 Z0.gbits::blsmsk<System.UInt64>(System.UInt64)
-    IL_0006: ret
-
-}
-ulong blsmsk_d64u(ulong src)
-{
-    IL_0000: ldarg.0
-    IL_0001: call System.UInt64 Z0.Bits::blsmsk(System.UInt64)
     IL_0006: ret
 
 }
@@ -701,6 +612,13 @@ ulong mask_8x64u(ref ulong dst, int exp0, int exp1, int exp2, int exp3, int exp4
     IL_000E: call System.UInt64& Z0.Bits::mask(System.UInt64&,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)
     IL_0013: ldind.i8
     IL_0014: ret
+
+}
+int pop_bitstore(ulong src)
+{
+    IL_0000: ldarg.0
+    IL_0001: call System.Int32 Z0.Bits::popbs(System.UInt64)
+    IL_0006: ret
 
 }
 void part64x1_byte(ulong src, Span<byte> dst)

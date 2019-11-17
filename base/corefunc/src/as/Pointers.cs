@@ -230,7 +230,6 @@ namespace Z0
         public static unsafe double* constptr(in double src)
             => refptr(ref asRef(in src));
 
-
         [MethodImpl(Inline)]
         public static unsafe sbyte* constptr(in sbyte src, int offset)
             => refptr(ref seek(ref asRef(in src), offset));
@@ -308,7 +307,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static unsafe void store64(ulong src, ref byte dst)
              => *((ulong*)refptr(ref dst)) = src;
-
     }
 
 }

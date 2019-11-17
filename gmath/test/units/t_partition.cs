@@ -62,7 +62,7 @@ namespace Z0
             var dst = src.PartPoints();
             var fmt = dst.Map(x => x.ToString()).Concat(", ");
             Claim.eq(src.Length() + 1, dst.Length);            
-            items(5,6,7,8,9,10,11,12).ToSpan().ClaimEqual(dst);
+            Claim.eq(items(5,6,7,8,9,10,11,12).ToSpan(),dst);
         }
 
         public void part1()

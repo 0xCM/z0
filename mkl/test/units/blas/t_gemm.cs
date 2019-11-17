@@ -171,8 +171,7 @@ namespace Z0.Mkl.Test
                     }
                 }
 
-
-                E.Unblocked.ClaimEqual(X.Unblocked,epsilon);
+                Claim.close(E.Unblocked, X.Unblocked, epsilon);
             }
 
             OpTime timing = optime(CycleCount, runtime, label);

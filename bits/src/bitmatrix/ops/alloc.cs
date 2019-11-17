@@ -106,9 +106,9 @@ namespace Z0
         /// </summary>
         /// <param name="n">The bitness selector</param>
         /// <param name="fill">The value with which the allocated matrix is filled</param>
-        [MethodImpl(NotInline)]
+        [MethodImpl(Inline)]
         public static BitMatrix4 alloc(N4 n, bit fill = default)
-            => BitMatrix4.Alloc(fill);
+            => fill == bit.On ? new BitMatrix4(ushort.MaxValue) : new BitMatrix4(ushort.MinValue);
             
         /// <summary>
         /// Allocates a primal bitmatrix 

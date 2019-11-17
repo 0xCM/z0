@@ -11,34 +11,34 @@ namespace Z0.Test
     public class t_bitwidth : ScalarBitTest<t_bitwidth>
     {
 
-        public void width8u()
+        public void effwidth_8u()
         {
             var x = (byte)0b0;
-            var w = Bits.width(in x);
+            var w = gbits.effwidth(x);
             Claim.eq(w,0);
             
             x = (byte)0b00010000;
-            w = Bits.width(in x);
+            w = gbits.effwidth(x);
             Claim.eq(w,5);
 
             x = (byte)0b00000001;
-            w = Bits.width(in x);
+            w = gbits.effwidth(x);
             Claim.eq(w,1);
 
             x = (byte)0b10000000;
-            w = Bits.width(in x);
+            w = gbits.effwidth(x);
             Claim.eq(w,8);
 
         }
 
-        public void width32u()
+        public void effwidth_32u()
         {
             var x = 0xFFu + 1u;
-            var w = Bits.width(in x);
+            var w = gbits.effwidth(x);
             Claim.eq(w,9);
 
             x = UInt32.MaxValue;
-            w = Bits.width(in x);
+            w = gbits.effwidth(x);
             Claim.eq(w,32);
         }
     }

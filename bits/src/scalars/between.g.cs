@@ -13,8 +13,7 @@ namespace Z0
     using static AsIn;
     
     partial class gbits
-    {
-
+    {    
         /// <summary>
         /// Extracts a contiguous range of bits from a primal source inclusively between two index positions
         /// </summary>
@@ -79,7 +78,5 @@ namespace Z0
             else            
                 throw unsupported<T>();
         }
-
     }
-
 }

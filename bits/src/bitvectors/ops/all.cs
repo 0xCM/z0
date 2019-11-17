@@ -20,7 +20,7 @@ namespace Z0
         /// Enumerates each and every 8-bit bitvector exactly once
         /// </summary>
         /// <param name="n">The bitness selector</param>
-        public static IEnumerable<BitVector8> all(N8 n)
+        public static IEnumerable<BitVector8> list(N8 n)
         {
             var bv = BitVector8.Zero;
             do            
@@ -32,7 +32,7 @@ namespace Z0
         /// Enumerates all 16-bit bitvectors whose width is less than or equal to a specified maximum
         /// </summary>
         /// <param name="n">The bitness selector</param>
-        public static IEnumerable<BitVector16> all(N16 n, int maxwidth)
+        public static IEnumerable<BitVector16> list(N16 n, int maxwidth)
         {
             var maxval = 1 << math.min(maxwidth,16);
             var bv = BitVector16.Zero;
@@ -46,7 +46,7 @@ namespace Z0
         /// <param name="n">The bitness selector</param>
         public static IEnumerable<BitVector8> gray(N8 n)
         {
-            foreach(var x in all(n))
+            foreach(var x in list(n))
                 yield return x ^ (x >> 1);
         }
 

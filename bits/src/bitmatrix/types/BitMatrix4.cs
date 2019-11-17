@@ -11,7 +11,6 @@ namespace Z0
     using System.Runtime.InteropServices;
 
     using static zfunc;
-    using BP = BitParts.Part16x4;
 
     public ref struct BitMatrix4
     {        
@@ -41,15 +40,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitMatrix4 From(ushort src)        
             => new BitMatrix4(src);
-
-        [MethodImpl(Inline)]
-        public static BitMatrix4 From(BitVector4[] rows)
-        {
-            ushort result = 0;
-            for(var i=0; i<rows.Length; i++)
-                result |= (ushort)(rows[i].Scalar << 4*i); 
-            return result;            
-        }
 
         [MethodImpl(Inline)]
         public static explicit operator ushort(BitMatrix4 src)
@@ -98,7 +88,7 @@ namespace Z0
         const byte M4 = 0b1111;
 
         [MethodImpl(Inline)]
-        BitMatrix4(ushort src)
+        internal BitMatrix4(ushort src)
         {
             this.data = src;
         }
@@ -122,45 +112,35 @@ namespace Z0
         /// </summary>
         /// <param name="index">The row index</param>
         [MethodImpl(Inline)]
-        public BitVector4 GetRow(int index)
+        BitVector4 GetRow(int index)
             => (byte)(M4 & (data >> index*4));
 
-        void SetRow2(int index, BitVector4 src)
-        {
-            var replace = index == 0 ? BP.Part0 : index == 1 ? BP.Part1 : index == 2 ? BP.Part2 : BP.Part3;                        
-            BitParts.project(src, replace);
-        }
-
         [MethodImpl(Inline)]
-        public void SetRow(int index, BitVector4 src)
+        void SetRow(int row, BitVector4 value)
         {
             ushort result = 0;
             for(var i=0; i<N; i++)
-                result |= (ushort)(i == index ? src.Scalar << 4*i : GetRow(index));
+                result |= (ushort)(i == row ? value.Scalar << 4*i : this[row]);
             data = result;
         }
-
-        [MethodImpl(Inline)]
-        bit TestBit(int row, int col)
-            => BitMask.test(data, row*4 + col);
-
-        [MethodImpl(Inline)]
-        void SetBit(int row, int col, bit state)
-            => BitMask.set(ref data, (byte)(row*4 + col), state);
 
         public bit this[int row, int col]
         {
             [MethodImpl(Inline)]
-            get => TestBit(row,col);
+            get => BitMask.test(data, row*4 + col);
 
             [MethodImpl(Inline)]
-            set => SetBit(row,col,value);
+            set => BitMask.set(ref data, (byte)(row*4 + col), value);
         }            
 
         public BitVector4 this[int row]
         {
             [MethodImpl(Inline)]
             get => GetRow(row);
+
+            [MethodImpl(Inline)]
+            set => SetRow(row, value);
+
         }
             
         [MethodImpl(Inline)]

@@ -31,16 +31,23 @@ namespace Z0
         public static ReadOnlySpan<byte> bitseq(byte value)
             => BitStore.select(value);
 
-        public static Span<byte> bitseq2(ulong value)
-            => BitStore.bitseq2(value);
+        public static void bitseq_8u(byte value, Span<byte> dst)
+            => BitStore.bitseq(value,dst);
 
+        public static void bitseq_16u(ushort value, Span<byte> dst)
+            => BitStore.bitseq(value,dst);
+
+        public static void bitseq_32u(uint value, Span<byte> dst)
+            => BitStore.bitseq(value,dst);
+
+        public static void bitseq_64u(ulong value, Span<byte> dst)
+            => BitStore.bitseq(value,dst);
+        
         public static ReadOnlySpan<byte> bitseq(int offset, int count)
             => BitStore.select(offset,count);
 
-
         public static ReadOnlySpan<byte> bitseq8u(byte src)
             => BitStore.bitseq(src);
-
 
     }
 

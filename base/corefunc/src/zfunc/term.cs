@@ -30,8 +30,8 @@ partial class zfunc
     /// Writes a single line to the terminal
     /// </summary>
     /// <param name="msg">The message to print</param>    
-    public static void print(string msg)
-        => terminal.WriteLine(msg);
+    public static void print(string msg, SeverityLevel? severity = null)
+        => terminal.WriteLine(msg, severity ?? SeverityLevel.Info);
 
     /// <summary>
     /// Writes an empty line to the console

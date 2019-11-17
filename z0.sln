@@ -110,6 +110,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "z0.intrinsics", "intrinsics
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "z0.intrinsics.test", "intrinsics\test\z0.intrinsics.test.csproj", "{EE873E4B-9F02-4AD9-B488-617B24300F82}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "z0.devops", "devops\z0.devops.csproj", "{F07FFC09-EE41-44F5-9AA7-F0F0C4C04476}"
+EndProject
 Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -555,6 +557,18 @@ Global
 		{EE873E4B-9F02-4AD9-B488-617B24300F82}.Release|x64.Build.0 = Release|Any CPU
 		{EE873E4B-9F02-4AD9-B488-617B24300F82}.Release|x86.ActiveCfg = Release|Any CPU
 		{EE873E4B-9F02-4AD9-B488-617B24300F82}.Release|x86.Build.0 = Release|Any CPU
+		{F07FFC09-EE41-44F5-9AA7-F0F0C4C04476}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F07FFC09-EE41-44F5-9AA7-F0F0C4C04476}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F07FFC09-EE41-44F5-9AA7-F0F0C4C04476}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{F07FFC09-EE41-44F5-9AA7-F0F0C4C04476}.Debug|x64.Build.0 = Debug|Any CPU
+		{F07FFC09-EE41-44F5-9AA7-F0F0C4C04476}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{F07FFC09-EE41-44F5-9AA7-F0F0C4C04476}.Debug|x86.Build.0 = Debug|Any CPU
+		{F07FFC09-EE41-44F5-9AA7-F0F0C4C04476}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F07FFC09-EE41-44F5-9AA7-F0F0C4C04476}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F07FFC09-EE41-44F5-9AA7-F0F0C4C04476}.Release|x64.ActiveCfg = Release|Any CPU
+		{F07FFC09-EE41-44F5-9AA7-F0F0C4C04476}.Release|x64.Build.0 = Release|Any CPU
+		{F07FFC09-EE41-44F5-9AA7-F0F0C4C04476}.Release|x86.ActiveCfg = Release|Any CPU
+		{F07FFC09-EE41-44F5-9AA7-F0F0C4C04476}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{F4DFA2B2-4446-4488-9C3D-8E37525DD4F0} = {59051E91-488F-40FA-A313-A6A9B7BA308D}

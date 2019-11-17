@@ -1,4 +1,77 @@
-// 2019-11-15 15:23:02:784
+// 2019-11-17 00:33:33:585
+ulong project(ulong src, Part64x4:ulong part)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call System.UInt64 Z0.BitParts::project(System.UInt64,System.UInt64)
+    IL_0007: ret
+
+}
+void part8x4(uint src, ref byte dst)
+{
+    IL_0000: ldarg.1
+    IL_0001: ldc.i4.0
+    IL_0002: call System.Byte& zfunc::seek<System.Byte>(System.Byte&,System.Int32)
+    IL_0007: ldarg.0
+    IL_0008: ldc.i4.s 15
+    IL_000A: and
+    IL_000B: conv.u1
+    IL_000C: stind.i1
+    IL_000D: ldarg.1
+    IL_000E: ldc.i4.1
+    IL_000F: call System.Byte& zfunc::seek<System.Byte>(System.Byte&,System.Int32)
+    IL_0014: ldarg.0
+    IL_0015: ldc.i4.4
+    IL_0016: shr.un
+    IL_0017: ldc.i4.s 15
+    IL_0019: and
+    IL_001A: conv.u1
+    IL_001B: stind.i1
+    IL_001C: ret
+
+}
+void part8x4(uint src, Span<byte> dst)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call System.Byte& zfunc::head<System.Byte>(System.Span`1<System.Byte>)
+    IL_0007: call System.Void Z0.BitParts::part8x4(System.UInt32,System.Byte&)
+    IL_000C: ret
+
+}
+void part12x4(uint src, ref byte dst)
+{
+    IL_0000: ldarg.1
+    IL_0001: ldc.i4.0
+    IL_0002: call System.Byte& zfunc::seek<System.Byte>(System.Byte&,System.Int32)
+    IL_0007: ldarg.0
+    IL_0008: ldc.i4.s 15
+    IL_000A: and
+    IL_000B: conv.u1
+    IL_000C: stind.i1
+    IL_000D: ldarg.1
+    IL_000E: ldc.i4.1
+    IL_000F: call System.Byte& zfunc::seek<System.Byte>(System.Byte&,System.Int32)
+    IL_0014: ldarg.0
+    IL_0015: ldc.i4.4
+    IL_0016: shr.un
+    IL_0017: ldc.i4.s 15
+    IL_0019: and
+    IL_001A: conv.u1
+    IL_001B: stind.i1
+    IL_001C: ldarg.1
+    IL_001D: ldc.i4.2
+    IL_001E: call System.Byte& zfunc::seek<System.Byte>(System.Byte&,System.Int32)
+    IL_0023: ldarg.0
+    IL_0024: ldc.i4.8
+    IL_0025: shr.un
+    IL_0026: ldc.i4.s 15
+    IL_0028: and
+    IL_0029: conv.u1
+    IL_002A: stind.i1
+    IL_002B: ret
+
+}
 void part12x4(uint src, Span<byte> dst)
 {
     IL_0000: ldarg.0
@@ -400,7 +473,7 @@ void part32x8(uint src, Span<byte> dst)
     IL_000C: ret
 
 }
-byte select(byte src, Odd8:byte parts)
+byte select(byte src, Odd8:byte spec)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
@@ -408,7 +481,7 @@ byte select(byte src, Odd8:byte parts)
     IL_0007: ret
 
 }
-ushort select(ushort src, Odd16:ushort parts)
+ushort select(ushort src, Odd16:ushort spec)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
@@ -416,7 +489,7 @@ ushort select(ushort src, Odd16:ushort parts)
     IL_0007: ret
 
 }
-uint select(uint src, Odd32:uint parts)
+uint select(uint src, Odd32:uint spec)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
@@ -424,11 +497,43 @@ uint select(uint src, Odd32:uint parts)
     IL_0007: ret
 
 }
-ulong select(ulong src, Odd64:ulong parts)
+ulong select(ulong src, Odd64:ulong spec)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: call System.UInt64 Z0.BitParts::select(System.UInt64,System.UInt64)
+    IL_0007: ret
+
+}
+uint project(uint src, Odd8:byte spec)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call System.UInt32 Z0.BitParts::project(System.UInt32,System.UInt32)
+    IL_0007: ret
+
+}
+uint project(uint src, Odd16:ushort spec)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call System.UInt32 Z0.BitParts::project(System.UInt32,System.UInt32)
+    IL_0007: ret
+
+}
+uint project(uint src, Odd32:uint spec)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call System.UInt32 Z0.BitParts::project(System.UInt32,System.UInt32)
+    IL_0007: ret
+
+}
+ulong project(ulong src, Odd64:ulong spec)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call System.UInt64 Z0.BitParts::project(System.UInt64,System.UInt64)
     IL_0007: ret
 
 }
@@ -554,7 +659,7 @@ ulong select(ulong src, ulong mask)
     IL_0007: ret
 
 }
-uint select(uint src, Even8:byte parts)
+uint select(uint src, Even8:byte spec)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
@@ -562,7 +667,7 @@ uint select(uint src, Even8:byte parts)
     IL_0007: ret
 
 }
-uint select(uint src, Even16:ushort parts)
+uint select(uint src, Even16:ushort spec)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
@@ -570,7 +675,7 @@ uint select(uint src, Even16:ushort parts)
     IL_0007: ret
 
 }
-uint select(uint src, Even32:uint parts)
+uint select(uint src, Even32:uint spec)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
@@ -578,11 +683,43 @@ uint select(uint src, Even32:uint parts)
     IL_0007: ret
 
 }
-ulong select(ulong src, Even64:ulong parts)
+ulong select(ulong src, Even64:ulong spec)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: call System.UInt64 Z0.BitParts::select(System.UInt64,System.UInt64)
+    IL_0007: ret
+
+}
+uint project(uint src, Even8:byte spec)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call System.UInt32 Z0.BitParts::project(System.UInt32,System.UInt32)
+    IL_0007: ret
+
+}
+uint project(uint src, Even16:ushort spec)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call System.UInt32 Z0.BitParts::project(System.UInt32,System.UInt32)
+    IL_0007: ret
+
+}
+uint project(uint src, Even32:uint spec)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call System.UInt32 Z0.BitParts::project(System.UInt32,System.UInt32)
+    IL_0007: ret
+
+}
+ulong project(ulong src, Even64:ulong spec)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call System.UInt64 Z0.BitParts::project(System.UInt64,System.UInt64)
     IL_0007: ret
 
 }
@@ -652,7 +789,7 @@ void part32x16(uint src, out ushort x0, out ushort x1)
     IL_000B: ret
 
 }
-uint select(uint src, Part2x1:uint part)
+uint select(uint src, Part2x1:uint spec)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
@@ -660,7 +797,7 @@ uint select(uint src, Part2x1:uint part)
     IL_0007: ret
 
 }
-uint select(uint src, Part3x1:uint part)
+uint select(uint src, Part3x1:uint spec)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
@@ -668,7 +805,7 @@ uint select(uint src, Part3x1:uint part)
     IL_0007: ret
 
 }
-uint select(uint src, Part4x1:uint part)
+uint select(uint src, Part4x1:uint spec)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
@@ -676,7 +813,7 @@ uint select(uint src, Part4x1:uint part)
     IL_0007: ret
 
 }
-uint select(uint src, Part5x1:uint part)
+uint select(uint src, Part5x1:uint spec)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
@@ -684,7 +821,7 @@ uint select(uint src, Part5x1:uint part)
     IL_0007: ret
 
 }
-uint select(uint src, Part6x1:uint part)
+uint select(uint src, Part6x1:uint spec)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
@@ -692,7 +829,7 @@ uint select(uint src, Part6x1:uint part)
     IL_0007: ret
 
 }
-uint select(uint src, Part7x1:uint part)
+uint select(uint src, Part7x1:uint spec)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
@@ -700,7 +837,7 @@ uint select(uint src, Part7x1:uint part)
     IL_0007: ret
 
 }
-uint select(uint src, Part8x1:uint part)
+uint select(uint src, Part8x1:uint spec)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
@@ -708,7 +845,7 @@ uint select(uint src, Part8x1:uint part)
     IL_0007: ret
 
 }
-uint select(uint src, Part9x1:uint part)
+uint select(uint src, Part9x1:uint spec)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
@@ -716,7 +853,7 @@ uint select(uint src, Part9x1:uint part)
     IL_0007: ret
 
 }
-uint select(uint src, Part10x1:uint part)
+uint select(uint src, Part10x1:uint spec)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
@@ -724,7 +861,7 @@ uint select(uint src, Part10x1:uint part)
     IL_0007: ret
 
 }
-uint select(uint src, Part11x1:uint part)
+uint select(uint src, Part11x1:uint spec)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
@@ -732,7 +869,7 @@ uint select(uint src, Part11x1:uint part)
     IL_0007: ret
 
 }
-uint select(uint src, Part12x1:uint part)
+uint select(uint src, Part12x1:uint spec)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
@@ -740,7 +877,7 @@ uint select(uint src, Part12x1:uint part)
     IL_0007: ret
 
 }
-uint select(uint src, Part13x1:uint part)
+uint select(uint src, Part13x1:uint spec)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
@@ -748,7 +885,7 @@ uint select(uint src, Part13x1:uint part)
     IL_0007: ret
 
 }
-uint select(uint src, Part16x1:uint part)
+uint select(uint src, Part16x1:uint spec)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
@@ -756,7 +893,7 @@ uint select(uint src, Part16x1:uint part)
     IL_0007: ret
 
 }
-uint select(uint src, Part32x1:uint part)
+uint select(uint src, Part32x1:uint spec)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
@@ -764,7 +901,7 @@ uint select(uint src, Part32x1:uint part)
     IL_0007: ret
 
 }
-ulong select(ulong src, Part64x1:ulong part)
+ulong select(ulong src, Part64x1:ulong spec)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
@@ -772,7 +909,7 @@ ulong select(ulong src, Part64x1:ulong part)
     IL_0007: ret
 
 }
-uint project(uint src, Part2x1:uint part)
+uint project(uint src, Part2x1:uint spec)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
@@ -780,7 +917,7 @@ uint project(uint src, Part2x1:uint part)
     IL_0007: ret
 
 }
-uint project(uint src, Part3x1:uint part)
+uint project(uint src, Part3x1:uint spec)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
@@ -788,7 +925,7 @@ uint project(uint src, Part3x1:uint part)
     IL_0007: ret
 
 }
-uint project(uint src, Part4x1:uint part)
+uint project(uint src, Part4x1:uint spec)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
@@ -796,7 +933,7 @@ uint project(uint src, Part4x1:uint part)
     IL_0007: ret
 
 }
-uint project(uint src, Part8x1:uint part)
+uint project(uint src, Part8x1:uint spec)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
@@ -804,7 +941,7 @@ uint project(uint src, Part8x1:uint part)
     IL_0007: ret
 
 }
-uint project(uint src, Part10x1:uint part)
+uint project(uint src, Part10x1:uint spec)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
@@ -812,7 +949,7 @@ uint project(uint src, Part10x1:uint part)
     IL_0007: ret
 
 }
-uint project(uint src, Part5x1:uint part)
+uint project(uint src, Part5x1:uint spec)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
@@ -820,7 +957,7 @@ uint project(uint src, Part5x1:uint part)
     IL_0007: ret
 
 }
-uint project(uint src, Part6x1:uint part)
+uint project(uint src, Part6x1:uint spec)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
@@ -828,7 +965,7 @@ uint project(uint src, Part6x1:uint part)
     IL_0007: ret
 
 }
-uint project(uint src, Part9x1:uint part)
+uint project(uint src, Part9x1:uint spec)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
@@ -836,7 +973,7 @@ uint project(uint src, Part9x1:uint part)
     IL_0007: ret
 
 }
-uint project(uint src, Part7x1:uint part)
+uint project(uint src, Part7x1:uint spec)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
@@ -844,7 +981,7 @@ uint project(uint src, Part7x1:uint part)
     IL_0007: ret
 
 }
-uint project(uint src, Part11x1:uint part)
+uint project(uint src, Part11x1:uint spec)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
@@ -852,7 +989,7 @@ uint project(uint src, Part11x1:uint part)
     IL_0007: ret
 
 }
-uint project(uint src, Part12x1:uint part)
+uint project(uint src, Part12x1:uint spec)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
@@ -860,7 +997,7 @@ uint project(uint src, Part12x1:uint part)
     IL_0007: ret
 
 }
-uint project(uint src, Part13x1:uint part)
+uint project(uint src, Part13x1:uint spec)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
@@ -868,7 +1005,7 @@ uint project(uint src, Part13x1:uint part)
     IL_0007: ret
 
 }
-uint project(uint src, Part16x1:uint part)
+uint project(uint src, Part16x1:uint spec)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
@@ -876,7 +1013,7 @@ uint project(uint src, Part16x1:uint part)
     IL_0007: ret
 
 }
-uint project(uint src, Part32x1:uint part)
+uint project(uint src, Part32x1:uint spec)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
@@ -884,7 +1021,7 @@ uint project(uint src, Part32x1:uint part)
     IL_0007: ret
 
 }
-ulong project(ulong src, Part64x1:ulong part)
+ulong project(ulong src, Part64x1:ulong spec)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
@@ -2016,78 +2153,5 @@ uint project(uint src, Part32x4:uint part)
     IL_0001: ldarg.1
     IL_0002: call System.UInt32 Z0.BitParts::project(System.UInt32,System.UInt32)
     IL_0007: ret
-
-}
-ulong project(ulong src, Part64x4:ulong part)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: call System.UInt64 Z0.BitParts::project(System.UInt64,System.UInt64)
-    IL_0007: ret
-
-}
-void part8x4(uint src, ref byte dst)
-{
-    IL_0000: ldarg.1
-    IL_0001: ldc.i4.0
-    IL_0002: call System.Byte& zfunc::seek<System.Byte>(System.Byte&,System.Int32)
-    IL_0007: ldarg.0
-    IL_0008: ldc.i4.s 15
-    IL_000A: and
-    IL_000B: conv.u1
-    IL_000C: stind.i1
-    IL_000D: ldarg.1
-    IL_000E: ldc.i4.1
-    IL_000F: call System.Byte& zfunc::seek<System.Byte>(System.Byte&,System.Int32)
-    IL_0014: ldarg.0
-    IL_0015: ldc.i4.4
-    IL_0016: shr.un
-    IL_0017: ldc.i4.s 15
-    IL_0019: and
-    IL_001A: conv.u1
-    IL_001B: stind.i1
-    IL_001C: ret
-
-}
-void part8x4(uint src, Span<byte> dst)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: call System.Byte& zfunc::head<System.Byte>(System.Span`1<System.Byte>)
-    IL_0007: call System.Void Z0.BitParts::part8x4(System.UInt32,System.Byte&)
-    IL_000C: ret
-
-}
-void part12x4(uint src, ref byte dst)
-{
-    IL_0000: ldarg.1
-    IL_0001: ldc.i4.0
-    IL_0002: call System.Byte& zfunc::seek<System.Byte>(System.Byte&,System.Int32)
-    IL_0007: ldarg.0
-    IL_0008: ldc.i4.s 15
-    IL_000A: and
-    IL_000B: conv.u1
-    IL_000C: stind.i1
-    IL_000D: ldarg.1
-    IL_000E: ldc.i4.1
-    IL_000F: call System.Byte& zfunc::seek<System.Byte>(System.Byte&,System.Int32)
-    IL_0014: ldarg.0
-    IL_0015: ldc.i4.4
-    IL_0016: shr.un
-    IL_0017: ldc.i4.s 15
-    IL_0019: and
-    IL_001A: conv.u1
-    IL_001B: stind.i1
-    IL_001C: ldarg.1
-    IL_001D: ldc.i4.2
-    IL_001E: call System.Byte& zfunc::seek<System.Byte>(System.Byte&,System.Int32)
-    IL_0023: ldarg.0
-    IL_0024: ldc.i4.8
-    IL_0025: shr.un
-    IL_0026: ldc.i4.s 15
-    IL_0028: and
-    IL_0029: conv.u1
-    IL_002A: stind.i1
-    IL_002B: ret
 
 }

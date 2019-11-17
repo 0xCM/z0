@@ -103,7 +103,7 @@ namespace Z0
         }
 
         public ImmInfo Description 
-            => new ImmInfo(Width, imagine(ref Unsafe.AsRef(in Value), out ulong _));
+            => new ImmInfo(Width, cast(ref Unsafe.AsRef(in Value), out ulong _));
 
         [MethodImpl(Inline)]
         public Imm<T> Redefine(T src)         
@@ -112,7 +112,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public Imm<S> As<S>()
             where S : unmanaged
-                => imagine<Imm<T>, Imm<S>>(ref Unsafe.AsRef(in this));            
+                => Unsafe.As<Imm<T>, Imm<S>>(ref Unsafe.AsRef(in this));            
 
         [MethodImpl(Inline)]
         public Imm<S> SignExtend<S>()

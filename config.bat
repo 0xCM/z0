@@ -1,6 +1,8 @@
 dotnet sln add base/nats/src/z0.nats.csproj
 dotnet sln add base/coredata/src/z0.coredata.csproj
 dotnet sln add base/corefunc/src/z0.corefunc.csproj
+dotnet sln add devops/z0.devops.csproj
+
 dotnet sln add gmath/src/z0.gmath.csproj
 dotnet sln add intrinsics/src/z0.intrinsics.csproj
 dotnet sln add libm/src/z0.libm.csproj
