@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2019
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Logix
+namespace Z0
 {
     using System;
     using System.Linq;
@@ -13,7 +13,7 @@ namespace Z0.Logix
     using static zfunc;
     using static As;
 
-    public static class Lookup
+    public static class LUT
     {        
 
         /// <summary>
@@ -24,7 +24,7 @@ namespace Z0.Logix
         [MethodImpl(Inline)]
         public static LookupKey GetKey(in Lut16 table, LookupSlot slot)
         {
-            ref var key = ref seekb(ref Unsafe.As<Lut16,byte>(ref asRef(in table)), (byte)slot);
+            ref var key = ref seekb(ref Unsafe.As<Lut16,byte>(ref mutable(in table)), (byte)slot);
             return (LookupKey)key;
         }
 
@@ -35,6 +35,7 @@ namespace Z0.Logix
             key = (byte)value;
         }
 
+
         /// <summary>
         /// Loads a cpu vector from a lookup table
         /// </summary>
@@ -42,9 +43,10 @@ namespace Z0.Logix
         [MethodImpl(Inline)]
         public static Vector128<byte> LoadVector(in Lut16 src)
         {
-            ref var mem = ref Unsafe.As<Lut16,byte>(ref As.asRef(in src));
+            ref var mem = ref byteref(src);
             return ginx.vload(n128, in mem);
         }
+
 
         /// <summary>
         /// Loads a cpu vector from a lookup table
@@ -53,7 +55,7 @@ namespace Z0.Logix
         [MethodImpl(Inline)]
         public static Vector256<byte> LoadVector(in Lut32 src)
         {
-            ref var mem = ref Unsafe.As<Lut32,byte>(ref As.asRef(in src));
+            ref var mem = ref byteref(src);
             return ginx.vload(n256, in mem);
         }
 
@@ -64,8 +66,8 @@ namespace Z0.Logix
         [MethodImpl(Inline)]
         public static unsafe Span<byte> AsSpan(in Lut16 src)
         {
-            ref var mem = ref Unsafe.As<Lut16,byte>(ref As.asRef(in src));
-            return new Span<byte>(As.constptr(in src), Lut16.Size);
+            ref var mem = ref Unsafe.As<Lut16,byte>(ref mutable(in src));
+            return new Span<byte>(constptr(in src), Lut16.Size);
         }
 
         /// <summary>
@@ -75,8 +77,8 @@ namespace Z0.Logix
         [MethodImpl(Inline)]
         public static unsafe Span<byte> AsSpan(in Lut32 src)
         {
-            ref var mem = ref Unsafe.As<Lut32,byte>(ref As.asRef(in src));
-            return new Span<byte>(As.constptr(in src), Lut32.Size);
+            ref var mem = ref Unsafe.As<Lut32,byte>(ref mutable(in src));
+            return new Span<byte>(constptr(in src), Lut32.Size);
         }
 
         /// <summary>

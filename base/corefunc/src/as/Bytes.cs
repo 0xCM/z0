@@ -64,7 +64,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static T read<T>(ReadOnlySpan<byte> src, in int offset = 0)
             where T : unmanaged
-                =>  Unsafe.ReadUnaligned<T>(ref asRef(skip(head(src), offset)));
+                =>  Unsafe.ReadUnaligned<T>(ref mutable(skip(head(src), offset)));
 
         /// <summary>
         /// Reads an unmanaged generic value from a bytespan beginning at a specified offset

@@ -15,41 +15,12 @@ namespace Z0
 
     partial class ginx
     {
-        [MethodImpl(Inline)]
-        public static Vector128<T> vunpackhi<T>(Vector128<T> x, Vector128<T> y)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(byte) 
-            || typeof(T) == typeof(ushort) 
-            || typeof(T) == typeof(uint) 
-            || typeof(T) == typeof(ulong))
-                return vunpackhi_u(x,y);
-            else if(typeof(T) == typeof(sbyte) 
-            || typeof(T) == typeof(short) 
-            || typeof(T) == typeof(int) 
-            || typeof(T) == typeof(long))
-                return vunpackhi_i(x,y);
-            else 
-                throw unsupported<T>();
-        }
-
-        [MethodImpl(Inline)]
-        public static Vector256<T> vunpackhi<T>(Vector256<T> x, Vector256<T> y)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(byte) 
-            || typeof(T) == typeof(ushort) 
-            || typeof(T) == typeof(uint) 
-            || typeof(T) == typeof(ulong))
-                return vunpackhi_u(x,y);
-            else if(typeof(T) == typeof(sbyte) 
-            || typeof(T) == typeof(short) 
-            || typeof(T) == typeof(int) 
-            || typeof(T) == typeof(long))
-                return vunpackhi_i(x,y);
-            else throw unsupported<T>();
-        }
-
+        /// <summary>
+        /// Forms the vector z := [vlo(x), vlo(y)] from vectors x and y
+        /// </summary>
+        /// <param name="x">The left source vector</param>
+        /// <param name="y">The right source vector</param>
+        /// <typeparam name="T">The primal component type</typeparam>
         [MethodImpl(Inline)]
         public static Vector128<T> vunpacklo<T>(Vector128<T> x, Vector128<T> y)
             where T : unmanaged
@@ -64,9 +35,16 @@ namespace Z0
             || typeof(T) == typeof(int) 
             || typeof(T) == typeof(long))
                 return vunpacklo_i(x,y);
-            else throw unsupported<T>();
+            else 
+                throw unsupported<T>();
         }
 
+        /// <summary>
+        /// Forms the vector z := [vlo(x), vlo(y)] from vectors x and y
+        /// </summary>
+        /// <param name="x">The left source vector</param>
+        /// <param name="y">The right source vector</param>
+        /// <typeparam name="T">The primal component type</typeparam>
         [MethodImpl(Inline)]
         public static Vector256<T> vunpacklo<T>(Vector256<T> x, Vector256<T> y)
             where T : unmanaged
@@ -85,5 +63,52 @@ namespace Z0
                 throw unsupported<T>();
         }
 
+        /// <summary>
+        /// Forms the vector z := [vhi(x), vhi(y)] from vectors x and y
+        /// </summary>
+        /// <param name="x">The left source vector</param>
+        /// <param name="y">The right source vector</param>
+        /// <typeparam name="T">The primal component type</typeparam>
+        [MethodImpl(Inline)]
+        public static Vector128<T> vunpackhi<T>(Vector128<T> x, Vector128<T> y)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(byte) 
+            || typeof(T) == typeof(ushort) 
+            || typeof(T) == typeof(uint) 
+            || typeof(T) == typeof(ulong))
+                return vunpackhi_u(x,y);
+            else if(typeof(T) == typeof(sbyte) 
+            || typeof(T) == typeof(short) 
+            || typeof(T) == typeof(int) 
+            || typeof(T) == typeof(long))
+                return vunpackhi_i(x,y);
+            else 
+                throw unsupported<T>();
+        }
+
+        /// <summary>
+        /// Forms the vector z := [vhi(x), vhi(y)] from vectors x and y
+        /// </summary>
+        /// <param name="x">The left source vector</param>
+        /// <param name="y">The right source vector</param>
+        /// <typeparam name="T">The primal component type</typeparam>
+        [MethodImpl(Inline)]
+        public static Vector256<T> vunpackhi<T>(Vector256<T> x, Vector256<T> y)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(byte) 
+            || typeof(T) == typeof(ushort) 
+            || typeof(T) == typeof(uint) 
+            || typeof(T) == typeof(ulong))
+                return vunpackhi_u(x,y);
+            else if(typeof(T) == typeof(sbyte) 
+            || typeof(T) == typeof(short) 
+            || typeof(T) == typeof(int) 
+            || typeof(T) == typeof(long))
+                return vunpackhi_i(x,y);
+            else 
+                throw unsupported<T>();
+        }
     }
 }

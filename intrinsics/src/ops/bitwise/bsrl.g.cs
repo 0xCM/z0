@@ -15,12 +15,12 @@ namespace Z0
 
     partial class ginx
     {
-
         /// <summary>
-        /// Shifts the source vector rightwards a specified number of bytes
+        /// Applies a rigtward shift over the full 128 vector bits at byte-level resolution
         /// </summary>
-        /// <param name="src">The source vector</param>
+        /// <param name="x">The source vector</param>
         /// <param name="count">The number of bytes to shift</param>
+        /// <typeparam name="T">THe primal component type</typeparam>
         [MethodImpl(Inline)]
         public static Vector128<T> vbsrl<T>(Vector128<T> x, byte count)
             where T : unmanaged
@@ -38,10 +38,11 @@ namespace Z0
         }
 
         /// <summary>
-        /// Shifts the source vector rightwards a specified number of bytes
+        /// Applies a rightward shift to each 128-bit lane at byte-level resolution
         /// </summary>
-        /// <param name="src">The source vector</param>
+        /// <param name="x">The source vector</param>
         /// <param name="count">The number of bytes to shift</param>
+        /// <typeparam name="T">THe primal component type</typeparam>
         [MethodImpl(Inline)]
         public static Vector256<T> vbsrl<T>(Vector256<T> x, byte count)
             where T : unmanaged

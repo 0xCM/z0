@@ -46,7 +46,6 @@ namespace Z0
         public static Vector128<short> vxor(Vector128<short> x, Vector128<short> y)
             => Xor(x, y);
 
-
         /// <summary>
         /// Computes the bitwise XOR between operands
         /// </summary>
@@ -164,8 +163,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<ulong> vxor(Vector256<ulong> x, Vector256<ulong> y)
             => Xor(x, y);
-
-
    }
 
 }

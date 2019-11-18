@@ -20,7 +20,7 @@ namespace Z0
     partial class dinx
     {         
         /// <summary>
-        /// Computes XOR(x,NOT(y)) for vectors x and y
+        /// Computes x ^ ~y for vectors x and y
         /// </summary>
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
@@ -29,7 +29,7 @@ namespace Z0
             => Xor(x, vnot(y));
 
         /// <summary>
-        /// Computes XOR(x,NOT(y)) for vectors x and y
+        /// Computes x ^ ~y for vectors x and y
         /// </summary>
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
@@ -38,7 +38,7 @@ namespace Z0
             => Xor(x, vnot(y));
 
         /// <summary>
-        /// Computes XOR(x,NOT(y)) for vectors x and y
+        /// Computes x ^ ~y for vectors x and y
         /// </summary>
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
@@ -46,9 +46,8 @@ namespace Z0
         public static Vector128<short> vxornot(Vector128<short> x, Vector128<short> y)
             => Xor(x, vnot(y));
 
-
         /// <summary>
-        /// Computes XOR(x,NOT(y)) for vectors x and y
+        /// Computes x ^ ~y for vectors x and y
         /// </summary>
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
@@ -57,7 +56,7 @@ namespace Z0
             => Xor(x, vnot(y));
 
         /// <summary>
-        /// Computes XOR(x,NOT(y)) for vectors x and y
+        /// Computes x ^ ~y for vectors x and y
         /// </summary>
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
@@ -66,7 +65,7 @@ namespace Z0
             => Xor(x, vnot(y));
 
         /// <summary>
-        /// Computes XOR(x,NOT(y)) for vectors x and y
+        /// Computes x ^ ~y for vectors x and y
         /// </summary>
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
@@ -75,7 +74,7 @@ namespace Z0
             => Xor(x, vnot(y));
 
         /// <summary>
-        /// Computes XOR(x,NOT(y)) for vectors x and y
+        /// Computes x ^ ~y for vectors x and y
         /// </summary>
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
@@ -84,7 +83,7 @@ namespace Z0
             => Xor(x, vnot(y));
 
         /// <summary>
-        /// Computes XOR(x,NOT(y)) for vectors x and y
+        /// Computes x ^ ~y for vectors x and y
         /// </summary>
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
@@ -94,7 +93,7 @@ namespace Z0
 
 
         /// <summary>
-        /// Computes XOR(x,NOT(y)) for vectors x and y
+        /// Computes x ^ ~y for vectors x and y
         /// </summary>
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
@@ -103,7 +102,7 @@ namespace Z0
             => Xor(x, vnot(y));
 
         /// <summary>
-        /// Computes XOR(x,NOT(y)) for vectors x and y
+        /// Computes x ^ ~y for vectors x and y
         /// </summary>
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
@@ -112,7 +111,7 @@ namespace Z0
             => Xor(x, vnot(y));
 
         /// <summary>
-        /// Computes XOR(x,NOT(y)) for vectors x and y
+        /// Computes x ^ ~y for vectors x and y
         /// </summary>
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
@@ -121,7 +120,7 @@ namespace Z0
             => Xor(x, vnot(y));
 
         /// <summary>
-        /// Computes XOR(x,NOT(y)) for vectors x and y
+        /// Computes x ^ ~y for vectors x and y
         /// </summary>
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
@@ -130,7 +129,7 @@ namespace Z0
             => Xor(x, vnot(y));
 
         /// <summary>
-        /// Computes XOR(x,NOT(y)) for vectors x and y
+        /// Computes x ^ ~y for vectors x and y
         /// </summary>
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
@@ -139,7 +138,7 @@ namespace Z0
             => Xor(x, vnot(y));
 
         /// <summary>
-        /// Computes XOR(x,NOT(y)) for vectors x and y
+        /// Computes x ^ ~y for vectors x and y
         /// </summary>
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
@@ -148,7 +147,7 @@ namespace Z0
             => Xor(x, vnot(y));
 
         /// <summary>
-        /// Computes XOR(x,NOT(y)) for vectors x and y
+        /// Computes x ^ ~y for vectors x and y
         /// </summary>
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
@@ -157,7 +156,7 @@ namespace Z0
             => Xor(x, vnot(y));
 
         /// <summary>
-        /// Computes XOR(x,NOT(y)) for vectors x and y
+        /// Computes x ^ ~y for vectors x and y
         /// </summary>
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
@@ -165,5 +164,4 @@ namespace Z0
         public static Vector256<ulong> vxornot(Vector256<ulong> x, Vector256<ulong> y)
             => Xor(x, vnot(y));
    }
-
 }

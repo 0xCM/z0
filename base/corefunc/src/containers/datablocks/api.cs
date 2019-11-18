@@ -120,24 +120,24 @@ namespace Z0
         public static void store(in byte src, uint count, ref Block128 dst)
         {
             ref var dstBytes = ref uint8(ref dst.X0);
-            Unsafe.CopyBlockUnaligned(ref dstBytes, ref asRef(in src), count);
+            Unsafe.CopyBlockUnaligned(ref dstBytes, ref mutable(in src), count);
         }
 
         [MethodImpl(Inline)]
         public static unsafe Span<char> chars(ref CharBlock2 src)
-            => new Span<char>(refptr(ref src.C0), 2).AsChar();
+            => new Span<char>(ptr(ref src.C0), 2).AsChar();
 
         [MethodImpl(Inline)]
         public static unsafe Span<char> chars(ref CharBlock4 src)
-            => new Span<char>(refptr(ref src.C0), 4).AsChar();
+            => new Span<char>(ptr(ref src.C0), 4).AsChar();
 
         [MethodImpl(Inline)]
         public static unsafe Span<char> chars(ref CharBlock8 src)
-            => new Span<char>(refptr(ref src.C0), 8).AsChar();            
+            => new Span<char>(ptr(ref src.C0), 8).AsChar();            
 
         [MethodImpl(Inline)]
         public static unsafe Span<char> chars(ref CharBlock16 src)
-            => new Span<char>(refptr(ref src.C0), 8).AsChar();
+            => new Span<char>(ptr(ref src.C0), 8).AsChar();
 
         [MethodImpl(Inline)]
         public static CharBlock4 concat(in CharBlock2 head, in CharBlock2 tail)

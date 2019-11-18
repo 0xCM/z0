@@ -31,75 +31,75 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static explicit operator sbyte(in num<T> src)
-            => convert(scalar(ref asRef(in src)), out sbyte x);
+            => convert(scalar(ref mutable(in src)), out sbyte x);
 
         [MethodImpl(Inline)]
         public static explicit operator byte(in num<T> src)
-            => convert(scalar(ref asRef(in src)), out byte x);
+            => convert(scalar(ref mutable(in src)), out byte x);
 
         [MethodImpl(Inline)]
         public static explicit operator short(in num<T> src)
-            => convert(scalar(ref asRef(in src)), out short x);
+            => convert(scalar(ref mutable(in src)), out short x);
 
         [MethodImpl(Inline)]
         public static explicit operator ushort(in num<T> src)
-            => convert(scalar(ref asRef(in src)), out ushort x);
+            => convert(scalar(ref mutable(in src)), out ushort x);
 
         [MethodImpl(Inline)]
         public static explicit operator int(in num<T> src)
-            => convert(scalar(ref asRef(in src)), out int x);
+            => convert(scalar(ref mutable(in src)), out int x);
 
         [MethodImpl(Inline)]
         public static explicit operator uint(in num<T> src)
-            => convert(scalar(ref asRef(in src)), out uint x);
+            => convert(scalar(ref mutable(in src)), out uint x);
 
         [MethodImpl(Inline)]
         public static explicit operator long(in num<T> src)
-            => convert(scalar(ref asRef(in src)), out long x);
+            => convert(scalar(ref mutable(in src)), out long x);
 
         [MethodImpl(Inline)]
         public static explicit operator ulong(in num<T> src)
-            => convert(scalar(ref asRef(in src)), out ulong x);
+            => convert(scalar(ref mutable(in src)), out ulong x);
 
         [MethodImpl(Inline)]
         public static explicit operator float(in num<T> src)
-            => convert(scalar(ref asRef(in src)), out float x);
+            => convert(scalar(ref mutable(in src)), out float x);
 
         [MethodImpl(Inline)]
         public static explicit operator double(in num<T> src)
-            => convert(scalar(ref asRef(in src)), out double x);
+            => convert(scalar(ref mutable(in src)), out double x);
 
         [MethodImpl(Inline)]
         public static explicit operator num<T>(in sbyte src)
-            => toNum(ref generic<T>(ref asRef(in src)));
+            => toNum(ref generic<T>(ref mutable(in src)));
 
         [MethodImpl(Inline)]
         public static explicit operator num<T>(in byte src)
-            => toNum(ref generic<T>(ref asRef(in src)));
+            => toNum(ref generic<T>(ref mutable(in src)));
 
         [MethodImpl(Inline)]
         public static explicit operator num<T>(in short src)
-            => toNum(ref generic<T>(ref asRef(in src)));
+            => toNum(ref generic<T>(ref mutable(in src)));
 
         [MethodImpl(Inline)]
         public static explicit operator num<T>(in ushort src)
-            => toNum(ref generic<T>(ref asRef(in src)));
+            => toNum(ref generic<T>(ref mutable(in src)));
 
         [MethodImpl(Inline)]
         public static explicit operator num<T>(in int src)
-            => toNum(ref generic<T>(ref asRef(in src)));
+            => toNum(ref generic<T>(ref mutable(in src)));
 
         [MethodImpl(Inline)]
         public static explicit operator num<T>(in uint src)
-            => toNum(ref generic<T>(ref asRef(in src)));
+            => toNum(ref generic<T>(ref mutable(in src)));
 
         [MethodImpl(Inline)]
         public static explicit operator num<T>(in long src)
-            => toNum(ref generic<T>(ref asRef(in src)));
+            => toNum(ref generic<T>(ref mutable(in src)));
 
         [MethodImpl(Inline)]
         public static explicit operator num<T>(in ulong src)
-            => toNum(ref generic<T>(ref asRef(in src)));
+            => toNum(ref generic<T>(ref mutable(in src)));
 
         [MethodImpl(Inline)]
         public static explicit operator num<T>(in float src)
@@ -114,7 +114,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator num<T>(in T src)
-            => Unsafe.As<T,num<T>>(ref  asRef(in src));
+            => Unsafe.As<T,num<T>>(ref  mutable(in src));
 
         [MethodImpl(Inline)]
         public static num<T> operator + (in num<T> lhs, in num<T> rhs) 
@@ -292,6 +292,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static ref T unwrap(in num<T> src)
-            => ref Unsafe.As<num<T>,T>(ref As.asRef(in src));
+            => ref Unsafe.As<num<T>,T>(ref mutable(in src));
     }
 }

@@ -49,7 +49,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         unsafe IntPtr GetPointer()        
-            => (IntPtr)Unsafe.AsPointer(ref As.asRef( in Bytes[0]));
+            => (IntPtr)Unsafe.AsPointer(ref mutable( in Bytes[0]));
         
         /// <summary>
         /// Creates a delegate to execute the encapsulated code
@@ -92,9 +92,8 @@ namespace Z0
         public readonly IntPtr Pointer
             => GetPointer();
 
-
         unsafe IntPtr GetPointer()        
-            => (IntPtr)Unsafe.AsPointer(ref  Z0.As.asRef( in Bytes[0]));
+            => (IntPtr)Unsafe.AsPointer(ref  mutable(in head(Bytes)));
         
         /// <summary>
         /// Creates a delegate to execute the encapsulated code

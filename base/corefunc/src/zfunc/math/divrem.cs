@@ -97,7 +97,7 @@ partial class zfunc
     [MethodImpl(Inline)]
     public static long divrem<N>(long m, out long r, N n = default)
         where N : unmanaged, ITypeNat
-            => Math.DivRem(m,(long)n.value, out r);
+            => Math.DivRem(m,(long)natval<N>(), out r);
 
     /// <summary>
     /// Computes the quotient and remainder
@@ -110,8 +110,8 @@ partial class zfunc
     public static ulong divrem<N>(ulong m, out ulong r, N n = default)
         where N : unmanaged, ITypeNat
     {
-        var q = m / n.value;
-        r = m - n.value * q;
+        var q = m / natval<N>();
+        r = m - natval<N>() * q;
         return q;
     }
 

@@ -14,6 +14,11 @@ namespace Z0
 
     partial class ginx
     {
+        /// <summary>
+        /// Computes ~(x | y) for vectors x and y
+        /// </summary>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
         public static Vector128<T> vnor<T>(Vector128<T> x, Vector128<T> y)
             where T : unmanaged
@@ -22,16 +27,21 @@ namespace Z0
             || typeof(T) == typeof(ushort) 
             || typeof(T) == typeof(uint) 
             || typeof(T) == typeof(ulong))
-                return vnor_128u(x,y);
+                return vnor_u(x,y);
             else if(typeof(T) == typeof(sbyte) 
             || typeof(T) == typeof(short) 
             || typeof(T) == typeof(int) 
             || typeof(T) == typeof(long))
-                return vnor_128i(x,y);
+                return vnor_i(x,y);
             else 
-                return vnor_128f(x,y);
+                return vnor_f(x,y);
         }
 
+        /// <summary>
+        /// Computes ~(x | y) for vectors x and y
+        /// </summary>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
         public static Vector256<T> vnor<T>(Vector256<T> x, Vector256<T> y)
             where T : unmanaged
@@ -40,18 +50,18 @@ namespace Z0
             || typeof(T) == typeof(ushort) 
             || typeof(T) == typeof(uint) 
             || typeof(T) == typeof(ulong))
-                return vnor_256u(x,y);
+                return vnor_u(x,y);
             else if(typeof(T) == typeof(sbyte) 
             || typeof(T) == typeof(short) 
             || typeof(T) == typeof(int) 
             || typeof(T) == typeof(long))
-                return vnor_256i(x,y);
+                return vnor_i(x,y);
             else 
-                return vnor_256f(x,y);
+                return vnor_f(x,y);
         }
 
        [MethodImpl(Inline)]
-        static Vector128<T> vnor_128u<T>(Vector128<T> x, Vector128<T> y)
+        static Vector128<T> vnor_u<T>(Vector128<T> x, Vector128<T> y)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -65,7 +75,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static Vector128<T> vnor_128i<T>(Vector128<T> x, Vector128<T> y)
+        static Vector128<T> vnor_i<T>(Vector128<T> x, Vector128<T> y)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
@@ -79,7 +89,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static Vector128<T> vnor_128f<T>(Vector128<T> x, Vector128<T> y)
+        static Vector128<T> vnor_f<T>(Vector128<T> x, Vector128<T> y)
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
@@ -91,7 +101,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static Vector256<T> vnor_256u<T>(Vector256<T> x, Vector256<T> y)
+        static Vector256<T> vnor_u<T>(Vector256<T> x, Vector256<T> y)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -105,7 +115,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static Vector256<T> vnor_256i<T>(Vector256<T> x, Vector256<T> y)
+        static Vector256<T> vnor_i<T>(Vector256<T> x, Vector256<T> y)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
@@ -119,7 +129,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static Vector256<T> vnor_256f<T>(Vector256<T> x, Vector256<T> y)
+        static Vector256<T> vnor_f<T>(Vector256<T> x, Vector256<T> y)
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))

@@ -15,6 +15,11 @@ namespace Z0
     partial class ginx
     {
 
+        /// <summary>
+        /// Computes x ^ ~y for vectors x and y
+        /// </summary>
+        /// <param name="x">The left operand</param>
+        /// <param name="y">The right operand</param>
         [MethodImpl(Inline)]
         public static Vector128<T> vxornot<T>(Vector128<T> x, Vector128<T> y)
             where T : unmanaged
@@ -33,6 +38,11 @@ namespace Z0
                 return vxornot_128f(x,y);
         }
 
+        /// <summary>
+        /// Computes x ^ ~y for vectors x and y
+        /// </summary>
+        /// <param name="x">The left operand</param>
+        /// <param name="y">The right operand</param>
         [MethodImpl(Inline)]
         public static Vector256<T> vxornot<T>(Vector256<T> x, Vector256<T> y)
             where T : unmanaged
@@ -80,33 +90,6 @@ namespace Z0
                 return generic<T>(dinx.vxornot(int64(x), int64(y)));
         }
 
-        [MethodImpl(Inline)]
-        public static Vector128<T> vxornot<T>(N128 n, in T a, in T b)
-            where T : unmanaged
-        {                    
-            vload(in a, out Vector128<T> vA);
-            vload(in b, out Vector128<T> vB);
-            return vxornot(vA,vB);
-        }
-
-        [MethodImpl(Inline)]
-        public static Vector256<T> vxornot<T>(N256 n, in T a, in T b)
-            where T : unmanaged
-        {                    
-            vload(in a, out Vector256<T> vA);
-            vload(in b, out Vector256<T> vB);
-            return vxornot(vA,vB);
-        }
-
-        [MethodImpl(Inline)]
-        public static void vxornot<T>(N128 n, in T a, in T b, ref T z)
-            where T : unmanaged
-                => vstore(vxornot(n, in a, in b), ref z);
-
-        [MethodImpl(Inline)]
-        public static void vxornot<T>(N256 n, in T a, in T b, ref T z)
-            where T : unmanaged
-                => vstore(vxornot(n, in a, in b), ref z);
  
         [MethodImpl(Inline)]
         static Vector128<T> vxornot_128f<T>(Vector128<T> x, Vector128<T> y)

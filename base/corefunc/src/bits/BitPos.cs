@@ -81,11 +81,11 @@ namespace Z0
         
         [MethodImpl(Inline)]
         public static BitPos operator ++(in BitPos lhs)
-            => Increment(ref asRef(in lhs));
+            => Increment(ref mutable(in lhs));
 
         [MethodImpl(Inline)]
         public static BitPos operator --(in BitPos lhs)
-            => Decrement(ref asRef(in lhs));
+            => Decrement(ref mutable(in lhs));
 
         [MethodImpl(Inline)]
         public static bool operator ==(BitPos lhs, BitPos rhs)

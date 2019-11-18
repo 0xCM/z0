@@ -10,9 +10,19 @@ using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;    
 
 using Z0;
-using static Z0.As;
+//using static Z0.As;
 partial class zfunc
 {
+    [MethodImpl(Inline)]
+    public static byte uint8<T>(T src)
+        => Unsafe.As<T,byte>(ref src);
+
+    [MethodImpl(Inline)]
+    public static byte? uint8<T>(T? src)
+        where T : unmanaged
+            => Unsafe.As<T?, byte?>(ref src);
+
+
     /// <summary>
     /// If possible, applies the conversion S -> T
     /// </summary>
@@ -133,13 +143,13 @@ partial class zfunc
         where T : unmanaged
     {
         if(typeof(T) == typeof(byte))
-            return generic<T>((byte)src);
+            return As.generic<T>((byte)src);
         else if(typeof(T) == typeof(ushort))
-            return generic<T>((ushort)src);
+            return As.generic<T>((ushort)src);
         else if(typeof(T) == typeof(uint))
-            return generic<T>((uint)src);
+            return As.generic<T>((uint)src);
         else if(typeof(T) == typeof(ulong))
-            return generic<T>((ulong)src);
+            return As.generic<T>((ulong)src);
         else
             throw unsupported<T>();
     }

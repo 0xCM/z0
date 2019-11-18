@@ -1,4 +1,4 @@
-// 2019-11-17 00:33:31:663
+// 2019-11-17 22:14:50:345
 Sign:int signum_d16u(ushort x)
 {
     IL_0000: ldarg.0
@@ -3101,33 +3101,6 @@ ulong fma_g64u(ulong x, ulong a, ulong b)
     IL_0008: ret
 
 }
-float fma_d32f(float x, float a, float b)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: ldarg.2
-    IL_0003: call System.Single Z0.fmath::fma(System.Single,System.Single,System.Single)
-    IL_0008: ret
-
-}
-float fma_g32f(float x, float a, float b)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: ldarg.2
-    IL_0003: call System.Single Z0.gmath::fma<System.Single>(System.Single,System.Single,System.Single)
-    IL_0008: ret
-
-}
-double fma_d64f(double x, double a, double b)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: ldarg.2
-    IL_0003: call System.Double Z0.fmath::fma(System.Double,System.Double,System.Double)
-    IL_0008: ret
-
-}
 double fma_g64f(double x, double a, double b)
 {
     IL_0000: ldarg.0
@@ -3222,6 +3195,30 @@ bit gt_d32u(uint a, uint b)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: call Z0.bit Z0.math::gt(System.UInt32,System.UInt32)
+    IL_0007: ret
+
+}
+bit gt_g32u(uint a, uint b)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call Z0.bit Z0.gmath::gt<System.UInt32>(System.UInt32,System.UInt32)
+    IL_0007: ret
+
+}
+bit gt_d64i(long a, long b)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call Z0.bit Z0.math::gt(System.Int64,System.Int64)
+    IL_0007: ret
+
+}
+bit gt_g64i(long a, long b)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call Z0.bit Z0.gmath::gt<System.Int64>(System.Int64,System.Int64)
     IL_0007: ret
 
 }

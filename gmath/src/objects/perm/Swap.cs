@@ -101,7 +101,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Swap operator ++(in Swap src)
         {
-            ref var dst = ref As.asRef(in src);
+            ref var dst = ref mutable(in src);
             dst.i++;
             dst.j++;
             return dst;
@@ -110,7 +110,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Swap operator --(in Swap src)
         {
-            ref var dst = ref As.asRef(in src);
+            ref var dst = ref mutable(in src);
             if(src.i != 0)
                 dst.i--;
             if(src.j != 0)

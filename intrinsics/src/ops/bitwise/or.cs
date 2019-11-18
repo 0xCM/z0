@@ -47,11 +47,9 @@ namespace Z0
         public static Vector128<long> vor(Vector128<long> x, Vector128<long> y)
             => Or(x, y);
 
-
         [MethodImpl(Inline)]
         public static Vector128<ulong> vor(Vector128<ulong> x, Vector128<ulong> y)
             => Or(x, y);
-
 
         [MethodImpl(Inline)]
         public static Vector256<byte> vor(Vector256<byte> x, Vector256<byte> y)
@@ -84,8 +82,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<ulong> vor(Vector256<ulong> x, Vector256<ulong> y)
             => Or(x, y);
-
-
     }
-
 }

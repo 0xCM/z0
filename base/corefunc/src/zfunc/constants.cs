@@ -79,5 +79,58 @@ partial class zfunc
     /// </summary>
     public const ulong xAAAAAAAAAAAAAAAA = 0xAAAAAAAAAAAAAAAA;    
 
+    public const ulong x0000FFFFFFFF0000 = 0x0000FFFFFFFF0000;
+    
+    public const uint x00FFFF00 = 0x00FFFF00;
+
+    public const ulong x00FFFF0000FFFF00 = 0x00FFFF0000FFFF00;
+
+    public const ushort x0FF0 = 0x0FF0;    
+
+    public const uint x0FF00FF0 = 0x0FF00FF0;    
+
+    public const ulong x0FF00FF00FF00FF0 = 0x0FF00FF00FF00FF0;
+
+    /// <summary>
+    /// Defines a 4-bit interior segment of enabled bits, 0b00_1111_00
+    /// </summary>
+    public const byte x3C = 0x3C;
+
+    /// <summary>
+    /// Defines a sequence of alternating 4-bit segments, 0b00_1111_0000_1111_..._0000_1111_00
+    /// </summary>
+    public const ushort x3C3C = 0x3C3C;
+
+    /// <summary>
+    /// Defines a sequence of alternating 4-bit segments, 0b00_1111_0000_1111_..._0000_1111_00
+    /// </summary>
+    public const uint x3C3C3C3C = 0x3C3C3C3C;
+
+    /// <summary>
+    /// Defines a sequence of alternating 4-bit segments, 0b00_1111_0000_1111_..._0000_1111_00
+    /// </summary>
+    public const ulong x3C3C3C3C3C3C3C3C = 0x3C3C3C3C3C3C3C3C;
+
+    /// <summary>
+    /// Defines a sequence of alternating 2-bit segments, 0b0_11_00_11_0
+    /// </summary>
+    public const byte x66 = 0x66;
+
+    /// <summary>
+    /// Defines a sequence of alternating 2-bit segments, 0b0_11_00_11_00_..._11_00_11_0 
+    /// </summary>
+    public const ushort x6666 = 0x6666;
+
+    /// <summary>
+    /// Defines a sequence of alternating 2-bit segments, 0b0_11_00_11_00_..._11_00_11_0 
+    /// </summary>
+    public const uint x66666666 = 0x66666666;
+    
+    /// <summary>
+    /// Defines a sequence of alternating 2-bit segments, 0b0_11_00_11_00_..._11_00_11_0 
+    /// </summary>
+    public const ulong x6666666666666666 = 0x6666666666666666;
+
+
 }
 

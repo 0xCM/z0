@@ -15,32 +15,33 @@ namespace Z0
     
     partial class ginx
     {    
+        
         [MethodImpl(Inline)]
-        public static Vector128<T> vsrl<T>(Vector128<T> lhs, byte offset)
+        public static Vector128<T> vsrl<T>(Vector128<T> x, byte offset)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(dinx.vsrl(uint8(lhs), offset));
+                return generic<T>(dinx.vsrl(uint8(x), offset));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(dinx.vsrl(uint16(lhs), offset));
+                return generic<T>(dinx.vsrl(uint16(x), offset));
             else if(typeof(T) == typeof(uint)) 
-                return generic<T>(dinx.vsrl(uint32(lhs), offset));
+                return generic<T>(dinx.vsrl(uint32(x), offset));
             else 
-                return generic<T>(dinx.vsrl(uint64(lhs), offset));
+                return generic<T>(dinx.vsrl(uint64(x), offset));
         }
 
         [MethodImpl(Inline)]
-        public static Vector256<T> vsrl<T>(Vector256<T> lhs, byte offset)
+        public static Vector256<T> vsrl<T>(Vector256<T> x, byte offset)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(dinx.vsrl(uint8(lhs), offset));
+                return generic<T>(dinx.vsrl(uint8(x), offset));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(dinx.vsrl(uint16(lhs), offset));
+                return generic<T>(dinx.vsrl(uint16(x), offset));
             else if(typeof(T) == typeof(uint)) 
-                return generic<T>(dinx.vsrl(uint32(lhs), offset));
+                return generic<T>(dinx.vsrl(uint32(x), offset));
             else 
-                return generic<T>(dinx.vsrl(uint64(lhs), offset));
+                return generic<T>(dinx.vsrl(uint64(x), offset));
         }
 
         [MethodImpl(Inline)]

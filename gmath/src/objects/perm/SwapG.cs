@@ -78,7 +78,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static SwapG<T> operator ++(in SwapG<T> src)
         {
-            ref var dst = ref As.asRef(in src);
+            ref var dst = ref mutable(in src);
             gmath.inc(ref dst.i);
             gmath.inc(ref dst.j);
             return dst;
@@ -87,7 +87,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static SwapG<T> operator --(in SwapG<T> src)
         {
-            ref var dst = ref As.asRef(in src);
+            ref var dst = ref mutable(in src);
             if(gmath.nonzero(src.i))
                 gmath.dec(ref dst.i);
             
@@ -237,7 +237,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static SwapG<N,T> operator ++(in SwapG<N,T> src)
         {
-            ref var dst = ref As.asRef(in src);
+            ref var dst = ref mutable(in src);
             dst.i++;
             dst.j++;
             return dst;
@@ -246,7 +246,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static SwapG<N,T> operator --(in SwapG<N,T> src)
         {
-            ref var dst = ref As.asRef(in src);
+            ref var dst = ref mutable(in src);
             if(src.i != 0)
                 dst.i--;
             if(src.j != 0)

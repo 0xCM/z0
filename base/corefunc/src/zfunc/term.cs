@@ -220,4 +220,28 @@ partial class zfunc
         return msg;
     }
 
+    /// <summary>
+    /// Evaluates the expression and writes the result to standard output
+    /// </summary>
+    /// <param name="fx">The expression to evaluate</param>
+    /// <typeparam name="T">The evaluation value type</typeparam>
+    public static void print<T>(Expression<Func<T>> fx)
+    {
+        var nv = fx.Evaluate();
+        print(AppMsg.Define($"{nv}", SeverityLevel.HiliteCL));
+    }
+
+    /// <summary>
+    /// Writes a named value to standard output
+    /// </summary>
+    /// <param name="nv">The named vaue to emit</param>
+    /// <typeparam name="T">The value type</typeparam>
+    public static void print<T>(NamedValue<T> nv)
+    {
+        print(AppMsg.Define($"{nv}", SeverityLevel.HiliteCL));
+    }
+
+    public static void print<T>(string name, T value)
+        => print(NamedValue.Define(name,value));
+
 }

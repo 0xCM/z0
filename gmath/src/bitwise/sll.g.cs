@@ -17,24 +17,25 @@ namespace Z0
         /// <summary>
         /// Applies a logical right-shift to an integer
         /// </summary>
-        /// <param name="src">The value to shift</param>
+        /// <param name="a">The value to shift</param>
         /// <param name="offset">The number of bits to shift</param>
         /// <typeparam name="T">The primal integer type</typeparam>
         [MethodImpl(Inline)]
-        public static T sll<T>(T src, int offset)
+        public static T sll<T>(T a, int offset)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte) 
             || typeof(T) == typeof(ushort) 
             || typeof(T) == typeof(uint) 
             || typeof(T) == typeof(ulong))
-                return sllu(src,offset);
+                return sll_u(a,offset);
             else if(typeof(T) == typeof(sbyte) 
             || typeof(T) == typeof(short) 
             || typeof(T) == typeof(int) 
             || typeof(T) == typeof(long))
-                return slli(src,offset);
-            else throw unsupported<T>();
+                return sll_i(a,offset);
+            else 
+                throw unsupported<T>();
         }
 
         /// <summary>
@@ -44,81 +45,81 @@ namespace Z0
         /// <param name="offset">The number of bits to shift</param>
         /// <typeparam name="T">The primal integer type</typeparam>
         [MethodImpl(Inline)]
-        public static ref T sll<T>(ref T lhs, int offset)
+        public static ref T sll<T>(ref T a, int offset)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte) 
             || typeof(T) == typeof(ushort) 
             || typeof(T) == typeof(uint) 
             || typeof(T) == typeof(ulong))
-                sllu(ref lhs, offset);
+                sll_u(ref a, offset);
             else if(typeof(T) == typeof(sbyte) 
             || typeof(T) == typeof(short) 
             || typeof(T) == typeof(int) 
             || typeof(T) == typeof(long))
-                slli(ref lhs,offset);
+                sll_i(ref a,offset);
             else 
                 throw unsupported<T>();
                 
-            return ref lhs;
+            return ref a;
         }
 
         [MethodImpl(Inline)]
-        static T slli<T>(T lhs, int offset)
+        static T sll_i<T>(T a, int offset)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                 return generic<T>(math.sll(int8(lhs), offset));
+                 return generic<T>(math.sll(int8(a), offset));
             if(typeof(T) == typeof(short))
-                 return generic<T>(math.sll(int16(lhs), offset));
+                 return generic<T>(math.sll(int16(a), offset));
             if(typeof(T) == typeof(int))
-                 return generic<T>(math.sll(int32(lhs), offset));
+                 return generic<T>(math.sll(int32(a), offset));
             else
-                 return generic<T>(math.sll(int64(lhs), offset));
+                 return generic<T>(math.sll(int64(a), offset));
         }
 
         [MethodImpl(Inline)]
-        static T sllu<T>(T lhs, int offset)
+        static T sll_u<T>(T a, int offset)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(math.sll(uint8(lhs), offset));
+                return generic<T>(math.sll(uint8(a), offset));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(math.sll(uint16(lhs), offset));
+                return generic<T>(math.sll(uint16(a), offset));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(math.sll(uint32(lhs), offset));
+                return generic<T>(math.sll(uint32(a), offset));
             else 
-                return generic<T>(math.sll(uint64(lhs), offset));
+                return generic<T>(math.sll(uint64(a), offset));
         }
 
         [MethodImpl(Inline)]
-        static ref T slli<T>(ref T lhs, int rhs)
+        static ref T sll_i<T>(ref T a, int rhs)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                 math.sll(ref int8(ref lhs), rhs);
+                 math.sll(ref int8(ref a), rhs);
             if(typeof(T) == typeof(short))
-                 math.sll(ref int16(ref lhs), rhs);
+                 math.sll(ref int16(ref a), rhs);
             if(typeof(T) == typeof(int))
-                 math.sll(ref int32(ref lhs), rhs);
+                 math.sll(ref int32(ref a), rhs);
             else
-                 math.sll(ref int64(ref lhs), rhs);
-            return ref lhs;
+                 math.sll(ref int64(ref a), rhs);
+            return ref a;
         }
 
         [MethodImpl(Inline)]
-        static ref T sllu<T>(ref T lhs, int rhs)
+        static ref T sll_u<T>(ref T a, int rhs)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                 math.sll(ref uint8(ref lhs), rhs);
+                 math.sll(ref uint8(ref a), rhs);
             if(typeof(T) == typeof(ushort))
-                 math.sll(ref uint16(ref lhs), rhs);
+                 math.sll(ref uint16(ref a), rhs);
             if(typeof(T) == typeof(uint))
-                 math.sll(ref uint32(ref lhs), rhs);
+                 math.sll(ref uint32(ref a), rhs);
             else
-                 math.sll(ref uint64(ref lhs), rhs);
-            return ref lhs;
+                 math.sll(ref uint64(ref a), rhs);
+            return ref a;
         }
 
     }

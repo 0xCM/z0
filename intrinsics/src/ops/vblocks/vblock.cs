@@ -473,7 +473,7 @@ namespace Z0
         {                    
             vload(in a, out Vector128<T> vA);
             vload(in b, out Vector128<T> vB);
-            return ginx.vimply(vA,vB);
+            return ginx.vimpl(vA,vB);
         }
 
         [MethodImpl(Inline)]
@@ -482,7 +482,7 @@ namespace Z0
         {                    
             vload(in a, out Vector256<T> vA);
             vload(in b, out Vector256<T> vB);
-            return ginx.vimply(vA,vB);
+            return ginx.vimpl(vA,vB);
         }
 
         [MethodImpl(Inline)]
@@ -519,7 +519,7 @@ namespace Z0
         {                    
             vload(in a, out Vector128<T> vA);
             vload(in b, out Vector128<T> vB);
-            return ginx.vnotimply(vA,vB);
+            return ginx.vnonimpl(vA,vB);
         }
 
         [MethodImpl(Inline)]
@@ -528,7 +528,7 @@ namespace Z0
         {                    
             vload(in a, out Vector256<T> vA);
             vload(in b, out Vector256<T> vB);
-            return ginx.vnotimply(vA,vB);
+            return ginx.vnonimpl(vA,vB);
         }
 
         [MethodImpl(Inline)]
@@ -565,7 +565,7 @@ namespace Z0
         {                    
             vload(in a, out Vector128<T> vA);
             vload(in b, out Vector128<T> vB);
-            return ginx.vcimply(vA,vB);
+            return ginx.vcimpl(vA,vB);
         }
 
         [MethodImpl(Inline)]
@@ -574,7 +574,7 @@ namespace Z0
         {                    
             vload(in a, out Vector256<T> vA);
             vload(in b, out Vector256<T> vB);
-            return ginx.vcimply(vA,vB);
+            return ginx.vcimpl(vA,vB);
         }
 
         [MethodImpl(Inline)]
@@ -611,7 +611,7 @@ namespace Z0
         {                    
             vload(in a, out Vector128<T> vA);
             vload(in b, out Vector128<T> vB);
-            return ginx.vcnotimply(vA,vB);
+            return ginx.vcnonimpl(vA,vB);
         }
 
         [MethodImpl(Inline)]
@@ -620,7 +620,7 @@ namespace Z0
         {                    
             vload(in rX, out Vector256<T> vA);
             vload(in b, out Vector256<T> vB);
-            return ginx.vcnotimply(vA,vB);
+            return ginx.vcnonimpl(vA,vB);
         }
 
         [MethodImpl(Inline)]

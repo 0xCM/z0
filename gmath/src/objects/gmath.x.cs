@@ -210,7 +210,7 @@ namespace Z0
         {
             if(lhs.Length != rhs.Length)
                 return false;
-            return SequenceEqual(ref asRef(in head(lhs)), ref asRef(in head(rhs)), lhs.Length);
+            return SequenceEqual(ref mutable(in head(lhs)), ref mutable(in head(rhs)), lhs.Length);
         }
 
         [MethodImpl(Inline)]

@@ -13,113 +13,111 @@ namespace Z0
     partial class dinx
     {
         /// <summary>
-        /// A composite operation that shifts the source vector components leftward
-        /// by a specified offset and then computes the XOR between the original source 
-        /// vector and the shifted vector
+        /// Computes x^(x << offset)
         /// </summary>
-        /// <param name="src">The source vector</param>
+        /// <param name="x">The source vector</param>
         /// <param name="offset">Specifies the shift offset for each corresponding component</param>
         [MethodImpl(Inline)]
-        public static Vector128<ushort> vxorsl(Vector128<ushort> src, byte offset)
-            => dinx.vxor(src, vsll(src,offset));
+        public static Vector128<byte> vxorsl(Vector128<byte> x, byte offset)
+            => dinx.vxor(x, vsll(x,offset));
 
         /// <summary>
-        /// A composite operation that shifts the source vector components leftward
-        /// by a specified offset and then computes the XOR between the original source 
-        /// vector and the shifted vector
+        /// Computes x^(x << offset)
         /// </summary>
-        /// <param name="src">The source vector</param>
+        /// <param name="x">The source vector</param>
         /// <param name="offset">Specifies the shift offset for each corresponding component</param>
         [MethodImpl(Inline)]
-        public static Vector128<uint> vxorsl(Vector128<uint> src, byte offset)
-            => dinx.vxor(src, vsll(src,offset));
+        public static Vector128<ushort> vxorsl(Vector128<ushort> x, byte offset)
+            => dinx.vxor(x, vsll(x,offset));
 
         /// <summary>
-        /// A composite operation that shifts the source vector components leftward
-        /// by a specified offset and then computes the XOR between the original source 
-        /// vector and the shifted vector
+        /// Computes x^(x << offset)
         /// </summary>
-        /// <param name="src">The source vector</param>
+        /// <param name="x">The source vector</param>
         /// <param name="offset">Specifies the shift offset for each corresponding component</param>
         [MethodImpl(Inline)]
-        public static Vector128<ulong> vxorsl(Vector128<ulong> src, byte offset)
-            => dinx.vxor(src, vsll(src,offset));
+        public static Vector128<uint> vxorsl(Vector128<uint> x, byte offset)
+            => dinx.vxor(x, vsll(x,offset));
 
         /// <summary>
-        /// A composite operation that shifts the source vector components leftward
-        /// by a specified offset and then computes the XOR between the original source 
-        /// vector and the shifted vector
+        /// Computes x^(x << offset)
         /// </summary>
-        /// <param name="src">The source vector</param>
+        /// <param name="x">The source vector</param>
         /// <param name="offset">Specifies the shift offset for each corresponding component</param>
         [MethodImpl(Inline)]
-        public static Vector256<ushort> vxorsl(Vector256<ushort> src, byte offset)
-            => dinx.vxor(src, vsll(src,offset));
+        public static Vector128<ulong> vxorsl(Vector128<ulong> x, byte offset)
+            => dinx.vxor(x, vsll(x,offset));
 
         /// <summary>
-        /// A composite operation that shifts the source vector components leftward
-        /// by a specified offset and then computes the XOR between the original source 
-        /// vector and the shifted vector
+        /// Computes x^(x << offset)
         /// </summary>
-        /// <param name="src">The source vector</param>
+        /// <param name="x">The source vector</param>
         /// <param name="offset">Specifies the shift offset for each corresponding component</param>
         [MethodImpl(Inline)]
-        public static Vector256<uint> vxorsl(Vector256<uint> src, byte offset)
-            => dinx.vxor(src, vsll(src,offset));
+        public static Vector256<byte> vxorsl(Vector256<byte> x, byte offset)
+            => dinx.vxor(x, vsll(x,offset));
 
         /// <summary>
-        /// A composite operation that shifts the source vector components leftward
-        /// by a specified offset and then computes the XOR between the original source 
-        /// vector and the shifted vector
+        /// Computes x^(x << offset)
         /// </summary>
-        /// <param name="src">The source vector</param>
+        /// <param name="x">The source vector</param>
         /// <param name="offset">Specifies the shift offset for each corresponding component</param>
         [MethodImpl(Inline)]
-        public static Vector256<ulong> vxorsl(Vector256<ulong> src, byte offset)
-            => dinx.vxor(src, vsll(src,offset));
+        public static Vector256<ushort> vxorsl(Vector256<ushort> x, byte offset)
+            => dinx.vxor(x, vsll(x,offset));
 
         /// <summary>
-        /// A composite operation that shifts the source vector components leftward
-        /// by variable offsets and then computes the XOR between the original source 
-        /// vector and the shifted vector
+        /// Computes x^(x << offset)
         /// </summary>
-        /// <param name="src">The source vector</param>
+        /// <param name="x">The source vector</param>
         /// <param name="offset">Specifies the shift offset for each corresponding component</param>
         [MethodImpl(Inline)]
-        public static Vector128<uint> vxorslv(Vector128<uint> src, Vector128<uint> offsets)
-            => dinx.vxor(src, dinx.vsllv(src,offsets));
+        public static Vector256<uint> vxorsl(Vector256<uint> x, byte offset)
+            => dinx.vxor(x, vsll(x,offset));
 
         /// <summary>
-        /// A composite operation that shifts the source vector components leftward
-        /// by variable offsets and then computes the XOR between the original source 
-        /// vector and the shifted vector
+        /// Computes x^(x << offset)
         /// </summary>
-        /// <param name="src">The source vector</param>
+        /// <param name="x">The source vector</param>
         /// <param name="offset">Specifies the shift offset for each corresponding component</param>
         [MethodImpl(Inline)]
-        public static Vector128<ulong> vxorslv(Vector128<ulong> src, Vector128<ulong> offsets)
-            => dinx.vxor(src,dinx.vsllv(src,offsets));
+        public static Vector256<ulong> vxorsl(Vector256<ulong> x, byte offset)
+            => dinx.vxor(x, vsll(x,offset));
 
         /// <summary>
-        /// A composite operation that shifts the source vector components leftward
-        /// by variable offsets and then computes the XOR between the original source 
-        /// vector and the shifted vector
+        /// Computes x^(x << offsets)
         /// </summary>
-        /// <param name="src">The source vector</param>
+        /// <param name="x">The source vector</param>
         /// <param name="offset">Specifies the shift offset for each corresponding component</param>
         [MethodImpl(Inline)]
-        public static Vector256<uint> vxorslv(Vector256<uint> src, Vector256<uint> offsets)
-            => dinx.vxor(src, dinx.vsllv(src,offsets));
+        public static Vector128<uint> vxorslv(Vector128<uint> x, Vector128<uint> offsets)
+            => dinx.vxor(x, dinx.vsllv(x,offsets));
 
         /// <summary>
-        /// A composite operation that shifts the source vector components leftward
-        /// by variable offsets and then computes the XOR between the original source 
-        /// vector and the shifted vector
+        /// Computes x^(x << offsets)
         /// </summary>
-        /// <param name="src">The source vector</param>
+        /// <param name="x">The source vector</param>
         /// <param name="offset">Specifies the shift offset for each corresponding component</param>
         [MethodImpl(Inline)]
-        public static Vector256<ulong> vxorslv(Vector256<ulong> src, Vector256<ulong> offsets)
-            => dinx.vxor(src, dinx.vsllv(src,offsets));
+        public static Vector128<ulong> vxorslv(Vector128<ulong> x, Vector128<ulong> offsets)
+            => dinx.vxor(x,dinx.vsllv(x,offsets));
+
+        /// <summary>
+        /// Computes x^(x << offsets)
+        /// </summary>
+        /// <param name="x">The source vector</param>
+        /// <param name="offset">Specifies the shift offset for each corresponding component</param>
+        [MethodImpl(Inline)]
+        public static Vector256<uint> vxorslv(Vector256<uint> x, Vector256<uint> offsets)
+            => dinx.vxor(x, dinx.vsllv(x,offsets));
+
+        /// <summary>
+        /// Computes x^(x << offsets)
+        /// </summary>
+        /// <param name="x">The source vector</param>
+        /// <param name="offset">Specifies the shift offset for each corresponding component</param>
+        [MethodImpl(Inline)]
+        public static Vector256<ulong> vxorslv(Vector256<ulong> x, Vector256<ulong> offsets)
+            => dinx.vxor(x, dinx.vsllv(x,offsets));
     }
 }

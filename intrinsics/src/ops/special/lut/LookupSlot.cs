@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2019
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Logix
+namespace Z0
 {
     using System;
     using System.Linq;
@@ -13,43 +13,40 @@ namespace Z0.Logix
     using static zfunc;
 
     /// <summary>
-    /// Identifies lookup values
+    /// Identifies lookup table slots, i.e., positions in the lookup table
     /// </summary>
-    public enum LookupKey : byte
+    public enum LookupSlot : byte
     {
-        K0,
+        S0,
 
-        K1,
+        S1,
 
-        K2,
+        S2,
 
-        K3,
+        S3,
 
-        K4,
+        S4,
 
-        K5,
+        S5,
 
-        K6,
+        S6,
 
-        K7,
+        S7,
 
-        K8,
+        S8,
 
-        K9,
+        S9,
 
-        KA,
+        SA,
 
-        KB,
+        SB,
 
-        KC,
+        SC,
 
-        KD,
+        SD,
 
-        KE,
+        SE,
 
-        KF
+        SF
     }
-
-
-
 }

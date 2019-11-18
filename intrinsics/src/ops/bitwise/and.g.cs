@@ -14,6 +14,12 @@ namespace Z0
 
     partial class ginx
     {
+        /// <summary>
+        /// Computes the bitwise AND between the operands
+        /// </summary>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
+        /// <typeparam name="T">The primal component type</typeparam>
         [MethodImpl(Inline)]
         public static Vector128<T> vand<T>(Vector128<T> x, Vector128<T> y)
             where T : unmanaged
@@ -22,16 +28,22 @@ namespace Z0
             || typeof(T) == typeof(ushort) 
             || typeof(T) == typeof(uint) 
             || typeof(T) == typeof(ulong))
-                return vand_128u(x,y);
+                return vand_u(x,y);
             else if(typeof(T) == typeof(sbyte) 
             || typeof(T) == typeof(short) 
             || typeof(T) == typeof(int) 
             || typeof(T) == typeof(long))
-                return vand_128i(x,y);
+                return vand_i(x,y);
             else 
                 throw unsupported<T>();
         }
 
+        /// <summary>
+        /// Computes the bitwise AND between the operands
+        /// </summary>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
+        /// <typeparam name="T">The primal component type</typeparam>
         [MethodImpl(Inline)]
         public static Vector256<T> vand<T>(Vector256<T> x, Vector256<T> y)
             where T : unmanaged
@@ -40,18 +52,18 @@ namespace Z0
             || typeof(T) == typeof(ushort) 
             || typeof(T) == typeof(uint) 
             || typeof(T) == typeof(ulong))
-                return vand_256u(x,y);
+                return vand_u(x,y);
             else if(typeof(T) == typeof(sbyte) 
             || typeof(T) == typeof(short) 
             || typeof(T) == typeof(int) 
             || typeof(T) == typeof(long))
-                return vand_256i(x,y);
+                return vand_i(x,y);
             else 
                 throw unsupported<T>();
         }
 
         [MethodImpl(Inline)]
-        static Vector128<T> vand_128u<T>(Vector128<T> x, Vector128<T> y)
+        static Vector128<T> vand_u<T>(Vector128<T> x, Vector128<T> y)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -65,7 +77,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static Vector128<T> vand_128i<T>(Vector128<T> x, Vector128<T> y)
+        static Vector128<T> vand_i<T>(Vector128<T> x, Vector128<T> y)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
@@ -80,7 +92,7 @@ namespace Z0
 
 
         [MethodImpl(Inline)]
-        static Vector256<T> vand_256u<T>(Vector256<T> x, Vector256<T> y)
+        static Vector256<T> vand_u<T>(Vector256<T> x, Vector256<T> y)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -94,7 +106,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static Vector256<T> vand_256i<T>(Vector256<T> x, Vector256<T> y)
+        static Vector256<T> vand_i<T>(Vector256<T> x, Vector256<T> y)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))

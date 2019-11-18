@@ -19,160 +19,160 @@ namespace Z0
         /// __m128i _mm_bsrli_si128 (__m128i a, int imm8) PSRLDQ xmm, imm8
         /// Shifts the source vector rightwards with byte-level resolution
         /// </summary>
-        /// <param name="src">The source vector</param>
+        /// <param name="x">The source vector</param>
         /// <param name="count">The number of bytes to shift</param>
         [MethodImpl(Inline)]
-        public static Vector128<sbyte> vbsrl(Vector128<sbyte> src, byte count)
-            => ShiftRightLogical128BitLane(src, count);
+        public static Vector128<sbyte> vbsrl(Vector128<sbyte> x, byte count)
+            => ShiftRightLogical128BitLane(x, count);
 
         /// <summary>
         /// __m128i _mm_bsrli_si128 (__m128i a, int imm8) PSRLDQ xmm, imm8
         /// Shifts the source vector rightwards with byte-level resolution
         /// </summary>
-        /// <param name="src">The source vector</param>
+        /// <param name="x">The source vector</param>
         /// <param name="count">The number of bytes to shift</param>
         [MethodImpl(Inline)]
-        public static Vector128<byte> vbsrl(Vector128<byte> src, byte count)
-            => ShiftRightLogical128BitLane(src, count);
+        public static Vector128<byte> vbsrl(Vector128<byte> x, byte count)
+            => ShiftRightLogical128BitLane(x, count);
 
         /// <summary>
         /// __m128i _mm_bsrli_si128 (__m128i a, int imm8) PSRLDQ xmm, imm8
         /// Shifts the source vector rightwards with byte-level resolution
         /// </summary>
-        /// <param name="src">The source vector</param>
+        /// <param name="x">The source vector</param>
         /// <param name="count">The number of bytes to shift</param>
         [MethodImpl(Inline)]
-        public static Vector128<short> vbsrl(Vector128<short> src, byte count)
-            => ShiftRightLogical128BitLane(src, count);
+        public static Vector128<short> vbsrl(Vector128<short> x, byte count)
+            => ShiftRightLogical128BitLane(x, count);
 
         /// <summary>
         /// __m128i _mm_bsrli_si128 (__m128i a, int imm8) PSRLDQ xmm, imm8
         /// Shifts the source vector rightwards with byte-level resolution
         /// </summary>
-        /// <param name="src">The source vector</param>
+        /// <param name="x">The source vector</param>
         /// <param name="count">The number of bytes to shift</param>
         [MethodImpl(Inline)]
-        public static Vector128<ushort> vbsrl(Vector128<ushort> src, byte count)
-            => ShiftRightLogical128BitLane(src, count);
+        public static Vector128<ushort> vbsrl(Vector128<ushort> x, byte count)
+            => ShiftRightLogical128BitLane(x, count);
 
         /// <summary>
         /// __m128i _mm_bsrli_si128 (__m128i a, int imm8) PSRLDQ xmm, imm8
         /// Shifts the source vector rightwards with byte-level resolution
         /// </summary>
-        /// <param name="src">The source vector</param>
+        /// <param name="x">The source vector</param>
         /// <param name="count">The number of bytes to shift</param>
         [MethodImpl(Inline)]
-        public static Vector128<int> vbsrl(Vector128<int> src, byte count)
-            => ShiftRightLogical128BitLane(src, count);
+        public static Vector128<int> vbsrl(Vector128<int> x, byte count)
+            => ShiftRightLogical128BitLane(x, count);
 
         /// <summary>
         /// __m128i _mm_bsrli_si128 (__m128i a, int imm8) PSRLDQ xmm, imm8
         /// Shifts the source vector rightwards with byte-level resolution
         /// </summary>
-        /// <param name="src">The source vector</param>
+        /// <param name="x">The source vector</param>
         /// <param name="count">The number of bytes to shift</param>
         [MethodImpl(Inline)]
-        public static Vector128<uint> vbsrl(Vector128<uint> src, byte count)
-            => ShiftRightLogical128BitLane(src, count);
+        public static Vector128<uint> vbsrl(Vector128<uint> x, byte count)
+            => ShiftRightLogical128BitLane(x, count);
 
         /// <summary>
         /// __m128i _mm_bsrli_si128 (__m128i a, int imm8) PSRLDQ xmm, imm8
         /// Shifts the source vector rightwards with byte-level resolution
         /// </summary>
-        /// <param name="src">The source vector</param>
+        /// <param name="x">The source vector</param>
         /// <param name="count">The number of bytes to shift</param>
         [MethodImpl(Inline)]
-        public static Vector128<long> vbsrl(Vector128<long> src, byte count)
-            => ShiftRightLogical128BitLane(src, count);
+        public static Vector128<long> vbsrl(Vector128<long> x, byte count)
+            => ShiftRightLogical128BitLane(x, count);
 
         /// <summary>
         /// __m128i _mm_bsrli_si128 (__m128i a, int imm8) PSRLDQ xmm, imm8
         /// Shifts the source vector rightwards with byte-level resolution
         /// </summary>
-        /// <param name="src">The source vector</param>
+        /// <param name="x">The source vector</param>
         /// <param name="count">The number of bytes to shift</param>
         [MethodImpl(Inline)]
-        public static Vector128<ulong> vbsrl(Vector128<ulong> src, byte count)
-            => ShiftRightLogical128BitLane(src, count);
+        public static Vector128<ulong> vbsrl(Vector128<ulong> x, byte count)
+            => ShiftRightLogical128BitLane(x, count);
 
         /// <summary>
         /// __m256i _mm256_bsrli_epi128 (__m256i a, const int imm8) VPSRLDQ ymm, ymm, imm8
         /// Shifts the source vector rightwards with byte-level resolution
         /// </summary>
-        /// <param name="src">The source vector</param>
+        /// <param name="x">The source vector</param>
         /// <param name="count">The number of bytes to shift</param>
         [MethodImpl(Inline)]
-        public static Vector256<sbyte> vbsrl(Vector256<sbyte> src, byte count)
-            => ShiftRightLogical128BitLane(src, count);
+        public static Vector256<sbyte> vbsrl(Vector256<sbyte> x, byte count)
+            => ShiftRightLogical128BitLane(x, count);
 
         /// <summary>
         /// __m256i _mm256_bsrli_epi128 (__m256i a, const int imm8) VPSRLDQ ymm, ymm, imm8
         /// Shifts the source vector rightwards with byte-level resolution
         /// </summary>
-        /// <param name="src">The source vector</param>
+        /// <param name="x">The source vector</param>
         /// <param name="count">The number of bytes to shift</param>
         [MethodImpl(Inline)]
-        public static Vector256<byte> vbsrl(Vector256<byte> src, byte count)
-            => ShiftRightLogical128BitLane(src, count);
+        public static Vector256<byte> vbsrl(Vector256<byte> x, byte count)
+            => ShiftRightLogical128BitLane(x, count);
 
         /// <summary>
         /// __m256i _mm256_bsrli_epi128 (__m256i a, const int imm8) VPSRLDQ ymm, ymm, imm8
         /// Shifts the source vector rightwards with byte-level resolution
         /// </summary>
-        /// <param name="src">The source vector</param>
+        /// <param name="x">The source vector</param>
         /// <param name="count">The number of bytes to shift</param>
         [MethodImpl(Inline)]
-        public static Vector256<short> vbsrl(Vector256<short> src, byte count)
-            => ShiftRightLogical128BitLane(src, count);
+        public static Vector256<short> vbsrl(Vector256<short> x, byte count)
+            => ShiftRightLogical128BitLane(x, count);
 
         /// <summary>
         /// __m256i _mm256_bsrli_epi128 (__m256i a, const int imm8) VPSRLDQ ymm, ymm, imm8
         /// Shifts the source vector rightwards with byte-level resolution
         /// </summary>
-        /// <param name="src">The source vector</param>
+        /// <param name="x">The source vector</param>
         /// <param name="count">The number of bytes to shift</param>
         [MethodImpl(Inline)]
-        public static Vector256<ushort> vbsrl(Vector256<ushort> src, byte count)
-            => ShiftRightLogical128BitLane(src, count);
+        public static Vector256<ushort> vbsrl(Vector256<ushort> x, byte count)
+            => ShiftRightLogical128BitLane(x, count);
 
         /// <summary>
         /// __m256i _mm256_bsrli_epi128 (__m256i a, const int imm8) VPSRLDQ ymm, ymm, imm8
         /// Shifts the source vector rightwards with byte-level resolution
         /// </summary>
-        /// <param name="src">The source vector</param>
+        /// <param name="x">The source vector</param>
         /// <param name="count">The number of bytes to shift</param>
         [MethodImpl(Inline)]
-        public static Vector256<int> vbsrl(Vector256<int> src, byte count)
-            => ShiftRightLogical128BitLane(src, count);
+        public static Vector256<int> vbsrl(Vector256<int> x, byte count)
+            => ShiftRightLogical128BitLane(x, count);
 
         /// <summary>
         /// __m256i _mm256_bsrli_epi128 (__m256i a, const int imm8) VPSRLDQ ymm, ymm, imm8
         /// Shifts the source vector rightwards with byte-level resolution
         /// </summary>
-        /// <param name="src">The source vector</param>
+        /// <param name="x">The source vector</param>
         /// <param name="count">The number of bytes to shift</param>
         [MethodImpl(Inline)]
-        public static Vector256<uint> vbsrl(Vector256<uint> src, byte count)
-            => ShiftRightLogical128BitLane(src, count);
+        public static Vector256<uint> vbsrl(Vector256<uint> x, byte count)
+            => ShiftRightLogical128BitLane(x, count);
 
         /// <summary>
         /// __m256i _mm256_bsrli_epi128 (__m256i a, const int imm8) VPSRLDQ ymm, ymm, imm8
         /// Shifts the source vector rightwards with byte-level resolution
         /// </summary>
-        /// <param name="src">The source vector</param>
+        /// <param name="x">The source vector</param>
         /// <param name="count">The number of bytes to shift</param>
         [MethodImpl(Inline)]
-        public static Vector256<long> vbsrl(Vector256<long> src, byte count)
-            => ShiftRightLogical128BitLane(src, count);
+        public static Vector256<long> vbsrl(Vector256<long> x, byte count)
+            => ShiftRightLogical128BitLane(x, count);
 
         /// <summary>
         /// __m256i _mm256_bsrli_epi128 (__m256i a, const int imm8) VPSRLDQ ymm, ymm, imm8
         /// Shifts the source vector rightwards with byte-level resolution
         /// </summary>
-        /// <param name="src">The source vector</param>
+        /// <param name="x">The source vector</param>
         /// <param name="count">The number of bytes to shift</param>
         [MethodImpl(Inline)]
-        public static Vector256<ulong> vbsrl(Vector256<ulong> src, byte count)
-            => ShiftRightLogical128BitLane(src, count); 
+        public static Vector256<ulong> vbsrl(Vector256<ulong> x, byte count)
+            => ShiftRightLogical128BitLane(x, count); 
     }
 }

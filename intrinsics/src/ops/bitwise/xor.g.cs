@@ -14,6 +14,11 @@ namespace Z0
 
     partial class ginx
     {
+        /// <summary>
+        /// Computes x ^ y for vectors x and y
+        /// </summary>
+        /// <param name="x">The left operand</param>
+        /// <param name="y">The right operand</param>
         [MethodImpl(Inline)]
         public static Vector128<T> vxor<T>(Vector128<T> x, Vector128<T> y)
             where T : unmanaged
@@ -22,16 +27,21 @@ namespace Z0
             || typeof(T) == typeof(ushort) 
             || typeof(T) == typeof(uint) 
             || typeof(T) == typeof(ulong))
-                return vxor_128u(x,y);
+                return vxor_8u(x,y);
             else if(typeof(T) == typeof(sbyte) 
             || typeof(T) == typeof(short) 
             || typeof(T) == typeof(int) 
             || typeof(T) == typeof(long))
-                return vxor_128i(x,y);
+                return vxor_i(x,y);
             else 
-                return vxor_128f(x,y);
+                return vxor_f(x,y);
         }
 
+        /// <summary>
+        /// Computes x ^ y for vectors x and y
+        /// </summary>
+        /// <param name="x">The left operand</param>
+        /// <param name="y">The right operand</param>
         [MethodImpl(Inline)]        
         public static Vector256<T> vxor<T>(Vector256<T> x, Vector256<T> y)
             where T : unmanaged
@@ -40,18 +50,18 @@ namespace Z0
             || typeof(T) == typeof(ushort) 
             || typeof(T) == typeof(uint) 
             || typeof(T) == typeof(ulong))
-                return vxor_256u(x,y);
+                return vxor_u(x,y);
             else if(typeof(T) == typeof(sbyte) 
             || typeof(T) == typeof(short) 
             || typeof(T) == typeof(int) 
             || typeof(T) == typeof(long))
-                return vxor_256i(x,y);
+                return vxor_i(x,y);
             else 
-                return vxor_256f(x,y);
+                return vxor_f(x,y);
         }
 
         [MethodImpl(Inline)]
-        static Vector128<T> vxor_128u<T>(Vector128<T> x, Vector128<T> y)
+        static Vector128<T> vxor_8u<T>(Vector128<T> x, Vector128<T> y)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -65,7 +75,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static Vector128<T> vxor_128i<T>(Vector128<T> x, Vector128<T> y)
+        static Vector128<T> vxor_i<T>(Vector128<T> x, Vector128<T> y)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
@@ -79,7 +89,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static Vector128<T> vxor_128f<T>(Vector128<T> x, Vector128<T> y)
+        static Vector128<T> vxor_f<T>(Vector128<T> x, Vector128<T> y)
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
@@ -91,7 +101,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static Vector256<T> vxor_256u<T>(Vector256<T> x, Vector256<T> y)
+        static Vector256<T> vxor_u<T>(Vector256<T> x, Vector256<T> y)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -105,7 +115,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static Vector256<T> vxor_256i<T>(Vector256<T> x, Vector256<T> y)
+        static Vector256<T> vxor_i<T>(Vector256<T> x, Vector256<T> y)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
@@ -119,7 +129,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static Vector256<T> vxor_256f<T>(Vector256<T> x, Vector256<T> y)
+        static Vector256<T> vxor_f<T>(Vector256<T> x, Vector256<T> y)
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))

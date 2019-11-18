@@ -155,7 +155,7 @@ namespace Z0
         public ulong Identifier
         {
             [MethodImpl(Inline)]
-            get => Unsafe.As<GridMoniker, ulong>(ref As.asRef(in this));
+            get => Unsafe.As<GridMoniker, ulong>(ref mutable(in this));
         }
 
         [MethodImpl(Inline)]

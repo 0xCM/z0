@@ -16,183 +16,183 @@ namespace Z0
     partial class math
     {
         [MethodImpl(Inline)]
-        public static sbyte and(sbyte lhs, sbyte rhs)
-            => (sbyte)(lhs & rhs);
+        public static sbyte and(sbyte a, sbyte b)
+            => (sbyte)(a & b);
 
         [MethodImpl(Inline)]
-        public static byte and(byte lhs, byte rhs)
-            => (byte)(lhs & rhs);
+        public static byte and(byte a, byte b)
+            => (byte)(a & b);
 
         [MethodImpl(Inline)]
-        public static short and(short lhs, short rhs)
-            => (short)(lhs & rhs);
+        public static short and(short a, short b)
+            => (short)(a & b);
 
         [MethodImpl(Inline)]
-        public static ushort and(ushort lhs, ushort rhs)
-            => (ushort)(lhs & rhs);
+        public static ushort and(ushort a, ushort b)
+            => (ushort)(a & b);
 
         [MethodImpl(Inline)]
-        public static int and(int lhs, int rhs)
-            => lhs & rhs;
+        public static int and(int a, int b)
+            => a & b;
 
         [MethodImpl(Inline)]
-        public static uint and(uint lhs, uint rhs)
-            => lhs & rhs;
+        public static uint and(uint a, uint b)
+            => a & b;
 
         [MethodImpl(Inline)]
-        public static long and(long lhs, long rhs)
-            => lhs & rhs;
+        public static long and(long a, long b)
+            => a & b;
 
         [MethodImpl(Inline)]
-        public static ulong and(ulong lhs, ulong rhs)
-            => lhs & rhs;
+        public static ulong and(ulong a, ulong b)
+            => a & b;
 
         [MethodImpl(Inline)]
-        public static float and(float lhs, float rhs)
-            => BitConverter.Int32BitsToSingle(lhs.ToBits() & rhs.ToBits());
+        public static float and(float a, float b)
+            => BitConverter.Int32BitsToSingle(a.ToBits() & b.ToBits());
 
         [MethodImpl(Inline)]
-        public static double and(double lhs, double rhs)
-            => BitConverter.Int64BitsToDouble(lhs.ToBits() & rhs.ToBits());
+        public static double and(double a, double b)
+            => BitConverter.Int64BitsToDouble(a.ToBits() & b.ToBits());
 
         [MethodImpl(Inline)]
-        public static ref sbyte and(in sbyte lhs, in sbyte rhs, ref sbyte dst)
+        public static ref sbyte and(in sbyte a, in sbyte b, ref sbyte dst)
         {
-            dst = (sbyte)(lhs & rhs);
+            dst = (sbyte)(a & b);
             return ref dst;
         }
 
         [MethodImpl(Inline)]
-        public static ref byte and(in byte lhs, in byte rhs, ref byte dst)
+        public static ref byte and(in byte a, in byte b, ref byte dst)
         {
-            dst = (byte)(lhs & rhs);
+            dst = (byte)(a & b);
             return ref dst;
         }
 
         [MethodImpl(Inline)]
-        public static ref short and(in short lhs, in short rhs, ref short dst)
+        public static ref short and(in short a, in short b, ref short dst)
         {
-            dst = (short)(lhs & rhs);
+            dst = (short)(a & b);
             return ref dst;
         }
 
         [MethodImpl(Inline)]
-        public static ref ushort and(in ushort lhs, in ushort rhs, ref ushort dst)
+        public static ref ushort and(in ushort a, in ushort b, ref ushort dst)
         {
-            dst = (ushort)(lhs & rhs);
+            dst = (ushort)(a & b);
             return ref dst;
         }
 
         [MethodImpl(Inline)]
-        public static ref int and(in int lhs, in int rhs, ref int dst)
+        public static ref int and(in int a, in int b, ref int dst)
         {
-            dst = lhs & rhs;
+            dst = a & b;
             return ref dst;
         }
 
         [MethodImpl(Inline)]
-        public static ref uint and(in uint lhs, in uint rhs, ref uint dst)
+        public static ref uint and(in uint a, in uint b, ref uint dst)
         {
-            dst = lhs & rhs;
+            dst = a & b;
             return ref dst;
         }
 
         [MethodImpl(Inline)]
-        public static ref long and(in long lhs, in long rhs, ref long dst)
+        public static ref long and(in long a, in long b, ref long dst)
         {
-            dst = lhs & rhs;
+            dst = a & b;
             return ref dst;
         }
 
         [MethodImpl(Inline)]
-        public static ref ulong and(in ulong lhs, in ulong rhs, ref ulong dst)
+        public static ref ulong and(in ulong a, in ulong b, ref ulong dst)
         {
-            dst = lhs & rhs;
+            dst = a & b;
             return ref dst;
         }
 
         [MethodImpl(Inline)]
-        public static ref float and(in float lhs, in float rhs, ref float dst)
+        public static ref float and(in float a, in float b, ref float dst)
         {
-            dst = BitConverter.Int32BitsToSingle(lhs.ToBits() & rhs.ToBits());
+            dst = BitConverter.Int32BitsToSingle(a.ToBits() & b.ToBits());
             return ref dst;
         }
 
         [MethodImpl(Inline)]
-        public static ref double and(in double lhs, in double rhs, ref double dst)
+        public static ref double and(in double a, in double b, ref double dst)
         {
-            dst = BitConverter.Int64BitsToDouble(lhs.ToBits() & rhs.ToBits());
+            dst = BitConverter.Int64BitsToDouble(a.ToBits() & b.ToBits());
             return ref dst;
         }
             
         [MethodImpl(Inline)]
-        public static ref sbyte and(ref sbyte lhs, sbyte rhs)
+        public static ref sbyte and(ref sbyte a, sbyte b)
         {
-            lhs = (sbyte)(lhs & rhs);
-            return ref lhs;
+            a = (sbyte)(a & b);
+            return ref a;
         }
 
         [MethodImpl(Inline)]
-        public static ref byte and(ref byte lhs, byte rhs)
+        public static ref byte and(ref byte a, byte b)
         {
-            lhs = (byte)(lhs & rhs);
-            return ref lhs;
+            a = (byte)(a & b);
+            return ref a;
         }
 
         [MethodImpl(Inline)]
-        public static ref short and(ref short lhs, short rhs)
+        public static ref short and(ref short a, short b)
         {
-            lhs = (short)(lhs & rhs);
-            return ref lhs;
+            a = (short)(a & b);
+            return ref a;
         }
 
         [MethodImpl(Inline)]
-        public static ref ushort and(ref ushort lhs, ushort rhs)
+        public static ref ushort and(ref ushort a, ushort b)
         {
-            lhs = (ushort)(lhs & rhs);
-            return ref lhs;
+            a = (ushort)(a & b);
+            return ref a;
         }
 
         [MethodImpl(Inline)]
-        public static ref int and(ref int lhs, int rhs)
+        public static ref int and(ref int a, int b)
         {
-            lhs = lhs & rhs;
-            return ref lhs;
+            a = a & b;
+            return ref a;
         }
 
         [MethodImpl(Inline)]
-        public static ref uint and(ref uint lhs, uint rhs)
+        public static ref uint and(ref uint a, uint b)
         {
-            lhs = lhs & rhs;
-            return ref lhs;
+            a = a & b;
+            return ref a;
         }
 
         [MethodImpl(Inline)]
-        public static ref long and(ref long lhs, long rhs)
+        public static ref long and(ref long a, long b)
         {
-            lhs = lhs & rhs;
-            return ref lhs;
+            a = a & b;
+            return ref a;
         }
 
         [MethodImpl(Inline)]
-        public static ref ulong and(ref ulong lhs, ulong rhs)
+        public static ref ulong and(ref ulong a, ulong b)
         {
-            lhs = lhs & rhs;
-            return ref lhs;
+            a = a & b;
+            return ref a;
         }
  
         [MethodImpl(Inline)]
-        public static ref float and(ref float lhs, float rhs)
+        public static ref float and(ref float a, float b)
         {
-            lhs = and(lhs,rhs);
-            return ref lhs;
+            a = and(a,b);
+            return ref a;
         }
 
         [MethodImpl(Inline)]
-        public static ref double and(ref double lhs, double rhs)
+        public static ref double and(ref double a, double b)
         {
-            lhs = and(lhs,rhs);
-            return ref lhs;
+            a = and(a,b);
+            return ref a;
         }
 
 

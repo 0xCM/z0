@@ -46,7 +46,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ref byte Head<T>(this ref T src)
             where T : unmanaged
-                => ref Unsafe.As<T, byte>(ref As.asRef(in src));
+                => ref Unsafe.As<T, byte>(ref mutable(in src));
 
         /// <summary>
         /// Retrieves a memory reference determined by a bank address

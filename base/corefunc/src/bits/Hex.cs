@@ -137,7 +137,7 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return As.uint8(src).HexDigits(uppercase);
+                return uint8(src).HexDigits(uppercase);
             else if(typeof(T) == typeof(ushort))
                 return As.uint16(src).HexDigits(uppercase);
             else if(typeof(T) == typeof(uint))

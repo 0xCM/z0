@@ -47,7 +47,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static num<T> from<T>(in T src)
             where T : unmanaged
-                => Unsafe.As<T,num<T>>(ref asRef(in src));
+                => Unsafe.As<T,num<T>>(ref mutable(in src));
 
         [MethodImpl(Inline)]
         public static num<T> num<T>(T src)

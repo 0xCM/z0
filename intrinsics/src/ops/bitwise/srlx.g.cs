@@ -15,7 +15,6 @@ namespace Z0
     
     partial class ginx
     {        
-
         /// <summary>
         /// Shifts the full 128 bits of a vector rightward at bit-level resolution
         /// </summary>

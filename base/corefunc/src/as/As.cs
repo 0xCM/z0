@@ -88,9 +88,6 @@ namespace Z0
                 => (ReadOnlySpan128<T>)MemoryMarshal.Cast<S,T>(src);
 
 
-        [MethodImpl(Inline)]
-        public static ref T asRef<T>(in T src)
-            => ref Unsafe.AsRef(in src);
         
         [MethodImpl(Inline)]
         public static ref T refAdd<T>(ref T src, int offset)
@@ -102,6 +99,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static ref T inAdd<T>(in T src, IntPtr offset)
-            => ref Unsafe.Add(ref asRef(in src), offset);
+            => ref Unsafe.Add(ref mutable(in src), offset);
     }
 }

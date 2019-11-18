@@ -517,7 +517,7 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return test(As.uint8(src), pos);
+                return test(uint8(src), pos);
             else if(typeof(T) == typeof(ushort))
                 return test(As.uint16(src), pos);
             else if(typeof(T) == typeof(uint))

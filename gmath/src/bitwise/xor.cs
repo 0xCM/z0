@@ -14,161 +14,161 @@ namespace Z0
     {
 
         [MethodImpl(Inline)]
-        public static sbyte xor(sbyte lhs, sbyte rhs)
-            => (sbyte)(lhs ^ rhs);
+        public static sbyte xor(sbyte a, sbyte b)
+            => (sbyte)(a ^ b);
 
         [MethodImpl(Inline)]
-        public static byte xor(byte lhs, byte rhs)
-            => (byte)(lhs ^ rhs);
+        public static byte xor(byte a, byte b)
+            => (byte)(a ^ b);
 
         [MethodImpl(Inline)]
-        public static short xor(short lhs, short rhs)
-            => (short)(lhs ^ rhs);
+        public static short xor(short a, short b)
+            => (short)(a ^ b);
 
         [MethodImpl(Inline)]
-        public static ushort xor(ushort lhs, ushort rhs)
-            => (ushort)(lhs ^ rhs);
+        public static ushort xor(ushort a, ushort b)
+            => (ushort)(a ^ b);
 
         [MethodImpl(Inline)]
-        public static int xor(int lhs, int rhs)
-            => lhs ^ rhs;
+        public static int xor(int a, int b)
+            => a ^ b;
 
         [MethodImpl(Inline)]
-        public static uint xor(uint lhs, uint rhs)
-            => lhs ^ rhs;
+        public static uint xor(uint a, uint b)
+            => a ^ b;
 
         [MethodImpl(Inline)]
-        public static long xor(long lhs, long rhs)
-            => lhs ^ rhs;
+        public static long xor(long a, long b)
+            => a ^ b;
 
         [MethodImpl(Inline)]
-        public static ulong xor(ulong lhs, ulong rhs)
-            => lhs ^ rhs;
+        public static ulong xor(ulong a, ulong b)
+            => a ^ b;
 
         [MethodImpl(Inline)]
-        public static ref sbyte xor(ref sbyte lhs, sbyte rhs)
+        public static ref sbyte xor(ref sbyte a, sbyte b)
         {
-            lhs = (sbyte)(lhs ^ rhs);
-            return ref lhs;
+            a = (sbyte)(a ^ b);
+            return ref a;
         }
 
         [MethodImpl(Inline)]
-        public static ref byte xor(ref byte lhs, byte rhs)
+        public static ref byte xor(ref byte a, byte b)
         {
-            lhs = (byte)(lhs ^ rhs);
-            return ref lhs;
+            a = (byte)(a ^ b);
+            return ref a;
         }
 
         [MethodImpl(Inline)]
-        public static ref short xor(ref short lhs, short rhs)
+        public static ref short xor(ref short a, short b)
         {
-            lhs = (short)(lhs ^ rhs);
-            return ref lhs;
+            a = (short)(a ^ b);
+            return ref a;
         }
 
         [MethodImpl(Inline)]
-        public static ref ushort xor(ref ushort lhs, ushort rhs)
+        public static ref ushort xor(ref ushort a, ushort b)
         {
-            lhs = (ushort)(lhs ^ rhs);
-            return ref lhs;
+            a = (ushort)(a ^ b);
+            return ref a;
         }
 
         [MethodImpl(Inline)]
-        public static ref int xor(ref int lhs, int rhs)
+        public static ref int xor(ref int a, int b)
         {
-            lhs = lhs ^ rhs;
-            return ref lhs;
+            a = a ^ b;
+            return ref a;
         }
 
         [MethodImpl(Inline)]
-        public static ref uint xor(ref uint lhs, uint rhs)
+        public static ref uint xor(ref uint a, uint b)
         {
-            lhs = lhs ^ rhs;
-            return ref lhs;
+            a = a ^ b;
+            return ref a;
         }
 
         [MethodImpl(Inline)]
-        public static ref long xor(ref long lhs, long rhs)
+        public static ref long xor(ref long a, long b)
         {
-            lhs = lhs ^ rhs;
-            return ref lhs;
+            a = a ^ b;
+            return ref a;
         }
 
         [MethodImpl(Inline)]
-        public static ref ulong xor(ref ulong lhs, ulong rhs)
+        public static ref ulong xor(ref ulong a, ulong b)
         {
-            lhs = lhs ^ rhs;
-            return ref lhs;
+            a = a ^ b;
+            return ref a;
         }
 
 
         [MethodImpl(Inline)]
-        public static ref sbyte xor(in sbyte lhs, in sbyte rhs, ref sbyte dst)
+        public static ref sbyte xor(in sbyte a, in sbyte b, ref sbyte dst)
         {
-            dst = (sbyte)(lhs ^ rhs);
+            dst = (sbyte)(a ^ b);
             return ref dst;
         }
 
         [MethodImpl(Inline)]
-        public static ref byte xor(in byte lhs, in byte rhs, ref byte dst)
+        public static ref byte xor(in byte a, in byte b, ref byte dst)
         {
-            dst = (byte)(lhs ^ rhs);
+            dst = (byte)(a ^ b);
             return ref dst;
         }
 
         [MethodImpl(Inline)]
-        public static ref short xor(in short lhs, in short rhs, ref short dst)
+        public static ref short xor(in short a, in short b, ref short dst)
         {
-            dst = (short)(lhs ^ rhs);
+            dst = (short)(a ^ b);
             return ref dst;
         }
 
         [MethodImpl(Inline)]
-        public static ref ushort xor(in ushort lhs, in ushort rhs, ref ushort dst)
+        public static ref ushort xor(in ushort a, in ushort b, ref ushort dst)
         {
-            dst = (ushort)(lhs ^ rhs);
+            dst = (ushort)(a ^ b);
             return ref dst;
         }
 
         [MethodImpl(Inline)]
-        public static ref int xor(in int lhs, in int rhs, ref int dst)
+        public static ref int xor(in int a, in int b, ref int dst)
         {
-            dst = lhs ^ rhs;
+            dst = a ^ b;
             return ref dst;
         }
 
         [MethodImpl(Inline)]
-        public static ref uint xor(in uint lhs, in uint rhs, ref uint dst)
+        public static ref uint xor(in uint a, in uint b, ref uint dst)
         {
-            dst = lhs ^ rhs;
+            dst = a ^ b;
             return ref dst;
         }
 
         [MethodImpl(Inline)]
-        public static ref long xor(in long lhs, in long rhs, ref long dst)
+        public static ref long xor(in long a, in long b, ref long dst)
         {
-            dst = lhs ^ rhs;
+            dst = a ^ b;
             return ref dst;
         }
 
         [MethodImpl(Inline)]
-        public static ref ulong xor(in ulong lhs, in ulong rhs, ref ulong dst)
+        public static ref ulong xor(in ulong a, in ulong b, ref ulong dst)
         {
-            dst = lhs ^ rhs;
+            dst = a ^ b;
             return ref dst;
         }
 
         [MethodImpl(Inline)]
-        public static ref float xor(in float lhs, in float rhs, ref float dst)
+        public static ref float xor(in float a, in float b, ref float dst)
         {
-            dst = BitConverter.Int32BitsToSingle(lhs.ToBits() ^ rhs.ToBits());
+            dst = BitConverter.Int32BitsToSingle(a.ToBits() ^ b.ToBits());
             return ref dst;
         }
 
         [MethodImpl(Inline)]
-        public static ref double xor(in double lhs, in double rhs, ref double dst)
+        public static ref double xor(in double a, in double b, ref double dst)
         {
-            dst = BitConverter.Int64BitsToDouble(lhs.ToBits() ^ rhs.ToBits());
+            dst = BitConverter.Int64BitsToDouble(a.ToBits() ^ b.ToBits());
             return ref dst;
         }        
     }

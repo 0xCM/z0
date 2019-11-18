@@ -3,7 +3,7 @@
 // Copyright   :  (c) Chris Moore, 2019
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Logix
+namespace Z0
 {
     using System;
     using System.Linq;
@@ -37,7 +37,7 @@ namespace Z0.Logix
             for(var i = 0; i<values.Length; i++)
                 values[i] = Bits.rev((byte)i);
             
-            var lut = Lookup.From(nCount,values).Vector;
+            var lut = LUT.From(nCount,values).Vector;
             var keys = dinx.vparts(n128, 15,14,13,12,11,10,9,8,7,6,5,4,3,2,1,0);
             var selected = dinx.vshuf16x8(lut,keys);
             Trace(lut.Format());
@@ -54,7 +54,7 @@ namespace Z0.Logix
             for(var i=0; i<src.Length; i++)
                 src[i] = (byte)i;
                         
-            var table = Lookup.From(nLut, src);
+            var table = LUT.From(nLut, src);
             for(var i=0; i< nLut; i++)
                 Claim.eq(table[(LookupSlot)i], (LookupKey)i);
 
@@ -81,7 +81,7 @@ namespace Z0.Logix
             for(var i=0; i < nLut; i++)
                 src[i] = (byte)i;
                         
-            var table = Lookup.From(nLut, src);
+            var table = LUT.From(nLut, src);
             var dst = table.Bytes;
             for(var i=0; i < nLut; i++)                   
                 Claim.eq(src[i], dst[i]);

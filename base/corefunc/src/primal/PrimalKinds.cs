@@ -14,7 +14,7 @@ namespace Z0
     {
         public static readonly PrimalKind[] AllList = kinds<PrimalKind>();
 
-        public static readonly PrimalKind[] IntList = array(int8, uint8, int16, uint16, int32, uint32, int64, uint64);
+        public static readonly PrimalKind[] IntList = array(PrimalKind.int8, PrimalKind.uint8, PrimalKind.int16, PrimalKind.uint16, PrimalKind.int32, PrimalKind.uint32, PrimalKind.int64, PrimalKind.uint64);
                 
         [MethodImpl(Inline)]
         public static PrimalKind kind<T>()

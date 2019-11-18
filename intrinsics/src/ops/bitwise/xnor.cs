@@ -20,7 +20,7 @@ namespace Z0
     partial class dinx
     {         
         /// <summary>
-        /// Computes the bitwise XOR between operands
+        /// Computes ~ (x ^ y) for vectors x and y
         /// </summary>
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
@@ -29,7 +29,7 @@ namespace Z0
             => vnot(Xor(x, y));
 
         /// <summary>
-        /// Computes the bitwise XOR between operands
+        /// Computes ~ (x ^ y) for vectors x and y
         /// </summary>
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
@@ -38,7 +38,7 @@ namespace Z0
             => vnot(Xor(x, y));
 
         /// <summary>
-        /// Computes the bitwise XOR between operands
+        /// Computes ~ (x ^ y) for vectors x and y
         /// </summary>
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
@@ -47,7 +47,7 @@ namespace Z0
             => vnot(Xor(x, y));
 
         /// <summary>
-        /// Computes the bitwise XOR between operands
+        /// Computes ~ (x ^ y) for vectors x and y
         /// </summary>
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
@@ -56,7 +56,7 @@ namespace Z0
             => vnot(Xor(x, y));
 
         /// <summary>
-        /// Computes the bitwise XOR between operands
+        /// Computes ~ (x ^ y) for vectors x and y
         /// </summary>
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
@@ -65,7 +65,7 @@ namespace Z0
             => vnot(Xor(x, y));
 
         /// <summary>
-        /// Computes the bitwise XOR between operands
+        /// Computes ~ (x ^ y) for vectors x and y
         /// </summary>
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
@@ -74,7 +74,7 @@ namespace Z0
             => vnot(Xor(x, y));
 
         /// <summary>
-        /// Computes the bitwise XOR between operands
+        /// Computes ~ (x ^ y) for vectors x and y
         /// </summary>
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
@@ -83,7 +83,7 @@ namespace Z0
             => vnot(Xor(x, y));
 
         /// <summary>
-        /// Computes the bitwise XOR between operands
+        /// Computes ~ (x ^ y) for vectors x and y
         /// </summary>
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
@@ -92,7 +92,7 @@ namespace Z0
             => vnot(Xor(x, y));
 
         /// <summary>
-        /// Computes the bitwise XOR between operands
+        /// Computes ~ (x ^ y) for vectors x and y
         /// </summary>
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
@@ -101,7 +101,7 @@ namespace Z0
             => vnot(Xor(x, y));
 
         /// <summary>
-        /// Computes the bitwise XOR between operands
+        /// Computes ~ (x ^ y) for vectors x and y
         /// </summary>
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
@@ -110,7 +110,7 @@ namespace Z0
             => vnot(Xor(x, y));
 
         /// <summary>
-        /// Computes the bitwise XOR between operands
+        /// Computes ~ (x ^ y) for vectors x and y
         /// </summary>
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
@@ -128,7 +128,7 @@ namespace Z0
             => vnot(Xor(x, y));
 
         /// <summary>
-        /// Computes the bitwise XOR between operands
+        /// Computes ~ (x ^ y) for vectors x and y
         /// </summary>
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
@@ -137,7 +137,7 @@ namespace Z0
             => vnot(Xor(x, y));
 
         /// <summary>
-        /// Computes the bitwise XOR between operands
+        /// Computes ~ (x ^ y) for vectors x and y
         /// </summary>
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
@@ -146,7 +146,7 @@ namespace Z0
             => vnot(Xor(x, y));
 
         /// <summary>
-        /// Computes the bitwise XOR between operands
+        /// Computes ~ (x ^ y) for vectors x and y
         /// </summary>
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
@@ -155,7 +155,7 @@ namespace Z0
             => vnot(Xor(x, y));
 
         /// <summary>
-        /// Computes the bitwise XOR between operands
+        /// Computes ~ (x ^ y) for vectors x and y
         /// </summary>
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>

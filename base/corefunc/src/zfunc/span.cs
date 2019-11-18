@@ -54,7 +54,7 @@ partial class zfunc
     public static unsafe void memcpy<S,T>(in S src, ref T dst, uint targets)
         where T : unmanaged
         where S : unmanaged
-            =>  Unsafe.CopyBlock(pointer(ref dst), Unsafe.AsPointer(ref Unsafe.AsRef(in src)), targets*size<T>());
+            =>  Unsafe.CopyBlock(ptr(ref dst), Unsafe.AsPointer(ref Unsafe.AsRef(in src)), targets*size<T>());
 
     /// <summary>
     /// Copies a contiguous segments of bytes from one location to another
@@ -86,7 +86,7 @@ partial class zfunc
     [MethodImpl(Inline)]
     public static unsafe void memcpy<T>(T* pSrc, Span<T> dst, int offset, uint targets)
         where T : unmanaged
-            =>  memcpy(pSrc, pointer(ref head(dst), offset), targets); 
+            =>  memcpy(pSrc, ptr(ref head(dst), offset), targets); 
 
     /// <summary>
     /// Copies a contiguous segments of bytes from a source location to a target span
@@ -292,7 +292,7 @@ partial class zfunc
     [MethodImpl(Inline)]   
     public static Span<byte> bytespan<T>(ref T src)
         where T : unmanaged
-            => MemoryMarshal.CreateSpan(ref byteref(ref src), size<T>()); 
+            => MemoryMarshal.CreateSpan(ref byterefR(ref src), size<T>()); 
 
     /// <summary>
     /// Converts the source span to a readonly bytespan
@@ -726,9 +726,5 @@ partial class zfunc
                 => lhs.BlockCount == rhs.BlockCount ? lhs.BlockCount 
                     : throw Errors.CountMismatch(lhs.BlockCount, rhs.BlockCount, caller, file, line);
 
-    [MethodImpl(Inline)]
-    public static unsafe T* pointer<T>(ref T src, int offset = 0)
-        where T : unmanaged
-            => (T*)Unsafe.AsPointer(ref seek(ref src, offset));
 
 }

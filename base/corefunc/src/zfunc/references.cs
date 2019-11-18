@@ -3,23 +3,55 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Diagnostics;
+using System.Runtime.Intrinsics;
 
 using Z0;
 
 partial class zfunc
 {
+    /// <summary>
+    /// Presents a readonly reference as reference
+    /// </summary>
+    /// <param name="src">The source reference</param>
+    /// <typeparam name="T">The source type</typeparam>
     [MethodImpl(Inline)]
-    public static IntPtr intptr(long i)
-        => new IntPtr(i);
+    public static ref T mutable<T>(in T src)
+        => ref Unsafe.AsRef(in src);
 
+    /// <summary>
+    /// Presents a reference as a byte reference
+    /// </summary>
+    /// <param name="src">The source reference</param>
+    /// <typeparam name="T">The source type</typeparam>
     [MethodImpl(Inline)]
-    public static IntPtr intptr(int i)
-        => new IntPtr(i);
+    public static ref byte byterefR<T>(ref T src)
+        where T : unmanaged
+            => ref Unsafe.As<T,byte>(ref src);
+
+    /// <summary>
+    /// Presents a readonly reference as a byte reference
+    /// </summary>
+    /// <param name="src">The source reference</param>
+    /// <typeparam name="T">The source type</typeparam>
+    [MethodImpl(Inline)]
+    public static ref byte byteref<T>(in T src)
+        where T :unmanaged
+            => ref Unsafe.As<T,byte>(ref mutable(in src));
+
+    /// <summary>
+    /// The canonical swap function
+    /// </summary>
+    /// <param name="lhs">The left value</param>
+    /// <param name="rhs">The right value</param>
+    /// <typeparam name="T">The value type</typeparam>
+    [MethodImpl(Inline)]
+    public static void swap<T>(ref T lhs, ref T rhs)
+    {
+        var temp = lhs;
+        lhs = rhs;
+        rhs = temp;
+    }
 
     /// <summary>
     /// Adds an offset to a reference, measured relative to the reference type
@@ -74,7 +106,7 @@ partial class zfunc
     [MethodImpl(Inline)]
     public static ref readonly T skip<T>(in T src, int count)
         where T : unmanaged
-            => ref Unsafe.Add(ref As.asRef(in src), count);
+            => ref Unsafe.Add(ref mutable(in src), count);
 
     /// <summary>
     /// Returns an readonly reference to a memory location following a specified number of elements
@@ -96,7 +128,7 @@ partial class zfunc
     [MethodImpl(Inline)]
     public static ref readonly T skipb<T>(in T src, long count)
         where T : unmanaged
-            => ref Unsafe.Add(ref As.asRef(in src), intptr(count));
+            => ref Unsafe.Add(ref mutable(in src), intptr(count));
 
     /// <summary>
     /// Returns an readonly reference to a memory location, following a specified number of bytes
@@ -107,5 +139,5 @@ partial class zfunc
     [MethodImpl(Inline)]
     public static ref readonly T skipb<T>(ReadOnlySpan<T> src, long count)
         where T : unmanaged
-            => ref skipb(in head(src), count);
+            => ref skipb(in head(src), count);    
 }

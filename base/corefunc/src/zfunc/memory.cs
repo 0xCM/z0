@@ -16,48 +16,6 @@ using Z0;
 partial class zfunc
 {
     /// <summary>
-    /// Computes the size, in bytes of a source value of specified type
-    /// </summary>
-    /// <typeparam name="T">The value type</typeparam>
-    [MethodImpl(Inline)]
-    public static ByteSize size<T>()
-        where T : unmanaged
-            => Unsafe.SizeOf<T>();
-
-    /// <summary>
-    /// Computes the size, in bits of a source value of specified type
-    /// </summary>
-    /// <typeparam name="T">The value type</typeparam>
-    [MethodImpl(Inline)]
-    public static BitSize bitsize<T>()
-        where T :struct
-            => Unsafe.SizeOf<T>()*8;
-
-    /// <summary>
-    /// The canonical swap function
-    /// </summary>
-    /// <param name="lhs">The left value</param>
-    /// <param name="rhs">The right value</param>
-    /// <typeparam name="T">The value type</typeparam>
-    [MethodImpl(Inline)]
-    public static void swap<T>(ref T lhs, ref T rhs)
-    {
-        var temp = lhs;
-        lhs = rhs;
-        rhs = temp;
-    }
-
-    /// <summary>
-    /// Presents a source reference as a byte reference
-    /// </summary>
-    /// <param name="src">The source reference</param>
-    /// <typeparam name="T">The source type</typeparam>
-    [MethodImpl(Inline)]
-    public static ref byte byteref<T>(ref T src)
-        where T : unmanaged
-            => ref Unsafe.As<T,byte>(ref src);
-
-    /// <summary>
     /// Enumerates the content of a readonly memory segment
     /// </summary>
     /// <param name="src">The source memory</param>

@@ -27,7 +27,7 @@ namespace Z0
             => vsrl(src, offset.Item(0));
 
         /// <summary>
-        /// __m256i _mm256_srl_epi16 (__m256i a, __m128i count)VPSRLW ymm, ymm, xmm/m128
+        /// __m256i _mm256_srl_epi16 (__m256i a, __m128i count) VPSRLW ymm, ymm, xmm/m128
         /// </summary>
         /// <param name="src"></param>
         /// <param name="offset"></param>
@@ -37,7 +37,7 @@ namespace Z0
             => ShiftRightLogical(src, offset);
 
         /// <summary>
-        /// __m256i _mm256_srl_epi16 (__m256i a, __m128i count)VPSRLW ymm, ymm, xmm/m128
+        /// __m256i _mm256_srl_epi16 (__m256i a, __m128i count) VPSRLW ymm, ymm, xmm/m128
         /// </summary>
         /// <param name="src"></param>
         /// <param name="offset"></param>
@@ -47,7 +47,7 @@ namespace Z0
             => ShiftRightLogical(src, offset);
 
         /// <summary>
-        /// __m256i _mm256_srl_epi32 (__m256i a, __m128i count)VPSRLD ymm, ymm, xmm/m128
+        /// __m256i _mm256_srl_epi32 (__m256i a, __m128i count) VPSRLD ymm, ymm, xmm/m128
         /// </summary>
         /// <param name="src"></param>
         /// <param name="offset"></param>
@@ -67,7 +67,7 @@ namespace Z0
             => ShiftRightLogical(src, offset);
 
         /// <summary>
-        /// __m256i _mm256_srl_epi64 (__m256i a, __m128i count)VPSRLQ ymm, ymm, xmm/m128
+        /// __m256i _mm256_srl_epi64 (__m256i a, __m128i count) VPSRLQ ymm, ymm, xmm/m128
         /// </summary>
         /// <param name="src"></param>
         /// <param name="offset"></param>
@@ -77,7 +77,7 @@ namespace Z0
             => ShiftRightLogical(src, offset);
 
         /// <summary>
-        /// __m256i _mm256_srl_epi64 (__m256i a, __m128i count)VPSRLQ ymm, ymm, xmm/m128
+        /// __m256i _mm256_srl_epi64 (__m256i a, __m128i count) VPSRLQ ymm, ymm, xmm/m128
         /// </summary>
         /// <param name="src"></param>
         /// <param name="offset"></param>

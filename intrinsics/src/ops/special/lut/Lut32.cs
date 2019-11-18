@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2019
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Logix
+namespace Z0
 {
     using System;
     using System.Linq;
@@ -24,16 +24,16 @@ namespace Z0.Logix
         public Vector256<byte> Vector
         {
             [MethodImpl(Inline)]
-            get => Lookup.LoadVector(in this);
+            get => LUT.LoadVector(in this);
 
             [MethodImpl(Inline)]
-            set => Lookup.From(value, ref this);
+            set => LUT.From(value, ref this);
         }
 
         public Span<byte> Bytes
         {
             [MethodImpl(Inline)]
-            get => Lookup.AsSpan(in this);
+            get => LUT.AsSpan(in this);
         }
     }
 }

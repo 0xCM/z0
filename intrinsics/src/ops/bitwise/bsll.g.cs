@@ -15,35 +15,46 @@ namespace Z0
     
     partial class ginx
     {
-
+        /// <summary>
+        /// Applies a leftward shift over the full 128 vector bits at byte-level resolution
+        /// </summary>
+        /// <param name="x">The source vector</param>
+        /// <param name="count">The number of bytes to shift</param>
+        /// <typeparam name="T">THe primal component type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector128<T> vbsll<T>(Vector128<T> lhs, byte count)
+        public static Vector128<T> vbsll<T>(Vector128<T> x, byte count)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(dinx.vbsll(uint8(lhs), count));
+                return generic<T>(dinx.vbsll(uint8(x), count));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(dinx.vbsll(uint16(lhs), count));
+                return generic<T>(dinx.vbsll(uint16(x), count));
             else if(typeof(T) == typeof(uint)) 
-                return generic<T>(dinx.vbsll(uint32(lhs), count));
+                return generic<T>(dinx.vbsll(uint32(x), count));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(dinx.vbsll(uint64(lhs), count));
+                return generic<T>(dinx.vbsll(uint64(x), count));
             else
                 throw unsupported<T>();
         }
 
+        /// <summary>
+        /// Applies a leftward shift to each 128-bit lane at byte-level resolution
+        /// </summary>
+        /// <param name="x">The source vector</param>
+        /// <param name="count">The number of bytes to shift</param>
+        /// <typeparam name="T">THe primal component type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector256<T> vbsll<T>(Vector256<T> lhs, byte count)
+        public static Vector256<T> vbsll<T>(Vector256<T> x, byte count)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(dinx.vbsll(uint8(lhs), count));
+                return generic<T>(dinx.vbsll(uint8(x), count));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(dinx.vbsll(uint16(lhs), count));
+                return generic<T>(dinx.vbsll(uint16(x), count));
             else if(typeof(T) == typeof(uint)) 
-                return generic<T>(dinx.vbsll(uint32(lhs), count));
+                return generic<T>(dinx.vbsll(uint32(x), count));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(dinx.vbsll(uint64(lhs), count));
+                return generic<T>(dinx.vbsll(uint64(x), count));
             else
                 throw unsupported<T>();
         }

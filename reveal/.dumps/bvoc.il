@@ -1,4 +1,4 @@
-// 2019-11-17 00:33:32:349
+// 2019-11-17 22:14:51:015
 ulong clear_64(ulong src, int p0, int p1)
 {
     IL_0000: ldarg.0
@@ -112,6 +112,344 @@ ref ulong bitmap_g64u_to_64u(in ulong src, byte srcOffset, byte len, byte dstOff
     IL_0005: ldarg.s dst
     IL_0007: call System.UInt64& Z0.gbits::bitmap<System.UInt64>(System.UInt64,System.Byte,System.Byte,System.Byte,System.UInt64&)
     IL_000C: ret
+
+}
+byte butterfly_8x1(byte x)
+{
+    IL_0000: call Z0.N1 zfunc::get_n1()
+    IL_0005: ldarg.0
+    IL_0006: call System.Byte Z0.gbits::butterfly<System.Byte>(Z0.N1,System.Byte)
+    IL_000B: ret
+
+}
+Vector128<byte> vbutterfly_128x8x1(Vector128<byte> x)
+{
+    IL_0000: call Z0.N1 zfunc::get_n1()
+    IL_0005: ldarg.0
+    IL_0006: call System.Runtime.Intrinsics.Vector128`1<System.Byte> Z0.gbits::vbutterfly<System.Byte>(Z0.N1,System.Runtime.Intrinsics.Vector128`1<System.Byte>)
+    IL_000B: ret
+
+}
+Vector256<byte> vbutterfly_256x8x1(Vector256<byte> x)
+{
+    IL_0000: call Z0.N1 zfunc::get_n1()
+    IL_0005: ldarg.0
+    IL_0006: call System.Runtime.Intrinsics.Vector256`1<System.Byte> Z0.gbits::vbutterfly<System.Byte>(Z0.N1,System.Runtime.Intrinsics.Vector256`1<System.Byte>)
+    IL_000B: ret
+
+}
+ushort butterfly_16x1(ushort x)
+{
+    IL_0000: call Z0.N1 zfunc::get_n1()
+    IL_0005: ldarg.0
+    IL_0006: call System.UInt16 Z0.gbits::butterfly<System.UInt16>(Z0.N1,System.UInt16)
+    IL_000B: ret
+
+}
+Vector128<ushort> vbutterfly_128x16x1(Vector128<ushort> x)
+{
+    IL_0000: call Z0.N1 zfunc::get_n1()
+    IL_0005: ldarg.0
+    IL_0006: call System.Runtime.Intrinsics.Vector128`1<System.UInt16> Z0.gbits::vbutterfly<System.UInt16>(Z0.N1,System.Runtime.Intrinsics.Vector128`1<System.UInt16>)
+    IL_000B: ret
+
+}
+Vector256<ushort> vbutterfly_256x16x1(Vector256<ushort> x)
+{
+    IL_0000: call Z0.N1 zfunc::get_n1()
+    IL_0005: ldarg.0
+    IL_0006: call System.Runtime.Intrinsics.Vector256`1<System.UInt16> Z0.gbits::vbutterfly<System.UInt16>(Z0.N1,System.Runtime.Intrinsics.Vector256`1<System.UInt16>)
+    IL_000B: ret
+
+}
+uint butterfly_32x1(uint x)
+{
+    IL_0000: call Z0.N1 zfunc::get_n1()
+    IL_0005: ldarg.0
+    IL_0006: call System.UInt32 Z0.gbits::butterfly<System.UInt32>(Z0.N1,System.UInt32)
+    IL_000B: ret
+
+}
+Vector128<uint> vbutterfly_128x32x1(Vector128<uint> x)
+{
+    IL_0000: call Z0.N1 zfunc::get_n1()
+    IL_0005: ldarg.0
+    IL_0006: call System.Runtime.Intrinsics.Vector128`1<System.UInt32> Z0.gbits::vbutterfly<System.UInt32>(Z0.N1,System.Runtime.Intrinsics.Vector128`1<System.UInt32>)
+    IL_000B: ret
+
+}
+Vector256<uint> vbutterfly_256x32x1(Vector256<uint> x)
+{
+    IL_0000: call Z0.N1 zfunc::get_n1()
+    IL_0005: ldarg.0
+    IL_0006: call System.Runtime.Intrinsics.Vector256`1<System.UInt32> Z0.gbits::vbutterfly<System.UInt32>(Z0.N1,System.Runtime.Intrinsics.Vector256`1<System.UInt32>)
+    IL_000B: ret
+
+}
+ulong butterfly_64x1(ulong x)
+{
+    IL_0000: call Z0.N1 zfunc::get_n1()
+    IL_0005: ldarg.0
+    IL_0006: call System.UInt64 Z0.gbits::butterfly<System.UInt64>(Z0.N1,System.UInt64)
+    IL_000B: ret
+
+}
+Vector128<ulong> vbutterfly_128x64x1(Vector128<ulong> x)
+{
+    IL_0000: call Z0.N1 zfunc::get_n1()
+    IL_0005: ldarg.0
+    IL_0006: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.gbits::vbutterfly<System.UInt64>(Z0.N1,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
+    IL_000B: ret
+
+}
+Vector256<ulong> vbutterfly_256x64x1(Vector256<ulong> x)
+{
+    IL_0000: call Z0.N1 zfunc::get_n1()
+    IL_0005: ldarg.0
+    IL_0006: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.gbits::vbutterfly<System.UInt64>(Z0.N1,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
+    IL_000B: ret
+
+}
+byte butterfly_8x2(byte x)
+{
+    IL_0000: call Z0.N2 zfunc::get_n2()
+    IL_0005: ldarg.0
+    IL_0006: call System.Byte Z0.gbits::butterfly<System.Byte>(Z0.N2,System.Byte)
+    IL_000B: ret
+
+}
+Vector128<byte> vbutterfly_128x8x2(Vector128<byte> x)
+{
+    IL_0000: call Z0.N2 zfunc::get_n2()
+    IL_0005: ldarg.0
+    IL_0006: call System.Runtime.Intrinsics.Vector128`1<System.Byte> Z0.gbits::vbutterfly<System.Byte>(Z0.N2,System.Runtime.Intrinsics.Vector128`1<System.Byte>)
+    IL_000B: ret
+
+}
+Vector256<byte> vbutterfly_256x8x2(Vector256<byte> x)
+{
+    IL_0000: call Z0.N2 zfunc::get_n2()
+    IL_0005: ldarg.0
+    IL_0006: call System.Runtime.Intrinsics.Vector256`1<System.Byte> Z0.gbits::vbutterfly<System.Byte>(Z0.N2,System.Runtime.Intrinsics.Vector256`1<System.Byte>)
+    IL_000B: ret
+
+}
+ushort butterfly_16x2(ushort x)
+{
+    IL_0000: call Z0.N2 zfunc::get_n2()
+    IL_0005: ldarg.0
+    IL_0006: call System.UInt16 Z0.gbits::butterfly<System.UInt16>(Z0.N2,System.UInt16)
+    IL_000B: ret
+
+}
+Vector128<ushort> vbutterfly_128x16x2(Vector128<ushort> x)
+{
+    IL_0000: call Z0.N2 zfunc::get_n2()
+    IL_0005: ldarg.0
+    IL_0006: call System.Runtime.Intrinsics.Vector128`1<System.UInt16> Z0.gbits::vbutterfly<System.UInt16>(Z0.N2,System.Runtime.Intrinsics.Vector128`1<System.UInt16>)
+    IL_000B: ret
+
+}
+Vector256<ushort> vbutterfly_256x16x2(Vector256<ushort> x)
+{
+    IL_0000: call Z0.N2 zfunc::get_n2()
+    IL_0005: ldarg.0
+    IL_0006: call System.Runtime.Intrinsics.Vector256`1<System.UInt16> Z0.gbits::vbutterfly<System.UInt16>(Z0.N2,System.Runtime.Intrinsics.Vector256`1<System.UInt16>)
+    IL_000B: ret
+
+}
+uint butterfly_32x2(uint x)
+{
+    IL_0000: call Z0.N2 zfunc::get_n2()
+    IL_0005: ldarg.0
+    IL_0006: call System.UInt32 Z0.Bits::butterfly(Z0.N2,System.UInt32)
+    IL_000B: ret
+
+}
+Vector128<uint> vbutterfly_128x32x2(Vector128<uint> x)
+{
+    IL_0000: call Z0.N2 zfunc::get_n2()
+    IL_0005: ldarg.0
+    IL_0006: call System.Runtime.Intrinsics.Vector128`1<System.UInt32> Z0.gbits::vbutterfly<System.UInt32>(Z0.N2,System.Runtime.Intrinsics.Vector128`1<System.UInt32>)
+    IL_000B: ret
+
+}
+Vector256<uint> vbutterfly_256x32x2(Vector256<uint> x)
+{
+    IL_0000: call Z0.N2 zfunc::get_n2()
+    IL_0005: ldarg.0
+    IL_0006: call System.Runtime.Intrinsics.Vector256`1<System.UInt32> Z0.gbits::vbutterfly<System.UInt32>(Z0.N2,System.Runtime.Intrinsics.Vector256`1<System.UInt32>)
+    IL_000B: ret
+
+}
+ulong butterfly_64x2(ulong x)
+{
+    IL_0000: call Z0.N2 zfunc::get_n2()
+    IL_0005: ldarg.0
+    IL_0006: call System.UInt64 Z0.gbits::butterfly<System.UInt64>(Z0.N2,System.UInt64)
+    IL_000B: ret
+
+}
+Vector128<ulong> vbutterfly_128x64x2(Vector128<ulong> x)
+{
+    IL_0000: call Z0.N2 zfunc::get_n2()
+    IL_0005: ldarg.0
+    IL_0006: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.gbits::vbutterfly<System.UInt64>(Z0.N2,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
+    IL_000B: ret
+
+}
+Vector256<ulong> vbutterfly_256x64x2(Vector256<ulong> x)
+{
+    IL_0000: call Z0.N2 zfunc::get_n2()
+    IL_0005: ldarg.0
+    IL_0006: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.gbits::vbutterfly<System.UInt64>(Z0.N2,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
+    IL_000B: ret
+
+}
+ushort butterfly_16x4(ushort x)
+{
+    IL_0000: call Z0.N4 zfunc::get_n4()
+    IL_0005: ldarg.0
+    IL_0006: call System.UInt16 Z0.Bits::butterfly(Z0.N4,System.UInt16)
+    IL_000B: ret
+
+}
+Vector128<ushort> vbutterfly_128x16x4(Vector128<ushort> x)
+{
+    IL_0000: call Z0.N4 zfunc::get_n4()
+    IL_0005: ldarg.0
+    IL_0006: call System.Runtime.Intrinsics.Vector128`1<System.UInt16> Z0.gbits::vbutterfly<System.UInt16>(Z0.N4,System.Runtime.Intrinsics.Vector128`1<System.UInt16>)
+    IL_000B: ret
+
+}
+Vector256<ushort> vbutterfly_256x16x4(Vector256<ushort> x)
+{
+    IL_0000: call Z0.N4 zfunc::get_n4()
+    IL_0005: ldarg.0
+    IL_0006: call System.Runtime.Intrinsics.Vector256`1<System.UInt16> Z0.gbits::vbutterfly<System.UInt16>(Z0.N4,System.Runtime.Intrinsics.Vector256`1<System.UInt16>)
+    IL_000B: ret
+
+}
+ulong butterfly_32x4(uint x)
+{
+    IL_0000: call Z0.N4 zfunc::get_n4()
+    IL_0005: ldarg.0
+    IL_0006: call System.UInt32 Z0.Bits::butterfly(Z0.N4,System.UInt32)
+    IL_000B: conv.u8
+    IL_000C: ret
+
+}
+Vector128<uint> vbutterfly_128x32x4(Vector128<uint> x)
+{
+    IL_0000: call Z0.N4 zfunc::get_n4()
+    IL_0005: ldarg.0
+    IL_0006: call System.Runtime.Intrinsics.Vector128`1<System.UInt32> Z0.gbits::vbutterfly<System.UInt32>(Z0.N4,System.Runtime.Intrinsics.Vector128`1<System.UInt32>)
+    IL_000B: ret
+
+}
+Vector256<uint> vbutterfly_256x32x4(Vector256<uint> x)
+{
+    IL_0000: call Z0.N4 zfunc::get_n4()
+    IL_0005: ldarg.0
+    IL_0006: call System.Runtime.Intrinsics.Vector256`1<System.UInt32> Z0.gbits::vbutterfly<System.UInt32>(Z0.N4,System.Runtime.Intrinsics.Vector256`1<System.UInt32>)
+    IL_000B: ret
+
+}
+ulong butterfly_64x4(ulong x)
+{
+    IL_0000: call Z0.N4 zfunc::get_n4()
+    IL_0005: ldarg.0
+    IL_0006: call System.UInt64 Z0.Bits::butterfly(Z0.N4,System.UInt64)
+    IL_000B: ret
+
+}
+Vector128<ulong> vbutterfly_128x64x4(Vector128<ulong> x)
+{
+    IL_0000: call Z0.N4 zfunc::get_n4()
+    IL_0005: ldarg.0
+    IL_0006: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.gbits::vbutterfly<System.UInt64>(Z0.N4,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
+    IL_000B: ret
+
+}
+Vector256<ulong> vbutterfly_256x64x4(Vector256<ulong> x)
+{
+    IL_0000: call Z0.N4 zfunc::get_n4()
+    IL_0005: ldarg.0
+    IL_0006: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.gbits::vbutterfly<System.UInt64>(Z0.N4,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
+    IL_000B: ret
+
+}
+ulong butterfly_32x8(uint x)
+{
+    IL_0000: call Z0.N8 zfunc::get_n8()
+    IL_0005: ldarg.0
+    IL_0006: call System.UInt32 Z0.gbits::butterfly<System.UInt32>(Z0.N8,System.UInt32)
+    IL_000B: conv.u8
+    IL_000C: ret
+
+}
+Vector128<uint> vbutterfly_128x32x8(Vector128<uint> x)
+{
+    IL_0000: call Z0.N8 zfunc::get_n8()
+    IL_0005: ldarg.0
+    IL_0006: call System.Runtime.Intrinsics.Vector128`1<System.UInt32> Z0.gbits::vbutterfly<System.UInt32>(Z0.N8,System.Runtime.Intrinsics.Vector128`1<System.UInt32>)
+    IL_000B: ret
+
+}
+Vector256<uint> vbutterfly_256x32x8(Vector256<uint> x)
+{
+    IL_0000: call Z0.N8 zfunc::get_n8()
+    IL_0005: ldarg.0
+    IL_0006: call System.Runtime.Intrinsics.Vector256`1<System.UInt32> Z0.gbits::vbutterfly<System.UInt32>(Z0.N8,System.Runtime.Intrinsics.Vector256`1<System.UInt32>)
+    IL_000B: ret
+
+}
+ulong butterfly_64x8(ulong x)
+{
+    IL_0000: call Z0.N8 zfunc::get_n8()
+    IL_0005: ldarg.0
+    IL_0006: call System.UInt64 Z0.gbits::butterfly<System.UInt64>(Z0.N8,System.UInt64)
+    IL_000B: ret
+
+}
+Vector128<ulong> vbutterfly_128x64x8(Vector128<ulong> x)
+{
+    IL_0000: call Z0.N8 zfunc::get_n8()
+    IL_0005: ldarg.0
+    IL_0006: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.gbits::vbutterfly<System.UInt64>(Z0.N8,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
+    IL_000B: ret
+
+}
+Vector256<ulong> vbutterfly_256x64x8(Vector256<ulong> x)
+{
+    IL_0000: call Z0.N8 zfunc::get_n8()
+    IL_0005: ldarg.0
+    IL_0006: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.gbits::vbutterfly<System.UInt64>(Z0.N8,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
+    IL_000B: ret
+
+}
+ulong butterfly_64x16(ulong x)
+{
+    IL_0000: call Z0.N16 zfunc::get_n16()
+    IL_0005: ldarg.0
+    IL_0006: call System.UInt64 Z0.gbits::butterfly<System.UInt64>(Z0.N16,System.UInt64)
+    IL_000B: ret
+
+}
+Vector128<ulong> vbutterfly_128x64x16(Vector128<ulong> x)
+{
+    IL_0000: call Z0.N16 zfunc::get_n16()
+    IL_0005: ldarg.0
+    IL_0006: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.gbits::vbutterfly<System.UInt64>(Z0.N16,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
+    IL_000B: ret
+
+}
+Vector256<ulong> vbutterfly_256x64x16(Vector256<ulong> x)
+{
+    IL_0000: call Z0.N16 zfunc::get_n16()
+    IL_0005: ldarg.0
+    IL_0006: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.gbits::vbutterfly<System.UInt64>(Z0.N16,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
+    IL_000B: ret
 
 }
 BitVector32 alt_32()

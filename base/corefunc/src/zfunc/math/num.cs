@@ -112,6 +112,7 @@ partial class zfunc
               : unsignedint<T>() ?  AsciLower.u 
               : AsciSym.Question;
 
+
     /// <summary>
     /// Creates an enumerable sequence that ranges between inclusive upper and lower bounds
     /// </summary>

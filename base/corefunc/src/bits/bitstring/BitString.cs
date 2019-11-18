@@ -152,41 +152,79 @@ namespace Z0
         /// <typeparam name="T">The primal type</typeparam>
         /// <param name="offset">The index of the first bit </param>
         [MethodImpl(Inline)]
-        public T TakeScalar<T>(int offset = 0)
+        public T TakeScalar<T>()
             where T : unmanaged
-                => PackSingle<T>(offset, Unsafe.SizeOf<T>());
+                => PackSingle<T>(0);
+
+        /// <summary>
+        /// Renders a segment as a packed primal value
+        /// </summary>
+        /// <typeparam name="T">The primal type</typeparam>
+        /// <param name="offset">The index of the first bit </param>
+        [MethodImpl(Inline)]
+        public T TakeScalar<T>(int offset)
+            where T : unmanaged
+                => PackSingle<T>(offset);
 
         /// <summary>
         /// Renders a bitstring segment as a packed byte value
         /// </summary>
         /// <param name="offset">The index of the first bit </param>
         [MethodImpl(Inline)]
-        public byte TakeUInt8(int offset = 0)
+        public byte TakeUInt8(int offset)
             => TakeScalar<byte>(offset);
+
+        /// <summary>
+        /// Renders a bitstring segment as a packed byte value
+        /// </summary>
+        /// <param name="offset">The index of the first bit </param>
+        [MethodImpl(Inline)]
+        public byte TakeUInt8()
+            => TakeScalar<byte>();
 
         /// <summary>
         /// Renders a bitstring segment as a packed ushort value
         /// </summary>
         /// <param name="offset">The index of the first bit </param>
         [MethodImpl(Inline)]
-        public ushort TakeUInt16(int offset = 0)
+        public ushort TakeUInt16(int offset)
             => TakeScalar<ushort>(offset);
+
+        /// <summary>
+        /// Renders a bitstring segment as a packed ushort value
+        /// </summary>
+        /// <param name="offset">The index of the first bit </param>
+        [MethodImpl(Inline)]
+        public ushort TakeUInt16()
+            => TakeScalar<ushort>();
 
         /// <summary>
         /// Renders a bitstring segment as a packed uint value
         /// </summary>
         /// <param name="offset">The index of the first bit </param>
         [MethodImpl(Inline)]
-        public uint TakeUInt32(int offset = 0)
+        public uint TakeUInt32(int offset)
             => TakeScalar<uint>(offset);
+
+        /// <summary>
+        /// Renders a bitstring segment as a packed uint value
+        /// </summary>
+        /// <param name="offset">The index of the first bit </param>
+        [MethodImpl(Inline)]
+        public uint TakeUInt32()
+            => TakeScalar<uint>();
 
         /// <summary>
         /// Renders a bitstring segment as a packed ulong value
         /// </summary>
         /// <param name="offset">The index of the first bit </param>
         [MethodImpl(Inline)]
-        public ulong TakeUInt64(int offset = 0)
+        public ulong TakeUInt64(int offset)
             => TakeScalar<ulong>(offset);
+
+        [MethodImpl(Inline)]
+        public ulong TakeUInt64()
+            => TakeScalar<ulong>();
 
         /// <summary>
         /// Packs a section of the represented bits into a bytespan
@@ -194,7 +232,11 @@ namespace Z0
         /// <param name="offset">The position of the first bit</param>
         /// <param name="minlen">The the minimum length of the produced span</param>
         [MethodImpl(Inline)]
-        public readonly Span<byte> Pack(int offset = 0, int? minlen = null)
+        public readonly Span<byte> Pack()
+            => PackedBits(bitseq, 0, null);
+
+        [MethodImpl(Inline)]
+        public readonly Span<byte> Pack(int offset, int minlen)
             => PackedBits(bitseq, offset, minlen);
 
         /// <summary>
@@ -422,9 +464,7 @@ namespace Z0
             if(specifier)
                 result = $"0b{result}";
             return result;
-
         }
-
 
         /// <summary>
         /// Formats bitstring content
@@ -486,15 +526,27 @@ namespace Z0
         public override bool Equals(object rhs)
             => rhs is BitString x && Equals(x);
 
+        /// <summary>
+        /// Packs a section of bits into a scalar 
+        /// </summary>
+        /// <typeparam name="T">The primal type</typeparam>
+        /// <param name="offset">The index of the first bit </param>
+        public T Scalar<T>(int offset = 0, int? count = null)
+            where T : unmanaged
+        {
+            var len = Math.Min((count == null ? (int)bitsize<T>() : count.Value), Length - offset);       
+            var bits = BitSeq.Slice(offset, len);
+            return bits.TakeScalar<T>();
+        }
+
         [MethodImpl(Inline)]
-        readonly T PackSingle<T>(int offset = 0, int? minlen = null)
+        readonly T PackSingle<T>(int offset)
             where T : unmanaged
         {                        
             var src = bitseq.ToReadOnlySpan();
-            var packed = PackedBits(src, offset, minlen);
+            var packed = PackedBits(src, offset, size<T>());
             return packed.Length != 0 ? SpanConvert.TakeSingle<byte,T>(packed) : default;
         }
-
 
         [MethodImpl(Inline)]
         static bool HasBitSpecifier(in string bs)

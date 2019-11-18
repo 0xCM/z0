@@ -14,19 +14,29 @@ namespace Z0
     /// </summary>
     public static class Pair
     {
+        /// <summary>
+        /// Creates an empty pair
+        /// </summary>
+        /// <typeparam name="T">The member type</typeparam>
         [MethodImpl(Inline)]
         public static Pair<T> alloc<T>()
             where T : unmanaged
                 => default;
 
+        /// <summary>
+        /// Defines a pair
+        /// </summary>
+        /// <param name="a">The first member</param>
+        /// <param name="b">The second member</param>
+        /// <typeparam name="T">The member type</typeparam>
         [MethodImpl(Inline)]
-        public static Pair<T> define<T>(T left, T right)
+        public static Pair<T> define<T>(T a, T b)
             where T : unmanaged
-                => new Pair<T>(left,right);
+                => new Pair<T>(a,b);
     }
 
     /// <summary>
-    /// An homogenous pair. That's it.
+    /// An homogenous 2-tuple
     /// </summary>
     public struct Pair<T>
         where T : unmanaged
@@ -42,9 +52,17 @@ namespace Z0
         public T B;
 
         [MethodImpl(Inline)]
-        public static implicit operator Pair<T>((T left, T right) src)
-            => Pair.define(src.left, src.right);
-        
+        public static implicit operator Pair<T>((T a, T b) src)
+            => Pair.define(src.a, src.b);
+
+        [MethodImpl(Inline)]
+        public static bool operator ==(Pair<T> x, Pair<T> y)        
+            => x.Equals(y);
+
+        [MethodImpl(Inline)]
+        public static bool operator !=(Pair<T> x, Pair<T> y)        
+            => x.Equals(y);
+
         [MethodImpl(Inline)]
         public Pair(T left, T right)
         {
@@ -53,23 +71,36 @@ namespace Z0
         }                
 
         [MethodImpl(Inline)]
-        public void Deconstruct(out T left, out T right)
+        public void Deconstruct(out T a, out T b)
         {
-            left = this.A;
-            right = this.B;
+            a = this.A;
+            b = this.B;
         }
 
         /// <summary>
         /// Interprets the pair over an alternate domain
         /// </summary>
-        /// <typeparam name="D">The alternate type</typeparam>
+        /// <typeparam name="U">The alternate type</typeparam>
         [MethodImpl(Inline)]
-        public Pair<D> As<D>()
-            where D : unmanaged
-                => new Pair<D>(Unsafe.As<T,D>(ref A), Unsafe.As<T,D>(ref B));
+        public Pair<U> As<U>()
+            where U : unmanaged
+                => new Pair<U>(Unsafe.As<T,U>(ref A), Unsafe.As<T,U>(ref B));
+
+        [MethodImpl(Inline)]
+        public bool Equals(Pair<T> rhs)
+            => A.Equals(rhs.A) && B.Equals(rhs.B);
 
         public string Format()
             => $"({A},{B})";
+
+        public override int GetHashCode()
+            => HashCode.Combine(A,B);
+        
+        public override bool Equals(object obj)
+            => obj is Pair<T> x && Equals(x);
+
+        public override string ToString()
+            => Format();
     }
 
 }
