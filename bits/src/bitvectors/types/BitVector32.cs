@@ -5,110 +5,42 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
 
     using static zfunc;    
 
     /// <summary>
     /// Defines a 32-bit bitvector
     /// </summary>
-    [StructLayout(LayoutKind.Sequential, Size = 4)]
     public struct BitVector32 
     {
         internal uint data;
 
-        public static readonly BitVector32 Zero = default;
-
-        public static readonly BitVector32 One = 1;
-
-        public static readonly BitVector32 Ones = uint.MaxValue;
-
+        /// <summary>
+        /// The vector bit-width
+        /// </summary>
         public const int Width = 32;
 
-        public const int FirstPos = 0;
-
-        public const int LastPos = Width - 1;
-
         /// <summary>
-        /// Allocates a zero-filled vector
+        /// Allocates a vector with all bits disabled
         /// </summary>
-        [MethodImpl(Inline)]
-        public static BitVector32 Alloc()
-            => new BitVector32(0);
+        public static BitVector32 Zero => default;
 
         /// <summary>
-        /// Creates a vector from an usigned 32-bit integer
+        /// Allocates a vector that has the least bit enabled and all others disabled
         /// </summary>
-        /// <param name="src">The source value</param>
-        [MethodImpl(Inline)]
-        public static BitVector32 FromScalar(uint src)
-            => new BitVector32(src);    
+        public static BitVector32 One => 1;
 
         /// <summary>
-        /// Creates a vector from a signed 32-bit integer
+        /// Allocates a vector with all bits enabled
         /// </summary>
-        /// <param name="src">The source value</param>
-        [MethodImpl(Inline)]
-        public static BitVector32 FromScalar(int src)
-            => new BitVector32((uint)src);    
+        public static BitVector32 Ones => uint.MaxValue;
 
-        /// <summary>
-        /// Creates a vector from the least 32 bits of the source
-        /// </summary>
-        /// <param name="src">The source value</param>
-        [MethodImpl(Inline)]
-        public static BitVector32 FromScalar(ulong src)
-            => new BitVector32((uint)src);    
-
-        /// <summary>
-        /// Creates a vector from four unsigned 8-bit integers
-        /// </summary>
-        /// <param name="src">The source value</param>
-        [MethodImpl(Inline)]
-        public static BitVector32 FromScalars(byte x0, byte x1, byte x2, byte x3)
-            => BitConverter.ToUInt32(new byte[]{x0, x1, x2, x3},0);
-
-        /// <summary>
-        /// Creates a vector from two unsigned 16-bit integers
-        /// </summary>
-        /// <param name="src">The source bitstring</param>
-        [MethodImpl(Inline)]
-        public static BitVector32 FromScalars(ushort lo, ushort hi)
-            => FromScalar((uint)hi << 16 | (uint)lo);
-
-        /// <summary>
-        /// Creates a vector from a bit parameter array
-        /// </summary>
-        /// <param name="src">The source bitstring</param>
-        [MethodImpl(Inline)]
-        public static BitVector32 FromBits(params Bit[] src)
-            => new BitVector32(src);
-
-        /// <summary>
-        /// Creates a vector from a bitstring
-        /// </summary>
-        /// <param name="src">The source bitstring</param>
-        [MethodImpl(Inline)]
-        public static BitVector32 FromBitString(in BitString src)        
-            => src.TakeUInt32();
-    
-        /// <summary>
-        /// Enumerates all 32-bit bitvectors whose width is less than or equal to a specified maximum
-        /// </summary>
-        public static IEnumerable<BitVector32> All(int maxwidth)
-        {
-            var maxval = Pow2.pow(maxwidth);
-            var bv = BitVector32.Zero;
-            while(bv < maxval)
-                yield return bv++;            
-        }
+        public static N32 N => default;
 
         [MethodImpl(Inline)]
         public static implicit operator BitVector<N32,uint>(BitVector32 src)
             => BitVector<N32,uint>.FromArray(src.data);
-
 
         [MethodImpl(Inline)]
         public static implicit operator BitVector<uint>(BitVector32 src)
@@ -116,7 +48,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator BitVector64(BitVector32 src)
-            => src.Expand();
+            => BitVector.from(n64,src.data);
 
         [MethodImpl(Inline)]
         public static explicit operator BitVector4(BitVector32 src)
@@ -140,7 +72,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]    
         public static implicit operator BitVector32(byte src)
-            => FromScalar(src);
+            => BitVector.from(N,src);
 
         /// <summary>
         /// Implicitly converts a scalar value to a 32-bit bitvector
@@ -148,7 +80,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]    
         public static implicit operator BitVector32(ushort src)
-            => FromScalar(src);
+            => BitVector.from(N,src);
 
         /// <summary>
         /// Implicitly converts a scalar value to a 32-bit bitvector
@@ -294,73 +226,6 @@ namespace Z0
         public BitVector32(uint src)
             : this() => this.data = src;
 
-        /// <summary>
-        /// Initializes a vector with a sequence of bit values that is clamped to 32 bits
-        /// </summary>
-        /// <param name="src">The source value</param>
-        [MethodImpl(Inline)]
-        public BitVector32(in Bit[] src)
-            : this()
-        {
-            this.data = 0;
-            for(var i = 0; i< Math.Min(32, src.Length); i++)
-                if(src[i])
-                    BitMask.enable(ref data, i);
-        }
-
-        /// <summary>
-        /// Presents vector content as a span of bytes
-        /// </summary>
-        [MethodImpl(Inline)]
-        public Span<byte> AsBytes()
-            => bytespan(ref data);
-
-        /// <summary>
-        /// Queries/Manipulates index-identified bits
-        /// </summary>
-        public bit this[int pos]
-        {
-            [MethodImpl(Inline)]
-            get => GetBit(pos);
-            
-            [MethodImpl(Inline)]
-            set => SetBit(pos, value);
-       }
-
-        public BitVector32 this[Range range]
-        {
-            [MethodImpl(Inline)]
-            get => Between(range.Start.Value, range.End.Value);
-        }
-
-        /// <summary>
-        /// Gets the value of an index-identified bit
-        /// </summary>
-        /// <param name="pos">The bit index</param>
-        [MethodImpl(Inline)]
-        public bit GetBit(int pos)
-            => BitMask.test(data, pos);
-
-        /// <summary>
-        /// Sets the state of an index-identified bit
-        /// </summary>
-        /// <param name="pos">The bit index</param>
-        /// <param name="value">The bit value</param>
-        [MethodImpl(Inline)]
-        public void SetBit(int pos, bit value)
-            => data = BitMask.set(ref data, (byte)pos, value);
-
-        /// <summary>
-        /// Selects a contiguous range of bits
-        /// </summary>
-        /// <param name="first">The position of the first bit</param>
-        /// <param name="last">The position of the last bit</param>
-        public BitVector32 this[int first, int last]
-        {
-            [MethodImpl(Inline)]
-            get => Between(first, last);
-        }
-
         public BitVector16 Lo
         {
             [MethodImpl(Inline)]
@@ -374,14 +239,6 @@ namespace Z0
         }
         
         /// <summary>
-        /// Zero-extends the vector to a vector that accomondates
-        /// the next power of 2
-        /// </summary>
-        [MethodImpl(Inline)]
-        public BitVector64 Expand()
-            => BitVector.from(n64,data);
-
-        /// <summary>
         /// Presents bitvector content as a bytespan
         /// </summary>
         public Span<byte> Bytes
@@ -391,12 +248,31 @@ namespace Z0
         }
 
         /// <summary>
-        /// Selects an index-identified byte where index = 0 | 1 | 2 | 3
+        /// Returns true if no bits are enabled, false otherwise
         /// </summary>
-        /// <param name="index">The 0-based byte-relative position</param>
-        [MethodImpl(Inline)]
-        public ref byte Byte(int index)        
-            => ref Bytes[index];
+        public readonly bool Empty
+        {
+            [MethodImpl(Inline)]
+            get => data == 0;
+        }
+
+        /// <summary>
+        /// Returns true if the vector has at least one enabled bit; false otherwise
+        /// </summary>
+        public readonly bool Nonempty
+        {
+            [MethodImpl(Inline)]
+            get => data != 0;
+        }
+
+        /// <summary>
+        /// Extracts the scalar represented by the vector
+        /// </summary>
+        public readonly uint Scalar
+        {
+            [MethodImpl(Inline)]
+            get => data;
+        }
 
         /// <summary>
         /// The number of bits represented by the vector
@@ -406,6 +282,40 @@ namespace Z0
             [MethodImpl(Inline)]
             get => Width;
         }
+
+        /// <summary>
+        /// Queries/Manipulates index-identified bits
+        /// </summary>
+        public bit this[int pos]
+        {
+            [MethodImpl(Inline)]
+            get => Get(pos);
+            
+            [MethodImpl(Inline)]
+            set => Set(pos, value);
+       }
+
+        /// <summary>
+        /// Selects a contiguous range of bits defined by an inclusive 0-based index range
+        /// </summary>
+        /// <param name="first">The position of the first bit</param>
+        /// <param name="last">The position of the last bit</param>
+        /// <remarks>Unfortuantely, the range spec/select syntanx [a..b] results in about 50 extra bytes
+        /// of assembly (!) of the jmp/cmp/test variety. So, defining a range operator for
+        /// performance-sensitive types is hard no-go </remarks>
+        public BitVector32 this[int first, int last]
+        {
+            [MethodImpl(Inline)]
+            get => Between(first, last);
+        }
+
+        /// <summary>
+        /// Selects an index-identified byte where index = 0 | 1 | 2 | 3
+        /// </summary>
+        /// <param name="index">The 0-based byte-relative position</param>
+        [MethodImpl(Inline)]
+        public ref byte Byte(int index)        
+            => ref Bytes[index];
 
         /// <summary>
         /// Enables a bit if it is disabled
@@ -424,21 +334,21 @@ namespace Z0
             => data = BitMask.disable(ref data, pos);
 
         /// <summary>
-        /// Disables the high bits that follow a specified bit
+        /// Gets the value of an index-identified bit
         /// </summary>
-        /// <param name="pos">The bit position</param>
+        /// <param name="pos">The bit index</param>
         [MethodImpl(Inline)]
-        public void DisableAfter(int pos)
-            => data = Bits.bzhi(ref data, (byte)(++pos));
-
-        /// <summary>
-        /// Determines whether a bit is enabled
-        /// </summary>
-        /// <param name="pos">The bit position</param>
-        [MethodImpl(Inline)]
-        public readonly bit Test(int pos)
+        public readonly bit Get(int pos)
             => BitMask.test(data, pos);
 
+        /// <summary>
+        /// Sets the state of an index-identified bit
+        /// </summary>
+        /// <param name="pos">The bit index</param>
+        /// <param name="value">The bit value</param>
+        [MethodImpl(Inline)]
+        public void Set(int pos, bit value)
+            => data = BitMask.set(ref data, (byte)pos, value);
 
         /// <summary>
         /// Extracts a contiguous sequence of bits defined by an inclusive range
@@ -448,104 +358,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public readonly BitVector32 Between(int first, int last)
             => Bits.between(data, (byte)first,(byte)last);
-
-        /// <summary>
-        /// Reverses the vector's bits
-        /// </summary>
-        [MethodImpl(Inline)]
-        public BitVector32 Reverse()
-        {     
-            data = Bits.rev(data);
-            return this;
-        }
-
-        /// <summary>
-        /// Rearranges the vector in-place as specified by a permutation
-        /// </summary>
-        /// <param name="spec">The permutation</param>
-        [MethodImpl(Inline)]
-        public BitVector32 Permute(Perm spec)
-            => BitVector.perm(ref this, spec);
-            
-        /// <summary>
-        /// Counts the number of enabled bits in the source
-        /// </summary>
-        [MethodImpl(Inline)]
-        public readonly uint Pop()
-            => Bits.pop(data);
-        
-
-        [MethodImpl(Inline)]
-        public readonly bool AllOnes()
-            => (UInt32.MaxValue & data) == UInt32.MaxValue;
-
-        /// <summary>
-        /// Returns true if no bits are enabled, false otherwise
-        /// </summary>
-        public readonly bool Empty
-        {
-            [MethodImpl(Inline)]
-            get => data == 0;
-        }
-
-        /// <summary>
-        /// Returns true if the vector has at least one enabled bit; false otherwise
-        /// </summary>
-        public readonly bool Nonempty
-        {
-            [MethodImpl(Inline)]
-            get => !Empty;
-        }
-
-        [MethodImpl(Inline)]
-        public readonly BitString ToBitString()
-            => data.ToBitString();
-
-        /// <summary>
-        /// Extracts the scalar represented by the vector
-        /// </summary>
-        public readonly uint Scalar
-        {
-            [MethodImpl(Inline)]
-            get => data;
-        }
-
-        [MethodImpl(Inline)]
-        public BitVector64 Concat(BitVector32 tail)
-            => BitVector.from(n64,tail.data, data);
-
-        /// <summary>
-        /// Returns a copy of the vector
-        /// </summary>
-        [MethodImpl(Inline)]
-        public readonly BitVector32 Replicate()
-            => new BitVector32(data);
-
-        [MethodImpl(Inline)]
-        public BitVector64 Replicate(N2 n)
-            => Concat(this);
-
-        /// <summary>
-        /// Applies a permutation to a replicated vector
-        /// </summary>
-        /// <param name="p">The permutation</param>
-        [MethodImpl(Inline)]
-        public readonly BitVector32 Replicate(Perm p)
-        {
-            var dst = Replicate();
-            dst.Permute(p);
-            return dst;
-        }
-
-        /// <summary>
-        /// Formats the bitvector as a bitstring
-        /// </summary>
-        /// <param name="tlz">True if leadzing zeros should be trimmed, false otherwise</param>
-        /// <param name="specifier">True if the prefix specifier '0b' should be prepended</param>
-        /// <param name="blockWidth">The width of the blocks, if any</param>
-        [MethodImpl(Inline)]
-        public string Format(bool tlz = false, bool specifier = false, int? blockWidth = null)
-            => ToBitString().Format(tlz, specifier, blockWidth);
 
         [MethodImpl(Inline)]
         public bool Equals(BitVector32 y)
@@ -558,7 +370,6 @@ namespace Z0
             => data.GetHashCode();
  
         public override string ToString()
-            => Format();
-
+            => this.Format();
     }
 }

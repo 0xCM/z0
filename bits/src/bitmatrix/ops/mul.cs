@@ -6,12 +6,9 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
     using System.Runtime.Intrinsics;
-    using System.Runtime.Intrinsics.X86;
 
     using static zfunc;
-    using static As;
 
     partial class BitMatrix
     {
@@ -172,7 +169,7 @@ namespace Z0
         public static BitVector32 mul(BitMatrix32 A, BitVector32 x)
         {
             const int N = 32;
-            var y = BitVector32.Alloc();
+            var y = BitVector.alloc(n32);
             for(var i=0; i< N; i++)
                 y[i] = A[i] % x;
             return y;        

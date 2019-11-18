@@ -17,42 +17,39 @@ namespace Z0
     public static partial class math
     {                
         /// <summary>
-        /// Computes the material nomimplication, equivalent to the bitwise expression ~a & b for operands a and b
+        /// Computes the converse nonimplication c := a & ~b for operands a and b
         /// </summary>
         /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
         [MethodImpl(Inline)]
-        public static byte notimply(byte a, byte b)
-            => (byte)AndNot((uint)a,(uint)b);
+        public static byte cnonimpl(byte a, byte b)
+            => (byte)AndNot((uint)b,(uint)a);
 
         /// <summary>
-        /// Computes the material nomimplication, equivalent to the bitwise expression ~a & b for operands a and b
+        /// Computes the converse nonimplication c := a & ~b for operands a and b
         /// </summary>
         /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
         [MethodImpl(Inline)]
-        public static ushort notimply(ushort a, ushort b)
-            => (ushort)AndNot((uint)a,(uint)b);
+        public static ushort cnonimpl(ushort a, ushort b)
+            => (ushort)AndNot((uint)b,(uint)a);
 
         /// <summary>
-        /// Computes the material nomimplication, equivalent to the bitwise expression ~a & b for operands a and b
+        /// Computes the converse nonimplication c := a & ~b for operands a and b
         /// </summary>
         /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
         [MethodImpl(Inline)]
-        public static ulong notimply(ulong a, ulong b)
-            => AndNot(a,b);
+        public static uint cnonimpl(uint a, uint b)
+            => AndNot(b,a);
 
         /// <summary>
-        /// Computes the material nomimplication, equivalent to the bitwise expression ~a & b for operands a and b
+        /// Computes the converse nonimplication c := a & ~b for operands a and b
         /// </summary>
         /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
         [MethodImpl(Inline)]
-        public static uint notimply(uint a, uint b)
-            => AndNot(a,b);
-
-
+        public static ulong cnonimpl(ulong a, ulong b)
+            => AndNot(b,a);
     }
-
 }

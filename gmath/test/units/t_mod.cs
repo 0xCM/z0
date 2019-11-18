@@ -9,7 +9,7 @@ namespace Z0.Test
 
     using static zfunc;
 
-    using D = PrimalDelegates;
+    using D = GDel;
 
     public class t_mod : UnitTest<t_mod>
     {

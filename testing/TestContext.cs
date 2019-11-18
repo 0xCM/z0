@@ -8,8 +8,6 @@ namespace Z0
     using System.Linq;
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
-    using System.IO;
-
     
     using static zfunc;
     using static nfunc;
@@ -237,7 +235,7 @@ namespace Z0
                 Claim.eq(baseline(src[i]),subject(src[i]), caller, file, line);            
         }
 
-        protected void VerifyOp<K>(PrimalPredicate<K> baseline, PrimalPredicate<K> op, bool nonzero = false, 
+        protected void VerifyOp<K>(BinaryPred<K> baseline, BinaryPred<K> op, bool nonzero = false, 
             [CallerMemberName] string caller = null, [CallerFilePath] string file = null, [CallerLineNumber] int? line = null)
             where K : unmanaged
         {
@@ -251,7 +249,7 @@ namespace Z0
                 Claim.eq(baseline(lhs[i],rhs[i]), op(lhs[i],rhs[i]), caller, file, line);            
         }
 
-        protected void VerifyOp<K>(OpKind opKind, PrimalPredicate<K> baseline, PrimalPredicate<K> op, bool nonzero = false, 
+        protected void VerifyOp<K>(OpKind opKind, BinaryPred<K> baseline, BinaryPred<K> op, bool nonzero = false, 
             [CallerMemberName] string caller = null, [CallerFilePath] string file = null, [CallerLineNumber] int? line = null)
             where K : unmanaged
         {

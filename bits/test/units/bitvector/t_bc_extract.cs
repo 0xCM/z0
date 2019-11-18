@@ -2,14 +2,13 @@
 // Copyright   :  (c) Chris Moore, 2019
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Test
+namespace Z0
 {
     using System;
     using System.Linq;
     using System.Runtime.CompilerServices;
 
     using static zfunc;
-
 
     public class t_bc_extract : BitVectorTest<t_bc_extract>
     {
@@ -48,11 +47,11 @@ namespace Z0.Test
             for(var i=0; i< SampleSize; i++)
             {
                 var v1 = BitCells.load(src[i]);
-                var v2 = BitVector32.FromScalar(src[i]);
+                var v2 = BitVector.from(n32,src[i]);
                 Claim.eq(v1.ToBitVector(n32),v2);
 
                 var r1 = v1.SliceCell(lower[i], upper[i]);
-                var r2 = v2.Between(lower[i], upper[i]);
+                var r2 = v2[lower[i], upper[i]];
                 Claim.eq(r1,r2);                
             }
         }

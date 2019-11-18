@@ -5,12 +5,9 @@
 namespace Z0.Logix
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
     using System.Runtime.CompilerServices;
 
     using static zfunc;    
-    using static LogicOpApi;
 
     public static class BitVectorOps
     {
@@ -166,7 +163,7 @@ namespace Z0.Logix
         [MethodImpl(Inline)]
         public static BitVector<T> notimply<T>(BitVector<T> x, BitVector<T> y)
             where T : unmanaged
-                => BitVector.notimply(x,y);
+                => BitVector.nonimpl(x,y);
 
         /// <summary>
         /// Computes the bitwise converse implication of the source vectors via delegation to external bitvector API
@@ -188,7 +185,7 @@ namespace Z0.Logix
         [MethodImpl(Inline)]
         public static BitVector<T> cnotimply<T>(BitVector<T> x, BitVector<T> y)
             where T : unmanaged
-                => BitVector.cnotimply(x,y);
+                => BitVector.cnonimpl(x,y);
 
         /// <summary>
         /// Computes the ternary select bitvector
@@ -201,10 +198,5 @@ namespace Z0.Logix
         public static BitVector<T> select<T>(BitVector<T> x, BitVector<T> y, BitVector<T> z)
             where T : unmanaged
             => BitVector.select(x,y,z);
-
-
-
-
     }
-
 }

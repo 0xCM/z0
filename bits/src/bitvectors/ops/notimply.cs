@@ -6,12 +6,8 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
-    using System.Collections.Generic;
 
     using static zfunc;    
-    using static nfunc;
-    using static As;
 
     partial class BitVector
     {
@@ -22,9 +18,9 @@ namespace Z0
         /// <param name="y">The right vector</param>
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
-        public static BitVector<T> notimply<T>(BitVector<T> x, BitVector<T> y)
+        public static BitVector<T> nonimpl<T>(BitVector<T> x, BitVector<T> y)
             where T : unmanaged
-                => gmath.notimply(x.Data, y.Data);
+                => gmath.nonimpl(x.Data, y.Data);
 
         /// <summary>
         /// Computes the material nonimplication, equivalent to the bitwise expression a & (~b) for operands a and b
@@ -32,8 +28,8 @@ namespace Z0
         /// <param name="x">The left bitvector</param>
         /// <param name="y">The right bitvector</param>
         [MethodImpl(Inline)]
-        public static BitVector4 notimply(BitVector4 x, BitVector4 y)
-            => math.notimply(x.data,y.data);
+        public static BitVector4 nonimpl(BitVector4 x, BitVector4 y)
+            => math.nonimpl(x.data,y.data);
 
         /// <summary>
         /// Computes the material nonimplication, equivalent to the bitwise expression a & (~b) for operands a and b
@@ -41,8 +37,8 @@ namespace Z0
         /// <param name="x">The left bitvector</param>
         /// <param name="y">The right bitvector</param>
         [MethodImpl(Inline)]
-        public static BitVector8 notimply(BitVector8 x, BitVector8 y)
-            => math.notimply(x.data,y.data);
+        public static BitVector8 nonimpl(BitVector8 x, BitVector8 y)
+            => math.nonimpl(x.data,y.data);
 
         /// <summary>
         /// Computes the material nonimplication, equivalent to the bitwise expression a & (~b) for operands a and b
@@ -50,8 +46,8 @@ namespace Z0
         /// <param name="x">The left bitvector</param>
         /// <param name="y">The right bitvector</param>
         [MethodImpl(Inline)]
-        public static BitVector16 notimply(BitVector16 x, BitVector16 y)
-            => math.notimply(x.data, y.data);
+        public static BitVector16 nonimpl(BitVector16 x, BitVector16 y)
+            => math.nonimpl(x.data, y.data);
 
         /// <summary>
         /// Computes the material nonimplication, equivalent to the bitwise expression a & (~b) for operands a and b
@@ -59,8 +55,8 @@ namespace Z0
         /// <param name="x">The left bitvector</param>
         /// <param name="y">The right bitvector</param>
         [MethodImpl(Inline)]
-        public static BitVector32 notimply(BitVector32 x, BitVector32 y)
-            => math.notimply(x.data, y.data);
+        public static BitVector32 nonimpl(BitVector32 x, BitVector32 y)
+            => math.nonimpl(x.data, y.data);
 
         /// <summary>
         /// Computes the material nonimplication, equivalent to the bitwise expression a & (~b) for operands a and b
@@ -68,7 +64,21 @@ namespace Z0
         /// <param name="x">The left bitvector</param>
         /// <param name="y">The right bitvector</param>
         [MethodImpl(Inline)]
-        public static BitVector64 notimply(BitVector64 x, BitVector64 y)
-            => math.notimply(x.data, y.data);
+        public static BitVector64 nonimpl(BitVector64 x, BitVector64 y)
+            => math.nonimpl(x.data, y.data);
+ 
+        /// <summary>
+        /// Computes the bitvector z: = ~(x ^ y) from bitvectors x and y
+        /// </summary>
+        /// <param name="x">The left bitvector</param>
+        /// <param name="y">The right bitvector</param>
+        [MethodImpl(Inline)]
+        public static BitVector128 nonimpl(BitVector128 x, BitVector128 y)
+        {
+            var z = alloc(n128);
+            vblock.nonimpl(n128, in x.x0, in y.x0, ref z.x0);
+            return z;
+        }
+
     }
 }

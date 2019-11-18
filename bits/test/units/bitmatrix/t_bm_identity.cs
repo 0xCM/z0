@@ -2,11 +2,9 @@
 // Copyright   :  (c) Chris Moore, 2019
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Test
+namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Reflection;
     using System.Runtime.CompilerServices;
 
     using static zfunc;
@@ -86,7 +84,7 @@ namespace Z0.Test
             var m = BitMatrix32.Identity;
             for(byte i=0; i < m.Order; i++)
                 Claim.eq(m[i,i],Bit.On);
-            Claim.yea(m.Diagonal().AllOnes());
+            Claim.yea(m.Diagonal().TestC());
         }
     
         public void bm_identity_64x64_check()

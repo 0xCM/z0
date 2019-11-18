@@ -15,6 +15,33 @@ namespace Z0
 
     partial class Reflections
     {        
+        [MethodImpl(Inline)]
+        public static string PrialNumericName(this Type src)
+        {
+            if(src == typeof(sbyte) || src.GetUnderlyingType() == typeof(sbyte))
+                return "sbyte";
+            else if(src == typeof(byte) || src.GetUnderlyingType() == typeof(byte))
+                return "byte";
+            else if(src == typeof(ushort)|| src.GetUnderlyingType() == typeof(ushort))
+                return "ushort";
+            else if(src == typeof(short)|| src.GetUnderlyingType() == typeof(short))
+                return "short";
+            else if(src == typeof(int)|| src.GetUnderlyingType() == typeof(int))
+                return "int";
+            else if(src == typeof(uint)|| src.GetUnderlyingType() == typeof(uint))
+                return "uint";
+            else if(src == typeof(long)|| src.GetUnderlyingType() == typeof(long))
+                return "long";
+            else if(src == typeof(ulong) || src.GetUnderlyingType() == typeof(ulong))
+                return "ulong";
+            else if(src == typeof(float)|| src.GetUnderlyingType() == typeof(float))
+                return "float";
+            else if(src == typeof(double)|| src.GetUnderlyingType() == typeof(double))
+                return "double";
+            else 
+                return string.Empty;
+        }
+
         /// <summary>
         /// Constructs a display name for a type
         /// </summary>
@@ -87,7 +114,6 @@ namespace Z0
         public static string SpecializeName<T>(this MethodBase src)
             => src.DeclaringType.DisplayName() + "/" + src.Name + "<" + typeof(T).DisplayName() + ">";
                 
-
         /// <summary>
         /// Constructs a display name for a method
         /// </summary>

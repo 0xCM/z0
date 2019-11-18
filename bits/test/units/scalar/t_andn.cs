@@ -5,8 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Reflection;
 
     using static zfunc;
  
@@ -42,7 +40,7 @@ namespace Z0
             {
                 var x = Random.Next<T>();                    
                 var y = Random.Next<T>();                    
-                var z1 = gmath.cnotimply(x, y);
+                var z1 = gmath.cnonimpl(x, y);
                 var z2 = gmath.and(x,gmath.not(y));
                 Claim.eq(z1,z2);
 

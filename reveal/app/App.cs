@@ -11,7 +11,6 @@ namespace Z0
 
     using static zfunc;
 
-
     class App
     {                
         static readonly FolderPath DumpFolder
@@ -98,9 +97,8 @@ namespace Z0
         {
             Disassemble(new ExperimentalScenarios());
             Disassemble(typeof(inxoc));    
-            Disassemble(typeof(pmoc));    
+            Disassemble(typeof(gmoc));    
             Disassemble(typeof(zfoc));    
-            Disassemble(typeof(fpoc));    
             Disassemble(typeof(circop));    
             Disassemble(typeof(bvoc));    
             Disassemble(typeof(bmoc));    

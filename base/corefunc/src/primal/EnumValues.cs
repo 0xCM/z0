@@ -22,9 +22,6 @@ namespace Z0
         static readonly E[] Cache
             = typeof(E).GetEnumValues().AsQueryable().Cast<E>().Distinct().ToArray();
 
-        // static readonly Dictionary<E,int> PositionIndex
-        //     = Cache.Mapi((i,v) => (v,i)).ToDictionary();
-
         static readonly Dictionary<string, E> NameIndex
             = Cache.Select(e => (e.ToString(), e)).ToDictionary();
 
@@ -47,20 +44,6 @@ namespace Z0
             return default;
         }
         
-        // [MethodImpl(Inline)]
-        // public int ToIndex(E value)
-        // {
-        //     if(PositionIndex.TryGetValue(value, out int index))
-        //         return index;
-        //     else 
-        //         return - 1;
-        // }
-
-        // [MethodImpl(Inline)]
-        // public T ToScalar<T>(E src)
-        //     where T : unmanaged
-        //         => EnumValues<E,T>.TheOnly.ToScalar(src);
-
         [MethodImpl(Inline)]
         public ReadOnlySpan<E> ToSpan()
             => Cache;

@@ -2,18 +2,15 @@
 // Copyright   :  (c) Chris Moore, 2019
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Test
+namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
-    using System.IO;
     
     using static zfunc;
-    using D = PrimalDelegates;
+    using D = GDel;
 
-    public class t_flip : ScalarBitTest<t_flip>
+    public class t_not : ScalarBitTest<t_not>
     {
         public void flip_g8i_check()
             => VerifyOp(OpKind.Not, x => (sbyte) ~x, D.flip<sbyte>());

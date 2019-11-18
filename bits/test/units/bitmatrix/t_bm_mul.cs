@@ -2,11 +2,9 @@
 // Copyright   :  (c) Chris Moore, 2019
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Test
+namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Reflection;
     using System.Runtime.CompilerServices;
     
     using static zfunc;
@@ -219,7 +217,7 @@ namespace Z0.Test
                 var m = Random.BitMatrix32();
                 var c = Random.BitVector(n32);
                 var z1 = m * c;            
-                var z2 = BitVector32.Alloc();
+                var z2 = BitVector.alloc(n32);
                 for(var i = 0; i<m.Order; i++)           
                 {
                     var r = m[i];

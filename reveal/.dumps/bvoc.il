@@ -1,4 +1,4 @@
-// 2019-11-17 22:14:51:015
+// 2019-11-18 13:26:06:618
 ulong clear_64(ulong src, int p0, int p1)
 {
     IL_0000: ldarg.0
@@ -850,6 +850,27 @@ ulong gather_g64u(ulong src, ulong mask)
     IL_0002: ldarga.s mask
     IL_0004: call System.UInt64 Z0.gbits::gather<System.UInt64>(System.UInt64&,System.UInt64&)
     IL_0009: ret
+
+}
+BitVector32 bitrange_32_a(BitVector32 src, int i, int j)
+{
+    IL_0000: ldarga.s src
+    IL_0002: ldarg.1
+    IL_0003: ldarg.2
+    IL_0004: call Z0.BitVector32 Z0.BitVector32::get_Item(System.Int32,System.Int32)
+    IL_0009: ret
+
+}
+BitVector32 bitrange_32_b(BitVector32 src, int i, int j)
+{
+    IL_0000: ldarga.s src
+    IL_0002: ldarg.1
+    IL_0003: call System.Index System.Index::op_Implicit(System.Int32)
+    IL_0008: ldarg.2
+    IL_0009: call System.Index System.Index::op_Implicit(System.Int32)
+    IL_000E: newobj System.Void System.Range::.ctor(System.Index,System.Index)
+    IL_0013: call Z0.BitVector32 Z0.BitVector32::get_Item(System.Range)
+    IL_0018: ret
 
 }
 ulong mask_1x64u(ulong dst, int exp0)

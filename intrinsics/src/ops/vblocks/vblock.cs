@@ -194,63 +194,66 @@ namespace Z0
         // ~ and
 
         [MethodImpl(Inline)]
-        public static void vand<T>(N128 n, in T a, in T b, ref T z)
+        public static Vector128<T> vand<T>(N128 n, in T a, in T b)
             where T : unmanaged
         {                    
             vload(in a, out Vector128<T> vA);
             vload(in b, out Vector128<T> vB);
-            vstore(ginx.vand(vA,vB), ref z);
+            return ginx.vand(vA,vB);
         }
 
         [MethodImpl(Inline)]
-        public static void vand<T>(N256 n, in T a, in T b, ref T z)
+        public static Vector256<T> vand<T>(N256 n, in T a, in T b)
             where T : unmanaged
-        {
+        {                    
             vload(in a, out Vector256<T> vA);
             vload(in b, out Vector256<T> vB);
-            vstore(ginx.vand(vA,vB), ref z);
+            return ginx.vand(vA,vB);
         }
+
+        [MethodImpl(Inline)]
+        public static void and<T>(N128 n, in T a, in T b, ref T z)
+            where T : unmanaged
+                => vstore(vand(n, in a, in b), ref z);
 
         [MethodImpl(Inline)]
         public static void and<T>(N128 n, int vcount, int step, in T a, in T b, ref T z)
             where T : unmanaged
         {
             for(int i=0, offset = 0; i < vcount; i++, offset += step)
-                vand(n, in skip(in a, offset), in skip(in b, offset), ref seek(ref z, offset));
+                and(n, in skip(in a, offset), in skip(in b, offset), ref seek(ref z, offset));
         }
 
         [MethodImpl(Inline)]
         public static void and<T>(N256 n, in T a, in T b, ref T z)
             where T : unmanaged
-        {
-            vand(n, in a, in b, ref z);
-        }
+                => vstore(vand(n, in a, in b), ref z);
 
         [MethodImpl(Inline)]
         public static void and<T>(N256 n, int vcount, int step, in T a, in T b, ref T z)
             where T : unmanaged
         {
             for(int i=0, offset = 0; i < vcount; i++, offset += step)
-                vand(n, in skip(in a, offset), in skip(in b, offset), ref seek(ref z, offset));
+                and(n, in skip(in a, offset), in skip(in b, offset), ref seek(ref z, offset));
         }
 
         // ~ nand
 
         [MethodImpl(Inline)]
-        public static Vector128<T> vnand<T>(N128 n, in T rX, in T rY)
+        public static Vector128<T> vnand<T>(N128 n, in T a, in T b)
             where T : unmanaged
         {                    
-            vload(in rX, out Vector128<T> vA);
-            vload(in rY, out Vector128<T> vB);
+            vload(in a, out Vector128<T> vA);
+            vload(in b, out Vector128<T> vB);
             return ginx.vnand(vA,vB);
         }
 
         [MethodImpl(Inline)]
-        public static Vector256<T> vnand<T>(N256 n, in T rX, in T rY)
+        public static Vector256<T> vnand<T>(N256 n, in T a, in T b)
             where T : unmanaged
         {                    
-            vload(in rX, out Vector256<T> vA);
-            vload(in rY, out Vector256<T> vB);
+            vload(in a, out Vector256<T> vA);
+            vload(in b, out Vector256<T> vB);
             return ginx.vnand(vA,vB);
         }
 
@@ -258,7 +261,6 @@ namespace Z0
         public static void nand<T>(N128 n, in T a, in T b, ref T z)
             where T : unmanaged
                 => vstore(vnand(n, in a, in b), ref z);
-
 
         [MethodImpl(Inline)]
         public static void nand<T>(N128 n, int vcount, int step, in T a, in T b, ref T z)
@@ -302,9 +304,9 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static void or<T>(N128 n, in T rX, in T rY, ref T rDst)
+        public static void or<T>(N128 n, in T a, in T b, ref T z)
             where T : unmanaged
-                => vstore(vor(n, in rX, in rY), ref rDst);
+                => vstore(vor(n, in a, in b), ref z);
 
         [MethodImpl(Inline)]
         public static void or<T>(N128 n, int vcount, int step, in T a, in T b, ref T z)
@@ -315,9 +317,9 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static void or<T>(N256 n, in T rX, in T rY, ref T rDst)
+        public static void or<T>(N256 n, in T a, in T b, ref T z)
             where T : unmanaged
-                => vstore(vor(n, in rX, in rY), ref rDst);
+                => vstore(vor(n, in a, in b), ref z);
 
         [MethodImpl(Inline)]
         public static void or<T>(N256 n, int vcount, int step, in T a, in T b, ref T z)
@@ -468,7 +470,7 @@ namespace Z0
         // ~ imply
 
         [MethodImpl(Inline)]
-        public static Vector128<T> vimply<T>(N128 n, in T a, in T b)
+        public static Vector128<T> vimpl<T>(N128 n, in T a, in T b)
             where T : unmanaged
         {                    
             vload(in a, out Vector128<T> vA);
@@ -477,7 +479,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static Vector256<T> vimply<T>(N256 n, in T a, in T b)
+        public static Vector256<T> vimpl<T>(N256 n, in T a, in T b)
             where T : unmanaged
         {                    
             vload(in a, out Vector256<T> vA);
@@ -486,35 +488,35 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static void imply<T>(N128 n, in T a, in T b, ref T z)
+        public static void impl<T>(N128 n, in T a, in T b, ref T z)
             where T : unmanaged
-                => vstore(vimply(n, in a, in b), ref z);
+                => vstore(vimpl(n, in a, in b), ref z);
 
         [MethodImpl(Inline)]
-        public static void imply<T>(N256 n, in T a, in T b, ref T z)
+        public static void impl<T>(N256 n, in T a, in T b, ref T z)
             where T : unmanaged
-                => vstore(vimply(n, in a, in b), ref z);
+                => vstore(vimpl(n, in a, in b), ref z);
 
         [MethodImpl(Inline)]
-        public static void imply<T>(N128 n, int vcount, int step, in T a, in T b, ref T z)
-            where T : unmanaged
-        {
-            for(int i=0, offset = 0; i < vcount; i++, offset += step)
-                imply(n, in skip(in a, offset), in skip(in b, offset), ref seek(ref z, offset));
-        }
-
-        [MethodImpl(Inline)]
-        public static void imply<T>(N256 n, int vcount, int step, in T a, in T b, ref T z)
+        public static void impl<T>(N128 n, int vcount, int step, in T a, in T b, ref T z)
             where T : unmanaged
         {
             for(int i=0, offset = 0; i < vcount; i++, offset += step)
-                imply(n, in skip(in a, offset), in skip(in b, offset), ref seek(ref z, offset));
+                impl(n, in skip(in a, offset), in skip(in b, offset), ref seek(ref z, offset));
         }
 
-        // ~ notimply
+        [MethodImpl(Inline)]
+        public static void impl<T>(N256 n, int vcount, int step, in T a, in T b, ref T z)
+            where T : unmanaged
+        {
+            for(int i=0, offset = 0; i < vcount; i++, offset += step)
+                impl(n, in skip(in a, offset), in skip(in b, offset), ref seek(ref z, offset));
+        }
+
+        // ~ nonimpl
 
         [MethodImpl(Inline)]
-        public static Vector128<T> vnotimply<T>(N128 n, in T a, in T b)
+        public static Vector128<T> vnonimpl<T>(N128 n, in T a, in T b)
             where T : unmanaged
         {                    
             vload(in a, out Vector128<T> vA);
@@ -532,35 +534,35 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static void notimply<T>(N128 n, in T a, in T b, ref T z)
+        public static void nonimpl<T>(N128 n, in T a, in T b, ref T z)
+            where T : unmanaged
+                => vstore(vnonimpl(n, in a, in b), ref z);
+
+        [MethodImpl(Inline)]
+        public static void nonimpl<T>(N256 n, in T a, in T b, ref T z)
             where T : unmanaged
                 => vstore(vnotimply(n, in a, in b), ref z);
 
         [MethodImpl(Inline)]
-        public static void notimply<T>(N256 n, in T a, in T b, ref T z)
-            where T : unmanaged
-                => vstore(vnotimply(n, in a, in b), ref z);
-
-        [MethodImpl(Inline)]
-        public static void notimply<T>(N128 n, int vcount, int step, in T a, in T b, ref T z)
+        public static void nonimpl<T>(N128 n, int vcount, int step, in T a, in T b, ref T z)
             where T : unmanaged
         {
             for(int i=0, offset = 0; i < vcount; i++, offset += step)
-                notimply(n, in skip(in a, offset), in skip(in b, offset), ref seek(ref z, offset));
+                nonimpl(n, in skip(in a, offset), in skip(in b, offset), ref seek(ref z, offset));
         }
 
         [MethodImpl(Inline)]
-        public static void notimply<T>(N256 n, int vcount, int step, in T a, in T b, ref T z)
+        public static void nonimpl<T>(N256 n, int vcount, int step, in T a, in T b, ref T z)
             where T : unmanaged
         {
             for(int i=0, offset = 0; i < vcount; i++, offset += step)
-                notimply(n, in skip(in a, offset), in skip(in b, offset), ref seek(ref z, offset));
+                nonimpl(n, in skip(in a, offset), in skip(in b, offset), ref seek(ref z, offset));
         }
 
         // ~ cimply
 
         [MethodImpl(Inline)]
-        public static Vector128<T> vcimply<T>(N128 n, in T a, in T b)
+        public static Vector128<T> vcimpl<T>(N128 n, in T a, in T b)
             where T : unmanaged
         {                    
             vload(in a, out Vector128<T> vA);
@@ -569,7 +571,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static Vector256<T> vcimply<T>(N256 n, in T a, in T b)
+        public static Vector256<T> vcimpl<T>(N256 n, in T a, in T b)
             where T : unmanaged
         {                    
             vload(in a, out Vector256<T> vA);
@@ -578,35 +580,35 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static void cimply<T>(N128 n, in T a, in T b, ref T z)
+        public static void cimpl<T>(N128 n, in T a, in T b, ref T z)
             where T : unmanaged
-                => vstore(vcimply(n, in a, in b), ref z);
+                => vstore(vcimpl(n, in a, in b), ref z);
 
         [MethodImpl(Inline)]
-        public static void cimply<T>(N256 n, in T a, in T b, ref T z)
+        public static void cimpl<T>(N256 n, in T a, in T b, ref T z)
             where T : unmanaged
-                => vstore(vcimply(n, in a, in b), ref z);
+                => vstore(vcimpl(n, in a, in b), ref z);
 
         [MethodImpl(Inline)]
-        public static void cimply<T>(N128 n, int vcount, int step, in T a, in T b, ref T z)
+        public static void cimpl<T>(N128 n, int vcount, int step, in T a, in T b, ref T z)
             where T : unmanaged
         {
             for(int i=0, offset = 0; i < vcount; i++, offset += step)
-                cimply(n, in skip(in a, offset), in skip(in b, offset), ref seek(ref z, offset));
+                cimpl(n, in skip(in a, offset), in skip(in b, offset), ref seek(ref z, offset));
         }
 
         [MethodImpl(Inline)]
-        public static void cimply<T>(N256 n, int vcount, int step, in T a, in T b, ref T z)
+        public static void cimpl<T>(N256 n, int vcount, int step, in T a, in T b, ref T z)
             where T : unmanaged
         {
             for(int i=0, offset = 0; i < vcount; i++, offset += step)
-                cimply(n, in skip(in a, offset), in skip(in b, offset), ref seek(ref z, offset));
+                cimpl(n, in skip(in a, offset), in skip(in b, offset), ref seek(ref z, offset));
         }
 
         // ~ cnotimply
 
         [MethodImpl(Inline)]
-        public static Vector128<T> vcnotimply<T>(N128 n, in T a, in T b)
+        public static Vector128<T> vcnonimpl<T>(N128 n, in T a, in T b)
             where T : unmanaged
         {                    
             vload(in a, out Vector128<T> vA);
@@ -615,7 +617,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static Vector256<T> vcnotimply<T>(N256 n, in T rX, in T b)
+        public static Vector256<T> vcnonimpl<T>(N256 n, in T rX, in T b)
             where T : unmanaged
         {                    
             vload(in rX, out Vector256<T> vA);
@@ -624,29 +626,29 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static void cnotimply<T>(N128 n, in T a, in T b, ref T z)
+        public static void cnonimpl<T>(N128 n, in T a, in T b, ref T z)
             where T : unmanaged
-                => vstore(vcnotimply(n, in a, in b), ref z);
+                => vstore(vcnonimpl(n, in a, in b), ref z);
 
         [MethodImpl(Inline)]
-        public static void cnotimply<T>(N256 n, in T a, in T b, ref T z)
+        public static void cnonimpl<T>(N256 n, in T a, in T b, ref T z)
             where T : unmanaged
-                => vstore(vcnotimply(n, in a, in b), ref z);
+                => vstore(vcnonimpl(n, in a, in b), ref z);
 
         [MethodImpl(Inline)]
-        public static void cnotimply<T>(N128 n, int vcount, int step, in T a, in T b, ref T z)
+        public static void cnonimpl<T>(N128 n, int vcount, int step, in T a, in T b, ref T z)
             where T : unmanaged
         {
             for(int i=0, offset = 0; i < vcount; i++, offset += step)
-                cnotimply(n, in skip(in a, offset), in skip(in b, offset), ref seek(ref z, offset));
+                cnonimpl(n, in skip(in a, offset), in skip(in b, offset), ref seek(ref z, offset));
         }
 
         [MethodImpl(Inline)]
-        public static void cnotimply<T>(N256 n, int vcount, int step, in T a, in T b, ref T z)
+        public static void cnonimpl<T>(N256 n, int vcount, int step, in T a, in T b, ref T z)
             where T : unmanaged
         {
             for(int i=0, offset = 0; i < vcount; i++, offset += step)
-                cnotimply(n, in skip(in a, offset), in skip(in b, offset), ref seek(ref z, offset));
+                cnonimpl(n, in skip(in a, offset), in skip(in b, offset), ref seek(ref z, offset));
         }
 
         // ~ xornot

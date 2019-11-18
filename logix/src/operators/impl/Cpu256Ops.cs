@@ -6,9 +6,7 @@ namespace Z0.Logix
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
     using System.Runtime.Intrinsics;
-    using System.Collections.Generic;
 
     using static zfunc;    
     using static TernaryOpKind;

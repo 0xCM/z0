@@ -5,28 +5,26 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
     using static zfunc;
     
     partial class math
     {
         [MethodImpl(Inline)]
         public static byte select(byte a, byte b, byte c)
-            => or(and(a,b), notimply(a,c));
+            => or(and(a,b), nonimpl(a,c));
 
         [MethodImpl(Inline)]
         public static ushort select(ushort a, ushort b, ushort c)
-            => or(and(a,b), notimply(a,c));
+            => or(and(a,b), nonimpl(a,c));
 
         [MethodImpl(Inline)]
         public static uint select(uint a, uint b, uint c)
-            => or(and(a,b), notimply(a,c));
+            => or(and(a,b), nonimpl(a,c));
         
         [MethodImpl(Inline)]
         public static ulong select(ulong a, ulong b, ulong c)
-            => or(and(a,b), notimply(a,c)); 
+            => or(and(a,b), nonimpl(a,c)); 
 
         [MethodImpl(Inline)]
         public static byte merge(byte mask, byte a, byte b)

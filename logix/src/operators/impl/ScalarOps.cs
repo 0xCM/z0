@@ -5,17 +5,13 @@
 namespace Z0.Logix
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
     using System.Runtime.CompilerServices;
 
     using static zfunc;    
     using static TernaryOpKind;
 
-
     public static class ScalarOps
-    {
-        
+    {        
         [MethodImpl(Inline)]
         public static T zero<T>()
             where T : unmanaged
@@ -158,22 +154,22 @@ namespace Z0.Logix
         [MethodImpl(Inline), BinaryBitwiseOp(BinaryBitwiseOpKind.Implication)]
         public static T imply<T>(T a, T b)
             where T : unmanaged
-                => gmath.imply(a,b);
+                => gmath.impl(a,b);
 
         [MethodImpl(Inline), BinaryBitwiseOp(BinaryBitwiseOpKind.Nonimplication)]
         public static T notimply<T>(T a, T b)
             where T : unmanaged
-                => gmath.notimply(a,b);
+                => gmath.nonimpl(a,b);
 
         [MethodImpl(Inline), BinaryBitwiseOp(BinaryBitwiseOpKind.ConverseImplication)]
         public static T cimply<T>(T a, T b)
             where T : unmanaged
-                => gmath.cimply(a,b);
+                => gmath.cimpl(a,b);
         
         [MethodImpl(Inline), BinaryBitwiseOp(BinaryBitwiseOpKind.ConverseNonimplication)]
         public static T cnotimply<T>(T a, T b)
             where T : unmanaged
-                => gmath.cnotimply(a,b);
+                => gmath.cnonimpl(a,b);
                 
         [MethodImpl(Inline)]
         public static T xornot<T>(T a, T b)

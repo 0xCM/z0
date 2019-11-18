@@ -5,12 +5,11 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
     using System.Runtime.CompilerServices;
     
     using static zfunc;    
 
-    partial class pmoc
+    partial class gmoc
     {
         public static ulong select_1(ulong a, ulong b, ulong c)
             => gmath.select(a,b,c);

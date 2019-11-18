@@ -89,27 +89,77 @@ partial class zfunc
             =>ptr<T,byte>(ref r);
 
     /// <summary>
+    /// Presents a generic reference as an sbyte pointer
+    /// </summary>
+    /// <param name="r">The memory reference</param>
+    /// <typeparam name="T">The source reference type</typeparam>
+    [MethodImpl(Inline)]
+    public static unsafe sbyte* psbyte<T>(ref T r)
+        where T : unmanaged
+            =>ptr<T,sbyte>(ref r);
+
+    /// <summary>
+    /// Presents a generic reference as a byte pointer
+    /// </summary>
+    /// <param name="r">The memory reference</param>
+    /// <typeparam name="T">The source reference type</typeparam>
+    [MethodImpl(Inline)]
+    public static unsafe byte* puint8<T>(ref T r)
+        where T : unmanaged
+            =>ptr<T,byte>(ref r);
+
+    /// <summary>
+    /// Presents a generic reference as an sbyte pointer
+    /// </summary>
+    /// <param name="r">The memory reference</param>
+    /// <typeparam name="T">The source reference type</typeparam>
+    [MethodImpl(Inline)]
+    public static unsafe sbyte* pint8<T>(ref T r)
+        where T : unmanaged
+            =>ptr<T,sbyte>(ref r);
+
+    /// <summary>
     /// Presents a generic reference as a short pointer
     /// </summary>
     /// <param name="r">The memory reference</param>
     /// <typeparam name="T">The source reference type</typeparam>
     [MethodImpl(Inline)]
-    public static unsafe short* pshort<T>(ref T r)
+    public static unsafe short* pint16<T>(ref T r)
         where T : unmanaged
             => ptr<T,short>(ref r);
 
     /// <summary>
-    /// Presents a generic reference as an int pointer
+    /// Presents a generic reference as a ushort pointer
     /// </summary>
     /// <param name="r">The memory reference</param>
     /// <typeparam name="T">The source reference type</typeparam>
     [MethodImpl(Inline)]
-    public static unsafe int* pint<T>(ref T r)
+    public static unsafe ushort* puint16<T>(ref T r)
+        where T : unmanaged
+            => ptr<T,ushort>(ref r);
+
+    /// <summary>
+    /// Presents a generic reference as an int32 pointer
+    /// </summary>
+    /// <param name="r">The memory reference</param>
+    /// <typeparam name="T">The source reference type</typeparam>
+    [MethodImpl(Inline)]
+    public static unsafe int* pint32<T>(ref T r)
         where T : unmanaged
             => ptr<T,int>(ref r);
 
     /// <summary>
-    /// Presents a generic reference as a long pointer
+    /// Presents a generic reference as an uint32 pointer
+    /// </summary>
+    /// <param name="r">The memory reference</param>
+    /// <typeparam name="T">The source reference type</typeparam>
+    [MethodImpl(Inline)]
+    public static unsafe uint* puint32<T>(ref T r)
+        where T : unmanaged
+            => ptr<T,uint>(ref r);
+
+    /// <summary>
+    /// Presents a generic reference as an int64 pointer
     /// </summary>
     /// <param name="r">The memory reference</param>
     /// <typeparam name="T">The source reference type</typeparam>
@@ -119,12 +169,32 @@ partial class zfunc
             => ptr<T,long>(ref r);
 
     /// <summary>
-    /// Presents a generic reference as an unsigned long pointer
+    /// Presents a generic reference as an int64 pointer
     /// </summary>
     /// <param name="r">The memory reference</param>
     /// <typeparam name="T">The source reference type</typeparam>
     [MethodImpl(Inline)]
-    public static unsafe ulong* plongu<T>(ref T r)
+    public static unsafe long* pint64<T>(ref T r)
+        where T : unmanaged
+            => ptr<T,long>(ref r);
+
+    /// <summary>
+    /// Presents a generic reference as a uint64 pointer
+    /// </summary>
+    /// <param name="r">The memory reference</param>
+    /// <typeparam name="T">The source reference type</typeparam>
+    [MethodImpl(Inline)]
+    public static unsafe ulong* pulong<T>(ref T r)
+        where T : unmanaged
+            => ptr<T,ulong>(ref r);
+
+    /// <summary>
+    /// Presents a generic reference as a uint64 pointer
+    /// </summary>
+    /// <param name="r">The memory reference</param>
+    /// <typeparam name="T">The source reference type</typeparam>
+    [MethodImpl(Inline)]
+    public static unsafe ulong* puint64<T>(ref T r)
         where T : unmanaged
             => ptr<T,ulong>(ref r);
 }

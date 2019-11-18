@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using static zfunc;
 
-
 	/// <summary>
 	/// Identifies a bit position within a contiguous sequence of T-element values
 	/// </summary>
@@ -33,7 +32,7 @@ namespace Z0
 		/// <summary>
 		/// Specifies the number of bits that can be placed in one segment
 		/// </summary>
-		public static readonly BitSize SegCapacity = SizeOf<T>.BitSize;
+		public static readonly BitSize SegCapacity = bitsize<T>();
 
 		/// <summary>
 		/// Modulus for number of potential bits in T

@@ -127,7 +127,6 @@ namespace Z0
         public static implicit operator T(EnumG<E,T> src)
             => src.Scalar;
 
-
         [MethodImpl(Inline)]
         public EnumG(E value)
             => this.Value = value;

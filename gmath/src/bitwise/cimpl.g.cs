@@ -15,22 +15,22 @@ namespace Z0
     partial class gmath
     {
         /// <summary>
-        /// Computes the converse nonimplication, equivalent to the bitwise expression a & (~b) for operands a and b
+        /// Computes the converse implication c := ~a | b for unsigned integers a and b
         /// </summary>
         /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
         [MethodImpl(Inline)]
-        public static T cnotimply<T>(T a, T b)
+        public static T cimpl<T>(T a, T b)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(math.cnotimply(uint8(a), uint8(b)));
+                return generic<T>(math.cimpl(uint8(a), uint8(b)));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(math.cnotimply(uint16(a), uint16(b)));
+                return generic<T>(math.cimpl(uint16(a), uint16(b)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(math.cnotimply(uint32(a), uint32(b)));
+                return generic<T>(math.cimpl(uint32(a), uint32(b)));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(math.cnotimply(uint64(a), uint64(b)));
+                return generic<T>(math.cimpl(uint64(a), uint64(b)));
             else
                 throw unsupported<T>();
         }

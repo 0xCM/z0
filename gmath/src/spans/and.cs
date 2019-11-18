@@ -15,7 +15,7 @@ namespace Z0
             where T : unmanaged
         {
             for(var i=0; i<lhs.Length; i++)
-                gmath.and(ref lhs[i],rhs);
+                lhs[i] = gmath.and(lhs[i],rhs);
             return lhs;
         }
 

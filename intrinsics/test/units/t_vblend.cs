@@ -6,10 +6,9 @@ namespace Z0
 {
     using System;
     using System.Linq;
-    using System.IO;
-    using System.Runtime.Intrinsics;
     
     using static zfunc;
+    using static HexConst;
 
     public class t_vblend : IntrinsicTest<t_vblend>
     {

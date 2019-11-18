@@ -71,23 +71,5 @@ namespace Z0
             Claim.eq(xACBD, Vector128.Create(xs[A], xs[C], xs[B], xs[D], xs[A + 4], xs[B + 4], xs[C + 4], xs[D + 4]));
             
         }
-
-        public void shuffle_128x8u_check()
-        {
-            var src = ginx.vincrements<byte>(n128);
-            var perm = PermSpec.natural(PermSpec.reversed(n16));
-            for(int i=0,j=15; i<perm.Length; i++, j--)
-                Claim.eq(perm[i],j);
-
-            var shufspec = perm.ToShuffleSpec();
-            var dst = dinx.vshuf16x8(src,shufspec);
-            var expect = DataPatterns.decrements<byte>(n128);
-            Claim.eq(expect, dst);
-
-            var dstPerm = dst.ToPerm();
-            var expectPerm = expect.ToPerm();
-            Claim.eq(dstPerm, expectPerm);
-
-        }
     }
 }

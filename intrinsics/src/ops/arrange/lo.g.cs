@@ -9,8 +9,6 @@ namespace Z0
     using System.Runtime.Intrinsics;    
     
     using static zfunc;    
-    using static AsIn;    
-    using static As;
     using static aux;
 
     partial class ginx
@@ -22,7 +20,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<T> vlo<T>(Vector128<T> src)
             where T : unmanaged
-                =>  As.generic<T>(dinx.vmovescalar(v64u(src)));
+                =>  As.generic<T>(dinx.vmovelo(v64u(src)));
 
         /// <summary>
         /// Extracts the lo 128-bit lane of the source vector to scalar targets

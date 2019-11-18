@@ -16,7 +16,7 @@ namespace Z0
         {
             var len = length(lhs,rhs);
             for(var i=0; i<len; i++)
-                dst[i] = gmath.cnotimply(lhs[i], rhs[i]);
+                dst[i] = gmath.cnonimpl(lhs[i], rhs[i]);
             return dst;
         }
 

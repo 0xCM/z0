@@ -7,8 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
-    using System.Runtime.InteropServices;
-    using System.Numerics;
 
     using static zfunc;    
     using static Bits;
@@ -499,7 +497,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public BitVector8 AndNot(BitVector8 y)
         {
-            data = math.cnotimply(data, y.data);            
+            data = math.cnonimpl(data, y.data);            
             return this;
         }        
 
@@ -623,7 +621,7 @@ namespace Z0
         /// </summary>
         [MethodImpl(Inline)]
         public BitVector32 ToBitVector32()
-            => BitVector32.FromScalar(data);
+            => BitVector.from(n32,data);
 
         /// <summary>
         /// Converts the source to a 64-bit vector

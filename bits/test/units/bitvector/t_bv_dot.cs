@@ -2,16 +2,14 @@
 // Copyright   :  (c) Chris Moore, 2019
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Test
+namespace Z0
 {
     using System;
-    using System.Linq;
     using System.Runtime.CompilerServices;
 
     using static zfunc;
 
     using static BitVector;
-
 
     public class t_bv_dot : BitVectorTest<t_bv_dot>
     {
@@ -123,8 +121,8 @@ namespace Z0.Test
                 var b = modprod(x,y);
                 Claim.yea(a == b);            
 
-                var zx = x.ToNatBits();
-                var zy = y.ToNatBits();
+                var zx = x.ToNatural();
+                var zy = y.ToNatural();
                 var c = zx % zy;
                 Claim.yea(a == c);
 
@@ -141,8 +139,8 @@ namespace Z0.Test
                 var b = modprod(x,y);
                 Claim.yea(a == b);   
 
-                var zx = x.ToNatBits();
-                var zy = y.ToNatBits();
+                var zx = x.ToNatural();
+                var zy = y.ToNatural();
                 var c = zx % zy;
                 Claim.yea(a == c);
 
@@ -159,8 +157,8 @@ namespace Z0.Test
                 var b = modprod(x,y);
                 Claim.yea(a == b);
             
-                var zx = x.ToNatBits();
-                var zy = y.ToNatBits();
+                var zx = x.ToNatural();
+                var zy = y.ToNatural();
                 var c = zx % zy;
                 Claim.yea(a == c);
             }
@@ -176,8 +174,8 @@ namespace Z0.Test
                 var b = modprod(x,y);
                 Claim.yea(a == b);
 
-                var zx = x.ToNatBits();
-                var zy = y.ToNatBits();
+                var zx = x.ToNatural();
+                var zy = y.ToNatural();
                 bit c = zx % zy;
                 Claim.yea(a == c);
             

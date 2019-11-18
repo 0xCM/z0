@@ -5,17 +5,13 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
-    using System.IO;
     
     using static zfunc;
 
     public class t_vmovemask : IntrinsicTest<t_vmovemask>
     {
-
         public void pack_test()
         {
             var x = dinx.vparts(n128,0,1,2,4,4,5,6,7);
@@ -38,9 +34,7 @@ namespace Z0
             }
 
             Trace(v8u(y).FormatBits());
-            Trace(m.FormatBits());
-
-            
+            Trace(m.FormatBits());            
 
         }
 
@@ -108,7 +102,7 @@ namespace Z0
                 var srcVector = src.TakeVector(i);
                 var srcSpan = srcVector.ToSpan();
 
-                var mmExpect = BitVector32.Alloc();
+                var mmExpect = BitVector.alloc(n32);
                 for(byte r=0; r<srcVector.Length(); r++)
                     if(BitMask.test(srcSpan[r], 31))
                         mmExpect.Enable(r);
@@ -117,7 +111,6 @@ namespace Z0
                 Claim.yea(mmExpect == mmActual);
             }
         }
-
 
         public void movemask_256x64f()
         {
@@ -128,7 +121,7 @@ namespace Z0
                 var srcVector = src.TakeVector(i);
                 var srcSpan = srcVector.ToSpan();
 
-                var mmExpect = BitVector32.Alloc();
+                var mmExpect = BitVector.alloc(n32);
                 for(byte r=0; r<srcVector.Length(); r++)
                     if(BitMask.test(srcSpan[r], 63))
                         mmExpect.Enable(r);

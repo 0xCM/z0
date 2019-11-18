@@ -6,11 +6,11 @@ namespace Z0.Test
 {
     using System;
     using System.Linq;
-    using System.Collections.Generic;
-    using System.Runtime.CompilerServices;
     using System.IO;
+    using System.Runtime.Intrinsics;
     
     using static zfunc;
+    using static HexConst;
     
     //using static VecParts128x8u;
     public class t_vshuffle : IntrinsicTest<t_vshuffle>
@@ -110,6 +110,24 @@ namespace Z0.Test
         }
 
 
+        public void shuffle_128x8u_check()
+        {
+            var src = ginx.vincrements<byte>(n128);
+            var perm = PermSpec.natural(PermSpec.reversed(n16));
+            for(int i=0,j=15; i<perm.Length; i++, j--)
+                Claim.eq(perm[i],j);
+
+            var shufspec = perm.ToShuffleSpec();
+            var dst = dinx.vshuf16x8(src,shufspec);
+            var expect = DataPatterns.decrements<byte>(n128);
+            Claim.eq(expect, dst);
+
+            var dstPerm = dst.ToPerm();
+            var expectPerm = expect.ToPerm();
+            Claim.eq(dstPerm, expectPerm);
+
+        }
+
         public void shuffle_lo_128x16u()
         {
             var id = dinx.vparts(n128, 0,1,2,3,6,7,8,9);
@@ -177,7 +195,5 @@ namespace Z0.Test
                                 
             }
         }
-
     }
-
 }

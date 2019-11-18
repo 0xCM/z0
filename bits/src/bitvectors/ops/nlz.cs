@@ -6,11 +6,9 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
-    using System.Collections.Generic;
+    using System.Runtime.Intrinsics;
 
     using static zfunc;    
-    using static nfunc;
 
     partial class BitVector
     {
@@ -27,35 +25,35 @@ namespace Z0
         /// </summary>
         [MethodImpl(Inline)]
         public static uint nlz(BitVector8 x)
-            => Bits.nlz(x.data);
+            => gbits.nlz(x.data);
 
         /// <summary>
         /// Counts the number of leading zero bits
         /// </summary>
         [MethodImpl(Inline)]
         public static uint nlz(BitVector16 x)
-            => Bits.nlz(x.data);
+            => gbits.nlz(x.data);
 
-        /// <summary>
-        /// Counts the number of trailing zero bits
-        /// </summary>
-        [MethodImpl(Inline)]
-        public static uint ntz<T>(BitVector<T> x)
-            where T : unmanaged
-                => gbits.ntz(x.data);
-
-        /// <summary>
-        /// Counts the number of trailing zero bits
-        /// </summary>
-        [MethodImpl(Inline)]
-        public static uint ntz(BitVector8 x)
-            => Bits.ntz(x.data);
 
         /// <summary>
         /// Counts the number of leading zero bits
         /// </summary>
         [MethodImpl(Inline)]
         public static uint nlz(BitVector64 x)
-            => Bits.nlz(x.data);
+            => gbits.nlz(x.data);
+
+        /// <summary>
+        /// Counts the number of leading zeros
+        /// </summary>
+        [MethodImpl(Inline)]
+        public static uint nlz(BitVector128 x)
+        {
+            if(x.x1 == 0)
+                return 64 + gbits.nlz(x.x0);
+            else
+                return gbits.nlz(x.x1);
+        }
+
+
     }
 }

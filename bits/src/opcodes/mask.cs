@@ -6,14 +6,16 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
 
     using static zfunc;
-    using static As;
-    using static AsIn;
 
     partial class bvoc
     {
+
+        public static BitVector32 bitrange_32_a(BitVector32 src, int i, int j)
+            => src[i,j];
+
+
         public static ulong mask_1x64u(ulong dst, int exp0)
             => Bits.mask(ref dst, exp0);        
 

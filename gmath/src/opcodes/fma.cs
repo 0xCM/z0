@@ -5,12 +5,11 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
     using System.Runtime.CompilerServices;
     
     using static zfunc;    
 
-    partial class pmoc
+    partial class gmoc
     {
         public static sbyte fma_d8i(sbyte x, sbyte a, sbyte b)    
             => math.fma(x,a,b);

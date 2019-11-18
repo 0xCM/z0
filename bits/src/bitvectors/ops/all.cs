@@ -6,16 +6,12 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
     using System.Collections.Generic;
 
     using static zfunc;    
-    using static nfunc;
-    using static As;
 
     partial class BitVector
     {
-
         /// <summary>
         /// Enumerates each and every 8-bit bitvector exactly once
         /// </summary>
@@ -50,6 +46,15 @@ namespace Z0
                 yield return x ^ (x >> 1);
         }
 
+        /// <summary>
+        /// Enumerates all 32-bit bitvectors whose width is less than or equal to a specified maximum
+        /// </summary>
+        public static IEnumerable<BitVector32> list(N32 n, int maxwidth)
+        {
+            var maxval = Pow2.pow(maxwidth);
+            var bv = BitVector32.Zero;
+            while(bv < maxval)
+                yield return bv++;            
+        }
     }
-
 }

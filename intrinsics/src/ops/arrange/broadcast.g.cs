@@ -27,14 +27,14 @@ namespace Z0
             || typeof(T) == typeof(ushort) 
             || typeof(T) == typeof(uint) 
             || typeof(T) == typeof(ulong))
-                return vbc_128u(src);
+                return vbc_u(n, src);
             else if(typeof(T) == typeof(sbyte) 
             || typeof(T) == typeof(short) 
             || typeof(T) == typeof(int) 
             || typeof(T) == typeof(long))
-                return vbc_128i(src);
+                return vbc_i(n, src);
             else
-                return vbc_128f(src);
+                return vbc_f(n, src);
         }
 
         /// <summary>
@@ -51,14 +51,14 @@ namespace Z0
             || typeof(T) == typeof(ushort) 
             || typeof(T) == typeof(uint) 
             || typeof(T) == typeof(ulong))
-                return vbc_256u(src);
+                return vbc_u(n, src);
             else if(typeof(T) == typeof(sbyte) 
             || typeof(T) == typeof(short) 
             || typeof(T) == typeof(int) 
             || typeof(T) == typeof(long))
-                return vbc_256i(src);
+                return vbc_i(n, src);
             else
-                return vbc_256f(src);
+                return vbc_f(n, src);
        }
 
     }

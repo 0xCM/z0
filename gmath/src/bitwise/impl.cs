@@ -17,39 +17,39 @@ namespace Z0
     partial class math
     {                
         /// <summary>
-        /// Computes a | ~b, the material implication
+        /// Computes the material implication c := a | ~b for operands a and b
         /// </summary>
         /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
         [MethodImpl(Inline)]
-        public static byte imply(byte a, byte b)
+        public static byte impl(byte a, byte b)
             => (byte)(a | ~b);
 
         /// <summary>
-        /// Computes a | ~b, the material implication
+        /// Computes the material implication c := a | ~b for operands a and b
         /// </summary>
         /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
         [MethodImpl(Inline)]
-        public static ushort imply(ushort a, ushort b)
+        public static ushort impl(ushort a, ushort b)
             => (ushort)(a | ~b);
 
         /// <summary>
-        /// Computes a | ~b, the material implication
+        /// Computes the material implication c := a | ~b for operands a and b
         /// </summary>
         /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
         [MethodImpl(Inline)]
-        public static uint imply(uint a, uint b)
+        public static uint impl(uint a, uint b)
             => a | ~b;
 
         /// <summary>
-        /// Computes a | ~b, the material implication
+        /// Computes the material implication c := a | ~b for operands a and b
         /// </summary>
         /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
         [MethodImpl(Inline)]
-        public static ulong imply(ulong a, ulong b)
+        public static ulong impl(ulong a, ulong b)
             => a | ~b;
     }
 

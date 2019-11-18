@@ -1,4 +1,46 @@
-// 2019-11-17 22:14:52:414
+// 2019-11-18 13:26:08:095
+ref byte packseq(ReadOnlySpan<byte> src, out byte dst)
+{
+    IL_0000: ldarg.1
+    IL_0001: ldc.i4.0
+    IL_0002: stind.i1
+    IL_0003: ldc.i4.8
+    IL_0004: ldarga.s src
+    IL_0006: call System.Int32 System.ReadOnlySpan`1<System.Byte>::get_Length()
+    IL_000B: call System.Int32 System.Math::Min(System.Int32,System.Int32)
+    IL_0010: stloc.0
+    IL_0011: ldc.i4.0
+    IL_0012: stloc.1
+    IL_0013: br.s IL_0032
+    IL_0015: ldarga.s src
+    IL_0017: ldloc.1
+    IL_0018: call System.Byte& modreq(System.Runtime.InteropServices.InAttribute) System.ReadOnlySpan`1<System.Byte>::get_Item(System.Int32)
+    IL_001D: ldind.u1
+    IL_001E: ldc.i4.1
+    IL_001F: bne.un.s IL_002E
+    IL_0021: ldarg.1
+    IL_0022: ldarg.1
+    IL_0023: ldind.u1
+    IL_0024: ldc.i4.1
+    IL_0025: ldloc.1
+    IL_0026: ldc.i4.s 31
+    IL_0028: and
+    IL_0029: shl
+    IL_002A: conv.u1
+    IL_002B: or
+    IL_002C: conv.u1
+    IL_002D: stind.i1
+    IL_002E: ldloc.1
+    IL_002F: ldc.i4.1
+    IL_0030: add
+    IL_0031: stloc.1
+    IL_0032: ldloc.1
+    IL_0033: ldloc.0
+    IL_0034: blt.s IL_0015
+    IL_0036: ldarg.1
+    IL_0037: ret
+
+}
 ref byte packseq(out byte dst, Byte[] src)
 {
     IL_0000: ldarg.0
@@ -3580,6 +3622,44 @@ uint pack(bit b0, bit b1, bit b2, bit b3, bit b4, bit b5, bit b6, bit b7)
     IL_001D: ret
 
 }
+ref uint pack(ReadOnlySpan<bit> src, ref uint dst)
+{
+    IL_0000: ldarga.s src
+    IL_0002: call System.Int32 System.ReadOnlySpan`1<Z0.bit>::get_Length()
+    IL_0007: ldc.i4.s 32
+    IL_0009: call System.Int32 Z0.math::min(System.Int32,System.Int32)
+    IL_000E: stloc.0
+    IL_000F: ldarg.0
+    IL_0010: call Z0.bit& modreq(System.Runtime.InteropServices.InAttribute) zfunc::head<Z0.bit>(System.ReadOnlySpan`1<Z0.bit>)
+    IL_0015: stloc.1
+    IL_0016: ldc.i4.0
+    IL_0017: stloc.2
+    IL_0018: br.s IL_0039
+    IL_001A: ldarg.1
+    IL_001B: ldarg.1
+    IL_001C: ldind.u4
+    IL_001D: ldloc.1
+    IL_001E: ldloc.2
+    IL_001F: call Z0.bit& modreq(System.Runtime.InteropServices.InAttribute) zfunc::skip<Z0.bit>(Z0.bit&,System.Int32)
+    IL_0024: ldobj Z0.bit
+    IL_0029: call System.UInt32 Z0.bit::op_Explicit(Z0.bit)
+    IL_002E: ldloc.2
+    IL_002F: ldc.i4.s 31
+    IL_0031: and
+    IL_0032: shl
+    IL_0033: or
+    IL_0034: stind.i4
+    IL_0035: ldloc.2
+    IL_0036: ldc.i4.1
+    IL_0037: add
+    IL_0038: stloc.2
+    IL_0039: ldloc.2
+    IL_003A: ldloc.0
+    IL_003B: blt.s IL_001A
+    IL_003D: ldarg.1
+    IL_003E: ret
+
+}
 ref uint pack(N1 n, in bit src, ref uint dst)
 {
     IL_0000: ldarg.2
@@ -3867,48 +3947,6 @@ ulong pack(byte x0, byte x1, byte x2, byte x3, byte x4, byte x5, byte x6, byte x
     IL_002D: shl
     IL_002E: or
     IL_002F: ret
-
-}
-ref byte packseq(ReadOnlySpan<byte> src, out byte dst)
-{
-    IL_0000: ldarg.1
-    IL_0001: ldc.i4.0
-    IL_0002: stind.i1
-    IL_0003: ldc.i4.8
-    IL_0004: ldarga.s src
-    IL_0006: call System.Int32 System.ReadOnlySpan`1<System.Byte>::get_Length()
-    IL_000B: call System.Int32 System.Math::Min(System.Int32,System.Int32)
-    IL_0010: stloc.0
-    IL_0011: ldc.i4.0
-    IL_0012: stloc.1
-    IL_0013: br.s IL_0032
-    IL_0015: ldarga.s src
-    IL_0017: ldloc.1
-    IL_0018: call System.Byte& modreq(System.Runtime.InteropServices.InAttribute) System.ReadOnlySpan`1<System.Byte>::get_Item(System.Int32)
-    IL_001D: ldind.u1
-    IL_001E: ldc.i4.1
-    IL_001F: bne.un.s IL_002E
-    IL_0021: ldarg.1
-    IL_0022: ldarg.1
-    IL_0023: ldind.u1
-    IL_0024: ldc.i4.1
-    IL_0025: ldloc.1
-    IL_0026: ldc.i4.s 31
-    IL_0028: and
-    IL_0029: shl
-    IL_002A: conv.u1
-    IL_002B: or
-    IL_002C: conv.u1
-    IL_002D: stind.i1
-    IL_002E: ldloc.1
-    IL_002F: ldc.i4.1
-    IL_0030: add
-    IL_0031: stloc.1
-    IL_0032: ldloc.1
-    IL_0033: ldloc.0
-    IL_0034: blt.s IL_0015
-    IL_0036: ldarg.1
-    IL_0037: ret
 
 }
 Vector128<byte> vbutterfly(N1 n, Vector128<byte> x)

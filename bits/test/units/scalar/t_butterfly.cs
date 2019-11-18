@@ -5,15 +5,11 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Reflection;
 
     using static zfunc;
-    using static Bit;
 
     public class t_butterfly : ScalarBitTest<t_butterfly>
     {
-
         //[0 1 2 3] -> [0 2 1 3]
         public void butterfly_16x64u()
         {
@@ -165,7 +161,5 @@ namespace Z0
             Trace($"{input} | {output}");
         }
 
-
     }
-
 }

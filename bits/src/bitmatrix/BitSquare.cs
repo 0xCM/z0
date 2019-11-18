@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
     using System.Runtime.Intrinsics;
     using System.Runtime.Intrinsics.X86;
     using static zfunc;
@@ -156,11 +155,11 @@ namespace Z0
             if(typeof(T) == typeof(byte))
                imply(in uint8(in A), in uint8(in B), ref uint8(ref Z));
             else if(typeof(T) == typeof(ushort))
-                vblock.imply(n, in A, in B, ref Z);
+                vblock.impl(n, in A, in B, ref Z);
             else if(typeof(T) == typeof(uint))
-                vblock.imply(n, 4, 8, in A, in B, ref Z);
+                vblock.impl(n, 4, 8, in A, in B, ref Z);
             else if(typeof(T) == typeof(ulong))
-                vblock.imply(n, 16, 4, in A, in B, ref Z);
+                vblock.impl(n, 16, 4, in A, in B, ref Z);
             else
                 throw unsupported<T>();
         }
@@ -172,11 +171,11 @@ namespace Z0
             if(typeof(T) == typeof(byte))
                notimply(in uint8(in A), in uint8(in B), ref uint8(ref Z));
             else if(typeof(T) == typeof(ushort))
-                vblock.notimply(n, in A, in B, ref Z);
+                vblock.nonimpl(n, in A, in B, ref Z);
             else if(typeof(T) == typeof(uint))
-                vblock.notimply(n, 4, 8, in A, in B, ref Z);
+                vblock.nonimpl(n, 4, 8, in A, in B, ref Z);
             else if(typeof(T) == typeof(ulong))
-                vblock.notimply(n, 16, 4, in A, in B, ref Z);
+                vblock.nonimpl(n, 16, 4, in A, in B, ref Z);
             else
                 throw unsupported<T>();
         }
@@ -188,11 +187,11 @@ namespace Z0
             if(typeof(T) == typeof(byte))
                cimply(in uint8(in A), in uint8(in B), ref uint8(ref Z));
             else if(typeof(T) == typeof(ushort))
-                vblock.cimply(n, in A, in B, ref Z);
+                vblock.cimpl(n, in A, in B, ref Z);
             else if(typeof(T) == typeof(uint))
-                vblock.cimply(n, 4, 8, in A, in B, ref Z);
+                vblock.cimpl(n, 4, 8, in A, in B, ref Z);
             else if(typeof(T) == typeof(ulong))
-                vblock.cimply(n, 16, 4, in A, in B, ref Z);
+                vblock.cimpl(n, 16, 4, in A, in B, ref Z);
             else
                 throw unsupported<T>();
         }
@@ -204,11 +203,11 @@ namespace Z0
             if(typeof(T) == typeof(byte))
                cnotimply(in uint8(in A), in uint8(in B), ref uint8(ref Z));
             else if(typeof(T) == typeof(ushort))
-                vblock.cnotimply(n, in A, in B, ref Z);
+                vblock.cnonimpl(n, in A, in B, ref Z);
             else if(typeof(T) == typeof(uint))
-                vblock.cnotimply(n, 4, 8, in A, in B, ref Z);
+                vblock.cnonimpl(n, 4, 8, in A, in B, ref Z);
             else if(typeof(T) == typeof(ulong))
-                vblock.cnotimply(n, 16, 4, in A, in B, ref Z);
+                vblock.cnonimpl(n, 16, 4, in A, in B, ref Z);
             else
                 throw unsupported<T>();
         }
@@ -311,19 +310,19 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static void notimply(in byte A, in byte B, ref byte Z)
-            => store64(math.notimply(read64(A), read64(B)), ref Z);
+            => store64(math.nonimpl(read64(A), read64(B)), ref Z);
 
         [MethodImpl(Inline)]
         static void imply(in byte A, in byte B, ref byte Z)
-            => store64(math.imply(read64(A), read64(B)), ref Z);
+            => store64(math.impl(read64(A), read64(B)), ref Z);
 
         [MethodImpl(Inline)]
         static void cimply(in byte A, in byte B, ref byte Z)
-            => store64(math.cimply(read64(A), read64(B)), ref Z);
+            => store64(math.cimpl(read64(A), read64(B)), ref Z);
 
         [MethodImpl(Inline)]
         static void cnotimply(in byte A, in byte B, ref byte Z)
-            => store64(math.cnotimply(read64(A), read64(B)), ref Z);
+            => store64(math.cnonimpl(read64(A), read64(B)), ref Z);
 
         [MethodImpl(Inline)]
         static void xornot(in byte A, in byte B, ref byte Z)

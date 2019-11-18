@@ -6,12 +6,8 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
-    using System.Numerics;
 
     using static zfunc;
-    using static Bits;
-    using static Bytes;
 
     /// <summary>
     /// Defines a 4-bit bitvector
@@ -27,10 +23,6 @@ namespace Z0
         public static BitVector4 Ones => 0xFF;
 
         public const int Width = 4;
-
-        public const int FirstPos = 0;
-
-        public const int LastPos = Width - 1;
 
         /// <summary>
         /// Allocates a zero-filled vector

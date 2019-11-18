@@ -6,12 +6,8 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
-    using System.Collections.Generic;
 
     using static zfunc;    
-    using static nfunc;
-    using static As;
 
     partial class BitVector
     {
@@ -24,7 +20,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bit modprod<T>(BitVector<T> x, BitVector<T> y)
             where T : unmanaged
-                => BitCells.modprod(x.ToBitCells(), y.ToBitCells());
+                => BitCells.modprod(x.ToCells(), y.ToCells());
 
         /// <summary>
         /// Computes the Euclidean scalar product between two natural bitvectors using modular arithmetic
@@ -36,7 +32,7 @@ namespace Z0
         public static bit modprod<N,T>(BitVector<N,T> x, BitVector<N,T> y)
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => BitCells.modprod(x.ToBitCells(),y.ToBitCells());
+                => BitCells.modprod(x.ToCells(),y.ToCells());
 
         /// <summary>
         /// Computes the Euclidean scalar product between two bitvectors using modular arithmetic

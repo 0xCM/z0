@@ -6,12 +6,8 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
-    using System.Collections.Generic;
 
     using static zfunc;    
-    using static nfunc;
-    using static As;
 
     partial class BitVector
     {
@@ -33,7 +29,7 @@ namespace Z0
         /// <param name="y">The right bitvector</param>
         [MethodImpl(Inline)]
         public static BitVector4 nor(BitVector4 x, BitVector4 y)
-            => math.nor(x.data, y.data);
+            => gmath.nor(x.data, y.data);
 
         /// <summary>
         /// Computes the bitwise NOR between two source vectors
@@ -42,7 +38,7 @@ namespace Z0
         /// <param name="y">The right bitvector</param>
         [MethodImpl(Inline)]
         public static BitVector8 nor(BitVector8 x, BitVector8 y)
-            => math.nor(x.data, y.data);
+            => gmath.nor(x.data, y.data);
 
         /// <summary>
         /// Computes the bitwise NOR between two source vectors
@@ -51,7 +47,7 @@ namespace Z0
         /// <param name="y">The right bitvector</param>
         [MethodImpl(Inline)]
         public static BitVector16 nor(BitVector16 x, BitVector16 y)
-            => math.nor(x.data, y.data);
+            => gmath.nor(x.data, y.data);
 
         /// <summary>
         /// Computes the bitwise NOR between two source vectors
@@ -60,7 +56,7 @@ namespace Z0
         /// <param name="y">The right bitvector</param>
         [MethodImpl(Inline)]
         public static BitVector32 nor(BitVector32 x, BitVector32 y)
-            => math.nor(x.data, y.data);
+            => gmath.nor(x.data, y.data);
 
         /// <summary>
         /// Computes the bitwise NOR between two source vectors
@@ -69,7 +65,6 @@ namespace Z0
         /// <param name="y">The right bitvector</param>
         [MethodImpl(Inline)]
         public static BitVector64 nor(BitVector64 x, BitVector64 y)
-            => math.nor(x.data, y.data);
- 
+            => gmath.nor(x.data, y.data); 
     }
 }

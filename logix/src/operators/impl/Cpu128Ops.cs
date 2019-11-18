@@ -6,12 +6,9 @@ namespace Z0.Logix
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
-    using System.Collections.Generic;
     using System.Runtime.Intrinsics;
 
     using static zfunc;    
-    using static As;
 
     public static partial class CpuOps
     {
@@ -383,7 +380,6 @@ namespace Z0.Logix
         public static Vector128<T> f97<T>(Vector128<T> a, Vector128<T> b, Vector128<T> c)
             where T : unmanaged
                 => select(c, xnor(b,c), nand(b,c));
-
     }
 }
 

@@ -5,15 +5,9 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
-    using System.IO;
     
     using static zfunc;
-    using static As;
-    using static Constants;
 
     /// <summary>
     /// Represents a sequence of bits

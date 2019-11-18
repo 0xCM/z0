@@ -17,39 +17,39 @@ namespace Z0
     partial class math
     {                
         /// <summary>
-        /// Computes ~a | b, the converse implication;;
+        /// Computes the converse implication c := ~a | b for operands a and b
         /// </summary>
         /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
         [MethodImpl(Inline)]
-        public static byte cimply(byte a, byte b)
+        public static byte cimpl(byte a, byte b)
             => (byte)(~a | b);
 
         /// <summary>
-        /// Computes ~a | b, the converse implication;
+        /// Computes the converse implication c := ~a | b for operands a and b
         /// </summary>
         /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
         [MethodImpl(Inline)]
-        public static ushort cimply(ushort a, ushort b)
+        public static ushort cimpl(ushort a, ushort b)
             => (ushort)(~a | b);
 
         /// <summary>
-        /// Computes ~a | b, the converse implication;;
+        /// Computes the converse implication c := ~a | b for operands a and b
         /// </summary>
         /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
         [MethodImpl(Inline)]
-        public static uint cimply(uint a, uint b)
+        public static uint cimpl(uint a, uint b)
             => ~a | b;
 
         /// <summary>
-        /// Computes ~a | b, the converse implication;
+        /// Computes the converse implication c := ~a | b for operands a and b
         /// </summary>
         /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
         [MethodImpl(Inline)]
-        public static ulong cimply(ulong a, ulong b)
+        public static ulong cimpl(ulong a, ulong b)
             => ~a | b;
     }
 

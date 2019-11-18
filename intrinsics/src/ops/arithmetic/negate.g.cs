@@ -28,7 +28,8 @@ namespace Z0
             || typeof(T) == typeof(int) 
             || typeof(T) == typeof(long))
                 return vnegate_i(src);
-            else return gfpv.vnegate(src);
+            else 
+                return gfpv.vnegate(src);
         }
 
         [MethodImpl(Inline)]
@@ -45,7 +46,8 @@ namespace Z0
             || typeof(T) == typeof(int) 
             || typeof(T) == typeof(long))
                 return vnegate_i(src);
-            else return gfpv.vnegate(src);
+            else 
+                return gfpv.vnegate(src);
         }                    
  
         [MethodImpl(Inline)]

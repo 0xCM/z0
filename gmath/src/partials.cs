@@ -49,7 +49,7 @@ namespace Z0
     /// <summary>
     /// Primal math op codes
     /// </summary>
-    public static partial class pmoc
+    public static partial class gmoc
     {
 
     }

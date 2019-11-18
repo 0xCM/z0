@@ -22,12 +22,12 @@ namespace Z0
             || typeof(T) == typeof(ushort) 
             || typeof(T) == typeof(uint) 
             || typeof(T) == typeof(ulong))
-                return vnot_128u(x);
+                return vnot_u(x);
             else if(typeof(T) == typeof(sbyte) 
             || typeof(T) == typeof(short) 
             || typeof(T) == typeof(int) 
             || typeof(T) == typeof(long))
-                return vnot_128i(x);
+                return vnot_i(x);
             else 
                 throw unsupported<T>();
         }
@@ -40,18 +40,18 @@ namespace Z0
             || typeof(T) == typeof(ushort) 
             || typeof(T) == typeof(uint) 
             || typeof(T) == typeof(ulong))
-                return vnot_256u(x);
+                return vnot_u(x);
             else if(typeof(T) == typeof(sbyte) 
             || typeof(T) == typeof(short) 
             || typeof(T) == typeof(int) 
             || typeof(T) == typeof(long))
-                return vnot_256i(x);
+                return vnot_i(x);
             else 
                 throw unsupported<T>();
         }
 
         [MethodImpl(Inline)]
-        static Vector128<T> vnot_128u<T>(Vector128<T> x)
+        static Vector128<T> vnot_u<T>(Vector128<T> x)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -65,7 +65,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static Vector128<T> vnot_128i<T>(Vector128<T> x)
+        static Vector128<T> vnot_i<T>(Vector128<T> x)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
@@ -79,7 +79,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static Vector256<T> vnot_256u<T>(Vector256<T> x)
+        static Vector256<T> vnot_u<T>(Vector256<T> x)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -93,7 +93,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static Vector256<T> vnot_256i<T>(Vector256<T> x)
+        static Vector256<T> vnot_i<T>(Vector256<T> x)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))

@@ -10,7 +10,7 @@ namespace Z0
     
     using static zfunc;    
 
-    partial class pmoc
+    partial class gmoc
     {
         public static sbyte inc_d8i(sbyte x)
             => math.inc(x);
@@ -59,5 +59,18 @@ namespace Z0
 
         public static ulong inc_g64u(ulong x)
             => gmath.inc(x);
+ 
+        public static float inc_g32f(float x)
+            => gfp.inc(x);
+
+        public static float inc_d32f(float x)
+            => fmath.inc(x);
+
+        public static double inc_d64f(double x)
+            => fmath.inc(x);
+
+        public static double inc_g64f(double x)
+            => gfp.inc(x);
+ 
     }
 }

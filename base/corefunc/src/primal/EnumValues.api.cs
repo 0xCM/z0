@@ -5,12 +5,10 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.InteropServices;
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
     using System.Linq;
     using static zfunc;
-    using static As;
 
     public static class EnumValues
     {     
@@ -55,7 +53,5 @@ namespace Z0
         public static EnumG<E> ToGeneric<E>(E src)
             where E : Enum
                 => new EnumG<E>(src);
-
-
     }
 }

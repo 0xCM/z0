@@ -14,7 +14,6 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Avx2;
 
     using static zfunc;
-    using static As;
 
     partial class dinx
     {
@@ -151,7 +150,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static uint vmovemask(Vector256<long> src)
             => (uint)MoveMask(v8u(src));
-
 
         /// <summary>
         /// int _mm256_movemask_epi8 (__m256i a) VPMOVMSKB reg, ymm

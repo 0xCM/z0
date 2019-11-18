@@ -6,9 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;    
-    using System.Runtime.InteropServices;    
-    
-    
+        
     using static zfunc;
     using static As;
 
@@ -177,7 +175,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static num<T> operator & (in num<T> lhs, in num<T> rhs) 
         {
-            ref var result = ref gmath.and(ref unwrap(in lhs), unwrap(in rhs));
+            var result = gmath.and(unwrap(in lhs), unwrap(in rhs));
             return Unsafe.As<T,num<T>>(ref result);
         }
 

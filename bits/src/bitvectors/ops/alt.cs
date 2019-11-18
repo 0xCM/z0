@@ -6,12 +6,9 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
-    using System.Collections.Generic;
 
     using static zfunc;    
-    using static nfunc;
-    using static As;
+    using static HexConst;
 
     partial class BitVector
     {
@@ -64,8 +61,6 @@ namespace Z0
         /// <param name="parity">The state of the first bit</param>
         [MethodImpl(Inline)]
         public static BitVector64 alt(N64 n, bit parity)
-            => parity ? x5555555555555555 : xAAAAAAAAAAAAAAAA;        
-
+            => parity ? x5555555555555555 : xAAAAAAAAAAAAAAAA;
     }
-
 }

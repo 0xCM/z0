@@ -5,32 +5,26 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
 
     using static zfunc;    
 
     /// <summary>
     /// Defines a 16-bit bitvector
     /// </summary>
-    [StructLayout(LayoutKind.Sequential, Size = 2)]
     public struct BitVector16
     {
         internal ushort data;
 
-        public static readonly BitVector16 Zero = 0;
-
-        public static readonly BitVector16 One = 1;
-
-        public static readonly BitVector16 Ones = ushort.MaxValue;
-
         public const int Width = 16;
 
-        public const int FirstPos = 0;
+        public static BitVector16 Zero => 0;
 
-        public const int LastPos = Width - 1;
+        public static BitVector16 One => 1;
 
+        public static BitVector16 Ones => ushort.MaxValue;
+
+        public static N16 N => default;
 
         /// <summary>
         /// Allocates a zero-filled vector
@@ -87,8 +81,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitVector16 FromBitString(in BitString src)
             => src.TakeUInt16();    
-
-
 
         [MethodImpl(Inline)]
         public static implicit operator BitVector<N16,ushort>(BitVector16 src)
@@ -350,7 +342,7 @@ namespace Z0
         /// </summary>
         [MethodImpl(Inline)]
         public BitVector32 Expand()
-            => BitVector32.FromScalar(data);
+            => BitVector.from(n32,data);
 
         /// <summary>
         /// Presents bitvector content as a bytespan
@@ -464,7 +456,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public BitVector32 Concat(BitVector16 tail)
-            => BitVector32.FromScalars(tail.data, data);
+            => BitVector.from(n32,tail.data, data);
 
         /// <summary>
         /// Returns a copy of the vector
@@ -476,23 +468,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public BitVector32 Replicate(N2 n)
             => Concat(this);
-
-        [MethodImpl(Inline)]
-        public BitVector64 Replicate(N4 n)
-            => Concat(this).Replicate(n2);
-
-        /// <summary>
-        /// Applies a permutation to a replicated vector
-        /// </summary>
-        /// <param name="p">The permutation</param>
-        [MethodImpl(Inline)]
-        public BitVector16 Replicate(Perm p)
-        {
-            var dst = Replicate();
-            dst.Permute(p);
-            return dst;
-        }
-
 
         /// <summary>
         /// Returns the vector's bitstring representation
@@ -529,7 +504,7 @@ namespace Z0
         /// </summary>
         [MethodImpl(Inline)]
         public BitVector32 ToBitVector32()
-            => BitVector32.FromScalar(data);
+            => BitVector.from(n32,data);
 
         /// <summary>
         /// A widening conversion Bv16 -> Bv64

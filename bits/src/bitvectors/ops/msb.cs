@@ -6,14 +6,19 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
-    using System.Collections.Generic;
 
     using static zfunc;    
-    using static nfunc;
 
     partial class BitVector
     {
+        /// <summary>
+        /// Disables the high bits starting at a specified position
+        /// </summary>
+        /// <param name="pos">The bit position</param>
+        [MethodImpl(Inline)]
+        public static void bzhi(ref BitVector32 src, int pos)
+            => src.data = Bits.bzhi(ref src.data, (byte)pos);
+
         /// <summary>
         /// Constructs a bitvector formed from the n lest significant bits of the source vector
         /// </summary>

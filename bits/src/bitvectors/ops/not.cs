@@ -6,17 +6,14 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
-    using System.Collections.Generic;
+    using System.Runtime.Intrinsics;
 
     using static zfunc;    
-    using static nfunc;
-    using static As;
 
     partial class BitVector
     {
         /// <summary>
-        /// Computes the bitwise complement of the source vector
+        /// Computes the bitwise complement z:= ~x of a bitvector x
         /// </summary>
         /// <param name="x">The source vector</param>
         /// <typeparam name="T">The primal type</typeparam>
@@ -26,7 +23,7 @@ namespace Z0
                 => gmath.not(x.Data);
 
         /// <summary>
-        /// Computes the complememt bitvector ~x from the source bitvector x
+        /// Computes the bitwise complement z:= ~x of a bitvector x
         /// </summary>
         /// <param name="x">The left bitvector</param>
         [MethodImpl(Inline)]
@@ -34,40 +31,50 @@ namespace Z0
             => TakeHi((byte)((byte)(~src.data) << 4));
 
         /// <summary>
-        /// Computes the bitwise complement ~x from the source bitvector x
+        /// Computes the bitwise complement z:= ~x of a bitvector x
         /// </summary>
         /// <param name="x">The left bitvector</param>
         [MethodImpl(Inline)]
         public static BitVector8 not(BitVector8 x)
-            => math.not(x.data);
+            => gmath.not(x.data);
             
         /// <summary>
-        /// Computes the bitwise complement ~x from the source bitvector x
+        /// Computes the bitwise complement z:= ~x of a bitvector x
         /// </summary>
         /// <param name="x">The source bitvector</param>
         [MethodImpl(Inline)]
         public static BitVector16 not(BitVector16 x)
-            => math.not(x.data);
+            => gmath.not(x.data);
 
         /// <summary>
-        /// Computes the bitwise complement ~x from the source bitvector x
+        /// Computes the bitwise complement z:= ~x of a bitvector x
         /// </summary>
         /// <param name="x">The source bitvector</param>
         [MethodImpl(Inline)]
         public static BitVector32 not(BitVector32 x)
-            => math.not(x.data);
+            => gmath.not(x.data);
 
         /// <summary>
-        /// Computes the bitwise complement ~x from the source bitvector x
+        /// Computes the bitwise complement z:= ~x of a bitvector x
         /// </summary>
         /// <param name="x">The source bitvector</param>
         [MethodImpl(Inline)]
         public static BitVector64 not(BitVector64 x)
-            => math.not(x.data);
+            => gmath.not(x.data);
  
+        /// <summary>
+        /// Computes the bitwise complement z:= ~x of a bitvector x
+        /// </summary>
+        [MethodImpl(Inline)]
+        public static BitVector128 not(BitVector128 x)
+        {
+            var z = alloc(n128);
+            vblock.not(n128, in x.x0, ref z.x0);
+            return z;
+        }
+
         [MethodImpl(Inline)]
         static byte TakeHi(byte src)        
             => (byte)((src >> 4) & 0xF);
-
     }
 }

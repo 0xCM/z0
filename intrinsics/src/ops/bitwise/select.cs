@@ -47,7 +47,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<ulong> vselect(Vector256<ulong> x, Vector256<ulong> y, Vector256<ulong> z) 
             => vor(vand(x,y), vnonimpl(x,z));
-
     }
 
 }

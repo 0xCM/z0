@@ -15,22 +15,22 @@ namespace Z0
     partial class gmath
     {
         /// <summary>
-        /// Computes the material implication a -> b, i.e. a | ~b
+        /// Computes the converse nonimplication c := a & ~b for unsigned integers a and b
         /// </summary>
         /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
         [MethodImpl(Inline)]
-        public static T imply<T>(T a, T b)
+        public static T cnonimpl<T>(T a, T b)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(math.imply(uint8(a), uint8(b)));
+                return generic<T>(math.cnonimpl(uint8(a), uint8(b)));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(math.imply(uint16(a), uint16(b)));
+                return generic<T>(math.cnonimpl(uint16(a), uint16(b)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(math.imply(uint32(a), uint32(b)));
+                return generic<T>(math.cnonimpl(uint32(a), uint32(b)));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(math.imply(uint64(a), uint64(b)));
+                return generic<T>(math.cnonimpl(uint64(a), uint64(b)));
             else
                 throw unsupported<T>();
         }

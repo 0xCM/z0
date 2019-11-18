@@ -1,4 +1,4 @@
-// 2019-11-17 22:14:51:172
+// 2019-11-18 13:26:06:777
 BitMatrix4 and_4x4(in BitMatrix4 A, in BitMatrix4 B)
 {
     IL_0000: ldarg.0

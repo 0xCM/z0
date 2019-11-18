@@ -83,7 +83,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
         public static Vector128<ulong> vswaphl(Vector128<ulong> x)
-            => vinsert(vxscalar(x,0), vscalar(vxscalar(x,1)), 1);
+            => vinsert(vxscalar(x,0), vloadlo(vxscalar(x,1)), 1);
 
         /// <summary>
         /// Swaps 64-bit hi/lo segments of the source vector
@@ -91,7 +91,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
         public static Vector128<long> vswaphl(Vector128<long> x)
-            => vinsert(vsxcalar(x,0), vscalar(vsxcalar(x,1)), 1);
+            => vinsert(vsxcalar(x,0), vloadlo(vsxcalar(x,1)), 1);
 
         /// <summary>
         /// Swaps the source vectors' hi/lo 128-bit lanes
@@ -161,7 +161,5 @@ namespace Z0
             var spec = DataPatterns.bswap<ulong>(n128);
             return v64u(vshuf16x8(v8u(x), spec));
         }
-
     }
-
 }

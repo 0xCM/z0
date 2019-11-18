@@ -5,16 +5,11 @@
 namespace Z0.Test
 {
     using System;
-    using System.Linq;
-    using System.Reflection;
-    using System.ComponentModel;
-    using System.Numerics;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
 
     using static zfunc;
 
-    using D = PrimalDelegates;
+    using D = GDel;
 
     class t_arith : UnitTest<t_arith>
     {

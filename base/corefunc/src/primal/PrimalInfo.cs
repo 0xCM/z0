@@ -461,14 +461,12 @@ namespace Z0
         public static readonly PrimalInfo<long> Summary 
             = new PrimalInfo<long>((MinVal,MaxVal), Signed, Zero, One, BitSize, Comparer);
 
-
         [MethodImpl(Inline)]
         static int Compare(long x, long y)
             => x.CompareTo(y);
         
         public static readonly Comparer<long> Comparer 
             = new ScalarComparer<long>(Compare);
-
     }            
 
     readonly struct UInt64Info
@@ -573,9 +571,7 @@ namespace Z0
         
         public static readonly Comparer<decimal> Comparer 
             = new ScalarComparer<decimal>(Compare);
-
     }                
-
 
     public readonly struct PrimalInfo<T> : IPrimalInfo<T>
         where T : unmanaged

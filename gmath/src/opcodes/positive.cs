@@ -5,12 +5,11 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
     using System.Runtime.CompilerServices;
     
     using static zfunc;    
 
-    partial class pmoc
+    partial class gmoc
     {
         public static bool positive_n8i(sbyte x)
             => x > 0;

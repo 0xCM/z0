@@ -7,26 +7,21 @@ namespace Z0
     using System;
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
-    using System.Numerics;
 
     using static zfunc;    
 
     /// <summary>
     /// Defines a 64-bit bitvector
     /// </summary>
-    [StructLayout(LayoutKind.Sequential, Size = 8)]
     public struct BitVector64 
     {    
         internal ulong data;
 
-        public static readonly BitVector64 Zero = default;
+        public static BitVector64 Zero => default;
 
-        public static readonly BitVector64 One = 1;        
+        public static BitVector64 One => 1;        
 
         public const int Width = 64;
-
-        public const int LastPos = Width - 1;
 
         /// <summary>
         /// Allocates a new empty vector
@@ -100,7 +95,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
         public static explicit operator BitVector32(BitVector64 src)
-            => BitVector32.FromScalar((uint)src.data);        
+            => BitVector.from(n32, (uint)src.data);        
 
         /// <summary>
         /// Implicitly converts a scalar value to a 64-bit bitvector
@@ -305,7 +300,7 @@ namespace Z0
         public readonly BitVector32 Lo
         {
             [MethodImpl(Inline)]
-            get => BitVector32.FromScalar((uint)data);
+            get => BitVector.from(n32, (uint)data);
         }
 
         /// <summary>
@@ -314,7 +309,7 @@ namespace Z0
         public readonly BitVector32 Hi
         {
             [MethodImpl(Inline)]
-            get => BitVector32.FromScalar((uint)(data >> 32));
+            get => BitVector.from(n32,(uint)(data >> 32));
         }        
 
         /// <summary>

@@ -5,12 +5,8 @@
 namespace Z0
 {        
     using System;
-    using System.Linq;
-    using System.ComponentModel;
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
-    using System.IO;
-    using static System.Runtime.Intrinsics.X86.Avx2;
 
     using static zfunc;
 
@@ -22,8 +18,6 @@ namespace Z0
 
         }
 
-        public static int polyadd_int32(int x, int y)
-            => StructOps.add(x,y);
         public static ulong min_n64u(ulong x, ulong y)
             => Math.Min(x,y);
 
@@ -156,7 +150,5 @@ namespace Z0
         public static ulong xor_g64u(ulong x, ulong y)
             => gmath.xor(x,y);
 
-
- 
     }
 }

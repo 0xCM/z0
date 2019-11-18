@@ -74,6 +74,21 @@ namespace Z0
         }
 
         /// <summary>
+        /// Packs up to 32 source bits into the target
+        /// </summary>
+        /// <param name="src">The bit source</param>
+        /// <param name="dst">The bit taget</param>
+        [MethodImpl(Inline)]
+        public static ref uint pack(ReadOnlySpan<bit> src, ref uint dst)
+        {
+            var count = math.min(src.Length,32);
+            ref readonly var start = ref head(src);
+            for(var i=0; i<count; i++)
+                dst |= ((uint)skip(in start, i) << i);
+            return ref dst;
+        }
+
+        /// <summary>
         /// Packs 1 bits into the least bits of an unsigned integer
         /// </summary>
         [MethodImpl(Inline)]

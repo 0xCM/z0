@@ -50,7 +50,7 @@ namespace Z0
         /// <param name="n">The width discriminator</param>
         [MethodImpl(Inline)]
         public static BitVector8 alloc(N8 n)
-            => BitVector8.Alloc();
+            => default;
 
         /// <summary>
         /// Allocates a primal 16-bit bitvector
@@ -58,7 +58,7 @@ namespace Z0
         /// <param name="n">The width discriminator</param>
         [MethodImpl(Inline)]
         public static BitVector16 alloc(N16 n)
-            => BitVector16.Alloc();
+            => default;
 
         /// <summary>
         /// Allocates a primal 32-bit bitvector
@@ -66,7 +66,7 @@ namespace Z0
         /// <param name="n">The width discriminator</param>
         [MethodImpl(Inline)]
         public static BitVector32 alloc(N32 n)
-            => BitVector32.Alloc();
+            => default;
 
         /// <summary>
         /// Allocates a primal 64-bit bitvector
@@ -74,6 +74,14 @@ namespace Z0
         /// <param name="n">The width discriminator</param>
         [MethodImpl(Inline)]
         public static BitVector64 alloc(N64 n)
-            => BitVector64.Alloc();
+            => default;
+
+        /// <summary>
+        /// Allocates a primal 128-bit bitvector
+        /// </summary>
+        /// <param name="n">The width discriminator</param>
+        [MethodImpl(Inline)]
+        public static BitVector128 alloc(N128 n)
+            => default;
     }
 }

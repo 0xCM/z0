@@ -8,15 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
         
     using static zfunc;    
-    using static As;
-    using static AsIn;
-
-/*
-        static ulong select2(ulong a, ulong b, ulong c)
-            => c ^ ((c^b) & a);
-
-
- */
 
     partial class gmath
     {
@@ -32,7 +23,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static T select<T>(T a, T b, T c)
             where T : unmanaged
-                => or(and(a,b), notimply(a,c));
+                => or(and(a,b), nonimpl(a,c));
 
         /// <summary>
         ///  This operator is equivalent to select, but is implemented xor(b, and(xor(b,a),  mask))
@@ -48,5 +39,4 @@ namespace Z0
             where T : unmanaged
                 => xor(b, and(xor(b,a), mask));
     }
-
 }

@@ -5,11 +5,9 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Reflection;
 
     using static zfunc;
-    using D = PrimalDelegates;
+    using D = GDel;
 
     public class t_vor : IntrinsicTest<t_vor>
     {

@@ -5,7 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
     using System.Runtime.Intrinsics;
@@ -15,92 +14,39 @@ namespace Z0
     [StructLayout(LayoutKind.Sequential)]
     public struct BitVector128
     {
-        ulong x0;
+        internal ulong x0;
 
-        ulong x1;
+        internal ulong x1;
 
         /// <summary>
-        /// Defines a reference vector consisting of only zeros
+        /// The vector bit-width
+        /// </summary>
+        public const int Width = 128;        
+
+        public static N128 N => default;
+         
+        /// <summary>
+        /// Allocates a vector with all bits disabled
         /// </summary>
         public static BitVector128 Zero => default;
 
         /// <summary>
-        /// Defines a reference vector that has the numeric value 1
+        /// Allocates a vector that has the least bit enabled and all others disabled
         /// </summary>
-        public static BitVector128 One => FromScalar(1);
+        public static BitVector128 One => BitVector.from(N,1);
 
         /// <summary>
-        /// Defines a reference vector consisting of only ones
+        /// Allocates a vector with all bits enabled
         /// </summary>
-        public static BitVector128 Ones => FromScalars(UInt64.MaxValue, UInt64.MaxValue);
-
-        public const int N = 128;        
-
-        /// <summary>
-        /// Allocates a new empty vector
-        /// </summary>
-        [MethodImpl(Inline)]
-        public static BitVector128 Alloc()
-            => default;
+        public static BitVector128 Ones => BitVector.from(N,UInt64.MaxValue, UInt64.MaxValue);
 
         /// <summary>
         /// Creates a vector from a primal source value
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
-        public static BitVector128 FromScalar(byte src)
-            => FromScalar((ulong)src);
-
-        /// <summary>
-        /// Creates a vector from a primal source value
-        /// </summary>
-        /// <param name="src">The source value</param>
-        [MethodImpl(Inline)]
-        public static BitVector128 FromScalar(ushort src)
-            => FromScalar((ulong)src);
-
-        /// <summary>
-        /// Creates a vector from a primal source value
-        /// </summary>
-        /// <param name="src">The source value</param>
-        [MethodImpl(Inline)]
-        public static BitVector128 FromScalar(uint src)
-            => FromScalar((ulong)src);
-
-        /// <summary>
-        /// Creates a vector from a primal source value
-        /// </summary>
-        [MethodImpl(Inline)]
-        public static BitVector128 FromScalar(ulong lo)
-            => new BitVector128(lo,0);
-
-        /// <summary>
-        /// Creates a vector from two unsigned 64-bit integers
-        /// </summary>
-        /// <param name="src">The source bitstring</param>
-        [MethodImpl(Inline)]
-        public static BitVector128 FromScalars(uint x0, uint x1, uint x2, uint x3)
-            => new BitVector128(x0,x1,x2,x3);
-
-        /// <summary>
-        /// Creates a vector from two unsigned 64-bit integers
-        /// </summary>
-        /// <param name="src">The source bitstring</param>
-        [MethodImpl(Inline)]
-        public static BitVector128 FromScalars(ulong lo, ulong hi)
-            => new BitVector128(lo,hi);
-
-        /// <summary>
-        /// Creates a vector from a bitstring
-        /// </summary>
-        /// <param name="src">The source bitstring</param>
-        [MethodImpl(Inline)]
-        public static BitVector128 FromBitString(in BitString src)
-        {
-            var x0 = src.TakeUInt64(0);            
-            var x1 = src.Length > 64 ? src.TakeUInt64(64) : 0ul;
-            return FromScalars(x0, x1);
-        }
+        public static BitVector128 from(byte src)
+            => BitVector.from(N,(ulong)src);
 
         [MethodImpl(Inline)]    
         public static implicit operator BitVector128((ulong x0, ulong x1) src)
@@ -111,20 +57,12 @@ namespace Z0
             => (src.x0, src.x1);
 
         /// <summary>
-        /// Implicitly converts an unsigned 128-bit integer to a bitvector
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        [MethodImpl(Inline)]    
-        public static implicit operator BitVector128(UInt128 src)
-            => new BitVector128(src);
-
-        /// <summary>
         /// Implicitly converts a scalar value to a 128-bit bitvector
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]    
         public static implicit operator BitVector128(byte src)
-            => FromScalar(src);
+            => BitVector.from(N,src);
 
         /// <summary>
         /// Implicitly converts a scalar value to a 128-bit bitvector
@@ -132,7 +70,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]    
         public static implicit operator BitVector128(ushort src)
-            => FromScalar(src);
+            => BitVector.from(N,src);
 
         /// <summary>
         /// Implicitly converts a scalar value to a 128-bit bitvector
@@ -140,7 +78,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]    
         public static implicit operator BitVector128(uint src)
-            => FromScalar(src);
+            => BitVector.from(N,src);
 
         /// <summary>
         /// Implicitly converts a scalar value to a 128-bit bitvector
@@ -148,7 +86,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]    
         public static implicit operator BitVector128(ulong src)
-            => FromScalar(src);
+            => BitVector.from(N,src);
 
         /// <summary>
         /// Implicitly converts a scalar value to a 128-bit bitvector
@@ -156,7 +94,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]    
         public static implicit operator BitVector128(BitVector8 src)
-            => FromScalar(src);
+            => BitVector.from(N,src);
 
         /// <summary>
         /// Implicitly converts a scalar value to a 128-bit bitvector
@@ -164,7 +102,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]    
         public static implicit operator BitVector128(BitVector16 src)
-            => FromScalar(src);
+            => BitVector.from(N,src);
 
         /// <summary>
         /// Implicitly converts a scalar value to a 128-bit bitvector
@@ -172,7 +110,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]    
         public static implicit operator BitVector128(BitVector32 src)
-            => FromScalar(src);
+            => BitVector.from(N,src);
 
         /// <summary>
         /// Implicitly converts a scalar value to a 128-bit bitvector
@@ -180,15 +118,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]    
         public static implicit operator BitVector128(BitVector64 src)
-            => FromScalar(src);
-
-        /// <summary>
-        /// Implicitly converts a bitvector to a cpu vector
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        [MethodImpl(Inline)]    
-        public static implicit operator Vector128<ulong>(BitVector128 src)
-            => src.ToCpuVec();
+            => BitVector.from(N,src);
 
         /// <summary>
         /// Explicitly truncates the source to 8 bits
@@ -223,58 +153,58 @@ namespace Z0
             => src.ToBitVector64();
 
         /// <summary>
-        /// Computes the bitwise XOR of the source operands
-        /// Note that the XOR operator is equivalent to the (+) operator
-        /// </summary>
-        /// <param name="lhs">The left vector</param>
-        /// <param name="rhs">The right vector</param>
-        [MethodImpl(Inline)]
-        public static BitVector128 operator ^(BitVector128 lhs, BitVector128 rhs)
-            => lhs.XOr(rhs);
-
-        /// <summary>
         /// Computes the bitwise AND of the source operands
         /// Note that the AND operator is equivalent to the (*) operator
         /// </summary>
-        /// <param name="lhs">The left vector</param>
-        /// <param name="rhs">The right vector</param>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static BitVector128 operator &(BitVector128 lhs, BitVector128 rhs)
-            => lhs.And(rhs);
+        public static BitVector128 operator &(BitVector128 x, BitVector128 y)
+            => BitVector.and(x,y);
 
         /// <summary>
         /// Computes the bitwise OR of the source operands
         /// </summary>
-        /// <param name="lhs">The left vector</param>
-        /// <param name="rhs">The right vector</param>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static BitVector128 operator |(BitVector128 lhs, BitVector128 rhs)
-            => lhs.Or(rhs);
+        public static BitVector128 operator |(BitVector128 x, BitVector128 y)
+            => BitVector.or(x,y);
+
+        /// <summary>
+        /// Computes the bitwise XOR of the source operands
+        /// Note that the XOR operator is equivalent to the (+) operator
+        /// </summary>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
+        [MethodImpl(Inline)]
+        public static BitVector128 operator ^(BitVector128 x, BitVector128 y)
+            => BitVector.xor(x,y);
 
         /// <summary>
         /// Computes the bitwise complement of the operand
         /// </summary>
         /// <param name="lhs">The source operand</param>
         [MethodImpl(Inline)]
-        public static BitVector128 operator ~(BitVector128 src)
-            => src.Not();
+        public static BitVector128 operator ~(BitVector128 x)
+            => BitVector.not(x);
 
         /// <summary>
         /// Negates the operand via two'2 complement
         /// </summary>
         /// <param name="lhs">The source operand</param>
         [MethodImpl(Inline)]
-        public static BitVector128 operator -(BitVector128 src)
-            => src.Negate();
+        public static BitVector128 operator -(BitVector128 x)
+            => BitVector.negate(x);
 
         /// <summary>
         /// Computes the scalar product of the operands
         /// </summary>
-        /// <param name="lhs">The left operand</param>
-        /// <param name="rhs">The right operand</param>
+        /// <param name="x">The left operand</param>
+        /// <param name="y">The right operand</param>
         [MethodImpl(Inline)]
-        public static bit operator %(BitVector128 lhs,BitVector128 rhs)
-            => odd((lhs & rhs).Pop());              
+        public static bit operator %(BitVector128 x, BitVector128 y)
+            => BitVector.dot(x,y);
 
         /// <summary>
         /// Returns true if the source vector is nonzero, false otherwise
@@ -314,14 +244,6 @@ namespace Z0
             this.x1 = Bits.pack(x10, x11);
         }
 
-
-        [MethodImpl(Inline)]    
-        public BitVector128(UInt128 src)
-        {
-            this.x0 = src.lo;
-            this.x1 = src.hi;
-        }
-
         /// <summary>
         /// Assigns the bitvector a specified value
         /// </summary>
@@ -357,7 +279,7 @@ namespace Z0
         public readonly uint Length
         {
             [MethodImpl(Inline)]
-            get => N;
+            get => Width;
         }
 
         /// <summary>
@@ -400,100 +322,6 @@ namespace Z0
        }
 
         /// <summary>
-        /// Computes the bitwise and of the vector and the operand
-        /// </summary>
-        /// <param name="rhs">The right vector</param>
-        [MethodImpl(Inline)]
-        public BitVector128 And(BitVector128 rhs)
-        {
-            dinx.vload(in x0, out Vector128<ulong> x);
-            dinx.vload(in rhs.x0, out Vector128<ulong> y);
-            ginx.vstore(dinx.vand(x,y), ref x0);
-            return this;
-        }
-
-        /// <summary>
-        /// Computs the bitwise or of the vector and the operand
-        /// </summary>
-        /// <param name="rhs">The right vector</param>
-        [MethodImpl(Inline)]
-        public BitVector128 Or(BitVector128 rhs)
-        {
-            dinx.vload(in x0, out Vector128<ulong> x);
-            dinx.vload(in rhs.x0, out Vector128<ulong> y);
-            ginx.vstore(dinx.vor(x,y), ref x0);
-            return this;
-        }
-
-        /// <summary>
-        /// Computs the bitwise xor of the vector and the operand
-        /// </summary>
-        /// <param name="rhs">The right vector</param>
-        [MethodImpl(Inline)]
-        public BitVector128 XOr(BitVector128 rhs)
-        {
-            dinx.vload(in x0, out Vector128<ulong> x);
-            dinx.vload(in rhs.x0, out Vector128<ulong> y);
-            ginx.vstore(dinx.vxor(x,y), ref x0);
-            return this;
-        }
-
-        /// <summary>
-        /// Negates the vector via two's complement
-        /// </summary>
-        [MethodImpl(Inline)]
-        public BitVector128 Negate()
-        {
-            dinx.vload(in x0, out Vector128<ulong> x);
-            ginx.vstore(dinx.vnegate(x), ref x0);
-            return this;
-        }
-
-        /// <summary>
-        /// Applies the bitwise complement
-        /// </summary>
-        [MethodImpl(Inline)]
-        public BitVector128 Not()
-        {
-            dinx.vload(in x0, out Vector128<ulong> x);
-            ginx.vstore(dinx.vnot(x), ref x0);
-            return this;
-        }
-
-
-        /// <summary>
-        /// <summary>
-        /// Counts the number of enabled bits in the source
-        /// </summary>
-        [MethodImpl(Inline)]
-        public readonly uint Pop()
-            => Bits.pop(x0) + Bits.pop(x1);
-
-        /// <summary>
-        /// Counts the number of leading zeros
-        /// </summary>
-        [MethodImpl(Inline)]
-        public readonly uint Nlz()
-        {
-            if(x1 == 0)
-                return 64 + Bits.nlz(x0);
-            else
-                return Bits.nlz(x1);
-        }
-
-        /// <summary>
-        /// Counts the number of trailing zeros
-        /// </summary>
-        [MethodImpl(Inline)]
-        public readonly uint Ntz()
-        {
-            if(x0 == 0)
-                return Bits.ntz(x1) + 64;
-            else
-                return Bits.ntz(x0);
-        }
-
-        /// <summary>
         /// Sets a bit to a specified value
         /// </summary>
         /// <param name="pos">The position of the bit to set</param>
@@ -508,56 +336,6 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public readonly Vector128<ulong> ToCpuVec()
-            => Vector128.Create(x0,x1);
-
-        /// <summary>
-        /// Returns a copy of the vector
-        /// </summary>
-        [MethodImpl(Inline)]
-        public readonly BitVector128 Replicate()
-            => new BitVector128(x0,x1);
-
-        /// <summary>
-        /// Applies a truncating reduction Bv64 -> Bv8
-        /// </summary>
-        [MethodImpl(Inline)]
-        public BitVector8 ToBitVector8()
-            => BitVector8.FromScalar(x0);
-
-        /// <summary>
-        /// Applies a truncating reduction Bv64 -> Bv16
-        /// </summary>
-        [MethodImpl(Inline)]
-        public BitVector16 ToBitVector16()
-            => BitVector16.FromScalar(x0);
-
-        /// <summary>
-        /// Applies a truncating reduction Bv64 -> Bv32
-        /// </summary>
-        [MethodImpl(Inline)]
-        public BitVector32 ToBitVector32()
-            => BitVector32.FromScalar(x0);
-
-        /// <summary>
-        /// Applies the identity conversion Bv64 -> Bv64
-        /// </summary>
-        [MethodImpl(Inline)]
-        public BitVector64 ToBitVector64()
-            => BitVector.from(n64, x0);
-
-        /// <summary>
-        /// Converts the vector to a bitstring
-        /// </summary>
-        [MethodImpl(Inline)]
-        public readonly BitString ToBitString()
-            => BitString.from(x1) + BitString.from(x0);
-
-        [MethodImpl(Inline)]
-        public readonly string FormatBits(bool tlz = false, bool specifier = false, int? blockWidth = null)
-            => ToBitString().Format(tlz, specifier, blockWidth);
-
-        [MethodImpl(Inline)]
         public readonly bool Equals(BitVector128 rhs)
             => x0 == rhs.x0 && x1 == rhs.x1;
 
@@ -568,6 +346,6 @@ namespace Z0
             => HashCode.Combine(x0,x1);
 
         public override string ToString()
-            => FormatBits(); 
+            => this.FormatBits(); 
     }
 }

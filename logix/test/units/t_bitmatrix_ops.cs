@@ -5,13 +5,10 @@
 namespace Z0.Logix
 {
     using System;
-    using System.Linq;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
     
     using static zfunc;
-    using static TypedLogicSpec;
     using static BinaryBitwiseOpKind;
 
     public class t_bitmatrix_ops : UnitTest<t_bitmatrix_ops>
@@ -269,7 +266,7 @@ namespace Z0.Logix
                 BitMatrixOpApi.eval(op, A, B, ref C);
                 for(var i=0; i<n; i++)
                 {
-                    var expect = BitVector.imply(A[i], B[i]);
+                    var expect = BitVector.impl(A[i], B[i]);
                     var actual = C[i];
                     Claim.yea<T>(expect == actual);
                 }
@@ -295,7 +292,7 @@ namespace Z0.Logix
                 BitMatrixOpApi.eval(op, A, B, ref C);
                 for(var i=0; i<n; i++)
                 {
-                    var expect = BitVector.notimply(A[i], B[i]);
+                    var expect = BitVector.nonimpl(A[i], B[i]);
                     var actual = C[i];
                     Claim.yea<T>(expect == actual);
                 }
@@ -452,6 +449,5 @@ namespace Z0.Logix
 
             Benchmark(opname, clock, opcount);
         }
-
     }
 }

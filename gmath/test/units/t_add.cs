@@ -2,20 +2,17 @@
 // Copyright   :  (c) Chris Moore, 2019
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Test
+namespace Z0
 {
     using System;
-    using System.Linq;
     using System.Runtime.CompilerServices;
 
     using static zfunc;
-    using D = PrimalDelegates;
+    using D = GDel;
     
-
     public class t_add : UnitTest<t_add>
     {
         protected override int CycleCount => Pow2.T16;
-
 
         public void add_g8i_bench()
         {
@@ -155,37 +152,33 @@ namespace Z0.Test
 
         public void polyadd()
         {
-            polyadd_check(in StructOps.add<sbyte>());
-            polyadd_check(in StructOps.add<byte>());
-            polyadd_check(in StructOps.add<short>());
-            polyadd_check(in StructOps.add<ushort>());
-            polyadd_check(in StructOps.add<int>());
-            polyadd_check(in StructOps.add<uint>());
-            polyadd_check(in StructOps.add<long>());
-            polyadd_check(in StructOps.add<ulong>());
-            polyadd_check(in StructOps.add<float>());
-            polyadd_check(in StructOps.add<double>());
-
-            
+            polyadd_check(SDel.add<sbyte>());
+            polyadd_check(SDel.add<byte>());
+            polyadd_check(SDel.add<short>());
+            polyadd_check(SDel.add<ushort>());
+            polyadd_check(SDel.add<int>());
+            polyadd_check(SDel.add<uint>());
+            polyadd_check(SDel.add<long>());
+            polyadd_check(SDel.add<ulong>());
+            polyadd_check(SDel.add<float>());
+            polyadd_check(SDel.add<double>());            
         }
         
         public void polyadd_bench()
         {
-            polyadd_bench(StructOps.add<sbyte>());
-            polyadd_bench(StructOps.add<byte>());
-            polyadd_bench(StructOps.add<short>());
-            polyadd_bench(StructOps.add<ushort>());
-            polyadd_bench(StructOps.add<int>());
-            polyadd_bench(StructOps.add<uint>());
-            polyadd_bench(StructOps.add<long>());
-            polyadd_bench(StructOps.add<ulong>());
-            polyadd_bench(StructOps.add<float>());
-            polyadd_bench(StructOps.add<double>());
-
+            polyadd_bench(SDel.add<sbyte>());
+            polyadd_bench(SDel.add<byte>());
+            polyadd_bench(SDel.add<short>());
+            polyadd_bench(SDel.add<ushort>());
+            polyadd_bench(SDel.add<int>());
+            polyadd_bench(SDel.add<uint>());
+            polyadd_bench(SDel.add<long>());
+            polyadd_bench(SDel.add<ulong>());
+            polyadd_bench(SDel.add<float>());
+            polyadd_bench(SDel.add<double>());
         }
 
-
-        void polyadd_check<T>(in AddOp<T> op)
+        void polyadd_check<T>(AddOp<T> op)
             where T : unmanaged
         {
             for(var i=0; i< SampleSize; i++)
@@ -248,8 +241,6 @@ namespace Z0.Test
 
             Benchmark($"polyadd_g{moniker<T>()}", counter);
         }
-
     }
-
 }
 

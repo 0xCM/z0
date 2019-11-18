@@ -20,6 +20,62 @@ namespace Z0
 
     partial class aux
     {
+        [MethodImpl(Inline)]
+        public static void vcmove_i<T>(Vector128<T> src, Vector128<byte> mask, ref byte dst)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(sbyte))
+                dinx.vcmove(int8(src), mask, ref dst);
+            else if(typeof(T) == typeof(short))
+                dinx.vcmove(int16(src), mask, ref dst);
+            else if(typeof(T) == typeof(int))
+                dinx.vcmove(int32(src), mask, ref dst);
+            else 
+                dinx.vcmove(int64(src), mask, ref dst);
+        }
+
+        [MethodImpl(Inline)]
+        public static void vcmove_u<T>(Vector128<T> src, Vector128<byte> mask, ref byte dst)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(byte))
+                dinx.vcmove(uint8(src), mask, ref dst);
+            else if(typeof(T) == typeof(ushort))
+                dinx.vcmove(uint16(src), mask, ref dst);
+            else if(typeof(T) == typeof(uint))
+                dinx.vcmove(uint32(src), mask, ref dst);
+            else 
+                dinx.vcmove(uint64(src), mask, ref dst);
+        }
+
+
+        [MethodImpl(Inline)]
+        public static void vcmove_i<T>(Vector256<T> src, Vector256<byte> mask, ref byte dst)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(sbyte))
+                dinx.vcmove(int8(src), mask, ref dst);
+            else if(typeof(T) == typeof(short))
+                dinx.vcmove(int16(src), mask, ref dst);
+            else if(typeof(T) == typeof(int))
+                dinx.vcmove(int32(src), mask, ref dst);
+            else 
+                dinx.vcmove(int64(src), mask, ref dst);
+        }
+
+        [MethodImpl(Inline)]
+        public static void vcmove_u<T>(Vector256<T> src, Vector256<byte> mask, ref byte dst)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(byte))
+                dinx.vcmove(uint8(src), mask, ref dst);
+            else if(typeof(T) == typeof(ushort))
+                dinx.vcmove(uint16(src), mask, ref dst);
+            else if(typeof(T) == typeof(uint))
+                dinx.vcmove(uint32(src), mask, ref dst);
+            else 
+                dinx.vcmove(uint64(src), mask, ref dst);
+        }
 
         [MethodImpl(Inline)]
         public static Vector128<T> vunpacklo_i<T>(Vector128<T> x, Vector128<T> y)
@@ -136,65 +192,10 @@ namespace Z0
                 return generic<T>(dinx.vunpackhi(uint64(x), uint64(y)));
         }    
 
-        [MethodImpl(Inline)]
-        public static void vmaskstore_i<T>(Vector128<T> src, Vector128<byte> mask, ref T dst)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(sbyte))
-                dinx.vmaskstore(int8(src), mask, ref int8(ref dst));
-            else if(typeof(T) == typeof(short))
-                dinx.vmaskstore(int16(src), mask, ref int16(ref dst));
-            else if(typeof(T) == typeof(int))
-                dinx.vmaskstore(int32(src), mask, ref int32(ref dst));
-            else 
-                dinx.vmaskstore(int64(src), mask, ref int64(ref dst));
-        }
-
-        [MethodImpl(Inline)]
-        public static void vmaskstore_u<T>(Vector128<T> src, Vector128<byte> mask, ref T dst)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(byte))
-                dinx.vmaskstore(uint8(src), mask, ref uint8(ref dst));
-            else if(typeof(T) == typeof(ushort))
-                dinx.vmaskstore(uint16(src), mask, ref uint16(ref dst));
-            else if(typeof(T) == typeof(uint))
-                dinx.vmaskstore(uint32(src), mask, ref uint32(ref dst));
-            else 
-                dinx.vmaskstore(uint64(src), mask, ref uint64(ref dst));
-        }
-
-        [MethodImpl(Inline)]
-        public static void vmaskstore_i<T>(Vector256<T> src, Vector256<byte> mask, ref T dst)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(sbyte))
-                dinx.vmaskstore(int8(src), mask, ref int8(ref dst));
-            else if(typeof(T) == typeof(short))
-                dinx.vmaskstore(int16(src), mask, ref int16(ref dst));
-            else if(typeof(T) == typeof(int))
-                dinx.vmaskstore(int32(src), mask, ref int32(ref dst));
-            else 
-                dinx.vmaskstore(int64(src), mask, ref int64(ref dst));
-        }
-
-        [MethodImpl(Inline)]
-        public static void vmaskstore_u<T>(Vector256<T> src, Vector256<byte> mask, ref T dst)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(byte))
-                dinx.vmaskstore(uint8(src), mask, ref uint8(ref dst));
-            else if(typeof(T) == typeof(ushort))
-                dinx.vmaskstore(uint16(src), mask, ref uint16(ref dst));
-            else if(typeof(T) == typeof(uint))
-                dinx.vmaskstore(uint32(src), mask, ref uint32(ref dst));
-            else 
-                dinx.vmaskstore(uint64(src), mask, ref uint64(ref dst));
-        }
 
 
         [MethodImpl(Inline)]
-        public static Vector128<T> vbc_128i<T>(T src)
+        public static Vector128<T> vbc_i<T>(N128 n, T src)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
@@ -208,7 +209,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static Vector128<T> vbc_128u<T>(T src)
+        public static Vector128<T> vbc_u<T>(N128 n, T src)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -222,7 +223,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static Vector128<T> vbc_128f<T>(T src)
+        public static Vector128<T> vbc_f<T>(N128 n, T src)
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
@@ -234,7 +235,7 @@ namespace Z0
         }
  
         [MethodImpl(Inline)]
-        public static Vector256<T> vbc_256i<T>(T src)
+        public static Vector256<T> vbc_i<T>(N256 n, T src)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
@@ -248,7 +249,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static Vector256<T> vbc_256u<T>(T src)
+        public static Vector256<T> vbc_u<T>(N256 n, T src)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -262,7 +263,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static Vector256<T> vbc_256f<T>(T src)
+        public static Vector256<T> vbc_f<T>(N256 n, T src)
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))

@@ -5,12 +5,11 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Collections.Generic;
     using System.Runtime.Intrinsics;
 
     using static zfunc;
-    
+    using static HexConst;
+
     public class t_vspread : IntrinsicTest<t_vspread>
     {     
 
@@ -22,7 +21,7 @@ namespace Z0
             var src =  dinx.vparts(n,    0,   AA,    0,    0,   0,   AA,   AA,   AA,     0,    0,    0,   AA,   AA,   AA,    0,    0);
             var mask = dinx.vparts(n, skip, pick, skip, skip, skip, pick, pick, pick, skip, skip, skip, pick, pick, pick, skip, skip);
             var dst = BlockedSpan.alloc<byte>(n,FF);
-            ginx.vmaskstore(src, mask, ref dst.Head);
+            ginx.vcmove(src, mask, ref dst.Head);
             for(var i=0; i<16; i++)
             {
                 var expect = gbits.test(mask.Item(i), 7) ? AA : FF;

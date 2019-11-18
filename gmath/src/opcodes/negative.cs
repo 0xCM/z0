@@ -10,7 +10,7 @@ namespace Z0
     
     using static zfunc;    
 
-    partial class pmoc
+    partial class gmoc
     {
         public static bool negative_d8i(sbyte x)
             => math.negative(x);
@@ -39,12 +39,17 @@ namespace Z0
         public static bool negative_d32f(float x)
             => math.negative(x);
 
+        public static bool negative_d64f(double x)
+            => math.negative(x);
+
+        public static bool negative_n32f(float x)
+            => x < 0;
+
         public static bool negative_g32f(float x)
             => gmath.negative(x);
 
-
-        public static bool negative_d64f(double x)
-            => math.negative(x);
+        public static bool negative_n64f(double x)
+            => x < 0;
 
         public static bool negative_g64f(double x)
             => gmath.negative(x);

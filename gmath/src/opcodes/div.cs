@@ -5,12 +5,11 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
     using System.Runtime.CompilerServices;
     
     using static zfunc;    
 
-    partial class pmoc
+    partial class gmoc
     {
         public static sbyte div_d8i(sbyte lhs, sbyte rhs)
             => math.div(lhs,rhs);

@@ -32,7 +32,7 @@ namespace Z0
         /// <param name="y">The right bitvector</param>
         [MethodImpl(Inline)]
         public static bit dot(BitVector4 x, BitVector4 y)
-            => odd(Bits.pop(x.data & y.data));              
+            => odd(pop(and(x, y)));              
 
         /// <summary>
         /// Computes the scalar product between two bitvectors
@@ -41,7 +41,7 @@ namespace Z0
         /// <param name="y">The right bitvector</param>
         [MethodImpl(Inline)]
         public static bit dot(BitVector8 x, BitVector8 y)
-            => odd(Bits.pop(x.data & y.data));              
+            => odd(pop(and(x, y)));              
 
         /// <summary>
         /// Computes the scalar product between two bitvectors
@@ -50,7 +50,7 @@ namespace Z0
         /// <param name="y">The right bitvector</param>
         [MethodImpl(Inline)]
         public static bit dot(BitVector16 x, BitVector16 y)
-            => odd(Bits.pop(x.data & y.data));              
+            => odd(pop(and(x, y)));              
 
         /// <summary>
         /// Computes the scalar product between two bitvectors
@@ -59,7 +59,7 @@ namespace Z0
         /// <param name="y">The right bitvector</param>
         [MethodImpl(Inline)]
         public static bit dot(BitVector32 x, BitVector32 y)
-            => odd(Bits.pop(x.data & y.data));              
+            => odd(pop(and(x, y)));              
 
         /// <summary>
         /// Computes the scalar product between two bitvectors
@@ -68,6 +68,16 @@ namespace Z0
         /// <param name="y">The right bitvector</param>
         [MethodImpl(Inline)]
         public static bit dot(BitVector64 x, BitVector64 y)
-            => odd(Bits.pop(x.data & y.data));
+            => odd(pop(and(x, y)));              
+
+        /// <summary>
+        /// Computes the scalar product between two bitvectors
+        /// </summary>
+        /// <param name="x">The left bitvector</param>
+        /// <param name="y">The right bitvector</param>
+        [MethodImpl(Inline)]
+        public static bit dot(BitVector128 x, BitVector128 y)
+            => odd(pop(and(x, y)));              
+
     }
 }

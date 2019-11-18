@@ -5,11 +5,7 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Collections.Generic;
-    using System.Threading;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
 
     using static zfunc;
 
@@ -108,7 +104,7 @@ namespace Z0
         {
             var rc = rowdim(A,B,C);
             for(var i=0; i<rc; i++)
-                C[i] = BitVector.cnotimply(A[i],B[i]);
+                C[i] = BitVector.cnonimpl(A[i],B[i]);
             return C;
 
         }

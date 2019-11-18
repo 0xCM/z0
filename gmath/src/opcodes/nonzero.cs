@@ -10,7 +10,7 @@ namespace Z0
     
     using static zfunc;    
 
-    partial class pmoc
+    partial class gmoc
     {
         public static bool nonzero_d8i(sbyte x)
             => !x.Equals(0);
@@ -59,5 +59,18 @@ namespace Z0
 
         public static bit nonzero_g64u(ulong x)
             => gmath.nonzero(x);
+ 
+         public static bool nonzero_n32f(float x)
+            => x != 0;
+
+        public static bool nonzero_g32f(float x)
+            => gmath.nonzero(x);
+
+        public static bool nonzero_n64f(double x)
+            => x != 0;
+
+        public static bool nonzero_g64f(double x)
+            => gmath.nonzero(x);
+
     }
 }

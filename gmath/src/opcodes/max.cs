@@ -9,7 +9,7 @@ namespace Z0
     
     using static zfunc;    
 
-    partial class pmoc
+    partial class gmoc
     {
         public static sbyte max_d8i(sbyte a, sbyte b)
             => math.max(a,b);
@@ -58,5 +58,18 @@ namespace Z0
 
         public static ulong max_g64u(ulong a, ulong b)
             => gmath.max(a,b);
+            
+        public static float max_d32f(float lhs, float rhs)
+            => fmath.max(lhs,rhs);
+
+        public static float max_g32f(float lhs, float rhs)
+            => gfp.max(lhs,rhs);
+
+        public static double max_d64f(double lhs, double rhs)
+            => fmath.max(lhs,rhs);
+        
+        public static double max_g64f(double lhs, double rhs)
+            => gfp.max(lhs,rhs);
+
     }
 }

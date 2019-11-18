@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
     using System.Runtime.Intrinsics;
 
     using static zfunc;
@@ -40,7 +39,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ref BitMatrix8 transpose(in BitMatrix8 A, ref BitMatrix8 Z)
         {
-            var x = dinx.vscalar((ulong)A);
+            var x = dinx.vloadlo((ulong)A);
             for(var i=7; i>= 0; i--)
             {
                 Z[i] = (byte)dinx.vmovemask(v8u(x));
@@ -98,7 +97,6 @@ namespace Z0
             return BitMatrix.load<N16,N8,uint>(A.Data);
         }
 
-
         static Vec128<byte> Tr8x16Mask
         {
             [MethodImpl(Inline)]
@@ -115,6 +113,5 @@ namespace Z0
             2, 6, 10, 14,
             3, 7, 11, 15
         };
-
     }
 }
