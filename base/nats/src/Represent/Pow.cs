@@ -5,20 +5,14 @@
 namespace Z0
 {
     using System;
-    using System.Numerics;
     using System.Linq;
-    using System.Collections.Generic;
-    using System.Collections.Concurrent;
-    using System.Reflection;
     using System.Runtime.CompilerServices;
     
     using static nfunc;
     using static constant;
 
-
-
     /// <summary>
-    /// Reifies a natural k such that b:B & e:E => k = b^e
+    /// Encodes a natural number k := b^e
     /// </summary>
     public readonly struct Pow<B,E> : INatPow<Pow<B, E>, B, E>
         where B : unmanaged, ITypeNat
@@ -38,19 +32,17 @@ namespace Z0
             => repeat(@base, exp).Aggregate((x,y) => x * y); 
 
         public static ulong Value
-            => pow(Nat.nat<B>().value, Nat.nat<E>().value);
+            => pow(Nat.nat<B>().NatValue, Nat.nat<E>().NatValue);
             
         public static byte[] Digits => digits(Value);
 
         public static NatSeq Seq => Nat.reflect(Digits);
 
-        public ITypeNat rep 
-            => Rep;
 
-        public NatSeq seq
+        public NatSeq Sequence
             => Seq;
 
-        public ulong value 
+        public ulong NatValue 
             => Value;
 
         public NatSeq natseq()
@@ -72,10 +64,10 @@ namespace Z0
             => Value.Equals(rhs);
 
         public bool Equals(Pow<B, E> other)
-            => Value == other.value;
+            => Value == other.NatValue;
 
         public bool Equals(NatSeq other)
-            => Value == other.value;
+            => Value == other.NatValue;
 
     }
 }

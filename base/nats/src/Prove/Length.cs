@@ -41,7 +41,7 @@ namespace Z0
         [MethodImpl(Inline)]   
         public static IReadOnlyList<T> length<K,T>(K k, IReadOnlyList<T> src)
             where K : unmanaged, ITypeNat
-                => k.value == (ulong)src.Count ? src : failure<K,IReadOnlyList<T>>(nameof(length), src);
+                => k.NatValue == (ulong)src.Count ? src : failure<K,IReadOnlyList<T>>(nameof(length), src);
 
         /// <summary>
         /// Attempts to prove that the k:K => src.length = k
@@ -54,7 +54,7 @@ namespace Z0
         [MethodImpl(Inline)]   
         public static T[] length<K,T>(K k, params T[] src)
             where K : unmanaged, ITypeNat
-                => k.value == (ulong)src.Length ? src : failure<K,T[]>(nameof(length),src); 
+                => k.NatValue == (ulong)src.Length ? src : failure<K,T[]>(nameof(length),src); 
 
         /// <summary>
         /// Attempts to prove that the k:K => src.length = k

@@ -5,32 +5,11 @@
 namespace Z0
 {
     using System;
-    using System.Numerics;
     using System.Collections.Generic;
-    using System.Collections.Concurrent;
-    using System.Reflection;
     using System.Linq;
-
-    using static nfunc;
-    using static constant;
 
     public class Primes
     {
-        static IEnumerable<ulong> defined()
-            => from f in typeof(Primes).GetFields()
-                where f.FieldType == typeof(ulong)
-                select (ulong)f.GetRawConstantValue();
-                
-        static readonly HashSet<ulong> Cached = new HashSet<ulong>(defined());
-                
-        /// <summary>
-        /// Returns true if the supplied value is prime, false otherwise
-        /// </summary>
-        /// <param name="n">The value to test</param>
-        /// <returns></returns>
-        public static bool prime(ulong n)
-            => Cached.Contains(n) ? true : throw new Exception();
-
         public static readonly N2 P2 = default; 
         
         public static readonly N3 P3 = default; 
@@ -84,8 +63,23 @@ namespace Z0
         public static readonly NatSeq<N1,N0,N7> P107 = default;
 
         public static readonly NatSeq<N1,N0,N9> P109 = default;
+
+        public static readonly NatSeq<N1,N1,N3> P113 = default;
+
+        public static readonly NatSeq<N1,N2,N7> P127 = default;
+
+        public static readonly NatSeq<N1,N3,N1> P131 = default;
+
+        public static readonly NatSeq<N1,N3,N7> P137 = default;
+
+        public static readonly NatSeq<N1,N4,N9> P149 = default;
+
+        public static readonly NatSeq<N1,N5,N1> P151 = default;
+
+        public static readonly NatSeq<N1,N5,N7> P157 = default;
+
         /*
-            113, 127, 131, 137, 139, 149, 151, 157, 163, 167, 173, 179, 181, 191, 193, 197, 199        
+            163, 167, 173, 179, 181, 191, 193, 197, 199        
          */
     }
 

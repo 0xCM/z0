@@ -7,7 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
-    using System.Collections.Generic;
 
     using static zfunc;    
 
@@ -54,7 +53,7 @@ namespace Z0
         /// <param name="x">The first vector</param>
         /// <param name="y">The second vector</param>
         /// <remarks>This should be considered a reference implementation; the dot operation is considerably faster</remarks>
-        public static bit modprod<T>(BitCells<T> x, BitCells<T> y)
+        public static bit modprod<T>(in BitCells<T> x, in BitCells<T> y)
             where T : unmanaged
         {
             var result = 0u;
@@ -73,7 +72,7 @@ namespace Z0
                 => BitCells<T>.StepSize;
 
         [MethodImpl(Inline)]
-        public static BitCells<T> and<T>(BitCells<T> x, BitCells<T> y)
+        public static BitCells<T> and<T>(in BitCells<T> x,in BitCells<T> y)
             where T : unmanaged
         {
             var z = alloc<T>(x.BlockCount);

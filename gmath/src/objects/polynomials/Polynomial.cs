@@ -189,7 +189,7 @@ namespace Z0
     {
         public readonly Monomial<M,T>[] Terms;
 
-        public static readonly uint Degree = (uint)new N().value;
+        public static readonly uint Degree = (uint)new N().NatValue;
         
         /// <summary>
         /// The zero polynomial of degree N

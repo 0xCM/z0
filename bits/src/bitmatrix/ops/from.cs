@@ -5,11 +5,7 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Collections.Generic;
-    using System.Threading;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
 
     using static zfunc;
 
@@ -21,7 +17,7 @@ namespace Z0
         /// <param name="rows">The row content</param>
         /// <typeparam name="T">The primal type over which the matrix is constructed</typeparam>
         [MethodImpl(Inline)]
-        public static BitMatrix<T> from<T>(RowBits<T> src)
+        public static BitMatrix<T> from<T>(in RowBits<T> src)
             where T : unmanaged
         {
             if(src.RowCount != bitsize<T>())
@@ -64,7 +60,5 @@ namespace Z0
             permute(spec, ref id);
             return id;
         }
-
     }
-
 }

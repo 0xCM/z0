@@ -189,12 +189,12 @@ namespace Z0
             Span<N,ulong> _seed;
             if(seed.Length == 0)
                 _seed = Entropy.Values<N,ulong>();
-            else if(seed.Length == (int)n.value)
+            else if(seed.Length == (int)n.NatValue)
                 _seed = NatSpan.load(n, ref seed[0]);
             else
-                throw Errors.LengthMismatch((int)n.value, seed.Length);
+                throw Errors.LengthMismatch((int)n.NatValue, seed.Length);
 
-            var members = new IPolyrand[n.value];
+            var members = new IPolyrand[n.NatValue];
             for(var i=0; i<members.Length; i++)
                 members[i] = WyHash64(_seed[i]);
 

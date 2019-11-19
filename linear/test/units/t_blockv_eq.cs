@@ -16,7 +16,7 @@ namespace Z0
             where T : unmanaged
             where N : unmanaged, ITypeNat
         {
-            var len = (int)(new N().value);
+            var len = (int)(new N().NatValue);
 
             for(var i = 0; i< len; i++)
                 Claim.eq(x[i], y[i]);

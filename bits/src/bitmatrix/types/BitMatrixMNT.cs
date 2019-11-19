@@ -16,12 +16,12 @@ namespace Z0
     /// <typeparam name="M">The row dimension</typeparam>
     /// <typeparam name="N">The column dimension</typeparam>
     /// <typeparam name="T">The element type</typeparam>
-    public ref struct BitMatrix<M,N,T> 
+    public readonly ref struct BitMatrix<M,N,T> 
         where M : unmanaged, ITypeNat        
         where N : unmanaged, ITypeNat
         where T : unmanaged
     {        
-        Span<T> data;
+        readonly Span<T> data;
 
         /// <summary>
         /// The number of bits per row
@@ -43,7 +43,7 @@ namespace Z0
         /// </summary>
         public static int TotalBitCount => NatMath.mul<M,N>();
 
-        GridMoniker moniker;                
+        readonly GridMoniker moniker;                
         
         static readonly BitGridSpec<T> GridSpec = (Unsafe.SizeOf<T>()*8, RowBitCount, ColBitCount);
         

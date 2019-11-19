@@ -25,7 +25,7 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where S : unmanaged
         {
-            var n = (int)(new N().value);
+            var n = (int)(new N().NatValue);
             Claim.eq(bs.Length, n);
             for(var i=0; i<n; i++)
                 Claim.eq(bv[i], bs[i]);

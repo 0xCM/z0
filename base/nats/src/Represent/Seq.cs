@@ -5,31 +5,9 @@
 namespace Z0
 {
     using System;
-    using System.Numerics;
-    using System.Collections.Generic;
-    using System.Collections.Concurrent;
-    using System.Reflection;
+    using System.Runtime.CompilerServices;
 
     using static constant;
-    using static nfunc;
-
-    /// <summary>
-    /// Characterizes a type-level sequence of typenats
-    /// </summary>
-    public interface NatSeq : ITypeNat
-    {
-
-    }
-
-    /// <summary>
-    /// Characterizes a natural sequence with an unspecified number of terms
-    /// </summary>
-    /// <typeparam name="S">The reifying type</typeparam>
-    public interface INatSeq<S> : ITypeNat<S>, NatSeq
-        where S : INatSeq<S>, new()
-    {
-
-    }
 
 
     /// <summary>
@@ -42,15 +20,15 @@ namespace Z0
         public static NatSeq1<K1> Rep => default;
         
         public static ulong Value =>
-             Nat.nat<K1>().value;
+             Nat.nat<K1>().NatValue;
                 
-        public ulong value 
+        public ulong NatValue 
             => Value;
 
-        public ITypeNat rep
+        public ITypeNat NatRep
             => Rep; 
 
-        public NatSeq seq
+        public NatSeq Sequence
             => Rep; 
 
         public string format()
@@ -70,16 +48,16 @@ namespace Z0
         public static NatSeq<K1,K2> Rep => default;
 
         public static ulong Value =>
-              Nat.nat<K1>().value * 10
-            + Nat.nat<K2>().value;
+              Nat.nat<K1>().NatValue * 10
+            + Nat.nat<K2>().NatValue;
 
-        public ulong value 
+        public ulong NatValue 
             => Value;
 
-        public ITypeNat rep
+        public ITypeNat NatRep
             => Rep; 
 
-        public NatSeq seq
+        public NatSeq Sequence
             => Rep; 
     
         public string format()
@@ -99,18 +77,23 @@ namespace Z0
     {
         public static NatSeq<K1,K2,K3> Rep => default;
         
-        public static ulong Value =>
-             Nat.nat<K1>().value * 100
-            + Nat.nat<K2>().value * 10
-            + Nat.nat<K3>().value;
+        public static ulong Value 
+        {            
+            [MethodImpl(Inline)]
+            get => 
+              Nat.nat<K1>().NatValue * 100
+            + Nat.nat<K2>().NatValue * 10
+            + Nat.nat<K3>().NatValue;
 
-        public ulong value 
+        }
+        
+        public ulong NatValue 
             => Value;
 
-        public ITypeNat rep
+        public ITypeNat NatRep
             => Rep; 
 
-        public NatSeq seq
+        public NatSeq Sequence
             => Rep; 
 
         public string format()
@@ -131,19 +114,23 @@ namespace Z0
     {
         public static NatSeq<K1,K2,K3,K4> Rep => default;
 
-        public static ulong Value =>
-              Nat.nat<K1>().value * 1000
-            + Nat.nat<K2>().value * 100
-            + Nat.nat<K3>().value * 10
-            + Nat.nat<K4>().value;
+        public static ulong Value 
+        {            
+            [MethodImpl(Inline)]
+            get => 
+              Nat.nat<K1>().NatValue * 1000
+            + Nat.nat<K2>().NatValue * 100
+            + Nat.nat<K3>().NatValue * 10
+            + Nat.nat<K4>().NatValue;
+        }
 
-        public ulong value 
+        public ulong NatValue 
             => Value;
 
-        public ITypeNat rep
+        public ITypeNat NatRep
             => Rep; 
 
-        public NatSeq seq
+        public NatSeq Sequence
             => Rep; 
 
         public string format()
@@ -165,20 +152,24 @@ namespace Z0
     {
         public static NatSeq<K1,K2,K3,K4,K5> Rep => default;
 
-        public static ulong Value =>
-              Nat.nat<K1>().value * 10000
-            + Nat.nat<K2>().value * 1000
-            + Nat.nat<K3>().value * 100
-            + Nat.nat<K4>().value * 10
-            + Nat.nat<K5>().value;
+        public static ulong Value 
+        {            
+            [MethodImpl(Inline)]
+            get => 
+              Nat.nat<K1>().NatValue * 10000
+            + Nat.nat<K2>().NatValue * 1000
+            + Nat.nat<K3>().NatValue * 100
+            + Nat.nat<K4>().NatValue * 10
+            + Nat.nat<K5>().NatValue;
+        }
 
-        public ulong value 
+        public ulong NatValue 
             => Value;
 
-        public ITypeNat rep
+        public ITypeNat NatRep
             => Rep; 
 
-        public NatSeq seq
+        public NatSeq Sequence
             => Rep; 
 
         public string format()
@@ -201,21 +192,25 @@ namespace Z0
     {
         public static NatSeq<K1,K2,K3,K4,K5,K6> Rep => default;
 
-        public static ulong Value => 
-              Nat.nat<K1>().value * 100000
-            + Nat.nat<K2>().value * 10000
-            + Nat.nat<K3>().value * 1000
-            + Nat.nat<K4>().value * 100
-            + Nat.nat<K5>().value * 10
-            + Nat.nat<K6>().value;
+        public static ulong Value 
+        {            
+            [MethodImpl(Inline)]
+            get => 
+              Nat.nat<K1>().NatValue * 100000
+            + Nat.nat<K2>().NatValue * 10000
+            + Nat.nat<K3>().NatValue * 1000
+            + Nat.nat<K4>().NatValue * 100
+            + Nat.nat<K5>().NatValue * 10
+            + Nat.nat<K6>().NatValue;
+        }
     
-        public ulong value 
+        public ulong NatValue 
             => Value;
 
-        public ITypeNat rep
+        public ITypeNat NatRep
             => Rep; 
 
-        public NatSeq seq
+        public NatSeq Sequence
             => Rep; 
 
         public string format()
@@ -239,22 +234,26 @@ namespace Z0
     {
         public static NatSeq<K1,K2,K3,K4,K5,K6,K7> Rep => default;
 
-        public static ulong Value =>
-              Nat.nat<K1>().value * 1000000
-            + Nat.nat<K2>().value * 100000
-            + Nat.nat<K3>().value * 10000
-            + Nat.nat<K4>().value * 1000
-            + Nat.nat<K5>().value * 100
-            + Nat.nat<K6>().value * 10
-            + Nat.nat<K7>().value;
+        public static ulong Value 
+        {            
+            [MethodImpl(Inline)]
+            get => 
+              Nat.nat<K1>().NatValue * 1000000
+            + Nat.nat<K2>().NatValue * 100000
+            + Nat.nat<K3>().NatValue * 10000
+            + Nat.nat<K4>().NatValue * 1000
+            + Nat.nat<K5>().NatValue * 100
+            + Nat.nat<K6>().NatValue * 10
+            + Nat.nat<K7>().NatValue;
+        }
 
-        public ulong value 
+        public ulong NatValue 
             => Value;
 
-        public ITypeNat rep
+        public ITypeNat NatRep
             => Rep; 
 
-        public NatSeq seq
+        public NatSeq Sequence
             => Rep; 
 
         public string format()
@@ -279,23 +278,27 @@ namespace Z0
     {
         public static NatSeq<K1,K2,K3,K4,K5,K6,K7,K8> Rep => default;
 
-        public static ulong Value =>
-              Nat.nat<K1>().value * 10000000
-            + Nat.nat<K2>().value * 1000000
-            + Nat.nat<K3>().value * 100000
-            + Nat.nat<K4>().value * 10000
-            + Nat.nat<K5>().value * 1000
-            + Nat.nat<K6>().value * 100
-            + Nat.nat<K7>().value * 10
-            + Nat.nat<K8>().value;
+        public static ulong Value 
+        {            
+            [MethodImpl(Inline)]
+            get => 
+              Nat.nat<K1>().NatValue * 10000000
+            + Nat.nat<K2>().NatValue * 1000000
+            + Nat.nat<K3>().NatValue * 100000
+            + Nat.nat<K4>().NatValue * 10000
+            + Nat.nat<K5>().NatValue * 1000
+            + Nat.nat<K6>().NatValue * 100
+            + Nat.nat<K7>().NatValue * 10
+            + Nat.nat<K8>().NatValue;
+        }
 
-        public ulong value 
+        public ulong NatValue 
             => Value;
 
-        public ITypeNat rep
+        public ITypeNat NatRep
             => Rep; 
 
-        public NatSeq seq
+        public NatSeq Sequence
             => Rep; 
 
         public string format()
@@ -321,25 +324,28 @@ namespace Z0
     {
         public static NatSeq<K1,K2,K3,K4,K5,K6,K7,K8,K9> Rep => default;
 
-        public static ulong Value =>
-              Nat.nat<K1>().value * 100000000
-            + Nat.nat<K2>().value * 10000000
-            + Nat.nat<K3>().value * 1000000
-            + Nat.nat<K4>().value * 100000
-            + Nat.nat<K5>().value * 10000
-            + Nat.nat<K6>().value * 1000
-            + Nat.nat<K7>().value * 100
-            + Nat.nat<K8>().value * 10
-            + Nat.nat<K9>().value; 
+        public static ulong Value 
+        {            
+            [MethodImpl(Inline)]
+            get => 
+              Nat.nat<K1>().NatValue * 100000000
+            + Nat.nat<K2>().NatValue * 10000000
+            + Nat.nat<K3>().NatValue * 1000000
+            + Nat.nat<K4>().NatValue * 100000
+            + Nat.nat<K5>().NatValue * 10000
+            + Nat.nat<K6>().NatValue * 1000
+            + Nat.nat<K7>().NatValue * 100
+            + Nat.nat<K8>().NatValue * 10
+            + Nat.nat<K9>().NatValue; 
+        }
 
-
-        public ulong value 
+        public ulong NatValue 
             => Value;
 
-        public ITypeNat rep
+        public ITypeNat NatRep
             => Rep; 
 
-        public NatSeq seq
+        public NatSeq Sequence
             => Rep; 
 
         public string format()

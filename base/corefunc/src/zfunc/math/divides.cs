@@ -31,7 +31,7 @@ partial class zfunc
     [MethodImpl(Inline)]
     public static bool divides<N>(N n, long m)
         where N : unmanaged, ITypeNat
-            => (ulong)m % n.value == 0;
+            => (ulong)m % n.NatValue == 0;
 
     /// <summary>
     /// Determines whether m is evenly divisible by n
@@ -42,7 +42,7 @@ partial class zfunc
     [MethodImpl(Inline)]
     public static bool divides<N>(N n, ulong m)
         where N : unmanaged, ITypeNat
-            => m % n.value == 0;
+            => m % n.NatValue == 0;
 
     /// <summary>
     /// Determines whether m is evenly divisible by n

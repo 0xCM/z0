@@ -20,7 +20,7 @@ namespace Z0
     public interface ICpuReg<N> : ICpuReg
         where N : unmanaged, ITypeNat
     {
-        static readonly BitSize BW =new N().value;
+        static readonly BitSize BW =new N().NatValue;
 
         static readonly ByteSize BZ = new ByteSize(BW/8);
         

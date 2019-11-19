@@ -26,10 +26,10 @@ namespace Z0
             => BitParts.part64x1(src, dst);
 
         public static uint pop3x256(Vector256<ulong> x, Vector256<ulong> y, Vector256<ulong> z)
-            => Bits.pop(x,y,z);
+            => Bits.vpop(x,y,z);
 
         public static uint pop3x128(Vector128<ulong> x, Vector128<ulong> y, Vector128<ulong> z)
-            => Bits.pop(x,y,z);
+            => Bits.vpop(x,y,z);
 
         public static uint pop3x64(ulong x, ulong y, ulong z)
             => Bits.pop(x,y,z);

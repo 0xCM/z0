@@ -27,7 +27,7 @@ namespace Z0
         static readonly string description = $"{k1} <= {k} <= {k2}";
 
         public NatBetween(K k, K1 k1, K2 k2)
-            => valid = demand(k.value >= k1.value && k.value <= k2.value);
+            => valid = demand(k.NatValue >= k1.NatValue && k.NatValue <= k2.NatValue);
         
         public bool valid {get;}
 

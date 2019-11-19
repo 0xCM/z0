@@ -12,62 +12,24 @@ namespace Z0
  
     using static constant;
 
-    public readonly struct NatVal
-    {        
-        public readonly ulong Value;
-
-        [MethodImpl(Inline)]
-        public static NatVal From<N>(N n = default)
-            where N : unmanaged, ITypeNat
-                => NatMath.natval<N>();
-
-        [MethodImpl(Inline)]
-        internal static NatVal From(ulong src)
-            => new NatVal(src);
-
-        [MethodImpl(Inline)]
-        internal static NatVal From(long src)
-            => new NatVal((ulong)src);
-
-        [MethodImpl(Inline)]
-        public static implicit operator byte(NatVal src)
-            => (byte)src.Value;
-
-        [MethodImpl(Inline)]
-        public static implicit operator sbyte(NatVal src)
-            => (sbyte)src.Value;
-
-        [MethodImpl(Inline)]
-        public static implicit operator short(NatVal src)
-            => (short)src.Value;
-
-        [MethodImpl(Inline)]
-        public static implicit operator ushort(NatVal src)
-            => (ushort)src.Value;
-
-        [MethodImpl(Inline)]
-        public static implicit operator int(NatVal src)
-            => (int)src.Value;
-
-        [MethodImpl(Inline)]
-        public static implicit operator uint(NatVal src)
-            => (uint)src.Value;
-
-        [MethodImpl(Inline)]
-        public static implicit operator long(NatVal src)
-            => (long)src.Value;
-
-        [MethodImpl(Inline)]
-        public static implicit operator ulong(NatVal src)
-            => src.Value;
-
-        [MethodImpl(Inline)]
-        NatVal(ulong src)
-            => this.Value = src;
-    }
 
     public static class NatMath
     {
+        
+        /// <summary>
+        /// For k1 % k2 = 0, computes k := k1 / k2
+        /// </summary>
+        /// <param name="k1"></param>
+        /// <param name="k2"></param>
+        /// <typeparam name="K1"></typeparam>
+        /// <typeparam name="K2"></typeparam>
+        /// <returns></returns>
+        [MethodImpl(Inline)]
+        public static NatVal multiples<K1,K2>(K1 k1 = default, K2 k2 = default)
+            where K1 : unmanaged, ITypeNat<K1>, INatDivisible<K1,K2>
+            where K2 : unmanaged, ITypeNat<K2>
+                => NatVal.From(natval(k1) / natval(k2));
+        
         [MethodImpl(Inline)]
         public static NatVal natval<N>(N n = default)
             where N : unmanaged, ITypeNat
@@ -426,7 +388,7 @@ namespace Z0
             else if(typeof(N) == typeof(N32768))
                 return 32768;
             else 
-                return new N().value;
+                return new N().NatValue;
         }
 
     }

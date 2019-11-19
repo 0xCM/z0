@@ -41,7 +41,7 @@ namespace Z0
         [MethodImpl(Inline)]   
         public static ulong eq<K>(K k, ulong expected)
                 where K : unmanaged, ITypeNat
-                    => k.value == expected  ? expected : failure<K,ulong>("eq", expected);
+                    => k.NatValue == expected  ? expected : failure<K,ulong>("eq", expected);
 
         /// <summary>
         /// Attempts to prove that k:K => k == expected
@@ -66,7 +66,7 @@ namespace Z0
         [MethodImpl(Inline)]   
         public static uint eq<K>(K k, int expected)
                 where K : unmanaged, ITypeNat
-                    => k.value == (uint)expected ? (uint)expected : failure<K,uint>("eq", (uint)expected);
+                    => k.NatValue == (uint)expected ? (uint)expected : failure<K,uint>("eq", (uint)expected);
 
         /// <summary>
         /// Prooves that a test value is equal to the value of a natural representative

@@ -15,12 +15,12 @@ namespace Z0
     /// <summary>
     /// Defines a permutation of natural length N over the natural numbers 0,1,...,N-1
     /// </summary>
-    public struct Perm<N>
+    public readonly struct Perm<N>
         where N : unmanaged, ITypeNat
     {
-        Perm perm;
+        readonly Perm perm;
 
-        static int n = (int)(new N().value);
+        static int n = (int)(new N().NatValue);
 
         /// <summary>
         /// The canonical identity permutation of length N

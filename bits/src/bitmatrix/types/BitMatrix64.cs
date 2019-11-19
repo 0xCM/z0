@@ -4,23 +4,16 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Threading;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
-    using System.Runtime.Intrinsics;
-    using System.Runtime.Intrinsics.X86;
-
-    using static As;
 
     using static zfunc;
 
     /// <summary>
     /// Defines a 64x64 matrix of bits
     /// </summary>
-    public ref struct BitMatrix64
+    public readonly ref struct BitMatrix64
     {                
-        Span<ulong> data;
+        readonly Span<ulong> data;
 
         /// <summary>
         /// The matrix order
@@ -243,7 +236,7 @@ namespace Z0
         /// </summary>
         /// <param name="row">The row index</param>
         [MethodImpl(Inline)]
-        public readonly BitVector64 ColVector(int col)
+        public BitVector64 ColVector(int col)
             =>  ColData(col);
 
         /// <summary>
@@ -255,16 +248,11 @@ namespace Z0
         public void RowSwap(int i, int j)
             => data.Swap(i,j);
 
-
         [MethodImpl(Inline)] 
-        public readonly BitVector64 Diagonal()
+        public BitVector64 Diagonal()
             => BitMatrix.diagonal(this);
 
-        [MethodImpl(Inline)] 
-        public BitMatrix64 AndNot(in BitMatrix64 rhs)
-            => BitMatrix.cnotimply(this, rhs, ref this);
-
-        public readonly BitMatrix64 Transpose()
+        public BitMatrix64 Transpose()
         {
             var dst = Replicate();
             for(var i=0; i<N; i++)
@@ -288,8 +276,6 @@ namespace Z0
             => throw new NotSupportedException();
         
         public override string ToString()
-            => throw new NotSupportedException();
- 
-        
+            => throw new NotSupportedException();       
     }
 }

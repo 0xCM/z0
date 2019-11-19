@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static zfunc;
-    using static As;
 
     partial class BitMatrix
     {
@@ -42,7 +41,7 @@ namespace Z0
         /// <param name="A">The left matrix</param>
         /// <param name="B">The right matrix</param>
         [MethodImpl(Inline)]
-        public static bit same(BitMatrix8 A, BitMatrix8 B)
+        public static bit same(in BitMatrix8 A, in BitMatrix8 B)
         {
             var Z = BitMatrix.alloc(n8);
             BitSquare.xnor(in A.Head, in B.Head, ref Z.Head);
@@ -55,7 +54,7 @@ namespace Z0
         /// <param name="A">The left matrix</param>
         /// <param name="B">The right matrix</param>
         [MethodImpl(Inline)]
-        public static bit same(BitMatrix16 A, BitMatrix16 B)
+        public static bit same(in BitMatrix16 A, in BitMatrix16 B)
         {
             var Z = BitMatrix.alloc(n16);
             BitSquare.xnor(in A.Head, in B.Head, ref Z.Head);
@@ -68,7 +67,7 @@ namespace Z0
         /// <param name="A">The left matrix</param>
         /// <param name="B">The right matrix</param>
         [MethodImpl(Inline)]
-        public static bit same(BitMatrix32 A, BitMatrix32 B)
+        public static bit same(in BitMatrix32 A, in BitMatrix32 B)
         {
             var Z = BitMatrix.alloc(n32);
             BitSquare.xnor(in A.Head, in B.Head, ref Z.Head);
@@ -82,7 +81,7 @@ namespace Z0
         /// <param name="A">The left matrix</param>
         /// <param name="B">The right matrix</param>
         [MethodImpl(Inline)]
-        public static bit same(BitMatrix64 A, BitMatrix64 B)
+        public static bit same(in BitMatrix64 A, in BitMatrix64 B)
         {
             var Z = BitMatrix.alloc(n64);
             BitSquare.xnor(in A.Head, in B.Head, ref Z.Head);

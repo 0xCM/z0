@@ -9,29 +9,21 @@ namespace Z0
     
     using static constant;    
 
-
-    public readonly struct N22 : INatSeq<N22>
+    public readonly struct N22 : INatSeq<N22>, INatEven<N22>
     {
-        public static N22 Rep => default;
-
         public static NatSeq<N2,N2> Seq => default;
 
         [MethodImpl(Inline)]
         public static implicit operator int(N22 src)
-            => (int)src.value;
+            => (int)src.NatValue;
 
-        public ITypeNat rep 
-            => Rep;
-
-        public NatSeq seq 
+        public NatSeq Sequence 
             => Seq;
 
-        public ulong value 
-            => Seq.value;
+        public ulong NatValue 
+            => Seq.NatValue;
 
         public override string ToString() 
             => Seq.format();
     }
-
-
 }

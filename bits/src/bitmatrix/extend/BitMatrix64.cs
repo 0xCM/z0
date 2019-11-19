@@ -74,6 +74,10 @@ namespace Z0
         public static Graph<byte> ToGraph(this BitMatrix64 A)
             => BitGraph.graph(A);
 
+        [MethodImpl(Inline)]
+        public static BitMatrix64 AndNot(this BitMatrix64 A, in BitMatrix64 B)
+            => BitMatrix.cnotimply(A, B);
+
     }
 
 

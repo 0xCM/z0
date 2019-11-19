@@ -20,7 +20,7 @@ namespace Z0
     
 
         public Nonzero(K n)
-            => valid = demand(n.value != 0);
+            => valid = demand(n.NatValue != 0);
         
         public bool valid {get;}
 

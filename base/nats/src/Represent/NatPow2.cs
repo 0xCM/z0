@@ -19,7 +19,7 @@ namespace Z0
     /// Reifies a natural k such that e:E => k = 2^e
     /// </summary>
     public readonly struct NatPow2<E> : INatPow2<E>
-        where E : unmanaged, ITypeNat
+        where E : unmanaged, ITypeNat<E>
     {
         public static NatPow2<E> Rep => default;
 
@@ -32,7 +32,7 @@ namespace Z0
             => repeat(@base, exp).Aggregate((x,y) => x * y); 
 
         public static readonly ulong Value
-            = pow(Nat.nat<E>().value, Nat.nat<E>().value);
+            = pow(Nat.nat<E>().NatValue, Nat.nat<E>().NatValue);
             
         public static readonly byte[] Digits 
             = digits(Value);
@@ -43,10 +43,10 @@ namespace Z0
         public ITypeNat rep 
             => Rep;
 
-        public NatSeq seq
+        public NatSeq Sequence
             => Seq;
 
-        public ulong value 
+        public ulong NatValue 
             => Value;
 
         public NatSeq natseq()
@@ -62,10 +62,10 @@ namespace Z0
             => Value.GetHashCode();
 
         public bool Equals(NatPow2<E> rhs)
-            => Value == rhs.value;
+            => Value == rhs.NatValue;
 
         public bool Equals(NatSeq other)
-            => Value == other.value;
+            => Value == other.NatValue;
 
     }
 }

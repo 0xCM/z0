@@ -5,9 +5,7 @@
 namespace Z0
 {
     using System;
-    using System.Numerics;
     using System.Linq;
-    using System.Reflection;
     using System.Collections.Generic;
     using System.Collections.Concurrent;
     using System.Runtime.CompilerServices;
@@ -20,8 +18,6 @@ namespace Z0
     /// </summary>
     public static class Nat
     {        
-        const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;
-
         [MethodImpl(Inline)]   
         static Type primtype(byte value)
             => (value switch {                    
@@ -65,22 +61,19 @@ namespace Z0
         /// Constructs the natural type corresponding to an integral value
         /// </summary>
         /// <param name="digits">The source digits</param>
-        /// <returns></returns>
         [MethodImpl(Inline)]       
         public static NatSeq reflect(uint value)        
             => reflect(digits(value));
 
-        public static int require<N>(int value)
+        public static int require<N>(int value, N n = default)
             where N : unmanaged, ITypeNat
                 => nati<N>() == value ? value : throw new Exception();
 
         /// <summary>
-        /// Consstructs the canonical sequence representatives for the natural numbers
-        /// within an inclusive range
+        /// Consstructs the canonical sequence representatives for the natural numbers within an inclusive range
         /// </summary>
         /// <param name="min">The minimum value</param>
         /// <param name="max">The maximum value</param>
-        /// <returns></returns>
         public static IEnumerable<NatSeq> reflect(uint min, uint max)
         {
             for(var i = min; i<= max; i++)
@@ -105,43 +98,28 @@ namespace Z0
         [MethodImpl(Inline)]   
         public static K nat<K>()
             where K : unmanaged, ITypeNat
-                => new K(); 
+                => default;
 
         [MethodImpl(Inline)]   
-        public static Next<K> next<K>()
+        public static Next<K> next<K>(K nat = default)
             where K : unmanaged, ITypeNat
-                => new Next<K>();
+                => default;
+
+        [MethodImpl(Inline)]   
+        public static Prior<K> prior<K>(K nat = default)
+            where K : unmanaged, ITypeNat
+                => default;
 
         /// <summary>
-        /// Recuces the representation to canonical form
+        /// Defines a relative to a natural base
         /// </summary>
-        /// <typeparam name="S">The source natural</typeparam>
-        /// <typeparam name="T">The target natural</typeparam>
-        [MethodImpl(Inline)]   
-        public static T reduce<S,T>()
-            where S : unmanaged, ITypeNat
-            where T : unmanaged, ITypeNat
-        {                        
-            var tval = Nat.nat<T>();
-            var sval = Nat.nat<S>();
-            NatProve.eq(tval, sval);
-            return tval;
-        }
-
-        [MethodImpl(Inline)]   
-        public static Next<K> next<K>(K nat)
-            where K : unmanaged, ITypeNat
-                => new Next<K>();
-
-        [MethodImpl(Inline)]   
-        public static Prior<K> prior<K>()
-            where K : unmanaged, ITypeNat
-                => new Prior<K>();
-
-        [MethodImpl(Inline)]   
-        public static Prior<K> prior<K>(K nat)
-            where K : unmanaged, ITypeNat
-                => new Prior<K>();
+        /// <param name="src">The source value</param>
+        /// <typeparam name="T">The digit's enumeration type</typeparam>
+        /// <typeparam name="N">The natural base type</typeparam>
+        public static Digit<N,T> digit<N,T>(T src, N @base = default)
+            where N : unmanaged, ITypeNat
+            where T : unmanaged
+                => new Digit<N,T>(src);
 
         /// <summary>
         /// Constructs (k1,k2) where k1:K2 & k2:K2 
@@ -149,14 +127,13 @@ namespace Z0
         /// <typeparam name="K1">The first nat type</typeparam>
         /// <typeparam name="K2">The second type</typeparam>
         [MethodImpl(Inline)]   
-        public static (ulong k1, ulong k2) pair<K1,K2>()
+        public static (ulong k1, ulong k2) pair<K1,K2>(K1 k1 = default, K2 k2 = default)
             where K2 : unmanaged, ITypeNat
             where K1 : unmanaged, ITypeNat
                 => (natu<K1>(), natu<K2>());            
 
-
         [MethodImpl(Inline)]   
-        public static (int k1, int k2) pairi<K1,K2>()
+        public static (int k1, int k2) pairi<K1,K2>(K1 k1 = default, K2 k2 = default)
             where K2 : unmanaged, ITypeNat
             where K1 : unmanaged, ITypeNat
                 => (nati<K1>(), nati<K2>());            
@@ -168,43 +145,11 @@ namespace Z0
         /// <typeparam name="K2">The second type</typeparam>
         /// <typeparam name="K3">The thrid type</typeparam>
         [MethodImpl(Inline)]   
-        public static (ulong k1, ulong k2, ulong k3) triple<K1,K2,K3>()
+        public static (ulong k1, ulong k2, ulong k3) triple<K1,K2,K3>(K1 k1 = default, K2 k2 = default, K3 k3 = default)
             where K2 : unmanaged, ITypeNat
             where K1 : unmanaged, ITypeNat
             where K3 : unmanaged, ITypeNat
                 => (natu<K1>(),natu<K2>(), natu<K3>());            
-
-        /// <summary>
-        /// Contructs the canonical 1-element natural sequence for a primitive natural
-        /// </summary>
-        /// <typeparam name="K">A representative type</typeparam>
-        [MethodImpl(Inline)]   
-        public static NatSeq natseq<K>()
-            where K : INatPrimitive<K>,new()
-                => new K().seq;
-
-        /// <summary>
-        /// Constructs the canonical 2-element natural sequence for the 2-digit natural number k such that
-        /// {k1:K1, k2:K2} => k = k1*10 + k2
-        /// </summary>
-        /// <typeparam name="K1">The first nat type, corresponding the first digit of the associated value</typeparam>
-        /// <typeparam name="K2">The second nat type, corresponding the second digit of the associated value</typeparam>
-        [MethodImpl(Inline)]   
-        public static NatSeq<K1,K2> seq<K1,K2>()
-            where K1 : unmanaged, INatPrimitive<K1>
-            where K2 : unmanaged, INatPrimitive<K2>
-                => NatSeq<K1,K2>.Rep;
-
-        /// <summary>
-        /// Constructs a nondegenerate interval bounded by natural types
-        /// </summary>
-        /// <typeparam name="K1">The type of the left endpoint</typeparam>
-        /// <typeparam name="K2">The type of the right endpoint</typeparam>
-        [MethodImpl(Inline)]   
-        public static NatInterval<K1,K2> interval<K1,K2>()
-            where K1 : unmanaged, ITypeNat, INatLt<K1,K2>
-            where K2 : unmanaged, ITypeNat
-                => new NatInterval<K1,K2>(natrep<K1>(), natrep<K2>());
 
         /// <summary>
         /// Constructs a natural representative that encodes the sum of two naturals
@@ -269,49 +214,50 @@ namespace Z0
         /// <typeparam name="K1">The first dimensional factor</typeparam>
         /// <typeparam name="K2">The second dimensional factor</typeparam>
         [MethodImpl(Inline)]   
-        public static Dim<K1,K2> dim<K1,K2>()
+        public static Dim<K1,K2> dim<K1,K2>(K1 k1 = default, K2 k2 = default)
             where K1 : unmanaged, ITypeNat        
             where K2 : unmanaged, ITypeNat
-                => Dim<K1,K2>.Rep;
-
-        /// <summary>
-        /// Constructs the natural dimension (k1,k2) where k1:K1 & k2:K2 
-        /// </summary>
-        /// <typeparam name="K1">The first dimensional factor</typeparam>
-        /// <typeparam name="K2">The second dimensional factor</typeparam>
-        [MethodImpl(Inline)]   
-        public static Dim<K1,K2> dim<K1,K2>(K1 k1, K2 k2)
-            where K1 : unmanaged, ITypeNat        
-            where K2 : unmanaged, ITypeNat
-                => Dim<K1,K2>.Rep;
+                => default;
 
         /// <summary>
         /// Constructs the natural dimension (k1,k2,k3) where k1:K1 & k2:K2 & k3:K3
         /// </summary>
         [MethodImpl(Inline)]   
-        public static Dim<K1,K2,K3> dim<K1,K2,K3>()
+        public static Dim<K1,K2,K3> dim<K1,K2,K3>(K1 k1 = default, K2 k2 = default, K3 k3 = default)
             where K1 : unmanaged, ITypeNat        
             where K2 : unmanaged, ITypeNat
             where K3 : unmanaged, ITypeNat
-                => Dim<K1,K2,K3>.Rep;
+                => default;
+
+        /// <summary>
+        /// Constructs the canonical 2-element natural sequence for the 2-digit natural number k such that
+        /// {k1:K1, k2:K2} => k = k1*10 + k2
+        /// </summary>
+        /// <typeparam name="K1">The first nat type, corresponding the first digit of the associated value</typeparam>
+        /// <typeparam name="K2">The second nat type, corresponding the second digit of the associated value</typeparam>
+        [MethodImpl(Inline)]   
+        public static NatSeq<K1,K2> seq<K1,K2>(K1 k1 = default, K2 k2 = default)
+            where K1 : unmanaged, INatPrimitive<K1>
+            where K2 : unmanaged, INatPrimitive<K2>
+                => NatSeq<K1,K2>.Rep;
 
         /// <summary>
         /// Constructs the canonical 3-element natural sequence for the 3-digit natural number k such that
         /// {k1:K1, k2:K2, k3:K3} => k = k1*10^2 + k2*10^1 + k3
         /// </summary>
         [MethodImpl(Inline)]   
-        public static NatSeq<K1,K2,K3> seq<K1,K2,K3>()
+        public static NatSeq<K1,K2,K3> seq<K1,K2,K3>(K1 k1 = default, K2 k2 = default, K3 k3 = default)
             where K1 : unmanaged, INatPrimitive<K1>
             where K2 : unmanaged, INatPrimitive<K2>
             where K3 : unmanaged, INatPrimitive<K3>
-                => NatSeq<K1,K2,K3>.Rep;
+                => default;
         
         /// <summary>
         /// Constructs the canonical 4-element natural sequence for the 4-digit natural number k such that
         /// {k1:K1, ..., k4:K4} => k = k1*10^3 + k2*10^2 + k3*10 + K4
         /// </summary>
         [MethodImpl(Inline)]   
-        public static NatSeq<K1,K2,K3,K4> seq<K1,K2,K3,K4>()
+        public static NatSeq<K1,K2,K3,K4> seq<K1,K2,K3,K4>(K1 k1 = default, K2 k2 = default, K3 k3 = default, K4 k4 = default)
             where K1 : unmanaged, INatPrimitive<K1>
             where K2 : unmanaged, INatPrimitive<K2>
             where K3 : unmanaged, INatPrimitive<K3>
@@ -323,7 +269,7 @@ namespace Z0
         /// {k1:K1 ... k5:K5} => k = k1*10^4 + k2*10^3 + k3*10^2 + K4*10 + k5
         /// </summary>
         [MethodImpl(Inline)]   
-        public static NatSeq<K1,K2,K3,K4,K5> seq<K1,K2,K3,K4,K5>()
+        public static NatSeq<K1,K2,K3,K4,K5> seq<K1,K2,K3,K4,K5>(K1 k1 = default, K2 k2 = default, K3 k3 = default, K4 k4 = default, K5 k5 = default)
             where K1 : unmanaged, INatPrimitive<K1>
             where K2 : unmanaged, INatPrimitive<K2>
             where K3 : unmanaged, INatPrimitive<K3>
@@ -336,44 +282,29 @@ namespace Z0
         /// {k1:K1, ..., k6:K6} => k = k1*10^5 + k2*10^4 + k3*10^3 + K4*10^2 + k5*10 + k6
         /// </summary>
         [MethodImpl(Inline)]   
-        public static NatSeq<K1,K2,K3,K4,K5,K6> seq<K1,K2,K3,K4,K5,K6>()
+        public static NatSeq<K1,K2,K3,K4,K5,K6> seq<K1,K2,K3,K4,K5,K6>(K1 k1 = default, K2 k2 = default, K3 k3 = default, K4 k4 = default, K5 k5 = default, K6 k6 = default)
             where K1 : unmanaged, INatPrimitive<K1>
             where K2 : unmanaged, INatPrimitive<K2>
             where K3 : unmanaged, INatPrimitive<K3>
             where K4 : unmanaged, INatPrimitive<K4>
             where K5 : unmanaged, INatPrimitive<K5>
             where K6 : unmanaged, INatPrimitive<K6>
-                => default;
-   
-   
-        /// <summary>
-        /// Partitions a seequence into segments of a specified natural width
-        /// </summary>
-        /// <param name="src">The source sequence</param>
-        /// <typeparam name="W">The width type</typeparam>
-        /// <typeparam name="T">The element type</typeparam>
-        public static IEnumerable<IReadOnlyList<T>> partition<W,T>(IEnumerable<T> src)
-            where W : unmanaged, ITypeNat
-        {
-            var width = natu<W>();
-            var sement = new T[width];
-            var current = 0UL;
-            foreach(var item in src)
-            {
-                if(current == width)
-                {
-                    current = 0;
-                    yield return sement;
-                    sement = new T[width];
-                }
-                    
-                sement[current++] = item;
-            }
+                => default;      
 
-            for(var i = current; i < width; i++)
-                sement[i] = default(T);
-            
-            yield return sement;
+        /// <summary>
+        /// Recuces the representation to canonical form
+        /// </summary>
+        /// <typeparam name="K1">The source natural</typeparam>
+        /// <typeparam name="K2">The target natural</typeparam>
+        [MethodImpl(Inline)]   
+        public static K2 reduce<K1,K2>(K1 k1 = default, K2 k2 = default)
+            where K1 : unmanaged, ITypeNat
+            where K2 : unmanaged, ITypeNat
+        {                        
+            var tval = Nat.nat<K2>();
+            var sval = Nat.nat<K1>();
+            NatProve.eq(tval, sval);
+            return tval;
         }
 
     }

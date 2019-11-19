@@ -9,24 +9,19 @@ namespace Z0
     
     using static constant;    
 
-    public readonly struct N18 : INatSeq<N18>
+    public readonly struct N18 : INatSeq<N18>, INatEven<N18>
     {
-        public static N18 Rep => default;
-
         public static NatSeq<N1,N8> Seq => default;
 
         [MethodImpl(Inline)]
         public static implicit operator int(N18 src)
-            => (int)src.value;
+            => (int)src.NatValue;
 
-        public ITypeNat rep 
-            => Rep;
-
-        public NatSeq seq 
+        public NatSeq Sequence 
             => Seq;
 
-        public ulong value 
-            => Seq.value;
+        public ulong NatValue 
+            => Seq.NatValue;
 
         public override string ToString() 
             => Seq.format();

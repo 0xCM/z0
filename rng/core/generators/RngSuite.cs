@@ -21,7 +21,7 @@ namespace Z0
     {
         readonly IPolyrand[] members;
 
-        static readonly int n = (int)new N().value;        
+        static readonly int n = (int)new N().NatValue;        
 
         public RngSuite(IPolyrand[] members)
         {

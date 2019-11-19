@@ -25,7 +25,7 @@ namespace Z0
         where N : unmanaged, ITypeNat
     {
         BitSize Size 
-            => new N().value;
+            => new N().NatValue;
 
     }
 

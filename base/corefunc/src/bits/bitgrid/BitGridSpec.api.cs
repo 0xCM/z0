@@ -26,6 +26,6 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where M : unmanaged, ITypeNat
             where T : unmanaged
-                => new BitGridSpec<T>(bitsize<T>(), (int)m.value, (int)n.value);
+                => new BitGridSpec<T>(bitsize<T>(), (int)m.NatValue, (int)n.NatValue);
     }
 }

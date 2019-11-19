@@ -6,11 +6,9 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using static nfunc;
 
     public static class Pow2N
     {        
-
         public static N1 T00 => default;
 
         public static N2 T01 => default;
@@ -41,6 +39,7 @@ namespace Z0
 
         public static N16384 T14 => default;
 
+        public static N32768 T15 => default;
 
     }
 

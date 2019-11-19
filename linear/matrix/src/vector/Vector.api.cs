@@ -32,13 +32,13 @@ namespace Z0
         public static Vector<N,T> alloc<N,T>(N n = default)
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                =>  alloc<T>((int)n.value);
+                =>  alloc<T>((int)n.NatValue);
 
         [MethodImpl(Inline)]
         public static Vector<N,T> alloc<N,T>(N n, T fill)
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                =>  alloc<T>((int)n.value, fill);
+                =>  alloc<T>((int)n.NatValue, fill);
 
         [MethodImpl(Inline)]
         public static Vector<T> load<T>(T[] src)

@@ -15,11 +15,11 @@ namespace Z0
     /// </summary>
     /// <typeparam name="N">The matrix order</typeparam>
     /// <typeparam name="T">The element type</typeparam>
-    public ref struct BitMatrix<N,T>
+    public readonly ref struct BitMatrix<N,T>
         where N : unmanaged, ITypeNat
         where T : unmanaged
     {        
-        Span<T> data;
+        readonly Span<T> data;
 
         public static BitMatrix<N,T> Identity => BitMatrix.identity<N,T>();
 
@@ -30,7 +30,7 @@ namespace Z0
         /// <summary>
         /// Specifies the square matrix dimension
         /// </summary>
-        public int Order => (int)new N().value;
+        public int Order => (int)new N().NatValue;
 
         /// <summary>
         /// Allocates a Zero-filled NxN matrix

@@ -13,21 +13,21 @@ namespace Z0
     /// </summary>
     /// <typeparam name="K">An even natural type</typeparam>
     public readonly struct NatEven<K> : INatEven<K>
-        where K: unmanaged, ITypeNat
+        where K: unmanaged, ITypeNat<K>
     {
         static readonly K k = default;
         static readonly string description = $"{k} % {2} = {0}";
         
         public NatEven(K n)
-            => valid = demand(n.value % 2 == 0);
+            => valid = demand(n.NatValue % 2 == 0);
         
         public bool valid {get;}
 
-        public ulong value 
-            => k.value;
+        public ulong NatValue 
+            => k.NatValue;
 
-        public NatSeq seq 
-            => k.seq;
+        public NatSeq Sequence 
+            => k.Sequence;
 
         public string format()
             => valid ? description: $"INVALID({description})";    

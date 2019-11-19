@@ -25,7 +25,7 @@ namespace Z0
         static readonly string description = $"{k1} % {k2} = {k3}";
 
         public NatMod(K1 k1, K2 k2, K3 k3)
-            => valid = demand(k1.value % k2.value == k3.value);
+            => valid = demand(k1.NatValue % k2.NatValue == k3.NatValue);
         
         public bool valid {get;}
 

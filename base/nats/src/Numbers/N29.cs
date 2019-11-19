@@ -11,22 +11,17 @@ namespace Z0
 
     public readonly struct N29 : INatSeq<N29>
     {
-        public static N29 Rep => default;
-
         public static NatSeq<N2,N9> Seq => default;
 
         [MethodImpl(Inline)]
         public static implicit operator int(N29 src)
-            => (int)src.value;
+            => (int)src.NatValue;
 
-        public ITypeNat rep 
-            => Rep;
-
-        public NatSeq seq 
+        public NatSeq Sequence 
             => Seq;
 
-        public ulong value 
-            => Seq.value;
+        public ulong NatValue 
+            => Seq.NatValue;
 
         public override string ToString() 
             => Seq.format();

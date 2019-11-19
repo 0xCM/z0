@@ -64,7 +64,7 @@ namespace Z0.Test
         void bv_disable_ng707x64u()
         {
             var n707 = nat(n7,n0,n7);
-            Claim.eq(707,(int)n707.value);
+            Claim.eq(707,(int)n707.NatValue);
             bv_disable_ng_check(n707, (ulong)0);
 
         }
@@ -96,7 +96,7 @@ namespace Z0.Test
             {
                 var bv = Random.BitVector<N,T>();
                 var bs = bv.ToBitString();
-                Claim.eq(bv.Length, n.value);
+                Claim.eq(bv.Length, n.NatValue);
                 Claim.eq(bv.Length, bs.Length);
                 for(var i=0; i<bv.Length; i+= 2)
                 {

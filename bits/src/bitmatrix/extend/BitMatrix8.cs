@@ -89,6 +89,12 @@ namespace Z0
         public static BitMatrix8 Transpose(this BitMatrix8 A)
             => BitMatrix.transpose(A);
  
+        [MethodImpl(Inline)]
+        public static BitMatrix8 AndNot(this BitMatrix8 A, in BitMatrix8 B)
+            => BitMatrix.cnotimply(A, B);
+
+
+
         /// <summary>
         /// Creates a new matrix by cloning the existing matrix or allocating a matrix with the same structure
         /// </summary>

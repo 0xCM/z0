@@ -5,22 +5,16 @@
 namespace Z0
 {
     using System;
-    using System.Numerics;
-    using System.Collections.Generic;
-    using System.Collections.Concurrent;
-    using System.Reflection;
     using System.Runtime.CompilerServices;
     
     using static constant;
 
-
-
     /// <summary>
-    /// Encodes a natural number k such that k1:K1 & k2:K2 => k = k1*k2
+    /// Encodes a natural number k := k1*k2
     /// </summary>
     public readonly struct Product<K1, K2> : INatProduct<Product<K1,K2>, K1,K2>
-            where K1 : unmanaged, ITypeNat
-            where K2 : unmanaged, ITypeNat
+        where K1 : unmanaged, ITypeNat
+        where K2 : unmanaged, ITypeNat
     {
         static K1 k1 => default;
 
@@ -28,7 +22,7 @@ namespace Z0
 
         public static Product<K1,K2> Rep => default;        
         
-        public static ulong Value => k1.value * k2.value;
+        public static ulong Value => k1.NatValue * k2.NatValue;
 
         static string description => $"{k1} * {k2} = {Value}";
 
@@ -39,20 +33,20 @@ namespace Z0
         public ITypeNat rep 
             => Rep;
 
-        public NatSeq seq
+        public NatSeq Sequence
             => Seq;
 
-        public ulong value 
+        public ulong NatValue 
             => Value;
 
         public NatSeq natseq()
             => Seq;
 
         public bool Equals(Pow<K1, K2> other)
-            => Value == other.value;
+            => Value == other.NatValue;
 
         public bool Equals(NatSeq other)
-            => Value == other.value;
+            => Value == other.NatValue;
 
          public string format()
             => description;

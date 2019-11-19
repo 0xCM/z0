@@ -21,7 +21,7 @@ namespace Z0
         static readonly string description = $"{k1} < {k2}";
 
         public NatLt(K1 n1, K2 n2)
-            => valid = demand(n1.value < n2.value);
+            => valid = demand(n1.NatValue < n2.NatValue);
         
         public bool valid {get;}
 

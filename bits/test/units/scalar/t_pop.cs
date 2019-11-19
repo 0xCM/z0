@@ -56,7 +56,7 @@ namespace Z0
                 pop3 += Bits.pop(src[i],0,0);
             }
 
-            var pop1 = Bits.pop(x0,x1,x2);
+            var pop1 = Bits.vpop(x0,x1,x2);
             Claim.eq(pop2,pop3);
             Claim.eq(pop1,pop3);
 
@@ -114,7 +114,7 @@ namespace Z0
                 var z = Random.CpuVector<ulong>(n);
                 counter.Start();
                 for(var i=0; i<SampleSize; i++)
-                    total += Bits.pop(x,y,z);
+                    total += Bits.vpop(x,y,z);
                 counter.Stop();
             }
             Benchmark($"pop3x256", counter,(int)total);
@@ -180,7 +180,7 @@ namespace Z0
             where N : unmanaged, ITypeNat
         {
             
-            var len = (int)(Mod8.div((uint)n.value) + (Mod8.mod((uint)n.value) != 0 ? 1 : 0));
+            var len = (int)(Mod8.div((uint)n.NatValue) + (Mod8.mod((uint)n.NatValue) != 0 ? 1 : 0));
             
             var src = Random.Span<byte>(len);
 

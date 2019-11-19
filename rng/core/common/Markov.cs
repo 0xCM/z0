@@ -106,7 +106,7 @@ namespace Z0
         {
             var tol = .001;
             var radius = closed(1 - tol,1 + tol);   
-            for(var r = 0; r < (int)n.value; r ++)
+            for(var r = 0; r < (int)n.NatValue; r ++)
             {
                 var row = src.Row(r);
                 var sum =  convert<T,double>(mathspan.sum(row.Unsized));

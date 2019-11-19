@@ -4,14 +4,9 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Threading;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
     using System.Runtime.Intrinsics;
     using System.Runtime.Intrinsics.X86;
-
-    using static As;
 
     using static zfunc;
 
@@ -19,10 +14,10 @@ namespace Z0
     /// Defines a sequence of generic bitvectors, interpreted as rows, for which the width is determined by 
     /// the bitvector primal type
     /// </summary>
-    public ref struct RowBits<T>
+    public readonly ref struct RowBits<T>
         where T : unmanaged
     {
-        internal Span<T> data;
+        readonly internal Span<T> data;
 
         public static int Width 
         {

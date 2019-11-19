@@ -11,59 +11,21 @@ namespace Z0
     using static nfunc;
     using static constant;
     
-    public static class NatDigits
-    {
-        /// <summary>
-        /// Defines a generic digit based on a digit enumeration value
-        /// in the context of a natural base
-        /// </summary>
-        /// <param name="src">The source value</param>
-        /// <typeparam name="T">The digit's enumeration type</typeparam>
-        /// <typeparam name="N">The natural base type</typeparam>
-        public static Digit<N,T> Define<N,T>(T src)
-            where N : unmanaged, ITypeNat
-            where T : Enum
-                => new Digit<N,T>(src);
-
-        /// <summary>
-        /// Defines a generic digit based on a digit enumeration value
-        /// in the context of a natural base
-        /// </summary>
-        /// <param name="src">The source value</param>
-        /// <typeparam name="T">The digit's enumeration type</typeparam>
-        /// <typeparam name="N">The natural base type</typeparam>
-        public static Digit<N,T> Define<N,T>(T src, N b)
-            where N : unmanaged, ITypeNat
-            where T : Enum
-                => new Digit<N,T>(src);
-    }
-
-    public interface IDigit<N,S,T>
-        where N : unmanaged, ITypeNat
-        where S : IDigit<N,S,T>
-        where T : Enum
-    {
-
-    }
-
     /// <summary>
     /// Defines a generic digit representation realtive to a natural base
     /// </summary>
     /// <typeparam name="N">The natural base type</typeparam>
-    /// <typeparam name="T">The digit's enumeration type</typeparam>
+    /// <typeparam name="T">The digit's primal type</typeparam>
     public readonly struct Digit<N,T> : IDigit<N,Digit<N,T>,T>
-        where T : Enum
+        where T : unmanaged
         where N : unmanaged, ITypeNat
     {
-        /// <summary>
-        /// Specifies the value of the structurel digit corresponding to 0
-        /// </summary>
-        public static readonly Digit<N,T> Zero = default;
+        readonly T value;
 
         /// <summary>
         /// Specifies the integral value value of the natural base
         /// </summary>
-        public static readonly uint Base = (uint)natu<N>();
+        public static uint Base => (uint)natu<N>();
 
         [MethodImpl(Inline)]
         public static bool operator ==(Digit<N,T> lhs, Digit<N,T> rhs)
@@ -80,9 +42,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator T(Digit<N,T> src)
             => src.value;
-
-
-        readonly T value;
 
         [MethodImpl(Inline)]
         public Digit(T src)
@@ -116,6 +75,5 @@ namespace Z0
         public override string ToString()
             => format();
     }
-
 
 }

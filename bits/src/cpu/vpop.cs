@@ -35,8 +35,7 @@ namespace Z0
 
         static Vector256<ulong> K2 => dinx.vbroadcast(n256, k2);
 
-        static Vector256<ulong> K4 => dinx.vbroadcast(n256, k4);
-        
+        static Vector256<ulong> K4 => dinx.vbroadcast(n256, k4);        
 
         static Vector128<ulong> v128K1 => dinx.vbroadcast(n128, k1);
 
@@ -44,32 +43,6 @@ namespace Z0
 
         static Vector128<ulong> v128K4 => dinx.vbroadcast(n128, k4);
         
-
-        /// <summary>
-        /// Computes the population count of the content of 3 64-bit unsigned integers
-        /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        /// <param name="z"></param>
-        [MethodImpl(Inline)]
-        public static uint pop (ulong x, ulong y, ulong z) 
-        {
-            var maj = ((x ^ y ) & z) | (x & y);
-            var odd = ((x ^ y ) ^ z);
-            
-            maj =  maj - ((maj >> 1) & k1 );
-            odd =  odd - ((odd >> 1) & k1 );
-            
-            maj = (maj & k2) + ((maj >> 2) & k2);
-            odd = (odd & k2) + ((odd >> 2) & k2);
-            
-            maj = (maj + (maj >> 4)) & k4;
-            odd = (odd + (odd >> 4)) & k4;
-            
-            odd = ((maj + maj + odd) * kf ) >> 56;
-            return (uint) odd;
-        }        
-
         /// <summary>
         /// Computes the population count of the content of 3 128-bit vectors
         /// </summary>
@@ -80,7 +53,7 @@ namespace Z0
         /// This is a vectorization of the scalar algorithm found at https://www.chessprogramming.org/Population_Count
         /// </remarks>
         [MethodImpl(Inline)]
-        public static uint pop(Vector128<ulong> x, Vector128<ulong> y, Vector128<ulong> z)
+        public static uint vpop(Vector128<ulong> x, Vector128<ulong> y, Vector128<ulong> z)
         {
             var k1 = v128K1;
             var k2 = v128K2;
@@ -119,7 +92,7 @@ namespace Z0
         /// This is a vectorization of the scalar algorithm found at https://www.chessprogramming.org/Population_Count
         /// </remarks>
         [MethodImpl(Inline)]
-        public static uint pop(Vector256<ulong> x, Vector256<ulong> y, Vector256<ulong> z)
+        public static uint vpop(Vector256<ulong> x, Vector256<ulong> y, Vector256<ulong> z)
         {
             var k1 = K1;
             var k2 = K2;

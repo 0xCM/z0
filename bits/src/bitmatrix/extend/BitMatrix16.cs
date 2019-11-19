@@ -78,6 +78,10 @@ namespace Z0
         public static BitMatrix16 Transpose(this BitMatrix16 A)
             => BitMatrix.transpose(A);
 
+        [MethodImpl(Inline)]
+        public static BitMatrix16 AndNot(this BitMatrix16 A, in BitMatrix16 B)
+            => BitMatrix.cnotimply(A, B);
+
     }
 
 }

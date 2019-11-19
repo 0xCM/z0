@@ -9,9 +9,10 @@ namespace Z0
 
     using static constant;    
 
-    public readonly struct N256 : INatSeq<N256>, 
-        INatPow<N256, N2,N8>,
-        INatPow2<N8>
+    public readonly struct N256 : INatSeq<N256>, INatPow<N256, N2,N8>, INatPow2<N8>, 
+        INatDivisible<N256,N4>, INatDivisible<N256,N8>, INatDivisible<N256,N16>, 
+        INatDivisible<N256,N32>, INatDivisible<N256,N64>, INatDivisible<N256,N128>         
+
     {
         public static N256 Rep => default;
 
@@ -19,16 +20,14 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator int(N256 src)
-            => (int)src.value;
+            => (int)src.NatValue;
 
-        public ITypeNat rep 
-            => Rep;
 
-        public NatSeq seq 
-            => Seq.seq;
+        public NatSeq Sequence 
+            => Seq.Sequence;
 
-        public ulong value 
-            => Seq.value;
+        public ulong NatValue 
+            => Seq.NatValue;
 
         ITypeNat INatPow2.Exponent 
             => N8.Rep;

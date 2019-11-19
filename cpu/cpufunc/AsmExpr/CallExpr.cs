@@ -27,7 +27,7 @@ namespace Z0
         where N : unmanaged, ITypeNat
     {
         public readonly int ArgCount
-            = (int)new N().value;
+            = (int)new N().NatValue;
 
         /// <summary>
         /// Specfies the function identifier

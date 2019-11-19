@@ -13,7 +13,7 @@ namespace Z0
         where N : unmanaged, ITypeNat
 
     {
-        static readonly int MemberCount = (int)new N().value;
+        static readonly int MemberCount = (int)new N().NatValue;
         
         readonly WyHash64[] Generators = new WyHash64[MemberCount];
 

@@ -55,7 +55,7 @@ namespace Z0
         /// <typeparam name="K">An even natural type</typeparam>
         [MethodImpl(Inline)]
         public static NatEven<K> even<K>()
-            where K: unmanaged, ITypeNat
+            where K: unmanaged, ITypeNat<K>
                 => new NatEven<K>(natrep<K>());
 
         /// <summary>
@@ -66,7 +66,7 @@ namespace Z0
         /// <typeparam name="K">An even natural type</typeparam>
         [MethodImpl(Inline)]
         public static NatEven<K> even<K>(K k)
-            where K: unmanaged, ITypeNat
+            where K: unmanaged, ITypeNat<K>
                 => new NatEven<K>(k);
 
         /// <summary>

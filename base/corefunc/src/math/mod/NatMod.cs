@@ -23,7 +23,7 @@ namespace Z0
         /// <summary>
         /// The fixed 64-bit modulus for the generic closure
         /// </summary>
-        public static readonly ulong M64 = new N().value;
+        public static readonly ulong M64 = new N().NatValue;
         
         /// <summary>
         /// The fixed 32-bit modulus for the generic closure

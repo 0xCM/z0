@@ -5,34 +5,9 @@
 namespace Z0
 {
     using System;
-    using System.Numerics;
-    using System.Collections.Generic;
-    using System.Collections.Concurrent;
-    using System.Reflection;
     using System.Runtime.CompilerServices;
 
     using static constant;
-
-    /// <summary>
-    /// Characterizes the reification of a natural number k such that 
-    /// a:K1 & b:K2 & k = a + b
-    /// </summary>
-    /// <typeparam name="K2">The base type</typeparam>
-    /// <typeparam name="E">The exponent type</typeparam>
-    public interface INatSum<K1,K2> : ITypeNat
-        where K1 : unmanaged, ITypeNat
-        where K2 : unmanaged, ITypeNat
-    {
-
-    }
-
-    public interface INatSum<K> : ITypeNat
-        where K : unmanaged, ITypeNat
-    {
-        ITypeNat Lhs {get;}        
-
-        ITypeNat Rhs {get;}
-    }
 
     public readonly struct NatSum<K> : INatSum<K>
         where K : unmanaged, ITypeNat
@@ -49,11 +24,11 @@ namespace Z0
 
         public ITypeNat Rhs {get;}
 
-        NatSeq ITypeNat.seq
-            => Rep.seq;
+        NatSeq ITypeNat.Sequence
+            => Rep.Sequence;
 
-        ulong ITypeNat.value
-            => Rep.value;
+        ulong ITypeNat.NatValue
+            => Rep.NatValue;
 
 
     }
@@ -71,7 +46,7 @@ namespace Z0
         public static NatSum<K1,K2> Rep => default;
 
         
-        public static ulong Value => k1.value + k2.value;
+        public static ulong Value => k1.NatValue + k2.NatValue;
 
         static string description => $"{k1} + {k2} = {Value}";
 
@@ -83,10 +58,10 @@ namespace Z0
         public static implicit operator int(NatSum<K1,K2> src)
             => (int)src.value;
 
-        NatSeq ITypeNat.seq
+        NatSeq ITypeNat.Sequence
             => Seq;
 
-        ulong ITypeNat.value 
+        ulong ITypeNat.NatValue 
             => Value;
 
         public ulong value 
@@ -96,10 +71,10 @@ namespace Z0
             => Seq;
 
         public bool Equals(Pow<K1, K2> other)
-            => Value == other.value;
+            => Value == other.NatValue;
 
         public bool Equals(NatSeq other)
-            => Value == other.value;
+            => Value == other.NatValue;
 
         public override string ToString() 
             => description;
@@ -114,7 +89,7 @@ namespace Z0
         public NatSum<K> Reduce<K>(K target = default)
             where K : unmanaged, ITypeNat
         {
-            if(Value == target.value)
+            if(Value == target.NatValue)
                 return new NatSum<K>(k1,k2);
             else 
                 throw new Exception($"{k1} + {k2} != {target}");

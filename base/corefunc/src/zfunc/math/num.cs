@@ -240,7 +240,7 @@ partial class zfunc
         where T : unmanaged
         where N : unmanaged, ITypeNat
     {
-        var last = convert<T>(n.value);
+        var last = convert<T>(n.NatValue);
         return range(first,last);
     }
 

@@ -19,10 +19,10 @@ namespace Z0
     /// A System.Span[T] clone where the  encasulated data is always a multiple 
     /// of 16 bytes = 128 bits
     /// </summary>
-    public ref struct Span128<T>
+    public readonly ref struct Span128<T>
         where T : unmanaged
     {
-        Span<T> data;
+        readonly Span<T> data;
 
         /// <summary>
         /// The number of cells in the block
@@ -43,23 +43,23 @@ namespace Z0
         public static int CellSize => BlockSize / BlockLength;
 
         [MethodImpl(Inline)]
-        public static implicit operator Span<T>(Span128<T> src)
+        public static implicit operator Span<T>(in Span128<T> src)
             => src.data;
 
         [MethodImpl(Inline)]
-        public static implicit operator ReadOnlySpan<T> (Span128<T> src)
+        public static implicit operator ReadOnlySpan<T> (in Span128<T> src)
             => src.ReadOnly();
 
         [MethodImpl(Inline)]
-        public static implicit operator ReadOnlySpan128<T> (Span128<T> src)
+        public static implicit operator ReadOnlySpan128<T> (in Span128<T> src)
             => ReadOnlySpan128<T>.Load(src);
 
         [MethodImpl(Inline)]
-        public static bool operator == (Span128<T> lhs, Span128<T> rhs)
+        public static bool operator == (in Span128<T> lhs, in Span128<T> rhs)
             => lhs.data == rhs.data;
 
         [MethodImpl(Inline)]
-        public static bool operator != (Span128<T> lhs, Span128<T> rhs)
+        public static bool operator != (in Span128<T> lhs, in Span128<T> rhs)
             => lhs.data != rhs.data;
         
         [MethodImpl(Inline)]

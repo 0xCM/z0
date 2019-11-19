@@ -8,8 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static zfunc;
-    using static As;
-    using static BitParts;
 
     partial class BitMatrix
     {

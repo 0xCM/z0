@@ -7,17 +7,16 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
-    using System.Collections.Generic;
 
     using static zfunc;    
 
-    public ref struct BitCells<T>
+    public readonly ref struct BitCells<T>
         where T : unmanaged
     {
         /// <summary>
         /// The bitvector content, indexed via a bitmap
         /// </summary>
-        Span256<T> data;
+        readonly Span256<T> data;
     
         /// <summary>
         /// Correlates linear bit positions and storage segments
@@ -46,7 +45,7 @@ namespace Z0
 
         public static BitCells<T> Zero => new BitCells<T>(BlockedSpan.alloc<T>(n256));
 
-        public static  int StepSize => 256 / bitsize<T>();
+        public static int StepSize => 256 / bitsize<T>();
 
         /// <summary>
         /// Computes the number of cells required to hold a specified number of bits
@@ -125,7 +124,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static BitCells<T> operator &(BitCells<T> x, BitCells<T> y)
+        public static BitCells<T> operator &(in BitCells<T> x, in BitCells<T> y)
             => Zero;
 
         /// <summary>
@@ -134,7 +133,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static BitCells<T> operator |(BitCells<T> x, BitCells<T> y)
+        public static BitCells<T> operator |(in BitCells<T> x, in BitCells<T> y)
             => Zero;
 
         /// <summary>
@@ -143,11 +142,11 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static BitCells<T> operator ^(BitCells<T> x, BitCells<T> y)
+        public static BitCells<T> operator ^(in BitCells<T> x, in BitCells<T> y)
             => Zero;
 
         [MethodImpl(Inline)]
-        public static bit operator %(BitCells<T> x, BitCells<T> y)
+        public static bit operator %(in BitCells<T> x, in BitCells<T> y)
             => dot(x,y);
 
         /// <summary>
@@ -155,7 +154,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The source operand</param>
         [MethodImpl(Inline)]
-        public static BitCells<T> operator ~(BitCells<T> src)
+        public static BitCells<T> operator ~(in BitCells<T> src)
             => default;
 
         /// <summary>
@@ -163,7 +162,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
-        public static bool operator true(BitCells<T> src)
+        public static bool operator true(in BitCells<T> src)
             => src.Nonempty;
 
         /// <summary>
@@ -171,7 +170,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
-        public static bool operator false(BitCells<T> src)
+        public static bool operator false(in BitCells<T> src)
             => !src.Nonempty;
 
         [MethodImpl(Inline)]
@@ -220,7 +219,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(NotInline)]
-        static bit dot(BitCells<T> x, BitCells<T> y)
+        static bit dot(in BitCells<T> x, in BitCells<T> y)
         {
             require(x.Length == y.Length);
 

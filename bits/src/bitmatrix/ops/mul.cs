@@ -17,7 +17,7 @@ namespace Z0
         /// </summary>
         /// <param name="A">The bitmatrix that defines the transformation</param>
         /// <param name="x">The vector to be transformed</param>
-        public static BitVector<T> mul<T>(BitMatrix<T> A, BitVector<T> x)
+        public static BitVector<T> mul<T>(in BitMatrix<T> A, in BitVector<T> x)
             where T : unmanaged
         {
             var n = BitMatrix<T>.N;
@@ -46,7 +46,7 @@ namespace Z0
         /// </summary>
         /// <param name="A">The bitmatrix that defines the transformation</param>
         /// <param name="x">The vector to be transformed</param>
-        public static BitVector8 mul(BitMatrix8 A, BitVector8 B)
+        public static BitVector8 mul(in BitMatrix8 A, in BitVector8 B)
         {
             var n = n8;
             var z = BitVector.alloc(n);
@@ -118,7 +118,7 @@ namespace Z0
             return mul(A,B, ref Z);
         }
         
-        public static BitVector16 mul(BitMatrix16 A, BitVector16 x)
+        public static BitVector16 mul(in BitMatrix16 A, in BitVector16 x)
         {
             var n = BitMatrix16.N;
             var dst = BitVector.alloc(n16);
@@ -127,7 +127,7 @@ namespace Z0
             return dst;        
         }
 
-        public static BitMatrix16 mul(BitMatrix16 A, BitMatrix16 B)
+        public static BitMatrix16 mul(in BitMatrix16 A, in BitMatrix16 B)
         {
             var n = BitMatrix16.N;
             var X = A.Replicate();
@@ -143,7 +143,7 @@ namespace Z0
             return dst;
         }
 
-        public static ref BitMatrix32 mul(ref BitMatrix32 A, BitMatrix32 B)
+        public static ref BitMatrix32 mul(ref BitMatrix32 A, in BitMatrix32 B)
         {
             var n = BitMatrix32.N;
             var C = B.Transpose();            
@@ -160,13 +160,13 @@ namespace Z0
 
         }
 
-        public static BitMatrix32 mul(BitMatrix32 A, BitMatrix32 B)
+        public static BitMatrix32 mul(BitMatrix32 A, in BitMatrix32 B)
         {
             var C = A.Replicate();
             return mul(ref C, B);
         }
 
-        public static BitVector32 mul(BitMatrix32 A, BitVector32 x)
+        public static BitVector32 mul(in BitMatrix32 A, in BitVector32 x)
         {
             const int N = 32;
             var y = BitVector.alloc(n32);
@@ -191,13 +191,13 @@ namespace Z0
             return ref A;
         }
 
-        public static BitMatrix64 mul(BitMatrix64 A, BitMatrix64 B)
+        public static BitMatrix64 mul(in BitMatrix64 A, in BitMatrix64 B)
         {
             var C = A.Replicate();
             return mul(ref C, B);
         }
 
-        public static BitVector64 mul(BitMatrix64 A, BitVector64 B)
+        public static BitVector64 mul(in BitMatrix64 A, BitVector64 B)
         {
             const int N = 64;                        
             var dst = BitVector64.Alloc();
@@ -223,7 +223,7 @@ namespace Z0
         {
             var x = A;
             var y = B.Transpose();
-            var n = (int)new N().value;
+            var n = (int)new N().NatValue;
             for(var i=0; i<n; i++)
             {
                 var row = x.RowVector(i);
@@ -259,7 +259,7 @@ namespace Z0
             where T : unmanaged
         {
             var tr = B.Transpose();
-            var n = (int)new N().value;
+            var n = (int)new N().NatValue;
             for(var i=0; i<n; i++)
             {
                 var row = A[i];

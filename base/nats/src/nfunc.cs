@@ -177,7 +177,7 @@ public static class nfunc
     public static int muli<K1,K2>(K1 k1 = default, K2 k2 = default)
         where K1 : unmanaged, ITypeNat
         where K2 : unmanaged, ITypeNat
-            => (int)mul(k1,k2).value;
+            => (int)mul(k1,k2).NatValue;
 
     [MethodImpl(Inline)]   
     public static NatSum<K1, K2> sum<K1,K2>(K1 k1 = default, K2 k2 = default)

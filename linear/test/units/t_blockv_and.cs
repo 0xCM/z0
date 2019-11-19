@@ -34,7 +34,7 @@ namespace Z0.Test
             where N : unmanaged, ITypeNat
         {
             var rep = new N();
-            var len = (int)rep.value;
+            var len = (int)rep.NatValue;
             var u = Random.BlockVector<N,T>();
             var v = Random.BlockVector<N,T>();
             var vResult = Linear.and(u, v);

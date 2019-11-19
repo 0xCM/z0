@@ -5,14 +5,7 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Threading;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
-    using System.Runtime.Intrinsics;
-    using System.Runtime.Intrinsics.X86;
-
-    using static As;
 
     using static zfunc;
 
@@ -20,9 +13,9 @@ namespace Z0
     /// Defines a 32x32 matrix of bits
     /// </summary>
     
-    public ref struct BitMatrix32
+    public readonly ref struct BitMatrix32
     {                
-        Span<uint> data;        
+        readonly Span<uint> data;        
 
         /// <summary>
         /// The matrix order

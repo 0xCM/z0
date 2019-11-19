@@ -5,14 +5,9 @@
 namespace Z0
 {
     using System;
-    using System.Numerics;
-    using System.Collections.Generic;
-    using System.Collections.Concurrent;
-    using System.Reflection;
     using System.Runtime.CompilerServices;
 
     using static constant;
-
     
 
     /// <summary>
@@ -26,9 +21,9 @@ namespace Z0
 
         public static Next<K> Rep => default;
 
-        public static ulong Value => k.value + 1u;
+        public static ulong Value => k.NatValue + 1u;
 
-        static string description => $"++{k.value} = {Value}";
+        static string description => $"++{k.NatValue} = {Value}";
 
         public static byte[] Digits  => digits(Value);
 
@@ -37,20 +32,20 @@ namespace Z0
         public ITypeNat rep 
             => Rep;
 
-        public NatSeq seq
+        public NatSeq Sequence
             => Seq;
 
-        public ulong value 
+        public ulong NatValue 
             => Value;
 
         public NatSeq natseq()
             => Seq;
 
         public bool Equals(Next<K> rhs)
-            => Value == rhs.value;
+            => Value == rhs.NatValue;
 
         public bool Equals(NatSeq rhs)
-            => Value == rhs.value;
+            => Value == rhs.NatValue;
 
         public string format()
             => description;
@@ -64,5 +59,4 @@ namespace Z0
         public override bool Equals(object rhs)
             => Value.Equals(rhs);
     }
-
 }

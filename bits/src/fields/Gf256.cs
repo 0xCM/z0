@@ -50,7 +50,7 @@ namespace Z0
             where N : unmanaged, ITypeNat
         {
             var dst = BlockMatrix.Alloc<N,byte>();
-            products(1, (byte)n.value, ref dst.Unblocked[0]);
+            products(1, (byte)n.NatValue, ref dst.Unblocked[0]);
             return dst;
         }
  

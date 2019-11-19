@@ -9,7 +9,6 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static zfunc;
-    using static As;
 
     partial class BitMatrix
     {
@@ -75,7 +74,7 @@ namespace Z0
         /// <param name="A">The left matrix</param>
         /// <param name="B">The right matrix</param>
         [MethodImpl(Inline)]
-        public static BitMatrix8 xnor(BitMatrix8 A, BitMatrix8 B)
+        public static BitMatrix8 xnor(in BitMatrix8 A, in BitMatrix8 B)
         {
             var Z = BitMatrix.alloc(n8);
             BitSquare.xnor(in A.Head, in B.Head, ref Z.Head);
@@ -101,7 +100,7 @@ namespace Z0
         /// <param name="A">The left matrix</param>
         /// <param name="B">The right matrix</param>
         [MethodImpl(Inline)]
-        public static BitMatrix16 xnor(BitMatrix16 A, BitMatrix16 B)
+        public static BitMatrix16 xnor(in BitMatrix16 A, in BitMatrix16 B)
         {
             var Z = BitMatrix.alloc(n16);
             BitSquare.xnor(in A.Head, in B.Head, ref Z.Head);
@@ -127,7 +126,7 @@ namespace Z0
         /// <param name="A">The left matrix</param>
         /// <param name="B">The right matrix</param>
         [MethodImpl(Inline)]
-        public static BitMatrix32 xnor(BitMatrix32 A, BitMatrix32 B)
+        public static BitMatrix32 xnor(in BitMatrix32 A, in BitMatrix32 B)
         {
             var Z = BitMatrix.alloc(n32);
             BitSquare.xnor(in A.Head, in B.Head, ref Z.Head);

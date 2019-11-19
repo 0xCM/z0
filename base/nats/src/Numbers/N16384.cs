@@ -10,9 +10,12 @@ namespace Z0
     using static constant;    
 
 
-    public readonly struct N16384 : INatSeq<N16384>, 
-        INatPow<N16384, N2, N14>,
-        INatPow2<N14>
+    public readonly struct N16384 : INatSeq<N16384>, INatPow<N16384, N2, N14>, INatPow2<N14>,
+        INatDivisible<N16384,N8192>, INatDivisible<N16384,N4096>, INatDivisible<N16384,N2048>, 
+        INatDivisible<N16384,N1024>, INatDivisible<N16384,N512>, INatDivisible<N16384,N256>, 
+        INatDivisible<N16384,N128>, INatDivisible<N16384,N64>, INatDivisible<N16384,N32>, 
+        INatDivisible<N16384,N16>, INatDivisible<N16384,N8>, INatDivisible<N16384,N4>    
+
     {
         public const ulong Value = 1ul << 14;
         
@@ -22,15 +25,12 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator int(N16384 src)
-            => (int)src.value;
+            => (int)src.NatValue;
 
-        public ITypeNat rep 
-            => Rep;
+        public NatSeq Sequence 
+            => Seq.Sequence;
 
-        public NatSeq seq 
-            => Seq.seq;
-
-        public ulong value 
+        public ulong NatValue 
             => Value;
 
         ITypeNat INatPow2.Exponent 

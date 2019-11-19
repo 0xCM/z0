@@ -52,7 +52,7 @@ namespace Z0
             }
             
             var offset = 0;
-            var offsetMax = (int)(new N().value);
+            var offsetMax = (int)(new N().NatValue);
             var refLocalBuf = default(byte);
             ref var data = ref refLocalBuf;
             var pSrcCurrent = pSrc;            

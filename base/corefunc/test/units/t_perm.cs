@@ -107,7 +107,7 @@ namespace Z0
         void perm_invert_check<N>(N n = default, int cycles = DefaltCycleCount)
             where N: unmanaged, ITypeNat
         {
-            for(var i=0; i<(int)n.value; i++)
+            for(var i=0; i<(int)n.NatValue; i++)
             {
                 var p1 = Random.Perm(n);
                 var p2 = ~ p1;

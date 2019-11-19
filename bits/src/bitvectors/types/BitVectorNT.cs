@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
 
     using static zfunc;    
 
@@ -15,12 +14,11 @@ namespace Z0
     /// </summary>
     /// <typeparam name="N">The vector length type</typeparam>
     /// <typeparam name="T">The vector component type</typeparam>
-    public ref struct BitVector<N,T>
+    public readonly ref struct BitVector<N,T>
         where N : unmanaged, ITypeNat
         where T : unmanaged
     {        
-        Span<T> data;
-
+        readonly Span<T> data;
 
         /// <summary>
         /// The maximum number of bits contained in an N[T] vector component
@@ -85,19 +83,19 @@ namespace Z0
             => new BitVector<N,T>(src.As<byte,T>());    
 
         [MethodImpl(Inline)]
-        public static implicit operator BitCells<T>(BitVector<N,T> src)
-            => BitCells<T>.FromCells(src.data, (int)new N().value);
+        public static implicit operator BitCells<T>(in BitVector<N,T> src)
+            => BitCells<T>.FromCells(src.data, (int)new N().NatValue);
 
         [MethodImpl(Inline)]
-        public static BitVector<N,T> operator &(BitVector<N,T> lhs, BitVector<N,T> rhs)
+        public static BitVector<N,T> operator &(in BitVector<N,T> lhs, in BitVector<N,T> rhs)
             => new BitVector<N,T>(mathspan.and(lhs.data, rhs.data, lhs.data.Replicate(true)));
 
         [MethodImpl(Inline)]
-        public static BitVector<N,T> operator |(BitVector<N,T> lhs, BitVector<N,T> rhs)
+        public static BitVector<N,T> operator |(in BitVector<N,T> lhs, in BitVector<N,T> rhs)
             => new BitVector<N,T>(mathspan.or(lhs.data, rhs.data, lhs.data.Replicate(true)));
 
         [MethodImpl(Inline)]
-        public static BitVector<N,T> operator ^(BitVector<N,T> lhs, BitVector<N,T> rhs)
+        public static BitVector<N,T> operator ^(in BitVector<N,T> lhs, in BitVector<N,T> rhs)
             => new BitVector<N,T>(mathspan.xor(lhs.data, rhs.data, lhs.data.Replicate(true)));
 
         /// <summary>
@@ -105,7 +103,7 @@ namespace Z0
         /// </summary>
         /// <param name="lhs">The source operand</param>
         [MethodImpl(Inline)]
-        public static BitVector<N,T> operator ~(BitVector<N,T> src)
+        public static BitVector<N,T> operator ~(in BitVector<N,T> src)
             => new BitVector<N,T>(mathspan.not(src.data, src.data.Replicate(true)));                        
 
         /// <summary>
@@ -114,7 +112,7 @@ namespace Z0
         /// <param name="lhs">The left operand</param>
         /// <param name="rhs">The right operand</param>
         [MethodImpl(Inline)]
-        public static bit operator %(BitVector<N,T> lhs, BitVector<N,T> rhs)
+        public static bit operator %(in BitVector<N,T> lhs, in BitVector<N,T> rhs)
             => lhs.Dot(rhs);
 
         /// <summary>
@@ -122,7 +120,7 @@ namespace Z0
         /// </summary>
         /// <param name="lhs">The source operand</param>
         [MethodImpl(Inline)]
-        public static BitVector<N,T> operator -(BitVector<N,T> src)
+        public static BitVector<N,T> operator -(in BitVector<N,T> src)
             => new BitVector<N,T>(mathspan.negate(src.data, src.data.Replicate(true)));                        
 
         /// <summary>
@@ -130,7 +128,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
-        public static bool operator true(BitVector<N,T> src)
+        public static bool operator true(in BitVector<N,T> src)
             => src.Nonempty;
 
         /// <summary>
@@ -138,7 +136,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
-        public static bool operator false(BitVector<N,T> src)
+        public static bool operator false(in BitVector<N,T> src)
             => !src.Nonempty;
 
         [MethodImpl(Inline)]
@@ -209,7 +207,7 @@ namespace Z0
         /// Computes the scalar product between this vector and another
         /// </summary>
         /// <param name="rhs">The other vector</param>
-        public bit Dot(BitVector<N,T> rhs)
+        public bit Dot(in BitVector<N,T> rhs)
         {             
             var result = bit.Off;
             for(var i=0; i<Length; i++)

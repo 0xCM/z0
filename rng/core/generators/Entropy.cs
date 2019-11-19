@@ -53,7 +53,7 @@ namespace Z0
         public static Span<N,T> Values<N,T>(N n = default)
             where N : unmanaged, ITypeNat
             where T : unmanaged        
-                => Values<T>((int)n.value);
+                => Values<T>((int)n.NatValue);
 
         /// <summary>
         /// Produces a single entropic value of primal type

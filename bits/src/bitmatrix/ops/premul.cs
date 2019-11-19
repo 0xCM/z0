@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static zfunc;
-    using static As;
 
     partial class BitMatrix
     {
@@ -17,11 +16,10 @@ namespace Z0
         /// </summary>
         /// <param name="spec">The permutation definition</param>
         [MethodImpl(Inline)]
-        public static ref BitMatrix8 premul(Perm<N8> spec, ref BitMatrix8 A)
+        public static BitMatrix8 premul(in Perm<N8> spec, in BitMatrix8 A)
         {
             var P = spec.ToBitMatrix();
-            A = P * A;
-            return ref A;
+            return P * A;
         }
 
         /// <summary>
@@ -30,11 +28,10 @@ namespace Z0
         /// <param name="spec">The permutation definition</param>
         /// <param name="A">The target matrix</param>
         [MethodImpl(Inline)]
-        public static BitMatrix16 premul(Perm<N16> spec, BitMatrix16 A)
+        public static BitMatrix16 premul(in Perm<N16> spec, BitMatrix16 A)
         {
             var P = spec.ToBitMatrix();
-            A = P * A;
-            return A;
+            return P * A;;
         }
 
         /// <summary>
@@ -43,11 +40,10 @@ namespace Z0
         /// <param name="spec">The permutation definition</param>
         /// <param name="A">The target matrix</param>
         [MethodImpl(Inline)]
-        public static BitMatrix32 premul(Perm<N32> spec, BitMatrix32 A)
+        public static BitMatrix32 premul(in Perm<N32> spec, in BitMatrix32 A)
         {
             var P = spec.ToBitMatrix();
-            A = P * A;
-            return A;
+            return P * A;
         }
  
         /// <summary>
@@ -56,11 +52,10 @@ namespace Z0
         /// <param name="spec">The permutation definition</param>
         /// <param name="A">The target matrix</param>
         [MethodImpl(Inline)]
-        public static BitMatrix64 premul(Perm<N64> spec, BitMatrix64 A)
+        public static BitMatrix64 premul(in Perm<N64> spec, in BitMatrix64 A)
         {
             var P = spec.ToBitMatrix();
-            A = P * A;
-            return A;
+            return P * A;;
         }
     }
 }

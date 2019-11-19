@@ -8,26 +8,20 @@ namespace Z0
     using System.Runtime.CompilerServices;
     
     using static constant;    
-    using static nfunc;
 
     public readonly struct N17 : INatSeq<N17>, INatPrime<N11>
     {
-        public static N17 Rep => default;
-
         public static NatSeq<N1,N7> Seq => default;
 
         [MethodImpl(Inline)]
         public static implicit operator int(N17 src)
-            => (int)src.value;
+            => (int)src.NatValue;
 
-        public ITypeNat rep 
-            => Rep;
-
-        public NatSeq seq 
+        public NatSeq Sequence 
             => Seq;
 
-        public ulong value 
-            => Seq.value;
+        public ulong NatValue 
+            => Seq.NatValue;
 
         public override string ToString() 
             => Seq.format();

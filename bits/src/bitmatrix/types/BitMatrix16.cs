@@ -5,24 +5,16 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Threading;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
-    using System.Runtime.Intrinsics;
 
-    using System.Runtime.Intrinsics.X86;
-
-    using static As;
     using static zfunc;
-
 
     /// <summary>
     /// Defines a 16x16 matrix of bits
     /// </summary>
-    public ref struct BitMatrix16 
+    public readonly ref struct BitMatrix16 
     {   
-        Span<ushort> data;
+        readonly Span<ushort> data;
 
         /// <summary>
         /// The matrix order
@@ -245,11 +237,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public void SetBit(int row, int col, bit src)
             => BitMask.set(ref seek(ref Head, row), (byte)col, src);
-
-
-        [MethodImpl(Inline)]
-        public BitMatrix16 AndNot(in BitMatrix16 rhs)
-            => BitMatrix.cnotimply(this, rhs, ref this);
 
         [MethodImpl(Inline)]
         public readonly BitVector16 Diagonal()

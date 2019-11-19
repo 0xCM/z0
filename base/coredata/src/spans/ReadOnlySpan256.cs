@@ -17,31 +17,31 @@ namespace Z0
     /// A System.Span[T] clone where the  encasulated data is always a multiple 
     /// of 16 bytes = 256 bits
     /// </summary>
-    public ref struct ReadOnlySpan256<T>
+    public readonly ref struct ReadOnlySpan256<T>
         where T : unmanaged
     {
-        ReadOnlySpan<T> data;
+        readonly ReadOnlySpan<T> data;
 
         /// <summary>
         /// The number of cells in the block
         /// </summary>
-        public static readonly int BlockLength = Span256<T>.BlockLength;
+        public static int BlockLength => Span256<T>.BlockLength;
 
         /// <summary>
         /// The size, in bytes, of a block 
         /// </summary>
         /// <typeparam name="T">The primitive type</typeparam>
         /// <remarks>Should always be 16 irrespective of the cell type</remarks>
-        public static readonly int BlockSize = Span256<T>.BlockSize;
+        public static int BlockSize => Span256<T>.BlockSize;
 
         /// <summary>
         /// The size, in bytes, of a constituent block cell
         /// </summary>
         /// <typeparam name="T">The primitive type</typeparam>
-        public static readonly int CellSize = Span256<T>.CellSize;
+        public static int CellSize => Span256<T>.CellSize;
 
         [MethodImpl(Inline)]
-        public static implicit operator ReadOnlySpan<T>(ReadOnlySpan256<T> src)
+        public static implicit operator ReadOnlySpan<T>(in ReadOnlySpan256<T> src)
             => src.data;
 
         [MethodImpl(Inline)]
@@ -57,11 +57,11 @@ namespace Z0
             => new ReadOnlySpan256<T>(src);
 
         [MethodImpl(Inline)]
-        public static bool operator == (ReadOnlySpan256<T> lhs, ReadOnlySpan256<T> rhs)
+        public static bool operator == (in ReadOnlySpan256<T> lhs, in ReadOnlySpan256<T> rhs)
             => lhs.data == rhs.data;
 
         [MethodImpl(Inline)]
-        public static bool operator != (ReadOnlySpan256<T> lhs, ReadOnlySpan256<T> rhs)
+        public static bool operator != (in ReadOnlySpan256<T> lhs, in ReadOnlySpan256<T> rhs)
             => lhs.data != rhs.data;
         
         [MethodImpl(Inline)]
@@ -76,7 +76,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static ReadOnlySpan256<T> Load(Span256<T> src)
+        public static ReadOnlySpan256<T> Load(in Span256<T> src)
             => new ReadOnlySpan256<T>(src);
 
 

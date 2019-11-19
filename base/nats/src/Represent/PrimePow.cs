@@ -16,16 +16,16 @@ namespace Z0
 
         public static Pow<P,E> Seq => default;
 
-        public static ulong Value => Seq.value;
+        public static ulong Value => Seq.NatValue;
 
         public ITypeNat rep 
             => Rep;
 
-        public NatSeq seq 
-            => Seq.seq;
+        public NatSeq Sequence 
+            => Seq.Sequence;
 
-        public ulong value 
-            => Seq.value;
+        public ulong NatValue 
+            => Seq.NatValue;
 
         public string format()
             => Value.ToString();

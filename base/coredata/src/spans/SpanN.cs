@@ -16,11 +16,11 @@ namespace Z0
     /// <summary>
     /// Defines a span of natural length N
     /// </summary>
-    public ref struct Span<N,T>
+    public readonly ref struct Span<N,T>
         where N : unmanaged, ITypeNat
         where T : unmanaged
     {
-        Span<T> data;
+        readonly Span<T> data;
 
         public static int Count => nati<N>();
 

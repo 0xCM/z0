@@ -20,7 +20,7 @@ namespace Z0
         public static BitGridLayout<T> layout<N,T>(N n = default)
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => new BitGridSpec<T>(bitsize<T>(), (int)n.value,(int)n.value).CalcLayout();
+                => new BitGridSpec<T>(bitsize<T>(), (int)n.NatValue,(int)n.NatValue).CalcLayout();
 
     }
 

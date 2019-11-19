@@ -44,8 +44,8 @@ namespace Z0.Test
 
         public static void sum()
         {
-            NatProve.add(n5, n5, n10.value);
-            NatProve.add(n13, n0, n13.value);
+            NatProve.add(n5, n5, n10.NatValue);
+            NatProve.add(n13, n0, n13.NatValue);
             NatProve.add(n512, n10, 522);
         }
 
@@ -82,7 +82,7 @@ namespace Z0.Test
            var n17 = Nat.next(n16);
            var n18 = Nat.next(n17);
            var n19 = Nat.next(n18);
-           Claim.eq(n19.value,19);
+           Claim.eq(n19.NatValue,19);
         }
     }
 }

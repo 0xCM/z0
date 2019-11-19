@@ -68,7 +68,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Span<N,bit> BitSpan<N>(this IPolyrand random, N len = default)
             where N : unmanaged, ITypeNat
-                => random.BitSpan((int)len.value);
+                => random.BitSpan((int)len.NatValue);
 
         /// <summary>
         /// Produces a span populated with a specified number of random bits
@@ -123,7 +123,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitString BitString<N>(this IPolyrand random, N n = default)
             where N : unmanaged, ITypeNat
-                => random.BitString((int)n.value);
+                => random.BitString((int)n.NatValue);
 
         /// <summary>
         /// Produces sequences of random bitstrings with specified length

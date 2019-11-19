@@ -16,10 +16,10 @@ namespace Z0
     /// <summary>
     /// A System.Span[T] clone with length a multiple of 16 bytes = 128 bits
     /// </summary>
-    public ref struct ReadOnlySpan128<T>
+    public readonly ref struct ReadOnlySpan128<T>
         where T : unmanaged
     {
-        ReadOnlySpan<T> data;
+        readonly ReadOnlySpan<T> data;
 
         /// <summary>
         /// The number of cells in the block
@@ -40,7 +40,7 @@ namespace Z0
         public static int CellSize => Span128<T>.CellSize;
 
         [MethodImpl(Inline)]
-        public static implicit operator ReadOnlySpan<T>(ReadOnlySpan128<T> src)
+        public static implicit operator ReadOnlySpan<T>(in ReadOnlySpan128<T> src)
             => src.data;
 
         [MethodImpl(Inline)]
@@ -56,11 +56,11 @@ namespace Z0
             => new ReadOnlySpan128<T>(src);
 
         [MethodImpl(Inline)]
-        public static bool operator == (ReadOnlySpan128<T> lhs, ReadOnlySpan128<T> rhs)
+        public static bool operator == (in ReadOnlySpan128<T> lhs, in ReadOnlySpan128<T> rhs)
             => lhs.data == rhs.data;
 
         [MethodImpl(Inline)]
-        public static bool operator != (ReadOnlySpan128<T> lhs, ReadOnlySpan128<T> rhs)
+        public static bool operator != (in ReadOnlySpan128<T> lhs, in ReadOnlySpan128<T> rhs)
             => lhs.data != rhs.data;
         
         [MethodImpl(Inline)]
@@ -75,7 +75,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static ReadOnlySpan128<T> Load(Span128<T> src)
+        public static ReadOnlySpan128<T> Load(in Span128<T> src)
             => new ReadOnlySpan128<T>(src);
 
         [MethodImpl(Inline)]
@@ -119,7 +119,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        ReadOnlySpan128(Span128<T> src)
+        ReadOnlySpan128(in Span128<T> src)
         {
             data = src.ReadOnly();
         }

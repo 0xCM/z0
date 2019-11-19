@@ -225,7 +225,7 @@ namespace Z0
         /// </summary>
         /// <typeparam name="K">An even natural type</typeparam>
         public static Option<NatEven<K>> TryEven<K>(K k)
-            where K: unmanaged, ITypeNat
+            where K: unmanaged, ITypeNat<K>
                 => Try(() => new NatEven<K>(k));
 
         /// <summary>
@@ -235,7 +235,7 @@ namespace Z0
         /// </summary>
         /// <typeparam name="K">An even natural type</typeparam>
         public static Option<NatEven<K>> TryEven<K>()
-            where K: unmanaged, ITypeNat
+            where K: unmanaged, ITypeNat<K>
                 => Try(() => new NatEven<K>(natrep<K>()));
 
         /// <summary>

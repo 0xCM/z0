@@ -18,10 +18,10 @@ namespace Z0
     /// A System.Span[T] clone where the  encasulated data is always a multiple 
     /// of 16 bytes = 128 bits
     /// </summary>
-    public ref struct Span256<T>
+    public readonly ref struct Span256<T>
         where T : unmanaged
     {
-        Span<T> data;
+        readonly Span<T> data;
 
         /// <summary>
         /// The number of cells in the block
@@ -97,7 +97,6 @@ namespace Z0
         /// the content as the underlying data
         /// </summary>
         /// <param name="src">The source span</param>
-        /// <returns></returns>
         [MethodImpl(Inline)]
         public static Span256<T> LoadDirect(Span<T> src)
             => new Span256<T>(src);

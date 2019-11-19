@@ -22,15 +22,15 @@ namespace Z0
         static readonly K k = default;
 
         public NatPrime(K n)
-            => valid = demand(prime(n.value));
+            => valid = demand(prime(n.NatValue));
 
         public bool valid {get;}
 
-        public ulong value 
-            => k.value;
+        public ulong NatValue 
+            => k.NatValue;
 
-        public NatSeq seq 
-            => k.seq;
+        public NatSeq Sequence 
+            => k.Sequence;
 
         public string format()
             => valid ? $"{k} is prime" : $"INVALID({k} is prime)";    

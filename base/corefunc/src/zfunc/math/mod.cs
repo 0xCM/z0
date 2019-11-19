@@ -85,7 +85,7 @@ partial class zfunc
     [MethodImpl(Inline)]
     public static long mod<N>(long m, N n = default)
         where N : unmanaged, ITypeNat
-            => m % (long)n.value  * sign(m);
+            => m % (long)n.NatValue  * sign(m);
 
 
 }

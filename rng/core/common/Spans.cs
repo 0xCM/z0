@@ -95,7 +95,7 @@ namespace Z0
         public static Span<N,T> Span<N,T>(this IPolyrand random, N n = default, Interval<T>? domain = null, Func<T,bool> filter = null)
             where T : unmanaged  
             where N : unmanaged, ITypeNat
-                => NatSpan.load(n, random.Span<T>((int)n.value, domain, filter));                                    
+                => NatSpan.load(n, random.Span<T>((int)n.NatValue, domain, filter));                                    
 
         /// <summary>
         /// Allocates a table span of natural dimensions and populates the cells with random values

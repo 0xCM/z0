@@ -35,7 +35,7 @@ namespace Z0
             => N3.Rep;
 
         public ulong nat3val()
-            => N3.Rep.value;
+            => N3.Rep.NatValue;
 
         public int natval()
             => NatMath.natval<N30>();

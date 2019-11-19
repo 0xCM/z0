@@ -5,11 +5,7 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Collections.Generic;
-    using System.Threading;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
 
     using static zfunc;
 
@@ -45,7 +41,7 @@ namespace Z0
         /// <param name="row">The source vector used to fill each row</param>
         /// <typeparam name="T">The primal type over which the matrix is constructed</typeparam>
         [MethodImpl(NotInline)]
-        public static BitMatrix<N,T> broadcast<N,T>(BitVector<N,T> row)
+        public static BitMatrix<N,T> broadcast<N,T>(in BitVector<N,T> row)
             where T : unmanaged
             where N : unmanaged, ITypeNat
         {
@@ -65,7 +61,7 @@ namespace Z0
         /// <param name="row">The source vector used to fill each row</param>
         /// <typeparam name="T">The primal type over which the matrix is constructed</typeparam>
         [MethodImpl(NotInline)]
-        public static BitMatrix<M,N,T> broadcast<M,N,T>(BitVector<N,T> row, M m = default)
+        public static BitMatrix<M,N,T> broadcast<M,N,T>(in BitVector<N,T> row, M m = default)
             where T : unmanaged
             where N : unmanaged, ITypeNat
             where M : unmanaged, ITypeNat
@@ -176,6 +172,5 @@ namespace Z0
             A.Data.Fill(x);
             return ref A;
         }
-
     }
 }

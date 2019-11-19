@@ -1,4 +1,4 @@
-// 2019-11-18 23:19:06:754
+// 2019-11-19 14:11:59:592
 ulong clear_64(ulong src, int p0, int p1)
 {
     IL_0000: ldarg.0
@@ -118,25 +118,16 @@ void bs_and(in Span256<uint> x, in Span256<uint> y, Span256<uint> z)
 {
     IL_0000: call Z0.N256 zfunc::get_n256()
     IL_0005: ldarg.0
-    IL_0006: ldobj Z0.Span256`1<System.UInt32>
-    IL_000B: stloc.0
-    IL_000C: ldloca.s V_0
-    IL_000E: call System.Int32 Z0.Span256`1<System.UInt32>::get_BlockCount()
-    IL_0013: ldc.i4.8
-    IL_0014: ldarg.0
-    IL_0015: ldobj Z0.Span256`1<System.UInt32>
-    IL_001A: stloc.0
-    IL_001B: ldloca.s V_0
-    IL_001D: call System.UInt32& Z0.Span256`1<System.UInt32>::get_Head()
-    IL_0022: ldarg.1
-    IL_0023: ldobj Z0.Span256`1<System.UInt32>
-    IL_0028: stloc.0
-    IL_0029: ldloca.s V_0
-    IL_002B: call System.UInt32& Z0.Span256`1<System.UInt32>::get_Head()
-    IL_0030: ldarga.s z
-    IL_0032: call System.UInt32& Z0.Span256`1<System.UInt32>::get_Head()
-    IL_0037: call System.Void Z0.vblock::and<System.UInt32>(Z0.N256,System.Int32,System.Int32,System.UInt32&,System.UInt32&,System.UInt32&)
-    IL_003C: ret
+    IL_0006: call System.Int32 Z0.Span256`1<System.UInt32>::get_BlockCount()
+    IL_000B: ldc.i4.8
+    IL_000C: ldarg.0
+    IL_000D: call System.UInt32& Z0.Span256`1<System.UInt32>::get_Head()
+    IL_0012: ldarg.1
+    IL_0013: call System.UInt32& Z0.Span256`1<System.UInt32>::get_Head()
+    IL_0018: ldarga.s z
+    IL_001A: call System.UInt32& Z0.Span256`1<System.UInt32>::get_Head()
+    IL_001F: call System.Void Z0.vblock::and<System.UInt32>(Z0.N256,System.Int32,System.Int32,System.UInt32&,System.UInt32&,System.UInt32&)
+    IL_0024: ret
 
 }
 void s_and(Span<uint> x, Span<uint> y, Span<uint> z)
@@ -1073,7 +1064,7 @@ uint pop3x256(Vector256<ulong> x, Vector256<ulong> y, Vector256<ulong> z)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.UInt32 Z0.Bits::pop(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
+    IL_0003: call System.UInt32 Z0.Bits::vpop(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
     IL_0008: ret
 
 }
@@ -1082,7 +1073,7 @@ uint pop3x128(Vector128<ulong> x, Vector128<ulong> y, Vector128<ulong> z)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.UInt32 Z0.Bits::pop(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
+    IL_0003: call System.UInt32 Z0.Bits::vpop(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
     IL_0008: ret
 
 }

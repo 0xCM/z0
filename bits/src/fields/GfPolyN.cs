@@ -22,7 +22,7 @@ namespace Z0
     {
         readonly T data;
 
-        static readonly int degree = (int)new N().value;
+        static readonly int degree = (int)new N().NatValue;
 
         public static readonly GfPoly<N,T> Zero = default;
         

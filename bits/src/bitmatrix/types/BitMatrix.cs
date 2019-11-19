@@ -4,23 +4,18 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Threading;
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
     using System.Runtime.Intrinsics;
     using System.Runtime.Intrinsics.X86;
-    using System.Security;
-
-    using static As;
 
     using static zfunc;
 
     [StructLayout(LayoutKind.Sequential)]
-    public ref struct BitMatrix<T>
+    public readonly ref struct BitMatrix<T>
         where T : unmanaged
     {                        
-        Span<T> data;
+        readonly Span<T> data;
 
         public static uint N => bitsize<T>();
 

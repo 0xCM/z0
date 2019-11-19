@@ -50,7 +50,7 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where T : unmanaged
         {
-            var n = (int)dim.value;
+            var n = (int)dim.NatValue;
             var nodes = Graph.Vertices<T>(n);
             var edges = new List<Edge<T>>();
             for(var row = 0; row < n; row++)

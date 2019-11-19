@@ -123,7 +123,7 @@ namespace Z0.Test
         {
             TypeCaseStart<N>();
 
-            var nVal = (uint)n.value;
+            var nVal = (uint)n.NatValue;
             var n0 = Mod.Define(n);
 
             var lhs = Random.Span<uint>(samples);
@@ -177,7 +177,7 @@ namespace Z0.Test
             where N : unmanaged, ITypeNat
         {
             TypeCaseStart<N>();
-            var nVal = (uint)n.value;
+            var nVal = (uint)n.NatValue;
             var n0 = Mod.Define(n);            
             var expect = new uint[nVal,nVal];
             for(var i=0u; i<nVal; i++)
@@ -200,7 +200,7 @@ namespace Z0.Test
             TypeCaseStart<N>();
             var n0 = Mod.Define(n);
             var n1 = n0 + 1u;
-            for(var i=1u; i<n.value; i++)
+            for(var i=1u; i<n.NatValue; i++)
             {
                 var x = n0 + i;
                 var y = x.Invert();
@@ -215,7 +215,7 @@ namespace Z0.Test
         {
             TypeCaseStart<N>();
 
-            var max = (uint)n.value - 1;
+            var max = (uint)n.NatValue - 1;
             var last = Mod.Define(max, n);
             var m = last;
             
@@ -245,7 +245,7 @@ namespace Z0.Test
 
             var x = Mod.Define(n);
             var y = Mod.Define(n);
-            var max = (uint)n.value;
+            var max = (uint)n.NatValue;
 
             x++; x++; x++;
             y += 3u;

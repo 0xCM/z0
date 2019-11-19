@@ -11,23 +11,19 @@ namespace Z0
 
     public readonly struct N127 : INatSeq<N127>, INatPrior<N127,N128>
     {
-
         public static N127 Rep => default;
         
         public static NatSeq<N1,N2,N7> Seq => default;
         
         [MethodImpl(Inline)]
         public static implicit operator int(N127 src)
-            => (int)src.value;
-
-        public ITypeNat rep 
-            => Rep;
+            => (int)src.NatValue;
         
-        public NatSeq seq 
+        public NatSeq Sequence 
             => Seq;
         
-        public ulong value 
-            => Seq.value;
+        public ulong NatValue 
+            => Seq.NatValue;
                 
         public override string ToString() 
             => Seq.format();

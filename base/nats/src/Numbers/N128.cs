@@ -8,30 +8,24 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static constant;    
-    using static nfunc;
 
-    public readonly struct N128 : INatSeq<N128>,  
-        INatPow<N128, N2,N7>,
-        INatPow2<N7>
+    public readonly struct N128 : INatSeq<N128>,  INatPow<N128, N2,N7>, INatPow2<N7>, 
+        INatDivisible<N128,N4>, INatDivisible<N128,N8>, INatDivisible<N128,N16>,  
+        INatDivisible<N128,N32>, INatDivisible<N128,N64>        
     {
         public const ulong Value = 1ul << 7;      
-          
-        public static N128 Rep => default;
-        
+                  
         public static NatSeq<N1,N2,N8> Seq => default;
         
         [MethodImpl(Inline)]
         public static implicit operator int(N128 src)
-            => (int)src.value;
-
-        public ITypeNat rep 
-            => Rep;
+            => (int)src.NatValue;
         
-        public NatSeq seq 
+        public NatSeq Sequence 
             => Seq;
         
-        public ulong value 
-            => Seq.value;
+        public ulong NatValue 
+            => Seq.NatValue;
 
         ITypeNat INatPow2.Exponent 
             => N7.Rep;
@@ -39,6 +33,4 @@ namespace Z0
         public override string ToString() 
             => Seq.format();
     }
-
-
 }

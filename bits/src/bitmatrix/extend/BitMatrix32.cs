@@ -62,6 +62,11 @@ namespace Z0
         internal static string FormatMatrixBits(this uint[] src, int rowlen)            
             => src.AsSpan().AsBytes().FormatMatrixBits(rowlen);
 
+        [MethodImpl(Inline)]
+        public static BitMatrix32 AndNot(this BitMatrix32 A, in BitMatrix32 B)
+            => BitMatrix.cnotimply(A, B);
+
+
         /// <summary>
         /// Determines whether this matrix is equivalent to the canonical 0 matrix
         /// </summary>

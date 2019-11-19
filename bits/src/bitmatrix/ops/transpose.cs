@@ -69,7 +69,7 @@ namespace Z0
         /// <param name="Z"></param>
         /// <remarks>Code adapted from Hacker's Delight</remarks>
         [MethodImpl(Inline)]
-        public static ref BitMatrix8 transpose_v3(BitMatrix8 A, ref BitMatrix8 Z)
+        public static ref BitMatrix8 transpose_v3(in BitMatrix8 A, ref BitMatrix8 Z)
         {
             var src = (ulong)A;
             var t = (src ^ (src >> 7)) & 0x00AA00AA00AA00AAul;

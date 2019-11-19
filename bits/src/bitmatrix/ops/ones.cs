@@ -5,14 +5,9 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Collections.Generic;
-    using System.Threading;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
 
     using static zfunc;
-    using static As;
 
     partial class BitMatrix
     {        
@@ -59,7 +54,7 @@ namespace Z0
             where T : unmanaged
        {            
             var dst = alloc(n,zero);
-            var order  = (int)n.value;
+            var order  = (int)n.NatValue;
             for(var i = 0; i< order; i++)
                 dst[i,i] = true;            
             return dst;
@@ -89,7 +84,5 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where T : unmanaged
                 => alloc(n, gmath.maxval<T>());
-
     }
-
 }

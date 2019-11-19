@@ -5,14 +5,30 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
     using static zfunc;    
 
+
     partial class inxoc
     {
+
+        public static void vconvert_v256x16u_v2x256x64u(Vector256<ushort> src, out Vector256<ulong> lo, out Vector256<ulong> hi)
+            => dinx.vconvert(src, out lo, out hi);
+
+        public static void vconvert_ymem16u_v2x256x64u(ref ushort src, out Vector256<ulong> lo, out Vector256<ulong> hi)
+            => dinx.vconvert(ref src, out lo, out hi);
+
+        public static void vconvert_yspan16u_v2x256x64u(Span256<ushort> src, out Vector256<ulong> lo, out Vector256<ulong> hi)
+            => dinx.vconvert(src, out lo, out hi);
+
+        public static Vector256<ulong> vconvert_xspan32u_v256x64u(Span128<uint> src, out Vector256<ulong> dst)        
+            => dinx.vconvert(src, out dst);
+
+        public static unsafe void vconvert_ymem32u_v2x256x64u(Span256<uint> src, out Vector256<ulong> lo, out Vector256<ulong> hi)
+            => dinx.vconvert(src, out lo, out hi);
+
         public static Vector256<byte> valignr256x4n(Vector256<byte> x, Vector256<byte> y)
             => dinx.valignr(x,y,n4);
 

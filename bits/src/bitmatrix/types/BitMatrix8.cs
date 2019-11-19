@@ -5,23 +5,18 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Threading;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
-    using System.Runtime.Intrinsics.X86;
-
+ 
     using static As;
 
     using static zfunc;
-    using System.Runtime.Intrinsics;
-
+ 
     /// <summary>
     /// Defines an 8x8 matrix of bits
     /// </summary>
-    public ref struct BitMatrix8
+    public readonly ref struct BitMatrix8
     {        
-        Span<byte> data;
+        readonly Span<byte> data;
                                         
         /// <summary>
         /// The matrix order
@@ -235,10 +230,6 @@ namespace Z0
             [MethodImpl(Inline)]
             get => ref RowVector(row);
         }
-
-        [MethodImpl(Inline)]
-        public BitMatrix8 AndNot(in BitMatrix8 rhs)
-            => BitMatrix.cnotimply(this, rhs, ref this);
 
         /// <summary>
         /// Retrives the bitvector determined by the matrix diagonal

@@ -5,9 +5,8 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
-
-    using static nfunc;
+    using System.Runtime.CompilerServices;
+    using static constant;
 
     /// <summary>
     /// Characterizes a type-level natural number, a *typenat*
@@ -15,14 +14,31 @@ namespace Z0
     public interface ITypeNat
     {
         /// <summary>
-        /// Specifies the value of the associated natural number
+        /// The number's value
         /// </summary>
-        ulong value {get;}
+        ulong NatValue {get;}
 
         /// <summary>
         /// Specifies the canonical sequence representative
         /// </summary>
-        NatSeq seq {get;}
+        NatSeq Sequence {get;}
+    }
+
+    /// <summary>
+    /// Characterizes a type-level sequence of typenats
+    /// </summary>
+    public interface NatSeq : ITypeNat
+    {
+
+    }
+
+    /// <summary>
+    /// Characterizes a natural sequence with an unspecified number of terms
+    /// </summary>
+    /// <typeparam name="S">The reifying type</typeparam>
+    public interface INatSeq<S> : ITypeNat<S>, NatSeq
+        where S : unmanaged, INatSeq<S>
+    {
 
     }
 
@@ -30,37 +46,15 @@ namespace Z0
     /// Characterizes a typenat
     /// </summary>
     /// <typeparam name="T">The represented type</typeparam>
-    public interface ITypeNat<T> : ITypeNat 
-        where T: ITypeNat
+    public interface ITypeNat<K> : ITypeNat, INatDivisible<K>
+        where K: unmanaged, ITypeNat<K>
     {
-        /// <summary>
-        /// Specifies the representing type
-        /// </summary>
-        ITypeNat rep {get;}
+        K NatRep
+        {
+            [MethodImpl(Inline)]
+            get => default(K);
+        }
     }
-
-    /// <summary>
-    /// Characterizes an enumerable with a known length as specified
-    /// by a natural type parameter
-    /// </summary>
-    public interface IEnumerable<N,I> : IEnumerable<I>
-        where N : unmanaged, ITypeNat
-    {
-        /// <summary>
-        /// The value of the natural parameter
-        /// </summary>
-        uint Length {get;}
-    }
-
-    public interface IArray<N,T> : IEnumerable<N,T>
-        where N : unmanaged, ITypeNat
-    {
-        /// <summary>
-        /// Specifies or retrieves an array value via an unchecked index
-        /// </summary>
-        ref T this[int ix] {get;}
-    }
-
 
     public interface INatDemand 
     {
@@ -74,14 +68,7 @@ namespace Z0
     public interface INatDemand<K1> : INatDemand
         where K1 : unmanaged, ITypeNat
     {
-        /// <summary>
-        /// Specifies whether reification satisfies demand
-        /// </summary>
-        /// <remarks>
-        /// Any attempt to instantiate an invalid reification should fail
-        /// and thus this attribute should always be true
-        /// </remarks>
-        bool valid {get;}
+        
     }
     
     /// <summary>
@@ -94,6 +81,25 @@ namespace Z0
         where K2 : ITypeNat
     {
         
+    }
+
+
+    /// <summary>
+    /// Requires k1 = n*k2 for some n>= 1
+    /// </summary>
+    /// <typeparam name="K1"></typeparam>
+    /// <typeparam name="K2"></typeparam>
+    public interface INatDivisible<K1,K2> : INatDemand<K1,K2>
+        where K1: unmanaged, ITypeNat<K1>
+        where K2: unmanaged, ITypeNat
+    {
+
+    }
+
+    public interface INatDivisible<K> : INatDivisible<K,K>
+        where K : unmanaged, ITypeNat<K>
+    {
+
     }
 
     /// <summary>
@@ -110,6 +116,7 @@ namespace Z0
         
     }
 
+ 
     /// <summary>
     /// Requires n:K & n1:K1 & n2:K2 => n1 <= n <= n2
     /// </summary>
@@ -177,8 +184,8 @@ namespace Z0
     /// Requires k:K => k % 2 == 0
     /// </summary>
     /// <typeparam name="K">An even natural type</typeparam>
-    public interface INatEven<K> : ITypeNat
-        where K : unmanaged, ITypeNat
+    public interface INatEven<K> : ITypeNat, INatDivisible<K,N2>
+        where K : unmanaged, ITypeNat<K>
     {
 
     }
@@ -241,8 +248,8 @@ namespace Z0
     /// </summary>
     /// <typeparam name="B">The base type</typeparam>
     /// <typeparam name="E">The exponent type</typeparam>
-    public interface INatPow2<E> : INatPow2, INatPow<N2,E>
-        where E : unmanaged, ITypeNat
+    public interface INatPow2<E> : INatPow2, INatPow<N2,E>, INatEven<E>
+        where E : unmanaged, ITypeNat<E>
     {
 
     }
@@ -254,7 +261,7 @@ namespace Z0
     /// <typeparam name="B">The base type</typeparam>
     /// <typeparam name="E">The exponent type</typeparam>
     public interface INatPow<S,B,E> : INatPow<B,E>, ITypeNat<S>
-        where S : INatPow<S,B,E>, new()
+        where S : unmanaged, INatPow<S,B,E>
         where B : unmanaged, ITypeNat
         where E : unmanaged, ITypeNat
     {
@@ -287,7 +294,6 @@ namespace Z0
     {
 
     } 
-
 
     /// <summary>
     /// Requires n:T => n is prime
@@ -341,5 +347,31 @@ namespace Z0
 
     }
 
-    
+    /// <summary>
+    /// Reifies k := k1 + k2
+    /// </summary>
+    /// <typeparam name="K2">The base type</typeparam>
+    /// <typeparam name="E">The exponent type</typeparam>
+    public interface INatSum<K1,K2> : ITypeNat
+        where K1 : unmanaged, ITypeNat
+        where K2 : unmanaged, ITypeNat
+    {
+
+    }
+
+    public interface INatSum<K> : ITypeNat
+        where K : unmanaged, ITypeNat
+    {
+        ITypeNat Lhs {get;}        
+
+        ITypeNat Rhs {get;}
+    }    
+
+    public interface IDigit<N,S,T>
+        where N : unmanaged, ITypeNat
+        where S : IDigit<N,S,T>
+        where T : unmanaged
+    {
+
+    }
 }

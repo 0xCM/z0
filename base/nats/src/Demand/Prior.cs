@@ -22,7 +22,7 @@ namespace Z0
         static readonly string description = $"++{k1} = {k2}";
 
         public NatNext(K1 n1, K2 n2)
-            => valid = demand(n1.value + 1 == n2.value);
+            => valid = demand(n1.NatValue + 1 == n2.NatValue);
 
         public bool valid {get;}
 
@@ -49,7 +49,7 @@ namespace Z0
         static readonly string description = $"{k1} - 1 = {k2}";
 
         public NatPrior(K1 n1, K2 n2)
-            => valid = demand(n1.value - 1 == n2.value);
+            => valid = demand(n1.NatValue - 1 == n2.NatValue);
 
         public bool valid {get;}
 

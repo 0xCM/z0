@@ -24,7 +24,7 @@ namespace Z0
 
         public static Prior<K1> Rep = default;
 
-        public static ulong Value => k.value - 1u;
+        public static ulong Value => k.NatValue - 1u;
 
         static string description => $"--{k} = {Value}";
 
@@ -35,20 +35,20 @@ namespace Z0
         public ITypeNat rep 
             => Rep;
 
-        public NatSeq seq
+        public NatSeq Sequence
             => Seq;
 
-        public ulong value 
+        public ulong NatValue 
             => Value;
 
         public NatSeq natseq()
             => Seq;
 
         public bool Equals(Prior<K1> rhs)
-            => Value == rhs.value;
+            => Value == rhs.NatValue;
 
         public bool Equals(NatSeq rhs)
-            => Value == rhs.value;
+            => Value == rhs.NatValue;
 
         public string format()
             => description;
