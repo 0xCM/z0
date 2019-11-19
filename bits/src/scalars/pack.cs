@@ -187,8 +187,15 @@ namespace Z0
         /// </summary>
         [MethodImpl(Inline)]
         public static uint pack(byte x0, byte x1, byte x2, byte x3)
-              =>  (uint)x0 << 0 * 8 | (uint)x1 << 1 * 8 | (uint)x2 << 2 * 8 | (uint)x3 << 3 * 8;
-        
+            => (uint)x0 << 0 * 8 | (uint)x1 << 1 * 8 | (uint)x2 << 2 * 8 | (uint)x3 << 3 * 8;
+
+        /// <summary>
+        /// Packs 4 unsigned 16-bit integers into an unsigned 64-bit integer
+        /// </summary>
+        [MethodImpl(Inline)]
+        public static ulong pack(ushort x0, ushort x1, ushort x2, ushort x3)
+            => (uint)x0 << 0 * 16 | (uint)x1 << 1 * 16 | (uint)x2 << 2 * 16 | (uint)x3 << 3 * 16;
+
         /// <summary>
         /// Packs 8 bytes into an unsigned 64-bit integer
         /// </summary>

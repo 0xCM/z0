@@ -73,11 +73,7 @@ namespace Z0
         /// </summary>
         /// <param name="rhs">The right vector</param>
         [MethodImpl(Inline)]
-        public static BitVector128 or(BitVector128 x, BitVector128 y)
-        {
-            var z = alloc(n128);
-            vblock.or(n128, in x.x0, in y.x0, ref z.x0);
-            return z;
-        }
+        public static BitVector128 or(in BitVector128 x, in BitVector128 y)
+            => from(n128, gmath.or(x.x0, y.x0), gmath.or(x.x1,  y.x1));
     }
 }

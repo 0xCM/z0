@@ -21,7 +21,7 @@ namespace Z0
         /// <param name="spec">Identifies the source bits of interest</param>
         /// <param name="dst">Receives the identified bits</param>
         [MethodImpl(Inline)]
-        public static BitVector<T> Gather<T>(BitVector<T> src, BitVector<T> spec)
+        public static BitVector<T> gather<T>(BitVector<T> src, BitVector<T> spec)
             where T : unmanaged
                 => gbits.gather(src.data, spec.data);
 
@@ -31,8 +31,8 @@ namespace Z0
         /// <param name="spec">Identifies the source bits of interest</param>
         /// <param name="dst">Receives the identified bits</param>
         [MethodImpl(Inline)]
-        public static BitVector8 Gather(BitVector8 src, BitVector8 spec)
-            => Bits.gather(src.data, spec.data);
+        public static BitVector8 gather(BitVector8 src, BitVector8 spec)
+            => gbits.gather(src.data, spec.data);
 
         /// <summary>
         /// Populates a target vector with specified source bits
@@ -40,8 +40,8 @@ namespace Z0
         /// <param name="spec">Identifies the source bits of interest</param>
         /// <param name="dst">Receives the identified bits</param>
         [MethodImpl(Inline)]
-        public static BitVector16 Gather(BitVector16 src, BitVector16 spec)
-            => Bits.gather(src.data, spec.data);
+        public static BitVector16 gather(BitVector16 src, BitVector16 spec)
+            => gbits.gather(src.data, spec.data);
 
         /// <summary>
         /// Populates a target vector with specified source bits
@@ -49,8 +49,8 @@ namespace Z0
         /// <param name="spec">Identifies the source bits of interest</param>
         /// <param name="dst">Receives the identified bits</param>
         [MethodImpl(Inline)]
-        public static BitVector32 Gather(BitVector32 src, BitVector32 spec)
-            => Bits.gather(src.data, spec.data);
+        public static BitVector32 gather(BitVector32 src, BitVector32 spec)
+            => gbits.gather(src.data, spec.data);
 
         /// <summary>
         /// Populates a target vector with specified source bits
@@ -58,7 +58,17 @@ namespace Z0
         /// <param name="spec">Identifies the source bits of interest</param>
         /// <param name="dst">Receives the identified bits</param>
         [MethodImpl(Inline)]
-        public static BitVector64 Gather(BitVector64 src, BitVector64 spec)
-            => Bits.gather(src.data, spec.data);
+        public static BitVector64 gather(BitVector64 src, BitVector64 spec)
+            => gbits.gather(src.data, spec.data);
+
+        /// <summary>
+        /// Populates a target vector with specified source bits
+        /// </summary>
+        /// <param name="spec">Identifies the source bits of interest</param>
+        /// <param name="dst">Receives the identified bits</param>
+        [MethodImpl(Inline)]
+        public static BitVector128 gather(in BitVector128 src, in BitVector128 spec)
+            => from(n128, gather(src.Lo, spec.Lo), gather(src.Hi, spec.Hi));
+
     }
 }

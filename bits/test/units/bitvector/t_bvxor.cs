@@ -36,11 +36,10 @@ namespace Z0
 
         void bv_xor128_check()
         {
-            var vectors = Random.BitVectors(n128);
             for(var i=0; i< SampleSize; i++)
             {
-                var x = vectors.First();
-                var y = vectors.First();
+                var x = Random.BitVector(n128);
+                var y = Random.BitVector(n128);
                 var z = x ^ y;
 
                 var xbs = x.ToBitString();

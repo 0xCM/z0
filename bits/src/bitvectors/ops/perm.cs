@@ -32,7 +32,6 @@ namespace Z0
                     dst[i] = src[j];
             }
             return ref x;
-
         }
 
         /// <summary>

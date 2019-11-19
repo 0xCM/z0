@@ -264,10 +264,18 @@ namespace Z0
         public static bit operator %(BitVector8 x, BitVector8 y)
             => BitVector.dot(x,y);
 
+        /// <summary>
+        /// Arithmetically increments the bitvector
+        /// </summary>
+        /// <param name="lhs">The source operand</param>
         [MethodImpl(Inline)]
         public static BitVector8 operator ++(BitVector8 src)
             => BitVector.inc(src);
 
+        /// <summary>
+        /// Arithmetically decrements the bitvector
+        /// </summary>
+        /// <param name="lhs">The source operand</param>
         [MethodImpl(Inline)]
         public static BitVector8 operator --(BitVector8 src)
             => BitVector.dec(src);
@@ -288,10 +296,6 @@ namespace Z0
         public static bool operator false(BitVector8 src)
             => !src.Nonempty;
 
-        /// <summary>
-        /// Computes the operand's logical negation: if x = 0 then 1 else 0
-        /// </summary>
-        /// <param name="src">The ource operand</param>
         [MethodImpl(Inline)]
         public static Bit operator !(BitVector8 src)
             => src.Empty;

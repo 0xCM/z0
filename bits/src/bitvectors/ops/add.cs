@@ -16,7 +16,7 @@ namespace Z0
     partial class BitVector
     {
         /// <summary>
-        /// Computes the arithmetic sum of two generic bitvectors
+        /// Computes the arithmetic difference z := x - y for generic bitvectors x and y
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
@@ -27,7 +27,7 @@ namespace Z0
                 => gmath.add(x.Data, y.Data);
 
         /// <summary>
-        /// Computes the arithmetic sum of two bitvectors
+        /// Computes the arithmetic sum z := x + y for bitvectors x and y
         /// </summary>
         /// <param name="x">The left bitvector</param>
         /// <param name="y">The right bitvector</param>
@@ -42,33 +42,46 @@ namespace Z0
         /// <param name="y">The right bitvector</param>
         [MethodImpl(Inline)]
         public static BitVector8 add(BitVector8 x, BitVector8 y)
-            => math.add(x.Scalar, y.Scalar);
+            => gmath.add(x.data, y.data);
 
         /// <summary>
-        /// Computes the arithmetic sum of two bitvectors
+        /// Computes the arithmetic sum z := x + y for bitvectors x and y
         /// </summary>
         /// <param name="x">The left bitvector</param>
         /// <param name="y">The right bitvector</param>
         [MethodImpl(Inline)]
         public static BitVector16 add(BitVector16 x, BitVector16 y)
-            => math.add(x.Scalar, y.Scalar);
+            => gmath.add(x.data, y.data);
 
         /// <summary>
-        /// Computes the arithmetic sum of two bitvectors
+        /// Computes the arithmetic sum z := x + y for bitvectors x and y
         /// </summary>
         /// <param name="x">The left bitvector</param>
         /// <param name="y">The right bitvector</param>
         [MethodImpl(Inline)]
         public static BitVector32 add(BitVector32 x, BitVector32 y)
-            => math.add(x.Scalar, y.Scalar);
+            => gmath.add(x.data, y.data);
 
         /// <summary>
-        /// Computes the arithmetic sum of two bitvectors
+        /// Computes the arithmetic sum z := x + y for bitvectors x and y
         /// </summary>
         /// <param name="x">The left bitvector</param>
         /// <param name="y">The right bitvector</param>
         [MethodImpl(Inline)]
         public static BitVector64 add(BitVector64 x, BitVector64 y)
-            => math.add(x.Scalar, y.Scalar); 
+            => gmath.add(x.data, y.data);
+
+        /// <summary>
+        /// Computes the arithmetic sum z := x + y for bitvectors x and y
+        /// </summary>
+        /// <param name="x">The left bitvector</param>
+        /// <param name="y">The right bitvector</param>
+        [MethodImpl(Inline)]
+        public static BitVector128 add(in BitVector128 x, in BitVector128 y)
+        {
+            var z = BitVector.alloc(n128);
+            Math128.add(in x.x0, in y.x0, ref z.x0);
+            return z;
+        }
     }
 }

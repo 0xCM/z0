@@ -16,60 +16,73 @@ namespace Z0
     partial class BitVector
     {
         /// <summary>
-        /// Applies a logical left shift to the source vector
+        /// Computes z := x << s for a bitvector x and shift offset s
         /// </summary>
         /// <param name="x">The source bitvector</param>
-        /// <param name="y">The shift offset</param>
+        /// <param name="s">The shift amount</param>
         [MethodImpl(Inline)]
-        public static BitVector<T> sll<T>(BitVector<T> x, int offset)
+        public static BitVector<T> sll<T>(BitVector<T> x, int s)
             where T : unmanaged
-                => gmath.srl(x.Data,offset);
+                => gmath.srl(x.Data,s);
 
         /// <summary>
-        /// Applies a logical left shift to the source vector
+        /// Computes z := x << s for a bitvector x and shift offset s
         /// </summary>
         /// <param name="x">The source bitvector</param>
-        /// <param name="y">The shift offset</param>
+        /// <param name="y">The shift s</param>
         [MethodImpl(Inline)]
-        public static BitVector4 sll(BitVector4 x, int offset)
-            => math.sll(x.Scalar,offset);
+        public static BitVector4 sll(BitVector4 x, int s)
+            => math.sll(x.Scalar,s);
 
         /// <summary>
-        /// Applies a logical left shift to the source vector
+        /// Computes z := x << s for a bitvector x and shift offset s
         /// </summary>
         /// <param name="x">The source bitvector</param>
-        /// <param name="y">The shift offset</param>
+        /// <param name="y">The shift s</param>
         [MethodImpl(Inline)]
-        public static BitVector8 sll(BitVector8 x, int offset)
-            => math.sll(x.Scalar,offset);
+        public static BitVector8 sll(BitVector8 x, int s)
+            => math.sll(x.Scalar,s);
             
         /// <summary>
-        /// Applies a logical left shift to the source vector
+        /// Computes z := x << s for a bitvector x and shift offset s
         /// </summary>
         /// <param name="x">The source bitvector</param>
-        /// <param name="y">The shift offset</param>
+        /// <param name="y">The shift s</param>
         [MethodImpl(Inline)]
-        public static BitVector16 sll(BitVector16 x, int offset)
-            => math.sll(x.Scalar,offset);
+        public static BitVector16 sll(BitVector16 x, int s)
+            => math.sll(x.Scalar,s);
 
         /// <summary>
-        /// Applies a logical left shift to the source vector
+        /// Computes z := x << s for a bitvector x and shift offset s
         /// </summary>
         /// <param name="x">The source bitvector</param>
-        /// <param name="y">The shift offset</param>
+        /// <param name="y">The shift s</param>
         [MethodImpl(Inline)]
-        public static BitVector32 sll(BitVector32 x, int offset)
-            => math.sll(x.Scalar,offset);
+        public static BitVector32 sll(BitVector32 x, int s)
+            => math.sll(x.Scalar,s);
 
         /// <summary>
-        /// Applies a logical left shift to the source vector
+        /// Computes z := x << s for a bitvector x and shift offset s
         /// </summary>
         /// <param name="x">The source bitvector</param>
-        /// <param name="y">The shift offset</param>
+        /// <param name="y">The shift s</param>
         [MethodImpl(Inline)]
-        public static BitVector64 sll(BitVector64 x, int offset)
-            => math.sll(x.Scalar,offset);
+        public static BitVector64 sll(BitVector64 x, int s)
+            => math.sll(x.Scalar,s);
  
+        /// <summary>
+        /// Computes z := x << s for a bitvector x and shift offset s
+        /// </summary>
+        /// <param name="x">The source bitvector</param>
+        /// <param name="s">The shift amount</param>
+        [MethodImpl(Inline)]
+        public static BitVector128 sll(BitVector128 x, int s)
+        {
+            var z = BitVector.alloc(n128);
+            vblock.sllx(n128, in x.x0, (byte)s, ref z.x0);
+            return z;
+        }
+
 
     }
 

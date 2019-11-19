@@ -26,20 +26,20 @@ namespace Z0
         /// <summary>
         /// The number of cells in the block
         /// </summary>
-        public static readonly int BlockLength = Vector256<T>.Count;
+        public static int BlockLength => Vector256<T>.Count;
 
         /// <summary>
         /// The size, in bytes, of a block 
         /// </summary>
         /// <typeparam name="T">The primitive type</typeparam>
         /// <remarks>Should always be 16 irrespective of the cell type</remarks>
-        public static readonly ByteSize BlockSize = Unsafe.SizeOf<T>() * BlockLength; 
+        public static int BlockSize => Unsafe.SizeOf<T>() * BlockLength; 
 
         /// <summary>
         /// The size, in bytes, of a constituent block cell
         /// </summary>
         /// <typeparam name="T">The primitive type</typeparam>
-        public static readonly ByteSize CellSize = BlockSize / BlockLength;
+        public static int CellSize => BlockSize / BlockLength;
 
         [MethodImpl(Inline)]
         public static implicit operator Span<T>(Span256<T> src)
@@ -127,8 +127,7 @@ namespace Z0
         Span256(T[] src)
         {
             data = src;
-        }
-                
+        }                
 
         [MethodImpl(Inline)]
         Span256(Span<T> src)
@@ -227,6 +226,12 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => data;
+        }
+
+        public Span<byte> Bytes
+        {
+            [MethodImpl(Inline)]
+            get => data.AsBytes();
         }
 
         public int Length 

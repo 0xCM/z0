@@ -1,4 +1,4 @@
-// 2019-11-18 13:26:06:618
+// 2019-11-18 23:19:06:754
 ulong clear_64(ulong src, int p0, int p1)
 {
     IL_0000: ldarg.0
@@ -112,6 +112,90 @@ ref ulong bitmap_g64u_to_64u(in ulong src, byte srcOffset, byte len, byte dstOff
     IL_0005: ldarg.s dst
     IL_0007: call System.UInt64& Z0.gbits::bitmap<System.UInt64>(System.UInt64,System.Byte,System.Byte,System.Byte,System.UInt64&)
     IL_000C: ret
+
+}
+void bs_and(in Span256<uint> x, in Span256<uint> y, Span256<uint> z)
+{
+    IL_0000: call Z0.N256 zfunc::get_n256()
+    IL_0005: ldarg.0
+    IL_0006: ldobj Z0.Span256`1<System.UInt32>
+    IL_000B: stloc.0
+    IL_000C: ldloca.s V_0
+    IL_000E: call System.Int32 Z0.Span256`1<System.UInt32>::get_BlockCount()
+    IL_0013: ldc.i4.8
+    IL_0014: ldarg.0
+    IL_0015: ldobj Z0.Span256`1<System.UInt32>
+    IL_001A: stloc.0
+    IL_001B: ldloca.s V_0
+    IL_001D: call System.UInt32& Z0.Span256`1<System.UInt32>::get_Head()
+    IL_0022: ldarg.1
+    IL_0023: ldobj Z0.Span256`1<System.UInt32>
+    IL_0028: stloc.0
+    IL_0029: ldloca.s V_0
+    IL_002B: call System.UInt32& Z0.Span256`1<System.UInt32>::get_Head()
+    IL_0030: ldarga.s z
+    IL_0032: call System.UInt32& Z0.Span256`1<System.UInt32>::get_Head()
+    IL_0037: call System.Void Z0.vblock::and<System.UInt32>(Z0.N256,System.Int32,System.Int32,System.UInt32&,System.UInt32&,System.UInt32&)
+    IL_003C: ret
+
+}
+void s_and(Span<uint> x, Span<uint> y, Span<uint> z)
+{
+    IL_0000: call Z0.N256 zfunc::get_n256()
+    IL_0005: ldarga.s x
+    IL_0007: call System.Int32 System.Span`1<System.UInt32>::get_Length()
+    IL_000C: ldc.i4.8
+    IL_000D: div
+    IL_000E: call System.Int32 Z0.Span256`1<System.UInt32>::get_BlockLength()
+    IL_0013: ldarg.0
+    IL_0014: call System.UInt32& zfunc::head<System.UInt32>(System.Span`1<System.UInt32>)
+    IL_0019: ldarg.1
+    IL_001A: call System.UInt32& zfunc::head<System.UInt32>(System.Span`1<System.UInt32>)
+    IL_001F: ldarg.2
+    IL_0020: call System.UInt32& zfunc::head<System.UInt32>(System.Span`1<System.UInt32>)
+    IL_0025: call System.Void Z0.vblock::and<System.UInt32>(Z0.N256,System.Int32,System.Int32,System.UInt32&,System.UInt32&,System.UInt32&)
+    IL_002A: ret
+
+}
+BitVector128 and_128(BitVector128 x, BitVector128 y)
+{
+    IL_0000: ldarga.s x
+    IL_0002: ldarga.s y
+    IL_0004: call Z0.BitVector128 Z0.BitVector128::op_BitwiseAnd(Z0.BitVector128&,Z0.BitVector128&)
+    IL_0009: ret
+
+}
+BitVector128 xnor_128(BitVector128 x, BitVector128 y)
+{
+    IL_0000: ldarga.s x
+    IL_0002: ldarga.s y
+    IL_0004: call Z0.BitVector128 Z0.BitVector::xnor(Z0.BitVector128&,Z0.BitVector128&)
+    IL_0009: ret
+
+}
+void partition(BitVector128 x, Span<BitVector32> dst)
+{
+    IL_0000: ldarga.s x
+    IL_0002: ldarg.1
+    IL_0003: call System.Span`1<Z0.BitVector32> Z0.BitVector::partition(Z0.BitVector128&,System.Span`1<Z0.BitVector32>)
+    IL_0008: pop
+    IL_0009: ret
+
+}
+bit dot_64(BitVector64 x, BitVector64 y)
+{
+    IL_0000: ldarga.s x
+    IL_0002: ldarga.s y
+    IL_0004: call Z0.bit Z0.BitVector64::op_Modulus(Z0.BitVector64&,Z0.BitVector64&)
+    IL_0009: ret
+
+}
+bit dot_128(BitVector128 x, BitVector128 y)
+{
+    IL_0000: ldarga.s x
+    IL_0002: ldarga.s y
+    IL_0004: call Z0.bit Z0.BitVector::dot(Z0.BitVector128&,Z0.BitVector128&)
+    IL_0009: ret
 
 }
 byte butterfly_8x1(byte x)
@@ -554,10 +638,10 @@ void bitchars_64u(ulong value, Span<Char> dst)
 }
 BitVector32 and_bv_32u(BitVector32 x, BitVector32 y)
 {
-    IL_0000: ldarga.s x
-    IL_0002: ldarga.s y
-    IL_0004: call Z0.BitVector32 Z0.BitVector::and(Z0.BitVector32&,Z0.BitVector32&)
-    IL_0009: ret
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call Z0.BitVector32 Z0.BitVector::and(Z0.BitVector32,Z0.BitVector32)
+    IL_0007: ret
 
 }
 BitVector32 and_bv_o32u(BitVector32 x, BitVector32 y)
@@ -859,18 +943,6 @@ BitVector32 bitrange_32_a(BitVector32 src, int i, int j)
     IL_0003: ldarg.2
     IL_0004: call Z0.BitVector32 Z0.BitVector32::get_Item(System.Int32,System.Int32)
     IL_0009: ret
-
-}
-BitVector32 bitrange_32_b(BitVector32 src, int i, int j)
-{
-    IL_0000: ldarga.s src
-    IL_0002: ldarg.1
-    IL_0003: call System.Index System.Index::op_Implicit(System.Int32)
-    IL_0008: ldarg.2
-    IL_0009: call System.Index System.Index::op_Implicit(System.Int32)
-    IL_000E: newobj System.Void System.Range::.ctor(System.Index,System.Index)
-    IL_0013: call Z0.BitVector32 Z0.BitVector32::get_Item(System.Range)
-    IL_0018: ret
 
 }
 ulong mask_1x64u(ulong dst, int exp0)

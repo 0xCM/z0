@@ -62,5 +62,16 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitVector64 alt(N64 n, bit parity)
             => parity ? x5555555555555555 : xAAAAAAAAAAAAAAAA;
+
+        /// <summary>
+        /// Creates a bitvector with uniformly alternating states where the state of the
+        /// first bit is determine by a specified parity bit
+        /// </summary>
+        /// <param name="n">The width selector</param>
+        /// <param name="parity">The state of the first bit</param>
+        [MethodImpl(Inline)]
+        public static BitVector128 alt(N128 n, bit parity)
+            => parity ? (x5555555555555555,x5555555555555555) : (xAAAAAAAAAAAAAAAA,xAAAAAAAAAAAAAAAA);
+
     }
 }

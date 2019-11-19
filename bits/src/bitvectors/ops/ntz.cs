@@ -59,7 +59,7 @@ namespace Z0
         /// Counts the number of trailing zeros
         /// </summary>
         [MethodImpl(Inline)]
-        public static uint ntz(BitVector128 x)
+        public static uint ntz(in BitVector128 x)
         {
             if(x.x0 == 0)
                 return gbits.ntz(x.x1) + 64;

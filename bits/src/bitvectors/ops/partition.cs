@@ -17,40 +17,51 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Span<BitVector4> partition(BitVector16 src, Span<BitVector4> dst)
         {
-            var bs = dst.AsBytes();
-            BitParts.part16x4(src,bs);
+            BitParts.part16x4(src, bytes(dst));
             return dst;
         }
 
         [MethodImpl(Inline)]
         public static Span<BitVector8> partition(BitVector16 src, Span<BitVector8> dst)
         {
-            var bs = dst.AsBytes();
-            BitParts.part16x8(src,bs);
+            BitParts.part16x8(src, bytes(dst));
             return dst;
         }
 
         [MethodImpl(Inline)]
         public static Span<BitVector4> partition(BitVector32 src, Span<BitVector4> dst)
         {
-            var bs = dst.AsBytes();
-            BitParts.part32x4(src,bs);
+            BitParts.part32x4(src, bytes(dst));
             return dst;
         }
 
         [MethodImpl(Inline)]
         public static Span<BitVector8> partition(BitVector32 src, Span<BitVector8> dst)
         {
-            var bs = dst.AsBytes();
-            BitParts.part32x8(src,bs);
+            BitParts.part32x8(src, bytes(dst));
             return dst;
         }
 
         [MethodImpl(Inline)]
         public static Span<BitVector16> partition(BitVector32 src, Span<BitVector16> dst)
         {
-            var bs = dst.AsUInt16();
-            BitParts.part32x16(src,bs);
+            BitParts.part32x16(src,dst.AsUInt16());
+            return dst;
+        }
+
+        [MethodImpl(Inline)]
+        public static Span<BitVector8> partition(BitVector64 src, Span<BitVector8> dst)
+        {            
+            BitParts.part64x8(src, bytes(dst));
+            return dst;
+        }
+
+        [MethodImpl(Inline)]
+        public static Span<BitVector32> partition(in BitVector128 src, Span<BitVector32> dst)
+        {            
+            ref var target = ref head(dst.AsUInt32());
+            BitParts.part64x32(src.x0, ref target);
+            BitParts.part64x32(src.x1, ref seek(ref target,2));
             return dst;
         }
 

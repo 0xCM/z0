@@ -56,7 +56,7 @@ namespace Z0
         /// <param name="x">The left bitvector</param>
         /// <param name="y">The right bitvector</param>
         [MethodImpl(Inline)]
-        public static BitVector32 and(in BitVector32 x, in BitVector32 y)
+        public static BitVector32 and(BitVector32 x, BitVector32 y)
             => gmath.and(x.data, y.data);
 
         /// <summary>
@@ -73,11 +73,9 @@ namespace Z0
         /// </summary>
         /// <param name="rhs">The right vector</param>
         [MethodImpl(Inline)]
-        public static BitVector128 and(BitVector128 x, BitVector128 y)
-        {
-            var z = alloc(n128);
-            vblock.and(n128, in x.x0, in y.x0, ref z.x0);
-            return z;
-        }
+        public static BitVector128 and(in BitVector128 x, in BitVector128 y)
+            => from(n128, gmath.and(x.x0, y.x0), gmath.and(x.x1,  y.x1));
+
+
     }
 }

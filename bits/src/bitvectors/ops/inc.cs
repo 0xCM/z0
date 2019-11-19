@@ -23,7 +23,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitVector<T> inc<T>(BitVector<T> x)
             where T : unmanaged
-                => gmath.inc(x.Data);
+                => gmath.inc(x.data);
 
         /// <summary>
         /// Arithmetically increments the source vector
@@ -38,7 +38,6 @@ namespace Z0
             return ref x;
         }
 
-
         [MethodImpl(Inline)]
         public static BitVector4 inc(BitVector4 x)
         {
@@ -49,35 +48,47 @@ namespace Z0
         }
 
         /// <summary>
-        /// Decrements the source vector
+        /// Increments the source vector
         /// </summary>
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
         public static BitVector8 inc(BitVector8 x)        
-            => math.inc(x.data);
+            => gmath.inc(x.data);
         
         /// <summary>
-        /// Decrements the source vector
+        /// Increments the source vector
         /// </summary>
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
         public static BitVector16 inc(BitVector16 x)        
-            => math.inc(x.data);
+            => gmath.inc(x.data);
 
         /// <summary>
-        /// Decrements the source vector
+        /// Increments the source vector
         /// </summary>
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
         public static BitVector32 inc(BitVector32 x)        
-            => math.inc(x.data);
+            => gmath.inc(x.data);
 
         /// <summary>
-        /// Decrements the source vector
+        /// Increments the source vector
         /// </summary>
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
         public static BitVector64 inc(BitVector64 x)        
-            => math.inc(x.data);
+            => gmath.inc(x.data);
+
+        /// <summary>
+        /// Increments the source vector
+        /// </summary>
+        /// <param name="x">The source vector</param>
+        [MethodImpl(Inline)]
+        public static BitVector128 inc(in BitVector128 x)        
+        {            
+            var y  = alloc(n128);
+            Math128.inc(in x.x0, ref y.x0);
+            return x;
+        }
     }
 }

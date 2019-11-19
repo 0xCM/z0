@@ -160,7 +160,6 @@ namespace Z0
         public static ulong project(ulong src, Part64x2 part)
             => project(src, (ulong)part);
 
-
         /// <summary>
         /// Partitions the first 8 bits of a 32-bit source into 4 target segments each with an effective width of 2
         /// </summary>
@@ -176,15 +175,24 @@ namespace Z0
         }
 
         /// <summary>
+        /// Partitions the source into 4 target segments of physical widht 8 and effective width 2
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <param name="dst">The target memory location</param>
+        [MethodImpl(Inline)]
+        public static void part8x2(byte src, ref byte dst)
+            => part8x2((uint)src, ref dst);
+
+        /// <summary>
         /// Partitions the first 16 bits of a 32-bit source into 8 target segments each with an effective width of 2
         /// </summary>
         /// <param name="src">The source value</param>
         /// <param name="dst">The target memory location</param>
         [MethodImpl(Inline)]
-        public static void part16x2(uint src, ref byte dst)
+        public static void part16x2(ushort src, ref byte dst)
         {
-            part8x2(src, ref dst);
-            part8x2(src >> 8, ref seek(ref dst, 4));
+            part8x2((byte)src, ref dst);
+            part8x2((byte)(src >> 8), ref seek(ref dst, 4));
         }
 
         /// <summary>
@@ -195,8 +203,8 @@ namespace Z0
         [MethodImpl(Inline)]
         public static void part32x2(uint src, ref byte dst)
         {
-            part16x2(src, ref dst);
-            part16x2(src >> 16, ref seek(ref dst, 8));
+            part16x2((ushort)src, ref dst);
+            part16x2((ushort)(src >> 16), ref seek(ref dst, 8));
         }
     }
 }

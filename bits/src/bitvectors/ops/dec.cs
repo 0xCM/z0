@@ -23,7 +23,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitVector<T> dec<T>(BitVector<T> x)
             where T : unmanaged
-                => gmath.dec(x.Data);
+                => gmath.dec(x.data);
 
         /// <summary>
         /// Arithmetically decrements the source vector
@@ -43,7 +43,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
         public static BitVector8 dec(BitVector8 x)        
-            => math.dec(x.data);
+            => gmath.dec(x.data);
         
         /// <summary>
         /// Arithmetically decrements the source vector
@@ -51,7 +51,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
         public static BitVector16 dec(BitVector16 x)        
-            => math.dec(x.data);
+            => gmath.dec(x.data);
 
         /// <summary>
         /// Arithmetically decrements the source vector
@@ -59,7 +59,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
         public static BitVector32 dec(BitVector32 x)        
-            => math.dec(x.data);
+            => gmath.dec(x.data);
 
         /// <summary>
         /// Arithmetically decrements the source vector
@@ -67,6 +67,20 @@ namespace Z0
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
         public static BitVector64 dec(BitVector64 x)        
-            => math.dec(x.data);
+            => gmath.dec(x.data);
+ 
+        /// <summary>
+        /// Decrements the source vector
+        /// </summary>
+        /// <param name="x">The source vector</param>
+        [MethodImpl(Inline)]
+        public static BitVector128 dec(in BitVector128 x)        
+        {
+            var y  = alloc(n128);
+            Math128.dec(in x.x0, ref y.x0);
+            return x;
+        }
+
+ 
     }
 }

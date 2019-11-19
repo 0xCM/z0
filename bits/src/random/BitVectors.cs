@@ -30,66 +30,6 @@ namespace Z0
             return stream(produce(), random.RngKind);            
         }
 
-        /// <summary>
-        /// Produces a stream of random 8-bit bitvectors
-        /// </summary>
-        /// <param name="random">The random source</param>
-        public static IRandomStream<BitVector8> BitVectors(this IPolyrand random, N8 n)
-        {
-            IEnumerable<BitVector8> produce()
-            {            
-                while(true)
-                    yield return random.BitVector(n);
-            }
-
-            return stream(produce(), random.RngKind);            
-        }            
-
-
-        /// <summary>
-        /// Produces a stream of random 32-bit bitvectors
-        /// </summary>
-        /// <param name="random">The random source</param>
-        public static IRandomStream<BitVector32> BitVectors(this IPolyrand random, N32 n)
-        {
-            IEnumerable<BitVector32> produce()
-            {
-                while(true)
-                    yield return random.BitVector(n);
-
-            }
-            return stream(produce(), random.RngKind);
-        }            
-
-        /// <summary>
-        /// Produces a stream of random 64-bit bitvectors
-        /// </summary>
-        /// <param name="random">The random source</param>
-        public static IRandomStream<BitVector64> BitVectors(this IPolyrand random, N64 n)
-        {
-            IEnumerable<BitVector64> produce()
-            {
-                while(true)
-                    yield return random.BitVector(n);
-            }
-            return stream(produce(), random.RngKind);
-        }            
-
-        /// <summary>
-        /// Produces a stream of random 128-bit bitvectors
-        /// </summary>
-        /// <param name="random">The random source</param>
-        public static IRandomStream<BitVector128> BitVectors(this IPolyrand random, N128 n)
-        {
-            IEnumerable<BitVector128> produce()
-            {
-                while(true)
-                    yield return random.BitVector(n);
-
-            }
-            return stream(produce(), random.RngKind);
-        }            
-
         public static void Fill(this IPolyrand random, Span<bit> dst)
         {
             const int segwidth = 64;

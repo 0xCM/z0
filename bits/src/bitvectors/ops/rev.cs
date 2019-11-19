@@ -31,7 +31,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
         public static BitVector4 rev(BitVector4 x)        
-            => Bits.rev(x.data);
+            => gbits.rev(x.data);
 
         /// <summary>
         /// Reverses the bits in the source vector
@@ -39,7 +39,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
         public static BitVector8 rev(BitVector8 x)        
-            => Bits.rev(x.data);
+            => gbits.rev(x.data);
         
         /// <summary>
         /// Reverses the bits in the source vector
@@ -47,7 +47,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
         public static BitVector16 rev(BitVector16 x)        
-            => Bits.rev(x.data);
+            => gbits.rev(x.data);
 
         /// <summary>
         /// Reverses the bits in the source vector
@@ -55,7 +55,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
         public static BitVector32 rev(BitVector32 x)        
-            => Bits.rev(x.data);
+            => gbits.rev(x.data);
 
         /// <summary>
         /// Reverses the bits in the source vector
@@ -63,6 +63,6 @@ namespace Z0
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
         public static BitVector64 rev(BitVector64 x)        
-            => Bits.rev(x.data);
+            => gbits.rev(x.data);
     }
 }

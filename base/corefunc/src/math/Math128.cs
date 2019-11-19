@@ -156,6 +156,21 @@ namespace Z0
         }
 
         /// <summary>
+        /// Computes the sum c := a + b of 128-bit unsigned integers a and b
+        /// </summary>
+        /// <param name="a">A reference to the left 128-bits</param>
+        /// <param name="b">A reference to the right 128-bits</param>
+        /// <param name="c">A reference to the target 128-bits</param>
+        /// <remarks>Follows https://github.com/chfast/intx/include/intx/int128.hpp</remarks>
+        [MethodImpl(Inline)]
+        public static void add(in ulong a, in ulong b, ref ulong c)
+        {
+            c = a + b;
+            bit carry = a > c;
+            seek(ref c, 1) = skip(in a, 1) + skip(in b, 1) + (uint)carry;
+        }
+
+        /// <summary>
         /// Computes the difference of two 128-bit integers
         /// </summary>
         /// <param name="x">The first integer, represented via paired hi/lo components</param>
@@ -168,6 +183,21 @@ namespace Z0
             bit borrow = x.A < lo;
             var hi = x.B - y.B - (uint)borrow;
             return (lo,hi);
+        }
+
+        /// <summary>
+        /// Computes the difference c := a - b between 128-bit unsigned integers a and b
+        /// </summary>
+        /// <param name="a">A reference to the left 128-bits</param>
+        /// <param name="b">A reference to the right 128-bits</param>
+        /// <param name="c">A reference to the target 128-bits</param>
+        /// <remarks>Follows https://github.com/chfast/intx/include/intx/int128.hpp</remarks>
+        [MethodImpl(Inline)]
+        public static void sub(in ulong a, in ulong b, ref ulong c)
+        {
+            c = a - b;
+            bit borrow = a < c;
+            seek(ref c, 1) = skip(in a, 1) - skip(in b, 1) - (uint)borrow;
         }
 
         /// <summary>
@@ -190,6 +220,36 @@ namespace Z0
         {
             x = add(x,one);
             return ref x;
+        }
+
+        [MethodImpl(Inline)]
+        public static ref ulong inc(ref ulong x)
+        {
+            var o = one;
+            add(in x, in o.A, ref x);
+            return ref x;
+        }
+
+        [MethodImpl(Inline)]
+        public static void inc(in ulong x, ref ulong y)
+        {
+            var o = one;
+            add(in x, in o.A, ref y);
+        }
+
+        [MethodImpl(Inline)]
+        public static ref ulong dec(ref ulong x)
+        {
+            var o = one;
+            sub(in x, in o.A, ref x);
+            return ref x;
+        }
+
+        [MethodImpl(Inline)]
+        public static void dec(in ulong x, ref ulong y)
+        {
+            var o = one;
+            sub(in x, in o.A, ref y);
         }
 
         /// <summary>

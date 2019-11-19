@@ -10,7 +10,7 @@ namespace Z0
     using Z0;
  
     using static zfunc;
-    using static Bits;
+    using static As;
 
     partial class BitParts
     {        
@@ -78,45 +78,58 @@ namespace Z0
             => project(src, (ulong)part);
  
         /// <summary>
-        /// Partitions the first 16 bits of an unsigned 32-bit integer into 2 target segments each with a width of 8
+        /// Partitions the source value into 2 segments of width 8
         /// </summary>
         /// <param name="src">The source value</param>
         /// <param name="dst">A target span of sufficient length</param>
-        public static void part16x8(uint src, ref byte dst)
-        {
-            seek(ref dst, 0) = (byte)((src >> 0) & 0xFF);
-            seek(ref dst, 1) = (byte)((src >> 8) & 0xFF);
-        }
+        [MethodImpl(Inline)]
+        public static void part16x8(ushort src, ref byte dst)
+            => uint16(ref dst) = src;
 
         /// <summary>
-        /// Partitions the first 16 bits of an unsigned 32-bit integer into 2 target segments each with a width of 8
+        /// Partitions the source value into 2 segments of width 8
         /// </summary>
         /// <param name="src">The source value</param>
         /// <param name="dst">A target span of sufficient length</param>
-        public static void part16x8(uint src, Span<byte> dst)
-            => part16x8(src, ref head(dst));
+        [MethodImpl(Inline)]
+        public static void part16x8(ushort src, Span<byte> dst)
+            => head16(dst) = src;
  
         /// <summary>
         /// Partitions a 32-bit source value into 4 segments of bit width 8
         /// </summary>
         /// <param name="src">The source value</param>
         /// <param name="dst">A target span of sufficient length</param>
+        [MethodImpl(Inline)]
         public static void part32x8(uint src, ref byte dst)
-        {
-            seek(ref dst, 0) = (byte)((src >> 0) & 0xFF);
-            seek(ref dst, 1) = (byte)((src >> 8) & 0xFF);
-            seek(ref dst, 2) = (byte)((src >> 16) & 0xFF);
-            seek(ref dst, 3) = (byte)((src >> 24) & 0xFF);
-        }
-
+            => uint32(ref dst) = src;
 
         /// <summary>
-        /// Partitions a 32-bit source value into 4 segments of bit width 8
+        /// Partitions a 32-bit source value into 4 segments of width 8
         /// </summary>
         /// <param name="src">The source value</param>
-        /// <param name="dst">A target span of sufficient length</param>
+        /// <param name="dst">The partition target</param>
+        [MethodImpl(Inline)]
         public static void part32x8(uint src, Span<byte> dst)
-            => part32x8(src, ref head(dst));
+            => head32(dst) = src;
 
+        /// <summary>
+        /// Partitions a 64-bit source value into 8 segments of width 8
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <param name="dst">The partition target</param>
+        [MethodImpl(Inline)]
+        public static void part64x8(ulong src, ref byte dst)
+            => uint64(ref dst) = src;
+
+        /// <summary>
+        /// Partitions a 64-bit source value into 8 segments of width 8
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <param name="dst">The partition target</param>
+        [MethodImpl(Inline)]
+        public static void part64x8(ulong src, Span<byte> dst)
+            => head64(dst) = src;
+            
     }
 }

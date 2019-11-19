@@ -12,7 +12,7 @@ namespace Z0
     partial class BitVector
     {
         /// <summary>
-        /// Computes the bitwise NOR between generic source vectors
+        /// Computes the bitvector z: = ~(x | y) from bitvectors x and y
         /// </summary>
         /// <param name="x">The left bitvector</param>
         /// <param name="y">The right bitvector</param>
@@ -23,7 +23,7 @@ namespace Z0
                 => gmath.nor(x.Data, y.Data);
 
         /// <summary>
-        /// Computes the bitwise NOR between two source vectors
+        /// Computes the bitvector z: = ~(x | y) from bitvectors x and y
         /// </summary>
         /// <param name="x">The left bitvector</param>
         /// <param name="y">The right bitvector</param>
@@ -32,7 +32,7 @@ namespace Z0
             => gmath.nor(x.data, y.data);
 
         /// <summary>
-        /// Computes the bitwise NOR between two source vectors
+        /// Computes the bitvector z: = ~(x | y) from bitvectors x and y
         /// </summary>
         /// <param name="x">The left bitvector</param>
         /// <param name="y">The right bitvector</param>
@@ -41,7 +41,7 @@ namespace Z0
             => gmath.nor(x.data, y.data);
 
         /// <summary>
-        /// Computes the bitwise NOR between two source vectors
+        /// Computes the bitvector z: = ~(x | y) from bitvectors x and y
         /// </summary>
         /// <param name="x">The left bitvector</param>
         /// <param name="y">The right bitvector</param>
@@ -50,7 +50,7 @@ namespace Z0
             => gmath.nor(x.data, y.data);
 
         /// <summary>
-        /// Computes the bitwise NOR between two source vectors
+        /// Computes the bitvector z: = ~(x | y) from bitvectors x and y
         /// </summary>
         /// <param name="x">The left bitvector</param>
         /// <param name="y">The right bitvector</param>
@@ -59,12 +59,26 @@ namespace Z0
             => gmath.nor(x.data, y.data);
 
         /// <summary>
-        /// Computes the bitwise NOR between two source vectors
+        /// Computes the bitvector z: = ~(x | y) from bitvectors x and y
         /// </summary>
         /// <param name="x">The left bitvector</param>
         /// <param name="y">The right bitvector</param>
         [MethodImpl(Inline)]
         public static BitVector64 nor(BitVector64 x, BitVector64 y)
             => gmath.nor(x.data, y.data); 
+
+        /// <summary>
+        /// Computes the bitvector z: = ~(x | y) from bitvectors x and y
+        /// </summary>
+        /// <param name="x">The left bitvector</param>
+        /// <param name="y">The right bitvector</param>
+        [MethodImpl(Inline)]
+        public static BitVector128 nor(in BitVector128 x, in BitVector128 y)
+        {
+            var z = alloc(n128);
+            vblock.nor(n128, in x.x0, in y.x0, ref z.x0);
+            return z;
+        }
+
     }
 }

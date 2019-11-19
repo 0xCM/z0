@@ -138,6 +138,14 @@ namespace Z0
             => src.TakeUInt16();
 
         [MethodImpl(Inline)]
+        public static BitVector16 from(N16 n, byte lo, byte hi)
+            => new BitVector16((ushort)((ushort)hi << 8 | (ushort)lo));
+
+        [MethodImpl(Inline)]
+        public static BitVector16 from(N16 n, ulong src)
+            => new BitVector16((ushort)src);
+
+        [MethodImpl(Inline)]
         public static BitVector32 from(N32 n, uint src)
             => new BitVector32(src);
 
@@ -188,6 +196,7 @@ namespace Z0
         public static BitVector32 from(N32 n, ushort lo, ushort hi)
             => from(n, (uint)hi << 16 | (uint)lo);
 
+
         /// <summary>
         /// Creates a generic bitvector from 4 explicit bytes
         /// </summary>
@@ -195,6 +204,14 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitVector<uint> from(byte x0, byte x1, byte x2, byte x3)
             => BitVector<uint>.From(Bits.pack(x0,x1,x2,x3));
+
+        /// <summary>
+        /// Creates a generic bitvector from 4 explicit bytes
+        /// </summary>
+        /// <param name="src">The source bitstring</param>
+        [MethodImpl(Inline)]
+        public static BitVector64 from(N64 n, ushort x0, ushort x1, ushort x2, ushort x3)
+            => Bits.pack(x0,x1,x2,x3);
 
         /// <summary>
         /// Creates a 64-bit bitvector where the first 8 bits a populated with a specified value and 

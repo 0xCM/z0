@@ -41,22 +41,6 @@ namespace Z0
         public static BitVector128 Ones => BitVector.from(N,UInt64.MaxValue, UInt64.MaxValue);
 
         /// <summary>
-        /// Creates a vector from a primal source value
-        /// </summary>
-        /// <param name="src">The source value</param>
-        [MethodImpl(Inline)]
-        public static BitVector128 from(byte src)
-            => BitVector.from(N,(ulong)src);
-
-        [MethodImpl(Inline)]    
-        public static implicit operator BitVector128((ulong x0, ulong x1) src)
-            => new BitVector128(src.x0, src.x1);
-
-        [MethodImpl(Inline)]    
-        public static implicit operator (ulong x0, ulong x1)(BitVector128 src)
-            => (src.x0, src.x1);
-
-        /// <summary>
         /// Implicitly converts a scalar value to a 128-bit bitvector
         /// </summary>
         /// <param name="src">The source vector</param>
@@ -126,7 +110,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
         public static explicit operator BitVector8(BitVector128 src)
-            => src.ToBitVector8();
+            => BitVector.from(n8, src.x0);
 
         /// <summary>
         /// Explicitly truncates the source to 16 bits
@@ -134,7 +118,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
         public static explicit operator BitVector16(BitVector128 src)
-            => src.ToBitVector16();
+            => BitVector.from(n16, src.x0);
 
         /// <summary>
         /// Explicitly truncates the source to 32 bits
@@ -142,7 +126,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
         public static explicit operator BitVector32(BitVector128 src)
-            => src.ToBitVector32();
+            => BitVector.from(n32, src.x0);
 
         /// <summary>
         /// Explicitly truncates the source to 64 bits
@@ -150,7 +134,15 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
         public static explicit operator BitVector64(BitVector128 src)
-            => src.ToBitVector64();
+            => BitVector.from(n64, src.x0);
+
+        [MethodImpl(Inline)]    
+        public static implicit operator BitVector128((ulong x0, ulong x1) src)
+            => new BitVector128(src.x0, src.x1);
+
+        [MethodImpl(Inline)]    
+        public static implicit operator (ulong x0, ulong x1)(BitVector128 src)
+            => (src.x0, src.x1);
 
         /// <summary>
         /// Computes the bitwise AND of the source operands
@@ -159,7 +151,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static BitVector128 operator &(BitVector128 x, BitVector128 y)
+        public static BitVector128 operator &(in BitVector128 x, in BitVector128 y)
             => BitVector.and(x,y);
 
         /// <summary>
@@ -182,6 +174,15 @@ namespace Z0
             => BitVector.xor(x,y);
 
         /// <summary>
+        /// Computes the scalar product of the operands
+        /// </summary>
+        /// <param name="x">The left operand</param>
+        /// <param name="y">The right operand</param>
+        [MethodImpl(Inline)]
+        public static bit operator %(BitVector128 x, BitVector128 y)
+            => BitVector.dot(x,y);
+
+        /// <summary>
         /// Computes the bitwise complement of the operand
         /// </summary>
         /// <param name="lhs">The source operand</param>
@@ -198,13 +199,38 @@ namespace Z0
             => BitVector.negate(x);
 
         /// <summary>
-        /// Computes the scalar product of the operands
+        /// Computes the arithmetic difference of the bitvectors
         /// </summary>
-        /// <param name="x">The left operand</param>
-        /// <param name="y">The right operand</param>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static bit operator %(BitVector128 x, BitVector128 y)
-            => BitVector.dot(x,y);
+        public static BitVector128 operator - (BitVector128 x, BitVector128 y)
+            => BitVector.sub(x,y);
+
+        /// <summary>
+        /// Computes the arithmetic sum of the bitvectors
+        /// </summary>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
+        [MethodImpl(Inline)]
+        public static BitVector128 operator + (BitVector128 x, BitVector128 y)
+            => BitVector.add(x,y);
+
+        /// <summary>
+        /// Arithmetically increments the bitvector
+        /// </summary>
+        /// <param name="lhs">The source operand</param>
+        [MethodImpl(Inline)]
+        public static BitVector128 operator ++(BitVector128 x)
+            => BitVector.inc(x);
+
+        /// <summary>
+        /// Arithmetically decrements the bitvector
+        /// </summary>
+        /// <param name="lhs">The source operand</param>
+        [MethodImpl(Inline)]
+        public static BitVector128 operator --(BitVector128 x)
+            => BitVector.dec(x);
 
         /// <summary>
         /// Returns true if the source vector is nonzero, false otherwise
@@ -223,6 +249,10 @@ namespace Z0
             => !src.Nonempty;
 
         [MethodImpl(Inline)]
+        public static Bit operator !(BitVector128 src)
+            => src.Empty;
+
+        [MethodImpl(Inline)]
         public static bool operator ==(in BitVector128 lhs, in BitVector128 rhs)
             => lhs.Equals(rhs);
 
@@ -233,32 +263,21 @@ namespace Z0
         [MethodImpl(Inline)]    
         public BitVector128(ulong x0, ulong x1)
         {
-            this.x0 = x0; 
+            this.x0 = x0;
             this.x1 = x1;
         }
 
         [MethodImpl(Inline)]    
-        public BitVector128(uint x00, uint x01,uint x10, uint x11)
+        public BitVector128(uint x00, uint x01, uint x10, uint x11)
         {
             this.x0 = Bits.pack(x00,x01);
             this.x1 = Bits.pack(x10, x11);
         }
 
         /// <summary>
-        /// Assigns the bitvector a specified value
-        /// </summary>
-        /// <param name="src">The source value</param>
-        [MethodImpl(Inline)]
-        public void assign(ulong x0, ulong x1)
-        {
-            this.x0 = x0;
-            this.x1 = x1;
-        }
-
-        /// <summary>
         /// The vector's 64 least significant bits
         /// </summary>
-        public readonly BitVector64 Lo
+        public BitVector64 Lo
         {
             [MethodImpl(Inline)]
             get => x0;
@@ -267,7 +286,7 @@ namespace Z0
         /// <summary>
         /// The vector's 64 most significant bits
         /// </summary>
-        public readonly BitVector64 Hi
+        public BitVector64 Hi
         {
             [MethodImpl(Inline)]
             get => x1;
@@ -283,18 +302,9 @@ namespace Z0
         }
 
         /// <summary>
-        /// The maximum number of bits that can be represented
-        /// </summary>
-        public readonly uint Capacity
-        {
-            [MethodImpl(Inline)]
-            get => Length;
-        }
-
-        /// <summary>
         /// Returns true if no bits are enabled, false otherwise
         /// </summary>
-        public readonly bool Empty
+        public bool Empty
         {
             [MethodImpl(Inline)]
             get => x0 == 0 && x1 == 0;
@@ -303,7 +313,7 @@ namespace Z0
         /// <summary>
         /// Returns true if the vector has at least one enabled bit; false otherwise
         /// </summary>
-        public readonly bool Nonempty
+        public bool Nonempty
         {
             [MethodImpl(Inline)]
             get => !Empty;
@@ -336,11 +346,14 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public readonly bool Equals(BitVector128 rhs)
+        public bool Equals(BitVector128 rhs)
             => x0 == rhs.x0 && x1 == rhs.x1;
 
         public override bool Equals(object obj)
-            => obj is BitVector128 x && Equals(x);
+            => throw new NotSupportedException();
+
+        // public override bool Equals(object obj)
+        //     => obj is BitVector128 x && Equals(x);
         
         public override int GetHashCode()
             => HashCode.Combine(x0,x1);

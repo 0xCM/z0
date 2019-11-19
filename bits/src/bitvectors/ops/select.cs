@@ -16,20 +16,20 @@ namespace Z0
     partial class BitVector
     {
         /// <summary>
-        /// Computes the bitwise selection among three generic source vectors
+        /// Computes the bitwise ternary select for bitvector operands
         /// </summary>
-        /// <param name="x">The pivot vector</param>
+        /// <param name="x">The pivot/mask vector</param>
         /// <param name="y">The primary choice</param>
         /// <param name="z">The alternative choice</param>
         [MethodImpl(Inline)]
         public static BitVector<T> select<T>(BitVector<T> x, BitVector<T> y, BitVector<T> z)
             where T : unmanaged
-                => gmath.select(x.Data,y.Data, z.Data);
+                => gmath.select(x.data, y.data, z.data);
 
         /// <summary>
-        /// Computes the bitwise selection among three source vectors
+        /// Computes the bitwise ternary select for bitvector operands
         /// </summary>
-        /// <param name="x">The pivot vector</param>
+        /// <param name="x">The pivot/mask vector</param>
         /// <param name="y">The primary choice</param>
         /// <param name="z">The alternative choice</param>
         [MethodImpl(Inline)]
@@ -47,9 +47,9 @@ namespace Z0
             => gmath.select(x.data, y.data, z.data);
 
         /// <summary>
-        /// Computes the bitwise selection among three source vectors
+        /// Computes the bitwise ternary select for bitvector operands
         /// </summary>
-        /// <param name="x">The pivot vector</param>
+        /// <param name="x">The pivot/mask vector</param>
         /// <param name="y">The primary choice</param>
         /// <param name="z">The alternative choice</param>
         [MethodImpl(Inline)]
@@ -57,9 +57,9 @@ namespace Z0
             => gmath.select(x.data, y.data, z.data);
 
         /// <summary>
-        /// Computes the bitwise selection among three source vectors
+        /// Computes the bitwise ternary select for bitvector operands
         /// </summary>
-        /// <param name="x">The pivot vector</param>
+        /// <param name="x">The pivot/mask vector</param>
         /// <param name="y">The primary choice</param>
         /// <param name="z">The alternative choice</param>
         [MethodImpl(Inline)]
@@ -67,14 +67,21 @@ namespace Z0
             => gmath.select(x.data, y.data, z.data);
 
         /// <summary>
-        /// Computes the bitwise selection among three source vectors
+        /// Computes the bitwise ternary select for bitvector operands
         /// </summary>
-        /// <param name="x">The pivot vector</param>
+        /// <param name="x">The pivot/mask vector</param>
         /// <param name="y">The primary choice</param>
         /// <param name="z">The alternative choice</param>
         [MethodImpl(Inline)]
         public static BitVector64 select(BitVector64 x, BitVector64 y, BitVector64 z)
             => gmath.select(x.data, y.data, z.data);
 
+        [MethodImpl(Inline)]
+        public static BitVector128 select(in BitVector128 x, in BitVector128 y, in BitVector128 z)
+        {
+            var selected = BitVector.alloc(n128);
+            vblock.select(n128, x.x0, y.x0,z.x0, ref selected.x0);
+            return selected;
+        }        
     }
 }

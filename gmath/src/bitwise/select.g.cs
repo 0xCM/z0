@@ -13,7 +13,7 @@ namespace Z0
     {
         /// <summary>
         /// Defines the ternary bitwise select operator over primal unsigned integers, 
-        /// select(a,b,c) := or(and(a, b), and(not(a), c)) = or(and(a,b), notimply(a,c));
+        /// select(a,b,c) := or(a & b, and(~a, c)) = or(and(a,b), notimpl(a,c));
         /// </summary>
         /// <param name="a">The first operand</param>
         /// <param name="b">The second operand</param>

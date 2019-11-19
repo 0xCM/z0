@@ -12,7 +12,7 @@ namespace Z0
     partial class BitVector
     {
         /// <summary>
-        /// Computes the bitvector z: = x ^ y from bitvectors x and y
+        /// Computes  z := x ^ y from bitvectors x and y
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
@@ -23,7 +23,7 @@ namespace Z0
                 => gmath.xor(x.Data,y.Data);
 
         /// <summary>
-        /// Computes the bitvector z: = x ^ y from bitvectors x and y
+        /// Computes  z := x ^ y from bitvectors x and y
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
@@ -32,7 +32,7 @@ namespace Z0
             => gmath.xor(x.data,y.data);
 
         /// <summary>
-        /// Computes the bitvector z: = x ^ y from bitvectors x and y
+        /// Computes  z := x ^ y from bitvectors x and y
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
@@ -41,7 +41,7 @@ namespace Z0
             => gmath.xor(x.data,y.data);
 
         /// <summary>
-        /// Computes the bitvector z: = x ^ y from bitvectors x and y
+        /// Computes  z := x ^ y from bitvectors x and y
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
@@ -59,7 +59,7 @@ namespace Z0
             => gmath.xor(x.data, y.data);
 
         /// <summary>
-        /// Computes the bitvector z: = x ^ y from bitvectors x and y
+        /// Computes  z := x ^ y from bitvectors x and y
         /// </summary>
         /// <param name="x">The left bitvector</param>
         /// <param name="y">The right bitvector</param>
@@ -68,16 +68,12 @@ namespace Z0
             => gmath.xor(x.data, y.data);
 
         /// <summary>
-        /// Computes the bitvector z: = x ^ y from bitvectors x and y
+        /// Computes  z := x ^ y from bitvectors x and y
         /// </summary>
         /// <param name="x">The left bitvector</param>
         /// <param name="y">The right bitvector</param>
         [MethodImpl(Inline)]
-        public static BitVector128 xor(BitVector128 x, BitVector128 y)
-        {
-            var z = alloc(n128);
-            vblock.xor(n128, in x.x0, in y.x0, ref z.x0);
-            return z;
-        }
+        public static BitVector128 xor(in BitVector128 x, in BitVector128 y)
+            => from(n128, gmath.xor(x.x0, y.x0), gmath.xor(x.x1,  y.x1));
     }
 }

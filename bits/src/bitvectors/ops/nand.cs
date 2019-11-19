@@ -16,61 +16,68 @@ namespace Z0
     partial class BitVector
     {
         /// <summary>
-        /// Computes the bitwise NAND between two generic vectors
+        /// Computes z := ~(x & y) for bitvectors x and y
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         /// <typeparam name="T">The primal type</typeparam>
-        /// <returns></returns>
         [MethodImpl(Inline)]
         public static BitVector<T> nand<T>(BitVector<T> x, BitVector<T> y)
             where T : unmanaged
                 => gmath.nand(x.Data, y.Data);
 
         /// <summary>
-        /// Computes the bitwise NAND between two vectors
+        /// Computes z := ~(x & y) for bitvectors x and y
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
         public static BitVector4 nand(BitVector4 x, BitVector4 y)
-            => math.nand(x.data, y.data);
+            => gmath.nand(x.data, y.data);
 
         /// <summary>
-        /// Computes the bitwise NAND between two vectors
+        /// Computes z := ~(x & y) for bitvectors x and y
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
         public static BitVector8 nand(BitVector8 x, BitVector8 y)
-            => math.nand(x.data, y.data);
+            => gmath.nand(x.data, y.data);
 
         /// <summary>
-        /// Computes the bitwise NAND between two vectors
+        /// Computes z := ~(x & y) for bitvectors x and y
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
         public static BitVector16 nand(BitVector16 x, BitVector16 y)
-            => math.nand(x.data, y.data);
+            => gmath.nand(x.data, y.data);
 
         /// <summary>
-        /// Computes the bitwise NAND between two vectors
+        /// Computes z := ~(x & y) for bitvectors x and y
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
         public static BitVector32 nand(BitVector32 x, BitVector32 y)
-            => math.nand(x.data, y.data);
+            => gmath.nand(x.data, y.data);
 
         /// <summary>
-        /// Computes the bitwise NAND between two vectors
+        /// Computes z := ~(x & y) for bitvectors x and y
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
         public static BitVector64 nand(BitVector64 x, BitVector64 y)
-            => math.nand(x.data, y.data);
+            => gmath.nand(x.data, y.data);
  
+        /// <summary>
+        /// Computes z := ~(x & y) for bitvectors x and y
+        /// </summary>
+        /// <param name="x">The left bitvector</param>
+        /// <param name="y">The right bitvector</param>
+        [MethodImpl(Inline)]
+        public static BitVector128 nand(BitVector128 x, BitVector128 y)
+            => from(n128, gmath.nand(x.x0, y.x0), gmath.nand(x.x1,  y.x1));
     }
 }

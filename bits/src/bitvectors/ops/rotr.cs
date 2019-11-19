@@ -16,14 +16,15 @@ namespace Z0
     partial class BitVector
     {
         /// <summary>
-        /// Rotates the source bits rightwards
+        /// Rotates source bits rightward
         /// </summary>
-        /// <param name="x">The source vector</param>
+        /// <param name="x">The source bitvector</param>
+        /// <param name="s">The rotation magnitude</param>
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
-        public static BitVector<T> rotr<T>(BitVector<T> x, int offset)
+        public static BitVector<T> rotr<T>(BitVector<T> x, int s)
             where T : unmanaged
-                => gbits.rotr(x.Data,offset);
+                => gbits.rotr(x.Data,s);
 
         /// <summary>
         /// Computes a rightward bit rotation
@@ -32,7 +33,7 @@ namespace Z0
         /// <param name="y">The rotation magnitude</param>
         [MethodImpl(Inline)]
         public static BitVector4 rotr(BitVector4 x, int offset)
-            => Bits.rotr(x.Scalar,offset);
+            => gbits.rotr(x.data,offset);
 
         /// <summary>
         /// Computes a rightward bit rotation
@@ -41,16 +42,16 @@ namespace Z0
         /// <param name="y">The rotation magnitude</param>
         [MethodImpl(Inline)]
         public static BitVector8 rotr(BitVector8 x, int offset)
-            => Bits.rotr(x.Scalar,offset);
+            => gbits.rotr(x.data,offset);
             
         /// <summary>
-        /// Computes a rightward bit rotation
+        /// Rotates source bits rightward
         /// </summary>
         /// <param name="x">The source bitvector</param>
-        /// <param name="y">The rotation magnitude</param>
+        /// <param name="s">The rotation magnitude</param>
         [MethodImpl(Inline)]
-        public static BitVector16 rotr(BitVector16 x, int offset)
-            => Bits.rotr(x.Scalar,offset);
+        public static BitVector16 rotr(BitVector16 x, int s)
+            => gbits.rotr(x.data,s);
 
         /// <summary>
         /// Computes a rightward bit rotation
@@ -58,17 +59,32 @@ namespace Z0
         /// <param name="x">The source bitvector</param>
         /// <param name="y">The rotation magnitude</param>
         [MethodImpl(Inline)]
-        public static BitVector32 rotr(BitVector32 x, int offset)
-            => Bits.rotr(x.Scalar,offset);
+        public static BitVector32 rotr(BitVector32 x, int s)
+            => gbits.rotr(x.data,s);
 
         /// <summary>
-        /// Computes a rightward bit rotation
+        /// Rotates source bits rightward
         /// </summary>
         /// <param name="x">The source bitvector</param>
-        /// <param name="y">The rotation magnitude</param>
+        /// <param name="s">The rotation magnitude</param>
         [MethodImpl(Inline)]
-        public static BitVector64 rotr(BitVector64 x, int offset)
-             => Bits.rotr(x.Scalar,offset);
+        public static BitVector64 rotr(BitVector64 x, int s)
+             => gbits.rotr(x.data,s);
+
+        /// <summary>
+        /// Rotates source bits rightward
+        /// </summary>
+        /// <param name="x">The source bitvector</param>
+        /// <param name="s">The rotation magnitude</param>
+        [MethodImpl(Inline)]
+        public static BitVector128 rotr(in BitVector128 x, int s)
+        {
+            var z = BitVector.alloc(n128);
+            vblock.rotrx(n128, in x.x0, (byte)s, ref z.x0);
+            return z;
+        }
+
+
     }
 
 }

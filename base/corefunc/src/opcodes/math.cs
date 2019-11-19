@@ -14,6 +14,13 @@ namespace Z0
 
     partial class zfoc
     {
+
+        public static Pair<ulong> sub_128u_a(Pair<ulong> a, Pair<ulong> b)
+            => Math128.sub(a,b);
+
+        public static void sub_128u_b(in ulong a, in ulong b, ref ulong c)
+            => Math128.sub(a,b, ref c);
+
         public static ulong byteswap64(ulong src)
             => bswap(src);
             
@@ -35,8 +42,6 @@ namespace Z0
         public static Pair<ulong> negate_128u(Pair<ulong> a)
             => Math128.negate(a);
 
-        public static Pair<ulong> sub_128u(Pair<ulong> a, Pair<ulong> b)
-            => Math128.sub(a,b);
 
         public static ref Pair<ulong> inc_128u(ref Pair<ulong> a)
             => ref Math128.inc(ref a);

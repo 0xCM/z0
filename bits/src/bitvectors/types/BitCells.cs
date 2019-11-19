@@ -17,7 +17,7 @@ namespace Z0
         /// <summary>
         /// The bitvector content, indexed via a bitmap
         /// </summary>
-        Span<T> data;
+        Span256<T> data;
     
         /// <summary>
         /// Correlates linear bit positions and storage segments
@@ -42,7 +42,11 @@ namespace Z0
         /// <summary>
         /// The maximum number of bits that can be placed a single segment segment
         /// </summary>
-        public static readonly int CellCapacity = bitsize<T>();
+        public static int CellCapacity => bitsize<T>();
+
+        public static BitCells<T> Zero => new BitCells<T>(BlockedSpan.alloc<T>(n256));
+
+        public static  int StepSize => 256 / bitsize<T>();
 
         /// <summary>
         /// Computes the number of cells required to hold a specified number of bits
@@ -55,14 +59,6 @@ namespace Z0
             var q = Math.DivRem(len, CellCapacity, out int r);            
             return r == 0 ? q : q + 1;
         }
-
-        /// <summary>
-        /// Creates a single-cell bitvector where the bit width is determined by the cell type
-        /// </summary>
-        /// <param name="src">The source cell</param>
-        [MethodImpl(Inline)]
-        public static BitCells<T> FromCell(T src)
-            => new BitCells<T>(src,bitsize<T>());
 
         /// <summary>
         /// Creates a bitvector defined by a single cell or portion thereof
@@ -115,22 +111,6 @@ namespace Z0
         public static BitCells<T> From(BitString src)
             => FromBytes(src.ToPackedBytes(), src.Length);
 
-        /// <summary>
-        /// Allocates a generic bitvector
-        /// </summary>
-        /// <param name="len">The length</param>
-        /// <param name="fill">The fill value</param>
-        /// <typeparam name="N">The length type</typeparam>
-        /// <typeparam name="T">The component type</typeparam>
-        [MethodImpl(Inline)]
-        public static BitCells<T> Alloc(BitSize len, T? fill = null)
-        {
-            Span<T> cells = new T[CellCount(len)];            
-            if(fill.HasValue)
-                cells.Fill(fill.Value);
-            return FromCells(cells,len);
-        }        
-
         [MethodImpl(Inline)]
         public static implicit operator BitCells<T>(Span<T> src)
             => new BitCells<T>(src, bitsize<T>());
@@ -146,7 +126,7 @@ namespace Z0
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
         public static BitCells<T> operator &(BitCells<T> x, BitCells<T> y)
-            => mathspan.and(x.data,y.data);
+            => Zero;
 
         /// <summary>
         /// Computes the bitwias AND between the operands
@@ -155,7 +135,7 @@ namespace Z0
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
         public static BitCells<T> operator |(BitCells<T> x, BitCells<T> y)
-            => mathspan.or(x.data,y.data);
+            => Zero;
 
         /// <summary>
         /// Computes the bitwise XOR between the operands
@@ -164,7 +144,7 @@ namespace Z0
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
         public static BitCells<T> operator ^(BitCells<T> x, BitCells<T> y)
-            => mathspan.xor(x.data,y.data);
+            => Zero;
 
         [MethodImpl(Inline)]
         public static bit operator %(BitCells<T> x, BitCells<T> y)
@@ -176,7 +156,7 @@ namespace Z0
         /// <param name="x">The source operand</param>
         [MethodImpl(Inline)]
         public static BitCells<T> operator ~(BitCells<T> src)
-            => mathspan.not(src.data);
+            => default;
 
         /// <summary>
         /// Returns true if the source vector is nonzero, false otherwise
@@ -205,7 +185,8 @@ namespace Z0
         [MethodImpl(Inline)]
         BitCells(T src, int n)
         {            
-            this.data = new T[]{src};
+            this.data = BlockedSpan.alloc<T>(n256);
+            head(this.data) = src;
             this.MaxBitCount = CellCapacity;
             this.SegLength = MaxBitCount;
             this.BitCount = n;
@@ -215,7 +196,7 @@ namespace Z0
         [MethodImpl(Inline)]
         BitCells(Span<T> src, int n)
         {            
-            this.data = src;
+            this.data = BlockedSpan.load(n256,src);
             this.MaxBitCount = src.Length * CellCapacity;
             this.BitCount = n;
             this.SegLength = BitSize.Segments<T>(MaxBitCount);            
@@ -223,11 +204,15 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        BitCells(T[] src, int n)
-            : this(src.AsSpan(), n)
+        internal BitCells(Span256<T> src)
         {            
-
+            this.data = src;
+            this.MaxBitCount = src.Length * CellCapacity;
+            this.BitCount = src.BlockCount * 256;
+            this.SegLength = BitSize.Segments<T>(MaxBitCount);            
+            this.BitMap = BitSize.BitMap<T>(MaxBitCount);
         }
+
 
         /// <summary>
         /// Computes the scalar product between this vector and another of identical length
@@ -260,7 +245,7 @@ namespace Z0
         public readonly Span<byte> Bytes
         {
             [MethodImpl(Inline)]
-            get => data.AsBytes();
+            get => data.Bytes;
         }
 
         /// <summary>
@@ -437,7 +422,13 @@ namespace Z0
         [MethodImpl(Inline)]
         public uint Rank(int pos)
             => Pop(pos);
-            
+
+        public int BlockCount
+        {
+            [MethodImpl(Inline)]
+            get => data.BlockCount;
+        }
+
         /// <summary>
         /// Gets the mapped bit location
         /// </summary>
@@ -502,6 +493,9 @@ namespace Z0
             return gmath.or(ref part1, part2);              
         }
 
+        public BitCells<T> Replicate(bool structureOnly = false)
+            => new BitCells<T>(data.Replicate(structureOnly));
+                    
         [MethodImpl(Inline)]
         public bool Equals(in BitCells<T> y)
             => ToBitString().Equals(y.ToBitString());

@@ -1,4 +1,4 @@
-// 2019-11-18 13:26:06:359
+// 2019-11-18 23:19:06:438
 bit testbit_d8i(sbyte src, int pos)
 {
     IL_0000: ldarg.0
@@ -418,6 +418,23 @@ ReadOnlySpan<byte> bitseq8u(byte src)
     IL_0006: ret
 
 }
+Pair<ulong> sub_128u_a(Pair<ulong> a, Pair<ulong> b)
+{
+    IL_0000: ldarga.s a
+    IL_0002: ldarga.s b
+    IL_0004: call Z0.Pair`1<System.UInt64> Z0.Math128::sub(Z0.Pair`1<System.UInt64>&,Z0.Pair`1<System.UInt64>&)
+    IL_0009: ret
+
+}
+void sub_128u_b(in ulong a, in ulong b, ref ulong c)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: ldarg.2
+    IL_0003: call System.Void Z0.Math128::sub(System.UInt64&,System.UInt64&,System.UInt64&)
+    IL_0008: ret
+
+}
 ulong byteswap64(ulong src)
 {
     IL_0000: ldarg.0
@@ -471,14 +488,6 @@ Pair<ulong> negate_128u(Pair<ulong> a)
     IL_0000: ldarg.0
     IL_0001: call Z0.Pair`1<System.UInt64> Z0.Math128::negate(Z0.Pair`1<System.UInt64>)
     IL_0006: ret
-
-}
-Pair<ulong> sub_128u(Pair<ulong> a, Pair<ulong> b)
-{
-    IL_0000: ldarga.s a
-    IL_0002: ldarga.s b
-    IL_0004: call Z0.Pair`1<System.UInt64> Z0.Math128::sub(Z0.Pair`1<System.UInt64>&,Z0.Pair`1<System.UInt64>&)
-    IL_0009: ret
 
 }
 ref Pair<ulong> inc_128u(ref Pair<ulong> a)

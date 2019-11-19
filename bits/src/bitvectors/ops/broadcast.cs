@@ -58,6 +58,18 @@ namespace Z0
             return src | (src << 32);
         }
 
+        [MethodImpl(Inline)]
+        public static BitVector128 broadcast(N128 n, uint a)
+            => new BitVector128(a,a,a,a);
+
+        [MethodImpl(Inline)]
+        public static BitVector128 broadcast(N128 n, ulong a)
+            => new BitVector128(a,a);
+
+        [MethodImpl(Inline)]
+        public static BitVector128 broadcast(N128 n, bit b)
+            => b ? BitVector128.Ones : BitVector128.Zero;
+
     }
 
 }

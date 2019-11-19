@@ -46,7 +46,7 @@ namespace Z0
         /// Counts the number of leading zeros
         /// </summary>
         [MethodImpl(Inline)]
-        public static uint nlz(BitVector128 x)
+        public static uint nlz(in BitVector128 x)
         {
             if(x.x1 == 0)
                 return 64 + gbits.nlz(x.x0);

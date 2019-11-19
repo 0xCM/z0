@@ -69,7 +69,7 @@ namespace Z0
         /// Computes the two's complement bitvector z := ~x + 1 for a bitvector x
         /// </summary>
         [MethodImpl(Inline)]
-        public static BitVector128 negate(BitVector128 x)
+        public static BitVector128 negate(in BitVector128 x)
         {
             var z = alloc(n128);
             vblock.negate(n128, in x.x0, ref z.x0);

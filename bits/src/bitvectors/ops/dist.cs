@@ -23,7 +23,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static uint dist<T>(BitVector<T> x, BitVector<T> y)
             where T : unmanaged
-            => gbits.pop(gmath.xor(x.Data,y.Data));
+            => pop(xor(x,y));
 
         /// <summary>
         /// Computes the Hamming distance between two bitvectors
@@ -32,7 +32,7 @@ namespace Z0
         /// <param name="y">The right bitvector</param>
         [MethodImpl(Inline)]
         public static uint dist(BitVector4 x, BitVector4 y)
-            => Bits.pop(math.xor(x.data,y.data));
+            => pop(xor(x,y));
 
         /// <summary>
         /// Computes the Hamming distance between two bitvectors
@@ -41,7 +41,7 @@ namespace Z0
         /// <param name="y">The right bitvector</param>
         [MethodImpl(Inline)]
         public static uint dist(BitVector8 x, BitVector8 y)
-            => Bits.pop(math.xor(x.data,y.data));
+            => pop(xor(x,y));
 
         /// <summary>
         /// Computes the Hamming distance between two bitvectors
@@ -50,7 +50,7 @@ namespace Z0
         /// <param name="y">The right bitvector</param>
         [MethodImpl(Inline)]
         public static uint dist(BitVector16 x, BitVector16 y)
-            => Bits.pop(math.xor(x.data,y.data));
+            => pop(xor(x,y));
 
         /// <summary>
         /// Computes the Hamming distance between two bitvectors
@@ -59,7 +59,7 @@ namespace Z0
         /// <param name="y">The right bitvector</param>
         [MethodImpl(Inline)]
         public static uint dist(BitVector32 x, BitVector32 y)
-            => Bits.pop(math.xor(x.data,y.data));
+            => pop(xor(x,y));
 
         /// <summary>
         /// Computes the Hamming distance between two bitvectors
@@ -68,7 +68,16 @@ namespace Z0
         /// <param name="y">The right bitvector</param>
         [MethodImpl(Inline)]
         public static uint dist(BitVector64 x, BitVector64 y)
-            => Bits.pop(math.xor(x.data,y.data));
+            => pop(xor(x,y));
+ 
+        /// <summary>
+        /// Computes the Hamming distance between two bitvectors
+        /// </summary>
+        /// <param name="x">The left bitvector</param>
+        /// <param name="y">The right bitvector</param>
+        [MethodImpl(Inline)]
+        public static uint dist(in BitVector128 x, in BitVector128 y)
+            => pop(xor(x,y));
  
     }
 }

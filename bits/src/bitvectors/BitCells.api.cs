@@ -13,27 +13,10 @@ namespace Z0
 
     public static class BitCells
     {
-        /// <summary>
-        /// Allocates a 1-cell generic bitvector, optionally initialized to a specified value
-        /// </summary>
-        /// <param name="init">The initial value</param>
-        /// <typeparam name="T">The component type</typeparam>
-        [MethodImpl(Inline)]
-        public static BitCells<T> alloc<T>(T? init = null)
+        [MethodImpl(NotInline)]
+        public static BitCells<T> alloc<T>(int blocks)        
             where T : unmanaged
-                => BitCells<T>.FromCell(init ?? default);
-            
-        /// <summary>
-        /// Allocates a generic bitvector
-        /// </summary>
-        /// <param name="len">The length</param>
-        /// <param name="fill">The fill value</param>
-        /// <typeparam name="N">The length type</typeparam>
-        /// <typeparam name="T">The component type</typeparam>
-        [MethodImpl(Inline)]
-        public static BitCells<T> alloc<T>(int len, T? fill = null)
-            where T : unmanaged
-                => BitCells<T>.Alloc(len, fill);
+                => new BitCells<T>(BlockedSpan.alloc<T>(n256,blocks));
 
         /// <summary>
         /// Loads a generic bitvector from a span
@@ -45,17 +28,6 @@ namespace Z0
         public static BitCells<T> load<T>(Span<T> src, int n)
             where T : unmanaged
                 => BitCells<T>.FromCells(src, n);
-
-        /// <summary>
-        /// Defines a generic bitvector with a specified number of components and bitlength
-        /// </summary>
-        /// <param name="n">The number of components (bits) in the vector</param>
-        /// <param name="src">The source from which the bits will be extracted</param>
-        /// <typeparam name="T">The source type</typeparam>
-        [MethodImpl(Inline)]
-        public static BitCells<T> load<T>(T[] src, int n)
-            where T : unmanaged
-                => BitCells<T>.From(src,n);
 
         /// <summary>
         /// Creates a generic bitvector defined by an arbitrary number of segments
@@ -95,5 +67,23 @@ namespace Z0
             return odd(result);
         }
 
+        [MethodImpl(Inline)]
+        static int stepsize<T>()
+            where T : unmanaged
+                => BitCells<T>.StepSize;
+
+        [MethodImpl(Inline)]
+        public static BitCells<T> and<T>(BitCells<T> x, BitCells<T> y)
+            where T : unmanaged
+        {
+            var z = alloc<T>(x.BlockCount);
+            and(x,y,ref z);
+            return z;
+        }
+
+        [MethodImpl(Inline)]
+        public static void and<T>(in BitCells<T> x, in BitCells<T> y, ref BitCells<T> z)        
+            where T : unmanaged
+                => vblock.and(n256, x.BlockCount, stepsize<T>(), in x.Head, y.Head, ref z.Head);
    }
 }

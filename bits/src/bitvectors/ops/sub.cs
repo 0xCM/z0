@@ -12,7 +12,7 @@ namespace Z0
     partial class BitVector
     {
         /// <summary>
-        /// Computes the bitvector z: = x - y for bitvectors x and y
+        /// Computes the arithmetic difference z := x - y for generic bitvectors x and y
         /// </summary>
         /// <param name="x">The left bitvector</param>
         /// <param name="y">The right bitvector</param>
@@ -22,7 +22,7 @@ namespace Z0
                 => gmath.sub(x.Data, y.Data);
 
         /// <summary>
-        /// Computes the bitvector z: = x - y for bitvectors x and y
+        /// Computes the arithmetic difference z := x - y for bitvectors x and y
         /// </summary>
         /// <param name="x">The left bitvector</param>
         /// <param name="y">The right bitvector</param>
@@ -31,7 +31,7 @@ namespace Z0
             => (byte)Mod16.mod(math.sub((uint)x.data, (uint)y.data));
 
         /// <summary>
-        /// Computes the bitvector z: = x - y for bitvectors x and y
+        /// Computes the arithmetic difference z := x - y for bitvectors x and y
         /// </summary>
         /// <param name="x">The left bitvector</param>
         /// <param name="y">The right bitvector</param>
@@ -40,7 +40,7 @@ namespace Z0
             => gmath.sub(x.data, y.data);
 
         /// <summary>
-        /// Computes the bitvector z: = x - y for bitvectors x and y
+        /// Computes the arithmetic difference z := x - y for bitvectors x and y
         /// </summary>
         /// <param name="x">The left bitvector</param>
         /// <param name="y">The right bitvector</param>
@@ -49,7 +49,7 @@ namespace Z0
             => gmath.sub(x.data, y.data);
 
         /// <summary>
-        /// Computes the bitvector z: = x - y for bitvectors x and y
+        /// Computes the arithmetic difference z := x - y for bitvectors x and y
         /// </summary>
         /// <param name="x">The left bitvector</param>
         /// <param name="y">The right bitvector</param>
@@ -58,7 +58,7 @@ namespace Z0
             => gmath.sub(x.data, y.data);
 
         /// <summary>
-        /// Computes the bitvector z: = x - y for bitvectors x and y
+        /// Computes the arithmetic difference z := x - y for bitvectors x and y
         /// </summary>
         /// <param name="x">The left bitvector</param>
         /// <param name="y">The right bitvector</param>
@@ -67,18 +67,16 @@ namespace Z0
             => gmath.sub(x.data, y.data);
 
         /// <summary>
-        /// Computes the bitvector z: = x - y for bitvectors x and y
+        /// Computes the arithmetic difference z := x - y for bitvectors x and y
         /// </summary>
         /// <param name="x">The left bitvector</param>
         /// <param name="y">The right bitvector</param>
         [MethodImpl(Inline)]
-        public static BitVector128 sub(BitVector128 x, BitVector128 y)
+        public static BitVector128 sub(in BitVector128 x, in BitVector128 y)
         {
-            var z = alloc(n128);
-            vblock.sub(n128, in x.x0, in y.x0, ref z.x0);
+            var z = BitVector.alloc(n128);
+            Math128.sub(in x.x0, in y.x0, ref z.x0);
             return z;
         }
-
-
     }
 }

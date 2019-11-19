@@ -16,58 +16,72 @@ namespace Z0
     partial class BitVector
     {
         /// <summary>
-        /// Applies a logical right shift to the source vector
+        /// Computes z := x >> s for a bitvector x and shift offset s
         /// </summary>
         /// <param name="x">The source bitvector</param>
-        /// <param name="y">The shift offset</param>
+        /// <param name="s">The shift amount</param>
         [MethodImpl(Inline)]
-        public static BitVector<T> srl<T>(BitVector<T> x, int offset)
+        public static BitVector<T> srl<T>(BitVector<T> x, int s)
             where T : unmanaged
-                => gmath.srl(x.Data,offset);
+                => gmath.srl(x.Data,s);
 
         /// <summary>
-        /// Applies a logical right shift to the source vector
+        /// Computes z := x >> s for a bitvector x and shift offset s
         /// </summary>
         /// <param name="x">The source bitvector</param>
-        /// <param name="y">The shift offset</param>
+        /// <param name="s">The shift amount</param>
         [MethodImpl(Inline)]
-        public static BitVector4 srl(BitVector4 x, int offset)
-            => math.srl(x.data,offset);
+        public static BitVector4 srl(BitVector4 x, int s)
+            => gmath.srl(x.data,s);
 
         /// <summary>
-        /// Applies a logical right shift to the source vector
+        /// Computes z := x >> s for a bitvector x and shift offset s
         /// </summary>
         /// <param name="x">The source bitvector</param>
-        /// <param name="y">The shift offset</param>
+        /// <param name="s">The shift amount</param>
         [MethodImpl(Inline)]
-        public static BitVector8 srl(BitVector8 x, int offset)
-            => math.srl(x.data,offset);
+        public static BitVector8 srl(BitVector8 x, int s)
+            => gmath.srl(x.data,s);
             
         /// <summary>
-        /// Applies a logical right shift to the source vector
+        /// Computes z := x >> s for a bitvector x and shift offset s
         /// </summary>
         /// <param name="x">The source bitvector</param>
-        /// <param name="y">The shift offset</param>
+        /// <param name="s">The shift amount</param>
         [MethodImpl(Inline)]
-        public static BitVector16 srl(BitVector16 x, int offset)
-            => math.srl(x.data,offset);
+        public static BitVector16 srl(BitVector16 x, int s)
+            => gmath.srl(x.data,s);
 
         /// <summary>
-        /// Applies a logical right shift to the source vector
+        /// Computes z := x >> s for a bitvector x and shift offset s
         /// </summary>
         /// <param name="x">The source bitvector</param>
-        /// <param name="y">The shift offset</param>
+        /// <param name="s">The shift amount</param>
         [MethodImpl(Inline)]
-        public static BitVector32 srl(BitVector32 x, int offset)
-            => math.srl(x.data, offset);
+        public static BitVector32 srl(BitVector32 x, int s)
+            => gmath.srl(x.data, s);
 
         /// <summary>
-        /// Applies a logical right shift to the source vector
+        /// Computes z := x >> s for a bitvector x and shift offset s
         /// </summary>
         /// <param name="x">The source bitvector</param>
-        /// <param name="y">The shift offset</param>
+        /// <param name="s">The shift amount</param>
         [MethodImpl(Inline)]
-        public static BitVector64 srl(BitVector64 x, int offset)
-            => math.srl(x.data,offset);
+        public static BitVector64 srl(BitVector64 x, int s)
+            => gmath.srl(x.data,s);            
+
+        /// <summary>
+        /// Computes z := x >> s for a bitvector x and shift offset s
+        /// </summary>
+        /// <param name="x">The source bitvector</param>
+        /// <param name="s">The shift amount</param>
+        [MethodImpl(Inline)]
+        public static BitVector128 srl(in BitVector128 x, int s)
+        {
+            var z = BitVector.alloc(n128);
+            vblock.srlx(n128, in x.x0, (byte)s, ref z.x0);
+            return z;
+        }
+
     }
 }
