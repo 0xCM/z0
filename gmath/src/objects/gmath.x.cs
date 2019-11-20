@@ -168,7 +168,7 @@ namespace Z0
             return false;        
         }
 
-        public static bool Identical<T>(this ReadOnlySpan128<T> lhs, ReadOnlySpan128<T> rhs)        
+        public static bool Identical<T>(this ConstBlock128<T> lhs, ConstBlock128<T> rhs)        
                 where T : unmanaged        
         {
             for(var i = 0; i< Span128.length(lhs,rhs); i++)
@@ -177,7 +177,7 @@ namespace Z0
             return true;
         }
 
-        public static bool Identical<T>(this ReadOnlySpan256<T> lhs, ReadOnlySpan256<T> rhs)        
+        public static bool Identical<T>(this ConstBlock256<T> lhs, ConstBlock256<T> rhs)        
             where T : unmanaged        
         {
             for(var i = 0; i< length(lhs,rhs); i++)

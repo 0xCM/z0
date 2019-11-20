@@ -103,7 +103,7 @@ namespace Z0
         /// <remarks>Adapted from http://www.hackersdelight.org/MontgomeryMultiplication.pdf</remarks>
         static void binxgcd(ulong a, ulong b, out ulong u, out ulong v)     
         {
-            if(!math.isPow2(a))
+            if(!math.ispow2(a))
                 throw new Exception($"{a} is not a power of 2");
             
             if(!odd(b))

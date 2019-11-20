@@ -144,7 +144,7 @@ namespace Z0
 
                 var xs = x.ToSpan();
                 var ys = y.ToSpan();
-                var zs = BlockedSpan.alloc<T>(n);
+                var zs = MemBlocks.alloc<T>(n);
                 for(var i=0; i<zs.Length; i++)
                     zs[i] = gmath.max(xs[i],ys[i]);
                 
@@ -165,7 +165,7 @@ namespace Z0
 
                 var xs = x.ToSpan();
                 var ys = y.ToSpan();
-                var zs = BlockedSpan.alloc<T>(n);
+                var zs = MemBlocks.alloc<T>(n);
                 for(var i=0; i<zs.Length; i++)
                     zs[i] = gmath.max(xs[i],ys[i]);
                 
@@ -185,7 +185,7 @@ namespace Z0
 
             var lhs = Random.BlockedSpan<T>(n, blocks);
             var rhs = Random.BlockedSpan<T>(n, blocks);
-            var dst = BlockedSpan.alloc<T>(n, blocks);
+            var dst = MemBlocks.alloc<T>(n, blocks);
             vblock.max(n, blocks, step, in lhs.Head, in rhs.Head, ref dst.Head);
             for(var i=0; i<cells; i++)
                 Claim.eq(gmath.max(lhs[i],rhs[i]), dst[i]);
@@ -201,7 +201,7 @@ namespace Z0
 
             var lhs = Random.BlockedSpan<T>(n, blocks);
             var rhs = Random.BlockedSpan<T>(n, blocks);
-            var dst = BlockedSpan.alloc<T>(n, blocks);
+            var dst = MemBlocks.alloc<T>(n, blocks);
             vblock.max(n, blocks, step, in lhs.Head, in rhs.Head, ref dst.Head);
             for(var i=0; i<cells; i++)
                 Claim.eq(gmath.max(lhs[i],rhs[i]), dst[i]);

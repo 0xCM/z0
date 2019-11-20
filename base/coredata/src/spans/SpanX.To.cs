@@ -14,7 +14,7 @@ namespace Z0
 
     using static zfunc;
 
-    partial class SpanExtensions
+    partial class MemBlockExtend
     {
         /// <summary>
         /// Lifts the content of a span into a LINQ enumerable
@@ -144,7 +144,7 @@ namespace Z0
         /// <typeparam name="N">The source span length type</typeparam>
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(NotInline)]
-        public static ISet<T> ToSet<N,T>(this ReadOnlySpan<N,T> src)        
+        public static ISet<T> ToSet<N,T>(this ConstBlock<N,T> src)        
             where N : unmanaged, ITypeNat
             where T : unmanaged
                 => new HashSet<T>(src.ToArray());   
@@ -197,7 +197,7 @@ namespace Z0
                 => NatSpan.load(n,src);
 
         [MethodImpl(Inline)]
-        public static ReadOnlySpan<N,T> ToNatural<N,T>(this ReadOnlySpan<T> src, N n = default)
+        public static ConstBlock<N,T> ToNatural<N,T>(this ReadOnlySpan<T> src, N n = default)
             where T : unmanaged
             where N : unmanaged, ITypeNat
                 => NatSpan.load(n,src);

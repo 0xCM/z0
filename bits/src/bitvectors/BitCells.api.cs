@@ -15,7 +15,7 @@ namespace Z0
         [MethodImpl(NotInline)]
         public static BitCells<T> alloc<T>(int blocks)        
             where T : unmanaged
-                => new BitCells<T>(BlockedSpan.alloc<T>(n256,blocks));
+                => new BitCells<T>(MemBlocks.alloc<T>(n256,blocks));
 
         /// <summary>
         /// Loads a generic bitvector from a span

@@ -16,7 +16,7 @@ namespace Z0
     /// <summary>
     /// Defines a readonly span of natural length N
     /// </summary>
-    public ref struct ReadOnlySpan<M,N,T>
+    public ref struct ConstBlock<M,N,T>
         where M : unmanaged, ITypeNat        
         where N : unmanaged, ITypeNat
     {
@@ -50,28 +50,28 @@ namespace Z0
         /// </summary>
         public static readonly int CellCount = RowLenth * ColLength;
 
-        public static implicit operator ReadOnlySpan<T> (ReadOnlySpan<M,N,T> src)
+        public static implicit operator ReadOnlySpan<T> (ConstBlock<M,N,T> src)
             => src.data;
     
-        public static bool operator == (ReadOnlySpan<M,N,T> lhs, ReadOnlySpan<M,N,T> rhs)
+        public static bool operator == (ConstBlock<M,N,T> lhs, ConstBlock<M,N,T> rhs)
             => lhs.data == rhs.data;
 
-        public static bool operator != (ReadOnlySpan<M,N,T> lhs, ReadOnlySpan<M,N,T> rhs)
+        public static bool operator != (ConstBlock<M,N,T> lhs, ConstBlock<M,N,T> rhs)
             => lhs.data != rhs.data;
             
         [MethodImpl(Inline)]
-        public ReadOnlySpan(ref T src)
+        public ConstBlock(ref T src)
             => data = MemoryMarshal.CreateReadOnlySpan(ref src, CellCount);
 
         [MethodImpl(Inline)]
-        public ReadOnlySpan(ref ReadOnlySpan<T> src)
+        public ConstBlock(ref ReadOnlySpan<T> src)
         {
             require(src.Length == CellCount, $"length(src) = {src.Length} != {CellCount} = SpanLength");         
             this.data = src;
         }
 
         [MethodImpl(Inline)]
-        public ReadOnlySpan(ReadOnlySpan<T> src)
+        public ConstBlock(ReadOnlySpan<T> src)
         {
             require(src.Length == CellCount, $"length(src) = {src.Length} != {CellCount} = SpanLength");         
             this.data = src;

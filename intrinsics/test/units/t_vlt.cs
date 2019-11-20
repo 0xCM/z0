@@ -74,7 +74,7 @@ namespace Z0
             {
                 var x = Random.BlockedSpan<T>(n);
                 var y = Random.BlockedSpan<T>(n);
-                var z = BlockedSpan.alloc<T>(n);
+                var z = MemBlocks.alloc<T>(n);
                 
                 for(var j=0; j<z.Length; j++)
                     if(gmath.lt(x[j],y[j]))
@@ -99,7 +99,7 @@ namespace Z0
             {
                 var x = Random.BlockedSpan<T>(n);
                 var y = Random.BlockedSpan<T>(n);
-                var z = BlockedSpan.alloc<T>(n);
+                var z = MemBlocks.alloc<T>(n);
                 
                 for(var j=0; j<z.Length; j++)
                     if(gmath.lt(x[j],y[j]))

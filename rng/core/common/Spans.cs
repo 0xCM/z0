@@ -194,7 +194,7 @@ namespace Z0
         /// <param name="filter">An optional filter that refines the domain</param>
         /// <typeparam name="T">The primal random value type</typeparam>
         [MethodImpl(Inline)]
-        public static ReadOnlySpan128<T> ReadOnlySpan128<T>(this IPolyrand random, int blocks = 1, Interval<T>? domain = null, Func<T,bool> filter = null)
+        public static ConstBlock128<T> ReadOnlySpan128<T>(this IPolyrand random, int blocks = 1, Interval<T>? domain = null, Func<T,bool> filter = null)
             where T : unmanaged
                 => random.BlockedSpan<T>(n128, blocks, domain, filter);
 
@@ -233,7 +233,7 @@ namespace Z0
         /// <param name="filter">An optional filter that refines the domain</param>
         /// <typeparam name="T">The primal random value type</typeparam>
         [MethodImpl(Inline)]
-        public static unsafe ReadOnlySpan256<T> ReadOnlySpan256<T>(this IPolyrand random, int blocks = 1, Interval<T>? domain = null, Func<T,bool> filter = null)
+        public static unsafe ConstBlock256<T> ReadOnlySpan256<T>(this IPolyrand random, int blocks = 1, Interval<T>? domain = null, Func<T,bool> filter = null)
             where T : unmanaged
                 => random.BlockedSpan<T>(n256,blocks, domain, filter);
 

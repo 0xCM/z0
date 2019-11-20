@@ -37,8 +37,8 @@ namespace Z0
             => src.data;
 
         [MethodImpl(Inline)]
-        public static implicit operator ReadOnlySpan<N,T>(Span<N,T> src)
-            => new ReadOnlySpan<N, T>(src);
+        public static implicit operator ConstBlock<N,T>(Span<N,T> src)
+            => new ConstBlock<N, T>(src);
 
         [MethodImpl(Inline)]
         public static implicit operator Span<N,T>(Span256<T> src)
@@ -129,7 +129,7 @@ namespace Z0
             => data = MemoryMarshal.CreateSpan(ref src, Count);
 
         [MethodImpl(Inline)]
-        internal Span(ReadOnlySpan<N,T> src)
+        internal Span(ConstBlock<N,T> src)
             => data = src.ToArray();
  
         public ref T this[int ix] 

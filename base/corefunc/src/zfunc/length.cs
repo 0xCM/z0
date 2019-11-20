@@ -135,7 +135,7 @@ partial class zfunc
     /// <typeparam name="T">The element type of the first operand</typeparam>
     /// <typeparam name="S">The element type of the second operand</typeparam>
     [MethodImpl(Inline)]   
-    public static int length<S,T>(ReadOnlySpan128<S> lhs, ReadOnlySpan128<T> rhs,  [CallerMemberName] string caller = null, 
+    public static int length<S,T>(ConstBlock128<S> lhs, ConstBlock128<T> rhs,  [CallerMemberName] string caller = null, 
         [CallerFilePath] string file = null, [CallerLineNumber] int? line = null)
             where S : unmanaged
             where T : unmanaged
@@ -162,7 +162,7 @@ partial class zfunc
     /// <typeparam name="T">The element type of the first operand</typeparam>
     /// <typeparam name="S">The element type of the second operand</typeparam>
     [MethodImpl(Inline)]   
-    public static int length<S,T>(ReadOnlySpan256<S> lhs, ReadOnlySpan256<T> rhs,[CallerMemberName] string caller = null, 
+    public static int length<S,T>(ConstBlock256<S> lhs, ConstBlock256<T> rhs,[CallerMemberName] string caller = null, 
         [CallerFilePath] string file = null, [CallerLineNumber] int? line = null)
             where T : unmanaged
             where S : unmanaged

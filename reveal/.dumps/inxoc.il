@@ -1,22 +1,4 @@
-// 2019-11-20 01:20:42:358
-bool vtestz_d128x8u(Vector128<byte> src, Vector128<byte> mask)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: call Z0.bit Z0.dinx::vtestz(System.Runtime.Intrinsics.Vector128`1<System.Byte>,System.Runtime.Intrinsics.Vector128`1<System.Byte>)
-    IL_0007: call System.Boolean Z0.bit::op_Implicit(Z0.bit)
-    IL_000C: ret
-
-}
-bool vtestz_g128x8u(Vector128<byte> src, Vector128<byte> mask)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: call Z0.bit Z0.ginx::vtestz<System.Byte>(System.Runtime.Intrinsics.Vector128`1<System.Byte>,System.Runtime.Intrinsics.Vector128`1<System.Byte>)
-    IL_0007: call System.Boolean Z0.bit::op_Implicit(Z0.bit)
-    IL_000C: ret
-
-}
+// 2019-11-20 15:08:31:388
 bool vtestz_d128x16i(Vector128<short> src, Vector128<short> mask)
 {
     IL_0000: ldarg.0
@@ -929,24 +911,6 @@ ulong vcell_1_128x8u(Vector128<byte> src)
     IL_0008: ret
 
 }
-ulong vextract_1_128x8u(Vector128<byte> src)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldc.i4.1
-    IL_0002: call System.Byte Z0.dinx::vxscalar(System.Runtime.Intrinsics.Vector128`1<System.Byte>,System.Byte)
-    IL_0007: conv.u8
-    IL_0008: ret
-
-}
-ulong vextract_index_128x8u(Vector128<byte> src, byte index)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: call System.Byte Z0.dinx::vxscalar(System.Runtime.Intrinsics.Vector128`1<System.Byte>,System.Byte)
-    IL_0007: conv.u8
-    IL_0008: ret
-
-}
 ulong vcell_2_256x64u(Vector256<ulong> src)
 {
     IL_0000: ldarg.0
@@ -1325,6 +1289,24 @@ bool vtestz_g128x8i(Vector128<sbyte> src, Vector128<sbyte> mask)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: call Z0.bit Z0.ginx::vtestz<System.SByte>(System.Runtime.Intrinsics.Vector128`1<System.SByte>,System.Runtime.Intrinsics.Vector128`1<System.SByte>)
+    IL_0007: call System.Boolean Z0.bit::op_Implicit(Z0.bit)
+    IL_000C: ret
+
+}
+bool vtestz_d128x8u(Vector128<byte> src, Vector128<byte> mask)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call Z0.bit Z0.dinx::vtestz(System.Runtime.Intrinsics.Vector128`1<System.Byte>,System.Runtime.Intrinsics.Vector128`1<System.Byte>)
+    IL_0007: call System.Boolean Z0.bit::op_Implicit(Z0.bit)
+    IL_000C: ret
+
+}
+bool vtestz_g128x8u(Vector128<byte> src, Vector128<byte> mask)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call Z0.bit Z0.ginx::vtestz<System.Byte>(System.Runtime.Intrinsics.Vector128`1<System.Byte>,System.Runtime.Intrinsics.Vector128`1<System.Byte>)
     IL_0007: call System.Boolean Z0.bit::op_Implicit(Z0.bit)
     IL_000C: ret
 

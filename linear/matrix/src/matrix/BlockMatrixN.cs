@@ -94,7 +94,7 @@ namespace Z0
             => src.Unsized;
 
         [MethodImpl(Inline)]
-        public static implicit operator ReadOnlySpan256<T>(BlockMatrix<N,T> src)
+        public static implicit operator ConstBlock256<T>(BlockMatrix<N,T> src)
             => src.Unsized;
 
         [MethodImpl(Inline)]

@@ -44,7 +44,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static Vector128<short> vconvert(in Span64<sbyte> src, out Vector128<short> dst)
+        public static Vector128<short> vconvert(in Block64<sbyte> src, out Vector128<short> dst)
             => vconvert(ref src.Head, out dst);
 
         /// <summary>
@@ -121,7 +121,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static Vector128<short> vconvert(in Span64<byte> src, out Vector128<short> dst)
+        public static Vector128<short> vconvert(in Block64<byte> src, out Vector128<short> dst)
             => vconvert(ref src.Head, out dst);
 
         /// <summary>
@@ -160,7 +160,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static Vector128<ushort> vconvert(in Span64<byte> src, out Vector128<ushort> dst)
+        public static Vector128<ushort> vconvert(in Block64<byte> src, out Vector128<ushort> dst)
             => vconvert(ref src.Head, out dst);
 
         [MethodImpl(Inline)]
@@ -231,7 +231,7 @@ namespace Z0
             => vconvert(ref src.Head, out dst);
 
         [MethodImpl(Inline)]
-        public static void vconvert(in Span64<byte> src, out Vector128<uint> x0, out Vector128<uint> x1)
+        public static void vconvert(in Block64<byte> src, out Vector128<uint> x0, out Vector128<uint> x1)
         {
             vconvert(ref src.Head, out x0);
             vconvert(ref seek(ref src.Head, 4), out x1);

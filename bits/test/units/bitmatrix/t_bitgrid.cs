@@ -81,7 +81,7 @@ namespace Z0
         public void bitgrid_store()
         {
             // var g1 = Random.BitGrid<uint>(20,20);
-            var dst = DataBlocks.alloc(n128);
+            var dst = StackStore.alloc(n128);
             var dst8u = dst.AsBytes();
             for(var i=0; i<16; i++)
                 dst8u[i] = Random.Next<byte>();
@@ -90,8 +90,8 @@ namespace Z0
             Claim.eq(bs1,bs2);
 
             var a = Random.Span128<byte>();
-            var b = DataBlocks.alloc(n128);
-            DataBlocks.store(in a.Head, 16, ref b);
+            var b = StackStore.alloc(n128);
+            StackStore.store(in a.Head, 16, ref b);
             Claim.eq(a, b.AsBytes());        
         }
 

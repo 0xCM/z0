@@ -13,7 +13,7 @@ namespace Z0
     using static zfunc;
     using static nfunc;
 
-    partial class SpanExtensions
+    partial class MemBlockExtend
     {
         /// <summary>
         /// Clones the source span into a new span
@@ -61,7 +61,7 @@ namespace Z0
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
-        public static Span256<T> Replicate<T>(this ReadOnlySpan256<T> src, bool structureOnly = false)
+        public static Span256<T> Replicate<T>(this ConstBlock256<T> src, bool structureOnly = false)
             where T : unmanaged
         {
             Span<T> dst = new T[src.Length];
@@ -77,7 +77,7 @@ namespace Z0
         /// <typeparam name="N">The natural length</typeparam>
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]   
-        public static Span<N,T> Replicate<N,T>(this ReadOnlySpan<N,T> src)    
+        public static Span<N,T> Replicate<N,T>(this ConstBlock<N,T> src)    
             where N : unmanaged, ITypeNat
             where T : unmanaged
                 => new Span<N,T>(src);

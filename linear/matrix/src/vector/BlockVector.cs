@@ -22,7 +22,7 @@ namespace Z0
             => this.data = src;
 
         [MethodImpl(Inline)]
-        public BlockVector(in ReadOnlySpan256<T> src)
+        public BlockVector(in ConstBlock256<T> src)
             => this.data = src.Replicate();
 
         [MethodImpl(Inline)]
@@ -30,7 +30,7 @@ namespace Z0
             =>  new BlockVector<T>(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator BlockVector<T>(in ReadOnlySpan256<T> src)
+        public static implicit operator BlockVector<T>(in ConstBlock256<T> src)
             =>  new BlockVector<T>(src);
 
         [MethodImpl(Inline)]
@@ -133,7 +133,7 @@ namespace Z0
         public Span256<T> ToSpan256()
             => data;
 
-        public ReadOnlySpan256<T> ToReadOnlySpan256()
+        public ConstBlock256<T> ToReadOnlySpan256()
             => data;
     }
 }

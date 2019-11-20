@@ -72,7 +72,7 @@ namespace Z0
             
             odd = vadd(vadd(maj, maj), odd);
 
-            var dst = DataBlocks.alloc(n128);
+            var dst = StackStore.alloc(n128);
             vstore(odd, ref dst.X0);
             var total = 0ul;
 
@@ -111,7 +111,7 @@ namespace Z0
             
             odd = vadd(vadd(maj, maj), odd);
 
-            var dst = DataBlocks.alloc(n256);
+            var dst = StackStore.alloc(n256);
             vstore(odd, ref dst.X0);
             
             var total = 0ul;

@@ -16,7 +16,7 @@ namespace Z0
     /// <summary>
     /// Defines a readonly span of natural length N
     /// </summary>
-    public ref struct ReadOnlySpan<N,T>
+    public ref struct ConstBlock<N,T>
         where N : unmanaged, ITypeNat
         where T : unmanaged
     {
@@ -30,9 +30,9 @@ namespace Z0
         /// <param name="src">The source span</param>
         /// <typeparam name="U">The source element type</typeparam>
         [MethodImpl(Inline)]
-        internal static ReadOnlySpan<N,U> Transfer<U>(ReadOnlySpan<U> src)
+        internal static ConstBlock<N,U> Transfer<U>(ReadOnlySpan<U> src)
             where U : unmanaged
-                => new ReadOnlySpan<N, U>(src);
+                => new ConstBlock<N, U>(src);
 
         /// <summary>
         /// Verifies correct source span length prior to backing store assignment
@@ -40,45 +40,45 @@ namespace Z0
         /// <param name="src">The source span</param>
         /// <typeparam name="U">The source element type</typeparam>
         [MethodImpl(Inline)]
-        public static ReadOnlySpan<N,U> CheckedTransfer<U>(ReadOnlySpan<U> src)
+        public static ConstBlock<N,U> CheckedTransfer<U>(ReadOnlySpan<U> src)
             where U : unmanaged
         {
             
             require(src.Length >= Count, $"length(src) = {src.Length} < {Count} = SpanLength");               
-            return new ReadOnlySpan<N, U>(src);
+            return new ConstBlock<N, U>(src);
         }
 
         [MethodImpl(Inline)]
-        public static implicit operator ReadOnlySpan<T> (ReadOnlySpan<N,T> src)
+        public static implicit operator ReadOnlySpan<T> (ConstBlock<N,T> src)
             => src.data;
     
         [MethodImpl(Inline)]
-        public static implicit operator ReadOnlySpan<N,T> (T[] src)
+        public static implicit operator ConstBlock<N,T> (T[] src)
             => CheckedTransfer<T>(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator ReadOnlySpan<N,T> (ReadOnlySpan<T> src)
+        public static implicit operator ConstBlock<N,T> (ReadOnlySpan<T> src)
             => CheckedTransfer<T>(src);
 
         [MethodImpl(Inline)]
-        public static bool operator == (ReadOnlySpan<N,T> lhs, ReadOnlySpan<N,T> rhs)
+        public static bool operator == (ConstBlock<N,T> lhs, ConstBlock<N,T> rhs)
             => lhs.data == rhs.data;
 
         [MethodImpl(Inline)]
-        public static bool operator != (ReadOnlySpan<N,T> lhs, ReadOnlySpan<N,T> rhs)
+        public static bool operator != (ConstBlock<N,T> lhs, ConstBlock<N,T> rhs)
             => lhs.data != rhs.data;
 
         [MethodImpl(Inline)]
-        internal ReadOnlySpan(ref T src)
+        internal ConstBlock(ref T src)
             => data = MemoryMarshal.CreateReadOnlySpan(ref src, Count);
 
         [MethodImpl(Inline)]
-        internal ReadOnlySpan(Span<N,T> src)
+        internal ConstBlock(Span<N,T> src)
             => this.data = src;
 
 
         [MethodImpl(Inline)]
-        ReadOnlySpan(ReadOnlySpan<T> src)
+        ConstBlock(ReadOnlySpan<T> src)
             => this.data = src;
 
         public ref readonly T this[int ix] 
@@ -131,7 +131,7 @@ namespace Z0
             => data.TryCopyTo(dst);
 
         [MethodImpl(Inline)]
-        public ReadOnlySpan<N,S> As<S>()
+        public ConstBlock<N,S> As<S>()
             where S : unmanaged
                 => Transfer(MemoryMarshal.Cast<T,S>(data));
  

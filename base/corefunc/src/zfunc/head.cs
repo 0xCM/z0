@@ -81,7 +81,7 @@ partial class zfunc
     /// <param name="src">The source span</param>
     /// <typeparam name="T">The element type</typeparam>
     [MethodImpl(Inline)]
-    public static ref readonly T head<N,T>(in ReadOnlySpan<N,T> src)
+    public static ref readonly T head<N,T>(in ConstBlock<N,T> src)
         where N : unmanaged, ITypeNat
         where T : unmanaged
             => ref src.Head;
@@ -112,7 +112,7 @@ partial class zfunc
     /// <param name="src">The source span</param>
     /// <typeparam name="T">The element type</typeparam>
     [MethodImpl(Inline)]
-    public static ref readonly T head<T>(in ReadOnlySpan128<T> src)
+    public static ref readonly T head<T>(in ConstBlock128<T> src)
         where T : unmanaged
             =>  ref src.Head;
 
@@ -122,7 +122,7 @@ partial class zfunc
     /// <param name="src">The source span</param>
     /// <typeparam name="T">The element type</typeparam>
     [MethodImpl(Inline)]
-    public static ref readonly T head<T>(in ReadOnlySpan256<T> src)
+    public static ref readonly T head<T>(in ConstBlock256<T> src)
         where T : unmanaged
             =>  ref src.Head;
 

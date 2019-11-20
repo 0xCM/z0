@@ -11,6 +11,12 @@ namespace Z0
 
     partial class gmoc
     {
+        public static bit ispow2_g16u(ushort a)
+            => gmath.ispow2(a);
+
+        public static bit ispow2_16u(ushort a)
+            => math.ispow2(a);
+
         public static sbyte pow_b8i(sbyte b, uint exp)
             => math.pow(b,exp);
 

@@ -231,13 +231,6 @@ namespace Z0
             return Unsafe.As<T,num<T>>(ref result);
         }
 
-        [MethodImpl(Inline)]
-        public num<T> ipow(uint exp) 
-        {
-            ref var result = ref gmath.pow(ref unwrap(in this), exp);
-            return Unsafe.As<T,num<T>>(ref result);
-        }
-
         public bool nonzero
         {
             [MethodImpl(Inline)]

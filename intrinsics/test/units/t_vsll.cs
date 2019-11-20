@@ -17,51 +17,51 @@ namespace Z0
         public void vsll_128x8u()
             => vsll_check<byte>(n128);
 
-        public void vsll_128x8u_bench()
-            =>vsll_bench<byte>(n128);
-
         public void vsll_128x16u()
             => vsll_check<ushort>(n128);
-
-        public void vsll_128x16u_bench()
-            => vsll_bench<ushort>(n128);
 
         public void vsll_128x32u()
             => vsll_check<uint>(n128);
 
-        public void vsll_128x32u_bench()
-            => vsll_bench<uint>(n128);
-
         public void vsll_128x64u()
             => vsll_check<ulong>(n128);
-
-        public void vsll_128x64u_bench()
-            => vsll_bench<ulong>(n128);
 
         public void vsll_256x8u()
             => vsll_check<byte>(n256);
 
-        public void vsll_256x8u_bench()
-            => vsll_bench<byte>(n256);
-
         public void vsll_256x16u()
             => vsll_check<ushort>(n256);
-
-        public void vsll_256x16u_bench()
-            => vsll_bench<ushort>(n256);
 
         public void vsll_256x32u()
             => vsll_check<uint>(n256);
 
-        public void vsll_256x32u_bench()
-            => vsll_bench<uint>(n256);
 
         public void vsll_256x64u()
             => vsll_check<ulong>(n256);
 
+        public void vsll_128x8u_bench()
+            =>vsll_bench<byte>(n128);
+
+        public void vsll_128x16u_bench()
+            => vsll_bench<ushort>(n128);
+
+        public void vsll_128x32u_bench()
+            => vsll_bench<uint>(n128);
+
+        public void vsll_128x64u_bench()
+            => vsll_bench<ulong>(n128);
+
+        public void vsll_256x8u_bench()
+            => vsll_bench<byte>(n256);
+
+        public void vsll_256x16u_bench()
+            => vsll_bench<ushort>(n256);
+
+        public void vsll_256x32u_bench()
+            => vsll_bench<uint>(n256);
+
         public void vsll_256x64u_bench()
             => vsll_bench<ulong>(n256);
-
 
         void vsll_check<T>(N128 n)
             where T : unmanaged
@@ -96,7 +96,7 @@ namespace Z0
                 var b = ginx.vsll(src, vOffset);
                 Claim.eq(a,b);
 
-                for(var j=0; j<a.Length(); j++)
+                for(var j=0; j<a.Length()/2; j++)
                 {
                     var x = vcell(ginx.vlo(a), (byte)j);
                     var y = vcell(ginx.vlo(src), (byte)j);

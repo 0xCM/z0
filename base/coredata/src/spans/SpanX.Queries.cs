@@ -17,7 +17,7 @@ namespace Z0
     /// <summary>
     /// Defines various methods that extract/interrogate span content
     /// </summary>
-    partial class SpanExtensions
+    partial class MemBlockExtend
     {
         /// <summary>
         /// Determines whether any elements of the source match the target

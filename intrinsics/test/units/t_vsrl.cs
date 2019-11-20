@@ -14,7 +14,6 @@ namespace Z0
 
     public class t_vsrl : IntrinsicTest<t_vsrl>
     {
-
         public void vsrl_128x8u()
             => vsrl_check<byte>(n128);
 
@@ -40,35 +39,28 @@ namespace Z0
             => vsrl_bench<ulong>(n128);
 
         public void vsrl_256x8u()
-        {
-            vsrl_check<byte>(n256);
-        }
-
-        public void vsrl_256x8u_bench()
-        {
-            vsrl_bench<byte>(n256);
-        }
+            => vsrl_check<byte>(n256);
 
         public void vsrl_256x16u()
-        {
-            vsrl_check<ushort>(n256);
-        }
-
-        public void vsrl_256x16u_bench()
-            => vsrl_bench<ushort>(n256);
+            => vsrl_check<ushort>(n256);
 
         public void vsrl_256x32u()
             => vsrl_check<uint>(n256);
 
-        public void vsrl_256x32u_bench()
-            => vsrl_bench<uint>(n256);
-
         public void vsrl_256x64u()
             => vsrl_check<ulong>(n256);
 
+        public void vsrl_256x8u_bench()
+            => vsrl_bench<byte>(n256);
+
+        public void vsrl_256x16u_bench()
+            => vsrl_bench<ushort>(n256);
+
+        public void vsrl_256x32u_bench()
+            => vsrl_bench<uint>(n256);
+
         public void vsrl_256x64u_bench()
             => vsrl_bench<ulong>(n256);
-
 
         void vsrl_check<T>(N128 n)
             where T : unmanaged
@@ -98,11 +90,11 @@ namespace Z0
                 var offset = Random.Next<byte>(2,7);
                 var vOffset = ginx.vscalar(convert<byte,T>(offset));
 
-                var a = ginx.vsrl(src,offset);
+                var a = ginx.vsrl(src, offset);
                 var b = ginx.vsrl(src, vOffset);
                 Claim.eq(a,b);
 
-                for(var j=0; j<a.Length(); j++)
+                for(var j=0; j<a.Length()/2; j++)
                 {
                     var x = vcell(ginx.vlo(a), (byte)j);
                     var y = vcell(ginx.vlo(src), (byte)j);

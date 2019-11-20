@@ -19,6 +19,22 @@ namespace Z0
     public static class Matrix
     {
         /// <summary>
+        /// Allocates a memory span of specified length
+        /// </summary>
+        /// <param name="len">The data length</param>
+        /// <param name="fill">An optional fill value</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]
+        static T[] array<T>(int len, T? fill = default)
+            where T : unmanaged
+        {
+            var dst = new T[len];
+            if(fill != null)
+                dst.AsSpan().Fill(fill.Value);
+            return dst;
+        }
+    
+        /// <summary>
         /// Allocates a square matrix of natual dimension
         /// </summary>
         /// <param name="n">The square dimension; specified, if desired, to aid type inference</param>
@@ -45,7 +61,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => new Matrix<M, N, T>(MemorySpan.Alloc<T>(nati<M>()* nati<N>(),fill));
+                => new Matrix<M, N, T>(array<T>(nati<M>()* nati<N>(),fill));
          
         /// <summary>
         /// Loads a matrix of natural dimensions from an array
@@ -147,7 +163,7 @@ namespace Z0
             if(n != doc.Rows[0].Cells.Length)
                 return default;
 
-            var dst =  load<M,N,T>(MemorySpan.Alloc<T>(m * n));
+            var dst =  load<M,N,T>(array<T>(m * n));
             for(var i = 0; i<doc.Rows.Length; i++)
             {
                 ref readonly var row = ref doc[i];

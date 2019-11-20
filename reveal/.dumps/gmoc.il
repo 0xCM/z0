@@ -1,4 +1,28 @@
-// 2019-11-20 01:20:42:879
+// 2019-11-20 15:08:31:851
+double xor_g64f(double lhs, double rhs)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call System.Double Z0.gfp::xor<System.Double>(System.Double,System.Double)
+    IL_0007: ret
+
+}
+short pow_g16i(short b, uint exp)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call System.Int16 Z0.gmath::pow<System.Int16>(System.Int16,System.UInt32)
+    IL_0007: ret
+
+}
+ushort pow_b16u(ushort b, uint exp)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call System.UInt16 Z0.math::pow(System.UInt16,System.UInt32)
+    IL_0007: ret
+
+}
 ushort pow_g16u(ushort b, uint exp)
 {
     IL_0000: ldarg.0
@@ -973,14 +997,6 @@ double xor_d64f(double lhs, double rhs)
     IL_0007: ret
 
 }
-double xor_g64f(double lhs, double rhs)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: call System.Double Z0.gfp::xor<System.Double>(System.Double,System.Double)
-    IL_0007: ret
-
-}
 uint negate_g32u(uint x)
 {
     IL_0000: ldarg.0
@@ -1934,6 +1950,20 @@ bool positive_g64f(double x)
     IL_000B: ret
 
 }
+bit ispow2_g16u(ushort a)
+{
+    IL_0000: ldarg.0
+    IL_0001: call Z0.bit Z0.gmath::ispow2<System.UInt16>(System.UInt16)
+    IL_0006: ret
+
+}
+bit ispow2_16u(ushort a)
+{
+    IL_0000: ldarg.0
+    IL_0001: call Z0.bit Z0.math::ispow2(System.UInt16)
+    IL_0006: ret
+
+}
 sbyte pow_b8i(sbyte b, uint exp)
 {
     IL_0000: ldarg.0
@@ -1971,22 +2001,6 @@ short pow_b16i(short b, uint exp)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: call System.Int16 Z0.math::pow(System.Int16,System.UInt32)
-    IL_0007: ret
-
-}
-short pow_g16i(short b, uint exp)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: call System.Int16 Z0.gmath::pow<System.Int16>(System.Int16,System.UInt32)
-    IL_0007: ret
-
-}
-ushort pow_b16u(ushort b, uint exp)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: call System.UInt16 Z0.math::pow(System.UInt16,System.UInt32)
     IL_0007: ret
 
 }
@@ -3430,6 +3444,33 @@ uint fma_g32u(uint x, uint a, uint b)
     IL_0008: ret
 
 }
+long fma_d64i(long x, long a, long b)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: ldarg.2
+    IL_0003: call System.Int64 Z0.math::fma(System.Int64,System.Int64,System.Int64)
+    IL_0008: ret
+
+}
+long fma_g64i(long x, long a, long b)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: ldarg.2
+    IL_0003: call System.Int64 Z0.gmath::fma<System.Int64>(System.Int64,System.Int64,System.Int64)
+    IL_0008: ret
+
+}
+ulong fma_d64u(ulong x, ulong a, ulong b)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: ldarg.2
+    IL_0003: call System.UInt64 Z0.math::fma(System.UInt64,System.UInt64,System.UInt64)
+    IL_0008: ret
+
+}
 ulong fma_g64u(ulong x, ulong a, ulong b)
 {
     IL_0000: ldarg.0
@@ -3488,30 +3529,6 @@ bit gt_g8i(sbyte a, sbyte b)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: call Z0.bit Z0.gmath::gt<System.SByte>(System.SByte,System.SByte)
-    IL_0007: ret
-
-}
-bit gt_d8u(byte a, byte b)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: call Z0.bit Z0.math::gt(System.Byte,System.Byte)
-    IL_0007: ret
-
-}
-bit gt_g8u(byte a, byte b)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: call Z0.bit Z0.gmath::gt<System.Byte>(System.Byte,System.Byte)
-    IL_0007: ret
-
-}
-bit gt_d16i(short a, short b)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: call Z0.bit Z0.math::gt(System.Int16,System.Int16)
     IL_0007: ret
 
 }

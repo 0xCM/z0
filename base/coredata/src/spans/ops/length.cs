@@ -1,0 +1,83 @@
+//-----------------------------------------------------------------------------
+// Copyright   :  (c) Chris Moore, 2019
+// License     :  MIT
+//-----------------------------------------------------------------------------
+namespace Z0
+{
+    using System;
+    using System.Runtime.CompilerServices;    
+    using System.Runtime.InteropServices;    
+        
+    using static zfunc;
+
+    partial class MemBlocks
+    {
+        /// <summary>
+        /// Returns the length of spans of equal length; otherwise raises an error
+        /// </summary>
+        /// <param name="lhs">The left span</param>
+        /// <param name="rhs">The right span</param>
+        [MethodImpl(Inline)]   
+        public static int length<S,T>(in Block64<S> lhs, in Block64<T> rhs)
+            where S : unmanaged
+            where T : unmanaged
+                => lhs.Length == rhs.Length ? lhs.Length : badsize<int>(lhs.Length,rhs.Length);
+
+        /// <summary>
+        /// Returns the length of spans of equal length; otherwise raises an error
+        /// </summary>
+        /// <param name="lhs">The left span</param>
+        /// <param name="rhs">The right span</param>
+        [MethodImpl(Inline)]   
+        public static int length<S,T>(in ConstBlock64<S> lhs, in ConstBlock64<T> rhs)
+            where S : unmanaged
+            where T : unmanaged
+                => lhs.Length == rhs.Length ? lhs.Length : badsize<int>(lhs.Length,rhs.Length);
+
+        /// <summary>
+        /// Returns the length of spans of equal length; otherwise raises an error
+        /// </summary>
+        /// <param name="lhs">The left span</param>
+        /// <param name="rhs">The right span</param>
+        [MethodImpl(Inline)]   
+        public static int length<S,T>(in Span128<S> lhs, in Span128<T> rhs)
+            where S : unmanaged
+            where T : unmanaged
+                => lhs.Length == rhs.Length ? lhs.Length : badsize<int>(lhs.Length,rhs.Length);
+
+        /// <summary>
+        /// Returns the length of spans of equal length; otherwise raises an error
+        /// </summary>
+        /// <param name="lhs">The left span</param>
+        /// <param name="rhs">The right span</param>
+        [MethodImpl(Inline)]   
+        public static int length<S,T>(in ConstBlock128<S> lhs, in ConstBlock128<T> rhs)
+            where S : unmanaged
+            where T : unmanaged
+                => lhs.Length == rhs.Length ? lhs.Length : badsize<int>(lhs.Length,rhs.Length);
+
+        /// <summary>
+        /// Returns the length of spans of equal length; otherwise raises an error
+        /// </summary>
+        /// <param name="lhs">The left span</param>
+        /// <param name="rhs">The right span</param>
+        [MethodImpl(Inline)]   
+        public static int length<S,T>(in Span256<S> lhs, in Span256<T> rhs)
+            where S : unmanaged
+            where T : unmanaged
+                => lhs.Length == rhs.Length ? lhs.Length : badsize<int>(lhs.Length,rhs.Length);
+
+        /// <summary>
+        /// Returns the length of spans of equal length; otherwise raises an error
+        /// </summary>
+        /// <param name="lhs">The left span</param>
+        /// <param name="rhs">The right span</param>
+        [MethodImpl(Inline)]   
+        public static int length<S,T>(in ConstBlock256<S> lhs, in ConstBlock256<T> rhs)
+            where S : unmanaged
+            where T : unmanaged
+                => lhs.Length == rhs.Length ? lhs.Length : badsize<int>(lhs.Length,rhs.Length);
+
+    }
+
+}

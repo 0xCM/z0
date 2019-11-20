@@ -10,7 +10,7 @@ namespace Z0
 
     using static zfunc;
 
-    partial class SpanExtensions
+    partial class MemBlockExtend
     {
         /// <summary>
         /// Presents selected span content as a readonly span of bytes
@@ -247,7 +247,7 @@ namespace Z0
         /// <typeparam name="N">The natural length</typeparam>
         /// <typeparam name="T">The source span type</typeparam>
         [MethodImpl(Inline)]
-        public static ReadOnlySpan<N,byte> AsBytes<N,T>(this ReadOnlySpan<N,T> src)
+        public static ConstBlock<N,byte> AsBytes<N,T>(this ConstBlock<N,T> src)
             where N : unmanaged, ITypeNat
             where T : unmanaged
                 => src.As<byte>();
@@ -259,7 +259,7 @@ namespace Z0
         /// <typeparam name="N">The natural length</typeparam>
         /// <typeparam name="T">The source span type</typeparam>
         [MethodImpl(Inline)]
-        public static ReadOnlySpan<N,sbyte> AsSBytes<N,T>(this ReadOnlySpan<N,T> src)
+        public static ConstBlock<N,sbyte> AsSBytes<N,T>(this ConstBlock<N,T> src)
             where N : unmanaged, ITypeNat
             where T : unmanaged
                 => src.As<sbyte>();
@@ -271,7 +271,7 @@ namespace Z0
         /// <typeparam name="N">The natural length</typeparam>
         /// <typeparam name="T">The source span type</typeparam>
         [MethodImpl(Inline)]
-        public static ReadOnlySpan<N,ushort> AsUInt16<N,T>(this ReadOnlySpan<N,T> src)
+        public static ConstBlock<N,ushort> AsUInt16<N,T>(this ConstBlock<N,T> src)
             where N : unmanaged, ITypeNat
             where T : unmanaged
                 => src.As<ushort>();
@@ -283,7 +283,7 @@ namespace Z0
         /// <typeparam name="N">The natural length</typeparam>
         /// <typeparam name="T">The source span type</typeparam>
         [MethodImpl(Inline)]
-        public static ReadOnlySpan<N,short> AsInt16<N,T>(this ReadOnlySpan<N,T> src)
+        public static ConstBlock<N,short> AsInt16<N,T>(this ConstBlock<N,T> src)
             where N : unmanaged, ITypeNat
             where T : unmanaged
                 => src.As<short>();
@@ -295,7 +295,7 @@ namespace Z0
         /// <typeparam name="N">The natural length</typeparam>
         /// <typeparam name="T">The source span type</typeparam>
         [MethodImpl(Inline)]
-        public static ReadOnlySpan<N,int> AsInt32<N,T>(this ReadOnlySpan<N,T> src)
+        public static ConstBlock<N,int> AsInt32<N,T>(this ConstBlock<N,T> src)
             where N : unmanaged, ITypeNat
             where T : unmanaged
                 => src.As<int>();
@@ -307,7 +307,7 @@ namespace Z0
         /// <typeparam name="N">The natural length</typeparam>
         /// <typeparam name="T">The source span type</typeparam>
         [MethodImpl(Inline)]
-        public static ReadOnlySpan<N,uint> AsUInt32<N,T>(this ReadOnlySpan<N,T> src)
+        public static ConstBlock<N,uint> AsUInt32<N,T>(this ConstBlock<N,T> src)
             where N : unmanaged, ITypeNat
             where T : unmanaged
                 => src.As<uint>();
@@ -319,7 +319,7 @@ namespace Z0
         /// <typeparam name="N">The natural length</typeparam>
         /// <typeparam name="T">The source span type</typeparam>
         [MethodImpl(Inline)]
-        public static ReadOnlySpan<N,long> AsInt64<N,T>(this ReadOnlySpan<N,T> src)
+        public static ConstBlock<N,long> AsInt64<N,T>(this ConstBlock<N,T> src)
             where N : unmanaged, ITypeNat
             where T : unmanaged
                 => src.As<long>();
@@ -331,7 +331,7 @@ namespace Z0
         /// <typeparam name="N">The natural length</typeparam>
         /// <typeparam name="T">The source span type</typeparam>
         [MethodImpl(Inline)]
-        public static ReadOnlySpan<N,ulong> AsUInt64<N,T>(this ReadOnlySpan<N,T> src)
+        public static ConstBlock<N,ulong> AsUInt64<N,T>(this ConstBlock<N,T> src)
             where N : unmanaged, ITypeNat
             where T : unmanaged
                 => src.As<ulong>();
@@ -343,7 +343,7 @@ namespace Z0
         /// <typeparam name="N">The natural length</typeparam>
         /// <typeparam name="T">The source span type</typeparam>
         [MethodImpl(Inline)]
-        public static ReadOnlySpan<N,float> AsSingle<N,T>(this ReadOnlySpan<N,T> src)
+        public static ConstBlock<N,float> AsSingle<N,T>(this ConstBlock<N,T> src)
             where N : unmanaged, ITypeNat
             where T : unmanaged
                 => src.As<float>();
@@ -355,7 +355,7 @@ namespace Z0
         /// <typeparam name="N">The natural length</typeparam>
         /// <typeparam name="T">The source span type</typeparam>
         [MethodImpl(Inline)]
-        public static ReadOnlySpan<N,double> AsDouble<N,T>(this ReadOnlySpan<N,T> src)
+        public static ConstBlock<N,double> AsDouble<N,T>(this ConstBlock<N,T> src)
             where N : unmanaged, ITypeNat
             where T : unmanaged
                 => src.As<double>(); 

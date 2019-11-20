@@ -32,7 +32,7 @@ namespace Z0
             return dst;
         }
 
-        public static Span256<T> and<T>(ReadOnlySpan256<T> lhs, ReadOnlySpan256<T> rhs, Span256<T> dst)
+        public static Span256<T> and<T>(ConstBlock256<T> lhs, ConstBlock256<T> rhs, Span256<T> dst)
             where T : unmanaged
         {
             for(var i=0; i< blocks(lhs,rhs); i++)

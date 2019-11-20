@@ -269,7 +269,7 @@ namespace Z0
         /// <param name="file">The file in which the invoking function is defined </param>
         /// <param name="line">The file line number of invocation</param>
         /// <typeparam name="T">The element type</typeparam>        
-        public static void eq<T>(ReadOnlySpan128<T> lhs, ReadOnlySpan128<T> rhs,  [Member] string caller = null, [File] string file = null, [Line] int? line = null)
+        public static void eq<T>(ConstBlock128<T> lhs, ConstBlock128<T> rhs,  [Member] string caller = null, [File] string file = null, [Line] int? line = null)
             where T : unmanaged 
         {
             for(var i = 0; i< Span128.length(lhs,rhs); i++)

@@ -82,8 +82,8 @@ namespace Z0
         public static implicit operator ReadOnlySpan<T> (Span<M,N,T> src)
             => src.data;
 
-        public static implicit operator ReadOnlySpan<M,N,T> (Span<M,N,T> src)
-            => new ReadOnlySpan<M, N, T>(src);
+        public static implicit operator ConstBlock<M,N,T> (Span<M,N,T> src)
+            => new ConstBlock<M, N, T>(src);
 
 
         /// <summary>
@@ -220,7 +220,7 @@ namespace Z0
             => new Span<M, N, T>(data.ToArray());
 
         [MethodImpl(Inline)]
-        public ReadOnlySpan<M,N,T> ReadOnly()        
+        public ConstBlock<M,N,T> ReadOnly()        
             => this;
 
         [MethodImpl(Inline)]

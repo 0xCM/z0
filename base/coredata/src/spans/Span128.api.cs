@@ -243,7 +243,7 @@ namespace Z0
         /// <param name="rhs">The right source</param>
         /// <typeparam name="T">The span element type</typeparam>
         [MethodImpl(Inline)]   
-        public static int blocks<S,T>(ReadOnlySpan128<S> lhs, ReadOnlySpan128<T> rhs, [CallerFilePath] string caller = null,
+        public static int blocks<S,T>(ConstBlock128<S> lhs, ConstBlock128<T> rhs, [CallerFilePath] string caller = null,
             [CallerFilePath] string file = null, [CallerLineNumber] int? line = null)
                 where T : unmanaged
                 where S : unmanaged
@@ -256,7 +256,7 @@ namespace Z0
         /// <param name="lhs">The left span</param>
         /// <param name="rhs">The right span</param>
         [MethodImpl(Inline)]   
-        public static int length<S,T>(ReadOnlySpan128<S> lhs, ReadOnlySpan128<T> rhs, [CallerFilePath] string caller = null, 
+        public static int length<S,T>(ConstBlock128<S> lhs, ConstBlock128<T> rhs, [CallerFilePath] string caller = null, 
             [CallerFilePath] string file = null, [CallerLineNumber] int? line = null)        
             where T : unmanaged
             where S : unmanaged
@@ -292,7 +292,7 @@ namespace Z0
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
-        static ref readonly T head<T>(in ReadOnlySpan128<T> src)
+        static ref readonly T head<T>(in ConstBlock128<T> src)
             where T : unmanaged
                 =>  ref MemoryMarshal.GetReference<T>(src);
 

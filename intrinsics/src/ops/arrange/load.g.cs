@@ -127,7 +127,7 @@ namespace Z0
                 =>  vload(n128,src.Unblocked);
 
         [MethodImpl(Inline)]
-        public static Vector128<T> vload<T>(ReadOnlySpan128<T> src)
+        public static Vector128<T> vload<T>(ConstBlock128<T> src)
             where T : unmanaged
                 =>  vload(n128,src.Data);
 
@@ -137,7 +137,7 @@ namespace Z0
                 =>  vload(n256,src.Unblocked);
 
         [MethodImpl(Inline)]
-        public static Vector256<T> vload<T>(ReadOnlySpan256<T> src)
+        public static Vector256<T> vload<T>(ConstBlock256<T> src)
             where T : unmanaged
                 => vload(n256,src.Unblocked);
 

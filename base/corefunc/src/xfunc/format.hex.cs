@@ -436,7 +436,7 @@ namespace Z0
         /// <param name="specifier">Whether to prefix each number with the canonical hex specifier, "0x"</param>
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
-        public static string FormatHex<T>(this Span64<T> src, bool bracket = false, char? sep = null, bool specifier = false)
+        public static string FormatHex<T>(this Block64<T> src, bool bracket = false, char? sep = null, bool specifier = false)
             where T : unmanaged
                 => src.Unblocked.FormatHex(bracket, sep, specifier);
 
@@ -529,7 +529,7 @@ namespace Z0
         /// <param name="specifier">Whether to prefix each number with the canonical hex specifier, "0x"</param>
         /// <typeparam name="T">The primal cell type</typeparam>
         [MethodImpl(Inline)]
-        public static string FormatHex<N,T>(this ReadOnlySpan<N,T> src, bool bracket = false, char? sep = null, bool specifier = false)
+        public static string FormatHex<N,T>(this ConstBlock<N,T> src, bool bracket = false, char? sep = null, bool specifier = false)
             where N : unmanaged, ITypeNat
             where T : unmanaged
                 => src.Unsize().FormatHex(bracket, sep, specifier);
@@ -615,7 +615,7 @@ namespace Z0
         /// <param name="sep">The block delimiter</param>
         /// <typeparam name="T">The cell component type</typeparam>
         [MethodImpl(Inline)]
-        public static string FormatHexBlocks<N,T>(this ReadOnlySpan<N,T> src, int? width = null, char? sep = null)
+        public static string FormatHexBlocks<N,T>(this ConstBlock<N,T> src, int? width = null, char? sep = null)
             where N : unmanaged, ITypeNat
             where T : unmanaged
                 => src.Unsized.FormatHexBlocks(width,sep,false);    

@@ -43,8 +43,8 @@ namespace Z0
         public static Vector128<T> valt<T>(N128 n, T a, T b)
             where T : unmanaged
         {            
-            var data = BlockedSpan.alloc<T>(n);
-            var len = BlockedSpan.blocklen<T>(n);
+            var data = MemBlocks.alloc<T>(n);
+            var len = MemBlocks.blocklen<T>(n);
             ref var mem = ref head(data);
             for(var i=0; i<len; i++)
                 seek(ref mem, i) = even(i) ? a : b;

@@ -80,7 +80,7 @@ namespace Z0
             => src.Denaturalize();
 
         [MethodImpl(Inline)]   
-        public static implicit operator ReadOnlySpan256<T>(BlockVector<N,T> src)
+        public static implicit operator ConstBlock256<T>(BlockVector<N,T> src)
             => src.data;
 
         [MethodImpl(Inline)]   
@@ -106,7 +106,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        BlockVector(in ReadOnlySpan<N,T> src)
+        BlockVector(in ConstBlock<N,T> src)
         {
             data = Span256.load(src.Unsized);
         }
@@ -229,7 +229,7 @@ namespace Z0
         public Span256<T> ToSpan256()
             => data;
 
-        public ReadOnlySpan256<T> ToReadOnlySpan256()
+        public ConstBlock256<T> ToReadOnlySpan256()
             => data;
     }
 }

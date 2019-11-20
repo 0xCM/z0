@@ -13,7 +13,7 @@ namespace Z0
     using static zfunc;
     using static nfunc;
 
-    partial class SpanExtensions
+    partial class MemBlockExtend
     {
         /// <summary>
         /// Projects a source span to target span via a supplied transformation

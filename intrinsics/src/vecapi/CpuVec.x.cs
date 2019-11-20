@@ -121,7 +121,7 @@ namespace Z0
                 => ginx.vprior<T>(src);
  
         [MethodImpl(Inline)]
-        public static Vector256<T> LoadVector<T>(this in ReadOnlySpan256<T> src, int block = 0)            
+        public static Vector256<T> LoadVector<T>(this in ConstBlock256<T> src, int block = 0)            
             where T : unmanaged      
         {      
             ginx.vload(in src.Block(block), out Vector256<T> x);
@@ -129,7 +129,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static Vector128<T> LoadVector<T>(this in ReadOnlySpan128<T> src, int block = 0)            
+        public static Vector128<T> LoadVector<T>(this in ConstBlock128<T> src, int block = 0)            
             where T : unmanaged      
         {      
             ginx.vload(in src.Block(block), out Vector128<T> x);

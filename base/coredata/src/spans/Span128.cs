@@ -53,8 +53,8 @@ namespace Z0
             => src.ReadOnly();
 
         [MethodImpl(Inline)]
-        public static implicit operator ReadOnlySpan128<T> (in Span128<T> src)
-            => ReadOnlySpan128<T>.Load(src);
+        public static implicit operator ConstBlock128<T> (in Span128<T> src)
+            => ConstBlock128<T>.Load(src);
 
         [MethodImpl(Inline)]
         public static bool operator == (in Span128<T> lhs, in Span128<T> rhs)
@@ -84,12 +84,6 @@ namespace Z0
             return new Span128<T>(src, offset, src.Length - offset);
         }
 
-        [MethodImpl(Inline)]
-        public static Span128<T> Transfer(Span<T> src)
-        {
-            require(Aligned(src.Length));
-            return new Span128<T>(src);
-        }
 
         [MethodImpl(Inline)]
         internal static Span128<T> TransferUnsafe(Span<T> src)
@@ -109,7 +103,6 @@ namespace Z0
             return new Span128<T>(offset == 0 ? src : src.Slice(offset));
         }
 
-
         [MethodImpl(Inline)]
         internal unsafe Span128(void* src, int length)    
         {
@@ -117,20 +110,20 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        Span128(T[] src, int offset, int length)
+        internal Span128(T[] src, int offset, int length)
         {
             data = new Span<T>(src, offset, length);
         }
 
         
         [MethodImpl(Inline)]
-        Span128(ReadOnlySpan<T> src)
+        internal Span128(ReadOnlySpan<T> src)
         {
             data = src.ToArray();            
         }
 
         [MethodImpl(Inline)]
-        Span128(Span<T> src)
+        internal Span128(Span<T> src)
         {
             this.data = src;
         }
@@ -197,10 +190,10 @@ namespace Z0
         /// <param name="n">The block width selector</param>
         /// <param name="blockIndex">The index of the block, with respect to 64-bit blocks</param>
         [MethodImpl(Inline)]
-        public Span64<T> Block(N64 n, int blockIndex)
+        public Block64<T> Block(N64 n, int blockIndex)
         {
             var count = BlockLength >> 1;
-            return new Span64<T>(data.Slice(blockIndex * count, count));
+            return new Block64<T>(data.Slice(blockIndex * count, count));
         }
 
         [MethodImpl(Inline)]
@@ -220,8 +213,8 @@ namespace Z0
             => new Span128<T>(Slice(blockIndex * BlockLength, blockCount * BlockLength ));
             
         [MethodImpl(Inline)]
-        public ReadOnlySpan128<T> ReadOnly()
-            => (ReadOnlySpan128<T>)data;
+        public ConstBlock128<T> ReadOnly()
+            => (ConstBlock128<T>)data;
 
         [MethodImpl(Inline)]
         public T[] ToArray()

@@ -52,8 +52,8 @@ namespace Z0
             => src.data;
 
         [MethodImpl(Inline)]
-        public static implicit operator ReadOnlySpan256<T> (Span256<T> src)
-            => ReadOnlySpan256<T>.Load(src);
+        public static implicit operator ConstBlock256<T> (Span256<T> src)
+            => ConstBlock256<T>.Load(src);
 
         [MethodImpl(Inline)]
         public static bool operator == (Span256<T> lhs, Span256<T> rhs)
@@ -67,12 +67,6 @@ namespace Z0
         public static bool Aligned(int length)
             => length % BlockLength == 0;
         
-        [MethodImpl(Inline)]
-        public static Span256<T> Transfer(Span<T> src)
-        {
-            require(Aligned(src.Length));
-            return new Span256<T>(src);
-        }
             
         [MethodImpl(Inline)]
         internal static Span256<T> TransferUnsafe(Span<T> src)
@@ -132,13 +126,13 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        Span256(T[] src)
+        internal Span256(T[] src)
         {
             data = src;
         }                
 
         [MethodImpl(Inline)]
-        Span256(Span<T> src)
+        internal Span256(Span<T> src)
         {
             this.data = src;
         }
@@ -195,8 +189,8 @@ namespace Z0
         /// Presents the allocated data as a blocked read-only span
         /// </summary>
         [MethodImpl(Inline)]
-        public ReadOnlySpan256<T> ReadOnly()
-            => (ReadOnlySpan256<T>)data;
+        public ConstBlock256<T> ReadOnly()
+            => (ConstBlock256<T>)data;
 
         [MethodImpl(Inline)]
         public T[] ToArray()

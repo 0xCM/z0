@@ -10,7 +10,7 @@ namespace Z0
 
     using static zfunc;
     using static As;
-    using static BlockStorage;
+    using static StackContainers;
     partial class zfoc
     {
         public static ReadOnlySpan<char> hexdigits(ushort a)
@@ -22,11 +22,11 @@ namespace Z0
         public static void hexdigits(byte a, out char d0, out char d1)
             => Hex.digits(a, out d0, out d1);
 
-        public static void datablock_store(in byte src, uint count, ref Block128 dst)
-            => DataBlocks.store(in src, count, ref dst);
+        public static void datablock_store(in byte src, uint count, ref Stack128 dst)
+            => StackStore.store(in src, count, ref dst);
 
-        public static void datablock_bytes(ref Block128 src)
-            => DataBlocks.bytes(ref src);
+        public static void datablock_bytes(ref Stack128 src)
+            => StackStore.bytes(ref src);
 
         public static ReadOnlySpan<byte> bitseq(byte value)
             => BitStore.select(value);

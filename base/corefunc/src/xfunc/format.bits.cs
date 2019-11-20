@@ -145,7 +145,7 @@ namespace Z0
         /// <param name="blockWidth">The number of binary digits per block, if specified</param>
         /// <typeparam name="T">The primal component type</typeparam>
         [MethodImpl(Inline)]
-        public static string FormatBits<N,T>(this ReadOnlySpan<N,T> src, bool tlz = false, bool specifier = false, int? blockWidth = null)
+        public static string FormatBits<N,T>(this ConstBlock<N,T> src, bool tlz = false, bool specifier = false, int? blockWidth = null)
             where T : unmanaged
             where N : unmanaged, ITypeNat
                 => src.Unsized.FormatBits(tlz,specifier,blockWidth);
@@ -185,7 +185,7 @@ namespace Z0
         /// <param name="blockWidth">The number of binary digits per block, if specified</param>
         /// <typeparam name="T">The primal component type</typeparam>
         [MethodImpl(Inline)]
-        public static string FormatBits<N>(this ReadOnlySpan<N,bit> src, bool tlz = false, bool specifier = false, int? blockWidth = null)
+        public static string FormatBits<N>(this ConstBlock<N,bit> src, bool tlz = false, bool specifier = false, int? blockWidth = null)
             where N : unmanaged, ITypeNat
                 => src.Unsized.FormatBits(tlz,specifier,blockWidth);
 

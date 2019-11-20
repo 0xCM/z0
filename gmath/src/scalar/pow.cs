@@ -5,16 +5,14 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
     using System.Runtime.CompilerServices;
-    using System.Diagnostics;
     
     using static zfunc;    
-    using static Constants;
     
     partial class math
     {
         // See https://stackoverflow.com/questions/101439/the-most-efficient-way-to-implement-an-integer-based-power-function-powint-int
+        [MethodImpl(Inline)]
         public static sbyte pow(sbyte b, uint exp)
         {
             if(exp == 0)
@@ -33,6 +31,7 @@ namespace Z0
             return result;
         }
 
+        [MethodImpl(Inline)]
         public static byte pow(byte b, uint exp)
         {
             if(exp == 0)
@@ -51,6 +50,7 @@ namespace Z0
             return result;
         }
 
+        [MethodImpl(Inline)]
         public static short pow(short b, uint exp)
         {
             if(exp == 0)
@@ -69,6 +69,7 @@ namespace Z0
             return result;
         }
 
+        [MethodImpl(Inline)]
         public static ushort pow(ushort b, uint exp)
         {
             if(exp == 0)
@@ -87,6 +88,7 @@ namespace Z0
             return result;
         }
 
+        [MethodImpl(Inline)]
         public static int pow(int b, uint exp)
         {
             if(exp == 0)
@@ -105,6 +107,7 @@ namespace Z0
             return result;
         }
 
+        [MethodImpl(Inline)]
         public static uint pow(uint b, uint exp)
         {
             if(exp == 0)
@@ -123,6 +126,7 @@ namespace Z0
             return result;
         }
 
+        [MethodImpl(Inline)]
         public static long pow(long b, uint exp)
         {
             if(exp == 0)
@@ -141,6 +145,7 @@ namespace Z0
             return result;
         }
 
+        [MethodImpl(Inline)]
         public static ulong pow(ulong b, uint exp)
         {
             if(exp == 0)
@@ -159,60 +164,5 @@ namespace Z0
             return result;
         }
  
-        [MethodImpl(Inline)]
-        public static ref sbyte pow(ref sbyte src, uint exp)
-        {
-            src = pow(src,exp);
-            return ref src;
-        }
-
-        [MethodImpl(Inline)]
-        public static ref byte pow(ref byte src, uint exp)
-        {
-            src = pow(src,exp);
-            return ref src;
-        }
-
-        [MethodImpl(Inline)]
-        public static ref short pow(ref short src, uint exp)
-        {
-            src = pow(src,exp);
-            return ref src;
-        }
-
-        [MethodImpl(Inline)]
-        public static ref ushort pow(ref ushort src, uint exp)
-        {
-            src = pow(src,exp);
-            return ref src;
-        }
-
-        [MethodImpl(Inline)]
-        public static ref int pow(ref int src, uint exp)
-        {
-            src = pow(src,exp);
-            return ref src;
-        }
-
-        [MethodImpl(Inline)]
-        public static ref uint pow(ref uint src, uint exp)
-        {
-            src = pow(src,exp);
-            return ref src;
-        }
-
-        [MethodImpl(Inline)]
-        public static ref long pow(ref long src, uint exp)
-        {
-            src = pow(src,exp);
-            return ref src;
-        }
-
-        [MethodImpl(Inline)]
-        public static ref ulong pow(ref ulong src, uint exp)
-        {
-            src = pow(src,exp);
-            return ref src;
-        }
     }
 }

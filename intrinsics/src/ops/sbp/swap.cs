@@ -20,7 +20,7 @@ namespace Z0
             where T : unmanaged  
         {
             var len = vcount<T>(n);
-            var src = BlockedSpan.loadu(n, range(default, gmath.add(default, convert<T>(len - 1))).ToArray().AsSpan());
+            var src = MemBlocks.loadu(n, range(default, gmath.add(default, convert<T>(len - 1))).ToArray().AsSpan());
             var dst = src.Swap(swaps);
             return ginx.vload(n, in dst.Head);
         }

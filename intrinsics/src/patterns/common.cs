@@ -45,7 +45,7 @@ namespace Z0
         public static Vector128<T> vunits<T>(N128 n)
             where T : unmanaged
         {            
-            var data = BlockedSpan.alloc(n, gmath.one<T>());
+            var data = MemBlocks.alloc(n, gmath.one<T>());
             return ginx.vload(n, in data.Head);
         }
 
@@ -58,7 +58,7 @@ namespace Z0
         public static Vector256<T> vunits<T>(N256 n)
             where T : unmanaged
         {            
-            var data = BlockedSpan.alloc(n, gmath.one<T>());
+            var data = MemBlocks.alloc(n, gmath.one<T>());
             return ginx.vload(n, in data.Head);
         }
 

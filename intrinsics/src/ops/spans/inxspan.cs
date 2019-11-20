@@ -15,7 +15,7 @@ namespace Z0
 
     public static class inxspan
     {
-        public static Span256<T> sll<T>(ReadOnlySpan256<T> lhs, byte offset, Span256<T> dst)
+        public static Span256<T> sll<T>(ConstBlock256<T> lhs, byte offset, Span256<T> dst)
             where T : unmanaged
         {
             for(var i=0; i< lhs.BlockCount; i++)
@@ -23,7 +23,7 @@ namespace Z0
             return dst;        
         } 
 
-        public static Span256<T> srl<T>(ReadOnlySpan256<T> lhs, byte offset, Span256<T> dst)
+        public static Span256<T> srl<T>(ConstBlock256<T> lhs, byte offset, Span256<T> dst)
             where T : unmanaged
         {
             for(var i=0; i< lhs.BlockCount; i++)
@@ -31,7 +31,7 @@ namespace Z0
             return dst;        
         } 
 
-        public static Span256<T> or<T>(ReadOnlySpan256<T> lhs, ReadOnlySpan256<T> rhs, Span256<T> dst)
+        public static Span256<T> or<T>(ConstBlock256<T> lhs, ConstBlock256<T> rhs, Span256<T> dst)
             where T : unmanaged
         {
             for(var i=0; i< blocks(lhs,rhs); i++)
@@ -39,7 +39,7 @@ namespace Z0
             return dst;        
         } 
 
-        public static Span256<T> xor<T>(ReadOnlySpan256<T> lhs, ReadOnlySpan256<T> rhs, Span256<T> dst)
+        public static Span256<T> xor<T>(ConstBlock256<T> lhs, ConstBlock256<T> rhs, Span256<T> dst)
             where T : unmanaged
         {
             for(var i=0; i< blocks(lhs,rhs); i++)
@@ -47,7 +47,7 @@ namespace Z0
             return dst;        
         } 
 
-        public static Span256<T> sub<T>(ReadOnlySpan256<T> lhs, ReadOnlySpan256<T> rhs, Span256<T> dst)
+        public static Span256<T> sub<T>(ConstBlock256<T> lhs, ConstBlock256<T> rhs, Span256<T> dst)
             where T : unmanaged
         {            
             var blocks = dst.BlockCount;
@@ -56,7 +56,7 @@ namespace Z0
             return dst;
         }
 
-        public static Span256<T> add<T>(ReadOnlySpan256<T> lhs, ReadOnlySpan256<T> rhs, Span256<T> dst)
+        public static Span256<T> add<T>(ConstBlock256<T> lhs, ConstBlock256<T> rhs, Span256<T> dst)
             where T : unmanaged
         {
             var blocks = dst.BlockCount;

@@ -58,10 +58,10 @@ namespace Z0
         /// <typeparam name="S">The source element type</typeparam>
         /// <typeparam name="T">The target element type</typeparam>
         [MethodImpl(Inline)]
-        internal static ReadOnlySpan256<T> cast<S,T>(in ReadOnlySpan256<S> src)                
+        internal static ConstBlock256<T> cast<S,T>(in ConstBlock256<S> src)                
             where S : unmanaged
             where T : unmanaged
-                => (ReadOnlySpan256<T>)MemoryMarshal.Cast<S,T>(src);
+                => (ConstBlock256<T>)MemoryMarshal.Cast<S,T>(src);
                 
         /// <summary>
         /// Reimagines a span of one element type as a span of another element type
@@ -82,10 +82,10 @@ namespace Z0
         /// <typeparam name="S">The source element type</typeparam>
         /// <typeparam name="T">The target element type</typeparam>
         [MethodImpl(Inline)]
-        internal  static ReadOnlySpan128<T> cast<S,T>(in ReadOnlySpan128<S> src)                
+        internal  static ConstBlock128<T> cast<S,T>(in ConstBlock128<S> src)                
             where S : unmanaged
             where T : unmanaged
-                => (ReadOnlySpan128<T>)MemoryMarshal.Cast<S,T>(src);
+                => (ConstBlock128<T>)MemoryMarshal.Cast<S,T>(src);
 
 
         

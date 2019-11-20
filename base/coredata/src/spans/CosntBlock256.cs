@@ -9,14 +9,15 @@ namespace Z0
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;    
     using System.Runtime.InteropServices;    
-    using System.Diagnostics;
-        
+    using System.Diagnostics;    
+    
     using static zfunc;
 
     /// <summary>
-    /// A System.Span[T] clone with length a multiple of 16 bytes = 128 bits
+    /// A System.Span[T] clone where the  encasulated data is always a multiple 
+    /// of 16 bytes = 256 bits
     /// </summary>
-    public readonly ref struct ReadOnlySpan128<T>
+    public readonly ref struct ConstBlock256<T>
         where T : unmanaged
     {
         readonly ReadOnlySpan<T> data;
@@ -24,113 +25,106 @@ namespace Z0
         /// <summary>
         /// The number of cells in the block
         /// </summary>
-        public static int BlockLength => Span128<T>.BlockLength;
+        public static int BlockLength => Span256<T>.BlockLength;
 
         /// <summary>
         /// The size, in bytes, of a block 
         /// </summary>
         /// <typeparam name="T">The primitive type</typeparam>
         /// <remarks>Should always be 16 irrespective of the cell type</remarks>
-        public static int BlockSize => Span128<T>.BlockSize;
+        public static int BlockSize => Span256<T>.BlockSize;
 
         /// <summary>
         /// The size, in bytes, of a constituent block cell
         /// </summary>
         /// <typeparam name="T">The primitive type</typeparam>
-        public static int CellSize => Span128<T>.CellSize;
+        public static int CellSize => Span256<T>.CellSize;
 
         [MethodImpl(Inline)]
-        public static implicit operator ReadOnlySpan<T>(in ReadOnlySpan128<T> src)
+        public static implicit operator ReadOnlySpan<T>(in ConstBlock256<T> src)
             => src.data;
 
         [MethodImpl(Inline)]
-        public static explicit operator ReadOnlySpan128<T>(Span<T> src)
-            => new ReadOnlySpan128<T>(src);
+        public static explicit operator ConstBlock256<T>(Span<T> src)
+            => new ConstBlock256<T>(src);
 
         [MethodImpl(Inline)]
-        public static explicit operator ReadOnlySpan128<T>(ReadOnlySpan<T> src)
-            => new ReadOnlySpan128<T>(src);
+        public static explicit operator ConstBlock256<T>(ReadOnlySpan<T> src)
+            => new ConstBlock256<T>(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator ReadOnlySpan128<T> (T[] src)
-            => new ReadOnlySpan128<T>(src);
+        public static implicit operator ConstBlock256<T> (T[] src)
+            => new ConstBlock256<T>(src);
 
         [MethodImpl(Inline)]
-        public static bool operator == (in ReadOnlySpan128<T> lhs, in ReadOnlySpan128<T> rhs)
+        public static bool operator == (in ConstBlock256<T> lhs, in ConstBlock256<T> rhs)
             => lhs.data == rhs.data;
 
         [MethodImpl(Inline)]
-        public static bool operator != (in ReadOnlySpan128<T> lhs, in ReadOnlySpan128<T> rhs)
+        public static bool operator != (in ConstBlock256<T> lhs, in ConstBlock256<T> rhs)
             => lhs.data != rhs.data;
         
         [MethodImpl(Inline)]
-        public static bool aligned(int length)
-            => Span128<T>.Aligned(length);
+        public static bool Aligned(int length)
+            => Span256<T>.Aligned(length);
 
         [MethodImpl(Inline)]
-        public static ReadOnlySpan128<T> Load(T[] src)
+        public static ConstBlock256<T> Load(T[] src)
         {
-            require(aligned(src.Length));
-            return new ReadOnlySpan128<T>(src);
+            require(Aligned(src.Length));
+            return new ConstBlock256<T>(src);
         }
 
         [MethodImpl(Inline)]
-        public static ReadOnlySpan128<T> Load(in Span128<T> src)
-            => new ReadOnlySpan128<T>(src);
+        public static ConstBlock256<T> Load(in Span256<T> src)
+            => new ConstBlock256<T>(src);
+
 
         [MethodImpl(Inline)]
-        public static ReadOnlySpan128<T> load(Span<T> src, int offset, int length)
+        public static ConstBlock256<T> Load(Span<T> src, int offset = 0)
         {
-            require(aligned(length));
-            return new ReadOnlySpan128<T>(src.Slice(offset, length));
+            require(Aligned(src.Length - offset));
+            return new ConstBlock256<T>(src.Slice(offset));
         }
 
         [MethodImpl(Inline)]
-        public static ReadOnlySpan128<T> load(ReadOnlySpan<T> src, int offset, int length)
+        public static ConstBlock256<T> Load(ReadOnlySpan<T> src, int offset = 0)
         {
-            require(aligned(length));
-            return new ReadOnlySpan128<T>(src.Slice(offset, length));
+            require(Aligned(src.Length - offset));
+            return new ConstBlock256<T>(src.Slice(offset));
         }
 
         [MethodImpl(Inline)]
-        public static unsafe ReadOnlySpan128<T> load(void* src, int length)
+        public static unsafe ConstBlock256<T> Load(void* src, int length)
         {
-            require(aligned(length));
-            return new ReadOnlySpan128<T>(src,length);
+            require(Aligned(length));
+            return new ConstBlock256<T>(src,length);
         }
 
+
         [MethodImpl(Inline)]
-        internal unsafe ReadOnlySpan128(void* src, int length)    
+        unsafe ConstBlock256(void* src, int length)    
         {
             data = new ReadOnlySpan<T>(src, length);  
         }
 
         [MethodImpl(Inline)]
-        internal ReadOnlySpan128(T[] src)
-        {
-            data = src;
-        }
+        ConstBlock256(T[] src)
+            => data = src;
         
         
         [MethodImpl(Inline)]
-        internal ReadOnlySpan128(ReadOnlySpan<T> src)
-        {
-            data = src;
-        }
+        ConstBlock256(ReadOnlySpan<T> src)
+            => data = src;
 
         [MethodImpl(Inline)]
-        internal ReadOnlySpan128(in Span128<T> src)
-        {
-            data = src.ReadOnly();
-        }
+        ConstBlock256(Span<T> src)        
+            => this.data = src;
 
-        [MethodImpl(Inline)]
-        internal ReadOnlySpan128(Span<T> src)
-        {
-            this.data = src;
-        }
-
-        public ReadOnlySpan<T> Data
+        /// <summary>
+        /// Provides access to the underlying storage
+        /// </summary>
+        public ReadOnlySpan<T> Unblocked
         {
             [MethodImpl(Inline)]
             get => data;
@@ -159,13 +153,13 @@ namespace Z0
             [MethodImpl(Inline)]
             get => ref MemoryMarshal.GetReference<T>(data);
         }            
-
+        
         public ref readonly T this[int ix] 
         {
             [MethodImpl(Inline)]
             get => ref Unsafe.Add(ref Head, ix);
         }
-
+ 
         [MethodImpl(Inline)]
         public ref readonly T Block(int blockIndex)
             => ref Unsafe.Add(ref Head, blockIndex*BlockLength);
@@ -179,20 +173,17 @@ namespace Z0
             => data.Slice(start,length);
 
         [MethodImpl(Inline)]
-        public ReadOnlySpan128<T> SliceBlock(int blockIndex)
-            => new ReadOnlySpan128<T>(data.Slice(blockIndex * BlockLength, BlockLength));
-
+        public ConstBlock256<T> SliceBlock(int blockIndex)
+            => new ConstBlock256<T>(data.Slice(blockIndex * BlockLength, BlockLength));
+        
         [MethodImpl(Inline)]
-        public ReadOnlySpan128<T> SliceBlocks(int blockIndex, int blockCount)
-            => (ReadOnlySpan128<T>)Slice(blockIndex * BlockLength, blockCount * BlockLength );
+        public ConstBlock256<T> SliceBlocks(int blockIndex, int blockCount)
+            => (ConstBlock256<T>)Slice(blockIndex * BlockLength, blockCount * BlockLength );
             
         [MethodImpl(Inline)]
-        public Span128<T> ToSpan128()
-            => Span128.load(data);
+        public Span256<T> ToBlockedSpan()
+            => Span256<T>.Load(data.ToArray());
 
-        [MethodImpl(Inline)]
-        public Span<T> ToSpan()
-            => new Span<T>(data.ToArray());
 
         [MethodImpl(Inline)]
         public T[] ToArray()
@@ -215,14 +206,14 @@ namespace Z0
             => data.TryCopyTo(dst);
                 
         [MethodImpl(Inline)]
-        public ReadOnlySpan128<S> As<S>()                
+        public ConstBlock256<S> As<S>()                
             where S : unmanaged
-                => (ReadOnlySpan128<S>)MemoryMarshal.Cast<T,S>(data);                    
- 
+                => (ConstBlock256<S>)MemoryMarshal.Cast<T,S>(data);                     
+             
         public override string ToString() 
             => data.ToString();
 
-       public override bool Equals(object rhs) 
+        public override bool Equals(object rhs) 
             => throw new NotSupportedException();
 
        public override int GetHashCode() 

@@ -21,60 +21,60 @@ namespace Z0
     partial class aux
     {
         [MethodImpl(Inline)]
-        public static void vcmove_i<T>(Vector128<T> src, Vector128<byte> mask, ref byte dst)
+        public static void vcstore_i<T>(Vector128<T> src, Vector128<byte> mask, ref byte dst)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                dinx.vcmove(int8(src), mask, ref dst);
+                dinx.vcstore(int8(src), mask, ref dst);
             else if(typeof(T) == typeof(short))
-                dinx.vcmove(int16(src), mask, ref dst);
+                dinx.vcstore(int16(src), mask, ref dst);
             else if(typeof(T) == typeof(int))
-                dinx.vcmove(int32(src), mask, ref dst);
+                dinx.vcstore(int32(src), mask, ref dst);
             else 
-                dinx.vcmove(int64(src), mask, ref dst);
+                dinx.vcstore(int64(src), mask, ref dst);
         }
 
         [MethodImpl(Inline)]
-        public static void vcmove_u<T>(Vector128<T> src, Vector128<byte> mask, ref byte dst)
+        public static void vcstore_u<T>(Vector128<T> src, Vector128<byte> mask, ref byte dst)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                dinx.vcmove(uint8(src), mask, ref dst);
+                dinx.vcstore(uint8(src), mask, ref dst);
             else if(typeof(T) == typeof(ushort))
-                dinx.vcmove(uint16(src), mask, ref dst);
+                dinx.vcstore(uint16(src), mask, ref dst);
             else if(typeof(T) == typeof(uint))
-                dinx.vcmove(uint32(src), mask, ref dst);
+                dinx.vcstore(uint32(src), mask, ref dst);
             else 
-                dinx.vcmove(uint64(src), mask, ref dst);
+                dinx.vcstore(uint64(src), mask, ref dst);
         }
 
 
         [MethodImpl(Inline)]
-        public static void vcmove_i<T>(Vector256<T> src, Vector256<byte> mask, ref byte dst)
+        public static void vcstore_i<T>(Vector256<T> src, Vector256<byte> mask, ref byte dst)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                dinx.vcmove(int8(src), mask, ref dst);
+                dinx.vcstore(int8(src), mask, ref dst);
             else if(typeof(T) == typeof(short))
-                dinx.vcmove(int16(src), mask, ref dst);
+                dinx.vcstore(int16(src), mask, ref dst);
             else if(typeof(T) == typeof(int))
-                dinx.vcmove(int32(src), mask, ref dst);
+                dinx.vcstore(int32(src), mask, ref dst);
             else 
-                dinx.vcmove(int64(src), mask, ref dst);
+                dinx.vcstore(int64(src), mask, ref dst);
         }
 
         [MethodImpl(Inline)]
-        public static void vcmove_u<T>(Vector256<T> src, Vector256<byte> mask, ref byte dst)
+        public static void vcstore_u<T>(Vector256<T> src, Vector256<byte> mask, ref byte dst)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                dinx.vcmove(uint8(src), mask, ref dst);
+                dinx.vcstore(uint8(src), mask, ref dst);
             else if(typeof(T) == typeof(ushort))
-                dinx.vcmove(uint16(src), mask, ref dst);
+                dinx.vcstore(uint16(src), mask, ref dst);
             else if(typeof(T) == typeof(uint))
-                dinx.vcmove(uint32(src), mask, ref dst);
+                dinx.vcstore(uint32(src), mask, ref dst);
             else 
-                dinx.vcmove(uint64(src), mask, ref dst);
+                dinx.vcstore(uint64(src), mask, ref dst);
         }
 
         [MethodImpl(Inline)]

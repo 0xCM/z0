@@ -46,7 +46,7 @@ namespace Z0
                 =>  new BitSpan<N, T>(MemoryMarshal.CreateSpan(ref src, cells<N,T>()));
 
         [MethodImpl(Inline)]
-        public static BitSpan<N,T> from<N,T>(in Span64<T> src, N n = default)
+        public static BitSpan<N,T> from<N,T>(in Block64<T> src, N n = default)
             where N : unmanaged, ITypeNat<N>
             where T : unmanaged
                 => new BitSpan<N, T>(src.Unblocked);

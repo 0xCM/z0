@@ -20,48 +20,63 @@ namespace Z0
     {
         /// <summary>
         /// __m128i _mm_maskload_epi32 (int const* mem_addr, __m128i mask) VPMASKMOVD xmm, xmm, m128
+        /// Vectorized Conditional Load
         /// </summary>
         /// <param name="src">The memory source</param>
         /// <param name="mask">Hi bit on selects the memory, otherwise set to zero</param>
         [MethodImpl(Inline)]
-        public static unsafe Vector128<int> vmaskload(ref int src, Vector128<int> mask)
-            => MaskLoad(refptr(ref src), mask);
+        public static unsafe Vector128<int> vcload(ref int src, Vector128<int> mask)
+            => MaskLoad(ptr(ref src), mask);
+
+        /// <summary>
+        /// __m128i _mm_maskload_epi32 (int const* mem_addr, __m128i mask) VPMASKMOVD xmm, xmm, m128
+        /// Vectorized Conditional Load
+        /// </summary>
+        /// <param name="src">The memory source</param>
+        /// <param name="mask">Hi bit on selects the memory, otherwise set to zero</param>
+        [MethodImpl(Inline)]
+        public static unsafe Vector128<uint> vcload(ref uint src, Vector128<uint> mask)
+            => MaskLoad(ptr(ref src), mask);
 
         /// <summary>
         /// __m256i _mm256_maskload_epi32 (int const* mem_addr, __m256i mask) VPMASKMOVD ymm, ymm, m256
+        /// Vectorized Conditional Load
         /// </summary>
         /// <param name="src">The memory source</param>
         /// <param name="mask">Hi bit on selects the memory, otherwise set to zero</param>
         [MethodImpl(Inline)]
-        public static unsafe Vector256<int> vmaskload(ref int src, Vector256<int> mask)
-            => MaskLoad(refptr(ref src), mask);
+        public static unsafe Vector256<int> vcload(ref int src, Vector256<int> mask)
+            => MaskLoad(ptr(ref src), mask);
 
         /// <summary>
         /// __m256i _mm256_maskload_epi32 (int const* mem_addr, __m256i mask) VPMASKMOVD ymm, ymm, m256
+        /// Vectorized Conditional Load
         /// </summary>
         /// <param name="src">The memory source</param>
         /// <param name="mask">Hi bit on selects the memory, otherwise set to zero</param>
         [MethodImpl(Inline)]
-        public static unsafe Vector256<uint> vmaskload(ref uint src, Vector256<uint> mask)
-            => MaskLoad(refptr(ref src), mask);
+        public static unsafe Vector256<uint> vcload(ref uint src, Vector256<uint> mask)
+            => MaskLoad(ptr(ref src), mask);
 
         /// <summary>
         /// __m256i _mm256_maskload_epi64 (__int64 const* mem_addr, __m256i mask) VPMASKMOVQ ymm, ymm, m256
+        /// Vectorized Conditional Load
         /// </summary>
         /// <param name="src">The memory source</param>
         /// <param name="mask">Hi bit on selects the memory, otherwise set to zero</param>
         [MethodImpl(Inline)]
-        public static unsafe Vector256<long> vmaskload(ref long src, Vector256<long> mask)
-            => MaskLoad(refptr(ref src), mask);
+        public static unsafe Vector256<long> vcload(ref long src, Vector256<long> mask)
+            => MaskLoad(ptr(ref src), mask);
 
         /// <summary>
         /// __m256i _mm256_maskload_epi64 (__int64 const* mem_addr, __m256i mask) VPMASKMOVQ ymm, ymm, m256
+        /// Vectorized Conditional Load
         /// </summary>
         /// <param name="src">The memory source</param>
         /// <param name="mask">Hi bit on selects the memory, otherwise set to zero</param>
         [MethodImpl(Inline)]
-        public static unsafe Vector256<ulong> vmaskload(ref ulong src, Vector256<ulong> mask)
-            => MaskLoad(refptr(ref src), mask); 
+        public static unsafe Vector256<ulong> vcload(ref ulong src, Vector256<ulong> mask)
+            => MaskLoad(ptr(ref src), mask); 
     }
 
 }

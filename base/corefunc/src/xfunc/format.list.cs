@@ -108,7 +108,7 @@ namespace Z0
         /// <param name="offset">The position at which formatting should begin</param>
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]        
-        public static string FormatList<T>(this ReadOnlySpan128<T> src, char delimiter = ',', int offset = 0, int pad = 0)
+        public static string FormatList<T>(this ConstBlock128<T> src, char delimiter = ',', int offset = 0, int pad = 0)
             where T : unmanaged
                 => src.Data.FormatList(delimiter, offset, pad);
 
@@ -120,7 +120,7 @@ namespace Z0
         /// <param name="offset">The position at which formatting should begin</param>
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]        
-        public static string FormatList<T>(this ReadOnlySpan256<T> src, char delimiter = ',', int offset = 0, int pad = 0)
+        public static string FormatList<T>(this ConstBlock256<T> src, char delimiter = ',', int offset = 0, int pad = 0)
             where T : unmanaged
             => src.Unblocked.FormatList(delimiter, offset, pad);
 

@@ -48,9 +48,9 @@ partial class zfunc
     /// <param name="blocks">The number of blocks to allocate</param>
     /// <typeparam name="T">The cell data type</typeparam>
     [MethodImpl(Inline)]
-    public static Span64<T> blocks<T>(N64 n, int blocks)
+    public static Block64<T> blocks<T>(N64 n, int blocks)
         where T : unmanaged
-            => BlockedSpan.alloc<T>(n, blocks);
+            => MemBlocks.alloc<T>(n, blocks);
 
     /// <summary>
     /// Allocates a specified number of 128-bit blocks
@@ -61,7 +61,7 @@ partial class zfunc
     [MethodImpl(Inline)]
     public static Span128<T> blocks<T>(N128 n, int blocks)
         where T : unmanaged
-            => BlockedSpan.alloc<T>(n, blocks);
+            => MemBlocks.alloc<T>(n, blocks);
 
     /// <summary>
     /// Allocates a specified number of 256-bit blocks
@@ -72,7 +72,7 @@ partial class zfunc
     [MethodImpl(Inline)]
     public static Span256<T> blocks<T>(N256 n, int blocks)
         where T : unmanaged
-            => BlockedSpan.alloc<T>(n, blocks);
+            => MemBlocks.alloc<T>(n, blocks);
 
     /// <summary>
     /// Returns the common number of blocks in the operands if they are the same; otherwise, raises an error
@@ -95,7 +95,7 @@ partial class zfunc
     /// <param name="rhs">The right source</param>
     /// <typeparam name="T">The span element type</typeparam>
     [MethodImpl(Inline)]   
-    public static int blocks<S,T>(ReadOnlySpan128<S> lhs, ReadOnlySpan128<T> rhs, [CallerMemberName] string caller = null, 
+    public static int blocks<S,T>(ConstBlock128<S> lhs, ConstBlock128<T> rhs, [CallerMemberName] string caller = null, 
         [CallerFilePath] string file = null, [CallerLineNumber] int? line = null)
             where S : unmanaged
             where T : unmanaged
@@ -123,7 +123,7 @@ partial class zfunc
     /// <param name="rhs">The right source</param>
     /// <typeparam name="T">The span element type</typeparam>
     [MethodImpl(Inline)]   
-    public static int blocks<S,T>(ReadOnlySpan256<S> lhs, ReadOnlySpan256<T> rhs, [CallerMemberName] string caller = null, 
+    public static int blocks<S,T>(ConstBlock256<S> lhs, ConstBlock256<T> rhs, [CallerMemberName] string caller = null, 
         [CallerFilePath] string file = null, [CallerLineNumber] int? line = null)
             where S : unmanaged
             where T : unmanaged

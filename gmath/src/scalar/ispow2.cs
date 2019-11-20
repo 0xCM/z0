@@ -5,47 +5,75 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Reflection;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
-    using System.Diagnostics;
     
     using static zfunc;    
     
 
     partial class math
     {
+        /// <summary>
+        /// Returns 1 if the source value is a power of 2 and 0 otherwise
+        /// </summary>
+        /// <param name="x">The value to test</param>
         [MethodImpl(Inline)]
-        public static bit isPow2(sbyte src)
-            => (src & (src - 1)) == 0;
+        public static bit ispow2(sbyte x)
+            => (x & (x - 1)) == 0;
 
+        /// <summary>
+        /// Returns 1 if the source value is a power of 2 and 0 otherwise
+        /// </summary>
+        /// <param name="x">The value to test</param>
         [MethodImpl(Inline)]
-        public static bit isPow2(byte src)
-            => (src & (src - 1)) == 0;
+        public static bit ispow2(byte x)
+            => (x & (x - 1)) == 0;
 
+        /// <summary>
+        /// Returns 1 if the source value is a power of 2 and 0 otherwise
+        /// </summary>
+        /// <param name="x">The value to test</param>
         [MethodImpl(Inline)]
-        public static bit isPow2(short src)
-            => (src & (src - 1)) == 0;
+        public static bit ispow2(short x)
+            => (x & (x - 1)) == 0;
 
+        /// <summary>
+        /// Returns 1 if the source value is a power of 2 and 0 otherwise
+        /// </summary>
+        /// <param name="x">The value to test</param>
         [MethodImpl(Inline)]
-        public static bit isPow2(ushort src)
-            => (src & (src - 1)) == 0;
+        public static bit ispow2(ushort x)
+            => (x & (x - 1)) == 0;
 
+        /// <summary>
+        /// Returns 1 if the source value is a power of 2 and 0 otherwise
+        /// </summary>
+        /// <param name="x">The value to test</param>
         [MethodImpl(Inline)]
-        public static bit isPow2(int src)
-            => (src & (src - 1)) == 0;
+        public static bit ispow2(int x)
+            => (x & (x - 1)) == 0;
 
+        /// <summary>
+        /// Returns 1 if the source value is a power of 2 and 0 otherwise
+        /// </summary>
+        /// <param name="x">The value to test</param>
         [MethodImpl(Inline)]
-        public static bit isPow2(uint src)
-            => (src & (src - 1)) == 0;
+        public static bit ispow2(uint x)
+            => (x & (x - 1)) == 0;
 
+        /// <summary>
+        /// Returns 1 if the source value is a power of 2 and 0 otherwise
+        /// </summary>
+        /// <param name="x">The value to test</param>
         [MethodImpl(Inline)]
-        public static bit isPow2(long src)
-            => (src & (src - 1)) == 0;
+        public static bit ispow2(long x)
+            => (x & (x - 1)) == 0;
 
+        /// <summary>
+        /// Returns 1 if the source value is a power of 2 and 0 otherwise
+        /// </summary>
+        /// <param name="x">The value to test</param>
         [MethodImpl(Inline)]
-        public static bit isPow2(ulong src)
-            => (src & (src - 1)) == 0;
+        public static bit ispow2(ulong x)
+            => (x & (x - 1)) == 0;
     }
 }

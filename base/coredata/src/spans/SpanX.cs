@@ -13,7 +13,7 @@ namespace Z0
     using static zfunc;
     using static nfunc;
 
-    public static partial class SpanExtensions
+    public static partial class MemBlockExtend
     {
         [MethodImpl(Inline)]
         public static void CopyTo<T>(this Span<T> src, Span<T> dst, int offset)
@@ -63,7 +63,7 @@ namespace Z0
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
-        public static ReadOnlySpan<N,T> ReadOnly<N,T>(this Span<N,T> src)
+        public static ConstBlock<N,T> ReadOnly<N,T>(this Span<N,T> src)
             where N : unmanaged, ITypeNat
             where T : unmanaged
                 => src;

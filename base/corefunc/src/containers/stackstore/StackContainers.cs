@@ -10,17 +10,16 @@ namespace Z0
 
     using static zfunc;
 
-    public static class BlockStorage
+    public static class StackContainers
     {
-
-        public ref struct Block128
+        public ref struct Stack128
         {
             public ulong X0;
 
             public ulong X1;        
         }
 
-        public ref struct Block256
+        public ref struct Stack256
         {
             public ulong X0;
 
@@ -31,7 +30,7 @@ namespace Z0
             public ulong X3;
         }
 
-        public ref struct Block512
+        public ref struct Stack512
         {
             public ulong X0;
 
@@ -50,7 +49,7 @@ namespace Z0
             public ulong X7;
         }
 
-        public ref struct Block1024
+        public ref struct Stack1024
         {
             public ulong X0;
 
@@ -86,7 +85,7 @@ namespace Z0
         }
 
 
-        public ref struct CharBlock2
+        public ref struct CharStack2
         {
             public char C0;
 
@@ -94,7 +93,7 @@ namespace Z0
 
         }
 
-        public ref struct CharBlock4
+        public ref struct CharStack4
         {
             public char C0;
 
@@ -105,7 +104,7 @@ namespace Z0
             public char C3;
         }
 
-        public ref struct CharBlock8
+        public ref struct CharStack8
         {
             public char C0;
 
@@ -125,7 +124,7 @@ namespace Z0
 
         }
 
-        public ref struct CharBlock16
+        public ref struct CharStack16
         {
             public char C0;
 
