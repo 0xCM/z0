@@ -7,18 +7,77 @@ using System.Runtime.CompilerServices;
 using System.Runtime.Intrinsics;
 using System.Runtime.Intrinsics.X86;
 
-using static zfunc;
-using static Z0.As;
-using static Z0.AsIn;
 using Z0;
 
 partial class zfunc
 {
     /// <summary>
+    /// Extracts an index-identified component from the source vector
+    /// </summary>
+    /// <param name="src">The source vector</param>
+    /// <param name="index">The index of the component to extract</param>
+    /// <typeparam name="T">The primal component type</typeparam>
+    [MethodImpl(Inline)]
+    public static T vcell<T>(Vector128<T> src, int index)
+        where T : unmanaged
+            => src.GetElement(index);
+
+    /// <summary>
+    /// Extracts an index-identified component from the source vector
+    /// </summary>
+    /// <param name="src">The source vector</param>
+    /// <param name="index">The index of the component to extract</param>
+    /// <typeparam name="T">The primal component type</typeparam>
+    [MethodImpl(Inline)]
+    public static T vcell<T>(Vector256<T> src, int index)
+        where T : unmanaged
+            => src.GetElement(index);
+
+    /// <summary>
+    /// Returns a 128-bit vector with all bits disabled
+    /// </summary>
+    /// <param name="n">The bitness selector</param>
+    /// <typeparam name="T">The primal component type</typeparam>
+    [MethodImpl(Inline)]
+    public static Vector128<T> vzero<T>(N128 n)
+        where T : unmanaged
+            => default;
+
+    /// <summary>
+    /// Returns a 256-bit vector with all bits disabled
+    /// </summary>
+    /// <param name="n">The bitness selector</param>
+    /// <typeparam name="T">The primal component type</typeparam>
+    [MethodImpl(Inline)]
+    public static Vector256<T> vzero<T>(N256 n)
+        where T : unmanaged
+            => default;
+
+    /// <summary>
+    /// Returns the number of components that comprise a 128-bit vector
+    /// </summary>
+    /// <param name="n">The bitness selector</param>
+    /// <typeparam name="T">The primal component type</typeparam>
+    [MethodImpl(Inline)]
+    public static int vcount<T>(N128 n)
+        where T : unmanaged
+            => Vector128<T>.Count;
+
+    /// <summary>
+    /// Returns the number of components that comprise a 256-bit vector
+    /// </summary>
+    /// <param name="n">The bitness selector</param>
+    /// <typeparam name="T">The primal component type</typeparam>
+    [MethodImpl(Inline)]
+    public static int vcount<T>(N256 n)
+        where T : unmanaged
+            => Vector256<T>.Count;
+
+    /// <summary>
     /// Presents a generic cpu vector as a cpu vector with components of type int8
     /// </summary>
     /// <param name="x">The source vector</param>
-    /// <typeparam name="T">The source vector primal component type</typeparam>
+    /// <typeparam name="T">The primal component type</typeparam>
     [MethodImpl(Inline)]
     public static Vector128<sbyte> v8i<T>(Vector128<T> x)
         where T : unmanaged

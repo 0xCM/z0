@@ -95,11 +95,11 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public ref T Row(int row)
-            => ref tail(data, row);
+            => ref head(data, row);
 
         [MethodImpl(Inline)]
         ref BitVector<T> RowVector(int row)
-            => ref AsBitVector(ref tail(data, row));
+            => ref AsBitVector(ref head(data, row));
 
         [MethodImpl(Inline)]
         static ref BitVector<T> AsBitVector(ref T src)

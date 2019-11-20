@@ -23,6 +23,8 @@ namespace Z0
     {
         readonly Span<T> data;
 
+        public static N256 N => default;
+
         /// <summary>
         /// The number of cells in the block
         /// </summary>
@@ -85,7 +87,7 @@ namespace Z0
             return dst;
         }
     
-        [MethodImpl(Inline)]
+        [MethodImpl(NotInline)]
         public static Span256<T> Load(T[] src)
         {
             require(Aligned(src.Length));
@@ -117,7 +119,14 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        Span256(ref T src, int length)
+        internal unsafe Span256(void* src, int length)    
+        {
+            data = new Span<T>(src, length);  
+        }
+
+
+        [MethodImpl(Inline)]
+        internal Span256(ref T src, int length)
         {
             data = MemoryMarshal.CreateSpan(ref src, length);
         }
@@ -151,7 +160,7 @@ namespace Z0
         /// </summary>
         /// <param name="blockIndex">The index of the desired block</param>
         [MethodImpl(Inline)]
-        public ref T Block(int blockIndex)
+        public ref T BlockHead(int blockIndex)
             => ref this[blockIndex*BlockLength];
 
         /// <summary>
@@ -172,7 +181,7 @@ namespace Z0
             => data.Slice(start,length);
 
         [MethodImpl(Inline)]
-        public Span256<T> Blocked(int blockIndex)
+        public Span256<T> Block(int blockIndex)
         {
             var slice = data.Slice(blockIndex * BlockLength, BlockLength); 
             return new Span256<T>(slice);

@@ -33,8 +33,8 @@ namespace Z0
         /// <param name="y">The right vector</param>
         /// <param name="spec">The blend specification</param>
         [MethodImpl(Inline)]
-        public static Vector128<sbyte> vblend16x8(Vector128<sbyte> x, Vector128<sbyte> y, Vector128<sbyte> spec)        
-            =>  BlendVariable(x, y, spec);
+        public static Vector128<sbyte> vblend16x8(Vector128<sbyte> x, Vector128<sbyte> y, Vector128<byte> spec)        
+            => BlendVariable(x, y, v8i(spec));
 
         /// <summary>
         /// __m128i _mm_blendv_epi8 (__m128i a, __m128i b, __m128i mask) PBLENDVB xmm, xmm/m128, xmm
@@ -43,8 +43,8 @@ namespace Z0
         /// <param name="y">The right vector</param>
         /// <param name="spec">The blend specification</param>
         [MethodImpl(Inline)]
-        public static Vector128<short> vblend16x8(Vector128<short> x, Vector128<short> y, Vector128<short> spec)        
-            =>  BlendVariable(x, y, spec);
+        public static Vector128<short> vblend16x8(Vector128<short> x, Vector128<short> y, Vector128<byte> spec)        
+            => BlendVariable(x, y, v16i(spec));
 
         /// <summary>
         /// __m128i _mm_blendv_epi8 (__m128i a, __m128i b, __m128i mask) PBLENDVB xmm, xmm/m128, xmm
@@ -53,8 +53,8 @@ namespace Z0
         /// <param name="y">The right vector</param>
         /// <param name="spec">The blend specification</param>
         [MethodImpl(Inline)]
-        public static Vector128<ushort> vblend16x8(Vector128<ushort> x, Vector128<ushort> y, Vector128<ushort> spec)        
-            =>  BlendVariable(x, y, spec);
+        public static Vector128<ushort> vblend16x8(Vector128<ushort> x, Vector128<ushort> y, Vector128<byte> spec)        
+            => BlendVariable(x, y, v16u(spec));
 
         /// <summary>
         /// __m128i _mm_blendv_epi8 (__m128i a, __m128i b, __m128i mask) PBLENDVB xmm, xmm/m128, xmm
@@ -63,8 +63,8 @@ namespace Z0
         /// <param name="y">The right vector</param>
         /// <param name="spec">The blend specification</param>
         [MethodImpl(Inline)]
-        public static Vector128<int> vblend16x8(Vector128<int> x, Vector128<int> y, Vector128<int> spec)        
-            =>  BlendVariable(x, y, spec);
+        public static Vector128<int> vblend16x8(Vector128<int> x, Vector128<int> y, Vector128<byte> spec)        
+            => BlendVariable(x, y, v32i(spec));
 
         /// <summary>
         /// __m128i _mm_blendv_epi8 (__m128i a, __m128i b, __m128i mask) PBLENDVB xmm, xmm/m128, xmm
@@ -73,8 +73,8 @@ namespace Z0
         /// <param name="y">The right vector</param>
         /// <param name="spec">The blend specification</param>
         [MethodImpl(Inline)]
-        public static Vector128<uint> vblend16x8(Vector128<uint> x, Vector128<uint> y, Vector128<uint> spec)        
-            =>  BlendVariable(x, y, spec);
+        public static Vector128<uint> vblend16x8(Vector128<uint> x, Vector128<uint> y, Vector128<byte> spec)        
+            => BlendVariable(x, y, v32u(spec));
 
         /// <summary>
         /// __m128i _mm_blendv_epi8 (__m128i a, __m128i b, __m128i mask) PBLENDVB xmm, xmm/m128, xmm
@@ -83,8 +83,8 @@ namespace Z0
         /// <param name="y">The right vector</param>
         /// <param name="spec">The blend specification</param>
         [MethodImpl(Inline)]
-        public static Vector128<long> vblend16x8(Vector128<long> x, Vector128<long> y, Vector128<long> spec)        
-            =>  BlendVariable(x, y, spec);
+        public static Vector128<long> vblend16x8(Vector128<long> x, Vector128<long> y, Vector128<byte> spec)        
+            => BlendVariable(x, y, v64i(spec));
 
         /// <summary>
         /// __m128i _mm_blendv_epi8 (__m128i a, __m128i b, __m128i mask) PBLENDVB xmm, xmm/m128, xmm
@@ -93,9 +93,7 @@ namespace Z0
         /// <param name="y">The right vector</param>
         /// <param name="spec">The blend specification</param>
         [MethodImpl(Inline)]
-        public static Vector128<ulong> vblend16x8(Vector128<ulong> x, Vector128<ulong> y, Vector128<ulong> spec)        
-            =>  BlendVariable(x, y, spec);
-
+        public static Vector128<ulong> vblend16x8(Vector128<ulong> x, Vector128<ulong> y, Vector128<byte> spec)        
+            => BlendVariable(x, y, v64u(spec));
     }
-
 }

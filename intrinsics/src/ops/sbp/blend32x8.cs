@@ -18,8 +18,7 @@ namespace Z0
     {
         /// <summary>
         /// __m256i _mm256_blendv_epi8 (__m256i a, __m256i b, __m256i mask) VPBLENDVB ymm,ymm, ymm/m256, ymm
-        /// Forms a vector z from components chosen from two source vectors x and y as determined by the hi bit of each 
-        /// corresponding specifier component, z[i] = testbit(spec[i],7) ? x[i] : y[i]
+        /// Forms a vector z[i] = testbit(spec[i],7) ? x[i] : y[i] where i = 0,...31
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
@@ -31,8 +30,7 @@ namespace Z0
 
         /// <summary>
         /// __m256i _mm256_blendv_epi8 (__m256i a, __m256i b, __m256i mask) VPBLENDVB ymm,ymm, ymm/m256, ymm
-        /// Forms a vector z from components chosen from two source vectors x and y as determined by the hi bit of each 
-        /// corresponding specifier component, z[i] = testbit(spec[i],7) ? x[i] : y[i]
+        /// Forms a vector z[i] = testbit(spec[i],7) ? x[i] : y[i] where i = 0,...31
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
@@ -44,8 +42,7 @@ namespace Z0
 
         /// <summary>
         /// __m256i _mm256_blendv_epi8 (__m256i a, __m256i b, __m256i mask) VPBLENDVB ymm,ymm, ymm/m256, ymm
-        /// Forms a vector z from components chosen from two source vectors x and y as determined by the hi bit of each 
-        /// corresponding specifier component, z[i] = testbit(spec[i],7) ? x[i] : y[i]
+        /// Forms a vector z[i] = testbit(spec[i],7) ? x[i] : y[i] where i = 0,...31
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
@@ -57,8 +54,7 @@ namespace Z0
 
         /// <summary>
         /// __m256i _mm256_blendv_epi8 (__m256i a, __m256i b, __m256i mask) VPBLENDVB ymm,ymm, ymm/m256, ymm
-        /// Forms a vector z from components chosen from two source vectors x and y as determined by the hi bit of each 
-        /// corresponding specifier component, z[i] = testbit(spec[i],7) ? x[i] : y[i]
+        /// Forms a vector z[i] = testbit(spec[i],7) ? x[i] : y[i] where i = 0,...31
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
@@ -70,8 +66,7 @@ namespace Z0
 
         /// <summary>
         /// __m256i _mm256_blendv_epi8 (__m256i a, __m256i b, __m256i mask) VPBLENDVB ymm,ymm, ymm/m256, ymm
-        /// Forms a vector z from components chosen from two source vectors x and y as determined by the hi bit of each 
-        /// corresponding specifier component, z[i] = testbit(spec[i],7) ? x[i] : y[i]
+        /// Forms a vector z[i] = testbit(spec[i],7) ? x[i] : y[i] where i = 0,...31
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
@@ -83,8 +78,7 @@ namespace Z0
 
         /// <summary>
         /// __m256i _mm256_blendv_epi8 (__m256i a, __m256i b, __m256i mask) VPBLENDVB ymm,ymm, ymm/m256, ymm
-        /// Forms a vector z from components chosen from two source vectors x and y as determined by the hi bit of each 
-        /// corresponding specifier component, z[i] = testbit(spec[i],7) ? x[i] : y[i]
+        /// Forms a vector z[i] = testbit(spec[i],7) ? x[i] : y[i] where i = 0,...31
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
@@ -96,8 +90,7 @@ namespace Z0
 
         /// <summary>
         /// __m256i _mm256_blendv_epi8 (__m256i a, __m256i b, __m256i mask) VPBLENDVB ymm,ymm, ymm/m256, ymm
-        /// Forms a vector z from components chosen from two source vectors x and y as determined by the hi bit of each 
-        /// corresponding specifier component, z[i] = testbit(spec[i],7) ? x[i] : y[i]
+        /// Forms a vector z[i] = testbit(spec[i],7) ? x[i] : y[i] where i = 0,...31
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
@@ -109,8 +102,7 @@ namespace Z0
 
         /// <summary>
         /// __m256i _mm256_blendv_epi8 (__m256i a, __m256i b, __m256i mask) VPBLENDVB ymm,ymm, ymm/m256, ymm
-        /// Forms a vector z from components chosen from two source vectors x and y as determined by the hi bit of each 
-        /// corresponding specifier component, z[i] = testbit(spec[i],7) ? x[i] : y[i]
+        /// Forms a vector z[i] = testbit(spec[i],7) ? x[i] : y[i] where i = 0,...31
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>

@@ -22,16 +22,16 @@ namespace Z0
         /// </summary>
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
-        public static Vector128<long> vmovelo(Vector128<long> xmm)
-            => MoveScalar(xmm);
+        public static Vector128<long> vmovelo(Vector128<long> x)
+            => MoveScalar(x);
 
         /// <summary>
         /// __m128i _mm_move_epi64 (__m128i a) MOVQ xmm, xmm
         /// Extracts the lower 64 bits from the source vector to create a scalar vector
         /// </summary>
-        /// <param name="xmm">The source vector</param>
+        /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
-        public static Vector128<ulong> vmovelo(Vector128<ulong> xmm)
-            => MoveScalar(xmm);
+        public static Vector128<ulong> vmovelo(Vector128<ulong> x)
+            => MoveScalar(x);
     }
 }

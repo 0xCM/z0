@@ -138,8 +138,8 @@ namespace Z0.Logix
         {
             var x = Random.CpuVector<T>(n);
             var y = Random.CpuVector<T>(n);
-            var expect = ginx.vzero<T>(n);
-            var actual = ginx.vzero<T>(n);
+            var expect = vzero<T>(n);
+            var actual = vzero<T>(n);
             for(var i=0; i< SampleSize; i++)
             {                
                 expect = ginx.vlt(x,y);
@@ -157,8 +157,8 @@ namespace Z0.Logix
         {
             var x = Random.CpuVector<T>(n);
             var y = Random.CpuVector<T>(n);
-            var expect = ginx.vzero<T>(n);
-            var actual = ginx.vzero<T>(n);
+            var expect = vzero<T>(n);
+            var actual = vzero<T>(n);
             for(var i=0; i< SampleSize; i++)
             {                
                 expect = ginx.vlt(x,y);
@@ -177,8 +177,8 @@ namespace Z0.Logix
         {
             var x = Random.CpuVector<T>(n);
             var y = Random.CpuVector<T>(n);
-            var expect = ginx.vzero<T>(n);
-            var actual = ginx.vzero<T>(n);
+            var expect = vzero<T>(n);
+            var actual = vzero<T>(n);
             for(var i=0; i< SampleSize; i++)
             {                
                 expect = ginx.vgt(x,y);
@@ -197,8 +197,8 @@ namespace Z0.Logix
         {
             var x = Random.CpuVector<T>(n);
             var y = Random.CpuVector<T>(n);
-            var expect = ginx.vzero<T>(n);
-            var actual = ginx.vzero<T>(n);
+            var expect = vzero<T>(n);
+            var actual = vzero<T>(n);
             for(var i=0; i< SampleSize; i++)
             {                
                 expect = ginx.vgt(x,y);

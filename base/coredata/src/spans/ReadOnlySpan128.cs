@@ -100,45 +100,75 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        unsafe ReadOnlySpan128(void* src, int length)    
+        internal unsafe ReadOnlySpan128(void* src, int length)    
         {
             data = new ReadOnlySpan<T>(src, length);  
         }
 
         [MethodImpl(Inline)]
-        ReadOnlySpan128(T[] src)
+        internal ReadOnlySpan128(T[] src)
         {
             data = src;
         }
         
         
         [MethodImpl(Inline)]
-        ReadOnlySpan128(ReadOnlySpan<T> src)
+        internal ReadOnlySpan128(ReadOnlySpan<T> src)
         {
             data = src;
         }
 
         [MethodImpl(Inline)]
-        ReadOnlySpan128(in Span128<T> src)
+        internal ReadOnlySpan128(in Span128<T> src)
         {
             data = src.ReadOnly();
         }
 
         [MethodImpl(Inline)]
-        ReadOnlySpan128(Span<T> src)
+        internal ReadOnlySpan128(Span<T> src)
         {
             this.data = src;
         }
 
+        public ReadOnlySpan<T> Data
+        {
+            [MethodImpl(Inline)]
+            get => data;
+        }
+
+        public int Length 
+        {
+            [MethodImpl(Inline)]
+            get => data.Length;
+        }
+
+        public int BlockCount 
+        {
+            [MethodImpl(Inline)]
+            get => data.Length / BlockLength; 
+        }
+
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => data.IsEmpty;
+        }
+            
+        public ref T Head
+        {
+            [MethodImpl(Inline)]
+            get => ref MemoryMarshal.GetReference<T>(data);
+        }            
+
         public ref readonly T this[int ix] 
         {
             [MethodImpl(Inline)]
-            get => ref data[ix];
+            get => ref Unsafe.Add(ref Head, ix);
         }
 
         [MethodImpl(Inline)]
         public ref readonly T Block(int blockIndex)
-            => ref this[blockIndex*BlockLength];
+            => ref Unsafe.Add(ref Head, blockIndex*BlockLength);
 
         [MethodImpl(Inline)]
         public ReadOnlySpan<T> Slice(int start)
@@ -188,34 +218,7 @@ namespace Z0
         public ReadOnlySpan128<S> As<S>()                
             where S : unmanaged
                 => (ReadOnlySpan128<S>)MemoryMarshal.Cast<T,S>(data);                    
-
-        /// <summary>
-        /// Provides access to the underlying storage
-        /// </summary>
-        public ReadOnlySpan<T> Unblocked
-        {
-            [MethodImpl(Inline)]
-            get => data;
-        }
-
-        public int Length 
-        {
-            [MethodImpl(Inline)]
-            get => data.Length;
-        }
-
-        public int BlockCount 
-        {
-            [MethodImpl(Inline)]
-            get => data.Length / BlockLength; 
-        }
-
-        public bool IsEmpty
-        {
-            [MethodImpl(Inline)]
-            get => data.IsEmpty;
-        }
-            
+ 
         public override string ToString() 
             => data.ToString();
 

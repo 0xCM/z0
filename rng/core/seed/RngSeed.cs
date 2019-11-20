@@ -37,7 +37,7 @@ namespace Z0
         /// <typeparam name="T">The data type</typeparam>
         public static T TakeSingle<T>(int offset)
             where T : unmanaged
-            => ByteSpan.ReadValue<T>(Bytes, VerifyIndex<T>(offset));
+                => read<T>(Bytes, VerifyIndex<T>(offset));
 
         /// <summary>
         /// Acauires a readonly span of values from the embedded source
@@ -49,7 +49,7 @@ namespace Z0
             where T : unmanaged
         {
             VerifyIndex<T>(offset* Unsafe.SizeOf<T>() + length* Unsafe.SizeOf<T>());
-            return ByteSpan.Cast<T>(Bytes, offset,length);            
+            return cast<T>(Bytes, offset,length);            
         }
                      
         /// <summary>

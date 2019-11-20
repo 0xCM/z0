@@ -78,7 +78,7 @@ namespace Z0
         void vhi_check<T>(N128 n)
             where T : unmanaged
         {
-            var count = ginx.vcount<T>(n);
+            var count = vcount<T>(n);
             for(var sample=0; sample< SampleSize; sample++)
             {                
                 var x = Random.CpuVector<T>(n);
@@ -92,7 +92,7 @@ namespace Z0
         void vhi_check<T>(N256 n)
             where T : unmanaged
         {
-            var count = ginx.vcount<T>(n);
+            var count = vcount<T>(n);
             for(var sample=0; sample< SampleSize; sample++)
             {                
                 var x = Random.CpuVector<T>(n);

@@ -19,8 +19,8 @@ namespace Z0
         static Vector128<T> swapspec<T>(N128 n, params Swap[] swaps)
             where T : unmanaged  
         {
-            var len = Vector128<T>.Count;
-            var src = BlockedSpan.load(n, range(default, gmath.add(default, convert<T>(len - 1))).ToArray().AsSpan());
+            var len = vcount<T>(n);
+            var src = BlockedSpan.loadu(n, range(default, gmath.add(default, convert<T>(len - 1))).ToArray().AsSpan());
             var dst = src.Swap(swaps);
             return ginx.vload(n, in dst.Head);
         }
@@ -83,7 +83,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
         public static Vector128<ulong> vswaphl(Vector128<ulong> x)
-            => vinsert(vxscalar(x,0), vloadlo(vxscalar(x,1)), 1);
+            => vinsert(vcell(x,0), vmov(n128,vcell(x,1)), 1);
 
         /// <summary>
         /// Swaps 64-bit hi/lo segments of the source vector
@@ -91,7 +91,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
         public static Vector128<long> vswaphl(Vector128<long> x)
-            => vinsert(vsxcalar(x,0), vloadlo(vsxcalar(x,1)), 1);
+            => vinsert(vcell(x,0), vmov(n128,vcell(x,1)), 1);
 
         /// <summary>
         /// Swaps the source vectors' hi/lo 128-bit lanes

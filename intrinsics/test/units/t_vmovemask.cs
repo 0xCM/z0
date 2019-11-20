@@ -47,7 +47,7 @@ namespace Z0
 
             for(var i=0; i<SampleSize; i++)
             {                
-                var srcBlock = src.Blocked(i);
+                var srcBlock = src.Block(i);
                 var srcCpuVec = src.LoadVector(i);
                 var srcBitVec = srcCpuVec.ToSpan().ToBitCells(bits);
                 
@@ -75,7 +75,7 @@ namespace Z0
             for(var i=0; i<SampleSize; i++)
             {
                 
-                var srcBlock = src.Blocked(i);
+                var srcBlock = src.Block(i);
                 var srcCpuVec = src.LoadVector(i);
                 var srcBitVec = srcCpuVec.ToSpan().ToBitCells(bits);
                 

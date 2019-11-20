@@ -120,16 +120,49 @@ namespace Z0
         [MethodImpl(Inline)]
         ReadOnlySpan256(Span<T> src)        
             => this.data = src;
+
+        /// <summary>
+        /// Provides access to the underlying storage
+        /// </summary>
+        public ReadOnlySpan<T> Unblocked
+        {
+            [MethodImpl(Inline)]
+            get => data;
+        }
+
+        public int Length 
+        {
+            [MethodImpl(Inline)]
+            get => data.Length;
+        }
+
+        public int BlockCount 
+        {
+            [MethodImpl(Inline)]
+            get => data.Length / BlockLength; 
+        }
+
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => data.IsEmpty;
+        }
+            
+        public ref T Head
+        {
+            [MethodImpl(Inline)]
+            get => ref MemoryMarshal.GetReference<T>(data);
+        }            
         
         public ref readonly T this[int ix] 
         {
             [MethodImpl(Inline)]
-            get => ref data[ix];
+            get => ref Unsafe.Add(ref Head, ix);
         }
-
+ 
         [MethodImpl(Inline)]
         public ref readonly T Block(int blockIndex)
-            => ref this[blockIndex*BlockLength];
+            => ref Unsafe.Add(ref Head, blockIndex*BlockLength);
 
         [MethodImpl(Inline)]
         public ReadOnlySpan<T> Slice(int start)
@@ -175,39 +208,12 @@ namespace Z0
         [MethodImpl(Inline)]
         public ReadOnlySpan256<S> As<S>()                
             where S : unmanaged
-                => (ReadOnlySpan256<S>)MemoryMarshal.Cast<T,S>(data);                    
- 
-        /// <summary>
-        /// Provides access to the underlying storage
-        /// </summary>
-        public ReadOnlySpan<T> Unblocked
-        {
-            [MethodImpl(Inline)]
-            get => data;
-        }
-
-        public int Length 
-        {
-            [MethodImpl(Inline)]
-            get => data.Length;
-        }
-
-        public int BlockCount 
-        {
-            [MethodImpl(Inline)]
-            get => data.Length / BlockLength; 
-        }
-
-        public bool IsEmpty
-        {
-            [MethodImpl(Inline)]
-            get => data.IsEmpty;
-        }
-            
+                => (ReadOnlySpan256<S>)MemoryMarshal.Cast<T,S>(data);                     
+             
         public override string ToString() 
             => data.ToString();
 
-       public override bool Equals(object rhs) 
+        public override bool Equals(object rhs) 
             => throw new NotSupportedException();
 
        public override int GetHashCode() 

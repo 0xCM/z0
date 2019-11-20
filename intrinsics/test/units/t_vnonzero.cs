@@ -47,11 +47,11 @@ namespace Z0.Test
             var  src = Random.BlockedSpan<T>(n, blocks: SampleSize);
             for(var i = 0; i< src.BlockCount; i++)
             {
-                var v = ginx.vload(n, in src.Block(i));
+                var v = ginx.vload(n, in src.BlockHead(i));
                 Claim.yea(ginx.vnonz(v));
             }
             
-            Claim.nea(ginx.vnonz(ginx.vzero<T>(n)));
+            Claim.nea(ginx.vnonz(vzero<T>(n)));
         }
 
         void nonzero256_check<T>(N256 n = default)
@@ -60,11 +60,11 @@ namespace Z0.Test
             var  src = Random.BlockedSpan<T>(n, blocks: SampleSize);
             for(var i = 0; i< src.BlockCount; i++)
             {
-                var v = ginx.vload(n, in src.Block(i));
+                var v = ginx.vload(n, in src.BlockHead(i));
                 Claim.yea(ginx.vnonz(v));
             }
             
-            Claim.nea(ginx.vnonz(ginx.vzero<T>(n)));
+            Claim.nea(ginx.vnonz(vzero<T>(n)));
         }
 
     }

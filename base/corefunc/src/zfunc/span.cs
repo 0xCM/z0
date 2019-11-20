@@ -9,38 +9,11 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;    
 using System.Runtime.Intrinsics;
-using System.Diagnostics;
 
 using Z0;
 
 partial class zfunc
 {
-    /// <summary>
-    /// Interprets 8 elements of a bytespan as an unsigned 64-bit integer
-    /// </summary>
-    /// <param name="src">The source span</param>
-    /// <param name="offset">The offset at which the first byte begins</param>
-    [MethodImpl(Inline)]
-    public static ref ulong block64u(Span<byte> src, int offset)
-        => ref head(MemoryMarshal.Cast<byte,ulong>(src.Slice(offset, 8)));
-
-    /// <summary>
-    /// Interprets 4 elements of a span of unsigned 16-bit integers as an unsigned 64-bit integer
-    /// </summary>
-    /// <param name="src">The source span</param>
-    /// <param name="offset">The offset at which the first byte begins</param>
-    [MethodImpl(Inline)]
-    public static ref ulong block64u(Span<ushort> src, int offset)
-        => ref head(MemoryMarshal.Cast<ushort,ulong>(src.Slice(offset, 4)));
-
-    /// <summary>
-    /// Interprets 2 elements of a span of unsigned 32-bit integers as an unsigned 64-bit integer
-    /// </summary>
-    /// <param name="src">The source span</param>
-    /// <param name="offset">The offset at which the first byte begins</param>
-    [MethodImpl(Inline)]
-    public static ref ulong block64u(Span<uint> src, int offset)
-        => ref head(MemoryMarshal.Cast<uint,ulong>(src.Slice(offset, 2)));
     
     /// <summary>
     /// Copies data from a readonly memory reference of one type to a memory refrence to another type
@@ -188,14 +161,6 @@ partial class zfunc
     public static Span<T> span<T>(T[] src, int offset, int length)
         => new Span<T>(src,offset, length);
 
-    /// <summary>
-    /// Constructs a span from the entireity of a sequence
-    /// </summary>
-    /// <param name="src">The source sequence</param>
-    /// <typeparam name="T">The element type</typeparam>
-    [MethodImpl(Inline)]
-    public static Span<T> span<T>(IEnumerable<T> src)
-        => src.ToSpan();
 
     [MethodImpl(Inline)]
     public static ReadOnlySpan<T> cast<S,T>(ReadOnlySpan<S> src)                
@@ -221,6 +186,39 @@ partial class zfunc
         where T : unmanaged
             => dst = MemoryMarshal.Cast<S,T>(src);
 
+    [MethodImpl(Inline)]
+    public static ReadOnlySpan<T> cast<T>(ReadOnlySpan<byte> src, int offset, int length)
+        where T : unmanaged
+            => MemoryMarshal.Cast<byte,T>(src.Slice(offset, length * Unsafe.SizeOf<T>()));
+
+    [MethodImpl(Inline)]
+    public static Span<T> cast<T>(Span<byte> src, int offset, int length)
+        where T : unmanaged
+            => MemoryMarshal.Cast<byte,T>(src.Slice(offset, length * Unsafe.SizeOf<T>()));
+    
+    [MethodImpl(Inline)]
+    public static ReadOnlySpan<T> cast<T>(ReadOnlySpan<byte> src)
+        where T : unmanaged
+            => cast<T>(src, 0, src.Length/Unsafe.SizeOf<T>());
+
+    [MethodImpl(Inline)]
+    public static Span<T> cast<T>(Span<byte> src)
+        where T : unmanaged        
+            => cast<T>(src, 0, src.Length/Unsafe.SizeOf<T>());
+
+    [MethodImpl(Inline)]
+    public static Span<T> cast<T>(Span<byte> src, out Span<byte> rem)
+        where T : unmanaged        
+    {
+        rem = Span<byte>.Empty;
+        var tSize = Unsafe.SizeOf<T>();
+        var dst = cast<T>(src);
+        var q = Math.DivRem(dst.Length, tSize, out int r);
+        if(r != 0)
+            rem = src.Slice(dst.Length*tSize);
+        return dst;
+    }
+
     /// <summary>
     /// Constructs a span from a parameter array
     /// </summary>
@@ -241,48 +239,24 @@ partial class zfunc
         => MemoryMarshal.CreateSpan(ref src, length);
 
     /// <summary>
-    /// Allocates a generically-presented span with cells of unsigned integral type with bit width n = 8
+    /// Constructs a span from the entireity of a sequence
     /// </summary>
-    /// <param name="n">The bit width selector</param>
-    /// <param name="len">The number of cells to allocate</param>
-    /// <typeparam name="T">The generic presentation type</typeparam>
+    /// <param name="src">The source sequence</param>
+    /// <typeparam name="T">The element type</typeparam>
     [MethodImpl(Inline)]
-    public static Span<T> span<T>(N8 n, int len)
-        where T : unmanaged
-            => MemoryMarshal.Cast<byte,T>(new Span<byte>(new byte[len]));
+    public static Span<T> span<T>(IEnumerable<T> src)
+        => src.ToSpan();
 
     /// <summary>
-    /// Allocates a generically-presented span with cells of unsigned integral type with bit width n = 16
+    /// Constructs a span from a sequence selection
     /// </summary>
-    /// <param name="n">The bit width selector</param>
-    /// <param name="len">The number of cells to allocate</param>
-    /// <typeparam name="T">The generic presentation type</typeparam>
+    /// <param name="src">The source sequence</param>
+    /// <param name="offset">The number of elements to skip from the head of the sequence</param>
+    /// <param name="length">The number of elements to take from the sequence</param>
+    /// <typeparam name="T">The element type</typeparam>
     [MethodImpl(Inline)]
-    public static Span<T> span<T>(N16 n, int len)
-        where T : unmanaged
-            => MemoryMarshal.Cast<ushort,T>(new Span<ushort>(new ushort[len]));
-
-    /// <summary>
-    /// Allocates a generically-presented span with cells of unsigned integral type with bit width n = 32
-    /// </summary>
-    /// <param name="n">The bit width selector</param>
-    /// <param name="len">The number of cells to allocate</param>
-    /// <typeparam name="T">The generic presentation type</typeparam>
-    [MethodImpl(Inline)]
-    public static Span<T> span<T>(N32 n, int len)
-        where T : unmanaged
-            => MemoryMarshal.Cast<uint,T>(new Span<uint>(new uint[len]));
-
-    /// <summary>
-    /// Allocates a generically-presented span with cells of unsigned integral type with bit width n = 64
-    /// </summary>
-    /// <param name="n">The bit width selector</param>
-    /// <param name="len">The number of cells to allocate</param>
-    /// <typeparam name="T">The generic presentation type</typeparam>
-    [MethodImpl(Inline)]
-    public static Span<T> span<T>(N64 n, int len)
-        where T : unmanaged
-            => MemoryMarshal.Cast<ulong,T>(new Span<ulong>(new ulong[len]));
+    public static Span<T> span<T>(IEnumerable<T> src, int? offset = null, int? length = null)
+        => span(length == null ? src.Skip(offset ?? 0) : src.Skip(offset ?? 0).Take(length.Value));
 
     /// <summary>
     /// Presents a source reference as a span of bytes
@@ -333,470 +307,5 @@ partial class zfunc
     public static Span<byte> bytes<T>(in T src)
         where T : unmanaged
             => MemoryMarshal.AsBytes(span(src));
-
-    /// <summary>
-    /// Constructs a span from a sequence selection
-    /// </summary>
-    /// <param name="src">The source sequence</param>
-    /// <param name="offset">The number of elements to skip from the head of the sequence</param>
-    /// <param name="length">The number of elements to take from the sequence</param>
-    /// <typeparam name="T">The element type</typeparam>
-    [MethodImpl(Inline)]
-    public static Span<T> span<T>(IEnumerable<T> src, int? offset = null, int? length = null)
-        => span(length == null ? src.Skip(offset ?? 0) : src.Skip(offset ?? 0).Take(length.Value));
-
-    /// <summary>
-    /// Returns a reference to the location of the first element
-    /// </summary>
-    /// <param name="src">The source array</param>
-    /// <typeparam name="T">The element type</typeparam>
-    [MethodImpl(Inline)]
-    public static unsafe ref T head<T>(T[] src)
-        where T : unmanaged
-            => ref src[0];
-    
-    /// <summary>
-    /// Returns a reference to the location of the first span element
-    /// </summary>
-    /// <param name="src">The source span</param>
-    /// <typeparam name="T">The element type</typeparam>
-    [MethodImpl(Inline)]
-    public static ref T head<T>(Span<T> src)
-        =>  ref MemoryMarshal.GetReference<T>(src);
-
-    /// <summary>
-    /// Returns a reference to the head of a readonly span
-    /// </summary>
-    /// <param name="src">The source span</param>
-    /// <typeparam name="T">The cell type</typeparam>
-    [MethodImpl(Inline)]
-    public static ref readonly T head<T>(ReadOnlySpan<T> src)
-        where T : unmanaged
-            =>  ref MemoryMarshal.GetReference<T>(src);
-
-    /// <summary>
-    /// Returns a reference to the location of the first span element
-    /// </summary>
-    /// <param name="src">The source span</param>
-    /// <typeparam name="T">The element type</typeparam>
-    [MethodImpl(Inline)]
-    public static ref T head<N,T>(Span<N,T> src)
-        where N : unmanaged, ITypeNat
-        where T : unmanaged
-            =>  ref src.Head;
-
-    /// <summary>
-    /// Returns a reference to the location of the first span element
-    /// </summary>
-    /// <param name="src">The source span</param>
-    /// <typeparam name="T">The element type</typeparam>
-    [MethodImpl(Inline)]
-    public static ref readonly T head<N,T>(ReadOnlySpan<N,T> src)
-        where N : unmanaged, ITypeNat
-        where T : unmanaged
-            =>  ref src.Head;
-
-    /// <summary>
-    /// Returns a reference to the location of the first span element
-    /// </summary>
-    /// <param name="src">The source span</param>
-    /// <typeparam name="T">The element type</typeparam>
-    [MethodImpl(Inline)]
-    public static ref T head<T>(Span128<T> src)
-        where T : unmanaged
-            =>  ref MemoryMarshal.GetReference<T>(src.Unblocked);
-
-    /// <summary>
-    /// Returns a reference to the location of the first span element
-    /// </summary>
-    /// <param name="src">The source span</param>
-    /// <typeparam name="T">The element type</typeparam>
-    [MethodImpl(Inline)]
-    public static ref T head<T>(Span256<T> src)
-        where T : unmanaged
-            =>  ref MemoryMarshal.GetReference<T>(src.Unblocked);
-
-    /// <summary>
-    /// Returns a readonly reference to the location of the first span element
-    /// </summary>
-    /// <param name="src">The source span</param>
-    /// <typeparam name="T">The element type</typeparam>
-    [MethodImpl(Inline)]
-    public static ref T head<T>(ReadOnlySpan128<T> src)
-        where T : unmanaged
-            =>  ref MemoryMarshal.GetReference<T>(src.Unblocked);
-
-    /// <summary>
-    /// Returns a readonly reference to the location of the first span element
-    /// </summary>
-    /// <param name="src">The source span</param>
-    /// <typeparam name="T">The element type</typeparam>
-    [MethodImpl(Inline)]
-    public static ref T head<T>(ReadOnlySpan256<T> src)
-        where T : unmanaged
-            =>  ref MemoryMarshal.GetReference<T>(src.Unblocked);
-
-    /// <summary>
-    /// Presents the span head as a reference to an unsigned 16-bit integer
-    /// </summary>
-    /// <param name="src">The source span</param>
-    /// <typeparam name="T">The cell type</typeparam>
-    [MethodImpl(Inline)]
-    public static ref ushort head16(Span<byte> src)
-        => ref head(src.AsUInt16());
-
-    /// <summary>
-    /// Presents the span head as a reference to an unsigned 16-bit integer
-    /// </summary>
-    /// <param name="src">The source span</param>
-    /// <typeparam name="T">The cell type</typeparam>
-    [MethodImpl(Inline)]
-    public static ref readonly ushort head16(ReadOnlySpan<byte> src)
-        => ref head(src.AsUInt16());
-
-    /// <summary>
-    /// Presents the bytespan head as a reference to an unsigned 32-bit integer
-    /// </summary>
-    /// <param name="src">The source span</param>
-    /// <typeparam name="T">The cell type</typeparam>
-    [MethodImpl(Inline)]
-    public static ref uint head32(Span<byte> src)
-        => ref head(src.AsUInt32());
-
-    /// <summary>
-    /// Presents the span head as a reference to an unsigned 32-bit integer
-    /// </summary>
-    /// <param name="src">The source span</param>
-    /// <typeparam name="T">The cell type</typeparam>
-    [MethodImpl(Inline)]
-    public static ref readonly uint head32(ReadOnlySpan<byte> src)
-        => ref head(src.AsUInt32());
-
-    /// <summary>
-    /// Presents the span head as a reference to an unsigned 32-bit integer
-    /// </summary>
-    /// <param name="src">The source span</param>
-    /// <typeparam name="T">The cell type</typeparam>
-    [MethodImpl(Inline)]
-    public static ref uint head32(Span<ushort> src)
-        => ref head(src.AsUInt32());
-
-    /// <summary>
-    /// Presents the span head as a reference to an unsigned 32-bit integer
-    /// </summary>
-    /// <param name="src">The source span</param>
-    /// <typeparam name="T">The cell type</typeparam>
-    [MethodImpl(Inline)]
-    public static ref readonly uint head32(ReadOnlySpan<ushort> src)
-        => ref head(src.AsUInt32());
-
-    /// <summary>
-    /// Presents the span head as a reference to an unsigned 64-bit integer
-    /// </summary>
-    /// <param name="src">The source span</param>
-    /// <typeparam name="T">The cell type</typeparam>
-    [MethodImpl(Inline)]
-    public static ref ulong head64(Span<byte> src)
-        => ref head(src.AsUInt64());
-
-    /// <summary>
-    /// Presents the span head as a reference to an unsigned 64-bit integer
-    /// </summary>
-    /// <param name="src">The source span</param>
-    /// <typeparam name="T">The cell type</typeparam>
-    [MethodImpl(Inline)]
-    public static ref readonly ulong head64(ReadOnlySpan<byte> src)
-        => ref head(src.AsUInt64());
-
-    /// <summary>
-    /// Presents the span head as a reference to an unsigned 64-bit integer
-    /// </summary>
-    /// <param name="src">The source span</param>
-    /// <typeparam name="T">The cell type</typeparam>
-    [MethodImpl(Inline)]
-    public static ref ulong head64(Span<ushort> src)
-        => ref head(src.AsUInt64());
-
-    /// <summary>
-    /// Presents the span head as a reference to an unsigned 64-bit integer
-    /// </summary>
-    /// <param name="src">The source span</param>
-    /// <typeparam name="T">The cell type</typeparam>
-    [MethodImpl(Inline)]
-    public static ref readonly ulong head64(ReadOnlySpan<ushort> src)
-        => ref head(src.AsUInt64());
-
-    /// <summary>
-    /// Presents the span head as a reference to an unsigned 64-bit integer
-    /// </summary>
-    /// <param name="src">The source span</param>
-    /// <typeparam name="T">The cell type</typeparam>
-    [MethodImpl(Inline)]
-    public static ref ulong head64(Span<uint> src)
-        => ref head(src.AsUInt64());
-
-    /// <summary>
-    /// Presents the span head as a reference to an unsigned 64-bit integer
-    /// </summary>
-    /// <param name="src">The source span</param>
-    /// <typeparam name="T">The cell type</typeparam>
-    [MethodImpl(Inline)]
-    public static ref readonly ulong head64(ReadOnlySpan<uint> src)
-        => ref head(src.AsUInt64());
-
-    /// <summary>
-    /// Returns a reference to the location of a non-leading span element
-    /// </summary>
-    /// <param name="src">The source span</param>
-    /// <typeparam name="T">The element type</typeparam>
-    [MethodImpl(Inline)]
-    public static ref T tail<T>(Span<T> src, int offset)
-        => ref Unsafe.Add(ref head(src), offset);        
-
-    /// <summary>
-    /// Returns a reference to the location of a non-leading span element
-    /// </summary>
-    /// <param name="src">The source span</param>
-    /// <typeparam name="T">The element type</typeparam>
-    [MethodImpl(Inline)]
-    public static ref T tail<T>(Span128<T> src, int offset)
-        where T : unmanaged
-            => ref Unsafe.Add(ref src.Head, offset);        
-
-    /// <summary>
-    /// Returns a reference to the location of a non-leading span element
-    /// </summary>
-    /// <param name="src">The source span</param>
-    /// <typeparam name="T">The element type</typeparam>
-    [MethodImpl(Inline)]
-    public static ref T tail<T>(Span256<T> src, int offset)
-        where T : unmanaged
-            => ref Unsafe.Add(ref src.Head, offset);        
-
-    [MethodImpl(Inline)]
-    public static ref readonly T tail<T>(ReadOnlySpan<T> src, int offset)
-        where T : unmanaged
-            =>  ref head(src.Slice(offset));
-
-    /// <summary>
-    /// Returns a reference to a readonly span at a specified offset
-    /// </summary>
-    /// <param name="src">The source span</param>
-    /// <param name="offset">The T-relative offset</param>
-    /// <typeparam name="T">The cell type</typeparam>
-    [MethodImpl(Inline)]
-    public static ref T cellref<T>(ReadOnlySpan<T> src, int offset)
-        where T : unmanaged
-            =>  ref Unsafe.Add(ref MemoryMarshal.GetReference<T>(src), offset);
-
-    /// <summary>
-    /// Returns the common length of the operands if they are the same; otherwise, raises an error
-    /// </summary>
-    /// <param name="lhs">The left span</param>
-    /// <param name="rhs">The right span</param>
-    /// <typeparam name="T">The element type</typeparam>
-    [MethodImpl(Inline)]   
-    public static int length<T>(Span<T> lhs, ReadOnlySpan<T> rhs, [CallerMemberName] string caller = null, 
-        [CallerFilePath] string file = null, [CallerLineNumber] int? line = null)
-            => lhs.Length == rhs.Length ? lhs.Length 
-                : throw Errors.LengthMismatch(lhs.Length, rhs.Length, caller, file, line);
-
-    /// <summary>
-    /// Returns the common length of the operands if they are the same; otherwise, raises an error
-    /// </summary>
-    /// <param name="lhs">The left span</param>
-    /// <param name="rhs">The right span</param>
-    /// <typeparam name="T">The element type</typeparam>
-    [MethodImpl(Inline)]   
-    public static int length<T>(Span<T> lhs, IReadOnlyList<T> rhs, [CallerMemberName] string caller = null, 
-        [CallerFilePath] string file = null, [CallerLineNumber] int? line = null)
-            => lhs.Length == rhs.Count ? lhs.Length 
-                : throw Errors.LengthMismatch(lhs.Length, rhs.Count, caller, file, line);
-
-    /// <summary>
-    /// Returns the common length of the operands if they are the same; otherwise, raises an error
-    /// </summary>
-    /// <param name="lhs">The left span</param>
-    /// <param name="rhs">The right span</param>
-    /// <typeparam name="T">The element type</typeparam>
-    [MethodImpl(Inline)]   
-    public static int length<T>(IReadOnlyList<T> lhs, Span<T> rhs, [CallerMemberName] string caller = null, 
-        [CallerFilePath] string file = null, [CallerLineNumber] int? line = null)
-            => lhs.Count == rhs.Length ? lhs.Count
-                : throw Errors.LengthMismatch(lhs.Count, rhs.Length, caller, file, line);
-
-    /// <summary>
-    /// Returns the common length of the operands if they are the same; otherwise, raises an error
-    /// </summary>
-    /// <param name="lhs">The left span</param>
-    /// <param name="rhs">The right span</param>
-    /// <typeparam name="T">The element type</typeparam>
-    [MethodImpl(Inline)]   
-    public static int length<T>(ReadOnlySpan<T> lhs, IReadOnlyList<T> rhs, [CallerMemberName] string caller = null, 
-        [CallerFilePath] string file = null, [CallerLineNumber] int? line = null)
-            => lhs.Length == rhs.Count ? lhs.Length 
-                : throw Errors.LengthMismatch(lhs.Length, rhs.Count, caller, file, line);
-
-    /// <summary>
-    /// Returns the common length of the operands if they are the same; otherwise, raises an error
-    /// </summary>
-    /// <param name="lhs">The left span</param>
-    /// <param name="rhs">The right span</param>
-    /// <typeparam name="T">The element type</typeparam>
-    [MethodImpl(Inline)]   
-    public static int length<T>(IReadOnlyList<T> lhs, ReadOnlySpan<T> rhs, [CallerMemberName] string caller = null, 
-        [CallerFilePath] string file = null, [CallerLineNumber] int? line = null)
-            => lhs.Count == rhs.Length ? lhs.Count
-                : throw Errors.LengthMismatch(lhs.Count, rhs.Length, caller, file, line);
-
-    /// <summary>
-    /// Returns the common length of the operands if they are the same; otherwise, raises an error
-    /// </summary>
-    /// <param name="lhs">The left span</param>
-    /// <param name="rhs">The right span</param>
-    /// <typeparam name="T">The element type of the first operand</typeparam>
-    /// <typeparam name="S">The element type of the second operand</typeparam>
-    [MethodImpl(Inline)]   
-    public static int length<S,T>(Span<S> lhs, Span<T> rhs, [CallerMemberName] string caller = null, 
-        [CallerFilePath] string file = null, [CallerLineNumber] int? line = null)
-            => lhs.Length == rhs.Length ? lhs.Length 
-                : throw Errors.LengthMismatch(lhs.Length, rhs.Length, caller, file, line);
-
-    /// <summary>
-    /// Returns the common length of the operands if they are the same; otherwise, raises an error
-    /// </summary>
-    /// <param name="lhs">The left span</param>
-    /// <param name="rhs">The right span</param>
-    /// <typeparam name="T">The element type of the first operand</typeparam>
-    /// <typeparam name="S">The element type of the second operand</typeparam>
-    [MethodImpl(Inline)]   
-    public static int length<S,T>(ReadOnlySpan<S> lhs, Span<T> rhs, [CallerMemberName] string caller = null, 
-        [CallerFilePath] string file = null, [CallerLineNumber] int? line = null)
-            => lhs.Length == rhs.Length ? lhs.Length 
-                : throw Errors.LengthMismatch(lhs.Length, rhs.Length, caller, file, line);
-
-    /// <summary>
-    /// Returns the common length of the operands if they are the same; otherwise, raises an error
-    /// </summary>
-    /// <param name="lhs">The left span</param>
-    /// <param name="rhs">The right span</param>
-    /// <typeparam name="T">The element type of the first operand</typeparam>
-    /// <typeparam name="S">The element type of the second operand</typeparam>
-    [MethodImpl(Inline)]   
-    public static int length<S,T>(ReadOnlySpan<S> lhs, ReadOnlySpan<T> rhs, [CallerMemberName] string caller = null, 
-        [CallerFilePath] string file = null, [CallerLineNumber] int? line = null)
-            => lhs.Length == rhs.Length ? lhs.Length 
-                : throw Errors.LengthMismatch(lhs.Length, rhs.Length, caller, file, line);
-
-    /// <summary>
-    /// Returns the common length of the operands if they are the same; otherwise, raises an error
-    /// </summary>
-    /// <param name="lhs">The left span</param>
-    /// <param name="rhs">The right span</param>
-    /// <typeparam name="T">The element type of the first operand</typeparam>
-    /// <typeparam name="S">The element type of the second operand</typeparam>
-    [MethodImpl(Inline)]   
-    public static int length<T>(T[] lhs, T[] rhs, [CallerMemberName] string caller = null, 
-        [CallerFilePath] string file = null, [CallerLineNumber] int? line = null)
-            => lhs.Length == rhs.Length ? lhs.Length 
-                : throw Errors.LengthMismatch(lhs.Length, rhs.Length, caller, file, line);
-
-    /// <summary>
-    /// Returns the common length of the operands if they are the same; otherwise, raises an error
-    /// </summary>
-    /// <param name="lhs">The left span</param>
-    /// <param name="rhs">The right span</param>
-    /// <typeparam name="T">The element type of the first operand</typeparam>
-    /// <typeparam name="S">The element type of the second operand</typeparam>
-    [MethodImpl(Inline)]   
-    public static int length<S,T>(ReadOnlySpan128<S> lhs, ReadOnlySpan128<T> rhs,  [CallerMemberName] string caller = null, 
-        [CallerFilePath] string file = null, [CallerLineNumber] int? line = null)
-            where S : unmanaged
-            where T : unmanaged
-            => lhs.Length == rhs.Length ? lhs.Length 
-                : throw Errors.LengthMismatch(lhs.Length, rhs.Length, caller, file, line);
-
-    /// <summary>
-    /// Returns the length of spans of equal length; otherwise raises an error
-    /// </summary>
-    /// <param name="lhs">The left span</param>
-    /// <param name="rhs">The right span</param>
-    [MethodImpl(Inline)]   
-    public static int length<S,T>(Span256<S> lhs, Span256<T> rhs, [CallerMemberName] string caller = null,
-        [CallerFilePath] string file = null, [CallerLineNumber] int? line = null)
-            where T : unmanaged
-            where S : unmanaged
-                => lhs.Length == rhs.Length ? lhs.Length : throw Errors.LengthMismatch(lhs.Length, rhs.Length, caller, file, line);
-
-    /// <summary>
-    /// Returns the common length of the operands if they are the same; otherwise, raises an error
-    /// </summary>
-    /// <param name="lhs">The left span</param>
-    /// <param name="rhs">The right span</param>
-    /// <typeparam name="T">The element type of the first operand</typeparam>
-    /// <typeparam name="S">The element type of the second operand</typeparam>
-    [MethodImpl(Inline)]   
-    public static int length<S,T>(ReadOnlySpan256<S> lhs, ReadOnlySpan256<T> rhs,[CallerMemberName] string caller = null, 
-        [CallerFilePath] string file = null, [CallerLineNumber] int? line = null)
-            where T : unmanaged
-            where S : unmanaged
-                =>  lhs.Length == rhs.Length ? lhs.Length : throw Errors.LengthMismatch(lhs.Length, rhs.Length, caller, file, line);
-
-    /// <summary>
-    /// Returns the common number of blocks in the operands if they are the same; otherwise, raises an error
-    /// </summary>
-    /// <param name="lhs">The left source</param>
-    /// <param name="rhs">The right source</param>
-    /// <typeparam name="T">The span element type</typeparam>
-    [MethodImpl(Inline)]   
-    public static int blocks<S,T>(Span128<S> lhs, Span128<T> rhs, [CallerMemberName] string caller = null,  
-        [CallerFilePath] string file = null, [CallerLineNumber] int? line = null)
-            where S : unmanaged
-            where T : unmanaged                
-                => lhs.BlockCount == rhs.BlockCount ? lhs.BlockCount 
-                    : throw Errors.CountMismatch(lhs.BlockCount, rhs.BlockCount, caller, file, line);
-
-    /// <summary>
-    /// Returns the common number of blocks in the operands if they are the same; otherwise, raises an error
-    /// </summary>
-    /// <param name="lhs">The left source</param>
-    /// <param name="rhs">The right source</param>
-    /// <typeparam name="T">The span element type</typeparam>
-    [MethodImpl(Inline)]   
-    public static int blocks<S,T>(ReadOnlySpan128<S> lhs, ReadOnlySpan128<T> rhs, [CallerMemberName] string caller = null, 
-        [CallerFilePath] string file = null, [CallerLineNumber] int? line = null)
-            where S : unmanaged
-            where T : unmanaged
-                => lhs.BlockCount == rhs.BlockCount ? lhs.BlockCount 
-                    : throw Errors.CountMismatch(lhs.BlockCount, rhs.BlockCount, caller, file, line);
-
-    /// <summary>
-    /// Returns the common number of blocks in the operands if they are the same; otherwise, raises an error
-    /// </summary>
-    /// <param name="lhs">The left source</param>
-    /// <param name="rhs">The right source</param>
-    /// <typeparam name="T">The span element type</typeparam>
-    [MethodImpl(Inline)]   
-    public static int blocks<S,T>(Span256<S> lhs, Span256<T> rhs, [CallerMemberName] string caller = null,  
-        [CallerFilePath] string file = null, [CallerLineNumber] int? line = null)
-            where S : unmanaged
-            where T : unmanaged                
-                => lhs.BlockCount == rhs.BlockCount ? lhs.BlockCount 
-                    : throw Errors.CountMismatch(lhs.BlockCount, rhs.BlockCount, caller, file, line);
-
-    /// <summary>
-    /// Returns the common number of blocks in the operands if they are the same; otherwise, raises an error
-    /// </summary>
-    /// <param name="lhs">The left source</param>
-    /// <param name="rhs">The right source</param>
-    /// <typeparam name="T">The span element type</typeparam>
-    [MethodImpl(Inline)]   
-    public static int blocks<S,T>(ReadOnlySpan256<S> lhs, ReadOnlySpan256<T> rhs, [CallerMemberName] string caller = null, 
-        [CallerFilePath] string file = null, [CallerLineNumber] int? line = null)
-            where S : unmanaged
-            where T : unmanaged
-                => lhs.BlockCount == rhs.BlockCount ? lhs.BlockCount 
-                    : throw Errors.CountMismatch(lhs.BlockCount, rhs.BlockCount, caller, file, line);
-
 
 }

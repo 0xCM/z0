@@ -38,11 +38,11 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static Vector128<long> vreverse(Vector128<long> src)
-            => vinsert(vsxcalar(src,0), vloadlo(vsxcalar(src,1)), 1);
+            => vinsert(vcell(src,0), vmov(n128, vcell(src,1)), 1);
 
         [MethodImpl(Inline)]
         public static Vector128<ulong> vreverse(Vector128<ulong> src)
-            => vinsert(vxscalar(src,0), vloadlo(vxscalar(src,1)), 1);
+            => vinsert(vcell(src,0), vmov(n128,vcell(src,1)), 1);
 
         [MethodImpl(Inline)]
         public static Vector256<byte> vreverse(Vector256<byte> src)

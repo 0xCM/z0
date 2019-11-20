@@ -35,7 +35,7 @@ namespace Z0
         void scalar_andn_check<T>()
             where T : unmanaged
         {
-            var vZero = ginx.vzero<T>(n128);
+            var vZero = vzero<T>(n128);
             for(var i=0; i<SampleSize; i++)
             {
                 var x = Random.Next<T>();                    

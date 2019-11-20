@@ -15,45 +15,6 @@ namespace Z0
     
     partial class ginx
     {
-        /// <summary>
-        /// Returns the number of components that comprise a 128-bit vector
-        /// </summary>
-        /// <param name="n">The bitness selector</param>
-        /// <typeparam name="T">The primal component type</typeparam>
-        [MethodImpl(Inline)]
-        public static int vcount<T>(N128 n)
-            where T : unmanaged
-               => Vector128<T>.Count;
-
-        /// <summary>
-        /// Returns the number of components that comprise a 256-bit vector
-        /// </summary>
-        /// <param name="n">The bitness selector</param>
-        /// <typeparam name="T">The primal component type</typeparam>
-        [MethodImpl(Inline)]
-        public static int vcount<T>(N256 n)
-            where T : unmanaged
-               => Vector256<T>.Count;
-
-        /// <summary>
-        /// Returns a 128-bit vector with all bits disabled
-        /// </summary>
-        /// <param name="n">The bitness selector</param>
-        /// <typeparam name="T">The primal component type</typeparam>
-        [MethodImpl(Inline)]
-        public static Vector128<T> vzero<T>(N128 n)
-            where T : unmanaged
-               => default;
-
-        /// <summary>
-        /// Returns a 256-bit vector with all bits disabled
-        /// </summary>
-        /// <param name="n">The bitness selector</param>
-        /// <typeparam name="T">The primal component type</typeparam>
-        [MethodImpl(Inline)]
-        public static Vector256<T> vzero<T>(N256 n)
-            where T : unmanaged
-               => default;
 
         /// <summary>
         /// Returns a 128-bit vector with all bits enabled

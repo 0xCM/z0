@@ -37,11 +37,15 @@ namespace Z0
         /// <param name="src">The memory source</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline)]
-        public static unsafe Vector128<short> vconvert(ref sbyte src, out Vector128<short> dst)
+        internal static unsafe Vector128<short> vconvert(ref sbyte src, out Vector128<short> dst)
         {
-            dst = ConvertToVector128Int16(refptr(ref src));
+            dst = ConvertToVector128Int16(ptr(ref src));
             return dst;
         }
+
+        [MethodImpl(Inline)]
+        public static Vector128<short> vconvert(in Span64<sbyte> src, out Vector128<short> dst)
+            => vconvert(ref src.Head, out dst);
 
         /// <summary>
         /// __m128i _mm_cvtepi8_epi32 (__m128i a) PMOVSXBD xmm, xmm/m32
@@ -110,11 +114,15 @@ namespace Z0
         /// <param name="src">The memory source</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline)]
-        public static unsafe Vector128<short> vconvert(ref byte src, out Vector128<short> dst)
+        internal static unsafe Vector128<short> vconvert(ref byte src, out Vector128<short> dst)
         {
             dst = ConvertToVector128Int16(ptr(ref src));
             return dst;
         }
+
+        [MethodImpl(Inline)]
+        public static Vector128<short> vconvert(in Span64<byte> src, out Vector128<short> dst)
+            => vconvert(ref src.Head, out dst);
 
         /// <summary>
         /// __m128i _mm_cvtepu8_epi16 (__m128i a) PMOVZXBW xmm, xmm/m64
@@ -152,14 +160,18 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static unsafe void vconvert(ref byte src, out Vector128<ushort> lo, out Vector128<ushort> hi)
+        public static Vector128<ushort> vconvert(in Span64<byte> src, out Vector128<ushort> dst)
+            => vconvert(ref src.Head, out dst);
+
+        [MethodImpl(Inline)]
+        internal static void vconvert(ref byte src, out Vector128<ushort> lo, out Vector128<ushort> hi)
         {
             vconvert(ref src, out lo);
             vconvert(ref seek(ref src, 8), out hi);            
         }
 
         [MethodImpl(Inline)]
-        public static unsafe void vconvert(in Span128<byte> src, out Vector128<ushort> lo, out Vector128<ushort> hi)
+        public static void vconvert(in Span128<byte> src, out Vector128<ushort> lo, out Vector128<ushort> hi)
             => vconvert(ref src.Head, out lo, out hi);
 
         /// <summary>
@@ -180,11 +192,15 @@ namespace Z0
         /// <param name="src">The memory source</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline)]
-        public static unsafe Vector128<int> vconvert(ref byte src, out Vector128<int> dst)
+        internal static unsafe Vector128<int> vconvert(ref byte src, out Vector128<int> dst)
         {
             dst = ConvertToVector128Int32(ptr(ref src));
             return dst;
         }
+
+        [MethodImpl(Inline)]
+        public static Vector128<int> vconvert(in BitSpan<N5,byte> src, out Vector128<int> dst)
+            => vconvert(ref src.Head, out dst);
 
         /// <summary>
         /// __m128i _mm_cvtepu8_epi32 (__m128i a) PMOVZXBD xmm, xmm/m32
@@ -204,11 +220,22 @@ namespace Z0
         /// <param name="src">The memory source</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline)]
-        public static unsafe Vector128<uint> vconvert(ref byte src, out Vector128<uint> dst)
+        internal static unsafe Vector128<uint> vconvert(ref byte src, out Vector128<uint> dst)
         {
             dst = v32u(ConvertToVector128Int32(ptr(ref src)));
             return dst;
         }
+
+        [MethodImpl(Inline)]
+        public static Vector128<uint> vconvert(in BitSpan<N5,byte> src, out Vector128<uint> dst)
+            => vconvert(ref src.Head, out dst);
+
+        [MethodImpl(Inline)]
+        public static void vconvert(in Span64<byte> src, out Vector128<uint> x0, out Vector128<uint> x1)
+        {
+            vconvert(ref src.Head, out x0);
+            vconvert(ref seek(ref src.Head, 4), out x1);
+        }            
 
         /// <summary>
         /// __m128i _mm_cvtepi32_epi64 (__m128i a) PMOVSXDQ xmm, xmm/m64

@@ -18,7 +18,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<T> vhi<T>(Vector128<T> src)
             where T : unmanaged
-                => generic<T>(vscalar(vxscalar(v64u(src),n1)));
+                => generic<T>(vscalar(vcell(v64u(src),1)));
 
         /// <summary>
         /// Extracts the hi 128-bit lane of the source vector to scalar targets

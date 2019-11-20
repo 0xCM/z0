@@ -68,7 +68,7 @@ namespace Z0
             where T : unmanaged
         {
             var ones = ginx.vones<T>(n);
-            var one = ginx.vxscalar(ones,0);
+            var one = vcell(ones,0);
             
             for(var i=0; i< SampleSize; i++)
             {
@@ -93,7 +93,7 @@ namespace Z0
             where T : unmanaged
         {
             var ones = ginx.vones<T>(n);
-            var one = ginx.vxscalar(ginx.vlo(ones),0);
+            var one = vcell(ginx.vlo(ones),0);
             
             for(var i=0; i< SampleSize; i++)
             {

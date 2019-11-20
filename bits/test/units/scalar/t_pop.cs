@@ -5,8 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Reflection;
     
     using static zfunc;
 
@@ -14,9 +12,9 @@ namespace Z0
     {
         
         protected override int CycleCount => Pow2.T10;
+
         protected override int SampleSize => Pow2.T10;
         
-
         public void popbs_check()
         {
             for(var i=0; i< SampleSize; i++)
@@ -27,6 +25,7 @@ namespace Z0
                 Claim.eq(pc1,pc2);
             }
         }
+
         public void pop1()
         {
             Span<byte> bits = stackalloc byte[16];
@@ -35,7 +34,7 @@ namespace Z0
             var bitsPC = bits.PopCount();
             Claim.eq(6,bitsPC);
 
-            var bytes = ByteSpan.From(ref src);
+            var bytes = BitConvert.GetBytes(src);
             Claim.eq(2, bytes.Length);
             
             var bytesPC = bytes.PopCount();
@@ -59,7 +58,6 @@ namespace Z0
             var pop1 = Bits.vpop(x0,x1,x2);
             Claim.eq(pop2,pop3);
             Claim.eq(pop1,pop3);
-
         }
 
         public void pop_64u_check()

@@ -209,6 +209,12 @@ namespace Z0
                 return default(T);
         }
 
+        /// <summary>
+        /// Computes 2^n
+        /// </summary>
+        /// <param name="n"></param>
+        /// <typeparam name="N"></typeparam>
+        /// <returns></returns>
         [MethodImpl(Inline)]
         public static NatVal pow2<N>(N n = default)
             where N : unmanaged, ITypeNat

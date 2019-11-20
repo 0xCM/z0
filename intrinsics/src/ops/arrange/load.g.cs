@@ -129,7 +129,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<T> vload<T>(ReadOnlySpan128<T> src)
             where T : unmanaged
-                =>  vload(n128,src.Unblocked);
+                =>  vload(n128,src.Data);
 
         [MethodImpl(Inline)]
         public static Vector256<T> vload<T>(Span256<T> src)

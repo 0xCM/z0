@@ -54,7 +54,7 @@ namespace Z0
         /// </summary>
         [MethodImpl(Inline)]
         public static AppEvent<T> Materialize(Span<byte> src)
-            => ByteSpan.ReadValue<AppEvent<T>>(src);
+            => read<AppEvent<T>>(src);
 
         [MethodImpl(Inline)]
         public static implicit operator AppEvent(AppEvent<T> src)
@@ -72,7 +72,7 @@ namespace Z0
         /// </summary>
         [MethodImpl(Inline)]
         public Span<byte> Serialize()
-            => ByteSpan.FromValue(this);
+            => BitConvert.GetBytes(this);
         
     }
 }

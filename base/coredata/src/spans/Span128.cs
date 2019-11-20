@@ -24,6 +24,8 @@ namespace Z0
     {
         readonly Span<T> data;
 
+        public static N128 N => default;
+
         /// <summary>
         /// The number of cells in the block
         /// </summary>
@@ -75,7 +77,7 @@ namespace Z0
             return dst;
         }
 
-        [MethodImpl(Inline)]
+        [MethodImpl(NotInline)]
         public static Span128<T> Load(T[] src, int offset = 0)
         {
             require(Aligned(src.Length - offset));
@@ -107,16 +109,9 @@ namespace Z0
             return new Span128<T>(offset == 0 ? src : src.Slice(offset));
         }
 
-        [MethodImpl(Inline)]
-        public static unsafe Span128<T> Load(void* src, int length)
-        {
-            require(Aligned(length));
-            return new Span128<T>(src,length);
-        }
-
 
         [MethodImpl(Inline)]
-        unsafe Span128(void* src, int length)    
+        internal unsafe Span128(void* src, int length)    
         {
             data = new Span<T>(src, length);  
         }
@@ -186,14 +181,26 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public ref T Block(int blockIndex)
-            => ref this[blockIndex*BlockLength];
+        public ref T BlockHead(int blockIndex)
+            => ref Unsafe.Add(ref Head, blockIndex*BlockLength); 
 
         [MethodImpl(Inline)]
-        public Span128<T> Blocked(int blockIndex)
+        public Span128<T> Block(int blockIndex)
         {
             var slice = data.Slice(blockIndex * BlockLength, BlockLength); 
             return new Span128<T>(slice);
+        }
+
+        /// <summary>
+        /// Retrieves a 64-bit block
+        /// </summary>
+        /// <param name="n">The block width selector</param>
+        /// <param name="blockIndex">The index of the block, with respect to 64-bit blocks</param>
+        [MethodImpl(Inline)]
+        public Span64<T> Block(N64 n, int blockIndex)
+        {
+            var count = BlockLength >> 1;
+            return new Span64<T>(data.Slice(blockIndex * count, count));
         }
 
         [MethodImpl(Inline)]

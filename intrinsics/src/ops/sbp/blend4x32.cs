@@ -24,6 +24,50 @@ namespace Z0
         /// <param name="y">The right vector</param>
         /// <param name="spec">The blend specification</param>
         [MethodImpl(Inline)]
+        public static Vector128<byte> vblend4x32(Vector128<byte> x, Vector128<byte> y, Blend4x32 spec)        
+            => v8u(Blend(v32u(x), v32u(y), (byte)spec));
+
+        /// <summary>
+        /// __m128i _mm_blend_epi32 (__m128i a, __m128i b, const int imm8) VPBLENDD xmm, xmm, xmm/m128, imm8
+        /// Combines components from left/right vectors per the blend spec
+        /// </summary>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
+        /// <param name="spec">The blend specification</param>
+        [MethodImpl(Inline)]
+        public static Vector128<sbyte> vblend4x32(Vector128<sbyte> x, Vector128<sbyte> y, Blend4x32 spec)        
+            => v8i(Blend(v32u(x), v32u(y), (byte)spec));
+
+        /// <summary>
+        /// __m128i _mm_blend_epi32 (__m128i a, __m128i b, const int imm8) VPBLENDD xmm, xmm, xmm/m128, imm8
+        /// Combines components from left/right vectors per the blend spec
+        /// </summary>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
+        /// <param name="spec">The blend specification</param>
+        [MethodImpl(Inline)]
+        public static Vector128<short> vblend4x32(Vector128<short> x, Vector128<short> y, Blend4x32 spec)        
+            => v16i(Blend(v32u(x), v32u(y), (byte)spec));
+
+        /// <summary>
+        /// __m128i _mm_blend_epi32 (__m128i a, __m128i b, const int imm8) VPBLENDD xmm, xmm, xmm/m128, imm8
+        /// Combines components from left/right vectors per the blend spec
+        /// </summary>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
+        /// <param name="spec">The blend specification</param>
+        [MethodImpl(Inline)]
+        public static Vector128<ushort> vblend4x32(Vector128<ushort> x, Vector128<ushort> y, Blend4x32 spec)        
+            => v16u(Blend(v32u(x), v32u(y), (byte)spec));
+
+        /// <summary>
+        /// __m128i _mm_blend_epi32 (__m128i a, __m128i b, const int imm8) VPBLENDD xmm, xmm, xmm/m128, imm8
+        /// Combines components from left/right vectors per the blend spec
+        /// </summary>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
+        /// <param name="spec">The blend specification</param>
+        [MethodImpl(Inline)]
         public static Vector128<int> vblend4x32(Vector128<int> x, Vector128<int> y, Blend4x32 spec)        
             => Blend(x, y, (byte)spec);
 
@@ -59,6 +103,29 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<uint> vblend4x32(Vector128<uint> x, Vector128<uint> y, byte spec)        
             => Blend(x, y, spec);
+
+        /// <summary>
+        /// __m128i _mm_blend_epi32 (__m128i a, __m128i b, const int imm8) VPBLENDD xmm, xmm, xmm/m128, imm8
+        /// Combines components from left/right vectors per the blend spec
+        /// </summary>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
+        /// <param name="spec">The blend specification</param>
+        [MethodImpl(Inline)]
+        public static Vector128<ulong> vblend4x32(Vector128<ulong> x, Vector128<ulong> y, Blend4x32 spec)        
+            => v64u(Blend(v32u(x), v32u(y), (byte)spec));
+
+        /// <summary>
+        /// __m128i _mm_blend_epi32 (__m128i a, __m128i b, const int imm8) VPBLENDD xmm, xmm, xmm/m128, imm8
+        /// Combines components from left/right vectors per the blend spec
+        /// </summary>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
+        /// <param name="spec">The blend specification</param>
+        [MethodImpl(Inline)]
+        public static Vector128<long> vblend4x32(Vector128<long> x, Vector128<long> y, Blend4x32 spec)        
+            => v64i(Blend(v32u(x), v32u(y), (byte)spec));
+
     }
 
     /// <summary>

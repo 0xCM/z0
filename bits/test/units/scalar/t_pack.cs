@@ -235,7 +235,7 @@ namespace Z0
                 var src = Random.Next<ulong>();
                 BitParts.unpack64x1(src, dst);
                 var bitsPC = dst.PopCount();
-                var bytes = ByteSpan.From(ref src);
+                var bytes = BitConvert.GetBytes(src);
                 var bytesPC = bytes.PopCount();
                 Claim.eq(bitsPC, bytesPC);        
             }
@@ -297,7 +297,7 @@ namespace Z0
             var bytes = q + (r == 0 ? 0 : 1);
             Claim.eq(bytes, y.Length);
 
-            var bulk = ByteSpan.Cast<T>(y,out Span<byte> rem);
+            var bulk = cast<T>(y,out Span<byte> rem);
 
             var merged = rem.Length != 0 ? bulk.Extend(bulk.Length + 1) : bulk;
             if(merged.Length != bulk.Length)

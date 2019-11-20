@@ -195,7 +195,7 @@ namespace Z0
         [MethodImpl(Inline)]
         BitCells(Span<T> src, int n)
         {            
-            this.data = BlockedSpan.load(n256,src);
+            this.data = BlockedSpan.loadu(n256,src);
             this.MaxBitCount = src.Length * CellCapacity;
             this.BitCount = n;
             this.SegLength = BitSize.Segments<T>(MaxBitCount);            
@@ -352,7 +352,7 @@ namespace Z0
         public ref T Head
         {
             [MethodImpl(Inline)]
-            get => ref head(data);
+            get => ref data.Head;
         }
 
         [MethodImpl(Inline)]

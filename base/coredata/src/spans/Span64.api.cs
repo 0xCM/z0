@@ -17,16 +17,6 @@ namespace Z0
     public static class Span64
     {
         /// <summary>
-        /// Reimagines a 64-bit bloocked span of generic values as a span of bytes
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <typeparam name="T">The source value type</typeparam>
-        [MethodImpl(Inline)]
-        public static Span64<byte> bytes<T>(Span64<T> src)
-            where T : unmanaged
-                => load(MemoryMarshal.AsBytes(src.Unblocked));
-
-        /// <summary>
         /// Allocates a span with a specified number of blocks
         /// </summary>
         /// <param name="blocks">The number of blocks for which memory should be alocated</param>
@@ -36,16 +26,6 @@ namespace Z0
         public static Span64<T> alloc<T>(int blocks, T? fill = null)
             where T : unmanaged        
                 => Span64<T>.AllocBlocks(blocks, fill);
-
-        /// <summary>
-        /// Allocates a 1-block span 
-        /// </summary>
-        /// <param name="fill">An optional value that, if specified, is used to initialize the cell values</param>
-        /// <typeparam name="T">The element type</typeparam>
-        [MethodImpl(NotInline)]
-        public static Span64<T> alloc<T>(T? fill = null)
-            where T : unmanaged        
-                => Span64<T>.AllocBlocks(1, fill);
 
         /// <summary>
         /// Allocates a 256-bit blocked span of a specified minimum length which may not partition evently into 256-bit blocks
@@ -113,29 +93,6 @@ namespace Z0
                 => Span64<T>.Load(src);
 
         /// <summary>
-        /// Loads a blocked span from an unblocked span
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <param name="offset">The span index at which to begin the load</param>
-        /// <typeparam name="T">The primitive type</typeparam>
-        [MethodImpl(Inline)]
-        public static Span64<T> load<T>(Span<T> src, int offset = 0)
-            where T : unmanaged
-                => Span64<T>.Load(src, offset);
-
-        /// <summary>
-        /// Loads an unsized 256-bit blocked span from a sized unblocked span
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <param name="offset">The span index at which to begin the load</param>
-        /// <typeparam name="T">The element type</typeparam>
-        [MethodImpl(Inline)]
-        public static Span64<T> load<N,T>(Span<N,T> src)
-            where T : unmanaged
-            where N : unmanaged, ITypeNat<N>, INatDivisible<N,N64>
-                => load(src.Unsized);
-
-        /// <summary>
         /// Loads a blocked readonly span from an unblocked readonly span
         /// </summary>
         /// <param name="src">The source span</param>
@@ -147,24 +104,6 @@ namespace Z0
                 => Span64<T>.Load(src, offset);
 
         /// <summary>
-        /// Calculates the number of bytes required to represent a block constituent
-        /// </summary>
-        /// <typeparam name="T">The block constituent type</typeparam>
-        [MethodImpl(Inline)]
-        public static int cellsize<T>()
-            where T : unmanaged        
-                => Span64<T>.CellSize;
-
-        /// <summary>
-        /// Calculates the number of bytes requred to represent a block
-        /// </summary>
-        /// <typeparam name="T">The block constituent type</typeparam>
-        [MethodImpl(Inline)]
-        public static int blocksize<T>()
-            where T : unmanaged        
-                => Span64<T>.BlockSize;
-
-        /// <summary>
         /// Calculates the number of cells that comprise a specified number of block
         /// </summary>
         /// <typeparam name="T">The block constituent type</typeparam>
@@ -172,38 +111,6 @@ namespace Z0
         public static int blocklen<T>(int blocks = 1)
             where T : unmanaged        
                 => blocks * Span64<T>.BlockLength;
-
-        /// <summary>
-        /// Calculates the number of whole blocks into which a sequence of cells may be partitioned
-        /// </summary>
-        /// <param name="length">The length of the cell sequence</param>
-        /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
-        public static int fullblocks<T>(int length)
-            where T : unmanaged  
-                => length / blocklen<T>();
-
-        /// <summary>
-        /// Determines whether data of a specified length can be evenly covered by 64-bit
-        /// primal blocks
-        /// </summary>
-        /// <param name="datasize">The length, in bytes, of the source data</param>
-        /// <typeparam name="T">The block constituent type</typeparam>
-        [MethodImpl(Inline)]
-        public static bool aligned<T>(int length)
-            where T : unmanaged        
-                => Span64<T>.Aligned(length);
-
-        [MethodImpl(Inline)]
-        public static int align<T>(int length)
-            where T : unmanaged        
-        {
-            var remainder = length % blocklen<T>();
-            if(remainder == 0)
-                return length;
-            else
-                return (length - remainder) + blocklen<T>();
-        }                    
 
         /// <summary>
         /// Calculates alignment attributes predicated on a source length and element type
@@ -229,34 +136,21 @@ namespace Z0
         /// <param name="rhs">The right source</param>
         /// <typeparam name="T">The span element type</typeparam>
         [MethodImpl(Inline)]   
-        public static int blocks<S,T>(Span64<S> lhs, Span64<T> rhs, [CallerFilePath] string caller = null,
-            [CallerFilePath] string file = null, [CallerLineNumber] int? line = null)
-                where T : unmanaged
-                where S : unmanaged
-                    => lhs.BlockCount == rhs.BlockCount ? lhs.BlockCount 
-                        : throw CountMismatch(lhs.BlockCount, rhs.BlockCount, caller, file,line);
+        public static int blocks<S,T>(in Span64<S> lhs, in Span64<T> rhs)
+            where T : unmanaged
+            where S : unmanaged
+                => lhs.BlockCount == rhs.BlockCount ? lhs.BlockCount : badsize<int>(lhs.BlockCount,rhs.BlockCount);
+
         /// <summary>
         /// Returns the length of spans of equal length; otherwise raises an error
         /// </summary>
         /// <param name="lhs">The left span</param>
         /// <param name="rhs">The right span</param>
         [MethodImpl(Inline)]   
-        public static int length<S,T>(Span64<S> lhs, Span64<T> rhs, [CallerFilePath] string caller = null,
-            [CallerFilePath] string file = null, [CallerLineNumber] int? line = null)
-                where S : unmanaged
-                where T : unmanaged
-                    => lhs.Length == rhs.Length ? lhs.Length 
-                        : throw CountMismatch(lhs.Length, rhs.Length, caller, file, line);   
- 
-         /// <summary>
-        /// Returns a reference to the first element of a span
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <typeparam name="T">The element type</typeparam>
-        [MethodImpl(Inline)]
-        static ref T head<T>(in Span64<T> src)
+        public static int length<S,T>(in Span64<S> lhs, in Span64<T> rhs)
+            where S : unmanaged
             where T : unmanaged
-                =>  ref MemoryMarshal.GetReference<T>(src);
-
+                => lhs.Length == rhs.Length ? lhs.Length : badsize<int>(lhs.Length,rhs.Length);
+ 
     }
 }

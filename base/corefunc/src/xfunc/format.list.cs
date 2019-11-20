@@ -110,7 +110,7 @@ namespace Z0
         [MethodImpl(Inline)]        
         public static string FormatList<T>(this ReadOnlySpan128<T> src, char delimiter = ',', int offset = 0, int pad = 0)
             where T : unmanaged
-                => src.Unblocked.FormatList(delimiter, offset, pad);
+                => src.Data.FormatList(delimiter, offset, pad);
 
         /// <summary>
         /// Formats a blocked span as a delimited list

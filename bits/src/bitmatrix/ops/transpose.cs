@@ -39,7 +39,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ref BitMatrix8 transpose(in BitMatrix8 A, ref BitMatrix8 Z)
         {
-            var x = dinx.vloadlo((ulong)A);
+            var x = dinx.vmov(n128,(ulong)A);
             for(var i=7; i>= 0; i--)
             {
                 Z[i] = (byte)dinx.vmovemask(v8u(x));

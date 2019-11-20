@@ -12,15 +12,15 @@ namespace Z0
     using static zfunc;
 
     /// <summary>
-    /// Defines a span that holds a natural number of bits that is a multiple of 64
+    /// Defines a span predicated on a natural number N := log2(bitcount)
     /// </summary>
     public readonly ref struct BitSpan<N,T>
-        where N : unmanaged, ITypeNat<N>, INatDivisible<N,N64>
+        where N : unmanaged, ITypeNat<N>
         where T : unmanaged
     {
         readonly Span<T> data;
 
-        public static int BitCount => natval<N>();
+        public static int BitCount => BitSpan.bits<N>();
 
         public static int CellCount => BitSpan.cells<N,T>();
 
@@ -43,11 +43,7 @@ namespace Z0
         [MethodImpl(Inline)]
         internal BitSpan(Span<T> src)
             => this.data = src;
-
-        [MethodImpl(Inline)]
-        internal BitSpan(ref T src)
-            => data = MemoryMarshal.CreateSpan(ref src, CellCount);
- 
+             
         public ref T this[int ix] 
         {
             [MethodImpl(Inline)]
@@ -83,20 +79,23 @@ namespace Z0
             => ref data.GetPinnableReference();
 
         [MethodImpl(Inline)]
-        public void CopyTo (Span<T> dst)
+        public void CopyTo(Span<T> dst)
             => data.CopyTo(dst);
 
         [MethodImpl(Inline)]
-        public bool TryCopyTo (Span<T> dst)
+        public bool TryCopyTo(Span<T> dst)
             => data.TryCopyTo(dst);        
         
         [MethodImpl(Inline)]
-        public BitSpan<N,T> Replicate()        
-            => new BitSpan<N,T>(data.Replicate());
+        public BitSpan<N,T> Replicate(bool structureOnly = false)        
+            => new BitSpan<N,T>(data.Replicate(structureOnly));
         
         public int Length 
-            => BitCount;
-            
+            => CellCount;
+
+        public int BitWidth
+            => BitCount;            
+
         public bool IsEmpty
             => data.IsEmpty;
 

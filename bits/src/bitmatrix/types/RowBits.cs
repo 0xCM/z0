@@ -35,7 +35,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static RowBits<T> From(Span<byte> src)        
-            => new RowBits<T>(ByteSpan.Cast<T>(src));
+            => new RowBits<T>(cast<T>(src));
 
         [MethodImpl(NotInline)]
         public static RowBits<T> Alloc(int rows)        
@@ -161,7 +161,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         ref BitVector<T> Row(int offset)
-            => ref AsBitVector(ref tail(data, offset));
+            => ref AsBitVector(ref head(data, offset));
 
         [MethodImpl(Inline)]
         static ref BitVector<T> AsBitVector(ref T src)

@@ -53,7 +53,7 @@ namespace Z0
             where T : unmanaged
         {
 
-            var len = ginx.vcount<T>(n);
+            var len = vcount<T>(n);
             var src = Random.CpuVector<T>(n);
             var actual = src.ToSpan();
             var expect = span<T>(len);
@@ -65,7 +65,7 @@ namespace Z0
         void vextract_check<T>(N256 n)
             where T : unmanaged
         {
-            var len = ginx.vcount<T>(n);
+            var len = vcount<T>(n);
             var half = len >> 1;
             var src = Random.CpuVector<T>(n);
             var srcData = src.Store(span<T>(len));

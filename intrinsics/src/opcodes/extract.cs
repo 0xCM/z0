@@ -13,6 +13,27 @@ namespace Z0
 
     partial class inxoc
     {
+        public static ulong vcell_0_256x64u(Vector256<ulong> src)
+            => vcell(src,0);
+
+        public static ulong vcell_1_256x64u(Vector256<ulong> src)
+            => vcell(src,1);
+
+        public static ulong vcell_1_128x8u(Vector128<byte> src)
+            => vcell(src,1);
+
+        public static ulong vcell_2_256x64u(Vector256<ulong> src)
+            => vcell(src,2);
+    
+        public static byte vcell_3_256x64u(Vector256<byte> src)
+            => vcell(src,3);
+    
+        public static uint vcell_256x32u_1(Vector256<uint> src)
+            => vcell(src,1);
+
+        public static uint vcell_256x32u_2(Vector256<uint> src)
+            => vcell(src,2);
+
         public static Vector128<byte> swap_hl(Vector128<byte> src)
             => ginx.vswaphl(src);
 
@@ -29,60 +50,7 @@ namespace Z0
 
         public static Vector128<byte> lo_128x8u(Vector128<byte> src)
             => ginx.vlo(src);
-
-        public static byte vextract_128x8u_0(Vector128<byte> src)
-            => ginx.vxscalar(src,n0);
-
-        public static ulong vextract_128x64u_0(Vector128<ulong> src)
-            => ginx.vxscalar(src,n0);
-
-        public static ulong vextract_128x64u_1(Vector128<ulong> src)
-            => ginx.vxscalar(src,n1);
-
-        public static void vextract_128x64u_all(Vector128<ulong> src, out ulong x0, out ulong x1)
-        {
-            x0 = ginx.vxscalar(src,n0);
-            x1 = ginx.vxscalar(src,n1);
-        }
-
-        public static void vextract_128x64u_all_2(Vector128<ulong> src, ref ulong dst)
-        {
-            dst = ginx.vxscalar(src, n0);
-            Unsafe.Add(ref dst, 1) = ginx.vxscalar(src, n1);
-        }
-
-        public static void vextract_128x64u_all_3(Vector128<ulong> src, out ulong x0, out ulong x1)
-        {
-            x0 = ginx.vxscalar(src, 0);
-            x1 = ginx.vxscalar(src, 1);
-        }
-
-        public static void vextract_128x64u_all_4(Vector128<ulong> src, ref ulong dst)
-        {
-            ginx.vstore(src, ref dst);
-        }
-
-        public static byte vextract_256x8u_0(Vector256<byte> src)
-            => ginx.vxscalar(src,n0);
-
-        public static byte vextract_256x8u_1(Vector256<byte> src)
-            => ginx.vxscalar(src,n1);
-
-        public static byte vextract_256x8u_2(Vector256<byte> src)
-            => ginx.vxscalar(src,n2);
-
-        public static uint vextract_256x32u_0(Vector256<uint> src)
-            => ginx.vxscalar(src,n0);
-
-        public static uint vextract_256x32u_1(Vector256<uint> src)
-            => ginx.vxscalar(src,n1);
-
-        public static ulong vextract_256x32u_2(Vector256<uint> src)
-            => ginx.vxscalar(src,n2);
-
-        public static uint vextract_256x32u_3(Vector256<uint> src)
-            => ginx.vxscalar(src,n3);
-
+       
 
         public static void vlo_256x8u_out(Vector256<byte> src, out ulong x0, out ulong x1)
             => dinx.vlo(src, out x0, out x1);
@@ -102,17 +70,6 @@ namespace Z0
         public static ref Pair<ulong> vhi_256x64u_pair(Vector256<ulong> src, ref Pair<ulong> dst)
             => ref ginx.vhi(src, ref dst);
 
-        public static ulong vextract_256x64u_0(Vector256<ulong> src)
-            => ginx.vxscalar(src,n0);
-
-        public static ulong vextract_256x64u_1(Vector256<ulong> src)
-            => ginx.vxscalar(src,n1);
-
-        public static ulong vextract_256x64u_2(Vector256<ulong> src)
-            => ginx.vxscalar(src,n2);
-
-        public static ulong vextract_256x64u_3(Vector256<ulong> src)
-            => ginx.vxscalar(src,n3);
 
         public static Vector128<byte> vshuffle_128x8u(Vector128<byte> src, Vector128<byte> spec)
             => dinx.vshuf16x8(src,spec);
@@ -125,7 +82,6 @@ namespace Z0
 
         public static Vector256<sbyte> vshuffle_256x8i(Vector256<sbyte> src, Vector256<sbyte> spec)
             => dinx.vshuf16x8(src,spec);
-
 
     }
 

@@ -81,8 +81,8 @@ namespace Z0
                 var dst = ginx.vsrl(src,offset);
                 for(var j=0; j<dst.Length(); j++)
                 {
-                    var x = ginx.vxscalar(dst, (byte)j);
-                    var y = ginx.vxscalar(src, (byte)j);
+                    var x = vcell(dst, (byte)j);
+                    var y = vcell(src, (byte)j);
                     Claim.eq(x, gmath.srl(y,offset));
                 }
             }
@@ -104,12 +104,12 @@ namespace Z0
 
                 for(var j=0; j<a.Length(); j++)
                 {
-                    var x = ginx.vxscalar(ginx.vlo(a), (byte)j);
-                    var y = ginx.vxscalar(ginx.vlo(src), (byte)j);
+                    var x = vcell(ginx.vlo(a), (byte)j);
+                    var y = vcell(ginx.vlo(src), (byte)j);
                     Claim.eq(x, gmath.srl(y,offset));
 
-                    x = ginx.vxscalar(ginx.vhi(a), (byte)j);
-                    y = ginx.vxscalar(ginx.vhi(src), (byte)j);
+                    x = vcell(ginx.vhi(a), (byte)j);
+                    y = vcell(ginx.vhi(src), (byte)j);
                     Claim.eq(x, gmath.srl(y,offset));
 
                 }
@@ -120,7 +120,7 @@ namespace Z0
             where T : unmanaged
         {
             var opcount = RoundCount * CycleCount;
-            var last = ginx.vzero<T>(n);
+            var last = vzero<T>(n);
             var sw = stopwatch(false);
             var bitlen = bitsize<T>();
             var opname = $"srl_{n}x{bitlen}u";
@@ -142,7 +142,7 @@ namespace Z0
             where T : unmanaged
         {
             var opcount = RoundCount * CycleCount;
-            var last = ginx.vzero<T>(n);
+            var last = vzero<T>(n);
             var sw = stopwatch(false);
             var bitlen = bitsize<T>();
             var opname = $"srl_{n}x{bitlen}u";

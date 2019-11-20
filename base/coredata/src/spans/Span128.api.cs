@@ -185,8 +185,7 @@ namespace Z0
                 => length / blocklen<T>();
 
         /// <summary>
-        /// Determines whether data of a specified length can be evenly covered by 128-bit
-        /// primal blocks
+        /// Determines whether data of a specified length can be evenly covered by 128-bit primal blocks
         /// </summary>
         /// <param name="datasize">The length, in bytes, of the source data</param>
         /// <typeparam name="T">The block constituent type</typeparam>

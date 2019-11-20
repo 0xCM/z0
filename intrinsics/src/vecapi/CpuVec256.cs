@@ -21,15 +21,6 @@ namespace Z0
     public static class CpuVec256
     {
  
-        [MethodImpl(Inline)]
-        public static T item<T>(Vector256<T> x, int index)
-            where T : unmanaged
-                => x.GetElement(index);
-
-        [MethodImpl(Inline)]
-        public static Vector256<T> item<T>(Vector256<T> x, int index, T value)
-            where T : unmanaged
-                => x.WithElement(index,value);
             
     } 
 }

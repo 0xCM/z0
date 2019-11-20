@@ -1,4 +1,4 @@
-// 2019-11-19 14:11:58:224
+// 2019-11-20 01:20:42:095
 Span<byte> GetBytes(in int src)
 {
     IL_0000: ldarg.1
@@ -31,7 +31,7 @@ ulong nat3val()
     IL_0000: call Z0.N3 Z0.N3::get_Rep()
     IL_0005: stloc.0
     IL_0006: ldloca.s V_0
-    IL_0008: call System.UInt64 Z0.N3::get_value()
+    IL_0008: call System.UInt64 Z0.N3::get_NatValue()
     IL_000D: ret
 
 }

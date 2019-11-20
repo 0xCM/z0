@@ -5,6 +5,7 @@
 namespace Z0
 {
     using System;
+	using System.Linq;
 
 	/// <summary>
 	/// Represents a native code block
@@ -27,8 +28,10 @@ namespace Z0
 		/// </summary>
     	public readonly byte[] Data;
 	
+        string FormatData()
+            => Data.FormatHex(true, false, false, true).Select(x => x.ToString()).Concat(" ");
 
 		public override string ToString() 
-			=> $"{Address.FormatHex()}: {Data.FormatHexBlocks()}";
+			=> $"{Address.FormatHex()}: {FormatData()}";
 	}
 }
