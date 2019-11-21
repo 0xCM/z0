@@ -18,44 +18,21 @@ namespace Z0
     /// </summary>
     public static class Nat
     {        
-        [MethodImpl(Inline)]   
-        static Type primtype(byte value)
-            => (value switch {                    
-                    1 => N1.Rep as ITypeNat, 
-                    2 => N2.Rep, 
-                    3 => N3.Rep,
-                    4 => N4.Rep, 
-                    5 => N5.Rep, 
-                    6 => N6.Rep, 
-                    7 => N7.Rep,
-                    8 => N8.Rep,
-                    9 => N9.Rep, 
-                    _ => N0.Rep
-                    }).GetType();
 
+        public static int require<N>(int value, N n = default)
+            where N : unmanaged, ITypeNat
+                => nati<N>() == value ? value : throw new Exception();
 
-        [MethodImpl(Inline)]   
-        static Type typedef(Type t)
-            => t.GetGenericTypeDefinition();
-
-        [MethodImpl(Inline)]   
-        static Type seqtype(uint args)
-            => typedef(args switch {
-                1 => typeof(NatSeq1<>), 
-                2 => typeof(NatSeq<,>), 
-                3 => typeof(NatSeq<,,>),
-                4 => typeof(NatSeq<,,,>), 
-                5 => typeof(NatSeq<,,,,>), 
-                6 => typeof(NatSeq<,,,,,>), 
-                7 => typeof(NatSeq<,,,,,,>), 
-                8 => typeof(NatSeq<,,,,,,,>), 
-                9 => typeof(NatSeq<,,,,,,,,>), 
-                _ => throw new NotSupportedException()
-                });
-
-        [MethodImpl(Inline)]       
-        static Type[] types(byte[] digits)
-            => digits.Select(primtype).ToArray();
+        /// <summary>
+        /// Consructs the canonical sequence representatives for the natural numbers within an inclusive range
+        /// </summary>
+        /// <param name="min">The minimum value</param>
+        /// <param name="max">The maximum value</param>
+        public static IEnumerable<NatSeq> reflect(uint min, uint max)
+        {
+            for(var i = min; i<= max; i++)
+                yield return reflect(i);
+        }
 
         /// <summary>
         /// Constructs the natural type corresponding to an integral value
@@ -65,57 +42,108 @@ namespace Z0
         public static NatSeq reflect(uint value)        
             => reflect(digits(value));
 
-        public static int require<N>(int value, N n = default)
-            where N : unmanaged, ITypeNat
-                => nati<N>() == value ? value : throw new Exception();
-
         /// <summary>
-        /// Consstructs the canonical sequence representatives for the natural numbers within an inclusive range
+        /// Constructs an array of types that defines a sequence of natural primitives
         /// </summary>
-        /// <param name="min">The minimum value</param>
-        /// <param name="max">The maximum value</param>
-        public static IEnumerable<NatSeq> reflect(uint min, uint max)
+        /// <param name="digits">The digit values where each value is in the range 0..9</param>
+        [MethodImpl(Inline)]       
+        public static Type[] seqtypes(byte[] digits)
         {
-            for(var i = min; i<= max; i++)
-                yield return reflect(i);
+            var types = new Type[digits.Length];
+            ref var tHead = ref types[0];
+            ref var dHead = ref digits[0];
+            for(var i=0; i< digits.Length; i++)
+                Unsafe.Add(ref tHead, i) = primtype(Unsafe.Add(ref dHead, i));
+            return types;            
         }
- 
+
         /// <summary>
         /// Constructs a type natural from a sequence of digits
         /// </summary>
         /// <param name="digits">The source digits</param>
         public static NatSeq reflect(byte[] digits)
         {
-            var dtypes = types(digits);
-            var nattype = seqtype((uint)dtypes.Length).MakeGenericType(dtypes);
-            return  (NatSeq)Activator.CreateInstance(nattype);
+            var dtypes = seqtypes(digits);
+            var nattype = seqdef((uint)dtypes.Length).MakeGenericType(dtypes);
+            return (NatSeq)Activator.CreateInstance(nattype);
         }
+        
+        [MethodImpl(Inline)]   
+        public static NatSeq reflect(byte d1, byte d0)
+            => (NatSeq) Activator.CreateInstance(close(seqdef(2), 
+                    primtype(d1), primtype(d0)
+                    ));                    
+
+        [MethodImpl(Inline)]   
+        public static NatSeq reflect(byte d2, byte d1, byte d0)
+            => (NatSeq) Activator.CreateInstance(close(seqdef(3), 
+                    primtype(d2), primtype(d1), primtype(d0)
+                    ));                    
+
+        [MethodImpl(Inline)]   
+        public static NatSeq reflect(byte d3, byte d2, byte d1, byte d0)
+            => (NatSeq) Activator.CreateInstance(close(seqdef(4), 
+                    primtype(d3), primtype(d2), primtype(d1), primtype(d0)
+                    ));                    
+
+        [MethodImpl(Inline)]   
+        public static NatSeq reflect(byte d4, byte d3, byte d2, byte d1, byte d0)
+            => (NatSeq) Activator.CreateInstance(close(seqdef(5), 
+                    primtype(d4), primtype(d3), primtype(d2), primtype(d1), 
+                    primtype(d0)
+                    ));                    
+
+        [MethodImpl(Inline)]   
+        public static NatSeq reflect(byte d5, byte d4, byte d3, byte d2, byte d1, byte d0)
+            => (NatSeq) Activator.CreateInstance(close(seqdef(6), 
+                    primtype(d5), primtype(d4), primtype(d3), primtype(d2), 
+                    primtype(d1), primtype(d0)
+                    ));                    
+
+        [MethodImpl(Inline)]   
+        public static NatSeq reflect(byte d6, byte d5, byte d4, byte d3, byte d2, byte d1, byte d0)
+            => (NatSeq) Activator.CreateInstance(close(seqdef(7), 
+                    primtype(d6), primtype(d5), primtype(d4), primtype(d3), 
+                    primtype(d2), primtype(d1), primtype(d0)
+                    ));                    
+
+        [MethodImpl(Inline)]   
+        public static NatSeq reflect(byte d7, byte d6, byte d5, byte d4, byte d3, byte d2, byte d1, byte d0)
+            => (NatSeq) Activator.CreateInstance(close(seqdef(8), 
+                    primtype(d7), primtype(d6), primtype(d5), primtype(d4), 
+                    primtype(d3), primtype(d2), primtype(d1), primtype(d0)
+                    ));                    
+
+        [MethodImpl(Inline)]   
+        static Type close(Type t, params Type[] args)
+            => t.MakeGenericType(args);
         
         /// <summary>
         /// Constructs a natural representative for a specified parametric type
         /// </summary>
         /// <typeparam name="K">The representative type to construct</typeparam>
         [MethodImpl(Inline)]   
-        public static K nat<K>()
+        public static K nat<K>(K k = default)
             where K : unmanaged, ITypeNat
                 => default;
 
         [MethodImpl(Inline)]   
-        public static Next<K> next<K>(K nat = default)
+        public static Next<K> next<K>(K k = default)
             where K : unmanaged, ITypeNat
                 => default;
 
         [MethodImpl(Inline)]   
-        public static Prior<K> prior<K>(K nat = default)
+        public static Prior<K> prior<K>(K k = default)
             where K : unmanaged, ITypeNat
                 => default;
 
         /// <summary>
-        /// Defines a relative to a natural base
+        /// Defines a digit relative to a natural base
         /// </summary>
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The digit's enumeration type</typeparam>
         /// <typeparam name="N">The natural base type</typeparam>
+        [MethodImpl(Inline)]   
         public static Digit<N,T> digit<N,T>(T src, N @base = default)
             where N : unmanaged, ITypeNat
             where T : unmanaged
@@ -163,12 +191,12 @@ namespace Z0
                 => NatSum<K1,K2>.Rep;
 
         /// <summary>
-        /// Constructs a natural representative that encodes the sum of two naturals
+        /// Encodes a natural number k := k1 + k2
         /// </summary>
         /// <typeparam name="K1">The first operand type</typeparam>
         /// <typeparam name="K2">The second operand type</typeparam>
         [MethodImpl(Inline)]   
-        public static NatSum<K1,K2> add<K1,K2>(K1 k1, K2 k2)
+        public static NatSum<K1,K2> sum<K1,K2>(K1 k1 = default, K2 k2 =default)
             where K1 : unmanaged, ITypeNat        
             where K2 : unmanaged, ITypeNat
                 => NatSum<K1,K2>.Rep;
@@ -179,7 +207,7 @@ namespace Z0
         /// <typeparam name="K1">The first operand type</typeparam>
         /// <typeparam name="K2">The second operand type</typeparam>
         [MethodImpl(Inline)]   
-        public static Product<K1,K2> mul<K1,K2>()
+        public static Product<K1,K2> product<K1,K2>(K1 k1 = default, K2 k2 = default)
             where K1 : unmanaged, ITypeNat        
             where K2 : unmanaged, ITypeNat
                 => Product<K1,K2>.Rep;
@@ -306,6 +334,82 @@ namespace Z0
             NatProve.eq(tval, sval);
             return tval;
         }
+
+        // [MethodImpl(Inline)]   
+        // static Type tprimitive(byte value)
+        //     => (value switch {                    
+        //             1 => N1.Rep as ITypeNat, 
+        //             2 => N2.Rep, 
+        //             3 => N3.Rep,
+        //             4 => N4.Rep, 
+        //             5 => N5.Rep, 
+        //             6 => N6.Rep, 
+        //             7 => N7.Rep,
+        //             8 => N8.Rep,
+        //             9 => N9.Rep, 
+        //             _ => N0.Rep
+        //             }).GetType();
+
+        /// <summary>
+        /// For a natural number n <= 9, returns the type of the corresponding natural primitive. If n > 9, returns the zero type
+        /// </summary>
+        /// <param name="n">The number to evaluate</param>
+        [MethodImpl(Inline)]   
+        static Type primtype(byte n)
+        {
+            if(n == 1)
+                return typeof(N1);
+            else if(n == 2)
+                return typeof(N2);
+            else if(n == 3)
+                return typeof(N3);
+            else if(n == 4)
+                return typeof(N4);
+            else if(n == 5)
+                return typeof(N5);
+            else if(n == 6)
+                return typeof(N6);
+            else if(n == 7)
+                return typeof(N7);
+            else if(n == 8)
+                return typeof(N8);
+            else if(n == 9)
+                return typeof(N9);
+            else
+                return typeof(N0);
+        }
+
+        /// <summary>
+        /// Computes the generic type definition for a natural sequence
+        /// </summary>
+        /// <param name="length">The sequence length</param>
+        [MethodImpl(Inline)]   
+        static Type seqdef(uint length)
+        {
+            if(length == 2)
+                return typedef(typeof(NatSeq<,>));
+            else if(length == 3)
+                return typedef(typedef(typeof(NatSeq<,,>)));
+            else if(length == 4)
+                return typedef(typeof(NatSeq<,,,>)); 
+            else if(length == 5)
+                return typedef(typeof(NatSeq<,,,,>)); 
+            else if(length == 6)
+                return typedef(typeof(NatSeq<,,,,,>)); 
+            else if(length == 7)
+                return typedef(typeof(NatSeq<,,,,,,>)); 
+            else if(length == 8)
+                return typedef(typeof(NatSeq<,,,,,,,>)); 
+            else if(length == 9)
+                return typedef(typeof(NatSeq<,,,,,,,,>)); 
+            else
+                return typeof(NatSeq1<>);
+        }
+
+        [MethodImpl(Inline)]   
+        static Type typedef(Type t)
+            => t.GetGenericTypeDefinition();
+
 
     }
 }

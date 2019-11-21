@@ -5,22 +5,22 @@
 namespace Z0
 {
     using System;
-    using static nfunc;
-    
+    using System.Runtime.CompilerServices;
 
-    /// <summary>
-    /// Captures evidence that k:K => k % 2 == 0
-    /// </summary>
-    /// <typeparam name="K">An even natural type</typeparam>
-    public readonly struct NatEven<K> : INatEven<K>
-        where K: unmanaged, ITypeNat<K>
+    using static nfunc;
+    using static constant;
+
+   /// <summary>
+   // Captures evidence that k:K => k is prime
+   // </summary>
+   public readonly struct NatPrime<K> : INatPrime<K>
+        where K : unmanaged, ITypeNat
     {
         static readonly K k = default;
-        static readonly string description = $"{k} % {2} = {0}";
-        
-        public NatEven(K n)
-            => valid = demand(n.NatValue % 2 == 0);
-        
+
+        public NatPrime(K n)
+            => valid = demand(prime(n.NatValue));
+
         public bool valid {get;}
 
         public ulong NatValue 
@@ -30,12 +30,10 @@ namespace Z0
             => k.Sequence;
 
         public string format()
-            => valid ? description: $"INVALID({description})";    
+            => valid ? $"{k} is prime" : $"INVALID({k} is prime)";    
         
         public override string ToString()
             => format();
+
     }
-
-
-
 }

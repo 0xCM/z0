@@ -3,19 +3,22 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{
+{        
     using System;
-    using System.Numerics;
-    using System.Collections.Generic;
-    using System.Reflection;
     using System.Linq;
+    using System.ComponentModel;
     using System.Runtime.CompilerServices;
+ 
+    using static constant;
 
-    using static nfunc;
-    using static constant;    
-
-    public static class NatReduce
+    public static partial class natoc
     {
 
+
+    }
+
+    public static partial class NatProve
+    {
+        
     }
 }

@@ -5,30 +5,31 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
 
+    using static constant;
     using static nfunc;
     
-
     /// <summary>
-    /// Captures evidence that n1:T1 & n2:T2 => n1 < T2
+    /// Captures evidence k1 < k2
     /// </summary>
     public readonly struct NatLt<K1,K2> : INatLt<K1,K2>
         where K1: unmanaged, ITypeNat
         where K2: unmanaged, ITypeNat
     {
-        static readonly K1 k1 = default;
-        static readonly K2 k2 = default;
-        static readonly string description = $"{k1} < {k2}";
-
-        public NatLt(K1 n1, K2 n2)
-            => valid = demand(n1.NatValue < n2.NatValue);
+        static K1 k1 => default;
         
-        public bool valid {get;}
+        static K2 k2 => default;
+        
+        public static string Description => $"{k1} < {k2}";
 
-        public string format()
-            => valid ? description : $"INVALID({description})";    
+        [MethodImpl(Inline)]
+        public NatLt(K1 n1, K2 n2)
+        {
+            demand(n1.NatValue < n2.NatValue);
+        }                
         
         public override string ToString()
-            => format();
+            => Description;
     }
 }

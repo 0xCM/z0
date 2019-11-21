@@ -5,31 +5,30 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
+
     using static nfunc;
-    
+    using static constant;
 
     /// <summary>
-    /// Captures evidence that k:K => k != 0
+    /// Captures evidence that k != 0
     /// </summary>
     /// <typeparam name="K">A nonzero natural type</typeparam>
     public readonly struct Nonzero<K> : INatNonZero<K>
         where K: unmanaged, ITypeNat
     {
-        static readonly K k = default;
-        static readonly string description = $"{k} != 0";
-    
+        static K k => default;
+        
+        public static string Description => $"{k} != 0";
 
+        [MethodImpl(Inline)]
         public Nonzero(K n)
-            => valid = demand(n.NatValue != 0);
-        
-        public bool valid {get;}
-
-        public string format()
-            => valid ? description: $"INVALID({description})";    
-        
+        {
+            demand(n.NatValue != 0);
+        }
+            
         public override string ToString()
-            => format();
-
+            => Description;
     }
 
 }

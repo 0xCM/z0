@@ -28,7 +28,7 @@ partial class zfunc
     public static NatVal natval<T0,T1>(T0 t0 = default, T1 t1 = default) 
         where T0 : unmanaged, INatPrimitive<T0>
         where T1 : unmanaged, INatPrimitive<T1>
-            => NatMath.natval<T0,T1>(); 
+            => NatMath.natseq<T0,T1>(); 
 
     [MethodImpl(Inline)]   
     public static NatSeq<T0,T1> natseq<T0,T1>(T0 t0 = default, T1 t1 = default)

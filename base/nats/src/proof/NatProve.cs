@@ -5,20 +5,13 @@
 namespace Z0
 {
     using System;
-    using System.Numerics;
-    using System.Collections.Generic;
-    using System.Reflection;
-    using System.Linq;
     using System.Runtime.CompilerServices;
 
     using static nfunc;
-    //using static zfunc;
     using static constant;    
 
-    public static partial class NatProve
+    partial class NatProve
     {
-        //const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;        
-
         /// <summary>
         /// Registers natural constraint failure
         /// </summary>
@@ -29,7 +22,11 @@ namespace Z0
         [MethodImpl(Inline)]   
         static bool failure<K>(string name, uint value, bool raise = true)
             where K : unmanaged, ITypeNat
-            => raise ? throw new DemandException("eq", value, natu<K>())  : false;
+        {
+            if(raise) 
+                DemandException.Throw("eq", value, natu<K>());
+            return false;
+        }
 
         /// <summary>
         /// Registers a natural constraint failure
@@ -42,7 +39,11 @@ namespace Z0
         [MethodImpl(Inline)]   
         static T failure<K,T>(string name, T value, bool raise = true)
             where K : unmanaged, ITypeNat
-                => raise ? throw new DemandException("eq", value, natu<K>())  : value;
+        {
+            if(raise) 
+                DemandException.Throw("eq", value, natu<K>());
+            return value;        
+        }
    
         /// <summary>
         /// Registers a natural pair constraint failure
@@ -55,6 +56,10 @@ namespace Z0
         static bool failure<K1,K2>(string name, bool raise = true)
             where K1 : unmanaged, ITypeNat
             where K2 : unmanaged, ITypeNat
-                => raise ? throw new DemandException(name, Nat.pair<K1,K2>()) : false;
+        {
+            if(raise)
+                DemandException.Throw(name, Nat.pair<K1,K2>());
+            return false;
+        } 
     }
 }

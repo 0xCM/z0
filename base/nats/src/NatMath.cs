@@ -5,204 +5,218 @@
 namespace Z0
 {        
     using System;
-    using System.Linq;
-    using System.ComponentModel;
     using System.Runtime.CompilerServices;
-
  
     using static constant;
 
-
     public static class NatMath
-    {
-        
+    {        
+        [MethodImpl(Inline)]
+        public static NatVal natval<K>(K n = default)
+            where K : unmanaged, ITypeNat
+                => NatVal.From(default(K).NatValue);
+
         /// <summary>
         /// For k1 % k2 = 0, computes k := k1 / k2
         /// </summary>
-        /// <param name="k1"></param>
-        /// <param name="k2"></param>
-        /// <typeparam name="K1"></typeparam>
-        /// <typeparam name="K2"></typeparam>
-        /// <returns></returns>
         [MethodImpl(Inline)]
         public static NatVal multiples<K1,K2>(K1 k1 = default, K2 k2 = default)
             where K1 : unmanaged, ITypeNat<K1>, INatDivisible<K1,K2>
             where K2 : unmanaged, ITypeNat<K2>
                 => NatVal.From(natval(k1) / natval(k2));
-        
-        [MethodImpl(Inline)]
-        public static NatVal natval<N>(N n = default)
-            where N : unmanaged, ITypeNat
-                => NatVal.From(natval0<N>());
 
         [MethodImpl(Inline)]
-        public static NatVal add<T0,T1>(T0 n0 = default, T1 n1 = default)
-            where T0 : unmanaged, ITypeNat
-            where T1 : unmanaged, ITypeNat
-                => NatVal.From(natval0<T0>() + natval0<T1>());
+        public static NatVal add<K1,K2>(K1 k1 = default, K2 k2 = default)
+            where K1 : unmanaged, ITypeNat
+            where K2 : unmanaged, ITypeNat
+                => NatVal.From(natval(k1) + natval(k2));
 
         [MethodImpl(Inline)]
-        public static NatVal sub<T0,T1>(T0 a = default, T1 b = default)
-            where T0 : unmanaged, ITypeNat
-            where T1 : unmanaged, ITypeNat
-                => NatVal.From(natval0<T0>() - natval0<T1>());
+        public static NatVal sub<K1,K2>(K1 k1 = default, K2 k2 = default)
+            where K1 : unmanaged, ITypeNat
+            where K2 : unmanaged, ITypeNat
+                => NatVal.From(natval(k1) + natval(k2));
 
         [MethodImpl(Inline)]
-        public static NatVal mul<T0,T1>(T0 a = default, T1 b = default)
-            where T0 : unmanaged, ITypeNat
-            where T1 : unmanaged, ITypeNat
-                => NatVal.From(natval0<T0>() * natval0<T1>());
+        public static NatVal mul<K1,K2>(K1 k1 = default, K2 k2 = default)
+            where K1 : unmanaged, ITypeNat
+            where K2 : unmanaged, ITypeNat
+                => NatVal.From(natval(k1) * natval(k2));
 
         [MethodImpl(Inline)]
-        public static NatVal mul<T0,T1,T2>(T0 a = default, T1 b = default, T2 c = default)
-            where T0 : unmanaged, ITypeNat
-            where T1 : unmanaged, ITypeNat
-            where T2 : unmanaged, ITypeNat
-                => NatVal.From(natval0<T0>() * natval0<T1>());
+        public static NatVal mul<K1,K2,K3>(K1 k1 = default, K2 k2 = default, K3 k3 = default)
+            where K1 : unmanaged, ITypeNat
+            where K2 : unmanaged, ITypeNat
+            where K3 : unmanaged, ITypeNat
+                => NatVal.From(natval(k1) * natval(k2) * natval(k3));
 
         [MethodImpl(Inline)]
-        public static NatVal div<T0,T1>(T0 a = default, T1 b = default)
-            where T0 : unmanaged, ITypeNat
-            where T1 : unmanaged, ITypeNat
-                => NatVal.From(natval0<T0>() / natval0<T1>());
+        public static NatVal div<K1,K2>(K1 k1 = default, K2 k2 = default)
+            where K1 : unmanaged, ITypeNat
+            where K2 : unmanaged, ITypeNat
+                => NatVal.From(natval<K1>() / natval<K2>());
 
         /// <summary>
         /// Computes the quotient z of a product, z := a*b / c
         /// </summary>
         [MethodImpl(Inline)]
-        public static NatVal divprod<T0,T1,T2>(T0 a = default, T1 b = default, T2 c = default)
-            where T0 : unmanaged, ITypeNat
-            where T1 : unmanaged, ITypeNat
-            where T2 : unmanaged, ITypeNat
-                => NatVal.From(mul(a,b) / natval(c));
-
-
-        [MethodImpl(Inline)]
-        public static NatVal mod<T0,T1>(T0 a = default, T1 b = default)
-            where T0 : unmanaged, ITypeNat
-            where T1 : unmanaged, ITypeNat
-                => NatVal.From(natval0<T0>() % natval0<T1>());
+        public static NatVal divprod<K1,K2,K3>(K1 k1 = default, K2 k2 = default, K3 k3 = default)
+            where K1 : unmanaged, ITypeNat
+            where K2 : unmanaged, ITypeNat
+            where K3 : unmanaged, ITypeNat
+                => NatVal.From(mul(k1,k2) / natval(k3));
 
         /// <summary>
-        /// Computes the modulus z of a product, z := a*b % c
+        /// Computes k := k1 % k2
         /// </summary>
         [MethodImpl(Inline)]
-        public static NatVal modprod<T0,T1,T2>(T0 a = default, T1 b = default, T2 c = default)
-            where T0 : unmanaged, ITypeNat
-            where T1 : unmanaged, ITypeNat
-            where T2 : unmanaged, ITypeNat
-                => NatVal.From(mul(a,b) % natval(c));
+        public static NatVal mod<K1,K2>(K1 k1 = default, K2 k2 = default)
+            where K1 : unmanaged, ITypeNat
+            where K2 : unmanaged, ITypeNat
+                => NatVal.From(natval(k1) % natval(k2));
 
+        /// <summary>
+        /// Computes a := k % 2 == 0
+        /// </summary>
+        [MethodImpl(Inline)]
+        public static bool even<K>(K k = default)
+            where K : unmanaged, ITypeNat
+                => natval(k) % 2 == 0;
+
+        /// <summary>
+        /// Computes a := k % 2 != 0
+        /// </summary>
+        [MethodImpl(Inline)]
+        public static bool odd<K>(K k = default)
+            where K : unmanaged, ITypeNat
+                => natval(k) % 2 != 0;
+
+        /// <summary>
+        /// Computes z := a*b % c
+        /// </summary>
+        [MethodImpl(Inline)]
+        public static NatVal modprod<K1,K2,K3>(K1 k1 = default, K2 k2 = default, K3 k3 = default)
+            where K1 : unmanaged, ITypeNat
+            where K2 : unmanaged, ITypeNat
+            where K3 : unmanaged, ITypeNat
+                => NatVal.From(mul(k1,k2) % natval(k3));
 
         [MethodImpl(Inline)]
-        public static NatVal and<T0,T1>(T0 n0 = default, T1 n1 = default)
-            where T0 : unmanaged, ITypeNat
-            where T1 : unmanaged, ITypeNat
-                => NatVal.From(natval0<T0>() & natval0<T1>());
+        public static NatVal and<K1,K2>(K1 k1 = default, K2 k2 = default)
+            where K1 : unmanaged, ITypeNat
+            where K2 : unmanaged, ITypeNat
+                => NatVal.From(natval(k1) & natval(k2));
 
         [MethodImpl(Inline)]
-        public static NatVal or<T0,T1>(T0 n0 = default, T1 n1 = default)
-            where T0 : unmanaged, ITypeNat
-            where T1 : unmanaged, ITypeNat
-                => NatVal.From(natval0<T0>() | natval0<T1>());
+        public static NatVal or<K1,K2>(K1 k1 = default, K2 k2 = default)
+            where K1 : unmanaged, ITypeNat
+            where K2 : unmanaged, ITypeNat
+                => NatVal.From(natval(k2) | natval(k2));
 
         [MethodImpl(Inline)]
-        public static NatVal xor<T0,T1>(T0 n0 = default, T1 n1 = default)
-            where T0 : unmanaged, ITypeNat
-            where T1 : unmanaged, ITypeNat
-                => NatVal.From(natval0<T0>() ^ natval0<T1>());
+        public static NatVal xor<K1,K2>(K1 k1 = default, K2 k2 = default)
+            where K1 : unmanaged, ITypeNat
+            where K2 : unmanaged, ITypeNat
+                => NatVal.From(natval(k1) ^ natval(k2));
 
         [MethodImpl(Inline)]
-        public static NatVal not<T0>(T0 n0 = default)
-            where T0 : unmanaged, ITypeNat
-                => NatVal.From(~natval0<T0>());
+        public static NatVal not<K1>(K1 k1 = default)
+            where K1 : unmanaged, ITypeNat
+                => NatVal.From(~ natval(k1));
 
         [MethodImpl(Inline)]
-        public static NatVal sll<T0,T1>(T0 n0 = default, T1 n1 = default)
-            where T0 : unmanaged, ITypeNat
-            where T1 : unmanaged, ITypeNat
-                => NatVal.From(natval0<T0>() << (int)natval0<T1>());
+        public static NatVal sll<K1,K2>(K1 k1 = default, K2 k2 = default)
+            where K1 : unmanaged, ITypeNat
+            where K2 : unmanaged, ITypeNat
+                => NatVal.From(natval(k1) << natval(k2));
 
         [MethodImpl(Inline)]
-        public static NatVal srl<T0,T1>(T0 n0 = default, T1 n1 = default)
-            where T0 : unmanaged, ITypeNat
-            where T1 : unmanaged, ITypeNat
-                => NatVal.From(natval0<T0>() >> (int)natval0<T1>());
+        public static NatVal srl<K1,K2>(K1 k1 = default, K2 k2 = default)
+            where K1 : unmanaged, ITypeNat
+            where K2 : unmanaged, ITypeNat
+                => NatVal.From(natval(k1) >> natval(k2));
 
         /// <summary>
         /// Applies a logical left-shift to a natural product: result := a*b << offset
         /// </summary>
         [MethodImpl(Inline)]
-        public static NatVal sllprod<T0,T1,T2>(T0 a = default, T1 b = default, T2 offset = default)
-            where T0 : unmanaged, ITypeNat
-            where T1 : unmanaged, ITypeNat
-            where T2 : unmanaged, ITypeNat
-                => NatVal.From(mul<T0,T1>() << (int)natval0<T2>());
+        public static NatVal sllprod<K1,K2,K3>(K1 k1 = default, K2 k2 = default, K3 shift = default)
+            where K1 : unmanaged, ITypeNat
+            where K2 : unmanaged, ITypeNat
+            where K3 : unmanaged, ITypeNat
+                => NatVal.From(mul(k1,k2) << natval(shift));
 
         /// <summary>
-        /// Applies a logical right-shift to a natural product: result := a*b >> offset
+        /// Computes := a*b >> offset
         /// </summary>
         [MethodImpl(Inline)]
-        public static NatVal srlprod<T0,T1,T2>(T0 a = default, T1 b = default, T2 offset = default)
-            where T0 : unmanaged, ITypeNat
-            where T1 : unmanaged, ITypeNat
-            where T2 : unmanaged, ITypeNat
-                => NatVal.From(mul<T0,T1>() >> (int)natval0<T2>());
+        public static NatVal srlprod<K1,K2,K3>(K1 k1 = default, K2 k2 = default, K3 shift = default)
+            where K1 : unmanaged, ITypeNat
+            where K2 : unmanaged, ITypeNat
+            where K3 : unmanaged, ITypeNat
+                => NatVal.From(mul(k1,k2) >> natval(shift));
 
         [MethodImpl(Inline)]
-        public static bool eq<T0,T1>(T0 n0 = default, T1 n1 = default)
-            where T0 : unmanaged, ITypeNat
-            where T1 : unmanaged, ITypeNat
-                => natval0<T0>() == natval0<T1>();
+        public static bool eq<K1,K2>(K1 k1 = default, K2 k2 = default)
+            where K1 : unmanaged, ITypeNat
+            where K2 : unmanaged, ITypeNat
+                => natval(k1) == natval(k2);
 
         [MethodImpl(Inline)]
-        public static bool lt<T0,T1>(T0 n0 = default, T1 n1 = default)
-            where T0 : unmanaged, ITypeNat
-            where T1 : unmanaged, ITypeNat
-                => natval0<T0>() < natval0<T1>();
+        public static bool lt<K1,K2>(K1 k1 = default, K2 k2 = default)
+            where K1 : unmanaged, ITypeNat
+            where K2 : unmanaged, ITypeNat
+                => natval(k1) < natval(k2);
 
         [MethodImpl(Inline)]
-        public static bool lteq<T0,T1>(T0 n0 = default, T1 n1 = default)
-            where T0 : unmanaged, ITypeNat
-            where T1 : unmanaged, ITypeNat
-                => natval0<T0>() <= natval0<T1>();
+        public static bool lteq<K1,K2>(K1 k1 = default, K2 k2 = default)
+            where K1 : unmanaged, ITypeNat
+            where K2 : unmanaged, ITypeNat
+                => natval(k1) <= natval(k2);
 
         [MethodImpl(Inline)]
-        public static bool gt<T0,T1>(T0 n0 = default, T1 n1 = default)
-            where T0 : unmanaged, ITypeNat
-            where T1 : unmanaged, ITypeNat
-                => natval0<T0>() > natval0<T1>();
+        public static bool gt<K1,K2>(K1 k1 = default, K2 k2 = default)
+            where K1 : unmanaged, ITypeNat
+            where K2 : unmanaged, ITypeNat
+                => natval(k1) > natval(k2);
 
         [MethodImpl(Inline)]
-        public static bool gteq<T0,T1>(T0 n0 = default, T1 n1 = default)
-            where T0 : unmanaged, ITypeNat
-            where T1 : unmanaged, ITypeNat
-                => natval0<T0>() >= natval0<T1>();
-                
+        public static bool gteq<K1,K2>(K1 k1 = default, K2 k2 = default)
+            where K1 : unmanaged, ITypeNat
+            where K2 : unmanaged, ITypeNat
+                => natval(k1) >= natval(k2);
+
         [MethodImpl(Inline)]
-        public static T rotr<T,T0,T1>()
+        public static bool between<K,K1,K2>(K k = default, K1 k1 = default, K2 k2 = default)
+            where K : unmanaged, ITypeNat
+            where K1 : unmanaged, ITypeNat
+            where K2 : unmanaged, ITypeNat
+                => gteq(k,k1) && lteq(k,k2);
+
+        [MethodImpl(Inline)]
+        public static T rotr<T,K1,K2>(K1 k1 = default, K2 k2 = default, T zero = default)
             where T : unmanaged
-            where T0 : unmanaged, ITypeNat
-            where T1 : unmanaged, ITypeNat
+            where K1 : unmanaged, ITypeNat
+            where K2 : unmanaged, ITypeNat
         {
             if(typeof(T) == typeof(byte))
             {
-                var result = (byte)rotrN<N8,T0,T1>();
+                var result = (byte)rotrN<N8,K1,K2>();
                 return Unsafe.As<byte,T>(ref result);
             }
             else if(typeof(T) == typeof(ushort))
             {
-                var result = (ushort)rotrN<N16,T0,T1>();
+                var result = (ushort)rotrN<N16,K1,K2>();
                 return Unsafe.As<ushort,T>(ref result);
             }
             else if(typeof(T) == typeof(uint))
             {
-                var result = (uint)rotrN<N32,T0,T1>();
+                var result = (uint)rotrN<N32,K1,K2>();
                 return Unsafe.As<uint,T>(ref result);
             }
             else if(typeof(T) == typeof(ulong))
             {
-                var result = (ulong)rotrN<N64,T0,T1>();
+                var result = (ulong)rotrN<N64,K1,K2>();
                 return Unsafe.As<ulong,T>(ref result);
             }
             else
@@ -210,193 +224,49 @@ namespace Z0
         }
 
         /// <summary>
-        /// Computes 2^n
+        /// Computes z := 2^n
         /// </summary>
-        /// <param name="n"></param>
-        /// <typeparam name="N"></typeparam>
-        /// <returns></returns>
         [MethodImpl(Inline)]
         public static NatVal pow2<N>(N n = default)
             where N : unmanaged, ITypeNat
-                => NatVal.From(1ul << (int)natval0<N>());
+                => NatVal.From(1ul << natval(n));
 
         [MethodImpl(Inline)]
-        static ulong rotrN<B,T0,T1>()
-            where B : unmanaged, ITypeNat
-            where T0 : unmanaged, ITypeNat
-            where T1 : unmanaged, ITypeNat
-        {
-            var x = srl<T0,T1>();
-            var sr = sub<B,T1>();
-            return srl<T0,T1>() |  ((ulong)natval0<T0>() << sub<B,T1>());
-        }
+        static ulong rotrN<K3,K1,K2>(K1 k1 = default, K2 k2 = default, K3 k3 = default)
+            where K3 : unmanaged, ITypeNat
+            where K1 : unmanaged, ITypeNat
+            where K2 : unmanaged, ITypeNat
+                => (ulong)srl(k1,k2) |  ((ulong)natval(k1) << sub(k3,k2));
 
         [MethodImpl(Inline)]
-        public static NatVal natval<T0,T1>(T0 n0 = default, T1 n1 = default)
-            where T0 : unmanaged, INatPrimitive<T0>
-            where T1 : unmanaged, INatPrimitive<T1>
-                => NatVal.From(10*natval0<T0>() + natval0<T1>());
+        public static NatVal natseq<K1,K2>(K1 k1 = default, K2 k2 = default)
+            where K1 : unmanaged, INatPrimitive<K1>
+            where K2 : unmanaged, INatPrimitive<K2>
+                => NatVal.From(NatSeq<K1,K2>.Value);
 
         [MethodImpl(Inline)]
-        public static NatVal natval<T0,T1,T2>(T0 n0 = default, T1 n1 = default, T2 n2 = default)
-            where T0 : unmanaged, INatPrimitive<T0>
-            where T1 : unmanaged, INatPrimitive<T1>
-            where T2 : unmanaged, INatPrimitive<T2>
-                => NatVal.From(100*natval0<T0>() + 10*natval0<T1>() + natval0<T2>());
+        public static NatVal natseq<K1,K2,K3>(K1 k1 = default, K2 k2 = default, K3 k3 = default)
+            where K1 : unmanaged, INatPrimitive<K1>
+            where K2 : unmanaged, INatPrimitive<K2>
+            where K3 : unmanaged, INatPrimitive<K3>
+                => NatVal.From(NatSeq<K1,K2,K3>.Value);
 
         [MethodImpl(Inline)]
-        public static NatVal natval<T0,T1,T2,T3>(T0 n0 = default, T1 n1 = default, T2 n2 = default, T3 n3 = default)
-            where T0 : unmanaged, INatPrimitive<T0>
-            where T1 : unmanaged, INatPrimitive<T1>
-            where T2 : unmanaged, INatPrimitive<T2>
-            where T3 : unmanaged, INatPrimitive<T3>        
-                => NatVal.From(1000*natval0<T0>() + 100*natval0<T1>() + 10*natval0<T2>() + natval0<T3>());
+        public static NatVal natseq<K1,K2,K3,K4>(K1 k1 = default, K2 k2 = default, K3 k3 = default, K4 k4 = default)
+            where K1 : unmanaged, INatPrimitive<K1>
+            where K2 : unmanaged, INatPrimitive<K2>
+            where K3 : unmanaged, INatPrimitive<K3>
+            where K4 : unmanaged, INatPrimitive<K4>        
+                => NatVal.From(NatSeq<K1,K2,K3,K4>.Value);
         
         [MethodImpl(Inline)]
-        public static NatVal natval<T0,T1,T2,T3,T4>(T0 n0 = default, T1 n1 = default, T2 n2 = default, T3 n3 = default, T4 n4 = default)
-            where T0 : unmanaged, INatPrimitive<T0>
-            where T1 : unmanaged, INatPrimitive<T1>
-            where T2 : unmanaged, INatPrimitive<T2>
-            where T3 : unmanaged, INatPrimitive<T3>
-            where T4 : unmanaged, INatPrimitive<T4>
-                => NatVal.From(10000*natval0<T0>() + 1000*natval0<T1>() + 100*natval0<T2>() + 10*natval0<T3>() + natval0<T4>());
-
-    
-        [MethodImpl(Inline)]
-        static ulong natval0<N>()
-            where N : unmanaged, ITypeNat
-        {
-            if(typeof(N) == typeof(N0))
-                return 0;
-            else if(typeof(N) == typeof(N1))
-                return 1;
-            else if(typeof(N) == typeof(N2))
-                return 2;
-            else if (typeof(N) == typeof(N3))
-                return 3;
-            else if (typeof(N) == typeof(N4))
-                return 4;
-            else if (typeof(N) == typeof(N5))
-                return 5;
-            else if (typeof(N) == typeof(N6))
-                return 6;
-            else if (typeof(N) == typeof(N7))
-                return 7;
-            else if (typeof(N) == typeof(N8))
-                return 8;
-            else if (typeof(N) == typeof(N9))
-                return 9;
-            else 
-                return natval10<N>();
-        }
-
-        [MethodImpl(Inline)]
-        static ulong natval10<N>()
-            where N : unmanaged, ITypeNat
-        {
-            if(typeof(N) == typeof(N10))
-                return 10;
-            else if(typeof(N) == typeof(N11))
-                return 11;
-            else if(typeof(N) == typeof(N12))
-                return 12;
-            else if (typeof(N) == typeof(N13))
-                return 13;
-            else if (typeof(N) == typeof(N14))
-                return 14;
-            else if (typeof(N) == typeof(N15))
-                return 15;
-            else if (typeof(N) == typeof(N16))
-                return 16;
-            else if (typeof(N) == typeof(N17))
-                return 17;
-            else if (typeof(N) == typeof(N18))
-                return 18;
-            else if (typeof(N) == typeof(N19))
-                return 19;
-            else 
-                return natval20<N>();
-        }
-
-        [MethodImpl(Inline)]
-        static ulong natval20<N>()
-            where N : unmanaged, ITypeNat
-        {
-            if(typeof(N) == typeof(N20))
-                return 20;
-            else if(typeof(N) == typeof(N21))
-                return 21;
-            else if(typeof(N) == typeof(N22))
-                return 22;
-            else if (typeof(N) == typeof(N23))
-                return 23;
-            else if (typeof(N) == typeof(N24))
-                return 24;
-            else if (typeof(N) == typeof(N25))
-                return 25;
-            else if (typeof(N) == typeof(N26))
-                return 26;
-            else if (typeof(N) == typeof(N27))
-                return 27;
-            else if (typeof(N) == typeof(N28))
-                return 28;
-            else if (typeof(N) == typeof(N29))
-                return 29;
-            else 
-                return natval30<N>();
-        }
-
-        [MethodImpl(Inline)]
-        static ulong natval30<N>()
-            where N : unmanaged, ITypeNat
-        {
-            if(typeof(N) == typeof(N30))
-                return 30;
-            else if(typeof(N) == typeof(N31))
-                return 31;
-            else 
-                return natpow2_32<N>();
-        }
-
-        [MethodImpl(Inline)]
-        static ulong natpow2_32<N>()
-            where N : unmanaged, ITypeNat
-        {
-            if(typeof(N) == typeof(N32))
-                return 32;
-            else if(typeof(N) == typeof(N64))
-                return 64;
-            else if(typeof(N) == typeof(N128))
-                return 128;
-            else if(typeof(N) == typeof(N256))
-                return 256;
-            else if(typeof(N) == typeof(N512))
-                return 512;
-            else if(typeof(N) == typeof(N1024))
-                return 1024;
-            else if(typeof(N) == typeof(N2048))
-                return 2048;
-            else if(typeof(N) == typeof(N4096))
-                return 4096;
-            else 
-                return natpow2_8192<N>();
-                
-        }
-
-        [MethodImpl(Inline)]
-        static ulong natpow2_8192<N>()
-            where N : unmanaged, ITypeNat
-        {
-            if(typeof(N) == typeof(N8192))
-                return 8192;
-            else if(typeof(N) == typeof(N16384))
-                return 16384;
-            else if(typeof(N) == typeof(N32768))
-                return 32768;
-            else 
-                return new N().NatValue;
-        }
-
+        public static NatVal natseq<K1,K2,K3,K4,K5>(K1 k1 = default, K2 k2 = default, K3 k3 = default, K4 k4 = default, K5 k5 = default)
+            where K1 : unmanaged, INatPrimitive<K1>
+            where K2 : unmanaged, INatPrimitive<K2>
+            where K3 : unmanaged, INatPrimitive<K3>
+            where K4 : unmanaged, INatPrimitive<K4>
+            where K5 : unmanaged, INatPrimitive<K5>
+                => NatVal.From(NatSeq<K1,K2,K3,K4,K5>.Value);
     }
 
 }

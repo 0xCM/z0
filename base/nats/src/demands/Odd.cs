@@ -5,36 +5,36 @@
 namespace Z0
 {
     using System;
-    using static nfunc;
+    using System.Runtime.CompilerServices;
 
+    using static nfunc;
+    using static constant;
 
     /// <summary>
-    /// Captures evidence that k:K => k % 2 != 0
+    /// Captures evidence that k % 2 != 0
     /// </summary>
     /// <typeparam name="K">An odd natural type</typeparam>
     public readonly struct NatOdd<K> : INatOdd<K>
         where K: unmanaged, ITypeNat
     {
-        static readonly K k = default;
+        static K k => default;
         
-        static readonly string description = $"{k} % {2} != {0}";
+        public static string Description => $"{k} % {2} != {0}";
         
-        public NatOdd(K n)
-            => valid = demand(n.NatValue % 2 != 0);
+        [MethodImpl(Inline)]
+        public NatOdd(K k)
+        {
+            demand(NatMath.odd(k));
+        }
         
-        public bool valid {get;}
-
         public ulong NatValue 
             => k.NatValue;
 
         public NatSeq Sequence 
             => k.Sequence;
-
-        public string format()
-            => valid ? description: $"INVALID({description})";    
         
         public override string ToString()
-            => format();
+            => Description;
     }
 
 

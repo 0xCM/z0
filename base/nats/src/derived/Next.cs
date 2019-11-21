@@ -15,8 +15,7 @@ namespace Z0
     /// </summary>
     public readonly struct Next<K> : ITypeNat
         where K : unmanaged, ITypeNat
-    {
-        
+    {        
         static K k => default;
 
         public static Next<K> Rep => default;

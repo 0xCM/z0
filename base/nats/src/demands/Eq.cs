@@ -5,34 +5,34 @@
 namespace Z0
 {
     using System;
-    using static nfunc;
+    using System.Runtime.CompilerServices;
 
+    using static nfunc;
+    using static constant;
 
     /// <summary>
-    /// Captures evidence that n1:T1 & n2:T2 => n1 != n2
+    /// Captures evidence that n1 == n2
     /// </summary>
     /// <typeparam name="K1">The first nat type</typeparam>
     /// <typeparam name="N2">The second nat type</typeparam>
-     public readonly struct NatNEq<K1,K2> : INatNEq<K1,K2>
+     public readonly struct NatEq<K1,K2> : INatEq<K1,K2>
         where K1: unmanaged, ITypeNat
         where K2: unmanaged, ITypeNat
     {
-        static readonly K1 k1 = default;
-        static readonly K2 k2 = default;
-        static readonly string description = $"{k1} != {k2}";
+        static K1 k1 => default;
+        static K2 k2 => default;
         
-        public NatNEq(K1 n1, K2 n2)
-            => valid = demand(n1.NatValue != n2.NatValue);
+        public static string Description => $"{k1} == {k2}";
         
-        public bool valid {get;}
-
-        public string format()
-            => valid ? description: $"INVALID({description})";    
+        [MethodImpl(Inline)]
+        public NatEq(K1 k1, K2 k2)
+        {
+            demand(NatMath.eq(k1,k2));
+        }
         
         public override string ToString()
-            => format();
+            => Description;
     }
-
 
 
 }

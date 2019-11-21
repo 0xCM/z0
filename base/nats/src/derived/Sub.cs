@@ -7,25 +7,24 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
+    using static nfunc;
     using static constant;
 
     /// <summary>
     /// Encodes a natural number k := k1 - k2
     /// </summary>
     public readonly struct Sub<K1, K2> : INatSub<Sub<K1,K2>, K1,K2>
-            where K1 : unmanaged, ITypeNat
-            where K2 : unmanaged, ITypeNat
+        where K1 : unmanaged, ITypeNat
+        where K2 : unmanaged, ITypeNat
     {
         static K1 k1 => default;
 
         static K2 k2 => default;
 
-        public static Sub<K1,K2> Rep => default;
+        public static string Description => $"{k1} - {k2} = {Value}";
 
         public static ulong Value
-            => k1.NatValue - k2.NatValue;
-
-        static string description => $"{k1} - {k2} = {Value}";
+            => NatMath.sub(k1,k2);
 
         public static byte[] Digits 
             => digits(Value);
@@ -39,20 +38,14 @@ namespace Z0
         ulong ITypeNat.NatValue 
             => Value;
 
-        public NatSeq natseq()
-            => Seq;
-
         public bool Equals(Pow<K1, K2> other)
             => Value == other.NatValue;
 
         public bool Equals(NatSeq other)
             => Value == other.NatValue;
 
-        public string format()
-            => description;
-
         public override string ToString() 
-            => format();
+            => Description;
 
         public override int GetHashCode()
             => Value.GetHashCode();

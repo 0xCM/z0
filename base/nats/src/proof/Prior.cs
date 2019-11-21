@@ -31,27 +31,12 @@ namespace Z0
                 =>  natu<K1>() == natu<K2>() + 1 ? true : failure<K1,K2>(nameof(successor), raise);
 
         /// <summary>
-        /// Attempts to prove that k1:K1 & k2:K2 => k1 = k2 + 1;
-        /// Signals success by returning evidence
-        /// Signals failure by raising an error
+        /// Attempts construct evidence that k1 = k2 + 1;
         /// </summary>
         /// <typeparam name="K1">The source type</typeparam>
         /// <typeparam name="K2">The successor type</typeparam>
         [MethodImpl(Inline)]   
-        public static NatPrior<K1,K2> prior<K1,K2>()
-            where K1: unmanaged, ITypeNat
-            where K2: unmanaged, ITypeNat
-                => new NatPrior<K1,K2>(natrep<K1>(),natrep<K2>());                             
-
-        /// <summary>
-        /// Attempts to prove that k1:K1 & k2:K2 => k1 = k2 + 1;
-        /// Signals success by returning evidence
-        /// Signals failure by raising an error
-        /// </summary>
-        /// <typeparam name="K1">The source type</typeparam>
-        /// <typeparam name="K2">The successor type</typeparam>
-        [MethodImpl(Inline)]   
-        public static NatPrior<K1,K2> prior<K1,K2>(K1 k1, K2 k2)
+        public static NatPrior<K1,K2> prior<K1,K2>(K1 k1 = default, K2 k2 = default)
             where K1: unmanaged, ITypeNat
             where K2: unmanaged, ITypeNat
                 => new NatPrior<K1,K2>(k1,k2);                             

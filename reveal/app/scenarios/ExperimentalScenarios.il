@@ -1,4 +1,4 @@
-// 2019-11-21 00:45:01:882
+// 2019-11-21 12:21:37:976
 Span<byte> GetBytes(in int src)
 {
     IL_0000: ldarg.1
@@ -53,7 +53,7 @@ int natseq2()
     IL_0009: ldloca.s V_1
     IL_000B: initobj Z0.N7
     IL_0011: ldloc.1
-    IL_0012: call Z0.NatVal Z0.NatMath::natval<Z0.N3,Z0.N7>(Z0.N3,Z0.N7)
+    IL_0012: call Z0.NatVal Z0.NatMath::natseq<Z0.N3,Z0.N7>(Z0.N3,Z0.N7)
     IL_0017: call System.Int32 Z0.NatVal::op_Implicit(Z0.NatVal)
     IL_001C: ret
 
@@ -69,7 +69,7 @@ int natseq3()
     IL_0012: ldloca.s V_2
     IL_0014: initobj Z0.N1
     IL_001A: ldloc.2
-    IL_001B: call Z0.NatVal Z0.NatMath::natval<Z0.N3,Z0.N7,Z0.N1>(Z0.N3,Z0.N7,Z0.N1)
+    IL_001B: call Z0.NatVal Z0.NatMath::natseq<Z0.N3,Z0.N7,Z0.N1>(Z0.N3,Z0.N7,Z0.N1)
     IL_0020: call System.Int32 Z0.NatVal::op_Implicit(Z0.NatVal)
     IL_0025: ret
 
@@ -88,7 +88,7 @@ int natseq4()
     IL_001B: ldloca.s V_3
     IL_001D: initobj Z0.N4
     IL_0023: ldloc.3
-    IL_0024: call Z0.NatVal Z0.NatMath::natval<Z0.N1,Z0.N0,Z0.N2,Z0.N4>(Z0.N1,Z0.N0,Z0.N2,Z0.N4)
+    IL_0024: call Z0.NatVal Z0.NatMath::natseq<Z0.N1,Z0.N0,Z0.N2,Z0.N4>(Z0.N1,Z0.N0,Z0.N2,Z0.N4)
     IL_0029: call System.Int32 Z0.NatVal::op_Implicit(Z0.NatVal)
     IL_002E: ret
 
@@ -196,26 +196,55 @@ ulong srl()
 }
 ulong rotr64u()
 {
-    IL_0000: call System.UInt64 Z0.NatMath::rotr<System.UInt64,Z0.N1024,Z0.N8>()
-    IL_0005: ret
+    IL_0000: ldloca.s V_0
+    IL_0002: initobj Z0.N1024
+    IL_0008: ldloc.0
+    IL_0009: ldloca.s V_1
+    IL_000B: initobj Z0.N8
+    IL_0011: ldloc.1
+    IL_0012: ldc.i4.0
+    IL_0013: conv.i8
+    IL_0014: call System.UInt64 Z0.NatMath::rotr<System.UInt64,Z0.N1024,Z0.N8>(Z0.N1024,Z0.N8,System.UInt64)
+    IL_0019: ret
 
 }
 byte rotr8u_1()
 {
-    IL_0000: call System.Byte Z0.NatMath::rotr<System.Byte,Z0.N128,Z0.N1>()
-    IL_0005: ret
+    IL_0000: ldloca.s V_0
+    IL_0002: initobj Z0.N128
+    IL_0008: ldloc.0
+    IL_0009: ldloca.s V_1
+    IL_000B: initobj Z0.N1
+    IL_0011: ldloc.1
+    IL_0012: ldc.i4.0
+    IL_0013: call System.Byte Z0.NatMath::rotr<System.Byte,Z0.N128,Z0.N1>(Z0.N128,Z0.N1,System.Byte)
+    IL_0018: ret
 
 }
 byte rotr8u_2()
 {
-    IL_0000: call System.Byte Z0.NatMath::rotr<System.Byte,Z0.N128,Z0.N2>()
-    IL_0005: ret
+    IL_0000: ldloca.s V_0
+    IL_0002: initobj Z0.N128
+    IL_0008: ldloc.0
+    IL_0009: ldloca.s V_1
+    IL_000B: initobj Z0.N2
+    IL_0011: ldloc.1
+    IL_0012: ldc.i4.0
+    IL_0013: call System.Byte Z0.NatMath::rotr<System.Byte,Z0.N128,Z0.N2>(Z0.N128,Z0.N2,System.Byte)
+    IL_0018: ret
 
 }
 byte rotr8u_3()
 {
-    IL_0000: call System.Byte Z0.NatMath::rotr<System.Byte,Z0.N128,Z0.N3>()
-    IL_0005: ret
+    IL_0000: ldloca.s V_0
+    IL_0002: initobj Z0.N128
+    IL_0008: ldloc.0
+    IL_0009: ldloca.s V_1
+    IL_000B: initobj Z0.N3
+    IL_0011: ldloc.1
+    IL_0012: ldc.i4.0
+    IL_0013: call System.Byte Z0.NatMath::rotr<System.Byte,Z0.N128,Z0.N3>(Z0.N128,Z0.N3,System.Byte)
+    IL_0018: ret
 
 }
 Vec256<ulong> perm4x64_256x64(Vec256<ulong> src)

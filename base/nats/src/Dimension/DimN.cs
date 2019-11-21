@@ -15,7 +15,6 @@ namespace Z0
     {
         public readonly ulong I;
 
-
         public static implicit operator DimInfo(Dim1 src)
             => new DimInfo(src.Order, new ulong[]{src.I}, src.Volume);
 
@@ -76,8 +75,5 @@ namespace Z0
  
         public override string ToString()
             => Format();
-
     }
-
-
 }

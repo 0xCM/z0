@@ -5,11 +5,13 @@
 namespace Z0
 {
     using System;
-    using static nfunc;
+    using System.Runtime.CompilerServices;
 
+    using static nfunc;
+    using static constant;
     
     /// <summary>
-    /// Captures evidence that k1:K1, k2:K2 => k1 > k2
+    /// Captures evidence that k1 > k2
     /// </summary>
     /// <typeparam name="K1">The larger nat type</typeparam>
     /// <typeparam name="K2">The smaller nat type</typeparam>
@@ -17,20 +19,20 @@ namespace Z0
         where K1: unmanaged, ITypeNat
         where K2: unmanaged, ITypeNat
     {
-        static readonly K1 k1 = default;
-        static readonly K2 k2 = default;
-        static readonly string description = $"{k1} > {k2}";
+        static K1 k1 => default;
 
-        public NatGt(K1 n1, K2 n2)
-                => valid = demand(n1.NatValue > n2.NatValue);
+        static K2 k2 => default;
+
+        public static string Description => $"{k1} > {k2}";
+
+        [MethodImpl(Inline)]
+        public NatGt(K1 k1, K2 k2)
+        {
+            demand(NatMath.gt(k1,k2));
+        }
         
-        public bool valid {get;}
-  
-        public string format()
-            => valid ? description : $"INVALID({description})";    
         
         public override string ToString()
-            => format();
-
+            => Description;
     }
  }

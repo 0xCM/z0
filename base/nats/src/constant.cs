@@ -7,9 +7,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
 
-using Z0;
-
-
 internal static class constant
 {
     public const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;
@@ -20,6 +17,14 @@ internal static class constant
     /// <param name="src">The source value</param>
     [MethodImpl(MethodImplOptions.NoInlining)]
     public static byte[] digits(ulong src)
-        => src.ToString().Select(c => byte.Parse(c.ToString())).ToArray();
+    {
+        var text = src.ToString();
+        var chars = new byte[text.Length];
+        for(var i=0; i<text.Length; i++)
+            chars[i] = byte.Parse(text[i].ToString());                
+        return chars;
+        //=> src.ToString().Select(c => byte.Parse(c.ToString())).ToArray();   
+    }
+
 
 }

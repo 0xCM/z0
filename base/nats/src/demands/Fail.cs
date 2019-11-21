@@ -8,9 +8,14 @@ namespace Z0
     using System.Linq;
     using System.Collections.Generic; 
 
-
     public class DemandException : Exception
-    {
+    {        
+        public static void Throw(string constraint, object expect, object actual)
+            => throw new DemandException(constraint, expect, actual);
+
+        public static void Throw(string constraint, (ulong x, ulong y) relation)
+            => throw new DemandException(constraint, relation);
+
         public string Expect {get;}
         
         public string Actual{get;}
@@ -31,7 +36,7 @@ namespace Z0
             this.Actual = string.Empty;
         }
 
-        public DemandException(string constraint, (ulong x, ulong y) relation )
+        public DemandException(string constraint, (ulong x, ulong y) relation)
         {
             this.Constraint = constraint;
             this.Expect = $"({relation.x}, {relation.y})";            
@@ -42,7 +47,5 @@ namespace Z0
             => Actual != string.Empty 
              ? $"Natural number {Constraint} failed. Expected: {Expect} | Actual: {Actual}"
              : $"Natural invariant {Constraint} failed: {Expect}";
-
     }
-
 }

@@ -24,51 +24,43 @@ namespace Z0
 
         public ITypeNat Rhs {get;}
 
-        NatSeq ITypeNat.Sequence
+        public NatSeq Sequence
             => Rep.Sequence;
 
-        ulong ITypeNat.NatValue
+        public ulong NatValue
             => Rep.NatValue;
-
-
     }
+    
     /// <summary>
-    /// Encodes a natural number k such that k1:K1 & k2:K2 => k = k1 + k2
+    /// Encodes a natural number k := k1 + k2
     /// </summary>
     public readonly struct NatSum<K1, K2> : INatSum<K1,K2>
-            where K1 : unmanaged, ITypeNat
-            where K2 : unmanaged, ITypeNat
+        where K1 : unmanaged, ITypeNat
+        where K2 : unmanaged, ITypeNat
     {
         static K1 k1 => default;
 
         static K2 k2 => default;
 
         public static NatSum<K1,K2> Rep => default;
-
         
-        public static ulong Value => k1.NatValue + k2.NatValue;
+        public static ulong Value => NatMath.add(k1,k2);
 
         static string description => $"{k1} + {k2} = {Value}";
 
-        public static byte[] Digits  => digits(Value);
+        public static byte[] Digits => digits(Value);
 
         public static NatSeq Seq => Nat.reflect(Digits);
 
         [MethodImpl(Inline)]
         public static implicit operator int(NatSum<K1,K2> src)
-            => (int)src.value;
+            => (int)src.NatValue;
 
         NatSeq ITypeNat.Sequence
             => Seq;
 
-        ulong ITypeNat.NatValue 
-            => Value;
-
-        public ulong value 
-            => Value;
-
-        public NatSeq natseq()
-            => Seq;
+        public ulong NatValue 
+            => NatMath.add(k1,k2);
 
         public bool Equals(Pow<K1, K2> other)
             => Value == other.NatValue;

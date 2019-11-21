@@ -15,14 +15,13 @@ namespace Z0
     /// </summary>
     public readonly struct Dim2 : IDim
     {
+        public readonly ulong I;
+
+        public readonly ulong J;
         
         [MethodImpl(Inline)]
         public static Dim2 Define(ulong i, ulong j)
             => new Dim2(i,j);
-
-        [MethodImpl(Inline)]
-        public static Dim2 Define(int i, int j)
-            => new Dim2((ulong)i,(ulong)j);
 
         [MethodImpl(Inline)]
         public static implicit operator Dim2((ulong i, ulong j) x)
@@ -36,14 +35,6 @@ namespace Z0
         public static implicit operator Dim2((int i, int j) x)
             => Define((ulong)x.i,(ulong)x.j);
 
-        public readonly ulong I;
-
-        public readonly ulong J;
-
-        [MethodImpl(Inline)]
-        public static implicit operator DimInfo(Dim2 src)
-            => new DimInfo(src.Order, new ulong[]{src.I, src.J}, src.Volume);
-
         [MethodImpl(Inline)]
         public Dim2(ulong I, ulong J)
         {
@@ -52,16 +43,25 @@ namespace Z0
         }
 
         public ulong Volume
-            => I * J;
+        {
+            [MethodImpl(Inline)]
+            get => I * J;
+        }
 
         public ulong this[int axis]            
-            => axis == 0 ? I 
-            :  axis == 1 ? J
-            :  0;
+        {
+            [MethodImpl(Inline)]
+            get => axis == 0 ? I :  axis == 1 ? J :  0;
+        }
 
         public int Order 
-            => 2;
+        {
+            [MethodImpl(Inline)]
+            get => 2;
+        }
 
+        public DimInfo Describe()
+            => new DimInfo(Order, new ulong[]{I, J}, Volume);
     }
 
 
@@ -73,8 +73,7 @@ namespace Z0
     public readonly struct Dim<M,N> : IDim
         where M : unmanaged, ITypeNat
         where N : unmanaged, ITypeNat
-    {
-        public static Dim<M,N> Rep => default;
+    {        
 
         [MethodImpl(Inline)]
         public static implicit operator (ulong i, ulong j)(Dim<M,N> x)
@@ -83,10 +82,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator (int i, int j)(Dim<M,N> x)
             => Nat.pairi<M,N>();
-
-        [MethodImpl(Inline)]
-        public static implicit operator DimInfo(Dim<M,N> src)
-            => new DimInfo(2, new ulong[]{natu<M>(), natu<N>()}, natu<M>() * natu<N>());
 
         [MethodImpl(Inline)]
         public static implicit operator Dim2(Dim<M,N> x)
@@ -99,37 +94,36 @@ namespace Z0
         /// <summary>
         /// Specifies the first component of the dimension
         /// </summary>
-        public ulong I 
-            => natu<M>();
+        public ulong I => natu<M>();
         
         /// <summary>
         /// Specifies the second component of the dimension
         /// </summary>
-        public ulong J 
-            => natu<N>();
+        public ulong J => natu<N>();
 
-        public ulong Volume
-            => I*J;
-
+        public ulong Volume => NatMath.mul<M,N>();
+            
         public ulong this[int axis]
-            => axis == 0 ? I 
-            :  axis == 1 ? J
-            :  0;
+        {
+            [MethodImpl(Inline)]
+            get => axis == 0 ? I  :  axis == 1 ? J :  0;
+        }
 
         public int Order 
-            => 2;
+        {
+            [MethodImpl(Inline)]
+            get => 2;
+        }
 
         public string Format()
             => $"{I}×{J}";
  
-        public override string  ToString()
+        public override string ToString()
             => Format();
 
-        public T[] alloc<T>()
-            => new T[Volume];
+        public DimInfo Describe()
+            => new DimInfo(2, new ulong[]{I, J}, Volume);
+
     }
-
-
-
 
 }

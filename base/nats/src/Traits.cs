@@ -116,7 +116,6 @@ namespace Z0
         
     }
 
- 
     /// <summary>
     /// Requires n:K & n1:K1 & n2:K2 => n1 <= n <= n2
     /// </summary>
@@ -281,7 +280,6 @@ namespace Z0
     {
 
     }
-
  
     /// <summary>
     /// Requires k1:K1 & k2:K2 => k1 + 1 = k2
@@ -296,7 +294,7 @@ namespace Z0
     } 
 
     /// <summary>
-    /// Requires n:T => n is prime
+    /// Requires k prime
     /// </summary>
     /// <typeparam name="K">A prime nat type</typeparam>
     public interface INatPrime<K> : ITypeNat
@@ -306,23 +304,23 @@ namespace Z0
     }
 
     /// <summary>
-    /// Requires n:T =>  n = p^m for some prime number p and and integer m
+    /// Requires z = p^k for some prime number p
     /// </summary>
-    /// <typeparam name="T"></typeparam>
-    public interface IPrimePower<T> : INatDemand<T>
-        where T : unmanaged, ITypeNat
+    /// <typeparam name="K"></typeparam>
+    public interface IPrimePower<K> : INatDemand<K>
+        where K : unmanaged, ITypeNat
     {
 
     }
 
     /// <summary>
-    /// Requires m:T =>  m = p^n for some prime number p and and natural n
+    /// Requires z = p^k where p is prime
     /// </summary>
     /// <typeparam name="P">The prime type</typeparam>
-    /// <typeparam name="N">The power type</typeparam>
-    public interface IPrimePower<P,N> : INatDemand<P,N>
+    /// <typeparam name="K">The power type</typeparam>
+    public interface IPrimePower<P,K> : INatDemand<P,K>
         where P : unmanaged, ITypeNat, INatPrime<P>
-        where N : unmanaged, ITypeNat
+        where K : unmanaged, ITypeNat
     {
 
     }
@@ -350,8 +348,8 @@ namespace Z0
     /// <summary>
     /// Reifies k := k1 + k2
     /// </summary>
-    /// <typeparam name="K2">The base type</typeparam>
-    /// <typeparam name="E">The exponent type</typeparam>
+    /// <typeparam name="K1">The first operand type</typeparam>
+    /// <typeparam name="K2">The second operand type</typeparam>
     public interface INatSum<K1,K2> : ITypeNat
         where K1 : unmanaged, ITypeNat
         where K2 : unmanaged, ITypeNat
@@ -369,8 +367,8 @@ namespace Z0
 
     public interface IDigit<N,S,T>
         where N : unmanaged, ITypeNat
-        where S : IDigit<N,S,T>
         where T : unmanaged
+        where S : IDigit<N,S,T>
     {
 
     }

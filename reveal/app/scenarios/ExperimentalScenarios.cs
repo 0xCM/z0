@@ -41,13 +41,13 @@ namespace Z0
             => NatMath.natval<N30>();
 
         public int natseq2()
-            => NatMath.natval<N3,N7>();
+            => NatMath.natseq<N3,N7>();
 
         public int natseq3()
-            => natval<N3,N7,N1>();
+            => NatMath.natseq<N3, N7, N1>();
 
         public int natseq4()
-            => natval<N1,N0,N2,N4>();
+            => NatMath.natseq<N1, N0, N2, N4>();
 
         public int add()
             => add<N32,N4>();

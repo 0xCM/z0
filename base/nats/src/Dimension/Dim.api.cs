@@ -4,25 +4,32 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using System;
+    using System.Runtime.CompilerServices;
+
+    using static constant;
+
     public static class Dim
     {
         /// <summary>
         /// Constructs an natural dimension of order 1
         /// </summary>
         /// <typeparam name="N">The axis type</typeparam>
+        [MethodImpl(Inline)]
         public static Dim<N> Define<N>()
             where N : unmanaged, ITypeNat
-                => Dim<N>.Rep;
+                => default;
 
         /// <summary>
         /// Constructs an natural dimension of order 2
         /// </summary>
         /// <typeparam name="M">The type of the first axis</typeparam>
         /// <typeparam name="N">The type of the second axis</typeparam>
+        [MethodImpl(Inline)]
         public static Dim<M,N> Define<M,N>()
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
-                => Dim<M,N>.Rep;
+                => default;
 
         /// <summary>
         /// Constructs an natural dimension of order 3
@@ -30,16 +37,18 @@ namespace Z0
         /// <typeparam name="M">The type of the first axis</typeparam>
         /// <typeparam name="N">The type of the second axis</typeparam>
         /// <typeparam name="P">The type of the third axis</typeparam>
+        [MethodImpl(Inline)]
         public static Dim<M,N,P> Define<M,N,P>()
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where P : unmanaged, ITypeNat
-                => Dim<M,N,P>.Rep;
-    
+                => default;
+
         /// <summary>
         /// Defines a dimension of order 1
         /// </summary>
         /// <param name="i">The length of the first axis</param>
+        [MethodImpl(Inline)]
         public static Dim1 Define(ulong i)
             => new Dim1(i);
 
@@ -47,6 +56,7 @@ namespace Z0
         /// Defines a dimension of order 2 
         /// </summary>
         /// <param name="i">The length of the first axis</param>
+        [MethodImpl(Inline)]
         public static Dim2 Define(ulong i, ulong j)
             => new Dim2(i, j);
 

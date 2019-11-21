@@ -5,19 +5,13 @@
 namespace Z0
 {
     using System;
-    using System.Numerics;
-    using System.Collections.Generic;
-    using System.Reflection;
-    using System.Linq;
     using System.Runtime.CompilerServices;
-
 
     using static nfunc;
     using static constant;    
 
     partial class NatProve
     {
-
         /// <summary>
         /// Retrieves the value of the natural number associated with a typenat
         /// and retuns the value if it agrees with a supplied expected value; othwise,
@@ -40,8 +34,8 @@ namespace Z0
         /// <typeparam name="K">The natural type</typeparam>
         [MethodImpl(Inline)]   
         public static ulong eq<K>(K k, ulong expected)
-                where K : unmanaged, ITypeNat
-                    => k.NatValue == expected  ? expected : failure<K,ulong>("eq", expected);
+            where K : unmanaged, ITypeNat
+                => k.NatValue == expected  ? expected : failure<K,ulong>("eq", expected);
 
         /// <summary>
         /// Attempts to prove that k:K => k == expected
@@ -65,8 +59,8 @@ namespace Z0
         /// <typeparam name="K">The natural type</typeparam>
         [MethodImpl(Inline)]   
         public static uint eq<K>(K k, int expected)
-                where K : unmanaged, ITypeNat
-                    => k.NatValue == (uint)expected ? (uint)expected : failure<K,uint>("eq", (uint)expected);
+            where K : unmanaged, ITypeNat
+                => nati<K>() == (uint)expected ? (uint)expected : failure<K,uint>("eq", (uint)expected);
 
         /// <summary>
         /// Prooves that a test value is equal to the value of a natural representative
@@ -77,56 +71,29 @@ namespace Z0
         [MethodImpl(Inline)]   
         public static bool eq<K>(uint test, bool raise = true)
             where K : unmanaged, ITypeNat 
-                =>  natu<K>() == test ? true : failure<K>("eq", test, raise);
+                => natu<K>() == test ? true : failure<K>("eq", test, raise);
 
         /// <summary>
-        /// If possible, constructs evidence that k1:K1 & k2:K2 => k1 = k2; otherwise
-        /// raises an error
+        /// Attemts to construct evidence that k1 == k2
         /// </summary>
         /// <typeparam name="K1">The first type</typeparam>
         /// <typeparam name="K2">The second type</typeparam>
-        /// <returns></returns>
-        public static NatEq<K1,K2> eq<K1,K2>()
-            where K1: unmanaged, ITypeNat
-            where K2: unmanaged, ITypeNat
-                => new NatEq<K1,K2>(natrep<K1>(),natrep<K2>());                             
-
-        /// <summary>
-        /// If possible, constructs evidence that k1:K1 & k2:K2 => k1 = k2; otherwise
-        /// raises an error
-        /// </summary>
-        /// <typeparam name="K1">The first type</typeparam>
-        /// <typeparam name="K2">The second type</typeparam>
-        /// <returns></returns>
-        public static NatEq<K1,K2> eq<K1,K2>(K1 k1, K2 k2)
+        [MethodImpl(Inline)]   
+        public static NatEq<K1,K2> eq<K1,K2>(K1 k1 = default, K2 k2 = default)
             where K1: unmanaged, ITypeNat
             where K2: unmanaged, ITypeNat
                 => new NatEq<K1,K2>(k1,k2);                             
 
         /// <summary>
-        /// If possible, constructs evidence that k1:K1 & k2:K2 => k1 = k2; otherwise
-        /// raises an error
+        /// Attemts to construct evidence that k1 != k2
         /// </summary>
         /// <typeparam name="K1">The first type</typeparam>
         /// <typeparam name="K2">The second type</typeparam>
-        /// <returns></returns>
-        public static NatNEq<K1,K2> neq<K1,K2>()
-            where K1: unmanaged, ITypeNat
-            where K2: unmanaged, ITypeNat
-                => new NatNEq<K1,K2>(natrep<K1>(),natrep<K2>());                             
-
-        /// <summary>
-        /// If possible, constructs evidence that k1:K1 & k2:K2 => k1 = k2; otherwise
-        /// raises an error
-        /// </summary>
-        /// <typeparam name="K1">The first type</typeparam>
-        /// <typeparam name="K2">The second type</typeparam>
-        /// <returns></returns>
-        public static NatNEq<K1,K2> neq<K1,K2>(K1 k1, K2 k2)
+        [MethodImpl(Inline)]   
+        public static NatNEq<K1,K2> neq<K1,K2>(K1 k1 = default, K2 k2 = default)
             where K1: unmanaged, ITypeNat
             where K2: unmanaged, ITypeNat
                 => new NatNEq<K1,K2>(k1,k2);
-
 
     }
 }

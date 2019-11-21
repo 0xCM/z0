@@ -40,7 +40,6 @@ namespace Z0
             => 3;
     }
 
-
     /// <summary>
     /// Defines a cubical dimension
     /// </summary>

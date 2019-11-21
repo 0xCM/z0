@@ -5,19 +5,13 @@
 namespace Z0
 {
     using System;
-    using System.Numerics;
-    using System.Collections.Generic;
-    using System.Reflection;
-    using System.Linq;
     using System.Runtime.CompilerServices;
-
 
     using static constant;    
     using static nfunc;
 
     partial class NatProve
     {
-
         /// <summary>
         /// Attempts to prove that that n:K & n1:K1 & n2:K2 => n1 <= n <= n2
         /// Signals success by returning evidence

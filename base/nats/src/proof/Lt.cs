@@ -42,28 +42,14 @@ namespace Z0
             where K : unmanaged, ITypeNat 
                 =>  natu<K>() <= t ? true : failure<K>("lteq", t, raise);
 
-        /// <summary>
-        /// Attempts to prove k1:K1 & k2:K2 => k1 > k2
-        /// Signals success by returning evidence
-        /// Signals failure by raising an error
-        /// </summary>
-        /// <typeparam name="K1">The smaller type</typeparam>
-        /// <typeparam name="K2">The larger type</typeparam>
-        [MethodImpl(Inline)]   
-        public static NatLt<K1,K2> lt<K1,K2>()
-            where K1: unmanaged, ITypeNat
-            where K2: unmanaged, ITypeNat
-                => new NatLt<K1,K2>(natrep<K1>(),natrep<K2>());                             
 
         /// <summary>
-        /// Attempts to prove k1:K1 & k2:K2 => k1 < k2
-        /// Signals success by returning evidence
-        /// Signals failure by raising an error
+        /// Attempts to construct evidence that k1 < k2
         /// </summary>
         /// <typeparam name="K1">The smaller type</typeparam>
         /// <typeparam name="K2">The larger type</typeparam>
         [MethodImpl(Inline)]   
-        public static NatLt<K1,K2> lt<K1,K2>(K1 k1, K2 k2)
+        public static NatLt<K1,K2> lt<K1,K2>(K1 k1 = default, K2 k2 = default)
             where K1: unmanaged, ITypeNat
             where K2: unmanaged, ITypeNat
                 => new NatLt<K1,K2>(k1,k2);

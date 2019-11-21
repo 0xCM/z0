@@ -25,7 +25,7 @@ namespace Z0
             where K2 : unmanaged, ITypeNat
         {
             eq<Product<K1,K2>>(expected);
-            return Nat.mul<K1,K2>();
+            return Nat.product<K1,K2>();
         } 
 
         /// <summary>
@@ -42,7 +42,7 @@ namespace Z0
             where K2 : unmanaged, ITypeNat
         {
             eq<Product<K1,K2>>(expected);
-            return Nat.mul<K1,K2>();
+            return Nat.product<K1,K2>();
         } 
 
     }
