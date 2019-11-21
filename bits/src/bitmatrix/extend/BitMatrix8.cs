@@ -73,7 +73,7 @@ namespace Z0
         /// </summary>
         [MethodImpl(Inline)]
         public static Graph<byte> ToGraph(this BitMatrix8 A)
-            => BitGraph.graph(A);
+            => BitMatrix.graph(A);
 
         /// <summary>
         /// Packs the matrix into an unsigned 64-bit integer

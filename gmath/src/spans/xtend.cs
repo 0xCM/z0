@@ -5,12 +5,7 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Reflection;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
-    using System.Diagnostics;
-
     
     using static zfunc;    
     
@@ -169,11 +164,11 @@ namespace Z0
             => mathspan.avg(src);
 
         [MethodImpl(Inline)]
-        public static float Avg(this Span256<float> src)
+        public static float Avg(this Block256<float> src)
             => mathspan.avg<float>(src);
 
         [MethodImpl(Inline)]
-        public static double Avg(this Span256<double> src)
+        public static double Avg(this Block256<double> src)
             => mathspan.avg<double>(src);
  
          [MethodImpl(Inline)]

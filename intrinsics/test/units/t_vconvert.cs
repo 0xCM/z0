@@ -87,7 +87,7 @@ namespace Z0
 
         public void bitspan_5x8u_v128x32u()
         {
-            var x = BitSpan.load<N5,byte>(0,1,2,3,4);
+            var x = BitBlock.load<N5,byte>(0,1,2,3,4);
             dinx.vconvert(x, out Vector128<uint> y);
             var ys = y.ToSpan();
             for(var i=0; i<4; i++)

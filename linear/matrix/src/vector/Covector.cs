@@ -40,8 +40,8 @@ namespace Z0
         /// <typeparam name="N">The natural length</typeparam>
         /// <typeparam name="T">THe component type</typeparam>
         [MethodImpl(Inline)]   
-        public static implicit operator Span<N,T>(Covector<N,T> src)
-            => NatSpan.load(default(N), src.data);
+        public static implicit operator NatBlock<N,T>(Covector<N,T> src)
+            => NatBlock.load(default(N), src.data);
 
         [MethodImpl(Inline)]
         public static bool operator == (Covector<N,T> lhs, Covector<N,T> rhs) 
@@ -71,7 +71,7 @@ namespace Z0
         /// </summary>
         [MethodImpl(Inline)]
         public BlockVector<N,T> Block()
-            => BlockVector.Load<N,T>(Span256.load(data));
+            => BlockVector.Load<N,T>(Block256.load(data));
 
         [MethodImpl(Inline)]
         public Vector<N,T> Transpose()

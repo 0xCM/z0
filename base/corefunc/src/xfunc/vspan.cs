@@ -48,7 +48,7 @@ namespace Z0
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The component type</typeparam>
         [MethodImpl(NotInline)]
-        public static Span128<T> ToBlockedSpan<T>(this Vector128<T> src)
+        public static Block128<T> ToBlockedSpan<T>(this Vector128<T> src)
             where T : unmanaged            
         {
             var dst = MemBlocks.alloc<T>(n128);
@@ -62,7 +62,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <typeparam name="T">The primitive type</typeparam>
         [MethodImpl(NotInline)]
-        public static Span256<T> ToBlockedSpan<T>(this Vector256<T> src)
+        public static Block256<T> ToBlockedSpan<T>(this Vector256<T> src)
             where T : unmanaged            
         {
             var dst = MemBlocks.alloc<T>(n256);
@@ -71,6 +71,16 @@ namespace Z0
         }                       
 
 
+        /// <summary>
+        /// Determines whether any elements of the source match the target
+        /// </summary>
+        /// <param name="src">The source values</param>
+        /// <param name="target">The target value to match</param>
+        /// <typeparam name="T">The value type</typeparam>
+        [MethodImpl(Inline)]
+        public static bool Contains<T>(this ReadOnlySpan<T> src, T target)        
+            where T : unmanaged
+                => src.BinarySearch(target, PrimalComparer.Get<T>()) >= 0;
 
     }
 

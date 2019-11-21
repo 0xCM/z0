@@ -5,16 +5,11 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
     using static zfunc;
-    using static As;
-    using static AsIn;
 
     partial class gbits
     {
-
         /// <summary>
         /// Sets an identified bit to a supplied value
         /// </summary>
@@ -32,7 +27,5 @@ namespace Z0
                 disable(ref src, pos);
             return ref src;
         }
-
-
     }
 }

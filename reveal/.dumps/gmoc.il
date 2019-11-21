@@ -1,4 +1,4 @@
-// 2019-11-20 15:08:31:851
+// 2019-11-21 00:45:02:616
 double xor_g64f(double lhs, double rhs)
 {
     IL_0000: ldarg.0
@@ -3532,27 +3532,27 @@ bit gt_g8i(sbyte a, sbyte b)
     IL_0007: ret
 
 }
-bit gt_g16i(short a, short b)
+bit gt_d8u(byte a, byte b)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: call Z0.bit Z0.gmath::gt<System.Int16>(System.Int16,System.Int16)
+    IL_0002: call Z0.bit Z0.math::gt(System.Byte,System.Byte)
     IL_0007: ret
 
 }
-bit gt_d16u(ushort a, ushort b)
+bit gt_g8u(byte a, byte b)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: call Z0.bit Z0.math::gt(System.UInt16,System.UInt16)
+    IL_0002: call Z0.bit Z0.gmath::gt<System.Byte>(System.Byte,System.Byte)
     IL_0007: ret
 
 }
-bit gt_g16u(ushort a, ushort b)
+bit gt_d16i(short a, short b)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: call Z0.bit Z0.gmath::gt<System.UInt16>(System.UInt16,System.UInt16)
+    IL_0002: call Z0.bit Z0.math::gt(System.Int16,System.Int16)
     IL_0007: ret
 
 }

@@ -1,4 +1,4 @@
-// 2019-11-20 15:08:31:388
+// 2019-11-21 00:45:02:164
 bool vtestz_d128x16i(Vector128<short> src, Vector128<short> mask)
 {
     IL_0000: ldarg.0
@@ -654,7 +654,7 @@ int bitspan_counts_4x8()
     IL_0002: initobj Z0.N5
     IL_0008: ldloc.0
     IL_0009: ldc.i4.0
-    IL_000A: call System.Int32 Z0.BitSpan::cells<Z0.N5,System.Byte>(Z0.N5,System.Byte)
+    IL_000A: call System.Int32 Z0.BitBlock::cells<Z0.N5,System.Byte>(Z0.N5,System.Byte)
     IL_000F: ret
 
 }
@@ -664,7 +664,7 @@ int bitspan_counts_8x8()
     IL_0002: initobj Z0.N6
     IL_0008: ldloc.0
     IL_0009: ldc.i4.0
-    IL_000A: call System.Int32 Z0.BitSpan::cells<Z0.N6,System.Byte>(Z0.N6,System.Byte)
+    IL_000A: call System.Int32 Z0.BitBlock::cells<Z0.N6,System.Byte>(Z0.N6,System.Byte)
     IL_000F: ret
 
 }
@@ -674,7 +674,7 @@ int bitspan_counts_4x16()
     IL_0002: initobj Z0.N6
     IL_0008: ldloc.0
     IL_0009: ldc.i4.0
-    IL_000A: call System.Int32 Z0.BitSpan::cells<Z0.N6,System.UInt16>(Z0.N6,System.UInt16)
+    IL_000A: call System.Int32 Z0.BitBlock::cells<Z0.N6,System.UInt16>(Z0.N6,System.UInt16)
     IL_000F: ret
 
 }
@@ -686,11 +686,11 @@ Vector128<uint> mem8u_v128x32u(ref byte src, out Vector128<uint> dst)
     IL_0007: ret
 
 }
-Vector128<uint> bs5x8u_v128x32u(in BitSpan<N5,byte> src, out Vector128<uint> dst)
+Vector128<uint> bs5x8u_v128x32u(in BitBlock<N5,byte> src, out Vector128<uint> dst)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: call System.Runtime.Intrinsics.Vector128`1<System.UInt32> Z0.dinx::vconvert(Z0.BitSpan`2<Z0.N5,System.Byte>&,System.Runtime.Intrinsics.Vector128`1<System.UInt32>&)
+    IL_0002: call System.Runtime.Intrinsics.Vector128`1<System.UInt32> Z0.dinx::vconvert(Z0.BitBlock`2<Z0.N5,System.Byte>&,System.Runtime.Intrinsics.Vector128`1<System.UInt32>&)
     IL_0007: ret
 
 }
@@ -712,29 +712,29 @@ void vconvert_ymem16u_v2x256x64u(ref ushort src, out Vector256<ulong> lo, out Ve
     IL_0008: ret
 
 }
-void vconvert_yspan16u_v2x256x64u(Span256<ushort> src, out Vector256<ulong> lo, out Vector256<ulong> hi)
+void vconvert_yspan16u_v2x256x64u(Block256<ushort> src, out Vector256<ulong> lo, out Vector256<ulong> hi)
 {
     IL_0000: ldarga.s src
     IL_0002: ldarg.1
     IL_0003: ldarg.2
-    IL_0004: call System.Void Z0.dinx::vconvert(Z0.Span256`1<System.UInt16>&,System.Runtime.Intrinsics.Vector256`1<System.UInt64>&,System.Runtime.Intrinsics.Vector256`1<System.UInt64>&)
+    IL_0004: call System.Void Z0.dinx::vconvert(Z0.Block256`1<System.UInt16>&,System.Runtime.Intrinsics.Vector256`1<System.UInt64>&,System.Runtime.Intrinsics.Vector256`1<System.UInt64>&)
     IL_0009: ret
 
 }
-Vector256<ulong> vconvert_xspan32u_v256x64u(Span128<uint> src, out Vector256<ulong> dst)
+Vector256<ulong> vconvert_xspan32u_v256x64u(Block128<uint> src, out Vector256<ulong> dst)
 {
     IL_0000: ldarga.s src
     IL_0002: ldarg.1
-    IL_0003: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.dinx::vconvert(Z0.Span128`1<System.UInt32>&,System.Runtime.Intrinsics.Vector256`1<System.UInt64>&)
+    IL_0003: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.dinx::vconvert(Z0.Block128`1<System.UInt32>&,System.Runtime.Intrinsics.Vector256`1<System.UInt64>&)
     IL_0008: ret
 
 }
-void vconvert_ymem32u_v2x256x64u(Span256<uint> src, out Vector256<ulong> lo, out Vector256<ulong> hi)
+void vconvert_ymem32u_v2x256x64u(Block256<uint> src, out Vector256<ulong> lo, out Vector256<ulong> hi)
 {
     IL_0000: ldarga.s src
     IL_0002: ldarg.1
     IL_0003: ldarg.2
-    IL_0004: call System.Void Z0.dinx::vconvert(Z0.Span256`1<System.UInt32>&,System.Runtime.Intrinsics.Vector256`1<System.UInt64>&,System.Runtime.Intrinsics.Vector256`1<System.UInt64>&)
+    IL_0004: call System.Void Z0.dinx::vconvert(Z0.Block256`1<System.UInt32>&,System.Runtime.Intrinsics.Vector256`1<System.UInt64>&,System.Runtime.Intrinsics.Vector256`1<System.UInt64>&)
     IL_0009: ret
 
 }
@@ -815,11 +815,11 @@ Vector128<uint> item_set_128x32u_2(Vector128<uint> x, uint value)
     IL_0008: ret
 
 }
-Vector256<uint> avxpack1(Span<N8,uint> src, int offset)
+Vector256<uint> avxpack1(NatBlock<N8,uint> src, int offset)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
-    IL_0002: call System.Runtime.Intrinsics.Vector256`1<System.UInt32> Z0.AvxBitpack::pack(Z0.Span`2<Z0.N8,System.UInt32>,System.Int32)
+    IL_0002: call System.Runtime.Intrinsics.Vector256`1<System.UInt32> Z0.AvxBitpack::pack(Z0.NatBlock`2<Z0.N8,System.UInt32>,System.Int32)
     IL_0007: ret
 
 }

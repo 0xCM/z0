@@ -14,18 +14,10 @@ namespace Z0
     /// </summary>
     public readonly struct EnumBit
     {
-        [MethodImpl(Inline)]
-        public EnumBit(BitPos Pos, string Name, Bit Value)
-        {
-            this.Pos = Pos;
-            this.Name = Name;
-            this.Value = Value;
-        }
-        
         /// <summary>
         /// The 0-based position of the bit
         /// </summary>
-        public readonly BitPos Pos;
+        public readonly int Pos;
 
         /// <summary>
         /// The name/label identifier
@@ -35,8 +27,16 @@ namespace Z0
         /// <summary>
         /// The value of the bit
         /// </summary>
-        public readonly Bit Value;
+        public readonly bit Value;
 
+        [MethodImpl(Inline)]
+        public EnumBit(int Pos, string Name, bit Value)
+        {
+            this.Pos = Pos;
+            this.Name = Name;
+            this.Value = Value;
+        }
+        
         public override string ToString()
             => $"({Pos.ToString().PadLeft(2, AsciDigits.A0)}, {Name}, {Value})";
     }

@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Runtime.InteropServices;
     
     using static zfunc;
 
@@ -377,10 +378,10 @@ namespace Z0
         /// <summary>
         /// Renders the content as a natural bitspan
         /// </summary>
-        public Span<N,bit> ToBitSpan<N>(N n = default)
+        public NatBlock<N,bit> ToBitSpan<N>(N n = default)
             where N : unmanaged, ITypeNat
         {
-            var dst = NatSpan.alloc<N,bit>();
+            var dst = NatBlock.alloc<N,bit>();
             for(var i=0; i< bitseq.Length; i++)
                 dst[i] = (bit)bitseq[i];
             return dst;
@@ -533,13 +534,27 @@ namespace Z0
             return bits.TakeScalar<T>();
         }
 
+        /// <summary>
+        /// Renders a non-allocating mutable view over a source span segment that is presented as an individual target value
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <param name="offset">The index of the first source element</param>
+        /// <param name="length">The number of source elements required to constitute a target type</param>
+        /// <typeparam name="S">The source element type</typeparam>
+        /// <typeparam name="T">The target element type</typeparam>
+        [MethodImpl(Inline)]
+        static ref T TakeSingle<S,T>(Span<S> src, int offset = 0, int? length = null)
+            where S : unmanaged
+            where T : unmanaged
+                => ref MemoryMarshal.AsRef<T>(src.AsBytes(offset,length));
+
         [MethodImpl(Inline)]
         readonly T PackSingle<T>(int offset)
             where T : unmanaged
         {                        
             var src = bitseq.ToReadOnlySpan();
             var packed = PackedBits(src, offset, size<T>());
-            return packed.Length != 0 ? SpanConvert.TakeSingle<byte,T>(packed) : default;
+            return packed.Length != 0 ? TakeSingle<byte,T>(packed) : default;
         }
 
         [MethodImpl(Inline)]

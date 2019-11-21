@@ -25,7 +25,7 @@ namespace Z0
         where N : unmanaged, ITypeNat
         where T : unmanaged
     {        
-        Span256<T> data;
+        Block256<T> data;
 
         public static readonly Dim<M,N> Dim = default;        
 
@@ -64,13 +64,13 @@ namespace Z0
         /// </summary>
         public static N ColRep = default;
 
-        public static implicit operator BlockMatrix<M,N,T>(Span256<T> src)
+        public static implicit operator BlockMatrix<M,N,T>(Block256<T> src)
             => new BlockMatrix<M,N,T>(src);
 
-        public static implicit operator Span<M,N,T>(BlockMatrix<M,N,T> src)
+        public static implicit operator NatGrid<M,N,T>(BlockMatrix<M,N,T> src)
             => src.Natural;
 
-        public static implicit operator Span256<T>(BlockMatrix<M,N,T> src)
+        public static implicit operator Block256<T>(BlockMatrix<M,N,T> src)
             => src.Unsized;
 
         [MethodImpl(Inline)]
@@ -82,14 +82,14 @@ namespace Z0
             => !lhs.Equals(rhs);
 
         [MethodImpl(Inline)]
-        public BlockMatrix(Span256<T> src)
+        public BlockMatrix(Block256<T> src)
         {
             require(src.Length >= CellCount);
             data = src;
         }
 
         [MethodImpl(Inline)]
-        internal BlockMatrix(Span256<T> src, bool skipChecks)
+        internal BlockMatrix(Block256<T> src, bool skipChecks)
             => data = src;
 
         [MethodImpl(Inline)]        
@@ -178,7 +178,7 @@ namespace Z0
         /// <summary>
         /// Provides access to the underlying data as a 256-bit blocked span
         /// </summary>
-        public Span256<T> Unsized
+        public Block256<T> Unsized
         {            
             [MethodImpl(Inline)]
             get => data;
@@ -187,7 +187,7 @@ namespace Z0
         /// <summary>
         /// Provides access to the underlying data as a span of natural dimensions
         /// </summary>
-        public Span<M,N,T> Natural
+        public NatGrid<M,N,T> Natural
         {
             [MethodImpl(Inline)]
             get => data;

@@ -36,7 +36,7 @@ namespace Z0
         public static int SegCount 
         {
             [MethodImpl(Inline)]
-            get => BitGrid.segments(natval<N>(), natval<N1>(), (ushort)bitsize<T>());
+            get => BitGrid.segcount(natval<N>(), natval<N1>(), (ushort)bitsize<T>());
         }
         
         /// <summary>
@@ -161,7 +161,6 @@ namespace Z0
 
         }
 
-
         [MethodImpl(Inline)]
         BitVector(Span<T> src, bool skipChecks)
         {
@@ -173,40 +172,24 @@ namespace Z0
         {
             this.data = src;
         }
-
-        /// <summary>
-        /// Reads a bit value
-        /// </summary>
-        /// <param name="pos">The bit position</param>
-        [MethodImpl(Inline)]
-        public bit GetBit(int bitpos)
-            => BitGrid.readbit(in Head, bitpos);
             
-        /// <summary>
-        /// Sets a bit value
-        /// </summary>
-        /// <param name="pos">The absolute bit position</param>
-        /// <param name="value">The value the bit will receive</param>
-        [MethodImpl(Inline)]            
-        public void SetBit(int bitpos, bit state)
-            => BitGrid.setbit(bitpos, state, ref Head);
-
         /// <summary>
         /// A bit-level accessor/manipulator
         /// </summary>
-        public bit this[BitPos index]
+        public bit this[int bitpos]
         {
             [MethodImpl(Inline)]
-            get => GetBit(index);
+            get => BitGrid.readbit(in Head, bitpos);
             
             [MethodImpl(Inline)]
-            set => SetBit(index, value);
+            set => BitGrid.setbit(bitpos, value, ref Head);
         }
 
         /// <summary>
         /// Computes the scalar product between this vector and another
         /// </summary>
         /// <param name="rhs">The other vector</param>
+        [MethodImpl(Inline)]
         public bit Dot(in BitVector<N,T> rhs)
         {             
             var result = bit.Off;

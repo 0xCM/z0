@@ -18,15 +18,15 @@ namespace Z0
         public static void VerifyUnaryOp<T>(IPolyrand random, int blocks, Vector128UnaryOp<T> inXOp, Func<T,T> primalOp)
             where T : unmanaged
         {
-            var blocklen = Span128<T>.BlockLength;                     
+            var blocklen = Block128<T>.BlockLength;                     
             
             var src = random.ReadOnlySpan128<T>(blocks);
             Claim.eq(blocks*blocklen,src.Length);
                         
-            var expect = Span128.alloc<T>(blocks);
+            var expect = Block128.alloc<T>(blocks);
             Claim.eq(blocks, expect.BlockCount);
 
-            var actual = Span128.alloc<T>(blocks);
+            var actual = Block128.alloc<T>(blocks);
             Claim.eq(blocks, actual.BlockCount);
 
             var tmp = new T[blocklen];
@@ -53,15 +53,15 @@ namespace Z0
         public static void VerifyUnaryOp<T>(IPolyrand random, int blocks, Vector256UnaryOp<T> inXOp, Func<T,T> primalOp)
             where T : unmanaged
         {
-            var blocklen = Span256<T>.BlockLength;                     
+            var blocklen = Block256<T>.BlockLength;                     
             
             var src = random.ReadOnlySpan256<T>(blocks);
             Claim.eq(blocks*blocklen,src.Length);
                         
-            var expect = Span256.alloc<T>(blocks);
+            var expect = Block256.alloc<T>(blocks);
             Claim.eq(blocks, expect.BlockCount);
 
-            var actual = Span256.alloc<T>(blocks);
+            var actual = Block256.alloc<T>(blocks);
             Claim.eq(blocks, actual.BlockCount);
 
             var tmp = new T[blocklen];
@@ -89,7 +89,7 @@ namespace Z0
         public static void VerifyBinOp<T>(IPolyrand random, int blocks, Vector128BinOp<T> inXOp, Func<T,T,T> primalOp)
             where T : unmanaged
         {
-            var blocklen = Span128<T>.BlockLength;                     
+            var blocklen = Block128<T>.BlockLength;                     
             
             var lhs = random.ReadOnlySpan128<T>(blocks);
             Claim.eq(blocks*blocklen,lhs.Length);
@@ -97,10 +97,10 @@ namespace Z0
             var rhs = random.ReadOnlySpan128<T>(blocks);
             Claim.eq(blocks*blocklen,rhs.Length);
             
-            var expect = Span128.alloc<T>(blocks);
+            var expect = Block128.alloc<T>(blocks);
             Claim.eq(blocks, expect.BlockCount);
 
-            var actual = Span128.alloc<T>(blocks);
+            var actual = Block128.alloc<T>(blocks);
             Claim.eq(blocks, actual.BlockCount);
 
             Span<T> tmp = stackalloc T[blocklen];
@@ -129,7 +129,7 @@ namespace Z0
         public static void VerifyBinOp<T>(IPolyrand random, int blocks, Vector256BinOp<T> inXOp, Func<T,T,T> primalOp)
             where T : unmanaged
         {
-            var blocklen = Span256<T>.BlockLength;                     
+            var blocklen = Block256<T>.BlockLength;                     
             
             var lhs = random.ReadOnlySpan256<T>(blocks);
             Claim.eq(blocks*blocklen,lhs.Length);
@@ -137,10 +137,10 @@ namespace Z0
             var rhs = random.ReadOnlySpan256<T>(blocks);
             Claim.eq(blocks*blocklen,rhs.Length);
             
-            var expect = Span256.alloc<T>(blocks);
+            var expect = Block256.alloc<T>(blocks);
             Claim.eq(blocks, expect.BlockCount);
 
-            var actual = Span256.alloc<T>(blocks);
+            var actual = Block256.alloc<T>(blocks);
             Claim.eq(blocks, actual.BlockCount);
 
             Span<T> tmp = stackalloc T[blocklen];

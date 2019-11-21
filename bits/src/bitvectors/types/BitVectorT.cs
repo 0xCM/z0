@@ -24,7 +24,7 @@ namespace Z0
         /// The number of bits represented by the vector
         /// </summary>
         /// <typeparam name="T">The type over which the vector is defined</typeparam>
-        public static readonly int Width = bitsize<T>();
+        public static int Width => bitsize<T>();
         
         /// <summary>
         /// Creates a bitvector defined by a single cell or portion thereof
@@ -192,10 +192,10 @@ namespace Z0
         /// <summary>
         /// The number of bits represented by the vector
         /// </summary>
-        public readonly uint Length 
+        public readonly int Length 
         {
             [MethodImpl(Inline)]
-            get => bitsize<T>();
+            get => Width;
         }
 
         /// <summary>

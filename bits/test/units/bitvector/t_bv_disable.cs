@@ -2,20 +2,15 @@
 // Copyright   :  (c) Chris Moore, 2019
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Test
+namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Reflection;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
 
     using static zfunc;
-    using static BitParts;
 
     public class t_bv_disable : BitVectorTest<t_bv_disable>
     {        
-
         public void bv_disable_after_16()
         {
             var src = BitVector16.Ones;
@@ -100,7 +95,7 @@ namespace Z0.Test
                 Claim.eq(bv.Length, bs.Length);
                 for(var i=0; i<bv.Length; i+= 2)
                 {
-                    bv.SetBit(i, bit.Off);
+                    bv[i] = bit.Off;
                     bs[i] = bit.Off;
                 }
 

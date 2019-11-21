@@ -161,7 +161,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => BM.load(m, n, random.Span<T>(BitGridSpec.Define(m,n,default(T)).TotalCellCount));
+                => BM.load(m, n, random.Span<T>(BitGridSpec.define(m,n,default(T)).TotalCellCount));
 
         /// <summary>
         /// Produces an generic bitmatrix of natural order
@@ -174,7 +174,7 @@ namespace Z0
         public static BitMatrix<N,T> BitMatrix<N,T>(this IPolyrand random, N n = default, T zero = default)
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => BM.load(n,random.Span<T>(BitGridSpec.Define(n,n,default(T)).TotalCellCount));                
+                => BM.load(n,random.Span<T>(BitGridSpec.define(n,n,default(T)).TotalCellCount));                
  
         /// <summary>
         /// Allocates and populates a bitgrid
@@ -191,7 +191,7 @@ namespace Z0
             where T : unmanaged
         {
             var grid = Z0.BitGrid.alloc(m,n,zero);
-            var segments = Z0.BitGrid.segments(grid.Moniker);
+            var segments = Z0.BitGrid.segcount(m,n,zero);
             random.Fill(segments, ref grid.Head);
             return grid;
         }

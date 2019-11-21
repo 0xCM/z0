@@ -95,7 +95,7 @@ namespace Z0.Mkl
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
-        static ref T head<N,T>(Span<N,T> src)
+        static ref T head<N,T>(NatBlock<N,T> src)
             where T : unmanaged
             where N : unmanaged, ITypeNat
             =>  ref MemoryMarshal.GetReference<T>(src.Unsized);

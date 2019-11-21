@@ -18,7 +18,7 @@ namespace Z0
         where N : unmanaged, ITypeNat
         where T : unmanaged    
     {
-        Span256<T> data;
+        Block256<T> data;
 
         static readonly N NatRep = new N();
 
@@ -27,7 +27,7 @@ namespace Z0
             => new BlockVector<N,T>(ref src);
 
         [MethodImpl(Inline)]
-        public static BlockVector<N,T> LoadAligned(Span<N,T> src)
+        public static BlockVector<N,T> LoadAligned(NatBlock<N,T> src)
             => new BlockVector<N,T>(src);
 
         [MethodImpl(Inline)]
@@ -39,7 +39,7 @@ namespace Z0
             => new BlockVector<N,T>(src);
 
         [MethodImpl(Inline)]
-        public static BlockVector<N,T> LoadAligned(Span256<T> src)
+        public static BlockVector<N,T> LoadAligned(Block256<T> src)
             => new BlockVector<N,T>(src);
 
         [MethodImpl(Inline)]
@@ -58,7 +58,7 @@ namespace Z0
         /// <typeparam name="N">The natural length</typeparam>
         /// <typeparam name="T">THe component type</typeparam>
         [MethodImpl(Inline)]   
-        public static implicit operator Span<N,T>(BlockVector<N,T> src)
+        public static implicit operator NatBlock<N,T>(BlockVector<N,T> src)
             => src.data;
 
         /// <summary>
@@ -68,11 +68,11 @@ namespace Z0
         /// <typeparam name="N">The natural length</typeparam>
         /// <typeparam name="T">THe component type</typeparam>
         [MethodImpl(Inline)]   
-        public static implicit operator BlockVector<N,T>(Span<N,T> src)
+        public static implicit operator BlockVector<N,T>(NatBlock<N,T> src)
             => new BlockVector<N,T>(src);
 
         [MethodImpl(Inline)]   
-        public static implicit operator Span256<T>(BlockVector<N,T> src)
+        public static implicit operator Block256<T>(BlockVector<N,T> src)
             => src.data;
 
         [MethodImpl(Inline)]   
@@ -102,39 +102,39 @@ namespace Z0
         [MethodImpl(Inline)]
         BlockVector(ref T src)
         {  
-            data =  Span256.load<T>(ref src, Length);  
+            data =  Block256.load<T>(ref src, Length);  
         }
 
         [MethodImpl(Inline)]
-        BlockVector(in ConstBlock<N,T> src)
+        BlockVector(in ConstNatBlock<N,T> src)
         {
-            data = Span256.load(src.Unsized);
+            data = Block256.load(src.Unsized);
         }
 
         [MethodImpl(Inline)]
         BlockVector(in ReadOnlySpan<T> src)
         {
-            data = Span256.load(src);
+            data = Block256.load(src);
         }
 
         [MethodImpl(Inline)]
         BlockVector(Span<T> src)
         {
-            data = Span256.load(src);
+            data = Block256.load(src);
         }
 
 
         [MethodImpl(Inline)]
-        BlockVector(Span256<T> src)
+        BlockVector(Block256<T> src)
         {
             require(src.Length >= Length);
             data = src;
         }
 
         [MethodImpl(Inline)]
-        BlockVector(Span<N,T> src)
+        BlockVector(NatBlock<N,T> src)
         {
-            data = Span256.load(src);
+            data = Block256.load(src);
         }
                     
         public ref T this[int index] 
@@ -146,7 +146,7 @@ namespace Z0
             get => data.Unblocked;
         }
  
-        public Span256<T> Data
+        public Block256<T> Data
         {
             [MethodImpl(Inline)]
             get => data;
@@ -226,7 +226,7 @@ namespace Z0
         public override string ToString()
             => Format();
     
-        public Span256<T> ToSpan256()
+        public Block256<T> ToSpan256()
             => data;
 
         public ConstBlock256<T> ToReadOnlySpan256()

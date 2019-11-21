@@ -25,7 +25,7 @@ namespace Z0
         /// <param name="vertices">The vertices in the graph</param>
         /// <param name="edges">The edges that connect the vertices</param>
         public static Graph<V> Define(IEnumerable<Vertex<V>> vertices, IEnumerable<Edge<V>> edges)
-            => new Graph<V>(vertices.OrderBy(x => x.Index,PrimalInfo.comparer<V>()).ToArray(), edges.ToArray());
+            => new Graph<V>(vertices.OrderBy(x => x.Index,PrimalComparer.Get<V>()).ToArray(), edges.ToArray());
 
         public static Graph<V> Define(params Edge<V>[] edges)
         {

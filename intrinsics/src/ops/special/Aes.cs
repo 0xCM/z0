@@ -103,13 +103,13 @@ namespace Z0
         public static Vector128<byte> kgassist(Vector128<byte> src,byte imm8)
             => AES.KeygenAssist(src,imm8);
 
-        public static void enc(Span128<byte> src, Vector128<byte> key, Span128<byte> dst)            
+        public static void enc(Block128<byte> src, Vector128<byte> key, Block128<byte> dst)            
         {
             for(var block = 0; block < src.BlockCount; block++)
                  ginx.vstore(enc(src.LoadVector(block),key), ref dst.BlockHead(block));
         }
 
-        public static void dec(Span128<byte> src, Vector128<byte> key, Span128<byte> dst)            
+        public static void dec(Block128<byte> src, Vector128<byte> key, Block128<byte> dst)            
         {
             for(var block = 0; block < src.BlockCount; block++)
                  ginx.vstore(dec(src.LoadVector(block),key), ref dst.BlockHead(block));

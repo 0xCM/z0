@@ -148,7 +148,7 @@ partial class zfunc
     /// <param name="lhs">The left span</param>
     /// <param name="rhs">The right span</param>
     [MethodImpl(Inline)]   
-    public static int length<S,T>(Span256<S> lhs, Span256<T> rhs, [CallerMemberName] string caller = null,
+    public static int length<S,T>(Block256<S> lhs, Block256<T> rhs, [CallerMemberName] string caller = null,
         [CallerFilePath] string file = null, [CallerLineNumber] int? line = null)
             where T : unmanaged
             where S : unmanaged

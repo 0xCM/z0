@@ -186,11 +186,11 @@ namespace Z0
         public static IRngSuite<N> WyHash64Suite<N>(N n = default, params ulong[] seed)
             where N : unmanaged, ITypeNat
         {
-            Span<N,ulong> _seed;
+            NatBlock<N,ulong> _seed;
             if(seed.Length == 0)
                 _seed = Entropy.Values<N,ulong>();
             else if(seed.Length == (int)n.NatValue)
-                _seed = NatSpan.load(n, ref seed[0]);
+                _seed = NatBlock.load(n, ref seed[0]);
             else
                 throw Errors.LengthMismatch((int)n.NatValue, seed.Length);
 

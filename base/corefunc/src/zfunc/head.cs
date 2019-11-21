@@ -70,7 +70,7 @@ partial class zfunc
     /// <param name="src">The source span</param>
     /// <typeparam name="T">The element type</typeparam>
     [MethodImpl(Inline)]
-    public static ref T head<N,T>(in Span<N,T> src)
+    public static ref T head<N,T>(in NatBlock<N,T> src)
         where N : unmanaged, ITypeNat
         where T : unmanaged
             =>  ref src.Head;
@@ -81,7 +81,7 @@ partial class zfunc
     /// <param name="src">The source span</param>
     /// <typeparam name="T">The element type</typeparam>
     [MethodImpl(Inline)]
-    public static ref readonly T head<N,T>(in ConstBlock<N,T> src)
+    public static ref readonly T head<N,T>(in ConstNatBlock<N,T> src)
         where N : unmanaged, ITypeNat
         where T : unmanaged
             => ref src.Head;
@@ -92,7 +92,7 @@ partial class zfunc
     /// <param name="src">The source span</param>
     /// <typeparam name="T">The element type</typeparam>
     [MethodImpl(Inline)]
-    public static ref T head<T>(in Span128<T> src)
+    public static ref T head<T>(in Block128<T> src)
         where T : unmanaged
             => ref src.Head;
 
@@ -102,7 +102,7 @@ partial class zfunc
     /// <param name="src">The source span</param>
     /// <typeparam name="T">The element type</typeparam>
     [MethodImpl(Inline)]
-    public static ref T head<T>(in Span256<T> src)
+    public static ref T head<T>(in Block256<T> src)
         where T : unmanaged
             => ref src.Head;
 
@@ -240,7 +240,7 @@ partial class zfunc
     /// <param name="src">The source span</param>
     /// <typeparam name="T">The element type</typeparam>
     [MethodImpl(Inline)]
-    public static ref T head<T>(in Span128<T> src, int offset)
+    public static ref T head<T>(in Block128<T> src, int offset)
         where T : unmanaged
             => ref Unsafe.Add(ref src.Head, offset);        
 
@@ -250,7 +250,7 @@ partial class zfunc
     /// <param name="src">The source span</param>
     /// <typeparam name="T">The element type</typeparam>
     [MethodImpl(Inline)]
-    public static ref T head<T>(in Span256<T> src, int offset)
+    public static ref T head<T>(in Block256<T> src, int offset)
         where T : unmanaged
             => ref Unsafe.Add(ref src.Head, offset);        
 

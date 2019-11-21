@@ -59,7 +59,7 @@ partial class zfunc
     /// <param name="len">The number of cells to allocate</param>
     /// <typeparam name="T">The generic presentation type</typeparam>
     [MethodImpl(Inline)]
-    public static Span128<T> blocks<T>(N128 n, int blocks)
+    public static Block128<T> blocks<T>(N128 n, int blocks)
         where T : unmanaged
             => MemBlocks.alloc<T>(n, blocks);
 
@@ -70,7 +70,7 @@ partial class zfunc
     /// <param name="len">The number of cells to allocate</param>
     /// <typeparam name="T">The generic presentation type</typeparam>
     [MethodImpl(Inline)]
-    public static Span256<T> blocks<T>(N256 n, int blocks)
+    public static Block256<T> blocks<T>(N256 n, int blocks)
         where T : unmanaged
             => MemBlocks.alloc<T>(n, blocks);
 
@@ -81,7 +81,7 @@ partial class zfunc
     /// <param name="rhs">The right source</param>
     /// <typeparam name="T">The span element type</typeparam>
     [MethodImpl(Inline)]   
-    public static int blocks<S,T>(Span128<S> lhs, Span128<T> rhs, [CallerMemberName] string caller = null,  
+    public static int blocks<S,T>(Block128<S> lhs, Block128<T> rhs, [CallerMemberName] string caller = null,  
         [CallerFilePath] string file = null, [CallerLineNumber] int? line = null)
             where S : unmanaged
             where T : unmanaged                
@@ -109,7 +109,7 @@ partial class zfunc
     /// <param name="rhs">The right source</param>
     /// <typeparam name="T">The span element type</typeparam>
     [MethodImpl(Inline)]   
-    public static int blocks<S,T>(Span256<S> lhs, Span256<T> rhs, [CallerMemberName] string caller = null,  
+    public static int blocks<S,T>(Block256<S> lhs, Block256<T> rhs, [CallerMemberName] string caller = null,  
         [CallerFilePath] string file = null, [CallerLineNumber] int? line = null)
             where S : unmanaged
             where T : unmanaged                

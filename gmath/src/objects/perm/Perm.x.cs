@@ -115,7 +115,7 @@ namespace Z0
         /// <param name="j">The second index</param>
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
-        public static Span128<T> Swap<T>(this Span128<T> src, params Swap[] swaps)           
+        public static Block128<T> Swap<T>(this Block128<T> src, params Swap[] swaps)           
             where T : unmanaged
         {
              if(swaps == null || swaps.Length == 0)
@@ -133,7 +133,7 @@ namespace Z0
         /// <param name="j">The second index</param>
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
-        public static Span256<T> Swap<T>(this Span256<T> src, params Swap[] swaps)           
+        public static Block256<T> Swap<T>(this Block256<T> src, params Swap[] swaps)           
             where T : unmanaged
         {
              if(swaps == null || swaps.Length == 0)
@@ -192,10 +192,10 @@ namespace Z0
         /// Computes the digigs corresponding to each 2-bit segment of the permutation spec
         /// </summary>
         /// <param name="src">The perm spec</param>
-        public static Span<N4, byte> Digits(this Perm4 src)
+        public static NatBlock<N4, byte> Digits(this Perm4 src)
         {
             var scalar = (byte)src;
-            var dst = NatSpan.alloc<N4,byte>();
+            var dst = NatBlock.alloc<N4,byte>();
             dst[0] = BitMask.between(scalar, 0, 1);
             dst[1] = BitMask.between(scalar, 2, 3);
             dst[2] = BitMask.between(scalar, 4, 5);

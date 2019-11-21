@@ -66,7 +66,7 @@ namespace Z0
         /// </summary>
         /// <param name="random">The random source</param>
         [MethodImpl(Inline)]
-        public static Span<N,bit> BitSpan<N>(this IPolyrand random, N len = default)
+        public static NatBlock<N,bit> BitSpan<N>(this IPolyrand random, N len = default)
             where N : unmanaged, ITypeNat
                 => random.BitSpan((int)len.NatValue);
 
@@ -91,7 +91,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitString BitString(this IPolyrand random, BitSize len)
         {
-            var bytes = random.Span<byte>(len.UpperByteCount);
+            var bytes = random.Span<byte>(len.MaxByteCount);
             return Z0.BitString.from(bytes, len);        
         }
 

@@ -46,10 +46,10 @@ namespace Z0
         /// <typeparam name="S">The source element type</typeparam>
         /// <typeparam name="T">The target element type</typeparam>
         [MethodImpl(Inline)]
-        internal static Span256<T> cast<S,T>(in Span256<S> src)                
+        internal static Block256<T> cast<S,T>(in Block256<S> src)                
             where S : unmanaged
             where T : unmanaged
-                => Span256<T>.LoadAligned(MemoryMarshal.Cast<S,T>(src));
+                => Block256<T>.LoadAligned(MemoryMarshal.Cast<S,T>(src));
 
         /// <summary>
         /// Reimagines a readonly span of one element type as a readonly span of another element type
@@ -70,10 +70,10 @@ namespace Z0
         /// <typeparam name="S">The source element type</typeparam>
         /// <typeparam name="T">The target element type</typeparam>
         [MethodImpl(Inline)]
-        internal static Span128<T> cast<S,T>(in Span128<S> src)                
+        internal static Block128<T> cast<S,T>(in Block128<S> src)                
             where S : unmanaged
             where T : unmanaged
-                =>  Span128.load(MemoryMarshal.Cast<S,T>(src));
+                =>  Block128.load(MemoryMarshal.Cast<S,T>(src));
 
         /// <summary>
         /// Reimagines a readonly span of one element type as a readonly span of another element type

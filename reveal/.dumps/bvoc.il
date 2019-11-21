@@ -1,4 +1,4 @@
-// 2019-11-20 15:08:32:451
+// 2019-11-21 00:45:03:256
 ulong clear_64(ulong src, int p0, int p1)
 {
     IL_0000: ldarg.0
@@ -114,18 +114,18 @@ ref ulong bitmap_g64u_to_64u(in ulong src, byte srcOffset, byte len, byte dstOff
     IL_000C: ret
 
 }
-void bs_and(in Span256<uint> x, in Span256<uint> y, Span256<uint> z)
+void bs_and(in Block256<uint> x, in Block256<uint> y, Block256<uint> z)
 {
     IL_0000: call Z0.N256 zfunc::get_n256()
     IL_0005: ldarg.0
-    IL_0006: call System.Int32 Z0.Span256`1<System.UInt32>::get_BlockCount()
+    IL_0006: call System.Int32 Z0.Block256`1<System.UInt32>::get_BlockCount()
     IL_000B: ldc.i4.8
     IL_000C: ldarg.0
-    IL_000D: call System.UInt32& Z0.Span256`1<System.UInt32>::get_Head()
+    IL_000D: call System.UInt32& Z0.Block256`1<System.UInt32>::get_Head()
     IL_0012: ldarg.1
-    IL_0013: call System.UInt32& Z0.Span256`1<System.UInt32>::get_Head()
+    IL_0013: call System.UInt32& Z0.Block256`1<System.UInt32>::get_Head()
     IL_0018: ldarga.s z
-    IL_001A: call System.UInt32& Z0.Span256`1<System.UInt32>::get_Head()
+    IL_001A: call System.UInt32& Z0.Block256`1<System.UInt32>::get_Head()
     IL_001F: call System.Void Z0.vblock::and<System.UInt32>(Z0.N256,System.Int32,System.Int32,System.UInt32&,System.UInt32&,System.UInt32&)
     IL_0024: ret
 
@@ -137,7 +137,7 @@ void s_and(Span<uint> x, Span<uint> y, Span<uint> z)
     IL_0007: call System.Int32 System.Span`1<System.UInt32>::get_Length()
     IL_000C: ldc.i4.8
     IL_000D: div
-    IL_000E: call System.Int32 Z0.Span256`1<System.UInt32>::get_BlockLength()
+    IL_000E: call System.Int32 Z0.Block256`1<System.UInt32>::get_BlockLength()
     IL_0013: ldarg.0
     IL_0014: call System.UInt32& zfunc::head<System.UInt32>(System.Span`1<System.UInt32>)
     IL_0019: ldarg.1

@@ -28,11 +28,6 @@ namespace Z0
         public static readonly BitGridLayout<T> GridLayout = BitMatrix.layout<N,T>();
 
         /// <summary>
-        /// Specifies the square matrix dimension
-        /// </summary>
-        public int Order => (int)new N().NatValue;
-
-        /// <summary>
         /// Allocates a Zero-filled NxN matrix
         /// </summary>
         [MethodImpl(Inline)]
@@ -81,7 +76,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        readonly Bit GetBit(int row, int col)
+        readonly bit GetBit(int row, int col)
         {
             var cell = GridLayout.Row(row)[col];
             return gbits.test(Data[cell.Segment], cell.Offset);                    
@@ -94,7 +89,7 @@ namespace Z0
             gbits.set(ref Data[cell.Segment], (byte)cell.Offset, value);
         }
 
-        public Bit this[int row, int col]
+        public bit this[int row, int col]
         {
             [MethodImpl(Inline)]
             get => GetBit(row, col);

@@ -131,7 +131,7 @@ namespace Z0
         /// </summary>
         [MethodImpl(Inline)]
         public BlockVector<T> Block()
-            => Span256.load(data);
+            => Block256.load(data);
 
         [MethodImpl(Inline)]
         public Vector<U> Convert<U>()

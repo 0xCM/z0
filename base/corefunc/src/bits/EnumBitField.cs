@@ -18,13 +18,7 @@ namespace Z0
     public ref struct EnumBitField<T>
         where T : Enum
     {
-        static readonly BitSize DataSize = BitSize.x64;
-
-        static readonly string[] Labels
-            = Enum.GetNames(typeof(T));
-
-        static readonly T[] Identifiers
-            = (T[])Enum.GetValues(typeof(T));
+        const int BitCount = 64;
 
         ulong data;
 
@@ -43,23 +37,27 @@ namespace Z0
         /// Reads or Sets a value-identified field
         /// </summary>
         public Bit this[T id]
-        {
-            
-            get => bits[0,System.Convert.ToByte(id)];
+        {            
+            [MethodImpl(Inline)]
+            get => bits[0, System.Convert.ToByte(id)];
+
+            [MethodImpl(Inline)]
             set => bits[0,System.Convert.ToByte(id)] = value;
         }
 
         /// <summary>
         /// Retrieves all bits in the field
         /// </summary>
-        public ReadOnlySpan<EnumBit> Bits
+        public Span<EnumBit> Bits
         {
             get
-            {
-                var len = Math.Min(DataSize, Labels.Length);
+            {   var identifiers = (T[])Enum.GetValues(typeof(T));
+                var labels = Enum.GetNames(typeof(T));
+                var len = Math.Min(BitCount, labels.Length);
                 Span<EnumBit> dst = new EnumBit[len];
+                ref var target = ref head(dst);
                 for(byte pos=0; pos< len; pos++)
-                    dst[pos] = new EnumBit(pos, Labels[pos], this[Identifiers[pos]]);
+                    seek(ref target, pos) = new EnumBit(pos, labels[pos], this[identifiers[pos]]);
                 return dst;
             }
         }        
@@ -70,14 +68,14 @@ namespace Z0
         public ReadOnlySpan<T> Enabled
         {
             get
-            {
-                var len = Math.Min(DataSize, Labels.Length);
+            {   var identifiers = (T[])Enum.GetValues(typeof(T));
+                var len = Math.Min(BitCount, identifiers.Length);
                 var count =0;
                 Span<T> dst = new T[len];
                 for(var i=0; i< len; i++)
                 {
-                    var sv = Identifiers[i];
-                    if (this[Identifiers[i]])
+                    var sv = identifiers[i];
+                    if (this[identifiers[i]])
                         dst[count++] = sv;
                 }
                 return dst.Slice(0, count);

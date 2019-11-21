@@ -34,11 +34,6 @@ namespace Z0
         public static int ColBitCount => natval<N>();
 
         /// <summary>
-        /// The number of bits per storage segment
-        /// </summary>
-        public static int SegSize => bitsize<T>();
-
-        /// <summary>
         /// The number of bits apprehended by the matrix
         /// </summary>
         public static int TotalBitCount => NatMath.mul<M,N>();
@@ -152,7 +147,6 @@ namespace Z0
             [MethodImpl(Inline)]
             set => SetBit(row, col, value);
         }            
-
 
         /// <summary>
         /// Queries mainpulates a row

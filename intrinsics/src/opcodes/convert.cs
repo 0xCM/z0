@@ -45,18 +45,18 @@ namespace Z0
             => dinx.vmov(n256,src);
 
         public static int bitspan_counts_4x8()
-            => BitSpan.cells<N5,byte>();
+            => BitBlock.cells<N5,byte>();
 
         public static int bitspan_counts_8x8()
-            => BitSpan.cells<N6,byte>();
+            => BitBlock.cells<N6,byte>();
 
         public static int bitspan_counts_4x16()
-            => BitSpan.cells<N6,ushort>();
+            => BitBlock.cells<N6,ushort>();
 
         public static Vector128<uint> mem8u_v128x32u(ref byte src, out Vector128<uint> dst)
             => dinx.vconvert(ref src, out dst);
             
-        public static Vector128<uint> bs5x8u_v128x32u(in BitSpan<N5,byte> src, out Vector128<uint> dst)
+        public static Vector128<uint> bs5x8u_v128x32u(in BitBlock<N5,byte> src, out Vector128<uint> dst)
             => dinx.vconvert(src, out dst);
 
         public static void vconvert_v256x16u_v2x256x64u(Vector256<ushort> src, out Vector256<ulong> lo, out Vector256<ulong> hi)
@@ -65,13 +65,13 @@ namespace Z0
         public static void vconvert_ymem16u_v2x256x64u(ref ushort src, out Vector256<ulong> lo, out Vector256<ulong> hi)
             => dinx.vconvert(ref src, out lo, out hi);
 
-        public static void vconvert_yspan16u_v2x256x64u(Span256<ushort> src, out Vector256<ulong> lo, out Vector256<ulong> hi)
+        public static void vconvert_yspan16u_v2x256x64u(Block256<ushort> src, out Vector256<ulong> lo, out Vector256<ulong> hi)
             => dinx.vconvert(src, out lo, out hi);
 
-        public static Vector256<ulong> vconvert_xspan32u_v256x64u(Span128<uint> src, out Vector256<ulong> dst)        
+        public static Vector256<ulong> vconvert_xspan32u_v256x64u(Block128<uint> src, out Vector256<ulong> dst)        
             => dinx.vconvert(src, out dst);
 
-        public static unsafe void vconvert_ymem32u_v2x256x64u(Span256<uint> src, out Vector256<ulong> lo, out Vector256<ulong> hi)
+        public static unsafe void vconvert_ymem32u_v2x256x64u(Block256<uint> src, out Vector256<ulong> lo, out Vector256<ulong> hi)
             => dinx.vconvert(src, out lo, out hi);
 
         public static Vector256<byte> valignr256x4n(Vector256<byte> x, Vector256<byte> y)

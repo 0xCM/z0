@@ -29,8 +29,7 @@ namespace Z0
 
                 for(var i = 0; i<points.Length; i++)
                 {                    
-                    var moniker = GridMoniker.Define(points[i].row, points[i].col, segwidth);
-                    var gs = BitGrid.map(moniker).Stats();
+                    var gs = BitGrid.map(points[i].row, points[i].col, segwidth).Stats();
                         if(gs.Vec256Remainder == 0 || gs.Vec128Remainder == 0)
                             dst.WriteLine(gs.Format());
                 }

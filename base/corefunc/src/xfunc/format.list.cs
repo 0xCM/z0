@@ -84,7 +84,7 @@ namespace Z0
         /// <param name="offset">The position at which formatting should begin</param>
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]        
-        public static string FormatList<T>(this Span128<T> src, char delimiter = ',', int offset = 0, int pad = 0)
+        public static string FormatList<T>(this Block128<T> src, char delimiter = ',', int offset = 0, int pad = 0)
             where T : unmanaged
                 => src.Unblocked.FormatList(delimiter, offset, pad);
 
@@ -96,7 +96,7 @@ namespace Z0
         /// <param name="offset">The position at which formatting should begin</param>
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]        
-        public static string FormatList<T>(this Span256<T> src, char delimiter = ',', int offset = 0, int pad = 0)
+        public static string FormatList<T>(this Block256<T> src, char delimiter = ',', int offset = 0, int pad = 0)
             where T : unmanaged
                 => src.Unblocked.FormatList(delimiter, offset, pad); 
 
@@ -133,7 +133,7 @@ namespace Z0
         /// <typeparam name="T">The element type</typeparam>
         /// <typeparam name="N">The length type</typeparam>
         [MethodImpl(Inline)]        
-        public static string FormatList<N,T>(this Span<N,T> src, char delimiter = ',', int offset = 0, int pad = 0)
+        public static string FormatList<N,T>(this NatBlock<N,T> src, char delimiter = ',', int offset = 0, int pad = 0)
             where N : unmanaged, ITypeNat
             where T : unmanaged 
                 => src.Unsized.FormatList(delimiter,offset,pad);

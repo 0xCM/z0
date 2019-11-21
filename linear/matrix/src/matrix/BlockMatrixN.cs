@@ -23,7 +23,7 @@ namespace Z0
         where N : unmanaged, ITypeNat
         where T : unmanaged    
     {        
-        Span256<T> data;
+        Block256<T> data;
 
         public static readonly Dim<N,N> Dim = default;        
 
@@ -55,9 +55,9 @@ namespace Z0
         /// <summary>
         /// The size, in bytes, of each cell
         /// </summary>
-        public static readonly ByteSize CellSize = Span256<T>.CellSize;
+        public static readonly ByteSize CellSize = Block256<T>.CellSize;
 
-        static readonly int AlignedRowLength = Span256<T>.BlockLength;
+        static readonly int AlignedRowLength = Block256<T>.BlockLength;
 
         /// <summary>
         /// The Row dimension representative
@@ -70,7 +70,7 @@ namespace Z0
         public static N ColRep = default;
 
         [MethodImpl(Inline)]
-        public static implicit operator BlockMatrix<N,T>(Span256<T> src)
+        public static implicit operator BlockMatrix<N,T>(Block256<T> src)
             => new BlockMatrix<N,T>(src);
 
         [MethodImpl(Inline)]
@@ -82,7 +82,7 @@ namespace Z0
             => src.ToRectangular();
 
         [MethodImpl(Inline)]
-        public static implicit operator Span<N,T>(BlockMatrix<N,T> src)
+        public static implicit operator NatBlock<N,T>(BlockMatrix<N,T> src)
             => src.Natural;
 
         [MethodImpl(Inline)]
@@ -90,7 +90,7 @@ namespace Z0
             => src.Unsized;
 
         [MethodImpl(Inline)]
-        public static implicit operator Span256<T>(BlockMatrix<N,T> src)
+        public static implicit operator Block256<T>(BlockMatrix<N,T> src)
             => src.Unsized;
 
         [MethodImpl(Inline)]
@@ -106,7 +106,7 @@ namespace Z0
             => !lhs.Equals(rhs);
 
         [MethodImpl(Inline)]
-        public BlockMatrix(Span256<T> src)
+        public BlockMatrix(Block256<T> src)
         {
             require(src.Length >= CellCount);
             data = src;
@@ -176,7 +176,7 @@ namespace Z0
         /// <summary>
         /// Provides access to the underlying data as a 256-bit blocked span
         /// </summary>
-        public Span256<T> Unsized
+        public Block256<T> Unsized
         {            
             [MethodImpl(Inline)]
             get => data;
@@ -186,7 +186,7 @@ namespace Z0
         /// <summary>
         /// Provides access to the underlying data as a span of natural dimensions
         /// </summary>
-        public Span<N,T> Natural
+        public NatBlock<N,T> Natural
         {
             [MethodImpl(Inline)]
             get => data;

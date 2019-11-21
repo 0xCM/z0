@@ -17,21 +17,21 @@ namespace Z0
     public readonly struct BitGridSpec<T>
         where T : unmanaged
     {
-        public static implicit operator BitGridSpec<T>((BitSize PrimalSize, int RowCount, int ColCount) x)
+        public static implicit operator BitGridSpec<T>((int PrimalSize, int RowCount, int ColCount) x)
             => new BitGridSpec<T>(x.PrimalSize, x.RowCount, x.ColCount);
             
-        public BitGridSpec(BitSize CellSize, int RowCount, int ColCount)
+        public BitGridSpec(int CellSize, int RowCount, int ColCount)
         {
             this.CellSize = CellSize;
             this.RowCount = RowCount;
             this.ColCount = ColCount;
-            this.RowCellCount = CalcRowStorageLength(CellSize, ColCount);
+            this.RowCellCount = CalcRowCellCount(CellSize, ColCount);
         }
         
         /// <summary>
         /// The bit size of the underlying storage type
         /// </summary>
-        public readonly BitSize CellSize;
+        public readonly int CellSize;
         
         /// <summary>
         /// The number of grid rows
@@ -49,9 +49,9 @@ namespace Z0
         public readonly int RowCellCount;
 
         /// <summary>
-        /// The number of bits stored in the grid, given by <see cref='RowCount'/> * <see cref='ColCount'/>
+        /// The number of bits stored in the grid
         /// </summary>
-        public readonly BitSize BitCount
+        public readonly int BitCount
         {
             [MethodImpl(Inline)]
             get => RowCount * ColCount;
@@ -71,13 +71,13 @@ namespace Z0
         /// Computes the length of a primal span/array that is required to store a row of data
         /// </summary>
         [MethodImpl(Inline)]
-        static int CalcRowStorageLength(BitSize CellSize, int ColCount)
+        static int CalcRowCellCount(int cellbits, int colcount)
         {
-            if(CellSize >= ColCount)
+            if(cellbits >= colcount)
                 return 1;
             else
             {
-                var q = Math.DivRem(ColCount, CellSize, out int r);                
+                var q = Math.DivRem(colcount, cellbits, out int r);                
                 return r == 0 ? q : q + 1;
             }
         }

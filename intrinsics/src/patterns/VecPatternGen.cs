@@ -245,7 +245,7 @@ namespace Z0
         public static Span<T> DefineClearAlt<T>()
             where T : unmanaged
         {
-            var mask = Span256.allocu<T>(1);
+            var mask = Block256.allocu<T>(1);
             var chop = PrimalInfo.Get<T>().MaxVal;
             
             //For the first 128-bit lane

@@ -27,7 +27,7 @@ namespace Z0
         public static BlockVector<N,T> Alloc<N,T>(N n = default)
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                =>  BlockVector<N,T>.LoadAligned(Span256.allocu<N,T>());
+                =>  BlockVector<N,T>.LoadAligned(Block256.allocu<N,T>());
 
         /// <summary>
         /// Allocates a block vector of natural length filled with a specified value
@@ -40,7 +40,7 @@ namespace Z0
         public static BlockVector<N,T> Alloc<N,T>(N n, T fill)
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                =>  BlockVector<N,T>.LoadAligned(Span256.allocu<N,T>(fill));
+                =>  BlockVector<N,T>.LoadAligned(Block256.allocu<N,T>(fill));
         
         /// <summary>
         /// Allocates a block vector optionally filled with a specified value
@@ -52,7 +52,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BlockVector<T> Alloc<T>(int n, T? fill = null)               
             where T : unmanaged
-                => Span256.allocu<T>(n, fill);
+                => Block256.allocu<T>(n, fill);
 
         /// <summary>
         /// Loads a vector of natural length from a span that may not be aligned (Allocating if unaligned)
@@ -65,7 +65,7 @@ namespace Z0
         public static BlockVector<N,T> Load<N,T>(Span<T> src, N n = default)
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => BlockVector<N,T>.LoadAligned(Span256.load(src));
+                => BlockVector<N,T>.LoadAligned(Block256.load(src));
 
         /// <summary>
         /// Loads a vector of natural length from a parameter array.
@@ -79,7 +79,7 @@ namespace Z0
         public static BlockVector<N,T> Load<N,T>(N length, params T[] src)
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => BlockVector<N,T>.LoadAligned(Span256.load<T>(src));
+                => BlockVector<N,T>.LoadAligned(Block256.load<T>(src));
 
         /// <summary>
         /// Loads a block vector from a source span, allocating if the span is not 256-bit aligned
@@ -89,16 +89,16 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BlockVector<T> Load<T>(Span<T> src)
             where T : unmanaged
-                => Span256.load(src);
+                => Block256.load(src);
 
         [MethodImpl(Inline)]
-        public static BlockVector<N,T> Load<N,T>(Span256<T> src)
+        public static BlockVector<N,T> Load<N,T>(Block256<T> src)
             where N : unmanaged, ITypeNat
             where T : unmanaged
                 => BlockVector<N, T>.LoadAligned(src);
 
         [MethodImpl(Inline)]
-        public static BlockVector<N,T> Load<N,T>(Span<N,T> src)
+        public static BlockVector<N,T> Load<N,T>(NatBlock<N,T> src)
             where N : unmanaged, ITypeNat
             where T : unmanaged
                 => src;

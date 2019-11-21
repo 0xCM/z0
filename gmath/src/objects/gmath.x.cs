@@ -171,7 +171,7 @@ namespace Z0
         public static bool Identical<T>(this ConstBlock128<T> lhs, ConstBlock128<T> rhs)        
                 where T : unmanaged        
         {
-            for(var i = 0; i< Span128.length(lhs,rhs); i++)
+            for(var i = 0; i< Block128.length(lhs,rhs); i++)
                 if(gmath.neq(lhs[i],rhs[i]))
                     return false;
             return true;
@@ -186,11 +186,11 @@ namespace Z0
             return true;
         }
 
-        public static bool Identical<T>(this Span256<T> lhs, Span256<T> rhs)        
+        public static bool Identical<T>(this Block256<T> lhs, Block256<T> rhs)        
             where T : unmanaged        
                 => lhs.ReadOnly().Identical(rhs);
 
-        public static bool Identical<T>(this Span128<T> lhs, Span128<T> rhs)        
+        public static bool Identical<T>(this Block128<T> lhs, Block128<T> rhs)        
             where T : unmanaged        
                 => lhs.ReadOnly().Identical(rhs);
 

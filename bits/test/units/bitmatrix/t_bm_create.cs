@@ -134,7 +134,7 @@ namespace Z0
 
         public void create9x4()
         {
-            var grid = BitGridSpec.Define<N9,N4,byte>();    
+            var grid = BitGridSpec.define<N9,N4,byte>();    
             Claim.eq(9, grid.RowCount);
             Claim.eq(4, grid.ColCount);
 
@@ -198,7 +198,7 @@ namespace Z0
 
         public void create16x16()
         {
-            var spec = BitGridSpec.Define<N16,N16,byte>();    
+            var spec = BitGridSpec.define<N16,N16,byte>();    
             Claim.eq(16, spec.RowCount);
             Claim.eq(16, spec.ColCount);
 

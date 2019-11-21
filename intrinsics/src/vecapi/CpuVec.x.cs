@@ -183,7 +183,7 @@ namespace Z0
         /// <param name="block">The block index</param>
         /// <typeparam name="T">The primitive type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector128<T> LoadVector<T>(this in Span128<T> src, int block = 0)            
+        public static Vector128<T> LoadVector<T>(this in Block128<T> src, int block = 0)            
             where T : unmanaged            
                 => ginx.vload(n128, in src.BlockHead(block));
 
@@ -194,7 +194,7 @@ namespace Z0
         /// <param name="block">The block index</param>
         /// <typeparam name="T">The primitive type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector256<T> LoadVector<T>(this in Span256<T> src, int block = 0)            
+        public static Vector256<T> LoadVector<T>(this in Block256<T> src, int block = 0)            
             where T : unmanaged            
                 => ginx.vload(n256, in src.BlockHead(block));
 
@@ -243,7 +243,7 @@ namespace Z0
         /// <param name="block">The block index</param>
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector256<T> TakeVector<T>(this in Span256<T> src, int block = 0)
+        public static Vector256<T> TakeVector<T>(this in Block256<T> src, int block = 0)
             where T : unmanaged
                 => ginx.vload(n256, in src.BlockHead(block));
 
@@ -254,7 +254,7 @@ namespace Z0
         /// <param name="block">The block index</param>
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector128<T> TakeVector<T>(this in Span128<T> src, int block = 0)
+        public static Vector128<T> TakeVector<T>(this in Block128<T> src, int block = 0)
             where T : unmanaged
                 => ginx.vload(n128, in src.BlockHead(block));
 

@@ -1,4 +1,4 @@
-// 2019-11-20 15:08:32:188
+// 2019-11-21 00:45:03:005
 bit testbit_d8i(sbyte src, int pos)
 {
     IL_0000: ldarg.0
@@ -343,19 +343,19 @@ void hexdigits(byte a, out Char d0, out Char d1)
     IL_0008: ret
 
 }
-void datablock_store(in byte src, uint count, ref Block128 dst)
+void datablock_store(in byte src, uint count, ref Stack128 dst)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.Void Z0.DataBlocks::store(System.Byte&,System.UInt32,Z0.BlockStorage/Block128&)
+    IL_0003: call System.Void Z0.StackStore::store(System.Byte&,System.UInt32,Z0.StackContainers/Stack128&)
     IL_0008: ret
 
 }
-void datablock_bytes(ref Block128 src)
+void datablock_bytes(ref Stack128 src)
 {
     IL_0000: ldarg.0
-    IL_0001: call System.Span`1<System.Byte> Z0.DataBlocks::bytes(Z0.BlockStorage/Block128&)
+    IL_0001: call System.Span`1<System.Byte> Z0.StackStore::bytes(Z0.StackContainers/Stack128&)
     IL_0006: pop
     IL_0007: ret
 

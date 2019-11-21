@@ -171,7 +171,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static void vconvert(in Span128<byte> src, out Vector128<ushort> lo, out Vector128<ushort> hi)
+        public static void vconvert(in Block128<byte> src, out Vector128<ushort> lo, out Vector128<ushort> hi)
             => vconvert(ref src.Head, out lo, out hi);
 
         /// <summary>
@@ -199,7 +199,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static Vector128<int> vconvert(in BitSpan<N5,byte> src, out Vector128<int> dst)
+        public static Vector128<int> vconvert(in BitBlock<N5,byte> src, out Vector128<int> dst)
             => vconvert(ref src.Head, out dst);
 
         /// <summary>
@@ -227,7 +227,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static Vector128<uint> vconvert(in BitSpan<N5,byte> src, out Vector128<uint> dst)
+        public static Vector128<uint> vconvert(in BitBlock<N5,byte> src, out Vector128<uint> dst)
             => vconvert(ref src.Head, out dst);
 
         [MethodImpl(Inline)]
@@ -919,7 +919,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static unsafe void vconvert(in Span256<ushort> src, out Vector256<ulong> lo, out Vector256<ulong> hi)
+        public static unsafe void vconvert(in Block256<ushort> src, out Vector256<ulong> lo, out Vector256<ulong> hi)
             => vconvert(ref src.Head, out lo, out hi);
         
         /// <summary>
@@ -947,7 +947,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static unsafe Vector256<long> vconvert(in Span128<int> src, out Vector256<long> dst)
+        public static unsafe Vector256<long> vconvert(in Block128<int> src, out Vector256<long> dst)
             => vconvert(ref src.Head, out dst);
 
         /// <summary>
@@ -975,7 +975,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static unsafe Vector256<long> vconvert(in Span128<uint> src, out Vector256<long> dst)
+        public static unsafe Vector256<long> vconvert(in Block128<uint> src, out Vector256<long> dst)
             => vconvert(ref src.Head, out dst);
 
         /// <summary>
@@ -1003,7 +1003,7 @@ namespace Z0
         }
     
         [MethodImpl(Inline)]
-        public static unsafe Vector256<ulong> vconvert(in Span128<uint> src, out Vector256<ulong> dst)
+        public static unsafe Vector256<ulong> vconvert(in Block128<uint> src, out Vector256<ulong> dst)
             => vconvert(ref src.Head, out dst);
 
         [MethodImpl(Inline)]
@@ -1021,7 +1021,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static unsafe void vconvert(in Span256<uint> src, out Vector256<ulong> lo, out Vector256<ulong> hi)
+        public static unsafe void vconvert(in Block256<uint> src, out Vector256<ulong> lo, out Vector256<ulong> hi)
             => vconvert(ref src.Head, out lo, out hi);
     }
 }

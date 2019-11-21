@@ -92,10 +92,10 @@ namespace Z0
         /// <typeparam name="N">The length type</typeparam>
         /// <typeparam name="T">The primal random value type</typeparam>
         [MethodImpl(Inline)]
-        public static Span<N,T> Span<N,T>(this IPolyrand random, N n = default, Interval<T>? domain = null, Func<T,bool> filter = null)
+        public static NatBlock<N,T> Span<N,T>(this IPolyrand random, N n = default, Interval<T>? domain = null, Func<T,bool> filter = null)
             where T : unmanaged  
             where N : unmanaged, ITypeNat
-                => NatSpan.load(n, random.Span<T>((int)n.NatValue, domain, filter));                                    
+                => NatBlock.load(n, random.Span<T>((int)n.NatValue, domain, filter));                                    
 
         /// <summary>
         /// Allocates a table span of natural dimensions and populates the cells with random values
@@ -107,11 +107,11 @@ namespace Z0
         /// <typeparam name="N">The col count type</typeparam>
         /// <typeparam name="T">The primal random value type</typeparam>
         [MethodImpl(Inline)]
-        public static Span<M,N,T> Span<M,N,T>(this IPolyrand random, M rows = default, N cols = default)
+        public static NatGrid<M,N,T> Span<M,N,T>(this IPolyrand random, M rows = default, N cols = default)
             where T : unmanaged  
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
-                => NatSpan.load<M,N,T>(random.Span<T>(nfunc.muli(rows,cols)), rows, cols);
+                => NatGrid.load<M,N,T>(random.Span<T>(nfunc.muli(rows,cols)), rows, cols);
 
         /// <summary>
         /// Allocates a table span of natural dimensions and populates the cells with random values that
@@ -125,11 +125,11 @@ namespace Z0
         /// <typeparam name="N">The col count type</typeparam>
         /// <typeparam name="T">The primal random value type</typeparam>
         [MethodImpl(Inline)]
-        public static Span<M,N,T> Span<M,N,T>(this IPolyrand random, M rows, N cols, Interval<T> domain)
+        public static NatGrid<M,N,T> Span<M,N,T>(this IPolyrand random, M rows, N cols, Interval<T> domain)
             where T : unmanaged  
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
-                => NatSpan.load<M,N,T>(random.Span<T>(nfunc.muli(rows,cols),domain), rows, cols);
+                => NatGrid.load<M,N,T>(random.Span<T>(nfunc.muli(rows,cols),domain), rows, cols);
 
         /// <summary>
         /// Allocates a 128-bit blocked span and populates it with random values
@@ -140,9 +140,9 @@ namespace Z0
         /// <param name="filter">An optional filter that refines the domain</param>
         /// <typeparam name="T">The primal random value type</typeparam>
         [MethodImpl(Inline)]
-        public static Span128<T> Span128<T>(this IPolyrand random, int blocks = 1, Interval<T>? domain = null, Func<T,bool> filter = null)
+        public static Block128<T> Span128<T>(this IPolyrand random, int blocks = 1, Interval<T>? domain = null, Func<T,bool> filter = null)
             where T : unmanaged
-                => random.Stream(domain,filter).ToSpan(Z0.Span128.blocklen<T>(blocks)).ToSpan128(); 
+                => random.Stream(domain,filter).ToSpan(Z0.Block128.blocklen<T>(blocks)).ToSpan128(); 
 
         /// <summary>
         /// Allocates a 128-bit blocked span and populates it with random values
@@ -154,9 +154,9 @@ namespace Z0
         /// <param name="filter">An optional filter that refines the domain</param>
         /// <typeparam name="T">The primal random value type</typeparam>
         [MethodImpl(Inline)]
-        public static Span128<T> BlockedSpan<T>(this IPolyrand random, N128 n, int blocks = 1, Interval<T>? domain = null, Func<T,bool> filter = null)
+        public static Block128<T> BlockedSpan<T>(this IPolyrand random, N128 n, int blocks = 1, Interval<T>? domain = null, Func<T,bool> filter = null)
             where T : unmanaged
-                => random.Stream(domain,filter).ToSpan(Z0.Span128.blocklen<T>(blocks)).ToSpan128(); 
+                => random.Stream(domain,filter).ToSpan(Z0.Block128.blocklen<T>(blocks)).ToSpan128(); 
 
         /// <summary>
         /// Allocates a 128-bit blocked span and populates it with random values
@@ -168,9 +168,9 @@ namespace Z0
         /// <param name="filter">An optional filter that refines the domain</param>
         /// <typeparam name="T">The primal random value type</typeparam>
         [MethodImpl(Inline)]
-        public static Span128<T> BlockedSpan<T>(this IPolyrand random, N128 n, Interval<T> domain, int blocks = 1, Func<T,bool> filter = null)
+        public static Block128<T> BlockedSpan<T>(this IPolyrand random, N128 n, Interval<T> domain, int blocks = 1, Func<T,bool> filter = null)
             where T : unmanaged
-                => random.Stream(domain,filter).ToSpan(Z0.Span128.blocklen<T>(blocks)).ToSpan128(); 
+                => random.Stream(domain,filter).ToSpan(Z0.Block128.blocklen<T>(blocks)).ToSpan128(); 
 
         /// <summary>
         /// Allocates a 128-bit blocked span and populates it with random values
@@ -181,9 +181,9 @@ namespace Z0
         /// <param name="filter">An optional filter that refines the domain</param>
         /// <typeparam name="T">The primal random value type</typeparam>
         [MethodImpl(Inline)]
-        public static Span128<T> BlockedSpan<T>(this IPolyrand random, N128 n, T min, T max, int blocks = 1, Func<T,bool> filter = null)
+        public static Block128<T> BlockedSpan<T>(this IPolyrand random, N128 n, T min, T max, int blocks = 1, Func<T,bool> filter = null)
             where T : unmanaged
-                => random.Stream((min,max),filter).ToSpan(Z0.Span128.blocklen<T>(blocks)).ToSpan128(); 
+                => random.Stream((min,max),filter).ToSpan(Z0.Block128.blocklen<T>(blocks)).ToSpan128(); 
 
         /// <summary>
         /// Allocates a 128-bit blocked span and populates it with random values and returns a readonly view to the caller
@@ -206,7 +206,7 @@ namespace Z0
         /// <param name="domain">An optional domain to which values are constrained</param>
         /// <typeparam name="T">The primal random value type</typeparam>
         [MethodImpl(Inline)]
-        public static Span128<T> NonZeroBlockedSpan<T>(this IPolyrand random, N128 n, int blocks = 1, Interval<T>? domain = null)        
+        public static Block128<T> NonZeroBlockedSpan<T>(this IPolyrand random, N128 n, int blocks = 1, Interval<T>? domain = null)        
             where T : unmanaged  
                 => random.BlockedSpan(n, blocks, domain, x => gmath.nonzero(x));
 
@@ -220,9 +220,9 @@ namespace Z0
         /// <param name="filter">An optional filter that refines the domain</param>
         /// <typeparam name="T">The primal random value type</typeparam>
         [MethodImpl(Inline)]
-        public static Span256<T> BlockedSpan<T>(this IPolyrand random, N256 n, int blocks = 1, Interval<T>? domain = null, Func<T,bool> filter = null)
+        public static Block256<T> BlockedSpan<T>(this IPolyrand random, N256 n, int blocks = 1, Interval<T>? domain = null, Func<T,bool> filter = null)
             where T : unmanaged       
-                => random.Stream(domain,filter).ToSpan(Z0.Span256.blocklen<T>(blocks)).ToSpan256();       
+                => random.Stream(domain,filter).ToSpan(Z0.Block256.blocklen<T>(blocks)).ToSpan256();       
 
         /// <summary>
         /// Allocates populates a 256-bit blocked readonly span with random values
@@ -245,7 +245,7 @@ namespace Z0
         /// <param name="domain">An optional domain to which values are constrained</param>
         /// <typeparam name="T">The primal random value type</typeparam>
         [MethodImpl(Inline)]
-        public static Span256<T> NonZeroBlockedSpan<T>(this IPolyrand random, N256 n, int blocks = 1, Interval<T>? domain = null)        
+        public static Block256<T> NonZeroBlockedSpan<T>(this IPolyrand random, N256 n, int blocks = 1, Interval<T>? domain = null)        
             where T : unmanaged  
                 => random.BlockedSpan(n,blocks, domain, x => gmath.nonzero(x)); 
     }

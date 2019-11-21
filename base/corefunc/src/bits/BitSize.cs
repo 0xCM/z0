@@ -102,7 +102,7 @@ namespace Z0
         /// <param name="src">The source bits</param>
         [MethodImpl(Inline)]
         public static explicit operator ByteSize(BitSize src)
-            => src.UpperByteCount;
+            => src.MaxByteCount;
 
         [MethodImpl(Inline)]
         public static explicit operator byte(BitSize src)
@@ -222,7 +222,7 @@ namespace Z0
         public override bool Equals(object obj)
             => obj is BitSize x ? Equals(x) : false;
 
-        public ByteSize UpperByteCount
+        public ByteSize MaxByteCount
         {
             [MethodImpl(Inline)]
             get
@@ -232,7 +232,7 @@ namespace Z0
             }
         }
 
-        public ByteSize LowerByteCount
+        public ByteSize MinByteCount
         {
             [MethodImpl(Inline)]
             get => Bits/8ul;

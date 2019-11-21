@@ -1,0 +1,152 @@
+//-----------------------------------------------------------------------------
+// Copyright   :  (c) Chris Moore, 2019
+// License     :  MIT
+//-----------------------------------------------------------------------------
+namespace Z0
+{        
+    using System;
+    using System.Linq;
+    using System.Collections.Generic;
+    using System.Runtime.CompilerServices;
+
+    using static zfunc;
+
+    public class GridMap
+    {        
+        public GridMap(in GridSpec spec)
+        {
+            this.RowCount = spec.RowCount;
+            this.ColCount = spec.ColCount;
+            this.SegWidth = spec.SegWidth;
+            this.StorageBits = spec.StorageBits;
+            this.StorageBytes = spec.StorageBytes;
+            this.SegCount = spec.StorageSegs;                        
+        }        
+
+        public GridMap(ushort rows, ushort cols, ushort segwidth)
+        {
+            this.RowCount = rows;
+            this.ColCount = cols;
+            this.SegWidth = segwidth;
+            var spec = BitGrid.specify(rows, cols, segwidth);
+            this.StorageBits = spec.StorageBits;
+            this.StorageBytes = spec.StorageBytes;
+            this.SegCount = spec.StorageSegs;                        
+        }        
+
+        /// <summary>
+        /// The number of rows in the layout
+        /// </summary>
+        public readonly ushort RowCount;
+        
+        /// <summary>
+        /// The number of columns in the layout
+        /// </summary>
+        public readonly ushort ColCount;
+
+        /// <summary>
+        /// The number of bits in a segment
+        /// </summary>
+        public readonly ushort SegWidth;
+            
+        /// <summary>
+        /// The number of segment-aligned bits required for storage
+        /// </summary>
+        public readonly int StorageBits;
+
+        /// <summary>
+        /// The number of segment-aligned bytes bits required for storage
+        /// </summary>
+        public readonly int StorageBytes;
+
+        /// <summary>
+        /// The number of segment-aligned storage segments
+        /// </summary>
+        public readonly int SegCount;
+
+        /// <summary>
+        /// The number bytes that do not fit into a whole number of 128-bit vectors
+        /// </summary>
+        public int Vec128Remainder  
+        {
+            [MethodImpl(Inline)]
+            get => StorageBytes % 16;
+        }
+
+        /// <summary>
+        /// The number of whole 128-bit vectors required for storage
+        /// </summary>
+        public int Vec128Count 
+        {
+            [MethodImpl(Inline)]
+            get => StorageBytes/16 + (Vec128Remainder != 0 ? 1 : 0);
+        }
+
+        /// <summary>
+        /// The number of whole 256-bit vectors required for storage
+        /// </summary>
+        public int Vec256Count 
+        {
+            [MethodImpl(Inline)]
+            get => StorageBytes / 32 + (Vec256Remainder != 0 ? 1 : 0);
+        }
+            
+        /// <summary>
+        /// The number bytes that do not fit into a whole number of 256-bit vectors
+        /// </summary>
+        public int Vec256Remainder 
+        {
+            [MethodImpl(Inline)]
+            get => StorageBytes % 32;
+        }
+
+        /// <summary>
+        /// The total number of items covered by the grid
+        /// </summary>
+        public int PointCount 
+        {
+            [MethodImpl(Inline)]
+            get => RowCount * ColCount;     
+        }
+
+        /// <summary>
+        /// A semantic identifier that characterizes/identifies a grid
+        /// </summary>
+        public GridMoniker Moniker 
+        {
+            [MethodImpl(Inline)]
+            get => GridMoniker.FromSpecs((ushort)RowCount,(ushort)ColCount, (ushort)SegWidth);
+        }
+
+        /// <summary>
+        /// Computes the 0-based linear index determined by a row/col coordinate
+        /// </summary>
+        /// <param name="row">The 0-based row index</param>
+        /// <param name="col">The 0-based col index</param>
+        [MethodImpl(Inline)]
+        public int Pos(int row, int col)
+            => BitGrid.bitpos(ColCount, row,col);
+
+        /// <summary>
+        /// Computes the storage segment offset for a row/col coordinate
+        /// </summary>
+        /// <param name="row">The 0-based row index</param>
+        /// <param name="col">The 0-based col index</param>
+        [MethodImpl(Inline)]
+        public int Offset(int row, int col)
+            => Pos(row,col) % SegWidth;
+
+        /// <summary>
+        /// Computes the storage segment that covers a specifed row/col coordinate
+        /// </summary>
+        /// <param name="row">The 0-based row index</param>
+        /// <param name="col">The 0-based col index</param>
+        [MethodImpl(Inline)]
+        public int Seg(int row, int col)
+            => Pos(row,col) / SegWidth;
+            
+        public override string ToString()
+            => this.Format();    
+
+    }
+}

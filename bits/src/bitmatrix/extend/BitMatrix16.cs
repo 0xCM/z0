@@ -69,7 +69,7 @@ namespace Z0
         /// </summary>
         [MethodImpl(Inline)] 
         public static Graph<byte> ToGraph(this BitMatrix16 A)
-            => BitGraph.graph(A);
+            => BitMatrix.graph(A);
 
         /// <summary>
         /// Transposes a copy of the source matrix

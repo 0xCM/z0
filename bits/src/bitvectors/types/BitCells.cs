@@ -16,7 +16,7 @@ namespace Z0
         /// <summary>
         /// The bitvector content, indexed via a bitmap
         /// </summary>
-        readonly Span256<T> data;
+        readonly Block256<T> data;
     
         /// <summary>
         /// Correlates linear bit positions and storage segments
@@ -203,7 +203,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        internal BitCells(Span256<T> src)
+        internal BitCells(Block256<T> src)
         {            
             this.data = src;
             this.MaxBitCount = src.Length * CellCapacity;

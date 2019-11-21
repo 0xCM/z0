@@ -21,7 +21,7 @@ namespace Z0
             // Note that this is just POC; to really read the method properly,
             //one must know where it ends, and I'm not sure if that can be done
             //without cracking open the method table of the PE file...
-            return MethodMemory.ReadUntil(m, NatSpan.alloc<N32,byte>(), 0xc3, 0xe0);
+            return MethodMemory.ReadUntil(m, NatBlock.alloc<N32,byte>(), 0xc3, 0xe0);
         }
 
         [MethodImpl(Inline)]
@@ -37,7 +37,7 @@ namespace Z0
             return ref dst;
         }
 
-        static unsafe MethodMemory ReadUntil<N>(MethodInfo m, Span<N,byte> dst, params byte[] conditions)
+        static unsafe MethodMemory ReadUntil<N>(MethodInfo m, NatBlock<N,byte> dst, params byte[] conditions)
             where N : unmanaged, ITypeNat
         {
             

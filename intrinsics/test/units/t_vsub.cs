@@ -118,7 +118,7 @@ namespace Z0.Test
             var lhs = Random.BlockedSpan<T>(n256,SampleSize).ReadOnly();
             var rhs = Random.BlockedSpan<T>(n256,SampleSize).ReadOnly();
             var dstA = inxspan.sub(lhs, rhs, lhs.Replicate());
-            var dstB = Span256.alloc<T>(lhs.BlockCount);
+            var dstB = Block256.alloc<T>(lhs.BlockCount);
             for(var i = 0; i < dstA.Length; i++)
                 dstB[i] = gmath.sub(lhs[i], rhs[i]);
             Claim.yea(dstA.Identical(dstB));

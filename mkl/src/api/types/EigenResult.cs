@@ -12,7 +12,7 @@ namespace Z0.Mkl
 
     public static class EigenResult
     {
-        public static EigenResult<N,T> Define<N,T>(Span<N,Complex<T>> values, Span256<T> lv = default,  Span256<T> rv = default)
+        public static EigenResult<N,T> Define<N,T>(NatBlock<N,Complex<T>> values, Block256<T> lv = default,  Block256<T> rv = default)
             where N : unmanaged, ITypeNat
             where T : unmanaged
                 => new EigenResult<N, T>(values, lv, rv);
@@ -25,18 +25,18 @@ namespace Z0.Mkl
         where N : unmanaged, ITypeNat
         where T : unmanaged
     {
-        public EigenResult(Span<N,Complex<T>> values, Span256<T> lv = default,  Span256<T> rv = default)
+        public EigenResult(NatBlock<N,Complex<T>> values, Block256<T> lv = default,  Block256<T> rv = default)
         {
             this.Values = values;
             this.LeftVectors  = lv;
             this.RightVectors = rv;
         }
         
-        public readonly Span<N,Complex<T>> Values;
+        public readonly NatBlock<N,Complex<T>> Values;
 
-        public readonly Span256<T> LeftVectors;
+        public readonly Block256<T> LeftVectors;
 
-        public readonly Span256<T> RightVectors;
+        public readonly Block256<T> RightVectors;
 
     }
 

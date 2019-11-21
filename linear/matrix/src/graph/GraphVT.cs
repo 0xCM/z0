@@ -26,7 +26,7 @@ namespace Z0
         /// <param name="vertices">The vertices in the graph</param>
         /// <param name="edges">The edges that connect the vertices</param>
         public static Graph<V,T> Define(IEnumerable<Vertex<V,T>> vertices, IEnumerable<Edge<V>> edges)
-            => new Graph<V,T>(vertices.OrderBy(x => x.Index,PrimalInfo.comparer<V>()).ToArray(), edges.ToArray());
+            => new Graph<V,T>(vertices.OrderBy(x => x.Index,PrimalComparer.Get<V>()).ToArray(), edges.ToArray());
 
         /// <summary>
         /// Creates a graph from supplied vertices and edges and assumes the vertices are already appropriately sorted

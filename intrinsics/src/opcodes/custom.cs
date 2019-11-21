@@ -23,7 +23,7 @@ namespace Z0
             => CpuVec128.item(x, 2,value);
 
 
-        public static Vector256<uint> avxpack1(Span<N8,uint> src, int offset)
+        public static Vector256<uint> avxpack1(NatBlock<N8,uint> src, int offset)
             => AvxBitpack.pack(src, offset);
         
         public static ulong sum_256x64u(Vector256<ulong> src)

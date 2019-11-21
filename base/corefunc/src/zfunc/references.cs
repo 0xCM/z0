@@ -61,7 +61,7 @@ partial class zfunc
     /// <typeparam name="T">The element type</typeparam>
     [MethodImpl(Inline)]
     public static ref T seek<T>(ref T src, int count)
-        where T : unmanaged
+        //where T : unmanaged
             => ref Unsafe.Add(ref src, count);
 
     /// <summary>
@@ -72,7 +72,7 @@ partial class zfunc
     /// <typeparam name="T">The element type</typeparam>
     [MethodImpl(Inline)]
     public static ref T seek<T>(Span<T> src, int count)
-        where T : unmanaged
+        //where T : unmanaged
             => ref seek(ref head(src), count);
 
     /// <summary>
@@ -83,7 +83,7 @@ partial class zfunc
     /// <typeparam name="T">The element type</typeparam>
     [MethodImpl(Inline)]
     public static ref T seekb<T>(ref T src, long count)
-        where T : unmanaged
+        //where T : unmanaged
             => ref Unsafe.AddByteOffset(ref src, intptr(count));
 
     /// <summary>
@@ -94,7 +94,7 @@ partial class zfunc
     /// <typeparam name="T">The element type</typeparam>
     [MethodImpl(Inline)]
     public static ref T seekb<T>(Span<T> src, long count)
-        where T : unmanaged
+        //where T : unmanaged
             => ref seekb(ref head(src), count);
 
     /// <summary>

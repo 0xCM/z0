@@ -1,4 +1,4 @@
-// 2019-11-20 15:08:33:875
+// 2019-11-21 00:45:04:696
 ref uint pack(N8 n, in bit src, ref uint dst)
 {
     IL_0000: call Z0.N4 zfunc::get_n4()
@@ -4313,18 +4313,18 @@ uint vpop(Vector128<ulong> x, Vector128<ulong> y, Vector128<ulong> z)
     IL_00D1: call System.Runtime.Intrinsics.Vector128`1<System.UInt64> Z0.dinx::vadd(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
     IL_00D6: stloc.s V_4
     IL_00D8: call Z0.N128 zfunc::get_n128()
-    IL_00DD: call Z0.BlockStorage/Block128 Z0.DataBlocks::alloc(Z0.N128)
+    IL_00DD: call Z0.StackContainers/Stack128 Z0.StackStore::alloc(Z0.N128)
     IL_00E2: stloc.s V_5
     IL_00E4: ldloc.s V_4
     IL_00E6: ldloca.s V_5
-    IL_00E8: ldflda System.UInt64 Z0.BlockStorage/Block128::X0
+    IL_00E8: ldflda System.UInt64 Z0.StackContainers/Stack128::X0
     IL_00ED: call System.Void Z0.dinx::vstore(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.UInt64&)
     IL_00F2: ldc.i4.0
     IL_00F3: conv.i8
     IL_00F4: stloc.s V_6
     IL_00F6: ldloc.s V_6
     IL_00F8: ldloc.s V_5
-    IL_00FA: ldfld System.UInt64 Z0.BlockStorage/Block128::X0
+    IL_00FA: ldfld System.UInt64 Z0.StackContainers/Stack128::X0
     IL_00FF: ldc.i8 72340172838076673
     IL_0108: mul
     IL_0109: ldc.i4.s 56
@@ -4333,7 +4333,7 @@ uint vpop(Vector128<ulong> x, Vector128<ulong> y, Vector128<ulong> z)
     IL_010D: stloc.s V_6
     IL_010F: ldloc.s V_6
     IL_0111: ldloc.s V_5
-    IL_0113: ldfld System.UInt64 Z0.BlockStorage/Block128::X1
+    IL_0113: ldfld System.UInt64 Z0.StackContainers/Stack128::X1
     IL_0118: ldc.i8 72340172838076673
     IL_0121: mul
     IL_0122: ldc.i4.s 56
@@ -4428,18 +4428,18 @@ uint vpop(Vector256<ulong> x, Vector256<ulong> y, Vector256<ulong> z)
     IL_00D1: call System.Runtime.Intrinsics.Vector256`1<System.UInt64> Z0.dinx::vadd(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
     IL_00D6: stloc.s V_4
     IL_00D8: call Z0.N256 zfunc::get_n256()
-    IL_00DD: call Z0.BlockStorage/Block256 Z0.DataBlocks::alloc(Z0.N256)
+    IL_00DD: call Z0.StackContainers/Stack256 Z0.StackStore::alloc(Z0.N256)
     IL_00E2: stloc.s V_5
     IL_00E4: ldloc.s V_4
     IL_00E6: ldloca.s V_5
-    IL_00E8: ldflda System.UInt64 Z0.BlockStorage/Block256::X0
+    IL_00E8: ldflda System.UInt64 Z0.StackContainers/Stack256::X0
     IL_00ED: call System.Void Z0.dinx::vstore(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.UInt64&)
     IL_00F2: ldc.i4.0
     IL_00F3: conv.i8
     IL_00F4: stloc.s V_6
     IL_00F6: ldloc.s V_6
     IL_00F8: ldloc.s V_5
-    IL_00FA: ldfld System.UInt64 Z0.BlockStorage/Block256::X0
+    IL_00FA: ldfld System.UInt64 Z0.StackContainers/Stack256::X0
     IL_00FF: ldc.i8 72340172838076673
     IL_0108: mul
     IL_0109: ldc.i4.s 56
@@ -4448,7 +4448,7 @@ uint vpop(Vector256<ulong> x, Vector256<ulong> y, Vector256<ulong> z)
     IL_010D: stloc.s V_6
     IL_010F: ldloc.s V_6
     IL_0111: ldloc.s V_5
-    IL_0113: ldfld System.UInt64 Z0.BlockStorage/Block256::X1
+    IL_0113: ldfld System.UInt64 Z0.StackContainers/Stack256::X1
     IL_0118: ldc.i8 72340172838076673
     IL_0121: mul
     IL_0122: ldc.i4.s 56
@@ -4457,7 +4457,7 @@ uint vpop(Vector256<ulong> x, Vector256<ulong> y, Vector256<ulong> z)
     IL_0126: stloc.s V_6
     IL_0128: ldloc.s V_6
     IL_012A: ldloc.s V_5
-    IL_012C: ldfld System.UInt64 Z0.BlockStorage/Block256::X2
+    IL_012C: ldfld System.UInt64 Z0.StackContainers/Stack256::X2
     IL_0131: ldc.i8 72340172838076673
     IL_013A: mul
     IL_013B: ldc.i4.s 56
@@ -4466,7 +4466,7 @@ uint vpop(Vector256<ulong> x, Vector256<ulong> y, Vector256<ulong> z)
     IL_013F: stloc.s V_6
     IL_0141: ldloc.s V_6
     IL_0143: ldloc.s V_5
-    IL_0145: ldfld System.UInt64 Z0.BlockStorage/Block256::X3
+    IL_0145: ldfld System.UInt64 Z0.StackContainers/Stack256::X3
     IL_014A: ldc.i8 72340172838076673
     IL_0153: mul
     IL_0154: ldc.i4.s 56

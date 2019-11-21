@@ -238,7 +238,7 @@ namespace Z0
         /// <param name="line">The file line number of invocation</param>
         /// <typeparam name="N">The length type</typeparam>
         /// <typeparam name="T">The element type</typeparam>
-        public static void eq<N,T>(Span<N,T> lhs, Span<N,T> rhs, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
+        public static void eq<N,T>(NatBlock<N,T> lhs, NatBlock<N,T> rhs, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
             where T : unmanaged 
             where N : unmanaged, ITypeNat             
                 => eq(lhs.Unsized,rhs.Unsized, caller,file,line);
@@ -254,11 +254,11 @@ namespace Z0
         /// <typeparam name="M">The row dimension type</typeparam>
         /// <typeparam name="N">The column dimension type</typeparam>
         /// <typeparam name="T">The element type</typeparam>
-        public static void eq<M,N,T>(Span<M,N,T> lhs, Span<M,N,T> rhs, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
+        public static void eq<M,N,T>(NatGrid<M,N,T> lhs, NatGrid<M,N,T> rhs, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
             where N : unmanaged, ITypeNat
             where M : unmanaged, ITypeNat
             where T : unmanaged 
-                => eq(lhs.Unsized,rhs.Unsized, caller, file, line);
+                => eq(lhs.Data,rhs.Data, caller, file, line);
 
         /// <summary>
         /// Asserts content equality for two 128-bit blocked spans
@@ -272,7 +272,7 @@ namespace Z0
         public static void eq<T>(ConstBlock128<T> lhs, ConstBlock128<T> rhs,  [Member] string caller = null, [File] string file = null, [Line] int? line = null)
             where T : unmanaged 
         {
-            for(var i = 0; i< Span128.length(lhs,rhs); i++)
+            for(var i = 0; i< Block128.length(lhs,rhs); i++)
                 if(!gmath.eq(lhs[i],rhs[i]))
                     throw Errors.ItemsNotEqual(i, lhs[i], rhs[i], caller, file, line);
         }
@@ -286,7 +286,7 @@ namespace Z0
         /// <param name="file">The file in which the invoking function is defined </param>
         /// <param name="line">The file line number of invocation</param>
         /// <typeparam name="T">The element type</typeparam>        
-        public static void eq<T>(Span128<T> lhs, Span128<T> rhs, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
+        public static void eq<T>(Block128<T> lhs, Block128<T> rhs, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
             where T : unmanaged 
                 => eq(lhs.ReadOnly(),rhs.ReadOnly(), caller,file,line);
 
@@ -299,7 +299,7 @@ namespace Z0
         /// <param name="file">The file in which the invoking function is defined </param>
         /// <param name="line">The file line number of invocation</param>
         /// <typeparam name="T">The element type</typeparam>        
-        public static void eq<T>(Span256<T> lhs, Span256<T> rhs, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
+        public static void eq<T>(Block256<T> lhs, Block256<T> rhs, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
             where T : unmanaged
         {
             for(var i = 0; i< length(lhs,rhs); i++)

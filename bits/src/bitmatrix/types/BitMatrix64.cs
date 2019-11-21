@@ -66,7 +66,7 @@ namespace Z0
             => new BitMatrix64(src);
 
         [MethodImpl(Inline)]
-        public static BitMatrix64 From(in Span<N64,ulong> src)        
+        public static BitMatrix64 From(in NatBlock<N64,ulong> src)        
             => new BitMatrix64(src);
 
         [MethodImpl(Inline)]

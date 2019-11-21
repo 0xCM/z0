@@ -47,7 +47,7 @@ namespace Z0
         /// <param name="src">The source span</param>
         /// <param name="scalar">The scalar value</param>
         /// <typeparam name="T">The span element type</typeparam>
-        public static Span<N,T> add<N,T>(Span<N,T> src, T scalar)
+        public static NatBlock<N,T> add<N,T>(NatBlock<N,T> src, T scalar)
             where T : unmanaged
             where N : unmanaged, ITypeNat
         {

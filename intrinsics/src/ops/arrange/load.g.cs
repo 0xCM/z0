@@ -122,7 +122,7 @@ namespace Z0
                 => vload(n, in head(src));
 
         [MethodImpl(Inline)]
-        public static Vector128<T> vload<T>(Span128<T> src)
+        public static Vector128<T> vload<T>(Block128<T> src)
             where T : unmanaged
                 =>  vload(n128,src.Unblocked);
 
@@ -132,7 +132,7 @@ namespace Z0
                 =>  vload(n128,src.Data);
 
         [MethodImpl(Inline)]
-        public static Vector256<T> vload<T>(Span256<T> src)
+        public static Vector256<T> vload<T>(Block256<T> src)
             where T : unmanaged
                 =>  vload(n256,src.Unblocked);
 

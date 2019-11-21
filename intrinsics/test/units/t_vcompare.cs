@@ -114,7 +114,7 @@ namespace Z0
             }
         }
 
-        void Report<T>(Span128<T> x, Span128<T> y, Vector128<T> expect, Vector128<T> actual, Vector128<T> result)
+        void Report<T>(Block128<T> x, Block128<T> y, Vector128<T> expect, Vector128<T> actual, Vector128<T> result)
             where T : unmanaged
         {
             var pad = 5;
@@ -126,7 +126,7 @@ namespace Z0
 
         }
 
-        void Report<T>(Span256<T> x, Span256<T> y, Vector256<T> expect, Vector256<T> actual, Vector256<T> result)
+        void Report<T>(Block256<T> x, Block256<T> y, Vector256<T> expect, Vector256<T> actual, Vector256<T> result)
             where T : unmanaged
         {
             var pad = 5;

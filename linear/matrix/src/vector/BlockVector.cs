@@ -15,10 +15,10 @@ namespace Z0
     public ref struct BlockVector<T>
         where T : unmanaged
     {
-        Span256<T> data;
+        Block256<T> data;
 
         [MethodImpl(Inline)]
-        public BlockVector(in Span256<T> src)
+        public BlockVector(in Block256<T> src)
             => this.data = src;
 
         [MethodImpl(Inline)]
@@ -26,7 +26,7 @@ namespace Z0
             => this.data = src.Replicate();
 
         [MethodImpl(Inline)]
-        public static implicit operator BlockVector<T>(in Span256<T> src)
+        public static implicit operator BlockVector<T>(in Block256<T> src)
             =>  new BlockVector<T>(src);
 
         [MethodImpl(Inline)]
@@ -34,7 +34,7 @@ namespace Z0
             =>  new BlockVector<T>(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator Span256<T>(in BlockVector<T> src)
+        public static implicit operator Block256<T>(in BlockVector<T> src)
             =>  src.data;
 
         [MethodImpl(Inline)]
@@ -82,7 +82,7 @@ namespace Z0
             get => data;
         }
 
-        public Span256<T> Data
+        public Block256<T> Data
         {
             [MethodImpl(Inline)]
             get => data;
@@ -130,7 +130,7 @@ namespace Z0
         public override int GetHashCode()
             => throw new NotSupportedException(); 
 
-        public Span256<T> ToSpan256()
+        public Block256<T> ToSpan256()
             => data;
 
         public ConstBlock256<T> ToReadOnlySpan256()

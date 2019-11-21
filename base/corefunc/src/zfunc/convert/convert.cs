@@ -54,11 +54,11 @@ partial class zfunc
     /// <typeparam name="S">The source type</typeparam>
     /// <typeparam name="T">The target type</typeparam>
     [MethodImpl(Inline)]   
-    public static Span256<T> convert<S,T>(Span256<S> src)
+    public static Block256<T> convert<S,T>(Block256<S> src)
         where T : unmanaged
         where S : unmanaged
     {
-        var dst = Span256.allocu<T>(src.Length);
+        var dst = Block256.allocu<T>(src.Length);
         for(var i=0; i< src.Length; i++)
             dst[i] = convert<S,T>(src[i]);
         return dst;
@@ -105,7 +105,7 @@ partial class zfunc
     /// <typeparam name="S">The source type</typeparam>
     /// <typeparam name="T">The target type</typeparam>
     [MethodImpl(Inline)]   
-    public static Span<T> convert<N,S,T>(Span<N,S> src)
+    public static Span<T> convert<N,S,T>(NatBlock<N,S> src)
         where N : unmanaged, ITypeNat
         where T : unmanaged
         where S : unmanaged

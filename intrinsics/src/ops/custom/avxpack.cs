@@ -31,11 +31,11 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static Vector256<uint> pack(Span<N8,uint> src, int offset)
+        public static Vector256<uint> pack(NatBlock<N8,uint> src, int offset)
             => pack(8, ref src.Head, offset);
 
         [MethodImpl(Inline)]
-        public static Vector256<uint> pack(Span<N32,uint> src, int offset)
+        public static Vector256<uint> pack(NatBlock<N32,uint> src, int offset)
             => pack(32, ref src.Head, offset);
 
         [MethodImpl(Inline)]

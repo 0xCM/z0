@@ -23,7 +23,7 @@ namespace Z0
         where T : unmanaged
     {
         public static Graph<V,W,T> Define(IEnumerable<Vertex<V,T>> vertices, IEnumerable<Edge<V,W>> edges)
-            => new Graph<V,W,T>(vertices.OrderBy(x => x.Index,PrimalInfo.comparer<V>()).ToArray(), edges.ToArray());
+            => new Graph<V,W,T>(vertices.OrderBy(x => x.Index,PrimalComparer.Get<V>()).ToArray(), edges.ToArray());
 
         Graph(Vertex<V,T>[] vertices, Edge<V,W>[] edges)
         {

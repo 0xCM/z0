@@ -30,11 +30,36 @@ namespace Z0
             for(var row = 0; row < map.RowCount; row++)
             for(var col = 0; col < map.ColCount; col++)
             {
-                var index = map.Cell(row,col);
-                var actual = gbits.test(src, index.Position);
+                var actual = gbits.test(src, (uint)map.Pos(row,col));
                 Claim.yea(actual == state);
                 state = !state;
             }        
+        }
+
+        public void bgbs_11x3x16u()
+            => bg_bs_check(n11,n3,ushort.MinValue);
+            
+        public void bgbs_64x4x8u()
+            => bg_bs_check(n64,n4,byte.MinValue);
+
+        public void bgbs_113x201x64u()
+            => bg_bs_check(natseq(n1,n1,n3), natseq(n2,n0,n1), ulong.MinValue);
+
+        void bg_bs_check<M,N,T>(M m = default, N n = default, T zero = default)
+            where M : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
+            where T : unmanaged
+        {
+            for(var sample = 0; sample < SampleSize; sample++)
+            {
+                var bg = BitGrid.alloc(m,n,zero);
+                var bs = Random.BitString((int)NatMath.mul(m,n));
+
+                for(var i=0; i<bs.Length; i++)
+                    bg[i] = bs[i];
+                
+                Claim.eq(bg.ToBitString(), bs);        
+            }
         }
 
         public void natural_layout()
@@ -80,7 +105,7 @@ namespace Z0
         
         public void bitgrid_store()
         {
-            // var g1 = Random.BitGrid<uint>(20,20);
+            
             var dst = StackStore.alloc(n128);
             var dst8u = dst.AsBytes();
             for(var i=0; i<16; i++)
@@ -101,9 +126,6 @@ namespace Z0
             for(var i = 0; i < SampleSize; i++)
             {
                 var src = Random.BitGrid<T>(rows,cols);
-                var moniker = src.Moniker;
-                Claim.eq(moniker, BitGrid.moniker<T>(rows,cols));
-
                 var dstA = BitGrid.alloc<T>(rows,cols);
                 var dstB = BitGrid.alloc<T>(rows,cols);                
 
@@ -111,7 +133,7 @@ namespace Z0
                 for(var row = 0; row < rows; row++)
                 for(var col = 0; col < cols; col++, bitpos++)
                 {
-                    var b1 = BitGrid.readbit(moniker, in src.Head, row, col);
+                    var b1 = BitGrid.readbit(src.Width, in src.Head, row, col);
                     var b2 = BitGrid.readbit(in src.Head, bitpos);
                     Claim.yea(b1 == b2);
 
@@ -122,8 +144,8 @@ namespace Z0
                 var bsB = dstB.ToBitString();
                 Claim.eq(bsA, bsB);
             }
-
         }
+
         void bitread_bench<T>(ushort M, ushort N, int cycles, SystemCounter counter = default)
             where T : unmanaged
         {
@@ -141,8 +163,6 @@ namespace Z0
 
             Benchmark($"gridread_{moniker<T>()}", counter, cycles*M*N);
         }
-
-
 
         void bitmatrix_bitread_bench<T>(int cycles, SystemCounter counter = default)
             where T : unmanaged
@@ -187,7 +207,7 @@ namespace Z0
         {
             ushort M = 249;
             ushort N = 128;
-            var moniker = GridMoniker.Define<ulong>(M,N);
+            var moniker = GridMoniker.FromDim<ulong>(M,N);
             int segwidth = bitsize<ulong>();
             var segorder = (int)math.log2(segwidth);
 
@@ -208,10 +228,10 @@ namespace Z0
                 var offset = pos % segwidth;
 
                 Claim.eq(map.Pos(row,col), pos);
-                Claim.eq(map.Cell(pos).Segment, seg);
-                Claim.eq(map.Cell(pos).Offset, offset);
+                Claim.eq(map.Seg(row,col), seg);
+                Claim.eq(map.Offset(row,col), offset);
                 
-                var b1 = BitGrid.readbit(moniker, in head(src), row,col);
+                var b1 = BitGrid.readbit(N, in head(src), row, col);
                 var b2 = bg[row,col];
                 Claim.eq(b1,b2);
             }            
@@ -229,14 +249,7 @@ namespace Z0
 
             for(var row = 0; row < rows; row++)
             for(var col = 0; col < cols; col++, current++)
-            {
-                var pos1 = map[row,col].Position;
-                var pos2 = map[current].Position;
-
-                Claim.eq(pos1, current);
-                Claim.eq(pos2, current);
-                
-            }
+                Claim.eq(map.Pos(row,col), current);
 
             Claim.eq(current, rows*cols);
             Claim.eq(current, map.PointCount);
@@ -258,14 +271,8 @@ namespace Z0
 
             for(var row = 0; row < rows; row++)
             for(var col = 0; col < cols; col++, current++)
-            {
-                var pos1 = map[row,col].Position;
-                var pos2 = map[current].Position;
-
-                Claim.eq(pos1, current);
-                Claim.eq(pos2, current);                
-            }
-
+                Claim.eq(map.Pos(row,col), current);
+                
             Claim.eq(current, rows*cols);
             Claim.eq(current, map.PointCount);
         
@@ -324,7 +331,7 @@ namespace Z0
             
             for(var i=0; i< SampleSize; i++)
             {
-                var input = Random.BitString(grid.Moniker.PointCount);
+                var input = Random.BitString(grid.PointCount);
                 for(var pos=0; pos<input.Length; pos++)
                     grid[pos] = input[pos];
 

@@ -1,23 +1,23 @@
-// 2019-11-20 15:08:33:312
-Vector128<uint> pack(ReadOnlySpan<N128,bit> src)
+// 2019-11-21 00:45:04:061
+Vector128<uint> pack(ConstNatBlock<N128,bit> src)
 {
     IL_0000: call Z0.N1 zfunc::get_n1()
     IL_0005: call Z0.N32 zfunc::get_n32()
     IL_000A: ldarga.s src
-    IL_000C: call Z0.ReadOnlySpan`2<Z0.N128,System.UInt32> Z0.ReadOnlySpan`2<Z0.N128,Z0.bit>::As<System.UInt32>()
+    IL_000C: call Z0.ConstNatBlock`2<Z0.N128,System.UInt32> Z0.ConstNatBlock`2<Z0.N128,Z0.bit>::As<System.UInt32>()
     IL_0011: stloc.0
     IL_0012: ldloca.s V_0
-    IL_0014: call System.UInt32& modreq(System.Runtime.InteropServices.InAttribute) zfunc::head<Z0.N128,System.UInt32>(Z0.ReadOnlySpan`2<Z0.N128,System.UInt32>&)
+    IL_0014: call System.UInt32& modreq(System.Runtime.InteropServices.InAttribute) zfunc::head<Z0.N128,System.UInt32>(Z0.ConstNatBlock`2<Z0.N128,System.UInt32>&)
     IL_0019: call System.Runtime.Intrinsics.Vector128`1<System.UInt32> Z0.SimdPack::pack(Z0.N1,Z0.N32,System.UInt32&)
     IL_001E: ret
 
 }
-Vector128<uint> pack(N1 width, ReadOnlySpan<N128,uint> src)
+Vector128<uint> pack(N1 width, ConstNatBlock<N128,uint> src)
 {
     IL_0000: ldarg.0
     IL_0001: call Z0.N32 zfunc::get_n32()
     IL_0006: ldarga.s src
-    IL_0008: call System.UInt32& modreq(System.Runtime.InteropServices.InAttribute) zfunc::head<Z0.N128,System.UInt32>(Z0.ReadOnlySpan`2<Z0.N128,System.UInt32>&)
+    IL_0008: call System.UInt32& modreq(System.Runtime.InteropServices.InAttribute) zfunc::head<Z0.N128,System.UInt32>(Z0.ConstNatBlock`2<Z0.N128,System.UInt32>&)
     IL_000D: call System.Runtime.Intrinsics.Vector128`1<System.UInt32> Z0.SimdPack::pack(Z0.N1,Z0.N32,System.UInt32&)
     IL_0012: ret
 
