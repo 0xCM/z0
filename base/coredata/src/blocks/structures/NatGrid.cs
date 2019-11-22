@@ -25,7 +25,6 @@ namespace Z0
     {
         readonly Span<T> data;
 
-
         /// <summary>
         /// The number of rows in the structure
         /// </summary>
@@ -119,32 +118,22 @@ namespace Z0
             this.data = src.Data;
         }
 
-
-        [MethodImpl(Inline)]        
-        public ref T Cell(int r, int c)
-        {
-            if(r >= RowCount)
-                throw new Exception($"Out of range: The row index {r} was outside the range [{0},{RowCount - 1}]");
-            if(c >= ColCount)
-                throw new Exception($"Out of range: The col index {c} was outside the range [{0},{ColCount - 1}]");
-                     
-            return ref data[RowLenth*r + c];
-        }
-
-        [MethodImpl(Inline)]        
-        public ref T Cell(uint i, uint j)
-            => ref Cell((int)i, (int)j);
-
-        public ref T this[int i, int j]
+        public ref T Head
         {
             [MethodImpl(Inline)]        
-            get => ref Cell(i,j);
+            get => ref MemoryMarshal.GetReference(data);
         }
 
-        public ref T this[int ix] 
+        public ref T this[int r, int c]
+        {
+            [MethodImpl(Inline)]        
+            get => ref Unsafe.Add(ref Head, RowLenth*r + c);
+        }
+
+        public ref T this[int index] 
         {
             [MethodImpl(Inline)]
-            get => ref data[ix];
+            get => ref Unsafe.Add(ref Head, index);
         }
 
         /// <summary>
@@ -195,7 +184,7 @@ namespace Z0
             where I : unmanaged, ITypeNat
             where J : unmanaged, ITypeNat
         {            
-            var  dst = NatGrid.alloc<I,J,T>();
+            var  dst = DataBlocks.gridalloc<I,J,T>();
             var curidx = 0;
             for(var i = origin.r; i < (origin.r + dim.I); i++)
             for(var j = origin.c; j < (origin.c + dim.J); j++)
@@ -230,7 +219,7 @@ namespace Z0
 
         public NatGrid<N,M,T> Transpose()
         {
-            var dst = NatGrid.alloc<N,M,T>();                
+            var dst = DataBlocks.gridalloc<N,M,T>();                
             for(var r = 0; r < RowCount; r++)
             for(var c = 0; c < ColCount; c++)
                 dst[c, r] = this[r, c];

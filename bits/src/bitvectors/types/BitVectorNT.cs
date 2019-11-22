@@ -84,7 +84,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator BitCells<T>(in BitVector<N,T> src)
-            => BitCells<T>.FromCells(src.data, (int)new N().NatValue);
+            => new BitCells<T>(src.data, (int)new N().NatValue);
 
         [MethodImpl(Inline)]
         public static BitVector<N,T> operator &(in BitVector<N,T> lhs, in BitVector<N,T> rhs)

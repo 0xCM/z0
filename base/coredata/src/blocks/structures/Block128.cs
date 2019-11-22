@@ -26,18 +26,6 @@ namespace Z0
         /// </summary>
         public static int BlockLength => Vector128<T>.Count;
 
-        /// <summary>
-        /// The size, in bytes, of a block 
-        /// </summary>
-        /// <typeparam name="T">The primitive type</typeparam>
-        /// <remarks>Should always be 16 irrespective of the cell type</remarks>
-        public static int BlockSize =>  Unsafe.SizeOf<T>() * BlockLength; 
-
-        /// <summary>
-        /// The size, in bytes, of a constituent block cell
-        /// </summary>
-        /// <typeparam name="T">The primitive type</typeparam>
-        public static int CellSize => BlockSize / BlockLength;
 
         [MethodImpl(Inline)]
         public static implicit operator Span<T>(in Block128<T> src)
@@ -54,27 +42,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bool operator != (in Block128<T> lhs, in Block128<T> rhs)
             => lhs.data != rhs.data;
-        
-        [MethodImpl(Inline)]
-        public static bool Aligned(int length)
-            => length % BlockLength == 0;
-
-        [MethodImpl(NotInline)]
-        public static Block128<T> AllocBlocks(int count, T? fill = null)
-        {
-            Span<T> dst = new T[count * BlockLength];
-            if(fill != null)
-                dst.Fill(fill.Value);
-            return new Block128<T>(dst);
-        }
-
-        [MethodImpl(NotInline)]
-        public static Block128<T> Load(T[] src, int offset = 0)
-        {
-            require(Aligned(src.Length - offset));
-            Span<T> dst = new Span<T>(src, offset, src.Length - offset);
-            return new Block128<T>(dst);
-        }
         
         [MethodImpl(Inline)]
         internal Block128(Span<T> src)

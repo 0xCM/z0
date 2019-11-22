@@ -61,7 +61,7 @@ namespace Z0
 
         public void m64x8u_v128x16u()
         {
-            var x = DataBlocks.load<byte>(n64,0,1,2,3,4,5,6,7);
+            var x = DataBlocks.partload<byte>(n64,0,1,2,3,4,5,6,7);
             var y = dinx.vconvert(x, out Vector128<ushort> _);
             var z = dinx.vparts(n128,0,1,2,3,4,5,6,7);            
 
@@ -70,7 +70,7 @@ namespace Z0
 
         public void blockspan_128x8u_v128x16u()
         {
-            var x = DataBlocks.load<byte>(n128,0,1,2,3,4,5,6,7,8,9,A,B,C,D,E,F);
+            var x = DataBlocks.partload<byte>(n128,0,1,2,3,4,5,6,7,8,9,A,B,C,D,E,F);
             dinx.vconvert(x, out Vector128<ushort> y0, out Vector128<ushort> y1);
             var z0 = x.Block(n64,0);
             var z1 = x.Block(n64,1);
@@ -86,7 +86,7 @@ namespace Z0
 
         public void blockspan_64x8u_v2x128x32u()
         {
-            var x = DataBlocks.load<byte>(n64,0,1,2,3,4,5,6,7);
+            var x = DataBlocks.partload<byte>(n64,0,1,2,3,4,5,6,7);
             dinx.vconvert(x, out Vector128<uint> y0, out Vector128<uint> y1);
             var z0 = x.Slice(0,4);
             var z1 = x.Slice(4,4);

@@ -190,7 +190,7 @@ namespace Z0
             if(seed.Length == 0)
                 _seed = Entropy.Values<N,ulong>();
             else if(seed.Length == (int)n.NatValue)
-                _seed = NatBlock.load(n, ref seed[0]);
+                _seed = DataBlocks.natload(n, ref seed[0]);
             else
                 throw Errors.LengthMismatch((int)n.NatValue, seed.Length);
 

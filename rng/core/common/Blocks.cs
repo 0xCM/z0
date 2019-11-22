@@ -26,7 +26,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Block128<T> Blocks<T>(this IPolyrand random, N128 n, int blocks = 1, Interval<T>? domain = null, Func<T,bool> filter = null)
             where T : unmanaged
-                => random.Stream(domain,filter).ToSpan(DataBlocks.blocklen<T>(n,blocks)).ToSpan128(); 
+                => random.Stream(domain,filter).ToSpan(DataBlocks.blocklen<T>(n,blocks)).ToBlock128(); 
 
         /// <summary>
         /// Allocates a 128-bit blocked span and populates it with random values
@@ -40,7 +40,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Block128<T> Blocks<T>(this IPolyrand random, N128 n, Interval<T> domain, int blocks = 1, Func<T,bool> filter = null)
             where T : unmanaged
-                => random.Stream(domain,filter).ToSpan(DataBlocks.blocklen<T>(n,blocks)).ToSpan128(); 
+                => random.Stream(domain,filter).ToSpan(DataBlocks.blocklen<T>(n,blocks)).ToBlock128(); 
 
         /// <summary>
         /// Allocates a 128-bit blocked span and populates it with random values
@@ -53,7 +53,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Block128<T> Blocks<T>(this IPolyrand random, N128 n, T min, T max, int blocks = 1, Func<T,bool> filter = null)
             where T : unmanaged
-                => random.Stream((min,max),filter).ToSpan(DataBlocks.blocklen<T>(n,blocks)).ToSpan128(); 
+                => random.Stream((min,max),filter).ToSpan(DataBlocks.blocklen<T>(n,blocks)).ToBlock128(); 
 
         /// <summary>
         /// Allocates a 128-bit blocked span and populates it with random values and returns a readonly view to the caller
@@ -92,7 +92,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Block256<T> Blocks<T>(this IPolyrand random, N256 n, int blocks = 1, Interval<T>? domain = null, Func<T,bool> filter = null)
             where T : unmanaged       
-                => random.Stream(domain,filter).ToSpan(DataBlocks.blocklen<T>(n,blocks)).ToSpan256();       
+                => random.Stream(domain,filter).ToSpan(DataBlocks.blocklen<T>(n,blocks)).ToBlock256();       
 
         /// <summary>
         /// Allocates and populates 256-bit readonly data blocks with random values

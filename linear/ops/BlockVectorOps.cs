@@ -267,7 +267,7 @@ namespace Z0
             var dst = span<T>(new NatSum<M,N>());
             head.Unsized.CopyTo(dst);
             tail.Unsized.CopyTo(dst.Slice((int)new M().NatValue));
-            return BlockVector<P,T>.LoadAligned(dst);
+            return BlockVector<P,T>.Load(dst);
         }
     }
 }

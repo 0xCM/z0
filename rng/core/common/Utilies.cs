@@ -29,7 +29,7 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where T : unmanaged
         {
-            var dst = NatBlock.alloc<N,T>();
+            var dst = DataBlocks.natalloc<N,T>();
             for(var i=0; i<dst.Length; i++)
                 dst[i] = Contractors.Contract(src[i],max[i]);
             return dst;
@@ -39,7 +39,7 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where T : unmanaged
         {
-            var dst = NatBlock.alloc<N,T>();
+            var dst = DataBlocks.natalloc<N,T>();
             for(var i=0; i<dst.Length; i++)
                 dst[i] = Contractors.Contract(src[i],max[i]);
             return dst;

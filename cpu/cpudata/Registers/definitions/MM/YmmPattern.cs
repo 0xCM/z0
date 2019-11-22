@@ -51,7 +51,7 @@ namespace Z0
         public static YMM Increments(T first = default, params Swap[] swaps)
         {
             
-            var dst = Block256.allocu<T>(Length);
+            var dst = DataBlocks.cellalloc<T>(n256,Length);
             var val = first;
             for(var i=0; i < dst.Length; i++)
             {
@@ -70,7 +70,7 @@ namespace Z0
         /// <typeparam name="T">The primal component type</typeparam>        
         public static YMM Decrements(T last = default, params Swap[] swaps)
         {
-            var dst = Block256.allocu<T>(Length);
+            var dst = DataBlocks.cellalloc<T>(n256, Length);
             var val = last;
             for(var i=0; i<dst.Length; i++)
             {

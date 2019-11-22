@@ -163,7 +163,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public Block64<S> As<S>()                
             where S : unmanaged
-                => DataBlocks.load(N,MemoryMarshal.Cast<T,S>(data));                    
+                => DataBlocks.safeload(N,MemoryMarshal.Cast<T,S>(data));                    
 
         public override bool Equals(object rhs) 
             => throw new NotSupportedException();

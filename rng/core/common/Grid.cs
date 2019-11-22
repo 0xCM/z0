@@ -28,7 +28,7 @@ namespace Z0
         public static NatBlock<N,T> NatBlocks<N,T>(this IPolyrand random, N n = default, Interval<T>? domain = null, Func<T,bool> filter = null)
             where T : unmanaged  
             where N : unmanaged, ITypeNat
-                => NatBlock.load(n, random.Span<T>((int)n.NatValue, domain, filter));                                    
+                => DataBlocks.natload(n, random.Span<T>((int)n.NatValue, domain, filter));                                    
 
         /// <summary>
         /// Allocates a table span of natural dimensions and populates the cells with random values
@@ -44,7 +44,7 @@ namespace Z0
             where T : unmanaged  
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
-                => Z0.NatGrid.load<M, N, T>(random.Span<T>(nfunc.muli(rows, cols)), rows, cols);
+                => DataBlocks.gridload<M, N, T>(random.Span<T>(nfunc.muli(rows, cols)), rows, cols);
 
         /// <summary>
         /// Allocates a table span of natural dimensions and populates the cells with random values that
@@ -62,7 +62,7 @@ namespace Z0
             where T : unmanaged  
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
-                => NatGrid.load<M, N, T>(random.Span(nfunc.muli(rows, cols), domain), rows, cols);
+                => DataBlocks.gridload<M, N, T>(random.Span(nfunc.muli(rows, cols), domain), rows, cols);
 
     }
 

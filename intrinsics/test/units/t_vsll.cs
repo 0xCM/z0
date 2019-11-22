@@ -154,7 +154,7 @@ namespace Z0
 
         static Vector256<byte> ShuffleIdentityMask()
         {
-            Block256<byte> mask = Block256.allocu<byte>(1);
+            Block256<byte> mask = DataBlocks.cellalloc<byte>(n256,1);
 
             //For the first 128-bit lane
             var half = mask.Length/2;

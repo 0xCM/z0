@@ -21,7 +21,7 @@ namespace Z0
             // Note that this is just POC; to really read the method properly,
             //one must know where it ends, and I'm not sure if that can be done
             //without cracking open the method table of the PE file...
-            return MethodMemory.ReadUntil(m, NatBlock.alloc<N32,byte>(), 0xc3, 0xe0);
+            return MethodMemory.ReadUntil(m, DataBlocks.natalloc<N32,byte>(), 0xc3, 0xe0);
         }
 
         [MethodImpl(Inline)]

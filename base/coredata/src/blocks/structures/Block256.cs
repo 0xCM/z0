@@ -26,18 +26,6 @@ namespace Z0
         /// </summary>
         public static int BlockLength => Vector256<T>.Count;
 
-        /// <summary>
-        /// The size, in bytes, of a block 
-        /// </summary>
-        /// <typeparam name="T">The primitive type</typeparam>
-        /// <remarks>Should always be 16 irrespective of the cell type</remarks>
-        public static int BlockSize => Unsafe.SizeOf<T>() * BlockLength; 
-
-        /// <summary>
-        /// The size, in bytes, of a constituent block cell
-        /// </summary>
-        /// <typeparam name="T">The primitive type</typeparam>
-        public static int CellSize => BlockSize / BlockLength;
 
         [MethodImpl(Inline)]
         public static implicit operator Span<T>(in Block256<T> src)
@@ -55,25 +43,6 @@ namespace Z0
         public static bool operator != (in Block256<T> lhs, in Block256<T> rhs)
             => lhs.data != rhs.data;
         
-        [MethodImpl(Inline)]
-        public static bool Aligned(int length)
-            => length % BlockLength == 0;        
-        
-        [MethodImpl(NotInline)]
-        public static Block256<T> AllocBlocks(int blocks, T? fill = null)
-        {
-            var dst = new Block256<T>(new T[blocks * BlockLength]);
-            if(fill.HasValue)
-                dst.data.Fill(fill.Value);
-            return dst;
-        }
-    
-        [MethodImpl(Inline)]
-        internal Block256(ref T src, int length)
-        {
-            data = MemoryMarshal.CreateSpan(ref src, length);
-        }
-
         [MethodImpl(Inline)]
         internal Block256(T[] src)
         {

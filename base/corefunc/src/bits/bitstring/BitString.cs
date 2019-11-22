@@ -381,7 +381,7 @@ namespace Z0
         public NatBlock<N,bit> ToBitSpan<N>(N n = default)
             where N : unmanaged, ITypeNat
         {
-            var dst = NatBlock.alloc<N,bit>();
+            var dst = DataBlocks.natalloc<N,bit>();
             for(var i=0; i< bitseq.Length; i++)
                 dst[i] = (bit)bitseq[i];
             return dst;

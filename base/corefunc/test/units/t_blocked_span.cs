@@ -108,78 +108,56 @@ namespace Z0.Test
 
         public void BlockCount()
         {
-            Claim.eq(1, Block128.fullblocks<sbyte>(16));
-            Claim.eq(1, Block128.fullblocks<byte>(16));
+            Claim.eq(1, DataBlocks.wholeblocks<sbyte>(n128,16));
+            Claim.eq(1, DataBlocks.wholeblocks<byte>(n128,16));
 
-            Claim.eq(1, Block128.fullblocks<short>(8));
-            Claim.eq(1, Block128.fullblocks<ushort>(8));
+            Claim.eq(1, DataBlocks.wholeblocks<short>(n128,8));
+            Claim.eq(1, DataBlocks.wholeblocks<ushort>(n128,8));
 
-            Claim.eq(1, Block128.fullblocks<int>(4));
-            Claim.eq(1, Block128.fullblocks<uint>(4));
-            Claim.eq(1, Block128.fullblocks<float>(4));
+            Claim.eq(1, DataBlocks.wholeblocks<int>(n128,4));
+            Claim.eq(1, DataBlocks.wholeblocks<uint>(n128,4));
+            Claim.eq(1, DataBlocks.wholeblocks<float>(n128,4));
 
-            Claim.eq(1, Block128.fullblocks<long>(2));
-            Claim.eq(1, Block128.fullblocks<ulong>(2));
-            Claim.eq(1, Block128.fullblocks<double>(2));
+            Claim.eq(1, DataBlocks.wholeblocks<long>(n128,2));
+            Claim.eq(1, DataBlocks.wholeblocks<ulong>(n128,2));
+            Claim.eq(1, DataBlocks.wholeblocks<double>(n128,2));
 
-            Claim.eq(1, Block256.fullblocks<sbyte>(32));
-            Claim.eq(1, Block256.fullblocks<byte>(32));
+            Claim.eq(1, DataBlocks.wholeblocks<sbyte>(n256, 32));
+            Claim.eq(1, DataBlocks.wholeblocks<byte>(n256, 32));
 
-            Claim.eq(1, Block256.fullblocks<short>(16));
-            Claim.eq(1, Block256.fullblocks<ushort>(16));
+            Claim.eq(1, DataBlocks.wholeblocks<short>(n256, 16));
+            Claim.eq(1, DataBlocks.wholeblocks<ushort>(n256, 16));
 
-            Claim.eq(1, Block256.fullblocks<int>(8));
-            Claim.eq(1, Block256.fullblocks<uint>(8));
-            Claim.eq(1, Block256.fullblocks<float>(8));
+            Claim.eq(1, DataBlocks.wholeblocks<int>(n256, 8));
+            Claim.eq(1, DataBlocks.wholeblocks<uint>(n256, 8));
+            Claim.eq(1, DataBlocks.wholeblocks<float>(n256, 8));
 
-            Claim.eq(1, Block256.fullblocks<long>(4));
-            Claim.eq(1, Block256.fullblocks<ulong>(4));
-            Claim.eq(1, Block256.fullblocks<double>(4));
+            Claim.eq(1, DataBlocks.wholeblocks<long>(n256, 4));
+            Claim.eq(1, DataBlocks.wholeblocks<ulong>(n256, 4));
+            Claim.eq(1, DataBlocks.wholeblocks<double>(n256, 4));
         }
 
 
-        public void Alignment()
-        {
-
-            Claim.eq(4, Block128.align<int>(4));
-            Claim.yea(Block128.aligned<int>(4));
-
-            Claim.eq(8, Block128.align<int>(5));
-            Claim.nea(Block128.aligned<int>(5));
-
-            Claim.eq(8, Block128.align<int>(6));
-            Claim.nea(Block128.aligned<int>(6));
-
-            Claim.eq(8, Block128.align<int>(7));
-            Claim.nea(Block128.aligned<int>(7));
-
-            Claim.eq(8, Block128.align<int>(8));
-            Claim.yea(Block128.aligned<int>(8));
-
-            Claim.eq(12, Block128.align<int>(9));
-            Claim.nea(Block128.aligned<int>(9));
-
-        }
 
         public void BlockSlice()
         {
-            var x = DataBlocks.load(n128,span<int>(1,2,3,4,5,6,7,8));
+            var x = DataBlocks.safeload(n128,span<int>(1,2,3,4,5,6,7,8));
 
             var block0 = x.Block(0);
             Claim.eq(4, block0.Length);   
-            var y = DataBlocks.load(n128,span(1,2,3,4));         
+            var y = DataBlocks.safeload(n128,span(1,2,3,4));         
             Claim.eq(block0, y);
 
             var block2 = x.Block(1);
             Claim.eq(4, block2.Length);
-            Claim.eq(block2,Block128.FromParts(5,6,7,8));
+            Claim.eq(block2,DataBlocks.partload(n128,5,6,7,8));
 
         }
         public void Load1()
         {
-            var x = DataBlocks.load(n128,span<int>(1,2,3,4,5,6,7,8));
+            var x = DataBlocks.safeload(n128,span<int>(1,2,3,4,5,6,7,8));
             Claim.eq(x.BlockCount,2);
-            Claim.eq(x, Block128.FromParts(1,2,3,4,5,6,7,8));
+            Claim.eq(x, DataBlocks.partload(n128,1,2,3,4,5,6,7,8));
             
         }
 

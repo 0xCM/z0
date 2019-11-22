@@ -26,7 +26,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitCells<T> load<T>(Span<T> src, int n)
             where T : unmanaged
-                => BitCells<T>.FromCells(src, n);
+                => new BitCells<T>(src, n);
 
         /// <summary>
         /// Creates a generic bitvector defined by an arbitrary number of segments
@@ -35,7 +35,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitCells<T> load<T>(params T[] src)
             where T : unmanaged
-                => BitCells<T>.From(src, bitsize<T>()*src.Length);
+                => new BitCells<T>(src, bitsize<T>()*src.Length);
  
         /// <summary>
         /// Computes the number of cells required to hold a specified number of bits
@@ -43,9 +43,30 @@ namespace Z0
         /// <param name="len">The number of bits to store</param>
         /// <typeparam name="T">The primal storage type</typeparam>
         [MethodImpl(Inline)]
-        public static int cells<T>(int len)
+        public static int cellcount<T>(int len)
             where T : unmanaged
-                => BitCells<T>.CellCount(len);
+        {
+            var q = Math.DivRem(len, bitsize<T>(), out int r);            
+            return r == 0 ? q : q + 1;
+        }
+
+        /// <summary>
+        /// Creates a bitvector from a span of bytes
+        /// </summary>
+        /// <param name="src">The source bits</param>
+        /// <param name="n">The bitvector length</param>
+        public static BitCells<T> loadbytes<T>(Span<byte> src, int n)
+            where T : unmanaged
+        {
+            var q = Math.DivRem(src.Length, size<T>(), out int r);
+            var cellcount = r == 0 ? q : q + 1;
+            var capacity = size<T>();
+            
+            var cells = new T[cellcount];
+            for(int i=0, offset = 0; i< cellcount; i++, offset += capacity)
+                cells[i] = src.Slice(offset).TakeScalar<T>();
+            return new BitCells<T>(cells, n);
+        }
 
         /// <summary>
         /// Computes the Euclidean scalar product between two bitvectors using modular arithmetic
@@ -69,7 +90,7 @@ namespace Z0
         [MethodImpl(Inline)]
         static int stepsize<T>()
             where T : unmanaged
-                => BitCells<T>.StepSize;
+                => 256 / bitsize<T>();
 
         [MethodImpl(Inline)]
         public static BitCells<T> and<T>(in BitCells<T> x,in BitCells<T> y)
@@ -84,5 +105,22 @@ namespace Z0
         public static void and<T>(in BitCells<T> x, in BitCells<T> y, ref BitCells<T> z)        
             where T : unmanaged
                 => vblock.and(n256, x.BlockCount, stepsize<T>(), in x.Head, y.Head, ref z.Head);
+
+        /// <summary>
+        /// Computes the scalar product between this vector and another of identical length
+        /// </summary>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
+        [MethodImpl(Inline)]
+        public static bit dot<T>(in BitCells<T> x, in BitCells<T> y)
+            where T : unmanaged
+        {
+            var result = bit.Off;
+            for(var i=0; i<x.Length; i++)
+                result ^= x[i] & y[i];
+            return result;
+        }
+
+
    }
 }

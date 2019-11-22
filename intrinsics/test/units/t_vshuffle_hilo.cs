@@ -26,16 +26,16 @@ namespace Z0
         public void perm4_digits_check()
         {
             var dABCD = Perm4.ABCD.Digits();
-            Claim.eq(NatBlock.parts(n4, A, B, C, D), dABCD);
+            Claim.eq(DataBlocks.natparts(n4, A, B, C, D), dABCD);
 
             var dDCBA = Perm4.DCBA.Digits();
-            Claim.eq(NatBlock.parts(n4, D, C, B, A), dDCBA);
+            Claim.eq(DataBlocks.natparts(n4, D, C, B, A), dDCBA);
 
             var dACBD = Perm4.ACBD.Digits();
-            Claim.eq(NatBlock.parts(n4, A, C, B, D), dACBD);
+            Claim.eq(DataBlocks.natparts(n4, A, C, B, D), dACBD);
 
             var dCBDA = Perm4.CBDA.Digits();
-            Claim.eq(NatBlock.parts(n4, C, B, D, A), dCBDA);
+            Claim.eq(DataBlocks.natparts(n4, C, B, D, A), dCBDA);
 
         }
 

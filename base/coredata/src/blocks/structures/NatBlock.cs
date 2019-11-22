@@ -36,7 +36,6 @@ namespace Z0
         public static implicit operator ReadOnlySpan<T> (NatBlock<N,T> src)
             => src.data;
 
-
         [MethodImpl(Inline)]
         public static implicit operator NatBlock<N,T>(Block256<T> src)
             => new NatBlock<N, T>(src);
@@ -71,18 +70,6 @@ namespace Z0
         {
             require(src.Length >= Count, $"length(src) = {src.Length} < {Count} = SpanLength");               
             return new NatBlock<N, T>(src);
-        }
-
-        /// <summary>
-        /// Verifies correct source span length prior to backing store assignment
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <typeparam name="U">The source element type</typeparam>
-        [MethodImpl(Inline)]
-        public static NatBlock<N,T> CheckedTransfer(ReadOnlySpan<T> src)
-        {
-            require(src.Length >= Count, $"length(src) = {src.Length} < {Count} = SpanLength");               
-            return new NatBlock<N,T>(src);
         }
 
         [MethodImpl(Inline)]

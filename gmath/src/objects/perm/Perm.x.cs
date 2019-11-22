@@ -195,7 +195,7 @@ namespace Z0
         public static NatBlock<N4, byte> Digits(this Perm4 src)
         {
             var scalar = (byte)src;
-            var dst = NatBlock.alloc<N4,byte>();
+            var dst = DataBlocks.natalloc<N4,byte>();
             dst[0] = BitMask.between(scalar, 0, 1);
             dst[1] = BitMask.between(scalar, 2, 3);
             dst[2] = BitMask.between(scalar, 4, 5);

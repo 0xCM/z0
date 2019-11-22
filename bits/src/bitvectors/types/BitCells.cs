@@ -45,20 +45,6 @@ namespace Z0
 
         public static BitCells<T> Zero => new BitCells<T>(DataBlocks.alloc<T>(n256));
 
-        public static int StepSize => 256 / bitsize<T>();
-
-        /// <summary>
-        /// Computes the number of cells required to hold a specified number of bits
-        /// </summary>
-        /// <param name="len">The number of bits to store</param>
-        /// <typeparam name="T">The primal storage type</typeparam>
-        [MethodImpl(Inline)]
-        public static int CellCount(int len)
-        {
-            var q = Math.DivRem(len, CellCapacity, out int r);            
-            return r == 0 ? q : q + 1;
-        }
-
         /// <summary>
         /// Creates a bitvector defined by a single cell or portion thereof
         /// </summary>
@@ -66,49 +52,13 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitCells<T> FromCell(T src, int n)
             => new BitCells<T>(src,n);
-
-        /// <summary>
-        /// Creates a bitvector from a cell span
-        /// </summary>
-        /// <param name="src">The source bits</param>
-        /// <param name="n">The bitvector length</param>
-        [MethodImpl(Inline)]
-        public static BitCells<T> FromCells(Span<T> src, int n)
-            => new BitCells<T>(src,n);
-        
-        /// <summary>
-        /// Creates a bitvector from a cell array, subject to a specified bitsize
-        /// </summary>
-        /// <param name="n">The length of the bitvector</param>
-        /// <param name="src">The source bits</param>
-        [MethodImpl(Inline)]
-        public static BitCells<T> From(T[] src, int n)
-            => new BitCells<T>(src, n);
-
-        /// <summary>
-        /// Creates a bitvector from a span of bytes
-        /// </summary>
-        /// <param name="src">The source bits</param>
-        /// <param name="n">The bitvector length</param>
-        public static BitCells<T> FromBytes(Span<byte> src, int n)
-        {
-            var q = Math.DivRem(src.Length, size<T>(), out int r);
-            var cellcount = r == 0 ? q : q + 1;
-            var capacity = CellCapacity/8;
-            
-            var cells = new T[cellcount];
-            for(int i=0, offset = 0; i< cellcount; i++, offset += capacity)
-                cells[i] = src.Slice(offset).TakeScalar<T>();
-            return From(cells,n);
-        }
-
         /// <summary>
         /// Loads an bitvector of minimal size from a source bitstring
         /// </summary>
         /// <param name="src">The bitstring source</param>
         [MethodImpl(Inline)]
         public static BitCells<T> From(BitString src)
-            => FromBytes(src.ToPackedBytes(), src.Length);
+            => BitCells.loadbytes<T>(src.ToPackedBytes(), src.Length);
 
         [MethodImpl(Inline)]
         public static implicit operator BitCells<T>(Span<T> src)
@@ -147,7 +97,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static bit operator %(in BitCells<T> x, in BitCells<T> y)
-            => dot(x,y);
+            => BitCells.dot(x,y);
 
         /// <summary>
         /// Computes the bitwise complement of the operand
@@ -182,7 +132,7 @@ namespace Z0
             => !x.Equals(y);
 
         [MethodImpl(Inline)]
-        BitCells(T src, int n)
+        internal BitCells(T src, int n)
         {            
             this.data = DataBlocks.alloc<T>(n256);
             head(this.data) = src;
@@ -193,9 +143,9 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        BitCells(Span<T> src, int n)
+        internal BitCells(Span<T> src, int n)
         {            
-            this.data = DataBlocks.loadu(n256,src);
+            this.data = DataBlocks.safeload(n256,src);
             this.MaxBitCount = src.Length * CellCapacity;
             this.BitCount = n;
             this.SegLength = BitSize.Segments<T>(MaxBitCount);            
@@ -210,23 +160,6 @@ namespace Z0
             this.BitCount = src.BlockCount * 256;
             this.SegLength = BitSize.Segments<T>(MaxBitCount);            
             this.BitMap = BitSize.BitMap<T>(MaxBitCount);
-        }
-
-
-        /// <summary>
-        /// Computes the scalar product between this vector and another of identical length
-        /// </summary>
-        /// <param name="x">The left vector</param>
-        /// <param name="y">The right vector</param>
-        [MethodImpl(NotInline)]
-        static bit dot(in BitCells<T> x, in BitCells<T> y)
-        {
-            require(x.Length == y.Length);
-
-            var result = bit.Off;
-            for(var i=0; i<x.Length; i++)
-                result ^= x[i] & y[i];
-            return result;
         }
 
         /// <summary>
@@ -320,46 +253,12 @@ namespace Z0
         }
 
         /// <summary>
-        /// Tests the status of an identified bit
-        /// </summary>
-        /// <param name="pos">The position of the bit to test</param>
-        [MethodImpl(Inline)]
-        public bool Test(int pos)
-            => Get(pos);
-
-        /// <summary>
-        /// Enables an identified bit
-        /// </summary>
-        /// <param name="pos">The position of the bit to enable</param>
-        [MethodImpl(Inline)]
-        public void Enable(int pos)
-            => Set(pos, bit.On);
-
-        /// <summary>
-        /// Disables an identified bit
-        /// </summary>
-        /// <param name="pos">The position of the bit to disable</param>
-        [MethodImpl(Inline)]
-        public void Disable(int pos)
-        {
-            ref readonly var cell = ref BitMap[pos];
-            gbits.disable(ref data[cell.Segment], (byte)cell.Offset);
-        }
-
-        /// <summary>
         /// Specifies a reference to the leading cell
         /// </summary>
         public ref T Head
         {
             [MethodImpl(Inline)]
             get => ref data.Head;
-        }
-
-        [MethodImpl(Inline)]
-        public void Toggle(int pos)
-        {         
-            ref readonly var loc = ref Location(pos);
-            BitMaskG.toggle(ref data[loc.Segment],  (byte)loc.Offset);
         }
 
         [MethodImpl(Inline)]
@@ -398,29 +297,6 @@ namespace Z0
                 rank += (uint)gbits.pop(segments[i]);            
             return rank;
         }
-
-        /// <summary>
-        /// Sets all the bits to align with the source value
-        /// </summary>
-        /// <param name="value">The source value</param>
-        [MethodImpl(Inline)]
-        public void Fill(bit value)
-        {
-            var primal = PrimalInfo.Get<T>();
-            if(value)
-                data.Fill(primal.MaxVal);
-            else
-                data.Fill(primal.Zero);
-        }
-
-        /// <summary>
-        /// Counts the number of bits set up to and including the specified position
-        /// </summary>
-        /// <param name="src">The bit source</param>
-        /// <param name="pos">The position of the bit for which rank will be calculated</param>
-        [MethodImpl(Inline)]
-        public uint Rank(int pos)
-            => Pop(pos);
 
         public int BlockCount
         {

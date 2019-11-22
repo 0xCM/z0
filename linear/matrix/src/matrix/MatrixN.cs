@@ -296,12 +296,6 @@ namespace Z0
         public Matrix<N,N,T> ToRectangular()
             => new Matrix<N,N,T>(this.data);
 
-        /// <summary>
-        /// Loads the data from the source into a block matrix, allocating as necessary to ensure alignment
-        /// </summary>
-        [MethodImpl(Inline)]
-        public BlockMatrix<N,T> Block()
-            => Block256.load(data);
 
         [MethodImpl(Inline)]
         public Matrix<N,U> Convert<U>()

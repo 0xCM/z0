@@ -58,7 +58,7 @@ namespace Z0
         public static BlockMatrix<N,T> blockalloc<N,T>(N n = default, T exemplar = default)
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => Block256.allocu<N,N,T>(); 
+                => DataBlocks.alloc<N,N,T>(n256); 
 
         /// <summary>
         /// Allocates a blocked matrix of natual dimensions
@@ -74,7 +74,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => Block256.allocu<M,N,T>(); 
+                => DataBlocks.alloc<M,N,T>(n256); 
 
         /// <summary>
         /// Allocates a matrix of natual dimensions
@@ -145,7 +145,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => Block256.load(src);
+                => DataBlocks.safeload(n256,src);
 
         /// <summary>
         /// Defines a square matrix
@@ -300,7 +300,7 @@ namespace Z0
             if(n != doc.Rows[0].Cells.Length)
                 return default;
 
-            var dst =  Matrix.blockload<M,N,T>(Block256.allocu<M,N,T>());
+            var dst =  Matrix.blockload<M,N,T>(DataBlocks.alloc<M,N,T>(n256));
             for(var i = 0; i<doc.Rows.Length; i++)
             {
                 ref readonly var row = ref doc[i];

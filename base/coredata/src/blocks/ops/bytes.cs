@@ -20,7 +20,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Block64<byte> bytes<T>(in Block64<T> src, N64 n = default)
             where T : unmanaged
-                => load(n, MemoryMarshal.AsBytes(src.Data));
+                => new Block64<byte>(src.As<byte>());
 
         /// <summary>
         /// Reimagines a 256-bit bloocked span of generic values as a span of bytes
@@ -30,7 +30,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Block128<byte> bytes<T>(Block128<T> src, N128 n = default)
             where T : unmanaged
-                => load(n,MemoryMarshal.AsBytes(src.Data));
+                => new Block128<byte>(src.As<byte>());
 
         /// <summary>
         /// Reimagines a 256-bit bloocked span of generic values as a span of bytes
@@ -40,7 +40,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Block256<byte> bytes<T>(Block256<T> src, N256 n = default)
             where T : unmanaged
-                => load(n,MemoryMarshal.AsBytes(src.Data));
+                => new Block256<byte>(src.As<byte>());
 
     }
 }

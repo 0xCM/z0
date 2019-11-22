@@ -171,7 +171,7 @@ namespace Z0
         public static bool Identical<T>(this ConstBlock128<T> lhs, ConstBlock128<T> rhs)        
                 where T : unmanaged        
         {
-            for(var i = 0; i< Block128.length(lhs,rhs); i++)
+            for(var i = 0; i< DataBlocks.length(lhs,rhs); i++)
                 if(gmath.neq(lhs[i],rhs[i]))
                     return false;
             return true;

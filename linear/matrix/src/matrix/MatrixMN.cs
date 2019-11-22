@@ -231,13 +231,6 @@ namespace Z0
             }
         }
 
-        /// <summary>
-        /// Loads the data from the source into a block matrix, allocating as necessary to ensure alignment
-        /// </summary>
-        [MethodImpl(Inline)]
-        public BlockMatrix<M,N,T> Block()
-            => Block256.load(data);
-
         public bool Equals(Matrix<M,N,T> rhs)
         {
             for(var r = 0; r < (int)_RowCount; r ++)

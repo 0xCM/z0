@@ -81,15 +81,6 @@ namespace Z0
             where T : unmanaged
                 => src.Data.Clear();
 
-        /// <summary>
-        /// Constructs a 256-bit blocked span from an array
-        /// </summary>
-        /// <param name="src">The source array</param>
-        /// <typeparam name="T">The element type</typeparam>
-        [MethodImpl(Inline)]
-        public static Block256<T> ToSpan256<T>(this T[] src)
-            where T : unmanaged
-            => Z0.Block256.load<T>(src);
 
         /// <summary>
         /// Constructs a 128-bit blocked span from an unblocked span
@@ -97,9 +88,9 @@ namespace Z0
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
-        public static Block64<T> ToSpan64<T>(this Span<T> src, N64 n = default)
+        public static Block64<T> ToBlock64<T>(this Span<T> src, N64 n = default)
              where T : unmanaged
-                => DataBlocks.load(n,src);
+                => DataBlocks.safeload(n,src);
 
         /// <summary>
         /// Constructs a 128-bit blocked span from an unblocked span
@@ -107,9 +98,9 @@ namespace Z0
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
-        public static Block128<T> ToSpan128<T>(this Span<T> src, N128 n = default)
+        public static Block128<T> ToBlock128<T>(this Span<T> src, N128 n = default)
              where T : unmanaged
-                => DataBlocks.load(n,src);
+                => DataBlocks.safeload(n,src);
 
         /// <summary>
         /// Constructs a 128-bit blocked span from an unblocked span
@@ -117,9 +108,9 @@ namespace Z0
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
-        public static Block256<T> ToSpan256<T>(this Span<T> src, N256 n = default)
+        public static Block256<T> ToBlock256<T>(this Span<T> src, N256 n = default)
              where T : unmanaged
-                => DataBlocks.load(n,src);
+                => DataBlocks.safeload(n,src);
 
         /// <summary>
         /// Clones a blocked span
@@ -225,6 +216,54 @@ namespace Z0
         public static ConstBlock256<T> ReadOnly<T>(this Block256<T> src)
             where T : unmanaged
                 => new ConstBlock256<T>(src);
+
+        /// <summary>
+        /// Presents an unsized span as one of natural length
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <param name="n">The target size</param>
+        /// <typeparam name="N">The target type</typeparam>
+        /// <typeparam name="T">The element type</typeparam>
+        [MethodImpl(Inline)]        
+        public static NatBlock<N,T> NatLoad<N,T>(this Span<T> src, N n = default)
+            where N : unmanaged, ITypeNat
+            where T : unmanaged
+                => DataBlocks.natload(n,src);
+
+        /// <summary>
+        /// Fills a tabular span of natural dimensions with streamed elements
+        /// </summary>
+        /// <param name="src">The source stream</param>
+        /// <param name="dst">The target span</param>
+        /// <typeparam name="M">The row dimension type</typeparam>
+        /// <typeparam name="N">The column dimension type</typeparam>
+        /// <typeparam name="T">The element type</typeparam>
+        public static void StreamTo<M,N,T>(this IEnumerable<T> src, in NatGrid<M,N,T> dst)
+            where M : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
+            where T : unmanaged
+                => src.Take(NatMath.mul<M,N>()).StreamTo(dst.Data);
+
+        public static Span<T> Map<M,N,S,T>(this in NatGrid<M,N,S> src, Func<S, T> f)
+            where M : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
+            where S : unmanaged
+            where T : unmanaged
+        {
+            var dst = DataBlocks.gridalloc<M,N,T>();
+            var m = nfunc.nati<M>();
+            var n = nfunc.nati<N>();
+            for(var i=0; i < m; i++)
+            for(var j=0; j < n; j++)
+                dst[i,j] = f(src[i,j]);
+            return dst;
+        }
+
+        public static T Reduce<M,N,T>(this in NatGrid<M,N,T> src, Func<T,T,T> f)
+            where M : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
+            where T : unmanaged
+                => src.Data.ReadOnly().Reduce(f);        
 
     }
 }

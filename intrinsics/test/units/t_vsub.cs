@@ -119,7 +119,7 @@ namespace Z0.Test
             var rhs = Random.Blocks<T>(n256,SampleSize).ReadOnly();
             var dstA = lhs.Replicate();
             vblock.sub(lhs, rhs, dstA);
-            var dstB = Block256.alloc<T>(lhs.BlockCount);
+            var dstB = DataBlocks.alloc<T>(n256,lhs.BlockCount);
             for(var i = 0; i < dstA.Length; i++)
                 dstB[i] = gmath.sub(lhs[i], rhs[i]);
             Claim.yea(dstA.Identical(dstB));

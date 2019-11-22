@@ -37,6 +37,54 @@ namespace Z0
             return length/blocklen<T>(n);
         }
 
+        [MethodImpl(Inline)]
+        public static int blockcount<T>(N256 n,int srclen)
+            where T : unmanaged        
+        {
+            var bz = blockcount<T>(n,srclen, out int remainder);
+            return remainder == 0 ? bz : bz + 1;
+        }
+
+
+        /// <summary>
+        /// Calculates the number of whole blocks into which a sequence of cells may be partitioned
+        /// </summary>
+        /// <param name="cellcount">The length of the cell sequence</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static int wholeblocks<T>(N128 n, int cellcount)
+            where T : unmanaged  
+                => cellcount / Block128<T>.BlockLength;
+
+        /// <summary>
+        /// Calculates the number of whole blocks into which a sequence of cells may be partitioned
+        /// </summary>
+        /// <param name="cellcount">The length of the cell sequence</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static int wholeblocks<T>(N256 n, int cellcount)
+            where T : unmanaged  
+                => cellcount / Block256<T>.BlockLength;
+
+
+        /// <summary>
+        /// Computes the minimum number of 256-bit blocks that can hold a table of data
+        /// </summary>
+        /// <param name="srclen">The length of the source data</param>
+        /// <typeparam name="M">The row type </typeparam>
+        /// <typeparam name="N">The column type</typeparam>
+        /// <typeparam name="T">The scalar type</typeparam>
+        [MethodImpl(Inline)]
+        public static int blockcount<M,N,T>(N256 n)
+            where M : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
+            where T : unmanaged        
+        {
+            var srclen = NatMath.mul<M,N>();
+            var bz = blockcount<T>(n,srclen, out int remainder);
+            return remainder == 0 ? bz : bz + 1;
+        }
+
         /// <summary>
         /// Returns the block count of spans of equal length; otherwise raises an error
         /// </summary>

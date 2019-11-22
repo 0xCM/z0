@@ -25,7 +25,7 @@ namespace Z0
         
         public NatBlock<N, ulong> Next()
         {
-            var dst = NatBlock.alloc<N,ulong>();
+            var dst = DataBlocks.natalloc<N,ulong>();
             var next = Generators.Mapi((index ,g) => (index, value: g.Next()));
             foreach(var item in next)
                 dst[item.index] = item.value;

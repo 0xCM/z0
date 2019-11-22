@@ -126,12 +126,6 @@ namespace Z0
              data.CopyTo(dst);
         }
 
-        /// <summary>
-        /// Loads the data from the source into a block vector, allocating as necessary to ensure alignment
-        /// </summary>
-        [MethodImpl(Inline)]
-        public BlockVector<T> Block()
-            => Block256.load(data);
 
         [MethodImpl(Inline)]
         public Vector<U> Convert<U>()

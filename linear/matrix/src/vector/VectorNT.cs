@@ -122,13 +122,7 @@ namespace Z0
             return ref dst;
         }
 
-        /// <summary>
-        /// Loads the data from the source into a block vector, allocating as necessary to ensure alignment
-        /// </summary>
-        [MethodImpl(Inline)]
-        public BlockVector<N,T> Block()
-            => Vector.blockload<N,T>(Block256.load(data));
-
+        
         [MethodImpl(Inline)]
         public Vector<N,U> Convert<U>()
             where U : unmanaged

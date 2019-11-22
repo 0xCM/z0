@@ -20,28 +20,12 @@ namespace Z0
         static readonly N NatRep = new N();
 
         [MethodImpl(Inline)]
-        public static BlockVector<N,T> LoadAligned(ref T src)
-            => new BlockVector<N,T>(ref src);
-
-        [MethodImpl(Inline)]
-        public static BlockVector<N,T> LoadAligned(NatBlock<N,T> src)
+        public static BlockVector<N,T> Load(Span<T> src)
             => new BlockVector<N,T>(src);
 
         [MethodImpl(Inline)]
-        public static BlockVector<N,T> LoadAligned(ReadOnlySpan<T> src)
+        public static BlockVector<N,T> Load(Block256<T> src)
             => new BlockVector<N,T>(src);
-
-        [MethodImpl(Inline)]
-        public static BlockVector<N,T> LoadAligned(Span<T> src)
-            => new BlockVector<N,T>(src);
-
-        [MethodImpl(Inline)]
-        public static BlockVector<N,T> LoadAligned(Block256<T> src)
-            => new BlockVector<N,T>(src);
-
-        [MethodImpl(Inline)]
-        public static BlockVector<N,T> LoadAligned(params T[] src)
-            => new BlockVector<N, T>(src);
 
         /// <summary>
         /// Specifies the length of the vector, i.e. its component count
@@ -97,23 +81,10 @@ namespace Z0
             => mathspan.dot<T>(lhs.Unsized, rhs.Unsized);
          
         [MethodImpl(Inline)]
-        BlockVector(ref T src)
-        {  
-            data =  Block256.load<T>(ref src, Length);  
-        }
-
-        [MethodImpl(Inline)]
-        BlockVector(in ReadOnlySpan<T> src)
-        {
-            data = Block256.load(src);
-        }
-
-        [MethodImpl(Inline)]
         BlockVector(Span<T> src)
         {
-            data = Block256.load(src);
+            data = DataBlocks.safeload(n256,src);
         }
-
 
         [MethodImpl(Inline)]
         BlockVector(Block256<T> src)
@@ -125,7 +96,7 @@ namespace Z0
         [MethodImpl(Inline)]
         BlockVector(NatBlock<N,T> src)
         {
-            data = Block256.load(src);
+            data = DataBlocks.safeload(n256,src);
         }
                     
         public ref T this[int index] 
@@ -215,13 +186,7 @@ namespace Z0
             => throw new NotSupportedException();
  
         public override string ToString()
-            => Format();
-    
-        public Block256<T> ToSpan256()
-            => data;
-
-        public ConstBlock256<T> ToReadOnlySpan256()
-            => data;
+            => Format();    
     }
 }
 

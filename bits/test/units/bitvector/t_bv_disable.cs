@@ -75,8 +75,8 @@ namespace Z0
                 Claim.eq(bv.Length, bs.Length);
                 for(var i=0; i<bv.Length; i+= 2)
                 {
-                    bv.Disable(i);
-                    bs[i] = Bit.Off;
+                    bv[i] = bit.Off;
+                    bs[i] = bit.Off;
                 }
 
                 Claim.eq(bv.ToBitString(),bs);

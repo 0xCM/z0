@@ -58,10 +58,10 @@ namespace Z0
             var src = random.ConstBlocks<T>(n256,blocks);
             Claim.eq(blocks*blocklen,src.Length);
                         
-            var expect = Block256.alloc<T>(blocks);
+            var expect = DataBlocks.alloc<T>(n256, blocks);
             Claim.eq(blocks, expect.BlockCount);
 
-            var actual = Block256.alloc<T>(blocks);
+            var actual = DataBlocks.alloc<T>(n256,blocks);
             Claim.eq(blocks, actual.BlockCount);
 
             var tmp = new T[blocklen];
@@ -137,10 +137,10 @@ namespace Z0
             var rhs = random.ConstBlocks<T>(n256,blocks);
             Claim.eq(blocks*blocklen,rhs.Length);
             
-            var expect = Block256.alloc<T>(blocks);
+            var expect = DataBlocks.alloc<T>(n256,blocks);
             Claim.eq(blocks, expect.BlockCount);
 
-            var actual = Block256.alloc<T>(blocks);
+            var actual = DataBlocks.alloc<T>(n256,blocks);
             Claim.eq(blocks, actual.BlockCount);
 
             Span<T> tmp = stackalloc T[blocklen];

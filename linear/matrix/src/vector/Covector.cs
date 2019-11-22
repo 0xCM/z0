@@ -33,16 +33,6 @@ namespace Z0
         /// </summary>
         public static readonly int Length = nati<N>();     
 
-        /// <summary>
-        /// Implicly converts a covector of natural length to a span of natural length
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <typeparam name="N">The natural length</typeparam>
-        /// <typeparam name="T">THe component type</typeparam>
-        [MethodImpl(Inline)]   
-        public static implicit operator NatBlock<N,T>(Covector<N,T> src)
-            => NatBlock.load(default(N), src.data);
-
         [MethodImpl(Inline)]
         public static bool operator == (Covector<N,T> lhs, Covector<N,T> rhs) 
             => lhs.Equals(rhs);
@@ -65,13 +55,6 @@ namespace Z0
             [MethodImpl(Inline)]
             get => data;
         }
-
-        /// <summary>
-        /// Loads the data from the source into a block vector, allocating as necessary to ensure alignment
-        /// </summary>
-        [MethodImpl(Inline)]
-        public BlockVector<N,T> Block()
-            => Vector.blockload<N,T>(Block256.load(data));
 
         [MethodImpl(Inline)]
         public Vector<N,T> Transpose()

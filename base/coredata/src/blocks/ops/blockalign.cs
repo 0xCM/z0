@@ -38,7 +38,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static int blocksize<T>(N128 n)
             where T : unmanaged        
-                => Block128<T>.BlockSize;
+                => Unsafe.SizeOf<T>() * blocklen<T>(n);
 
         /// <summary>
         /// Calculates the number of bytes requred to represent a block
@@ -47,7 +47,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static int blocksize<T>(N256 n)
             where T : unmanaged        
-                => Block256<T>.BlockSize;
+                => Unsafe.SizeOf<T>() * blocklen<T>(n);
 
         /// <summary>
         /// Computes the minimum number of 64-bit blocks required to cover a specified number of cells
