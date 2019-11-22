@@ -21,7 +21,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ref Matrix<N8, bit> unpack(in BitMatrix8 A, ref Matrix<N8,bit> Z)
         {
-            gbits.unpack(A.Bytes, Z.Data);            
+            gbits.unpack(A.data, Z.Data);            
             return ref Z;
         }
 
@@ -250,7 +250,7 @@ namespace Z0
         public static ref Matrix<N8, T> unpack<T>(in BitMatrix8 src, ref Matrix<N8,T> dst)
             where T : unmanaged
         {
-            gbits.unpack(src.Bytes, dst.Data.AsSpan());            
+            gbits.unpack(src.data, dst.Data.AsSpan());            
             return ref dst;
         }
 

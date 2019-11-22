@@ -17,7 +17,7 @@ namespace Z0
         {
             const uint n = BitMatrix8.N;
 
-            var dst = BitMatrix8.Alloc();
+            var dst = BitMatrix.alloc(n8);
             rhs = rhs.Transpose();
             for(var i=0; i< n; i++)
             {

@@ -22,7 +22,7 @@ namespace Z0
             where T : unmanaged    
         {
             var dst = x.Replicate(true);
-            inxspan.xor(x.Data,y.Data,dst.Data);
+            vblock.xor(x.Data,y.Data,dst.Data);
             return dst;
         }
 

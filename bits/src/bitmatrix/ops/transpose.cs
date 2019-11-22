@@ -78,7 +78,7 @@ namespace Z0
             src = src ^ t ^ (t << 14);
             t = (src ^ (src >> 28)) & 0x00000000F0F0F0F0ul;
             src = src ^ t ^ (t << 28);
-            bytes(src).CopyTo(Z.Bytes);
+            bytes(src).CopyTo(Z.data);
             return ref Z;
         }
 

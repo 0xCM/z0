@@ -10,6 +10,7 @@ namespace Z0
 
     using static zfunc;
 
+
     public static class StackContainers
     {
         public ref struct Stack128
@@ -17,49 +18,47 @@ namespace Z0
             public ulong X0;
 
             public ulong X1;        
+            
         }
 
         public ref struct Stack256
         {
-            public ulong X0;
+            internal Stack128 X0;
 
-            public ulong X1;
+            Stack128 X1;
             
-            public ulong X2;
-
-            public ulong X3;
         }
 
         public ref struct Stack512
         {
-            public ulong X0;
+            internal ulong X0;
 
-            public ulong X1;
+            ulong X1;
             
-            public ulong X2;
+            ulong X2;
 
-            public ulong X3;
+            ulong X3;
 
-            public ulong X4;
+            ulong X4;
 
-            public ulong X5;
+            ulong X5;
             
-            public ulong X6;
+            ulong X6;
 
-            public ulong X7;
+            ulong X7;
         }
 
         public ref struct Stack1024
         {
-            public ulong X0;
+            internal ulong X0;
 
-            public ulong X1;
+            ulong X1;
             
-            public ulong X2;
+            ulong X2;
 
-            public ulong X3;
+            ulong X3;
 
-            public ulong X4;
+            ulong X4;
 
             public ulong X5;
             
@@ -83,7 +82,6 @@ namespace Z0
 
             public ulong XF;
         }
-
 
         public ref struct CharStack2
         {

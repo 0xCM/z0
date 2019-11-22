@@ -59,56 +59,13 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bool operator != (in ConstBlock128<T> lhs, in ConstBlock128<T> rhs)
             => lhs.data != rhs.data;
-        
-        [MethodImpl(Inline)]
-        public static bool aligned(int length)
-            => Block128<T>.Aligned(length);
-
-        [MethodImpl(Inline)]
-        public static ConstBlock128<T> Load(T[] src)
-        {
-            require(aligned(src.Length));
-            return new ConstBlock128<T>(src);
-        }
+    
 
         [MethodImpl(Inline)]
         public static ConstBlock128<T> Load(in Block128<T> src)
             => new ConstBlock128<T>(src);
 
-        [MethodImpl(Inline)]
-        public static ConstBlock128<T> load(Span<T> src, int offset, int length)
-        {
-            require(aligned(length));
-            return new ConstBlock128<T>(src.Slice(offset, length));
-        }
 
-        [MethodImpl(Inline)]
-        public static ConstBlock128<T> load(ReadOnlySpan<T> src, int offset, int length)
-        {
-            require(aligned(length));
-            return new ConstBlock128<T>(src.Slice(offset, length));
-        }
-
-        [MethodImpl(Inline)]
-        public static unsafe ConstBlock128<T> load(void* src, int length)
-        {
-            require(aligned(length));
-            return new ConstBlock128<T>(src,length);
-        }
-
-        [MethodImpl(Inline)]
-        internal unsafe ConstBlock128(void* src, int length)    
-        {
-            data = new ReadOnlySpan<T>(src, length);  
-        }
-
-        [MethodImpl(Inline)]
-        internal ConstBlock128(T[] src)
-        {
-            data = src;
-        }
-        
-        
         [MethodImpl(Inline)]
         internal ConstBlock128(ReadOnlySpan<T> src)
         {
@@ -122,7 +79,14 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        internal ConstBlock128(Span<T> src)
+        ConstBlock128(T[] src)
+        {
+            data = src;
+        }        
+        
+
+        [MethodImpl(Inline)]
+        ConstBlock128(Span<T> src)
         {
             this.data = src;
         }
@@ -183,9 +147,6 @@ namespace Z0
         public ConstBlock128<T> SliceBlocks(int blockIndex, int blockCount)
             => (ConstBlock128<T>)Slice(blockIndex * BlockLength, blockCount * BlockLength );
             
-        [MethodImpl(Inline)]
-        public Block128<T> ToSpan128()
-            => Block128.load(data);
 
         [MethodImpl(Inline)]
         public Span<T> ToSpan()

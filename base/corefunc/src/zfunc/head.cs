@@ -81,17 +81,6 @@ partial class zfunc
     /// <param name="src">The source span</param>
     /// <typeparam name="T">The element type</typeparam>
     [MethodImpl(Inline)]
-    public static ref readonly T head<N,T>(in ConstNatBlock<N,T> src)
-        where N : unmanaged, ITypeNat
-        where T : unmanaged
-            => ref src.Head;
-
-    /// <summary>
-    /// Returns a reference to the location of the first span element
-    /// </summary>
-    /// <param name="src">The source span</param>
-    /// <typeparam name="T">The element type</typeparam>
-    [MethodImpl(Inline)]
     public static ref T head<T>(in Block128<T> src)
         where T : unmanaged
             => ref src.Head;

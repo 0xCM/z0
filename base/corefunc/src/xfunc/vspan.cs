@@ -22,9 +22,9 @@ namespace Z0
         public static Span<T> ToSpan<T>(this Vector128<T> src)
             where T : unmanaged            
         {
-            var dst = MemBlocks.alloc<T>(n128);
+            var dst = DataBlocks.alloc<T>(n128);
             gcpu.vstore(src, ref dst.Head);
-            return dst.Unblocked;
+            return dst.Data;
         }
 
 
@@ -37,9 +37,9 @@ namespace Z0
         public static Span<T> ToSpan<T>(this Vector256<T> src)
             where T : unmanaged            
         {
-            var dst = MemBlocks.alloc<T>(n256);
+            var dst = DataBlocks.alloc<T>(n256);
             gcpu.vstore(src, ref dst.Head);
-            return dst.Unblocked;
+            return dst.Data;
         }
 
         /// <summary>
@@ -51,7 +51,7 @@ namespace Z0
         public static Block128<T> ToBlockedSpan<T>(this Vector128<T> src)
             where T : unmanaged            
         {
-            var dst = MemBlocks.alloc<T>(n128);
+            var dst = DataBlocks.alloc<T>(n128);
             gcpu.vstore(src, ref dst.Head);
             return dst;
         }                       
@@ -65,7 +65,7 @@ namespace Z0
         public static Block256<T> ToBlockedSpan<T>(this Vector256<T> src)
             where T : unmanaged            
         {
-            var dst = MemBlocks.alloc<T>(n256);
+            var dst = DataBlocks.alloc<T>(n256);
             gcpu.vstore(src, ref dst.Head);
             return dst;
         }                       

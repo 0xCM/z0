@@ -106,12 +106,6 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        BlockVector(in ConstNatBlock<N,T> src)
-        {
-            data = Block256.load(src.Unsized);
-        }
-
-        [MethodImpl(Inline)]
         BlockVector(in ReadOnlySpan<T> src)
         {
             data = Block256.load(src);
@@ -143,7 +137,7 @@ namespace Z0
         public Span<T> Unsized
         {
             [MethodImpl(Inline)]
-            get => data.Unblocked;
+            get => data.Data;
         }
  
         public Block256<T> Data

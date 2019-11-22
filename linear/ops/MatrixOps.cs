@@ -32,7 +32,7 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where T : unmanaged    
         {
-            inxspan.add(A.Unsized, B.Unsized, C.Unsized);
+            vblock.add(A.Unsized, B.Unsized, C.Unsized);
             return ref C;
         }
 

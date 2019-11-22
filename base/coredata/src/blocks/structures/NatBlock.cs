@@ -36,9 +36,6 @@ namespace Z0
         public static implicit operator ReadOnlySpan<T> (NatBlock<N,T> src)
             => src.data;
 
-        [MethodImpl(Inline)]
-        public static implicit operator ConstNatBlock<N,T>(NatBlock<N,T> src)
-            => new ConstNatBlock<N, T>(src);
 
         [MethodImpl(Inline)]
         public static implicit operator NatBlock<N,T>(Block256<T> src)
@@ -105,15 +102,15 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        NatBlock(Span<T> src)
+        internal NatBlock(Span<T> src)
             => this.data = src;
 
         [MethodImpl(Inline)]
-        NatBlock(ReadOnlySpan<T> src)
+        internal NatBlock(ReadOnlySpan<T> src)
             => data = src.ToArray();            
 
         [MethodImpl(Inline)]
-        NatBlock(T[] src)
+        internal NatBlock(T[] src)
             => this.data = src;
 
         [MethodImpl(Inline)]
@@ -128,9 +125,6 @@ namespace Z0
         internal NatBlock(ref T src)
             => data = MemoryMarshal.CreateSpan(ref src, Count);
 
-        [MethodImpl(Inline)]
-        internal NatBlock(ConstNatBlock<N,T> src)
-            => data = src.ToArray();
  
         public ref T this[int ix] 
         {

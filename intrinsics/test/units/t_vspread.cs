@@ -20,7 +20,7 @@ namespace Z0
             var n = n128;
             var src =  dinx.vparts(n,    0,   AA,    0,    0,   0,   AA,   AA,   AA,     0,    0,    0,   AA,   AA,   AA,    0,    0);
             var mask = dinx.vparts(n, skip, pick, skip, skip, skip, pick, pick, pick, skip, skip, skip, pick, pick, pick, skip, skip);
-            var dst = MemBlocks.alloc<byte>(n,FF);
+            var dst = DataBlocks.alloc<byte>(n,FF);
             ginx.vcstore(src, mask, ref dst.Head);
             for(var i=0; i<16; i++)
             {

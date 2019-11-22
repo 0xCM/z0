@@ -5,11 +5,7 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.InteropServices;
     using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics;
-    using System.Runtime.Intrinsics.X86;
-    using System.Security;
     
     using static zfunc;
     
@@ -118,6 +114,7 @@ namespace Z0
 
     partial class As
     {
+
 
         [MethodImpl(Inline)]
         public static sbyte int8<T>(T src)
@@ -316,7 +313,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static T generic<T>(float src)
             => Unsafe.As<float,T>(ref src);
-
 
         [MethodImpl(Inline)]
         public static T generic<T>(double src)

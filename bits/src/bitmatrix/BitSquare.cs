@@ -19,7 +19,6 @@ namespace Z0
     {
         static N256 n => n256;
 
-
         [MethodImpl(Inline)]
         public static void not<T>(in T A, ref T Z)
             where T : unmanaged
@@ -153,7 +152,7 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-               imply(in uint8(in A), in uint8(in B), ref uint8(ref Z));
+               impl(in uint8(in A), in uint8(in B), ref uint8(ref Z));
             else if(typeof(T) == typeof(ushort))
                 vblock.impl(n, in A, in B, ref Z);
             else if(typeof(T) == typeof(uint))
@@ -169,7 +168,7 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-               notimply(in uint8(in A), in uint8(in B), ref uint8(ref Z));
+               nonimpl(in uint8(in A), in uint8(in B), ref uint8(ref Z));
             else if(typeof(T) == typeof(ushort))
                 vblock.nonimpl(n, in A, in B, ref Z);
             else if(typeof(T) == typeof(uint))
@@ -185,7 +184,7 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-               cimply(in uint8(in A), in uint8(in B), ref uint8(ref Z));
+               cimpl(in uint8(in A), in uint8(in B), ref uint8(ref Z));
             else if(typeof(T) == typeof(ushort))
                 vblock.cimpl(n, in A, in B, ref Z);
             else if(typeof(T) == typeof(uint))
@@ -197,11 +196,11 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static void cnotimply<T>(in T A, in T B, ref T Z)
+        public static void cnonimpl<T>(in T A, in T B, ref T Z)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-               cnotimply(in uint8(in A), in uint8(in B), ref uint8(ref Z));
+               cnonimpl(in uint8(in A), in uint8(in B), ref uint8(ref Z));
             else if(typeof(T) == typeof(ushort))
                 vblock.cnonimpl(n, in A, in B, ref Z);
             else if(typeof(T) == typeof(uint))
@@ -278,7 +277,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static void not(in byte A, ref byte Z)
-            => store64(math.not(read64(A)), ref Z);
+            => store64(gmath.not(read64(A)), ref Z);
 
         [MethodImpl(Inline)]
         static void select(in byte A, in byte B, in byte C, ref byte Z)
@@ -286,47 +285,47 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static void and(in byte A, in byte B, ref byte Z)
-            => store64(math.and(read64(A), read64(B)), ref Z);
+            => store64(gmath.and(read64(A), read64(B)), ref Z);
 
         [MethodImpl(Inline)]
         static void nand(in byte A, in byte B, ref byte Z)
-            => store64(math.nand(read64(A), read64(B)), ref Z);
+            => store64(gmath.nand(read64(A), read64(B)), ref Z);
 
         [MethodImpl(Inline)]
         static void or(in byte A, in byte B, ref byte Z)
-            => store64(math.or(read64(A), read64(B)), ref Z);
+            => store64(gmath.or(read64(A), read64(B)), ref Z);
 
         [MethodImpl(Inline)]
         static void nor(in byte A, in byte B, ref byte Z)
-            => store64(math.nor(read64(A), read64(B)), ref Z);
+            => store64(gmath.nor(read64(A), read64(B)), ref Z);
 
         [MethodImpl(Inline)]
         static void xor(in byte A, in byte B, ref byte Z)
-            => store64(math.xor(read64(A), read64(B)), ref Z);
+            => store64(gmath.xor(read64(A), read64(B)), ref Z);
 
         [MethodImpl(Inline)]
         static void xnor(in byte A, in byte B, ref byte Z)
-            => store64(math.xnor(read64(A), read64(B)), ref Z);
+            => store64(gmath.xnor(read64(A), read64(B)), ref Z);
 
         [MethodImpl(Inline)]
-        static void notimply(in byte A, in byte B, ref byte Z)
-            => store64(math.nonimpl(read64(A), read64(B)), ref Z);
+        static void nonimpl(in byte A, in byte B, ref byte Z)
+            => store64(gmath.nonimpl(read64(A), read64(B)), ref Z);
 
         [MethodImpl(Inline)]
-        static void imply(in byte A, in byte B, ref byte Z)
-            => store64(math.impl(read64(A), read64(B)), ref Z);
+        static void impl(in byte A, in byte B, ref byte Z)
+            => store64(gmath.impl(read64(A), read64(B)), ref Z);
 
         [MethodImpl(Inline)]
-        static void cimply(in byte A, in byte B, ref byte Z)
-            => store64(math.cimpl(read64(A), read64(B)), ref Z);
+        static void cimpl(in byte A, in byte B, ref byte Z)
+            => store64(gmath.cimpl(read64(A), read64(B)), ref Z);
 
         [MethodImpl(Inline)]
-        static void cnotimply(in byte A, in byte B, ref byte Z)
-            => store64(math.cnonimpl(read64(A), read64(B)), ref Z);
+        static void cnonimpl(in byte A, in byte B, ref byte Z)
+            => store64(gmath.cnonimpl(read64(A), read64(B)), ref Z);
 
         [MethodImpl(Inline)]
         static void xornot(in byte A, in byte B, ref byte Z)
-            => store64(math.xor(read64(in A), math.not(read64(in B))), ref Z);
+            => store64(gmath.xor(read64(in A), gmath.not(read64(in B))), ref Z);
 
         [MethodImpl(Inline)]
         static bit testz(in byte A, in byte B)

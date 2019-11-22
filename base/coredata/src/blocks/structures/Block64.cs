@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.InteropServices;    
         
     using static zfunc;
-    using static MemBlocks;
+    using static DataBlocks;
 
     /// <summary>
     /// Encapsulates a span that can be evenly partitioned into 64-bit blocks
@@ -49,73 +49,16 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bool Aligned(int length)
             => length % BlockLength == 0;
-
-        [MethodImpl(NotInline)]
-        public static Block64<T> AllocBlocks(int count, T? fill = null)
-        {
-            var dst = new Block64<T>(new T[count * BlockLength]);
-            if(fill != null)
-                dst.data.Fill(fill.Value);
-            return dst;
-        }
-
-        [MethodImpl(Inline)]
-        public static Block64<T> Load(T[] src, int offset = 0)
-        {
-            require(Aligned(src.Length - offset));
-            return new Block64<T>(src, offset, src.Length - offset);
-        }
-
-
-        [MethodImpl(Inline)]
-        internal static Block64<T> TransferUnsafe(Span<T> src)
-            => new Block64<T>(src);
-
-        [MethodImpl(Inline)]
-        public static Block64<T> Load(ReadOnlySpan<T> src, int offset = 0)
-        {
-            require(Aligned(src.Length - offset));
-            return new Block64<T>( offset == 0 ? src : src.Slice(offset));
-        }
-
-        [MethodImpl(Inline)]
-        public static Block64<T> Load(Span<T> src, int offset = 0)
-        {
-            require(Aligned(src.Length - offset));
-            return new Block64<T>(offset == 0 ? src : src.Slice(offset));
-        }
-
-        [MethodImpl(Inline)]
-        internal unsafe Block64(void* src, int length)    
-        {
-            data = new Span<T>(src, length);  
-        }
-
-        [MethodImpl(Inline)]
-        internal Block64(T[] src, int offset, int length)
-        {
-            data = new Span<T>(src, offset, length);
-        }
-
-        
-        [MethodImpl(Inline)]
-        internal Block64(ReadOnlySpan<T> src)
-        {
-            data = src.ToArray();            
-        }
-
+            
         [MethodImpl(Inline)]
         internal Block64(Span<T> src)
         {
             this.data = src;
         }
 
-        public ref T this[int ix] 
-        {
-            [MethodImpl(Inline)]
-            get => ref data[ix];
-        }
-
+        /// <summary>
+        /// The leading storage cell
+        /// </summary>
         public ref T Head
         {
             [MethodImpl(Inline)]
@@ -123,9 +66,18 @@ namespace Z0
         }
 
         /// <summary>
-        /// Provides access to the underlying storage
+        /// Reads/Writes an index-identified cell
         /// </summary>
-        public Span<T> Unblocked
+        public ref T this[int ix] 
+        {
+            [MethodImpl(Inline)]
+            get => ref Unsafe.Add(ref Head, ix);
+        }
+
+        /// <summary>
+        /// The encapsulated storage
+        /// </summary>
+        public Span<T> Data
         {
             [MethodImpl(Inline)]
             get => data;
@@ -137,13 +89,19 @@ namespace Z0
             get => data.Length;
         }
 
+        /// <summary>
+        /// The number of covered blocks
+        /// </summary>
         public int BlockCount 
         {
             [MethodImpl(Inline)]
             get => data.Length / BlockLength; 
         }
 
-        public int BlockWidth
+        /// <summary>
+        /// The number of cells per block, synonymous with block length
+        /// </summary>
+        public int BlockCells
         {
             [MethodImpl(Inline)]
             get => BlockLength;
@@ -155,6 +113,10 @@ namespace Z0
             get => data.IsEmpty;
         }
 
+        /// <summary>
+        /// Returns the leading cell of an index-identified block
+        /// </summary>
+        /// <param name="blockIndex">The block index, a number in the range 0..k-1 where k is the total number of covered blocks</param>
         [MethodImpl(Inline)]
         public ref T BlockHead(int blockIndex)
             => ref Unsafe.Add(ref Head, blockIndex*BlockLength); 
@@ -206,7 +168,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public Block64<S> As<S>()                
             where S : unmanaged
-                => MemBlocks.load(N,MemoryMarshal.Cast<T,S>(data));                    
+                => DataBlocks.load(N,MemoryMarshal.Cast<T,S>(data));                    
 
         public override bool Equals(object rhs) 
             => throw new NotSupportedException();

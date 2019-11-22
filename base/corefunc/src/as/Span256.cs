@@ -5,26 +5,12 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.InteropServices;
     using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics;
-    using System.Runtime.Intrinsics.X86;
-    using System.Security;
     
     using static zfunc;
 
     public static partial class As
     {
-
-        [MethodImpl(Inline)]
-        public static Block256<sbyte> int8<T>(in Block256<T> src)
-            where T : unmanaged
-                => cast<T,sbyte>(src);
-
-        [MethodImpl(Inline)]
-        public static Block256<byte> uint8<T>(in Block256<T> src)
-            where T : unmanaged
-                => cast<T,byte>(src);
 
         [MethodImpl(Inline)]
         public static Block256<short> int16<T>(in Block256<T> src)
@@ -94,12 +80,10 @@ namespace Z0
             where T : unmanaged
                 => cast<int,T>(src);
 
-
         [MethodImpl(Inline)]
         public static Block256<T> generic<T>(in Block256<uint> src)
             where T : unmanaged
                 => cast<uint,T>(src);
-
 
         [MethodImpl(Inline)]
         public static Block256<T> generic<T>(in Block256<long> src)
@@ -121,9 +105,6 @@ namespace Z0
         public static Block256<T> generic<T>(in Block256<double> src)
             where T : unmanaged
                 => cast<double,T>(src);
-
-
-
     }
 
 }

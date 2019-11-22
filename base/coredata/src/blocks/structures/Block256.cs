@@ -39,7 +39,6 @@ namespace Z0
         /// <typeparam name="T">The primitive type</typeparam>
         public static int CellSize => BlockSize / BlockLength;
 
-
         [MethodImpl(Inline)]
         public static implicit operator Span<T>(Block256<T> src)
             => src.data;
@@ -64,11 +63,7 @@ namespace Z0
         public static bool Aligned(int length)
             => length % BlockLength == 0;
         
-            
-        [MethodImpl(Inline)]
-        internal static Block256<T> TransferUnsafe(Span<T> src)
-            => new Block256<T>(src);
-
+        
         [MethodImpl(NotInline)]
         public static Block256<T> AllocBlocks(int blocks, T? fill = null)
         {
@@ -78,22 +73,6 @@ namespace Z0
             return dst;
         }
     
-        [MethodImpl(NotInline)]
-        public static Block256<T> Load(T[] src)
-        {
-            require(Aligned(src.Length));
-            return new Block256<T>(src);
-        }
-
-        /// <summary>
-        /// Takes, on faith, the source span is properly blocked and creates a new matrix using
-        /// the content as the underlying data
-        /// </summary>
-        /// <param name="src">The source span</param>
-        [MethodImpl(Inline)]
-        public static Block256<T> LoadDirect(Span<T> src)
-            => new Block256<T>(src);
-
         [MethodImpl(Inline)]
         public static Block256<T> LoadAligned(Span<T> src, int offset = 0)
         {
@@ -101,20 +80,6 @@ namespace Z0
             var slice = src.Slice(offset);
             return new Block256<T>(slice);
         }
-
-        [MethodImpl(Inline)]
-        public static Block256<T> LoadAligned(ref T head, int length)
-        {
-            require(Aligned(length));
-            return new Block256<T>(ref head, length);
-        }
-
-        [MethodImpl(Inline)]
-        internal unsafe Block256(void* src, int length)    
-        {
-            data = new Span<T>(src, length);  
-        }
-
 
         [MethodImpl(Inline)]
         internal Block256(ref T src, int length)
@@ -134,12 +99,9 @@ namespace Z0
             this.data = src;
         }
 
-        public ref T this[int ix] 
-        {
-            [MethodImpl(Inline)]
-            get => ref data[ix];
-        }
-
+        /// <summary>
+        /// The leading storage cell
+        /// </summary>
         public ref T Head
         {
             [MethodImpl(Inline)]
@@ -147,12 +109,75 @@ namespace Z0
         }
 
         /// <summary>
-        /// Slices a block from the encapsulated source
+        /// Reads/Writes an index-identified cell
+        /// </summary>
+        public ref T this[int ix] 
+        {
+            [MethodImpl(Inline)]
+            get => ref Unsafe.Add(ref Head, ix);
+        }
+
+        /// <summary>
+        /// The encapsulated storage
+        /// </summary>
+        public Span<T> Data
+        {
+            [MethodImpl(Inline)]
+            get => data;
+        }
+
+        /// <summary>
+        /// The encapsulated storage presented as a span of bytes
+        /// </summary>
+        public Span<byte> Bytes
+        {
+            [MethodImpl(Inline)]
+            get => data.AsBytes();
+        }
+
+        /// <summary>
+        /// The total number of available cells 
+        /// </summary>
+        public int Length 
+        {
+            [MethodImpl(Inline)]
+            get => data.Length;
+        }
+
+        /// <summary>
+        /// The number of covered blocks
+        /// </summary>
+        public int BlockCount 
+        {
+            [MethodImpl(Inline)]
+            get => data.Length / BlockLength; 
+        }
+
+        /// <summary>
+        /// The number of cells per block, synonymous with block length
+        /// </summary>
+        public int BlockCells
+        {
+            [MethodImpl(Inline)]
+            get => BlockLength;
+        }
+
+        /// <summary>
+        /// True if no capacity exists, false otherwise
+        /// </summary>
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => data.IsEmpty;
+        }
+
+        /// <summary>
+        /// Returns a reference to the leading cell of an index-identified block
         /// </summary>
         /// <param name="blockIndex">The index of the desired block</param>
         [MethodImpl(Inline)]
         public ref T BlockHead(int blockIndex)
-            => ref this[blockIndex*BlockLength];
+            => ref Unsafe.Add(ref Head, blockIndex * BlockLength);
 
         /// <summary>
         /// Slices an elementwise span from the source
@@ -218,45 +243,7 @@ namespace Z0
             where S : unmanaged
                 => new Block256<S>(MemoryMarshal.Cast<T,S>(data)); 
  
-        /// <summary>
-        /// Provides access to the underlying storage
-        /// </summary>
-        public Span<T> Unblocked
-        {
-            [MethodImpl(Inline)]
-            get => data;
-        }
-
-        public Span<byte> Bytes
-        {
-            [MethodImpl(Inline)]
-            get => data.AsBytes();
-        }
-
-        public int Length 
-        {
-            [MethodImpl(Inline)]
-            get => data.Length;
-        }
-
-        public int BlockCount 
-        {
-            [MethodImpl(Inline)]
-            get => data.Length / BlockLength; 
-        }
-
-        public int BlockWidth
-        {
-            [MethodImpl(Inline)]
-            get => BlockLength;
-        }
-
-        public bool IsEmpty
-        {
-            [MethodImpl(Inline)]
-            get => data.IsEmpty;
-        }
-
+ 
         public override bool Equals(object rhs) 
             => throw new NotSupportedException();
 

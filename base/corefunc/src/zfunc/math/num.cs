@@ -112,6 +112,26 @@ partial class zfunc
               : unsignedint<T>() ?  AsciLower.u 
               : AsciSym.Question;
 
+    static IEnumerable<T> range8i<T>(T x0, T x1, T? step = null)
+        where T : unmanaged
+    {
+        var min = Unsafe.As<T,sbyte>(ref x0);
+        var max = Unsafe.As<T,sbyte>(ref x1);
+        var _step = Unsafe.As<T?, sbyte?>(ref step) ??(sbyte)1;
+        for(var i = min; i <= max; i += _step)            
+            yield return Unsafe.As<sbyte,T>(ref i);
+    }
+
+    static IEnumerable<T> range8u<T>(T x0, T x1, T? step = null)
+        where T : unmanaged
+    {
+        var min = Unsafe.As<T,byte>(ref x0);
+        var max = Unsafe.As<T,byte>(ref x1);
+        var _step = Unsafe.As<T?, byte?>(ref step) ??(byte)1;
+        for(var i = min; i <= max; i += _step)            
+            yield return Unsafe.As<byte,T>(ref i);
+    }
+    
 
     /// <summary>
     /// Creates an enumerable sequence that ranges between inclusive upper and lower bounds
@@ -125,83 +145,83 @@ partial class zfunc
     {
         if(typeof(T) == typeof(sbyte))
         {
-            var min = int8(x0);
-            var max = int8(x1);
-            var _step = int8(step) ??(sbyte)1;
+            var min = Unsafe.As<T,sbyte>(ref x0);
+            var max = Unsafe.As<T,sbyte>(ref x1);
+            var _step = Unsafe.As<T?, sbyte?>(ref step) ??(sbyte)1;
             for(var i = min; i <= max; i += _step)            
-                yield return generic<T>(i);
+                yield return Unsafe.As<sbyte,T>(ref i);
         }
         else if(typeof(T) == typeof(byte))
         {
-            var min = uint8(x0);
-            var max = uint8(x1);
-            var _step = uint8(step) ??(byte)1;
+            var min = Unsafe.As<T,byte>(ref x0);
+            var max = Unsafe.As<T,byte>(ref x1);
+            var _step = Unsafe.As<T?, byte?>(ref step) ??(byte)1;
             for(var i = min; i <= max; i += _step)            
-                yield return generic<T>(i);
+                yield return Unsafe.As<byte,T>(ref i);
         }
         else if(typeof(T) == typeof(short))
         {
-            var min = int16(x0);
-            var max = int16(x1);
-            var _step = int16(step) ?? (short)1;
+            var min = Unsafe.As<T,short>(ref x0);
+            var max = Unsafe.As<T,short>(ref x1);
+            var _step = Unsafe.As<T?, short?>(ref step) ?? (short)1;
             for(var i = min; i <= max; i += _step)            
-                yield return generic<T>(i);
+                yield return Unsafe.As<short,T>(ref i);
         }
         else if(typeof(T) == typeof(ushort))
         {
-            var min = uint16(x0);
-            var max = uint16(x1);
-            var _step = uint16(step) ?? (ushort)1;
+            var min = Unsafe.As<T,ushort>(ref x0);
+            var max = Unsafe.As<T,ushort>(ref x1);
+            var _step = Unsafe.As<T?, ushort?>(ref step) ?? (ushort)1;
             for(var i = min; i <= max; i += _step)            
-                yield return generic<T>(i);
+                yield return Unsafe.As<ushort,T>(ref i);
         }
         else if(typeof(T) == typeof(int))
         {
-            var min = int32(x0);
-            var max = int32(x1);
-            var _step = int32(step) ?? 1;
+            var min = Unsafe.As<T,int>(ref x0);
+            var max = Unsafe.As<T,int>(ref x1);
+            var _step = Unsafe.As<T?, int?>(ref step) ?? 1;
             for(var i = min; i <= max; i += _step)            
-                yield return generic<T>(i);
+                yield return Unsafe.As<int,T>(ref i);
         }
         else if(typeof(T) == typeof(uint))
         {
-            var min = uint32(x0);
-            var max = uint32(x1);
-            var _step = uint32(step) ?? 1u;
+            var min = Unsafe.As<T,uint>(ref x0);
+            var max = Unsafe.As<T,uint>(ref x1);
+            var _step = Unsafe.As<T?, uint?>(ref step) ?? 1u;
             for(var i = min; i <= max; i += _step)            
-                yield return generic<T>(i);
+                yield return Unsafe.As<uint,T>(ref i);
         }
         else if(typeof(T) == typeof(long))
         {
-            var min = int64(x0);
-            var max = int64(x1);
-            var _step = int64(step) ?? 1L;
+            var min = Unsafe.As<T,long>(ref x0);
+            var max = Unsafe.As<T,long>(ref x1);
+            var _step = Unsafe.As<T?, long?>(ref step) ?? 1L;
             for(var i = min; i <= max; i += _step)            
-                yield return generic<T>(i);
+                yield return Unsafe.As<long,T>(ref i);
         }
         else if(typeof(T) == typeof(ulong))
         {
-            var min = uint64(x0);
-            var max = uint64(x1);
-            var _step = uint64(step) ?? 1ul;
+            var min = Unsafe.As<T,ulong>(ref x0);
+            var max = Unsafe.As<T,ulong>(ref x1);
+            var _step = Unsafe.As<T?, ulong?>(ref step) ?? 1ul;
             for(var i = min; i <= max; i += _step)            
-                yield return generic<T>(i);
+                yield return Unsafe.As<ulong,T>(ref i);
         }
         else if(typeof(T) == typeof(float))
         {
-            var min = float32(x0);
-            var max = float32(x1);
-            var _step = float32(step) ?? 1f;
+            var min = Unsafe.As<T,float>(ref x0);
+            var max = Unsafe.As<T,float>(ref x1);
+            var _step = Unsafe.As<T?, float?>(ref step) ?? 1f;
             for(var i = min; i <= max; i += _step)            
-                yield return generic<T>(i);
+                yield return Unsafe.As<float,T>(ref i);
         }
         else if(typeof(T) == typeof(double))
         {
-            var min = float64(x0);
-            var max = float64(x1);
-            var _step = float64(step) ?? 1d;
+            var min = Unsafe.As<T,double>(ref x0);
+            var max = Unsafe.As<T,double>(ref x1);
+            var _step = Unsafe.As<T?, double?>(ref step) ?? 1d;
             for(var i = min; i <= max; i += _step)            
-                yield return generic<T>(i);
+                yield return Unsafe.As<double,T>(ref i);
         }
         else
             throw unsupported<T>();
@@ -227,7 +247,6 @@ partial class zfunc
     public static IEnumerable<T> range<T>(T count)
         where T : unmanaged
             => range(default(T), count);
-
 
     /// <summary>
     /// Defines a scalar sequence [first, ..., (first + N)]

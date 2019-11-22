@@ -57,7 +57,7 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where T : unmanaged    
         {
-            inxspan.add(x.Data, y.Data, dst.Data);
+            vblock.add(x.Data, y.Data, dst.Data);
             return ref dst;
         }
 
@@ -112,7 +112,7 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where T : unmanaged    
         {
-            inxspan.add<T>(x,y,x);
+            vblock.add<T>(x,y,x);
             return ref x;
         }
 

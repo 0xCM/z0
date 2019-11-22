@@ -12,15 +12,6 @@ namespace Z0
 
     public static class Block128
     {
-        /// <summary>
-        /// Reimagines a 128-bit bloocked span of generic values as a span of bytes
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <typeparam name="T">The source value type</typeparam>
-        [MethodImpl(Inline)]
-        public static Block128<byte> bytes<T>(Block128<T> src)
-            where T : unmanaged
-                => load(MemoryMarshal.AsBytes(src.Unblocked));
 
         /// <summary>
         /// Allocates a span with a specified number of blocks
@@ -116,29 +107,6 @@ namespace Z0
         /// <typeparam name="T">The primitive type</typeparam>
         [MethodImpl(Inline)]
         public static Block128<T> load<T>(Span<T> src, int offset = 0)
-            where T : unmanaged
-                => Block128<T>.Load(src, offset);
-
-        /// <summary>
-        /// Loads an unsized 256-bit blocked span from a sized unblocked span
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <param name="offset">The span index at which to begin the load</param>
-        /// <typeparam name="T">The element type</typeparam>
-        [MethodImpl(Inline)]
-        public static Block128<T> load<N,T>(NatBlock<N,T> src)
-            where T : unmanaged
-            where N : unmanaged, ITypeNat
-                => load(src.Unsized);
-
-        /// <summary>
-        /// Loads a blocked readonly span from an unblocked readonly span
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <param name="offset">The span index at which to begin the load</param>
-        /// <typeparam name="T">The primitive type</typeparam>
-        [MethodImpl(Inline)]
-        public static Block128<T> load<T>(ReadOnlySpan<T> src, int offset = 0)
             where T : unmanaged
                 => Block128<T>.Load(src, offset);
 

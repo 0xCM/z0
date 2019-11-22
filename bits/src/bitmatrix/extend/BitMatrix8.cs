@@ -5,17 +5,13 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Threading;
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
-    using System.Diagnostics;
 
     using static zfunc;
 
     public static class BitMatrix8x
     {   
-
         /// <summary>
         /// Converts the matrix to a bitvector
         /// </summary>
@@ -28,7 +24,7 @@ namespace Z0
         /// </summary>
         [MethodImpl(Inline)]
         public static BitMatrix<byte> ToGeneric(this BitMatrix8 A)
-            => new BitMatrix<byte>(A.Bytes);
+            => new BitMatrix<byte>(A.data);
 
         /// <summary>
         /// Creates the matrix determined by a permutation
@@ -37,7 +33,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitMatrix8 ToBitMatrix(this Perm<N8> perm)
         {
-            var dst = BitMatrix8.Alloc();
+            var dst = BitMatrix.alloc(n8);
             for(var row = 0; row<perm.Length; row++)
                 dst[row, perm[row]] = Bit.On;
             return dst;
@@ -48,7 +44,7 @@ namespace Z0
         /// </summary>
         [MethodImpl(Inline)]
         public static BitMatrix<N8,byte> ToNatural(this BitMatrix8 A)
-            => BitMatrix.load(n8,A.Bytes);
+            => BitMatrix.load(n8,A.data);
 
         /// <summary>
         /// Converts the source matrix to a square matrix of natural order
@@ -59,7 +55,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static string Format(this BitMatrix8 src)            
-            => src.Bytes.FormatMatrixBits(src.Order);
+            => src.data.FormatMatrixBits(src.Order);
 
         /// <summary>
         /// Determines whether this matrix is equivalent to the canonical 0 matrix
@@ -80,7 +76,7 @@ namespace Z0
         /// </summary>
         [MethodImpl(Inline)]
         public static ulong Pack(this BitMatrix8 A)
-            => BitConvert.ToUInt64(A.Bytes);
+            => BitConvert.ToUInt64(A.data);
 
         /// <summary>
         /// Transposes a copy of the source matrix
@@ -93,7 +89,36 @@ namespace Z0
         public static BitMatrix8 AndNot(this BitMatrix8 A, in BitMatrix8 B)
             => BitMatrix.cnotimply(A, B);
 
+        /// <summary>
+        /// Retrives the bitvector determined by the matrix diagonal
+        /// </summary>
+        [MethodImpl(Inline)]
+        public static BitVector8 Diagonal(this BitMatrix8 A)
+            => BitMatrix.diagonal(A);
 
+        /// <summary>
+        /// Queries the matrix for the data in an index-identified column and returns
+        /// the bitvector representative
+        /// </summary>
+        /// <param name="index">The row index</param>
+        [MethodImpl(Inline)]
+        public static BitVector8 Column(this BitMatrix8 A, int index)
+        {
+            byte col = 0;
+            for(var r = 0; r < 8; r++)
+                if(BitMask.test(A.Data[r], index))
+                    BitMask.enable(ref col, r);
+            return col;
+        }
+
+        /// <summary>
+        /// Interchanges the i'th and j'th rows where  0 <= i,j < 32
+        /// </summary>
+        /// <param name="i">A row index</param>
+        /// <param name="j">A row index</param>
+        [MethodImpl(Inline)]
+        public static void RowSwap(this BitMatrix8 A, int i, int j)
+            => A.data.Swap(i,j);
 
         /// <summary>
         /// Creates a new matrix by cloning the existing matrix or allocating a matrix with the same structure

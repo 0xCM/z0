@@ -5,9 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Collections;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
     
@@ -19,55 +16,23 @@ namespace Z0
     /// </summary>
     /// <typeparam name="N">The order type</typeparam>
     /// <typeparam name="T">The primal type</typeparam>
-    public ref struct BlockMatrix<N,T>
+    public readonly ref struct BlockMatrix<N,T>
         where N : unmanaged, ITypeNat
         where T : unmanaged    
     {        
-        Block256<T> data;
+        readonly Block256<T> data;
 
-        public static readonly Dim<N,N> Dim = default;        
-
-        /// <summary>
-        /// The number of rows in the structure
-        /// </summary>
-        public static readonly int RowCount = nati<N>();
+        public static Dim<N,N> Dim => default;        
 
         /// <summary>
-        /// The number of columns in the structure
+        /// The number of matrix rows
         /// </summary>
-        public static readonly int ColCount = nati<N>();
-
-        /// <summary>
-        /// The number of cells in each row
-        /// </summary>
-        public static readonly int RowLenth = ColCount;
-
-        /// <summary>
-        /// The number of cells in each column
-        /// </summary>
-        public static readonly int ColLength = RowCount;
+        public static int Order = natval<N>();
 
         /// <summary>
         /// The total number of allocated elements
         /// </summary>
-        public static readonly int CellCount = RowLenth * ColLength;
-
-        /// <summary>
-        /// The size, in bytes, of each cell
-        /// </summary>
-        public static readonly ByteSize CellSize = Block256<T>.CellSize;
-
-        static readonly int AlignedRowLength = Block256<T>.BlockLength;
-
-        /// <summary>
-        /// The Row dimension representative
-        /// </summary>
-        public static N RowRep = default;
-
-        /// <summary>
-        /// The Column dimension representative
-        /// </summary>
-        public static N ColRep = default;
+        public static int CellCount => NatMath.square<N>();
 
         [MethodImpl(Inline)]
         public static implicit operator BlockMatrix<N,T>(Block256<T> src)
@@ -114,7 +79,7 @@ namespace Z0
         
         [MethodImpl(Inline)]        
         public ref T Cell(int r, int c)
-            => ref data[RowLenth*r + c];
+            => ref data[Order*r + c];
 
         public ref T this[int r, int c]
         {
@@ -131,29 +96,29 @@ namespace Z0
         [MethodImpl(Inline)]
         public BlockVector<N,T> Row(int row)
         {
-            if(row < 0 || row >= RowCount)
-                throw Errors.OutOfRange(row, 0, RowCount - 1);
+            if(row < 0 || row >= Order)
+                throw Errors.OutOfRange(row, 0, Order - 1);
             
-            return BlockVector.Load<N,T>(data.Slice(row * RowLenth, RowLenth));
+            return BlockVector.Load<N,T>(data.Slice(row * Order, Order));
         }
 
         [MethodImpl(Inline)]
         public ref BlockVector<N,T> Row(int row, ref BlockVector<N,T> dst)
         {
-            if(row < 0 || row >= RowCount)
-                throw Errors.OutOfRange(row, 0, RowCount - 1);
-             var src = data.Slice(row * RowLenth, RowLenth);
+            if(row < 0 || row >= Order)
+                throw Errors.OutOfRange(row, 0, Order - 1);
+             var src = data.Slice(row * Order, Order);
              src.CopyTo(dst.Unsized);
              return ref dst;
         }
 
         public ref BlockVector<N,T> Col(int col, ref BlockVector<N,T> dst)
         {
-            if(col < 0 || col >= ColCount)
-                throw Errors.OutOfRange(col, 0, ColCount - 1);
+            if(col < 0 || col >= Order)
+                throw Errors.OutOfRange(col, 0, Order - 1);
             
-            for(var row = 0; row < ColLength; row++)
-                dst[row] = data[row*RowLenth + col];
+            for(var row = 0; row < Order; row++)
+                dst[row] = data[row*Order + col];
             return ref dst;
         }
 
@@ -198,8 +163,8 @@ namespace Z0
         /// <param name="f">The function to apply</param>
         public void Apply(Func<T,T> f)
         {
-            for(var r = 0; r < RowCount; r++)
-            for(var c = 0; c < ColCount; c++)
+            for(var r = 0; r < Order; r++)
+            for(var c = 0; c < Order; c++)
                 this[r,c] = f(this[r,c]);
         }
 
@@ -216,8 +181,8 @@ namespace Z0
 
         public bool Equals(BlockMatrix<N,T> rhs)
         {
-            for(var r = 0; r < (int)RowCount; r ++)
-            for(var c = 0; c < (int)ColCount; c ++)
+            for(var r = 0; r < Order; r ++)
+            for(var c = 0; c < Order; c ++)
                 if(!gmath.eq(this[r,c], rhs[r,c]))
                     return false;
             return true;
@@ -231,8 +196,8 @@ namespace Z0
         public Option<T> First(Func<T,bool> f, out (int i, int j) pos)
         {
             pos = (0,0);
-            for(var r = 0; r < (int)RowCount; r ++)
-            for(var c = 0; c < (int)ColCount; c ++)
+            for(var r = 0; r < (int)Order; r ++)
+            for(var c = 0; c < (int)Order; c ++)
             {                
                 if(f(this[r,c]))
                 {
@@ -245,8 +210,8 @@ namespace Z0
 
         public Option<T> First(Func<T,bool> f)
         {
-            for(var r = 0; r < (int)RowCount; r ++)
-            for(var c = 0; c < (int)ColCount; c ++)
+            for(var r = 0; r < Order; r ++)
+            for(var c = 0; c < Order; c ++)
                 if(f(this[r,c]))
                     return this[r,c];
             return default;            

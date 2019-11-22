@@ -25,24 +25,36 @@ namespace Z0
             where K2 : unmanaged, ITypeNat<K2>
                 => NatVal.From(natval(k1) / natval(k2));
 
+        /// <summary>
+        /// Computes k := k1 + k2
+        /// </summary>
         [MethodImpl(Inline)]
         public static NatVal add<K1,K2>(K1 k1 = default, K2 k2 = default)
             where K1 : unmanaged, ITypeNat
             where K2 : unmanaged, ITypeNat
                 => NatVal.From(natval(k1) + natval(k2));
 
+        /// <summary>
+        /// Computes k := k1 - k2
+        /// </summary>
         [MethodImpl(Inline)]
         public static NatVal sub<K1,K2>(K1 k1 = default, K2 k2 = default)
             where K1 : unmanaged, ITypeNat
             where K2 : unmanaged, ITypeNat
                 => NatVal.From(natval(k1) + natval(k2));
 
+        /// <summary>
+        /// Computes k := k1*k2
+        /// </summary>
         [MethodImpl(Inline)]
         public static NatVal mul<K1,K2>(K1 k1 = default, K2 k2 = default)
             where K1 : unmanaged, ITypeNat
             where K2 : unmanaged, ITypeNat
                 => NatVal.From(natval(k1) * natval(k2));
 
+        /// <summary>
+        /// Computes k := k1*k2*k3
+        /// </summary>
         [MethodImpl(Inline)]
         public static NatVal mul<K1,K2,K3>(K1 k1 = default, K2 k2 = default, K3 k3 = default)
             where K1 : unmanaged, ITypeNat
@@ -50,6 +62,17 @@ namespace Z0
             where K3 : unmanaged, ITypeNat
                 => NatVal.From(natval(k1) * natval(k2) * natval(k3));
 
+        /// <summary>
+        /// Computes k := k1*k1
+        /// </summary>
+        [MethodImpl(Inline)]
+        public static NatVal square<K1>(K1 k1 = default)
+            where K1 : unmanaged, ITypeNat
+                => NatVal.From(natval(k1) * natval(k1));
+
+        /// <summary>
+        /// Computes k := k1 / k2
+        /// </summary>
         [MethodImpl(Inline)]
         public static NatVal div<K1,K2>(K1 k1 = default, K2 k2 = default)
             where K1 : unmanaged, ITypeNat
@@ -57,7 +80,7 @@ namespace Z0
                 => NatVal.From(natval<K1>() / natval<K2>());
 
         /// <summary>
-        /// Computes the quotient z of a product, z := a*b / c
+        /// Computes k := (k1*k2) / k3
         /// </summary>
         [MethodImpl(Inline)]
         public static NatVal divprod<K1,K2,K3>(K1 k1 = default, K2 k2 = default, K3 k3 = default)
@@ -76,23 +99,23 @@ namespace Z0
                 => NatVal.From(natval(k1) % natval(k2));
 
         /// <summary>
-        /// Computes a := k % 2 == 0
+        /// Computes k := k % 2 == 0
         /// </summary>
         [MethodImpl(Inline)]
-        public static bool even<K>(K k = default)
-            where K : unmanaged, ITypeNat
-                => natval(k) % 2 == 0;
+        public static bool even<K1>(K1 k1 = default)
+            where K1 : unmanaged, ITypeNat
+                => natval(k1) % 2 == 0;
 
         /// <summary>
-        /// Computes a := k % 2 != 0
+        /// Computes k := k % 2 != 0
         /// </summary>
         [MethodImpl(Inline)]
-        public static bool odd<K>(K k = default)
-            where K : unmanaged, ITypeNat
-                => natval(k) % 2 != 0;
+        public static bool odd<K1>(K1 k1 = default)
+            where K1 : unmanaged, ITypeNat
+                => natval(k1) % 2 != 0;
 
         /// <summary>
-        /// Computes z := a*b % c
+        /// Computes k := (k1*k2) % k3
         /// </summary>
         [MethodImpl(Inline)]
         public static NatVal modprod<K1,K2,K3>(K1 k1 = default, K2 k2 = default, K3 k3 = default)
@@ -101,24 +124,36 @@ namespace Z0
             where K3 : unmanaged, ITypeNat
                 => NatVal.From(mul(k1,k2) % natval(k3));
 
+        /// <summary>
+        /// Computes k := k1 & k2
+        /// </summary>
         [MethodImpl(Inline)]
         public static NatVal and<K1,K2>(K1 k1 = default, K2 k2 = default)
             where K1 : unmanaged, ITypeNat
             where K2 : unmanaged, ITypeNat
                 => NatVal.From(natval(k1) & natval(k2));
 
+        /// <summary>
+        /// Computes k := k1 | k2
+        /// </summary>
         [MethodImpl(Inline)]
         public static NatVal or<K1,K2>(K1 k1 = default, K2 k2 = default)
             where K1 : unmanaged, ITypeNat
             where K2 : unmanaged, ITypeNat
                 => NatVal.From(natval(k2) | natval(k2));
 
+        /// <summary>
+        /// Computes k := k1 ^ k2
+        /// </summary>
         [MethodImpl(Inline)]
         public static NatVal xor<K1,K2>(K1 k1 = default, K2 k2 = default)
             where K1 : unmanaged, ITypeNat
             where K2 : unmanaged, ITypeNat
                 => NatVal.From(natval(k1) ^ natval(k2));
 
+        /// <summary>
+        /// Computes k := ~k1
+        /// </summary>
         [MethodImpl(Inline)]
         public static NatVal not<K1>(K1 k1 = default)
             where K1 : unmanaged, ITypeNat

@@ -438,7 +438,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static string FormatHex<T>(this Block64<T> src, bool bracket = false, char? sep = null, bool specifier = false)
             where T : unmanaged
-                => src.Unblocked.FormatHex(bracket, sep, specifier);
+                => src.Data.FormatHex(bracket, sep, specifier);
 
         /// <summary>
         /// Formats a 128-bit blocked span as a sequence of hex values
@@ -451,7 +451,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static string FormatHex<T>(this Block128<T> src, bool bracket = false, char? sep = null, bool specifier = false)
             where T : unmanaged
-                => src.Unblocked.FormatHex(bracket, sep, specifier);
+                => src.Data.FormatHex(bracket, sep, specifier);
 
         /// <summary>
         /// Formats a span of integral type as a sequence of hex values
@@ -464,7 +464,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static string FormatHex<T>(this Block256<T> src, bool bracket = false, char? sep = null, bool specifier = false)
             where T : unmanaged
-                => src.Unblocked.FormatHex(bracket, sep, specifier);
+                => src.Data.FormatHex(bracket, sep, specifier);
 
         /// <summary>
         /// Formats a span of natural length and integral type as a sequence of hex values
@@ -520,19 +520,6 @@ namespace Z0
              where T : unmanaged
                 => src.ToSpan().FormatHex(bracket,sep, specifier); 
                 
-        /// <summary>
-        /// Formats a span of natural length and integral type as a sequence of hex values
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <param name="bracket">Whether to enclose the formatted hex within brackets</param>
-        /// <param name="sep">The character to use as a separator, if applicable</param>
-        /// <param name="specifier">Whether to prefix each number with the canonical hex specifier, "0x"</param>
-        /// <typeparam name="T">The primal cell type</typeparam>
-        [MethodImpl(Inline)]
-        public static string FormatHex<N,T>(this ConstNatBlock<N,T> src, bool bracket = false, char? sep = null, bool specifier = false)
-            where N : unmanaged, ITypeNat
-            where T : unmanaged
-                => src.Unsize().FormatHex(bracket, sep, specifier);
 
         /// <summary>
         /// Formats a span of integral type as a blocked hex
@@ -580,7 +567,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static string FormatHexBlocks<T>(this Block128<T> src, int? width = null, char? sep = null)
             where T : unmanaged
-                => src.Unblocked.FormatHexBlocks(width, sep);
+                => src.Data.FormatHexBlocks(width, sep);
         
         /// <summary>
         /// Formats span cells as blocked hex
@@ -592,7 +579,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static string FormatHexBlocks<T>(this Block256<T> src, int? width = null, char? sep = null)
             where T : unmanaged
-                => src.Unblocked.FormatHexBlocks(width, sep);
+                => src.Data.FormatHexBlocks(width, sep);
 
         /// <summary>
         /// Formats span cells as blocked hex
@@ -607,18 +594,6 @@ namespace Z0
             where T : unmanaged
                 => src.Unsized.FormatHexBlocks(width,sep);
 
-        /// <summary>
-        /// Formats span cells as blocked hex
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <param name="width">The block width</param>
-        /// <param name="sep">The block delimiter</param>
-        /// <typeparam name="T">The cell component type</typeparam>
-        [MethodImpl(Inline)]
-        public static string FormatHexBlocks<N,T>(this ConstNatBlock<N,T> src, int? width = null, char? sep = null)
-            where N : unmanaged, ITypeNat
-            where T : unmanaged
-                => src.Unsized.FormatHexBlocks(width,sep,false);    
     }
 
 }

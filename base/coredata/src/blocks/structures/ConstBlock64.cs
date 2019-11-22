@@ -23,7 +23,7 @@ namespace Z0
         /// <summary>
         /// The number of cells per block
         /// </summary>
-        public static int BlockLength => MemBlocks.blocklen<T>(N);
+        public static int BlockLength => DataBlocks.blocklen<T>(N);
 
         [MethodImpl(Inline)]
         public static implicit operator ReadOnlySpan<T>(in ConstBlock64<T> src)
@@ -47,50 +47,9 @@ namespace Z0
             => Block64<T>.Aligned(length);
 
         [MethodImpl(Inline)]
-        public static ConstBlock64<T> Load(T[] src)
-        {
-            require(aligned(src.Length));
-            return new ConstBlock64<T>(src);
-        }
-
-        [MethodImpl(Inline)]
         public static ConstBlock64<T> Load(in Block64<T> src)
             => new ConstBlock64<T>(src);
 
-        [MethodImpl(Inline)]
-        public static ConstBlock64<T> load(Span<T> src, int offset, int length)
-        {
-            require(aligned(length));
-            return new ConstBlock64<T>(src.Slice(offset, length));
-        }
-
-        [MethodImpl(Inline)]
-        public static ConstBlock64<T> load(ReadOnlySpan<T> src, int offset, int length)
-        {
-            require(aligned(length));
-            return new ConstBlock64<T>(src.Slice(offset, length));
-        }
-
-        [MethodImpl(Inline)]
-        public static unsafe ConstBlock64<T> load(void* src, int length)
-        {
-            require(aligned(length));
-            return new ConstBlock64<T>(src,length);
-        }
-
-        [MethodImpl(Inline)]
-        internal unsafe ConstBlock64(void* src, int length)    
-        {
-            data = new ReadOnlySpan<T>(src, length);  
-        }
-
-        [MethodImpl(Inline)]
-        internal ConstBlock64(T[] src)
-        {
-            data = src;
-        }
-        
-        
         [MethodImpl(Inline)]
         internal ConstBlock64(ReadOnlySpan<T> src)
         {
@@ -101,12 +60,6 @@ namespace Z0
         internal ConstBlock64(in Block64<T> src)
         {
             data = src;
-        }
-
-        [MethodImpl(Inline)]
-        internal ConstBlock64(Span<T> src)
-        {
-            this.data = src;
         }
 
         public ReadOnlySpan<T> Data
@@ -165,10 +118,6 @@ namespace Z0
         public ConstBlock64<T> SliceBlocks(int blockIndex, int blockCount)
             => new ConstBlock64<T>(Slice(blockIndex * BlockLength, blockCount * BlockLength));
             
-        [MethodImpl(Inline)]
-        public Block64<T> ToSpan64()
-            => Block64.load(data);
-
         [MethodImpl(Inline)]
         public Span<T> ToSpan()
             => new Span<T>(data.ToArray());

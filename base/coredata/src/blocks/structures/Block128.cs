@@ -79,16 +79,6 @@ namespace Z0
             return new Block128<T>(src, offset, src.Length - offset);
         }
 
-        [MethodImpl(Inline)]
-        internal static Block128<T> TransferUnsafe(Span<T> src)
-            => new Block128<T>(src);
-
-        [MethodImpl(Inline)]
-        public static Block128<T> Load(ReadOnlySpan<T> src, int offset = 0)
-        {
-            require(Aligned(src.Length - offset));
-            return new Block128<T>( offset == 0 ? src : src.Slice(offset));
-        }
 
         [MethodImpl(Inline)]
         public static Block128<T> Load(Span<T> src, int offset = 0)
@@ -98,17 +88,10 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        internal unsafe Block128(void* src, int length)    
-        {
-            data = new Span<T>(src, length);  
-        }
-
-        [MethodImpl(Inline)]
         internal Block128(T[] src, int offset, int length)
         {
             data = new Span<T>(src, offset, length);
         }
-
         
         [MethodImpl(Inline)]
         internal Block128(ReadOnlySpan<T> src)
@@ -122,12 +105,9 @@ namespace Z0
             this.data = src;
         }
 
-        public ref T this[int ix] 
-        {
-            [MethodImpl(Inline)]
-            get => ref data[ix];
-        }
-
+        /// <summary>
+        /// The leading storage cell
+        /// </summary>
         public ref T Head
         {
             [MethodImpl(Inline)]
@@ -135,51 +115,86 @@ namespace Z0
         }
 
         /// <summary>
-        /// Provides access to the underlying storage
+        /// Reads/Writes an index-identified cell
         /// </summary>
-        public Span<T> Unblocked
+        public ref T this[int ix] 
+        {
+            [MethodImpl(Inline)]
+            get => ref Unsafe.Add(ref Head, ix);
+        }
+
+        /// <summary>
+        /// The backing storage
+        /// </summary>
+        public Span<T> Data
         {
             [MethodImpl(Inline)]
             get => data;
         }
 
+        /// <summary>
+        /// The encapsulated storage presented as a bytespan
+        /// </summary>
+        public Span<byte> Bytes
+        {
+            [MethodImpl(Inline)]
+            get => data.AsBytes();
+        }
+
+        /// <summary>
+        /// The total number of available cells 
+        /// </summary>
         public int Length 
         {
             [MethodImpl(Inline)]
             get => data.Length;
         }
 
+        /// <summary>
+        /// The number of covered blocks
+        /// </summary>
         public int BlockCount 
         {
             [MethodImpl(Inline)]
             get => data.Length / BlockLength; 
         }
 
-        public int BlockWidth
+        /// <summary>
+        /// The number of cells per block, synonymous with block length
+        /// </summary>
+        public int BlockCells
         {
             [MethodImpl(Inline)]
             get => BlockLength;
         }
 
+        /// <summary>
+        /// True if no capacity exists, false otherwise
+        /// </summary>
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
             get => data.IsEmpty;
         }
 
+        /// <summary>
+        /// Returns the leading cell of an index-identified block
+        /// </summary>
+        /// <param name="blockIndex">The block index, a number in the range 0..k-1 where k is the total number of covered blocks</param>
         [MethodImpl(Inline)]
         public ref T BlockHead(int blockIndex)
             => ref Unsafe.Add(ref Head, blockIndex*BlockLength); 
 
         [MethodImpl(Inline)]
         public Block128<T> Block(int blockIndex)
-        {
-            var slice = data.Slice(blockIndex * BlockLength, BlockLength); 
-            return new Block128<T>(slice);
-        }
+            => new Block128<T>(data.Slice(blockIndex * BlockLength, BlockLength));
+        
+        [MethodImpl(Inline)]
+        public Block128<T> Blocks(int blockIndex, int blockCount)
+            => new Block128<T>(Slice(blockIndex * BlockLength, blockCount * BlockLength ));
 
         /// <summary>
-        /// Retrieves a 64-bit block
+        /// Returns an index-identified block
         /// </summary>
         /// <param name="n">The block width selector</param>
         /// <param name="blockIndex">The index of the block, with respect to 64-bit blocks</param>
@@ -197,15 +212,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public Span<T> Slice(int offset, int length)
             => data.Slice(offset,length);
-
-        [MethodImpl(Inline)]
-        public Block128<T> SliceBlock(int blockIndex)
-            => new Block128<T>(data.Slice(blockIndex * BlockLength, BlockLength));
-        
-        [MethodImpl(Inline)]
-        public Block128<T> SliceBlocks(int blockIndex, int blockCount)
-            => new Block128<T>(Slice(blockIndex * BlockLength, blockCount * BlockLength ));
-            
+                    
         [MethodImpl(Inline)]
         public ConstBlock128<T> ReadOnly()
             => (ConstBlock128<T>)data;

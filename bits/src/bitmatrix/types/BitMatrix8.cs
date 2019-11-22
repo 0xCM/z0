@@ -16,13 +16,12 @@ namespace Z0
     /// </summary>
     public readonly ref struct BitMatrix8
     {        
-        readonly Span<byte> data;
+        internal readonly Span<byte> data;
                                         
         /// <summary>
         /// The matrix order
         /// </summary>
         public const uint N = 8;
-
 
         /// <summary>
         /// Allocates an 8x8 identity bitmatrix
@@ -37,100 +36,42 @@ namespace Z0
         /// <summary>
         /// Allocates an 8x8 1-filled bitmatrix
         /// </summary>
-        public static BitMatrix8 Ones => new BitMatrix8(AllOnes.Replicate());
-
-        /// <summary>
-        /// Allocates a matrix with an optional fill value
-        /// </summary>
-        public static BitMatrix8 Alloc(bit fill = default)                
-            => fill ? new BitMatrix8(UInt64.MaxValue) : new BitMatrix8(0ul);
-
-        /// <summary>
-        /// Allocates a matrix where each row is initialized to a common vector
-        /// </summary>
-        /// <param name="fill">The fill vector</param>
-        public static BitMatrix8 Alloc(BitVector8 fill)
-        {
-            var data = new byte[N];
-            data.Fill(fill);
-            return new BitMatrix8(data);
-        }
-
-        /// <summary>
-        /// Loads a matrix from the source value
-        /// </summary>
-        /// <param name="src">The bit source</param>
-        [MethodImpl(Inline)]
-        public static BitMatrix8 From(ulong src)        
-            => new BitMatrix8(src);
-
-        /// <summary>
-        /// Creates an 8x8 bitmatrix from a span of length 8
-        /// </summary>
-        /// <param name="src">The source array</param>
-        [MethodImpl(Inline)]
-        public static BitMatrix8 From(Span<byte> src)        
-            => new BitMatrix8(src);
-
-        /// <summary>
-        /// Creates an 8x8 bitmatrix from a memory segment of length 8
-        /// </summary>
-        /// <param name="src">The source array</param>
-        [MethodImpl(Inline)]
-        public static BitMatrix8 From(byte[] src)        
-            => new BitMatrix8(src);
-
-        /// <summary>
-        /// Defines a matrix by the explicit specification of 8 bytes
-        /// </summary>
-        [MethodImpl(Inline)]
-        public static BitMatrix8 From(byte row0, byte row1, byte row2, byte row3, byte row4, byte row5, byte row6, byte row7)        
-            => new BitMatrix8(array(row0,row1,row2,row3,row4,row5,row6, row7));
-
-        /// <summary>
-        /// Defifines a matrix from two 32-bit unsigned integers; the upper value contains
-        /// the data for rows 0...3 and the lower value contains the dat for rows [4 ... 7]
-        /// </summary>
-        /// <param name="lo">The upper row data</param>
-        /// <param name="hi">The lower row data</param>
-        [MethodImpl(Inline)]
-        public static BitMatrix8 From(uint lo, uint hi)
-            => From(Z0.Bits.pack(lo, hi));
+        public static BitMatrix8 Ones => new BitMatrix8(0xFFFFFFFFFFFFFFFF);
 
         [MethodImpl(Inline)]
-        public static BitMatrix8 operator & (BitMatrix8 lhs, BitMatrix8 rhs)
+        public static BitMatrix8 operator & (in BitMatrix8 lhs, in BitMatrix8 rhs)
             =>  BitMatrix.and(lhs,rhs);
 
         [MethodImpl(Inline)]
-        public static BitMatrix8 operator | (BitMatrix8 lhs, BitMatrix8 rhs)
+        public static BitMatrix8 operator | (BitMatrix8 lhs, in BitMatrix8 rhs)
             => BitMatrix.or(lhs,rhs);
 
         [MethodImpl(Inline)]
-        public static BitMatrix8 operator ^ (BitMatrix8 lhs, BitMatrix8 rhs)
+        public static BitMatrix8 operator ^ (in BitMatrix8 lhs, in BitMatrix8 rhs)
             => BitMatrix.xor(lhs,rhs);
 
         [MethodImpl(Inline)]
-        public static BitMatrix8 operator ~ (BitMatrix8 src)
+        public static BitMatrix8 operator ~ (in BitMatrix8 src)
             => BitMatrix.not(src);
 
         [MethodImpl(Inline)]
-        public static BitMatrix8 operator - (BitMatrix8 A, BitMatrix8 B)
+        public static BitMatrix8 operator - (in BitMatrix8 A, in BitMatrix8 B)
             => BitMatrix.xornot(A,B);
 
         [MethodImpl(Inline)]
-        public static BitMatrix8 operator * (BitMatrix8 lhs, BitMatrix8 rhs)
+        public static BitMatrix8 operator * (BitMatrix8 lhs, in BitMatrix8 rhs)
             => BitMatrix.mul(lhs,rhs);
 
         [MethodImpl(Inline)]
-        public static BitVector8 operator * (BitMatrix8 lhs, BitVector8 rhs)
+        public static BitVector8 operator * (in BitMatrix8 lhs, in BitVector8 rhs)
             => BitMatrix.mul(lhs,rhs);
 
         [MethodImpl(Inline)]
-        public static bool operator ==(BitMatrix8 lhs, BitMatrix8 rhs)
+        public static bool operator ==(in BitMatrix8 lhs, in BitMatrix8 rhs)
             => lhs.Equals(rhs);
 
         [MethodImpl(Inline)]
-        public static bool operator !=(BitMatrix8 lhs, BitMatrix8 rhs)
+        public static bool operator !=(in BitMatrix8 lhs, in BitMatrix8 rhs)
             => !(lhs.Equals(rhs));
 
         [MethodImpl(Inline)]
@@ -142,14 +83,13 @@ namespace Z0
             => new BitMatrix8(src);
 
         [MethodImpl(Inline)]
-        BitMatrix8(Span<byte> src)
+        internal BitMatrix8(Span<byte> src)
         {
             this.data = src;
         }
 
-
         [MethodImpl(Inline)]
-        BitMatrix8(ulong src)
+        internal BitMatrix8(ulong src)
         {
             this.data = BitConvert.GetBytes(src);
         }
@@ -163,7 +103,7 @@ namespace Z0
             get => (int)N;
         }
 
-        public Span<byte> Bytes
+        public ReadOnlySpan<byte> Bytes
         {
             [MethodImpl(Inline)]
             get => data;            
@@ -188,107 +128,29 @@ namespace Z0
         }
 
         /// <summary>
-        /// Reads the bit in a specified cell
-        /// </summary>
-        /// <param name="row">The row index</param>
-        /// <param name="col">The column index</param>
-        [MethodImpl(Inline)]
-        readonly Bit GetBit(int row, int col)
-            => BitMask.test(data[row], col);
-
-        /// <summary>
-        /// Sets the bit in a specified cell
-        /// </summary>
-        /// <param name="row">The row index</param>
-        /// <param name="col">The column index</param>
-        /// <param name="src">The source value</param>
-        [MethodImpl(Inline)]
-        void SetBit(int row, int col, Bit src)
-            => BitMask.set(ref data[row], (byte)col, src);
-
-        /// <summary>
         /// Reads/manipulates the bit in a specified cell
         /// </summary>
         /// <param name="row">The row index</param>
         /// <param name="col">The column index</param>
         /// <param name="src">The source value</param>
-        public Bit this[int row, int col]
+        public bit this[int row, int col]
         {
             [MethodImpl(Inline)]
-            get => GetBit(row,col);
+            get => BitMask.test(skip(in Head,row), col);
 
             [MethodImpl(Inline)]
-            set => SetBit(row,col,value);
+            set => BitMask.set(ref seek(ref Head, row), (byte)col, value);
         }            
 
         /// <summary>
-        /// A mutable indexer, functionally equivalent to <see cref='RowData' /> function
+        /// Gets/Sets the data for a row
         /// </summary>
         /// <param name="row">The row index</param>
         public ref BitVector8 this[int row]
         {
             [MethodImpl(Inline)]
-            get => ref RowVector(row);
+            get => ref Unsafe.As<byte,BitVector8>(ref seek(ref Head, row));
         }
-
-        /// <summary>
-        /// Retrives the bitvector determined by the matrix diagonal
-        /// </summary>
-        [MethodImpl(Inline)]
-        public readonly BitVector8 Diagonal()
-            => BitMatrix.diagonal(this);
-
-        /// <summary>
-        /// Returns a mutable reference for an index-identified matrix row
-        /// </summary>
-        /// <param name="row">The row index</param>
-        [MethodImpl(Inline)]
-        public ref byte RowData(int row)
-            => ref seek(ref Head, row);
-
-        /// <summary>
-        /// Interchanges the i'th and j'th rows where  0 <= i,j < 32
-        /// </summary>
-        /// <param name="i">A row index</param>
-        /// <param name="j">A row index</param>
-        [MethodImpl(Inline)]
-        public void RowSwap(int i, int j)
-            => data.Swap(i,j);
-
-        /// <summary>
-        /// Presents the data at a specified offset as a bitvector
-        /// </summary>
-        /// <param name="row">The row index</param>
-        [MethodImpl(Inline)]
-        public ref BitVector8 RowVector(int row)
-            => ref Unsafe.As<byte,BitVector8>(ref seek(ref Head, row));
-
-
-        /// <summary>
-        /// Queries the matrix for the data in an index-identified column 
-        /// </summary>
-        /// <param name="index">The row index</param>
-        public readonly byte ColData(int index)
-        {
-            byte col = 0;
-            for(var r = 0; r < N; r++)
-                if(BitMask.test(data[r], index))
-                    BitMask.enable(ref col, r);
-            return col;
-        }
-
-        static ReadOnlySpan<byte> AllOnes
-            => new byte[8]{0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF};
-
-        /// <summary>
-        /// Queries the matrix for the data in an index-identified column and returns
-        /// the bitvector representative
-        /// </summary>
-        /// <param name="index">The row index</param>
-        [MethodImpl(Inline)]
-        public readonly BitVector8 ColVector(int index)
-            => ColData(index);
-
 
         public override string ToString()
             => this.Format();

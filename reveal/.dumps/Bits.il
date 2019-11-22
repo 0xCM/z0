@@ -1,4 +1,4 @@
-// 2019-11-21 12:21:40:987
+// 2019-11-21 19:28:34:228
 ref uint pack(N8 n, in bit src, ref uint dst)
 {
     IL_0000: call Z0.N4 zfunc::get_n4()
@@ -4430,52 +4430,62 @@ uint vpop(Vector256<ulong> x, Vector256<ulong> y, Vector256<ulong> z)
     IL_00D8: call Z0.N256 zfunc::get_n256()
     IL_00DD: call Z0.StackContainers/Stack256 Z0.StackStore::alloc(Z0.N256)
     IL_00E2: stloc.s V_5
-    IL_00E4: ldloc.s V_4
-    IL_00E6: ldloca.s V_5
-    IL_00E8: ldflda System.UInt64 Z0.StackContainers/Stack256::X0
-    IL_00ED: call System.Void Z0.dinx::vstore(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.UInt64&)
-    IL_00F2: ldc.i4.0
-    IL_00F3: conv.i8
-    IL_00F4: stloc.s V_6
-    IL_00F6: ldloc.s V_6
-    IL_00F8: ldloc.s V_5
-    IL_00FA: ldfld System.UInt64 Z0.StackContainers/Stack256::X0
-    IL_00FF: ldc.i8 72340172838076673
-    IL_0108: mul
-    IL_0109: ldc.i4.s 56
-    IL_010B: shr.un
-    IL_010C: add
-    IL_010D: stloc.s V_6
-    IL_010F: ldloc.s V_6
-    IL_0111: ldloc.s V_5
-    IL_0113: ldfld System.UInt64 Z0.StackContainers/Stack256::X1
-    IL_0118: ldc.i8 72340172838076673
-    IL_0121: mul
-    IL_0122: ldc.i4.s 56
-    IL_0124: shr.un
-    IL_0125: add
-    IL_0126: stloc.s V_6
-    IL_0128: ldloc.s V_6
-    IL_012A: ldloc.s V_5
-    IL_012C: ldfld System.UInt64 Z0.StackContainers/Stack256::X2
-    IL_0131: ldc.i8 72340172838076673
-    IL_013A: mul
-    IL_013B: ldc.i4.s 56
-    IL_013D: shr.un
-    IL_013E: add
-    IL_013F: stloc.s V_6
-    IL_0141: ldloc.s V_6
-    IL_0143: ldloc.s V_5
-    IL_0145: ldfld System.UInt64 Z0.StackContainers/Stack256::X3
-    IL_014A: ldc.i8 72340172838076673
-    IL_0153: mul
-    IL_0154: ldc.i4.s 56
-    IL_0156: shr.un
-    IL_0157: add
-    IL_0158: stloc.s V_6
-    IL_015A: ldloc.s V_6
-    IL_015C: conv.u4
-    IL_015D: ret
+    IL_00E4: ldloca.s V_5
+    IL_00E6: call System.UInt64& Z0.StackStore::head64(Z0.StackContainers/Stack256&)
+    IL_00EB: stloc.s V_6
+    IL_00ED: ldloc.s V_4
+    IL_00EF: ldloc.s V_6
+    IL_00F1: call System.Void Z0.dinx::vstore(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.UInt64&)
+    IL_00F6: ldc.i4.0
+    IL_00F7: conv.i8
+    IL_00F8: stloc.s V_7
+    IL_00FA: ldloc.s V_7
+    IL_00FC: ldloc.s V_6
+    IL_00FE: ldc.i4.0
+    IL_00FF: call System.UInt64& zfunc::seek<System.UInt64>(System.UInt64&,System.Int32)
+    IL_0104: ldind.i8
+    IL_0105: ldc.i8 72340172838076673
+    IL_010E: mul
+    IL_010F: ldc.i4.s 56
+    IL_0111: shr.un
+    IL_0112: add
+    IL_0113: stloc.s V_7
+    IL_0115: ldloc.s V_7
+    IL_0117: ldloc.s V_6
+    IL_0119: ldc.i4.1
+    IL_011A: call System.UInt64& zfunc::seek<System.UInt64>(System.UInt64&,System.Int32)
+    IL_011F: ldind.i8
+    IL_0120: ldc.i8 72340172838076673
+    IL_0129: mul
+    IL_012A: ldc.i4.s 56
+    IL_012C: shr.un
+    IL_012D: add
+    IL_012E: stloc.s V_7
+    IL_0130: ldloc.s V_7
+    IL_0132: ldloc.s V_6
+    IL_0134: ldc.i4.2
+    IL_0135: call System.UInt64& zfunc::seek<System.UInt64>(System.UInt64&,System.Int32)
+    IL_013A: ldind.i8
+    IL_013B: ldc.i8 72340172838076673
+    IL_0144: mul
+    IL_0145: ldc.i4.s 56
+    IL_0147: shr.un
+    IL_0148: add
+    IL_0149: stloc.s V_7
+    IL_014B: ldloc.s V_7
+    IL_014D: ldloc.s V_6
+    IL_014F: ldc.i4.3
+    IL_0150: call System.UInt64& zfunc::seek<System.UInt64>(System.UInt64&,System.Int32)
+    IL_0155: ldind.i8
+    IL_0156: ldc.i8 72340172838076673
+    IL_015F: mul
+    IL_0160: ldc.i4.s 56
+    IL_0162: shr.un
+    IL_0163: add
+    IL_0164: stloc.s V_7
+    IL_0166: ldloc.s V_7
+    IL_0168: conv.u4
+    IL_0169: ret
 
 }
 sbyte between(sbyte src, byte i0, byte i1)

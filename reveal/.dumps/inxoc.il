@@ -1,4 +1,13 @@
-// 2019-11-21 12:21:38:267
+// 2019-11-21 19:28:31:344
+bool vtestz_g128x8u(Vector128<byte> src, Vector128<byte> mask)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call Z0.bit Z0.ginx::vtestz<System.Byte>(System.Runtime.Intrinsics.Vector128`1<System.Byte>,System.Runtime.Intrinsics.Vector128`1<System.Byte>)
+    IL_0007: call System.Boolean Z0.bit::op_Implicit(Z0.bit)
+    IL_000C: ret
+
+}
 bool vtestz_d128x16i(Vector128<short> src, Vector128<short> mask)
 {
     IL_0000: ldarg.0
@@ -454,6 +463,15 @@ Vector128<short> vblend_128x16u_RLRLRLRL(Vector128<short> x, Vector128<short> y)
     IL_0002: ldc.i4.s 85
     IL_0004: call System.Runtime.Intrinsics.Vector128`1<System.Int16> Z0.dinx::vblend8x16(System.Runtime.Intrinsics.Vector128`1<System.Int16>,System.Runtime.Intrinsics.Vector128`1<System.Int16>,Z0.Blend8x16)
     IL_0009: ret
+
+}
+void xor_block256(ConstBlock256<uint> xs, ConstBlock256<uint> ys, Block256<uint> zs)
+{
+    IL_0000: ldarga.s xs
+    IL_0002: ldarga.s ys
+    IL_0004: ldarga.s zs
+    IL_0006: call System.Void Z0.vblock::xor<System.UInt32>(Z0.ConstBlock256`1<System.UInt32>&,Z0.ConstBlock256`1<System.UInt32>&,Z0.Block256`1<System.UInt32>&)
+    IL_000B: ret
 
 }
 Vector128<int> vcmplt_128x32i(Vector128<int> x, Vector128<int> y)
@@ -1298,15 +1316,6 @@ bool vtestz_d128x8u(Vector128<byte> src, Vector128<byte> mask)
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: call Z0.bit Z0.dinx::vtestz(System.Runtime.Intrinsics.Vector128`1<System.Byte>,System.Runtime.Intrinsics.Vector128`1<System.Byte>)
-    IL_0007: call System.Boolean Z0.bit::op_Implicit(Z0.bit)
-    IL_000C: ret
-
-}
-bool vtestz_g128x8u(Vector128<byte> src, Vector128<byte> mask)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: call Z0.bit Z0.ginx::vtestz<System.Byte>(System.Runtime.Intrinsics.Vector128`1<System.Byte>,System.Runtime.Intrinsics.Vector128`1<System.Byte>)
     IL_0007: call System.Boolean Z0.bit::op_Implicit(Z0.bit)
     IL_000C: ret
 

@@ -89,7 +89,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static YMM From<T>(Block256<T> src)
             where T : unmanaged
-                => From(src.Unblocked);
+                => From(src.Data);
 
         [MethodImpl(Inline)]
         public static ref T As<T>(ref YMM src)

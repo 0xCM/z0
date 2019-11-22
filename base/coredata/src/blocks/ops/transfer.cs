@@ -10,7 +10,7 @@ namespace Z0
         
     using static zfunc;
 
-    partial class MemBlocks
+    partial class DataBlocks
     {
         /// <summary>
         /// Covers an unblocked span with 64-bit blocks, raising an error if the source span bit length is not evenly divisible by 128
@@ -24,6 +24,7 @@ namespace Z0
         {
             if(!aligned<T>(n,src.Length))
                 badsize(n,src.Length);
+                
             return new Block64<T>(src);
         }        
 
@@ -39,6 +40,7 @@ namespace Z0
         {
             if(!aligned<T>(n,src.Length))
                 badsize(n,src.Length);
+
             return new Block128<T>(src);
         }        
 
@@ -54,41 +56,8 @@ namespace Z0
         {
             if(!aligned<T>(n,src.Length))
                 badsize(n,src.Length);
+
             return new Block256<T>(src);
         }        
-
-        /// <summary>
-        /// Covers an unblocked span with 64-bit blocks with no size checks
-        /// </summary>
-        /// <param name="n">The bitness selector</param>
-        /// <param name="src">The source span</param>
-        /// <typeparam name="T">The element type</typeparam>
-        [MethodImpl(Inline)]
-        internal static Block64<T> transferunsafe<T>(N64 n, Span<T> src)
-            where T : unmanaged        
-                => new Block64<T>(src);
-
-        /// <summary>
-        /// Covers an unblocked span with 128-bit blocks with no size checks
-        /// </summary>
-        /// <param name="n">The bitness selector</param>
-        /// <param name="src">The source span</param>
-        /// <typeparam name="T">The element type</typeparam>
-        [MethodImpl(Inline)]
-        internal static Block128<T> transferunsafe<T>(N128 n, Span<T> src)
-            where T : unmanaged        
-                => new Block128<T>(src);
-
-        /// <summary>
-        /// Covers an unblocked span with 128-bit blocks with no size checks
-        /// </summary>
-        /// <param name="n">The bitness selector</param>
-        /// <param name="src">The source span</param>
-        /// <typeparam name="T">The element type</typeparam>
-        [MethodImpl(Inline)]
-        internal static Block256<T> transferunsafe<T>(N256 n, Span<T> src)
-            where T : unmanaged        
-                => new Block256<T>(src);
-
     }
 }

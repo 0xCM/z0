@@ -46,19 +46,19 @@ namespace Z0
         public static BitBlock<N,T> load<N,T>(in Block64<T> src, N n = default)
             where N : unmanaged, ITypeNat<N>
             where T : unmanaged
-                => new BitBlock<N, T>(src.Unblocked);
+                => new BitBlock<N, T>(src.Data);
     
         [MethodImpl(Inline)]
         public static BitBlock<N,T> load<N,T>(in Block128<T> src, N n = default)
             where N : unmanaged, ITypeNat<N>
             where T : unmanaged
-                => new BitBlock<N, T>(src.Unblocked);
+                => new BitBlock<N, T>(src.Data);
 
         [MethodImpl(Inline)]
         public static BitBlock<N,T> load<N,T>(in Block256<T> src, N n = default)
             where N : unmanaged, ITypeNat<N>
             where T : unmanaged
-                => new BitBlock<N, T>(src.Unblocked);
+                => new BitBlock<N, T>(src.Data);
 
         /// <summary>
         /// Allocates a bitspan of width 2^N over cells of primal type

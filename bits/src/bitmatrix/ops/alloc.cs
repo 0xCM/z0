@@ -117,15 +117,19 @@ namespace Z0
         /// <param name="fill">The value with which the allocated matrix is filled</param>
         [MethodImpl(NotInline)]
         public static BitMatrix8 alloc(N8 n, bit fill = default)
-            => BitMatrix8.Alloc(fill);
+            => new BitMatrix8(((uint)fill)*UInt64.MaxValue);
 
         /// <summary>
         /// Allocates a primal bitmatrix with rows filled by a specified vector
         /// </summary>
         /// <param name="fill">The row with which the allocated matrix is filled</param>
         [MethodImpl(NotInline)]
-        public static BitMatrix8 alloc(BitVector8 fill)
-            => BitMatrix8.Alloc(fill);
+        public static BitMatrix8 alloc(N8 n, BitVector8 fill)
+        {
+            var data = new byte[n];
+            data.Fill(fill);
+            return new BitMatrix8(data);
+        }
 
         /// <summary>
         /// Allocates a primal bitmatrix 

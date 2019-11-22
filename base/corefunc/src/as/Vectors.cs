@@ -5,29 +5,13 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.InteropServices;
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
-    using System.Runtime.Intrinsics.X86;
-    using System.Security;
     
     using static zfunc;
 
     partial class As
     {
-
-
-
-        [MethodImpl(Inline)]
-        public static ref Vector128<sbyte> int8<T>(in Vector128<T> src)
-            where T : unmanaged        
-                => ref Unsafe.As<Vector128<T>,Vector128<sbyte>>(ref mutable(in src));
-
-        [MethodImpl(Inline)]
-        public static ref Vector128<byte> uint8<T>(in Vector128<T> src)
-            where T : unmanaged        
-                => ref Unsafe.As<Vector128<T>,Vector128<byte>>(ref mutable(in src));
-
         [MethodImpl(Inline)]
         public static ref Vector128<short> int16<T>(in Vector128<T> src)
             where T : unmanaged        
@@ -58,7 +42,6 @@ namespace Z0
             where T : unmanaged        
                 => ref Unsafe.As<Vector128<T>,Vector128<ulong>>(ref mutable(in src));
 
-
         [MethodImpl(Inline)]
         public static ref Vector128<double> float64<T>(in Vector128<T> src)
             where T : unmanaged        
@@ -68,8 +51,6 @@ namespace Z0
         public static ref Vector128<float> float32<T>(in Vector128<T> src)
             where T : unmanaged        
                 => ref Unsafe.As<Vector128<T>,Vector128<float>>(ref mutable(in src));
-
-
 
         [MethodImpl(Inline)]
         public static ref Vector128<T> generic<T>(in Vector128<sbyte> src)
@@ -121,17 +102,6 @@ namespace Z0
             where T : unmanaged        
                 => ref Unsafe.As<Vector128<double>,Vector128<T>>(ref mutable(in src));
 
-
-
-        [MethodImpl(Inline)]
-        public static ref Vector256<sbyte> int8<T>(in Vector256<T> src)
-            where T : unmanaged        
-                => ref Unsafe.As<Vector256<T>,Vector256<sbyte>>(ref mutable(in src));
-                
-        [MethodImpl(Inline)]
-        public static ref Vector256<byte> uint8<T>(in Vector256<T> src)
-            where T : unmanaged        
-                => ref Unsafe.As<Vector256<T>,Vector256<byte>>(ref mutable(in src));
 
         [MethodImpl(Inline)]
         public static ref Vector256<short> int16<T>(in Vector256<T> src)
@@ -288,7 +258,6 @@ namespace Z0
             where T : unmanaged        
                 => Unsafe.As<Vector128<ulong>,Vector128<T>>(ref src);
 
-
         [MethodImpl(Inline)]
         public static Vector128<T> vgeneric<T>(Vector128<float> src)
             where T : unmanaged        
@@ -298,7 +267,6 @@ namespace Z0
         public static Vector128<T> vgeneric<T>(Vector128<double> src)
             where T : unmanaged        
                 => Unsafe.As<Vector128<double>,Vector128<T>>(ref src);
-
 
         [MethodImpl(Inline)]
         public static ref Vec256<T> generic<T>(in Vec256<float> src)
@@ -319,7 +287,5 @@ namespace Z0
         public static ref Vec128<T> generic<T>(in Vec128<double> src)
             where T : unmanaged        
                 => ref Unsafe.As<Vec128<double>,Vec128<T>>(ref mutable(in src));
-
     }
-
 }

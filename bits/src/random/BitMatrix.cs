@@ -90,7 +90,7 @@ namespace Z0
         /// <param name="random">The random source</param>
         [MethodImpl(Inline)]
         public static BitMatrix8 BitMatrix8(this IPolyrand random)
-            => Z0.BitMatrix8.From(random.Next<ulong>());
+            => Z0.BitMatrix.primal(n8,random.Next<ulong>());
 
         /// <summary>
         /// Produces a 8x8 bitmatrix from a random source
@@ -98,7 +98,7 @@ namespace Z0
         /// <param name="random">The random source</param>
         [MethodImpl(Inline)]
         public static BitMatrix8 BitMatrix(this IPolyrand random, N8 n)
-            => Z0.BitMatrix8.From(random.Next<ulong>());
+            => Z0.BitMatrix.primal(n,random.Next<ulong>());
 
         /// <summary>
         /// Produces a 16x16 bitmatrix from a random source

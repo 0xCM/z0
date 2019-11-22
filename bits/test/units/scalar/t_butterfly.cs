@@ -78,7 +78,7 @@ namespace Z0
                 var x = Random.CpuVector<uint>(n);
                 var y = gbits.vbutterfly(w, x);
                 var xs = x.ToSpan();
-                var zs = MemBlocks.alloc<uint>(n);
+                var zs = DataBlocks.alloc<uint>(n);
                 for(var j=0; j<zs.Length; j++)
                     zs[j] = gbits.butterfly(w,xs[j]);
                 var z = zs.TakeVector();
@@ -96,7 +96,7 @@ namespace Z0
                 var x = Random.CpuVector<uint>(n);
                 var y = gbits.vbutterfly(w, x);
                 var xs = x.ToSpan();
-                var zs = MemBlocks.alloc<uint>(n);
+                var zs = DataBlocks.alloc<uint>(n);
                 for(var j=0; j<zs.Length; j++)
                     zs[j] = gbits.butterfly(w,xs[j]);
                 var z = zs.TakeVector();
@@ -114,7 +114,7 @@ namespace Z0
                 var x = Random.CpuVector<ulong>(n);
                 var y = gbits.vbutterfly(w, x);
                 var xs = x.ToSpan();
-                var zs = MemBlocks.alloc<ulong>(n);
+                var zs = DataBlocks.alloc<ulong>(n);
                 for(var j=0; j<zs.Length; j++)
                     zs[j] = gbits.butterfly(w,xs[j]);
                 var z = zs.TakeVector();
@@ -132,7 +132,7 @@ namespace Z0
                 var x = Random.CpuVector<ulong>(n);
                 var y = gbits.vbutterfly(w, x);
                 var xs = x.ToSpan();
-                var zs = MemBlocks.alloc<ulong>(n);
+                var zs = DataBlocks.alloc<ulong>(n);
                 for(var j=0; j<zs.Length; j++)
                     zs[j] = gbits.butterfly(w,xs[j]);
                 var z = zs.TakeVector();

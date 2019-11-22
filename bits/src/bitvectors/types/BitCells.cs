@@ -43,7 +43,7 @@ namespace Z0
         /// </summary>
         public static int CellCapacity => bitsize<T>();
 
-        public static BitCells<T> Zero => new BitCells<T>(MemBlocks.alloc<T>(n256));
+        public static BitCells<T> Zero => new BitCells<T>(DataBlocks.alloc<T>(n256));
 
         public static int StepSize => 256 / bitsize<T>();
 
@@ -184,7 +184,7 @@ namespace Z0
         [MethodImpl(Inline)]
         BitCells(T src, int n)
         {            
-            this.data = MemBlocks.alloc<T>(n256);
+            this.data = DataBlocks.alloc<T>(n256);
             head(this.data) = src;
             this.MaxBitCount = CellCapacity;
             this.SegLength = MaxBitCount;
@@ -195,7 +195,7 @@ namespace Z0
         [MethodImpl(Inline)]
         BitCells(Span<T> src, int n)
         {            
-            this.data = MemBlocks.loadu(n256,src);
+            this.data = DataBlocks.loadu(n256,src);
             this.MaxBitCount = src.Length * CellCapacity;
             this.BitCount = n;
             this.SegLength = BitSize.Segments<T>(MaxBitCount);            

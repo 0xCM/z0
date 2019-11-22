@@ -138,11 +138,11 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static unsafe int to32i(float x)
-            => ConvertToInt32WithTruncation(LoadScalarVector128(refptr(ref x)));
+            => ConvertToInt32WithTruncation(LoadScalarVector128(ptr(ref x)));
 
         [MethodImpl(Inline)]
         public static unsafe int to32i(double x)
-            => ConvertToInt32WithTruncation(LoadScalarVector128(refptr(ref x)));
+            => ConvertToInt32WithTruncation(LoadScalarVector128(ptr(ref x)));
 
         [MethodImpl(Inline)]
         public static float to32f(long x)        
@@ -150,7 +150,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static unsafe long to64i(float x)
-            => ConvertToInt64WithTruncation(LoadScalarVector128(refptr(ref x)));
+            => ConvertToInt64WithTruncation(LoadScalarVector128(ptr(ref x)));
 
         /// <summary>
         /// __m128 _mm_add_ss (__m128 a, __m128 b)ADDSS xmm, xmm/m32

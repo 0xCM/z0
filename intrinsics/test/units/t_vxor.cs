@@ -118,7 +118,7 @@ namespace Z0
 
             var lhs = Random.BlockedSpan<T>(n, blocks);
             var rhs = Random.BlockedSpan<T>(n, blocks);
-            var dst = MemBlocks.alloc<T>(n, blocks);
+            var dst = DataBlocks.alloc<T>(n, blocks);
             vblock.xor(n, blocks, step, in lhs.Head, in rhs.Head, ref dst.Head);
             for(var i=0; i<cells; i++)
                 Claim.eq(gmath.xor(lhs[i],rhs[i]), dst[i]);
@@ -136,7 +136,7 @@ namespace Z0
 
             var lhs = Random.BlockedSpan<T>(n, blocks);
             var rhs = Random.BlockedSpan<T>(n, blocks);
-            var dst = MemBlocks.alloc<T>(n, blocks);
+            var dst = DataBlocks.alloc<T>(n, blocks);
             
             vblock.xor(n, blocks, step, in lhs.Head, in rhs.Head, ref dst.Head);
             for(var i=0; i<cells; i++)
@@ -153,7 +153,7 @@ namespace Z0
                 var vX = srcX.TakeVector();
                 var vY = srcY.TakeVector();
                 
-                var dstExpect = MemBlocks.alloc<T>(n);
+                var dstExpect = DataBlocks.alloc<T>(n);
                 for(var i=0; i< dstExpect.Length; i++)
                     dstExpect[i] = gmath.xor(srcX[i], srcY[i]);
                 
@@ -173,7 +173,7 @@ namespace Z0
                 var vX = srcX.TakeVector();
                 var vY = srcY.TakeVector();
 
-                var dstExpect = MemBlocks.alloc<T>(n);
+                var dstExpect = DataBlocks.alloc<T>(n);
                 for(var i=0; i< dstExpect.Length; i++)
                     dstExpect[i] = gmath.xor(srcX[i], srcY[i]);
                 

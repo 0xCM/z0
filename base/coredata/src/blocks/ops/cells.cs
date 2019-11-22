@@ -10,7 +10,7 @@ namespace Z0
         
     using static zfunc;
 
-    partial class MemBlocks
+    partial class DataBlocks
     {
         /// <summary>
         /// Creates a 64-bit blocked span

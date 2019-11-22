@@ -108,6 +108,8 @@ namespace Z0
             
             var dst = StackStore.alloc(n128);
             var dst8u = dst.AsBytes();
+            Claim.eq(16,dst8u.Length);
+
             for(var i=0; i<16; i++)
                 dst8u[i] = Random.Next<byte>();
             var bs1 = dst.ToBitString();

@@ -36,8 +36,8 @@ namespace Z0
             where T : unmanaged
         {
             var current = first;
-            var data = MemBlocks.alloc<T>(n);
-            var len = MemBlocks.blocklen<T>(n);
+            var data = DataBlocks.alloc<T>(n);
+            var len = DataBlocks.blocklen<T>(n);
             ref var mem = ref head(data);
             for(var i=0; i<len; i++)
             {
@@ -60,8 +60,8 @@ namespace Z0
             where T : unmanaged
         {
             var current = first;
-            var data = MemBlocks.alloc<T>(n);
-            var len = MemBlocks.blocklen<T>(n);
+            var data = DataBlocks.alloc<T>(n);
+            var len = DataBlocks.blocklen<T>(n);
             ref var mem = ref head(data);
             for(var i=0; i<len; i++)
             {

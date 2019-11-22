@@ -60,12 +60,22 @@ namespace Z0
             }
         }
 
+        public void create_16x16_from_fixed()
+        {
+            var data = Random.Span<ushort>(16);
+            var src = FixedStore.alloc(n256);
+            FixedStore.deposit(in head(data), ref src);
+            var A = BitMatrix.primal(n16, FixedStore.bytes(src));
+            var B = BitMatrix.primal(n16, data);
+            Claim.yea(BitMatrix.same(A,B));
+        }
+
         public void create_8x8()
         {
             var src = Random.Stream<ulong>().Take(Pow2.T07).GetEnumerator();
             while(src.MoveNext())
             {
-                var m1 = BitMatrix8.From(src.Current);
+                var m1 = BitMatrix.primal(n8,src.Current);
                 var n = new N8();
                 var m2 = BitMatrix.load(n, n,src.Current.ToBytes().ToSpan());
                 for(var i=0; i<8; i++)

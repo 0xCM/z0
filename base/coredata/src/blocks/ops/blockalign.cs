@@ -10,7 +10,7 @@ namespace Z0
         
     using static zfunc;
 
-    partial class MemBlocks
+    partial class DataBlocks
     {
         /// <summary>
         /// Computes the minimum number of 64-bit blocks required to cover a specified number of cells
@@ -56,6 +56,5 @@ namespace Z0
             var blockcount = cellcount / blocklen<T>(n);
             return cellcount % blocklen<T>(n) == 0 ? blockcount : blockcount + 1;
         } 
-
     }
 }

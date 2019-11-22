@@ -5,9 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Collections;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
     
@@ -20,76 +17,66 @@ namespace Z0
     /// <typeparam name="M">The row count type</typeparam>
     /// <typeparam name="N">The column count type</typeparam>
     /// <typeparam name="T">The primal type</typeparam>
-    public ref struct BlockMatrix<M,N,T>
+    public readonly ref struct BlockMatrix<M,N,T>
         where M : unmanaged, ITypeNat
         where N : unmanaged, ITypeNat
         where T : unmanaged
     {        
-        Block256<T> data;
+        readonly Block256<T> data;
 
-        public static readonly Dim<M,N> Dim = default;        
-
-        /// <summary>
-        /// The number of rows in the structure
-        /// </summary>
-        public static readonly int RowCount = nati<M>();
+        public static Dim<M,N> Dim => default;        
 
         /// <summary>
-        /// The number of columns in the structure
+        /// The number of matrix rows
         /// </summary>
-        public static readonly int ColCount = nati<N>();
+        public static int RowCount => nati<M>();
 
         /// <summary>
-        /// The number of cells in each row
+        /// The number of matrix colums
         /// </summary>
-        public static readonly int RowLenth = ColCount;
+        public static int ColCount => nati<N>();
 
         /// <summary>
-        /// The number of cells in each column
+        /// A synonym for ColCount
         /// </summary>
-        public static readonly int ColLength = RowCount;
+        public static int RowLenth => ColCount;
 
         /// <summary>
-        /// The total number of allocated elements
+        /// A synonym for RowCount
         /// </summary>
-        public static readonly int CellCount = RowLenth * ColLength;
+        public static int ColLength => RowCount;
 
         /// <summary>
-        /// The Row dimension representative
+        /// The total number of matrix cells
         /// </summary>
-        public static M RowRep = default;
+        public static int CellCount => RowLenth * ColLength;
 
-        /// <summary>
-        /// The Column dimension representative
-        /// </summary>
-        public static N ColRep = default;
-
-        public static implicit operator BlockMatrix<M,N,T>(Block256<T> src)
+        public static implicit operator BlockMatrix<M,N,T>(in Block256<T> src)
             => new BlockMatrix<M,N,T>(src);
 
-        public static implicit operator NatGrid<M,N,T>(BlockMatrix<M,N,T> src)
-            => src.Natural;
+        public static implicit operator NatGrid<M,N,T>(in BlockMatrix<M,N,T> A)
+            => A.Natural;
 
-        public static implicit operator Block256<T>(BlockMatrix<M,N,T> src)
-            => src.Unsized;
-
-        [MethodImpl(Inline)]
-        public static bool operator == (BlockMatrix<M,N,T> lhs, in BlockMatrix<M,N,T> rhs) 
-            => lhs.Equals(rhs);
+        public static implicit operator Block256<T>(in BlockMatrix<M,N,T> A)
+            => A.Unsized;
 
         [MethodImpl(Inline)]
-        public static bool operator != (BlockMatrix<M,N,T> lhs, in BlockMatrix<M,N,T> rhs) 
-            => !lhs.Equals(rhs);
+        public static bool operator == (in BlockMatrix<M,N,T> A, in BlockMatrix<M,N,T> B) 
+            => A.Equals(B);
 
         [MethodImpl(Inline)]
-        public BlockMatrix(Block256<T> src)
+        public static bool operator != (in BlockMatrix<M,N,T> A, in BlockMatrix<M,N,T> B) 
+            => !A.Equals(B);
+
+        [MethodImpl(Inline)]
+        public BlockMatrix(in Block256<T> src)
         {
             require(src.Length >= CellCount);
             data = src;
         }
 
         [MethodImpl(Inline)]
-        internal BlockMatrix(Block256<T> src, bool skipChecks)
+        internal BlockMatrix(in Block256<T> src, bool skipChecks)
             => data = src;
 
         [MethodImpl(Inline)]        
@@ -283,6 +270,4 @@ namespace Z0
         public override int GetHashCode()
             => throw new NotSupportedException();
     }
-
-
 }

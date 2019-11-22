@@ -16,35 +16,35 @@ namespace Z0
     {
         [MethodImpl(Inline)]
         public static unsafe Span<byte> AsBytes(this in ulong src)
-            => new Span<byte>(As.constptr(in src), 8);
+            => new Span<byte>(constptr(in src), 8);
 
         [MethodImpl(Inline)]
         public static unsafe Span<byte> AsBytes(this in long src)
-            => new Span<byte>(As.constptr(in src), 8);
+            => new Span<byte>(constptr(in src), 8);
 
         [MethodImpl(Inline)]
         public static unsafe Span<byte> AsBytes(this in double src)
-            => new Span<byte>(As.constptr(in src), 8);
+            => new Span<byte>(constptr(in src), 8);
 
         [MethodImpl(Inline)]
         public static unsafe Span<byte> AsBytes(this in uint src)
-            => new Span<byte>(As.constptr(in src), 4);
+            => new Span<byte>(constptr(in src), 4);
 
         [MethodImpl(Inline)]
         public static unsafe Span<byte> AsBytes(this in int src)
-            => new Span<byte>(As.constptr(in src), 4);
+            => new Span<byte>(constptr(in src), 4);
 
         [MethodImpl(Inline)]
         public static unsafe Span<byte> AsBytes(this in float src)
-            => new Span<byte>(As.constptr(in src), 4);
+            => new Span<byte>(constptr(in src), 4);
 
         [MethodImpl(Inline)]
         public static unsafe Span<byte> AsBytes(this in ushort src)
-            => new Span<byte>(As.constptr(in src), 2);
+            => new Span<byte>(constptr(in src), 2);
 
         [MethodImpl(Inline)]
         public static unsafe Span<byte> AsBytes(this in short src)
-            => new Span<byte>(As.constptr(in src), 2);
+            => new Span<byte>(constptr(in src), 2);
 
 
         /// <summary>

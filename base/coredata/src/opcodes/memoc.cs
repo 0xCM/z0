@@ -16,13 +16,13 @@ namespace Z0
         static N64 n64 => default;
         
         public static int blockalign_64x8u_var(int cellcount)
-            => MemBlocks.blockalign<byte>(n64,cellcount);
+            => DataBlocks.blockalign<byte>(n64,cellcount);
 
         public static int blockalign_64x8u_16()
-            => MemBlocks.blockalign<byte>(n64,16);
+            => DataBlocks.blockalign<byte>(n64,16);
 
         public static int blockalign_64x8u_17()
-            => MemBlocks.blockalign<byte>(n64,17);
+            => DataBlocks.blockalign<byte>(n64,17);
 
     }
 

@@ -13,15 +13,6 @@ namespace Z0
 
     public static class Block256
     {
-        /// <summary>
-        /// Reimagines a 256-bit bloocked span of generic values as a span of bytes
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <typeparam name="T">The source value type</typeparam>
-        [MethodImpl(Inline)]
-        public static Block256<byte> bytes<T>(Block256<T> src)
-            where T : unmanaged
-                => Block256.load(MemoryMarshal.AsBytes(src.Unblocked));
 
         /// <summary>
         /// Allocates a span to hold a specified number of blocks
@@ -33,16 +24,6 @@ namespace Z0
         public static Block256<T> alloc<T>(int blocks, T? fill = null)
             where T : unmanaged        
                 => Block256<T>.AllocBlocks(blocks, fill);
-
-        /// <summary>
-        /// Allocates a 1-block span 
-        /// </summary>
-        /// <param name="fill">An optional value that, if specified, is used to initialize the cell values</param>
-        /// <typeparam name="T">The element type</typeparam>
-        [MethodImpl(NotInline)]
-        public static Block256<T> alloc<T>(T? fill = null)
-            where T : unmanaged        
-                => Block256<T>.AllocBlocks(1, fill);
 
         /// <summary>
         /// Allocates a 256-bit blocked span of a specified minimum length which may not
@@ -156,7 +137,7 @@ namespace Z0
             var bz = blockcount<T>(minlen, out int remainder);
             var bl = blocklen<T>();
             var len = remainder == 0 ? bz * bl : (bz + 1) * bl;            
-            return Block256<T>.LoadAligned(ref src, len);
+            return new Block256<T>(ref src, len);
         }
 
         [MethodImpl(Inline)]
@@ -273,25 +254,5 @@ namespace Z0
             fullBlocks = srcLen / blocklen;
             remainder = srcLen % blocklen<T>();
         } 
-
-        /// <summary>
-        /// Loads a single blocked span from a parameter array
-        /// </summary>
-        /// <param name="src">The source parameters</param>
-        /// <typeparam name="T">The primitive type</typeparam>
-        [MethodImpl(Inline)]
-        static Block256<T> Single<T>(params T[] src)
-            where T : unmanaged
-                => Block256<T>.Load(src);
-
-        /// <summary>
-        /// Calculates the number of bytes consumed by a specified number of cells
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
-        static ByteSize CellBytes<T>(int count)
-            where T : unmanaged        
-                => count * cellsize<T>();
    }
 }

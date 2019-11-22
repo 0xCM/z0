@@ -112,13 +112,14 @@ namespace Z0
             odd = vadd(vadd(maj, maj), odd);
 
             var dst = StackStore.alloc(n256);
-            vstore(odd, ref dst.X0);
+            ref var X = ref StackStore.head64(ref dst);
+            vstore(odd, ref X);
             
             var total = 0ul;
-            total += (dst.X0 * kf) >> 56;
-            total += (dst.X1 * kf) >> 56;
-            total += (dst.X2 * kf) >> 56;
-            total += (dst.X3 * kf) >> 56;
+            total += (seek(ref X, 0) * kf) >> 56;
+            total += (seek(ref X, 1) * kf) >> 56;
+            total += (seek(ref X, 2) * kf) >> 56;
+            total += (seek(ref X, 3) * kf) >> 56;
 
             return (uint)total;            
         }

@@ -5,26 +5,12 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.InteropServices;
     using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics;
-    using System.Runtime.Intrinsics.X86;
-    using System.Security;
     
     using static zfunc;
 
     partial class As
     {
-        [MethodImpl(Inline)]
-        public static ReadOnlySpan<sbyte> int8<T>(in ReadOnlySpan<T> src)
-            where T : unmanaged
-                => cast<T,sbyte>(src);
-
-        [MethodImpl(Inline)]
-        public static ReadOnlySpan<byte> uint8<T>(in ReadOnlySpan<T> src)
-            where T : unmanaged
-                => cast<T,byte>(src);
-
         [MethodImpl(Inline)]
         public static ReadOnlySpan<short> int16<T>(in ReadOnlySpan<T> src)
             where T : unmanaged

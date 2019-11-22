@@ -32,20 +32,28 @@ namespace Z0
             => default;
 
         [MethodImpl(Inline)]
+        public static ref ulong head64(ref Stack128 src)
+            => ref src.X0;
+
+        [MethodImpl(Inline)]
+        public static ref ulong head64(ref Stack256 src)
+            => ref src.X0.X0;
+
+        [MethodImpl(Inline)]
         public static unsafe Span<byte> bytes(ref Stack128 src)
-            => new Span<ulong>(refptr(ref src.X0), 2).AsBytes();
+            => new Span<ulong>(ptr(ref src.X0), 2).AsBytes();
 
         [MethodImpl(Inline)]
         public static unsafe Span<byte> bytes(ref Stack256 src)
-            => new Span<ulong>(refptr(ref src.X0), 4).AsBytes();
+            => new Span<ulong>(ptr(ref head64(ref src)), 4).AsBytes();
 
         [MethodImpl(Inline)]
         public static unsafe Span<byte> bytes(ref Stack512 src)
-            => new Span<ulong>(refptr(ref src.X0), 8).AsBytes();
+            => new Span<ulong>(ptr(ref src.X0), 8).AsBytes();
 
         [MethodImpl(Inline)]
         public static unsafe Span<byte> bytes(ref Stack1024 src)
-            => new Span<ulong>(refptr(ref src.X0), 16).AsBytes();
+            => new Span<ulong>(ptr(ref src.X0), 16).AsBytes();
 
         [MethodImpl(Inline)]
         public static ref T head<T>(ref Stack128 src)
@@ -55,7 +63,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ref T head<T>(ref Stack256 src)
             where T : unmanaged
-                => ref Unsafe.As<ulong,T>(ref src.X0);
+                => ref Unsafe.As<ulong,T>(ref head64(ref src.X0));
 
         [MethodImpl(Inline)]
         public static ref T head<T>(ref Stack512 src)
@@ -86,32 +94,6 @@ namespace Z0
         public static ref T value<T>(ref Stack1024 src, int index)
             where T : unmanaged
                 => ref Unsafe.Add(ref head<T>(ref src), index);
-
-        [MethodImpl(Inline)]
-        public static Stack256 concat(in Stack128 head, in Stack128 tail)
-        {
-            Stack256 dst = default;
-            value<ulong>(ref dst, 3) = head.X1;
-            value<ulong>(ref dst, 2) = head.X0;
-            value<ulong>(ref dst, 1) = tail.X1;
-            value<ulong>(ref dst, 0) = tail.X0;
-            return dst;
-        }
-
-        [MethodImpl(Inline)]
-        public static Stack512 concat(in Stack256 head, in Stack256 tail)
-        {
-            Stack512 dst = default;
-            value<ulong>(ref dst, 7) = head.X3;
-            value<ulong>(ref dst, 6) = head.X2;
-            value<ulong>(ref dst, 5) = head.X1;
-            value<ulong>(ref dst, 4) = head.X0;
-            value<ulong>(ref dst, 3) = tail.X3;
-            value<ulong>(ref dst, 2) = tail.X2;
-            dst.X1 = tail.X1;
-            dst.X0 = tail.X0;
-            return dst;
-        }
 
         [MethodImpl(Inline)]
         public static void store(in byte src, uint count, ref Stack128 dst)

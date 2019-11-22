@@ -13,7 +13,6 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Avx;
     
     using static zfunc;
-    using static As;
 
     partial class dinx
     {
@@ -161,7 +160,6 @@ namespace Z0
         public static unsafe Vector256<ulong> vload(in ulong src, out Vector256<ulong> dst)
             => dst = LoadDquVector256(constptr(in src));
   
-
         [MethodImpl(Inline)]
         public static unsafe Vector128<byte> vload(N128 n, in byte src)
             => LoadDquVector128(constptr(src));
@@ -289,6 +287,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static unsafe Vector256<ulong> vload(N256 n, in ulong src, int offset)
             => LoadDquVector256(constptr(src,offset));
-
    }
 }

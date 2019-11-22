@@ -296,13 +296,13 @@ namespace Z0
         public static unsafe void mul(ulong x, ulong y, out ulong lo, out ulong hi)
         {
            lo = 0ul;
-           hi = Bmi2.X64.MultiplyNoFlags(x,y, refptr(ref lo));
+           hi = Bmi2.X64.MultiplyNoFlags(x,y, ptr(ref lo));
         }
 
         [MethodImpl(Inline)]
         public static unsafe ref Pair<ulong> mul(in Pair<ulong> src, ref Pair<ulong> dst)  
         {               
-            dst.B = Bmi2.X64.MultiplyNoFlags(src.A, src.B, refptr(ref dst.A));
+            dst.B = Bmi2.X64.MultiplyNoFlags(src.A, src.B, ptr(ref dst.A));
             return ref dst;
         }
 
@@ -317,7 +317,7 @@ namespace Z0
         public static unsafe uint mullo(uint x, uint y)
         {
             var lo = 0u;
-            Bmi2.MultiplyNoFlags(x,y, refptr(ref lo));
+            Bmi2.MultiplyNoFlags(x,y, ptr(ref lo));
             return lo;
         }
 
@@ -329,7 +329,7 @@ namespace Z0
         public static unsafe void mul(uint x, uint y, out uint lo, out uint hi)
         {
            lo = 0u;
-           hi = Bmi2.MultiplyNoFlags(x,y, refptr(ref lo));
+           hi = Bmi2.MultiplyNoFlags(x,y, ptr(ref lo));
         }
 
         /// <summary>
@@ -341,7 +341,7 @@ namespace Z0
         public static unsafe ulong mul(uint x, uint y)
         {
             var dst = 0u;
-            return (((ulong)Bmi2.MultiplyNoFlags(x, y, refptr(ref dst))) << 32) | dst;
+            return (((ulong)Bmi2.MultiplyNoFlags(x, y, ptr(ref dst))) << 32) | dst;
         }
             
         [MethodImpl(Inline)]
@@ -354,7 +354,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static unsafe ref Pair<uint> mul(in Pair<uint> src, ref Pair<uint> dst)                 
         {
-            dst.B = Bmi2.MultiplyNoFlags(src.A, src.B, refptr(ref dst.A));
+            dst.B = Bmi2.MultiplyNoFlags(src.A, src.B, ptr(ref dst.A));
             return ref dst;
         }
 

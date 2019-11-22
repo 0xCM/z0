@@ -145,20 +145,6 @@ namespace Z0
         /// <param name="blockWidth">The number of binary digits per block, if specified</param>
         /// <typeparam name="T">The primal component type</typeparam>
         [MethodImpl(Inline)]
-        public static string FormatBits<N,T>(this ConstNatBlock<N,T> src, bool tlz = false, bool specifier = false, int? blockWidth = null)
-            where T : unmanaged
-            where N : unmanaged, ITypeNat
-                => src.Unsized.FormatBits(tlz,specifier,blockWidth);
-
-        /// <summary>
-        /// Formats span cells as bitstrings
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <param name="tlz">Whether to trim leading zeros from the cell values</param>
-        /// <param name="specifier">Whether to prefix rendered bitstrings with the '0b' specifier</param>
-        /// <param name="blockWidth">The number of binary digits per block, if specified</param>
-        /// <typeparam name="T">The primal component type</typeparam>
-        [MethodImpl(Inline)]
         public static string FormatBits<N,T>(this NatBlock<N,T> src, bool tlz = false, bool specifier = false, int? blockWidth = null)
             where T : unmanaged
             where N : unmanaged, ITypeNat
@@ -175,20 +161,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static string FormatBits(this ReadOnlySpan<bit> src, bool tlz = false, bool specifier = false, int? blockWidth = null)
             => src.ToBitString().Format(tlz, specifier, blockWidth);
-
-        /// <summary>
-        /// Formats span cells as bitstrings
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <param name="tlz">Whether to trim leading zeros from the cell values</param>
-        /// <param name="specifier">Whether to prefix rendered bitstrings with the '0b' specifier</param>
-        /// <param name="blockWidth">The number of binary digits per block, if specified</param>
-        /// <typeparam name="T">The primal component type</typeparam>
-        [MethodImpl(Inline)]
-        public static string FormatBits<N>(this ConstNatBlock<N,bit> src, bool tlz = false, bool specifier = false, int? blockWidth = null)
-            where N : unmanaged, ITypeNat
-                => src.Unsized.FormatBits(tlz,specifier,blockWidth);
-
+            
         /// <summary>
         /// Formats span cells as bitstrings
         /// </summary>

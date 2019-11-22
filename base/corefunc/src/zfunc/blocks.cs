@@ -50,7 +50,7 @@ partial class zfunc
     [MethodImpl(Inline)]
     public static Block64<T> blocks<T>(N64 n, int blocks)
         where T : unmanaged
-            => MemBlocks.alloc<T>(n, blocks);
+            => DataBlocks.alloc<T>(n, blocks);
 
     /// <summary>
     /// Allocates a specified number of 128-bit blocks
@@ -61,7 +61,7 @@ partial class zfunc
     [MethodImpl(Inline)]
     public static Block128<T> blocks<T>(N128 n, int blocks)
         where T : unmanaged
-            => MemBlocks.alloc<T>(n, blocks);
+            => DataBlocks.alloc<T>(n, blocks);
 
     /// <summary>
     /// Allocates a specified number of 256-bit blocks
@@ -72,7 +72,7 @@ partial class zfunc
     [MethodImpl(Inline)]
     public static Block256<T> blocks<T>(N256 n, int blocks)
         where T : unmanaged
-            => MemBlocks.alloc<T>(n, blocks);
+            => DataBlocks.alloc<T>(n, blocks);
 
     /// <summary>
     /// Returns the common number of blocks in the operands if they are the same; otherwise, raises an error

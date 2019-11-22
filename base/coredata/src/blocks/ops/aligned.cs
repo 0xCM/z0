@@ -10,7 +10,7 @@ namespace Z0
         
     using static zfunc;
 
-    partial class MemBlocks
+    partial class DataBlocks
     {
         /// <summary>
         /// Determines whether a specified number of elements can be evenly covered by 64-bit blocks

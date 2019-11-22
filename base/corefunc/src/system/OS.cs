@@ -105,7 +105,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static IntPtr Liberate(ReadOnlySpan<byte> src)
         {
-            var pCode = (IntPtr)refptr(ref mutable(in src[0]));
+            var pCode = (IntPtr)ptr(ref mutable(in src[0]));
             if (!OS.VirtualProtectEx(CurrentProcess, pCode, (UIntPtr)src.Length, 0x40, out uint _))
                 ThrowLiberationError(pCode, src);
             return pCode;

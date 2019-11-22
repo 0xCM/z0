@@ -10,7 +10,7 @@ namespace Z0
         
     using static zfunc;
 
-    partial class MemBlocks
+    partial class DataBlocks
     {
         /// <summary>
         /// Computes the number of elements that comprise a single 64-bit block
@@ -41,8 +41,6 @@ namespace Z0
         public static int blocklen<T>(N256 n)
             where T : unmanaged
                 => 32/Unsafe.SizeOf<T>();
-
-
  
     }
 

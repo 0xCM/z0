@@ -156,8 +156,8 @@ namespace Z0
                     z[j] = r % C[j];
                 A[i] = (uint)z;
             }
+            
             return ref A;
-
         }
 
         public static BitMatrix32 mul(BitMatrix32 A, in BitMatrix32 B)

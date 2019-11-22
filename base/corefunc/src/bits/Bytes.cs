@@ -6,13 +6,8 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Numerics;
-    using System.Runtime.Intrinsics.X86;
-    using System.Runtime.InteropServices;
-    using Z0;
  
     using static zfunc;
-    using static As;
 
     public static class Bytes
     {

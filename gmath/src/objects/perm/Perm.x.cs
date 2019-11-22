@@ -121,7 +121,7 @@ namespace Z0
              if(swaps == null || swaps.Length == 0)
                 return src;
                 
-             src.Unblocked.Swap(swaps);
+             src.Data.Swap(swaps);
              return src;
         }        
 
@@ -139,7 +139,7 @@ namespace Z0
              if(swaps == null || swaps.Length == 0)
                 return src;
 
-             src.Unblocked.Swap(swaps);
+             src.Data.Swap(swaps);
              return src;
         }
                 

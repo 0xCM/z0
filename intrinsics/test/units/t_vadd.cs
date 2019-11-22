@@ -110,7 +110,7 @@ namespace Z0.Test
 
             var lhs = Random.BlockedSpan<T>(n, blocks);
             var rhs = Random.BlockedSpan<T>(n, blocks);
-            var dst = MemBlocks.alloc<T>(n, blocks);
+            var dst = DataBlocks.alloc<T>(n, blocks);
             vblock.add(n, blocks, step, in lhs.Head, in rhs.Head, ref dst.Head);
             for(var i=0; i<cells; i++)
                 Claim.eq(gmath.add(lhs[i],rhs[i]), dst[i]);
@@ -126,7 +126,7 @@ namespace Z0.Test
 
             var lhs = Random.BlockedSpan<T>(n, blocks);
             var rhs = Random.BlockedSpan<T>(n, blocks);
-            var dst = MemBlocks.alloc<T>(n, blocks);
+            var dst = DataBlocks.alloc<T>(n, blocks);
             vblock.add(n, blocks, step, in lhs.Head, in rhs.Head, ref dst.Head);
             for(var i=0; i<cells; i++)
                 Claim.eq(gmath.add(lhs[i],rhs[i]), dst[i]);

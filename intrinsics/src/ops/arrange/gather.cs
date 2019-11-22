@@ -28,7 +28,7 @@ namespace Z0
         /// <param name="scale"></param>
         [MethodImpl(Inline)]
         public static unsafe Vector128<int> vgather(N128 n, ref int mem, Vector128<int> index, byte scale)
-            => GatherVector128(refptr(ref mem), index, scale);         
+            => GatherVector128(ptr(ref mem), index, scale);         
 
         /// <summary>
         /// __m128i _mm_i64gather_epi32 (int const* base_addr, __m128i vindex, const int scale) VPGATHERQD xmm, vm64x, xmm
@@ -39,7 +39,7 @@ namespace Z0
         /// <param name="scale"></param>
         [MethodImpl(Inline)]
         public static unsafe Vector128<int> vgather(N128 n, ref int mem, Vector128<long> index, byte scale)
-            => GatherVector128(refptr(ref mem), index, scale);         
+            => GatherVector128(ptr(ref mem), index, scale);         
 
         /// <summary>
         ///  __m128i _mm_i32gather_epi32 (int const* base_addr, __m128i vindex, const int scale) VPGATHERDD xmm, vm32x, xmm
@@ -50,7 +50,7 @@ namespace Z0
         /// <param name="scale"></param>
         [MethodImpl(Inline)]
         public static unsafe Vector128<uint> vgather(N128 n, ref uint mem, Vector128<int> index, byte scale)
-            => GatherVector128(refptr(ref mem), index, scale);         
+            => GatherVector128(ptr(ref mem), index, scale);         
 
         /// <summary>
         /// __m128i _mm_i64gather_epi32 (int const* base_addr, __m128i vindex, const int scale) VPGATHERQD xmm, vm64x, xmm
@@ -61,7 +61,7 @@ namespace Z0
         /// <param name="scale"></param>
         [MethodImpl(Inline)]
         public static unsafe Vector128<uint> vgather(N128 n, ref uint mem, Vector128<long> index, byte scale)
-            => GatherVector128(refptr(ref mem), index, scale);         
+            => GatherVector128(ptr(ref mem), index, scale);         
 
         /// <summary>
         /// __m128i _mm_i32gather_epi64 (__int64 const* base_addr, __m128i vindex, const int scale) VPGATHERDQ xmm, vm32x, xmm
@@ -72,7 +72,7 @@ namespace Z0
         /// <param name="scale">1, 2, 4 or 8</param>
         [MethodImpl(Inline)]
         public static unsafe Vector128<ulong> vgather(N128 n, ref ulong mem, Vector128<int> index, byte scale)
-            => GatherVector128(refptr(ref mem), index, scale);         
+            => GatherVector128(ptr(ref mem), index, scale);         
 
         /// <summary>
         /// __m128i _mm_i64gather_epi64 (__int64 const* base_addr, __m128i vindex, const int scale) VPGATHERQQ xmm, vm64x, xmm
@@ -83,7 +83,7 @@ namespace Z0
         /// <param name="scale"></param>
         [MethodImpl(Inline)]
         public static unsafe Vector128<ulong> vgather(N128 n, ref ulong mem, Vector128<long> index, byte scale)
-            => GatherVector128(refptr(ref mem), index, scale);         
+            => GatherVector128(ptr(ref mem), index, scale);         
 
         /// <summary>
         /// __m256i _mm256_i32gather_epi32 (int const* base_addr, __m256i vindex, const int, scale)VPGATHERDD ymm, vm32y, ymm
@@ -94,7 +94,7 @@ namespace Z0
         /// <param name="scale"></param>
         [MethodImpl(Inline)]
         public static unsafe Vector256<int> vgather(N256 n, ref int src, Vector256<int> index, byte scale)
-            => GatherVector256(refptr(ref src), index, scale);         
+            => GatherVector256(ptr(ref src), index, scale);         
 
         /// <summary>
         /// __m256i _mm256_i32gather_epi32 (int const* base_addr, __m256i vindex, const int scale)VPGATHERDD ymm, vm32y, ymm
@@ -105,7 +105,7 @@ namespace Z0
         /// <param name="scale"></param>
         [MethodImpl(Inline)]
         public static unsafe Vector256<uint> vgather(N256 n, ref uint mem, Vector256<int> index, byte scale)
-            => GatherVector256(refptr(ref mem), index, scale);         
+            => GatherVector256(ptr(ref mem), index, scale);         
 
         /// <summary>
         /// __m256i _mm256_i64gather_epi64 (__int64 const* base_addr, __m256i vindex, const int scale) VPGATHERQQ ymm, vm64y, ymm
@@ -116,7 +116,7 @@ namespace Z0
         /// <param name="scale"></param>
         [MethodImpl(Inline)]
         public static unsafe Vector256<long> vgather(N256 n, ref long mem, Vector256<long> index, byte scale)
-            => GatherVector256(refptr(ref mem), index, scale);         
+            => GatherVector256(ptr(ref mem), index, scale);         
 
         /// <summary>
         ///  __m256i _mm256_i32gather_epi64 (__int64 const* base_addr, __m128i vindex, const int scale)VPGATHERDQ ymm, vm32y, ymm
@@ -127,7 +127,7 @@ namespace Z0
         /// <param name="scale"></param>
         [MethodImpl(Inline)]
         public static unsafe Vector256<long> vgather(N256 n, ref long mem, Vector128<int> index, byte scale)
-            => GatherVector256(refptr(ref mem), index, scale);         
+            => GatherVector256(ptr(ref mem), index, scale);         
 
         /// <summary>
         /// __m256i _mm256_i64gather_epi64 (__int64 const* base_addr, __m256i vindex, const int scale) VPGATHERQQ ymm, vm64y, ymm
@@ -138,7 +138,7 @@ namespace Z0
         /// <param name="scale"></param>
         [MethodImpl(Inline)]
         public static unsafe Vector256<ulong> vgather(N256 n, ref ulong mem, Vector256<long> index, byte scale)
-            => GatherVector256(refptr(ref mem), index, scale);         
+            => GatherVector256(ptr(ref mem), index, scale);         
 
         /// <summary>
         /// __m256i _mm256_i32gather_epi64 (__int64 const* base_addr, __m128i vindex, const int scale) VPGATHERDQ ymm, vm32y, ymm
@@ -149,11 +149,10 @@ namespace Z0
         /// <param name="scale"></param>
         [MethodImpl(Inline)]
         public static unsafe Vector256<ulong> vgather(N256 n, ref ulong mem, Vector128<int> index, byte scale)
-            => GatherVector256(refptr(ref mem), index, scale);         
-
+            => GatherVector256(ptr(ref mem), index, scale);         
 
         [MethodImpl(Inline)]
         public static unsafe Vector256<uint> vmgather(N256 n, Vector256<uint> src, ref uint mem, Vector256<int> index, Vector256<uint> mask, byte scale)
-            => GatherMaskVector256(src, refptr(ref mem), index, mask, scale);
+            => GatherMaskVector256(src, ptr(ref mem), index, mask, scale);
     }
 }

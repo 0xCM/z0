@@ -45,7 +45,7 @@ namespace Z0
         /// <param name="src">The data used to populate the matrix</param>
         [MethodImpl(Inline)]
         public static BitMatrix8 primal(N8 n, Span<byte> src)
-            => BitMatrix8.From(src);
+            => new BitMatrix8(src);
 
         /// <summary>
         /// Defines a primal bitmatrix of order 8
@@ -54,7 +54,21 @@ namespace Z0
         /// <param name="src">The data used to populate the matrix</param>
         [MethodImpl(Inline)]
         public static BitMatrix8 primal(N8 n, ReadOnlySpan<byte> src)
-            => BitMatrix8.From(src.Replicate());
+            => new BitMatrix8(src.Replicate());
+
+        /// <summary>
+        /// Defifines a matrix from two 32-bit unsigned integers; the upper value contains
+        /// the data for rows 0...3 and the lower value contains the dat for rows [4 ... 7]
+        /// </summary>
+        /// <param name="lo">The upper row data</param>
+        /// <param name="hi">The lower row data</param>
+        [MethodImpl(Inline)]
+        public static BitMatrix8 primal(N8 n, uint lo, uint hi)
+            => new BitMatrix8(Z0.Bits.pack(lo, hi));
+
+        [MethodImpl(Inline)]
+        public static BitMatrix8 primal(N8 n, ulong src)        
+            => new BitMatrix8(src);
 
         /// <summary>
         /// Defines a primal bitmatrix of order 16
@@ -113,7 +127,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitMatrix8 primal(N8 n8, byte row0 = 0, byte row1 = 0, byte row2 = 0, byte row3 = 0, 
             byte row4 = 0, byte row5 = 0, byte row6 = 0, byte row7 = 0)
-                => BitMatrix8.From(row0, row1, row2, row3, row4, row5, row6, row7);
+                => new BitMatrix8(array(row0,row1,row2,row3,row4,row5,row6, row7));
  
     }
 }

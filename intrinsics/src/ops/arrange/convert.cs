@@ -769,7 +769,6 @@ namespace Z0
             return dst;
         }
 
-
         /// <summary>
         /// __m256i _mm256_cvtepi16_epi64 (__m128i a) VPMOVSXDQ ymm, xmm/m128
         /// </summary>
@@ -900,7 +899,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static unsafe Vector256<ulong> vconvert(ref ushort src, out Vector256<ulong> dst)
         {
-            dst = v64u(ConvertToVector256Int64(refptr(ref src)));
+            dst = v64u(ConvertToVector256Int64(ptr(ref src)));
             return dst;
         }
 

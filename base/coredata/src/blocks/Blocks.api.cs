@@ -13,7 +13,7 @@ namespace Z0
     /// <summary>
     /// Defines api surface for blocked span allocation/manipulation
     /// </summary>
-    public static partial class MemBlocks
+    public static partial class DataBlocks
     {
 
 

@@ -155,11 +155,11 @@ namespace Z0.Test
         {
             var x = Block128.load(span<int>(1,2,3,4,5,6,7,8));
 
-            var block0 = x.SliceBlock(0);
+            var block0 = x.Block(0);
             Claim.eq(4, block0.Length);            
             Claim.eq(block0,Block128.load(span(1,2,3,4)));
 
-            var block2 = x.SliceBlock(1);
+            var block2 = x.Block(1);
             Claim.eq(4, block2.Length);
             Claim.eq(block2,Block128.FromParts(5,6,7,8));
 
@@ -201,7 +201,7 @@ namespace Z0.Test
             blockX[2] = 3;
             blockX[3] = 4;
 
-            var blockY = Block128.load(blockX.Unblocked);
+            var blockY = Block128.load(blockX.Data);
             Claim.eq(blockX, blockY);
 
         }

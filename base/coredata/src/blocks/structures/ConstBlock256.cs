@@ -40,8 +40,8 @@ namespace Z0
         public static int CellSize => Block256<T>.CellSize;
 
         [MethodImpl(Inline)]
-        public static implicit operator ReadOnlySpan<T>(in ConstBlock256<T> src)
-            => src.data;
+        public static implicit operator ReadOnlySpan<T>(in ConstBlock256<T> xb)
+            => xb.data;
 
         [MethodImpl(Inline)]
         public static explicit operator ConstBlock256<T>(Span<T> src)
@@ -56,12 +56,12 @@ namespace Z0
             => new ConstBlock256<T>(src);
 
         [MethodImpl(Inline)]
-        public static bool operator == (in ConstBlock256<T> lhs, in ConstBlock256<T> rhs)
-            => lhs.data == rhs.data;
+        public static bool operator == (in ConstBlock256<T> xb, in ConstBlock256<T> yb)
+            => xb.data == yb.data;
 
         [MethodImpl(Inline)]
-        public static bool operator != (in ConstBlock256<T> lhs, in ConstBlock256<T> rhs)
-            => lhs.data != rhs.data;
+        public static bool operator != (in ConstBlock256<T> xb, in ConstBlock256<T> yb)
+            => xb.data != yb.data;
         
         [MethodImpl(Inline)]
         public static bool Aligned(int length)
@@ -179,9 +179,6 @@ namespace Z0
         public ConstBlock256<T> SliceBlocks(int blockIndex, int blockCount)
             => (ConstBlock256<T>)Slice(blockIndex * BlockLength, blockCount * BlockLength );
             
-        [MethodImpl(Inline)]
-        public Block256<T> ToBlockedSpan()
-            => Block256<T>.Load(data.ToArray());
 
 
         [MethodImpl(Inline)]

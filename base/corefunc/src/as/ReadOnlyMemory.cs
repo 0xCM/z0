@@ -13,19 +13,13 @@ namespace Z0
     
     using static zfunc;
 
-    partial class As
+    public static partial class As
     {
-        
         [MethodImpl(Inline)]
-        public static ReadOnlySpan<sbyte> int8<T>(in ReadOnlyMemory<T> src)
-            where T : unmanaged
-                => cast<T,sbyte>(src.Span);
+        public static ref T refAdd<T>(ref T src, IntPtr offset)
+            => ref Unsafe.Add(ref src, offset);
 
-        [MethodImpl(Inline)]
-        public static ReadOnlySpan<byte> uint8<T>(in ReadOnlyMemory<T> src)
-            where T : unmanaged
-                => cast<T,byte>(src.Span);
-
+    
         [MethodImpl(Inline)]
         public static ReadOnlySpan<short> int16<T>(in ReadOnlyMemory<T> src)
             where T : unmanaged

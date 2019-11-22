@@ -148,7 +148,7 @@ namespace Z0
         {            
             var dst = Z0.Block256.alloc<float>(Z0.Block256.minblocks<float>(length));
             random.Fill(closed(min,max), length, ref dst[0]);
-            mathspan.fdiv(dst.Unblocked, dst.Avg() * length);
+            mathspan.fdiv(dst.Data, dst.Avg() * length);
             return dst; 
         }
 
@@ -157,7 +157,7 @@ namespace Z0
         {                        
             var dst = Z0.Block256.alloc<double>(Z0.Block256.minblocks<double>(length));
             random.Fill(closed(min,max), length, ref dst[0]);
-            mathspan.fdiv(dst.Unblocked, dst.Avg() * length);
+            mathspan.fdiv(dst.Data, dst.Avg() * length);
             return dst; 
         }
     }

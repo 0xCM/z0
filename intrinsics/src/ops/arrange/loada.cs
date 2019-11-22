@@ -13,7 +13,6 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Avx;
     
     using static zfunc;
-    using static As;
 
     partial class dinx
     {
@@ -159,8 +158,6 @@ namespace Z0
         /// <param name="src">A readonly memory reference</param>
         [MethodImpl(Inline)]
         public static unsafe Vector256<ulong> vloada(N256 n, in ulong src)
-            => LoadAlignedVector256(constptr(in src));
- 
+            => LoadAlignedVector256(constptr(in src)); 
     }
-
 }

@@ -3,26 +3,12 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 using System;
-using System.Linq;
-using System.Reflection;
-using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;    
 
 using Z0;
-//using static Z0.As;
 partial class zfunc
 {
-    [MethodImpl(Inline)]
-    public static byte uint8<T>(T src)
-        => Unsafe.As<T,byte>(ref src);
-
-    [MethodImpl(Inline)]
-    public static byte? uint8<T>(T? src)
-        where T : unmanaged
-            => Unsafe.As<T?, byte?>(ref src);
-
-
     /// <summary>
     /// If possible, applies the conversion S -> T
     /// </summary>
@@ -263,5 +249,8 @@ partial class zfunc
     [MethodImpl(Inline)]   
     public static T convert<T>(char src)
         where T : unmanaged
-            => Converter.convert<T>(src);
+            => Converter.convert<T>(src);            
+
+
+
 }

@@ -13,16 +13,6 @@ namespace Z0
     public static partial class As
     {
         [MethodImpl(Inline)]
-        public static Span<sbyte> int8<T>(Span<T> src)
-            where T : unmanaged
-                => cast<T,sbyte>(src);
-
-        [MethodImpl(Inline)]
-        public static Span<byte> uint8<T>(Span<T> src)
-            where T : unmanaged
-                => cast<T,byte>(src);
-
-        [MethodImpl(Inline)]
         public static Span<short> int16<T>(Span<T> src)
             where T : unmanaged
                 => cast<T,short>(src);

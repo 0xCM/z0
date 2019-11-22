@@ -95,7 +95,7 @@ namespace Z0
                 
         [MethodImpl(Inline)]
         public string Format(char delimiter = ',')
-            => data.Unblocked.FormatList(delimiter);    
+            => data.Data.FormatList(delimiter);    
 
         [MethodImpl(Inline)]
         public ref BlockVector<T> CopyTo(ref BlockVector<T> dst)
