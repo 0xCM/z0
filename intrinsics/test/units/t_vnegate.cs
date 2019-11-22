@@ -127,7 +127,7 @@ namespace Z0.Test
             var step = stats.StepSize;
             var cells = stats.CellCount;
 
-            var src = Random.BlockedSpan<T>(n, blocks);
+            var src = Random.Blocks<T>(n, blocks);
             var dst = DataBlocks.alloc<T>(n, blocks);
             vblock.negate(n, blocks, step, in src.Head, ref dst.Head);
             for(var i=0; i<cells; i++)
@@ -142,7 +142,7 @@ namespace Z0.Test
             var step = stats.StepSize;
             var cells = stats.CellCount;
 
-            var src = Random.BlockedSpan<T>(n, blocks);
+            var src = Random.Blocks<T>(n, blocks);
             var dst = DataBlocks.alloc<T>(n, blocks);
             vblock.negate(n, blocks, step, in src.Head, ref dst.Head);
             for(var i=0; i<cells; i++)

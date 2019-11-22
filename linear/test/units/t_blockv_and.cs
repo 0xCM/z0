@@ -42,7 +42,7 @@ namespace Z0.Test
             var calcs = span<T>(len);
             for(var i = 0; i< calcs.Length; i++)
                 calcs[i] = gmath.and(u[i], v[i]);
-            var vExpect = BlockVector.Load(calcs, rep);            
+            var vExpect = Vector.blockload(calcs, rep);            
             
             Util.ClaimEqual(vExpect, vResult);
         }

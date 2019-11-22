@@ -139,7 +139,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<T> vload<T>(ConstBlock256<T> src)
             where T : unmanaged
-                => vload(n256,src.Unblocked);
+                => vload(n256,src.Data);
 
         [MethodImpl(Inline)]
         public static unsafe ref Vector128<T> vload<T>(T* pSrc, out Vector128<T> dst)

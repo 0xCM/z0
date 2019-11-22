@@ -43,7 +43,7 @@ namespace Z0
 
         public void pop_3x256_check()
         {
-            var src = Random.BlockedSpan<ulong>(n256, 3, (0,uint.MaxValue));
+            var src = Random.Blocks<ulong>(n256, 3, (0,uint.MaxValue));
             var x0 = src.TakeVector(0);
             var x1 = src.TakeVector(1);
             var x2 = src.TakeVector(2);

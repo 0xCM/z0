@@ -12,83 +12,6 @@ namespace Z0
 
     public static class Block128
     {
-
-        /// <summary>
-        /// Allocates a span with a specified number of blocks
-        /// </summary>
-        /// <param name="blocks">The number of blocks for which memory should be alocated</param>
-        /// <param name="fill">An optional value that, if specified, is used to initialize the cell values</param>
-        /// <typeparam name="T">The element type</typeparam>
-        [MethodImpl(NotInline)]
-        public static Block128<T> alloc<T>(int blocks, T? fill = null)
-            where T : unmanaged        
-                => Block128<T>.AllocBlocks(blocks, fill);
-
-        /// <summary>
-        /// Allocates a 1-block span 
-        /// </summary>
-        /// <param name="fill">An optional value that, if specified, is used to initialize the cell values</param>
-        /// <typeparam name="T">The element type</typeparam>
-        [MethodImpl(NotInline)]
-        public static Block128<T> alloc<T>(T? fill = null)
-            where T : unmanaged        
-                => Block128<T>.AllocBlocks(1, fill);
-
-        /// <summary>
-        /// Allocates a 256-bit blocked span of a specified minimum length which may not partition evently into 256-bit blocks
-        /// </summary>
-        /// <param name="minlen">The minimum allocation length</param>
-        /// <typeparam name="T">The element type</typeparam>
-        [MethodImpl(NotInline)]
-        public static Block128<T> allocu<T>(int minlen, T? fill = null)
-            where T : unmanaged        
-        {
-            alignment<T>(minlen, out int blocklen, out int fullBlocks, out int remainder);            
-            if(remainder == 0)
-                return alloc<T>(fullBlocks, fill);
-            else
-                return alloc<T>(fullBlocks + 1, fill);
-        }
-
-        /// <summary>
-        /// Allocates the minimum amount of memory required to align data of natural length in 128-bit blocks
-        /// </summary>
-        /// <typeparam name="M">The row type </typeparam>
-        /// <typeparam name="N">The column type</typeparam>
-        /// <typeparam name="T">The scalar type</typeparam>
-        [MethodImpl(Inline)]
-        public static Block128<T> allocu<N,T>(T? fill = null)
-            where N : unmanaged, ITypeNat
-            where T : unmanaged
-        {
-            var dataLen = nfunc.nati<N>();
-            alignment<T>(dataLen, out int blocklen, out int fullBlocks, out int remainder);            
-            if(remainder == 0)
-                return alloc<T>(fullBlocks,fill);
-            else
-                return alloc<T>(fullBlocks + 1,fill);
-        }
-
-        /// <summary>
-        /// Allocates the minimum amount of memory required to align matrix/tabular data in 256-bit blocks
-        /// </summary>
-        /// <typeparam name="M">The row type </typeparam>
-        /// <typeparam name="N">The column type</typeparam>
-        /// <typeparam name="T">The scalar type</typeparam>
-        [MethodImpl(Inline)]
-        public static Block128<T> allocu<M,N,T>(T? fill = null)
-            where M : unmanaged, ITypeNat
-            where N : unmanaged, ITypeNat
-            where T : unmanaged
-        {
-            var dataLen = nfunc.nati<M>() * nfunc.nati<N>();
-            alignment<T>(dataLen, out int blocklen, out int fullBlocks, out int remainder);            
-            if(remainder == 0)
-                return alloc<T>(fullBlocks, fill);
-            else
-                return alloc<T>(fullBlocks + 1,fill);
-        }
-
         /// <summary>
         /// Loads a single blocked span from a parameter array
         /// </summary>
@@ -98,35 +21,6 @@ namespace Z0
         public static Block128<T> FromParts<T>(params T[] src)
             where T : unmanaged
                 => Block128<T>.Load(src);
-
-        /// <summary>
-        /// Loads a blocked span from an unblocked span
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <param name="offset">The span index at which to begin the load</param>
-        /// <typeparam name="T">The primitive type</typeparam>
-        [MethodImpl(Inline)]
-        public static Block128<T> load<T>(Span<T> src, int offset = 0)
-            where T : unmanaged
-                => Block128<T>.Load(src, offset);
-
-        /// <summary>
-        /// Calculates the number of bytes required to represent a block constituent
-        /// </summary>
-        /// <typeparam name="T">The block constituent type</typeparam>
-        [MethodImpl(Inline)]
-        public static int cellsize<T>()
-            where T : unmanaged        
-                => Block128<T>.CellSize;
-
-        /// <summary>
-        /// Calculates the number of bytes requred to represent a block
-        /// </summary>
-        /// <typeparam name="T">The block constituent type</typeparam>
-        [MethodImpl(Inline)]
-        public static int blocksize<T>()
-            where T : unmanaged        
-                => Block128<T>.BlockSize;
 
 
         /// <summary>
@@ -239,26 +133,5 @@ namespace Z0
                 where T : unmanaged
                     => lhs.Length == rhs.Length ? lhs.Length 
                         : throw CountMismatch(lhs.Length, rhs.Length, caller, file, line);   
- 
-         /// <summary>
-        /// Returns a reference to the first element of a span
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <typeparam name="T">The element type</typeparam>
-        [MethodImpl(Inline)]
-        static ref T head<T>(in Block128<T> src)
-            where T : unmanaged
-                =>  ref MemoryMarshal.GetReference<T>(src);
-
-        /// <summary>
-        /// Returns a readonly reference to the first element of a readonly span
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <typeparam name="T">The element type</typeparam>
-        [MethodImpl(Inline)]
-        static ref readonly T head<T>(in ConstBlock128<T> src)
-            where T : unmanaged
-                =>  ref MemoryMarshal.GetReference<T>(src);
-
     }
 }

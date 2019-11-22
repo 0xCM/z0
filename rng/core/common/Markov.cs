@@ -59,7 +59,7 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where T : unmanaged
         {
-            var dst = Z0.BlockVector.Alloc<N, T>();
+            var dst = Z0.Vector.blockalloc<N, T>();
             random.MarkovVec(dst.Unsized);
             return dst;
         }
@@ -81,7 +81,7 @@ namespace Z0
             var n = nati<N>();
             for(int row=0; row < n; row++)
                 random.MarkovVec<T>(data.Slice(row*n, n));                            
-            return Z0.BlockMatrix.Load<N,T>(data);
+            return Z0.Matrix.blockload<N,T>(data);
         }
 
         [MethodImpl(Inline)]

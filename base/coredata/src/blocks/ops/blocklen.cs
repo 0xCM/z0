@@ -23,6 +23,15 @@ namespace Z0
                 => 8/Unsafe.SizeOf<T>();
 
         /// <summary>
+        /// Calculates the number of cells that comprise a specified number of blocks
+        /// </summary>
+        /// <typeparam name="T">The block constituent type</typeparam>
+        [MethodImpl(Inline)]
+        public static int blocklen<T>(N64 n, int blocks)
+            where T : unmanaged        
+                => blocks * blocklen<T>(n);
+
+        /// <summary>
         /// Computes the number of elements that comprise a single 128-bit block
         /// </summary>
         /// <param name="n">The bitness selector</param>
@@ -33,6 +42,15 @@ namespace Z0
                 => 16/Unsafe.SizeOf<T>();
 
         /// <summary>
+        /// Calculates the number of cells that comprise a specified number of blocks
+        /// </summary>
+        /// <typeparam name="T">The block constituent type</typeparam>
+        [MethodImpl(Inline)]
+        public static int blocklen<T>(N128 n, int blocks)
+            where T : unmanaged        
+                => blocks * blocklen<T>(n);
+
+        /// <summary>
         /// Computes the number of elements that comprise a 256-bit block
         /// </summary>
         /// <param name="n">The bitness selector</param>
@@ -41,7 +59,15 @@ namespace Z0
         public static int blocklen<T>(N256 n)
             where T : unmanaged
                 => 32/Unsafe.SizeOf<T>();
- 
+
+        /// <summary>
+        /// Calculates the number of cells that comprise a specified number of blocks
+        /// </summary>
+        /// <typeparam name="T">The block constituent type</typeparam>
+        [MethodImpl(Inline)]
+        public static int blocklen<T>(N256 n, int blocks)
+            where T : unmanaged        
+                => blocks * blocklen<T>(n);
     }
 
 }

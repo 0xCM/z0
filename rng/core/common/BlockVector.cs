@@ -23,7 +23,7 @@ namespace Z0
         public static BlockVector<T> BlockVector<T>(this IPolyrand random, int len, Interval<T>? domain = null)
             where T : unmanaged
         {
-            var dst = Z0.BlockVector.Alloc<T>(len);
+            var dst = Z0.Vector.blockalloc<T>(len);
             if(domain != null)
                 random.Fill(domain.Value, len, ref dst[0]);
             else
@@ -58,7 +58,7 @@ namespace Z0
             where T : unmanaged
             where N : unmanaged, ITypeNat
         {
-            var dst = Z0.BlockVector.Alloc<N, T>();
+            var dst = Z0.Vector.blockalloc<N, T>();
             random.Fill(domain, ref dst);
             return dst;
         }
@@ -90,7 +90,7 @@ namespace Z0
             where T : unmanaged
             where N : unmanaged, ITypeNat
         {
-            var dst = Z0.BlockVector.Alloc<N, T>();
+            var dst = Z0.Vector.blockalloc<N, T>();
             random.Fill(ref dst);
             return dst;
         }

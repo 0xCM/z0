@@ -47,7 +47,7 @@ namespace Z0
         /// <param name="max">The maximum operand value</param>
         public static BlockMatrix<N7,byte> products()
         {
-            var dst = BlockMatrix.Alloc<N7,byte>();
+            var dst = Matrix.blockalloc<N7,byte>();
             products(1, (byte)0b111, ref dst.Unblocked[0]);
             return dst;
         }

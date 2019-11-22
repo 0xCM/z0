@@ -72,7 +72,7 @@ namespace Z0
             var n = n256;
             for(var i = 0; i< SampleSize; i++)
             {
-                var x = Random.BlockedSpan<uint>(n);
+                var x = Random.Blocks<uint>(n);
                 var y = x.Replicate();
                 y.Reverse();
             

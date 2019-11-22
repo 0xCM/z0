@@ -53,10 +53,10 @@ namespace Z0.Test
                 var sw = stopwatch(false);
                 for(var i=0; i<SampleSize; i++)
                 {
-                    var x = Random.BlockedSpan<byte>(n256);
-                    var y = Random.BlockedSpan<byte>(n256);
+                    var x = Random.Blocks<byte>(n256);
+                    var y = Random.Blocks<byte>(n256);
                     sw.Start();
-                    var b = mathspan.avgi(x, y);
+                    var b = mathspan.avgi(x.ReadOnly(), y.ReadOnly());
                     sw.Stop();
                 }
                 return OpTime.Define<byte>(SampleSize, sw, $"vavg-ref");

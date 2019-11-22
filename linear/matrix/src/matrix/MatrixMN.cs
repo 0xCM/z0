@@ -156,7 +156,7 @@ namespace Z0
             if(row < 0 || row >= _RowCount)
                 throw Errors.OutOfRange(row, 0, _RowCount - 1);
             
-            return BlockVector.Load<N,T>(data.AsSpan().Slice(row * _RowLenth, _RowLenth));
+            return Vector.blockload<N,T>(data.AsSpan().Slice(row * _RowLenth, _RowLenth));
         }
 
         [MethodImpl(Inline)]
@@ -182,7 +182,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public BlockVector<M,T> GetCol(int col)
         {
-            var alloc = BlockVector.Alloc<M,T>();
+            var alloc = Vector.blockalloc<M,T>();
             return GetCol(col, ref alloc);
         }
 
@@ -207,7 +207,6 @@ namespace Z0
                 dst.SetCol(row, GetRow(row));            
             return dst;
         }
-
 
         /// <summary>
         /// Applies a function to each cell and overwites the existing cell value with the result

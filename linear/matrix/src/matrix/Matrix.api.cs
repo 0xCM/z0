@@ -48,6 +48,35 @@ namespace Z0
                 => new Matrix<N, T>(zfunc.alloc(zfunc.natval<N>()* zfunc.natval<N>(), fill));
 
         /// <summary>
+        /// Allocates a blocked square matrix of natual dimension
+        /// </summary>
+        /// <param name="n">The square dimension; specified, if desired, to aid type inference</param>
+        /// <param name="exemplar">An example value; specified, if desired, to aid type inference</param>
+        /// <typeparam name="N">The natural dimension type</typeparam>
+        /// <typeparam name="T">The element type</typeparam>
+        [MethodImpl(Inline)]
+        public static BlockMatrix<N,T> blockalloc<N,T>(N n = default, T exemplar = default)
+            where N : unmanaged, ITypeNat
+            where T : unmanaged
+                => Block256.allocu<N,N,T>(); 
+
+        /// <summary>
+        /// Allocates a blocked matrix of natual dimensions
+        /// </summary>
+        /// <param name="m">The row count, specified if desired to aid type inference</param>
+        /// <param name="n">The column count, specified if desired to aid type inference</param>
+        /// <param name="exemplar">An example value, specified if desired to aid type inference</param>
+        /// <typeparam name="M">The row count type</typeparam>
+        /// <typeparam name="N">The col count type</typeparam>
+        /// <typeparam name="T">The element type</typeparam>
+        [MethodImpl(Inline)]
+        public static BlockMatrix<M,N,T> blockalloc<M,N,T>(M m = default, N n = default, T exemplar = default)
+            where M : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
+            where T : unmanaged
+                => Block256.allocu<M,N,T>(); 
+
+        /// <summary>
         /// Allocates a matrix of natual dimensions
         /// </summary>
         /// <param name="m">The row count, specified if desired to aid type inference</param>
@@ -76,6 +105,77 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where T : unmanaged
                 => new Matrix<M, N, T>(src);
+
+        [MethodImpl(Inline)]
+        public static Matrix<M,N,T> load<M,N,T>(Span<T> src, M m = default, N n = default)
+            where M : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
+            where T : unmanaged
+                => new Matrix<M, N, T>(src.ToArray());
+
+        /// <summary>
+        /// Loads a matrix of natural dimensions from a blocked span
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <typeparam name="M">The row count type</typeparam>
+        /// <typeparam name="N">The col count type</typeparam>
+        /// <typeparam name="T">The element type</typeparam>
+        [MethodImpl(Inline)]
+        public static BlockMatrix<M,N,T> blockload<M,N,T>(Block256<T> src, M m = default, N n = default)
+            where M : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
+            where T : unmanaged
+                => new BlockMatrix<M, N, T>(src);
+
+        /// <summary>
+        /// Loads a square matrix of natural dimensions from a blocked span
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <typeparam name="M">The row count type</typeparam>
+        /// <typeparam name="N">The col count type</typeparam>
+        /// <typeparam name="T">The element type</typeparam>
+        [MethodImpl(Inline)]
+        public static BlockMatrix<N,T> blockload<N,T>(Block256<T> src,  N n = default)
+            where N : unmanaged, ITypeNat
+            where T : unmanaged
+                => new BlockMatrix<N, T>(src);
+
+        [MethodImpl(Inline)]
+        public static BlockMatrix<M,N,T> blockload<M,N,T>(Span<T> src,M m = default, N n = default)
+            where M : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
+            where T : unmanaged
+                => Block256.load(src);
+
+        /// <summary>
+        /// Defines a square matrix
+        /// </summary>
+        /// <param name="src">The source data </param>
+        /// <param name="n">The order</param>
+        /// <typeparam name="N">The square dimension type</typeparam>
+        /// <typeparam name="T">The element type</typeparam>
+        [MethodImpl(Inline)]
+        public static BlockMatrix<N,T> blockload<N,T>(T[] src, N n = default)
+            where N : unmanaged, ITypeNat
+            where T : unmanaged
+        {
+            var dst = Matrix.blockalloc<N,T>();
+            src.CopyTo(dst.Unblocked);
+            return dst;
+        }
+
+        /// <summary>
+        /// Defines a square matrix
+        /// </summary>
+        /// <param name="src">The source data </param>
+        /// <param name="n">The order</param>
+        /// <typeparam name="N">The square dimension type</typeparam>
+        /// <typeparam name="T">The element type</typeparam>
+        [MethodImpl(Inline)]
+        public static BlockMatrix<N,T> blockload<N,T>(N n, params T[] src )
+            where N : unmanaged, ITypeNat
+            where T : unmanaged
+                => blockload<N,T>(src,n);
 
         /// <summary>
         /// Loads a square matrix of natural order from an array
@@ -176,6 +276,89 @@ namespace Z0
 
             return dst;
         }
+
+        /// <summary>
+        /// Reads a matrix from a delimited file
+        /// </summary>
+        /// <param name="src">The source file</param>
+        /// <param name="format">The file format</param>
+        /// <typeparam name="M">The row count type</typeparam>
+        /// <typeparam name="N">The column count type</typeparam>
+        /// <typeparam name="T">The element type</typeparam>
+        public static BlockMatrix<M,N,T> blockread<M,N,T>(FilePath src, TextFormat? format = null)
+            where M : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
+            where T : unmanaged    
+        {
+            var doc = src.ReadTextDoc().Require();
+            var m = nati<M>();
+            var n = nati<N>();
+
+            if(m != doc.DataLineCount)
+                return default;
+
+            if(n != doc.Rows[0].Cells.Length)
+                return default;
+
+            var dst =  Matrix.blockload<M,N,T>(Block256.allocu<M,N,T>());
+            for(var i = 0; i<doc.Rows.Length; i++)
+            {
+                ref readonly var row = ref doc[i];
+                for(var j = 0; j<row.Cells.Length; j++)
+                {
+                    gmath.parse<T>(row.Cells[j].CellValue, out T cell);
+                    dst[i,j] = cell;
+                }                
+            }
+
+            return dst;
+        }
+
+        public static ref Matrix<N,T> mul<N,T>(Matrix<N,T> A, Matrix<N,T> B, ref Matrix<N,T> C)
+            where N : unmanaged, ITypeNat
+            where T : unmanaged
+        {
+            var tB = B.Transpose();
+            for(var i=0; i<A.RowCount; i++)
+            for(var j=0; j<B.ColCount; j++)
+                C[i,j] = A[i] * tB[j];
+            return ref C;
+        }
+
+        public static ref Matrix<M,N,T> mul<M,P,N,T>(Matrix<M,P,T> A, Matrix<P,N,T> B, ref Matrix<M,N,T> C)
+            where M : unmanaged, ITypeNat
+            where P : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
+            where T : unmanaged
+        {
+            var tB = B.Transpose();
+            for(var i=0; i<A.RowCount; i++)
+            for(var j=0; j<B.ColCount; j++)
+                C[i,j] = A[i] * tB[j];
+            return ref C;
+        }
+
+        public static void mul<M,K,N,T>(in BlockMatrix<M,K,T> A, in BlockMatrix<K,N,T> B, ref BlockMatrix<M,N,T> X)
+            where M : unmanaged, ITypeNat
+            where K : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
+            where T : unmanaged    
+        {
+            var m = natval<M>();
+            var n = natval<N>();
+            var tB = B.Transpose();
+
+            for(var i=0; i< m; i++)
+            {
+                var r = A.GetRow(i);
+                for(var j = 0; j< n; j++)
+                {
+                    var c = tB.GetRow(j);
+                    X[i,j] = r * c;
+                }
+            }
+        }
+
    }
 
 }

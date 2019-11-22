@@ -28,7 +28,7 @@ namespace Z0
         /// <param name="dst">The target matrix</param>
         public static ref BlockMatrix<N512,ushort> products(out BlockMatrix<N512,ushort> dst)
         {
-            dst = BlockMatrix.Alloc<N512,ushort>();
+            dst = Matrix.blockalloc<N512,ushort>();
             for(ushort i=1; i < MemberCount; i++)
             for(ushort j=1; j < MemberCount; j++)
                 dst[i, j] = Gf512.mul(i,j);

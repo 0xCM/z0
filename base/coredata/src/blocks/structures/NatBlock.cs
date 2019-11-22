@@ -48,16 +48,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bool operator != (NatBlock<N,T> lhs, NatBlock<N,T> rhs)
             => lhs.data != rhs.data;            
-
-        /// <summary>
-        /// Uncritically assigns a source span to the state store of natural span
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <typeparam name="U">The source element type</typeparam>
-        [MethodImpl(Inline)]
-        internal static NatBlock<N,T> Transfer(Span<T> src)
-            => new NatBlock<N, T>(src);
-
+    
         /// <summary>
         /// Verifies correct source span length prior to backing store assignment
         /// </summary>
@@ -124,12 +115,11 @@ namespace Z0
         [MethodImpl(Inline)]
         internal NatBlock(ref T src)
             => data = MemoryMarshal.CreateSpan(ref src, Count);
-
  
-        public ref T this[int ix] 
+        public ref T this[int index] 
         {
             [MethodImpl(Inline)]
-            get => ref data[ix];
+            get => ref data[index];
         }
 
         public Span<T> Unsized
@@ -142,6 +132,18 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => ref MemoryMarshal.GetReference(data);
+        }
+
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => data.IsEmpty;
+        }
+
+        public int Length 
+        {
+            [MethodImpl(Inline)]
+            get => Count;
         }
 
         [MethodImpl(Inline)]
@@ -166,28 +168,21 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public bool TryCopyTo (Span<T> dst)
-            => data.TryCopyTo(dst);        
-        
+            => data.TryCopyTo(dst);                
 
         [MethodImpl(Inline)]
         public NatBlock<N,T> Replicate()        
             => new NatBlock<N,T>(data.Replicate());
-        
-        public int Length 
-            => Count;
-            
-        public bool IsEmpty
-            => data.IsEmpty;
-
+                
         [MethodImpl(Inline)]
         public NatBlock<N,S> As<S>()
             where S : unmanaged
                 => new NatBlock<N, S>(MemoryMarshal.Cast<T,S>(data));
 
-       public override bool Equals(object rhs) 
+        public override bool Equals(object rhs) 
             => throw new NotSupportedException();
 
-       public override int GetHashCode() 
+        public override int GetHashCode() 
             => throw new NotSupportedException();        
     }
 }

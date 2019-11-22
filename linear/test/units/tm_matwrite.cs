@@ -40,7 +40,7 @@ namespace Z0.Test
             TypeCaseStart<M,N,T>();
             for(var i=0; i< count; i++)
             {
-                var filename = BlockMatrix.DataFileName<M,N,T>();
+                var filename = Matrix.filename<M,N,T>();
                 var dstpath = LogSettings.Get().TestLogPath(filename);
                 var A = Random.BlockMatrix<M,N,T>();
                 if(isFp)
@@ -48,7 +48,7 @@ namespace Z0.Test
                 Matrix.write(A,dstpath);
 
                 var srcPath = dstpath;
-                var B = BlockMatrix.ReadFrom<M,N,T>(srcPath);
+                var B = Matrix.blockread<M,N,T>(srcPath);
                 if(isFp)
                     B.Apply(round);
 

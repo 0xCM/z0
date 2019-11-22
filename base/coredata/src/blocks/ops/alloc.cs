@@ -67,7 +67,10 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Block128<T> alloc<T>(N128 n)
             where T : unmanaged        
-                => Block128<T>.AllocBlocks(1);
+        {
+            Span<T> dst = new T[1 * blocklen<T>(n)];
+            return new Block128<T>(dst);
+        }
 
         /// <summary>
         /// Allocates a 128-bit 1-block span filled with a specified pattern
@@ -86,12 +89,10 @@ namespace Z0
         /// <param name="fill">An optional value that, if specified, is used to initialize the cell values</param>
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
-        public static Block128<T> alloc<T>(N128 n, int blocks, T? fill = null)
+        public static Block128<T> alloc<T>(N128 n, int blocks)
             where T : unmanaged        
         {
             Span<T> data = new T[blocks * blocklen<T>(n)];
-            if(fill != null)
-                data.Fill(fill.Value);
             return new Block128<T>(data);
         }
 

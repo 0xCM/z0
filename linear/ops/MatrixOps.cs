@@ -51,7 +51,7 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where T : unmanaged    
         {
-            inxspan.sub(A.Unsized, B.Unsized, C.Unsized);
+            vblock.sub(A.Unsized, B.Unsized, C.Unsized);
             return ref C;
         }
 

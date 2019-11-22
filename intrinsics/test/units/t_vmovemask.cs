@@ -42,7 +42,7 @@ namespace Z0
         {
             var bits = n256;
             var bytes = n32;
-            var src = Random.BlockedSpan<byte>(n256, blocks:SampleSize);
+            var src = Random.Blocks<byte>(n256, blocks:SampleSize);
             const int hibit = 7;
 
             for(var i=0; i<SampleSize; i++)
@@ -70,7 +70,7 @@ namespace Z0
             const int hibit = 7;
             var bits = n128;
             var bytes = n16;
-            var src = Random.BlockedSpan<byte>(bits, blocks:SampleSize);
+            var src = Random.Blocks<byte>(bits, blocks:SampleSize);
 
             for(var i=0; i<SampleSize; i++)
             {
@@ -96,7 +96,7 @@ namespace Z0
         public void movemask_256x32f()
         {
             var samples = Pow2.T12;
-            var src = Random.BlockedSpan<float>(n256,samples);
+            var src = Random.Blocks<float>(n256,samples);
             for(var i=0; i<samples; i++)
             {
                 var srcVector = src.TakeVector(i);
@@ -115,7 +115,7 @@ namespace Z0
         public void movemask_256x64f()
         {
             var samples = Pow2.T12;
-            var src = Random.BlockedSpan<double>(n256, samples);
+            var src = Random.Blocks<double>(n256, samples);
             for(var i=0; i<samples; i++)
             {
                 var srcVector = src.TakeVector(i);

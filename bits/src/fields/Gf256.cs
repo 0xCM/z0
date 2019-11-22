@@ -49,7 +49,7 @@ namespace Z0
         public static BlockMatrix<N,byte> products<N>(N n = default)
             where N : unmanaged, ITypeNat
         {
-            var dst = BlockMatrix.Alloc<N,byte>();
+            var dst = Matrix.blockalloc<N,byte>();
             products(1, (byte)n.NatValue, ref dst.Unblocked[0]);
             return dst;
         }
@@ -60,7 +60,7 @@ namespace Z0
         /// <param name="dst">The target matrix</param>
         public static ref BlockMatrix<N256,byte> products(out BlockMatrix<N256,byte> dst)
         {
-            dst = BlockMatrix.Alloc<N256,byte>();
+            dst = Matrix.blockalloc<N256,byte>();
             for(uint i=1; i < MemberCount; i++)
             for(uint j=1; j < MemberCount; j++)
                 dst[i, j] = clmul((byte)i,(byte)j);

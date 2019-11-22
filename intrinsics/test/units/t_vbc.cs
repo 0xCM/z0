@@ -70,14 +70,10 @@ namespace Z0
         }
 
         public void vbc_256x64u()
-        {
-            vbc_check<ulong>(n256);   
-        }
+            => vbc_check<ulong>(n256);   
 
         public void vbc_256x32f()
-        {
-            vbc_check<float>(n256); 
-        }
+            => vbc_check<float>(n256); 
 
         public void vbc_256x64f()
             => vbc_check<double>(n256);

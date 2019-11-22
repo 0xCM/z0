@@ -31,7 +31,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where K : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
-                => BlockMatrix.Load<M,N,float>(mkl.gemm<M,K,N>(A.Unsized, B.Unsized));
+                => Matrix.blockload<M,N,float>(mkl.gemm<M,K,N>(A.Unsized, B.Unsized));
 
         /// <summary>
         /// Allocates and computes a matrix X = AB of natural dimension MxN 
@@ -46,7 +46,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where K : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
-                => BlockMatrix.Load<M,N,double>(mkl.gemm<M,K,N>(A.Unsized, B.Unsized));
+                => Matrix.blockload<M,N,double>(mkl.gemm<M,K,N>(A.Unsized, B.Unsized));
 
         /// <summary>
         /// Computes the matrix product X = AB
@@ -124,7 +124,7 @@ namespace Z0
             where S : unmanaged
         {
             var src = A.Unblocked;
-            var dstM = BlockMatrix.Alloc<N,T>();
+            var dstM = Matrix.blockalloc<N,T>();
             var dst = dstM.Unblocked;
             for(var i=0; i<dst.Length; i++)
                 dst[i] = f(src[i]);
@@ -138,7 +138,7 @@ namespace Z0
                 return A;
 
             var B = A.Replicate();
-            var X = BlockMatrix.Alloc<N,double>();
+            var X = Matrix.blockalloc<N,double>();
             mkl.gemm(A,B,ref X);
             if(exp == 2)
                 return X;

@@ -117,7 +117,7 @@ namespace Z0
 
             BitMatrix.unpack(A,ref Aup);
             BitMatrix.unpack(B,ref Bup);
-            IntMatrix.mul(Aup, Bup, ref Cup);
+            Matrix.mul(Aup, Bup, ref Cup);
             Cup.Apply(x => even(x) ? (byte)0 : (byte)1);
             Trace(C.Format());
             Trace(Cup.Format());

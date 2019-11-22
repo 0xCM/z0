@@ -119,8 +119,8 @@ namespace Z0
             var step = stats.StepSize;
             var cells = stats.CellCount;
 
-            var lhs = Random.BlockedSpan<T>(n, blocks);
-            var rhs = Random.BlockedSpan<T>(n, blocks);
+            var lhs = Random.Blocks<T>(n, blocks);
+            var rhs = Random.Blocks<T>(n, blocks);
             var dst = DataBlocks.alloc<T>(n, blocks);
             vblock.and(n, blocks, step, in lhs.Head, in rhs.Head, ref dst.Head);
             for(var i=0; i<cells; i++)
@@ -135,8 +135,8 @@ namespace Z0
             var step = stats.StepSize;
             var cells = stats.CellCount;
 
-            var lhs = Random.BlockedSpan<T>(n, blocks);
-            var rhs = Random.BlockedSpan<T>(n, blocks);
+            var lhs = Random.Blocks<T>(n, blocks);
+            var rhs = Random.Blocks<T>(n, blocks);
             var dst = DataBlocks.alloc<T>(n, blocks);
             vblock.and(n, blocks, step, in lhs.Head, in rhs.Head, ref dst.Head);
             for(var i=0; i<cells; i++)
@@ -149,8 +149,8 @@ namespace Z0
             var N = n128;
             for(var block = 0; block < SampleSize; block++)
             {
-                var srcX = Random.BlockedSpan<T>(N);
-                var srcY = Random.BlockedSpan<T>(N);
+                var srcX = Random.Blocks<T>(N);
+                var srcY = Random.Blocks<T>(N);
                 var vX = ginx.vload(N, in head(srcX));
                 var vY = ginx.vload(N, in head(srcY));
                 
@@ -169,8 +169,8 @@ namespace Z0
             var N = n256;
             for(var block = 0; block < SampleSize; block++)
             {
-                var srcX = Random.BlockedSpan<T>(N);
-                var srcY = Random.BlockedSpan<T>(N);
+                var srcX = Random.Blocks<T>(N);
+                var srcY = Random.Blocks<T>(N);
                 var vX = ginx.vload(N, in head(srcX));
                 var vY = ginx.vload(N, in head(srcY));
                 var dstExpect = DataBlocks.alloc<T>(N);

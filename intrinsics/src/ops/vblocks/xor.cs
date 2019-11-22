@@ -59,12 +59,21 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
+        public static void xor<T>(in ConstBlock128<T> xb, in ConstBlock128<T> yb, in Block128<T> zb)
+            where T : unmanaged
+        {
+            var count = zb.BlockCount;
+            for(var block=0; block< count; block++)
+                vstore(ginx.vxor(xb.LoadVector(block), yb.LoadVector(block)), ref zb.SeekBlock(block));                             
+        } 
+
+        [MethodImpl(Inline)]
         public static void xor<T>(in ConstBlock256<T> xb, in ConstBlock256<T> yb, in Block256<T> zb)
             where T : unmanaged
         {
             var count = zb.BlockCount;
             for(var block=0; block< count; block++)
-                vstore(ginx.vxor(xb.LoadVector(block), yb.LoadVector(block)), ref zb.BlockHead(block));                             
+                vstore(ginx.vxor(xb.LoadVector(block), yb.LoadVector(block)), ref zb.SeekBlock(block));                             
         } 
 
     }

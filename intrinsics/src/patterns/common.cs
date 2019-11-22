@@ -44,10 +44,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<T> vunits<T>(N128 n)
             where T : unmanaged
-        {            
-            var data = DataBlocks.alloc(n, gmath.one<T>());
-            return ginx.vload(n, in data.Head);
-        }
+                => DataPatterns.uints<T>(n);
 
         /// <summary>
         /// Returns a 256-bit vector where each component is assigned the value 1
@@ -57,10 +54,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<T> vunits<T>(N256 n)
             where T : unmanaged
-        {            
-            var data = DataBlocks.alloc(n, gmath.one<T>());
-            return ginx.vload(n, in data.Head);
-        }
+                => DataPatterns.uints<T>(n);
 
         /// <summary>
         /// Describes a shuffle mask that clears ever-other vector component

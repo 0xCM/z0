@@ -58,7 +58,7 @@ namespace Z0
         {
             var len = src.Length;
             require(len == max.Length);
-            var dst = Z0.BlockVector.Alloc<T>(len);
+            var dst = Z0.Vector.blockalloc<T>(len);
             for(var i=0; i<dst.Length; i++)
                 dst[i] = Contractors.Contract(src[i],max[i]);
             return dst;

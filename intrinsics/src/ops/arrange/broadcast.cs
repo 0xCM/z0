@@ -12,7 +12,6 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Avx2;
     
     using static zfunc;
-    using static As;
 
     partial class dinx
     {
@@ -167,6 +166,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static unsafe Vector256<ulong> vbroadcast(N256 n, ulong src)
             => BroadcastScalarToVector256(&src);
- 
     }
 }

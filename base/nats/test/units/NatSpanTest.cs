@@ -22,7 +22,7 @@ namespace Z0.Test
             
             var m = nati<N4>();
             var n = nati<N3>();
-            var src = Random.Span(n4, n5, closed(1,1000));
+            var src = Random.Grid(n4, n5, closed(1,1000));
             Claim.eq(src.Dim.I, m);
             Claim.eq(src.Dim.J, n);            
 

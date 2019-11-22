@@ -20,13 +20,13 @@ namespace Z0
         {
             var blocklen = Block128<T>.BlockLength;                     
             
-            var src = random.ReadOnlySpan128<T>(blocks);
+            var src = random.ConstBlocks<T>(n128,blocks);
             Claim.eq(blocks*blocklen,src.Length);
                         
-            var expect = Block128.alloc<T>(blocks);
+            var expect = DataBlocks.alloc<T>(n128,blocks);
             Claim.eq(blocks, expect.BlockCount);
 
-            var actual = Block128.alloc<T>(blocks);
+            var actual = DataBlocks.alloc<T>(n128,blocks);
             Claim.eq(blocks, actual.BlockCount);
 
             var tmp = new T[blocklen];
@@ -44,8 +44,8 @@ namespace Z0
 
                 Claim.eq(vExpect, vActual);
             
-                ginx.vstore(vExpect, ref expect.BlockHead(block));
-                ginx.vstore(vActual, ref actual.BlockHead(block));
+                ginx.vstore(vExpect, ref expect.SeekBlock(block));
+                ginx.vstore(vActual, ref actual.SeekBlock(block));
             }
             Claim.eq(expect, actual);
         }
@@ -55,7 +55,7 @@ namespace Z0
         {
             var blocklen = Block256<T>.BlockLength;                     
             
-            var src = random.ReadOnlySpan256<T>(blocks);
+            var src = random.ConstBlocks<T>(n256,blocks);
             Claim.eq(blocks*blocklen,src.Length);
                         
             var expect = Block256.alloc<T>(blocks);
@@ -79,8 +79,8 @@ namespace Z0
 
                 Claim.eq(vExpect, vActual);
             
-                ginx.vstore(vExpect, ref expect.BlockHead(block));
-                ginx.vstore(vActual, ref actual.BlockHead(block));
+                ginx.vstore(vExpect, ref expect.SeekBlock(block));
+                ginx.vstore(vActual, ref actual.SeekBlock(block));
             }
             Claim.eq(expect, actual);
         }
@@ -91,16 +91,16 @@ namespace Z0
         {
             var blocklen = Block128<T>.BlockLength;                     
             
-            var lhs = random.ReadOnlySpan128<T>(blocks);
+            var lhs = random.ConstBlocks<T>(n128,blocks);
             Claim.eq(blocks*blocklen,lhs.Length);
             
-            var rhs = random.ReadOnlySpan128<T>(blocks);
+            var rhs = random.ConstBlocks<T>(n128,blocks);
             Claim.eq(blocks*blocklen,rhs.Length);
             
-            var expect = Block128.alloc<T>(blocks);
+            var expect = DataBlocks.alloc<T>(n128,blocks);
             Claim.eq(blocks, expect.BlockCount);
 
-            var actual = Block128.alloc<T>(blocks);
+            var actual = DataBlocks.alloc<T>(n128,blocks);
             Claim.eq(blocks, actual.BlockCount);
 
             Span<T> tmp = stackalloc T[blocklen];
@@ -119,8 +119,8 @@ namespace Z0
 
                 Claim.eq(vExpect, vActual);
             
-                ginx.vstore(vExpect, ref expect.BlockHead(block));
-                ginx.vstore(vActual, ref actual.BlockHead(block));
+                ginx.vstore(vExpect, ref expect.SeekBlock(block));
+                ginx.vstore(vActual, ref actual.SeekBlock(block));
             }
             Claim.eq(expect, actual);
         }
@@ -131,10 +131,10 @@ namespace Z0
         {
             var blocklen = Block256<T>.BlockLength;                     
             
-            var lhs = random.ReadOnlySpan256<T>(blocks);
+            var lhs = random.ConstBlocks<T>(n256, blocks);
             Claim.eq(blocks*blocklen,lhs.Length);
             
-            var rhs = random.ReadOnlySpan256<T>(blocks);
+            var rhs = random.ConstBlocks<T>(n256,blocks);
             Claim.eq(blocks*blocklen,rhs.Length);
             
             var expect = Block256.alloc<T>(blocks);
@@ -159,8 +159,8 @@ namespace Z0
 
                 Claim.eq(vExpect, vActual);
             
-                ginx.vstore(vExpect, ref expect.BlockHead(block));
-                ginx.vstore(vActual, ref actual.BlockHead(block));
+                ginx.vstore(vExpect, ref expect.SeekBlock(block));
+                ginx.vstore(vActual, ref actual.SeekBlock(block));
             }
             Claim.eq(expect, actual);
         }

@@ -57,6 +57,24 @@ namespace Z0
                 negate(n, in skip(in a, offset), ref seek(ref z, offset));
         }
 
+        [MethodImpl(Inline)]
+        public static void negate<T>(in ConstBlock128<T> xb, in Block128<T> zb)
+            where T : unmanaged
+        {
+            var count = zb.BlockCount;
+            for(var block=0; block< count; block++)
+                vstore(ginx.vnegate(xb.LoadVector(block)), ref zb.SeekBlock(block));                             
+        } 
+
+        [MethodImpl(Inline)]
+        public static void negate<T>(in ConstBlock256<T> xb, in Block256<T> zb)
+            where T : unmanaged
+        {
+            var count = zb.BlockCount;
+            for(var block=0; block< count; block++)
+                vstore(ginx.vnegate(xb.LoadVector(block)), ref zb.SeekBlock(block));                             
+        } 
+
     }
 
 }

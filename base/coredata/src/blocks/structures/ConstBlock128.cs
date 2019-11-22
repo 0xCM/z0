@@ -23,34 +23,9 @@ namespace Z0
         /// </summary>
         public static int BlockLength => Block128<T>.BlockLength;
 
-        /// <summary>
-        /// The size, in bytes, of a block 
-        /// </summary>
-        /// <typeparam name="T">The primitive type</typeparam>
-        /// <remarks>Should always be 16 irrespective of the cell type</remarks>
-        public static int BlockSize => Block128<T>.BlockSize;
-
-        /// <summary>
-        /// The size, in bytes, of a constituent block cell
-        /// </summary>
-        /// <typeparam name="T">The primitive type</typeparam>
-        public static int CellSize => Block128<T>.CellSize;
-
         [MethodImpl(Inline)]
         public static implicit operator ReadOnlySpan<T>(in ConstBlock128<T> src)
             => src.data;
-
-        [MethodImpl(Inline)]
-        public static explicit operator ConstBlock128<T>(Span<T> src)
-            => new ConstBlock128<T>(src);
-
-        [MethodImpl(Inline)]
-        public static explicit operator ConstBlock128<T>(ReadOnlySpan<T> src)
-            => new ConstBlock128<T>(src);
-
-        [MethodImpl(Inline)]
-        public static implicit operator ConstBlock128<T> (T[] src)
-            => new ConstBlock128<T>(src);
 
         [MethodImpl(Inline)]
         public static bool operator == (in ConstBlock128<T> lhs, in ConstBlock128<T> rhs)
@@ -60,12 +35,6 @@ namespace Z0
         public static bool operator != (in ConstBlock128<T> lhs, in ConstBlock128<T> rhs)
             => lhs.data != rhs.data;
     
-
-        [MethodImpl(Inline)]
-        public static ConstBlock128<T> Load(in Block128<T> src)
-            => new ConstBlock128<T>(src);
-
-
         [MethodImpl(Inline)]
         internal ConstBlock128(ReadOnlySpan<T> src)
         {
@@ -75,20 +44,7 @@ namespace Z0
         [MethodImpl(Inline)]
         internal ConstBlock128(in Block128<T> src)
         {
-            data = src.ReadOnly();
-        }
-
-        [MethodImpl(Inline)]
-        ConstBlock128(T[] src)
-        {
-            data = src;
-        }        
-        
-
-        [MethodImpl(Inline)]
-        ConstBlock128(Span<T> src)
-        {
-            this.data = src;
+            data = src.Data;
         }
 
         public ReadOnlySpan<T> Data
@@ -128,7 +84,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public ref readonly T Block(int blockIndex)
+        public ref readonly T SeekBlock(int blockIndex)
             => ref Unsafe.Add(ref Head, blockIndex*BlockLength);
 
         [MethodImpl(Inline)]
@@ -138,16 +94,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public ReadOnlySpan<T> Slice(int start, int length)
             => data.Slice(start,length);
-
-        [MethodImpl(Inline)]
-        public ConstBlock128<T> SliceBlock(int blockIndex)
-            => new ConstBlock128<T>(data.Slice(blockIndex * BlockLength, BlockLength));
-
-        [MethodImpl(Inline)]
-        public ConstBlock128<T> SliceBlocks(int blockIndex, int blockCount)
-            => (ConstBlock128<T>)Slice(blockIndex * BlockLength, blockCount * BlockLength );
             
-
         [MethodImpl(Inline)]
         public Span<T> ToSpan()
             => new Span<T>(data.ToArray());
@@ -165,25 +112,25 @@ namespace Z0
             => ref data.GetPinnableReference();
 
         [MethodImpl(Inline)]
-        public void CopyTo (Span<T> dst)
+        public void CopyTo(Span<T> dst)
             => data.CopyTo(dst);
 
         [MethodImpl(Inline)]
-        public bool TryCopyTo (Span<T> dst)
+        public bool TryCopyTo(Span<T> dst)
             => data.TryCopyTo(dst);
                 
         [MethodImpl(Inline)]
         public ConstBlock128<S> As<S>()                
             where S : unmanaged
-                => (ConstBlock128<S>)MemoryMarshal.Cast<T,S>(data);                    
+                => new ConstBlock128<S>(MemoryMarshal.Cast<T,S>(data));                    
  
         public override string ToString() 
             => data.ToString();
 
-       public override bool Equals(object rhs) 
+        public override bool Equals(object rhs) 
             => throw new NotSupportedException();
 
-       public override int GetHashCode() 
+        public override int GetHashCode() 
             => throw new NotSupportedException();        
     }
 }

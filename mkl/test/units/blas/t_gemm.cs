@@ -135,11 +135,11 @@ namespace Z0.Mkl.Test
             where T : unmanaged
 
         {
-            var A = BlockMatrix.Alloc<M,K,T>();
-            var B = BlockMatrix.Alloc<K,N,T>();
-            var X = BlockMatrix.Alloc<M,N,T>();
+            var A = Matrix.blockalloc<M,K,T>();
+            var B = Matrix.blockalloc<K,N,T>();
+            var X = Matrix.blockalloc<M,N,T>();
             var XU = X.Unblocked;
-            var E = BlockMatrix.Alloc<M,N,T>();
+            var E = Matrix.blockalloc<M,N,T>();
             var EU = E.Unblocked;
             var collect = false;
             var label = $"gemm<N{nati<M>()},N{nati<K>()},N{nati<N>()},{typeof(T).Name}>";
@@ -153,7 +153,7 @@ namespace Z0.Mkl.Test
                 mkl.gemm(A, B, ref X);            
                 runtime += snapshot(sw);
                 
-                MatMulRef.Mul(A, B, ref E);
+                Matrix.mul(A, B, ref E);
 
                 if(trace)       
                 {
@@ -187,10 +187,10 @@ namespace Z0.Mkl.Test
             where N : unmanaged, ITypeNat
 
         {
-            var A = BlockMatrix.Alloc<M,K,float>();
-            var B = BlockMatrix.Alloc<K,N,float>();
-            var X = BlockMatrix.Alloc<M,N,float>();
-            var E = BlockMatrix.Alloc<M,N,float>();
+            var A = Matrix.blockalloc<M,K,float>();
+            var B = Matrix.blockalloc<K,N,float>();
+            var X = Matrix.blockalloc<M,N,float>();
+            var E = Matrix.blockalloc<M,N,float>();
             var collect = false;
         
             var runtime = Duration.Zero;
@@ -221,10 +221,10 @@ namespace Z0.Mkl.Test
             where N : unmanaged, ITypeNat
 
         {
-            var A = BlockMatrix.Alloc<M,K,double>();
-            var B = BlockMatrix.Alloc<K,N,double>();
-            var X = BlockMatrix.Alloc<M,N,double>();
-            var E = BlockMatrix.Alloc<M,N,double>();
+            var A = Matrix.blockalloc<M,K,double>();
+            var B = Matrix.blockalloc<K,N,double>();
+            var X = Matrix.blockalloc<M,N,double>();
+            var E = Matrix.blockalloc<M,N,double>();
             var collect = false;
         
             var runtime = Duration.Zero;
@@ -254,10 +254,10 @@ namespace Z0.Mkl.Test
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
         {
-            var A = BlockMatrix.Alloc<M,N,double>();
-            var x = BlockVector.Alloc<N,double>();
-            var y = BlockVector.Alloc<M,double>();
-            var z = BlockVector.Alloc<M,double>();
+            var A = Matrix.blockalloc<M,N,double>();
+            var x = Vector.blockalloc<N,double>();
+            var y = Vector.blockalloc<M,double>();
+            var z = Vector.blockalloc<M,double>();
             var sw = stopwatch(false);
 
             for(var i=0; i<cycles; i++)
@@ -364,7 +364,7 @@ namespace Z0.Mkl.Test
             var m = n5;
             var m1 = Random.BlockMatrix(domain, m, n);
             var m2 = Random.BlockMatrix(domain, m, n);
-            var m3 = BlockMatrix.Alloc(m,n,0);
+            var m3 = Matrix.blockalloc(m,n,0);
             var m4 = mkl.gemm(m1,m2,ref m3);
         }
     }

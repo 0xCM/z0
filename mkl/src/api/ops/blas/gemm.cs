@@ -117,7 +117,7 @@ namespace Z0.Mkl
             var lda = k;
             var ldb = n;
             var ldx = n;
-            var X = BlockMatrix.Alloc<M,N,float>();
+            var X = Matrix.blockalloc<M,N,float>();
             CBLAS.cblas_sgemm(RowMajor, NoTranspose, NoTranspose, m, n, k, 1.0f, ref head(A), lda, ref head(B), ldb, 0, ref head(X), ldx);
             return X;
         }    
@@ -141,7 +141,7 @@ namespace Z0.Mkl
             var lda = k;
             var ldb = n;
             var ldx = n;
-            var X = BlockMatrix.Alloc<M,N,double>();
+            var X = Matrix.blockalloc<M,N,double>();
             CBLAS.cblas_dgemm(RowMajor, NoTranspose, NoTranspose, m, n, k, 1.0f, ref head(A), lda, ref head(B), ldb, 0, ref head(X), ldx);
             return X;
         }    

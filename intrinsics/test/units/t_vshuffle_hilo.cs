@@ -13,7 +13,7 @@ namespace Z0
     using static zfunc;
     using static nfunc;
 
-    public class t_vshuffle : IntrinsicTest<t_vshuffle>
+    public class t_vshuffle_hilo : IntrinsicTest<t_vshuffle_hilo>
     {
         const byte A = 0b00;
         
@@ -53,6 +53,9 @@ namespace Z0
 
             var xACBD = dinx.vpermhi4x16(x, Perm4.ACBD);
             Claim.eq(xACBD, Vector128.Create(xs[A], xs[B], xs[C], xs[D], xs[A + 4], xs[C + 4], xs[B + 4], xs[D + 4]));            
+
+            Claim.eq(dinx.vpermhi4x16(dinx.vparts(n128, 0,1,2,3,6,7,8,9), Perm4.ADCB), dinx.vparts(n128,0,1,2,3,6,9,8,7));
+
         }
 
         public void shuffle_lo_128x16u_check()
@@ -69,7 +72,9 @@ namespace Z0
 
             var xACBD = dinx.vpermlo4x16(x, Perm4.ACBD);
             Claim.eq(xACBD, Vector128.Create(xs[A], xs[C], xs[B], xs[D], xs[A + 4], xs[B + 4], xs[C + 4], xs[D + 4]));
-            
+
+            Claim.eq(dinx.vpermlo4x16(dinx.vparts(n128, 0,1,2,3,6,7,8,9), Perm4.ADCB), dinx.vparts(n128, 0,3,2,1,6,7,8,9));           
         }
+
     }
 }

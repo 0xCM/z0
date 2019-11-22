@@ -5,12 +5,9 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     
     using static zfunc;
-    using static nfunc;
 
     /// <summary>
     /// Defines Modular matrix operations
@@ -27,7 +24,7 @@ namespace Z0
         /// <param name="v">The vector to be transformed</param>
         /// <param name="u">The transformed vector</param>
         /// <param name="m">The modulus</param>
-        public static ref Vector<N,uint> MVMul<N>(in Matrix<N,uint> A, in Vector<N,uint> v, uint m, ref Vector<N,uint> u) 
+        public static ref Vector<N,uint> mvmul<N>(in Matrix<N,uint> A, in Vector<N,uint> v, uint m, ref Vector<N,uint> u) 
             where N : unmanaged, ITypeNat
         {
             //var x = new uint[v.Length];
@@ -49,7 +46,7 @@ namespace Z0
         /// <param name="v">The vector to be transformed</param>
         /// <param name="u">The transformed vector</param>
         /// <param name="m">The modulus</param>
-        public static ref Vector<N,ulong> MVMul<N>(in Matrix<N,ulong> A, in Vector<N,ulong> v, ulong m, ref Vector<N,ulong> u) 
+        public static ref Vector<N,ulong> mvmul<N>(in Matrix<N,ulong> A, in Vector<N,ulong> v, ulong m, ref Vector<N,ulong> u) 
             where N : unmanaged, ITypeNat
         {
             //var x = new ulong[v.Length];
@@ -73,7 +70,7 @@ namespace Z0
         /// <param name="v">The vector to be transformed</param>
         /// <param name="u">The transformed vector</param>
         /// <param name="m">The modulus</param>
-        public static ref Vector<N,double> MVMul<N>(in Matrix<N,double> A, in Vector<N,double> v, double m, ref Vector<N,double> u) 
+        public static ref Vector<N,double> mvmul<N>(in Matrix<N,double> A, in Vector<N,double> v, double m, ref Vector<N,double> u) 
             where N : unmanaged, ITypeNat
         {
             var x = new double[u.Length];
@@ -95,7 +92,7 @@ namespace Z0
         /// <param name="C">The target matrix</param>
         /// <param name="m">The modulus</param>
         /// <typeparam name="N">The matrix order type</typeparam>
-        public static ref Matrix<N,uint> Mul<N>(in Matrix<N,uint> A, in Matrix<N,uint> B, uint m, ref Matrix<N,uint> C) 
+        public static ref Matrix<N,uint> mul<N>(in Matrix<N,uint> A, in Matrix<N,uint> B, uint m, ref Matrix<N,uint> C) 
             where N: unmanaged, ITypeNat
         {
             var rc = C.RowCount;
@@ -108,7 +105,7 @@ namespace Z0
                 for (var j = 0; j < rc;  ++j)
                     v[j] = B[j,i];
                 
-                MVMul(A, v, m, ref v);
+                mvmul(A, v, m, ref v);
                 
                 for (var j = 0; j < rc;  ++j)
                     W[j,i] = v[j];
@@ -128,7 +125,7 @@ namespace Z0
         /// <param name="B">The right matrix</param>
         /// <param name="C">The result matrix</param>
         /// <param name="m">The modulus</param>
-        public static ref Matrix<N,ulong> Mul<N>(in Matrix<N,ulong> A, in Matrix<N,ulong> B, ulong m, ref Matrix<N,ulong> C) 
+        public static ref Matrix<N,ulong> mul<N>(in Matrix<N,ulong> A, in Matrix<N,ulong> B, ulong m, ref Matrix<N,ulong> C) 
             where N: unmanaged, ITypeNat
         {
             var rc = C.RowCount;
@@ -142,7 +139,7 @@ namespace Z0
                 for (var j = 0; j < rc;  ++j)
                     v[j] = B[j,i];
                 
-                MVMul(A, v, m, ref v);
+                mvmul(A, v, m, ref v);
                 
                 for (var j = 0; j < rc;  ++j)
                     W[j,i] = v[j];
@@ -161,7 +158,7 @@ namespace Z0
         /// <param name="B">The right matrix</param>
         /// <param name="C">The result matrix</param>
         /// <param name="m">The modulus</param>
-        public static ref Matrix<N,double> Mul<N>(in Matrix<N,double> A, in Matrix<N,double> B, double m, ref Matrix<N,double> C) 
+        public static ref Matrix<N,double> mul<N>(in Matrix<N,double> A, in Matrix<N,double> B, double m, ref Matrix<N,double> C) 
             where N : unmanaged, ITypeNat
         {
             int r = C.RowCount;
@@ -173,7 +170,7 @@ namespace Z0
                 for (var j = 0; j < r;  ++j)
                     V[j] = B[j,i];
 
-                MVMul<N>(A, V, m, ref V);
+                mvmul<N>(A, V, m, ref V);
             
                 for (var j = 0; j < r; ++j)
                     W[j,i] = V[j];
@@ -193,7 +190,7 @@ namespace Z0
         /// <param name="e">The exponent</param>
         /// <param name="m">The modulus</param>
         /// <param name="B">The result matrix</param>
-        public static ref Matrix<N,uint> Pow<N>(in Matrix<N,uint> A, uint e, uint m, ref Matrix<N,uint> B) 
+        public static ref Matrix<N,uint> pow<N>(in Matrix<N,uint> A, uint e, uint m, ref Matrix<N,uint> B) 
             where N : unmanaged, ITypeNat
         {
             
@@ -216,9 +213,9 @@ namespace Z0
             while (exp > 0) 
             {
                 if ((exp % 2)==1)
-                    Mul (W, B, m, ref B);
+                    mul (W, B, m, ref B);
             
-                Mul (W, W, m, ref W);
+                mul (W, W, m, ref W);
                 exp /= 2;
             }
             return ref B;
@@ -231,7 +228,7 @@ namespace Z0
         /// <param name="e">The exponent</param>
         /// <param name="m">The modulus</param>
         /// <param name="B">The result matrix</param>
-        public static ref Matrix<N,ulong> Pow<N>(in Matrix<N,ulong> A, uint e, ulong m, ref Matrix<N,ulong> B) 
+        public static ref Matrix<N,ulong> pow<N>(in Matrix<N,ulong> A, uint e, ulong m, ref Matrix<N,ulong> B) 
             where N : unmanaged, ITypeNat
         {
             
@@ -254,9 +251,9 @@ namespace Z0
             while (exp > 0) 
             {
                 if ((exp % 2)==1)
-                    Mul (W, B, m, ref B);
+                    mul (W, B, m, ref B);
             
-                Mul (W, W, m, ref W);
+                mul (W, W, m, ref W);
                 exp /= 2;
             }
             return ref B;
@@ -269,7 +266,7 @@ namespace Z0
         /// <param name="e">The exponent</param>
         /// <param name="m">The modulus</param>
         /// <param name="B">The result matrix</param>
-        public static ref Matrix<N,double> Pow<N>(in Matrix<N,double> A, uint e, double m, ref Matrix<N,double> B) 
+        public static ref Matrix<N,double> pow<N>(in Matrix<N,double> A, uint e, double m, ref Matrix<N,double> B) 
             where N : unmanaged, ITypeNat
         {
             int i, j;
@@ -294,9 +291,9 @@ namespace Z0
             while (n > 0) 
             {
                 if ((n % 2)==1)
-                    Mul<N>(W, B, m, ref B);
+                    mul<N>(W, B, m, ref B);
             
-                Mul<N>(W, W,m, ref W);
+                mul<N>(W, W,m, ref W);
                 n /= 2;
             }
             return ref B;
@@ -309,7 +306,7 @@ namespace Z0
         /// <param name="e">The base-2 log of the exponent</param>
         /// <param name="m">The modulus</param>
         /// <param name="B">The result matrix</param>
-        public static ref Matrix<N,uint> Pow2<N>(in Matrix<N,uint> A, uint e, uint m, ref Matrix<N,uint> B) 
+        public static ref Matrix<N,uint> pow2<N>(in Matrix<N,uint> A, uint e, uint m, ref Matrix<N,uint> B) 
             where N : unmanaged, ITypeNat
         {            
             /* initialize: B = A */
@@ -323,7 +320,7 @@ namespace Z0
 
             /* Compute B = A^{2^e} */
             for (var i = 0; i < e; i++)
-                Mul(B, B, m, ref B);
+                mul(B, B, m, ref B);
         
             return ref B;
         }
@@ -335,7 +332,7 @@ namespace Z0
         /// <param name="e">The base-2 log of the exponent</param>
         /// <param name="m">The modulus</param>
         /// <param name="B">The result matrix</param>
-        public static ref Matrix<N,ulong> Pow2<N>(in Matrix<N,ulong> A, uint e, ulong m, ref Matrix<N,ulong> B) 
+        public static ref Matrix<N,ulong> pow2<N>(in Matrix<N,ulong> A, uint e, ulong m, ref Matrix<N,ulong> B) 
             where N : unmanaged, ITypeNat
         {            
             /* initialize: B = A */
@@ -349,7 +346,7 @@ namespace Z0
 
             /* Compute B = A^{2^e} */
             for (var i = 0ul; i < e; i++)
-                Mul(B, B, m, ref B);
+                mul(B, B, m, ref B);
 
             return ref B;
         }
@@ -361,7 +358,7 @@ namespace Z0
         /// <param name="e">The base-2 log of the exponent</param>
         /// <param name="m">The modulus</param>
         /// <param name="B">The result matrix</param>
-        public static ref Matrix<N,double> Pow2<N>(in Matrix<N,double> A, uint e, double m, ref Matrix<N,double> B) 
+        public static ref Matrix<N,double> pow2<N>(in Matrix<N,double> A, uint e, double m, ref Matrix<N,double> B) 
             where N : unmanaged, ITypeNat
         {
             /* initialize: B = A */
@@ -375,7 +372,7 @@ namespace Z0
 
             /* Compute B = A^{2^e} */
             for (var i = 0; i < e; i++)
-                Mul<N>(B, B, m, ref B);
+                mul<N>(B, B, m, ref B);
             return ref B;
         }
     }

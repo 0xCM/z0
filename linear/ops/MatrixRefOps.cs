@@ -68,7 +68,7 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where T : unmanaged
         {
-            var X = BlockMatrix.Alloc<M,N,T>();
+            var X = Matrix.blockalloc<M,N,T>();
             Mul(A,B, ref X);
             return X;
         }

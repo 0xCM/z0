@@ -26,6 +26,13 @@ namespace Z0
         /// </summary>
         public static int BlockLength => blocklen<T>(N);
 
+        /// <summary>
+        /// The size, in bytes, of a block 
+        /// </summary>
+        /// <typeparam name="T">The primitive type</typeparam>
+        /// <remarks>Should always be 8 irrespective of the cell type</remarks>
+        public static int BlockSize =>  Unsafe.SizeOf<T>() * BlockLength; 
+
         [MethodImpl(Inline)]
         public static implicit operator Span<T>(in Block64<T> src)
             => src.data;
@@ -35,8 +42,8 @@ namespace Z0
             => src.ReadOnly();
 
         [MethodImpl(Inline)]
-        public static implicit operator ConstBlock64<T> (in Block64<T> src)
-            => src.ReadOnly();
+        public static implicit operator ConstBlock64<T>(in Block64<T> src)
+            => new ConstBlock64<T>(src);
 
         [MethodImpl(Inline)]
         public static bool operator == (in Block64<T> lhs, in Block64<T> rhs)
@@ -118,16 +125,8 @@ namespace Z0
         /// </summary>
         /// <param name="blockIndex">The block index, a number in the range 0..k-1 where k is the total number of covered blocks</param>
         [MethodImpl(Inline)]
-        public ref T BlockHead(int blockIndex)
+        public ref T SeekBlock(int blockIndex)
             => ref Unsafe.Add(ref Head, blockIndex*BlockLength); 
-
-        [MethodImpl(Inline)]
-        public Block64<T> Block(int blockIndex)
-            => new Block64<T>(data.Slice(blockIndex * BlockLength, BlockLength));
-
-        [MethodImpl(Inline)]
-        public Block64<T> Blocks(int blockIndex, int blockCount)
-            => new Block64<T>(Slice(blockIndex * BlockLength, blockCount * BlockLength ));
 
         [MethodImpl(Inline)]
         public Span<T> Slice(int offset)
@@ -135,11 +134,7 @@ namespace Z0
             
         [MethodImpl(Inline)]
         public Span<T> Slice(int offset, int length)
-            => data.Slice(offset,length);
-            
-        [MethodImpl(Inline)]
-        public ConstBlock64<T> ReadOnly()
-            => ConstBlock64<T>.Load(this);
+            => data.Slice(offset,length);            
 
         [MethodImpl(Inline)]
         public T[] ToArray()
@@ -158,7 +153,7 @@ namespace Z0
             => ref data.GetPinnableReference();
 
         [MethodImpl(Inline)]
-        public void CopyTo (Span<T> dst)
+        public void CopyTo(Span<T> dst)
             => data.CopyTo(dst);
 
         [MethodImpl(Inline)]

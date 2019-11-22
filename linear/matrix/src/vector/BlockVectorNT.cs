@@ -5,20 +5,17 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Collections;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
     
     using static nfunc;
     using static zfunc;
 
-    public ref struct BlockVector<N,T>
+    public readonly ref struct BlockVector<N,T>
         where N : unmanaged, ITypeNat
         where T : unmanaged    
     {
-        Block256<T> data;
+        readonly Block256<T> data;
 
         static readonly N NatRep = new N();
 
@@ -178,7 +175,7 @@ namespace Z0
         public BlockVector<N,U> Map<U>(Func<T,U> f)
             where U:unmanaged
         {
-            var dst = BlockVector.Alloc<N,U>();
+            var dst = Vector.blockalloc<N,U>();
             return Map(f, ref dst);
         }
 

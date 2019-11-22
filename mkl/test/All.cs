@@ -231,12 +231,12 @@ namespace Z0.Mkl
             var srcA = span<double>(count);
             for(var i=1; i<= count; i++)
                 srcA[i-1] = i;
-            var a = BlockMatrix.Load<M,N,double>(srcA);
+            var a = Matrix.blockload<M,N,double>(srcA);
 
             var srcB = span<double>(m*n);
             for(var i=1; i<= count; i++)
                 srcB[i-1] = i;
-            var b = BlockMatrix.Load<N,M,double>(srcB);
+            var b = Matrix.blockload<N,M,double>(srcB);
 
             (var timer, var startMsg) = input(
                 nameof(a), a.Format(), 

@@ -30,11 +30,6 @@ namespace Z0
             => src.data;
 
         [MethodImpl(Inline)]
-        public static implicit operator ConstBlock64<T>(in Block64<T> src)
-            => new ConstBlock64<T>(src);
-
-
-        [MethodImpl(Inline)]
         public static bool operator == (in ConstBlock64<T> lhs, in ConstBlock64<T> rhs)
             => lhs.data == rhs.data;
 
@@ -42,14 +37,6 @@ namespace Z0
         public static bool operator != (in ConstBlock64<T> lhs, in ConstBlock64<T> rhs)
             => lhs.data != rhs.data;
         
-        [MethodImpl(Inline)]
-        public static bool aligned(int length)
-            => Block64<T>.Aligned(length);
-
-        [MethodImpl(Inline)]
-        public static ConstBlock64<T> Load(in Block64<T> src)
-            => new ConstBlock64<T>(src);
-
         [MethodImpl(Inline)]
         internal ConstBlock64(ReadOnlySpan<T> src)
         {
@@ -99,8 +86,8 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public ref readonly T Block(int blockIndex)
-            => ref  Unsafe.Add(ref Unsafe.AsRef(in Head), blockIndex*BlockLength);  
+        public ref readonly T SeekBlock(int blockIndex)
+            => ref Unsafe.Add(ref Unsafe.AsRef(in Head), blockIndex*BlockLength);  
 
         [MethodImpl(Inline)]
         public ReadOnlySpan<T> Slice(int start)
@@ -111,16 +98,8 @@ namespace Z0
             => data.Slice(start,length);
 
         [MethodImpl(Inline)]
-        public ConstBlock64<T> SliceBlock(int blockIndex)
-            => new ConstBlock64<T>(data.Slice(blockIndex * BlockLength, BlockLength));
-
-        [MethodImpl(Inline)]
-        public ConstBlock64<T> SliceBlocks(int blockIndex, int blockCount)
-            => new ConstBlock64<T>(Slice(blockIndex * BlockLength, blockCount * BlockLength));
-            
-        [MethodImpl(Inline)]
         public Span<T> ToSpan()
-            => new Span<T>(data.ToArray());
+            => data.ToSpan();
 
         [MethodImpl(Inline)]
         public T[] ToArray()
@@ -135,23 +114,22 @@ namespace Z0
             => ref data.GetPinnableReference();
 
         [MethodImpl(Inline)]
-        public void CopyTo (Span<T> dst)
+        public void CopyTo(Span<T> dst)
             => data.CopyTo(dst);
 
         [MethodImpl(Inline)]
-        public bool TryCopyTo (Span<T> dst)
+        public bool TryCopyTo(Span<T> dst)
             => data.TryCopyTo(dst);
                 
         [MethodImpl(Inline)]
         public ConstBlock64<S> As<S>()                
             where S : unmanaged
                 => new ConstBlock64<S>(MemoryMarshal.Cast<T,S>(data));                    
-
             
         public override string ToString() 
             => data.ToString();
 
-       public override bool Equals(object rhs) 
+        public override bool Equals(object rhs) 
             => throw new NotSupportedException();
 
        public override int GetHashCode() 

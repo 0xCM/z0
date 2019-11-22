@@ -481,20 +481,6 @@ namespace Z0
                 => src.Unsized.FormatHex(bracket, sep, specifier);
 
         /// <summary>
-        /// Formats a bitspan of natural length and integral type as a sequence of hex values
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <param name="bracket">Whether to enclose the formatted hex within brackets</param>
-        /// <param name="sep">The character to use when separating digits</param>
-        /// <param name="specifier">Whether to prefix each number with the canonical hex specifier, "0x"</param>
-        /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline)]
-        public static string FormatHex<N,T>(this BitBlock<N,T> src, bool bracket = false, char? sep = null, bool specifier = false)
-            where N : unmanaged, ITypeNat<N>
-            where T : unmanaged
-                => src.Data.FormatHex(bracket, sep, specifier);
-
-        /// <summary>
         /// Formats cpu vector components of integral type as a sequence of hex values
         /// </summary>
         /// <param name="src">The source vector</param>

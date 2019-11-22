@@ -21,7 +21,7 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where T : unmanaged    
         {
-            inxspan.or(x.Data,y.Data,dst.Data);
+            vblock.or(x.Data,y.Data,dst.Data);
             return ref dst;
         }
 
@@ -30,7 +30,7 @@ namespace Z0
             where T : unmanaged
         {
             var dst = lhs.Replicate(true);
-            inxspan.or(lhs.Data, rhs.Data, dst.Data);
+            vblock.or(lhs.Data, rhs.Data, dst.Data);
             return dst;
         }
 

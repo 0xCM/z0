@@ -31,6 +31,38 @@ namespace Z0
                 throw unsupported<T>();
         }
 
+        [MethodImpl(Inline)]
+        public static Vector128<T> uints<T>(N128 n)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(byte) || typeof(T) == typeof(sbyte))
+                return ginx.vload<T>(n,Units_128x8u);
+            else if(typeof(T) == typeof(ushort) || typeof(T) == typeof(short))
+                return ginx.vload<T>(n,Units_128x16u);
+            else if(typeof(T) == typeof(uint) || typeof(T) == typeof(int))
+                return ginx.vload<T>(n,Units_128x32u);
+            else if(typeof(T) == typeof(ulong) || typeof(T) == typeof(long))
+                return ginx.vload<T>(n,Units_128x64u);
+            else
+                throw unsupported<T>();
+        }
+
+        [MethodImpl(Inline)]
+        public static Vector256<T> uints<T>(N256 n)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(byte) || typeof(T) == typeof(sbyte))
+                return ginx.vload<T>(n,Units_256x8u);
+            else if(typeof(T) == typeof(ushort) || typeof(T) == typeof(short))
+                return ginx.vload<T>(n,Units_256x16u);
+            else if(typeof(T) == typeof(uint) || typeof(T) == typeof(int))
+                return ginx.vload<T>(n,Units_256x32u);
+            else if(typeof(T) == typeof(ulong) || typeof(T) == typeof(long))
+                return ginx.vload<T>(n,Units_256x64u);
+            else
+                throw unsupported<T>();
+        }
+
 
         [MethodImpl(Inline)]
         public static Vector256<T> increments<T>(N256 n)
@@ -438,5 +470,43 @@ namespace Z0
                 FF,FF,FF,FF,FF,FF,FF,FF,
                 0,0,0,0,0,0,0,0,  
             };
+
+        static ReadOnlySpan<byte> Units_128x8u
+            => new byte[16]{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1};
+
+        static ReadOnlySpan<byte> Units_128x16u
+            => new byte[16]{1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0};
+
+        static ReadOnlySpan<byte> Units_128x32u
+            => new byte[16]{1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0};
+
+        static ReadOnlySpan<byte> Units_128x64u
+            => new byte[16]{1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0};
+
+       static ReadOnlySpan<byte> Units_256x8u
+            => new byte[32]{
+                1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+                1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
+                };
+
+        static ReadOnlySpan<byte> Units_256x16u
+            => new byte[32]{
+                1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,
+                1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0
+                };
+
+
+        static ReadOnlySpan<byte> Units_256x32u
+            => new byte[32]{
+                1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,
+                1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0
+                };
+
+        static ReadOnlySpan<byte> Units_256x64u
+            => new byte[32]{
+                1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,
+                1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0
+                };
+
     }
 }

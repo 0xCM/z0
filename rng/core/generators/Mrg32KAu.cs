@@ -78,14 +78,14 @@ namespace Z0
             for(int i = 0; i < 3; i++)
                 vv[i] = v[i];
 
-            MatMod.MVMul(in A, in vv, m1, ref vv);
+            MatMod.mvmul(in A, in vv, m1, ref vv);
             for(int i = 0; i < 3; i++)
                 v[i] = vv[i];
 
             for(int i = 0; i < 3; i++)
                 vv[i] = v[i + 3];
 
-            MatMod.MVMul(in B, in vv, m2, ref vv);
+            MatMod.mvmul(in B, in vv, m2, ref vv);
             for(int i = 0; i < 3; i++)
                 v[i + 3] = vv[i];
         }

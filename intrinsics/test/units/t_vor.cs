@@ -116,8 +116,8 @@ namespace Z0
             var step = stats.StepSize;
             var cells = stats.CellCount;
 
-            var lhs = Random.BlockedSpan<T>(n, blocks);
-            var rhs = Random.BlockedSpan<T>(n, blocks);
+            var lhs = Random.Blocks<T>(n, blocks);
+            var rhs = Random.Blocks<T>(n, blocks);
             var dst = DataBlocks.alloc<T>(n, blocks);
             
             vblock.or(n, blocks, step, in lhs.Head, in rhs.Head, ref dst.Head);
@@ -135,8 +135,8 @@ namespace Z0
             var step = stats.StepSize;
             var cells = stats.CellCount;
 
-            var lhs = Random.BlockedSpan<T>(n, blocks);
-            var rhs = Random.BlockedSpan<T>(n, blocks);
+            var lhs = Random.Blocks<T>(n, blocks);
+            var rhs = Random.Blocks<T>(n, blocks);
             var dst = DataBlocks.alloc<T>(n, blocks);
             
             vblock.or(n, blocks, step, in lhs.Head, in rhs.Head, ref dst.Head);
@@ -149,8 +149,8 @@ namespace Z0
         {
             for(var block = 0; block < SampleSize; block++)
             {
-                var srcX = Random.BlockedSpan<T>(n);
-                var srcY = Random.BlockedSpan<T>(n);
+                var srcX = Random.Blocks<T>(n);
+                var srcY = Random.Blocks<T>(n);
                 var vX = srcX.TakeVector();
                 var vY = srcY.TakeVector();
                 
@@ -169,8 +169,8 @@ namespace Z0
         {            
             for(var block = 0; block < SampleSize; block++)
             {
-                var srcX = Random.BlockedSpan<T>(n);
-                var srcY = Random.BlockedSpan<T>(n);
+                var srcX = Random.Blocks<T>(n);
+                var srcY = Random.Blocks<T>(n);
                 var vX = srcX.TakeVector();
                 var vY = srcY.TakeVector();
 

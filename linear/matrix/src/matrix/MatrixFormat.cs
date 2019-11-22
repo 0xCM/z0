@@ -5,11 +5,9 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Collections;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     using System.Text;
+
     using static nfunc;
     using static zfunc;
 
@@ -19,7 +17,7 @@ namespace Z0
             where M: unmanaged, ITypeNat
             where N: unmanaged, ITypeNat
             where T : unmanaged    
-                => Matrix.load<M,N,T>(src.Unblocked.ToArray());
+                => Matrix.load<M,N,T>(src.Unblocked);
 
         public static string Format<M,N,T>(this BlockMatrix<M,N,T> src, int? cellwidth = null, char? cellsep = null, Func<T,string> render = null)
             where M : unmanaged, ITypeNat
@@ -28,8 +26,8 @@ namespace Z0
         {
             var sep = cellsep ?? '|';
             var width = cellwidth ?? 3;
-            var rows = nati<M>();
-            var cols = nati<N>();
+            var rows = natval<M>();
+            var cols = natval<N>();
             var sb = new StringBuilder();                        
             for(var row = 0; row < rows; row++)
             {
@@ -53,8 +51,8 @@ namespace Z0
         {
             var sep = cellsep ?? '|';
             var width = cellwidth ?? 3;
-            var rows = nati<M>();
-            var cols = nati<N>();
+            var rows = natval<M>();
+            var cols = natval<N>();
             var sb = new StringBuilder();                        
             for(var row = 0; row < rows; row++)
             {
@@ -71,19 +69,16 @@ namespace Z0
             return sb.ToString();            
         }
 
-        [MethodImpl(Inline)]
         public static string Format<N,T>(this BlockMatrix<N,T> src, int? cellwidth = null, char? cellsep = null, Func<T,string> render = null)
             where N: unmanaged, ITypeNat
             where T : unmanaged    
                 => src.ToRectangular().Format(cellwidth, cellsep,render);
 
-        [MethodImpl(Inline)]
         public static string Format<N,T>(this Matrix<N,T> src, int? cellwidth = null, char? cellsep = null, Func<T,string> render = null)
             where N: unmanaged, ITypeNat
             where T : unmanaged    
                 => src.ToRectangular().Format(cellwidth, cellsep,render);
 
-        [MethodImpl(Inline)]
         public static string Format<N,T>(this Covector<N,T> src)
             where T : unmanaged    
             where N: unmanaged, ITypeNat
@@ -95,12 +90,10 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <typeparam name="N">The natural type</typeparam>
         /// <typeparam name="T">The component type</typeparam>
-        [MethodImpl(Inline)]
         public static string Fomat<N,T>(this BlockVector<N,T> src)
             where T : unmanaged    
             where N: unmanaged, ITypeNat
                 => src.Unsized.FormatList();
-
     }
 
 }

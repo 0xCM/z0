@@ -44,10 +44,10 @@ namespace Z0.Test
             where T : unmanaged
         {
             
-            var  src = Random.BlockedSpan<T>(n, blocks: SampleSize);
+            var  src = Random.Blocks<T>(n, blocks: SampleSize);
             for(var i = 0; i< src.BlockCount; i++)
             {
-                var v = ginx.vload(n, in src.BlockHead(i));
+                var v = ginx.vload(n, in src.SeekBlock(i));
                 Claim.yea(ginx.vnonz(v));
             }
             
@@ -57,10 +57,10 @@ namespace Z0.Test
         void nonzero256_check<T>(N256 n = default)
             where T : unmanaged
         {
-            var  src = Random.BlockedSpan<T>(n, blocks: SampleSize);
+            var  src = Random.Blocks<T>(n, blocks: SampleSize);
             for(var i = 0; i< src.BlockCount; i++)
             {
-                var v = ginx.vload(n, in src.BlockHead(i));
+                var v = ginx.vload(n, in src.SeekBlock(i));
                 Claim.yea(ginx.vnonz(v));
             }
             

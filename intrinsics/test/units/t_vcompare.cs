@@ -72,8 +72,8 @@ namespace Z0
             
             for(var i=0; i< SampleSize; i++)
             {
-                var x = Random.BlockedSpan<T>(n);
-                var y = Random.BlockedSpan<T>(n);
+                var x = Random.Blocks<T>(n);
+                var y = Random.Blocks<T>(n);
                 var z = DataBlocks.alloc<T>(n);
                 
                 for(var j=0; j<z.Length; j++)
@@ -97,8 +97,8 @@ namespace Z0
             
             for(var i=0; i< SampleSize; i++)
             {
-                var x = Random.BlockedSpan<T>(n);
-                var y = Random.BlockedSpan<T>(n);
+                var x = Random.Blocks<T>(n);
+                var y = Random.Blocks<T>(n);
                 var z = DataBlocks.alloc<T>(n);
                 
                 for(var j=0; j<z.Length; j++)

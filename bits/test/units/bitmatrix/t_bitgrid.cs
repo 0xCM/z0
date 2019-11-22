@@ -116,7 +116,7 @@ namespace Z0
             var bs2 = dst8u.ToBitString();
             Claim.eq(bs1,bs2);
 
-            var a = Random.Span128<byte>();
+            var a = Random.Blocks<byte>(n128);
             var b = StackStore.alloc(n128);
             StackStore.store(in a.Head, 16, ref b);
             Claim.eq(a, b.AsBytes());        

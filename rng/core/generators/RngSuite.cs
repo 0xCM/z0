@@ -38,7 +38,7 @@ namespace Z0
         public BlockVector<N, T> Next<T>() 
             where T : unmanaged
         {
-            var dst = BlockVector.Alloc<N,T>();
+            var dst = Vector.blockalloc<N,T>();
             for(var i=0; i<n; i++)
                 dst[i] = members[i].Next<T>();
             return dst;
@@ -47,7 +47,7 @@ namespace Z0
         public BlockVector<N, T> Next<T>(T min) 
             where T : unmanaged
         {
-            var dst = BlockVector.Alloc<N,T>();
+            var dst = Vector.blockalloc<N,T>();
             for(var i=0; i<n; i++)
                 dst[i] = members[i].Next<T>(min);
             return dst;
@@ -56,7 +56,7 @@ namespace Z0
         public BlockVector<N, T> Next<T>(T min, T max) 
             where T : unmanaged
         {
-            var dst = BlockVector.Alloc<N,T>();
+            var dst = Vector.blockalloc<N,T>();
             for(var i=0; i<n; i++)
                 dst[i] = members[i].Next<T>(min,max);
             return dst;
@@ -65,7 +65,7 @@ namespace Z0
         public BlockVector<N, T> Next<T>(Interval<T> domain)
              where T : unmanaged
         {
-            var dst = BlockVector.Alloc<N,T>();
+            var dst = Vector.blockalloc<N,T>();
             for(var i=0; i<n; i++)
                 dst[i] = members[i].Next<T>(domain);
             return dst;

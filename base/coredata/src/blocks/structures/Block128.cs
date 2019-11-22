@@ -44,12 +44,8 @@ namespace Z0
             => src.data;
 
         [MethodImpl(Inline)]
-        public static implicit operator ReadOnlySpan<T> (in Block128<T> src)
-            => src.ReadOnly();
-
-        [MethodImpl(Inline)]
-        public static implicit operator ConstBlock128<T> (in Block128<T> src)
-            => ConstBlock128<T>.Load(src);
+        public static implicit operator ConstBlock128<T>(in Block128<T> src)
+            => new ConstBlock128<T>(src);
 
         [MethodImpl(Inline)]
         public static bool operator == (in Block128<T> lhs, in Block128<T> rhs)
@@ -66,39 +62,20 @@ namespace Z0
         [MethodImpl(NotInline)]
         public static Block128<T> AllocBlocks(int count, T? fill = null)
         {
-            var dst = new Block128<T>(new T[count * BlockLength]);
+            Span<T> dst = new T[count * BlockLength];
             if(fill != null)
-                dst.data.Fill(fill.Value);
-            return dst;
+                dst.Fill(fill.Value);
+            return new Block128<T>(dst);
         }
 
         [MethodImpl(NotInline)]
         public static Block128<T> Load(T[] src, int offset = 0)
         {
             require(Aligned(src.Length - offset));
-            return new Block128<T>(src, offset, src.Length - offset);
-        }
-
-
-        [MethodImpl(Inline)]
-        public static Block128<T> Load(Span<T> src, int offset = 0)
-        {
-            require(Aligned(src.Length - offset));
-            return new Block128<T>(offset == 0 ? src : src.Slice(offset));
-        }
-
-        [MethodImpl(Inline)]
-        internal Block128(T[] src, int offset, int length)
-        {
-            data = new Span<T>(src, offset, length);
+            Span<T> dst = new Span<T>(src, offset, src.Length - offset);
+            return new Block128<T>(dst);
         }
         
-        [MethodImpl(Inline)]
-        internal Block128(ReadOnlySpan<T> src)
-        {
-            data = src.ToArray();            
-        }
-
         [MethodImpl(Inline)]
         internal Block128(Span<T> src)
         {
@@ -182,16 +159,8 @@ namespace Z0
         /// </summary>
         /// <param name="blockIndex">The block index, a number in the range 0..k-1 where k is the total number of covered blocks</param>
         [MethodImpl(Inline)]
-        public ref T BlockHead(int blockIndex)
+        public ref T SeekBlock(int blockIndex)
             => ref Unsafe.Add(ref Head, blockIndex*BlockLength); 
-
-        [MethodImpl(Inline)]
-        public Block128<T> Block(int blockIndex)
-            => new Block128<T>(data.Slice(blockIndex * BlockLength, BlockLength));
-        
-        [MethodImpl(Inline)]
-        public Block128<T> Blocks(int blockIndex, int blockCount)
-            => new Block128<T>(Slice(blockIndex * BlockLength, blockCount * BlockLength ));
 
         /// <summary>
         /// Returns an index-identified block
@@ -213,10 +182,6 @@ namespace Z0
         public Span<T> Slice(int offset, int length)
             => data.Slice(offset,length);
                     
-        [MethodImpl(Inline)]
-        public ConstBlock128<T> ReadOnly()
-            => (ConstBlock128<T>)data;
-
         [MethodImpl(Inline)]
         public T[] ToArray()
             => data.ToArray();   
@@ -244,12 +209,12 @@ namespace Z0
         [MethodImpl(Inline)]
         public Block128<S> As<S>()                
             where S : unmanaged
-                => Block128.load(MemoryMarshal.Cast<T,S>(data));                    
+                => new Block128<S>(MemoryMarshal.Cast<T,S>(data));
 
-       public override bool Equals(object rhs) 
+        public override bool Equals(object rhs) 
             => throw new NotSupportedException();
 
-       public override int GetHashCode() 
+        public override int GetHashCode() 
             => throw new NotSupportedException();        
     }
 }

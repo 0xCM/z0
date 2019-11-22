@@ -65,8 +65,7 @@ namespace Z0
             var y = dinx.vconvert(x, out Vector128<ushort> _);
             var z = dinx.vparts(n128,0,1,2,3,4,5,6,7);            
 
-            Claim.eq(y,z);
-            
+            Claim.eq(y,z);            
         }
 
         public void blockspan_128x8u_v128x16u()
@@ -83,17 +82,6 @@ namespace Z0
                 Claim.eq(z0[i], (byte)y0s[i]);
                 Claim.eq(z1[i], (byte)y1s[i]);
             }                                 
-        }
-
-        public void bitspan_5x8u_v128x32u()
-        {
-            var x = BitBlock.load<N5,byte>(0,1,2,3,4);
-            dinx.vconvert(x, out Vector128<uint> y);
-            var ys = y.ToSpan();
-            for(var i=0; i<4; i++)
-                Claim.eq(x[i],(byte)ys[i]);
-            
-                                 
         }
 
         public void blockspan_64x8u_v2x128x32u()

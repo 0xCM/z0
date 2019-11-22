@@ -28,7 +28,7 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where T : unmanaged    
         {
-            inxspan.sub(x.Data,y.Data,z.Data);
+            vblock.sub(x.Data,y.Data,z.Data);
             return ref z;
         }
 

@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2019
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Test
+namespace Z0
 {
     using System;
     using System.Linq;
@@ -12,21 +12,9 @@ namespace Z0.Test
     using static zfunc;
     using static HexConst;
     
-    //using static VecParts128x8u;
     public class t_vshuffle : IntrinsicTest<t_vshuffle>
     {        
 
-        static ReadOnlySpan<byte> Inc8u  
-            => new byte[16]{0,1,2,3,4,5,6,7,8,9,A,B,C,D,E,F};
-
-
-        //Identity
-        static ReadOnlySpan<byte> Pattern1  
-            => new byte[16]{0,1,2,3,4,5,6,7,8,9,A,B,C,D,E,F};
-
-        //Reversal
-        static ReadOnlySpan<byte> Pattern2  
-            => new byte[16]{F,E,D,C,B,A,9,8,7,6,5,4,3,2,1,0};
 
         public void shuffle_128x8u_1()
         {
@@ -93,24 +81,23 @@ namespace Z0.Test
             var y = dinx.vparts(4u,3u,2u,1u);
             var x = dinx.vperm4x32(src, Perm4.ABCD);
             Claim.eq(x, src);
-            Trace($"shuffle({x},{spec}) = {y}");           
 
             y = dinx.vparts(4u,3u,2u,1u);
             spec = Perm4.DCBA;
             x = dinx.vperm4x32(src,spec);
             Claim.eq(x, y); 
-            Trace($"shuffle({x},{spec}) = {y}");           
 
             y = dinx.vparts(4u,3u,2u,1u);
             spec = Perm4.DCBA;
             x = dinx.vperm4x32(src,spec);
             Claim.eq(x, y); 
-            Trace($"shuffle({x},{spec}) = {y}");           
+
+            Claim.eq(dinx.vperm4x32(dinx.vparts(0,1,2,3), Perm4.ADCB), dinx.vparts(0,3,2,1));
+            Claim.eq(dinx.vperm4x32(dinx.vparts(0,1,2,3), Perm4.DBCA), dinx.vparts(3,1,2,0));
 
         }
 
-
-        public void shuffle_128x8u_check()
+        public void vshuf_16x8()
         {
             var src = ginx.vincrements<byte>(n128);
             var perm = PermSpec.natural(PermSpec.reversed(n16));
@@ -128,35 +115,17 @@ namespace Z0.Test
 
         }
 
-        public void shuffle_lo_128x16u()
-        {
-            var id = dinx.vparts(n128, 0,1,2,3,6,7,8,9);
-            Claim.eq(dinx.vpermlo4x16(id, Perm4.ADCB), dinx.vparts(n128, 0,3,2,1,6,7,8,9));
-        }
 
-        public void shuffle_hi_128x16u()
-        {
-            var id = dinx.vparts(n128, 0,1,2,3,6,7,8,9);
-            Claim.eq(dinx.vpermhi4x16(id, Perm4.ADCB), dinx.vparts(n128,0,1,2,3,6,9,8,7));
-        }
-
-        public void shuffle_128x16u()
+        public void vperm_4x16()
         {
             var id = dinx.vparts(n128,0,1,2,3,6,7,8,9);
-            Claim.eq(dinx.vperm4x16(id, Perm4.ADCB, Perm4.ADCB), dinx.vparts(n128,0,3,2,1,6,9,8,7));
+            Claim.eq(dinx.vperm4x16(dinx.vparts(n128,0,1,2,3,6,7,8,9), Perm4.ADCB, Perm4.ADCB), dinx.vparts(n128,0,3,2,1,6,9,8,7));
+
         }
 
-        public void permute128i32()
+        public void vperm_4x32_128x32u()
         {
-            var id = dinx.vparts(0,1,2,3);
-            Claim.eq(dinx.vperm4x32(id, Perm4.ADCB), dinx.vparts(0,3,2,1));
-            Claim.eq(dinx.vperm4x32(id, Perm4.DBCA), dinx.vparts(3,1,2,0));
-            Permute4i32();        
-        }
-
-
-        void Permute4i32(bool trace = false)
-        {
+            var trace = false;
             var pSrc = Random.EnumValues<Perm4>(x => (byte)x > 5);
             
             for(var i=0; i<CycleCount; i++)
@@ -195,5 +164,16 @@ namespace Z0.Test
                                 
             }
         }
+
+        static ReadOnlySpan<byte> Inc8u  
+            => new byte[16]{0,1,2,3,4,5,6,7,8,9,A,B,C,D,E,F};
+
+        //Identity
+        static ReadOnlySpan<byte> Pattern1  
+            => new byte[16]{0,1,2,3,4,5,6,7,8,9,A,B,C,D,E,F};
+
+        //Reversal
+        static ReadOnlySpan<byte> Pattern2  
+            => new byte[16]{F,E,D,C,B,A,9,8,7,6,5,4,3,2,1,0};
     }
 }

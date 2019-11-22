@@ -51,11 +51,11 @@ namespace Z0
 
             for(var sample=0; sample<SampleSize; sample++)
             {
-                var xs = Random.BlockedSpan<ulong>(n);
+                var xs = Random.Blocks<ulong>(n);
                 var x = xs.TakeVector();
                 Claim.eq(x,dinx.vparts(n, xs[0], xs[1], xs[2], xs[3]));
 
-                var ys = Random.BlockedSpan<ulong>(n);
+                var ys = Random.Blocks<ulong>(n);
                 var y = ys.TakeVector();
                 Claim.eq(y,dinx.vparts(n, ys[0], ys[1], ys[2], ys[3]));
 

@@ -40,29 +40,24 @@ namespace Z0
         public static int CellSize => BlockSize / BlockLength;
 
         [MethodImpl(Inline)]
-        public static implicit operator Span<T>(Block256<T> src)
+        public static implicit operator Span<T>(in Block256<T> src)
             => src.data;
 
         [MethodImpl(Inline)]
-        public static implicit operator ReadOnlySpan<T> (Block256<T> src)
-            => src.data;
+        public static implicit operator ConstBlock256<T>(in Block256<T> src)
+            => new ConstBlock256<T>(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator ConstBlock256<T> (Block256<T> src)
-            => ConstBlock256<T>.Load(src);
-
-        [MethodImpl(Inline)]
-        public static bool operator == (Block256<T> lhs, Block256<T> rhs)
+        public static bool operator == (in Block256<T> lhs, in Block256<T> rhs)
             => lhs.data == rhs.data;
 
         [MethodImpl(Inline)]
-        public static bool operator != (Block256<T> lhs, Block256<T> rhs)
+        public static bool operator != (in Block256<T> lhs, in Block256<T> rhs)
             => lhs.data != rhs.data;
         
         [MethodImpl(Inline)]
         public static bool Aligned(int length)
-            => length % BlockLength == 0;
-        
+            => length % BlockLength == 0;        
         
         [MethodImpl(NotInline)]
         public static Block256<T> AllocBlocks(int blocks, T? fill = null)
@@ -73,14 +68,6 @@ namespace Z0
             return dst;
         }
     
-        [MethodImpl(Inline)]
-        public static Block256<T> LoadAligned(Span<T> src, int offset = 0)
-        {
-            require(Aligned(src.Length - offset));
-            var slice = src.Slice(offset);
-            return new Block256<T>(slice);
-        }
-
         [MethodImpl(Inline)]
         internal Block256(ref T src, int length)
         {
@@ -176,7 +163,7 @@ namespace Z0
         /// </summary>
         /// <param name="blockIndex">The index of the desired block</param>
         [MethodImpl(Inline)]
-        public ref T BlockHead(int blockIndex)
+        public ref T SeekBlock(int blockIndex)
             => ref Unsafe.Add(ref Head, blockIndex * BlockLength);
 
         /// <summary>
@@ -195,24 +182,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public Span<T> Slice(int start, int length)
             => data.Slice(start,length);
-
-        [MethodImpl(Inline)]
-        public Block256<T> Block(int blockIndex)
-        {
-            var slice = data.Slice(blockIndex * BlockLength, BlockLength); 
-            return new Block256<T>(slice);
-        }
-            
-        [MethodImpl(Inline)]
-        public Block256<T> Blocks(int blockIndex, int blockCount)
-            => Block256<T>.LoadAligned(Slice(blockIndex * BlockLength, blockCount * BlockLength));
-            
-        /// <summary>
-        /// Presents the allocated data as a blocked read-only span
-        /// </summary>
-        [MethodImpl(Inline)]
-        public ConstBlock256<T> ReadOnly()
-            => (ConstBlock256<T>)data;
 
         [MethodImpl(Inline)]
         public T[] ToArray()
@@ -242,8 +211,7 @@ namespace Z0
         public Block256<S> As<S>()                
             where S : unmanaged
                 => new Block256<S>(MemoryMarshal.Cast<T,S>(data)); 
- 
- 
+  
         public override bool Equals(object rhs) 
             => throw new NotSupportedException();
 

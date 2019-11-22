@@ -71,7 +71,7 @@ namespace Z0
         /// </summary>
         [MethodImpl(Inline)]
         public BlockVector<N,T> Block()
-            => BlockVector.Load<N,T>(Block256.load(data));
+            => Vector.blockload<N,T>(Block256.load(data));
 
         [MethodImpl(Inline)]
         public Vector<N,T> Transpose()

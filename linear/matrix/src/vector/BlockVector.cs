@@ -5,17 +5,14 @@
 namespace Z0
 {
     using System;
-    using System.Numerics;
-    using System.Linq;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;    
         
     using static zfunc;
 
-    public ref struct BlockVector<T>
+    public readonly ref struct BlockVector<T>
         where T : unmanaged
     {
-        Block256<T> data;
+        readonly Block256<T> data;
 
         [MethodImpl(Inline)]
         public BlockVector(in Block256<T> src)
@@ -43,7 +40,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator ReadOnlySpan<T>(in BlockVector<T> src)
-            =>  src.data;
+            =>  src.Data.ReadOnly();
 
         [MethodImpl(Inline)]
         public static bool operator == (BlockVector<T> lhs, in BlockVector<T> rhs) 
@@ -56,7 +53,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static T operator *(BlockVector<T> lhs, in BlockVector<T> rhs)
-            => mathspan.dot<T>(lhs.data, rhs.data);
+            => mathspan.dot<T>(lhs.Data.ReadOnly(), rhs.Data.ReadOnly());
 
         public ref T this[int i]
         {
@@ -129,11 +126,5 @@ namespace Z0
 
         public override int GetHashCode()
             => throw new NotSupportedException(); 
-
-        public Block256<T> ToSpan256()
-            => data;
-
-        public ConstBlock256<T> ToReadOnlySpan256()
-            => data;
     }
 }

@@ -124,13 +124,13 @@ namespace Z0
         /// <param name="offset">The span index at which to begin the load</param>
         /// <typeparam name="T">The primitive type</typeparam>
         [MethodImpl(Inline)]
-        public static Block128<T> load<T>(N128 n, ReadOnlySpan<T> src, int offset = 0)
+        public static ConstBlock128<T> load<T>(N128 n, ReadOnlySpan<T> src, int offset = 0)
             where T : unmanaged
         {
             if(!aligned<T>(n,src.Length - offset))
                 badsize(n, src.Length - offset);      
 
-            return new Block128<T>( offset == 0 ? src : src.Slice(offset));
+            return new ConstBlock128<T>(offset == 0 ? src : src.Slice(offset));
         }
 
         /// <summary>
@@ -142,7 +142,13 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Block128<T> load<T>(N128 n, params T[] src)
             where T : unmanaged        
-                => Block128<T>.Load(src);
+        {
+            if(!aligned<T>(n,src.Length))
+                badsize(n, src.Length);      
+            
+            Span<T> dst = src;
+            return new Block128<T>(dst);
+        }
 
         [MethodImpl(Inline)]
         public static ConstBlock128<T> load<T>(N128 n, ReadOnlySpan<T> src, int offset, int length)

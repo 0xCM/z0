@@ -44,20 +44,10 @@ namespace Z0
         public static Vector256<double> vmov256x64u(double src)
             => dinx.vmov(n256,src);
 
-        public static int bitspan_counts_4x8()
-            => BitBlock.cells<N5,byte>();
-
-        public static int bitspan_counts_8x8()
-            => BitBlock.cells<N6,byte>();
-
-        public static int bitspan_counts_4x16()
-            => BitBlock.cells<N6,ushort>();
 
         public static Vector128<uint> mem8u_v128x32u(ref byte src, out Vector128<uint> dst)
             => dinx.vconvert(ref src, out dst);
             
-        public static Vector128<uint> bs5x8u_v128x32u(in BitBlock<N5,byte> src, out Vector128<uint> dst)
-            => dinx.vconvert(src, out dst);
 
         public static void vconvert_v256x16u_v2x256x64u(Vector256<ushort> src, out Vector256<ulong> lo, out Vector256<ulong> hi)
             => dinx.vconvert(src, out lo, out hi);

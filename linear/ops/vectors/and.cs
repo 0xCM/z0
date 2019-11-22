@@ -27,7 +27,7 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where T : unmanaged    
         {
-            var dst = BlockVector.Alloc<N,T>();
+            var dst = Vector.blockalloc<N,T>();
             and<T>(lhs.Data, rhs.Data, dst);
             return dst;
         }
@@ -36,7 +36,7 @@ namespace Z0
             where T : unmanaged
         {
             for(var i=0; i< blocks(lhs,rhs); i++)
-                ginx.vstore(ginx.vand<T>(lhs.LoadVector(i), rhs.LoadVector(i)), ref dst.BlockHead(i));                             
+                ginx.vstore(ginx.vand<T>(lhs.LoadVector(i), rhs.LoadVector(i)), ref dst.SeekBlock(i));                             
             return dst;        
         } 
 

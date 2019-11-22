@@ -115,9 +115,10 @@ namespace Z0.Test
             where T : unmanaged
         {
             TypeCaseStart<T>();
-            var lhs = Random.BlockedSpan<T>(n256,SampleSize).ReadOnly();
-            var rhs = Random.BlockedSpan<T>(n256,SampleSize).ReadOnly();
-            var dstA = inxspan.sub(lhs, rhs, lhs.Replicate());
+            var lhs = Random.Blocks<T>(n256,SampleSize).ReadOnly();
+            var rhs = Random.Blocks<T>(n256,SampleSize).ReadOnly();
+            var dstA = lhs.Replicate();
+            vblock.sub(lhs, rhs, dstA);
             var dstB = Block256.alloc<T>(lhs.BlockCount);
             for(var i = 0; i < dstA.Length; i++)
                 dstB[i] = gmath.sub(lhs[i], rhs[i]);

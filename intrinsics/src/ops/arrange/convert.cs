@@ -198,10 +198,6 @@ namespace Z0
             return dst;
         }
 
-        [MethodImpl(Inline)]
-        public static Vector128<int> vconvert(in BitBlock<N5,byte> src, out Vector128<int> dst)
-            => vconvert(ref src.Head, out dst);
-
         /// <summary>
         /// __m128i _mm_cvtepu8_epi32 (__m128i a) PMOVZXBD xmm, xmm/m32
         /// </summary>
@@ -226,9 +222,6 @@ namespace Z0
             return dst;
         }
 
-        [MethodImpl(Inline)]
-        public static Vector128<uint> vconvert(in BitBlock<N5,byte> src, out Vector128<uint> dst)
-            => vconvert(ref src.Head, out dst);
 
         [MethodImpl(Inline)]
         public static void vconvert(in Block64<byte> src, out Vector128<uint> x0, out Vector128<uint> x1)

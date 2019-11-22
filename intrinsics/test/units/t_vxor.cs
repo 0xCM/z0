@@ -12,6 +12,9 @@ namespace Z0
 
     public class t_vxor : IntrinsicTest<t_vxor>
     {
+        protected override int CycleCount
+            => Pow2.T12;
+
         public void vxor_128x8i()
             => vxor_check<sbyte>(n128);
 
@@ -116,15 +119,77 @@ namespace Z0
             var step = stats.StepSize;
             var cells = stats.CellCount;
 
-            var lhs = Random.BlockedSpan<T>(n, blocks);
-            var rhs = Random.BlockedSpan<T>(n, blocks);
-            var dst = DataBlocks.alloc<T>(n, blocks);
-            vblock.xor(n, blocks, step, in lhs.Head, in rhs.Head, ref dst.Head);
+            var xb = Random.Blocks<T>(n, blocks);
+            var yb = Random.Blocks<T>(n, blocks);
+            var zb = DataBlocks.alloc<T>(n, blocks);
+            vblock.xor(n, blocks, step, in xb.Head, in yb.Head, ref zb.Head);
             for(var i=0; i<cells; i++)
-                Claim.eq(gmath.xor(lhs[i],rhs[i]), dst[i]);
-
+                Claim.eq(gmath.xor(xb[i],yb[i]), zb[i]);
+            
+            zb.Clear();
+            vblock.xor(xb, yb, zb);
+            for(var i=0; i<cells; i++)
+                Claim.eq(gmath.xor(xb[i],yb[i]), zb[i]);
         }
 
+        public void vxor_bench_256x32u()
+            => vxor_bench<uint>(n256);
+
+        public void vxor_bench_256x8u()
+            => vxor_bench<byte>(n256);
+
+        public void vxor_bench_256x64u()
+            => vxor_bench<ulong>(n256);
+
+        void vxor_bench<T>(N256 n)
+            where T : unmanaged
+        {
+            xor_gmath_bench<T>(n);
+            xor_intrinsic_bench<T>(n);
+        }
+
+        void xor_gmath_bench<T>(N256 n, SystemCounter counter = default)
+            where T : unmanaged
+        {
+            var opname = $"xor_gmath_{moniker<T>()}";
+            var blocks = 8;
+            var blocklen = DataBlocks.blocklen<T>(n);
+            var xb = Random.Blocks<T>(n,blocks);
+            var yb = Random.Blocks<T>(n,blocks);
+            var zb = DataBlocks.alloc<T>(n,blocks);
+            var opcount = 0;
+            var cellcount = xb.Length;
+
+            counter.Start();
+            for(var i=0; i<CycleCount; i++, opcount += cellcount)
+            {                
+                for(var block = 0; block< blocks; block++)
+                for(var cell = 0; cell < blocklen; cell++)
+                    zb.Block(block)[cell] = gmath.xor(xb.Block(block)[cell], yb.Block(block)[cell]);                                    
+            }
+            counter.Stop();
+            Benchmark(opname, counter,opcount);
+        }
+
+        void xor_intrinsic_bench<T>(N256 n, SystemCounter counter = default)
+            where T : unmanaged
+        {
+            var opname = $"xor_ginx_{moniker<T>()}";
+            var blocks = 8;
+            var blocklen = DataBlocks.blocklen<T>(n);
+            var xb = Random.Blocks<T>(n,blocks);
+            var yb = Random.Blocks<T>(n,blocks);
+            var zb = DataBlocks.alloc<T>(n,blocks);
+            var opcount = 0;
+            var cellcount = xb.Length;
+
+            counter.Start();
+            for(var i=0; i<CycleCount; i++, opcount += cellcount)
+                vblock.xor(xb, yb, zb);
+            counter.Stop();
+            Benchmark(opname, counter,opcount);
+
+        }
 
         void vxor_blocks_check<T>(N256 n)
             where T : unmanaged
@@ -134,22 +199,28 @@ namespace Z0
             var step = stats.StepSize;
             var cells = stats.CellCount;
 
-            var lhs = Random.BlockedSpan<T>(n, blocks);
-            var rhs = Random.BlockedSpan<T>(n, blocks);
-            var dst = DataBlocks.alloc<T>(n, blocks);
+            var xb = Random.Blocks<T>(n, blocks);
+            var yb = Random.Blocks<T>(n, blocks);
+            var zb = DataBlocks.alloc<T>(n, blocks);
             
-            vblock.xor(n, blocks, step, in lhs.Head, in rhs.Head, ref dst.Head);
+            vblock.xor(n, blocks, step, in xb.Head, in yb.Head, ref zb.Head);
+            
             for(var i=0; i<cells; i++)
-                Claim.eq(gmath.xor(lhs[i],rhs[i]), dst[i]);
+                Claim.eq(gmath.xor(xb[i],yb[i]), zb[i]);
+
+            zb.Clear();
+            vblock.xor(xb, yb, zb);
+            for(var i=0; i<cells; i++)
+                Claim.eq(gmath.xor(xb[i],yb[i]), zb[i]);
         }
-     
+
         void vxor_check<T>(N128 n)
             where T : unmanaged
         {
             for(var block = 0; block < SampleSize; block++)
             {
-                var srcX = Random.BlockedSpan<T>(n);
-                var srcY = Random.BlockedSpan<T>(n);
+                var srcX = Random.Blocks<T>(n);
+                var srcY = Random.Blocks<T>(n);
                 var vX = srcX.TakeVector();
                 var vY = srcY.TakeVector();
                 
@@ -168,8 +239,8 @@ namespace Z0
         {            
             for(var block = 0; block < SampleSize; block++)
             {
-                var srcX = Random.BlockedSpan<T>(n);
-                var srcY = Random.BlockedSpan<T>(n);
+                var srcX = Random.Blocks<T>(n);
+                var srcY = Random.Blocks<T>(n);
                 var vX = srcX.TakeVector();
                 var vY = srcY.TakeVector();
 

@@ -52,7 +52,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator ReadOnlySpan<T>(BlockMatrix<N,T> src)
-            => src.Unsized;
+            => src.Unsized.ReadOnly();
 
         [MethodImpl(Inline)]
         public static implicit operator Block256<T>(BlockMatrix<N,T> src)
@@ -99,7 +99,7 @@ namespace Z0
             if(row < 0 || row >= Order)
                 throw Errors.OutOfRange(row, 0, Order - 1);
             
-            return BlockVector.Load<N,T>(data.Slice(row * Order, Order));
+            return Vector.blockload<N,T>(data.Slice(row * Order, Order));
         }
 
         [MethodImpl(Inline)]
@@ -125,7 +125,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public BlockVector<N,T> Col(int col)
         {
-            var alloc = BlockVector.Alloc<N,T>();
+            var alloc = Vector.blockalloc<N,T>();
             return Col(col, ref alloc);
         }
 

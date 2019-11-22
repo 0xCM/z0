@@ -101,7 +101,7 @@ namespace Z0
             if(row < 0 || row >= RowCount)
                 throw Errors.OutOfRange(row, 0, RowCount - 1);
             
-            return BlockVector.Load<N,T>(data.Slice(row * RowLenth, RowLenth));
+            return Vector.blockload<N,T>(data.Slice(row * RowLenth, RowLenth));
         }
 
         [MethodImpl(Inline)]
@@ -127,7 +127,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public BlockVector<M,T> GetCol(int col)
         {
-            var alloc = BlockVector.Alloc<M,T>();
+            var alloc = Vector.blockalloc<M,T>();
             return GetCol(col, ref alloc);
         }
 
@@ -147,7 +147,7 @@ namespace Z0
         /// </summary>
         public BlockMatrix<N,M,T> Transpose()
         {
-            var dst = BlockMatrix.Alloc<N,M,T>();
+            var dst = Matrix.blockalloc<N,M,T>();
             for(var row = 0; row < RowCount; row++)
                 dst.SetCol(row, GetRow(row));            
             return dst;

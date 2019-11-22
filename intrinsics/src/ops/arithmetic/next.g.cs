@@ -36,25 +36,6 @@ namespace Z0
             where T : unmanaged
                 => vadd<T>(src, vunits<T>(n256));
 
-        /// <summary>
-        /// Decrements each source vector component by a unit
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <typeparam name="T">The primal component type</typeparam>
-        [MethodImpl(Inline)]
-        public static Vector128<T> vprior<T>(Vector128<T> src)
-            where T : unmanaged
-                => vsub<T>(src, vunits<T>(n128));
-
-        /// <summary>
-        /// Decrements each source vector component by a unit
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <typeparam name="T">The primal component type</typeparam>
-        [MethodImpl(Inline)]
-        public static Vector256<T> vprior<T>(Vector256<T> src)
-            where T : unmanaged
-                => vsub<T>(src, vunits<T>(n256));
 
     }
 

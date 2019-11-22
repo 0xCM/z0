@@ -12,6 +12,43 @@ namespace Z0
 
     partial class DataBlocks
     {
+
+        /// <summary>
+        /// Calculates the number of bytes required to represent a block constituent
+        /// </summary>
+        /// <typeparam name="T">The block constituent type</typeparam>
+        [MethodImpl(Inline)]
+        public static int cellsize<T>()
+            where T : unmanaged        
+                => Unsafe.SizeOf<T>();
+
+        /// <summary>
+        /// Calculates the number of bytes requred to represent a block
+        /// </summary>
+        /// <typeparam name="T">The block constituent type</typeparam>
+        [MethodImpl(Inline)]
+        public static int blocksize<T>(N64 n)
+            where T : unmanaged        
+                => Block64<T>.BlockSize;
+
+        /// <summary>
+        /// Calculates the number of bytes requred to represent a block
+        /// </summary>
+        /// <typeparam name="T">The block constituent type</typeparam>
+        [MethodImpl(Inline)]
+        public static int blocksize<T>(N128 n)
+            where T : unmanaged        
+                => Block128<T>.BlockSize;
+
+        /// <summary>
+        /// Calculates the number of bytes requred to represent a block
+        /// </summary>
+        /// <typeparam name="T">The block constituent type</typeparam>
+        [MethodImpl(Inline)]
+        public static int blocksize<T>(N256 n)
+            where T : unmanaged        
+                => Block256<T>.BlockSize;
+
         /// <summary>
         /// Computes the minimum number of 64-bit blocks required to cover a specified number of cells
         /// </summary>

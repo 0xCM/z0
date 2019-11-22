@@ -93,7 +93,7 @@ namespace Z0
         {
             var bz = blockcount<T>(src.Length, out int remainder);
             if(remainder == 0)
-                return Block256<T>.LoadAligned(src);
+                return new Block256<T>(src);
             else
             {
                 var dst = alloc<T>(bz + 1);
@@ -146,7 +146,7 @@ namespace Z0
         {
             var bz = blockcount<T>(src.Length, out int remainder);
             if(remainder == 0)
-                return Block256<T>.LoadAligned(src.Replicate());
+                return new Block256<T>(src.Replicate());
             else
             {
                 var dst = alloc<T>(bz + 1);

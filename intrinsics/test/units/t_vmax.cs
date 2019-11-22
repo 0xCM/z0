@@ -183,8 +183,8 @@ namespace Z0
             var step = stats.StepSize;
             var cells = stats.CellCount;
 
-            var lhs = Random.BlockedSpan<T>(n, blocks);
-            var rhs = Random.BlockedSpan<T>(n, blocks);
+            var lhs = Random.Blocks<T>(n, blocks);
+            var rhs = Random.Blocks<T>(n, blocks);
             var dst = DataBlocks.alloc<T>(n, blocks);
             vblock.max(n, blocks, step, in lhs.Head, in rhs.Head, ref dst.Head);
             for(var i=0; i<cells; i++)
@@ -199,8 +199,8 @@ namespace Z0
             var step = stats.StepSize;
             var cells = stats.CellCount;
 
-            var lhs = Random.BlockedSpan<T>(n, blocks);
-            var rhs = Random.BlockedSpan<T>(n, blocks);
+            var lhs = Random.Blocks<T>(n, blocks);
+            var rhs = Random.Blocks<T>(n, blocks);
             var dst = DataBlocks.alloc<T>(n, blocks);
             vblock.max(n, blocks, step, in lhs.Head, in rhs.Head, ref dst.Head);
             for(var i=0; i<cells; i++)

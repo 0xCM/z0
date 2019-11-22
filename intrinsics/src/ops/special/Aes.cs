@@ -106,13 +106,13 @@ namespace Z0
         public static void enc(Block128<byte> src, Vector128<byte> key, Block128<byte> dst)            
         {
             for(var block = 0; block < src.BlockCount; block++)
-                 ginx.vstore(enc(src.LoadVector(block),key), ref dst.BlockHead(block));
+                 ginx.vstore(enc(src.LoadVector(block),key), ref dst.SeekBlock(block));
         }
 
         public static void dec(Block128<byte> src, Vector128<byte> key, Block128<byte> dst)            
         {
             for(var block = 0; block < src.BlockCount; block++)
-                 ginx.vstore(dec(src.LoadVector(block),key), ref dst.BlockHead(block));
+                 ginx.vstore(dec(src.LoadVector(block),key), ref dst.SeekBlock(block));
         }
 
     }

@@ -122,16 +122,12 @@ namespace Z0
             return ref dst;
         }
 
-        // [MethodImpl(Inline)]
-        // public Covector<N,T> Transpose()
-        //     => Covector<N, T>.Load(data);
-
         /// <summary>
         /// Loads the data from the source into a block vector, allocating as necessary to ensure alignment
         /// </summary>
         [MethodImpl(Inline)]
         public BlockVector<N,T> Block()
-            => BlockVector.Load<N,T>(Block256.load(data));
+            => Vector.blockload<N,T>(Block256.load(data));
 
         [MethodImpl(Inline)]
         public Vector<N,U> Convert<U>()

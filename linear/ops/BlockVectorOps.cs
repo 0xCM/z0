@@ -31,7 +31,7 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where T : unmanaged    
         {
-            inxspan.sll(src.Data, offset, dst.Data);
+            vblock.sll(src.Data, offset, dst.Data);
             return dst;
         }
 
@@ -50,7 +50,7 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where T : unmanaged    
         {
-            inxspan.srl(src.Data,offset,dst.Data);
+            vblock.srl(src.Data,offset,dst.Data);
             return ref dst;
         }
 
