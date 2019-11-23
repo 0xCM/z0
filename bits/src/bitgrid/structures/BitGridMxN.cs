@@ -21,12 +21,12 @@ namespace Z0
         readonly Span<T> data;
 
         [MethodImpl(Inline)]
-        public static bool operator ==(BitGrid<M,N,T> lhs, BitGrid<M,N,T> rhs)
-            => lhs.Equals(rhs);
+        public static bool operator ==(in BitGrid<M,N,T> g1, in BitGrid<M,N,T> g2)
+            => g1.Equals(g2);
 
         [MethodImpl(Inline)]
-        public static bool operator !=(BitGrid<M,N,T> lhs, BitGrid<M,N,T> rhs)
-            => !lhs.Equals(rhs);
+        public static bool operator !=(in BitGrid<M,N,T> g1, in BitGrid<M,N,T> g2)
+            => !g1.Equals(g2);
 
         [MethodImpl(Inline)]
         internal BitGrid(Span<T> data)
@@ -35,6 +35,24 @@ namespace Z0
         }
 
         public N Width => default;
+
+        public int RowCount
+        {
+            [MethodImpl(Inline)]
+            get => natval<M>();
+        }
+
+        public int ColCount
+        {
+            [MethodImpl(Inline)]
+            get => natval<N>();
+        }
+
+        public int PointCount
+        {
+            [MethodImpl(Inline)]
+            get => NatMath.mul<M,N>(); 
+        }
 
         public Span<T> Data
         {
@@ -64,12 +82,6 @@ namespace Z0
 
             [MethodImpl(Inline)]
             set => BitGrid.setbit(pos, value, ref Head);
-        }
-
-        public int PointCount
-        {
-            [MethodImpl(Inline)]
-            get => NatMath.mul<M,N>(); 
         }
 
         public GridMoniker<T> Moniker

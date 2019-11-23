@@ -54,6 +54,7 @@ namespace Z0
             var databits = data.Length * bitsize<T>();
             if(databits < natbits)
                 Errors.ThrowInvariantFailure($"{databits} < {natbits}");
+
             return new BitGrid<M,N,T>(data);
         }
 
@@ -66,7 +67,7 @@ namespace Z0
         [MethodImpl(NotInline)]
         public static BitGrid<M,N8,byte> load<M>(M m, Span<BitVector8> src)
             where M : unmanaged, ITypeNat
-                => new BitGrid<M,N8,byte>(src.AsBytes());
+                => load<M,N8,byte>(src.AsBytes());
 
         /// <summary>
         /// Loads a natural bitgrid of dimensions Mx16 of type ushort from primal bitvectors of length 16
@@ -77,7 +78,7 @@ namespace Z0
         [MethodImpl(NotInline)]
         public static BitGrid<M,N16,ushort> load<M>(M m, Span<BitVector16> src)
             where M : unmanaged, ITypeNat
-                => new BitGrid<M,N16,ushort>(src.AsUInt16());
+                => load<M,N16,ushort>(src.AsUInt16());
 
         /// <summary>
         /// Loads a natural bitgrid of dimensions Mx32 of type uint from primal bitvectors of length 32
@@ -88,7 +89,7 @@ namespace Z0
         [MethodImpl(NotInline)]
         public static BitGrid<M,N32,uint> load<M>(M m, Span<BitVector32> src)
             where M : unmanaged, ITypeNat
-                => new BitGrid<M,N32,uint>(src.AsUInt32());
+                => load<M,N32,uint>(src.AsUInt32());
 
         /// <summary>
         /// Loads a natural bitmatrix of dimensions Mx64 of type ulong from primal bitvectors of length 64
@@ -99,7 +100,7 @@ namespace Z0
         [MethodImpl(NotInline)]
         public static BitGrid<M,N64,ulong> load<M>(M m, Span<BitVector64> src)
             where M : unmanaged, ITypeNat
-                => new BitGrid<M,N64,ulong>(src.AsUInt64());
+                => load<M,N64,ulong>(src.AsUInt64());
 
 
     }

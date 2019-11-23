@@ -141,7 +141,7 @@ namespace Z0
             }
         }
 
-        public void create9x4()
+        public void nbm_create_9x4x8()
         {
             var grid = BitGridSpec.define<N9,N4,byte>();    
             Claim.eq(9, grid.RowCount);
@@ -174,7 +174,7 @@ namespace Z0
             }            
         }
 
-        public void create_7x9x8u()
+        public void nbm_create_7x9x8()
         {
             var m1 = BitMatrix.alloc<N7,N9,byte>();
             m1.Fill(Bit.On);
@@ -183,7 +183,7 @@ namespace Z0
 
         }
 
-        public void broadcast_7x9x8u()
+        public void nbm_broadcast_7x9x8()
         {
             const byte pattern = 0b01010101;
             var fill = BitVector.alloc(n9, pattern);
@@ -192,7 +192,7 @@ namespace Z0
                 Claim.yea(fill == matrix[i]);
         }
 
-        public void create7x7()
+        public void nbm_create_7x7x8()
         {
             var m1 = BitMatrix.alloc<N7,byte>();
             m1.Fill(on);

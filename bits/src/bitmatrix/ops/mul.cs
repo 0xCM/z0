@@ -96,7 +96,7 @@ namespace Z0
         public static ref BitMatrix8 mul(in BitMatrix8 A, in BitMatrix8 B, ref BitMatrix8 Z)
         {
             var n = BitMatrix8.N;
-            var C = BitMatrix.transpose(B);
+            var C = BitMatrix.transpose_v2(B);
             for(var i=0; i< n; i++)
             {
                 ref var z = ref Z[i];

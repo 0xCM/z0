@@ -84,7 +84,7 @@ namespace Z0.Test
                 var src = Random.BitMatrix8();
                 for(var c = 0; c < src.Order; c ++)
                 {
-                    var col = src.Column(c);
+                    var col = src.Col(c);
                     for(var r=0; r<src.Order; r++)
                         Claim.eq(col[r], src[r,c]);
                 }

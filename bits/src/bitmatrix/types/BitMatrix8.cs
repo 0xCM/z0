@@ -152,6 +152,19 @@ namespace Z0
             get => ref Row(index);
         }
 
+        [MethodImpl(Inline)]
+        public BitVector8 Col(int index)
+            => BitVector.from(n8, Bits.gather((ulong)this, (C0 << index)));
+
+        // C0 =           [00000001 00000001 ... 00000001]
+        // C1 = C0 << 1 = [00000010 00000010 ... 00000010]
+        // C2 = C0 << 2 = [00000100 00000100 ... 00000100]
+        // ...
+        // C7 = C0 << 7 = [10000000 10000000 ... 10000000]
+        const ulong C0 = 
+            (1ul << 64 - 1*8) | (1ul << 64 - 2*8) | (1ul << 64 - 3*8) | (1ul << 64 - 4*8) | 
+            (1ul << 64 - 5*8) | (1ul << 64 - 6*8) | (1ul << 64 - 7*8) | 1;
+
         /// <summary>
         /// Presents the data at a specified offset as a bitvector
         /// </summary>

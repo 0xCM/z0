@@ -23,12 +23,12 @@ namespace Z0
         public readonly ushort Width;
 
         [MethodImpl(Inline)]
-        public static bool operator ==(in BitGrid<T> lhs, in BitGrid<T> rhs)
-            => lhs.Equals(rhs);
+        public static bool operator ==(in BitGrid<T> g1, in BitGrid<T> g2)
+            => g1.Equals(g2);
 
         [MethodImpl(Inline)]
-        public static bool operator !=(in BitGrid<T> lhs, in BitGrid<T> rhs)
-            => !lhs.Equals(rhs);
+        public static bool operator !=(in BitGrid<T> g1, in BitGrid<T> g2)
+            => !g1.Equals(g2);
         
         [MethodImpl(Inline)]
         internal BitGrid(Span<T> data, ushort rows, ushort width)

@@ -83,7 +83,7 @@ namespace Z0
         /// </summary>
         [MethodImpl(Inline)]
         public static BitMatrix8 Transpose(this BitMatrix8 A)
-            => BitMatrix.transpose(A);
+            => BitMatrix.transpose_v2(A);
  
         [MethodImpl(Inline)]
         public static BitMatrix8 AndNot(this BitMatrix8 A, in BitMatrix8 B)
@@ -97,21 +97,6 @@ namespace Z0
             => BitMatrix.diagonal(A);
 
         /// <summary>
-        /// Queries the matrix for the data in an index-identified column and returns
-        /// the bitvector representative
-        /// </summary>
-        /// <param name="index">The row index</param>
-        [MethodImpl(Inline)]
-        public static BitVector8 Column(this BitMatrix8 A, int index)
-        {
-            byte col = 0;
-            for(var r = 0; r < 8; r++)
-                if(BitMask.test(A.Data[r], index))
-                    BitMask.enable(ref col, r);
-            return col;
-        }
-
-        /// <summary>
         /// Interchanges the i'th and j'th rows where  0 <= i,j < 32
         /// </summary>
         /// <param name="i">A row index</param>
@@ -119,6 +104,10 @@ namespace Z0
         [MethodImpl(Inline)]
         public static void RowSwap(this BitMatrix8 A, int i, int j)
             => A.data.Swap(i,j);
+
+        [MethodImpl(Inline)]
+        public static BitMatrix8 ToPrimalBits(this ulong src, N8 n = default)
+            => BitMatrix.primal(n, src);
 
         /// <summary>
         /// Creates a new matrix by cloning the existing matrix or allocating a matrix with the same structure

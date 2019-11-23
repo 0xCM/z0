@@ -76,10 +76,10 @@ namespace Z0
                 var bs = A.ToBitString();
                 var bsT = BitString.transpose(bs,m,n);
 
-                var c0 = A[n0];
-                var c1 = A[n1];
-                var c2 = A[n2];
-                var c3 = A[n3];
+                var c0 = A.Col(0);
+                var c1 = A.Col(1);
+                var c2 = A.Col(2);
+                var c3 = A.Col(3);
 
                 var colidx = 0;
                 var bs0 = BitString.alloc(rowcount);
@@ -178,5 +178,4 @@ namespace Z0
         }
 
     }
-
 }

@@ -22,8 +22,8 @@ namespace Z0
         public static BitGrid<T> alloc<T>(ushort rows, ushort cols)
             where T : unmanaged
         {            
-            Span<T> data = new T[segcount<T>(rows,cols)];
-            return new BitGrid<T>(data, rows, cols);
+            Span<T> data = new T[segcount<T>(rows, cols)];
+            return new BitGrid<T>(data,rows,cols);            
         }
 
         /// <summary>
@@ -38,12 +38,8 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where T : unmanaged
         {
-            Span<T> data = new T[segcount(m,n,zero)];
+            Span<T> data = new T[segcount<T>(natval(m), natval(n))];            
             return new BitGrid<M, N, T>(data);
         }
-
-
-
     }
-
 }

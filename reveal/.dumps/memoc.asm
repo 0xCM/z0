@@ -1,4 +1,4 @@
-; 2019-11-23 00:41:16:220
+; 2019-11-23 02:41:17:812
 ; function: N64 get_n64()
 ; location: [7FFDDAF384B0h, 7FFDDAF384C4h]
 0000h push rax                      ; PUSH(Push_r64) [RAX]                                 encoding(1 byte ) = 50

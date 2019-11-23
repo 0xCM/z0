@@ -103,24 +103,6 @@ namespace Z0
             bitread_check<ushort>(250,67);
         }
         
-        public void bitgrid_store()
-        {
-            
-            var dst = StackStore.alloc(n128);
-            var dst8u = dst.AsBytes();
-            Claim.eq(16,dst8u.Length);
-
-            for(var i=0; i<16; i++)
-                dst8u[i] = Random.Next<byte>();
-            var bs1 = dst.ToBitString();
-            var bs2 = dst8u.ToBitString();
-            Claim.eq(bs1,bs2);
-
-            var a = Random.Blocks<byte>(n128);
-            var b = StackStore.alloc(n128);
-            StackStore.store(in a.Head, 16, ref b);
-            Claim.eq(a, b.AsBytes());        
-        }
 
         void bitread_check<T>(ushort rows, ushort cols)
             where T : unmanaged

@@ -67,32 +67,26 @@ namespace Z0
         public BitVector4 this[int index]
         {
             [MethodImpl(Inline)]
-            get => BitMatrix.row(this, index);
+            get => Row(index);
         }
 
-        public BitVector16 this[N0 col]
-        {
-            [MethodImpl(Inline)]
-            get => BitMatrix.col(this,col);
-        }
+        [MethodImpl(Inline)]
+        public BitVector4 Row(int index)
+            => BitVector.direct(n4, Bits.extract((ulong)this,(byte)(index*4), 4));
 
-        public BitVector16 this[N1 col]
-        {
-            [MethodImpl(Inline)]
-            get => BitMatrix.col(this, col);
-        }
+        [MethodImpl(Inline)]
+        public BitVector16 Col(int index)
+            => BitVector.from(n16, Bits.gather(this,(C0 << index)));
 
-        public BitVector16 this[N2 col]
-        {
-            [MethodImpl(Inline)]
-            get => BitMatrix.col(this,col);
-        }
-
-        public BitVector16 this[N3 col]
-        {
-            [MethodImpl(Inline)]
-            get => BitMatrix.col(this,col);
-        }
+        // C0 = [0001 0001 ... 0001]
+        // C1 = C0 << 1 = [0010 0010 ... 0010]
+        // C2 = C0 << 2 = [0100 0100 ... 0100]
+        // C3 = C0 << 3 = [1000 1000 ... 1000]
+        const ulong C0 = 
+            (1ul << 64 - 1*4) | (1ul << 64 - 2*4) | (1ul << 64 - 3*4) | (1ul << 64 - 4*4) | 
+            (1ul << 64 - 5*4) | (1ul << 64 - 6*4) | (1ul << 64 - 7*4) | (1ul << 64 - 8*4) |
+            (1ul << 64 - 9*4) | (1ul << 64 - A*4) | (1ul << 64 - B*4) | (1ul << 64 - C*4) |
+            (1ul << 64 - D*4) | (1ul << 64 - E*4) | (1ul << 64 - F*4) | 1;        
     }
 
     partial class BitMatrix
@@ -145,65 +139,10 @@ namespace Z0
         public static uint pop(BitMatrix16x4 A)
             => Bits.pop(A);
 
-        [MethodImpl(Inline)]
-        public static BitVector4 row(BitMatrix16x4 A, int index)
-            => BitVector.direct(n4, Bits.extract((ulong)A,(byte)(index*4), 4));
-
-        [MethodImpl(Inline)]
-        public static BitVector16 col<N>(BitMatrix16x4 A, N n = default)
-            where N : unmanaged, ITypeNat
-        {
-            if(typeof(N) == typeof(N0))
-                return col(A,n0);
-            else if (typeof(N) == typeof(N1))
-                return col(A,n1);
-            else if (typeof(N) == typeof(N2))
-                return col(A,n2);
-            else if (typeof(N) == typeof(N3))
-                return col(A,n3);
-            else
-                return default;
-        }
 
         [MethodImpl(Inline)]
         public static BitMatrix4x16 transpose(BitMatrix16x4 A)
-            => BitMatrix.define(n4,n16, ((ulong)col(A,n0) << 0) | ((ulong)col(A,n1) << 16) | ((ulong)col(A,n2) << 32) | ((ulong)col(A,n3) << 48));
-
-        // [MethodImpl(Inline)]
-        // public static BitGrid<N4,N16,ulong> transpose(BitMatrix16x4 A)
-        //     => BitGrid.load(n4,n16, ((ulong)col(A,n0) << 0) | ((ulong)col(A,n1) << 16) | ((ulong)col(A,n2) << 32) | ((ulong)col(A,n3) << 48));
-
-        // [0001 0001 ... 0001]
-        const ulong C0 = 
-            (1ul << 64 - 1*4) | (1ul << 64 - 2*4) | (1ul << 64 - 3*4) | (1ul << 64 - 4*4) | 
-            (1ul << 64 - 5*4) | (1ul << 64 - 6*4) | (1ul << 64 - 7*4) | (1ul << 64 - 8*4) |
-            (1ul << 64 - 9*4) | (1ul << 64 - A*4) | (1ul << 64 - B*4) | (1ul << 64 - C*4) |
-            (1ul << 64 - D*4) | (1ul << 64 - E*4) | (1ul << 64 - F*4) | 1;
-        
-        // [0010 0010 ... 0010]
-        const ulong C1 = (C0 << 1);
-        
-        // [0100 0100 ... 0100]
-        const ulong C2 = (C0 << 2);
-        
-        // [1000 1000 ... 1000]
-        const ulong C3 = (C0 << 3);
-
-        [MethodImpl(Inline)]
-        static BitVector16 col(BitMatrix16x4 A, N0 index)
-            => BitVector.from(n16, Bits.gather(A,C0));
-
-        [MethodImpl(Inline)]
-        static BitVector16 col(BitMatrix16x4 A, N1 index)
-            => BitVector.from(n16,Bits.gather(A,C1));
-
-        [MethodImpl(Inline)]
-        static BitVector16 col(BitMatrix16x4 A, N2 index)
-            => BitVector.from(n16,Bits.gather(A,C2));
-
-        [MethodImpl(Inline)]
-        static BitVector16 col(BitMatrix16x4 A, N3 index)
-            => BitVector.from(n16,Bits.gather(A,C3));
+            => BitMatrix.define(n4,n16, ((ulong)A.Col(0) << 0) | ((ulong)A.Col(1) << 16) | ((ulong)A.Col(2) << 32) | ((ulong)A.Col(3) << 48));
 
         /*
         0 | 0 1 2 3
@@ -232,12 +171,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitMatrix16x4 ToPrimalBits(this ulong src, N16 m, N4 n)
             => BitMatrix.define(m,n,src);
-
-        [MethodImpl(Inline)]
-        public static BitMatrix8 ToPrimalBits(this ulong src, N8 n = default)
-            => BitMatrix.primal(n, src);
-
-
 
     }
 }

@@ -37,7 +37,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static ref BitMatrix8 transpose(in BitMatrix8 A, ref BitMatrix8 Z)
+        public static ref BitMatrix8 transpose_v1(in BitMatrix8 A, ref BitMatrix8 Z)
         {
             var x = dinx.vmov(n128,(ulong)A);
             for(var i=7; i>= 0; i--)
@@ -49,17 +49,55 @@ namespace Z0
         }
         
         [MethodImpl(Inline)]
-        public static BitMatrix8 transpose(in BitMatrix8 A)
+        public static BitMatrix8 transpose_v2(in BitMatrix8 A)
         {
             var n = n8;
             var src = (ulong)A;
-            var dst = 0ul;
+            var data = 0ul;
             for(var i=0; i<8; i++)
             {
-                dst |= (Bits.gather(src, BitMask.Lsb64x8) << i*8);
+                data |= (Bits.gather(src, BitMask.Lsb64x8) << i*8);
                 src >>= 1;
             }
-            return (BitMatrix8)dst;
+            return (BitMatrix8)data;
+        }
+
+        [MethodImpl(Inline)]
+        public static void transpose_v2(in BitMatrix8 A, ref BitMatrix8 Z)
+        {
+            var n = n8;
+            var src = (ulong)A;
+            var data = 0ul;
+            for(var i=0; i<8; i++)
+            {
+                data |= (Bits.gather(src, BitMask.Lsb64x8) << i*8);
+                src >>= 1;
+            }
+
+            As.uint64(ref Z.Head) = data;
+        }
+
+        [MethodImpl(Inline)]
+        public static BitMatrix8 transpose_v3(in BitMatrix8 A)
+            => BitMatrix.primal(n8, 
+                  ((ulong)A.Col(0) << 0*8) 
+                | ((ulong)A.Col(1) << 1*8) 
+                | ((ulong)A.Col(2) << 2*8) 
+                | ((ulong)A.Col(3) << 3*8)
+                | ((ulong)A.Col(4) << 4*8) 
+                | ((ulong)A.Col(5) << 5*8) 
+                | ((ulong)A.Col(6) << 6*8)
+                | ((ulong)A.Col(7) << 7*8)
+                );
+
+        [MethodImpl(Inline)]
+        public static void transpose_v3(in BitMatrix8 A, ref BitMatrix8 Z)
+        {
+            const int width = 8;
+            var data = 0ul;            
+            for(var i=0; i<width; i++)
+                data |= ((ulong)A.Col(i) << i*width);
+            As.uint64(ref Z.Head) = data;
         }
 
         /// <summary>
@@ -69,17 +107,17 @@ namespace Z0
         /// <param name="Z"></param>
         /// <remarks>Code adapted from Hacker's Delight</remarks>
         [MethodImpl(Inline)]
-        public static ref BitMatrix8 transpose_v3(in BitMatrix8 A, ref BitMatrix8 Z)
+        public static void transpose_v4(in BitMatrix8 A, ref BitMatrix8 Z)
         {
-            var src = (ulong)A;
-            var t = (src ^ (src >> 7)) & 0x00AA00AA00AA00AAul;
-            src = src ^ t ^ (t << 7);
-            t = (src ^ (src >> 14)) & 0x0000CCCC0000CCCCul;
-            src = src ^ t ^ (t << 14);
-            t = (src ^ (src >> 28)) & 0x00000000F0F0F0F0ul;
-            src = src ^ t ^ (t << 28);
-            bytes(src).CopyTo(Z.data);
-            return ref Z;
+            var data = (ulong)A;
+            var t = (data ^ (data >> 7)) & 0x00AA00AA00AA00AAul;
+            data = data ^ t ^ (t << 7);
+            t = (data ^ (data >> 14)) & 0x0000CCCC0000CCCCul;
+            data = data ^ t ^ (t << 14);
+            t = (data ^ (data >> 28)) & 0x00000000F0F0F0F0ul;
+            data = data ^ t ^ (t << 28);
+            //bytes(data).CopyTo(Z.data);
+            As.uint64(ref Z.Head) = data;
         }
 
         public static BitMatrix16 transpose(in BitMatrix16 A)

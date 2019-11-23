@@ -29,12 +29,12 @@ namespace Z0
         {
             var n = n8;
             var m1 = Random.BitMatrix(n);
-            var m2 = BitMatrix.transpose(m1);
+            var m2 = BitMatrix.transpose_v2(m1);
             for(var i=0; i<n; i++)
             for(var j=0; j<n; j++)
                 Claim.eq(m1[i,j], m2[j,i]);
             
-            var m3 = BitMatrix.transpose(m2);
+            var m3 = BitMatrix.transpose_v2(m2);
             Claim.yea(m3 == m1);
         }
 
