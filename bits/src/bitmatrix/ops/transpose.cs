@@ -20,7 +20,7 @@ namespace Z0
         {
             byte col = 0;
             for(var r = 0; r < BitMatrix4.N; r++)
-                BitMask.set(ref col, (byte)r, BitMask.test(A[r], index));
+                col = BitMask.set(col, (byte)r, BitMask.test(A[r], index));
             return col;
         }
 
@@ -86,7 +86,7 @@ namespace Z0
         {
             var dst = A.Replicate();
             for(var i=0; i< BitMatrix16.N; i++)
-                dst[i] = A.ColData(i);
+                dst[i] = A.Column(i);
             return dst;
         }
 

@@ -279,8 +279,6 @@ namespace Z0
         }
         
         
-        public static ref ulong bitset_3(ref ulong src, byte pos, bit state)
-            => ref BitMask.set(ref src, pos, state);
          
 
         [MethodImpl(Inline)]        

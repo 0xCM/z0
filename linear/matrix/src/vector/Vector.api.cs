@@ -87,10 +87,10 @@ namespace Z0
         /// <typeparam name="N">The length type</typeparam>
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
-        public static BlockVector<N,T> blockalloc<N,T>(N n = default)
+        public static VBlock256<N,T> blockalloc<N,T>(N n = default)
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                =>  BlockVector<N,T>.Load(DataBlocks.alloc<N,T>(n256));
+                =>  VBlock256<N,T>.Load(DataBlocks.alloc<N,T>(n256));
         
         /// <summary>
         /// Allocates a block vector optionally filled with a specified value
@@ -100,7 +100,7 @@ namespace Z0
         /// <typeparam name="N">The length type</typeparam>
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
-        public static BlockVector<T> blockalloc<T>(int length)               
+        public static VBlock256<T> blockalloc<T>(int length)               
             where T : unmanaged
                 => DataBlocks.cellalloc<T>(n256,length);
 
@@ -112,19 +112,19 @@ namespace Z0
         /// <typeparam name="N">The length type</typeparam>
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
-        public static BlockVector<N,T> blockload<N,T>(Span<T> src, N n = default)
+        public static VBlock256<N,T> blockload<N,T>(Span<T> src, N n = default)
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => BlockVector<N,T>.Load(DataBlocks.safeload(n256,src));
+                => VBlock256<N,T>.Load(DataBlocks.safeload(n256,src));
 
         [MethodImpl(Inline)]
-        public static BlockVector<N,T> blockload<N,T>(Block256<T> src)
+        public static VBlock256<N,T> blockload<N,T>(Block256<T> src)
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => BlockVector<N, T>.Load(src);
+                => VBlock256<N, T>.Load(src);
 
         [MethodImpl(Inline)]
-        public static BlockVector<N,T> blockload<N,T>(NatBlock<N,T> src)
+        public static VBlock256<N,T> blockload<N,T>(NatSpan<N,T> src)
             where N : unmanaged, ITypeNat
             where T : unmanaged
                 => src;

@@ -78,27 +78,6 @@ namespace Z0
         public static uint hi(ulong src)
             => (uint)(src >> 32);
 
-        [MethodImpl(Inline)]
-        public static ref ushort puthi(byte src, ref ushort dst)
-        {
-            dst = (ushort)(bzhi(ref dst,8) | ((ushort)src << 8));
-            return ref dst;
-        }
-
-        [MethodImpl(Inline)]
-        public static ref uint puthi(ushort src, ref uint dst)
-        {
-            dst = bzhi(ref dst,16) | ((uint)src << 16);
-            return ref dst;
-        }
-
-        [MethodImpl(Inline)]
-        public static ref ulong puthi(uint src, ref ulong dst)
-        {
-            dst = bzhi(ref dst,32) | ((ulong)src << 32);
-            return ref dst;
-        }
-
     }
 
 }

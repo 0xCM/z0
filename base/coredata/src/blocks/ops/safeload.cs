@@ -40,7 +40,7 @@ namespace Z0
         /// <param name="offset">The span index at which to begin the load</param>
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
-        public static Block64<T> safeload<N,T>(N64 n, in NatBlock<N,T> src)
+        public static Block64<T> safeload<N,T>(N64 n, in NatSpan<N,T> src)
             where T : unmanaged
             where N : unmanaged, ITypeNat<N>, INatDivisible<N,N64>
                 => safeload(n, src.Unsized);
@@ -72,7 +72,7 @@ namespace Z0
         /// <param name="offset">The span index at which to begin the load</param>
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
-        public static Block128<T> safeload<N,T>(N128 n, in NatBlock<N,T> src)
+        public static Block128<T> safeload<N,T>(N128 n, in NatSpan<N,T> src)
             where T : unmanaged
             where N : unmanaged, ITypeNat<N>, INatDivisible<N,N64>
                 => safeload(n, src.Unsized);
@@ -105,7 +105,7 @@ namespace Z0
         /// <param name="offset">The span index at which to begin the load</param>
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
-        public static Block256<T> safeload<N,T>(N256 n, in NatBlock<N,T> src)
+        public static Block256<T> safeload<N,T>(N256 n, in NatSpan<N,T> src)
             where T : unmanaged
             where N : unmanaged, ITypeNat
                 => safeload(n,src.Unsized);

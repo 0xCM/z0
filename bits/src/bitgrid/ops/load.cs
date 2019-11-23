@@ -44,6 +44,19 @@ namespace Z0
             return new BitGrid<M, N, T>(src);
         }
 
+        [MethodImpl(NotInline)]
+        public static BitGrid<M,N,T> load<M,N,T>(M m, N n, params T[] data)
+            where N : unmanaged, ITypeNat
+            where M : unmanaged, ITypeNat
+            where T : unmanaged
+        {
+            var natbits = NatMath.mul(m,n) ;   
+            var databits = data.Length * bitsize<T>();
+            if(databits < natbits)
+                Errors.ThrowInvariantFailure($"{databits} < {natbits}");
+            return new BitGrid<M,N,T>(data);
+        }
+
         /// <summary>
         /// Loads a natural bitgrid of dimensions Mx8 of type byte from primal bitvectors of length 8
         /// </summary>

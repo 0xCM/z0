@@ -375,13 +375,25 @@ namespace Z0
             return dst;
         }
 
+        public BitString Slice(int offset)
+        {
+            Span<byte> bits = bitseq;
+            return new BitString(bits.Slice(offset));
+        }
+
+        public BitString Slice(int offset, int length)
+        {
+            Span<byte> bits = bitseq;
+            return new BitString(bits.Slice(offset,length));
+        }
+
         /// <summary>
         /// Renders the content as a natural bitspan
         /// </summary>
-        public NatBlock<N,bit> ToBitSpan<N>(N n = default)
+        public NatSpan<N,bit> ToBitSpan<N>(N n = default)
             where N : unmanaged, ITypeNat
         {
-            var dst = DataBlocks.natalloc<N,bit>();
+            var dst = NatSpan.alloc<N,bit>();
             for(var i=0; i< bitseq.Length; i++)
                 dst[i] = (bit)bitseq[i];
             return dst;

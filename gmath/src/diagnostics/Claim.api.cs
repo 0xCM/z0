@@ -5,7 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Numerics;
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
         
@@ -238,7 +237,7 @@ namespace Z0
         /// <param name="line">The file line number of invocation</param>
         /// <typeparam name="N">The length type</typeparam>
         /// <typeparam name="T">The element type</typeparam>
-        public static void eq<N,T>(NatBlock<N,T> lhs, NatBlock<N,T> rhs, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
+        public static void eq<N,T>(NatSpan<N,T> lhs, NatSpan<N,T> rhs, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
             where T : unmanaged 
             where N : unmanaged, ITypeNat             
                 => eq(lhs.Unsized,rhs.Unsized, caller,file,line);
@@ -254,7 +253,7 @@ namespace Z0
         /// <typeparam name="M">The row dimension type</typeparam>
         /// <typeparam name="N">The column dimension type</typeparam>
         /// <typeparam name="T">The element type</typeparam>
-        public static void eq<M,N,T>(NatGrid<M,N,T> lhs, NatGrid<M,N,T> rhs, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
+        public static void eq<M,N,T>(NatSpan<M,N,T> lhs, NatSpan<M,N,T> rhs, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
             where N : unmanaged, ITypeNat
             where M : unmanaged, ITypeNat
             where T : unmanaged 
@@ -293,18 +292,18 @@ namespace Z0
         /// <summary>
         /// Asserts content equality for two 256-bit blocked spans
         /// </summary>
-        /// <param name="lhs">The left span</param>
-        /// <param name="rhs">The right span</param>
+        /// <param name="xb">The left block</param>
+        /// <param name="yb">The right block</param>
         /// <param name="caller">The invoking function</param>
         /// <param name="file">The file in which the invoking function is defined </param>
         /// <param name="line">The file line number of invocation</param>
         /// <typeparam name="T">The element type</typeparam>        
-        public static void eq<T>(Block256<T> lhs, Block256<T> rhs, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
+        public static void eq<T>(Block256<T> xb, Block256<T> yb, [Member] string caller = null, [File] string file = null, [Line] int? line = null)
             where T : unmanaged
         {
-            for(var i = 0; i< length(lhs,rhs); i++)
-                if(!gmath.eq(lhs[i],rhs[i]))
-                    throw Errors.ItemsNotEqual(i, lhs[i], rhs[i], caller, file, line);
+            for(var i = 0; i< length(xb,yb); i++)
+                if(!gmath.eq(xb[i],yb[i]))
+                    throw Errors.ItemsNotEqual(i, xb[i], yb[i], caller, file, line);
         }
 
         /// <summary>

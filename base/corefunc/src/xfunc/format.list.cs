@@ -133,7 +133,7 @@ namespace Z0
         /// <typeparam name="T">The element type</typeparam>
         /// <typeparam name="N">The length type</typeparam>
         [MethodImpl(Inline)]        
-        public static string FormatList<N,T>(this NatBlock<N,T> src, char delimiter = ',', int offset = 0, int pad = 0)
+        public static string FormatList<N,T>(this NatSpan<N,T> src, char delimiter = ',', int offset = 0, int pad = 0)
             where N : unmanaged, ITypeNat
             where T : unmanaged 
                 => src.Unsized.FormatList(delimiter,offset,pad);

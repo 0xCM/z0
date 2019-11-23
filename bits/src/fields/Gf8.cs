@@ -45,14 +45,14 @@ namespace Z0
         /// </summary>
         /// <param name="min">The minimum operand value</param>
         /// <param name="max">The maximum operand value</param>
-        public static BlockMatrix<N7,byte> products()
+        public static MBlock256<N7,byte> products()
         {
             var dst = Matrix.blockalloc<N7,byte>();
             products(1, (byte)0b111, ref dst.Unblocked[0]);
             return dst;
         }
 
-        public static string FormatTable<N,T>(BlockMatrix<N,T> src)
+        public static string FormatTable<N,T>(MBlock256<N,T> src)
             where T : unmanaged
             where N: unmanaged, ITypeNat
                 => src.Format(render:x => BitString.from(x).Format());            

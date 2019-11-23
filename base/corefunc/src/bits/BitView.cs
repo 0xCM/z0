@@ -83,7 +83,7 @@ namespace Z0
             get => BitMask.test(Bytes[offset], pos);
             
             [MethodImpl(Inline)]
-            set => BitMask.set(ref Bytes[offset], pos, value);
+            set => Bytes[offset] = BitMask.set(Bytes[offset], pos, value);
                 
         }
 

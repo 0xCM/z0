@@ -12,7 +12,7 @@ namespace Z0
     public class t_bm_or : BitMatrixTest<t_bm_or>
     {                
 
-        public void bm_or_32x32()
+        public void pbm_or_32()
         {
             for(var i=0; i<SampleSize; i++)
             {

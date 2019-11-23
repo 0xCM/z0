@@ -281,10 +281,10 @@ namespace Z0
         public bit this[int pos]
         {
             [MethodImpl(Inline)]
-            get => GetBit(pos);
+            get => BitMask.test(data, pos);
             
             [MethodImpl(Inline)]
-            set => SetBit(pos,value);
+            set => data = BitMask.set(data, (byte)pos, value);
         }
         
         /// <summary>
@@ -383,12 +383,12 @@ namespace Z0
             => BitMask.disable(ref data, pos);
 
         /// <summary>
-        /// Disables the high bits that follow the specified index
+        /// Disables the bits after a specified poistion
         /// </summary>
         /// <param name="pos">The bit position</param>
         [MethodImpl(Inline)]
         public void DisableAfter(int pos)
-            => data = Bits.bzhi(ref data, (byte)++pos);
+            => data = Bits.zerohi(data, (byte)++pos);
             
         /// <summary>
         /// Determines whether a bit is enabled
@@ -399,30 +399,11 @@ namespace Z0
             => BitMask.test(data, pos);
 
         /// <summary>
-        /// Gets the value of an index-identified bit
-        /// </summary>
-        /// <param name="pos">The bit index</param>
-        [MethodImpl(Inline)]
-        public bit GetBit(int pos)
-            => BitMask.test(data, pos);
-
-        /// <summary>
-        /// Sets the state of an index-identified bit
-        /// </summary>
-        /// <param name="pos">The bit index</param>
-        /// <param name="value">The bit value</param>
-        [MethodImpl(Inline)]
-        public void SetBit(int pos, bit value)
-            => data = BitMask.set(ref data, (byte)pos, value);
-
-        /// <summary>
         /// Counts vector's enabled bits
         /// </summary>
         [MethodImpl(Inline)]
         public uint Pop()
             => Bits.pop(data);
-
-
 
         /// <summary>
         /// Rearranges the vector in-place as specified by a permutation

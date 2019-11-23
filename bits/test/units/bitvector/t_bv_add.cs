@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2019
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Test
+namespace Z0
 {
     using System;
     using System.Linq;
@@ -14,7 +14,7 @@ namespace Z0.Test
     public class t_bv_add : BitVectorTest<t_bv_add>
     {
 
-        public void bvadd_8()
+        public void bvadd_p8()
         {
             for(var i=0; i<SampleSize; i++)
             {
@@ -26,7 +26,7 @@ namespace Z0.Test
             }
         }
 
-        public void bvadd_16()
+        public void bvadd_p16()
         {
             for(var i=0; i<SampleSize; i++)
             {
@@ -38,7 +38,7 @@ namespace Z0.Test
             }
         }
 
-        public void bvadd_32()
+        public void bvadd_p32()
         {
             for(var i=0; i<SampleSize; i++)
             {
@@ -50,7 +50,7 @@ namespace Z0.Test
             }
         }
 
-        public void bvadd_64()
+        public void bvadd_p64()
         {
             for(var i=0; i<SampleSize; i++)
             {
@@ -61,7 +61,6 @@ namespace Z0.Test
 
             }
         }
-
 
     }
 

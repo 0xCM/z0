@@ -16,7 +16,7 @@ namespace Z0
         /// Counts the number of trailing zero bits
         /// </summary>
         [MethodImpl(Inline)]
-        public static uint ntz<T>(BitVector<T> x)
+        public static uint ntz<T>(in BitVector<T> x)
             where T : unmanaged
                 => gbits.ntz(x.data);
 

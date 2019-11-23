@@ -19,15 +19,15 @@ namespace Z0.Mkl
         const int DefaultVectorLength = Pow2.T08;
 
         [MethodImpl(Inline)]
-        protected BlockVector<T> RVec<T>(int? len = null, T rep = default)
+        protected VBlock256<T> RVec<T>(int? len = null, T rep = default)
             where T : unmanaged
-                => Random.BlockVector<T>(len ?? DefaultVectorLength);
+                => Random.VectorBlock<T>(len ?? DefaultVectorLength);
 
         [MethodImpl(Inline)]
-        protected BlockVector<N,T> RVec<N,T>(N len = default, T rep = default)
+        protected VBlock256<N,T> RVec<N,T>(N len = default, T rep = default)
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => Random.BlockVector<N,T>();
+                => Random.VectorBlock<N,T>();
 
         /// <summary>
         /// Produces a random matrix of natural dimension
@@ -39,28 +39,28 @@ namespace Z0.Mkl
         /// <typeparam name="N">The column count type</typeparam>
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
-        protected BlockMatrix<M,N,T> RMat<M,N,T>(Interval<T> domain, M m = default, N n = default)
+        protected MBlock256<M,N,T> RMat<M,N,T>(Interval<T> domain, M m = default, N n = default)
             where T : unmanaged
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
-                => Random.BlockMatrix<M,N,T>(domain);
+                => Random.MatrixBlock<M,N,T>(domain);
 
         [MethodImpl(Inline)]
-        protected BlockVector<float> RVecF32(int len, int? min = null, int? max = null)
-            => Random.BlockVector<int,float>(len, closed(min ?? -25, max ?? 25));
+        protected VBlock256<float> RVecF32(int len, int? min = null, int? max = null)
+            => Random.VectorBlock<int,float>(len, closed(min ?? -25, max ?? 25));
 
         [MethodImpl(Inline)]
-        protected BlockVector<double> RVecF64(int len, long? min = null, long? max = null)
-            => Random.BlockVector<long,double>(len, closed(min ?? -25L, max ?? 25L));
+        protected VBlock256<double> RVecF64(int len, long? min = null, long? max = null)
+            => Random.VectorBlock<long,double>(len, closed(min ?? -25L, max ?? 25L));
 
         [MethodImpl(Inline)]
-        protected BlockVector<float> RVecF32<N>(N len = default, int? min = null, int? max = null)
+        protected VBlock256<float> RVecF32<N>(N len = default, int? min = null, int? max = null)
             where N : unmanaged, ITypeNat
-                => Random.BlockVector<N,int,float>(closed(min ?? -25, max ?? 25));
+                => Random.VectorBlock<N,int,float>(closed(min ?? -25, max ?? 25));
 
         [MethodImpl(Inline)]
-        protected BlockVector<double> RVecF64<N>(N len = default, long? min = null, long? max = null)
+        protected VBlock256<double> RVecF64<N>(N len = default, long? min = null, long? max = null)
             where N : unmanaged, ITypeNat
-                => Random.BlockVector<N,long,double>(closed(min ?? -25L, max ?? 25L));
+                => Random.VectorBlock<N,long,double>(closed(min ?? -25L, max ?? 25L));
     }
 }

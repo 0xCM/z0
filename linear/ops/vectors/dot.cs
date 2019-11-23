@@ -15,8 +15,6 @@ namespace Z0
 
     partial class Linear
     {
-
-
         /// <summary>
         /// Computes the canonical scalar product between two blocked vectors
         /// </summary>
@@ -24,7 +22,7 @@ namespace Z0
         /// <param name="y">The second vector</param>
         /// <typeparam name="T">The common vector component type</typeparam>
         [MethodImpl(Inline)]
-        public static T dot<T>(BlockVector<T> x, BlockVector<T> y)
+        public static T dot<T>(VBlock256<T> x, VBlock256<T> y)
             where T : unmanaged
                 => mathspan.dot<T>(x.Unblocked, y.Unblocked);
 
@@ -36,12 +34,10 @@ namespace Z0
         /// <typeparam name="N">The length type</typeparam>
         /// <typeparam name="T">The common component type</typeparam>
         [MethodImpl(Inline)]
-        public static T dot<N,T>(BlockVector<N,T> x, BlockVector<N,T> y)
+        public static T dot<N,T>(VBlock256<N,T> x, VBlock256<N,T> y)
             where N : unmanaged, ITypeNat
             where T : unmanaged    
-                => mathspan.dot<T>(x.Unsized,y.Unsized);
-
-
+                => mathspan.dot<T>(x.Unsized, y.Unsized);
     }
 
 }

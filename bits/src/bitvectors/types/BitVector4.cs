@@ -219,6 +219,14 @@ namespace Z0
         public static bool operator !=(in BitVector4 lhs, in BitVector4 rhs)
             => !lhs.Equals(rhs);
 
+
+        [MethodImpl(Inline)]
+        internal BitVector4(byte data, bit direct)
+        {
+            this.data = data;
+        }
+
+
         [MethodImpl(Inline)]
         public BitVector4(byte data)
         {
@@ -474,6 +482,7 @@ namespace Z0
         public override string ToString()
             => Format();
 
+
         public BitVector4 Inc()
         {
             if(data < 0xF)
@@ -514,7 +523,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public void SetBit(int pos, bit value)
-            => data = BitMask.set(ref data, (byte)pos, value);
+            => data = BitMask.set(data, (byte)pos, value);
 
         /// <summary>
         /// Gets the state of the first bit

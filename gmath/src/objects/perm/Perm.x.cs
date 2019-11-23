@@ -5,10 +5,7 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
-    using System.Text;
 
     using static zfunc;    
 
@@ -192,10 +189,10 @@ namespace Z0
         /// Computes the digigs corresponding to each 2-bit segment of the permutation spec
         /// </summary>
         /// <param name="src">The perm spec</param>
-        public static NatBlock<N4, byte> Digits(this Perm4 src)
+        public static NatSpan<N4, byte> Digits(this Perm4 src)
         {
             var scalar = (byte)src;
-            var dst = DataBlocks.natalloc<N4,byte>();
+            var dst = NatSpan.alloc<N4,byte>();
             dst[0] = BitMask.between(scalar, 0, 1);
             dst[1] = BitMask.between(scalar, 2, 3);
             dst[2] = BitMask.between(scalar, 4, 5);

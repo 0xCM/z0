@@ -14,11 +14,16 @@ namespace Z0
     /// <summary>
     /// Defines a vertex within a graph
     /// </summary>
-    public readonly struct Vertex<V> : IVertex<V>
+    public readonly struct Vertex<V>
         where V : unmanaged
     {        
+        /// <summary>
+        /// The index of the vertex that uniquely identifies it within a graph
+        /// </summary>
+        public readonly V Index;
+
         [MethodImpl(Inline)]
-        public static Edge<V> operator +(Vertex<V> source, Vertex<V> target)
+        public static Edge<V> operator +(in Vertex<V> source, in Vertex<V> target)
             => source.Connect(target);
 
         [MethodImpl(Inline)]
@@ -26,14 +31,6 @@ namespace Z0
         {
             this.Index = Index;
         }
-
-        /// <summary>
-        /// The index of the vertex that uniquely identifies it within a graph
-        /// </summary>
-        public readonly V Index;
-
-        V IVertex<V>.Index 
-            => Index;
 
         public override string ToString() 
             => $"({Index})";

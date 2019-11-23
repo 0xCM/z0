@@ -20,22 +20,6 @@ namespace Z0
 
         public static int Width => bitsize<T>();
 
-        [MethodImpl(Inline)]
-        public static RowBits<T> From(T[] src)        
-            => new RowBits<T>(src);
-
-        [MethodImpl(Inline)]
-        public static RowBits<T> From(Span<T> src)        
-            => new RowBits<T>(src);
-
-        [MethodImpl(Inline)]
-        public static RowBits<T> From(Span<byte> src)        
-            => new RowBits<T>(cast<T>(src));
-
-        [MethodImpl(NotInline)]
-        public static RowBits<T> Alloc(int rows)        
-            => new RowBits<T>(new T[rows]);
-
         /// <summary>
         /// Computes the bitwise AND between the operands
         /// </summary>
@@ -136,18 +120,9 @@ namespace Z0
             set => BitGrid.setbit(Width, row, col, value, ref Head);
         }
 
-    
-        [MethodImpl(Inline)]
-        public RowBits<T> Fill(T value)
-        {
-            data.Fill(value);
-            return this;
-        }
-
         [MethodImpl(Inline)]
         public RowBits<S> As<S>()
             where S : unmanaged
                 => new RowBits<S>(data.As<T,S>());
     }
-
 }

@@ -5,17 +5,13 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Threading;
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
-    using System.Diagnostics;
 
     using static zfunc;
 
     public static class BitMatrix64x
     {   
-
         /// <summary>
         /// Converts the matrix to a bitvector
         /// </summary>
@@ -77,8 +73,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitMatrix64 AndNot(this BitMatrix64 A, in BitMatrix64 B)
             => BitMatrix.cnotimply(A, B);
-
     }
-
 
 }

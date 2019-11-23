@@ -19,16 +19,26 @@ namespace Z0
     public static class Graph
     {
         /// <summary>
-        /// Creates a graph from supplied vertices and edges
+        /// Creates a graph from supplied vertices and edges, sorting the provided vertices according to their index
         /// </summary>
         /// <param name="vertices">The vertices in the graph</param>
         /// <param name="edges">The edges that connect the vertices</param>
-        /// <typeparam name="V">The vertex index type</typeparam>
         [MethodImpl(Inline)]    
-        public static Graph<V,T> Define<V,T>(IEnumerable<Vertex<V,T>> vertices, IEnumerable<Edge<V>> edges)
+        public static Graph<V,T> define<V,T>(IEnumerable<Vertex<V,T>> vertices, IEnumerable<Edge<V>> edges)
             where V : unmanaged
             where T : unmanaged
-                => Graph<V,T>.Define(vertices,edges);
+                => new Graph<V,T>(vertices.OrderBy(x => x.Index,PrimalComparer.Get<V>()).ToArray(), edges.ToArray());
+
+        /// <summary>
+        /// Creates a graph from supplied vertices and edges and assumes the vertices are already appropriately sorted
+        /// </summary>
+        /// <param name="vertices">The vertices in the graph</param>
+        /// <param name="edges">The edges that connect the vertices</param>
+        [MethodImpl(Inline)]    
+        public static Graph<V,T> define<V,T>(Span<Vertex<V,T>> vertices, IEnumerable<Edge<V>> edges)
+            where V : unmanaged
+            where T : unmanaged
+                => new Graph<V,T>(vertices.ToArray(), edges.ToArray());
 
         /// <summary>
         /// Creates a graph from supplied vertices and edges
@@ -37,67 +47,77 @@ namespace Z0
         /// <param name="edges">The edges that connect the vertices</param>
         /// <typeparam name="V">The vertex index type</typeparam>
         [MethodImpl(Inline)]    
-        public static Graph<V,T> Define<V,T>(Span<Vertex<V,T>> vertices, IEnumerable<Edge<V>> edges)
+        public static Graph<V> define<V>(Span<Vertex<V>> vertices, IEnumerable<Edge<V>> edges)
             where V : unmanaged
-            where T : unmanaged
-                => Graph<V,T>.Define(vertices,edges);
+                => new Graph<V>(vertices.ToArray(), edges.ToArray());
 
         /// <summary>
-        /// Creates a graph from supplied vertices and edges
+        /// Creates a graph from supplied vertices and edges, sorting the provided vertices according to their index
         /// </summary>
         /// <param name="vertices">The vertices in the graph</param>
         /// <param name="edges">The edges that connect the vertices</param>
-        /// <typeparam name="V">The vertex index type</typeparam>
-        [MethodImpl(Inline)]    
-        public static Graph<V> Define<V>(Span<Vertex<V>> vertices, IEnumerable<Edge<V>> edges)
+        public static Graph<V> define<V>(IEnumerable<Vertex<V>> vertices, IEnumerable<Edge<V>> edges)
             where V : unmanaged
-            => Graph<V>.Define(vertices, edges);
+                => new Graph<V>(vertices.OrderBy(x => x.Index,PrimalComparer.Get<V>()).ToArray(), edges.ToArray());
+        
+        public static Graph<V> define<V>(params Edge<V>[] edges)
+            where V : unmanaged
+        {
+            var vertices = edges.Select(e => e.Source).Union(edges.Select(e => e.Target)).Select(x => new Vertex<V>(x));
+            return define(vertices,edges);
+        }
+
+        public static Graph<V,W,T> define<V,W,T>(IEnumerable<Vertex<V,T>> vertices, IEnumerable<Edge<V,W>> edges)
+            where V : unmanaged
+            where W : unmanaged
+            where T : unmanaged
+                => new Graph<V,W,T>(vertices.OrderBy(x => x.Index,PrimalComparer.Get<V>()).ToArray(), edges.ToArray());
 
         /// <summary>
         /// Defines an edge from an index-identified source to an index identified target
         /// </summary>
-        /// <param name="src">The source index</param>
-        /// <param name="dst">The target index</param>
+        /// <param name="source">The source index</param>
+        /// <param name="target">The target index</param>
         /// <typeparam name="V">The vertex index type</typeparam>
         [MethodImpl(Inline)]    
-        public static Edge<V> Edge<V>(V src, V dst)
+        public static Edge<V> edge<V>(V source, V target)
             where V : unmanaged
-                => (src,dst);
+                => (source,target);
 
         /// <summary>
         /// Defines a weighted edge from an index-identified source to an index identified target
         /// </summary>
-        /// <param name="src">The source index</param>
-        /// <param name="dst">The target index</param>
+        /// <param name="source">The source index</param>
+        /// <param name="target">The target index</param>
         /// <typeparam name="V">The vertex index type</typeparam>
         [MethodImpl(Inline)]    
-        public static Edge<V,W> Edge<V,W>(V src, V dst, W weight)
+        public static Edge<V,W> edge<V,W>(V source, V target, W weight)
             where V : unmanaged
             where W : unmanaged
-                => (src,dst,weight);
+                => (source,target,weight);
 
         /// <summary>
         /// Connects a source vertex to a target vertex
         /// </summary>
-        /// <param name="src">The source vertex</param>
-        /// <param name="dst">The target vertex</param>
+        /// <param name="source">The source vertex</param>
+        /// <param name="target">The target vertex</param>
         /// <typeparam name="V">The vertex index type</typeparam>
         /// <typeparam name="T">The vertex payload type</typeparam>
         [MethodImpl(Inline)]    
-        public static Edge<V> Connect<V,T>(in Vertex<V,T> src, in Vertex<V,T> dst)
+        public static Edge<V> connect<V,T>(in Vertex<V,T> source, in Vertex<V,T> target)
             where V : unmanaged
             where T : unmanaged
-                => new Edge<V>(src.Index,dst.Index);
+                => new Edge<V>(source.Index,target.Index);
 
         /// <summary>
         /// Connects a source vertex to a target vertex
         /// </summary>
-        /// <param name="src">The source vertex</param>
-        /// <param name="dst">The target vertex</param>
+        /// <param name="source">The source vertex</param>
+        /// <param name="target">The target vertex</param>
         /// <typeparam name="V">The vertex index type</typeparam>
-        public static Edge<V> Connect<V>(in Vertex<V> src, in Vertex<V> dst)
+        public static Edge<V> connect<V>(in Vertex<V> source, in Vertex<V> target)
             where V : unmanaged
-                => new Edge<V>(src.Index,dst.Index);
+                => new Edge<V>(source.Index,target.Index);
 
         /// <summary>
         /// Creates a vertex without payload
@@ -105,7 +125,7 @@ namespace Z0
         /// <param name="index">The index of the vertex that servies as a 
         /// unique identifier within the context of a graph</param>
         /// <typeparam name="V">The index type</typeparam>
-        public static Vertex<V> Vertex<V>(V index)
+        public static Vertex<V> vertex<V>(V index)
             where V : unmanaged
                 => new Vertex<V>(index);
 
@@ -114,7 +134,7 @@ namespace Z0
         /// </summary>
         /// <param name="count">The number of virtices in the sequence</param>
         /// <typeparam name="V">The index type</typeparam>
-        public static Span<Vertex<V>> Vertices<V>(int count)
+        public static Span<Vertex<V>> vertices<V>(int count)
             where V : unmanaged
         {
             Span<Vertex<V>> dst = new Vertex<V>[count];
@@ -129,7 +149,7 @@ namespace Z0
         /// <param name="s0">The first index assigned</param>
         /// <param name="data">The vertex payloads</param>
         /// <typeparam name="V">The index type</typeparam>
-        public static Span<Vertex<V,T>> Vertices<V,T>(V s0, params T[] data)
+        public static Span<Vertex<V,T>> vertices<V,T>(V s0, params T[] data)
             where V : unmanaged
             where T : unmanaged
         {
@@ -149,11 +169,10 @@ namespace Z0
         /// <typeparam name="V">The index type</typeparam>
         /// <typeparam name="V">The payload type</typeparam>
         [MethodImpl(Inline)]    
-        public static Vertex<V,T> Vertex<V,T>(V index, T data)
+        public static Vertex<V,T> vertex<V,T>(V index, T data)
             where V : unmanaged
             where T : unmanaged
                 => new Vertex<V, T>(index,data);
-
 
         /// <summary>
         /// Finds the edges in a graph that target an identified vertex
@@ -161,18 +180,19 @@ namespace Z0
         /// <param name="graph">The declaring graph</param>
         /// <param name="target">The index of the target vertex</param>
         /// <typeparam name="V">The vertex index type</typeparam>
-        public static ReadOnlySpan<Edge<V>> Incoming<V>(Graph<V> graph, V target)
+        public static ReadOnlySpan<Edge<V>> incoming<V>(Graph<V> graph, V target)
             where V : unmanaged
         {            
-            Span<Edge<V>> dst = new Edge<V>[graph.EdgeCount];
+            var count = graph.EdgeCount;
+            Span<Edge<V>> edges = new Edge<V>[count];
             var j = 0;
-            for(var i = 0u; i<graph.Edges.Length; i++)
+            for(var i = 0; i<count; i++)
             {
                 ref readonly var edge = ref graph.Edge(i);
                 if(gmath.eq(edge.Target, target))
-                    dst[j++] = edge;                    
+                    edges[j++] = edge;                    
             }
-            return dst.Slice(0, j);
+            return edges.Slice(0, j);
         }
 
 
@@ -182,18 +202,19 @@ namespace Z0
         /// <param name="graph">The declaring graph</param>
         /// <param name="target">The index of the target vertex</param>
         /// <typeparam name="V">The vertex index type</typeparam>
-        public static ReadOnlySpan<Edge<V>> Outgoing<V>(Graph<V> graph, V source)
+        public static ReadOnlySpan<Edge<V>> outgoing<V>(Graph<V> graph, V source)
             where V : unmanaged
         {            
-            Span<Edge<V>> dst = new Edge<V>[graph.EdgeCount];
+            var count = graph.EdgeCount;
+            Span<Edge<V>> edges = new Edge<V>[count];
             var j = 0;
-            for(var i = 0u; i<graph.Edges.Length; i++)
+            for(var i = 0; i<count; i++)
             {
                 ref readonly var edge = ref graph.Edge(i);
                 if(gmath.eq(edge.Source, source))
-                    dst[j++] = edge;                    
+                    edges[j++] = edge;                    
             }
-            return dst.Slice(0, j);
+            return edges.Slice(0, j);
         }
 
         /// <summary>
@@ -202,14 +223,15 @@ namespace Z0
         /// <param name="graph">The declaring graph</param>
         /// <param name="label">An optional label for the graph</param>
         /// <typeparam name="V">The verex index type</typeparam>
-        public static string Format<V>(Graph<V> src, string label = null)
+        public static string format<V>(Graph<V> src, string label = null)
             where V : unmanaged
         {
+            var count = src.EdgeCount;
             var text = sbuild();
             text.AppendLine("digraph " +(label ?? "g") + "   {");
-            for(var i=0; i< src.Edges.Length; i++)
+            for(var i=0; i< count; i++)
             {
-                var edge = src.Edges[i];
+                ref readonly var edge = ref src.Edge(i);
                 text.AppendLine($"    {edge.Source} -> {edge.Target}");                
             }
             text.AppendLine("}");

@@ -77,7 +77,7 @@ namespace Z0
          public static ulong inject(ulong src, ulong dst, byte first, byte len)
          {
             var last = (byte)(first + len);
-            var part0 = Bits.bzhi(dst,first);
+            var part0 = Bits.zerohi(dst,first);
             var part1 = src << first;
             var part2 = Bits.extract(dst, last, (byte)(64 - last)) << last;
             return part0 | part1 | part2;
@@ -87,7 +87,7 @@ namespace Z0
          public static uint inject(uint src, uint dst, byte first, byte len)
          {
             var last = (byte)(first + len);
-            var part0 = Bits.bzhi(dst,first);
+            var part0 = Bits.zerohi(dst,first);
             var part1 = src << first;
             var part2 = Bits.extract(dst, last, (byte)(64 - last)) << last;
             return part0 | part1 | part2;

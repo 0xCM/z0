@@ -64,5 +64,13 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitVector64 rev(BitVector64 x)        
             => gbits.rev(x.data);
+
+        /// <summary>
+        /// Reverses the bits in the source vector
+        /// </summary>
+        /// <param name="x">The source vector</param>
+        [MethodImpl(Inline)]
+        public static BitVector128 rev(BitVector128 x)        
+            => (gbits.rev(x.x1), gbits.rev(x.x0));            
     }
 }

@@ -104,13 +104,13 @@ namespace Z0
             => !BitMatrix.same(lhs,rhs);
 
         [MethodImpl(Inline)]
-        BitMatrix32(Span<uint> src)
+        internal BitMatrix32(Span<uint> src)
         {                        
             this.data = src;
         }        
 
         [MethodImpl(Inline)]
-        BitMatrix32(bit fill)
+        internal BitMatrix32(bit fill)
         {
             this.data = new uint[N];
             if(fill)
@@ -124,25 +124,6 @@ namespace Z0
         }
 
         /// <summary>
-        /// Reads the bit in a specified cell
-        /// </summary>
-        /// <param name="row">The row index</param>
-        /// <param name="col">The column index</param>
-        [MethodImpl(Inline)]
-        public readonly bit GetBit(int row, int col)
-            => BitMask.test(data[row], col);
-
-        /// <summary>
-        /// Sets the bit in a specified cell
-        /// </summary>
-        /// <param name="row">The row index</param>
-        /// <param name="col">The column index</param>
-        /// <param name="src">The source value</param>
-        [MethodImpl(Inline)]
-        public void SetBit(int row, int col, bit src)
-            => BitMask.set(ref data[row], (byte)col, src);
-
-        /// <summary>
         /// Queries/manipulates a bit in an identified cell
         /// </summary>
         /// <param name="row">The row index</param>
@@ -150,10 +131,10 @@ namespace Z0
         public bit this[int row, int col]
         {
             [MethodImpl(Inline)]
-            get => GetBit(row,col);
+            get => BitMask.test(data[row], col);
 
             [MethodImpl(Inline)]
-            set => SetBit(row,col,value);
+            set =>  data[row] = BitMask.set(data[row], (byte)col, value);
         }            
 
         /// <summary>
@@ -190,8 +171,19 @@ namespace Z0
         public ref BitVector32 this[int row]
         {
             [MethodImpl(Inline)]
-            get => ref RowVector(row);
+            get => ref Unsafe.As<uint,BitVector32>(ref seek(ref Head, row));
         }
+
+
+        [MethodImpl(Inline)]
+        public readonly BitVector32 Column(int index)
+        {
+            uint col = 0;
+            for(var r = 0; r < N; r++)
+                col = BitMask.setif(data[r], index, col, r);
+            return col;
+        }
+
 
         [MethodImpl(Inline)] 
         public readonly BitVector32 Diagonal()
@@ -202,48 +194,19 @@ namespace Z0
             => new BitMatrix32(data.ToArray());
 
         /// <summary>
-        /// Presents the data at a specified offset as a bitvector
-        /// </summary>
-        /// <param name="row">The row index</param>
-        [MethodImpl(Inline)]
-        public ref BitVector32 RowVector(int row)
-            => ref Unsafe.As<uint,BitVector32>(ref seek(ref Head, row));
-
-        /// <summary>
-        /// Presents the data at a specified offset as an unsigned integer
-        /// </summary>
-        /// <param name="row">The row index</param>
-        [MethodImpl(Inline)]
-        public ref uint RowData(int row)
-            => ref seek(ref Head, row);
-
-        /// <summary>
         /// Interchanges the i'th and j'th rows where  0 <= i,j < 32
         /// </summary>
         /// <param name="i">A row index</param>
         /// <param name="j">A row index</param>
         [MethodImpl(Inline)]
         public void RowSwap(int i, int j)
-            => data.Swap(i,j);
-
-        public readonly uint ColData(int index)
-        {
-            uint col = 0;
-            for(var r = 0; r < N; r++)
-                BitMask.setif(in data[r], index, ref col, r);
-            return col;
-        }
-        
-        [MethodImpl(Inline)]
-        public readonly BitVector32 ColVec(int index)
-            => ColData(index);
-
+            => data.Swap(i,j);        
         
         public readonly BitMatrix32 Transpose()
         {
             var dst = Replicate();
             for(var i=0; i<N; i++)
-                dst.data[i] = ColData(i);
+                dst.data[i] = Column(i);
             return dst;
         }
     

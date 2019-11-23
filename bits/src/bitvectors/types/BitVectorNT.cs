@@ -148,27 +148,27 @@ namespace Z0
             => !lhs.Equals(rhs);
 
         [MethodImpl(Inline)]
-        BitVector(Span<T> src)
+        internal BitVector(Span<T> src)
         {
             require(src.Length * SegWidth >= BitCount);
             this.data = src;
         }
 
         [MethodImpl(Inline)]
-        BitVector(params T[] src)
+        internal BitVector(params T[] src)
             : this(src.AsSpan())
         {
 
         }
 
         [MethodImpl(Inline)]
-        BitVector(Span<T> src, bool skipChecks)
+        internal BitVector(Span<T> src, bool skipChecks)
         {
             this.data = src;
         }
 
         [MethodImpl(Inline)]
-        BitVector(T[] src, bool skipChecks)
+        internal BitVector(T[] src, bool skipChecks)
         {
             this.data = src;
         }

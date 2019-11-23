@@ -24,7 +24,7 @@ namespace Z0.Mkl
         /// <param name="y">A target vector of length M</param>
         /// <typeparam name="M">The row dimension type of A</typeparam>
         /// <typeparam name="N">The column dimension type of A</typeparam>
-        public static ref BlockVector<M,double> gemv<M,N>(BlockMatrix<M,N,double> A, BlockVector<N,double> x, ref BlockVector<M,double> y)
+        public static ref VBlock256<M,double> gemv<M,N>(MBlock256<M,N,double> A, VBlock256<N,double> x, ref VBlock256<M,double> y)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
         {
@@ -43,7 +43,7 @@ namespace Z0.Mkl
         /// <param name="y">A target vector of length M</param>
         /// <typeparam name="M">The row dimension type of A</typeparam>
         /// <typeparam name="N">The column dimension type of A</typeparam>
-        public static ref BlockVector<M,float> gemv<M,N>(BlockMatrix<M,N,float> A, BlockVector<N,float> x, ref BlockVector<M,float> y)
+        public static ref VBlock256<M,float> gemv<M,N>(MBlock256<M,N,float> A, VBlock256<N,float> x, ref VBlock256<M,float> y)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
         {

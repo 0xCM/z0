@@ -334,6 +334,14 @@ namespace Z0
             => data = BitMask.disable(ref data, pos);
 
         /// <summary>
+        /// Disables the bits after a specified poistion
+        /// </summary>
+        /// <param name="pos">The bit position</param>
+        [MethodImpl(Inline)]
+        public void DisableAfter(int pos)
+            => data = Bits.zerohi(data, (byte)++pos);
+            
+        /// <summary>
         /// Gets the value of an index-identified bit
         /// </summary>
         /// <param name="pos">The bit index</param>
@@ -348,7 +356,7 @@ namespace Z0
         /// <param name="value">The bit value</param>
         [MethodImpl(Inline)]
         public void Set(int pos, bit value)
-            => data = BitMask.set(ref data, (byte)pos, value);
+            => data = BitMask.set(data, (byte)pos, value);
 
         /// <summary>
         /// Extracts a contiguous sequence of bits defined by an inclusive range

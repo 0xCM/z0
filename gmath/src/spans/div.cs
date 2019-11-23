@@ -64,7 +64,7 @@ namespace Z0
         {
             var len = length(lhs,rhs);
             for(var i = 0; i< len; i++)
-                gmath.div(ref lhs[i], rhs[i]);
+                lhs[i] = gmath.div(lhs[i], rhs[i]);
             return lhs;
         }
 

@@ -12,34 +12,22 @@ namespace Z0
     public class t_bm_identity : BitMatrixTest<t_bm_identity>
     {
         public void bm_identity_ng8x8u_check()
-        {
-            bm_identity_ng_check<N8,byte>();
-        }
+            => bm_identity_check<N8,byte>();
 
         public void bm_identity_ng8x16u_check()
-        {
-            bm_identity_ng_check<N8,short>();
-        }
+            => bm_identity_check<N8,short>();
 
         public void bm_identity_ng16x8u_check()
-        {
-            bm_identity_ng_check<N16,byte>();
-        }
+            => bm_identity_check<N16,byte>();
 
         public void bm_identity_ng18x8u_check()
-        {
-            bm_identity_ng_check<N18,byte>();
-        }
+            => bm_identity_check<N18,byte>();
 
         public void bm_identity_ng19x8u_check()
-        {
-            bm_identity_ng_check<N18,byte>();
-        }
+            => bm_identity_check<N18,byte>();
 
         public void bm_indentity_ng12x16u_check()
-        {   
-            bm_identity_ng_check<N12,ushort>();
-        }
+            => bm_identity_check<N12,ushort>();
 
         public void bm_identity_4x8u_check()
         {
@@ -49,9 +37,9 @@ namespace Z0
             for(var j=0; j<4; j++)
             {
                 if(i == j)
-                    Claim.eq(Bit.On, I[i,j]);
+                    Claim.eq(bit.On, I[i,j]);
                 else
-                    Claim.eq(Bit.Off, I[i,j]);
+                    Claim.eq(bit.Off, I[i,j]);
             }                
         }
 
@@ -120,20 +108,15 @@ namespace Z0
             Claim.nea(BitMatrix64.Identity.IsZero());
             Claim.nea(Random.BitMatrix(n64).IsZero());
         }
-
         
-        void bm_identity_ng_check<N,T>()
+        void bm_identity_check<N,T>()
             where N : unmanaged, ITypeNat
             where T : unmanaged
        {
-            TypeCaseStart<N>();
             var identity = BitMatrix.identity<N,T>();
-            for(var i=0; i< identity.RowCount; i++)
-            for(var j=0; j< identity.ColCount; j++)
+            for(var i=0; i< identity.Order; i++)
+            for(var j=0; j< identity.Order; j++)
                 Claim.eq(identity[i,j], i==j ? Bit.On : Bit.Off);            
-            TypeCaseEnd<N>();
         }
-
     }
-
 }

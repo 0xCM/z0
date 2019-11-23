@@ -174,7 +174,7 @@ namespace Z0
         public static BitMatrix<N,T> BitMatrix<N,T>(this IPolyrand random, N n = default, T zero = default)
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => BM.load(n,random.Span<T>(BitGridSpec.define(n,n,default(T)).TotalCellCount));                
+                => BM.load(n,random.Span<T>(Z0.BitMatrix<N,T>.TotalCellCount));
  
         /// <summary>
         /// Allocates and populates a bitgrid

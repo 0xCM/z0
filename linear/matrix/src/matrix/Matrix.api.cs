@@ -55,7 +55,7 @@ namespace Z0
         /// <typeparam name="N">The natural dimension type</typeparam>
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
-        public static BlockMatrix<N,T> blockalloc<N,T>(N n = default, T exemplar = default)
+        public static MBlock256<N,T> blockalloc<N,T>(N n = default, T exemplar = default)
             where N : unmanaged, ITypeNat
             where T : unmanaged
                 => DataBlocks.alloc<N,N,T>(n256); 
@@ -70,7 +70,7 @@ namespace Z0
         /// <typeparam name="N">The col count type</typeparam>
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
-        public static BlockMatrix<M,N,T> blockalloc<M,N,T>(M m = default, N n = default, T exemplar = default)
+        public static MBlock256<M,N,T> blockalloc<M,N,T>(M m = default, N n = default, T exemplar = default)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
@@ -121,11 +121,11 @@ namespace Z0
         /// <typeparam name="N">The col count type</typeparam>
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
-        public static BlockMatrix<M,N,T> blockload<M,N,T>(Block256<T> src, M m = default, N n = default)
+        public static MBlock256<M,N,T> blockload<M,N,T>(Block256<T> src, M m = default, N n = default)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => new BlockMatrix<M, N, T>(src);
+                => new MBlock256<M, N, T>(src);
 
         /// <summary>
         /// Loads a square matrix of natural dimensions from a blocked span
@@ -135,13 +135,13 @@ namespace Z0
         /// <typeparam name="N">The col count type</typeparam>
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
-        public static BlockMatrix<N,T> blockload<N,T>(Block256<T> src,  N n = default)
+        public static MBlock256<N,T> blockload<N,T>(Block256<T> src,  N n = default)
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => new BlockMatrix<N, T>(src);
+                => new MBlock256<N, T>(src);
 
         [MethodImpl(Inline)]
-        public static BlockMatrix<M,N,T> blockload<M,N,T>(Span<T> src,M m = default, N n = default)
+        public static MBlock256<M,N,T> blockload<M,N,T>(Span<T> src,M m = default, N n = default)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
@@ -155,7 +155,7 @@ namespace Z0
         /// <typeparam name="N">The square dimension type</typeparam>
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
-        public static BlockMatrix<N,T> blockload<N,T>(T[] src, N n = default)
+        public static MBlock256<N,T> blockload<N,T>(T[] src, N n = default)
             where N : unmanaged, ITypeNat
             where T : unmanaged
         {
@@ -172,7 +172,7 @@ namespace Z0
         /// <typeparam name="N">The square dimension type</typeparam>
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
-        public static BlockMatrix<N,T> blockload<N,T>(N n, params T[] src )
+        public static MBlock256<N,T> blockload<N,T>(N n, params T[] src )
             where N : unmanaged, ITypeNat
             where T : unmanaged
                 => blockload<N,T>(src,n);
@@ -211,7 +211,7 @@ namespace Z0
         /// <typeparam name="M">The natural row count type</typeparam>
         /// <typeparam name="N">The natural column count type</typeparam>
         /// <typeparam name="T">The element type</typeparam>
-        public static void write<M,N,T>(BlockMatrix<M,N,T> src, FilePath dst, bool overwrite = true, TextFormat? fmt = null)
+        public static void write<M,N,T>(MBlock256<M,N,T> src, FilePath dst, bool overwrite = true, TextFormat? fmt = null)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
@@ -285,7 +285,7 @@ namespace Z0
         /// <typeparam name="M">The row count type</typeparam>
         /// <typeparam name="N">The column count type</typeparam>
         /// <typeparam name="T">The element type</typeparam>
-        public static BlockMatrix<M,N,T> blockread<M,N,T>(FilePath src, TextFormat? format = null)
+        public static MBlock256<M,N,T> blockread<M,N,T>(FilePath src, TextFormat? format = null)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged    
@@ -338,7 +338,7 @@ namespace Z0
             return ref C;
         }
 
-        public static void mul<M,K,N,T>(in BlockMatrix<M,K,T> A, in BlockMatrix<K,N,T> B, ref BlockMatrix<M,N,T> X)
+        public static void mul<M,K,N,T>(in MBlock256<M,K,T> A, in MBlock256<K,N,T> B, ref MBlock256<M,N,T> X)
             where M : unmanaged, ITypeNat
             where K : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat

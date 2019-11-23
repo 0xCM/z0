@@ -125,7 +125,7 @@ namespace Z0
             {
                 var left = points[i];
                 var right = points[i + 1];                
-                gmath.add<T>(ref deltaSum, gmath.sub(right,left));                
+                deltaSum = gmath.add<T>(deltaSum, gmath.sub(right,left));                
             }
 
             Claim.eq(len, deltaSum);                        

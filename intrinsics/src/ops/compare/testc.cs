@@ -94,6 +94,7 @@ namespace Z0
         public static bit vtestc(Vector128<long> src, Vector128<long> mask)
             => TestC(src, mask);        
 
+
         /// <summary>
         /// int _mm_testc_si128 (__m128i a, __m128i b) PTEST xmm, xmm/m128
         /// Returns true if all source bits identified by a mask are on
@@ -103,6 +104,34 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bit vtestc(Vector128<ulong> src, Vector128<ulong> mask)
             => TestC(src, mask);                     
+
+        [MethodImpl(Inline)]
+        public static bit vtestc(Vector128<sbyte> src)
+            => TestC(src, ginx.vones<sbyte>(n128));
+
+        [MethodImpl(Inline)]
+        public static bit vtestc(Vector128<byte> src)
+            => TestC(src, ginx.vones<byte>(n128));
+
+        [MethodImpl(Inline)]
+        public static bit vtestc(Vector128<ushort> src)
+            => TestC(src, ginx.vones<ushort>(n128));
+        
+        [MethodImpl(Inline)]
+        public static bit vtestc(Vector128<int> src)
+            => TestC(src, ginx.vones<int>(n128));
+
+        [MethodImpl(Inline)]
+        public static bit vtestc(Vector128<uint> src)
+            => TestC(src, ginx.vones<uint>(n128));
+
+        [MethodImpl(Inline)]
+        public static bit vtestc(Vector128<long> src)
+            => TestC(src, ginx.vones<long>(n128));
+
+        [MethodImpl(Inline)]
+        public static bit vtestc(Vector128<ulong> src)
+            => TestC(src, ginx.vones<ulong>(n128));
 
         /// <summary>
         /// int _mm256_testc_si256 (__m256i a, __m256i b) VPTEST ymm, ymm/m256

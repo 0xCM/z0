@@ -21,6 +21,7 @@ namespace Z0
         public static int bitpos(int gridwidth, int row, int col)
             => row*gridwidth+ col;
 
+
     }
 
 }

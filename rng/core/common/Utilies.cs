@@ -25,21 +25,21 @@ namespace Z0
         /// <param name="max">The upper bound</param>
         /// <typeparam name="N">The length type</typeparam>
         /// <typeparam name="T">The unsigned primal type</typeparam>
-         public static BlockVector<N,T> Contract<N,T>(this BlockVector<N,T> src, BlockVector<N,T> max)
+         public static VBlock256<N,T> Contract<N,T>(this VBlock256<N,T> src, VBlock256<N,T> max)
             where N : unmanaged, ITypeNat
             where T : unmanaged
         {
-            var dst = DataBlocks.natalloc<N,T>();
+            var dst = Z0.NatSpan.alloc<N, T>();
             for(var i=0; i<dst.Length; i++)
                 dst[i] = Contractors.Contract(src[i],max[i]);
             return dst;
         }
 
-         public static NatBlock<N,T> Contract<N,T>(this NatBlock<N,T> src, NatBlock<N,T> max)
+         public static NatSpan<N,T> Contract<N,T>(this NatSpan<N,T> src, NatSpan<N,T> max)
             where N : unmanaged, ITypeNat
             where T : unmanaged
         {
-            var dst = DataBlocks.natalloc<N,T>();
+            var dst = Z0.NatSpan.alloc<N, T>();
             for(var i=0; i<dst.Length; i++)
                 dst[i] = Contractors.Contract(src[i],max[i]);
             return dst;
@@ -53,7 +53,7 @@ namespace Z0
         /// <param name="max">The upper bound</param>
         /// <typeparam name="N">The length type</typeparam>
         /// <typeparam name="T">The unsigned primal type</typeparam>
-         public static BlockVector<T> Contract<T>(this BlockVector<T> src, BlockVector<T> max)
+         public static VBlock256<T> Contract<T>(this VBlock256<T> src, VBlock256<T> max)
             where T : unmanaged
         {
             var len = src.Length;

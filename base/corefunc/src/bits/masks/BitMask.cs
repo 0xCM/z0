@@ -208,7 +208,7 @@ namespace Z0
         /// <param name="pos">The position of the bit to enable</param>
         [MethodImpl(Inline)]
         public static int enable(int src, int pos)
-        =>  src |= (1 << pos);
+            =>  src |= (1 << pos);
 
         /// <summary>
         /// Enables a specified source bit
@@ -217,7 +217,7 @@ namespace Z0
         /// <param name="pos">The position of the bit to enable</param>
         [MethodImpl(Inline)]
         public static uint enable(uint src, int pos)
-        =>  src |= (1u << pos);
+            =>  src |= (1u << pos);
 
         /// <summary>
         /// Enables a specified source bit
@@ -226,7 +226,7 @@ namespace Z0
         /// <param name="pos">The position of the bit to enable</param>
         [MethodImpl(Inline)]
         public static long enable(long src, int pos)
-        =>  src |= (1L << pos);
+            =>  src |= (1L << pos);
 
         /// <summary>
         /// Enables a specified source bit
@@ -660,117 +660,6 @@ namespace Z0
         public static bit test(double src, byte pos)
             => test(BitConverter.DoubleToInt64Bits(src),pos);
 
-        /// <summary>
-        /// Aligns an index-identified bit in a source value with a supplied bit value
-        /// </summary>
-        /// <param name="src">The source</param>
-        /// <param name="pos">The source bit index</param>
-        /// <param name="state">The state with which to align a source bit</param>
-        [MethodImpl(Inline)]
-        public static ref byte set(ref byte src, byte pos, bit state)            
-        {
-            var c = ~(byte)state + 1;
-            src ^= (byte)((c ^ src) & (1 << pos));
-            return ref src;
-        }
-        
-        /// <summary>
-        /// Aligns an index-identified bit in a source value with a supplied bit value
-        /// </summary>
-        /// <param name="src">The source</param>
-        /// <param name="pos">The source bit index</param>
-        /// <param name="state">The state with which to align a source bit</param>
-        [MethodImpl(Inline)]
-        public static ref sbyte set(ref sbyte src, byte pos, bit state)            
-        {
-            var c = ~(sbyte)state + 1;
-            src ^= (sbyte)((c ^ src) & (1 << pos));
-            return ref src;
-        }
-
-        /// <summary>
-        /// Aligns an index-identified bit in a source value with a supplied bit value
-        /// </summary>
-        /// <param name="src">The source</param>
-        /// <param name="pos">The source bit index</param>
-        /// <param name="state">The state with which to align a source bit</param>
-        [MethodImpl(Inline)]
-        public static ref short set(ref short src, byte pos, bit state)            
-        {
-            var c = ~(short)state + 1;
-            src ^= (short)((c ^ src) & (1 << pos));
-            return ref src;
-        }
-
-        /// <summary>
-        /// Aligns an index-identified bit in a source value with a supplied bit value
-        /// </summary>
-        /// <param name="src">The source</param>
-        /// <param name="pos">The source bit index</param>
-        /// <param name="state">The state with which to align a source bit</param>
-        [MethodImpl(Inline)]
-        public static ref ushort set(ref ushort src, byte pos, bit state)            
-        {
-            var c = ~(ushort)state + 1;
-            src ^= (ushort)((c ^ src) & (1 << pos));
-            return ref src;
-        }
-
-        /// <summary>
-        /// Aligns an index-identified bit in a source value with a supplied bit value
-        /// </summary>
-        /// <param name="src">The source</param>
-        /// <param name="pos">The source bit index</param>
-        /// <param name="state">The state with which to align a source bit</param>
-        [MethodImpl(Inline)]
-        public static ref int set(ref int src, byte pos, bit state)            
-        {
-            var c = ~(int)state + 1;
-            src ^= (c ^ src) & (1 << pos);
-            return ref src;
-        }
-
-        /// <summary>
-        /// Aligns an index-identified bit in a source value with a supplied bit value
-        /// </summary>
-        /// <param name="src">The source</param>
-        /// <param name="pos">The source bit index</param>
-        /// <param name="state">The state with which to align a source bit</param>
-        [MethodImpl(Inline)]
-        public static ref uint set(ref uint src, byte pos, bit state)            
-        {
-            var c = ~(uint)state + 1u;
-            src ^= (c ^ src) & (1u << pos);
-            return ref src;
-        }
-
-        /// <summary>
-        /// Aligns an index-identified bit in a source value with a supplied bit value
-        /// </summary>
-        /// <param name="src">The source</param>
-        /// <param name="pos">The source bit index</param>
-        /// <param name="state">The state with which to align a source bit</param>
-        [MethodImpl(Inline)]
-        public static ref long set(ref long src, byte pos, bit state)            
-        {
-            var c = ~(long)state + 1L;
-            src ^= (c ^ src) & (1L << pos);
-            return ref src;
-        }
-
-        /// <summary>
-        /// Aligns an index-identified bit in a source value with a supplied bit value
-        /// </summary>
-        /// <param name="src">The source</param>
-        /// <param name="index">The source bit index</param>
-        /// <param name="value">The state with which to align a source bit</param>
-        [MethodImpl(Inline)]
-        public static ref ulong set(ref ulong src, byte pos, bit state)
-        {
-            var c = ~(ulong)state + 1ul;
-            src ^= (c ^ src) & (1ul << pos);
-            return ref src;
-        }
         
         /// <summary>
         /// Enaables a bit in the target if it is enabled in the source
@@ -810,11 +699,11 @@ namespace Z0
         /// <param name="dst">The target value</param>
         /// <param name="dstpos">The target bit position</param>
         [MethodImpl(Inline)]
-        public static ref short setif(in short src, int srcpos, ref short dst, int dstpos)        
+        public static short setif(short src, int srcpos, ref short dst, int dstpos)        
         {
             if(test(src, srcpos))
                 enable(ref dst, srcpos);
-            return ref dst;
+            return dst;
         }
 
         /// <summary>
@@ -825,27 +714,20 @@ namespace Z0
         /// <param name="dst">The target value</param>
         /// <param name="dstpos">The target bit position</param>
         [MethodImpl(Inline)]
-        public static ref ushort setif(in ushort src, int srcpos, ref ushort dst, int dstpos)        
+        public static ref ushort setif(ushort src, int srcpos, ref ushort dst, int dstpos)        
         {
             if(test(src, srcpos))
                 enable(ref dst, dstpos);
             return ref dst;
         }
 
-
-        /// <summary>
-        /// Enaables a bit in the target if it is enabled in the source
-        /// </summary>
-        /// <param name="src">The source value</param>
-        /// <param name="srcpos">The source bit position</param>
-        /// <param name="dst">The target value</param>
-        /// <param name="dstpos">The target bit position</param>
         [MethodImpl(Inline)]
-        public static ref int setif(in int src, int srcpos, ref int dst, int dstpos)        
+        public static ushort setif(ushort src, int srcpos, ushort dst, int dstpos)        
         {
             if(test(src, srcpos))
-                enable(ref dst, dstpos);
-            return ref dst;
+                return enable(dst, dstpos);
+            else
+                return dst;            
         }
 
         /// <summary>
@@ -856,11 +738,43 @@ namespace Z0
         /// <param name="dst">The target value</param>
         /// <param name="dstpos">The target bit position</param>
         [MethodImpl(Inline)]
-        public static ref uint setif(in uint src, int srcpos, ref uint dst, int dstpos)        
+        public static int setif(int src, int srcpos, ref int dst, int dstpos)        
         {
             if(test(src, srcpos))
                 enable(ref dst, dstpos);
-            return ref dst;
+            return dst;
+        }
+
+        /// <summary>
+        /// Enables a specified bit in the target if a specified bit is enabled in the source
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <param name="srcpos">The source bit position</param>
+        /// <param name="dst">The target value</param>
+        /// <param name="dstpos">The target bit position</param>
+        [MethodImpl(Inline)]
+        public static uint setif(uint src, int srcpos, uint dst, int dstpos)        
+        {
+            if(test(src, srcpos))
+                return enable(dst, dstpos);
+            else
+                return dst;
+        }
+
+        /// <summary>
+        /// Enables a specified bit in the target if a specified bit is enabled in the source
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <param name="srcpos">The source bit position</param>
+        /// <param name="dst">The target value</param>
+        /// <param name="dstpos">The target bit position</param>
+        [MethodImpl(Inline)]
+        public static ulong setif(ulong src, int srcpos, ulong dst, int dstpos)        
+        {
+            if(test(src, srcpos))
+                return enable(dst, dstpos);
+            else
+                return dst;
         }
 
         /// <summary>
@@ -871,11 +785,12 @@ namespace Z0
         /// <param name="dst">The target value</param>
         /// <param name="dstpos">The target bit position</param>
         [MethodImpl(Inline)]
-        public static ref long setif(in long src, int srcpos, ref long dst, int dstpos)        
+        public static long setif(long src, int srcpos, long dst, int dstpos)        
         {
             if(test(src, srcpos))
-                enable(ref dst, dstpos);
-            return ref dst;
+                return enable(dst, dstpos);
+            else
+                return dst;
         }
 
         /// <summary>
@@ -1142,7 +1057,6 @@ namespace Z0
             bits ^= (1L << pos);
             return ref src;
         } 
-
 
     }   
 }

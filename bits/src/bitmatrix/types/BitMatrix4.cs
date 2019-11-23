@@ -130,7 +130,7 @@ namespace Z0
             get => BitMask.test(data, row*4 + col);
 
             [MethodImpl(Inline)]
-            set => BitMask.set(ref data, (byte)(row*4 + col), value);
+            set => data = BitMask.set(data, (byte)(row*4 + col), value);
         }            
 
         public BitVector4 this[int row]

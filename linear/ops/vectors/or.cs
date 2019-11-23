@@ -17,7 +17,7 @@ namespace Z0
     {
 
         [MethodImpl(Inline)]
-        public static ref BlockVector<N,T> or<N,T>(BlockVector<N,T> x, BlockVector<N,T> y, ref BlockVector<N,T> dst)
+        public static ref VBlock256<N,T> or<N,T>(VBlock256<N,T> x, VBlock256<N,T> y, ref VBlock256<N,T> dst)
             where N : unmanaged, ITypeNat
             where T : unmanaged    
         {
@@ -26,7 +26,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static BlockVector<T> or<T>(BlockVector<T> lhs, BlockVector<T> rhs)
+        public static VBlock256<T> or<T>(VBlock256<T> lhs, VBlock256<T> rhs)
             where T : unmanaged
         {
             var dst = lhs.Replicate(true);
@@ -36,7 +36,7 @@ namespace Z0
 
 
         [MethodImpl(Inline)]
-        public static BlockVector<N,T> or<N,T>(BlockVector<N,T> x, BlockVector<N,T> y)
+        public static VBlock256<N,T> or<N,T>(VBlock256<N,T> x, VBlock256<N,T> y)
             where N : unmanaged, ITypeNat
             where T : unmanaged    
         {

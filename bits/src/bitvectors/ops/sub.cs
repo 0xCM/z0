@@ -30,6 +30,15 @@ namespace Z0
         public static BitVector4 sub(BitVector4 x, BitVector4 y)
             => (byte)Mod16.mod(math.sub((uint)x.data, (uint)y.data));
 
+        [MethodImpl(Inline)]
+        public static BitVector4 sub2(BitVector4 x, BitVector4 y)
+        {
+            const int modulus = 16;
+            var diff = (int)x - (int)y;
+            var reduced = (byte)(diff < 0 ? (uint)(diff + modulus) : (uint)diff);
+            return new BitVector4(reduced,true);
+        }
+
         /// <summary>
         /// Computes the arithmetic difference z := x - y for bitvectors x and y
         /// </summary>

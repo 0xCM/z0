@@ -70,7 +70,7 @@ partial class zfunc
     /// <param name="src">The source span</param>
     /// <typeparam name="T">The element type</typeparam>
     [MethodImpl(Inline)]
-    public static ref T head<N,T>(in NatBlock<N,T> src)
+    public static ref T head<N,T>(in NatSpan<N,T> src)
         where N : unmanaged, ITypeNat
         where T : unmanaged
             =>  ref src.Head;

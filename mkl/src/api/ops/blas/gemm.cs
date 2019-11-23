@@ -24,7 +24,7 @@ namespace Z0.Mkl
 		/// <param name="N">The number of columns in B and C</param>
 		/// <param name="K">The number of columns in A and rows in B</param>
         [MethodImpl(Inline)]
-        public static ref BlockMatrix<M,N,T> gemm<M,K,N,T>(BlockMatrix<M,K,T> A, BlockMatrix<K,N,T> B, ref BlockMatrix<M,N,T> X)
+        public static ref MBlock256<M,N,T> gemm<M,K,N,T>(MBlock256<M,K,T> A, MBlock256<K,N,T> B, ref MBlock256<M,N,T> X)
             where M : unmanaged, ITypeNat
             where K : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
@@ -66,7 +66,7 @@ namespace Z0.Mkl
 		/// <param name="M">The number of rows in A and C</param>
 		/// <param name="N">The number of columns in B and C</param>
 		/// <param name="K">The number of columns in A and rows in B</param>
-        public static ref BlockMatrix<N,T> gemm<N,T>(BlockMatrix<N,T> A, BlockMatrix<N,T> B, ref BlockMatrix<N,T> X)
+        public static ref MBlock256<N,T> gemm<N,T>(MBlock256<N,T> A, MBlock256<N,T> B, ref MBlock256<N,T> X)
             where N : unmanaged, ITypeNat
             where T : unmanaged
         {
@@ -106,7 +106,7 @@ namespace Z0.Mkl
 		/// <param name="M">The number of rows in A and C</param>
 		/// <param name="N">The number of columns in B and C</param>
 		/// <param name="K">The number of columns in A and rows in B</param>
-        public static BlockMatrix<M,N,float> gemm<M,K,N>(BlockMatrix<M,K,float> A, BlockMatrix<K,N,float> B)
+        public static MBlock256<M,N,float> gemm<M,K,N>(MBlock256<M,K,float> A, MBlock256<K,N,float> B)
             where M : unmanaged, ITypeNat
             where K : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
@@ -130,7 +130,7 @@ namespace Z0.Mkl
 		/// <param name="M">The number of rows in A and C</param>
 		/// <param name="N">The number of columns in B and C</param>
 		/// <param name="K">The number of columns in A and rows in B</param>
-        public static BlockMatrix<M,N,double> gemm<M,K,N>(BlockMatrix<M,K,double> A, BlockMatrix<K,N,double> B)
+        public static MBlock256<M,N,double> gemm<M,K,N>(MBlock256<M,K,double> A, MBlock256<K,N,double> B)
             where M : unmanaged, ITypeNat
             where K : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
@@ -154,7 +154,7 @@ namespace Z0.Mkl
 		/// <param name="M">The number of rows in A and C</param>
 		/// <param name="N">The number of columns in B and C</param>
 		/// <param name="K">The number of columns in A and rows in B</param>
-        public static ref BlockMatrix<M,N,float> gemm<M,K,N>(BlockMatrix<M,K,float> A, BlockMatrix<K,N,float> B, ref BlockMatrix<M,N,float> X)
+        public static ref MBlock256<M,N,float> gemm<M,K,N>(MBlock256<M,K,float> A, MBlock256<K,N,float> B, ref MBlock256<M,N,float> X)
             where M : unmanaged, ITypeNat
             where K : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
@@ -177,7 +177,7 @@ namespace Z0.Mkl
 		/// <param name="M">The number of rows in A and C</param>
 		/// <param name="N">The number of columns in B and C</param>
 		/// <param name="K">The number of columns in A and rows in B</param>
-        public static ref BlockMatrix<M,N,double> gemm<M,K,N>(BlockMatrix<M,K,double> A, BlockMatrix<K,N,double> B, ref BlockMatrix<M,N,double> X)
+        public static ref MBlock256<M,N,double> gemm<M,K,N>(MBlock256<M,K,double> A, MBlock256<K,N,double> B, ref MBlock256<M,N,double> X)
             where M : unmanaged, ITypeNat
             where K : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
@@ -199,7 +199,7 @@ namespace Z0.Mkl
         /// <param name="B">The right matrix</param>
         /// <param name="X">The target matrix</param>
 		/// <param name="N">The number of columns in B and C</param>
-        public static ref BlockMatrix<N,float> gemm<N>(BlockMatrix<N,float> A, BlockMatrix<N,float> B, ref BlockMatrix<N,float> X)
+        public static ref MBlock256<N,float> gemm<N>(MBlock256<N,float> A, MBlock256<N,float> B, ref MBlock256<N,float> X)
             where N : unmanaged, ITypeNat
         {
             var n = nati<N>();
@@ -215,7 +215,7 @@ namespace Z0.Mkl
         /// <param name="B">The right matrix</param>
         /// <param name="X">The target matrix</param>
 		/// <param name="N">The number of columns in B and C</param>
-        public static ref BlockMatrix<N,double> gemm<N>(BlockMatrix<N,double> A, BlockMatrix<N,double> B, ref BlockMatrix<N,double> X)
+        public static ref MBlock256<N,double> gemm<N>(MBlock256<N,double> A, MBlock256<N,double> B, ref MBlock256<N,double> X)
             where N : unmanaged, ITypeNat
         {
             var n = nati<N>();

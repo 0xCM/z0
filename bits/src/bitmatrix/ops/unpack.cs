@@ -325,7 +325,7 @@ namespace Z0
         /// <typeparam name="N">The col dimension type</typeparam>
         /// <typeparam name="S">The source matrix element type</typeparam>
         /// <typeparam name="T">The target matrix element type</typeparam>
-        public static ref BlockMatrix<N, T> unpack<N,S,T>(in BitMatrix<N,S> src, ref BlockMatrix<N,T> dst)
+        public static ref MBlock256<N, T> unpack<N,S,T>(in BitMatrix<N,S> src, ref MBlock256<N,T> dst)
             where S : unmanaged
             where T : unmanaged
             where N : unmanaged, ITypeNat
@@ -343,7 +343,7 @@ namespace Z0
         /// <typeparam name="N">The col dimension type</typeparam>
         /// <typeparam name="S">The source matrix element type</typeparam>
         /// <typeparam name="T">The target matrix element type</typeparam>
-        public static ref BlockMatrix<M,N,T> unpack<M,N,S,T>(in BitMatrix<M,N,S> src, ref BlockMatrix<M,N,T> dst)
+        public static ref MBlock256<M,N,T> unpack<M,N,S,T>(in BitMatrix<M,N,S> src, ref MBlock256<M,N,T> dst)
             where S : unmanaged
             where T : unmanaged
             where M : unmanaged, ITypeNat

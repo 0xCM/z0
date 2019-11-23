@@ -20,7 +20,7 @@ namespace Z0.Mkl
         /// </summary>
         /// <param name="X">The source vector</param>
         [MethodImpl(Inline)]
-        public static float norm(BlockVector<float> X)        
+        public static float norm(VBlock256<float> X)        
             => CBLAS.cblas_snrm2(X.Length, ref head(X), 1);
 
         /// <summary>
@@ -28,7 +28,7 @@ namespace Z0.Mkl
         /// </summary>
         /// <param name="X">The source vector</param>
         [MethodImpl(Inline)]
-        public static double norm(BlockVector<double> X)        
+        public static double norm(VBlock256<double> X)        
             => CBLAS.cblas_dnrm2(X.Length, ref head(X), 1);
 
         /// <summary>

@@ -5,8 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
     using System.Security.Cryptography;
@@ -50,7 +48,7 @@ namespace Z0
         /// <typeparam name="T">The primal type</typeparam>
         /// <typeparam name="N">The length type</typeparam>
         [MethodImpl(Inline)]
-        public static NatBlock<N,T> Values<N,T>(N n = default)
+        public static NatSpan<N,T> Values<N,T>(N n = default)
             where N : unmanaged, ITypeNat
             where T : unmanaged        
                 => Values<T>((int)n.NatValue);
@@ -68,5 +66,4 @@ namespace Z0
             return MemoryMarshal.Cast<byte,T>(src)[0];
         }        
     }
-
 }

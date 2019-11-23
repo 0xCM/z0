@@ -23,7 +23,7 @@ namespace Z0
             => CpuVec128.item(x, 2,value);
 
 
-        public static Vector256<uint> avxpack1(NatBlock<N8,uint> src, int offset)
+        public static Vector256<uint> avxpack1(NatSpan<N8,uint> src, int offset)
             => AvxBitpack.pack(src, offset);
         
         public static ulong sum_256x64u(Vector256<ulong> src)
@@ -46,7 +46,6 @@ namespace Z0
 
         public static void vtranspose(ref Vector128<uint> row0, ref Vector128<uint> row1, ref Vector128<uint> row2, ref Vector128<uint> row3)        
             => dinx.vtranspose(ref row0, ref row1, ref row2, ref row3);
-
 
     }
 

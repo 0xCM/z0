@@ -78,12 +78,19 @@ namespace Z0
             => BitVector16.FromScalar(src.data);
 
         /// <summary>
+        /// Reverses the vector bits
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        [MethodImpl(Inline)]
+        public static BitVector64 Reverse(this BitVector64 src)
+            => BitVector.rev(src);
+
+        /// <summary>
         /// Applies a widening conversion Bv64 -> Bv128
         /// </summary>
         [MethodImpl(Inline)]
         public static BitVector128 Expand(this BitVector64 src, N128 n)
             => BitVector.from(n,src.data);
-
 
     }
 

@@ -1,4 +1,12 @@
-// 2019-11-21 19:28:32:834
+// 2019-11-23 00:41:18:213
+BitMatrix4x16 transpose_16x4(in BitMatrix16x4 A)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldobj Z0.BitMatrix16x4
+    IL_0006: call Z0.BitMatrix4x16 Z0.BitMatrix::transpose(Z0.BitMatrix16x4)
+    IL_000B: ret
+
+}
 BitMatrix4 and_4x4(in BitMatrix4 A, in BitMatrix4 B)
 {
     IL_0000: ldarg.0

@@ -75,11 +75,10 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where T : unmanaged
         {
-
-            var dst = BitMatrix<N,T>.Alloc();
+            Span<T> data = new T[BitMatrix<N,T>.TotalCellCount];
             if(gmath.nonzero(fill))
-                dst.Data.Fill(fill);
-            return dst;
+                data.Fill(fill);
+            return new BitMatrix<N, T>(data);
         }
 
         /// <summary>
@@ -179,7 +178,8 @@ namespace Z0
         /// </summary>
         /// <param name="fill">The row with which the allocated matrix is filled</param>
         [MethodImpl(NotInline)]
-        public static BitMatrix64 alloc(BitVector64 fill)
+        public static BitMatrix64 alloc(BitVector64 fill)        
             => BitMatrix64.Alloc(fill);
+
     }
 }

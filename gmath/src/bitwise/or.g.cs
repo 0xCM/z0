@@ -40,24 +40,6 @@ namespace Z0
                 return gfp.or(lhs,rhs);
         }
 
-        /// <summary>
-        /// ortiplies two primal values
-        /// </summary>
-        /// <param name="lhs">The left value</param>
-        /// <param name="rhs">The right value</param>
-        /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline)]
-        public static ref T or<T>(ref T lhs, T rhs)
-            where T : unmanaged
-        {
-            if(unsignedint<T>())
-                or_u(ref lhs,rhs);
-            else if(signedint<T>())
-                or_i(ref lhs,rhs);
-            else 
-                gfp.or(ref lhs,rhs);
-            return ref lhs;
-        }
 
         [MethodImpl(Inline)]
         static T or_i<T>(T lhs, T rhs)
@@ -85,36 +67,6 @@ namespace Z0
                 return generic<T>(math.or(uint32(lhs), uint32(rhs)));
             else 
                 return generic<T>(math.or(uint64(lhs), uint64(rhs)));
-        }
-
-        [MethodImpl(Inline)]
-        static ref T or_i<T>(ref T lhs, T rhs)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(byte))
-                 math.or(ref int8(ref lhs), int8(rhs));
-            else if(typeof(T) == typeof(short))
-                 math.or(ref int16(ref lhs), int16(rhs));
-            else if(typeof(T) == typeof(int))
-                 math.or(ref int32(ref lhs), int32(rhs));
-            else
-                 math.or(ref int64(ref lhs), int64(rhs));
-            return ref lhs;
-        }
-
-        [MethodImpl(Inline)]
-        static ref T or_u<T>(ref T lhs, T rhs)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(byte))
-                math.or(ref uint8(ref lhs), uint8(rhs));
-            else if(typeof(T) == typeof(ushort))
-                math.or(ref uint16(ref lhs), uint16(rhs));
-            else if(typeof(T) == typeof(uint))
-                math.or(ref uint32(ref lhs), uint32(rhs));
-            else 
-                math.or(ref uint64(ref lhs), uint64(rhs));
-            return ref lhs;
         }
     }
 }

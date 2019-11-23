@@ -15,7 +15,7 @@ namespace Z0.Mkl
 
     partial class mkl
     {
-        public static EigenResult<N,double> geev<N>(BlockMatrix<N,double> A)
+        public static EigenResult<N,double> geev<N>(MBlock256<N,double> A)
             where N : unmanaged, ITypeNat
         {
             var n = nati<N>();
@@ -25,8 +25,8 @@ namespace Z0.Mkl
             var wslen = n*n;
             var exitcode = 0;        
             var v = 'V';
-            var wr = DataBlocks.natalloc<N,double>();
-            var wi = DataBlocks.natalloc<N,double>();
+            var wr = NatSpan.alloc<N,double>();
+            var wi = NatSpan.alloc<N,double>();
             var lVec = A.Replicate(true);
             var rVec = A.Replicate(true);             
                         

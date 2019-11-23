@@ -62,7 +62,6 @@ namespace Z0
             Claim.yea(m3 == m1);    
         }
 
-
         void bm_transpose_gn_check<M,N,T>()
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat

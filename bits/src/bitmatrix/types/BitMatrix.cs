@@ -25,15 +25,11 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public BitMatrix(params T[] data)
-        {
-            this.data = data;
-        }
+            => this.data = data;
 
         [MethodImpl(Inline)]
         public BitMatrix(Span<T> data)
-        {
-            this.data = data;
-        }
+            => this.data = data;
 
         [MethodImpl(Inline)]
         public BitMatrix(BitVector<T> fill)
@@ -63,7 +59,7 @@ namespace Z0
         public ref BitVector<T> this[int row]
         {
             [MethodImpl(Inline)]
-            get => ref RowVector(row);
+            get => ref AsBitVector(ref head(data, row));
         }
 
         public bit this[int row, int col]
@@ -84,42 +80,13 @@ namespace Z0
             get => (int)N;
         }
 
-        /// <summary>
-        /// Interchanges the i'th and j'th rows where  0 <= i,j < N
-        /// </summary>
-        /// <param name="i">A row index</param>
-        /// <param name="j">A row index</param>
-        [MethodImpl(Inline)]
-        public void RowSwap(int i, int j)
-            => data.Swap(i,j);
-
-        [MethodImpl(Inline)]
-        public ref T Row(int row)
-            => ref head(data, row);
-
-        [MethodImpl(Inline)]
-        ref BitVector<T> RowVector(int row)
-            => ref AsBitVector(ref head(data, row));
-
         [MethodImpl(Inline)]
         static ref BitVector<T> AsBitVector(ref T src)
             => ref Unsafe.As<T,BitVector<T>>(ref src);
 
         [MethodImpl(Inline)]
-        public void Update(BitMatrix<T> src)
-            => src.data.CopyTo(data);
-
-        [MethodImpl(NotInline)]
-        public BitMatrix<T> Replicate()
-        {
-            Span<T> dst = new T[data.Length];
-            data.CopyTo(dst);
-            return new BitMatrix<T>(dst);
-        }
-
-        [MethodImpl(Inline)]
-        public BitMatrix<S> To<S>()
+        public BitMatrix<S> As<S>()
             where S : unmanaged
-                => new BitMatrix<S>(data.As<T,S>());        
+                => new BitMatrix<S>(Data.As<T,S>());        
     }
 }

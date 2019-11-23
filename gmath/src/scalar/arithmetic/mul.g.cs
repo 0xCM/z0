@@ -5,9 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Reflection;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
         
     using static zfunc;    
@@ -38,29 +35,6 @@ namespace Z0
             else return gfp.mul(lhs,rhs);
         }
 
-        /// <summary>
-        /// Multiplies two primal values
-        /// </summary>
-        /// <param name="lhs">The left value</param>
-        /// <param name="rhs">The right value</param>
-        /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline)]
-        public static ref T mul<T>(ref T lhs, T rhs)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(byte) 
-            || typeof(T) == typeof(ushort) 
-            || typeof(T) == typeof(uint) 
-            || typeof(T) == typeof(ulong))
-                mulu(ref lhs,rhs);
-            else if(typeof(T) == typeof(sbyte) 
-            || typeof(T) == typeof(short) 
-            || typeof(T) == typeof(int) 
-            || typeof(T) == typeof(long))
-                muli(ref lhs,rhs);
-            else gfp.mul(ref lhs,rhs);
-            return ref lhs;
-        }
 
         [MethodImpl(Inline)]
         static T muli<T>(T lhs, T rhs)
@@ -88,36 +62,6 @@ namespace Z0
                 return generic<T>(math.mul(uint32(lhs), uint32(rhs)));
             else 
                 return generic<T>(math.mul(uint64(lhs), uint64(rhs)));
-        }
-
-        [MethodImpl(Inline)]
-        static ref T muli<T>(ref T lhs, T rhs)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(byte))
-                 math.mul(ref int8(ref lhs), int8(rhs));
-            else if(typeof(T) == typeof(short))
-                 math.mul(ref int16(ref lhs), int16(rhs));
-            else if(typeof(T) == typeof(int))
-                 math.mul(ref int32(ref lhs), int32(rhs));
-            else
-                 math.mul(ref int64(ref lhs), int64(rhs));
-            return ref lhs;
-        }
-
-        [MethodImpl(Inline)]
-        static ref T mulu<T>(ref T lhs, T rhs)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(byte))
-                math.mul(ref uint8(ref lhs), uint8(rhs));
-            else if(typeof(T) == typeof(ushort))
-                math.mul(ref uint16(ref lhs), uint16(rhs));
-            else if(typeof(T) == typeof(uint))
-                math.mul(ref uint32(ref lhs), uint32(rhs));
-            else 
-                math.mul(ref uint64(ref lhs), uint64(rhs));
-            return ref lhs;
         }
     }
 }

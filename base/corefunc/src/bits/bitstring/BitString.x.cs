@@ -180,25 +180,13 @@ namespace Z0
         /// Extracts the even bits
         /// </summary>
         public static BitString Even(this BitString src)
-        {
-            var count = src.Length>>1;
-            var dst = BitString.alloc(count);            
-            for(int i=0,j=0; i<src.Length; i+=2,j++)
-                dst[j] = src[i];
-            return dst;
-        }
+            => BitString.even(src);
 
         /// <summary>
         /// Extracts the odd bits
         /// </summary>
         public static BitString Odd(this BitString src)
-        {
-            var count = src.Length>>1;
-            var dst = BitString.alloc(count);            
-            for(int i=1,j=0; i<src.Length; i+=2,j++)
-                dst[j] = src[i];
-            return dst;
-        }
+            => BitString.odd(src);
 
         public static BitString Intersperse(this BitString lhs, BitString rhs)
         {
@@ -212,7 +200,6 @@ namespace Z0
                     dst[i+1] = rhs[j];
             }
             return dst;
-
         }
         
         public static BitString Clear(this BitString src, int i0, int i1)
@@ -228,5 +215,38 @@ namespace Z0
                 dst[i] = src[j];
             return dst;
         }
+
+        [MethodImpl(Inline)]
+        public static BitString Not(this BitString bs)
+            => BitString.not(bs);
+
+        [MethodImpl(Inline)]
+        public static BitString And(this BitString xbs, BitString ybs)
+            => BitString.and(xbs,ybs);
+
+        [MethodImpl(Inline)]
+        public static BitString Or(this BitString xbs, BitString ybs)
+            => BitString.or(xbs,ybs);
+
+        [MethodImpl(Inline)]
+        public static BitString Xor(this BitString xbs, BitString ybs)
+            => BitString.xor(xbs,ybs);
+        
+        [MethodImpl(Inline)]
+        public static BitString Srl(this BitString bs, int shift)
+            => BitString.srl(bs,shift);
+
+        [MethodImpl(Inline)]
+        public static BitString Sll(this BitString bs, int shift) 
+            => BitString.sll(bs,shift);
+
+        public static BitString Transpose<M,N>(this BitString bs, M m = default, N n = default)
+            where M : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
+                => BitString.transpose(bs,m,n);
+        
+        public static BitString Transpose(this BitString bs, int m, int n)        
+            => BitString.transpose(bs,m,n);
+                    
     }
 }

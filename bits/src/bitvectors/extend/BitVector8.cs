@@ -56,6 +56,13 @@ namespace Z0
         public static BitVector<N8,byte> ToNatural(this BitVector8 src)
             => src;
     
+        /// <summary>
+        /// Reverses the vector bits
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        [MethodImpl(Inline)]
+        public static BitVector8 Reverse(this BitVector8 src)
+            => BitVector.rev(src);
 
     }
 

@@ -22,13 +22,13 @@ namespace Z0
             var m = src.RowCount;
             var n = src.RowWidth;
             
-            var nodes = Graph.Vertices<V>(m);
+            var nodes = Graph.vertices<V>(m);
             var edges = new List<Edge<V>>();
             for(var row = 0; row < m; row++)
             for(var col = 0; col < n; col++)
                 if(src[row,col])
-                    edges.Add(Graph.Connect(nodes[row], nodes[col]));
-            return Graph.Define(nodes, edges);
+                    edges.Add(Graph.connect(nodes[row], nodes[col]));
+            return Graph.define(nodes, edges);
         }
 
         /// <summary>
@@ -39,7 +39,7 @@ namespace Z0
         [MethodImpl(Inline)]        
         public static RowBits<T> alloc<T>(int rows)
             where T : unmanaged
-                => RowBits<T>.Alloc(rows);
+                => new RowBits<T>(new T[rows]);
 
         /// <summary>
         /// Loads loads rows from a bytespan
@@ -49,7 +49,8 @@ namespace Z0
         [MethodImpl(Inline)]
         public static RowBits<T> load<T>(Span<byte> src)
             where T : unmanaged
-                => RowBits<T>.From(src);
+                => new RowBits<T>(cast<T>(src));
+        
 
         /// <summary>
         /// Loads loads rows from a span
@@ -59,7 +60,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static RowBits<T> load<T>(Span<T> src)
             where T : unmanaged
-                => RowBits<T>.From(src);
+                => new RowBits<T>(src);
 
         [MethodImpl(Inline)]
         public static RowBits<T> transfer<T>(Span<T> src)
@@ -72,9 +73,9 @@ namespace Z0
         /// <param name="src">The data source</param>
         /// <typeparam name="T">The primal type that implicitly defines the number of matrix coluns</typeparam>
         [MethodImpl(Inline)]
-        public static RowBits<T> load<T>(T[] src)
+        public static RowBits<T> load<T>(params T[] src)
             where T : unmanaged
-                => RowBits<T>.From(src);
+               => new RowBits<T>(src);
 
         [MethodImpl(Inline)]
         public static RowBits<T> block<T>(in RowBits<T> A, int firstRow)

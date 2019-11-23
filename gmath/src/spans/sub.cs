@@ -36,7 +36,7 @@ namespace Z0
             where T : unmanaged
         {
             for(var i=0; i< src.Length; i++)
-                gmath.sub(ref src[i],scalar);
+                src[i] = gmath.sub(src[i],scalar);
             return src;
         }
 
@@ -46,12 +46,12 @@ namespace Z0
         /// <param name="src">The source span</param>
         /// <param name="scalar">The scalar value</param>
         /// <typeparam name="T">The span element type</typeparam>
-        public static NatBlock<N,T> sub<N,T>(NatBlock<N,T> src, T scalar)
+        public static NatSpan<N,T> sub<N,T>(in NatSpan<N,T> src, T scalar)
             where T : unmanaged
             where N : unmanaged, ITypeNat
         {
             for(var i=0; i< src.Length; i++)
-                gmath.sub(ref src[i],scalar);
+                src[i] = gmath.sub(src[i],scalar);
             return src;
         }
 
@@ -69,7 +69,7 @@ namespace Z0
         {
             var len = length(lhs,rhs);
             for(var i = 0; i< len; i++)
-                gmath.sub(ref lhs[i], rhs[i]);
+                lhs[i] = gmath.sub(lhs[i], rhs[i]);
             return lhs;
         }
     }

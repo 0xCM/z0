@@ -4,10 +4,8 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
+    using System.Runtime.CompilerServices;
     
     using static zfunc;
         
@@ -22,26 +20,52 @@ namespace Z0
         where W : unmanaged
         where T : unmanaged
     {
-        public static Graph<V,W,T> Define(IEnumerable<Vertex<V,T>> vertices, IEnumerable<Edge<V,W>> edges)
-            => new Graph<V,W,T>(vertices.OrderBy(x => x.Index,PrimalComparer.Get<V>()).ToArray(), edges.ToArray());
+        readonly Vertex<V,T>[] vertices;
 
-        Graph(Vertex<V,T>[] vertices, Edge<V,W>[] edges)
+        readonly Edge<V,W>[] edges;
+
+        internal Graph(Vertex<V,T>[] vertices, Edge<V,W>[] edges)
         {
             this.vertices = vertices;
             this.edges = edges;            
         }
 
-        readonly Vertex<V,T>[] vertices;
+        /// <summary>
+        /// Specifies the edges declared by the graph
+        /// </summary>
+        public int EdgeCount
+            => edges.Length;
 
-        readonly Edge<V,W>[] edges;
+        /// <summary>
+        /// Specifies the number of vertices declared by the graph
+        /// </summary>
+        public int VertexCount
+            => vertices.Length;
 
-        public ReadOnlySpan<Vertex<V,T>> Vertices
-            => vertices;
+        /// <summary>
+        /// Looks up a vertex based on its index
+        /// </summary>
+        /// <param name="index">The vertex index</param>
+        [MethodImpl(Inline)]
+        public ref Vertex<V,T> Vertex(V index)
+            => ref vertices[convert<V,ulong>(index)];
 
-        public ReadOnlySpan<Edge<V,W>> Edges 
-            => edges;
+        /// <summary>
+        /// Looks up an edge based on its index
+        /// </summary>
+        /// <param name="index">The vertex index</param>
+        [MethodImpl(Inline)]
+        public ref Edge<V,W> Edge(int index)
+            => ref edges[index];
+
+        /// <summary>
+        /// Looks up a vertex based on its index
+        /// </summary>
+        /// <param name="index">The vertex index</param>
+        public ref Vertex<V,T> this[V index]
+        {
+            [MethodImpl(Inline)]
+            get => ref Vertex(index);
+        }
     }
-
 }
-
-

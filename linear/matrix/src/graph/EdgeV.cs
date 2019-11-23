@@ -5,9 +5,7 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
-    using System.Linq;
 
     using static zfunc;
 
@@ -15,24 +13,9 @@ namespace Z0
     /// Defines an unweighted edge, parameterized by the vertex index type
     /// </summary>
     /// <typeparam name="V">The vertex index type</typeparam>
-    public readonly struct Edge<V> : IEdge<V>
+    public readonly struct Edge<V>
         where V : unmanaged
     {
-        [MethodImpl(Inline)]
-        public static implicit operator (V src, V dst)(Edge<V> edge)
-            => (edge.Source,edge.Target);
-
-        [MethodImpl(Inline)]
-        public static implicit operator Edge<V>((V src, V dst) x)
-            => (x.src,x.dst);
-        
-        [MethodImpl(Inline)]
-        public Edge(V Source, V Target)
-        {
-            this.Source = Source;
-            this.Target = Target;
-        }
-        
         /// <summary>
         /// The index of the source vertex
         /// </summary>
@@ -43,12 +26,21 @@ namespace Z0
         /// </summary>
         public readonly V Target;
 
-        V IEdge<V>.Source 
-            => Source;
+        [MethodImpl(Inline)]
+        public static implicit operator (V src, V dst)(Edge<V> edge)
+            => (edge.Source,edge.Target);
 
-        V IEdge<V>.Target 
-            => Target;
-
+        [MethodImpl(Inline)]
+        public static implicit operator Edge<V>((V src, V dst) x)
+            => (x.src,x.dst);
+        
+        [MethodImpl(Inline)]
+        public Edge(V src, V dst)
+        {
+            this.Source = src;
+            this.Target = dst;
+        }
+        
         public string Format() 
             => $"{Source} -> {Target}";
 

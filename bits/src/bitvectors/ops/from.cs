@@ -37,6 +37,26 @@ namespace Z0
         public static BitVector<byte> generic(N8 n, bit b0, bit b1, bit b2, bit b3)
             => from(n, b0, b1, b2, b3);
 
+        [MethodImpl(Inline)]
+        public static BitVector4 from(N4 n, byte src)
+            => BitVector4.FromScalar(src);
+
+        [MethodImpl(Inline)]
+        public static BitVector4 from(N4 n, ushort data)
+            => new BitVector4((byte)data);
+
+        [MethodImpl(Inline)]
+        public static BitVector4 from(N4 n, uint data)
+            => new BitVector4((byte)data);
+
+        [MethodImpl(Inline)]
+        public static BitVector4 from(N4 n, ulong data)
+            => new BitVector4((byte)data);
+
+        [MethodImpl(Inline)]
+        public static BitVector4 direct(N4 n, ulong data)
+            => new BitVector4((byte)data, true);
+
         /// <summary>
         /// Creates a 4-bit bitvector from 4 explicit bits
         /// </summary>
@@ -60,10 +80,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitVector4 from(N4 n, bit b0, bit b1)
             => BitVector4.FromBits(b0,b1);
-
-        [MethodImpl(Inline)]
-        public static BitVector4 from(N4 n, byte src)
-            => BitVector4.FromScalar(src);
 
         /// <summary>
         /// Creates a vector from a bitstring
@@ -332,8 +348,6 @@ namespace Z0
             var x1 = src.Length > 64 ? src.TakeUInt64(64) : 0ul;
             return from(n,x0, x1);
         }
-
-
     }
 
 }

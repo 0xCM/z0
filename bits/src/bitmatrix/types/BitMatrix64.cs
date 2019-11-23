@@ -66,7 +66,7 @@ namespace Z0
             => new BitMatrix64(src);
 
         [MethodImpl(Inline)]
-        public static BitMatrix64 From(in NatBlock<N64,ulong> src)        
+        public static BitMatrix64 From(in NatSpan<N64,ulong> src)        
             => new BitMatrix64(src);
 
         [MethodImpl(Inline)]
@@ -111,13 +111,13 @@ namespace Z0
 
 
         [MethodImpl(Inline)]
-        BitMatrix64(Span<ulong> src)
+        internal BitMatrix64(Span<ulong> src)
         {                        
             this.data = src;
         }
 
         [MethodImpl(Inline)]
-        BitMatrix64(bit fill)
+        internal BitMatrix64(bit fill)
         {
             this.data = new ulong[N];
             if(fill)
@@ -182,7 +182,7 @@ namespace Z0
         public ref BitVector64 this[int row]
         {
             [MethodImpl(Inline)]
-            get => ref RowVector(row);
+            get => ref Row(row);
         }
 
         /// <summary>
@@ -202,42 +202,24 @@ namespace Z0
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
         public void SetBit(int row, int col, Bit src)
-            => BitMask.set(ref data[row], (byte)col, src);
+            => data[row] = BitMask.set(data[row], (byte)col, src);
 
         /// <summary>
         /// Presents the data at a specified offset as a bitvector
         /// </summary>
         /// <param name="row">The row index</param>
         [MethodImpl(Inline)]
-        public ref BitVector64 RowVector(int row)
+        public ref BitVector64 Row(int row)
             => ref Unsafe.As<ulong,BitVector64>(ref seek(ref Head, row));
 
-        /// <summary>
-        /// Presents the data at a specified offset as an unsigned integer
-        /// </summary>
-        /// <param name="row">The row index</param>
         [MethodImpl(Inline)]
-        public ref ulong RowData(int row)
-            => ref seek(ref Head, row);
-
-        /// <summary>
-        /// Returns the data for an index-identified column
-        /// </summary>
-        public readonly ulong ColData(int index)
+        public readonly BitVector64 Column(int index)
         {
-            ulong col = 0;
+            var col = 0ul;
             for(var r = 0; r < N; r++)
-                BitMask.setif(in data[r], index, ref col, r);
+                col = BitMask.setif(data[r], index, col, r);
             return col;
-        }
-        
-        /// <summary>
-        /// Creates a bitvector from the content of an index-identified column
-        /// </summary>
-        /// <param name="row">The row index</param>
-        [MethodImpl(Inline)]
-        public BitVector64 ColVector(int col)
-            =>  ColData(col);
+        }        
 
         /// <summary>
         /// Interchanges the i'th and j'th rows where  0 <= i,j < 64
@@ -256,10 +238,9 @@ namespace Z0
         {
             var dst = Replicate();
             for(var i=0; i<N; i++)
-                dst.data[i] = ColData(i);
+                dst.data[i] = Column(i);
             return dst;
         }
-
 
         [MethodImpl(Inline)] 
         public readonly BitMatrix64 Replicate()

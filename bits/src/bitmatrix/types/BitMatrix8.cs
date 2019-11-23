@@ -39,16 +39,16 @@ namespace Z0
         public static BitMatrix8 Ones => new BitMatrix8(0xFFFFFFFFFFFFFFFF);
 
         [MethodImpl(Inline)]
-        public static BitMatrix8 operator & (in BitMatrix8 lhs, in BitMatrix8 rhs)
-            =>  BitMatrix.and(lhs,rhs);
+        public static BitMatrix8 operator & (in BitMatrix8 A, in BitMatrix8 B)
+            =>  BitMatrix.and(A,B);
 
         [MethodImpl(Inline)]
-        public static BitMatrix8 operator | (BitMatrix8 lhs, in BitMatrix8 rhs)
-            => BitMatrix.or(lhs,rhs);
+        public static BitMatrix8 operator | (in BitMatrix8 A, in BitMatrix8 B)
+            => BitMatrix.or(A,B);
 
         [MethodImpl(Inline)]
-        public static BitMatrix8 operator ^ (in BitMatrix8 lhs, in BitMatrix8 rhs)
-            => BitMatrix.xor(lhs,rhs);
+        public static BitMatrix8 operator ^ (in BitMatrix8 A, in BitMatrix8 B)
+            => BitMatrix.xor(A,B);
 
         [MethodImpl(Inline)]
         public static BitMatrix8 operator ~ (in BitMatrix8 src)
@@ -59,20 +59,20 @@ namespace Z0
             => BitMatrix.xornot(A,B);
 
         [MethodImpl(Inline)]
-        public static BitMatrix8 operator * (BitMatrix8 lhs, in BitMatrix8 rhs)
-            => BitMatrix.mul(lhs,rhs);
+        public static BitMatrix8 operator * (in BitMatrix8 A, in BitMatrix8 B)
+            => BitMatrix.mul(A,B);
 
         [MethodImpl(Inline)]
-        public static BitVector8 operator * (in BitMatrix8 lhs, in BitVector8 rhs)
-            => BitMatrix.mul(lhs,rhs);
+        public static BitVector8 operator * (in BitMatrix8 A, in BitVector8 x)
+            => BitMatrix.mul(A,x);
 
         [MethodImpl(Inline)]
-        public static bool operator ==(in BitMatrix8 lhs, in BitMatrix8 rhs)
-            => lhs.Equals(rhs);
+        public static bool operator ==(in BitMatrix8 A, in BitMatrix8 B)
+            => A.Equals(B);
 
         [MethodImpl(Inline)]
-        public static bool operator !=(in BitMatrix8 lhs, in BitMatrix8 rhs)
-            => !(lhs.Equals(rhs));
+        public static bool operator !=(in BitMatrix8 A, in BitMatrix8 B)
+            => !(A.Equals(B));
 
         [MethodImpl(Inline)]
         public static explicit operator ulong(BitMatrix8 src)
@@ -139,18 +139,26 @@ namespace Z0
             get => BitMask.test(skip(in Head,row), col);
 
             [MethodImpl(Inline)]
-            set => BitMask.set(ref seek(ref Head, row), (byte)col, value);
+            set => seek(ref Head, row) = BitMask.set(seek(ref Head, row), (byte)col, value);
         }            
 
         /// <summary>
         /// Gets/Sets the data for a row
         /// </summary>
-        /// <param name="row">The row index</param>
-        public ref BitVector8 this[int row]
+        /// <param name="index">The row index</param>
+        public ref BitVector8 this[int index]
         {
             [MethodImpl(Inline)]
-            get => ref Unsafe.As<byte,BitVector8>(ref seek(ref Head, row));
+            get => ref Row(index);
         }
+
+        /// <summary>
+        /// Presents the data at a specified offset as a bitvector
+        /// </summary>
+        /// <param name="row">The row index</param>
+        [MethodImpl(Inline)]
+        public ref BitVector8 Row(int row)
+            => ref Unsafe.As<byte,BitVector8>(ref seek(ref Head, row));
 
         public override string ToString()
             => this.Format();

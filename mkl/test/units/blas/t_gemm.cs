@@ -15,7 +15,7 @@ namespace Z0.Mkl.Test
 
     public class t_gemm : UnitTest<t_gemm>
     {        
-        internal static void refmul<M,N,T>(BlockMatrix<M,N,T> A, BlockVector<N,T> B, BlockVector<M,T> X)
+        internal static void refmul<M,N,T>(MBlock256<M,N,T> A, VBlock256<N,T> B, VBlock256<M,T> X)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
@@ -27,8 +27,8 @@ namespace Z0.Mkl.Test
 
         public void dot()
         {
-            var v1 = Random.BlockVector<N256,double>();
-            var v2 = Random.BlockVector<N256,double>();
+            var v1 = Random.VectorBlock<N256,double>();
+            var v2 = Random.VectorBlock<N256,double>();
 
             var x = mkl.dot(v1,v2).Round(4);
             var y = Dot(v1,v2).Round(4);
@@ -277,7 +277,7 @@ namespace Z0.Mkl.Test
             return optime(cycles, sw, label);
         }
 
-        static double Dot<N>(BlockVector<N,double> x, BlockVector<N,double> y)
+        static double Dot<N>(VBlock256<N,double> x, VBlock256<N,double> y)
             where N : unmanaged, ITypeNat
         {
             var result = 0d;
@@ -288,7 +288,7 @@ namespace Z0.Mkl.Test
             return result;
         }
 
-        static float Dot<N>(BlockVector<N,float> x, BlockVector<N,float> y)
+        static float Dot<N>(VBlock256<N,float> x, VBlock256<N,float> y)
             where N : unmanaged, ITypeNat
         {
             var result = 0f;
@@ -319,7 +319,7 @@ namespace Z0.Mkl.Test
             return result;
         }
 
-        static ref BlockMatrix<M,N,float> Mul<M,K,N>(BlockMatrix<M,K,float> A, BlockMatrix<K,N,float> B, ref BlockMatrix<M,N,float> X)
+        static ref MBlock256<M,N,float> Mul<M,K,N>(MBlock256<M,K,float> A, MBlock256<K,N,float> B, ref MBlock256<M,N,float> X)
             where M : unmanaged, ITypeNat
             where K : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
@@ -338,7 +338,7 @@ namespace Z0.Mkl.Test
             return ref X;
         }
 
-        static ref BlockMatrix<M,N,double> Mul<M,K,N>(BlockMatrix<M,K,double> A, BlockMatrix<K,N,double> B, ref BlockMatrix<M,N,double> X)
+        static ref MBlock256<M,N,double> Mul<M,K,N>(MBlock256<M,K,double> A, MBlock256<K,N,double> B, ref MBlock256<M,N,double> X)
             where M : unmanaged, ITypeNat
             where K : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
@@ -362,8 +362,8 @@ namespace Z0.Mkl.Test
             var domain = closed(-32768, 32768);
             var n = n5;
             var m = n5;
-            var m1 = Random.BlockMatrix(domain, m, n);
-            var m2 = Random.BlockMatrix(domain, m, n);
+            var m1 = Random.MatrixBlock(domain, m, n);
+            var m2 = Random.MatrixBlock(domain, m, n);
             var m3 = Matrix.blockalloc(m,n,0);
             var m4 = mkl.gemm(m1,m2,ref m3);
         }

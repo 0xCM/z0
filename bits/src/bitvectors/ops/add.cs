@@ -26,6 +26,15 @@ namespace Z0
             where T : unmanaged
                 => gmath.add(x.Data, y.Data);
 
+        [MethodImpl(Inline)]
+        public static BitVector4 add2(BitVector4 x, BitVector4 y)
+        {
+            const int modulus = 16;
+            var sum = x.data + y.data;
+            var reduced = (byte)((sum >= modulus) ? sum - modulus: sum);
+            return new BitVector4(reduced,true);
+        }
+
         /// <summary>
         /// Computes the arithmetic sum z := x + y for bitvectors x and y
         /// </summary>

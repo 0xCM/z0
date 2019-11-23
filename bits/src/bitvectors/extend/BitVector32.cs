@@ -138,15 +138,6 @@ namespace Z0
             return ref src;
         }
 
-        /// <summary>
-        /// Reverses vector bits in-place
-        /// </summary>
-        [MethodImpl(Inline)]
-        public static ref BitVector32 Reverse(this ref BitVector32 src)
-        {     
-            src.data = Bits.rev(src.data);
-            return ref src;
-        }
 
         /// <summary>
         /// Applies a permutation to a replicated vector
@@ -163,6 +154,14 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitString ToBitString(this BitVector32 src)
             => src.data.ToBitString();
+
+        /// <summary>
+        /// Reverses the vector bits
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        [MethodImpl(Inline)]
+        public static BitVector32 Reverse(this BitVector32 src)
+            => BitVector.rev(src);
 
         /// <summary>
         /// Formats the bitvector as a bitstring

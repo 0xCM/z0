@@ -371,7 +371,7 @@ namespace Z0
         /// <param name="value">The bit value</param>
         [MethodImpl(Inline)]
         public void SetBit(int pos, bit value)
-            => data = BitMask.set(ref data, (byte)pos, value);
+            => data = BitMask.set(data, (byte)pos, value);
 
         /// <summary>
         /// Enables a bit in-place
@@ -390,13 +390,13 @@ namespace Z0
             => data = BitMask.disable(ref data, pos);
 
         /// <summary>
-        /// Disables the high bits that follow a specified bit
+        /// Disables the bits after a specified poistion
         /// </summary>
         /// <param name="pos">The bit position</param>
         [MethodImpl(Inline)]
         public void DisableAfter(int pos)
-            => data = Bits.bzhi(ref data, (byte)(++pos));
-
+            => data = Bits.zerohi(data, (byte)++pos);
+            
         /// <summary>
         /// Rearranges the vector in-place as specified by a permutation
         /// </summary>
@@ -469,8 +469,8 @@ namespace Z0
         /// <param name="specifier">True if the prefix specifier '0b' should be prepended</param>
         /// <param name="blockWidth">The width of the blocks, if any</param>
         [MethodImpl(Inline)]
-        public readonly string Format(bool tlz = false, bool specifier = false, int? blockWidth = null)
-            => ToBitString().Format(tlz, specifier, blockWidth);
+        public readonly string Format(bool tlz = false, bool specifier = false, int? blockWidth = null, int? rowWidth = null)
+            => ToBitString().Format(tlz, specifier, blockWidth, null, rowWidth);
 
         [MethodImpl(Inline)]
         public readonly bool Equals(BitVector64 y)

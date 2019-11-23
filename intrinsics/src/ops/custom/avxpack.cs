@@ -6,10 +6,8 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Numerics;
     using System.Runtime.Intrinsics;
     using System.Runtime.Intrinsics.X86;
-    using static System.Runtime.Intrinsics.X86.Pclmulqdq;
  
     using static zfunc;
     using static dinx;        
@@ -31,11 +29,11 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static Vector256<uint> pack(NatBlock<N8,uint> src, int offset)
+        public static Vector256<uint> pack(NatSpan<N8,uint> src, int offset)
             => pack(8, ref src.Head, offset);
 
         [MethodImpl(Inline)]
-        public static Vector256<uint> pack(NatBlock<N32,uint> src, int offset)
+        public static Vector256<uint> pack(NatSpan<N32,uint> src, int offset)
             => pack(32, ref src.Head, offset);
 
         [MethodImpl(Inline)]
@@ -45,13 +43,6 @@ namespace Z0
             for(var i = 0; i<32; i++)
                 x = step(x, ref src, i);            
             ginx.vstore(x, ref dst);
-
         }
-
     }
-
 }
-
-
-
-

@@ -24,11 +24,11 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source bits to condense</param>
         [MethodImpl(Inline)]
-        public static Vector128<uint> pack(NatBlock<N128,bit> src)
+        public static Vector128<uint> pack(NatSpan<N128,bit> src)
             => pack(n1, n32, in head(src.As<uint>()));
 
         [MethodImpl(Inline)]
-        public static Vector128<uint> pack(N1 width, NatBlock<N128,uint> src)
+        public static Vector128<uint> pack(N1 width, NatSpan<N128,uint> src)
             => pack(width, n32, in head(src));
 
         [MethodImpl(Inline)]

@@ -35,7 +35,7 @@ namespace Z0
             require(this.members.Length == n);
         }
 
-        public BlockVector<N, T> Next<T>() 
+        public VBlock256<N, T> Next<T>() 
             where T : unmanaged
         {
             var dst = Vector.blockalloc<N,T>();
@@ -44,7 +44,7 @@ namespace Z0
             return dst;
         }
 
-        public BlockVector<N, T> Next<T>(T min) 
+        public VBlock256<N, T> Next<T>(T min) 
             where T : unmanaged
         {
             var dst = Vector.blockalloc<N,T>();
@@ -53,7 +53,7 @@ namespace Z0
             return dst;
         }
 
-        public BlockVector<N, T> Next<T>(T min, T max) 
+        public VBlock256<N, T> Next<T>(T min, T max) 
             where T : unmanaged
         {
             var dst = Vector.blockalloc<N,T>();
@@ -62,7 +62,7 @@ namespace Z0
             return dst;
         }
 
-        public BlockVector<N, T> Next<T>(Interval<T> domain)
+        public VBlock256<N, T> Next<T>(Interval<T> domain)
              where T : unmanaged
         {
             var dst = Vector.blockalloc<N,T>();

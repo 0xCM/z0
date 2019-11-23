@@ -14,9 +14,9 @@ namespace Z0
     {
         uint data;
 
-        public static readonly UInt4 MinValue = MinDataVal;
+        public static UInt4 MinValue => MinDataVal;
 
-        public static readonly UInt4 MaxValue = MaxDataVal;
+        public static UInt4 MaxValue => MaxDataVal;
 
         const uint MinDataVal = 0;
 
@@ -29,8 +29,8 @@ namespace Z0
         /// <summary>
         /// Defines a mapping from possible UInt4 values to their hex code representations
         /// </summary>
-        static readonly char[] HexMap 
-            = new char[]{'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
+        static char[] HexMap 
+            => new char[]{'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
 
         /// <summary>
         /// Constructs a <see cref='UInt4'/> from a byte value in the range [0, 15]
@@ -198,19 +198,17 @@ namespace Z0
         [MethodImpl(Inline)]
         public static UInt4 operator + (UInt4 x, UInt4 y)
         {
+            const int modulus = 16;
             var sum = x.data + y.data;
-            return Wrap((sum >= Modulus) 
-                ? sum - Modulus
-                : sum);
+            return Wrap((sum >= modulus) ? sum - modulus: sum);
         }
 
         [MethodImpl(Inline)]
         public static UInt4 operator - (UInt4 x, UInt4 y)
         {
+            const int modulus = 16;
             var diff = (int)x - (int)y;
-            return Wrap(diff < 0 
-                ? (uint)(diff + Modulus) 
-                : (uint)diff);
+            return Wrap(diff < 0 ? (uint)(diff + modulus) : (uint)diff);
         }
 
         [MethodImpl(Inline)]
@@ -328,7 +326,7 @@ namespace Z0
         public void SetBit(byte pos, Bit bit)
         {
             if(pos < BitCount)
-                BitMask.set(ref data, pos, bit);
+                data = BitMask.set(data, pos, bit);
         }
 
         /// <summary>
@@ -410,7 +408,7 @@ namespace Z0
             => new UInt4(src,false);
 
          [MethodImpl(Inline)]
-        UInt4 RotL(int offset)
+         UInt4 RotL(int offset)
             => (data << offset) | data >> (BitCount - offset);
 
     }

@@ -149,7 +149,7 @@ namespace Z0.Logix
         {
             var data = default(T);
             foreach(var choice in src.Choices)
-                gmath.or(ref data, choice.Id);
+                data = gmath.or(data, choice.Id);
             return data;
         }
 
@@ -163,7 +163,7 @@ namespace Z0.Logix
         {
             var data = default(T);
             foreach(var choice in src.Chosen)
-                gmath.or(ref data, choice.Id);
+                data = gmath.or(data, choice.Id);
             return data;
         }
 

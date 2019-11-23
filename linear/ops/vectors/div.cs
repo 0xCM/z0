@@ -41,7 +41,7 @@ namespace Z0
         /// <param name="rhs">The right operand</param>
         /// <typeparam name="T">The component type</typeparam>
         [MethodImpl(Inline)]
-        public static ref BlockVector<T> div<T>(ref BlockVector<T> lhs, in BlockVector<T> rhs)
+        public static ref VBlock256<T> div<T>(ref VBlock256<T> lhs, in VBlock256<T> rhs)
             where T : unmanaged
         {
             if(typeof(T) == typeof(float) || typeof(T) == typeof(double))
@@ -59,7 +59,7 @@ namespace Z0
         /// <typeparam name="N">The length type</typeparam>
         /// <typeparam name="T">The component type</typeparam>
         [MethodImpl(Inline)]
-        public static ref BlockVector<N,T> div<N,T>(ref BlockVector<N,T> lhs, in BlockVector<N,T> rhs)
+        public static ref VBlock256<N,T> div<N,T>(ref VBlock256<N,T> lhs, in VBlock256<N,T> rhs)
             where N : unmanaged, ITypeNat
             where T : unmanaged    
         {

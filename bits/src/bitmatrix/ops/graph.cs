@@ -22,13 +22,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return graph(BitMatrix<N8,T>.Load(A.Data));
+                return graph(BitMatrix.load(n8,A.Data));
             else if(typeof(T) == typeof(ushort))
-                return graph(BitMatrix<N16,T>.Load(A.Data));
+                return graph(BitMatrix.load(n16,A.Data));
             else if(typeof(T) == typeof(uint))
-                return graph(BitMatrix<N32,T>.Load(A.Data));
-            else if(typeof(T) == typeof(uint))
-                return graph(BitMatrix<N64,T>.Load(A.Data));
+                return graph(BitMatrix.load(n32,A.Data));
+            else if(typeof(T) == typeof(ulong))
+                return graph(BitMatrix.load(n64,A.Data));
             else
                 throw unsupported<T>();
         }
@@ -47,13 +47,13 @@ namespace Z0
             where T : unmanaged
         {
             var n = (int)dim.NatValue;
-            var nodes = Graph.Vertices<T>(n);
+            var nodes = Graph.vertices<T>(n);
             var edges = new List<Edge<T>>();
             for(var row = 0; row < n; row++)
             for(var col = 0; col < n; col++)
                 if(src[row,col])
-                    edges.Add(Graph.Connect(nodes[row], nodes[col]));
-            return Graph.Define(nodes, edges);
+                    edges.Add(Graph.connect(nodes[row], nodes[col]));
+            return Graph.define(nodes, edges);
         }
 
         /// <summary>

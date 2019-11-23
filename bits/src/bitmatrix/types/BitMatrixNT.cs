@@ -21,31 +21,21 @@ namespace Z0
     {        
         readonly Span<T> data;
 
-        public static BitMatrix<N,T> Identity => BitMatrix.identity<N,T>();
+        static readonly BitGridLayout<T> GridLayout = BitMatrix.layout<N,T>();
 
-        public static BitMatrix<N,T> Ones => BitMatrix.ones<N,T>();
-
-        public static readonly BitGridLayout<T> GridLayout = BitMatrix.layout<N,T>();
+        public static int RowWidth = natval<N>();
 
         /// <summary>
-        /// Allocates a Zero-filled NxN matrix
+        /// Computes the length of a primal span/array that is required to store a row of data
         /// </summary>
-        [MethodImpl(Inline)]
-        public static BitMatrix<N,T> Alloc()
-            => new BitMatrix<N, T>(new T[GridLayout.TotalCellCount]);
-
-        [MethodImpl(Inline)]
-        public static BitMatrix<N,T> Load(T[] src)
+        public static int RowCellCount
         {
-            require(src.Length == GridLayout.TotalCellCount, 
-                $"A span of length {src.Length} was provided which differs from the required segment count of {GridLayout.TotalCellCount}");
-            return new BitMatrix<N, T>(src);
+            [MethodImpl(Inline)]
+            get => bitsize<T>() >= natval<N>() ? 1 : (natval<N>() % bitsize<T>()) == 0 ? (natval<N>() / bitsize<T>()) : (natval<N>() / bitsize<T>()) + 1;
         }
 
-        [MethodImpl(Inline)]
-        public static BitMatrix<N,T> Load(Span<T> data)
-            => new BitMatrix<N, T>(data);
-
+        public static int TotalCellCount => RowCellCount * RowWidth;
+    
         /// <summary>
         /// Multiplies the left matrix by the right
         /// </summary>
@@ -64,15 +54,63 @@ namespace Z0
             => !lhs.Equals(rhs);
 
         [MethodImpl(Inline)]
-        BitMatrix(T[] src)
+        internal BitMatrix(params T[] src)
         {
             this.data = src;
         }
 
         [MethodImpl(Inline)]
-        BitMatrix(Span<T> src)
+        internal BitMatrix(Span<T> src)
         {
             this.data = src;
+        }
+
+        /// <summary>
+        /// Returns a reference to the leading segment of the underlying storage
+        /// </summary>
+        public ref T Head
+        {
+            [MethodImpl(Inline)]
+            get => ref head(data);
+        }
+
+        public bit this[int row, int col]
+        {
+            [MethodImpl(Inline)]
+            get => GetBit(row, col);
+
+            [MethodImpl(Inline)]
+            set => SetBit(row, col, value);
+        }            
+
+        /// <summary>
+        /// Queries/Specifies a row
+        /// </summary>
+        public BitVector<N,T> this[int row]
+        {
+            [MethodImpl(Inline)]
+            get => RowVector(row);
+            
+            [MethodImpl(Inline)]
+            set => ReplaceRow(row,value);
+        }
+
+        /// <summary>
+        /// The number of rows/cols in the matrix
+        /// </summary>
+        public readonly int Order
+        {
+            [MethodImpl(Inline)]
+            get => RowWidth;
+        }
+        
+        /// <summary>
+        /// Provides direct access to the underlying bitstore
+        /// </summary>
+        public readonly Span<T> Data
+        {
+            [MethodImpl(Inline)]
+            get => data;
         }
 
         [MethodImpl(Inline)]
@@ -88,105 +126,22 @@ namespace Z0
             var cell = GridLayout.Row(row)[col];
             gbits.set(ref Data[cell.Segment], (byte)cell.Offset, value);
         }
-
-        public bit this[int row, int col]
-        {
-            [MethodImpl(Inline)]
-            get => GetBit(row, col);
-
-            [MethodImpl(Inline)]
-            set => SetBit(row, col, value);
-        }            
-
-
-        /// <summary>
-        /// The number of rows in the matrix
-        /// </summary>
-        public readonly int RowCount
-        {
-            [MethodImpl(Inline)]
-            get => GridLayout.RowCount;
-        }
-
-        /// <summary>
-        /// The (padded) length of a primal span/array required to store a row of grid data.
-        /// </summary>
-        public readonly int RowSegCount
-        {
-            [MethodImpl(Inline)]
-            get => GridLayout.RowCellCount;
-        }
-        
-        /// <summary>
-        /// The number of columns in the matrix
-        /// </summary>
-        public readonly int ColCount
-        {
-            [MethodImpl(Inline)]
-            get => GridLayout.ColCount;
-        }
-
-        /// <summary>
-        /// Provides direct access to the underlying bitstore
-        /// </summary>
-        public readonly Span<T> Data
-        {
-            [MethodImpl(Inline)]
-            get => data;
-        }
-
-        /// <summary>
-        /// Returns a reference to the leading segment of the underlying storage
-        /// </summary>
-        public ref T Head
-        {
-            [MethodImpl(Inline)]
-            get => ref head(data);
-        }
-
-        [MethodImpl(Inline)]
-        readonly int RowOffset(int row)        
-            => GridLayout.Row(row)[0].Segment;
                 
-        [MethodImpl(Inline)]
-        public Span<T> RowCells(int row)
-            => data.Slice(RowOffset(row), GridLayout.RowCellCount);
-
         /// <summary>
         /// Retrives an identified row of bits
         /// </summary>
-        /// <param name="index">The 0-based row index</param>
+        /// <param name="row">The 0-based row index</param>
         [MethodImpl(Inline)]
-        public BitVector<N,T> RowVector(int index)                    
-            => BitVector<N,T>.FromSpan(RowCells(index));                
+        public BitVector<N,T> RowVector(int row)                    
+            => BitVector<N,T>.FromSpan(Data.Slice(row*RowCellCount, RowCellCount));
 
         /// <summary>
         /// Replaces an index-identied column of data with the content of a row vector
         /// </summary>
         /// <param name="col">The column index</param>
         [MethodImpl(Inline)]
-        public readonly void ReplaceRow(int row, BitVector<N,T> src)
-            => src.Data.CopyTo(Data.Slice(RowOffset(row), GridLayout.RowCellCount));     
-
-        public readonly BitVector<N,T> Diagonal()
-        {
-            var dst = BitVector.natural<N,T>();
-            for(var i=0; i<RowCount; i++)
-                dst[i] = GetBit(i,i);
-            return dst;
-        }
-
-        /// <summary>
-        /// Queries/Specifies a row
-        /// </summary>
-        public BitVector<N,T> this[int row]
-        {
-            [MethodImpl(Inline)]
-            get => RowVector(row);
-            
-            [MethodImpl(Inline)]
-            set => ReplaceRow(row,value);
-        }
+        public void ReplaceRow(int row, BitVector<N,T> src)
+            => src.Data.CopyTo(Data.Slice(row*RowCellCount, RowCellCount));     
 
         /// <summary>
         /// Replaces an index-identied column of data with the content of a column vector
@@ -195,7 +150,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public void SetCol(int col, BitVector<N,T> src)
         {
-            for(var row=0; row < RowCount; row++)
+            for(var row=0; row < Order; row++)
                 this[row,col] = src[row];
         }
 
@@ -207,7 +162,7 @@ namespace Z0
         public BitVector<N,T> GetCol(int col)
         {
             var cv = default(BitVector<N,T>);
-            for(var row=0; row < RowCount; row++)
+            for(var row=0; row < Order; row++)
                 cv[row] = this[row, col];
             return cv;
         }
@@ -230,22 +185,18 @@ namespace Z0
         public string Format()
         {
             var sb = sbuild();
-            for(var i=0; i< RowCount; i++)
+            for(var i=0; i< Order; i++)
                  sb.AppendLine(RowVector(i).Format());
             return sb.ToString();
         }
  
         public BitMatrix<N,T> Transpose()
         {
-            var dst = Alloc();
-            for(var row = 0; row < RowCount; row++)
+            var dst = BitMatrix.alloc<N,T>();
+            for(var row = 0; row < Order; row++)
                 dst.SetCol(row, RowVector(row));            
             return dst;
         }
-
-        [MethodImpl(NotInline)] 
-        public BitMatrix<N,T> Replicate()
-            => new BitMatrix<N, T>(data.ToArray());
 
         public bool Equals(BitMatrix<N,T> rhs)        
         {

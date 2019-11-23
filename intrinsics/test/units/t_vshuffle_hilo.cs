@@ -5,13 +5,10 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
-    using System.IO;
     
     using static zfunc;
-    using static nfunc;
 
     public class t_vshuffle_hilo : IntrinsicTest<t_vshuffle_hilo>
     {
@@ -26,16 +23,16 @@ namespace Z0
         public void perm4_digits_check()
         {
             var dABCD = Perm4.ABCD.Digits();
-            Claim.eq(DataBlocks.natparts(n4, A, B, C, D), dABCD);
+            Claim.eq(NatSpan.parts(n4, A, B, C, D), dABCD);
 
             var dDCBA = Perm4.DCBA.Digits();
-            Claim.eq(DataBlocks.natparts(n4, D, C, B, A), dDCBA);
+            Claim.eq(NatSpan.parts(n4, D, C, B, A), dDCBA);
 
             var dACBD = Perm4.ACBD.Digits();
-            Claim.eq(DataBlocks.natparts(n4, A, C, B, D), dACBD);
+            Claim.eq(NatSpan.parts(n4, A, C, B, D), dACBD);
 
             var dCBDA = Perm4.CBDA.Digits();
-            Claim.eq(DataBlocks.natparts(n4, C, B, D, A), dCBDA);
+            Claim.eq(NatSpan.parts(n4, C, B, D, A), dCBDA);
 
         }
 

@@ -80,7 +80,7 @@ namespace Z0
         /// <param name="dst">The target span</param>
         /// <typeparam name="N">The span length type</typeparam>
         /// <typeparam name="T">The element type</typeparam>
-        public static void StreamTo<N,T>(this IEnumerable<T> src, NatBlock<N,T> dst, N n = default)
+        public static void StreamTo<N,T>(this IEnumerable<T> src, NatSpan<N,T> dst, N n = default)
             where N : unmanaged, ITypeNat
             where T : unmanaged
                 => src.Take(nati<N>()).StreamTo(dst.Unsized);

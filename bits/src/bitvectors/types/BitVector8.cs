@@ -427,13 +427,13 @@ namespace Z0
             => data = BitMask.disable(ref data, pos);
 
         /// <summary>
-        /// Disables the high bits that follow a specified bit
+        /// Disables the bits after a specified poistion
         /// </summary>
         /// <param name="pos">The bit position</param>
         [MethodImpl(Inline)]
         public void DisableAfter(int pos)
-            => data = Bits.bzhi(ref data, (byte)++pos);
-
+            => data = Bits.zerohi(data, (byte)++pos);
+            
         /// <summary>
         /// Gets the value of an index-identified bit
         /// </summary>
@@ -449,7 +449,7 @@ namespace Z0
         /// <param name="value">The bit value</param>
         [MethodImpl(Inline)]
         public void SetBit(int pos, bit value)
-            => data = BitMask.set(ref data, (byte)pos, value);
+            => data = BitMask.set(data, (byte)pos, value);
 
         /// <summary>
         /// Determines whether a bit is enabled

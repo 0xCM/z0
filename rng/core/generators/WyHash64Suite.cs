@@ -17,15 +17,15 @@ namespace Z0
         
         readonly WyHash64[] Generators = new WyHash64[MemberCount];
 
-        public WyHash64Suite(NatBlock<N,ulong> Seed)
+        public WyHash64Suite(in NatSpan<N,ulong> Seed)
         {
             for(var i=0; i<MemberCount; i++)
                 Generators[i] = new WyHash64(Seed[i]);
         }
         
-        public NatBlock<N, ulong> Next()
+        public NatSpan<N, ulong> Next()
         {
-            var dst = DataBlocks.natalloc<N,ulong>();
+            var dst = NatSpan.alloc<N,ulong>();
             var next = Generators.Mapi((index ,g) => (index, value: g.Next()));
             foreach(var item in next)
                 dst[item.index] = item.value;

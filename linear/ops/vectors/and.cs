@@ -23,7 +23,7 @@ namespace Z0
         /// <typeparam name="N">The length type</typeparam>
         /// <typeparam name="T">The component type</typeparam>
         [MethodImpl(Inline)]
-        public static BlockVector<N,T> and<N,T>(BlockVector<N,T> lhs, BlockVector<N,T> rhs)
+        public static VBlock256<N,T> and<N,T>(VBlock256<N,T> lhs, VBlock256<N,T> rhs)
             where N : unmanaged, ITypeNat
             where T : unmanaged    
         {
@@ -42,7 +42,7 @@ namespace Z0
 
 
         [MethodImpl(Inline)]
-        public static ref BlockVector<N,T> and<N,T>(BlockVector<N,T> lhs, BlockVector<N,T> rhs, ref BlockVector<N,T> dst)
+        public static ref VBlock256<N,T> and<N,T>(VBlock256<N,T> lhs, VBlock256<N,T> rhs, ref VBlock256<N,T> dst)
             where N : unmanaged, ITypeNat
             where T : unmanaged    
         {
@@ -58,7 +58,7 @@ namespace Z0
         /// <typeparam name="N">The length type</typeparam>
         /// <typeparam name="T">The component type</typeparam>
         [MethodImpl(Inline)]
-        public static BlockVector<N,T> and<N,T>(BlockVector<N,T> lhs, T rhs)
+        public static VBlock256<N,T> and<N,T>(VBlock256<N,T> lhs, T rhs)
             where N : unmanaged, ITypeNat
             where T : unmanaged    
         {
@@ -68,7 +68,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static ref BlockVector<N,T> and<N,T>(BlockVector<N,T> lhs, T rhs, ref BlockVector<N,T> dst)
+        public static ref VBlock256<N,T> and<N,T>(VBlock256<N,T> lhs, T rhs, ref VBlock256<N,T> dst)
             where N : unmanaged, ITypeNat
             where T : unmanaged    
         {

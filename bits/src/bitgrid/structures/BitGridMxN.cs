@@ -11,7 +11,7 @@ namespace Z0
     using static zfunc;
 
     /// <summary>
-    /// Defines a bitgrid of natural dimensions over a primal type
+    /// Defines a bitgrid - a maximally packed data structure - of natural dimensions over a primal type
     /// </summary>
     public readonly ref struct BitGrid<M,N,T>
         where M : unmanaged, ITypeNat
@@ -33,7 +33,9 @@ namespace Z0
         {
             this.data = data;
         }
-    
+
+        public N Width => default;
+
         public Span<T> Data
         {
             [MethodImpl(Inline)]
@@ -45,10 +47,6 @@ namespace Z0
             [MethodImpl(Inline)]
             get => ref head(data);
         }
-
-        public ushort RowCount => natval<M>();
-
-        public N Width => default;
 
         public bit this[int row, int col]
         {
@@ -78,11 +76,11 @@ namespace Z0
             => GridMoniker.FromTypes<M,N,T>();
             
         public string Format()
-            => data.FormatMatrixBits(natval(Width));
+            => Data.FormatMatrixBits(natval(Width));
 
         [MethodImpl(Inline)]
         public bool Equals(BitGrid<M,N,T> rhs)
-            => data.Identical(rhs.data);
+            => Data.Identical(rhs.data);
  
         public override bool Equals(object obj)
             => throw new NotSupportedException();

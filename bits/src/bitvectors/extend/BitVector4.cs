@@ -29,6 +29,14 @@ namespace Z0
         public static BitVector4 ToBitVector(this BitString src, N4 n)
             => BitVector4.FromBitString(src);
 
+        /// <summary>
+        /// Reverses the vector bits
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        [MethodImpl(Inline)]
+        public static BitVector4 Reverse(this BitVector4 src)
+            => BitVector.rev(src);
+
     }
 
 }

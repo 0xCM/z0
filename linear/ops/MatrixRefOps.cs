@@ -19,7 +19,7 @@ namespace Z0
     /// </summary>
     public static class MatrixRefOps
     {
-        public static NatGrid<M,P,double> Mul<M,N,P>(NatGrid<M,N,double> lhs, NatGrid<N,P,double> rhs)
+        public static NatSpan<M,P,double> Mul<M,N,P>(NatSpan<M,N,double> lhs, NatSpan<N,P,double> rhs)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where P : unmanaged, ITypeNat
@@ -27,7 +27,7 @@ namespace Z0
             var m = nati<M>();
             var n = nati<N>();
             var p = nati<P>();
-            var dst = DataBlocks.gridalloc<M,P,double>();
+            var dst = NatSpan.alloc<M,P,double>();
             for(var r = 0; r< m; r++)
                 for(var c = 0; c < p; c++)
                     for(var i=0; i<nati<N>(); i++)
@@ -36,7 +36,7 @@ namespace Z0
             return dst;
         }
 
-        public static ref BlockMatrix<N,T> Mul<N,T>(BlockMatrix<N,T> A, BlockMatrix<N,T> B, ref BlockMatrix<N,T> X)
+        public static ref MBlock256<N,T> Mul<N,T>(MBlock256<N,T> A, MBlock256<N,T> B, ref MBlock256<N,T> X)
             where N : unmanaged, ITypeNat
             where T : unmanaged
         {
@@ -48,7 +48,7 @@ namespace Z0
         }
 
 
-        public static ref BlockMatrix<M,N,T> Mul<M,K,N,T>(BlockMatrix<M,K,T> A, BlockMatrix<K,N,T> B, ref BlockMatrix<M,N,T> X)
+        public static ref MBlock256<M,N,T> Mul<M,K,N,T>(MBlock256<M,K,T> A, MBlock256<K,N,T> B, ref MBlock256<M,N,T> X)
             where M : unmanaged, ITypeNat
             where K : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
@@ -62,7 +62,7 @@ namespace Z0
             return ref X;           
         }
 
-        public static BlockMatrix<M,N,T> Mul<M,K,N,T>(BlockMatrix<M,K,T> A, BlockMatrix<K,N,T> B)
+        public static MBlock256<M,N,T> Mul<M,K,N,T>(MBlock256<M,K,T> A, MBlock256<K,N,T> B)
             where M : unmanaged, ITypeNat
             where K : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
@@ -81,12 +81,12 @@ namespace Z0
         /// <typeparam name="N">The natural type</typeparam>
         /// <typeparam name="T">The component type</typeparam>
         [MethodImpl(Inline)]
-        static T dot<N,T>(in BlockVector<N,T> lhs, in BlockVector<N,T> rhs)
+        static T dot<N,T>(in VBlock256<N,T> lhs, in VBlock256<N,T> rhs)
             where N : unmanaged, ITypeNat
             where T : unmanaged    
                 => mathspan.dot<T>(lhs.Unsized,rhs.Unsized);
 
-        public static void Mul<M,N,T>(BlockMatrix<M,N,T> A, BlockVector<N,T> B, BlockVector<M,T> X)
+        public static void Mul<M,N,T>(MBlock256<M,N,T> A, VBlock256<N,T> B, VBlock256<M,T> X)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged

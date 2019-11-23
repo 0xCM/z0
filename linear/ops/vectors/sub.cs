@@ -24,7 +24,7 @@ namespace Z0
         /// <typeparam name="N">The length type</typeparam>
         /// <typeparam name="T">The component type</typeparam>
         [MethodImpl(Inline)]
-        public static ref BlockVector<N,T> sub<N,T>(BlockVector<N,T> x, BlockVector<N,T> y, ref BlockVector<N,T> z)
+        public static ref VBlock256<N,T> sub<N,T>(VBlock256<N,T> x, VBlock256<N,T> y, ref VBlock256<N,T> z)
             where N : unmanaged, ITypeNat
             where T : unmanaged    
         {
@@ -40,7 +40,7 @@ namespace Z0
         /// <typeparam name="N">The length type</typeparam>
         /// <typeparam name="T">The component type</typeparam>
         [MethodImpl(Inline)]
-        public static BlockVector<N,T> sub<N,T>(BlockVector<N,T> x, BlockVector<N,T> y)
+        public static VBlock256<N,T> sub<N,T>(VBlock256<N,T> x, VBlock256<N,T> y)
             where N : unmanaged, ITypeNat
             where T : unmanaged    
         {
@@ -57,7 +57,7 @@ namespace Z0
         /// <param name="z">The target vector</param>
         /// <typeparam name="T">The component type</typeparam>
         [MethodImpl(Inline)]
-        public static ref BlockVector<T> sub<T>(BlockVector<T> x, BlockVector<T> y, ref BlockVector<T> z)
+        public static ref VBlock256<T> sub<T>(VBlock256<T> x, VBlock256<T> y, ref VBlock256<T> z)
             where T : unmanaged
         {
             mathspan.sub(x.Unblocked, y.Unblocked, z.Unblocked);
@@ -71,7 +71,7 @@ namespace Z0
         /// <param name="y">The right vector</param>
         /// <typeparam name="T">The component type</typeparam>
         [MethodImpl(Inline)]
-        public static BlockVector<T> sub<T>(BlockVector<T> x, BlockVector<T> y)
+        public static VBlock256<T> sub<T>(VBlock256<T> x, VBlock256<T> y)
             where T : unmanaged
         {                
             var z = x.Replicate(true);

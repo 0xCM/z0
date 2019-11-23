@@ -59,6 +59,39 @@ namespace Z0
         public static BitVector<ulong> ToBitVectorG(this ulong src)
             => src;        
 
-    }
+        /// <summary>
+        /// Sets all the bits to align with the source value
+        /// </summary>
+        /// <param name="value">The source value</param>
+        [MethodImpl(Inline)]
+        public static void Fill<T>(this BitVector<T> src, bit value)
+            where T : unmanaged
+             => src.data = gmath.mul(gmath.maxval<T>(), convert<uint,T>((uint)value));
 
+        /// <summary>
+        /// Extracts the represented data as a bitstring
+        /// </summary>
+        [MethodImpl(Inline)]
+        public static BitString ToBitString<T>(this BitVector<T> src)
+            where T : unmanaged
+                => BitString.from<T>(src.Data); 
+
+        /// <summary>
+        /// Extracts the represented data as a bitstring truncated to a specified width
+        /// </summary>
+        [MethodImpl(Inline)]
+        public static BitString ToBitString<T>(this BitVector<T> src, int width)
+            where T : unmanaged
+                => BitString.from<T>(src.Data).Truncate(width); 
+
+        [MethodImpl(Inline)]
+        public static BitVector<T> Reverse<T>(this BitVector<T> src)
+            where T : unmanaged
+                => BitVector.rev(src);
+
+        [MethodImpl(Inline)]
+        public static string Format<T>(this BitVector<T> src, bool tlz = false, bool specifier = false, int? blockWidth = null)
+            where T : unmanaged
+                => src.ToBitString().Format(tlz, specifier, blockWidth);
+    }
 }

@@ -296,7 +296,7 @@ namespace Z0
         {
             ref readonly var index = ref BitMap<ulong>()[pos];
             ref var cell  = ref Cell<ulong>(index.CellIndex);
-            BitMask.set(ref cell, index.CellOffset, value);
+            cell = BitMask.set(cell, index.CellOffset, value);
         }
 
         [MethodImpl(Inline)]

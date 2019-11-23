@@ -19,25 +19,25 @@ namespace Z0
             Claim.eq((ushort)0b111, dst);
         }
 
-        public void bv_disable_g16()
+        public void gbv_disable_16()
         {
             bv_disable_check<ushort>(16);
-            bv_disable_ng_check<N16,ushort>();
+            nbv_disable_check<N16,ushort>();
         }
 
-        public void bv_disable_g32()
+        public void gbv_disable_32()
         {
             bv_disable_check<uint>(32);
-            bv_disable_ng_check<N32,uint>();
+            nbv_disable_check<N32,uint>();
         }
 
-        public void bv_disable_g64()
+        public void gbv_disable_64()
         {
             bv_disable_check<ulong>(64);
-            bv_disable_ng_check<N64,ulong>();
+            nbv_disable_check<N64,ulong>();
         }
 
-        public void bv_disable_g213()
+        public void gbv_disable_213()
         {
             var len = 213;
             bv_disable_check<byte>(len);
@@ -47,21 +47,20 @@ namespace Z0
 
         }
 
-        public void bv_disable_ng213()
+        public void nbv_disable_213()
         {
             var n213 = nat(n2,n1,n3);
-            bv_disable_ng_check(n213, (byte)0);
-            bv_disable_ng_check(n213, (ushort)0);
-            bv_disable_ng_check(n213, (uint)0);
-            bv_disable_ng_check(n213, (ulong)0);
+            nbv_disable_check(n213, (byte)0);
+            nbv_disable_check(n213, (ushort)0);
+            nbv_disable_check(n213, (uint)0);
+            nbv_disable_check(n213, (ulong)0);
         }
 
-        void bv_disable_ng707x64u()
+        void nbv_disable_707x64u()
         {
             var n707 = nat(n7,n0,n7);
             Claim.eq(707,(int)n707.NatValue);
-            bv_disable_ng_check(n707, (ulong)0);
-
+            nbv_disable_check(n707, (ulong)0);
         }
 
         void bv_disable_check<T>(BitSize n)
@@ -83,7 +82,7 @@ namespace Z0
             }
         }
 
-        void bv_disable_ng_check<N,T>(N n = default, T rep = default)
+        void nbv_disable_check<N,T>(N n = default, T rep = default)
             where T : unmanaged
             where N : unmanaged, ITypeNat
         {

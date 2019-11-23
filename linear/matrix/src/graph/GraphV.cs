@@ -18,167 +18,90 @@ namespace Z0
     /// <remarks>For terminology consult, for example, https://xlinux.nist.gov/dads/<remarks>
     public class Graph<V>
         where V : unmanaged
-    {
-        /// <summary>
-        /// Creates a graph from supplied vertices and edges, sorting the provided vertices according to their index
-        /// </summary>
-        /// <param name="vertices">The vertices in the graph</param>
-        /// <param name="edges">The edges that connect the vertices</param>
-        public static Graph<V> Define(IEnumerable<Vertex<V>> vertices, IEnumerable<Edge<V>> edges)
-            => new Graph<V>(vertices.OrderBy(x => x.Index,PrimalComparer.Get<V>()).ToArray(), edges.ToArray());
-
-        public static Graph<V> Define(params Edge<V>[] edges)
-        {
-            var vertices = edges.Select(e => e.Source).Union(edges.Select(e => e.Target)).Select(x => new Vertex<V>(x));
-            return Define(vertices,edges);
-        }
-
-        /// <summary>
-        /// Creates a graph from supplied vertices and edges and assumes the vertices are already appropriately sorted
-        /// </summary>
-        /// <param name="vertices">The vertices in the graph</param>
-        /// <param name="edges">The edges that connect the vertices</param>
-        public static Graph<V> Define(Span<Vertex<V>> vertices, IEnumerable<Edge<V>> edges)
-            => new Graph<V>(vertices.ToArray(), edges.ToArray());
-
-        [MethodImpl(Inline)]
-        static List<V> list(V first)
-        {
-            var list = new List<V>();
-            list.Add(first);
-            return list;
-        }
-
-        Graph(Vertex<V>[] vertices, Edge<V>[] edges)
-        {
-            this.vertices = vertices;
-            this.edges = edges; 
-
-            for(var i=0; i<edges.Length; i++)
-            {
-                var edge = edges[i];
-                if(SourceIndex.TryGetValue(edge.Source, out List<V> targets))
-                    targets.Add(edge.Target);
-                else
-                    SourceIndex[edge.Source] = list(edge.Target);
-
-                if(TargetIndex.TryGetValue(edge.Target, out List<V> sources))
-                    sources.Add(edge.Source);
-                else
-                    TargetIndex[edge.Target] = list(edge.Source);
-            }
-
-        }
-
-        /// <summary>
-        /// Correlates sources with their targets
-        /// </summary>
-        Dictionary<V,List<V>> SourceIndex {get;}
-            = new Dictionary<V, List<V>>();
-
-        /// <summary>
-        /// Correlates targets with their sources
-        /// </summary>
-        IDictionary<V,List<V>> TargetIndex {get;}
-            = new Dictionary<V, List<V>>();
-
+    {        
         readonly Vertex<V>[] vertices;
 
         readonly Edge<V>[] edges;
-
-        static readonly List<V> EmptyList = new List<V>();
         
+        readonly NodeIndex<V> index;
+
+        [MethodImpl(Inline)]
+        internal Graph(Vertex<V>[] vertices, Edge<V>[] edges)
+        {
+            this.vertices = vertices;
+            this.edges = edges; 
+            this.index = NodeIndex<V>.Build(vertices, edges);            
+        }
+                    
         /// <summary>
         /// Retrieves the indices of a targets' source vertices 
         /// </summary>
         /// <param name="source">The source vertex</param>
         [MethodImpl(Inline)]
-        public IReadOnlyList<V> Sources(V target)
-        {
-            if(SourceIndex.TryGetValue(target, out List<V> sources))
-                return sources;
-            else
-                return EmptyList;
-        }
+        public List<V> Sources(V target)
+            => index.Sources(target);
 
         /// <summary>
         /// Retrieves the indices of a sources' target vertices
         /// </summary>
         /// <param name="source">The source vertex</param>
         [MethodImpl(Inline)]
-        public IReadOnlyList<V> Targets(V source)
-        {
-            if(TargetIndex.TryGetValue(source, out List<V> targets))
-                return targets;
-            else
-                return EmptyList;
-        }
+        public List<V> Targets(V source)
+            => index.Targets(source);
 
         /// <summary>
         /// Looks up a vertex based on its index
         /// </summary>
         /// <param name="index">The vertex index</param>
         [MethodImpl(Inline)]
-        public ref readonly Vertex<V> Vertex(V index)
+        public ref Vertex<V> Vertex(V index)
             => ref vertices[convert<V,ulong>(index)];
-
-        /// <summary>
-        /// Looks up a vertex based on its index
-        /// </summary>
-        /// <param name="index">The vertex index</param>
-        public ref readonly Vertex<V> this[V index]
-        {
-            [MethodImpl(Inline)]
-            get => ref Vertex(index);
-        }
 
         /// <summary>
         /// Looks up an edge based on its index
         /// </summary>
         /// <param name="index">The vertex index</param>
         [MethodImpl(Inline)]
-        public ref readonly Edge<V> Edge(uint index)
+        public ref Edge<V> Edge(int index)
             => ref edges[index];
 
         /// <summary>
-        /// Reveals all vertices covered by the graph
+        /// Looks up a vertex based on its index
         /// </summary>
-        public ReadOnlySpan<Vertex<V>> Vertices
-            => vertices;
-
-        /// <summary>
-        /// Reveals all edges that connect graph vertices
-        /// </summary>
-        public ReadOnlySpan<Edge<V>> Edges 
-            => edges;
+        /// <param name="index">The vertex index</param>
+        public ref Vertex<V> this[V index]
+        {
+            [MethodImpl(Inline)]
+            get => ref Vertex(index);
+        }
 
         /// <summary>
         /// Specifies the edges declared by the graph
         /// </summary>
-        public uint EdgeCount
-            => (uint)edges.Length;
+        public int EdgeCount
+            => edges.Length;
 
         /// <summary>
         /// Specifies the number of vertices declared by the graph
         /// </summary>
-        public uint VertexCount
-            => (uint)vertices.Length;
+        public int VertexCount
+            => vertices.Length;
 
         /// <summary>
         /// Computes the in-degree of a vertex; i.e. the count of incoming vertices
         /// </summary>
         /// <param name="target">The target vector</param>
         [MethodImpl(Inline)]
-        public uint InDegree(V target)
-            => (uint)Sources(target).Count;
+        public int InDegree(V target)
+            => Sources(target).Count;
 
         /// <summary>
         /// Computes the out-degree of a vertex; i.e. the count of outgoing vertices
         /// </summary>
         /// <param name="source">The source vector</param>
         [MethodImpl(Inline)]
-        public uint OutDegree(V source)
-            => (uint)Targets(source).Count;
+        public int OutDegree(V source)
+            => Targets(source).Count;
         
         /// <summary>
         /// Determines whether a vertex is disconnected from the graph
@@ -238,8 +161,7 @@ namespace Z0
         public IEnumerable<V> Path(V v0,  V vEnd = default)
         {
             foreach(var target in Targets(v0))
-            {
-                
+            {                
                 yield return target;
                 
                 if(target.Equals(v0) || target.Equals(vEnd)) 
@@ -249,7 +171,5 @@ namespace Z0
                     yield return subnode;
             }
         }
-
     }
-
 }

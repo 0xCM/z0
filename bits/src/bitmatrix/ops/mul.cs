@@ -181,10 +181,10 @@ namespace Z0
             var C = B.Transpose();
             for(var i=0; i< N; i++)
             {
-                ref readonly var row = ref A.RowData(i);
+                ref readonly var row = ref A[i];
                 var z = BitVector64.Alloc();
                 for(var j=0; j< N; j++)
-                    z[j] = Z0.BitVector.dot(row, C.RowData(j));
+                    z[j] = BitVector.dot(row, C[j]);
                 A[i] = (ulong)z;
             }
 

@@ -17,6 +17,8 @@ namespace Z0
     /// </summary>
     public static class bmoc
     {        
+        public static BitMatrix4x16 transpose_16x4(in BitMatrix16x4 A)
+            => BitMatrix.transpose(A);
 
         public static BitMatrix4 and_4x4(in BitMatrix4 A, in BitMatrix4 B)
             => BitMatrix.and(A, B);

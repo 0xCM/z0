@@ -99,14 +99,14 @@ namespace Z0
             => Flip(ref src);
 
         [MethodImpl(Inline)]
-        BitMatrix(T[] src)
+        internal BitMatrix(params T[] src)
         {
             this.data = src;
             this.moniker = BitGrid.moniker<M,N,T>();
         }
 
         [MethodImpl(Inline)]
-        BitMatrix(Span<T> src)
+        internal BitMatrix(Span<T> src)
         {
             this.data = src;
             this.moniker = BitGrid.moniker<M,N,T>();

@@ -154,7 +154,7 @@ namespace Z0
             for(var i=0; i<len; i++)
             {
                 seek(ref mem, i) = current;
-                gmath.add(ref current, step);
+                current = gmath.add(current, step);
             }
             return ginx.vload(n, in mem);
         }
@@ -175,7 +175,7 @@ namespace Z0
             for(var i=0; i<len; i++)
             {
                 seek(ref mem, i) = current;
-                gmath.add(ref current, step);
+                current = gmath.add(current, step);
             }
             return ginx.vload(n, in mem);
         }

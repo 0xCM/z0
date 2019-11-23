@@ -340,9 +340,9 @@ namespace Z0
         public void Set(int pos, bit value)
         {
             if(pos < 64) 
-                x0 = BitMask.set(ref x0, (byte)pos, value);
+                x0 = BitMask.set(x0, (byte)pos, value);
             else
-                x1 = BitMask.set(ref x1, (byte)pos, value);
+                x1 = BitMask.set(x1, (byte)pos, value);
         }
 
         [MethodImpl(Inline)]

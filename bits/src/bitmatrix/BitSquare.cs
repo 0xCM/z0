@@ -329,30 +329,15 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static bit testz(in byte A, in byte B)
-        {
-            var a = read64(in A);
-            var b = read64(in B);
-            var x = dinx.vbroadcast(n128, a);
-            var y = dinx.vbroadcast(n128, b);
-            return dinx.vtestz(x,y);
-        }
-
-        [MethodImpl(Inline)]
-        static bit testc(in byte A)
-        {
-            var a = read64(in A);
-            var x = ginx.vbroadcast(n128,a);
-            return ginx.vtestc(x);
-        }
+            => Bits.testz(read64(in A),read64(in B));
 
         [MethodImpl(Inline)]
         static bit testc(in byte A, in byte B)
-        {
-            var a = read64(in A);
-            var b = read64(in B);
-            var x = ginx.vbroadcast(n128,a);
-            var y = ginx.vbroadcast(n128,b);
-            return ginx.vtestc(x,y);
-        }
+            => Bits.testc(read64(in A),read64(in B));
+
+        [MethodImpl(Inline)]
+        static bit testc(in byte A)
+            => Bits.testc(read64(in A));
+
     }
 }

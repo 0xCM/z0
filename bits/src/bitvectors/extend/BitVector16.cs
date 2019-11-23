@@ -66,6 +66,14 @@ namespace Z0
         public static BitVector<N16,ushort> ToNatural(this BitVector16 src)
             => src;
 
+        /// <summary>
+        /// Reverses the vector bits
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        [MethodImpl(Inline)]
+        public static BitVector16 Reverse(this BitVector16 src)
+            => BitVector.rev(src);
+
     }
 
 }

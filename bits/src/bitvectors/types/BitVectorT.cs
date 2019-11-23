@@ -288,20 +288,6 @@ namespace Z0
             => data = gbits.disable(ref data, (byte)pos);
 
         /// <summary>
-        /// Sets all the bits to align with the source value
-        /// </summary>
-        /// <param name="value">The source value</param>
-        [MethodImpl(Inline)]
-        public void Fill(bit value)
-        {
-            var primal = PrimalInfo.Get<T>();
-            if(value)
-                data = gmath.maxval<T>();
-            else
-                data = default(T);
-        }
-
-        /// <summary>
         /// Specifies the data over which the vector is defined
         /// </summary>
         public readonly T Data
@@ -319,12 +305,6 @@ namespace Z0
         public readonly BitVector<T> Between(int first, int last)
             => gbits.between(data, (byte)first,(byte)last);
 
-        /// <summary>
-        /// Extracts the represented data as a bitstring
-        /// </summary>
-        [MethodImpl(Inline)]
-        public readonly BitString ToBitString()
-            => BitString.from<T>(data); 
 
         /// <summary>
         /// Counts the vector's enabled bits
@@ -344,10 +324,6 @@ namespace Z0
         public readonly bool Equals(BitVector<T> y)
             => gmath.eq(data, y.data);
 
-        [MethodImpl(Inline)]
-        public readonly string Format(bool tlz = false, bool specifier = false, int? blockWidth = null)
-            => ToBitString().Format(tlz, specifier, blockWidth);
-
         public readonly override bool Equals(object obj)
             => obj is BitVector<T> x && Equals(x);
         
@@ -355,8 +331,6 @@ namespace Z0
             => data.GetHashCode();
     
         public override string ToString()
-            => Format();
-
+            => this.Format();
     }
-
 }

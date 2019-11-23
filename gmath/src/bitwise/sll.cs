@@ -20,7 +20,7 @@ namespace Z0
         /// <param name="offset">The number of bits to shift leftwards</param>
         [MethodImpl(Inline)]
         public static sbyte sll(sbyte src, int offset)
-            => (sbyte)(math.abs(ref src) << offset);
+            => (sbyte)(math.abs(src) << offset);
 
         /// <summary>
         /// Applies a logical left shift to the source value
@@ -38,7 +38,7 @@ namespace Z0
         /// <param name="offset">The number of bits to shift leftwards</param>
         [MethodImpl(Inline)]
         public static short sll(short src, int offset)
-            => (short)(math.abs(ref src) << offset);
+            => (short)(math.abs(src) << offset);
 
         /// <summary>
         /// Applies a logical left shift to the source value
@@ -56,7 +56,7 @@ namespace Z0
         /// <param name="offset">The number of bits to shift leftwards</param>
         [MethodImpl(Inline)]
         public static int sll(int src, int offset)
-            => math.abs(ref src) << offset;
+            => math.abs(src) << offset;
 
         /// <summary>
         /// Applies a logical left shift to the source value
@@ -74,7 +74,7 @@ namespace Z0
         /// <param name="offset">The number of bits to shift leftwards</param>
         [MethodImpl(Inline)]
         public static long sll(long src, int offset)
-            => math.abs(ref src) << offset;
+            => math.abs(src) << offset;
 
         /// <summary>
         /// Applies a logical left shift to the source value
@@ -85,102 +85,6 @@ namespace Z0
         public static ulong sll(ulong src, int offset)
             => src << offset;
 
-        /// <summary>
-        /// Applies an logical rightwards shift to the source operand in-place
-        /// </summary>
-        /// <param name="src">The source operand</param>
-        /// <param name="offset">The number of bits to shift</param>
-        [MethodImpl(Inline)]
-        public static ref sbyte sll(ref sbyte src, int offset)
-        {            
-            math.abs(ref src) <<= offset;
-            return ref src;
-        }
-
-        /// <summary>
-        /// Applies an logical rightwards shift to the source operand in-place
-        /// </summary>
-        /// <param name="src">The source operand</param>
-        /// <param name="offset">The number of bits to shift</param>
-        [MethodImpl(Inline)]
-        public static ref byte sll(ref byte src, int offset)
-        {
-            src <<= offset;
-            return ref src;
-        }
-
-        /// <summary>
-        /// Applies an logical rightwards shift to the source operand in-place
-        /// </summary>
-        /// <param name="src">The source operand</param>
-        /// <param name="offset">The number of bits to shift</param>
-        [MethodImpl(Inline)]
-        public static ref short sll(ref short src, int offset)
-        {
-            math.abs(ref src) <<= offset;
-            return ref src;
-        }
-
-        /// <summary>
-        /// Applies an logical rightwards shift to the source operand in-place
-        /// </summary>
-        /// <param name="src">The source operand</param>
-        /// <param name="offset">The number of bits to shift</param>
-        [MethodImpl(Inline)]
-        public static ref ushort sll(ref ushort src, int offset)
-        {
-            src <<= offset;
-            return ref src;
-        }
-
-        /// <summary>
-        /// Applies an logical rightwards shift to the source operand in-place
-        /// </summary>
-        /// <param name="src">The source operand</param>
-        /// <param name="offset">The number of bits to shift</param>
-        [MethodImpl(Inline)]
-        public static ref int sll(ref int src, int offset)
-        {
-            math.abs(ref src) <<= offset;
-            return ref src;
-        }
-
-        /// <summary>
-        /// Applies an logical rightwards shift to the source operand in-place
-        /// </summary>
-        /// <param name="src">The source operand</param>
-        /// <param name="offset">The number of bits to shift</param>
-        [MethodImpl(Inline)]
-        public static ref uint sll(ref uint src, int offset)
-        {
-            src <<= offset;
-            return ref src;
-        }
-
-        /// <summary>
-        /// Applies an logical rightwards shift to the source operand in-place
-        /// </summary>
-        /// <param name="src">The source operand</param>
-        /// <param name="offset">The number of bits to shift</param>
-        [MethodImpl(Inline)]
-        public static ref long sll(ref long src, int offset)
-        {
-            math.abs(ref src) <<= offset;
-            return ref src;
-        }
-
-        /// <summary>
-        /// Applies an logical rightwards shift to the source operand in-place
-        /// </summary>
-        /// <param name="src">The source operand</param>
-        /// <param name="offset">The number of bits to shift</param>
-        [MethodImpl(Inline)]
-        public static ref ulong sll(ref ulong src, int offset)
-        {
-            src <<= offset;
-            return ref src;
-        }
-
-    }
+   }
 
 }

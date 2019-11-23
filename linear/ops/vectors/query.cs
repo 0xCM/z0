@@ -22,11 +22,11 @@ namespace Z0
         /// <param name="match">The target value to match</param>
         /// <typeparam name="N">The natural type</typeparam>
         /// <typeparam name="T">The component type</typeparam>
-        public static bool all<N,T>(in BlockVector<N,T> src, T match)
+        public static bool all<N,T>(in VBlock256<N,T> src, T match)
             where N : unmanaged, ITypeNat
             where T : unmanaged    
         {
-            for(var i=0; i< BlockVector<N,T>.Length; i++)            
+            for(var i=0; i< VBlock256<N,T>.Length; i++)            
                 if(gmath.neq(src[i],match))
                     return false;
             return true;

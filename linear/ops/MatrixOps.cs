@@ -27,7 +27,7 @@ namespace Z0
         /// <typeparam name="N">The natural column count type</typeparam>
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
-        public static ref BlockMatrix<M,N,T> add<M,N,T>(BlockMatrix<M,N,T> A, BlockMatrix<M,N,T> B, ref BlockMatrix<M,N,T> C)
+        public static ref MBlock256<M,N,T> add<M,N,T>(MBlock256<M,N,T> A, MBlock256<M,N,T> B, ref MBlock256<M,N,T> C)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged    
@@ -46,7 +46,7 @@ namespace Z0
         /// <typeparam name="N">The natural column count type</typeparam>
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
-        public static ref BlockMatrix<M,N,T> sub<M,N,T>(BlockMatrix<M,N,T> A, BlockMatrix<M,N,T> B, ref BlockMatrix<M,N,T> C)
+        public static ref MBlock256<M,N,T> sub<M,N,T>(MBlock256<M,N,T> A, MBlock256<M,N,T> B, ref MBlock256<M,N,T> C)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged    
@@ -65,7 +65,7 @@ namespace Z0
         /// <typeparam name="N">The natural column count type</typeparam>
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
-        public static ref BlockMatrix<M,N,T> and<M,N,T>(BlockMatrix<M,N,T> A, BlockMatrix<M,N,T> B, ref BlockMatrix<M,N,T> C)
+        public static ref MBlock256<M,N,T> and<M,N,T>(MBlock256<M,N,T> A, MBlock256<M,N,T> B, ref MBlock256<M,N,T> C)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged    

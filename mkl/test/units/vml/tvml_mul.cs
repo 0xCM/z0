@@ -5,13 +5,10 @@
 namespace Z0.Mkl.Test
 {
     using System;
-    using System.Linq;
 
     using static zfunc;
     using static nfunc;
     
-    using Z0.Test;
-
     public class tvml_mul : t_mkl<tvml_mul>
     {
         public void vMulF32()
@@ -28,8 +25,8 @@ namespace Z0.Mkl.Test
 
         public void vMulF64()
         {
-            var lhs = Random.BlockVector<N256,double>();
-            var rhs = Random.BlockVector<N256,double>();
+            var lhs = Random.VectorBlock<N256,double>();
+            var rhs = Random.VectorBlock<N256,double>();
             var dst1 = Vector.blockalloc<N256,double>();
             mkl.mul(lhs,rhs, ref dst1);
             
@@ -79,7 +76,5 @@ namespace Z0.Mkl.Test
             TracePerf(vMulPerf(n, i).Format());
             
         }
-
     }
-
 }

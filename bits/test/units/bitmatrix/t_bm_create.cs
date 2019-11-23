@@ -39,8 +39,7 @@ namespace Z0
                 var v1 = Random.BitVector(n32);
                 var v2 = mat * v1;
                 var v3 = v1.Replicate();
-                v3.Reverse();
-                Claim.eq(v3,v2);
+                Claim.eq(v3.Reverse(),v2);
             }
         }
 
@@ -247,12 +246,12 @@ namespace Z0
             Claim.eq(1, (int)row0[9].Segment);
 
             var m = BitMatrix.ones<N16,byte>();
-            Claim.eq(16, m.RowCount);
-            Claim.eq(16, m.ColCount);
-            Claim.eq(2, m.RowSegCount);
+            Claim.eq(16, m.Order);
+            Claim.eq(16, m.Order);
+            Claim.eq(2, BitMatrix<N16,byte>.RowCellCount);
             
-            for(var i=0; i < m.RowCount; i++)
-            for(var j=0; j < m.ColCount; j++)
+            for(var i=0; i < m.Order; i++)
+            for(var j=0; j < m.Order; j++)
                 Claim.eq(on, m[i,j]);
         }
     }

@@ -81,12 +81,11 @@ namespace Z0
         /// <typeparam name="T">The span element type</typeparam>
         /// <typeparam name="M">The row count type</typeparam>
         /// <typeparam name="N">The row count type</typeparam>
-        public static string FormatTable<M,N,T>(this NatGrid<M,N,T> src, 
+        public static string FormatTable<M,N,T>(this NatSpan<M,N,T> src, 
             int? padlen = null, char? padchar = null, char? rowsep = null, char? cellsep = null)
                 where M : unmanaged, ITypeNat
                 where N : unmanaged, ITypeNat
                 where T : unmanaged
                     => src.Data.FormatTable(nati<M>(), nati<N>(),  padlen, padchar, rowsep, cellsep); 
-
     }
 }

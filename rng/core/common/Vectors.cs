@@ -15,7 +15,7 @@ namespace Z0
     partial class RngX
     {
         /// <summary>
-        /// Produces a blocked vector
+        /// Produces a generic vector
         /// </summary>
         /// <param name="random">The random source</param>
         /// <param name="domain">The domain of the random variable</param>
@@ -32,7 +32,7 @@ namespace Z0
         }
 
         /// <summary>
-        /// Allocates and populates a vector of natural length
+        /// Produces a natural vector
         /// </summary>
         /// <param name="random">The random source</param>
         /// <param name="domain">The domain of the random variable</param>
@@ -49,7 +49,7 @@ namespace Z0
         }
 
         /// <summary>
-        /// Allocates and populates a vector of natural length
+        /// Produces a natural vector
         /// </summary>
         /// <param name="random">The random source</param>
         /// <typeparam name="N">The length type</typeparam>
@@ -81,7 +81,7 @@ namespace Z0
         }
 
         /// <summary>
-        /// Allocates and populates a vector of natural length
+        /// Produces a natural vector over one domain and converts it to another
         /// </summary>
         /// <param name="random">The random source</param>
         /// <param name="domain">The domain of the random variable</param>
@@ -97,7 +97,7 @@ namespace Z0
                 => random.Vector<N,S>(domain).Convert<T>();
 
         /// <summary>
-        /// Produces a generic random vector over one domain and converts it to a vector over another
+        /// Produces a natural vector over one domain and converts it to another
         /// </summary>
         /// <param name="random">The random source</param>
         /// <param name="len">The vector length</param>
@@ -138,7 +138,6 @@ namespace Z0
             where T : unmanaged
             where N : unmanaged, ITypeNat
                 => random.Fill<T>(nati<N>(), ref vector.Data[0]);
-
     }
 }
 

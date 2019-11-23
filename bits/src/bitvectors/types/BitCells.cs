@@ -364,8 +364,8 @@ namespace Z0
                 print($"firstCount = {firstCount}");
                 print($"LastCount = {lastCount}");
             }
-            gmath.sal(ref part2, firstCount);
-            return gmath.or(ref part1, part2);              
+            part2 = gmath.sal(part2, firstCount);
+            return gmath.or(part1, part2);              
         }
 
         public BitCells<T> Replicate(bool structureOnly = false)

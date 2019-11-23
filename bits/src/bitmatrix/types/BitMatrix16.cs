@@ -106,12 +106,12 @@ namespace Z0
 
 
         [MethodImpl(Inline)]
-        BitMatrix16(Span<ushort> src)
+        internal BitMatrix16(Span<ushort> src)
         {                        
             this.data = src;
         }
 
-        BitMatrix16(bit fill)
+        internal BitMatrix16(bit fill)
         {
             this.data = new ushort[N];
             if(fill)
@@ -167,7 +167,7 @@ namespace Z0
         public ref BitVector16 this[int row]
         {
             [MethodImpl(Inline)]
-            get => ref RowVector(row);
+            get => ref Row(row);
         }
 
         public readonly int RowCount
@@ -187,28 +187,17 @@ namespace Z0
         /// </summary>
         /// <param name="row">The row index</param>
         [MethodImpl(Inline)]
-        public ref BitVector16 RowVector(int row)
+        public ref BitVector16 Row(int row)
             => ref Unsafe.As<ushort,BitVector16>(ref seek(ref Head, row));
 
-        /// <summary>
-        /// Returns a mutable reference for an index-identified matrix row
-        /// </summary>
-        /// <param name="row">The row index</param>
         [MethodImpl(Inline)]
-        public ref ushort RowData(int row)
-            => ref data[row];
-
-        public readonly ushort ColData(int index)
+        public readonly BitVector16 Column(int index)
         {
             ushort col = 0;
             for(var r = 0; r < N; r++)
-                BitMask.setif(in data[r], index, ref col, r);
+                col = BitMask.setif(data[r], index, col, r);
             return col;
         }
-        
-        [MethodImpl(Inline)]
-        public readonly BitVector16 ColVector(int index)
-            => ColData(index);
 
         /// <summary>
         /// Interchanges the i'th and j'th rows where  0 <= i,j < 16
@@ -225,7 +214,7 @@ namespace Z0
         /// <param name="row">The row index</param>
         /// <param name="col">The column index</param>
         [MethodImpl(Inline)]
-        public bit GetBit(int row, int col)
+        bit GetBit(int row, int col)
             => BitMask.test(skip(in Head, row), col);
 
         /// <summary>
@@ -235,8 +224,8 @@ namespace Z0
         /// <param name="col">The column index</param>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
-        public void SetBit(int row, int col, bit src)
-            => BitMask.set(ref seek(ref Head, row), (byte)col, src);
+        void SetBit(int row, int col, bit src)
+            => seek(ref Head, row) = BitMask.set(seek(ref Head, row), (byte)col, src);
 
         [MethodImpl(Inline)]
         public readonly BitVector16 Diagonal()
@@ -246,7 +235,7 @@ namespace Z0
         {
             var dst = Replicate();
             for(var i=0; i<N; i++)
-                dst.data[i] = ColData(i);
+                dst.data[i] = Column(i);
             return dst;
         }
 

@@ -1,4 +1,4 @@
-// 2019-11-21 19:28:32:636
+// 2019-11-23 00:41:18:032
 ulong clear_64(ulong src, int p0, int p1)
 {
     IL_0000: ldarg.0
@@ -806,15 +806,6 @@ ref ulong bitset_2(ref ulong src, int pos, bit state)
     IL_0018: stind.i8
     IL_0019: ldarg.0
     IL_001A: ret
-
-}
-ref ulong bitset_3(ref ulong src, byte pos, bit state)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: ldarg.2
-    IL_0003: call System.UInt64& Z0.BitMask::set(System.UInt64&,System.Byte,Z0.bit)
-    IL_0008: ret
 
 }
 ref ulong bitmask_set(ref ulong src, byte pos, bit state)

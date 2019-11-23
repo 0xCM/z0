@@ -1,4 +1,4 @@
-// 2019-11-21 19:28:31:904
+// 2019-11-23 00:41:17:184
 double xor_g64f(double lhs, double rhs)
 {
     IL_0000: ldarg.0
@@ -3556,6 +3556,30 @@ bit gt_d16i(short a, short b)
     IL_0007: ret
 
 }
+bit gt_g16i(short a, short b)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call Z0.bit Z0.gmath::gt<System.Int16>(System.Int16,System.Int16)
+    IL_0007: ret
+
+}
+bit gt_d16u(ushort a, ushort b)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call Z0.bit Z0.math::gt(System.UInt16,System.UInt16)
+    IL_0007: ret
+
+}
+bit gt_g16u(ushort a, ushort b)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call Z0.bit Z0.gmath::gt<System.UInt16>(System.UInt16,System.UInt16)
+    IL_0007: ret
+
+}
 bit gt_d32i(int a, int b)
 {
     IL_0000: ldarg.0
@@ -3872,27 +3896,6 @@ int inc_d32i(int x)
 {
     IL_0000: ldarg.0
     IL_0001: call System.Int32 Z0.math::inc(System.Int32)
-    IL_0006: ret
-
-}
-int inc_g32i(int x)
-{
-    IL_0000: ldarg.0
-    IL_0001: call System.Int32 Z0.gmath::inc<System.Int32>(System.Int32)
-    IL_0006: ret
-
-}
-uint inc_d32u(uint x)
-{
-    IL_0000: ldarg.0
-    IL_0001: call System.UInt32 Z0.math::inc(System.UInt32)
-    IL_0006: ret
-
-}
-uint inc_g32u(uint x)
-{
-    IL_0000: ldarg.0
-    IL_0001: call System.UInt32 Z0.gmath::inc<System.UInt32>(System.UInt32)
     IL_0006: ret
 
 }

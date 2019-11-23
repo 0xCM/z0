@@ -15,7 +15,7 @@ namespace Z0.Mkl
     public class t_getrf : t_mkl<t_getrf>
     {
         // Taken from https://www.ibm.com/support/knowledgecenter/en/SSFHY8_6.1/reference/am5gr_hsgetrf.html
-        static BlockMatrix<N9,double> DGETRF_In
+        static MBlock256<N9,double> DGETRF_In
             => Matrix.blockload(new double[]{
             1.0,  1.2,  1.4,  1.6,  1.8,  2.0,  2.2,  2.4,  2.6,
             1.2,  1.0,  1.2,  1.4,  1.6,  1.8,  2.0,  2.2,  2.4,
@@ -28,7 +28,7 @@ namespace Z0.Mkl
             2.6,  2.4,  2.2,  2.0,  1.8,  1.6,  1.4,  1.2,  1.0
             }, n9);
             
-        static BlockMatrix<N9,double> DGETRF_Out
+        static MBlock256<N9,double> DGETRF_Out
             => Matrix.blockload(new double[]{
                 2.6,   2.4,  2.2,  2.0,  1.8,  1.6,  1.4,  1.2,  1.0, 
                 0.4,   0.3,  0.6,  0.8,  1.1,  1.4,  1.7,  1.9,  2.2,

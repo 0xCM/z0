@@ -4,11 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    
+    using System.Runtime.CompilerServices;
+
     using static zfunc;
 
     /// <summary>
@@ -20,36 +18,52 @@ namespace Z0
         where V : unmanaged
         where T : unmanaged
     {
-        /// <summary>
-        /// Creates a graph from supplied vertices and edges, sorting the provided vertices according to their index
-        /// </summary>
-        /// <param name="vertices">The vertices in the graph</param>
-        /// <param name="edges">The edges that connect the vertices</param>
-        public static Graph<V,T> Define(IEnumerable<Vertex<V,T>> vertices, IEnumerable<Edge<V>> edges)
-            => new Graph<V,T>(vertices.OrderBy(x => x.Index,PrimalComparer.Get<V>()).ToArray(), edges.ToArray());
+        readonly Vertex<V,T>[] vertices;
 
-        /// <summary>
-        /// Creates a graph from supplied vertices and edges and assumes the vertices are already appropriately sorted
-        /// </summary>
-        /// <param name="vertices">The vertices in the graph</param>
-        /// <param name="edges">The edges that connect the vertices</param>
-        public static Graph<V,T> Define(Span<Vertex<V,T>> vertices, IEnumerable<Edge<V>> edges)
-            => new Graph<V,T>(vertices.ToArray(), edges.ToArray());
+        readonly Edge<V>[] edges;
 
-        Graph(Vertex<V,T>[] vertices, Edge<V>[] edges)
+        internal Graph(Vertex<V,T>[] vertices, Edge<V>[] edges)
         {
             this.vertices = vertices;
             this.edges = edges;            
         }
 
-        readonly Vertex<V,T>[] vertices;
+        /// <summary>
+        /// Specifies the edges declared by the graph
+        /// </summary>
+        public int EdgeCount
+            => edges.Length;
 
-        readonly Edge<V>[] edges;
+        /// <summary>
+        /// Specifies the number of vertices declared by the graph
+        /// </summary>
+        public int VertexCount
+            => vertices.Length;
 
-        public ReadOnlySpan<Vertex<V,T>> Vertices
-            => vertices;
+        /// <summary>
+        /// Looks up a vertex based on its index
+        /// </summary>
+        /// <param name="index">The vertex index</param>
+        [MethodImpl(Inline)]
+        public ref Vertex<V,T> Vertex(V index)
+            => ref vertices[convert<V,ulong>(index)];
 
-        public ReadOnlySpan<Edge<V>> Edges 
-            => edges;
+        /// <summary>
+        /// Looks up an edge based on its index
+        /// </summary>
+        /// <param name="index">The vertex index</param>
+        [MethodImpl(Inline)]
+        public ref Edge<V> Edge(int index)
+            => ref edges[index];
+
+        /// <summary>
+        /// Looks up a vertex based on its index
+        /// </summary>
+        /// <param name="index">The vertex index</param>
+        public ref Vertex<V,T> this[V index]
+        {
+            [MethodImpl(Inline)]
+            get => ref Vertex(index);
+        }
     }
 }

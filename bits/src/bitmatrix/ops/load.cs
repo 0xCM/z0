@@ -33,7 +33,7 @@ namespace Z0
         public static BitMatrix<N,T> load<N,T>(N n, Span<T> src)
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => BitMatrix<N,T>.Load(src); 
+                => new BitMatrix<N,T>(src);
 
         /// <summary>
         /// Loads a square bitmatrix of natural order from an span
@@ -45,7 +45,7 @@ namespace Z0
         public static BitMatrix<N,T> load<N,T>(Span<T> src)
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => BitMatrix<N,T>.Load(src); 
+                => new BitMatrix<N,T>(src);
 
         /// <summary>
         /// Loads an MxN natural bitmatrix from an array

@@ -58,7 +58,7 @@ namespace Z0.Test
             var c = Random.BitMatrix(n64);
             var a = new ulong[64];
             for(var i = 0; i<64; i++)
-                a[i] = ~ c.RowData(i);
+                a[i] = ~ c[i];
             var b = BitMatrix64.From(a);
             Claim.yea(b == ~c);        
         }
@@ -98,7 +98,7 @@ namespace Z0.Test
                 var src = Random.BitMatrix16();
                 for(var c = 0; c < src.ColCount; c ++)
                 {
-                    var col = src.ColVector(c);
+                    var col = src.Column(c);
                     for(var r=0; r<src.RowCount; r++)
                         Claim.eq(col[r], src[r,c]);
                 }
@@ -112,7 +112,7 @@ namespace Z0.Test
                 var src = Random.BitMatrix(n32);
                 for(var c = 0; c < src.Order; c ++)
                 {
-                    var col = src.ColVec(c);
+                    var col = src.Column(c);
                     for(var r=0; r<src.Order; r++)
                         Claim.eq(col[r], src[r,c]);
                 }
@@ -126,7 +126,7 @@ namespace Z0.Test
                 var src = Random.BitMatrix(n64);
                 for(var c = 0; c < src.Order; c ++)
                 {
-                    var col = src.ColVector(c);
+                    var col = src.Column(c);
                     for(var r=0; r<src.Order; r++)
                         Claim.eq(col[r], src[r,c]);
                 }

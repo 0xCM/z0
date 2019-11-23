@@ -21,7 +21,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <typeparam name="T">The component type</typeparam>
         [MethodImpl(Inline)]
-        public static ref BlockVector<T> negate<T>(ref BlockVector<T> src)
+        public static ref VBlock256<T> negate<T>(ref VBlock256<T> src)
             where T : unmanaged
         {
             mathspan.negate(src.Unblocked);
@@ -35,7 +35,7 @@ namespace Z0
         /// <typeparam name="N">The length type</typeparam>
         /// <typeparam name="T">The component type</typeparam>
         [MethodImpl(Inline)]
-        public static ref BlockVector<N,T> negate<N,T>(ref BlockVector<N,T> src)
+        public static ref VBlock256<N,T> negate<N,T>(ref VBlock256<N,T> src)
             where N : unmanaged, ITypeNat
             where T : unmanaged    
         {

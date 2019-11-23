@@ -15,35 +15,35 @@ namespace Z0
     partial class RngX
     {
         /// <summary>
-        /// Produces a stochastic vector of a specified length
-        /// </summary>
-        /// <param name="random">The random source</param>
-        /// <param name="len">The result vector length</param>
-        [MethodImpl(Inline)]
-        public static BlockVector<T> MarkovVec<T>(this IPolyrand random, int length)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(float))                
-                return random.MarkovVec(length, 1f, length << 4).As<T>();
-            else if(typeof(T) == typeof(double))
-                return random.MarkovVec(length, 1.0, length << 4).As<T>();
-            else
-                throw unsupported<T>();
-        }
-
-        /// <summary>
         /// Produces a stochastic vector of *unspecified* length
         /// </summary>
         /// <param name="random">The random source</param>
         /// <param name="len">The result vector length</param>
         [MethodImpl(Inline)]
-        public static void MarkovVec<T>(this IPolyrand random, Span<T> dst)
+        public static void MarkovSpan<T>(this IPolyrand random, Span<T> dst)
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))                
-                random.MarkovVec(As.float32(dst));
+                random.MarkovSpan(As.float32(dst));
             else if(typeof(T) == typeof(double))
-                random.MarkovVec(As.float64(dst));
+                random.MarkovSpan(As.float64(dst));
+            else
+                throw unsupported<T>();
+        }
+
+        /// <summary>
+        /// Produces a stochastic vector of a specified length
+        /// </summary>
+        /// <param name="random">The random source</param>
+        /// <param name="len">The result vector length</param>
+        [MethodImpl(Inline)]
+        public static VBlock256<T> MarkovBlock<T>(this IPolyrand random, int length)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(float))                
+                return random.MarkovBlock(length, 1f, length << 4).As<T>();
+            else if(typeof(T) == typeof(double))
+                return random.MarkovBlock(length, 1.0, length << 4).As<T>();
             else
                 throw unsupported<T>();
         }
@@ -55,13 +55,22 @@ namespace Z0
         /// <param name="len">The result vector length</param>
         /// <typeparam name="N">The length type</typeparam>
         [MethodImpl(Inline)]
-        public static BlockVector<N,T> MarkovVec<N,T>(this IPolyrand random)
+        public static VBlock256<N,T> MarkovBlock<N,T>(this IPolyrand random)
             where N : unmanaged, ITypeNat
             where T : unmanaged
         {
             var dst = Z0.Vector.blockalloc<N, T>();
-            random.MarkovVec(dst.Unsized);
+            random.MarkovSpan(dst.Unsized);
             return dst;
+        }
+
+        [MethodImpl(Inline)]
+        public static ref VBlock256<N,T> MarkovBlock<N,T>(this IPolyrand random, ref VBlock256<N,T> dst)
+            where N : unmanaged, ITypeNat
+            where T : unmanaged
+        {
+            random.MarkovSpan(dst.Unsized);
+            return ref dst;
         }
 
         /// <summary>
@@ -73,25 +82,27 @@ namespace Z0
         /// <param name="dim"></param>
         /// <typeparam name="N">The order type</typeparam>
         /// <typeparam name="T"></typeparam>
-        public static BlockMatrix<N,T> MarkovMat<N,T>(this IPolyrand random, T rep = default, N dim = default)
+        public static MBlock256<N,T> MarkovSquare<N,T>(this IPolyrand random, T rep = default, N dim = default)
             where T : unmanaged
             where N : unmanaged, ITypeNat
         {
             var data = DataBlocks.alloc<N,N,T>(n256);
             var n = nati<N>();
             for(int row=0; row < n; row++)
-                random.MarkovVec<T>(data.Slice(row*n, n));                            
+                random.MarkovSpan<T>(data.Slice(row*n, n));                            
             return Z0.Matrix.blockload<N,T>(data);
         }
 
-        [MethodImpl(Inline)]
-        public static ref BlockVector<N,T> MarkovVec<N,T>(this IPolyrand random, ref BlockVector<N,T> dst)
-            where N : unmanaged, ITypeNat
+        public static ref MBlock256<N,T> MarkovSquare<N,T>(this IPolyrand random, ref MBlock256<N,T> dst)
             where T : unmanaged
+            where N : unmanaged, ITypeNat
         {
-            random.MarkovVec(dst.Unsized);
+            var data = dst.Unsized;
+            var n = nati<N>();
+            for(int row=0; row < n; row++)
+                random.MarkovSpan<T>(data.Slice(row*n, n));                            
             return ref dst;
-        }
+        }        
 
         /// Evaluates whether a square matrix is right-stochasitc, i.e. the sum of the entries
         /// in each row is equal to 1
@@ -100,7 +111,7 @@ namespace Z0
         /// <param name="n">The natural dimension value</param>
         /// <typeparam name="N">The natural dimension type</typeparam>
         /// <typeparam name="T">The element type</typeparam>
-         public static bool IsRightStochastic<N,T>(this BlockMatrix<N,T> src, N n = default)
+         public static bool IsRightStochastic<N,T>(this MBlock256<N,T> src, N n = default)
             where N : unmanaged, ITypeNat
             where T : unmanaged
         {
@@ -116,19 +127,9 @@ namespace Z0
             return true;
         }
 
-        public static ref BlockMatrix<N,T> MarkovMat<N,T>(this IPolyrand random, ref BlockMatrix<N,T> dst)
-            where T : unmanaged
-            where N : unmanaged, ITypeNat
-        {
-            var data = dst.Unsized;
-            var n = nati<N>();
-            for(int row=0; row < n; row++)
-                random.MarkovVec<T>(data.Slice(row*n, n));                            
-            return ref dst;
-        }        
 
         [MethodImpl(Inline)]
-        static void MarkovVec(this IPolyrand random, Span<float> dst)
+        static void MarkovSpan(this IPolyrand random, Span<float> dst)
         {            
             var length = dst.Length;
             random.Fill(closed(1.0f,length << 4), length, ref dst[0]);
@@ -136,7 +137,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static void MarkovVec(this IPolyrand random, Span<double> dst)
+        static void MarkovSpan(this IPolyrand random, Span<double> dst)
         {            
             var length = dst.Length;
             random.Fill(closed(1.0, length << 4), length, ref dst[0]);
@@ -144,7 +145,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static BlockVector<float> MarkovVec(this IPolyrand random, int length, float min, float max)
+        static VBlock256<float> MarkovBlock(this IPolyrand random, int length, float min, float max)
         {            
             var dst = DataBlocks.alloc<float>(n256, DataBlocks.blockcount<float>(n256,length));
             random.Fill(closed(min,max), length, ref dst[0]);
@@ -153,7 +154,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static BlockVector<double> MarkovVec(this IPolyrand random, int length, double min, double max)
+        static VBlock256<double> MarkovBlock(this IPolyrand random, int length, double min, double max)
         {                        
             var dst = DataBlocks.alloc<double>(n256, DataBlocks.blockcount<double>(n256,length));
             random.Fill(closed(min,max), length, ref dst[0]);

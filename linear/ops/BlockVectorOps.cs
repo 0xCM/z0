@@ -17,7 +17,7 @@ namespace Z0
     {
 
         [MethodImpl(Inline)]
-        public static BlockVector<N,T> xor<N,T>(BlockVector<N,T> x, BlockVector<N,T> y)
+        public static VBlock256<N,T> xor<N,T>(VBlock256<N,T> x, VBlock256<N,T> y)
             where N : unmanaged, ITypeNat
             where T : unmanaged    
         {
@@ -27,7 +27,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static BlockVector<N,T> sll<N,T>(BlockVector<N,T> src, byte offset, BlockVector<N,T> dst)
+        public static VBlock256<N,T> sll<N,T>(VBlock256<N,T> src, byte offset, VBlock256<N,T> dst)
             where N : unmanaged, ITypeNat
             where T : unmanaged    
         {
@@ -36,7 +36,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static BlockVector<N,T> sll<N,T>(BlockVector<N,T> src, byte offset)
+        public static VBlock256<N,T> sll<N,T>(VBlock256<N,T> src, byte offset)
             where N : unmanaged, ITypeNat
             where T : unmanaged    
         {
@@ -46,7 +46,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static ref BlockVector<N,T> srl<N,T>(BlockVector<N,T> src, byte offset, ref BlockVector<N,T> dst)
+        public static ref VBlock256<N,T> srl<N,T>(VBlock256<N,T> src, byte offset, ref VBlock256<N,T> dst)
             where N : unmanaged, ITypeNat
             where T : unmanaged    
         {
@@ -55,7 +55,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static BlockVector<N,T> srl<N,T>(BlockVector<N,T> src, byte offset)
+        public static VBlock256<N,T> srl<N,T>(VBlock256<N,T> src, byte offset)
             where N : unmanaged, ITypeNat
             where T : unmanaged    
         {
@@ -113,7 +113,7 @@ namespace Z0
         /// <param name="rhs">The right operand</param>
         /// <typeparam name="T">The component type</typeparam>
         [MethodImpl(Inline)]
-        public static ref BlockVector<T> mul<T>(ref BlockVector<T> x, in BlockVector<T> rhs)
+        public static ref VBlock256<T> mul<T>(ref VBlock256<T> x, in VBlock256<T> rhs)
             where T : unmanaged
         {
             mathspan.mul(x.Unblocked, rhs.Unblocked);
@@ -128,7 +128,7 @@ namespace Z0
         /// <typeparam name="N">The length type</typeparam>
         /// <typeparam name="T">The component type</typeparam>
         [MethodImpl(Inline)]
-        public static ref BlockVector<N,T> mul<N,T>(ref BlockVector<N,T> x, in BlockVector<N,T> rhs)
+        public static ref VBlock256<N,T> mul<N,T>(ref VBlock256<N,T> x, in VBlock256<N,T> rhs)
             where N : unmanaged, ITypeNat
             where T : unmanaged    
         {
@@ -147,7 +147,7 @@ namespace Z0
         /// <typeparam name="N">The length type</typeparam>
         /// <typeparam name="T">The component type</typeparam>
         [MethodImpl(Inline)]
-        public static ref BlockVector<N,T> xor<N,T>(ref BlockVector<N,T> x, in BlockVector<N,T> rhs)
+        public static ref VBlock256<N,T> xor<N,T>(ref VBlock256<N,T> x, in VBlock256<N,T> rhs)
             where N : unmanaged, ITypeNat
             where T : unmanaged
 
@@ -164,7 +164,7 @@ namespace Z0
         /// <typeparam name="N">The length type</typeparam>
         /// <typeparam name="T">The component type</typeparam>
         [MethodImpl(Inline)]
-        public static ref BlockVector<N,T> xor<N,T>(ref BlockVector<N,T> x, in T rhs)
+        public static ref VBlock256<N,T> xor<N,T>(ref VBlock256<N,T> x, in T rhs)
             where N : unmanaged, ITypeNat
             where T : unmanaged
 
@@ -181,7 +181,7 @@ namespace Z0
         /// <typeparam name="N">The length type</typeparam>
         /// <typeparam name="T">The component type</typeparam>
         [MethodImpl(Inline)]
-        public static ref BlockVector<N,T> pow<N,T>(ref BlockVector<N,T> x, uint rhs)
+        public static ref VBlock256<N,T> pow<N,T>(ref VBlock256<N,T> x, uint rhs)
             where N : unmanaged, ITypeNat
             where T : unmanaged
 
@@ -197,7 +197,7 @@ namespace Z0
         /// <typeparam name="N">The length type</typeparam>
         /// <typeparam name="T">The component type</typeparam>
         [MethodImpl(Inline)]
-        public static ref BlockVector<N,T> flip<N,T>(ref BlockVector<N,T> src)
+        public static ref VBlock256<N,T> flip<N,T>(ref VBlock256<N,T> src)
             where N : unmanaged, ITypeNat
             where T : unmanaged    
 
@@ -212,7 +212,7 @@ namespace Z0
         /// <param name="src">The source/target operand which will be updated in-place</param>
         /// <typeparam name="T">The component type</typeparam>
         [MethodImpl(Inline)]
-        public static ref BlockVector<T> inc<T>(ref BlockVector<T> src)
+        public static ref VBlock256<T> inc<T>(ref VBlock256<T> src)
             where T : unmanaged
         {
             mathspan.inc(src.Unblocked);
@@ -225,7 +225,7 @@ namespace Z0
         /// <typeparam name="N">The length type</typeparam>
         /// <typeparam name="T">The component type</typeparam>
         [MethodImpl(Inline)]
-        public static ref BlockVector<N,T> inc<N,T>(ref BlockVector<N,T> src)
+        public static ref VBlock256<N,T> inc<N,T>(ref VBlock256<N,T> src)
             where N : unmanaged, ITypeNat
             where T : unmanaged    
         {
@@ -234,7 +234,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static ref BlockVector<T> dec<T>(ref BlockVector<T> src)
+        public static ref VBlock256<T> dec<T>(ref VBlock256<T> src)
             where T : unmanaged
         {
             mathspan.dec(src.Unblocked);
@@ -248,7 +248,7 @@ namespace Z0
         /// <typeparam name="N">The length type</typeparam>
         /// <typeparam name="T">The component type</typeparam>
         [MethodImpl(Inline)]
-        public static ref BlockVector<N,T> dec<N,T>(ref BlockVector<N,T> src)
+        public static ref VBlock256<N,T> dec<N,T>(ref VBlock256<N,T> src)
             where N : unmanaged, ITypeNat
             where T : unmanaged    
 
@@ -258,7 +258,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static BlockVector<P,T> concat<M,N,P,T>(in BlockVector<M,T> head, BlockVector<N,T> tail, P sum = default)
+        public static VBlock256<P,T> concat<M,N,P,T>(in VBlock256<M,T> head, VBlock256<N,T> tail, P sum = default)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where P : unmanaged, INatSum<M,N>
@@ -267,7 +267,7 @@ namespace Z0
             var dst = span<T>(new NatSum<M,N>());
             head.Unsized.CopyTo(dst);
             tail.Unsized.CopyTo(dst.Slice((int)new M().NatValue));
-            return BlockVector<P,T>.Load(dst);
+            return VBlock256<P,T>.Load(dst);
         }
     }
 }

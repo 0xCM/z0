@@ -93,6 +93,14 @@ namespace Z0
             => new BitVector128(src.x0,src.x1);
 
         /// <summary>
+        /// Reverses the vector bits
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        [MethodImpl(Inline)]
+        public static BitVector128 Reverse(this BitVector128 src)
+            => BitVector.rev(src);
+
+        /// <summary>
         /// Applies a truncating reduction Bv64 -> Bv8
         /// </summary>
         [MethodImpl(Inline)]

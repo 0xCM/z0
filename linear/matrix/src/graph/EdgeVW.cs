@@ -15,10 +15,25 @@ namespace Z0
     /// <summary>
     /// Defines a weighted edge, parameterized by the vertex index type and the weight type
     /// </summary>
-    public readonly struct Edge<V,W> : IEdge<V,W>
+    public readonly struct Edge<V,W>
         where V : unmanaged
         where W : unmanaged
     {
+        /// <summary>
+        /// The index of the source vertex
+        /// </summary>
+        public readonly V Source;
+
+        /// <summary>
+        /// The index of the target vertex
+        /// </summary>
+        public readonly V Target;
+
+        /// <summary>
+        /// The weight given to the edge
+        /// </summary>
+        public readonly W Weight;
+
         /// <summary>
         /// Sheds the associated weight to form a weight-free edge
         /// </summary>
@@ -40,37 +55,13 @@ namespace Z0
             => new Edge<V, W>(x.src, x.dst, x.weight);
 
         [MethodImpl(Inline)]
-        public Edge(V Source, V Target, W Weight)
+        public Edge(V src, V dst, W w)
         {
-            this.Source = Source;
-            this.Target = Target;
-            this.Weight = Weight;
+            this.Source = src;
+            this.Target = dst;
+            this.Weight = w;
         }
         
-        /// <summary>
-        /// The index of the source vertex
-        /// </summary>
-        public readonly V Source;
-
-        /// <summary>
-        /// The index of the target vertex
-        /// </summary>
-        public readonly V Target;
-
-        /// <summary>
-        /// The weight given to the edge
-        /// </summary>
-        public readonly W Weight;
-
-        V IEdge<V>.Source 
-            => Source;
-
-        V IEdge<V>.Target 
-            => Target;
-
-        W IEdge<V, W>.Weight 
-            => Weight;
-
         public override string ToString() 
             => $"{Source} -> {Target}";
 
