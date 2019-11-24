@@ -20,7 +20,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitVector<T> msb<T>(BitVector<T> x, int n)                
             where T : unmanaged
-                => between(x, BitVector<T>.Width - n, BitVector<T>.Width - 1);                
+                => between(x, x.Width - n, x.Width - 1);                
 
         /// <summary>
         /// Constructs a bitvector formed from the n most significant bits of the source vector
@@ -29,7 +29,7 @@ namespace Z0
         /// <param name="n">The count of most significant bits</param>
         [MethodImpl(Inline)]
         public static BitVector4 msb(BitVector4 x, int n)                
-            => between(x, BitVector4.Width - n, BitVector4.Width - 1);                
+            => between(x, x.Width - n, x.Width - 1);                
 
         /// <summary>
         /// Constructs a bitvector formed from the n most significant bits of the source vector
@@ -38,7 +38,7 @@ namespace Z0
         /// <param name="n">The count of most significant bits</param>
         [MethodImpl(Inline)]
         public static BitVector8 msb(BitVector8 x, int n)                
-            => between(x, BitVector8.Width - n, BitVector8.Width - 1);                
+            => between(x, x.Width - n, x.Width - 1);                
 
         /// <summary>
         /// Constructs a bitvector formed from the n most significant bits of the source vector
@@ -47,7 +47,7 @@ namespace Z0
         /// <param name="n">The count of most significant bits</param>
         [MethodImpl(Inline)]
         public static BitVector16 msb(BitVector16 x, int n)                
-            => BitVector.between(x.data, BitVector16.Width - n, BitVector16.Width - 1);                
+            => BitVector.between(x.data, x.Width - n, x.Width - 1);                
 
         /// <summary>
         /// Constructs a bitvector formed from the n most significant bits of the source vector
@@ -56,7 +56,7 @@ namespace Z0
         /// <param name="n">The count of most significant bits</param>
         [MethodImpl(Inline)]
         public static BitVector32 msb(BitVector32 x, int n)                
-            => BitVector.between(x.data, BitVector32.Width - n, BitVector32.Width - 1);                
+            => BitVector.between(x.data, x.Width - n, x.Width - 1);                
 
         /// <summary>
         /// Constructs a bitvector formed from the n most significant bits of the source vector
@@ -65,6 +65,6 @@ namespace Z0
         /// <param name="n">The count of most significant bits</param>
         [MethodImpl(Inline)]
         public static BitVector64 msb(BitVector64 x, int n)                
-            => BitVector.between(x.data, BitVector64.Width - n, BitVector64.Width - 1);
+            => BitVector.between(x.data, x.Width - n, x.Width - 1);
     }
 }

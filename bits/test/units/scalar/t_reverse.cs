@@ -12,19 +12,19 @@ namespace Z0.Test
 
     public class t_reverse : ScalarBitTest<t_reverse>
     {
-        public void rev_check_8()
-            => rev_check<byte>();
+        public void bitrev_8()
+            => bitrev_check<byte>();
 
-        public void rev_check_16()
-            => rev_check<ushort>();
+        public void bitrev_16()
+            => bitrev_check<ushort>();
         
-        public void rev_check_32()
-            => rev_check<uint>();
+        public void bitrev_32()
+            => bitrev_check<uint>();
 
-        public void rev_check_64()
-            => rev_check<ulong>();
+        public void bitrev_64()
+            => bitrev_check<ulong>();
         
-        void rev_check<T>()
+        void bitrev_check<T>()
             where T : unmanaged
         {
             for(var i=0; i<SampleSize; i++)            

@@ -26,7 +26,7 @@ namespace Z0.Logix
         public static BitVector<T> and<T>(BitVector<T> x, BitVector<T> y)
             where T : unmanaged
         {
-            var len = x.Length;
+            var len = x.Width;
             var z = BitVector.alloc<T>();
             for(var i=0; i< len; i++)
                 z[i] = eval(BinaryLogicOpKind.And, x[i], y[i]);
@@ -42,7 +42,7 @@ namespace Z0.Logix
         public static BitVector<T> nand<T>(BitVector<T> x, BitVector<T> y)
             where T : unmanaged
         {
-            var len = x.Length;
+            var len = x.Width;
             var z = BitVector.alloc<T>();
             for(var i=0; i< len; i++)
                 z[i] = eval(BinaryLogicOpKind.Nand, x[i], y[i]);
@@ -58,7 +58,7 @@ namespace Z0.Logix
         public static BitVector<T> or<T>(BitVector<T> x, BitVector<T> y)
             where T : unmanaged
         {
-            var len = x.Length;
+            var len = x.Width;
             var z = BitVector.alloc<T>();
             for(var i=0; i< len; i++)
                 z[i] = eval(BinaryLogicOpKind.Or, x[i], y[i]);
@@ -74,7 +74,7 @@ namespace Z0.Logix
         public static BitVector<T> nor<T>(BitVector<T> x, BitVector<T> y)
             where T : unmanaged
         {
-            var len = x.Length;
+            var len = x.Width;
             var z = BitVector.alloc<T>();
             for(var i=0; i< len; i++)
                 z[i] = eval(BinaryLogicOpKind.Nor, x[i], y[i]);
@@ -90,7 +90,7 @@ namespace Z0.Logix
         public static BitVector<T> xor<T>(BitVector<T> x, BitVector<T> y)
             where T : unmanaged
         {
-            var len = x.Length;
+            var len = x.Width;
             var z = BitVector.alloc<T>();
             for(var i=0; i< len; i++)
                 z[i] = eval(BinaryLogicOpKind.XOr, x[i], y[i]);
@@ -106,7 +106,7 @@ namespace Z0.Logix
         public static BitVector<T> xnor<T>(BitVector<T> x, BitVector<T> y)
             where T : unmanaged
         {
-            var len = x.Length;
+            var len = x.Width;
             var z = BitVector.alloc<T>();
             for(var i=0; i< len; i++)
                 z[i] = eval(BinaryLogicOpKind.Xnor, x[i], y[i]);
@@ -123,7 +123,7 @@ namespace Z0.Logix
         public static BitVector<T> lnot<T>(BitVector<T> x, BitVector<T> y)
             where T : unmanaged
         {
-            var len = x.Length;
+            var len = x.Width;
             var z = BitVector.alloc<T>();
             for(var i=0; i< len; i++)
                 z[i] = eval(UnaryLogicOpKind.Not, x[i]);
@@ -139,7 +139,7 @@ namespace Z0.Logix
         public static BitVector<T> rnot<T>(BitVector<T> x, BitVector<T> y)
             where T : unmanaged
         {
-            var len = x.Length;
+            var len = x.Width;
             var z = BitVector.alloc<T>();
             for(var i=0; i< len; i++)
                 z[i] = eval(UnaryLogicOpKind.Not, y[i]);
@@ -155,7 +155,7 @@ namespace Z0.Logix
         public static BitVector<T> imply<T>(BitVector<T> x, BitVector<T> y)
             where T : unmanaged
         {
-            var len = x.Length;
+            var len = x.Width;
             var z = BitVector.alloc<T>();
             for(var i=0; i< len; i++)
                 z[i] = eval(BinaryLogicOpKind.Implication, x[i], y[i]);
@@ -171,7 +171,7 @@ namespace Z0.Logix
         public static BitVector<T> notimply<T>(BitVector<T> x, BitVector<T> y)
             where T : unmanaged
         {
-            var len = x.Length;
+            var len = x.Width;
             var z = BitVector.alloc<T>();
             for(var i=0; i< len; i++)
                 z[i] = eval(BinaryLogicOpKind.Nonimplication, x[i], y[i]);
@@ -187,7 +187,7 @@ namespace Z0.Logix
         public static BitVector<T> cimply<T>(BitVector<T> x, BitVector<T> y)
             where T : unmanaged
         {
-            var len = x.Length;
+            var len = x.Width;
             var z = BitVector.alloc<T>();
             for(var i=0; i< len; i++)
                 z[i] = eval(BinaryLogicOpKind.ConverseImplication, x[i], y[i]);
@@ -203,7 +203,7 @@ namespace Z0.Logix
         public static BitVector<T> cnotimply<T>(BitVector<T> x, BitVector<T> y)
             where T : unmanaged
         {
-            var len = x.Length;
+            var len = x.Width;
             var z = BitVector.alloc<T>();
             for(var i=0; i< len; i++)
                 z[i] = eval(BinaryLogicOpKind.ConverseNonimplication, x[i], y[i]);
@@ -213,7 +213,7 @@ namespace Z0.Logix
         public static BitVector<T> select<T>(BitVector<T> x, BitVector<T> y, BitVector<T> z)
             where T : unmanaged
         {
-            var len = x.Length;
+            var len = x.Width;
             var dst = BitVector.alloc<T>();
             for(var i=0; i< len; i++)
                 dst[i] = LogicOps.select(x[i], y[i], z[i]);

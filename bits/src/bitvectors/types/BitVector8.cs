@@ -20,13 +20,7 @@ namespace Z0
         public static BitVector8 One => 1;
 
         public static BitVector8 Ones => byte.MaxValue;
-        
-        public const int Width = 8;
-
-        public const int FirstPos = 0;
-
-        public const int LastPos = Width - 1;
-        
+                    
         /// <summary>
         /// Allocates a zero-filled vector
         /// </summary>
@@ -218,7 +212,6 @@ namespace Z0
         public static BitVector8 operator -(in BitVector8 src)
             => BitVector.negate(src);
 
-
         /// <summary>
         /// Computes the arithmetic sum of the source operands. 
         /// </summary>
@@ -404,10 +397,10 @@ namespace Z0
         /// <summary>
         /// The number of bits represented by the vector
         /// </summary>
-        public readonly int Length
+        public readonly int Width
         {
             [MethodImpl(Inline)]
-            get => Width;
+            get => 8;
         }        
 
         /// <summary>
@@ -533,7 +526,7 @@ namespace Z0
         public BitVector8 Permute(Perm spec)
         {
             var src = Replicate();
-            for(var i=0; i<Length; i++)
+            for(var i=0; i<Width; i++)
                 this[i] = src[spec[i]];
             return this;
         }

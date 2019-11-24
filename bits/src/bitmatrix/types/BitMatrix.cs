@@ -34,7 +34,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public BitMatrix(BitVector<T> fill)
         {
-            this.data = new T[fill.Length];
+            this.data = new T[fill.Width];
             this.data.Fill(fill);
         }
 

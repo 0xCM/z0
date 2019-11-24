@@ -25,7 +25,7 @@ namespace Z0
         /// </summary>
         [MethodImpl(Inline)]
         public static uint nlz(BitVector4 x)
-            => gbits.nlz(x.data) - BitVector4.Width;
+            => (uint)(gbits.nlz(x.data) - x.Width);
 
         /// <summary>
         /// Counts the number of leading zero bits

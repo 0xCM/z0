@@ -30,7 +30,7 @@ namespace Z0.Test
             var bv = m2.ToBitVector();
             Claim.eq(y2,bv);
             
-            for(var i=0; i<y2.Length; i++)
+            for(var i=0; i<y2.Width; i++)
                 Claim.eq(y2[i], i % 8 == 0 ? Bit.On : Bit.Off);
 
         }

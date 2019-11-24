@@ -24,7 +24,7 @@ namespace Z0
         {
             var src = x.Replicate();
             ref var dst = ref x;
-            var len = x.Length;
+            var len = x.Width;
             for(var i=0; i<len; i++)
             {
                 ref readonly var j = ref spec[i];
@@ -57,7 +57,7 @@ namespace Z0
         {
             var src = x.Replicate();
             ref var dst = ref x;
-            var len = x.Length;
+            var len = x.Width;
             for(var i=0; i<len; i++)
             {
                 ref readonly var j = ref spec[i];
@@ -90,7 +90,7 @@ namespace Z0
         {
             var src = x.Replicate();
             ref var dst = ref x;
-            var len = x.Length;
+            var len = x.Width;
             for(var i=0; i<len; i++)
             {
                 ref readonly var j = ref spec[i];
@@ -123,7 +123,7 @@ namespace Z0
         {
             var src = x.Replicate();
             ref var dst = ref x;
-            var len = x.Length;
+            var len = x.Width;
             for(var i=0; i<len; i++)
             {
                 ref readonly var j = ref spec[i];

@@ -72,7 +72,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public BitVector4 Row(int index)
-            => BitVector.direct(n4, Bits.extract((ulong)this,(byte)(index*4), 4));
+            => BitVector.direct(n4, Bits.extract((ulong)this,index*4, 4));
 
         [MethodImpl(Inline)]
         public BitVector16 Col(int index)

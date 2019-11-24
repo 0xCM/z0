@@ -65,7 +65,7 @@ namespace Z0
                 var p1 = Random.Perm(n64);
                 var v1 = Random.BitVector(n64);
                 var v2 = v1.Replicate().Permute(p1);
-                for(var i=0; i<v1.Length; i++)
+                for(var i=0; i<v1.Width; i++)
                     Claim.eq(v1[p1[i]], v2[i]);
             }
         }

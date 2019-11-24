@@ -17,11 +17,6 @@ namespace Z0
         internal uint data;
 
         /// <summary>
-        /// The vector bit-width
-        /// </summary>
-        public const int Width = 32;
-
-        /// <summary>
         /// Allocates a vector with all bits disabled
         /// </summary>
         public static BitVector32 Zero => default;
@@ -277,10 +272,10 @@ namespace Z0
         /// <summary>
         /// The number of bits represented by the vector
         /// </summary>
-        public readonly int Length
+        public readonly int Width
         {
             [MethodImpl(Inline)]
-            get => Width;
+            get => 32;
         }
 
         /// <summary>

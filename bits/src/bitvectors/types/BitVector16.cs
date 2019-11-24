@@ -14,9 +14,7 @@ namespace Z0
     /// </summary>
     public struct BitVector16
     {
-        internal ushort data;
-
-        public const int Width = 16;
+        internal ushort data;            
 
         public static BitVector16 Zero => 0;
 
@@ -310,7 +308,7 @@ namespace Z0
         /// <summary>
         /// The number of bits represented by the vector
         /// </summary>
-        public readonly int Length
+        public readonly int Width
         {
             [MethodImpl(Inline)]
             get => 16;

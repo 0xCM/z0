@@ -22,8 +22,8 @@ namespace Z0
           [MethodImpl(Inline)]
           public static byte clear(byte src, int first, int last)
           {
-               var before = extract(src,0,(byte)first);
-               var after = extract(src, (byte)(last + 1), (byte)(8 - last));
+               var before = extract(src,0,first);
+               var after = extract(src, last + 1, 8 - last);
                var cleared = (byte)(((after << (last - first)) << (first + 1)) | before);
                return cleared;                      
           }
@@ -37,8 +37,8 @@ namespace Z0
           [MethodImpl(Inline)]
           public static ushort clear(ushort src, int first, int last)
           {
-               var before = extract(src,0,(byte)first);
-               var after = extract(src, (byte)(last + 1), (byte)(16 - last));
+               var before = extract(src,0,first);
+               var after = extract(src, last + 1, 16 - last);
                var cleared = (ushort)(((after << (last - first)) << (first + 1)) | before);
                return cleared;                      
           }
@@ -52,8 +52,8 @@ namespace Z0
           [MethodImpl(Inline)]
           public static uint clear(uint src, int first, int last)
           {
-               var before = extract(src,0,(byte)first);
-               var after = extract(src, (byte)(last + 1), (byte)(32 - last));
+               var before = extract(src,0,first);
+               var after = extract(src, last + 1, 32 - last);
                var cleared = ((after << (last - first)) << (first + 1)) | before;
                return cleared;                      
           }
@@ -67,8 +67,8 @@ namespace Z0
           [MethodImpl(Inline)]
           public static ulong clear(ulong src, int first, int last)
           {
-               var part0 = extract(src,0,(byte)first);
-               var part2 = extract(src, (byte)(last + 1), (byte)(64 - last));
+               var part0 = extract(src,0,first);
+               var part2 = extract(src, last + 1, 64 - last);
                var cleared = ((part2 << (last - first)) << (first + 1)) | part0;
                return cleared;                      
           }
@@ -76,20 +76,20 @@ namespace Z0
          [MethodImpl(Inline)]
          public static ulong inject(ulong src, ulong dst, byte first, byte len)
          {
-            var last = (byte)(first + len);
+            var last = first + len;
             var part0 = Bits.zerohi(dst,first);
             var part1 = src << first;
-            var part2 = Bits.extract(dst, last, (byte)(64 - last)) << last;
+            var part2 = Bits.extract(dst, last, 64 - last) << last;
             return part0 | part1 | part2;
          }
 
          [MethodImpl(Inline)]
          public static uint inject(uint src, uint dst, byte first, byte len)
          {
-            var last = (byte)(first + len);
+            var last = first + len;
             var part0 = Bits.zerohi(dst,first);
             var part1 = src << first;
-            var part2 = Bits.extract(dst, last, (byte)(64 - last)) << last;
+            var part2 = Bits.extract(dst, last, 64 - last) << last;
             return part0 | part1 | part2;
          }
 

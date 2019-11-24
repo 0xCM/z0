@@ -21,12 +21,6 @@ namespace Z0
         internal T data;
 
         /// <summary>
-        /// The number of bits represented by the vector
-        /// </summary>
-        /// <typeparam name="T">The type over which the vector is defined</typeparam>
-        public static int Width => bitsize<T>();
-        
-        /// <summary>
         /// Creates a bitvector defined by a single cell or portion thereof
         /// </summary>
         /// <param name="src">The source cell</param>
@@ -192,10 +186,10 @@ namespace Z0
         /// <summary>
         /// The number of bits represented by the vector
         /// </summary>
-        public readonly int Length 
+        public readonly int Width 
         {
             [MethodImpl(Inline)]
-            get => Width;
+            get => bitsize<T>();
         }
 
         /// <summary>
@@ -237,14 +231,6 @@ namespace Z0
             get => Pop() != 0;
         }
 
-        /// <summary>
-        /// Specifies whether all bits are enabled
-        /// </summary>
-        public readonly bool LitUp
-        {
-            [MethodImpl(Inline)]
-            get => Pop() == Width;
-        }
 
         /// <summary>
         /// Reads a bit value

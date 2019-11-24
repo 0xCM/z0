@@ -19,9 +19,7 @@ namespace Z0
 
         public static BitVector64 Zero => default;
 
-        public static BitVector64 One => 1;        
-
-        public const int Width = 64;
+        public static BitVector64 One => 1;                
 
         /// <summary>
         /// Allocates a new empty vector
@@ -315,10 +313,10 @@ namespace Z0
         /// <summary>
         /// The actual number of bits represented by the vector
         /// </summary>
-        public readonly int Length
+        public readonly int Width
         {
             [MethodImpl(Inline)]
-            get => Width;
+            get => 64;
         }
 
         /// <summary>

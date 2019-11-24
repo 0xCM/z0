@@ -67,7 +67,7 @@ namespace Z0
             var v64 = FullAdder.Compute(x,y,cin);
             var sum = v64.Lo;
             var cout = v64.Hi;
-            for(var i=0; i<sum.Length; i++)
+            for(var i=0; i<sum.Width; i++)
             {
                 var expect = FullAdder.Compute(x[i], y[i], cin[i]);
                 Claim.eq(expect.x, sum[i]);

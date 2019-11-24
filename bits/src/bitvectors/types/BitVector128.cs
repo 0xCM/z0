@@ -18,10 +18,6 @@ namespace Z0
 
         internal ulong x1;
 
-        /// <summary>
-        /// The vector bit-width
-        /// </summary>
-        public const int Width = 128;        
 
         public static N128 N => default;
          
@@ -293,12 +289,12 @@ namespace Z0
         }
         
         /// <summary>
-        /// The actual number of bits represented by the vector
+        /// The number of bits represented by the vector
         /// </summary>
-        public readonly uint Length
+        public readonly uint Width
         {
             [MethodImpl(Inline)]
-            get => Width;
+            get => 128;
         }
 
         /// <summary>

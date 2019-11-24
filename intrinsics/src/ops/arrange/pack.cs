@@ -128,7 +128,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<short> vpackss(Vector256<int> x, Vector256<int> y)
             => PackSignedSaturate(x,y);
-
-
     }
 }

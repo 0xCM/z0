@@ -22,8 +22,6 @@ namespace Z0
 
         public static BitVector4 Ones => 0xFF;
 
-        public const int Width = 4;
-
         /// <summary>
         /// Allocates a zero-filled vector
         /// </summary>
@@ -257,7 +255,7 @@ namespace Z0
         /// <summary>
         /// The number of bits represented by the vector
         /// </summary>
-        public readonly int Length
+        public readonly int Width
         {
             [MethodImpl(Inline)]
             get => 4;
@@ -386,7 +384,7 @@ namespace Z0
         public BitVector4 Permute(Perm spec)
         {
             var src = Replicate();
-            for(var i=0; i<Length; i++)
+            for(var i=0; i<Width; i++)
                 this[i] = src[spec[i]];
             return this;
         }

@@ -165,7 +165,7 @@ namespace Z0
             for(var i=0; i< SampleSize; i++)            
             {
                 var bv = Random.BitVector(n64);
-                var n = Random.Next(1, bv.Length);
+                var n = Random.Next(1, bv.Width);
                 var result = BitVector.lsb(bv,n).ToBitString();
                 var expect = bv.ToBitString()[0, n - 1];
                 Claim.eq(expect, result);
@@ -178,7 +178,7 @@ namespace Z0
             for(var i=0; i< SampleSize; i++)            
             {
                 var bv = Random.BitVector(n64);
-                var n = Random.Next(1, bv.Length);
+                var n = Random.Next(1, bv.Width);
                 var result = BitVector.msb(bv,n).ToBitString();
                 var expect = bv.ToBitString().Reverse()[0, n - 1].Reverse();
                 Claim.eq(expect, result);

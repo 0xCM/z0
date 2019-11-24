@@ -348,13 +348,13 @@ namespace Z0
                 throw new ArgumentException($"The total count {wantedCount} exceeds segment capacity of {CellCapacity}");
 
             ref var seg1 = ref Segment(in first);
-            var part1 = gbits.extract(seg1, (byte)first.Offset, (byte)firstCount);
+            var part1 = gbits.extract(seg1, first.Offset, firstCount);
             
             if(sameSeg)
                 return part1;
 
             ref var seg2 = ref Segment(in last);
-            var part2 = gbits.extract(seg2, 0, (byte)lastCount);            
+            var part2 = gbits.extract(seg2, 0, lastCount);            
 
             if(describe)
             {

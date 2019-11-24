@@ -16,6 +16,7 @@ namespace Z0
     partial class gbits
     {
 
+
         /// <summary>
         /// Extracts a contiguous range of bits from the source
         /// </summary>
@@ -23,7 +24,7 @@ namespace Z0
         /// <param name="start">The bit posiion within the source where extraction should benin</param>
         /// <param name="length">The number of bits that should be extracted</param>
         [MethodImpl(Inline)]
-        public static T extract<T>(T lhs, byte start, byte length)
+        public static T extract<T>(T lhs, int start, int length)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte) 
@@ -40,8 +41,7 @@ namespace Z0
                 throw unsupported<T>();
         }           
 
-        [MethodImpl(Inline)]
-        static T extract_i<T>(T lhs, byte start, byte length)
+        static T extract_i<T>(T lhs, int start, int length)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
@@ -55,7 +55,7 @@ namespace Z0
         }           
 
         [MethodImpl(Inline)]
-        static T extract_u<T>(T lhs, byte start, byte length)
+        static T extract_u<T>(T lhs, int start, int length)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))

@@ -273,7 +273,7 @@ namespace Z0.Logix
                 var va = BitVector.alloc(sa);
                 var vb = BitVector.alloc(sb);
                 var vc = BitVector.alloc(sc);
-                for(var i=0; i< z0.Length; i++)
+                for(var i=0; i< z0.Width; i++)
                     z0[i] = BL(va[i],vb[i],vc[i]);
 
                 var z3 = SC(sa, sb, sc);

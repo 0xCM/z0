@@ -70,7 +70,7 @@ namespace Z0.Logix
                 var b = Random.BitVector<T>();
                 var c = Random.BitVector<T>();
                 BitVector<T> x = ScalarOps.select(a.Data, b.Data, c.Data);
-                for(var j=0; j<x.Length; j++)
+                for(var j=0; j<x.Width; j++)
                     Claim.eq(x[j], LogicOps.select(a[j],b[j],c[j]));
             }
 
