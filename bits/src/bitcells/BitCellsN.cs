@@ -14,7 +14,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="N">The vector length type</typeparam>
     /// <typeparam name="T">The vector component type</typeparam>
-    public readonly ref struct BitVector<N,T>
+    public readonly ref struct BitCells<N,T>
         where N : unmanaged, ITypeNat
         where T : unmanaged
     {        
@@ -50,61 +50,61 @@ namespace Z0
         public static int UnusedCapacity => TotalCapacity - BitCount;
 
         [MethodImpl(NotInline)]
-        public static BitVector<N,T> Alloc(T? fill = null)
+        public static BitCells<N,T> Alloc(T? fill = null)
         {                        
             Span<T> cells = new T[SegCount];
             if(fill.HasValue)
                 cells.Fill(fill.Value);
-            return new BitVector<N,T>(cells, true);
+            return new BitCells<N,T>(cells, true);
         }
 
         [MethodImpl(Inline)]
-        internal static BitVector<N,T> FromArrayUnchecked(T[] src)
-            => new BitVector<N,T>(src,true);
+        internal static BitCells<N,T> FromArrayUnchecked(T[] src)
+            => new BitCells<N,T>(src,true);
 
         [MethodImpl(Inline)]
-        internal static BitVector<N,T> FromSpanUnchecked(Span<T> src)
-            => new BitVector<N,T>(src,true);
+        internal static BitCells<N,T> FromSpanUnchecked(Span<T> src)
+            => new BitCells<N,T>(src,true);
 
         [MethodImpl(Inline)]
-        public static BitVector<N,T> FromCell(T src)
-            => new BitVector<N, T>(src);        
+        public static BitCells<N,T> FromCell(T src)
+            => new BitCells<N, T>(src);        
         
         [MethodImpl(Inline)]
-        public static BitVector<N,T> FromArray(params T[] src)
-            => new BitVector<N,T>(src);    
+        public static BitCells<N,T> FromArray(params T[] src)
+            => new BitCells<N,T>(src);    
 
         [MethodImpl(Inline)]
-        public static BitVector<N,T> FromSpan(Span<T> src)
-            => new BitVector<N,T>(src);    
+        public static BitCells<N,T> FromSpan(Span<T> src)
+            => new BitCells<N,T>(src);    
 
         [MethodImpl(Inline)]
-        public static BitVector<N,T> FromBytes(Span<byte> src)
-            => new BitVector<N,T>(src.As<byte,T>());    
+        public static BitCells<N,T> FromBytes(Span<byte> src)
+            => new BitCells<N,T>(src.As<byte,T>());    
 
         [MethodImpl(Inline)]
-        public static implicit operator BitCells<T>(in BitVector<N,T> src)
+        public static implicit operator BitCells<T>(in BitCells<N,T> src)
             => new BitCells<T>(src.data, (int)new N().NatValue);
 
         [MethodImpl(Inline)]
-        public static BitVector<N,T> operator &(in BitVector<N,T> lhs, in BitVector<N,T> rhs)
-            => new BitVector<N,T>(mathspan.and(lhs.data, rhs.data, lhs.data.Replicate(true)));
+        public static BitCells<N,T> operator &(in BitCells<N,T> lhs, in BitCells<N,T> rhs)
+            => new BitCells<N,T>(mathspan.and(lhs.data, rhs.data, lhs.data.Replicate(true)));
 
         [MethodImpl(Inline)]
-        public static BitVector<N,T> operator |(in BitVector<N,T> lhs, in BitVector<N,T> rhs)
-            => new BitVector<N,T>(mathspan.or(lhs.data, rhs.data, lhs.data.Replicate(true)));
+        public static BitCells<N,T> operator |(in BitCells<N,T> lhs, in BitCells<N,T> rhs)
+            => new BitCells<N,T>(mathspan.or(lhs.data, rhs.data, lhs.data.Replicate(true)));
 
         [MethodImpl(Inline)]
-        public static BitVector<N,T> operator ^(in BitVector<N,T> lhs, in BitVector<N,T> rhs)
-            => new BitVector<N,T>(mathspan.xor(lhs.data, rhs.data, lhs.data.Replicate(true)));
+        public static BitCells<N,T> operator ^(in BitCells<N,T> lhs, in BitCells<N,T> rhs)
+            => new BitCells<N,T>(mathspan.xor(lhs.data, rhs.data, lhs.data.Replicate(true)));
 
         /// <summary>
         /// Computes the bitwise complement of the operand
         /// </summary>
         /// <param name="lhs">The source operand</param>
         [MethodImpl(Inline)]
-        public static BitVector<N,T> operator ~(in BitVector<N,T> src)
-            => new BitVector<N,T>(mathspan.not(src.data, src.data.Replicate(true)));                        
+        public static BitCells<N,T> operator ~(in BitCells<N,T> src)
+            => new BitCells<N,T>(mathspan.not(src.data, src.data.Replicate(true)));                        
 
         /// <summary>
         /// Computes the scalar product of the operands
@@ -112,7 +112,7 @@ namespace Z0
         /// <param name="lhs">The left operand</param>
         /// <param name="rhs">The right operand</param>
         [MethodImpl(Inline)]
-        public static bit operator %(in BitVector<N,T> lhs, in BitVector<N,T> rhs)
+        public static bit operator %(in BitCells<N,T> lhs, in BitCells<N,T> rhs)
             => lhs.Dot(rhs);
 
         /// <summary>
@@ -120,15 +120,15 @@ namespace Z0
         /// </summary>
         /// <param name="lhs">The source operand</param>
         [MethodImpl(Inline)]
-        public static BitVector<N,T> operator -(in BitVector<N,T> src)
-            => new BitVector<N,T>(mathspan.negate(src.data, src.data.Replicate(true)));                        
+        public static BitCells<N,T> operator -(in BitCells<N,T> src)
+            => new BitCells<N,T>(mathspan.negate(src.data, src.data.Replicate(true)));                        
 
         /// <summary>
         /// Returns true if the source vector is nonzero, false otherwise
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
-        public static bool operator true(in BitVector<N,T> src)
+        public static bool operator true(in BitCells<N,T> src)
             => src.Nonempty;
 
         /// <summary>
@@ -136,39 +136,39 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
-        public static bool operator false(in BitVector<N,T> src)
+        public static bool operator false(in BitCells<N,T> src)
             => !src.Nonempty;
 
         [MethodImpl(Inline)]
-        public static bool operator ==(in BitVector<N,T> lhs, in BitVector<N,T> rhs)
+        public static bool operator ==(in BitCells<N,T> lhs, in BitCells<N,T> rhs)
             => lhs.Equals(rhs);
 
         [MethodImpl(Inline)]
-        public static bool operator !=(in BitVector<N,T> lhs, in BitVector<N,T> rhs)
+        public static bool operator !=(in BitCells<N,T> lhs, in BitCells<N,T> rhs)
             => !lhs.Equals(rhs);
 
         [MethodImpl(Inline)]
-        internal BitVector(Span<T> src)
+        internal BitCells(Span<T> src)
         {
             require(src.Length * SegWidth >= BitCount);
             this.data = src;
         }
 
         [MethodImpl(Inline)]
-        internal BitVector(params T[] src)
+        internal BitCells(params T[] src)
             : this(src.AsSpan())
         {
 
         }
 
         [MethodImpl(Inline)]
-        internal BitVector(Span<T> src, bool skipChecks)
+        internal BitCells(Span<T> src, bool skipChecks)
         {
             this.data = src;
         }
 
         [MethodImpl(Inline)]
-        internal BitVector(T[] src, bool skipChecks)
+        internal BitCells(T[] src, bool skipChecks)
         {
             this.data = src;
         }
@@ -190,7 +190,7 @@ namespace Z0
         /// </summary>
         /// <param name="rhs">The other vector</param>
         [MethodImpl(Inline)]
-        public bit Dot(in BitVector<N,T> rhs)
+        public bit Dot(in BitCells<N,T> rhs)
         {             
             var result = bit.Off;
             for(var i=0; i<Length; i++)
@@ -279,7 +279,7 @@ namespace Z0
             => ToBitString().Format(tlz, specifier, blockWidth);
 
         [MethodImpl(Inline)]
-        public bool Equals(in BitVector<N,T> rhs)
+        public bool Equals(in BitCells<N,T> rhs)
             => ToBitString().Equals(rhs.ToBitString());
            
         

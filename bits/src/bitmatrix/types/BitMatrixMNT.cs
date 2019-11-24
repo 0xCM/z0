@@ -151,7 +151,7 @@ namespace Z0
         /// <summary>
         /// Queries mainpulates a row
         /// </summary>
-        public BitVector<N,T> this[int row]
+        public BitCells<N,T> this[int row]
         {
             [MethodImpl(Inline)]
             get => RowVector(row);
@@ -223,7 +223,7 @@ namespace Z0
         /// </summary>
         /// <param name="col">The column index</param>
         [MethodImpl(Inline)]
-        public void RowVector(int row, BitVector<N,T> src)
+        public void RowVector(int row, BitCells<N,T> src)
             => src.Data.CopyTo(Data.Slice(RowOffset(row), Layout.RowCellCount));     
 
         /// <summary>
@@ -231,19 +231,19 @@ namespace Z0
         /// </summary>
         /// <param name="index">The 0-based row index</param>
         [MethodImpl(Inline)]
-        public BitVector<N,T> RowVector(int index)                    
-            => BitVector<N,T>.FromSpan(RowData(index));                
+        public BitCells<N,T> RowVector(int index)                    
+            => BitCells<N,T>.FromSpan(RowData(index));                
 
         [MethodImpl(Inline)]
-        public readonly BitVector<N,T> CopyRow(int index)                    
-            => BitVector<N,T>.FromSpan(data.Slice(RowOffset(index), Layout.RowCellCount).Replicate());
+        public readonly BitCells<N,T> CopyRow(int index)                    
+            => BitCells<N,T>.FromSpan(data.Slice(RowOffset(index), Layout.RowCellCount).Replicate());
 
         /// <summary>
         /// Replaces an index-identied column of data with the content of a column vector
         /// </summary>
         /// <param name="col">The column index</param>
         [MethodImpl(Inline)]
-        public void SetCol(int col, BitVector<M,T> src)
+        public void SetCol(int col, BitCells<M,T> src)
         {
             for(var row=0; row < RowCount; row++)
                 this[row,col] = src[row];
@@ -254,10 +254,10 @@ namespace Z0
         /// </summary>
         /// <param name="col">The column index</param>
         [MethodImpl(Inline)]
-        public BitVector<M,T> GetCol(int col)
+        public BitCells<M,T> GetCol(int col)
         {
             var cidx = ColCount - col - 1;
-            var cv = BitVector.natural<M,T>();
+            var cv = BitCells.alloc<M,T>();
             for(var row = 0; row < RowCount; row++)            
                 cv[row] = this[row, cidx];                        
             return cv;

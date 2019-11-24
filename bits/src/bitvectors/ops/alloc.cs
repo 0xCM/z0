@@ -31,10 +31,10 @@ namespace Z0
         /// <param name="n">The number of bits to store</param>
         /// <typeparam name="T">The primal storage type</typeparam>
         [MethodImpl(NotInline)]
-        public static BitVector<N,T> alloc<N,T>(N n = default, T fill = default)
+        public static BitCells<N,T> alloc<N,T>(N n = default, T fill = default)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => BitVector<N,T>.Alloc(fill);
+                => BitCells<N,T>.Alloc(fill);
 
         /// <summary>
         /// Allocates a 4-bit primal bitvector
@@ -42,7 +42,7 @@ namespace Z0
         /// <param name="n">The width discriminator</param>
         [MethodImpl(Inline)]
         public static BitVector4 alloc(N4 n)
-            => BitVector4.Alloc();
+            => default;
 
         /// <summary>
         /// Allocates an 8-bit primal bitvector

@@ -15,13 +15,13 @@ namespace Z0
     /// <summary>
     /// Defines a permutation over the integers [0, 1, ..., n - 1] where n is the permutation length
     /// </summary>
-    public struct Perm
+    public readonly struct Perm
     {
         /// <summary>
         /// Defines the permutation (0 -> terms[0], 1 -> terms[1], ..., n - 1 -> terms[n-1])
         /// where n is the length of the array
         /// </summary>
-        int[] terms;
+        readonly int[] terms;
 
         /// <summary>
         /// Defines an untyped identity permutation

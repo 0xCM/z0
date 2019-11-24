@@ -34,8 +34,8 @@ namespace Z0
         public static N32 N => default;
 
         [MethodImpl(Inline)]
-        public static implicit operator BitVector<N32,uint>(BitVector32 src)
-            => BitVector<N32,uint>.FromArray(src.data);
+        public static implicit operator BitCells<N32,uint>(BitVector32 src)
+            => BitCells<N32,uint>.FromArray(src.data);
 
         [MethodImpl(Inline)]
         public static implicit operator BitVector<uint>(BitVector32 src)
@@ -47,15 +47,15 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static explicit operator BitVector4(BitVector32 src)
-            => BitVector4.FromScalar((byte)src.data);
+            => new BitVector4((byte)src.data);
 
         [MethodImpl(Inline)]
         public static explicit operator BitVector8(BitVector32 src)
-            => BitVector8.FromScalar((byte)src.data);
+            => (byte)src.data;
 
         [MethodImpl(Inline)]
         public static explicit operator BitVector16(BitVector32 src)
-            => BitVector16.FromScalar((ushort)src.data);
+            =>(ushort)src.data;
 
         [MethodImpl(Inline)]
         public static implicit operator uint(BitVector32 src)
@@ -195,7 +195,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
         public static bool operator true(BitVector32 src)
-            => src.Nonempty;
+            => src.NonEmpty;
 
         /// <summary>
         /// Returns false if the source vector is the zero vector, false otherwise
@@ -203,7 +203,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
         public static bool operator false(BitVector32 src)
-            => !src.Nonempty;
+            => !src.NonEmpty;
 
         [MethodImpl(Inline)]
         public static bool operator ==(in BitVector32 x, in BitVector32 y)
@@ -219,7 +219,16 @@ namespace Z0
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
         public BitVector32(uint src)
-            : this() => this.data = src;
+            => this.data = src;
+
+        /// <summary>
+        /// Extracts the scalar represented by the vector
+        /// </summary>
+        public readonly uint Scalar
+        {
+            [MethodImpl(Inline)]
+            get => data;
+        }
 
         public BitVector16 Lo
         {
@@ -254,19 +263,10 @@ namespace Z0
         /// <summary>
         /// Returns true if the vector has at least one enabled bit; false otherwise
         /// </summary>
-        public readonly bool Nonempty
+        public readonly bool NonEmpty
         {
             [MethodImpl(Inline)]
             get => data != 0;
-        }
-
-        /// <summary>
-        /// Extracts the scalar represented by the vector
-        /// </summary>
-        public readonly uint Scalar
-        {
-            [MethodImpl(Inline)]
-            get => data;
         }
 
         /// <summary>
@@ -284,10 +284,10 @@ namespace Z0
         public bit this[int pos]
         {
             [MethodImpl(Inline)]
-            get => Get(pos);
+            get => BitMask.test(data, pos);
             
             [MethodImpl(Inline)]
-            set => Set(pos, value);
+            set => data = BitMask.set(data, (byte)pos, value);
        }
 
         /// <summary>
@@ -301,66 +301,8 @@ namespace Z0
         public BitVector32 this[int first, int last]
         {
             [MethodImpl(Inline)]
-            get => Between(first, last);
+            get =>  Bits.between(data, (byte)first,(byte)last);
         }
-
-        /// <summary>
-        /// Selects an index-identified byte where index = 0 | 1 | 2 | 3
-        /// </summary>
-        /// <param name="index">The 0-based byte-relative position</param>
-        [MethodImpl(Inline)]
-        public ref byte Byte(int index)        
-            => ref Bytes[index];
-
-        /// <summary>
-        /// Enables a bit if it is disabled
-        /// </summary>
-        /// <param name="pos">The position of the bit to enable</param>
-        [MethodImpl(Inline)]
-        public void Enable(int pos)
-            => data = BitMask.enable(ref data, pos);
-
-        /// <summary>
-        /// Disables a bit if it is enabled
-        /// </summary>
-        /// <param name="pos">The bit position</param>
-        [MethodImpl(Inline)]
-        public void Disable(int pos)
-            => data = BitMask.disable(ref data, pos);
-
-        /// <summary>
-        /// Disables the bits after a specified poistion
-        /// </summary>
-        /// <param name="pos">The bit position</param>
-        [MethodImpl(Inline)]
-        public void DisableAfter(int pos)
-            => data = Bits.zerohi(data, (byte)++pos);
-            
-        /// <summary>
-        /// Gets the value of an index-identified bit
-        /// </summary>
-        /// <param name="pos">The bit index</param>
-        [MethodImpl(Inline)]
-        public readonly bit Get(int pos)
-            => BitMask.test(data, pos);
-
-        /// <summary>
-        /// Sets the state of an index-identified bit
-        /// </summary>
-        /// <param name="pos">The bit index</param>
-        /// <param name="value">The bit value</param>
-        [MethodImpl(Inline)]
-        public void Set(int pos, bit value)
-            => data = BitMask.set(data, (byte)pos, value);
-
-        /// <summary>
-        /// Extracts a contiguous sequence of bits defined by an inclusive range
-        /// </summary>
-        /// <param name="first">The first bit position</param>
-        /// <param name="last">The last bit position</param>
-        [MethodImpl(Inline)]
-        public readonly BitVector32 Between(int first, int last)
-            => Bits.between(data, (byte)first,(byte)last);
 
         [MethodImpl(Inline)]
         public bool Equals(BitVector32 y)

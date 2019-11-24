@@ -86,7 +86,7 @@ namespace Z0
         /// <summary>
         /// Queries/Specifies a row
         /// </summary>
-        public BitVector<N,T> this[int row]
+        public BitCells<N,T> this[int row]
         {
             [MethodImpl(Inline)]
             get => RowVector(row);
@@ -132,15 +132,15 @@ namespace Z0
         /// </summary>
         /// <param name="row">The 0-based row index</param>
         [MethodImpl(Inline)]
-        public BitVector<N,T> RowVector(int row)                    
-            => BitVector<N,T>.FromSpan(Data.Slice(row*RowCellCount, RowCellCount));
+        public BitCells<N,T> RowVector(int row)                    
+            => BitCells<N,T>.FromSpan(Data.Slice(row*RowCellCount, RowCellCount));
 
         /// <summary>
         /// Replaces an index-identied column of data with the content of a row vector
         /// </summary>
         /// <param name="col">The column index</param>
         [MethodImpl(Inline)]
-        public void ReplaceRow(int row, BitVector<N,T> src)
+        public void ReplaceRow(int row, BitCells<N,T> src)
             => src.Data.CopyTo(Data.Slice(row*RowCellCount, RowCellCount));     
 
         /// <summary>
@@ -148,7 +148,7 @@ namespace Z0
         /// </summary>
         /// <param name="col">The column index</param>
         [MethodImpl(Inline)]
-        public void SetCol(int col, BitVector<N,T> src)
+        public void SetCol(int col, BitCells<N,T> src)
         {
             for(var row=0; row < Order; row++)
                 this[row,col] = src[row];
@@ -159,9 +159,9 @@ namespace Z0
         /// </summary>
         /// <param name="col">The column index</param>
         [MethodImpl(Inline)]
-        public BitVector<N,T> GetCol(int col)
+        public BitCells<N,T> GetCol(int col)
         {
-            var cv = default(BitVector<N,T>);
+            var cv = default(BitCells<N,T>);
             for(var row=0; row < Order; row++)
                 cv[row] = this[row, col];
             return cv;

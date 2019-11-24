@@ -23,7 +23,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bit dot<T>(BitVector<T> x, BitVector<T> y)
             where T : unmanaged
-                => gbits.dot(x.data, y.data);
+                => parity(and(x,y));
 
         /// <summary>
         /// Computes the scalar product between two bitvectors

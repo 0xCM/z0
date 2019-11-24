@@ -182,7 +182,7 @@ namespace Z0
             
             var src = Random.Span<byte>(len);
 
-            var bv = BitVector<N,T>.FromBytes(src);
+            var bv = BitCells<N,T>.FromBytes(src);
             var pc1 = bv.Pop();
 
             var bs = BitString.from(src);

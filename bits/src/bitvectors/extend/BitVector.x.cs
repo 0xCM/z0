@@ -149,6 +149,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitCells<T> ToBitCells<T>(this Span<T> src, int len)
             where T : unmanaged
-                => BitCells.load(src,len);
+                => BitCells.from(src,len);
     }
 }

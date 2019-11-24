@@ -105,7 +105,7 @@ namespace Z0
         /// </summary>
         [MethodImpl(Inline)]
         public static BitVector8 ToBitVector8(this BitVector128 src)
-            => BitVector8.FromScalar(src.x0);
+            => BitVector.from(n8,src.x0);
 
         /// <summary>
         /// Applies a truncating reduction Bv64 -> Bv16

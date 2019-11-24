@@ -20,8 +20,8 @@ namespace Z0
         /// Converts the matrix to a bitvector
         /// </summary>
         [MethodImpl(Inline)]
-        public static BitVector<N1024,uint> ToBitVector(this BitMatrix32 A)
-            => BitVector.natural(A.Data, n1024);
+        public static BitCells<N1024,uint> ToBitVector(this BitMatrix32 A)
+            => BitCells.from(A.Data, n1024);
 
 
         /// <summary>

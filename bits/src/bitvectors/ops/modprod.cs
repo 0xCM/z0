@@ -29,7 +29,7 @@ namespace Z0
         /// <param name="y">The second vector</param>
         /// <remarks>This should be considered a reference implementation; the dot operation is considerably faster</remarks>
         [MethodImpl(Inline)]
-        public static bit modprod<N,T>(in BitVector<N,T> x, in BitVector<N,T> y)
+        public static bit modprod<N,T>(in BitCells<N,T> x, in BitCells<N,T> y)
             where N : unmanaged, ITypeNat
             where T : unmanaged
                 => BitCells.modprod(x.ToCells(),y.ToCells());

@@ -20,12 +20,12 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitVector<T> ToBitVector<T>(this BitString src)
             where T : unmanaged
-                => BitVector.from<T>(src);
+                => BitVector.generic<T>(src);
 
         [MethodImpl(Inline)]
         public static BitCells<T> ToCells<T>(this BitVector<T> src)
             where T : unmanaged
-                => BitCells.load(src.Data);
+                => BitCells.from(src.Data);
 
         /// <summary>
         /// Defines an 8-bit generic bitvector from an unsigned integer of commensurate width

@@ -169,7 +169,7 @@ namespace Z0
                 var m = Random.BitMatrix8();
                 var c = Random.BitVector(n8);
                 var z1 = m * c;            
-                var z2 = BitVector8.Alloc();
+                var z2 = BitVector.alloc(n8);
                 for(var i = 0; i<m.Order; i++)           
                     z2[i] = m[i] % c;
                 

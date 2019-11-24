@@ -15,7 +15,7 @@ namespace Z0
         {
             var src = BitVector16.Ones;
             var dst = src.Replicate();
-            dst.DisableAfter(2);
+            dst = BitVector.zerohi(dst,2);
             Claim.eq((ushort)0b111, dst);
         }
 

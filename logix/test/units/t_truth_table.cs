@@ -119,7 +119,7 @@ namespace Z0.Logix
             const byte on = 1;
             const byte off = 0;
 
-            var dst = BitVector4.Alloc();
+            var dst = BitVector.alloc(n4);
             dst[0] = (byte)(ScalarOpApi.eval(op, off,off) & on) == on;
             dst[1] = (byte)(ScalarOpApi.eval(op, on,off) & on) == on;
             dst[2] = (byte)(ScalarOpApi.eval(op, off,on) & on) == on;
@@ -130,7 +130,7 @@ namespace Z0.Logix
         
         void check_truth(BL op)
         {
-            var dst = BitVector4.Alloc();
+            var dst = BitVector.alloc(n4);
             dst[0] = LogicOpApi.eval(op, bit.Off,bit.Off);
             dst[1] = LogicOpApi.eval(op, bit.On,bit.Off);
             dst[2] = LogicOpApi.eval(op, bit.Off,bit.On);

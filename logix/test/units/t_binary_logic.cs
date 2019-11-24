@@ -164,7 +164,7 @@ namespace Z0.Logix
             {
                 var bs = Random.BitString(2,7);
                 var x = LiteralLogicSeq.FromBitString(bs);
-                var y = BitVector8.FromBitString(bs);
+                var y = BitVector.from(n8,bs);
                 for(var i=0; i<bs.Length; i++)
                 {
                     Claim.eq(bs[i],x[i]);

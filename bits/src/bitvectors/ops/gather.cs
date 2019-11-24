@@ -31,6 +31,15 @@ namespace Z0
         /// <param name="spec">Identifies the source bits of interest</param>
         /// <param name="dst">Receives the identified bits</param>
         [MethodImpl(Inline)]
+        public static BitVector4 gather(BitVector4 src, BitVector4 spec)
+            => gbits.gather(src.data, spec.data);
+
+        /// <summary>
+        /// Populates a target vector with specified source bits
+        /// </summary>
+        /// <param name="spec">Identifies the source bits of interest</param>
+        /// <param name="dst">Receives the identified bits</param>
+        [MethodImpl(Inline)]
         public static BitVector8 gather(BitVector8 src, BitVector8 spec)
             => gbits.gather(src.data, spec.data);
 

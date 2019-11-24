@@ -11,7 +11,7 @@ namespace Z0
 
     using static zfunc;
 
-    partial class BitVectorX
+    public static class BitCellX
     {
 
         /// <summary>
@@ -22,10 +22,23 @@ namespace Z0
         /// <typeparam name="N">The natural type</typeparam>
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
-        public static BitVector<N,T> ToBitVector<N,T>(this ReadOnlySpan<T> src, N n = default)
+        public static BitCells<N,T> ToCells<N,T>(this ReadOnlySpan<T> src, N n = default)
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => BitVector.natural(src,n);
+                => BitCells.from(src,n);
+
+        /// <summary>
+        /// Constructs a bitvector of natural length from a source span
+        /// </summary>
+        /// <param name="src">The bit source</param>
+        /// <param name="n">The natural length</param>
+        /// <typeparam name="N">The natural type</typeparam>
+        /// <typeparam name="T">The primal segment type</typeparam>
+        [MethodImpl(Inline)]
+        public static BitCells<N,T> ToCells<N,T>(this Span<T> src, N n = default)
+            where N : unmanaged, ITypeNat
+            where T : unmanaged
+                => BitCells.from(src,n);
 
         /// <summary>
         /// Converts the least significant elements of a generic natural bitvector to a 8-bit primal bitvector
@@ -33,7 +46,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <typeparam name="T">The primal source type</typeparam>        
         [MethodImpl(Inline)]
-        public static BitVector8 ToPrimal<N,T>(this BitVector<N,T> src, N8 n)        
+        public static BitVector8 ToPrimal<N,T>(this BitCells<N,T> src, N8 n)        
             where T : unmanaged
             where N : unmanaged, ITypeNat
                 => src.Data.TakeUInt8();
@@ -44,7 +57,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <typeparam name="T">The primal source type</typeparam>        
         [MethodImpl(Inline)]
-        public static BitVector16 ToPrimal<N,T>(this BitVector<N,T> src, N16 n)        
+        public static BitVector16 ToPrimal<N,T>(this BitCells<N,T> src, N16 n)        
             where T : unmanaged
             where N : unmanaged, ITypeNat
                 => src.Data.TakeUInt16();
@@ -55,7 +68,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <typeparam name="T">The primal source type</typeparam>        
         [MethodImpl(Inline)]
-        public static BitVector32 ToPrimal<N,T>(this BitVector<N,T> src, N32 n)        
+        public static BitVector32 ToPrimal<N,T>(this BitCells<N,T> src, N32 n)        
             where T : unmanaged
             where N : unmanaged, ITypeNat
                 => src.Data.TakeUInt32();
@@ -66,31 +79,16 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <typeparam name="T">The primal source type</typeparam>        
         [MethodImpl(Inline)]
-        public static BitVector64 ToPrimal<N,T>(this BitVector<N,T> src, N64 n)        
+        public static BitVector64 ToPrimal<N,T>(this BitCells<N,T> src, N64 n)        
             where T : unmanaged
             where N : unmanaged, ITypeNat
                 => src.Data.TakeUInt64();
 
         [MethodImpl(Inline)]
-        public static BitCells<T> ToCells<N,T>(this BitVector<N,T> src)
+        public static BitCells<T> ToCells<N,T>(this BitCells<N,T> src)
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => BitCells.load(src.Data, natval<N>());
-
-        /// <summary>
-        /// Constructs a bitvector of natural length from a source span
-        /// </summary>
-        /// <param name="src">The bit source</param>
-        /// <param name="n">The natural length</param>
-        /// <typeparam name="N">The natural type</typeparam>
-        /// <typeparam name="T">The primal segment type</typeparam>
-        [MethodImpl(Inline)]
-        public static BitVector<N,T> ToBitVector<N,T>(this Span<T> src, N n = default)
-            where N : unmanaged, ITypeNat
-            where T : unmanaged
-                => BitVector.natural(src,n);
-
- 
+                => BitCells.from(src.Data, natval<N>()); 
     }
 
 }

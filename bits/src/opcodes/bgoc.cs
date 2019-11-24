@@ -57,13 +57,13 @@ namespace Z0
             return dst;            
         }
 
-        public static bit read_bit_from_vector(in BitVector<N23,byte> src)
+        public static bit read_bit_from_vector(in BitCells<N23,byte> src)
             => BitGrid.readbit(in src.Head, 3);
 
-        public static bit read_bit_from_vector_2(in BitVector<N23,byte> src)
+        public static bit read_bit_from_vector_2(in BitCells<N23,byte> src)
             => src[3];
 
-        public static void set_bit_in_vector(in BitVector<N23,byte> src)
+        public static void set_bit_in_vector(in BitCells<N23,byte> src)
             => src[9] = bit.On;
 
         public static void set_bits_in_grid(BitGrid<N23,N11,byte> src)
@@ -83,7 +83,7 @@ namespace Z0
             => src[3];
 
         public static int segments()
-            => BitVector<N23,byte>.SegCount;
+            => BitCells<N23,byte>.SegCount;
 
         public static int count_segs()
             => BitCalcs.segcount<N20,N30,uint>();

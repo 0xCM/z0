@@ -31,7 +31,7 @@ namespace Z0
         /// <param name="x">The left bitvector</param>
         [MethodImpl(Inline)]
         public static BitVector4 negate(BitVector4 x)
-            => BitVector4.FromLo(gmath.negate(x.data));
+            => gmath.negate(x.data);
             
         /// <summary>
         /// Computes the two's complement bitvector z := ~x + 1 for a bitvector x

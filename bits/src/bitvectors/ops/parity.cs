@@ -10,7 +10,6 @@ namespace Z0
     using Z0;
 
     using static zfunc;
-    using static BitParts;
 
     partial class BitVector
     {
@@ -87,6 +86,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bit parity(in BitVector128 src)
             => odd(pop(src));
-
     }
 }

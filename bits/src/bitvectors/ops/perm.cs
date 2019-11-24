@@ -7,44 +7,58 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics.X86;
-    using Z0;
 
     using static zfunc;
-    using static BitParts;
 
     partial class BitVector
     {
         /// <summary>
-        /// Rearranges the vector in-place as specified by a permutation
+        /// Rearranges the vector as specified by a permutation
         /// </summary>
         /// <param name="x">The source vector</param>
         /// <param name="spec">The permutation</param>
-        public static ref BitVector<T> perm<T>(ref BitVector<T> x, Perm spec)
+        public static BitVector<T> perm<T>(BitVector<T> src, in Perm spec)
             where T : unmanaged
         {
-            var src = x.Replicate();
-            ref var dst = ref x;
-            var len = x.Width;
-            for(var i=0; i<len; i++)
+            var dst = src.Replicate();
+            var width = src.Width;
+
+            for(var i=0; i<width; i++)
             {
                 ref readonly var j = ref spec[i];
                 if(j != i)
                     dst[i] = src[j];
             }
-            return ref x;
+            return dst;
         }
 
         /// <summary>
-        /// Creates a new vector by permuting a replica of the source vector as specified by a permuation
+        /// Permutes the vector corrding to the spec
         /// </summary>
-        /// <param name="x">The source vector</param>
         /// <param name="spec">The permutation</param>
         [MethodImpl(Inline)]
-        public static BitVector<T> perm<T>(BitVector<T> x, Perm spec)
-            where T : unmanaged        
+        public static BitVector4 perm(BitVector4 src, Perm spec)
         {
-            var dst = x.Replicate();
-            return perm(ref dst, spec);
+            var dst = src.Replicate();
+            var width = src.Width;
+            for(var i=0; i<width; i++)
+                dst[i] = src[spec[i]];
+            return dst;
+        }
+
+        /// <summary>
+        /// Applies a permutation to a replicated vector
+        /// </summary>
+        /// <param name="p">The permutation</param>
+        [MethodImpl(Inline)]
+        public static BitVector8 perm(BitVector8 src, in Perm p)
+        {
+            var dst = src.Replicate();
+            var width = src.Width;
+
+            for(var i=0; i<width; i++)
+                dst[i] = src[p[i]];
+            return dst;
         }
 
         /// <summary>
@@ -53,96 +67,55 @@ namespace Z0
         /// <param name="x">The source vector</param>
         /// <param name="spec">The permutation</param>
         [MethodImpl(Inline)]
-        public static ref BitVector16 perm(ref BitVector16 x, in Perm spec)
-        {
-            var src = x.Replicate();
-            ref var dst = ref x;
-            var len = x.Width;
-            for(var i=0; i<len; i++)
+        public static BitVector16 perm(BitVector16 src, in Perm spec)
+        {            
+            var dst = src.Replicate();
+            var width = src.Width;
+            for(var i=0; i<width; i++)
             {
                 ref readonly var j = ref spec[i];
                 if(j != i)
                     dst[i] = src[j];
             }
-            return ref x;
+            return dst;
         }        
 
         /// <summary>
-        /// Creates a new vector by permuting a replica of the source vector as
-        /// specified by a permuation
+        /// Rearranges the vector specified by a permutation
         /// </summary>
-        /// <param name="x">The source vector</param>
+        /// <param name="src">The source vector</param>
         /// <param name="spec">The permutation</param>
         [MethodImpl(Inline)]
-        public static BitVector16 perm(BitVector16 x, Perm spec)
+        public static BitVector32 perm(BitVector32 src, in Perm spec)
         {
-            var dst = x.Replicate();
-            return perm(ref dst, spec);
-        }
-
-        /// <summary>
-        /// Rearranges the vector in-place as specified by a permutation
-        /// </summary>
-        /// <param name="x">The source vector</param>
-        /// <param name="spec">The permutation</param>
-        [MethodImpl(Inline)]
-        public static ref BitVector32 perm(ref BitVector32 x, in Perm spec)
-        {
-            var src = x.Replicate();
-            ref var dst = ref x;
-            var len = x.Width;
-            for(var i=0; i<len; i++)
+            var dst = src.Replicate();
+            var width = src.Width;
+            for(var i=0; i<width; i++)
             {
                 ref readonly var j = ref spec[i];
                 if(j != i)
                     dst[i] = src[j];
             }
-            return ref x;
-        }        
-
-        /// <summary>
-        /// Creates a new vector by permuting a replica of the source vector as
-        /// specified by a permuation
-        /// </summary>
-        /// <param name="x">The source vector</param>
-        /// <param name="spec">The permutation</param>
-        [MethodImpl(Inline)]
-        public static BitVector32 perm(BitVector32 x, Perm spec)
-        {
-            var dst = x.Replicate();
-            return perm(ref dst, spec);
-        }
-
-        /// <summary>
-        /// Rearranges the vector in-place as specified by a permutation
-        /// </summary>
-        /// <param name="x">The source vector</param>
-        /// <param name="spec">The permutation</param>
-        [MethodImpl(Inline)]
-        public static ref BitVector64 perm(ref BitVector64 x, in Perm spec)
-        {
-            var src = x.Replicate();
-            ref var dst = ref x;
-            var len = x.Width;
-            for(var i=0; i<len; i++)
-            {
-                ref readonly var j = ref spec[i];
-                if(j != i)
-                    dst[i] = src[j];
-            }
-            return ref x;
+            return dst;
         }        
 
         /// <summary>
         /// Creates a new vector by permuting a replica of the source vector as specified by a permuation
         /// </summary>
-        /// <param name="x">The source vector</param>
+        /// <param name="src">The source vector</param>
         /// <param name="spec">The permutation</param>
         [MethodImpl(Inline)]
-        public static BitVector64 perm(BitVector64 x, Perm spec)
+        public static BitVector64 perm(BitVector64 src, in Perm spec)
         {
-            var dst = x.Replicate();
-            return perm(ref dst, spec);
-        }
+            var dst = src.Replicate();
+            var width = src.Width;
+            for(var i=0; i<width; i++)
+            {
+                ref readonly var j = ref spec[i];
+                if(j != i)
+                    dst[i] = src[j];
+            }
+            return dst;
+        }        
     }
 }

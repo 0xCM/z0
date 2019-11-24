@@ -39,7 +39,7 @@ namespace Z0
             => src.ToBitVector();
         
         [MethodImpl(Inline)]
-        public static implicit operator BitVector<N9,ushort>(GfPoly16 src)
+        public static implicit operator BitCells<N9,ushort>(GfPoly16 src)
             => src.ToNatVec();
 
         [MethodImpl(Inline)]
@@ -114,8 +114,8 @@ namespace Z0
         /// Converts the polynomial to a bitvector with natural length equal to the degree
         /// </summary>
         [MethodImpl(Inline)]
-        public BitVector<N9,ushort> ToNatVec()
-            => BitVector<N9, ushort>.FromArray(data);
+        public BitCells<N9,ushort> ToNatVec()
+            => BitCells<N9, ushort>.FromArray(data);
         
         /// <summary>
         /// Formats the polynomial

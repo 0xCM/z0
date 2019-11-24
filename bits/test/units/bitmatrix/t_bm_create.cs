@@ -24,7 +24,7 @@ namespace Z0
                 var v1 = Random.BitVector(n8);
                 var v2 = mat * v1;
                 var v3 = v1.Replicate();
-                v3.Reverse();
+                v3 = BitVector.rev(v3);
                 Claim.eq(v3,v2);
             }
         }

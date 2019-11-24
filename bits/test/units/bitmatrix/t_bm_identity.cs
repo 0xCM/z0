@@ -48,7 +48,8 @@ namespace Z0
             var m = BitMatrix8.Identity;
             for(byte i=0; i < m.Order; i++)
                 Claim.eq(m[i,i],Bit.On);
-            Claim.yea(m.Diagonal().AllOnes());
+            
+            Claim.yea(m.Diagonal().AllOn);
 
             var lhs = BitMatrix8.Identity;
             var rhs = BitMatrix8.Identity;

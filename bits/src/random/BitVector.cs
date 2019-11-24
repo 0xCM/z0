@@ -164,10 +164,10 @@ namespace Z0
         /// <typeparam name="N">The length type</typeparam>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline)]
-        public static BitVector<N,T> BitVector<N,T>(this IPolyrand random)
+        public static BitCells<N,T> BitVector<N,T>(this IPolyrand random)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => BV.natural<N,T>(random.Stream<T>().ToSpan(BitCalcs.segcount<N,N1,T>()));
+                => Z0.BitCells.from<N,T>(random.Stream<T>().ToSpan(BitCalcs.segcount<N,N1,T>()));
 
         /// <summary>
         /// Produces a random generic bitvector of specified length
@@ -178,7 +178,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitCells<T> BitCells<T>(this IPolyrand random, int len)
             where T : unmanaged
-                => BC.load<T>(random.Stream<T>().ToSpan(BC.cellcount<T>(len)), len);
+                => BC.from<T>(random.Stream<T>().ToSpan(BC.cellcount<T>(len)), len);
 
         /// <summary>
         /// Produces a random generic bitvector of randomized length
@@ -192,7 +192,7 @@ namespace Z0
             where T : unmanaged
         {
             var len = random.Next<int>(minlen,++maxlen);
-            return BC.load<T>(random.Stream<T>().TakeArray(BC.cellcount<T>(len),len));
+            return BC.from<T>(random.Stream<T>().TakeArray(BC.cellcount<T>(len),len));
         }
 
         /// <summary>

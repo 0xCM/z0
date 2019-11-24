@@ -54,7 +54,7 @@ namespace Z0
             for(var i=0; i<src.Length - segcount; i++)
             {
                 var bvSrc = src.Slice(i, segcount);
-                var bv = bvSrc.ToBitVector(dim);
+                var bv = bvSrc.ToCells(dim);
                 var x = Bits.pack(bvSrc[0], bvSrc[1]);
                 for(var j = 0; j < dim; j++)
                     Claim.eq(BitMask.test(x,j), bv[j]);                
@@ -68,9 +68,9 @@ namespace Z0
             var bv = Random.BitVector<N13,byte>();
             ClaimEqual(bv,bv.ToBitString());
             
-            var segcount = BitVector<N13,byte>.SegCount;
-            var capacity = BitVector<N13,byte>.TotalCapacity;
-            var unused = BitVector<N13,byte>.UnusedCapacity;
+            var segcount = BitCells<N13,byte>.SegCount;
+            var capacity = BitCells<N13,byte>.TotalCapacity;
+            var unused = BitCells<N13,byte>.UnusedCapacity;
             
             Claim.eq(dim, bv.Length);
             Claim.eq(bitsize<byte>() * segcount, capacity);
@@ -133,7 +133,7 @@ namespace Z0
 
             for(var i=0; i<src.Length; i++)
             for(var j = 0; j < Pow2.T03; j++)
-                Claim.eq(gbits.test(src[i],j), bv.Test(i*Pow2.T03 + j));
+                Claim.eq(gbits.test(src[i],j), BitVector.enabled(bv,i*Pow2.T03 + j));
         }
 
 
@@ -143,7 +143,7 @@ namespace Z0
             var n = 40;      
             var bvz = BitCells<ulong>.FromCell(z,n);
             Span<byte> xSrc =  BitConverter.GetBytes(z);
-            var bvx = BitCells.load(xSrc.Slice(0,5).ToArray());
+            var bvx = BitCells.from(xSrc.Slice(0,5).ToArray());
             Claim.eq(gbits.pop(z), bvz.Pop());
             Claim.eq(gbits.pop(z), bvx.Pop());
 
@@ -153,7 +153,7 @@ namespace Z0
 
         public void create_N12i32()
         {
-            var bv = BitVector.from(0b101110001110, n12);
+            var bv = BitCells.from(0b101110001110, n12);
             Claim.eq(bv[0], Bit.Off);
             Claim.eq(bv[1], Bit.On);
             Claim.eq(bv[11], Bit.On);
@@ -204,18 +204,18 @@ namespace Z0
             int n = natval<N>();
             var rep = default(N);
             var segcount = BitSize.Segments<T>(n);
-            Claim.eq(BitVector<N,T>.SegCount, segcount);
-            var totalcap = BitVector<N,T>.TotalCapacity;
-            var unusedcap = BitVector<N,T>.UnusedCapacity;
+            Claim.eq(BitCells<N,T>.SegCount, segcount);
+            var totalcap = BitCells<N,T>.TotalCapacity;
+            var unusedcap = BitCells<N,T>.UnusedCapacity;
             var segcap = bitsize<T>();
-            Claim.eq(BitVector<N,T>.SegWidth, segcap);
+            Claim.eq(BitCells<N,T>.SegWidth, segcap);
 
 
             var src = Random.Span<T>(SampleSize);
             for(var i=0; i<SampleSize; i+= segcount)
             {
                 var bvSrc = src.Slice(i,segcount);
-                var bv = bvSrc.ToBitVector(rep);
+                var bv = bvSrc.ToCells(rep);
                 ClaimEqual(bv,bv.ToBitString());
                 Claim.eq(n, bv.Length);
                 Claim.eq(segcap * segcount, totalcap);

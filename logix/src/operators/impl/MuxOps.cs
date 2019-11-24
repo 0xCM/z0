@@ -97,11 +97,11 @@ namespace Z0.Logix
 
         [MethodImpl(Inline)]
         Mux8Control(bit c0, bit c1, bit c2)
-            => Selector = BitVector4.FromBits(c0,c1,c2,bit.Off);
+            => Selector = BitVector.from(n4,c0,c1,c2,bit.Off);
         
         [MethodImpl(Inline)]
         Mux8Control(BitVector4 src)        
-            => this.Selector = src[0..2];
+            => this.Selector = src[0,2];
         
         public readonly BitVector4 Selector;
 

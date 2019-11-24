@@ -46,7 +46,7 @@ namespace Z0
 
 
             var v1 = BitVector32.Zero;
-            var v2 = v1.Replicate(p1);
+            var v2 = v1.Permute(p1);
 
             Claim.eq(v1[31],v2[0]);
             Claim.eq(v1[30],v2[1]);
@@ -56,15 +56,14 @@ namespace Z0
         public void bv_perm64()
         {
             var p = Perm.Define(n64, (0,1),(1,2),(2,3),(3,4),(4,5),(5,6));
-            var bv = BitVector64.One;
-            bv.Permute(p);
+            var bv = BitVector.perm(BitVector64.One,p);
             Claim.eq(bv[6], bit.On);
 
             for(var j=0; j<SampleSize; j++)
             {
                 var p1 = Random.Perm(n64);
                 var v1 = Random.BitVector(n64);
-                var v2 = v1.Replicate().Permute(p1);
+                var v2 = BitVector.perm(v1,p1);
                 for(var i=0; i<v1.Width; i++)
                     Claim.eq(v1[p1[i]], v2[i]);
             }

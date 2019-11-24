@@ -55,7 +55,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
-        public static BitVector<N32,uint> ToNatural(this BitVector32 src)
+        public static BitCells<N32,uint> ToNatural(this BitVector32 src)
             => src;
 
         /// <summary>
@@ -91,20 +91,6 @@ namespace Z0
             => (ushort)src;
 
         /// <summary>
-        /// Applies a truncating reduction Bv32 -> Bv8
-        /// </summary>
-        [MethodImpl(Inline)]
-        public static BitVector8 Narrow(this BitVector32 src, N8 n)
-            => BitVector8.FromScalar(src.data);
-
-        /// <summary>
-        /// Applies a truncating reduction Bv32 -> Bv16
-        /// </summary>
-        [MethodImpl(Inline)]
-        public static BitVector16 Narrow(this BitVector32 src, N16 n)
-            => BitVector16.FromScalar(src.data);
-
-        /// <summary>
         /// Applies the bit width promotion Bv32 -> Bv64
         /// </summary>
         [MethodImpl(Inline)]
@@ -121,39 +107,17 @@ namespace Z0
         /// <summary>
         /// Returns true of all bits are enabled, false otherwise
         /// </summary>
-        /// <param name="src"></param>
-        /// <returns></returns>
         [MethodImpl(Inline)]
         public static bit TestC(this BitVector32 src)
             => (UInt32.MaxValue & src.data) == UInt32.MaxValue;
-
-        /// <summary>
-        /// Rearranges the vector in-place as specified by a permutation
-        /// </summary>
-        /// <param name="spec">The permutation</param>
-        [MethodImpl(Inline)]
-        public static ref BitVector32 Permute(this ref BitVector32 src, Perm spec)
-        {
-            BitVector.perm(ref src, spec);
-            return ref src;
-        }
-
 
         /// <summary>
         /// Applies a permutation to a replicated vector
         /// </summary>
         /// <param name="p">The permutation</param>
         [MethodImpl(Inline)]
-        public static BitVector32 Replicate(this BitVector32 src, Perm p)
-        {
-            var dst = src.Replicate();
-            BitVector.perm(ref src, p);
-            return dst;
-        }
-
-        [MethodImpl(Inline)]
-        public static BitString ToBitString(this BitVector32 src)
-            => src.data.ToBitString();
+        public static BitVector32 Permute(this BitVector32 src, in Perm p)
+            => BitVector.perm(src,p);
 
         /// <summary>
         /// Reverses the vector bits
@@ -162,6 +126,26 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitVector32 Reverse(this BitVector32 src)
             => BitVector.rev(src);
+
+        /// <summary>
+        /// Creates a new vector via concatenation
+        /// </summary>
+        /// <param name="tail">The lower bits of the new vector</param>
+        [MethodImpl(Inline)]
+        public static BitVector64 Concat(this BitVector32 head, BitVector32 tail)
+            => BitVector64.FromScalars(tail.data, head.data);
+
+        /// <summary>
+        /// Concatentates a vector to itself
+        /// </summary>
+        /// <param name="tail">The lower bits of the new vector</param>
+        [MethodImpl(Inline)]
+        public static BitVector64 Replicate(this BitVector32 src, N2 n)
+            => src.Concat(src);
+
+        [MethodImpl(Inline)]
+        public static BitString ToBitString(this BitVector32 src)
+            => src.data.ToBitString();
 
         /// <summary>
         /// Formats the bitvector as a bitstring

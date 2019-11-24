@@ -27,6 +27,7 @@ namespace Z0
             where T : unmanaged
                 => odd(pop(gmath.and(x,y)));
 
+
         [MethodImpl(Inline)]
         public static uint pop<T>(T x0, T x1, T x2, T x3)
             where T : unmanaged

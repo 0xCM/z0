@@ -7,39 +7,15 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
-    using System.Collections.Generic;
 
     using static zfunc;    
-    using static nfunc;
 
     partial class BitVector
     {
-        /// <summary>
-        /// Creates a vector from a bitstring
-        /// </summary>
-        /// <param name="src">The source bitstring</param>
-        [MethodImpl(Inline)]
-        public static BitVector<T> from<T>(BitString src)
-            where T : unmanaged
-                => src.TakeScalar<T>();
-
-        /// <summary>
-        /// Allocates and fills a byte-secialized generic bitvector
-        /// </summary>
-        [MethodImpl(Inline)]
-        public static BitVector<byte> generic(N8 n8, byte init)
-            => init;
-
-        /// <summary>
-        /// Allocates and fills a byte-secialized generic bitvector
-        /// </summary>
-        [MethodImpl(Inline)]
-        public static BitVector<byte> generic(N8 n, bit b0, bit b1, bit b2, bit b3)
-            => from(n, b0, b1, b2, b3);
 
         [MethodImpl(Inline)]
         public static BitVector4 from(N4 n, byte src)
-            => BitVector4.FromScalar(src);
+            => new BitVector4(src);
 
         [MethodImpl(Inline)]
         public static BitVector4 from(N4 n, ushort data)
@@ -56,14 +32,26 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitVector4 direct(N4 n, ulong data)
             => new BitVector4((byte)data, true);
-
+        
         /// <summary>
-        /// Creates a 4-bit bitvector from 4 explicit bits
+        /// Creates a 4-bit bitvector from explicit bitss
         /// </summary>
         /// <param name="src">The source bitstring</param>
         [MethodImpl(Inline)]
-        public static BitVector4 from(N4 n, bit b0, bit b1, bit b2, bit b3)
-            => BitVector4.FromBits(b0,b1,b2,b3);
+        public static BitVector4 from(N4 n, bit b0, bit b1)
+        {
+            var data = 0u;
+            if(b0) 
+                data |= (1 << 0);
+            if(b1) 
+                data |= (1 << 1);
+
+            return (byte)data;
+        }
+
+        [MethodImpl(Inline)]
+        public static BitVector4 from(N4 n, BitString src)
+            => new BitVector4(src.IsEmpty ? (byte)0 : src.Pack()[0]);            
 
         /// <summary>
         /// Creates a 4-bit bitvector from explicit bitss
@@ -71,15 +59,25 @@ namespace Z0
         /// <param name="src">The source bitstring</param>
         [MethodImpl(Inline)]
         public static BitVector4 from(N4 n, bit b0, bit b1, bit b2)
-            => BitVector4.FromBits(b0,b1,b2);
+        {
+            var data = from(n4,b0,b1);
+            if(b2) 
+                data |= (1 << 2);
+            return (byte)data;
+        }
 
         /// <summary>
-        /// Creates a 4-bit bitvector from explicit bitss
+        /// Creates a 4-bit bitvector from 4 explicit bits
         /// </summary>
         /// <param name="src">The source bitstring</param>
         [MethodImpl(Inline)]
-        public static BitVector4 from(N4 n, bit b0, bit b1)
-            => BitVector4.FromBits(b0,b1);
+        public static BitVector4 from(N4 n, bit b0, bit b1, bit b2, bit b3)
+        {
+            var data = from(n,b0,b1,b2);
+            if(b3) 
+                data |= (1 << 3);
+            return data;
+        }
 
         /// <summary>
         /// Creates a vector from a bitstring
@@ -212,15 +210,6 @@ namespace Z0
         public static BitVector32 from(N32 n, ushort lo, ushort hi)
             => from(n, (uint)hi << 16 | (uint)lo);
 
-
-        /// <summary>
-        /// Creates a generic bitvector from 4 explicit bytes
-        /// </summary>
-        /// <param name="src">The source bitstring</param>
-        [MethodImpl(Inline)]
-        public static BitVector<uint> from(byte x0, byte x1, byte x2, byte x3)
-            => BitVector<uint>.From(Bits.pack(x0,x1,x2,x3));
-
         /// <summary>
         /// Creates a generic bitvector from 4 explicit bytes
         /// </summary>
@@ -277,18 +266,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitVector64 from(N64 n, BitString src)
             => src.TakeUInt64();
-
-        /// <summary>
-        /// Creates a generic bitvector of natural length from a single cell
-        /// </summary>
-        /// <param name="src">The source value</param>
-        /// <param name="n">The bitvector length</param>
-        /// <typeparam name="T">The source type</typeparam>
-        [MethodImpl(Inline)]
-        public static BitVector<N,T> from<N,T>(T src, N n = default)        
-            where N : unmanaged, ITypeNat
-            where T : unmanaged
-                => BitVector<N,T>.FromCell(src);
 
         /// <summary>
         /// Creates a vector from a primal source value
@@ -349,5 +326,4 @@ namespace Z0
             return from(n,x0, x1);
         }
     }
-
 }

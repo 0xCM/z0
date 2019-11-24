@@ -39,9 +39,18 @@ namespace Z0
                 yield return bv++;            
         }
 
+        /// <summary>
+        /// Creates a vector from 32-bit values
+        /// </summary>
+        /// <param name="lo">The byte that will constitute the lo vector bits</param>
+        /// <param name="hi">The byte that will constitute the hi vector bits</param>
         [MethodImpl(Inline)]
-        public static implicit operator BitVector<N64,ulong>(in BitVector64 src)
-            => BitVector<N64,ulong>.FromArray(src.data);
+        public static BitVector64 FromScalars(uint lo, uint hi)
+            => (ulong)hi << 32 | (ulong)lo;
+
+        [MethodImpl(Inline)]
+        public static implicit operator BitCells<N64,ulong>(in BitVector64 src)
+            => BitCells<N64,ulong>.FromArray(src.data);
 
         [MethodImpl(Inline)]
         public static implicit operator BitVector<ulong>(BitVector64 src)
@@ -69,7 +78,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
         public static explicit operator BitVector4(BitVector64 src)
-            => BitVector4.FromScalar((byte)src.data);        
+            => BitVector.from(n4,(byte)src.data);        
 
         /// <summary>
         /// Explicitly converts a a 64-bit bitvector to an 8-bit bitvector
@@ -77,7 +86,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
         public static explicit operator BitVector8(BitVector64 src)
-            => BitVector8.FromScalar((byte)src.data);        
+            => (byte)src.data;
 
         /// <summary>
         /// Explicitly converts a a 64-bit bitvector to a 16-bit bitvector
@@ -227,7 +236,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
         public static bool operator true(BitVector64 src)
-            => src.Nonempty;
+            => src.NonEmpty;
 
         /// <summary>
         /// Returns false if the source vector is the zero vector, false otherwise
@@ -235,7 +244,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
         public static bool operator false(BitVector64 src)
-            => !src.Nonempty;
+            => !src.NonEmpty;
 
         [MethodImpl(Inline)]
         public static bool operator ==(in BitVector64 x, in BitVector64 y)
@@ -251,14 +260,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
         public BitVector64(in ulong data)
-            : this() => this.data = data;
-
-        /// <summary>
-        /// Presents vector content as a span of bytes
-        /// </summary>
-        [MethodImpl(Inline)]
-        public Span<byte> AsBytes()
-            => bytespan(ref data);
+            => this.data = data;
 
         /// <summary>
         /// Reads/Manipulates a source bit at a specified position
@@ -266,20 +268,11 @@ namespace Z0
         public bit this[int pos]
         {
             [MethodImpl(Inline)]
-            get => GetBit(pos);
+            get => BitMask.test(data, pos);
             
             [MethodImpl(Inline)]
-            set => SetBit(pos,value);
+            set => BitMask.set(data, (byte)pos, value);
        }
-
-        /// <summary>
-        /// Selects an inclusive range of bits
-        /// </summary>
-        public BitVector64 this[Range range]
-        {
-            [MethodImpl(Inline)]
-            get => BitVector.between(this,range.Start.Value, range.End.Value);
-        }
 
         /// <summary>
         /// Selects a contiguous range of bits
@@ -331,7 +324,7 @@ namespace Z0
         /// <summary>
         /// Returns true if no bits are enabled, false otherwise
         /// </summary>
-        public readonly bool Empty
+        public readonly bit Empty
         {
             [MethodImpl(Inline)]
             get => data == 0;
@@ -340,10 +333,10 @@ namespace Z0
         /// <summary>
         /// Returns true if the vector has at least one enabled bit; false otherwise
         /// </summary>
-        public readonly bool Nonempty
+        public readonly bit NonEmpty
         {
             [MethodImpl(Inline)]
-            get => !Empty;
+            get => data != 0;
         }
 
         /// <summary>
@@ -353,71 +346,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public ref byte Byte(int index)        
             => ref Bytes[index];
-
-        /// <summary>
-        /// Gets the value of an index-identified bit
-        /// </summary>
-        /// <param name="pos">The bit index</param>
-        [MethodImpl(Inline)]
-        public bit GetBit(int pos)
-            => BitMask.test(data, pos);
-
-        /// <summary>
-        /// Sets the state of an index-identified bit
-        /// </summary>
-        /// <param name="pos">The bit index</param>
-        /// <param name="value">The bit value</param>
-        [MethodImpl(Inline)]
-        public void SetBit(int pos, bit value)
-            => data = BitMask.set(data, (byte)pos, value);
-
-        /// <summary>
-        /// Enables a bit in-place
-        /// </summary>
-        /// <param name="pos">The position of the bit to enable</param>
-        [MethodImpl(Inline)]
-        public void Enable(int pos)
-            => data = BitMask.enable(ref data, pos);
-
-        /// <summary>
-        /// Disables a bit in-place
-        /// </summary>
-        /// <param name="pos">The position of the bit to disable</param>
-        [MethodImpl(Inline)]
-        public void Disable(int pos)
-            => data = BitMask.disable(ref data, pos);
-
-        /// <summary>
-        /// Disables the bits after a specified poistion
-        /// </summary>
-        /// <param name="pos">The bit position</param>
-        [MethodImpl(Inline)]
-        public void DisableAfter(int pos)
-            => data = Bits.zerohi(data, (byte)++pos);
-            
-        /// <summary>
-        /// Rearranges the vector in-place as specified by a permutation
-        /// </summary>
-        /// <param name="spec">The permutation</param>
-        [MethodImpl(Inline)]
-        public BitVector64 Permute(Perm spec)
-            => BitVector.perm(ref this, spec);
-
-        /// <summary>
-        /// Determines whether a bit is enabled
-        /// </summary>
-        /// <param name="pos">The bit position</param>
-        [MethodImpl(Inline)]
-        public readonly bit Test(int pos)
-            => BitMask.test(data, pos);
-        
-        /// <summary>
-        /// Counts the number of enabled bits in the source
-        /// </summary>
-        [MethodImpl(Inline)]
-        public readonly uint Pop()
-            => Bits.pop(data);
-        
+                
         /// <summary>
         /// Tests whether all bits are on
         /// </summary>
@@ -425,13 +354,6 @@ namespace Z0
         public readonly bool AllOnes()
             => (UInt64.MaxValue & data) == UInt64.MaxValue;
         
-        /// <summary>
-        /// Converts the vector to a bitstring
-        /// </summary>
-        [MethodImpl(Inline)]
-        public readonly BitString ToBitString()
-            => data.ToBitString();
-
         /// <summary>
         /// Extracts the scalar represented by the vector
         /// </summary>
@@ -441,35 +363,6 @@ namespace Z0
             get => data;
         }
             
-        /// <summary>
-        /// Returns a copy of the vector
-        /// </summary>
-        [MethodImpl(Inline)]
-        public readonly BitVector64 Replicate()
-            => new BitVector64(data);
-
-        /// <summary>
-        /// Applies a permutation to a replicated vector
-        /// </summary>
-        /// <param name="p">The permutation</param>
-        [MethodImpl(Inline)]
-        public readonly BitVector64 Replicate(Perm p)
-        {
-            var dst = Replicate();
-            dst.Permute(p);
-            return dst;
-        }
-
-        /// <summary>
-        /// Formats the bitvector as a bitstring
-        /// </summary>
-        /// <param name="tlz">True if leadzing zeros should be trimmed, false otherwise</param>
-        /// <param name="specifier">True if the prefix specifier '0b' should be prepended</param>
-        /// <param name="blockWidth">The width of the blocks, if any</param>
-        [MethodImpl(Inline)]
-        public readonly string Format(bool tlz = false, bool specifier = false, int? blockWidth = null, int? rowWidth = null)
-            => ToBitString().Format(tlz, specifier, blockWidth, null, rowWidth);
-
         [MethodImpl(Inline)]
         public readonly bool Equals(BitVector64 y)
             => data == y.data;
@@ -481,8 +374,6 @@ namespace Z0
             => data.GetHashCode();
  
         public override string ToString()
-            => Format();
- 
-
+            => this.Format(); 
     }
 }

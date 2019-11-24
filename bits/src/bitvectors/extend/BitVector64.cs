@@ -14,22 +14,6 @@ namespace Z0
     partial class BitVectorX
     {
         /// <summary>
-        /// Constructs a 64-bit bitvector from a 64-bit primal value
-        /// </summary>
-        /// <param name="src">The source value</param>
-        [MethodImpl(Inline)]
-        public static BitVector64 ToBitVector(this ulong src)
-            => src;
-
-        /// <summary>
-        /// Constructs a 64-bit bitvector from bitstring
-        /// </summary>
-        /// <param name="src">The source value</param>
-        [MethodImpl(Inline)]
-        public static BitVector64 ToBitVector(this BitString src, N64 n)
-            => BitVector.from(n,src);
-
-        /// <summary>
         /// Constructs a 64-bit bitvector from a sequence of bit cells
         /// </summary>
         /// <param name="src">The source vector</param>
@@ -49,33 +33,28 @@ namespace Z0
             => src.data;
 
         /// <summary>
+        /// Constructs a 64-bit bitvector from bitstring
+        /// </summary>
+        /// <param name="src">The source value</param>
+        [MethodImpl(Inline)]
+        public static BitVector64 ToBitVector(this BitString src, N64 n)
+            => BitVector.from(n,src);
+
+        /// <summary>
         /// Converts the source bitvector it the equivalent natural/generic bitvector
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
-        public static BitVector<N64,ulong> ToNatural(this BitVector64 src)
+        public static BitCells<N64,ulong> ToCells(this BitVector64 src)
             => src;
 
         /// <summary>
-        /// Applies a truncating reduction Bv64 -> Bv32
+        /// Constructs a 64-bit bitvector from a 64-bit primal value
         /// </summary>
+        /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
-        public static BitVector32 Narrow(this BitVector64 src, N32 n)
-            => BitVector.from(n,src.data);
-
-        /// <summary>
-        /// Applies a truncating reduction Bv64 -> Bv8
-        /// </summary>
-        [MethodImpl(Inline)]
-        public static BitVector8 Narrow(this BitVector64 src, N8 n)
-            => BitVector8.FromScalar(src.data);
-
-        /// <summary>
-        /// Applies a truncating reduction Bv64 -> Bv16
-        /// </summary>
-        [MethodImpl(Inline)]
-        public static BitVector16 Narrow(this BitVector64 src, N16 n)
-            => BitVector16.FromScalar(src.data);
+        public static BitVector64 ToBitVector(this ulong src)
+            => src;
 
         /// <summary>
         /// Reverses the vector bits
@@ -86,12 +65,36 @@ namespace Z0
             => BitVector.rev(src);
 
         /// <summary>
-        /// Applies a widening conversion Bv64 -> Bv128
+        /// Returns a copy of the vector
         /// </summary>
         [MethodImpl(Inline)]
-        public static BitVector128 Expand(this BitVector64 src, N128 n)
-            => BitVector.from(n,src.data);
+        public static BitVector64 Replicate(this BitVector64 x)
+            => x.data;
 
+        /// <summary>
+        /// Applies a permutation to a replicated vector
+        /// </summary>
+        /// <param name="p">The permutation</param>
+        [MethodImpl(Inline)]
+        public static BitVector64 Permute(this BitVector64 src, in Perm p)
+            => BitVector.perm(src,p);
+
+        /// <summary>
+        /// Converts the vector to a bitstring
+        /// </summary>
+        [MethodImpl(Inline)]
+        public static BitString ToBitString(this BitVector64 x)
+            => x.data.ToBitString();
+
+        /// <summary>
+        /// Formats the bitvector as a bitstring
+        /// </summary>
+        /// <param name="tlz">True if leadzing zeros should be trimmed, false otherwise</param>
+        /// <param name="specifier">True if the prefix specifier '0b' should be prepended</param>
+        /// <param name="blockWidth">The width of the blocks, if any</param>
+        [MethodImpl(Inline)]
+        public static string Format(this BitVector64 x, bool tlz = false, bool specifier = false, int? blockWidth = null, int? rowWidth = null)
+            => x.ToBitString().Format(tlz, specifier, blockWidth, null, rowWidth);
     }
 
 }

@@ -5,23 +5,19 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Threading;
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
-    using System.Diagnostics;
 
     using static zfunc;
 
     public static class BitMatrix16x
     {   
-
         /// <summary>
         /// Converts the matrix to a bitvector
         /// </summary>
         [MethodImpl(Inline)]
-        public static BitVector<N256,ushort> ToBitVector(this BitMatrix16 A)
-            => BitVector.natural(A.Data, n256);
+        public static BitCells<N256,ushort> ToCells(this BitMatrix16 A)
+            => BitCells.from(A.Data, n256);
 
         /// <summary>
         /// Creates the matrix determined by a permutation

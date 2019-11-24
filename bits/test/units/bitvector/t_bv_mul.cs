@@ -29,9 +29,9 @@ namespace Z0
 
         public void bvmul_8u_bench()
         {
-            var lhsSrc = Random.Stream<byte>().Take(SampleSize).Select(BitVector8.FromScalar).ToArray();
-            var rhsSrc = Random.Stream<byte>().Take(SampleSize).Select(BitVector8.FromScalar).ToArray();
-            var result = BitVector8.Alloc();                        
+            var lhsSrc = Random.Stream<byte>().Take(SampleSize).Select(x => BitVector.from(n8,x)).ToArray();
+            var rhsSrc = Random.Stream<byte>().Take(SampleSize).Select(x => BitVector.from(n8,x)).ToArray();
+            var result = BitVector.alloc(n8);
             int Bench()
             {                
                 for(var i=0; i< CycleCount; i++)

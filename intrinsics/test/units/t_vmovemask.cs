@@ -105,7 +105,7 @@ namespace Z0
                 var mmExpect = BitVector.alloc(n32);
                 for(byte r=0; r<srcVector.Length(); r++)
                     if(BitMask.test(srcSpan[r], 31))
-                        mmExpect.Enable(r);
+                        BitVector.enable(mmExpect,r);
                 
                 var mmActual = dfp.vmovemask(srcVector).ToBitVector(n32);
                 Claim.yea(mmExpect == mmActual);
@@ -124,7 +124,7 @@ namespace Z0
                 var mmExpect = BitVector.alloc(n32);
                 for(byte r=0; r<srcVector.Length(); r++)
                     if(BitMask.test(srcSpan[r], 63))
-                        mmExpect.Enable(r);
+                        BitVector.enable(mmExpect,r);
                 
                 var mmActual = dfp.vmovemask(srcVector).ToBitVector(n32);
                 Claim.yea(mmExpect == mmActual);

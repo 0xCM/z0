@@ -16,8 +16,8 @@ namespace Z0
         /// Converts the matrix to a bitvector
         /// </summary>
         [MethodImpl(Inline)]
-        public static BitVector<N4096,ulong> ToBitVector(this BitMatrix64 A)
-            => BitVector.natural(A.Data, n4096);
+        public static BitCells<N4096,ulong> ToBitVector(this BitMatrix64 A)
+            => BitCells.from(A.Data, n4096);
 
         /// <summary>
         /// Creates the matrix determined by a permutation
