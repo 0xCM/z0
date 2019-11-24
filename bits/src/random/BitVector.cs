@@ -167,7 +167,7 @@ namespace Z0
         public static BitVector<N,T> BitVector<N,T>(this IPolyrand random)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => BV.natural<N,T>(random.Stream<T>().ToSpan(Z0.BitGrid.segcount<N,N1,T>()));
+                => BV.natural<N,T>(random.Stream<T>().ToSpan(BitCalcs.segcount<N,N1,T>()));
 
         /// <summary>
         /// Produces a random generic bitvector of specified length

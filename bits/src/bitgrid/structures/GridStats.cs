@@ -14,6 +14,69 @@ namespace Z0
 
     public class GridStats
     {        
+        /// <summary>
+        /// Computes grid map summary information
+        /// </summary>
+        /// <param name="map">The map to summarize</param>
+        [MethodImpl(Inline)]
+        public static GridStats Define<T>(ushort rows, ushort cols)
+            where T : unmanaged
+                => Define(GridMap.Define(GridSpec.Define<T>(rows,cols)));
+
+        /// <summary>
+        /// Computes grid map summary information
+        /// </summary>
+        /// <param name="map">The map to summarize</param>
+        [MethodImpl(Inline)]
+        public static GridStats Define(ushort rows, ushort cols, ushort segwidth)
+            => Define(GridMap.Define(GridSpec.Define(rows,cols,segwidth)));
+
+        /// <summary>
+        /// Defines a standard header for a grid map summary line
+        /// </summary>
+        /// <param name="colpad">The amount by which to pad each column</param>
+        /// <param name="delimiter">The column separator</param>
+        public static string FormatHeader(int? colpad = null, char? delimiter = null)
+        {
+            var pad = colpad ?? 10;
+            var sep = delimiter ?? AsciSym.Pipe;
+            var format = sbuild();
+            format.Append($"moniker".PadRight(pad));
+            format.Append($" {sep} rows".PadRight(pad));
+            format.Append($" {sep} cols".PadRight(pad));
+            format.Append($" {sep} segsize".PadRight(pad));
+            format.Append($" {sep} points".PadRight(pad));
+            format.Append($" {sep} segs".PadRight(pad));
+            format.Append($" {sep} bits".PadRight(pad));
+            format.Append($" {sep} bytes".PadRight(pad));
+            format.Append($" {sep} v128".PadRight(pad));
+            format.Append($" {sep} v128/r".PadRight(pad));
+            format.Append($" {sep} v256".PadRight(pad));
+            format.Append($" {sep} v256/r".PadRight(pad));
+            return format.ToString();
+        }
+
+        public static string Format(GridStats stats, int? colpad = null, char? delimiter = null)
+        {
+            var format = sbuild();
+            var pad = colpad ?? 10;
+            var sep = delimiter ?? AsciSym.Pipe;
+            format.Append($"{stats.Moniker}".PadRight(pad));
+            format.Append($" {sep} {stats.RowCount}".PadRight(pad));
+            format.Append($" {sep} {stats.ColCount}".PadRight(pad));
+            format.Append($" {sep} {stats.SegWidth}".PadRight(pad));
+            format.Append($" {sep} {stats.PointCount}".PadRight(pad));
+            format.Append($" {sep} {stats.SorageSegs}".PadRight(pad));
+            format.Append($" {sep} {stats.StorageBits}".PadRight(pad));
+            format.Append($" {sep} {stats.StorageBytes}".PadRight(pad));
+            format.Append($" {sep} {stats.Vec128Count}".PadRight(pad));
+            format.Append($" {sep} {stats.Vec128Remainder}".PadRight(pad));
+            format.Append($" {sep} {stats.Vec256Count}".PadRight(pad));
+            format.Append($" {sep} {stats.Vec256Remainder}".PadRight(pad));
+            return format.ToString();
+        }
+
+
         [MethodImpl(Inline)]
         public static GridStats Define(GridMap src)
             => new GridStats

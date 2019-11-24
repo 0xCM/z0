@@ -19,7 +19,7 @@ namespace Z0
             {
                 var filename = FileName.Define($"GridMap{segwidth}.csv");
                 using var dst = LogArea.Test.LogWriter(filename);
-                dst.WriteLine(BitGrid.header());
+                dst.WriteLine(GridStats.FormatHeader());
                 var points = (
                     from row in range(minsegs,maxsegs)
                     from col in range(minsegs,maxsegs)
@@ -29,7 +29,7 @@ namespace Z0
 
                 for(var i = 0; i<points.Length; i++)
                 {                    
-                    var gs = BitGrid.map(points[i].row, points[i].col, segwidth).Stats();
+                    var gs = GridMap.Define(points[i].row, points[i].col, segwidth).Stats();
                         if(gs.Vec256Remainder == 0 || gs.Vec128Remainder == 0)
                             dst.WriteLine(gs.Format());
                 }

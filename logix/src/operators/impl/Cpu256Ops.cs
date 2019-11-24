@@ -193,7 +193,7 @@ namespace Z0.Logix
         [MethodImpl(Inline)]
         public static bit same<T>(Vector256<T> a, Vector256<T> b)
             where T : unmanaged
-                => ginx.vtestc(equals(a,b));
+                => ginx.vtestc(ginx.veq(a,b));
 
         [MethodImpl(Inline)]
         public static Vector256<T> lt<T>(Vector256<T> a, Vector256<T> b)

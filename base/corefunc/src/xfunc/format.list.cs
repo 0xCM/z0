@@ -77,6 +77,23 @@ namespace Z0
             => src.ReadOnly().FormatList(delimiter, offset, pad);
 
         /// <summary>
+        /// Formats a span of pairs as a delimited list
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <param name="delimiter">The delimiter</param>
+        /// <param name="offset">The position at which formatting should begin</param>
+        /// <typeparam name="T">The element type</typeparam>
+        public static string FormatPairs<T>(this Span<Pair<T>> src, PairFormat style = PairFormat.Tuple,  char delimiter = ',', int offset = 0, int pad = 0)
+            where T : unmanaged
+        {
+            var count = src.Length;
+            Span<string> items = new string[count];
+            for(var i=0; i<count; i++)
+                items[i] =src[i].Format(style);
+            return items.FormatList(delimiter, offset, pad);
+        }
+
+        /// <summary>
         /// Formats a blocked span as a delimited list
         /// </summary>
         /// <param name="src">The source span</param>

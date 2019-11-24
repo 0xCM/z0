@@ -7,12 +7,130 @@ namespace Z0
     using System;
     using System.Linq;
     using System.Reflection;
+    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
 
     using static zfunc;
     
     public class t_bitgrid : BitMatrixTest<t_bitgrid>
     {        
+        public void bg_row_8x4()
+        {
+            var m = n8;
+            var n = n4;
+            var data = Random.Next<uint>();
+            var bs = data.ToBitString();
+            var bg = data.ToBitGrid(m,n);            
+
+            for(var r = 0; r < m; r++)
+            {                
+                var bv1 = BitGrid.row(bg,r);
+                var bs1 = bs.Slice(r*n,n);
+                Claim.eq(bv1, bs1.ToBitVector(n4));                
+            }
+        }
+
+        public void bg_col_32x2()
+        {
+            var m = n32;
+            var n = n2;
+            var xg = Random.BitGrid(m,n);
+            var xs = xg.ToSpan().ToBitString().Transpose(m,n);
+
+            for(var i=0; i<n; i++)
+            {
+                var bv1 = BitGrid.col(xg,i);     
+                var bv2 = xs.Slice(i*m, m).ToBitVector(m);                    
+                Claim.eq(bv1, bv2);
+            }            
+        }
+
+        public void bg_row_16x16()
+        {
+            var m = n16;
+            var n = n16;
+            var grid = Random.BitGrid<ulong>(m,n);
+            var data = grid.ToSpan().AsUInt16();
+            for(var i = 0; i<m; i++)
+            {
+                var row1 = BitGrid.row(grid,i);
+                var row2 = data[i].ToBitVector();
+                Claim.eq(row1,row2);
+            }
+
+        }
+
+
+        public void bg_col_8x4()
+        {
+            var m = n8;
+            var n = n4;
+            var xg = Random.BitGrid(m,n);
+            var xs = xg.ToSpan().ToBitString().Transpose(m,n);
+
+            for(var i=0; i<n; i++)
+            {
+                var bv1 = BitGrid.col(xg,i);     
+                var bv2 = xs.Slice(i*m, m).ToBitVector(m);                    
+                Claim.eq(bv1, bv2);
+            }            
+        }
+
+        public void bg_col_64()
+        {
+
+            var m = n8;
+            var n = n8;
+            var xg = Random.BitGrid(m,n);
+            var xs = xg.ToSpan().ToBitString().Transpose(m,n);
+            for(var i=0; i<n; i++)
+            {
+                var bv1 = BitGrid.col(xg,i);     
+                var bv2 = xs.Slice(i*m, m).ToBitVector(m);                    
+                Claim.eq(bv1, bv2);
+            }            
+
+        }
+
+        public void bg_col_256()
+        {
+            var block = n256;
+            var m = n32;
+            var n = n8;
+            var xg = Random.BitGrid<ulong>(m,n);
+            var xs = xg.ToSpan().ToBitString().Transpose(m,n);
+            for(var i=0; i<n; i++)
+            {
+                var bv1 = BitGrid.col(xg,i);     
+                var bv2 = xs.Slice(i*m, m).ToBitVector(m);                    
+                Claim.eq(bv1, bv2);
+            }            
+        }
+
+        public void bg_col_128()
+        {
+            var block = n128;
+            var m = n16;
+            var n = n8;
+            var xg = Random.BitGrid<ulong>(m,n);
+            var xs = xg.ToSpan().ToBitString().Transpose(m,n);
+            for(var i=0; i<n; i++)
+            {
+                var bv1 = BitGrid.col(xg,i);     
+                var bv2 = xs.Slice(i*m, m).ToBitVector(m);                    
+                Claim.eq(bv1, bv2);
+            }            
+
+        }
+
+        void emit_factors()
+        {
+            var k = 8u;
+            
+            for(var j = 1u; j<= 32u; j*=2)
+                Trace($"{j*k}", gmath.factor(j*k).FormatPairs(PairFormat.Dim));
+
+        }
         public void emit_grid_maps()
             => GridWriter.EmitGridMaps();
 
@@ -23,7 +141,7 @@ namespace Z0
             data.Fill(0b10101010);
 
             ref readonly var src = ref head64(data);
-            var spec = BitGrid.specify(n8, n8, byte.MinValue);
+            var spec = GridSpec.Define(n8, n8, byte.MinValue);
             var map = spec.Map();
             var state = bit.Off;
             Claim.eq(map.PointCount, data.Length * bitsize<byte>());
@@ -64,16 +182,16 @@ namespace Z0
 
         public void natural_layout()
         {
-            var a0 = BitGrid.specify(n21,n32,0u);
-            var b0 = BitGrid.specify(21, 32, 32);
+            var a0 = GridSpec.Define(n21,n32,0u);
+            var b0 = GridSpec.Define(21, 32, 32);
             Claim.eq(a0,b0);
 
-            var a1 = BitGrid.specify(n32,n64,ushort.MinValue);
-            var b1 = BitGrid.specify(32, 64, 16);
+            var a1 = GridSpec.Define(n32,n64,ushort.MinValue);
+            var b1 = GridSpec.Define(32, 64, 16);
             Claim.eq(a1,b1);
 
-            var a2 = BitGrid.specify(n5,n15,byte.MinValue);
-            var b2 = BitGrid.specify(5, 15, 8);
+            var a2 = GridSpec.Define(n5,n15,byte.MinValue);
+            var b2 = GridSpec.Define(5, 15, 8);
             Claim.eq(a2,b2);
         }
 
@@ -195,7 +313,7 @@ namespace Z0
             int segwidth = bitsize<ulong>();
             var segorder = (int)math.log2(segwidth);
 
-            var map = BitGrid.map<ulong>(M,N);
+            var map = GridMap.Define<ulong>(M,N);
             var points = M*N;
             var segs = (points >> segorder) + (points % segwidth != 0 ? 1 : 0);
             Claim.eq(map.SegCount, segs);
@@ -226,7 +344,7 @@ namespace Z0
             const ushort rows = 32;
             const ushort cols = 8;            
             const ushort cellwidth = 8;
-            var map = BitGrid.map(rows, cols, cellwidth);
+            var map = GridMap.Define(rows, cols, cellwidth);
             Claim.eq(8*32, map.StorageBits);
             
             var current = 0;
@@ -247,7 +365,7 @@ namespace Z0
             var points = rows*cols;
             var bytes = points/8 + (points % 8 != 0 ? 1 : 0);
             var bits = bytes/8;
-            var map = BitGrid.map(rows,cols,segwidth);
+            var map = GridMap.Define(rows,cols,segwidth);
             Claim.eq(bytes, map.SegCount);
             Claim.eq(points, map.PointCount);
 

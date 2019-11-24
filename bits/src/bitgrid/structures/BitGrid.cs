@@ -86,6 +86,5 @@ namespace Z0
 
         public override int GetHashCode()
             => throw new NotSupportedException();
-
     }
 }

@@ -24,7 +24,7 @@ namespace Z0.Test
             // for(var i=0; i<y1.Length; i++)
             //     Claim.eq(y1[i], even(i) ? Bit.On : Bit.Off);
 
-            var m2 = BitMask.Lsb32x8;
+            var m2 = BitMask.Lsb32x4;
             var x2 = Bits.gather(UInt32.MaxValue, m2);
             var y2 = Bits.scatter(x2, m2).ToBitVector();
             var bv = m2.ToBitVector();

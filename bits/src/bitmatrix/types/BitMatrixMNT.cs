@@ -102,14 +102,14 @@ namespace Z0
         internal BitMatrix(params T[] src)
         {
             this.data = src;
-            this.moniker = BitGrid.moniker<M,N,T>();
+            this.moniker = GridMoniker.FromTypes<M,N,T>();
         }
 
         [MethodImpl(Inline)]
         internal BitMatrix(Span<T> src)
         {
             this.data = src;
-            this.moniker = BitGrid.moniker<M,N,T>();
+            this.moniker = GridMoniker.FromTypes<M,N,T>();
         }
 
         /// <summary>

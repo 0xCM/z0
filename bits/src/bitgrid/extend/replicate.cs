@@ -10,7 +10,7 @@ namespace Z0
 
     using static zfunc;
 
-    partial class BitGrid
+    partial class BitGridX
     {
         [MethodImpl(Inline)]
         public static RowBits<T> Replicate<T>(this RowBits<T> src, bool structureOnly = false)
@@ -26,8 +26,23 @@ namespace Z0
         public static BitGrid<M,N,T> Replicate<M,N,T>(this BitGrid<M,N,T> src)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
-            where T : unmanaged
+            where T : unmanaged 
                 => new BitGrid<M,N,T>(src.Data.Replicate());
+
+        [MethodImpl(Inline)]
+        public static BitGrid64<M,N,T> Replicate<M,N,T>(this BitGrid64<M,N,T> src)
+            where M : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
+            where T : unmanaged
+                => new BitGrid64<M, N, T>(src.Scalar);
+
+        [MethodImpl(Inline)]
+        public static BitGrid32<M,N,T> Replicate<M,N,T>(this BitGrid32<M,N,T> src)
+            where M : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
+            where T : unmanaged
+                => new BitGrid32<M, N, T>(src.Scalar);
+
     }
 
 }

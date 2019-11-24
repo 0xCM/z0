@@ -13,6 +13,47 @@ namespace Z0
 
     public class GridMap
     {        
+        /// <summary>
+        /// Defines a grid map predicated row count, col count and storage segment bit width width
+        /// </summary>
+        /// <param name="rows">The number of rows in the grid</param>
+        /// <param name="cols">The number of columns in the grid</param>
+        /// <param name="segwidth">The width of a grid cell</param>
+        [MethodImpl(Inline)]
+        public static GridMap Define(ushort rows, ushort cols, ushort segwidth)    
+            => Define(GridSpec.Define(rows,cols, segwidth));
+
+        /// <summary>
+        /// Defines a grid map predicated row count, col count and the bit width of parametric type
+        /// </summary>
+        /// <param name="rows">The number of rows in the grid</param>
+        /// <param name="cols">The number of columns in the grid</param>
+        [MethodImpl(NotInline)]
+        public static GridMap Define<T>(ushort rows, ushort cols)    
+            where T : unmanaged
+                => Define(GridSpec.Define<T>(rows,cols));
+
+        /// <summary>
+        /// Defines a grid map predicated on type parameters
+        /// </summary>
+        /// <param name="RowCount">The number of rows in the grid</param>
+        /// <param name="ColCount">The number of columns in the grid</param>
+        /// <param name="CellWidth">The width of a grid cell</param>
+        /// <typeparam name="T">The storage segment type</typeparam>
+        [MethodImpl(Inline)]
+        public static GridMap Define<M,N,T>(M m = default, N n = default, T zero = default)    
+            where N : unmanaged, ITypeNat
+            where M : unmanaged, ITypeNat
+            where T : unmanaged
+                => Define(GridSpec.Define(m,n, zero));
+
+        /// <summary>
+        /// Defines a grid map predicated on an existing specification
+        /// </summary>
+        /// <param name="spec">The grid specification that characterizes the layout</param>
+        public static GridMap Define(in GridSpec spec)
+            => new GridMap(spec);
+         
         public GridMap(in GridSpec spec)
         {
             this.RowCount = spec.RowCount;
@@ -28,7 +69,7 @@ namespace Z0
             this.RowCount = rows;
             this.ColCount = cols;
             this.SegWidth = segwidth;
-            var spec = BitGrid.specify(rows, cols, segwidth);
+            var spec = GridSpec.Define(rows, cols, segwidth);
             this.StorageBits = spec.StorageBits;
             this.StorageBytes = spec.StorageBytes;
             this.SegCount = spec.StorageSegs;                        
@@ -125,7 +166,7 @@ namespace Z0
         /// <param name="col">The 0-based col index</param>
         [MethodImpl(Inline)]
         public int Pos(int row, int col)
-            => BitGrid.bitpos(ColCount, row,col);
+            => BitCalcs.bitpos(ColCount, row,col);
 
         /// <summary>
         /// Computes the storage segment offset for a row/col coordinate
@@ -143,9 +184,6 @@ namespace Z0
         /// <param name="col">The 0-based col index</param>
         [MethodImpl(Inline)]
         public int Seg(int row, int col)
-            => Pos(row,col) / SegWidth;
-            
-        public override string ToString()
-            => this.Format();    
+            => Pos(row,col) / SegWidth;            
     }
 }

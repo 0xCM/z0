@@ -20,7 +20,7 @@ namespace Z0
             {
                 var x = Random.CpuVector<byte>(n256);
                 var y = dinx.vshuf16x8(x, tr);
-                var xs = x.ToBlockedSpan();
+                var xs = x.ToBlock();
                 for(var j =0; j< xs.Length; j++)
                 {
                     if(j % 2 != 0)

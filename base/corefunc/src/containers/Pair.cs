@@ -9,6 +9,20 @@ namespace Z0
 
     using static zfunc;
 
+    public enum PairFormat
+    {
+        
+        /// <summary>
+        /// Specifies a pair of values a and b is rendered as (a,b)
+        /// </summary>
+        Tuple,
+
+        /// <summary>
+        /// Specifies a pair of values a and b is rendered as axb
+        /// </summary>
+        Dim
+    }
+
     /// <summary>
     /// Defines api surface for pair
     /// </summary>
@@ -90,8 +104,8 @@ namespace Z0
         public bool Equals(Pair<T> rhs)
             => A.Equals(rhs.A) && B.Equals(rhs.B);
 
-        public string Format()
-            => $"({A},{B})";
+        public string Format(PairFormat style = PairFormat.Tuple)
+            => style == PairFormat.Tuple ? $"({A},{B})" : $"{A}x{B}";
 
         public override int GetHashCode()
             => HashCode.Combine(A,B);

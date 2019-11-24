@@ -18,6 +18,20 @@ namespace Z0
     public static class bgoc
     {        
 
+        public static BitGrid64<uint> bg64_and_32(BitGrid64<uint> gx, BitGrid64<uint> gy)
+            => BitGrid.and(gx,gy);
+
+        public static BitGrid64<N16,N4,uint> bg64_and_32(BitGrid64<N16,N4,uint> gx, BitGrid64<N16,N4,uint> gy)
+            => BitGrid.and<uint>(gx,gy);
+
+        public static BitGrid128<uint> bg_and_128x32(BitGrid128<uint> gx, BitGrid128<uint> gy)
+            => BitGrid.and(gx,gy);
+
+        public static BitGrid128<N16,N4,uint> bg_and_16x4_128x32(BitGrid128<N16,N4,uint> gx, BitGrid128<N16,N4,uint> gy)
+            => BitGrid.and<uint>(gx,gy);
+
+        public static BitGrid256<N32,N8,uint> bg_and_16x4_128x32(BitGrid256<N32,N8,uint> gx, BitGrid256<N32,N8,uint> gy)
+            => BitGrid.and<uint>(gx,gy);
 
         public static void set_bit(ref uint src, byte pos, bit state)
             => gbits.set(ref src, pos, state);
@@ -72,7 +86,7 @@ namespace Z0
             => BitVector<N23,byte>.SegCount;
 
         public static int count_segs()
-            => BitGrid.segcount<N20,N30,uint>();
+            => BitCalcs.segcount<N20,N30,uint>();
 
         public static bit readbit_row_col_2(int n, ulong src, int row, int col)    
             => BitGrid.readbit(n, in src, row, col);
@@ -84,8 +98,6 @@ namespace Z0
             => BitGrid.load(src, 32,32);
 
 
-        public static GridSpec bg_specify(ushort rows, ushort cols, ushort segwidth)
-            => BitGrid.specify(rows,cols,segwidth);
     }
 
 }

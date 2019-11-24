@@ -1,4 +1,65 @@
-// 2019-11-23 02:41:20:143
+// 2019-11-23 16:56:47:551
+BitGrid64<uint> bg64_and_32(BitGrid64<uint> gx, BitGrid64<uint> gy)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call Z0.BitGrid64`1<System.UInt32> Z0.BitGrid::and<System.UInt32>(Z0.BitGrid64`1<System.UInt32>,Z0.BitGrid64`1<System.UInt32>)
+    IL_0007: ret
+
+}
+BitGrid64<N16,N4,uint> bg64_and_32(BitGrid64<N16,N4,uint> gx, BitGrid64<N16,N4,uint> gy)
+{
+    IL_0000: ldarg.0
+    IL_0001: call Z0.BitGrid64`1<System.UInt32> Z0.BitGrid64`3<Z0.N16,Z0.N4,System.UInt32>::op_Implicit(Z0.BitGrid64`3<Z0.N16,Z0.N4,System.UInt32>)
+    IL_0006: ldarg.1
+    IL_0007: call Z0.BitGrid64`1<System.UInt32> Z0.BitGrid64`3<Z0.N16,Z0.N4,System.UInt32>::op_Implicit(Z0.BitGrid64`3<Z0.N16,Z0.N4,System.UInt32>)
+    IL_000C: call Z0.BitGrid64`1<System.UInt32> Z0.BitGrid::and<System.UInt32>(Z0.BitGrid64`1<System.UInt32>,Z0.BitGrid64`1<System.UInt32>)
+    IL_0011: call Z0.BitGrid64`3<Z0.N16,Z0.N4,System.UInt32> Z0.BitGrid64`3<Z0.N16,Z0.N4,System.UInt32>::op_Implicit(Z0.BitGrid64`1<System.UInt32>)
+    IL_0016: ret
+
+}
+BitGrid128<uint> bg_and_128x32(BitGrid128<uint> gx, BitGrid128<uint> gy)
+{
+    IL_0000: ldarga.s gx
+    IL_0002: ldarga.s gy
+    IL_0004: call Z0.BitGrid128`1<System.UInt32> Z0.BitGrid::and<System.UInt32>(Z0.BitGrid128`1<System.UInt32>&,Z0.BitGrid128`1<System.UInt32>&)
+    IL_0009: ret
+
+}
+BitGrid128<N16,N4,uint> bg_and_16x4_128x32(BitGrid128<N16,N4,uint> gx, BitGrid128<N16,N4,uint> gy)
+{
+    IL_0000: ldarga.s gx
+    IL_0002: call Z0.BitGrid128`1<System.UInt32> Z0.BitGrid128`3<Z0.N16,Z0.N4,System.UInt32>::op_Implicit(Z0.BitGrid128`3<Z0.N16,Z0.N4,System.UInt32>&)
+    IL_0007: stloc.0
+    IL_0008: ldloca.s V_0
+    IL_000A: ldarga.s gy
+    IL_000C: call Z0.BitGrid128`1<System.UInt32> Z0.BitGrid128`3<Z0.N16,Z0.N4,System.UInt32>::op_Implicit(Z0.BitGrid128`3<Z0.N16,Z0.N4,System.UInt32>&)
+    IL_0011: stloc.1
+    IL_0012: ldloca.s V_1
+    IL_0014: call Z0.BitGrid128`1<System.UInt32> Z0.BitGrid::and<System.UInt32>(Z0.BitGrid128`1<System.UInt32>&,Z0.BitGrid128`1<System.UInt32>&)
+    IL_0019: stloc.2
+    IL_001A: ldloca.s V_2
+    IL_001C: call Z0.BitGrid128`3<Z0.N16,Z0.N4,System.UInt32> Z0.BitGrid128`3<Z0.N16,Z0.N4,System.UInt32>::op_Implicit(Z0.BitGrid128`1<System.UInt32>&)
+    IL_0021: ret
+
+}
+BitGrid256<N32,N8,uint> bg_and_16x4_128x32(BitGrid256<N32,N8,uint> gx, BitGrid256<N32,N8,uint> gy)
+{
+    IL_0000: ldarga.s gx
+    IL_0002: call Z0.BitGrid256`1<System.UInt32> Z0.BitGrid256`3<Z0.N32,Z0.N8,System.UInt32>::op_Implicit(Z0.BitGrid256`3<Z0.N32,Z0.N8,System.UInt32>&)
+    IL_0007: stloc.0
+    IL_0008: ldloca.s V_0
+    IL_000A: ldarga.s gy
+    IL_000C: call Z0.BitGrid256`1<System.UInt32> Z0.BitGrid256`3<Z0.N32,Z0.N8,System.UInt32>::op_Implicit(Z0.BitGrid256`3<Z0.N32,Z0.N8,System.UInt32>&)
+    IL_0011: stloc.1
+    IL_0012: ldloca.s V_1
+    IL_0014: call Z0.BitGrid256`1<System.UInt32> Z0.BitGrid::and<System.UInt32>(Z0.BitGrid256`1<System.UInt32>&,Z0.BitGrid256`1<System.UInt32>&)
+    IL_0019: stloc.2
+    IL_001A: ldloca.s V_2
+    IL_001C: call Z0.BitGrid256`3<Z0.N32,Z0.N8,System.UInt32> Z0.BitGrid256`3<Z0.N32,Z0.N8,System.UInt32>::op_Implicit(Z0.BitGrid256`1<System.UInt32>&)
+    IL_0021: ret
+
+}
 void set_bit(ref uint src, byte pos, bit state)
 {
     IL_0000: ldarg.0

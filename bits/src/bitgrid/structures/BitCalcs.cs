@@ -10,8 +10,44 @@ namespace Z0
 
     using static zfunc;
 
-    partial class BitGrid
+    public static class BitCalcs
     {
+        /// <summary>
+        /// Computes the 0-based linear index determined by a row/col coordinate
+        /// </summary>
+        /// <param name="row">The 0-based row index</param>
+        /// <param name="col">The 0-based col index</param>
+        [MethodImpl(Inline)]
+        public static int bitpos(int gridwidth, int row, int col)
+            => row*gridwidth+ col;
+
+        /// <summary>
+        /// Computes the number of bytes required to cover a grid, predicated on row/col counts
+        /// </summary>
+        /// <param name="rows">The number of grid rows</param>
+        /// <param name="cols">The number of grid columns</param>
+        [MethodImpl(Inline)]
+        public static int bytecount(ushort rows, ushort cols)
+        {
+            var points = rows*cols;
+            return (points >> 3) + (points % 8 != 0 ? 1 : 0);
+        }
+
+        /// <summary>
+        /// Computes the number of bytes required to cover a grid, predicated on natural row/col counts
+        /// </summary>
+        /// <param name="m">The row count representative</param>
+        /// <param name="n">The col count representative</param>
+        /// <typeparam name="M">The row type</typeparam>
+        /// <typeparam name="N">The col type</typeparam>
+        [MethodImpl(Inline)]
+        public static int bytecount<M,N>(M m = default, N n = default)
+            where M : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
+        {
+            var points = NatMath.mul(m,n);
+            return (points >> 3) + (points % 8 != 0 ? 1 : 0);
+        }
 
         /// <summary>
         /// Computes the number of segments required to cover a grid
@@ -55,6 +91,27 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where T : unmanaged
                 => segcount(natval(m), natval(n), (ushort)bitsize<T>());
+
+        /// <summary>
+        /// Computes the number of points in a grid, predicated on row and column counts
+        /// </summary>
+        /// <param name="rows">The grid row count</param>
+        /// <param name="cols">The grid col count</param>
+        [MethodImpl(Inline)]
+        public static int points(int rows, int cols)
+            => rows * cols;
+
+        /// <summary>
+        /// Computes the number of points in a grid, predicated on natural dimensions
+        /// </summary>
+        /// <param name="rows">The grid row count</param>
+        /// <param name="cols">The grid col count</param>
+        [MethodImpl(Inline)]
+        public static int points<M,N>(M m = default, N n = default)
+            where M : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
+                => NatMath.mul(m,n);
+         
     }
 
 }

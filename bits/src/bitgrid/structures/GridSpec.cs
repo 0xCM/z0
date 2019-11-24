@@ -16,25 +16,6 @@ namespace Z0
     /// </summary>
     public readonly struct GridSpec
     {
-        [MethodImpl(Inline)]
-        public static bool operator ==(GridSpec a, GridSpec b)
-            => a.Equals(b);
-
-        [MethodImpl(Inline)]
-        public static bool operator !=(GridSpec a, GridSpec b)
-            => !a.Equals(b);
-
-        [MethodImpl(Inline)]
-        public GridSpec(ushort rows, ushort cols, ushort segwidth)
-        {
-            this.RowCount = rows;
-            this.ColCount = cols;
-            this.SegWidth = segwidth;
-            this.StorageBytes = BitGrid.bytecount(rows, cols);
-            this.StorageBits = StorageBytes*8;
-            this.StorageSegs = BitGrid.segcount(rows,cols,segwidth);
-        }
-
         /// <summary>
         /// The number of grid rows
         /// </summary>
@@ -64,6 +45,53 @@ namespace Z0
         /// The the toal number of segments allocated for storage
         /// </summary>
         public readonly int StorageSegs;
+
+
+        /// <summary>
+        /// Defines a grid specification predicated on specified row count, col count and bit width
+        /// </summary>
+        /// <param name="rows">The number of rows in the grid</param>
+        /// <param name="cols">The number of columns in the grid</param>
+        /// <param name="segwidth">The width of a grid cell</param>
+        [MethodImpl(Inline)]
+        public static GridSpec Define(ushort rows, ushort cols, ushort segwidth)    
+            => new GridSpec(rows: rows, cols : cols, segwidth : segwidth);
+
+        /// <summary>
+        /// Defines a grid specification predicated on specified row count, col count and bit width of a parametric type
+        /// </summary>
+        /// <param name="rows">The number of rows in the grid</param>
+        /// <param name="cols">The number of columns in the grid</param>
+        [MethodImpl(Inline)]
+        public static GridSpec Define<T>(ushort rows, ushort cols) 
+            where T : unmanaged   
+                => Define(rows, cols, (ushort)bitsize<T>());
+         
+        [MethodImpl(Inline)]
+        public static GridSpec Define<M,N,T>(M m = default, N n = default, T zero = default)
+            where N : unmanaged, ITypeNat
+            where M : unmanaged, ITypeNat
+            where T : unmanaged
+                => Define<T>(natval<M>(), natval<N>());
+
+        [MethodImpl(Inline)]
+        public static bool operator ==(GridSpec a, GridSpec b)
+            => a.Equals(b);
+
+        [MethodImpl(Inline)]
+        public static bool operator !=(GridSpec a, GridSpec b)
+            => !a.Equals(b);
+
+        [MethodImpl(Inline)]
+        public GridSpec(ushort rows, ushort cols, ushort segwidth)
+        {
+            this.RowCount = rows;
+            this.ColCount = cols;
+            this.SegWidth = segwidth;
+            this.StorageBytes = BitCalcs.bytecount(rows, cols);
+            this.StorageBits = StorageBytes*8;
+            this.StorageSegs = BitCalcs.segcount(rows,cols,segwidth);
+        }
 
         [MethodImpl(Inline)]
         public bool Equals(GridSpec rhs)

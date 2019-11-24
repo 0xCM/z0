@@ -10,17 +10,19 @@ namespace Z0
 
     using static zfunc;
 
-    partial class BitGrid
+    partial class BitGridX
     {
-        /// <summary>
-        /// Computes the 0-based linear index determined by a row/col coordinate
-        /// </summary>
-        /// <param name="row">The 0-based row index</param>
-        /// <param name="col">The 0-based col index</param>
-        [MethodImpl(Inline)]
-        public static int bitpos(int gridwidth, int row, int col)
-            => row*gridwidth+ col;
 
+        /// <summary>
+        /// Calculates a grid layout from a specification
+        /// </summary>
+        /// <param name="spec">The grid specification that characterizes the layout</param>
+        /// <typeparam name="T">The storage type</typeparam>
+        public static GridMap Map(this GridSpec spec)
+            => GridMap.Define(spec);
+
+        public static GridStats Stats(this GridMap map)
+            => GridStats.Define(map);
 
     }
 

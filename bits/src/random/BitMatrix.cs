@@ -191,7 +191,7 @@ namespace Z0
             where T : unmanaged
         {
             var grid = Z0.BitGrid.alloc(m,n,zero);
-            var segments = Z0.BitGrid.segcount(m,n,zero);
+            var segments = BitCalcs.segcount(m,n,zero);
             random.Fill(segments, ref grid.Head);
             return grid;
         }

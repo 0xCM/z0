@@ -20,6 +20,11 @@ namespace Z0
     {                
         readonly Span<T> data;
 
+        /// <summary>
+        /// The grid dimension
+        /// </summary>
+        public static Dim<M,N> Dim => default;
+
         [MethodImpl(Inline)]
         public static bool operator ==(in BitGrid<M,N,T> g1, in BitGrid<M,N,T> g2)
             => g1.Equals(g2);
