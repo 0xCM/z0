@@ -13,7 +13,6 @@ namespace Z0
 
     partial class BitVectorX
     {
-
         /// <summary>
         /// Converts a generic bitvector to natural bitvector
         /// </summary>
@@ -43,12 +42,49 @@ namespace Z0
             where T : unmanaged
             where N : unmanaged, ITypeNat
                 => BitString.from<T>(src.Scalar, natval<N>());
-
+        
         [MethodImpl(Inline)]
         public static BitVector<N,T> ToBitVector<N,T>(this BitString src)
             where T : unmanaged
             where N : unmanaged, ITypeNat
                 => BitVector.natural<N,T>(src);
+
+
+        /// <summary>
+        /// Defines a bitvector over an 8-bit cell of specified natural width
+        /// </summary>
+        /// <param name="src">The source value</param>
+        [MethodImpl(Inline)]
+        public static BitVector<N,byte> ToNatBits<N>(this byte src, N n = default)
+            where N : unmanaged, ITypeNat
+                => src;
+
+        /// <summary>
+        /// Defines a bitvector over a 16-bit cell of specified natural width
+        /// </summary>
+        /// <param name="src">The source value</param>
+        [MethodImpl(Inline)]
+        public static BitVector<N,ushort> ToNatBits<N>(this ushort src, N n = default)
+            where N : unmanaged, ITypeNat
+                => src;
+
+        /// <summary>
+        /// Defines a bitvector over a 32-bit cell of specified natural width
+        /// </summary>
+        /// <param name="src">The source value</param>
+        [MethodImpl(Inline)]
+        public static BitVector<N,uint> ToNatBits<N>(this uint src, N n = default)
+            where N : unmanaged, ITypeNat
+                => src;
+
+        /// <summary>
+        /// Defines a bitvector over a 64-bit cell of specified natural width
+        /// </summary>
+        /// <param name="src">The source value</param>
+        [MethodImpl(Inline)]
+        public static BitVector<N,ulong> ToNatBits<N>(this ulong src, N n = default)
+            where N : unmanaged, ITypeNat
+                => src;        
 
         [MethodImpl(Inline)]
         public static string Format<N,T>(this BitVector<N,T> src, bool tlz = false, bool specifier = false, int? blockWidth = null)

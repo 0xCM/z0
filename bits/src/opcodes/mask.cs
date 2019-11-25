@@ -11,6 +11,20 @@ namespace Z0
 
     partial class bvoc
     {
+        public static uint max_val_nbv_4()
+            => BitVector<N4,uint>.MaxValue;
+
+        public static uint max_val_nbv_8()
+            => BitVector<N8,uint>.MaxValue;
+
+        public static BitVector<N8,uint> add(BitVector<N8,uint> x,BitVector<N8,uint> y)
+            => x + y;
+
+        public static BitVector<N8,uint> inc(BitVector<N8,uint> src)
+            => ++src; 
+
+        public static BitVector<N8,uint> dec(BitVector<N8,uint> src)
+            => --src; 
 
         public static bit mod_prod_nbv(BitVector<N23,uint> x, BitVector<N23,uint> y)
             => BitVector.modprod(x,y);

@@ -12,26 +12,25 @@ namespace Z0
 
     partial class BitVector
     {
-
         [MethodImpl(Inline)]
         public static BitVector4 from(N4 n, byte src)
-            => new BitVector4(src);
+            => src;
 
         [MethodImpl(Inline)]
-        public static BitVector4 from(N4 n, ushort data)
-            => new BitVector4((byte)data);
+        public static BitVector4 from(N4 n, ushort src)
+            => (byte)src;
 
         [MethodImpl(Inline)]
-        public static BitVector4 from(N4 n, uint data)
-            => new BitVector4((byte)data);
+        public static BitVector4 from(N4 n, uint src)
+            => (byte)src;
 
         [MethodImpl(Inline)]
-        public static BitVector4 from(N4 n, ulong data)
-            => new BitVector4((byte)data);
+        public static BitVector4 from(N4 n, ulong src)
+            => (byte)src;
 
         [MethodImpl(Inline)]
-        public static BitVector4 direct(N4 n, ulong data)
-            => new BitVector4((byte)data, true);
+        public static BitVector4 direct(N4 n, ulong src)
+            => new BitVector4((byte)src, true);
         
         /// <summary>
         /// Creates a 4-bit bitvector from explicit bitss

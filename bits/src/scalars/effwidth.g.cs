@@ -19,6 +19,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The bit source</param>
         /// <typeparam name="T">The source type</typeparam>
+        [MethodImpl(Inline)]
         public static BitView<T> view<T>(ref T src)
             where T: unmanaged
                 => new BitView<T>(ref src);
@@ -29,7 +30,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The source type</typeparam>
         [MethodImpl(Inline)]
-        public static uint effwidth<T>(T src)
+        public static int effwidth<T>(T src)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -43,8 +44,5 @@ namespace Z0
             else            
                 throw unsupported<T>();
         }           
-
-
     }
-
 }

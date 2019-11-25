@@ -25,7 +25,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitCells<T> ToCells<T>(this BitVector<T> src)
             where T : unmanaged
-                => BitCells.from(src.Scalar);
+                => BitCells.literals(src.Scalar);
 
         /// <summary>
         /// Defines an 8-bit generic bitvector from an unsigned integer of commensurate width
@@ -84,6 +84,13 @@ namespace Z0
             where T : unmanaged
                 => BitString.from<T>(src.Scalar,width);
 
+        /// <summary>
+        /// Clones the vector
+        /// </summary>
+        [MethodImpl(Inline)]
+        public static BitVector<T> Replicate<T>(this BitVector<T> src)
+            where T : unmanaged
+                => src.Scalar;
 
         [MethodImpl(Inline)]
         public static BitVector<T> Reverse<T>(this BitVector<T> src)

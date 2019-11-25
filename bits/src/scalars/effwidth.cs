@@ -18,7 +18,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
-        public static uint effwidth(in byte src)
+        public static int effwidth(in byte src)
             => 8 - nlz(src);
 
         /// <summary>
@@ -26,7 +26,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
-        public static uint effwidth(in ushort src)
+        public static int effwidth(in ushort src)
             => 16 - nlz(src);
 
         /// <summary>
@@ -34,7 +34,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
-        public static uint effwidth(uint src)
+        public static int effwidth(uint src)
             => 32 - nlz(src);
 
         /// <summary>
@@ -42,7 +42,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
-        public static uint effwidth(ulong src)
+        public static int effwidth(ulong src)
             => 64 - nlz(src);
     }
 

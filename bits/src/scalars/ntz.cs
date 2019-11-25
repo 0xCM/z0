@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Numerics;
     using System.Runtime.Intrinsics;
     using System.Runtime.Intrinsics.X86;
 
@@ -23,8 +22,8 @@ namespace Z0
         /// </summary>
         /// <param name="src">The bit source</param>
         [MethodImpl(Inline)]
-        public static uint ntz(sbyte src)
-           => (uint)TrailingZeroCount((uint)src);
+        public static int ntz(sbyte src)
+           => (int)TrailingZeroCount((uint)src);
 
         /// <summary>
         /// int _mm_tzcnt_32 (unsigned int a) TZCNT reg, reg/m32
@@ -32,8 +31,8 @@ namespace Z0
         /// </summary>
         /// <param name="src">The bit source</param>
         [MethodImpl(Inline)]
-        public static uint ntz(byte src)
-           => (uint)TrailingZeroCount(src);
+        public static int ntz(byte src)
+           => (int)TrailingZeroCount((uint)src);
 
         /// <summary>
         /// int _mm_tzcnt_32 (unsigned int a) TZCNT reg, reg/m32
@@ -41,8 +40,8 @@ namespace Z0
         /// </summary>
         /// <param name="src">The bit source</param>
         [MethodImpl(Inline)]
-        public static uint ntz(short src)
-           => (uint)TrailingZeroCount((uint)src);
+        public static int ntz(short src)
+           => (int)TrailingZeroCount((uint)src);
 
         /// <summary>
         /// int _mm_tzcnt_32 (unsigned int a) TZCNT reg, reg/m32
@@ -50,8 +49,8 @@ namespace Z0
         /// </summary>
         /// <param name="src">The bit source</param>
         [MethodImpl(Inline)]
-        public static uint ntz(ushort src)
-             => (uint)TrailingZeroCount(src);
+        public static int ntz(ushort src)
+            => (int)TrailingZeroCount((uint)src);
 
         /// <summary>
         /// int _mm_tzcnt_32 (unsigned int a) TZCNT reg, reg/m32
@@ -59,8 +58,8 @@ namespace Z0
         /// </summary>
         /// <param name="src">The bit source</param>
          [MethodImpl(Inline)]
-         public static uint ntz(int src)
-            => (uint)TrailingZeroCount((uint)src);
+         public static int ntz(int src)
+            => (int)TrailingZeroCount((uint)src);
 
         /// <summary>
         /// int _mm_tzcnt_32 (unsigned int a) TZCNT reg, reg/m32
@@ -68,16 +67,16 @@ namespace Z0
         /// </summary>
         /// <param name="src">The bit source</param>
         [MethodImpl(Inline)]
-        public static uint ntz(uint src)
-            => (uint)TrailingZeroCount(src);
+        public static int ntz(uint src)
+            => (int)TrailingZeroCount(src);
 
         /// <summary>
         /// Counts the number of trailing zero bits in the source
         /// </summary>
         /// <param name="src">The bit source</param>
          [MethodImpl(Inline)]
-         public static uint ntz(long src)
-            => (uint)TrailingZeroCount((ulong)src);
+         public static int ntz(long src)
+            => (int)TrailingZeroCount((ulong)src);
 
         /// <summary>
         /// __int64 _mm_tzcnt_64 (unsigned __int64 a) TZCNT reg, reg/m64
@@ -85,7 +84,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The bit source</param>
         [MethodImpl(Inline)]
-        public static uint ntz(ulong src)
-            =>(uint) TrailingZeroCount(src);
+        public static int ntz(ulong src)
+            => (int) TrailingZeroCount(src);
     }
 }

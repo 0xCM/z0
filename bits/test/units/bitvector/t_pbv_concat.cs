@@ -9,8 +9,7 @@ namespace Z0
 
     using static zfunc;
 
-
-    public class t_bv_concat : BitVectorTest<t_bv_concat>
+    public class t_pbv_concat : t_bv<t_pbv_concat>
     {
         public void bv_inc_8()
         {            

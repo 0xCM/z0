@@ -7,11 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
-    using System.Collections.Generic;
 
     using static zfunc;    
-    using static nfunc;
-    using static As;
 
     partial class BitVector
     {
@@ -35,7 +32,7 @@ namespace Z0
             where T : unmanaged
             where N : unmanaged, ITypeNat
                 => gmath.srl(gbits.rev(x.Scalar), bitsize<T>() - x.Width);
-                
+
         /// <summary>
         /// Reverses the bits in the source vector
         /// </summary>

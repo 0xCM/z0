@@ -31,7 +31,7 @@ namespace Z0
         /// <param name="x">The source bitvector</param>
         /// <param name="s">The shift amount</param>
         [MethodImpl(Inline)]
-        public static BitVector<T> srl<N,T>(BitVector<N,T> x, int s)
+        public static BitVector<N,T> srl<N,T>(BitVector<N,T> x, int s)
             where T : unmanaged
             where N : unmanaged, ITypeNat
                 => gmath.srl(x.Scalar,s);
@@ -93,6 +93,5 @@ namespace Z0
             vblock.srlx(n128, in x.x0, (byte)s, ref z.x0);
             return z;
         }
-
     }
 }

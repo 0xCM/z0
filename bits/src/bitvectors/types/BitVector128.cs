@@ -291,7 +291,7 @@ namespace Z0
         /// <summary>
         /// The number of bits represented by the vector
         /// </summary>
-        public readonly uint Width
+        public readonly int Width
         {
             [MethodImpl(Inline)]
             get => 128;

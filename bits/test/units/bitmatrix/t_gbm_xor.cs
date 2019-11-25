@@ -9,21 +9,21 @@ namespace Z0
 
     using static zfunc;
 
-    public class t_bm_xor : BitMatrixTest<t_bm_xor>
+    public class t_gbm_xor : BitMatrixTest<t_gbm_xor>
     {        
-        public void xor_8x8g()
-            => xor_generic_check<byte>();
+        public void gbm_xor_8()
+            => gbm_xor_check<byte>();
 
-        public void xor_16x16g()
-            => xor_generic_check<ushort>();
+        public void gbm_xor_16()
+            => gbm_xor_check<ushort>();
 
-        public void xor_32x32g()
-            => xor_generic_check<uint>();
+        public void gbm_xor_32()
+            => gbm_xor_check<uint>();
 
-        public void xor_64x64g()
-            => xor_generic_check<ulong>();
+        public void gbm_xor_64()
+            => gbm_xor_check<ulong>();
 
-       void xor_generic_check<T>()
+       protected void gbm_xor_check<T>()
             where T : unmanaged
         {
             var Z = BitMatrix.alloc<T>();

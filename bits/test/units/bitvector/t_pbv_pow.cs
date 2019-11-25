@@ -11,7 +11,7 @@ namespace Z0
 
     using static zfunc;
 
-    public class t_bv_pow : BitVectorTest<t_bv_pow>
+    public class t_pbv_pow : t_bv<t_pbv_pow>
     {
         public void bv_pow_8()
         {

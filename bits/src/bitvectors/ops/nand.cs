@@ -7,11 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
-    using System.Collections.Generic;
 
     using static zfunc;    
-    using static nfunc;
-    using static As;
 
     partial class BitVector
     {
@@ -24,6 +21,18 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitVector<T> nand<T>(BitVector<T> x, BitVector<T> y)
             where T : unmanaged
+                => gmath.nand(x.Scalar, y.Scalar);
+
+        /// <summary>
+        /// Computes z := ~(x & y) for bitvectors x and y
+        /// </summary>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
+        /// <typeparam name="T">The primal type</typeparam>
+        [MethodImpl(Inline)]
+        public static BitVector<N,T> nand<N,T>(BitVector<N,T> x, BitVector<N,T> y)
+            where T : unmanaged
+            where N : unmanaged, ITypeNat
                 => gmath.nand(x.Scalar, y.Scalar);
 
         /// <summary>
@@ -77,7 +86,7 @@ namespace Z0
         /// <param name="x">The left bitvector</param>
         /// <param name="y">The right bitvector</param>
         [MethodImpl(Inline)]
-        public static BitVector128 nand(BitVector128 x, BitVector128 y)
+        public static BitVector128 nand(in BitVector128 x, in BitVector128 y)
             => from(n128, gmath.nand(x.x0, y.x0), gmath.nand(x.x1,  y.x1));
     }
 }

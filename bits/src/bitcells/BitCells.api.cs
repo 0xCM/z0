@@ -13,10 +13,10 @@ namespace Z0
     public static class BitCells
     {
         /// <summary>
-        /// Defines a natural generic bitvector, either tmpty or filled with an optional value if specified
+        /// Allocates a natural bitcell container filled with a specified value
         /// </summary>
         /// <param name="n">The natural length of the vector in bits</param>
-        /// <param name="fill">The optional fill value</param>
+        /// <param name="fill">The fill value</param>
         /// <typeparam name="N">The natural type upon which the vector is predicated</typeparam>
         /// <typeparam name="T">The primal type upon which the vector is predicated</typeparam>
         [MethodImpl(Inline)]
@@ -25,110 +25,103 @@ namespace Z0
             where T : unmanaged
                 => BitCells<N,T>.Alloc(fill);
 
+        /// <summary>
+        /// Allocates a zero-filled natural bitcell container
+        /// </summary>
+        /// <param name="n">The natural length of the vector in bits</param>
+        /// <param name="fill">The fill value</param>
+        /// <typeparam name="N">The natural type upon which the vector is predicated</typeparam>
+        /// <typeparam name="T">The primal type upon which the vector is predicated</typeparam>
         [MethodImpl(Inline)]
         public static BitCells<N,T> alloc<N,T>(N n = default)
             where N : unmanaged, ITypeNat
             where T : unmanaged
                 => BitCells<N,T>.Alloc();
 
-        [MethodImpl(NotInline)]
-        public static BitCells<T> alloc<T>(int blocks)        
-            where T : unmanaged
-                => new BitCells<T>(DataBlocks.alloc<T>(n256,blocks));
-
         /// <summary>
-        /// Creates a generic bitvector defined by an arbitrary number of segments
+        /// Creates a generic bitcell container over an arbitrary number of segments
         /// </summary>
         /// <param name="src">The source segment</param>
         [MethodImpl(Inline)]
-        public static BitCells<T> from<T>(params T[] src)
+        public static BitCells<T> literals<T>(params T[] src)
             where T : unmanaged
                 => new BitCells<T>(src, bitsize<T>()*src.Length);
 
         /// <summary>
-        /// Defines a natural generic bitvector, initialized with a parameter array for which
-        /// the total bit width is at least the value defined by the natural parameter
+        /// Creates a natural cell container over an arbitrary number of segments
         /// </summary>
         /// <param name="src">The source bits</param>
         /// <typeparam name="N">The natural type upon which the vector is predicated</typeparam>
         /// <typeparam name="T">The primal type upon which the vector is predicated</typeparam>
         [MethodImpl(Inline)]
-        public static BitCells<N,T> from<N,T>(params T[] src)
+        public static BitCells<N,T> literals<N,T>(params T[] src)
             where N : unmanaged, ITypeNat
             where T : unmanaged
                 => BitCells<N, T>.FromArray(src);
 
         /// <summary>
-        /// Defines a natural generic bitvector, initialized with an array for which
-        /// the total bit width is at least the value defined by the natural parameter
-        /// </summary>
-        /// <param name="src">The source bits</param>
-        /// <param name="n">The natural length of the vector in bits</param>
-        /// <typeparam name="N">The natural type upon which the vector is predicated</typeparam>
-        /// <typeparam name="T">The primal type upon which the vector is predicated</typeparam>
-        [MethodImpl(Inline)]
-        public static BitCells<N,T> from<N,T>(T[] src, N n = default)
-            where N : unmanaged, ITypeNat
-            where T : unmanaged
-                => BitCells<N, T>.FromArray(src);
-
-        /// <summary>
-        /// Loads a generic bitvector from a span
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <param name="n">The vector length</param>
-        /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline)]
-        public static BitCells<T> from<T>(Span<T> src, int n)
-            where T : unmanaged
-                => new BitCells<T>(src, n);
-
-        /// <summary>
-        /// Defines a natural generic bitvector, initialized with a span for which
-        /// the total bit width is at least the value defined by the natural parameter
-        /// </summary>
-        /// <param name="src">The source bits</param>
-        /// <typeparam name="N">The natural type upon which the vector is predicated</typeparam>
-        /// <typeparam name="T">The primal type upon which the vector is predicated</typeparam>
-        [MethodImpl(Inline)]
-        public static BitCells<N,T> from<N,T>(Span<T> src, N n = default)
-            where N : unmanaged, ITypeNat
-            where T : unmanaged
-                => BitCells<N, T>.FromSpan(src);
-
-        /// <summary>
-        /// Defines a natural generic bitvector, initialized with a readonly span for which
-        /// the total bit width is at least the value defined by the natural parameter
-        /// </summary>
-        /// <param name="src">The source bits</param>
-        /// <typeparam name="N">The natural type upon which the vector is predicated</typeparam>
-        /// <typeparam name="T">The primal type upon which the vector is predicated</typeparam>
-        [MethodImpl(Inline)]
-        public static BitCells<N,T> from<N,T>(ReadOnlySpan<T> src, N n = default)
-            where N : unmanaged, ITypeNat
-            where T : unmanaged
-                => BitCells<N, T>.FromSpan(src.ToSpan());
-
-         
-        /// <summary>
-        /// Creates a generic bitvector of natural length from a single cell
+        /// Creates a natural cell container over a single cell
         /// </summary>
         /// <param name="src">The source value</param>
         /// <param name="n">The bitvector length</param>
         /// <typeparam name="T">The source type</typeparam>
         [MethodImpl(Inline)]
-        public static BitCells<N,T> from<N,T>(T src, N n = default)        
+        public static BitCells<N,T> literal<N,T>(T src, N n = default)        
             where N : unmanaged, ITypeNat
             where T : unmanaged
                 => BitCells<N,T>.FromCell(src);
 
+        /// <summary>
+        /// Allocates a generic bitcell container over a specified number of 256-bit blocks
+        /// </summary>
+        /// <param name="blocks">The block count</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(NotInline)]
+        public static BitCells<T> blockalloc<T>(int blocks)        
+            where T : unmanaged
+                => new BitCells<T>(DataBlocks.alloc<T>(n256,blocks));
 
+        /// <summary>
+        /// Loads a generic bitcell container from a span
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <param name="n">The cell count</param>
+        /// <typeparam name="T">The primal type</typeparam>
+        [MethodImpl(Inline)]
+        public static BitCells<T> load<T>(Span<T> src, int n)
+            where T : unmanaged
+                => new BitCells<T>(src, n);
+
+        /// <summary>
+        /// Loads a natural bitcell container from a span
+        /// </summary>
+        /// <param name="src">The source bits</param>
+        /// <typeparam name="N">The natural type upon which the vector is predicated</typeparam>
+        /// <typeparam name="T">The primal type upon which the vector is predicated</typeparam>
+        [MethodImpl(Inline)]
+        public static BitCells<N,T> load<N,T>(Span<T> src, N n = default)
+            where N : unmanaged, ITypeNat
+            where T : unmanaged
+                => BitCells<N, T>.FromSpan(src);
+
+        /// <summary>
+        /// Loads a natural bitcell container from a readonly span
+        /// </summary>
+        /// <param name="src">The source bits</param>
+        /// <typeparam name="N">The natural type upon which the vector is predicated</typeparam>
+        /// <typeparam name="T">The primal type upon which the vector is predicated</typeparam>
+        [MethodImpl(Inline)]
+        public static BitCells<N,T> load<N,T>(ReadOnlySpan<T> src, N n = default)
+            where N : unmanaged, ITypeNat
+            where T : unmanaged
+                => BitCells<N, T>.FromSpan(src.ToSpan());
+         
         /// <summary>
         /// Creates a bitvector from a span of bytes
         /// </summary>
         /// <param name="src">The source bits</param>
         /// <param name="n">The bitvector length</param>
-        public static BitCells<T> from<T>(Span<byte> src, int n)
+        public static BitCells<T> load<T>(Span<byte> src, int n)
             where T : unmanaged
         {
             var q = Math.DivRem(src.Length, size<T>(), out int r);
@@ -195,7 +188,7 @@ namespace Z0
         public static BitCells<T> and<T>(in BitCells<T> x,in BitCells<T> y)
             where T : unmanaged
         {
-            var z = alloc<T>(x.BlockCount);
+            var z = blockalloc<T>(x.BlockCount);
             and(x,y,ref z);
             return z;
         }
@@ -219,7 +212,5 @@ namespace Z0
                 result ^= x[i] & y[i];
             return result;
         }
-
-
    }
 }

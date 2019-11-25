@@ -12,32 +12,31 @@ namespace Z0
 
     partial class BitVector
     {
+        /// <summary>
+        /// Defines a bitvector of natural width
+        /// </summary>
+        /// <param name="n">The width selector</param>
+        /// <param name="a">The scalar source data</param>
+        /// <typeparam name="N">The width type</typeparam>
+        /// <typeparam name="T">The scalar type</typeparam>
+        [MethodImpl(Inline)]
+        public static BitVector<N,T> natural<N,T>(N n, T a)
+            where N : unmanaged, ITypeNat
+            where T : unmanaged
+                => new BitVector<N, T>(a);
 
         /// <summary>
         /// Defines a bitvector of natural width
         /// </summary>
         /// <param name="n">The width selector</param>
-        /// <param name="data">The scalar source data</param>
+        /// <param name="a">The scalar source data</param>
         /// <typeparam name="N">The width type</typeparam>
         /// <typeparam name="T">The scalar type</typeparam>
         [MethodImpl(Inline)]
-        public static BitVector<N,T> natural<N,T>(N n, T data)
+        public static BitVector<N,T> natural<N,T>(T a)
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => new BitVector<N, T>(data);
-
-        /// <summary>
-        /// Defines a bitvector of natural width
-        /// </summary>
-        /// <param name="n">The width selector</param>
-        /// <param name="data">The scalar source data</param>
-        /// <typeparam name="N">The width type</typeparam>
-        /// <typeparam name="T">The scalar type</typeparam>
-        [MethodImpl(Inline)]
-        public static BitVector<N,T> natural<N,T>(T data)
-            where N : unmanaged, ITypeNat
-            where T : unmanaged
-                => new BitVector<N, T>(data);
+                => new BitVector<N, T>(a);
 
         /// <summary>
         /// Creates a vector from a bitstring
@@ -48,6 +47,5 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where T : unmanaged
                 => gbits.packseq(src.Slice(0, natval(n)).BitSeq, out T _);
-
     }
 }

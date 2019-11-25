@@ -31,7 +31,7 @@ namespace Z0
         /// <param name="x">The source bitvector</param>
         /// <param name="s">The shift amount</param>
         [MethodImpl(Inline)]
-        public static BitVector<T> sll<N,T>(BitVector<N,T> x, int s)
+        public static BitVector<N,T> sll<N,T>(BitVector<N,T> x, int s)
             where T : unmanaged
             where N : unmanaged, ITypeNat
                 => gmath.sll(x.Scalar,s);

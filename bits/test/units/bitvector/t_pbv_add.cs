@@ -5,16 +5,14 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
     using System.Runtime.CompilerServices;
 
     using static zfunc;
 
-
-    public class t_bv_add : BitVectorTest<t_bv_add>
+    public class t_pbv_add : t_bv<t_pbv_add>
     {
 
-        public void bvadd_p8()
+        public void pvb_add_8()
         {
             for(var i=0; i<SampleSize; i++)
             {
@@ -26,7 +24,7 @@ namespace Z0
             }
         }
 
-        public void bvadd_p16()
+        public void pvb_add_16()
         {
             for(var i=0; i<SampleSize; i++)
             {
@@ -38,7 +36,7 @@ namespace Z0
             }
         }
 
-        public void bvadd_p32()
+        public void pvb_add_32()
         {
             for(var i=0; i<SampleSize; i++)
             {
@@ -50,7 +48,7 @@ namespace Z0
             }
         }
 
-        public void bvadd_p64()
+        public void pvb_add_64()
         {
             for(var i=0; i<SampleSize; i++)
             {
@@ -61,7 +59,5 @@ namespace Z0
 
             }
         }
-
     }
-
 }

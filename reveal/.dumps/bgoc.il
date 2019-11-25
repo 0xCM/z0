@@ -1,4 +1,4 @@
-// 2019-11-25 01:31:48:002
+// 2019-11-25 04:09:27:024
 BitGrid64<uint> bg64_and_32(BitGrid64<uint> gx, BitGrid64<uint> gy)
 {
     IL_0000: ldarg.0

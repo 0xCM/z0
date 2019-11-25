@@ -5,14 +5,11 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Reflection;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
 
     using static zfunc;
     
-    public class t_bitgrid : BitMatrixTest<t_bitgrid>
+    public class t_bg_row : BitMatrixTest<t_bg_row>
     {        
         public void bg_row_8x4()
         {
@@ -30,21 +27,6 @@ namespace Z0
             }
         }
 
-        public void bg_col_32x2()
-        {
-            var m = n32;
-            var n = n2;
-            var xg = Random.BitGrid(m,n);
-            var xs = xg.ToSpan().ToBitString().Transpose(m,n);
-
-            for(var i=0; i<n; i++)
-            {
-                var bv1 = BitGrid.col(xg,i);     
-                var bv2 = xs.Slice(i*m, m).ToBitVector(m);                    
-                Claim.eq(bv1, bv2);
-            }            
-        }
-
         public void bg_row_16x16()
         {
             var m = n16;
@@ -58,6 +40,21 @@ namespace Z0
                 Claim.eq(row1,row2);
             }
 
+        }
+
+        public void bg_col_32x2()
+        {
+            var m = n32;
+            var n = n2;
+            var xg = Random.BitGrid(m,n);
+            var xs = xg.ToSpan().ToBitString().Transpose(m,n);
+
+            for(var i=0; i<n; i++)
+            {
+                var bv1 = BitGrid.col(xg,i);     
+                var bv2 = xs.Slice(i*m, m).ToBitVector(m);                    
+                Claim.eq(bv1, bv2);
+            }            
         }
 
 
@@ -155,15 +152,15 @@ namespace Z0
         }
 
         public void bgbs_11x3x16u()
-            => bg_bs_check(n11,n3,ushort.MinValue);
+            => bg_bitstring_check(n11,n3,ushort.MinValue);
             
-        public void bgbs_64x4x8u()
-            => bg_bs_check(n64,n4,byte.MinValue);
+        public void bg_bitstring_64x4x8u()
+            => bg_bitstring_check(n64,n4,byte.MinValue);
 
         public void bgbs_113x201x64u()
-            => bg_bs_check(natseq(n1,n1,n3), natseq(n2,n0,n1), ulong.MinValue);
+            => bg_bitstring_check(natseq(n1,n1,n3), natseq(n2,n0,n1), ulong.MinValue);
 
-        void bg_bs_check<M,N,T>(M m = default, N n = default, T zero = default)
+        void bg_bitstring_check<M,N,T>(M m = default, N n = default, T zero = default)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
@@ -197,9 +194,9 @@ namespace Z0
 
         public void bitread_bench()
         {
-            bitread_bench<ulong>(249,128, Pow2.T08);
-            bitread_bench<byte>(249,128, Pow2.T08);
-            bitread_bench<ulong>(64,64, Pow2.T08);
+            bg_read_bench<ulong>(249,128, Pow2.T08);
+            bg_read_bench<byte>(249,128, Pow2.T08);
+            bg_read_bench<ulong>(64,64, Pow2.T08);
 
 
             bitmatrix_bitread_bench<ulong>(Pow2.T08);
@@ -213,16 +210,16 @@ namespace Z0
 
         public void bitread_check()
         {
-            bitread_check<uint>(20,20);
-            bitread_check<uint>(21,30);
-            bitread_check<uint>(17,25);
-            bitread_check<ulong>(250,67);
-            bitread_check<byte>(250,67);
-            bitread_check<ushort>(250,67);
+            bg_read_check<uint>(20,20);
+            bg_read_check<uint>(21,30);
+            bg_read_check<uint>(17,25);
+            bg_read_check<ulong>(250,67);
+            bg_read_check<byte>(250,67);
+            bg_read_check<ushort>(250,67);
         }
         
 
-        void bitread_check<T>(ushort rows, ushort cols)
+        protected void bg_read_check<T>(ushort rows, ushort cols)
             where T : unmanaged
         {
             for(var i = 0; i < SampleSize; i++)
@@ -248,7 +245,7 @@ namespace Z0
             }
         }
 
-        void bitread_bench<T>(ushort M, ushort N, int cycles, SystemCounter counter = default)
+        protected void bg_read_bench<T>(ushort M, ushort N, int cycles, SystemCounter counter = default)
             where T : unmanaged
         {
             var last = bit.Off;
@@ -442,7 +439,6 @@ namespace Z0
             }
 
         }
-
     }
 
 }

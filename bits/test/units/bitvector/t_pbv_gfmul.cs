@@ -10,9 +10,9 @@ namespace Z0
 
     using static zfunc;
 
-    public class t_bv_mul : BitVectorTest<t_bv_mul>
+    public class t_pbv_gfmul : t_bv<t_pbv_gfmul>
     {
-        public void bvmul_8u_check()
+        public void pbv_gfmul_8()
         {
             for(var i=0; i<SampleSize; i++)
             {
@@ -27,7 +27,7 @@ namespace Z0
             }
         }
 
-        public void bvmul_8u_bench()
+        public void pbv_gfmul_8_bench()
         {
             var lhsSrc = Random.Stream<byte>().Take(SampleSize).Select(x => BitVector.from(n8,x)).ToArray();
             var rhsSrc = Random.Stream<byte>().Take(SampleSize).Select(x => BitVector.from(n8,x)).ToArray();
@@ -43,7 +43,18 @@ namespace Z0
             Measure(Bench);
         }
 
-        public void gfmul8()
+        public void gfpoly_format()
+        {
+            var p1 = GfPoly.Gfp_8_4_3_2_0;
+            var p2 = GfPoly16.FromExponents(8,4,3,2,0);
+            var p3 = GfPoly16.FromScalar(0b100011101);
+
+            Claim.eq(p3.Degree,(byte)8);                        
+            Claim.eq(p1.Scalar, p2.Scalar);
+            Claim.eq(p1.Format(),p2.Format());                
+        }
+
+        public void gfmul_8()
         {
             var expect =  new byte[,]
             {
@@ -77,45 +88,19 @@ namespace Z0
 
         public void gfpoly()
         {            
-            gfpoly_check(GfPoly.Lookup<N3,byte>(), BitString.parse("1011"));
-            
+            gfpoly_check(GfPoly.Lookup<N3,byte>(), BitString.parse("1011"));            
             gfpoly_check(GfPoly.Lookup<N8,ushort>(), BitString.parse("100011101"));
             Claim.eq((ushort)0b100011101, GfPoly.Lookup<N8,ushort>().Scalar);
             
-            gfpoly_check(GfPoly.Lookup<N16,uint>(), BitString.parse("10000001111011101"));
-            
-        }
-
-        void gfmul256ref_bench()
-        {
-            var lhsSrc = Random.Array<byte>(SampleSize);
-            var rhsSrc = Random.Array<byte>(SampleSize);
-                        
-            int Bench()
-            {                
-                var ops = 0;
-                for(var i=0; i< CycleCount; i++)
-                {
-                    for(var j=0; j< SampleSize; j++)
-                    {
-                        Gf256.mul_ref(lhsSrc[j],rhsSrc[j]);
-                        ops++;
-                    }
-                }
-                return ops;
-            }   
-
-            Measure(Bench);
+            gfpoly_check(GfPoly.Lookup<N16,uint>(), BitString.parse("10000001111011101"));            
         }
 
         void gfpoly_check<N,T>(GfPoly<N,T> p, BitString match)
             where N : unmanaged, ITypeNat
             where T : unmanaged
         {
-
             var bs = BitString.from(p.Scalar).Truncate(p.Degree + 1);
             Claim.eq(bs, match);  
-
         }
     }
 }

@@ -9,7 +9,7 @@ namespace Z0
 
     using static zfunc;
 
-    public class t_bv_xor : BitVectorTest<t_bv_xor>
+    public class t_pbv_xor : t_bv<t_pbv_xor>
     {
         void bv_xor_4()
         {
@@ -30,22 +30,8 @@ namespace Z0
             }
         }
 
-        public void bv_xor_g8x7w()
-            => bv_xor_check<byte>(7);
 
-        public void bv_xor_g16x13w()
-            => bv_xor_check<ushort>(13);
-
-        public void bv_xor_g32x22w()
-            => bv_xor_check<uint>(22);
-
-        public void bv_xor_g64x19w()
-            => bv_xor_check<ulong>(19);
-
-        public void bv_xor_g64x53w()
-            => bv_xor_check<ulong>(53);
-
-        public void bvxor_n13x8u_check()
+        public void nbc_xor_13x8()
         {
             var x0 = Random.BitCells<N13,byte>();
             var y0 = Random.BitCells<N13,byte>();
@@ -72,30 +58,5 @@ namespace Z0
             }
         }
 
-        void bv_xor_check<T>(int width)
-            where T : unmanaged
-        {
-            for(var i=0; i<SampleSize; i++)
-            {
-                var x = Random.BitVector<T>(width);
-                Claim.lteq(BitVector.effwidth(x),width);
-                
-                var y = Random.BitVector<T>(width);
-                Claim.lteq(BitVector.effwidth(y),width);
-
-                var z = x ^ y;
-                Claim.eq(gmath.xor(x.Scalar, y.Scalar), z.Scalar);
-
-                var xbs = x.ToBitString().Truncate(width);
-                Claim.eq(width, xbs.Length);
-
-                var ybs = y.ToBitString().Truncate(width);
-                Claim.eq(width, ybs.Length);
-
-                var zbs = xbs.Xor(ybs);
-
-                Claim.eq(zbs, z.ToBitString().Truncate(width));
-            }
-        }
     }
 }

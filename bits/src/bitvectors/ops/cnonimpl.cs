@@ -26,6 +26,18 @@ namespace Z0
         /// <summary>
         /// Computes the converse nonimplication, z := x & ~y, for bitvectors x and y
         /// </summary>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
+        /// <typeparam name="T">The primal type</typeparam>
+        [MethodImpl(Inline)]
+        public static BitVector<N,T> cnonimpl<N,T>(BitVector<N,T> x, BitVector<N,T> y)
+            where T : unmanaged
+            where N : unmanaged, ITypeNat
+                => gmath.cnonimpl(x.Scalar, y.Scalar);
+
+        /// <summary>
+        /// Computes the converse nonimplication, z := x & ~y, for bitvectors x and y
+        /// </summary>
         /// <param name="x">The left bitvector</param>
         /// <param name="y">The right bitvector</param>
         [MethodImpl(Inline)]

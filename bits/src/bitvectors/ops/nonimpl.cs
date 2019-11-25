@@ -28,6 +28,17 @@ namespace Z0
         /// <param name="x">The left bitvector</param>
         /// <param name="y">The right bitvector</param>
         [MethodImpl(Inline)]
+        public static BitVector<N,T> nonimpl<N,T>(BitVector<N,T> x, BitVector<N,T> y)
+            where T : unmanaged
+            where N : unmanaged, ITypeNat
+                => gmath.nonimpl(x.Scalar, y.Scalar);
+
+        /// <summary>
+        /// Computes the material nonimplication, equivalent to the bitwise expression a & (~b) for operands a and b
+        /// </summary>
+        /// <param name="x">The left bitvector</param>
+        /// <param name="y">The right bitvector</param>
+        [MethodImpl(Inline)]
         public static BitVector4 nonimpl(BitVector4 x, BitVector4 y)
             => math.nonimpl(x.data,y.data);
 
@@ -73,7 +84,7 @@ namespace Z0
         /// <param name="x">The left bitvector</param>
         /// <param name="y">The right bitvector</param>
         [MethodImpl(Inline)]
-        public static BitVector128 nonimpl(BitVector128 x, BitVector128 y)
+        public static BitVector128 nonimpl(in BitVector128 x, in BitVector128 y)
             => from(n128, gmath.nonimpl(x.x0, y.x0), gmath.nonimpl(x.x1,  y.x1));
 
     }

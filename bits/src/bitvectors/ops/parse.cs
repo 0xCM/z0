@@ -13,6 +13,17 @@ namespace Z0
 
     partial class BitVector
     {
+        [MethodImpl(Inline)]
+        public static BitVector<T> parse<T>(string src)
+            where T : unmanaged
+                => gbits.packseq(BitString.parse(src).BitSeq, out T _);
+
+        [MethodImpl(Inline)]
+        public static BitVector<N,T> parse<N,T>(string src)
+            where T : unmanaged
+            where N : unmanaged, ITypeNat
+                => gbits.packseq(BitString.parse(src).Slice(0,natval<N>()).BitSeq, out T _);
+
         /// <summary>
         /// Parses a 8-bit primal bitvector from a 0-1 string
         /// </summary>

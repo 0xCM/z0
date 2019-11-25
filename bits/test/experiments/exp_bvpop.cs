@@ -13,7 +13,7 @@ namespace Z0
     using static dinx;
 
 
-    public class exp_bvpop : BitVectorTest<exp_bvpop>
+    public class exp_bvpop : t_bv<exp_bvpop>
     {
 
 

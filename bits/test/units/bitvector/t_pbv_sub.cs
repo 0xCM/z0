@@ -9,9 +9,9 @@ namespace Z0
 
     using static zfunc;
 
-    public class t_bv_sub : BitVectorTest<t_bv_sub>
+    public class t_pvb_sub : t_bv<t_pvb_sub>
     {
-        public void bv_sub_8()
+        public void pbv_sub_8()
         {
             for(var i=0; i<SampleSize; i++)
             {
@@ -23,7 +23,7 @@ namespace Z0
             }
         }
 
-        public void bv_sub_16()
+        public void pbv_sub_16()
         {
             for(var i=0; i<SampleSize; i++)
             {
@@ -35,7 +35,7 @@ namespace Z0
             }
         }
 
-        public void bv_sub_32()
+        public void pbv_sub_32()
         {
             for(var i=0; i<SampleSize; i++)
             {
@@ -47,7 +47,7 @@ namespace Z0
             }
         }
 
-        public void bv_sub_64()
+        public void pbv_sub_64()
         {
             for(var i=0; i<SampleSize; i++)
             {

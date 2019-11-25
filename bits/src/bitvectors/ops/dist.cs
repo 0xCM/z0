@@ -7,11 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
-    using System.Collections.Generic;
 
     using static zfunc;    
-    using static nfunc;
-    using static As;
 
     partial class BitVector
     {
@@ -90,6 +87,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static uint dist(in BitVector128 x, in BitVector128 y)
             => pop(xor(x,y));
- 
     }
 }

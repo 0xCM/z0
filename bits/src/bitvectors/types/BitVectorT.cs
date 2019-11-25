@@ -80,24 +80,6 @@ namespace Z0
             => BitVector.negate(src);
 
         /// <summary>
-        /// Computes the arithmetic sum of the source operands. 
-        /// </summary>
-        /// <param name="x">The left operand</param>
-        /// <param name="y">The right operand</param>
-        [MethodImpl(Inline)]
-        public static BitVector<T> operator +(BitVector<T> x, BitVector<T> y)
-            => BitVector.add(x,y);
-
-        /// <summary>
-        /// Arithmetically subtracts the second operand from the first. 
-        /// </summary>
-        /// <param name="x">The left vector</param>
-        /// <param name="y">The right vector</param>
-        [MethodImpl(Inline)]
-        public static BitVector<T> operator - (BitVector<T> x, BitVector<T> y)
-            => BitVector.sub(x,y);
-
-        /// <summary>
         /// Shifts the source bits leftwards
         /// </summary>
         /// <param name="x">The source operand</param>
@@ -112,6 +94,22 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitVector<T> operator >>(BitVector<T> x, int offset)
             => BitVector.srl(x,offset);
+
+        /// <summary>
+        /// Returns true if the source vector is nonzero, false otherwise
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        [MethodImpl(Inline)]
+        public static bool operator true(BitVector<T> src)
+            => src.NonEmpty;
+
+        /// <summary>
+        /// Returns false if the source vector is the zero vector, false otherwise
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        [MethodImpl(Inline)]
+        public static bool operator false(BitVector<T> src)
+            => src.Empty;
 
         /// <summary>
         /// Increments the vector arithmetically
@@ -130,20 +128,23 @@ namespace Z0
             => BitVector.dec(src);
 
         /// <summary>
-        /// Returns true if the source vector is nonzero, false otherwise
+        /// Computes the arithmetic sum of the source operands. 
         /// </summary>
-        /// <param name="src">The source vector</param>
+        /// <param name="x">The left operand</param>
+        /// <param name="y">The right operand</param>
         [MethodImpl(Inline)]
-        public static bool operator true(BitVector<T> src)
-            => src.NonEmpty;
+        public static BitVector<T> operator +(BitVector<T> x, BitVector<T> y)
+            => BitVector.add(x,y);
 
         /// <summary>
-        /// Returns false if the source vector is the zero vector, false otherwise
+        /// Arithmetically subtracts the second operand from the first. 
         /// </summary>
-        /// <param name="src">The source vector</param>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static bool operator false(BitVector<T> src)
-            => !src.NonEmpty;
+        public static BitVector<T> operator - (BitVector<T> x, BitVector<T> y)
+            => BitVector.sub(x,y);
+
 
         [MethodImpl(Inline)]
         public static bool operator ==(BitVector<T> x, BitVector<T> y)
@@ -187,19 +188,19 @@ namespace Z0
         /// <summary>
         /// Specifies whether all bits are disabled
         /// </summary>
-        public bool Empty
+        public bit Empty
         {
             [MethodImpl(Inline)]
-            get => BitVector.pop(this) == 0;
+            get => !gmath.nonzero(data);
         }
 
         /// <summary>
         /// Specifies whether at least one bit is enabled
         /// </summary>
-        public readonly bool NonEmpty
+        public readonly bit NonEmpty
         {
             [MethodImpl(Inline)]
-            get => BitVector.pop(this) != 0;
+            get => gmath.nonzero(data);
         }
 
         /// <summary>
@@ -224,13 +225,6 @@ namespace Z0
             [MethodImpl(Inline)]
             get => BitVector.between(this, first, last);
         }
-
-        /// <summary>
-        /// Clones the vector
-        /// </summary>
-        [MethodImpl(Inline)]
-        public readonly BitVector<T> Replicate()
-            => new BitVector<T>(data);
 
         [MethodImpl(Inline)]
         public readonly bool Equals(BitVector<T> y)

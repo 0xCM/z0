@@ -9,9 +9,9 @@ namespace Z0
 
     using static zfunc;
 
-    public class t_bv_perm : BitVectorTest<t_bv_perm>
+    public class t_pbv_perm : t_bv<t_pbv_perm>
     {        
-        public void bv_perm8()
+        public void pbv_perm_8()
         {        
             var perm = Perm.Define<N8>((2,3), (6,7));
             var bs1 = ((byte)0b10001101).ToBitString();
@@ -21,7 +21,7 @@ namespace Z0
 
         }
 
-        public void bv_perm16()
+        public void pbv_perm_16()
         {        
             var p2 = Perm.Define<N16>((1,10), (2,11), (3, 8));
             var bsx2 = ((ushort)0b1000110111000100).ToBitString();
@@ -31,7 +31,7 @@ namespace Z0
 
         }
 
-        public void bv_perm32()
+        public void pbv_perm_32()
         {
             var p1 = Perm.Define(n32, (31,0), (30,1), (29,2));
             Claim.eq(p1[0],31);
@@ -53,7 +53,7 @@ namespace Z0
             Claim.eq(v1[29],v2[2]);
         }
 
-        public void bv_perm64()
+        public void pbv_perm_64()
         {
             var p = Perm.Define(n64, (0,1),(1,2),(2,3),(3,4),(4,5),(5,6));
             var bv = BitVector.perm(BitVector64.One,p);

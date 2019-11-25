@@ -23,15 +23,6 @@ namespace Z0
             where T : unmanaged
                 => gmath.add(x.Scalar, y.Scalar);
 
-        [MethodImpl(Inline)]
-        public static BitVector4 add2(BitVector4 x, BitVector4 y)
-        {
-            const int modulus = 16;
-            var sum = x.data + y.data;
-            var reduced = (byte)((sum >= modulus) ? sum - modulus: sum);
-            return new BitVector4(reduced,true);
-        }
-
         /// <summary>
         /// Computes the arithmetic sum z := x + y for bitvectors x and y
         /// </summary>
@@ -39,7 +30,7 @@ namespace Z0
         /// <param name="y">The right bitvector</param>
         [MethodImpl(Inline)]
         public static BitVector4 add(BitVector4 x, BitVector4 y)
-            => new BitVector4((byte)Mod16.mod(math.add(x.data, y.data)));
+            => new BitVector4(math.mod(math.add(x.Scalar, y.Scalar), (byte)4),true);
 
         /// <summary>
         /// Computes the arithmetic sum of two bitvectors

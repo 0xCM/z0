@@ -182,7 +182,7 @@ namespace Z0
         public static BitCells<N,T> BitCells<N,T>(this IPolyrand random)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => Z0.BitCells.from<N,T>(random.Stream<T>().ToSpan(BitCalcs.segcount<N,N1,T>()));
+                => Z0.BitCells.load<N,T>(random.Stream<T>().ToSpan(BitCalcs.segcount<N,N1,T>()));
 
         /// <summary>
         /// Produces a random generic bitvector of specified length
@@ -193,7 +193,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitCells<T> BitCells<T>(this IPolyrand random, int len)
             where T : unmanaged
-                => BC.from<T>(random.Stream<T>().ToSpan(BC.cellcount<T>(len)), len);
+                => BC.load<T>(random.Stream<T>().ToSpan(BC.cellcount<T>(len)), len);
 
         /// <summary>
         /// Produces a random generic bitvector of randomized length
@@ -207,7 +207,7 @@ namespace Z0
             where T : unmanaged
         {
             var len = random.Next<int>(minlen,++maxlen);
-            return BC.from<T>(random.Stream<T>().TakeArray(BC.cellcount<T>(len),len));
+            return BC.literals<T>(random.Stream<T>().TakeArray(BC.cellcount<T>(len),len));
         }
 
         /// <summary>

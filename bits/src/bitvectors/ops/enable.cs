@@ -17,8 +17,8 @@ namespace Z0
         /// </summary>
         /// <param name="pos">The position of the bit to enable</param>
         [MethodImpl(Inline)]
-        public static BitVector4 Enable(BitVector4 x, int pos)
-            => new BitVector4(x.data |= (byte)(1 << pos),true);
+        public static BitVector4 enable(BitVector4 x, int index)
+            => BitMask.enable(x, index);
 
         /// <summary>
         /// Enables a bit if it is disabled

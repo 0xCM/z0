@@ -16,7 +16,7 @@ namespace Z0
         /// Counts the number of leading zero bits
         /// </summary>
         [MethodImpl(Inline)]
-        public static uint nlz<T>(BitVector<T> x)
+        public static int nlz<T>(BitVector<T> x)
             where T : unmanaged
                 => gbits.nlz(x.data);
 
@@ -24,44 +24,52 @@ namespace Z0
         /// Counts the number of leading zero bits
         /// </summary>
         [MethodImpl(Inline)]
-        public static uint nlz<N,T>(BitVector<N,T> x)
+        public static int nlz<N,T>(BitVector<N,T> x)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => (uint) (gbits.nlz(x.data) - x.Width);
+                =>  gbits.nlz(x.data) - x.Width;
 
         /// <summary>
         /// Counts the number of leading zero bits
         /// </summary>
         [MethodImpl(Inline)]
-        public static uint nlz(BitVector4 x)
-            => (uint)(gbits.nlz(x.data) - x.Width);
+        public static int nlz(BitVector4 x)
+            => gbits.nlz(x.data) - x.Width;
+
 
         /// <summary>
         /// Counts the number of leading zero bits
         /// </summary>
         [MethodImpl(Inline)]
-        public static uint nlz(BitVector8 x)
+        public static int nlz(BitVector8 x)
             => gbits.nlz(x.data);
 
         /// <summary>
         /// Counts the number of leading zero bits
         /// </summary>
         [MethodImpl(Inline)]
-        public static uint nlz(BitVector16 x)
+        public static int nlz(BitVector16 x)
             => gbits.nlz(x.data);
 
         /// <summary>
         /// Counts the number of leading zero bits
         /// </summary>
         [MethodImpl(Inline)]
-        public static uint nlz(BitVector64 x)
+        public static int nlz(BitVector32 x)
+            => gbits.nlz(x.data);
+
+        /// <summary>
+        /// Counts the number of leading zero bits
+        /// </summary>
+        [MethodImpl(Inline)]
+        public static int nlz(BitVector64 x)
             => gbits.nlz(x.data);
 
         /// <summary>
         /// Counts the number of leading zeros
         /// </summary>
         [MethodImpl(Inline)]
-        public static uint nlz(in BitVector128 x)
+        public static int nlz(in BitVector128 x)
         {
             if(x.x1 == 0)
                 return 64 + gbits.nlz(x.x0);

@@ -12,7 +12,7 @@ namespace Z0
     using static zfunc;
     using static dinx;
 
-    public class exp_mul128 : BitVectorTest<exp_mul128>
+    public class exp_mul128 : t_bv<exp_mul128>
     {
 
         public void mul_no_overflow()

@@ -11,8 +11,8 @@ namespace Z0
     using static zfunc;
     using static BitParts;
 
-    public abstract class BitLibTest<T> : UnitTest<T>
-        where T : BitLibTest<T>, new()
+    public abstract class t_bits<T> : UnitTest<T>
+        where T : t_bits<T>, new()
     {
         /// <summary>
         /// Asserts logical bitvector/bitstring equality
@@ -32,16 +32,20 @@ namespace Z0
         }
 
 
+        protected static NatSeq<N2,N1,N7> n217 => default;
+
+        protected static NatSeq<N2,N1,N3> n213 = default;
+
+        protected const byte z8 = 0;
+        
+        protected const ushort z16 = 0;
+
+        protected const uint z32 = 0;
+
+        protected const ulong z64 = 0;
+
+
     }
 
-    public abstract class BitVectorTest<T> : BitLibTest<T>
-        where T : BitVectorTest<T>, new()
-    {
-
-        protected override int SampleSize => Pow2.T08;
-
-        protected override int CycleCount => Pow2.T03;
-
-    }
 
 }

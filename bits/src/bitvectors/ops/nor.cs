@@ -27,6 +27,18 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left bitvector</param>
         /// <param name="y">The right bitvector</param>
+        /// <typeparam name="T">The primal bitvector type</typeparam>
+        [MethodImpl(Inline)]
+        public static BitVector<N,T> nor<N,T>(BitVector<N,T> x, BitVector<N,T> y)
+            where T : unmanaged
+            where N : unmanaged, ITypeNat
+                => gmath.nor(x.Scalar, y.Scalar);
+
+        /// <summary>
+        /// Computes the bitvector z: = ~(x | y) from bitvectors x and y
+        /// </summary>
+        /// <param name="x">The left bitvector</param>
+        /// <param name="y">The right bitvector</param>
         [MethodImpl(Inline)]
         public static BitVector4 nor(BitVector4 x, BitVector4 y)
             => gmath.nor(x.data, y.data);
@@ -79,6 +91,5 @@ namespace Z0
             vblock.nor(n128, in x.x0, in y.x0, ref z.x0);
             return z;
         }
-
     }
 }

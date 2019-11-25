@@ -38,8 +38,8 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left bitvector</param>
         [MethodImpl(Inline)]
-        public static BitVector4 not(BitVector4 src)
-            => TakeHi((byte)((byte)(~src.data) << 4));
+        public static BitVector4 not(BitVector4 x)
+            => gmath.not(x.data);
 
         /// <summary>
         /// Computes the bitwise complement z:= ~x of a bitvector x
@@ -83,9 +83,5 @@ namespace Z0
             vblock.not(n128, in x.x0, ref z.x0);
             return z;
         }
-
-        [MethodImpl(Inline)]
-        static byte TakeHi(byte src)        
-            => (byte)((src >> 4) & 0xF);
     }
 }

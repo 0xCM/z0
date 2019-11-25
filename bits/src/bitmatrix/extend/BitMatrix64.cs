@@ -17,7 +17,7 @@ namespace Z0
         /// </summary>
         [MethodImpl(Inline)]
         public static BitCells<N4096,ulong> ToBitVector(this BitMatrix64 A)
-            => BitCells.from(A.Data, n4096);
+            => BitCells.load(A.Data, n4096);
 
         /// <summary>
         /// Creates the matrix determined by a permutation

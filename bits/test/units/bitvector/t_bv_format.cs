@@ -11,19 +11,9 @@ namespace Z0.Test
     using static zfunc;
 
 
-    public class t_bv_format : BitVectorTest<t_bv_format>
+    public class t_bv_format : t_bv<t_bv_format>
     {
 
-        public void format16()
-        {
-            var p1 = GfPoly.Gfp_8_4_3_2_0;
-            var p2 = GfPoly16.FromExponents(8,4,3,2,0);
-            var p3 = GfPoly16.FromScalar(0b100011101);
-
-            Claim.eq(p3.Degree,(byte)8);                        
-            Claim.eq(p1.Scalar, p2.Scalar);
-            Claim.eq(p1.Format(),p2.Format());                
-        }
     }
 
 }

@@ -23,17 +23,17 @@ namespace Z0
         /// <summary>
         /// The fixed 64-bit modulus for the generic closure
         /// </summary>
-        public static readonly ulong M64 = new N().NatValue;
+        public static ulong M64 => default(N).NatValue;
         
         /// <summary>
         /// The fixed 32-bit modulus for the generic closure
         /// </summary>
-        public static readonly uint M32 = (uint)M64;
+        public static uint M32 => (uint)M64;
 
         /// <summary>
         /// The fixed modulus reciprocal
         /// </summary>
-        static readonly double MR = 1.0 / (double)M64;
+        static double MR => 1.0 / (double)M64;
 
         /// <summary>
         /// Constructs a modulus with a specified state
@@ -148,6 +148,11 @@ namespace Z0
         public static uint mod(uint a)
             => _Mod.mod(a);
 
+        [MethodImpl(Inline)]
+        public static T mod<T>(T a)
+            where T : unmanaged             
+                => convert<uint,T>(mod(convert<T,uint>(a)));
+
         /// <summary>
         /// Computes the quotient a / n
         /// </summary>
@@ -245,7 +250,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public Mod<N> Invert()
-            => new Mod<N>(Inverse(state));
+            =>  default;//new Mod<N>(Inverse(state));
 
         [MethodImpl(Inline)]
         public string Format()
@@ -263,31 +268,32 @@ namespace Z0
         /// <summary>
         /// The maximum state value
         /// </summary>
-        static readonly uint StateMax = M32 - 1;
+        static uint StateMax => M32 - 1;
 
         /// <summary>
         /// The equivalent untyped modulus with nullary state
         /// </summary>
-        static readonly Mod _Mod = Mod.Define(M32, 0);
+        static Mod _Mod => Mod.Define(M32, 0);
 
-        static uint[,] ProductTable()
-        {
-            var products = new uint[M32,M32];
-            for(var i = 1u; i<M32; i++)
-            for(var j = 1u; j<M32; j++)
-                products[i,j] = _Mod.mod(i*j);                
-            return products;            
-        }
+    //     static uint[,] ProductTable()
+    //     {
+    //         var products = new uint[M32,M32];
+    //         for(var i = 1u; i<M32; i++)
+    //         for(var j = 1u; j<M32; j++)
+    //             products[i,j] = _Mod.mod(i*j);                
+    //         return products;            
+    //     }
 
-        static uint Inverse(uint a)
-        {
-            var prod = Products.Value;
-            for(var i=1u; i<M32; i++)
-                if(prod[i,a] == 1u) return i;
+    //     static uint Inverse(uint a)
+    //     {
+    //         var prod = Products.Value;
+    //         for(var i=1u; i<M32; i++)
+    //             if(prod[i,a] == 1u) return i;
          
-            throw new Exception($"Multiplicative inverse for {a} not found. Are you sure {M32} is prime?");
-        }
+    //         throw new Exception($"Multiplicative inverse for {a} not found. Are you sure {M32} is prime?");
+    //     }
         
-        static Lazy<uint[,]> Products = new Lazy<uint[,]>(ProductTable);
+    //     static Lazy<uint[,]> Products = new Lazy<uint[,]>(ProductTable);
+    // }
     }
 }

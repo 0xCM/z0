@@ -1,4 +1,4 @@
-// 2019-11-25 01:31:48:865
+// 2019-11-25 04:09:27:862
 ref uint pack(N2 n, in bit src, ref uint dst)
 {
     IL_0000: ldarg.2
@@ -2188,40 +2188,42 @@ ulong clear(ulong src, int first, int last)
     IL_002A: ret
 
 }
-uint effwidth(in byte src)
+int effwidth(in byte src)
 {
     IL_0000: ldc.i4.8
     IL_0001: ldarg.0
-    IL_0002: call System.UInt32 Z0.Bits::nlz(System.Byte&)
-    IL_0007: sub
-    IL_0008: ret
-
-}
-uint effwidth(in ushort src)
-{
-    IL_0000: ldc.i4.s 16
-    IL_0002: ldarg.0
-    IL_0003: call System.UInt32 Z0.Bits::nlz(System.UInt16&)
+    IL_0002: ldind.u1
+    IL_0003: call System.Int32 Z0.Bits::nlz(System.Byte)
     IL_0008: sub
     IL_0009: ret
 
 }
-uint effwidth(uint src)
+int effwidth(in ushort src)
 {
-    IL_0000: ldc.i4.s 32
-    IL_0002: ldarga.s src
-    IL_0004: call System.UInt32 Z0.Bits::nlz(System.UInt32&)
+    IL_0000: ldc.i4.s 16
+    IL_0002: ldarg.0
+    IL_0003: ldind.u2
+    IL_0004: call System.Int32 Z0.Bits::nlz(System.UInt16)
     IL_0009: sub
     IL_000A: ret
 
 }
-uint effwidth(ulong src)
+int effwidth(uint src)
+{
+    IL_0000: ldc.i4.s 32
+    IL_0002: ldarg.0
+    IL_0003: call System.Int32 Z0.Bits::nlz(System.UInt32)
+    IL_0008: sub
+    IL_0009: ret
+
+}
+int effwidth(ulong src)
 {
     IL_0000: ldc.i4.s 64
-    IL_0002: ldarga.s src
-    IL_0004: call System.UInt32 Z0.Bits::nlz(System.UInt64&)
-    IL_0009: sub
-    IL_000A: ret
+    IL_0002: ldarg.0
+    IL_0003: call System.Int32 Z0.Bits::nlz(System.UInt64)
+    IL_0008: sub
+    IL_0009: ret
 
 }
 sbyte extract(sbyte src, byte start, byte length)
@@ -3416,98 +3418,94 @@ ulong mix(N1 parity, ulong x, ulong y)
     IL_003B: ret
 
 }
-uint nlz(in byte src)
+int nlz(byte src)
 {
     IL_0000: ldarg.0
-    IL_0001: ldind.u1
-    IL_0002: call System.UInt32 System.Runtime.Intrinsics.X86.Lzcnt::LeadingZeroCount(System.UInt32)
-    IL_0007: ldc.i4.s 24
-    IL_0009: sub
-    IL_000A: ret
+    IL_0001: call System.UInt32 System.Runtime.Intrinsics.X86.Lzcnt::LeadingZeroCount(System.UInt32)
+    IL_0006: ldc.i4.s 24
+    IL_0008: sub
+    IL_0009: ret
 
 }
-uint nlz(in ushort src)
+int nlz(ushort src)
 {
     IL_0000: ldarg.0
-    IL_0001: ldind.u2
-    IL_0002: call System.UInt32 System.Runtime.Intrinsics.X86.Lzcnt::LeadingZeroCount(System.UInt32)
-    IL_0007: ldc.i4.s 16
-    IL_0009: sub
-    IL_000A: ret
+    IL_0001: call System.UInt32 System.Runtime.Intrinsics.X86.Lzcnt::LeadingZeroCount(System.UInt32)
+    IL_0006: ldc.i4.s 16
+    IL_0008: sub
+    IL_0009: ret
 
 }
-uint nlz(in uint src)
+int nlz(uint src)
 {
     IL_0000: ldarg.0
-    IL_0001: ldind.u4
-    IL_0002: call System.UInt32 System.Runtime.Intrinsics.X86.Lzcnt::LeadingZeroCount(System.UInt32)
+    IL_0001: call System.UInt32 System.Runtime.Intrinsics.X86.Lzcnt::LeadingZeroCount(System.UInt32)
+    IL_0006: ret
+
+}
+int nlz(ulong src)
+{
+    IL_0000: ldarg.0
+    IL_0001: call System.UInt64 System.Runtime.Intrinsics.X86.Lzcnt/X64::LeadingZeroCount(System.UInt64)
+    IL_0006: conv.i4
     IL_0007: ret
 
 }
-uint nlz(in ulong src)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldind.i8
-    IL_0002: call System.UInt64 System.Runtime.Intrinsics.X86.Lzcnt/X64::LeadingZeroCount(System.UInt64)
-    IL_0007: conv.u4
-    IL_0008: ret
-
-}
-uint ntz(sbyte src)
+int ntz(sbyte src)
 {
     IL_0000: ldarg.0
     IL_0001: call System.UInt32 System.Runtime.Intrinsics.X86.Bmi1::TrailingZeroCount(System.UInt32)
     IL_0006: ret
 
 }
-uint ntz(byte src)
+int ntz(byte src)
 {
     IL_0000: ldarg.0
     IL_0001: call System.UInt32 System.Runtime.Intrinsics.X86.Bmi1::TrailingZeroCount(System.UInt32)
     IL_0006: ret
 
 }
-uint ntz(short src)
+int ntz(short src)
 {
     IL_0000: ldarg.0
     IL_0001: call System.UInt32 System.Runtime.Intrinsics.X86.Bmi1::TrailingZeroCount(System.UInt32)
     IL_0006: ret
 
 }
-uint ntz(ushort src)
+int ntz(ushort src)
 {
     IL_0000: ldarg.0
     IL_0001: call System.UInt32 System.Runtime.Intrinsics.X86.Bmi1::TrailingZeroCount(System.UInt32)
     IL_0006: ret
 
 }
-uint ntz(int src)
+int ntz(int src)
 {
     IL_0000: ldarg.0
     IL_0001: call System.UInt32 System.Runtime.Intrinsics.X86.Bmi1::TrailingZeroCount(System.UInt32)
     IL_0006: ret
 
 }
-uint ntz(uint src)
+int ntz(uint src)
 {
     IL_0000: ldarg.0
     IL_0001: call System.UInt32 System.Runtime.Intrinsics.X86.Bmi1::TrailingZeroCount(System.UInt32)
     IL_0006: ret
 
 }
-uint ntz(long src)
+int ntz(long src)
 {
     IL_0000: ldarg.0
     IL_0001: call System.UInt64 System.Runtime.Intrinsics.X86.Bmi1/X64::TrailingZeroCount(System.UInt64)
-    IL_0006: conv.u4
+    IL_0006: conv.i4
     IL_0007: ret
 
 }
-uint ntz(ulong src)
+int ntz(ulong src)
 {
     IL_0000: ldarg.0
     IL_0001: call System.UInt64 System.Runtime.Intrinsics.X86.Bmi1/X64::TrailingZeroCount(System.UInt64)
-    IL_0006: conv.u4
+    IL_0006: conv.i4
     IL_0007: ret
 
 }

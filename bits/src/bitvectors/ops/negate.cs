@@ -8,10 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
     using System.Runtime.Intrinsics;
-    using System.Collections.Generic;
 
     using static zfunc;    
-    using static As;
 
     partial class BitVector
     {
@@ -23,6 +21,17 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitVector<T> negate<T>(BitVector<T> x)
             where T : unmanaged
+                => gmath.negate(x.Scalar);
+
+        /// <summary>
+        /// Computes the two's complement bitvector z := ~x + 1 for a bitvector x
+        /// </summary>
+        /// <param name="x">The source vector</param>
+        /// <typeparam name="T">The primal type</typeparam>
+        [MethodImpl(Inline)]
+        public static BitVector<N,T> negate<N,T>(BitVector<N,T> x)
+            where T : unmanaged
+            where N : unmanaged, ITypeNat
                 => gmath.negate(x.Scalar);
 
         /// <summary>
@@ -75,7 +84,5 @@ namespace Z0
             vblock.negate(n128, in x.x0, ref z.x0);
             return z;
         }
-
     }
-
 }

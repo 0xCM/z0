@@ -58,7 +58,7 @@ namespace Z0
         /// <param name="src">The bitstring source</param>
         [MethodImpl(Inline)]
         public static BitCells<T> From(BitString src)
-            => BitCells.from<T>(src.ToPackedBytes(), src.Length);
+            => BitCells.load<T>(src.ToPackedBytes(), src.Length);
 
         [MethodImpl(Inline)]
         public static implicit operator BitCells<T>(Span<T> src)

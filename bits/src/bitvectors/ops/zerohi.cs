@@ -16,7 +16,7 @@ namespace Z0
         /// </summary>
         /// <param name="pos">The bit position</param>
         [MethodImpl(Inline)]
-        public static BitVector<T> bzhi<T>(BitVector<T> src, int pos)
+        public static BitVector<T> zerohi<T>(BitVector<T> src, int pos)
             where T : unmanaged
                 => gbits.zerohi(src.data, pos);
 
@@ -25,7 +25,17 @@ namespace Z0
         /// </summary>
         /// <param name="pos">The bit position</param>
         [MethodImpl(Inline)]
-        public static BitVector4 bzhi(BitVector4 src, int pos)
+        public static BitVector<N,T> zerohi<N,T>(BitVector<N,T> src, int pos)
+            where T : unmanaged
+            where N : unmanaged, ITypeNat
+                => gbits.zerohi(src.data, pos);
+
+        /// <summary>
+        /// Disables the high bits starting at a specified position
+        /// </summary>
+        /// <param name="pos">The bit position</param>
+        [MethodImpl(Inline)]
+        public static BitVector4 zerohi(BitVector4 src, int pos)
             => gbits.zerohi(src.data, pos);
 
         /// <summary>
@@ -33,7 +43,7 @@ namespace Z0
         /// </summary>
         /// <param name="pos">The bit position</param>
         [MethodImpl(Inline)]
-        public static BitVector8 bzhi(BitVector8 src, int pos)
+        public static BitVector8 zerohi(BitVector8 src, int pos)
             => gbits.zerohi(src.data, pos);
 
         /// <summary>
@@ -41,7 +51,7 @@ namespace Z0
         /// </summary>
         /// <param name="pos">The bit position</param>
         [MethodImpl(Inline)]
-        public static BitVector16 bzhi(BitVector16 src, int pos)
+        public static BitVector16 zerohi(BitVector16 src, int pos)
             => gbits.zerohi(src.data, pos);
 
         /// <summary>
@@ -49,7 +59,7 @@ namespace Z0
         /// </summary>
         /// <param name="pos">The bit position</param>
         [MethodImpl(Inline)]
-        public static BitVector32 bzhi(BitVector32 src, int pos)
+        public static BitVector32 zerohi(BitVector32 src, int pos)
             => gbits.zerohi(src.data, pos);
 
         /// <summary>
@@ -57,7 +67,7 @@ namespace Z0
         /// </summary>
         /// <param name="pos">The bit position</param>
         [MethodImpl(Inline)]
-        public static BitVector64 bzhi(BitVector64 src, int pos)
+        public static BitVector64 zerohi(BitVector64 src, int pos)
             => gbits.zerohi(src.data, pos);
 
     }

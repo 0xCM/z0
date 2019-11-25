@@ -1,4 +1,43 @@
-// 2019-11-25 01:31:47:266
+// 2019-11-25 04:09:26:123
+uint pop3x128(Vector128<ulong> x, Vector128<ulong> y, Vector128<ulong> z)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: ldarg.2
+    IL_0003: call System.UInt32 Z0.Bits::vpop(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
+    IL_0008: ret
+
+}
+uint pop3x64(ulong x, ulong y, ulong z)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: ldarg.2
+    IL_0003: call System.UInt32 Z0.Bits::pop(System.UInt64,System.UInt64,System.UInt64)
+    IL_0008: ret
+
+}
+ulong pow2_20()
+{
+    IL_0000: call Z0.N20 zfunc::get_n20()
+    IL_0005: call System.UInt64 Z0.NatMath::pow2<Z0.N20>(Z0.N20)
+    IL_000A: ret
+
+}
+ulong pow2m1_20()
+{
+    IL_0000: call Z0.N20 zfunc::get_n20()
+    IL_0005: call System.UInt64 Z0.NatMath::pow2m1<Z0.N20>(Z0.N20)
+    IL_000A: ret
+
+}
+ulong pow2_33()
+{
+    IL_0000: call Z0.N33 zfunc::get_n33()
+    IL_0005: call System.UInt64 Z0.NatMath::pow2<Z0.N33>(Z0.N33)
+    IL_000A: ret
+
+}
 ulong pow2m1_33()
 {
     IL_0000: call Z0.N33 zfunc::get_n33()
@@ -1037,6 +1076,44 @@ ulong gather_g64u(ulong src, ulong mask)
     IL_0009: ret
 
 }
+uint max_val_nbv_4()
+{
+    IL_0000: call System.UInt32 Z0.BitVector`2<Z0.N4,System.UInt32>::get_MaxValue()
+    IL_0005: ret
+
+}
+uint max_val_nbv_8()
+{
+    IL_0000: call System.UInt32 Z0.BitVector`2<Z0.N8,System.UInt32>::get_MaxValue()
+    IL_0005: ret
+
+}
+BitVector<N8,uint> add(BitVector<N8,uint> x, BitVector<N8,uint> y)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call Z0.BitVector`2<Z0.N8,System.UInt32> Z0.BitVector`2<Z0.N8,System.UInt32>::op_Addition(Z0.BitVector`2<Z0.N8,System.UInt32>,Z0.BitVector`2<Z0.N8,System.UInt32>)
+    IL_0007: ret
+
+}
+BitVector<N8,uint> inc(BitVector<N8,uint> src)
+{
+    IL_0000: ldarg.0
+    IL_0001: call Z0.BitVector`2<Z0.N8,System.UInt32> Z0.BitVector`2<Z0.N8,System.UInt32>::op_Increment(Z0.BitVector`2<Z0.N8,System.UInt32>)
+    IL_0006: dup
+    IL_0007: starg.s src
+    IL_0009: ret
+
+}
+BitVector<N8,uint> dec(BitVector<N8,uint> src)
+{
+    IL_0000: ldarg.0
+    IL_0001: call Z0.BitVector`2<Z0.N8,System.UInt32> Z0.BitVector`2<Z0.N8,System.UInt32>::op_Decrement(Z0.BitVector`2<Z0.N8,System.UInt32>)
+    IL_0006: dup
+    IL_0007: starg.s src
+    IL_0009: ret
+
+}
 bit mod_prod_nbv(BitVector<N23,uint> x, BitVector<N23,uint> y)
 {
     IL_0000: ldarg.0
@@ -1224,44 +1301,5 @@ uint pop3x256(Vector256<ulong> x, Vector256<ulong> y, Vector256<ulong> z)
     IL_0002: ldarg.2
     IL_0003: call System.UInt32 Z0.Bits::vpop(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
     IL_0008: ret
-
-}
-uint pop3x128(Vector128<ulong> x, Vector128<ulong> y, Vector128<ulong> z)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: ldarg.2
-    IL_0003: call System.UInt32 Z0.Bits::vpop(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
-    IL_0008: ret
-
-}
-uint pop3x64(ulong x, ulong y, ulong z)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: ldarg.2
-    IL_0003: call System.UInt32 Z0.Bits::pop(System.UInt64,System.UInt64,System.UInt64)
-    IL_0008: ret
-
-}
-ulong pow2_20()
-{
-    IL_0000: call Z0.N20 zfunc::get_n20()
-    IL_0005: call System.UInt64 Z0.NatMath::pow2<Z0.N20>(Z0.N20)
-    IL_000A: ret
-
-}
-ulong pow2m1_20()
-{
-    IL_0000: call Z0.N20 zfunc::get_n20()
-    IL_0005: call System.UInt64 Z0.NatMath::pow2m1<Z0.N20>(Z0.N20)
-    IL_000A: ret
-
-}
-ulong pow2_33()
-{
-    IL_0000: call Z0.N33 zfunc::get_n33()
-    IL_0005: call System.UInt64 Z0.NatMath::pow2<Z0.N33>(Z0.N33)
-    IL_000A: ret
 
 }

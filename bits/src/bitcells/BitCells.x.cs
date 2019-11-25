@@ -25,7 +25,7 @@ namespace Z0
         public static BitCells<N,T> ToCells<N,T>(this ReadOnlySpan<T> src, N n = default)
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => BitCells.from(src,n);
+                => BitCells.load(src,n);
 
         /// <summary>
         /// Constructs a bitvector of natural length from a source span
@@ -38,7 +38,7 @@ namespace Z0
         public static BitCells<N,T> ToCells<N,T>(this Span<T> src, N n = default)
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => BitCells.from(src,n);
+                => BitCells.load(src,n);
 
         /// <summary>
         /// Converts the least significant elements of a generic natural bitvector to a 8-bit primal bitvector
@@ -88,7 +88,7 @@ namespace Z0
         public static BitCells<T> ToCells<N,T>(this BitCells<N,T> src)
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => BitCells.from(src.Data, natval<N>()); 
+                => BitCells.load(src.Data, natval<N>()); 
     }
 
 }

@@ -7,11 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
-    using System.Collections.Generic;
 
     using static zfunc;    
-    using static nfunc;
-    using static As;
 
     partial class BitVector
     {
@@ -24,19 +21,6 @@ namespace Z0
         public static BitVector<T> inc<T>(BitVector<T> x)
             where T : unmanaged
                 => gmath.inc(x.data);
-
-        /// <summary>
-        /// Arithmetically increments the source vector
-        /// </summary>
-        /// <param name="x">The source vector</param>
-        /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline)]
-        public static ref BitVector<T> inc<T>(ref BitVector<T> x)
-            where T : unmanaged
-        {
-            gmath.inc(ref x.data);
-            return ref x;
-        }
 
         [MethodImpl(Inline)]
         public static BitVector4 inc(BitVector4 x)

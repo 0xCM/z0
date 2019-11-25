@@ -9,7 +9,7 @@ namespace Z0
 
     using static zfunc;
 
-    public abstract class BitPartTest<T> : BitLibTest<T>
+    public abstract class BitPartTest<T> : t_bits<T>
         where T : BitPartTest<T>, new()
     {
         

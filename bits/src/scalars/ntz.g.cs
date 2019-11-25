@@ -5,7 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
     using static zfunc;
@@ -20,7 +19,7 @@ namespace Z0
         /// <param name="src">The bit source</param>
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
-        public static uint ntz<T>(T src)
+        public static int ntz<T>(T src)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))

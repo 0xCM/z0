@@ -2,18 +2,16 @@
 // Copyright   :  (c) Chris Moore, 2019
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Test
+namespace Z0
 {
     using System;
-    using System.Linq;
     using System.Runtime.CompilerServices;
 
     using static zfunc;
 
-
-    public class t_bv_part : BitVectorTest<t_bv_part>
+    public class t_pbv_partition : t_bv<t_pbv_partition>
     {
-        public void bvpart_32x16()
+        public void pbv_partition_32x16()
         {
             Span<BitVector16> dst = stackalloc BitVector16[2];
             for(var i=0; i<SampleSize; i++)
@@ -25,7 +23,7 @@ namespace Z0.Test
             }
         }
 
-        public void bvpart_32x4()
+        public void pbv_partition_32x4()
         {
             Span<BitVector4> dst = stackalloc BitVector4[8];
             for(var i=0; i<SampleSize; i++)
@@ -36,10 +34,8 @@ namespace Z0.Test
                 {
                     var y = (BitVector4)x[j,j+4];
                     Claim.eq(y, dst[k]);
-
                 }
             }         
         }
-
     }
 }

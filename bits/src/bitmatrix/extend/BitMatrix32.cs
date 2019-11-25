@@ -21,7 +21,7 @@ namespace Z0
         /// </summary>
         [MethodImpl(Inline)]
         public static BitCells<N1024,uint> ToBitVector(this BitMatrix32 A)
-            => BitCells.from(A.Data, n1024);
+            => BitCells.load(A.Data, n1024);
 
 
         /// <summary>

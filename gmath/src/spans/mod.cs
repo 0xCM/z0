@@ -15,7 +15,7 @@ namespace Z0
             where T : unmanaged
         {
             for(var i=0; i<lhs.Length; i++)
-                gmath.mod(ref lhs[i],rhs);
+                lhs[i] = gmath.mod(lhs[i],rhs);
             return lhs;
         }
 
@@ -42,7 +42,7 @@ namespace Z0
         {
             var len = length(lhs,rhs);
             for(var i=0; i<len; i++)
-                gmath.mod(ref lhs[i],rhs[i]);
+                lhs[i] = gmath.mod(lhs[i],rhs[i]);
             return lhs;
         }
 
