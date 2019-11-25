@@ -53,7 +53,7 @@ namespace Z0
         /// <param name="src">The source pattern</param>
         /// <param name="reps">The number of times to repeat the pattern</param>
         /// <typeparam name="T">The primal source type</typeparam>
-        public static BitString from<T>(T src, int reps)                
+        public static BitString replicate<T>(T src, int reps)                
             where T : unmanaged
         {
             BitSize capacity = Unsafe.SizeOf<T>() * 8;
@@ -70,9 +70,19 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The primal source type</typeparam>
         [MethodImpl(Inline)]
-        public static BitString from<T>(in T src)
+        public static BitString from<T>(T src)
             where T : unmanaged
                 => new BitString(BitStore.bitseq(src));                
+
+        /// <summary>
+        /// Constructs a bitstring from primal value
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <typeparam name="T">The primal source type</typeparam>
+        [MethodImpl(Inline)]
+        public static BitString from<T>(T src, int maxlen)
+            where T : unmanaged
+                => new BitString(BitStore.bitseq(src,maxlen));                
 
         /// <summary>
         /// Constructs a bitstring from span of scalar values

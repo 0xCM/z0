@@ -14,29 +14,19 @@ namespace Z0
         INatDivisible<N512,N32>, INatDivisible<N512,N16>, INatDivisible<N512,N8>, 
         INatDivisible<N512,N4>
     {
+        public const ulong Value = 1ul << 9;
+
         public static N512 Rep => default;
 
-        public static NatSeq<N5,N1,N2> Seq => default;
 
         [MethodImpl(Inline)]
-        public static implicit operator int(N512 src)
-            => (int)src.NatValue;
+        public static implicit operator int(N512 src) => 512;
 
-
-        public NatSeq Sequence 
-            => Seq.Sequence;
-
-        public ulong NatValue 
-            => Seq.NatValue;
-
-        ITypeNat INatPow2.Exponent 
-            => N9.Rep;
-
+        public ulong NatValue => Value;
 
         public override string ToString() 
-            => Seq.format();
+            => Value.ToString();
 
     }
-
 
 }

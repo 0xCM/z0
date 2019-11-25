@@ -7,11 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
-    using System.Collections.Generic;
 
     using static zfunc;    
-    using static nfunc;
-    using static As;
 
     partial class BitVector
     {
@@ -24,7 +21,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitVector<T> add<T>(BitVector<T> x, BitVector<T> y)
             where T : unmanaged
-                => gmath.add(x.Data, y.Data);
+                => gmath.add(x.Scalar, y.Scalar);
 
         [MethodImpl(Inline)]
         public static BitVector4 add2(BitVector4 x, BitVector4 y)

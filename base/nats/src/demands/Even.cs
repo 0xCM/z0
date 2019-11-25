@@ -29,9 +29,6 @@ namespace Z0
         
         public ulong NatValue 
             => k.NatValue;
-
-        public NatSeq Sequence 
-            => k.Sequence;
         
         public override string ToString()
             => Description;

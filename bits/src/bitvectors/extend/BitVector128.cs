@@ -112,7 +112,7 @@ namespace Z0
         /// </summary>
         [MethodImpl(Inline)]
         public static BitVector16 ToBitVector16(this BitVector128 src)
-            => BitVector16.FromScalar(src.x0);
+            => (ushort)src.x0;
 
         /// <summary>
         /// Applies a truncating reduction Bv64 -> Bv32

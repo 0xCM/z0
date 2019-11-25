@@ -115,7 +115,7 @@ namespace Z0
             var sb = sbuild();
             for(var i=0; i<src.Length; i++)
             {
-                var bs = BitString.from(in src[i]).Format(tlz,specifier,blockWidth);
+                var bs = BitString.from(src[i]).Format(tlz,specifier,blockWidth);
                 sb.Append(bs);
                 if(i != src.Length - 1)
                     sb.Append(AsciSym.Space);                    

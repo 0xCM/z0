@@ -22,6 +22,7 @@ namespace Z0
             where T : unmanaged
                 => bitsize<T>() - nlz(x);
 
+
         /// <summary>
         /// Counts the number of leading zero bits
         /// </summary>

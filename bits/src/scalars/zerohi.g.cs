@@ -21,7 +21,7 @@ namespace Z0
         /// <param name="index">The index at which to begin disabling target bits</param>
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
-        public static T zerohi<T>(T src, uint index)
+        public static T zerohi<T>(T src, int index)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))

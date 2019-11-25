@@ -23,8 +23,8 @@ namespace Z0
         /// </summary>
         /// <param name="src">The bit source</param>
         [MethodImpl(Inline)]
-        public static byte zerohi(byte src, uint index)
-            =>  (byte)ZeroHighBits((uint)src, index);
+        public static byte zerohi(byte src, int index)
+            => (byte)ZeroHighBits((uint)src, (uint)index);
 
         /// <summary>
         /// unsigned int _bzhi_u32 (unsigned int a, unsigned int index) BZHI r32a, reg/m32, r32b
@@ -32,8 +32,8 @@ namespace Z0
         /// </summary>
         /// <param name="src">The bit source</param>
         [MethodImpl(Inline)]
-        public static ushort zerohi(ushort src, uint index)
-            => (ushort)ZeroHighBits((uint)src, index);
+        public static ushort zerohi(ushort src, int index)
+            => (ushort)ZeroHighBits((uint)src, (uint)index);
 
         /// <summary>
         /// unsigned int _bzhi_u32 (unsigned int a, unsigned int index) BZHI r32a, reg/m32, r32b
@@ -41,8 +41,8 @@ namespace Z0
         /// </summary>
         /// <param name="src">The bit source</param>
         [MethodImpl(Inline)]
-        public static uint zerohi(uint src, uint index)
-            => ZeroHighBits(src, index);
+        public static uint zerohi(uint src, int index)
+            => ZeroHighBits(src, (uint)index);
 
         /// <summary>
         /// unsigned __int64 _bzhi_u64 (unsigned __int64 a, unsigned int index) BZHI r64a,reg/m32, r64b 
@@ -51,7 +51,7 @@ namespace Z0
         /// <param name="src">The bit source</param>
         /// <param name="index">The index at which to begin disabling bits</param>
         [MethodImpl(Inline)]
-        public static ulong zerohi(ulong src, uint index)
-            => ZeroHighBits(src, index);
+        public static ulong zerohi(ulong src, int index)
+            => ZeroHighBits(src, (uint)index);
     }
 }

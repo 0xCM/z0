@@ -1,4 +1,4 @@
-// 2019-11-23 16:56:45:216
+// 2019-11-25 01:31:45:766
 Span<byte> GetBytes(in int src)
 {
     IL_0000: ldarg.1
@@ -163,9 +163,8 @@ ulong pow2()
     IL_0000: ldloca.s V_0
     IL_0002: initobj Z0.N16
     IL_0008: ldloc.0
-    IL_0009: call Z0.NatVal Z0.NatMath::pow2<Z0.N16>(Z0.N16)
-    IL_000E: call System.UInt64 Z0.NatVal::op_Implicit(Z0.NatVal)
-    IL_0013: ret
+    IL_0009: call System.UInt64 Z0.NatMath::pow2<Z0.N16>(Z0.N16)
+    IL_000E: ret
 
 }
 ulong sll()

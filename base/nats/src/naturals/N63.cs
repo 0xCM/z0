@@ -9,25 +9,19 @@ namespace Z0
 
     using static constant;    
 
-    public readonly struct N63 : INatSeq<N63>, 
-        INatPrior<N63,N64>
+    public readonly struct N63 : INatSeq<N63,N6,N3>, INatPrior<N63,N64>
     {
-        public static N63 Rep => default;
+        public const ulong Value = (1ul << 6) - 1;     
 
-        public static NatSeq<N6,N3> Seq => default;
+        public static N63 Rep => default;
+        
         
         [MethodImpl(Inline)]
-        public static implicit operator int(N63 src)
-            => (int)src.NatValue;
-
+        public static implicit operator int(N63 src) => 63;
         
-        public NatSeq Sequence 
-            => Seq;
-        
-        public ulong NatValue 
-            => Seq.NatValue;                
+        public ulong NatValue => Value;
         
         public override string ToString() 
-            => Seq.format();        
+            => Value.ToString();
     }
 }

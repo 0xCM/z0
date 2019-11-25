@@ -11,20 +11,18 @@ namespace Z0
 
     public readonly struct N19 : INatSeq<N19>
     {
-        public static NatSeq<N1,N9> Seq => default;
+        public const ulong Value = 19;
+
+        public static N19 Rep => default;
+
 
         [MethodImpl(Inline)]
-        public static implicit operator int(N19 src)
-            => (int)src.NatValue;
+        public static implicit operator int(N19 src) => 19;
 
-        public NatSeq Sequence 
-            => Seq;
-
-        public ulong NatValue 
-            => Seq.NatValue;
+        public ulong NatValue => Value;
 
         public override string ToString() 
-            => Seq.format();
+            => Value.ToString();
     }
 
 

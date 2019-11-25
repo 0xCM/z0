@@ -9,24 +9,18 @@ namespace Z0
     
     using static constant;    
 
-    public readonly struct N80 : INatSeq<N80>
+    public readonly struct N80 : INatSeq<N80,N8,N0>
     {
+        public const ulong Value = 80;
+
         public static N80 Rep => default;
 
-        public static NatSeq<N8,N0> Seq => default;
-
         [MethodImpl(Inline)]
-        public static implicit operator int(N80 src)
-            => (int)src.NatValue;
+        public static implicit operator int(N80 src) => 80;
 
-
-        public NatSeq Sequence 
-            => Seq;
-
-        public ulong NatValue 
-            => Seq.NatValue;
+        public ulong NatValue => Value;
 
         public override string ToString() 
-            => Seq.format();
+            => Value.ToString();
     }
 }

@@ -22,6 +22,18 @@ namespace Z0
         /// <param name="dst">The right bit position</param>
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
+        public static T between<T>(T src, int p0, int p1)
+            where T : unmanaged
+                => between(src,(byte)p0, (byte)p1);
+
+        /// <summary>
+        /// Extracts a contiguous range of bits from a primal source inclusively between two index positions
+        /// </summary>
+        /// <param name="src">The bit source</param>
+        /// <param name="rhs">The left bit position</param>
+        /// <param name="dst">The right bit position</param>
+        /// <typeparam name="T">The primal type</typeparam>
+        [MethodImpl(Inline)]
         public static T between<T>(T src, byte p0, byte p1)
             where T : unmanaged
         {
@@ -29,15 +41,16 @@ namespace Z0
                 || typeof(T) == typeof(ushort) 
                 || typeof(T) == typeof(uint) 
                 || typeof(T) == typeof(ulong))
-                    return between_u(src,p0,p1);
+                return between_u(src,p0,p1);
             else if(typeof(T) == typeof(sbyte) 
                 || typeof(T) == typeof(short)
                 || typeof(T) == typeof(int) 
                 || typeof(T) == typeof(long))
-                    return between_i(src,p0,p1);
+                return between_i(src,p0,p1);
             else
-                    return between_f(src,p0,p1);
+                return between_f(src,p0,p1);
         }
+
 
         [MethodImpl(Inline)]
         static T between_i<T>(T src, byte p0, byte p1)

@@ -25,6 +25,17 @@ namespace Z0
         /// Counts the number of enabled bits in the source vector
         /// </summary>
         /// <param name="x">The source vector</param>
+        /// <typeparam name="T">The primal type</typeparam>
+        [MethodImpl(Inline)]
+        public static uint pop<N,T>(BitVector<N,T> x)
+            where T : unmanaged
+            where N : unmanaged, ITypeNat
+                => gbits.pop(x.data);
+
+        /// <summary>
+        /// Counts the number of enabled bits in the source vector
+        /// </summary>
+        /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
         public static uint pop(BitVector4 x)
             => gbits.pop(x.data);

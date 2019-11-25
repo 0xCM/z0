@@ -7,7 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static nfunc;
     using static constant;
 
     /// <summary>
@@ -31,9 +30,6 @@ namespace Z0
 
         public static NatSeq Seq
             => Nat.reflect(Digits);
-
-        NatSeq ITypeNat.Sequence
-            => Seq;
 
         ulong ITypeNat.NatValue 
             => Value;

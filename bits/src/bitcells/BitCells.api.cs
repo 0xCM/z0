@@ -20,10 +20,16 @@ namespace Z0
         /// <typeparam name="N">The natural type upon which the vector is predicated</typeparam>
         /// <typeparam name="T">The primal type upon which the vector is predicated</typeparam>
         [MethodImpl(Inline)]
-        public static BitCells<N,T> alloc<N,T>(N len = default, T? fill = null)
+        public static BitCells<N,T> alloc<N,T>(N n, T fill)
             where N : unmanaged, ITypeNat
             where T : unmanaged
                 => BitCells<N,T>.Alloc(fill);
+
+        [MethodImpl(Inline)]
+        public static BitCells<N,T> alloc<N,T>(N n = default)
+            where N : unmanaged, ITypeNat
+            where T : unmanaged
+                => BitCells<N,T>.Alloc();
 
         [MethodImpl(NotInline)]
         public static BitCells<T> alloc<T>(int blocks)        
@@ -155,6 +161,18 @@ namespace Z0
         }
 
         /// <summary>
+        /// Computes the Euclidean scalar product between two natural bitvectors using modular arithmetic
+        /// </summary>
+        /// <param name="x">The first vector</param>
+        /// <param name="y">The second vector</param>
+        /// <remarks>This should be considered a reference implementation; the dot operation is considerably faster</remarks>
+        [MethodImpl(Inline)]
+        public static bit modprod<N,T>(in BitCells<N,T> x, in BitCells<N,T> y)
+            where N : unmanaged, ITypeNat
+            where T : unmanaged
+                => modprod(x.ToCells(),y.ToCells());
+
+        /// <summary>
         /// Computes the number of cells required to hold a specified number of bits
         /// </summary>
         /// <param name="len">The number of bits to store</param>
@@ -201,5 +219,7 @@ namespace Z0
                 result ^= x[i] & y[i];
             return result;
         }
+
+
    }
 }

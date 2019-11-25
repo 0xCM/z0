@@ -11,19 +11,17 @@ namespace Z0
 
     public readonly struct N22 : INatSeq<N22>, INatEven<N22>
     {
-        public static NatSeq<N2,N2> Seq => default;
+        public const ulong Value = 22;
+
+        public static N22 Rep => default;
+
 
         [MethodImpl(Inline)]
-        public static implicit operator int(N22 src)
-            => (int)src.NatValue;
+        public static implicit operator int(N22 src) => 22;
 
-        public NatSeq Sequence 
-            => Seq;
-
-        public ulong NatValue 
-            => Seq.NatValue;
+        public ulong NatValue => Value;
 
         public override string ToString() 
-            => Seq.format();
+            => Value.ToString();
     }
 }

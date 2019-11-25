@@ -195,10 +195,10 @@ namespace Z0
             NatCaseStart<N,T>();
             for(var i=0; i<CycleCount; i++)
             {
-                var x = Random.BitVector<N,T>();
-                var y = Random.BitVector<N,T>();
+                var x = Random.BitCells<N,T>();
+                var y = Random.BitCells<N,T>();
                 bit a = x % y;
-                var b = modprod(x,y);
+                var b = BitCells.modprod(x,y);
                 if(a != b)
                     Trace($"{bitcount}x{moniker<T>()} is a problem");
                 Claim.yea(a == b);            

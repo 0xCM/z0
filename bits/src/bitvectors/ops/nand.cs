@@ -24,7 +24,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitVector<T> nand<T>(BitVector<T> x, BitVector<T> y)
             where T : unmanaged
-                => gmath.nand(x.Data, y.Data);
+                => gmath.nand(x.Scalar, y.Scalar);
 
         /// <summary>
         /// Computes z := ~(x & y) for bitvectors x and y

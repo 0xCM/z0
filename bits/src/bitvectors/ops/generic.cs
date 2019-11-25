@@ -14,13 +14,33 @@ namespace Z0
     {
 
         /// <summary>
-        /// Creates a vector from a bitstring
+        /// Creates a bitvector defined by a single cell or portion thereof
         /// </summary>
-        /// <param name="src">The source bitstring</param>
+        /// <param name="src">The source cell</param>
+        [MethodImpl(Inline)]
+        public static BitVector<T> generic<T>(T src)
+            where T : unmanaged
+                => new BitVector<T>(src);
+
+        /// <summary>
+        /// Creates a bitvector from a span of bytes
+        /// </summary>
+        /// <param name="src">The source bits</param>
+        /// <param name="n">The bitvector length</param>
+        [MethodImpl(Inline)]
+        public static BitVector<T> generic<T>(Span<byte> src)
+            where T : unmanaged
+                => generic(src.TakeScalar<T>());
+
+
+        /// <summary>
+        /// Loads an bitvector of minimal size from a source bitstring
+        /// </summary>
+        /// <param name="src">The bitstring source</param>
         [MethodImpl(Inline)]
         public static BitVector<T> generic<T>(BitString src)
             where T : unmanaged
-                => src.TakeScalar<T>();
+                => generic<T>(src.ToPackedBytes());
 
         /// <summary>
         /// Allocates and fills a byte-secialized generic bitvector
@@ -42,7 +62,7 @@ namespace Z0
         /// <param name="src">The source bitstring</param>
         [MethodImpl(Inline)]
         public static BitVector<uint> generic(byte x0, byte x1, byte x2, byte x3)
-            => BitVector<uint>.From(Bits.pack(x0,x1,x2,x3));
+            => generic(Bits.pack(x0,x1,x2,x3));
 
     }
 

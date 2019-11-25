@@ -1,4 +1,4 @@
-// 2019-11-23 16:56:47:551
+// 2019-11-25 01:31:48:002
 BitGrid64<uint> bg64_and_32(BitGrid64<uint> gx, BitGrid64<uint> gy)
 {
     IL_0000: ldarg.0
@@ -105,29 +105,29 @@ void store_bitstring(BitString src, in BitGrid<N8,N32,ulong> dst)
     IL_001A: ret
 
 }
-bit read_bit_from_vector(in BitVector<N23,byte> src)
+bit read_bit_from_vector(in BitCells<N23,byte> src)
 {
     IL_0000: ldarg.0
-    IL_0001: call System.Byte& Z0.BitVector`2<Z0.N23,System.Byte>::get_Head()
+    IL_0001: call System.Byte& Z0.BitCells`2<Z0.N23,System.Byte>::get_Head()
     IL_0006: ldc.i4.3
     IL_0007: call Z0.bit Z0.BitGrid::readbit<System.Byte>(System.Byte&,System.Int32)
     IL_000C: ret
 
 }
-bit read_bit_from_vector_2(in BitVector<N23,byte> src)
+bit read_bit_from_vector_2(in BitCells<N23,byte> src)
 {
     IL_0000: ldarg.0
     IL_0001: ldc.i4.3
-    IL_0002: call Z0.bit Z0.BitVector`2<Z0.N23,System.Byte>::get_Item(System.Int32)
+    IL_0002: call Z0.bit Z0.BitCells`2<Z0.N23,System.Byte>::get_Item(System.Int32)
     IL_0007: ret
 
 }
-void set_bit_in_vector(in BitVector<N23,byte> src)
+void set_bit_in_vector(in BitCells<N23,byte> src)
 {
     IL_0000: ldarg.0
     IL_0001: ldc.i4.s 9
     IL_0003: call Z0.bit Z0.bit::get_On()
-    IL_0008: call System.Void Z0.BitVector`2<Z0.N23,System.Byte>::set_Item(System.Int32,Z0.bit)
+    IL_0008: call System.Void Z0.BitCells`2<Z0.N23,System.Byte>::set_Item(System.Int32,Z0.bit)
     IL_000D: ret
 
 }
@@ -171,7 +171,7 @@ bit read_bit_from_grid(in BitGrid<N23,N5,byte> src)
 }
 int segments()
 {
-    IL_0000: call System.Int32 Z0.BitVector`2<Z0.N23,System.Byte>::get_SegCount()
+    IL_0000: call System.Int32 Z0.BitCells`2<Z0.N23,System.Byte>::get_SegCount()
     IL_0005: ret
 
 }
@@ -184,7 +184,7 @@ int count_segs()
     IL_000B: initobj Z0.N30
     IL_0011: ldloc.1
     IL_0012: ldc.i4.0
-    IL_0013: call System.Int32 Z0.BitGrid::segcount<Z0.N20,Z0.N30,System.UInt32>(Z0.N20,Z0.N30,System.UInt32)
+    IL_0013: call System.Int32 Z0.BitCalcs::segcount<Z0.N20,Z0.N30,System.UInt32>(Z0.N20,Z0.N30,System.UInt32)
     IL_0018: ret
 
 }
@@ -213,14 +213,5 @@ BitGrid<uint> bg_load_32x32x32(Span<uint> src)
     IL_0003: ldc.i4.s 32
     IL_0005: call Z0.BitGrid`1<System.UInt32> Z0.BitGrid::load<System.UInt32>(System.Span`1<System.UInt32>,System.UInt16,System.UInt16)
     IL_000A: ret
-
-}
-GridSpec bg_specify(ushort rows, ushort cols, ushort segwidth)
-{
-    IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: ldarg.2
-    IL_0003: call Z0.GridSpec Z0.BitGrid::specify(System.UInt16,System.UInt16,System.UInt16)
-    IL_0008: ret
 
 }

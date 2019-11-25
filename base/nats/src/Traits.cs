@@ -18,10 +18,6 @@ namespace Z0
         /// </summary>
         ulong NatValue {get;}
 
-        /// <summary>
-        /// Specifies the canonical sequence representative
-        /// </summary>
-        NatSeq Sequence {get;}
     }
 
     /// <summary>
@@ -30,6 +26,20 @@ namespace Z0
     public interface NatSeq : ITypeNat
     {
 
+    }
+
+    /// <summary>
+    /// Characterizes a typenat
+    /// </summary>
+    /// <typeparam name="T">The represented type</typeparam>
+    public interface ITypeNat<K> : ITypeNat, INatDivisible<K>
+        where K: unmanaged, ITypeNat
+    {
+        K NatRep
+        {
+            [MethodImpl(Inline)]
+            get => default(K);
+        }
     }
 
     /// <summary>
@@ -42,18 +52,32 @@ namespace Z0
 
     }
 
-    /// <summary>
-    /// Characterizes a typenat
-    /// </summary>
-    /// <typeparam name="T">The represented type</typeparam>
-    public interface ITypeNat<K> : ITypeNat, INatDivisible<K>
-        where K: unmanaged, ITypeNat<K>
+    public interface INatSeq<K,K1,K2> : INatSeq<K>
+        where K : unmanaged, INatSeq<K,K1,K2>
+        where K1 : unmanaged, INatPrimitive<K1>
+        where K2 : unmanaged, INatPrimitive<K2>
     {
-        K NatRep
+
+        NatSeq<K1,K2> SeqRep
         {
             [MethodImpl(Inline)]
-            get => default(K);
-        }
+            get => NatSeq<K1,K2>.Rep;
+        }     
+
+    }
+     
+    public interface INatSeq<K,K1,K2,K3> : INatSeq<K>
+        where K : unmanaged, INatSeq<K,K1,K2,K3>
+        where K1 : unmanaged, INatPrimitive<K1>
+        where K2 : unmanaged, INatPrimitive<K2>
+        where K3 : unmanaged, INatPrimitive<K3>
+    {
+
+        NatSeq<K1,K2,K3> SeqRep
+        {
+            [MethodImpl(Inline)]
+            get => NatSeq<K1,K2,K3>.Rep;
+        }        
     }
 
     public interface INatDemand 
@@ -83,21 +107,20 @@ namespace Z0
         
     }
 
-
     /// <summary>
     /// Requires k1 = n*k2 for some n>= 1
     /// </summary>
     /// <typeparam name="K1"></typeparam>
     /// <typeparam name="K2"></typeparam>
     public interface INatDivisible<K1,K2> : INatDemand<K1,K2>
-        where K1: unmanaged, ITypeNat<K1>
+        where K1: unmanaged, ITypeNat
         where K2: unmanaged, ITypeNat
     {
 
     }
 
     public interface INatDivisible<K> : INatDivisible<K,K>
-        where K : unmanaged, ITypeNat<K>
+        where K : unmanaged, ITypeNat//, ITypeNat<K>
     {
 
     }
@@ -239,7 +262,7 @@ namespace Z0
 
     public interface INatPow2 : ITypeNat
     {
-        ITypeNat Exponent {get;}        
+        
     }
 
     /// <summary>
@@ -250,6 +273,12 @@ namespace Z0
     public interface INatPow2<E> : INatPow2, INatPow<N2,E>, INatEven<E>
         where E : unmanaged, ITypeNat<E>
     {
+        E Exp
+        {
+            [MethodImpl(Inline)]
+            get => default(E);
+        }
+         
 
     }
 

@@ -203,7 +203,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
         public static bool operator false(BitVector32 src)
-            => !src.NonEmpty;
+            => src.Empty;
 
         [MethodImpl(Inline)]
         public static bool operator ==(in BitVector32 x, in BitVector32 y)
@@ -228,6 +228,15 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => data;
+        }
+
+        /// <summary>
+        /// The number of bits represented by the vector
+        /// </summary>
+        public readonly int Width
+        {
+            [MethodImpl(Inline)]
+            get => 32;
         }
 
         public BitVector16 Lo
@@ -269,14 +278,6 @@ namespace Z0
             get => data != 0;
         }
 
-        /// <summary>
-        /// The number of bits represented by the vector
-        /// </summary>
-        public readonly int Width
-        {
-            [MethodImpl(Inline)]
-            get => 32;
-        }
 
         /// <summary>
         /// Queries/Manipulates index-identified bits

@@ -58,6 +58,11 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
+        public static ReadOnlySpan<byte> bitseq<T>(T src, int count)
+            where T : unmanaged
+                => bitseq(src).Slice(0, Math.Min(bitsize<T>(), count));
+
+        [MethodImpl(Inline)]
         public static void bitseq<T>(T src, Span<byte> dst, int offset = 0)
             where T : unmanaged
         {
@@ -181,7 +186,6 @@ namespace Z0
         {            
             for(var i=0; i<4; i++)
                 memcpy(bitseqP((byte)(src >> seglen*i)), dst, offset + seglen*i, seglen);
-
         }                 
 
         [MethodImpl(Inline)]

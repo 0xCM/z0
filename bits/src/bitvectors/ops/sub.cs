@@ -19,7 +19,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitVector<T> sub<T>(BitVector<T> x, BitVector<T> y)
             where T : unmanaged
-                => gmath.sub(x.Data, y.Data);
+                => gmath.sub(x.Scalar, y.Scalar);
 
         /// <summary>
         /// Computes the arithmetic difference z := x - y for bitvectors x and y

@@ -9,24 +9,19 @@ namespace Z0
 
     using static constant;    
 
-    public readonly struct N15 : INatSeq<N15>, INatDivisible<N15,N5>
+    public readonly struct N15 : INatSeq<N15,N1,N5>, INatDivisible<N15,N5>
     {
+        public const ulong Value = 15;
+
         public static N15 Rep => default;
 
-        public static NatSeq<N1,N5> Seq => default;
 
         [MethodImpl(Inline)]
-        public static implicit operator int(N15 src)
-            => (int)src.NatValue;
-
-        public NatSeq Sequence 
-            => Seq;
-
-        public ulong NatValue 
-            => Seq.NatValue;
+        public static implicit operator int(N15 src) => 15;
+        public ulong NatValue  => Value;
 
         public override string ToString() 
-            => Seq.format();
+            => Value.ToString();
     }
 
 

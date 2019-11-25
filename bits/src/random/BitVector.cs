@@ -46,7 +46,22 @@ namespace Z0
             int clamp = bitsize<T>() - math.min(bitsize<T>(), (uint)width);
             return gmath.srl(v,clamp);
         }    
-            
+
+        /// <summary>
+        /// Produces a natural bitvector predicated on a random source and effective width
+        /// </summary>
+        /// <param name="random">The random source</param>
+        /// <typeparam name="T">The underlying primal type</typeparam>
+        [MethodImpl(Inline)]
+        public static BitVector<N,T> BitVector<N,T>(this IPolyrand random, N n = default)        
+            where T : unmanaged
+            where N : unmanaged, ITypeNat
+        {
+            var v = random.Next<T>();
+            int clamp = bitsize<T>() - math.min(bitsize<T>(), natval(n));
+            return gmath.srl(v,clamp);
+        }    
+
         /// <summary>
         /// Produces a 4-bit primal bitvector predicated on a random source
         /// </summary>
@@ -164,7 +179,7 @@ namespace Z0
         /// <typeparam name="N">The length type</typeparam>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline)]
-        public static BitCells<N,T> BitVector<N,T>(this IPolyrand random)
+        public static BitCells<N,T> BitCells<N,T>(this IPolyrand random)
             where T : unmanaged
             where N : unmanaged, ITypeNat
                 => Z0.BitCells.from<N,T>(random.Stream<T>().ToSpan(BitCalcs.segcount<N,N1,T>()));

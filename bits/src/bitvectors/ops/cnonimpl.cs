@@ -21,7 +21,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitVector<T> cnonimpl<T>(BitVector<T> x, BitVector<T> y)
             where T : unmanaged
-                => gmath.cnonimpl(x.Data, y.Data);
+                => gmath.cnonimpl(x.Scalar, y.Scalar);
 
         /// <summary>
         /// Computes the converse nonimplication, z := x & ~y, for bitvectors x and y

@@ -16,28 +16,17 @@ namespace Z0
         INatDivisible<N4096,N4>    
 
     {
-        public const ulong Value = 1ul << 12;        
+        public const ulong Value = 1ul << 12;
 
         public static N4096 Rep => default;
 
-        public static NatSeq<N4,N0,N9,N6> Seq => default;
-
         [MethodImpl(Inline)]
-        public static implicit operator int(N4096 src)
-            => (int)src.NatValue;
+        public static implicit operator int(N4096 src) => 4096;
 
-
-        public NatSeq Sequence 
-            => Seq.Sequence;
-
-        public ulong NatValue 
-            => Value;
-
-        ITypeNat INatPow2.Exponent 
-            => N12.Rep;
+        public ulong NatValue => Value;
 
         public override string ToString() 
-            => Seq.format();
+            => Value.ToString();
     }
 
 

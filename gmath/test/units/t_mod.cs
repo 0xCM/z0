@@ -72,7 +72,6 @@ namespace Z0.Test
             mod_inverse_check(n19);
             mod_inverse_check(n31);
             mod_inverse_check(N41);
-            mod_inverse_check(n1277);
         }
 
         public void mod_add()

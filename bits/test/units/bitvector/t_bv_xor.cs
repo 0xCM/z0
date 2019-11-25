@@ -11,7 +11,7 @@ namespace Z0
 
     public class t_bv_xor : BitVectorTest<t_bv_xor>
     {
-        public void bv_xor_4()
+        void bv_xor_4()
         {
             for(var i=0; i<SampleSize; i++)
             {
@@ -47,8 +47,8 @@ namespace Z0
 
         public void bvxor_n13x8u_check()
         {
-            var x0 = Random.BitVector<N13,byte>();
-            var y0 = Random.BitVector<N13,byte>();
+            var x0 = Random.BitCells<N13,byte>();
+            var y0 = Random.BitCells<N13,byte>();
             var z0 = x0 ^ y0;
             var x1 = x0.ToPrimal(n16);
             var y1 = y0.ToPrimal(n16);
@@ -56,7 +56,7 @@ namespace Z0
             Claim.eq(z0.ToPrimal(n16),z1);
         }
 
-        public void bv_xor_128()
+        void bv_xor_128()
         {
             for(var i=0; i< SampleSize; i++)
             {
@@ -84,7 +84,7 @@ namespace Z0
                 Claim.lteq(BitVector.effwidth(y),width);
 
                 var z = x ^ y;
-                Claim.eq(gmath.xor(x.Data, y.Data), z.Data);
+                Claim.eq(gmath.xor(x.Scalar, y.Scalar), z.Scalar);
 
                 var xbs = x.ToBitString().Truncate(width);
                 Claim.eq(width, xbs.Length);

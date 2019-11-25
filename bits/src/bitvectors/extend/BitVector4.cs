@@ -61,8 +61,8 @@ namespace Z0
         /// </summary>
         [MethodImpl(Inline)]
         public static BitString ToBitString(this BitVector4 src)
-            => src.ToBitString().Truncate(4);
-
+            => BitString.from(src.Scalar, src.Width);
+            
         [MethodImpl(Inline)]
         public static string Format(this BitVector4 src,bool tlz = false, bool specifier = false, int? blockWidth = null)
             => src.ToBitString().Format(tlz, specifier, blockWidth);

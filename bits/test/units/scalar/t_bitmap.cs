@@ -63,14 +63,15 @@ namespace Z0
             Claim.eq(expect, actual);        
         }
 
-        void inject_64u_basecase()
+        public void inject_64u_basecase()
         {
             ulong src = 0b10101010;
-            ulong dst = 0b11111111_11111111_11111111_11111111_11111111_11111111_11111111_11111111;            
+            ulong dst = 0b11111111_11111111_11111111_11111111_11111111_11111111_11111111_11111111;   
+            ulong exp = 0b11111111_11111111_11111111_11111111_11111111_10101010_11111111_11111111;            
             byte start = 16;
             byte len = 8;
             var result = Bits.inject(src, dst, start,len);
-            Trace(result.FormatBits(blockWidth:8));
+            Claim.eq(exp,result);            
 
         }
 
@@ -80,12 +81,17 @@ namespace Z0
             byte len = 12;
             for(var i=0; i<SampleSize; i++)
             {
-                BitVector64 src = 0b111111110101;
+                BitVector64 src = 0b111111111111;
                 BitVector64 dst = Random.Next<ulong>();
                 BitVector64 x = Bits.inject(src, dst, start, len);
                 BitVector64 y = dst;
                 for(int j=start, k=0; j< start + len; j++,k++)
                     y[j] = src[k];
+                if(x != y)
+                {
+                    Trace(x.Format(blockWidth:8));
+                    Trace(y.Format(blockWidth:8));
+                }
                 Claim.eq(x,y);
 
                 var bs = dst.ToBitString().Inject(src.ToBitString(), start,len);

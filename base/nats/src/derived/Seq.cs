@@ -19,8 +19,7 @@ namespace Z0
     {
         public static NatSeq1<K1> Rep => default;
         
-        public static ulong Value =>
-             Nat.nat<K1>().NatValue;
+        public static ulong Value => Nat.nat<K1>().NatValue;
                 
         public ulong NatValue 
             => Value;
@@ -47,24 +46,21 @@ namespace Z0
     {
         public static NatSeq<K1,K2> Rep => default;
 
-        public static ulong Value =>
-              Nat.nat<K1>().NatValue * 10
-            + Nat.nat<K2>().NatValue;
+        public static ulong Value
+        {
+            [MethodImpl(Inline)]
+            get => Nat.nat<K1>().NatValue * 10 + Nat.nat<K2>().NatValue;
+        }
 
-        public ulong NatValue 
-            => Value;
+        public ulong NatValue => Value;
 
-        public ITypeNat NatRep
-            => Rep; 
-
-        public NatSeq Sequence
-            => Rep; 
+        public NatSeq Sequence => Rep; 
     
         public string format()
             => Value.ToString();
 
         public override string ToString() 
-            => format();
+            => Value.ToString();
     }
 
     /// <summary>
@@ -90,9 +86,6 @@ namespace Z0
         public ulong NatValue 
             => Value;
 
-        public ITypeNat NatRep
-            => Rep; 
-
         public NatSeq Sequence
             => Rep; 
 
@@ -100,7 +93,7 @@ namespace Z0
             => Value.ToString();
 
         public override string ToString() 
-            => format();
+            => Value.ToString();
     }
 
     /// <summary>
@@ -124,20 +117,15 @@ namespace Z0
             + Nat.nat<K4>().NatValue;
         }
 
-        public ulong NatValue 
-            => Value;
+        public ulong NatValue => Value;
 
-        public ITypeNat NatRep
-            => Rep; 
-
-        public NatSeq Sequence
-            => Rep; 
+        public NatSeq Sequence => Rep; 
 
         public string format()
             => Value.ToString();
 
         public override string ToString() 
-            => format();
+            => Value.ToString();
     }
 
     /// <summary>
@@ -292,20 +280,15 @@ namespace Z0
             + Nat.nat<K8>().NatValue;
         }
 
-        public ulong NatValue 
-            => Value;
+        public ulong NatValue => Value;
 
-        public ITypeNat NatRep
-            => Rep; 
-
-        public NatSeq Sequence
-            => Rep; 
-
+        public NatSeq Sequence => Rep; 
+        
         public string format()
             => Value.ToString();
 
         public override string ToString() 
-            => format();
+            => Value.ToString();
     } 
 
     /// <summary>
@@ -339,19 +322,14 @@ namespace Z0
             + Nat.nat<K9>().NatValue; 
         }
 
-        public ulong NatValue 
-            => Value;
+        public ulong NatValue => Value;
 
-        public ITypeNat NatRep
-            => Rep; 
-
-        public NatSeq Sequence
-            => Rep; 
+        public NatSeq Sequence => Rep; 
 
         public string format()
             => Value.ToString();
 
         public override string ToString() 
-            => format();
-    }     
+             => Value.ToString();
+   }     
 }

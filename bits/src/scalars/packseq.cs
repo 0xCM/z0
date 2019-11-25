@@ -5,12 +5,10 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
+
     using static zfunc;
-    using static As;
-    using static AsIn;
 
     partial class Bits
     {        
@@ -21,27 +19,7 @@ namespace Z0
         public static ref byte packseq(ReadOnlySpan<byte> src, out byte dst)
         {
             dst = 0;
-            var count = Math.Min(8, src.Length);
-            for(var i=0; i< count; i++)
-                if(src[i] == 1)
-                    dst |= (byte)(1 << i);
-            return ref dst;
-        }
-
-        public static ref byte packseq(out byte dst, params byte[] src)        
-        {
-            dst = 0;
-            var count = Math.Min(8, src.Length);
-            for(var i=0; i< count; i++)
-                if(src[i] == 1)
-                    dst |= (byte)(1 << i);
-            return ref dst;
-        }
-
-        public static ref uint packseq(out uint dst, params byte[] src)        
-        {
-            dst = 0;
-            var count = Math.Min(32, src.Length);
+            var count = math.min(8, src.Length);
             for(var i=0; i< count; i++)
                 if(src[i] == 1)
                     dst |= (byte)(1 << i);
@@ -55,7 +33,7 @@ namespace Z0
         public static ref ushort packseq(ReadOnlySpan<byte> src, out ushort dst)
         {
             dst = 0;
-            var count = Math.Min(16, src.Length);
+            var count = math.min(16, src.Length);
             for(var i=0; i< count; i++)
                 if(src[i] == 1)
                     dst |= (ushort)(1 << i);
@@ -69,7 +47,7 @@ namespace Z0
         public static ref uint packseq(ReadOnlySpan<byte> src, out uint dst)
         {
             dst = 0u;
-            var count = Math.Min(32, src.Length);
+            var count = math.min(32, src.Length);
             for(var i=0; i< count; i++)
                 if(src[i] == 1)
                     dst |= (1u << i);
@@ -83,7 +61,7 @@ namespace Z0
         public static ref ulong packseq(ReadOnlySpan<byte> src, out ulong dst)
         {
             dst = 0ul;
-            var count = Math.Min(64, src.Length);
+            var count = math.min(64, src.Length);
             for(var i=0; i< count; i++)
                 if(src[i] == 1)
                     dst |= (1ul << i);

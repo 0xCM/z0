@@ -43,13 +43,13 @@ namespace Z0
             Claim.eq(width, bs0.PopCount());
             Claim.eq(width, bs0.Length);
 
-            Claim.eq(width, bv0.Pop());
+            Claim.eq(width, BitVector.pop(bv0));
             
             var bs1 = bs0.Truncate(maxlen);
             Claim.eq(maxlen, bs1.PopCount());
             Claim.eq(maxlen, bs1.Length);
 
-            var bv1 = gbits.zerohi(bv0.Data, (uint)maxlen);
+            var bv1 = gbits.zerohi(bv0.Scalar, maxlen);
             Claim.eq(maxlen, gbits.pop(bv1));
 
             var bs2 = bs1.Pad(width);
@@ -60,7 +60,7 @@ namespace Z0
             {
                 var x = Random.Next<T>();
                 var j = Random.Next(2u, width - width/2);
-                var y = gbits.zerohi(x, j);
+                var y = gbits.zerohi(x, (int)j);
 
                 var x0 = gbits.range(x,0,j - 1);
                 var y0 = gbits.range(y,0,j - 1);

@@ -75,7 +75,7 @@ namespace Z0
             var x = Random.BitVector<T>();
             var pos = Random.Next(1,bitsize<T>() - 2);
             
-            var actual = gbits.rank(x.Data,(uint)pos);
+            var actual = gbits.rank(x.Scalar,(uint)pos);
             var expect = 0u;
             for(var i=0; i<= pos; i++)
                 expect += (x[i] ? 1u : 0u);

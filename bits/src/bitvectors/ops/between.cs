@@ -23,7 +23,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitVector<T> between<T>(BitVector<T> x, int first, int last)
             where T : unmanaged
-                => gbits.between(x.data, (byte)first, (byte)last);
+                => gbits.between(x.data, first, last);
 
         /// <summary>
         /// Extracts a contiguous sequence of bits defined by an inclusive range

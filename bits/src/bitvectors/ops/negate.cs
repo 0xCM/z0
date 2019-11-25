@@ -23,7 +23,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitVector<T> negate<T>(BitVector<T> x)
             where T : unmanaged
-                => gmath.negate(x.Data);
+                => gmath.negate(x.Scalar);
 
         /// <summary>
         /// Computes the two's complement bitvector z := ~x + 1 for a bitvector x

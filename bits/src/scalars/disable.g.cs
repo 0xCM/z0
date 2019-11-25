@@ -22,9 +22,20 @@ namespace Z0
         /// <param name="pos">The 0-based index of the bit to change</param>
         /// <typeparam name="T">The source element type</typeparam>
         [MethodImpl(Inline)]
-        public static ref T disable<T>(ref T src, byte pos)
+        public static T disable<T>(T src, int pos)
             where T : unmanaged
-                => ref BitMaskG.disable(ref src, (byte)pos);
+                => BitMaskG.disable(src, pos);
+
+        /// <summary>
+        /// Disables an identified source bit
+        /// </summary>
+        /// <param name="src">The source segment</param>
+        /// <param name="pos">The 0-based index of the bit to change</param>
+        /// <typeparam name="T">The source element type</typeparam>
+        [MethodImpl(Inline)]
+        public static ref T disable<T>(ref T src, int pos)
+            where T : unmanaged
+                => ref BitMaskG.disable(ref src, pos);
     }
 
 }

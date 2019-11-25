@@ -23,7 +23,18 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitVector<T> srl<T>(BitVector<T> x, int s)
             where T : unmanaged
-                => gmath.srl(x.Data,s);
+                => gmath.srl(x.Scalar,s);
+
+        /// <summary>
+        /// Computes z := x >> s for a bitvector x and shift offset s
+        /// </summary>
+        /// <param name="x">The source bitvector</param>
+        /// <param name="s">The shift amount</param>
+        [MethodImpl(Inline)]
+        public static BitVector<T> srl<N,T>(BitVector<N,T> x, int s)
+            where T : unmanaged
+            where N : unmanaged, ITypeNat
+                => gmath.srl(x.Scalar,s);
 
         /// <summary>
         /// Computes z := x >> s for a bitvector x and shift offset s

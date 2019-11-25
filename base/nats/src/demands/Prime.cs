@@ -26,9 +26,6 @@ namespace Z0
         public ulong NatValue 
             => k.NatValue;
 
-        public NatSeq Sequence 
-            => k.Sequence;
-
         public string format()
             => valid ? $"{k} is prime" : $"INVALID({k} is prime)";    
         

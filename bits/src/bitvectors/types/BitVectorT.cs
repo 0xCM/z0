@@ -7,7 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
-    using System.Collections.Generic;
 
     using static zfunc;    
 
@@ -19,31 +18,6 @@ namespace Z0
         where T : unmanaged
     {
         internal T data;
-
-        /// <summary>
-        /// Creates a bitvector defined by a single cell or portion thereof
-        /// </summary>
-        /// <param name="src">The source cell</param>
-        [MethodImpl(Inline)]
-        public static BitVector<T> From(T src)
-            => new BitVector<T>(src);
-
-        /// <summary>
-        /// Creates a bitvector from a span of bytes
-        /// </summary>
-        /// <param name="src">The source bits</param>
-        /// <param name="n">The bitvector length</param>
-        [MethodImpl(Inline)]
-        public static BitVector<T> From(Span<byte> src)
-            => From(src.TakeScalar<T>());
-
-        /// <summary>
-        /// Loads an bitvector of minimal size from a source bitstring
-        /// </summary>
-        /// <param name="src">The bitstring source</param>
-        [MethodImpl(Inline)]
-        public static BitVector<T> From(BitString src)
-            => From(src.ToPackedBytes());
 
         [MethodImpl(Inline)]
         public static implicit operator BitVector<T>(T src)
@@ -161,7 +135,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
         public static bool operator true(BitVector<T> src)
-            => src.Nonempty;
+            => src.NonEmpty;
 
         /// <summary>
         /// Returns false if the source vector is the zero vector, false otherwise
@@ -169,7 +143,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
         public static bool operator false(BitVector<T> src)
-            => !src.Nonempty;
+            => !src.NonEmpty;
 
         [MethodImpl(Inline)]
         public static bool operator ==(BitVector<T> x, BitVector<T> y)
@@ -180,8 +154,17 @@ namespace Z0
             => !x.Equals(y);
 
         [MethodImpl(Inline)]
-        BitVector(T src)
+        internal BitVector(T src)
             => this.data = src;
+
+        /// <summary>
+        /// Specifies the data over which the vector is defined
+        /// </summary>
+        public readonly T Scalar
+        {
+            [MethodImpl(Inline)]
+            get => data;
+        }
 
         /// <summary>
         /// The number of bits represented by the vector
@@ -202,84 +185,33 @@ namespace Z0
         }
 
         /// <summary>
-        /// A bit-level accessor/manipulator
-        /// </summary>
-        public bit this[int index]
-        {
-            [MethodImpl(Inline)]
-            get => GetBit(index);
-            
-            [MethodImpl(Inline)]
-            set => SetBit(index, value);
-        }
-
-        /// <summary>
         /// Specifies whether all bits are disabled
         /// </summary>
         public bool Empty
         {
             [MethodImpl(Inline)]
-            get => Pop() == 0;
+            get => BitVector.pop(this) == 0;
         }
 
         /// <summary>
         /// Specifies whether at least one bit is enabled
         /// </summary>
-        public readonly bool Nonempty
+        public readonly bool NonEmpty
         {
             [MethodImpl(Inline)]
-            get => Pop() != 0;
+            get => BitVector.pop(this) != 0;
         }
 
-
         /// <summary>
-        /// Reads a bit value
+        /// Reads/Manipulates a single bit
         /// </summary>
-        /// <param name="pos">The bit position</param>
-        [MethodImpl(Inline)]
-        public readonly bit GetBit(int pos)
-            => gbits.test(data, pos);
-
-        /// <summary>
-        /// Sets a bit value
-        /// </summary>
-        /// <param name="pos">The absolute bit position</param>
-        /// <param name="value">The value the bit will receive</param>
-        [MethodImpl(Inline)]
-        public void SetBit(int pos, bit value)
-            => data = gbits.set(ref data, (byte)pos, value);
-
-        /// <summary>
-        /// Tests the status of an identified bit
-        /// </summary>
-        /// <param name="pos">The position of the bit to test</param>
-        [MethodImpl(Inline)]
-        public bool Test(int pos)
-            => gbits.test(data, pos);
-
-        /// <summary>
-        /// Enables an identified bit
-        /// </summary>
-        /// <param name="pos">The position of the bit to enable</param>
-        [MethodImpl(Inline)]
-        public void Enable(int pos)
-            => data = gbits.set(ref data, (byte)pos, bit.On);
-
-        /// <summary>
-        /// Disables an identified bit
-        /// </summary>
-        /// <param name="pos">The position of the bit to disable</param>
-        [MethodImpl(Inline)]
-        public void Disable(int pos)
-            => data = gbits.disable(ref data, (byte)pos);
-
-        /// <summary>
-        /// Specifies the data over which the vector is defined
-        /// </summary>
-        public readonly T Data
+        public bit this[int index]
         {
             [MethodImpl(Inline)]
-            get => data;
+            get => gbits.test(data, index);
+            
+            [MethodImpl(Inline)]
+            set => data = gbits.set(data, index, value);
         }
 
         /// <summary>
@@ -287,17 +219,11 @@ namespace Z0
         /// </summary>
         /// <param name="first">The first bit position</param>
         /// <param name="last">The last bit position</param>
-        [MethodImpl(Inline)]
-        public readonly BitVector<T> Between(int first, int last)
-            => gbits.between(data, (byte)first,(byte)last);
-
-
-        /// <summary>
-        /// Counts the vector's enabled bits
-        /// </summary>
-        [MethodImpl(Inline)]
-        public readonly uint Pop()
-            => BitVector.pop(this);
+        public BitVector<T> this[int first, int last]
+        {
+            [MethodImpl(Inline)]
+            get => BitVector.between(this, first, last);
+        }
 
         /// <summary>
         /// Clones the vector

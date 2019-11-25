@@ -24,9 +24,6 @@ namespace Z0
 
         public ITypeNat Rhs {get;}
 
-        public NatSeq Sequence
-            => Rep.Sequence;
-
         public ulong NatValue
             => Rep.NatValue;
     }
@@ -55,10 +52,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator int(NatSum<K1,K2> src)
             => (int)src.NatValue;
-
-        NatSeq ITypeNat.Sequence
-            => Seq;
-
         public ulong NatValue 
             => NatMath.add(k1,k2);
 

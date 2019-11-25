@@ -24,6 +24,15 @@ namespace Z0
         /// Counts the number of leading zero bits
         /// </summary>
         [MethodImpl(Inline)]
+        public static uint nlz<N,T>(BitVector<N,T> x)
+            where T : unmanaged
+            where N : unmanaged, ITypeNat
+                => (uint) (gbits.nlz(x.data) - x.Width);
+
+        /// <summary>
+        /// Counts the number of leading zero bits
+        /// </summary>
+        [MethodImpl(Inline)]
         public static uint nlz(BitVector4 x)
             => (uint)(gbits.nlz(x.data) - x.Width);
 

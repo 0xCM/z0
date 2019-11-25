@@ -20,7 +20,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitVector<T> nonimpl<T>(BitVector<T> x, BitVector<T> y)
             where T : unmanaged
-                => gmath.nonimpl(x.Data, y.Data);
+                => gmath.nonimpl(x.Scalar, y.Scalar);
 
         /// <summary>
         /// Computes the material nonimplication, equivalent to the bitwise expression a & (~b) for operands a and b

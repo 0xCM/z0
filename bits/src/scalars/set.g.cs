@@ -18,6 +18,23 @@ namespace Z0
         /// <param name="value">The value to be applied</param>
         /// <typeparam name="T">The source element type</typeparam>
         [MethodImpl(Inline)]
+        public static T set<T>(T src, int pos, bit value)            
+            where T : unmanaged
+        {
+            if(value)
+                return enable(src, pos);
+            else
+                return disable(src, pos);
+        }
+
+        /// <summary>
+        /// Sets an identified bit to a supplied value
+        /// </summary>
+        /// <param name="src">The source segment</param>
+        /// <param name="pos">The bit position</param>
+        /// <param name="value">The value to be applied</param>
+        /// <typeparam name="T">The source element type</typeparam>
+        [MethodImpl(Inline)]
         public static ref T set<T>(ref T src, byte pos, bit value)            
             where T : unmanaged
         {

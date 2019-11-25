@@ -69,7 +69,7 @@ namespace Z0.Logix
                 var a = Random.BitVector<T>();
                 var b = Random.BitVector<T>();
                 var c = Random.BitVector<T>();
-                BitVector<T> x = ScalarOps.select(a.Data, b.Data, c.Data);
+                BitVector<T> x = ScalarOps.select(a.Scalar, b.Scalar, c.Scalar);
                 for(var j=0; j<x.Width; j++)
                     Claim.eq(x[j], LogicOps.select(a[j],b[j],c[j]));
             }
@@ -148,7 +148,7 @@ namespace Z0.Logix
                     u[j] = LogicOpApi.eval(kind, a[j], b[j], c[j]);
                 
                 
-                BitVector<T> v = ScalarOpApi.eval(kind, a.Data, b.Data, c.Data);
+                BitVector<T> v = ScalarOpApi.eval(kind, a.Scalar, b.Scalar, c.Scalar);
 
                 if(u != v)
                     Trace($"Equivalence failed for ternary op {kind}:{moniker<T>()}");

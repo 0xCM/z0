@@ -277,7 +277,7 @@ namespace Z0.Logix
                     z0[i] = BL(va[i],vb[i],vc[i]);
 
                 var z3 = SC(sa, sb, sc);
-                if(!ScalarOps.same(z3, z0.Data))
+                if(!ScalarOps.same(z3, z0.Scalar))
                     Claim.fail($"Evalutation of ternary op {id} failed");
 
                 var v1 = ginx.vbroadcast(n256,sa);
@@ -327,7 +327,7 @@ namespace Z0.Logix
                 v2.Set(b);
                 T expect = ScalarOpApi.eval(op,a,b);
                 T result1 = LogicEngine.eval(expr);
-                T result2 = BitVectorOpApi.eval(op, BitVector.alloc(a),BitVector.alloc(b)).Data;
+                T result2 = BitVectorOpApi.eval(op, BitVector.alloc(a),BitVector.alloc(b)).Scalar;
                 Claim.eq(expect, result1);                            
                 Claim.eq(expect, result2);                            
             }

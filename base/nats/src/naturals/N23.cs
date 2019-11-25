@@ -9,23 +9,19 @@ namespace Z0
     
     using static constant;    
 
-    public readonly struct N23 : INatSeq<N23>
+    public readonly struct N23 : INatSeq<N23,N2,N3>
     {
-        public static NatSeq<N2,N3> Seq => default;
+        public const ulong Value = 23;
+
+        public static N23 Rep => default;
+
 
         [MethodImpl(Inline)]
-        public static implicit operator int(N23 src)
-            => (int)src.NatValue;
-
-        public NatSeq Sequence 
-            => Seq;
-
-        public ulong NatValue 
-            => Seq.NatValue;
+        public static implicit operator int(N23 src) => 23;
+        public ulong NatValue => Value;
 
         public override string ToString() 
-            => Seq.format();
+            => Value.ToString();
     }
-
 
 }

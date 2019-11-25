@@ -9,21 +9,20 @@ namespace Z0
 
     using static constant;    
 
-    public readonly struct N56 : INatSeq<N56>
+    public readonly struct N56 : INatSeq<N56,N5,N6>
     {
+        public const ulong Value = 56;
+        
         public static NatSeq<N5,N6> Seq => default;
 
         [MethodImpl(Inline)]
-        public static implicit operator int(N56 src)
-            => (int)src.NatValue;
+        public static implicit operator int(N56 src) => 56;
 
-        public NatSeq Sequence 
-            => Seq;
+        
 
-        public ulong NatValue 
-            => Seq.NatValue;
+        public ulong NatValue => Value;
 
         public override string ToString() 
-            => Seq.format();
+            => Value.ToString();
     }
 }

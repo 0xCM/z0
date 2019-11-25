@@ -20,7 +20,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitVector<T> nor<T>(BitVector<T> x, BitVector<T> y)
             where T : unmanaged
-                => gmath.nor(x.Data, y.Data);
+                => gmath.nor(x.Scalar, y.Scalar);
 
         /// <summary>
         /// Computes the bitvector z: = ~(x | y) from bitvectors x and y

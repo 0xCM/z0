@@ -11,21 +11,17 @@ namespace Z0
 
     public readonly struct N13 : INatSeq<N13>, INatPrime<N11>
     {
+        public const ulong Value = 13;
+
         public static N13 Rep => default;
 
-        public static NatSeq<N1,N3> Seq => default;
 
         [MethodImpl(Inline)]
-        public static implicit operator int(N13 src)
-            => (int)src.NatValue;
+        public static implicit operator int(N13 src) => 13;
 
-        public NatSeq Sequence 
-            => Seq;
-
-        public ulong NatValue 
-            => Seq.NatValue;
+        public ulong NatValue  => Value;
 
         public override string ToString() 
-            => Seq.format();
+            => Value.ToString();
     }
 }

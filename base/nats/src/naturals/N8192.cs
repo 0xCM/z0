@@ -18,23 +18,15 @@ namespace Z0
     {
         public const ulong Value = 1ul << 13;        
 
-        public static NatSeq<N8,N1,N9,N2> Seq => default; 
 
         [MethodImpl(Inline)]
-        public static implicit operator int(N8192 src)
-            => (int)src.NatValue;
+        public static implicit operator int(N8192 src) => 8192;
 
-        public NatSeq Sequence 
-            => Seq.Sequence;
+        public ulong NatValue => Value;
 
-        public ulong NatValue 
-            => Seq.NatValue;
-
-        ITypeNat INatPow2.Exponent 
-            => N13.Rep;
- 
+   
         public override string ToString() 
-            => Seq.format();
+            => Value.ToString();
    }
 
 

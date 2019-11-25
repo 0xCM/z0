@@ -21,7 +21,19 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitVector<T> and<T>(BitVector<T> x, BitVector<T> y)
             where T : unmanaged
-                => gmath.and(x.Data, y.Data);
+                => gmath.and(x.Scalar, y.Scalar);
+
+        /// <summary>
+        /// Computes the bitvector z := x & y from bitvectors x and y
+        /// </summary>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
+        /// <typeparam name="T">The primal type</typeparam>
+        [MethodImpl(Inline)]
+        public static BitVector<N,T> and<N,T>(BitVector<N,T> x, BitVector<N,T> y)
+            where T : unmanaged
+            where N : unmanaged, ITypeNat
+                => gmath.and(x.Scalar, y.Scalar);
 
         /// <summary>
         /// Computes a new bitvector z = x & y from bitvectors x and y

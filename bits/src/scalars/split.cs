@@ -27,7 +27,6 @@ namespace Z0
             x1 = (byte)(src >> 4);
         }        
 
-
         /// <summary>
         /// Partitions a 16-bit source value into upper and lower 8-bit parts
         /// </summary>

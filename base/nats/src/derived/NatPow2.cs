@@ -5,12 +5,7 @@
 namespace Z0
 {
     using System;
-    using System.Numerics;
     using System.Linq;
-    using System.Collections.Generic;
-    using System.Collections.Concurrent;
-    using System.Reflection;
-    using System.Runtime.CompilerServices;
     
     using static nfunc;
     using static constant;
@@ -51,9 +46,6 @@ namespace Z0
 
         public NatSeq natseq()
             => Seq;
-
-         ITypeNat INatPow2.Exponent 
-            => new E();
 
         public override string ToString() 
             => Value.ToString();

@@ -5,15 +5,22 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
     using static zfunc;
     using static As;
     using static AsIn;
 
     partial class gbits
     {        
+        /// <summary>
+        /// Reurns a sequence of N enabled bits, starting from index 0 and extendint to index n - 1
+        /// </summary>
+        /// <typeparam name="N">The enabled bit count type</typeparam>
+        [MethodImpl(Inline)]
+        public static T lomask<N,T>()
+            where T : unmanaged
+            where N : unmanaged, ITypeNat
+                => convert<ulong,T>(Bits.lomask<N>());
 
         /// <summary>
         /// Computes floor(log(src,2))

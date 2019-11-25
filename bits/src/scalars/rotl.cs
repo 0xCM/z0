@@ -5,87 +5,87 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Reflection;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
-    using System.Diagnostics;
     
     using static zfunc;    
     
     partial class Bits
     {                
         /// <summary>
-        /// Rotates the source bits leftward by a specified offset
+        /// Rotates the source bits leftward by a specified shift amount
         /// </summary>
         /// <param name="src">The source value</param>
-        /// <param name="offset">The magnitude of the rotation</param>
+        /// <param name="shift">The magnitude of the rotation</param>
         [MethodImpl(Inline)]
-        public static byte rotl(byte src, byte offset)
-            => (byte)((src << offset) | (src >> (8 - offset)));
+        public static byte rotl(byte src, int shift)
+            => (byte)((src << shift) | (src >> (8 - shift)));
 
         /// <summary>
-        /// Rotates the source bits leftward by a specified offset
+        /// Rotates the source bits leftward by a specified shift amount
         /// </summary>
         /// <param name="src">The source value</param>
-        /// <param name="offset">The magnitude of the rotation</param>
+        /// <param name="shift">The magnitude of the rotation</param>
         [MethodImpl(Inline)]
-        public static ushort rotl(ushort src, ushort offset)
-            => (ushort)((src << offset) | (src >> (16 - offset)));
+        public static ushort rotl(ushort src, int shift)
+            => (ushort)((src << shift) | (src >> (16 - shift)));
 
         /// <summary>
-        /// Rotates the source bits leftward by a specified offset
+        /// Rotates the source bits leftward by a specified shift amount
         /// </summary>
         /// <param name="src">The source value</param>
-        /// <param name="offset">The magnitude of the rotation</param>
+        /// <param name="shift">The magnitude of the rotation</param>
         [MethodImpl(Inline)]
-        public static uint rotl(uint src, uint offset)
-            => (src << (int)offset) | (src >> (32 - (int)offset));
+        public static uint rotl(uint src, int shift)
+            => (src << shift) | (src >> (32 - shift));
 
         /// <summary>
-        /// Rotates the source bits leftward by a specified offset
+        /// Rotates the source bits leftward by a specified shift amount
         /// </summary>
         /// <param name="src">The source value</param>
-        /// <param name="offset">The magnitude of the rotation</param>
+        /// <param name="shift">The magnitude of the rotation</param>
         [MethodImpl(Inline)]
-        public static ulong rotl(ulong src, ulong offset)
-            => (src << (int)offset) | (src >> (64 - (int)offset));
+        public static ulong rotl(ulong src, int shift)
+            => (src << shift) | (src >> (64 - shift));
 
         /// <summary>
-        /// Rotates the source bits leftward by a specified offset
+        /// Rotates the source bits leftward by a specified shift amount
         /// </summary>
         /// <param name="src">The source value</param>
-        /// <param name="offset">The magnitude of the rotation</param>
+        /// <param name="shift">The magnitude of the rotation</param>
+        /// <param name="width">The effective bit-width of the source value</param>
         [MethodImpl(Inline)]
-        public static byte rotl(byte src, int offset)
-            => (byte)((src << offset) | (src >> (8 - offset)));
+        public static byte rotl(byte src, int shift, int width)
+            => (byte)((src << shift) | (src >> (width - shift)));
 
         /// <summary>
-        /// Rotates the source bits leftward by a specified offset
+        /// Rotates the source bits leftward by a specified shift amount
         /// </summary>
         /// <param name="src">The source value</param>
-        /// <param name="offset">The magnitude of the rotation</param>
+        /// <param name="shift">The magnitude of the rotation</param>
+        /// <param name="width">The effective bit-width of the source value</param>
         [MethodImpl(Inline)]
-        public static ushort rotl(ushort src, int offset)
-            => (ushort)((src << offset) | (src >> (16 - offset)));
+        public static ushort rotl(ushort src, int shift, int width)
+            => (ushort)((src << shift) | (src >> (width - shift)));
 
         /// <summary>
-        /// Rotates the source bits leftward by a specified offset
+        /// Rotates the source bits leftward by a specified shift amount
         /// </summary>
         /// <param name="src">The source value</param>
-        /// <param name="offset">The magnitude of the rotation</param>
+        /// <param name="shift">The magnitude of the rotation</param>
+        /// <param name="width">The effective bit-width of the source value</param>
         [MethodImpl(Inline)]
-        public static uint rotl(uint src, int offset)
-            => (src << offset) | (src >> (32 - offset));
+        public static uint rotl(uint src, int shift, int width)
+            => (src << shift) | (src >> (width - shift));
 
         /// <summary>
-        /// Rotates the source bits leftward by a specified offset
+        /// Rotates the source bits leftward by a specified shift amount
         /// </summary>
         /// <param name="src">The source value</param>
-        /// <param name="offset">The magnitude of the rotation</param>
+        /// <param name="shift">The magnitude of the rotation</param>
+        /// <param name="width">The effective bit-width of the source value</param>
         [MethodImpl(Inline)]
-        public static ulong rotl(ulong src, int offset)
-            => (src << offset) | (src >> (64 - offset));
+        public static ulong rotl(ulong src, int shift, int width)
+            => (src << shift) | (src >> (width - shift));
 
     }
 }

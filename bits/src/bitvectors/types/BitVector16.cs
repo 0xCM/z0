@@ -25,60 +25,13 @@ namespace Z0
         public static N16 N => default;
 
         /// <summary>
-        /// Allocates a zero-filled vector
-        /// </summary>
-        [MethodImpl(Inline)]
-        public static BitVector16 Alloc()
-            => new BitVector16(0);    
-
-        /// <summary>
-        /// Loads a vector from the primal source value it represents
-        /// </summary>
-        /// <param name="src">The source value</param>
-        [MethodImpl(Inline)]
-        public static BitVector16 FromScalar(ushort src)
-            => new BitVector16(src);    
-
-        /// <summary>
-        /// Loads a vector from a primal source
-        /// </summary>
-        /// <param name="src">The source value</param>
-        [MethodImpl(Inline)]
-        public static BitVector16 FromScalar(uint src)
-            => new BitVector16((ushort)src);    
-
-        /// <summary>
-        /// Loads a vector from a primal source
-        /// </summary>
-        /// <param name="src">The source value</param>
-        [MethodImpl(Inline)]
-        public static BitVector16 FromScalar(int src)
-            => new BitVector16((ushort)src);    
-
-        /// <summary>
-        /// Creates a vector from the least 16 bits of the source
-        /// </summary>
-        /// <param name="src">The source value</param>
-        [MethodImpl(Inline)]
-        public static BitVector16 FromScalar(ulong src)
-            => new BitVector16((ushort)src);    
-
-        /// <summary>
         /// Creates a vector from two bytes
         /// </summary>
         /// <param name="lo">The byte that will constitute the lo vector bits</param>
         /// <param name="hi">The byte that will constitute the hi vector bits</param>
         [MethodImpl(Inline)]
         public static BitVector16 FromScalars(byte lo, byte hi)
-            => FromScalar((ushort)hi << 8 | (ushort)lo);
-
-        /// <summary>
-        /// Creates a vector from a bitstring
-        /// </summary>
-        /// <param name="src">The source bitstring</param>
-        [MethodImpl(Inline)]
-        public static BitVector16 FromBitString(in BitString src)
-            => src.TakeUInt16();    
+            =>(ushort)((ushort)hi << 8 | (ushort)lo);
 
         [MethodImpl(Inline)]
         public static implicit operator BitCells<N16,ushort>(BitVector16 src)
@@ -291,6 +244,30 @@ namespace Z0
         }
 
         /// <summary>
+        /// Returns true if no bits are enabled, false otherwise
+        /// </summary>
+        public bit Empty
+        {
+            [MethodImpl(Inline)]
+            get => data == 0;
+        }
+
+        /// <summary>
+        /// Returns true if the vector has at least one enabled bit; false otherwise
+        /// </summary>
+        public bit NonEmpty
+        {
+            [MethodImpl(Inline)]
+            get => data != 0;
+        }
+
+        public bit AllOn
+        {
+            [MethodImpl(Inline)]
+            get => (UInt16.MaxValue & data) == UInt16.MaxValue;
+        }
+
+        /// <summary>
         /// The vector's 8 least significant bits
         /// </summary>
         public BitVector8 Lo
@@ -306,7 +283,6 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => (byte)(data >> 8);
-
         }
     
         /// <summary>
@@ -341,36 +317,11 @@ namespace Z0
             get => BitVector.between(this, first, last);
         }
 
-
-        [MethodImpl(Inline)]
-        public bool AllOnes()
-            => (UInt16.MaxValue & data) == UInt16.MaxValue;
-
-        /// <summary>
-        /// Returns true if no bits are enabled, false otherwise
-        /// </summary>
-        public bit Empty
-        {
-            [MethodImpl(Inline)]
-            get => data == 0;
-        }
-
-        /// <summary>
-        /// Returns true if the vector has at least one enabled bit; false otherwise
-        /// </summary>
-        public bit NonEmpty
-        {
-            [MethodImpl(Inline)]
-            get => data != 0;
-        }
-
-
         [MethodImpl(Inline)]
         public bool Equals(BitVector16 y)
             => data == y.data;
 
-
-         public override bool Equals(object obj)
+        public override bool Equals(object obj)
             => obj is BitVector16 x ? Equals(x) : false;
         
         public override int GetHashCode()

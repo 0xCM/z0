@@ -454,6 +454,34 @@ namespace Z0
         /// <param name="src">The source value to manipulate</param>
         /// <param name="pos">The position of the bit to disable</param>
         [MethodImpl(Inline)]
+        public static float disable(float src, int pos)
+        {
+            ref var bits = ref Unsafe.As<float,int>(ref src);
+            var m = 1 << pos;
+            bits &= ~m;
+            return src;
+        } 
+
+        /// <summary>
+        /// Disables a specified source bit
+        /// </summary>
+        /// <param name="src">The source value to manipulate</param>
+        /// <param name="pos">The position of the bit to disable</param>
+        [MethodImpl(Inline)]
+        public static double disable(double src, int pos)
+        {
+            ref var bits = ref Unsafe.As<double,long>(ref src);
+            var m = 1L << pos;
+            bits &= ~m;
+            return src;
+        } 
+
+        /// <summary>
+        /// Disables a specified source bit
+        /// </summary>
+        /// <param name="src">The source value to manipulate</param>
+        /// <param name="pos">The position of the bit to disable</param>
+        [MethodImpl(Inline)]
         public static ref byte disable(ref byte src, int pos)
         {
             src &= (byte)~((byte)(1 << pos));

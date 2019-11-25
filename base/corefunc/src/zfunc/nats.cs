@@ -117,53 +117,55 @@ partial class zfunc
 
     public static N32 n32 => default;
 
-    public static NatSeq<N3,N3> n33 => default;
+    public static N33 n33 => default;
 
-    public static NatSeq<N3,N4> n34 => default;
+    public static N34 n34 => default;
 
-    public static NatSeq<N3,N5> n35 => default;
+    public static N35 n35 => default;
 
-    public static NatSeq<N3,N6> n36 => default;
+    public static N36 n36 => default;
 
-    public static NatSeq<N3,N7> n37 => default;
+    public static N37 n37 => default;
 
-    public static NatSeq<N3,N8> n38 => default;
+    public static N38 n38 => default;
 
-    public static NatSeq<N3,N9> n39 => default;
+    public static N39 n39 => default;
 
-    public static NatSeq<N4,N0> n40 => default;
+    public static N40 n40 => default;
 
-    public static NatSeq<N4,N1> N41 => default;
+    public static N41 N41 => default;
 
-    public static NatSeq<N4,N2> n42 => default;
+    public static N42 n42 => default;
 
-    public static NatSeq<N4,N3> n43 => default;
+    public static N43 n43 => default;
 
-    public static NatSeq<N4,N4> n44 => default;
+    public static N44 n44 => default;
 
-    public static NatSeq<N4,N5> n45 => default;
+    public static N45 n45 => default;
 
-    public static NatSeq<N4,N5> n47 => default;
+    public static N46 n46 => default;
 
-    public static NatSeq<N4,N8> N48 => default;
+    public static N47 n47 => default;
+
+    public static N48 n48 => default;
+
+    public static N49 n49 => default;
+
+    public static N50 n51 => default;
+
+    public static N52 n52 => default;
+
+    public static N53 n53 => default;
+
+    public static N54 n54 => default;
+
+    public static N55 n55 => default;
 
     public static N63 n63 => default;
 
     public static N64 n64 => default;
 
-    public static NatSeq<N6,N5> n65 => default;
-
-    public static NatSeq<N6,N6> n66 => default;
-
-    public static NatSeq<N6,N7> n67 => default;
-
-    public static NatSeq<N6,N8> n68 => default;
-
-    public static NatSeq<N8,N7> n87 => default;
-
-    public static NatSeq<N8,N7> n88 => default;
-
-    public static NatSeq<N1,N1,N1> n111 => default;
+    public static N87 n87 => default;
 
     public static N127 n127 => default;
 
@@ -173,13 +175,11 @@ partial class zfunc
 
     public static N256 n256 => default;
 
-    public static NatSeq<N2,N5,N7> n257 => default;
+    public static N257 n257 => default;
 
     public static N512 n512 => default;
 
     public static N1024 n1024 => default;
-
-    public static NatSeq<N1,N2,N7,N7> n1277 => default;
 
     public static N2048 n2048 => default;
 
@@ -188,6 +188,8 @@ partial class zfunc
     public static N8192 n8192 => default;
 
     public static N16384 n16384 => default; 
+
+    public static N32768 n32768 => default; 
 
     /// <summary>
     /// Creates a natural sequence of length 2

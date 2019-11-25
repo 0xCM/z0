@@ -32,6 +32,17 @@ namespace Z0
             return dst;
         }
 
+        public static BitVector<N,T> perm<N,T>(BitVector<N,T> src, in Perm spec)
+            where T : unmanaged
+            where N : unmanaged, ITypeNat
+        {
+            var dst = src.Replicate();
+            var n = src.Width;
+            for(var i=0; i<n; i++)
+                dst[i] = src[spec[i]];
+            return dst;
+        }
+
         /// <summary>
         /// Permutes the vector corrding to the spec
         /// </summary>

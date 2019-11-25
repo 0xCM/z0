@@ -21,22 +21,13 @@ namespace Z0
         
         public static N16384 Rep => default;
 
-        public static NatSeq<N1,N6,N3,N8,N4> Seq => default;
 
         [MethodImpl(Inline)]
-        public static implicit operator int(N16384 src)
-            => (int)src.NatValue;
+        public static implicit operator int(N16384 src) => 16384;
 
-        public NatSeq Sequence 
-            => Seq.Sequence;
-
-        public ulong NatValue 
-            => Value;
-
-        ITypeNat INatPow2.Exponent 
-            => N14.Rep;
+        public ulong NatValue => Value;
  
         public override string ToString() 
-            => Seq.format();
+            => Value.ToString();
    }
 }

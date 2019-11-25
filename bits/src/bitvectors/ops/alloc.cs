@@ -20,21 +20,21 @@ namespace Z0
         /// </summary>
         /// <param name="n">The number of bits to store</param>
         /// <typeparam name="T">The primal storage type</typeparam>
-        [MethodImpl(NotInline)]
+        [MethodImpl(Inline)]
         public static BitVector<T> alloc<T>(T fill = default)
             where T : unmanaged
-                => BitVector<T>.From(fill);
+                => BitVector.generic(fill);
 
         /// <summary>
         /// Allocates a natural bitvector
         /// </summary>
         /// <param name="n">The number of bits to store</param>
         /// <typeparam name="T">The primal storage type</typeparam>
-        [MethodImpl(NotInline)]
-        public static BitCells<N,T> alloc<N,T>(N n = default, T fill = default)
+        [MethodImpl(Inline)]
+        public static BitVector<N,T> alloc<N,T>(N n = default, T fill = default)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => BitCells<N,T>.Alloc(fill);
+                => new BitVector<N, T>(fill);
 
         /// <summary>
         /// Allocates a 4-bit primal bitvector

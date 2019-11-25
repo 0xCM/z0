@@ -5,13 +5,9 @@
 namespace Z0
 {
     using System;
-    using System.Numerics;
-    using System.Collections.Generic;
-    using System.Collections.Concurrent;
     using System.Runtime.CompilerServices;
 
     using static constant;
-    using static nfunc;
 
     /// <summary>
     /// Characterizes an atom of the type natural grammar
@@ -28,68 +24,40 @@ namespace Z0
     /// </summary>
     public readonly struct N0 : ITypeNat<N0>, INatSeq<N0>, INatPrimitive<N0>, INatEven<N0>, INatNext<N0,N1>
     {
+        public const ulong Value = 0;
+
         public static N0 Rep => default;
 
-
         [MethodImpl(Inline)]
-        public static implicit operator int(N0 src)
-            => (int)src.NatValue;
+        public static implicit operator int(N0 src) => 0;
         
-        public bool valid 
-            => true;
+        public ulong NatValue  => Value;
 
-        public ulong NatValue 
-            => 0;
-
-        public NatSeq Sequence
-            => this;
-
-        public string format()
-            => NatValue.ToString();
+        public NatSeq Sequence => this;
 
         public override string ToString() 
-            => format();
-
+            => Value.ToString();
     }
 
     /// <summary>
     /// The singleton type representative for 1
     /// </summary>
-    public readonly struct N1 
-      : ITypeNat<N1>, 
-        INatPrimitive<N1>, 
-        INatSeq<N1>, 
-        INatNonZero<N1>, 
-        INatPow<N1,N1,N0>, 
-        INatOdd<N1>, 
-        INatPrior<N1,N0>, 
-        INatNext<N1,N2>,
-        INatPow2<N0>
+    public readonly struct N1 : ITypeNat<N1>, INatPrimitive<N1>, INatSeq<N1>, INatNonZero<N1>, 
+        INatPow<N1,N1,N0>, INatOdd<N1>, INatPrior<N1,N0>, INatNext<N1,N2>, INatPow2<N0>
     {
+        public const ulong Value = 1;
+
         public static N1 Rep => default;
 
         [MethodImpl(Inline)]
-        public static implicit operator int(N1 src)
-            => (int)src.NatValue;
+        public static implicit operator int(N1 src) => 1;
 
-        public NatSeq Sequence
-            => this;
+        public NatSeq Sequence => this;
 
-        public bool valid 
-            => true;
-
-        ITypeNat INatPow2.Exponent 
-            => N0.Rep;
-
-        public ulong NatValue 
-            => 1;
-
-        public string format()
-            => NatValue.ToString();
+        public ulong NatValue => Value;
 
         public override string ToString() 
-            => format();
-
+            => Value.ToString();
     }
 
     /// <summary>
@@ -107,32 +75,19 @@ namespace Z0
         INatNext<N2,N3>,
         INatPow2<N1>        
     {
-        public static N2 Rep => default;
-
         public const ulong Value = 2;
 
+        public static N2 Rep => default;
+
         [MethodImpl(Inline)]
-        public static implicit operator int(N2 src)
-            => (int)src.NatValue;
+        public static implicit operator int(N2 src) => 2;
 
-        public ulong NatValue 
-            => Value;
+        public ulong NatValue => Value;
         
-        public NatSeq Sequence
-            => this;
-
-        public bool valid 
-            => true;
+        public NatSeq Sequence => this;
         
-        ITypeNat INatPow2.Exponent 
-            => N1.Rep;
-
-        public string format()
-            => NatValue.ToString();
-
         public override string ToString() 
-            => format();
-
+            => Value.ToString();
     }
 
     /// <summary>
@@ -148,27 +103,19 @@ namespace Z0
         INatPrior<N3,N2>, 
         INatNext<N3,N4>
     {
+        public const ulong Value = 3;
+
         public static N3 Rep => default;
 
-        public ulong NatValue 
-            => 3;
-
         [MethodImpl(Inline)]
-        public static implicit operator int(N3 src)
-            => (int)src.NatValue;
+        public static implicit operator int(N3 src) => 3;
 
-        public NatSeq Sequence
-            => this;
+        public ulong NatValue => Value;
 
-        public bool valid 
-            => true;
-        
-        public string format()
-            => NatValue.ToString();
+        public NatSeq Sequence => this;
 
         public override string ToString() 
-            => format();
-
+            => Value.ToString();
     }
 
     /// <summary>
@@ -184,28 +131,18 @@ namespace Z0
         INatPrior<N4,N3>, 
         INatNext<N4,N5>,
         INatPow2<N2>        
-
     {
+        public const ulong Value = 4;
+
         public static N4 Rep => default;
 
-        public ulong NatValue 
-            => 4;
-
         [MethodImpl(Inline)]
-        public static implicit operator int(N4 src)
-            => (int)src.NatValue;
+        public static implicit operator int(N4 src) => 4;
 
-        public ITypeNat NatRep 
-            => this;
+        public ulong NatValue  => Value;
 
         public NatSeq Sequence
             => this;
-
-        public bool valid 
-            => true;
-
-        ITypeNat INatPow2.Exponent 
-            => N2.Rep;
 
         public string format()
             => NatValue.ToString();
@@ -228,26 +165,18 @@ namespace Z0
         INatPrior<N5,N4>, 
         INatNext<N5,N6>
     {
+        public const ulong Value = 5;
         public static N5 Rep => default;
 
-        public ulong NatValue 
-            => 5;
-
         [MethodImpl(Inline)]
-        public static implicit operator int(N5 src)
-            => (int)src.NatValue;
+        public static implicit operator int(N5 src) => 5;
 
-        public NatSeq Sequence
-            => this;
+        public ulong NatValue => Value;
 
-        public bool valid 
-            => true;
-                
-        public string format()
-            => NatValue.ToString();
+        public NatSeq Sequence => this;
 
         public override string ToString() 
-            => format();
+            => Value.ToString();
     }
 
     /// <summary>
@@ -263,29 +192,21 @@ namespace Z0
         INatNext<N6,N7>,
         INatDivisible<N6,N3>
     {
+        public const ulong Value = 6;
+
         public static N6 Rep => default;
 
-        public ulong NatValue 
-            => 6;
 
         [MethodImpl(Inline)]
-        public static implicit operator int(N6 src)
-            => (int)src.NatValue;
+        public static implicit operator int(N6 src) => 6;
 
-        public ITypeNat NatRep 
-            => this;
+        public ulong NatValue => 6;
 
-        public NatSeq Sequence
-            => this;
+        public NatSeq Sequence => this;
 
-        public bool valid 
-            => true;
-
-        public string format()
-            => NatValue.ToString();
 
         public override string ToString() 
-            => format();
+            => Value.ToString();
  
      }
 
@@ -302,29 +223,20 @@ namespace Z0
         INatPrior<N7,N6>, 
         INatNext<N7,N8>
     {
+        public const ulong Value = 7;
+
         public static N7 Rep => default;
 
-        public ulong NatValue 
-            => 7;
-
         [MethodImpl(Inline)]
-        public static implicit operator int(N7 src)
-            => (int)src.NatValue;
+        public static implicit operator int(N7 src) => 7;
 
-        public ITypeNat NatRep 
-            => this;
+        public ulong NatValue => 7;
 
-        public NatSeq Sequence
-            => this;
+        public NatSeq Sequence => this;
 
-        public bool valid 
-            => true;
-            
-        public string format()
-            => NatValue.ToString();
 
         public override string ToString() 
-            => format();
+            => Value.ToString();
  
     }
 
@@ -344,26 +256,17 @@ namespace Z0
         INatDivisible<N8,N4>        
 
     { 
-        public static N8 Rep => default;
+        public const ulong Value = 8;
 
-        public ulong NatValue  
-            => 8;
+        public static N8 Rep => default;
      
         [MethodImpl(Inline)]
-        public static implicit operator int(N8 src)
-            => (int)src.NatValue;
+        public static implicit operator int(N8 src) => 8;
 
-        public ITypeNat NatRep 
-            => this;
+        public ulong NatValue => 8;
 
         public NatSeq Sequence
             => this;
-
-        public bool valid 
-            => true;
-
-        ITypeNat INatPow2.Exponent 
-            => N3.Rep;
 
         public string format()
             => NatValue.ToString();
@@ -385,25 +288,18 @@ namespace Z0
         INatPrior<N9,N8>,
         INatDivisible<N9,N3>
     {
+        public const ulong Value = 9;
+
         public static N9 Rep => default;
-        
-        public ulong NatValue 
-            => 9;
- 
+         
         [MethodImpl(Inline)]
-        public static implicit operator int(N9 src)
-            => (int)src.NatValue;
+        public static implicit operator int(N9 src) => 9;
   
-        public ITypeNat NatRep 
-            => this;
+        public ulong NatValue => 9;
 
-        public NatSeq Sequence
-            => this;
-
-        public bool valid 
-            => true;
+        public NatSeq Sequence=> this;
 
         public override string ToString() 
-            => NatValue.ToString();             
+            => Value.ToString();             
     }
 }

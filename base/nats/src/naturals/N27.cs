@@ -11,19 +11,17 @@ namespace Z0
 
     public readonly struct N27 : INatSeq<N27>
     {
-        public static NatSeq<N2,N7> Seq => default;
+        public const ulong Value = 27;
+
+        public static N27 Rep => default;
+
 
         [MethodImpl(Inline)]
-        public static implicit operator int(N27 src)
-            => (int)src.NatValue;
-
-        public NatSeq Sequence 
-            => Seq;
-
-        public ulong NatValue 
-            => Seq.NatValue;
+        public static implicit operator int(N27 src) => 27;
+    
+        public ulong NatValue => Value;
 
         public override string ToString() 
-            => Seq.format();
+            => Value.ToString();
     }
 }

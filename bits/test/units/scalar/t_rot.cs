@@ -51,7 +51,7 @@ namespace Z0
             for(var i=0; i<SampleSize; i++)
             {
                 var x = Random.Next<T>();                
-                var bsx = BitString.from(in x);
+                var bsx = BitString.from(x);
                 var bsxRef = bsx.Replicate();
                 Claim.eq(x,bsx.TakeScalar<T>());
                 x = gbits.rotl(x, offset);

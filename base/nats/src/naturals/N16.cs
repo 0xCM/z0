@@ -9,26 +9,21 @@ namespace Z0
 
     using static constant;    
 
-    public readonly struct N16 : INatSeq<N16>, INatPow<N16,N2,N4>, INatPow2<N4>, 
-        INatDivisible<N16,N8>, INatDivisible<N16,N4> 
+    public readonly struct N16 : INatSeq<N16>, INatPow<N16,N2,N4>, INatPow2<N4>, INatDivisible<N16,N8>, INatDivisible<N16,N4> 
     {
-        public static NatSeq<N1,N6> Seq => default;
+        public const ulong Value = 16;
+
+        public static N16 Rep => default;
+        
 
         [MethodImpl(Inline)]
-        public static implicit operator int(N16 src)
-            => (int)src.NatValue;
+        public static implicit operator int(N16 src) => 16;
 
-        public NatSeq Sequence 
-            => Seq;
+        public ulong NatValue => Value;
 
-        public ulong NatValue 
-            => Seq.NatValue;
-
-        ITypeNat INatPow2.Exponent 
-            => N4.Rep;
 
         public override string ToString() 
-            => Seq.format();
+            => Value.ToString();
     }
 
 }

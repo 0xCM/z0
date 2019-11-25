@@ -11,11 +11,13 @@ namespace Z0
     using System.Runtime.Intrinsics.X86;
 
     using static zfunc;
-    using static As;
-    using static AsIn;
 
     partial class bvoc
     {
+
+
+
+
         public static int pop_bitstore(ulong src)
             => Bits.popbs(src);
 

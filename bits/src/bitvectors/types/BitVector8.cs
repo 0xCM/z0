@@ -232,20 +232,20 @@ namespace Z0
             => !x.Equals(y);
 
         [MethodImpl(Inline)]
-        public static Bit operator <(BitVector8 x, BitVector8 y)
-            => x.data < y.data ? Bit.On : Bit.Off;
+        public static bit operator <(BitVector8 x, BitVector8 y)
+            => x.data < y.data ? bit.On : bit.Off;
 
         [MethodImpl(Inline)]
-        public static Bit operator >(BitVector8 x, BitVector8 y)
-            => x.data > y.data ? Bit.On : Bit.Off;
+        public static bit operator >(BitVector8 x, BitVector8 y)
+            => x.data > y.data ? bit.On : bit.Off;
 
         [MethodImpl(Inline)]
-        public static Bit operator <=(BitVector8 x, BitVector8 y)
-            => x.data <= y.data ? Bit.On : Bit.Off;
+        public static bit operator <=(BitVector8 x, BitVector8 y)
+            => x.data <= y.data ? bit.On : bit.Off;
 
         [MethodImpl(Inline)]
-        public static Bit operator >=(BitVector8 x, BitVector8 y)
-            => x.data >= y.data ? Bit.On : Bit.Off;
+        public static bit operator >=(BitVector8 x, BitVector8 y)
+            => x.data >= y.data ? bit.On : bit.Off;
 
         [MethodImpl(Inline)]
         public BitVector8(byte src)

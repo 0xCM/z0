@@ -24,7 +24,19 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitVector<T> rotr<T>(BitVector<T> x, int s)
             where T : unmanaged
-                => gbits.rotr(x.Data,s);
+                => gbits.rotr(x.Scalar,s);
+
+        /// <summary>
+        /// Rotates source bits rightward
+        /// </summary>
+        /// <param name="x">The source bitvector</param>
+        /// <param name="s">The rotation magnitude</param>
+        /// <typeparam name="T">The primal type</typeparam>
+        [MethodImpl(Inline)]
+        public static BitVector<N,T> rotr<N,T>(BitVector<N,T> x, int s)
+            where T : unmanaged
+            where N : unmanaged, ITypeNat
+                => gbits.rotr(x.Scalar, s, x.Width);
 
         /// <summary>
         /// Computes a rightward bit rotation
@@ -32,8 +44,8 @@ namespace Z0
         /// <param name="x">The source bitvector</param>
         /// <param name="y">The rotation magnitude</param>
         [MethodImpl(Inline)]
-        public static BitVector4 rotr(BitVector4 x, int offset)
-            => gbits.rotr(x.data,offset);
+        public static BitVector4 rotr(BitVector4 x, int s)
+            => gbits.rotr(x.data,s, x.Width);
 
         /// <summary>
         /// Computes a rightward bit rotation
@@ -41,8 +53,8 @@ namespace Z0
         /// <param name="x">The source bitvector</param>
         /// <param name="y">The rotation magnitude</param>
         [MethodImpl(Inline)]
-        public static BitVector8 rotr(BitVector8 x, int offset)
-            => gbits.rotr(x.data,offset);
+        public static BitVector8 rotr(BitVector8 x, int s)
+            => gbits.rotr(x.data,s);
             
         /// <summary>
         /// Rotates source bits rightward
@@ -83,8 +95,5 @@ namespace Z0
             vblock.rotrx(n128, in x.x0, (byte)s, ref z.x0);
             return z;
         }
-
-
     }
-
 }

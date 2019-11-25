@@ -20,7 +20,19 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitVector<T> xor<T>(BitVector<T> x, BitVector<T> y)
             where T : unmanaged
-                => gmath.xor(x.Data,y.Data);
+                => gmath.xor(x.Scalar,y.Scalar);
+
+        /// <summary>
+        /// Computes the bitvector z := x ^ y from bitvectors x and y
+        /// </summary>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
+        /// <typeparam name="T">The primal type</typeparam>
+        [MethodImpl(Inline)]
+        public static BitVector<N,T> xor<N,T>(BitVector<N,T> x, BitVector<N,T> y)
+            where T : unmanaged
+            where N : unmanaged, ITypeNat
+                => gmath.xor(x.Scalar, y.Scalar);
 
         /// <summary>
         /// Computes  z := x ^ y from bitvectors x and y

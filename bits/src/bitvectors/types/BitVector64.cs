@@ -94,7 +94,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
         public static explicit operator BitVector16(BitVector64 src)
-            => BitVector16.FromScalar((ushort)src.data);        
+            => (ushort)src.data;
 
         /// <summary>
         /// Explicitly converts a a 64-bit bitvector to a 32-bit bitvector
@@ -271,7 +271,7 @@ namespace Z0
             get => BitMask.test(data, pos);
             
             [MethodImpl(Inline)]
-            set => BitMask.set(data, (byte)pos, value);
+            set => data = BitMask.set(data, (byte)pos, value);
        }
 
         /// <summary>
@@ -350,8 +350,7 @@ namespace Z0
         /// <summary>
         /// Tests whether all bits are on
         /// </summary>
-        [MethodImpl(Inline)]
-        public readonly bool AllOnes()
+        public readonly bool AllOn
             => (UInt64.MaxValue & data) == UInt64.MaxValue;
         
         /// <summary>

@@ -11,7 +11,6 @@ namespace Z0
 
     partial class BitVector
     {
-
         /// <summary>
         /// Constructs a bitvector formed from the n lest significant bits of the source vector
         /// </summary>

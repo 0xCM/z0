@@ -19,20 +19,13 @@ namespace Z0
         public static NatSeq<N6,N4> Seq => default;
 
         [MethodImpl(Inline)]
-        public static implicit operator int(N64 src)
-            => (int)src.NatValue;
-
+        public static implicit operator int(N64 src) => 64;
+    
         
-        public NatSeq Sequence 
-            => Seq;
-
-        ITypeNat INatPow2.Exponent 
-            => N6.Rep;
        
-        public ulong NatValue 
-            => Seq.NatValue;                
+        public ulong NatValue => Value;
         
         public override string ToString() 
-            => Seq.format();
+            => Value.ToString();
     }
 }

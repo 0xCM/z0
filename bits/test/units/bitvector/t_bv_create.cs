@@ -65,7 +65,7 @@ namespace Z0
         void bvcreate_ng13x8u()
         {
             var dim = n13;
-            var bv = Random.BitVector<N13,byte>();
+            var bv = Random.BitCells<N13,byte>();
             ClaimEqual(bv,bv.ToBitString());
             
             var segcount = BitCells<N13,byte>.SegCount;

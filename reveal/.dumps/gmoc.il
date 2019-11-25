@@ -1,4 +1,4 @@
-// 2019-11-23 16:56:46:039
+// 2019-11-25 01:31:46:615
 double xor_g64f(double lhs, double rhs)
 {
     IL_0000: ldarg.0
@@ -3857,17 +3857,17 @@ byte inc_d8u(byte x)
     IL_0006: ret
 
 }
-byte inc_g8u(byte x)
+ushort inc_d16u(ushort x)
 {
     IL_0000: ldarg.0
-    IL_0001: call System.Byte Z0.gmath::inc<System.Byte>(System.Byte)
+    IL_0001: call System.UInt16 Z0.math::inc(System.UInt16)
     IL_0006: ret
 
 }
-short inc_d16i(short x)
+ushort inc_g16u(ushort x)
 {
     IL_0000: ldarg.0
-    IL_0001: call System.Int16 Z0.math::inc(System.Int16)
+    IL_0001: call System.UInt16 Z0.gmath::inc<System.UInt16>(System.UInt16)
     IL_0006: ret
 
 }

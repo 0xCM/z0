@@ -25,14 +25,14 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitCells<T> ToCells<T>(this BitVector<T> src)
             where T : unmanaged
-                => BitCells.from(src.Data);
+                => BitCells.from(src.Scalar);
 
         /// <summary>
         /// Defines an 8-bit generic bitvector from an unsigned integer of commensurate width
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
-        public static BitVector<byte> ToBitVectorG(this byte src)
+        public static BitVector<byte> ToGenericBits(this byte src)
             => src;
 
         /// <summary>
@@ -40,7 +40,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
-        public static BitVector<ushort> ToBitVectorG(this ushort src)
+        public static BitVector<ushort> ToGenericBits(this ushort src)
             => src;
 
         /// <summary>
@@ -48,7 +48,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
-        public static BitVector<uint> ToBitVectorG(this uint src)
+        public static BitVector<uint> ToGenericBits(this uint src)
             => src;
 
         /// <summary>
@@ -56,7 +56,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
-        public static BitVector<ulong> ToBitVectorG(this ulong src)
+        public static BitVector<ulong> ToGenericBits(this ulong src)
             => src;        
 
         /// <summary>
@@ -74,7 +74,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitString ToBitString<T>(this BitVector<T> src)
             where T : unmanaged
-                => BitString.from<T>(src.Data); 
+                => BitString.from<T>(src.Scalar); 
 
         /// <summary>
         /// Extracts the represented data as a bitstring truncated to a specified width
@@ -82,7 +82,8 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitString ToBitString<T>(this BitVector<T> src, int width)
             where T : unmanaged
-                => BitString.from<T>(src.Data).Truncate(width); 
+                => BitString.from<T>(src.Scalar,width);
+
 
         [MethodImpl(Inline)]
         public static BitVector<T> Reverse<T>(this BitVector<T> src)

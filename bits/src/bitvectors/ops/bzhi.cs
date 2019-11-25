@@ -16,8 +16,17 @@ namespace Z0
         /// </summary>
         /// <param name="pos">The bit position</param>
         [MethodImpl(Inline)]
+        public static BitVector<T> bzhi<T>(BitVector<T> src, int pos)
+            where T : unmanaged
+                => gbits.zerohi(src.data, pos);
+
+        /// <summary>
+        /// Disables the high bits starting at a specified position
+        /// </summary>
+        /// <param name="pos">The bit position</param>
+        [MethodImpl(Inline)]
         public static BitVector4 bzhi(BitVector4 src, int pos)
-            => gbits.zerohi(src.data, (byte)pos);
+            => gbits.zerohi(src.data, pos);
 
         /// <summary>
         /// Disables the high bits starting at a specified position
@@ -25,7 +34,7 @@ namespace Z0
         /// <param name="pos">The bit position</param>
         [MethodImpl(Inline)]
         public static BitVector8 bzhi(BitVector8 src, int pos)
-            => gbits.zerohi(src.data, (byte)pos);
+            => gbits.zerohi(src.data, pos);
 
         /// <summary>
         /// Disables the high bits starting at a specified position
@@ -33,7 +42,7 @@ namespace Z0
         /// <param name="pos">The bit position</param>
         [MethodImpl(Inline)]
         public static BitVector16 bzhi(BitVector16 src, int pos)
-            => gbits.zerohi(src.data, (byte)pos);
+            => gbits.zerohi(src.data, pos);
 
         /// <summary>
         /// Disables the high bits starting at a specified position
@@ -41,7 +50,7 @@ namespace Z0
         /// <param name="pos">The bit position</param>
         [MethodImpl(Inline)]
         public static BitVector32 bzhi(BitVector32 src, int pos)
-            => gbits.zerohi(src.data, (byte)pos);
+            => gbits.zerohi(src.data, pos);
 
         /// <summary>
         /// Disables the high bits starting at a specified position
@@ -49,7 +58,7 @@ namespace Z0
         /// <param name="pos">The bit position</param>
         [MethodImpl(Inline)]
         public static BitVector64 bzhi(BitVector64 src, int pos)
-            => gbits.zerohi(src.data, (byte)pos);
+            => gbits.zerohi(src.data, pos);
 
     }
 

@@ -184,7 +184,7 @@ namespace Z0
                 var m = Random.BitMatrix16();
                 var c = Random.BitVector(n16);
                 var z1 = m * c;            
-                var z2 = BitVector16.Alloc();
+                var z2 = BitVector.alloc(n16);
                 for(var i = 0; i<m.RowCount; i++)           
                 {
                     var r = m[i];

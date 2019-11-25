@@ -19,7 +19,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitVector<T> impl<T>(BitVector<T> x, BitVector<T> y)
             where T : unmanaged
-                => gmath.impl(x.Data, y.Data);
+                => gmath.impl(x.Scalar, y.Scalar);
 
         /// <summary>
         /// Computes the material implication a -> b, i.e. a | ~b

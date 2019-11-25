@@ -56,8 +56,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
         public static BitVector16 ToBitVector(this BitString src, N16 n)
-            => BitVector16.FromBitString(src);
-
+            => src.TakeUInt16();
 
         /// <summary>
         /// Converts the source bitvector to an equivalent natural/generic bitvector

@@ -186,7 +186,7 @@ namespace Z0
         public void nbm_broadcast_7x9x8()
         {
             const byte pattern = 0b01010101;
-            var fill = BitVector.alloc(n9, pattern);
+            var fill = BitCells.alloc(n9, pattern);
             var matrix = BitMatrix.broadcast(fill, n7);
             for(var i=0; i<matrix.RowCount; i++)
                 Claim.yea(fill == matrix[i]);
@@ -199,7 +199,7 @@ namespace Z0
             var fmt = m1.Format().RemoveWhitespace();
             Claim.eq(7*7, fmt.Length);
             var d = m1.Diagonal();
-            var x = BitVector.alloc<N7,byte>();
+            var x = BitCells.alloc<N7,byte>();
             x.Fill(on);
 
             Claim.yea(d == x);                        
