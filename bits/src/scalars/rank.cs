@@ -50,7 +50,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static uint rank(ulong src, uint pos)
             => pop(range(src,0,pos));
-
     }
-
 }

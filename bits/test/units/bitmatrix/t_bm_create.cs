@@ -11,7 +11,7 @@ namespace Z0
 
     using static zfunc;
 
-    public class t_bm_create : BitMatrixTest<t_bm_create>
+    public class t_bm_create : t_bm<t_bm_create>
     {
         public void permrev_8x8()
         {

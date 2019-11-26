@@ -38,11 +38,10 @@ namespace Z0
 
     }
 
-    /// <summary>
-    /// Opcodes for scalar bit-level operations
-    /// </summary>
-    public static partial class bvoc
-    {
+    public static partial class CpuBits
+    {    
+
+
 
     }
 

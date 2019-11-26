@@ -11,11 +11,6 @@ namespace Z0
  
     using static constant;
 
-    public static partial class natoc
-    {
-
-
-    }
 
     public static partial class NatProve
     {

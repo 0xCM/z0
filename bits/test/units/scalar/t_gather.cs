@@ -12,7 +12,7 @@ namespace Z0.Test
 
     using static zfunc;
 
-    public class t_gather : ScalarBitTest<t_gather>
+    public class t_gather : t_sb<t_gather>
     {            
         public void gather_masks()
         {

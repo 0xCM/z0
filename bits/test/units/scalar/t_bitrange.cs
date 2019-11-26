@@ -10,7 +10,7 @@ namespace Z0.Test
 
     using static zfunc;
 
-    public class t_bitrange : ScalarBitTest<t_bitrange>
+    public class t_bitrange : t_sb<t_bitrange>
     {
         public void range8u()
         {

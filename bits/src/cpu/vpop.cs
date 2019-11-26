@@ -8,21 +8,12 @@ namespace Z0
     using System.Runtime.CompilerServices;    
     using System.Runtime.Intrinsics;
     using System.Runtime.Intrinsics.X86;
-    
-    using static System.Runtime.Intrinsics.X86.Sse41;
-    using static System.Runtime.Intrinsics.X86.Sse2;
-    using static System.Runtime.Intrinsics.X86.Avx2;
-    using static System.Runtime.Intrinsics.X86.Avx;
-    
-    using static As;
+        
     using static zfunc;
- 
     using static dinx;
 
-
-    partial class Bits
-    {    
-
+    partial class CpuBits
+    {
         const ulong k1 = 0x5555555555555555;
         
         const ulong k2 = 0x3333333333333333;
@@ -31,18 +22,18 @@ namespace Z0
         
         const ulong kf = 0x0101010101010101; 
 
-        static Vector256<ulong> K1 => dinx.vbroadcast(n256, k1);
+        static Vector256<ulong> K1 => vbroadcast(n256, k1);
 
-        static Vector256<ulong> K2 => dinx.vbroadcast(n256, k2);
+        static Vector256<ulong> K2 => vbroadcast(n256, k2);
 
-        static Vector256<ulong> K4 => dinx.vbroadcast(n256, k4);        
+        static Vector256<ulong> K4 => vbroadcast(n256, k4);        
 
-        static Vector128<ulong> v128K1 => dinx.vbroadcast(n128, k1);
+        static Vector128<ulong> v128K1 => vbroadcast(n128, k1);
 
-        static Vector128<ulong> v128K2 => dinx.vbroadcast(n128, k2);
+        static Vector128<ulong> v128K2 => vbroadcast(n128, k2);
 
-        static Vector128<ulong> v128K4 => dinx.vbroadcast(n128, k4);
-        
+        static Vector128<ulong> v128K4 => vbroadcast(n128, k4);
+
         /// <summary>
         /// Computes the population count of the content of 3 128-bit vectors
         /// </summary>
@@ -123,5 +114,6 @@ namespace Z0
 
             return (uint)total;            
         }
+ 
     }
 }

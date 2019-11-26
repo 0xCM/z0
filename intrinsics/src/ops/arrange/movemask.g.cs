@@ -28,7 +28,7 @@ namespace Z0
                 => (uint)MoveMask(v8u(src));
 
         /// <summary>
-        /// _mm_movemask_epi8 (__m128i a) PMOVMSKB reg, xmm
+        /// int _mm256_movemask_epi8 (__m256i a) VPMOVMSKB reg, ymm
         /// Constructs an integer from the most significant bit of each 8-bit segment of the source vector
         /// </summary>
         /// <param name="src">The source vector</param>

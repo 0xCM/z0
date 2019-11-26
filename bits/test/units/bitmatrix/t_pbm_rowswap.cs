@@ -9,7 +9,7 @@ namespace Z0
 
     using static zfunc;
     
-    public class t_bm_rowswap : BitMatrixTest<t_bm_rowswap>
+    public class t_bm_rowswap : t_bm<t_bm_rowswap>
     {        
         public void pbm_rowswap_16()
         {

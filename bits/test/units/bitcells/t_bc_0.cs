@@ -153,10 +153,29 @@ namespace Z0
                 var bs = data.ToBitString(bitcount);
                 Claim.eq(bc.Length, bitcount);
                 Claim.eq(bs.Length, bitcount);
+                
                 for(var j=0; j<bc.Length; j++)
                     Claim.eq(bc[j], bs[j]);
-
             }
         }
+
+        protected void nbc_pop_check<N,T>(N n = default)
+            where T : unmanaged
+            where N : unmanaged, ITypeNat
+        {
+            
+            var len = (int)(Mod8.div((uint)n.NatValue) + (Mod8.mod((uint)n.NatValue) != 0 ? 1 : 0));            
+            var src = Random.Span<byte>(len);
+
+            var bc = BitCells<N,T>.FromBytes(src);
+            var pc1 = bc.Pop();
+
+            var bs = BitString.from(src);
+            var pc2 = bs.PopCount();
+
+            Claim.eq(pc1,pc2);
+        }
+
+
     }
 }

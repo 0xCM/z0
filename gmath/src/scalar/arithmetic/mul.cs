@@ -19,92 +19,36 @@ namespace Z0
     partial class math
     {
        [MethodImpl(Inline)]
-        public static sbyte mul(sbyte lhs, sbyte rhs)
-            => (sbyte)(lhs * rhs);
+        public static sbyte mul(sbyte a, sbyte rhs)
+            => (sbyte)(a * rhs);
 
         [MethodImpl(Inline)]
-        public static byte mul(byte lhs, byte rhs)
-            => (byte)(lhs * rhs);
+        public static byte mul(byte a, byte b)
+            => (byte)(a * b);
 
         [MethodImpl(Inline)]
-        public static short mul(short lhs, short rhs)
-            => (short)(lhs * rhs);
+        public static short mul(short a, short b)
+            => (short)(a * b);
 
         [MethodImpl(Inline)]
-        public static ushort mul(ushort lhs, ushort rhs)
-            => (ushort)(lhs * rhs);
+        public static ushort mul(ushort a, ushort b)
+            => (ushort)(a * b);
 
         [MethodImpl(Inline)]
-        public static int mul(int lhs, int rhs)
-            => lhs * rhs;
+        public static int mul(int a, int b)
+            => a * b;
 
         [MethodImpl(Inline)]
-        public static uint mul(uint lhs, uint rhs)
-            => lhs * rhs;
+        public static uint mul(uint a, uint b)
+            => a * b;
 
         [MethodImpl(Inline)]
-        public static long mul(long lhs, long rhs)
-            => lhs * rhs;
+        public static long mul(long a, long b)
+            => a * b;
 
         [MethodImpl(Inline)]
-        public static ulong mul(ulong lhs, ulong rhs)
-            => lhs * rhs;
-
-        [MethodImpl(Inline)]
-        public static ref sbyte mul(ref sbyte lhs, sbyte rhs)
-        {
-            lhs = (sbyte)(lhs * rhs);
-            return ref lhs;
-        }
-
-        [MethodImpl(Inline)]
-        public static ref byte mul(ref byte lhs, byte rhs)
-        {
-            lhs = (byte)(lhs * rhs);
-            return ref lhs;
-        }
-
-        [MethodImpl(Inline)]
-        public static ref short mul(ref short lhs, short rhs)
-        {
-            lhs = (short)(lhs * rhs);
-            return ref lhs;
-        }
-
-        [MethodImpl(Inline)]
-        public static ref ushort mul(ref ushort lhs, ushort rhs)
-        {
-            lhs = (ushort)(lhs * rhs);
-            return ref lhs;
-        }
-
-        [MethodImpl(Inline)]
-        public static ref int mul(ref int lhs, int rhs)
-        {
-            lhs = lhs * rhs;
-            return ref lhs;
-        }
-
-        [MethodImpl(Inline)]
-        public static ref uint mul(ref uint lhs, uint rhs)
-        {
-            lhs = lhs * rhs;
-            return ref lhs;
-        }
-
-        [MethodImpl(Inline)]
-        public static ref long mul(ref long lhs, long rhs)
-        {
-            lhs = lhs * rhs;
-            return ref lhs;
-        }
-
-        [MethodImpl(Inline)]
-        public static ref ulong mul(ref ulong lhs, ulong rhs)
-        {
-            lhs = lhs * rhs;
-            return ref lhs;
-        }
+        public static ulong mul(ulong a, ulong b)
+            => a * b;
 
         /// <summary>
         /// Computes the full 64-bit product between two unsigned 32-bit integers
@@ -112,7 +56,7 @@ namespace Z0
         /// <param name="src">The source integers</param>
         /// <param name="dst">The multiplication result, partitioned into lo/hi parts</param>
         [MethodImpl(Inline)]
-        public static unsafe void mul(in Pair<uint> src, ref Pair<uint> dst)                 
+        public static unsafe void mul32x64(in Pair<uint> src, ref Pair<uint> dst)                 
             => dst.B = Bmi2.MultiplyNoFlags(src.A, src.B, ptr(ref dst.A));
 
         /// <summary>
@@ -121,7 +65,7 @@ namespace Z0
         /// <param name="src">The source integers</param>
         /// <param name="dst">The multiplication result, partitioned into lo/hi parts</param>
         [MethodImpl(Inline)]
-        public static unsafe void mul(in Pair<ulong> src, ref Pair<ulong> dst)                 
+        public static unsafe void mul64x128(in Pair<ulong> src, ref Pair<ulong> dst)                 
             => dst.B = Bmi2.X64.MultiplyNoFlags(src.A, src.B, ptr(ref dst.A));
 
         /// <summary>
@@ -130,10 +74,10 @@ namespace Z0
         /// <param name="src">The source integers</param>
         /// <param name="dst">The multiplication result, partitioned into lo/hi parts</param>
         [MethodImpl(Inline)]
-        public static Pair<uint> mul(in Pair<uint> src)
+        public static Pair<uint> mul32x64(in Pair<uint> src)
         {                         
             var dst = default(Pair<uint>);
-            mul(src, ref dst);
+            mul32x64(src, ref dst);
             return dst;
         }
 
@@ -143,10 +87,10 @@ namespace Z0
         /// <param name="src">The source integers</param>
         /// <param name="dst">The multiplication result, partitioned into lo/hi parts</param>
         [MethodImpl(Inline)]
-        public static Pair<ulong> mul(in Pair<ulong> src)
+        public static Pair<ulong> mul64x128(in Pair<ulong> src)
         {                         
             var dst = default(Pair<ulong>);
-            mul(src, ref dst);
+            mul64x128(src, ref dst);
             return dst;
         }
 
@@ -154,29 +98,40 @@ namespace Z0
         /// Computes the full 128-bit product between two unsigned 64-bit integers
         /// </summary>
         /// <param name="src">The source integers</param>
-        /// <param name="dst">The multiplication result, partitioned into lo/hi parts</param>
+        /// <param name="z">The multiplication result, partitioned into lo/hi parts</param>
         [MethodImpl(Inline)]
-        public static ref Pair<ulong> mul(in ulong a, in ulong b, ref Pair<ulong> dst)
+        public static ref Pair<ulong> mul64x128(in ulong a, in ulong b, ref Pair<ulong> z)
         {                         
-            mul(pair(a,b), ref dst);
-            return ref dst;
+            mul64x128(pair(a,b), ref z);
+            return ref z;
         }
 
+        /// <summary>
+        /// Computes the full 128-bit products between corresponding 64-bit span elements
+        /// </summary>
+        /// <param name="xs">The left operands</param>
+        /// <param name="xs">The right operands</param>
+        /// <param name="zs">The multiplication result, partitioned into lo/hi parts</param>
         [MethodImpl(Inline)]
-        public static void mul(ReadOnlySpan<ulong> lhs, ReadOnlySpan<ulong> rhs, Span<Pair<ulong>> dst)
+        public static void mul64x128(ReadOnlySpan<ulong> xs, ReadOnlySpan<ulong> ys, Span<Pair<ulong>> zs)
         {
-            var count = math.min(math.min(lhs.Length, rhs.Length), dst.Length);
+            var count = math.min(math.min(xs.Length, ys.Length), zs.Length);
             for(var i=0; i<count; i++)
-                mul(skip(in head(lhs), i), skip(in head(rhs), i), ref seek(ref head(dst), i));
+                mul64x128(skip(in head(xs), i), skip(in head(ys), i), ref seek(ref head(zs), i));
         }
 
+        /// <summary>
+        /// Computes the full 128-bit products between 64-bit span elements and a 64-bit scalar
+        /// </summary>
+        /// <param name="xs">The left operands</param>
+        /// <param name="xs">The scalar value</param>
+        /// <param name="zs">The multiplication result, partitioned into lo/hi parts</param>
         [MethodImpl(Inline)]
-        public static void mul(ReadOnlySpan<ulong> lhs, ulong rhs, Span<Pair<ulong>> dst)
+        public static void mul64x128(ReadOnlySpan<ulong> xs, ulong a, Span<Pair<ulong>> zs)
         {
-            var count = lhs.Length;
+            var count = xs.Length;
             for(var i=0; i<count; i++)
-                mul(skip(in head(lhs), i), rhs, ref seek(ref head(dst), i));
+                mul64x128(skip(in head(xs), i), a, ref seek(ref head(zs), i));
         }
-
     }
 }

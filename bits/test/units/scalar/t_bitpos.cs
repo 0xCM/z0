@@ -12,7 +12,7 @@ namespace Z0
 
     using static zfunc;
 
-    public class t_bitpos : ScalarBitTest<t_bitpos>
+    public class t_bitpos : t_sb<t_bitpos>
     {
         public void bitidx_increment()
         {

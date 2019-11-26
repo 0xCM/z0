@@ -11,7 +11,7 @@ namespace Z0
     
     using static zfunc;
 
-    public class t_bitstring : ScalarBitTest<t_bitstring>
+    public class t_bitstring : t_sb<t_bitstring>
     {
         public void bs_sar_8i_check()
             => bs_sar_check<sbyte>();

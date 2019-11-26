@@ -98,9 +98,68 @@ namespace Z0
                 bitchars_f(src,dst,offset);
         }        
 
+        /// <summary>
+        /// Computes the population count of an unsigned primal value
+        /// </summary>
+        /// <param name="src">The primal value</param>
+        /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
-        public static int PopCount(byte a)
+        public static int pop<T>(T src)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(byte))
+                return popd(uint8(src));
+            else if(typeof(T) == typeof(ushort))
+                return popd(uint16(src));
+            else if(typeof(T) == typeof(uint))
+                return popd(uint32(src));
+            else if(typeof(T) == typeof(ulong))
+                return popd(uint64(src));
+            else
+                throw unsupported<T>();
+        }
+
+        [MethodImpl(Inline)]
+        static int popd(in byte a)
             => skip(in head(PopCounts), a);
+
+        [MethodImpl(Inline)]
+        static int popd(in ushort a)
+        {
+            var count = 0;
+            ref readonly var src = ref AsIn.uint8(in a);
+            count += popd(skip(in src, 0));
+            count += popd(skip(in src, 1));
+            return count;
+        }
+
+        [MethodImpl(Inline)]
+        static int popd(in uint a)
+        {
+            var count = 0;
+            ref readonly var src = ref AsIn.uint8(in a);
+            count += popd(skip(in src, 0));
+            count += popd(skip(in src, 1));
+            count += popd(skip(in src, 2));
+            count += popd(skip(in src, 3));
+            return count;
+        }
+
+        [MethodImpl(Inline)]
+        static int popd(in ulong a)
+        {
+            var count = 0;
+            ref readonly var src = ref AsIn.uint8(in a);
+            count += popd(skip(in src, 0));
+            count += popd(skip(in src, 1));
+            count += popd(skip(in src, 2));
+            count += popd(skip(in src, 3));
+            count += popd(skip(in src, 4));
+            count += popd(skip(in src, 5));
+            count += popd(skip(in src, 6));
+            count += popd(skip(in src, 7));
+            return count;
+        }
 
         const int seglen = 8;
 

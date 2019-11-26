@@ -11,7 +11,7 @@ namespace Z0
     using static zfunc;
     using static Bit;
 
-    public class t_toggle : ScalarBitTest<t_toggle>
+    public class t_toggle : t_sb<t_toggle>
     {
         public void toggle_8i()
         {

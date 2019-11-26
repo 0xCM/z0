@@ -14,7 +14,6 @@ namespace Z0
 
     partial class BitsX
     {
-
                
         [MethodImpl(Inline)]   
         public static ulong PopCount(this Span<byte> src)

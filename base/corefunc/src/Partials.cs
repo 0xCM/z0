@@ -23,11 +23,6 @@ namespace Z0
         
     }
 
-    [OpCodeHost]
-    public static partial class zfoc
-    {
-        
-    }
 
     
 

@@ -11,15 +11,15 @@ namespace Z0
     
     using static zfunc;
 
-    public class UInt4Test : ScalarBitTest<UInt4Test>
+    public class UInt4Test : t_sb<UInt4Test>
     {
 
         public void add_4u_check()
         {
-            var x = UInt4.From(3) + UInt4.From(5);
+            var x = UInt4.From(3u) + UInt4.From(5u);
             Claim.eq(8u, x);
 
-            var y = UInt4.From(10) + UInt4.From(5);
+            var y = UInt4.From(10u) + UInt4.From(5u);
             Claim.eq(UInt4.MaxValue,y);
 
 
@@ -100,7 +100,7 @@ namespace Z0
             var z2 = (byte)0b1101;
             Claim.eq(y2,z2);
 
-            var x3 = UInt4.FromBits(Bit.On, Bit.Off, Bit.On, Bit.On);
+            var x3 = UInt4.FromBits(bit.On, bit.Off, bit.On, bit.On);
             byte y3 = x3;
             var z3 = (byte)0b1101;
             Claim.eq(y3,z3);
@@ -112,9 +112,6 @@ namespace Z0
             var z4 = (byte)0;
             Claim.eq(y4,z4);
 
-            var x5 = UInt4.FromBitSeq(gbits.bitseq((byte)5));
-            var y5 = (UInt4)5;
-            Claim.eq(x5,y5);
         }
 
         public void uint4_format()

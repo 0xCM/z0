@@ -74,6 +74,7 @@ namespace Z0
             where T : unmanaged
                 => new BitString(BitStore.bitseq(src));                
 
+
         /// <summary>
         /// Constructs a bitstring from primal value
         /// </summary>

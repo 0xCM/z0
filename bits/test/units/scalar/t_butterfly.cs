@@ -8,7 +8,7 @@ namespace Z0
 
     using static zfunc;
 
-    public class t_butterfly : ScalarBitTest<t_butterfly>
+    public class t_butterfly : t_sb<t_butterfly>
     {
         //[0 1 2 3] -> [0 2 1 3]
         public void butterfly_16x64u()

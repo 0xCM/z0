@@ -9,7 +9,7 @@ namespace Z0
 
     using static zfunc;
 
-    public class t_shift : ScalarBitTest<t_shift>
+    public class t_shift : t_sb<t_shift>
     {
         public void sal_8i()
         {

@@ -12,7 +12,7 @@ namespace Z0
 
     using static zfunc;
 
-    public class t_bitseq : ScalarBitTest<t_bitseq>
+    public class t_bitseq : t_sb<t_bitseq>
     {
 
         public void bitseq_8u()

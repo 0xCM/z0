@@ -10,7 +10,7 @@ namespace Z0
 
     using static zfunc;
 
-    public class t_bzhi : ScalarBitTest<t_bzhi>
+    public class t_bzhi : t_sb<t_bzhi>
     {    
         public void bzhi_8u_check()
             => bzhi_check<byte>();

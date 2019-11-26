@@ -10,7 +10,7 @@ namespace Z0
 
     using static zfunc;
 
-    public class t_blsi : ScalarBitTest<t_blsi>
+    public class t_blsi : t_sb<t_blsi>
     {
 
         /// <summary>

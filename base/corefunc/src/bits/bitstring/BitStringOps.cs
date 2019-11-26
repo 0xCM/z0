@@ -5,18 +5,13 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
-    using System.IO;
-    
+
     using static zfunc;
-    using static As;
 
     partial struct BitString
     {
-
         public static BitString not(BitString src)
         {            
             var len = src.Length;
@@ -139,6 +134,5 @@ namespace Z0
 
             return dst;
         }
-
     }
 }

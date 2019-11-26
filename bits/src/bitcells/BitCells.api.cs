@@ -166,15 +166,15 @@ namespace Z0
                 => modprod(x.ToCells(),y.ToCells());
 
         /// <summary>
-        /// Computes the number of cells required to hold a specified number of bits
+        /// Computes the number of primal cells required to cover a specified number of bits
         /// </summary>
-        /// <param name="len">The number of bits to store</param>
-        /// <typeparam name="T">The primal storage type</typeparam>
+        /// <param name="bitcount">The number of bits to cover</param>
+        /// <typeparam name="T">The primal cell type</typeparam>
         [MethodImpl(Inline)]
-        public static int cellcount<T>(int len)
+        public static int cellcount<T>(int bitcount)
             where T : unmanaged
         {
-            var q = Math.DivRem(len, bitsize<T>(), out int r);            
+            var q = Math.DivRem(bitcount, bitsize<T>(), out int r);            
             return r == 0 ? q : q + 1;
         }
 

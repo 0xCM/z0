@@ -46,22 +46,6 @@ namespace Z0
 
     }
 
-    /// <summary>
-    /// Primal math op codes
-    /// </summary>
-    public static partial class gmoc
-    {
-
-    }
-
-    /// <summary>
-    /// Floating-point op codes
-    /// </summary>
-    public static partial class fpoc
-    {
-
-    }
-
 
     public static partial class mathspan
     {    

@@ -50,13 +50,6 @@ namespace Z0
 
     }
 
-    /// <summary>
-    /// Opcodes for intrinsic vectorized operations
-    /// </summary>
-    public static partial class inxoc
-    {
-
-    }
 
     /// <summary>
     /// Continer for internal helpers

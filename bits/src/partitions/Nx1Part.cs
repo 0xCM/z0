@@ -11,7 +11,6 @@ namespace Z0
     using Z0;
  
     using static zfunc;
-    using static Bits;
 
     partial class BitParts
     {        
@@ -413,7 +412,7 @@ namespace Z0
             => part64x1(src, ref head64(dst));
  
         /// <summary>
-        /// Partitions a 64-bit source into 64 8-bit targets of effective width 1
+        /// Partitions a 64-bit source value into 64 individual bit values
         /// </summary>
         /// <param name="src">The source value</param>
         /// <param name="dst">The target span</param>

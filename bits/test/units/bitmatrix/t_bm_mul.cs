@@ -9,7 +9,7 @@ namespace Z0
     
     using static zfunc;
 
-    public class t_bm_mul : BitMatrixTest<t_bm_mul>
+    public class t_bm_mul : t_bm<t_bm_mul>
     {
 
         public void pbm_mul_8()

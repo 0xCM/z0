@@ -10,7 +10,7 @@ namespace Z0.Test
 
     using static zfunc;
 
-    public class t_perm : ScalarBitTest<t_perm>
+    public class t_perm : t_sb<t_perm>
     {
 
         public void perm_create()

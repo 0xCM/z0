@@ -11,7 +11,7 @@ namespace Z0
     using static zfunc;
     using static BitParts;
 
-    public class t_bitparts : BitPartTest<t_bitparts>
+    public class t_bitparts : t_bitpart<t_bitparts>
     {
         public void bitpart_10x1()
             => bitpart_check<uint,byte>(BitParts.part10x1, (int)Part10x1.Count,(int)Part10x1.Width);

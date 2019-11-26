@@ -14,6 +14,7 @@ namespace Z0
     
     partial class gbits
     {    
+
         /// <summary>
         /// Clears a contiguous range of bits from the source
         /// </summary>

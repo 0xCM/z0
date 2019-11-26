@@ -147,4 +147,47 @@ namespace Z0
         public static void Main(params string[] args)
             => new App().Run();
     }
+
+    /// <summary>
+    /// Opcodes for scalar bit-level operations
+    /// </summary>
+    public static partial class bvoc
+    {
+
+    }
+
+    /// <summary>
+    /// Primal math op codes
+    /// </summary>
+    public static partial class gmoc
+    {
+
+    }
+
+    public static partial class bgoc
+    {
+        
+    }
+
+    /// <summary>
+    /// Floating-point op codes
+    /// </summary>
+    public static partial class fpoc
+    {
+
+    }
+
+    public static partial class zfoc
+    {
+        
+    }
+
+    /// <summary>
+    /// Opcodes for intrinsic vectorized operations
+    /// </summary>
+    public static partial class inxoc
+    {
+
+    }
+
 }

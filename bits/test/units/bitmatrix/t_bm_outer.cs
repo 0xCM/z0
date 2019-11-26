@@ -11,7 +11,7 @@ namespace Z0
 
     using static zfunc;
     
-    public class t_bm_outer : BitMatrixTest<t_bm_outer>
+    public class t_bm_outer : t_bm<t_bm_outer>
     {
 
         public void outer_product_32()

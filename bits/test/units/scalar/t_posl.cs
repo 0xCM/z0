@@ -10,7 +10,7 @@ namespace Z0.Test
 
     using static zfunc;
 
-    public class t_posl : ScalarBitTest<t_posl>
+    public class t_posl : t_sb<t_posl>
     {
         
         public void FindLeastOnBit()

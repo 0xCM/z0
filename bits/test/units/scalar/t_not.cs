@@ -10,7 +10,7 @@ namespace Z0
     using static zfunc;
     using D = GDel;
 
-    public class t_not : ScalarBitTest<t_not>
+    public class t_not : t_sb<t_not>
     {
         public void flip_g8i_check()
             => VerifyOp(OpKind.Not, x => (sbyte) ~x, D.flip<sbyte>());

@@ -8,7 +8,7 @@ namespace Z0
 
     using static zfunc;
  
-    public class t_andn : ScalarBitTest<t_andn>
+    public class t_andn : t_sb<t_andn>
     {
 
         public void scalar_andn_8u()

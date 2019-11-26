@@ -3,9 +3,6 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 using System;
-using System.Linq;
-using System.Reflection;
-using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;    
 using System.Runtime.Intrinsics;
@@ -21,8 +18,7 @@ partial class zfunc
     /// <typeparam name="T">The element type</typeparam>
     [MethodImpl(Inline)]
     public static unsafe ref T head<T>(T[] src)
-        where T : unmanaged
-            => ref src[0];
+        => ref src[0];
     
     /// <summary>
     /// Returns a reference to the location of the first span element
@@ -31,8 +27,7 @@ partial class zfunc
     /// <typeparam name="T">The element type</typeparam>
     [MethodImpl(Inline)]
     public static ref T head<T>(Span<T> src)
-        =>  ref MemoryMarshal.GetReference<T>(src);
-
+        => ref MemoryMarshal.GetReference<T>(src);
 
     /// <summary>
     /// Returns a reference to the head of a span, offset by a specified amount
@@ -43,7 +38,6 @@ partial class zfunc
     public static ref T head<T>(Span<T> src, int offset)
         => ref Unsafe.Add(ref head(src), offset);        
 
-
     /// <summary>
     /// Returns a reference to the head of a readonly span
     /// </summary>
@@ -51,8 +45,7 @@ partial class zfunc
     /// <typeparam name="T">The cell type</typeparam>
     [MethodImpl(Inline)]
     public static ref readonly T head<T>(ReadOnlySpan<T> src)
-        where T : unmanaged
-            =>  ref MemoryMarshal.GetReference<T>(src);
+        => ref MemoryMarshal.GetReference<T>(src);
 
     /// <summary>
     /// Returns a readonly reference to the head of a readonly span, offset by a specified amount
@@ -73,7 +66,7 @@ partial class zfunc
     public static ref T head<N,T>(in NatSpan<N,T> src)
         where N : unmanaged, ITypeNat
         where T : unmanaged
-            =>  ref src.Head;
+            => ref src.Head;
 
     /// <summary>
     /// Returns a reference to the location of the first span element
@@ -103,7 +96,7 @@ partial class zfunc
     [MethodImpl(Inline)]
     public static ref readonly T head<T>(in ConstBlock128<T> src)
         where T : unmanaged
-            =>  ref src.Head;
+            => ref src.Head;
 
     /// <summary>
     /// Returns a readonly reference to the location of the first span element
@@ -113,7 +106,7 @@ partial class zfunc
     [MethodImpl(Inline)]
     public static ref readonly T head<T>(in ConstBlock256<T> src)
         where T : unmanaged
-            =>  ref src.Head;
+            => ref src.Head;
 
     /// <summary>
     /// Presents the span head as a reference to an unsigned 16-bit integer
@@ -241,8 +234,5 @@ partial class zfunc
     [MethodImpl(Inline)]
     public static ref T head<T>(in Block256<T> src, int offset)
         where T : unmanaged
-            => ref Unsafe.Add(ref src.Head, offset);        
-
-
-
+            => ref Unsafe.Add(ref src.Head, offset);
 }

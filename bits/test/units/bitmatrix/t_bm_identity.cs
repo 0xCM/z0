@@ -9,7 +9,7 @@ namespace Z0
 
     using static zfunc;
 
-    public class t_bm_identity : BitMatrixTest<t_bm_identity>
+    public class t_bm_identity : t_bm<t_bm_identity>
     {
         public void bm_identity_ng8x8u_check()
             => bm_identity_check<N8,byte>();

@@ -11,7 +11,7 @@ namespace Z0
 
     using static zfunc;
     
-    public class t_bm_diagonal : BitMatrixTest<t_bm_diagonal>
+    public class t_bm_diagonal : t_bm<t_bm_diagonal>
     {
 
         public void diagonal_4x4()

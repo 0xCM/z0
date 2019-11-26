@@ -10,7 +10,7 @@ namespace Z0.Test
 
     using static zfunc;
 
-    public class t_reverse : ScalarBitTest<t_reverse>
+    public class t_reverse : t_sb<t_reverse>
     {
         public void bitrev_8()
             => bitrev_check<byte>();

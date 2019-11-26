@@ -1,20 +1,36 @@
-// 2019-11-25 04:09:26:123
-uint pop3x128(Vector128<ulong> x, Vector128<ulong> y, Vector128<ulong> z)
+// 2019-11-25 21:05:21:443
+uint pop_3x128(Vector128<ulong> x, Vector128<ulong> y, Vector128<ulong> z)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.UInt32 Z0.Bits::vpop(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
+    IL_0003: call System.UInt32 Z0.CpuBits::vpop(System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>,System.Runtime.Intrinsics.Vector128`1<System.UInt64>)
     IL_0008: ret
 
 }
-uint pop3x64(ulong x, ulong y, ulong z)
+uint pop_3x256(Vector256<ulong> x, Vector256<ulong> y, Vector256<ulong> z)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.UInt32 Z0.Bits::pop(System.UInt64,System.UInt64,System.UInt64)
+    IL_0003: call System.UInt32 Z0.CpuBits::vpop(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
     IL_0008: ret
+
+}
+void part64x1_byte(ulong src, Span<byte> dst)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call System.Void Z0.BitParts::part64x1(System.UInt64,System.Span`1<System.Byte>)
+    IL_0007: ret
+
+}
+void part64x1_bit(ulong src, Span<bit> dst)
+{
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call System.Void Z0.BitParts::part64x1(System.UInt64,System.Span`1<Z0.bit>)
+    IL_0007: ret
 
 }
 ulong pow2_20()
@@ -1271,35 +1287,33 @@ ulong mask_8x64u(ref ulong dst, int exp0, int exp1, int exp2, int exp3, int exp4
     IL_0014: ret
 
 }
-int pop_bitstore(ulong src)
+int pop_bitstore_8(byte src)
 {
     IL_0000: ldarg.0
-    IL_0001: call System.Int32 Z0.Bits::popbs(System.UInt64)
+    IL_0001: call System.Int32 Z0.BitStore::pop<System.Byte>(System.Byte)
     IL_0006: ret
 
 }
-void part64x1_byte(ulong src, Span<byte> dst)
+int pop_bitstore_32(uint src)
 {
     IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: call System.Void Z0.BitParts::part64x1(System.UInt64,System.Span`1<System.Byte>)
-    IL_0007: ret
+    IL_0001: call System.Int32 Z0.BitStore::pop<System.UInt32>(System.UInt32)
+    IL_0006: ret
 
 }
-void part64x1_bit(ulong src, Span<bit> dst)
+int pop_bitstore_64(ulong src)
 {
     IL_0000: ldarg.0
-    IL_0001: ldarg.1
-    IL_0002: call System.Void Z0.BitParts::part64x1(System.UInt64,System.Span`1<Z0.bit>)
-    IL_0007: ret
+    IL_0001: call System.Int32 Z0.BitStore::pop<System.UInt64>(System.UInt64)
+    IL_0006: ret
 
 }
-uint pop3x256(Vector256<ulong> x, Vector256<ulong> y, Vector256<ulong> z)
+uint pop_3x64(ulong x, ulong y, ulong z)
 {
     IL_0000: ldarg.0
     IL_0001: ldarg.1
     IL_0002: ldarg.2
-    IL_0003: call System.UInt32 Z0.Bits::vpop(System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>,System.Runtime.Intrinsics.Vector256`1<System.UInt64>)
+    IL_0003: call System.UInt32 Z0.Bits::pop(System.UInt64,System.UInt64,System.UInt64)
     IL_0008: ret
 
 }

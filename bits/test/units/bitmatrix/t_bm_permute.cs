@@ -11,7 +11,7 @@ namespace Z0
 
     using static zfunc;
 
-    public class t_bm_permute : BitMatrixTest<t_bm_permute>
+    public class t_bm_permute : t_bm<t_bm_permute>
     {
 
         // public void perm_16x4()

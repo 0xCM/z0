@@ -8,7 +8,7 @@ namespace Z0.Test
 
     using static zfunc;
         
-    public class t_bitwidth : ScalarBitTest<t_bitwidth>
+    public class t_bitwidth : t_sb<t_bitwidth>
     {
 
         public void effwidth_8u()

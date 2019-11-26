@@ -12,7 +12,7 @@ namespace Z0
     using static zfunc;
     using static BitParts;
         
-    public class t_mix : ScalarBitTest<t_mix>
+    public class t_mix : t_sb<t_mix>
     {
         public void mix8()
             => mix_check<byte>();

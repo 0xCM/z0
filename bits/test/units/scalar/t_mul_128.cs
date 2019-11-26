@@ -1,0 +1,26 @@
+//-----------------------------------------------------------------------------
+// Copyright   :  (c) Chris Moore, 2019
+// License     :  MIT
+//-----------------------------------------------------------------------------
+namespace Z0
+{
+    using System;
+    using System.Runtime.CompilerServices;
+    using System.Runtime.Intrinsics;
+
+    using static zfunc;
+
+    public class t_mul_128 : t_sb<t_mul_128>
+    {
+
+        public void mul_no_overflow()
+        {
+            var x = Random.Span<ulong>(SampleSize, z32, uint.MaxValue);
+            var y = Random.Span<ulong>(SampleSize, z32, uint.MaxValue);                                
+            Span<Pair<ulong>> z = new Pair<ulong>[SampleSize];
+            math.mul64x128(x,y,z);
+            for(var i=0; i<SampleSize; i++)
+                Claim.eq(x[i] * y[i], z[i].A);
+        }
+    }
+}

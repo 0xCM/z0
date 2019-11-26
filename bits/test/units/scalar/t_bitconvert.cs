@@ -11,7 +11,7 @@ namespace Z0
     using static zfunc;
     using static Bit;
 
-    public class t_bitconvert : ScalarBitTest<t_bitconvert>
+    public class t_bitconvert : t_sb<t_bitconvert>
     {
         public void bit_convert()
         {

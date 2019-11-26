@@ -26,8 +26,7 @@ partial class zfunc
     /// <typeparam name="T">The source type</typeparam>
     [MethodImpl(Inline)]
     public static ref byte byterefR<T>(ref T src)
-        where T : unmanaged
-            => ref Unsafe.As<T,byte>(ref src);
+        => ref Unsafe.As<T,byte>(ref src);
 
     /// <summary>
     /// Presents a readonly reference as a byte reference
@@ -36,8 +35,7 @@ partial class zfunc
     /// <typeparam name="T">The source type</typeparam>
     [MethodImpl(Inline)]
     public static ref byte byteref<T>(in T src)
-        where T :unmanaged
-            => ref Unsafe.As<T,byte>(ref mutable(in src));
+        => ref Unsafe.As<T,byte>(ref mutable(in src));
 
     /// <summary>
     /// The canonical swap function
@@ -61,8 +59,7 @@ partial class zfunc
     /// <typeparam name="T">The element type</typeparam>
     [MethodImpl(Inline)]
     public static ref T seek<T>(ref T src, int count)
-        //where T : unmanaged
-            => ref Unsafe.Add(ref src, count);
+        => ref Unsafe.Add(ref src, count);
 
     /// <summary>
     /// Adds an offset to the head of a span, measured relative to the reference type
@@ -72,8 +69,7 @@ partial class zfunc
     /// <typeparam name="T">The element type</typeparam>
     [MethodImpl(Inline)]
     public static ref T seek<T>(Span<T> src, int count)
-        //where T : unmanaged
-            => ref seek(ref head(src), count);
+        => ref seek(ref head(src), count);
 
     /// <summary>
     /// Adds an offset to a reference, measured in bytes
@@ -83,8 +79,7 @@ partial class zfunc
     /// <typeparam name="T">The element type</typeparam>
     [MethodImpl(Inline)]
     public static ref T seekb<T>(ref T src, long count)
-        //where T : unmanaged
-            => ref Unsafe.AddByteOffset(ref src, intptr(count));
+        => ref Unsafe.AddByteOffset(ref src, intptr(count));
 
     /// <summary>
     /// Adds an offset to the head of a span, measured in bytes
@@ -94,8 +89,7 @@ partial class zfunc
     /// <typeparam name="T">The element type</typeparam>
     [MethodImpl(Inline)]
     public static ref T seekb<T>(Span<T> src, long count)
-        //where T : unmanaged
-            => ref seekb(ref head(src), count);
+        => ref seekb(ref head(src), count);
 
     /// <summary>
     /// Returns an readonly reference to a memory location following a specified number of elements
@@ -105,8 +99,7 @@ partial class zfunc
     /// <typeparam name="T">The source element type</typeparam>
     [MethodImpl(Inline)]
     public static ref readonly T skip<T>(in T src, int count)
-        where T : unmanaged
-            => ref Unsafe.Add(ref mutable(in src), count);
+        => ref Unsafe.Add(ref mutable(in src), count);
 
     /// <summary>
     /// Returns an readonly reference to a memory location following a specified number of elements
@@ -116,8 +109,7 @@ partial class zfunc
     /// <typeparam name="T">The source element type</typeparam>
     [MethodImpl(Inline)]
     public static ref readonly T skip<T>(ReadOnlySpan<T> src, int count)
-        where T : unmanaged
-            => ref skip(in head(src), count);
+        => ref skip(in head(src), count);
 
     /// <summary>
     /// Returns an readonly reference to a memory location, following a specified number of bytes
@@ -127,8 +119,7 @@ partial class zfunc
     /// <typeparam name="T">The source element type</typeparam>
     [MethodImpl(Inline)]
     public static ref readonly T skipb<T>(in T src, long count)
-        where T : unmanaged
-            => ref Unsafe.Add(ref mutable(in src), intptr(count));
+        => ref Unsafe.Add(ref mutable(in src), intptr(count));
 
     /// <summary>
     /// Returns an readonly reference to a memory location, following a specified number of bytes
@@ -138,6 +129,5 @@ partial class zfunc
     /// <typeparam name="T">The source element type</typeparam>
     [MethodImpl(Inline)]
     public static ref readonly T skipb<T>(ReadOnlySpan<T> src, long count)
-        where T : unmanaged
-            => ref skipb(in head(src), count);    
+        => ref skipb(in head(src), count);    
 }

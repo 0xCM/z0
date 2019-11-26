@@ -5,17 +5,14 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
     using static zfunc;
-    using static As;
-    using static AsIn;
 
     partial class gbits
     {
         /// <summary>
-        /// Projects each source bit into an element of the target span at the corresponding position
+        /// Projects each bit from a source value into target span element at the corresponding index
         /// </summary>
         /// <param name="src">The bit soure</param>
         /// <param name="dst">The bit target</param>
@@ -33,14 +30,13 @@ namespace Z0
         }
 
         /// <summary>
-        /// Projects each source bit from each source element into an element of the target span 
-        /// at the corresponding position
+        /// Projects each source bit from each source element into an element of the target span at the corresponding index
         /// </summary>
         /// <param name="src">The bit soure</param>
         /// <param name="dst">The bit target</param>
         /// <typeparam name="T">The bit source type</typeparam>
         /// <typeparam name="T">The target type</typeparam>
-        public static Span<T> unpack<S,T>(Span<S> src, Span<T> dst)
+        public static Span<T> unpack<S,T>(ReadOnlySpan<S> src, Span<T> dst)
             where S : unmanaged
             where T : unmanaged
         {
@@ -60,13 +56,12 @@ namespace Z0
             }
         }
 
-        /// <summary>
-        /// Extracts each bit from source and writes the state to a caller-supplied target
-        /// </summary>
-        /// <param name="src">The source values to be unpacked</param>
-        /// <param name="dst"></param>
-        /// <typeparam name="T">The source value type</typeparam>
-        public static Span<bit> unpack<T>(Span<T> src, Span<bit> dst)
+        public static Span<T> unpack<S,T>(Span<S> src, Span<T> dst)
+            where S : unmanaged
+            where T : unmanaged
+                => unpack(src.ReadOnly(), dst);
+        
+        public static Span<bit> unpack<T>(ReadOnlySpan<T> src, Span<bit> dst)
             where T : unmanaged
         {
             var srcsize = bitsize<T>();
@@ -82,10 +77,20 @@ namespace Z0
         }
 
         /// <summary>
-        /// Extracts each bit from source and writes the state to a caller-supplied target
+        /// Extracts each bit from each source element into caller-supplied target at the corresponding index
         /// </summary>
         /// <param name="src">The source values to be unpacked</param>
-        /// <param name="dst"></param>
+        /// <param name="dst">The target span of length at least bitsize[T]*length(Span[T])</param>
+        /// <typeparam name="T">The source value type</typeparam>
+        public static Span<bit> unpack<T>(Span<T> src, Span<bit> dst)
+            where T : unmanaged
+                => unpack(src.ReadOnly(),dst);
+
+        /// <summary>
+        /// Extracts each bit from each source element into caller-supplied target at the corresponding index
+        /// </summary>
+        /// <param name="src">The source values to be unpacked</param>
+        /// <param name="dst">The target array of length at least bitsize[T]*length(Span[T])</param>
         /// <typeparam name="T">The source value type</typeparam>
         public static Span<bit> unpack<T>(Span<T> src, bit[] dst)
             where T : unmanaged
@@ -101,6 +106,5 @@ namespace Z0
                 seek(ref target, k) = test(src[i], j);
             return dst;
         }
-
     }
 }

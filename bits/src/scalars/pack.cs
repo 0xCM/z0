@@ -12,6 +12,7 @@ namespace Z0
     
     partial class Bits
     {         
+
         /// <summary>
         /// Packs 2 bits into the least bits of an unsigned integer
         /// </summary>

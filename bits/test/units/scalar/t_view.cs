@@ -5,28 +5,23 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Reflection;
 
     using static zfunc;
         
-    public class t_bitview : ScalarBitTest<t_bitview>
+    public class t_sb_bitview : t_sb<t_sb_bitview>
     {
+        public void gsb_bitview_8()
+            => gsb_bitview_check<byte>();
 
-        public void VerifyPrimalView()
-        {
-            var src = UInt64.MaxValue;  
-            var len = sizeof(ulong);
-            var view = BitView.Over(ref src);
-            for(var i=0; i<len; i++)
-            for(byte j=0; j<8; j++)
-                view[i,j] = j % 2 == 0;
-            
-            var bs = src.ToBitString();
-            for(var i=0; i< len*8; i++)
-                Claim.yea(bs[i] == (i%2 == 0));
+        public void gsb_bitview_16()
+            => gsb_bitview_check<ushort>();
 
-        }
+        public void gsb_bitview_32()
+            => gsb_bitview_check<uint>();
+
+        public void gsb_bitview_64()
+            => gsb_bitview_check<ulong>();
+
 
     }
 

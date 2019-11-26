@@ -10,7 +10,7 @@ namespace Z0
 
     using static zfunc;
 
-    public class t_extract : ScalarBitTest<t_extract>
+    public class t_extract : t_sb<t_extract>
     {        
         public void extract_32u()
         {

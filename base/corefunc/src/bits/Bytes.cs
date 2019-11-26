@@ -46,7 +46,7 @@ namespace Z0
         /// <param name="offset">The source array offset</param>
         /// <typeparam name="T">The source type</typeparam>
         [MethodImpl(Inline)]
-        public static T read<T>(Span<byte> src, in int offset = 0)
+        public static T read<T>(Span<byte> src, int offset = 0)
             where T : unmanaged
                 => Unsafe.ReadUnaligned<T>(ref seek(ref head(src), offset));
 
@@ -57,7 +57,7 @@ namespace Z0
         /// <param name="offset">The source span offset</param>
         /// <typeparam name="T">The source type</typeparam>
         [MethodImpl(Inline)]
-        public static T read<T>(ReadOnlySpan<byte> src, in int offset = 0)
+        public static T read<T>(ReadOnlySpan<byte> src, int offset = 0)
             where T : unmanaged
                 =>  Unsafe.ReadUnaligned<T>(ref mutable(skip(head(src), offset)));
 
@@ -70,7 +70,7 @@ namespace Z0
         /// <param name="dst">The target reference</param>
         /// <typeparam name="T">The source type</typeparam>
         [MethodImpl(Inline)]
-        public static ref T read<T>(Span<byte> src, in int offset, ref T dst)
+        public static ref T read<T>(Span<byte> src, int offset, ref T dst)
             where T : unmanaged
         {            
             dst = Unsafe.ReadUnaligned<T>(ref seek(ref head(src), offset));
@@ -85,7 +85,7 @@ namespace Z0
         /// <param name="offset">The target span offset</param>
         /// <typeparam name="T">The source type</typeparam>
         [MethodImpl(Inline)]
-        public static Span<byte> write<T>(in T src, Span<byte> dst, in int offset)
+        public static Span<byte> write<T>(in T src, Span<byte> dst, int offset)
             where T : unmanaged
         {
             As.generic<T>(ref seek(ref head(dst), offset)) = src;

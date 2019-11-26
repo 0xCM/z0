@@ -10,11 +10,11 @@ namespace Z0
     using System.Runtime.Intrinsics;
     using static zfunc;
 
+
     partial class BitGrid
-    {        
-        
+    {                
         /// <summary>
-        /// Extracts an index-identifed 2-bit grid column
+        /// Extracts an index-identifed 1-bit grid column
         /// </summary>
         /// <param name="g">The source grid</param>
         /// <param name="index">The zero-based column index, in the inclusive range 0...7</param>
@@ -168,24 +168,6 @@ namespace Z0
             where T : unmanaged
             where N : unmanaged, ITypeNat
                 => g.Scalar;
-
-        // [MethodImpl(Inline)]
-        // public static BitVector16 col<N,T>(BitGrid64<N16,N,T> g, int index)
-        //     where T : unmanaged
-        //     where N : unmanaged, ITypeNat
-        // {
-        //     // C0 = [0001 0001 ... 0001]
-        //     // C1 = C0 << 1 = [0010 0010 ... 0010]
-        //     // C2 = C0 << 2 = [0100 0100 ... 0100]
-        //     // C3 = C0 << 3 = [1000 1000 ... 1000]
-        //     const ulong C0 = 
-        //         (1ul << 64 - 1*4) | (1ul << 64 - 2*4) | (1ul << 64 - 3*4) | (1ul << 64 - 4*4) | 
-        //         (1ul << 64 - 5*4) | (1ul << 64 - 6*4) | (1ul << 64 - 7*4) | (1ul << 64 - 8*4) |
-        //         (1ul << 64 - 9*4) | (1ul << 64 - A*4) | (1ul << 64 - B*4) | (1ul << 64 - C*4) |
-        //         (1ul << 64 - D*4) | (1ul << 64 - E*4) | (1ul << 64 - F*4) | 1;        
-        //     return (ushort)Bits.gather(g, C0 << index);
-        // }
-
 
         /// <summary>
         /// Extracts an index-identifed 16-bit grid column

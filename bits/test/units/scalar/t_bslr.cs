@@ -10,7 +10,7 @@ namespace Z0
 
     using static zfunc;
 
-    public class t_blsr : ScalarBitTest<t_blsr>
+    public class t_blsr : t_sb<t_blsr>
     {
 
         public void blsr_u8_check()

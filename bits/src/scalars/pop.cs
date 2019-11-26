@@ -15,26 +15,14 @@ namespace Z0
     
     partial class Bits
     {                
-        [MethodImpl(Inline)]
-        public static unsafe int popbs(ulong src)
-        {
-            Span<byte> bytes = new Span<byte>(&src,8);
-            ref readonly var data = ref head(bytes);
-            var count = 0;
-            var index = 0;
-            for(var i=0; i<8; i++)
-                count += BitStore.PopCount(skip(in data, i));
+        const ulong k1 = 0x5555555555555555;
+        
+        const ulong k2 = 0x3333333333333333;
+        
+        const ulong k4 = 0x0f0f0f0f0f0f0f0f;
+        
+        const ulong kf = 0x0101010101010101; 
 
-            // count += BitStore.PopCount(skip(in data, index++));
-            // count += BitStore.PopCount(skip(in data, index++));
-            // count += BitStore.PopCount(skip(in data, index++));
-            // count += BitStore.PopCount(skip(in data, index++));
-            // count += BitStore.PopCount(skip(in data, index++));
-            // count += BitStore.PopCount(skip(in data, index++));
-            // count += BitStore.PopCount(skip(in data, index++));
-            // count += BitStore.PopCount(skip(in data, index++));
-            return count;
-        }
 
         /// <summary>
         /// Counts the enabled bits in the source
@@ -104,14 +92,6 @@ namespace Z0
         public static uint pop(ulong x0, ulong x1)
             => (uint)(PopCount(x0) + PopCount(x1));
 
-        [MethodImpl(Inline)]
-        public static uint pop(ulong x0, ulong x1, ulong x2, ulong x3)
-            => (uint)(PopCount(x0) + PopCount(x1) + PopCount(x2) + PopCount(x3));
-
-        [MethodImpl(Inline)]
-        public static uint pop(ulong x0, ulong x1, ulong x2, ulong x3, ulong x4, ulong x5, ulong x6, ulong x7)
-            => pop(x0,x1,x2,x3) + pop(x4,x5,x6,x7);
-
         /// <summary>
         /// Computes the population count of the content of 3 64-bit unsigned integers
         /// </summary>
@@ -120,7 +100,7 @@ namespace Z0
         /// <param name="z"></param>
         /// <remarks>Reference: https://www.chessprogramming.org/Population_Count</remarks>
         [MethodImpl(Inline)]
-        public static uint pop (ulong x, ulong y, ulong z) 
+        public static uint pop(ulong x, ulong y, ulong z) 
         {
             var maj = ((x ^ y ) & z) | (x & y);
             var odd = ((x ^ y ) ^ z);
@@ -139,9 +119,15 @@ namespace Z0
         }        
 
         [MethodImpl(Inline)]
+        public static uint pop(ulong x0, ulong x1, ulong x2, ulong x3)
+            => (uint)(PopCount(x0) + PopCount(x1) + PopCount(x2) + PopCount(x3));
+
+        [MethodImpl(Inline)]
+        public static uint pop(ulong x0, ulong x1, ulong x2, ulong x3, ulong x4, ulong x5, ulong x6, ulong x7)
+            => pop(x0,x1,x2,x3) + pop(x4,x5,x6,x7);
+
+        [MethodImpl(Inline)]
         public static uint pop(ulong x0, ulong x1, ulong x2, ulong x3, ulong x4, ulong x5)
             => pop(x0,x1,x2) + pop(x3,x4,x5);
-
-
     }
 }
