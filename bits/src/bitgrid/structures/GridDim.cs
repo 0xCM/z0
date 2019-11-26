@@ -10,6 +10,57 @@ namespace Z0
 
     using static zfunc;
 
+    public static class GridDim
+    {
+        public static GridDim<M,N,T> define<M,N,T>(M m = default, N n = default, T zero = default)
+            where M : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
+            where T : unmanaged
+                => default;
+    }
+
+    public interface IGridDim
+    {
+        int RowCount {get;}
+        
+        int ColCount {get;}
+        
+        int CellWidth {get;}
+    }
+    
+    public interface IGridDim<M,N,T> : IGridDim
+        where M : unmanaged, ITypeNat
+        where N : unmanaged, ITypeNat
+        where T : unmanaged
+    {
+
+    }
+
+    public readonly struct GridDim<M,N,T> : IGridDim<M,N,T>
+        where M : unmanaged, ITypeNat
+        where N : unmanaged, ITypeNat
+        where T : unmanaged
+    {
+        public int RowCount
+        {
+            [MethodImpl(Inline)]
+            get => natval<M>();
+        }
+
+        public int ColCount
+        {
+            [MethodImpl(Inline)]
+            get => natval<N>();
+        }
+
+        public int CellWidth
+        {
+            [MethodImpl(Inline)]
+            get => bitsize<T>();
+        }
+
+    }
+
     public enum GridDim32 : uint
     {
         Dim1x32 = 1 << 16 | 32,
@@ -84,68 +135,5 @@ namespace Z0
  
     }
 
-    public enum GridDim : uint
-    {
-        Dim1x32 = GridDim32.Dim1x32,
-
-        Dim32x1 = GridDim32.Dim32x1,
-
-        Dim2x16 = GridDim32.Dim2x16,
-
-        Dim16x2 = GridDim32.Dim16x2,
-
-        Dim4x8 = GridDim32.Dim4x8,
-
-        Dim8x4 = GridDim32.Dim8x4,
-
-        Dim1x64 = GridDim64.Dim1x64,
-
-        Dim64x1 = GridDim64.Dim64x1,
-
-        Dim2x32 = GridDim64.Dim2x32,
-
-        Dim32x2 = GridDim64.Dim32x2,
-
-        Dim4x16 = GridDim64.Dim4x16,
-
-        Dim16x4 = GridDim64.Dim16x4,
-
-        Dim8x8 = GridDim64.Dim8x8,
-
-        Dim1x128 = GridDim128.Dim1x128,
-
-        Dim128x1 = GridDim128.Dim128x1,
-
-        Dim2x64 =  GridDim128.Dim2x64,
-
-        Dim64x2 = GridDim128.Dim64x2,
-
-        Dim4x32 =  GridDim128.Dim4x32,
-
-        Dim32x4 = GridDim128.Dim32x4,
-
-        Dim8x16 =  GridDim128.Dim8x16,
-
-        Dim16x8 = GridDim128.Dim16x8,
-
-        Dim1x256 = GridDim256.Dim1x256,
-
-        Dim256x1 = GridDim256.Dim256x1,
-
-        Dim2x128 = GridDim256.Dim2x128,
-
-        Dim128x2 = GridDim256.Dim128x2,
-
-        Dim4x64 = GridDim256.Dim4x64,
-
-        Dim64x4 = GridDim256.Dim64x4,
-
-        Dim8x32 = GridDim256.Dim8x32,
-
-        Dim32x8 = GridDim256.Dim32x8,
-
-        Dim16x16 = GridDim256.Dim16x16,
-
-    }
 
 }

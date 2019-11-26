@@ -24,15 +24,6 @@ namespace Z0
 
         public static N16 N => default;
 
-        /// <summary>
-        /// Creates a vector from two bytes
-        /// </summary>
-        /// <param name="lo">The byte that will constitute the lo vector bits</param>
-        /// <param name="hi">The byte that will constitute the hi vector bits</param>
-        [MethodImpl(Inline)]
-        public static BitVector16 FromScalars(byte lo, byte hi)
-            =>(ushort)((ushort)hi << 8 | (ushort)lo);
-
         [MethodImpl(Inline)]
         public static implicit operator BitCells<N16,ushort>(BitVector16 src)
             => BitCells<N16,ushort>.FromArray(src.data);
@@ -45,10 +36,6 @@ namespace Z0
         public static implicit operator BitVector16(ushort src)
             => new BitVector16(src);
 
-        /// <summary>
-        /// Converts the source vector to the underlying primal value
-        /// </summary>
-        /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
         public static implicit operator ushort(BitVector16 src)
             => src.data;        
@@ -61,26 +48,12 @@ namespace Z0
         public static implicit operator BitVector64(BitVector16 src)
             => src.data;
 
-        /// <summary>
-        /// Truncates the source vector by half
-        /// </summary>
-        /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
         public static explicit operator BitVector8(BitVector16 src)
             => (byte)src.data;
 
         /// <summary>
-        /// Computes the bitwise XOR of the source operands
-        /// Note that the XOR operator is equivalent to the (+) operator
-        /// </summary>
-        /// <param name="x">The left vector</param>
-        /// <param name="y">The right vector</param>
-        [MethodImpl(Inline)]
-        public static BitVector16 operator ^(BitVector16 x, BitVector16 y)
-            => BitVector.xor(x,y);
-
-        /// <summary>
-        /// Computes the bitwise AND of the source operands
+        /// Computes the bitwise AND of the operands
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
@@ -89,7 +62,7 @@ namespace Z0
             => BitVector.and(x,y);
 
         /// <summary>
-        /// Computes the bitwise OR of the source operands
+        /// Computes the bitwise OR of the operands
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
@@ -98,8 +71,16 @@ namespace Z0
             => BitVector.or(x,y);
 
         /// <summary>
+        /// Computes the bitwise XOR of the operands
+        /// </summary>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
+        [MethodImpl(Inline)]
+        public static BitVector16 operator ^(BitVector16 x, BitVector16 y)
+            => BitVector.xor(x,y);
+
+        /// <summary>
         /// Computes the bitwise complement of the operand. 
-        /// Note that this operator is closely related to the negation operator (-)
         /// </summary>
         /// <param name="x">The source operand</param>
         [MethodImpl(Inline)]
@@ -107,10 +88,10 @@ namespace Z0
             => BitVector.not(src);
 
         /// <summary>
-        /// Computes the arithmetic sum of the source operands. 
+        /// Computes the arithmetic sum of the operands
         /// </summary>
-        /// <param name="x">The left operand</param>
-        /// <param name="y">The right operand</param>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
         public static BitVector16 operator +(BitVector16 x, BitVector16 y)
             => BitVector.add(x,y);
@@ -118,15 +99,13 @@ namespace Z0
         /// <summary>
         /// Computes the two's complement of the operand
         /// </summary>
-        /// <param name="x">The source operand</param>
+        /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
-        public static BitVector16 operator -(in BitVector16 src)
-            => BitVector.negate(src);
+        public static BitVector16 operator -(BitVector16 x)
+            => BitVector.negate(x);
 
         /// <summary>
-        /// Subtracts the second operand from the first. Note that this operator is equivalent to
-        /// the composite operation of applying the XOR operator to the left operand and the
-        /// complement of the second
+        /// Computes the arithmetic difference between the operands
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
@@ -140,7 +119,7 @@ namespace Z0
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
         [MethodImpl(Inline)]
-        public static bit operator %( BitVector16 x, BitVector16 y)
+        public static bit operator %(BitVector16 x, BitVector16 y)
             => BitVector.dot(x,y);
 
         /// <summary>
@@ -148,16 +127,16 @@ namespace Z0
         /// </summary>
         /// <param name="x">The source operand</param>
         [MethodImpl(Inline)]
-        public static BitVector16 operator <<(BitVector16 x, int offset)
-            => BitVector.sll(x,offset);
+        public static BitVector16 operator <<(BitVector16 x, int shift)
+            => BitVector.sll(x,shift);
 
         /// <summary>
         /// Right-shifts the bits in the source
         /// </summary>
         /// <param name="x">The source operand</param>
         [MethodImpl(Inline)]
-        public static BitVector16 operator >>(BitVector16 x, int offset)
-            => BitVector.srl(x,offset);
+        public static BitVector16 operator >>(BitVector16 x, int shift)
+            => BitVector.srl(x,shift);
 
         /// <summary>
         /// Arithmetically increments the source vector 
@@ -196,33 +175,64 @@ namespace Z0
         /// </summary>
         /// <param name="src">The ource operand</param>
         [MethodImpl(Inline)]
-        public static Bit operator !(BitVector16 src)
+        public static bit operator !(BitVector16 src)
             => src.Empty;
 
         /// <summary>
-        /// Determines whether the operands represent identical values
+        /// Determines whether operand content is identical
         /// </summary>
-        /// <param name="x">The left operand</param>
-        /// <param name="y">The right operand</param>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static bool operator ==(BitVector16 x, BitVector16 y)
-            => x.Equals(y);
+        public static bit operator ==(BitVector16 x, BitVector16 y)
+            => math.eq(x,y);
 
         /// <summary>
-        /// Determines whether the operands represent identical values
+        /// Determines whether operand content is non-identical
         /// </summary>
-        /// <param name="x">The left operand</param>
-        /// <param name="y">The right operand</param>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static bool operator !=(BitVector16 x, BitVector16 y)
-            => !x.Equals(y);
+        public static bit operator !=(BitVector16 x, BitVector16 y)
+            => math.neq(x,y);
+
+        /// <summary>
+        /// Determines whether the left operand is arithmetically less than the second
+        /// </summary>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
+        [MethodImpl(Inline)]
+        public static bit operator <(BitVector16 x, BitVector16 y)
+            => math.lt(x,y);
+
+        /// <summary>
+        /// Determines whether the left operand is arithmetically greater than the second
+        /// </summary>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
+        [MethodImpl(Inline)]
+        public static bit operator >(BitVector16 x, BitVector16 y)
+            => math.gt(x,y);
+
+        /// <summary>
+        /// Determines whether the left operand is arithmetically less than or equal to the second
+        /// </summary>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
+        [MethodImpl(Inline)]
+        public static bit operator <=(BitVector16 x, BitVector16 y)
+            => math.lteq(x,y);
+
+        [MethodImpl(Inline)]
+        public static bit operator >=(BitVector16 x, BitVector16 y)
+            => math.gteq(x,y);
 
         /// <summary>
         /// Initializes the vector with the source value it represents
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
-        public BitVector16(in ushort src)
+        public BitVector16(ushort src)
             => this.data = src;
 
         /// <summary>

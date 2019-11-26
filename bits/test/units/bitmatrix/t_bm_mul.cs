@@ -81,7 +81,7 @@ namespace Z0
                 var A = Random.BitMatrix64();
                 var x = Random.BitVector(n64);
                 var z = A * x;            
-                var y = BitVector64.Alloc();
+                var y = BitVector.alloc(n64);
                 for(var i = 0; i<A.Order; i++)           
                 {
                     var r = A[i];
@@ -185,7 +185,7 @@ namespace Z0
                 var c = Random.BitVector(n16);
                 var z1 = m * c;            
                 var z2 = BitVector.alloc(n16);
-                for(var i = 0; i<m.RowCount; i++)           
+                for(var i = 0; i<m.Order; i++)           
                 {
                     var r = m[i];
                     z2[i] = r % c;

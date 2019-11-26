@@ -5,69 +5,27 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
     using static zfunc;
-    using static As;
-    using static AsIn;
 
     partial class Bits
     {
-        [MethodImpl(Inline)]
-        public static ref sbyte loff(ref sbyte src)
-        {
-            src &= (sbyte)(src - 1);
-            return ref src;
-        }
 
         [MethodImpl(Inline)]
-        public static ref byte loff(ref byte src)
-        {
-            src &= (byte)(src - 1);
-            return ref src;
-        }
+        public static byte loff(byte src)
+            => (byte)(src & (src - 1));
 
         [MethodImpl(Inline)]
-        public static ref short loff(ref short src)
-        {
-            src &= (short)(src - 1);
-            return ref src;
-        }
+        public static ushort loff(ushort src)
+            => (ushort)(src & (src - 1));
 
         [MethodImpl(Inline)]
-        public static ref ushort loff(ref ushort src)
-        {
-            src &= (ushort)(src - 1);
-            return ref src;
-        }
+        public static uint loff(uint src)
+            => (src & (src - 1));
 
         [MethodImpl(Inline)]
-        public static ref int loff(ref int src)
-        {
-            src &= src - 1;
-            return ref src;
-        }
-
-        [MethodImpl(Inline)]
-        public static ref uint loff(ref uint src)
-        {
-            src &= src - 1;
-            return ref src;
-        }
-
-        [MethodImpl(Inline)]
-        public static ref long loff(ref long src)
-        {
-            src &= src - 1;
-            return ref src;
-        }
-
-        [MethodImpl(Inline)]
-        public static ref ulong loff(ref ulong src)
-        {
-            src &= src - 1;
-            return ref src;
-        }  
+        public static ulong loff(ulong src)
+            => (src & (src - 1));
     }
 }

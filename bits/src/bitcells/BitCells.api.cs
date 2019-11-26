@@ -183,7 +183,6 @@ namespace Z0
             where T : unmanaged
                 => 256 / bitsize<T>();
 
-
         [MethodImpl(Inline)]
         public static BitCells<T> and<T>(in BitCells<T> x,in BitCells<T> y)
             where T : unmanaged

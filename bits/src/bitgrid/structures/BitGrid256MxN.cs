@@ -21,7 +21,7 @@ namespace Z0
         where N : unmanaged, ITypeNat
         where M : unmanaged, ITypeNat
     {                
-        readonly Vector256<T> data;
+        internal readonly Vector256<T> data;
 
         /// <summary>
         /// The grid dimension
@@ -46,8 +46,7 @@ namespace Z0
         /// <summary>
         /// The number of cells covered by the grid
         /// </summary>
-        public static int CellCount => BitGrid256<T>.CellCount;
-
+        public static int CellCount => BitGrid256<T>.GridCells;
 
         [MethodImpl(Inline)]
         public static implicit operator Vector256<T>(in BitGrid256<M,N,T> src)
@@ -74,12 +73,32 @@ namespace Z0
             => new BitGrid256<T>(src.data);
 
         [MethodImpl(Inline)]
-        public static bool operator ==(in BitGrid256<M,N,T> g1, in BitGrid256<M,N,T> g2)
-            => g1.Equals(g2);
+        public static BitGrid256<M,N,T> operator & (in BitGrid256<M,N,T> gx, in BitGrid256<M,N,T> gy)
+            => BitGrid.and(gx,gy);
 
         [MethodImpl(Inline)]
-        public static bool operator !=(in BitGrid256<M,N,T> g1, in BitGrid256<M,N,T> g2)
-            => !g1.Equals(g2);
+        public static BitGrid256<M,N,T> operator | (in BitGrid256<M,N,T> gx, in BitGrid256<M,N,T> gy)
+            => BitGrid.or(gx, gy);
+
+        [MethodImpl(Inline)]
+        public static BitGrid256<M,N,T> operator ^ (in BitGrid256<M,N,T> gx, in BitGrid256<M,N,T> gy)
+            => BitGrid.xor(gx, gy);
+
+        [MethodImpl(Inline)]
+        public static BitGrid256<M,N,T> operator ~ (in BitGrid256<M,N,T> gx)
+            => BitGrid.not(gx);
+
+        [MethodImpl(Inline)]
+        public static BitGrid256<M,N,T> operator - (in BitGrid256<M,N,T> gx)
+            => BitGrid.negate(gx);
+
+        [MethodImpl(Inline)]
+        public static bit operator ==(in BitGrid256<M,N,T> g1, in BitGrid256<M,N,T> g2)
+            => BitGrid.same(g1,g2);
+
+        [MethodImpl(Inline)]
+        public static bit operator !=(in BitGrid256<M,N,T> g1, in BitGrid256<M,N,T> g2)
+            => !BitGrid.same(g1,g2);
         
         [MethodImpl(Inline)]
         internal BitGrid256(Vector256<T> data)
@@ -107,9 +126,9 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public bool Equals(BitGrid256<M,N,T> rhs)
-            => ginx.vtestc(ginx.veq(data,rhs));
+            =>  BitGrid.same(this,rhs);
 
-       public override bool Equals(object obj)
+        public override bool Equals(object obj)
             => throw new NotSupportedException();
 
         public override int GetHashCode()

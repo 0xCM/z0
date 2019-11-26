@@ -145,14 +145,59 @@ namespace Z0
         public static BitVector<T> operator - (BitVector<T> x, BitVector<T> y)
             => BitVector.sub(x,y);
 
-
+        /// <summary>
+        /// Determines whether operand content is identical
+        /// </summary>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static bool operator ==(BitVector<T> x, BitVector<T> y)
-            => x.Equals(y);
+        public static bit operator ==(BitVector<T> x, BitVector<T> y)
+            => gmath.eq(x.data,y.data);
 
+        /// <summary>
+        /// Determines whether operand content is non-identical
+        /// </summary>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static bool operator !=(BitVector<T> x, BitVector<T> y)
-            => !x.Equals(y);
+        public static bit operator !=(BitVector<T> x, BitVector<T> y)
+            => gmath.neq(x.data,y.data);
+
+        /// <summary>
+        /// Determines whether the left operand is arithmetically less than the second
+        /// </summary>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
+        [MethodImpl(Inline)]
+        public static bit operator <(BitVector<T> x, BitVector<T> y)
+            => gmath.lt(x.data,y.data);
+
+        /// <summary>
+        /// Determines whether the left operand is arithmetically greater than the second
+        /// </summary>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
+        [MethodImpl(Inline)]
+        public static bit operator >(BitVector<T> x, BitVector<T> y)
+            => gmath.gt(x.data,y.data);
+
+        /// <summary>
+        /// Determines whether the left operand is arithmetically less than or equal to the second
+        /// </summary>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
+        [MethodImpl(Inline)]
+        public static bit operator <=(BitVector<T> x, BitVector<T> y)
+            => gmath.lteq(x.data,y.data);
+
+        /// <summary>
+        /// Determines whether the left operand is arithmetically greater than or equal to the second
+        /// </summary>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
+        [MethodImpl(Inline)]
+        public static bit operator >=(BitVector<T> x, BitVector<T> y)
+            => gmath.gteq(x.data,y.data);
 
         [MethodImpl(Inline)]
         internal BitVector(T src)

@@ -42,7 +42,7 @@ namespace Z0
         /// <summary>
         /// The number of cells covered by the grid
         /// </summary>
-        public static int CellCount => BitGrid128<T>.CellCount;
+        public static int CellCount => BitGrid128<T>.GridCells;
 
         [MethodImpl(Inline)]
         public static implicit operator Vector128<T>(in BitGrid128<M,N,T> src)
@@ -69,12 +69,32 @@ namespace Z0
             => new BitGrid128<T>(src.data);
 
         [MethodImpl(Inline)]
-        public static bool operator ==(in BitGrid128<M,N,T> g1, in BitGrid128<M,N,T> g2)
-            => g1.Equals(g2);
+        public static BitGrid128<M,N,T> operator & (in BitGrid128<M,N,T> gx, in BitGrid128<M,N,T> gy)
+            => BitGrid.and(gx,gy);
 
         [MethodImpl(Inline)]
-        public static bool operator !=(in BitGrid128<M,N,T> g1, in BitGrid128<M,N,T> g2)
-            => !g1.Equals(g2);
+        public static BitGrid128<M,N,T> operator | (in BitGrid128<M,N,T> gx, in BitGrid128<M,N,T> gy)
+            => BitGrid.or(gx, gy);
+
+        [MethodImpl(Inline)]
+        public static BitGrid128<M,N,T> operator ^ (in BitGrid128<M,N,T> gx, in BitGrid128<M,N,T> gy)
+            => BitGrid.xor(gx, gy);
+
+        [MethodImpl(Inline)]
+        public static BitGrid128<M,N,T> operator ~ (in BitGrid128<M,N,T> gx)
+            => BitGrid.not(gx);
+
+        [MethodImpl(Inline)]
+        public static BitGrid128<M,N,T> operator - (in BitGrid128<M,N,T> gx)
+            => BitGrid.negate(gx);
+
+        [MethodImpl(Inline)]
+        public static bit operator ==(in BitGrid128<M,N,T> g1, in BitGrid128<M,N,T> g2)
+            => BitGrid.same(g1,g2);
+
+        [MethodImpl(Inline)]
+        public static bit operator !=(in BitGrid128<M,N,T> g1, in BitGrid128<M,N,T> g2)
+            => !BitGrid.same(g1,g2);
         
         [MethodImpl(Inline)]
         internal BitGrid128(Vector128<T> data)

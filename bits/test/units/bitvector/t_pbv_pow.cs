@@ -37,7 +37,7 @@ namespace Z0
         {    
             var orders = new Dictionary<byte,int>();
 
-            foreach(var v in BitVector8.AllNonempty)
+            foreach(var v in BitVector.nonempty(n8))
             {
                 var order = v.Order();
                 Claim.eq(BitVector8.One, v^order);

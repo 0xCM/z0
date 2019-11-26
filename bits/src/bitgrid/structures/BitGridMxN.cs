@@ -26,12 +26,12 @@ namespace Z0
         public static Dim<M,N> Dim => default;
 
         [MethodImpl(Inline)]
-        public static bool operator ==(in BitGrid<M,N,T> g1, in BitGrid<M,N,T> g2)
-            => g1.Equals(g2);
+        public static bit operator ==(in BitGrid<M,N,T> g1, in BitGrid<M,N,T> g2)
+            => BitGrid.same(g1,g2);
 
         [MethodImpl(Inline)]
-        public static bool operator !=(in BitGrid<M,N,T> g1, in BitGrid<M,N,T> g2)
-            => !g1.Equals(g2);
+        public static bit operator !=(in BitGrid<M,N,T> g1, in BitGrid<M,N,T> g2)
+            => !BitGrid.same(g1,g2);
 
         [MethodImpl(Inline)]
         internal BitGrid(Span<T> data)
@@ -39,7 +39,19 @@ namespace Z0
             this.data = data;
         }
 
-        public N Width => default;
+        public Span<T> Data
+        {
+            [MethodImpl(Inline)]
+            get => data;
+        }
+
+        public ref T Head
+        {
+            [MethodImpl(Inline)]
+            get => ref head(data);
+        }
+
+        public N BitWidth => default;
 
         public int RowCount
         {
@@ -59,25 +71,13 @@ namespace Z0
             get => NatMath.mul<M,N>(); 
         }
 
-        public Span<T> Data
-        {
-            [MethodImpl(Inline)]
-            get => data;
-        }
-
-        public ref T Head
-        {
-            [MethodImpl(Inline)]
-            get => ref head(data);
-        }
-
         public bit this[int row, int col]
         {
             [MethodImpl(Inline)]
-            get => BitGrid.readbit(Width, in Head, row, col);
+            get => BitGrid.readbit(BitWidth, in Head, row, col);
 
             [MethodImpl(Inline)]
-            set => BitGrid.setbit(Width, row, col, value, ref Head);
+            set => BitGrid.setbit(BitWidth, row, col, value, ref Head);
         }
 
         public bit this[int pos]
@@ -93,7 +93,7 @@ namespace Z0
             => GridMoniker.FromTypes<M,N,T>();
             
         public string Format()
-            => Data.FormatMatrixBits(natval(Width));
+            => Data.FormatMatrixBits(natval(BitWidth));
 
         [MethodImpl(Inline)]
         public bool Equals(BitGrid<M,N,T> rhs)

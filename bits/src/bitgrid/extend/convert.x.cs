@@ -74,189 +74,383 @@ namespace Z0
                 => BitMatrix.load<N,T>(src.Data);
 
         [MethodImpl(Inline)]
-        public static BitGrid<N8,N8, T> ToGrid<T>(this BitMatrix<T> src, N8 m)
+        public static BitGrid<N8,N8, T> ToBitGrid<T>(this BitMatrix<T> src, N8 m)
             where T : unmanaged
                 => BitGrid.load(src.Data,m,m);
 
         [MethodImpl(Inline)]
-        public static BitGrid<N16,N16, T> ToGrid<T>(this BitMatrix<T> src, N16 n)
+        public static BitGrid<N16,N16, T> ToBitGrid<T>(this BitMatrix<T> src, N16 n)
             where T : unmanaged
                 => BitGrid.load(src.Data,n,n);
 
         [MethodImpl(Inline)]
-        public static BitGrid<N32,N32, T> ToGrid<T>(this BitMatrix<T> src, N32 n)
+        public static BitGrid<N32,N32, T> ToBitGrid<T>(this BitMatrix<T> src, N32 n)
             where T : unmanaged
                 => BitGrid.load(src.Data,n,n);
 
         [MethodImpl(Inline)]
-        public static BitGrid<N64,N64, T> ToGrid<T>(this BitMatrix<T> src, N64 n)
+        public static BitGrid<N64,N64, T> ToBitGrid<T>(this BitMatrix<T> src, N64 n)
             where T : unmanaged
                 => BitGrid.load(src.Data,n,n);
 
+        /// <summary>
+        /// Represents the source matrix as a natural bitgrid of dimension 8x8 over cells of width 8
+        /// </summary>
+        /// <param name="src">The source matrix</param>
+        /// <param name="m">The target row count</param>
+        /// <param name="n">The target column count</param>
         [MethodImpl(Inline)]
-        public static BitGrid<N8,N8, byte> ToGrid(this BitMatrix8 src, N8 n)
+        public static BitGrid<N8,N8, byte> ToBitGrid(this BitMatrix8 src, N8 m, N8 n = default)
             => BitGrid.load(src.data,n,n);
 
+        /// <summary>
+        /// Represents the source matrix as a generic bitgrid of dimension 8x8 over cells of width 8
+        /// </summary>
+        /// <param name="src">The source matrix</param>
         [MethodImpl(Inline)]
-        public static BitGrid<byte> ToGrid(this BitMatrix8 src)
+        public static BitGrid<byte> ToBitGrid(this BitMatrix8 src)
             => BitGrid.load(src.data, 8,8);
 
         [MethodImpl(Inline)]
-        public static BitGrid<N16,N16, ushort> ToGrid(this BitMatrix16 src, N16 n)
+        public static BitGrid256<N16,N16,ushort> ToBitGrid(this BitMatrix16 src)
+            => ginx.vload(n256, src.Data);
+        
+        [MethodImpl(Inline)]
+        public static BitGrid<N32,N32,uint> ToBitGrid(this BitMatrix32 src, N32 n)
             => BitGrid.load(src.Data,n,n);
 
+        /// <summary>
+        /// Represents the source matrix as a generic bitgrid of dimension 32x32 over cells of width 32
+        /// </summary>
+        /// <param name="src">The source matrix</param>
         [MethodImpl(Inline)]
-        public static BitGrid<ushort> ToGrid(this BitMatrix16 src)
-            => BitGrid.load(src.Data, 16,16);
-
-        [MethodImpl(Inline)]
-        public static BitGrid<N32,N32, uint> ToGrid(this BitMatrix32 src, N32 n)
-            => BitGrid.load(src.Data,n,n);
-
-        [MethodImpl(Inline)]
-        public static BitGrid<uint> ToGrid(this BitMatrix32 src)
+        public static BitGrid<uint> ToBitGrid(this BitMatrix32 src)
             => BitGrid.load(src.Data, 32,32);
 
         [MethodImpl(Inline)]
-        public static BitGrid<N64,N64,ulong> ToGrid(this BitMatrix64 src, N64 n)
+        public static BitGrid<N64,N64,ulong> ToBitGrid(this BitMatrix64 src, N64 n)
             => BitGrid.load(src.Data,n,n);
 
+        /// <summary>
+        /// Represents the source matrix as a generic bitgrid of dimension 64x64 over cells of width 64
+        /// </summary>
+        /// <param name="src">The source matrix</param>
         [MethodImpl(Inline)]
-        public static BitGrid<ulong> ToGrid(this BitMatrix64 src)
+        public static BitGrid<ulong> ToBitGrid(this BitMatrix64 src)
             => BitGrid.load(src.Data, 64,64);
 
+        /// <summary>
+        /// Represents the source value as a 32-bit natural bitgrid of dimension 1x32 
+        /// </summary>
+        /// <param name="x">The source value</param>
+        /// <param name="m">The target row count</param>
+        /// <param name="n">The garget col count</param>
         [MethodImpl(Inline)]
         public static BitGrid32<N1,N32,uint> ToBitGrid(this uint x, N1 m, N32 n)
             => x;
 
+        /// <summary>
+        /// Represents the source value as a 32-bit natural bitgrid of dimension 32x1 
+        /// </summary>
+        /// <param name="x">The source value</param>
+        /// <param name="m">The target row count</param>
+        /// <param name="n">The garget col count</param>
         [MethodImpl(Inline)]
         public static BitGrid32<N32,N1,uint> ToBitGrid(this uint x, N32 m, N1 n)
             => x;
 
+        /// <summary>
+        /// Represents the source value as a 32-bit natural bitgrid of dimension 2x16 
+        /// </summary>
+        /// <param name="x">The source value</param>
+        /// <param name="m">The target row count</param>
+        /// <param name="n">The garget col count</param>
         [MethodImpl(Inline)]
         public static BitGrid32<N2,N16,uint> ToBitGrid(this uint x, N2 m, N16 n)
             => x;
 
+        /// <summary>
+        /// Represents the source value as a 32-bit natural bitgrid of dimension 16x2 
+        /// </summary>
+        /// <param name="x">The source value</param>
+        /// <param name="m">The target row count</param>
+        /// <param name="n">The garget col count</param>
         [MethodImpl(Inline)]
         public static BitGrid32<N16,N2,uint> ToBitGrid(this uint x, N16 m, N2 n)
             => x;
 
+        /// <summary>
+        /// Represents the source value as a 32-bit natural bitgrid of dimension 4x8 
+        /// </summary>
+        /// <param name="x">The source value</param>
+        /// <param name="m">The target row count</param>
+        /// <param name="n">The garget col count</param>
         [MethodImpl(Inline)]
         public static BitGrid32<N4,N8,uint> ToBitGrid(this uint x, N4 m, N8 n)
             => x;
 
+        /// <summary>
+        /// Represents the source value as a 32-bit natural bitgrid of dimension 8x4 
+        /// </summary>
+        /// <param name="x">The source value</param>
+        /// <param name="m">The target row count</param>
+        /// <param name="n">The garget col count</param>
         [MethodImpl(Inline)]
         public static BitGrid32<N8,N4,uint> ToBitGrid(this uint x, N8 m, N4 n)
             => x;
 
+        /// <summary>
+        /// Represents the source value as a 64-bit natural bitgrid of dimension 64x1 
+        /// </summary>
+        /// <param name="x">The source value</param>
+        /// <param name="m">The target row count</param>
+        /// <param name="n">The garget col count</param>
         [MethodImpl(Inline)]
         public static BitGrid64<N64,N1,ulong> ToBitGrid(this ulong x, N64 m, N1 n)
             => x;
 
+        /// <summary>
+        /// Represents the source value as a 64-bit natural bitgrid of dimension 1x64
+        /// </summary>
+        /// <param name="x">The source value</param>
+        /// <param name="m">The target row count</param>
+        /// <param name="n">The garget col count</param>
         [MethodImpl(Inline)]
         public static BitGrid64<N1,N64,ulong> ToBitGrid(this ulong x, N1 m, N64 n)
             => x;
 
+        /// <summary>
+        /// Represents the source value as a 64-bit natural bitgrid of dimension 32x2
+        /// </summary>
+        /// <param name="x">The source value</param>
+        /// <param name="m">The target row count</param>
+        /// <param name="n">The garget col count</param>
         [MethodImpl(Inline)]
         public static BitGrid64<N32,N2,ulong> ToBitGrid(this ulong x, N32 m, N2 n)
             => x;
 
+        /// <summary>
+        /// Represents the source value as a 64-bit natural bitgrid of dimension 2x32
+        /// </summary>
+        /// <param name="x">The source value</param>
+        /// <param name="m">The target row count</param>
+        /// <param name="n">The garget col count</param>
         [MethodImpl(Inline)]
         public static BitGrid64<N2,N32,ulong> ToBitGrid(this ulong x, N2 m, N32 n)
             => x;
 
+        /// <summary>
+        /// Represents the source value as a 64-bit natural bitgrid of dimension 16x4
+        /// </summary>
+        /// <param name="x">The source value</param>
+        /// <param name="m">The target row count</param>
+        /// <param name="n">The garget col count</param>
         [MethodImpl(Inline)]
         public static BitGrid64<N16,N4,ulong> ToBitGrid(this ulong x, N16 m, N4 n)
             => x;
 
+        /// <summary>
+        /// Represents the source value as a 64-bit natural bitgrid of dimension 4x16
+        /// </summary>
+        /// <param name="x">The source value</param>
+        /// <param name="m">The target row count</param>
+        /// <param name="n">The garget col count</param>
         [MethodImpl(Inline)]
         public static BitGrid64<N4,N16,ulong> ToBitGrid(this ulong x, N4 m, N16 n)
             => x;
 
+        /// <summary>
+        /// Represents the source value as a 64-bit natural bitgrid of dimension 8x8
+        /// </summary>
+        /// <param name="x">The source value</param>
+        /// <param name="m">The target row count</param>
+        /// <param name="n">The garget col count</param>
         [MethodImpl(Inline)]
         public static BitGrid64<N8,N8,ulong> ToBitGrid(this ulong x, N8 m, N8 n = default)
             => x;
 
+        /// <summary>
+        /// Represents the source vector as a 128-bit natural bitgrid of dimension 1x128
+        /// </summary>
+        /// <param name="x">The source vector</param>
+        /// <param name="m">The target row count</param>
+        /// <param name="n">The garget col count</param>
         [MethodImpl(Inline)]
         public static BitGrid128<N1,N128,T> ToBitGrid<T>(this Vector128<T> x, N1 m, N128 n)
             where T : unmanaged            
                 => x;
 
+        /// <summary>
+        /// Represents the source vector as a 128-bit natural bitgrid of dimension 128x1
+        /// </summary>
+        /// <param name="x">The source vector</param>
+        /// <param name="m">The target row count</param>
+        /// <param name="n">The garget col count</param>
         [MethodImpl(Inline)]
         public static BitGrid128<N128,N1,T> ToBitGrid<T>(this Vector128<T> x, N128 m, N1 n)
             where T : unmanaged            
                 => x;
 
+        /// <summary>
+        /// Represents the source vector as a 128-bit natural bitgrid of dimension 2x64
+        /// </summary>
+        /// <param name="x">The source vector</param>
+        /// <param name="m">The target row count</param>
+        /// <param name="n">The garget col count</param>
         [MethodImpl(Inline)]
         public static BitGrid128<N2,N64,T> ToBitGrid<T>(this Vector128<T> x, N2 m, N64 n)
             where T : unmanaged            
                 => x;
 
+        /// <summary>
+        /// Represents the source vector as a 128-bit natural bitgrid of dimension 64x2
+        /// </summary>
+        /// <param name="x">The source vector</param>
+        /// <param name="m">The target row count</param>
+        /// <param name="n">The garget col count</param>
         [MethodImpl(Inline)]
         public static BitGrid128<N64,N2,T> ToBitGrid<T>(this Vector128<T> x, N64 m, N2 n)
             where T : unmanaged            
                 => x;
 
+        /// <summary>
+        /// Represents the source vector as a 128-bit natural bitgrid of dimension 4x32
+        /// </summary>
+        /// <param name="x">The source vector</param>
+        /// <param name="m">The target row count</param>
+        /// <param name="n">The garget col count</param>
         [MethodImpl(Inline)]
         public static BitGrid128<N4,N32,T> ToBitGrid<T>(this Vector128<T> x, N4 m, N32 n)
             where T : unmanaged            
                 => x;
 
+        /// <summary>
+        /// Represents the source vector as a 128-bit natural bitgrid of dimension 32x4
+        /// </summary>
+        /// <param name="x">The source vector</param>
+        /// <param name="m">The target row count</param>
+        /// <param name="n">The garget col count</param>
         [MethodImpl(Inline)]
         public static BitGrid128<N32,N4,T> ToBitGrid<T>(this Vector128<T> x, N32 m, N4 n)
             where T : unmanaged            
                 => x;
 
+        /// <summary>
+        /// Represents the source vector as a 128-bit natural bitgrid of dimension 8x16
+        /// </summary>
+        /// <param name="x">The source vector</param>
+        /// <param name="m">The target row count</param>
+        /// <param name="n">The garget col count</param>
         [MethodImpl(Inline)]
         public static BitGrid128<N8,N16,T> ToBitGrid<T>(this Vector128<T> x, N8 m, N16 n)
             where T : unmanaged            
                 => x;
 
+        /// <summary>
+        /// Represents the source vector as a 128-bit natural bitgrid of dimension 16x8
+        /// </summary>
+        /// <param name="x">The source vector</param>
+        /// <param name="m">The target row count</param>
+        /// <param name="n">The garget col count</param>
         [MethodImpl(Inline)]
         public static BitGrid128<N16,N8,T> ToBitGrid<T>(this Vector128<T> x, N16 m, N8 n)
             where T : unmanaged            
                 => x;
 
+        /// <summary>
+        /// Represents the source vector as a 256-bit natural bitgrid of dimension 1x256
+        /// </summary>
+        /// <param name="x">The source vector</param>
+        /// <param name="m">The target row count</param>
+        /// <param name="n">The garget col count</param>
         [MethodImpl(Inline)]
         public static BitGrid256<N1,N256,T> ToBitGrid<T>(this Vector256<T> x, N1 m, N256 n)
             where T : unmanaged            
                 => x;
 
+        /// <summary>
+        /// Represents the source vector as a 256-bit natural bitgrid of dimension 256x1
+        /// </summary>
+        /// <param name="x">The source vector</param>
+        /// <param name="m">The target row count</param>
+        /// <param name="n">The garget col count</param>
         [MethodImpl(Inline)]
         public static BitGrid256<N256,N1,T> ToBitGrid<T>(this Vector256<T> x, N256 m, N1 n)
             where T : unmanaged            
                 => x;
 
+        /// <summary>
+        /// Represents the source vector as a 256-bit natural bitgrid of dimension 2x128
+        /// </summary>
+        /// <param name="x">The source vector</param>
+        /// <param name="m">The target row count</param>
+        /// <param name="n">The garget col count</param>
         [MethodImpl(Inline)]
         public static BitGrid256<N128,N2,T> ToBitGrid<T>(this Vector256<T> x, N2 m, N128 n)
             where T : unmanaged            
                 => x;
 
+        /// <summary>
+        /// Represents the source vector as a 256-bit natural bitgrid of dimension 128x2
+        /// </summary>
+        /// <param name="x">The source vector</param>
+        /// <param name="m">The target row count</param>
+        /// <param name="n">The garget col count</param>
         [MethodImpl(Inline)]
         public static BitGrid256<N128,N2,T> ToBitGrid<T>(this Vector256<T> x, N128 m, N2 n)
             where T : unmanaged            
                 => x;
 
+        /// <summary>
+        /// Represents the source vector as a 256-bit natural bitgrid of dimension 4x64
+        /// </summary>
+        /// <param name="x">The source vector</param>
+        /// <param name="m">The target row count</param>
+        /// <param name="n">The garget col count</param>
         [MethodImpl(Inline)]
         public static BitGrid256<N4,N64,T> ToBitGrid<T>(this Vector256<T> x, N4 m, N64 n)
             where T : unmanaged            
                 => x;
 
+        /// <summary>
+        /// Represents the source vector as a 256-bit natural bitgrid of dimension 64x4
+        /// </summary>
+        /// <param name="x">The source vector</param>
+        /// <param name="m">The target row count</param>
+        /// <param name="n">The garget col count</param>
         [MethodImpl(Inline)]
         public static BitGrid256<N64,N4,T> ToBitGrid<T>(this Vector256<T> x, N64 m, N4 n)
             where T : unmanaged            
                 => x;
 
+        /// <summary>
+        /// Represents the source vector as a 256-bit natural bitgrid of dimension 8x32
+        /// </summary>
+        /// <param name="x">The source vector</param>
+        /// <param name="m">The target row count</param>
+        /// <param name="n">The garget col count</param>
         [MethodImpl(Inline)]
         public static BitGrid256<N8,N32,T> ToBitGrid<T>(this Vector256<T> x, N8 m, N32 n)
             where T : unmanaged            
                 => x;
 
+        /// <summary>
+        /// Represents the source vector as a 256-bit natural bitgrid of dimension 32x8
+        /// </summary>
+        /// <param name="x">The source vector</param>
+        /// <param name="m">The target row count</param>
+        /// <param name="n">The garget col count</param>
         [MethodImpl(Inline)]
         public static BitGrid256<N32,N8,T> ToBitGrid<T>(this Vector256<T> x, N32 m, N8 n)
             where T : unmanaged            
                 => x;
 
+        /// <summary>
+        /// Represents the source vector as a 256-bit natural bitgrid of dimension 16x16
+        /// </summary>
+        /// <param name="x">The source vector</param>
+        /// <param name="m">The target row count</param>
+        /// <param name="n">The garget col count</param>
         [MethodImpl(Inline)]
         public static BitGrid256<N16,N16,T> ToBitGrid<T>(this Vector256<T> x, N16 m, N16 n = default)
             where T : unmanaged            

@@ -50,10 +50,10 @@ namespace Z0
                 => (byte)Bits.extract(g, index*4, 4);
 
         /// <summary>
-        /// Extracts an index-identifed row
+        /// Extracts an index-identifed 8-bit row
         /// </summary>
         /// <param name="g">The source grid</param>
-        /// <param name="index">The zero-based row index, in the inclusive range 0...15</param>
+        /// <param name="index">The zero-based row index, in the inclusive range 0...3</param>
         /// <typeparam name="T">The grid cell type</typeparam>
         [MethodImpl(Inline)]
         public static BitVector<byte> row<M,T>(BitGrid32<M,N8,T> g, int index)
@@ -62,7 +62,7 @@ namespace Z0
                 => (byte)Bits.extract(g, index*8, 8);
 
         /// <summary>
-        /// Extracts an index-identifed row
+        /// Extracts an index-identifed 16-bit row
         /// </summary>
         /// <param name="g">The source grid</param>
         /// <param name="index">The zero-based row index, in the inclusive range 0...15</param>
@@ -108,7 +108,6 @@ namespace Z0
             where T : unmanaged
             where M : unmanaged, ITypeNat
             => (byte)Bits.extract(g, index*2, 2);
-
 
         /// <summary>
         /// Extracts an index-identifed row
@@ -173,6 +172,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitVector<ushort> row<T>(in BitGrid256<N16,N16,T> g, int index)
             where T : unmanaged
-                => v16u(g.Data).GetElement(index);
+                => v16u(g.data).GetElement(index);
     }
 }

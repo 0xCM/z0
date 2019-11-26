@@ -11,7 +11,7 @@ namespace Z0
     using static zfunc;    
 
     /// <summary>
-    /// Defines a natural bitvector (NBV)
+    /// Defines a natural bitvector
     /// </summary>
     /// <typeparam name="T">The cell type</typeparam>
     /// <typeparam name="N">The bit-width type</typeparam>
@@ -199,18 +199,28 @@ namespace Z0
         public static bool operator false(BitVector<N,T> src)
             => src.Empty;
 
+        /// <summary>
+        /// Determines whether operand content is identical
+        /// </summary>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static bool operator ==(BitVector<N,T> x, BitVector<N,T> y)
-            => x.Equals(y);
+        public static bit operator ==(BitVector<N,T> x, BitVector<N,T> y)
+            => gmath.eq(x.data,y.data);
 
+        /// <summary>
+        /// Determines whether operand content is non-identical
+        /// </summary>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static bool operator !=(BitVector<N,T> x, BitVector<N,T> y)
-            => !x.Equals(y);
+        public static bit operator !=(BitVector<N,T> x, BitVector<N,T> y)
+            => gmath.neq(x.data,y.data);
 
         /// <summary>
         /// Intializes a bitvector with the lo N bits of a scalar source
         /// </summary>
-        /// <param name="data"></param>
+        /// <param name="data">The scalar source value</param>
         [MethodImpl(Inline)]
         internal BitVector(T data)
             => this.data = gmath.and(gbits.lomask<N,T>(), data);

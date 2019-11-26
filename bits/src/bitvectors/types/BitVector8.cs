@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
 
     using static zfunc;    
     using static Bits;
@@ -21,19 +20,6 @@ namespace Z0
 
         public static BitVector8 Ones => byte.MaxValue;
                     
-        /// <summary>
-        /// Enumerates each and every nonmpty 8-bit bitvector exactly once
-        /// </summary>
-        public static IEnumerable<BitVector8> AllNonempty
-        {
-           get
-           {
-                var bv = BitVector8.One;
-                do            
-                    yield return bv;            
-                while(++bv);
-           }
-        }
 
         [MethodImpl(Inline)]
         public static implicit operator BitCells<N8,byte>(in BitVector8 src)
@@ -64,7 +50,7 @@ namespace Z0
             => (ByteKind)src.data;
 
         /// <summary>
-        /// Converts the source vector to the underlying value it represents
+        /// Converts the source vector to the underlying scalar
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
@@ -115,32 +101,32 @@ namespace Z0
         /// </summary>
         /// <param name="x">The source operand</param>
         [MethodImpl(Inline)]
-        public static BitVector8 operator <<(BitVector8 x, int offset)
-            => BitVector.sll(x,offset);
+        public static BitVector8 operator <<(BitVector8 x, int shift)
+            => BitVector.sll(x,shift);
 
         /// <summary>
         /// Right-shifts the bits in the source
         /// </summary>
         /// <param name="x">The source operand</param>
         [MethodImpl(Inline)]
-        public static BitVector8 operator >>(BitVector8 x, int offset)
-            => BitVector.srl(x,offset);
+        public static BitVector8 operator >>(BitVector8 x, int shift)
+            => BitVector.srl(x,shift);
 
         /// <summary>
         /// Computes the one's complement of the operand. 
         /// </summary>
-        /// <param name="src">The source operand</param>
+        /// <param name="x">The source operand</param>
         [MethodImpl(Inline)]
-        public static BitVector8 operator ~(BitVector8 src)
-            => BitVector.not(src);
+        public static BitVector8 operator ~(BitVector8 x)
+            => BitVector.not(x);
 
         /// <summary>
         /// Computes the two's complement of the operand
         /// </summary>
         /// <param name="x">The source operand</param>
         [MethodImpl(Inline)]
-        public static BitVector8 operator -(in BitVector8 src)
-            => BitVector.negate(src);
+        public static BitVector8 operator -(BitVector8 x)
+            => BitVector.negate(x);
 
         /// <summary>
         /// Computes the arithmetic sum of the source operands. 
@@ -161,7 +147,7 @@ namespace Z0
             => BitVector.gfmul(x,y);
 
         /// <summary>
-        /// Subtracts the second operand from the first. 
+        /// Computes the arithmetic difference between the operands
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
@@ -219,33 +205,67 @@ namespace Z0
         public static bool operator false(BitVector8 src)
             => src.Empty;
 
+        /// <summary>
+        /// Computes the operand's logical negation: if x = 0 then 1 else 0
+        /// </summary>
+        /// <param name="src">The ource operand</param>
         [MethodImpl(Inline)]
-        public static Bit operator !(BitVector8 src)
+        public static bit operator !(BitVector8 src)
             => src.Empty;
 
+        /// <summary>
+        /// Determines whether operand content is identical
+        /// </summary>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static bool operator ==(BitVector8 x, BitVector8 y)
-            => x.Equals(y);
+        public static bit operator ==(BitVector8 x, BitVector8 y)
+            => math.eq(x,y);
 
+        /// <summary>
+        /// Determines whether operand content is non-identical
+        /// </summary>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static bool operator !=(BitVector8 x, BitVector8 y)
-            => !x.Equals(y);
+        public static bit operator !=(BitVector8 x, BitVector8 y)
+            => math.neq(x,y);
 
+        /// <summary>
+        /// Determines whether the left operand is arithmetically less than the second
+        /// </summary>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
         public static bit operator <(BitVector8 x, BitVector8 y)
-            => x.data < y.data ? bit.On : bit.Off;
+            => math.lt(x,y);
 
+        /// <summary>
+        /// Determines whether the left operand is arithmetically greater than than the second
+        /// </summary>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
         public static bit operator >(BitVector8 x, BitVector8 y)
-            => x.data > y.data ? bit.On : bit.Off;
+            => math.gt(x,y);
 
+        /// <summary>
+        /// Determines whether the left operand is arithmetically less than or equal to the second
+        /// </summary>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
         public static bit operator <=(BitVector8 x, BitVector8 y)
-            => x.data <= y.data ? bit.On : bit.Off;
+            => math.lteq(x,y);
 
+        /// <summary>
+        /// Determines whether the left operand is arithmetically greater than or equal to the second
+        /// </summary>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
         public static bit operator >=(BitVector8 x, BitVector8 y)
-            => x.data >= y.data ? bit.On : bit.Off;
+            => math.gteq(x,y);
 
         [MethodImpl(Inline)]
         public BitVector8(byte src)
@@ -269,13 +289,40 @@ namespace Z0
             get => 8;
         }        
 
-        public bit this[int pos]
+        /// <summary>
+        /// Presents bitvector content as a bytespan
+        /// </summary>
+        public Span<byte> Bytes
         {
             [MethodImpl(Inline)]
-            get => BitMask.test(data, pos);
-            
+            get => bytes(data);
+        }
+
+        /// <summary>
+        /// Returns true if no bits are enabled, false otherwise
+        /// </summary>
+        public readonly bit Empty
+        {
             [MethodImpl(Inline)]
-            set => data = BitMask.set(data, (byte)pos, value);
+            get => data == 0;
+        }
+
+        /// <summary>
+        /// Returns true if the vector has at least one enabled bit; false otherwise
+        /// </summary>
+        public readonly bit NonEmpty
+        {
+            [MethodImpl(Inline)]
+            get => !Empty;
+        }
+
+        /// <summary>
+        /// Returns true if all bits are enabled, false otherwise
+        /// </summary>
+        public readonly bit AllOn
+        {
+            [MethodImpl(Inline)]
+            get => (0xFF & data) == 0xFF;
         }
 
         /// <summary>
@@ -297,12 +344,16 @@ namespace Z0
         }        
 
         /// <summary>
-        /// Presents bitvector content as a bytespan
+        /// Gets/sets the state of an index-identified bit
         /// </summary>
-        public Span<byte> Bytes
+        /// <value></value>
+        public bit this[int index]
         {
             [MethodImpl(Inline)]
-            get => bytes(data);
+            get => BitMask.test(data, index);
+            
+            [MethodImpl(Inline)]
+            set => data = BitMask.set(data, (byte)index, value);
         }
 
         /// <summary>
@@ -316,33 +367,6 @@ namespace Z0
             get => BitVector.between(this,first,last);
         }
             
-        /// <summary>
-        /// Returns true if all bits are enabled, false otherwise
-        /// </summary>
-        public readonly bit AllOn
-        {
-            [MethodImpl(Inline)]
-            get => (0xFF & data) == 0xFF;
-        }
-
-        /// <summary>
-        /// Returns true if no bits are enabled, false otherwise
-        /// </summary>
-        public readonly bit Empty
-        {
-            [MethodImpl(Inline)]
-            get => data == 0;
-        }
-
-        /// <summary>
-        /// Returns true if the vector has at least one enabled bit; false otherwise
-        /// </summary>
-        public readonly bit NonEmpty
-        {
-            [MethodImpl(Inline)]
-            get => !Empty;
-        }
-
         [MethodImpl(Inline)]
         public readonly bool Equals(BitVector8 y)
             => data == y.data;

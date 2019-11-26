@@ -38,7 +38,7 @@ namespace Z0
 
         public static string Format<T>(this BitGrid<T> src)
             where T : unmanaged
-                => src.ToBitString().Format(blockWidth:1,rowWidth:src.Width);
+                => src.ToBitString().Format(blockWidth:1,rowWidth:src.ColCount);
 
         public static string Format<T>(this RowBits<T> src)
             where T : unmanaged

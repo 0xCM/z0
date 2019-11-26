@@ -33,5 +33,19 @@ namespace Z0
             where T : unmanaged
                 => ginx.vnegate<T>(gx);
 
+        [MethodImpl(Inline)]
+        public static BitGrid128<M,N,T> negate<M,N,T>(in BitGrid128<M,N,T> gx)
+            where T : unmanaged
+            where N : unmanaged, ITypeNat
+            where M : unmanaged, ITypeNat
+                => ginx.vnegate<T>(gx);    
+
+        [MethodImpl(Inline)]
+        public static BitGrid256<M,N,T> negate<M,N,T>(in BitGrid256<M,N,T> gx)
+            where T : unmanaged
+            where N : unmanaged, ITypeNat
+            where M : unmanaged, ITypeNat
+                => ginx.vnegate<T>(gx);    
+
     }
 }

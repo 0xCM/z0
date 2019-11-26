@@ -38,30 +38,30 @@ namespace Z0
         /// Computes the XOR of the source operands. 
         /// Note that this operator is equivalent to the addition operator (+)
         /// </summary>
-        /// <param name="lhs">The left operand</param>
-        /// <param name="rhs">The right operand</param>
+        /// <param name="x">The left operand</param>
+        /// <param name="y">The right operand</param>
         [MethodImpl(Inline)]
-        public static BitVector4 operator ^(in BitVector4 lhs, in BitVector4 rhs)
-            => (byte)(lhs.data ^ rhs.data);
+        public static BitVector4 operator ^(in BitVector4 x, in BitVector4 y)
+            => (byte)(x.data ^ y.data);
 
         /// <summary>
         /// Computes the bitwise AND of the source operands
         /// Note that the AND operator is equivalent to the (*) operator
         /// </summary>
-        /// <param name="lhs">The left vector</param>
-        /// <param name="rhs">The right vector</param>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static BitVector4 operator &(in BitVector4 lhs, in BitVector4 rhs)
-            => (byte)(lhs.data & rhs.data);
+        public static BitVector4 operator &(in BitVector4 x, in BitVector4 y)
+            => (byte)(x.data & y.data);
 
         /// <summary>
         /// Computes the bitwise OR of the source operands
         /// </summary>
-        /// <param name="lhs">The left vector</param>
-        /// <param name="rhs">The right vector</param>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static BitVector4 operator |(in BitVector4 lhs, in BitVector4 rhs)
-            => BitVector.or(lhs,rhs);
+        public static BitVector4 operator |(in BitVector4 x, in BitVector4 y)
+            => BitVector.or(x,y);
 
         /// <summary>
         /// Computes the bitwise complement
@@ -74,8 +74,8 @@ namespace Z0
         /// <summary>
         /// Computes the arithmetic sum of the source operands. 
         /// </summary>
-        /// <param name="lhs">The left operand</param>
-        /// <param name="rhs">The right operand</param>
+        /// <param name="x">The left operand</param>
+        /// <param name="y">The right operand</param>
         [MethodImpl(Inline)]
         public static BitVector4 operator +(BitVector4 x, BitVector4 y)
             => BitVector.add(x,y);
@@ -84,20 +84,20 @@ namespace Z0
         /// Computes the product of the operands. 
         /// Note that this operator is equivalent to the AND operator (&)
         /// </summary>
-        /// <param name="lhs">The left operand</param>
-        /// <param name="rhs">The right operand</param>
+        /// <param name="x">The left operand</param>
+        /// <param name="y">The right operand</param>
         [MethodImpl(Inline)]
-        public static BitVector4 operator *(in BitVector4 lhs, in BitVector4 rhs)
-            => (byte)(lhs.data & rhs.data);
+        public static BitVector4 operator *(in BitVector4 x, in BitVector4 y)
+            => (byte)(x.data & y.data);
 
         /// <summary>
         /// Computes the scalar product of the operands
         /// </summary>
-        /// <param name="lhs">The left operand</param>
-        /// <param name="rhs">The right operand</param>
+        /// <param name="x">The left operand</param>
+        /// <param name="y">The right operand</param>
         [MethodImpl(Inline)]
-        public static bit operator %(BitVector4 lhs, BitVector4 rhs)
-            => BitVector.dot(lhs,rhs);
+        public static bit operator %(BitVector4 x, BitVector4 y)
+            => BitVector.dot(x,y);
 
         [MethodImpl(Inline)]
         public static BitVector4 operator -(in BitVector4 src)
@@ -106,27 +106,73 @@ namespace Z0
         /// <summary>
         /// Subtracts the second operand from the first. 
         /// </summary>
-        /// <param name="lhs">The left vector</param>
-        /// <param name="rhs">The right vector</param>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static BitVector4 operator - (BitVector4 lhs, BitVector4 rhs)
-            => BitVector.sub(lhs,rhs);
+        public static BitVector4 operator - (BitVector4 x, BitVector4 y)
+            => BitVector.sub(x,y);
 
         [MethodImpl(Inline)]
-        public static BitVector4 operator >>(BitVector4 lhs, int offset)
-            => BitVector.srl(lhs,offset);
+        public static BitVector4 operator >>(BitVector4 x, int shift)
+            => BitVector.srl(x,shift);
 
         [MethodImpl(Inline)]
-        public static BitVector4 operator <<(BitVector4 lhs, int offset)
-            => BitVector.sll(lhs,offset);
+        public static BitVector4 operator <<(BitVector4 x, int shift)
+            => BitVector.sll(x,shift);
 
+        /// <summary>
+        /// Determines whether operand content is identical
+        /// </summary>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static bool operator ==(in BitVector4 lhs, in BitVector4 rhs)
-            => lhs.Equals(rhs);
+        public static bit operator ==(BitVector4 x, BitVector4 y)
+            => math.eq(x,y);
 
+        /// <summary>
+        /// Determines whether operand content is non-identical
+        /// </summary>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static bool operator !=(in BitVector4 lhs, in BitVector4 rhs)
-            => !lhs.Equals(rhs);
+        public static bit operator !=(BitVector4 x, BitVector4 y)
+            => math.neq(x,y);
+
+        /// <summary>
+        /// Determines whether the left operand is arithmetically less than the second
+        /// </summary>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
+        [MethodImpl(Inline)]
+        public static bit operator <(BitVector4 x, BitVector4 y)
+            => math.lt(x,y);
+
+        /// <summary>
+        /// Determines whether the left operand is arithmetically greater than than the second
+        /// </summary>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
+        [MethodImpl(Inline)]
+        public static bit operator >(BitVector4 x, BitVector4 y)
+            => math.gt(x,y);
+
+        /// <summary>
+        /// Determines whether the left operand is arithmetically less than or equal to the second
+        /// </summary>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
+        [MethodImpl(Inline)]
+        public static bit operator <=(BitVector4 x, BitVector4 y)
+            => math.lteq(x,y);
+
+        /// <summary>
+        /// Determines whether the left operand is arithmetically greater than or equal to the second
+        /// </summary>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
+        [MethodImpl(Inline)]
+        public static bit operator >=(BitVector4 x, BitVector4 y)
+            => math.gteq(x,y);
 
         [MethodImpl(Inline)]
         internal BitVector4(byte data, bit direct)
@@ -193,11 +239,9 @@ namespace Z0
             get => BitVector.between(this,first,last);
         }
 
-
         [MethodImpl(Inline)]
-        public bool Equals(in BitVector4 rhs)
-            => data == rhs.data;
-
+        public bool Equals(in BitVector4 y)
+            => data == y.data;
 
         [MethodImpl(Inline)]
         public bool Equals(BitVector4 other)

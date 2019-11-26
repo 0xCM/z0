@@ -87,12 +87,11 @@ namespace Z0
 
         /// <summary>
         /// Computes the bitwise XOR of the source operands
-        /// Note that the XOR operator is equivalent to the (+) operator
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static BitVector32 operator ^(in BitVector32 x, in BitVector32 y)
+        public static BitVector32 operator ^(BitVector32 x, BitVector32 y)
             => BitVector.xor(x,y);
 
         /// <summary>
@@ -101,7 +100,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static BitVector32 operator &(in BitVector32 x, in BitVector32 y)
+        public static BitVector32 operator &(BitVector32 x, BitVector32 y)
             => BitVector.and(x,y);
 
         /// <summary>
@@ -110,7 +109,7 @@ namespace Z0
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
         [MethodImpl(Inline)]
-        public static bit operator %(in BitVector32 x, in BitVector32 y)
+        public static bit operator %(BitVector32 x, BitVector32 y)
             => BitVector.dot(x,y);
 
         /// <summary>
@@ -119,7 +118,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static BitVector32 operator |(in BitVector32 x, in BitVector32 y)
+        public static BitVector32 operator |(BitVector32 x, BitVector32 y)
             => BitVector.or(x,y);
 
         /// <summary>
@@ -156,7 +155,7 @@ namespace Z0
             => BitVector.dec(src);
 
         /// <summary>
-        /// Subtracts the second operand from the first. 
+        /// Computes the arithmetic difference between the operands
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
@@ -165,53 +164,106 @@ namespace Z0
             => BitVector.sub(x,y);
 
         /// <summary>
-        /// Negates the operand. Note that this operator is equivalent to the 
-        /// complement operator (~)
+        /// Computes the two's complement of the operand
         /// </summary>
-        /// <param name="x">The source operand</param>
+        /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
-        public static BitVector32 operator -(BitVector32 src)
-            => BitVector.negate(src);
+        public static BitVector32 operator -(BitVector32 x)
+            => BitVector.negate(x);
 
         /// <summary>
         /// Left-shifts the bits in the source
         /// </summary>
         /// <param name="x">The source operand</param>
         [MethodImpl(Inline)]
-        public static BitVector32 operator <<(BitVector32 x, int offset)
-            => BitVector.sll(x,offset);
+        public static BitVector32 operator <<(BitVector32 x, int shift)
+            => BitVector.sll(x,shift);
 
         /// <summary>
         /// Right-shifts the bits in the source
         /// </summary>
         /// <param name="x">The source operand</param>
         [MethodImpl(Inline)]
-        public static BitVector32 operator >>(BitVector32 x, int offset)
-            => BitVector.srl(x,offset);
+        public static BitVector32 operator >>(BitVector32 x, int shift)
+            => BitVector.srl(x,shift);
 
         /// <summary>
         /// Returns true if the source vector is nonzero, false otherwise
         /// </summary>
-        /// <param name="src">The source vector</param>
+        /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
-        public static bool operator true(BitVector32 src)
-            => src.NonEmpty;
+        public static bool operator true(BitVector32 x)
+            => x.NonEmpty;
 
         /// <summary>
         /// Returns false if the source vector is the zero vector, false otherwise
         /// </summary>
-        /// <param name="src">The source vector</param>
+        /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
-        public static bool operator false(BitVector32 src)
+        public static bool operator false(BitVector32 x)
+            => x.Empty;
+
+        /// <summary>
+        /// Computes the operand's logical negation: if x = 0 then 1 else 0
+        /// </summary>
+        /// <param name="src">The ource operand</param>
+        [MethodImpl(Inline)]
+        public static bit operator !(BitVector32 src)
             => src.Empty;
 
+        /// <summary>
+        /// Determines whether operand content is identical
+        /// </summary>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static bool operator ==(in BitVector32 x, in BitVector32 y)
-            => x.Equals(y);
+        public static bit operator ==(BitVector32 x, BitVector32 y)
+            => x.data == y.data;
 
+        /// <summary>
+        /// Determines whether operand content is non-identical
+        /// </summary>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static bool operator !=(in BitVector32 x, in BitVector32 y)
-            => !x.Equals(y);
+        public static bit operator !=(BitVector32 x, BitVector32 y)
+            => x.data != y.data;
+
+        /// <summary>
+        /// Determines whether the left operand is arithmetically less than the second
+        /// </summary>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
+        [MethodImpl(Inline)]
+        public static bit operator <(BitVector32 x, BitVector32 y)
+            => math.lt(x,y);
+
+        /// <summary>
+        /// Determines whether the left operand is arithmetically greater than the second
+        /// </summary>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
+        [MethodImpl(Inline)]
+        public static bit operator >(BitVector32 x, BitVector32 y)
+            => math.gt(x,y);
+
+        /// <summary>
+        /// Determines whether the left operand is arithmetically less than or equal to the second
+        /// </summary>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
+        [MethodImpl(Inline)]
+        public static bit operator <=(BitVector32 x, BitVector32 y)
+            => math.lteq(x,y);
+
+        /// <summary>
+        /// Determines whether the left operand is arithmetically greater than or equal to the second
+        /// </summary>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
+        [MethodImpl(Inline)]
+        public static bit operator >=(BitVector32 x, BitVector32 y)
+            => math.gteq(x,y);
 
         /// <summary>
         /// Initializes the vector with the source value it represents
@@ -277,7 +329,6 @@ namespace Z0
             [MethodImpl(Inline)]
             get => data != 0;
         }
-
 
         /// <summary>
         /// Queries/Manipulates index-identified bits

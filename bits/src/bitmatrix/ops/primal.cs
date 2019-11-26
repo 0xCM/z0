@@ -77,7 +77,7 @@ namespace Z0
         /// <param name="src">The data used to populate the matrix</param>
         [MethodImpl(Inline)]
         public static BitMatrix16 primal(N16 n, Span<ushort> src)
-            => BitMatrix16.From(src);
+            => new BitMatrix16(src);
 
         /// <summary>
         /// Defines a primal bitmatrix of order 16
@@ -86,7 +86,7 @@ namespace Z0
         /// <param name="src">The data used to populate the matrix</param>
         [MethodImpl(Inline)]
         public static BitMatrix16 primal(N16 n, ReadOnlySpan<byte> src)
-            => BitMatrix16.From(src.Replicate());
+            => new BitMatrix16(src.AsUInt16().Replicate());
 
         /// <summary>
         /// Defines a primal bitmatrix of order 32
@@ -95,7 +95,7 @@ namespace Z0
         /// <param name="src">The data used to populate the matrix</param>
         [MethodImpl(Inline)]
         public static BitMatrix32 primal(N32 n, Span<uint> src)
-            => BitMatrix32.From(src);
+            => new BitMatrix32(src);
 
         /// <summary>
         /// Defines a primal bitmatrix of order 32
@@ -104,7 +104,7 @@ namespace Z0
         /// <param name="src">The data used to populate the matrix</param>
         [MethodImpl(Inline)]
         public static BitMatrix32 primal(N32 n, ReadOnlySpan<byte> src)
-            => BitMatrix32.From(src.Replicate());
+            => new BitMatrix32(src.AsUInt32().Replicate());
 
         /// <summary>
         /// Defines a primal bitmatrix of order 64
@@ -113,7 +113,7 @@ namespace Z0
         /// <param name="src">The data used to populate the matrix</param>
         [MethodImpl(Inline)]
         public static BitMatrix64 primal(N64 n, Span<ulong> src)
-            => BitMatrix64.From(src);
+            => new BitMatrix64(src);
 
         /// <summary>
         /// Defines a primal bitmatrix of order 64
@@ -122,7 +122,7 @@ namespace Z0
         /// <param name="src">The data used to populate the matrix</param>
         [MethodImpl(Inline)]
         public static BitMatrix64 primal(N64 n, ReadOnlySpan<byte> src)
-            => BitMatrix64.From(src.Replicate());
+            => new BitMatrix64(src.AsUInt64().Replicate());
  
         [MethodImpl(Inline)]
         public static BitMatrix8 primal(N8 n8, byte row0 = 0, byte row1 = 0, byte row2 = 0, byte row3 = 0, 

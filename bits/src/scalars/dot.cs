@@ -9,12 +9,9 @@ namespace Z0
     using System.Runtime.InteropServices;
 
     using static zfunc;
-    using static As;
-    using static AsIn;
     
     partial class gbits
     {    
-
         /// <summary>
         /// Pretends that the operands are bitvectors and computes their scalar product
         /// </summary>

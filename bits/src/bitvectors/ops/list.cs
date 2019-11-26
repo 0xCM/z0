@@ -23,7 +23,18 @@ namespace Z0
                 yield return bv;            
             while(++bv);
         }
-        
+
+        /// <summary>
+        /// Enumerates each nonempty 8-bit bitvector 
+        /// </summary>
+        public static IEnumerable<BitVector8> nonempty(N8 n)
+        {
+            var bv = BitVector8.One;
+            do            
+                yield return bv;            
+            while(++bv);
+        }
+
         /// <summary>
         /// Enumerates all 16-bit bitvectors whose width is less than or equal to a specified maximum
         /// </summary>
@@ -47,12 +58,23 @@ namespace Z0
         }
 
         /// <summary>
-        /// Enumerates all 32-bit bitvectors whose width is less than or equal to a specified maximum
+        /// Enumerates all 32-bit bitvectors for which the effective width is less than or equal to a specified maximum
         /// </summary>
         public static IEnumerable<BitVector32> list(N32 n, int maxwidth)
         {
             var maxval = Pow2.pow(maxwidth);
             var bv = BitVector32.Zero;
+            while(bv < maxval)
+                yield return bv++;            
+        }
+
+        /// <summary>
+        /// Enumerates all 64-bit bitvectors for which the effective width is less than or equal to a specified maximum
+        /// </summary>
+        public static IEnumerable<BitVector64> list(N64 n, int maxwidth)
+        {
+            var maxval = Pow2.pow(maxwidth);
+            var bv = BitVector64.Zero;
             while(bv < maxval)
                 yield return bv++;            
         }

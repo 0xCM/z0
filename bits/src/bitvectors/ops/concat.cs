@@ -36,11 +36,11 @@ namespace Z0
             => from(n64, lo.data, hi.data);
 
         [MethodImpl(Inline)]
-        public static BitVector128 concat(in BitVector64 lo, in BitVector64 hi)
+        public static BitVector128 concat(BitVector64 lo, BitVector64 hi)
             => from(n128, lo.data, hi.data);
 
         [MethodImpl(Inline)]
-        public static BitVector128 concat(in BitVector32 x0, in BitVector32 x1, in BitVector32 x2, in BitVector32 x3)
+        public static BitVector128 concat(BitVector32 x0, BitVector32 x1, BitVector32 x2, BitVector32 x3)
             => from(n128, x0.data, x1.data, x2.data, x3.data);
 
     }

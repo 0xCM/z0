@@ -21,35 +21,8 @@ namespace Z0
 
         public static BitVector64 One => 1;                
 
-        /// <summary>
-        /// Allocates a new empty vector
-        /// </summary>
         [MethodImpl(Inline)]
-        public static BitVector64 Alloc()
-            => new BitVector64(0);
-
-        /// <summary>
-        /// Enumerates all 32-bit bitvectors whose width is less than or equal to a specified maximum
-        /// </summary>
-        public static IEnumerable<BitVector64> All(int maxwidth)
-        {
-            var maxval = Pow2.pow(maxwidth);
-            var bv = BitVector64.Zero;
-            while(bv < maxval)
-                yield return bv++;            
-        }
-
-        /// <summary>
-        /// Creates a vector from 32-bit values
-        /// </summary>
-        /// <param name="lo">The byte that will constitute the lo vector bits</param>
-        /// <param name="hi">The byte that will constitute the hi vector bits</param>
-        [MethodImpl(Inline)]
-        public static BitVector64 FromScalars(uint lo, uint hi)
-            => (ulong)hi << 32 | (ulong)lo;
-
-        [MethodImpl(Inline)]
-        public static implicit operator BitCells<N64,ulong>(in BitVector64 src)
+        public static implicit operator BitCells<N64,ulong>(BitVector64 src)
             => BitCells<N64,ulong>.FromArray(src.data);
 
         [MethodImpl(Inline)]
@@ -161,7 +134,7 @@ namespace Z0
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
         [MethodImpl(Inline)]
-        public static bit operator %(in BitVector64 x, in BitVector64 y)
+        public static bit operator %(BitVector64 x, BitVector64 y)
             => BitVector.dot(x,y);
 
         /// <summary>
@@ -203,105 +176,127 @@ namespace Z0
         /// </summary>
         /// <param name="x">The source operand</param>
         [MethodImpl(Inline)]
-        public static BitVector64 operator <<(BitVector64 x, int offset)
-            => BitVector.sll(x,offset);
+        public static BitVector64 operator <<(BitVector64 x, int shift)
+            => BitVector.sll(x,shift);
 
         /// <summary>
         /// Shifts the source bits rightwards
         /// </summary>
         /// <param name="x">The source operand</param>
         [MethodImpl(Inline)]
-        public static BitVector64 operator >>(BitVector64 x, int offset)
-            => BitVector.srl(x,offset);
+        public static BitVector64 operator >>(BitVector64 x, int shift)
+            => BitVector.srl(x,shift);
 
         /// <summary>
         /// Increments the vector arithmetically
         /// </summary>
-        /// <param name="src">The source vector</param>
+        /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
-        public static BitVector64 operator ++(BitVector64 src)
-            => BitVector.inc(src);
+        public static BitVector64 operator ++(BitVector64 x)
+            => BitVector.inc(x);
 
         /// <summary>
         /// Decrements the vector arithmetically
         /// </summary>
-        /// <param name="src">The source vector</param>
+        /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
-        public static BitVector64 operator --(BitVector64 src)
-            => BitVector.dec(src);
+        public static BitVector64 operator --(BitVector64 x)
+            => BitVector.dec(x);
 
         /// <summary>
         /// Returns true if the source vector is nonzero, false otherwise
         /// </summary>
-        /// <param name="src">The source vector</param>
+        /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
-        public static bool operator true(BitVector64 src)
-            => src.NonEmpty;
+        public static bool operator true(BitVector64 x)
+            => x.NonEmpty;
 
         /// <summary>
         /// Returns false if the source vector is the zero vector, false otherwise
         /// </summary>
-        /// <param name="src">The source vector</param>
+        /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
-        public static bool operator false(BitVector64 src)
-            => !src.NonEmpty;
+        public static bool operator false(BitVector64 x)
+            => !x.NonEmpty;
 
+        /// <summary>
+        /// Computes the operand's logical negation: if x = 0 then 1 else 0
+        /// </summary>
+        /// <param name="src">The ource operand</param>
         [MethodImpl(Inline)]
-        public static bool operator ==(in BitVector64 x, in BitVector64 y)
-            => x.Equals(y);
+        public static bit operator !(BitVector64 src)
+            => src.Empty;
 
+        /// <summary>
+        /// Determines whether operand content is identical
+        /// </summary>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static bool operator !=(in BitVector64 x, in BitVector64 y)
-            => !x.Equals(y);
+        public static bit operator ==(BitVector64 x, BitVector64 y)
+            => x.data == y.data;
+
+        /// <summary>
+        /// Determines whether operand content is non-identical
+        /// </summary>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
+        [MethodImpl(Inline)]
+        public static bit operator !=(BitVector64 x, BitVector64 y)
+            => math.neq(x,y);
+
+        /// <summary>
+        /// Determines whether the left operand is arithmetically less than the second
+        /// </summary>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
+        [MethodImpl(Inline)]
+        public static bit operator <(BitVector64 x, BitVector64 y)
+            => math.lt(x,y);
+
+        /// <summary>
+        /// Determines whether the left operand is arithmetically greater than the second
+        /// </summary>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
+        [MethodImpl(Inline)]
+        public static bit operator >(BitVector64 x, BitVector64 y)
+            => math.gt(x,y);
+
+        /// <summary>
+        /// Determines whether the left operand is arithmetically less than or equal to the second
+        /// </summary>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
+        [MethodImpl(Inline)]
+        public static bit operator <=(BitVector64 x, BitVector64 y)
+            => math.lteq(x,y);
+
+        /// <summary>
+        /// Determines whether the left operand is arithmetically greater than or equal to the second
+        /// </summary>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
+        [MethodImpl(Inline)]
+        public static bit operator >=(BitVector64 x, BitVector64 y)
+            => math.gteq(x,y);
 
         /// <summary>
         /// Initializes a vector with the primal source value it represents
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
-        public BitVector64(in ulong data)
+        public BitVector64(ulong data)
             => this.data = data;
 
         /// <summary>
-        /// Reads/Manipulates a source bit at a specified position
+        /// Extracts the scalar represented by the vector
         /// </summary>
-        public bit this[int pos]
+        public readonly ulong Scalar
         {
             [MethodImpl(Inline)]
-            get => BitMask.test(data, pos);
-            
-            [MethodImpl(Inline)]
-            set => data = BitMask.set(data, (byte)pos, value);
-       }
-
-        /// <summary>
-        /// Selects a contiguous range of bits
-        /// </summary>
-        /// <param name="first">The position of the first bit</param>
-        /// <param name="last">The position of the last bit</param>
-        public BitVector64 this[int first, int last]
-        {
-            [MethodImpl(Inline)]
-            get => BitVector.between(this,first, last);
+            get => data;
         }
-
-        /// <summary>
-        /// The vector's 32 least significant bits
-        /// </summary>
-        public readonly BitVector32 Lo
-        {
-            [MethodImpl(Inline)]
-            get => BitVector.from(n32, (uint)data);
-        }
-
-        /// <summary>
-        /// The vector's 32 most significant bits
-        /// </summary>
-        public readonly BitVector32 Hi
-        {
-            [MethodImpl(Inline)]
-            get => BitVector.from(n32,(uint)(data >> 32));
-        }        
 
         /// <summary>
         /// The actual number of bits represented by the vector
@@ -340,28 +335,63 @@ namespace Z0
         }
 
         /// <summary>
+        /// Tests whether all bits are on
+        /// </summary>
+        public readonly bool AllOn
+        {
+            [MethodImpl(Inline)]
+            get => (UInt64.MaxValue & data) == UInt64.MaxValue;
+        }
+
+        /// <summary>
+        /// The vector's 32 least significant bits
+        /// </summary>
+        public readonly BitVector32 Lo
+        {
+            [MethodImpl(Inline)]
+            get => BitVector.from(n32, (uint)data);
+        }
+
+        /// <summary>
+        /// The vector's 32 most significant bits
+        /// </summary>
+        public readonly BitVector32 Hi
+        {
+            [MethodImpl(Inline)]
+            get => BitVector.from(n32,(uint)(data >> 32));
+        }        
+
+        /// <summary>
+        /// Reads/Manipulates a source bit at a specified position
+        /// </summary>
+        public bit this[int index]
+        {
+            [MethodImpl(Inline)]
+            get => BitMask.test(data, index);
+            
+            [MethodImpl(Inline)]
+            set => data = BitMask.set(data, (byte)index, value);
+        }
+
+        /// <summary>
+        /// Selects a contiguous range of bits
+        /// </summary>
+        /// <param name="first">The position of the first bit</param>
+        /// <param name="last">The position of the last bit</param>
+        public BitVector64 this[int first, int last]
+        {
+            [MethodImpl(Inline)]
+            get => BitVector.between(this,first, last);
+        }
+
+        /// <summary>
         /// Selects an index-identified byte where index = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7
         /// </summary>
         /// <param name="index">The 0-based byte-relative position</param>
         [MethodImpl(Inline)]
         public ref byte Byte(int index)        
             => ref Bytes[index];
-                
-        /// <summary>
-        /// Tests whether all bits are on
-        /// </summary>
-        public readonly bool AllOn
-            => (UInt64.MaxValue & data) == UInt64.MaxValue;
-        
-        /// <summary>
-        /// Extracts the scalar represented by the vector
-        /// </summary>
-        public readonly ulong Scalar
-        {
-            [MethodImpl(Inline)]
-            get => data;
-        }
-            
+                                    
         [MethodImpl(Inline)]
         public readonly bool Equals(BitVector64 y)
             => data == y.data;

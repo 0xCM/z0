@@ -34,32 +34,11 @@ namespace Z0
         public static BitMatrix64 Alloc()        
             => new BitMatrix64(new ulong[N]);
 
-        /// <summary>
-        /// Allocates a matrix with a fill value
-        /// </summary>
-        [MethodImpl(Inline)]
-        public static BitMatrix64 Alloc(bit fill)                
-            => new BitMatrix64(fill);
-
-        /// <summary>
-        /// Allocates a matrix where each row is initialized to a common vector
-        /// </summary>
-        /// <param name="fill">The fill vector</param>
-        [MethodImpl(Inline)]
-        internal static BitMatrix64 Alloc(BitVector64 fill)
-        {
-            var data = new ulong[N];
-            data.Fill(fill);
-            return new BitMatrix64(data);
-        }
 
         [MethodImpl(Inline)]
         public static BitMatrix64 From(ulong[] src)        
             => new BitMatrix64(src);
 
-        [MethodImpl(Inline)]
-        public static BitMatrix64 From(BitMatrix<N64,ulong> src)        
-            => From(src.Data);
 
         [MethodImpl(Inline)]
         public static BitMatrix64 From(Span<ulong> src)        
@@ -102,13 +81,12 @@ namespace Z0
             => BitMatrix.mul(A,B);
 
         [MethodImpl(Inline)]
-        public static bool operator ==(BitMatrix64 A, BitMatrix64 B)
-            => A.Equals(B);
+        public static bit operator ==(BitMatrix64 A, BitMatrix64 B)
+            => BitMatrix.same(A,B);
 
         [MethodImpl(Inline)]
-        public static bool operator !=(BitMatrix64 A, BitMatrix64 B)
-            => !A.Equals(B);
-
+        public static bit operator !=(BitMatrix64 A, BitMatrix64 B)
+            => !BitMatrix.same(A,B);
 
         [MethodImpl(Inline)]
         internal BitMatrix64(Span<ulong> src)

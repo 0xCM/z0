@@ -29,7 +29,7 @@ namespace Z0
             }
 
             var srcSpan = Random.Span<ulong>(SampleSize);
-            var spPop = bitspan.pop(srcSpan);            
+            var spPop = Bits.pop(srcSpan);            
             var spPopExpect = 0u;
             for(var i=0; i<srcSpan.Length; i++)
                 spPopExpect += gbits.pop(srcSpan[i]);

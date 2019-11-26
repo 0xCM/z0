@@ -18,8 +18,8 @@ namespace Z0
         public static BitMatrix16 hprod(in BitMatrix16 A, in BitMatrix16 B)
         {
             var C = BitMatrix16.Alloc();
-            for(var i=0; i<A.RowCount; i++)
-            for(var j=0; j<B.ColCount; j++)
+            for(var i=0; i<A.Order; i++)
+            for(var j=0; j<B.Order; j++)
                 C[i,j] = A[i,j] & B[i,j];
             return C;
         }

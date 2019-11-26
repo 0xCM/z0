@@ -20,7 +20,7 @@ namespace Z0
         [MethodImpl(NotInline)]
         public static BitGrid<T> Replicate<T>(this BitGrid<T> src)
             where T : unmanaged
-                => new BitGrid<T>(src.Data.Replicate(), src.RowCount, src.Width);
+                => new BitGrid<T>(src.Data.Replicate(), src.RowCount, src.ColCount);
 
         [MethodImpl(NotInline)]
         public static BitGrid<M,N,T> Replicate<M,N,T>(this BitGrid<M,N,T> src)

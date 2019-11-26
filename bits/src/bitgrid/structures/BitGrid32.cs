@@ -33,7 +33,7 @@ namespace Z0
         /// <summary>
         /// The number of cells covered by the grid
         /// </summary>
-        public static int CellCount => ByteCount/size<T>();
+        public static int GridCells => ByteCount/size<T>();
 
         /// <summary>
         /// The number of bits covered by a grid cell
@@ -49,9 +49,29 @@ namespace Z0
             => src.data;
 
         [MethodImpl(Inline)]
+        public static bit operator ==(BitGrid32<T> gx, BitGrid32<T> gy)
+            => gx.data == gy.data;
+
+        [MethodImpl(Inline)]
+        public static bit operator !=(BitGrid32<T> gx, BitGrid32<T> gy)
+            => gx.data != gy.data;
+
+        [MethodImpl(Inline)]
         internal BitGrid32(uint data)
             => this.data = data;
         
+        public uint Scalar
+        {
+            [MethodImpl(Inline)]
+            get => data;
+        }
+
+        public int CellCount
+        {
+            [MethodImpl(Inline)]
+            get => GridCells;
+        }
+
         public Span<T> Cells
         {
             [MethodImpl(Inline)]
@@ -64,20 +84,15 @@ namespace Z0
             get => ref head(Cells);
         }
 
-        public int Count
-        {
-            [MethodImpl(Inline)]
-            get => CellCount;
-        }
-
-        public uint Scalar
-        {
-            [MethodImpl(Inline)]
-            get => data;
-        }
-
         [MethodImpl(Inline)]
         public bool Equals(BitGrid32<T> rhs)
             => data.Equals(rhs.data);
+
+        public override bool Equals(object obj)
+            => throw new NotSupportedException();
+
+        public override int GetHashCode()
+            => throw new NotSupportedException();
+ 
     }
 }

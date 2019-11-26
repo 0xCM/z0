@@ -18,9 +18,15 @@ namespace Z0
     {                
         readonly Span<T> data;
 
+        /// <summary>
+        /// The number of grid rows
+        /// </summary>
         public readonly ushort RowCount;
 
-        public readonly ushort Width;
+        /// <summary>
+        /// The number of grid columns
+        /// </summary>
+        public readonly ushort ColCount;
 
         [MethodImpl(Inline)]
         public static bool operator ==(in BitGrid<T> g1, in BitGrid<T> g2)
@@ -35,7 +41,7 @@ namespace Z0
         {
             this.data = data;
             this.RowCount = rows;
-            this.Width = width;
+            this.ColCount = width;
         }
 
         public Span<T> Data
@@ -50,22 +56,25 @@ namespace Z0
             get => ref head(data);
         }
         
-        public int SegCount
+        /// <summary>
+        /// The number of cells over which the grid is defined
+        /// </summary>
+        public int CellCount
         {
             [MethodImpl(Inline)]
             get => data.Length;
         }
 
         public readonly GridMoniker<T> Moniker
-            => GridMoniker.FromDim<T>(RowCount,Width);
+            => GridMoniker.FromDim<T>(RowCount,ColCount);
 
         public bit this[int row, int col]
         {
             [MethodImpl(Inline)]
-            get => BitGrid.readbit(Width, in Head, row, col);
+            get => BitGrid.readbit(ColCount, in Head, row, col);
 
             [MethodImpl(Inline)]
-            set => BitGrid.setbit(Width, row, col, value, ref Head);
+            set => BitGrid.setbit(ColCount, row, col, value, ref Head);
         }
 
         public bit this[int pos]

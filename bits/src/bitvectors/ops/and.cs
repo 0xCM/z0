@@ -87,7 +87,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitVector128 and(in BitVector128 x, in BitVector128 y)
             => from(n128, gmath.and(x.x0, y.x0), gmath.and(x.x1,  y.x1));
-
-
     }
 }

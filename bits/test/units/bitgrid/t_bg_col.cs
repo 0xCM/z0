@@ -12,7 +12,7 @@ namespace Z0
     public class t_bg_col : t_bg<t_bg_col>
     {        
 
-        public void bg_col_32x2()
+        public void nbg_col_32x2()
         {
             var m = n32;
             var n = n2;
@@ -28,7 +28,7 @@ namespace Z0
         }
 
 
-        public void bg_col_8x4()
+        public void nbg_col_8x4()
         {
             var m = n8;
             var n = n4;
@@ -43,7 +43,7 @@ namespace Z0
             }            
         }
 
-        public void bg_col_64()
+        public void nbg_col_8x8x64()
         {
 
             var m = n8;
@@ -59,9 +59,8 @@ namespace Z0
 
         }
 
-        public void bg_col_256()
+        public void nbg_col_32x8x256()
         {
-            var block = n256;
             var m = n32;
             var n = n8;
             var xg = Random.BitGrid<ulong>(m,n);
@@ -74,9 +73,8 @@ namespace Z0
             }            
         }
 
-        public void bg_col_128()
+        public void nbg_col_16x8x128()
         {
-            var block = n128;
             var m = n16;
             var n = n8;
             var xg = Random.BitGrid<ulong>(m,n);
@@ -87,7 +85,6 @@ namespace Z0
                 var bv2 = xs.Slice(i*m, m).ToBitVector(m);                    
                 Claim.eq(bv1, bv2);
             }            
-
         }
     }
 

@@ -32,82 +32,49 @@ namespace Z0
         /// </summary>
         public static BitMatrix32 Zero => new BitMatrix32(new uint[N]);
                 
-        /// <summary>
-        /// Allocates a matrix with a fill value
-        /// </summary>
-        [MethodImpl(Inline)]
-        internal static BitMatrix32 Alloc(bit fill)                
-            => new BitMatrix32(fill);
-
-        /// <summary>
-        /// Allocates a matrix where each row is initialized to a common vector
-        /// </summary>
-        /// <param name="fill">The fill vector</param>
-        [MethodImpl(Inline)]
-        internal static BitMatrix32 Alloc(BitVector32 fill)
-        {
-            var data = new uint[N];
-            data.Fill(fill);
-            return new BitMatrix32(data);
-        }
-
-        [MethodImpl(Inline)]
-        public static BitMatrix32 From(uint[] src)        
-            => new BitMatrix32(src);
-
-        [MethodImpl(Inline)]
-        public static BitMatrix32 From(BitMatrix<N32,uint> src)        
-            => new BitMatrix32(src.Data);
-
-        [MethodImpl(Inline)]
-        public static BitMatrix32 From(Span<uint> src)        
-            => new BitMatrix32(src);
-
         [MethodImpl(Inline)]
         public static BitMatrix32 From(Span<byte> src)        
             => new BitMatrix32(src.AsUInt32());
 
         [MethodImpl(Inline)]
-        public static BitMatrix32 operator & (BitMatrix32 lhs, BitMatrix32 rhs)
-            => BitMatrix.and(lhs,rhs);
+        public static BitMatrix32 operator & (in BitMatrix32 A, in BitMatrix32 B)
+            => BitMatrix.and(A,B);
 
         [MethodImpl(Inline)]
-        public static BitMatrix32 operator | (BitMatrix32 lhs, BitMatrix32 rhs)
-            => BitMatrix.or(lhs, rhs);
+        public static BitMatrix32 operator | (in BitMatrix32 A, in BitMatrix32 B)
+            => BitMatrix.or(A, B);
 
         [MethodImpl(Inline)]
-        public static BitMatrix32 operator ^ (BitMatrix32 lhs, BitMatrix32 rhs)
-            => BitMatrix.xor(lhs, rhs);
+        public static BitMatrix32 operator ^ (in BitMatrix32 A, in BitMatrix32 B)
+            => BitMatrix.xor(A, B);
 
         [MethodImpl(Inline)]
-        public static BitMatrix32 operator ~ (BitMatrix32 src)
-            => BitMatrix.not(src);
+        public static BitMatrix32 operator ~ (in BitMatrix32 A)
+            => BitMatrix.not(A);
 
         [MethodImpl(Inline)]
-        public static BitMatrix32 operator - (BitMatrix32 A, BitMatrix32 B)
+        public static BitMatrix32 operator - (in BitMatrix32 A, in BitMatrix32 B)
             => BitMatrix.xornot(A,B);
 
         [MethodImpl(Inline)]
-        public static BitMatrix32 operator * (BitMatrix32 A, BitMatrix32 B)
+        public static BitMatrix32 operator * (in BitMatrix32 A, in BitMatrix32 B)
             => BitMatrix.mul(A, B);
 
         [MethodImpl(Inline)]
-        public static BitVector32 operator * (BitMatrix32 A, BitVector32 B)
+        public static BitVector32 operator * (in BitMatrix32 A, in BitVector32 B)
             => BitMatrix.mul(A, B);
 
         [MethodImpl(Inline)]
-        public static bool operator ==(BitMatrix32 lhs, BitMatrix32 rhs)
-            => BitMatrix.same(lhs,rhs);
+        public static bool operator ==(in BitMatrix32 A, in BitMatrix32 B)
+            => BitMatrix.same(A,B);
 
         [MethodImpl(Inline)]
-        public static bool operator !=(BitMatrix32 lhs, BitMatrix32 rhs)
-            => !BitMatrix.same(lhs,rhs);
+        public static bool operator !=(in BitMatrix32 A, in BitMatrix32 B)
+            => !BitMatrix.same(A,B);
 
         [MethodImpl(Inline)]
         internal BitMatrix32(Span<uint> src)
-        {                        
-            this.data = src;
-        }        
+            => this.data = src;
 
         [MethodImpl(Inline)]
         internal BitMatrix32(bit fill)
@@ -115,35 +82,6 @@ namespace Z0
             this.data = new uint[N];
             if(fill)
                 data.Fill(uint.MaxValue);
-        }
-
-        public readonly int Order
-        {
-            [MethodImpl(Inline)]
-            get => (int)N;
-        }
-
-        /// <summary>
-        /// Queries/manipulates a bit in an identified cell
-        /// </summary>
-        /// <param name="row">The row index</param>
-        /// <param name="col">The column index</param>
-        public bit this[int row, int col]
-        {
-            [MethodImpl(Inline)]
-            get => BitMask.test(data[row], col);
-
-            [MethodImpl(Inline)]
-            set =>  data[row] = BitMask.set(data[row], (byte)col, value);
-        }            
-
-        /// <summary>
-        /// The underlying matrix presented as a bytespan
-        /// </summary>
-        public Span<byte> Bytes
-        {
-            [MethodImpl(Inline)]
-            get => data.AsBytes();
         }
 
         /// <summary>
@@ -164,6 +102,39 @@ namespace Z0
             get => ref head(data);
         }
 
+
+        /// <summary>
+        /// The square matrix order
+        /// </summary>
+        public readonly int Order
+        {
+            [MethodImpl(Inline)]
+            get => (int)N;
+        }
+
+        /// <summary>
+        /// The underlying matrix presented as a bytespan
+        /// </summary>
+        public Span<byte> Bytes
+        {
+            [MethodImpl(Inline)]
+            get => data.AsBytes();
+        }
+
+        /// <summary>
+        /// Queries/manipulates a bit in an identified cell
+        /// </summary>
+        /// <param name="row">The row index</param>
+        /// <param name="col">The column index</param>
+        public bit this[int row, int col]
+        {
+            [MethodImpl(Inline)]
+            get => BitMask.test(data[row], col);
+
+            [MethodImpl(Inline)]
+            set =>  data[row] = BitMask.set(data[row], (byte)col, value);
+        }            
+
         /// <summary>
         /// Queries/manipulates row data
         /// </summary>
@@ -174,7 +145,6 @@ namespace Z0
             get => ref Unsafe.As<uint,BitVector32>(ref seek(ref Head, row));
         }
 
-
         [MethodImpl(Inline)]
         public readonly BitVector32 Column(int index)
         {
@@ -183,11 +153,6 @@ namespace Z0
                 col = BitMask.setif(data[r], index, col, r);
             return col;
         }
-
-
-        [MethodImpl(Inline)] 
-        public readonly BitVector32 Diagonal()
-            => BitMatrix.diagonal(this);
 
         [MethodImpl(NotInline)] 
         public readonly BitMatrix32 Replicate()

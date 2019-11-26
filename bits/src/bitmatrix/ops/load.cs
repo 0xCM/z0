@@ -72,7 +72,7 @@ namespace Z0
         public static BitMatrix<M,N,T> load<M,N,T>(Span<T> src)        
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
-            where T : unmanaged
+            where T : unmanaged            
                 => BitMatrix<M,N,T>.Load(src); 
     }
 }

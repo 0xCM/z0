@@ -124,7 +124,7 @@ namespace Z0
         {
             var dst = A.Replicate();
             for(var i=0; i< BitMatrix16.N; i++)
-                dst[i] = A.Column(i);
+                dst[i] = A.Col(i);
             return dst;
         }
 

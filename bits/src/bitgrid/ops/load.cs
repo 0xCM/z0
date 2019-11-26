@@ -501,6 +501,21 @@ namespace Z0
         public static BitGrid256<N16,N16,T> load<T>(Vector256<T> src, N16 m = default, N16 n = default)
             where T : unmanaged            
                 => src; 
+
+        [MethodImpl(Inline)]
+        public static BitGrid128<M,N,T> load<M,N,T>(Vector128<T> src, M m = default, N n = default)
+            where M : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
+            where T : unmanaged            
+                => src; 
+
+        [MethodImpl(Inline)]
+        public static BitGrid256<M,N,T> load<M,N,T>(Vector256<T> src, M m = default, N n = default)
+            where M : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
+            where T : unmanaged            
+                => src; 
+ 
     }
 
 }

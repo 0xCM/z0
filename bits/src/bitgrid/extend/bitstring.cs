@@ -23,7 +23,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitString ToBitString<T>(this BitGrid<T> src)
             where T : unmanaged
-                => src.Data.ToBitString(src.RowCount * src.Width);
+                => src.Data.ToBitString(src.RowCount * src.ColCount);
 
         [MethodImpl(Inline)]
         public static BitString ToBitString<M,N,T>(this BitGrid32<M,N,T> g)
@@ -32,7 +32,6 @@ namespace Z0
             where T : unmanaged
                 => g.Scalar.ToBitString();
 
-
         [MethodImpl(Inline)]
         public static BitString ToBitString<M,N,T>(this BitGrid64<M,N,T> g)
             where M : unmanaged, ITypeNat
@@ -40,6 +39,19 @@ namespace Z0
             where T : unmanaged
                 => g.Scalar.ToBitString();
 
+        [MethodImpl(Inline)]
+        public static BitString ToBitString<M,N,T>(this BitGrid128<M,N,T> g)
+            where M : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
+            where T : unmanaged
+                => g.Data.ToBitString();
+
+        [MethodImpl(Inline)]
+        public static BitString ToBitString<M,N,T>(this BitGrid256<M,N,T> g)
+            where M : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
+            where T : unmanaged
+                => g.Data.ToBitString();
 
     }
 

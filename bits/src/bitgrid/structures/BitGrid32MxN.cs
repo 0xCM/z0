@@ -45,7 +45,7 @@ namespace Z0
         /// <summary>
         /// The number of cells covered by the grid
         /// </summary>
-        public static int CellCount => BitGrid32<T>.CellCount;
+        public static int CellCount => BitGrid32<T>.GridCells;
 
 
         [MethodImpl(Inline)]

@@ -133,7 +133,7 @@ namespace Z0
         /// <param name="tail">The lower bits of the new vector</param>
         [MethodImpl(Inline)]
         public static BitVector64 Concat(this BitVector32 head, BitVector32 tail)
-            => BitVector64.FromScalars(tail.data, head.data);
+            => BitVector.from(n64,tail.data, head.data);
 
         /// <summary>
         /// Concatentates a vector to itself

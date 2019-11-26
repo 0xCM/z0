@@ -55,7 +55,5 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where T : unmanaged
                 => grid.Data.Fill(state ? gmath.maxval<T>() : gmath.zero<T>());
-
     }
-
 }

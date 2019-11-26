@@ -31,16 +31,8 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
-        public static BitVector16 ToBitVector(this ushort src)
+        public static BitVector16 ToBitVector(this ushort src, N16 n = default)
             => src;
-
-        /// <summary>
-        /// Creates a 16-bit bitvector from a 16-bit scalar
-        /// </summary>
-        /// <param name="src">The source value</param>
-        [MethodImpl(Inline)]
-        public static BitVector16 ToBitVector(this short src, N16 n)        
-            => (ushort)src;
 
         /// <summary>
         /// Creates a 16-bit bitvector with the lower 8 bits populated by the source value

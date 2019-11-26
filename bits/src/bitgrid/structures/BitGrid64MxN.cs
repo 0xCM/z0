@@ -42,7 +42,7 @@ namespace Z0
         /// <summary>
         /// The number of cells covered by the grid
         /// </summary>
-        public static int CellCount => BitGrid64<T>.CellCount;
+        public static int CellCount => BitGrid64<T>.GridCells;
 
         [MethodImpl(Inline)]
         public static implicit operator BitGrid64<M,N,T>(Block64<T> src)

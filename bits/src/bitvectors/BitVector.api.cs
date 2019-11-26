@@ -7,14 +7,11 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
-    using System.Collections.Generic;
 
     using static zfunc;    
 
-
     public static partial class BitVector
     {   
-
         /// <summary>
         /// Returns a generic vector with all bits enabled
         /// </summary>
@@ -32,6 +29,5 @@ namespace Z0
         public static BitVector<T> zero<T>()
             where T : unmanaged
                 =>  default;
-
     }
 }

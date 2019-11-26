@@ -32,5 +32,19 @@ namespace Z0
         public static BitGrid256<T> and<T>(in BitGrid256<T> gx, in BitGrid256<T> gy)
             where T : unmanaged
                 => ginx.vand<T>(gx,gy);    
+
+        [MethodImpl(Inline)]
+        public static BitGrid128<M,N,T> and<M,N,T>(in BitGrid128<M,N,T> gx, in BitGrid128<M,N,T> gy)
+            where T : unmanaged
+            where N : unmanaged, ITypeNat
+            where M : unmanaged, ITypeNat
+                => ginx.vand<T>(gx,gy);    
+
+        [MethodImpl(Inline)]
+        public static BitGrid256<M,N,T> and<M,N,T>(in BitGrid256<M,N,T> gx, in BitGrid256<M,N,T> gy)
+            where T : unmanaged
+            where N : unmanaged, ITypeNat
+            where M : unmanaged, ITypeNat
+                => ginx.vand<T>(gx,gy);    
     }
 }

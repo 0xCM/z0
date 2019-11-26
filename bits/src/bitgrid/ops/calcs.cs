@@ -110,8 +110,6 @@ namespace Z0
         public static int points<M,N>(M m = default, N n = default)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
-                => NatMath.mul(m,n);
-         
+                => NatMath.mul(m,n);         
     }
-
 }

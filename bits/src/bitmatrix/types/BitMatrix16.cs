@@ -36,17 +36,6 @@ namespace Z0
             => From(new ushort[N]);
 
         /// <summary>
-        /// Allocates a matrix where each row is initialized to a common vector
-        /// </summary>
-        /// <param name="fill">The fill vector</param>
-        public static BitMatrix16 Alloc(BitVector16 fill)
-        {
-            var data = new ushort[N];
-            data.Fill(fill);
-            return new BitMatrix16(data);
-        }
-
-        /// <summary>
         /// Allocates a matrix with a fill value
         /// </summary>
         [MethodImpl(Inline)]
@@ -56,14 +45,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitMatrix16 From(ushort[] src)        
             => new BitMatrix16(src);
-
-        [MethodImpl(Inline)]
-        public static BitMatrix16 From(Span<ushort> src)        
-            => new BitMatrix16(src);
-
-        [MethodImpl(Inline)]
-        public static BitMatrix16 From(Span<byte> src)        
-            => new BitMatrix16(src.AsUInt16());
 
         /// <summary>
         /// Computes the bitwise and of the operands
@@ -97,19 +78,16 @@ namespace Z0
             => BitMatrix.mul(A, B);
 
         [MethodImpl(Inline)]
-        public static bool operator ==(BitMatrix16 A, BitMatrix16 B)
-            => A.Equals(B);
+        public static bit operator ==(BitMatrix16 A, BitMatrix16 B)
+            => BitMatrix.same(A,B);
 
         [MethodImpl(Inline)]
-        public static bool operator !=(BitMatrix16 A, BitMatrix16 B)
-            => !A.Equals(B);
-
+        public static bit operator !=(BitMatrix16 A, BitMatrix16 B)
+            => !BitMatrix.same(A,B);
 
         [MethodImpl(Inline)]
         internal BitMatrix16(Span<ushort> src)
-        {                        
-            this.data = src;
-        }
+            => this.data = src;
 
         internal BitMatrix16(bit fill)
         {
@@ -145,6 +123,12 @@ namespace Z0
             get => ref head(data);
         }
 
+        public readonly int Order
+        {
+            [MethodImpl(Inline)]
+            get => (int)N;
+        }
+
         /// <summary>
         /// Reads/manipulates the bit in a specified cell
         /// </summary>
@@ -154,10 +138,10 @@ namespace Z0
         public bit this[int row, int col]
         {
             [MethodImpl(Inline)]
-            get => GetBit(row,col);
+            get => BitMask.test(skip(in Head, row), col);
 
             [MethodImpl(Inline)]
-            set => SetBit(row,col,value);
+            set => seek(ref Head, row) = BitMask.set(seek(ref Head, row), (byte)col, value);
         }            
 
         /// <summary>
@@ -167,31 +151,11 @@ namespace Z0
         public ref BitVector16 this[int row]
         {
             [MethodImpl(Inline)]
-            get => ref Row(row);
+            get => ref Unsafe.As<ushort,BitVector16>(ref seek(ref Head, row));
         }
-
-        public readonly int RowCount
-        {
-            [MethodImpl(Inline)]
-            get => (int)N;
-        }
-
-        public readonly int ColCount
-        {
-            [MethodImpl(Inline)]
-            get => (int)N;
-        }
-
-        /// <summary>
-        /// Presents the data at a specified offset as a bitvector
-        /// </summary>
-        /// <param name="row">The row index</param>
-        [MethodImpl(Inline)]
-        public ref BitVector16 Row(int row)
-            => ref Unsafe.As<ushort,BitVector16>(ref seek(ref Head, row));
 
         [MethodImpl(Inline)]
-        public readonly BitVector16 Column(int index)
+        public readonly BitVector16 Col(int index)
         {
             ushort col = 0;
             for(var r = 0; r < N; r++)
@@ -208,34 +172,11 @@ namespace Z0
         public void RowSwap(int i, int j)
             => data.Swap(i,j);
 
-        /// <summary>
-        /// Reads the bit in a specified cell
-        /// </summary>
-        /// <param name="row">The row index</param>
-        /// <param name="col">The column index</param>
-        [MethodImpl(Inline)]
-        bit GetBit(int row, int col)
-            => BitMask.test(skip(in Head, row), col);
-
-        /// <summary>
-        /// Sets the bit in a specified cell
-        /// </summary>
-        /// <param name="row">The row index</param>
-        /// <param name="col">The column index</param>
-        /// <param name="src">The source value</param>
-        [MethodImpl(Inline)]
-        void SetBit(int row, int col, bit src)
-            => seek(ref Head, row) = BitMask.set(seek(ref Head, row), (byte)col, src);
-
-        [MethodImpl(Inline)]
-        public readonly BitVector16 Diagonal()
-            => BitMatrix.diagonal(this);
-
         public readonly BitMatrix16 Transpose()
         {
             var dst = Replicate();
             for(var i=0; i<N; i++)
-                dst.data[i] = Column(i);
+                dst.data[i] = Col(i);
             return dst;
         }
 

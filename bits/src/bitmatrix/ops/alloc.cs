@@ -5,9 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Collections.Generic;
-    using System.Threading;
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
 
@@ -145,7 +142,11 @@ namespace Z0
         /// <param name="fill">The row with which the allocated matrix is filled</param>
         [MethodImpl(NotInline)]
         public static BitMatrix16 alloc(BitVector16 fill)
-            => BitMatrix16.Alloc(fill);
+        {
+            Span<ushort> data = new ushort[16];
+            data.Fill(fill);
+            return new BitMatrix16(data);
+        }
 
         /// <summary>
         /// Allocates a primal bitmatrix 
@@ -154,7 +155,7 @@ namespace Z0
         /// <param name="fill">The value with which the allocated matrix is filled</param>
         [MethodImpl(NotInline)]
         public static BitMatrix32 alloc(N32 n, bit fill = default)
-            => BitMatrix32.Alloc(fill);
+            => new BitMatrix32(fill);
 
         /// <summary>
         /// Allocates a primal bitmatrix with rows filled by a specified vector
@@ -162,7 +163,11 @@ namespace Z0
         /// <param name="fill">The row with which the allocated matrix is filled</param>
         [MethodImpl(NotInline)]
         public static BitMatrix32 alloc(BitVector32 fill)
-            => BitMatrix32.Alloc(fill);
+        {
+            Span<uint> data = new uint[32];
+            data.Fill(fill);
+            return new BitMatrix32(data);
+        }
 
         /// <summary>
         /// Allocates a primal bitmatrix 
@@ -171,7 +176,7 @@ namespace Z0
         /// <param name="fill">The value with which the allocated matrix is filled</param>
         [MethodImpl(NotInline)]
         public static BitMatrix64 alloc(N64 n, bit fill = default)
-            => BitMatrix64.Alloc(fill);
+            => new BitMatrix64(fill);
  
         /// <summary>
         /// Allocates a primal bitmatrix with rows filled by a specified vector
@@ -179,7 +184,10 @@ namespace Z0
         /// <param name="fill">The row with which the allocated matrix is filled</param>
         [MethodImpl(NotInline)]
         public static BitMatrix64 alloc(BitVector64 fill)        
-            => BitMatrix64.Alloc(fill);
-
+        {
+            Span<ulong> data = new ulong[64];
+            data.Fill(fill);
+            return new BitMatrix64(data);
+        }
     }
 }

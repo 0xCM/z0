@@ -19,7 +19,7 @@ namespace Z0
             where T : unmanaged
         {
             var gz = new BitGrid32<T>(0u);
-            gcells.rotl(in gx.Head, shift, ref gz.Head, gx.Count);
+            gcells.rotl(in gx.Head, shift, ref gz.Head, gx.CellCount);
             return gz;
         }
 
@@ -28,7 +28,7 @@ namespace Z0
             where T : unmanaged
         {
             var gz = new BitGrid32<T>(0u);
-            gcells.rotr(in gx.Head, shift, ref gz.Head, gx.Count);
+            gcells.rotr(in gx.Head, shift, ref gz.Head, gx.CellCount);
             return gz;
         }
 
@@ -37,7 +37,7 @@ namespace Z0
             where T : unmanaged
         {
             var gz = new BitGrid64<T>(0ul);
-            gcells.rotl(in gx.Head, shift, ref gz.Head, gx.Count);
+            gcells.rotl(in gx.Head, shift, ref gz.Head, gx.CellCount);
             return gz;
         }
 
@@ -46,7 +46,7 @@ namespace Z0
             where T : unmanaged
         {
             var gz = new BitGrid64<T>(0ul);
-            gcells.rotr(in gx.Head, shift, ref gz.Head, gx.Count);
+            gcells.rotr(in gx.Head, shift, ref gz.Head, gx.CellCount);
             return gz;
         }
 

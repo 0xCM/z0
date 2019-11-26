@@ -12,7 +12,6 @@ namespace Z0
 
     partial class BitGridX
     {
-
         /// <summary>
         /// Calculates a grid layout from a specification
         /// </summary>

@@ -84,7 +84,7 @@ namespace Z0
         /// <param name="tail">The lower bits of the new vector</param>
         [MethodImpl(Inline)]
         public static BitVector16 Concat(this BitVector8 head, BitVector8 tail)
-            => BitVector16.FromScalars(tail.data, head.data);
+            => BitVector.from(n16,tail.data, head.data);
 
         [MethodImpl(Inline)]
         public static BitVector16 Replicate(this BitVector8 src, N2 n)

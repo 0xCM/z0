@@ -30,7 +30,7 @@ namespace Z0
         public void pbm_nlz_16()
         {
             var A = BitMatrix16.Identity;
-            var rows = A.RowCount;
+            var rows = A.Order;
             for(int i=0, j=rows - 1; i < rows; i++, j--)            
                 Claim.eq(BitVector.nlz(A[i++]), j--);
         }

@@ -182,7 +182,7 @@ namespace Z0
             for(var i=0; i< N; i++)
             {
                 ref readonly var row = ref A[i];
-                var z = BitVector64.Alloc();
+                var z = BitVector.alloc(n64);
                 for(var j=0; j< N; j++)
                     z[j] = BitVector.dot(row, C[j]);
                 A[i] = (ulong)z;
@@ -200,7 +200,7 @@ namespace Z0
         public static BitVector64 mul(in BitMatrix64 A, BitVector64 B)
         {
             const int N = 64;                        
-            var dst = BitVector64.Alloc();
+            var dst = BitVector.alloc(n64);
             for(var i=0; i< N; i++)
                 dst[i] = A[i] % B;
             return dst;        
