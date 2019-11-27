@@ -22,6 +22,11 @@ namespace Z0
             where T : unmanaged
                 => new BitMatrix<T>(src);
 
+        [MethodImpl(Inline)]
+        public static BitMatrix<T> load<T>(Block256<T> src)
+            where T : unmanaged
+                => new BitMatrix<T>(src);
+
         /// <summary>
         /// Loads a square bitmatrix of natural order from an span
         /// </summary>

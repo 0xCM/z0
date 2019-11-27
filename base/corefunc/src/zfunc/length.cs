@@ -139,8 +139,8 @@ partial class zfunc
         [CallerFilePath] string file = null, [CallerLineNumber] int? line = null)
             where S : unmanaged
             where T : unmanaged
-            => lhs.Length == rhs.Length ? lhs.Length 
-                : throw Errors.LengthMismatch(lhs.Length, rhs.Length, caller, file, line);
+            => lhs.CellCount == rhs.CellCount ? lhs.CellCount 
+                : throw Errors.LengthMismatch(lhs.CellCount, rhs.CellCount, caller, file, line);
 
     /// <summary>
     /// Returns the length of spans of equal length; otherwise raises an error
@@ -152,7 +152,7 @@ partial class zfunc
         [CallerFilePath] string file = null, [CallerLineNumber] int? line = null)
             where T : unmanaged
             where S : unmanaged
-                => lhs.Length == rhs.Length ? lhs.Length : throw Errors.LengthMismatch(lhs.Length, rhs.Length, caller, file, line);
+                => lhs.CellCount == rhs.CellCount ? lhs.CellCount : throw Errors.LengthMismatch(lhs.CellCount, rhs.CellCount, caller, file, line);
 
     /// <summary>
     /// Returns the common length of the operands if they are the same; otherwise, raises an error
@@ -166,7 +166,7 @@ partial class zfunc
         [CallerFilePath] string file = null, [CallerLineNumber] int? line = null)
             where T : unmanaged
             where S : unmanaged
-                =>  lhs.Length == rhs.Length ? lhs.Length : throw Errors.LengthMismatch(lhs.Length, rhs.Length, caller, file, line);
+                =>  lhs.CellCount == rhs.CellCount ? lhs.CellCount : throw Errors.LengthMismatch(lhs.CellCount, rhs.CellCount, caller, file, line);
 
 
 

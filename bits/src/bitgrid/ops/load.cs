@@ -20,7 +20,7 @@ namespace Z0
         /// <param name="map">The grid map</param>
         /// <typeparam name="T">The segment type</typeparam>
         [MethodImpl(Inline)]
-        public static BitGrid<T> load<T>(Span<T> src, ushort rows, ushort cols)
+        public static BitGrid<T> load<T>(Block256<T> src, ushort rows, ushort cols)
             where T : unmanaged
                 => new BitGrid<T>(src, rows, cols);
 
@@ -35,74 +35,24 @@ namespace Z0
         /// <typeparam name="N">The col type</typeparam>
         /// <typeparam name="T">The storage segment type</typeparam>
         [MethodImpl(Inline)]
-        public static BitGrid<M,N,T> load<M,N,T>(Span<T> src, M m = default, N n = default, T zero = default)
+        public static BitGrid<M,N,T> load<M,N,T>(Block256<T> src, M m = default, N n = default, T zero = default)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
         {
-            var layout = GridMap.Define(m,n,zero);
-            require(src.Length == layout.SegCount);
             return new BitGrid<M, N, T>(src);
         }
 
         [MethodImpl(NotInline)]
-        public static BitGrid<M,N,T> load<M,N,T>(M m, N n, params T[] data)
+        public static BitGrid<M,N,T> load<M,N,T>(M m, N n, Block256<T> src)
             where N : unmanaged, ITypeNat
             where M : unmanaged, ITypeNat
             where T : unmanaged
         {
-            var natbits = NatMath.mul(m,n) ;   
-            var databits = data.Length * bitsize<T>();
-            if(databits < natbits)
-                Errors.ThrowInvariantFailure($"{databits} < {natbits}");
 
-            return new BitGrid<M,N,T>(data);
+            return new BitGrid<M,N,T>(src);
         }
 
-        /// <summary>
-        /// Loads a natural bitgrid of dimensions Mx8 of type byte from primal bitvectors of length 8
-        /// </summary>
-        /// <param name="m">The row count</param>
-        /// <param name="src">The source data</param>
-        /// <typeparam name="M">The row count type</typeparam>
-        [MethodImpl(NotInline)]
-        public static BitGrid<M,N8,byte> load<M>(M m, Span<BitVector8> src)
-            where M : unmanaged, ITypeNat
-                => load<M,N8,byte>(src.AsBytes());
-
-        /// <summary>
-        /// Loads a natural bitgrid of dimensions Mx16 of type ushort from primal bitvectors of length 16
-        /// </summary>
-        /// <param name="m">The row count</param>
-        /// <param name="src">The source data</param>
-        /// <typeparam name="M">The row count type</typeparam>
-        [MethodImpl(NotInline)]
-        public static BitGrid<M,N16,ushort> load<M>(M m, Span<BitVector16> src)
-            where M : unmanaged, ITypeNat
-                => load<M,N16,ushort>(src.AsUInt16());
-
-        /// <summary>
-        /// Loads a natural bitgrid of dimensions Mx32 of type uint from primal bitvectors of length 32
-        /// </summary>
-        /// <param name="m">The row count</param>
-        /// <param name="src">The source data</param>
-        /// <typeparam name="M">The row count type</typeparam>
-        [MethodImpl(Inline)]
-        public static BitGrid<M,N32,uint> load<M>(M m, Span<BitVector32> src)
-            where M : unmanaged, ITypeNat
-                => load<M,N32,uint>(src.AsUInt32());
-
-        /// <summary>
-        /// Loads a natural bitmatrix of dimensions Mx64 of type ulong from primal bitvectors of length 64
-        /// </summary>
-        /// <param name="m">The row count</param>
-        /// <param name="src">The source data</param>
-        /// <typeparam name="M">The row count type</typeparam>
-        [MethodImpl(Inline)]
-        public static BitGrid<M,N64,ulong> load<M>(M m, Span<BitVector64> src)
-            where M : unmanaged, ITypeNat
-                => load<M,N64,ulong>(src.AsUInt64());
- 
         /// <summary>
         /// Forms a 1x64 grid from the lower 64 bits of a vector
         /// </summary>
@@ -514,8 +464,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged            
-                => src; 
- 
+                => src;  
     }
 
 }

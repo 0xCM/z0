@@ -15,26 +15,18 @@ namespace Z0
         /// <summary>
         /// Specifies the set of unsigned primal integer types
         /// </summary>
-        public static readonly Type[] UnsignedInt = 
-            array(typeof(byte),  typeof(ushort), typeof(uint), typeof(ulong));
-
-        /// <summary>
-        /// Specifies the set of signed primal integer types
-        /// </summary>
-        public static readonly Type[] SignedInt = 
-            array(typeof(sbyte), typeof(short), typeof(int),  typeof(long));
-
-        /// <summary>
-        /// Specifies the set of primal floating-point types
-        /// </summary>
-        public static readonly Type[] Floating = 
-            array(typeof(float),typeof(double));
+        static ReadOnlySpan<Type> Types =>
+            new Type[]{
+                typeof(byte), typeof(ushort), typeof(uint), typeof(ulong),
+                typeof(sbyte), typeof(short), typeof(int), typeof(long),
+                typeof(float),typeof(double)
+                };
 
         /// <summary>
         /// Specifies the set of all primal numeric types
         /// </summary>
         public static readonly HashSet<Type> All = 
-            new HashSet<Type>(concat(UnsignedInt, SignedInt, Floating));
+            new HashSet<Type>(Types.ToArray());
 
         [MethodImpl(Inline)]
         public static bool IsPrimalNumeric(this Type src)

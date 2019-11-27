@@ -73,7 +73,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public MBlock256(Block256<T> src)
         {
-            require(src.Length >= CellCount);
+            require(src.CellCount >= CellCount);
             data = src;
         }
         
@@ -173,7 +173,7 @@ namespace Z0
         {
             get
             {
-                for(var i = 0; i < data.Length; i++)
+                for(var i = 0; i < data.CellCount; i++)
                     if(gmath.nonzero(data[i]))
                         return false;
                 return true;

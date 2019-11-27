@@ -218,7 +218,7 @@ namespace Z0
             where N : unmanaged,ITypeNat
             where T : unmanaged
         {
-            random.Fill(dst.Data.Length, ref dst.Head);
+            random.Fill(dst.Data.CellCount, ref dst.Head);
             return dst;
         }
     }

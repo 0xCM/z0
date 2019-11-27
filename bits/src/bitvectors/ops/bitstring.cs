@@ -31,7 +31,7 @@ namespace Z0
         public static BitString bitstring<N,T>(BitVector<N,T> x)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => BitString.from<T>(x.Scalar, x.Width);
+                => BitString.scalar<T>(x.Scalar, x.Width);
         
         /// <summary>
         /// Extracts the represented data as a bitstring
@@ -39,7 +39,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitString bitstring<T>(BitVector<T> src)
             where T : unmanaged
-                => BitString.from<T>(src.Scalar); 
+                => BitString.scalar<T>(src.Scalar); 
 
         /// <summary>
         /// Extracts the represented data as a bitstring truncated to a specified width
@@ -47,7 +47,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitString bitstring<T>(BitVector<T> src, int width)
             where T : unmanaged
-                => BitString.from<T>(src.Scalar, width);
+                => BitString.scalar<T>(src.Scalar, width);
 
         /// <summary>
         /// Converts the vector to a bistring representation
@@ -55,7 +55,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
         public static BitString bitstring(BitVector4 x)
-            => BitString.from(x.Scalar, x.Width);
+            => BitString.scalar(x.Scalar, x.Width);
 
         /// <summary>
         /// Converts the vector to a bistring representation
@@ -63,7 +63,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
         public static BitString bitstring(BitVector8 x)
-            => BitString.from(x.Scalar);
+            => BitString.scalar(x.Scalar);
 
         /// <summary>
         /// Converts the vector to a bistring representation
@@ -71,7 +71,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
         public static BitString bitstring(BitVector16 x)
-            => BitString.from(x.Scalar);
+            => BitString.scalar(x.Scalar);
 
         /// <summary>
         /// Converts the vector to a bistring representation
@@ -79,7 +79,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
         public static BitString bitstring(BitVector32 x)
-            => BitString.from(x.Scalar);
+            => BitString.scalar(x.Scalar);
 
         /// <summary>
         /// Converts the vector to a bistring representation
@@ -87,14 +87,14 @@ namespace Z0
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
         public static BitString bitstring(BitVector64 x)
-            => BitString.from(x.Scalar);
+            => BitString.scalar(x.Scalar);
 
         /// <summary>
         /// Converts the vector to a bitstring
         /// </summary>
         [MethodImpl(Inline)]
         public static BitString bitstring(BitVector128 x)
-            => BitString.from(x.x1) + BitString.from(x.x0);
+            => BitString.scalar(x.x1) + BitString.scalar(x.x0);
 
     }
 

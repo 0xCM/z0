@@ -26,7 +26,6 @@ namespace Z0
         /// </summary>
         public static int BlockLength => Vector256<T>.Count;
 
-
         [MethodImpl(Inline)]
         public static implicit operator Span<T>(in Block256<T> src)
             => src.data;
@@ -92,9 +91,9 @@ namespace Z0
         }
 
         /// <summary>
-        /// The total number of available cells 
+        /// The number of allocated cells 
         /// </summary>
-        public int Length 
+        public int CellCount 
         {
             [MethodImpl(Inline)]
             get => data.Length;
@@ -108,6 +107,11 @@ namespace Z0
             [MethodImpl(Inline)]
             get => data.Length / BlockLength; 
         }
+
+        /// <summary>
+        /// The bit width of a block
+        /// </summary>
+        public int BlockWidth => N;
 
         /// <summary>
         /// The number of cells per block, synonymous with block length
@@ -132,8 +136,17 @@ namespace Z0
         /// </summary>
         /// <param name="blockIndex">The index of the desired block</param>
         [MethodImpl(Inline)]
-        public ref T SeekBlock(int blockIndex)
+        public ref T BlockSeek(int blockIndex)
             => ref Unsafe.Add(ref Head, blockIndex * BlockLength);
+
+        /// <summary>
+        /// Extracts a block-relative slice
+        /// </summary>
+        /// <param name="start">The block-relative index at which to begin extraction</param>
+        /// <param name="count">The number of blocks to extract</param>
+        [MethodImpl(Inline)]
+        public Block256<T> BlockSlice(int start, int count)
+            => new Block256<T>(data.Slice(start*BlockLength, BlockLength * count));
 
         /// <summary>
         /// Slices an elementwise span from the source

@@ -39,6 +39,18 @@ namespace Z0
         public static BitMatrix8 Ones => new BitMatrix8(0xFFFFFFFFFFFFFFFF);
 
         [MethodImpl(Inline)]
+        public static implicit operator BitMatrix<byte>(BitMatrix8 src)
+            => BitMatrix.load(src.data);
+
+        [MethodImpl(Inline)]
+        public static explicit operator ulong(BitMatrix8 src)
+            => BitConvert.ToUInt64(src.data);
+
+        [MethodImpl(Inline)]
+        public static explicit operator BitMatrix8(ulong src)
+            => new BitMatrix8(src);
+
+        [MethodImpl(Inline)]
         public static BitMatrix8 operator & (in BitMatrix8 A, in BitMatrix8 B)
             =>  BitMatrix.and(A,B);
 
@@ -75,47 +87,17 @@ namespace Z0
             => !(A.Equals(B));
 
         [MethodImpl(Inline)]
-        public static explicit operator ulong(BitMatrix8 src)
-            => BitConvert.ToUInt64(src.data);
-
-        [MethodImpl(Inline)]
-        public static explicit operator BitMatrix8(ulong src)
-            => new BitMatrix8(src);
-
-        [MethodImpl(Inline)]
         internal BitMatrix8(Span<byte> src)
-        {
-            this.data = src;
-        }
+            => this.data = src;
 
         [MethodImpl(Inline)]
         internal BitMatrix8(ulong src)
-        {
-            this.data = BitConvert.GetBytes(src);
-        }
-
-        /// <summary>
-        /// The number of rows in the matrix
-        /// </summary>
-        public readonly int Order
-        {
-            [MethodImpl(Inline)]
-            get => (int)N;
-        }
+            => this.data = BitConvert.GetBytes(src);
 
         public ReadOnlySpan<byte> Bytes
         {
             [MethodImpl(Inline)]
             get => data;            
-        }
-
-        /// <summary>
-        /// The underlying matrix data
-        /// </summary>
-        public BitView<ulong> Data
-        {
-            [MethodImpl(Inline)]
-            get => BitView.Over(ref uint64(ref Head));
         }
 
         /// <summary>
@@ -125,6 +107,15 @@ namespace Z0
         {
             [MethodImpl(Inline)] 
             get => ref head(data);
+        }
+
+        /// <summary>
+        /// The square matrix order
+        /// </summary>
+        public readonly int Order
+        {
+            [MethodImpl(Inline)]
+            get => (int)N;
         }
 
         /// <summary>
@@ -149,29 +140,16 @@ namespace Z0
         public ref BitVector8 this[int index]
         {
             [MethodImpl(Inline)]
-            get => ref Row(index);
+            get => ref Unsafe.As<byte,BitVector8>(ref seek(ref Head, index));
         }
 
         [MethodImpl(Inline)]
         public BitVector8 Col(int index)
             => BitVector.from(n8, Bits.gather((ulong)this, (C0 << index)));
 
-        // C0 =           [00000001 00000001 ... 00000001]
-        // C1 = C0 << 1 = [00000010 00000010 ... 00000010]
-        // C2 = C0 << 2 = [00000100 00000100 ... 00000100]
-        // ...
-        // C7 = C0 << 7 = [10000000 10000000 ... 10000000]
         const ulong C0 = 
             (1ul << 64 - 1*8) | (1ul << 64 - 2*8) | (1ul << 64 - 3*8) | (1ul << 64 - 4*8) | 
             (1ul << 64 - 5*8) | (1ul << 64 - 6*8) | (1ul << 64 - 7*8) | 1;
-
-        /// <summary>
-        /// Presents the data at a specified offset as a bitvector
-        /// </summary>
-        /// <param name="row">The row index</param>
-        [MethodImpl(Inline)]
-        public ref BitVector8 Row(int row)
-            => ref Unsafe.As<byte,BitVector8>(ref seek(ref Head, row));
 
         public override string ToString()
             => this.Format();

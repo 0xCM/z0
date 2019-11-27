@@ -130,9 +130,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         internal BitCells(Span<T> src, bool skipChecks)
-        {
-            this.data = src;
-        }
+            => this.data = src;
 
         /// <summary>
         /// The data over which the bitvector is constructed
@@ -224,11 +222,9 @@ namespace Z0
                 data.Clear();
         }
 
-
         [MethodImpl(Inline)]
         public bool Equals(in BitCells<N,T> rhs)
-            => data.Identical(rhs.data);
-           
+            => data.Identical(rhs.data);           
         
         public override bool Equals(object obj)
             => throw new NotImplementedException();

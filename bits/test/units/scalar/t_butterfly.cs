@@ -79,7 +79,7 @@ namespace Z0
                 var y = gbits.vbutterfly(w, x);
                 var xs = x.ToSpan();
                 var zs = DataBlocks.alloc<uint>(n);
-                for(var j=0; j<zs.Length; j++)
+                for(var j=0; j<zs.CellCount; j++)
                     zs[j] = gbits.butterfly(w,xs[j]);
                 var z = zs.TakeVector();
                 Claim.eq(z,y);
@@ -97,7 +97,7 @@ namespace Z0
                 var y = gbits.vbutterfly(w, x);
                 var xs = x.ToSpan();
                 var zs = DataBlocks.alloc<uint>(n);
-                for(var j=0; j<zs.Length; j++)
+                for(var j=0; j<zs.CellCount; j++)
                     zs[j] = gbits.butterfly(w,xs[j]);
                 var z = zs.TakeVector();
                 Claim.eq(z,y);
@@ -115,7 +115,7 @@ namespace Z0
                 var y = gbits.vbutterfly(w, x);
                 var xs = x.ToSpan();
                 var zs = DataBlocks.alloc<ulong>(n);
-                for(var j=0; j<zs.Length; j++)
+                for(var j=0; j<zs.CellCount; j++)
                     zs[j] = gbits.butterfly(w,xs[j]);
                 var z = zs.TakeVector();
                 Claim.eq(z,y);
@@ -133,7 +133,7 @@ namespace Z0
                 var y = gbits.vbutterfly(w, x);
                 var xs = x.ToSpan();
                 var zs = DataBlocks.alloc<ulong>(n);
-                for(var j=0; j<zs.Length; j++)
+                for(var j=0; j<zs.CellCount; j++)
                     zs[j] = gbits.butterfly(w,xs[j]);
                 var z = zs.TakeVector();
                 Claim.eq(z,y);

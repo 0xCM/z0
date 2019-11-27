@@ -55,7 +55,7 @@ namespace Z0
         public static string FormatTable<N,T>(MBlock256<N,T> src)
             where T : unmanaged
             where N: unmanaged, ITypeNat
-                => src.Format(render:x => BitString.from(x).Format());            
+                => src.Format(render:x => BitString.scalar(x).Format());            
 
     }
 

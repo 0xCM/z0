@@ -21,7 +21,7 @@ namespace Z0
             var blocklen = Block128<T>.BlockLength;                     
             
             var src = random.ConstBlocks<T>(n128,blocks);
-            Claim.eq(blocks*blocklen,src.Length);
+            Claim.eq(blocks*blocklen,src.CellCount);
                         
             var expect = DataBlocks.alloc<T>(n128,blocks);
             Claim.eq(blocks, expect.BlockCount);
@@ -44,8 +44,8 @@ namespace Z0
 
                 Claim.eq(vExpect, vActual);
             
-                vstore(vExpect, ref expect.SeekBlock(block));
-                vstore(vActual, ref actual.SeekBlock(block));
+                vstore(vExpect, ref expect.BlockSeek(block));
+                vstore(vActual, ref actual.BlockSeek(block));
             }
             Claim.eq(expect, actual);
         }
@@ -56,7 +56,7 @@ namespace Z0
             var blocklen = Block256<T>.BlockLength;                     
             
             var src = random.ConstBlocks<T>(n256,blocks);
-            Claim.eq(blocks*blocklen,src.Length);
+            Claim.eq(blocks*blocklen,src.CellCount);
                         
             var expect = DataBlocks.alloc<T>(n256, blocks);
             Claim.eq(blocks, expect.BlockCount);
@@ -79,8 +79,8 @@ namespace Z0
 
                 Claim.eq(vExpect, vActual);
             
-                vstore(vExpect, ref expect.SeekBlock(block));
-                vstore(vActual, ref actual.SeekBlock(block));
+                vstore(vExpect, ref expect.BlockSeek(block));
+                vstore(vActual, ref actual.BlockSeek(block));
             }
             Claim.eq(expect, actual);
         }
@@ -92,10 +92,10 @@ namespace Z0
             var blocklen = Block128<T>.BlockLength;                     
             
             var lhs = random.ConstBlocks<T>(n128,blocks);
-            Claim.eq(blocks*blocklen,lhs.Length);
+            Claim.eq(blocks*blocklen,lhs.CellCount);
             
             var rhs = random.ConstBlocks<T>(n128,blocks);
-            Claim.eq(blocks*blocklen,rhs.Length);
+            Claim.eq(blocks*blocklen,rhs.CellCount);
             
             var expect = DataBlocks.alloc<T>(n128,blocks);
             Claim.eq(blocks, expect.BlockCount);
@@ -119,8 +119,8 @@ namespace Z0
 
                 Claim.eq(vExpect, vActual);
             
-                vstore(vExpect, ref expect.SeekBlock(block));
-                vstore(vActual, ref actual.SeekBlock(block));
+                vstore(vExpect, ref expect.BlockSeek(block));
+                vstore(vActual, ref actual.BlockSeek(block));
             }
             Claim.eq(expect, actual);
         }
@@ -132,10 +132,10 @@ namespace Z0
             var blocklen = Block256<T>.BlockLength;                     
             
             var lhs = random.ConstBlocks<T>(n256, blocks);
-            Claim.eq(blocks*blocklen,lhs.Length);
+            Claim.eq(blocks*blocklen,lhs.CellCount);
             
             var rhs = random.ConstBlocks<T>(n256,blocks);
-            Claim.eq(blocks*blocklen,rhs.Length);
+            Claim.eq(blocks*blocklen,rhs.CellCount);
             
             var expect = DataBlocks.alloc<T>(n256,blocks);
             Claim.eq(blocks, expect.BlockCount);
@@ -159,8 +159,8 @@ namespace Z0
 
                 Claim.eq(vExpect, vActual);
             
-                vstore(vExpect, ref expect.SeekBlock(block));
-                vstore(vActual, ref actual.SeekBlock(block));
+                vstore(vExpect, ref expect.BlockSeek(block));
+                vstore(vActual, ref actual.BlockSeek(block));
             }
             Claim.eq(expect, actual);
         }

@@ -18,7 +18,7 @@ namespace Z0
         where N : unmanaged, ITypeNat
         where T : unmanaged
     {                
-        readonly Span<T> data;
+        readonly Block256<T> data;
 
         /// <summary>
         /// The grid dimension
@@ -34,12 +34,12 @@ namespace Z0
             => !BitGrid.same(g1,g2);
 
         [MethodImpl(Inline)]
-        internal BitGrid(Span<T> data)
+        internal BitGrid(Block256<T> data)
         {
             this.data = data;
         }
 
-        public Span<T> Data
+        public Block256<T> Data
         {
             [MethodImpl(Inline)]
             get => data;
@@ -48,7 +48,7 @@ namespace Z0
         public ref T Head
         {
             [MethodImpl(Inline)]
-            get => ref head(data);
+            get => ref data.Head;
         }
 
         public N BitWidth => default;
@@ -93,7 +93,7 @@ namespace Z0
             => GridMoniker.FromTypes<M,N,T>();
             
         public string Format()
-            => Data.FormatMatrixBits(natval(BitWidth));
+            => Data.Bytes.FormatMatrixBits(natval(BitWidth));
 
         [MethodImpl(Inline)]
         public bool Equals(BitGrid<M,N,T> rhs)

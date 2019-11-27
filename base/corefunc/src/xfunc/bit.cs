@@ -24,7 +24,7 @@ namespace Z0
         {
             while(src.MoveNext())
             {
-                var bs = BitString.from(src.Current);
+                var bs = BitString.scalar(src.Current);
                 for(var i = 0; i< 64; i++)
                     yield return bs[i];                                    
             }

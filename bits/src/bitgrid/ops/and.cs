@@ -14,7 +14,24 @@ namespace Z0
     partial class BitGrid
     {        
         /// <summary>
-        /// Computes the bitwise NAND between the operands
+        /// Computes the bitwise AND between the operands
+        /// </summary>
+        /// <param name="gx">The left grid</param>
+        /// <param name="gy">The right grid</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static BitGrid<M,N,T> and<M,N,T>(BitGrid<M,N,T> gx, BitGrid<M,N,T> gy)
+            where T : unmanaged
+            where M : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
+        {
+
+            return default;
+        }
+
+
+        /// <summary>
+        /// Computes the bitwise AND between the operands
         /// </summary>
         /// <param name="gx">The left grid</param>
         /// <param name="gy">The right grid</param>
@@ -25,7 +42,7 @@ namespace Z0
                 => math.and(gx,gy);
 
         /// <summary>
-        /// Computes the bitwise NAND between the operands
+        /// Computes the bitwise AND between the operands
         /// </summary>
         /// <param name="gx">The left grid</param>
         /// <param name="gy">The right grid</param>
@@ -36,7 +53,7 @@ namespace Z0
                 => math.and(gx,gy);
 
         /// <summary>
-        /// Computes the bitwise NAND between the operands
+        /// Computes the bitwise AND between the operands
         /// </summary>
         /// <param name="gx">The left grid</param>
         /// <param name="gy">The right grid</param>
@@ -47,7 +64,7 @@ namespace Z0
                 => ginx.vand<T>(gx,gy);
     
         /// <summary>
-        /// Computes the bitwise NAND between the operands
+        /// Computes the bitwise AND between the operands
         /// </summary>
         /// <param name="gx">The left grid</param>
         /// <param name="gy">The right grid</param>
@@ -58,7 +75,7 @@ namespace Z0
                 => ginx.vand<T>(gx,gy);    
 
         /// <summary>
-        /// Computes the bitwise NAND between the operands
+        /// Computes the bitwise AND between the operands
         /// </summary>
         /// <param name="gx">The left grid</param>
         /// <param name="gy">The right grid</param>
@@ -71,7 +88,7 @@ namespace Z0
                 => ginx.vand<T>(gx,gy);    
 
         /// <summary>
-        /// Computes the bitwise NAND between the operands
+        /// Computes the bitwise AND between the operands
         /// </summary>
         /// <param name="gx">The left grid</param>
         /// <param name="gy">The right grid</param>

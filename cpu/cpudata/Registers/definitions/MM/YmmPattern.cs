@@ -53,7 +53,7 @@ namespace Z0
             
             var dst = DataBlocks.cellalloc<T>(n256,Length);
             var val = first;
-            for(var i=0; i < dst.Length; i++)
+            for(var i=0; i < dst.CellCount; i++)
             {
                 dst[i] = val;
                 gmath.inc(ref val);
@@ -72,7 +72,7 @@ namespace Z0
         {
             var dst = DataBlocks.cellalloc<T>(n256, Length);
             var val = last;
-            for(var i=0; i<dst.Length; i++)
+            for(var i=0; i<dst.CellCount; i++)
             {
                 dst[i] = val;
                 gmath.dec(ref val);

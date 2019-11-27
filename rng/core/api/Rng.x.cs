@@ -27,7 +27,7 @@ namespace Z0
         /// <param name="rng"></param>
         [MethodImpl(Inline)]
         public static System.Random ToSysRand(this IPolyrand rng)
-            => SysRand.Derive(rng);
+            => SysRand.From(rng);
 
         /// <summary>
         /// Creates a polyrand based on a specified source

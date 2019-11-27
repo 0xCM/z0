@@ -76,7 +76,7 @@ namespace Z0
                 var y = Random.Blocks<T>(n);
                 var z = DataBlocks.alloc<T>(n);
                 
-                for(var j=0; j<z.Length; j++)
+                for(var j=0; j<z.CellCount; j++)
                     if(gmath.gt(x[j],y[j]))
                         z[j] = one;
 
@@ -101,7 +101,7 @@ namespace Z0
                 var y = Random.Blocks<T>(n);
                 var z = DataBlocks.alloc<T>(n);
                 
-                for(var j=0; j<z.Length; j++)
+                for(var j=0; j<z.CellCount; j++)
                     if(gmath.gt(x[j],y[j]))
                         z[j] = one;
                 

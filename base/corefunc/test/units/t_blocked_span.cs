@@ -144,12 +144,12 @@ namespace Z0.Test
             var x = DataBlocks.safeload(n128,span<int>(1,2,3,4,5,6,7,8));
 
             var block0 = x.Block(0);
-            Claim.eq(4, block0.Length);   
+            Claim.eq(4, block0.CellCount);   
             var y = DataBlocks.safeload(n128,span(1,2,3,4));         
             Claim.eq(block0, y);
 
             var block2 = x.Block(1);
-            Claim.eq(4, block2.Length);
+            Claim.eq(4, block2.CellCount);
             Claim.eq(block2,DataBlocks.partload(n128,5,6,7,8));
 
         }
@@ -169,7 +169,7 @@ namespace Z0.Test
             var src = Random.ConstBlocks<int>(n128,blocks);
             var dst = DataBlocks.alloc<int>(n128,blocks);
 
-            Claim.eq(src.Length, dst.Length);
+            Claim.eq(src.CellCount, dst.CellCount);
 
             for(int block = 0, idx = 0; block<blocks; block++, idx ++)
             {

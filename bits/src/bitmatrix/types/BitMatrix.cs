@@ -12,8 +12,8 @@ namespace Z0
     using static zfunc;
 
     /// <summary>
-    /// Defines a square bitmatrix with order determined by the primal type over
-    /// which it is defined
+    /// Defines a square bitmatrix with order determined by the primal type over which it is defined
+    /// The intent is to provide a primal bitmatrix generalization 
     /// </summary>
     [StructLayout(LayoutKind.Sequential)]
     public readonly ref struct BitMatrix<T>
@@ -64,7 +64,6 @@ namespace Z0
             [MethodImpl(Inline)]
             get => (int)N;
         }
-
 
         public ref BitVector<T> this[int row]
         {

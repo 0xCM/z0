@@ -57,7 +57,7 @@ namespace Z0
         {
             BitSize capacity = Unsafe.SizeOf<T>() * 8;
             Span<byte> bitseq = new byte[capacity*reps];            
-            var pattern = from(src);
+            var pattern = scalar(src);
             for(var i=0; i<reps; i++)
                 pattern.BitSeq.CopyTo(bitseq, i*capacity);
             return fromseq(bitseq);            
@@ -69,7 +69,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The primal source type</typeparam>
         [MethodImpl(Inline)]
-        public static BitString from<T>(T src)
+        public static BitString scalar<T>(T src)
             where T : unmanaged
                 => new BitString(BitStore.bitseq(src));                
 
@@ -79,9 +79,37 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The primal source type</typeparam>
         [MethodImpl(Inline)]
-        public static BitString from<T>(T src, int maxlen)
+        public static BitString scalar<T>(T src, int maxlen)
             where T : unmanaged
                 => new BitString(BitStore.bitseq(src,maxlen));                
+
+        /// <summary>
+        /// Constructs a bitstring from span of scalar values
+        /// </summary>
+        /// <param name="data">The source span</param>
+        /// <typeparam name="T">The primal type</typeparam>
+        [MethodImpl(Inline)]
+        public static BitString from<T>(ReadOnlySpan<T> data, int? maxbits = null)
+            where T : unmanaged
+        {
+            int segbits = bitsize<T>();
+            var bitcount = maxbits ?? segbits*data.Length;
+            Span<byte> bitseq = new byte[bitcount];
+
+            ref var dst = ref head(bitseq);
+            ref readonly var src = ref head(data);
+            var srclen = data.Length;
+
+            var k = 0;
+            for(int i=0; i<srclen; i++)
+            {
+                ref readonly var bits = ref head(BitStore.bitseq(skip(in src, i)));
+                for(var j = 0; j<segbits && k<bitcount; j++, k++)
+                    seek(ref dst, k) = skip(in bits, j);
+            }
+            
+            return new BitString(bitseq);
+        }
 
         /// <summary>
         /// Constructs a bitstring from span of scalar values

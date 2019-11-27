@@ -23,19 +23,63 @@ namespace Z0
 
         static readonly BitGridLayout<T> GridLayout = BitMatrix.layout<N,T>();
 
-        public static int RowWidth = natval<N>();
+        /// <summary>
+        /// The bit width of each row/column 
+        /// </summary>
+        public static int RowWidth 
+        {
+            [MethodImpl(Inline)]
+            get => natval<N>();
+        }
 
         /// <summary>
-        /// Computes the length of a primal span/array that is required to store a row of data
+        /// The bit width of a storage cell
+        /// </summary>
+        public static int CellWidth
+        {
+            [MethodImpl(Inline)]
+            get => bitsize<T>();
+        }
+
+        /// <summary>
+        /// The (padded) number of cells required for each row of storage
         /// </summary>
         public static int RowCellCount
         {
             [MethodImpl(Inline)]
-            get => bitsize<T>() >= natval<N>() ? 1 : (natval<N>() % bitsize<T>()) == 0 ? (natval<N>() / bitsize<T>()) : (natval<N>() / bitsize<T>()) + 1;
+            get => CellWidth >= RowWidth ? 1 : PaddingRequired ? WholeRowCells + 1 : WholeRowCells;
         }
 
-        public static int TotalCellCount => RowCellCount * RowWidth;
-    
+
+        public static int TotalCellCount
+        {
+            [MethodImpl(Inline)]
+            get => RowCellCount * RowWidth;
+        }
+
+        /// <summary>
+        /// The whole number of cells required to store a row of bits
+        /// </summary>
+        static int WholeRowCells
+        {
+            [MethodImpl(Inline)]
+            get => RowWidth / CellWidth;
+        }
+
+        static bit PaddingRequired 
+        {
+            [MethodImpl(Inline)]
+            get => RowWidth % CellWidth != 0;
+        }
+
+        [MethodImpl(Inline)]
+        static int RowOffset(int row)
+            => row*RowCellCount;
+
+        [MethodImpl(Inline)]
+        static int ColOffset(int row, int col)
+            => row*RowCellCount + col/RowWidth;
+
         /// <summary>
         /// Multiplies the left matrix by the right
         /// </summary>
@@ -74,13 +118,26 @@ namespace Z0
             get => ref head(data);
         }
 
+        [MethodImpl(Inline)]
+        Span<T> RowCells(int row)
+            => Data.Slice(RowOffset(row), RowCellCount);
+
         public bit this[int row, int col]
         {
             [MethodImpl(Inline)]
-            get => GetBit(row, col);
+            get
+            {
+                return this[row][col];
+            }
+            
 
             [MethodImpl(Inline)]
-            set => SetBit(row, col, value);
+            set
+            {
+                var cell = GridLayout.Row(row)[col];                                
+                gbits.set(ref Data[cell.Segment], (byte)cell.Offset, value);
+
+            }
         }            
 
         /// <summary>
@@ -89,10 +146,10 @@ namespace Z0
         public BitCells<N,T> this[int row]
         {
             [MethodImpl(Inline)]
-            get => RowVector(row);
+            get => new BitCells<N,T>(RowCells(row), true);
             
             [MethodImpl(Inline)]
-            set => ReplaceRow(row,value);
+            set => value.Data.CopyTo(RowCells(row));     
         }
 
         /// <summary>
@@ -113,35 +170,6 @@ namespace Z0
             get => data;
         }
 
-        [MethodImpl(Inline)]
-        readonly bit GetBit(int row, int col)
-        {
-            var cell = GridLayout.Row(row)[col];
-            return gbits.test(Data[cell.Segment], cell.Offset);                    
-        }
-
-        [MethodImpl(Inline)]
-        void SetBit(int row, int col, bit value)
-        {
-            var cell = GridLayout.Row(row)[col];
-            gbits.set(ref Data[cell.Segment], (byte)cell.Offset, value);
-        }
-                
-        /// <summary>
-        /// Retrives an identified row of bits
-        /// </summary>
-        /// <param name="row">The 0-based row index</param>
-        [MethodImpl(Inline)]
-        public BitCells<N,T> RowVector(int row)                    
-            => new BitCells<N,T>(Data.Slice(row*RowCellCount, RowCellCount));
-
-        /// <summary>
-        /// Replaces an index-identied column of data with the content of a row vector
-        /// </summary>
-        /// <param name="col">The column index</param>
-        [MethodImpl(Inline)]
-        public void ReplaceRow(int row, BitCells<N,T> src)
-            => src.Data.CopyTo(Data.Slice(row*RowCellCount, RowCellCount));     
 
         /// <summary>
         /// Replaces an index-identied column of data with the content of a column vector
@@ -185,7 +213,7 @@ namespace Z0
         {
             var sb = sbuild();
             for(var i=0; i< Order; i++)
-                 sb.AppendLine(RowVector(i).Format());
+                 sb.AppendLine(this[i].Format());
             return sb.ToString();
         }
  
@@ -193,7 +221,7 @@ namespace Z0
         {
             var dst = BitMatrix.alloc<N,T>();
             for(var row = 0; row < Order; row++)
-                dst.SetCol(row, RowVector(row));            
+                dst.SetCol(row, this[row]);            
             return dst;
         }
 

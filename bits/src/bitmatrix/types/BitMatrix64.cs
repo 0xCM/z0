@@ -29,28 +29,10 @@ namespace Z0
         /// Defines the 64x64 zero bitmatrix
         /// </summary>
         public static BitMatrix64 Zero => new BitMatrix64(new ulong[N]);
-        
-        [MethodImpl(Inline)]
-        public static BitMatrix64 Alloc()        
-            => new BitMatrix64(new ulong[N]);
-
 
         [MethodImpl(Inline)]
-        public static BitMatrix64 From(ulong[] src)        
-            => new BitMatrix64(src);
-
-
-        [MethodImpl(Inline)]
-        public static BitMatrix64 From(Span<ulong> src)        
-            => new BitMatrix64(src);
-
-        [MethodImpl(Inline)]
-        public static BitMatrix64 From(in NatSpan<N64,ulong> src)        
-            => new BitMatrix64(src);
-
-        [MethodImpl(Inline)]
-        public static BitMatrix64 From(Span<byte> src)        
-            => new BitMatrix64(src.AsUInt64());
+        public static implicit operator BitMatrix<ulong>(in BitMatrix64 src)
+            => BitMatrix.load(src.data);
 
         [MethodImpl(Inline)]
         public static BitMatrix64 operator & (BitMatrix64 A, BitMatrix64 B)
@@ -90,9 +72,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         internal BitMatrix64(Span<ulong> src)
-        {                        
-            this.data = src;
-        }
+            => this.data = src;
 
         [MethodImpl(Inline)]
         internal BitMatrix64(bit fill)
@@ -147,10 +127,10 @@ namespace Z0
         public bit this[int row, int col]
         {
             [MethodImpl(Inline)]
-            get => GetBit(row, col);
+            get => BitMask.test(data[row], col);
 
             [MethodImpl(Inline)]
-            set => SetBit(row,col,value);
+            set => data[row] = BitMask.set(data[row], (byte)col, value);
         }            
 
         /// <summary>
@@ -160,35 +140,8 @@ namespace Z0
         public ref BitVector64 this[int row]
         {
             [MethodImpl(Inline)]
-            get => ref Row(row);
+            get => ref Unsafe.As<ulong,BitVector64>(ref seek(ref Head, row));
         }
-
-        /// <summary>
-        /// Reads the bit in a specified cell
-        /// </summary>
-        /// <param name="row">The row index</param>
-        /// <param name="col">The column index</param>
-        [MethodImpl(Inline)]
-        public readonly Bit GetBit(int row, int col)
-            => BitMask.test(data[row], col);
-
-        /// <summary>
-        /// Sets the bit in a specified cell
-        /// </summary>
-        /// <param name="row">The row index</param>
-        /// <param name="col">The column index</param>
-        /// <param name="src">The source value</param>
-        [MethodImpl(Inline)]
-        public void SetBit(int row, int col, Bit src)
-            => data[row] = BitMask.set(data[row], (byte)col, src);
-
-        /// <summary>
-        /// Presents the data at a specified offset as a bitvector
-        /// </summary>
-        /// <param name="row">The row index</param>
-        [MethodImpl(Inline)]
-        public ref BitVector64 Row(int row)
-            => ref Unsafe.As<ulong,BitVector64>(ref seek(ref Head, row));
 
         [MethodImpl(Inline)]
         public readonly BitVector64 Column(int index)
@@ -208,10 +161,6 @@ namespace Z0
         public void RowSwap(int i, int j)
             => data.Swap(i,j);
 
-        [MethodImpl(Inline)] 
-        public BitVector64 Diagonal()
-            => BitMatrix.diagonal(this);
-
         public BitMatrix64 Transpose()
         {
             var dst = Replicate();
@@ -222,7 +171,7 @@ namespace Z0
 
         [MethodImpl(Inline)] 
         public readonly BitMatrix64 Replicate()
-            => From(data.ToArray()); 
+            => new BitMatrix64(data.Replicate()); 
 
         [MethodImpl(Inline)]
         public bool Equals(BitMatrix64 rhs)

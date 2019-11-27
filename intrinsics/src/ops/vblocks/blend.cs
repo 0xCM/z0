@@ -44,7 +44,7 @@ namespace Z0
         {
             var count = zb.BlockCount;
             for(var block=0; block< count; block++)
-                vstore(ginx.vblend32x8(xb.LoadVector(block), yb.LoadVector(block), zb.LoadVector(block)), ref dst.SeekBlock(block));                             
+                vstore(ginx.vblend32x8(xb.LoadVector(block), yb.LoadVector(block), zb.LoadVector(block)), ref dst.BlockSeek(block));                             
         } 
     }
 }

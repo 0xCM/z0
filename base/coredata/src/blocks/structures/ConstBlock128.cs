@@ -19,7 +19,12 @@ namespace Z0
         readonly ReadOnlySpan<T> data;
 
         /// <summary>
-        /// The number of cells in the block
+        /// The natural block width
+        /// </summary>
+        public static N128 N => default;
+
+        /// <summary>
+        /// The number of cells in a block
         /// </summary>
         public static int BlockLength => Block128<T>.BlockLength;
 
@@ -53,17 +58,28 @@ namespace Z0
             get => data;
         }
 
-        public int Length 
+        /// <summary>
+        /// The number of allocated cells
+        /// </summary>
+        public int CellCount 
         {
             [MethodImpl(Inline)]
             get => data.Length;
         }
 
+        /// <summary>
+        /// The number of covered blocks
+        /// </summary>
         public int BlockCount 
         {
             [MethodImpl(Inline)]
             get => data.Length / BlockLength; 
         }
+
+        /// <summary>
+        /// The bit width of a block
+        /// </summary>
+        public int BlockWidth => N;
 
         public bool IsEmpty
         {
@@ -84,8 +100,17 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public ref readonly T SeekBlock(int blockIndex)
-            => ref Unsafe.Add(ref Head, blockIndex*BlockLength);
+        public ref readonly T BlockSeek(int index)
+            => ref Unsafe.Add(ref Head, index*BlockLength);
+
+        /// <summary>
+        /// Extracts a block-relative slice
+        /// </summary>
+        /// <param name="offset">The block-relative offset at which to begin extraction</param>
+        /// <param name="count">The number of blocks to extract</param>
+        [MethodImpl(Inline)]
+        public ConstBlock128<T> BlockSlice(int offset, int count)
+            => new ConstBlock128<T>(data.Slice(offset*BlockLength, BlockLength * count));
 
         [MethodImpl(Inline)]
         public ReadOnlySpan<T> Slice(int start)
@@ -95,6 +120,7 @@ namespace Z0
         public ReadOnlySpan<T> Slice(int start, int length)
             => data.Slice(start,length);
             
+
         [MethodImpl(Inline)]
         public Span<T> ToSpan()
             => new Span<T>(data.ToArray());

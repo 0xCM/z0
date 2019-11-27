@@ -157,7 +157,7 @@ namespace Z0
             Block256<byte> mask = DataBlocks.cellalloc<byte>(n256,1);
 
             //For the first 128-bit lane
-            var half = mask.Length/2;
+            var half = mask.CellCount/2;
             for(byte i=0; i< half; i++)
                 mask[i] = i;
 

@@ -56,7 +56,7 @@ namespace Z0
             for(var i=0; i<SampleSize; i++)
             {
                 var x = Random.Next<T>();                
-                var bsx = BitString.from(x);
+                var bsx = BitString.scalar(x);
                 var bsxRef = bsx.Replicate();
                 Claim.eq(x,bsx.TakeScalar<T>());
                 x = gbits.rotl(x, offset);
@@ -76,8 +76,8 @@ namespace Z0
             for(var i=0; i<SampleSize; i++)
             {
                 var x = Random.Next<T>();
-                var y = BitString.from(gbits.clear(x, p0,p1));
-                var z = BitString.from(x).Clear(p0,p1);
+                var y = BitString.scalar(gbits.clear(x, p0,p1));
+                var z = BitString.scalar(x).Clear(p0,p1);
                 Claim.eq(y,z);            
             }
         }
@@ -93,7 +93,7 @@ namespace Z0
             for(byte j=0; j<8; j++)
                 view[i,j] = j % 2 == 0;
             
-            var bs = BitString.from(src);
+            var bs = BitString.scalar(src);
             for(var i=0; i< bytecount*8; i++)
                 Claim.yea(bs[i] == (i%2 == 0));
         }
@@ -107,7 +107,7 @@ namespace Z0
                 var src = Random.Next<S>();
                 Span<T> dst = new T[bitsize<S>()];   
                 gbits.unpack(src,dst);                     
-                var bs = BitString.from(src);
+                var bs = BitString.scalar(src);
                 for(var i = 0; i< bs.Length; i++)
                 {
                     var expect = bs[i] ? one<T>() : zero<T>();
@@ -158,7 +158,7 @@ namespace Z0
             {
                 var src = Random.Next<T>();
                 var r1 = gbits.rev(src);
-                var r2 = BitString.from(src).Reverse().TakeScalar<T>();
+                var r2 = BitString.scalar(src).Reverse().TakeScalar<T>();
                 Claim.eq(r1,r2);
             }
 
@@ -179,16 +179,16 @@ namespace Z0
                 var b = Random.Next<T>();
 
                 // odd a/b interspersal
-                var abOdd = BitString.from(gbits.mix(n1,a,b));
+                var abOdd = BitString.scalar(gbits.mix(n1,a,b));
 
                 // even a/b interspersal
-                var abEven = BitString.from(gbits.mix(n0,a,b));
+                var abEven = BitString.scalar(gbits.mix(n0,a,b));
 
                 // even/odd bits for a/b via bitstring
-                var bsaEven = BitString.from(a).Even();
-                var bsaOdd = BitString.from(a).Odd();
-                var bsbEven = BitString.from(b).Even();
-                var bsbOdd = BitString.from(b).Odd();
+                var bsaEven = BitString.scalar(a).Even();
+                var bsaOdd = BitString.scalar(a).Odd();
+                var bsbEven = BitString.scalar(b).Even();
+                var bsbOdd = BitString.scalar(b).Odd();
                 
                 // bitstring reference interspersal for the even bits
                 var bsEven = bsaEven.Intersperse(bsbEven);                
@@ -222,7 +222,7 @@ namespace Z0
                 var x = Random.Next<T>();
                 var xpos = gbits.msbpos(x);
                 var xcount = gbits.nlz(x);
-                var bs = BitString.from(x);
+                var bs = BitString.scalar(x);
                 var bscount = bs.Nlz();
                 Claim.eq(xcount, bscount);
                 var bspos = bs.Length - 1 - bscount;
@@ -238,7 +238,7 @@ namespace Z0
                 var x = Random.Next<T>();
                 var xpos = gbits.lsbpos(x);
                 var xcount = gbits.ntz(x);
-                var bs = BitString.from(x);
+                var bs = BitString.scalar(x);
                 var bscount = bs.Ntz();
                 Claim.eq(xcount, bscount);
                 var bspos = bscount;
@@ -272,7 +272,7 @@ namespace Z0
 
                 s0.Reverse();
                 var textA = s0.Format();
-                var textB = BitString.from(a).Format();
+                var textB = BitString.scalar(a).Format();
                 Claim.eq(textA, textB);
             }
         }
@@ -307,7 +307,7 @@ namespace Z0
         {
             var width = bitsize<T>();
 
-            var bs0 = BitString.from(gmath.maxval<T>());
+            var bs0 = BitString.scalar(gmath.maxval<T>());
             var bv0 = bs0.ToBitVector<T>();
 
             Claim.eq(width, bs0.PopCount());

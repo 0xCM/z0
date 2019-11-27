@@ -155,7 +155,7 @@ namespace Z0
                 var vY = ginx.vload(N, in head(srcY));
                 
                 var dstExpect = DataBlocks.alloc<T>(N);
-                for(var i=0; i< dstExpect.Length; i++)
+                for(var i=0; i< dstExpect.CellCount; i++)
                     dstExpect[i] = gmath.and(srcX[i], srcY[i]);
                 var expect = ginx.vload(N, in head(dstExpect));
                 var actual = ginx.vand(vX,vY);
@@ -174,7 +174,7 @@ namespace Z0
                 var vX = ginx.vload(N, in head(srcX));
                 var vY = ginx.vload(N, in head(srcY));
                 var dstExpect = DataBlocks.alloc<T>(N);
-                for(var i=0; i< dstExpect.Length; i++)
+                for(var i=0; i< dstExpect.CellCount; i++)
                     dstExpect[i] = gmath.and(srcX[i], srcY[i]);
                 var expect = ginx.vload(N, in head(dstExpect));
                 var actual = ginx.vand(vX,vY);

@@ -17,7 +17,7 @@ namespace Z0
     public readonly struct EnumValues<E>
         where E : Enum
     {
-        internal static readonly EnumValues<E> TheOnly = default;
+        internal static EnumValues<E> TheOnly => default;
 
         static readonly E[] Cache
             = typeof(E).GetEnumValues().AsQueryable().Cast<E>().Distinct().ToArray();
@@ -48,9 +48,11 @@ namespace Z0
         public ReadOnlySpan<E> ToSpan()
             => Cache;
 
-        [MethodImpl(Inline)]
-        public IReadOnlyDictionary<string,NamedValue<E>> NamedValues()
-            => NameValueCache;
+        public IReadOnlyDictionary<string,NamedValue<E>> NamedValues
+        {
+            [MethodImpl(Inline)]
+            get => NameValueCache;
+        }
         
         public IEnumerable<E> Enumerate()
             => new EnumValueEnumerator<E>();         
@@ -67,14 +69,12 @@ namespace Z0
         where T : unmanaged
 
     {
-        internal static readonly EnumValues<E,T> TheOnly = default;
+        internal static EnumValues<E,T> TheOnly => default;
 
-        static readonly EnumValues<E> Values = EnumValues<E>.TheOnly;
+        static EnumValues<E> Values => EnumValues<E>.TheOnly;
 
         static readonly Dictionary<E,T> ScalarIndex
             = Values.ToArray().Select(e => (e, (T)Convert.ChangeType(e,typeof(T)))).ToDictionary();
-
-        static readonly T[] ScalarCache = ScalarIndex.Values.ToArray();
         
         static readonly NamedValue<T>[] NamedScalarCache 
             = ScalarIndex.Select(x => new NamedValue<T>(x.Key.ToString(), x.Value)).ToArray();
@@ -83,17 +83,21 @@ namespace Z0
         public static implicit operator EnumValues<E>(EnumValues<E,T> src)
             => Values;
 
-        [MethodImpl(Inline)]
-        public ReadOnlySpan<E> ToSpan()
-            => Values.ToSpan();
+        public ReadOnlySpan<E> ValueSpan
+        {
+            [MethodImpl(Inline)]
+            get => EnumValues<E>.TheOnly.ToSpan();
+        }
 
-        [MethodImpl(Inline)]
-        public ReadOnlySpan<T> ToScalarSpan()
-            => ScalarCache;
+        public ReadOnlySpan<T> ScalarSpan
+        {
+            [MethodImpl(Inline)]
+            get => ScalarIndex.Values.ToArray();
+        }
     
         [MethodImpl(Inline)]
         public Option<E> Parse(string src)
-            => EnumValues<E>.TheOnly.Parse(src);
+            => Values.Parse(src);
 
         [MethodImpl(Inline)]
         public T ToScalar(E src)
@@ -104,19 +108,16 @@ namespace Z0
                 return (T)Convert.ChangeType(src,typeof(T));
         }
 
-        // [MethodImpl(Inline)]
-        // public int ToIndex(E value)
-        //     => Values.ToIndex(value);
+        public IReadOnlyDictionary<string,NamedValue<E>> NamedValues
+        {
+            [MethodImpl(Inline)]
+            get => Values.NamedValues;
+        }
 
-        [MethodImpl(Inline)]
-        public IReadOnlyDictionary<string,NamedValue<E>> NamedValues()
-            => Values.NamedValues();
-
-        [MethodImpl(Inline)]
-        public ReadOnlySpan<NamedValue<T>> NamedScalars()
-            => NamedScalarCache;
-
-        public IEnumerable<E> EnumerateValues()
-            => Values.Enumerate();
+        public ReadOnlySpan<NamedValue<T>> NamedScalars
+        {
+            [MethodImpl(Inline)]
+            get => NamedScalarCache;
+        }
     }
 }

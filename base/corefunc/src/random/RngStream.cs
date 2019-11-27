@@ -18,7 +18,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static IRandomStream<T> From<T>(IEnumerable<T> src, RngKind rng)
             where T : struct
-                =>  new RandomStream<T>(rng,src);
+                => new RandomStream<T>(rng,src);
     }
 
     /// <summary>
@@ -49,7 +49,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public T Next()
             => src.First();
-
+            
         IEnumerator IEnumerable.GetEnumerator()
             => src.GetEnumerator();
     }

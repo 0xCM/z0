@@ -21,7 +21,7 @@ namespace Z0
         public static int length<S,T>(in Block64<S> lhs, in Block64<T> rhs)
             where S : unmanaged
             where T : unmanaged
-                => lhs.Length == rhs.Length ? lhs.Length : badsize<int>(lhs.Length,rhs.Length);
+                => lhs.CellCount == rhs.CellCount ? lhs.CellCount : badsize<int>(lhs.CellCount,rhs.CellCount);
 
         /// <summary>
         /// Returns the length of spans of equal length; otherwise raises an error
@@ -32,7 +32,7 @@ namespace Z0
         public static int length<S,T>(in ConstBlock64<S> lhs, in ConstBlock64<T> rhs)
             where S : unmanaged
             where T : unmanaged
-                => lhs.Length == rhs.Length ? lhs.Length : badsize<int>(lhs.Length,rhs.Length);
+                => lhs.CellCount == rhs.CellCount ? lhs.CellCount : badsize<int>(lhs.CellCount,rhs.CellCount);
 
         /// <summary>
         /// Returns the length of spans of equal length; otherwise raises an error
@@ -43,7 +43,7 @@ namespace Z0
         public static int length<S,T>(in Block128<S> lhs, in Block128<T> rhs)
             where S : unmanaged
             where T : unmanaged
-                => lhs.Length == rhs.Length ? lhs.Length : badsize<int>(lhs.Length,rhs.Length);
+                => lhs.CellCount == rhs.CellCount ? lhs.CellCount : badsize<int>(lhs.CellCount,rhs.CellCount);
 
         /// <summary>
         /// Returns the length of spans of equal length; otherwise raises an error
@@ -54,7 +54,7 @@ namespace Z0
         public static int length<S,T>(in ConstBlock128<S> lhs, in ConstBlock128<T> rhs)
             where S : unmanaged
             where T : unmanaged
-                => lhs.Length == rhs.Length ? lhs.Length : badsize<int>(lhs.Length,rhs.Length);
+                => lhs.CellCount == rhs.CellCount ? lhs.CellCount : badsize<int>(lhs.CellCount,rhs.CellCount);
 
         /// <summary>
         /// Returns the length of spans of equal length; otherwise raises an error
@@ -65,7 +65,7 @@ namespace Z0
         public static int length<S,T>(in Block256<S> lhs, in Block256<T> rhs)
             where S : unmanaged
             where T : unmanaged
-                => lhs.Length == rhs.Length ? lhs.Length : badsize<int>(lhs.Length,rhs.Length);
+                => lhs.CellCount == rhs.CellCount ? lhs.CellCount : badsize<int>(lhs.CellCount,rhs.CellCount);
 
         /// <summary>
         /// Returns the length of spans of equal length; otherwise raises an error
@@ -76,7 +76,7 @@ namespace Z0
         public static int length<S,T>(in ConstBlock256<S> lhs, in ConstBlock256<T> rhs)
             where S : unmanaged
             where T : unmanaged
-                => lhs.Length == rhs.Length ? lhs.Length : badsize<int>(lhs.Length,rhs.Length);
+                => lhs.CellCount == rhs.CellCount ? lhs.CellCount : badsize<int>(lhs.CellCount,rhs.CellCount);
 
     }
 

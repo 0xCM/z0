@@ -26,7 +26,6 @@ namespace Z0
         /// </summary>
         public static int BlockLength => Vector128<T>.Count;
 
-
         [MethodImpl(Inline)]
         public static implicit operator Span<T>(in Block128<T> src)
             => src.data;
@@ -86,9 +85,9 @@ namespace Z0
         }
 
         /// <summary>
-        /// The total number of available cells 
+        /// The number of allocated cells 
         /// </summary>
-        public int Length 
+        public int CellCount 
         {
             [MethodImpl(Inline)]
             get => data.Length;
@@ -102,6 +101,11 @@ namespace Z0
             [MethodImpl(Inline)]
             get => data.Length / BlockLength; 
         }
+
+        /// <summary>
+        /// The bit width of a block
+        /// </summary>
+        public int BlockWidth => N;
 
         /// <summary>
         /// The number of cells per block, synonymous with block length
@@ -124,10 +128,19 @@ namespace Z0
         /// <summary>
         /// Returns the leading cell of an index-identified block
         /// </summary>
-        /// <param name="blockIndex">The block index, a number in the range 0..k-1 where k is the total number of covered blocks</param>
+        /// <param name="index">The block index, a number in the range 0..k-1 where k is the total number of covered blocks</param>
         [MethodImpl(Inline)]
-        public ref T SeekBlock(int blockIndex)
-            => ref Unsafe.Add(ref Head, blockIndex*BlockLength); 
+        public ref T BlockSeek(int index)
+            => ref Unsafe.Add(ref Head, index*BlockLength); 
+
+        /// <summary>
+        /// Extracts a block-relative slice
+        /// </summary>
+        /// <param name="offset">The block-relative offset at which to begin extraction</param>
+        /// <param name="count">The number of blocks to extract</param>
+        [MethodImpl(Inline)]
+        public Block128<T> BlockSlice(int offset, int count)
+            => new Block128<T>(data.Slice(offset*BlockLength, BlockLength * count));
 
         /// <summary>
         /// Returns an index-identified block
@@ -145,10 +158,16 @@ namespace Z0
         public Span<T> Slice(int offset)
             => data.Slice(offset);
             
+        /// <summary>
+        /// Extracts an element-relative slice
+        /// </summary>
+        /// <param name="offset">The element index at which to begin extraction</param>
+        /// <param name="length">The number of elements to extract</param>
         [MethodImpl(Inline)]
         public Span<T> Slice(int offset, int length)
             => data.Slice(offset,length);
-                    
+
+
         [MethodImpl(Inline)]
         public T[] ToArray()
             => data.ToArray();   

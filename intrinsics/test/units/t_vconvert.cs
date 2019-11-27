@@ -39,7 +39,7 @@ namespace Z0
             where T : unmanaged
         {
             var srcType = moniker<S>();
-            var srcCount = x.Length;
+            var srcCount = x.CellCount;
             var dstType = moniker<T>();
             var dstCount = y.Length();
             var srcWidth = srcCount * bitsize<S>();

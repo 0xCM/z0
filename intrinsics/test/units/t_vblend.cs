@@ -62,7 +62,7 @@ namespace Z0
                 var m = DataPatterns.blendspec(n256,n64,false);
 
                 var es = DataBlocks.alloc<ulong>(n);
-                for(var i=0; i<es.Length; i++)
+                for(var i=0; i<es.CellCount; i++)
                     es[i] = odd(i) ? ys[i] : xs[i];
                 var expect = es.TakeVector();
                 var actual = ginx.vblend32x8(x,y,m);

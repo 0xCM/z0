@@ -19,7 +19,7 @@ namespace Z0
             var dst = new byte[256];
             for(var i=0; i<=255; i++)
             {
-                var bs = BitString.from(i);
+                var bs = BitString.scalar(i);
                 dst[i] = (byte)bs.PopCount();
             }
             return dst;

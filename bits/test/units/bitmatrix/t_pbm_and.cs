@@ -66,7 +66,7 @@ namespace Z0
                 var B = Random.BitMatrix64();
                 var C = A & B;
 
-                var D = BitMatrix64.From(mathspan.and(A.Bytes, B.Bytes));
+                var D = BitMatrix.primal(n64,mathspan.and(A.Bytes, B.Bytes));
                 Claim.yea(C == D);
             }
         }

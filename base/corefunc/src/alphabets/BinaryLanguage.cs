@@ -35,7 +35,7 @@ namespace Z0
             var count = Pow2.pow(length) - 1;
             for(var i=0ul; i <= count; i++)
             {
-                var bs = BitString.from(i);
+                var bs = BitString.scalar(i);
                 var bsfmt = bs.Format(true).PadLeft(length, '0');
                 yield return BitString.parse(bsfmt);
             }

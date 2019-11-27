@@ -52,7 +52,7 @@ namespace Z0
             var a = new ulong[64];
             for(var i = 0; i<64; i++)
                 a[i] = ~ c[i];
-            var b = BitMatrix64.From(a);
+            var b = BitMatrix.primal(n64,a);
             Claim.yea(b == ~c);        
         }
 

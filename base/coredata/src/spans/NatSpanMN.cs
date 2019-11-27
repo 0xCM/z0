@@ -114,7 +114,7 @@ namespace Z0
         [MethodImpl(Inline)]
         internal NatSpan(Block256<T> src)
         {
-            require(src.Length == CellCount, $"length(src) = {src.Length} != {CellCount} = SpanLength");         
+            require(src.CellCount == CellCount, $"length(src) = {src.CellCount} != {CellCount} = SpanLength");         
             this.data = src.Data;
         }
 

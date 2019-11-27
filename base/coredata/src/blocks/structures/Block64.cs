@@ -52,11 +52,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bool operator != (in Block64<T> lhs, in Block64<T> rhs)
             => lhs.data != rhs.data;
-        
-        [MethodImpl(Inline)]
-        public static bool Aligned(int length)
-            => length % BlockLength == 0;
-            
+                    
         [MethodImpl(Inline)]
         internal Block64(Span<T> src)
         {
@@ -90,7 +86,10 @@ namespace Z0
             get => data;
         }
 
-        public int Length 
+        /// <summary>
+        /// The number of allocated cells
+        /// </summary>
+        public int CellCount 
         {
             [MethodImpl(Inline)]
             get => data.Length;
@@ -104,6 +103,11 @@ namespace Z0
             [MethodImpl(Inline)]
             get => data.Length / BlockLength; 
         }
+
+        /// <summary>
+        /// The bit width of a block
+        /// </summary>
+        public int BlockWidth => N;
 
         /// <summary>
         /// The number of cells per block, synonymous with block length
@@ -123,10 +127,19 @@ namespace Z0
         /// <summary>
         /// Returns the leading cell of an index-identified block
         /// </summary>
-        /// <param name="blockIndex">The block index, a number in the range 0..k-1 where k is the total number of covered blocks</param>
+        /// <param name="index">The block index, a number in the range 0..k-1 where k is the total number of covered blocks</param>
         [MethodImpl(Inline)]
-        public ref T SeekBlock(int blockIndex)
-            => ref Unsafe.Add(ref Head, blockIndex*BlockLength); 
+        public ref T BlockSeek(int index)
+            => ref Unsafe.Add(ref Head, index*BlockLength); 
+
+        /// <summary>
+        /// Extracts a block-relative slice
+        /// </summary>
+        /// <param name="offset">The block-relative offset at which to begin extraction</param>
+        /// <param name="count">The number of blocks to extract</param>
+        [MethodImpl(Inline)]
+        public Block64<T> BlockSlice(int offset, int count)
+            => new Block64<T>(data.Slice(offset*BlockLength, BlockLength * count));
 
         [MethodImpl(Inline)]
         public Span<T> Slice(int offset)

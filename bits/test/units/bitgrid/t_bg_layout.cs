@@ -40,7 +40,7 @@ namespace Z0
             var segs = (points >> segorder) + (points % segwidth != 0 ? 1 : 0);
             Claim.eq(map.SegCount, segs);
         
-            var src = Random.Span<ulong>(segs);
+            var src = Random.Blocks<ulong>(n256,1);
             var bg = BitGrid.load(src,M,N);
 
             for(var row = 0; row< M; row++)

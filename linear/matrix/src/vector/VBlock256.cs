@@ -64,13 +64,13 @@ namespace Z0
         public int Count
         {
             [MethodImpl(Inline)]
-            get => data.Length;            
+            get => data.CellCount;            
         }
 
         public int Length
         {
             [MethodImpl(Inline)]
-            get => data.Length;
+            get => data.CellCount;
         }
 
         public Span<T> Unblocked

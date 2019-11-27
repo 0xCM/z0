@@ -84,16 +84,13 @@ namespace Z0
         /// The encapsulated value
         /// </summary>
         public readonly E Value;
-
-
-        static readonly EnumValues<E,T> _Values = EnumValues.Get<E,T>();
-
+        
         public static ReadOnlySpan<E> Values 
-            => _Values.ToSpan();
+            => EnumValues.Get<E,T>().ValueSpan;
         
         [MethodImpl(Inline)]
         public static Option<EnumG<E,T>> Parse(string Label)
-            => _Values.Parse(Label).TryMap(x => new EnumG<E, T>(x));
+            => EnumValues.Get<E,T>().Parse(Label).TryMap(x => new EnumG<E, T>(x));
 
         /// <summary>
         /// Implicitly forms a generic enum representation from a source value
@@ -135,7 +132,10 @@ namespace Z0
         /// The underlying scalar value of the enum
         /// </summary>
         public T Scalar
-            => _Values.ToScalar(Value);
+        {
+            [MethodImpl(Inline)]
+            get => EnumValues.Get<E,T>().ToScalar(Value);
+        }
 
         /// <summary>
         /// The identifying label

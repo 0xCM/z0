@@ -249,7 +249,7 @@ namespace Z0
             var chop = maxval<T>();
             
             //For the first 128-bit lane
-            var half = mask.Length/2;
+            var half = mask.CellCount/2;
             for(byte i=0; i< half; i++)
             {
                 if(i % 2 != 0)

@@ -120,7 +120,7 @@ namespace Z0.Test
             var dstA = lhs.Replicate();
             vblock.sub(lhs, rhs, dstA);
             var dstB = DataBlocks.alloc<T>(n256,lhs.BlockCount);
-            for(var i = 0; i < dstA.Length; i++)
+            for(var i = 0; i < dstA.CellCount; i++)
                 dstB[i] = gmath.sub(lhs[i], rhs[i]);
             Claim.yea(dstA.Identical(dstB));
             TypeCaseEnd<T>();

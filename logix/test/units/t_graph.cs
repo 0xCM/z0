@@ -39,7 +39,7 @@ namespace Z0.Logix
             // a) one node per level
             // b) Except for the last level, the node on level i is directly 
             // connected to a single node at level i + 1 or greater
-            var m = BitMatrix64.Alloc();
+            var m = BitMatrix.alloc(n64);
             m[first] = Pow2.T01;
             m[last] = 0;
             for(var i=1; i<last; i++)

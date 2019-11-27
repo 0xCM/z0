@@ -158,7 +158,7 @@ namespace Z0
             var yb = Random.Blocks<T>(n,blocks);
             var zb = DataBlocks.alloc<T>(n,blocks);
             var opcount = 0;
-            var cellcount = xb.Length;
+            var cellcount = xb.CellCount;
 
             counter.Start();
             for(var i=0; i<CycleCount; i++, opcount += cellcount)
@@ -181,7 +181,7 @@ namespace Z0
             var yb = Random.Blocks<T>(n,blocks);
             var zb = DataBlocks.alloc<T>(n,blocks);
             var opcount = 0;
-            var cellcount = xb.Length;
+            var cellcount = xb.CellCount;
 
             counter.Start();
             for(var i=0; i<CycleCount; i++, opcount += cellcount)
@@ -225,7 +225,7 @@ namespace Z0
                 var vY = srcY.TakeVector();
                 
                 var dstExpect = DataBlocks.alloc<T>(n);
-                for(var i=0; i< dstExpect.Length; i++)
+                for(var i=0; i< dstExpect.CellCount; i++)
                     dstExpect[i] = gmath.xor(srcX[i], srcY[i]);
                 
                 var expect = dstExpect.TakeVector();
@@ -245,7 +245,7 @@ namespace Z0
                 var vY = srcY.TakeVector();
 
                 var dstExpect = DataBlocks.alloc<T>(n);
-                for(var i=0; i< dstExpect.Length; i++)
+                for(var i=0; i< dstExpect.CellCount; i++)
                     dstExpect[i] = gmath.xor(srcX[i], srcY[i]);
                 
                 var expect = dstExpect.TakeVector();

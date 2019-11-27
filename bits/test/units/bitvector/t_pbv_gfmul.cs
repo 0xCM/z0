@@ -99,7 +99,7 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where T : unmanaged
         {
-            var bs = BitString.from(p.Scalar).Truncate(p.Degree + 1);
+            var bs = BitString.scalar(p.Scalar).Truncate(p.Degree + 1);
             Claim.eq(bs, match);  
         }
     }

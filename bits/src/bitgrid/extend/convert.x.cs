@@ -74,62 +74,20 @@ namespace Z0
                 => BitMatrix.load<N,T>(src.Data);
 
         [MethodImpl(Inline)]
-        public static BitGrid<N8,N8, T> ToBitGrid<T>(this BitMatrix<T> src, N8 m)
-            where T : unmanaged
-                => BitGrid.load(src.Data,m,m);
-
-        [MethodImpl(Inline)]
-        public static BitGrid<N16,N16, T> ToBitGrid<T>(this BitMatrix<T> src, N16 n)
-            where T : unmanaged
-                => BitGrid.load(src.Data,n,n);
-
-        [MethodImpl(Inline)]
-        public static BitGrid<N32,N32, T> ToBitGrid<T>(this BitMatrix<T> src, N32 n)
-            where T : unmanaged
-                => BitGrid.load(src.Data,n,n);
-
-        [MethodImpl(Inline)]
-        public static BitGrid<N64,N64, T> ToBitGrid<T>(this BitMatrix<T> src, N64 n)
-            where T : unmanaged
-                => BitGrid.load(src.Data,n,n);
-
-        /// <summary>
-        /// Represents the source matrix as a natural bitgrid of dimension 8x8 over cells of width 8
-        /// </summary>
-        /// <param name="src">The source matrix</param>
-        /// <param name="m">The target row count</param>
-        /// <param name="n">The target column count</param>
-        [MethodImpl(Inline)]
-        public static BitGrid<N8,N8, byte> ToBitGrid(this BitMatrix8 src, N8 m, N8 n = default)
-            => BitGrid.load(src.data,n,n);
-
-        /// <summary>
-        /// Represents the source matrix as a generic bitgrid of dimension 8x8 over cells of width 8
-        /// </summary>
-        /// <param name="src">The source matrix</param>
-        [MethodImpl(Inline)]
-        public static BitGrid<byte> ToBitGrid(this BitMatrix8 src)
-            => BitGrid.load(src.data, 8,8);
-
-        [MethodImpl(Inline)]
         public static BitGrid256<N16,N16,ushort> ToBitGrid(this BitMatrix16 src)
             => ginx.vload(n256, src.Data);
         
-        [MethodImpl(Inline)]
-        public static BitGrid<N32,N32,uint> ToBitGrid(this BitMatrix32 src, N32 n)
-            => BitGrid.load(src.Data,n,n);
-
         /// <summary>
         /// Represents the source matrix as a generic bitgrid of dimension 32x32 over cells of width 32
         /// </summary>
         /// <param name="src">The source matrix</param>
         [MethodImpl(Inline)]
         public static BitGrid<uint> ToBitGrid(this BitMatrix32 src)
-            => BitGrid.load(src.Data, 32,32);
+            => BitGrid.load(DataBlocks.load(n256,src.Data),32,32);
 
         [MethodImpl(Inline)]
         public static BitGrid<N64,N64,ulong> ToBitGrid(this BitMatrix64 src, N64 n)
-            => BitGrid.load(src.Data,n,n);
+            => BitGrid.load(DataBlocks.load(n256,src.Data),n,n);
 
         /// <summary>
         /// Represents the source matrix as a generic bitgrid of dimension 64x64 over cells of width 64
@@ -137,7 +95,7 @@ namespace Z0
         /// <param name="src">The source matrix</param>
         [MethodImpl(Inline)]
         public static BitGrid<ulong> ToBitGrid(this BitMatrix64 src)
-            => BitGrid.load(src.Data, 64,64);
+            => BitGrid.load(DataBlocks.load(n256,src.Data),64,64);
 
         /// <summary>
         /// Represents the source value as a 32-bit natural bitgrid of dimension 1x32 

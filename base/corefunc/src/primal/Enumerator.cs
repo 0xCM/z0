@@ -19,19 +19,11 @@ namespace Z0
     readonly struct EnumValueEnumerator<E> : IEnumerable<E>
         where E : Enum
     {
-        static readonly EnumValues<E> Values = EnumValues<E>.TheOnly;
-
-        static readonly E[] Cache
-            = Values.ToArray();
-
-        static IEnumerable<E> All
-            => Cache;
+        static EnumValues<E> Values => EnumValues<E>.TheOnly;
          
-        public IEnumerator<E> GetEnumerator()
-            => All.GetEnumerator();
+        public IEnumerator<E> GetEnumerator() => Values.Enumerate().GetEnumerator();
 
-        IEnumerator IEnumerable.GetEnumerator()
-            => GetEnumerator();
+        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
     }
 
 }

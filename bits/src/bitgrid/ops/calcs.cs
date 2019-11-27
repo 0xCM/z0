@@ -65,8 +65,7 @@ namespace Z0
         }
 
         /// <summary>
-        /// Computes the number of segments required to cover a grid, predicated on the 
-        /// bit-width of the parametric storage segment type
+        /// Computes the number of segments required to cover a grid with specifed storage cell type and dimension
         /// </summary>
         /// <param name="rows">The number of rows in the grid</param>
         /// <param name="cols">The number of columns in the grid</param>
@@ -75,7 +74,19 @@ namespace Z0
         public static int segcount<T>(ushort rows, ushort cols)
             where T : unmanaged
                 => segcount(rows,cols, (ushort)bitsize<T>());
-        
+
+        /// <summary>
+        /// Calculates the number of 256-bit blocks reqired to cover a grid of the specified dimension
+        /// </summary>
+        /// <param name="rows">The row count</param>
+        /// <param name="cols">The col count</param>
+        /// <param name="block">The block size</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static int blockcount<T>(N256 block, ushort rows, ushort cols)
+            where T : unmanaged
+                => DataBlocks.blockalign<T>(block, segcount<T>(rows,cols));
+
         /// <summary>
         /// Computes the number of segments required cover a grid as characterized by parametric type information
         /// </summary>

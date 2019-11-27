@@ -17,6 +17,6 @@ partial class zfunc
     [MethodImpl(Inline)]
     public static BitString bitstring<T>(T src)
         where T : unmanaged
-            => BitString.from(src);
+            => BitString.scalar(src);
 
 }

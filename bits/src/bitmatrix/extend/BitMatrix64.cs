@@ -26,7 +26,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitMatrix64 ToBitMatrix(this Perm<N64> perm)            
         {
-            var dst = BitMatrix64.Alloc();
+            var dst = BitMatrix.alloc(n64);
             for(var row = 0; row<perm.Length; row++)
                 dst[row,perm[row]] = Bit.On;
             return dst;

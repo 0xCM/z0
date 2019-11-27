@@ -59,7 +59,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static string Format(this Blend4x32 src)                
-            => BitString.from((byte)src).Format(true);
+            => BitString.scalar((byte)src).Format(true);
 
         /// <summary>
         /// Defines a shuffle spec from a permutation
@@ -124,7 +124,7 @@ namespace Z0
         public static Vector256<T> LoadVector<T>(this in ConstBlock256<T> src, int block = 0)            
             where T : unmanaged      
         {      
-            ginx.vload(in src.SeekBlock(block), out Vector256<T> x);
+            ginx.vload(in src.BlockSeek(block), out Vector256<T> x);
             return x;
         }
 
@@ -132,7 +132,7 @@ namespace Z0
         public static Vector128<T> LoadVector<T>(this in ConstBlock128<T> src, int block = 0)            
             where T : unmanaged      
         {      
-            ginx.vload(in src.SeekBlock(block), out Vector128<T> x);
+            ginx.vload(in src.BlockSeek(block), out Vector128<T> x);
             return x;
         }
 
@@ -185,7 +185,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<T> LoadVector<T>(this in Block128<T> src, int block = 0)            
             where T : unmanaged            
-                => ginx.vload(n128, in src.SeekBlock(block));
+                => ginx.vload(n128, in src.BlockSeek(block));
 
         /// <summary>
         /// Loads a 256-bit vector from a blocked span
@@ -196,7 +196,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<T> LoadVector<T>(this in Block256<T> src, int block = 0)            
             where T : unmanaged            
-                => ginx.vload(n256, in src.SeekBlock(block));
+                => ginx.vload(n256, in src.BlockSeek(block));
 
         /// <summary>
         /// Specifies the length, i.e. the number of components, of an
@@ -245,7 +245,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<T> TakeVector<T>(this in Block256<T> src, int block = 0)
             where T : unmanaged
-                => ginx.vload(n256, in src.SeekBlock(block));
+                => ginx.vload(n256, in src.BlockSeek(block));
 
         /// <summary>
         /// Loads a 128-bit cpu vector from a compatibly-blocked span
@@ -256,7 +256,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<T> TakeVector<T>(this in Block128<T> src, int block = 0)
             where T : unmanaged
-                => ginx.vload(n128, in src.SeekBlock(block));
+                => ginx.vload(n128, in src.BlockSeek(block));
 
         /// <summary>
         /// Combines two 128-bit source vectors into a 128-bit target vector via a mapping function

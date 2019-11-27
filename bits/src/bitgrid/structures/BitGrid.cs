@@ -16,7 +16,7 @@ namespace Z0
     public readonly ref struct BitGrid<T>
         where T : unmanaged
     {                
-        readonly Span<T> data;
+        readonly Block256<T> data;
 
         /// <summary>
         /// The number of grid rows
@@ -37,14 +37,14 @@ namespace Z0
             => !g1.Equals(g2);
         
         [MethodImpl(Inline)]
-        internal BitGrid(Span<T> data, ushort rows, ushort width)
+        internal BitGrid(Block256<T> data, ushort rows, ushort width)
         {
             this.data = data;
             this.RowCount = rows;
             this.ColCount = width;
         }
 
-        public Span<T> Data
+        public Block256<T> Data
         {
             [MethodImpl(Inline)]
             get => data;
@@ -53,7 +53,7 @@ namespace Z0
         public ref T Head
         {
             [MethodImpl(Inline)]
-            get => ref head(data);
+            get => ref data.Head;
         }
         
         /// <summary>
@@ -62,11 +62,23 @@ namespace Z0
         public int CellCount
         {
             [MethodImpl(Inline)]
-            get => data.Length;
+            get => data.CellCount;
+        }
+
+        public int BlockCount
+        {
+            [MethodImpl(Inline)]
+            get => data.BlockCount;
+        }
+
+        public int BlockWidth
+        {
+            [MethodImpl(Inline)]
+            get => data.BlockWidth;
         }
 
         public readonly GridMoniker<T> Moniker
-            => GridMoniker.FromDim<T>(RowCount,ColCount);
+            => GridMoniker.FromDim<T>(RowCount, ColCount);
 
         public bit this[int row, int col]
         {

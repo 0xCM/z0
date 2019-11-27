@@ -5,8 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Numerics;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     using System.Runtime.Serialization;
         
@@ -56,7 +54,5 @@ namespace Z0
 
         public override string ToString()
             => Message.ToString();
-
     }
-
 }

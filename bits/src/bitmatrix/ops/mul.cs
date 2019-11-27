@@ -264,7 +264,7 @@ namespace Z0
             {
                 var row = A[i];
                 for(var j=0; j<n; j++)
-                    Z[i,j] = row % tr.RowVector(j);
+                    Z[i,j] = row % tr[j];
             }
 
             return ref Z;

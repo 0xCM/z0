@@ -162,7 +162,7 @@ namespace System
             where T : unmanaged;
 
         /// <summary>
-        /// Retrieves the random  stream navigator, if supported
+        /// Retrieves the random stream navigator, if supported
         /// </summary>
         Option<IRandomNav> Navigator {get;}    
     }

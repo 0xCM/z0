@@ -112,17 +112,5 @@ namespace Z0
                 Claim.yea(fill == matrix[i]);
         }
 
-        public void nbm_create_7x7x8()
-        {
-            var m1 = BitMatrix.alloc<N7,byte>();
-            m1.Fill(on);
-            var fmt = m1.Format().RemoveWhitespace();
-            Claim.eq(7*7, fmt.Length);
-            var d = m1.Diagonal();
-            var x = BitCells.alloc<N7,byte>();
-            x.Fill(on);
-
-            Claim.yea(d == x);                        
-        }
     }
 }

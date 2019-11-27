@@ -84,7 +84,7 @@ namespace Z0
         /// </summary>
         public string Format(char? variable = null)
         {
-            var bs = BitString.from(data);
+            var bs = BitString.scalar(data);
             var terms = new List<string>();
             
             for(var i=0; i<bs.Length; i++)

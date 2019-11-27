@@ -17,14 +17,14 @@ namespace Z0
             var blocks = 3;
             var cells = blocks*4;
             var src = Random.Blocks<ulong>(n, blocks, (0,uint.MaxValue));
-            Claim.eq(cells, src.Length);
+            Claim.eq(cells, src.CellCount);
 
             var x0 = src.TakeVector(0);
             var x1 = src.TakeVector(1);
             var x2 = src.TakeVector(2);
             var pop2 = 0u;
             var pop3 = 0u;
-            for(var i=0; i< src.Length; i++)
+            for(var i=0; i< src.CellCount; i++)
             {
                 pop2 += Bits.pop(src[i]);
                 pop3 += Bits.pop(src[i],0,0);
@@ -41,14 +41,14 @@ namespace Z0
             var blocks = 3;
             var cells = blocks*2;
             var src = Random.Blocks<ulong>(n, blocks, (0,uint.MaxValue));
-            Claim.eq(cells, src.Length);
+            Claim.eq(cells, src.CellCount);
 
             var x0 = src.TakeVector(0);
             var x1 = src.TakeVector(1);
             var x2 = src.TakeVector(2);
             var pop2 = 0u;
             var pop3 = 0u;
-            for(var i=0; i< src.Length; i++)
+            for(var i=0; i< src.CellCount; i++)
             {
                 pop2 += Bits.pop(src[i]);
                 pop3 += Bits.pop(src[i],0,0);

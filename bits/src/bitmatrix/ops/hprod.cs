@@ -43,7 +43,7 @@ namespace Z0
         /// <remarks>See https://en.wikipedia.org/wiki/Hadamard_product_(matrices)</remarks>
         public static BitMatrix64 hprod(in BitMatrix64 A, in BitMatrix64 B)
         {
-            var C = BitMatrix64.Alloc();
+            var C = BitMatrix.alloc(n64);
             for(var i=0; i<A.Order; i++)
             for(var j=0; j<B.Order; j++)
                 C[i,j] = A[i,j] & B[i,j];

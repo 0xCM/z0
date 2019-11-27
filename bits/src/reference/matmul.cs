@@ -71,7 +71,7 @@ namespace Z0
         {
             const uint n = BitMatrix64.N;
 
-            var dst = BitMatrix64.Alloc();
+            var dst = BitMatrix.alloc(n64);
             rhs = rhs.Transpose();
             for(var i=0; i< n; i++)
             {

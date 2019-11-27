@@ -36,7 +36,7 @@ namespace Z0
             while(true)
             {
                 var scalar = random.Next<ulong>();
-                var bs = Z0.BitString.from(scalar);
+                var bs = Z0.BitString.scalar(scalar);
                 for(var i=0; i<bs.Length; i++)
                 {
                     yield return bs[i];

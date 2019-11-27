@@ -31,7 +31,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
         public static BitString ToBitString(this sbyte src)
-            => BitString.from(src);
+            => BitString.scalar(src);
 
         /// <summary>
         /// Converts the source value to a bitstring
@@ -39,7 +39,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
         public static BitString ToBitString(this byte src)
-            => BitString.from(src);
+            => BitString.scalar(src);
 
         /// <summary>
         /// Converts the source value to a bitstring
@@ -47,7 +47,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
         public static BitString ToBitString(this short src)
-            => BitString.from(src);
+            => BitString.scalar(src);
 
         /// <summary>
         /// Converts the source value to a bitstring
@@ -55,7 +55,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
         public static BitString ToBitString(this ushort src)
-            => BitString.from(src);
+            => BitString.scalar(src);
 
         /// <summary>
         /// Converts the source value to a bitstring
@@ -63,7 +63,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
         public static BitString ToBitString(this int src)
-            => BitString.from(src);
+            => BitString.scalar(src);
 
         /// <summary>
         /// Converts the source value to a bitstring
@@ -71,7 +71,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
         public static BitString ToBitString(this uint src)
-            => BitString.from(src);
+            => BitString.scalar(src);
 
         /// <summary>
         /// Converts the source value to a bitstring
@@ -79,7 +79,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
         public static BitString ToBitString(this long src)
-            => BitString.from(src);
+            => BitString.scalar(src);
 
         /// <summary>
         /// Converts the source value to a bitstring
@@ -87,7 +87,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
         public static BitString ToBitString(this ulong src)
-            => BitString.from(src);
+            => BitString.scalar(src);
 
         /// <summary>
         /// Converts the source value to a bitstring
@@ -95,7 +95,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
         public static BitString ToBitString(this float src)
-            => BitString.from(src);
+            => BitString.scalar(src);
 
         /// <summary>
         /// Converts the source value to a bitstring
@@ -103,7 +103,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
         public static BitString ToBitString(this double src)
-            => BitString.from(src);
+            => BitString.scalar(src);
 
         /// <summary>
         /// Converts a bitspan to a to a bitstring
@@ -134,9 +134,117 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source bits</param>
         [MethodImpl(Inline)]        
-        public static BitString ToBitString<T>(this Span<T> src, BitSize? maxwidth = null)
+        public static BitString ToBitString<T>(this Span<T> src, BitSize? maxbits = null)
             where T : unmanaged
-                => BitString.from(src, maxwidth); 
+                => BitString.from(src, maxbits); 
+
+        /// <summary>
+        /// Converts datablock content to a bitstring
+        /// </summary>
+        /// <param name="src">The source bits</param>
+        [MethodImpl(Inline)]        
+        public static BitString ToBitString<T>(this Block64<T> src)
+            where T : unmanaged
+                => BitString.from(src.Data);
+
+        /// <summary>
+        /// Converts datablock content to a bitstring
+        /// </summary>
+        /// <param name="src">The source bits</param>
+        [MethodImpl(Inline)]        
+        public static BitString ToBitString<T>(this Block64<T> src, int maxbits)
+            where T : unmanaged
+                => BitString.from(src.Data, maxbits);
+
+        /// <summary>
+        /// Converts datablock content to a bitstring
+        /// </summary>
+        /// <param name="src">The source bits</param>
+        [MethodImpl(Inline)]        
+        public static BitString ToBitString<T>(this Block128<T> src)
+            where T : unmanaged
+                => BitString.from(src.Data);
+
+        /// <summary>
+        /// Converts datablock content to a bitstring
+        /// </summary>
+        /// <param name="src">The source bits</param>
+        [MethodImpl(Inline)]        
+        public static BitString ToBitString<T>(this Block128<T> src, int maxbits)
+            where T : unmanaged
+                => BitString.from(src.Data, maxbits);
+
+        /// <summary>
+        /// Converts datablock content to a bitstring
+        /// </summary>
+        /// <param name="src">The source bits</param>
+        [MethodImpl(Inline)]        
+        public static BitString ToBitString<T>(this Block256<T> src)
+            where T : unmanaged
+                => BitString.from(src.Data);
+
+        /// <summary>
+        /// Converts datablock content to a bitstring
+        /// </summary>
+        /// <param name="src">The source bits</param>
+        [MethodImpl(Inline)]        
+        public static BitString ToBitString<T>(this Block256<T> src, int maxbits)
+            where T : unmanaged
+                => BitString.from(src.Data, maxbits);
+
+        /// <summary>
+        /// Converts datablock content to a bitstring
+        /// </summary>
+        /// <param name="src">The source bits</param>
+        [MethodImpl(Inline)]        
+        public static BitString ToBitString<T>(this ConstBlock64<T> src)
+            where T : unmanaged
+                => BitString.from(src.Data);
+
+        /// <summary>
+        /// Converts datablock content to a bitstring
+        /// </summary>
+        /// <param name="src">The source bits</param>
+        [MethodImpl(Inline)]        
+        public static BitString ToBitString<T>(this ConstBlock64<T> src, int maxbits)
+            where T : unmanaged
+                => BitString.from(src.Data, maxbits);
+
+        /// <summary>
+        /// Converts datablock content to a bitstring
+        /// </summary>
+        /// <param name="src">The source bits</param>
+        [MethodImpl(Inline)]        
+        public static BitString ToBitString<T>(this ConstBlock128<T> src)
+            where T : unmanaged
+                => BitString.from(src.Data);
+
+        /// <summary>
+        /// Converts datablock content to a bitstring
+        /// </summary>
+        /// <param name="src">The source bits</param>
+        [MethodImpl(Inline)]        
+        public static BitString ToBitString<T>(this ConstBlock128<T> src, int maxbits)
+            where T : unmanaged
+                => BitString.from(src.Data, maxbits);
+
+        /// <summary>
+        /// Converts datablock content to a bitstring
+        /// </summary>
+        /// <param name="src">The source bits</param>
+        [MethodImpl(Inline)]        
+        public static BitString ToBitString<T>(this ConstBlock256<T> src)
+            where T : unmanaged
+                => BitString.from(src.Data);
+
+        /// <summary>
+        /// Converts datablock content to a bitstring
+        /// </summary>
+        /// <param name="src">The source bits</param>
+        [MethodImpl(Inline)]        
+        public static BitString ToBitString<T>(this ConstBlock256<T> src, int maxbits)
+            where T : unmanaged
+                => BitString.from(src.Data, maxbits);
 
         /// <summary>
         /// Converts a bitview to a bitstring
@@ -154,7 +262,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
         public static BitString ToBitString(this UInt128 src)
-            => BitString.from(src.hi) + BitString.from(src.lo);
+            => BitString.scalar(src.hi) + BitString.scalar(src.lo);
  
         /// <summary>
         /// Converts an 128-bit intrinsic vector representation to a bistring

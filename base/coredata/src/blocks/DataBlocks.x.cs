@@ -120,7 +120,7 @@ namespace Z0
         public static Block256<T> Replicate<T>(this in Block256<T> src, bool structureOnly = false)
             where T : unmanaged
         {
-            Span<T> dst = new T[src.Length];
+            Span<T> dst = new T[src.CellCount];
             if(!structureOnly)
                 src.CopyTo(dst);
             return new Block256<T>(dst);
@@ -135,7 +135,7 @@ namespace Z0
         public static Block256<T> Replicate<T>(this in ConstBlock256<T> src, bool structureOnly = false)
             where T : unmanaged
         {
-            Span<T> dst = new T[src.Length];
+            Span<T> dst = new T[src.CellCount];
             if(!structureOnly)
                 src.CopyTo(dst);
             return new Block256<T>(dst);

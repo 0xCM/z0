@@ -155,7 +155,7 @@ namespace Z0
                 var vY = srcY.TakeVector();
                 
                 var dstExpect = DataBlocks.alloc<T>(n);
-                for(var i=0; i< dstExpect.Length; i++)
+                for(var i=0; i< dstExpect.CellCount; i++)
                     dstExpect[i] = gmath.or(srcX[i], srcY[i]);
                 
                 var expect = dstExpect.TakeVector();
@@ -175,7 +175,7 @@ namespace Z0
                 var vY = srcY.TakeVector();
 
                 var dstExpect = DataBlocks.alloc<T>(n);
-                for(var i=0; i< dstExpect.Length; i++)
+                for(var i=0; i< dstExpect.CellCount; i++)
                     dstExpect[i] = gmath.or(srcX[i], srcY[i]);
                 
                 var expect = dstExpect.TakeVector();

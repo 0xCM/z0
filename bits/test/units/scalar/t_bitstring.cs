@@ -138,7 +138,7 @@ namespace Z0
             var bs1 = BitString.parse(bsSrc);
             Claim.eq((int)bs1.Length, bsSrc.Length);
 
-            var bs2 = BitString.from(x);
+            var bs2 = BitString.scalar(x);
             var y = bs1.TakeScalar<uint>();
             Claim.eq(x,y);
             Claim.yea(bs1.Equals(bs2));
@@ -256,10 +256,10 @@ namespace Z0
 
         public void bs_tlz()
         {
-            Claim.eq("100", BitString.from(0b00000100).Format(true));
-            Claim.eq("101", BitString.from(0b00000101).Format(true));
-            Claim.eq("1000101", BitString.from(0b01000101).Format(true));
-            Claim.eq("11010101", BitString.from(0b11010101).Format(true));
+            Claim.eq("100", BitString.scalar(0b00000100).Format(true));
+            Claim.eq("101", BitString.scalar(0b00000101).Format(true));
+            Claim.eq("1000101", BitString.scalar(0b01000101).Format(true));
+            Claim.eq("11010101", BitString.scalar(0b11010101).Format(true));
         }
 
         public void bs_parselit()
@@ -339,10 +339,10 @@ namespace Z0
             for(var i=0; i<src.Length; i++)
             {
                 var x = src[i];
-                var bs = BitString.from(src[i]);
+                var bs = BitString.scalar(src[i]);
                 var y = bs.TakeScalar<T>();
                 Claim.eq(x,y);
-                Claim.eq(bs.Format(), BitString.from(y).Format());
+                Claim.eq(bs.Format(), BitString.scalar(y).Format());
             }
 
             TypeCaseEnd<T>();                
@@ -355,8 +355,8 @@ namespace Z0
             var src = Random.Span<T>(SampleSize);
             for(var i=0; i<src.Length; i++)
             {
-                var bc1 =  BitString.from(src[i]).Format();
-                var bc3 = BitString.from(src[i]);
+                var bc1 =  BitString.scalar(src[i]).Format();
+                var bc3 = BitString.scalar(src[i]);
                 Claim.eq(bc1,bc3);
             }
 
@@ -405,7 +405,7 @@ namespace Z0
             var src = Random.Span<T>(SampleSize);
             foreach(var x in src)
             {
-                var y = BitString.from(x);
+                var y = BitString.scalar(x);
                 var z = y.TakeScalar<T>();
                 Claim.eq(x,z);
             }

@@ -51,12 +51,7 @@ namespace Z0
         /// <param name="B">The right matrix</param>
         [MethodImpl(Inline)]
         public static BitMatrix4 and(in BitMatrix4 A, in BitMatrix4 B)
-        {
-            var a = (ushort)A;
-            var b = (ushort)B;
-            var c = math.and(a,b);
-            return BitMatrix4.From(c);
-        }
+            => BitMatrix4.From(math.and((ushort)A,(ushort)B));
 
         /// <summary>
         /// Computes the logical And between two source bitmatrices and returns the allocated result to the caller

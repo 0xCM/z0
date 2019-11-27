@@ -48,6 +48,21 @@ namespace  Z0
         public static Span<T> Shuffle<T>(this IPolyrand random, ReadOnlySpan<T> src)
             => random.Shuffle(src.Replicate());    
 
+        /// <summary>
+        /// Provides a stream of random bytes
+        /// </summary>
+        /// <param name="random">The random source</param>
+        public static IEnumerable<byte> Bytes(this IPolyrand random)
+        {
+            byte[] cache = new byte[8];
+            while(true)
+            {
+                var src = random.Next<ulong>();
+                BitConvert.GetBytes(src,cache);   
+                for(var i=0; i < cache.Length; i++)
+                    yield return cache[i];
+            }
+        }
 
         /// <summary>
         /// Returns the next pair of random primal values
@@ -116,6 +131,10 @@ namespace  Z0
                 yield return convert<ulong,T>(Z0.Pow2.pow(exp));
             }
         }
+
+        [MethodImpl(Inline)]
+        public static System.Random ToSystemRand(this IPolyrand random)
+            => SysRand.From(random);
 
         [MethodImpl(Inline)]
         public static T Pow2Cut<T>(this IPolyrand random)

@@ -141,7 +141,7 @@ namespace Z0
         internal BitCells(Block256<T> src)
         {            
             this.data = src;
-            this.MaxBitCount = src.Length * CellCapacity;
+            this.MaxBitCount = src.CellCount * CellCapacity;
             this.BitCount = src.BlockCount * 256;
             this.SegLength = BitSize.Segments<T>(MaxBitCount);            
             this.BitMap = BitSize.BitMap<T>(MaxBitCount);
@@ -236,7 +236,7 @@ namespace Z0
         public readonly uint Pop()
         {
             var count = 0u;
-            for(var i=0; i< data.Length; i++)
+            for(var i=0; i< data.CellCount; i++)
                 count += gbits.pop(data[i]);
             return count;
         }

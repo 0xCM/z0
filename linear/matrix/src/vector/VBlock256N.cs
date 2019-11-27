@@ -89,7 +89,7 @@ namespace Z0
         [MethodImpl(Inline)]
         internal VBlock256(Block256<T> src)
         {
-            require(src.Length >= Length);
+            require(src.CellCount >= Length);
             data = src;
         }
 

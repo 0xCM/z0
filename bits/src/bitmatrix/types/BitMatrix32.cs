@@ -33,6 +33,10 @@ namespace Z0
         public static BitMatrix32 Zero => new BitMatrix32(new uint[N]);
                 
         [MethodImpl(Inline)]
+        public static implicit operator BitMatrix<uint>(in BitMatrix32 src)
+            => BitMatrix.load(src.data);
+
+        [MethodImpl(Inline)]
         public static BitMatrix32 operator & (in BitMatrix32 A, in BitMatrix32 B)
             => BitMatrix.and(A,B);
 
@@ -90,6 +94,15 @@ namespace Z0
         }
 
         /// <summary>
+        /// The underlying matrix presented as a bytespan
+        /// </summary>
+        public Span<byte> Bytes
+        {
+            [MethodImpl(Inline)]
+            get => data.AsBytes();
+        }
+
+        /// <summary>
         /// A reference to the first row of the matrix
         /// </summary>
         public unsafe ref uint Head
@@ -105,15 +118,6 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => (int)N;
-        }
-
-        /// <summary>
-        /// The underlying matrix presented as a bytespan
-        /// </summary>
-        public Span<byte> Bytes
-        {
-            [MethodImpl(Inline)]
-            get => data.AsBytes();
         }
 
         /// <summary>

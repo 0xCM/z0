@@ -13,26 +13,26 @@ namespace Z0
     public static class EnumValues
     {     
         [MethodImpl(Inline)]
-        public static ref readonly EnumValues<E> Get<E>()
+        public static EnumValues<E> Get<E>()
             where E : Enum     
-                => ref EnumValues<E>.TheOnly;
+                => EnumValues<E>.TheOnly;
 
         [MethodImpl(Inline)]
-        public static ref readonly EnumValues<E,T> Get<E,T>()
+        public static EnumValues<E,T> Get<E,T>()
             where E : Enum
             where T : unmanaged
-                => ref EnumValues<E,T>.TheOnly;
+                => EnumValues<E,T>.TheOnly;
 
         [MethodImpl(Inline)]
         public static IReadOnlyDictionary<string,NamedValue<E>> NamedValues<E>()
             where E : Enum
-                => Get<E>().NamedValues();
+                => Get<E>().NamedValues;
 
         [MethodImpl(Inline)]
         public static ReadOnlySpan<NamedValue<T>> NamedScalars<E,T>()
             where E : Enum
             where T : unmanaged
-                => Get<E,T>().NamedScalars();
+                => Get<E,T>().NamedScalars;
 
         [MethodImpl(Inline)]
         public static Option<E> Parse<E>(string name)

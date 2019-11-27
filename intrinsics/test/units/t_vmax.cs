@@ -145,7 +145,7 @@ namespace Z0
                 var xs = x.ToSpan();
                 var ys = y.ToSpan();
                 var zs = DataBlocks.alloc<T>(n);
-                for(var i=0; i<zs.Length; i++)
+                for(var i=0; i<zs.CellCount; i++)
                     zs[i] = gmath.max(xs[i],ys[i]);
                 
                 var expect = zs.TakeVector();                
@@ -166,7 +166,7 @@ namespace Z0
                 var xs = x.ToSpan();
                 var ys = y.ToSpan();
                 var zs = DataBlocks.alloc<T>(n);
-                for(var i=0; i<zs.Length; i++)
+                for(var i=0; i<zs.CellCount; i++)
                     zs[i] = gmath.max(xs[i],ys[i]);
                 
                 var expect = zs.TakeVector();                
