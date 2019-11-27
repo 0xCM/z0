@@ -153,7 +153,7 @@ namespace Z0.Logix
                 Claim.eq(actual,expect);
                 matrix[j] = actual;
             
-                Trace(actual.Format(blockWidth: 8));
+                Trace(actual.Format(8));
             }
             
         }

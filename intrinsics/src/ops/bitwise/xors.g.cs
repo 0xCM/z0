@@ -47,13 +47,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(dinx.vxorsr(uint8(x), offset));
+                return As.vgeneric<T>(dinx.vxorsr(vcast8u(x), offset));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(dinx.vxorsr(uint16(x), offset));
+                return generic<T>(dinx.vxorsr(vcast16u(x), offset));
             else if(typeof(T) == typeof(uint)) 
-                return generic<T>(dinx.vxorsr(uint32(x), offset));
+                return generic<T>(dinx.vxorsr(vcast32u(x), offset));
             else 
-                return generic<T>(dinx.vxorsr(uint64(x), offset));
+                return generic<T>(dinx.vxorsr(vcast64u(x), offset));
         }
 
         /// <summary>
@@ -66,13 +66,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(dinx.vxorsr(uint8(x), offset));
+                return generic<T>(dinx.vxorsr(vcast8u(x), offset));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(dinx.vxorsr(uint16(x), offset));
+                return generic<T>(dinx.vxorsr(vcast16u(x), offset));
             else if(typeof(T) == typeof(uint)) 
-                return generic<T>(dinx.vxorsr(uint32(x), offset));
+                return generic<T>(dinx.vxorsr(vcast32u(x), offset));
             else 
-                return generic<T>(dinx.vxorsr(uint64(x), offset));
+                return generic<T>(dinx.vxorsr(vcast64u(x), offset));
         }
 
         /// <summary>
@@ -85,13 +85,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(dinx.vxorsl(uint8(x), offset));
+                return As.vgeneric<T>(dinx.vxorsl(vcast8u(x), offset));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(dinx.vxorsl(uint16(x), offset));
+                return generic<T>(dinx.vxorsl(vcast16u(x), offset));
             else if(typeof(T) == typeof(uint)) 
-                return generic<T>(dinx.vxorsl(uint32(x), offset));
+                return generic<T>(dinx.vxorsl(vcast32u(x), offset));
             else 
-                return generic<T>(dinx.vxorsl(uint64(x), offset));
+                return generic<T>(dinx.vxorsl(vcast64u(x), offset));
         }
 
         /// <summary>
@@ -104,13 +104,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(dinx.vxorsl(uint8(x), offset));
+                return generic<T>(dinx.vxorsl(vcast8u(x), offset));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(dinx.vxorsl(uint16(x), offset));
+                return generic<T>(dinx.vxorsl(vcast16u(x), offset));
             else if(typeof(T) == typeof(uint)) 
-                return generic<T>(dinx.vxorsl(uint32(x), offset));
+                return generic<T>(dinx.vxorsl(vcast32u(x), offset));
             else 
-                return generic<T>(dinx.vxorsl(uint64(x), offset));
+                return generic<T>(dinx.vxorsl(vcast64u(x), offset));
         }
     }
 }

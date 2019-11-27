@@ -655,7 +655,6 @@ partial class zfunc
     public static string cmdFlag(string value, string flag, string arg = null)
         => empty(value) ? estring() : flag + arg ?? estring();
 
-
     /// <summary>
     /// Creates a complied regular expression from the supplied pattern
     /// </summary>
@@ -743,14 +742,26 @@ partial class zfunc
     /// Joins the string representation of a sequence of values
     /// </summary>
     /// <param name="values">The values to be joined</param>
-    /// <param name="delimiter">The value delimiter</param>
+    /// <param name="sep">The value delimiter</param>
     [MethodImpl(Inline)]
-    public static string join(string delimiter, IEnumerable<object> values)
-        => string.Join(delimiter, values);
-
+    public static string join(string sep, IEnumerable<object> values)
+        => string.Join(sep, values);
 
     [MethodImpl(Inline)]
     public static StringBuilder sbuild(string s0 = null)
         => s0 != null ? new StringBuilder(s0) : new StringBuilder();
+
+    public static StringBuilder text()
+        => new StringBuilder();
+
+    public static StringBuilder text(object s)
+        => new StringBuilder(s.ToString());
+
+    public static StringBuilder text(char sep, params object[] values)
+        => new StringBuilder(join(sep.ToString(), values));
+
+    public static StringBuilder text(string sep, params object[] values)
+        => new StringBuilder(join(sep, values));
+
 
 }

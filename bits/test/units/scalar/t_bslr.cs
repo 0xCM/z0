@@ -5,45 +5,24 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Reflection;
 
     using static zfunc;
 
-    public class t_blsr : t_sb<t_blsr>
+    public class t_sb_blsr : t_sb<t_sb_blsr>
     {
 
-        public void blsr_u8_check()
-        {
-            blsr_check<byte>();
-        }
+        public void blsr_8()
+            => sb_blsr_check<byte>();
 
-        public void blsr_u16_check()
-        {
-            blsr_check<ushort>();
-        }
+        public void sb_blsr_16()
+            => sb_blsr_check<ushort>();
 
-        public void blsr_u32_check()
-        {
-            blsr_check<uint>();
-        }
+        public void sb_blsr_32()
+            => sb_blsr_check<uint>();
 
-        public void blsr_u64_check()
-        {
-            blsr_check<ulong>();
-        }
+        public void sb_blsr_64()
+            => sb_blsr_check<ulong>();
 
-        void blsr_check<T>()
-            where T : unmanaged
-        {
-            for(var i=0; i<SampleSize; i++)
-            {
-                var x = Random.Next<T>();
-                var y0 = gbits.blsr(x);
-                var y1 = gmath.and(gmath.sub(x, gmath.one<T>()), x);
-                Claim.eq(y0,y1);
-            }
-        }
 
     }
 

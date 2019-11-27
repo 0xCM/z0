@@ -31,7 +31,7 @@ namespace Z0
         /// <summary>
         /// The actual number of bits that are represented by the vector
         /// </summary>
-        readonly int BitCount;
+        public readonly int BitCount;
 
         /// <summary>
         /// The number of bits represented by a segment, save the last
@@ -44,21 +44,6 @@ namespace Z0
         public static int CellCapacity => bitsize<T>();
 
         public static BitCells<T> Zero => new BitCells<T>(DataBlocks.alloc<T>(n256));
-
-        /// <summary>
-        /// Creates a bitvector defined by a single cell or portion thereof
-        /// </summary>
-        /// <param name="src">The source cell</param>
-        [MethodImpl(Inline)]
-        public static BitCells<T> FromCell(T src, int n)
-            => new BitCells<T>(src,n);
-        /// <summary>
-        /// Loads an bitvector of minimal size from a source bitstring
-        /// </summary>
-        /// <param name="src">The bitstring source</param>
-        [MethodImpl(Inline)]
-        public static BitCells<T> From(BitString src)
-            => BitCells.load<T>(src.ToPackedBytes(), src.Length);
 
         [MethodImpl(Inline)]
         public static implicit operator BitCells<T>(Span<T> src)
@@ -113,7 +98,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
         public static bool operator true(in BitCells<T> src)
-            => src.Nonempty;
+            => src.NonEmpty;
 
         /// <summary>
         /// Returns false if the source vector is the zero vector, false otherwise
@@ -121,7 +106,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
         public static bool operator false(in BitCells<T> src)
-            => !src.Nonempty;
+            => !src.NonEmpty;
 
         [MethodImpl(Inline)]
         public static bool operator ==(in BitCells<T> x, in BitCells<T> y)
@@ -132,13 +117,13 @@ namespace Z0
             => !x.Equals(y);
 
         [MethodImpl(Inline)]
-        internal BitCells(T src, int n)
+        internal BitCells(T src, int bitcount)
         {            
             this.data = DataBlocks.alloc<T>(n256);
             head(this.data) = src;
             this.MaxBitCount = CellCapacity;
             this.SegLength = MaxBitCount;
-            this.BitCount = n;
+            this.BitCount = bitcount;
             this.BitMap = BitSize.BitMap<T>(MaxBitCount);
         }
 
@@ -163,12 +148,21 @@ namespace Z0
         }
 
         /// <summary>
-        /// The number of bits represented by the vector
+        /// The underlying cell data
         /// </summary>
-        public readonly BitSize Length 
+        public Span<T> Data
         {
             [MethodImpl(Inline)]
-            get => BitCount;
+            get => data;
+        }
+
+        /// <summary>
+        /// Specifies a reference to the leading cell
+        /// </summary>
+        public ref T Head
+        {
+            [MethodImpl(Inline)]
+            get => ref data.Head;
         }
 
         /// <summary>
@@ -181,21 +175,9 @@ namespace Z0
         }
 
         /// <summary>
-        /// A bit-level accessor/manipulator
-        /// </summary>
-        public bit this[int index]
-        {
-            [MethodImpl(Inline)]
-            get => Get(index);
-            
-            [MethodImpl(Inline)]
-            set => Set(index, value);
-        }
-
-        /// <summary>
         /// Is true if no bits are enabled, false otherwise
         /// </summary>
-        public bool Empty
+        public bit Empty
         {
             [MethodImpl(Inline)]
             get => Pop() == 0;
@@ -204,61 +186,36 @@ namespace Z0
         /// <summary>
         /// Is true if the vector has at least one enabled bit; false otherwise
         /// </summary>
-        public readonly bool Nonempty
+        public readonly bit NonEmpty
         {
             [MethodImpl(Inline)]
             get => Pop() != 0;
         }
 
-
-        /// <summary>
-        /// The maximum number of bits that can be represented by the vector
-        /// </summary>
-        public readonly int Capacity
+        public int BlockCount
         {
             [MethodImpl(Inline)]
-            get => data.Length * CellCapacity;
+            get => data.BlockCount;
         }
 
         /// <summary>
-        /// Reads a bit value
+        /// A bit-level accessor/manipulator
         /// </summary>
-        /// <param name="pos">The bit position</param>
-        [MethodImpl(Inline)]
-        public readonly Bit Get(int pos)
-        {
-            ref readonly var loc = ref Location(pos);
-            return gbits.test(data[loc.Segment], loc.Offset);
-        }
-
-        /// <summary>
-        /// The underlying cell data
-        /// </summary>
-        public Span<T> Data
+        public bit this[int index]
         {
             [MethodImpl(Inline)]
-            get => data;
-        }
-
-        /// <summary>
-        /// Sets a bit value
-        /// </summary>
-        /// <param name="pos">The absolute bit position</param>
-        /// <param name="value">The value the bit will receive</param>
-        [MethodImpl(Inline)]
-        public void Set(int pos, bit value)
-        {
-            ref readonly var loc = ref Location(pos);
-            gbits.set(ref data[loc.Segment], (byte)loc.Offset, value);
-        }
-
-        /// <summary>
-        /// Specifies a reference to the leading cell
-        /// </summary>
-        public ref T Head
-        {
+            get 
+            {
+                ref readonly var loc = ref Location(index);
+                return gbits.test(data[loc.Segment], loc.Offset);
+            }
+            
             [MethodImpl(Inline)]
-            get => ref data.Head;
+            set
+            {
+                ref readonly var loc = ref Location(index);
+                gbits.set(ref data[loc.Segment], (byte)loc.Offset, value);
+            }
         }
 
         [MethodImpl(Inline)]
@@ -270,7 +227,7 @@ namespace Z0
         /// </summary>
         [MethodImpl(Inline)]
         public readonly BitString ToBitString()
-            => BitString.from<T>(data, Length); 
+            => BitString.from<T>(data, BitCount); 
 
         /// <summary>
         /// Counts the vector's enabled bits
@@ -298,12 +255,6 @@ namespace Z0
             return rank;
         }
 
-        public int BlockCount
-        {
-            [MethodImpl(Inline)]
-            get => data.BlockCount;
-        }
-
         /// <summary>
         /// Gets the mapped bit location
         /// </summary>
@@ -319,14 +270,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public ref T Segment(in BitCellIndex<T> pos)
             => ref data[pos.Segment];
-
-        /// <summary>
-        /// Returns a reference to the segment in which a specified bit is defined
-        /// </summary>
-        /// <param name="pos">The segmented bit position</param>
-        [MethodImpl(Inline)]
-        public ref T Segment(int pos)
-            => ref Segment(in Location(pos));
 
         /// <summary>
         /// Retrieves the segments up to and including an identified bit
@@ -373,11 +316,11 @@ namespace Z0
                     
         [MethodImpl(Inline)]
         public bool Equals(in BitCells<T> y)
-            => ToBitString().Equals(y.ToBitString());
+            => data.Identical(y.data);
 
         [MethodImpl(Inline)]
-        public string Format(bool tlz = false, bool specifier = false, int? blockWidth = null)
-            => ToBitString().Format(tlz, specifier, blockWidth);
+        public string Format(BitFormat? fmt = null)
+            => ToBitString().Format(fmt);
 
         public override bool Equals(object obj)
             => throw new NotImplementedException();

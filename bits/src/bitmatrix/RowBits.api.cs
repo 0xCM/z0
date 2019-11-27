@@ -50,8 +50,7 @@ namespace Z0
         public static RowBits<T> load<T>(Span<byte> src)
             where T : unmanaged
                 => new RowBits<T>(cast<T>(src));
-        
-
+                
         /// <summary>
         /// Loads loads rows from a span
         /// </summary>

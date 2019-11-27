@@ -32,7 +32,7 @@ namespace Z0
         /// <param name="index">The zero-based row index, in the inclusive range 0...15</param>
         /// <typeparam name="T">The grid cell type</typeparam>
         [MethodImpl(Inline)]
-        public static BitVector4 row<M,T>(BitGrid32<M,N2,T> g, int index)
+        public static BitVector<N4,byte> row<M,T>(BitGrid32<M,N2,T> g, int index)
             where T : unmanaged
             where M : unmanaged, ITypeNat
                 => (byte)Bits.extract(g, index*2, 2);
@@ -44,7 +44,7 @@ namespace Z0
         /// <param name="index">The zero-based row index, in the inclusive range 0...15</param>
         /// <typeparam name="T">The grid cell type</typeparam>
         [MethodImpl(Inline)]
-        public static BitVector4 row<M,T>(BitGrid32<M,N4,T> g, int index)
+        public static BitVector<N4,byte> row<M,T>(BitGrid32<M,N4,T> g, int index)
             where T : unmanaged
             where M : unmanaged, ITypeNat
                 => (byte)Bits.extract(g, index*4, 4);
@@ -80,7 +80,7 @@ namespace Z0
         /// <param name="index">The zero-based row index, in the inclusive range 0...1</param>
         /// <typeparam name="T">The grid cell type</typeparam>
         [MethodImpl(Inline)]
-        public static BitVector<uint> row<M,T>(BitGrid32<M,N32,T> g, int index)
+        public static BitVector<N32,uint> row<M,T>(BitGrid32<M,N32,T> g, int index)
             where T : unmanaged
             where M : unmanaged, ITypeNat
                 => g.Scalar;
@@ -104,7 +104,7 @@ namespace Z0
         /// <param name="index">The zero-based row index, in the inclusive range 0...15</param>
         /// <typeparam name="T">The grid cell type</typeparam>
         [MethodImpl(Inline)]
-        public static BitVector4 row<M,T>(BitGrid64<M,N2,T> g, int index)
+        public static BitVector<N2,byte> row<M,T>(BitGrid64<M,N2,T> g, int index)
             where T : unmanaged
             where M : unmanaged, ITypeNat
             => (byte)Bits.extract(g, index*2, 2);
@@ -116,7 +116,7 @@ namespace Z0
         /// <param name="index">The zero-based row index, in the inclusive range 0...15</param>
         /// <typeparam name="T">The grid cell type</typeparam>
         [MethodImpl(Inline)]
-        public static BitVector4 row<M,T>(BitGrid64<M,N4,T> g, int index)
+        public static BitVector<N4,byte> row<M,T>(BitGrid64<M,N4,T> g, int index)
             where T : unmanaged
             where M : unmanaged, ITypeNat
             => (byte)Bits.extract(g, index*4, 4);
@@ -128,7 +128,7 @@ namespace Z0
         /// <param name="index">The zero-based column index, in the inclusive range 0...7</param>
         /// <typeparam name="T">The grid cell type</typeparam>
         [MethodImpl(Inline)]
-        public static BitVector<byte> row<M,T>(BitGrid64<M,N8,T> g, int index)
+        public static BitVector<N8,byte> row<M,T>(BitGrid64<M,N8,T> g, int index)
             where T : unmanaged
             where M : unmanaged, ITypeNat
                 => (byte)Bits.extract(g,index*8, 8);
@@ -140,7 +140,7 @@ namespace Z0
         /// <param name="index">The zero-based row index, in the inclusive range 0...3</param>
         /// <typeparam name="T">The grid cell type</typeparam>
         [MethodImpl(Inline)]
-        public static BitVector<ushort> row<M,T>(BitGrid64<M,N16,T> g, int index)
+        public static BitVector<N16,ushort> row<M,T>(BitGrid64<M,N16,T> g, int index)
             where T : unmanaged
             where M : unmanaged, ITypeNat
                 => (ushort)Bits.extract(g,index*16, 16);
@@ -152,7 +152,7 @@ namespace Z0
         /// <param name="index">The zero-based row index, in the inclusive range 0...1</param>
         /// <typeparam name="T">The grid cell type</typeparam>
         [MethodImpl(Inline)]
-        public static BitVector<uint> row<M,T>(BitGrid64<M,N32,T> g, int index)
+        public static BitVector<N32,uint> row<M,T>(BitGrid64<M,N32,T> g, int index)
             where T : unmanaged
             where M : unmanaged, ITypeNat
                 => (uint)Bits.extract(g, index*32,32);
@@ -164,13 +164,13 @@ namespace Z0
         /// <param name="index">The zero-based row index, in the inclusive range 0...1</param>
         /// <typeparam name="T">The grid cell type</typeparam>
         [MethodImpl(Inline)]
-        public static BitVector<ulong> row<M,T>(BitGrid64<M,N64,T> g, int index)
+        public static BitVector<N64,ulong> row<M,T>(BitGrid64<M,N64,T> g, int index)
             where T : unmanaged
             where M : unmanaged, ITypeNat
                 => g.Scalar;
 
         [MethodImpl(Inline)]
-        public static BitVector<ushort> row<T>(in BitGrid256<N16,N16,T> g, int index)
+        public static BitVector<N16,ushort> row<T>(in BitGrid256<N16,N16,T> g, int index)
             where T : unmanaged
                 => v16u(g.data).GetElement(index);
     }

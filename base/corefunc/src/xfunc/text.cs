@@ -13,7 +13,6 @@ namespace Z0
     using System.Text;
 
     using static zfunc;
-    using static nfunc;
 
     partial class xfunc
     {
@@ -138,10 +137,8 @@ namespace Z0
         public static bool ContainsAny(this string src, IEnumerable<char> chars)
         {
             foreach (var c in chars)
-            {
                 if (src.Contains(c))
                     return true;
-            }
             return false;
         }
 
@@ -153,10 +150,8 @@ namespace Z0
         public static bool ContainsAny(this string src, params string[] substrings)
         {
             foreach (var c in substrings)
-            {
                 if (src.Contains(c))
                     return true;
-            }
             return false;
         }
 
@@ -695,6 +690,17 @@ namespace Z0
         public static string RemoveWhitespace(this string src)
             => src.RemoveAny(items(AsciSym.Space, AsciEscape.LineFeed, AsciEscape.NewLine, AsciEscape.Tab));
  
+
+        public static StringBuilder WithLabeled(this StringBuilder sb, object label, object content, int? labelWidth = null)
+        {
+            var padR = labelWidth ?? 12;
+            sb.Append($"{label}".PadRight(padR));
+            sb.Append($"{content}");
+            sb.AppendLine();
+            return sb;
+        }
+
+
         [MethodImpl(Inline)]
         static bool IsRowHead(int index, int rowlen)
             => index == 0 || index % rowlen == 0; 

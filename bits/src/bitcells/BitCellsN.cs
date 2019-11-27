@@ -48,51 +48,18 @@ namespace Z0
         /// Tne number of bits allocated but which are not in use, i.e. the delta between the capacity and length
         /// </summary>
         public static int UnusedCapacity => TotalCapacity - BitCount;
-
-        [MethodImpl(NotInline)]
-        public static BitCells<N,T> Alloc(T? fill = null)
-        {                        
-            Span<T> cells = new T[SegCount];
-            if(fill.HasValue)
-                cells.Fill(fill.Value);
-            return new BitCells<N,T>(cells, true);
-        }
-
-        [MethodImpl(Inline)]
-        internal static BitCells<N,T> FromArrayUnchecked(T[] src)
-            => new BitCells<N,T>(src,true);
-
-        [MethodImpl(Inline)]
-        internal static BitCells<N,T> FromSpanUnchecked(Span<T> src)
-            => new BitCells<N,T>(src,true);
-
-        [MethodImpl(Inline)]
-        public static BitCells<N,T> FromCell(T src)
-            => new BitCells<N, T>(src);        
         
         [MethodImpl(Inline)]
-        public static BitCells<N,T> FromArray(params T[] src)
-            => new BitCells<N,T>(src);    
+        public static implicit operator BitCells<T>(in BitCells<N,T> x)
+            => new BitCells<T>(x.data, (int)new N().NatValue);
 
         [MethodImpl(Inline)]
-        public static BitCells<N,T> FromSpan(Span<T> src)
-            => new BitCells<N,T>(src);    
+        public static BitCells<N,T> operator &(in BitCells<N,T> x, in BitCells<N,T> y)
+            => new BitCells<N,T>(mathspan.and(x.data, y.data, x.data.Replicate(true)));
 
         [MethodImpl(Inline)]
-        public static BitCells<N,T> FromBytes(Span<byte> src)
-            => new BitCells<N,T>(src.As<byte,T>());    
-
-        [MethodImpl(Inline)]
-        public static implicit operator BitCells<T>(in BitCells<N,T> src)
-            => new BitCells<T>(src.data, (int)new N().NatValue);
-
-        [MethodImpl(Inline)]
-        public static BitCells<N,T> operator &(in BitCells<N,T> lhs, in BitCells<N,T> rhs)
-            => new BitCells<N,T>(mathspan.and(lhs.data, rhs.data, lhs.data.Replicate(true)));
-
-        [MethodImpl(Inline)]
-        public static BitCells<N,T> operator |(in BitCells<N,T> lhs, in BitCells<N,T> rhs)
-            => new BitCells<N,T>(mathspan.or(lhs.data, rhs.data, lhs.data.Replicate(true)));
+        public static BitCells<N,T> operator |(in BitCells<N,T> x, in BitCells<N,T> y)
+            => new BitCells<N,T>(mathspan.or(x.data, y.data, x.data.Replicate(true)));
 
         [MethodImpl(Inline)]
         public static BitCells<N,T> operator ^(in BitCells<N,T> lhs, in BitCells<N,T> rhs)
@@ -103,49 +70,49 @@ namespace Z0
         /// </summary>
         /// <param name="lhs">The source operand</param>
         [MethodImpl(Inline)]
-        public static BitCells<N,T> operator ~(in BitCells<N,T> src)
-            => new BitCells<N,T>(mathspan.not(src.data, src.data.Replicate(true)));                        
+        public static BitCells<N,T> operator ~(in BitCells<N,T> x)
+            => new BitCells<N,T>(mathspan.not(x.data, x.data.Replicate(true)));                        
 
         /// <summary>
         /// Computes the scalar product of the operands
         /// </summary>
-        /// <param name="lhs">The left operand</param>
-        /// <param name="rhs">The right operand</param>
+        /// <param name="x">The left operand</param>
+        /// <param name="y">The right operand</param>
         [MethodImpl(Inline)]
-        public static bit operator %(in BitCells<N,T> lhs, in BitCells<N,T> rhs)
-            => lhs.Dot(rhs);
+        public static bit operator %(in BitCells<N,T> x, in BitCells<N,T> y)
+            => BitCells.dot(x,y);
 
         /// <summary>
         /// Computes the bitwise complement of the operand
         /// </summary>
         /// <param name="lhs">The source operand</param>
         [MethodImpl(Inline)]
-        public static BitCells<N,T> operator -(in BitCells<N,T> src)
-            => new BitCells<N,T>(mathspan.negate(src.data, src.data.Replicate(true)));                        
+        public static BitCells<N,T> operator -(in BitCells<N,T> x)
+            => new BitCells<N,T>(mathspan.negate(x.data, x.data.Replicate(true)));                        
 
         /// <summary>
         /// Returns true if the source vector is nonzero, false otherwise
         /// </summary>
-        /// <param name="src">The source vector</param>
+        /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
-        public static bool operator true(in BitCells<N,T> src)
-            => src.Nonempty;
+        public static bool operator true(in BitCells<N,T> x)
+            => x.Nonempty;
 
         /// <summary>
         /// Returns false if the source vector is the zero vector, false otherwise
         /// </summary>
-        /// <param name="src">The source vector</param>
+        /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
-        public static bool operator false(in BitCells<N,T> src)
-            => !src.Nonempty;
+        public static bool operator false(in BitCells<N,T> x)
+            => !x.Nonempty;
 
         [MethodImpl(Inline)]
-        public static bool operator ==(in BitCells<N,T> lhs, in BitCells<N,T> rhs)
-            => lhs.Equals(rhs);
+        public static bit operator ==(in BitCells<N,T> x, in BitCells<N,T> y)
+            => x.Equals(y);
 
         [MethodImpl(Inline)]
-        public static bool operator !=(in BitCells<N,T> lhs, in BitCells<N,T> rhs)
-            => !lhs.Equals(rhs);
+        public static bit operator !=(in BitCells<N,T> x, in BitCells<N,T> y)
+            => !x.Equals(y);
 
         [MethodImpl(Inline)]
         internal BitCells(Span<T> src)
@@ -167,37 +134,6 @@ namespace Z0
             this.data = src;
         }
 
-        [MethodImpl(Inline)]
-        internal BitCells(T[] src, bool skipChecks)
-        {
-            this.data = src;
-        }
-            
-        /// <summary>
-        /// A bit-level accessor/manipulator
-        /// </summary>
-        public bit this[int bitpos]
-        {
-            [MethodImpl(Inline)]
-            get => BitGrid.readbit(in Head, bitpos);
-            
-            [MethodImpl(Inline)]
-            set => BitGrid.setbit(bitpos, value, ref Head);
-        }
-
-        /// <summary>
-        /// Computes the scalar product between this vector and another
-        /// </summary>
-        /// <param name="rhs">The other vector</param>
-        [MethodImpl(Inline)]
-        public bit Dot(in BitCells<N,T> rhs)
-        {             
-            var result = bit.Off;
-            for(var i=0; i<Length; i++)
-                result ^= this[i] & rhs[i];
-            return result;
-        }
-
         /// <summary>
         /// The data over which the bitvector is constructed
         /// </summary>
@@ -208,12 +144,42 @@ namespace Z0
         }
 
         /// <summary>
-        /// The number of bits represented by the vector
+        /// Returns a reference to the leading segment of the underlying storage
         /// </summary>
-        public readonly BitSize Length
+        public ref T Head
+        {
+            [MethodImpl(Inline)]
+            get => ref head(data);
+        }
+
+        /// <summary>
+        /// The number of represented bits
+        /// </summary>
+        public readonly int Width
         {
             [MethodImpl(Inline)]
             get => BitCount;
+        }
+
+        /// <summary>
+        /// The number of allocated cells
+        /// </summary>
+        public readonly int Length
+        {
+            [MethodImpl(Inline)]
+            get => data.Length;
+        }
+
+        /// <summary>
+        /// A bit-level accessor/manipulator
+        /// </summary>
+        public bit this[int bitpos]
+        {
+            [MethodImpl(Inline)]
+            get => BitGrid.readbit(in Head, bitpos);
+            
+            [MethodImpl(Inline)]
+            set => BitGrid.setbit(bitpos, value, ref Head);
         }
 
         /// <summary>
@@ -247,15 +213,6 @@ namespace Z0
         }
 
         /// <summary>
-        /// Returns a reference to the leading segment of the underlying storage
-        /// </summary>
-        public ref T Head
-        {
-            [MethodImpl(Inline)]
-            get => ref head(data);
-        }
-
-        /// <summary>
         /// Sets all the bits in use to the specified state
         /// </summary>
         /// <param name="state">The source state</param>
@@ -267,20 +224,10 @@ namespace Z0
                 data.Clear();
         }
 
-        /// <summary>
-        /// Extracts the represented data as a bitstring
-        /// </summary>
-        [MethodImpl(Inline)]
-        public BitString ToBitString()
-            => BitString.from(Data, Length); 
-
-        [MethodImpl(Inline)]
-        public string Format(bool tlz = false, bool specifier = false, int? blockWidth = null)
-            => ToBitString().Format(tlz, specifier, blockWidth);
 
         [MethodImpl(Inline)]
         public bool Equals(in BitCells<N,T> rhs)
-            => ToBitString().Equals(rhs.ToBitString());
+            => data.Identical(rhs.data);
            
         
         public override bool Equals(object obj)

@@ -1,0 +1,38 @@
+//-----------------------------------------------------------------------------
+// Copyright   :  (c) Chris Moore, 2019
+// License     :  MIT
+//-----------------------------------------------------------------------------
+namespace Z0
+{
+    using System;
+    using System.Runtime.CompilerServices;
+    using System.Runtime.Intrinsics;
+
+    using static zfunc;
+
+    partial class BitMatrix
+    {
+        /// <summary>
+        /// Queries the matrix for the data in an index-identified column 
+        /// </summary>
+        /// <param name="index">The row index</param>
+        public static BitVector4 col(in BitMatrix4 A, int index)
+        {
+            byte col = 0;
+            for(var r = 0; r < BitMatrix4.N; r++)
+                col = BitMask.set(col, (byte)r, BitMask.test(A[r], index));
+            return col;
+        }
+
+        [MethodImpl(Inline)]
+        public static BitVector32 col(in BitMatrix32 A, int index)
+        {
+            uint col = 0;
+            for(var r = 0; r < A.Order; r++)
+                col = BitMask.setif(A[r], index, col, r);
+            return col;
+        }
+
+    }
+
+}

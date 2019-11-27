@@ -61,11 +61,11 @@ namespace Z0
         /// </summary>
         [MethodImpl(Inline)]
         public static BitString ToBitString(this BitVector4 src)
-            => BitString.from(src.Scalar, src.Width);
+            => BitVector.bitstring(src);
             
         [MethodImpl(Inline)]
-        public static string Format(this BitVector4 src,bool tlz = false, bool specifier = false, int? blockWidth = null)
-            => src.ToBitString().Format(tlz, specifier, blockWidth);
+        public static string Format(this BitVector4 src, BitFormat? fmt = null)
+            => BitVector.format(src,fmt);
 
     }
 

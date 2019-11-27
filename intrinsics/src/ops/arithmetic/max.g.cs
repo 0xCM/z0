@@ -56,13 +56,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                 return generic<T>(dinx.vmax(int8(x), int8(y)));
+                 return As.vgeneric<T>(dinx.vmax(vcast8i(x), vcast8i(y)));
             else if(typeof(T) == typeof(short))
-                 return generic<T>(dinx.vmax(int16(x), int16(y)));
+                 return As.vgeneric<T>(dinx.vmax(vcast16i(x), vcast16i(y)));
             else if(typeof(T) == typeof(int))
-                 return generic<T>(dinx.vmax(int32(x), int32(y)));
+                 return generic<T>(dinx.vmax(vcast32i(x), vcast32i(y)));
             else
-                 return generic<T>(dinx.vmax(int64(x), int64(y)));
+                 return generic<T>(dinx.vmax(vcast64i(x), vcast64i(y)));
         }
 
         [MethodImpl(Inline)]
@@ -70,13 +70,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(dinx.vmax(uint8(x), uint8(y)));
+                return As.vgeneric<T>(dinx.vmax(vcast8u(x), vcast8u(y)));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(dinx.vmax(uint16(x), uint16(y)));
+                return generic<T>(dinx.vmax(vcast16u(x), vcast16u(y)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(dinx.vmax(uint32(x), uint32(y)));
+                return generic<T>(dinx.vmax(vcast32u(x), vcast32u(y)));
             else 
-                return generic<T>(dinx.vmax(uint64(x), uint64(y)));
+                return generic<T>(dinx.vmax(vcast64u(x), vcast64u(y)));
         }
 
         [MethodImpl(Inline)]
@@ -84,13 +84,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                 return generic<T>(dinx.vmax(int8(x), int8(y)));
+                 return generic<T>(dinx.vmax(vcast8i(x), vcast8i(y)));
             else if(typeof(T) == typeof(short))
-                 return generic<T>(dinx.vmax(int16(x), int16(y)));
+                 return generic<T>(dinx.vmax(vcast16i(x), vcast16i(y)));
             else if(typeof(T) == typeof(int))
-                 return generic<T>(dinx.vmax(int32(x), int32(y)));
+                 return generic<T>(dinx.vmax(vcast32i(x), vcast32i(y)));
             else
-                 return generic<T>(dinx.vmax(int64(x), int64(y)));
+                 return generic<T>(dinx.vmax(vcast64i(x), vcast64i(y)));
         }
 
         [MethodImpl(Inline)]
@@ -98,13 +98,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(dinx.vmax(uint8(x), uint8(y)));
+                return generic<T>(dinx.vmax(vcast8u(x), vcast8u(y)));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(dinx.vmax(uint16(x), uint16(y)));
+                return generic<T>(dinx.vmax(vcast16u(x), vcast16u(y)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(dinx.vmax(uint32(x), uint32(y)));
+                return generic<T>(dinx.vmax(vcast32u(x), vcast32u(y)));
             else 
-                return generic<T>(dinx.vmax(uint64(x), uint64(y)));
+                return generic<T>(dinx.vmax(vcast64u(x), vcast64u(y)));
         }
 
 

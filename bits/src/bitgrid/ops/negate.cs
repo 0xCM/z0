@@ -13,26 +13,51 @@ namespace Z0
 
     partial class BitGrid
     {        
+        /// <summary>
+        /// Computes the two's complement negation of the operand
+        /// </summary>
+        /// <param name="gx">The source grid</param>
+        /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
         public static BitGrid32<T> negate<T>(BitGrid32<T> gx)
             where T : unmanaged
                 => math.negate(gx);
 
+        /// <summary>
+        /// Computes the two's complement negation of the operand
+        /// </summary>
+        /// <param name="gx">The source grid</param>
+        /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
         public static BitGrid64<T> negate<T>(BitGrid64<T> gx)
             where T : unmanaged
                 => math.negate(gx);
 
+        /// <summary>
+        /// Computes the two's complement negation of the operand
+        /// </summary>
+        /// <param name="gx">The source grid</param>
+        /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
         public static BitGrid128<T> negate<T>(in BitGrid128<T> gx)
             where T : unmanaged
                 => ginx.vnegate<T>(gx);
 
+        /// <summary>
+        /// Computes the two's complement negation of the operand
+        /// </summary>
+        /// <param name="gx">The source grid</param>
+        /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
         public static BitGrid256<T> negate<T>(in BitGrid256<T> gx)
             where T : unmanaged
                 => ginx.vnegate<T>(gx);
 
+        /// <summary>
+        /// Computes the two's complement negation of the operand
+        /// </summary>
+        /// <param name="gx">The source grid</param>
+        /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
         public static BitGrid128<M,N,T> negate<M,N,T>(in BitGrid128<M,N,T> gx)
             where T : unmanaged
@@ -40,6 +65,11 @@ namespace Z0
             where M : unmanaged, ITypeNat
                 => ginx.vnegate<T>(gx);    
 
+        /// <summary>
+        /// Computes the two's complement negation of the operand
+        /// </summary>
+        /// <param name="gx">The source grid</param>
+        /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
         public static BitGrid256<M,N,T> negate<M,N,T>(in BitGrid256<M,N,T> gx)
             where T : unmanaged

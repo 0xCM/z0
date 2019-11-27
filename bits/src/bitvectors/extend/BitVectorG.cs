@@ -74,7 +74,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitString ToBitString<T>(this BitVector<T> src)
             where T : unmanaged
-                => BitString.from<T>(src.Scalar); 
+                => BitVector.bitstring(src);
 
         /// <summary>
         /// Extracts the represented data as a bitstring truncated to a specified width
@@ -82,7 +82,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitString ToBitString<T>(this BitVector<T> src, int width)
             where T : unmanaged
-                => BitString.from<T>(src.Scalar,width);
+                => BitVector.bitstring(src,width);
 
         /// <summary>
         /// Clones the vector
@@ -98,8 +98,8 @@ namespace Z0
                 => BitVector.rev(src);
 
         [MethodImpl(Inline)]
-        public static string Format<T>(this BitVector<T> src, bool tlz = false, bool specifier = false, int? blockWidth = null)
+        public static string Format<T>(this BitVector<T> src, BitFormat? fmt = null)
             where T : unmanaged
-                => src.ToBitString().Format(tlz, specifier, blockWidth);
+                => BitVector.format(src,fmt);
     }
 }

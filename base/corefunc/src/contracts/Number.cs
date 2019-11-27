@@ -26,7 +26,7 @@ namespace Z0
         where T : unmanaged
 
     {                                
-        PrimalInfo<T> Description {get;}
+
     }
 
     /// <summary>

@@ -14,6 +14,37 @@ namespace Z0
     {
         protected override int CycleCount => Pow2.T16;
 
+        public void add_8i()
+            => opcheck((x,y) => (sbyte)(x + y), D.add<sbyte>());
+
+        public void add_8u()
+            => opcheck((x,y) => (byte)(x + y), D.add<byte>());
+
+        public void add_16i_check()
+            => opcheck((x,y) => (short)(x + y), D.add<short>());
+
+        public void add_16u()
+            => opcheck((x,y) => (ushort)(x + y), D.add<ushort>());
+
+        public void add_32i()
+            => opcheck((x,y) => (x + y), D.add<int>());
+
+        public void add_32u()
+            => opcheck((x,y) => (x + y), D.add<uint>());
+
+        public void add_64i()
+            => opcheck((x,y) => (x + y), D.add<long>());
+
+        public void add_64u()
+            => opcheck((x,y) => (x + y), D.add<ulong>());
+
+        public void add_32f()
+            => VerifyOp((x,y) => (x + y), D.add<float>());
+
+        public void add_64()
+            => VerifyOp((x,y) => (x + y), D.add<double>());              
+
+
         public void add_g8i_bench()
         {
             var x = closed(1,2);
@@ -65,56 +96,6 @@ namespace Z0
         public void add_g64f_bench()
         {
             gadd_bench<double>();
-        }
-
-        public void add_g8i_check()
-        {
-            opcheck((x,y) => (sbyte)(x + y), D.add<sbyte>());
-        }
-
-        public void add_g8u_check()
-        {
-            opcheck((x,y) => (byte)(x + y), D.add<byte>());
-        }
-
-        public void add_g16i_check()
-        {
-            opcheck((x,y) => (short)(x + y), D.add<short>());
-        }
-
-        public void add_g16u_check()
-        {
-            opcheck((x,y) => (ushort)(x + y), D.add<ushort>());
-        }
-
-        public void add_g32i_check()
-        {
-            opcheck((x,y) => (x + y), D.add<int>());
-        }
-
-        public void add_g32u_check()
-        {
-            opcheck((x,y) => (x + y), D.add<uint>());
-        }
-
-        public void add_g64i_check()
-        {
-            opcheck((x,y) => (x + y), D.add<long>());
-        }
-
-        public void add_g64u_check()
-        {
-            opcheck((x,y) => (x + y), D.add<ulong>());
-        }
-
-        public void add_g32f_check()
-        {
-            VerifyOp((x,y) => (x + y), D.add<float>());
-        }
-
-        public void add_g64f_check()
-        {
-            VerifyOp((x,y) => (x + y), D.add<double>());              
         }
 
         public void add_d32_baseline()
@@ -178,7 +159,7 @@ namespace Z0
             polyadd_bench(SDel.add<double>());
         }
 
-        void polyadd_check<T>(AddOp<T> op)
+        void polyadd_check<T>(IBinaryOp<T> op)
             where T : unmanaged
         {
             for(var i=0; i< SampleSize; i++)
@@ -221,10 +202,9 @@ namespace Z0
                 counter.Stop();
             }
             Benchmark($"add_d{moniker<int>()}", counter);
-
         }
 
-        void polyadd_bench<T>(AddOp<T> op, SystemCounter counter = default)
+        void polyadd_bench<T>(IBinaryOp<T> op, SystemCounter counter = default)
             where T : unmanaged
         {
             var sw = stopwatch(false);

@@ -60,6 +60,26 @@ namespace Z0
             }
         }
 
+        protected void nbv_dot_check_128<N,T>(N n = default, T zero = default)
+            where N : unmanaged, ITypeNat
+            where T : unmanaged
+        {
+            for(var i=0; i< SampleSize; i++)
+            {
+                var x = Random.BitVector128(n, zero);
+                var y = Random.BitVector128(n, zero);
+                Claim.lteq(BitVector.nlz(x), x.Width);
+
+                var a = x % y;
+                var xc = x.ToBitCells();
+                var yc = y.ToBitCells();
+                var b = xc % yc;
+                Claim.eq(a,b);
+
+            }
+        }
+
+
         protected void nbv_rev_check<N,T>()
             where N : unmanaged, ITypeNat
             where T : unmanaged

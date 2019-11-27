@@ -22,15 +22,15 @@ namespace Z0
         }
 
         public void sb_scatter_8()
-            => gsb_scatter_check<byte>();
+            => sb_scatter_check<byte>();
 
         public void sb_scatter_16()
-            => gsb_scatter_check<ushort>();
+            => sb_scatter_check<ushort>();
 
         public void sb_scatter_32()
-            => gsb_scatter_check<uint>();
+            => sb_scatter_check<uint>();
 
         public void s_scatter_64()
-            => gsb_scatter_check<ulong>();
+            => sb_scatter_check<ulong>();
     }
 }

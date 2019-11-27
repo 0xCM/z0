@@ -246,7 +246,7 @@ namespace Z0
             where T : unmanaged
         {
             var mask = DataBlocks.cellalloc<T>(n256,1);
-            var chop = PrimalInfo.Get<T>().MaxVal;
+            var chop = maxval<T>();
             
             //For the first 128-bit lane
             var half = mask.Length/2;

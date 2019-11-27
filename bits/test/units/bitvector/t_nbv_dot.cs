@@ -14,6 +14,9 @@ namespace Z0
     /// </summary>
     public class t_nbv_dot : t_bv<t_nbv_dot>
     {
+        public void nbv_dot_87x128x64()
+            => nbv_dot_check_128<N87,ulong>();
+
         public void nbv_dot_2x8()
             => nbv_dot_check<N2,byte>();
 

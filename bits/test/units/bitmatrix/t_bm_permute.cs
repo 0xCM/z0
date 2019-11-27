@@ -5,23 +5,57 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Reflection;
     using System.Runtime.CompilerServices;
 
     using static zfunc;
 
     public class t_bm_permute : t_bm<t_bm_permute>
     {
+        public void bm_permrev_8x8()
+        {
+            for(var i= 0; i<SampleSize; i++)
+            {
+                //Creates an "exchange" matrix
+                var perm = Perm.identity(n8).Reverse();
+                var mat = perm.ToBitMatrix();
 
-        // public void perm_16x4()
-        // {
-        //     var A = Random.BitMatrix(n16,n4, 0ul);
-        //     Trace(A.Format());
-        //     var perm = A.ToPermutation();
-        //     Trace(perm.Format());
-            
-        // }
+                var v1 = Random.BitVector(n8);
+                var v2 = mat * v1;
+                var v3 = v1.Replicate();
+                v3 = BitVector.rev(v3);
+                Claim.eq(v3,v2);
+            }
+        }
+        public void bm_permrev_32x32()
+        {
+            for(var i= 0; i<SampleSize; i++)
+            {
+                //Creates an "exchange" matrix            
+                var perm = Perm.identity(n32).Reverse();
+                var mat = perm.ToBitMatrix();
+
+                var v1 = Random.BitVector(n32);
+                var v2 = mat * v1;
+                var v3 = v1.Replicate();
+                Claim.eq(v3.Reverse(),v2);
+            }
+        }
+
+        public void bm_permrev_64x64()
+        {
+            for(var i= 0; i<SampleSize; i++)
+            {
+                //Creates an "exchange" matrix            
+                var perm = Perm.identity(n64).Reverse();
+                var mat = perm.ToBitMatrix();
+
+                var v1 = Random.BitVector(n64);
+                var v2 = mat * v1;
+                var v3 = v1.Replicate();
+                v3 = BitVector.rev(v3);
+                Claim.eq(v3,v2);
+            }
+        }
         
         void permute_check<T>()
             where T : unmanaged

@@ -132,11 +132,11 @@ namespace Z0
         /// Converts the vector to a bitstring
         /// </summary>
         [MethodImpl(Inline)]
-        public static BitString ToBitString(this BitVector128 src)
-            => BitString.from(src.x1) + BitString.from(src.x0);
+        public static BitString ToBitString(this BitVector128 x)
+            => BitVector.bitstring(x);
 
         [MethodImpl(Inline)]
-        public static string FormatBits(this BitVector128 src, bool tlz = false, bool specifier = false, int? blockWidth = null)
-            => src.ToBitString().Format(tlz, specifier, blockWidth);
+        public static string Format(this BitVector128 src, BitFormat? format = null)
+            => BitVector.format(src,format);
     }
 }

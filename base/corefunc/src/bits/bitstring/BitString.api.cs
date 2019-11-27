@@ -8,8 +8,7 @@ namespace Z0
     using System.Linq;
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
-    using System.IO;
+    using System.Runtime.Intrinsics;
     
     using static zfunc;
     using static As;
@@ -74,7 +73,6 @@ namespace Z0
             where T : unmanaged
                 => new BitString(BitStore.bitseq(src));                
 
-
         /// <summary>
         /// Constructs a bitstring from primal value
         /// </summary>
@@ -106,6 +104,16 @@ namespace Z0
             }
             return new BitString(bitseq);
         }
+
+        [MethodImpl(Inline)]   
+        public static BitString from<T>(Vector128<T> src)
+            where T : unmanaged        
+                => BitString.from(src.ToSpan(), null);
+
+        [MethodImpl(Inline)]   
+        public static BitString from<T>(Vector128<T> src, int maxwidth)
+            where T : unmanaged        
+                => BitString.from(src.ToSpan(), maxwidth);
 
         /// <summary>
         /// Assembles a bitstring from primal parts ordered from lo to hi

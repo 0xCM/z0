@@ -115,7 +115,7 @@ namespace Z0
         /// </summary>
         [MethodImpl(Inline)]
         public BitCells<N9,ushort> ToNatVec()
-            => BitCells<N9, ushort>.FromArray(data);
+            => new BitCells<N9,ushort>(data);
         
         /// <summary>
         /// Formats the polynomial

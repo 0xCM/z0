@@ -5,11 +5,8 @@
 namespace Z0
 {
     using System;
-    using System.Numerics;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
-    using System.Linq;
 
     using static zfunc;
 
@@ -51,6 +48,10 @@ namespace Z0
             uint state = *((byte*)(&src));
             return new bit(state);
         }
+
+        [MethodImpl(Inline)]
+        public static bit Parse(char c)
+            => c == '1';
 
         /// <summary>
         /// Returns true if the bit is enabled, false otherwise

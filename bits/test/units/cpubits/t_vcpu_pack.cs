@@ -11,22 +11,42 @@ namespace Z0
 
     public class t_vcpu_pack : t_vcpu<t_vcpu_pack>
     {
-        public void vcpu_pack_basecase()
-        {            
-            Span<byte> src1 = new byte[16];
-            for(var i=0; i<src1.Length; i++)
-                src1[i] = 1;
-            
-            var dst1 = CpuBits.vpack16x1x8(src1);
-            Claim.eq(dst1, (uint)ushort.MaxValue);
-
-            Span<byte> src2 = new byte[32];
-            for(var i=0; i<src2.Length; i++)
-                src2[i] = 1;
-
-            var dst2 = CpuBits.vpack32x1x8(src2);
-            Claim.eq(dst2, uint.MaxValue);
+        public void vcpu_pack_8x1x8()
+        {
+            for(var i=0; i< SampleSize; i++)
+            {
+                var data = Random.Next<byte>();
+                var bs = data.ToBitString();
+                Claim.eq(8,bs.Length);
+                var packed = CpuBits.vpack8x1x8(bs.BitSeq);
+                Claim.eq(data,packed);
+            }
         }
+
+        public void vcpu_pack_16x1x8()
+        {
+            for(var i=0; i< SampleSize; i++)
+            {
+                var data = Random.Next<ushort>();
+                var bs = data.ToBitString();
+                Claim.eq(16,bs.Length);
+                var packed = CpuBits.vpack16x1x8(bs.BitSeq);
+                Claim.eq(data,packed);
+            }
+        }
+
+        public void vcpu_pack_32x1x8()
+        {
+            for(var i=0; i<SampleSize; i++)
+            {
+                var data = Random.Next<uint>();
+                var bs = data.ToBitString();
+                Claim.eq(32,bs.Length);
+                var packed = CpuBits.vpack32x1x8(bs.BitSeq);
+                Claim.eq(data,packed);
+            }
+        }
+
     }
 
 }

@@ -5,12 +5,9 @@
 namespace Z0
 {
     using System;
-    using System.Collections;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     
     using static zfunc;
-    using static As;
 
     /// <summary>
     /// Defines a contiguous segment of homogenous values that lie within left and right boundaries 
@@ -22,33 +19,48 @@ namespace Z0
         where T : unmanaged
     {
         /// <summary>
+        /// The left endpoint
+        /// </summary>
+        public readonly T Left;
+
+        /// <summary>
+        /// The right endpoint
+        /// </summary>
+        public readonly T Right;
+
+        /// <summary>
+        /// The interval classification
+        /// </summary>
+        public IntervalKind Kind {get;}
+
+        /// <summary>
         /// Specifies the canonical closed unit interval over the underlying primitive
         /// </summary>
         /// <typeparam name="T">The primal type</typeparam>
         public static Interval<T> U01 
-            => new Interval<T>(Zero, One, IntervalKind.Closed);
+            => new Interval<T>(zero<T>(), one<T>(), IntervalKind.Closed);
 
         /// <summary>
         /// Defines a closed interval that subsumes all points representable by the primal type
         /// </summary>
         public static Interval<T> Full 
-            => new Interval<T>(MinTypeVal, MaxTypeVal, IntervalKind.Closed);
+            => new Interval<T>(minval<T>(), maxval<T>(), IntervalKind.Closed);
 
-        [MethodImpl(Inline)]
-        public static Interval<T> LeftUnbound(T right)
-            => new Interval<T>(MinTypeVal, right, IntervalKind.LeftOpen);
-
-        [MethodImpl(Inline)]
-        public static Interval<T> RightUnbound(T left)
-            => new Interval<T>(left, MaxTypeVal, IntervalKind.RightOpen);
-        
         /// <summary>
         /// Defines an open interval that subsumes all points representable by the primal type and all points represented 
         /// by increasing the size of the primal type without altering other characteristics
         /// </summary>
         public static Interval<T> Unbound
-            => new Interval<T>(MinTypeVal, MaxTypeVal, IntervalKind.Open);
+            => new Interval<T>(minval<T>(), maxval<T>(), IntervalKind.Open);
 
+        [MethodImpl(Inline)]
+        public static Interval<T> LeftUnbound(T right)
+            => new Interval<T>(minval<T>(), right, IntervalKind.LeftOpen);
+
+        [MethodImpl(Inline)]
+        public static Interval<T> RightUnbound(T left)
+            => new Interval<T>(left, maxval<T>(), IntervalKind.RightOpen);
+        
         [MethodImpl(Inline)]
         public static implicit operator Interval<T>((T left, T right) x)
             => new Interval<T>(x.left, true, x.right, true);
@@ -93,20 +105,6 @@ namespace Z0
             this.Kind = kind;
         }
 
-        /// <summary>
-        /// The left endpoint
-        /// </summary>
-        public readonly T Left;
-
-        /// <summary>
-        /// The right endpoint
-        /// </summary>
-        public readonly T Right;
-
-        /// <summary>
-        /// The interval classification
-        /// </summary>
-        public IntervalKind Kind {get;}
 
         /// <summary>
         /// Specifies whether the interval is left-closed, or equivalently right-open, denoted by [Left,Right),
@@ -168,7 +166,7 @@ namespace Z0
         public bool LeftUnbounded
         {
             [MethodImpl(Inline)]
-            get => Kind == IntervalKind.LeftOpen &&  Left.Equals(MinTypeVal);
+            get => Kind == IntervalKind.LeftOpen &&  Left.Equals(minval<T>());
         }
 
         /// <summary>
@@ -177,7 +175,7 @@ namespace Z0
         public bool RightUnbounded
         {
             [MethodImpl(Inline)]
-            get => Kind == IntervalKind.RightOpen &&  Right.Equals(MaxTypeVal);
+            get => Kind == IntervalKind.RightOpen &&  Right.Equals(maxval<T>());
         }
 
 
@@ -187,7 +185,7 @@ namespace Z0
         public bool Unbounded
         {
             [MethodImpl(Inline)]
-            get => Kind == IntervalKind.Open &&  Left.Equals(MinTypeVal) && Right.Equals(MaxTypeVal);
+            get => Kind == IntervalKind.Open &&  Left.Equals(minval<T>()) && Right.Equals(maxval<T>());
         }
 
 
@@ -252,12 +250,6 @@ namespace Z0
         public Interval<T> WithEndpoints(T left, T right)
             => new Interval<T>(left,right, Kind);
 
-        string LeftFormat
-            => LeftUnbounded ? "-∞" : Left.ToString();
-
-        string RightFormat
-            => RightUnbounded ? "∞" : Right.ToString();
-
         public string Format()
             => concat(LeftSymbol, LeftFormat, Separator, RightFormat, RightSymbol);
 
@@ -271,22 +263,15 @@ namespace Z0
             right = Right;
         }
 
-        char LeftSymbol
-            =>  (LeftClosed  || Closed) ? AsciSym.LBracket : AsciSym.LParen;
+        string LeftFormat => LeftUnbounded ? "-∞" : Left.ToString();
 
-        char RightSymbol
-            => (RightClosed || Closed) ? AsciSym.RBracket : AsciSym.RParen;
+        string RightFormat => RightUnbounded ? "∞" : Right.ToString();
+
+        char LeftSymbol =>  (LeftClosed  || Closed) ? AsciSym.LBracket : AsciSym.LParen;
+
+        char RightSymbol => (RightClosed || Closed) ? AsciSym.RBracket : AsciSym.RParen;
         
-        char Separator
-            => AsciSym.Comma;
-
-        static T MinTypeVal => PrimalInfo.minval<T>();
-
-        static T MaxTypeVal => PrimalInfo.maxval<T>();
-
-        static T Zero => PrimalInfo.zero<T>();
-
-        static T One => PrimalInfo.one<T>();
+        char Separator => AsciSym.Comma;        
 
         [MethodImpl(NotInline)]
         static void Degenerate(T left, T right)

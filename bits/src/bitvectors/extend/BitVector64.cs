@@ -84,17 +84,12 @@ namespace Z0
         /// </summary>
         [MethodImpl(Inline)]
         public static BitString ToBitString(this BitVector64 x)
-            => x.data.ToBitString();
+            => BitVector.bitstring(x);
 
-        /// <summary>
-        /// Formats the bitvector as a bitstring
-        /// </summary>
-        /// <param name="tlz">True if leadzing zeros should be trimmed, false otherwise</param>
-        /// <param name="specifier">True if the prefix specifier '0b' should be prepended</param>
-        /// <param name="blockWidth">The width of the blocks, if any</param>
         [MethodImpl(Inline)]
-        public static string Format(this BitVector64 x, bool tlz = false, bool specifier = false, int? blockWidth = null, int? rowWidth = null)
-            => x.ToBitString().Format(tlz, specifier, blockWidth, null, rowWidth);
+        public static string Format(this BitVector64 src, BitFormat? fmt = null)
+            => BitVector.format(src, fmt);
+
     }
 
 }

@@ -201,7 +201,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged    
-                => FileName.Define($" {fileId ?? "mat"}_{PrimalKinds.kind<T>()}[{nati<M>()}x{nati<N>()}].csv");
+                => FileName.Define($" {fileId ?? "mat"}_{typename<T>()}[{nati<M>()}x{nati<N>()}].csv");
         
         /// <summary>
         /// Writes the matrix to a delimited file

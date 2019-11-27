@@ -13,6 +13,9 @@ namespace Z0
 
     partial class inxoc
     {
+        public static Vector256<byte> vquadpack256x32x4(Vector256<uint> x0,Vector256<uint> x1,Vector256<uint> x2, Vector256<uint> x3)
+            => dinx.vquadpack(x0,x1,x2,x3);
+
         public static Vector128<byte> vmov128x8u(byte src)
             => dinx.vmov(n128,src);
 

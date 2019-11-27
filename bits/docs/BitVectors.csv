@@ -1,0 +1,10 @@
+Type                | Width       | Primal | Generic | Natural | Dimension | Vectorized
+BitVector4          | 4           | Y      | N       | N       | 4         | N
+BitVector8          | 8           | Y      | N       | N       | 8         | N
+BitVector16         | 16          | Y      | N       | N       | 16        | N
+BitVector32         | 32          | Y      | N       | N       | 32        | N
+BitVector64         | 64          | Y      | N       | N       | 64        | N
+BitVector128        | 128         | Y      | N       | N       | 128       | N
+BitVector[T]        | 8/16/32/64  | Y      | Y       | Y       | 0         | N 
+BitVector[N,T]      | 8/16/32/64  | Y      | Y       | Y       | N         | N 
+BitVector128[N,T]   | 128         | N      | Y       | Y       | N         | Y

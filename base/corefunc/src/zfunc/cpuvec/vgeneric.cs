@@ -23,7 +23,7 @@ partial class zfunc
     [MethodImpl(Inline)]
     public static Vector128<T> vgeneric<T>(Vector128<sbyte> x)
         where T : unmanaged
-            => As.generic<T>(x);
+            => As.vgeneric<T>(x);
 
     /// <summary>
     /// Presents a cpu vector closed over a specified type as a generic cpu vector
@@ -33,7 +33,7 @@ partial class zfunc
     [MethodImpl(Inline)]
     public static Vector128<T> vgeneric<T>(Vector128<byte> x)
         where T : unmanaged
-            => As.generic<T>(x);
+            => As.vgeneric<T>(x);
 
     /// <summary>
     /// Presents a cpu vector closed over a specified type as a generic cpu vector
@@ -43,7 +43,7 @@ partial class zfunc
     [MethodImpl(Inline)]
     public static Vector128<T> vgeneric<T>(Vector128<short> x)
         where T : unmanaged
-            => As.generic<T>(x);
+            => As.vgeneric<T>(x);
 
     /// <summary>
     /// Presents a cpu vector closed over a specified type as a generic cpu vector

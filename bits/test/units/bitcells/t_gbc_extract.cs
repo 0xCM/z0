@@ -80,8 +80,8 @@ namespace Z0
             byte x2 = 0b10100011;
             byte x3 = 0b10011101;
             byte x4 = 0b01011000;
-            var bvx = BitCells.literals(x0,x1,x2,x3,x4);
-            Claim.eq(40, bvx.Length);
+            var bcx = BitCells.literals(x0,x1,x2,x3,x4);
+            Claim.eq(40, bcx.BitCount);
 
             byte y0 = 0b0110;
             byte y1 = 0b1101;
@@ -98,30 +98,30 @@ namespace Z0
             byte y8 = 0b1000;
             byte y9 = 0b0101;
             var y89 = gmath.or(y8, gmath.sal(y9, 4));
-            var bvy = BitCells.literals(y01,y23,y45,y67,y89);            
-            Claim.eq(40, bvy.Length);
+            var bcy = BitCells.literals(y01,y23,y45,y67,y89);            
+            Claim.eq(40, bcy.BitCount);
 
             ulong z = 0b0101100010011101101000111001010111010110;           
-            var bvz = BitCells<ulong>.FromCell(z,40);
-            Claim.eq(40, bvz.Length);
+            var bvz = BitCells.literal(z,40);
+            Claim.eq(40, bvz.BitCount);
 
-            var bsy = bvy.ToBitString().Format(true);
-            var bsx = bvx.ToBitString().Format(true);
+            var bsy = bcy.ToBitString().Format(true);
+            var bsx = bcx.ToBitString().Format(true);
             var bsz = bvz.ToBitString().Format(true);
             Claim.eq(bsx, "101100010011101101000111001010111010110");
             Claim.eq(bsx, bsy);
             Claim.eq(bsx, bsz);
 
-            Claim.eq(y0, bvx.SliceCell(0,3));
-            Claim.eq(y1, bvx.SliceCell(4,7));
-            Claim.eq(y2, bvx.SliceCell(8,11));
-            Claim.eq(y3, bvx.SliceCell(12,15));
-            Claim.eq(y4, bvx.SliceCell(16,19));
-            Claim.eq(y5, bvx.SliceCell(20,23));
-            Claim.eq(y6, bvx.SliceCell(24,27));
-            Claim.eq(y7, bvx.SliceCell(28,31));
-            Claim.eq(y8, bvx.SliceCell(32,35));
-            Claim.eq(y9, bvx.SliceCell(36,39));
+            Claim.eq(y0, bcx.SliceCell(0,3));
+            Claim.eq(y1, bcx.SliceCell(4,7));
+            Claim.eq(y2, bcx.SliceCell(8,11));
+            Claim.eq(y3, bcx.SliceCell(12,15));
+            Claim.eq(y4, bcx.SliceCell(16,19));
+            Claim.eq(y5, bcx.SliceCell(20,23));
+            Claim.eq(y6, bcx.SliceCell(24,27));
+            Claim.eq(y7, bcx.SliceCell(28,31));
+            Claim.eq(y8, bcx.SliceCell(32,35));
+            Claim.eq(y9, bcx.SliceCell(36,39));
 
             Claim.eq(y0, (byte)bvz.SliceCell(0,3));
             Claim.eq(y1, bvz.SliceCell(4,7));
@@ -139,7 +139,7 @@ namespace Z0
         {
 
             ulong z = 0b01011_00010_01110_11010_00111_00101_01110_10110;           
-            var bvz = BitCells<ulong>.FromCell(z,40);
+            var bvz = BitCells.literal(z,40);
             var xSrc =  BitConvert.GetBytes(z);
             Span<ushort> ySrc = xSrc.AsUInt16();
             Claim.eq(ySrc.Length*2, xSrc.Length);

@@ -25,13 +25,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(Bits.vbutterfly(n,uint8(x)));
+                return As.vgeneric<T>(Bits.vbutterfly(n, vcast8u(x)));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(Bits.vbutterfly(n,uint16(x)));
+                return generic<T>(Bits.vbutterfly(n,vcast16u(x)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(Bits.vbutterfly(n,uint32(x)));
+                return generic<T>(Bits.vbutterfly(n,vcast32u(x)));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(Bits.vbutterfly(n,uint64(x)));
+                return generic<T>(Bits.vbutterfly(n,vcast64u(x)));
             else            
                 throw unsupported<T>();
         }
@@ -46,13 +46,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(Bits.vbutterfly(n,uint8(x)));
+                return As.vgeneric<T>(Bits.vbutterfly(n, vcast8u(x)));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(Bits.vbutterfly(n,uint16(x)));
+                return generic<T>(Bits.vbutterfly(n,vcast16u(x)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(Bits.vbutterfly(n,uint32(x)));
+                return generic<T>(Bits.vbutterfly(n,vcast32u(x)));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(Bits.vbutterfly(n,uint64(x)));
+                return generic<T>(Bits.vbutterfly(n,vcast64u(x)));
             else            
                 throw unsupported<T>();
         }
@@ -70,11 +70,11 @@ namespace Z0
             if(typeof(T) == typeof(byte))
                 return x;
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(Bits.vbutterfly(n,uint16(x)));
+                return generic<T>(Bits.vbutterfly(n,vcast16u(x)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(Bits.vbutterfly(n,uint32(x)));
+                return generic<T>(Bits.vbutterfly(n,vcast32u(x)));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(Bits.vbutterfly(n,uint64(x)));
+                return generic<T>(Bits.vbutterfly(n,vcast64u(x)));
             else            
                 throw unsupported<T>();
         }
@@ -92,9 +92,9 @@ namespace Z0
             if(typeof(T) == typeof(byte) || typeof(T) == typeof(ushort))
                 return x;
             else if(typeof(T) == typeof(uint))
-                return generic<T>(Bits.vbutterfly(n,uint32(x)));
+                return generic<T>(Bits.vbutterfly(n,vcast32u(x)));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(Bits.vbutterfly(n,uint64(x)));
+                return generic<T>(Bits.vbutterfly(n,vcast64u(x)));
             else            
                 throw unsupported<T>();
         }
@@ -111,7 +111,7 @@ namespace Z0
             if(typeof(T) == typeof(byte) || typeof(T) == typeof(ushort) || typeof(T) == typeof(uint))
                 return x;
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(Bits.vbutterfly(n,uint64(x)));
+                return generic<T>(Bits.vbutterfly(n,vcast64u(x)));
             else            
                 throw unsupported<T>();
         }
@@ -126,13 +126,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(Bits.vbutterfly(n,uint8(x)));
+                return generic<T>(Bits.vbutterfly(n,vcast8u(x)));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(Bits.vbutterfly(n,uint16(x)));
+                return generic<T>(Bits.vbutterfly(n,vcast16u(x)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(Bits.vbutterfly(n,uint32(x)));
+                return generic<T>(Bits.vbutterfly(n,vcast32u(x)));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(Bits.vbutterfly(n,uint64(x)));
+                return generic<T>(Bits.vbutterfly(n,vcast64u(x)));
             else            
                 throw unsupported<T>();
         }
@@ -147,13 +147,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(Bits.vbutterfly(n,uint8(x)));
+                return generic<T>(Bits.vbutterfly(n,vcast8u(x)));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(Bits.vbutterfly(n,uint16(x)));
+                return generic<T>(Bits.vbutterfly(n,vcast16u(x)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(Bits.vbutterfly(n,uint32(x)));
+                return generic<T>(Bits.vbutterfly(n,vcast32u(x)));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(Bits.vbutterfly(n,uint64(x)));
+                return generic<T>(Bits.vbutterfly(n,vcast64u(x)));
             else            
                 throw unsupported<T>();
         }
@@ -171,11 +171,11 @@ namespace Z0
             if(typeof(T) == typeof(byte))
                 return x;
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(Bits.vbutterfly(n,uint16(x)));
+                return generic<T>(Bits.vbutterfly(n,vcast16u(x)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(Bits.vbutterfly(n,uint32(x)));
+                return generic<T>(Bits.vbutterfly(n,vcast32u(x)));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(Bits.vbutterfly(n,uint64(x)));
+                return generic<T>(Bits.vbutterfly(n,vcast64u(x)));
             else            
                 throw unsupported<T>();
         }
@@ -193,9 +193,9 @@ namespace Z0
             if(typeof(T) == typeof(byte) || typeof(T) == typeof(ushort))
                 return x;
             else if(typeof(T) == typeof(uint))
-                return generic<T>(Bits.vbutterfly(n,uint32(x)));
+                return generic<T>(Bits.vbutterfly(n,vcast32u(x)));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(Bits.vbutterfly(n,uint64(x)));
+                return generic<T>(Bits.vbutterfly(n,vcast64u(x)));
             else            
                 throw unsupported<T>();
         }
@@ -212,7 +212,7 @@ namespace Z0
             if(typeof(T) == typeof(byte) || typeof(T) == typeof(ushort) || typeof(T) == typeof(uint))
                 return x;
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(Bits.vbutterfly(n,uint64(x)));
+                return generic<T>(Bits.vbutterfly(n,vcast64u(x)));
             else            
                 throw unsupported<T>();
         }

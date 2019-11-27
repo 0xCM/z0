@@ -12,17 +12,6 @@ namespace Z0
 
     partial class BitMatrix
     {
-        /// <summary>
-        /// Queries the matrix for the data in an index-identified column 
-        /// </summary>
-        /// <param name="index">The row index</param>
-        public static BitVector4 column(in BitMatrix4 A, int index)
-        {
-            byte col = 0;
-            for(var r = 0; r < BitMatrix4.N; r++)
-                col = BitMask.set(col, (byte)r, BitMask.test(A[r], index));
-            return col;
-        }
 
         /// <summary>
         /// Transposes a copy of the matrix
@@ -31,7 +20,7 @@ namespace Z0
         {        
             var B = A.Replicate();
             for(var i=0; i<BitMatrix4.N; i++)                
-                B[i] = column(A,i);
+                B[i] = col(A,i);
 
             return B;
         }
@@ -131,8 +120,16 @@ namespace Z0
         public static BitMatrix<N16,N8,uint> transpose(in BitMatrix<N8,N16,uint> A)
         {
             var vec = ginx.vload(n128,A.Bytes);
-            ginx.vstore(dinx.vshuf16x8(vec, Tr8x16Mask), ref head(A.Bytes));
+            vstore(dinx.vshuf16x8(vec, Tr8x16Mask), ref head(A.Bytes));
             return BitMatrix.load<N16,N8,uint>(A.Data);
+        }
+
+        public static BitMatrix32 transpose(in BitMatrix32 A)
+        {
+            var dst = A.Replicate();
+            for(var i=0; i<A.Order; i++)
+                dst[i] = col(A,i);
+            return dst;
         }
 
         static Vec128<byte> Tr8x16Mask

@@ -35,6 +35,18 @@ namespace Z0
             where N : unmanaged, ITypeNat
                 => gmath.and(x.Scalar, y.Scalar);
 
+
+        /// <summary>
+        /// Computes the bitvector z := x & y from bitvectors x and y
+        /// </summary>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
+        /// <typeparam name="T">The primal type</typeparam>
+        [MethodImpl(Inline)]
+        public static BitVector128<N,T> and<N,T>(in BitVector128<N,T> x, in BitVector128<N,T> y)
+            where N : unmanaged, ITypeNat
+            where T : unmanaged
+                => ginx.vand(x.data,y.data);
         /// <summary>
         /// Computes a new bitvector z = x & y from bitvectors x and y
         /// </summary>
@@ -87,5 +99,8 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitVector128 and(in BitVector128 x, in BitVector128 y)
             => from(n128, gmath.and(x.x0, y.x0), gmath.and(x.x1,  y.x1));
+
+
+
     }
 }

@@ -5,59 +5,12 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Reflection;
     using System.Runtime.CompilerServices;
 
     using static zfunc;
 
     public class t_bm_create : t_bm<t_bm_create>
     {
-        public void permrev_8x8()
-        {
-            for(var i= 0; i<SampleSize; i++)
-            {
-                //Creates an "exchange" matrix
-                var perm = Perm.identity(n8).Reverse();
-                var mat = perm.ToBitMatrix();
-
-                var v1 = Random.BitVector(n8);
-                var v2 = mat * v1;
-                var v3 = v1.Replicate();
-                v3 = BitVector.rev(v3);
-                Claim.eq(v3,v2);
-            }
-        }
-        public void permrev_32x32()
-        {
-            for(var i= 0; i<SampleSize; i++)
-            {
-                //Creates an "exchange" matrix            
-                var perm = Perm.identity(n32).Reverse();
-                var mat = perm.ToBitMatrix();
-
-                var v1 = Random.BitVector(n32);
-                var v2 = mat * v1;
-                var v3 = v1.Replicate();
-                Claim.eq(v3.Reverse(),v2);
-            }
-        }
-
-        public void permrev_64x64()
-        {
-            for(var i= 0; i<SampleSize; i++)
-            {
-                //Creates an "exchange" matrix            
-                var perm = Perm.identity(n64).Reverse();
-                var mat = perm.ToBitMatrix();
-
-                var v1 = Random.BitVector(n64);
-                var v2 = mat * v1;
-                var v3 = v1.Replicate();
-                v3 = BitVector.rev(v3);
-                Claim.eq(v3,v2);
-            }
-        }
 
         public void create_16x16_from_fixed()
         {
@@ -141,39 +94,6 @@ namespace Z0
             }
         }
 
-        public void nbm_create_9x4x8()
-        {
-            var grid = BitGridSpec.define<N9,N4,byte>();    
-            Claim.eq(9, grid.RowCount);
-            Claim.eq(4, grid.ColCount);
-
-            var layout = grid.CalcLayout();
-            Claim.eq(36, layout.BitCount);
-            Claim.eq(9, layout.RowCount);
-            Claim.eq(4, layout.ColCount);
-            Claim.eq(1, layout.RowCellCount);
-            Claim.eq(9, layout.TotalCellCount);
-            var row0 = layout.Row(0);
-            
-            Claim.eq(4, row0.Length);            
-            Claim.eq(0, row0[0].Col);
-            Claim.eq(3, row0[3].Col);
-            Claim.eq(0, (int)row0[3].Segment);
-
-            var row8 = layout.Row(8);
-            Claim.eq(4, row8.Length);
-            Claim.eq(8, (int)row8[3].Segment);
-
-            var m = BitMatrix.ones<N9,N4,byte>();
-            Claim.eq(9,m.RowCount);
-            Claim.eq(4,m.ColCount);
-            for(var i=0; i< m.RowCount; i++)
-            {
-                for(var j=0; j<m.ColCount; j++)
-                    Claim.eq(m[i,j], Bit.On);
-            }            
-        }
-
         public void nbm_create_7x9x8()
         {
             var m1 = BitMatrix.alloc<N7,N9,byte>();
@@ -203,56 +123,6 @@ namespace Z0
             x.Fill(on);
 
             Claim.yea(d == x);                        
-        }
-
-        public void create16x16()
-        {
-            var spec = BitGridSpec.define<N16,N16,byte>();    
-            Claim.eq(16, spec.RowCount);
-            Claim.eq(16, spec.ColCount);
-
-            var layout = spec.CalcLayout();
-
-            int rowCount = 0, bitpos = 0;
-            for(var row=0; row < layout.RowCount; row++)
-            {
-                rowCount++;
-                var cells = layout.Row(row);
-                for(var col=0; col< layout.ColCount; col++, bitpos++)
-                {
-
-                    var cell = cells[col];
-
-                    Claim.eq(bitpos, cell.Position);
-                    Claim.eq(row, cell.Row);
-                    Claim.eq(col, cell.Col);
-                }
-            }
-            Claim.eq(256, bitpos);
-            Claim.eq(256, layout.BitCount);
-            
-            Claim.eq(16, layout.RowCount);
-            Claim.eq(16, rowCount);
-            
-            Claim.eq(16, layout.ColCount);
-            Claim.eq(2, layout.RowCellCount);
-            Claim.eq(32, layout.TotalCellCount);
-
-            var row0 = layout.Row(0);
-            
-            Claim.eq(16, row0.Length);            
-            Claim.eq(0, row0[0].Col);
-            Claim.eq(3, row0[3].Col);
-            Claim.eq(1, (int)row0[9].Segment);
-
-            var m = BitMatrix.ones<N16,byte>();
-            Claim.eq(16, m.Order);
-            Claim.eq(16, m.Order);
-            Claim.eq(2, BitMatrix<N16,byte>.RowCellCount);
-            
-            for(var i=0; i < m.Order; i++)
-            for(var j=0; j < m.Order; j++)
-                Claim.eq(on, m[i,j]);
         }
     }
 }

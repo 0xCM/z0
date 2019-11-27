@@ -13,6 +13,7 @@ namespace Z0
     partial class CpuBits
     {         
 
+
         //pack 32 1-bit values from 32 8-bit segments
         [MethodImpl(Inline)]
         public static uint vpack32x1x8(ReadOnlySpan<byte> src)
@@ -24,13 +25,20 @@ namespace Z0
 
         //pack 16 1-bit values from 16 8-bit segments
         [MethodImpl(Inline)]
-        public static uint vpack16x1x8(ReadOnlySpan<byte> src)
+        public static ushort vpack16x1x8(ReadOnlySpan<byte> src)
         {
             var x = v64u(ginx.vload(n128, in head(src)));
             x = ginx.vsll(x,7);
-            return ginx.vmovemask(x);
+            return (ushort)ginx.vmovemask(x);
         }
 
+        //pack 8 1-bit values from 8 8-bit segments
+        [MethodImpl(Inline)]
+        public static byte vpack8x1x8(ReadOnlySpan<byte> src)
+        {
+            var x = ginx.vscalar(in head64(src));
+            x = ginx.vsll(x,7);
+            return (byte)ginx.vmovemask(x);
+        }
     }
-
 }

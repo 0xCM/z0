@@ -26,7 +26,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator BitCells<N16,ushort>(BitVector16 src)
-            => BitCells<N16,ushort>.FromArray(src.data);
+            => BitCells.literal(src.data, N);
 
         [MethodImpl(Inline)]
         public static implicit operator BitVector<ushort>(BitVector16 src)

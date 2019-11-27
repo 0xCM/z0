@@ -1,4 +1,4 @@
-// 2019-11-25 21:05:21:443
+// 2019-11-27 00:53:14:751
 uint pop_3x128(Vector128<ulong> x, Vector128<ulong> y, Vector128<ulong> z)
 {
     IL_0000: ldarg.0
@@ -349,10 +349,10 @@ void partition(BitVector128 x, Span<BitVector32> dst)
 }
 bit dot_64(BitVector64 x, BitVector64 y)
 {
-    IL_0000: ldarga.s x
-    IL_0002: ldarga.s y
-    IL_0004: call Z0.bit Z0.BitVector64::op_Modulus(Z0.BitVector64&,Z0.BitVector64&)
-    IL_0009: ret
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call Z0.bit Z0.BitVector64::op_Modulus(Z0.BitVector64,Z0.BitVector64)
+    IL_0007: ret
 
 }
 bit dot_128(BitVector128 x, BitVector128 y)
@@ -811,10 +811,10 @@ BitVector32 and_bv_32u(BitVector32 x, BitVector32 y)
 }
 BitVector32 and_bv_o32u(BitVector32 x, BitVector32 y)
 {
-    IL_0000: ldarga.s x
-    IL_0002: ldarga.s y
-    IL_0004: call Z0.BitVector32 Z0.BitVector32::op_BitwiseAnd(Z0.BitVector32&,Z0.BitVector32&)
-    IL_0009: ret
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call Z0.BitVector32 Z0.BitVector32::op_BitwiseAnd(Z0.BitVector32,Z0.BitVector32)
+    IL_0007: ret
 
 }
 BitVector32 or_bv_32u(BitVector32 x, BitVector32 y)
@@ -827,10 +827,10 @@ BitVector32 or_bv_32u(BitVector32 x, BitVector32 y)
 }
 BitVector32 or_bv_o32u(BitVector32 x, BitVector32 y)
 {
-    IL_0000: ldarga.s x
-    IL_0002: ldarga.s y
-    IL_0004: call Z0.BitVector32 Z0.BitVector32::op_BitwiseOr(Z0.BitVector32&,Z0.BitVector32&)
-    IL_0009: ret
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call Z0.BitVector32 Z0.BitVector32::op_BitwiseOr(Z0.BitVector32,Z0.BitVector32)
+    IL_0007: ret
 
 }
 BitVector32 xor_bv_32u(BitVector32 x, BitVector32 y)
@@ -843,10 +843,10 @@ BitVector32 xor_bv_32u(BitVector32 x, BitVector32 y)
 }
 BitVector32 xor_bv_o32u(BitVector32 x, BitVector32 y)
 {
-    IL_0000: ldarga.s x
-    IL_0002: ldarga.s y
-    IL_0004: call Z0.BitVector32 Z0.BitVector32::op_ExclusiveOr(Z0.BitVector32&,Z0.BitVector32&)
-    IL_0009: ret
+    IL_0000: ldarg.0
+    IL_0001: ldarg.1
+    IL_0002: call Z0.BitVector32 Z0.BitVector32::op_ExclusiveOr(Z0.BitVector32,Z0.BitVector32)
+    IL_0007: ret
 
 }
 BitVector32 sll_bv_32u(BitVector32 x, int offset)

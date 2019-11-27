@@ -1,4 +1,4 @@
-// 2019-11-25 21:05:21:596
+// 2019-11-27 00:53:14:915
 int convert_g32f_to_g32i(float src)
 {
     IL_0000: ldarg.0
@@ -850,6 +850,26 @@ short convert_g32u_to_g16i(uint src)
     IL_0000: ldarg.0
     IL_0001: call System.Int16 Z0.Converter::convert<System.UInt32,System.Int16>(System.UInt32)
     IL_0006: ret
+
+}
+ushort convert_32u_to_16u(uint src)
+{
+    IL_0000: ldarg.0
+    IL_0001: conv.u2
+    IL_0002: ret
+
+}
+ushort convert_g32u_to_g16u(uint src)
+{
+    IL_0000: ldarg.0
+    IL_0001: call System.UInt16 Z0.Converter::convert<System.UInt32,System.UInt16>(System.UInt32)
+    IL_0006: ret
+
+}
+int convert_32u_to_32i(uint src)
+{
+    IL_0000: ldarg.0
+    IL_0001: ret
 
 }
 int convert_g32u_to_g32i(uint src)

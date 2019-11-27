@@ -23,7 +23,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator BitCells<N8,byte>(in BitVector8 src)
-            => BitCells<N8,byte>.FromArray(src.data);
+            => new BitCells<N8,byte>(src.data);
 
         [MethodImpl(Inline)]
         public static implicit operator BitVector<byte>(BitVector8 src)

@@ -11,7 +11,6 @@ using Z0;
 partial class zfunc
 {
 
-
     [MethodImpl(Inline)]
     static sbyte sign(sbyte src)
         => BitMask.test(src,7) ? (sbyte)(-1) : (sbyte)1;

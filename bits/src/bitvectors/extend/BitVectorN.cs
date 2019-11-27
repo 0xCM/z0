@@ -38,17 +38,16 @@ namespace Z0
         /// Converts the vector content to a bitring representation
         /// </summary>
         [MethodImpl(Inline)]
-        public static BitString ToBitString<N,T>(this BitVector<N,T> src)
+        public static BitString ToBitString<N,T>(this BitVector<N,T> x)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => BitString.from<T>(src.Scalar, natval<N>());
+                => BitVector.bitstring(x);
         
         [MethodImpl(Inline)]
         public static BitVector<N,T> ToBitVector<N,T>(this BitString src)
             where T : unmanaged
             where N : unmanaged, ITypeNat
                 => BitVector.natural<N,T>(src);
-
 
         /// <summary>
         /// Defines a bitvector over an 8-bit cell of specified natural width
@@ -87,9 +86,9 @@ namespace Z0
                 => src;        
 
         [MethodImpl(Inline)]
-        public static string Format<N,T>(this BitVector<N,T> src, bool tlz = false, bool specifier = false, int? blockWidth = null)
+        public static string Format<N,T>(this BitVector<N,T> src, BitFormat? fmt = null)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => src.ToBitString().Format(tlz, specifier, blockWidth);
+                => BitVector.format(src,fmt);
     }
 }

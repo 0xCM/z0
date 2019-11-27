@@ -11,16 +11,29 @@ namespace Z0
     using static zfunc;    
 
     /// <summary>
-    /// Defines a natural bitvector
+    /// Defines a natural bitvector over a primal cell
     /// </summary>
     /// <typeparam name="T">The cell type</typeparam>
     /// <typeparam name="N">The bit-width type</typeparam>
+    /// <remarks>There are three notions of width that are applicable to this data structure.
+    /// First, the bit width of the primal cell which determines the maximum number of
+    /// bits that can be covered. Next is the natural parametric width that defines an
+    /// upper bound for the effective width. Finally, is the effective bitvector width, a value
+    /// which is bounded above by the the natural width/remarks>
     public struct BitVector<N,T>
         where N : unmanaged, ITypeNat
         where T : unmanaged
     {
         internal T data;
 
+        /// <summary>
+        /// The physical width of the vector
+        /// </summary>
+        public static int MaxWidth => bitsize<T>();
+
+        /// <summary>
+        /// The maximum arithmetic value of the vector, constrained by the natural width
+        /// </summary>
         public static T MaxValue 
         {
             [MethodImpl(Inline)]

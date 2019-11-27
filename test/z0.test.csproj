@@ -17,7 +17,6 @@
     <ProjectReference Include="$(TopDir)cpu/cpufunc/z0.cpufunc.csproj" />
     <ProjectReference Include="$(TopDir)rng/core/z0.rng.core.csproj" />    
     <ProjectReference Include="$(TopDir)bits/src/z0.bits.csproj" />
-    <ProjectReference Include="$(TopDir)circuits/src/z0.circuits.csproj" />
     <ProjectReference Include="$(TopDir)machines/src/z0.machines.csproj" />
     <ProjectReference Include="$(TopDir)linear/matrix/src/z0.matrix.csproj" />
     <ProjectReference Include="$(TopDir)linear/ops/z0.linops.csproj" />
@@ -35,7 +34,6 @@
     <ProjectReference Include="$(TopDir)intrinsics/test/z0.intrinsics.test.csproj" />
     <ProjectReference Include="$(TopDir)cpu/test/z0.cpu.test.csproj" />
     <ProjectReference Include="$(TopDir)bits/test/z0.bits.test.csproj" />
-    <ProjectReference Include="$(TopDir)circuits/test/z0.circuits.test.csproj" />
     <ProjectReference Include="$(TopDir)machines/test/z0.machines.test.csproj" />
     <ProjectReference Include="$(TopDir)mkl/test/z0.mkl.test.csproj" />
     <ProjectReference Include="$(TopDir)libm/test/z0.libm.test.csproj" />

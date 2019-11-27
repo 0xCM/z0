@@ -55,48 +55,11 @@ namespace Z0
         /// Loads a matrix from an array of appopriate length
         /// </summary>
         [MethodImpl(Inline)]
-        public static BitMatrix<M,N,T> Load(T[] src)
-        {
-            require(src.Length == Layout.TotalCellCount);
-            return new BitMatrix<M, N, T>(src);
-        }
-
-        /// <summary>
-        /// Loads a matrix from an array of appopriate length
-        /// </summary>
-        [MethodImpl(Inline)]
         public static BitMatrix<M,N,T> Load(Span<T> src)
         {
             require(src.Length == Layout.TotalCellCount);
             return new BitMatrix<M, N, T>(src);
         }
-
-        /// <summary>
-        /// Computes the bitwise XOR between the operands
-        /// </summary>
-        /// <param name="lhs">The left matrix</param>
-        /// <param name="rhs">The right matrix</param>
-        [MethodImpl(Inline)]
-        public static BitMatrix<M,N,T> operator ^(BitMatrix<M,N,T> lhs, BitMatrix<M,N,T> rhs)
-            => XOr(ref lhs, rhs);
-
-        /// <summary>
-        /// Computes the bitwise AND between the operands
-        /// </summary>
-        /// <param name="lhs">The left matrix</param>
-        /// <param name="rhs">The right matrix</param>
-        [MethodImpl(Inline)]
-        public static BitMatrix<M,N,T> operator &(BitMatrix<M,N,T> lhs, BitMatrix<M,N,T> rhs)
-            => And(ref lhs, rhs);
-        
-
-        /// <summary>
-        /// Negates the operand via complemnt
-        /// </summary>
-        /// <param name="src">The source matrix</param>
-        [MethodImpl(Inline)]
-        public static BitMatrix<M,N,T> operator -(BitMatrix<M,N,T> src)
-            => Flip(ref src);
 
         [MethodImpl(Inline)]
         internal BitMatrix(params T[] src)
@@ -111,82 +74,6 @@ namespace Z0
             this.data = src;
             this.moniker = GridMoniker.FromTypes<M,N,T>();
         }
-
-        /// <summary>
-        /// Gets the the value of bit identified by row/col indices
-        /// </summary>
-        /// <param name="row">The zero-based row index</param>
-        /// <param name="col">The zero-based col index</param>
-        [MethodImpl(Inline)]
-        public bit GetBit(int row, int col)
-        {
-            var cell = Layout.Row(row)[col];
-            return gbits.test(Data[cell.Segment], cell.Offset);                    
-        }
-
-        /// <summary>
-        /// Sets the the value of bit identified by row/col indices
-        /// </summary>
-        /// <param name="row">The zero-based row index</param>
-        /// <param name="col">The zero-based col index</param>
-        [MethodImpl(Inline)]
-        public void SetBit(int row, int col, bit value)
-        {
-            var cell = Layout.Row(row)[col];
-            gbits.set(ref data[cell.Segment], (byte)cell.Offset, value);
-        }
-
-        /// <summary>
-        /// Queries/manipulates a bit at a specified row/col
-        /// </summary>
-        public bit this[int row, int col]
-        {
-            [MethodImpl(Inline)]
-            get => GetBit(row, col);
-
-            [MethodImpl(Inline)]
-            set => SetBit(row, col, value);
-        }            
-
-        /// <summary>
-        /// Queries mainpulates a row
-        /// </summary>
-        public BitCells<N,T> this[int row]
-        {
-            [MethodImpl(Inline)]
-            get => RowVector(row);
-            
-            [MethodImpl(Inline)]
-            set => RowVector(row,value);
-        }
-
-        /// <summary>
-        /// The number of rows in the matrix
-        /// </summary>
-        public readonly int RowCount
-        {
-            [MethodImpl(Inline)]
-            get => Layout.RowCount;
-        }
-
-        /// <summary>
-        /// The number of columns in the matrix
-        /// </summary>
-        public readonly int ColCount
-        {
-            [MethodImpl(Inline)]
-            get => Layout.ColCount;
-        }
-
-        /// <summary>
-        /// Presents matrix storage as a bytespan
-        /// </summary>
-        public Span<byte> Bytes
-        {
-            [MethodImpl(Inline)]
-            get => data.AsBytes();
-        }
-
         /// <summary>
         /// Presents matrix storage as a span of generic cells
         /// </summary>
@@ -205,38 +92,80 @@ namespace Z0
             get => ref head(data);
         }
 
+        /// <summary>
+        /// Presents matrix storage as a bytespan
+        /// </summary>
+        public Span<byte> Bytes
+        {
+            [MethodImpl(Inline)]
+            get => data.AsBytes();
+        }
+
+        /// <summary>
+        /// The number of rows in the matrix
+        /// </summary>
+        public readonly int RowCount
+        {
+            [MethodImpl(Inline)]
+            get => RowBitCount;
+        }
+
+        /// <summary>
+        /// The number of columns in the matrix
+        /// </summary>
+        public readonly int ColCount
+        {
+            [MethodImpl(Inline)]
+            get => ColBitCount;
+        }
+
+        /// <summary>
+        /// Queries/manipulates a bit at a specified row/col
+        /// </summary>
+        public bit this[int row, int col]
+        {
+            [MethodImpl(Inline)]
+            get 
+            {
+                var cell = Layout.Row(row)[col];
+                return gbits.test(Data[cell.Segment], cell.Offset);                    
+            }
+
+            [MethodImpl(Inline)]
+            set 
+            {
+                var cell = Layout.Row(row)[col];
+                gbits.set(ref data[cell.Segment], (byte)cell.Offset, value);
+            }
+        }            
+
+        /// <summary>
+        /// Queries mainpulates a row
+        /// </summary>
+        public BitCells<N,T> this[int row]
+        {
+            [MethodImpl(Inline)]
+            get => GetRow(row);
+            
+            [MethodImpl(Inline)]
+            set => value.Data.CopyTo(Data.Slice(RowOffset(row), Layout.RowCellCount));     
+        }
 
         [MethodImpl(Inline)]
         readonly int RowOffset(int row)        
             => Layout.Row(row)[0].Segment;
                 
-        [MethodImpl(Inline)]
-        Span<T> RowData(int row)
-            => data.Slice(RowOffset(row), Layout.RowCellCount);
-
-        [MethodImpl(Inline)]
-        void SetRow(int row, Span<T> data)
-            => data.CopyTo(data.Slice(RowOffset(row), Layout.RowCellCount));     
-
-        /// <summary>
-        /// Replaces an index-identied column of data with the content of a row vector
-        /// </summary>
-        /// <param name="col">The column index</param>
-        [MethodImpl(Inline)]
-        public void RowVector(int row, BitCells<N,T> src)
-            => src.Data.CopyTo(Data.Slice(RowOffset(row), Layout.RowCellCount));     
-
         /// <summary>
         /// Retrives an identified row of bits
         /// </summary>
         /// <param name="index">The 0-based row index</param>
         [MethodImpl(Inline)]
-        public BitCells<N,T> RowVector(int index)                    
-            => BitCells<N,T>.FromSpan(RowData(index));                
+        public BitCells<N,T> GetRow(int index)                    
+            => new BitCells<N,T>(data.Slice(RowOffset(index), Layout.RowCellCount));                
 
         [MethodImpl(Inline)]
         public readonly BitCells<N,T> CopyRow(int index)                    
-            => BitCells<N,T>.FromSpan(data.Slice(RowOffset(index), Layout.RowCellCount).Replicate());
+            => new BitCells<N,T>(data.Slice(RowOffset(index), Layout.RowCellCount).Replicate());
 
         /// <summary>
         /// Replaces an index-identied column of data with the content of a column vector
@@ -270,11 +199,10 @@ namespace Z0
         [MethodImpl(Inline)]
         public void Fill(Bit value)
         {
-            var primal = PrimalInfo.Get<T>();
             if(value)
-                Data.Fill(primal.MaxVal);
+                Data.Fill(maxval<T>());
             else
-                Data.Fill(primal.Zero);
+                Data.Fill(minval<T>());
         }
 
         /// <summary>
@@ -288,19 +216,12 @@ namespace Z0
             return dst;
         }
 
-        /// <summary>
-        /// Extracts the bits that comprise the matrix in row-major order
-        /// </summary>
-        [MethodImpl(Inline)]
-        public Span<byte> Unpack()
-            => Bytes.Unpack();
-
         [MethodImpl(Inline)]
         public string Format()
         {
             var sb = sbuild();
             for(var i=0; i< RowCount; i++)
-                 sb.AppendLine(RowVector(i).Format(blockWidth:1));
+                 sb.AppendLine(GetRow(i).Format(blockWidth:1));
             return sb.ToString();
         }
 
@@ -317,26 +238,6 @@ namespace Z0
             => throw new NotSupportedException();
         
         public override int GetHashCode()
-            => 0;
-
-        static ref BitMatrix<M,N,T> XOr(ref BitMatrix<M,N,T> lhs, in BitMatrix<M,N,T> rhs)        
-        {
-            mathspan.xor(lhs.Data, rhs.Data, lhs.Data);
-            return ref lhs;
-        }
-
-        static ref BitMatrix<M,N,T> And(ref BitMatrix<M,N,T> lhs, in BitMatrix<M,N,T> rhs)        
-        {
-            mathspan.and(lhs.Data, rhs.Data, lhs.Data);
-            return ref lhs;
-        }
-
-        static ref BitMatrix<M,N,T> Flip(ref BitMatrix<M,N,T> src)        
-        {
-            mathspan.not(src.Data);
-            return ref src;
-        }
-
-
+            => throw new NotSupportedException();
     }
 }

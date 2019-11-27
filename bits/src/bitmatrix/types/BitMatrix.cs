@@ -11,28 +11,28 @@ namespace Z0
 
     using static zfunc;
 
+    /// <summary>
+    /// Defines a square bitmatrix with order determined by the primal type over
+    /// which it is defined
+    /// </summary>
     [StructLayout(LayoutKind.Sequential)]
     public readonly ref struct BitMatrix<T>
         where T : unmanaged
     {                        
         readonly Span<T> data;
 
-        public static uint N => bitsize<T>();
+        public static int N => bitsize<T>();
 
         [MethodImpl(Inline)]
         public static BitVector<T> operator * (BitMatrix<T> A, BitVector<T> x)
             => BitMatrix.mul(A,x);
 
         [MethodImpl(Inline)]
-        public BitMatrix(params T[] data)
+        internal BitMatrix(Span<T> data)
             => this.data = data;
 
         [MethodImpl(Inline)]
-        public BitMatrix(Span<T> data)
-            => this.data = data;
-
-        [MethodImpl(Inline)]
-        public BitMatrix(BitVector<T> fill)
+        internal BitMatrix(BitVector<T> fill)
         {
             this.data = new T[fill.Width];
             this.data.Fill(fill);
@@ -56,6 +56,16 @@ namespace Z0
             get => data;
         }
 
+        /// <summary>
+        /// Specifies the number rows/columns
+        /// </summary>
+        public int Order
+        {
+            [MethodImpl(Inline)]
+            get => (int)N;
+        }
+
+
         public ref BitVector<T> this[int row]
         {
             [MethodImpl(Inline)]
@@ -69,15 +79,6 @@ namespace Z0
             
             [MethodImpl(Inline)]
             set => gbits.set(ref data[row], (byte)col, value);
-        }
-
-        /// <summary>
-        /// Specifies the number of rows/columns in the matrix
-        /// </summary>
-        public int Order
-        {
-            [MethodImpl(Inline)]
-            get => (int)N;
         }
 
         [MethodImpl(Inline)]

@@ -11,6 +11,9 @@ namespace Z0
 
     using static zfunc;
 
+    /// <summary>
+    /// A grid of natural dimensions M and N such that M*N = 128
+    /// </summary>
     [StructLayout(LayoutKind.Sequential, Size=ByteCount)]
     public readonly ref struct BitGrid128<M,N,T>
         where T : unmanaged

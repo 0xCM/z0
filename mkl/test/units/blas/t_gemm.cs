@@ -11,8 +11,6 @@ namespace Z0.Mkl.Test
     using static zfunc;
     using static nfunc;
     
-    using Z0.Test;
-
     public class t_gemm : UnitTest<t_gemm>
     {        
         internal static void refmul<M,N,T>(MBlock256<M,N,T> A, VBlock256<N,T> B, VBlock256<M,T> X)
@@ -273,7 +271,7 @@ namespace Z0.Mkl.Test
                 Claim.yea(z == y);
             }
 
-            var label = $"gemv<{nati<M>()},{nati<N>()},{PrimalKinds.kind<double>()}>";
+            var label = $"gemv<{nati<M>()},{nati<N>()},{typename<double>()}>";
             return optime(cycles, sw, label);
         }
 

@@ -22,7 +22,7 @@ namespace Z0
 
         public void gbv_dot_64()
             => gbv_dot_check<ulong>();
+
+
     }
-
-
 }

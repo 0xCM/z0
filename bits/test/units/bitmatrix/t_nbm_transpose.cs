@@ -11,8 +11,6 @@ namespace Z0
 
     public class t_nbm_transpose : t_bm<t_nbm_transpose>
     {
-
-
         public void nbm_transpose_12x14x16()
             => nbm_transpose_check<N12,N14,short>();
 
@@ -24,7 +22,5 @@ namespace Z0
 
         public void nbm_transpose_8x8x8()
             => nbm_transpose_check<N8,N8,byte>();
-
     }
-
 }

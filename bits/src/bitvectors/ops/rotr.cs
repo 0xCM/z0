@@ -36,6 +36,18 @@ namespace Z0
                 => gbits.rotr(x.Scalar, s, x.Width);
 
         /// <summary>
+        /// Rotates source bits rightward
+        /// </summary>
+        /// <param name="x">The source bitvector</param>
+        /// <param name="s">The rotation magnitude</param>
+        /// <typeparam name="T">The primal type</typeparam>
+        [MethodImpl(Inline)]
+        public static BitVector128<N,T> rotr<N,T>(in BitVector128<N,T> x, int s)
+            where T : unmanaged
+            where N : unmanaged, ITypeNat
+                => ginx.vrotrx(x.data, (byte)s);
+
+        /// <summary>
         /// Computes a rightward bit rotation
         /// </summary>
         /// <param name="x">The source bitvector</param>

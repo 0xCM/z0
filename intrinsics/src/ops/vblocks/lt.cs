@@ -36,7 +36,7 @@ namespace Z0
         [MethodImpl(Inline)]
         static void lt<T>(N128 n, in T a, in T b, ref T z)
             where T : unmanaged
-                => ginx.vstore(vlt(n,in a, in b), ref z);
+                => vstore(vlt(n,in a, in b), ref z);
 
         [MethodImpl(Inline)]
         public static void lt<T>(N128 n, int vcount, int step, in T a, in T b, ref T z)

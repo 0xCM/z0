@@ -86,7 +86,7 @@ namespace Z0
         /// </summary>
         [MethodImpl(Inline)]
         public static BitString ToBitString(this BitVector16 src)
-            => src.data.ToBitString();
+            => BitVector.bitstring(src);
 
         /// <summary>
         /// Formats the bitvector as a bitstring
@@ -95,8 +95,8 @@ namespace Z0
         /// <param name="specifier">True if the prefix specifier '0b' should be prepended</param>
         /// <param name="blockWidth">The width of the blocks, if any</param>
         [MethodImpl(Inline)]
-        public static string Format(this BitVector16 src, bool tlz = false, bool specifier = false, int? blockWidth = null, char? blocksep = null)
-            => src.ToBitString().Format(tlz, specifier, blockWidth, blocksep);
+        public static string Format(this BitVector16 src, BitFormat? fmt = null)
+            => BitVector.format(src, fmt);
 
     }
 

@@ -36,6 +36,17 @@ namespace Z0
         /// <summary>
         /// Computes the bitwise complement z:= ~x of a bitvector x
         /// </summary>
+        /// <param name="x">The source vector</param>
+        /// <typeparam name="T">The primal type</typeparam>
+        [MethodImpl(Inline)]
+        public static BitVector128<N,T> not<N,T>(in BitVector128<N,T> x)
+            where N : unmanaged,ITypeNat
+            where T : unmanaged
+                => ginx.vnot(x.data);
+
+        /// <summary>
+        /// Computes the bitwise complement z:= ~x of a bitvector x
+        /// </summary>
         /// <param name="x">The left bitvector</param>
         [MethodImpl(Inline)]
         public static BitVector4 not(BitVector4 x)

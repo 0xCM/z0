@@ -23,20 +23,20 @@ namespace Z0
         [MethodImpl(Inline)]
         public static T one<T>()
             where T : unmanaged
-                => convert<T>(1);
+                => zfunc.one<T>();
 
         [MethodImpl(Inline)]
         public static T minval<T>()
             where T : unmanaged
-                => PrimalInfo.minval<T>();
+                => zfunc.minval<T>();
 
         [MethodImpl(Inline)]
         public static T maxval<T>()
             where T : unmanaged
-                => PrimalInfo.maxval<T>();
+                => zfunc.maxval<T>();
 
         /// <summary>
-        /// Defines an alternating bit pattern 0101...01 where the first bit is enabled
+        /// Defines an alternating bit pattern 01 01...01
         /// </summary>
         /// <typeparam name="T">The primal unsigned type</typeparam>
         [MethodImpl(Inline)]
@@ -51,6 +51,26 @@ namespace Z0
                 return generic<T>(Constants.U32_AltOdd);
             else if(typeof(T) == typeof(ulong))
                 return generic<T>(Constants.U64_AltOdd);
+            else 
+                throw unsupported<T>();
+        }
+
+        /// <summary>
+        /// Defines an alternating bit pattern 10 10...10
+        /// </summary>
+        /// <typeparam name="T">The primal unsigned type</typeparam>
+        [MethodImpl(Inline)]
+        public static T alteven<T>()
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(byte))
+                return generic<T>(Constants.U8_AltEven);
+            else if(typeof(T) == typeof(ushort))
+                return generic<T>(Constants.U16_AltEven);
+            else if(typeof(T) == typeof(uint))
+                return generic<T>(Constants.U32_AltEven);
+            else if(typeof(T) == typeof(ulong))
+                return generic<T>(Constants.U64_AltEven);
             else 
                 throw unsupported<T>();
         }

@@ -48,7 +48,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static void nor<T>(N256 n, in T a, in T b, ref T z)
             where T : unmanaged
-                => ginx.vstore(vnor(n, in a, in b), ref z);
+                => vstore(vnor(n, in a, in b), ref z);
 
         [MethodImpl(Inline)]
         public static void nor<T>(N256 n, int vcount, int step, in T a, in T b, ref T z)

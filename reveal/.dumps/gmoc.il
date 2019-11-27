@@ -1,4 +1,4 @@
-// 2019-11-25 21:05:21:175
+// 2019-11-27 00:53:14:479
 sbyte sar_g8i(sbyte lhs, int offset)
 {
     IL_0000: ldarg.0
@@ -4058,13 +4058,11 @@ double dec_g64f(double x)
 }
 uint add_sdel_u32(uint a, uint b)
 {
-    IL_0000: call Z0.AddOp`1<System.UInt32> Z0.SDel::add<System.UInt32>()
-    IL_0005: stloc.0
-    IL_0006: ldloca.s V_0
-    IL_0008: ldarg.0
-    IL_0009: ldarg.1
-    IL_000A: call System.UInt32 Z0.AddOp`1<System.UInt32>::apply(System.UInt32,System.UInt32)
-    IL_000F: ret
+    IL_0000: call Z0.IBinaryOp`1<System.UInt32> Z0.SDel::add<System.UInt32>()
+    IL_0005: ldarg.0
+    IL_0006: ldarg.1
+    IL_0007: callvirt System.UInt32 Z0.IBinaryOp`1<System.UInt32>::apply(System.UInt32,System.UInt32)
+    IL_000C: ret
 
 }
 uint add_gdel_u32(uint a, uint b)

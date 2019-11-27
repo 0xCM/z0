@@ -13,26 +13,56 @@ namespace Z0
 
     partial class BitGrid
     {        
+        /// <summary>
+        /// Computes the bitwise NAND between the operands
+        /// </summary>
+        /// <param name="gx">The left grid</param>
+        /// <param name="gy">The right grid</param>
+        /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
         public static BitGrid32<T> and<T>(BitGrid32<T> gx, BitGrid32<T> gy)
             where T : unmanaged
                 => math.and(gx,gy);
 
+        /// <summary>
+        /// Computes the bitwise NAND between the operands
+        /// </summary>
+        /// <param name="gx">The left grid</param>
+        /// <param name="gy">The right grid</param>
+        /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
         public static BitGrid64<T> and<T>(BitGrid64<T> gx, BitGrid64<T> gy)
             where T : unmanaged
                 => math.and(gx,gy);
 
+        /// <summary>
+        /// Computes the bitwise NAND between the operands
+        /// </summary>
+        /// <param name="gx">The left grid</param>
+        /// <param name="gy">The right grid</param>
+        /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
         public static BitGrid128<T> and<T>(in BitGrid128<T> gx, in BitGrid128<T> gy)
             where T : unmanaged
                 => ginx.vand<T>(gx,gy);
     
+        /// <summary>
+        /// Computes the bitwise NAND between the operands
+        /// </summary>
+        /// <param name="gx">The left grid</param>
+        /// <param name="gy">The right grid</param>
+        /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
         public static BitGrid256<T> and<T>(in BitGrid256<T> gx, in BitGrid256<T> gy)
             where T : unmanaged
                 => ginx.vand<T>(gx,gy);    
 
+        /// <summary>
+        /// Computes the bitwise NAND between the operands
+        /// </summary>
+        /// <param name="gx">The left grid</param>
+        /// <param name="gy">The right grid</param>
+        /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
         public static BitGrid128<M,N,T> and<M,N,T>(in BitGrid128<M,N,T> gx, in BitGrid128<M,N,T> gy)
             where T : unmanaged
@@ -40,6 +70,12 @@ namespace Z0
             where M : unmanaged, ITypeNat
                 => ginx.vand<T>(gx,gy);    
 
+        /// <summary>
+        /// Computes the bitwise NAND between the operands
+        /// </summary>
+        /// <param name="gx">The left grid</param>
+        /// <param name="gy">The right grid</param>
+        /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
         public static BitGrid256<M,N,T> and<M,N,T>(in BitGrid256<M,N,T> gx, in BitGrid256<M,N,T> gy)
             where T : unmanaged

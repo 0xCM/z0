@@ -42,7 +42,7 @@ namespace Z0
             var x = ginx.vload(n256, in src);
             for(var i = 0; i<32; i++)
                 x = step(x, ref src, i);            
-            ginx.vstore(x, ref dst);
+            vstore(x, ref dst);
         }
     }
 }

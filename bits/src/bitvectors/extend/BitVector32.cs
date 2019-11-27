@@ -145,17 +145,12 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static BitString ToBitString(this BitVector32 src)
-            => src.data.ToBitString();
+             => BitVector.bitstring(src);
 
-        /// <summary>
-        /// Formats the bitvector as a bitstring
-        /// </summary>
-        /// <param name="tlz">True if leadzing zeros should be trimmed, false otherwise</param>
-        /// <param name="specifier">True if the prefix specifier '0b' should be prepended</param>
-        /// <param name="blockWidth">The width of the blocks, if any</param>
         [MethodImpl(Inline)]
-        public static string Format(this BitVector32 src, bool tlz = false, bool specifier = false, int? blockWidth = null)
-            => src.ToBitString().Format(tlz, specifier, blockWidth);
+        public static string Format(this BitVector32 src, BitFormat? fmt = null)
+            => BitVector.format(src, fmt);
+
     }
 
 }

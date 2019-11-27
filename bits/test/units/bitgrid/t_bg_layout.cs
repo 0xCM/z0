@@ -121,6 +121,89 @@ namespace Z0
             }        
         }
 
+        public void bg_layout_9x4x8()
+        {
+            var grid = BitGridSpec.define<N9,N4,byte>();    
+            Claim.eq(9, grid.RowCount);
+            Claim.eq(4, grid.ColCount);
+
+            var layout = grid.CalcLayout();
+            Claim.eq(36, layout.BitCount);
+            Claim.eq(9, layout.RowCount);
+            Claim.eq(4, layout.ColCount);
+            Claim.eq(1, layout.RowCellCount);
+            Claim.eq(9, layout.TotalCellCount);
+            var row0 = layout.Row(0);
+            
+            Claim.eq(4, row0.Length);            
+            Claim.eq(0, row0[0].Col);
+            Claim.eq(3, row0[3].Col);
+            Claim.eq(0, (int)row0[3].Segment);
+
+            var row8 = layout.Row(8);
+            Claim.eq(4, row8.Length);
+            Claim.eq(8, (int)row8[3].Segment);
+
+            var m = BitMatrix.ones<N9,N4,byte>();
+            Claim.eq(9,m.RowCount);
+            Claim.eq(4,m.ColCount);
+            for(var i=0; i< m.RowCount; i++)
+            {
+                for(var j=0; j<m.ColCount; j++)
+                    Claim.eq(m[i,j], Bit.On);
+            }            
+        }
+
+        public void bg_layout_16x16x8()
+        {
+            var spec = BitGridSpec.define<N16,N16,byte>();    
+            Claim.eq(16, spec.RowCount);
+            Claim.eq(16, spec.ColCount);
+
+            var layout = spec.CalcLayout();
+
+            int rowCount = 0, bitpos = 0;
+            for(var row=0; row < layout.RowCount; row++)
+            {
+                rowCount++;
+                var cells = layout.Row(row);
+                for(var col=0; col< layout.ColCount; col++, bitpos++)
+                {
+
+                    var cell = cells[col];
+
+                    Claim.eq(bitpos, cell.Position);
+                    Claim.eq(row, cell.Row);
+                    Claim.eq(col, cell.Col);
+                }
+            }
+            Claim.eq(256, bitpos);
+            Claim.eq(256, layout.BitCount);
+            
+            Claim.eq(16, layout.RowCount);
+            Claim.eq(16, rowCount);
+            
+            Claim.eq(16, layout.ColCount);
+            Claim.eq(2, layout.RowCellCount);
+            Claim.eq(32, layout.TotalCellCount);
+
+            var row0 = layout.Row(0);
+            
+            Claim.eq(16, row0.Length);            
+            Claim.eq(0, row0[0].Col);
+            Claim.eq(3, row0[3].Col);
+            Claim.eq(1, (int)row0[9].Segment);
+
+            var m = BitMatrix.ones<N16,byte>();
+            Claim.eq(16, m.Order);
+            Claim.eq(16, m.Order);
+            Claim.eq(2, BitMatrix<N16,byte>.RowCellCount);
+            
+            for(var i=0; i < m.Order; i++)
+            for(var j=0; j < m.Order; j++)
+                Claim.eq(on, m[i,j]);
+        }
+
     }
 
 }

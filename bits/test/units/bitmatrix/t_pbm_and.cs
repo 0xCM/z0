@@ -53,7 +53,7 @@ namespace Z0
                 var B = Random.BitMatrix32();
                 var C = A & B;
 
-                var D = BitMatrix32.From(mathspan.and(A.Bytes, B.Bytes));
+                var D = BitMatrix.from(n32,mathspan.and(A.Bytes, B.Bytes));
                 Claim.yea(C == D);
             }
         }

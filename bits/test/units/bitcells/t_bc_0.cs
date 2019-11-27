@@ -19,9 +19,9 @@ namespace Z0
             {
                 var bv = Random.BitCells<T>(n);
                 var bs = bv.ToBitString();
-                Claim.eq(bv.Length, n);
-                Claim.eq(bv.Length, bs.Length);
-                for(var i=0; i<bv.Length; i+= 2)
+                Claim.eq(bv.BitCount, n);
+                Claim.eq(bv.BitCount, bs.Length);
+                for(var i=0; i<bv.BitCount; i+= 2)
                 {
                     bv[i] = bit.Off;
                     bs[i] = bit.Off;
@@ -39,9 +39,9 @@ namespace Z0
             {
                 var bc = Random.BitCells<N,T>();
                 var bs = bc.ToBitString();
-                Claim.eq(bc.Length, n.NatValue);
-                Claim.eq(bc.Length, bs.Length);
-                for(var i=0; i<bc.Length; i+= 2)
+                Claim.eq(bc.Width, n.NatValue);
+                Claim.eq(bc.Width, bs.Length);
+                for(var i=0; i<bc.Width; i+= 2)
                 {
                     bc[i] = bit.Off;
                     bs[i] = bit.Off;
@@ -98,8 +98,8 @@ namespace Z0
             for(var i=0; i< SampleSize; i++)            
             {
                 var bs = Random.BitString(5,233);
-                var bc = BitCells<T>.From(bs);
-                Claim.eq(bs.Length, bc.Length);
+                var bc = BitCells.from<T>(bs);
+                Claim.eq(bs.Length, bc.BitCount);
                 for(var j=0; j<bs.Length; j++)
                 {                
                     if(bc[j] != bs[j])
@@ -131,7 +131,7 @@ namespace Z0
                 var bcSrc = src.Slice(i,segcount);
                 var bc = bcSrc.ToCells(rep);
                 ClaimEqual(bc,bc.ToBitString());
-                Claim.eq(n, bc.Length);
+                Claim.eq(n, bc.Width);
                 Claim.eq(segcap * segcount, totalcap);
                 Claim.eq(totalcap - n, unusedcap);
 
@@ -151,10 +151,10 @@ namespace Z0
                 var data = src.Slice(i, segcount);
                 var bc = data.ToBitCells(bitcount);
                 var bs = data.ToBitString(bitcount);
-                Claim.eq(bc.Length, bitcount);
+                Claim.eq(bc.BitCount, bitcount);
                 Claim.eq(bs.Length, bitcount);
                 
-                for(var j=0; j<bc.Length; j++)
+                for(var j=0; j<bc.BitCount; j++)
                     Claim.eq(bc[j], bs[j]);
             }
         }
@@ -167,7 +167,7 @@ namespace Z0
             var len = (int)(Mod8.div((uint)n.NatValue) + (Mod8.mod((uint)n.NatValue) != 0 ? 1 : 0));            
             var src = Random.Span<byte>(len);
 
-            var bc = BitCells<N,T>.FromBytes(src);
+            var bc = BitCells.load<N,T>(src);
             var pc1 = bc.Pop();
 
             var bs = BitString.from(src);

@@ -5,16 +5,11 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
     using static zfunc;
-    using static As;
-    using static AsIn;
 
     partial class gbits
     {
-
         /// <summary>
         /// Enables an identified source bit
         /// </summary>
@@ -36,7 +31,5 @@ namespace Z0
         public static T enable<T>(T src, int pos)
             where T : unmanaged
                 => BitMaskG.enable(ref src, pos);
-
     }
-
 }

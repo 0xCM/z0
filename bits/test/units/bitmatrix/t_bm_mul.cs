@@ -12,7 +12,7 @@ namespace Z0
     public class t_bm_mul : t_bm<t_bm_mul>
     {
 
-        public void pbm_mul_8()
+        public void pbm_mul_8x8()
         {
             for(var i=0; i< SampleSize; i++)
             {
@@ -38,7 +38,7 @@ namespace Z0
             }            
         }
 
-        public void bmm_32x32_bench()
+        public void pbm_mul_32x32_bench()
         {
             var last = BitMatrix32.Zero;            
             var sw = stopwatch(false);
@@ -56,23 +56,6 @@ namespace Z0
             Collect((OpCount, snapshot(sw), "bmm_32x32_op"));
         }
 
-        void nbm_64x64x64_()
-        {
-            var Aup = Matrix.alloc<N64,byte>();
-            var Bup = Matrix.alloc<N64,byte>();
-            var Cup = Matrix.alloc<N64,byte>();
-            var A = Random.BitMatrix64();
-            var B = Random.BitMatrix64();
-            var C = A * B;
-
-            BitMatrix.unpack(A,ref Aup);
-            BitMatrix.unpack(B,ref Bup);
-            Matrix.mul(Aup, Bup, ref Cup);
-            Cup.Apply(x => even(x) ? (byte)0 : (byte)1);
-            Trace(C.Format());
-            Trace(Cup.Format());
-
-        }
         
         public void bmv_64x64x64u_64u()
         {
@@ -92,7 +75,7 @@ namespace Z0
             }
         }
 
-        public void bmm_4x4_bench()
+        public void pbm_4x4_bench()
         {
             var sw = stopwatch(false);
             var last = BitMatrix4.Zero;
@@ -108,7 +91,7 @@ namespace Z0
             Collect((OpCount, snapshot(sw), "bmm_4x4"));
         }
 
-        public void bmm_8x8_bench()
+        public void pbm_8x8_bench()
         {
             var count = counter();
             var last = BitMatrix8.Zero;
@@ -125,7 +108,7 @@ namespace Z0
             Benchmark("bmm_8x8", count);
         }
 
-        public void bmm_16x16_bench()
+        public void pbm_16x16_bench()
         {
             
             var last = BitMatrix16.Zero;
@@ -144,7 +127,7 @@ namespace Z0
         }
 
 
-        public void bmm_64x64x64u_bench()
+        public void pbm_64x64_bench()
         {
             var last = BitMatrix64.Zero;  
             var count = counter();

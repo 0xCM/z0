@@ -15,15 +15,15 @@ namespace Z0
 
         protected override int CycleCount => Pow2.T03;
 
-        protected void nbm_and_check<N,T>()
+        protected void nbm_and_check<N,T>(N n = default, T zero = default)
             where N : unmanaged, ITypeNat
             where T : unmanaged
         {
             for(var i=0; i<SampleSize; i++)
             {
-                var A = Random.BitMatrix<N,T>();
-                var B = Random.BitMatrix<N,T>();
-                var C1 = BitMatrix.and(in A, in B).Data;
+                var A = Random.BitMatrix(n,zero);
+                var B = Random.BitMatrix(n,zero);
+                var C1 = BitMatrix.and(A,B).Data;
                 var C2 = mathspan.and(A.Data, B.Data);
                 Claim.eq(A.Order, natval<N>());
                 Claim.eq(B.Order, natval<N>());                
@@ -31,7 +31,23 @@ namespace Z0
             }
         }
 
-         protected void gbm_and_bench<T>()
+        protected void nbm_xor_check<N,T>(N n = default, T zero = default)
+            where N : unmanaged, ITypeNat
+            where T : unmanaged
+        {
+            for(var i=0; i<SampleSize; i++)
+            {
+                var A = Random.BitMatrix(n,zero);
+                var B = Random.BitMatrix(n,zero);
+                var C1 = BitMatrix.xor(A, B).Data;
+                var C2 = mathspan.xor(A.Data, B.Data);
+                Claim.eq(A.Order, natval<N>());
+                Claim.eq(B.Order, natval<N>());                
+                Claim.eq(C1,C2);
+            }
+        }
+
+         protected void gbm_and_bench<T>(T zero = default)
             where T : unmanaged
         {
             var count = counter();
@@ -52,7 +68,7 @@ namespace Z0
             Benchmark($"bmand_{n}x{n}g", count);
         }
 
-        protected void gbm_and_check<T>()
+        protected void gbm_and_check<T>(T zero = default)
             where T : unmanaged
         {
             for(var i = 0; i< SampleSize; i++)
@@ -70,7 +86,7 @@ namespace Z0
             }
         }
 
-       protected void gbm_xor_check<T>()
+       protected void gbm_xor_check<T>(T zero = default)
             where T : unmanaged
         {
             var Z = BitMatrix.alloc<T>();
@@ -92,49 +108,31 @@ namespace Z0
             }
         }
 
-        protected void bm_16x4_binary_check(Func<BitMatrix16x4,BitMatrix16x4,BitMatrix16x4> f, Func<ulong,ulong,ulong> g)
+        protected void nbm_check_extract<M,N,T>(BitMatrix<M,N,T> src)
+            where M : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
+            where T : unmanaged
         {
-            var m = n16;
-            var n = n4;
-            for(var i=0; i<SampleSize; i++)
+            for(var row=0; row< src.RowCount; row++)
             {
-                var A = Random.Next<ulong>().ToPrimalBits(m,n);
-                var B = Random.Next<ulong>().ToPrimalBits(m,n);
-                var C = f(A,B);
-                var Z = g(A,B).ToPrimalBits(m,n);
-                var cbs = C.ToBitString();
-                var zbs = Z.ToBitString();
-                Claim.eq(zbs,cbs);
+                var vector = src.GetRow(row);
+                for(var col=0; col<vector.Width; col++)
+                    Claim.eq(vector[col], src[row,col]);
             }
         }
 
-        protected void bm_16x4_unary_check(Func<BitMatrix16x4,BitMatrix16x4> f, Func<ulong,ulong> g)
-        {
-            var m = n16;
-            var n = n4;
-            for(var i=0; i<SampleSize; i++)
-            {
-                var A = Random.Next<ulong>().ToPrimalBits(m,n);
-                var C = f(A);
-                var Z = g(A).ToPrimalBits(m,n);
-                var cbs = C.ToBitString();
-                var zbs = Z.ToBitString();
-                Claim.eq(zbs,cbs);
-            }
-        }
-
-        protected void nbm_transpose_check<M,N,T>()
+        protected void nbm_transpose_check<M,N,T>(M m = default, N n = default, T zero = default)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
         {
             for(var sample = 0; sample <SampleSize; sample++)
             {
-                var src = Random.BitMatrix<M, N,T>();
-                var tSrc = src.Transpose();
-                for(var i=0; i<tSrc.RowCount; i++)
-                for(var j=0; j<tSrc.ColCount; j++)
-                    Claim.eq(tSrc[i,j], src[j,i]);
+                var A = Random.BitMatrix(m,n,zero);
+                var B = A.Transpose();
+                for(var i=0; i<B.RowCount; i++)
+                for(var j=0; j<B.ColCount; j++)
+                    Claim.eq(B[i,j], A[j,i]);
             }
         }
 

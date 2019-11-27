@@ -11,16 +11,16 @@ namespace Z0
     public class t_sb_bitmap : t_sb<t_sb_bitmap>
     {            
         public void sb_clear_8()
-            => gsb_clear_check<byte>();
+            => sb_clear_check<byte>();
 
         public void sb_clear_16()
-            => gsb_clear_check<ushort>();
+            => sb_clear_check<ushort>();
 
         public void sb_clear_32()
-            => gsb_clear_check<uint>();
+            => sb_clear_check<uint>();
 
         public void sb_clear_64()
-            => gsb_clear_check<ulong>();
+            => sb_clear_check<ulong>();
 
 
         public void bitspan_rand_check()
@@ -85,8 +85,8 @@ namespace Z0
                     y[j] = src[k];
                 if(x != y)
                 {
-                    Trace(x.Format(blockWidth:8));
-                    Trace(y.Format(blockWidth:8));
+                    Trace(x.Format(8));
+                    Trace(y.Format(8));
                 }
                 Claim.eq(x,y);
 

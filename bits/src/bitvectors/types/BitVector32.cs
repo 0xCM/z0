@@ -35,7 +35,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator BitCells<N32,uint>(BitVector32 src)
-            => BitCells<N32,uint>.FromArray(src.data);
+            => BitCells.literal(src.data,N);
 
         [MethodImpl(Inline)]
         public static implicit operator BitVector<uint>(BitVector32 src)

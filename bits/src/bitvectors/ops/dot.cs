@@ -13,7 +13,7 @@ namespace Z0
     partial class BitVector
     {
         /// <summary>
-        /// Computes the scalar product between two generic bitvectors
+        /// Computes the scalar product between two bitvectors
         /// </summary>
         /// <param name="x">The left bitvector</param>
         /// <param name="y">The right bitvector</param>
@@ -23,12 +23,23 @@ namespace Z0
                 => parity(and(x,y));
 
         /// <summary>
-        /// Computes the scalar product between two generic bitvectors
+        /// Computes the scalar product between two bitvectors
         /// </summary>
         /// <param name="x">The left bitvector</param>
         /// <param name="y">The right bitvector</param>
         [MethodImpl(Inline)]
         public static bit dot<N,T>(BitVector<N,T> x, BitVector<N,T> y)
+            where T : unmanaged
+            where N : unmanaged, ITypeNat
+                => parity(and(x,y));
+
+        /// <summary>
+        /// Computes the scalar product between two bitvectors
+        /// </summary>
+        /// <param name="x">The left bitvector</param>
+        /// <param name="y">The right bitvector</param>
+        [MethodImpl(Inline)]
+        public static bit dot<N,T>(in BitVector128<N,T> x, in BitVector128<N,T> y)
             where T : unmanaged
             where N : unmanaged, ITypeNat
                 => parity(and(x,y));

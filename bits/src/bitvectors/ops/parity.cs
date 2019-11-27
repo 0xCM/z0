@@ -38,6 +38,15 @@ namespace Z0
                 => odd(gbits.pop(src.Scalar));
 
         /// <summary>
+        /// Computes the parity of the source vector
+        /// </summary>
+        [MethodImpl(Inline)]
+        public static bit parity<N,T>(in BitVector128<N,T> src)
+            where T : unmanaged
+            where N : unmanaged, ITypeNat
+                => odd(pop(src));
+
+        /// <summary>
         /// Computes the parity of the source vector, which is 1 if an odd number of its components are enabled and 0 otherwise
         /// </summary>
         /// <remarks>

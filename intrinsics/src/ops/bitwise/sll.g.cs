@@ -74,13 +74,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return generic<T>(dinx.vsll(int8(x), offset));
+                return As.vgeneric<T>(dinx.vsll(vcast8i(x), offset));
             else if(typeof(T) == typeof(short))
-                return generic<T>(dinx.vsll(int16(x), offset));
+                return As.vgeneric<T>(dinx.vsll(vcast16i(x), offset));
             else if(typeof(T) == typeof(int))
-                return generic<T>(dinx.vsll(int32(x), offset));
+                return generic<T>(dinx.vsll(vcast32i(x), offset));
             else 
-                return generic<T>(dinx.vsll(int64(x), offset));            
+                return generic<T>(dinx.vsll(vcast64i(x), offset));            
         }
 
         [MethodImpl(Inline)]
@@ -88,13 +88,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(dinx.vsll(uint8(x), offset));
+                return As.vgeneric<T>(dinx.vsll(vcast8u(x), offset));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(dinx.vsll(uint16(x), offset));
+                return generic<T>(dinx.vsll(vcast16u(x), offset));
             else if(typeof(T) == typeof(uint)) 
-                return generic<T>(dinx.vsll(uint32(x), offset));
+                return generic<T>(dinx.vsll(vcast32u(x), offset));
             else 
-                return generic<T>(dinx.vsll(uint64(x), offset));
+                return generic<T>(dinx.vsll(vcast64u(x), offset));
         }
 
         [MethodImpl(Inline)]
@@ -102,13 +102,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return generic<T>(dinx.vsll(int8(x), offset));
+                return generic<T>(dinx.vsll(vcast8i(x), offset));
             else if(typeof(T) == typeof(short))
-                return generic<T>(dinx.vsll(int16(x), offset));
+                return generic<T>(dinx.vsll(vcast16i(x), offset));
             else if(typeof(T) == typeof(int))
-                return generic<T>(dinx.vsll(int32(x), offset));
+                return generic<T>(dinx.vsll(vcast32i(x), offset));
             else 
-                return generic<T>(dinx.vsll(int64(x), offset));            
+                return generic<T>(dinx.vsll(vcast64i(x), offset));            
         }
 
         [MethodImpl(Inline)]
@@ -116,13 +116,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(dinx.vsll(uint8(x), offset));
+                return generic<T>(dinx.vsll(vcast8u(x), offset));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(dinx.vsll(uint16(x), offset));
+                return generic<T>(dinx.vsll(vcast16u(x), offset));
             else if(typeof(T) == typeof(uint)) 
-                return generic<T>(dinx.vsll(uint32(x), offset));
+                return generic<T>(dinx.vsll(vcast32u(x), offset));
             else 
-                return generic<T>(dinx.vsll(uint64(x), offset));
+                return generic<T>(dinx.vsll(vcast64u(x), offset));
         }
 
         [MethodImpl(Inline)]
@@ -130,13 +130,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return generic<T>(dinx.vsll(int8(x), int8(offset)));
+                return generic<T>(dinx.vsll(vcast8i(x), vcast8i(offset)));
             else if(typeof(T) == typeof(short))
-                return generic<T>(dinx.vsll(int16(x), int16(offset)));
+                return generic<T>(dinx.vsll(vcast16i(x), vcast16i(offset)));
             else if(typeof(T) == typeof(int))
-                return generic<T>(dinx.vsll(int32(x), int32(offset)));
+                return generic<T>(dinx.vsll(vcast32i(x), vcast32i(offset)));
             else 
-                return generic<T>(dinx.vsll(int64(x), int64(offset)));            
+                return generic<T>(dinx.vsll(vcast64i(x), vcast64i(offset)));            
         }
 
         [MethodImpl(Inline)]
@@ -144,13 +144,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(dinx.vsll(uint8(x), uint8(offset)));
+                return generic<T>(dinx.vsll(vcast8u(x), vcast8u(offset)));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(dinx.vsll(uint16(x), uint16(offset)));
+                return generic<T>(dinx.vsll(vcast16u(x), vcast16u(offset)));
             else if(typeof(T) == typeof(uint)) 
-                return generic<T>(dinx.vsll(uint32(x), uint32(offset)));
+                return generic<T>(dinx.vsll(vcast32u(x), vcast32u(offset)));
             else 
-                return generic<T>(dinx.vsll(uint64(x), uint64(offset)));
+                return generic<T>(dinx.vsll(vcast64u(x), vcast64u(offset)));
         }
 
     }

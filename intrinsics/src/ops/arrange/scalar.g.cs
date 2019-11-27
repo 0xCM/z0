@@ -44,9 +44,9 @@ namespace Z0
             where T : unmanaged
         {            
             if(typeof(T) == typeof(sbyte))
-                return generic<T>(Vector128.CreateScalarUnsafe(int8(src)));
+                return As.vgeneric<T>(Vector128.CreateScalarUnsafe(int8(src)));
             else if(typeof(T) == typeof(short))
-                return generic<T>(Vector128.CreateScalarUnsafe(int16(src)));
+                return As.vgeneric<T>(Vector128.CreateScalarUnsafe(int16(src)));
             else if(typeof(T) == typeof(int))
                 return generic<T>(Vector128.CreateScalarUnsafe(int32(src)));
             else 
@@ -58,7 +58,7 @@ namespace Z0
             where T : unmanaged
         {            
             if(typeof(T) == typeof(byte))
-                return generic<T>(Vector128.CreateScalarUnsafe(uint8(src)));
+                return As.vgeneric<T>(Vector128.CreateScalarUnsafe(uint8(src)));
             else if(typeof(T) == typeof(ushort))
                 return generic<T>(Vector128.CreateScalarUnsafe(uint16(src)));
             else if(typeof(T) == typeof(uint))

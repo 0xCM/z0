@@ -60,23 +60,5 @@ namespace Z0
 
         }
 
-       public void bench_ops()
-        {
-            if(odd(DateTime.Now.Ticks))
-            {
-                RunBench<byte>(PrimalBench.bench_byte);
-                RunBench<UInt8>(PrimalBench.bench_uint8,Random.Next<byte>(),Random.Next<byte>());
-            }
-            else
-            {
-                RunBench<UInt8>(PrimalBench.bench_uint8,Random.Next<byte>(),Random.Next<byte>());
-                RunBench<byte>(PrimalBench.bench_byte);
-            }
-        }
-
-
-
-
     }
-
 }

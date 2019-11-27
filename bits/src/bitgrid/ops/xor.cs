@@ -13,26 +13,56 @@ namespace Z0
 
     partial class BitGrid
     {        
+        /// <summary>
+        /// Computes the bitwise XOR between the operands
+        /// </summary>
+        /// <param name="gx">The left grid</param>
+        /// <param name="gy">The right grid</param>
+        /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
         public static BitGrid32<T> xor<T>(BitGrid32<T> gx, BitGrid32<T> gy)
             where T : unmanaged
                 => math.xor(gx,gy);
 
+        /// <summary>
+        /// Computes the bitwise XOR between the operands
+        /// </summary>
+        /// <param name="gx">The left grid</param>
+        /// <param name="gy">The right grid</param>
+        /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
         public static BitGrid64<T> xor<T>(BitGrid64<T> gx, BitGrid64<T> gy)
             where T : unmanaged
                 => math.xor(gx,gy);
 
+        /// <summary>
+        /// Computes the bitwise XOR between the operands
+        /// </summary>
+        /// <param name="gx">The left grid</param>
+        /// <param name="gy">The right grid</param>
+        /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
         public static BitGrid128<T> xor<T>(in BitGrid128<T> gx, in BitGrid128<T> gy)
             where T : unmanaged
                 => ginx.vxor<T>(gx,gy);
 
+        /// <summary>
+        /// Computes the bitwise XOR between the operands
+        /// </summary>
+        /// <param name="gx">The left grid</param>
+        /// <param name="gy">The right grid</param>
+        /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
         public static BitGrid256<T> xor<T>(in BitGrid256<T> gx, in BitGrid256<T> gy)
             where T : unmanaged
                 => ginx.vxor<T>(gx,gy);
 
+        /// <summary>
+        /// Computes the bitwise XOR between the operands
+        /// </summary>
+        /// <param name="gx">The left grid</param>
+        /// <param name="gy">The right grid</param>
+        /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
         public static BitGrid128<M,N,T> xor<M,N,T>(in BitGrid128<M,N,T> gx, in BitGrid128<M,N,T> gy)
             where T : unmanaged
@@ -40,6 +70,12 @@ namespace Z0
             where M : unmanaged, ITypeNat
                 => ginx.vxor<T>(gx,gy);    
 
+        /// <summary>
+        /// Computes the bitwise XOR between the operands
+        /// </summary>
+        /// <param name="gx">The left grid</param>
+        /// <param name="gy">The right grid</param>
+        /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
         public static BitGrid256<M,N,T> xor<M,N,T>(in BitGrid256<M,N,T> gx, in BitGrid256<M,N,T> gy)
             where T : unmanaged

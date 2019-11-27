@@ -12,7 +12,7 @@ namespace Z0
     using static zfunc;
 
     /// <summary>
-    /// Defines a grid of 64 bits ostensibly sharded over generic cells
+    /// Defines a 64-bit grid sans dimensional content
     /// </summary>
     [StructLayout(LayoutKind.Sequential, Size=ByteCount)]
     public readonly ref struct BitGrid64<T>

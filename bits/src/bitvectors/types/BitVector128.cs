@@ -350,6 +350,6 @@ namespace Z0
             => HashCode.Combine(x0,x1);
 
         public override string ToString()
-            => this.FormatBits(); 
+            => this.Format(); 
     }
 }

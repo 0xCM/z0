@@ -13,7 +13,6 @@ namespace Z0
 
     public static class BitCellX
     {
-
         /// <summary>
         /// Constructs a bitvector of natural length from a source span
         /// </summary>
@@ -89,6 +88,20 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where T : unmanaged
                 => BitCells.load(src.Data, natval<N>()); 
-    }
 
+        /// <summary>
+        /// Extracts the represented data as a bitstring
+        /// </summary>
+        [MethodImpl(Inline)]
+        public static BitString ToBitString<N,T>(this BitCells<N,T> src)
+            where N : unmanaged, ITypeNat
+            where T : unmanaged
+                => BitString.from(src.Data, src.Width); 
+
+        [MethodImpl(Inline)]
+        public static string Format<N,T>(this BitCells<N,T> src, bool tlz = false, bool specifier = false, int? blockWidth = null)
+            where N : unmanaged, ITypeNat
+            where T : unmanaged
+                => src.ToBitString().Format(tlz, specifier, blockWidth);
+    }
 }

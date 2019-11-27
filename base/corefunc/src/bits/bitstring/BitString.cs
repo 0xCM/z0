@@ -10,6 +10,7 @@ namespace Z0
     
     using static zfunc;
 
+
     /// <summary>
     /// Represents a sequence of bits
     /// </summary>
@@ -247,6 +248,22 @@ namespace Z0
                     break;
                 else
                     count++;                
+            }
+            return count;
+        }
+
+        /// <summary>
+        /// Counts the number of trailing zero bits
+        /// </summary>
+        public int Ntz()
+        {
+            var count = 0;
+            for(var i=0; i < bitseq.Length; i++)
+            {
+                if(bitseq[i] == 0)
+                    count++;
+                else
+                    break;
             }
             return count;
         }
@@ -516,6 +533,49 @@ namespace Z0
                 return  (specifier ? "0b" : string.Empty) + (tlz ? x.TrimStart('0') : x);
             }            
         }
+
+        public string Format(BitFormat? fmt = null)
+        {                                            
+            var style = fmt ?? BitFormat.Default;
+            var sep = style.BlockSep;
+            var rowWidth = style.RowWidth;
+            var specifier = style.SpecifierPrefix;
+            var tlz = style.TrimLeadingZeros;
+
+            if(style.BlockWidth == 0)
+                return FormatUnblocked(style.TrimLeadingZeros, specifier);
+            else
+            {
+                var blockWidth = style.BlockWidth;
+                var sb = sbuild();
+                var blocks = Partition(blockWidth).Reverse();
+                var lastix = blocks.Length - 1;
+                var counter = 0;
+                for(var i=0; i<=lastix; i++)
+                {
+                    sb.Append(blocks[i].FormatUnblocked(false,false));
+                    if(i != lastix)
+                    {
+                        if(rowWidth != 0)
+                        {
+                            if(++counter % rowWidth == 0)
+                            {
+                                counter = 0;
+                                sb.AppendLine();
+                            }
+                            else 
+                                sb.Append(sep);
+                        }
+                        else
+                            sb.Append(sep);
+                    }
+                
+                }
+                var x = sb.ToString();
+                return  (specifier ? "0b" : string.Empty) + (tlz ? x.TrimStart('0') : x);
+            }            
+        }
+
 
         /// <summary>
         /// Formats bitstring using default parameter values

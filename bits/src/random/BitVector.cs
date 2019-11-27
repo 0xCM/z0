@@ -59,6 +59,17 @@ namespace Z0
             return gmath.srl(v,clamp);
         }    
 
+        [MethodImpl(Inline)]
+        public static BitVector128<N,T> BitVector128<N,T>(this IPolyrand random, N n = default, T zero = default)        
+            where T : unmanaged
+            where N : unmanaged, ITypeNat
+        {
+            var w = Z0.BitVector128<N,T>.MaxWidth;
+            var v = random.CpuVector<T>(w);
+            var clamp = w - math.min(w, natval(n));
+            return ginx.vsrlx(v,(byte)clamp);
+        }
+
         /// <summary>
         /// Produces a 4-bit primal bitvector predicated on a random source
         /// </summary>

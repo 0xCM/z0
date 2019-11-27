@@ -5,8 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Reflection;
     using System.Runtime.CompilerServices;
 
     using static zfunc;
@@ -32,9 +30,5 @@ namespace Z0
                 Claim.eq(xt,y);
             }
         }
-
-
     }
-
-
 }

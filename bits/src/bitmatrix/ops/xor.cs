@@ -28,6 +28,27 @@ namespace Z0
             return Z;
         }
 
+        [MethodImpl(Inline)]
+        public static ref BitMatrix<N,T> xor<N,T>(in BitMatrix<N,T> A, in BitMatrix<N,T> B, ref BitMatrix<N,T> C)
+            where N : unmanaged, ITypeNat
+            where T : unmanaged
+        {
+            mathspan.xor(A.Data, B.Data, C.Data);
+            return ref C;
+        }
+
+        /// <summary>
+        /// Computes the bitwise AND between two square bitmatrices of common order
+        /// </summary>
+        [MethodImpl(Inline)]
+        public static BitMatrix<N,T> xor<N,T>(in BitMatrix<N,T> A, in BitMatrix<N,T> B)
+            where N : unmanaged, ITypeNat
+            where T : unmanaged
+        {
+            var C = alloc<N,T>();
+            return xor(in A, in B, ref C);
+        }
+
         /// <summary>
         /// Computes the logical Xor btween two generic bitmatrices, depositing the result to a caller-allocated target
         /// </summary>

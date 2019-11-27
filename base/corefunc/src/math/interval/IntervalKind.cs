@@ -5,12 +5,9 @@
 namespace Z0
 {
     using System;
-    using System.Collections;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     
     using static zfunc;
-    using static As;
 
     /// <summary>
     /// Defines interval classifications predicated on endpoint containment
@@ -29,6 +26,4 @@ namespace Z0
         
         RightOpen = LeftClosed
     }
-
-
 }

@@ -65,13 +65,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(dinx.vnor(uint8(x), uint8(y)));
+                return As.vgeneric<T>(dinx.vnor(vcast8u(x), vcast8u(y)));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(dinx.vnor(uint16(x), uint16(y)));
+                return generic<T>(dinx.vnor(vcast16u(x), vcast16u(y)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(dinx.vnor(uint32(x), uint32(y)));
+                return generic<T>(dinx.vnor(vcast32u(x), vcast32u(y)));
             else
-                return generic<T>(dinx.vnor(uint64(x), uint64(y)));
+                return generic<T>(dinx.vnor(vcast64u(x), vcast64u(y)));
         }
 
         [MethodImpl(Inline)]
@@ -79,13 +79,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return generic<T>(dinx.vnor(int8(x), int8(y)));
+                return As.vgeneric<T>(dinx.vnor(vcast8i(x), vcast8i(y)));
             else if(typeof(T) == typeof(short))
-                return generic<T>(dinx.vnor(int16(x), int16(y)));
+                return As.vgeneric<T>(dinx.vnor(vcast16i(x), vcast16i(y)));
             else if(typeof(T) == typeof(int))
-                return generic<T>(dinx.vnor(int32(x), int32(y)));
+                return generic<T>(dinx.vnor(vcast32i(x), vcast32i(y)));
             else
-                return generic<T>(dinx.vnor(int64(x), int64(y)));
+                return generic<T>(dinx.vnor(vcast64i(x), vcast64i(y)));
         }
 
         [MethodImpl(Inline)]
@@ -93,9 +93,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return generic<T>(dinx.vnor(float32(x), float32(y)));
+                return generic<T>(dinx.vnor(vcast32f(x), vcast32f(y)));
             else if(typeof(T) == typeof(double))
-                return generic<T>(dinx.vnor(float64(x), float64(y)));
+                return generic<T>(dinx.vnor(vcast64f(x), vcast64f(y)));
             else
                 throw unsupported<T>();
         }
@@ -105,13 +105,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(dinx.vnor(uint8(x), uint8(y)));
+                return generic<T>(dinx.vnor(vcast8u(x), vcast8u(y)));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(dinx.vnor(uint16(x), uint16(y)));
+                return generic<T>(dinx.vnor(vcast16u(x), vcast16u(y)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(dinx.vnor(uint32(x), uint32(y)));
+                return generic<T>(dinx.vnor(vcast32u(x), vcast32u(y)));
             else
-                return generic<T>(dinx.vnor(uint64(x), uint64(y)));
+                return generic<T>(dinx.vnor(vcast64u(x), vcast64u(y)));
         }
 
         [MethodImpl(Inline)]
@@ -119,13 +119,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return generic<T>(dinx.vnor(int8(x), int8(y)));
+                return generic<T>(dinx.vnor(vcast8i(x), vcast8i(y)));
             else if(typeof(T) == typeof(short))
-                return generic<T>(dinx.vnor(int16(x), int16(y)));
+                return generic<T>(dinx.vnor(vcast16i(x), vcast16i(y)));
             else if(typeof(T) == typeof(int))
-                return generic<T>(dinx.vnor(int32(x), int32(y)));
+                return generic<T>(dinx.vnor(vcast32i(x), vcast32i(y)));
             else
-                return generic<T>(dinx.vnor(int64(x), int64(y)));
+                return generic<T>(dinx.vnor(vcast64i(x), vcast64i(y)));
         }
 
         [MethodImpl(Inline)]
@@ -133,9 +133,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return generic<T>(dinx.vnor(float32(x), float32(y)));
+                return generic<T>(dinx.vnor(vcast32f(x), vcast32f(y)));
             else if(typeof(T) == typeof(double))
-                return generic<T>(dinx.vnor(float64(x), float64(y)));
+                return generic<T>(dinx.vnor(vcast64f(x), vcast64f(y)));
             else
                 throw unsupported<T>();
         }

@@ -60,7 +60,7 @@ namespace Z0
         {
             for(var row = 0; row < perm.Length; row++)
                 if(perm[row] != row)
-                    A.RowSwap(row, perm[row]);
+                    rowswap(A, row, perm[row]);
             return ref A;
         }
 

@@ -23,7 +23,7 @@ namespace Z0
             var v = ginx.vscalar(y);
             var z = CarrylessMultiply(u, v, 0);
             var dst = default(UInt128);
-            ginx.vstore(z, ref dst.lo);
+            vstore(z, ref dst.lo);
             return dst;
         }
 
@@ -53,7 +53,7 @@ namespace Z0
             var u = ginx.vscalar(x);
             var v = ginx.vscalar(y);
             var z = CarrylessMultiply(u, v, 0);
-            ginx.vstore(z,ref dst.lo);
+            vstore(z,ref dst.lo);
             return ref dst;
         }
     }

@@ -9,7 +9,6 @@ namespace Z0
 
     using static zfunc;
 
-
     /// <summary>
     /// Defines a generic immediate
     /// </summary>    
@@ -84,7 +83,7 @@ namespace Z0
         public bool IsSignExtended
         {
             [MethodImpl(Inline)]
-            get => PrimalInfo.signed<T>();
+            get => signed<T>();
         }
 
         /// <summary>
@@ -118,7 +117,7 @@ namespace Z0
         public Imm<S> SignExtend<S>()
             where S : unmanaged
         {
-            if (this.IsSignExtended || !PrimalInfo.signed<S>())
+            if (this.IsSignExtended || !signed<S>())
                 throw new NotSupportedException();
             return new Imm<S>(convert<T,S>(Value, out S dst));
         }

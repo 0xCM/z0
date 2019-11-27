@@ -23,7 +23,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<T> vshuf16x8<T>(Vector128<T> src, Vector128<byte> spec)
             where T : unmanaged
-                => generic<T>(dinx.vshuf16x8(v8u(src), spec));
+                => As.vgeneric<T>(dinx.vshuf16x8(v8u(src), spec));
 
         /// <summary>
         /// Shuffles 8-bit source segments within 128-bit lanes according to the shuffle spec

@@ -13,6 +13,12 @@ namespace Z0
     partial class BitVector
     {
         [MethodImpl(Inline)]
+        public static BitVector128<N,T> from<N,T>(BitString src, N128 n = default, T zero = default)
+            where T : unmanaged   
+            where N : unmanaged, ITypeNat
+                => DataBlocks.safeload(n,src.Pack().As<byte, T>()).LoadVector();
+
+        [MethodImpl(Inline)]
         public static BitVector4 from(N4 n, byte src)
             => src;
 

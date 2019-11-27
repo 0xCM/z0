@@ -11,7 +11,7 @@ namespace Z0
     using static zfunc;
 
     /// <summary>
-    /// Defines a bitgrid - a maximally packed data structure - of natural dimensions over a primal type
+    /// Defines a maximally packed data structure of natural dimensions over a primal type
     /// </summary>
     public readonly ref struct BitGrid<M,N,T>
         where M : unmanaged, ITypeNat

@@ -23,7 +23,7 @@ namespace Z0
             where T : unmanaged            
         {
             var dst = DataBlocks.alloc<T>(n128);
-            gcpu.vstore(src, ref dst.Head);
+            vstore(src, ref dst.Head);
             return dst.Data;
         }
 
@@ -36,7 +36,7 @@ namespace Z0
         [MethodImpl(NotInline)]
         public static void ToSpan<T>(this Vector128<T> src, Span<T> dst)
             where T : unmanaged            
-                => gcpu.vstore(src, ref head(dst));
+                => vstore(src, ref head(dst));
 
         /// <summary>
         /// Allocates and deposits vector content to a span
@@ -48,7 +48,7 @@ namespace Z0
             where T : unmanaged            
         {
             var dst = DataBlocks.alloc<T>(n256);
-            gcpu.vstore(src, ref dst.Head);
+            vstore(src, ref dst.Head);
             return dst.Data;
         }
 
@@ -61,7 +61,7 @@ namespace Z0
         [MethodImpl(NotInline)]
         public static void ToSpan<T>(this Vector256<T> src, Span<T> dst)
             where T : unmanaged            
-                => gcpu.vstore(src, ref head(dst));
+                => vstore(src, ref head(dst));
 
         /// <summary>
         /// Allocates and deposits vector content to a data block
@@ -73,7 +73,7 @@ namespace Z0
             where T : unmanaged            
         {
             var dst = DataBlocks.alloc<T>(n128);
-            gcpu.vstore(src, ref dst.Head);
+            vstore(src, ref dst.Head);
             return dst;
         }                       
 
@@ -85,7 +85,7 @@ namespace Z0
         [MethodImpl(NotInline)]
         public static void ToBlock<T>(this Vector128<T> src, in Block128<T> dst)
             where T : unmanaged            
-                => gcpu.vstore(src, ref dst.Head);
+                => vstore(src, ref dst.Head);
 
         /// <summary>
         /// Allocates and deposits vector content to a data block
@@ -97,7 +97,7 @@ namespace Z0
             where T : unmanaged            
         {
             var dst = DataBlocks.alloc<T>(n256);
-            gcpu.vstore(src, ref dst.Head);
+            vstore(src, ref dst.Head);
             return dst;
         }            
 
@@ -109,7 +109,7 @@ namespace Z0
         [MethodImpl(NotInline)]
         public static void ToBlock<T>(this Vector256<T> src, in Block256<T> dst)
             where T : unmanaged            
-                => gcpu.vstore(src, ref dst.Head);
+                => vstore(src, ref dst.Head);
 
         /// <summary>
         /// Determines whether any elements of the source match the target

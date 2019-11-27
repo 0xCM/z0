@@ -1,0 +1,23 @@
+//-----------------------------------------------------------------------------
+// Copyright   :  (c) Chris Moore, 2019
+// License     :  MIT
+//-----------------------------------------------------------------------------
+namespace Z0
+{
+    using System;
+    using System.Runtime.CompilerServices;
+    using System.Runtime.InteropServices;
+
+    using static zfunc;    
+
+    partial class BitVector
+    {
+        [MethodImpl(Inline)]
+        public static bit same<N,T>(in BitVector128<N,T> x, in BitVector128<N,T> y)
+            where T : unmanaged
+            where N : unmanaged, ITypeNat
+                => ginx.vsame(x.data, y.data);
+
+    }
+
+}

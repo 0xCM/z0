@@ -12,8 +12,7 @@ namespace Z0
     using static zfunc;
 
     /// <summary>
-    /// Defines packed container for a grid over 256 bits for the dimenions
-    /// 
+    /// A grid of natural dimensions M and N such that M*N = 256
     /// </summary>
     [StructLayout(LayoutKind.Sequential, Size=ByteCount)]
     public readonly ref struct BitGrid256<M,N,T>
@@ -126,7 +125,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public bool Equals(BitGrid256<M,N,T> rhs)
-            =>  BitGrid.same(this,rhs);
+            => BitGrid.same(this,rhs);
 
         public override bool Equals(object obj)
             => throw new NotSupportedException();

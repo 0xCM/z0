@@ -140,7 +140,6 @@ namespace Z0
             where T : unmanaged        
                 => MemoryMarshal.Cast<T,char>(src);
 
-
         /// <summary>
         /// Reimagines a span of bytes as a span of generic values
         /// </summary>

@@ -34,11 +34,7 @@ namespace Z0
         /// <remarks>
         /// Example:
         /// Permutation: [11 10 00 01] (ABCD -> BACD)
-        /// Bitmatrix:
-        /// 1000
-        /// 0000
-        /// 0100
-        /// 1100
+        /// Bitmatrix: [1000 | 0000 | 0100 | 1100]
         /// </remarks>
         public static BitMatrix4 from(N4 n, Perm4 perm)
         {
@@ -60,5 +56,10 @@ namespace Z0
             permute(spec, ref id);
             return id;
         }
+
+        [MethodImpl(Inline)]
+        public static BitMatrix32 from(N32 n, Span<byte> src)        
+            => new BitMatrix32(src.AsUInt32());
+
     }
 }

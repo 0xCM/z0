@@ -66,9 +66,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return generic<T>(dinx.vmov(n,int8(src)));
+                return As.vgeneric<T>(dinx.vmov(n, int8(src)));
             else if(typeof(T) == typeof(short))
-                return generic<T>(dinx.vmov(n,int16(src)));
+                return As.vgeneric<T>(dinx.vmov(n, int16(src)));
             else if(typeof(T) == typeof(int))
                 return generic<T>(dinx.vmov(n,int32(src)));
             else
@@ -80,7 +80,7 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(dinx.vmov(n,uint8(src)));
+                return As.vgeneric<T>(dinx.vmov(n, uint8(src)));
             else if(typeof(T) == typeof(ushort))
                 return generic<T>(dinx.vmov(n,uint16(src)));
             else if(typeof(T) == typeof(uint))

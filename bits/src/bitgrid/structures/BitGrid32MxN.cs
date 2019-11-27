@@ -12,8 +12,11 @@ namespace Z0
     using static zfunc;
 
     /// <summary>
-    /// Defines packed container for a grid over 32 bits with allowed dimensions 1x32, 32x1, 2x16, 16x2, 4x8, and 8x4.
+    /// A grid of natural dimensions M and N such that M*N = 64
     /// </summary>
+    /// <remarks>
+    ///  Conforming dimensions include 1x32, 32x1, 2x16, 16x2, 4x8, and 8x4.
+    /// </remarks>
     [StructLayout(LayoutKind.Sequential, Size=ByteCount)]
     public readonly ref struct BitGrid32<M,N,T>
         where T : unmanaged

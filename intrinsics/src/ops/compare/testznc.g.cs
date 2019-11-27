@@ -56,13 +56,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return dinx.vtestznc(int8(src), int8(mask));
+                return dinx.vtestznc(vcast8i(src), vcast8i(mask));
             else if(typeof(T) == typeof(short))
-                return dinx.vtestznc(int16(src), int16(mask));
+                return dinx.vtestznc(vcast16i(src), vcast16i(mask));
             else if(typeof(T) == typeof(int))
-                return dinx.vtestznc(int32(src), int32(mask));
+                return dinx.vtestznc(vcast32i(src), vcast32i(mask));
             else 
-                return dinx.vtestznc(int64(src), int64(mask));
+                return dinx.vtestznc(vcast64i(src), vcast64i(mask));
         }
 
         [MethodImpl(Inline)]
@@ -70,13 +70,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return dinx.vtestznc(uint8(src), uint8(mask));
+                return dinx.vtestznc(vcast8u(src), vcast8u(mask));
             else if(typeof(T) == typeof(ushort))
-                return dinx.vtestznc(uint16(src), uint16(mask));
+                return dinx.vtestznc(vcast16u(src), vcast16u(mask));
             else if(typeof(T) == typeof(uint))
-                return dinx.vtestznc(uint32(src), uint32(mask));
+                return dinx.vtestznc(vcast32u(src), vcast32u(mask));
             else 
-                return dinx.vtestznc(uint64(src), uint64(mask));
+                return dinx.vtestznc(vcast64u(src), vcast64u(mask));
         }
 
         [MethodImpl(Inline)]
@@ -84,9 +84,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return dinx.vtestznc(float32(src), float32(mask));
+                return dinx.vtestznc(vcast32f(src), vcast32f(mask));
             else if(typeof(T) == typeof(double))
-                return dinx.vtestznc(float64(src), float64(mask));
+                return dinx.vtestznc(vcast64f(src), vcast64f(mask));
             else 
                 throw unsupported<T>();
         }
@@ -96,13 +96,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return dinx.vtestznc(int8(src), int8(mask));
+                return dinx.vtestznc(vcast8i(src), vcast8i(mask));
             else if(typeof(T) == typeof(short))
-                return dinx.vtestznc(int16(src), int16(mask));
+                return dinx.vtestznc(vcast16i(src), vcast16i(mask));
             else if(typeof(T) == typeof(int))
-                return dinx.vtestznc(int32(src), int32(mask));
+                return dinx.vtestznc(vcast32i(src), vcast32i(mask));
             else 
-                return dinx.vtestznc(int64(src), int64(mask));
+                return dinx.vtestznc(vcast64i(src), vcast64i(mask));
         }
 
         [MethodImpl(Inline)]
@@ -110,13 +110,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return dinx.vtestznc(uint8(src), uint8(mask));
+                return dinx.vtestznc(vcast8u(src), vcast8u(mask));
             else if(typeof(T) == typeof(ushort))
-                return dinx.vtestznc(uint16(src), uint16(mask));
+                return dinx.vtestznc(vcast16u(src), vcast16u(mask));
             else if(typeof(T) == typeof(uint))
-                return dinx.vtestznc(uint32(src), uint32(mask));
+                return dinx.vtestznc(vcast32u(src), vcast32u(mask));
             else 
-                return dinx.vtestznc(uint64(src), uint64(mask));
+                return dinx.vtestznc(vcast64u(src), vcast64u(mask));
         }
 
         [MethodImpl(Inline)]
@@ -124,9 +124,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return dinx.vtestznc(float32(src), float32(mask));
+                return dinx.vtestznc(vcast32f(src), vcast32f(mask));
             else if(typeof(T) == typeof(double))
-                return dinx.vtestznc(float64(src), float64(mask));
+                return dinx.vtestznc(vcast64f(src), vcast64f(mask));
             else 
                 throw unsupported<T>();
         }

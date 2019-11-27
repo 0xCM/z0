@@ -86,23 +86,6 @@ namespace Z0
             Claim.yea(bit.On ==  bit.On);                
         }
 
-
-       public void bench_ops()
-        {
-            var s0 = Random.Next<uint>() % 2 == 0;
-            var s1 = Random.Next<uint>() % 2 == 0;
-            if(odd(DateTime.Now.Ticks))
-            {
-                RunBench<bool>(PrimalBench.bench_bool, s0, s1);
-                RunBench<bit>(PrimalBench.bench_bit,s0,s1);
-            }
-            else
-            {
-                RunBench<bit>(PrimalBench.bench_bit, s0,s1);
-                RunBench<bool>(PrimalBench.bench_bool, s0, s1);
-            }
-        }
-
     }
 
 }

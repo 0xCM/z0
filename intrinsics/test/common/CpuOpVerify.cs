@@ -44,8 +44,8 @@ namespace Z0
 
                 Claim.eq(vExpect, vActual);
             
-                ginx.vstore(vExpect, ref expect.SeekBlock(block));
-                ginx.vstore(vActual, ref actual.SeekBlock(block));
+                vstore(vExpect, ref expect.SeekBlock(block));
+                vstore(vActual, ref actual.SeekBlock(block));
             }
             Claim.eq(expect, actual);
         }
@@ -79,8 +79,8 @@ namespace Z0
 
                 Claim.eq(vExpect, vActual);
             
-                ginx.vstore(vExpect, ref expect.SeekBlock(block));
-                ginx.vstore(vActual, ref actual.SeekBlock(block));
+                vstore(vExpect, ref expect.SeekBlock(block));
+                vstore(vActual, ref actual.SeekBlock(block));
             }
             Claim.eq(expect, actual);
         }
@@ -119,8 +119,8 @@ namespace Z0
 
                 Claim.eq(vExpect, vActual);
             
-                ginx.vstore(vExpect, ref expect.SeekBlock(block));
-                ginx.vstore(vActual, ref actual.SeekBlock(block));
+                vstore(vExpect, ref expect.SeekBlock(block));
+                vstore(vActual, ref actual.SeekBlock(block));
             }
             Claim.eq(expect, actual);
         }
@@ -159,8 +159,8 @@ namespace Z0
 
                 Claim.eq(vExpect, vActual);
             
-                ginx.vstore(vExpect, ref expect.SeekBlock(block));
-                ginx.vstore(vActual, ref actual.SeekBlock(block));
+                vstore(vExpect, ref expect.SeekBlock(block));
+                vstore(vActual, ref actual.SeekBlock(block));
             }
             Claim.eq(expect, actual);
         }

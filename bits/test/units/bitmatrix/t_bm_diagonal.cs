@@ -5,8 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Reflection;
     using System.Runtime.CompilerServices;
 
     using static zfunc;
@@ -14,7 +12,7 @@ namespace Z0
     public class t_bm_diagonal : t_bm<t_bm_diagonal>
     {
 
-        public void diagonal_4x4()
+        public void pbm_diagonal_4x4()
         {
             for(var i=0; i<SampleSize; i++)
             {
@@ -27,7 +25,7 @@ namespace Z0
             }
         }
 
-        public void diagonal_8x8()
+        public void pbm_diagonal_8x8()
         {
             for(var i=0; i<SampleSize; i++)
             {
@@ -39,7 +37,5 @@ namespace Z0
                 Claim.eq(x,y);
             }
         }
-
     }
-
 }

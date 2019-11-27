@@ -11,18 +11,15 @@ namespace Z0
     public class t_sb_bitview : t_sb<t_sb_bitview>
     {
         public void gsb_bitview_8()
-            => gsb_bitview_check<byte>();
+            => sb_bitview_check<byte>();
 
         public void gsb_bitview_16()
-            => gsb_bitview_check<ushort>();
+            => sb_bitview_check<ushort>();
 
         public void gsb_bitview_32()
-            => gsb_bitview_check<uint>();
+            => sb_bitview_check<uint>();
 
         public void gsb_bitview_64()
-            => gsb_bitview_check<ulong>();
-
-
+            => sb_bitview_check<ulong>();
     }
-
 }

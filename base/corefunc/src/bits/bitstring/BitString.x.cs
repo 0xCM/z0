@@ -134,9 +134,9 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source bits</param>
         [MethodImpl(Inline)]        
-        public static BitString ToBitString<T>(this Span<T> src, BitSize? maxlen = null)
+        public static BitString ToBitString<T>(this Span<T> src, BitSize? maxwidth = null)
             where T : unmanaged
-                => BitString.from(src, maxlen); 
+                => BitString.from(src, maxwidth); 
 
         /// <summary>
         /// Converts a bitview to a bitstring
@@ -162,9 +162,9 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <typeparam name="T">The underlying primal type</typeparam>
         [MethodImpl(Inline)]   
-        public static BitString ToBitString<T>(this Vector128<T> src)
+        public static BitString ToBitString<T>(this Vector128<T> src, BitSize? maxwidth = null)
             where T : unmanaged        
-                => BitString.from(src.ToSpan());
+                => BitString.from(src.ToSpan(), maxwidth);
         
         /// <summary>
         /// Converts an 256-bit intrinsic vector representation to a bistring
@@ -172,9 +172,9 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <typeparam name="T">The underlying primal type</typeparam>
         [MethodImpl(Inline)]   
-        public static BitString ToBitString<T>(this Vector256<T> src)
+        public static BitString ToBitString<T>(this Vector256<T> src, BitSize? maxwidth = null)
             where T : unmanaged        
-                => BitString.from(src.ToSpan());        
+                => BitString.from(src.ToSpan(), maxwidth);        
 
         /// <summary>
         /// Extracts the even bits

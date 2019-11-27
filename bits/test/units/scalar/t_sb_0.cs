@@ -19,7 +19,7 @@ namespace Z0
         /// Generic scalar bit scatter check
         /// </summary>
         /// <typeparam name="T">The scalar type</typeparam>
-        protected void gsb_scatter_check<T>()
+        protected void sb_scatter_check<T>()
             where T : unmanaged
         {
             for(var i=0; i<SampleSize; i++)
@@ -32,11 +32,24 @@ namespace Z0
             }
         }
 
+       protected void sb_gather_check<T>()
+            where T : unmanaged
+        {
+            for(var i=0; i<SampleSize; i++)
+            {
+                var src = Random.Next<T>();
+                var mask = Random.Next<T>();
+                var s1 = BitRef.gather(src,mask);
+                var s2 = gbits.gather(src,mask);
+                Claim.eq(s1,s2);
+            }
+        }
+
         /// <summary>
         /// Generic scalar bit left rotation check
         /// </summary>
         /// <typeparam name="T">The scalar type</typeparam>
-        protected void gsb_rotl_check<T>()
+        protected void sb_rotl_check<T>()
             where T : unmanaged
         {
             var offset = Random.Next(1, bitsize<T>());
@@ -54,7 +67,7 @@ namespace Z0
             }
         }
 
-       protected void gsb_clear_check<T>()
+       protected void sb_clear_check<T>()
             where T : unmanaged
         {
             var width = (int)bitsize<T>();
@@ -69,7 +82,7 @@ namespace Z0
             }
         }
 
-        protected void gsb_bitview_check<T>()
+        protected void sb_bitview_check<T>()
             where T : unmanaged
         {
             var src = gmath.maxval<T>();
@@ -138,6 +151,206 @@ namespace Z0
             Collect((opcount,sw,opname));
         }
 
-    }
+        protected void sb_bitrev_check<T>()
+            where T : unmanaged
+        {
+            for(var i=0; i<SampleSize; i++)            
+            {
+                var src = Random.Next<T>();
+                var r1 = gbits.rev(src);
+                var r2 = BitString.from(src).Reverse().TakeScalar<T>();
+                Claim.eq(r1,r2);
+            }
 
+        }
+
+        /// <summary>
+        /// Verifies even/odd bit-level interspersal
+        /// </summary>
+        /// <typeparam name="T">The primal type</typeparam>
+        protected void sb_mix_check<T>()
+            where T : unmanaged
+        {
+            var len = bitsize<T>();
+
+            for(var i=0; i<SampleSize; i++)
+            {
+                var a = Random.Next<T>();
+                var b = Random.Next<T>();
+
+                // odd a/b interspersal
+                var abOdd = BitString.from(gbits.mix(n1,a,b));
+
+                // even a/b interspersal
+                var abEven = BitString.from(gbits.mix(n0,a,b));
+
+                // even/odd bits for a/b via bitstring
+                var bsaEven = BitString.from(a).Even();
+                var bsaOdd = BitString.from(a).Odd();
+                var bsbEven = BitString.from(b).Even();
+                var bsbOdd = BitString.from(b).Odd();
+                
+                // bitstring reference interspersal for the even bits
+                var bsEven = bsaEven.Intersperse(bsbEven);                
+                Claim.eq(bsEven, abEven);
+
+                // bitstring reference interspersal for the odd bits
+                var bsOdd = bsaOdd.Intersperse(bsbOdd);
+                Claim.eq(bsOdd, abOdd);                                
+            }
+        }
+
+        protected void sb_cnonimpl_check<T>()
+            where T : unmanaged
+        {
+            var vZero = vzero<T>(n128);
+            for(var i=0; i<SampleSize; i++)
+            {
+                var x = Random.Next<T>();                    
+                var y = Random.Next<T>();                    
+                var z1 = gmath.cnonimpl(x, y);
+                var z2 = gmath.and(x,gmath.not(y));
+                Claim.eq(z1,z2);
+            }
+        }
+
+        protected void sb_msbpos_check<T>()
+            where T : unmanaged
+        {
+            for(var i=0; i< SampleSize; i++)
+            {
+                var x = Random.Next<T>();
+                var xpos = gbits.msbpos(x);
+                var xcount = gbits.nlz(x);
+                var bs = BitString.from(x);
+                var bscount = bs.Nlz();
+                Claim.eq(xcount, bscount);
+                var bspos = bs.Length - 1 - bscount;
+                Claim.eq(xpos,bspos);
+            }
+        }
+
+        protected void sb_lsbpos_check<T>()
+            where T : unmanaged
+        {
+            for(var i=0; i< SampleSize; i++)
+            {
+                var x = Random.Next<T>();
+                var xpos = gbits.lsbpos(x);
+                var xcount = gbits.ntz(x);
+                var bs = BitString.from(x);
+                var bscount = bs.Ntz();
+                Claim.eq(xcount, bscount);
+                var bspos = bscount;
+                Claim.eq(xpos,bspos);
+            }
+        }
+
+        protected void sb_blsi_check<T>()
+            where T : unmanaged
+        {
+            for(var i=0; i<SampleSize; i++)
+            {
+                var src = Random.Next<T>();
+                var x = gbits.blsi(src);
+                var y = gmath.and(src,gmath.negate(src));
+                Claim.eq(x,y);
+            }
+        }
+
+        protected void bitchars_check<T>()
+            where T : unmanaged
+        {
+            Span<char> s0 = stackalloc char[bitsize<T>()];
+            ReadOnlySpan<char> s1 = default;
+            for(var i=0; i<SampleSize; i++)
+            {
+                var a = Random.Next<T>();
+                gbits.bitchars(a,s0);
+                s1 = gbits.bitchars(a);
+                Claim.eq(s0, s1);
+
+                s0.Reverse();
+                var textA = s0.Format();
+                var textB = BitString.from(a).Format();
+                Claim.eq(textA, textB);
+            }
+        }
+
+        protected void bitseq_check<T>()
+            where T : unmanaged
+        {
+            Span<byte> s0 = stackalloc byte[bitsize<T>()];
+            Span<byte> s1 = stackalloc byte[bitsize<T>()];
+            ReadOnlySpan<byte> s2 = default;
+            for(var i=0; i<SampleSize; i++)
+            {
+                var a = Random.Next<T>();
+                gbits.bitseq(a,s0);
+                gbits.bitseq(a,s1);
+                s2 = gbits.bitseq(a);
+                Claim.eq(s0, s1);
+                Claim.eq(s1, s2);
+            }
+        }
+
+        protected void bzhi_check<T>()
+            where T : unmanaged
+        {
+            var width = bitsize<T>();
+            for(var i=0; i< width; i++)
+                bzhi_check<T>(i);            
+        }
+
+        protected void bzhi_check<T>(int maxlen)
+            where T : unmanaged
+        {
+            var width = bitsize<T>();
+
+            var bs0 = BitString.from(gmath.maxval<T>());
+            var bv0 = bs0.ToBitVector<T>();
+
+            Claim.eq(width, bs0.PopCount());
+            Claim.eq(width, bs0.Length);
+
+            Claim.eq(width, BitVector.pop(bv0));
+            
+            var bs1 = bs0.Truncate(maxlen);
+            Claim.eq(maxlen, bs1.PopCount());
+            Claim.eq(maxlen, bs1.Length);
+
+            var bv1 = gbits.zerohi(bv0.Scalar, maxlen);
+            Claim.eq(maxlen, gbits.pop(bv1));
+
+            var bs2 = bs1.Pad(width);
+            Claim.eq(width, bs2.Length);
+            Claim.eq(maxlen, bs2.PopCount());
+
+            for(var i= 0; i< SampleSize; i++)
+            {
+                var x = Random.Next<T>();
+                var j = Random.Next(2u, width - width/2);
+                var y = gbits.zerohi(x, (int)j);
+
+                var x0 = gbits.range(x,0,j - 1);
+                var y0 = gbits.range(y,0,j - 1);
+                var y1 = gbits.range(y,j, width - 1);
+                Claim.eq(x0,y0);
+                Claim.nea(gmath.nonzero(y1));                        
+            }
+        }
+
+        protected void sb_blsr_check<T>()
+            where T : unmanaged
+        {
+            for(var i=0; i<SampleSize; i++)
+            {
+                var x = Random.Next<T>();
+                var y0 = gbits.blsr(x);
+                var y1 = gmath.and(gmath.sub(x, gmath.one<T>()), x);
+                Claim.eq(y0,y1);
+            }
+        }
+
+    }
 }

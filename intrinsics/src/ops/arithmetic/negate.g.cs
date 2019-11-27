@@ -55,13 +55,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                 return generic<T>(dinx.vnegate(int8(lhs)));
+                 return As.vgeneric<T>(dinx.vnegate(vcast8i(lhs)));
             else if(typeof(T) == typeof(short))
-                 return generic<T>(dinx.vnegate(int16(lhs)));
+                 return As.vgeneric<T>(dinx.vnegate(vcast16i(lhs)));
             else if(typeof(T) == typeof(int))
-                 return generic<T>(dinx.vnegate(int32(lhs)));
+                 return generic<T>(dinx.vnegate(vcast32i(lhs)));
             else
-                 return generic<T>(dinx.vnegate(int64(lhs)));
+                 return generic<T>(dinx.vnegate(vcast64i(lhs)));
         }
 
         [MethodImpl(Inline)]
@@ -69,13 +69,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(dinx.vnegate(uint8(lhs)));
+                return As.vgeneric<T>(dinx.vnegate(vcast8u(lhs)));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(dinx.vnegate(uint16(lhs)));
+                return generic<T>(dinx.vnegate(vcast16u(lhs)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(dinx.vnegate(uint32(lhs)));
+                return generic<T>(dinx.vnegate(vcast32u(lhs)));
             else 
-                return generic<T>(dinx.vnegate(uint64(lhs)));
+                return generic<T>(dinx.vnegate(vcast64u(lhs)));
         }
 
         [MethodImpl(Inline)]
@@ -83,13 +83,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                 return generic<T>(dinx.vnegate(int8(lhs)));
+                 return generic<T>(dinx.vnegate(vcast8i(lhs)));
             else if(typeof(T) == typeof(short))
-                 return generic<T>(dinx.vnegate(int16(lhs)));
+                 return generic<T>(dinx.vnegate(vcast16i(lhs)));
             else if(typeof(T) == typeof(int))
-                 return generic<T>(dinx.vnegate(int32(lhs)));
+                 return generic<T>(dinx.vnegate(vcast32i(lhs)));
             else
-                 return generic<T>(dinx.vnegate(int64(lhs)));
+                 return generic<T>(dinx.vnegate(vcast64i(lhs)));
         }
 
         [MethodImpl(Inline)]
@@ -97,13 +97,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(dinx.vnegate(uint8(lhs)));
+                return generic<T>(dinx.vnegate(vcast8u(lhs)));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(dinx.vnegate(uint16(lhs)));
+                return generic<T>(dinx.vnegate(vcast16u(lhs)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(dinx.vnegate(uint32(lhs)));
+                return generic<T>(dinx.vnegate(vcast32u(lhs)));
             else 
-                return generic<T>(dinx.vnegate(uint64(lhs)));
+                return generic<T>(dinx.vnegate(vcast64u(lhs)));
         }
 
     }

@@ -113,7 +113,7 @@ namespace Z0
             where K : unmanaged
         {
             var offsetMin = (byte)1;
-            var offsetMax = (byte)(PrimalInfo.Get<K>().BitSize - 2);
+            var offsetMax = (byte)(bitsize<K>() - 2);
             return closed(offsetMin,offsetMax);                
         }
 
@@ -214,7 +214,6 @@ namespace Z0
             [CallerFilePath] string file = null, [CallerLineNumber] int? line = null)
             where K : unmanaged
         {
-            var kind = PrimalKinds.kind<K>();            
             var src = RandArray<K>(nonzero);
             var timing = stopwatch();                        
 
@@ -226,8 +225,6 @@ namespace Z0
             [CallerFilePath] string file = null, [CallerLineNumber] int? line = null)
             where K : unmanaged
         {
-            var kind = PrimalKinds.kind<K>();            
-            var opid = opKind.PrimalGOpId<K>();           
             var src = RandArray<K>(nonzero);
             var timing = stopwatch();                        
 
@@ -239,7 +236,6 @@ namespace Z0
             [CallerMemberName] string caller = null, [CallerFilePath] string file = null, [CallerLineNumber] int? line = null)
             where K : unmanaged
         {
-            var kind = PrimalKinds.kind<K>();            
             var lhs = RandArray<K>();
             var rhs = RandArray<K>(nonzero);
             var len = length(lhs,rhs);
@@ -249,26 +245,11 @@ namespace Z0
                 Claim.eq(baseline(lhs[i],rhs[i]), op(lhs[i],rhs[i]), caller, file, line);            
         }
 
-        protected void VerifyOp<K>(OpKind opKind, BinaryPred<K> baseline, BinaryPred<K> op, bool nonzero = false, 
-            [CallerMemberName] string caller = null, [CallerFilePath] string file = null, [CallerLineNumber] int? line = null)
-            where K : unmanaged
-        {
-            var kind = PrimalKinds.kind<K>();            
-            var opid = opKind.PrimalGOpId<K>();           
-            var lhs = RandArray<K>();
-            var rhs = RandArray<K>(nonzero);
-            var len = length(lhs,rhs);
-            var timing = stopwatch();            
-
-            for(var i = 0; i<len; i++)
-                Claim.eq(baseline(lhs[i],rhs[i]), op(lhs[i],rhs[i]), caller, file, line);            
-        }
 
         protected void VerifyOp<K>(BinaryOp<K> baseline, BinaryOp<K> op, bool nonzero = false, [CallerMemberName] string caller = null, 
             [CallerFilePath] string file = null, [CallerLineNumber] int? line = null)
             where K : unmanaged
         {
-            var kind = PrimalKinds.kind<K>(); 
             var lhs = RandArray<K>();
             var rhs = RandArray<K>(nonzero);
             var len = length(lhs,rhs);
@@ -282,7 +263,6 @@ namespace Z0
             [CallerFilePath] string file = null, [CallerLineNumber] int? line = null)
             where K : unmanaged
         {
-            var kind = PrimalKinds.kind<K>(); 
             var lhs = RandArray<K>();
             var rhs = RandArray<K>(nonzero);
             var len = length(lhs,rhs);
@@ -293,23 +273,23 @@ namespace Z0
         }
 
         protected void TypeCaseStart<C>([CallerMemberName] string caller = null)
-            => Notify(AppMsg.Define($"{typeof(T).DisplayName()}/{caller}<{typeof(C).DisplayName()}> executing", SeverityLevel.HiliteCL));
+            => Notify(AppMsg.Define($"{typename<T>()}/{caller}<{typename<C>()}> executing", SeverityLevel.HiliteCL));
 
         protected void TypeCaseEnd<C>([CallerMemberName] string caller = null)
-            => Notify(AppMsg.Define($"{typeof(T).DisplayName()}/{caller}<{typeof(C).DisplayName()}> succeeded", SeverityLevel.HiliteCL));
+            => Notify(AppMsg.Define($"{typename<T>()}/{caller}<{typename<C>()}> succeeded", SeverityLevel.HiliteCL));
 
         protected void TypeCaseEnd<C>(AppMsg msg, [CallerMemberName] string caller = null)
-            => Notify(AppMsg.Define($"{typeof(T).DisplayName()}/{caller}<{typeof(C).DisplayName()}> succeeded: {msg}", SeverityLevel.HiliteCL));
+            => Notify(AppMsg.Define($"{typename<T>()}/{caller}<{typename<C>()}> succeeded: {msg}", SeverityLevel.HiliteCL));
 
         protected void TypeCaseStart<A,B>([CallerMemberName] string caller = null)
-            => Notify(AppMsg.Define($"{typeof(T).DisplayName()}/{caller}<{typeof(A).DisplayName()},{typeof(B).DisplayName()}> executing", SeverityLevel.HiliteCL));
+            => Notify(AppMsg.Define($"{typename<T>()}/{caller}<{typeof(A).DisplayName()},{typeof(B).DisplayName()}> executing", SeverityLevel.HiliteCL));
 
         protected void TypeCaseEnd<A,B>([CallerMemberName] string caller = null)
-            => Notify(AppMsg.Define($"{typeof(T).DisplayName()}/{caller}<{typeof(A).DisplayName()},{typeof(B).DisplayName()}> succeeded", SeverityLevel.HiliteCL));
+            => Notify(AppMsg.Define($"{typename<T>()}/{caller}<{typeof(A).DisplayName()},{typeof(B).DisplayName()}> succeeded", SeverityLevel.HiliteCL));
 
         protected void NatCaseStart<N,A>([CallerMemberName] string caller = null)
             where N : unmanaged, ITypeNat
-            => Notify(AppMsg.Define($"{typeof(T).DisplayName()}/{caller}<N{nati<N>()},{typeof(A).DisplayName()}> executing", SeverityLevel.HiliteCL));
+            => Notify(AppMsg.Define($"{typename<T>()}/{caller}<N{nati<N>()},{typeof(A).DisplayName()}> executing", SeverityLevel.HiliteCL));
 
         protected void TypeCaseStart<M,N,S>([CallerMemberName] string caller = null)
             where M : unmanaged, ITypeNat

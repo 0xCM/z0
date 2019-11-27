@@ -133,7 +133,7 @@ namespace Z0
         /// <param name="row">The 0-based row index</param>
         [MethodImpl(Inline)]
         public BitCells<N,T> RowVector(int row)                    
-            => BitCells<N,T>.FromSpan(Data.Slice(row*RowCellCount, RowCellCount));
+            => new BitCells<N,T>(Data.Slice(row*RowCellCount, RowCellCount));
 
         /// <summary>
         /// Replaces an index-identied column of data with the content of a row vector
@@ -173,12 +173,11 @@ namespace Z0
         /// <param name="value">The source value</param>
         [MethodImpl(Inline)]
         public void Fill(Bit value)
-        {
-            var primal = PrimalInfo.Get<T>();
+        {            
             if(value)
-                Data.Fill(primal.MaxVal);
+                Data.Fill(maxval<T>());
             else
-                Data.Fill(primal.Zero);
+                Data.Fill(zero<T>());
         }
 
         [MethodImpl(Inline)]

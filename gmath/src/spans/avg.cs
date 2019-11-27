@@ -203,13 +203,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(avg(uint8(src)));
+                return generic<T>(avg(span8u(src)));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(avg(uint16(src)));
+                return generic<T>(avg(span16u(src)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(avg(uint32(src)));
+                return generic<T>(avg(span32u(src)));
             else 
-                return generic<T>(avg(uint64(src)));
+                return generic<T>(avg(span64u(src)));
         }           
 
         public static T avg_f<T>(ReadOnlySpan<T> src)

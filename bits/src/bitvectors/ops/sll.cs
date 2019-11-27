@@ -34,6 +34,18 @@ namespace Z0
                 => gmath.sll(x.Scalar,s);
 
         /// <summary>
+        /// Computes z := x >> s for a bitvector x and shift offset s
+        /// </summary>
+        /// <param name="x">The source bitvector</param>
+        /// <param name="s">The shift amount</param>
+        [MethodImpl(Inline)]
+        public static BitVector128<N,T> sll<N,T>(in BitVector128<N,T> x, int s)
+            where N : unmanaged, ITypeNat
+            where T : unmanaged
+                => ginx.vsllx(x.data,(byte)s);
+
+
+        /// <summary>
         /// Computes z := x << s for a bitvector x and shift offset s
         /// </summary>
         /// <param name="x">The source bitvector</param>

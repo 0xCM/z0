@@ -51,9 +51,6 @@ namespace Z0.Designators
             D.Bits.Assembly,
             D.BitTest.Assembly,
 
-            D.Circuits.Assembly,
-            D.CircuitTest.Assembly,
-
             D.Rng.Assembly,
 
             D.LibM.Assembly,            

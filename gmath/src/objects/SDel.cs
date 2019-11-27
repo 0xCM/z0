@@ -9,12 +9,31 @@ namespace Z0
         
     using static zfunc;
 
+    public interface IBinaryOp<T>
+        where T : unmanaged
+    {
+        T apply(T x, T y);        
+    }
+
+    public interface IBinaryPred<T>
+        where T : unmanaged
+    {
+        bit apply(T x, T y);        
+    }
+
+
+    public interface IUnaryOp<T>
+        where T : unmanaged
+    {
+        T apply(T x);        
+    }
+
     public static class SDel
     {
         [MethodImpl(Inline)]
-        public static AddOp<T> add<T>()
+        public static IBinaryOp<T> add<T>()
             where T : unmanaged        
-                => default;
+                => default(AddOp<T>);
 
         [MethodImpl(Inline)]
         public static SubOp<T> sub<T>()
@@ -112,7 +131,7 @@ namespace Z0
                 => op.apply(x);
     }
 
-    public readonly struct AddOp<T>
+    public readonly struct AddOp<T> : IBinaryOp<T>
         where T : unmanaged        
     {
         [MethodImpl(Inline)]
@@ -120,7 +139,7 @@ namespace Z0
             => gmath.add(x,y);
     }
 
-    public readonly struct SubOp<T>
+    public readonly struct SubOp<T> : IBinaryOp<T>
         where T : unmanaged        
     {
         [MethodImpl(Inline)]
@@ -136,7 +155,7 @@ namespace Z0
             => gmath.mul(x,y);
     }
 
-    public readonly struct DivOp<T>
+    public readonly struct DivOp<T> : IBinaryOp<T>
         where T : unmanaged        
     {
         [MethodImpl(Inline)]
@@ -144,7 +163,7 @@ namespace Z0
             => gmath.div(x,y);
     }
 
-    public readonly struct ModOp<T>
+    public readonly struct ModOp<T> : IBinaryOp<T>
         where T : unmanaged        
     {
         [MethodImpl(Inline)]
@@ -152,7 +171,7 @@ namespace Z0
             => gmath.mod(x,y);
     }
 
-   public readonly struct AbsOp<T>
+   public readonly struct AbsOp<T>  : IUnaryOp<T>
         where T : unmanaged        
     {
         [MethodImpl(Inline)]
@@ -160,7 +179,7 @@ namespace Z0
             => gmath.abs(x);
     }
 
-    public readonly struct IncOp<T>
+    public readonly struct IncOp<T> : IUnaryOp<T>
         where T : unmanaged        
     {
         [MethodImpl(Inline)]
@@ -168,7 +187,7 @@ namespace Z0
             => gmath.inc(x);
     }
 
-    public readonly struct DecOp<T>
+    public readonly struct DecOp<T> : IUnaryOp<T>
         where T : unmanaged        
     {
         [MethodImpl(Inline)]
@@ -176,7 +195,7 @@ namespace Z0
             => gmath.dec(x);
     }
 
-    public readonly struct NegateOp<T>
+    public readonly struct NegateOp<T> : IUnaryOp<T>
         where T : unmanaged        
     {
         [MethodImpl(Inline)]
@@ -184,7 +203,7 @@ namespace Z0
             => gmath.negate(x);
     }
 
-    public readonly struct NotOp<T>
+    public readonly struct NotOp<T> : IUnaryOp<T>
         where T : unmanaged        
     {
         [MethodImpl(Inline)]

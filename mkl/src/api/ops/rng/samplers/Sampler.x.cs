@@ -7,7 +7,6 @@ namespace Z0.Mkl
     using System;
     using System.Runtime.InteropServices;
     using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
 	using static zfunc;
     using static As;
 
@@ -54,7 +53,7 @@ namespace Z0.Mkl
         public static ISampler<T> UniformSampler<T>(this MklRng rng, UniformSpec<T>? spec = null)
             where T : unmanaged
         {
-            var _spec = spec ?? UniformSpec.Define<T>(PrimalInfo.minval<T>(), PrimalInfo.maxval<T>());
+            var _spec = spec ?? UniformSpec.Define<T>(minval<T>(), maxval<T>());
             var sampler = default(ISampler<T>);
             if(typeof(T) == typeof(int))
                 sampler = samplers.uniform(rng, _spec.ToInt32()) as ISampler<T>;
@@ -126,5 +125,4 @@ namespace Z0.Mkl
             return sampler;
         }
     }
-
 }

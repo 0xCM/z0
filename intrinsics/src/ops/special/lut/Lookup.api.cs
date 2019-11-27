@@ -90,7 +90,7 @@ namespace Z0
         public static ref Lut16 From(Vector128<byte> src, ref Lut16 dst)
         {            
             ref var mem = ref Unsafe.As<Lut16,byte>(ref dst);
-            ginx.vstore(src, ref mem);
+            vstore(src, ref mem);
             return ref dst;            
         }
 
@@ -103,7 +103,7 @@ namespace Z0
         public static ref Lut32 From(Vector256<byte> src, ref Lut32 dst)
         {            
             ref var mem = ref Unsafe.As<Lut32,byte>(ref dst);
-            ginx.vstore(src, ref mem);
+            vstore(src, ref mem);
             return ref dst;            
         }
 

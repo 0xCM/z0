@@ -69,7 +69,7 @@ namespace Z0
             for(var sample=0; sample < SampleSize; sample++)
             {
                 (var i, var j) = Random.NextPair(0,n);
-                A.RowSwap(i,j);
+                BitMatrix.rowswap(A,i,j);
 
                 var tmp = a[i];
                 a[i] = a[j];

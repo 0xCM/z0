@@ -76,7 +76,7 @@ namespace Z0
         public static Perm<N16> ToPerm(this Vector128<byte> src)
         {
             Span<byte> dst = new byte[16];
-            ginx.vstore(src, ref head(dst));
+            vstore(src, ref head(dst));
             return Perm.Define(n16, dst.Convert<int>());
         }
 
@@ -213,7 +213,7 @@ namespace Z0
         public static Span<T> Store<T>(this Vector128<T> src, Span<T> dst)
             where T : unmanaged            
         {
-            ginx.vstore(src, ref head(dst));
+            vstore(src, ref head(dst));
             return dst;
         }
 
@@ -221,7 +221,7 @@ namespace Z0
         public static Span<T> Store<T>(this Vector256<T> src, Span<T> dst)
             where T : unmanaged            
         {
-            ginx.vstore(src, ref head(dst));
+            vstore(src, ref head(dst));
             return dst;
         }
 

@@ -43,7 +43,7 @@ namespace Z0.Mkl
             {
                 this.Weights = new T[SampleCount];
                 for(var i=0; i<SampleCount; i++)
-                    this.Weights[i] = PrimalInfo.one<T>();
+                    this.Weights[i] = one<T>();
 
                 this.Indices = new int[Dim];
                 for(var i=0; i<Dim; i++)

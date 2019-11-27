@@ -33,6 +33,17 @@ namespace Z0
                 => gmath.impl(x.Scalar, y.Scalar);
 
         /// <summary>
+        /// Computes the material implication z := x | ~y for bitvectors x and y
+        /// </summary>
+        /// <param name="x">The left bitvector</param>
+        /// <param name="y">The right bitvector</param>
+        [MethodImpl(Inline)]
+        public static BitVector128<N,T> impl<N,T>(in BitVector128<N,T> x, in BitVector128<N,T> y)
+            where T : unmanaged
+            where N : unmanaged, ITypeNat
+                => ginx.vimpl(x.data, y.data);
+
+        /// <summary>
         /// Computes the material implication a -> b, i.e. a | ~b
         /// </summary>
         /// <param name="x">The left bitvector</param>

@@ -39,6 +39,18 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left bitvector</param>
         /// <param name="y">The right bitvector</param>
+        /// <typeparam name="T">The primal bitvector type</typeparam>
+        [MethodImpl(Inline)]
+        public static BitVector128<N,T> nor<N,T>(in BitVector128<N,T> x, in BitVector128<N,T> y)
+            where T : unmanaged
+            where N : unmanaged, ITypeNat
+                => ginx.vnor(x.data,y.data);
+
+        /// <summary>
+        /// Computes the bitvector z: = ~(x | y) from bitvectors x and y
+        /// </summary>
+        /// <param name="x">The left bitvector</param>
+        /// <param name="y">The right bitvector</param>
         [MethodImpl(Inline)]
         public static BitVector4 nor(BitVector4 x, BitVector4 y)
             => gmath.nor(x.data, y.data);

@@ -23,7 +23,7 @@ namespace Z0
             => pop(xor(x,y));
 
         /// <summary>
-        /// Computes the Hamming distance between two natural bitvectors
+        /// Computes the Hamming distance between bitvectors
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
@@ -33,6 +33,19 @@ namespace Z0
             where T : unmanaged
             where N : unmanaged, ITypeNat
                 => pop(xor(x,y));
+
+        /// <summary>
+        /// Computes the Hamming distance between bitvectors
+        /// </summary>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
+        /// <typeparam name="T">The primal type</typeparam>
+        [MethodImpl(Inline)]
+        public static uint dist<N,T>(in BitVector128<N,T> x, in BitVector128<N,T> y)
+            where T : unmanaged
+            where N : unmanaged, ITypeNat
+                => pop(xor(x,y));
+
 
         /// <summary>
         /// Computes the Hamming distance between two bitvectors

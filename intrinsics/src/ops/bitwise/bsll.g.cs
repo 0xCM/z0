@@ -26,13 +26,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(dinx.vbsll(uint8(x), count));
+                return As.vgeneric<T>(dinx.vbsll(vcast8u(x), count));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(dinx.vbsll(uint16(x), count));
+                return generic<T>(dinx.vbsll(vcast16u(x), count));
             else if(typeof(T) == typeof(uint)) 
-                return generic<T>(dinx.vbsll(uint32(x), count));
+                return generic<T>(dinx.vbsll(vcast32u(x), count));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(dinx.vbsll(uint64(x), count));
+                return generic<T>(dinx.vbsll(vcast64u(x), count));
             else
                 throw unsupported<T>();
         }
@@ -48,13 +48,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(dinx.vbsll(uint8(x), count));
+                return generic<T>(dinx.vbsll(vcast8u(x), count));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(dinx.vbsll(uint16(x), count));
+                return generic<T>(dinx.vbsll(vcast16u(x), count));
             else if(typeof(T) == typeof(uint)) 
-                return generic<T>(dinx.vbsll(uint32(x), count));
+                return generic<T>(dinx.vbsll(vcast32u(x), count));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(dinx.vbsll(uint64(x), count));
+                return generic<T>(dinx.vbsll(vcast64u(x), count));
             else
                 throw unsupported<T>();
         }

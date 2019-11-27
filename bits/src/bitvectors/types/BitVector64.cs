@@ -21,9 +21,13 @@ namespace Z0
 
         public static BitVector64 One => 1;                
 
+        public static BitVector64 Ones => uint.MaxValue;
+
+        public static N64 N => default;
+
         [MethodImpl(Inline)]
         public static implicit operator BitCells<N64,ulong>(BitVector64 src)
-            => BitCells<N64,ulong>.FromArray(src.data);
+            => BitCells.literal(src.data, N);
 
         [MethodImpl(Inline)]
         public static implicit operator BitVector<ulong>(BitVector64 src)
@@ -83,7 +87,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]    
         public static implicit operator BitVector64(byte src)
-            => BitVector.from(n64,src);
+            => BitVector.from(N,src);
 
         /// <summary>
         /// Implicitly converts a scalar value to a 64-bit bitvector
@@ -91,7 +95,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]    
         public static implicit operator BitVector64(ushort src)
-            => BitVector.from(n64,src);
+            => BitVector.from(N,src);
 
         /// <summary>
         /// Implicitly converts a scalar value to a 64-bit bitvector
@@ -99,7 +103,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]    
         public static implicit operator BitVector64(uint src)
-            => BitVector.from(n64,src);
+            => BitVector.from(N,src);
 
         /// <summary>
         /// Computes the bitwise XOR of the source operands

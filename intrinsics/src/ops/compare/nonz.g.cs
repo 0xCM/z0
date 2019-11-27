@@ -46,13 +46,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return dinx.vnonz(int8(src));
+                return dinx.vnonz(vcast8i(src));
             else if(typeof(T) == typeof(short))
-                return dinx.vnonz(int16(src));
+                return dinx.vnonz(vcast16i(src));
             else if(typeof(T) == typeof(int))
-                return dinx.vnonz(int32(src));
+                return dinx.vnonz(vcast32i(src));
             else 
-                return dinx.vnonz(int64(src));
+                return dinx.vnonz(vcast64i(src));
         }
 
         [MethodImpl(Inline)]
@@ -60,13 +60,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return dinx.vnonz(uint8(src));
+                return dinx.vnonz(vcast8u(src));
             else if(typeof(T) == typeof(ushort))
-                return dinx.vnonz(uint16(src));
+                return dinx.vnonz(vcast16u(src));
             else if(typeof(T) == typeof(uint))
-                return dinx.vnonz(uint32(src));
+                return dinx.vnonz(vcast32u(src));
             else 
-                return dinx.vnonz(uint64(src));
+                return dinx.vnonz(vcast64u(src));
         }
 
         [MethodImpl(Inline)]
@@ -74,9 +74,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return dfp.vnonz(float32(src));
+                return dfp.vnonz(vcast32f(src));
             else if(typeof(T) == typeof(double))
-                return dfp.vnonz(float64(src));
+                return dfp.vnonz(vcast64f(src));
             else 
                 throw unsupported<T>();
         }
@@ -110,13 +110,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return dinx.vnonz(int8(src));
+                return dinx.vnonz(vcast8i(src));
             else if(typeof(T) == typeof(short))
-                return dinx.vnonz(int16(src));
+                return dinx.vnonz(vcast16i(src));
             else if(typeof(T) == typeof(int))
-                return dinx.vnonz(int32(src));
+                return dinx.vnonz(vcast32i(src));
             else 
-                return dinx.vnonz(int64(src));
+                return dinx.vnonz(vcast64i(src));
         }
 
         [MethodImpl(Inline)]
@@ -124,13 +124,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return dinx.vnonz(uint8(src));
+                return dinx.vnonz(vcast8u(src));
             else if(typeof(T) == typeof(ushort))
-                return dinx.vnonz(uint16(src));
+                return dinx.vnonz(vcast16u(src));
             else if(typeof(T) == typeof(uint))
-                return dinx.vnonz(uint32(src));
+                return dinx.vnonz(vcast32u(src));
             else 
-                return dinx.vnonz(uint64(src));
+                return dinx.vnonz(vcast64u(src));
         }
 
         [MethodImpl(Inline)]
@@ -138,9 +138,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return dfp.vnonz(float32(src));
+                return dfp.vnonz(vcast32f(src));
             else if(typeof(T) == typeof(double))
-                return dfp.vnonz(float64(src));
+                return dfp.vnonz(vcast64f(src));
             else 
                 throw unsupported<T>();
         }

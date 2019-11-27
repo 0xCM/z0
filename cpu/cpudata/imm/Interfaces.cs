@@ -44,7 +44,7 @@ namespace Z0
         bool IsSignExtended
         {
             [MethodImpl(Inline)]
-            get => PrimalInfo.signed<T>();
+            get => signed<T>();
         }
 
         /// <summary>
@@ -68,7 +68,4 @@ namespace Z0
     {
         I Redefine(T src);   
     }
-
-
-
 }

@@ -20,7 +20,7 @@ namespace Z0
         /// <summary>
         /// The matrix order
         /// </summary>
-        public const uint N = 32;
+        public const int N = 32;
 
         /// <summary>
         /// Allocates a 32x32 identity bitmatrix
@@ -32,10 +32,6 @@ namespace Z0
         /// </summary>
         public static BitMatrix32 Zero => new BitMatrix32(new uint[N]);
                 
-        [MethodImpl(Inline)]
-        public static BitMatrix32 From(Span<byte> src)        
-            => new BitMatrix32(src.AsUInt32());
-
         [MethodImpl(Inline)]
         public static BitMatrix32 operator & (in BitMatrix32 A, in BitMatrix32 B)
             => BitMatrix.and(A,B);
@@ -102,7 +98,6 @@ namespace Z0
             get => ref head(data);
         }
 
-
         /// <summary>
         /// The square matrix order
         /// </summary>
@@ -144,40 +139,6 @@ namespace Z0
             [MethodImpl(Inline)]
             get => ref Unsafe.As<uint,BitVector32>(ref seek(ref Head, row));
         }
-
-        [MethodImpl(Inline)]
-        public readonly BitVector32 Column(int index)
-        {
-            uint col = 0;
-            for(var r = 0; r < N; r++)
-                col = BitMask.setif(data[r], index, col, r);
-            return col;
-        }
-
-        [MethodImpl(NotInline)] 
-        public readonly BitMatrix32 Replicate()
-            => new BitMatrix32(data.ToArray());
-
-        /// <summary>
-        /// Interchanges the i'th and j'th rows where  0 <= i,j < 32
-        /// </summary>
-        /// <param name="i">A row index</param>
-        /// <param name="j">A row index</param>
-        [MethodImpl(Inline)]
-        public void RowSwap(int i, int j)
-            => data.Swap(i,j);        
-        
-        public readonly BitMatrix32 Transpose()
-        {
-            var dst = Replicate();
-            for(var i=0; i<N; i++)
-                dst.data[i] = Column(i);
-            return dst;
-        }
-    
-        [MethodImpl(Inline)]
-        public string Format()
-            => data.FormatMatrixBits(32);
 
         [MethodImpl(Inline)]
         public bool Equals(BitMatrix32 rhs)
